@@ -1,0 +1,364 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-23",
+  "scope": "KIDS_SERHAT_V4_LAST_20_AUDIO_GAPS_REVIEW_ONLY",
+  "sourceBranch": "review/kids-v4-nine-prepaid-artifact-replay-20261022",
+  "sourceStatusSha256": "4d6edba0408be33791107a15bb5c2694b0f6d4d4",
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "selected450": 450,
+  "technicallyComplete": 430,
+  "incompleteQuestions": 20,
+  "missingFieldAssignments": 26,
+  "originalPaidFlowRecovered": 56,
+  "originalPaidFlowStillMissing": 0,
+  "ageBandCounts": {
+    "4-6": 0,
+    "7-8": 6,
+    "9-10": 14
+  },
+  "reviewOnly": true,
+  "auditoryApproved": false,
+  "livePublished": false,
+  "important": "Exact 26 field mappings only. Reconcile source text SHA against already paid/provider-pending/quarantined ledger before NEW synthesis. Do not bypass Fuṣḥā pronunciation hold. Recitation requires authentic reciter audio, not TTS.",
+  "missingQuestionParts": [
+    {
+      "questionId": "kids-quiz-023",
+      "ageBand": "7-8",
+      "missingParts": [
+        {
+          "part": "explanation",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-036",
+      "ageBand": "9-10",
+      "missingParts": [
+        {
+          "part": "explanation",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-041",
+      "ageBand": "9-10",
+      "missingParts": [
+        {
+          "part": "question",
+          "textSha256": null
+        },
+        {
+          "part": "explanation",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-046",
+      "ageBand": "9-10",
+      "missingParts": [
+        {
+          "part": "question",
+          "textSha256": null
+        },
+        {
+          "part": "explanation",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-080",
+      "ageBand": "7-8",
+      "missingParts": [
+        {
+          "part": "question",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-094",
+      "ageBand": "9-10",
+      "missingParts": [
+        {
+          "part": "question",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-097",
+      "ageBand": "9-10",
+      "missingParts": [
+        {
+          "part": "question",
+          "textSha256": null
+        },
+        {
+          "part": "explanation",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-131",
+      "ageBand": "7-8",
+      "missingParts": [
+        {
+          "part": "question",
+          "textSha256": null
+        },
+        {
+          "part": "explanation",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-189",
+      "ageBand": "9-10",
+      "missingParts": [
+        {
+          "part": "explanation",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-271",
+      "ageBand": "7-8",
+      "missingParts": [
+        {
+          "part": "explanation",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-276",
+      "ageBand": "7-8",
+      "missingParts": [
+        {
+          "part": "explanation",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-278",
+      "ageBand": "7-8",
+      "missingParts": [
+        {
+          "part": "question",
+          "textSha256": null
+        },
+        {
+          "part": "explanation",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-485",
+      "ageBand": "9-10",
+      "missingParts": [
+        {
+          "part": "question",
+          "textSha256": null
+        },
+        {
+          "part": "explanation",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-499",
+      "ageBand": "9-10",
+      "missingParts": [
+        {
+          "part": "explanation",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-640",
+      "ageBand": "9-10",
+      "missingParts": [
+        {
+          "part": "question",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-641",
+      "ageBand": "9-10",
+      "missingParts": [
+        {
+          "part": "question",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-809",
+      "ageBand": "9-10",
+      "missingParts": [
+        {
+          "part": "question",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-839",
+      "ageBand": "9-10",
+      "missingParts": [
+        {
+          "part": "question",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-873",
+      "ageBand": "9-10",
+      "missingParts": [
+        {
+          "part": "question",
+          "textSha256": null
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-877",
+      "ageBand": "9-10",
+      "missingParts": [
+        {
+          "part": "question",
+          "textSha256": null
+        }
+      ]
+    }
+  ],
+  "missingOriginalSegmentsReportedByOfflineJoin": [
+    {
+      "fragment": "Taqwā.",
+      "requiredByFields": 2
+    },
+    {
+      "fragment": "Allah beschreibt den Qurʾān als Rechtleitung für die Muttaqīn.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Dürfen wir andere mit beleidigenden Spitznamen rufen?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Halāle und gute Nahrung.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Allah befiehlt, von dem Halālen und Guten auf der Erde zu essen.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Allah erlaubt das Halāle und Gute und warnt vor den Schritten des Shayṭān.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Der Qurʾān beschreibt Zakariyyās Ruf als verborgen und leise.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Mit wessen Erlaubnis geschahen die Wunder ʿĪsās?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Der Qurʾān wiederholt, dass ʿĪsās Zeichen mit Allahs Erlaubnis geschahen.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "nannte Schahāda, Gebet, Zakāh, Ḥaǧǧ und Fasten im Ramaḍān als Säulen des Islam.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Allah nennt Taqwā als Maßstab der besonderen Ehre bei Ihm.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Glücksspiele spielen.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Angeben.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Der Qurʾān befiehlt an vielen Stellen Gebet und Zakāh gemeinsam.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Zur al-Masǧid al-Ḥarām in Makkah.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "und den Gläubigen, sich im Gebet zur al-Masǧid al-Ḥarām zu wenden.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Der längste Qurʾān-Vers lehrt sorgfältige Dokumentation von Schulden und gerechte Zeugenschaft.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Es gibt keinen Unterschied zwischen Ḥalāl und Ḥarām.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Welche Regel lehrt der Ḥadīṯ über Ḥalāl, Ḥarām und zweifelhafte Dinge?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Ḥalāl und Ḥarām sind klar; bei Zweifelhaftem ist Vorsicht gut.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "erklärte, dass Ḥalāl und Ḥarām klar sind und dazwischen zweifelhafte Dinge liegen; wer sie meidet, schützt Dīn und Ehre.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Die Qurʾān-Duʿāʾ bittet Allah um Gutes im Diesseits und Jenseits und um Schutz vor der Strafe des Feuers.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Was zeigt die Geschichte Ayyūbs in Qurʾān 21:83–84 über Prüfungen?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Welche Verbindung macht Sulaymāns Duʿāʾ in Qurʾān 27:19 deutlich?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "ʿIbādah und Duʿāʾ richten wir an Allah allein.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Ghībah ist erlaubt, solange die Person es nicht hört.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Gute Taten und ʿIbādah werden aufrichtig für Allah getan.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Wir machen ʿIbādah nicht, um vor Menschen Eindruck zu machen.",
+      "requiredByFields": 1
+    }
+  ]
+}
