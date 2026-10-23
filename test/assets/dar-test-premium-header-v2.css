@@ -148,10 +148,10 @@
     font-size:9px!important;
   }
   #darTestBrandHeaderV1[data-premium-header-v2="ready"] .dtbh-actions{
-    gap:2px!important;
+    gap:0!important;
   }
   #darTestBrandHeaderV1[data-premium-header-v2="ready"] :is(.dtbh-action,.dtbh-toggle){
-    width:39px!important;min-width:39px!important;flex-basis:39px!important;height:44px!important;
+    width:44px!important;min-width:44px!important;flex-basis:44px!important;height:44px!important;
   }
 }
 /* Spacious tablets, iPad split view, fold-out, desktop — continuous one-row header. */
