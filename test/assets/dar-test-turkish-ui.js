@@ -303,7 +303,7 @@ async function loadCatalog(fetcher=global.fetch?.bind(global)){
  }catch(_){remoteCatalogState="unavailable";return dictionary.size}
 }
 
-const INTL_LOCALE={de:"de-DE",tr:"tr-TR",en:"en-GB",ar:"ar-EG-u-ca-gregory",ku:"ku-TR",ckb:"ckb-IQ-u-ca-gregory",bs:"bs-BA"};
+const INTL_LOCALE={de:"de-DE",tr:"tr-TR",en:"en-GB",ar:"ar-EG-u-ca-gregory",ku:"ku-TR",ckb:"ckb-IQ-u-ca-gregory",bs:"bs-BA",fr:"fr-FR",es:"es-ES"};
 const DE_MONTHS=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
 const DE_WEEKDAYS=["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag"];
 function formatCalendarDate(date,language=currentLocale(),options={weekday:"long",day:"numeric",month:"long",year:"numeric"}){
