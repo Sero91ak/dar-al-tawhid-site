@@ -41,14 +41,27 @@
     if(!shell)return;
     var height=Math.max(1,window.innerHeight||document.documentElement.clientHeight||760);
     var bounds=shell.getBoundingClientRect();
-    var progress=Math.max(0,Math.min(1,(height*.08-bounds.top)/Math.max(360,height*.86)));
+    var progress=Math.max(0,Math.min(1,(height*.12-bounds.top)/Math.max(560,height*1.55)));
     var reduced=!!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     var fade=(1-progress).toFixed(3);
-    var move=(reduced?0:Math.round(progress*42))+"px";
+    var move=(reduced?0:-Math.round(progress*28))+"px";
     if(shell.style.getPropertyValue("--dar-home-scene-fade")!==fade)
       shell.style.setProperty("--dar-home-scene-fade",fade);
     if(shell.style.getPropertyValue("--dar-home-scene-parallax")!==move)
       shell.style.setProperty("--dar-home-scene-parallax",move);
+  }
+  /* DAR_VISITOR_IMMERSIVE_MOTION_V2_20261023
+   * Scroll frames update only the art variables, not hero geometry. Child
+   * changes and resize still use the existing measured-height adapter.
+   */
+  var motionQueued=false;
+  function scheduleHomeMotion(){
+    if(motionQueued)return;
+    motionQueued=true;
+    requestAnimationFrame(function(){
+      motionQueued=false;
+      updateHomeImmersive();
+    });
   }
   function reconcile(){
     scheduled=false;
@@ -90,8 +103,8 @@
     }
     window.addEventListener("orientationchange",schedule,{passive:true});
     window.addEventListener("resize",schedule,{passive:true});
-    window.addEventListener("scroll",schedule,{passive:true});
-    document.addEventListener("scroll",schedule,{passive:true,capture:true});
+    window.addEventListener("scroll",scheduleHomeMotion,{passive:true});
+    document.addEventListener("scroll",scheduleHomeMotion,{passive:true,capture:true});
     window.addEventListener("pageshow",schedule,{passive:true});
     document.addEventListener("dar:frauen-render",schedule);
     schedule();
