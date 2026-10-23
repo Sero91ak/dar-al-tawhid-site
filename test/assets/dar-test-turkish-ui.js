@@ -409,10 +409,9 @@ function currentLocale(){try{const v=global.localStorage?.getItem(KEY);return SU
 function shouldSkip(element){
  if(!element||typeof element.closest!=="function")return false;
  const excluded=element.closest(EXCLUDE);
- const exactEditorialLabel=/^(AKTUELLE VERÖFFENTLICHUNG|WEITERER BEITRAG)$/;
  // These two labels are interface chrome rendered inside editorial cards. They
  // are not the card's source content and must remain localizable in the test.
- if(excluded&&exactEditorialLabel.test(String(element.textContent||'').trim()))return false;
+ if(element.matches?.('[data-dar-ui-label]'))return false;
  if(excluded&&excluded===global.document?.documentElement&&rtl.has(currentLocale()))return false;
  return !!excluded;
 }
