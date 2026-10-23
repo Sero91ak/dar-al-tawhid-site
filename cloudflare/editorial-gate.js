@@ -74,7 +74,7 @@ export async function editorialOwnerAccess(request,url,env){
    if(Number(request.headers.get("Content-Length")||0)>2048)return loginPage("Ungültige Anfrage.",413);
    const form=await request.formData().catch(()=>null);
    const supplied=String(form?.get("password")||"");
-   if(supplied.length>256||!(await equal(supplied,password)))return loginPage("Passwort nicht erkannt.",401);
+   if(supplied.length>256||!(await equal(supplied,password)))return loginPage("Das eingegebene Passwort stimmt nicht mit dem aktuell am Server hinterlegten Redaktionspasswort überein. Die Test-App verwendet möglicherweise einen anderen Anmeldeweg.",401);
    const exp=Math.floor(Date.now()/1000)+TTL;
    const sig=await mac(signing,"editorial-owner-v1|"+exp);
    return redirect(COOKIE+"=v1."+exp+"."+sig+"; HttpOnly; Secure; SameSite=Strict; Path="+ROOT+"; Max-Age="+TTL);
