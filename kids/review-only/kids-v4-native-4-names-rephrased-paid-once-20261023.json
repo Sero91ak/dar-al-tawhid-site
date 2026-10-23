@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "scope": "FOUR_QUIZ_276_278_640_641_NATIVE_FUSHA_PRIVATE_REVIEW",
+  "createdAt": "2026-10-23T17:34:44.145659+00:00",
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "fullSources": {
+    "Der Qurʾān beschreibt den leisen, verborgenen Ruf von Zakariyyā.": "kids-quiz-276",
+    "Der Qurʾān wiederholt, dass die Zeichen von ʿĪsā mit Allahs Erlaubnis geschahen.": "kids-quiz-278",
+    "Was zeigt die Geschichte von Ayyūb im Qurʾān 21:83–84 über Prüfungen?": "kids-quiz-640",
+    "Welche Verbindung macht das Duʿāʾ von Sulaymān im Qurʾān 27:19 deutlich?": "kids-quiz-641"
+  },
+  "sourceUnits": {
+    "Der Qurʾān beschreibt den leisen, verborgenen Ruf von Zakariyyā.": [
+      {
+        "sourceToken": "Der ",
+        "sourceSpoken": "Der",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      },
+      {
+        "sourceToken": "Qurʾān",
+        "sourceSpoken": "الْقُرْآن",
+        "language": "ar",
+        "type": "native_v4_fusha"
+      },
+      {
+        "sourceToken": " beschreibt den leisen, verborgenen Ruf von ",
+        "sourceSpoken": "beschreibt den leisen, verborgenen Ruf von",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      },
+      {
+        "sourceToken": "Zakariyyā",
+        "sourceSpoken": "زَكَرِيَّا",
+        "language": "ar",
+        "type": "native_v4_fusha"
+      },
+      {
+        "sourceToken": ".",
+        "sourceSpoken": ".",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      }
+    ],
+    "Der Qurʾān wiederholt, dass die Zeichen von ʿĪsā mit Allahs Erlaubnis geschahen.": [
+      {
+        "sourceToken": "Der ",
+        "sourceSpoken": "Der",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      },
+      {
+        "sourceToken": "Qurʾān",
+        "sourceSpoken": "الْقُرْآن",
+        "language": "ar",
+        "type": "native_v4_fusha"
+      },
+      {
+        "sourceToken": " wiederholt, dass die Zeichen von ",
+        "sourceSpoken": "wiederholt, dass die Zeichen von",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      },
+      {
+        "sourceToken": "ʿĪsā",
+        "sourceSpoken": "عِيسَى",
+        "language": "ar",
+        "type": "native_v4_fusha"
+      },
+      {
+        "sourceToken": " mit Allahs Erlaubnis geschahen.",
+        "sourceSpoken": "mit Allahs Erlaubnis geschahen.",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      }
+    ],
+    "Was zeigt die Geschichte von Ayyūb im Qurʾān 21:83–84 über Prüfungen?": [
+      {
+        "sourceToken": "Was zeigt die Geschichte von ",
+        "sourceSpoken": "Was zeigt die Geschichte von",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      },
+      {
+        "sourceToken": "Ayyūb",
+        "sourceSpoken": "أَيُّوب",
+        "language": "ar",
+        "type": "native_v4_fusha"
+      },
+      {
+        "sourceToken": " im ",
+        "sourceSpoken": "im",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      },
+      {
+        "sourceToken": "Qurʾān",
+        "sourceSpoken": "الْقُرْآن",
+        "language": "ar",
+        "type": "native_v4_fusha"
+      },
+      {
+        "sourceToken": " 21:83–84 über Prüfungen?",
+        "sourceSpoken": "21:83–84 über Prüfungen?",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      }
+    ],
+    "Welche Verbindung macht das Duʿāʾ von Sulaymān im Qurʾān 27:19 deutlich?": [
+      {
+        "sourceToken": "Welche Verbindung macht das ",
+        "sourceSpoken": "Welche Verbindung macht das",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      },
+      {
+        "sourceToken": "Duʿāʾ",
+        "sourceSpoken": "دُعَاء",
+        "language": "ar",
+        "type": "native_v4_fusha"
+      },
+      {
+        "sourceToken": " von ",
+        "sourceSpoken": "von",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      },
+      {
+        "sourceToken": "Sulaymān",
+        "sourceSpoken": "سُلَيْمَان",
+        "language": "ar",
+        "type": "native_v4_fusha"
+      },
+      {
+        "sourceToken": " im ",
+        "sourceSpoken": "im",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      },
+      {
+        "sourceToken": "Qurʾān",
+        "sourceSpoken": "الْقُرْآن",
+        "language": "ar",
+        "type": "native_v4_fusha"
+      },
+      {
+        "sourceToken": " 27:19 deutlich?",
+        "sourceSpoken": "27:19 deutlich?",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      }
+    ]
+  },
+  "newSourcesPlanned": {
+    "Der": "de",
+    "beschreibt den leisen, verborgenen Ruf von": "de",
+    "زَكَرِيَّا": "ar",
+    ".": "de",
+    "wiederholt, dass die Zeichen von": "de",
+    "عِيسَى": "ar",
+    "mit Allahs Erlaubnis geschahen.": "de",
+    "Was zeigt die Geschichte von": "de",
+    "أَيُّوب": "ar",
+    "im": "de",
+    "21:83–84 über Prüfungen?": "de",
+    "Welche Verbindung macht das": "de",
+    "von": "de",
+    "سُلَيْمَان": "ar",
+    "27:19 deutlich?": "de"
+  },
+  "estimatedCreditsNotInvoice": 294.02,
+  "publicRelease": false,
+  "humanHearingApproved": false,
+  "providerRequestsAllowed": 15,
+  "payments": [],
+  "composites": [],
+  "status": "STARTED_PREPAYMENT_REMOTE_CHECKPOINT"
+}
