@@ -207,3 +207,7 @@
     grid-template-columns:55px minmax(0,1fr) auto!important;
   }
 }
+
+/* Compact brand subtitle integrated in fixed header, not a second page banner. */
+#darTestBrandHeaderV1[data-premium-header-v2="ready"] .dtbh-tagline{display:block!important;opacity:1!important;letter-spacing:0!important;text-transform:none!important;}
+@media(max-width:599px){#darTestBrandHeaderV1[data-premium-header-v2="ready"] .dtbh-tagline{font-size:clamp(8px,2.1vw,10px)!important;line-height:1.2!important;}}
