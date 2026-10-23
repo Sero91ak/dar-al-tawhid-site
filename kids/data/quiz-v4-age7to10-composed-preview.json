@@ -175,6 +175,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Das merken wir uns: Allah beschreibt den Qurʾān als Rechtleitung für die Muttaqīn.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/92daa47ba2e2a990cac59c0609cd71f57536d52b.mp3",
+      "sha256": "842810ce04f290ab42172684778befc635d06653ffe94e64096b2ede4f66f114",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Hör dir die Frage und die Antworten in Ruhe an. Wem gehorchen wir im Dīn? Antwort 1: Allah und Seinem Gesandten ﷺ. Antwort 2: Nur der eigenen Meinung. Antwort 3: Jeder Idee im Internet. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/75bdf53eaf45b7e62ee8e39992a5bf6faaf8f890.mp3",
       "sha256": "4c189ef3c252a891ae069f32e21021e9ec98d3234c97080c772ae03d8f2f6f4b",
@@ -1597,6 +1608,17 @@
     "Das merken wir uns: Allah ließ Maryam frische Datteln von der Palme erhalten.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/d11b4b6ba90ec007cc32721d78fb07406a4760d3.mp3",
       "sha256": "efa97fa9c0ea509175f5a7d797d3fdec413b6fea4aa8fad433cb66ec8717d86b",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Mal sehen, was du zu diesem Thema weißt. Mit wessen Erlaubnis geschahen die Wunder ʿĪsās? Antwort 1: Mit Allahs Erlaubnis. Antwort 2: Aus eigener göttlicher Macht. Antwort 3: Mit Hilfe von Götzen. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/5514cf9aebf811110d3e0da25eddc400263ba57d.mp3",
+      "sha256": "b46575819403e91cfc030499bd21d0ac1092772041fa9c2ba969786788f223ef",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "qaApproval": "pending-human-auditory-review",
@@ -6361,13 +6383,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/9b7fcf63f60b45337e1af910f581e14c.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah beschreibt den Qurʾān als Rechtleitung für die Muttaqīn."
-          ]
+          "available": true,
+          "textSha256": "8a4df0bcefcbed095db264a0c5b5bd70f192df3fdefc6ae32ee825a67c67ab8e",
+          "mp3Sha256": "842810ce04f290ab42172684778befc635d06653ffe94e64096b2ede4f66f114",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/92daa47ba2e2a990cac59c0609cd71f57536d52b.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-024": {
       "ageBand": "7-8",
@@ -8323,10 +8345,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Mit wessen Erlaubnis geschahen die Wunder ʿĪsās?"
-          ]
+          "available": true,
+          "textSha256": "32c70be72db1340ab905101d54daba958dfe205bdebf225ae4088aef8dd74a6f",
+          "mp3Sha256": "b46575819403e91cfc030499bd21d0ac1092772041fa9c2ba969786788f223ef",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/5514cf9aebf811110d3e0da25eddc400263ba57d.mp3"
         },
         "correct": {
           "available": true,

@@ -3,7 +3,7 @@
   "app": "TAWḤĪD KIDS",
   "branch": "review/kids-quiz-v4-batch-001-020-20261014",
   "pullRequest": "https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143",
-  "basedOnReviewedCommit": "b6199d645bd6a98dc10a8b4452d12ac88c649918",
+  "basedOnReviewedCommit": "236301d4f8c335712e250fe7fe558e6bc1881839",
   "modelId": "eleven_v4",
   "masterVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "totalCanonicalQuestions": 900,
@@ -23,16 +23,16 @@
     },
     "7-8": {
       "questions": 150,
-      "completeFourPartQuestions": 146,
+      "completeFourPartQuestions": 147,
       "availableParts": {
-        "question": 148,
+        "question": 149,
         "correct": 150,
         "retry": 150,
-        "explanation": 147
+        "explanation": 148
       },
       "missingParts": {
-        "explanation": 3,
-        "question": 2
+        "question": 1,
+        "explanation": 2
       }
     },
     "9-10": {
@@ -50,10 +50,10 @@
       }
     }
   },
-  "uniqueVerifiedQuizMP3s": 861,
-  "reusedSpeechPartAssignments": 1777,
-  "fourPartAudioQuestions": 432,
-  "missingPartsQuestions": 18,
+  "uniqueVerifiedQuizMP3s": 863,
+  "reusedSpeechPartAssignments": 1779,
+  "fourPartAudioQuestions": 433,
+  "missingPartsQuestions": 17,
   "remainingNewV4UniqueSegmentsByCostAudit": 75,
   "remainingNewV4TextCodepoints": 5068,
   "older300CompactSpokenDraftCount": 300,
@@ -68,12 +68,12 @@
   "genuinelyNewFragmentsExcludingFlowReservations": null,
   "onlyAlreadyPaidMP3RecoveryBlockedQuestions": null,
   "questionsNeedingNewV4Originals": null,
-  "originalV4TextClipsRegistered": 1813,
-  "previouslyChargedDirectV4Takes": 1743,
+  "originalV4TextClipsRegistered": 1815,
+  "previouslyChargedDirectV4Takes": 1745,
   "prepaidOriginalsImported": 56,
   "prepaidOriginalsStillMissing": 0,
   "missingGenerationIds": [],
-  "remainingUniqueSpeechSegmentsEstimate": 58,
+  "remainingUniqueSpeechSegmentsEstimate": 56,
   "remainingEstimatedCreditsForAll450": 79133.93,
   "preciseBillingReconciled": false,
   "masterOfflineHearingPackageBuilder": "kids/tools/build_quiz_v4_all450_master_hearing_review.py",

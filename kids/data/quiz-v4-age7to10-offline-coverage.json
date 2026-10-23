@@ -6,24 +6,24 @@
   "elevenLabsCreditsSpent": 0,
   "humanListeningApprovalsCreated": 0,
   "originalMP3sCreatedBySynthesis": 0,
-  "sourceOriginalsVerified": 1428,
-  "uniqueFullAudioClipsAvailable": 567,
-  "newOfflineComposites": 541,
+  "sourceOriginalsVerified": 1433,
+  "uniqueFullAudioClipsAvailable": 569,
+  "newOfflineComposites": 543,
   "byAge": {
     "7-8": {
       "questions": 150,
-      "completeFourPartQuestions": 146,
+      "completeFourPartQuestions": 147,
       "availableFieldCounts": {
-        "question": 148,
+        "question": 149,
         "correct": 150,
         "retry": 150,
-        "explanation": 147
+        "explanation": 148
       },
       "missingFieldCounts": {
-        "question": 2,
+        "question": 1,
         "correct": 0,
         "retry": 0,
-        "explanation": 3
+        "explanation": 2
       }
     },
     "9-10": {
@@ -43,15 +43,11 @@
       }
     }
   },
-  "missingUniqueOriginalSegments": 25,
+  "missingUniqueOriginalSegments": 23,
   "missingOriginalSegmentsByFrequency": [
     {
       "fragment": "Taqwā.",
       "requiredByFields": 2
-    },
-    {
-      "fragment": "Allah beschreibt den Qurʾān als Rechtleitung für die Muttaqīn.",
-      "requiredByFields": 1
     },
     {
       "fragment": "Dürfen wir andere mit beleidigenden Spitznamen rufen?",
@@ -59,10 +55,6 @@
     },
     {
       "fragment": "Der Qurʾān beschreibt Zakariyyās Ruf als verborgen und leise.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Mit wessen Erlaubnis geschahen die Wunder ʿĪsās?",
       "requiredByFields": 1
     },
     {
@@ -78,11 +70,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Glücksspiele spielen.",
+      "fragment": "Angeben.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Angeben.",
+      "fragment": "Glücksspiele spielen.",
       "requiredByFields": 1
     },
     {
@@ -102,11 +94,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Regel lehrt der Ḥadīṯ über Ḥalāl, Ḥarām und zweifelhafte Dinge?",
+      "fragment": "Ḥalāl und Ḥarām sind klar; bei Zweifelhaftem ist Vorsicht gut.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Ḥalāl und Ḥarām sind klar; bei Zweifelhaftem ist Vorsicht gut.",
+      "fragment": "Welche Regel lehrt der Ḥadīṯ über Ḥalāl, Ḥarām und zweifelhafte Dinge?",
       "requiredByFields": 1
     },
     {
