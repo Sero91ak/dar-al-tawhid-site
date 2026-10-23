@@ -6,8 +6,7 @@
  */
 const ROOT="/redaktion", COOKIE="dar_editorial_owner_v1", TTL=14*86400;
 function route(path){
-  return path===ROOT||path===ROOT+"/"||path===ROOT+"/index.html"||
-         path===ROOT+"/login"||path===ROOT+"/logout";
+  return path===ROOT||path.startsWith(ROOT+"/");
 }
 function hdr(extra={}){
   return {"Cache-Control":"private, no-store, max-age=0","CDN-Cache-Control":"no-store",
@@ -70,12 +69,14 @@ export async function editorialOwnerAccess(request,url,env){
  if(request.method!=="GET"&&request.method!=="HEAD")return new Response("Method Not Allowed",{status:405,headers:hdr({"Allow":"GET, HEAD"})});
  if(!(await session(request,signing)))return loginPage();
  if(p===ROOT+"/login"||p===ROOT+"/logout")return redirect();
- const target=new URL(url.toString());target.pathname=ROOT+"/index.html";
+ const allowed=new Set([ROOT,ROOT+"/",ROOT+"/index.html",ROOT+"/editor.js",ROOT+"/style.css"]);
+ if(!allowed.has(p))return new Response("Not Found",{status:404,headers:hdr()});
+ const target=new URL(url.toString());target.pathname=(p===ROOT||p===ROOT+"/index.html")?ROOT+"/":p;
  const asset=await env.ASSETS.fetch(new Request(target.toString(),{method:"GET"}));
  if(!asset.ok||asset.status>=300)return new Response("Redaktionsseite nicht verfügbar",{status:503,headers:hdr()});
  const headers=new Headers(asset.headers);
  for(const [k,v]of Object.entries(hdr()))headers.set(k,v);
- headers.set("Content-Type","text/html; charset=utf-8");
+ if(p===ROOT||p===ROOT+"/"||p===ROOT+"/index.html")headers.set("Content-Type","text/html; charset=utf-8");
  headers.set("Content-Security-Policy","default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'");
  headers.delete("ETag");headers.delete("Content-Length");
  return new Response(request.method==="HEAD"?null:asset.body,{status:200,headers});
