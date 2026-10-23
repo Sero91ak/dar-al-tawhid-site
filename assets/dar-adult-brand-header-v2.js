@@ -13,6 +13,43 @@ function start(){
  header.id="darAdultBrandHeaderV2";
  header.setAttribute("aria-label","DĀR AL TAWḤĪD · App-Kopf");
  header.innerHTML='<div class="dtbh-row"><img class="dtbh-logo" alt="DĀR AL TAWḤĪD Logo"><div class="dtbh-copy"><span class="dtbh-tagline">Beiträge nach Qurʾān, Sunnah und Āthār</span><strong class="dtbh-name">DĀR AL TAWḤĪD</strong></div><button type="button" class="dtbh-toggle" aria-label="Erscheinungsbild auswählen" title="Erscheinungsbild auswählen" aria-haspopup="true" aria-expanded="false" aria-controls="darAdultBrandPaletteV2"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 3a9 9 0 0 0 0 18c2 0 3.4-1.6 3.4-3.1 0-1.1-.9-1.8-.9-2.6 0-.8.7-1.4 1.8-1.4h1.8a3 3 0 0 0 3-3A9 9 0 0 0 12 3Z"></path><circle cx="7.6" cy="10" r="1"></circle><circle cx="10.8" cy="6.7" r="1"></circle><circle cx="6.9" cy="14.1" r="1"></circle></svg></button></div><div id="darAdultBrandPaletteV2" class="dtbh-panel" role="group" aria-label="Erscheinungsbild" hidden><span class="dtbh-panel-title">Erscheinungsbild auswählen</span><div class="dtbh-grid"></div></div>';
+ /* One accessible toolbar: quick language, account login, then existing palette. */
+ var paletteTrigger=header.querySelector(".dtbh-toggle");
+ paletteTrigger.insertAdjacentHTML("beforebegin",
+  '<button type="button" class="dtbh-shortcut dtbh-language-shortcut" data-dar-no-translate="header" aria-label="Sprache auswählen" title="Sprache auswählen" aria-haspopup="dialog">'+
+  '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-3.3 3.6-3.3 14.4 0 18M12 3c3.3 3.6 3.3 14.4 0 18"/></svg><span class="dtbh-locale-code" aria-hidden="true">DE</span></button>'+
+  '<button type="button" class="dtbh-shortcut dtbh-account-shortcut" aria-label="Konto und Anmeldung öffnen" title="Konto und Anmeldung öffnen">'+
+  '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c.1-4.2 3.1-6.4 7.5-6.4s7.4 2.2 7.5 6.4"/></svg></button>');
+ var languageTrigger=header.querySelector(".dtbh-language-shortcut");
+ var accountTrigger=header.querySelector(".dtbh-account-shortcut");
+ function syncLanguageShortcut(){
+  var api=window.DARAdultLanguagePickerV1,code=api&&typeof api.read==="function"?api.read():"de";
+  var chip=languageTrigger.querySelector(".dtbh-locale-code");
+  if(chip)chip.textContent=String(code||"de").toUpperCase();
+  languageTrigger.setAttribute("aria-label","Sprache auswählen, aktuell "+String(code||"de").toUpperCase());
+ }
+ languageTrigger.addEventListener("click",function(e){
+  e.preventDefault();e.stopPropagation();
+  var picker=window.DARAdultLanguagePickerV1;
+  if(picker&&typeof picker.open==="function"){picker.open("quick",languageTrigger);return;}
+  /* The canonical picker normally loads with defer; recover if its asset is late. */
+  var script=document.querySelector('script[src*="/assets/i18n/adult-language-picker-v1.js"]');
+  if(!script){script=document.createElement("script");script.src="/assets/i18n/adult-language-picker-v1.js?v=20261022-header-shortcuts";document.head.appendChild(script);}
+  script.addEventListener("load",function(){
+   if(window.DARAdultLanguagePickerV1)window.DARAdultLanguagePickerV1.open("quick",languageTrigger);
+   syncLanguageShortcut();
+  },{once:true});
+ });
+ accountTrigger.addEventListener("click",function(e){
+  e.preventDefault();e.stopPropagation();
+  if(typeof window.navigate==="function"){window.navigate("account");return;}
+  /* Hash routing is the existing adult-app fallback; never open a duplicate login. */
+  location.hash="#account";
+ });
+ window.addEventListener("dar-adult-locale-changed",syncLanguageShortcut);
+ window.addEventListener("dar-adult-ui-languages-ready",syncLanguageShortcut);
+ window.addEventListener("pageshow",syncLanguageShortcut);
+ syncLanguageShortcut();
  document.body.insertBefore(header,document.body.firstChild);
  var logo=header.querySelector(".dtbh-logo");
  function syncLogo(){

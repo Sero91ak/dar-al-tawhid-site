@@ -5,17 +5,17 @@
 if(!window.DARAdultLanguagePickerV1&&!window.__DAR_LANGUAGE_PICKER_LOADING){
  window.__DAR_LANGUAGE_PICKER_LOADING=true;
  const picker=document.createElement("script");
- picker.src="/assets/i18n/adult-language-picker-v1.js?v=20261022-01";
+ picker.src="/assets/i18n/adult-language-picker-v1.js?v=20261022-header-locale-gate-v1";
  picker.async=true;
  picker.onerror=()=>{window.__DAR_LANGUAGE_PICKER_LOADING=false};
  (document.head||document.documentElement).appendChild(picker);
 }
 
-/* One shared adult Turkish UI catalog, reused by PWA, desktop and iOS WKWebView. */
+/* Shared visitor language settings runtime; Turkish catalog remains blocked until approval. */
 if(!window.__DAR_ADULT_UI_TR_VISITOR_LOADED&&!/^\/test(?:\/|$)/.test(location.pathname)){
  window.__DAR_ADULT_UI_TR_VISITOR_LOADED=true;
  const script=document.createElement("script");
- script.src="/assets/i18n/adult-ui-translate.js?v=20261021-tr-ui1";
+ script.src="/assets/i18n/adult-ui-translate.js?v=20261022-unreleased-gate-v1";
  script.async=true;
  script.onerror=()=>{window.__DAR_ADULT_UI_TR_VISITOR_LOADED=false};
  (document.head||document.documentElement).appendChild(script);

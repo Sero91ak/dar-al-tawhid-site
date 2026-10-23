@@ -70,15 +70,15 @@ jobs:
             driver.execute_script("if(typeof navigate==='function')navigate('more');else location.hash='#more'")
             WebDriverWait(driver,25).until(lambda d:d.execute_script("return !!document.querySelector('.dar-more-v15 [data-dal-open=quick]')"))
             driver.execute_script("document.querySelector('.dar-more-v15 [data-dal-open=quick]').click()")
-            WebDriverWait(driver,25).until(lambda d:d.execute_script("return document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale]').length===9"))
+            WebDriverWait(driver,25).until(lambda d:d.execute_script("return !!document.querySelector('#darAdultLanguagePicker [data-dal-locale=tr]') && !document.querySelector('#darAdultLanguagePicker [data-dal-locale][disabled]')"))
             assert driver.execute_script("return document.querySelector('#darAdultLanguagePicker [data-dal-locale=tr]').getAttribute('aria-pressed')")=='true'
-            assert driver.execute_script("return document.querySelector('#darAdultLanguagePicker [data-dal-locale=es]').disabled")
+            assert driver.execute_script("return [...document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale]')].every(el=>window.DARAdultLanguagePickerV1.available(el.dataset.dalLocale))")
             driver.execute_script("document.querySelector('#darAdultLanguagePicker [data-dal-locale=de]').click()")
             assert driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")=='de'
             driver.execute_script("if(typeof navigate==='function')navigate('settings');else location.hash='#settings'")
             WebDriverWait(driver,25).until(lambda d:d.execute_script("return !!document.querySelector('#darSettingsLocaleChoice [data-dal-open=settings]')"))
             driver.execute_script("document.querySelector('#darSettingsLocaleChoice [data-dal-open=settings]').click()")
-            WebDriverWait(driver,25).until(lambda d:d.execute_script("return document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale]').length===9"))
+            WebDriverWait(driver,25).until(lambda d:d.execute_script("return !!document.querySelector('#darAdultLanguagePicker [data-dal-locale=tr]') && !document.querySelector('#darAdultLanguagePicker [data-dal-locale][disabled]')"))
             driver.execute_script("document.querySelector('#darAdultLanguagePicker [data-dal-locale=tr]').click()")
             assert driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")=='tr'
             print('PASS: adult TEST home, More and Settings share the Turkish choice.')

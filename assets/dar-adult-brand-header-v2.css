@@ -314,3 +314,110 @@ html.dar-adult-global-brand-ready body.is-home-route .top-shell > .isnad.dt-isna
  html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 .dar-adult-home-salam-v5{font-size:19px!important}
  html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 p{font-size:13px!important}
 }
+
+
+/* DAR_ADULT_HEADER_SHORTCUTS_V1 · Sprache | Konto | Farbe, no new header height.
+ * Responsive widths protect the brand wordmark on narrow iPhones and Android.
+ * Identical presentation for TEST and the visitor mobile/PWA adult shell. */
+#darAdultBrandHeaderV2 .dtbh-shortcut{
+ appearance:none!important;
+ display:grid!important;place-items:center!important;
+ position:relative!important;
+ width:43px!important;height:43px!important;min-width:0!important;
+ flex:0 0 43px!important;padding:0!important;
+ background:var(--dtbh-btn)!important;color:var(--dtbh-ink)!important;
+ border:1px solid var(--dtbh-line)!important;border-radius:13px!important;
+ box-shadow:none!important;cursor:pointer!important;
+ touch-action:manipulation!important;
+}
+#darAdultBrandHeaderV2 .dtbh-shortcut svg{
+ width:21px!important;height:21px!important;stroke:currentColor!important;
+}
+#darAdultBrandHeaderV2 .dtbh-language-shortcut svg{transform:translateY(-3px)}
+#darAdultBrandHeaderV2 .dtbh-locale-code{
+ position:absolute!important;bottom:2px!important;inset-inline:0!important;
+ text-align:center!important;font:800 8px/1 system-ui,-apple-system,sans-serif!important;
+ letter-spacing:.04em!important;color:var(--dtbh-ink)!important;
+}
+#darAdultBrandHeaderV2 .dtbh-shortcut:focus-visible{
+ outline:2px solid var(--dtbh-muted)!important;outline-offset:2px!important;
+}
+@media (min-width:720px){
+ #darAdultBrandHeaderV2 .dtbh-shortcut{
+  width:48px!important;height:48px!important;flex-basis:48px!important;
+ }
+}
+@media (max-width:699px){
+ #darAdultBrandHeaderV2 .dtbh-row{
+  display:grid!important;
+  grid-template-columns:40px minmax(0,1fr) repeat(3,39px)!important;
+  grid-template-rows:auto 40px!important;
+  gap:3px 5px!important;
+  width:100%!important;max-width:100%!important;
+ }
+ #darAdultBrandHeaderV2 .dtbh-copy{display:contents!important}
+ #darAdultBrandHeaderV2 .dtbh-tagline{
+  grid-row:1!important;grid-column:1/-1!important;
+  min-width:0!important;white-space:nowrap!important;
+  overflow:hidden!important;text-overflow:ellipsis!important;
+ }
+ #darAdultBrandHeaderV2 .dtbh-logo{
+  grid-column:1!important;grid-row:2!important;
+  width:40px!important;height:40px!important;flex:0 0 40px!important;
+ }
+ #darAdultBrandHeaderV2 .dtbh-name{
+  grid-column:2!important;grid-row:2!important;min-width:0!important;
+  margin:0!important;white-space:nowrap!important;
+  overflow:hidden!important;
+  font:750 clamp(13px,4.25vw,22px)/1.06 Georgia,"Iowan Old Style",serif!important;
+  letter-spacing:-.035em!important;
+ }
+ #darAdultBrandHeaderV2 .dtbh-shortcut,#darAdultBrandHeaderV2 .dtbh-toggle{
+  grid-row:2!important;width:39px!important;height:40px!important;
+  min-width:0!important;flex:0 0 39px!important;
+  border-radius:12px!important;padding:0!important;
+ }
+ #darAdultBrandHeaderV2 .dtbh-language-shortcut{grid-column:3!important}
+ #darAdultBrandHeaderV2 .dtbh-account-shortcut{grid-column:4!important}
+ #darAdultBrandHeaderV2 .dtbh-toggle{grid-column:5!important}
+ #darAdultBrandHeaderV2 .dtbh-shortcut svg,
+ #darAdultBrandHeaderV2 .dtbh-toggle svg{width:19px!important;height:19px!important}
+}
+@media (max-width:359px){
+ #darAdultBrandHeaderV2 .dtbh-row{
+  grid-template-columns:36px minmax(0,1fr) repeat(3,36px)!important;
+  gap:3px 4px!important;
+ }
+ #darAdultBrandHeaderV2 .dtbh-logo{width:36px!important;height:36px!important;flex-basis:36px!important}
+ #darAdultBrandHeaderV2 .dtbh-name{
+  font-size:clamp(11.8px,3.85vw,14px)!important;letter-spacing:-.04em!important;
+ }
+ #darAdultBrandHeaderV2 .dtbh-shortcut,
+ #darAdultBrandHeaderV2 .dtbh-toggle{width:36px!important;height:40px!important;flex-basis:36px!important}
+}
+@media (prefers-reduced-motion:no-preference){
+ #darAdultBrandHeaderV2 .dtbh-shortcut:hover{
+  border-color:var(--dtbh-muted)!important;
+ }
+}
+
+/* DAR_ADULT_HEADER_WORDMARK_NARROW_V2
+ * Preserve the complete Unicode brand name at 320–390px; allow two lines
+ * rather than eliding the final part behind three touch controls. */
+@media(max-width:440px){
+ #darAdultBrandHeaderV2 .dtbh-name{
+  white-space:normal!important;
+  text-overflow:clip!important;
+  overflow:visible!important;
+  word-break:normal!important;
+  overflow-wrap:normal!important;
+  text-wrap:balance!important;
+  line-height:1.05!important;
+  font-size:clamp(13px,4.1vw,18px)!important;
+  max-height:40px!important;
+ }
+}
+
+/* DAR_ADULT_HEADER_RTL_STABLE_V1: keep the fixed brand/actions physically
+   Sprache → Konto → Farbe even while Arabic/Soranî document body is RTL. */
+#darAdultBrandHeaderV2 .dtbh-row{direction:ltr!important}

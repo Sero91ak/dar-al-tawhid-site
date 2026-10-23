@@ -32,6 +32,8 @@ function t(){return text[read()]||text.de}
 function item(code){return ITEMS.find(function(x){return x.code===code})}
 function available(code){
  if(code==="de")return true;
+ /* Public visitor, Android PWA and iOS WebView: no unreviewed language selectable. */
+ if(!TEST)return false;
  if(TEST){
   var runtime=w.DarTestTurkishUI;
   if(!runtime||!Array.isArray(runtime.supportedLocales)||runtime.supportedLocales.indexOf(code)<0)return false;
@@ -78,7 +80,7 @@ function renderList(){
  '<div class="dal-top"><button type="button" class="dal-back" data-dal-close>'+escape(head==="settings"?copy.back:copy.close)+'</button>'+
  '<span class="dal-identity">DĀR AL TAWḤĪD</span></div>'+
  '<header class="dal-heading"><span>'+escape(copy.language)+'</span><h2 id="dalTitle">'+escape(copy.choose)+'</h2><p>'+escape(copy.subtitle)+'</p></header>'+
- '<div class="dal-list" role="group" aria-label="'+escape(copy.choose)+'">'+ITEMS.map(function(l){
+ '<div class="dal-list" role="group" aria-label="'+escape(copy.choose)+'">'+ITEMS.filter(function(l){return available(l.code)}).map(function(l){
    var ok=available(l.code),sel=v===l.code;
    return '<button type="button" class="dal-option'+(sel?' is-selected':'')+'" data-dal-locale="'+l.code+'"'+(ok?'':' disabled aria-disabled="true"')+' aria-pressed="'+sel+'" lang="'+l.code+'" dir="ltr">'+
     '<span class="dal-mark" aria-hidden="true">'+(sel?'✓':'')+'</span><span class="dal-name" dir="'+l.dir+'">'+escape(l.name)+'</span>'+
