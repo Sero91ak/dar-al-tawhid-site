@@ -96,3 +96,19 @@ body:has(.admin-editorial-host) .meta-line{display:none!important}
  .admin-editorial-popout{font-size:11px;max-width:108px;white-space:normal;text-align:right}
  .admin-editorial-host iframe{min-height:420px}
 }
+
+/* Full-bleed host: remove the legacy Admin body's page gutters in atelier mode. */
+body:has(.admin-editorial-host){
+ padding:0!important;margin:0!important;
+ background:#07140f!important;touch-action:pan-y!important
+}
+body:has(.admin-editorial-host) .topbar{
+ padding-top:max(8px,env(safe-area-inset-top))!important
+}
+@media(max-width:767px){
+ body:has(.admin-editorial-host) .topbar{
+  padding-top:max(7px,env(safe-area-inset-top))!important;
+  padding-left:max(12px,env(safe-area-inset-left))!important;
+  padding-right:max(12px,env(safe-area-inset-right))!important
+ }
+}
