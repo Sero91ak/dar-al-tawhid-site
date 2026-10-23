@@ -237,6 +237,7 @@ async function selectFile(file){
    if(exact.length===1)state.q=String(exact[0].number);
   }
   save();draw();
+  if(window.matchMedia("(max-width:767px)").matches)setMobileView("editor");
   // Only existing explicitly approved translations may be loaded from manifest.
   await loadApprovedTranslations(file.replace(/\.md$/,""));
   if(state.q)await checkQ();else status("Originalbeitrag geladen; Q-Nummer noch nicht eindeutig zugeordnet.","importStatus");
@@ -314,6 +315,19 @@ async function share(){
  if(navigator.share){try{await navigator.share({text});return}catch(_){}}
  await copy(text);
 }
+function setMobileView(view){
+ const safe=["catalog","editor","sources"].includes(view)?view:"catalog";
+ document.body.dataset.mobileView=safe;
+ document.querySelectorAll("[data-mobile-view]").forEach(b=>{
+  const active=b.dataset.mobileView===safe;b.classList.toggle("active",active);b.setAttribute("aria-current",active?"page":"false");
+ });
+}
+function bindMobile(){
+ document.querySelectorAll("[data-mobile-view]").forEach(button=>{
+  button.onclick=()=>setMobileView(button.dataset.mobileView);
+ });
+ setMobileView("catalog");
+}
 function bind(){
  $("postSearch").oninput=e=>renderCatalog(e.target.value);
  $("newDraft").onclick=manualDraft;
@@ -348,5 +362,5 @@ function bind(){
  };
  $("exportDraft").onclick=download;$("importDraft").onchange=importFile;
 }
-bind();loadCatalog();
+bind();bindMobile();loadCatalog();
 })();
