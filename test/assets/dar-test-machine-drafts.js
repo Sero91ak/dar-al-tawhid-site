@@ -237,7 +237,7 @@ if(typeof global.fetch==="function"){
  }).then(boot).catch(error=>{
   if(global.console?.warn)global.console.warn("DĀR TEST machine drafts stayed hidden.",error);
  });
- global.fetch("/test/i18n/adult-surface-drafts.json?v=20261024-surface-quiz-3",{credentials:"same-origin",cache:"no-store"}).then(response=>{
+ global.fetch("/test/i18n/adult-surface-drafts.json?v=20261024-surface-quiz-4",{credentials:"same-origin",cache:"no-store"}).then(response=>{
   if(!response.ok)return null;
   return response.json();
  }).then(data=>{if(data)bootSurface(data)}).catch(()=>{});
