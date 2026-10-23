@@ -143,7 +143,7 @@ body.dar-admin-workspace #panel .meta-line{
 }
 /* Desktop persistent navigation with clear hierarchy, no card grid. */
 .dar-command-rail,.dar-mobile-command{display:none}
-@media(min-width:820px){
+@media(min-width:1200px){
  body.dar-admin-workspace{--dar-rail:235px;padding-left:var(--dar-rail)!important}
  body.dar-admin-workspace .dar-command-rail{
   display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;
@@ -171,7 +171,7 @@ body.dar-admin-workspace #panel .meta-line{
  body.dar-admin-workspace.dar-editorial-fullscreen{padding-left:0!important}
  body.dar-admin-workspace.dar-editorial-fullscreen .dar-command-rail{display:none!important}
 }
-@media(min-width:820px) and (max-width:1100px){
+@media(min-width:1200px) and (max-width:1420px){
  body.dar-admin-workspace{--dar-rail:185px}
  body.dar-admin-workspace:has(.admin-editorial-host){--dar-rail:185px}
  .dar-rail-header{padding-inline:12px}
@@ -180,7 +180,7 @@ body.dar-admin-workspace #panel .meta-line{
  body.dar-admin-workspace #panel .folder-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
 /* Compact iPhone / small tablet: one-row toolbar and fixed bottom section navigation. */
-@media(max-width:819px){
+@media(max-width:1199px){
  body.dar-admin-workspace{padding:0 0 calc(65px + env(safe-area-inset-bottom))!important}
  body.dar-admin-workspace .topbar{
   min-height:62px!important;padding:max(8px,env(safe-area-inset-top)) 12px 7px!important;
@@ -383,12 +383,12 @@ body.dar-admin-workspace #panel .planner-grid{column-gap:20px!important;row-gap:
 body.dar-admin-workspace #panel .admin-form-grid .wide{
  grid-column:1/-1!important
 }
-@media(min-width:700px) and (max-width:819px){
+@media(min-width:700px) and (max-width:1199px){
  body.dar-admin-workspace #panel{padding:18px!important}
  body.dar-admin-workspace #panel .folder-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
  body.dar-admin-workspace #panel .folder-card{min-height:110px!important}
 }
-@media(max-width:819px){
+@media(max-width:1199px){
  body.dar-admin-workspace #panel .quellen-grid{display:block!important}
  body.dar-admin-workspace #panel .quellen-grid>.panel+.panel{
   border-left:0!important;padding-left:0!important
@@ -398,3 +398,45 @@ body.dar-admin-workspace #panel .admin-form-grid .wide{
   grid-template-columns:1fr!important
  }
 }
+
+/* Responsive fold/tablet contract: do not waste the 700–1199px working window on a fixed rail.
+   Keep the established DAR app bottom navigation in medium/fold window sizes. */
+@media(min-width:700px) and (max-width:1199px){
+ body.dar-admin-workspace .topbar{min-height:62px!important;padding:9px 18px!important}
+ body.dar-admin-workspace .toolbar .btn{font-size:12px!important;width:auto!important;min-width:40px!important;padding:7px 13px!important}
+ body.dar-admin-workspace #panel{padding:17px 20px 72px!important}
+ body.dar-admin-workspace #panel:has(.admin-editorial-host){padding:0!important}
+ body.dar-admin-workspace #panel .folder-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body.dar-admin-workspace #panel .folder-card{min-height:108px!important;padding:18px!important}
+ body.dar-admin-workspace #panel .folder-card p{display:block!important}
+ body.dar-admin-workspace #panel .admin-form-grid,
+ body.dar-admin-workspace #panel .planner-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body.dar-admin-workspace #panel .quellen-grid{display:grid!important;grid-template-columns:minmax(235px,34%) minmax(0,66%)!important}
+ .dar-mobile-command{grid-template-columns:repeat(5,minmax(0,1fr));height:calc(58px + env(safe-area-inset-bottom))}
+ .dar-mobile-more{bottom:calc(58px + env(safe-area-inset-bottom))}
+}
+/* Avoid stale fixed rail if a touch fold is unfolded into an unusual ≥1200 CSS-px viewport.
+   Based on actual viewport capacity, not a claimed specific handset model. */
+@media(min-width:1200px) and (max-width:1439px){
+ body.dar-admin-fold-viewport.dar-admin-workspace{padding-left:0!important}
+ body.dar-admin-fold-viewport .dar-command-rail{display:none!important}
+ body.dar-admin-fold-viewport .dar-mobile-command{display:grid!important;position:fixed;bottom:0;left:0;right:0;
+  grid-template-columns:repeat(5,minmax(0,1fr));height:calc(60px + env(safe-area-inset-bottom));
+  padding:3px env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  background:#071612;border-top:1px solid var(--dar-c-rule);z-index:190}
+ body.dar-admin-fold-viewport .dar-bottom-link{display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:3px;min-width:0;border:0;border-top:2px solid transparent;
+  background:transparent;color:#b3c5b9;font-size:11px}
+ body.dar-admin-fold-viewport .dar-bottom-link.active{border-top-color:#edd093;color:#f3dba4}
+ body.dar-admin-fold-viewport .dar-bottom-icon{font-size:20px}
+ body.dar-admin-fold-viewport .dar-mobile-more:not([hidden]){
+  display:grid;position:fixed;left:0;right:0;bottom:calc(60px + env(safe-area-inset-bottom));
+  z-index:189;max-height:70dvh;overflow:auto;background:#0d201a;
+  grid-template-columns:repeat(3,minmax(0,1fr));padding:13px}
+ body.dar-admin-fold-viewport #panel{padding-bottom:80px!important}
+ body.dar-admin-fold-viewport #panel:has(.admin-editorial-host){padding:0!important}
+}
+/* One root scroll direction; no accidental width clipping in split-screen. */
+body.dar-admin-workspace #panel,
+body.dar-admin-workspace #panel>*,body.dar-admin-workspace .app{min-width:0!important}
+body.dar-admin-workspace .folder-grid,body.dar-admin-workspace .quellen-grid{width:100%!important}
