@@ -172,6 +172,14 @@ async function finalizeDarTestHomeV1193(asset) {
   if (!asset || !asset.ok) return asset; // /test is HTML; proxy content-type may be stale
   let html = await asset.text();
 
+  // DAR_TEST_V8_IMMERSIVE_RUNTIME_V1: keep the adult Test shell's visible
+  // motion system on one explicit cache key. This is test-route-only and
+  // prevents an older HTML/SW snapshot from selecting the previous shell URL.
+  html = html.replace(/v8-integrated-shell-v1\.css\?v=[^"'`\s]*/g,
+    "v8-integrated-shell-v1.css?v=20261023-immersive-1");
+  html = html.replace(/v8-integrated-shell-v1\.js\?v=[^"'`\s]*/g,
+    "v8-integrated-shell-v1.js?v=20261023-immersive-1");
+
   // Test v1200: exactly one Home authority. Remove the obsolete v1193 runtime
   // injection so it cannot race the v1194 home observer and recreate duplicate blocks.
   html = html.replace(/<link[^>]+dar-home-library-v1193\.css[^>]*>\s*/g, "");
