@@ -1,0 +1,852 @@
+{
+  "base": "http://127.0.0.1:8765",
+  "areas": [
+    "home",
+    "quran",
+    "recent",
+    "topics",
+    "more",
+    "duas",
+    "hadith",
+    "bibliothek",
+    "frauen",
+    "quiz",
+    "prayer",
+    "saved",
+    "account",
+    "settings",
+    "scholars"
+  ],
+  "locales": [
+    "de",
+    "tr",
+    "en",
+    "ar",
+    "ku",
+    "ckb",
+    "bs",
+    "fr",
+    "es"
+  ],
+  "expected": 135,
+  "checks": 135,
+  "pass": 0,
+  "fail": 0,
+  "blocked": 135,
+  "results": [
+    {
+      "area": "home",
+      "locale": "de",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quran",
+      "locale": "de",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "recent",
+      "locale": "de",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "topics",
+      "locale": "de",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "more",
+      "locale": "de",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "duas",
+      "locale": "de",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "hadith",
+      "locale": "de",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "bibliothek",
+      "locale": "de",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "frauen",
+      "locale": "de",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quiz",
+      "locale": "de",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "prayer",
+      "locale": "de",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "saved",
+      "locale": "de",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "account",
+      "locale": "de",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "settings",
+      "locale": "de",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "scholars",
+      "locale": "de",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "home",
+      "locale": "tr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quran",
+      "locale": "tr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "recent",
+      "locale": "tr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "topics",
+      "locale": "tr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "more",
+      "locale": "tr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "duas",
+      "locale": "tr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "hadith",
+      "locale": "tr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "bibliothek",
+      "locale": "tr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "frauen",
+      "locale": "tr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quiz",
+      "locale": "tr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "prayer",
+      "locale": "tr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "saved",
+      "locale": "tr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "account",
+      "locale": "tr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "settings",
+      "locale": "tr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "scholars",
+      "locale": "tr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "home",
+      "locale": "en",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quran",
+      "locale": "en",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "recent",
+      "locale": "en",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "topics",
+      "locale": "en",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "more",
+      "locale": "en",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "duas",
+      "locale": "en",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "hadith",
+      "locale": "en",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "bibliothek",
+      "locale": "en",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "frauen",
+      "locale": "en",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quiz",
+      "locale": "en",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "prayer",
+      "locale": "en",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "saved",
+      "locale": "en",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "account",
+      "locale": "en",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "settings",
+      "locale": "en",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "scholars",
+      "locale": "en",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "home",
+      "locale": "ar",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quran",
+      "locale": "ar",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "recent",
+      "locale": "ar",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "topics",
+      "locale": "ar",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "more",
+      "locale": "ar",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "duas",
+      "locale": "ar",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "hadith",
+      "locale": "ar",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "bibliothek",
+      "locale": "ar",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "frauen",
+      "locale": "ar",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quiz",
+      "locale": "ar",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "prayer",
+      "locale": "ar",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "saved",
+      "locale": "ar",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "account",
+      "locale": "ar",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "settings",
+      "locale": "ar",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "scholars",
+      "locale": "ar",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "home",
+      "locale": "ku",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quran",
+      "locale": "ku",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "recent",
+      "locale": "ku",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "topics",
+      "locale": "ku",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "more",
+      "locale": "ku",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "duas",
+      "locale": "ku",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "hadith",
+      "locale": "ku",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "bibliothek",
+      "locale": "ku",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "frauen",
+      "locale": "ku",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quiz",
+      "locale": "ku",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "prayer",
+      "locale": "ku",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "saved",
+      "locale": "ku",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "account",
+      "locale": "ku",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "settings",
+      "locale": "ku",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "scholars",
+      "locale": "ku",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "home",
+      "locale": "ckb",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quran",
+      "locale": "ckb",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "recent",
+      "locale": "ckb",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "topics",
+      "locale": "ckb",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "more",
+      "locale": "ckb",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "duas",
+      "locale": "ckb",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "hadith",
+      "locale": "ckb",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "bibliothek",
+      "locale": "ckb",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "frauen",
+      "locale": "ckb",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quiz",
+      "locale": "ckb",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "prayer",
+      "locale": "ckb",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "saved",
+      "locale": "ckb",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "account",
+      "locale": "ckb",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "settings",
+      "locale": "ckb",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "scholars",
+      "locale": "ckb",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "home",
+      "locale": "bs",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quran",
+      "locale": "bs",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "recent",
+      "locale": "bs",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "topics",
+      "locale": "bs",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "more",
+      "locale": "bs",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "duas",
+      "locale": "bs",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "hadith",
+      "locale": "bs",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "bibliothek",
+      "locale": "bs",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "frauen",
+      "locale": "bs",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quiz",
+      "locale": "bs",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "prayer",
+      "locale": "bs",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "saved",
+      "locale": "bs",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "account",
+      "locale": "bs",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "settings",
+      "locale": "bs",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "scholars",
+      "locale": "bs",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "home",
+      "locale": "fr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quran",
+      "locale": "fr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "recent",
+      "locale": "fr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "topics",
+      "locale": "fr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "more",
+      "locale": "fr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "duas",
+      "locale": "fr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "hadith",
+      "locale": "fr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "bibliothek",
+      "locale": "fr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "frauen",
+      "locale": "fr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quiz",
+      "locale": "fr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "prayer",
+      "locale": "fr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "saved",
+      "locale": "fr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "account",
+      "locale": "fr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "settings",
+      "locale": "fr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "scholars",
+      "locale": "fr",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "home",
+      "locale": "es",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quran",
+      "locale": "es",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "recent",
+      "locale": "es",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "topics",
+      "locale": "es",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "more",
+      "locale": "es",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "duas",
+      "locale": "es",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "hadith",
+      "locale": "es",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "bibliothek",
+      "locale": "es",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "frauen",
+      "locale": "es",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "quiz",
+      "locale": "es",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "prayer",
+      "locale": "es",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "saved",
+      "locale": "es",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "account",
+      "locale": "es",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "settings",
+      "locale": "es",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    },
+    {
+      "area": "scholars",
+      "locale": "es",
+      "status": "BLOCKED",
+      "error": "DAR_TEST_PASSWORD is not present in the environment"
+    }
+  ],
+  "screenshots": [],
+  "humanLinguisticApproval": "NOT_GRANTED",
+  "blockedReason": "DAR_TEST_PASSWORD is required via CI secret or environment variable",
+  "generatedAt": "2026-10-23T11:31:10Z"
+}
