@@ -70,6 +70,8 @@ for(const locale of EXPECTED){
 lng="de";runtime.apply();
 assert.equal(weekday.nodeValue,"Mittwoch, 21. Oktober 2026","calendar failed to restore German");
 assert.equal(runtime.formatCalendarDate("2026-10-21T12:00:00Z","en",{weekday:"long",timeZone:"UTC"}),"Wednesday");
+assert.equal(runtime.formatCalendarDate("2026-10-21T12:00:00Z","fr",{weekday:"long",timeZone:"UTC"}),"mercredi","French calendar must not fall back to German");
+assert.equal(runtime.formatCalendarDate("2026-10-21T12:00:00Z","es",{weekday:"long",timeZone:"UTC"}),"miércoles","Spanish calendar must not fall back to German");
 assert(runtime.translatePrayerName("Maghrib","en")==="Maghrib");
 assert(runtime.translatePrayerName("Maghrib","tr")==="Akşam");
 console.log("PASS: nine translated UI locales, full welcome/prayer/calendar/prophet UI, post exclusion, German rollback and source protection");
