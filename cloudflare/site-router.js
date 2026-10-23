@@ -2,6 +2,7 @@
 /* pwa-dedicated-shell-live-20261009-2050 */
 /* public-pwa-emergency-repair-live-20261009-1824 */
 import { gateHiddenSurfaces, academyOwnerAccess, academyOwnerAssetPath } from "./preview-gate.js";
+import { editorialOwnerAccess } from "./editorial-gate.js";
 /* Dar Test (/test) ohne Browser-Anmeldefenster. Kids bleibt geschützt. v1096 */
 function isNativeAppRequest(ua) {
   return /DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(String(ua || ""));
@@ -1173,6 +1174,9 @@ async function serveKidsIntroVideo(request, url, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    // Owner-only editorial route: fail-closed login before public static assets/router.
+    const editorialAccess = await editorialOwnerAccess(request,url,env);
+    if(editorialAccess instanceof Response)return editorialAccess;
     // Q_SOURCE_LIBRARY_DIRECT_ROUTING_V2
     // These are standalone public sources, NOT an SPA shell. Cloudflare's
     // default HTML handling already maps /quellen/ to quellen/index.html.
