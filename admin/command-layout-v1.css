@@ -417,7 +417,7 @@ body.dar-admin-workspace #panel .admin-form-grid .wide{
 }
 /* Avoid stale fixed rail if a touch fold is unfolded into an unusual ≥1200 CSS-px viewport.
    Based on actual viewport capacity, not a claimed specific handset model. */
-@media(min-width:1200px) and (max-width:1439px){
+@media(min-width:1200px) and (max-width:1679px){
  body.dar-admin-fold-viewport.dar-admin-workspace{padding-left:0!important}
  body.dar-admin-fold-viewport .dar-command-rail{display:none!important}
  body.dar-admin-fold-viewport .dar-mobile-command{display:grid!important;position:fixed;bottom:0;left:0;right:0;
@@ -443,7 +443,7 @@ body.dar-admin-workspace .folder-grid,body.dar-admin-workspace .quellen-grid{wid
 
 /* Fold with desktop-site viewport: avoid spending half the unfolded screen
    on a vacant login billboard. The form remains in the existing Admin app. */
-@media(min-width:851px) and (max-width:1439px){
+@media(min-width:851px) and (max-width:1679px){
  body.dar-admin-login.dar-admin-fold-viewport #panel{
   grid-template-columns:minmax(230px,31%) minmax(0,69%)!important
  }
