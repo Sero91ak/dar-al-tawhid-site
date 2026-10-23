@@ -263,3 +263,77 @@ body.dar-editor-embedded .work>.panel:first-child{border-top:0!important}
  body.dar-editor-embedded .sidebar{height:auto!important;max-height:none!important}
  body.dar-editor-embedded .mobile-work-tabs{margin:0!important}
 }
+
+/* DAR_EDITOR_FOLD_MASTER_DETAIL_V2 – use the real available container width.
+ * Compact under 680px; 34/66 master/detail for unfolded window 680–1199px.
+ * The catalog stays visible and text editing gets the entire remaining area. */
+body.dar-editor-embedded .work{container-type:inline-size}
+@media(min-width:680px) and (max-width:1199px){
+ body.dar-editor-embedded .shell{width:100%!important;max-width:none!important}
+ body.dar-editor-embedded .layout{
+  display:grid!important;grid-template-columns:minmax(218px,34%) minmax(0,66%)!important;
+  column-gap:0!important;align-items:stretch!important;width:100%!important
+ }
+ body.dar-editor-embedded .mobile-work-tabs{display:none!important}
+ body.dar-editor-embedded .sidebar{
+  display:flex!important;flex-direction:column!important;position:sticky!important;top:0!important;
+  height:100dvh!important;max-height:100dvh!important;min-width:0!important;
+  overflow:hidden!important;border-right:1px solid #c6b6814b!important
+ }
+ body.dar-editor-embedded .library-list{flex:1!important;max-height:none!important;overflow-y:auto!important}
+ body.dar-editor-embedded .work{display:flex!important;flex-direction:column!important;min-width:0!important}
+ body.dar-editor-embedded .work>section,
+ body.dar-editor-embedded[data-mobile-view] .work>section,
+ body.dar-editor-embedded[data-mobile-view] .work>section:last-child{
+  display:block!important;min-width:0!important
+ }
+ body.dar-editor-embedded #postText{min-height:340px!important}
+ body.dar-editor-embedded .work>.panel{padding:13px clamp(12px,1.4vw,24px)!important}
+ body.dar-editor-embedded .post-meta{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
+ body.dar-editor-embedded .editor-grid{grid-template-columns:minmax(0,1fr)!important}
+ body.dar-editor-embedded .editor-grid>div+div{
+  border-left:0!important;border-top:1px solid #a5b39a35!important
+ }
+}
+@media(min-width:680px) and (max-width:900px){
+ body.dar-editor-embedded .post-meta{grid-template-columns:minmax(0,1fr)!important}
+ body.dar-editor-embedded .editor-tools,
+ body.dar-editor-embedded .actions{gap:6px!important}
+ body.dar-editor-embedded .editor-tools .btn{padding:6px 9px!important}
+ body.dar-editor-embedded .source-summary{display:block!important}
+ body.dar-editor-embedded .source-summary .btn{margin-top:12px!important}
+}
+@media(min-width:1200px){
+ body.dar-editor-embedded .layout{
+  grid-template-columns:minmax(280px,29%) minmax(0,71%)!important
+ }
+ body.dar-editor-embedded .sidebar{height:100dvh!important;position:sticky!important}
+}
+@container (min-width:760px){
+ body.dar-editor-embedded .editor-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
+ body.dar-editor-embedded .editor-grid>div+div{border-top:0!important;border-left:1px solid #a5b39a35!important}
+}
+/* Narrow single-window Fold mode – tabs only, no microscopic side rail. */
+@media(max-width:679px){
+ body.dar-editor-embedded .layout{display:block!important}
+ body.dar-editor-embedded .sidebar{display:flex;position:static!important;height:auto!important;max-height:none!important}
+ body.dar-editor-embedded .mobile-work-tabs{display:grid!important}
+ body.dar-editor-embedded[data-mobile-view="catalog"] .work{display:none!important}
+ body.dar-editor-embedded[data-mobile-view="editor"] .sidebar,
+ body.dar-editor-embedded[data-mobile-view="sources"] .sidebar{display:none!important}
+ body.dar-editor-embedded[data-mobile-view="sources"] .work>section:not([data-sub-section="sources"]){display:none!important}
+ body.dar-editor-embedded[data-mobile-view="sources"] .work>section[data-sub-section="sources"]{display:block!important}
+ body.dar-editor-embedded[data-mobile-view="editor"] .work>section[data-sub-section="sources"]{display:none!important}
+ body.dar-editor-embedded .mobile-tab{border-radius:0!important}
+ body.dar-editor-embedded .editor-grid{grid-template-columns:1fr!important}
+ body.dar-editor-embedded .work{display:flex;flex-direction:column}
+ body.dar-editor-embedded #postText{min-height:36dvh!important;font-size:16px!important}
+ body.dar-editor-embedded .field,
+ body.dar-editor-embedded textarea{font-size:16px!important}
+}
+/* Fold keyboard raised: let the document flow above the Android IME naturally. */
+body.dar-editor-embedded .work,
+body.dar-editor-embedded #postText,body.dar-editor-embedded .preview{
+ min-width:0!important;max-width:100%!important;overflow-wrap:anywhere
+}
+body.dar-editor-embedded .preview{word-break:normal!important}
