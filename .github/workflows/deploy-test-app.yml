@@ -90,7 +90,8 @@ jobs:
         run: |
           git checkout origin/test-library-canonical -- \
             test/assets/v8-integrated-shell-v1.css \
-            test/assets/v8-integrated-shell-v1.js
+            test/assets/v8-integrated-shell-v1.js \
+            test/i18n/adult-ui-locales-nine-v8.json
           node scripts/activate-test-v8-shell.js
 
       # Keep the approved adult Test Quran Player independent of other branches.
