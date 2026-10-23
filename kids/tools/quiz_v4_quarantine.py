@@ -122,7 +122,33 @@ def quarantined_originals(root: Path):
             if (not file.is_relative_to(audio_root) or not file.is_file()
                 or hashlib.sha256(file.read_bytes()).hexdigest()!=expected):
                 raise RuntimeError("Owner Halal original MP3 SHA proof unavailable")
-        blocked_texts.add(reject)
+        # The rejected paid German-only recording remains SHA-blocked.
+        # A NEW exact-text composite is eligible for PRIVATE technical preview
+        # only when every genuine German source and the isolated owner-approved
+        # native Fuṣḥā clip have been SHA verified. This is NOT hearing consent.
+        registry=json.loads((root/"kids/data/quiz-v4-450-original-clip-registry.json").read_text(encoding="utf8"))
+        row=(registry.get("textClips") or {}).get(reject)
+        if row:
+            valid=(row.get("source")=="owner-approved-native-Fusha-Halal-with-genuine-German-V4-components"
+              and row.get("voiceId")=="DkU7j9uO4ZEtLD2iRZSH"
+              and row.get("modelId")=="eleven_v4"
+              and row.get("audioListeningApproved") is False
+              and row.get("qaApproval")=="pending-human-auditory-review"
+              and row.get("compositeNativeOriginalSha256")==native_sha
+              and row.get("replacesRejectedGermanWholeOriginalSha256")==sha
+              and row.get("textSha256")==hashlib.sha256(reject.encode("utf8")).hexdigest())
+            if not valid:
+                raise RuntimeError("Unverified Halal replacement is not allowed in private quiz preview")
+            rebuilt=(root/str(row.get("url","")).lstrip("/")).resolve()
+            if (not rebuilt.is_relative_to(audio_root) or not rebuilt.is_file()
+                or rebuilt==file
+                or hashlib.sha256(rebuilt.read_bytes()).hexdigest()!=row.get("sha256")
+                or row.get("sha256")==sha):
+                raise RuntimeError("Halal privately rebuilt MP3 is missing or matches rejected source")
+            # Do NOT call blocked_texts.add(reject). Technical assembly only;
+            # human quality count and public release stay at zero/false.
+        else:
+            blocked_texts.add(reject)
     return blocked_texts,blocked_ids
 
 
