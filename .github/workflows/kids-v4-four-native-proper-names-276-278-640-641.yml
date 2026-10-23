@@ -1,0 +1,119 @@
+name: KIDS V4 Four Native Arabic Proper Names - Q276 Q278 Q640 Q641
+on:
+  push:
+    branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
+    paths: ['.github/workflows/kids-v4-four-native-proper-names-276-278-640-641.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: tawhid-kids-v4-450-shared-paid-queue
+  cancel-in-progress: false
+jobs:
+  native-proper-names:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      KIDS_V4_OWNER_EXACT_THREE_NATIVE_RUN: 'YES'
+    steps:
+      - name: Checkout original 450 source in private review only
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Source integrity – native proper names rather than incorrect German possessive endings
+        run: |
+          set -euo pipefail
+          git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+          git merge --ff-only FETCH_HEAD
+          python3 -m py_compile kids/tools/normalize_kids_v4_four_german_possessive_names_20261023.py
+          python3 -m py_compile kids/tools/produce_kids_v4_four_native_names_rephrased_20261023.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('kids/data/quiz-v4-450-production-status.json').read_text())
+          assert s['completedQuestionsWithAllFourAudioParts']==437
+          assert s['uniqueNewOriginalMP3sStored']==1835
+          assert s['savedMP3TechnicallyAudited']==1835
+          assert s['questionsHumanListeningApproved']==0 and not s['livePublished']
+          print('KIDS_FOUR_NATIVE_NAME_QUIZ_437_PRECHECK_PASS')
+          PY
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get -qq update
+            sudo apt-get -qq install -y ffmpeg
+          fi
+      - name: Rewrite four selected 450 quiz utterances while retaining IDs, answer keys, Quran source citations
+        run: |
+          set -euo pipefail
+          python3 kids/tools/normalize_kids_v4_four_german_possessive_names_20261023.py
+          git config user.name kids-native-arabic-proper-names-review
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/data/quiz-kids-curated-450-review.json
+          git add kids/data/quiz-v4-curated-450-production-review.json
+          git add kids/data/quiz-v4-four-owner-name-genitive-rephrase-20261023.json
+          git commit -m 'fix(kids V4): pronounce 4 Quranic names as native Arabic by source-faithful German paraphrase [skip ci]'
+          git push origin HEAD:review/kids-v4-nine-prepaid-artifact-replay-20261022
+      - name: Generate only unpaid native Arabic and German exact source parts, each remotely SHA-checkpointed before billable TTS
+        run: |
+          set -euo pipefail
+          python3 kids/tools/produce_kids_v4_four_native_names_rephrased_20261023.py
+      - name: Decode audit of all MP3 originals, rebuild exactly 450 review questions and count true coverage
+        run: |
+          set -euo pipefail
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          st=json.loads(Path('kids/data/quiz-v4-450-production-status.json').read_text())
+          j=json.loads(Path('kids/review-only/kids-v4-native-4-names-rephrased-paid-once-20261023.json').read_text())
+          assert st['completedQuestionsWithAllFourAudioParts']>=441
+          assert st['completedQuestionsWithAllFourAudioParts']<=450
+          assert st['savedMP3TechnicallyAudited']==st['uniqueNewOriginalMP3sStored']
+          assert st['questionsHumanListeningApproved']==0
+          assert not st['livePublished'] and not st['appReleaseFlagEnabled']
+          assert len(j['composites'])==4 and not j['humanHearingApproved']
+          assert j['status']=='THREE_NATIVE_COMPOSITES_SAVED_PRIVATE_PENDING_HUMAN_HEARING'
+          print('KIDS_450_NATIVE_FOUR_CORRECT_NAMES_TECHNICALLY_READY',st['completedQuestionsWithAllFourAudioParts'])
+          PY
+      - name: Save only private review MP3 maps and technical status
+        run: |
+          set -euo pipefail
+          git config user.name kids-v4-four-native-arabic-names
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-450-production-status.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/quiz-v4-handover-latest.json kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'review(kids V4): four native Arabic names complete original 450 question audio technical staging [skip ci]'
+          for i in 1 2 3; do
+            if git push origin HEAD:review/kids-v4-nine-prepaid-artifact-replay-20261022; then exit 0; fi
+            git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+            git rebase FETCH_HEAD || exit 1
+          done
+          exit 1
+      - name: Preserve all genuine speech originals and source edits even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-four-native-quran-names-owner-review-only
+          retention-days: 60
+          if-no-files-found: warn
+          path: |
+            kids/review-only/kids-v4-native-4-names-rephrased-paid-once-20261023.json
+            kids/data/quiz-v4-four-owner-name-genitive-rephrase-20261023.json
+            kids/assets/kids-quiz-audio/v4-4-native-names-20261023/
+            kids/data/quiz-v4-450-production-status.json
