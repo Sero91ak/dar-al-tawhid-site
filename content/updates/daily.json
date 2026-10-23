@@ -16,5 +16,23 @@
     "title": "Mein Herr, vergib und erbarme Dich",
     "snippet": "Mein Herr, vergib und erbarme Dich, denn Du bist der Beste der Barmherzigen.",
     "category": "Vergebung"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 481,
+      "remaining": 445
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 62,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
