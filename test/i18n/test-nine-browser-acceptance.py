@@ -26,31 +26,31 @@ AREAS = ["home", "quran", "recent", "topics", "more", "duas", "hadith",
          "bibliothek", "frauen", "quiz", "prayer", "saved", "account",
          "settings", "scholars"]
 AREA_MARKERS = {
-    "home": "#dv3Home",
-    "quran": ".qov-page, .qrc-page, .quran-overview, .quran-reader-shell",
-    "recent": "#dv3Latest, [data-dar-area='recent'], .recent-page",
-    "topics": "[data-dar-area='topics'], .topics-page, .topics-shell",
-    "more": ".dar-more-v15",
-    "duas": ".duas-page, .dua-page, [data-dua-id]",
-    "hadith": ".hadith-page, .hadith-library, [data-hadith-id]",
-    "bibliothek": ".lib-page, .library-shell, .books-library-shell",
-    "frauen": ".frauen-page, .women-page, [data-dar-area='frauen']",
-    "quiz": ".quiz-page, #quizView, [data-dar-area='quiz']",
-    "prayer": ".prayer-page, #prayerView, [data-dar-area='prayer']",
-    "saved": ".saved-page, #savedView, [data-dar-area='saved']",
-    "account": ".account-page, #accountView, [data-dar-area='account']",
-    "settings": "#darSettingsLocaleChoice, .settings-page, [data-dar-area='settings']",
-    "scholars": ".scholars-page, .scholar-page, [data-dar-area='scholars']",
+    "home": "body.is-home-route #appView",
+    "quran": "body.is-quran-overview #appView, body.is-quran-reader-route .qrc-shell",
+    "recent": "body.is-recent-route .post-grid",
+    "topics": "body.is-topics-route .topics-hub",
+    "more": "body.is-more-route .dar-more-v15",
+    "duas": "body.is-dua-route .dua-hub",
+    "hadith": "body.is-hadith-route .hadith-hub",
+    "bibliothek": "body.is-library-route .lib-page, body.is-library-route .library-shell, body.is-library-route .books-library-shell",
+    "frauen": "body.is-frauen-route #appView",
+    "quiz": "body.is-quiz-route .quiz-shell",
+    "prayer": ".prayer-page-noble",
+    "saved": "body.is-saved-route .post-grid",
+    "account": "body.is-account-route #appView",
+    "settings": "body.is-settings-route #appView",
+    "scholars": "body.is-scholars-route .scholars-index",
 }
 PROTECTED_SELECTORS = (
     "[data-canonical-content], .post-body, .post-content, .quran-ayah, "
     ".quran-arabic, .ayah-ar, .hadith-text, .source-quote, "
-    ".prophets-quote__ar, .prophets-verse__text, [data-dar-no-translate]"
+    ".prophets-quote__ar, .prophets-verse__text, [data-dar-no-translate]:not([data-dar-no-translate='picker'])"
 )
 UI_EXCLUSION_SELECTOR = (
     "[data-canonical-content], .post-body, .post-content, .quran-ayah, "
     ".quran-arabic, .ayah-ar, .hadith-text, .source-quote, "
-    ".prophets-quote__ar, .prophets-verse__text, [data-dar-no-translate]"
+    ".prophets-quote__ar, .prophets-verse__text, [data-dar-no-translate]:not([data-dar-no-translate='picker'])"
 )
 
 
@@ -176,8 +176,8 @@ def layout_evidence(driver):
     return driver.execute_script(
         """const overflow=[...document.querySelectorAll('body *')].filter(e=>{
           const r=e.getBoundingClientRect();
-          return r.width>0&&r.height>0&&!e.children.length&&e.scrollWidth>e.clientWidth+2;
-        }).slice(0,20).map(e=>({tag:e.tagName,id:e.id,scrollWidth:e.scrollWidth,clientWidth:e.clientWidth}));
+          return r.width>0&&r.height>0&&(r.left < -2 || r.right > innerWidth + 2);
+        }).slice(0,20).map(e=>({tag:e.tagName,id:e.id,left:e.getBoundingClientRect().left,right:e.getBoundingClientRect().right}));
         const fields=[...document.querySelectorAll('input,textarea,button,[role=button]')].map(e=>({
           tag:e.tagName,placeholder:e.getAttribute('placeholder'),aria:e.getAttribute('aria-label'),
           text:(e.innerText||'').trim().slice(0,120)
