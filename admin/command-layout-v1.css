@@ -440,3 +440,19 @@ body.dar-admin-workspace #panel .admin-form-grid .wide{
 body.dar-admin-workspace #panel,
 body.dar-admin-workspace #panel>*,body.dar-admin-workspace .app{min-width:0!important}
 body.dar-admin-workspace .folder-grid,body.dar-admin-workspace .quellen-grid{width:100%!important}
+
+/* Fold with desktop-site viewport: avoid spending half the unfolded screen
+   on a vacant login billboard. The form remains in the existing Admin app. */
+@media(min-width:851px) and (max-width:1439px){
+ body.dar-admin-login.dar-admin-fold-viewport #panel{
+  grid-template-columns:minmax(230px,31%) minmax(0,69%)!important
+ }
+ body.dar-admin-login.dar-admin-fold-viewport #panel:before{
+  padding:clamp(20px,3vw,42px)!important;
+  font-size:clamp(28px,3.7vw,54px)!important;
+  min-height:100dvh!important
+ }
+ body.dar-admin-login.dar-admin-fold-viewport #panel .login{
+  padding:clamp(24px,3.5vw,47px)!important
+ }
+}
