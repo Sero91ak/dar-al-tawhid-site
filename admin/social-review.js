@@ -153,7 +153,7 @@
     return '<section class="admin-editorial-host" data-no-collapse aria-label="Redaktionsatelier">'+
       '<div class="admin-editorial-hostbar"><div><small>DĀR ADMIN / REDAKTION</small>'+
       '<strong>Redaktionsatelier</strong><span>Neun Sprachen · Kanonische Beiträge · Originalnachweise</span></div>'+
-      '<a href="/admin/redaktion/" target="_blank" rel="noopener" class="admin-editorial-popout">Arbeitsfläche separat öffnen ↗</a></div>'+
+      '<button type="button" id="darEditorFullscreen" class="admin-editorial-popout" aria-pressed="false">Widescreen öffnen ↗</button></div>'+
       '<iframe id="darAdminEditorialFrame" title="DĀR AL TAWḤĪD Redaktion" src="/admin/redaktion/?v=1" referrerpolicy="same-origin"></iframe>'+
       '</section>';
   }
@@ -163,12 +163,28 @@
     function resize(){
       if(!frame.isConnected)return;
       const top=frame.getBoundingClientRect().top;
-      const room=window.innerHeight-top-10;
+      const room=window.innerHeight-top-(document.body.classList.contains("dar-editorial-fullscreen")?0:10);
       frame.style.height=Math.max(420,room)+"px";
     }
-    resize();
-    frame.addEventListener("load",resize,{once:true});
+    const fullscreen=document.getElementById("darEditorFullscreen");
+    const closeFullscreen=()=>{
+      document.body.classList.remove("dar-editorial-fullscreen");
+      if(fullscreen){fullscreen.textContent="Widescreen öffnen ↗";fullscreen.setAttribute("aria-pressed","false")}
+      resize();
+    };
+    if(fullscreen)fullscreen.addEventListener("click",()=>{
+      const active=document.body.classList.toggle("dar-editorial-fullscreen");
+      fullscreen.textContent=active?"Widescreen schließen ×":"Widescreen öffnen ↗";
+      fullscreen.setAttribute("aria-pressed",String(active));resize();
+    });
+    if(global.__darEditorResize)window.removeEventListener("resize",global.__darEditorResize);
+    global.__darEditorResize=resize;
     window.addEventListener("resize",resize,{passive:true});
+    if(global.__darEditorEsc)window.removeEventListener("keydown",global.__darEditorEsc);
+    global.__darEditorEsc=e=>{if(e.key==="Escape"&&document.body.classList.contains("dar-editorial-fullscreen"))closeFullscreen()};
+    window.addEventListener("keydown",global.__darEditorEsc);
+    frame.addEventListener("load",resize,{once:true});
+    resize();
   }
   global.DARAdminSocialReview={render:renderImmersiveAtelier,bind:bindImmersiveAtelier,renderLegacy:render,bindLegacy:bind};
 
