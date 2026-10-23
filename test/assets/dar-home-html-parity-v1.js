@@ -42,7 +42,6 @@ function openQuickQibla(){
   if(window.DARQiblaQuickView&&typeof window.DARQiblaQuickView.open==="function"){
    window.DARQiblaQuickView.open();return;
   }
-  if(typeof window.openQiblaQuickSheet==="function"){window.openQiblaQuickSheet();return}
  }catch(e){console.warn("Qibla quick view initial open",e)}
  if(window.__darTestQiblaQuickLoading)return;
  window.__darTestQiblaQuickLoading=true;
