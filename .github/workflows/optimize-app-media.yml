@@ -101,8 +101,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git fetch origin main:refs/remotes/origin/main --depth=1
-          git checkout origin/main -- \
+          # A shallow checkout may already hold a non-ancestor origin/main.
+          # Fetch the current main tree into FETCH_HEAD instead of rewriting
+          # the remote-tracking ref (which rejects non-fast-forward updates).
+          git fetch --no-tags --depth=1 origin refs/heads/main
+          git checkout FETCH_HEAD -- \
             assets/app-icons \
             assets/brand/seals \
             kids/assets/kids-brand/logo-mark.png
