@@ -113,7 +113,7 @@ def preflight():
     for source,id in SOURCES.items():
         ensure(next(x for x in plan["pendingAudioFragments"] if x["text"]==source)["generated"] is False,
            "new canonical name source was already generated – do NOT retry")
-        ensure(id in old and any(source in slot.get("segments",[]) for
+        ensure(id in old and any(source in slot.get("text","") for
            slot in (old[id][k] for k in ("question","correct","retry","explanation"))),
            "exact canonical question no longer matches")
         ensure(source not in reg["textClips"],"source already exists or billed")
