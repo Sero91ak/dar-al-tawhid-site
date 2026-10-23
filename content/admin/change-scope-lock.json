@@ -8698,6 +8698,16 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-21T23:59:00.000Z"
+    },
+    {
+      "id": "adult-nine-language-browser-acceptance-workflow-20261023",
+      "at": "2026-10-23T15:00:00+02:00",
+      "approvedBy": "user-explicit-20261023-github-actions-nine-language-browser-acceptance",
+      "reason": "Isolated DAR TEST GitHub Actions browser acceptance only: Ubuntu Chromium/Selenium, local test server, DAR_TEST_PASSWORD secret reference, 135 adult UI checks and evidence artifacts. No deploy, push, worker, Kids, widgets, Apple TV, native source or productive visitor workflow changes.",
+      "paths": [
+        ".github/workflows/dar-test-nine-language-browser-acceptance.yml"
+      ],
+      "expiresAt": "2026-11-05T23:59:00+01:00"
     }
   ],
   "enabled": true
