@@ -136,3 +136,9 @@ body.dar-editorial-fullscreen .admin-editorial-hostbar span{display:none}
  .admin-editorial-hostbar small{font-size:9px}
  body.dar-editorial-fullscreen .admin-editorial-hostbar{padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
 }
+
+/* Workspace boot diagnostics: visible only while loading or on stale deployments */
+.admin-editorial-loading{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:12px 20px;background:#18271e;border-bottom:1px solid #9eaa8544;color:#eed8a4;font-size:13px;min-height:48px}
+.admin-editorial-loading[hidden]{display:none!important}
+.admin-editorial-loading button{width:auto;border-radius:4px;min-height:36px}
+.admin-editorial-popout{font-family:inherit;font-size:12px;font-weight:700;line-height:1.4}
