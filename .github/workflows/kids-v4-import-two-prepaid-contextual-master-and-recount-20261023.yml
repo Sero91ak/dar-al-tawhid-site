@@ -1,0 +1,96 @@
+name: KIDS V4 Recover Two Prepaid Contextual V4 MP3s - No New Charges
+on:
+  push:
+    branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
+    paths: ['.github/workflows/kids-v4-import-two-prepaid-contextual-master-and-recount-20261023.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: kids-v4-import-two-prepaid-contextual-source-originals
+  cancel-in-progress: false
+jobs:
+  recover-two-prepaid:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      ELEVENLABS_API_KEY: ''
+    steps:
+      - name: Checkout full private originals
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Install decoder, verify source SHA, preserve two previously paid originals
+        run: |
+          set -euo pipefail
+          git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+          git merge --ff-only FETCH_HEAD
+          if ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get -qq update
+            sudo apt-get -qq install -y ffmpeg
+          fi
+          python3 -m py_compile kids/tools/recover_two_prepaid_v4_contextual_originals_20261023.py
+          python3 kids/tools/recover_two_prepaid_v4_contextual_originals_20261023.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          git config user.name kids-v4-reuse-context-prepaid-owner-audio
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/data/quiz-v4-450-original-clip-registry.json
+          git add kids/data/quiz-v4-450-paid-generation-ledger.json
+          git add kids/review-only/quiz-v4-two-recovered-prepaid-contextual-master-originals-20261023.json
+          git commit -m 'review(kids V4): import two previously paid MP3 SHA originals with no provider calls [skip ci]'
+          git push origin HEAD:review/kids-v4-nine-prepaid-artifact-replay-20261022
+      - name: Technical audit of every recorded MP3, recomposition of all private KIDS question audio
+        run: |
+          set -euo pipefail
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path('kids/data/quiz-v4-450-production-status.json').read_text())
+          z=json.loads(Path('kids/review-only/quiz-v4-two-recovered-prepaid-contextual-master-originals-20261023.json').read_text())
+          assert x['completedQuestionsWithAllFourAudioParts']>=433
+          assert x['completedQuestionsWithAllFourAudioParts']<=450
+          assert x['savedMP3TechnicallyAudited']==x['uniqueNewOriginalMP3sStored']
+          assert x['questionsHumanListeningApproved']==0
+          assert not x['livePublished'] and not x['appReleaseFlagEnabled']
+          assert z['newElevenLabsRequests']==0 and z['newCreditsSpent']==0
+          print('KIDS_450_NEW_VERIFIED_PRIVATE_PROGRESS',x['completedQuestionsWithAllFourAudioParts'],'/450')
+          PY
+      - name: Persist auditable private playback counts, never release
+        run: |
+          set -euo pipefail
+          git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          git add kids/data/quiz-v4-450-production-status.json
+          git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/quiz-v4-handover-latest.json kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'review(kids V4): verify current 450 audio SHA counts, hearing approval stays zero [skip ci]'
+          for t in 1 2 3; do
+            if git push origin HEAD:review/kids-v4-nine-prepaid-artifact-replay-20261022; then exit 0; fi
+            git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+            git rebase FETCH_HEAD || exit 1
+          done
+          exit 1
+      - name: Archive original receipt and recomputed evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-recover-two-paid-contextual-master-20261023
+          retention-days: 60
+          if-no-files-found: warn
+          path: |
+            kids/review-only/quiz-v4-two-recovered-prepaid-contextual-master-originals-20261023.json
+            kids/data/quiz-v4-450-production-status.json
+            kids/data/quiz-v4-450-saved-mp3-technical-qa.json
