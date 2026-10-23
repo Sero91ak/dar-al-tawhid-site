@@ -239,84 +239,6 @@
         if (w.DARAdultLanguagePickerV1) w.DARAdultLanguagePickerV1.refresh();
     }
 
-    function ensureImmersiveScene() {
-        if (parentRoute(route()) !== "home") return;
-        var appView = d.getElementById("appView");
-        var app = appView && appView.parentElement;
-        if (!app || d.getElementById("darV8ImmersiveScene")) return;
-        var scene = d.createElement("section");
-        scene.id = "darV8ImmersiveScene";
-        scene.className = "dv8-immersive-scene";
-        scene.setAttribute("aria-labelledby", "darV8ImmersiveTitle");
-        scene.innerHTML = '<div class="dv8-scene-backdrop" aria-hidden="true"><img src="/test/assets/area-heroes-v1290/quran-learn.webp" alt="" decoding="async" fetchpriority="high"><span class="dv8-scene-glow"></span></div>' +
-            '<div class="dv8-scene-content"><span class="dv8-scene-kicker">DĀR AL TAWḤĪD · TEST</span><h1 id="darV8ImmersiveTitle">Wissen, das trägt.</h1><p>Qurʾān, Sunnah, Āṯār und Duʿāʾ — ruhig geordnet, mit Quellen und Raum zum Weiterlernen.</p><div class="dv8-scene-actions"><button type="button" class="dv8-spring-button" data-v8-nav="quran">Qurʾān öffnen</button><button type="button" class="dv8-quiet-button" data-v8-scroll-to="dv8ImmersiveDashboard">Weiter entdecken</button></div></div>' +
-            '<div class="dv8-scene-scroll-cue" aria-hidden="true"><span></span>Scrollen</div>';
-        app.insertBefore(scene, appView);
-        scene.querySelectorAll("img").forEach(function (imageNode) {
-            imageNode.addEventListener("error", function () { imageNode.hidden = true; }, { once: true });
-        });
-    }
-
-    function ensureImmersiveDashboard() {
-        if (parentRoute(route()) !== "home") return;
-        var appView = d.getElementById("appView");
-        if (!appView || d.getElementById("dv8ImmersiveDashboard")) return;
-        var dashboard = d.createElement("section");
-        dashboard.id = "dv8ImmersiveDashboard";
-        dashboard.className = "dv8-immersive-dashboard";
-        dashboard.setAttribute("aria-labelledby", "dv8ImmersiveDashboardTitle");
-        dashboard.innerHTML = '<div class="dv8-dashboard-heading"><div><span class="dv8-eyebrow">DEIN NÄCHSTER SCHRITT</span><h2 id="dv8ImmersiveDashboardTitle">Weiterlernen</h2></div><span class="dv8-dashboard-mark" aria-hidden="true">✦</span></div><div class="dv8-bento-grid"><button type="button" class="dv8-bento-card dv8-bento-card--wide" data-v8-nav="quran"><span class="dv8-bento-icon">☾</span><span><strong>Qurʾān</strong><small>Lesen · hören · weiterlernen</small></span><span class="dv8-bento-arrow">↗</span></button><button type="button" class="dv8-bento-card" data-v8-nav="duas"><span class="dv8-bento-icon">✧</span><span><strong>Duʿāʾ</strong><small>Mit Quellen bewahren</small></span><span class="dv8-bento-arrow">↗</span></button><button type="button" class="dv8-bento-card" data-v8-nav="posts"><span class="dv8-bento-icon">◈</span><span><strong>Beiträge</strong><small>Geordnet entdecken</small></span><span class="dv8-bento-arrow">↗</span></button><button type="button" class="dv8-bento-card" data-v8-nav="library"><span class="dv8-bento-icon">▤</span><span><strong>Bibliothek</strong><small>Quellen nachschlagen</small></span><span class="dv8-bento-arrow">↗</span></button></div>';
-        appView.insertBefore(dashboard, appView.firstElementChild);
-    }
-
-    function decorateMotionContent() {
-        var appView = d.getElementById("appView");
-        if (!appView) return;
-        appView.querySelectorAll(":scope > section, :scope > article, .premium-surface, .section-block, .home-discover, .home-v380, .prayer-overview, .quran-home-teaser").forEach(function (element) {
-            if (element.id === "dv8ImmersiveDashboard" || element.classList.contains("dv8-motion-ready")) return;
-            element.classList.add("dv8-motion-ready");
-        });
-        if (!w.__darV8MotionObserver && "IntersectionObserver" in w) {
-            w.__darV8MotionObserver = new IntersectionObserver(function (entries) {
-                entries.forEach(function (entry) {
-                    if (entry.isIntersecting) entry.target.classList.add("dv8-is-visible");
-                    else if (entry.boundingClientRect.top > 0) entry.target.classList.remove("dv8-is-visible");
-                });
-            }, { rootMargin: "0px 0px -9% 0px", threshold: 0.08 });
-            d.querySelectorAll(".dv8-motion-ready").forEach(function (element) { w.__darV8MotionObserver.observe(element); });
-        }
-    }
-
-    function syncScrollScene() {
-        var scene = d.getElementById("darV8ImmersiveScene");
-        if (!scene) return;
-        var rect = scene.getBoundingClientRect();
-        var distance = Math.max(1, rect.height - Math.min(w.innerHeight || 800, rect.height));
-        var progress = Math.max(0, Math.min(1, -rect.top / distance));
-        scene.style.setProperty("--dv8-scene-progress", progress.toFixed(4));
-        scene.style.setProperty("--dv8-scene-shift", (progress * 42).toFixed(2) + "px");
-    }
-
-    function ensureMotionEngine() {
-        if (!w.__darV8MotionEngine) {
-            w.__darV8MotionEngine = true;
-            var ticking = false;
-            var update = function () {
-                ticking = false;
-                syncScrollScene();
-            };
-            w.addEventListener("scroll", function () { if (!ticking) { ticking = true; w.requestAnimationFrame(update); } }, { passive: true });
-            w.addEventListener("resize", syncScrollScene, { passive: true });
-            d.addEventListener("pointerdown", function (event) { var target = event.target.closest("button, a"); if (target) target.classList.add("dv8-is-pressed"); });
-            d.addEventListener("pointerup", function () { d.querySelectorAll(".dv8-is-pressed").forEach(function (element) { element.classList.remove("dv8-is-pressed"); }); });
-            d.addEventListener("click", function (event) {
-                var target = event.target.closest("[data-v8-scroll-to]");
-                if (target) { var destination = d.getElementById(target.dataset.v8ScrollTo); if (destination) { event.preventDefault(); destination.scrollIntoView({ behavior: "smooth", block: "start" }); } }
-            });
-        }
-        syncScrollScene();
-    }
-
     function protectReaders() {
         d.querySelectorAll(".post-reader,.quran-ayah-list,.quran-reader-shell,.qrc-shell,.dua-detail-box,.post-body,.article,.post-share-modal,.qrc-ayah-share").forEach(function (element) {
             element.dataset.v8OriginalReader = "1";
@@ -332,10 +254,6 @@
         ensureQuickActions();
         ensureSmartDashboard();
         ensureSettings();
-        ensureImmersiveScene();
-        ensureImmersiveDashboard();
-        decorateMotionContent();
-        ensureMotionEngine();
         protectReaders();
     }
 
