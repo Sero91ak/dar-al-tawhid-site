@@ -188,7 +188,7 @@ async function checkQ(){
  if(!state)return;
  const number=$("qNumber").value.trim();
  if(!/^[1-9]\d{0,5}$/.test(number)){status("Ungültige Q-Nummer.","qStatus");return}
- state.q=number;state.qConfirmed=false;state.reviews={};qLinks=[];save();draw();
+ state.q=number;state.qConfirmed=false;qLinks=[];save();draw();
  status("Originalseite wird geprüft…","qStatus");
  try{
   const path="/q/"+number+"/";
