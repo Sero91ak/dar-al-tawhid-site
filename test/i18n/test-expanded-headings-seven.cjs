@@ -72,4 +72,4 @@ assert.equal(weekday.nodeValue,"Mittwoch, 21. Oktober 2026","calendar failed to 
 assert.equal(runtime.formatCalendarDate("2026-10-21T12:00:00Z","en",{weekday:"long",timeZone:"UTC"}),"Wednesday");
 assert(runtime.translatePrayerName("Maghrib","en")==="Maghrib");
 assert(runtime.translatePrayerName("Maghrib","tr")==="Akşam");
-console.log("PASS: eight translated UI locales plus one registered pending locale, full welcome/prayer/calendar/prophet UI, post exclusion, German rollback and source protection");
+console.log("PASS: nine translated UI locales, full welcome/prayer/calendar/prophet UI, post exclusion, German rollback and source protection");
