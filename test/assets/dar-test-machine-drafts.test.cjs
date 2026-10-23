@@ -108,3 +108,25 @@ assert.equal(article.getAttribute("aria-label"),"📖 Al-Muzanī: Keiner besitzt
 assert.equal(homeTitle.textContent,"📖 Al-Muzanī: Keiner besitzt Gehorsam aus sich selbst");
 assert.equal(homeExcerpt.textContent,"Deutscher Auszug.");
 console.log("PASS: DAR TEST shows the selected language in title and statement, restores German, and grants no approval");
+const surface=JSON.parse(fs.readFileSync(path.join(__dirname,"../i18n/adult-surface-drafts.json"),"utf8"));
+assert.equal(surface.humanApproval,false);
+assert.equal(surface.scope,"dar-test-surface-drafts-only");
+const germanMeaning="Unser Herr, gib uns im Diesseits Gutes und im Jenseits Gutes und bewahre uns vor der Strafe des Feuers.";
+const phrase={nodeValue:"  "+germanMeaning+"  ",parentElement:{closest(){return null}}};
+const surfaceDoc={
+ head:{appendChild(){}},getElementById(){return null},createElement:el,
+ querySelector(){return null},querySelectorAll(){return []},
+ createTreeWalker(){let seen=false;return {nextNode(){if(seen)return null;seen=true;return phrase}}},
+ body:{}
+};
+const surfaceWindow={location:{pathname:"/test/"},document:surfaceDoc,localStorage:{getItem:()=>"en"},
+ addEventListener(){},MutationObserver:function(){this.observe=()=>{}},
+ fetch:async(url)=>({ok:!String(url).includes("adult-surface"),json:async()=>pack}),console};
+vm.runInNewContext(source,{window:surfaceWindow});
+surfaceWindow.DarTestMachineDrafts.bootSurface(surface);
+assert.match(phrase.nodeValue,/Our Lord/);
+assert.doesNotMatch(phrase.nodeValue,/Diesseits/);
+surfaceWindow.localStorage.getItem=()=>"de";
+surfaceWindow.DarTestMachineDrafts.render();
+assert.match(phrase.nodeValue,/Diesseits/);
+console.log("PASS: DAR TEST swaps an exact duʿāʾ meaning and restores the German sentence");
