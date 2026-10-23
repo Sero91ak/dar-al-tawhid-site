@@ -1,0 +1,97 @@
+name: KIDS V4 Recover Eight Paid German MP3s Into Five Native Halal Composites
+on:
+  push:
+    branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
+    paths:
+      - '.github/workflows/kids-v4-recover-eight-paid-originals-and-stage-five-halal-20261023.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: kids-v4-recover-eight-Halal-german-originals-with-no-new-credits
+  cancel-in-progress: false
+jobs:
+  private-recover-and-stage:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 36
+    env:
+      ELEVENLABS_API_KEY: ''
+    steps:
+      - name: Checkout fully paid eight original MP3s and native Arabic master from protected branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Check repo and install audio join dependency without TTS or new credits
+        run: |
+          set -euo pipefail
+          git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+          git merge --ff-only FETCH_HEAD
+          python3 -m py_compile kids/tools/recover_kids_v4_5_halal_native_from_paid_originals_20261023.py
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get -qq update
+            sudo apt-get -qq install -y ffmpeg
+          fi
+          command -v ffmpeg && command -v ffprobe
+      - name: Assemble five exact quiz source MP3s using eight original German clips and proven native حَلَال
+        run: |
+          set -euo pipefail
+          python3 kids/tools/recover_kids_v4_5_halal_native_from_paid_originals_20261023.py
+      - name: Recompose all 450 review questions and recalculate true source completion
+        run: |
+          set -euo pipefail
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          status=json.loads(Path('kids/data/quiz-v4-450-production-status.json').read_text())
+          assert status['completedQuestionsWithAllFourAudioParts']>=432
+          assert status['completedQuestionsWithAllFourAudioParts']<=450
+          assert status['questionsHumanListeningApproved']==0
+          assert not status['livePublished'] and not status['appReleaseFlagEnabled']
+          report=json.loads(Path('kids/review-only/kids-v4-five-halal-native-450-repair-paid-journal-20261023.json').read_text())
+          assert report['status']=='FIVE_HALAL_NATIVE_COMPOSITES_PRIVATE_TECHNICALLY_READY_AWAIT_OWNER_HEARING'
+          assert report['newPaidCallsDuringRecovery']==0 and not report['publicQuizReleased']
+          print('KIDS_450_TECHNICAL_SOURCE_PROGRESS',status['completedQuestionsWithAllFourAudioParts'],'/450')
+          PY
+      - name: Save 5 private voice compositions and exact updated technical status
+        run: |
+          set -euo pipefail
+          git config user.name kids-v4-repair-no-double-charge
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/data/quiz-v4-450-original-clip-registry.json
+          git add kids/review-only/kids-v4-five-halal-native-450-repair-paid-journal-20261023.json
+          git add kids/assets/kids-quiz-audio/v4-halal-five-native-repaired-review-20261023/
+          git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-450-production-status.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/quiz-v4-handover-latest.json kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git diff --cached --quiet && exit 0
+          git commit -m 'review(kids V4): recover 8 paid originals, join 5 native Halal, recalc accurate 450 stage [skip ci]'
+          for trial in 1 2 3; do
+            if git push origin HEAD:review/kids-v4-nine-prepaid-artifact-replay-20261022; then exit 0; fi
+            git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+            git rebase FETCH_HEAD || exit 1
+          done
+          exit 1
+      - name: Preserve finished review artifacts even if a later non-audio assertion fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-recovered-five-native-Halal-no-new-credits
+          retention-days: 60
+          if-no-files-found: warn
+          path: |
+            kids/review-only/kids-v4-five-halal-native-450-repair-paid-journal-20261023.json
+            kids/data/quiz-v4-450-production-status.json
+            kids/assets/kids-quiz-audio/v4-halal-five-native-repaired-review-20261023/
+            kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
