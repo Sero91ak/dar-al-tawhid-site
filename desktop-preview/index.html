@@ -2611,6 +2611,51 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 <link rel="stylesheet" id="darV8AllRoutesCSS" href="/desktop-preview/assets/dar-v8-all-routes.css?v=20261021-2">
 <link rel="stylesheet" id="darV8ConversationCSS" href="/desktop-preview/assets/dar-v8-portal-live.css?v=20261021-quran-modal-v12">
 
+
+<style id="darV8QuizArenaCSS20261023">
+/* DAR_V8_QUIZ_ARENA_20261023 – public browser quiz only. */
+body.desktop-overhaul-v18[data-dar-v8-route="quiz"] #pageRoot{width:min(1160px,100%)!important;margin-inline:auto!important}
+body.desktop-overhaul-v18 .v8-quiz-arena{color:var(--v8-ink);margin:12px auto 50px;padding:0 clamp(9px,2vw,22px)}
+body.desktop-overhaul-v18 .v8-quiz-hero{border-radius:25px;padding:clamp(22px,4vw,43px);background:linear-gradient(125deg,#0c2923,#164934);color:#fff8eb}
+body.desktop-overhaul-v18 .v8-quiz-hero span,.v8-quiz-eyebrow{font-size:10px;font-weight:800;letter-spacing:.15em;color:var(--v8-gold)}
+body.desktop-overhaul-v18 .v8-quiz-hero span{color:#e8c78e}
+body.desktop-overhaul-v18 .v8-quiz-hero h1{margin:10px 0 7px;color:#fff8ed!important;font:550 clamp(30px,4vw,50px)/1.14 Georgia,serif}
+body.desktop-overhaul-v18 .v8-quiz-hero p{max-width:650px;color:#e6ede2!important;font-size:14px;line-height:1.6}
+body.desktop-overhaul-v18 .v8-quiz-hero small{display:inline-block;border:1px solid #d5c28a66;border-radius:999px;padding:8px 13px;color:#f5e2b6}
+body.desktop-overhaul-v18 .v8-quiz-panel{margin-top:16px;padding:clamp(20px,3.3vw,36px);background:var(--v8-paper);border:1px solid var(--v8-line);border-radius:24px;box-shadow:0 12px 40px #0e35200d}
+body.desktop-overhaul-v18 .v8-quiz-panel h2{font:550 clamp(22px,3vw,32px)/1.3 Georgia,serif;color:var(--v8-ink)!important;margin:12px 0 15px}
+body.desktop-overhaul-v18 .v8-quiz-panel p{font-size:14px;line-height:1.65;color:var(--v8-muted)!important}
+body.desktop-overhaul-v18 .v8-quiz-filters{display:grid;grid-template-columns:1.2fr 1fr .8fr;gap:12px;margin:25px 0}
+body.desktop-overhaul-v18 .v8-quiz-filters label{display:flex;flex-direction:column;gap:7px;font-size:12px;font-weight:700}
+body.desktop-overhaul-v18 .v8-quiz-filters select{min-width:0;width:100%;height:48px;padding:10px;border:1px solid var(--v8-line);border-radius:13px;background:var(--v8-surface);color:var(--v8-ink);font-size:15px}
+body.desktop-overhaul-v18 .v8-quiz-actions{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:22px}
+body.desktop-overhaul-v18 :is(.v8-quiz-primary,.v8-quiz-secondary){border-radius:999px;padding:12px 19px;min-height:45px;font-size:13px;font-weight:800;cursor:pointer}
+body.desktop-overhaul-v18 .v8-quiz-primary{background:#245c42;color:#fff8ed;border:1px solid #245c42}
+body.desktop-overhaul-v18 .v8-quiz-secondary{background:transparent;color:var(--v8-ink);border:1px solid var(--v8-line)}
+body.desktop-overhaul-v18 .v8-quiz-primary:disabled{opacity:.4;cursor:default}
+body.desktop-overhaul-v18 .v8-quiz-status{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:var(--v8-gold);font-weight:750}
+body.desktop-overhaul-v18 .v8-quiz-progress{display:block;margin:14px 0 20px;height:8px;background:color-mix(in srgb,var(--v8-gold) 15%,var(--v8-paper));border-radius:999px;overflow:hidden}
+body.desktop-overhaul-v18 .v8-quiz-progress i{display:block;height:100%;background:linear-gradient(90deg,#246e53,#d1b379);border-radius:inherit;transition:width .25s}
+body.desktop-overhaul-v18 .v8-quiz-number{font-size:12px;font-weight:800;color:var(--v8-gold)}
+body.desktop-overhaul-v18 .v8-quiz-answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:22px}
+body.desktop-overhaul-v18 .v8-quiz-answer{display:flex;align-items:center;gap:13px;min-height:76px;width:100%;padding:16px;text-align:start;background:var(--v8-surface);border:1px solid var(--v8-line);border-radius:17px;color:var(--v8-ink);font-size:14px;line-height:1.5;cursor:pointer}
+body.desktop-overhaul-v18 .v8-quiz-answer b{display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:10px;background:color-mix(in srgb,var(--v8-gold) 17%,var(--v8-paper))}
+body.desktop-overhaul-v18 .v8-quiz-answer span{flex:1}
+body.desktop-overhaul-v18 .v8-quiz-answer strong{color:#29936b;font-size:22px}
+body.desktop-overhaul-v18 .v8-quiz-answer.is-correct{background:color-mix(in srgb,#2c9468 13%,var(--v8-paper));border-color:#2c9468}
+body.desktop-overhaul-v18 .v8-quiz-answer.is-wrong{background:color-mix(in srgb,#b75656 13%,var(--v8-paper));border-color:#b75656}
+body.desktop-overhaul-v18 .v8-quiz-answer:disabled{opacity:1;cursor:default}
+body.desktop-overhaul-v18 .v8-quiz-feedback{padding:17px;margin-top:22px;border-radius:16px;background:color-mix(in srgb,var(--v8-gold) 7%,var(--v8-paper));border:1px solid var(--v8-line)}
+body.desktop-overhaul-v18 .v8-quiz-feedback p{margin:8px 0;color:var(--v8-ink)!important}
+body.desktop-overhaul-v18 .v8-quiz-feedback a{color:var(--v8-gold);font-size:13px;text-decoration:underline}
+body.desktop-overhaul-v18 .v8-quiz-result{text-align:center}
+body.desktop-overhaul-v18 .v8-quiz-result-pct{display:block;margin:16px auto;font:650 clamp(44px,7vw,75px) Georgia,serif;color:var(--v8-gold)}
+body.desktop-overhaul-v18 .v8-quiz-result .v8-quiz-actions{justify-content:center}
+body.desktop-overhaul-v18 .v8-quiz-arena :is(button,select):focus-visible{outline:2px solid var(--v8-gold)!important;outline-offset:3px!important}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){body.desktop-overhaul-v18 .v8-quiz-answer:not(:disabled):hover{transform:translateY(-2px);border-color:var(--v8-gold)}}
+@media(max-width:740px){body.desktop-overhaul-v18 .v8-quiz-filters,body.desktop-overhaul-v18 .v8-quiz-answers{grid-template-columns:1fr}body.desktop-overhaul-v18 .v8-quiz-panel{padding:19px 16px}body.desktop-overhaul-v18 .v8-quiz-actions .v8-quiz-primary{flex:1}}
+@media(prefers-reduced-motion:reduce){body.desktop-overhaul-v18 .v8-quiz-arena *{transition:none!important;animation:none!important}}
+</style>
 </head>
 <style id="dar-touch-active-fix">
 @media (hover:none) and (pointer:coarse){
@@ -4026,19 +4071,63 @@ renders.beitraege=function(){
   return realIntro("FRAUEN",area.titel,(area.sichtbareEintraege||0)+" geprüfte Inhalte · "+(area.untertitel||""))+'<section class="section parchment reveal"><div id="womenDetail"><div class="women-empty">Geprüfte Inhalte werden geladen …</div></div></section>'+footer()
  };
 
- var quizCursor=0;
+ /* DAR_V8_QUIZ_ARENA_20261023: existing approved questions; public V8 only. */
+ var v8Quiz={mode:"setup",cat:"",level:"",size:10,questions:[],at:0,score:0,answered:false,chosen:-1};
+ function v8QuizPool(){return realData.quiz.filter(function(q){return q&&q.question&&Array.isArray(q.answers)&&q.answers.length>1&&Number.isInteger(Number(q.correctIndex))&&Number(q.correctIndex)>=0&&Number(q.correctIndex)<q.answers.length})}
+ function v8QuizAllowed(){return v8QuizPool().filter(function(q){return (!v8Quiz.cat||(q.category||"Allgemein")===v8Quiz.cat)&&(!v8Quiz.level||q.level===v8Quiz.level)})}
+ function v8QuizShuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+ function v8QuizButton(t,id,cls,disabled){return '<button type="button" id="'+id+'" class="'+cls+'"'+(disabled?' disabled':'')+'>'+t+'</button>'}
  renders.quiz=function(){
-  var q=realData.quiz[quizCursor%Math.max(1,realData.quiz.length)]||null;
-  if(!q)return realIntro("QUIZ","Wissensquiz","Keine Frage verfügbar.");
-  return realIntro("QUIZ","Wissen prüfen",q.category+" · "+q.topic)+
-   '<section class="section reveal"><div style="max-width:880px"><div class="quiz-meta"><span>'+escBook(q.category)+'</span><span>'+escBook(q.level||"")+'</span><span>Frage '+escBook(q.number||"")+'</span></div><h2 style="font:500 29px/1.28 var(--serif);margin:8px 0 18px">'+escBook(q.question)+'</h2>'+q.answers.map(function(a,i){return '<button class="quiz-option" data-correct="'+(i===Number(q.correctIndex)?"1":"0")+'">'+escBook(a)+'</button>'}).join("")+'<div id="quizFeedback" class="quiz-feedback"></div><div id="quizSource" class="real-source" style="display:none"><b>Quelle:</b> '+escBook(q.source||"")+'</div><button id="quizNext" class="quiz-next" type="button">Nächste Frage →</button></div></section>'+footer()
+  var q=v8Quiz,pool=v8QuizPool(),count=pool.length;
+  var wrap='<section id="darV8QuizArena" class="v8-quiz-arena"><header class="v8-quiz-hero"><span>WISSEN · QUIZ · QUELLEN</span><h1>Wissensquiz</h1><p>Wähle ein Thema, prüfe dein Wissen und lerne aus geprüften Quellen.</p><small>'+count+' veröffentlichte und freigegebene Fragen</small></header>';
+  if(!count)return wrap+'<div class="v8-quiz-panel"><h2>Keine Fragen verfügbar</h2><p>Der freigegebene Fragenbestand konnte noch nicht geladen werden.</p></div></section>'+footer();
+  if(q.mode==="setup"){
+   var cats=[...new Set(pool.map(function(x){return x.category||"Allgemein"}))].sort(function(a,b){return a.localeCompare(b,"de")});
+   return wrap+'<div class="v8-quiz-panel"><div class="v8-quiz-eyebrow">DEINE LERNRUNDE</div><h2>Wie möchtest du üben?</h2>'+
+    '<p>Du erhältst nach jeder Antwort eine Erklärung und die vorhandene Quellenangabe.</p>'+
+    '<div class="v8-quiz-filters"><label>Thema<select id="v8QuizCategory"><option value="">Alle Themen</option>'+cats.map(function(x){return '<option value="'+escBook(x)+'"'+(x===q.cat?' selected':'')+'>'+escBook(x)+'</option>'}).join('')+'</select></label>'+
+    '<label>Schwierigkeitsstufe<select id="v8QuizLevel"><option value="">Alle Stufen</option>'+['Anfänger','Mittel','Fortgeschritten'].map(function(x){return '<option'+(x===q.level?' selected':'')+'>'+x+'</option>'}).join('')+'</select></label>'+
+    '<label>Fragen pro Runde<select id="v8QuizSize"><option value="10"'+(q.size===10?' selected':'')+'>10 Fragen</option><option value="20"'+(q.size===20?' selected':'')+'>20 Fragen</option></select></label></div>'+
+    '<div class="v8-quiz-actions"><span id="v8QuizAvailable" role="status"></span>'+v8QuizButton('Quiz starten →','v8QuizStart','v8-quiz-primary',false)+'</div></div></section>'+footer()
+  }
+  if(q.mode==="result"){
+   var total=q.questions.length,percent=total?Math.round(q.score/total*100):0;
+   return wrap+'<div class="v8-quiz-panel v8-quiz-result"><span class="v8-quiz-eyebrow">RUNDE ABGESCHLOSSEN</span><strong class="v8-quiz-result-pct">'+percent+' %</strong>'+
+    '<h2>'+q.score+' von '+total+' Antworten richtig</h2><p>Wiederhole diese Fragen oder wähle ein anderes Thema.</p>'+
+    '<div class="v8-quiz-actions">'+v8QuizButton('Neue Runde','v8QuizAgain','v8-quiz-primary',false)+v8QuizButton('Auswahl ändern','v8QuizReset','v8-quiz-secondary',false)+'</div></div></section>'+footer()
+  }
+  var question=q.questions[q.at];if(!question){q.mode="result";return renders.quiz()}
+  var correct=Number(question.correctIndex),answered=q.answered,number=q.at+1,letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var ans=question.answers.map(function(label,i){
+   var c='v8-quiz-answer'+(answered&&i===correct?' is-correct':'')+(answered&&i===q.chosen&&i!==correct?' is-wrong':'');
+   return '<button type="button" class="'+c+'" data-v8quiz-answer="'+i+'"'+(answered?' disabled':'')+'><b>'+letters[i]+'</b><span>'+escBook(label)+'</span>'+(answered&&i===correct?'<strong aria-label="Richtige Antwort">✓</strong>':'')+'</button>'
+  }).join('');
+  var feedback=answered?'<div class="v8-quiz-feedback" role="status"><strong>'+(q.chosen===correct?'Richtig beantwortet':'Die richtige Antwort ist markiert')+'</strong>'+
+   (question.explanation?'<p>'+escBook(question.explanation)+'</p>':'')+(question.source?'<p><b>Quelle:</b> '+escBook(question.source)+'</p>':'')+
+   (Array.isArray(question.sourceLinks)?question.sourceLinks.filter(function(x){return x&&/^https:\/\//.test(String(x.url||''))}).slice(0,2).map(function(x){return '<a rel="noopener noreferrer" target="_blank" href="'+escBook(x.url)+'">Quellennachweis öffnen ↗</a>'}).join(''):'')+'</div>':'<p class="v8-quiz-hint">Wähle eine Antwort. Die Lösung wird anschließend angezeigt.</p>';
+  return wrap+'<div class="v8-quiz-panel"><div class="v8-quiz-status"><span>'+escBook(question.category||'Wissen')+' · '+escBook(question.level||'')+'</span><span>✓ '+q.score+' richtig</span></div>'+
+   '<div class="v8-quiz-progress" role="progressbar" aria-valuemin="0" aria-valuemax="'+q.questions.length+'" aria-valuenow="'+(number-1)+'" aria-label="Fragenfortschritt"><i style="width:'+((number-1)/q.questions.length*100).toFixed(1)+'%"></i></div>'+
+   '<div class="v8-quiz-number">Frage '+number+' von '+q.questions.length+'</div><h2 class="v8-quiz-question">'+escBook(question.question)+'</h2>'+
+   '<div class="v8-quiz-answers" role="group" aria-label="Antwortmöglichkeiten">'+ans+'</div>'+feedback+
+   '<div class="v8-quiz-actions">'+v8QuizButton(number===q.questions.length?'Ergebnis anzeigen →':'Nächste Frage →','v8QuizNext','v8-quiz-primary',!answered)+v8QuizButton('Runde beenden','v8QuizFinish','v8-quiz-secondary',false)+'</div></div></section>'+footer()
  };
+ function v8QuizRefresh(){if(document.body.dataset.darV8Route!=='quiz')return;var root=document.getElementById('pageRoot');if(root){root.innerHTML=renders.quiz();initQuiz()}}
  initQuiz=function(){
-  var q=realData.quiz[quizCursor%Math.max(1,realData.quiz.length)]||null,out=document.getElementById("quizFeedback"),src=document.getElementById("quizSource"),next=document.getElementById("quizNext");
-  document.querySelectorAll(".quiz-option").forEach(function(b){b.onclick=function(){var ok=b.getAttribute("data-correct")==="1";out.textContent=ok?"Richtig.":("Nicht richtig. "+(q&&q.explanation||""));if(src)src.style.display="block"}});
-  if(next)next.onclick=function(){quizCursor=(quizCursor+1)%Math.max(1,realData.quiz.length);render()}
+  var arena=document.getElementById('darV8QuizArena');if(!arena)return;
+  var cat=arena.querySelector('#v8QuizCategory'),level=arena.querySelector('#v8QuizLevel'),size=arena.querySelector('#v8QuizSize');
+  function counter(){var el=arena.querySelector('#v8QuizAvailable'),btn=arena.querySelector('#v8QuizStart'),n=v8QuizAllowed().length;if(el)el.textContent=n+' passende Fragen';if(btn)btn.disabled=!n}
+  if(cat)cat.onchange=function(){v8Quiz.cat=cat.value;counter()};
+  if(level)level.onchange=function(){v8Quiz.level=level.value;counter()};
+  if(size)size.onchange=function(){v8Quiz.size=Number(size.value)===20?20:10;counter()};
+  counter();
+  function start(){var pool=v8QuizAllowed();if(!pool.length)return;v8Quiz.questions=v8QuizShuffle(pool).slice(0,v8Quiz.size);v8Quiz.at=0;v8Quiz.score=0;v8Quiz.chosen=-1;v8Quiz.answered=false;v8Quiz.mode='play';v8QuizRefresh()}
+  var begin=arena.querySelector('#v8QuizStart');if(begin)begin.onclick=start;
+  arena.querySelectorAll('[data-v8quiz-answer]').forEach(function(btn){btn.onclick=function(){if(v8Quiz.answered)return;var i=Number(btn.dataset.v8quizAnswer),q=v8Quiz.questions[v8Quiz.at];if(!q||i<0||i>=q.answers.length)return;v8Quiz.chosen=i;v8Quiz.answered=true;if(i===Number(q.correctIndex))v8Quiz.score++;v8QuizRefresh()}});
+  var next=arena.querySelector('#v8QuizNext');if(next)next.onclick=function(){if(!v8Quiz.answered)return;if(v8Quiz.at>=v8Quiz.questions.length-1)v8Quiz.mode='result';else{v8Quiz.at++;v8Quiz.answered=false;v8Quiz.chosen=-1}v8QuizRefresh()};
+  var finish=arena.querySelector('#v8QuizFinish');if(finish)finish.onclick=function(){v8Quiz.mode='result';v8QuizRefresh()};
+  var again=arena.querySelector('#v8QuizAgain');if(again)again.onclick=start;
+  var reset=arena.querySelector('#v8QuizReset');if(reset)reset.onclick=function(){v8Quiz.mode='setup';v8QuizRefresh()};
  };
-
  renders.quellen=function(){
   return realIntro("QUELLEN","Direktnachweise und verwendete Werke","Jede Aussage, ihre Quellenangabe und der Direktnachweis bleiben unmittelbar zusammen. Nichts wird gekürzt.")+
    '<section class="section reveal"><div id="sourcesFullList" class="inline-reader-list sources-inline-readers"><div class="loading-line">Aussagen und Direktnachweise werden geladen …</div></div></section>'+footer()
