@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-23",
+  "scope": "ONLY_THREE_CONTEXTUAL_FULL_SENTENCE_LISTENING_PILOTS",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "dictionaryId": "Q8w3SxtoVo8NSjsnlJEd",
+  "dictionaryVersionId": "wSzgkGpAwEDiTak8DApc",
+  "approvedParentNativeTerms": [
+    "ʿIbādah",
+    "Ḥalāl",
+    "Ḥarām"
+  ],
+  "parentOwnerVerdict": "Alles richtig",
+  "parentApprovalDoesNotProveSentencePhonetics": true,
+  "newContextSentenceOwnerListeningApproved": false,
+  "all450SpeechAudioApproved": false,
+  "publicReleaseAuthorized": false,
+  "globalProductionHoldRemainsActive": true,
+  "allowedProviderPOSTs": 3,
+  "estimatedCreditsNotInvoice": 129.85,
+  "maximumEstimatedCredits": 230.0,
+  "noRetryAfterAmbiguousRequest": true,
+  "originalTextHashes": [
+    {
+      "text": "Halāle und gute Nahrung.",
+      "sha256": "10f57a8b9debddee8f81752342f7826d662d4f1580bd5f3549f8498ab48e3292"
+    },
+    {
+      "text": "Allah beschreibt den Qurʾān als Rechtleitung für die Muttaqīn.",
+      "sha256": "85b21ae546baedf84eeb01fcb70560697bfce2ee4ccdbd3b03c14fd91bd1caad"
+    },
+    {
+      "text": "Mit wessen Erlaubnis geschahen die Wunder ʿĪsās?",
+      "sha256": "9d3b835954e5ef2473bf2bc02e631f0c9f2b44610c807779dad1eb404564c189"
+    }
+  ],
+  "entries": [],
+  "status": "STARTED_REMOTE_CHECKPOINTED_ONCE",
+  "startedAt": "2026-10-23T10:01:44.290822+00:00"
+}
