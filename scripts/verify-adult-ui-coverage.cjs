@@ -19,7 +19,7 @@ const protectedSourceKeys = new Set([
     "Qibla", "Ḥadīṯ", "Duʿāʾ", "Qurʾān", "Audio", "DĀR AL TAWḤĪD",
     "As-salāmu ʿalaikum wa raḥmatullāhi wa barakātuh",
     "Tafsīr", "Tadabbur", "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh",
-    "Fajr", "Faǧr", "Ẓuhr", "Dhuhr", "Zuhr", "ʿAṣr", "Asr", "Maghrib",
+    "Fajr", "Faǧr", "Ẓuhr", "Dhuhr", "Zuhr", "ʿAṣr", "Asr", "Maghrib", "Pause", "Quiz",
     "ʿIshāʾ", "Isha", "Rāwī", "Nabī / Rasūl",
     "„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“"
 ]);
