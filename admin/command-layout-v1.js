@@ -105,7 +105,20 @@
     }
   });
  }
+ function updateViewportCapacity(){
+  const client=document.documentElement.clientWidth||window.innerWidth||0;
+  const visual=window.visualViewport?.width||client;
+  const width=Math.max(0,Math.min(client,visual));
+  const height=window.visualViewport?.height||window.innerHeight||0;
+  const touch=window.matchMedia?.("(pointer:coarse)")?.matches===true;
+  // A touch device can be an unfolded phone, tablet or an app in split-window mode.
+  const foldMedium=touch&&width>=650&&width<1440;
+  document.body.classList.toggle("dar-admin-fold-viewport",foldMedium);
+  document.documentElement.style.setProperty("--dar-admin-window-width",width+"px");
+  document.documentElement.style.setProperty("--dar-admin-window-height",height+"px");
+ }
  function syncState(){
+  updateViewportCapacity();
   if(!adminActive()){
    document.body.classList.add("dar-admin-login");
    document.body.classList.remove("dar-admin-workspace","dar-editorial-fullscreen");
@@ -141,6 +154,11 @@
   observer.observe(panel,{childList:true});
   observer.observe(top,{attributes:true,attributeFilter:["hidden"]});
   document.addEventListener("change",event=>{if(event.target?.id==="adminTabSelect")queueSync()});
+  window.addEventListener("resize",queueSync,{passive:true});
+  window.addEventListener("orientationchange",queueSync,{passive:true});
+  window.visualViewport?.addEventListener("resize",queueSync,{passive:true});
+  // The Fold multi-window width may change without a device orientation event.
+  const rootResize=new ResizeObserver(queueSync);rootResize.observe(document.documentElement);
   document.addEventListener("click",event=>{
     if(more&&!more.hidden&&!event.target.closest(".dar-mobile-more,.dar-mobile-command")){
       more.hidden=true;bar?.querySelector("[data-dar-more]")?.setAttribute("aria-expanded","false")
