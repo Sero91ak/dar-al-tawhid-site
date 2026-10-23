@@ -1,0 +1,101 @@
+name: KIDS V4 Q036 - Schahāda Zakāh Ḥaǧǧ Ramaḍān Native Master
+on:
+  push:
+    branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
+    paths: ['.github/workflows/kids-v4-q036-four-native-fusha-words-review-20261023.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: tawhid-kids-v4-450-shared-paid-queue
+  cancel-in-progress: false
+jobs:
+  exact-native-q036:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 38
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      KIDS_V4_OWNER_EXACT_THREE_NATIVE_RUN: 'YES'
+    steps:
+      - name: Checkout protected 436/450 private source and exact paid ledgers
+        uses: actions/checkout@v4
+        with: {fetch-depth: 0, persist-credentials: true}
+      - name: Validate single Q036 owner voice/mixed-native source before any new paid generation
+        run: |
+          set -euo pipefail
+          git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+          git merge --ff-only FETCH_HEAD
+          python3 -m py_compile kids/tools/produce_kids_v4_q036_four_native_fusha_20261023.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('kids/data/quiz-v4-450-production-status.json').read_text())
+          assert s['completedQuestionsWithAllFourAudioParts']==436
+          assert s['uniqueNewOriginalMP3sStored']==1826
+          assert not s['livePublished'] and s['questionsHumanListeningApproved']==0
+          print('KIDS_NATIVE_Q036_PRECHECK_PASS 436/450')
+          PY
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get -qq update
+            sudo apt-get -qq install -y ffmpeg
+          fi
+      - name: Produce four fully vocalized Arabic word sources and German components, once only
+        run: |
+          set -euo pipefail
+          python3 kids/tools/produce_kids_v4_q036_four_native_fusha_20261023.py
+      - name: Recompose and recount 450 private question MP3s
+        run: |
+          set -euo pipefail
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('kids/data/quiz-v4-450-production-status.json').read_text())
+          j=json.loads(Path('kids/review-only/kids-v4-q036-native-4-terms-paid-once-20261023.json').read_text())
+          assert s['completedQuestionsWithAllFourAudioParts']>=437
+          assert s['savedMP3TechnicallyAudited']==s['uniqueNewOriginalMP3sStored']
+          assert s['questionsHumanListeningApproved']==0
+          assert not s['appReleaseFlagEnabled'] and not s['livePublished']
+          assert len(j['composites'])==1 and j['humanHearingApproved'] is False
+          print('KIDS_V4_Q036_COMPLETE_AND_PRIVATE',s['completedQuestionsWithAllFourAudioParts'],'/450')
+          PY
+      - name: Commit only updated private 450 previews and true count
+        run: |
+          set -euo pipefail
+          git config user.name kids-v4-q036-native-masters
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-450-production-status.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/quiz-v4-handover-latest.json kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'review(kids V4): Q036 native Fuṣḥā 4 terms and 450 actual technical audit [skip ci]'
+          for i in 1 2 3; do
+             if git push origin HEAD:review/kids-v4-nine-prepaid-artifact-replay-20261022; then exit 0; fi
+             git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+             git rebase FETCH_HEAD || exit 1
+          done
+          exit 1
+      - name: Archive paid immutable originals and private 450 status
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-q036-four-native-words-German-source-owner-review
+          retention-days: 60
+          if-no-files-found: warn
+          path: |
+            kids/review-only/kids-v4-q036-native-4-terms-paid-once-20261023.json
+            kids/assets/kids-quiz-audio/v4-q036-native-4-terms-20261023/
+            kids/data/quiz-v4-450-production-status.json
