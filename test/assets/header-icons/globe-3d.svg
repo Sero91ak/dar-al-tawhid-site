@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Sprache">
+<defs>
+<radialGradient id="orb" cx="28%" cy="17%" r="92%"><stop stop-color="#7cbba0"/><stop offset=".22" stop-color="#17654c"/><stop offset=".67" stop-color="#06392e"/><stop offset="1" stop-color="#021b18"/></radialGradient>
+<linearGradient id="gold" x1=".05" y1=".07" x2=".98" y2=".93"><stop stop-color="#fff5bd"/><stop offset=".18" stop-color="#c49242"/><stop offset=".47" stop-color="#ffdc82"/><stop offset=".68" stop-color="#9b621e"/><stop offset="1" stop-color="#f6d582"/></linearGradient>
+<radialGradient id="shine" cx=".23" cy=".14" r=".65"><stop stop-color="#fffde3" stop-opacity=".61"/><stop offset=".42" stop-color="#d2ffe9" stop-opacity=".10"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<filter id="shadow" x="-35%" y="-35%" width="170%" height="180%"><feDropShadow dx="0" dy="4" stdDeviation="3.2" flood-color="#07170f" flood-opacity=".32"/></filter>
+<clipPath id="clip"><circle cx="50" cy="47" r="38"/></clipPath>
+</defs>
+<g filter="url(#shadow)"><circle cx="50" cy="47" r="44" fill="url(#gold)"/><circle cx="50" cy="47" r="40.5" fill="#213a31"/><circle cx="50" cy="47" r="38" fill="url(#orb)"/>
+<g clip-path="url(#clip)" stroke="url(#gold)" stroke-linecap="round" stroke-linejoin="round">
+<ellipse cx="50" cy="47" rx="17" ry="38" fill="none" stroke-width="2.3" opacity=".88"/>
+<path d="M12 47h76M17 31c18 5 48 5 66 0M17 64c18-5 48-5 66 0" fill="none" stroke-width="2.3" opacity=".83"/>
+<path d="M32 14l8 4 5-2 7 6-6 4 3 8-7 5-1 7-8 3-4-8-7-2-1-7 5-6-1-6zm20 40l8 3 5-3 7 7-4 10-6 7-3 7-8-2-3-9-7-7 5-7zM68 19l8 5 5 7-3 8-7 1-9-7 1-7z" stroke="#97671f" stroke-width="1.1" fill="url(#gold)" opacity=".95"/>
+</g><circle cx="50" cy="47" r="38" fill="url(#shine)"/><path d="M22 24c10-14 25-17 35-13" stroke="#f7ffe6" stroke-width="3.3" stroke-linecap="round" opacity=".55" fill="none"/></g>
+</svg>
