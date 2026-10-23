@@ -95,6 +95,34 @@ def quarantined_originals(root: Path):
             or hashlib.sha256(oldpath.read_bytes()).hexdigest()!=old.get("originalSha256")):
             raise RuntimeError("Owner rejected paid Halal trial MP3 receipt unavailable")
         blocked_texts.update(sources)
+    # Owner explicitly rejected the latest German-V4 full-sentence "Hala".
+    # Reuse ONLY earlier, separately approved native Fuṣḥā حَلَال audio;
+    # retain exact bad original SHA for historical billing provenance.
+    second=root/"kids/review-only/quiz-v4-halal-fusha-owner-bad-full-sentence-quarantine-20261023.json"
+    if second.is_file():
+        m=json.loads(second.read_text(encoding="utf8"))
+        reject=m.get("rejectedSourceText")
+        sha=m.get("rejectedProviderOriginalSHA256")
+        url=m.get("rejectedOriginalURL")
+        native=m.get("nativeOriginalURL")
+        native_sha=m.get("approvedNativeOriginalSHA256")
+        if (reject!="Nahrung, die Halal und gut ist."
+            or sha!="d758ef39a4a8229d5fd127d7fae137271b6ac0acd7a241718200f6f63ce5d5c1"
+            or native_sha!="559a6fe9e1ed4d132b8001376758f3b101c86c39f788f331af999a23eac32ee5"
+            or m.get("approvedNativeSourceText")!="حَلَال"
+            or m.get("mustNeverReuseRejectedFullGermanTake") is not True
+            or m.get("mixedSentenceHearingApproved") is not False
+            or m.get("publicReleaseAllowed") is not False):
+            raise RuntimeError("Owner full-sentence Halal rejection receipt changed")
+        audio_root=(root/"kids/assets/kids-quiz-audio").resolve()
+        for candidate,expected in [(url,sha),(native,native_sha)]:
+            if not isinstance(candidate,str) or not candidate.startswith("/kids/assets/kids-quiz-audio/"):
+                raise RuntimeError("Owner Halal original audio URL not safe")
+            file=(root/candidate.lstrip("/")).resolve()
+            if (not file.is_relative_to(audio_root) or not file.is_file()
+                or hashlib.sha256(file.read_bytes()).hexdigest()!=expected):
+                raise RuntimeError("Owner Halal original MP3 SHA proof unavailable")
+        blocked_texts.add(reject)
     return blocked_texts,blocked_ids
 
 
