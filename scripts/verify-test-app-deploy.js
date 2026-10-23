@@ -154,6 +154,23 @@ async function fetchVersionBuild(base) {
     throw new Error(`workers.dev Test-App liefert noch nicht ${TEST_EXPECT_BUILD}: ${workersBase}/`);
   }
 
+  // DAR_TEST_ONE_VISIBLE_HOME_V60: verify the actual deployed HTML and runtime,
+  // rather than accepting only the long-unchanged app-shell-v1371 build ID.
+  // This catches stale Worker rewrites and cached pre-repair assets on both origins.
+  for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
+    const shell = await fetchText(`${base}/index.html?single-home-v60=${Date.now()}`);
+    const runtime = await fetchText(`${base}/assets/dar-home-html-parity-v1.js?v=20261023-v60-single-visible-home`);
+    const linked = shell.status === 200 &&
+      shell.text.includes("dar-home-html-parity-v1.js?v=20261023-v60-single-visible-home");
+    const guarded = runtime.status === 200 &&
+      runtime.text.includes("DAR_TEST_ONE_VISIBLE_HOME_V60") &&
+      runtime.text.includes('classList.add("dar-test-parity-active")');
+    console.log(`single-visible-home ${label}: shell=${shell.status} linked=${linked} runtime=${runtime.status} guarded=${guarded}`);
+    if (!linked || !guarded) {
+      throw new Error(`Test Home V60 not actually published to ${label}; legacy duplicate home may still be visible`);
+    }
+  }
+
   // DAR_TEST_PWA_BOOT_NO_REDIRECT_GUARD_20261016: Installed iOS/Android test PWA must boot without a 302.
   // The ordinary fetchText() intentionally follows redirects for other routes;
   // that would hide a broken /test/?env=staging&source=pwa&v=1371 start_url.
