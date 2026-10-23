@@ -154,7 +154,7 @@
       '<div class="admin-editorial-hostbar"><div><small>DĀR ADMIN / REDAKTION</small>'+
       '<strong>Redaktionsatelier</strong><span>Neun Sprachen · Kanonische Beiträge · Originalnachweise</span></div>'+
       '<button type="button" id="darEditorFullscreen" class="admin-editorial-popout" aria-pressed="false">Widescreen öffnen ↗</button></div>'+
-      '<div id="darAdminEditorialStatus" class="admin-editorial-loading" aria-live="polite">Redaktionsatelier wird geladen …</div><iframe id="darAdminEditorialFrame" title="DĀR AL TAWḤĪD Redaktion" src="/admin/redaktion/?v=2" referrerpolicy="same-origin"></iframe>'+
+      '<div id="darAdminEditorialStatus" class="admin-editorial-loading" aria-live="polite">Redaktionsatelier wird geladen …</div><iframe id="darAdminEditorialFrame" title="DĀR AL TAWḤĪD Redaktion" src="/admin/redaktion/?v=3" referrerpolicy="same-origin"></iframe>'+
       '</section>';
   }
   function bindImmersiveAtelier(){
