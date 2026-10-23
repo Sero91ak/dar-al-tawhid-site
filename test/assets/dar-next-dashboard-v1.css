@@ -1,0 +1,123 @@
+/* DĀR NEXT · Stage 1 · TEST ONLY. Non-destructive progressive enhancement.
+   Existing routing, prayer, audio, content, push, translation and PWA are untouched. */
+html.dar-next-v1{--dn-gold:#c6ae74;--dn-gold-soft:#e0d1a6;--dn-teal:#123d36;--dn-night:#071713;--dn-stroke:rgba(200,181,127,.32)}
+html.dar-next-v1 body{font-feature-settings:"kern" 1}
+html.dar-next-v1 .dar-next-hero,
+html.dar-next-v1 .dar-next-route-hero,
+html.dar-next-v1 #darNextPalette{color:#f6f1e5;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-sizing:border-box}
+html.dar-next-v1 .dar-next-hero *,html.dar-next-v1 .dar-next-route-hero *,html.dar-next-v1 #darNextPalette *{box-sizing:border-box}
+html.dar-next-v1 .dar-next-hero{position:relative;isolation:isolate;overflow:hidden;min-height:265px;margin:0 auto 22px;width:min(100%,1220px);border:1px solid var(--dn-stroke);border-radius:30px;background:#081c19;box-shadow:0 18px 45px rgba(3,16,13,.14)}
+html.dar-next-v1 .dar-next-hero::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(3,18,16,.97) 0%,rgba(3,18,16,.89) 37%,rgba(3,18,16,.5) 71%,rgba(3,18,16,.19)),url("/test/assets/dar-3d-icons/dar-home-cinematic-hero.png") center right/cover no-repeat;transform:scale(1.005)}
+html.dar-next-v1 .dar-next-hero::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(ellipse at 90% 9%,rgba(232,197,122,.15),transparent 47%),linear-gradient(180deg,transparent 60%,rgba(2,18,15,.65))}
+html.dar-next-v1 .dar-next-hero__inner{padding:clamp(26px,4.6vw,57px);width:min(76%,810px);display:grid;justify-items:start;gap:12px}
+html.dar-next-v1 .dar-next-kicker{color:var(--dn-gold-soft);text-transform:uppercase;letter-spacing:.2em;font-weight:750;font-size:10px;line-height:1.5}
+html.dar-next-v1 .dar-next-hero h2{font-family:Georgia,"Times New Roman",serif;font-size:clamp(28px,4vw,49px);line-height:1.1;letter-spacing:-.035em;margin:0;color:#fffaf0;text-wrap:balance}
+html.dar-next-v1 .dar-next-hero p{margin:0;color:#e3e9dd;font-size:clamp(12px,1.4vw,15px);line-height:1.65;max-width:520px}
+html.dar-next-v1 .dar-next-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+html.dar-next-v1 .dar-next-btn{appearance:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;padding:11px 17px;min-height:44px;border-radius:999px;border:1px solid rgba(220,196,139,.46);background:rgba(6,35,29,.65);color:#fff7de;font-size:13px;font-weight:700;box-shadow:none;text-decoration:none;transition:transform .25s ease,background .25s ease,border-color .25s ease}
+html.dar-next-v1 .dar-next-btn--primary{background:linear-gradient(125deg,#d8c08a,#f0e3c0);color:#18332b;border-color:#e8d6a3}
+html.dar-next-v1 .dar-next-btn:hover{transform:translateY(-2px);border-color:#e8d6a3}
+html.dar-next-v1 .dar-next-btn:focus-visible,html.dar-next-v1 .dar-next-launcher:focus-visible,
+html.dar-next-v1 #darNextPalette button:focus-visible,html.dar-next-v1 #darNextPalette input:focus-visible{outline:3px solid #f3da8f;outline-offset:3px}
+html.dar-next-v1 .dar-next-hero__seal{position:absolute;right:clamp(18px,7vw,110px);bottom:15px;width:clamp(74px,13vw,170px);opacity:.95;filter:drop-shadow(0 14px 22px rgba(0,0,0,.25));pointer-events:none}
+html.dar-next-v1 .dar-next-hero__seal img{width:100%;height:auto;display:block;object-fit:contain}
+html.dar-next-v1 .dar-next-route-hero{position:relative;display:flex;align-items:center;gap:16px;overflow:hidden;isolation:isolate;margin:4px auto 22px;width:min(100%,1220px);min-height:136px;padding:20px clamp(18px,3.4vw,36px);border:1px solid var(--dn-stroke);border-radius:24px;background:#09201b}
+html.dar-next-v1 .dar-next-route-hero::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,#071914 0%,rgba(8,32,27,.96) 48%,rgba(6,35,27,.42) 100%),var(--dn-art) center right/cover no-repeat}
+html.dar-next-v1 .dar-next-route-hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 92% 8%,rgba(228,199,135,.18),transparent 50%)}
+html.dar-next-v1 .dar-next-route-hero__copy{min-width:0;flex:1}
+html.dar-next-v1 .dar-next-route-hero h2{font:500 clamp(24px,3.5vw,35px)/1.14 Georgia,serif;color:#fff9e8;letter-spacing:-.02em;margin:5px 0 6px}
+html.dar-next-v1 .dar-next-route-hero p{font-size:13px;line-height:1.5;color:#dbe6da;margin:0;max-width:550px}
+html.dar-next-v1 .dar-next-route-hero img{width:clamp(59px,10vw,95px);height:clamp(59px,10vw,95px);object-fit:contain;filter:drop-shadow(0 8px 13px rgba(0,0,0,.32));flex:none}
+html.dar-next-v1 .dar-next-launcher{position:fixed;right:max(16px,env(safe-area-inset-right,0px) + 12px);bottom:calc(var(--bottom-navigation-height,70px) + env(safe-area-inset-bottom,0px) + 20px);z-index:110;min-height:46px;display:flex;align-items:center;gap:8px;border-radius:999px;border:1px solid rgba(247,223,157,.65);color:#fff5da;background:linear-gradient(120deg,#0f3b33,#061c1a);box-shadow:0 12px 35px #0005;padding:7px 15px 7px 8px;font:700 12px/1.2 system-ui,sans-serif;cursor:pointer;transition:transform .2s,box-shadow .2s}
+html.dar-next-v1 .dar-next-launcher:hover{transform:translateY(-2px);box-shadow:0 15px 40px #0007}
+html.dar-next-v1 .dar-next-launcher img{width:31px;height:31px;object-fit:contain}
+html.dar-next-v1 body.dar-next-is-ilm .dar-next-launcher{display:none!important}
+html.dar-next-v1 #darNextPalette[hidden],html.dar-next-v1 .dar-next-launcher[hidden]{display:none!important}
+html.dar-next-v1 #darNextPalette{position:fixed;inset:0;z-index:2147483000;display:grid;align-items:start;justify-items:center;overflow-y:auto;padding:clamp(38px,9svh,105px) 13px calc(25px + env(safe-area-inset-bottom,0px));background:rgba(0,12,11,.74);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+html.dar-next-v1 .dar-next-palette__panel{width:min(100%,780px);max-height:min(80svh,800px);display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(227,200,139,.48);border-radius:25px;background:linear-gradient(145deg,#102c27,#071916);box-shadow:0 24px 90px rgba(0,0,0,.5)}
+html.dar-next-v1 .dar-next-palette__head{display:flex;align-items:center;gap:14px;padding:20px 23px 13px}
+html.dar-next-v1 .dar-next-palette__head img{width:40px;height:40px;object-fit:contain}
+html.dar-next-v1 .dar-next-palette__head b{display:block;font:500 22px Georgia,serif;color:#fff5df}
+html.dar-next-v1 .dar-next-palette__head small{font-size:11px;color:#c6d2ca}
+html.dar-next-v1 .dar-next-palette__close{margin-left:auto;border-radius:50%;width:38px;height:38px;min-width:38px;border:1px solid #ffffff36;background:#ffffff0c;color:white;font-size:24px;cursor:pointer}
+html.dar-next-v1 .dar-next-palette__search{padding:0 20px 14px}
+html.dar-next-v1 .dar-next-palette__search input{width:100%;height:48px;border-radius:14px;border:1px solid rgba(224,201,153,.36);background:#f2efe5;color:#142c25;padding:0 15px;font:500 15px system-ui,sans-serif}
+html.dar-next-v1 .dar-next-palette__search input::placeholder{color:#5f706a}
+html.dar-next-v1 .dar-next-palette__sections{overflow-y:auto;overscroll-behavior:contain;padding:0 20px 20px;display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr))}
+html.dar-next-v1 .dar-next-palette__tile{display:flex;min-width:0;gap:11px;align-items:center;text-align:start;min-height:74px;padding:11px;border-radius:15px;border:1px solid rgba(224,201,153,.15);background:rgba(248,246,232,.065);color:#f6f1e5;cursor:pointer;font:inherit;transition:background .18s,transform .18s}
+html.dar-next-v1 .dar-next-palette__tile:hover{background:rgba(240,217,172,.16);transform:translateY(-2px)}
+html.dar-next-v1 .dar-next-palette__tile img{width:41px;height:41px;object-fit:contain;flex:none}
+html.dar-next-v1 .dar-next-palette__tile strong{display:block;font-size:13px;line-height:1.4;color:#fff8e4}
+html.dar-next-v1 .dar-next-palette__tile small{display:block;color:#cbd6cd;font-size:11px;line-height:1.4}
+html.dar-next-v1 .dar-next-palette__empty{grid-column:1/-1;color:#e6e0cb;padding:16px 0;font-size:13px}
+html.dar-next-v1 .dar-next-palette__footer{padding:12px 21px;font-size:11px;color:#d7d9cb;border-top:1px solid rgba(224,201,153,.18)}
+/* Real Majlis al-ʿIlm: visual upgrade only; existing assistant and source pipeline preserved. */
+html.dar-next-v1 body.dar-next-is-ilm .ilm-chat-shell{border-radius:clamp(0px,2.2vw,24px);overflow:hidden;background:var(--bg,#0d211c)}
+html.dar-next-v1 body.dar-next-is-ilm .ilm-chat-header{background:linear-gradient(105deg,#082720,#184137);border-bottom:1px solid rgba(200,181,127,.42)}
+html.dar-next-v1 body.dar-next-is-ilm .ilm-header-title b{font-family:Georgia,serif;letter-spacing:.02em}
+html.dar-next-v1 body.dar-next-is-ilm .ilm-composer-inner{border-radius:22px}
+html.dar-next-v1 body.dar-next-is-ilm .ilm-welcome-card{border-radius:24px;background:linear-gradient(150deg,rgba(198,174,116,.12),rgba(12,59,47,.08))}
+html.dar-next-v1 body.dar-next-is-ilm .ilm-welcome-logo{display:grid;place-items:center}
+html.dar-next-v1 body.dar-next-is-ilm .ilm-welcome-logo::before{content:"";width:58px;height:58px;position:absolute;background:url("/test/assets/dar-3d-icons/ilm.png") center/contain no-repeat}
+html.dar-next-v1 body.dar-next-is-ilm .ilm-welcome-logo{font-size:0;position:relative}
+/* Section cards and navigation are softly unified, but core typography and tap targets remain intact. */
+html.dar-next-v1 #appView .view-head,
+html.dar-next-v1 #appView .section-head{letter-spacing:-.01em}
+html.dar-next-v1 #bottomNav.bottom-nav{backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+html.dar-next-v1 #bottomNav .bottom-nav-btn{transition:transform .22s ease,filter .22s ease}
+html.dar-next-v1 #bottomNav .bottom-nav-btn:active{transform:scale(.94)}
+html.dar-next-v1 [data-darnext-animate]{animation:darNextAppear .52s both cubic-bezier(.2,.7,.2,1)}
+@keyframes darNextAppear{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:1100px){
+ html.dar-next-v1 .dar-next-hero{min-height:345px}
+ html.dar-next-v1 .dar-next-launcher{right:25px;bottom:26px}
+ html.dar-next-v1 .dar-next-route-hero{min-height:170px}
+}
+@media(max-width:699px){
+ html.dar-next-v1 .dar-next-hero{width:calc(100% - 12px);min-height:245px;margin:4px auto 18px;border-radius:24px}
+ html.dar-next-v1 .dar-next-hero::before{background:linear-gradient(90deg,rgba(4,21,18,.97),rgba(4,21,18,.83) 68%,rgba(4,21,18,.62)),url("/test/assets/dar-3d-icons/dar-home-cinematic-hero.png") center/cover}
+ html.dar-next-v1 .dar-next-hero__inner{padding:25px 20px;width:100%;max-width:410px}
+ html.dar-next-v1 .dar-next-hero h2{font-size:29px}
+ html.dar-next-v1 .dar-next-hero p{font-size:12px;max-width:300px}
+ html.dar-next-v1 .dar-next-hero__seal{width:80px;right:8px;bottom:6px;opacity:.45}
+ html.dar-next-v1 .dar-next-route-hero{width:calc(100% - 10px);margin:4px auto 16px;min-height:116px;border-radius:21px;padding:17px}
+ html.dar-next-v1 .dar-next-route-hero h2{font-size:25px}
+ html.dar-next-v1 .dar-next-route-hero p{font-size:12px}
+ html.dar-next-v1 .dar-next-route-hero img{width:60px;height:60px}
+ html.dar-next-v1 .dar-next-palette__sections{grid-template-columns:1fr}
+ html.dar-next-v1 .dar-next-launcher{bottom:calc(80px + env(safe-area-inset-bottom,0px));right:11px;padding:6px 11px 6px 6px}
+ html.dar-next-v1 .dar-next-launcher span{font-size:11px}
+}
+@media(max-width:370px){html.dar-next-v1 .dar-next-hero h2{font-size:26px}html.dar-next-v1 .dar-next-actions{gap:6px}html.dar-next-v1 .dar-next-btn{padding:9px 12px}}
+@media(prefers-reduced-motion:reduce){
+ html.dar-next-v1 [data-darnext-animate]{animation:none!important}
+ html.dar-next-v1 .dar-next-btn,html.dar-next-v1 .dar-next-launcher,html.dar-next-v1 .dar-next-palette__tile,html.dar-next-v1 #bottomNav .bottom-nav-btn{transition:none!important}
+}
+
+/* Wide-screen information architecture: retain every canonical V3 Home component,
+   arrange the real components in a two-column editorial dashboard. */
+@media(min-width:1100px){
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-home{
+  width:100%!important;max-width:920px!important;
+  display:grid!important;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)!important;
+  gap:14px 16px!important;align-items:start
+ }
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-hometitle,
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-language,
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-search-box{grid-column:1/-1}
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-tawhid{grid-column:1;grid-row:auto}
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-section[aria-labelledby="dv3LatestTitle"]{grid-column:2}
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-section[aria-labelledby="dv3QuickTitle"]{grid-column:1}
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-bottom{grid-column:2;align-self:start}
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-quick-grid{grid-template-columns:1fr 1fr}
+}
+/* Polished existing ʿIlm conversation, not a replacement AI backend. */
+html.dar-next-v1 body.dar-next-is-ilm .ilm-message-list{
+ background-image:radial-gradient(ellipse at 50% -10%,rgba(173,145,88,.08),transparent 60%)
+}
+html.dar-next-v1 body.dar-next-is-ilm .ilm-user-bubble{border-radius:18px 18px 5px 18px}
+html.dar-next-v1 body.dar-next-is-ilm .ilm-assistant-message{border-radius:18px 18px 18px 5px}
+html.dar-next-v1 body.dar-next-is-ilm .ilm-chat-input:focus-visible{outline:2px solid var(--dn-gold)!important;outline-offset:2px}
+@media(min-width:1100px){
+ html.dar-next-v1 body.dar-next-is-ilm .ilm-chat-shell{max-width:min(1120px,100%);margin-inline:auto}
+}
