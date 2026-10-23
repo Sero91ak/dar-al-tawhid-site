@@ -66,6 +66,35 @@ def quarantined_originals(root: Path):
                 raise RuntimeError("Owner-rejected V4 MP3 changed; no quiz playback")
             seen.add(spoken)
             blocked_texts.add(spoken)
+    # Owner specifically rejected the inflected "Halāle/Halālen" text and
+    # pronunciation in 3 Kids questions. This applies also to old original
+    # caches: retain exact paid receipts, but refuse playback and reuse.
+    correction_path=root/"kids/data/quiz-v4-halal-invariant-owner-correction-20261023.json"
+    if correction_path.is_file():
+        correction=json.loads(correction_path.read_text(encoding="utf8"))
+        sources=correction.get("blockedSourceTexts")
+        old=correction.get("oldPaidRejectedContextOriginal") or {}
+        if (correction.get("wordToDisplayAndSpeakExactly")!="Halal"
+            or correction.get("ownerCorrectionDate")!="2026-10-23"
+            or correction.get("affectedQuestionIds")!=[
+                "kids-quiz-109","kids-quiz-131","kids-quiz-271"]
+            or not isinstance(sources,list) or len(sources)!=5
+            or len(set(sources))!=5
+            or "Halāle und gute Nahrung." not in sources
+            or not all(any(w in source for w in (
+                "Halāle","Halālen","halāle","halālen")) for source in sources)
+            or old.get("ownerPronunciationRejected") is not True
+            or old.get("approvedForPlayback") is not False
+            or old.get("publicReleaseAllowed") is not False
+            or correction.get("newCorrectedAudioGenerated") is not False
+            or correction.get("publicReleaseAllowed") is not False):
+            raise RuntimeError("Owner rejected Halal pronunciation source receipt invalid")
+        oldpath=(root/str(old.get("originalURL","")).lstrip("/")).resolve()
+        if (not oldpath.is_relative_to((root/"kids/assets/kids-quiz-audio").resolve())
+            or not oldpath.is_file()
+            or hashlib.sha256(oldpath.read_bytes()).hexdigest()!=old.get("originalSha256")):
+            raise RuntimeError("Owner rejected paid Halal trial MP3 receipt unavailable")
+        blocked_texts.update(sources)
     return blocked_texts,blocked_ids
 
 
