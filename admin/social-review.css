@@ -1,0 +1,39 @@
+/* DĀR AL TAWḤĪD Admin — isolated language review workspace */
+.social-review{max-width:1300px;margin:8px auto 20px!important;padding:clamp(14px,2.6vw,26px)!important;border:1px solid rgba(227,190,109,.2)!important;background:radial-gradient(ellipse at 95% 0%,rgba(179,145,78,.1),transparent 46%),#081522!important;color:#f6f0e2}
+.social-review *{box-sizing:border-box}
+.social-header{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.social-header h2{font-family:Georgia,serif;font-size:clamp(23px,4vw,34px);line-height:1.15;letter-spacing:0;margin:8px 0;color:#f7e7b5}
+.social-header p,.social-small,.social-editor>p{color:#afc0ca;font-size:13px;line-height:1.6}
+.social-kicker{font-size:10px;letter-spacing:2px;font-weight:750;color:#dfc27b}
+.social-count{border-radius:40px;background:#15283b;color:#edda9b;padding:8px 12px;font-size:12px;font-weight:800;white-space:nowrap}
+.social-warning{border:1px solid rgba(240,187,81,.3);border-radius:12px;padding:11px 13px;font-size:12px;line-height:1.5;color:#f0dcaa;background:rgba(176,123,31,.08);margin:15px 0}
+.social-meta{display:grid;grid-template-columns:2fr 1fr;gap:12px}
+.social-meta label{font-size:12px;color:#e8dcbd;display:flex;flex-direction:column;gap:6px;font-weight:700}
+.social-review .field{background:#0d1f2c;color:#f7f0e4;border:1px solid #33465a;min-height:42px;border-radius:11px;width:100%;padding:9px 11px;font:inherit}
+.social-check{display:flex;gap:8px;align-items:center;font-size:13px;margin:12px 0 0;color:#dce1d7}
+.social-check input{width:18px;height:18px;accent-color:#be9e62}
+.social-q{color:#decda5;font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+.social-langs{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:6px;margin:15px 0}
+.social-lang{appearance:none;border:1px solid #2f4154;border-radius:12px;background:#102031;color:#cbd5dc;padding:9px 4px;min-height:57px;display:flex;align-items:center;flex-direction:column;justify-content:center;gap:3px;font-weight:650;font-size:clamp(10px,1.1vw,13px);cursor:pointer}
+.social-lang small{font-size:13px;color:#c8b379}
+.social-lang.active{border-color:#d6b66f;background:#223746;color:#f6e6b7;box-shadow:0 0 0 1px rgba(214,182,111,.18) inset}
+.social-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.social-editor,.social-preview{min-width:0;border:1px solid #2a3c4e;border-radius:17px;padding:14px;background:#0b1c2a}
+.social-editor h3{font:700 19px Georgia,serif;color:#edd798;margin:0}
+.social-editor>p{margin:6px 0 12px}
+.social-editor textarea{display:block;min-height:420px;resize:vertical;width:100%;background:#091722;color:#fbf7ed;border:1px solid #3a5263;border-radius:12px;padding:14px;font:15px/1.75 -apple-system,BlinkMacSystemFont,Arial,sans-serif;letter-spacing:0;unicode-bidi:plaintext}
+.social-editor textarea:focus-visible,.social-review .field:focus-visible,.social-lang:focus-visible{outline:2px solid #cfaf6d;outline-offset:2px}
+.social-review-state{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;color:#d8c795;margin-top:12px}
+.social-review .btn{border-radius:11px}
+.social-review .btn:disabled{opacity:.45;cursor:not-allowed}
+.social-validation{font-size:12px;line-height:1.65;color:#dbad92;background:rgba(162,83,41,.08);border-radius:10px;padding:10px;margin-top:10px}
+.social-preview-top{display:flex;justify-content:space-between;gap:10px;color:#e3d09b;font-size:12px;margin:0 0 12px;font-weight:800}
+.social-paper{min-height:385px;max-height:670px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;unicode-bidi:plaintext;border-radius:13px;padding:clamp(14px,3vw,25px);color:#243327;background:#f9f5e7;font-size:15px;line-height:1.86;letter-spacing:0;font-family:Georgia,Arial,sans-serif;box-shadow:inset 0 0 0 1px rgba(160,127,54,.15)}
+.social-preview label{display:block;margin:15px 0 7px;font-size:12px;color:#e3d09b}
+.social-copy{display:block;width:100%;margin-top:12px;min-height:46px;font-size:13px;font-weight:800}
+#socialNotice{min-height:18px;color:#c2d8bb;font-size:12px;line-height:1.5}
+.social-footer{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.social-import{position:relative;cursor:pointer}
+.social-small{margin:15px 0 0}
+@media(max-width:900px){.social-langs{grid-template-columns:repeat(3,minmax(0,1fr))}.social-grid{grid-template-columns:1fr}.social-editor textarea{min-height:300px}.social-paper{min-height:280px;max-height:550px}}
+@media(max-width:480px){.social-header{flex-wrap:wrap}.social-meta{grid-template-columns:1fr}.social-lang{min-height:50px}.social-review-state{flex-direction:column;align-items:stretch}.social-footer .btn{flex:1 1 100%}}
