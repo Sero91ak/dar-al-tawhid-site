@@ -6,7 +6,9 @@ const inventory=require(path.join(__dirname,"adult-ui-web-inventory.cjs"));
 const code=fs.readFileSync(path.join(__dirname,"../assets/dar-test-turkish-ui.js"),"utf8");
 const expected=["de","tr","en","ar","ku","ckb","bs","fr","es"];
 const translated=["tr","en","ar","ku","ckb","bs","fr","es"];
-const expectedUiTextCount=421+inventory.expandedWebKeys.length+inventory.readerChromeKeys.length;
+const baselineUiTextCount=421+inventory.expandedWebKeys.length+inventory.readerChromeKeys.length;
+const referenceUiKeys=Object.keys(locales.translations.en);
+const expectedUiTextCount=referenceUiKeys.length;
 assert.deepEqual(locales.availableLocales,expected);
 assert.deepEqual(locales.translatedLocales,["de",...translated]);
 assert.deepEqual(locales.pendingLocales,[]);
@@ -16,7 +18,9 @@ const countByLocale={};
 for(const locale of translated){
  const dict=locales.translations[locale];
  const values=Object.keys(dict);
+ assert(referenceUiKeys.length>=baselineUiTextCount,"UI catalog shrank below the reviewed baseline");
  assert.equal(values.length,expectedUiTextCount,locale+" UI inventory count");
+ assert.deepEqual(values.slice().sort(),referenceUiKeys.slice().sort(),locale+" UI keys diverged");
  assert(values.every(x=>x.trim()&&typeof dict[x]==="string"&&dict[x].trim()));
  for(const key of inventory.expandedWebKeys)assert(dict[key]?.trim(),locale+" missing expanded web UI key "+key);
  for(const key of inventory.readerChromeKeys)assert(dict[key]?.trim(),locale+" missing reader chrome key "+key);
@@ -30,7 +34,8 @@ const nodes=[
  {nodeType:3,nodeValue:"Startseite",parentElement:{closest:()=>null}},
  {nodeType:3,nodeValue:"Gebetszeiten",parentElement:{closest:()=>null}},
  {nodeType:3,nodeValue:"Originalquellen bleiben unverändert",parentElement:{closest:()=>({immutable:true})}},
- {nodeType:3,nodeValue:"الْقُرْآنُ",parentElement:{closest:()=>null}}
+ {nodeType:3,nodeValue:"الْقُرْآنُ",parentElement:{closest:()=>null}},
+ {nodeType:3,nodeValue:"← Zurück",parentElement:{closest:()=>null}}
 ];
 const doc={
  documentElement:{lang:"de",dir:"ltr"},body:{nodeType:1,closest:()=>null,getAttribute:()=>null},
@@ -50,6 +55,8 @@ for(const locale of expected){
  assert.equal(nodes[1].nodeValue,prayer,locale+" prayer");
  assert.equal(nodes[2].nodeValue,"Originalquellen bleiben unverändert","canonical content MUST remain unchanged");
  assert.equal(nodes[3].nodeValue,"الْقُرْآنُ","Arabic original must remain unchanged");
+ const back=locale==="de"?"Zurück":locale==="tr"?"Geri":locales.translations[locale].Zurück;
+ assert.equal(nodes[4].nodeValue,"← "+back,locale+" composed back label");
  assert.equal(doc.documentElement.lang,locale);
  assert.equal(doc.documentElement.dir,["ar","ckb"].includes(locale)?"rtl":"ltr");
 }

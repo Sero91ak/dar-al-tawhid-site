@@ -358,7 +358,47 @@ function isDynamicGermanUi(value){
   /^.{2,90}, \d+ Veröffentlichungen$/.test(value)||
   /^.{2,90} · \d+ Seiten$/.test(value)||
   /^(Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonntag), \d{1,2}\. (Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember) /.test(value)||
-  (/^.{2,160} öffnen$/.test(value)&&!/[\u0600-\u06ff<>]/.test(value));
+  (/^.{2,160} öffnen$/.test(value)&&!/[\u0600-\u06ff<>]/.test(value))||
+  /^(?:←|→|↗|‹|›)\s+\S/.test(value)||
+  /^Alle\s+\S/.test(value)||
+  /\swird geladen/.test(value)||
+  /^\d+\s+Duʿāʾ$/.test(value);
+}
+function lookupPack(value,language){
+ if(language==="tr"){
+  if(dictionary.has(value))return dictionary.get(value);
+  const extra=languagePacks.get("tr")?.get(value);
+  if(extra!==undefined)return extra;
+  return undefined;
+ }
+ return languagePacks.get(language)?.get(value);
+}
+function translateComposed(value,language){
+ const direct=lookupPack(value,language);
+ if(direct!==undefined)return direct;
+ const wrapped=value.match(/^(\s*(?:←|→|↗|‹|›)\s*)(.+?)(\s*(?:→|↗|›))?\s*$/);
+ if(wrapped){
+  const inner=lookupPack(wrapped[2].trim(),language);
+  if(inner!==undefined)return wrapped[1]+inner+(wrapped[3]||"");
+ }
+ const alle=value.match(/^Alle\s+(.+?)(\s*[→↗›])?$/);
+ if(alle){
+  const all=lookupPack("Alle",language);
+  const rest=lookupPack(alle[1].trim(),language);
+  if(all!==undefined&&rest!==undefined)return all+" "+rest+(alle[2]||"");
+ }
+ const loading=value.match(/^(.+?)\s+wird geladen\s*…?$/);
+ if(loading){
+  const noun=lookupPack(loading[1].trim(),language);
+  const verb=lookupPack("wird geladen",language);
+  if(noun!==undefined&&verb!==undefined)return noun+" "+verb;
+ }
+ const duas=value.match(/^(\d+)\s+Duʿāʾ$/);
+ if(duas){
+  const word=lookupPack("Duʿāʾ",language);
+  if(word!==undefined)return duas[1]+" "+word;
+ }
+ return null;
 }
 function germanSourceOf(text){
  const value=String(text||"");
@@ -409,6 +449,8 @@ function translateExact(value,language="tr"){
   "NEUESTER BEITRAG":{tr:"EN YENİ YAZI",en:"LATEST ARTICLE",ar:"أحدث مقال",ku:"NIVÎSA HERÎ NÛ",ckb:"نوێترین بابەت",bs:"NAJNOVIJI TEKST",fr:"ARTICLE LE PLUS RÉCENT",es:"ARTÍCULO MÁS RECIENTE"}
  };
  if(editorialLabels[value]?.[language])return editorialLabels[value][language];
+ const composed=translateComposed(value,language);
+ if(composed!==null&&composed!==undefined)return composed;
  if(language!=="tr"){
   const exact=languagePacks.get(language)?.get(value);
   if(exact!==undefined)return exact;
