@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="robots" content="noindex,nofollow">
+  <title>DAR Visual Design Studio · Entwicklung</title>
+  <link rel="stylesheet" href="./studio.css">
+  <script src="./studio.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">۞</span>
+      <span class="brand-name">DAR <strong>Visual Studio</strong><small>DESIGN · ENTWICKLUNG</small></span>
+    </div>
+    <div class="project-identity"><span class="project-dot"></span> DAR AL TAWḤĪD <span class="separator">/</span> <b id="projectName">Entwurf 01</b></div>
+    <div class="top-actions">
+      <span class="autosave" id="saveStatus" aria-live="polite">Nur lokal gespeichert</span>
+      <button class="tool-button" id="undoBtn" title="Rückgängig (Strg/⌘ Z)" aria-label="Rückgängig">↶</button>
+      <button class="tool-button" id="redoBtn" title="Wiederholen (Strg/⌘ Umschalt Z)" aria-label="Wiederholen">↷</button>
+      <button class="button subtle" id="newBtn">Neu</button>
+      <button class="button subtle" id="importBtn">Import</button>
+      <button class="button primary" id="exportBtn">↗ Export</button>
+      <input type="file" id="importFile" accept=".json,application/json" hidden>
+    </div>
+  </header>
+  <main class="workspace">
+    <aside class="sidebar">
+      <div class="side-top">
+        <span class="eyebrow">ARBEITSBEREICH</span>
+        <h2>Seiten & Elemente</h2>
+        <div class="mode-choice" role="group" aria-label="Arbeitsmodus">
+          <button id="canvasMode" class="active" aria-pressed="true">✦ Entwurf</button>
+          <button id="liveMode" aria-pressed="false">◉ DAR Test</button>
+        </div>
+      </div>
+      <section class="sidebar-section">
+        <div class="section-title">SEITEN <button id="addPageBtn" title="Neue Entwurfsseite">＋</button></div>
+        <div id="pageList" class="page-list"></div>
+      </section>
+      <section class="sidebar-section components-section" id="componentsSection">
+        <div class="section-title">BAUSTEINE <span class="muted">Klick = einsetzen</span></div>
+        <input class="search" id="componentSearch" placeholder="Baustein suchen …" aria-label="Bausteine suchen">
+        <div id="componentList" class="component-list"></div>
+      </section>
+      <section class="sidebar-section layers-section">
+        <div class="section-title">EBENEN <span class="muted" id="layerCount">0</span></div>
+        <div id="layerList" class="layer-list"></div>
+      </section>
+      <div class="side-note">GESCHÜTZTER ENTWURF<br><span>Keine Änderung an main, Test-App, Besucher-App oder Push. Export ist kein Deployment.</span></div>
+    </aside>
+
+    <section class="center">
+      <div class="canvas-toolbar">
+        <div class="field-device">
+          <label for="deviceSelect">Gerät</label>
+          <select id="deviceSelect" aria-label="Gerätevorschau"></select>
+        </div>
+        <div class="device-dims"><span id="deviceWidth">430</span> × <span id="deviceHeight">932</span> px</div>
+        <button id="rotateBtn" class="tool-button" title="Gerät drehen">⤾</button>
+        <div class="toolbar-separator"></div>
+        <label class="compact-field">Zoom <select id="zoomSelect"><option value="fit">Einpassen</option><option value="0.4">40 %</option><option value="0.5">50 %</option><option value="0.6">60 %</option><option value="0.75">75 %</option><option value="1">100 %</option><option value="1.25">125 %</option></select></label>
+        <label class="switchline"><input id="gridToggle" type="checkbox"> Raster</label>
+        <label class="switchline"><input id="safeToggle" type="checkbox" checked> Safe Area</label>
+        <div class="grow"></div>
+        <span id="modeHint" class="mode-hint">Visuelle Arbeitsfläche</span>
+      </div>
+      <div class="viewport" id="viewport">
+        <div class="board" id="board">
+          <div class="device-shell" id="deviceShell">
+            <div class="device-screen" id="deviceScreen">
+              <div class="canvas-page" id="canvasPage"></div>
+              <iframe id="testPreview" title="Vorschau der bestehenden DAR-Test-App" loading="lazy" referrerpolicy="no-referrer" hidden></iframe>
+              <div class="safe-outline" id="safeOutline"></div>
+              <div class="device-status" id="deviceStatus"><span>9:41</span><span>◉ ▂▃▅ ▰</span></div>
+            </div>
+          </div>
+          <div class="board-caption" id="boardCaption">DAR Entwurf · unabhängig von der Besucher-App</div>
+        </div>
+      </div>
+      <footer class="canvas-footer">
+        <span id="bottomInfo">Ein Element anklicken, um es rechts zu bearbeiten. Ziehen zum Verschieben.</span>
+        <span><span class="kbd">⌘</span> + <span class="kbd">Z</span> Rückgängig</span>
+      </footer>
+    </section>
+
+    <aside class="inspector">
+      <div class="inspector-top"><span class="eyebrow">INSPEKTOR</span><h2 id="inspectorTitle">Eigenschaften</h2><p id="inspectorSubtitle">Wähle ein Element auf der Designfläche.</p></div>
+      <div class="inspect-placeholder" id="inspectPlaceholder"><span class="inspect-symbol">◇</span><h3>Gestalten ohne Code</h3><p>Bausteine links hinzufügen, auf der Fläche anklicken und hier Größe, Farben, Abstände und Typografie bearbeiten.</p></div>
+      <div id="propertyPanel" hidden>
+        <div class="prop-group">
+          <h3>Inhalt</h3>
+          <label for="propLabel">Ebenenname</label><input id="propLabel" data-prop="name">
+          <label for="propText">Text / Symbol</label><textarea id="propText" data-prop="text" rows="3"></textarea>
+          <div id="liveSelectorWrap" hidden><label>CSS-Selektor (Vorschau)</label><code id="liveSelector"></code></div>
+        </div>
+        <div class="prop-group">
+          <h3>Position und Größe</h3>
+          <div class="form-grid">
+            <label>X (%)<input type="number" id="propX" data-prop="x" min="0" max="100" step="0.5"></label>
+            <label>Y (px)<input type="number" id="propY" data-prop="y" min="0" step="1"></label>
+            <label>Breite (%)<input type="number" id="propW" data-prop="w" min="1" max="100" step="0.5"></label>
+            <label>Höhe (px)<input type="number" id="propH" data-prop="h" min="4" step="1"></label>
+          </div>
+          <div class="hint">Positionswerte beziehen sich auf das Vorschau-Gerät. Breiten passen sich proportional an.</div>
+        </div>
+        <div class="prop-group">
+          <h3>Typografie</h3>
+          <label>Schriftfamilie<select id="propFont" data-prop="font"><option value="system-ui">System / Modern</option><option value="Georgia">Georgia · klassisch</option><option value="Arial">Arial</option><option value="Trebuchet MS">Trebuchet MS</option><option value="Times New Roman">Times New Roman</option><option value="Tahoma">Tahoma</option><option value="Amiri, Georgia, serif">Amiri · Arabisch (falls installiert)</option><option value="Noto Naskh Arabic, Georgia, serif">Noto Naskh Arabic (falls installiert)</option></select></label>
+          <div class="form-grid">
+            <label>Schriftgröße<input type="number" id="propFontSize" data-prop="fontSize" min="6" max="200"></label>
+            <label>Gewicht<select id="propWeight" data-prop="weight"><option value="400">Normal</option><option value="500">Medium</option><option value="600">Halbfett</option><option value="700">Fett</option><option value="800">Extrakaräftig</option></select></label>
+          </div>
+          <label>Ausrichtung<select id="propAlign" data-prop="align"><option value="left">Links</option><option value="center">Mitte</option><option value="right">Rechts</option></select></label>
+        </div>
+        <div class="prop-group">
+          <h3>Oberfläche</h3>
+          <div class="form-grid">
+            <label>Textfarbe<input type="color" id="propColor" data-prop="color"></label>
+            <label>Hintergrund<input type="color" id="propBg" data-prop="bg"></label>
+            <label>Radius (px)<input type="number" id="propRadius" data-prop="radius" min="0" max="400"></label>
+            <label>Rand (px)<input type="number" id="propBorder" data-prop="border" min="0" max="30"></label>
+            <label>Deckkraft (%)<input type="number" id="propOpacity" data-prop="opacity" min="0" max="100"></label>
+            <label>Innenabstand<input type="number" id="propPadding" data-prop="padding" min="0" max="100"></label>
+          </div>
+        </div>
+        <div class="prop-group">
+          <h3>Ebenenwerkzeuge</h3>
+          <div class="action-grid">
+            <button id="duplicateBtn" class="button subtle">⧉ Duplizieren</button>
+            <button id="frontBtn" class="button subtle">↑ Nach vorne</button>
+            <button id="backBtn" class="button subtle">↓ Nach hinten</button>
+            <button id="deleteBtn" class="button danger">✕ Entfernen</button>
+          </div>
+        </div>
+      </div>
+      <div class="inspector-bottom">
+        <button class="button outline wide" id="exportHtmlBtn">HTML-Vorschau exportieren</button>
+        <span>Der Export speichert eine Datei lokal. Kein automatischer Push.</span>
+      </div>
+    </aside>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</div>
+</body>
+</html>
