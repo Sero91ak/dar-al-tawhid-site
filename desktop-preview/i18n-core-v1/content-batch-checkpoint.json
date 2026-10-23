@@ -33,9 +33,17 @@
     16,
     17,
     18,
-    19
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27
   ],
-  "nextBatch": 20,
+  "nextBatch": 28,
   "items": [
     {
       "id": "post:354-547",
@@ -3254,6 +3262,1366 @@
       "id": "post:hukm-muhakamah-kein-herzenswiderstand-399",
       "sourceHash": "30eb339a942ff288d80924e4eb14dd549f19ecf2d14b0abae9999a0f11e7b776",
       "batch": 19,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-kein-iman-ohne-taslim-374",
+      "sourceHash": "8aaeba6aa13dffc75818e13467375dfa81ed3f8b734beb7f5afde55732120ab8",
+      "batch": 20,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-kein-urteil-ohne-wissen-407",
+      "sourceHash": "c036af73e8e1525a9319f1c59fa60bb045edc92590e92ba1a0be141bcab64d7b",
+      "batch": 20,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-keiner-traegt-schuld-eines-anderen-413",
+      "sourceHash": "432641006502c0132f47906deae7cd634f6fb48cd0fba84f2ceec4993293a826",
+      "batch": 20,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-kufr-begriff-braucht-tafsil-383",
+      "sourceHash": "30e74ee12fd57319708e6d58cc998c9b2da59965bbb3e442c62332e38297eb7c",
+      "batch": 20,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-kufr-zulm-fisq-zusammen-386",
+      "sourceHash": "df550632e9486a2644cb845b890db6bfb5fe53c94f57a0406fc0f080817d38ec",
+      "batch": 20,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-leugnung-und-anerkennung-372",
+      "sourceHash": "4fde5db2eb3422d698034151329e053bce0fee2c95e74436475605c7da2243b6",
+      "batch": 20,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-luege-gegen-allah-halal-haram-380",
+      "sourceHash": "6561baf2b1ff82d975b34e9f3888c5d8ada7e5a6d61ced6708c2ee73efb0dcf6",
+      "batch": 20,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-muhkam-und-mutashabih-371",
+      "sourceHash": "60a00246a080063b3809c98a498d3f07f6e91a4b26a5195ca1bad7a059f35e92",
+      "batch": 20,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-nicht-fuer-verraeter-streiten-392",
+      "sourceHash": "878c1757f752f00e19bd9f7063390ee6ab2a606af14f5fad3a6da48a6260d75b",
+      "batch": 20,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-nicht-fuer-verraeter-streiten-416",
+      "sourceHash": "c15625c100cb1b0c99ab1023ecca777e84f40675ac0ad2cf0545427d68f4c924",
+      "batch": 20,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-nifaq-abwendung-vom-urteil-369",
+      "sourceHash": "ff0c52ffab80b8b52838d45af70c42b80f2d582987be6e8b8af160b7dbdd7878",
+      "batch": 21,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-offenbarung-erklaert-alles-370",
+      "sourceHash": "4948813431d873fc122e1ac962ce8e6629cf706de7d0f3f42ac45fadeb64fc13",
+      "batch": 21,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-offenbarung-muss-uebermittelt-werden-430",
+      "sourceHash": "9cf72990258e1875c38e96f3d8eb1efb74733b24ea38eb13821d394f20c0f886",
+      "batch": 21,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-partner-in-gesetzgebung-379",
+      "sourceHash": "56bccb29bef88958a50284958e77326386ec58c31c24e62545a9a8944af7b0ab",
+      "batch": 21,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-qurtubi-zwei-faelle-357",
+      "sourceHash": "7211177525794b85cc3568a20ad3c8c253fcc7c1ea8bc2b64168ad504a2912fc",
+      "batch": 21,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-rabbiner-als-herren-376",
+      "sourceHash": "ca593431dd34d42ebc01d7acfed21a2d8e6a2a5fc2f230fa35bfb2621173f0da",
+      "batch": 21,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-radd-des-quran-387",
+      "sourceHash": "6e67a244b5213f4ad72fa12032605ce03232bc165777ccf78877c7208dab6cb7",
+      "batch": 21,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-rajm-fall-tahrif-359",
+      "sourceHash": "6586baa20022a3080d85ed7ffef4c60ee0595bff6bf580bdad1dec151e8968fd",
+      "batch": 21,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-reform-mit-gerechtigkeit-408",
+      "sourceHash": "e9a6b2d6a00d9562c150624d9b8da221ba1820f68d53a102360edc1608ebb0ce",
+      "batch": 21,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-richte-mit-gerechtigkeit-385",
+      "sourceHash": "39ca4aefa393a3d06a50c7d283a6f588d62834b553f552f336e8ae2233cc3d9a",
+      "batch": 21,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-richten-nach-offenbarung-362",
+      "sourceHash": "fbbfed887b6aa7a0e9fea5557c6a02710d5d765f6ed1ab1f9ed7ec4146d8f58c",
+      "batch": 22,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-richter-braucht-istighfar-415",
+      "sourceHash": "43ae45fa89537d011d31765281ddaacb8665ce4e6827d6360491efb83fd24060",
+      "batch": 22,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-scheinargumente-der-heuchler-396",
+      "sourceHash": "6a0c454cccd38a22e67631e180b0c1b9e48efb1f13778a5cb6a61a4e10ce72f9",
+      "batch": 22,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-schlussstein-kufr-duna-kufr-393",
+      "sourceHash": "1ad473553c9737a9ecf97f22352d130fb060de7032078da37391ac05eb481cb2",
+      "batch": 22,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-schuld-auf-sich-selbst-419",
+      "sourceHash": "99ac0ba1adfa5acd863676e8de55e6244c199211e92924dd5113adb0c4504a13",
+      "batch": 22,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-schuld-nicht-auf-unschuldige-420",
+      "sourceHash": "5dac36bd6c2c83ccd2fd11b2904b8ab24da05fa8463e99b4e3936d3752cd80d2",
+      "batch": 22,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-shariah-als-befehl-allahs-390",
+      "sourceHash": "f8d47dbf0462d1d4ffed2b8c24cd05f9a1cc26bc0d4fd88c4a13e1f0440bd564",
+      "batch": 22,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-sicherheit-durch-tauhid-412",
+      "sourceHash": "b30fb0d776bd1937335388a518d1797f34f738ee99c5f4900cc77dbbcc51ce74",
+      "batch": 22,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-streit-zurueck-zu-allah-und-gesandtem-404",
+      "sourceHash": "a4050abc223c5a4023fea827ed5a092fb80395a423d51eb9b71a7b423ab38b4c",
+      "batch": 22,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-suddi-544-warnung-an-juden-364",
+      "sourceHash": "0eb2cd63056e33a9316ee96467f017e52fe0e268b1dbb98b7240198fb22b6d7e",
+      "batch": 22,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-suht-und-luegenhoeren-384",
+      "sourceHash": "9dd7bfc5836b8f710b2c97ff1b31b73253a5205736aca658d612496b50bdbe4f",
+      "batch": 23,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-sunnah-erklaert-den-quran-423",
+      "sourceHash": "bfd788283cd3a6d7cd935ae04f118c685b11e2b388ea84cdb2562aa8bf41c038",
+      "batch": 23,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-sura-verpflichtend-gemacht-391",
+      "sourceHash": "23fefd0727ba9b0bc15cf745d4406a9ca6f05f6edb06a0259331110318fd1d47",
+      "batch": 23,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-tabari-tahrif-und-ersetzung-356",
+      "sourceHash": "b1edd554727f2f9c90aed2198c564336952f8c29e46520bffcf42f6039636ea0",
+      "batch": 23,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-taghut-verleugnen-394",
+      "sourceHash": "0f5a61c4d76a91d256058d19d644c475bbd3e3c23af7ac52ee9ea03240a7a086",
+      "batch": 23,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-tahakum-zum-taghut-360",
+      "sourceHash": "63a8362526e953f1de3a166cb7ea9629591aeb37c0bdef0180527b6f624f6174",
+      "batch": 23,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-tahkim-fremder-gesetze-istihlal-545",
+      "sourceHash": "76e4dd86c8713dfcd1c55dd5ef6b540de115b0247ec205238b63a29d46ab1f83",
+      "batch": 23,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-tahrif-wenn-urteil-nur-passt-368",
+      "sourceHash": "7a0af82bb9e565b35de01eddf1d3a3fe97745d5bc489c12f702e30d276e913f8",
+      "batch": 23,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-taschri-ohne-erlaubnis-allahs-361",
+      "sourceHash": "5178bd5860e95666a764316b07af762c2e14571b963f45a0193881800ebf74ba",
+      "batch": 23,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-taschri-von-satanswegen-403",
+      "sourceHash": "9a4d2fbf9ac0449c7f01f1e7f8f00bb889e561f18cb256d8c7fba5ffbc9cc263",
+      "batch": 23,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-taubah-nach-sunde-418",
+      "sourceHash": "4426fa0b410f01e85cc8104dc4d33359eb5c3955e061f2d27d1e389574f23f8d",
+      "batch": 24,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-tawakkul-im-gehorsam-433",
+      "sourceHash": "66df70533c680330653c00c7158941f39079c2bfb52dda27149dc8e9098c110d",
+      "batch": 24,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-tawus-kein-austritt-aus-millah-365",
+      "sourceHash": "310187fdb7fe41c176a8c64e6674c7efb2b401a283981f4c7ace8d7f6173c304",
+      "batch": 24,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-urteil-der-jahiliyyah-366",
+      "sourceHash": "31cd2ac85a73bbb1e628656ad5e299dea81ad8a197a64507ed19204199367ccc",
+      "batch": 24,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-urteil-nach-dem-was-allah-zeigte-414",
+      "sourceHash": "a1fa7236309b6894a78e5ba2468cffa9555bb1e8b46c1ff216dcfa62e743c99c",
+      "batch": 24,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-verbietet-nicht-das-erlaubte-378",
+      "sourceHash": "5b3e77d3d543d9509bf5de66f3a93a7b194902d0a5479f4e8966c003686fec6f",
+      "batch": 24,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-verborgenes-wird-offengelegt-428",
+      "sourceHash": "95b6fec4a136c66350f03a81fd908fd636c089184e6b57fc61e5c627c7fb1ee0",
+      "batch": 24,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-vergessen-des-geoffenbarten-427",
+      "sourceHash": "9f51c1dee7b0d96464837f897425931c7fd27ed90c77fd012b91b437d70ea0b6",
+      "batch": 24,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-verpflichtende-verse-422",
+      "sourceHash": "f079896c3a316e7d2a887ae537f379a4b365add32a73d7a2224b530f31232ae9",
+      "batch": 24,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-vom-dunkel-zum-licht-429",
+      "sourceHash": "0f7bee0aad347baa33ec42a09601117abd8467854cc0a7010927acdcbe5a3132",
+      "batch": 24,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-weg-der-glaeubigen-421",
+      "sourceHash": "69200f0291ee25a069fa7573af353880ca6aaee3f959aa6ac04fcd6129d408e2",
+      "batch": 25,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-wenn-es-passt-nehmen-sie-es-388",
+      "sourceHash": "14a1f0d7bf726d760d6d2abff8d060160cb55dd54d0acc6e2079e779a9661924",
+      "batch": 25,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-wir-hoeren-und-gehorchen-375",
+      "sourceHash": "e27704334e6b682b57d6aa0b066c255ca92f0211087c647c3c8268a87bc38d13",
+      "batch": 25,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-zusammenfassung-grenze-kufr-363",
+      "sourceHash": "220638908ce34d15ab74ecdc85477b489bab62094668f9b7adee456e05a6840b",
+      "batch": 25,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:hukm-muhakamah-zwei-wege-glaube-und-ablehnung-432",
+      "sourceHash": "b182b166df888fcd2d123fdf73fb07536df76509a7369d7c57509697e7c0022c",
+      "batch": 25,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-abbas-rabbaniyin-hilm-fiqh-549",
+      "sourceHash": "801d8bda0d5fbae4e4ac6e0b7ad5e952d609602c86af581e0301261a739b51ec",
+      "batch": 25,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-abd-al-barr-istiwa-sprache-bekannt-135",
+      "sourceHash": "fdae4c8891ebf1496672596761a4846a7695a9605633360be1200c4641e32994",
+      "batch": 25,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-abd-al-barr-nuzul-ohne-kayf-137",
+      "sourceHash": "31d4faac5fd3f65b8416da2155c229ac0fabec1492c6cf0b82c5825c4628d1c2",
+      "batch": 25,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-abd-al-barr-nuzul-ohne-kayf-slides-426",
+      "sourceHash": "e27fb1a68b9120d6c67380b8c42036eab9d54550e3a142a99d72fa283ca71819",
+      "batch": 25,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-al-mubarak-zuhd-001",
+      "sourceHash": "7c53de78504fa00c1dc9a87d924e174a2ba2803c4e068ade1d294977a64f2314",
+      "batch": 25,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-battah-ahl-al-bidah-nicht-zum-herzen-lassen-294",
+      "sourceHash": "c0f07f6e8b2383d5c8e755d4c2d116b8d75352deb5f77ecf96cfbc206aff940c",
+      "batch": 26,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-battah-das-fundament-ist-festhalten-an-der-jamaah-293",
+      "sourceHash": "8622984a50b781884564f0c2442725c2e30ffeda8088a96b7625fa2369ec95a3",
+      "batch": 26,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-battah-die-sunnah-ist-rettung-vor-spaltung-295",
+      "sourceHash": "23352572e663eb451ae7c56de4a1b8eb97392469077f3b6d311385fbf7b7bb5e",
+      "batch": 26,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-masud-glaeubige-fuerchtet-suenden-165",
+      "sourceHash": "a401b21e0e277acb56596f105c750ec7292e250d6179af47332d2867bd45a030",
+      "batch": 26,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-masud-ittiba-athar-001",
+      "sourceHash": "c4fdd5f7c27901b3360b37a9d5e6f2e7d52e3156e2c2d30018ab0077322d4781",
+      "batch": 26,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-masud-jamaah-wahrheit-466",
+      "sourceHash": "ba33a9162f7634bf60e6c546f276d5fe458a850d6ea38a0fc182e203d54db425",
+      "batch": 26,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-masud-mira-zerstoert-mehr-als-sie-klaert-427",
+      "sourceHash": "47ad43d69e0269b9dd85089e7249d4276dfe814d53633df329e906cef0d314fe",
+      "batch": 26,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-masud-opfere-vergaengliche-fuer-bleibende-34519",
+      "sourceHash": "f15165ee3e1dac65d76ed76091d1dc5de67e6fad6ce57236b330621dc31fbb7f",
+      "batch": 26,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-masud-wenig-sunnah-besser-als-viel-bidah-351",
+      "sourceHash": "9fbd2d423b431f89bf6d87e453eba5a9494eb84cc780d0cf40d0c1d0a18b1435",
+      "batch": 26,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-masud-wenn-fiqh-wenig-wird-443",
+      "sourceHash": "c774c7c946790c7988741ca5088fe11c729bb10fd49b509bccd66744c3772514",
+      "batch": 26,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-masud-wissen-verlangt-handeln-459",
+      "sourceHash": "dc0cf0249e9b05cf0e1ed7e48c3b07d91c92d3e51389ed7a39f50aaafb6c7d46",
+      "batch": 27,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-qutaybah-ahl-al-hadith-bewahren-die-uberlieferung-296",
+      "sourceHash": "6a49b2e9d7e6b22059a17fea33453c2ae467e92febb22855398bfbd298fc2fd7",
+      "batch": 27,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-qutaybah-scheinbarer-widerspruch-wird-mit-wissen-geloest-297",
+      "sourceHash": "960b3747c278020cea516c0c5dc16292d72ea7dc6bace0386b508d0f7254023c",
+      "batch": 27,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-sirin-wissen-vorbildliche-lebensfuehrung-20261019-479",
+      "sourceHash": "bce23263851d6af09e69fc40a1489ad08cd6315dfcceb497989c59560bc9a012",
+      "batch": 27,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-taymiyyah-ghulat-takfir-durch-suenden-352",
+      "sourceHash": "304a492e6390f475809cc2c520ce40c07da46f454b0afcfb48cf9d475bcdcae1",
+      "batch": 27,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ibn-taymiyyah-mittler-zur-anrufung-gemacht-164",
+      "sourceHash": "1c7b1b5fba087d4ca4761815e334c190cf9853978b6da12184b68823e9698e89",
+      "batch": 27,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ijma-auch-einzeln-uberlieferter-konsens-hat-beweiskraft-217",
+      "sourceHash": "7e648b111010026b873506b88a8d2762a0378107d78a97b4c16e223407a813fa",
+      "batch": 27,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ijma-keine-totung-unter-zwang-218",
+      "sourceHash": "da053de49e3afd1ee6202f750a0f75fd76047491a724bf14fb0c156f0a95ef8b",
+      "batch": 27,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ijma-nafaqah-ist-durch-buch-sunnah-und-konsens-verpflichtend-219",
+      "sourceHash": "7811031a8e9802e946eaacf9fc8276ab9237f5d2d034835c8f705bb2a1d09062",
+      "batch": 27,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ijma-riba-ist-durch-quran-sunnah-und-konsens-verboten-216",
+      "sourceHash": "c199fafacab11d8aca84597e16d76490cc58c9486f5bb4a0cb29f307f2a3bb62",
+      "batch": 27,
       "status": "draft",
       "humanApproval": false,
       "locales": {
