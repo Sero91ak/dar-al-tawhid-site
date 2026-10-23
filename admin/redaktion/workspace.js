@@ -1,5 +1,7 @@
 (function(){
 "use strict";
+// Embedded Admin workspace: do not duplicate the top-level Admin masthead.
+if(window.parent!==window)document.body.classList.add("dar-editor-embedded");
 const LANGS=[
 ["de","Deutsch","ltr"],["ar","العربية · Fuṣḥā","rtl"],["en","English","ltr"],
 ["tr","Türkçe","ltr"],["ku","Kurmancî","ltr"],["ckb","سۆرانی","rtl"],
