@@ -456,3 +456,14 @@ body.dar-admin-workspace .folder-grid,body.dar-admin-workspace .quellen-grid{wid
   padding:clamp(24px,3.5vw,47px)!important
  }
 }
+
+/* Fold landscape at 700–819px: retain full-width master/detail for Admin's
+   contribution and source manager, rather than falling back to stacked cards. */
+@media(min-width:700px) and (max-width:819px) and (orientation:landscape){
+ body.dar-admin-workspace #panel .quellen-grid{
+  display:grid!important;grid-template-columns:minmax(232px,34%) minmax(0,66%)!important
+ }
+ body.dar-admin-workspace #panel .quellen-grid>.panel+.panel{
+  padding-left:14px!important;border-left:1px solid var(--dar-c-border)!important
+ }
+}
