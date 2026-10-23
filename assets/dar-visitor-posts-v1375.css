@@ -1894,3 +1894,106 @@ html[data-theme] body.is-post-route .post-reader .dar-fazit-isolated .post-fazit
   color:var(--text)!important;
   overflow-wrap:break-word!important;
 }
+
+
+/* DAR_ADULT_POSTS_IMMERSIVE_MOTION_V3_20261023
+ * Visitor Beiträge / topic pages / individual post reader.
+ * Use EACH existing photographic hero as its one actual image surface.
+ * No cloned fixed background, DOM rewrite, JS scroll interception or text
+ * modifications. Search, reader, slide controls, source links remain intact.
+ */
+/* Image fades into the next section instead of ending in a hard color seam.
+ * The existing hero media, clipping, and full-bleed width are preserved. */
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head,
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title{
+  isolation:isolate!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head::after,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head::after,
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title::after{
+  content:"";
+  display:block;
+  position:absolute;
+  inset:auto 0 0;
+  height:clamp(24px,7svh,82px);
+  pointer-events:none;
+  border:0;
+  background:linear-gradient(
+    to bottom,
+    transparent 0%,
+    color-mix(in srgb,var(--bg,#0d1a1a) 46%,transparent) 66%,
+    color-mix(in srgb,var(--bg,#0d1a1a) 83%,transparent) 100%
+  );
+  z-index:0;
+}
+/* Preserve all titles, filters and live action controls above the photo veil. */
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head > *,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head > *,
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title > *{
+  position:relative;
+  z-index:1;
+}
+/* A single motion language for category rows, post lists, topic chips
+ * and next/previous readers. Do not animate Qur'an/Arabic quotation bodies. */
+@media(prefers-reduced-motion:no-preference){
+  html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route) #appView :is(
+    .post-row,.post-nav-card,.post-reader-top-btn,.dar-tl-chip
+  ){
+    transition:
+      transform .36s cubic-bezier(.2,1.18,.3,1),
+      box-shadow .3s ease,
+      border-color .3s ease;
+    transform-origin:center center;
+  }
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route) #appView :is(
+    .post-row,.post-nav-card,.post-reader-top-btn,.dar-tl-chip
+  ):hover{
+    transform:translate3d(0,-2px,0);
+  }
+}
+@media(pointer:coarse) and (prefers-reduced-motion:no-preference){
+  html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route) #appView :is(
+    .post-row,.post-nav-card,.post-reader-top-btn,.dar-tl-chip
+  ):active{
+    transform:scale(.982);
+  }
+}
+/* Keyboard focus must remain visible even where legacy card rules remove
+ * the standard outline. */
+html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route) #appView :is(
+  .topics-theme-card,.post-row,.post-nav-card,.post-reader-top-btn,.dar-tl-chip
+):focus-visible{
+  outline:2px solid var(--theme-accent,var(--gold2,#c6aa74))!important;
+  outline-offset:3px!important;
+}
+@supports (animation-timeline:view()){
+  @media(prefers-reduced-motion:no-preference){
+    html[data-theme] body.is-topics-route #appView .dar-tl-grid > .topics-theme-card,
+    html[data-theme] body.is-topic-route #appView .topic-collection > .post-row{
+      animation:darPostListRevealV3 linear both;
+      animation-timeline:view(block);
+      animation-range:entry 0% entry 24%;
+    }
+    @keyframes darPostListRevealV3{
+      from{opacity:.88;transform:translate3d(0,8px,0)}
+      to{opacity:1;transform:translate3d(0,0,0)}
+    }
+    html[data-theme] body.is-topics-route #appView .dar-tl-grid > .topics-theme-card:is(:focus-visible,:active),
+    html[data-theme] body.is-topic-route #appView .topic-collection > .post-row:is(:focus-visible,:active){
+      animation:none!important;
+      opacity:1!important;
+    }
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route) #appView :is(
+    .topics-theme-card,.post-row,.post-nav-card,.post-reader-top-btn,.dar-tl-chip
+  ){
+    animation:none!important;
+    transition:none!important;
+    transform:none!important;
+  }
+}
