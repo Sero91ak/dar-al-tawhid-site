@@ -500,6 +500,14 @@ if(typeof global.document?.createElement==="function"&&global.document.head&&
  tag.defer=true;
  global.document.head.appendChild(tag);
 }
+if(typeof global.document?.createElement==="function"&&global.document.head&&
+   !global.document.getElementById("dar-test-machine-drafts")){
+ const draftTag=global.document.createElement("script");
+ draftTag.id="dar-test-machine-drafts";
+ draftTag.src="/test/assets/dar-test-machine-drafts.js?v=20261023-batch1";
+ draftTag.defer=true;
+ global.document.head.appendChild(draftTag);
+}
 global.DarTestTurkishUI={apply,schedule,locale:currentLocale,loadCatalog,
   get translatedKeys(){return dictionary.size},
   get catalogStatus(){return remoteCatalogState},

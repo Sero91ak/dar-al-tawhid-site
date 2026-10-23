@@ -226,8 +226,17 @@ def run():
         print(json.dumps(report, ensure_ascii=False, indent=2))
         raise SystemExit(1)
     options = Options()
-    chrome_binary = os.environ.get("DAR_TEST_CHROME_BINARY", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
-    if Path(chrome_binary).exists():
+    chrome_candidates = [
+        os.environ.get("DAR_TEST_CHROME_BINARY", ""),
+        "/usr/bin/google-chrome-stable",
+        "/usr/bin/google-chrome",
+        "/usr/local/bin/google-chrome",
+        "/usr/bin/chromium",
+        "/usr/bin/chromium-browser",
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    ]
+    chrome_binary = next((candidate for candidate in chrome_candidates if candidate and Path(candidate).exists()), "")
+    if chrome_binary:
         options.binary_location = chrome_binary
     for flag in ("--headless=new", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=390,844"):
         options.add_argument(flag)
