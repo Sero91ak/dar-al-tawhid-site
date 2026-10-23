@@ -94,7 +94,7 @@
     return box;
   }
   function makeRouteHero(item) {
-    var box=el("section","dar-next-route-hero");box.id="darNextRouteHero";box.dataset.darnextAnimate="";
+    var box=el("section","dar-next-route-hero");box.id="darNextRouteHero";box.dataset.darnextAnimate="";box.dataset.darnextRoute=item.id;
     box.setAttribute("aria-label",item.title);box.style.setProperty("--dn-art",'url("' + HERO + item.art + '")');
     var copy=el("div","dar-next-route-hero__copy");
     copy.appendChild(el("div","dar-next-kicker","DĀR AL TAWḤĪD · TEST"));
@@ -192,6 +192,7 @@
       /* No extra hero above article readers, verse detail, player or full-screen tools. */
       var compact=["recent","quran","duas","topics","scholars","books","bibliothek","prayer","qibla","quiz","more","settings","propheten","frauen","hadith","zakat"];
       var current=main.querySelector("#darNextRouteHero");
+      if (current && current.dataset.darnextRoute !== id) {current.remove();current=null;}
       if (section && compact.indexOf(id)!==-1 && !current) main.insertBefore(makeRouteHero(section),main.firstChild);
       else if (current && (!section || compact.indexOf(id)===-1)) current.remove();
     }
