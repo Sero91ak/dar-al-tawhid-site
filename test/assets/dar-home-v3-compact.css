@@ -416,3 +416,31 @@ body.is-home-route .dv3-language button[aria-pressed="true"]{
 body.is-home-route .dv3-language button:focus-visible{
  outline:2px solid var(--gold,#bba273);outline-offset:3px
 }
+
+
+/* DAR TEST 2026-10-23: WebKit V3 search geometry fail-safe */
+/* Only on adult /test/ home. Functional sizing must not depend on late
+   html.dar-home-v3 lifecycle synchronization. Never style article SVGs. */
+body.is-home-route #appView #dv3Home .dv3-search-box{
+  box-sizing:border-box!important;
+  display:flex!important;align-items:center!important;
+  gap:9px!important;width:100%!important;max-width:100%!important;
+  min-width:0!important;min-height:44px!important;
+  overflow:hidden!important;
+}
+body.is-home-route #appView #dv3Home .dv3-search-label{
+  display:grid!important;place-items:center!important;
+  flex:0 0 20px!important;width:20px!important;height:20px!important;
+  min-width:20px!important;max-width:20px!important;
+  padding:0!important;margin:0!important;line-height:0!important;
+}
+body.is-home-route #appView #dv3Home .dv3-search-label > svg{
+  display:block!important;box-sizing:border-box!important;
+  width:19px!important;height:19px!important;
+  min-width:19px!important;max-width:19px!important;
+  min-height:19px!important;max-height:19px!important;
+  aspect-ratio:1!important;overflow:visible!important;
+}
+body.is-home-route #appView #dv3Home #homeSearchInput{
+  flex:1 1 auto!important;min-width:0!important;max-width:100%!important;
+}
