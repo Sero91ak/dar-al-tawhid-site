@@ -1,0 +1,106 @@
+name: KIDS V4 Produce Three Missing Fuṣḥā Sources - 189 499 839
+on:
+  push:
+    branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
+    paths:
+      - '.github/workflows/kids-v4-3-native-ghibah-quran-dua-original-recovery-20261023.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: tawhid-kids-v4-450-shared-paid-queue
+  cancel-in-progress: false
+jobs:
+  native-three-private:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      KIDS_V4_OWNER_EXACT_THREE_NATIVE_RUN: 'YES'
+    steps:
+      - name: Checkout private 433/450 source and previous immutable ElevenLabs receipts
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Audit exact three source texts and paid request history
+        run: |
+          set -euo pipefail
+          git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+          git merge --ff-only FETCH_HEAD
+          python3 -m py_compile kids/tools/produce_kids_v4_native_three_more_20261023.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('kids/data/quiz-v4-450-production-status.json').read_text())
+          assert s['completedQuestionsWithAllFourAudioParts']==433
+          assert s['uniqueNewOriginalMP3sStored']==1815
+          assert not s['livePublished'] and s['questionsHumanListeningApproved']==0
+          print('NATIVE_3_SOURCE_PREPAID_PROTECTION_PASS; 433/450')
+          PY
+      - name: Ensure decoder and composer available
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+             sudo apt-get -qq update
+             sudo apt-get -qq install -y ffmpeg
+          fi
+      - name: Produce native Arabic words and exact German text fragments once with separate SHA receipts
+        run: |
+          set -euo pipefail
+          python3 kids/tools/produce_kids_v4_native_three_more_20261023.py
+      - name: Recompose 450-question private audio and validate real completed count
+        run: |
+          set -euo pipefail
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('kids/data/quiz-v4-450-production-status.json').read_text())
+          j=json.loads(Path('kids/review-only/kids-v4-native-3-new-sources-paid-once-20261023.json').read_text())
+          assert s['completedQuestionsWithAllFourAudioParts']>=436
+          assert s['completedQuestionsWithAllFourAudioParts']<=450
+          assert not s['livePublished'] and not s['all450AudioReadyToPublish']
+          assert s['questionsHumanListeningApproved']==0
+          assert j['status']=='THREE_NATIVE_COMPOSITES_SAVED_PRIVATE_PENDING_HUMAN_HEARING'
+          assert len(j['composites'])==3 and not j['humanHearingApproved']
+          print('KIDS_V4_NATIVE_THREE_SOURCE_PROGRESS',s['completedQuestionsWithAllFourAudioParts'],'/450')
+          PY
+      - name: Commit real composite previews, private completion evidence
+        run: |
+          set -euo pipefail
+          git config user.name kids-v4-three-native-qa
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-450-production-status.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/quiz-v4-handover-latest.json kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'review(kids V4): three native Arabic terms in genuine four-part quiz audio [skip ci]'
+          for trial in 1 2 3; do
+            if git push origin HEAD:review/kids-v4-nine-prepaid-artifact-replay-20261022; then exit 0; fi
+            git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+            git rebase FETCH_HEAD || exit 1
+          done
+          exit 1
+      - name: Preserve private voice receipts and native MP3s even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-three-ghibah-quran-dua-native-master-owner-hearing
+          retention-days: 60
+          if-no-files-found: warn
+          path: |
+            kids/review-only/kids-v4-native-3-new-sources-paid-once-20261023.json
+            kids/assets/kids-quiz-audio/v4-3-native-new-sources-20261023/
+            kids/data/quiz-v4-450-production-status.json
