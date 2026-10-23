@@ -68,7 +68,8 @@ def main():
             wait_ready()
             if js("return document.documentElement.lang") != code:
                 failures.append({"area": "reload-persistence", "locale": code, "status": "FAIL", "error": "locale lost"})
-        js("location.hash = '#home'")
+        js("location.hash = '#more'")
+        wait_ready()
         WebDriverWait(driver, 15).until(lambda d: js("return !!document.querySelector('[data-dar-language-entry] [data-dal-open]')"))
         js("document.querySelector('[data-dar-language-entry] [data-dal-open]').click()")
         WebDriverWait(driver, 10).until(lambda d: js("return !!document.querySelector('#darAdultLanguagePicker[role=dialog]')"))
