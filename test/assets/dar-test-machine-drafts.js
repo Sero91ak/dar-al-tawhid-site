@@ -1,4 +1,5 @@
-/* DAR TEST only: show machine-reviewed adult drafts beside the German original.
+/* DAR TEST only: show machine-reviewed adult drafts in the selected language.
+ * The German original stays stored and is restored for locale de.
  * Drafts are never treated as approved. No provider calls. */
 (function(global){"use strict";
 if(global.__DarTestMachineDrafts)return;
@@ -33,39 +34,139 @@ function panelFor(article){
  else article.appendChild(panel);
  return panel;
 }
+const HOSTS="article.post-reader[data-post-id],[data-nav='post'][data-value],[data-dv3-nav='post'][data-dv3-value],[data-dhp-value],article.feed-card[data-post-id]";
+function hosts(){
+ const doc=global.document;
+ if(typeof doc?.querySelectorAll==="function")return Array.from(doc.querySelectorAll(HOSTS));
+ const one=doc?.querySelector?.("article.post-reader[data-post-id]");
+ return one?[one]:[];
+}
+function plain(value){
+ return String(value||"").replace(/\*\*/g,"").replace(/\s+\n/g,"\n").trim();
+}
+function splitDraft(body){
+ const text=plain(body);
+ const mark=text.indexOf("🌙");
+ if(mark<0)return {statement:text,conclusion:""};
+ return {statement:text.slice(0,mark).trim(),conclusion:text.slice(mark).trim()};
+}
+function excerptOf(statement){
+ const lines=String(statement||"").split(/\n+/).map(line=>line.trim()).filter(Boolean);
+ const quote=lines.find(line=>/[„“"«»]/.test(line)&&!line.startsWith("🖋️"));
+ return quote||lines.find(line=>!line.startsWith("🖋️")&&!line.startsWith("📖"))||lines[0]||"";
+}
+function listed(root,selector){
+ if(typeof root?.querySelectorAll==="function")return Array.from(root.querySelectorAll(selector));
+ const one=root?.querySelector?.(selector)||null;
+ return one?[one]:[];
+}
+function titleNodes(root){
+ const nodes=listed(root,".post-reader-title h2, header h2, .home-v380-post-title, .dv3-post-body b, .post-row__body h3, .related-compact-card h4, .dhp-post-capsule h3, .post-title");
+ if(nodes.length)return nodes;
+ const legacy=root?.querySelector?.(".post-reader-title h2, header h2");
+ return legacy?[legacy]:[];
+}
+function statementNodes(root){
+ const exact=listed(root,".post-aussage-text");
+ if(exact.length)return exact;
+ const quotes=listed(root,".sf-quote-text");
+ if(quotes.length)return quotes;
+ const loose=root?.querySelector?.(".statement");
+ if(loose&&!(loose.children&&loose.children.length))return [loose];
+ const legacy=root?.querySelector?.(".post-aussage-text, .statement");
+ return legacy&&!(legacy.children&&legacy.children.length)?[legacy]:[];
+}
+function showDraft(element,value,code){
+ if(!element||!value)return;
+ if(!element.getAttribute("data-dar-source"))element.setAttribute("data-dar-source",element.textContent||"");
+ if(element.textContent!==value)element.textContent=value;
+ element.setAttribute("lang",code);
+ element.setAttribute("dir",RTL.has(code)?"rtl":"ltr");
+ element.setAttribute("data-dar-no-translate","machine-draft-field");
+}
+function restoreField(element){
+ if(!element?.getAttribute?.("data-dar-source"))return;
+ const source=element.getAttribute("data-dar-source");
+ if(element.textContent!==source)element.textContent=source;
+ element.removeAttribute?.("lang");
+ element.removeAttribute?.("dir");
+ element.removeAttribute?.("data-dar-no-translate");
+}
+function showAria(element,germanTitle,translatedTitle){
+ const aria=element.getAttribute?.("aria-label");
+ if(!aria||!germanTitle||!translatedTitle)return;
+ if(!element.getAttribute("data-dar-source-aria"))element.setAttribute("data-dar-source-aria",aria);
+ const source=element.getAttribute("data-dar-source-aria");
+ if(!source.startsWith(germanTitle))return;
+ const next=translatedTitle+source.slice(germanTitle.length);
+ if(element.getAttribute("aria-label")!==next)element.setAttribute("aria-label",next);
+}
+function restoreAria(element){
+ const source=element.getAttribute?.("data-dar-source-aria");
+ if(source!=null&&element.getAttribute("aria-label")!==source)element.setAttribute("aria-label",source);
+}
+function applyVisible(host,code,translation){
+ const parts=splitDraft(translation.body);
+ const title=plain(translation.title);
+ const germanTitle=titleNodes(host)[0]?.getAttribute?.("data-dar-source")||titleNodes(host)[0]?.textContent||"";
+ titleNodes(host).forEach(node=>showDraft(node,title,code));
+ statementNodes(host).forEach(node=>showDraft(node,parts.statement,code));
+ listed(host,".home-v380-post-excerpt, .post-row__sub").forEach(node=>showDraft(node,excerptOf(parts.statement),code));
+ listed(host,".post-fazit-body").forEach(node=>{if(parts.conclusion)showDraft(node,parts.conclusion,code)});
+ showAria(host,germanTitle,title);
+ host.setAttribute("data-dar-draft-locale",code);
+}
+function restoreVisible(host){
+ titleNodes(host).forEach(restoreField);
+ statementNodes(host).forEach(restoreField);
+ listed(host,".home-v380-post-excerpt, .post-row__sub").forEach(restoreField);
+ listed(host,".post-fazit-body").forEach(restoreField);
+ restoreAria(host);
+ host.setAttribute("data-dar-draft-locale","de");
+}
+function hostId(node){
+ const raw=node.getAttribute("data-post-id")||node.getAttribute("data-value")||node.getAttribute("data-dv3-value")||node.getAttribute("data-dhp-value")||"";
+ if(!raw)return "";
+ return raw.startsWith("post:")?raw:"post:"+raw;
+}
 function render(){
  const doc=global.document;
- const article=doc?.querySelector?.("article.post-reader[data-post-id]");
- if(!article||!pack)return;
+ if(!pack||!doc)return;
  const code=locale();
- const existing=article.querySelector(":scope > .dar-machine-draft");
- if(code==="de"||!pack.locales?.includes(code)){existing?.remove();return}
- ensureStyle();
- const id="post:"+article.getAttribute("data-post-id");
- const record=pack.records?.[id];
- const panel=panelFor(article);
- panel.setAttribute("lang",code);
- panel.setAttribute("dir",RTL.has(code)?"rtl":"ltr");
- const note=doc.createElement("p");
- note.className="dar-machine-draft-note";
- if(!record){
-  note.textContent=pack.missing?.[code]||pack.missing?.en||"";
-  panel.replaceChildren(note);
-  return;
+ for(const host of hosts()){
+  const reader=host.className==="post-reader"||String(host.className||"").split(/\s+/).includes("post-reader");
+  const existing=reader?host.querySelector(":scope > .dar-machine-draft"):null;
+  const id=hostId(host);
+  const record=pack.records?.[id];
+  const translation=record?.translations?.[code];
+  const ready=code!=="de"&&pack.locales?.includes(code)&&translation&&record.status==="draft"&&record.humanApproval===false;
+  const signature=ready?code+"\n"+translation.title+"\n"+translation.body:code;
+  if(host.getAttribute("data-dar-draft-sig")===signature)continue;
+  if(!ready){
+   existing?.remove();
+   restoreVisible(host);
+   host.setAttribute("data-dar-draft-sig",signature);
+   continue;
+  }
+  applyVisible(host,code,translation);
+  if(reader){
+   ensureStyle();
+   const panel=panelFor(host);
+   panel.setAttribute("lang",code);
+   panel.setAttribute("dir",RTL.has(code)?"rtl":"ltr");
+   const note=doc.createElement("p");
+   note.className="dar-machine-draft-note";
+   note.textContent=pack.notices?.[code]||pack.notices?.en||"";
+   const title=doc.createElement("h3");
+   title.textContent=translation.title||"";
+   const body=doc.createElement("p");
+   body.textContent=translation.body||"";
+   const source=doc.createElement("p");
+   source.textContent=String(record.immutable?.source||"");
+   panel.replaceChildren(note,title,body,source);
+  }
+  host.setAttribute("data-dar-draft-sig",signature);
  }
- note.textContent=pack.notices?.[code]||pack.notices?.en||"";
- if(!record.translations?.[code]||record.status!=="draft"||record.humanApproval!==false){
-  note.textContent=pack.stale?.[code]||note.textContent;
-  panel.replaceChildren(note);
-  return;
- }
- const title=doc.createElement("h3");
- title.textContent=record.translations[code].title||"";
- const body=doc.createElement("p");
- body.textContent=record.translations[code].body||"";
- const source=doc.createElement("p");
- source.textContent=String(record.immutable?.source||"");
- panel.replaceChildren(note,title,body,source);
 }
 function boot(data){
  if(data?.schemaVersion!==1||data.scope!=="dar-test-machine-drafts-only"||data.humanApproval!==false||data.status!=="draft")return;

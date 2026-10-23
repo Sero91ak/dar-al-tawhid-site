@@ -6,7 +6,7 @@ const inventory=require(path.join(__dirname,"adult-ui-web-inventory.cjs"));
 const code=fs.readFileSync(path.join(__dirname,"../assets/dar-test-turkish-ui.js"),"utf8");
 const expected=["de","tr","en","ar","ku","ckb","bs","fr","es"];
 const translated=["tr","en","ar","ku","ckb","bs","fr","es"];
-const expectedUiTextCount=421+inventory.expandedWebKeys.length;
+const expectedUiTextCount=421+inventory.expandedWebKeys.length+inventory.readerChromeKeys.length;
 assert.deepEqual(locales.availableLocales,expected);
 assert.deepEqual(locales.translatedLocales,["de",...translated]);
 assert.deepEqual(locales.pendingLocales,[]);
@@ -19,6 +19,7 @@ for(const locale of translated){
  assert.equal(values.length,expectedUiTextCount,locale+" UI inventory count");
  assert(values.every(x=>x.trim()&&typeof dict[x]==="string"&&dict[x].trim()));
  for(const key of inventory.expandedWebKeys)assert(dict[key]?.trim(),locale+" missing expanded web UI key "+key);
+ for(const key of inventory.readerChromeKeys)assert(dict[key]?.trim(),locale+" missing reader chrome key "+key);
  for(const label of ["Startseite","Mehr","Gebetszeiten","Einstellungen","Suche","Konto","Suchen","Heute","Qurʾān","Duʿāʾ"]){
   assert(dict[label],locale+" missing "+label);
  }

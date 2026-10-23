@@ -54,6 +54,38 @@ const expandedWebKeys = [
     "Nr. {number}"
 ];
 
+const readerChromeKeys = [
+    "Autor",
+    "Band",
+    "Beitrag weitergeben",
+    "Bereich",
+    "Bewertung",
+    "Einordnung",
+    "Einordnung lesen",
+    "Einordnung schließen",
+    "Fazit",
+    "Fehler melden",
+    "Kategorie",
+    "Kein nächster Beitrag",
+    "Kein vorheriger Beitrag",
+    "Keine Quelle hinterlegt.",
+    "Leitung",
+    "NEUESTER BEITRAG",
+    "Nachweise",
+    "Nummer",
+    "Nächster Beitrag",
+    "Quellenbereich",
+    "Quelllinks schließen",
+    "Quelllinks öffnen",
+    "Seite",
+    "Vollständige Quelle",
+    "Vorheriger Beitrag",
+    "Zuschreibung",
+    "Ähnliche Beiträge",
+    "Ähnliche Duʿāʾ",
+    "Überliefert von"
+];
+
 const sourceMarkers = {
     "Ich habe {count} passende Fundstellen in den aktuell indexierten Inhalten gefunden. Öffne die Quellen unten, um die Originalbelege und den vollständigen Kontext zu lesen.": "Ich habe ",
     "{count} indexierte Einträge": " indexierte Einträge",
@@ -65,4 +97,4 @@ const sourceMarkers = {
     "Nr. {number}": "Nr. "
 };
 
-module.exports = { sourceFiles, expandedWebKeys, sourceMarkers };
+module.exports = { sourceFiles, expandedWebKeys, readerChromeKeys, sourceMarkers };

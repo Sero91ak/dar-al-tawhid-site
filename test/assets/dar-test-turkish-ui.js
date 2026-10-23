@@ -346,11 +346,26 @@ function rebuildReversePacks(){
  for(const [de,translated] of dictionary)add("tr",de,translated);
  for(const [code,dict] of languagePacks)for(const [de,translated] of dict)add(code,de,translated);
 }
+function isDynamicGermanUi(value){
+ return /^Qurʾān · \d+ Fundstellen$/.test(value)||
+  /^(Aussagen im Qurʾān|Aussagen in authentischer Sunnah) · \d+$/.test(value)||
+  /^\d+\s+(Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt|Funktionen|Ergebnisse)$/.test(value)||
+  /^\d+\s+Āyāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
+  /^\d+\s+Sūren\s*·\s*\d+\s+Āyāt$/.test(value)||
+  /^\d+(?:[.,]\d+)?%\s+Trefferquote$/.test(value)||
+  /^\d+\/\d+\s+gewählt$/.test(value)||
+  /^Sūrenbereich wechseln, aktuell \d+[–-]\d+$/.test(value)||
+  /^.{2,90}, \d+ Veröffentlichungen$/.test(value)||
+  /^.{2,90} · \d+ Seiten$/.test(value)||
+  /^(Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonntag), \d{1,2}\. (Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember) /.test(value)||
+  (/^.{2,160} öffnen$/.test(value)&&!/[\u0600-\u06ff<>]/.test(value));
+}
 function germanSourceOf(text){
  const value=String(text||"");
  if(!value)return null;
  if(dictionary.has(value))return value;
  for(const dict of languagePacks.values())if(dict.has(value))return value;
+ if(isDynamicGermanUi(value))return value;
  for(const rev of reversePacks.values()){
   if(!rev.has(value))continue;
   const de=rev.get(value);
@@ -390,10 +405,21 @@ function translateExact(value,language="tr"){
  if(dynamic&&dynamicLabels[dynamic[2]]?.[language])return dynamic[1]+" "+dynamicLabels[dynamic[2]][language];
  const editorialLabels={
   "AKTUELLE VERÖFFENTLICHUNG":{tr:"GÜNCEL YAYIN",en:"CURRENT PUBLICATION",ar:"المنشور الحالي",ku:"WEŞANA NIHAÎ",ckb:"بڵاوکراوەی ئێستا",bs:"TRENUTNA PUBLIKACIJA",fr:"PUBLICATION ACTUELLE",es:"PUBLICACIÓN ACTUAL"},
-  "WEITERER BEITRAG":{tr:"DİĞER YAZI",en:"ANOTHER ARTICLE",ar:"مقال آخر",ku:"NIVÎSEKE DIN",ckb:"بابەتێکی تر",bs:"DRUGI TEKST",fr:"AUTRE ARTICLE",es:"OTRO ARTÍCULO"}
+  "WEITERER BEITRAG":{tr:"DİĞER YAZI",en:"ANOTHER ARTICLE",ar:"مقال آخر",ku:"NIVÎSEKE DIN",ckb:"بابەتێکی تر",bs:"DRUGI TEKST",fr:"AUTRE ARTICLE",es:"OTRO ARTÍCULO"},
+  "NEUESTER BEITRAG":{tr:"EN YENİ YAZI",en:"LATEST ARTICLE",ar:"أحدث مقال",ku:"NIVÎSA HERÎ NÛ",ckb:"نوێترین بابەت",bs:"NAJNOVIJI TEKST",fr:"ARTICLE LE PLUS RÉCENT",es:"ARTÍCULO MÁS RECIENTE"}
  };
  if(editorialLabels[value]?.[language])return editorialLabels[value][language];
- if(language!=="tr")return languagePacks.get(language)?.get(value)??localizeGermanCalendarLabel(value,language);
+ if(language!=="tr"){
+  const exact=languagePacks.get(language)?.get(value);
+  if(exact!==undefined)return exact;
+  const openLabel=value.match(/^(.{2,160}) öffnen$/);
+  if(openLabel&&!/[<>\u0600-\u06ff]/.test(openLabel[1])){
+   const verb=languagePacks.get(language)?.get("öffnen");
+   const head=languagePacks.get(language)?.get(openLabel[1]);
+   if(verb)return (head||openLabel[1])+" "+verb;
+  }
+  return localizeGermanCalendarLabel(value,language);
+ }
  const known=dictionary.get(value);
  if(known!==undefined)return known;
  const extraTurkish=languagePacks.get("tr")?.get(value);
@@ -533,7 +559,7 @@ if(typeof global.document?.createElement==="function"&&global.document.head&&
    !global.document.getElementById("dar-test-machine-drafts")){
  const draftTag=global.document.createElement("script");
  draftTag.id="dar-test-machine-drafts";
- draftTag.src="/test/assets/dar-test-machine-drafts.js?v=20261023-batch1";
+ draftTag.src="/test/assets/dar-test-machine-drafts.js?v=20261023-visible-fields";
  draftTag.defer=true;
  global.document.head.appendChild(draftTag);
 }

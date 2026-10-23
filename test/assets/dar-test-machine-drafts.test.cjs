@@ -27,6 +27,9 @@ function el(tag){
   querySelector(selector){
    if(selector===":scope > .dar-machine-draft")return this.children.find(child=>child.className==="dar-machine-draft"&&!child.removed)||null;
    if(selector===".post-reader-title")return this.children.find(child=>child.className==="post-reader-title")||null;
+   if(selector===".post-reader-title h2, header h2")return heading;
+   if(selector===".post-aussage-text, .statement")return statement;
+   if(selector===".post-fazit-body")return null;
    return null;
   },
   replaceChildren(...children){this.children=children}
@@ -36,6 +39,7 @@ function el(tag){
 const article=el("article");
 article.className="post-reader";
 article.attrs["data-post-id"]="354-547";
+article.setAttribute("aria-label","📖 Al-Muzanī: Keiner besitzt Gehorsam aus sich selbst öffnen");
 const header=el("header");
 header.className="post-reader-title";
 const heading=el("h2");
@@ -45,12 +49,30 @@ const statement=el("p");
 statement.className="statement";
 statement.textContent="Deutscher Originaltext bleibt stehen.";
 article.children=[header,statement];
+const homeTitle=el("h3");
+homeTitle.className="home-v380-post-title";
+homeTitle.textContent="📖 Al-Muzanī: Keiner besitzt Gehorsam aus sich selbst";
+const homeExcerpt=el("p");
+homeExcerpt.className="home-v380-post-excerpt";
+homeExcerpt.textContent="Deutscher Auszug.";
+const home=el("article");
+home.className="home-v380-post-preview";
+home.setAttribute("data-nav","post");
+home.setAttribute("data-value","354-547");
+home.children=[homeTitle,homeExcerpt];
+home.querySelectorAll=function(selector){
+ const found=[];
+ if(selector.includes("home-v380-post-title"))found.push(homeTitle);
+ if(selector.includes("home-v380-post-excerpt"))found.push(homeExcerpt);
+ return found;
+};
 const storage={locale:"ar"};
 const doc={
  head:{appendChild(){}},
  getElementById(){return null},
  createElement:el,
  querySelector(selector){return selector==="article.post-reader[data-post-id]"?article:null},
+ querySelectorAll(selector){return selector.includes("data-nav")?[article,home]:[]},
  body:{}
 };
 const w={location:{pathname:"/test/"},document:doc,localStorage:{getItem:()=>storage.locale},
@@ -65,10 +87,24 @@ assert.equal(panel.attrs.dir,"rtl");
 assert.equal(panel.attrs["data-dar-no-translate"],"machine-draft");
 assert.match(panel.children[0].textContent,/الآلة/);
 assert.match(panel.children[1].textContent,/المزني/);
-assert.equal(heading.textContent,"📖 Al-Muzanī: Keiner besitzt Gehorsam aus sich selbst");
-assert.equal(statement.textContent,"Deutscher Originaltext bleibt stehen.");
+assert.match(heading.textContent,/المزني/);
+assert.match(statement.textContent,/المزني|الطاعة/);
+assert.equal(heading.getAttribute("data-dar-source"),"📖 Al-Muzanī: Keiner besitzt Gehorsam aus sich selbst");
+assert.equal(statement.getAttribute("data-dar-source"),"Deutscher Originaltext bleibt stehen.");
+assert.equal(heading.getAttribute("dir"),"rtl");
+assert.match(article.getAttribute("aria-label"),/المزني/);
+assert.match(homeTitle.textContent,/المزني/);
+assert.match(homeExcerpt.textContent,/الطاعة|«/);
+assert.equal(homeTitle.getAttribute("dir"),"rtl");
+assert.equal(homeExcerpt.getAttribute("data-dar-source"),"Deutscher Auszug.");
 assert.match(panel.children[3].textContent,/Sharḥ as-Sunnah/);
+assert.equal(pack.humanApproval,false);
 storage.locale="de";
 w.DarTestMachineDrafts.render();
 assert.equal(panel.removed,true);
-console.log("PASS: DAR TEST shows RTL machine drafts without replacing the German original or granting approval");
+assert.equal(heading.textContent,"📖 Al-Muzanī: Keiner besitzt Gehorsam aus sich selbst");
+assert.equal(statement.textContent,"Deutscher Originaltext bleibt stehen.");
+assert.equal(article.getAttribute("aria-label"),"📖 Al-Muzanī: Keiner besitzt Gehorsam aus sich selbst öffnen");
+assert.equal(homeTitle.textContent,"📖 Al-Muzanī: Keiner besitzt Gehorsam aus sich selbst");
+assert.equal(homeExcerpt.textContent,"Deutscher Auszug.");
+console.log("PASS: DAR TEST shows the selected language in title and statement, restores German, and grants no approval");
