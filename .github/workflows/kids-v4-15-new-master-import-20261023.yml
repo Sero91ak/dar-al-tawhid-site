@@ -1,0 +1,69 @@
+name: Kids Quiz V4 - import 15 already paid Serhat master originals to review
+on:
+  push:
+    branches:
+      - review/kids-v4-15-new-master-20261023
+    paths:
+      - kids/review-only/quiz-v4-15-new-master-transfer-20261023.json
+permissions:
+  contents: write
+concurrency:
+  group: kids-v4-15-new-paid-original-import-20261023
+  cancel-in-progress: false
+jobs:
+  import-verified-paid-mp3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-v4-15-new-master-20261023
+          fetch-depth: 2
+      - name: Check MP3 decoder
+        shell: bash
+        run: |
+          set -euo pipefail
+          command -v ffprobe
+          command -v ffmpeg
+      - name: Import only paid originals - no speech synthesis
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/import_quiz_v4_new_15_20261023.py
+          python3 kids/tools/import_quiz_v4_new_15_20261023.py
+      - name: Validate all saved audio and rebuild offline quiz only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+      - name: Commit only authenticated audio review receipts and remove expiring links
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git rm kids/review-only/quiz-v4-15-new-master-transfer-20261023.json
+          git add kids/assets/kids-quiz-audio/v4-curated450-review/
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/ kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-450-original-clip-registry.json kids/data/quiz-v4-450-saved-mp3-technical-qa.json kids/data/quiz-v4-450-production-status.json
+          git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/review-only/quiz-v4-15-new-master-import-results-20261023.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git commit -m "audio(kids): save 15 verified Serhat V4 MP3 originals into isolated review"
+          git push origin HEAD:review/kids-v4-15-new-master-20261023
+      - name: Backup real MP3s and verified metadata in workflow artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-15-new-master-originals-20261023
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-curated450-review/
+            kids/review-only/quiz-v4-15-new-master-import-results-20261023.json
