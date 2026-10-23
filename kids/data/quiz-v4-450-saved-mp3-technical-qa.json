@@ -1,9 +1,18 @@
 {
   "scope": "KIDS_V4_450_ORIGINAL_MP3_QA",
-  "savedClipCount": 1815,
+  "savedClipCount": 1835,
   "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "modelId": "eleven_v4",
   "clips": [
+    {
+      "textSha256": "ca4f0ac6e168b363b9fa59096ce796d0e78c898b9652f9db6e85cda735104ef9",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 0.993,
+      "mp3Bytes": 16343,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -19.4
+    },
     {
       "textSha256": "ee9826a370cb0126480b85528e3e499f1a790dfcadf8b134619f6ce450ac7a77",
       "technicalPassed": true,
@@ -4658,6 +4667,24 @@
       "meanVolumeDB": -19.6
     },
     {
+      "textSha256": "f280c0529d0f8110224d997bbb5fd035157c3c730db940ea3147ae6ac7204aab",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 1.149,
+      "mp3Bytes": 18851,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -19.5
+    },
+    {
+      "textSha256": "98615fe4ee3e8850e7c05203fab890afa895350ae365512c38e5eb3f3ef61341",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 7.776,
+      "mp3Bytes": 93645,
+      "sampleRateHz": 48000,
+      "meanVolumeDB": -21.0
+    },
+    {
       "textSha256": "49c392ea6088e988a241c65d50c98bef27142c0e0da27befef1a7d7f86a5f11e",
       "technicalPassed": true,
       "listeningApproved": false,
@@ -4710,6 +4737,15 @@
       "mp3Bytes": 85724,
       "sampleRateHz": 44100,
       "meanVolumeDB": -20.7
+    },
+    {
+      "textSha256": "d3c2d6d341045b1a4455dbe670f2adb3064fca79f42dcc361d2015b63a4d47b0",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 0.601,
+      "mp3Bytes": 10074,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -20.8
     },
     {
       "textSha256": "33d349739269759db9a4959a1aeaa17092c3991efcee22e77ace84ea3e450799",
@@ -4809,6 +4845,15 @@
       "mp3Bytes": 46018,
       "sampleRateHz": 44100,
       "meanVolumeDB": -20.5
+    },
+    {
+      "textSha256": "a33039602d0761e000db69fd4fd71ed4f93b05ce20d491e13cb2d5d57fb101d5",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 9.36,
+      "mp3Bytes": 112653,
+      "sampleRateHz": 48000,
+      "meanVolumeDB": -21.3
     },
     {
       "textSha256": "b630b467c9c686ba4238ccc696f1191186f08e3c7bf6211deb0bf4a9f49f1c12",
@@ -7023,6 +7068,15 @@
       "mp3Bytes": 52287,
       "sampleRateHz": 44100,
       "meanVolumeDB": -21.7
+    },
+    {
+      "textSha256": "7718291e519cf53721819d27d78fab4b8b26897eb9640ac284ef677078bc382d",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 3.936,
+      "mp3Bytes": 47565,
+      "sampleRateHz": 48000,
+      "meanVolumeDB": -20.1
     },
     {
       "textSha256": "8d7b3c1377aa0f74daaf7c8fa0661cfeb9799df20aa89293053f00be47218b32",
@@ -12515,6 +12569,15 @@
       "meanVolumeDB": -18.2
     },
     {
+      "textSha256": "53c75ac5713cc54031e50d4f6ec29653f49ba81e04f3e8a166d57ed406244fd2",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 5.146,
+      "mp3Bytes": 82798,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -20.7
+    },
+    {
       "textSha256": "865b37698d8ee8a5da0e5455155e31d1856307101ed5f3a93aeff9e825a57290",
       "technicalPassed": true,
       "listeningApproved": false,
@@ -15710,6 +15773,15 @@
       "meanVolumeDB": -20.8
     },
     {
+      "textSha256": "0a6a8265d56dd61a82d34411eefca8e420a5d39db6244a7079b6acb24b390acf",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 1.959,
+      "mp3Bytes": 31807,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -21.2
+    },
+    {
       "textSha256": "c385af37ca38e59b288a40ef6388694013b1db8509377848ed4e0e5ef7df0b1e",
       "technicalPassed": true,
       "listeningApproved": false,
@@ -15735,6 +15807,15 @@
       "mp3Bytes": 86978,
       "sampleRateHz": 44100,
       "meanVolumeDB": -20.6
+    },
+    {
+      "textSha256": "204a0abba68f5c5079e92187cb2aa4cc6e00573bf3f0710760817c203c36d4c4",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 6.269,
+      "mp3Bytes": 100771,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -21.0
     },
     {
       "textSha256": "5eefb94b9d314e378695054eaba90105b4aa091c7eeaad1c76e7c680708d21e9",
@@ -15863,6 +15944,15 @@
       "meanVolumeDB": -20.7
     },
     {
+      "textSha256": "dd9042267a6782aaf57d009fc6016d1bf0032a7abbe425cf863d2c264a47d31e",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 3.082,
+      "mp3Bytes": 49780,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -19.4
+    },
+    {
       "textSha256": "b5b084b719fe30226816e7599fc6040d9f4acd3cc6bebe801b79cb744ae36895",
       "technicalPassed": true,
       "listeningApproved": false,
@@ -15971,6 +16061,24 @@
       "meanVolumeDB": -20.3
     },
     {
+      "textSha256": "e2bcfa4d84b3c1d54972ea584bd454c4d4a85eda0f640868e46d5f46fabf62af",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 0.758,
+      "mp3Bytes": 12581,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -19.6
+    },
+    {
+      "textSha256": "5109fd9ad8549a04eb127130c49e3ebbe3d63f1bc19dd0fb08cff6b606b764c7",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 9.6,
+      "mp3Bytes": 115533,
+      "sampleRateHz": 48000,
+      "meanVolumeDB": -20.8
+    },
+    {
       "textSha256": "9d2a97c0281d65f148924be3ae03b814afc457b8eae3a5101f39e554d2267d09",
       "technicalPassed": true,
       "listeningApproved": false,
@@ -16032,6 +16140,15 @@
       "mp3Bytes": 15089,
       "sampleRateHz": 44100,
       "meanVolumeDB": -24.2
+    },
+    {
+      "textSha256": "6358bf461949c463eecba0da7fb409a3dbd58f64434b890c358d0e178df8718c",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 1.306,
+      "mp3Bytes": 21358,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -21.1
     },
     {
       "textSha256": "0e6ae3d2d7c735345bee028bfe8a95157940da4baafa83e34b9bd224311922a9",
@@ -16259,6 +16376,60 @@
       "meanVolumeDB": -20.8
     },
     {
+      "textSha256": "b32a8d1de9350051dd3079aa744bb9964398041c6102fe6b26375d5ebcd29b81",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 1.071,
+      "mp3Bytes": 17597,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -19.1
+    },
+    {
+      "textSha256": "c8f572f40e8d14e20038d4a61302a4596543e8a11d2fed20aa06a6a1dd961a2e",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 1.149,
+      "mp3Bytes": 18851,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -22.2
+    },
+    {
+      "textSha256": "f7e81de40b3fc55f470cec0d9f29289a748155d1b17c5d4d864147b3e15de0eb",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 1.411,
+      "mp3Bytes": 23030,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -20.7
+    },
+    {
+      "textSha256": "f44bdb539f93f6659bbd11b78cd31399533588ec8f029637c8238599000123a1",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 0.993,
+      "mp3Bytes": 16343,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -19.4
+    },
+    {
+      "textSha256": "2739da9816e0fca9ebdabf485d1e33c7c57ad04ca6001a9391c058d0d77c4282",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 1.071,
+      "mp3Bytes": 17597,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -18.0
+    },
+    {
+      "textSha256": "aa35fc96d8a0d06c85d0600ead734aafd71c3af68687e03b97dbaf25d011ba5f",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 1.071,
+      "mp3Bytes": 17597,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -21.2
+    },
+    {
       "textSha256": "3b05b4be0453b865ccf1c5921bddc1a2b0f01c376c01ec1f460b8e6919005c11",
       "technicalPassed": true,
       "listeningApproved": false,
@@ -16275,6 +16446,15 @@
       "mp3Bytes": 25538,
       "sampleRateHz": 44100,
       "meanVolumeDB": -20.3
+    },
+    {
+      "textSha256": "77d8173fba221c108f5cdd1b0c819a92eedb352cba7de4b72f781170067bdf9c",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 0.836,
+      "mp3Bytes": 13835,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -20.0
     },
     {
       "textSha256": "a281f24e7592aa0561bfa54c21385f690f303ee5e7e5fe610d73f6389765042e",
