@@ -4,7 +4,7 @@
  *   EDITORIAL_OWNER_PASSWORD, EDITORIAL_OWNER_SESSION_SECRET.
  * Missing either secret => fail closed (503); never leak the protected HTML.
  */
-const ROOT="/redaktion", COOKIE="dar_editorial_owner_v1", TTL=14*86400;
+const ROOT="/redaktion", COOKIE="dar_editorial_owner_v1", TTL=6*60*60;
 function route(path){
   return path===ROOT||path.startsWith(ROOT+"/");
 }
@@ -20,7 +20,7 @@ function escape(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt
 function loginPage(error="",status=200){
   return html(`<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow,noarchive"><title>Private Redaktion · DĀR AL TAWḤĪD</title><style>
   :root{color-scheme:dark}*{box-sizing:border-box}body{min-height:100dvh;margin:0;padding:30px 16px;display:grid;place-items:center;background:radial-gradient(ellipse at 55% -10%,#254238,transparent 70%),#08120f;color:#f0e8d6;font:15px/1.7 system-ui,sans-serif}main{width:min(100%,430px);border:1px solid #74633f;border-radius:23px;padding:clamp(22px,5vw,39px);background:#12221e;box-shadow:0 30px 90px #0008}small{font-size:11px;letter-spacing:.18em;color:#e0c184}h1{font:normal 32px Georgia,serif;color:#e1c98e;margin:8px 0}p{color:#c8d2c5}label{display:block;margin:22px 0 7px}input,button{width:100%;min-height:50px;border-radius:13px;font:inherit}input{background:#0b1714;color:#fff;border:1px solid #7d826e;padding:12px}button{border:0;background:#d8c18b;color:#17261e;font-weight:850;margin-top:12px}strong{color:#ffdbad}.line{width:75px;height:1px;background:#ae9566;margin:20px 0}
-</style></head><body><main><small>DĀR AL TAWḤĪD · NUR EIGENTÜMER</small><h1>Redaktionsatelier</h1><div class="line"></div><p>Neun Sprachen, Social-Media-Beiträge und Originalnachweise. Einmal anmelden – danach bleibt diese Browsersitzung gespeichert.</p>${error?'<p role="alert"><strong>'+escape(error)+'</strong></p>':''}<form method="post" action="/redaktion/login"><label for="password">Privates Redaktionspasswort</label><input id="password" name="password" type="password" maxlength="256" autocomplete="current-password" required autofocus><button type="submit">Redaktion öffnen →</button></form><p><small>Serverseitig geschützter Zugang · keine öffentliche Beiträge-Seite</small></p></main></body></html>`,status);
+</style></head><body><main><small>DĀR AL TAWḤĪD · NUR EIGENTÜMER</small><h1>Redaktionsatelier</h1><div class="line"></div><p>Neun Sprachen, Social-Media-Beiträge und Originalnachweise. Einmal anmelden – sechs Stunden lang ohne erneute Passworteingabe öffnen.</p>${error?'<p role="alert"><strong>'+escape(error)+'</strong></p>':''}<form method="post" action="/redaktion/login"><label for="password">Privates Redaktionspasswort</label><input id="password" name="password" type="password" maxlength="256" autocomplete="current-password" required autofocus><button type="submit">Redaktion öffnen →</button></form><p><small>Serverseitig geschützter Zugang · keine öffentliche Beiträge-Seite</small></p></main></body></html>`,status);
 }
 function b64(bytes){let s="";for(const b of bytes)s+=String.fromCharCode(b);return btoa(s).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,"");}
 async function mac(secret,payload){
