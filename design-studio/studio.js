@@ -656,6 +656,25 @@
     responsiveSelect.addEventListener("change",()=>{editScope=responsiveSelect.value;renderProperties();});
     responsiveLabel.append(responsiveSelect);
     toolbar.insertBefore(responsiveLabel,$("gridToggle").closest("label"));
+    const sidebarToggle=document.createElement("button");
+    sidebarToggle.className="tool-button mobile-side-toggle";
+    sidebarToggle.setAttribute("aria-label","Seiten und Bausteine öffnen");
+    sidebarToggle.textContent="☰";
+    toolbar.insertBefore(sidebarToggle,toolbar.firstChild);
+    sidebarToggle.addEventListener("click",()=>{
+      const aside=document.querySelector(".sidebar");
+      const visible=aside.classList.toggle("mobile-visible");
+      sidebarToggle.setAttribute("aria-expanded",String(visible));
+      if(visible)$("inspectorTitle").closest(".inspector").classList.remove("mobile-visible");
+    });
+    const closeInspector=document.createElement("button");
+    closeInspector.className="tool-button close-inspector";
+    closeInspector.setAttribute("aria-label","Eigenschaften schließen");
+    closeInspector.textContent="×";
+    $("inspectorTitle").parentElement.prepend(closeInspector);
+    closeInspector.addEventListener("click",()=>$("inspectorTitle").closest(".inspector").classList.remove("mobile-visible"));
+    $("pageList").addEventListener("click",()=>document.querySelector(".sidebar").classList.remove("mobile-visible"));
+    $("componentList").addEventListener("click",()=>document.querySelector(".sidebar").classList.remove("mobile-visible"));
   }
   function init(){
     try{const saved=localStorage.getItem(STORE);project=saved?validateProject(JSON.parse(saved)):starterProject();}
