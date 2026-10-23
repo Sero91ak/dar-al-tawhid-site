@@ -244,3 +244,30 @@ body.dar-admin-workspace #panel .meta-line{
   animation:none!important;transition:none!important;scroll-behavior:auto!important
  }
 }
+
+/* Guarantee that log-out removes both navigation surfaces on all widths. */
+.dar-command-rail[hidden],.dar-mobile-command[hidden],.dar-mobile-more[hidden]{display:none!important}
+body.dar-admin-workspace .topbar[hidden]{display:none!important}
+body.dar-admin-workspace #panel .folder-grid .folder-card .folder-icon{display:none!important}
+/* The 9 locale controls are editorial tabs, not boxed buttons. */
+body.dar-admin-workspace .social-langs{display:flex!important;gap:0!important;overflow-x:auto!important;scrollbar-width:thin!important;padding:0!important;border-bottom:1px solid var(--dar-c-rule)!important}
+body.dar-admin-workspace .social-lang{
+ flex:0 0 auto!important;min-width:105px!important;
+ border:0!important;border-bottom:2px solid transparent!important;border-radius:0!important;
+ background:none!important;box-shadow:none!important;padding:13px 11px!important
+}
+body.dar-admin-workspace .social-lang.active{
+ background:transparent!important;border-bottom-color:#e6ca88!important;color:#f0d69b!important
+}
+body.dar-admin-workspace .social-review{
+ width:100%!important;max-width:none!important;
+ border:0!important;border-radius:0!important;margin:0!important;padding:clamp(14px,2vw,34px)!important;
+ background:#091813!important;box-shadow:none!important
+}
+body.dar-admin-workspace .social-grid{gap:0!important}
+body.dar-admin-workspace .social-editor,body.dar-admin-workspace .social-preview{
+ border-radius:0!important;box-shadow:none!important
+}
+body.dar-admin-workspace .social-warning,
+body.dar-admin-workspace .social-review-state,
+body.dar-admin-workspace .social-count{border-radius:0!important}
