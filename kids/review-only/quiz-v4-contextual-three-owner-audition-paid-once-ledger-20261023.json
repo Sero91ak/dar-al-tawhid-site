@@ -35,7 +35,16 @@
       "sha256": "9d3b835954e5ef2473bf2bc02e631f0c9f2b44610c807779dad1eb404564c189"
     }
   ],
-  "entries": [],
+  "entries": [
+    {
+      "sourceText": "Halāle und gute Nahrung.",
+      "sourceTextSHA256": "10f57a8b9debddee8f81752342f7826d662d4f1580bd5f3549f8498ab48e3292",
+      "status": "REQUEST_STARTED_UNCONFIRMED",
+      "startedAt": "2026-10-23T10:01:47.218699+00:00",
+      "publicReleaseAllowed": false,
+      "fullSentenceOwnerListeningApproved": false
+    }
+  ],
   "status": "STARTED_REMOTE_CHECKPOINTED_ONCE",
   "startedAt": "2026-10-23T10:01:44.290822+00:00"
 }
