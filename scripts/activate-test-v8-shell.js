@@ -43,7 +43,7 @@ html = html.replace(/\s*<script\b[^>]*\bsrc=["'][^"']*\/dar-home-html-parity-v1\
 html = html.replace(/\s*<link\b(?=[^>]*\bid=["']darTestHomeV3ActualRoute["'])[^>]*>\s*/gi, "\n");
 html = html.replace(/<link\b[^>]*id="darV8GlassNavigationCSS"[^>]*>/gi,"");
 html = html.replace(/<script\b[^>]*id="darV8GlassNavigationJS"[^>]*><\/script>/gi,"");
-const insertion = `\n${cssTag}\n${jsTag}\n${homeGeometryTag}\n${homeParityTag}\n${glassCssTag}\n${glassJsTag}\n`;
+const insertion = `\n${cssTag}\n${jsTag}\n${homeGeometryTag}\n${homeParityTag}\n`;
 if (html.includes("</head>")) {
     html = html.replace("</head>", `${insertion}</head>`);
 } else if (/<head\b[^>]*>/i.test(html)) {
@@ -53,6 +53,21 @@ if (html.includes("</head>")) {
     html = html.replace(/(<head\b[^>]*>)/i, `$1${insertion}`);
 } else {
     throw new Error("V8-Test-App-Shell enthält keinen <head>-Bereich");
+}
+// Attach glass last, AFTER every existing V8/theme stylesheet. This is
+// essential when the compact test HTML omits an explicit closing </head>.
+const glassInsertion = `\n${glassCssTag}\n${glassJsTag}\n`;
+if (html.includes("</head>")) {
+    html = html.replace("</head>", `${glassInsertion}</head>`);
+} else if (/<body\b/i.test(html)) {
+    html = html.replace(/<body\b/i, `${glassInsertion}<body`);
+} else if (html.includes("</body>")) {
+    html = html.replace("</body>", `${glassInsertion}</body>`);
+} else {
+    throw new Error("DAR TEST V8 Glass: HTML boundary missing");
+}
+if (!html.includes("darV8GlassNavigationCSS") || !html.includes("darV8GlassNavigationJS")) {
+    throw new Error("DAR TEST V8 Glass: assets not registered");
 }
 fs.writeFileSync(htmlPath, html);
 console.log("V8-Test-Shell aktiviert:", cssHref, jsSrc);
