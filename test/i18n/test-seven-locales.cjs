@@ -4,6 +4,10 @@ const assert=require("node:assert/strict"),fs=require("node:fs"),vm=require("nod
 const locales=JSON.parse(fs.readFileSync(path.join(__dirname,"adult-ui-locales-seven.json"),"utf8"));
 const code=fs.readFileSync(path.join(__dirname,"../assets/dar-test-turkish-ui.js"),"utf8");
 const expected=["de","tr","en","ar","ku","ckb","bs"];
+const nine=[...expected,"fr","es"];
+const ninePack=JSON.parse(fs.readFileSync(path.join(__dirname,"adult-ui-locales-nine-v8.json"),"utf8"));
+assert.deepEqual(ninePack.availableLocales,nine);
+assert.equal(ninePack.scope,"adult-interface-only");
 assert.deepEqual(locales.availableLocales,expected);
 assert.equal(locales.noPaidProvider,true);
 assert.deepEqual(Object.keys(locales.translations).sort(),expected.filter(x=>x!=="de").sort());
@@ -33,8 +37,8 @@ const doc={
 const w={document:doc,location:{pathname:"/test/"},NodeFilter:{SHOW_ELEMENT:1,SHOW_TEXT:4},
  localStorage:{getItem:()=>storage.locale},addEventListener:(name,fn)=>events[name]=fn};
 vm.runInNewContext(code,{window:w,Map,Set,WeakMap,Promise,Uint8Array});
-assert.deepEqual(Array.from(w.DarTestTurkishUI.supportedLocales),expected);
-assert.equal(w.DarTestTurkishUI.registerLocaleData(locales),true);
+assert.deepEqual(Array.from(w.DarTestTurkishUI.supportedLocales),nine);
+assert.equal(w.DarTestTurkishUI.registerLocaleData(ninePack),true);
 for(const locale of expected){
  storage.locale=locale;w.DarTestTurkishUI.apply();
  const homepage=locale==="de"?"Startseite":locale==="tr"?"Ana Sayfa":locales.translations[locale].Startseite;
@@ -50,5 +54,5 @@ storage.locale="de";w.DarTestTurkishUI.apply();
 assert.equal(nodes[0].nodeValue,"Startseite","German return must be lossless");
 const here=fs.readFileSync(path.join(__dirname,"../assets/dar-test-seven-languages-loader.js"),"utf8");
 assert(!here.includes("api.openai.com"),"Client must never use paid translation API");
-assert(here.includes("/test/i18n/adult-ui-locales-seven.json"),"Require fixed static same-origin locale pack");
-console.log("PASS: 7 languages in 3 language selectors, "+JSON.stringify(countByLocale)+", DE restoration, source protection and RTL");
+assert(here.includes("/test/i18n/adult-ui-locales-nine-v8.json"),"Require fixed static same-origin nine-locale pack");
+console.log("PASS: original 7 locales regression with 9-locale runtime, "+JSON.stringify(countByLocale)+", DE restoration, source protection and RTL");
