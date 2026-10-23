@@ -15,9 +15,10 @@
   "humanApproval": false,
   "paidApiCalls": 0,
   "completedBatches": [
-    1
+    1,
+    2
   ],
-  "nextBatch": 2,
+  "nextBatch": 3,
   "items": [
     {
       "id": "post:354-547",
@@ -176,6 +177,176 @@
       "id": "post:abu-hatim-jahmiyyah-mushabbihah-001",
       "sourceHash": "ff6552b7282a2b6d662c0940e3202de0e2cc5b44d58cfb431d47c080de9ec3f6",
       "batch": 1,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:abu-hatim-quran-kalam-allah-001",
+      "sourceHash": "b6bfe44b9a6c5f1e91f9ad51420ce475fe613d22b754ce9626e8287c83c3ecf7",
+      "batch": 2,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:abu-hatim-ruyah-allah-im-jenseits-001",
+      "sourceHash": "6893fc78ad99be626e61e485f955a4c8836d1a9deea59cc57b6a3b2ccc21bb38",
+      "batch": 2,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:abu-hatim-sifat-allah-ohne-takyif-001",
+      "sourceHash": "c7ec4286473d2cc89b781e6a0ec7824ad6021ebac3d5e3a7aadaf4896f410ed3",
+      "batch": 2,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:abu-hatim-zeichen-ahl-al-bidah-001",
+      "sourceHash": "9d65317decb1a890f12693b09f796671c4acd8590dc4f3e5bf13b230c94d763c",
+      "batch": 2,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:abu-jafar-ibn-abi-shaybah-allah-ueber-dem-thron-439",
+      "sourceHash": "99b137ce6a18aba0232ca2e274b161738772b0dc364b83999a65f94884f4911e",
+      "batch": 2,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:abu-ubaid-falsche-froemmigkeit-ist-ein-kleid-aus-luege-394",
+      "sourceHash": "d305507afb52fefa30cfcf7483c60f380bfaad7df5b0d5b98f481e7815bc88ff",
+      "batch": 2,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:abu-ubaid-hayaa-keine-ausrede-gutes-zu-verlassen-160",
+      "sourceHash": "72d98111e7d6c6c4ad85c574e1be520edff0a8e618423ef12ba5f1a0430f71e6",
+      "batch": 2,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ad-darimi-ityan-allahs-bedeutung-klar-132",
+      "sourceHash": "e364f6664076e2be3d96c234088d8b06f320c292aedd1c4dd240a21c5c5b0d61",
+      "batch": 2,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ad-darimi-sifat-nuzul-001",
+      "sourceHash": "7f915070734d2d62b747d2a8307cdc1da83218f4bceedf7e857477a8103e81d5",
+      "batch": 2,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:adab-ist-nicht-mit-worten-zu-verletzen-235",
+      "sourceHash": "4c37cb448d7a0773878793e6a050ca869e81054fcee1585f94f903e2939506ad",
+      "batch": 2,
       "status": "draft",
       "humanApproval": false,
       "locales": {
