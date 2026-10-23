@@ -141,3 +141,97 @@ html.dar-v8-glass-test.dar-ios-native-app #darV8GlassLens{display:none!important
   transition:none!important;animation:none!important;transform:none!important
  }
 }
+
+
+/* DAR_TEST_V8_HOME_BENTO_GLASS_V2_20261023
+   Apply to the ACTUAL DAR TEST Home HTML-parity renderer (dhp*), not the
+   unused desktop V8 #pageRoot. Only presentation – do not copy content,
+   move the prayer hub or alter source text or share handlers. */
+html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 .dhp-welcome {
+  position:relative!important;isolation:isolate!important;overflow:hidden!important;
+  margin:14px 0 0!important;padding:clamp(19px,3.5vw,29px)!important;
+  border-radius:clamp(20px,5vw,28px)!important;
+  border:1px solid rgba(223,195,141,.36)!important;
+  background:
+    linear-gradient(104deg,rgba(3,24,24,.90),rgba(9,43,37,.68) 64%,rgba(16,50,40,.50)),
+    url("/test/assets/home-v1194/hero-wide-adobe.jpg") center 40%/cover no-repeat!important;
+  box-shadow:0 19px 47px rgba(0,24,21,.18),inset 0 1px 0 rgba(247,222,174,.15)!important;
+  color:#f7f0e5!important;
+}
+html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 .dhp-welcome::before {
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(ellipse at 88% 12%,rgba(224,185,108,.19),transparent 56%);
+}
+html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 :is(.dhp-greeting,.dhp-intro),
+html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 .dhp-intro strong {
+  position:relative;z-index:1;color:#faf4e8!important;
+  -webkit-text-fill-color:#faf4e8!important;text-shadow:0 1px 11px rgba(0,0,0,.22);
+}
+html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 .dhp-greeting {
+  font:600 clamp(19px,4.6vw,27px)/1.27 Georgia,serif!important;
+  letter-spacing:-.015em!important;
+}
+html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 .dhp-intro {
+  font:400 clamp(12px,2.9vw,14px)/1.6 system-ui,sans-serif!important;
+}
+html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 .dhp-welcome-rule{
+  position:relative;z-index:1;background:linear-gradient(90deg,#e8c98a,rgba(233,198,134,.17),transparent)!important;
+}
+html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 .dhp-prayer {
+ border-radius:23px!important;
+ border-color:var(--v8-g-stroke)!important;
+ box-shadow:0 9px 29px rgba(9,32,27,.08)!important;
+}
+html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 .dhp-isnad{
+ border-radius:20px!important;
+ background:color-mix(in srgb,var(--dhp-paper,var(--card,#142820)) 85%,transparent)!important;
+ border:1px solid var(--v8-g-stroke)!important;
+ -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+}
+html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 .dhp-search-pill {
+ border:1px solid var(--v8-g-stroke)!important;
+ border-radius:999px!important;
+ background:color-mix(in srgb,var(--dhp-paper,var(--card,#1d342b)) 87%,transparent)!important;
+ box-shadow:0 6px 22px rgba(9,32,25,.08)!important;
+ -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+}
+html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 :is(
+ .dhp-quick,.dhp-library-tile,.dhp-today-row,.dhp-quran-capsule,.dhp-panel
+ ) {
+ border-radius:clamp(15px,3vw,22px)!important;
+ border-color:var(--v8-g-stroke)!important;
+ box-shadow:0 5px 19px rgba(10,35,25,.055)!important;
+ transition:transform .31s cubic-bezier(.18,1.15,.32,1),box-shadow .23s ease;
+}
+html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 .dhp-library-tile {
+ min-height:92px!important;
+}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 :is(
+ .dhp-quick,.dhp-library-tile,.dhp-today-row,.dhp-quran-capsule
+ ):hover {transform:translateY(-2px)!important;box-shadow:0 13px 31px rgba(10,35,25,.11)!important}
+}
+@media(min-width:700px){
+ html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 .dhp-content{
+  max-width:min(100%,1000px)!important;
+  padding-inline:clamp(20px,3.4vw,36px)!important;
+ }
+ html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 .dhp-quickbar{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ }
+ html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 .dhp-library-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ }
+}
+@media(max-width:599px){
+ html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 .dhp-welcome{
+  background:
+   linear-gradient(105deg,rgba(3,24,24,.90),rgba(8,38,33,.69)),
+   url("/test/assets/home-v1194/hero-mobile-adobe.jpg") center 33%/cover no-repeat!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 :is(
+ .dhp-quick,.dhp-library-tile,.dhp-today-row,.dhp-quran-capsule
+ ){transition:none!important;transform:none!important}
+}

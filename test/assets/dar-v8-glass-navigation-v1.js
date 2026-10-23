@@ -9,6 +9,11 @@
  function keyboard(){var v=w.visualViewport,a=d.activeElement;return !!(v&&w.innerHeight-v.height>140&&a&&/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName||""))}
  function nativeBar(){return root.classList.contains("dar-ios-native-app")}
  function search(){
+  var homeInput=d.getElementById("dhpSearch");
+  if(homeInput&&homeInput.isConnected&&homeInput.offsetParent!==null){
+   homeInput.scrollIntoView({behavior:root.dataset.v8Motion==="reduce"?"auto":"smooth",block:"center"});
+   homeInput.focus({preventScroll:true});return
+  }
   var existing=d.querySelector('#bottomNav [data-bottom-nav="search"]');
   if(existing){existing.click();return}
   if(typeof w.navigate==="function")w.navigate("search");else w.location.hash="#search";
