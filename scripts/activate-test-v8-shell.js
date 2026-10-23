@@ -12,10 +12,14 @@ const fs = require("node:fs");
 const htmlPath = "test/index.html";
 const cssPath = "test/assets/v8-integrated-shell-v1.css";
 const jsPath = "test/assets/v8-integrated-shell-v1.js";
+const glassCssPath = "test/assets/dar-v8-glass-navigation-v1.css";
+const glassJsPath = "test/assets/dar-v8-glass-navigation-v1.js";
+const glassCssTag = '<link rel="stylesheet" id="darV8GlassNavigationCSS" href="/test/assets/dar-v8-glass-navigation-v1.css?v=20261023-glass-v1">';
+const glassJsTag = '<script id="darV8GlassNavigationJS" src="/test/assets/dar-v8-glass-navigation-v1.js?v=20261023-glass-v1" defer></script>';
 const cssHref = "/test/assets/v8-integrated-shell-v1.css?v=20261022-integrated-1";
 const jsSrc = "/test/assets/v8-integrated-shell-v1.js?v=20261022-integrated-1";
 
-for (const file of [htmlPath, cssPath, jsPath]) {
+for (const file of [htmlPath, cssPath, jsPath, glassCssPath, glassJsPath]) {
     if (!fs.existsSync(file) || fs.statSync(file).size === 0) {
         throw new Error(`V8-Testdatei fehlt oder ist leer: ${file}`);
     }
@@ -37,7 +41,9 @@ html = html.replace(/\s*<script\b[^>]*\bid=["']darV8IntegratedShellJS["'][^>]*><
 html = html.replace(/\s*<script\b(?=[^>]*\bid=["']darTestHomeHtmlParityV1["'])[^>]*><\/script>\s*/gi, "\n");
 html = html.replace(/\s*<script\b[^>]*\bsrc=["'][^"']*\/dar-home-html-parity-v1\.js[^"']*["'][^>]*><\/script>\s*/gi, "\n");
 html = html.replace(/\s*<link\b(?=[^>]*\bid=["']darTestHomeV3ActualRoute["'])[^>]*>\s*/gi, "\n");
-const insertion = `\n${cssTag}\n${jsTag}\n${homeGeometryTag}\n${homeParityTag}\n`;
+html = html.replace(/<link\b[^>]*id="darV8GlassNavigationCSS"[^>]*>/gi,"");
+html = html.replace(/<script\b[^>]*id="darV8GlassNavigationJS"[^>]*><\/script>/gi,"");
+const insertion = `\n${cssTag}\n${jsTag}\n${homeGeometryTag}\n${homeParityTag}\n${glassCssTag}\n${glassJsTag}\n`;
 if (html.includes("</head>")) {
     html = html.replace("</head>", `${insertion}</head>`);
 } else if (/<head\b[^>]*>/i.test(html)) {

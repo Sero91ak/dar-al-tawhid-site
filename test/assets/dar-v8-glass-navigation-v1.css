@@ -1,0 +1,143 @@
+/* DAR_TEST_GLASS_NAVIGATION_20261023 – ONLY /test/, existing adult five-tab dock.
+   Web approximation of Liquid Glass; no native SwiftUI APIs here. */
+html.dar-v8-glass-test{
+ --v8-g-bg:color-mix(in srgb,var(--bg,#0c1713) 53%,transparent);
+ --v8-g-ink:var(--text,#f5eddc);
+ --v8-g-stroke:color-mix(in srgb,var(--text,#f5eddc) 23%,transparent);
+ --v8-g-glow:var(--gold2,#dfc58d);
+ --v8-g-shadow:0 14px 38px rgba(2,17,14,.20),inset 0 1px 1px rgba(255,255,255,.27);
+}
+html.dar-v8-glass-test[data-theme="light"],
+html.dar-v8-glass-test[data-theme="soft"],
+html.dar-v8-glass-test[data-theme="eisgold"]{
+ --v8-g-bg:rgba(250,250,244,.66);--v8-g-ink:#283c31;
+ --v8-g-stroke:rgba(65,94,76,.24);--v8-g-glow:#9c7b3e;
+ --v8-g-shadow:0 15px 34px rgba(22,54,36,.13),inset 0 1px 1px rgba(255,255,255,.86)
+}
+html.dar-v8-glass-test[data-theme="royal"]{--v8-g-bg:rgba(11,29,52,.60)}
+html.dar-v8-glass-test[data-theme="bordeaux"]{--v8-g-bg:rgba(39,18,25,.63)}
+html.dar-v8-glass-test[data-theme="dar-al-layl"]{--v8-g-bg:rgba(5,9,8,.65)}
+/* Restyle, DO NOT clone or replace #bottomNav. The existing tab handlers work. */
+html.dar-v8-glass-test #bottomNav.bottom-nav,
+html.dar-v8-glass-test[data-theme] #appChromeDock #bottomNav.bottom-nav{
+ position:relative!important;isolation:isolate!important;
+ box-sizing:border-box!important;
+ inline-size:calc(100% - 68px)!important;max-inline-size:calc(100% - 68px)!important;
+ min-inline-size:0!important;min-block-size:65px!important;
+ margin-inline-start:0!important;margin-inline-end:68px!important;
+ padding:5px!important;
+ border-radius:999px!important;border:1px solid var(--v8-g-stroke)!important;
+ background:var(--v8-g-bg)!important;
+ background-image:linear-gradient(155deg,rgba(255,255,255,.2),transparent 49%)!important;
+ -webkit-backdrop-filter:blur(28px) saturate(1.3)!important;
+ backdrop-filter:blur(28px) saturate(1.3)!important;
+ box-shadow:var(--v8-g-shadow)!important;transform:none!important;
+ overflow:hidden!important;
+}
+html.dar-v8-glass-test #bottomNav.bottom-nav .bottom-nav-btn{
+ position:relative!important;z-index:2!important;min-inline-size:0!important;
+ flex:1 1 0!important;min-block-size:50px!important;
+ padding:6px 2px!important;border-radius:999px!important;
+ border:0!important;background:transparent!important;box-shadow:none!important;
+ touch-action:manipulation;
+}
+html.dar-v8-glass-test #bottomNav.bottom-nav .bottom-nav-btn.active{
+ color:var(--v8-g-ink)!important;background:transparent!important;
+}
+html.dar-v8-glass-test #bottomNav.bottom-nav .bottom-nav-btn::before,
+html.dar-v8-glass-test #bottomNav.bottom-nav .bottom-nav-btn::after{
+ opacity:0!important;background:none!important;box-shadow:none!important;
+}
+html.dar-v8-glass-test #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
+ transition:transform .35s cubic-bezier(.16,1.2,.34,1);
+}
+html.dar-v8-glass-test #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon{
+ transform:translateY(-2px) scale(1.08)!important;
+}
+html.dar-v8-glass-test #bottomNav.bottom-nav .bottom-nav-btn>span:not(.nav-icon){
+ font-size:clamp(8px,2.3vw,11px)!important;overflow:hidden;
+ white-space:nowrap;text-overflow:ellipsis;
+}
+/* Measured elastic selection pill behind the original active tab. */
+html.dar-v8-glass-test #bottomNav #darV8GlassSelection{
+ position:absolute;z-index:1;pointer-events:none;
+ inset-block-start:var(--v8-g-y,5px);inset-inline-start:var(--v8-g-x,5px);
+ inline-size:var(--v8-g-w,18%);block-size:var(--v8-g-h,52px);
+ border-radius:999px;
+ border:1px solid color-mix(in srgb,var(--v8-g-glow) 32%,transparent);
+ background:linear-gradient(150deg,
+  color-mix(in srgb,var(--v8-g-glow) 18%,transparent),
+  color-mix(in srgb,var(--v8-g-glow) 5%,transparent));
+ box-shadow:inset 0 1px 1px rgba(255,255,255,.24),0 2px 8px rgba(0,0,0,.05);
+ transition:inset-inline-start .38s cubic-bezier(.2,1.12,.32,1),inline-size .38s ease;
+}
+/* Independent search loupe, not a sixth tab and not another shell. */
+html.dar-v8-glass-test #darV8GlassLens{
+ position:fixed!important;z-index:860!important;
+ inset-inline-end:max(12px,env(safe-area-inset-right,0px))!important;
+ bottom:calc(14px + env(safe-area-inset-bottom,0px))!important;
+ display:grid!important;place-items:center!important;
+ inline-size:54px!important;block-size:54px!important;
+ padding:0!important;border-radius:50%!important;
+ border:1px solid var(--v8-g-stroke)!important;
+ background:var(--v8-g-bg)!important;
+ background-image:radial-gradient(circle at 26% 17%,rgba(255,255,255,.34),transparent 66%)!important;
+ color:var(--v8-g-ink)!important;box-shadow:var(--v8-g-shadow)!important;
+ -webkit-backdrop-filter:blur(30px) saturate(1.3)!important;
+ backdrop-filter:blur(30px) saturate(1.3)!important;
+ touch-action:manipulation;cursor:pointer;
+}
+html.dar-v8-glass-test #darV8GlassLens svg{
+ inline-size:24px;block-size:24px;fill:none;stroke:currentColor;
+ stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none;
+}
+html.dar-v8-glass-test #darV8GlassLens:focus-visible,
+html.dar-v8-glass-test #bottomNav .bottom-nav-btn:focus-visible{
+ outline:3px solid var(--v8-g-glow)!important;outline-offset:3px!important;
+}
+html.dar-v8-glass-test #darV8IntegratedActions button{
+ border:1px solid var(--v8-g-stroke)!important;
+ background:var(--v8-g-bg)!important;border-radius:999px!important;
+ -webkit-backdrop-filter:blur(20px)!important;backdrop-filter:blur(20px)!important;
+}
+html.dar-v8-glass-test #darV8IntegratedRail{
+ background:var(--v8-g-bg)!important;border-color:var(--v8-g-stroke)!important;
+ -webkit-backdrop-filter:blur(22px)!important;backdrop-filter:blur(22px)!important;
+}
+html.dar-v8-glass-test #darV8IntegratedRail nav .is-active{
+ color:var(--v8-g-ink)!important;
+ background:color-mix(in srgb,var(--v8-g-glow) 17%,transparent)!important;
+ border-radius:16px!important;
+}
+html.dar-v8-glass-test #appView .dv8-smart-dashboard{
+ border-radius:clamp(21px,5vw,29px)!important;
+ background:color-mix(in srgb,var(--card,var(--bg,#14251f)) 88%,transparent)!important;
+ -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+}
+html.dar-v8-glass-test #appView .dv8-smart-links button{
+ border-radius:18px!important;transition:transform .3s cubic-bezier(.2,1.15,.3,1);
+}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ html.dar-v8-glass-test #appView .dv8-smart-links button:hover{transform:translateY(-2px)}
+ html.dar-v8-glass-test #darV8GlassLens:hover{filter:brightness(1.08)}
+}
+html.dar-v8-glass-test[data-v8-viewport="expanded"] #darV8GlassLens,
+html.dar-v8-glass-test[data-v8-keyboard="open"] #darV8GlassLens,
+html.dar-v8-glass-test.dar-ios-native-app #darV8GlassLens{display:none!important}
+@media(min-width:900px){html.dar-v8-glass-test #darV8GlassLens{display:none!important}}
+@media(max-width:390px){
+ html.dar-v8-glass-test #bottomNav.bottom-nav{inline-size:calc(100% - 62px)!important;max-inline-size:calc(100% - 62px)!important;margin-inline-end:62px!important}
+ html.dar-v8-glass-test #darV8GlassLens{inline-size:49px!important;block-size:49px!important}
+}
+@media(prefers-reduced-transparency:reduce){
+ html.dar-v8-glass-test #bottomNav.bottom-nav,html.dar-v8-glass-test #darV8GlassLens{
+  background:var(--bg,#10241b)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html.dar-v8-glass-test #bottomNav #darV8GlassSelection,
+ html.dar-v8-glass-test #bottomNav .nav-icon,
+ html.dar-v8-glass-test #appView .dv8-smart-links button{
+  transition:none!important;animation:none!important;transform:none!important
+ }
+}
