@@ -694,6 +694,7 @@ main#panel.panel{
 <script src="/admin/quiz-stats-manager.js?v=2"></script>
 <script src="/admin/live-edit.js?v=1"></script>
 <script src="/admin/social-review.js?v=5"></script>
+<script src="/admin/secure-vault.js?v=2"></script>
 <link rel="stylesheet" href="/admin/library-admin.css?v=14">
 <link rel="stylesheet" href="/admin/live-edit.css?v=1">
 <link rel="stylesheet" href="/admin/social-review.css?v=5">
@@ -861,7 +862,14 @@ function kennwortBuiltinCatalog(){
     {id:"video-studio-test-token",group:"KI-Video-Studio",label:"VIDEO_STUDIO_TEST_TOKEN",hint:"Nur Staging-/Autotests.",githubName:"VIDEO_STUDIO_TEST_TOKEN"},
     {id:"voice-gpu-origin",group:"Voice Studio / GPU",label:"DAR_VOICE_GPU_ORIGIN",hint:"Private GPU-Adresse; kein Kennwort.",githubName:"DAR_VOICE_GPU_ORIGIN"},
     {id:"voice-gpu-token",group:"Voice Studio / GPU",label:"DAR_VOICE_GPU_TOKEN",hint:"Privater GPU-Gateway-Token.",githubName:"DAR_VOICE_GPU_TOKEN"},
-    {id:"voice-web-token",group:"Voice Studio / GPU",label:"DAR_VOICE_WEB_TOKEN",hint:"Separater Zugang zur Voice-PWA.",githubName:"DAR_VOICE_WEB_TOKEN"}
+    {id:"voice-web-token",group:"Voice Studio / GPU",label:"DAR_VOICE_WEB_TOKEN",hint:"Separater Zugang zur Voice-PWA.",githubName:"DAR_VOICE_WEB_TOKEN"},
+    {id:"push-unlock-password",group:"Push-Freigabe",label:"DAR_PUSH_UNLOCK_PASSWORD",hint:"Getrenntes Push-Freigabepasswort; keine automatische Freischaltung.",githubName:"DAR_PUSH_UNLOCK_PASSWORD"},
+    {id:"shotstack-production",group:"KI-Video-Studio",label:"SHOTSTACK_API_KEY_PRODUCTION",hint:"Produktionsschlüssel getrennt vom Sandbox-Schlüssel."},
+    {id:"shotstack-sandbox",group:"KI-Video-Studio",label:"SHOTSTACK_API_KEY_SANDBOX",hint:"Sandbox-Key; nicht mit Produktion verwechseln."},
+    {id:"apple-apns-key-id",group:"Apple Push",label:"APPLE_APNS_KEY_ID",hint:"Öffentliche ID der Apple Push Key-Datei."},
+    {id:"apple-apns-private-key",group:"Apple Push",label:"APPLE_APNS_P8_PRIVATE_KEY",hint:"Privater APNs-Dateischlüssel; nur lokal und verschlüsselt verwahren."},
+    {id:"onesignal-kids-app-id",group:"OneSignal Kids",label:"ONESIGNAL_KIDS_APP_ID",hint:"Öffentliche App-ID der eigenständigen Kinder-App."},
+    {id:"apple-issuer-id",group:"Apple App Store",label:"APPLE_APP_STORE_ISSUER_ID",hint:"App Store Connect Issuer ID, keine Geheimangabe."}
   ];
 }
 function kennwortMatchBuiltin(label,githubName){
@@ -1475,7 +1483,7 @@ function renderKennwoerter(){
   const rows=kennwortMergedRows();
   const locallyKnown=rows.filter(r=>r.hasValue).length;
   const workerKnown=rows.filter(r=>!r.hasValue&&r.workerSet).length;
-  return `<section class="kennwort-page">
+  return `${window.DARAdminSecureVault?.render(kennwortBuiltinCatalog()) || ""}<section class="kennwort-page">
     <div class="section-head"><h3>Kennwörter</h3><span>${locallyKnown} lokal · ${workerKnown} Worker-Meldungen</span></div>
     <p class="kennwort-intro">Inventar bekannter Zugangsnamen, keine automatische Übernahme aus GitHub/Cloudflare. Achtung: Eigene Kennwörter werden hier derzeit unverschlüsselt im Browser gespeichert; keine neuen Geheimnisse vor der sicheren Tresor-Umstellung eingeben. Vorhandene Werte bleiben unverändert.</p>
     <input class="kennwort-search" id="kennwortSearch" type="search" placeholder="Suchen…" value="${esc(kennwortQuery)}" autocomplete="off">
@@ -1491,19 +1499,19 @@ function renderKennwoerter(){
             <span class="kennwort-meta"><span class="kennwort-dot${row.hasValue||row.workerSet?" on":""}"></span><span class="kennwort-chevron">›</span></span>
           </button>
           <div class="kennwort-body">
-            <input class="kennwort-value" data-kennwort-input="${esc(row.id)}" type="${shown?"text":"password"}" value="${esc(display)}" ${row.live&&row.hasValue?"readonly":""} placeholder="${row.live?"Gilt in der laufenden App":"Aktuellen Wert eintragen"}" autocomplete="off">
+            <input class="kennwort-value" data-kennwort-input="${esc(row.id)}" type="${shown?"text":"password"}" value="${esc(display)}" readonly placeholder="${row.live?"Gilt in der laufenden App":"Legacy-Bestand, nur lesen"}" autocomplete="off">
             <div class="kennwort-tools">
               <button class="btn" type="button" data-kennwort-reveal="${esc(row.id)}">${shown?"Verbergen":"Anzeigen"}</button>
               <button class="btn primary" type="button" data-kennwort-copy="${esc(row.id)}">Kopieren</button>
             </div>
             <div class="kennwort-tools">
-              ${row.live?`<span class="kennwort-intro">Nur der App-Wert gilt.</span>`:`<button class="btn" type="button" data-kennwort-save="${esc(row.id)}">Als aktuell speichern</button>`}
+              ${row.live?`<span class="kennwort-intro">Nur der App-Wert gilt.</span>`:`<span class="kennwort-intro">Altbestand nur lesen · neue Schlüssel oben verschlüsselt hinterlegen.</span>`}
               ${row.custom?`<button class="btn" type="button" data-kennwort-delete="${esc(row.id)}">Löschen</button>`:""}
             </div>
           </div>
         </div>`;
       }).join("")}`).join("")}
-      <div class="kennwort-item${kennwortComposerOpen?" is-open":""}">
+      <div class="kennwort-item" hidden>
         <button class="kennwort-head" type="button" id="kennwortComposerToggle">
           <span><b>Neuer Eintrag</b><small>Gleicher Name überschreibt den alten Wert</small></span>
           <span class="kennwort-meta"><span class="kennwort-chevron">›</span></span>
@@ -1520,6 +1528,7 @@ function renderKennwoerter(){
 }
 function bindKennwoerter(){
   if(currentTab!=="kennwoerter")return;
+  window.DARAdminSecureVault?.bind(kennwortBuiltinCatalog());
   const persist=async(id,value)=>{
     const row=kennwortMergedRows().find(item=>item.id===id)||{};
     if(row.live)return;
@@ -4902,7 +4911,7 @@ function startRefresh(){stopRefresh();renderDashboard();refreshTimer=setInterval
 function renderApp(){authed=readAuth()||authed;if(!authed){stopRefresh();renderLogin();return}document.getElementById("topbar").hidden=false;if(currentTab==="social"){stopRefresh();renderShell();return}startRefresh()}
 document.getElementById("refreshBtn").onclick=()=>renderDashboard({force:true});
 document.getElementById("adminBackBtn").onclick=()=>adminBack();
-document.getElementById("logoutBtn").onclick=()=>{setAuth(false);lastData=null;renderApp()};
+document.getElementById("logoutBtn").onclick=()=>{window.DARAdminSecureVault?.lock(false);setAuth(false);lastData=null;renderApp()};
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&authed)setTimeout(()=>renderDashboard(),260)});
 let adminSwipe=null;
 document.addEventListener("touchstart",e=>{
