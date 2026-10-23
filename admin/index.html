@@ -693,8 +693,10 @@ main#panel.panel{
 <script src="/admin/library-manager.js?v=26"></script>
 <script src="/admin/quiz-stats-manager.js?v=2"></script>
 <script src="/admin/live-edit.js?v=1"></script>
+<script src="/admin/social-review.js?v=1"></script>
 <link rel="stylesheet" href="/admin/library-admin.css?v=14">
 <link rel="stylesheet" href="/admin/live-edit.css?v=1">
+<link rel="stylesheet" href="/admin/social-review.css?v=1">
 <link rel="stylesheet" href="/admin/dar-admin-top-chrome-fix.css?v=4"><!-- DAR_ADMIN_TOP_CHROME_FIX -->
 <script>
 window.DAR_ANALYTICS_CONFIG={
@@ -725,6 +727,7 @@ const ADMIN_PUBLISH_TRACK_KEY="darAdminPublishTrackV1";
 const DEFAULT_ADMIN_TABS=[
   ["start","Start"],
   ["quellen","Beiträge"],
+  ["social","Sprachkontrolle & Social Media"],
   ["actions","Neuer Beitrag"],
   ["news","News"],
   ["ordner","Ordner"],
@@ -763,7 +766,7 @@ let newsSearchQuery="",newsFilter="live",editingNewsId=null;
 function esc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function adminEditableTarget(target){return!!(target&&target.closest&&target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.admin-form-grid,.upload-grid,.push-test-controls,.login"))}
 function adminIsEditing(){
-  if(currentTab==="bibliothek"||currentTab==="live-edit"||currentTab==="kennwoerter")return true;
+  if(currentTab==="bibliothek"||currentTab==="live-edit"||currentTab==="kennwoerter"||currentTab==="social")return true;
   const active=document.activeElement;
   const tag=active&&active.tagName?active.tagName.toLowerCase():"";
   if(window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.isLibraryBusy==="function"&&window.DARLibraryAdmin.isLibraryBusy())return true;
@@ -2988,6 +2991,7 @@ function renderFeedBgAdminPanel(){
   return `<section class="news-workspace"><div class="panel news-panel"><div class="section-head"><h3>Feed · Auto-Hintergründe</h3></div><div class="notice-note wide" style="color:#ffc9c3">Modul konnte nicht geladen werden. Bitte Seite mit <b>Strg+F5</b> neu laden. Skript: <code>/admin/feed-backgrounds-manager.js?v=3</code></div></div></section>`;
 }
 window.getAdminCurrentTab=()=>currentTab;
+window.renderAdminSocialShell=()=>{if(currentTab==="social")renderShell()};
 window.renderLibraryAdminPartial=function(){
   if(currentTab!=="bibliothek"||!window.DARLibraryAdmin)return false;
   const mount=document.getElementById("libAdminMount");
@@ -3001,7 +3005,7 @@ window.renderLibraryAdminPartial=function(){
   return true;
 };
 function renderShell(){
-  if(currentTab==="bibliothek"||currentTab==="live-edit"||currentTab==="kennwoerter")stopRefresh();
+  if(currentTab==="bibliothek"||currentTab==="live-edit"||currentTab==="kennwoerter"||currentTab==="social")stopRefresh();
   if(currentTab==="bibliothek"&&window.DARLibraryAdmin&&typeof window.DARLibraryAdmin.isLibraryBusy==="function"&&window.DARLibraryAdmin.isLibraryBusy())return;
   const data=lastData||{live:{},totals:[],updated:new Date()};
   const live=data.live||{},rows=totals();
@@ -3014,7 +3018,7 @@ function renderShell(){
   currentTab=normalizeAdminTab(currentTab);
   if(currentTab==="schedule")currentTab="actions";
   const refreshSec=currentTab==="besucher"?15:30;
-  const body=currentTab==="kennwoerter"?renderKennwoerter():currentTab==="live-edit"&&window.DARLiveEdit?window.DARLiveEdit.renderLiveEditTab():currentTab==="besucher"?renderVisitors(ctx):currentTab==="wochenanalyse"?renderWeeklyReport():currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"?(window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():'<section class="lib-admin"><p class="lib-admin-category">Bibliothek-Modul wird geladen…</p></section>'):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const body=currentTab==="social"&&window.DARAdminSocialReview?window.DARAdminSocialReview.render():currentTab==="kennwoerter"?renderKennwoerter():currentTab==="live-edit"&&window.DARLiveEdit?window.DARLiveEdit.renderLiveEditTab():currentTab==="besucher"?renderVisitors(ctx):currentTab==="wochenanalyse"?renderWeeklyReport():currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"?(window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():'<section class="lib-admin"><p class="lib-admin-category">Bibliothek-Modul wird geladen…</p></section>'):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tab-picker" aria-label="Admin-Bereich wählen">
       <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
@@ -3025,6 +3029,7 @@ function renderShell(){
     ${body}
     <div class="meta-line">Aktualisiert (Europe/Berlin): ${esc(formatAdminBerlin(data.updated,true))} · Auto-Refresh alle ${refreshSec} Sekunden${currentTab==="besucher"?" · Besucher-Live":""}</div>`;
   bindUi();
+  if(currentTab==="social"&&window.DARAdminSocialReview)window.DARAdminSocialReview.bind();
   bindWeeklyReport();
   enhanceAdminCollapsibles();
   updateAdminBackButton();
@@ -3113,6 +3118,7 @@ function renderStart(ctx){
   </section>
   <section class="folder-grid">
     ${folderCard("①","Beiträge","Suchen, öffnen, speichern.","quellen","Editor")}
+    ${folderCard("🌐","Sprachkontrolle & Social Media","Neun Sprachen prüfen und kopieren.","social","Redaktion")}
     ${folderCard("②","Neuer Beitrag","Markdown einfügen und veröffentlichen.","actions","Veröffentlichen")}
     ${folderCard("③","News","Kurzhinweise für Besucher.","news",newsSummaryLabel())}
     ${folderCard("④","Ordner","Kategorien sortieren und Texte korrigieren.","ordner","Studio")}
@@ -3336,6 +3342,7 @@ function renderQuellen(){
     <div class="panel" data-no-collapse>
       <div class="section-head"><h3>Beiträge bearbeiten</h3><span>${busy?"lädt…":`${list.length} Treffer`}</span></div>
       <p class="quellen-lead">${workerReady?"Suchen, öffnen, speichern.":"Worker Secret unter Einstellungen hinterlegen."}${healthNote}</p>
+      <button class="btn" type="button" data-tab="social">🌐 Sprachkontrolle &amp; Social Media öffnen</button>
     </div>
     <div class="quellen-grid${quellenEdit.filename?" has-editor":""}">
       <aside class="panel quellen-search-panel" data-no-collapse>
@@ -4869,15 +4876,16 @@ async function renderDashboard({force=false}={}){
   if(!force&&adminIsEditing())return;
   const panel=document.getElementById("panel");
   if(!lastData)panel.innerHTML=`<div class="empty">Statistik wird geladen...</div>`;
+  if(currentTab==="social"){renderShell();return}
   if(!hasSupabase()){panel.innerHTML=`<div class="empty">Supabase ist nicht konfiguriert.</div>`;return}
   const newsPromise=fetchLiveNewsItems({force});
   try{lastData=await fetchDashboard();await newsPromise;renderShell()}catch(e){panel.innerHTML=`<div class="empty">Statistik konnte nicht geladen werden (${esc(String(e.message||e))}).</div>`}
 }
 function stopRefresh(){if(refreshTimer){clearInterval(refreshTimer);refreshTimer=null}}
 function refreshIntervalMs(){return currentTab==="besucher"?VISITOR_REFRESH_MS:ADMIN_REFRESH_MS}
-function restartRefreshInterval(){if(!authed)return;if(currentTab==="bibliothek"||currentTab==="live-edit"||currentTab==="kennwoerter")return;stopRefresh();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
+function restartRefreshInterval(){if(!authed)return;if(currentTab==="bibliothek"||currentTab==="live-edit"||currentTab==="kennwoerter"||currentTab==="social")return;stopRefresh();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
 function startRefresh(){stopRefresh();renderDashboard();refreshTimer=setInterval(renderDashboard,refreshIntervalMs())}
-function renderApp(){authed=readAuth()||authed;if(!authed){stopRefresh();renderLogin();return}document.getElementById("topbar").hidden=false;startRefresh()}
+function renderApp(){authed=readAuth()||authed;if(!authed){stopRefresh();renderLogin();return}document.getElementById("topbar").hidden=false;if(currentTab==="social"){stopRefresh();renderShell();return}startRefresh()}
 document.getElementById("refreshBtn").onclick=()=>renderDashboard({force:true});
 document.getElementById("adminBackBtn").onclick=()=>adminBack();
 document.getElementById("logoutBtn").onclick=()=>{setAuth(false);lastData=null;renderApp()};
@@ -4901,6 +4909,7 @@ document.addEventListener("touchend",e=>{
 window.addEventListener("error",e=>{const panel=document.getElementById("panel");if(!panel)return;const msg=String(e.message||e.error||"Unbekannter Fehler");panel.innerHTML=`<section class="login"><h2>Admin Fehler</h2><p>${esc(msg)}</p><button class="btn primary" type="button" onclick="location.reload()">Neu laden</button><button class="btn" type="button" onclick="window.__DAR_ADMIN_REPAIR__&&window.__DAR_ADMIN_REPAIR__()">Cache reparieren</button></section>`});
 loadLocalDraft();
 authed=readAuth();
+if(new URLSearchParams(location.search).get("tab")==="social")currentTab="social";
 renderApp();
 </script>
 </body>
