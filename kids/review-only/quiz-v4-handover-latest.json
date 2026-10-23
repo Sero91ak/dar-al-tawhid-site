@@ -3,7 +3,7 @@
   "app": "TAWḤĪD KIDS",
   "branch": "review/kids-quiz-v4-batch-001-020-20261014",
   "pullRequest": "https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143",
-  "basedOnReviewedCommit": "236301d4f8c335712e250fe7fe558e6bc1881839",
+  "basedOnReviewedCommit": "27378b4c5ff31fd539347d9b89a9057574b1a18d",
   "modelId": "eleven_v4",
   "masterVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "totalCanonicalQuestions": 900,
@@ -37,23 +37,23 @@
     },
     "9-10": {
       "questions": 150,
-      "completeFourPartQuestions": 136,
+      "completeFourPartQuestions": 139,
       "availableParts": {
-        "question": 139,
+        "question": 140,
         "correct": 150,
         "retry": 150,
-        "explanation": 143
+        "explanation": 145
       },
       "missingParts": {
-        "explanation": 7,
-        "question": 11
+        "explanation": 5,
+        "question": 10
       }
     }
   },
-  "uniqueVerifiedQuizMP3s": 863,
-  "reusedSpeechPartAssignments": 1779,
-  "fourPartAudioQuestions": 433,
-  "missingPartsQuestions": 17,
+  "uniqueVerifiedQuizMP3s": 866,
+  "reusedSpeechPartAssignments": 1782,
+  "fourPartAudioQuestions": 436,
+  "missingPartsQuestions": 14,
   "remainingNewV4UniqueSegmentsByCostAudit": 75,
   "remainingNewV4TextCodepoints": 5068,
   "older300CompactSpokenDraftCount": 300,
@@ -68,12 +68,12 @@
   "genuinelyNewFragmentsExcludingFlowReservations": null,
   "onlyAlreadyPaidMP3RecoveryBlockedQuestions": null,
   "questionsNeedingNewV4Originals": null,
-  "originalV4TextClipsRegistered": 1815,
-  "previouslyChargedDirectV4Takes": 1745,
+  "originalV4TextClipsRegistered": 1826,
+  "previouslyChargedDirectV4Takes": 1753,
   "prepaidOriginalsImported": 56,
   "prepaidOriginalsStillMissing": 0,
   "missingGenerationIds": [],
-  "remainingUniqueSpeechSegmentsEstimate": 56,
+  "remainingUniqueSpeechSegmentsEstimate": 53,
   "remainingEstimatedCreditsForAll450": 79133.93,
   "preciseBillingReconciled": false,
   "masterOfflineHearingPackageBuilder": "kids/tools/build_quiz_v4_all450_master_hearing_review.py",
