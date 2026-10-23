@@ -467,3 +467,69 @@ body.dar-admin-workspace .folder-grid,body.dar-admin-workspace .quellen-grid{wid
   padding-left:14px!important;border-left:1px solid var(--dar-c-border)!important
  }
 }
+
+/* Fold multitasking / desktop-site layout viewport mismatch: browser media
+   queries can use a virtual width larger than the actually visible window.
+   The controller measures the visible area and applies this fallback. */
+body.dar-admin-visual-window .app{
+ width:min(100%,var(--dar-admin-window-width))!important;
+ max-width:var(--dar-admin-window-width)!important;
+ min-width:0!important;margin:0!important
+}
+body.dar-admin-visual-window.dar-admin-workspace,
+body.dar-admin-visual-window.dar-admin-login{padding-left:0!important}
+body.dar-admin-visual-window .dar-command-rail{display:none!important}
+body.dar-admin-visual-window.dar-admin-workspace #panel{
+ width:100%!important;max-width:100%!important;min-width:0!important
+}
+body.dar-admin-visual-window.dar-admin-workspace #panel .folder-grid{
+ grid-template-columns:repeat(2,minmax(0,1fr))!important
+}
+body.dar-admin-visual-window[data-dar-window-capacity="compact"].dar-admin-workspace #panel .folder-grid{
+ grid-template-columns:1fr!important
+}
+body.dar-admin-visual-window[data-dar-window-capacity="compact"] #panel .quellen-grid{
+ display:block!important
+}
+body.dar-admin-visual-window[data-dar-window-capacity="compact"] #panel .admin-form-grid{
+ grid-template-columns:minmax(0,1fr)!important
+}
+body.dar-admin-visual-window.dar-admin-login #panel{
+ display:block!important;width:100%!important
+}
+body.dar-admin-visual-window.dar-admin-login #panel:before{
+ display:none!important
+}
+body.dar-admin-visual-window.dar-admin-login #panel .login{
+ width:100%!important;max-width:none!important;
+ margin:0!important;padding:clamp(18px,4vw,36px)!important
+}
+/* The bottom bar must remain reachable even when the Fold has a virtual
+   1200px+ CSS viewport but only a narrow visual viewport. */
+body.dar-admin-visual-window.dar-admin-workspace .dar-mobile-command{
+ display:grid!important;position:fixed!important;bottom:0!important;left:0!important;
+ right:auto!important;width:var(--dar-admin-window-width)!important;
+ grid-template-columns:repeat(5,minmax(0,1fr))!important;
+ height:calc(60px + env(safe-area-inset-bottom))!important;
+ padding-bottom:env(safe-area-inset-bottom)!important;
+ background:#071612!important;border-top:1px solid var(--dar-c-rule)!important;
+ z-index:190!important
+}
+body.dar-admin-visual-window.dar-admin-workspace .dar-bottom-link{
+ display:flex!important;flex-direction:column!important;align-items:center!important;
+ justify-content:center!important;gap:2px!important;
+ min-width:0!important;color:#e2d5ac!important;background:none!important;
+ border:0!important;border-top:2px solid transparent!important;font-size:10px!important
+}
+body.dar-admin-visual-window.dar-admin-workspace .dar-bottom-link.active{
+ border-top-color:#e8cb8c!important;color:#f3dbad!important
+}
+body.dar-admin-visual-window.dar-admin-workspace .dar-bottom-icon{font-size:20px!important}
+body.dar-admin-visual-window.dar-admin-workspace .dar-mobile-more:not([hidden]){
+ position:fixed!important;left:0!important;right:auto!important;
+ bottom:calc(60px + env(safe-area-inset-bottom))!important;
+ width:var(--dar-admin-window-width)!important;max-height:65dvh!important;
+ overflow-y:auto!important;display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ background:#0d201a!important;z-index:189!important
+}
