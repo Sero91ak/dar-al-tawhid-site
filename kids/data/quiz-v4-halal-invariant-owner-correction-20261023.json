@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "ownerDirectCorrection": "Halale falsch gibt es nicht die Aussprache ist auch falsch sondern nur Halal",
+  "ownerCorrectionDate": "2026-10-23",
+  "wordToDisplayAndSpeakExactly": "Halal",
+  "noInflectionAllowedInThisKidsQuizTerm": true,
+  "arabicMeaning": "حلال",
+  "affectedQuestionIds": [
+    "kids-quiz-109",
+    "kids-quiz-131",
+    "kids-quiz-271"
+  ],
+  "questionDisplaySourceEdits": [
+    {
+      "questionId": "kids-quiz-109",
+      "field": "topic",
+      "originalText": "Halāl essen",
+      "correctedText": "Halal essen",
+      "originalTextSHA256": "9ad2eb5ce068764d9fab6857d9c68068c6bcacf712392d35437da2a4cd95060a",
+      "correctedTextSHA256": "11aacf904a322aed0b731f4378171a883ad9faac9004a49f51bd7b344f4a0ce6"
+    },
+    {
+      "questionId": "kids-quiz-109",
+      "field": "question",
+      "originalText": "Sollen wir halāle und gute Dinge essen?",
+      "correctedText": "Sollen wir Nahrung essen, die Halal und gut ist?",
+      "originalTextSHA256": "a450395c3fe97b5340bc0c7004daf49f98b77d002f088910e30934dca5d5877e",
+      "correctedTextSHA256": "74bf9fc64aeae462dc259109e12a9823584ade05ea2c351d65dcd188e6bfa41d"
+    },
+    {
+      "questionId": "kids-quiz-109",
+      "field": "explanation",
+      "originalText": "Allah erlaubt das Halāle und Gute und warnt vor den Wegen des Shayṭān.",
+      "correctedText": "Allah erlaubt uns, Nahrung zu essen, die Halal und gut ist, und warnt vor den Wegen des Shayṭān.",
+      "originalTextSHA256": "adcc639a08872d4bc726cc8c42f7818b7a0a9371ba48f9b3be8c8a3e60abfb28",
+      "correctedTextSHA256": "f6297fe495c17fcf3baf20c0fcda27f849587762d8b4a11969a6e3bf65d3f8c2"
+    },
+    {
+      "questionId": "kids-quiz-131",
+      "field": "topic",
+      "originalText": "Halāl und ṭayyib",
+      "correctedText": "Halal und ṭayyib",
+      "originalTextSHA256": "69ffa792acca53ea481b51c11393d8c7abe9dde22b186d28c4d2764640e3f5aa",
+      "correctedTextSHA256": "7efc53869726ef16ff5fa4f68b63714b4e7581938997f6b18dd6f331430b27fa"
+    },
+    {
+      "questionId": "kids-quiz-131",
+      "field": "answers[0].label",
+      "originalText": "Halāle und gute Nahrung",
+      "correctedText": "Nahrung, die Halal und gut ist",
+      "originalTextSHA256": "93410923f66318338c798be067540e9d44cca2e25c6c539e6b0512b69ccf705a",
+      "correctedTextSHA256": "737983972d07ca001ef7a87f807f0225f15e08df938de84fe31b9b180f217370"
+    },
+    {
+      "questionId": "kids-quiz-131",
+      "field": "explanation",
+      "originalText": "Allah befiehlt, von dem Halālen und Guten auf der Erde zu essen.",
+      "correctedText": "Allah befiehlt, Nahrung zu essen, die Halal und gut ist.",
+      "originalTextSHA256": "3b5971737a02434d3ae8aafb2c67c9d68733c7b1184519fce1f7666835d29c84",
+      "correctedTextSHA256": "f6e8fa0033b42b80b165f2e6ecc764e2be35551738eeb048e513c033a631afd6"
+    },
+    {
+      "questionId": "kids-quiz-271",
+      "field": "explanation",
+      "originalText": "Allah erlaubt das Halāle und Gute und warnt vor den Schritten des Shayṭān.",
+      "correctedText": "Allah erlaubt uns, Nahrung zu essen, die Halal und gut ist, und warnt vor den Schritten des Shayṭān.",
+      "originalTextSHA256": "14afc3b0a4d906a6b904f55ce0cde04f976e51f3665e01644431d5da23c14305",
+      "correctedTextSHA256": "1a29a3701d903ffa13223248c9d31bc4adaa65d1e1412b523d5cf87452507103"
+    }
+  ],
+  "changedExactV4SpeechFragments": [
+    {
+      "questionId": "kids-quiz-109",
+      "slot": "question",
+      "before": "Sollen wir halāle und gute Dinge essen?",
+      "after": "Sollen wir Nahrung essen, die Halal und gut ist?",
+      "beforeSHA256": "a450395c3fe97b5340bc0c7004daf49f98b77d002f088910e30934dca5d5877e",
+      "afterSHA256": "74bf9fc64aeae462dc259109e12a9823584ade05ea2c351d65dcd188e6bfa41d"
+    },
+    {
+      "questionId": "kids-quiz-109",
+      "slot": "explanation",
+      "before": "Allah erlaubt das Halāle und Gute und warnt vor den Wegen des Shayṭān.",
+      "after": "Allah erlaubt uns, Nahrung zu essen, die Halal und gut ist, und warnt vor den Wegen des Shayṭān.",
+      "beforeSHA256": "adcc639a08872d4bc726cc8c42f7818b7a0a9371ba48f9b3be8c8a3e60abfb28",
+      "afterSHA256": "f6297fe495c17fcf3baf20c0fcda27f849587762d8b4a11969a6e3bf65d3f8c2"
+    },
+    {
+      "questionId": "kids-quiz-131",
+      "slot": "question",
+      "before": "Halāle und gute Nahrung.",
+      "after": "Nahrung, die Halal und gut ist.",
+      "beforeSHA256": "10f57a8b9debddee8f81752342f7826d662d4f1580bd5f3549f8498ab48e3292",
+      "afterSHA256": "91b6293ea34087f3c8fafac529e2bef21e01ddd4053adc0014ac9e19bef1930e"
+    },
+    {
+      "questionId": "kids-quiz-131",
+      "slot": "explanation",
+      "before": "Allah befiehlt, von dem Halālen und Guten auf der Erde zu essen.",
+      "after": "Allah befiehlt, Nahrung zu essen, die Halal und gut ist.",
+      "beforeSHA256": "3b5971737a02434d3ae8aafb2c67c9d68733c7b1184519fce1f7666835d29c84",
+      "afterSHA256": "f6e8fa0033b42b80b165f2e6ecc764e2be35551738eeb048e513c033a631afd6"
+    },
+    {
+      "questionId": "kids-quiz-271",
+      "slot": "explanation",
+      "before": "Allah erlaubt das Halāle und Gute und warnt vor den Schritten des Shayṭān.",
+      "after": "Allah erlaubt uns, Nahrung zu essen, die Halal und gut ist, und warnt vor den Schritten des Shayṭān.",
+      "beforeSHA256": "14afc3b0a4d906a6b904f55ce0cde04f976e51f3665e01644431d5da23c14305",
+      "afterSHA256": "1a29a3701d903ffa13223248c9d31bc4adaa65d1e1412b523d5cf87452507103"
+    }
+  ],
+  "oldPaidRejectedContextOriginal": {
+    "oldText": "Halāle und gute Nahrung.",
+    "originalSha256": "a3599b8ef9196e89d705b7b82464cbcc8a228895edd863920df7c431e7d38c5d",
+    "originalURL": "/kids/assets/kids-quiz-audio/v4-owner-contextual-pilots-review-20261023/10f57a8b9debddee8f81752342f7826d.mp3",
+    "retainedForPaidProvenance": true,
+    "ownerPronunciationRejected": true,
+    "approvedForPlayback": false,
+    "publicReleaseAllowed": false,
+    "doNotRepeatChargeOriginalText": true
+  },
+  "blockedSourceTexts": [
+    "Sollen wir halāle und gute Dinge essen?",
+    "Allah erlaubt das Halāle und Gute und warnt vor den Wegen des Shayṭān.",
+    "Halāle und gute Nahrung.",
+    "Allah befiehlt, von dem Halālen und Guten auf der Erde zu essen.",
+    "Allah erlaubt das Halāle und Gute und warnt vor den Schritten des Shayṭān."
+  ],
+  "holdNewCorrectedTextUntilVerifiedReRecording": true,
+  "newCorrectedAudioGenerated": false,
+  "newCreditsSpent": 0,
+  "ownerApprovedForV4Live": false,
+  "publicReleaseAllowed": false,
+  "productionStatusMustBeRecomputed": true
+}

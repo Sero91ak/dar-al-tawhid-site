@@ -14,14 +14,17 @@
   "byAge": {
     "4-6": {
       "questions": 150,
-      "completeFourPartQuestions": 150,
+      "completeFourPartQuestions": 149,
       "availableParts": {
-        "question": 150,
+        "question": 149,
         "correct": 150,
         "retry": 150,
-        "explanation": 150
+        "explanation": 149
       },
-      "missingParts": {}
+      "missingParts": {
+        "question": 1,
+        "explanation": 1
+      }
     },
     "7-8": {
       "questions": 150,
@@ -5140,18 +5143,6 @@
     "kids-quiz-109": {
       "ageBand": "4-6",
       "parts": {
-        "question": {
-          "spokenTextSha256": "c93c711281c7f5327535701353e416378b8564f71be7c69eb162a88d74695330",
-          "url": "/kids/assets/kids-quiz-audio/v4-first150-composed-review/5a13b6204f769baaa18d38e4fe171457.mp3",
-          "sha256": "55c163efe42a2253043e378b744ca1b72267a294ed96618e5d923e84b124c44d",
-          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
-          "modelId": "eleven_v4",
-          "bytes": 124461,
-          "durationSeconds": 10.344,
-          "audioListeningApproved": false,
-          "qaApproval": "pending-human-auditory-review",
-          "reviewOnly": true
-        },
         "correct": {
           "spokenTextSha256": "0067ec0a8085d6f0fa38a9761e7c7725e68f97771c72cd61251b27d57d213f5c",
           "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/fZ1VIkCQEsdIxFQ2hwjF.mp3",
@@ -5175,22 +5166,13 @@
           "audioListeningApproved": false,
           "qaApproval": "pending-human-auditory-review",
           "reviewOnly": true
-        },
-        "explanation": {
-          "spokenTextSha256": "60edae4c9a08e3fc5cb9912cb51a0f4fcc7e23490551af46740291082a8fbaf1",
-          "url": "/kids/assets/kids-quiz-audio/v4-first150-composed-review/0f0c47d6c067482ad2cfa1856a27201d.mp3",
-          "sha256": "6718834f49241d2f8cb963bdfc963466bb6ec2fc6bef9725c6991171f8173b19",
-          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
-          "modelId": "eleven_v4",
-          "bytes": 79533,
-          "durationSeconds": 6.6,
-          "audioListeningApproved": false,
-          "qaApproval": "pending-human-auditory-review",
-          "reviewOnly": true
         }
       },
-      "missing": {},
-      "fourPartTechnicallyReady": true,
+      "missing": {
+        "question": "unavailable-original-v4-mp3",
+        "explanation": "unavailable-original-v4-mp3"
+      },
+      "fourPartTechnicallyReady": false,
       "humanListeningApproved": false,
       "publicPlaybackAuthorized": false
     },

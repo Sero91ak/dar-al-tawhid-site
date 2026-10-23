@@ -3,7 +3,7 @@
   "app": "TAWḤĪD KIDS",
   "branch": "review/kids-quiz-v4-batch-001-020-20261014",
   "pullRequest": "https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143",
-  "basedOnReviewedCommit": "7e5a80c502690bf973ca55ea3aae0c03c93820f4",
+  "basedOnReviewedCommit": "2ff2a84f69b3bc0f049b6a39127c3e33e40cc0f8",
   "modelId": "eleven_v4",
   "masterVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "totalCanonicalQuestions": 900,
@@ -12,14 +12,17 @@
   "ageBreakdown": {
     "4-6": {
       "questions": 150,
-      "completeFourPartQuestions": 150,
+      "completeFourPartQuestions": 149,
       "availableParts": {
-        "question": 150,
+        "question": 149,
         "correct": 150,
         "retry": 150,
-        "explanation": 150
+        "explanation": 149
       },
-      "missingParts": {}
+      "missingParts": {
+        "question": 1,
+        "explanation": 1
+      }
     },
     "7-8": {
       "questions": 150,
@@ -50,10 +53,10 @@
       }
     }
   },
-  "uniqueVerifiedQuizMP3s": 858,
-  "reusedSpeechPartAssignments": 1774,
-  "fourPartAudioQuestions": 430,
-  "missingPartsQuestions": 20,
+  "uniqueVerifiedQuizMP3s": 856,
+  "reusedSpeechPartAssignments": 1772,
+  "fourPartAudioQuestions": 429,
+  "missingPartsQuestions": 21,
   "remainingNewV4UniqueSegmentsByCostAudit": 75,
   "remainingNewV4TextCodepoints": 5068,
   "older300CompactSpokenDraftCount": 300,
@@ -73,8 +76,8 @@
   "prepaidOriginalsImported": 56,
   "prepaidOriginalsStillMissing": 0,
   "missingGenerationIds": [],
-  "remainingUniqueSpeechSegmentsEstimate": 61,
-  "remainingEstimatedCreditsForAll450": 79075.79,
+  "remainingUniqueSpeechSegmentsEstimate": 63,
+  "remainingEstimatedCreditsForAll450": 79133.93,
   "preciseBillingReconciled": false,
   "masterOfflineHearingPackageBuilder": "kids/tools/build_quiz_v4_all450_master_hearing_review.py",
   "masterOfflineHearingGitHubActions": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/workflows/kids-v4-all450-master-hearing-package.yml",

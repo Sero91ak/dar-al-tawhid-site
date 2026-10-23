@@ -10,7 +10,7 @@
     "9-10": 150
   },
   "preservesOriginalIds": true,
-  "sourceTextsUnmodified": true,
+  "sourceTextsUnmodified": false,
   "audioPublication": "blocked-until-audio-hash-and-human-QA",
   "selectionMethod": "v1 reproducible multi-category, repetition-averse algorithm; editorial QA pending",
   "purpose": "CURATED_450_AUDIO_FIRST_REVIEW_NOT_LIVE",
@@ -3089,8 +3089,8 @@
       "ageMax": 6,
       "scene": "food",
       "category": "Adab",
-      "topic": "Halāl essen",
-      "question": "Sollen wir halāle und gute Dinge essen?",
+      "topic": "Halal essen",
+      "question": "Sollen wir Nahrung essen, die Halal und gut ist?",
       "answers": [
         {
           "id": "a1",
@@ -3105,7 +3105,7 @@
       ],
       "success": "Richtig. Sehr gut!",
       "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
-      "explanation": "Allah erlaubt das Halāle und Gute und warnt vor den Wegen des Shayṭān.",
+      "explanation": "Allah erlaubt uns, Nahrung zu essen, die Halal und gut ist, und warnt vor den Wegen des Shayṭān.",
       "sourceType": "Qurʾān",
       "source": "Qurʾān 2:168",
       "status": "published",
@@ -3527,12 +3527,12 @@
       "ageMax": 8,
       "scene": "food",
       "category": "Adab",
-      "topic": "Halāl und ṭayyib",
+      "topic": "Halal und ṭayyib",
       "question": "Welche Nahrung sollen Menschen wählen?",
       "answers": [
         {
           "id": "a1",
-          "label": "Halāle und gute Nahrung",
+          "label": "Nahrung, die Halal und gut ist",
           "correct": true
         },
         {
@@ -3548,7 +3548,7 @@
       ],
       "success": "Richtig. Sehr gut!",
       "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
-      "explanation": "Allah befiehlt, von dem Halālen und Guten auf der Erde zu essen.",
+      "explanation": "Allah befiehlt, Nahrung zu essen, die Halal und gut ist.",
       "sourceType": "Qurʾān",
       "source": "Qurʾān 2:168",
       "status": "published",
@@ -6736,7 +6736,7 @@
       ],
       "success": "Richtig. Sehr gut!",
       "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
-      "explanation": "Allah erlaubt das Halāle und Gute und warnt vor den Schritten des Shayṭān.",
+      "explanation": "Allah erlaubt uns, Nahrung zu essen, die Halal und gut ist, und warnt vor den Schritten des Shayṭān.",
       "sourceType": "Qurʾān",
       "source": "Qurʾān 2:168",
       "status": "published",
@@ -16094,5 +16094,18 @@
         899
       ]
     }
+  },
+  "ownerSourceCorrection": {
+    "date": "2026-10-23",
+    "scope": "kids-quiz-109/131/271",
+    "rule": "Halal is invariant (no Halāle/Halālen/halāle inflection)",
+    "canonicalSource900NotModified": true,
+    "questionIds": [
+      "kids-quiz-109",
+      "kids-quiz-131",
+      "kids-quiz-271"
+    ],
+    "noAudioVoiceApprovalImplied": true,
+    "liveReleaseNotAllowed": true
   }
 }
