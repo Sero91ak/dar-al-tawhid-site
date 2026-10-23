@@ -8,14 +8,14 @@ if(!/^\/test(?:\/|$)/.test(location.pathname)||/^\/test\/kids(?:\/|$)/.test(loca
 var HEADER_ID="darTestBrandHeaderV1";
 var LOGO="/app-logo-original.png";
 var ICONS={
- language:"/test/assets/header-icons/globe-3d.svg",
- account:"/test/assets/header-icons/account-3d.svg",
- palette:"/test/assets/header-icons/palette-3d.svg"
+ language:"/test/assets/header-icons/language-classic-v7.png",
+ account:"/test/assets/header-icons/account-classic-v7.png",
+ palette:"/test/assets/header-icons/appearance-classic-v7.png"
 };
 function icon(kind){
  var i=document.createElement("img");
  i.className="dtbh-icon-3d";
- i.src=ICONS[kind]+"?v=20261023-no-broken-icon-v5";
+ i.src=ICONS[kind]+"?v=20261023-real-3d-png-v7";
  i.alt="";i.setAttribute("aria-hidden","true");
  i.width=36;i.height=36;i.decoding="async";i.draggable=false;
  return i;
