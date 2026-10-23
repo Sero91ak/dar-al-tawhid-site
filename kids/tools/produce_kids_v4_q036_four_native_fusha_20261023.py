@@ -110,7 +110,7 @@ def preflight():
     for source,id in SOURCES.items():
         ensure(missing_by_text[source]["blocker"]=="NEW_V4_REQUIRED_AFTER_APPROVED_PILOT",
            "previously billed/rejected source – do NOT reorder")
-        ensure(id in old and any(source in slot.get("segments",[]) for
+        ensure(id in old and any(source in slot.get("text","") for
            slot in (old[id][k] for k in ("question","correct","retry","explanation"))),
            "exact canonical question no longer matches")
         ensure(source not in reg["textClips"],"source already exists or billed")
