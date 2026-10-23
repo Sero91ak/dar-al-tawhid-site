@@ -1,6 +1,7 @@
 import Testing
 @testable import DARNext
 
+@MainActor
 struct DARNextTests {
     @Test
     func realRepositoryProvidesVerifiedDashboardContent() async throws {
