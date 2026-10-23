@@ -84,6 +84,29 @@ checkNoStrayQuranBind("index.html", indexHtml);
 checkNoStrayQuranBind("test/index.html", read("test/index.html"));
 checkJsSyntax("test/index.html", extractMainScript(read("test/index.html")));
 
+// DAR_PUBLIC_V8_VISIBLE_SURFACE_CONTRACT_20261023
+// Public browser '/' runs desktop-preview/index.html, not native index.html.
+// Prevent a 'green deploy with invisible effects' caused by wrong DOM targets.
+const publicV8 = read("desktop-preview/index.html");
+for (const token of [
+  'id="darV8Workspace"', 'id="darV8TopWelcome"', 'id="pageRoot"',
+  'DAR_V8_ACTUAL_PUBLIC_IMMERSIVE_V1_20261023',
+  'id="darV8ActualPublicImmersive20261023"',
+  'id="darV8ActualPublicImmersiveRuntime20261023"',
+  'darV8ActualImmersiveScene',
+  'body.desktop-overhaul-v18.dar-v8-home',
+  'hero-mobile-adobe.jpg', 'hero-wide-adobe.jpg'
+]) {
+  if (!publicV8.includes(token)) fail("Öffentliches V8 Dashboard fehlt: " + token);
+}
+const v8Runtime = publicV8.match(/<script id="darV8ActualPublicImmersiveRuntime20261023">([\s\S]*?)<\/script>/);
+checkJsSyntax("öffentliches V8 Immersive Dashboard", v8Runtime && v8Runtime[1]);
+const publicRouter = read("cloudflare/site-router.js");
+if (!publicRouter.includes('isRoot && wantsPublicWebsite(request)') ||
+    !publicRouter.includes('new URL("/desktop-preview/", url.origin)'))
+  fail("Public website: echtes V8-Dokument wird nicht geroutet");
+else ok("Public website: V8-Dokument statt nativer #appView-Ansicht");
+
 // Admin app
 checkJsSyntax("admin/index.html", extractAdminMainScript(read("admin/index.html")));
 const adminHtml = read("admin/index.html");
