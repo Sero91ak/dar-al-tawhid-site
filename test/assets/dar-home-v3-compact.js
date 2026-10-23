@@ -171,11 +171,18 @@ function sync(){
   lastPosts="";lastCity="";
   return;
  }
- const shell=document.querySelector("#appView .home-v380-shell");
- if(!shell)return;
- ensureTopControls();rearrangeHeader();
+ // The canonical V3 home can be mounted without the legacy v380 wrapper.
+ // Activate its scoped stylesheet as soon as its actual root exists, otherwise
+ // WebKit renders intrinsic SVG dimensions (giant search icon) and unstyled cards.
  const root=document.getElementById("dv3Home");
- if(!root)return; // Single canonical renderer owns the home; never insert a second layout.
+ if(!root)return; // No parallel home renderer or legacy fallback.
+ document.documentElement.classList.add("dar-home-v3");
+ const shell=document.querySelector("#appView .home-v380-shell");
+ ensureTopControls();rearrangeHeader();
+ if(!shell){
+  syncLanguageButtons();renderLatest();fetchWeather();
+  return;
+ }
  const searchBlock=shell.querySelector("#homeSearchBlock");
  const searchField=root.querySelector(".dv3-search-box");
  if(searchBlock&&searchField&&searchField.nextElementSibling!==searchBlock)searchField.insertAdjacentElement("afterend",searchBlock);
