@@ -825,7 +825,7 @@ function kennwortHealthFlag(key){
   return h[key]===true;
 }
 function kennwortBuiltinCatalog(){
-  /* Agent: neue Passwörter, Tokens, IPs, Keywords nur hier — ein Slot, aktueller Wert, alten ersetzen. */
+  /* Inventar der bekannten Dienstnamen: keine Secret-Werte aus GitHub oder Workern auslesen. */
   const c=cfg();
   return [
     {id:"admin-pin",group:"Admin-App",label:"Admin-Login",hint:"Aktuelles Command-Center-Passwort.",live:true,get:()=>String(c.adminPin||"")},
@@ -835,6 +835,7 @@ function kennwortBuiltinCatalog(){
     {id:"worker-secret",group:"Cloudflare Worker",label:"ADMIN_PUBLISH_SECRET",hint:"Ein Worker-Passwort. GitHub-Secret gleichen Namens.",githubName:"ADMIN_PUBLISH_SECRET",workerFlag:"hasAdminSecret",get:()=>savedWorkerSecret()},
     {id:"supabase-url",group:"Supabase",label:"Projekt-URL",hint:"Statistik und Quiz.",live:true,get:()=>String(c.supabaseUrl||"")},
     {id:"supabase-anon",group:"Supabase",label:"Anon-Key",hint:"Öffentlicher App-Key, kein Service-Role.",live:true,get:()=>String(c.supabaseKey||"")},
+    {id:"supabase-service-role",group:"Supabase",label:"SUPABASE_SERVICE_ROLE_KEY",hint:"Privater Server-Schlüssel, nie im Browser-Code.",githubName:"SUPABASE_SERVICE_ROLE_KEY"},
     {id:"onesignal-app-id",group:"OneSignal",label:"App-ID",hint:"Aktuelle Besucher-Push-App.",live:true,get:()=>"786d7cd6-0455-4434-ab14-0c10a7bc6b1e"},
     {id:"onesignal-api-key",group:"OneSignal",label:"ONESIGNAL_API_KEY_NEW",hint:"Nur dieser Key gilt. Alter ONESIGNAL_API_KEY ist Fallback, nicht extra merken.",githubName:"ONESIGNAL_API_KEY_NEW",workerFlag:"hasOneSignalKey"},
     {id:"github-repo",group:"GitHub",label:"Repository",hint:"Aktuelles Repo.",live:true,get:()=>"Sero91ak/dar-al-tawhid-site"},
@@ -845,11 +846,22 @@ function kennwortBuiltinCatalog(){
     {id:"telegram-topics-chat-id",group:"Telegram",label:"TELEGRAM_TOPICS_CHAT_ID",hint:"Forum/Topics. TELEGRAM_FORUM_CHAT_ID ist nur Fallback.",githubName:"TELEGRAM_TOPICS_CHAT_ID",get:()=>String((workerPublishHealth&&workerPublishHealth.telegramTopicsChatId)||"")},
     {id:"cloudflare-api-token",group:"Cloudflare",label:"CLOUDFLARE_API_TOKEN",hint:"Wrangler-Deploy. Ein Token.",githubName:"CLOUDFLARE_API_TOKEN"},
     {id:"cloudflare-account-id",group:"Cloudflare",label:"CLOUDFLARE_ACCOUNT_ID",hint:"Cloudflare-Konto.",githubName:"CLOUDFLARE_ACCOUNT_ID"},
+    {id:"cloudflare-zone-id",group:"Cloudflare",label:"CLOUDFLARE_ZONE_ID",hint:"Zone / Cache-Workflow; keine Zugangsdaten.",githubName:"CLOUDFLARE_ZONE_ID"},
+    {id:"openai-api-key",group:"KI / Übersetzungen",label:"OPENAI_API_KEY",hint:"Serverseitiger API-Zugang.",githubName:"OPENAI_API_KEY"},
+    {id:"gemini-api-key",group:"KI / Recherche",label:"GEMINI_API_KEY",hint:"Gemini-Recherche-Bridge.",githubName:"GEMINI_API_KEY"},
+    {id:"groq-api-key",group:"KI / Recherche",label:"GROQ_API_KEY",hint:"Groq-Recherche-Bridge.",githubName:"GROQ_API_KEY"},
+    {id:"pexels-api-key",group:"Bildquellen",label:"PEXELS_API_KEY",hint:"Feed-/Bildsuche.",githubName:"PEXELS_API_KEY"},
+    {id:"unsplash-access-key",group:"Bildquellen",label:"UNSPLASH_ACCESS_KEY",hint:"Feed-/Bildsuche.",githubName:"UNSPLASH_ACCESS_KEY"},
+    {id:"pixabay-api-key",group:"Bildquellen",label:"PIXABAY_API_KEY",hint:"Feed-/Bildsuche.",githubName:"PIXABAY_API_KEY"},
     {id:"video-fal-key",group:"KI-Video-Studio",label:"FAL_KEY",hint:"Bild/Video-Modell. FAL_API_KEY ist nur Fallback.",githubName:"FAL_KEY",workerFlag:"videoStudioFal"},
     {id:"video-elevenlabs-key",group:"KI-Video-Studio",label:"ELEVENLABS_API_KEY",hint:"Stimme im Video-Studio.",githubName:"ELEVENLABS_API_KEY",workerFlag:"videoStudioVoice"},
     {id:"video-elevenlabs-voice",group:"KI-Video-Studio",label:"ELEVENLABS_VOICE_ID",hint:"Aktuelle Stimme. DAR_MALE_VOICE_ID ist Fallback.",githubName:"ELEVENLABS_VOICE_ID"},
     {id:"video-shotstack-key",group:"KI-Video-Studio",label:"SHOTSTACK_API_KEY",hint:"Schnitt am Worker.",githubName:"SHOTSTACK_API_KEY",workerFlag:"videoStudioShotstack"},
-    {id:"video-studio-signing",group:"KI-Video-Studio",label:"VIDEO_STUDIO_SIGNING_SECRET",hint:"Signatur der Studio-Jobs.",githubName:"VIDEO_STUDIO_SIGNING_SECRET",workerFlag:"videoStudioSigning"}
+    {id:"video-studio-signing",group:"KI-Video-Studio",label:"VIDEO_STUDIO_SIGNING_SECRET",hint:"Signatur der Studio-Jobs.",githubName:"VIDEO_STUDIO_SIGNING_SECRET",workerFlag:"videoStudioSigning"},
+    {id:"video-studio-test-token",group:"KI-Video-Studio",label:"VIDEO_STUDIO_TEST_TOKEN",hint:"Nur Staging-/Autotests.",githubName:"VIDEO_STUDIO_TEST_TOKEN"},
+    {id:"voice-gpu-origin",group:"Voice Studio / GPU",label:"DAR_VOICE_GPU_ORIGIN",hint:"Private GPU-Adresse; kein Kennwort.",githubName:"DAR_VOICE_GPU_ORIGIN"},
+    {id:"voice-gpu-token",group:"Voice Studio / GPU",label:"DAR_VOICE_GPU_TOKEN",hint:"Privater GPU-Gateway-Token.",githubName:"DAR_VOICE_GPU_TOKEN"},
+    {id:"voice-web-token",group:"Voice Studio / GPU",label:"DAR_VOICE_WEB_TOKEN",hint:"Separater Zugang zur Voice-PWA.",githubName:"DAR_VOICE_WEB_TOKEN"}
   ];
 }
 function kennwortMatchBuiltin(label,githubName){
@@ -1461,16 +1473,17 @@ function bindWorkerSecretReveal(){
 function renderKennwoerter(){
   const groups=kennwortGroupedRows();
   const rows=kennwortMergedRows();
-  const known=rows.filter(r=>r.hasValue||r.workerSet).length;
+  const locallyKnown=rows.filter(r=>r.hasValue).length;
+  const workerKnown=rows.filter(r=>!r.hasValue&&r.workerSet).length;
   return `<section class="kennwort-page">
-    <div class="section-head"><h3>Kennwörter</h3><span>Face ID · ${known} aktuell</span></div>
-    <p class="kennwort-intro">Eine Liste, ein gültiger Wert je Eintrag. Antippen öffnet. Anzeigen und Kopieren nach Face ID. Tokens aus GitHub/Cloudflare stehen nicht im Code — nur lokal, überschreibt den alten Wert.</p>
+    <div class="section-head"><h3>Kennwörter</h3><span>${locallyKnown} lokal · ${workerKnown} Worker-Meldungen</span></div>
+    <p class="kennwort-intro">Inventar bekannter Zugangsnamen, keine automatische Übernahme aus GitHub/Cloudflare. Achtung: Eigene Kennwörter werden hier derzeit unverschlüsselt im Browser gespeichert; keine neuen Geheimnisse vor der sicheren Tresor-Umstellung eingeben. Vorhandene Werte bleiben unverändert.</p>
     <input class="kennwort-search" id="kennwortSearch" type="search" placeholder="Suchen…" value="${esc(kennwortQuery)}" autocomplete="off">
     <div class="kennwort-list">
       ${groups.map(group=>`<div class="kennwort-sec">${esc(group.name)}</div>${group.rows.map(row=>{
         const open=kennwortOpenId===row.id;
         const shown=open&&kennwortVaultUnlocked;
-        const status=row.hasValue?"auf diesem Gerät":(row.workerSet?"am Worker gesetzt":"noch leer");
+        const status=row.hasValue?"auf diesem Gerät":(row.workerSet?"vom Worker als gesetzt gemeldet":"auf diesem Gerät nicht hinterlegt");
         const display=shown?(row.value||""):(row.hasValue?"••••••••••••":"");
         return `<div class="kennwort-item${open?" is-open":""}" data-kennwort-id="${esc(row.id)}">
           <button class="kennwort-head" type="button" data-kennwort-open="${esc(row.id)}">
