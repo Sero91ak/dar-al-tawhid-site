@@ -2,35 +2,24 @@
   "scope": "TAWḤĪD KIDS · 150 age 4–6 V4 cost-free listening preview",
   "questionCount": 150,
   "newPaidSynthesesForAssembly": 0,
-  "originalMasterMP3sStored": 1788,
-  "completeFourPartQuestions": 149,
+  "originalMasterMP3sStored": 1801,
+  "completeFourPartQuestions": 150,
   "availableFieldCounts": {
-    "question": 149,
+    "question": 150,
     "correct": 150,
     "retry": 150,
-    "explanation": 149
+    "explanation": 150
   },
   "importedPreviouslyPaidGenerationIdCount": 56,
-  "missingPreviouslyPaidOriginalTextCount": 2,
+  "missingPreviouslyPaidOriginalTextCount": 0,
   "missingPreviouslyPaidGenerationIdCount": 0,
   "missingDirectPaidPartGenerationIdCount": 0,
   "missingDirectPaidPartGenerationIds": [],
-  "missingPreviouslyPaidTexts": [
-    {
-      "text": "Allah erlaubt uns, Nahrung zu essen, die Halal und gut ist, und warnt vor den Wegen des Shayṭān.",
-      "requiredByQuestionParts": 1
-    },
-    {
-      "text": "Sollen wir Nahrung essen, die Halal und gut ist?",
-      "requiredByQuestionParts": 1
-    }
-  ],
+  "missingPreviouslyPaidTexts": [],
   "missingPaidOriginalGenerationIds": [],
   "originalFlowImportNeeded": false,
-  "projectedFourPartQuestionCountAfterAuthenticOldPaidImport": 149,
-  "projectedBlockedQuestionIdsAfterAuthenticOldPaidImport": [
-    "kids-quiz-109"
-  ],
+  "projectedFourPartQuestionCountAfterAuthenticOldPaidImport": 150,
+  "projectedBlockedQuestionIdsAfterAuthenticOldPaidImport": [],
   "projectionIsNotAudioProofOrHumanApproval": true,
   "readyForLive": false,
   "audioListeningApproved": false,
@@ -501,13 +490,12 @@
       "questionId": "kids-quiz-109",
       "availableAudioParts": [
         "correct",
+        "explanation",
+        "question",
         "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "explanation": "earlier-paid-original-flow-fragments-not-imported"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-112",

@@ -109,5 +109,51 @@
       "providerRequestId": "gnowHmfZKz9rRZ7xWn1k"
     }
   ],
-  "status": "STARTED_REMOTE_CHECKPOINT"
+  "status": "FIVE_HALAL_NATIVE_COMPOSITES_PRIVATE_TECHNICALLY_READY_AWAIT_OWNER_HEARING",
+  "composites": [
+    {
+      "sourceTextSHA256": "74bf9fc64aeae462dc259109e12a9823584ade05ea2c351d65dcd188e6bfa41d",
+      "sha256": "bbbcfdf0982b77137c83841aa834fdcd2bdb03b7f3fff937e24022e0ae265e0f",
+      "bytes": 52173,
+      "originalURL": "/kids/assets/kids-quiz-audio/v4-halal-five-native-repaired-review-20261023/74bf9fc64aeae462dc259109e12a9823-native-joined.mp3",
+      "nativeOriginalSHA256": "559a6fe9e1ed4d132b8001376758f3b101c86c39f788f331af999a23eac32ee5",
+      "ownerApprovedWholeSentence": false
+    },
+    {
+      "sourceTextSHA256": "f6297fe495c17fcf3baf20c0fcda27f849587762d8b4a11969a6e3bf65d3f8c2",
+      "sha256": "436395ffc2b52a6818ba63b00ff8ff1e959901fa326da498da69a1ee28afc8df",
+      "bytes": 88461,
+      "originalURL": "/kids/assets/kids-quiz-audio/v4-halal-five-native-repaired-review-20261023/f6297fe495c17fcf3baf20c0fcda27f8-native-joined.mp3",
+      "nativeOriginalSHA256": "559a6fe9e1ed4d132b8001376758f3b101c86c39f788f331af999a23eac32ee5",
+      "ownerApprovedWholeSentence": false
+    },
+    {
+      "sourceTextSHA256": "91b6293ea34087f3c8fafac529e2bef21e01ddd4053adc0014ac9e19bef1930e",
+      "sha256": "cb0b97e90111034d2fc4d24edd5b6894de01a8d47ac357215e4ccdc75611d87d",
+      "bytes": 41517,
+      "originalURL": "/kids/assets/kids-quiz-audio/v4-halal-five-native-repaired-review-20261023/91b6293ea34087f3c8fafac529e2bef2-native-joined.mp3",
+      "nativeOriginalSHA256": "559a6fe9e1ed4d132b8001376758f3b101c86c39f788f331af999a23eac32ee5",
+      "ownerApprovedWholeSentence": false
+    },
+    {
+      "sourceTextSHA256": "f6e8fa0033b42b80b165f2e6ecc764e2be35551738eeb048e513c033a631afd6",
+      "sha256": "1a9f18f43ed95690a965949769120dfcb0b8f5d12575b8cfb2bb2aec0a3821f3",
+      "bytes": 59661,
+      "originalURL": "/kids/assets/kids-quiz-audio/v4-halal-five-native-repaired-review-20261023/f6e8fa0033b42b80b165f2e6ecc764e2-native-joined.mp3",
+      "nativeOriginalSHA256": "559a6fe9e1ed4d132b8001376758f3b101c86c39f788f331af999a23eac32ee5",
+      "ownerApprovedWholeSentence": false
+    },
+    {
+      "sourceTextSHA256": "1a29a3701d903ffa13223248c9d31bc4adaa65d1e1412b523d5cf87452507103",
+      "sha256": "ebb11e775e23aecbb01c644b8f7c2646ddee5a7554d8b5e3b353828421ab88a7",
+      "bytes": 88461,
+      "originalURL": "/kids/assets/kids-quiz-audio/v4-halal-five-native-repaired-review-20261023/1a29a3701d903ffa13223248c9d31bc4-native-joined.mp3",
+      "nativeOriginalSHA256": "559a6fe9e1ed4d132b8001376758f3b101c86c39f788f331af999a23eac32ee5",
+      "ownerApprovedWholeSentence": false
+    }
+  ],
+  "recoveredWithoutNewPaidCallsAt": "2026-10-23T16:42:07.562749+00:00",
+  "newPaidCallsDuringRecovery": 0,
+  "ownerApprovedFullSentences": 0,
+  "publicQuizReleased": false
 }

@@ -780,6 +780,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Nimm dir Zeit für deine Antwort. Welche Nahrung sollen Menschen wählen? Antwort 1: Nahrung, die Halal und gut ist. Antwort 2: Verbotene Nahrung. Antwort 3: Alles ohne Prüfung. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/8cde0985d0a54edb3d02f7e003257e38782cd8e3.mp3",
+      "sha256": "55f42a66fe196202186c9c6c2604f57235aa8e03dcd39fc0fbc3474e7cd4f76f",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Allah befiehlt, Nahrung zu essen, die Halal und gut ist.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/381b479a8d61a0ee983460d13d43ef02261425c7.mp3",
+      "sha256": "14460761abff1fe865553ab74cf95dba6e0280ddf755f94363153a7db252d748",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Überlege kurz, bevor du dich entscheidest. Was kann Feindschaft nach Qurʾān 41:34 verändern? Antwort 1: Das Schlechte mit etwas Besserem abzuwehren. Antwort 2: Mehr Beleidigungen. Antwort 3: Gerüchte zu verbreiten. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/de345e914f289172f5ba9334578cca2ae09bd99a.mp3",
       "sha256": "847140ba71efb9f50007cc80438c0469f2494c52414c00235dca0c99c8252822",
@@ -1465,6 +1487,17 @@
     "Nimm dir Zeit für deine Antwort. Welchen Schritten sollen wir nach Qurʾān 2:168 nicht folgen? Antwort 1: Den Schritten des Shayṭān. Antwort 2: Dem Qurʾān. Antwort 3: Guten Ratschlägen. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/e9a370b18330a0fd80bed24bb1d602d7b96ada21.mp3",
       "sha256": "3037bd7298b678c396f2b8557e75b0a844951bb922bcac0d599dd26a8970aa06",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Allah erlaubt uns, Nahrung zu essen, die Halal und gut ist, und warnt vor den Schritten des Shayṭān.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/0bb845ed4167a093a74488f880a4f35aeb1d341b.mp3",
+      "sha256": "eeefd211db23590adb1b6a4b4034b1382c929943bf347e41cd35c23248d3bf2e",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "qaApproval": "pending-human-auditory-review",
@@ -7150,10 +7183,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Nahrung, die Halal und gut ist."
-          ]
+          "available": true,
+          "textSha256": "a89249e864fed5c020d9c5960fb94d4c69eec5ea03c2d9c8e9c11c1bf7d09998",
+          "mp3Sha256": "55f42a66fe196202186c9c6c2604f57235aa8e03dcd39fc0fbc3474e7cd4f76f",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/8cde0985d0a54edb3d02f7e003257e38782cd8e3.mp3"
         },
         "correct": {
           "available": true,
@@ -7168,13 +7201,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/41388654c1245c28b6b3d2e93d8bf77a.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah befiehlt, Nahrung zu essen, die Halal und gut ist."
-          ]
+          "available": true,
+          "textSha256": "fe8d31c6d2a0730f432c765b58e6e85923faeeeb7ea1864e8ef8fe7762a62717",
+          "mp3Sha256": "14460761abff1fe865553ab74cf95dba6e0280ddf755f94363153a7db252d748",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/381b479a8d61a0ee983460d13d43ef02261425c7.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-133": {
       "ageBand": "7-8",
@@ -8128,13 +8161,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/41388654c1245c28b6b3d2e93d8bf77a.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah erlaubt uns, Nahrung zu essen, die Halal und gut ist, und warnt vor den Schritten des Shayṭān."
-          ]
+          "available": true,
+          "textSha256": "892b250118b177951f35021836b43c161d66a12529de89e190a370ae9b60c246",
+          "mp3Sha256": "eeefd211db23590adb1b6a4b4034b1382c929943bf347e41cd35c23248d3bf2e",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/0bb845ed4167a093a74488f880a4f35aeb1d341b.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-272": {
       "ageBand": "7-8",
