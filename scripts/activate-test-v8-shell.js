@@ -14,8 +14,8 @@ const cssPath = "test/assets/v8-integrated-shell-v1.css";
 const jsPath = "test/assets/v8-integrated-shell-v1.js";
 const glassCssPath = "test/assets/dar-v8-glass-navigation-v1.css";
 const glassJsPath = "test/assets/dar-v8-glass-navigation-v1.js";
-const glassCssTag = '<link rel="stylesheet" id="darV8GlassNavigationCSS" href="/test/assets/dar-v8-glass-navigation-v1.css?v=20261023-glass-v1">';
-const glassJsTag = '<script id="darV8GlassNavigationJS" src="/test/assets/dar-v8-glass-navigation-v1.js?v=20261023-glass-v1" defer></script>';
+const glassCssTag = '<link rel="stylesheet" id="darV8GlassNavigationCSS" href="/test/assets/dar-v8-glass-navigation-v1.css?v=20261023-glass-v3">';
+const glassJsTag = '<script id="darV8GlassNavigationJS" src="/test/assets/dar-v8-glass-navigation-v1.js?v=20261023-glass-v3" defer></script>';
 const cssHref = "/test/assets/v8-integrated-shell-v1.css?v=20261022-integrated-1";
 const jsSrc = "/test/assets/v8-integrated-shell-v1.js?v=20261022-integrated-1";
 
