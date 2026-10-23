@@ -2007,6 +2007,7 @@
       if (play) {
         play.innerHTML = icon(state.playing ? "pause" : "play");
         play.setAttribute("aria-label", state.playing ? "Pause" : "Wiedergabe");
+        play.setAttribute("data-dar-ui-label", "player");
       }
       var sh = root.querySelector("[data-dqp=shuffle]");
       var rp = root.querySelector("[data-dqp=repeat]");
@@ -2018,8 +2019,15 @@
       var ayah = root.querySelector("[data-dqp-ayah]");
       if (ayah) fitAyah(ayah);
       syncMediaSession();
+      localizePlayerChrome(root);
     }
     paintMini();
+  }
+  function localizePlayerChrome(node) {
+    var ui = window.DarTestTurkishUI;
+    var lang = document.documentElement && document.documentElement.lang;
+    if (!node || !ui || !lang || lang === "de") return;
+    ui.apply(node, lang);
   }
   var posTick = 0;
   var lastMediaMetaKey = "";
@@ -2938,11 +2946,13 @@
     if (p) {
       p.innerHTML = icon("play");
       p.setAttribute("aria-label", "Wiedergabe");
+      p.setAttribute("data-dar-ui-label", "player");
       p.classList.toggle("is-on", !state.playing && !!state.sessionActive);
     }
     if (pa) {
       pa.innerHTML = icon("pause");
       pa.setAttribute("aria-label", "Pause");
+      pa.setAttribute("data-dar-ui-label", "player");
       pa.classList.toggle("is-on", !!state.playing);
     }
     if (st) st.innerHTML = icon("stop");
@@ -2983,6 +2993,7 @@
     paintMiniProgress();
     syncMediaSession();
     if (state.learnMode) followPlayingAyah(false);
+    localizePlayerChrome(el);
   }
   function bindLearnSheet(sh) {
     if (!sh || sh.dataset.dqpSheetBound === "1") return;
