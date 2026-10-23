@@ -61,23 +61,14 @@ function redirect(cookie){
  if(cookie)headers["Set-Cookie"]=cookie;
  return new Response(null,{status:303,headers});
 }
+/* Legacy standalone address now points to the consolidated DAR Admin atelier.
+   No new password page, no secondary source of truth. */
 export async function editorialOwnerAccess(request,url,env){
  if(!route(url.pathname))return null;
- // Temporary public editorial test. No server-side write or publish route.
- // Explicitly allow only the four static editor resources.
- const p=url.pathname;
- const allowed=new Set([ROOT,ROOT+"/",ROOT+"/index.html",ROOT+"/editor.js",ROOT+"/style.css"]);
- if(!allowed.has(p))return new Response("Not Found",{status:404,headers:hdr()});
  if(request.method!=="GET"&&request.method!=="HEAD")
   return new Response("Method Not Allowed",{status:405,headers:hdr({"Allow":"GET, HEAD"})});
- const target=new URL(url.toString());
- target.pathname=(p===ROOT||p===ROOT+"/index.html")?ROOT+"/":p;
- const asset=await env.ASSETS.fetch(new Request(target.toString(),{method:"GET"}));
- if(!asset.ok||asset.status>=300)return new Response("Redaktionsseite nicht verfügbar",{status:503,headers:hdr()});
- const headers=new Headers(asset.headers);
- for(const [k,v]of Object.entries(hdr()))headers.set(k,v);
- if(p===ROOT||p===ROOT+"/"||p===ROOT+"/index.html")headers.set("Content-Type","text/html; charset=utf-8");
- headers.set("Content-Security-Policy","default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'");
- headers.delete("ETag");headers.delete("Content-Length");
- return new Response(request.method==="HEAD"?null:asset.body,{status:200,headers});
+ if(url.pathname===ROOT||url.pathname===ROOT+"/"||url.pathname===ROOT+"/index.html"){
+  return new Response(null,{status:302,headers:hdr({"Location":"/admin/?tab=social"})});
+ }
+ return new Response("Not Found",{status:404,headers:hdr()});
 }
