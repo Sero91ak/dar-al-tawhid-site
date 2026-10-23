@@ -34,10 +34,10 @@ html = html.replace(/\s*<script\b[^>]*\bid=["']darV8IntegratedShellJS["'][^>]*><
 // Apply to the *built static HTML* as well as the Worker-rewritten shell.
 // On Cloudflare static-asset HIT the Worker rewrite can be skipped, so a
 // script-only update is otherwise invisible on an installed Test PWA.
-html = html.replace(/\\s*<script\\b(?=[^>]*\\bid=["']darTestHomeHtmlParityV1["'])[^>]*><\\/script>\\s*/gi, "\\n");
-html = html.replace(/\\s*<script\\b[^>]*\\bsrc=["'][^"']*\\/dar-home-html-parity-v1\\.js[^"']*["'][^>]*><\\/script>\\s*/gi, "\\n");
-html = html.replace(/\\s*<link\\b(?=[^>]*\\bid=["']darTestHomeV3ActualRoute["'])[^>]*>\\s*/gi, "\\n");
-const insertion = `\\n${cssTag}\\n${jsTag}\\n${homeGeometryTag}\\n${homeParityTag}\\n`;
+html = html.replace(/\s*<script\b(?=[^>]*\bid=["']darTestHomeHtmlParityV1["'])[^>]*><\/script>\s*/gi, "\n");
+html = html.replace(/\s*<script\b[^>]*\bsrc=["'][^"']*\/dar-home-html-parity-v1\.js[^"']*["'][^>]*><\/script>\s*/gi, "\n");
+html = html.replace(/\s*<link\b(?=[^>]*\bid=["']darTestHomeV3ActualRoute["'])[^>]*>\s*/gi, "\n");
+const insertion = `\n${cssTag}\n${jsTag}\n${homeGeometryTag}\n${homeParityTag}\n`;
 if (html.includes("</head>")) {
     html = html.replace("</head>", `${insertion}</head>`);
 } else if (/<head\b[^>]*>/i.test(html)) {
