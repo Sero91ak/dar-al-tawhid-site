@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "post:shafii-taten-und-worte-001",
+  "kind": "post",
+  "locale": "ar",
+  "sourceHash": "c50575c07625d4972287ab3ba01046b30f044305483eb2c26a872edf17e9c4b4",
+  "status": "draft",
+  "draftStatus": "machine-reviewed-draft",
+  "humanApproval": false,
+  "generatedBy": "cursor-agent-machine-review",
+  "generatedAt": "2026-10-23T20:45:47.936Z",
+  "model": null,
+  "paidApiCalls": 0,
+  "sourcePath": "content/posts/2026-06-05-shafii-taten-und-worte.md",
+  "reviewer": null,
+  "machineReview": {
+    "method": "cursor-agent-editorial-draft",
+    "linguistic": "machine-checked",
+    "religious": "machine-checked-against-german-canonical-wording",
+    "arabicOriginalChecked": true,
+    "arabicOriginalPolicy": "Immutable Arabic is copied unchanged. No Arabic primary text was invented.",
+    "sourcesChecked": true,
+    "sourcePolicy": "Canonical id, source, book, scholar and Q identity stay on the immutable record.",
+    "terminologyChecked": true,
+    "rtlChecked": true,
+    "humanLinguisticApproval": false,
+    "humanReligiousApproval": false
+  },
+  "fields": {
+    "title": "📖 العبرة بالأعمال والأقوال",
+    "body": "🖋️ **محمد بن إدريس الشافعي** قال:\n\n> ***«عفا الله عما في القلوب، وكُتبت على الناس الأعمال والأقوال.»***\n\n🌙 **الخلاصة:** لا يُكلَّف الإنسان بمجرد الخواطر الباطنة ما لم تصر **قولًا** أو **عملًا**. في ذلك رحمة — ومسؤولية في الوقت نفسه عن ***القول والعمل***."
+  },
+  "immutable": {
+    "source": "📝 adh-Dhahabī, Siyar Aʿlām an-Nubalāʾ, Tarjamat ash-Shāfiʿī, Band 10, S. 33.",
+    "book": "Siyar Aʿlām an-Nubalāʾ",
+    "scholar": "Muḥammad ibn Idrīs ash-Shāfiʿī",
+    "date": "2026-06-05T00:00:00.000Z",
+    "originalFile": "2026-06-05-shafii-taten-und-worte.md",
+    "sourceReviewBlocked": false
+  }
+}

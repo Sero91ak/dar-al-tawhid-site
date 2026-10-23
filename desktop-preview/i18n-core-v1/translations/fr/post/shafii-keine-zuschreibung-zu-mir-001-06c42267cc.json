@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "post:shafii-keine-zuschreibung-zu-mir-001",
+  "kind": "post",
+  "locale": "fr",
+  "sourceHash": "fdb069e1af2f0e79b5152f25913e5ec99d84bd77b8434742d03a748f4cd254e0",
+  "status": "draft",
+  "draftStatus": "machine-reviewed-draft",
+  "humanApproval": false,
+  "generatedBy": "cursor-agent-machine-review",
+  "generatedAt": "2026-10-23T20:45:46.997Z",
+  "model": null,
+  "paidApiCalls": 0,
+  "sourcePath": "content/posts/2026-06-05-shafii-keine-zuschreibung-zu-mir.md",
+  "reviewer": null,
+  "machineReview": {
+    "method": "cursor-agent-editorial-draft",
+    "linguistic": "machine-checked",
+    "religious": "machine-checked-against-german-canonical-wording",
+    "arabicOriginalChecked": true,
+    "arabicOriginalPolicy": "Immutable Arabic is copied unchanged. No Arabic primary text was invented.",
+    "sourcesChecked": true,
+    "sourcePolicy": "Canonical id, source, book, scholar and Q identity stay on the immutable record.",
+    "terminologyChecked": true,
+    "rtlChecked": false,
+    "humanLinguisticApproval": false,
+    "humanReligiousApproval": false
+  },
+  "fields": {
+    "title": "📖 La science sans gloire",
+    "body": "🖋️ **Muḥammad ibn Idrīs ash-Shāfiʿī** a dit :\n\n> ***« Je souhaitais que les gens apprennent cette science sans que rien de cela me soit attribué. »***\n\n🌙 **Conclusion :** L’**Ikhlāṣ** se montre lorsque l’homme aime le profit de la vérité, même si son propre nom y reste caché."
+  },
+  "immutable": {
+    "source": "📝 adh-Dhahabī, Siyar Aʿlām an-Nubalāʾ, Tarjamat ash-Shāfiʿī, Band 10, S. 29.",
+    "book": "Siyar Aʿlām an-Nubalāʾ",
+    "scholar": "Muḥammad ibn Idrīs ash-Shāfiʿī",
+    "date": "2026-06-05T00:00:00.000Z",
+    "originalFile": "2026-06-05-shafii-keine-zuschreibung-zu-mir.md",
+    "sourceReviewBlocked": false
+  }
+}
