@@ -129,9 +129,58 @@ function hostId(node){
  if(!raw)return "";
  return raw.startsWith("post:")?raw:"post:"+raw;
 }
+let surface=null;
+const phraseState=new WeakMap();
+function phraseMap(code){
+ const map=new Map();
+ if(!surface||code==="de")return map;
+ for(const record of Object.values(surface.records||{})){
+  if(record.status!=="draft"||record.humanApproval!==false)continue;
+  const source=record.german||{};
+  const translated=record.translations?.[code]||{};
+  for(const key of Object.keys(source)){
+   const from=source[key],to=translated[key];
+   if(typeof from==="string"&&typeof to==="string"&&from.trim()&&to.trim()&&!map.has(from))map.set(from,to);
+  }
+ }
+ return map;
+}
+function applyPhrases(){
+ const doc=global.document;
+ const root=doc?.body;
+ if(!root||typeof doc.createTreeWalker!=="function")return;
+ const code=locale();
+ const map=phraseMap(code);
+ const walker=doc.createTreeWalker(root,4);
+ let node;
+ while((node=walker.nextNode())){
+  const parent=node.parentElement;
+  if(!parent||parent.closest?.("script,style,.dua-arabic,.quran-arabic,[lang='ar'],[data-dar-no-translate]"))continue;
+  const current=String(node.nodeValue||"");
+  const match=current.match(/^(\s*)(.*?)(\s*)$/s);
+  if(!match)continue;
+  let state=phraseState.get(node);
+  if(state&&current!==state.rendered&&current!==state.source){phraseState.delete(node);state=null}
+  if(!state){
+   if(!map.has(match[2]))continue;
+   state={source:current,rendered:current};
+   phraseState.set(node,state);
+  }
+  const parts=state.source.match(/^(\s*)(.*?)(\s*)$/s);
+  const next=code==="de"||!map.has(parts[2])?state.source:parts[1]+map.get(parts[2])+parts[3];
+  if(node.nodeValue!==next)node.nodeValue=next;
+  state.rendered=next;
+ }
+}
+function bootSurface(data){
+ if(data?.schemaVersion!==1||data.scope!=="dar-test-surface-drafts-only"||data.humanApproval!==false||data.status!=="draft")return;
+ surface=data;
+ render();
+}
 function render(){
  const doc=global.document;
- if(!pack||!doc)return;
+ if(!doc||(!pack&&!surface))return;
+ if(!pack){applyPhrases();return}
  const code=locale();
  for(const host of hosts()){
   const reader=host.className==="post-reader"||String(host.className||"").split(/\s+/).includes("post-reader");
@@ -167,6 +216,7 @@ function render(){
   }
   host.setAttribute("data-dar-draft-sig",signature);
  }
+ applyPhrases();
 }
 function boot(data){
  if(data?.schemaVersion!==1||data.scope!=="dar-test-machine-drafts-only"||data.humanApproval!==false||data.status!=="draft")return;
@@ -178,7 +228,7 @@ function boot(data){
   new global.MutationObserver(()=>render()).observe(global.document.body,{childList:true,subtree:true});
  }
 }
-global.DarTestMachineDrafts={boot,render,get locale(){return locale()}};
+global.DarTestMachineDrafts={boot,bootSurface,render,get locale(){return locale()}};
 const url="/test/i18n/adult-content-machine-drafts.json?v=20261023-batch1";
 if(typeof global.fetch==="function"){
  global.fetch(url,{credentials:"same-origin",cache:"no-store"}).then(response=>{
@@ -187,5 +237,9 @@ if(typeof global.fetch==="function"){
  }).then(boot).catch(error=>{
   if(global.console?.warn)global.console.warn("DĀR TEST machine drafts stayed hidden.",error);
  });
+ global.fetch("/test/i18n/adult-surface-drafts.json?v=20261024-surface",{credentials:"same-origin",cache:"no-store"}).then(response=>{
+  if(!response.ok)return null;
+  return response.json();
+ }).then(data=>{if(data)bootSurface(data)}).catch(()=>{});
 }
 })(window);
