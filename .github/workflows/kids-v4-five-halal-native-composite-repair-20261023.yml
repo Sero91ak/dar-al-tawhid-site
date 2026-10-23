@@ -1,0 +1,58 @@
+name: KIDS V4 Repair Five Halal Original Fragments With Approved Native Voice
+on:
+  push:
+    branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
+    paths:
+      - '.github/workflows/kids-v4-five-halal-native-composite-repair-20261023.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: tawhid-kids-v4-450-shared-paid-queue
+  cancel-in-progress: false
+jobs:
+  owner-native-five:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 38
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      KIDS_V4_HALAL_PRIVATE_5_ONCE: 'YES'
+    steps:
+      - name: Checkout approved native and 450 private source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Audit all paid original receipts and owner corrections before billable V4 call
+        run: |
+          set -euo pipefail
+          git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+          git merge --ff-only FETCH_HEAD
+          python3 -m py_compile kids/tools/produce_kids_v4_halal_5_native_exact_review_20261023.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          c=json.loads(Path('kids/data/quiz-v4-halal-invariant-owner-correction-20261023.json').read_text())
+          s=json.loads(Path('kids/data/quiz-v4-450-production-status.json').read_text())
+          h=json.loads(Path('kids/data/quiz-v4-pronunciation-hold.json').read_text())
+          assert s['completedQuestionsWithAllFourAudioParts']==429 and not s['livePublished']
+          assert len(c['changedExactV4SpeechFragments'])==5
+          assert h['productionPaused'] and not h['publicQuizAudioReleaseAuthorized']
+          print('KIDS_V4_OWNER_HALAL_FIVE_PREFLIGHT 429/450; release OFF')
+          PY
+      - name: Produce exactly five split Fuṣḥā Halal source composites with remote billing journals
+        run: |
+          set -euo pipefail
+          python3 kids/tools/produce_kids_v4_halal_5_native_exact_review_20261023.py
+      - name: Preserve private original receipts even if ElevenLabs fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-five-native-Halal-private-voice-20261023
+          retention-days: 60
+          if-no-files-found: warn
+          path: |
+            kids/review-only/kids-v4-five-halal-native-450-repair-paid-journal-20261023.json
+            kids/assets/kids-quiz-audio/v4-halal-five-native-repaired-review-20261023/
