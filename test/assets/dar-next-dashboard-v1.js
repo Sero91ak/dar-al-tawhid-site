@@ -41,9 +41,11 @@
     es: ["DĀR AL TAWḤĪD · CENTRO DE CONOCIMIENTO","El conocimiento en un nuevo espacio","Corán, Sunna auténtica y Āṯār en un entorno sereno.","Abrir Majlis al-ʿIlm","Explorar secciones","Acceso rápido","Buscar sección …","Elige una sección. Se conservan las funciones existentes.","Abrir menú"]
   };
   var palette = null, launcher = null, search = null, grid = null, previousFocus = null;
-  var scheduling = false;
+  var scheduling = false, lastLocale = "";
   function lang() {
-    var raw = String(root.lang || "de").toLowerCase().split("-")[0];
+    var chosen = "";
+    try {chosen = String(localStorage.getItem("darAdultPreferredLocaleV1") || "");} catch (_e) {}
+    var raw = (chosen || String(root.lang || "de")).toLowerCase().split("-")[0];
     return Object.prototype.hasOwnProperty.call(translations,raw) ? raw : "de";
   }
   function t(index) { return translations[lang()][index]; }
@@ -168,6 +170,14 @@
   function update() {
     if (!document.body || !document.getElementById("appView")) return;
     makeLauncher();makePalette();
+    var selectedLocale = lang();
+    if (lastLocale !== selectedLocale) {
+      lastLocale = selectedLocale;
+      var staleHome = document.getElementById("darNextHomeHero");
+      var staleRoute = document.getElementById("darNextRouteHero");
+      if (staleHome) staleHome.remove();
+      if (staleRoute) staleRoute.remove();
+    }
     document.body.classList.toggle("dar-next-is-ilm",routeId()==="ilm");
     var id=routeId(),main=document.getElementById("appView");
     if (id==="home"){
@@ -205,6 +215,8 @@
     }).observe(app,{childList:true});
     window.addEventListener("hashchange",schedule);
     window.addEventListener("pageshow",schedule);
+    window.addEventListener("dar-adult-locale-changed",schedule);
+    window.addEventListener("storage",schedule);
     document.addEventListener("dar:view-rendered",schedule);
     if(window.MutationObserver) new MutationObserver(schedule).observe(root,{attributes:true,attributeFilter:["lang"]});
     document.addEventListener("keydown",function(ev){
