@@ -8695,6 +8695,27 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-23T23:59:00.000Z"
+    },
+    {
+      "id": "pwa-touch-dead-intent-guard-v2-20261024",
+      "at": "2026-10-24T16:20:00+02:00",
+      "approvedBy": "user-voice-android-pwa-nav-dead-only-scroll-works-20261024",
+      "reason": "Emergency: Android PWA taps dead after soft-boot — DAR_TOUCH_INTENT_GUARD_V1 (12px + bottom-nav) swallowed pointerup/click. Soft-boot hang fix (v1291) was never merged to main. Ship V2 touch guard + soft-boot + cache bump.",
+      "paths": [
+        "assets/dar-app-chrome.js",
+        "assets/app-soft-boot.js",
+        "cloudflare/site-router.js",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "service-worker.js",
+        "scripts/check-quellen-client.cjs",
+        "quellen/index.html",
+        "kids/",
+        "assets/bg/",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-07T23:59:00.000Z"
     }
   ],
   "enabled": true
