@@ -1,4 +1,4 @@
-// PUBLIC_WEBSITE_RECOVERY_TRIGGER_20261010_V2
+// PUBLIC_WEBSITE_RECOVERY_TRIGGER_20261024_V3_DESKTOP_NAV_BLANK
 /* pwa-dedicated-shell-live-20261009-2050 */
 /* pwa-softboot-unstick-v679-20261024 */
 /* public-pwa-emergency-repair-live-20261009-1824 */
@@ -510,6 +510,18 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
     if(android)document.documentElement.classList.add("dar-android-browser");
     if(standalone)document.documentElement.classList.add("dar-pwa-standalone");
   }catch(e){}
+  /* DESKTOP_NAV_BLANK_FIX_V1: if SPA leave-animation stalls, restore visibility. */
+  try{
+    setTimeout(function(){
+      try{
+        var page=document.getElementById("pageRoot");
+        if(page&&page.classList.contains("is-leaving")){
+          page.classList.remove("is-leaving");
+          page.classList.add("is-leaving-failsafe");
+        }
+      }catch(eVis){}
+    },2200);
+  }catch(eTimer){}
 
   var pwaIcons=[{"id":"type-creme-ar","label":"Creme · Arabisch","theme":"#10282a","bg":"#f6f0e4","high":true},{"id":"emblem-creme-petrol","label":"Emblem · Creme/Petrol","theme":"#163b3a","bg":"#f3ead8","high":true},{"id":"emblem-nachtblau","label":"Emblem · Nachtblau","theme":"#101c34","bg":"#0c1630","high":true},{"id":"emblem-schwarzgold","label":"Emblem · Schwarz/Gold","theme":"#0a0a0c","bg":"#0a0a0c","high":true},{"id":"type-anthrazit-ar","label":"Anthrazit · Arabisch","theme":"#25292f","bg":"#25292f","high":false},{"id":"type-anthrazit-fein","label":"Anthrazit · Fein","theme":"#292d33","bg":"#292d33","high":false},{"id":"type-creme","label":"Creme · Name","theme":"#10282a","bg":"#f6f0e4","high":true},{"id":"type-weiss-ar","label":"Weiß · Arabisch","theme":"#111111","bg":"#ffffff","high":false},{"id":"type-schwarz-rund","label":"Schwarz · Rund","theme":"#101010","bg":"#101010","high":false},{"id":"type-schwarz-ar","label":"Schwarz · Arabisch","theme":"#0b0b0d","bg":"#0b0b0d","high":true},{"id":"type-schwarz","label":"Schwarz · Name","theme":"#0b0b0d","bg":"#0b0b0d","high":true},{"id":"type-navy-ar","label":"Navy · Arabisch","theme":"#102038","bg":"#102038","high":true},{"id":"type-navy","label":"Navy · Name","theme":"#102038","bg":"#102038","high":true},{"id":"type-bordeaux-ar","label":"Bordeaux · Arabisch","theme":"#581620","bg":"#581620","high":true},{"id":"type-bordeaux","label":"Bordeaux · Name","theme":"#581620","bg":"#581620","high":true},{"id":"type-gruen-ar","label":"Grün · Arabisch","theme":"#123024","bg":"#123024","high":true},{"id":"type-gruen","label":"Grün · Name","theme":"#123024","bg":"#123024","high":true},{"id":"type-schwarz-ar2","label":"Schwarz · Fein","theme":"#0b0b0d","bg":"#0b0b0d","high":true}];
   var pwaIconMap={};pwaIcons.forEach(function(row){pwaIconMap[row.id]=row});
@@ -1734,8 +1746,8 @@ export default {
 
       let html = await assetResponse.text();
       if (assetResponse.ok) {
-        const styleTag = '<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=183">';
-        const scriptTag = '<script defer src="/desktop-preview/desktop-overhaul.js?v=183"><\/script>';
+        const styleTag = '<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=283">';
+        const scriptTag = '<script defer src="/desktop-preview/desktop-overhaul.js?v=283"><\/script>';
         if (!html.includes("desktop-overhaul.css")) html = html.replace("</head>", styleTag + "</head>");
         if (!html.includes("desktop-overhaul.js")) html = html.replace("</body>", scriptTag + "</body>");
         if (!html.includes("dar-onesignal-language-sync.js")) html = html.replace("</body>", '<script defer src="/assets/dar-onesignal-language-sync.js?v=1"></script></body>');

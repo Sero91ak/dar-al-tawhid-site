@@ -8716,6 +8716,28 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-07T23:59:00.000Z"
+    },
+    {
+      "id": "desktop-nav-blank-fix-20261024",
+      "at": "2026-10-24T16:30:00+02:00",
+      "approvedBy": "user-voice-desktop-website-still-broken-sofort-fixen-20261024",
+      "reason": "Emergency: public desktop website blank/dead after SPA nav when render() throws while #pageRoot.is-leaving (opacity:0). Harden navigate/render + recovery trigger. Includes prior soft-boot/touch emergency.",
+      "paths": [
+        "desktop-preview/",
+        "cloudflare/site-router.js",
+        "assets/dar-app-chrome.js",
+        "assets/app-soft-boot.js",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "service-worker.js",
+        "scripts/check-quellen-client.cjs",
+        "quellen/index.html",
+        "kids/",
+        "assets/bg/",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-07T23:59:00.000Z"
     }
   ],
   "enabled": true

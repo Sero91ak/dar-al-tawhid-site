@@ -96,7 +96,10 @@ button,input,select{font:inherit}
 .player-field select{max-width:180px;border:0;background:transparent;color:#332d25;font-size:10px;font-weight:700;outline:none;cursor:pointer}
 .player-step{width:42px;height:66px;border:0;border-left:1px solid var(--line2);background:transparent;color:#6e5730;cursor:pointer;font-size:15px}.player-step:hover{background:rgba(152,116,57,.04)}
 .page{width:min(var(--max),calc(100% - 50px));margin:0 auto;padding:31px 0 72px;transition:opacity .18s ease,transform .18s ease}
-.page.is-leaving{opacity:0;transform:translateY(7px)}
+/* DESKTOP_NAV_BLANK_FIX_V1: never leave the page permanently invisible.
+   Older navigate() removed is-leaving only after render(); any throw left opacity:0. */
+.page.is-leaving{opacity:0;transform:translateY(7px);pointer-events:none}
+.page.is-leaving-failsafe{opacity:1!important;transform:none!important;pointer-events:auto!important}
 .page-intro{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:38px;align-items:end;padding:15px 0 23px;border-bottom:1px solid var(--line)}
 .eyebrow{font-size:8px;letter-spacing:.19em;text-transform:uppercase;color:var(--gold);font-weight:850}
 .page-intro h1{margin:8px 0 8px;font:500 clamp(34px,4vw,58px)/1.01 var(--serif);letter-spacing:-.025em}
@@ -3062,37 +3065,53 @@ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .dar-v8-qa-to
   document.body.dataset.darV8Route=key;
   var crumb=document.getElementById("darV8BreadLabel");if(crumb)crumb.textContent=key==="start"?"Start":(intros[key]||intros.start)[0];document.querySelectorAll(".dar-v8-side-link").forEach(function(a){a.classList.toggle("active",a.dataset.page===key);if(a.dataset.page===key)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   try{
-   root.innerHTML=(key==="start"?"":window.DARV8Routes.htmlFor(key))+renders[key]();
+   root.innerHTML=(key==="start"?"":(window.DARV8Routes&&window.DARV8Routes.htmlFor?window.DARV8Routes.htmlFor(key):""))+renders[key]();
   }catch(err){
    try{console.error("Desktop render:",key,err)}catch(_){}
    root.innerHTML='<section class="page-intro reveal is-visible"><div><div class="eyebrow">DĀR AL TAWḤĪD</div><h1>Qurʾān, Sunnah und Wissen.</h1><p>Die Inhalte werden geladen. Nutze oben die Navigation, um Qurʾān, Beiträge, Duʿāʾ und Bibliothek zu öffnen.</p></div></section>';
   }
   document.querySelectorAll("#mainNav [data-page]").forEach(function(a){a.classList.toggle("active",a.getAttribute("data-page")===key)});
-  initReveal();
-  if(key==="quran")initBook();
-  if(document.getElementById("prayerRiver"))initPrayerTicker();
-  if(key==="zakat")initZakat();
-  if(key==="quiz")initQuiz();
-  if(key==="einstellungen")initSettings();
-  initRealPage(key);
-  initSmartBrowse(key);
-  if(window.DARV8Routes)window.DARV8Routes.init(key,{searchFold:searchFold});
-  if(window.DARV8Portal)window.DARV8Portal.init(key);
-  if(key==="start")initDarV8Home();
+  try{initReveal()}catch(_){}
+  try{if(key==="quran")initBook()}catch(_){}
+  try{if(document.getElementById("prayerRiver"))initPrayerTicker()}catch(_){}
+  try{if(key==="zakat")initZakat()}catch(_){}
+  try{if(key==="quiz")initQuiz()}catch(_){}
+  try{if(key==="einstellungen")initSettings()}catch(_){}
+  try{initRealPage(key)}catch(_){}
+  try{initSmartBrowse(key)}catch(_){}
+  try{if(window.DARV8Routes)window.DARV8Routes.init(key,{searchFold:searchFold})}catch(_){}
+  try{if(window.DARV8Portal)window.DARV8Portal.init(key)}catch(_){}
+  try{if(key==="start")initDarV8Home()}catch(_){}
   // Explicit player entry from the smart topbar opens the existing player controls.
-  if(key==="quran"&&new URLSearchParams(location.search).get("player")==="expanded"){
-   var player=document.querySelector(".v8-real-player"),expand=document.getElementById("darV8PlayerExpand");
-   if(player){player.classList.add("dar-v8-controls-open");}
-   if(expand){expand.setAttribute("aria-expanded","true");expand.textContent="⌃";}
-  }
-  if(key==="werk")initPdfReaderPage();
-  if(window.darSetPwaIcon)window.darSetPwaIcon(darPwaIconId(),false);
-  if(window.__darSyncInstallButtons)window.__darSyncInstallButtons();
+  try{
+   if(key==="quran"&&new URLSearchParams(location.search).get("player")==="expanded"){
+    var player=document.querySelector(".v8-real-player"),expand=document.getElementById("darV8PlayerExpand");
+    if(player){player.classList.add("dar-v8-controls-open");}
+    if(expand){expand.setAttribute("aria-expanded","true");expand.textContent="⌃";}
+   }
+  }catch(_){}
+  try{if(key==="werk")initPdfReaderPage()}catch(_){}
+  try{if(window.darSetPwaIcon)window.darSetPwaIcon(darPwaIconId(),false)}catch(_){}
+  try{if(window.__darSyncInstallButtons)window.__darSyncInstallButtons()}catch(_){}
  }
  function navigate(url,push){
   if(push!==false)history.pushState({desktop:true},"",url);
   root.classList.add("is-leaving");
-  setTimeout(function(){render();root.classList.remove("is-leaving");window.scrollTo({top:0,behavior:"smooth"})},150)
+  root.classList.remove("is-leaving-failsafe");
+  var leaveTimer=setTimeout(function(){
+   // Failsafe: never keep the public website blank if render stalls.
+   root.classList.add("is-leaving-failsafe");
+   root.classList.remove("is-leaving");
+  },1800);
+  setTimeout(function(){
+   try{render()}catch(err){try{console.error("Desktop navigate render:",err)}catch(_){}}
+   finally{
+    clearTimeout(leaveTimer);
+    root.classList.remove("is-leaving");
+    root.classList.remove("is-leaving-failsafe");
+    try{window.scrollTo({top:0,behavior:"smooth"})}catch(_){}
+   }
+  },150)
  }
  // Stable internal SPA navigation for the public website.
  // Keep page/search parameters inside the current document instead of round-tripping
@@ -4970,7 +4989,7 @@ renders.beitraege=function(){
 })();
 </script>
 <!-- desktop-content-sync-v12 -->
-<script defer src="/desktop-preview/desktop-overhaul.js?v=221"></script>
+<script defer src="/desktop-preview/desktop-overhaul.js?v=283"></script>
 <style id="darFinalTouchFeedbackV5">
 @media (hover:none) and (pointer:coarse){
   :where(a,button,[role="button"],summary,[tabindex],label,.desktop-link,.more-row,.category-card,.feature-card,.header-action,.main-nav a,.download-app-btn,.dar-pwa-home-action,.dar-pwa-icon-choice){
