@@ -25,7 +25,7 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 - Ausgangs-Branch-Commit vor diesem Statusnachweis: `bebf47c5851e5e15b16f4e7df168dcd745cfa9b4`.
 - Lokaler Xcode-Arbeitsordner: isolierter DARNext-Arbeitsstand; der bereitgestellte Ordner ist kein eigenständiger Git-Checkout, daher wurde kein lokaler Checkout/Reset/Checkout-Wechsel ausgeführt.
 - Xcode-Projekt: `DarAlTawhid.xcodeproj`.
-- Eigenständiges Target: `DARNextNext` (Application); zugehörig `DARNextTests` und `DARNextUITests`.
+- Eigenständiges Target: `DARNext` (Application); zugehörig `DARNextTests` und `DARNextUITests`.
 - Eigenständiges Scheme: `DARNext`; aktiver Testplan: `DARNext`.
 - Aktive Build-Destination: `iPhone Duo` Simulator (iOS 27.1); verfügbare iPhone-, iPad- und physische iPhone-Destinationen wurden von Xcode aufgelistet.
 - Bestehende DARNext-Struktur: native SwiftUI-Shell, Dashboard/Hub, Gebet, Qibla, Qurʾān, Duʿāʾ, Beiträge, Bibliothek, Suche, Audio, Quiz, lokale Repository-/Validierungsschicht und Tests.
