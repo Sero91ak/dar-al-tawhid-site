@@ -361,6 +361,9 @@ function isDynamicGermanUi(value){
   /^Juzʾ\s+\d+$/.test(value)||
   /^Sūrenbereich wechseln(?:\s+.+)?$/.test(value)||
   /^Alle 114 Sūren anzeigen/.test(value)||
+  /^\d+\s+Min vor Fajr$/.test(value)||
+  /^\d\/5 gewählt$/.test(value)||
+  /^In \d+ Min · .+ Uhr\. (?:Fajr|Dhuhr|ʿAṣr|Maghrib|ʿIshāʾ) naht — /.test(value)||
   /^\d+(?:[.,]\d+)?%\s+Trefferquote$/.test(value)||
   /^\d+\/\d+\s+gewählt$/.test(value)||
   /^Sūrenbereich wechseln, aktuell \d+[–-]\d+$/.test(value)||
@@ -476,6 +479,38 @@ function translateSharedPatterns(value,language){
  if(allSurahs){
   const line=lookupPack("Alle 114 Sūren anzeigen ↗",language);
   if(line)return line;
+ }
+ const beforeFajr=value.match(/^(\d+)\s+Min vor Fajr$/);
+ if(beforeFajr){
+  const line=lookupPack(beforeFajr[1]+" Min vor Fajr",language);
+  if(line)return line;
+ }
+ const picked=value.match(/^(\d)\/5 gewählt$/);
+ if(picked){
+  const chosen={ar:"تم اختيار",en:"selected",tr:"seçildi",ku:"hat hilbijartin",ckb:"هەڵبژێردرا",bs:"odabrano",fr:"sélectionné",es:"seleccionado"};
+  const word=chosen[language];
+  if(word)return language==="ar"||language==="ckb"?word+" "+picked[1]+"/5":picked[1]+"/5 "+word;
+ }
+ const soon=value.match(/^In (\d+) Min · (.+?) Uhr\. (Fajr|Dhuhr|ʿAṣr|Maghrib|ʿIshāʾ) naht — /);
+ if(soon){
+  const prayer={
+   Fajr:{ar:"الفجر",en:"Fajr",tr:"Fecir",ku:"Fecr",ckb:"فەجر",bs:"Fajr",fr:"Fajr",es:"Fajr"},
+   Dhuhr:{ar:"الظهر",en:"Ẓuhr",tr:"Öğle",ku:"Zohr",ckb:"زوهر",bs:"zuhr",fr:"Ẓuhr",es:"ẓuhr"},
+   "ʿAṣr":{ar:"العصر",en:"ʿAṣr",tr:"İkindi",ku:"Esr",ckb:"عەسر",bs:"ikindija",fr:"ʿAṣr",es:"ʿaṣr"},
+   Maghrib:{ar:"المغرب",en:"Maghrib",tr:"Akşam",ku:"Mexrib",ckb:"مەغریب",bs:"akšam",fr:"Maghrib",es:"magrib"},
+   "ʿIshāʾ":{ar:"العشاء",en:"ʿIshāʾ",tr:"Yatsı",ku:"Îşa",ckb:"عیشا",bs:"jacija",fr:"ʿIshāʾ",es:"ʿishāʾ"}
+  }[soon[3]];
+  const name=prayer?.[language];
+  if(!name)return null;
+  const minute=soon[1],clock=soon[2];
+  if(language==="ar")return "بعد "+minute+" دقيقة · "+clock+". اقتربت صلاة "+name+" — أدِّها لله.";
+  if(language==="ckb")return "دوای "+minute+" خولەک · "+clock+". نوێژی "+name+" نزیکە — بۆ الله ئەنجامی بدە.";
+  if(language==="tr")return minute+" dk sonra · "+clock+". "+name+" yaklaşıyor — namazı Allah için kıl.";
+  if(language==="ku")return "Di "+minute+" deqeyan de · "+clock+". "+name+" nêzîk e — nimêjê ji bo Allah bike.";
+  if(language==="bs")return "Za "+minute+" min · "+clock+". "+name+" se primiče — klanjaj namaz Allahu.";
+  if(language==="fr")return "Dans "+minute+" min · "+clock+". "+name+" approche — accomplis la prière pour Allah.";
+  if(language==="es")return "En "+minute+" min · "+clock+". Se acerca "+name+" — haz la oración por Allah.";
+  return "In "+minute+" min · "+clock+". "+name+" is near — pray it for Allah.";
  }
  return null;
 }
@@ -710,7 +745,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-quran-ui";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-13";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
