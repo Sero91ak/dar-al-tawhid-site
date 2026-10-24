@@ -150,13 +150,18 @@
     var hit=ev.target&&ev.target.closest?ev.target.closest("#bottomNav .bottom-nav-btn,[data-bottom-nav]"):null;
     if(hit)closeInternalSource(false);
   },true);
-  /* DAR_TOUCH_INTENT_GUARD_V1
-     Navigation in the adult shell uses pointerup for fast activation. A finger
-     that is scrolling/brushing a nav card must never activate it on release.
-     Preserve immediate, deliberate taps and all normal scrolling. */
+  /* DAR_TOUCH_INTENT_GUARD_V2
+     Navigation uses pointerup for fast activation. A finger that is clearly
+     scrolling a nav card must not activate it on release. Android finger
+     jitter (~10–20px) must NOT cancel taps. Fixed bottom-nav tabs are never
+     treated as scroll-brush targets (V1's 12px threshold + data-bottom-nav
+     made the PWA feel dead: scroll worked, taps did not). */
   var navPointer=null,dragClickTarget=null,dragClickUntil=0;
+  var MOVE_CANCEL_PX2=28*28;
   function navHit(el){
-    return el&&el.closest?el.closest("[data-nav],[data-bottom-nav],#backBtn,#homeBtn,#qovBackBtn,#qrcBackBtn"):null;
+    if(!el||!el.closest)return null;
+    if(el.closest("#bottomNav,[data-bottom-nav]"))return null;
+    return el.closest("[data-nav],#backBtn,#homeBtn,#qovBackBtn,#qrcBackBtn");
   }
   document.addEventListener("pointerdown",function(ev){
     if(ev.pointerType!=="touch"&&ev.pointerType!=="pen")return;
@@ -166,12 +171,12 @@
   document.addEventListener("pointermove",function(ev){
     if(!navPointer||ev.pointerId!==navPointer.id)return;
     var dx=ev.clientX-navPointer.x,dy=ev.clientY-navPointer.y;
-    if(dx*dx+dy*dy>144)navPointer.moved=true;
+    if(dx*dx+dy*dy>MOVE_CANCEL_PX2)navPointer.moved=true;
   },{capture:true,passive:true});
   document.addEventListener("pointerup",function(ev){
     if(!navPointer||ev.pointerId!==navPointer.id)return;
     var dx=ev.clientX-navPointer.x,dy=ev.clientY-navPointer.y;
-    var moved=navPointer.moved||dx*dx+dy*dy>144;
+    var moved=navPointer.moved||dx*dx+dy*dy>MOVE_CANCEL_PX2;
     navPointer=null;
     if(!moved)return;
     var target=navHit(ev.target);
