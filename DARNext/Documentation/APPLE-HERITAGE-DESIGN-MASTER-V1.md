@@ -141,6 +141,16 @@ Nach **jeder** Phase: kleiner isolierter Commit, reproduzierbare Tests, Screensh
 - Clean Build und Tests, inklusive aktueller `DARNextTests`, erfolgreich; falls in aktueller Umgebung blockiert: **nicht** als erfolgreich behaupten, präzisen Blocker protokollieren.
 - Bericht mit implementierten Features, noch offenen Punkten, Commit-IDs, Testnachweisen und nächstem isolierten Schritt.
 
+## 9a. UNVERÄNDERLICHER WIDGET-FREEZE · auf ausdrücklichen Wunsch des Projektinhabers
+**Alle existierenden DĀR AL TAWḤĪD Widgets müssen unverändert bleiben.** Dieser Auftrag autorisiert ausschließlich DARNext-Inhalte, Gestaltung und DARNext-eigenen Code, **keinerlei** Widget-Umbau.
+
+- Kein Ändern, Verschieben, Umbenennen, Ersetzen oder Löschen vorhandener Widget-Dateien oder Widget-Targets, insbesondere nicht an `DATPremiumWidgets`, `DARTawhidWidgetFresh`, anderen WidgetBundles/Extensions, WidgetKit Timelines, Watch-/StandBy-Widgets oder ihren Ressourcen.
+- Keine Änderungen an bestehenden App Groups, Entitlements, Signing, Bundle-IDs, Widget-Deep-Links, Shared Stores, Schemes oder Projektreferenzen, die bestehende Widgets beeinflussen könnten.
+- Keine Widget-Styles, Schriftarten, Farben, Texte, Icons, Layouts oder Datenquellen anpassen; keine Widget-Migration; keine neuen DARNext-Widgets im Rahmen dieses Auftrags.
+- Bei gemeinsamem Projekt-/Codepfad zuerst Seiteneffekte ausschließen. Bei Konflikt Widget-Bereich vollständig unangetastet lassen und den Blocker melden.
+- Vor jedem Commit `git diff --name-only` kontrollieren und jede Änderung mit Widget-/Extension-/AppGroup-Bezug abbrechen. Bereits vorhandene fremde Änderungen nicht löschen oder zurücksetzen; dem zuständigen Arbeitszweig zuordnen.
+- Späterer Widget-Auftrag erfordert eine **neue ausdrückliche Zustimmung**, unabhängig vom vorliegenden Masterauftrag.
+
 ## 10. Harte Schutzregeln für Xcode/Codex
 1. Nur DARNext-Dateien ändern, sofern nicht explizit eine gemeinsam genutzte nicht-breaking Schnittstelle freigegeben ist.
 2. Keine Änderungen an `main`, Website-Livebereitstellung, /test/, Kids, Store-App, TV, Watch oder fremden Worktrees.
