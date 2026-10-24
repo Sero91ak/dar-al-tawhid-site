@@ -2,7 +2,7 @@
 
 Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 
-**Gesamtstand:** P0 bis P4 lokal implementiert/auditiert und getestet; P5 teilweise umgesetzt/auditiert; P6 auditiert; P7 Manifest-Synchronisierung lokal implementiert und getestet; P8 als nächste zulässige Phase offen.
+**Gesamtstand:** P0 bis P4 lokal implementiert/auditiert und getestet; P5 teilweise umgesetzt/auditiert; P6 auditiert; P7 Manifest-Synchronisierung lokal implementiert und getestet; P8 Deep-Link-Teil lokal implementiert/getestet, Push-Teil aus Sicherheitsgründen nur auditiert; P9 als nächste zulässige Phase offen.
 
 | Phase | Status | Nachweis |
 | --- | --- | --- |
@@ -14,7 +14,7 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 | P5 Qurʾān/Audio/Tafsīr/Tadabbur | teilweise getestet | 114 Sūren, Versreader, echte Audioquelle/Rezitation/Player geprüft; Tafsīr/Tadabbur-native Datenpfad fehlt; Build erfolgreich; 7/7 Tests bestanden |
 | P6 Weitere Bereiche/Frauen/Ḥadīṯ | auditiert/teilweise offen | Zentrale Manifestdatei listet Frauen-/Wissensdaten; DARNext-Bundle enthält sie noch nicht als native Module; keine Inhalte erfunden |
 | P7 Inhalts-Synchronisierung | teilweise getestet | DARNext-only Manifest-Service mit ETag-/Disk-Cache und Offline-Fallback; zentraler Inhaltsimport noch offen; Build erfolgreich; 7/7 Tests bestanden |
-| P8 Push und Deep Links | offen | – |
+| P8 Push und Deep Links | teilweise getestet | DARNext-only URL-Router für native Tab-Ziele; bestehende OneSignal/Push-Dateien nur gelesen; keine Registrierung/Testsendung |
 | P9 Qualität/Sprachen/Geräte | offen | – |
 | P10 Übergabe | offen | – |
 
@@ -25,6 +25,15 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 - 10 sekundäre UI-Icons, 3 Home-Heros, 3 Beitrags-Heros, 7 Frauenbilder in zwei Varianten, 42 Cover-Quellen und 13 Feed-Hintergrundkategorien katalogisiert.
 - Geprüfte Pixelmaße: Mobile-Hero 1072 × 1920, Wide-Hero 2016 × 1152, Study 1376 × 768, Beitrags-Heros 1920 × 1080 bzw. 1376 × 768, Frauen v1223 1376 × 768, Frauen v1224 900 × 506.
 - Xcode-Abgleich: DARNext enthält aktuell keine eingebundene Kopie dieser Webmedien; gezielter DARNext-only Import ist für P2/P3 offen.
+
+## P8 — Push und Deep Links
+
+- Lokale Xcode-Dateien geändert: `DarAlTawhid/DARNext/App/DARNextDeepLinkDestination.swift`, `DarAlTawhid/DARNext/Shell/RootShell.swift`.
+- DARNext verarbeitet eingehende HTTPS-/Fragment-/Host-Ziele lokal für Start, Qurʾān und Mehr; die produktiven gemeinsamen Deep-Link-Dateien wurden nicht geändert.
+- `DarPushNotifications.swift` wurde ausschließlich gelesen/auditiert: bestehende OneSignal-App-ID, Produktions-Worker, Supabase-Registrierung und Push-Lanes gehören zur produktiven Spur und werden nicht für DARNext kopiert oder verändert.
+- Eine separate DARNext-Push-/APNs-/OneSignal-Zuordnung bleibt offen und erfordert die im Masterauftrag geforderte gesonderte Freigabe; es wurde keine Testnachricht versendet.
+- Xcode `BuildProject(buildForTesting: true)`: erfolgreich, 0 Fehler; Build-Log: `BuildProject-Log-20261024-195645.txt`.
+- Xcode `RunAllTests`, Scheme `DARNext`, Testplan `DARNext`: 7 bestanden, 0 fehlgeschlagen; `.xcresult`: `Test-DARNext-2026.10.24_19-56-46-+0200.xcresult`.
 
 ## P7 — Zentrale Content-Synchronisierung
 
@@ -111,8 +120,8 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 ## Offene Punkte
 
 - Der lokale Xcode-Arbeitsstand und der GitHub-Dokumentationsbranch müssen vor dem ersten Quellcode-Commit noch über den vorhandenen Xcode-/Repository-Workflow zusammengeführt werden; kein unbelegter Gleichstand mit GitHub wird behauptet.
-- P8 muss die bestehende native Push-/Deep-Link-Architektur gegen DARNext-Bundle/IDs prüfen; keine Testsendung und keine produktive Push-Code-Änderung.
+- P9 muss neun Sprachen, RTL, Themes, Accessibility, Dynamic Type, Offline-/Performance- und Geräteabdeckung prüfen; offene P5/P6/P7-Lücken bleiben sichtbar.
 
 ## Nächste Aktion
 
-P8: native Push-/Deep-Link-Audit und autorisierte Testgrenzen dokumentieren; danach Build, Tests und Status-Commit.
+P9: Sprach-/Accessibility-/Performance-QA auf DARNext durchführen; danach Build, Tests und Status-Commit.
