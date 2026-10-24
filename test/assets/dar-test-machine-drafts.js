@@ -61,7 +61,7 @@ function listed(root,selector){
  return one?[one]:[];
 }
 function titleNodes(root){
- const nodes=listed(root,".post-reader-title h2, header h2, .home-v380-post-title, .dv3-post-body b, .post-row__body h3, .related-compact-card h4, .dhp-post-capsule h3, .post-title");
+ const nodes=listed(root,".post-reader-title h2, header h2, .home-v380-post-title, .dv3-post-body b, .post-row__body h3, .home-v380-popular-text h4, .recommended-title, .related-compact-card h4, .dhp-post-capsule h3, .post-title");
  if(nodes.length)return nodes;
  const legacy=root?.querySelector?.(".post-reader-title h2, header h2");
  return legacy?[legacy]:[];
