@@ -50,3 +50,14 @@ jobs:
           test "$(wc -c </tmp/majlis.body)" -gt 90000
           echo "HTTPS SMOKE OK: $URL"
           sed -n '1,14p' /tmp/majlis.headers
+
+      - name: Browser UI smoke prerequisites
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated browser QA runner
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.55.0
+          npx playwright install chromium --with-deps
+      - name: Browser UI smoke on phone, tablet and desktop
+        run: node majlis-preview/qa-browser.cjs
