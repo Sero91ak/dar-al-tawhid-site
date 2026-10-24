@@ -47,6 +47,9 @@ jobs:
           curl --fail --silent --show-error --location --retry 5 --retry-delay 3 --max-time 45 --dump-header /tmp/majlis.headers "$URL" --output /tmp/majlis.body
           grep -Fq 'DĀR AL TAWḤĪD' /tmp/majlis.body
           grep -Fq 'MAJLIS NOVA' /tmp/majlis.body
+          curl --fail --silent --show-error --location --retry 3 --max-time 30 "${URL}majlisc-v4.css" --output /tmp/majlis.css
+          grep -Fq '.editorial-feed' /tmp/majlis.css
+          grep -Fq 'school-tabs' /tmp/majlis.body
           test "$(wc -c </tmp/majlis.body)" -gt 90000
           echo "HTTPS SMOKE OK: $URL"
           sed -n '1,14p' /tmp/majlis.headers
