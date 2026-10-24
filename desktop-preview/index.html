@@ -2829,7 +2829,7 @@ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .dar-v8-qa-to
 </div></div>
 
 <script src="/desktop-preview/assets/dar-v8-route-platform.js?v=20261021-quran-modal-v11"></script>
-<script src="/desktop-preview/assets/dar-v8-portal-live.js?v=20261021-quran-modal-v11"></script>
+<script src="/desktop-preview/assets/dar-v8-portal-live.js?v=20261024-click-recovery"></script>
 <script id="darV8ShellInteractions">(function(){var t=document.getElementById("darV8ThemeToggle");function apply(v){document.body.classList.toggle("dar-v8-night",v==="layl");if(t)t.textContent=v==="layl"?"☀":"☾"}try{apply(localStorage.getItem("darV8Theme")==="layl"?"layl":"salbei")}catch(e){apply("salbei")}if(t)t.addEventListener("click",function(){var v=document.body.classList.contains("dar-v8-night")?"salbei":"layl";apply(v);try{localStorage.setItem("darV8Theme",v)}catch(e){}});var a=document.getElementById("darV8TopAudio");if(a)a.addEventListener("click",function(){if(window.DARV8Portal){window.DARV8Portal.togglePlayer();return;}if(document.body.classList.contains("dar-v8-home")||document.body.classList.contains("dar-v8-quran-route")){document.querySelector(".v8-real-player")?.scrollIntoView({behavior:"smooth",block:"center"})}else{location.href="/?page=quran&player=expanded"}});var settings=document.getElementById("darV8PrayerSettings");if(settings)settings.addEventListener("click",function(){var section=document.querySelector(".v8-real-prayer");if(!section)return;var opened=section.classList.toggle("dar-v8-prayer-settings-open");settings.setAttribute("aria-expanded",String(opened));settings.textContent=opened?"Einstellungen schließen ×":"Standort ↗";if(opened)document.getElementById("prCityOpen")?.click()});var expand=document.getElementById("darV8PlayerExpand");if(expand)expand.addEventListener("click",function(){var row=document.querySelector(".v8-real-player");if(!row)return;var opened=row.classList.toggle("dar-v8-controls-open");var controls=document.getElementById("darV8PlayerControls");if(controls)controls.hidden=!opened;var tools=document.getElementById("darV8QaTools");if(tools)tools.hidden=!opened;expand.setAttribute("aria-expanded",String(opened));expand.innerHTML=opened?"⌃ <span>Schließen</span>":"⚙ <span>Auswahl</span>";if(opened&&window.matchMedia&&window.matchMedia("(max-width:740px)").matches&&window.DARV8Portal)window.DARV8Portal.togglePlayer(true)});document.addEventListener("keydown",function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();var input=document.getElementById("darV8FinderQuery")||document.getElementById("siteSearch");if(input)input.focus();else location.href="/?page=suche"}})})();</script>
 <script src="/widgets/shared/prayer-math.js"></script>
 <script src="/assets/zakat-engine.js?v=desktop-20261009-4"></script>
@@ -4970,7 +4970,7 @@ renders.beitraege=function(){
 })();
 </script>
 <!-- desktop-content-sync-v12 -->
-<script defer src="/desktop-preview/desktop-overhaul.js?v=221"></script>
+<script defer src="/desktop-preview/desktop-overhaul.js?v=222-click-recovery-20261024"></script>
 <style id="darFinalTouchFeedbackV5">
 @media (hover:none) and (pointer:coarse){
   :where(a,button,[role="button"],summary,[tabindex],label,.desktop-link,.more-row,.category-card,.feature-card,.header-action,.main-nav a,.download-app-btn,.dar-pwa-home-action,.dar-pwa-icon-choice){
