@@ -105,7 +105,7 @@ private struct MoreView: View {
                     Label("Quellen und Originalnachweise", systemImage: "checkmark.seal")
                 }
                 NavigationLink {
-                    DARNextOriginalWebView(title: "Wissensbereich", path: "/lernen/")
+                    DARNextOriginalWebView(title: "Wissensbereich", path: "/lernen/wissen-adab/")
                 } label: {
                     Label("Lernbereiche", systemImage: "books.vertical.fill")
                 }
