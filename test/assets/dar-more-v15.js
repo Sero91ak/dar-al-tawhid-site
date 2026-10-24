@@ -16,7 +16,7 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
     &&!window.__DAR_TEST_TR_UI_SCRIPT_LOADING){
  window.__DAR_TEST_TR_UI_SCRIPT_LOADING=true;
  const trScript=document.createElement("script");
- trScript.src="/test/assets/dar-test-turkish-ui.js?v=20261024-ui-more-13";
+ trScript.src="/test/assets/dar-test-turkish-ui.js?v=20261024-ui-more-14";
  trScript.async=true;
  trScript.onerror=()=>{window.__DAR_TEST_TR_UI_SCRIPT_LOADING=false};
  (document.head||document.documentElement).appendChild(trScript);
@@ -65,7 +65,7 @@ function renderOurApps(){
 }
 
 const localeKey="darAdultPreferredLocaleV1";
-const localeChoicesList=[["de","Deutsch"],["tr","Türkçe"],["en","English"],["ar","العربية"],["ku","Kurmancî"],["ckb","سۆرانی"],["bs","Bosanski"]];
+const localeChoicesList=[["de","Deutsch"],["tr","Türkçe"],["en","English"],["ar","العربية"],["ku","Kurmancî"],["ckb","سۆرانی"],["bs","Bosanski"],["fr","Français"],["es","Español"]];
 const localeCodes=new Set(localeChoicesList.map(x=>x[0]));
 function currentLocale(){try{return localeCodes.has(localStorage.getItem(localeKey))?localStorage.getItem(localeKey):"de"}catch(_){return"de"}}
 function setLocale(code){if(!localeCodes.has(code))return;try{localStorage.setItem(localeKey,code)}catch(_){}window.dispatchEvent(new CustomEvent("dar-adult-locale-changed",{detail:{locale:code}}));sync();}

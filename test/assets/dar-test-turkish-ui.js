@@ -362,6 +362,24 @@ function isDynamicGermanUi(value){
   /^Sūrenbereich wechseln(?:\s+.+)?$/.test(value)||
   /^Alle 114 Sūren anzeigen/.test(value)||
   /^\d+\s+Min vor Fajr$/.test(value)||
+  /^\d+\s+Minuten vorher$/.test(value)||
+  /^\d+ von 5 ausgewählt · \d+ Minuten vorher$/.test(value)||
+  /^\d+ Dateien konnten nicht geladen werden\. Der Rest ist offline verfügbar\.$/.test(value)||
+  /^\d+ Dateien konnten nicht geladen werden\. Tippe unten auf „Download fortsetzen“\.$/.test(value)||
+  /^\d+ weitere Beiträge in dieser Kategorie – nutze die Suche zum Eingrenzen\.$/.test(value)||
+  /^Lokaler Inhalt: .+\. Lesestand, Favoriten, Einstellungen und Quiz-Fortschritt bleiben lokal aktiv\.$/.test(value)||
+  /^Geschätzter Beginn: .+\. Lokale Mondsichtung kann abweichen\.$/.test(value)||
+  /^.+ · Suḥūr, Iftār, Duʿāʾ & Beiträge$/.test(value)||
+  /^.+ · Möge Allah dein Fasten annehmen\.$/.test(value)||
+  /^Bereich: .+$/.test(value)||
+  /^Fehler: .+$/.test(value)||
+  /^.+\. Dann siehst du „Nächstes Gebet“ 15 Min vorher und zur Gebetszeit eine Push-Meldung\.$/.test(value)||
+  /^Tag \d+ im Fastenmonat$/.test(value)||
+  /^Tag \d+$/.test(value)||
+  /^Noch ca\. \d+ Tage bis Ramaḍān$/.test(value)||
+  /^Noch \d+ Tage$/.test(value)||
+  /^Noch \d+ Tage im Fokus$/.test(value)||
+  /^Noch ca\. \d+ Std\. im Fokus$/.test(value)||
   /^\d\/5 gewählt$/.test(value)||
   /^In \d+ Min · .+ Uhr\. (?:Fajr|Dhuhr|ʿAṣr|Maghrib|ʿIshāʾ) naht — /.test(value)||
   /^\d+(?:[.,]\d+)?%\s+Trefferquote$/.test(value)||
@@ -511,6 +529,171 @@ function translateSharedPatterns(value,language){
   if(language==="fr")return "Dans "+minute+" min · "+clock+". "+name+" approche — accomplis la prière pour Allah.";
   if(language==="es")return "En "+minute+" min · "+clock+". Se acerca "+name+" — haz la oración por Allah.";
   return "In "+minute+" min · "+clock+". "+name+" is near — pray it for Allah.";
+ }
+ const minutesBefore=value.match(/^(\d+)\s+Minuten vorher$/);
+ if(minutesBefore){
+  const n=minutesBefore[1];
+  const forms={
+   ar:"قبل "+n+" دقيقة",
+   en:n+" minutes before",
+   tr:n+" dakika önce",
+   ku:n+" deqe berê",
+   ckb:n+" خولەک پێشتر",
+   bs:n+" minuta prije",
+   fr:n+" minutes avant",
+   es:n+" minutos antes"
+  };
+  return forms[language]||null;
+ }
+ const selected=value.match(/^(\d+) von 5 ausgewählt · (\d+) Minuten vorher$/);
+ if(selected){
+  const head={
+   ar:"تم اختيار "+selected[1]+" من 5",
+   en:selected[1]+" of 5 selected",
+   tr:"5 içinden "+selected[1]+" seçildi",
+   ku:selected[1]+" ji 5 hat hilbijartin",
+   ckb:selected[1]+" لە 5 هەڵبژێردرا",
+   bs:selected[1]+" od 5 odabrano",
+   fr:selected[1]+" sur 5 sélectionné",
+   es:selected[1]+" de 5 seleccionado"
+  }[language];
+  const tail=translateSharedPatterns(selected[2]+" Minuten vorher",language);
+  if(head&&tail)return head+" · "+tail;
+ }
+ const filesRest=value.match(/^(\d+) Dateien konnten nicht geladen werden\. Der Rest ist offline verfügbar\.$/);
+ if(filesRest){
+  const n=filesRest[1];
+  const forms={
+   ar:"تعذّر تحميل "+n+" ملفات. الباقي متاح دون اتصال.",
+   en:n+" files could not be loaded. The rest is available offline.",
+   tr:n+" dosya yüklenemedi. Geri kalanı çevrimdışı kullanılabilir.",
+   ku:n+" pel nehatin barkirin. Yê mayî negirêdayî amade ye.",
+   ckb:n+" پەڕگە نەتوانرا باربکرێت. ئەوەی ماوە بێ هێڵ بەردەستە.",
+   bs:"Nije učitano "+n+" datoteka. Ostatak je dostupan van mreže.",
+   fr:n+" fichiers n’ont pas pu être chargés. Le reste est disponible hors ligne.",
+   es:"No se pudieron cargar "+n+" archivos. El resto está disponible sin conexión."
+  };
+  return forms[language]||null;
+ }
+ const filesTap=value.match(/^(\d+) Dateien konnten nicht geladen werden\. Tippe unten auf „Download fortsetzen“\.$/);
+ if(filesTap){
+  const n=filesTap[1];
+  const resume=lookupPack("Download fortsetzen",language)||"Download fortsetzen";
+  const forms={
+   ar:"تعذّر تحميل "+n+" ملفات. اضغط أدناه على „"+resume+"“.",
+   en:n+" files could not be loaded. Tap „"+resume+"“ below.",
+   tr:n+" dosya yüklenemedi. Aşağıda „"+resume+"“ üzerine dokun.",
+   ku:n+" pel nehatin barkirin. Li jêr „"+resume+"“ bitikîne.",
+   ckb:n+" پەڕگە نەتوانرا باربکرێت. لە خوارەوە „"+resume+"“ دابگرە.",
+   bs:"Nije učitano "+n+" datoteka. Dodirni ispod „"+resume+"“.",
+   fr:n+" fichiers n’ont pas pu être chargés. Touche ci-dessous « "+resume+" ».",
+   es:"No se pudieron cargar "+n+" archivos. Toca abajo « "+resume+" »."
+  };
+  return forms[language]||null;
+ }
+ const morePosts=value.match(/^(\d+) weitere Beiträge in dieser Kategorie – nutze die Suche zum Eingrenzen\.$/);
+ if(morePosts){
+  const n=morePosts[1];
+  const forms={
+   ar:n+" مقالات أخرى في هذا القسم — استخدم البحث للتضييق.",
+   en:n+" more articles in this category — use search to narrow them.",
+   tr:"Bu kategoride "+n+" yazı daha — daraltmak için aramayı kullan.",
+   ku:n+" nivîsên din di vê kategoriyê de — ji bo tengkirinê lêgerînê bikar bîne.",
+   ckb:n+" بابەتی تر لەم پۆلەدا — بۆ سنووردارکردن گەڕان بەکاربهێنە.",
+   bs:"Još "+n+" tekstova u ovoj kategoriji — suzi pretragu.",
+   fr:n+" articles de plus dans cette catégorie — utilise la recherche pour affiner.",
+   es:n+" artículos más en esta categoría — usa la búsqueda para acotar."
+  };
+  return forms[language]||null;
+ }
+ const localContent=value.match(/^Lokaler Inhalt: (.+)\. Lesestand, Favoriten, Einstellungen und Quiz-Fortschritt bleiben lokal aktiv\.$/);
+ if(localContent){
+  const tail=lookupPack("Lesestand, Favoriten, Einstellungen und Quiz-Fortschritt bleiben lokal aktiv.",language);
+  const head={ar:"محتوى محلي:",en:"Local content:",tr:"Yerel içerik:",ku:"Naveroka herêmî:",ckb:"ناوەڕۆکی ناوخۆیی:",bs:"Lokalni sadržaj:",fr:"Contenu local :",es:"Contenido local:"}[language];
+  const middle=translateExact(localContent[1].trim(),language)||localContent[1].trim();
+  if(tail&&head)return head+" "+middle+". "+tail;
+ }
+ const moon=value.match(/^Geschätzter Beginn: (.+)\. Lokale Mondsichtung kann abweichen\.$/);
+ if(moon){
+  const tail=lookupPack("Lokale Mondsichtung kann abweichen.",language);
+  const date=localizeGermanCalendarLabel(moon[1],language)||moon[1];
+  const head={ar:"البداية التقديرية:",en:"Estimated start:",tr:"Tahmini başlangıç:",ku:"Destpêka texmînî:",ckb:"دەستپێکی خەمڵێنراو:",bs:"Procijenjeni početak:",fr:"Début estimé :",es:"Inicio estimado:"}[language];
+  if(tail&&head)return head+" "+date+". "+tail;
+ }
+ const season=value.match(/^(.+) · Suḥūr, Iftār, Duʿāʾ & Beiträge$/);
+ if(season){
+  const tail=lookupPack("Suḥūr, Iftār, Duʿāʾ & Beiträge",language);
+  const head=lookupPack(season[1].trim(),language)||season[1].trim();
+  if(tail)return head+" · "+tail;
+ }
+ const fast=value.match(/^(.+) · Möge Allah dein Fasten annehmen\.$/);
+ if(fast){
+  const tail=lookupPack("Möge Allah dein Fasten annehmen.",language);
+  const head=lookupPack(fast[1].trim(),language)||fast[1].trim();
+  if(tail)return head+" · "+tail;
+ }
+ const area=value.match(/^Bereich: (.+)$/);
+ if(area){
+  const label=lookupPack("Bereich:",language);
+  const rest=lookupPack(area[1].trim(),language)||area[1].trim();
+  if(label)return label+" "+rest;
+ }
+ const fault=value.match(/^Fehler: (.+)$/);
+ if(fault){
+  const label=lookupPack("Fehler:",language);
+  const rest=lookupPack(fault[1].trim(),language)||fault[1].trim();
+  if(label)return label+" "+rest;
+ }
+ const hint=value.match(/^(.+)\. Dann siehst du „Nächstes Gebet“ 15 Min vorher und zur Gebetszeit eine Push-Meldung\.$/);
+ if(hint){
+  const step=lookupPack(hint[1].trim(),language)||hint[1].trim();
+  const tails={
+   ar:"ثم ترى «الصلاة التالية» قبل 15 دقيقة، وعند الوقت إشعار Push.",
+   en:"Then you see “Next prayer” 15 min before, and a Push notice at the prayer time.",
+   tr:"Sonra “Sonraki namaz”ı 15 dk önce ve vaktinde bir Push bildirimi görürsün.",
+   ku:"Paşê “Nimêja pêş” 15 deqe berê û di dema nimêjê de agahdariya Push dibînî.",
+   ckb:"دواتر «نوێژی داهاتوو» 15 خولەک پێشتر و لە کاتی نوێژدا ئاگاداریی Push دەبینیت.",
+   bs:"Zatim vidiš „Sljedeći namaz“ 15 min prije i Push obavijest u vrijeme namaza.",
+   fr:"Ensuite tu vois « Prière suivante » 15 min avant, et une notification Push à l’heure.",
+   es:"Luego ves «Oración siguiente» 15 min antes y un aviso Push a la hora."
+  };
+  if(tails[language])return step+". "+tails[language];
+ }
+ const fastDay=value.match(/^Tag (\d+) im Fastenmonat$/);
+ if(fastDay){
+  const n=fastDay[1];
+  const forms={ar:"اليوم "+n+" من شهر الصيام",en:"Day "+n+" of the fasting month",tr:"Oruç ayının "+n+". günü",ku:"Roja "+n+" a meha rojiyê",ckb:"ڕۆژی "+n+"ی مانگی ڕۆژوو",bs:"Dan "+n+" mjeseca posta",fr:"Jour "+n+" du mois de jeûne",es:"Día "+n+" del mes de ayuno"};
+  return forms[language]||null;
+ }
+ const dayOnly=value.match(/^Tag (\d+)$/);
+ if(dayOnly){
+  const n=dayOnly[1];
+  const forms={ar:"اليوم "+n,en:"Day "+n,tr:n+". gün",ku:"Roja "+n,ckb:"ڕۆژی "+n,bs:"Dan "+n,fr:"Jour "+n,es:"Día "+n};
+  return forms[language]||null;
+ }
+ const untilRamadan=value.match(/^Noch ca\. (\d+) Tage bis Ramaḍān$/);
+ if(untilRamadan){
+  const n=untilRamadan[1],name=lookupPack("Ramaḍān",language)||"Ramaḍān";
+  const forms={ar:"بقي نحو "+n+" يوماً حتى "+name,en:"About "+n+" days until "+name,tr:name+" için yaklaşık "+n+" gün kaldı",ku:"Nêzîkî "+n+" roj heta "+name,ckb:"نزیکەی "+n+" ڕۆژ ماوە تا "+name,bs:"Još oko "+n+" dana do "+name,fr:"Encore environ "+n+" jours avant "+name,es:"Faltan unos "+n+" días para "+name};
+  return forms[language]||null;
+ }
+ const daysLeft=value.match(/^Noch (\d+) Tage$/);
+ if(daysLeft){
+  const n=daysLeft[1];
+  const forms={ar:"بقي "+n+" أيام",en:n+" days left",tr:n+" gün kaldı",ku:n+" roj man",ckb:n+" ڕۆژ ماوە",bs:"Još "+n+" dana",fr:"Encore "+n+" jours",es:"Faltan "+n+" días"};
+  return forms[language]||null;
+ }
+ const focusDays=value.match(/^Noch (\d+) Tage im Fokus$/);
+ if(focusDays){
+  const n=focusDays[1];
+  const forms={ar:"بقي "+n+" أيام في الواجهة",en:n+" days left in focus",tr:"Odakta "+n+" gün kaldı",ku:n+" roj di berçavê de man",ckb:n+" ڕۆژ لە پێشەوە ماوە",bs:"Još "+n+" dana u fokusu",fr:"Encore "+n+" jours en avant",es:"Faltan "+n+" días en destacado"};
+  return forms[language]||null;
+ }
+ const focusHours=value.match(/^Noch ca\. (\d+) Std\. im Fokus$/);
+ if(focusHours){
+  const n=focusHours[1];
+  const forms={ar:"بقي نحو "+n+" ساعة في الواجهة",en:"About "+n+" hours left in focus",tr:"Odakta yaklaşık "+n+" saat kaldı",ku:"Nêzîkî "+n+" saet di berçavê de man",ckb:"نزیکەی "+n+" کاتژمێر لە پێشەوە ماوە",bs:"Još oko "+n+" sati u fokusu",fr:"Encore environ "+n+" h en avant",es:"Faltan unas "+n+" horas en destacado"};
+  return forms[language]||null;
  }
  return null;
 }
@@ -745,7 +928,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-13";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-14";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
