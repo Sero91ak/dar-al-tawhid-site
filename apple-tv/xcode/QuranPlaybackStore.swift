@@ -280,7 +280,7 @@ final class QuranPlaybackStore: NSObject, ObservableObject, AVAudioPlayerDelegat
             // Resume the existing queue when possible. Rebuild only after an
             // explicit navigation or when no item has been prepared yet.
             let hasPreparedCurrentItem = player.currentItem.map {
-                queuedItemIndices[ObjectIdentifier($0)] == currentIndex
+                self.queuedItemIndices[ObjectIdentifier($0)] == self.currentIndex
             } ?? false
             if !hasPreparedCurrentItem {
                 player.removeAllItems()
@@ -442,7 +442,18 @@ final class QuranPlaybackStore: NSObject, ObservableObject, AVAudioPlayerDelegat
             currentIndex = endedIndex + 1
             persistReadingPosition()
             enqueueItems(startingAt: endedIndex + 1)
-            isPlaying = player.currentItem != nil
+            // AVQueuePlayer can briefly report a nil currentItem while it
+            // promotes the already-buffered next Āyah. Keep the logical
+            // playback state active when a queued item is still available;
+            // otherwise the UI and screensaver can falsely treat this as a
+            // manual pause at every boundary.
+            let hasQueuedContinuation = player.currentItem != nil || !player.items().isEmpty
+            if hasQueuedContinuation, wantsAutoplay {
+                player.play()
+                isPlaying = true
+            } else {
+                isPlaying = false
+            }
             return
         }
 
