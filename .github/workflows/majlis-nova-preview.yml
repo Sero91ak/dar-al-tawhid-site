@@ -1,0 +1,42 @@
+name: MAJLIS NOVA V3 isolated browser preview
+on:
+  push:
+    branches:
+      - preview/majlis-nova-standalone-20261024
+    paths:
+      - majlis-preview/**
+      - wrangler.majlis-nova.toml
+      - .github/workflows/majlis-nova-preview.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: isolated-majlis-nova-v3-preview
+  cancel-in-progress: true
+
+jobs:
+  publish-preview:
+    if: ${{ github.ref == 'refs/heads/preview/majlis-nova-standalone-20261024' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assert deployment isolation
+        run: |
+          set -euo pipefail
+          test -s majlis-preview/index.html
+          grep -Fq 'MAJLIS NOVA' majlis-preview/index.html
+          grep -Fq 'name = "dar-majlis-nova-v3-preview"' wrangler.majlis-nova.toml
+          grep -Fq 'workers_dev = true' wrangler.majlis-nova.toml
+          if grep -Eq '(^|[[:space:]])(route|routes|zone_id)[[:space:]]*=' wrangler.majlis-nova.toml; then
+            echo "Custom domain or route prohibited for this standalone preview."
+            exit 1
+          fi
+          echo "Isolated Worker. No production routes or custom domains."
+      - name: Publish only standalone HTML via Cloudflare
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "4.86.0"
+          command: deploy --config wrangler.majlis-nova.toml
