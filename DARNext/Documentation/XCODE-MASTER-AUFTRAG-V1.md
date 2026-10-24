@@ -81,6 +81,9 @@ Nutzerschnittstellen aus echtem `LocalContentRepository` oder nachweislich freig
 5. Keine pauschalen Rewrites, keine Löschung von fremden Dateien, kein App-Store-/Live-Deployment ohne ausdrückliche Erlaubnis.
 6. Am Ende jeder tatsächlich ausgeführten Arbeit nennen: geänderte Dateien, Commit-SHAs, was sicht-/testbar funktioniert, reale Build-/Testresultate, offene Punkte, nächste Umsetzung.
 
+## ABSOLUTE WIDGET-SPERRE
+**Der Nutzer verbietet Änderungen an allen vorhandenen Widgets ausdrücklich.** Keine Modifikation bestehender Widget-Targets, Swift-Dateien, Assets, Timelines, Layouts, Labels, App Groups, Entitlements, Signings, Bundle IDs, Widget-Konfigurationen, Watch-/StandBy-Widget-Modulen oder widgetrelevanten Projektverweisen. Auch keine neuen DARNext-Widgets ohne gesonderte Freigabe. Nicht einmal für ein Design-Refresh anfassen. Prüfe die geänderten Dateien vor jedem Commit; bei widgetrelevanten Seiteneffekten Umsetzung isolieren oder stoppen und Blocker dokumentieren. Keine fremden Widget-Arbeiten zurücksetzen.
+
 ## Guardrails bei Xcode-Projektdateien
 Projektdateien wie `.pbxproj` nur in der gerade geöffneten Umgebung zulässiger Art bearbeiten; wenn Xcode/Agent dies untersagt, nicht per Script/Shell/Patch umgehen. Stattdessen funktionierende Code-/Asset-Vorbereitung und Dokumentation liefern, konkrete Xcode-Projektverwaltungsaktion benennen, danach Build fortsetzen.
 
