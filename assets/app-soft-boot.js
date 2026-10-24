@@ -320,9 +320,19 @@
     if (finished || window.__darSoftBootLocked) return;
     var ready = viewLooksReady();
     if (!window.__darAppBootOk && !ready) return;
-    // Legacy visitor/test app still uses the explicit boot-ready signal.
-    // Desktop/PWA uses #pageRoot and may finish as soon as its real content is painted.
-    if (!window.__darAppBootOk && !document.getElementById("pageRoot")) return;
+    // Dedicated Android /pwa/ paints into #appView (shared visitor shell).
+    // Public website paints into #pageRoot. Requiring only #pageRoot left
+    // installed PWAs stuck on the soft-boot overlay forever when boot-ok
+    // was delayed or missing.
+    if (!window.__darAppBootOk) {
+      var hasAppView = !!document.getElementById("appView");
+      var hasPageRoot = !!document.getElementById("pageRoot");
+      if (IS_DEDICATED_PWA) {
+        if (!hasAppView && !hasPageRoot) return;
+      } else if (!hasPageRoot) {
+        return;
+      }
+    }
     finish();
   }
   function releaseChrome() {
@@ -415,6 +425,20 @@
       if (IS_DEDICATED_PWA && !viewLooksReady()) showPwaBootFailure();
       else finish();
     }, IS_DEDICATED_PWA ? PWA_READY_TIMEOUT_MS : HARD_TIMEOUT_MS);
+    /* PWA_SOFTBOOT_FORCE_UNSTICK_V679: never leave Android PWA behind soft-boot chrome. */
+    if (IS_DEDICATED_PWA) {
+      setTimeout(function () {
+        if (finished || window.__darSoftBootLocked) return;
+        if (viewLooksReady()) { finish(); return; }
+        try {
+          // Reveal the shell even without a perfect paint signal. A visible
+          // partially-loaded app beats an infinite soft-boot hang.
+          finished = true;
+          window.__darSoftBootLocked = true;
+          releaseChrome();
+        } catch (eForce) {}
+      }, 9000);
+    }
     try {
       if (/Android/i.test(String(navigator.userAgent || "")) && !IS_DEDICATED_PWA) {
         setTimeout(function () { if (!finished) finish(); }, 2200);
