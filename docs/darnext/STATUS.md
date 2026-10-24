@@ -2,7 +2,7 @@
 
 Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 
-**Gesamtstand:** P0 bis P4 lokal implementiert/auditiert und getestet; P5 teilweise umgesetzt/auditiert; P6 auditiert, native Erweiterung wegen fehlender DARNext-Ressourcen noch offen; P7 als nächste zulässige Phase offen.
+**Gesamtstand:** P0 bis P4 lokal implementiert/auditiert und getestet; P5 teilweise umgesetzt/auditiert; P6 auditiert; P7 Manifest-Synchronisierung lokal implementiert und getestet; P8 als nächste zulässige Phase offen.
 
 | Phase | Status | Nachweis |
 | --- | --- | --- |
@@ -13,7 +13,7 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 | P4 Beiträge/Duʿāʾ/Bibliothek | getestet (lokaler Xcode-Stand) | Bestehende reale Repository-Daten; native Post-/Duʿāʾ-ShareLink ergänzt; Build erfolgreich; 7/7 Tests bestanden |
 | P5 Qurʾān/Audio/Tafsīr/Tadabbur | teilweise getestet | 114 Sūren, Versreader, echte Audioquelle/Rezitation/Player geprüft; Tafsīr/Tadabbur-native Datenpfad fehlt; Build erfolgreich; 7/7 Tests bestanden |
 | P6 Weitere Bereiche/Frauen/Ḥadīṯ | auditiert/teilweise offen | Zentrale Manifestdatei listet Frauen-/Wissensdaten; DARNext-Bundle enthält sie noch nicht als native Module; keine Inhalte erfunden |
-| P7 Inhalts-Synchronisierung | offen | – |
+| P7 Inhalts-Synchronisierung | teilweise getestet | DARNext-only Manifest-Service mit ETag-/Disk-Cache und Offline-Fallback; zentraler Inhaltsimport noch offen; Build erfolgreich; 7/7 Tests bestanden |
 | P8 Push und Deep Links | offen | – |
 | P9 Qualität/Sprachen/Geräte | offen | – |
 | P10 Übergabe | offen | – |
@@ -25,6 +25,15 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 - 10 sekundäre UI-Icons, 3 Home-Heros, 3 Beitrags-Heros, 7 Frauenbilder in zwei Varianten, 42 Cover-Quellen und 13 Feed-Hintergrundkategorien katalogisiert.
 - Geprüfte Pixelmaße: Mobile-Hero 1072 × 1920, Wide-Hero 2016 × 1152, Study 1376 × 768, Beitrags-Heros 1920 × 1080 bzw. 1376 × 768, Frauen v1223 1376 × 768, Frauen v1224 900 × 506.
 - Xcode-Abgleich: DARNext enthält aktuell keine eingebundene Kopie dieser Webmedien; gezielter DARNext-only Import ist für P2/P3 offen.
+
+## P7 — Zentrale Content-Synchronisierung
+
+- Lokale Xcode-Dateien geändert: `DarAlTawhid/DARNext/Data/DARNextContentSyncService.swift`, `App/AppEnvironment.swift`, `Shell/DARNextRootView.swift`.
+- `DARNextContentSyncService` liest ausschließlich das kanonische Manifest `https://dar-al-tawhid.de/data/offline-content-manifest.json`, validiert HTTP/JSON, sendet ETag-Revalidierung, speichert einen DARNext-eigenen Cache und fällt bei Netzfehlern auf den letzten gültigen Manifeststand zurück.
+- Der Refresh läuft beim DARNext-Start und ist von Push/Worker/OneSignal getrennt. Es werden keine Gerätebenachrichtigungen versendet.
+- Abgrenzung: Das Manifest wird synchronisiert; die vollständige sichere Aktualisierung aller Inhaltsdateien ohne neuen Swift-Build ist noch nicht abgeschlossen und braucht einen kanonischen Native-Content-Payload-/Importvertrag. Keine fiktive P7-Abnahme.
+- Xcode `BuildProject(buildForTesting: true)`: erfolgreich, 0 Fehler; Build-Log: `BuildProject-Log-20261024-195515.txt`.
+- Xcode `RunAllTests`, Scheme `DARNext`, Testplan `DARNext`: 7 bestanden, 0 fehlgeschlagen; `.xcresult`: `Test-DARNext-2026.10.24_19-55-17-+0200.xcresult`.
 
 ## P6 — Ḥadīṯ, Frauenbereich und weitere Wissensmodule
 
@@ -102,8 +111,8 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 ## Offene Punkte
 
 - Der lokale Xcode-Arbeitsstand und der GitHub-Dokumentationsbranch müssen vor dem ersten Quellcode-Commit noch über den vorhandenen Xcode-/Repository-Workflow zusammengeführt werden; kein unbelegter Gleichstand mit GitHub wird behauptet.
-- P7 muss den kanonischen Manifest-/Content-Abgleich so anbinden, dass freigegebene Inhalte ohne neuen Swift-Build aktualisiert werden; Worker/Push-Code bleibt geschützt.
+- P8 muss die bestehende native Push-/Deep-Link-Architektur gegen DARNext-Bundle/IDs prüfen; keine Testsendung und keine produktive Push-Code-Änderung.
 
 ## Nächste Aktion
 
-P7: sicheren zentralen Content-Manifest-Abgleich als DARNext-eigene Service-Schicht vorbereiten, ohne produktive Worker zu ändern; danach Build, Tests und Status-Commit.
+P8: native Push-/Deep-Link-Audit und autorisierte Testgrenzen dokumentieren; danach Build, Tests und Status-Commit.
