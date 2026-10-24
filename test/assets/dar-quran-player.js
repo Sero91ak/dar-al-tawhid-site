@@ -127,6 +127,8 @@
   var allowAdvance = false;
   var engine = { started: false, lastUrl: "", loadedSurah: 0, loadedAyah: 0, stallTimer: 0, lastProgressAt: 0, wantPlay: false, objectUrl: "", blobTried: false, fallbackReciterTried: false, haltedOffline: false, watchReloadAt: 0, endedAt: 0 };
 
+  // In-memory, bounded next-Āyah buffer: never a background offline download.
+  var nextAudioPrefetch = null;
   var lastSysVolAt = 0;
   function usesSystemVolume() {
     return isOfficialIosApp() && !isAppleTvApp();
@@ -711,6 +713,15 @@
     return pack.blobUrl(rec.edition, globalAyah(surah, ayah)).catch(function () { return null; });
   }
   function resolveSource(qari, surah, ayah) {
+    var rec = reciterById(qari);
+    var key = rec && (rec.id + ":" + surah + ":" + ayah);
+    var ready = nextAudioPrefetch;
+    if (ready && ready.key === key && ready.blob) {
+      nextAudioPrefetch = null;
+      try {
+        return Promise.resolve({ qari: rec.id, url: URL.createObjectURL(ready.blob), saved: true, prefetched: true });
+      } catch (eBlob) {}
+    }
     if (!isOffline()) return resolvePlayable(qari, surah, ayah);
     return savedAyahUrl(qari, surah, ayah).then(function (saved) {
       if (saved) return { qari: qari, url: saved, saved: true };
@@ -910,7 +921,52 @@
       followPlayingAyah(false);
     });
   }
-  function preloadNext() {}
+  // Warm just the next sequential verse, using the same-origin audio proxy.
+  // This removes repeat network fetching on the next item but is not a
+  // guarantee of sample-accurate gapless playback (requires Sūrah masters/cues).
+  function preloadNext() {
+    if (!state.playing || !state.sessionActive || isOffline()) return;
+    if (state.shuffle !== "off" || state.repeat === "ayah") return;
+    if (state.learnMode && (state.learnLoop || state.learnStay)) return;
+    try {
+      if (navigator.connection && navigator.connection.saveData) return;
+    } catch (eSaveData) {}
+    var rec = reciterById(state.reciter);
+    if (!rec || !rec.edition) return;
+    var nextSurah = state.surah, nextAyah = state.ayah + 1;
+    if (nextAyah > ayahCountHard(nextSurah)) {
+      nextAyah = 1;
+      nextSurah = state.repeat === "surah" ? nextSurah : nextSurah >= 114 ? 1 : nextSurah + 1;
+    }
+    var key = rec.id + ":" + nextSurah + ":" + nextAyah;
+    if (nextAudioPrefetch && nextAudioPrefetch.key === key) return;
+    if (nextAudioPrefetch && nextAudioPrefetch.controller) {
+      try { nextAudioPrefetch.controller.abort(); } catch (eAbort) {}
+    }
+    var controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    var pending = { key: key, controller: controller, blob: null };
+    nextAudioPrefetch = pending;
+    var proxy = "/quran-audio/" + encodeURIComponent(rec.edition) + "/" +
+      globalAyah(nextSurah, nextAyah) + ".mp3";
+    var options = { credentials: "same-origin", cache: "force-cache" };
+    if (controller) options.signal = controller.signal;
+    fetch(proxy, options).then(function (response) {
+      if (!response.ok) throw new Error("prefetch HTTP " + response.status);
+      var declaredSize = Number(response.headers.get("content-length")) || 0;
+      if (declaredSize > 8 * 1024 * 1024) throw new Error("prefetch size limit");
+      return response.blob();
+    }).then(function (blob) {
+      if (nextAudioPrefetch !== pending) return;
+      if (!blob.size || blob.size > 8 * 1024 * 1024) {
+        nextAudioPrefetch = null;
+        return;
+      }
+      pending.blob = blob;
+    }).catch(function () {
+      if (nextAudioPrefetch === pending) nextAudioPrefetch = null;
+      // Streaming fallback is unchanged on errors; do not interrupt recitation.
+    });
+  }
   function tryFallback() {
     if (!engine.blobTried) {
       engine.blobTried = true;
@@ -1009,6 +1065,7 @@
     clearStallRetry();
     logAudio("canplay", snapAudio());
     syncPublicAudioState(audioEl());
+    preloadNext();
     if (state.error) {
       state.error = "";
       paintError();
