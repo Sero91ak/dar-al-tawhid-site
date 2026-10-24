@@ -62,6 +62,17 @@ for(const locale of expected){
 }
 assert.equal(w.DarTestTurkishUI.translatedFor("fr"),expectedUiTextCount);
 assert.equal(w.DarTestTurkishUI.translatedFor("es"),expectedUiTextCount);
+assert.equal(w.DarTestTurkishUI.translateValue("3 Treffer","ku"),"3 "+locales.translations.ku.Treffer);
+assert.equal(w.DarTestTurkishUI.translateValue("Wetter für Berlin wird geladen …","ku"),locales.translations.ku["Wetter für"]+" Berlin "+locales.translations.ku["wird geladen"]+" …");
+assert.equal(w.DarTestTurkishUI.translateValue("Wetter · Berlin: derzeit nicht verfügbar","es"),locales.translations.es.Wetter+" · Berlin: "+locales.translations.es["derzeit nicht verfügbar"]);
+assert.equal(w.DarTestTurkishUI.translateValue("Wetter · Köln: 12 °C · Klar","ku"),locales.translations.ku.Wetter+" · Köln: 12 °C · "+locales.translations.ku.Klar);
+assert.equal(locales.translations.es["Inhalt wird vorbereitet…"],"Preparando el contenido…");
+assert.equal(locales.translations.ku["Wissen durchsuchen"],"Li zanînê bigere");
+const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
+assert.equal(coverage.uiKeys,expectedUiTextCount);
+assert.equal(coverage.humanApproval,false);
+assert.equal(coverage.quranMeanings.reviewedEightLanguagePack,false);
+assert.equal(coverage.push.liveSend,false);
 storage.locale="de";w.DarTestTurkishUI.apply();
 assert.equal(nodes[0].nodeValue,"Startseite","German return must be lossless");
 const here=fs.readFileSync(path.join(__dirname,"../assets/dar-test-seven-languages-loader.js"),"utf8");

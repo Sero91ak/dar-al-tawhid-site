@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-24T19:20:00Z",
+  "scope": "dar-test-adult",
+  "locales": [
+    "de",
+    "tr",
+    "en",
+    "ar",
+    "ku",
+    "ckb",
+    "bs",
+    "fr",
+    "es"
+  ],
+  "uiKeys": 2948,
+  "humanApproval": false,
+  "paidApiCalls": 0,
+  "contentDrafts": {
+    "completedBatches": 48,
+    "nextBatch": 49,
+    "checkpointItems": 480,
+    "humanApproval": false
+  },
+  "blockedSourceReviewItems": 69,
+  "quranMeanings": {
+    "reviewedEightLanguagePack": false,
+    "arabicOriginalUnchanged": true,
+    "missingState": "Geprüfte Bedeutungsübersetzung in dieser Sprache folgt. Angezeigt bleibt die deutsche Fassung."
+  },
+  "push": {
+    "liveSend": false,
+    "preferenceKey": "darAdultPreferredLocaleV1",
+    "providerSync": "assets/dar-onesignal-language-sync.js sets OneSignal language for de,en,tr,ar,bs,fr,es only. ku and ckb stay on the documented German provider fallback. No message is sent."
+  },
+  "boot": {
+    "storedPreferenceFirst": true,
+    "deviceLanguageOnFirstVisit": true,
+    "loadingHiddenUntilLocalePaint": true
+  },
+  "dynamicPatterns": [
+    "N Treffer",
+    "Wetter für CITY wird geladen …",
+    "Wetter · CITY: derzeit nicht verfügbar",
+    "Wetter · CITY: TEMP °C · DESC"
+  ],
+  "notClaimed": [
+    "Nicht jede deutsche Zeichenkette in test/index.html ist ein UI-Schlüssel.",
+    "69 quellenblockierte Beiträge und Hadithe bleiben deutsch.",
+    "Qurʾān-Bedeutungen haben kein freigegebenes Acht-Sprachen-Paket.",
+    "Maschinenentwürfe bleiben humanApproval false.",
+    "Besucher-App, Kids, Widgets und Push-Versand sind unverändert."
+  ]
+}

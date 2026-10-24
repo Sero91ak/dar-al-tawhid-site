@@ -393,7 +393,11 @@ function isDynamicGermanUi(value){
   /^(?:←|→|↗|‹|›)\s+\S/.test(value)||
   /^Alle\s+\S/.test(value)||
   /\swird geladen/.test(value)||
-  /^\d+\s+Duʿāʾ$/.test(value);
+  /^\d+\s+Duʿāʾ$/.test(value)||
+  /^Wetter für .+ wird geladen …$/.test(value)||
+  /^Wetter · .+: derzeit nicht verfügbar$/.test(value)||
+  /^Wetter · .+: \d+ °C · .+$/.test(value)||
+  /^\d+ Treffer$/.test(value);
 }
 function lookupPack(value,language){
  if(language==="tr"){
@@ -711,6 +715,29 @@ function translateSharedPatterns(value,language){
   const forms={ar:"بقي نحو "+n+" ساعة في الواجهة",en:"About "+n+" hours left in focus",tr:"Odakta yaklaşık "+n+" saat kaldı",ku:"Nêzîkî "+n+" saet di berçavê de man",ckb:"نزیکەی "+n+" کاتژمێر لە پێشەوە ماوە",bs:"Još oko "+n+" sati u fokusu",fr:"Encore environ "+n+" h en avant",es:"Faltan unas "+n+" horas en destacado"};
   return forms[language]||null;
  }
+ const weatherLoad=value.match(/^Wetter für (.+) wird geladen …$/);
+ if(weatherLoad){
+  const head=lookupPack("Wetter für",language);
+  const verb=uiWord(language,"wird geladen");
+  if(head&&verb)return head+" "+weatherLoad[1]+" "+verb+" …";
+ }
+ const weatherDown=value.match(/^Wetter · (.+): derzeit nicht verfügbar$/);
+ if(weatherDown){
+  const wetter=lookupPack("Wetter",language);
+  const tail=lookupPack("derzeit nicht verfügbar",language);
+  if(wetter&&tail)return wetter+" · "+weatherDown[1]+": "+tail;
+ }
+ const weatherNow=value.match(/^Wetter · (.+): (\d+) °C · (.+)$/);
+ if(weatherNow){
+  const wetter=lookupPack("Wetter",language);
+  const desc=lookupPack(weatherNow[3],language);
+  if(wetter&&desc)return wetter+" · "+weatherNow[1]+": "+weatherNow[2]+" °C · "+desc;
+ }
+ const hits=value.match(/^(\d+) Treffer$/);
+ if(hits){
+  const word=lookupPack("Treffer",language);
+  if(word)return hits[1]+" "+word;
+ }
  return null;
 }
 function translateExact(value,language="tr"){
@@ -819,7 +846,10 @@ function transformText(node,locale){
  if(!state){
   const match=current.match(/^(\s*)(.*?)(\s*)$/s);
   const german=match&&germanSourceOf(match[2]);
-  if(!match||!german)return;
+  if(!match||!german){
+   if(locale!=="de"&&match&&/[äöüÄÖÜß]/.test(match[2])&&!/[\u0600-\u06ff<>]/.test(match[2]))noteGap(match[2]);
+   return;
+  }
   state={source:match[1]+german+match[3],rendered:current};originals.set(node,state);
  }
  const value=state.source.match(/^(\s*)(.*?)(\s*)$/s),translated=translateExact(value[2],locale);
@@ -885,9 +915,9 @@ const PINNED_CHROME={
   en:"App is loading…",
   tr:"Uygulama yükleniyor…",
   ku:"Sepan tê barkirin…",
-  ckb:"ئەپەکە دادەگیرێت…",
+  ckb:"ئەپ باردەکرێت…",
   bs:"Aplikacija se učitava…",
-  fr:"L’application est en cours de chargement…",
+  fr:"Chargement de l'application…",
   es:"La aplicación se está cargando…"
  },
  ".dar-library-brandbar__sub":{
@@ -914,12 +944,44 @@ function localizePinnedChrome(locale){
   });
  }
 }
+const MEANING_PENDING="Geprüfte Bedeutungsübersetzung in dieser Sprache folgt. Angezeigt bleibt die deutsche Fassung.";
+const gapLog=[];
+function noteGap(text){
+ const value=String(text||"").replace(/\s+/g," ").trim();
+ if(!value||value.length>180||gapLog.includes(value)||gapLog.length>=80)return;
+ gapLog.push(value);
+}
+function markPendingMeanings(locale){
+ const doc=global.document;
+ if(typeof doc?.querySelectorAll!=="function"||typeof doc.createElement!=="function")return;
+ if(typeof doc.getElementById==="function"&&doc.head&&!doc.getElementById("dar-meaning-pending-style")){
+  const style=doc.createElement("style");
+  style.id="dar-meaning-pending-style";
+  style.textContent=".dar-meaning-pending{margin:0 0 8px;padding:8px 10px;border-radius:12px;font-size:12px;line-height:1.45;text-align:start}";
+  doc.head.appendChild(style);
+ }
+ let bodies=[];
+ try{bodies=doc.querySelectorAll(".qrc-body")}catch(_){return}
+ bodies.forEach(body=>{
+  if(typeof body?.querySelector!=="function"||typeof body.prepend!=="function")return;
+  if(!body.querySelector(".quran-ayah-de"))return;
+  const note=body.querySelector(":scope > .dar-meaning-pending");
+  if(locale==="de"){if(note)note.remove();return}
+  if(note)return;
+  const el=doc.createElement("p");
+  el.className="dar-meaning-pending";
+  el.setAttribute("data-dar-ui-label","meaning-pending");
+  el.textContent=MEANING_PENDING;
+  body.prepend(el);
+ });
+}
 function apply(root=global.document?.body,locale=currentLocale()){
  if(!root)return 0;
  const doc=global.document;
  if(root.nodeType===1&&!shouldSkip(root))transformAttributes(root,locale);
  localizePinnedChrome(locale);
  renderHomeWelcome(locale);
+ markPendingMeanings(locale);
  translateFragmented(root,locale);
  const walker=doc.createTreeWalker(root,global.NodeFilter.SHOW_ELEMENT|global.NodeFilter.SHOW_TEXT);
  let node,seen=0;
@@ -944,7 +1006,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-15";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-16";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
@@ -985,5 +1047,6 @@ global.DarTestTurkishUI={apply,schedule,locale:currentLocale,loadCatalog,
   get localizedDraftTitleCount(){return titleByGerman.size},
   translatePrayerName:(source,locale=currentLocale())=>translateExact(source,locale)||source,
   translatedFor:code=>code==="tr"?dictionary.size:(languagePacks.get(code)?.size||0),
+  gaps:()=>gapLog.slice(),
   contentStore:()=>global.DarAdultCentralContent?.create()||null,scope:"adult-test-only"};
 })(window);
