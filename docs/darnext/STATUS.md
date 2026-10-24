@@ -2,7 +2,7 @@
 
 Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 
-**Gesamtstand:** P0 und P1 abgeschlossen; P2 und P3 lokal implementiert und getestet; P4 als nächste zulässige Phase offen.
+**Gesamtstand:** P0 bis P4 lokal implementiert/auditiert und getestet; P5 als nächste zulässige Phase offen.
 
 | Phase | Status | Nachweis |
 | --- | --- | --- |
@@ -10,7 +10,7 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 | P1 Medieninventar | getestet | [MEDIA_INVENTORY.md](MEDIA_INVENTORY.md); Asset-/Dimensionsaudit; Build und 7/7 Tests bestanden |
 | P2 Native Architektur/Designsystem | getestet (lokaler Xcode-Stand) | Adaptive DARNext-Shell implementiert; Build erfolgreich; 7/7 Tests bestanden |
 | P3 Startseite | getestet (lokaler Xcode-Stand) | GitHub-3D-Medien/Hero an DARNext-Startseite angebunden; Build erfolgreich; 7/7 Tests bestanden; Simulator-UI-Prüfung läuft |
-| P4 Beiträge/Duʿāʾ/Bibliothek | offen | – |
+| P4 Beiträge/Duʿāʾ/Bibliothek | getestet (lokaler Xcode-Stand) | Bestehende reale Repository-Daten; native Post-/Duʿāʾ-ShareLink ergänzt; Build erfolgreich; 7/7 Tests bestanden |
 | P5 Qurʾān/Audio/Tafsīr/Tadabbur | offen | – |
 | P6 Weitere Bereiche/Frauen/Ḥadīṯ | offen | – |
 | P7 Inhalts-Synchronisierung | offen | – |
@@ -25,6 +25,16 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 - 10 sekundäre UI-Icons, 3 Home-Heros, 3 Beitrags-Heros, 7 Frauenbilder in zwei Varianten, 42 Cover-Quellen und 13 Feed-Hintergrundkategorien katalogisiert.
 - Geprüfte Pixelmaße: Mobile-Hero 1072 × 1920, Wide-Hero 2016 × 1152, Study 1376 × 768, Beitrags-Heros 1920 × 1080 bzw. 1376 × 768, Frauen v1223 1376 × 768, Frauen v1224 900 × 506.
 - Xcode-Abgleich: DARNext enthält aktuell keine eingebundene Kopie dieser Webmedien; gezielter DARNext-only Import ist für P2/P3 offen.
+
+## P4 — Beiträge, Duʿāʾ, Bibliothek und Teilen
+
+- Lokale Xcode-Dateien geändert: `DarAlTawhid/DARNext/Features/Posts/PostsView.swift`, `DarAlTawhid/DARNext/Features/Dua/DuaView.swift`.
+- Bestehende `LocalContentRepository`-Daten und kanonische IDs bleiben maßgeblich; keine neue Redaktion und kein neuer Quellenbestand angelegt.
+- Post- und Duʿāʾ-Detailansichten besitzen native `ShareLink`-Aktionen mit Inhalt, Quelle bzw. bestehendem Q-Pfad.
+- Bibliothekslisten, Suche, Buch-/Publikationsmetadaten und PDF-Sicherheitsstatus wurden auditiert; nicht vorhandene lokale PDFs werden weiterhin transparent als nicht hinterlegt angezeigt.
+- Xcode `BuildProject(buildForTesting: true)`: erfolgreich, 0 Fehler; Build-Log: `BuildProject-Log-20261024-195153.txt`.
+- Xcode `RunAllTests`, Scheme `DARNext`, Testplan `DARNext`: 7 bestanden, 0 fehlgeschlagen; `.xcresult`: `Test-DARNext-2026.10.24_19-51-55-+0200.xcresult`.
+- Keine produktiven Targets, Publishing-/Push-Dateien oder Live-Inhalte verändert.
 
 ## P3 — Native Startseite
 
@@ -76,8 +86,8 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 ## Offene Punkte
 
 - Der lokale Xcode-Arbeitsstand und der GitHub-Dokumentationsbranch müssen vor dem ersten Quellcode-Commit noch über den vorhandenen Xcode-/Repository-Workflow zusammengeführt werden; kein unbelegter Gleichstand mit GitHub wird behauptet.
-- P4 muss Beiträge, Duʿāʾ, Bibliothek, Quellenkarten und native Share-Flows end-to-end an die bestehenden Daten/IDs anbinden; produktive App-Spuren bleiben unverändert.
+- P5 muss Qurʾān, Tafsīr, Tadabbur und Audio-/Lernplayer an geprüfte vorhandene Daten und Medien anbinden; fehlende Medien offen dokumentieren.
 
 ## Nächste Aktion
 
-P4: Beiträge, Duʿāʾ, Bibliothek, Quellenkarten und Share-Funktionen an echte Repository-Daten binden; danach statische Prüfung, Build, Tests und Status-Commit ausführen.
+P5: Qurʾān-/Audio-/Lernplayer-Audit und zulässige native Ergänzungen; danach statische Prüfung, Build, Tests und Status-Commit ausführen.
