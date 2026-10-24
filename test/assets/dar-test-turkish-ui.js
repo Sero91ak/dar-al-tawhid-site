@@ -179,11 +179,15 @@ function renderHomeWelcome(locale){
  if(!intro||!document.createTextNode||!document.createElement)return;
  let state=welcomeOriginals.get(intro);
  if(!state){state={original:intro.innerHTML,last:null};welcomeOriginals.set(intro,state)}
- intro.setAttribute("data-dar-no-translate","home-intro");
- if(state.last===locale)return;
- state.last=locale;
  const translation=locale==="de"?null:specialBlocks.get(locale);
- if(!translation){if(intro.innerHTML!==state.original)intro.innerHTML=state.original;return}
+ if(state.last===locale&&(!translation||intro.textContent===translation))return;
+ state.last=locale;
+ if(!translation){
+  intro.removeAttribute("data-dar-no-translate");
+  if(intro.innerHTML!==state.original)intro.innerHTML=state.original;
+  return;
+ }
+ intro.setAttribute("data-dar-no-translate","home-intro");
  const branded="DĀR AL TAWḤĪD",pos=translation.indexOf(branded);
  if(pos<0){intro.textContent=translation;return}
  const brand=document.createElement("strong");
@@ -387,11 +391,11 @@ function translateComposed(value,language){
   const rest=lookupPack(alle[1].trim(),language);
   if(all!==undefined&&rest!==undefined)return all+" "+rest+(alle[2]||"");
  }
- const loading=value.match(/^(.+?)\s+wird geladen\s*…?$/);
+ const loading=value.match(/^(.+?)\s+wird geladen(\s*[….]+)?\s*$/);
  if(loading){
   const noun=lookupPack(loading[1].trim(),language);
   const verb=lookupPack("wird geladen",language);
-  if(noun!==undefined&&verb!==undefined)return noun+" "+verb;
+  if(verb!==undefined)return (noun!==undefined?noun:loading[1].trim())+" "+verb+(loading[2]||"");
  }
  const duas=value.match(/^(\d+)\s+Duʿāʾ$/);
  if(duas){
@@ -545,11 +549,81 @@ function transformAttributes(element,locale){
   prior.rendered=desired;
  }
 }
+function translateFragmented(root,locale){
+ if(!root?.querySelectorAll||locale==="de")return;
+ const inline=/^(STRONG|EM|B|I|SPAN|SMALL|BR|WBR)$/;
+ root.querySelectorAll("p,div,small,li,h2,h3,span,a,button,label").forEach(element=>{
+  if(shouldSkip(element)||!element.children?.length)return;
+  if([...element.children].some(child=>!inline.test(child.tagName)||child.children?.length))return;
+  const text=String(element.textContent||"").replace(/\s+/g," ").trim();
+  if(text.length<8||text.length>240)return;
+  const translated=translateExact(text,locale);
+  if(!translated||translated===text)return;
+  element.textContent=translated;
+ });
+}
+const PINNED_CHROME={
+ ".dtbh-tagline,.dhp-home-source-v55":{
+  ar:"مقالات وفق القرآن والسنة والآثار",
+  en:"Articles according to the Qurʾān, the Sunnah and the Āthār",
+  tr:"Kur'an, Sünnet ve eserlere göre yazılar",
+  ku:"Nivîs li gor Qur'an, Sunnah û eserên pêşiyan",
+  ckb:"بابەتەکان بەپێی قورئان و سوننەت و ئاسار",
+  bs:"Tekstovi prema Kur'anu, sunnetu i predajama",
+  fr:"Articles selon le Qurʾān, la Sunnah et les Āthār",
+  es:"Artículos según el Qurʾān, la Sunnah y los Āthār"
+ },
+ "#darBootKicker,.brand-kicker-row small,.dar-library-brandbar__meta,#darHomeV47Leadin,.dar-v47-leadin":{
+  ar:"مشاركات وفق القرآن والسنة والآثار",
+  en:"CONTRIBUTIONS FROM THE QURʾĀN, SUNNAH & ĀTHĀR",
+  tr:"KUR'AN, SÜNNET VE ÂSÂRA GÖRE YAZILAR",
+  ku:"NIVÎS LI GOR QUR'AN, SUNNAH Û ESERAN",
+  ckb:"بەشدارییەکان بەپێی قورئان، سوننەت و ئاسار",
+  bs:"TEKSTOVI PREMA KUR'ANU, SUNNETU I PREDAJAMA",
+  fr:"ARTICLES SELON LE QURʾĀN, LA SUNNAH ET LES ĀTHĀR",
+  es:"ARTÍCULOS SEGÚN EL QURʾĀN, LA SUNNAH Y LOS ĀTHĀR"
+ },
+ "#darBootLoading":{
+  ar:"جارٍ تحميل التطبيق…",
+  en:"App is loading…",
+  tr:"Uygulama yükleniyor…",
+  ku:"Sepan tê barkirin…",
+  ckb:"ئەپەکە دادەگیرێت…",
+  bs:"Aplikacija se učitava…",
+  fr:"L’application est en cours de chargement…",
+  es:"La aplicación se está cargando…"
+ },
+ ".dar-library-brandbar__sub":{
+  ar:"علم من القرآن والسنة",
+  en:"Knowledge from the Qurʾān and the Sunnah",
+  tr:"Kur'an ve Sünnet'ten ilim",
+  ku:"Zanîn ji Qur'an û Sunnah",
+  ckb:"زانست لە قورئان و سوننەت",
+  bs:"Znanje iz Kur'ana i sunneta",
+  fr:"Savoir tiré du Qurʾān et de la Sunnah",
+  es:"Conocimiento del Qurʾān y de la Sunnah"
+ }
+};
+function localizePinnedChrome(locale){
+ const doc=global.document;
+ if(!doc?.querySelectorAll||locale==="de")return;
+ for(const [selector,pack] of Object.entries(PINNED_CHROME)){
+  const text=pack[locale];
+  if(!text)continue;
+  doc.querySelectorAll(selector).forEach(element=>{
+   if(element.closest?.("[data-dar-no-translate]"))return;
+   if(element.id==="darBootLoading"&&!element.isConnected)return;
+   if(element.textContent!==text)element.textContent=text;
+  });
+ }
+}
 function apply(root=global.document?.body,locale=currentLocale()){
  if(!root)return 0;
  const doc=global.document;
  if(root.nodeType===1&&!shouldSkip(root))transformAttributes(root,locale);
+ localizePinnedChrome(locale);
  renderHomeWelcome(locale);
+ translateFragmented(root,locale);
  const walker=doc.createTreeWalker(root,global.NodeFilter.SHOW_ELEMENT|global.NodeFilter.SHOW_TEXT);
  let node,seen=0;
  while((node=walker.nextNode())!==null){
@@ -573,7 +647,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261022";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-boot-lang";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
@@ -601,7 +675,7 @@ if(typeof global.document?.createElement==="function"&&global.document.head&&
    !global.document.getElementById("dar-test-machine-drafts")){
  const draftTag=global.document.createElement("script");
  draftTag.id="dar-test-machine-drafts";
- draftTag.src="/test/assets/dar-test-machine-drafts.js?v=20261023-visible-fields";
+ draftTag.src="/test/assets/dar-test-machine-drafts.js?v=20261024-boot-lang";
  draftTag.defer=true;
  global.document.head.appendChild(draftTag);
 }

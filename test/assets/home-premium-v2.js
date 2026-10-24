@@ -38,7 +38,6 @@
     const kicker=header.querySelector(".brand-kicker-row small");
     if(kicker&&!kicker.dataset.homePremiumOriginal){
       kicker.dataset.homePremiumOriginal=kicker.textContent||"";
-      kicker.textContent="TAWḤĪD · QURʾĀN · SUNNAH · ĀTHĀR";
     }
 
     hero.querySelectorAll(".home-tawhid-focus").forEach(function(el){el.remove()});

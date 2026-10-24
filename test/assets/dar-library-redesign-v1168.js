@@ -77,11 +77,41 @@
     }catch(e){}
   }
 
+  function preferredLocale(){
+    try{return localStorage.getItem("darAdultPreferredLocaleV1")||"de";}catch(e){return"de";}
+  }
   function syncGlobalSourceLine(){
-    var text="BEITRÄGE NACH QURʾĀN, SUNNAH & ĀTHĀR";
+    var lines={
+      de:"BEITRÄGE NACH QURʾĀN, SUNNAH & ĀTHĀR",
+      ar:"مشاركات وفق القرآن والسنة والآثار",
+      en:"CONTRIBUTIONS FROM THE QURʾĀN, SUNNAH & ĀTHĀR",
+      tr:"KUR'AN, SÜNNET VE ÂSÂRA GÖRE YAZILAR",
+      ku:"NIVÎS LI GOR QUR'AN, SUNNAH Û ESERAN",
+      ckb:"بەشدارییەکان بەپێی قورئان، سوننەت و ئاسار",
+      bs:"TEKSTOVI PREMA KUR'ANU, SUNNETU I PREDAJAMA",
+      fr:"ARTICLES SELON LE QURʾĀN, LA SUNNAH ET LES ĀTHĀR",
+      es:"ARTÍCULOS SEGÚN EL QURʾĀN, LA SUNNAH Y LOS ĀTHĀR"
+    };
+    var subs={
+      de:"Wissen aus Qurʾān & Sunnah",
+      ar:"علم من القرآن والسنة",
+      en:"Knowledge from the Qurʾān and the Sunnah",
+      tr:"Kur'an ve Sünnet'ten ilim",
+      ku:"Zanîn ji Qur'an û Sunnah",
+      ckb:"زانست لە قورئان و سوننەت",
+      bs:"Znanje iz Kur'ana i sunneta",
+      fr:"Savoir tiré du Qurʾān et de la Sunnah",
+      es:"Conocimiento del Qurʾān y de la Sunnah"
+    };
+    var code=preferredLocale();
+    var text=lines[code]||lines.de;
+    var sub=subs[code]||subs.de;
     document.querySelectorAll(".brand-kicker-row small,.dar-library-brandbar__meta").forEach(function(el){
       if(el.textContent!==text)el.textContent=text;
       el.classList.add("dar-global-source-line");
+    });
+    document.querySelectorAll(".dar-library-brandbar__sub").forEach(function(el){
+      if(el.textContent!==sub)el.textContent=sub;
     });
   }
 
@@ -103,6 +133,7 @@
   }
 
   document.addEventListener("DOMContentLoaded",schedule,{once:true});
+  window.addEventListener("dar-adult-locale-changed",schedule);
   window.addEventListener("hashchange",schedule);
   window.addEventListener("load",schedule,{once:true});
 

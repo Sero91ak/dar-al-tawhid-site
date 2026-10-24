@@ -9,7 +9,7 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
     &&!window.__DAR_TEST_TR_UI_SCRIPT_LOADING){
  window.__DAR_TEST_TR_UI_SCRIPT_LOADING=true;
  const trScript=document.createElement("script");
- trScript.src="/test/assets/dar-test-turkish-ui.js?v=20261021-core1";
+ trScript.src="/test/assets/dar-test-turkish-ui.js?v=20261024-boot-lang";
  trScript.async=true;
  trScript.onerror=()=>{window.__DAR_TEST_TR_UI_SCRIPT_LOADING=false};
  (document.head||document.documentElement).appendChild(trScript);
@@ -34,7 +34,7 @@ const LINKS=[
 const esc=x=>String(x==null?"":x).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 
 const LANGUAGE_KEY="darAdultPreferredLocaleV1";
-const LANGUAGE_CHOICES=[["de","Deutsch"],["tr","Türkçe"],["en","English"],["ar","العربية"],["ku","Kurmancî"],["ckb","سۆرانی"],["bs","Bosanski"]];
+const LANGUAGE_CHOICES=[["de","Deutsch"],["tr","Türkçe"],["en","English"],["ar","العربية"],["ku","Kurmancî"],["ckb","سۆرانی"],["bs","Bosanski"],["fr","Français"],["es","Español"]];
 const LANGUAGE_CODES=new Set(LANGUAGE_CHOICES.map(x=>x[0]));
 function currentLanguage(){try{return LANGUAGE_CODES.has(localStorage.getItem(LANGUAGE_KEY))?localStorage.getItem(LANGUAGE_KEY):"de"}catch(_){return"de"}}
 function syncLanguageButtons(){
@@ -92,7 +92,9 @@ function ensureTopControls(){
   row.appendChild(el);
  }
  const k=row.querySelector(".brand-kicker-row small");
- if(k&&k.textContent!=="BEITRÄGE NACH QURʾĀN · SUNNAH · AṮĀR")k.textContent="BEITRÄGE NACH QURʾĀN · SUNNAH · AṮĀR";
+ const sourceLines={de:"BEITRÄGE NACH QURʾĀN, SUNNAH & ĀTHĀR",ar:"مشاركات وفق القرآن والسنة والآثار",en:"CONTRIBUTIONS FROM THE QURʾĀN, SUNNAH & ĀTHĀR",tr:"KUR'AN, SÜNNET VE ÂSÂRA GÖRE YAZILAR",ku:"NIVÎS LI GOR QUR'AN, SUNNAH Û ESERAN",ckb:"بەشدارییەکان بەپێی قورئان، سوننەت و ئاسار",bs:"TEKSTOVI PREMA KUR'ANU, SUNNETU I PREDAJAMA",fr:"ARTICLES SELON LE QURʾĀN, LA SUNNAH ET LES ĀTHĀR",es:"ARTÍCULOS SEGÚN EL QURʾĀN, LA SUNNAH Y LOS ĀTHĀR"};
+ const sourceLine=sourceLines[currentLanguage()]||sourceLines.de;
+ if(k&&k.textContent!==sourceLine)k.textContent=sourceLine;
  const main=row.querySelector(".brand-main"),title=main?.querySelector(".brand-title-refined");
  if(main&&title&&k&&!main.querySelector(".dv3-brand-copy")){
   const copy=document.createElement("span");copy.className="dv3-brand-copy";
@@ -210,7 +212,7 @@ document.addEventListener("input",function(e){
  // Existing bindHomeV380Events already performs one native search; do not fire a second.
 });
 document.addEventListener("keydown",function(e){if(e.key!=="Escape")return;const p=document.getElementById("dv3ThemePanel");if(p&&!p.hidden){p.hidden=true;e.preventDefault();}});
-window.addEventListener("dar-adult-locale-changed",syncLanguageButtons);
+window.addEventListener("dar-adult-locale-changed",function(){syncLanguageButtons();queue()});
 window.addEventListener("storage",function(e){if(e.key===LANGUAGE_KEY)syncLanguageButtons()});
 document.addEventListener("dar:view-rendered",queue);
 window.addEventListener("hashchange",queue);

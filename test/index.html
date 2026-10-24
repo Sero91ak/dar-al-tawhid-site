@@ -21,8 +21,12 @@
     try{sessionStorage.setItem(KEY,value);}catch(e){}
     try{document.cookie="dar_test_open_until="+value+"; Max-Age=28800; Path=/; SameSite=Lax";}catch(e){}
   }
-  if(readUntil()>Date.now())return;
   var html=document.documentElement;
+  var bootLang="de";
+  try{bootLang=localStorage.getItem("darAdultPreferredLocaleV1")||"de";}catch(e){}
+  if(bootLang==="ar"||bootLang==="ckb"){html.lang=bootLang;html.dir="rtl";}
+  else if(bootLang&&bootLang!=="de"){html.lang=bootLang;html.dir="ltr";}
+  if(readUntil()>Date.now())return;
   html.style.visibility="hidden";
   function unlock(){
     writeUntil(Date.now()+OPEN_MS);
@@ -43,17 +47,27 @@
   function tryOpen(input){
     var value=String(input&&input.value||"").replace(/\s+/g,"").toLowerCase();
     if(value==="dawud26"){unlock();return;}
-    if(input){input.value="";input.placeholder="Nicht korrekt";}
+    if(input){input.value="";input.placeholder=wrap.getAttribute("data-dar-lock-bad")||"Nicht korrekt";}
   }
   var wrap=document.createElement("div");
   wrap.id="darTestLock";
   wrap.style.cssText="position:fixed;inset:0;z-index:2147483647;background:#0e1411;display:flex;align-items:center;justify-content:center;visibility:visible;padding:24px;";
-  wrap.innerHTML='<form id="darTestLockForm" action="javascript:void(0)" style="width:min(360px,100%);display:grid;gap:12px;color:#F4F1E6;font:600 15px/1.3 system-ui,sans-serif"><div style="font:800 22px/1.1 Georgia,serif">DĀR AL TAWḤĪD</div><div style="opacity:.8">Interner Bereich</div><input id="darTestLockInput" type="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Passwort" style="min-height:46px;border-radius:12px;border:1px solid #3d5146;background:#17211B;color:#F4F1E6;padding:0 12px"><button id="darTestLockBtn" type="button" style="min-height:46px;border-radius:999px;border:0;background:#F4F1E6;color:#17211B;font:800 15px system-ui,sans-serif">Öffnen</button></form>';
+  wrap.innerHTML='<form id="darTestLockForm" action="javascript:void(0)" style="width:min(360px,100%);display:grid;gap:12px;color:#F4F1E6;font:600 15px/1.3 system-ui,sans-serif"><div style="font:800 22px/1.1 Georgia,serif">DĀR AL TAWḤĪD</div><div id="darTestLockArea" style="opacity:.8">Interner Bereich</div><input id="darTestLockInput" type="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Passwort" style="min-height:46px;border-radius:12px;border:1px solid #3d5146;background:#17211B;color:#F4F1E6;padding:0 12px"><button id="darTestLockBtn" type="button" style="min-height:46px;border-radius:999px;border:0;background:#F4F1E6;color:#17211B;font:800 15px system-ui,sans-serif">Öffnen</button></form>';
   html.appendChild(wrap);
   html.style.visibility="visible";
   var input=document.getElementById("darTestLockInput");
   var btn=document.getElementById("darTestLockBtn");
   var form=document.getElementById("darTestLockForm");
+  var lockCopy={ar:{area:"منطقة داخلية",password:"كلمة المرور",open:"فتح",bad:"غير صحيحة"},en:{area:"Internal area",password:"Password",open:"Open",bad:"Not correct"},tr:{area:"Dahili alan",password:"Şifre",open:"Aç",bad:"Doğru değil"},ku:{area:"Qada navxweyî",password:"Şîfre",open:"Veke",bad:"Ne rast e"},ckb:{area:"ناوچەی ناوخۆیی",password:"وشەی نهێنی",open:"کردنەوە",bad:"ڕاست نییە"},bs:{area:"Interno područje",password:"Lozinka",open:"Otvori",bad:"Nije tačno"},fr:{area:"Espace interne",password:"Mot de passe",open:"Ouvrir",bad:"Incorrect"},es:{area:"Área interna",password:"Contraseña",open:"Abrir",bad:"No es correcto"}};
+  var lockRow=lockCopy[bootLang];
+  if(lockRow){
+    var lockArea=document.getElementById("darTestLockArea");
+    if(lockArea)lockArea.textContent=lockRow.area;
+    if(input)input.placeholder=lockRow.password;
+    if(btn)btn.textContent=lockRow.open;
+    wrap.setAttribute("data-dar-lock-bad",lockRow.bad);
+    if(bootLang==="ar"||bootLang==="ckb")wrap.setAttribute("dir","rtl");
+  }
   function go(ev){if(ev){ev.preventDefault();ev.stopPropagation();}tryOpen(input);}
   if(btn)btn.addEventListener("click",go,true);
   if(form)form.addEventListener("submit",go,true);
@@ -130,7 +144,7 @@ html[data-theme="light"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="lig
 <script>/* IOS_NATIVE_FORCE_SHELL_V1005: alte Hülle holt version.json und lädt neu */(function(){try{var ua=String(navigator.userAgent||"");if(!/DarAlTawhid-iOS/i.test(ua)&&!window.DAR_IOS_NATIVE_APP)return;window.DAR_IOS_NATIVE_APP=true;window.DAR_OFFICIAL_IOS_APP=true;try{document.documentElement.classList.add("dar-ios-native-app")}catch(e0){}var BUILD=String(window.__DAR_EXPECTED_BUILD||"");var ONCE="dar_ios_native_force_count_v1052";function num(id){var m=String(id||"").match(/v(\d+)/);return m?parseInt(m[1],10):0}function unreg(){try{if("serviceWorker"in navigator){navigator.serviceWorker.getRegistrations().then(function(rs){(rs||[]).forEach(function(r){try{if(String(r.scope||"").indexOf("/push/onesignal")>=0)return;r.unregister()}catch(e1){}})}).catch(function(){})}}catch(e2){}}function go(){try{var n=Number(sessionStorage.getItem(ONCE)||0)||0;if(n>=8)return;sessionStorage.setItem(ONCE,String(n+1))}catch(e3){}var h=location.hash||"#home";var base=location.pathname||"/";location.replace(base+(base.indexOf("?")>=0?"&":"?")+"ios-shell="+Date.now()+"&darsw="+Date.now()+h)}unreg();try{if("caches"in window){caches.keys().then(function(keys){return Promise.all((keys||[]).map(function(k){return caches.delete(k)}))}).catch(function(){})}}catch(e4){}var ver=String(location.pathname||"").indexOf("/test")===0?"/test/version.json":"/version.json";fetch(ver+"?ios="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(!remote||!remote.buildId)return;if(num(remote.buildId)>num(BUILD)&&num(BUILD)>0)go()}).catch(function(){})}catch(e){}})();</script>
 <script>/* VISUAL_PAST_PURGE_V588: alte Optik-Caches löschen – aktuelle Darstellung bleibt Autorität */(function(){var BUILD=String(window.__DAR_EXPECTED_BUILD||"");var KEY="dar_visual_authority_build_v1";var ONCE="dar_visual_past_purge_once_v1052";function num(id){var m=String(id||"").match(/v(\d+)/);return m?parseInt(m[1],10):0}function wipe(){if(!("caches"in window))return Promise.resolve();return caches.keys().then(function(keys){return Promise.all(keys.filter(function(k){return /^dar-al-tawhid-offline-light-/i.test(k)}).map(function(k){return caches.delete(k)}))})}function bustReload(tag){try{if(sessionStorage.getItem(ONCE)===BUILD+"|"+tag)return;sessionStorage.setItem(ONCE,BUILD+"|"+tag)}catch(e){}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?"+tag+"="+Date.now()+h)}try{var prev=localStorage.getItem(KEY)||"";var localN=num(BUILD);var prevN=num(prev);if(prevN>localN&&localN>0){wipe().then(function(){if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){try{g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}catch(e){}}).catch(function(){})}bustReload("visual-stale")}).catch(function(){bustReload("visual-stale")});return}if(localN>prevN){wipe().then(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}bustReload("visual-new")}).catch(function(){try{localStorage.setItem(KEY,BUILD)}catch(e){}});return}if(!prev&&BUILD){try{localStorage.setItem(KEY,BUILD)}catch(e){}}if(localN>0&&"caches"in window){caches.keys().then(function(keys){keys.forEach(function(k){if(!/^dar-al-tawhid-offline-light-/i.test(k))return;var kn=num(k);if(kn&&kn<localN)caches.delete(k)})}).catch(function(){})}}catch(e){}try{var path=String(location.pathname||"");var ver=path.indexOf("/test")===0?"/test/version.json":"/version.json";fetch(ver,{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(remote){if(!remote||!remote.buildId)return;var remoteN=num(remote.buildId);if(remoteN>localN&&localN>0){wipe().then(function(){bustReload("visual-remote")}).catch(function(){bustReload("visual-remote")})}}).catch(function(){})}catch(e){}})();</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
-<script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
+<script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var boot=document.getElementById("darBootLoading");if(boot&&boot.isConnected&&e.contains(boot)&&e.children.length===1)return true;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
 <script>/* KILL_FORCED_UI_UPDATE_V1007: unerwünschtes Aktualisierungs-Popup unterdrücken */(function(){try{localStorage.setItem("dar_forced_ui_update_v1007","app-shell-v1007-topfix")}catch(e){}try{var s=document.createElement("style");s.id="dar-kill-forced-ui-update-v1007";s.textContent="#dar-forced-ui-update-v1007,#dar-forced-ui-update-style-v1007{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}";(document.head||document.documentElement).appendChild(s)}catch(e){}function wipe(){try{var el=document.getElementById("dar-forced-ui-update-v1007");if(el)el.remove()}catch(e){}}wipe();document.addEventListener("DOMContentLoaded",wipe);setTimeout(wipe,0);setTimeout(wipe,250);setTimeout(wipe,1200)})();</script>
 <script defer src="/assets/live-boot.js?v=598"></script>
@@ -21044,7 +21058,7 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
 
 
 <link rel="stylesheet" href="/test/assets/dar-library-redesign-v1168.css?v=1196">
-<script defer src="/test/assets/dar-library-redesign-v1168.js?v=1196"></script>
+<script defer src="/test/assets/dar-library-redesign-v1168.js?v=20261024-boot-lang"></script>
 
 
 <!-- DAR_HADITH_STATIC_AUTHORITY_V1288 -->
@@ -21059,7 +21073,7 @@ body.is-quran-reader-route .quran-ayah-action-btn--tafsir.is-loading::after{cont
 </style>
 
 <!-- DĀR TEST · COMPACT HOME V3.1 · never include in public visitor build -->
-<script defer id="darTestHomeV3CompactScript" src="/test/assets/dar-home-v3-compact.js?v=20261021-tr-lang-v1"></script>
+<script defer id="darTestHomeV3CompactScript" src="/test/assets/dar-home-v3-compact.js?v=20261024-boot-lang"></script>
 <body class="has-bottom-nav">
 <div id="newPostsBanner" class="new-posts-banner hidden" role="button" tabindex="0" aria-label="Aktualisieren" style="display:none">
   <span class="new-posts-icon">&#x23F3;</span>
@@ -21074,18 +21088,50 @@ body.is-quran-reader-route .quran-ayah-action-btn--tafsir.is-loading::after{cont
       <div class="header-row header-row--brand-only">
         <div class="brand">
           <div class="brand-kicker-row">
-            <small>Tawḥīd · Qurʾān · Sunnah · Āthār</small>
+            <small id="darBootKicker">Tawḥīd · Qurʾān · Sunnah · Āthār</small>
           </div>
           <div class="brand-main"><img class="logo" src="/watermark-my-logo-full.png" alt="DĀR AL TAWḤĪD Logo"><h1 class="brand-title brand-title-refined">DĀR AL TAWḤĪD</h1></div>
         </div>
       </div>
       <div id="headerPrayerStatus" class="header-prayer-hub" data-nav="prayer" role="button" tabindex="0" aria-label="Gebetszeiten öffnen"></div>
-      <div class="hero-text"><div class="salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div><div class="intro"><strong>Tawḥīd im Mittelpunkt.</strong> Wissen aus <strong>Qurʾān</strong>, authentischer <strong>Sunnah</strong> und den <strong>Āthār der frühen Imāme</strong>.</div></div>
+      <div class="hero-text"><div class="salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</div><div class="intro" id="darBootIntro"><strong>Tawḥīd im Mittelpunkt.</strong> Wissen aus <strong>Qurʾān</strong>, authentischer <strong>Sunnah</strong> und den <strong>Āthār der frühen Imāme</strong>.</div></div>
     </header>
     <section class="isnad"><div class="isnad-label">Maßstab der Überlieferung</div><div class="isnad-quote"><span class="isnad-speaker">Ibn Sīrīn sagte:</span><span class="isnad-words">„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</span></div><div class="isnad-source" title="Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Band 1, S. 14.">Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Band 1, S. 14.</div></section>
   </section>
   <div class="app-bar"><div class="app-actions"><button id="backBtn" class="back-btn" type="button">← Zurück</button><button id="homeBtn" class="home-btn" type="button">⌂ Startseite</button></div><div id="crumb" class="crumb">Startseite</div><div id="postReaderActions" class="post-reader-actions" hidden><button type="button" class="post-reader-top-btn" data-post-save aria-label="Beitrag speichern">♡</button><button type="button" class="post-reader-top-btn" data-post-share-open aria-label="Beitrag teilen">Teilen</button><button type="button" class="post-reader-top-btn" data-post-more-open aria-label="Weitere Aktionen">⋯</button></div></div>
-  <main id="appView" class="view"><div class="loading">App wird geladen…</div></main>
+  <main id="appView" class="view"><div class="loading" id="darBootLoading">App wird geladen…</div></main>
+  <script>
+  (function(){
+    var code="de";
+    try{code=localStorage.getItem("darAdultPreferredLocaleV1")||"de";}catch(e){}
+    var pack={
+      ar:{kicker:"التوحيد · القرآن · السنة · الآثار",intro:"التوحيد في الصدارة. علم من القرآن، ومن السنة الصحيحة، ومن آثار الأئمة المتقدمين.",loading:"جارٍ تحميل التطبيق…",area:"منطقة داخلية",password:"كلمة المرور",open:"فتح",bad:"غير صحيحة"},
+      en:{kicker:"Tawḥīd · Qurʾān · Sunnah · Āthār",intro:"Tawḥīd at the center. Knowledge from the Qurʾān, the authentic Sunnah, and the Āthār of the early imams.",loading:"App is loading…",area:"Internal area",password:"Password",open:"Open",bad:"Not correct"},
+      tr:{kicker:"Tevhid · Kur'an · Sünnet · Āsār",intro:"Merkezde Tevhid. İlim; Kur'an'dan, sahih Sünnet'ten ve ilk dönem imamlarının Āsārından.",loading:"Uygulama yükleniyor…",area:"Dahili alan",password:"Şifre",open:"Aç",bad:"Doğru değil"},
+      ku:{kicker:"Tawḥīd · Qurʾān · Sunnah · Āthār",intro:"Tawḥīd di navendê de ye. Zanîn ji Qurʾān, ji Sunneta rast û ji Āthārên îmamên pêşîn.",loading:"Sepan tê barkirin…",area:"Qada navxweyî",password:"Şîfre",open:"Veke",bad:"Ne rast e"},
+      ckb:{kicker:"تەوحید · قورئان · سوننەت · ئاسار",intro:"تەوحید لە ناوەنددایە. زانست لە قورئان، لە سوننەتی ڕەسەن و لە ئاسارەکانی ئیمامانی پێشین.",loading:"ئەپەکە دادەگیرێت…",area:"ناوچەی ناوخۆیی",password:"وشەی نهێنی",open:"کردنەوە",bad:"ڕاست نییە"},
+      bs:{kicker:"Tawḥīd · Kur'an · Sunnet · Āthār",intro:"Tawḥīd u središtu. Znanje iz Kur'ana, vjerodostojnog sunneta i Āthāra ranih imama.",loading:"Aplikacija se učitava…",area:"Interno područje",password:"Lozinka",open:"Otvori",bad:"Nije tačno"},
+      fr:{kicker:"Tawḥīd · Qurʾān · Sunnah · Āthār",intro:"Le Tawḥīd au centre. Un savoir tiré du Qurʾān, de la Sunnah authentique et des Āthār des premiers imams.",loading:"L’application est en cours de chargement…",area:"Espace interne",password:"Mot de passe",open:"Ouvrir",bad:"Incorrect"},
+      es:{kicker:"Tawḥīd · Qurʾān · Sunnah · Āthār",intro:"El Tawḥīd en el centro. Conocimiento del Qurʾān, de la Sunnah auténtica y de los Āthār de los primeros imames.",loading:"La aplicación se está cargando…",area:"Área interna",password:"Contraseña",open:"Abrir",bad:"No es correcto"}
+    };
+    var row=pack[code];
+    if(!row)return;
+    var kicker=document.getElementById("darBootKicker");
+    var intro=document.getElementById("darBootIntro");
+    var loading=document.getElementById("darBootLoading");
+    if(kicker)kicker.textContent=row.kicker;
+    if(intro)intro.textContent=row.intro;
+    if(loading)loading.textContent=row.loading;
+    var area=document.getElementById("darTestLockArea");
+    var input=document.getElementById("darTestLockInput");
+    var button=document.getElementById("darTestLockBtn");
+    var lock=document.getElementById("darTestLock");
+    if(area)area.textContent=row.area;
+    if(input&&input.placeholder==="Passwort")input.placeholder=row.password;
+    if(button)button.textContent=row.open;
+    if(lock){lock.setAttribute("data-dar-lock-bad",row.bad);if(code==="ar"||code==="ckb")lock.setAttribute("dir","rtl");}
+  })();
+  </script>
   <div id="pwaInstallModal" class="pwa-modal-overlay" hidden aria-hidden="true"></div>
   <footer class="footer"><strong>DĀR AL TAWḤĪD</strong><br>Folgt für mehr Wissen aus Qurʾān & Sunnah<div class="footer-actions"><a class="footer-action-btn footer-action-tg footer-social-link" href="https://t.me/dar_al_tauhid" target="_blank" rel="noopener" aria-label="Telegram Kanal öffnen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M17.6 6.8 5.8 11.35c-.8.32-.8.77-.15.97l3.03.95 1.17 3.74c.15.42.08.58.52.58.34 0 .49-.15.68-.34l1.64-1.6 3.42 2.53c.63.35 1.08.17 1.24-.58l2.1-9.9c.24-.92-.35-1.34-.94-1.07Zm-1.82 2.17-5.74 5.18-.23 2.44-.95-3.05 6.92-4.37Z" fill="#fff"/></svg><span>Telegram</span></a><a class="footer-action-btn footer-action-wa footer-social-link" href="https://whatsapp.com/channel/0029VbBK0YaDp2Q8A0kW1F3g" target="_blank" rel="noopener" aria-label="WhatsApp Kanal öffnen"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#25D366" d="M12 1.8C6.37 1.8 1.8 6.37 1.8 12c0 1.79.47 3.54 1.35 5.07L1.8 22.2l5.28-1.39A10.16 10.16 0 0 0 12 22.2h.01c5.63 0 10.2-4.57 10.2-10.2 0-2.73-1.06-5.3-2.99-7.22A10.13 10.13 0 0 0 12 1.8Z"/><path fill="#fff" d="M9.87 7.55h-.56c-.18 0-.47.07-.72.34-.25.28-.96.94-.96 2.3s.98 2.67 1.11 2.85c.13.18 1.9 3.05 4.7 4.15.66.26 1.18.42 1.58.53.66.18 1.27.15 1.75.09.53-.07 1.64-.67 1.87-1.32.23-.66.23-1.22.16-1.33-.06-.11-.24-.17-.5-.3-.26-.13-1.54-.76-1.78-.85-.23-.09-.4-.13-.57.13-.17.25-.67.84-.82 1.01-.15.17-.31.2-.57.07-.26-.13-1.1-.41-2.1-1.31-.78-.7-1.31-1.57-1.46-1.84-.15-.26-.01-.41.11-.54.11-.11.25-.28.37-.42.12-.14.16-.23.25-.39.08-.16.04-.29-.02-.42-.07-.13-.57-1.43-.78-1.95-.2-.49-.41-.42-.57-.43Z"/></svg><span>WhatsApp</span></a><a class="footer-action-btn footer-action-ig footer-social-link" href="https://www.instagram.com/dar_at_tawhid?igsh=MTlnaXV2cGRieWNpOQ%3D%3D&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram Kanal öffnen"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igFoot" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="65%" stop-color="#d62976"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#igFoot)"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.25" fill="#fff"/></svg><span>Instagram</span></a><button id="footerAppSave" class="footer-action-btn footer-action-save footer-app-save" type="button">📲 App speichern</button></div><span class="signature">by Serhat Abu Malik</span></footer>
 </div>
@@ -28554,7 +28600,7 @@ function renderAppRecovery(error,stage="App-Start"){
 function isAppViewStuck(){
   const el=document.getElementById("appView");
   const text=(el?.textContent||"").trim();
-  if(text&&text.indexOf("App wird repariert")>=0)return true;return !el||!text||text==="App wird geladen…";
+  if(text&&text.indexOf("App wird repariert")>=0)return true;var boot=document.getElementById("darBootLoading");if(boot&&el&&el.contains(boot)&&el.children.length===1)return true;return !el||!text||text==="App wird geladen…";
 }
 let __darBootRepairTimer=null;
 function cancelBootAutonomousRepair(){if(__darBootRepairTimer){clearTimeout(__darBootRepairTimer);__darBootRepairTimer=null}}
@@ -29377,7 +29423,7 @@ function render(){
     console.error(error);
     var painted=document.getElementById("appView");
     var paintedText=painted?(painted.textContent||"").trim():"";
-    if(paintedText&&paintedText!=="App wird geladen…"&&paintedText.indexOf("App wird repariert")<0)return;
+    var bootOnly=painted&&painted.querySelector("#darBootLoading")&&painted.children.length===1;if(paintedText&&paintedText!=="App wird geladen…"&&paintedText.indexOf("App wird repariert")<0&&!bootOnly)return;
     renderAppRecovery(error,"Darstellung");
   }
 }

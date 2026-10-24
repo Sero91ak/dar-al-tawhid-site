@@ -23,7 +23,10 @@ function sync(){
  if(!header||!row||!prayer)return;
  document.documentElement.classList.add("dar-home-v47-layout");
  var lead=document.getElementById("darHomeV47Leadin");
- if(!lead){lead=make("p","dar-v47-leadin","BEITRÄGE NACH QURʾĀN, SUNNAH & ĀTHĀR");lead.id="darHomeV47Leadin"}
+ var leadLines={de:"BEITRÄGE NACH QURʾĀN, SUNNAH & ĀTHĀR",ar:"مشاركات وفق القرآن والسنة والآثار",en:"CONTRIBUTIONS FROM THE QURʾĀN, SUNNAH & ĀTHĀR",tr:"KUR'AN, SÜNNET VE ÂSÂRA GÖRE YAZILAR",ku:"NIVÎS LI GOR QUR'AN, SUNNAH Û ESERAN",ckb:"بەشدارییەکان بەپێی قورئان، سوننەت و ئاسار",bs:"TEKSTOVI PREMA KUR'ANU, SUNNETU I PREDAJAMA",fr:"ARTICLES SELON LE QURʾĀN, LA SUNNAH ET LES ĀTHĀR",es:"ARTÍCULOS SEGÚN EL QURʾĀN, LA SUNNAH Y LOS ĀTHĀR"};
+ var leadCode="de";try{leadCode=localStorage.getItem("darAdultPreferredLocaleV1")||"de"}catch(e){}
+ if(!lead){lead=make("p","dar-v47-leadin",leadLines[leadCode]||leadLines.de);lead.id="darHomeV47Leadin"}
+ else if(lead.textContent!==(leadLines[leadCode]||leadLines.de))lead.textContent=leadLines[leadCode]||leadLines.de;
  // The fixed DĀR brand rail is the ONE brand authority. V4.7 used to
  // recreate a second gold lead-in + logo/title/subline below it. Keep the
  // original row in the DOM for older theme hooks, but never show it on Home.
@@ -81,6 +84,7 @@ function init(){
  new MutationObserver(queue).observe(document.body,{attributes:true,attributeFilter:["class"]});
  new MutationObserver(queue).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme","data-theme-variant"]});
  document.addEventListener("dar:view-rendered",queue);
+ window.addEventListener("dar-adult-locale-changed",queue);
  document.addEventListener("dar:brand-header-mounted",queue);
  window.addEventListener("hashchange",queue);
  window.addEventListener("pageshow",queue);

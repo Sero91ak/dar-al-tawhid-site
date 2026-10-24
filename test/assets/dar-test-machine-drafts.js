@@ -155,7 +155,8 @@ function applyPhrases(){
  let node;
  while((node=walker.nextNode())){
   const parent=node.parentElement;
-  if(!parent||parent.closest?.("script,style,.dua-arabic,.quran-arabic,[lang='ar'],[data-dar-no-translate]"))continue;
+  const skipped=parent.closest?.("script,style,.dua-arabic,.quran-arabic,[lang='ar'],[data-dar-no-translate]");
+  if(skipped&&skipped!==global.document?.documentElement)continue;
   const current=String(node.nodeValue||"");
   const match=current.match(/^(\s*)(.*?)(\s*)$/s);
   if(!match)continue;
