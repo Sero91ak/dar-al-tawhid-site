@@ -212,7 +212,7 @@ async function toggleWakeLock(){
 }
 document.addEventListener('click',e=>{
 let b=e.target.closest('button');if(!b)return;
-if(b.dataset.qmode){$('.school-tabs button').forEach(x=>x.classList.toggle('on',x===b));renderSurah();return}
+if(b.dataset.qmode){$$('.school-tabs button').forEach(x=>x.classList.toggle('on',x===b));renderSurah();return}
 if(b.dataset.wake){toggleWakeLock();return}
 if(b.dataset.qfont){let n=Math.min(50,Math.max(24,(+ls('qArFont',30))+(+b.dataset.qfont)*2));save('qArFont',n);document.documentElement.style.setProperty('--q-ar-size',n+'px');notify('Arabische Schriftgröße '+n);return}
 if(b.dataset.verseaudio){$('#audioAyah').value=b.dataset.verseaudio;go('audio');updateAudioStatus();audioStart();return}
