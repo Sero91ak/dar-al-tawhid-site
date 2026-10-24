@@ -16,5 +16,23 @@
     "title": "Lass mich mit einem gesunden Herzen kommen",
     "snippet": "Und beschäme mich nicht am Tag, an dem sie auferweckt werden; am Tag, an dem weder Besitz noch Kinder nützen, außer wer zu Allah mit einem gesunden Herzen kommt.",
     "category": "Herz"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 481,
+      "remaining": 445
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 62,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
