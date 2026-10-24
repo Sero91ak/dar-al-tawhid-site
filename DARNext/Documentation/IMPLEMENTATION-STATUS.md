@@ -2,7 +2,7 @@
 
 Stand: 24.10.2026 · Arbeitszweig: codex/darnext-apple-heritage-master-v1-20261024
 
-Gesamtstand: P0-Audit abgeschlossen. P1 Design Foundation und die drei nativen Referenzbereiche sind im isolierten Xcode-Arbeitsstand weiterentwickelt; Build und bestehende Tests erfolgreich. P1/B bleibt bis zur visuellen iPhone-/iPad-Abnahme und Repository-Synchronisierung offen.
+Gesamtstand: P0-Audit abgeschlossen. P1 Design Foundation und die drei nativen Referenzbereiche sind im isolierten Xcode-Arbeitsstand weiterentwickelt; Build und bestehende Tests erfolgreich. P1/B bleibt bis zur visuellen iPhone-/iPad-Abnahme und Repository-Synchronisierung offen; der Reader ist funktional erweitert, die Geräteabnahme bleibt separat.
 
 | Phase | Status | Nachweis |
 | --- | --- | --- |
@@ -42,15 +42,15 @@ Gesamtstand: P0-Audit abgeschlossen. P1 Design Foundation und die drei nativen R
 ## Nachweise
 
 - Xcode BuildProject(buildForTesting: true): erfolgreich, 0 Fehler.
-- Build-Log: BuildProject-Log-20261024-201413.txt.
+- Build-Log: BuildProject-Log-20261024-201624.txt.
 - Xcode RunAllTests, Scheme DARNext, Testplan DARNext: 7 bestanden, 0 fehlgeschlagen.
-- Testresultat: Test-DARNext-2026.10.24_20-14-14-+0200.xcresult.
+- Testresultat: Test-DARNext-2026.10.24_20-16-25-+0200.xcresult.
 - Ein echter physischer iPhone-Run, iPad-Run und vollständige visuelle Heritage-Abnahme sind noch offen; ein GitHub-Commit allein installiert keinen neuen Build auf einem Gerät.
 
 ## Offene Aufgaben / nächste isolierte Schritte
 
 - Quellenregistry als freigegebenes, versioniertes DARNext-Modell integrieren, ohne /q/-IDs zu erfinden.
-- Wissenschaftsblatt um Quellen-Sheet, strukturierte Markdown-/Fazit-Typografie und Bookmark-Zustand erweitern.
+- Bookmark-Zustand und vollständige Q-Registry-Delta-Integration ergänzen.
 - Muṣḥaf-Leseposition, Bookmark, Transliteration und versgenaue Audio-Steuerung vervollständigen.
 - Design-Previews/Screenshots für Nacht, Pergament, Dark/Light, iPhone Duo und iPad erstellen.
 - Danach P2–P5 mit neun Sprachen, Offline-/Delta-Sync, Apple-Integrationen, VoiceOver, Dynamic Type, RTL und Geräte-QA bearbeiten.
