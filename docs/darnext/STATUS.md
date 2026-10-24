@@ -2,13 +2,13 @@
 
 Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 
-**Gesamtstand:** P0 und P1 abgeschlossen; P2 als nächste zulässige Phase offen.
+**Gesamtstand:** P0 und P1 abgeschlossen; P2 lokal implementiert und getestet; P3 als nächste zulässige Phase offen.
 
 | Phase | Status | Nachweis |
 | --- | --- | --- |
 | P0 Audit/Sicherung | getestet | DARNext-Target/Scheme/Testplan nachgewiesen; Build-for-Testing erfolgreich; 7/7 Tests bestanden; Arbeitsbranch dokumentiert |
 | P1 Medieninventar | getestet | [MEDIA_INVENTORY.md](MEDIA_INVENTORY.md); Asset-/Dimensionsaudit; Build und 7/7 Tests bestanden |
-| P2 Native Architektur/Designsystem | offen | – |
+| P2 Native Architektur/Designsystem | getestet (lokaler Xcode-Stand) | Adaptive DARNext-Shell implementiert; Build erfolgreich; 7/7 Tests bestanden |
 | P3 Startseite | offen | – |
 | P4 Beiträge/Duʿāʾ/Bibliothek | offen | – |
 | P5 Qurʾān/Audio/Tafsīr/Tadabbur | offen | – |
@@ -25,6 +25,16 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 - 10 sekundäre UI-Icons, 3 Home-Heros, 3 Beitrags-Heros, 7 Frauenbilder in zwei Varianten, 42 Cover-Quellen und 13 Feed-Hintergrundkategorien katalogisiert.
 - Geprüfte Pixelmaße: Mobile-Hero 1072 × 1920, Wide-Hero 2016 × 1152, Study 1376 × 768, Beitrags-Heros 1920 × 1080 bzw. 1376 × 768, Frauen v1223 1376 × 768, Frauen v1224 900 × 506.
 - Xcode-Abgleich: DARNext enthält aktuell keine eingebundene Kopie dieser Webmedien; gezielter DARNext-only Import ist für P2/P3 offen.
+
+## P2 — Native Architektur und Designsystem
+
+- Lokale Xcode-Datei geändert: `DarAlTawhid/DARNext/Shell/RootShell.swift`.
+- iPhone/iPad-Aufteilung: `TabView` für kompakte Größen, `NavigationSplitView` mit fünf DARNext-Navigationsbereichen für Regular-Size-Class.
+- Gemeinsamer `DARNextMiniPlayer` bleibt in beiden Layouts über Safe-Area-Inset erhalten.
+- Keine Änderung an produktiven Targets, Web-/Worker-/Push-Dateien, Bundle-ID, Entitlements, Signing oder Store-/TestFlight-Konfiguration.
+- Xcode `BuildProject(buildForTesting: true)`: erfolgreich, 0 Fehler; Build-Log: `BuildProject-Log-20261024-194659.txt`.
+- Xcode `RunAllTests`, Scheme `DARNext`, Testplan `DARNext`: 7 bestanden, 0 fehlgeschlagen; `.xcresult`: `Test-DARNext-2026.10.24_19-47-01-+0200.xcresult`.
+- Remote-Sync-Grenze: Die GitHub-Branch enthält aktuell keine entsprechende `ios/.../DARNext`-Quelldatei; der Xcode-Stand liegt im isolierten, nicht-Git-Checkout. Deshalb wird kein fiktiver Quellcode-Commit behauptet. Vor P3/P10 ist der lokale Quellstand über den vorgesehenen Repository-Workflow zu synchronisieren.
 
 ## Tests und Builds — P1
 
@@ -56,8 +66,8 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 ## Offene Punkte
 
 - Der lokale Xcode-Arbeitsstand und der GitHub-Dokumentationsbranch müssen vor dem ersten Quellcode-Commit noch über den vorhandenen Xcode-/Repository-Workflow zusammengeführt werden; kein unbelegter Gleichstand mit GitHub wird behauptet.
-- P2 muss den DARNext-eigenen Ressourcen-/Asset-Pfad und das gemeinsame native Designsystem aus dem Inventar aufbauen; produktive App-Spuren bleiben unverändert.
+- P3 muss die katalogisierten Medien gezielt in DARNext registrieren und die Startseite mit echten 3D-Icons/Hero-Inhalten vervollständigen; produktive App-Spuren bleiben unverändert.
 
 ## Nächste Aktion
 
-P2: DARNext-eigenen Ressourcenpfad und SwiftUI-Designsystem/Navigation erweitern; danach statische Prüfung, Build, Tests und Status-Commit ausführen.
+P3: vorhandene 3D-Icons/Hero-Medien DARNext-only importieren und die echte Startseite damit anbinden; danach statische Prüfung, Build, Tests und Status-Commit ausführen.
