@@ -8,6 +8,10 @@ private struct LibraryPublicationContainer: Decodable {
     let publications: [LibraryPublication]
 }
 
+private struct LearningModuleContainer: Decodable {
+    let modules: [LearningModule]
+}
+
 enum ContentResourceError: LocalizedError {
     case missingResource(String)
     case invalidResource(String)
@@ -63,6 +67,14 @@ struct ContentResourceStore: Sendable {
 
     func libraryPublications() throws -> [LibraryPublication] {
         try decode(LibraryPublicationContainer.self, path: "library-publications.json").publications
+    }
+
+    func qRegistry() throws -> QRegistry {
+        try decode(QRegistry.self, path: "q-registry.json")
+    }
+
+    func learningModules() throws -> [LearningModule] {
+        try decode(LearningModuleContainer.self, path: "learning-modules.json").modules
     }
 
     private func decode<T: Decodable>(_ type: T.Type, path: String) throws -> T {

@@ -93,6 +93,10 @@ struct IslamicHubView: View {
                 DARFeatureRow(title: "Bibliothek", subtitle: "Verifizierte Bücher und Publikationen", systemImage: "books.vertical.fill", tint: theme.gold)
             }
             .buttonStyle(.plain)
+            NavigationLink { LearningModulesView(repository: repository) } label: {
+                DARFeatureRow(title: "Tafsīr & Ḥadīṯ", subtitle: "Geprüfte Studien- und Frauenmodule", systemImage: "text.book.closed.fill", tint: theme.gold)
+            }
+            .buttonStyle(.plain)
         }
     }
 

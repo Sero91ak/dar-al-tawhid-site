@@ -149,6 +149,11 @@ private struct LibraryBookDetailView: View {
             }
         }
         .navigationTitle("Buch")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                ReadingBookmarkButton(id: "book-\(book.id)", kind: .book, title: book.title)
+            }
+        }
     }
 }
 
@@ -192,6 +197,11 @@ private struct LibraryPublicationDetailView: View {
             }
         }
         .navigationTitle("Publikation")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                ReadingBookmarkButton(id: "publication-\(publication.id)", kind: .book, title: publication.title)
+            }
+        }
     }
 }
 

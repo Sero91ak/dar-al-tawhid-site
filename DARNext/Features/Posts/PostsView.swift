@@ -6,6 +6,7 @@ struct PostsView: View {
 
     @Environment(\.darTheme) private var theme
     @State private var posts: [Post] = []
+    @State private var qRegistry: QRegistry?
     @State private var errorMessage: String?
 
     var body: some View {
@@ -44,6 +45,7 @@ struct PostsView: View {
         .task {
             do {
                 posts = try await repository.posts()
+                qRegistry = try? await repository.qRegistry()
             } catch {
                 errorMessage = error.localizedDescription
             }
@@ -144,6 +146,9 @@ private struct PostDetailView: View {
         .navigationTitle("Beitrag")
         .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                ReadingBookmarkButton(id: "post-\(post.id)", kind: .post, title: post.title)
+            }
             ToolbarItem(placement: .topBarTrailing) {
                 ShareLink(item: shareText) {
                     Image(systemName: "square.and.arrow.up")

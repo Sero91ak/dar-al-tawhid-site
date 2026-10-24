@@ -61,4 +61,38 @@ struct DARNextTests {
         #expect(questions.allSatisfy { $0.isApprovedAdultContent })
         #expect(questions.allSatisfy { $0.correctIndex >= 0 && $0.correctIndex < $0.answers.count })
     }
+
+    @Test
+    func canonicalQRegistryIsBoundAndValidated() async throws {
+        let registry = try await LocalContentRepository().qRegistry()
+
+        #expect(registry.baseDomain == "dar-al-tawhid.de")
+        #expect(registry.prefix == "/q/")
+        #expect(registry.links.count >= 40)
+        #expect(registry.nextNumber > (registry.links.map(\.number).max() ?? 0))
+        #expect(registry.links.allSatisfy { $0.shortPath == "/q/\($0.number)/" })
+    }
+
+    @Test
+    func verifiedLearningModulesAreAvailable() async throws {
+        let modules = try await LocalContentRepository().learningModules()
+
+        #expect(modules.contains { $0.category == "Tafsīr" })
+        #expect(modules.contains { $0.category == "Ḥadīṯ" })
+        #expect(modules.contains { $0.category == "Frauenmodul" })
+        #expect(modules.allSatisfy { $0.status == "verified" })
+    }
+
+    @Test
+    func readingStatePersistsBookmarkAndProgress() async throws {
+        let store = ReadingStateStore(fileManager: FileManager.default)
+        let id = "test-reading-state"
+        try await store.removeBookmark(id: id)
+        try await store.bookmark(ReadingBookmark(id: id, kind: .post, title: "Test", location: nil, updatedAt: .now))
+        try await store.record(ReadingProgress(id: id, kind: .post, position: 0.5, location: "Mitte", updatedAt: .now))
+
+        #expect(try await store.isBookmarked(id: id))
+        #expect(try await store.progress(for: id)?.position == 0.5)
+        try await store.removeBookmark(id: id)
+    }
 }

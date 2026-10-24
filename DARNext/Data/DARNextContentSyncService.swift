@@ -76,7 +76,12 @@ actor DARNextContentSyncService {
             }
 
             let manifest = try JSONDecoder().decode(DARNextContentManifest.self, from: data)
-            guard !manifest.version.isEmpty else {
+            guard !manifest.version.isEmpty,
+                  !manifest.requiredStatic.isEmpty,
+                  !manifest.requiredData.isEmpty,
+                  manifest.requiredStatic.allSatisfy(validRelativePath),
+                  manifest.requiredData.allSatisfy(validRelativePath)
+            else {
                 throw DARNextContentSyncError.invalidManifest
             }
             try data.write(to: cacheURL, options: .atomic)
@@ -99,5 +104,9 @@ actor DARNextContentSyncService {
             throw DARNextContentSyncError.unavailable
         }
         return try JSONDecoder().decode(DARNextContentManifest.self, from: data)
+    }
+
+    private func validRelativePath(_ path: String) -> Bool {
+        !path.isEmpty && !path.hasPrefix("/") && !path.contains("..")
     }
 }

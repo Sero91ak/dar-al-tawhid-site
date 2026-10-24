@@ -86,6 +86,7 @@ struct QuranSurahView: View {
     @Environment(QuranAudioEngine.self) private var audioEngine
     @State private var surah: QuranSurah?
     @State private var errorMessage: String?
+    @State private var transliterationMode = QuranTransliterationMode.readable
 
     var body: some View {
         ScrollViewReader { proxy in
@@ -112,12 +113,31 @@ struct QuranSurahView: View {
                                         .foregroundStyle(theme.cream)
                                         .frame(maxWidth: .infinity, alignment: .trailing)
                                         .environment(\.layoutDirection, .rightToLeft)
+                                    if transliterationMode != .hidden {
+                                        Text(transliterationMode.value(for: ayah))
+                                            .font(.subheadline)
+                                            .foregroundStyle(theme.goldLight)
+                                    }
                                     Text(ayah.germanTranslation)
                                         .font(.body)
                                         .foregroundStyle(theme.secondaryText)
                                     Text("Qurʾān \(surah.id):\(ayah.id)")
                                         .font(.caption.weight(.semibold))
                                         .foregroundStyle(theme.goldLight)
+                                }
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                Task {
+                                    try? await ReadingStateStore.shared.record(
+                                        ReadingProgress(
+                                            id: "quran-\(surah.id)",
+                                            kind: .quran,
+                                            position: Double(ayah.id) / Double(max(surah.totalVerses, 1)),
+                                            location: "Qurʾān \(surah.id):\(ayah.id)",
+                                            updatedAt: .now
+                                        )
+                                    )
                                 }
                             }
                             .id(ayah.id)
@@ -146,6 +166,18 @@ struct QuranSurahView: View {
         .navigationTitle("Qurʾān \(number)")
         .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                ReadingBookmarkButton(id: "quran-\(number)", kind: .quran, title: "Qurʾān \(number)")
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                Picker("Transliteration", selection: $transliterationMode) {
+                    ForEach(QuranTransliterationMode.allCases) { mode in
+                        Text(mode.title).tag(mode)
+                    }
+                }
+                .pickerStyle(.menu)
+                .accessibilityLabel("Transliteration auswählen")
+            }
             ToolbarItem(placement: .primaryAction) {
                 Button {
                     Task {
@@ -164,6 +196,30 @@ struct QuranSurahView: View {
             } catch {
                 errorMessage = error.localizedDescription
             }
+        }
+    }
+}
+
+private enum QuranTransliterationMode: String, CaseIterable, Identifiable {
+    case hidden
+    case readable
+    case academic
+
+    var id: Self { self }
+
+    var title: String {
+        switch self {
+        case .hidden: "Ohne Lautschrift"
+        case .readable: "Lesbare Lautschrift"
+        case .academic: "Akademische Lautschrift"
+        }
+    }
+
+    func value(for ayah: QuranAyah) -> String {
+        switch self {
+        case .hidden: ""
+        case .readable: ayah.readableTransliteration ?? ayah.transliteration ?? ""
+        case .academic: ayah.academicTransliteration ?? ayah.transliteration ?? ""
         }
     }
 }

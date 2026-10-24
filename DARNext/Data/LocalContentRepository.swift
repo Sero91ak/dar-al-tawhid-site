@@ -10,6 +10,8 @@ actor LocalContentRepository: ContentRepository {
     private var booksCache: [LibraryBook]?
     private var publicationsCache: [LibraryPublication]?
     private var quizCache: [QuizQuestion]?
+    private var qRegistryCache: QRegistry?
+    private var learningModulesCache: [LearningModule]?
     private var searchIndexCache: [IndexedSearchDocument]?
 
     init(resources: ContentResourceStore = ContentResourceStore()) {
@@ -49,6 +51,21 @@ actor LocalContentRepository: ContentRepository {
         try ContentImportValidator.validate(surah: surah)
         quranCache[number] = surah
         return surah
+    }
+
+    func qRegistry() throws -> QRegistry {
+        if let qRegistryCache { return qRegistryCache }
+        let registry = try resources.qRegistry()
+        try ContentImportValidator.validate(registry: registry)
+        qRegistryCache = registry
+        return registry
+    }
+
+    func learningModules() throws -> [LearningModule] {
+        if let learningModulesCache { return learningModulesCache }
+        let values = try resources.learningModules().filter { $0.status == "verified" }
+        learningModulesCache = values
+        return values
     }
 
     func duas() throws -> [Dua] {

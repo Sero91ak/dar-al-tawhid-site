@@ -6,10 +6,15 @@ struct RootShell: View {
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @AppStorage("darnext.appearanceMode") private var appearanceModeRawValue = DARAppearanceMode.nightLibrary.rawValue
+    @AppStorage("darnext.language") private var languageRawValue = DARNextLanguage.german.rawValue
     @State private var selectedTab = DARNextTab.start
 
     private var appearanceMode: DARAppearanceMode {
         DARAppearanceMode(rawValue: appearanceModeRawValue) ?? .nightLibrary
+    }
+
+    private var language: DARNextLanguage {
+        DARNextLanguage(rawValue: languageRawValue) ?? .german
     }
 
     var body: some View {
@@ -29,6 +34,8 @@ struct RootShell: View {
             }
         }
         .environment(\.darTheme, appearanceMode.theme)
+        .environment(\.locale, language.locale)
+        .environment(\.layoutDirection, language.isRTL ? .rightToLeft : .leftToRight)
         .tint(appearanceMode.theme.antiqueGold)
         .onOpenURL { url in
             switch DARNextDeepLinkDestination.from(url) {
@@ -189,6 +196,7 @@ private struct MoreView: View {
 
     @Environment(\.darTheme) private var theme
     @AppStorage("darnext.appearanceMode") private var appearanceModeRawValue = DARAppearanceMode.nightLibrary.rawValue
+    @AppStorage("darnext.language") private var languageRawValue = DARNextLanguage.german.rawValue
 
     private var appearanceMode: DARAppearanceMode {
         DARAppearanceMode(rawValue: appearanceModeRawValue) ?? .nightLibrary
@@ -258,6 +266,7 @@ private struct MoreView: View {
                 .buttonStyle(.plain)
 
                 appearanceCard
+                languageCard
             }
             .padding(.horizontal, 18)
             .padding(.top, 14)
@@ -290,6 +299,25 @@ private struct MoreView: View {
             RoundedRectangle(cornerRadius: 22, style: .continuous)
                 .strokeBorder(.white.opacity(0.11), lineWidth: 1)
         }
+    }
+
+    private var languageCard: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Label("Sprache & Schreibrichtung", systemImage: "character.book.closed")
+                .font(.headline)
+                .foregroundStyle(theme.cream)
+            Picker("Sprache", selection: $languageRawValue) {
+                ForEach(DARNextLanguage.allCases) { language in
+                    Text(language.title).tag(language.rawValue)
+                }
+            }
+            .pickerStyle(.menu)
+            Text("Arabisch und Urdu verwenden automatisch RTL. Die kanonischen Quellen-IDs bleiben sprachunabhängig.")
+                .font(.footnote)
+                .foregroundStyle(theme.secondaryText)
+        }
+        .padding(16)
+        .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 
     private func moreCard(title: String, subtitle: String, systemImage: String, tint: Color) -> some View {

@@ -1,6 +1,24 @@
 import Foundation
 
 enum ContentImportValidator {
+    static func validate(registry: QRegistry) throws {
+        guard registry.version > 0,
+              registry.baseDomain == "dar-al-tawhid.de",
+              registry.prefix == "/q/",
+              registry.nextNumber > 0
+        else {
+            throw ContentResourceError.invalidResource("q-registry.json")
+        }
+
+        let numbers = registry.links.map(\.number)
+        guard numbers == Array(Set(numbers)).sorted(),
+              registry.nextNumber > (numbers.max() ?? 0),
+              registry.links.allSatisfy({ $0.shortPath == "/q/\($0.number)/" })
+        else {
+            throw ContentResourceError.invalidResource("q-registry.json")
+        }
+    }
+
     static func validate(catalog: QuranCatalog) throws {
         guard catalog.surahs.count == 114 else {
             throw ContentResourceError.invalidResource("Qurʾān-Katalog enthält nicht 114 Sūren")
