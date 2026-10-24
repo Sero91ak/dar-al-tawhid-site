@@ -2,7 +2,7 @@
 
 Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 
-**Gesamtstand:** P0 bis P4 lokal implementiert/auditiert und getestet; P5 teilweise umgesetzt/auditiert; P6 auditiert; P7 Manifest-Synchronisierung lokal implementiert und getestet; P8 Deep-Link-Teil lokal implementiert/getestet, Push-Teil aus Sicherheitsgründen nur auditiert; P9 als nächste zulässige Phase offen.
+**Gesamtstand:** P0 bis P4 lokal implementiert/auditiert und getestet; P5 teilweise umgesetzt/auditiert; P6 auditiert; P7 Manifest-Synchronisierung lokal implementiert und getestet; P8 Deep-Link-Teil lokal implementiert/getestet, Push-Teil aus Sicherheitsgründen nur auditiert; P9 QA-Audit begonnen; P10 offen.
 
 | Phase | Status | Nachweis |
 | --- | --- | --- |
@@ -15,7 +15,7 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 | P6 Weitere Bereiche/Frauen/Ḥadīṯ | auditiert/teilweise offen | Zentrale Manifestdatei listet Frauen-/Wissensdaten; DARNext-Bundle enthält sie noch nicht als native Module; keine Inhalte erfunden |
 | P7 Inhalts-Synchronisierung | teilweise getestet | DARNext-only Manifest-Service mit ETag-/Disk-Cache und Offline-Fallback; zentraler Inhaltsimport noch offen; Build erfolgreich; 7/7 Tests bestanden |
 | P8 Push und Deep Links | teilweise getestet | DARNext-only URL-Router für native Tab-Ziele; bestehende OneSignal/Push-Dateien nur gelesen; keine Registrierung/Testsendung |
-| P9 Qualität/Sprachen/Geräte | offen | – |
+| P9 Qualität/Sprachen/Geräte | Audit begonnen | SwiftUI Dynamic-Type-/RTL-/Accessibility-Stellen geprüft; iPhone-Simulator visuell geprüft; iPad, neun Sprachreader, Offline-Payload-Import und physische Push-/Sensorprüfung offen |
 | P10 Übergabe | offen | – |
 
 ## P1 — Medieninventar
@@ -25,6 +25,13 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 - 10 sekundäre UI-Icons, 3 Home-Heros, 3 Beitrags-Heros, 7 Frauenbilder in zwei Varianten, 42 Cover-Quellen und 13 Feed-Hintergrundkategorien katalogisiert.
 - Geprüfte Pixelmaße: Mobile-Hero 1072 × 1920, Wide-Hero 2016 × 1152, Study 1376 × 768, Beitrags-Heros 1920 × 1080 bzw. 1376 × 768, Frauen v1223 1376 × 768, Frauen v1224 900 × 506.
 - Xcode-Abgleich: DARNext enthält aktuell keine eingebundene Kopie dieser Webmedien; gezielter DARNext-only Import ist für P2/P3 offen.
+
+## P9 — Qualität, Sprachen und Geräte
+
+- Durchgeführte UI-Verifikation: DARNext installiert/startet auf iPhone-Duo-Simulator; Hero, Schnellzugriffe und Navigation sichtbar/funktional; kein Absturz. Die untere Schnellzugriffsreihe ist im ScrollView erreichbar.
+- Statische SwiftUI-Prüfung: Arabische Haupttexte nutzen RTL-Kontext; vorhandene `Text`-Styles und flexible Layouts skalieren grundsätzlich, aber eine vollständige Dynamic-Type-Matrix wurde noch nicht gefahren.
+- Nicht abgeschlossen: neun aktivierte Sprachreader (`de,en,tr,ar,ku,ckb,bs,fr,es`) im DARNext-UI, echte RTL-/VoiceOver-/Dynamic-Type-Matrix, iPad-Split-View-Gerätelauf, Offline-Payload-Import, Speicher-/Performanceprofiling, physische Sensor-/Audio-/Pushprüfung.
+- Diese Lücken bleiben explizit offen; keine „vollständig barrierefrei“-, „neun Sprachen live“- oder „Push funktioniert“ Behauptung.
 
 ## P8 — Push und Deep Links
 
@@ -120,8 +127,8 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 ## Offene Punkte
 
 - Der lokale Xcode-Arbeitsstand und der GitHub-Dokumentationsbranch müssen vor dem ersten Quellcode-Commit noch über den vorhandenen Xcode-/Repository-Workflow zusammengeführt werden; kein unbelegter Gleichstand mit GitHub wird behauptet.
-- P9 muss neun Sprachen, RTL, Themes, Accessibility, Dynamic Type, Offline-/Performance- und Geräteabdeckung prüfen; offene P5/P6/P7-Lücken bleiben sichtbar.
+- P9 muss die offenen Sprach-/Accessibility-/Offline-/Geräteprüfungen schließen; erst danach P10 technische Übergabe.
 
 ## Nächste Aktion
 
-P9: Sprach-/Accessibility-/Performance-QA auf DARNext durchführen; danach Build, Tests und Status-Commit.
+P9: offene Sprach-/Accessibility-/Performance-/iPad-/Offline-Nachweise schließen; danach P10-Übergabe vorbereiten.
