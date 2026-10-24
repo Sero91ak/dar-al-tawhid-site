@@ -34,7 +34,9 @@ for(const width of [390,820,1440]){
  else await page.locator('#sidenav [data-go="quran"]').click();
  await page.waitForSelector('#page-quran.active .school-verse');
  await page.locator('.school-tabs [data-qmode="learn"]').click();
- await page.waitForSelector('.quran-mode-learn');
+ const learnState=await page.evaluate(()=>({mode:document.querySelector('.school-tabs .on')?.getAttribute('data-qmode'),qClass:document.querySelector('#surahText')?.className,section:document.querySelector('#page-quran')?.className,visible:getComputedStyle(document.querySelector('#surahText')).display}));
+ console.log('QURAN DEBUG '+width+' '+JSON.stringify(learnState)+' PAGE ERR '+JSON.stringify(errors.slice(-4)));
+ await page.waitForSelector('.quran-mode-learn',{timeout:2500});
  await page.locator('.school-verse [data-translation]').first().click();
  const label=await page.locator('.school-verse [data-translation]').first().innerText();
  if(!label.includes('anzeigen'))throw Error('Learning toggle '+width);
