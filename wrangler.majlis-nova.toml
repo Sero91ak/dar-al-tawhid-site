@@ -1,0 +1,7 @@
+name = "dar-majlis-nova-v3-preview"
+compatibility_date = "2026-10-24"
+workers_dev = true
+
+[assets]
+directory = "./majlis-preview"
+not_found_handling = "single-page-application"
