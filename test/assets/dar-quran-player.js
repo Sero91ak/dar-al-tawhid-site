@@ -755,6 +755,21 @@
       return null; // Offline playback requires a previously saved file.
     });
   }
+  // Consume the bounded next-ayah buffer on the normal online path too. The
+  // previous implementation only used it in the offline resolver, so online
+  // playback still performed a fresh source switch exactly at `ended`.
+  function takePrefetchedSource(qari, surah, ayah) {
+    var rec = reciterById(qari);
+    var pending = nextAudioPrefetch;
+    var key = rec && (rec.id + ":" + surah + ":" + ayah);
+    if (!pending || pending.key !== key || !pending.blob) return null;
+    nextAudioPrefetch = null;
+    try {
+      return { qari: rec.id, url: URL.createObjectURL(pending.blob), saved: true, prefetched: true };
+    } catch (eBlob) {
+      return null;
+    }
+  }
   function setAudioSrc(a, url) {
     var old = engine.objectUrl;
     a.src = url;
@@ -950,8 +965,13 @@
     // This avoids losing iOS WebKit audio user activation across a Promise.
     if (!isOffline()) {
       var chosen = reciterById(wantQari) || reciterById(FALLBACK_QARI);
-      var candidates = urlsForWithRec(chosen, surah, ayah);
-      applyResolvedSource(candidates[0] ? { qari: chosen.id, url: candidates[0], saved: false } : null);
+      var prefetched = takePrefetchedSource(wantQari, surah, ayah);
+      if (prefetched) {
+        applyResolvedSource(prefetched);
+      } else {
+        var candidates = urlsForWithRec(chosen, surah, ayah);
+        applyResolvedSource(candidates[0] ? { qari: chosen.id, url: candidates[0], saved: false } : null);
+      }
     } else {
       resolveSource(wantQari, surah, ayah).then(applyResolvedSource).catch(function (err) {
         if (gen !== playGen) return;
