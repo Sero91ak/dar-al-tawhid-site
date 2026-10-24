@@ -405,22 +405,32 @@ w.addEventListener("dar-v8-locale-changed",updateLocaleNotice);
 let v8HomePromoObserver=null,v8HomePromoQueued=false;
 function removeRedundantHomePromo(){
  if(d.body.dataset.darV8Route!=="start")return;
- const candidates=[...d.querySelectorAll("aside,article,section")].filter(node=>{
-  const content=(node.textContent||"").replace(/\s+/g," ");
-  return content.length<1400&&/DĀR AL TAWḤĪD für iPhone\s*(?:&|und)\s*iPad/i.test(content)
-    &&node.querySelector('a[href*="apps.apple.com"]');
- });
- candidates.sort((a,b)=>(a.textContent||"").length-(b.textContent||"").length);
- for(const node of candidates){
-  if(!node.isConnected)return;
+ // Only the App Store links are candidates. Scanning every section on every
+ // live countdown DOM update caused unnecessary full-page text traversal.
+ const links=d.querySelectorAll('a[href*="apps.apple.com"]');
+ for(const link of links){
+  const node=link.closest("aside,article,section");
+  if(!node||!node.isConnected)continue;
   if(node.closest("#darV8MoreSheet")||node.closest('[data-dar-v8-route="mehr"]'))continue;
-  node.remove();
+  const content=(node.textContent||"").replace(/\s+/g," ");
+  if(content.length<1400&&/DĀR AL TAWḤĪD für iPhone\s*(?:&|und)\s*iPad/i.test(content)){
+   node.remove();
+  }
  }
 }
 function setupHomePromoCleanup(){
  if(!v8HomePromoObserver){
-  v8HomePromoObserver=new MutationObserver(()=>{
+  v8HomePromoObserver=new MutationObserver(records=>{
    if(d.body.dataset.darV8Route!=="start"||v8HomePromoQueued)return;
+   // Ignore ordinary content and the once-per-second prayer countdown.
+   // React only when a new App Store promo link enters the document.
+   const hasNewPromo=records.some(record=>[...record.addedNodes].some(node=>
+    node.nodeType===1&&(
+     node.matches?.('a[href*="apps.apple.com"]')||
+     node.querySelector?.('a[href*="apps.apple.com"]')
+    )
+   ));
+   if(!hasNewPromo)return;
    v8HomePromoQueued=true;
    requestAnimationFrame(()=>{v8HomePromoQueued=false;removeRedundantHomePromo()});
   });
