@@ -782,72 +782,17 @@ html[data-theme] body.is-frauen-route #appView
 }
 
 
-/* DAR_VISITOR_HOME_IMMERSIVE_MOTION_V1_20261023
- * Start page only: full-bleed background belongs to the content, never a
- * fixed duplicate on top of the header. Existing sections and links untouched.
- * Sticky, reversible scroll artwork, theme-aware visibility, graceful fallback.
+/* DAR_VISITOR_HOME_PHOTO_FREE_20261024
+ * Visitor/PWA/WebView Startseite: the historical immersive photo is retired.
+ * Keep interactive card animations below; do not add a photo via ::before.
+ * Photo/art heroes on other routes remain untouched.
  */
-html[data-theme] body.is-home-route #appView .home-v380-shell{
-  --dar-home-scene-height:clamp(360px,88svh,780px);
-  --dar-home-scene-fade:1;
-  --dar-home-scene-parallax:0px;
-  --dar-home-scene-strength:.62;
-  position:relative;
-  isolation:isolate;
-  overflow:visible;
-}
 html[data-theme] body.is-home-route #appView .home-v380-shell::before{
-  content:"";
-  display:block;
-  box-sizing:border-box;
-  flex:0 0 var(--dar-home-scene-height);
-  align-self:stretch;
-  position:sticky;
-  top:0;
-  height:var(--dar-home-scene-height);
-  min-height:0;
-  margin:0 0 calc(-1 * var(--dar-home-scene-height));
-  z-index:0;
-  pointer-events:none;
-  border:0;
-  border-radius:0;
-  box-shadow:none;
-  background-image:
-    linear-gradient(180deg,rgba(4,20,19,.34) 0%,rgba(4,20,19,.13) 42%,rgba(4,20,19,0) 85%),
-    url("/assets/home-v1194/hero-mobile-adobe.jpg");
-  background-position:center top;
-  background-size:cover;
-  background-repeat:no-repeat;
-  opacity:calc(var(--dar-home-scene-strength) * var(--dar-home-scene-fade));
-  transform:translate3d(0,var(--dar-home-scene-parallax),0);
-  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 32%,rgba(0,0,0,.75) 56%,transparent 100%);
-  mask-image:linear-gradient(to bottom,#000 0%,#000 32%,rgba(0,0,0,.75) 56%,transparent 100%);
+  content:none!important;
+  display:none!important;
+  background-image:none!important;
 }
-html[data-theme] body.is-home-route #appView .home-v380-shell > *{
-  position:relative;
-  z-index:1;
-  min-width:0;
-}
-html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"])
- body.is-home-route #appView .home-v380-shell{
-  --dar-home-scene-strength:.24;
-}
-@media(min-width:740px){
-  html[data-theme] body.is-home-route #appView .home-v380-shell{
-    --dar-home-scene-height:clamp(460px,72svh,850px);
-    --dar-home-scene-strength:.43;
-  }
-  html[data-theme] body.is-home-route #appView .home-v380-shell::before{
-    background-image:
-      linear-gradient(180deg,rgba(4,20,19,.28) 0%,rgba(4,20,19,.11) 40%,transparent 85%),
-      url("/assets/home-v1194/hero-wide-adobe.jpg");
-    background-position:center 24%;
-  }
-  html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"])
-   body.is-home-route #appView .home-v380-shell{
-    --dar-home-scene-strength:.19;
-  }
-}
+
 @media(prefers-reduced-motion:no-preference){
   body.is-home-route #appView .home-v380-shell :is(
     .home-v380-quran-hero,.home-v380-open-row,.home-v380-text-link,
@@ -885,28 +830,6 @@ html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-th
 }
 
 
-/* DAR_VISITOR_IMMERSIVE_MOTION_V2_20261023
- * Canonical adult visitor website + shared PWA/WebView styles.
- * Keeps the original background photographs, real cards, scroll owner, and
- * specialist readers. No cloned hero artwork and no touch interception.
- */
-@media(max-width:1023px){
-  html[data-theme] body.is-home-route #appView .home-v380-shell::before{
-    inline-size:100vw;
-    inline-size:100dvw;
-    max-inline-size:none;
-    min-inline-size:100vw;
-    min-inline-size:100dvw;
-    margin-inline-start:calc(50% - 50vw);
-    margin-inline-start:calc(50% - 50dvw);
-    margin-inline-end:0;
-  }
-}
-@media(min-width:1024px){
-  html[data-theme] body.is-home-route #appView .home-v380-shell::before{
-    background-position:center 23%;
-  }
-}
 /* The card surfaces, not reading text or pinned headers, are animated.
  * Hover affects mouse/fine pointers; touch remains a brief elastic press. */
 @media(prefers-reduced-motion:no-preference){
@@ -974,22 +897,5 @@ html[data-theme] body:is(
   .home-v380-lib-grid:not(.home-v380-lib-grid--slider){
     grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));
     align-items:stretch;
-  }
-}
-@media(prefers-contrast:more){
-  html[data-theme] body.is-home-route #appView .home-v380-shell{
-    --dar-home-scene-strength:.15;
-  }
-}
-@media(prefers-reduced-motion:reduce){
-  html[data-theme] body.is-home-route #appView .home-v380-shell{
-    --dar-home-scene-parallax:0px!important;
-    --dar-home-scene-fade:1!important;
-  }
-}
-@media print{
-  html[data-theme] body.is-home-route #appView .home-v380-shell::before{
-    content:none!important;
-    display:none!important;
   }
 }
