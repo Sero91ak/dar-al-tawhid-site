@@ -69,9 +69,9 @@ assert.equal(w.DarTestTurkishUI.translateValue("Wetter · Köln: 12 °C · Klar"
 assert.equal(locales.translations.es["Inhalt wird vorbereitet…"],"Preparando el contenido…");
 assert.equal(locales.translations.ku["Wissen durchsuchen"],"Li zanînê bigere");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
-assert.equal(coverage.uiKeys,expectedUiTextCount);
-assert.equal(coverage.humanApproval,false);
-assert.equal(coverage.quranMeanings.reviewedEightLanguagePack,false);
+assert.equal(coverage.ui.keys,expectedUiTextCount);
+assert.equal(coverage.acceptance.contentComplete,false);
+assert.equal(coverage.content.quranMeanings.reviewedEightLanguagePack,false);
 assert.equal(coverage.push.liveSend,false);
 storage.locale="de";w.DarTestTurkishUI.apply();
 assert.equal(nodes[0].nodeValue,"Startseite","German return must be lossless");

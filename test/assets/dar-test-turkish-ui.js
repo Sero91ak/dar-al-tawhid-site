@@ -1006,7 +1006,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-16";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-17";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
