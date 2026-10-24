@@ -210,7 +210,7 @@ function registerTitleData(data){
  for(const [key,record] of Object.entries(data.records)){
   if(key!==(record.kind+":"+record.id)||!["post","dua"].includes(record.kind)||
      typeof record.sourceTitle!=="string"||record.sourceTitle.length>220||
-     Object.keys(record.translations||{}).sort().join("|")!=="ar|bs|ckb|en|ku|tr")return false;
+     Object.keys(record.translations||{}).sort().join("|")!=="ar|bs|ckb|en|es|fr|ku|tr")return false;
   // Editorial title drafts may cover only locales explicitly present in the
   // draft pack. Registered-but-pending locales must remain German fallback.
   if(Object.keys(record.translations||{}).some(k=>typeof record.translations[k]!=="string"||!record.translations[k].trim()))
@@ -374,6 +374,7 @@ function isDynamicGermanUi(value){
   /^Bereich: .+$/.test(value)||
   /^Fehler: .+$/.test(value)||
   /^.+\. Dann siehst du „Nächstes Gebet“ 15 Min vorher und zur Gebetszeit eine Push-Meldung\.$/.test(value)||
+  /^Favoriten: \d+\. Beim Einloggen werden lokale und gespeicherte Favoriten zusammengeführt\.$/.test(value)||
   /^Tag \d+ im Fastenmonat$/.test(value)||
   /^Tag \d+$/.test(value)||
   /^Noch ca\. \d+ Tage bis Ramaḍān$/.test(value)||
@@ -659,6 +660,21 @@ function translateSharedPatterns(value,language){
   };
   if(tails[language])return step+". "+tails[language];
  }
+ const favorites=value.match(/^Favoriten: (\d+)\. Beim Einloggen werden lokale und gespeicherte Favoriten zusammengeführt\.$/);
+ if(favorites){
+  const n=favorites[1];
+  const forms={
+   ar:"المفضلة: "+n+". عند تسجيل الدخول تُدمج المفضلة المحلية مع المحفوظة في الحساب.",
+   en:"Favorites: "+n+". When you sign in, local and saved favorites are merged.",
+   tr:"Favoriler: "+n+". Girişte yerel ve kayıtlı favoriler birleştirilir.",
+   ku:"Bijarte: "+n+". Di têketinê de bijarteyên herêmî û yên tomarkirî tên yekkirin.",
+   ckb:"دڵخوازەکان: "+n+". لە کاتی چوونەژوورەوە دڵخوازە ناوخۆییەکان و هەڵگیراوەکان پێکەوە دەبەسترێن.",
+   bs:"Omiljeno: "+n+". Pri prijavi se lokalno i sačuvano omiljeno spajaju.",
+   fr:"Favoris : "+n+". À la connexion, les favoris locaux et enregistrés sont réunis.",
+   es:"Favoritos: "+n+". Al entrar, se unen los favoritos locales y los guardados."
+  };
+  return forms[language]||null;
+ }
  const fastDay=value.match(/^Tag (\d+) im Fastenmonat$/);
  if(fastDay){
   const n=fastDay[1];
@@ -928,7 +944,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-14";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-15";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

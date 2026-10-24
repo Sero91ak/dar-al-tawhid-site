@@ -23,7 +23,7 @@ for(const [key,value] of Object.entries(pack.records)){
  const actual=value.kind==="post"?index.get(value.id):duaIndex.get(value.id);
  assert(actual,"Missing canonical title ID: "+key);
  assert.equal(value.sourceTitle,actual,"Outdated canonical German heading for "+key);
- for(const locale of ["tr","en","ar","ku","ckb","bs"]){
+ for(const locale of ["tr","en","ar","ku","ckb","bs","fr","es"]){
   assert(value.translations[locale]?.trim(),"No draft in "+locale+" for "+key);
  }
 }

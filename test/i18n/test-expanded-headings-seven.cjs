@@ -52,8 +52,8 @@ for(const locale of EXPECTED){
  assert.equal(primary.nodeValue,locale==="de"?"ÜBERLIEFERUNGSMAẞSTAB":v["ÜBERLIEFERUNGSMAẞSTAB"],locale+" motto");
  assert.equal(prayer.nodeValue,locale==="de"?"Faǧr":(locale==="tr"?"Sabah (Fecr)":v["Faǧr"]),locale+" prayer");
  const postRecord=titles.records["post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198"];
- const expectedPostTitle=locale==="de"||locale==="fr"||locale==="es"?postRecord.sourceTitle:postRecord.translations[locale];
- assert.equal(props.textContent,expectedPostTitle,locale+" post title remains excluded for Spanish");
+ const expectedPostTitle=locale==="de"?postRecord.sourceTitle:postRecord.translations[locale];
+ assert.equal(props.textContent,expectedPostTitle,locale+" post title");
  assert.equal(original.nodeValue,"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً","Arabic source modified");
  assert.equal(excluded.nodeValue,"Nicht authentisch belegt","source text modified");
  assert.equal(doc.documentElement.dir,["ar","ckb"].includes(locale)?"rtl":"ltr");
