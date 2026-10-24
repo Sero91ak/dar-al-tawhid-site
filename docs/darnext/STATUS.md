@@ -2,7 +2,7 @@
 
 Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 
-**Gesamtstand:** P0 bis P4 lokal implementiert/auditiert und getestet; P5 teilweise umgesetzt/auditiert; P6 auditiert; P7 Manifest-Synchronisierung lokal implementiert und getestet; P8 Deep-Link-Teil lokal implementiert/getestet, Push-Teil aus Sicherheitsgründen nur auditiert; P9 QA-Audit begonnen; P10 offen.
+**Gesamtstand:** P0 bis P4 lokal implementiert/auditiert und getestet; P5 teilweise umgesetzt/auditiert; P6 auditiert; P7 Manifest-Synchronisierung lokal implementiert und getestet; P8 Deep-Link-Teil lokal implementiert/getestet, Push-Teil aus Sicherheitsgründen nur auditiert; P9 QA-Audit dokumentiert, offene Nachweise bleiben; P10 Übergabe vorbereitet, aber wegen offener Integrations- und Synchronisationspunkte nicht abgenommen.
 
 | Phase | Status | Nachweis |
 | --- | --- | --- |
@@ -15,8 +15,8 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 | P6 Weitere Bereiche/Frauen/Ḥadīṯ | auditiert/teilweise offen | Zentrale Manifestdatei listet Frauen-/Wissensdaten; DARNext-Bundle enthält sie noch nicht als native Module; keine Inhalte erfunden |
 | P7 Inhalts-Synchronisierung | teilweise getestet | DARNext-only Manifest-Service mit ETag-/Disk-Cache und Offline-Fallback; zentraler Inhaltsimport noch offen; Build erfolgreich; 7/7 Tests bestanden |
 | P8 Push und Deep Links | teilweise getestet | DARNext-only URL-Router für native Tab-Ziele; bestehende OneSignal/Push-Dateien nur gelesen; keine Registrierung/Testsendung |
-| P9 Qualität/Sprachen/Geräte | Audit begonnen | SwiftUI Dynamic-Type-/RTL-/Accessibility-Stellen geprüft; iPhone-Simulator visuell geprüft; iPad, neun Sprachreader, Offline-Payload-Import und physische Push-/Sensorprüfung offen |
-| P10 Übergabe | offen | – |
+| P9 Qualität/Sprachen/Geräte | dokumentiert, teilweise offen | SwiftUI Dynamic-Type-/RTL-/Accessibility-Stellen geprüft; iPhone-Simulator visuell geprüft; iPad, neun Sprachreader, Offline-Payload-Import und physische Push-/Sensorprüfung offen |
+| P10 Übergabe | vorbereitet, nicht abgenommen | Offene P5/P6/P7/P8/P9-Punkte und lokaler Xcode-/Git-Sync müssen vor technischer Übergabe geschlossen werden |
 
 ## P1 — Medieninventar
 
@@ -32,6 +32,13 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 - Statische SwiftUI-Prüfung: Arabische Haupttexte nutzen RTL-Kontext; vorhandene `Text`-Styles und flexible Layouts skalieren grundsätzlich, aber eine vollständige Dynamic-Type-Matrix wurde noch nicht gefahren.
 - Nicht abgeschlossen: neun aktivierte Sprachreader (`de,en,tr,ar,ku,ckb,bs,fr,es`) im DARNext-UI, echte RTL-/VoiceOver-/Dynamic-Type-Matrix, iPad-Split-View-Gerätelauf, Offline-Payload-Import, Speicher-/Performanceprofiling, physische Sensor-/Audio-/Pushprüfung.
 - Diese Lücken bleiben explizit offen; keine „vollständig barrierefrei“-, „neun Sprachen live“- oder „Push funktioniert“ Behauptung.
+
+## P10 — Übergabevorbereitung
+
+- Der DARNext-Arbeitsstand ist als separate native Spur abgegrenzt; produktive Apps, Push-Dateien, Worker, Publishing und Live-Systeme wurden nicht verändert.
+- Übergabeblockaden: vollständiger Tafsīr-/Tadabbur-Datensatz, native Hadith-/Frauenmodule, vollständiger Offline-Payload-Import, separate Push-/APNs-Zuordnung, neun Sprachreader sowie iPad-/VoiceOver-/Dynamic-Type-/physische Geräteprüfungen.
+- Der Xcode-Arbeitsordner ist kein Git-Checkout. Deshalb sind lokale Swift-Änderungen nicht als fiktive GitHub-Quellcode-Commits ausgegeben; der GitHub-Arbeitsbranch enthält die Phasendokumentation und das Medieninventar.
+- P10 bleibt bis zur autorisierten Repository-Synchronisierung und den genannten Nachweisen offen.
 
 ## P8 — Push und Deep Links
 
@@ -131,4 +138,4 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 
 ## Nächste Aktion
 
-P9: offene Sprach-/Accessibility-/Performance-/iPad-/Offline-Nachweise schließen; danach P10-Übergabe vorbereiten.
+P10: Nach autorisierter Quellcode-Synchronisierung offene P5–P9-Nachweise schließen und technische Übergabe erneut prüfen.
