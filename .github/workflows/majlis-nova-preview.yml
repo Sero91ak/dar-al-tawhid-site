@@ -40,3 +40,13 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: "4.86.0"
           command: deploy --config wrangler.majlis-nova.toml
+      - name: Verify public preview over HTTPS
+        run: |
+          set -euo pipefail
+          URL="https://dar-majlis-nova-v3-preview.sero91ak.workers.dev/"
+          curl --fail --silent --show-error --location --retry 5 --retry-delay 3 --max-time 45 --dump-header /tmp/majlis.headers "$URL" --output /tmp/majlis.body
+          grep -Fq 'DĀR AL TAWḤĪD' /tmp/majlis.body
+          grep -Fq 'MAJLIS NOVA' /tmp/majlis.body
+          test "$(wc -c </tmp/majlis.body)" -gt 90000
+          echo "HTTPS SMOKE OK: $URL"
+          sed -n '1,14p' /tmp/majlis.headers
