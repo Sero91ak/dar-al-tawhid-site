@@ -1,5 +1,6 @@
 // PUBLIC_WEBSITE_RECOVERY_TRIGGER_20261010_V2
 /* pwa-dedicated-shell-live-20261009-2050 */
+/* pwa-softboot-unstick-v679-20261024 */
 /* public-pwa-emergency-repair-live-20261009-1824 */
 import { gateHiddenSurfaces, academyOwnerAccess, academyOwnerAssetPath } from "./preview-gate.js";
 import { editorialOwnerAccess } from "./editorial-gate.js";
@@ -1430,7 +1431,7 @@ export default {
         // even if the app has not rendered. Keep it for the regular website,
         // but let the dedicated PWA finish only after its actual content is ready.
         const prematureBootWipe = "/* SOFTBOOT_UNSTICK_V672 */(function(){";
-        const pwaSafeBootWipe = "/* SOFTBOOT_UNSTICK_V672 */(function(){if(location.pathname.indexOf(\"/pwa\")===0)return;";
+        const pwaSafeBootWipe = "/* SOFTBOOT_UNSTICK_V679 */(function(){if(location.pathname.indexOf(\"/pwa\")===0){setTimeout(function(){try{document.documentElement.classList.remove(\"dar-soft-booting\");document.documentElement.style.removeProperty(\"background-color\");document.querySelectorAll(\"#dar-soft-boot\").forEach(function(n){n.parentNode&&n.parentNode.removeChild(n)})}catch(e){}},12000);return;}";
         if (html.includes(prematureBootWipe)) html = html.replace(prematureBootWipe, pwaSafeBootWipe);
         // Freshly installed apps must not reload themselves during their first
         // navigation. The shared root app purges visual caches and redirects on
@@ -1443,12 +1444,12 @@ export default {
         // 11 seconds. For /pwa/, preserve its soft render retry and let the
         // dedicated loader show the existing retry control at 16 seconds.
         const legacyHardReload = "function hard(){try{var r=sessionStorage.getItem(K)";
-        const pwaNoHardReload = "function hard(){if(location.pathname.indexOf(\"/pwa\")===0)return;try{var r=sessionStorage.getItem(K)";
+        const pwaNoHardReload = "function hard(){if(location.pathname.indexOf(\"/pwa\")===0){try{location.replace(\"/pwa/?pwa=1&repair=\"+Date.now()+(location.hash||\"#home\"))}catch(ePwaHard){}return;}try{var r=sessionStorage.getItem(K)";
         if (html.includes(legacyHardReload)) html = html.replace(legacyHardReload, pwaNoHardReload);
         // The dedicated PWA must never register the website-wide worker from
         // the shared app HTML. Keep OneSignal at /push/onesignal/ unchanged.
         html = html.replace("navigator.serviceWorker.register(\"/service-worker.js\",{updateViaCache:\"none\"})", "navigator.serviceWorker.register(\"/pwa/service-worker.js\",{scope:\"/pwa/\",updateViaCache:\"none\"})");
-        html = html.replace("<script src=\"/assets/app-soft-boot.js?v=677\"></script>", "<script src=\"/assets/app-soft-boot.js?v=678\"></script>");
+        html = html.replace("<script src=\"/assets/app-soft-boot.js?v=679\"></script>", "<script src=\"/assets/app-soft-boot.js?v=679\"></script>");
         // Refresh only the isolated Android Fold workspace CSS after this layout fix.
         html = html.replace('/assets/fold-split.css?v=2', '/assets/fold-split.css?v=4');
         html = html.replace('/assets/fold-split.js?v=4', '/assets/fold-split.js?v=5');
