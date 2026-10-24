@@ -2,139 +2,85 @@ import Foundation
 import AVFoundation
 import Combine
 
-private final class QuranAudioPlayerDelegate: NSObject, AVAudioPlayerDelegate {
-    var onFinish: (() -> Void)?
-    var onDecodeError: (() -> Void)?
-
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        onFinish?()
-    }
-
-    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
-        onDecodeError?()
-    }
-}
-
 @MainActor
-final class QuranPlaybackStore: ObservableObject {
+final class QuranPlaybackStore: NSObject, ObservableObject, AVAudioPlayerDelegate {
     @Published private(set) var surah: QuranSynchronizedSurah?
     @Published private(set) var currentIndex = 0
     @Published private(set) var isLoading = false
     @Published private(set) var isPlaying = false
     @Published private(set) var errorMessage: String?
+    private var isPlaybackBlocked = false
+    private var wantsAutoplay = false
 
     private let contentService: QuranContentService
-    private let playerDelegate = QuranAudioPlayerDelegate()
-    private var audioPlayer: AVAudioPlayer?
-    private var playTask: Task<Void, Never>?
+    private let player = AVQueuePlayer()
+    private var localAudioPlayer: AVAudioPlayer?
     private var cancellables = Set<AnyCancellable>()
-    private var triedFallbackForIndex: Int?
-    private var resumeAfterInterruption = false
-    private var generation = 0
+    private var queuedItemIndices: [ObjectIdentifier: Int] = [:]
+    private let queueDepth = 3
+    private var operationGeneration = 0
+    private var playGeneration = 0
+    private var playbackRepairAttempts = 0
+    private var activePlaybackGeneration = 0
 
     private static let lastSurahKey = "dar.appleTV.quran.lastSurah"
     private static let lastAyahKey = "dar.appleTV.quran.lastAyah"
+    private static let resumePlaybackKey = "dar.appleTV.quran.resumePlayback"
+
+    var shouldResumePlayback: Bool {
+        (UserDefaults.standard.object(forKey: Self.resumePlaybackKey) as? Bool) ?? true
+    }
 
     init(contentService: QuranContentService = .shared) {
         self.contentService = contentService
-        playerDelegate.onFinish = { [weak self] in
-            Task { @MainActor in
-                self?.advanceAfterPlayback()
-            }
-        }
-        playerDelegate.onDecodeError = { [weak self] in
-            Task { @MainActor in
-                self?.handleItemFailure()
-            }
-        }
-        prepareSpeaker()
+        super.init()
+        player.volume = 1.0
+        localAudioPlayer?.volume = 1.0
+        player.automaticallyWaitsToMinimizeStalling = true
 
-        NotificationCenter.default.publisher(for: AVAudioSession.interruptionNotification)
+        NotificationCenter.default.publisher(for: .AVPlayerItemDidPlayToEndTime)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] notification in
-                self?.handleInterruption(notification)
+                guard let self, let endedItem = notification.object as? AVPlayerItem else {
+                    return
+                }
+                // AVQueuePlayer may already expose the next item when this fires.
+                // Identify the completed Āyah by identity, not by currentItem.
+                self.advanceAfterPlayback(endedItem: endedItem)
             }
             .store(in: &cancellables)
 
-        NotificationCenter.default.publisher(for: AVAudioSession.mediaServicesWereResetNotification)
+        NotificationCenter.default.publisher(for: .AVPlayerItemFailedToPlayToEndTime)
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                guard let self else { return }
-                self.prepareSpeaker()
-                if self.isPlaying { self.playCurrent() }
+            .sink { [weak self] notification in
+                guard let self, let failedItem = notification.object as? AVPlayerItem,
+                      failedItem === self.player.currentItem,
+                      let failedIndex = self.queuedItemIndices[ObjectIdentifier(failedItem)] else {
+                    return
+                }
+                self.restartQueue(at: failedIndex)
             }
             .store(in: &cancellables)
-    }
 
-    /// Tonausgang der Apple-TV-App einschalten (auch Simulator → Mac-Lautsprecher).
-    func prepareSpeaker() {
-        let session = AVAudioSession.sharedInstance()
-        do {
-            try session.setCategory(.playback, mode: .default, options: [])
-            try session.setActive(true)
-        } catch {
-            try? session.setCategory(.playback)
-            try? session.setActive(true)
-        }
-        audioPlayer?.volume = 1
-        audioPlayer?.isMeteringEnabled = false
-    }
-
-    private func handleInterruption(_ notification: Notification) {
-        guard let info = notification.userInfo,
-              let rawType = info[AVAudioSessionInterruptionTypeKey] as? UInt,
-              let type = AVAudioSession.InterruptionType(rawValue: rawType) else {
-            return
-        }
-
-        switch type {
-        case .began:
-            resumeAfterInterruption = isPlaying
-            audioPlayer?.pause()
-        case .ended:
-            guard resumeAfterInterruption else { return }
-            resumeAfterInterruption = false
-            prepareSpeaker()
-            if let audioPlayer, audioPlayer.play() {
-                isPlaying = true
-            } else {
-                playCurrent()
+        NotificationCenter.default.publisher(for: .AVPlayerItemPlaybackStalled)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] notification in
+                guard let self, self.isPlaying,
+                      let stalledItem = notification.object as? AVPlayerItem,
+                      stalledItem === self.player.currentItem else {
+                    return
+                }
+                Task { @MainActor [weak self] in
+                    try? await Task.sleep(for: .seconds(2))
+                    guard let self, self.isPlaying,
+                          self.player.currentItem === stalledItem,
+                          self.player.timeControlStatus != .playing else {
+                        return
+                    }
+                    self.restartQueue(at: self.currentIndex)
+                }
             }
-        @unknown default:
-            break
-        }
-    }
-
-    private func handleItemFailure() {
-        guard let verse = currentVerse else { return }
-
-        if triedFallbackForIndex != currentIndex {
-            triedFallbackForIndex = currentIndex
-            if let original = verse.audioURL,
-               original.absoluteString != (Self.siteAudioURL(edition: surah?.reciterIdentifier, verse: verse)?.absoluteString ?? "") {
-                startDownloadAndPlay(url: original, edition: surah?.reciterIdentifier ?? "", ayah: verse.globalNumber)
-                return
-            }
-            if let fallback = Self.fallbackAudioURL(for: verse.audioURLString) {
-                startDownloadAndPlay(url: fallback, edition: surah?.reciterIdentifier ?? "", ayah: verse.globalNumber)
-                return
-            }
-        }
-
-        advanceAfterPlayback()
-    }
-
-    private static func siteAudioURL(edition: String?, verse: QuranSynchronizedVerse) -> URL? {
-        guard let edition, !edition.isEmpty, verse.globalNumber >= 1 else { return nil }
-        return URL(string: "https://dar-al-tawhid.de/quran-audio/\(edition)/\(verse.globalNumber).mp3")
-    }
-
-    private static func fallbackAudioURL(for urlString: String) -> URL? {
-        if urlString.contains("dar-al-tawhid.de/quran-audio/") {
-            return nil
-        }
-        guard urlString.contains("/audio/128/") else { return nil }
-        return URL(string: urlString.replacingOccurrences(of: "/audio/128/", with: "/audio/64/"))
+            .store(in: &cancellables)
     }
 
     var currentVerse: QuranSynchronizedVerse? {
@@ -150,6 +96,25 @@ final class QuranPlaybackStore: ObservableObject {
 
     var currentAyahNumber: Int {
         currentVerse?.numberInSurah ?? 0
+    }
+
+    var currentSurahNumber: Int {
+        surah?.number ?? savedSurahNumber
+    }
+
+    var currentSurahTitle: String {
+        guard let surah else { return "Qurʾān" }
+        return "\(String(format: "%03d", surah.number)) · \(surah.englishName)"
+    }
+
+    var reciterName: String {
+        guard let identifier = surah?.reciterIdentifier else { return "Qurʾān-Rezitator" }
+        return QuranReciterNames.displayName(for: identifier) ?? identifier
+    }
+
+    var statusText: String {
+        if isLoading { return "Qurʾān wird geladen" }
+        return isPlaying ? "Qurʾān läuft" : "Qurʾān pausiert"
     }
 
     var canGoPrevious: Bool {
@@ -172,7 +137,12 @@ final class QuranPlaybackStore: ObservableObject {
         restoreSavedAyah: Bool = false,
         autoPlay: Bool = false
     ) async {
-        stop()
+        if autoPlay {
+            wantsAutoplay = true
+        }
+        operationGeneration += 1
+        let generation = operationGeneration
+        stopPlayer()
         isLoading = true
         errorMessage = nil
 
@@ -181,6 +151,7 @@ final class QuranPlaybackStore: ObservableObject {
                 surah: number,
                 reciterIdentifier: reciterIdentifier
             )
+            guard generation == operationGeneration else { return }
             surah = loaded
 
             if restoreSavedAyah, number == savedSurahNumber {
@@ -196,17 +167,23 @@ final class QuranPlaybackStore: ObservableObject {
 
             persistReadingPosition()
             isLoading = false
+            errorMessage = nil
 
-            if autoPlay {
+            if autoPlay, !isPlaybackBlocked {
                 playCurrent()
             }
         } catch {
             isLoading = false
-            errorMessage = "Qurʾān-Inhalt konnte momentan nicht geladen werden."
+            if surah == nil {
+                errorMessage = "Qurʾān-Texte sind ohne Internet erst nach dem ersten erfolgreichen Laden verfügbar."
+            }
         }
     }
 
     func changeReciter(to identifier: String) async {
+        UserDefaults.standard.set(identifier, forKey: "dar.appleTV.quran.selectedReciter")
+        operationGeneration += 1
+        let generation = operationGeneration
         guard let currentSurah = surah else {
             await load(surah: savedSurahNumber, reciterIdentifier: identifier, restoreSavedAyah: true)
             return
@@ -214,7 +191,7 @@ final class QuranPlaybackStore: ObservableObject {
 
         let ayahToKeep = currentVerse?.numberInSurah ?? 1
         let shouldResume = isPlaying
-        stop()
+        stopPlayer()
         isLoading = true
         errorMessage = nil
 
@@ -223,139 +200,179 @@ final class QuranPlaybackStore: ObservableObject {
                 surah: currentSurah.number,
                 reciterIdentifier: identifier
             )
+            guard generation == operationGeneration else { return }
             surah = reloaded
             currentIndex = reloaded.verses.firstIndex(where: { $0.numberInSurah == ayahToKeep }) ?? 0
             persistReadingPosition()
             isLoading = false
+            errorMessage = nil
 
-            if shouldResume {
+            if shouldResume, !isPlaybackBlocked {
                 playCurrent()
             }
         } catch {
             isLoading = false
-            errorMessage = "Die gewählte Rezitation konnte momentan nicht geladen werden."
+            if surah == nil {
+                errorMessage = "Die gewählte Rezitation ist offline nicht gespeichert."
+            }
         }
     }
 
     func togglePlayPause() {
-        prepareSpeaker()
         if isPlaying {
             pause()
             return
         }
-        if let audioPlayer, audioPlayer.currentTime > 0.05, audioPlayer.currentTime < audioPlayer.duration {
-            if audioPlayer.play() {
-                isPlaying = true
-                return
+
+        isPlaybackBlocked = false
+        wantsAutoplay = true
+
+        if currentVerse == nil {
+            let reciterIdentifier = surah?.reciterIdentifier
+                ?? UserDefaults.standard.string(forKey: "dar.appleTV.quran.selectedReciter")
+                ?? QuranReciterService.defaultIdentifier
+            Task { @MainActor [weak self] in
+                guard let self else { return }
+                await load(
+                    surah: currentSurahNumber,
+                    reciterIdentifier: reciterIdentifier,
+                    restoreSavedAyah: true,
+                    autoPlay: true
+                )
             }
+            return
         }
+
         playCurrent()
     }
 
+    func setPlaybackBlocked(_ blocked: Bool) {
+        isPlaybackBlocked = blocked
+        if blocked {
+            pauseForOverlay()
+        } else if wantsAutoplay, currentVerse != nil, !isPlaying {
+            playCurrent()
+        }
+    }
+
     func playCurrent() {
-        guard let verse = currentVerse else {
+        wantsAutoplay = true
+        UserDefaults.standard.set(true, forKey: Self.resumePlaybackKey)
+        guard let verse = currentVerse, verse.audioURL != nil else {
             isPlaying = false
+            errorMessage = "Für diesen Rezitator ist für diesen Vers keine MP3 hinterlegt."
             return
         }
 
-        let url = Self.siteAudioURL(edition: surah?.reciterIdentifier, verse: verse)
-            ?? verse.audioURL
-        guard let url else {
+        playGeneration += 1
+        let generation = playGeneration
+        activePlaybackGeneration = generation
+        playbackRepairAttempts = 0
+        Task { @MainActor [weak self] in
+            guard let self else { return }
+            await TVAudioSession.activate()
+            guard generation == playGeneration else { return }
+
+            localAudioPlayer?.stop()
+            localAudioPlayer = nil
+            player.volume = 1.0
+
+            // Resume the existing queue when possible. Rebuild only after an
+            // explicit navigation or when no item has been prepared yet.
+            let hasPreparedCurrentItem = player.currentItem.map {
+                self.queuedItemIndices[ObjectIdentifier($0)] == self.currentIndex
+            } ?? false
+            if !hasPreparedCurrentItem {
+                player.removeAllItems()
+                queuedItemIndices.removeAll()
+                enqueueItems(startingAt: currentIndex)
+            }
+
+            guard generation == playGeneration, player.currentItem != nil else {
+                isPlaying = false
+                errorMessage = "Qurʾān-Audio konnte nicht vorbereitet werden."
+                return
+            }
+            player.play()
+            isPlaying = true
+            errorMessage = nil
+            persistReadingPosition()
+        }
+    }
+
+    private func enqueueItems(startingAt index: Int) {
+        guard let verses = surah?.verses, verses.indices.contains(index) else { return }
+        var lastItem = player.items().last
+        let end = min(index + queueDepth, verses.count)
+
+        for itemIndex in index..<end where !queuedItemIndices.values.contains(itemIndex) {
+            guard let url = verses[itemIndex].audioURL else { continue }
+            let item = AVPlayerItem(url: url)
+            item.preferredForwardBufferDuration = 8
+            player.insert(item, after: lastItem)
+            queuedItemIndices[ObjectIdentifier(item)] = itemIndex
+            lastItem = item
+        }
+    }
+
+    private func restartQueue(at index: Int) {
+        guard wantsAutoplay, !isPlaybackBlocked else { return }
+        guard playbackRepairAttempts < 2 else {
             isPlaying = false
+            errorMessage = "Qurʾān-Audio konnte nach mehreren Versuchen nicht fortgesetzt werden."
             return
         }
-
-        triedFallbackForIndex = nil
-        persistReadingPosition()
-        let edition = surah?.reciterIdentifier ?? ""
-        let ayah = verse.globalNumber
-        startDownloadAndPlay(url: url, edition: edition, ayah: ayah)
-    }
-
-    private func startDownloadAndPlay(url: URL, edition: String = "", ayah: Int = 0) {
-        playTask?.cancel()
-        generation += 1
-        let token = generation
-        isPlaying = true
-        playTask = Task { [weak self] in
-            await self?.downloadAndPlay(url: url, edition: edition, ayah: ayah, token: token)
-        }
-    }
-
-    private func playFromFile(_ file: URL) throws {
-        prepareSpeaker()
-        audioPlayer?.stop()
-        let player = try AVAudioPlayer(contentsOf: file)
-        player.delegate = playerDelegate
-        player.volume = 1
-        player.prepareToPlay()
-        audioPlayer = player
-        prepareSpeaker()
-        guard player.play() else {
-            throw URLError(.cannotDecodeContentData)
-        }
-        isPlaying = true
-    }
-
-    private func downloadAndPlay(url: URL, edition: String, ayah: Int, token: Int) async {
-        prepareSpeaker()
-
-        if ayah >= 1, let local = QuranOfflinePackStore.shared.fileIfPresent(edition: edition, ayah: ayah) {
-            do {
-                try playFromFile(local)
-                return
-            } catch {
-                // Datei unbrauchbar: neu laden
-            }
-        }
-
-        do {
-            var request = URLRequest(url: url)
-            request.cachePolicy = .reloadIgnoringLocalCacheData
-            request.timeoutInterval = 25
-            let (data, response) = try await URLSession.shared.data(for: request)
-            guard token == generation, !Task.isCancelled else { return }
-            guard let http = response as? HTTPURLResponse,
-                  (200...299).contains(http.statusCode),
-                  data.count > 64 else {
-                handleItemFailure()
-                return
-            }
-
-            if ayah >= 1 {
-                QuranOfflinePackStore.shared.save(data, edition: edition, ayah: ayah)
-            }
-            if let file = QuranOfflinePackStore.shared.fileIfPresent(edition: edition, ayah: ayah) {
-                try playFromFile(file)
-            } else {
-                let tmp = FileManager.default.temporaryDirectory.appendingPathComponent("dar-quran-\(ayah).mp3")
-                try data.write(to: tmp, options: .atomic)
-                try playFromFile(tmp)
-            }
-        } catch {
-            guard token == generation, !Task.isCancelled else { return }
-            handleItemFailure()
-        }
+        playbackRepairAttempts += 1
+        player.pause()
+        player.removeAllItems()
+        queuedItemIndices.removeAll()
+        currentIndex = index
+        enqueueItems(startingAt: index)
+        player.play()
+        isPlaying = player.currentItem != nil
+        errorMessage = isPlaying ? nil : "Qurʾān-Audio konnte nicht abgespielt werden."
     }
 
     func pause() {
-        audioPlayer?.pause()
+        wantsAutoplay = false
+        UserDefaults.standard.set(false, forKey: Self.resumePlaybackKey)
+        playGeneration += 1
+        localAudioPlayer?.pause()
+        player.pause()
+        isPlaying = false
+    }
+
+    func pauseForOverlay() {
+        playGeneration += 1
+        localAudioPlayer?.pause()
+        player.pause()
         isPlaying = false
     }
 
     func stop() {
-        playTask?.cancel()
-        playTask = nil
-        generation += 1
-        audioPlayer?.stop()
-        audioPlayer = nil
+        operationGeneration += 1
+        stopPlayer()
+    }
+
+    private func stopPlayer() {
+        playGeneration += 1
+        localAudioPlayer?.stop()
+        localAudioPlayer = nil
+        player.pause()
+        player.removeAllItems()
+        queuedItemIndices.removeAll()
+        isPlaying = false
+    }
+
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        guard player === localAudioPlayer else { return }
         isPlaying = false
     }
 
     func previous() {
         guard canGoPrevious else { return }
         let shouldPlay = isPlaying
-        stop()
+        stopPlayer()
         currentIndex -= 1
         persistReadingPosition()
         if shouldPlay { playCurrent() }
@@ -364,10 +381,34 @@ final class QuranPlaybackStore: ObservableObject {
     func next() {
         guard canGoNext else { return }
         let shouldPlay = isPlaying
-        stop()
+        stopPlayer()
         currentIndex += 1
         persistReadingPosition()
         if shouldPlay { playCurrent() }
+    }
+
+    func selectSurah(_ number: Int) {
+        let clamped = min(max(number, 1), 114)
+        let reciterIdentifier = surah?.reciterIdentifier
+            ?? UserDefaults.standard.string(forKey: "dar.appleTV.quran.selectedReciter")
+            ?? QuranReciterService.defaultIdentifier
+
+        Task {
+            await load(
+                surah: clamped,
+                reciterIdentifier: reciterIdentifier,
+                restoreSavedAyah: false,
+                autoPlay: true
+            )
+        }
+    }
+
+    func previousSurah() {
+        selectSurah(currentSurahNumber - 1)
+    }
+
+    func nextSurah() {
+        selectSurah(currentSurahNumber + 1)
     }
 
     func selectAyah(numberInSurah: Int, autoPlay: Bool = false) {
@@ -376,26 +417,62 @@ final class QuranPlaybackStore: ObservableObject {
             return
         }
 
-        stop()
+        stopPlayer()
         currentIndex = index
         persistReadingPosition()
         if autoPlay { playCurrent() }
     }
 
-    private func advanceAfterPlayback() {
+    private func advanceAfterPlayback(endedItem: AVPlayerItem) {
+        guard let endedIndex = queuedItemIndices.removeValue(forKey: ObjectIdentifier(endedItem)) else {
+            return
+        }
+        guard !isPlaybackBlocked else {
+            isPlaying = false
+            return
+        }
         guard let verses = surah?.verses else {
             isPlaying = false
             return
         }
 
-        if currentIndex + 1 < verses.count {
-            currentIndex += 1
+        if endedIndex + 1 < verses.count {
+            // The next item is already in AVQueuePlayer, so this is a render-only
+            // update. Audio continues without pause, replace, seek, or restart.
+            currentIndex = endedIndex + 1
             persistReadingPosition()
-            playCurrent()
-        } else {
+            enqueueItems(startingAt: endedIndex + 1)
+            // AVQueuePlayer can briefly report a nil currentItem while it
+            // promotes the already-buffered next Āyah. Keep the logical
+            // playback state active when a queued item is still available;
+            // otherwise the UI and screensaver can falsely treat this as a
+            // manual pause at every boundary.
+            let hasQueuedContinuation = player.currentItem != nil || !player.items().isEmpty
+            if hasQueuedContinuation, wantsAutoplay {
+                player.play()
+                isPlaying = true
+            } else {
+                isPlaying = false
+            }
+            return
+        }
+
+        guard let currentSurah = surah, currentSurah.number < 114 else {
             isPlaying = false
-            audioPlayer?.stop()
-            audioPlayer = nil
+            player.removeAllItems()
+            queuedItemIndices.removeAll()
+            return
+        }
+        let reciterIdentifier = currentSurah.reciterIdentifier
+
+        Task { @MainActor [weak self] in
+            guard let self, !isPlaybackBlocked else { return }
+            await load(
+                surah: currentSurah.number + 1,
+                reciterIdentifier: reciterIdentifier,
+                restoreSavedAyah: false,
+                autoPlay: true
+            )
         }
     }
 
@@ -406,95 +483,114 @@ final class QuranPlaybackStore: ObservableObject {
     }
 }
 
+/// Stores the selected reciter's MP3 files locally and supplies them to AVAudioPlayer.
 @MainActor
 final class QuranOfflinePackStore: ObservableObject {
     static let shared = QuranOfflinePackStore()
-    static let ayahTotal = 6236
 
-    @Published private(set) var edition = ""
-    @Published private(set) var have = 0
-    @Published private(set) var isDownloading = false
+    struct Progress: Equatable {
+        let completed: Int
+        let total: Int
+        let isDownloading: Bool
 
-    private var downloadTask: Task<Void, Never>?
-    private var cancelled = false
+        var label: String {
+            isDownloading ? "Lädt \(completed)/\(total)" : "Gespeichert"
+        }
+    }
 
-    var total: Int { Self.ayahTotal }
+    @Published private(set) var progress: [String: Progress] = [:]
+    private var downloadTasks: [String: Task<Void, Never>] = [:]
+    private let session = URLSession(configuration: .ephemeral)
+
+    func localURL(edition: String, ayah: Int) -> URL {
+        let root = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("DarAlTawhidQuranOffline", isDirectory: true)
+        try? FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        return root.appendingPathComponent("\(safe(edition))-\(ayah).mp3")
+    }
+
+    func ensureLocalAudio(edition: String, ayah: Int, remoteURL: URL?) async -> URL? {
+        let destination = localURL(edition: edition, ayah: ayah)
+        if FileManager.default.fileExists(atPath: destination.path) {
+            return destination
+        }
+
+        let url = remoteURL ?? directURL(edition: edition, ayah: ayah)
+        do {
+            let (data, response) = try await session.data(from: url)
+            guard let http = response as? HTTPURLResponse,
+                  (200...299).contains(http.statusCode),
+                  data.count > 800 else {
+                return nil
+            }
+            try data.write(to: destination, options: .atomic)
+            return destination
+        } catch {
+            return nil
+        }
+    }
 
     func toggleDownload(edition: String) {
-        guard !edition.isEmpty else { return }
-        if isDownloading && self.edition == edition {
-            cancelled = true
-            downloadTask?.cancel()
-            isDownloading = false
+        if let task = downloadTasks[edition] {
+            task.cancel()
+            downloadTasks[edition] = nil
+            progress[edition] = Progress(completed: progress[edition]?.completed ?? 0, total: 6236, isDownloading: false)
             return
         }
-        startDownload(edition: edition)
-    }
 
-    func fileIfPresent(edition: String, ayah: Int) -> URL? {
-        let url = fileURL(edition: edition, ayah: ayah)
-        guard FileManager.default.fileExists(atPath: url.path) else { return nil }
-        return url
-    }
+        progress[edition] = Progress(completed: 0, total: 6236, isDownloading: true)
+        downloadTasks[edition] = Task { @MainActor [weak self] in
+            guard let self else { return }
+            var completed = 0
 
-    func save(_ data: Data, edition: String, ayah: Int) {
-        guard !edition.isEmpty, ayah >= 1, data.count > 64 else { return }
-        let url = fileURL(edition: edition, ayah: ayah)
-        try? FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
-        try? data.write(to: url, options: .atomic)
-        if self.edition == edition || self.edition.isEmpty {
-            refresh(edition: edition)
-        }
-    }
-
-    func refresh(edition: String) {
-        guard !edition.isEmpty else { return }
-        self.edition = edition
-        let dir = folder(edition: edition)
-        let count = (try? FileManager.default.contentsOfDirectory(atPath: dir.path).filter { $0.hasSuffix(".mp3") }.count) ?? 0
-        have = count
-    }
-
-    private func startDownload(edition: String) {
-        cancelled = false
-        isDownloading = true
-        self.edition = edition
-        refresh(edition: edition)
-        downloadTask?.cancel()
-        downloadTask = Task { [weak self] in
-            await self?.downloadAll(edition: edition)
-        }
-    }
-
-    private func downloadAll(edition: String) async {
-        for ayah in 1...Self.ayahTotal {
-            if cancelled || Task.isCancelled { break }
-            if fileIfPresent(edition: edition, ayah: ayah) != nil { continue }
-            guard let url = URL(string: "https://dar-al-tawhid.de/quran-audio/\(edition)/\(ayah).mp3") else { continue }
-            do {
-                let (data, response) = try await URLSession.shared.data(from: url)
-                guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode), data.count > 64 else {
-                    continue
+            for ayah in 1...6236 {
+                guard !Task.isCancelled else { break }
+                if await self.ensureLocalAudio(
+                    edition: edition,
+                    ayah: ayah,
+                    remoteURL: self.directURL(edition: edition, ayah: ayah)
+                ) != nil {
+                    completed += 1
                 }
-                save(data, edition: edition, ayah: ayah)
-            } catch {
-                continue
+                self.progress[edition] = Progress(
+                    completed: completed,
+                    total: 6236,
+                    isDownloading: true
+                )
             }
-            try? await Task.sleep(nanoseconds: 250_000_000)
+
+            self.progress[edition] = Progress(
+                completed: completed,
+                total: 6236,
+                isDownloading: false
+            )
+            self.downloadTasks[edition] = nil
         }
-        isDownloading = false
-        refresh(edition: edition)
     }
 
-    private func folder(edition: String) -> URL {
+    func removeDownload(edition: String) {
+        downloadTasks[edition]?.cancel()
+        downloadTasks[edition] = nil
+
         let root = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("DarAlTawhidAppleTV/QuranAudio", isDirectory: true)
-            .appendingPathComponent(edition.replacingOccurrences(of: "/", with: "-"), isDirectory: true)
-        try? FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
-        return root
+            .appendingPathComponent("DarAlTawhidQuranOffline", isDirectory: true)
+        let prefix = "\(safe(edition))-"
+        if let files = try? FileManager.default.contentsOfDirectory(at: root, includingPropertiesForKeys: nil) {
+            for file in files where file.lastPathComponent.hasPrefix(prefix) {
+                try? FileManager.default.removeItem(at: file)
+            }
+        }
+        progress[edition] = nil
     }
 
-    private func fileURL(edition: String, ayah: Int) -> URL {
-        folder(edition: edition).appendingPathComponent("\(ayah).mp3")
+    private func directURL(edition: String, ayah: Int) -> URL {
+        let encodedEdition = edition.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? edition
+        return URL(string: "https://dar-al-tawhid.de/quran-audio/\(encodedEdition)/\(ayah).mp3")!
+    }
+
+    private func safe(_ value: String) -> String {
+        value.replacingOccurrences(of: "/", with: "-")
+            .replacingOccurrences(of: ":", with: "-")
+            .replacingOccurrences(of: " ", with: "-")
     }
 }
