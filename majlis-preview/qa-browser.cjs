@@ -42,7 +42,7 @@ for(const width of [390,820,1440]){
  if(!label.includes('anzeigen'))throw Error('Learning toggle '+width);
  await page.locator('[data-qfont="1"]').click();
  if(width<681)await page.locator('.tabbar button[data-go="more"]').click();else await page.locator('#topTheme').click();
- if(width<681){await page.locator('.modal.open [data-go="settings"]').click();await page.locator('#topTheme').click()}
+ if(width<681){await page.locator('.modal.open [data-go="settings"]').first().click();await page.locator('#topTheme').click()}
  await page.waitForSelector('.modal.open .appearance-option');
  if(await page.locator('.modal.open .appearance-option').count()<9)throw Error('Themes missing '+width);
  await page.locator('.modal.open [data-appearance="royal"]').click();
