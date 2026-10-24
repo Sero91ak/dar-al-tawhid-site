@@ -101,9 +101,17 @@ assert.match(offline.getNode("sourceList").innerHTML, /href="\/q\/37\/"/);
   // Exercise the real Cloudflare Worker routing function using a local asset mock.
   const sandbox = { URL, Request, Response, Headers };
   vm.createContext(sandbox);
+  // Imports are stripped for the local sandbox — stub gate helpers so public
+  // Q/Quellen routing can still be exercised without Cloudflare module loading.
   vm.runInContext(
-    router.replace(/^import .*$/gm, "").replace(/export default\s*\{/, "const darRouter = {") +
-      "\nthis.darRouter = darRouter;",
+    [
+      "async function editorialOwnerAccess(){ return null; }",
+      "function gateHiddenSurfaces(){ return null; }",
+      "async function academyOwnerAccess(){ return null; }",
+      "function academyOwnerAssetPath(p){ return p; }",
+      router.replace(/^import .*$/gm, "").replace(/export default\s*\{/, "const darRouter = {") +
+        "\nthis.darRouter = darRouter;"
+    ].join("\n"),
     sandbox, { timeout: 3000 }
   );
   const requested = [];
