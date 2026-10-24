@@ -2,7 +2,7 @@
 
 Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 
-**Gesamtstand:** P0 bis P4 lokal implementiert/auditiert und getestet; P5 teilweise umgesetzt/auditiert; P6 als nächste zulässige Phase offen.
+**Gesamtstand:** P0 bis P4 lokal implementiert/auditiert und getestet; P5 teilweise umgesetzt/auditiert; P6 auditiert, native Erweiterung wegen fehlender DARNext-Ressourcen noch offen; P7 als nächste zulässige Phase offen.
 
 | Phase | Status | Nachweis |
 | --- | --- | --- |
@@ -12,7 +12,7 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 | P3 Startseite | getestet (lokaler Xcode-Stand) | GitHub-3D-Medien/Hero an DARNext-Startseite angebunden; Build erfolgreich; 7/7 Tests bestanden; Simulator-UI-Prüfung läuft |
 | P4 Beiträge/Duʿāʾ/Bibliothek | getestet (lokaler Xcode-Stand) | Bestehende reale Repository-Daten; native Post-/Duʿāʾ-ShareLink ergänzt; Build erfolgreich; 7/7 Tests bestanden |
 | P5 Qurʾān/Audio/Tafsīr/Tadabbur | teilweise getestet | 114 Sūren, Versreader, echte Audioquelle/Rezitation/Player geprüft; Tafsīr/Tadabbur-native Datenpfad fehlt; Build erfolgreich; 7/7 Tests bestanden |
-| P6 Weitere Bereiche/Frauen/Ḥadīṯ | offen | – |
+| P6 Weitere Bereiche/Frauen/Ḥadīṯ | auditiert/teilweise offen | Zentrale Manifestdatei listet Frauen-/Wissensdaten; DARNext-Bundle enthält sie noch nicht als native Module; keine Inhalte erfunden |
 | P7 Inhalts-Synchronisierung | offen | – |
 | P8 Push und Deep Links | offen | – |
 | P9 Qualität/Sprachen/Geräte | offen | – |
@@ -25,6 +25,13 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 - 10 sekundäre UI-Icons, 3 Home-Heros, 3 Beitrags-Heros, 7 Frauenbilder in zwei Varianten, 42 Cover-Quellen und 13 Feed-Hintergrundkategorien katalogisiert.
 - Geprüfte Pixelmaße: Mobile-Hero 1072 × 1920, Wide-Hero 2016 × 1152, Study 1376 × 768, Beitrags-Heros 1920 × 1080 bzw. 1376 × 768, Frauen v1223 1376 × 768, Frauen v1224 900 × 506.
 - Xcode-Abgleich: DARNext enthält aktuell keine eingebundene Kopie dieser Webmedien; gezielter DARNext-only Import ist für P2/P3 offen.
+
+## P6 — Ḥadīṯ, Frauenbereich und weitere Wissensmodule
+
+- Xcode-Inventar: DARNext besitzt aktuell keinen eigenständigen `HadithView`-/Frauenbereich-Reader und keine eingebundenen Frauenmedien.
+- Die GitHub-Quelle `data/offline-content-manifest.json` listet jedoch kanonische Frauen-Datenpakete, Frauenbilder v1224, Fiqh-/Sahabiyyat-/Familien-/Adab-/Quellenregister sowie bestehende 3D-Icons. Diese müssen über P7/P9 kontrolliert in DARNext synchronisiert bzw. als native Module registriert werden.
+- Vorhandene Hadith-/Frauenbezüge in DARNext sind derzeit überwiegend Teil geprüfter Beiträge/Bibliotheksdaten; keine neue religiöse Aussage wurde erstellt.
+- Status: Audit abgeschlossen, native Parität bewusst offen.
 
 ## P5 — Qurʾān, Audio, Tafsīr und Tadabbur
 
@@ -95,8 +102,8 @@ Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 ## Offene Punkte
 
 - Der lokale Xcode-Arbeitsstand und der GitHub-Dokumentationsbranch müssen vor dem ersten Quellcode-Commit noch über den vorhandenen Xcode-/Repository-Workflow zusammengeführt werden; kein unbelegter Gleichstand mit GitHub wird behauptet.
-- P6 muss Ḥadīṯ, Frauenbereich und weitere vorhandene Wissensmodule gegen den tatsächlichen Datenbestand abgleichen; fehlende geprüfte Daten offen lassen.
+- P7 muss den kanonischen Manifest-/Content-Abgleich so anbinden, dass freigegebene Inhalte ohne neuen Swift-Build aktualisiert werden; Worker/Push-Code bleibt geschützt.
 
 ## Nächste Aktion
 
-P6: Ḥadīṯ-/Frauen-/Wissensinventar und zulässige native Ergänzungen; danach statische Prüfung, Build, Tests und Status-Commit ausführen.
+P7: sicheren zentralen Content-Manifest-Abgleich als DARNext-eigene Service-Schicht vorbereiten, ohne produktive Worker zu ändern; danach Build, Tests und Status-Commit.
