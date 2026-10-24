@@ -54,6 +54,7 @@ final class QuranPlaybackStore: NSObject, ObservableObject, AVAudioPlayerDelegat
             .receive(on: DispatchQueue.main)
             .sink { [weak self] notification in
                 guard let self, let failedItem = notification.object as? AVPlayerItem,
+                      failedItem === self.player.currentItem,
                       let failedIndex = self.queuedItemIndices[ObjectIdentifier(failedItem)] else {
                     return
                 }
