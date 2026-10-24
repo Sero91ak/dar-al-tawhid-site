@@ -61,6 +61,26 @@ final class QuranPlaybackStore: NSObject, ObservableObject, AVAudioPlayerDelegat
                 self.restartQueue(at: failedIndex)
             }
             .store(in: &cancellables)
+
+        NotificationCenter.default.publisher(for: .AVPlayerItemPlaybackStalled)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] notification in
+                guard let self, self.isPlaying,
+                      let stalledItem = notification.object as? AVPlayerItem,
+                      stalledItem === self.player.currentItem else {
+                    return
+                }
+                Task { @MainActor [weak self] in
+                    try? await Task.sleep(for: .seconds(2))
+                    guard let self, self.isPlaying,
+                          self.player.currentItem === stalledItem,
+                          self.player.timeControlStatus != .playing else {
+                        return
+                    }
+                    self.restartQueue(at: self.currentIndex)
+                }
+            }
+            .store(in: &cancellables)
     }
 
     var currentVerse: QuranSynchronizedVerse? {
@@ -297,6 +317,11 @@ final class QuranPlaybackStore: NSObject, ObservableObject, AVAudioPlayerDelegat
 
     private func restartQueue(at index: Int) {
         guard wantsAutoplay, !isPlaybackBlocked else { return }
+        guard playbackRepairAttempts < 2 else {
+            isPlaying = false
+            errorMessage = "Qurʾān-Audio konnte nach mehreren Versuchen nicht fortgesetzt werden."
+            return
+        }
         playbackRepairAttempts += 1
         player.pause()
         player.removeAllItems()
