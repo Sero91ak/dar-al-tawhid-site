@@ -88,10 +88,12 @@ struct Post: Identifiable, Hashable, Sendable {
     let scholar: String?
     let book: String?
     let source: String?
+    let canonicalQSourceNumber: Int?
     let body: String
 
-    var sourceURL: String {
-        "/q/\(id)"
+    var sourceURL: String? {
+        guard let canonicalQSourceNumber else { return nil }
+        return "/q/\(canonicalQSourceNumber)/"
     }
 }
 

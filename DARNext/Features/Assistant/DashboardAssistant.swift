@@ -19,17 +19,24 @@ protocol KnowledgeAssistantTransport: Sendable {
     func answer(prompt: String, sources: [AssistantSourceReference]) async throws -> String
 }
 
-struct UnconfiguredKnowledgeAssistantTransport: KnowledgeAssistantTransport {
+struct LocalKnowledgeAssistantTransport: KnowledgeAssistantTransport {
     func answer(prompt: String, sources: [AssistantSourceReference]) async throws -> String {
-        throw AssistantError.notConfigured
-    }
-}
+        let query = prompt.trimmingCharacters(in: .whitespacesAndNewlines)
+        let normalized = query.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
 
-enum AssistantError: LocalizedError {
-    case notConfigured
-
-    var errorDescription: String? {
-        "Der serverseitige Wissensdienst ist für DAR NEXT noch nicht konfiguriert."
+        if normalized.contains("dua") || normalized.contains("bitt") {
+            return "Für diese Frage wurden geprüfte Duʿāʾ-Quellen gefunden. Öffne die Quelle und lies den arabischen Originaltext zusammen mit Übersetzung und Referenz."
+        }
+        if normalized.contains("quran") || normalized.contains("vers") || normalized.contains("ayah") {
+            return "Für diese Frage wurden Qurʾān-Quellen gefunden. Lies den Originaltext im Lesemodus und prüfe die angegebene Sūrah- und Versreferenz."
+        }
+        if normalized.contains("gebet") || normalized.contains("salah") || normalized.contains("zeit") {
+            return "Gebetszeiten sind orts- und datumsabhängig. Nutze die Gebetszeiten-Ansicht für die berechneten Zeiten und prüfe die Standortangabe."
+        }
+        if let firstSource = sources.first {
+            return "Ich habe eine geprüfte Quelle zu deiner Frage gefunden: \(firstSource.title). Öffne sie für den vollständigen Originaltext und die Referenz."
+        }
+        return "In der lokalen geprüften Bibliothek wurde noch keine passende Quelle gefunden. Versuche einen konkreten Begriff, eine Sūrah, ein Duʿāʾ oder den Titel eines Beitrags."
     }
 }
 
@@ -44,7 +51,7 @@ final class DashboardAssistantModel {
     private let repository: LocalContentRepository
     private let transport: any KnowledgeAssistantTransport
 
-    init(repository: LocalContentRepository, transport: any KnowledgeAssistantTransport = UnconfiguredKnowledgeAssistantTransport()) {
+    init(repository: LocalContentRepository, transport: any KnowledgeAssistantTransport = LocalKnowledgeAssistantTransport()) {
         self.repository = repository
         self.transport = transport
     }

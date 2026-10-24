@@ -15,6 +15,7 @@ struct IslamicHubView: View {
             LazyVStack(alignment: .leading, spacing: 22) {
                 header
                 ibadahSection
+                prayerSection
                 knowledgeSection
                 toolsSection
             }
@@ -60,6 +61,27 @@ struct IslamicHubView: View {
         }
     }
 
+    private var prayerSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            sectionTitle("Gebet & Orientierung", systemImage: "location.north.circle.fill")
+            LazyVGrid(columns: columns, spacing: 12) {
+                NavigationLink { PrayerView() } label: {
+                    DARFeatureTile(title: "Gebetszeiten", subtitle: "Standort & Erinnerungen", systemImage: "clock.fill", tint: theme.gold)
+                }
+                NavigationLink { QiblaView() } label: {
+                    DARFeatureTile(title: "Qibla", subtitle: "Ausrichtung zur Kaʿba", systemImage: "location.north.fill", tint: .orange)
+                }
+                NavigationLink { IslamicCalendarView() } label: {
+                    DARFeatureTile(title: "Kalender", subtitle: "Hijri & Gregorianisch", systemImage: "calendar", tint: .teal)
+                }
+                NavigationLink { DhikrView() } label: {
+                    DARFeatureTile(title: "Dhikr", subtitle: "Zähler & Erinnerung", systemImage: "circle.grid.cross.fill", tint: .pink)
+                }
+            }
+            .buttonStyle(.plain)
+        }
+    }
+
     private var knowledgeSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             sectionTitle("Wissen & Quellen", systemImage: "scroll.fill")
@@ -81,7 +103,7 @@ struct IslamicHubView: View {
                 DARFeatureRow(title: "Globale Suche", subtitle: "Alle geprüften Inhalte durchsuchen", systemImage: "magnifyingglass", tint: .blue)
             }
             .buttonStyle(.plain)
-            Text("Weitere native Module wie Gebetszeiten, Qibla, Dhikr und islamischer Kalender werden in dieselbe Feature-Struktur eingehängt.")
+            Text("Alle Bereiche bleiben in derselben geprüften, lokalen DAR-Architektur und können unabhängig voneinander erweitert werden.")
                 .font(.footnote)
                 .foregroundStyle(theme.secondaryText)
                 .padding(.top, 2)

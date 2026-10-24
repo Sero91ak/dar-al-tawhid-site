@@ -6,5 +6,8 @@ struct DARNextRootView: View {
     var body: some View {
         RootShell(environment: environment, audioEngine: environment.audioEngine)
             .environment(\.darTheme, .premium)
+            .task {
+                await environment.refreshContentManifest()
+            }
     }
 }

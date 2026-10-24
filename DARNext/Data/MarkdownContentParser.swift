@@ -41,6 +41,7 @@ struct MarkdownContentParser: Sendable {
             scholar: parsed.frontMatter["scholar"],
             book: parsed.frontMatter["book"],
             source: parsed.frontMatter["source"],
+            canonicalQSourceNumber: Int(parsed.frontMatter["canonicalQSourceNumber"] ?? parsed.frontMatter["qSourceNumber"] ?? ""),
             body: body
         )
     }

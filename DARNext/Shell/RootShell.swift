@@ -1,10 +1,52 @@
 import SwiftUI
-import WebKit
 
 struct RootShell: View {
     let environment: AppEnvironment
     let audioEngine: QuranAudioEngine
-    @State private var selectedTab = RootTab.start
+
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @AppStorage("darnext.appearanceMode") private var appearanceModeRawValue = DARAppearanceMode.nightLibrary.rawValue
+    @State private var selectedTab = DARNextTab.start
+
+    private var appearanceMode: DARAppearanceMode {
+        DARAppearanceMode(rawValue: appearanceModeRawValue) ?? .nightLibrary
+    }
+
+    var body: some View {
+        Group {
+            if horizontalSizeClass == .regular {
+                DARNextRegularShell(
+                    environment: environment,
+                    audioEngine: audioEngine,
+                    selectedTab: $selectedTab
+                )
+            } else {
+                DARNextPhoneShell(
+                    environment: environment,
+                    audioEngine: audioEngine,
+                    selectedTab: $selectedTab
+                )
+            }
+        }
+        .environment(\.darTheme, appearanceMode.theme)
+        .tint(appearanceMode.theme.antiqueGold)
+        .onOpenURL { url in
+            switch DARNextDeepLinkDestination.from(url) {
+            case .quran:
+                selectedTab = .quran
+            case .more:
+                selectedTab = .more
+            case .home:
+                selectedTab = .start
+            }
+        }
+    }
+}
+
+private struct DARNextPhoneShell: View {
+    let environment: AppEnvironment
+    let audioEngine: QuranAudioEngine
+    @Binding var selectedTab: DARNextTab
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -12,210 +54,272 @@ struct RootShell: View {
                 DashboardView(repository: environment.container.contentRepository)
             }
             .tabItem { Label("Start", systemImage: "sparkles") }
-            .tag(RootTab.start)
+            .tag(DARNextTab.start)
 
             NavigationStack {
                 QuranView(repository: environment.container.contentRepository)
             }
-            .tabItem { Label("Qurʾān", systemImage: "book.closed") }
-            .tag(RootTab.quran)
+            .tabItem { Label("Qurʾān", systemImage: "book.closed.fill") }
+            .tag(DARNextTab.quran)
 
             NavigationStack {
                 PostsView(repository: environment.container.contentRepository)
             }
-            .tabItem { Label("Beiträge", systemImage: "text.alignleft") }
-            .tag(RootTab.posts)
+            .tabItem { Label("Beiträge", systemImage: "text.book.closed.fill") }
+            .tag(DARNextTab.posts)
 
             NavigationStack {
-                KnowledgeView(repository: environment.container.contentRepository)
+                DashboardAssistantView(repository: environment.container.contentRepository)
             }
-            .tabItem { Label("Wissen", systemImage: "graduationcap") }
-            .tag(RootTab.knowledge)
+            .tabItem { Label("AI", systemImage: "sparkles") }
+            .tag(DARNextTab.assistant)
 
             NavigationStack {
                 MoreView(repository: environment.container.contentRepository)
             }
             .tabItem { Label("Mehr", systemImage: "ellipsis") }
-            .tag(RootTab.more)
+            .tag(DARNextTab.more)
         }
-        .tint(.white)
         .environment(audioEngine)
         .safeAreaInset(edge: .bottom, spacing: 8) {
-            if audioEngine.currentTrack != nil {
-                QuranMiniPlayer(engine: audioEngine)
-                    .padding(.horizontal, 12)
-            }
+            DARNextMiniPlayer(audioEngine: audioEngine)
         }
     }
-
 }
 
-private enum RootTab: Hashable {
+private struct DARNextRegularShell: View {
+    let environment: AppEnvironment
+    let audioEngine: QuranAudioEngine
+    @Binding var selectedTab: DARNextTab
+
+    var body: some View {
+        NavigationSplitView {
+            List {
+                ForEach(DARNextTab.allCases) { tab in
+                    Button {
+                        selectedTab = tab
+                    } label: {
+                        Label(tab.title, systemImage: tab.systemImage)
+                            .foregroundStyle(.primary)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .navigationTitle("DĀR AL TAWḤĪD")
+            .scrollContentBackground(.hidden)
+        } detail: {
+            NavigationStack {
+                DARNextDestination(
+                    tab: selectedTab,
+                    repository: environment.container.contentRepository
+                )
+            }
+        }
+        .environment(audioEngine)
+        .safeAreaInset(edge: .bottom, spacing: 8) {
+            DARNextMiniPlayer(audioEngine: audioEngine)
+        }
+    }
+}
+
+private struct DARNextDestination: View {
+    let tab: DARNextTab
+    let repository: LocalContentRepository
+
+    @ViewBuilder
+    var body: some View {
+        switch tab {
+        case .start:
+            DashboardView(repository: repository)
+        case .quran:
+            QuranView(repository: repository)
+        case .posts:
+            PostsView(repository: repository)
+        case .assistant:
+            DashboardAssistantView(repository: repository)
+        case .more:
+            MoreView(repository: repository)
+        }
+    }
+}
+
+private struct DARNextMiniPlayer: View {
+    let audioEngine: QuranAudioEngine
+
+    var body: some View {
+        if audioEngine.currentTrack != nil {
+            QuranMiniPlayer(engine: audioEngine)
+                .padding(.horizontal, 12)
+        }
+    }
+}
+
+private enum DARNextTab: Hashable, CaseIterable, Identifiable {
     case start
     case quran
     case posts
-    case knowledge
+    case assistant
     case more
-}
 
-private struct KnowledgeView: View {
-    let repository: LocalContentRepository
+    var id: Self { self }
 
-    var body: some View {
-        List {
-            NavigationLink("Duʿāʾ") {
-                DuaView(repository: repository)
-            }
-            Label("Quellengebundene Inhalte", systemImage: "checkmark.shield")
-                .foregroundStyle(.secondary)
+    var title: String {
+        switch self {
+        case .start: "Start"
+        case .quran: "Qurʾān"
+        case .posts: "Beiträge"
+        case .assistant: "AI"
+        case .more: "Mehr"
         }
-        .navigationTitle("Wissen")
+    }
+
+    var systemImage: String {
+        switch self {
+        case .start: "sparkles"
+        case .quran: "book.closed.fill"
+        case .posts: "text.book.closed.fill"
+        case .assistant: "sparkles"
+        case .more: "ellipsis"
+        }
     }
 }
 
 private struct MoreView: View {
     let repository: LocalContentRepository
 
+    @Environment(\.darTheme) private var theme
+    @AppStorage("darnext.appearanceMode") private var appearanceModeRawValue = DARAppearanceMode.nightLibrary.rawValue
+
+    private var appearanceMode: DARAppearanceMode {
+        DARAppearanceMode(rawValue: appearanceModeRawValue) ?? .nightLibrary
+    }
+
     var body: some View {
-        List {
-            NavigationLink {
-                SearchView(repository: repository)
-            } label: {
-                Label("Globale Suche", systemImage: "magnifyingglass")
-            }
-            NavigationLink {
-                LibraryView(repository: repository)
-            } label: {
-                Label("Bibliothek", systemImage: "books.vertical")
-            }
-            NavigationLink {
-                QuizView(repository: repository)
-            } label: {
-                Label("Wissensquiz", systemImage: "questionmark.circle")
-            }
-            Section("Vollständige Originalinhalte · online") {
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: 14) {
                 NavigationLink {
-                    DARNextOriginalWebView(title: "DĀR AL TAWḤĪD", path: "/")
+                    IslamicHubView(repository: repository)
                 } label: {
-                    Label("Komplette Web-App", systemImage: "globe")
+                    moreCard(
+                        title: "Islamische Bereiche",
+                        subtitle: "Duʿāʾ, Quiz, Bibliothek, Suche und weitere Module",
+                        systemImage: "moon.stars.fill",
+                        tint: theme.gold
+                    )
                 }
+                .buttonStyle(.plain)
+
                 NavigationLink {
-                    DARNextOriginalWebView(title: "Quellen & Nachweise", path: "/q/")
+                    DuaView(repository: repository)
                 } label: {
-                    Label("Quellen und Originalnachweise", systemImage: "checkmark.seal")
+                    moreCard(
+                        title: "Duʿāʾ",
+                        subtitle: "Überlieferte Bittgebete mit Arabisch und Bedeutung",
+                        systemImage: "hands.sparkles.fill",
+                        tint: theme.emerald
+                    )
                 }
+                .buttonStyle(.plain)
+
                 NavigationLink {
-                    DARNextOriginalWebView(title: "Wissensbereich", path: "/lernen/wissen-adab/")
+                    LibraryView(repository: repository)
                 } label: {
-                    Label("Lernbereiche", systemImage: "books.vertical.fill")
+                    moreCard(
+                        title: "Bibliothek",
+                        subtitle: "Verifizierte Bücher und Publikationen",
+                        systemImage: "books.vertical.fill",
+                        tint: .indigo
+                    )
                 }
+                .buttonStyle(.plain)
+
                 NavigationLink {
-                    DARNextOriginalWebView(title: "TAWḤĪD KIDS", path: "/kids/")
+                    QuizView(repository: repository)
                 } label: {
-                    Label("Kinderinhalte im Web", systemImage: "figure.child")
+                    moreCard(
+                        title: "Wissensquiz",
+                        subtitle: "Freigegebene Fragen zum Lernen",
+                        systemImage: "questionmark.circle.fill",
+                        tint: .purple
+                    )
                 }
+                .buttonStyle(.plain)
+
+                NavigationLink {
+                    SearchView(repository: repository)
+                } label: {
+                    moreCard(
+                        title: "Globale Suche",
+                        subtitle: "Qurʾān, Beiträge, Duʿāʾ und Bibliothek",
+                        systemImage: "magnifyingglass",
+                        tint: .blue
+                    )
+                }
+                .buttonStyle(.plain)
+
+                appearanceCard
             }
-            Label("Offline-Bibliothek aktiv", systemImage: "internaldrive")
-            Label("Gebetszeiten benötigen Standortfreigabe", systemImage: "location")
-                .foregroundStyle(.secondary)
+            .padding(.horizontal, 18)
+            .padding(.top, 14)
+            .padding(.bottom, 110)
         }
+        .scrollIndicators(.hidden)
+        .background(theme.backgroundGradient.ignoresSafeArea())
         .navigationTitle("Mehr")
-    }
-}
-
-// Content bridge only: Keep DARNext's native shell and bundled offline material intact.
-// This view opens the complete, canonical website content in-app without copying
-// private data, publishing to visitors, or changing other Xcode targets.
-private struct DARNextOriginalWebView: View {
-    let title: String
-    let path: String
-    @State private var loadingError: String?
-
-    private var contentURL: URL {
-        URL(string: "https://dar-al-tawhid.de" + path)!
+        .toolbarColorScheme(.dark, for: .navigationBar)
     }
 
-    var body: some View {
-        VStack(spacing: 0) {
-            if let loadingError {
-                ContentUnavailableView(
-                    "Online-Inhalte nicht erreichbar",
-                    systemImage: "wifi.exclamationmark",
-                    description: Text(loadingError + "\nDeine lokalen DARNext-Bereiche bleiben offline verfügbar.")
-                )
-            } else {
-                DARNextWebsiteContainer(url: contentURL, loadingError: $loadingError)
+    private var appearanceCard: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Label("Erscheinungsbild", systemImage: "circle.lefthalf.filled")
+                .font(.headline)
+                .foregroundStyle(theme.cream)
+
+            Picker("Erscheinungsbild", selection: $appearanceModeRawValue) {
+                ForEach(DARAppearanceMode.allCases) { mode in
+                    Text(mode.title).tag(mode.rawValue)
+                }
             }
+            .pickerStyle(.menu)
+            .tint(theme.goldLight)
+            .accessibilityLabel("DARNext Erscheinungsbild")
         }
-        .navigationTitle(title)
-        .navigationBarTitleDisplayMode(.inline)
-    }
-}
-
-private struct DARNextWebsiteContainer: UIViewRepresentable {
-    let url: URL
-    @Binding var loadingError: String?
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-
-    func makeUIView(context: Context) -> WKWebView {
-        let configuration = WKWebViewConfiguration()
-        configuration.allowsInlineMediaPlayback = true
-        configuration.websiteDataStore = .default()
-        let webView = WKWebView(frame: .zero, configuration: configuration)
-        webView.navigationDelegate = context.coordinator
-        webView.scrollView.contentInsetAdjustmentBehavior = .never
-        webView.load(URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30))
-        return webView
-    }
-
-    func updateUIView(_ webView: WKWebView, context: Context) {
-        // Do not reload when SwiftUI updates; retain web navigation and playback.
-    }
-
-    final class Coordinator: NSObject, WKNavigationDelegate {
-        var parent: DARNextWebsiteContainer
-
-        init(_ parent: DARNextWebsiteContainer) {
-            self.parent = parent
+        .padding(16)
+        .background(.white.opacity(0.065), in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                .strokeBorder(.white.opacity(0.11), lineWidth: 1)
         }
+    }
 
-        func webView(
-            _ webView: WKWebView,
-            decidePolicyFor navigationAction: WKNavigationAction,
-            decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
-        ) {
-            guard let destination = navigationAction.request.url else {
-                decisionHandler(.cancel)
-                return
+    private func moreCard(title: String, subtitle: String, systemImage: String, tint: Color) -> some View {
+        HStack(spacing: 14) {
+            Image(systemName: systemImage)
+                .font(.system(size: 20, weight: .semibold))
+                .foregroundStyle(.white)
+                .frame(width: 48, height: 48)
+                .background(tint.opacity(0.82), in: Circle())
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.headline)
+                    .foregroundStyle(theme.cream)
+                Text(subtitle)
+                    .font(.subheadline)
+                    .foregroundStyle(theme.secondaryText)
+                    .lineLimit(2)
             }
-            if destination.scheme == "https",
-               ["dar-al-tawhid.de", "www.dar-al-tawhid.de"].contains(destination.host?.lowercased() ?? "") {
-                decisionHandler(.allow)
-            } else if navigationAction.navigationType == .linkActivated {
-                UIApplication.shared.open(destination)
-                decisionHandler(.cancel)
-            } else {
-                decisionHandler(.cancel)
-            }
-        }
 
-        func webView(
-            _ webView: WKWebView,
-            didFailProvisionalNavigation navigation: WKNavigation!,
-            withError error: Error
-        ) {
-            parent.loadingError = error.localizedDescription
+            Spacer()
+            Image(systemName: "chevron.right")
+                .font(.caption.weight(.bold))
+                .foregroundStyle(theme.secondaryText)
         }
-
-        func webView(
-            _ webView: WKWebView,
-            didFail navigation: WKNavigation!,
-            withError error: Error
-        ) {
-            parent.loadingError = error.localizedDescription
+        .padding(16)
+        .background(.white.opacity(0.065), in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                .strokeBorder(.white.opacity(0.11), lineWidth: 1)
         }
     }
 }
