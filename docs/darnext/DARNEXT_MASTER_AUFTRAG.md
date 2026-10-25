@@ -8,6 +8,20 @@
 
 > Dieser Auftrag ist die dauerhafte zentrale Spezifikation für den Xcode/Codex-Agenten. Lies vor jedem Eingriff `AGENTS.md`, die aktuellen Sperrdateien und diesen gesamten Auftrag. Nicht blind einen früheren lokalen Zustand mit `main` überschreiben.
 
+
+## V2 — ZWINGENDE 1:1-PARITÄT ALLER ERWACHSENEN-INHALTE (NEUE HÖCHSTE IMPLEMENTIERUNGSPRÜFUNG, 25.10.2026)
+
+**Dies ist keine neue parallele App-Planung.** Der bestehende Auftrag P0–P10 bleibt erhalten, wird aber um folgende **verbindliche Vollständigkeits-Gates** erweitert:
+
+1. **PARITAET_MASTER_V2.md vollständig lesen** und nach seinen Anforderungen **alle** vorhandenen Erwachsenen-App-Inhalte, -Unterseiten, -Funktionen und -Gestaltungsassets in DARNext **wirklich** nativ umsetzen. Jede dort dokumentierte zusätzliche P0-R–P10-R-Aufgabe ist Bestandteil dieses Masterauftrags.
+2. **PARITAETS_MATRIX.md vollständig lesen und dynamisch erweitern**: Diese enthält ein 50-Zeilen-Startinventar. Jedes vorhandene Erwachsenen-Untermodul und jede wichtige Unterroute ist erst fertig, wenn die zugehörige Matrixzeile mit echten Daten, Swift-Dateien, Interaktionen, Medien, Quellen, Geräten und Tests abgenommen ist. Die Liste ist **kein** Anspruch auf erschöpfende Inventur.
+3. **Lokal vorhandenen DARNext-Code schützen:** Laut STATUS.md wurden P0–P4 in Xcode bereits teilweise erfolgreich implementiert (7/7 Tests), aber native Frauen-/Ḥadīṯ-Reader, Tafsīr/Tadabbur, kompletter Inhalts-Payload, Sprach-/Device-Matrix und Push fehlen noch. Die native Implementierung liegt teilweise **nicht auf GitHub**. Vor weiterer Arbeit den echten Xcode-Stand inventarisieren, sichern und erst dann kontrolliert synchronisieren. Keine bereits umgesetzten SwiftUI-Funktionen ersetzen oder fiktive GitHub-Commits behaupten.
+4. **Visuals mit vollständiger Bedeutung übertragen:** bestehendes DĀR-Branding, Original-Logo, alle passenden 3D-Icons, Heros, bibliotheks-/frauenbezogene Bilder, Buchcover, arabische Typografie, Quellen, Reihenfolge, Social-/Share-/Audio-/PDF- und Lesefunktionen. Apples aktuellste geeignete SwiftUI-Navigation/Glass/Safe-Area-Konventionen als **native Hülle**, nicht als Ersatz für unsere Identität.
+5. **Zentrale Push-/Publikationslogik bleibt verbindlich:** ein Datensatz/ID, eine geprüfte Veröffentlichung, Verfügbarkeit in allen vorgesehenen Erwachsenen-Apps; Geräte-Push separat geschützt und freigabepflichtig. Reines Manifest-Caching ist **keine** nachgewiesene volle Payload-Synchronisation.
+6. **Keine voreilige Fertigmeldung:** Ein erfolgreicher Xcode-Build, 7/7 Tests, fünf Tabs oder ein Mockup sind **nicht** gleichbedeutend mit der verlangten 1:1-Inhalts- und Funktionsparität. Erst sämtliche Inventar-/Matrixabnahmen schließen den Gesamtauftrag.
+
+**Hier weiterlesen:** [PARITAET_MASTER_V2.md](PARITAET_MASTER_V2.md) · [PARITAETS_MATRIX.md](PARITAETS_MATRIX.md) · [STATUS.md](STATUS.md).
+
 ## 0. Oberste Leitregeln und Sicherheitsgrenzen
 
 - **Eine zentrale redaktionelle Quelle, viele eigenständige Oberflächen.** Die native DARNext-App darf keine konkurrierende separate Content-Zentrale erschaffen. Kanonische IDs, Quellnummern und Links (insbesondere `/q/<Nummer>/`) bleiben über die Erwachsenenspuren identisch.
