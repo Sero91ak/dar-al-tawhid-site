@@ -1,5 +1,11 @@
 # DARNext — Fortschrittsprotokoll
 
+## Ergänzter Umfang ab 25.10.2026 — 1:1-Inhaltsparität
+
+**Diese Dokumentationsänderung ist keine neue Xcode-Implementierung.** Neu verbindlich: [PARITAET_MASTER_V2.md](PARITAET_MASTER_V2.md) und [PARITAETS_MATRIX.md](PARITAETS_MATRIX.md). Der bereits dokumentierte P0–P10-Teilstand bleibt gültig, aber **vollständige Erwachsenen-App-Inhalts-/Funktionsparität ist ausdrücklich NICHT abgenommen**. Der nächste Agentenlauf muss den echten lokalen Xcode-Stand sichern, das vollständige dynamische Quellinventar ermitteln, die Matrix erweitern und nach jeder fehlenden DARNext-Implementierung Tests und konkrete Nachweise eintragen. Insbesondere bleiben Frauen-/Ḥadīṯ-, Tafsīr-/Tadabbur- und vollständige Payload-Sync-/Neunsprachen-/Push-/iPad-Punkte offen. Keine Änderung an produktiven Apps/Push-Spuren aus diesem Dokumentationsauftrag.
+
+
+
 Masterauftrag: [DARNEXT_MASTER_AUFTRAG.md](DARNEXT_MASTER_AUFTRAG.md)
 
 **Gesamtstand:** P0 bis P4 lokal implementiert/auditiert und getestet; P5 teilweise umgesetzt/auditiert; P6 auditiert; P7 Manifest-Synchronisierung lokal implementiert und getestet; P8 Deep-Link-Teil lokal implementiert/getestet, Push-Teil aus Sicherheitsgründen nur auditiert; P9 QA-Audit dokumentiert, offene Nachweise bleiben; P10 Übergabe vorbereitet, aber wegen offener Integrations- und Synchronisationspunkte nicht abgenommen.
