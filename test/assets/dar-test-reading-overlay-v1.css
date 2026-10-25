@@ -72,3 +72,17 @@ body.dar-test-reading-open{overflow:hidden!important}
 @media(prefers-reduced-motion:reduce){
  #darTestReadingOverlay,#darTestReadingOverlay .dar-test-reader-dialog{transition:none!important;transform:none!important}
 }
+
+/* Existing bibliography/PDF reader must stay *inside* the new dialog. */
+#darTestReadingOverlay .dar-test-reader-content:has(.lib-reader){position:relative;padding:0!important;overflow:hidden!important}
+#darTestReadingOverlay .lib-reader{
+  position:relative!important;inset:auto!important;z-index:1!important;
+  width:100%!important;height:100%!important;min-height:0!important;max-height:100%!important;
+  display:flex!important;flex-direction:column!important;overflow:hidden!important;
+}
+#darTestReadingOverlay .lib-reader-toolbar{padding-top:10px!important}
+#darTestReadingOverlay .lib-pdf-surface{
+  position:absolute!important;z-index:2!important;left:0!important;right:0!important;
+  bottom:0!important;max-height:100%!important;
+}
+#darTestReadingOverlay .lib-reader [data-library-reader-close]{display:none!important}
