@@ -1,0 +1,743 @@
+/**
+ * DĀR AL TAWḤĪD · Visitor-App · Adaptive navigation placement v1325
+ * One #bottomNav, three positions. Side rails use icons only and reserve their
+ * own layout space so reader/content never sits underneath the rail.
+ */
+
+html.dar-test-side-nav{
+  --dar-side-nav-size:70px;
+  --dar-side-nav-reserve:82px;
+}
+
+/* Side rail geometry. Inline ownership from the controller is repeated here
+   as a final visual authority, but no scrolling/layout calculations happen. */
+html.dar-test-side-nav #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav #bottomNav.bottom-nav{
+  position:fixed!important;
+  top:50%!important;
+  bottom:auto!important;
+  width:var(--dar-side-nav-size)!important;
+  min-width:var(--dar-side-nav-size)!important;
+  max-width:var(--dar-side-nav-size)!important;
+  height:min(390px,calc(100dvh - max(18px,env(safe-area-inset-top,0px)) - max(18px,env(safe-area-inset-bottom,0px))))!important;
+  min-height:292px!important;
+  max-height:390px!important;
+  margin:0!important;
+  padding:6px!important;
+  flex-direction:column!important;
+  justify-content:space-between!important;
+  align-items:stretch!important;
+  gap:2px!important;
+  border-radius:26px!important;
+  transform:translate3d(0,-50%,0)!important;
+  -webkit-transform:translate3d(0,-50%,0)!important;
+  z-index:80!important;
+  contain:paint!important;
+  touch-action:manipulation!important;
+  will-change:auto!important;
+  transition:
+    opacity .22s cubic-bezier(.22,1,.36,1),
+    background-color .22s ease,
+    border-color .22s ease!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="left"] #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="left"] #bottomNav.bottom-nav{
+  left:max(8px,env(safe-area-inset-left,0px))!important;
+  right:auto!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="right"] #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="right"] #bottomNav.bottom-nav{
+  left:auto!important;
+  right:max(8px,env(safe-area-inset-right,0px))!important;
+}
+
+html.dar-test-side-nav #bottomNav.bottom-nav.post-nav-hidden{
+  opacity:1!important;
+  pointer-events:auto!important;
+  transform:translate3d(0,-50%,0)!important;
+  -webkit-transform:translate3d(0,-50%,0)!important;
+}
+
+/* Five equal touch zones. Side placement intentionally removes labels. */
+html.dar-test-side-nav #bottomNav .bottom-nav-btn{
+  flex:1 1 0!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:auto!important;
+  min-height:50px!important;
+  max-height:72px!important;
+  margin:0!important;
+  padding:5px 2px!important;
+  gap:0!important;
+  border:0!important;
+  border-radius:17px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+  overflow:visible!important;
+  transition:
+    color .16s ease,
+    background-color .16s ease,
+    filter .16s ease!important;
+}
+
+html.dar-test-side-nav #bottomNav .bottom-nav-btn > span:last-child{
+  display:none!important;
+  visibility:hidden!important;
+  width:0!important;
+  height:0!important;
+  overflow:hidden!important;
+}
+
+html.dar-test-side-nav #bottomNav .bottom-nav-btn .nav-icon,
+html.dar-test-side-nav #bottomNav .bottom-nav-btn.active .nav-icon,
+html.dar-test-side-nav #bottomNav .bottom-nav-btn.is-pressed .nav-icon,
+html.dar-test-side-nav #bottomNav .bottom-nav-btn:active .nav-icon{
+  width:28px!important;
+  height:28px!important;
+  min-width:28px!important;
+  min-height:28px!important;
+  font-size:22px!important;
+  line-height:28px!important;
+  margin:auto!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+}
+
+html.dar-test-side-nav #bottomNav .bottom-nav-btn .nav-icon img.dar3d-icon{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  display:block!important;
+}
+
+html.dar-test-side-nav #bottomNav .bottom-nav-btn.active{
+  color:var(--gold2,#efd78e)!important;
+  background:color-mix(in srgb,var(--gold2,#efd78e) 10%,transparent)!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2,#efd78e) 18%,transparent)!important;
+}
+
+html.dar-test-side-nav #bottomNav .bottom-nav-btn:active,
+html.dar-test-side-nav #bottomNav .bottom-nav-btn.is-pressed{
+  color:var(--gold2,#efd78e)!important;
+  background:color-mix(in srgb,var(--gold2,#efd78e) 14%,transparent)!important;
+  filter:brightness(1.06)!important;
+}
+
+html.dar-test-side-nav #bottomNav .bottom-nav-pill,
+html.dar-test-side-nav #bottomNav::before,
+html.dar-test-side-nav #bottomNav::after{
+  display:none!important;
+}
+
+/* The rail owns real space. Full-page backgrounds still paint through body,
+   while all normal flow content stops before the navigation rail. */
+html.dar-test-side-nav body.has-bottom-nav{
+  box-sizing:border-box!important;
+  max-width:100vw!important;
+  padding-bottom:max(8px,env(safe-area-inset-bottom,0px))!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="left"] body.has-bottom-nav{
+  padding-left:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-left,0px))!important;
+  padding-right:0!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="right"] body.has-bottom-nav{
+  padding-right:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-right,0px))!important;
+  padding-left:0!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="left"] body.is-feed-fullscreen{
+  padding-left:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-left,0px))!important;
+  padding-right:0!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="right"] body.is-feed-fullscreen{
+  padding-right:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-right,0px))!important;
+  padding-left:0!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="left"] body.has-bottom-nav .float-actions{
+  left:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-left,0px))!important;
+  right:auto!important;
+  bottom:max(10px,env(safe-area-inset-bottom,0px))!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="right"] body.has-bottom-nav .float-actions{
+  right:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-right,0px))!important;
+  left:auto!important;
+  bottom:max(10px,env(safe-area-inset-bottom,0px))!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="left"] .qrc-context-bar--dock{
+  left:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-left,0px))!important;
+  right:auto!important;
+  bottom:max(8px,env(safe-area-inset-bottom,0px))!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="right"] .qrc-context-bar--dock{
+  right:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-right,0px))!important;
+  left:auto!important;
+  bottom:max(8px,env(safe-area-inset-bottom,0px))!important;
+}
+
+/* Handedness rule for existing master/detail layouts:
+   nav right -> selection stays left (default)
+   nav left  -> selection rail moves to the right. */
+html.dar-test-side-nav[data-dar-nav-position="left"][data-fold-dual="1"] .dar-fold[data-fold-mode="dual"]{
+  grid-template-columns:minmax(0,1fr) var(--fold-rail-current,280px)!important;
+  gap:var(--fold-gap,16px)!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="left"][data-fold-dual="1"] .dar-fold[data-fold-mode="dual"] > .dar-fold__pane{
+  grid-column:1!important;
+  grid-row:1!important;
+  padding-left:0!important;
+  padding-right:18px!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="left"][data-fold-dual="1"] .dar-fold[data-fold-mode="dual"] > .dar-fold__rail{
+  grid-column:2!important;
+  grid-row:1!important;
+  padding-left:14px!important;
+  padding-right:0!important;
+  background:linear-gradient(
+    90deg,
+    var(--fold-divider,color-mix(in srgb,var(--gold2,#efd78e) 28%,transparent)) 0,
+    transparent 1px,
+    transparent 100%
+  )!important;
+}
+
+/* Stable reader measure inside the content pane. Backgrounds may remain
+   full-width; text never stretches into an unreadable desktop line length. */
+html.dar-test-side-nav #appView :is(
+  .article,
+  .post-reader,
+  .post-body,
+  .dua-detail-box,
+  .quran-reader-shell,
+  .quran-ayah-list,
+  .lib-detail,
+  .qsrc-detail
+){
+  max-inline-size:min(100%,46rem)!important;
+  margin-inline:auto!important;
+  box-sizing:border-box!important;
+  min-width:0!important;
+}
+
+/* Quiet reading state: opacity only. Blur and geometry never animate. */
+html.dar-test-side-nav.dar-nav-reader-idle #bottomNav.bottom-nav{
+  opacity:.34!important;
+}
+
+html.dar-test-side-nav.dar-nav-reader-idle #bottomNav.bottom-nav:hover,
+html.dar-test-side-nav.dar-nav-reader-idle #bottomNav.bottom-nav:focus-within{
+  opacity:.96!important;
+}
+
+/* Settings: line-based, compact, theme-aware, no extra card chrome. */
+body.is-settings-route .dar-nav-position-settings{
+  width:100%!important;
+  max-width:none!important;
+  margin:24px 0 8px!important;
+  padding:18px 0 4px!important;
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--gold2,#efd78e) 24%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--text,currentColor)!important;
+}
+
+.dar-nav-position-kicker{
+  margin:0 0 7px;
+  color:var(--gold2,#efd78e);
+  font-size:10px;
+  line-height:1.2;
+  font-weight:850;
+  letter-spacing:.14em;
+}
+
+.dar-nav-position-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  min-width:0;
+}
+
+.dar-nav-position-head h3{
+  margin:0;
+  font-size:clamp(16px,2.2vw,20px);
+  line-height:1.2;
+  font-weight:850;
+  text-wrap:balance;
+}
+
+.dar-nav-position-head p{
+  margin:5px 0 0;
+  max-width:58ch;
+  color:var(--muted,currentColor);
+  font-size:12px;
+  line-height:1.45;
+}
+
+.dar-nav-position-options{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  margin-top:15px;
+}
+
+.dar-nav-position-options button{
+  appearance:none;
+  -webkit-appearance:none;
+  min-width:0;
+  min-height:66px;
+  padding:10px 8px 9px;
+  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 22%,transparent);
+  border-radius:16px;
+  background:color-mix(in srgb,var(--gold2,#efd78e) 3%,transparent);
+  color:var(--text,currentColor);
+  display:grid;
+  grid-template-columns:20px minmax(0,1fr);
+  grid-template-rows:auto auto;
+  column-gap:7px;
+  align-items:center;
+  text-align:left;
+  cursor:pointer;
+  box-shadow:none;
+}
+
+.dar-nav-position-options button strong{
+  min-width:0;
+  font-size:12px;
+  line-height:1.2;
+  font-weight:850;
+}
+
+.dar-nav-position-options button small{
+  grid-column:2;
+  color:var(--muted,currentColor);
+  font-size:9.5px;
+  line-height:1.2;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.dar-nav-position-options button.is-selected{
+  border-color:color-mix(in srgb,var(--gold2,#efd78e) 58%,transparent);
+  background:color-mix(in srgb,var(--gold2,#efd78e) 10%,transparent);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2,#efd78e) 12%,transparent);
+}
+
+.dar-nav-choice-mark{
+  grid-row:1 / span 2;
+  width:18px;
+  height:28px;
+  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 42%,transparent);
+  border-radius:6px;
+  position:relative;
+  opacity:.82;
+}
+
+.dar-nav-choice-mark::after{
+  content:"";
+  position:absolute;
+  background:var(--gold2,#efd78e);
+  border-radius:999px;
+  opacity:.8;
+}
+
+.dar-nav-choice-mark--left::after{
+  left:2px; top:4px; bottom:4px; width:3px;
+}
+
+.dar-nav-choice-mark--right::after{
+  right:2px; top:4px; bottom:4px; width:3px;
+}
+
+.dar-nav-choice-mark--bottom::after{
+  left:3px; right:3px; bottom:2px; height:3px;
+}
+
+.dar-nav-position-status{
+  margin:10px 0 0;
+  color:var(--muted,currentColor);
+  font-size:10.5px;
+  line-height:1.4;
+}
+
+@media(max-width:520px){
+  .dar-nav-position-options{
+    gap:6px;
+  }
+  .dar-nav-position-options button{
+    min-height:62px;
+    padding:9px 6px;
+    grid-template-columns:16px minmax(0,1fr);
+    column-gap:5px;
+    border-radius:14px;
+  }
+  .dar-nav-choice-mark{
+    width:15px;
+    height:25px;
+  }
+  .dar-nav-position-options button strong{font-size:11px}
+  .dar-nav-position-options button small{font-size:8.5px}
+}
+
+html.dar-test-side-nav.adaptive-keyboard-open #bottomNav.bottom-nav{
+  opacity:0!important;
+  pointer-events:none!important;
+}
+
+@media(prefers-reduced-motion:reduce){
+  html.dar-test-side-nav #bottomNav.bottom-nav,
+  html.dar-test-side-nav #bottomNav .bottom-nav-btn{
+    transition:none!important;
+  }
+}
+
+
+/* v1329 · LANDSCAPE/FOLD SIDE-RAIL AUTHORITY */
+html.dar-test-side-nav{
+  --dar-side-nav-size:60px!important;
+  --dar-side-nav-reserve:70px!important;
+}
+
+/* Rail sits at the physical edge, not inside the reader. */
+html.dar-test-side-nav[data-dar-nav-position="left"] #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="left"] #bottomNav.bottom-nav{
+  left:max(3px,calc(env(safe-area-inset-left,0px) - 36px))!important;
+  right:auto!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="right"] #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="right"] #bottomNav.bottom-nav{
+  left:auto!important;
+  right:max(3px,calc(env(safe-area-inset-right,0px) - 36px))!important;
+}
+
+html.dar-test-side-nav #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav #bottomNav.bottom-nav{
+  width:60px!important;
+  min-width:60px!important;
+  max-width:60px!important;
+  height:min(352px,calc(100dvh - max(12px,env(safe-area-inset-top,0px)) - max(12px,env(safe-area-inset-bottom,0px))))!important;
+  min-height:268px!important;
+  max-height:352px!important;
+  padding:4px!important;
+  gap:0!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  border-radius:22px!important;
+  pointer-events:auto!important;
+  z-index:96!important;
+  overflow:hidden!important;
+  contain:paint!important;
+  transform:translate3d(0,-50%,0)!important;
+  -webkit-transform:translate3d(0,-50%,0)!important;
+  transition:opacity .2s cubic-bezier(.22,1,.36,1)!important;
+}
+
+/* Every icon gets one centered, reliable touch target. */
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn{
+  display:grid!important;
+  place-items:center!important;
+  align-content:center!important;
+  justify-content:center!important;
+  flex:1 1 0!important;
+  width:52px!important;
+  min-width:52px!important;
+  max-width:52px!important;
+  min-height:48px!important;
+  max-height:66px!important;
+  margin:0!important;
+  padding:0!important;
+  line-height:1!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  -webkit-user-select:none!important;
+  user-select:none!important;
+  -webkit-tap-highlight-color:transparent!important;
+  overflow:hidden!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn > span:last-child{
+  display:none!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
+  display:grid!important;
+  place-items:center!important;
+  position:static!important;
+  inset:auto!important;
+  width:32px!important;
+  height:32px!important;
+  min-width:32px!important;
+  min-height:32px!important;
+  margin:0 auto!important;
+  padding:0!important;
+  line-height:32px!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{
+  display:block!important;
+  width:32px!important;
+  height:32px!important;
+  max-width:32px!important;
+  max-height:32px!important;
+  margin:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+  pointer-events:none!important;
+}
+
+/* The app surface ends before the side rail. No reader, image or PDF may
+   continue underneath it. */
+html.dar-test-side-nav body.has-bottom-nav{
+  width:100%!important;
+  max-width:100vw!important;
+  box-sizing:border-box!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="right"] body.has-bottom-nav{
+  padding-right:calc(var(--dar-side-nav-reserve) + max(0px,env(safe-area-inset-right,0px) - 36px))!important;
+  padding-left:0!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"] body.has-bottom-nav{
+  padding-left:calc(var(--dar-side-nav-reserve) + max(0px,env(safe-area-inset-left,0px) - 36px))!important;
+  padding-right:0!important;
+}
+html.dar-test-side-nav :is(#appRoot,#appShell,.app,#appView,#appView.view,.view){
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  box-sizing:border-box!important;
+}
+html.dar-test-side-nav body.is-quran-overview :is(.qov-page,.qov-shell,.quran-overview),
+html.dar-test-side-nav body.is-quran-reader-route :is(.qrc-page,.qrc-shell,.quran-reader-shell),
+html.dar-test-side-nav body.is-library-route :is(.lib-page,.library-shell,.books-library-shell){
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:0!important;
+  box-sizing:border-box!important;
+}
+html.dar-test-side-nav body.is-library-route .lib-page[data-library-root] .lib-hero{
+  width:100%!important;
+  max-width:100%!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  left:auto!important;
+  right:auto!important;
+  transform:none!important;
+}
+
+/* Active scrolling: fade only the rail. No blur, resizing or reflow. */
+html.dar-test-side-nav.dar-nav-scrolling #bottomNav.bottom-nav{
+  opacity:.20!important;
+}
+html.dar-test-side-nav:not(.dar-nav-scrolling) #bottomNav.bottom-nav{
+  opacity:.94!important;
+}
+html.dar-test-side-nav.dar-nav-reader-idle #bottomNav.bottom-nav{
+  opacity:.94!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav:hover,
+html.dar-test-side-nav #bottomNav.bottom-nav:focus-within{
+  opacity:1!important;
+}
+
+
+/* v1330 · FINAL SIDE-RAIL GEOMETRY + CONTENT RESERVE */
+html.dar-test-side-nav{
+  --dar-side-nav-size:56px!important;
+  --dar-side-nav-reserve:66px!important;
+}
+
+/* Physical-edge placement. */
+html.dar-test-side-nav[data-dar-nav-position="left"] #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="left"] #bottomNav.bottom-nav{
+  left:max(2px,calc(env(safe-area-inset-left,0px) - 38px))!important;
+  right:auto!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="right"] #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="right"] #bottomNav.bottom-nav{
+  left:auto!important;
+  right:max(2px,calc(env(safe-area-inset-right,0px) - 38px))!important;
+}
+
+html.dar-test-side-nav #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav #bottomNav.bottom-nav{
+  width:56px!important;
+  min-width:56px!important;
+  max-width:56px!important;
+  height:min(340px,calc(100dvh - max(10px,env(safe-area-inset-top,0px)) - max(10px,env(safe-area-inset-bottom,0px))))!important;
+  min-height:260px!important;
+  max-height:340px!important;
+  padding:4px!important;
+  border-radius:20px!important;
+  align-items:center!important;
+  overflow:hidden!important;
+  opacity:.94!important;
+}
+
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn{
+  width:48px!important;
+  min-width:48px!important;
+  max-width:48px!important;
+  min-height:46px!important;
+  max-height:64px!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:0!important;
+  margin:0!important;
+  border-radius:15px!important;
+  overflow:hidden!important;
+}
+
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
+  width:30px!important;
+  height:30px!important;
+  min-width:30px!important;
+  min-height:30px!important;
+  line-height:30px!important;
+  margin:0!important;
+  display:grid!important;
+  place-items:center!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{
+  width:30px!important;
+  height:30px!important;
+  max-width:30px!important;
+  max-height:30px!important;
+  margin:0!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+}
+
+/* Reserve real app width for the rail. Never paint reader/content underneath. */
+html.dar-test-side-nav[data-dar-nav-position="right"] body.has-bottom-nav{
+  padding-right:calc(var(--dar-side-nav-reserve) + max(0px,env(safe-area-inset-right,0px) - 38px))!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"] body.has-bottom-nav{
+  padding-left:calc(var(--dar-side-nav-reserve) + max(0px,env(safe-area-inset-left,0px) - 38px))!important;
+}
+html.dar-test-side-nav body.has-bottom-nav > :is(.app,#appRoot,#appShell),
+html.dar-test-side-nav body.has-bottom-nav #appView{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+
+/* Scroll state affects opacity only. */
+html.dar-test-side-nav.dar-nav-scrolling #bottomNav.bottom-nav{
+  opacity:.18!important;
+}
+html.dar-test-side-nav:not(.dar-nav-scrolling) #bottomNav.bottom-nav{
+  opacity:.94!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav:is(:hover,:focus-within){
+  opacity:1!important;
+}
+
+
+/* v1331 · FIXED READER CHROME SAFE-LANE */
+html.dar-test-side-nav{
+  --dar-side-nav-reserve:76px!important;
+  --dar-side-content-gap:12px!important;
+}
+
+/* Give every normal route a visible gap before the side rail. */
+html.dar-test-side-nav[data-dar-nav-position="right"] #appView{
+  padding-right:var(--dar-side-content-gap)!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"] #appView{
+  padding-left:var(--dar-side-content-gap)!important;
+}
+
+/* Fixed Qurʾān reader chrome must respect the side rail as well; body padding
+   cannot constrain fixed-position UI. */
+html.dar-test-side-nav[data-dar-nav-position="right"] body.is-quran-reader-route .qrc-chrome{
+  left:0!important;
+  right:calc(var(--dar-side-nav-reserve) + var(--dar-side-content-gap))!important;
+  width:auto!important;
+  max-width:none!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"] body.is-quran-reader-route .qrc-chrome{
+  left:calc(var(--dar-side-nav-reserve) + var(--dar-side-content-gap))!important;
+  right:0!important;
+  width:auto!important;
+  max-width:none!important;
+}
+
+/* The reader's floating context dock is centered inside the usable content
+   surface instead of the physical viewport. */
+html.dar-test-side-nav[data-dar-nav-position="right"] body.is-quran-reader-route .qrc-context-bar,
+html.dar-test-side-nav[data-dar-nav-position="right"] body.is-quran-reader-route .qrc-context-bar.qrc-context-bar--dock{
+  left:calc(50% - (var(--dar-side-nav-reserve) + var(--dar-side-content-gap))/2)!important;
+  right:auto!important;
+  width:min(760px,calc(100vw - var(--dar-side-nav-reserve) - var(--dar-side-content-gap) - 28px))!important;
+  max-width:min(760px,calc(100vw - var(--dar-side-nav-reserve) - var(--dar-side-content-gap) - 28px))!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  transform:translate(-50%,0)!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"] body.is-quran-reader-route .qrc-context-bar,
+html.dar-test-side-nav[data-dar-nav-position="left"] body.is-quran-reader-route .qrc-context-bar.qrc-context-bar--dock{
+  left:calc(50% + (var(--dar-side-nav-reserve) + var(--dar-side-content-gap))/2)!important;
+  right:auto!important;
+  width:min(760px,calc(100vw - var(--dar-side-nav-reserve) - var(--dar-side-content-gap) - 28px))!important;
+  max-width:min(760px,calc(100vw - var(--dar-side-nav-reserve) - var(--dar-side-content-gap) - 28px))!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  transform:translate(-50%,0)!important;
+}
+
+/* Qurʾān mini-player / reader dock uses the same usable lane when visible. */
+html.dar-test-side-nav[data-dar-nav-position="right"] body.is-quran-reader-route #darQuranMiniPlayer{
+  left:0!important;
+  right:calc(var(--dar-side-nav-reserve) + var(--dar-side-content-gap))!important;
+  width:auto!important;
+  max-width:none!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"] body.is-quran-reader-route #darQuranMiniPlayer{
+  left:calc(var(--dar-side-nav-reserve) + var(--dar-side-content-gap))!important;
+  right:0!important;
+  width:auto!important;
+  max-width:none!important;
+}
+
+/* Keep the reader body visually centred in the usable surface. */
+html.dar-test-side-nav body.is-quran-reader-route .qrc-body{
+  margin-left:auto!important;
+  margin-right:auto!important;
+  max-width:min(100%,58rem)!important;
+}
+
+/* Articles and contribution detail pages get a calm reading measure and a
+   small safety gap from the global side rail. */
+html.dar-test-side-nav body:is(.is-post-route,.is-news-detail-route) :is(
+  .article,.post-reader,.post-body,.post-detail,.news-detail
+){
+  width:100%!important;
+  max-inline-size:min(100%,52rem)!important;
+  margin-inline:auto!important;
+  box-sizing:border-box!important;
+}
