@@ -1,0 +1,28 @@
+name: KIDS Home Quiz Entry v1450
+on:
+  pull_request:
+    paths:
+      - 'kids/quiz-library.js'
+      - 'kids/quiz-library.css'
+      - 'kids/index.html'
+      - 'kids/start.html'
+      - 'kids/shell.html'
+      - 'kids/sw.js'
+      - 'kids/version.json'
+      - 'kids/tools/test-quiz-home-entry-v1450.cjs'
+      - '.github/workflows/kids-quiz-home-entry-v1450.yml'
+permissions:
+  contents: read
+jobs:
+  quiz-home-tap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify quiz button, modal open, cache parity and age bands
+        run: |
+          node --check kids/quiz-library.js
+          node --check kids/sw.js
+          node kids/tools/test-quiz-home-entry-v1450.cjs
