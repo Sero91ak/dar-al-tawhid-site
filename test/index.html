@@ -29213,6 +29213,9 @@ function darTestReadingClose(){
   document.getElementById("darTestReadingOverlay")?.remove();
   document.body.classList.remove("dar-test-reading-open");
   const host=$("appView");if(host)host.inert=!!state.wasInert;
+  if(state.lastView==="bibliothek-reader"&&window.DARLibraryApp){
+    try{DARLibraryApp.bindLibrary(state.origin)}catch(e){console.warn("DAR TEST library cleanup",e)}
+  }
   window.__pageNavDir=null;window.__smoothNav=false;
   requestAnimationFrame(()=>{
     try{window.scrollTo({top:state.scrollY,behavior:"instant"})}catch(e){window.scrollTo(0,state.scrollY)}
@@ -29251,7 +29254,14 @@ function darTestReadingMount(html){
     const host=$("appView");if(host)host.inert=true;
   }
   const pane=overlay.querySelector("#darTestReadingBody");
-  if(pane){pane.innerHTML=html;pane.scrollTop=0}
+  const sameReader=darTestReadingState.lastRoute===routeSig(currentRoute);
+  const priorY=sameReader?pane?.scrollTop||0:0;
+  if(pane){pane.innerHTML=html;pane.scrollTop=priorY}
+  darTestReadingState.lastView=currentRoute.view;
+  darTestReadingState.lastRoute=routeSig(currentRoute);
+  const contentTitle=pane?.querySelector("h1,h2,.lib-reader-titlebar,h3");
+  const label=overlay.querySelector("#darTestReadingTitle");
+  if(contentTitle&&label)label.textContent="DĀR AL TAWḤĪD · "+String(contentTitle.textContent||"").trim().slice(0,100);
   if(first)requestAnimationFrame(()=>{overlay?.classList.add("is-visible");overlay?.querySelector(".dar-test-reader-x")?.focus({preventScroll:true})});
   else overlay.classList.add("is-visible");
 }
