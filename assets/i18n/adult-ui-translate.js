@@ -6,6 +6,8 @@
 (function(global){"use strict";
 if(/^\/test(?:\/|$)/.test(global.location.pathname)||global.DARAdultUI18n)return;
 const KEY="darAdultPreferredLocaleV1",URI="/assets/i18n/adult-ui-de-tr.json";
+// Turkish interface pack is retained for internal testing, not released to visitors.
+const VISITOR_RELEASED_LOCALES=new Set(["de"]);
 const catalog=new Map(),originalTexts=new WeakMap(),originalAttributes=new WeakMap();
 const deny="script,style,noscript,textarea,pre,code,[contenteditable],[data-dar-no-translate],"+
  "[lang='ar'],[dir='rtl'],[data-canonical-content],[class*='quran-arabic'],"+
@@ -14,7 +16,7 @@ const deny="script,style,noscript,textarea,pre,code,[contenteditable],[data-dar-
  "[class*='qsource-statement'],[class*='hadith-narration'],[class*='dua-arabic']";
 const attrs=["placeholder","aria-label","title"];
 let state="pending",queued=false;
-function locale(){try{return global.localStorage.getItem(KEY)==="tr"?"tr":"de"}catch(_){return"de"}}
+function locale(){try{const stored=global.localStorage.getItem(KEY)||"de";return VISITOR_RELEASED_LOCALES.has(stored)?stored:"de"}catch(_){return"de"}}
 function excluded(el){return !!(el&&typeof el.closest==="function"&&el.closest(deny))}
 function translate(value){
  if(typeof value!=="string")return null;
@@ -96,7 +98,7 @@ function schedule(){
  else Promise.resolve().then(fn);
 }
 function setLocale(code){
- if(code!=="de"&&code!=="tr")return false;
+ if(!VISITOR_RELEASED_LOCALES.has(code))return false;
  try{global.localStorage.setItem(KEY,code)}catch(_){}
  global.dispatchEvent(new CustomEvent("dar-adult-locale-changed",{detail:{locale:code}}));
  schedule();return true;
@@ -143,7 +145,7 @@ function boot(){
   script.onerror=()=>{global.__DAR_LANGUAGE_PICKER_LOADING=false};
   global.document.head?.appendChild(script);
  }
- load();mountSettingsChooser();
+ if(VISITOR_RELEASED_LOCALES.has("tr"))load();mountSettingsChooser();
  if(global.MutationObserver&&global.document.body)new MutationObserver(()=>schedule())
   .observe(global.document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:attrs});
  schedule();
