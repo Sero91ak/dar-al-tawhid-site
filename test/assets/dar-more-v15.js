@@ -5,7 +5,7 @@
 if(!window.DARAdultLanguagePickerV1&&!window.__DAR_LANGUAGE_PICKER_LOADING){
  window.__DAR_LANGUAGE_PICKER_LOADING=true;
  const picker=document.createElement("script");
- picker.src="/assets/i18n/adult-language-picker-v1.js?v=20261022-01";
+ picker.src="/assets/i18n/adult-language-picker-v1.js?v=20261022-header-locale-gate-v1";
  picker.async=true;
  picker.onerror=()=>{window.__DAR_LANGUAGE_PICKER_LOADING=false};
  (document.head||document.documentElement).appendChild(picker);

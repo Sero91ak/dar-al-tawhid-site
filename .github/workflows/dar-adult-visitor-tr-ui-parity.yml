@@ -1,4 +1,4 @@
-name: DAR Adult Visitor Turkish UI Parity
+name: DAR Adult Visitor Locale Release Gate
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  visitor-ui-tr:
+  adult-locale-release:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -45,5 +45,5 @@ jobs:
           python3 -m pip install --quiet selenium
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-visitor-ui.log 2>&1 &
           sleep 3
-      - name: Test live-style More, Settings and German/Turkish round trip in Chrome
+      - name: Test visitor German-only and staged Turkish selection in Chrome
         run: python3 assets/i18n/visitor-tr-ui-smoke.py

@@ -33,5 +33,50 @@ assert.ok(!sw.includes("caches.delete(CACHE_VERSION)"),"PWA erases saved offline
 assert.ok(picker.includes("Demnächst verfügbar")&&picker.includes("available(code)"),"Unreleased language fallback missing");
 for(const path of ["index.html","assets/dar-more-v15.js","assets/i18n/adult-ui-translate.js","assets/i18n/adult-language-picker-v1.js","pwa/service-worker.js"])
   assert.ok(fs.existsSync(path),"Missing required visitor/PWA asset: "+path);
-new Function(sw);new Function(picker);
-console.log("PASS adult visitor / Android PWA shared locale, 9 languages, offline-safe update.");
+const testIndex=read("test/index.html");
+assert.ok(testIndex.includes('id="darTestAdultBrandHeaderShortcutV1"')&&
+ testIndex.includes('id="darTestAdultBrandHeaderShortcutStyleV1"'),
+ "DAR TEST /test/ must actually load the same interactive header as visitor mobile/PWA");
+assert.ok(root.includes('id="darAdultGlobalBrandStyleV2"')&&root.includes('id="darAdultGlobalBrandScriptV2"'),
+ "Adult visitor web-app root must load header even without native/PWA UA");
+const headerJs=read("assets/dar-adult-brand-header-v2.js");
+const headerCss=read("assets/dar-adult-brand-header-v2.css");
+const vm=require("node:vm");
+assert.ok(headerJs.includes('paletteTrigger.insertAdjacentHTML("beforebegin"')&&
+ headerJs.includes('class="dtbh-shortcut dtbh-language-shortcut"')&&
+ headerJs.includes('class="dtbh-shortcut dtbh-account-shortcut"'),
+ "Header order must be language, account, existing palette");
+assert.ok(headerCss.includes("DAR_ADULT_HEADER_SHORTCUTS_V1")&&
+ headerCss.includes("grid-template-columns:40px minmax(0,1fr) repeat(3,39px)"),
+ "Narrow-device three-button header grid is missing");
+assert.ok(router.includes("dar-adult-brand-header-v2.js?v=20261022-header-shortcuts-v1"),
+ "iOS/PWA header script was not cache-busted");
+assert.ok(translate.includes('RELEASED_UI_LOCALES=new Set(["de"])')&&
+ translate.includes('if(!RELEASED_UI_LOCALES.has(code))return false'),
+ "Unreviewed Turkish visitor translation must be released explicitly");
+assert.ok(picker.includes('if(!TEST)return false')&&
+ picker.includes('ITEMS.filter(function(l){return available(l.code)}'),
+ "Visitor picker must hide unreleased languages");
+function mockPicker(path,chosen,runtime){
+ const sandbox={
+  window:{location:{pathname:path},localStorage:{getItem:()=>chosen},
+   DarTestTurkishUI:runtime,__DarTestSevenLocalesReady:true,addEventListener(){}},
+  document:{readyState:"loading",addEventListener(){}}
+ };
+ vm.runInNewContext(picker,sandbox,{timeout:1500});
+ return sandbox.window.DARAdultLanguagePickerV1;
+}
+const ready={
+ supportedLocales:["de","tr","en","ar","ku","ckb","bs","fr","es"],
+ translatedKeys:167,translatedFor:(code)=>code==="de"?0:167
+};
+const guest=mockPicker("/pwa/","tr",ready),visitor=mockPicker("/","tr",ready),test=mockPicker("/test/","tr",ready);
+for(const current of [guest,visitor]){
+ assert.equal(current.read(),"de","Public language state must fall back to German");
+ for(const code of langs.filter(l=>l!=="de"))
+  assert.equal(current.available(code),false,"Unreleased visitor language visible: "+code);
+}
+assert.equal(test.read(),"tr","Staged Turkish must remain usable in DAR TEST");
+assert.equal(test.available("en"),true,"Loaded test language pack must remain selectable");
+new Function(sw);new Function(picker);new Function(headerJs);new Function(translate);
+console.log("PASS adult header language/account/palette + TEST-only non-German + visitor/PWA German gate.");
