@@ -3,6 +3,7 @@
 const assert=require("node:assert/strict"),fs=require("node:fs"),path=require("node:path"),vm=require("node:vm");
 const ui=fs.readFileSync(path.join(__dirname,"../assets/dar-test-turkish-ui.js"),"utf8");
 const pack=JSON.parse(fs.readFileSync(path.join(__dirname,"adult-ui-locales-seven.json"),"utf8"));
+const ninePack=JSON.parse(fs.readFileSync(path.join(__dirname,"adult-ui-locales-nine-v8.json"),"utf8"));
 const titles=JSON.parse(fs.readFileSync(path.join(__dirname,"adult-visible-title-drafts-seven.json"),"utf8"));
 const EXPECTED=["de","tr","en","ar","ku","ckb","bs"];
 for(const locale of EXPECTED.slice(1)){
@@ -41,7 +42,7 @@ const w={location:{pathname:"/test/"},document:doc,NodeFilter:{SHOW_ELEMENT:1,SH
  localStorage:{getItem:()=>lng},addEventListener:()=>{}};
 vm.runInNewContext(ui,{window:w});
 const runtime=w.DarTestTurkishUI;
-assert(runtime.registerLocaleData(pack));
+assert(runtime.registerLocaleData(ninePack));
 assert(runtime.registerTitleData(titles));
 assert.equal(runtime.localizedDraftTitleCount,Object.keys(titles.records).length);
 for(const locale of EXPECTED){

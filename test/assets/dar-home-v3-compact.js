@@ -34,7 +34,7 @@ const LINKS=[
 const esc=x=>String(x==null?"":x).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 
 const LANGUAGE_KEY="darAdultPreferredLocaleV1";
-const LANGUAGE_CHOICES=[["de","Deutsch"],["tr","Türkçe"],["en","English"],["ar","العربية"],["ku","Kurmancî"],["ckb","سۆرانی"],["bs","Bosanski"]];
+const LANGUAGE_CHOICES=[["de","Deutsch"],["tr","Türkçe"],["en","English"],["ar","العربية"],["ku","Kurmancî"],["ckb","سۆرانی"],["bs","Bosanski"],["fr","Français"],["es","Español"]];
 const LANGUAGE_CODES=new Set(LANGUAGE_CHOICES.map(x=>x[0]));
 function currentLanguage(){try{return LANGUAGE_CODES.has(localStorage.getItem(LANGUAGE_KEY))?localStorage.getItem(LANGUAGE_KEY):"de"}catch(_){return"de"}}
 function syncLanguageButtons(){
