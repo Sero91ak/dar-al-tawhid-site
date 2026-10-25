@@ -8695,6 +8695,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-23T23:59:00.000Z"
+    },
+    {
+      "id": "dar-next-knowledge-hub-test-20261023",
+      "at": "2026-10-23T15:40:00+02:00",
+      "approvedBy": "user-explicit-dar-test-ui-ai-dashboard-modernization-20261023",
+      "reason": "Isolated DAR TEST only: one responsive 3D hero, 19 existing navigation targets, Majlis al-Ilm chat appearance and command palette. Preserve all existing data, content, source links, language engine, prayer logic, Push, workers, service workers and live visitor/Kids files.",
+      "paths": [
+        "test/index.html",
+        "test/assets/dar-next-dashboard-v1.css",
+        "test/assets/dar-next-dashboard-v1.js",
+        "test/tests/dar-next-dashboard-v1.test.cjs"
+      ],
+      "expiresAt": "2026-11-06T23:59:00+01:00"
     }
   ],
   "enabled": true
