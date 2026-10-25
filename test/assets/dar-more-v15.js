@@ -159,3 +159,12 @@ const obs=new MutationObserver(()=>{const root=document.querySelector("."+rootCl
 document.addEventListener("DOMContentLoaded",function(){const x=document.getElementById("appView");if(x)obs.observe(x,{childList:true,subtree:false});sync();});
 window.DAR_MORE_V15={render,version:"1.5",sync};
 })();
+/* Load isolated adult DE/TR locale controls on DAR TEST only. */
+(function(){
+ if(window.__darAdultLanguageUiLoaderV1)return;
+ window.__darAdultLanguageUiLoaderV1=true;
+ var script=document.createElement("script");
+ script.src="/test/assets/dar-adult-language-ui-v1.js?v=1";
+ script.async=true;
+ document.head.appendChild(script);
+})();
