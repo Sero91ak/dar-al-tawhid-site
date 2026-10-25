@@ -1,0 +1,89 @@
+name: DAR TR Single Manuscript API Smoke
+
+on:
+  push:
+    branches:
+      - feature/tr-api-one-draft-smoke-20261021
+    paths:
+      - '.github/workflows/dar-tr-single-manuscript-smoke.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test-one-translation:
+    if: ${{ github.run_attempt == 1 }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    concurrency:
+      group: dar-tr-single-manuscript-smoke
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify core and identify exactly one pending Turkish post
+        id: selected
+        shell: bash
+        run: |
+          set -euo pipefail
+          node desktop-preview/i18n-core-v1/validate-core.cjs
+          node desktop-preview/i18n-core-v1/translation-worklist.cjs --out "$RUNNER_TEMP/worklist.json"
+          export WORKLIST="$RUNNER_TEMP/worklist.json"
+          chosen="$(node - <<'NODE'
+          const fs=require('node:fs');
+          const inv=JSON.parse(fs.readFileSync(process.env.WORKLIST,'utf8'));
+          const index=new Map(inv.items.map(item=>[item.id,item]));
+          const pending=inv.queue.find(q=>{
+            const item=index.get(q.id);
+            return q.kind==='post' && q.locale==='tr' && q.state==='pending' &&
+              item && !item.immutable?.sourceReviewBlocked &&
+              JSON.stringify(item.fields).length<2200 &&
+              !fs.existsSync(q.translationPath);
+          });
+          if(!pending)process.exit(3);
+          process.stdout.write(pending.id);
+          NODE
+          )"
+          test -n "$chosen"
+          echo "item_id=$chosen" >>"$GITHUB_OUTPUT"
+          echo "Selected one missing Turkish manuscript: $chosen"
+      - name: Generate one unapproved Turkish manuscript through OpenAI
+        env:
+          DAR_I18N_AI_API_KEY: ${{ secrets.DAR_I18N_AI_API_KEY }}
+          DAR_I18N_AI_API_URL: https://api.openai.com/v1/chat/completions
+          DAR_I18N_AI_MODEL: gpt-4.1
+          DAR_I18N_PROVIDER_APPROVED: 'yes'
+          ITEM_ID: ${{ steps.selected.outputs.item_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${DAR_I18N_AI_API_KEY:-}" || { echo "::error::Missing API key secret"; exit 1; }
+          node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs \
+            --generate --inventory "$RUNNER_TEMP/worklist.json" \
+            --output "$RUNNER_TEMP/generated-drafts" \
+            --max-requests 1 --max-source-chars 2200 --max-output-tokens 3200 \
+            --locale tr --kind post --id "$ITEM_ID"
+          node - <<'NODE'
+          const fs=require('node:fs'),path=require('node:path'),root=process.env.RUNNER_TEMP+'/generated-drafts';
+          const stack=[root];let drafts=[];
+          while(stack.length){const d=stack.pop();if(!fs.existsSync(d))continue;
+            for(const item of fs.readdirSync(d,{withFileTypes:true})){const full=path.join(d,item.name);
+              if(item.isDirectory())stack.push(full);
+              else if(item.name.endsWith('.json'))drafts.push(full);
+            }}
+          if(drafts.length!==1)throw Error('Expected exactly one unapproved Turkish manuscript, got '+drafts.length);
+          const record=JSON.parse(fs.readFileSync(drafts[0],'utf8'));
+          if(record.locale!=='tr'||record.status!=='draft'||record.reviewer!==null)throw Error('Unexpected review status');
+          console.log('PASS: exactly one draft, source ID '+record.id+', model '+record.model);
+          console.log('Usage '+JSON.stringify(record.modelUsage||{}));
+          NODE
+      - name: Keep manuscript as review-only artifact, never publish
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-tr-single-manuscript-unapproved
+          path: ${{ runner.temp }}/generated-drafts/
+          retention-days: 7
+          if-no-files-found: warn
