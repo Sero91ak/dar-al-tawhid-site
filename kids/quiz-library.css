@@ -381,3 +381,21 @@
     scroll-padding-bottom:calc(94px + env(safe-area-inset-bottom,0px))!important;
   }
 }
+
+/* KIDS_QUIZ_HOME_ENTRY_V1450 – always tappable and above decorative artwork. */
+#view-today #openQuizButton.choice.quiz{
+  position:relative!important;
+  z-index:45!important;
+  touch-action:manipulation!important;
+  pointer-events:auto!important;
+}
+#view-today #openQuizButton.choice.quiz::before,
+#view-today #openQuizButton.choice.quiz::after{
+  pointer-events:none!important;
+}
+#quizModal.modal.open{
+  display:block!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+  z-index:220!important;
+}
