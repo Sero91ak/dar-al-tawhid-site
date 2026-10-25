@@ -29200,7 +29200,7 @@ function darTestReadingRoute(route){
 function darTestReadingCanStart(to,from){
   const host=$("appView");
   if(!darTestReadingRoute(to)||!from||routeEqual(to,from)||!host?.firstElementChild||!window.__lastRenderSig)return false;
-  if(["quran-surah","quran-player","quran-topic"].includes(from.view))return false;
+  if(["quran-surah","quran-player","quran-topic","post","dua","bibliothek-reader"].includes(from.view))return false;
   if(to.view==="post"&&!posts.some(p=>String(p.id)===String(to.value)))return false;
   if(to.view==="dua"&&!DUAS.some(d=>String(d.id)===String(to.value)))return false;
   if(to.view==="hadith"&&!findHadithById(String(to.value).split("/").pop()))return false;
@@ -29411,12 +29411,14 @@ function render(){
     if(currentRoute.view==="home"){loadPopularPostsBlock();hydrateHomeDiscoverLibrary()}
     if(currentRoute.view==="home"&&window.DAR_FOCUS_FEED){(window.DAR_FOCUS_FEED.onAppReady||window.DAR_FOCUS_FEED.refresh).call(window.DAR_FOCUS_FEED,{force:true})}
     if(currentRoute.view==="feed"){const pfMount=document.getElementById("premiumFeedMount");if(pfMount&&!pfMount.querySelector(".sf-app"))initPremiumFeedTab(true)}
-    else if(window.DAR_PREMIUM_FEED&&typeof window.DAR_PREMIUM_FEED.destroy==="function")window.DAR_PREMIUM_FEED.destroy();
+    else if(!(darTestReadingState&&darTestReadingState.origin.view==="feed")&&window.DAR_PREMIUM_FEED&&typeof window.DAR_PREMIUM_FEED.destroy==="function")window.DAR_PREMIUM_FEED.destroy();
     if(currentRoute.view==="zakat"&&window.DARZakatApp){
       window.DARZakatApp.bindZakat();
       if(!window.__zakatConfigReady){window.DARZakatApp.ensureZakatReady().then(()=>{window.__zakatConfigReady=true;if(readRoute().view==="zakat")render()})}
     }
-    if(["bibliothek","bibliothek-detail","bibliothek-reader"].includes(currentRoute.view)&&window.DARLibraryApp){
+    if(darTestReadingState&&currentRoute.view==="bibliothek-reader"&&window.DARLibraryApp){
+      window.DARLibraryApp.bindLibrary(currentRoute);
+    }else if(["bibliothek","bibliothek-detail","bibliothek-reader"].includes(currentRoute.view)&&window.DARLibraryApp){
       const libRoute={...currentRoute};
       window.DARLibraryApp.bindLibrary(libRoute);
       const foldDual=darUseMasterDetail();
