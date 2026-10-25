@@ -1172,15 +1172,24 @@
     const root = getReaderRoot();
     if (!root) return null;
     let stage = document.getElementById("darLibraryPdfSurface");
+    const premiumReader = document.getElementById("darTestReadingOverlay");
+    const premiumPane = premiumReader?.querySelector("#darTestReadingBody");
     if (!stage) {
       stage = document.createElement("div");
       stage.id = "darLibraryPdfSurface";
       stage.className = "lib-pdf-surface";
       stage.innerHTML = '<div class="lib-reader-msg">PDF wird geladen…</div>';
+    }
+    if (premiumPane) {
+      if (stage.parentElement !== premiumPane) premiumPane.appendChild(stage);
+    } else if (stage.parentElement !== document.body) {
       document.body.appendChild(stage);
     }
     const toolbar = root.querySelector(".lib-reader-toolbar");
-    const top = Math.max(48, Math.ceil(toolbar?.getBoundingClientRect().bottom || 56));
+    const screenTop = Math.max(48, Math.ceil(toolbar?.getBoundingClientRect().bottom || 56));
+    const top = premiumPane
+      ? Math.max(0, screenTop - premiumPane.getBoundingClientRect().top)
+      : screenTop;
     stage.style.top = `${top}px`;
     stage.style.left = "0px";
     stage.style.right = "0px";
