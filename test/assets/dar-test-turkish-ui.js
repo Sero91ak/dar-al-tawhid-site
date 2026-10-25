@@ -270,7 +270,7 @@ function registerLocaleData(pack){
    Existing reviewed manual phrases take precedence; Arabic/source text excluded below. */
 const manualKeys=new Set(dictionary.keys());
 let remoteCatalogState="not-loaded";
-const CATALOG_PATH="/test/i18n/ui-tr.generated.json";
+const CATALOG_PATH="/assets/i18n/adult-ui-de-tr.json";
 function catalogSafe(de,tr){
  if(typeof de!=="string"||typeof tr!=="string")return false;
  if(de.trim()!==de||tr.trim()!==tr||de.length<2||de.length>180||tr.length<1||tr.length>220)return false;
@@ -287,7 +287,7 @@ async function loadCatalog(fetcher=global.fetch?.bind(global)){
   if(!response?.ok)throw Error("Catalog unavailable");
   const data=await response.json();
   if(data?.schemaVersion!==1||data.locale!=="tr"||data.sourceLocale!=="de"||
-     data.scope!=="adult-test-ui-only"||!data.entries||typeof data.entries!=="object"||
+     data.scope!=="adult-interface-only"||!data.entries||typeof data.entries!=="object"||
      Array.isArray(data.entries))throw Error("Invalid UI catalog");
   let added=0;
   for(const [de,tr] of Object.entries(data.entries)){
