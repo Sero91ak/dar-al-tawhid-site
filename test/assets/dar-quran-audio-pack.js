@@ -356,6 +356,9 @@
   }
   function downloadReciter(edition) {
     if (!edition) return;
+    Object.keys(retryCounts).forEach(function (k) {
+      if (k.indexOf(edition + ":") === 0) delete retryCounts[k];
+    });
     cancelled[edition] = false;
     status.reciter = edition;
     var wanted = readWanted();
