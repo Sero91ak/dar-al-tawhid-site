@@ -276,17 +276,50 @@
     renderDashboard();
   }
   window.openKidsQuizHub=function(){
+    // KIDS_QUIZ_HOME_ENTRY_V1450: opening the surface must never depend on
+    // network data or a previously cached quiz bank.
     var modal=byId("quizModal");
-    if(modal)modal.classList.add("open");
+    if(!modal)return false;
+    modal.classList.add("open");
+    modal.setAttribute("data-quiz-band",bandId());
+    ensureUi();
+    showDashboard();
     if(!Array.isArray(window.kidsQuizPool)||!window.kidsQuizPool.length){
-      if(byId("quizAgeLabel"))byId("quizAgeLabel").textContent="Quiz wird geladen …";
+      var label=byId("quizAgeLabel");
+      if(label)label.textContent="Quiz wird geladen …";
       if(typeof window.fetchKidsQuiz==="function"){
-        Promise.resolve(window.fetchKidsQuiz()).then(showDashboard);
-        return;
+        Promise.resolve().then(function(){return window.fetchKidsQuiz()}).then(function(){
+          if(modal.classList.contains("open"))showDashboard();
+        }).catch(function(){
+          if(modal.classList.contains("open"))showDashboard();
+        });
       }
     }
-    showDashboard();
+    return true;
   };
+  // Bind the visible home tile independently of the legacy inline listener.
+  // Capture prevents the old handler from running twice (also when a child
+  // icon or label within the tile is tapped on iOS/PWA).
+  function kidsHomeQuizEntryCapture(event){
+    var tile=event.target&&event.target.closest&&event.target.closest("#openQuizButton");
+    if(!tile)return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    var modal=byId("quizModal");
+    if(modal)modal.classList.add("open");
+    try{
+      if(window.openKidsQuizHub()===true)return;
+    }catch(err){
+      try{console.error("KIDS Quiz home entry:",err)}catch(_){}
+    }
+    // Legacy player remains available if the enhanced dashboard fails.
+    try{if(typeof window.openQuiz==="function"){window.openQuiz();return}}catch(_){}
+    var body=byId("quizBody");
+    if(body)body.innerHTML='<div class="quiz-finish"><h3>Quiz konnte nicht geladen werden</h3><p>Bitte erneut versuchen.</p><button id="quizEntryRetry" class="primary" type="button">Quiz öffnen</button></div>';
+    var retry=byId("quizEntryRetry");
+    if(retry)retry.addEventListener("click",function(){window.openKidsQuizHub()});
+  }
+  document.addEventListener("click",kidsHomeQuizEntryCapture,true);
   window.onKidsQuizAgeChanged=function(){
     category="all";query="";visibleLimit=PAGE_SIZE;
     try{localStorage.removeItem("kids.quiz.ageBand")}catch(_){}
