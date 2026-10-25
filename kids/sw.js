@@ -467,7 +467,10 @@ self.addEventListener("fetch",function(event){
   // KIDS_QUIZ_HOME_ENTRY_V1450: fetch the current interaction script online,
   // and use the previous cached version only when the child is offline.
   if(url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"){
-    event.respondWith(networkFirst(request));
+    // Stable offline fallback for a stale cache-busted HTML entry (iOS PWA).
+    var quizFallback=url.pathname==="/kids/quiz-library.js"
+      ?"/kids/quiz-library.js?v=1450":"/kids/quiz-library.css?v=1450";
+    event.respondWith(networkFirst(request,quizFallback));
     return;
   }
  
