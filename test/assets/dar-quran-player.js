@@ -125,7 +125,7 @@
   var trackHeard = false;
   var playGen = 0;
   var allowAdvance = false;
-  var engine = { started: false, lastUrl: "", loadedSurah: 0, loadedAyah: 0, stallTimer: 0, lastProgressAt: 0, wantPlay: false, objectUrl: "", blobTried: false, fallbackReciterTried: false, haltedOffline: false, watchReloadAt: 0, endedAt: 0 };
+  var engine = { started: false, lastUrl: "", loadedSurah: 0, loadedAyah: 0, stallTimer: 0, lastProgressAt: 0, wantPlay: false, objectUrl: "", blobTried: false, fallbackReciterTried: false, haltedOffline: false, watchReloadAt: 0, endedAt: 0, recoveryCount: 0, lastObservedTime: 0 };
 
   var lastSysVolAt = 0;
   function usesSystemVolume() {
@@ -614,8 +614,30 @@
     clearTimeout(engine.stallTimer);
     engine.stallTimer = 0;
   }
+  function recoverPlayback(kind) {
+    if (!engine.wantPlay || window.__DAR_ADHAN_ACTIVE === true) return;
+    engine.recoveryCount = (engine.recoveryCount || 0) + 1;
+    if (engine.recoveryCount > 3) {
+      clearStallRetry();
+      engine.wantPlay = false;
+      state.playing = false;
+      state.error = "Die Rezitation wurde wiederholt unterbrochen. Tippe auf Erneut versuchen.";
+      try { audioEl().pause(); } catch (ePauseRecovery) {}
+      paintError();
+      paintChrome();
+      paintMini();
+      syncPublicAudioState(audioEl());
+      return;
+    }
+    var a = audioEl();
+    state.resumeAt = Number(a.currentTime) || state.current || 0;
+    engine.watchReloadAt = Date.now();
+    logAudio("recovery " + engine.recoveryCount + " after " + kind, snapAudio(a));
+    loadAudio(true, true, true);
+  }
   function scheduleStallRetry(kind) {
-    clearStallRetry();
+    // Repeated waiting events must not postpone the same recovery indefinitely.
+    if (engine.stallTimer) return;
     var gen = playGen;
     var a = audioEl();
     var at = Number(a.currentTime) || 0;
@@ -627,8 +649,7 @@
       if ((Number(live.currentTime) || 0) > at + 0.2 || live.readyState >= 3) return;
       state.current = at;
       state.resumeAt = at;
-      logAudio("retry after " + kind, snapAudio(live));
-      loadAudio(true, true);
+      recoverPlayback(kind);
     }, 8000);
   }
   function onAudioSignal(ev) {
@@ -747,6 +768,9 @@
     return list.filter(function (u, i, arr) { return u && arr.indexOf(u) === i; });
   }
   function missingAudioHalt(qari, surah, ayah, url) {
+    clearStallRetry();
+    try { audioEl().pause(); } catch (eNoAudio) {}
+    stopProgressClock();
     state.playing = false;
     allowAdvance = false;
     engine.started = false;
@@ -776,6 +800,7 @@
       url: engine.lastUrl,
       snap: snapAudio(a)
     });
+    var requestedAudioUrl = engine.lastUrl;
     var p = a.play();
     if (!p || !p.then) {
       engine.started = true;
@@ -783,7 +808,7 @@
       return;
     }
     p.then(function () {
-      if (gen !== playGen) return;
+      if (gen !== playGen || requestedAudioUrl !== engine.lastUrl) return;
       engine.started = true;
       engine.lastProgressAt = Date.now();
       state.playing = true;
@@ -793,7 +818,7 @@
       paintChrome();
       paintMini();
     }).catch(function (err) {
-      if (gen !== playGen) return;
+      if (gen !== playGen || requestedAudioUrl !== engine.lastUrl || !engine.wantPlay) return;
       var name = err && err.name;
       logAudio("play rejected", { name: name, message: err && err.message, snap: snapAudio(a) });
       if (name === "AbortError") {
@@ -814,6 +839,7 @@
         return;
       }
       if (name === "NotAllowedError") {
+        engine.wantPlay = false;
         state.playing = false;
         state.error = "Tippe erneut auf Wiedergabe, um den Ton zu starten.";
         paintError();
@@ -824,8 +850,10 @@
       tryFallback();
     });
   }
-  function loadAudio(autoplay, keepTime) {
+  function loadAudio(autoplay, keepTime, recovery) {
     var gen = ++playGen;
+    if (!recovery) engine.recoveryCount = 0;
+    engine.lastObservedTime = Number(state.resumeAt || state.current) || 0;
     urlIndex = 0;
     state.error = "";
     trackHeard = false;
@@ -861,7 +889,10 @@
       a.defaultMuted = false;
       a.volume = 1;
       unlockSpeaker(a);
-      try { a.pause(); } catch (ePauseSrc) {}
+      try {
+        if (!a.paused) engine.internalPausePending = true;
+        a.pause();
+      } catch (ePauseSrc) { engine.internalPausePending = false; }
       var prev = String(a.getAttribute("src") || a.currentSrc || "");
       if (prev && (prev === hit.url || prev.split("?")[0] === String(hit.url).split("?")[0])) {
         try { a.removeAttribute("src"); a.load(); } catch (eBlank) {}
@@ -936,7 +967,7 @@
     }
     var urls = urlsFor(state.surah, state.ayah);
     urlIndex += 1;
-    if (urlIndex >= urls.length && isOffline()) {
+    if (isOffline()) {
       missingAudioHalt(state.reciter, state.surah, state.ayah, engine.lastUrl);
       return;
     }
@@ -982,8 +1013,13 @@
     var a = audioEl();
     state.duration = audioDuration(a);
     syncProgressSample(false);
-    engine.lastProgressAt = Date.now();
-    clearStallRetry();
+    var observedTime = Number(a.currentTime) || 0;
+    if (observedTime > (Number(engine.lastObservedTime) || 0) + 0.09) {
+      engine.lastProgressAt = Date.now();
+      engine.lastObservedTime = observedTime;
+      engine.recoveryCount = 0;
+      clearStallRetry();
+    }
     syncPublicAudioState(a);
     if (engine.started && (Number(state.current) || 0) > 0.25 && isFinite(state.duration) && state.duration > 1) {
       trackHeard = true;
@@ -1016,6 +1052,7 @@
   }
   function onPlayEv() {
     if (!isAppleTvApp() && !isQuranArea()) {
+      engine.wantPlay = false;
       try { audioEl().pause(); } catch (ePlayLeave) {}
       persistCurrent("blocked-play-off-quran");
       state.playing = false;
@@ -1024,6 +1061,7 @@
       return;
     }
     engine.started = true;
+    engine.wantPlay = true;
     engine.lastProgressAt = Date.now();
     state.playing = true;
     state.sessionActive = true;
@@ -1040,7 +1078,13 @@
   }
   function onPauseEv() {
     var pausedEl = document.getElementById("darQuranPlayerAudio");
-    if (!(pausedEl && pausedEl.ended) && Date.now() >= ignoreEndedUntil && window.__DAR_ADHAN_ACTIVE !== true) engine.wantPlay = false;
+    var internalPause = !!engine.internalPausePending;
+    engine.internalPausePending = false;
+    // A delayed internal pause event must not turn a newly playing track into a fake paused state.
+    if (internalPause && pausedEl && !pausedEl.paused) return;
+    if (!internalPause && !(pausedEl && pausedEl.ended) && window.__DAR_ADHAN_ACTIVE !== true) {
+      engine.wantPlay = false;
+    }
     state.playing = false;
     saveState();
     paintChrome();
@@ -1080,8 +1124,12 @@
       logAudio("ended ignored: empty src");
       return false;
     }
-    if (Date.now() < ignoreEndedUntil) {
+    if (Date.now() < ignoreEndedUntil && !a.ended) {
       logAudio("ended ignored: src-change window");
+      return false;
+    }
+    if (engine.loadedSurah !== state.surah || engine.loadedAyah !== state.ayah) {
+      logAudio("ended ignored: obsolete verse", snapAudio(a));
       return false;
     }
     if (!engine.started) {
@@ -1337,39 +1385,50 @@
   }
   var dataLoadSerial = 0;
   var dataSurahLoaded = 0;
-  async function ensureData() {
+  var activeDataRequest = null;
+  function ensureData() {
     var requestedSurah = Number(state.surah);
-    if (dataSurahLoaded === requestedSurah && verses.length && meta && !state.loading) return true;
+    if (dataSurahLoaded === requestedSurah && verses.length && meta && !state.loading) return Promise.resolve(true);
+    if (activeDataRequest && activeDataRequest.surah === requestedSurah) return activeDataRequest.promise;
     var requestId = ++dataLoadSerial;
     state.loading = true;
     paintStatus();
-    try {
-      if (typeof window.loadQuranIndex === "function") await window.loadQuranIndex();
-      if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
-      var doc = typeof window.loadQuranSurah === "function"
-        ? await window.loadQuranSurah(requestedSurah) : null;
-      if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
-      verses = (doc && doc.verses) || [];
-      meta = surahMeta(requestedSurah);
-      dataSurahLoaded = requestedSurah;
-      if (state.ayah > totalAyat()) state.ayah = totalAyat();
-      if (state.ayah < 1) state.ayah = 1;
-      saveState();
-      ensureTadCatalog();
-      loadTranslit(requestedSurah);
-      loadTafsir(requestedSurah);
-      return true;
-    } catch (err) {
-      if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
-      state.error = "Die Qurʾān-Texte konnten nicht geladen werden. Bitte erneut versuchen.";
-      paintError();
-      return false;
-    } finally {
-      if (requestId === dataLoadSerial) {
-        state.loading = false;
-        paintStatus();
+    var promise = (async function () {
+      try {
+        if (typeof window.loadQuranIndex === "function") await window.loadQuranIndex();
+        if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
+        var doc = typeof window.loadQuranSurah === "function"
+          ? await window.loadQuranSurah(requestedSurah) : null;
+        if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
+        verses = (doc && doc.verses) || [];
+        meta = surahMeta(requestedSurah);
+        dataSurahLoaded = requestedSurah;
+        if (state.ayah > totalAyat()) state.ayah = totalAyat();
+        if (state.ayah < 1) state.ayah = 1;
+        saveState();
+        ensureTadCatalog();
+        loadTranslit(requestedSurah);
+        loadTafsir(requestedSurah);
+        return true;
+      } catch (err) {
+        if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
+        state.error = "Die Qurʾān-Texte konnten nicht geladen werden. Bitte erneut versuchen.";
+        paintError();
+        return false;
+      } finally {
+        if (requestId === dataLoadSerial) {
+          state.loading = false;
+          paintStatus();
+        }
       }
-    }
+    })();
+    activeDataRequest = { surah: requestedSurah, promise: promise };
+    promise.then(function () {
+      if (activeDataRequest && activeDataRequest.promise === promise) activeDataRequest = null;
+    }, function () {
+      if (activeDataRequest && activeDataRequest.promise === promise) activeDataRequest = null;
+    });
+    return promise;
   }
   function parseRoute(value) {
     var parts = String(value || "").split("/").filter(Boolean);
@@ -1504,7 +1563,7 @@
     if (!root) return;
     var el = root.querySelector("[data-dqp-ayah]");
     if (!el) return;
-    var v = verseAt(state.ayah);
+    var v = dataSurahLoaded === Number(state.surah) ? verseAt(state.ayah) : null;
     var apply = function () {
       var st = el.querySelector(".dqp-status");
       if (st) st.remove();
@@ -2090,7 +2149,7 @@
     mediaHandlersBound = true;
     try {
       navigator.mediaSession.setActionHandler("play", function () { togglePlay(true); });
-      navigator.mediaSession.setActionHandler("pause", function () { audioEl().pause(); });
+      navigator.mediaSession.setActionHandler("pause", function () { engine.wantPlay = false; audioEl().pause(); });
       navigator.mediaSession.setActionHandler("previoustrack", function () { prevAyah(); });
       navigator.mediaSession.setActionHandler("nexttrack", function () { nextAyah(false); });
       navigator.mediaSession.setActionHandler("seekbackward", function () { skip(-10); });
@@ -2230,6 +2289,10 @@
     return neu;
   }
   function navigateApp(view, value) {
+    if (value && typeof window.navigate === "function") {
+      window.navigate(view, value, { noAnim: true, skipPush: true });
+      return;
+    }
     if (typeof window.navigateToTabRootReplace === "function") {
       window.navigateToTabRootReplace(view, value || "");
       return;
@@ -2241,10 +2304,24 @@
       try { window.dispatchEvent(new HashChangeEvent("hashchange")); } catch (e2) {}
     }
   }
+  var returnQuranRoute = null;
+  function capturePlayerEntryRoute() {
+    var parts = String(location.hash || "").replace(/^#\/?/, "").split("/");
+    var view = parts.shift() || "";
+    if (view === "quran" || view === "quran-surah") {
+      returnQuranRoute = { view: view, value: parts.join("/") };
+    } else if (view !== "quran-player") {
+      returnQuranRoute = null;
+    }
+  }
   function leavePlayerRoute(kind) {
+    dismissAllPlayerSheets();
     persistCurrent("leave-full");
     writeMode("global-quran");
     dismissFullPlayer();
+    var target = kind === "read"
+      ? { view: "quran-surah", value: String(state.surah) + "/" + state.ayah }
+      : (returnQuranRoute || { view: "home", value: "" });
     function go() {
       document.documentElement.classList.remove("is-quran-player-route");
       if (document.body) {
@@ -2256,27 +2333,21 @@
         root.style.display = "none";
         try { root.setAttribute("inert", ""); } catch (e0) {}
       }
-      if (kind === "read") navigateApp("quran-surah", String(state.surah) + "/" + state.ayah);
-      else navigateApp("home");
-      try {
-        if (kind !== "read") {
-          history.replaceState(null, "", location.pathname + (location.search || "") + "#home");
-        }
-      } catch (e1) {}
+      navigateApp(target.view, target.value);
       paintMini();
       setTimeout(function () {
         dismissFullPlayer();
         hideFullPlayerUi();
         if (kind !== "read") {
           var hash = String(location.hash || "").replace(/^#\/?/, "");
-          if (hash.split("/")[0] === "quran-player") navigateApp("home");
+          if (hash.split("/")[0] === "quran-player") navigateApp(target.view, target.value);
         }
         paintMini();
       }, 40);
       setTimeout(function () {
         if (Date.now() < dismissUntil) {
           var hash2 = String(location.hash || "").replace(/^#\/?/, "");
-          if (hash2.split("/")[0] === "quran-player") navigateApp(kind === "read" ? "quran-surah" : "home", kind === "read" ? String(state.surah) + "/" + state.ayah : "");
+          if (hash2.split("/")[0] === "quran-player") navigateApp(target.view, target.value);
           hideFullPlayerUi();
           paintMini();
         }
@@ -2609,6 +2680,7 @@
       return;
     }
     qlog("[QURAN_STATE] restore global player state", opts);
+    capturePlayerEntryRoute();
     var snap = readGlobal();
     applyGlobalBlob(snap);
     state.learnMode = false;
@@ -2696,6 +2768,7 @@
       runPlay(a, playGen);
     } else {
       logAudio("pause clicked", snapAudio(a));
+      engine.wantPlay = false;
       a.pause();
     }
   }
@@ -2706,6 +2779,8 @@
     trackHeard = false;
     allowAdvance = false;
     engine.started = false;
+    engine.recoveryCount = 0;
+    clearStallRetry();
     stopProgressClock();
     if (engine.fallbackTimer) { clearTimeout(engine.fallbackTimer); engine.fallbackTimer = 0; }
     persistCurrent("stop");
@@ -2747,7 +2822,7 @@
       var t = e.target.closest("[data-dqp-mini]");
       var act = t ? t.getAttribute("data-dqp-mini") : "";
       if (act === "play") { e.preventDefault(); togglePlay(true); return; }
-      if (act === "pause") { e.preventDefault(); audioEl().pause(); return; }
+      if (act === "pause") { e.preventDefault(); engine.wantPlay = false; audioEl().pause(); return; }
       if (act === "stop") { e.preventDefault(); stopSession(); return; }
       if (act === "learn-loop") {
         e.preventDefault();
@@ -2797,6 +2872,7 @@
       pauseBtn.addEventListener("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
+        engine.wantPlay = false;
         audioEl().pause();
       });
     }
@@ -2816,6 +2892,8 @@
         var a = audioEl();
         var d = Number(a.duration) || Number(state.duration) || 0;
         if (d) a.currentTime = (Number(range.value) / 1000) * d;
+        engine.lastObservedTime = Number(a.currentTime) || 0;
+        engine.lastProgressAt = Date.now();
         state.current = a.currentTime || 0;
         syncProgressSample(true);
         lastProgPct = -1;
@@ -3035,6 +3113,18 @@
     return learnSheet();
   }
   var sheetEpoch = 0;
+  function dismissAllPlayerSheets() {
+    sheetEpoch += 1;
+    document.querySelectorAll("#darQuranPlayer [data-dqp-sheet], #dqpLearnSheet").forEach(function (sh) {
+      sh.classList.remove("is-open");
+      sh.hidden = true;
+      sh.innerHTML = "";
+    });
+    if (dlLabelTimer) {
+      clearInterval(dlLabelTimer);
+      dlLabelTimer = 0;
+    }
+  }
   function closeSheet() {
     sheetEpoch += 1;
     var sh = activeSheetEl();
@@ -3050,7 +3140,10 @@
     if (sh.id === "dqpLearnSheet") bindLearnSheet(sh);
     sh.hidden = false;
     sh.innerHTML = '<div class="dqp-sheet-card"><div class="dqp-sheet-head"><span>' + esc(title) + '</span><button type="button" class="dqp-hit" data-dqp="sheet-close">Fertig</button></div>' + html + "</div>";
-    requestAnimationFrame(function () { sh.classList.add("is-open"); });
+    var thisSheetEpoch = sheetEpoch;
+    requestAnimationFrame(function () {
+      if (thisSheetEpoch === sheetEpoch && !sh.hidden) sh.classList.add("is-open");
+    });
   }
   function cycle(list, cur) { return list[(list.indexOf(cur) + 1) % list.length]; }
   function pickRandomSurah() {
@@ -3159,6 +3252,8 @@
   function skip(d) {
     var a = audioEl();
     a.currentTime = Math.max(0, (a.currentTime || 0) + d);
+    engine.lastObservedTime = Number(a.currentTime) || 0;
+    engine.lastProgressAt = Date.now();
   }
   function clipTxt(s, n) {
     s = String(s || "").replace(/\s+/g, " ").trim();
@@ -3506,6 +3601,8 @@
         seekLock = true;
         var a = audioEl();
         if (a.duration) a.currentTime = (Number(sl.value) / 1000) * a.duration;
+        engine.lastObservedTime = Number(a.currentTime) || 0;
+        engine.lastProgressAt = Date.now();
         state.current = a.currentTime || 0;
         paintProgress();
       });
@@ -3717,7 +3814,7 @@
       saveState();
       loadAudio(true, false);
     },
-    pause: function () { audioEl().pause(); },
+    pause: function () { engine.wantPlay = false; audioEl().pause(); },
     resume: function () { togglePlay(true); },
     stop: stopSession,
     nextAyah: function () { return nextAyah(false); },
@@ -4298,7 +4395,7 @@
       engine.watchReloadAt = now;
       state.resumeAt = Number(a.currentTime) || 0;
       logAudio("watchdog reload after no progress", snapAudio(a));
-      loadAudio(true, true);
+      recoverPlayback("watchdog");
     }
   }, 4000);
   window.addEventListener("online", function () {
@@ -4312,6 +4409,7 @@
     routePaintT = setTimeout(function () {
       routePaintT = 0;
       persistCurrent("route");
+      if (!isFullPlayerRoute() && !isReaderRoute()) dismissAllPlayerSheets();
       ensureReaderLearnPlayer();
       cleanupLearningPlayerOnRouteLeave();
       paintMini();
