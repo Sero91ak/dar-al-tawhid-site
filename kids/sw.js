@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1449";
+const CACHE_NAME="dar-al-tawhid-kids-v1450";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -253,8 +253,8 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/data/quiz-audio.json",
   "/kids/data/dua-audio.json",
   "/kids/data/owner-voice-audio.json",
-  "/kids/quiz-library.css?v=1237",
-  "/kids/quiz-library.js?v=9",
+  "/kids/quiz-library.css?v=1450",
+  "/kids/quiz-library.js?v=1450",
   "/kids/quiz-v4-bridge.js?v=20261013-academy1",
   "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
   "/kids/assets/sahaba-mubashshirun/umar.jpg",
@@ -464,6 +464,13 @@ self.addEventListener("fetch",function(event){
     event.respondWith(cacheFirst(request));return;
   }
   if(!isKidsRequest(url))return;
+  // KIDS_QUIZ_HOME_ENTRY_V1450: fetch the current interaction script online,
+  // and use the previous cached version only when the child is offline.
+  if(url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
+ 
 
   if(request.mode==="navigate"||request.destination==="document"||url.pathname==="/kids/start"||url.pathname==="/kids/start.html"||url.pathname==="/kids/start/"||url.pathname==="/kids/"||url.pathname==="/kids/index.html"||url.pathname==="/kids/shell.html"){
     event.respondWith(networkFirst(request,"/kids/start"));

@@ -6985,7 +6985,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1449",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1450",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -8012,7 +8012,7 @@ html[data-view="stories"] #view-stories > :last-child{
 
 </style>
 <link rel="stylesheet" href="/kids/dua-smart-learn.css?v=1261" data-kids-dua-smart="1">
-<link rel="stylesheet" href="/kids/quiz-library.css?v=1237">
+<link rel="stylesheet" href="/kids/quiz-library.css?v=1450">
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=5">
 <script src="/kids/screen-awake.js?v=1"></script>
 <script src="/kids/story-follow-reader.js?v=19-salaf1"></script>
@@ -8027,7 +8027,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/story-hub.js?v=29"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-v4-bridge.js?v=20261013-academy1"></script>
-<script src="/kids/quiz-library.js?v=9"></script>
+<script src="/kids/quiz-library.js?v=1450"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1256-parent-hero-full" data-kids-section-heroes-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148" data-kids-stories-home-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1138.css?v=1152" data-kids-stories-home-polish="1">
