@@ -1,0 +1,36 @@
+name: TAWḤĪD KIDS – 450 Quiz V4 Audio Integrity (Private)
+on:
+  pull_request:
+    paths:
+      - 'kids/quiz-v4-private-hearing-preview.html'
+      - 'kids/review-only/quiz-v4-final13-450-candidate-review/**'
+      - 'kids/data/quiz-kids-curated-450-review.json'
+      - 'kids/data/quiz-kids-expansion-reserve-450.json'
+      - 'kids/data/quiz-v4-curated-450-production-review.json'
+      - 'kids/data/quiz-curation-release.json'
+      - 'kids/data/quiz-v4-pronunciation-hold.json'
+      - 'kids/assets/kids-quiz-audio/v4-*/**'
+      - 'kids/tools/kids_quiz_v4_450_private_integrity.py'
+      - '.github/workflows/kids-quiz-v4-450-private-integrity.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-audio-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify 900 IDs, age bands and 884 real MP3 files with SHA-256
+        run: python3 kids/tools/kids_quiz_v4_450_private_integrity.py
+      - name: Require publication to remain disabled
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          flag=json.loads(Path('kids/data/quiz-curation-release.json').read_text())
+          assert flag['enabled'] is False, 'Unapproved V4 audio must not be public'
+          print('PASS: release disabled; human listening required')
+          PY
