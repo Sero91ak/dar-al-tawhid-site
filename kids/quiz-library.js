@@ -281,6 +281,10 @@
     var modal=byId("quizModal");
     if(!modal)return false;
     modal.classList.add("open");
+    // Keep the visible quiz surface available to touch and assistive technology
+    // even after an iOS standalone app resume or an old hidden-modal state.
+    modal.setAttribute("aria-hidden","false");
+    modal.setAttribute("aria-modal","true");
     modal.setAttribute("data-quiz-band",bandId());
     ensureUi();
     showDashboard();
