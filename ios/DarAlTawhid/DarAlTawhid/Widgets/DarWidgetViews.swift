@@ -970,3 +970,346 @@ struct LockHijriPrayerView: View {
         }
     }
 }
+
+
+// MARK: - DĀR AL TAWḤĪD · Klassisch
+// Additive WidgetKit family. Premium widget views and kinds above remain unchanged.
+// The background is a bundled historical-book image, not a live web view.
+private enum ClassicColors {
+    static let dark = Color(red: 0.047, green: 0.044, blue: 0.040)
+    static let cream = Color(red: 0.98, green: 0.95, blue: 0.86)
+    static let gold = Color(red: 0.82, green: 0.70, blue: 0.47)
+    static let muted = Color(red: 0.78, green: 0.75, blue: 0.67)
+}
+
+private struct ClassicBookBackground: View {
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                ClassicColors.dark
+                Image("ClassicBooks")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .clipped()
+                    .opacity(0.40)
+                LinearGradient(
+                    stops: [
+                        .init(color: ClassicColors.dark.opacity(0.91), location: 0),
+                        .init(color: ClassicColors.dark.opacity(0.80), location: 0.45),
+                        .init(color: ClassicColors.dark.opacity(0.53), location: 1)
+                    ],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+            }
+            .frame(width: geometry.size.width, height: geometry.size.height)
+            .clipped()
+        }
+    }
+}
+
+private struct ClassicBrand: View {
+    let compact: Bool
+    var body: some View {
+        HStack(spacing: compact ? 6 : 9) {
+            Image("BrandMark")
+                .resizable()
+                .scaledToFit()
+                .frame(width: compact ? 25 : 31, height: compact ? 25 : 31)
+                .accessibilityHidden(true)
+            Text("DĀR AL TAWḤĪD")
+                .font(.system(size: compact ? 9 : 12, weight: .semibold, design: .serif))
+                .tracking(compact ? 0 : 0.25)
+                .lineLimit(1)
+                .minimumScaleFactor(0.80)
+                .foregroundStyle(ClassicColors.cream)
+            Spacer(minLength: 0)
+        }
+    }
+}
+
+private struct ClassicPrayerRows: View {
+    let prayers: [DarPrayerSlot]
+    let nextName: String
+    let compact: Bool
+
+    var body: some View {
+        VStack(spacing: compact ? 3 : 6) {
+            ForEach(prayers.filter { $0.id != "sunrise" }.prefix(5)) { prayer in
+                HStack(spacing: 6) {
+                    Text(prayer.name)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.80)
+                    Spacer(minLength: 4)
+                    Text(prayer.time)
+                        .monospacedDigit()
+                        .lineLimit(1)
+                }
+                .font(.system(size: compact ? 10 : 12, weight: prayer.name == nextName ? .semibold : .regular, design: .serif))
+                .foregroundStyle(prayer.name == nextName ? ClassicColors.gold : ClassicColors.cream)
+                .padding(.horizontal, prayer.name == nextName ? 5 : 0)
+                .padding(.vertical, prayer.name == nextName ? 2 : 0)
+                .background(prayer.name == nextName ? ClassicColors.gold.opacity(0.12) : Color.clear)
+                .clipShape(RoundedRectangle(cornerRadius: 4))
+            }
+        }
+    }
+}
+
+struct ClassicPrayerWidgetView: View {
+    let entry: DarEntry
+    @Environment(\.widgetFamily) private var family
+
+    private var snap: DarWidgetSnapshot { entry.snapshot }
+    private var configured: Bool {
+        let label = snap.cityLabel.lowercased()
+        return !label.isEmpty && !label.contains("standard") && !label.contains("standort folgt")
+    }
+
+    private var nextDate: Date? {
+        guard configured else { return nil }
+        let parts = snap.nextPrayerTime.split(separator: ":")
+        guard parts.count == 2, let hour = Int(parts[0]), let minute = Int(parts[1]),
+              (0...23).contains(hour), (0...59).contains(minute) else { return nil }
+        var cal = Calendar.current
+        cal.locale = Locale(identifier: "de_DE")
+        let components = DateComponents(hour: hour, minute: minute, second: 0)
+        return cal.nextDate(after: entry.date.addingTimeInterval(-1),
+                            matching: components, matchingPolicy: .nextTime)
+    }
+
+    private var nextPrayerTitle: String {
+        configured ? snap.nextPrayerName : "Standort einrichten"
+    }
+
+    @ViewBuilder
+    private func prayerTime(fontSize: CGFloat) -> some View {
+        if configured {
+            Text(snap.nextPrayerTime)
+                .font(.system(size: fontSize, weight: .medium, design: .serif))
+                .monospacedDigit()
+                .foregroundStyle(ClassicColors.cream)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+        } else {
+            Text("Gebetszeiten öffnen")
+                .font(.system(size: 12, weight: .medium, design: .serif))
+                .foregroundStyle(ClassicColors.muted)
+                .lineLimit(2)
+        }
+    }
+
+    @ViewBuilder
+    private func remaining(fontSize: CGFloat) -> some View {
+        if let target = nextDate {
+            HStack(spacing: 4) {
+                Text("in")
+                Text(target, style: .timer)
+                    .monospacedDigit()
+            }
+            .font(.system(size: fontSize, weight: .medium, design: .rounded))
+            .foregroundStyle(ClassicColors.gold)
+            .lineLimit(1)
+            .minimumScaleFactor(0.8)
+        }
+    }
+
+    private var small: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Spacer(minLength: 0)
+            Text("NÄCHSTES GEBET")
+                .font(.system(size: 9, weight: .medium, design: .serif))
+                .tracking(0.65)
+                .foregroundStyle(ClassicColors.muted)
+            Text(nextPrayerTitle)
+                .font(.system(size: 21, weight: .semibold, design: .serif))
+                .foregroundStyle(ClassicColors.gold)
+                .lineLimit(1)
+                .minimumScaleFactor(0.68)
+            prayerTime(fontSize: 24)
+            remaining(fontSize: 11)
+        }
+    }
+
+    private var medium: some View {
+        HStack(alignment: .center, spacing: 14) {
+            VStack(alignment: .leading, spacing: 5) {
+                Text("Nächstes Gebet")
+                    .font(.system(size: 11, design: .serif))
+                    .foregroundStyle(ClassicColors.muted)
+                Text(nextPrayerTitle)
+                    .font(.system(size: 22, weight: .semibold, design: .serif))
+                    .foregroundStyle(ClassicColors.gold)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.65)
+                prayerTime(fontSize: 24)
+                remaining(fontSize: 11)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            Rectangle()
+                .fill(ClassicColors.gold.opacity(0.22))
+                .frame(width: 0.5)
+            if configured {
+                ClassicPrayerRows(prayers: snap.prayers, nextName: snap.nextPrayerName, compact: true)
+                    .frame(maxWidth: .infinity)
+            } else {
+                Text("Öffne die App und wähle deinen Standort.")
+                    .font(.system(size: 11, design: .serif))
+                    .foregroundStyle(ClassicColors.muted)
+                    .frame(maxWidth: .infinity)
+            }
+        }
+    }
+
+    private var eventSummary: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Rectangle().fill(ClassicColors.gold.opacity(0.30)).frame(height: 0.5)
+            HStack(spacing: 8) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(snap.cityLabel)
+                        .lineLimit(1)
+                    if !snap.hijriLabel.isEmpty {
+                        Text(snap.hijriLabel)
+                            .lineLimit(1)
+                    }
+                }
+                Spacer(minLength: 0)
+                if let event = snap.islamicEvents.first {
+                    VStack(alignment: .trailing, spacing: 3) {
+                        Text(event.title)
+                            .lineLimit(1)
+                        Text("in \(event.daysUntil) Tagen")
+                            .lineLimit(1)
+                    }
+                }
+            }
+            .font(.system(size: 10, weight: .medium, design: .serif))
+            .foregroundStyle(ClassicColors.muted)
+        }
+    }
+
+    private var large: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .firstTextBaseline) {
+                Text("Nächstes Gebet")
+                    .font(.system(size: 11, design: .serif))
+                    .foregroundStyle(ClassicColors.muted)
+                Spacer(minLength: 4)
+                Text(entry.date, format: .dateTime.day().month(.abbreviated).year())
+                    .font(.system(size: 10, design: .serif))
+                    .foregroundStyle(ClassicColors.muted)
+            }
+            Text(nextPrayerTitle)
+                .font(.system(size: 33, weight: .semibold, design: .serif))
+                .foregroundStyle(ClassicColors.gold)
+                .lineLimit(1)
+                .minimumScaleFactor(0.72)
+            HStack(alignment: .firstTextBaseline, spacing: 12) {
+                prayerTime(fontSize: 33)
+                Spacer(minLength: 0)
+                remaining(fontSize: 12)
+            }
+            Rectangle().fill(ClassicColors.gold.opacity(0.30)).frame(height: 0.5)
+            if configured {
+                ClassicPrayerRows(prayers: snap.prayers, nextName: snap.nextPrayerName, compact: false)
+            }
+            Spacer(minLength: 0)
+            eventSummary
+        }
+    }
+
+    private var extraLarge: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text(entry.date, format: .dateTime.weekday(.wide).day().month(.wide).year())
+                .font(.system(size: 11, weight: .medium, design: .serif))
+                .foregroundStyle(ClassicColors.muted)
+                .lineLimit(1)
+            HStack(alignment: .top, spacing: 24) {
+                VStack(alignment: .leading, spacing: 7) {
+                    Text("Nächstes Gebet")
+                        .font(.system(size: 13, design: .serif))
+                        .foregroundStyle(ClassicColors.muted)
+                    Text(nextPrayerTitle)
+                        .font(.system(size: 37, weight: .semibold, design: .serif))
+                        .foregroundStyle(ClassicColors.gold)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                    prayerTime(fontSize: 35)
+                    remaining(fontSize: 15)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                Rectangle().fill(ClassicColors.gold.opacity(0.25)).frame(width: 0.5)
+                if configured {
+                    ClassicPrayerRows(prayers: snap.prayers, nextName: snap.nextPrayerName, compact: false)
+                        .frame(maxWidth: .infinity)
+                }
+                VStack(alignment: .leading, spacing: 7) {
+                    Text("Standort & Kalender")
+                        .font(.system(size: 12, weight: .semibold, design: .serif))
+                        .foregroundStyle(ClassicColors.gold)
+                    Text(snap.cityLabel).lineLimit(1)
+                    if !snap.hijriLabel.isEmpty { Text(snap.hijriLabel).lineLimit(2) }
+                    if let event = snap.islamicEvents.first {
+                        Rectangle().fill(ClassicColors.gold.opacity(0.25)).frame(height: 0.5)
+                        Text(event.title).lineLimit(2)
+                        Text("in \(event.daysUntil) Tagen")
+                    }
+                }
+                .font(.system(size: 12, design: .serif))
+                .foregroundStyle(ClassicColors.cream)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            Spacer(minLength: 0)
+        }
+    }
+
+    var body: some View {
+        Group {
+            if family == .accessoryInline {
+                Text("\(snap.nextPrayerName) \(snap.nextPrayerTime)")
+                    .widgetAccentable()
+            } else if family == .accessoryCircular {
+                VStack(spacing: 2) {
+                    Text(snap.nextPrayerName)
+                        .font(.system(size: 10, weight: .semibold, design: .serif))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.65)
+                    Text(snap.nextPrayerTime)
+                        .font(.system(size: 13, weight: .semibold, design: .rounded))
+                        .monospacedDigit()
+                }
+                .widgetAccentable()
+            } else if family == .accessoryRectangular {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Nächstes Gebet")
+                        .font(.system(size: 10, design: .serif))
+                    Text("\(snap.nextPrayerName) · \(snap.nextPrayerTime)")
+                        .font(.system(size: 15, weight: .semibold, design: .serif))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.70)
+                }
+                .widgetAccentable()
+            } else {
+                VStack(alignment: .leading, spacing: 10) {
+                    ClassicBrand(compact: family == .systemSmall)
+                    if family == .systemSmall {
+                        small
+                    } else if family == .systemMedium {
+                        medium
+                    } else if family == .systemExtraLarge {
+                        extraLarge
+                    } else {
+                        large
+                    }
+                }
+                .padding(family == .systemSmall ? 12 : 16)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .containerBackground(for: .widget) {
+                    ClassicBookBackground()
+                }
+            }
+        }
+        .widgetURL(DarDeepLink.Destination.prayer.url)
+    }
+}

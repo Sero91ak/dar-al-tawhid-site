@@ -252,6 +252,20 @@ struct LegacyPrayerWidget: Widget {
     }
 }
 
+
+struct ClassicPrayerWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "de.daraltawhid.widget.classic", provider: DarTimelineProvider()) { entry in
+            ClassicPrayerWidgetView(entry: entry)
+        }
+        .configurationDisplayName("DĀR AL TAWḤĪD · Klassisch")
+        .description("Historische Bücher, nächstes Gebet und Gebetszeiten. Ergänzt die Premium-Widgets.")
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .systemExtraLarge,
+                            .accessoryInline, .accessoryCircular, .accessoryRectangular])
+        .contentMarginsDisabled()
+    }
+}
+
 @main
 struct DarAlTawhidWidgets: WidgetBundle {
     var body: some Widget {
@@ -268,6 +282,7 @@ struct DarAlTawhidWidgets: WidgetBundle {
         TodayWidget()
         AyahWidget()
         DuaWidget()
+        ClassicPrayerWidget()
         if #available(iOSApplicationExtension 18.0, *) {
             DarPrayerControlWidget()
             DarQiblaControlWidget()
