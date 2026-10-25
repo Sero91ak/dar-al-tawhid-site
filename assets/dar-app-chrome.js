@@ -270,3 +270,23 @@
     }).observe(document.documentElement,{childList:true,subtree:true});
   }catch(e){}
 })();
+
+
+/* DAR_VISITOR_HERO_PRAYER_LIBRARY_BOOT_V1 — adult visitor only.
+   Loads independently of the protected push/runtime sources. */
+(function(){
+ "use strict";
+ if(typeof window==="undefined" || typeof document==="undefined" || typeof location==="undefined")return;
+ if(/^\/(?:test|kids|admin)(?:\/|$)/i.test(location.pathname))return;
+ if(window.__DAR_VISITOR_VISUAL_BOOT_V1__)return;
+ window.__DAR_VISITOR_VISUAL_BOOT_V1__=true;
+ var style=document.createElement("link");
+ style.rel="stylesheet";
+ style.href="/assets/visitor-hero-prayer-v1.css?v=20261016-visitor-v1";
+ style.setAttribute("data-dar-visitor-visual-v1","");
+ document.head.appendChild(style);
+ var script=document.createElement("script");
+ script.src="/assets/visitor-hero-prayer-v1.js?v=20261016-visitor-v1";
+ script.async=false;
+ document.head.appendChild(script);
+})();
