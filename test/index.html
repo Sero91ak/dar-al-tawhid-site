@@ -29186,13 +29186,98 @@ function renderFrauenRoute(){
   return `${setPageHeader(meta.title,meta.subtitle,"Frauen")}${body}`;
 }
 
+
+// DAR_TEST_READING_OVERLAY_V1 — existing full readers over preserved overview.
+let darTestReadingState=null;
+function darTestReadingRoute(route){
+  if(!route||!route.value)return false;
+  if(route.view==="post"||route.view==="dua")return true;
+  if(route.view==="bibliothek-reader")return !!window.DARLibraryApp?.renderBibliothekReader;
+  if(route.view==="hadith")return String(route.value).split("/").filter(Boolean).length>=4;
+  if(route.view==="frauen")return window.DARFrauenFiqh?.parseValue?.(route.value)?.page==="detail";
+  return false;
+}
+function darTestReadingCanStart(to,from){
+  const host=$("appView");
+  if(!darTestReadingRoute(to)||!from||routeEqual(to,from)||!host?.firstElementChild||!window.__lastRenderSig)return false;
+  if(["quran-surah","quran-player","quran-topic"].includes(from.view))return false;
+  if(to.view==="post"&&!posts.some(p=>String(p.id)===String(to.value)))return false;
+  if(to.view==="dua"&&!DUAS.some(d=>String(d.id)===String(to.value)))return false;
+  if(to.view==="hadith"&&!findHadithById(String(to.value).split("/").pop()))return false;
+  return true;
+}
+function darTestReadingClose(){
+  const state=darTestReadingState;
+  if(!state)return;
+  darTestReadingState=null;
+  document.getElementById("darTestReadingOverlay")?.remove();
+  document.body.classList.remove("dar-test-reading-open");
+  const host=$("appView");if(host)host.inert=!!state.wasInert;
+  window.__pageNavDir=null;window.__smoothNav=false;
+  requestAnimationFrame(()=>{
+    try{window.scrollTo({top:state.scrollY,behavior:"instant"})}catch(e){window.scrollTo(0,state.scrollY)}
+    if(state.trigger&&document.contains(state.trigger))try{state.trigger.focus({preventScroll:true})}catch(e){}
+  });
+}
+function darTestReadingReturn(){
+  if(!darTestReadingState)return;
+  const p=darTestReadingState.origin;
+  navigate(p.view,p.value||"",{skipPush:true,noAnim:true});
+}
+function darTestReadingKeydown(e){
+  if(!darTestReadingState)return;
+  if(e.key==="Escape"){e.preventDefault();e.stopPropagation();darTestReadingReturn();return}
+  if(e.key!=="Tab")return;
+  const el=document.getElementById("darTestReadingOverlay");if(!el)return;
+  const list=[...el.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])')]
+    .filter(n=>n.getClientRects().length&&!n.closest("[hidden]"));
+  if(!list.length)return;
+  if(e.shiftKey&&document.activeElement===list[0]){e.preventDefault();list[list.length-1].focus()}
+  else if(!e.shiftKey&&document.activeElement===list[list.length-1]){e.preventDefault();list[0].focus()}
+}
+function darTestReadingMount(html){
+  if(!darTestReadingState)return;
+  let overlay=document.getElementById("darTestReadingOverlay");
+  const first=!overlay;
+  if(!overlay){
+    overlay=document.createElement("div");overlay.id="darTestReadingOverlay";
+    const lang=String(document.documentElement.lang||"de").toLowerCase();
+    const close=({de:"Schließen",en:"Close",tr:"Kapat",ar:"إغلاق",ku:"Bigire",ckb:"داخستن",bs:"Zatvori",fr:"Fermer",es:"Cerrar"})[lang]||"Schließen";
+    overlay.innerHTML='<section class="dar-test-reader-dialog" role="dialog" aria-modal="true" aria-labelledby="darTestReadingTitle"><header class="dar-test-reader-header"><span id="darTestReadingTitle" class="dar-test-reader-brand">DĀR AL TAWḤĪD · LESEFENSTER</span><button type="button" class="dar-test-reader-x" aria-label="'+close+'" title="'+close+'">×</button></header><div id="darTestReadingBody" class="dar-test-reader-content"></div></section>';
+    overlay.querySelector(".dar-test-reader-x").addEventListener("click",darTestReadingReturn);
+    overlay.addEventListener("keydown",darTestReadingKeydown);
+    document.body.appendChild(overlay);
+    document.body.classList.add("dar-test-reading-open");
+    const host=$("appView");if(host)host.inert=true;
+  }
+  const pane=overlay.querySelector("#darTestReadingBody");
+  if(pane){pane.innerHTML=html;pane.scrollTop=0}
+  if(first)requestAnimationFrame(()=>{overlay?.classList.add("is-visible");overlay?.querySelector(".dar-test-reader-x")?.focus({preventScroll:true})});
+  else overlay.classList.add("is-visible");
+}
+
 function render(){
   try{
     const routeBefore=readRoute();
     const sigBefore=routeSig(routeBefore);
     const scrollBefore=window.scrollY||0;
     const sameRoute=window.__lastRenderSig===sigBefore;
+    const darTestPrior={...currentRoute};
     currentRoute=readRoute();
+    if(!darTestReadingState&&darTestReadingCanStart(currentRoute,darTestPrior)){
+      const host=$("appView");
+      darTestReadingState={origin:darTestPrior,scrollY:window.scrollY||0,trigger:document.activeElement,wasInert:!!host?.inert};
+    }
+    if(darTestReadingState&&routeEqual(currentRoute,darTestReadingState.origin)){
+      syncNavStackOnHashChange();
+      darTestReadingClose();
+      try{updateChrome(currentRoute)}catch(e){}
+      try{window.currentRoute=currentRoute}catch(e){}
+      window.__lastRenderSig=routeSig(currentRoute);
+      ensureBottomNavDock();
+      return;
+    }
+    if(darTestReadingState&&!darTestReadingRoute(currentRoute))darTestReadingClose();
     try{window.currentRoute=currentRoute}catch(e){}
     const activeLibraryReader=document.querySelector("[data-library-reader]");
     if(currentRoute.view==="bibliothek-reader"&&activeLibraryReader&&String(activeLibraryReader.getAttribute("data-library-reader")||"")===String(currentRoute.value||""))return;
@@ -29286,7 +29371,11 @@ function render(){
     else if(currentRoute.view==="statistik"){navigate("quiz","stats",{skipPush:true,noAnim:true});return}
     else if(currentRoute.view==="hadith")html=renderHadith();
     else html=renderHome();
-    $("appView").innerHTML=html;
+    if(darTestReadingState&&darTestReadingRoute(currentRoute)){
+      if(currentRoute.view==="bibliothek-reader"&&window.DARLibraryApp)html=DARLibraryApp.renderBibliothekReader(currentRoute.value||"");
+      darTestReadingMount(html);
+      window.__pageNavDir=null;
+    }else $("appView").innerHTML=html;
     markAppBootComplete();
     try{
     if(currentRoute.view==="feed")stripFeedPageHeader();
@@ -29310,6 +29399,9 @@ function render(){
       window.__tabSwipeDir=null;
     }
     bindEvents();
+    if(darTestReadingState&&darTestReadingRoute(currentRoute)){
+      try{updateChrome(darTestReadingState.origin)}catch(e){}
+    }
     if(currentRoute.view==="home"){ensureHomeUpdateButtonVisible();bindHomeRefreshButton()}
     updateHijriHeaderDate();
     syncQuranWakeLock(currentRoute);
@@ -29366,7 +29458,8 @@ function render(){
       setTimeout(()=>runQiblaAutoStart(),200);
     }else{
       const ayahJump=currentRoute.view==="quran-surah"?Number(String(currentRoute.value||"").split("/")[1]):0;
-      resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump);
+      if(!(darTestReadingState&&darTestReadingRoute(currentRoute)))resolveRenderScroll(scrollBefore,sameRoute,fromGesture,ayahJump);
+      else window.__smoothNav=false;
     }
     window.__lastRenderSig=routeSig(currentRoute);
     quranLastRoute={view:currentRoute.view,value:currentRoute.value||""};
@@ -38812,4 +38905,5 @@ html[data-theme] body:not(.is-home-route) > .app > footer.footer {
 <link rel="stylesheet" id="darTestHomeV3CompactStyle" href="/test/assets/dar-home-v3-compact.css?v=20261021-tr-lang-v1">
 <!-- DAR_TEST_HOME_EDITORIAL_DIVIDERS_V1 · Startseite only; no player/route change. -->
 <link rel="stylesheet" id="darTestHomeEditorialDividersV1" href="/test/assets/dar-home-editorial-separators-v1.css?v=20261022-v1">
+<link rel="stylesheet" href="/test/assets/dar-test-reading-overlay-v1.css?v=20261025-1" id="darTestReadingOverlayStyles">
 </html>
