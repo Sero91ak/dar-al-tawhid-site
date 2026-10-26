@@ -1,0 +1,37 @@
+# XCODE / CODEX · EIN GESCHLOSSENER MASTER-AUFTRAG · TAWḤĪD KIDS NEXT
+26.10.2026 · Copy/Paste in einen Xcode-fähigen Coding-Agenten mit Zugriff auf das lokale Git-Repository und einen macOS-27/Xcode-27.1-Simulator.
+
+Du bist der leitende iOS-Architekt, Qualitätsingenieur und Migrationsentwickler für die islamische Kinderlern-App TAWḤĪD KIDS. Führe diesen gesamten Auftrag in EINER autonomen Bearbeitung durch; arbeite erforderliche interne Teilschritte eigenständig ab und frage nicht bei jedem Modul nach. Keine Dummy-Seiten oder "fertig" ohne Beleg.
+
+## 0 · Absolute Priorität: Schutz
+Arbeite ausschließlich auf codex/tawhid-kids-next-simulator-architecture-20261026 oder einem davon abzweigenden privaten Arbeitsbranch. Keine Änderungen an main, kids-Live-Seiten, Erwachsenen-App, bestehendem App-Store-Bundle de.daraltawhid.kids, existierendem Besucher- oder Creator-Scheme, Apple-Signing, Store Connect, TestFlight, Cloudflare/Worker-Deploy oder OneSignal. Keine echten Kinderkonten importieren. Änderungen außerhalb des Kids-Next-Bereichs nur falls zwingend und nach Scope-Schutzkontrolle; niemals bestehende KIDS-Regeln überschreiben.
+
+## 1 · Regeln aus Repository vollständig lesen
+Lies KIDS.md, kids/KIDS-DESIGN.md, kids/TERM-LEARNING-POLICY.md, AGENTS.md (Kids-Spur), ios/DarAlTawhidKids/README.md, ios/DarAlTawhidKids/CREATOR-TEST-V1.md, kids/TAWHID-KIDS-NEXT-RULES.md sowie sämtliche vorhandenen Kids-Tests/Guards. Nutze ausschließlich den aktuell tatsächlich vorhandenen Stand, nicht ältere Kurz-Zusammenfassungen. Behalte original Kinderoptik, beide Profile und Originalbilder, gespeicherte Zustände und Fach-/Quellenfreigaben.
+
+## 2 · Einmalige maschinelle Vollinventur
+Indiziere kids/** und ios/DarAlTawhidKids/** und liefere im Repo die Datei ios/DarAlTawhidKids/Next/PARITY-MATRIX.md: jede Start-/Unter-/Modal-/Player-/Reader-Seite, Quiz-/Audio-/Duʿāʾ-/Qurʾān-/Akademie-/Geschichtenfunktion, alle Profile und Altersstufen, Navigation/Tabs, Assets, Persistenz, Schnittstellen, Lade-/Fehlerzustände. Nenne Quellpfad, reale Daten-ID, SwiftUI-Ziel, WebKit-Adapter oder Migrationsbedarf und den passenden Test. Nichts als "übernommen" markieren, was nicht ausführbar geprüft ist.
+
+## 3 · Echte native Hybridarchitektur ausbauen
+Erzeuge/benutze das separate Simulatorprojekt ios/DarAlTawhidKids/Next/TawhidKidsNext.xcodeproj (XcodeGen-Projekt-Spezifikation liegt in project.yml). Separates Debug-Simulator-Bundle de.daraltawhid.kids.next.dev. SwiftUI für neue native Startseite, Eltern-/Profil-Chrome, Quiz-UI mit Quiz-State-Machine, Lernstandanzeige, Audiobedienelemente, adaptive Navigation und Status-/Fehlerzustände. Vorhandene authentische Original-Bildassets nur referenzieren/kopieren, nicht neu erfinden.
+Noch nicht native Module über EINEN wohldefinierten WebKit-Adapter an den bestehenden KIDS-Creator-Staging-Worker binden. Bewährte Bridge für Now Playing, Audio Remote Controls und Lesemodus wiederverwenden; keinerlei doppeltes Playback, kein doppeltes Dock, kein ungeprüftes JavaScript-Click-Routing. Bestehende funktionierende Webbereiche vollständig nutzbar halten.
+Schaffe saubere Schichten Models / ContentRepository / AudioService / ProfileStore / NavigationCoordinator / SwiftUI Features / WKWebViewBridge / OfflinePackManager / DesignTokens und Unit-/UI-Tests. Ein gemeinsamer Inhaltsvertrag mit der Web-App. Fachinhalt wird NIEMALS neu per KI generiert; lese echte freigegebene JSON-/Audio-Manifeste und prüfe Schema/Version/Status. Alle Netzwerkvorgänge sind fehlertolerant, abbrechbar und geben einen echten Retry statt einer endlosen Spinnerseite. Caching nie zum Verwechseln von unterschiedlichen Datenversionen nutzen.
+Die native iOS-Darstellung ist eigenständig hochwertig und adaptiv, aber muss der existierenden KIDS-Benutzerführung/Profilidentität entsprechen. Migration ohne Verlust von Lernfortschritt und ohne Übernahme echter Testpersonendaten. Abweichungen zunächst dokumentieren statt stillschweigend Daten umzuschreiben.
+
+## 4 · Besonders streng prüfen
+- Startseite → Quiz wirklich antippbar, Fragen laden und Antwortspiel vollständig durchlaufen; aktuelle 900-Fragen-Quelle beachten (nicht alte Zahl 450 fest einbauen).
+- Einzelne Duʿāʾ: Arabisch / Lautschrift / deutsche Bedeutung / Wort-Hervorhebung / Einzelwort / langsam / Wiederholen / echtes Audio und Mitsprechen; Mikrofon nur bei echter freigegebener Funktion, transparent und datensparsam.
+- Qurʾān nur echte Rezitator-Audios, nie per ElevenLabs nachvertonen.
+- Stories alle drei Modi, korrekter Fortsetzungszeitpunkt, Audio-Unterbrechungen, Hintergrund/Lock Screen, Bluetooth.
+- Jungen-/Mädchenprofile und originales Bildmaterial getrennt, keine sichtbaren Haare/Hals bei Mädchen, keine Emoji-Figuren.
+- Beide Altersklassifikationen nur über explizit nachgewiesenes Mapping; 4–5/6–8/9–10 UI und 4–6/7–8/9–10 Quiz nicht blind mischen.
+- iPhone Duo geschlossen, aufgeklappt, rotiert und gefaltet, Split View/asymmetrische Safe Areas; iPad Hoch-/Querformat, Multitasking; iPhone kompakt/groß. Keine abgeschnittenen Buttons, Overlays oder Doppel-Tabs.
+- Keine externen Kinder-Links, Tracking, Ads, freies Store-Routing, Elternumgehung oder unsichtbares Audiogenerieren/ElevenLabs-Kosten.
+
+## 5 · Selbstständige technische Umsetzung / Nachweis
+Führe die native Struktur, Module, Tests und Regelfiles als nachvollziehbare Commits im privaten Branch aus. Starte auf dem Mac das Skript ios/DarAlTawhidKids/Next/TAWHID-KIDS-NEXT.command; es soll das Simulatorprojekt generieren, validieren, testen und auf einem verfügbaren Simulator öffnen. Verwende Xcode 27.1 und die nötigen Runtimes; bei Nichtverfügbarkeit genaue Diagnose ausgeben, niemals Testerfolg behaupten.
+Führe außerdem bestehende Kids-Gates (mindestens kids/tools/test-quiz-home-entry-v1450.cjs, kids/tools/quiz_v4_contract_guard.py, scripts/kids-design-guard.js, scripts/kids-dua-trilingual-guard.js und app-lane guard) aus; vor Ausführung Dateiexistenz und zulässige Testaufrufe prüfen. Erzeuge aussagekräftige Simulator-Screenshots und Protokolle je Device, Profil, Inhalt, Ausrichtung und Fehlerfall. Prüfe außerdem Child Privacy, Accessibility und Offline-Audio. Fertig ist erst, wenn Paritätsmatrix, Build-/Testlogs und reale Oberflächennachweise vollständig sind.
+WICHTIG: Ohne physischen Geräte-Test und explizite Nutzerfreigabe bleibt die Entwicklung **SIMULATOR / NICHT FREIGEGEBEN**, selbst wenn die automatischen Tests grün sind. Kein Merge, kein Store-Upload, kein Live-Push.
+
+## 6 · Bericht am Ende statt Rückfragen
+Antworte mit: neuem Branch/Commits, Xcodeprojekt + Scheme + Bundle-ID, Inventar (ist/soll je Modul), aktueller Quizfragen-Anzahl UND echte Audiodatei-Abdeckung, Testmatrix (iPhone/iPad/Duo mit konkreten Resultaten), Abweichungen/Blocker, Nachweise/Links und exakt einer Anweisung zum Öffnen. Arbeite fehlende Teile selbstständig durch, solange Schutzregeln dies gestatten. Bilde keine Erfolge ab, die nicht real gemessen wurden.
