@@ -14,7 +14,7 @@ html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"] {
    This overrides legacy fixed 300px left rails and the 34/66 split. */
 @media (min-width: 900px) and (min-height: 560px) {
   html[data-dar-hinge-layout="paired"][data-fold-dual="1"]
-  #appView .dar-fold[data-fold-mode="dual"] {
+  #appView .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
     column-gap: var(--dar-hinge-clearance) !important;
@@ -31,14 +31,14 @@ html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"] {
   /* When iOS supplies its physical division rectangle, exact pixel
      columns are computed relative to the measured fold shell. */
   html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"]
-  #appView .dar-fold[data-fold-mode="dual"][data-dar-hinge-measured="1"] {
+  #appView .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"])[data-dar-hinge-measured="1"] {
     grid-template-columns:
       minmax(0, var(--dar-hinge-left-pane))
       minmax(0, var(--dar-hinge-right-pane)) !important;
     column-gap: var(--dar-hinge-local-gap) !important;
   }
   html[data-dar-hinge-layout="paired"] #appView
-  .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane) {
+  .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > :is(.dar-fold__rail,.dar-fold__pane) {
     min-inline-size: 0 !important;
     inline-size: 100% !important;
     max-inline-size: 100% !important;
@@ -49,14 +49,14 @@ html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"] {
     /* Do not conceal long references or isolate sticky positioning. */
   }
   html[data-dar-hinge-layout="paired"] #appView
-  .dar-fold[data-fold-mode="dual"] > .dar-fold__rail {
+  .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > .dar-fold__rail {
     grid-column: 1 !important;
     padding-inline: 12px clamp(8px, 1.3vw, 16px) !important;
     border-inline-end: 0 !important;
     background-image: none !important;
   }
   html[data-dar-hinge-layout="paired"] #appView
-  .dar-fold[data-fold-mode="dual"] > .dar-fold__pane {
+  .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > .dar-fold__pane {
     grid-column: 2 !important;
     padding-inline: clamp(8px, 1.3vw, 16px) 12px !important;
   }
@@ -85,7 +85,7 @@ html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"] {
   }
   /* Do not re-split an already allocated half. It must own its local width. */
   html[data-dar-hinge-layout="paired"] body.has-bottom-nav #appView
-  .dar-fold[data-fold-mode="dual"] :is(
+  .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) :is(
     .topics-theme-grid,.dua-theme-grid,.more-group-grid,.frauen-library-grid,
     .home-v380-lib-grid,.lib-grid,.post-grid,.qov-surah-list,
     .quran-surah-grid,.scholars-grid
@@ -117,7 +117,7 @@ html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"] {
    obey legacy medium/single visibility rules and hide the right pane. */
 @media (min-width: 620px) and (min-height: 450px) {
   html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"]
-  #appView .dar-fold[data-fold-mode="dual"] {
+  #appView .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) {
     display: grid !important;
     grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important;
     column-gap: var(--dar-hinge-clearance) !important;
@@ -127,14 +127,14 @@ html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"] {
     max-inline-size: 100% !important;
   }
   html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"]
-  #appView .dar-fold[data-fold-mode="dual"][data-dar-hinge-measured="1"] {
+  #appView .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"])[data-dar-hinge-measured="1"] {
     grid-template-columns:
       minmax(0,var(--dar-hinge-left-pane))
       minmax(0,var(--dar-hinge-right-pane)) !important;
     column-gap: var(--dar-hinge-local-gap) !important;
   }
   html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"]
-  #appView .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane) {
+  #appView .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > :is(.dar-fold__rail,.dar-fold__pane) {
     display: block !important;
     position: relative !important;
     min-inline-size: 0 !important;
@@ -143,18 +143,18 @@ html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"] {
     overflow-y: auto !important;
   }
   html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"]
-  #appView .dar-fold[data-fold-mode="dual"] > .dar-fold__rail {
+  #appView .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > .dar-fold__rail {
     grid-column: 1 !important;
   }
   html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"]
-  #appView .dar-fold[data-fold-mode="dual"] > .dar-fold__pane {
+  #appView .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > .dar-fold__pane {
     grid-column: 2 !important;
   }
 }
 /* Native horizontal folding region: upper reading/list plane and lower
    detail plane. Activate ONLY when UIKit reports a horizontal division. */
 html[data-dar-hinge-axis="horizontal"][data-dar-hinge-source="native"]
-#appView .dar-fold[data-fold-mode="dual"] {
+#appView .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) {
   display: grid !important;
   grid-template-columns: minmax(0,1fr) !important;
   grid-template-rows: minmax(0,1fr) minmax(0,1fr) !important;
@@ -163,12 +163,12 @@ html[data-dar-hinge-axis="horizontal"][data-dar-hinge-source="native"]
   max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 32px);
 }
 html[data-dar-hinge-axis="horizontal"][data-dar-hinge-source="native"]
-#appView .dar-fold[data-fold-mode="dual"] > .dar-fold__rail {
+#appView .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > .dar-fold__rail {
   grid-row: 1 !important;
   grid-column: 1 !important;
 }
 html[data-dar-hinge-axis="horizontal"][data-dar-hinge-source="native"]
-#appView .dar-fold[data-fold-mode="dual"] > .dar-fold__pane {
+#appView .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > .dar-fold__pane {
   grid-row: 2 !important;
   grid-column: 1 !important;
 }
@@ -176,7 +176,7 @@ html[data-dar-hinge-axis="horizontal"][data-dar-hinge-source="native"]
    routing; never keep an invisible second panel or a phantom hinge. */
 @media (max-width: 899.98px), (max-height: 559.98px) {
   html[data-dar-hinge-layout="paired"]:not([data-dar-hinge-source="native"])
-  #appView .dar-fold[data-fold-mode="dual"] {
+  #appView .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) {
     grid-template-columns: minmax(0, 1fr) !important;
     column-gap: 0 !important;
   }
