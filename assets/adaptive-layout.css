@@ -967,7 +967,10 @@ html[data-theme] body.has-bottom-nav #appView :is(
   .library-shell, .books-library-shell, .more-page, .more-group-grid,
   .quiz-shell, .quiz-shell-pro, .settings-page, .settings-one-page,
   .notification-center-page, .account-page, .about-page,
-  .scholars-index, .dar-fold, .dar-fold__rail, .dar-fold__pane
+  .scholars-index, .scholars-index__body, .profile-box--scholar,
+  .scholar-rel, .prophets-root, .prophets-shell, .prophets-layout,
+  .prophets-rail, .prophets-pane, .prophets-detail,
+  .dar-fold, .dar-fold__rail, .dar-fold__pane
 ) {
   box-sizing: border-box;
   min-inline-size: 0;
