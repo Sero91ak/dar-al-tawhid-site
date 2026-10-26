@@ -45,7 +45,7 @@ const publishedIds=new Set(questions.map(q=>q.id));
 const reserve=originalQuestions.filter(q=>!publishedIds.has(q.id));
 assert.equal(reserve.length,450,"450 reserved IDs must remain out of the Quiz UI");
 for(const band of ["4-6","7-8","9-10"])assert.equal(reserve.filter(q=>q.ageBand===band).length,150);
-assert.ok(entry.includes("/kids/data/quiz-kids-public-450.json?v=20261026-450"),"Kids Quiz must fetch curated 450 only");
+assert.ok(entry.includes("/kids/data/quiz-kids-public-450.json?v=20261026-visitor-recovery"),"Fallback may only fetch the selected 450-question asset");
 assert.ok(entry.includes("kidsQuizPool=baseItems;"),"Content Studio must not add quiz questions");
 assert.ok(!sw.includes('"/kids/data/quiz-kids.json"'),"900 source must not be in the PWA offline seeds");
 
