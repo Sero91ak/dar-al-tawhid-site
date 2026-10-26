@@ -11,6 +11,9 @@ const css = read("assets/adaptive-layout.css");
 const adaptive = read("assets/adaptive-layout.js");
 const routeInventory = read("test/assets/test-global-edge-width-v1372.css");
 const visitorApp = read("index.html");
+// Theme, hero and route handlers must never override the measured window mode.
+assert.doesNotMatch(visitorApp, /setAttribute\(["']data-layout["']\s*,\s*["']compact["']\)/,
+  "Visitor inline theme JS must not reset the fold/tablet layout");
 const publishedRouteStates = [
   "is-area-route", "is-calendar-route", "is-catalog-route",
   "is-dua-route", "is-frauen-route", "is-hadith-route",
