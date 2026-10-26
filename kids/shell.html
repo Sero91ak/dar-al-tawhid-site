@@ -1,29 +1,9 @@
 <!doctype html>
 <html lang="de">
 <head>
-<!-- KIDS VISITOR iOS only · illustrated boot, same approved TEST artwork -->
-<script id="kids-visitor-boot-guard">(function(){var active=window.DAR_KIDS_IOS_APP===true&&!window.DAR_KIDS_NATIVE_START;window.__DAR_KIDS_VISITOR_SPLASH_ACTIVE__=active;if(active){document.documentElement.classList.add("kids-visitor-booting");setTimeout(function(){if(!window.__KIDS_VISITOR_SPLASH_1__){document.documentElement.classList.remove("kids-visitor-booting");var e=document.getElementById("kids-visitor-boot");if(e)e.remove();}},10000);}})();</script>
-<style id="kids-visitor-first-frame">
-html.kids-visitor-booting,html.kids-visitor-booting body{margin:0;background:#07152f!important;overflow:hidden!important;color-scheme:dark}
-html.kids-visitor-booting body>:not(#kids-visitor-boot):not(script){visibility:hidden!important}
-#kids-visitor-boot{display:none!important}
-html.kids-visitor-booting #kids-visitor-boot{position:fixed!important;inset:0!important;z-index:2147483645!important;display:flex!important;align-items:center;justify-content:center;overflow:hidden;background:#07152f!important;visibility:visible!important;color:#fff5d8;text-align:center;font-family:system-ui,sans-serif}
-#kids-visitor-boot .ktb-poster{position:relative;width:min(100vw,56.25dvh);height:100dvh;overflow:hidden;background:#07152f url("/kids/assets/kids-splash-20261017-v1.jpg") center/cover no-repeat}
-#kids-visitor-boot .ktb-loading{position:absolute;top:81%;left:7%;width:86%;z-index:2}
-#kids-visitor-boot .ktb-progress-labels{display:grid;grid-template-columns:28px 1fr 44px;gap:7px;align-items:center}
-#kids-visitor-boot .ktb-track{height:30px;border-radius:99px;border:2px solid #f3b83d;background:#002654;overflow:hidden;padding:3px}
-#kids-visitor-boot .ktb-fill{height:100%;width:0%;border-radius:99px;background:linear-gradient(#ffeda1,#e9a30c)}
-#kids-visitor-boot .ktb-percent{margin:7px 0 0;font-weight:900;font-size:29px;color:#ffd16a}
-#kids-visitor-boot .ktb-recover{display:none}
-</style>
-<link rel="preload" as="image" href="/kids/assets/kids-splash-20261017-v1.jpg">
-<link rel="stylesheet" href="/kids/splash-visitor-v1.css?v=20261018-1" media="print" onload="this.media='all'">
-<script defer src="/kids/splash-visitor-v1.js?v=20261018-1"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0c2636">
-<script src="/kids/kids-birth-month-v1431.js?v=1431"></script>
-<link rel="stylesheet" href="/kids/kids-birth-month-v1431.css?v=1431">
 <script id="kids-profile-first-paint-v1348">
 (function(){
   "use strict";
@@ -33,7 +13,7 @@ html.kids-visitor-booting #kids-visitor-boot{position:fixed!important;inset:0!im
     var profiles=JSON.parse(localStorage.getItem("kids.profiles.v1")||"[]");
     var p=Array.isArray(profiles)?profiles.find(function(x){return String(x&&x.id)===String(id)}):null;
     if(p&&(p.gender==="girl"||p.gender==="boy")){
-      gender=p.gender;age=(typeof window!=="undefined"&&window.DARKidsBirthMonth?window.DARKidsBirthMonth.resolve(id,p.age):p.age)||"";
+      gender=p.gender;age=p.age||"";
     }else if(!id&&localStorage.getItem("kids.guest.v1")==="1"){
       var g=localStorage.getItem("kids.guest.gender.v1");
       if(g==="girl"||g==="boy")gender=g;
@@ -90,16 +70,9 @@ html body .app #view-today > .hero :is(.cloud,.shooting-star,.city,.arch,.dune,.
 <link rel="preload" as="image" href="/kids/assets/kids-salah-v1272/hero-home.png?v=1274" fetchpriority="high">
 <link rel="stylesheet" href="https://use.typekit.net/jka5jda.css">
 <link rel="manifest" href="/kids/manifest.webmanifest">
-<link rel="preload" as="style" href="/kids/kids-nav-v1421.css?v=1422">
-<link rel="preload" as="style" href="/kids/kids-motion-v1422.css?v=1422">
-<!-- Apply the existing FINAL five-tab geometry before the first visible frame.
-     The later copies retain their cascade order and all boy/girl theme overrides. -->
-<link rel="stylesheet" href="/kids/kids-ui-contract-v1420.css?v=1425" data-kids-first-paint="stable-five-tabs">
-<link rel="stylesheet" href="/kids/kids-nav-v1421.css?v=1422" data-kids-first-paint="stable-icons">
-<link rel="preload" as="image" href="/kids/assets/kids-icons/learning-book-3d-v1422.png?v=1422">
 <link rel="stylesheet" href="/kids/offline-library-v1.css?v=1">
 <link rel="stylesheet" href="/kids/item-offline-v1.css?v=2">
-<script src="/kids/item-offline-v1.js?v=6"></script>
+<script src="/kids/item-offline-v1.js?v=4"></script>
 <link rel="apple-touch-icon" sizes="180x180" href="/kids/icons/apple-touch-icon.png?v=logo28">
 <link rel="icon" type="image/png" sizes="32x32" href="/kids/icons/favicon-32.png?v=logo28">
 <link rel="icon" type="image/png" sizes="48x48" href="/kids/icons/favicon-48.png?v=logo28">
@@ -3049,51 +3022,14 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
  },true);
 })();
 </script>
-<style id="kids-home-academy-first-frame-v1424">
-/* Stable geometry on the very first Kids frame, before late legacy styles. */
-#view-today #resumeButton[hidden]{display:none!important}
-#view-today > #kidsAcademyPriority.kids-academy-priority{
- display:flex!important;align-items:center!important;gap:clamp(13px,3.5vw,23px)!important;
- box-sizing:border-box!important;min-height:clamp(214px,42vw,266px)!important;
- padding:clamp(19px,4vw,29px)!important;margin-block:14px 22px!important;
- border:1.5px solid rgba(242,208,143,.70)!important;border-radius:clamp(24px,5vw,31px)!important;
- color:#fff8eb!important;text-align:left!important;overflow:hidden!important;
- background-color:#152e38!important;
- background-image:linear-gradient(90deg,rgba(7,28,38,.95),rgba(8,31,41,.79) 48%,rgba(8,29,40,.26)),url("/desktop-preview/assets/kids-academy-hero-boys-v1.jpg")!important;
- background-size:cover!important;background-position:center!important;
-}
-#view-today > #kidsAcademyPriority .kids-academy-priority-art{
- display:block!important;flex:0 0 clamp(57px,14vw,82px)!important;
- width:clamp(57px,14vw,82px)!important;height:clamp(57px,14vw,82px)!important;
- background:rgba(11,35,44,.70) url("/kids/assets/kids-icons/learning-book-3d-v1422.png?v=1422") center/90% no-repeat!important;
-}
-#view-today > #kidsAcademyPriority .kids-academy-priority-copy{
- display:flex!important;flex-direction:column!important;gap:clamp(5px,1.6vw,11px)!important;min-width:0!important;
-}
-#view-today > #kidsAcademyPriority .kids-academy-priority-copy > strong{
- font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(25px,6.6vw,39px)!important;
-}
-html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
- background-color:#37283d!important;
- background-image:linear-gradient(90deg,rgba(50,30,56,.96),rgba(57,33,58,.80) 48%,rgba(59,32,56,.24)),url("/desktop-preview/assets/kids-academy-hero-girls-v1.jpg")!important;
- border-color:rgba(247,190,226,.75)!important;
-}
-@media(max-width:780px){
- #view-today > :is(#kidsAcademyPriority,.big-choice-grid,.kids-salaf-feature,#knowledgeCard){
-  width:calc(100vw - 28px)!important;max-width:none!important;
-  margin-left:calc(50% - 50vw + 14px)!important;margin-right:0!important;
- }
-}
-#view-today > .big-choice-grid{grid-template-columns:minmax(0,1fr)!important}
+<link rel="stylesheet" href="/kids/quran-lernen/home-card.css?v=1">
+
+<style id="kids-quran-learn-entry-stage-v1">
+/* KIDS TEST only. All other shell/learning UI untouched. */
+body .nav-btn.kids-academy-nav .ico{background-image:url("/kids/assets/kids-icons/quran-real-v12.png?v=cut1")!important;background-repeat:no-repeat!important;background-size:contain!important;background-position:center!important}
 </style>
 </head>
 <body>
-<div id="kids-visitor-boot" role="region" aria-label="TAWḤĪD KIDS lädt">
-  <div class="ktb-poster"><div class="ktb-loading">
-    <div class="ktb-progress-labels"><span class="ktb-edge">0%</span><div class="ktb-track" role="progressbar" aria-label="Startvorbereitung" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="ktb-fill"></div></div><span class="ktb-edge">100%</span></div>
-    <p class="ktb-percent" aria-live="off">0%</p><p class="ktb-status" aria-live="polite"></p><button type="button" class="ktb-recover">App trotzdem öffnen</button>
-  </div></div><div class="ktb-reveal-glow" aria-hidden="true"></div>
-</div>
 <div id="kidsUpdateLayer" class="kids-update-layer">
   <div class="kids-update-card" role="dialog" aria-labelledby="kidsUpdateTitle" aria-describedby="kidsUpdateText">
     <div class="kids-update-scene"></div>
@@ -3126,19 +3062,13 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
       <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Überspringen</button>
     </div>
     <div class="step" data-step="age">
-      <h2>Geburtsmonat und Geburtsjahr</h2>
-      <p>Für das Kinderkonto bitte nur Monat und Jahr wählen. Die Lernstufe ändert sich ab dem 1. des Geburtsmonats automatisch.</p>
-      <div class="kids-birth-fields"><label>Geburtsmonat<select id="joinBirthMonth"><option value="">Monat wählen</option></select></label>
-      <label>Geburtsjahr<select id="joinBirthYear"><option value="">Jahr wählen</option></select></label></div>
-      <p class="kids-birth-notice" id="joinBirthNotice" role="status"></p>
-      <button type="button" id="joinBirthContinue">Mit automatischer Lernstufe weiter</button>
-      <p class="kids-birth-note">Kein Geburtstagstag. Nur auf diesem Gerät gespeichert.</p>
-      <div class="kids-birth-guest"><strong>Ohne Konto? Lernstufe selbst wählen:</strong>
+      <h2>Wie alt?</h2>
+      <p>Danach werden Schrift, Fragen und Bewegung passend.</p>
       <div class="kids-join-row">
         <button type="button" data-join-age="4–5">4–5</button>
         <button type="button" data-join-age="6–8">6–8</button>
       </div>
-      <button type="button" data-join-age="9–10" style="margin-top:10px;width:100%">9–10</button></div>
+      <button type="button" data-join-age="9–10" style="margin-top:10px;width:100%">9–10</button>
       <button type="button" class="ghost" data-back="who" style="margin-top:8px;width:100%">Zurück</button>
       <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Überspringen</button>
     </div>
@@ -3214,16 +3144,7 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
         </div>
       </div>
 
-      <button type="button" id="kidsAcademyPriority" class="kids-academy-priority academy-pilot-entry" data-academy-open="1" aria-label="Lernakademie öffnen und Unterricht beginnen">
-        <span class="kids-academy-priority-art" aria-hidden="true"></span>
-        <span class="kids-academy-priority-copy">
-          <small>DEINE LERNAKADEMIE · QURʾĀN &amp; SUNNAH</small>
-          <strong>Meine Lernakademie</strong>
-          <span>Dein Unterricht wartet auf dich · Schritt für Schritt lernen</span>
-          <em>Jetzt lernen <span aria-hidden="true">→</span></em>
-        </span>
-      </button>
-      <button class="resume" id="resumeButton" hidden aria-hidden="true" tabindex="-1">
+      <button class="resume" id="resumeButton">
         <div class="resume-icon"></div>
         <div class="resume-copy">
           <small class="resume-kicker" id="resumeKindLabel">DEIN HÖRPLATZ</small>
@@ -3252,6 +3173,13 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
           
         </button>
 
+        <button class="choice quran" type="button" onclick="window.location.assign('/kids/quran-lernen/index.html')" aria-label="Qurʾān lernen öffnen">
+          <span class="icon"></span>
+          <strong>Qurʾān lernen</strong>
+          <small>hören · mitsprechen · lernen</small>
+          
+        </button>
+
         <button class="choice dua" id="openDuaButton">
           <span class="icon"></span>
           <strong>Meine Duʿāʾ</strong>
@@ -3261,8 +3189,8 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
 
         <button class="choice quiz" id="openQuizButton">
           <span class="icon"></span>
-          <strong>Quiz-Lernwelt</strong>
-          <small>450 Fragen · neue Lernwelt</small>
+          <strong>Quiz spielen</strong>
+          <small>hören · tippen · lernen</small>
           
         </button>
       </div>
@@ -3270,6 +3198,21 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
         <span class="kids-salaf-feature-art" aria-hidden="true"></span>
         <span class="kids-salaf-feature-copy"><small>GESCHICHTEN · WERTVOLLE LEHREN</small><strong>Schätze der Salaf</strong><span>Gute Vorbilder entdecken und von ihnen lernen</span></span>
       </button>
+      <a href="/kids/akademie/index.html" class="academy-pilot-entry" aria-label="Meine Lernakademie öffnen">
+        <span class="academy-pilot-text"><small>LERNEN · MEINE AKADEMIE</small><strong>Meine Lernakademie</strong><span>Spannende Lektionen · Schritt für Schritt lernen</span></span>
+        <span class="academy-pilot-arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a href="/kids/quran-lernen/index.html" class="kids-quran-learning-entry" aria-label="Qurʾān lernen öffnen">
+        <span class="kids-quran-learning-art" aria-hidden="true"></span>
+        <span class="kids-quran-learning-copy">
+          <small>HÖREN · MITLESEN · VERSTEHEN</small>
+          <strong>Qurʾān lernen</strong>
+          <span>Kurze Sūren und wichtige Āyāt · Dein Lernfortschritt</span>
+        </span>
+        <span class="kids-quran-learning-arrow" aria-hidden="true">→</span>
+      </a>
+
       <button id="knowledgeCard" class="knowledge-card" type="button">
         <span class="kicon" aria-hidden="true"></span>
         <span class="kcopy">
@@ -3314,11 +3257,11 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
       <div class="kids-listening-shortcuts" aria-label="Weitere Hörwelten">
         <div class="kids-listening-shortcuts-title">Noch mehr zum Entdecken</div>
         <div class="kids-listening-shortcuts-grid">
-          <button type="button" class="kids-listen-shortcut kids-salaf-listening-hero kids-tap-card" data-go="salaf" aria-label="Schätze der Salaf im Hörbereich öffnen">
+          <button type="button" class="kids-listen-shortcut kids-tap-card" data-go="salaf" aria-label="Schätze der Salaf öffnen">
             <span class="kids-listen-shortcut-art salaf" aria-hidden="true"></span>
             <span class="kids-listen-shortcut-copy"><strong>Schätze der Salaf</strong><small>Schöne Geschichten und wertvolle Lehren</small></span>
           </button>
-          <button type="button" class="kids-listen-shortcut kids-listen-dua-secondary kids-tap-card" id="kidsListenDuaEntry" aria-label="Meine Duʿāʾ öffnen">
+          <button type="button" class="kids-listen-shortcut kids-tap-card" id="kidsListenDuaEntry" aria-label="Meine Duʿāʾ öffnen">
             <span class="kids-listen-shortcut-art dua" aria-hidden="true"></span>
             <span class="kids-listen-shortcut-copy"><strong>Meine Duʿāʾ</strong><small>Hören, nachsprechen und verstehen</small></span>
           </button>
@@ -3329,35 +3272,59 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
 
     <section id="view-salaf" class="view" aria-label="Schätze der Salaf"></section>
 
+    <section id="view-quran" class="view">
+      <div class="page-head quran-page-head">
+        <div class="kicker">HÖREN · MITSPRECHEN · LERNEN</div>
+        <h2>Mein Qurʾān</h2>
+        <p>Kein kompliziertes Menü. Eine Sūrah antippen und loslegen.</p>
+      </div>
+      <div class="quran-hero">
+        <div class="quran-hero-stage" aria-hidden="true"></div>
+        <div class="quran-hero-copy">
+          <div class="quran-hero-eyebrow">DEINE QURʾĀN-REISE</div>
+          <h3>Deine Qurʾān-Reise</h3>
+          <p>Höre eine Āyah, sprich danach selbst mit und gehe weiter, wenn du bereit bist.</p>
+        </div>
+        <div class="quran-actions">
+          <button class="quran-action" id="quickLearn112"><div class="qa-icon"></div><strong>Mitrezitieren</strong><small>Starte mit al-Iḫlāṣ</small></button>
+          <button class="quran-action" id="resumeQuran"><div class="qa-icon"></div><strong>Weiterlernen</strong><small id="resumeQuranText">dein letzter Vers</small></button>
+        </div>
+      </div>
+      
+      <div class="quran-section-head"><div><div class="section-title">Meine kurzen Sūrah</div><p>Antippen und direkt anfangen.</p></div><span class="quran-section-chip">KURZ & LEICHT</span></div>
+      <div class="surah-banner" aria-hidden="true"></div>
+      <div class="surah-grid" id="kidsSurahGrid"></div>
+      <div class="quran-section-head"><div><div class="section-title">Verse zum Lernen</div><p>Wichtige Āyāt Schritt für Schritt.</p></div><span class="quran-section-chip">MERKEN</span></div>
+      <div class="verse-banner" aria-hidden="true"></div>
+      <div class="verse-strip">
+        <button class="verse-card" data-quran-ref="2:255"><div class="verse-badge" aria-hidden="true"></div><div><strong>Āyat al-Kursī</strong><small>al-Baqarah · 2:255</small></div></button>
+        <button class="verse-card" data-quran-ref="20:114"><div class="verse-badge"></div><div><strong>„Mein Herr, mehre mich an Wissen.“</strong><small>Ṭā-Hā · 20:114</small></div></button>
+        <button class="verse-card" data-quran-ref="17:24"><div class="verse-badge"></div><div><strong>Duʿāʾ für die Eltern</strong><small>al-Isrāʾ · 17:24</small></div></button>
+      </div>
+      <button class="full-quran full-quran-listen" id="fullQuranButton"><div class="ficon"></div><div><strong>Ganzer Qurʾān zum Hören</strong><small>Eine Sūrah auswählen und direkt starten</small></div></button>
+      <div class="gentle-note">Höre in Ruhe, sprich mit und wiederhole so oft du möchtest. Lernen darf leicht und ruhig sein.</div>
+    </section>
     <section id="view-parents" class="view">
       <div class="page-head">
         <div class="kicker">FÜR ERWACHSENE</div>
         <h2>Eltern</h2>
-        <p>Profile, Lernfortschritte und Einstellungen im Überblick.</p>
+        <p>Hier wird eingestellt. Das Kind braucht diesen Bereich nicht.</p>
       </div>
 
       <div class="parent-card">
-        <div class="label-row"><strong>Altersstufe</strong><span id="kidsAgeMode" style="color:var(--gold);font-size:12px;font-weight:850">MANUELL</span></div>
+        <div class="label-row"><strong>Altersstufe</strong><span style="color:var(--gold);font-size:12px;font-weight:850">EINFACH</span></div>
         <div class="age-tabs">
           <button data-age="4–5">4–5</button>
           <button class="active" data-age="6–8">6–8</button>
           <button data-age="9–10">9–10</button>
         </div>
         <p id="ageHelp" class="age-help">hören · verstehen · mitmachen</p>
-        <div id="parentBirthPanel" class="kids-birth-details" hidden>
-          <strong>Geburtsmonat und -jahr des angemeldeten Kindes</strong>
-          <div class="kids-birth-fields"><label>Monat<select id="parentBirthMonth"><option value="">Monat wählen</option></select></label>
-          <label>Jahr<select id="parentBirthYear"><option value="">Jahr wählen</option></select></label></div>
-          <button id="parentBirthSave" type="button" class="ghost">Geburtsmonat speichern</button>
-          <p id="parentBirthNotice" class="kids-birth-notice" role="status"></p>
-          <p class="kids-birth-note">Die Angabe bleibt auf diesem Gerät. Alte Lernstände werden nicht gelöscht.</p>
-        </div>
       </div>
 
       <div class="parent-card">
         <div class="label-row"><strong>Tägliche Lernzeit</strong><strong id="minuteValue" style="color:var(--gold)">12 Min.</strong></div>
         <input id="minuteSlider" type="range" min="5" max="20" value="12" step="1">
-        <p class="parent-note">Ein ruhiger Lernrhythmus ohne Leistungsdruck.</p>
+        <p class="parent-note">Die App soll ein klares Ende haben. Keine endlosen Feeds, keine Streak-Angst und kein Kaufdruck.</p>
       </div>
 
       <div class="parent-card">
@@ -3367,14 +3334,15 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
           <div class="parent-progress-stat"><strong id="parentDuasDone">0</strong><span>Duʿāʾ sicher</span></div>
           <div class="parent-progress-stat"><strong id="parentQuizCorrect">0</strong><span>Quizfragen richtig</span></div>
           <div class="parent-progress-stat"><strong id="parentTodayDone">0/3</strong><span>Heute geschafft</span></div>
+          <div class="parent-progress-stat"><strong id="parentQuranResume">–</strong><span>Letzter Qurʾān-Stand</span></div>
         </div>
-        <p class="parent-note">Mit Kinderkonto kann der gespeicherte Lernstand nach Anmeldung auch auf anderen Geräten geladen werden. Ohne Konto bleibt er lokal.</p>
+        <p class="parent-note" id="parentQuizProgressSummary" aria-live="polite">Der Quiz-Lernverlauf wird pro Kinderprofil gespeichert.</p><p class="parent-note">Der Fortschritt bleibt auf diesem Gerät. Keine Rangliste und kein Vergleich mit anderen Kindern.</p>
       </div>
 
 
       <div class="parent-card" id="profileCard">
         <div class="label-row"><strong>Kinder auf diesem Gerät</strong><span style="color:var(--gold);font-size:12px">OHNE E-MAIL</span></div>
-        <p class="parent-note">Kinderkonto wechseln, hinzufügen oder auf einem anderen Gerät anmelden. Ein Konto ist freiwillig.</p>
+        <p class="parent-note">Ein Konto ist freiwillig. Ohne Konto geht die Kinderwelt trotzdem. Wer speichern und auf einem anderen Gerät weitermachen will, legt hier Name und Passwort an. Jeder Anmeldename gibt es nur einmal.</p>
         <div id="profileList" class="profile-list"></div>
         <div id="profileAsk" class="profile-ask" hidden>
           <p id="profileAskText" class="parent-note"></p>
@@ -3394,8 +3362,8 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
   <nav class="bottom-nav" aria-label="Hauptnavigation">
     <button class="nav-btn active" data-target="today"><span class="ico"></span><span class="lab">Heute</span></button>
     <button class="nav-btn" data-target="stories"><span class="ico"></span><span class="lab">Hören</span></button>
-    <button type="button" class="nav-btn kids-academy-tab" data-academy-open="1" aria-label="Lernakademie öffnen"><span class="ico" aria-hidden="true"></span><span class="lab">Lernen</span></button>
-    <button class="nav-btn" data-target="dua" aria-label="Meine Duʿāʾ"><span class="ico"></span><span class="lab">Duʿāʾ</span></button>
+    <button class="nav-btn" data-target="salaf" aria-label="Schätze der Salaf"><span class="ico"></span><span class="lab">Schätze</span></button>
+    <button type="button" class="nav-btn kids-academy-nav" aria-label="Meine Lernakademie öffnen" onclick="window.location.assign('/kids/akademie/index.html')"><span class="ico"></span><span class="lab">Lernen</span></button>
     <button class="nav-btn" data-target="parents"><span class="ico"></span><span class="lab">Eltern</span></button>
   </nav>
 
@@ -3437,7 +3405,7 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
       <div class="modal-top">
         <button class="close-btn" data-close="quiz" aria-label="Quiz schließen">×</button>
         <button class="quiz-global-back" id="quizGlobalBack" type="button" aria-label="Zurück im Quiz">← Zurück</button>
-        <div class="modal-title"><strong>Meine Quiz-Lernwelt</strong><small id="quizAgeLabel">450 Fragen · für deine Altersstufe</small></div>
+        <div class="modal-title"><strong>Mein Quiz</strong><small id="quizAgeLabel">für deine Altersstufe</small></div>
         <div class="top-spacer"></div>
       </div>
       <div id="quizStage" class="quiz-stage">
@@ -3484,16 +3452,89 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
     </div>
   </div>
 
-  
+  <div id="quranModal" class="modal">
+    <div class="modal-shell">
+      <div class="modal-top">
+        <button class="close-btn" data-close="quran">×</button>
+        <div class="modal-title"><strong id="quranTitle">Sūrah</strong><small id="quranSubtitle">Mitrezitieren</small></div>
+        <div class="top-spacer"></div>
+      </div>
+
+      <div class="quran-player">
+        <div id="progressDots" class="progress-dots"></div>
+        <div class="lesson-steps">
+          <div id="stepListen" class="lesson-step active">1 · HÖREN</div>
+          <div id="stepSpeak" class="lesson-step">2 · SPRECHEN</div>
+          <div id="stepDone" class="lesson-step">3 · GESCHAFFT</div>
+        </div>
+        <div class="ayah-stage">
+          <div id="ayahBox" class="ayah-box">
+            <div id="learnStatus" class="learn-status"> Erst hören</div>
+            <div id="wordCoach" class="word-coach">
+              <div id="coachKicker" class="coach-kicker">DEIN WORT</div>
+              <div id="coachWord" class="coach-word">—</div>
+              <div id="coachHelp" class="coach-help">Tippe auf „Mitsprechen“ und sprich dieses Wort.</div>
+              <div id="coachHeard" class="coach-heard" aria-live="polite"></div>
+              <div id="wordProgress" class="word-progress"></div>
+            </div>
+            <div id="ayahAr" class="ayah-ar"><span class="loader">Qurʾān wird geladen …</span></div>
+            <div id="micMonitor" class="mic-monitor">
+              <div class="mic-top">
+                <div class="mic-state"><span class="mic-dot"></span><span id="micStateText">Mikrofon bereit</span></div>
+                <span id="micClock">00:00</span>
+              </div>
+              <div class="mic-meter"><div id="micLevel" class="mic-level"></div></div>
+              <button id="recordingPlayback" class="recording-playback"> Meine Aufnahme anhören</button>
+            </div>
+            <div id="ayahTr" class="ayah-tr"></div>
+            <div id="ayahDe" class="ayah-de"></div>
+            <div id="ayahNo" class="ayah-no"></div>
+          </div>
+        </div>
+        <div class="quran-controls">
+          <div class="main-actions">
+            <button id="ayahPlay" class="big-play"> HÖREN</button>
+            <button id="speakAlong" class="big-speak"> SPRECHEN</button>
+          </div>
+          <div class="lesson-nav">
+            <button id="prevAyah">← Vorherige Āyah</button>
+            <button id="nextAyah"> Weiter</button>
+          </div>
+          <div class="quran-mini-note">Das Mikrofon erkennt jedes Wort automatisch. Grün = richtig und weiter. Orange = fast richtig, gleiches Wort wiederholen. Rot = Fehler, das Wort bleibt gesperrt.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="fullQuranModal" class="modal">
+    <div class="modal-shell">
+      <div class="modal-top">
+        <button class="close-btn" data-close="fullquran">×</button>
+        <div class="modal-title"><strong>Ganzer Qurʾān</strong><small>Einfach auswählen und hören</small></div>
+        <div class="top-spacer"></div>
+      </div>
+      <div class="picker-panel">
+        <div class="picker-icon"></div>
+        <h3>Welche Sūrah?</h3>
+        <p>Nur eine Auswahl. Danach öffnet sich direkt der große Hör- und Lernbildschirm.</p>
+        <select id="surahPicker" class="big-select" aria-label="Sūrah auswählen">
+          <option>Lade Sūrah …</option>
+        </select>
+        <button id="openPickedSurah" class="primary">Sūrah öffnen</button>
+      </div>
+    </div>
+  </div>
+
   
 </div>
 </div>
 
+<audio id="quranAudio" preload="none" playsinline></audio>
+<audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren";
-const KIDS_QURAN_LEARNING_REMOVED=true; // Qurʾān/Alif-Bāʾ learning UI retired; local history retained.
+const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1410";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -3774,6 +3815,7 @@ function dailyPlan(){
   return[
     {id:"story",title:"Eine Geschichte",hint:"zuhören & verstehen",icon:"headphones"},
     {id:"dua",title:"Ein Duʿāʾ",hint:"lernen & anwenden",icon:"dua"},
+    {id:"quran",title:"Qurʾān",hint:"eine Āyah lernen",icon:"book"},
     {id:"quiz",title:"Quiz",hint:"Wissen prüfen",icon:"star"}
   ];
 }
@@ -3807,23 +3849,35 @@ function updateParentProgress(){
     try{if(duaProgress(d.id).stage==="secure")duaCount++}catch(e){}
   });
   var quizCount=0;
-  try{quizCount=Number(localStorage.getItem("kids.quiz.correct")||"0")}catch(e){}
+  try{quizCount=quizSavedCorrect()}catch(e){}
   var plan=dailyPlan();
   var todayCount=plan.filter(function(s){return dailyDone(s.id)}).length;
+  var resume=readQuranResume();
   var s=document.getElementById("parentStoriesDone");
   var d=document.getElementById("parentDuasDone");
   var q=document.getElementById("parentQuizCorrect");
   var t=document.getElementById("parentTodayDone");
+  var r=document.getElementById("parentQuranResume");
   if(s)s.textContent=String(storyCount);
   if(d)d.textContent=String(duaCount);
   if(q)q.textContent=String(quizCount);
+  var quizSummary=document.getElementById("parentQuizProgressSummary");
+  if(quizSummary&&Array.isArray(kidsQuizPool)){
+    var targetBand=currentKidsQuizAgeBand(),questions=kidsQuizPool.filter(function(x){return x.ageBand===targetBand});
+    var seen=0,secure=0,errors=0;
+    questions.forEach(function(item){var e=quizProgress(item.id);if(e.attempts>0)seen++;if(e.stage==="secure")secure++;errors+=Number(e.mistakeTaps||0)});
+    quizSummary.textContent="Quiz "+(targetBand==="4-6"?"4–6":targetBand==="7-8"?"7–8":"9–10")+" Jahre: "+
+      seen+" von "+questions.length+" kennengelernt · "+secure+" sicher · "+errors+" Fehlversuche · "+
+      quizHistoryRead().length+" gespeicherte Antworten. Nur dieses Kinderprofil auf diesem Gerät.";
+  }
   if(t)t.textContent=todayCount+"/"+plan.length;
+  if(r)r.textContent=resume?(resume.label+" "+(Number(resume.ayah)+1)):"–";
 }
 function launchDailyStep(step){
   if(step==="story"){showTab("stories");return}
   if(step==="dua"){openDailyDua();return}
   if(step==="quiz"){openQuiz();return}
-  if(step==="quran"){showTab("today");return}
+  if(step==="quran"){showTab("quran");setTimeout(openDailyQuran,220)}
 }
 function launchNextDailyStep(){
   var plan=dailyPlan();
@@ -3897,11 +3951,6 @@ function kidsFinishMainTabSwitch(){
 }
 window.DARKidsResetMainScroll=kidsFinishMainTabSwitch;
 function showTab(name){
-  if(name==="quran"||name==="alphabet")name="today";
-  if(name==="dua"&&window.DARKidsDuaHub&&typeof window.DARKidsDuaHub.open==="function"){
-    window.DARKidsDuaHub.open();
-    return;
-  }
   var view=document.getElementById("view-"+name);
   if(!view)return;
   var current=document.querySelector(".view.active");
@@ -3913,7 +3962,7 @@ function showTab(name){
   document.documentElement.setAttribute("data-view",name);
   kidsFinishMainTabSwitch();
 }
-document.querySelectorAll(".bottom-nav .nav-btn[data-target]").forEach(function(b){b.addEventListener("click",function(){showTab(b.dataset.target)})});
+document.querySelectorAll(".nav-btn").forEach(function(b){b.addEventListener("click",function(){showTab(b.dataset.target)})});
 document.querySelectorAll("[data-go]").forEach(function(b){
   b.addEventListener("click",function(){
     showTab(b.dataset.go);
@@ -3932,7 +3981,6 @@ document.getElementById("dailyStart").addEventListener("click",function(){
 
 function renderKidsSurahs(){
   var grid=document.getElementById("kidsSurahGrid");
-  if(!grid)return;
   grid.innerHTML="";
   kidsSurahs.forEach(function(s){
     var card=document.createElement("button");
@@ -3961,7 +4009,6 @@ function fetchCatalog(){
 }
 function fillPicker(){
   var picker=document.getElementById("surahPicker");
-  if(!picker)return;
   picker.innerHTML="";
   var list=catalog.length?catalog:kidsSurahs.map(function(s){return{id:s.id,name:"",transliteration:s.label,total_verses:""}});
   list.forEach(function(s){
@@ -4164,7 +4211,6 @@ function nextQuranReview(){
   return items[0]||null;
 }
 function openDailyQuran(){
-  if(KIDS_QURAN_LEARNING_REMOVED)return;
   var review=nextQuranReview();
   if(review){
     openSurah(review.surah,review.ayahIndex,"learn");
@@ -4179,7 +4225,6 @@ function openDailyQuran(){
 }
 
 function openSurah(id,ayahIndex,mode){
-  if(KIDS_QURAN_LEARNING_REMOVED)return;
   stopQuran();
   practiceRequired=(mode==="learn");
   document.getElementById("quranModal").classList.add("open");
@@ -4198,7 +4243,6 @@ function openSurah(id,ayahIndex,mode){
   });
 }
 function openQuranRef(ref){
-  if(KIDS_QURAN_LEARNING_REMOVED)return;
   var parts=String(ref).split(":");
   var s=Number(parts[0]||1),a=Number(parts[1]||1);
   openSurah(s,Math.max(0,a-1),"learn");
@@ -4953,7 +4997,7 @@ function playCurrent(after){
     else updateLearnStatus(quranMode==="learn"?" Jetzt du":"✓ Geh weiter, wenn du bereit bist",quranMode==="learn");
   };
 }
-document.getElementById("recordingPlayback")?.addEventListener("click",function(){
+document.getElementById("recordingPlayback").addEventListener("click",function(){
   var audio=document.getElementById("recitationPlaybackAudio");
   if(!recordingUrl)return;
   if(audio.paused){
@@ -4966,7 +5010,7 @@ document.getElementById("recordingPlayback")?.addEventListener("click",function(
     this.textContent=" Meine Aufnahme anhören";
   }
 });
-document.getElementById("recitationPlaybackAudio")?.addEventListener("ended",function(){
+document.getElementById("recitationPlaybackAudio").addEventListener("ended",function(){
   document.getElementById("recordingPlayback").textContent=" Meine Aufnahme anhören";
 });
 document.getElementById("ayahPlay").addEventListener("click",function(){
@@ -4975,7 +5019,7 @@ document.getElementById("ayahPlay").addEventListener("click",function(){
   document.getElementById("speakAlong").classList.remove("active");
   playCurrent();
 });
-document.getElementById("speakAlong")?.addEventListener("click",function(){
+document.getElementById("speakAlong").addEventListener("click",function(){
   if(!currentSurah)return;
   if(practiceActive){
     stopPractice(false);
@@ -5014,13 +5058,13 @@ document.getElementById("speakAlong")?.addEventListener("click",function(){
     startPracticeSession();
   });
 });
-document.getElementById("prevAyah")?.addEventListener("click",function(){
+document.getElementById("prevAyah").addEventListener("click",function(){
   if(!currentSurah)return;
   stopQuran();
   currentAyahIndex=Math.max(0,currentAyahIndex-1);
   renderAyah();
 });
-document.getElementById("nextAyah")?.addEventListener("click",function(){
+document.getElementById("nextAyah").addEventListener("click",function(){
   if(!currentSurah)return;
   if(practiceRequired&&!ayahPassed){
     updateLearnStatus(" Erst alle Wörter richtig sprechen",false,"error");
@@ -5066,7 +5110,7 @@ function homeResumeFormatTime(value){
   return Math.floor(n/60)+":"+String(Math.floor(n%60)).padStart(2,"0");
 }
 function updateResume(){
-  var q=null; // Archived Qurʾān resume is not surfaced; story playback remains.
+  var q=readQuranResume();
   var s=readStoryResume();
   var qTime=Number(q&&q.updatedAt||0);
   var sTime=Number(s&&s.updatedAt||0);
@@ -5128,16 +5172,18 @@ document.getElementById("resumeButton").addEventListener("click",function(){
     },220);
     return;
   }
-  showTab("stories");
+  var r=readQuranResume();
+  showTab("quran");
+  if(r)setTimeout(function(){openSurah(r.surah,r.ayah,"learn")},220);
 });
-document.getElementById("resumeQuran")?.addEventListener("click",function(){
+document.getElementById("resumeQuran").addEventListener("click",function(){
   var r=readQuranResume();
   if(r)openSurah(r.surah,r.ayah,"learn");else openSurah(112,0,"learn");
 });
-document.getElementById("quickLearn112")?.addEventListener("click",function(){openSurah(112,0,"learn")});
+document.getElementById("quickLearn112").addEventListener("click",function(){openSurah(112,0,"learn")});
 document.querySelectorAll("[data-quran-ref]").forEach(function(b){b.addEventListener("click",function(){openQuranRef(b.dataset.quranRef)})});
-document.getElementById("fullQuranButton")?.addEventListener("click",function(){document.getElementById("fullQuranModal").classList.add("open")});
-document.getElementById("openPickedSurah")?.addEventListener("click",function(){
+document.getElementById("fullQuranButton").addEventListener("click",function(){document.getElementById("fullQuranModal").classList.add("open")});
+document.getElementById("openPickedSurah").addEventListener("click",function(){
   var id=Number(document.getElementById("surahPicker").value||1);
   document.getElementById("fullQuranModal").classList.remove("open");
   openSurah(id,0,"listen");
@@ -5537,12 +5583,14 @@ function setQuizListenState(state){
 function quizSpeak(text,options){
   options=options||{};
   try{if(speech)speech.cancel()}catch(e){}
-  var newV4=window.DARKidsQuizV4Approved;
-  var q=Array.isArray(currentQuiz)?currentQuiz[currentQuizIndex]:null;
-  if(newV4&&q&&options.quizPart&&options.quizId===q.id&&newV4.has(q,options.quizPart)){
-    return newV4.play(q,options.quizPart,{onended:options.onended,onerror:options.onerror});
+  // Exact 450-question V4 Master audio plays only after independently documented
+  // per-file human listening sign-off and complete public manifest approval.
+  var candidate=Array.isArray(currentQuiz)?currentQuiz[currentQuizIndex]:null;
+  var gated=window.DARKidsQuizV4Approved;
+  if(candidate&&options.quizId===candidate.id&&options.quizPart&&gated&&gated.has(candidate,options.quizPart)){
+    return gated.play(candidate,options.quizPart,{onended:options.onended,onerror:options.onerror});
   }
-  if(newV4&&typeof newV4.stop==="function")newV4.stop();
+  if(gated&&typeof gated.stop==="function")gated.stop();
   if(window.DARKidsOwnerVoice&&typeof window.DARKidsOwnerVoice.play==="function"){
     var ok=window.DARKidsOwnerVoice.play(String(text||""),{source:options.source||"kids-ui",onended:options.onended,onerror:options.onerror});
     if(options.quizPrompt&&ok===false)setQuizListenState("missing");
@@ -5564,14 +5612,12 @@ window.addEventListener("dar-kids-owner-voice-missing",function(event){
 function refreshQuizListenState(){
   var q=Array.isArray(currentQuiz)?currentQuiz[currentQuizIndex]:null;
   var owner=window.DARKidsOwnerVoice;
-  var newV4=window.DARKidsQuizV4Approved;
-  var available=!!(q&&((newV4&&newV4.has(q,"question"))||
-    (owner&&typeof owner.has==="function"&&owner.has(quizPrompt(q)))));
+  var gated=window.DARKidsQuizV4Approved;
+  var available=!!(q&&((gated&&gated.has(q,"question"))||(owner&&typeof owner.has==="function"&&owner.has(quizPrompt(q)))));
   setQuizListenState(available?"ready":"missing");
 }
 window.addEventListener("dar-kids-quiz-v4-approved-ready",function(){
-  var modal=document.getElementById("quizModal");
-  if(modal&&modal.classList.contains("open"))refreshQuizListenState();
+  var modal=document.getElementById("quizModal");if(modal&&modal.classList.contains("open"))refreshQuizListenState();
 });
 window.addEventListener("dar-kids-owner-voice-ready",function(){
   var modal=document.getElementById("quizModal");
@@ -5587,14 +5633,36 @@ function currentKidsQuizAgeBand(){
 }
 var kidsQuizRoundCategory="all";
 var kidsQuizRoundMode="normal";
-var QUIZ_SESSION_KEY="kids.quiz.session.v1";
+// KIDS_TEST_QUIZ_PROFILES_V1460: all learning state belongs to one child.
+function kidsQuizProfileScope(){
+  try{
+    var id=String(localStorage.getItem("kids.activeProfile")||"").trim();
+    return id?"child."+encodeURIComponent(id):"guest";
+  }catch(_){return"guest"}
+}
+function quizSessionKey(){return"kids.quiz.session.v2."+kidsQuizProfileScope()}
+function kidsQuizCorrectKey(){return"kids.quiz.correct.v3."+kidsQuizProfileScope()}
+function kidsQuizHistoryKey(){return"kids.quiz.history.v1."+kidsQuizProfileScope()}
+function quizHistoryRead(){
+  try{var a=JSON.parse(localStorage.getItem(kidsQuizHistoryKey())||"[]");return Array.isArray(a)?a:[]}catch(_){return[]}
+}
+function quizHistorySave(q,correct){
+  try{
+    var all=quizHistoryRead();
+    all.push({id:String(q.id),ageBand:String(q.ageBand||""),category:String(q.category||"Quiz"),
+      correct:!!correct,at:Date.now()});
+    localStorage.setItem(kidsQuizHistoryKey(),JSON.stringify(all.slice(-500)));
+  }catch(_){}
+}
+window.DARKidsQuizProfileScope=kidsQuizProfileScope;
+window.DARKidsQuizReadHistory=quizHistoryRead;
 function normalizeKidsQuizCategory(value){
   value=String(value||"all").trim();
   return value||"all";
 }
 function loadKidsQuizSession(){
   try{
-    var raw=JSON.parse(localStorage.getItem(QUIZ_SESSION_KEY)||"null");
+    var raw=JSON.parse(localStorage.getItem(quizSessionKey())||"null");
     if(!raw||typeof raw!=="object")return null;
     if(raw.ageBand!==currentKidsQuizAgeBand())return null;
     if(!Array.isArray(raw.ids)||!raw.ids.length)return null;
@@ -5605,7 +5673,7 @@ function loadKidsQuizSession(){
 function saveKidsQuizSession(){
   if(!Array.isArray(currentQuiz)||!currentQuiz.length)return;
   try{
-    localStorage.setItem(QUIZ_SESSION_KEY,JSON.stringify({
+    localStorage.setItem(quizSessionKey(),JSON.stringify({
       ageBand:currentKidsQuizAgeBand(),
       category:normalizeKidsQuizCategory(kidsQuizRoundCategory),
       mode:String(kidsQuizRoundMode||"normal"),
@@ -5617,13 +5685,15 @@ function saveKidsQuizSession(){
   }catch(e){}
 }
 function clearKidsQuizSession(){
-  try{localStorage.removeItem(QUIZ_SESSION_KEY)}catch(e){}
+  try{localStorage.removeItem(quizSessionKey())}catch(e){}
 }
 function setKidsQuizRoundContext(category,mode){
   kidsQuizRoundCategory=normalizeKidsQuizCategory(category);
   kidsQuizRoundMode=String(mode||"normal");
 }
+var kidsQuizDirectQuestion=false;
 window.startKidsQuizRound=function(category,mode){
+  kidsQuizDirectQuestion=false;
   setKidsQuizRoundContext(category,mode);
   beginQuizSession();
 };
@@ -5658,7 +5728,17 @@ function renderKidsQuizAgePicker(){
      Im Quiz selbst gibt es bewusst keine zweite Altersauswahl. */
   var selected=currentKidsQuizAgeBand();
   var modal=document.getElementById("quizModal");
-  if(modal)modal.setAttribute("data-quiz-band",selected);
+  if(modal){
+    modal.setAttribute("data-quiz-band",selected);
+    var g=document.querySelector(".app[data-gender]"),gender=String(g&&g.getAttribute("data-gender")||document.documentElement.dataset.kidsBootGender||"boy");
+    try{
+      var id=localStorage.getItem("kids.activeProfile");
+      var ps=JSON.parse(localStorage.getItem("kids.profiles.v1")||"[]");
+      var p=Array.isArray(ps)?ps.find(function(x){return x&&String(x.id)===String(id)}):null;
+      if(p&&p.gender)gender=p.gender;
+    }catch(_){}
+    modal.setAttribute("data-quiz-gender",gender==="girl"?"girl":"boy");
+  }
 }
 function isYesNoAnswers(answers){
   var labels=(answers||[]).map(function(a){return String(a.label||"").trim().toLowerCase()});
@@ -5679,15 +5759,11 @@ function quizV4Text(q,part,old){
   return window.DARKidsQuizV4?window.DARKidsQuizV4.pick(q,part,old):String(old||"");
 }
 function quizAcademyPraiseText(q){
-  var next=window.DARKidsQuizV4Approved;
-  if(next&&next.has(q,"correct"))return String(next.get(q,"correct").text);
   // The visible blessing is always Islamic. Only use newly rendered audio after the exact V4 clip exists.
   var voice=window.DARKidsQuizV4&&window.DARKidsQuizV4.speech(q);
   return String(voice&&voice.correctAudioText||q&&q.success||"Sehr gut!");
 }
 function quizAcademyRetryText(q){
-  var next=window.DARKidsQuizV4Approved;
-  if(next&&next.has(q,"retry"))return String(next.get(q,"retry").text);
   var voice=window.DARKidsQuizV4&&window.DARKidsQuizV4.speech(q);
   return String(voice&&voice.retryAudioText||q&&q.retry||"Versuch es noch einmal!");
 }
@@ -5702,12 +5778,12 @@ function quizAgeRange(){
   if(band==="7-8")return{id:"7-8",min:7,max:8,limit:4,label:"7–8 Jahre · geprüfte Fragen"};
   return{id:"9-10",min:9,max:10,limit:5,label:"9–10 Jahre · geprüft & vertieft"};
 }
-var QUIZ_PROGRESS_PREFIX="kids.quiz.progress.v2.";
+var QUIZ_PROGRESS_PREFIX="kids.quiz.progress.v3.";
 function quizProgressDefault(){
   return {stage:"new",attempts:0,reviewPasses:0,wrong:0,mistakeTaps:0,lapses:0,dueAt:0,lastSeenAt:0,lastMistakeAt:0,consecutiveFirstTry:0};
 }
 function quizProgress(id){
-  var key=QUIZ_PROGRESS_PREFIX+id;
+  var key=QUIZ_PROGRESS_PREFIX+kidsQuizProfileScope()+"."+id;
   try{
     var raw=JSON.parse(localStorage.getItem(key)||"null");
     if(raw&&typeof raw==="object"){
@@ -5716,22 +5792,12 @@ function quizProgress(id){
       Object.keys(base).forEach(function(k){if(raw[k]===undefined)raw[k]=base[k]});
       return raw;
     }
-    var legacy=Number(localStorage.getItem("kids.quiz.mastery."+id)||"0");
-    if(legacy>0){
-      var migrated=quizProgressDefault();
-      migrated.stage="learning";
-      migrated.attempts=legacy;
-      migrated.reviewPasses=1;
-      migrated.dueAt=Date.now();
-      migrated.lastSeenAt=Date.now();
-      localStorage.setItem(key,JSON.stringify(migrated));
-      return migrated;
-    }
+    // Legacy progress was shared across children: never silently copy it to a profile.
   }catch(e){}
   return quizProgressDefault();
 }
 function saveQuizProgress(id,entry){
-  try{localStorage.setItem(QUIZ_PROGRESS_PREFIX+id,JSON.stringify(entry||quizProgressDefault()))}catch(e){}
+  try{localStorage.setItem(QUIZ_PROGRESS_PREFIX+kidsQuizProfileScope()+"."+id,JSON.stringify(entry||quizProgressDefault()))}catch(e){}
 }
 function quizMastery(id){
   return Number(quizProgress(id).reviewPasses||0);
@@ -5785,6 +5851,13 @@ function recordQuizAttempt(id,firstTry){
   else if(e.reviewPasses>=2)e.stage="review";
   else e.stage="learning";
   saveQuizProgress(id,e);
+  var question=Array.isArray(kidsQuizPool)?kidsQuizPool.find(function(q){return q&&q.id===id}):null;
+  if(question)quizHistorySave(question,!!firstTry);
+  if(firstTry){
+    try{localStorage.setItem(kidsQuizCorrectKey(),String(quizSavedCorrect()+1))}catch(_){}
+  }
+  try{updateParentProgress()}catch(_){}
+  try{window.dispatchEvent(new CustomEvent("dar-kids-quiz-progress",{detail:{id:id,correct:!!firstTry}}))}catch(_){}
   return{entry:e,counted:counted,firstTry:firstTry};
 }
 function deterministicQuizRank(id){
@@ -5982,6 +6055,7 @@ window.quizArtworkForBand=quizArtworkForBand;
 window.renderQuizQuestion=renderQuizQuestion;
 window.renderQuizFinish=renderQuizFinish;
 window.openKidsQuizQuestion=function(q){
+  kidsQuizDirectQuestion=true;
   if(!q||!q.id||!kidsQuizLoaded)return false;
   setKidsQuizRoundContext("all","normal");
   currentQuiz=[q];currentQuizIndex=0;quizCorrectCount=0;
@@ -6055,6 +6129,7 @@ function openQuiz(){
   beginQuizSession();
 }
 function beginQuizSession(){
+  kidsQuizDirectQuestion=false;
   renderKidsQuizAgePicker();
   currentQuiz=quizBankForAge();
   currentQuizIndex=0;
@@ -6077,7 +6152,7 @@ function beginQuizSession(){
   renderQuizQuestion();
 }
 function quizSavedCorrect(){
-  try{return Number(localStorage.getItem("kids.quiz.correct")||"0")}catch(e){return 0}
+  try{return Number(localStorage.getItem(kidsQuizCorrectKey())||"0")}catch(e){return 0}
 }
 function renderQuizProgress(){
   var box=document.getElementById("quizProgress");
@@ -6092,7 +6167,10 @@ function renderQuizProgress(){
   }).join("");
 }
 function renderQuizQuestion(){
-  if(currentQuizIndex>=currentQuiz.length){(window.renderQuizFinish||renderQuizFinish)();return}
+  if(currentQuizIndex>=currentQuiz.length){
+    if(kidsQuizDirectQuestion&&typeof window.kidsQuizShowLibrary==="function"){window.kidsQuizShowLibrary();return}
+    renderQuizFinish();return
+  }
   renderKidsQuizAgePicker();
   saveKidsQuizSession();
   var ageLabel=document.getElementById("quizAgeLabel");
@@ -6129,10 +6207,11 @@ function renderQuizQuestion(){
     '<div id="quizAnswers" class="quiz-answers" role="group" aria-label="Antworten"></div>'+
     '<div id="quizFeedback" class="quiz-feedback" aria-live="polite"></div>'+
     '<div id="quizExplanation" class="quiz-explanation"></div>'+
-    '<button id="quizExplanationListen" class="quiz-listen" type="button" hidden disabled>Erklärung anhören</button>'+ 
+    '<button id="quizExplanationListen" type="button" class="quiz-listen" hidden disabled>Erklärung anhören</button>'+ 
     '<div id="quizTermLearning" hidden></div>'+ 
     '<div id="quizSource" class="quiz-source"></div>'+
-    '<button id="quizNext" class="quiz-next" type="button">'+(currentQuizIndex===currentQuiz.length-1?'Auswertung ansehen':'Weiter')+' ›</button>';
+    '<button id="quizNext" class="quiz-next" type="button" disabled aria-disabled="true">'+
+      (kidsQuizDirectQuestion?'Zur Fragenübersicht':currentQuizIndex===currentQuiz.length-1?'Auswertung ansehen':'Nächste Frage')+' ›</button>';
   var scene=document.getElementById("quizScene");
   if(scene&&art.url){
     scene.style.setProperty("--quiz-art",'url("'+art.url.replace(/"/g,"%22")+'")');
@@ -6154,13 +6233,19 @@ function renderQuizQuestion(){
   document.getElementById("quizListen").addEventListener("click",function(){
     refreshQuizListenState();
     if(this.disabled)return;
-    quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question",quizId:q.id,quizQuestion:q,quizPart:"question"});
+    quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question",quizId:q.id,quizPart:"question"});
   });
-  document.getElementById("quizNext").addEventListener("click",function(){window.DARKidsQuizV4Approved?.stop?.();window.DARKidsTermLearning?.stop?.();currentQuizIndex++;renderQuizQuestion()});
+  document.getElementById("quizNext").addEventListener("click",function(){
+    if(this.disabled||!quizLocked)return;
+    try{window.DARKidsQuizV4Approved?.stop?.();window.DARKidsOwnerVoice?.stop?.();window.DARKidsTermLearning?.stop?.()}catch(_){}
+    if(kidsQuizDirectQuestion&&typeof window.kidsQuizShowLibrary==="function"){window.kidsQuizShowLibrary();return}
+    currentQuizIndex++;renderQuizQuestion();
+    var body=document.getElementById("quizBody");if(body)body.scrollTop=0;
+  });
   setTimeout(function(){
     if(currentQuiz[currentQuizIndex]!==q)return;
     refreshQuizListenState();
-    quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question",quizId:q.id,quizQuestion:q,quizPart:"question"});
+    quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question",quizId:q.id,quizPart:"question"});
   },250);
 }
 function quizRewardBurst(){
@@ -6175,97 +6260,65 @@ function quizRewardBurst(){
   scene.appendChild(burst);
   setTimeout(function(){if(burst&&burst.parentNode)burst.remove()},950);
 }
+// KIDS_TEST_QUIZ_NEXT_V1460: a single answer unlocks the next step (right or wrong).
 function chooseQuizAnswer(index,button){
-  if(quizLocked)return;
-  var q=currentQuiz[currentQuizIndex];
-  var a=q.answers[index];
-  var buttons=[].slice.call(document.querySelectorAll("#quizAnswers .quiz-answer"));
-  if(a.correct){
-    quizLocked=true;
-    quizCorrectCount++;
-    button.classList.add("correct");
-    quizRewardBurst();
-    document.getElementById("quizFeedback").className="quiz-feedback good";
-    document.getElementById("quizFeedback").textContent="✓ "+quizAcademyPraiseText(q);
-    var explanation=document.getElementById("quizExplanation");
-    if(explanation&&q.explanation){
-      explanation.textContent=String(q.explanation);
-      explanation.classList.add("show");
-    }
-    // Erklärt Fachbegriffe beidseitig, ohne die freigegebenen Quiz-/Audio-Texte zu verändern.
-    var termSlot=document.getElementById("quizTermLearning");
-    if(termSlot&&window.DARKidsTermLearning&&typeof window.DARKidsTermLearning.render==="function"){
-      var correctTerms=(Array.isArray(q.answers)?q.answers:[]).filter(function(a){return a.correct}).map(function(a){return a.label||""});
-      window.DARKidsTermLearning.render(termSlot,
-        [q.question,q.explanation,q.topic,q.category].concat(correctTerms).join(" "),
-        {age:currentKidsQuizAgeBand(),max:2});
-    }
-    var src=document.getElementById("quizSource");
-    if(src)src.innerHTML='<strong>Quelle:</strong> '+String(q.source||"");
-    document.getElementById("quizNext").classList.add("show");
-    // Save mastery internally; don't replace the child's blessing with a technical learning state.
-    recordQuizAttempt(q.id,!quizQuestionHadError);
-    // Nach einer richtigen Antwort wird die kindgerechte Erklärung vollständig
-    // in der Serhat-Masterstimme vorgelesen, aber nur mit echtem freigegebenem Clip.
-    // Nicht auf System-TTS ausweichen und keine nächste Quizfrage übertönen.
-    var answeredQuestion=q,answeredIndex=currentQuizIndex;
-    var explanationAudio=quizV4Text(q,"explanationAudioText",q.explanation);
-    var newV4=window.DARKidsQuizV4Approved;
-    var canExplain=!!(q.explanation&&((newV4&&newV4.has(q,"explanation"))||
-      (window.DARKidsOwnerVoice&&typeof window.DARKidsOwnerVoice.has==="function"&&
-      window.DARKidsOwnerVoice.has(explanationAudio))));
-    var listenExplanation=document.getElementById("quizExplanationListen");
-    if(listenExplanation){
-      listenExplanation.hidden=!canExplain;
-      listenExplanation.disabled=!canExplain;
-      if(canExplain)listenExplanation.addEventListener("click",function(){
-        quizSpeak(explanationAudio,{source:"kids-quiz-explanation",quizId:q.id,quizQuestion:q,quizPart:"explanation"});
-      });
-    }
-    function questionStillOpen(){
-      var modal=document.getElementById("quizModal");
-      return !!(modal&&modal.classList.contains("open")&&
-        currentQuizIndex===answeredIndex&&currentQuiz[currentQuizIndex]===answeredQuestion);
-    }
-    function playQuizTermExplanation(){
-      if(!questionStillOpen()||!window.DARKidsTermLearning?.playFor)return;
-      var correctWords=(answeredQuestion.answers||[]).filter(function(x){return x.correct}).map(function(x){return x.label||""});
-      window.DARKidsTermLearning.playFor(
-        [answeredQuestion.question,answeredQuestion.explanation,answeredQuestion.topic,answeredQuestion.category].concat(correctWords).join(" "),
-        {age:currentKidsQuizAgeBand(),max:2,stillValid:questionStillOpen}
-      ).catch(function(){});
-    }
-    quizSpeak(quizV4Text(q,"correctAudioText",q.success),{
-      source:"kids-quiz-feedback",quizId:q.id,quizQuestion:q,quizPart:"correct",
-      onended:function(){
-        if(!questionStillOpen())return;
-        if(canExplain){
-          quizSpeak(explanationAudio,{
-            source:"kids-quiz-explanation",quizId:q.id,quizQuestion:q,quizPart:"explanation",
-            onended:playQuizTermExplanation
-          });
-        }else{playQuizTermExplanation()}
-      }
-    });
-  }else{
-    quizQuestionHadError=true;
-    recordQuizMistake(q.id);
-    button.classList.add("wrong");
-    document.getElementById("quizFeedback").className="quiz-feedback bad";
-    document.getElementById("quizFeedback").textContent=quizAcademyRetryText(q);
-    quizSpeak(quizV4Text(q,"retryAudioText",q.retry),{source:"kids-quiz-retry",quizId:q.id,quizQuestion:q,quizPart:"retry"});
-    // Leave encouragement visible while the child thinks; remove only the shake marker.
-    setTimeout(function(){
-      if(button&&button.isConnected)button.classList.remove("wrong");
-    },1100);
+  if(quizLocked||!currentQuiz||!currentQuiz[currentQuizIndex])return;
+  var q=currentQuiz[currentQuizIndex],answer=q.answers&&q.answers[index];
+  if(!answer)return;
+  quizLocked=true;
+  var correct=!!answer.correct,buttons=[].slice.call(document.querySelectorAll("#quizAnswers .quiz-answer"));
+  if(correct)quizCorrectCount++;
+  else{quizQuestionHadError=true;recordQuizMistake(q.id)}
+  buttons.forEach(function(el,i){
+    el.disabled=true;
+    el.setAttribute("aria-disabled","true");
+    if(q.answers[i]&&q.answers[i].correct)el.classList.add("correct");
+    else if(i===index)el.classList.add("wrong");
+  });
+  var feedback=document.getElementById("quizFeedback");
+  if(feedback){
+    feedback.className="quiz-feedback show "+(correct?"good":"bad");
+    feedback.textContent=correct?"✓ "+quizAcademyPraiseText(q):
+      "Guter Versuch! Richtig ist: "+(q.answers.find(function(a){return a.correct})||{}).label+".";
   }
+  var explanation=document.getElementById("quizExplanation");
+  if(explanation&&q.explanation){explanation.textContent=String(q.explanation);explanation.classList.add("show")}
+  var source=document.getElementById("quizSource");
+  if(source&&q.source)source.innerHTML='<strong>Quelle:</strong> '+quizText(q.source);
+  var next=document.getElementById("quizNext");
+  if(next){
+    next.disabled=false;next.setAttribute("aria-disabled","false");
+    next.classList.add("show");
+  }
+  recordQuizAttempt(q.id,correct);
+  if(correct)quizRewardBurst();
+  // Audios are optional: never block "Weiter" or publish unapproved V4 clips.
+  var gated=window.DARKidsQuizV4Approved,owner=window.DARKidsOwnerVoice;
+  var explanationText=quizV4Text(q,"explanationAudioText",q.explanation);
+  var canExplain=!!(q.explanation&&((gated&&gated.has(q,"explanation"))||(owner&&owner.has&&owner.has(explanationText))));
+  var explanationButton=document.getElementById("quizExplanationListen");
+  if(explanationButton){
+    explanationButton.hidden=!canExplain;
+    explanationButton.disabled=!canExplain;
+    explanationButton.addEventListener("click",function(){
+      quizSpeak(explanationText,{source:"kids-quiz-explanation",quizId:q.id,quizPart:"explanation"});
+    });
+  }
+  var text=correct?quizV4Text(q,"correctAudioText",q.success):quizV4Text(q,"retryAudioText",q.retry);
+  var kind=correct?"correct":"retry";
+  try{
+    if((gated&&gated.has(q,kind))||(owner&&owner.has&&owner.has(text))){
+      quizSpeak(text,{source:"kids-quiz-feedback",quizId:q.id,quizPart:kind,onended:function(){
+        if(currentQuiz&&currentQuiz[currentQuizIndex]===q&&quizLocked&&canExplain){
+          quizSpeak(explanationText,{source:"kids-quiz-explanation",quizId:q.id,quizPart:"explanation"});
+        }
+      }});
+    }
+  }catch(_){}
 }
 function renderQuizFinish(){
   clearKidsQuizSession();
-  try{
-    var total=quizSavedCorrect()+quizCorrectCount;
-    localStorage.setItem("kids.quiz.correct",String(total));
-  }catch(e){}
+  // Every answered question has already persisted its per-profile result.
   updateParentProgress();
   document.getElementById("quizProgress").innerHTML="";
   document.getElementById("quizBody").innerHTML=
@@ -6499,14 +6552,12 @@ syncActiveSurfaceFocus();
 var ageHelp={"4–5":"viel hören · sehr kurze Wege","6–8":"hören · verstehen · mitmachen","9–10":"verstehen · anwenden · vertiefen"};
 var ageButtons=[].slice.call(document.querySelectorAll("[data-age]"));
 var age=localStorage.getItem("kids.age")||"6–8";
-function birthAgeGroup(){try{var id=localStorage.getItem("kids.activeProfile"),b=window.DARKidsBirthMonth;return id&&b?b.groupAt(b.get(id)):null}catch(_){return null}}
 function setAge(a){
   age=a;localStorage.setItem("kids.age",a);
   try{localStorage.removeItem("kids.quiz.ageBand")}catch(e){}
   if(window.onKidsQuizAgeChanged)window.onKidsQuizAgeChanged();
   ageButtons.forEach(function(b){b.classList.toggle("active",b.dataset.age===a)});
-  document.getElementById("ageHelp").textContent=(ageHelp[a]||"")+(birthAgeGroup()?" · automatisch":"");
-  var badge=document.getElementById("kidsAgeMode");if(badge)badge.textContent=birthAgeGroup()?"AUTOMATISCH":"MANUELL";
+  document.getElementById("ageHelp").textContent=ageHelp[a]||"";
   var app=document.querySelector(".app");
   if(app)app.setAttribute("data-age",a);
   if(window.kidsAlphabetOnAge)window.kidsAlphabetOnAge();
@@ -6523,8 +6574,7 @@ function setAge(a){
     document.querySelectorAll(".quran-mini-note").forEach(function(el){el.textContent="Wort-für-Wort-Training mit Aufnahme: Grün = bestanden, Orange = ähnlich, Rot = Fehler. Die nächste Āyah bleibt bis zum vollständigen Bestehen gesperrt."});
   }
 }
-window.DARKidsApplyAgeGroup=setAge;
-ageButtons.forEach(function(b){b.addEventListener("click",function(){setAge(birthAgeGroup()||b.dataset.age)})});
+ageButtons.forEach(function(b){b.addEventListener("click",function(){setAge(b.dataset.age)})});
 
 var slider=document.getElementById("minuteSlider");
 slider.value=localStorage.getItem("kids.minutes")||"12";
@@ -6534,7 +6584,7 @@ function updateMinutes(){
 }
 slider.addEventListener("input",updateMinutes);
 
-quranAudio?.addEventListener("error",function(){
+quranAudio.addEventListener("error",function(){
   updateLearnStatus("Audio lädt gerade nicht — bitte erneut tippen",false);
   document.getElementById("ayahPlay").textContent=" Āyah anhören";
 });
@@ -6547,7 +6597,7 @@ updateParentProgress();
 fetchKidsDuas();
 fetchAuthenticStories();
 fetchVerifiedKnowledge();
-var laterKids=function(){fetchKidsQuiz();};
+var laterKids=function(){fetchKidsQuiz();fetchCatalog();};
 if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000});else setTimeout(laterKids,1800);
 })();
 </script>
@@ -6650,7 +6700,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   var API="https://djyfkttjbdraynuxrzno.supabase.co/rest/v1/rpc/";
   var APIKEY="sb_publishable_kR6b1SlL3uoVq4gbTFWKkQ_a2Rcfg2i";
   var join=document.getElementById("kidsJoin");
-  var draft={gender:"boy",age:"6–8",birthMonth:""};
+  var draft={gender:"boy",age:"6–8"};
   var askId="";
   var joinScrollY=0;
   var GUEST_GENDER="kids.guest.gender.v1";
@@ -6685,10 +6735,9 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   function applyProfile(p){
     var app=document.querySelector(".app");
     if(app)app.setAttribute("data-gender",p.gender||"boy");
-    var resolved=window.DARKidsBirthMonth?.resolve(p.id,p.age)||p.age||"6–8";
-    if(window.DARKidsApplyAgeGroup)window.DARKidsApplyAgeGroup(resolved);
-    else if(app)app.setAttribute("data-age",resolved);
-    refreshBirthPanel();
+    var btn=document.querySelector('.age-tabs [data-age="'+p.age+'"]');
+    if(btn)btn.click();
+    else if(app)app.setAttribute("data-age",p.age||"6–8");
   }
 
   /* Inline feedback works even when iOS WKWebView suppresses window.alert. */
@@ -6734,7 +6783,6 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var pw=document.getElementById(isRestore?"deviceLoginPass":"joinPass").value||"";
     if(name.length<2){joinFeedback("Bitte einen Namen mit mindestens zwei Zeichen eingeben.","error");return}
     if(pw.length<4){joinFeedback("Bitte ein Passwort mit mindestens vier Zeichen eingeben.","error");return}
-    if(mode==="register"&&!draft.birthMonth){step("age");document.getElementById("joinBirthNotice").textContent="Für das Konto bitte Monat und Jahr auswählen.";return}
     if(mode!=="login"&&!isRestore)document.getElementById("joinLoginExisting").hidden=true;
     joinPending(true);
     joinFeedback(mode==="login"||isRestore?"Anmeldung wird geprüft …":"Konto wird geprüft …","info");
@@ -6757,10 +6805,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
           var ageBtn=document.querySelector('.age-tabs [data-age="'+draft.age+'"]');
           if(ageBtn)ageBtn.click();
           var p={id:String(Date.now()),name:name,pass:h,gender:draft.gender,age:draft.age,data:bag()};
-          if(draft.birthMonth)window.DARKidsBirthMonth?.set(p.id,draft.birthMonth);
           var list=load();list.push(p);save(list);localStorage.setItem(ACTIVE,p.id);
-          /* The old account's auto-age cannot override the new child's age. */
-          if(window.DARKidsApplyAgeGroup)window.DARKidsApplyAgeGroup(draft.age);
           syncConfirmed[p.id]=profileSnapshot(p);
           joinFeedback("Konto erfolgreich angelegt.","success");closeJoin();renderList();
         });
@@ -6772,8 +6817,6 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     if(name==="place")name="name";
     joinFeedback("","info");document.getElementById("joinLoginExisting").hidden=true;
     join.querySelectorAll(".step").forEach(function(s){s.classList.toggle("on",s.getAttribute("data-step")===name)});
-    var globalCancel=document.getElementById("joinCancel");
-    if(globalCancel)globalCancel.style.display=name==="login"?"none":localStorage.getItem(ACTIVE)?"block":"none";
     join.querySelectorAll(".join-feedback").forEach(function(el){el.hidden=true;el.textContent=""});
     var card=join.querySelector(".kids-join-card");
     if(card)card.scrollTop=0;
@@ -6798,8 +6841,6 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var shellForJoin=document.querySelector(".shell");
     joinScrollY=shellForJoin?shellForJoin.scrollTop:0;
     join.classList.add("open");
-    var activeApp=document.querySelector(".app");
-    join.dataset.gender=activeApp?.getAttribute("data-gender")==="girl"?"girl":activeApp?.getAttribute("data-gender")==="boy"?"boy":draft.gender==="girl"?"girl":"boy";
     var cancel=document.getElementById("joinCancel");
     var has=!!localStorage.getItem(ACTIVE);
     join.querySelectorAll(".join-skip").forEach(function(b){b.style.display=has?"none":"block"});
@@ -6885,7 +6926,6 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     flushProfileSync(p.id);
   }
   function renderList(){
-    refreshBirthPanel();
     var box=document.getElementById("profileList");
     if(!box)return;
     var cur=localStorage.getItem(ACTIVE);
@@ -6914,8 +6954,6 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   function removeLocal(id){
     var list=load().filter(function(x){return x.id!==id});
     save(list);
-    /* Child privacy: erase birth-month metadata when profile is removed. */
-    window.DARKidsBirthMonth?.clear(id);
     if(localStorage.getItem(ACTIVE)===id){
       if(list[0])localStorage.setItem(ACTIVE,list[0].id);
       else localStorage.removeItem(ACTIVE);
@@ -6925,7 +6963,6 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var p=load().find(function(x){return x.id===id});
     if(!p)return;
     openJoin("login");
-    join.dataset.gender=p.gender==="girl"?"girl":"boy";
     document.getElementById("deviceLoginName").value=p.name||"";
     document.getElementById("deviceLoginPass").value="";
   }
@@ -6934,54 +6971,19 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   join.querySelectorAll("[data-gender]").forEach(function(b){
     b.addEventListener("click",function(){
       draft.gender=b.getAttribute("data-gender");
-      join.dataset.gender=draft.gender==="girl"?"girl":"boy";
       try{localStorage.setItem(GUEST_GENDER,draft.gender)}catch(e){}
       step("age");
     });
   });
-  /* KIDS_ACCOUNT_BIRTH_MONTH_V1431: local per-profile month-year. */
-  var BIRTH=window.DARKidsBirthMonth;
-  function populateBirth(){
-    var months=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
-    ["joinBirthMonth","parentBirthMonth"].forEach(function(id){var el=document.getElementById(id);if(el)months.forEach(function(m,i){var o=document.createElement("option");o.value=String(i+1).padStart(2,"0");o.textContent=m;el.appendChild(o)})});
-    ["joinBirthYear","parentBirthYear"].forEach(function(id){var el=document.getElementById(id);if(el)for(var y=new Date().getFullYear()-3;y>=new Date().getFullYear()-12;y--){var o=document.createElement("option");o.value=String(y);o.textContent=String(y);el.appendChild(o)}});
-  }
-  function birthValue(a,b){var m=document.getElementById(a).value,y=document.getElementById(b).value;return y.length===4&&m.length===2?y+"-"+m:""}
-  function refreshBirthPanel(){
-    var box=document.getElementById("parentBirthPanel");if(!box)return;
-    var p=currentProfile();box.hidden=!p;if(!p)return;
-    var value=BIRTH?.get(p.id)||"",parts=value.split("-");
-    document.getElementById("parentBirthYear").value=parts[0]||"";
-    document.getElementById("parentBirthMonth").value=parts[1]||"";
-    document.getElementById("parentBirthNotice").textContent=value?"Automatisch · "+BIRTH.ageAt(value)+" Jahre · Stufe "+BIRTH.groupAt(value):"Bitte Monat und Jahr ergänzen; bis dahin gilt die bisherige Altersstufe.";
-    document.getElementById("kidsAgeMode").textContent=value?"AUTOMATISCH":"MANUELL";
-  }
-  function refreshBirthday(){
-    var p=currentProfile(),desired=p&&BIRTH?BIRTH.groupAt(BIRTH.get(p.id)):null;
-    if(desired&&window.DARKidsApplyAgeGroup&&localStorage.getItem("kids.age")!==desired)window.DARKidsApplyAgeGroup(desired);
-  }
-  populateBirth();
-  document.getElementById("joinBirthContinue").addEventListener("click",function(){
-    var value=birthValue("joinBirthMonth","joinBirthYear");
-    if(!BIRTH?.isEligible(value)){document.getElementById("joinBirthNotice").textContent="Bitte gültigen Monat und Jahr für 4 bis 10 Jahre auswählen.";return}
-    draft.birthMonth=value;draft.age=BIRTH.groupAt(value);document.getElementById("joinBirthNotice").textContent="";step("name");
-  });
-  document.getElementById("parentBirthSave").addEventListener("click",function(){
-    var p=currentProfile();if(!p)return;
-    var value=birthValue("parentBirthMonth","parentBirthYear");
-    if(!BIRTH?.isEligible(value)){document.getElementById("parentBirthNotice").textContent="Bitte gültigen Monat und Jahr (4 bis 10 Jahre) wählen.";return}
-    if(!BIRTH.set(p.id,value)){document.getElementById("parentBirthNotice").textContent="Speichern nicht möglich.";return}
-    refreshBirthday();rememberCurrent();refreshBirthPanel();
-  });
   join.querySelectorAll("[data-join-age]").forEach(function(b){
-    b.addEventListener("click",function(){draft.birthMonth="";draft.age=b.getAttribute("data-join-age");step("name")});
+    b.addEventListener("click",function(){draft.age=b.getAttribute("data-join-age");step("name")});
   });
   var cancel=document.getElementById("joinCancel");
   if(cancel)cancel.addEventListener("click",function(){if(localStorage.getItem(ACTIVE))closeJoin()});
   document.getElementById("joinSave").addEventListener("click",function(){submitJoin("register")});
   document.getElementById("joinLoginExisting").addEventListener("click",function(){submitJoin("login")});
   var add=document.getElementById("profileAdd");
-  if(add)add.addEventListener("click",function(){draft={gender:"boy",age:"6–8",birthMonth:""};document.getElementById("joinBirthMonth").value="";document.getElementById("joinBirthYear").value="";openJoin(load().length?"who":"hello")});
+  if(add)add.addEventListener("click",function(){draft={gender:"boy",age:"6–8"};openJoin(load().length?"who":"hello")});
   join.querySelectorAll(".join-skip").forEach(function(b){b.addEventListener("click",skipJoin)});
   var bring=document.getElementById("profileBring");
   if(bring)bring.addEventListener("click",function(){
@@ -7031,7 +7033,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     try{
       var resumeProfileTab=sessionStorage.getItem("kids.profile.restoreTab")||"";
       sessionStorage.removeItem("kids.profile.restoreTab");
-      if(/^view-(today|stories|salaf|parents)$/.test(resumeProfileTab)){
+      if(/^view-(today|stories|salaf|quran|parents)$/.test(resumeProfileTab)){
         var targetTab=document.querySelector('.nav-btn[data-target="'+resumeProfileTab.slice(5)+'"]');
         if(targetTab)requestAnimationFrame(function(){targetTab.click()});
       }
@@ -7045,11 +7047,10 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if(add)add.textContent=load().length?"Weiteres Kind":"Konto anlegen";
   /* Never re-register local profiles at startup: this can overwrite cloud progress. */
   window.addEventListener("pagehide",rememberCurrent);
-  window.addEventListener("pageshow",function(){refreshBirthday();refreshBirthPanel()});
-  document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")rememberCurrent();else{refreshBirthday();refreshBirthPanel()}});
+  document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")rememberCurrent()});
   /* Progress can change in any Kids learning module without a page change. */
   setInterval(function(){
-    if(document.visibilityState!=="hidden"){refreshBirthday();rememberCurrent()}
+    if(document.visibilityState!=="hidden")rememberCurrent();
     var p=currentProfile();
     if(p&&syncPending[p.id]&&!syncBusy[p.id])flushProfileSync(p.id);
   },20000);
@@ -7062,18 +7063,18 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 <script src="/kids/content-studio-feed.js?v=studio8"></script>
-<script src="/kids/owner-voice.js?v=20261026-premium1"></script>
+<script src="/kids/owner-voice.js?v=8"></script>
 <script src="/kids/dua-word-meanings-v1.js?v=2"></script>
 <script src="/kids/dua-phonetic-alignment-v1.js?v=1"></script>
 <script src="/kids/dua-smart-learn.js?v=1312"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren";
+  var KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1410";
   // Stable start: do not reload a visible app when a service worker takes control.
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1457",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1460",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -7111,7 +7112,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
       }).catch(function(){}).finally(function(){refreshingSalaf=false});
   }
   document.addEventListener("click",function(event){
-    if(event.target.closest&&event.target.closest('[data-go="salaf"],.nav-btn[data-target="salaf"]')){
+    if(event.target.closest&&event.target.closest('.nav-btn[data-target="salaf"]')){
       setTimeout(refreshSalafIfStale,80);
     }
   },true);
@@ -7125,7 +7126,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     window.addEventListener("load",function(){
       setTimeout(function(){
         if(document.getElementById("profileJoin")?.hidden===false)return;
-        showTab("salaf");
+        document.querySelector('.nav-btn[data-target="salaf"]')?.click();
       },220);
     },{once:true});
   }
@@ -8100,25 +8101,25 @@ html[data-view="stories"] #view-stories > :last-child{
 
 </style>
 <link rel="stylesheet" href="/kids/dua-smart-learn.css?v=1261" data-kids-dua-smart="1">
-<link rel="stylesheet" href="/kids/quiz-library.css?v=20261026-premium1">
-<link rel="stylesheet" href="/kids/quiz-premium-v1.css?v=20261026-premium1">
+<link rel="stylesheet" href="/kids/quiz-library.css?v=1454">
+
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=5">
 <script src="/kids/screen-awake.js?v=1"></script>
-<script src="/kids/story-follow-reader.js?v=19-salaf1"></script>
+<script src="/kids/story-follow-reader.js?v=18-salaf1"></script>
 <script src="/kids/story-policy.js?v=2"></script>
-<script src="/kids/prophet-stories.js?v=43&outrofix=20261017"></script>
-<script src="/kids/mubashshirun-stories.js?v=1414&outrofix=20261017"></script>
-<script src="/kids/sahabiyyat-stories.js?v=1414&outrofix=20261017"></script>
+<script src="/kids/prophet-stories.js?v=20261015-gender1"></script>
+<script src="/kids/mubashshirun-stories.js?v=1414"></script>
+<script src="/kids/sahabiyyat-stories.js?v=1414"></script>
 <script src="/kids/deen-lessons.js?v=11"></script>
 <script src="/kids/global-story-glow-v1216.js?v=1218-calm"></script>
 <script src="/kids/term-learning.js?v=1"></script>
-<script src="/kids/dua-hub-v1219.js?v=1421" data-kids-dua-hub="1259"></script>
-<script src="/kids/story-hub.js?v=29"></script>
+<script src="/kids/dua-hub-v1219.js?v=1318" data-kids-dua-hub="1259"></script>
+<script src="/kids/story-hub.js?v=28"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-v4-bridge.js?v=20261013-academy1"></script>
 <script src="/kids/quiz-v4-approved-player.js?v=20261026-v1"></script>
 <script>window.DARKidsQuizV4Approved&&window.DARKidsQuizV4Approved.load();</script>
-<script src="/kids/quiz-library.js?v=20261026-premium1"></script>
+<script src="/kids/quiz-library.js?v=1460"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1256-parent-hero-full" data-kids-section-heroes-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148" data-kids-stories-home-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1138.css?v=1152" data-kids-stories-home-polish="1">
@@ -9861,7 +9862,7 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 </style>
 
-<script src="/kids/navigation-v1182.js?v=1425"></script>
+<script src="/kids/navigation-v1182.js?v=1410"></script>
 
 <style id="kids-home-cinema-v1185">
 #view-today{--home-v1185-deep:#061b26;--home-v1185-petrol:#082b37}
@@ -11704,8 +11705,8 @@ html[data-view="stories"] #view-stories > :last-child{
 
 
 <!-- KIDS_DUA_FULLBLEED_EXPLANATION_CTA_V1249: shared full-width header and explanation actions, original back controls, no bottom-nav changes -->
-<link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1428" data-kids-global-detail-dock="1257">
-<script src="/kids/global-detail-dock-v1247.js?v=1428" data-kids-global-detail-dock="1257"></script>
+<link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1411" data-kids-global-detail-dock="1257">
+<script src="/kids/global-detail-dock-v1247.js?v=1414" data-kids-global-detail-dock="1257"></script>
 
 <link rel="stylesheet" href="/kids/dua-layout-v1259.css?v=1311" data-kids-dua-layout="1259">
 <link rel="stylesheet" href="/kids/dua-learn-cinema-v1261.css?v=1261" data-kids-dua-cinema="1261">
@@ -11804,7 +11805,7 @@ html body .app:has(#view-parents.view.active) .shell{
 <script defer src="/kids/girls-profile-theme-v1332.js?v=1348" data-kids-girls-system-tint="1332"></script>
 <!-- KIDS_SALAF_LIBRARY_V1: fifth tab, isolated source-gated library; after other profile palettes -->
 <link rel="stylesheet" href="/kids/salaf-library-v1.css?v=1">
-<script defer src="/kids/salaf-library-v1.js?v=1441"></script>
+<script defer src="/kids/salaf-library-v1.js?v=20261014-4"></script>
 <!-- KIDS_OFFLINE_LIBRARY_V1: independent storage controls for the Parents tab -->
 <script defer src="/kids/offline-library-v1.js?v=1"></script>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
@@ -11848,154 +11849,23 @@ html body :is(
 }
 /* Do not change touch-action, pointer-events, scrolling, tap targets, focus or keyboard editing. */
 </style>
-<style id="kids-quran-learning-retired-v1418">
-#view-today .big-choice-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
-@media(max-width:620px){#view-today .big-choice-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
-</style>
 <!-- KIDS_SALAF_OPEN_WORLD_V1353: Salaf-only filmic full-bleed, profile-aware. Do not touch Home or floating dock. -->
 <link rel="stylesheet" href="/kids/salaf-open-world-v1353.css?v=1410">
 <!-- KIDS_GLOBAL_HEADER_HERO_SEAM_V1412: final visual geometry across all Kids readers -->
 <link rel="stylesheet" href="/kids/global-hero-seam-v1412.css?v=1413">
-<!-- KIDS_SALAF_GIRL_PALETTE_V1415: always last, girls-only colors, seamless page -->
-<link rel="stylesheet" href="/kids/salaf-girl-palette-v1415.css?v=1417">
-<!-- KIDS_GIRLS_GLOBAL_CANVAS_SEAM_V1416: uniform profile root/shell/ambient canvas -->
-<link rel="stylesheet" href="/kids/girls-profile-global-seam-v1416.css?v=1416">
-<link rel="stylesheet" href="/kids/kids-ui-contract-v1420.css?v=1425" data-kids-ui-contract="v1420">
-<link rel="stylesheet" href="/kids/kids-nav-v1421.css?v=1422" data-kids-navigation-contract="v1421">
-<link rel="stylesheet" href="/kids/kids-academy-girl-seam-v1421.css?v=1422" data-kids-girl-account-portal="v1421">
-<link rel="stylesheet" href="/kids/kids-motion-v1422.css?v=1422" data-kids-motion="v1422">
-<script defer src="/kids/kids-academy-portal-v1421.js?v=1425"></script>
-<style id="kids-home-priority-and-card-width-v1424">
-/* Home-first academy spotlight. The previous story resume stays in the DOM
-   for the existing story resume logic but is not presented on the homepage. */
-#view-today #resumeButton[hidden]{display:none!important}
-#view-today > #kidsAcademyPriority.kids-academy-priority{
- box-sizing:border-box!important;display:flex!important;flex-direction:row!important;
- align-items:center!important;justify-content:flex-start!important;
- gap:clamp(13px,3.5vw,23px)!important;
- min-height:clamp(214px,42vw,266px)!important;
- height:auto!important;
- padding:clamp(19px,4vw,29px)!important;
- margin-block:14px 22px!important;
- border:1.5px solid rgba(242,208,143,.70)!important;
- border-radius:clamp(24px,5vw,31px)!important;
- color:#fff8eb!important;text-align:left!important;text-decoration:none!important;
- background-color:#152e38!important;
- background-image:linear-gradient(90deg,rgba(7,28,38,.95) 0%,rgba(8,31,41,.79) 48%,rgba(8,29,40,.26) 100%),url("/desktop-preview/assets/kids-academy-hero-boys-v1.jpg")!important;
- background-position:center,center!important;background-size:cover!important;background-repeat:no-repeat!important;
- box-shadow:inset 0 1px rgba(255,239,201,.2),0 17px 38px rgba(0,0,0,.22)!important;
- overflow:hidden!important;
- -webkit-tap-highlight-color:transparent!important;
-}
-#view-today > #kidsAcademyPriority .kids-academy-priority-art{
- display:block!important;flex:0 0 clamp(57px,14vw,82px)!important;
- width:clamp(57px,14vw,82px)!important;height:clamp(57px,14vw,82px)!important;
- border-radius:clamp(15px,4vw,22px)!important;
- background:rgba(11,35,44,.70) url("/kids/assets/kids-icons/learning-book-3d-v1422.png?v=1422") center/90% no-repeat!important;
- border:1px solid rgba(246,213,153,.33)!important;
- box-shadow:inset 0 1px rgba(255,255,255,.12),0 8px 19px rgba(0,0,0,.22)!important;
-}
-#view-today > #kidsAcademyPriority .kids-academy-priority-copy{
- display:flex!important;flex-direction:column!important;align-items:flex-start!important;
- justify-content:center!important;flex:1 1 auto!important;gap:clamp(5px,1.6vw,11px)!important;
- width:auto!important;min-width:0!important;position:relative!important;z-index:2!important;
- text-shadow:0 3px 12px rgba(0,0,0,.5)!important;
-}
-#view-today > #kidsAcademyPriority .kids-academy-priority-copy > small{
- color:#f3cf8e!important;font-weight:850!important;
- font-size:clamp(10px,2.6vw,13px)!important;letter-spacing:.07em!important;line-height:1.35!important;
-}
-#view-today > #kidsAcademyPriority .kids-academy-priority-copy > strong{
- display:block!important;font-family:"Fredoka",system-ui,sans-serif!important;
- font-size:clamp(25px,6.6vw,39px)!important;line-height:1.13!important;
- color:#fff7e7!important;white-space:normal!important;overflow-wrap:normal!important;
-}
-#view-today > #kidsAcademyPriority .kids-academy-priority-copy > span{
- font-size:clamp(12px,3.1vw,16px)!important;line-height:1.42!important;color:#fff1dc!important;
-}
-#view-today > #kidsAcademyPriority .kids-academy-priority-copy > em{
- font-style:normal!important;font-weight:850!important;
- font-size:clamp(12px,3vw,15px)!important;line-height:1.1!important;
- color:#ffdfa0!important;
- border-bottom:1px solid rgba(252,222,160,.58)!important;
- padding-bottom:5px!important;
-}
-#view-today > #kidsAcademyPriority:focus-visible{
- outline:3px solid #ffdda0!important;outline-offset:3px!important;
-}
-html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
- background-color:#37283d!important;
- background-image:linear-gradient(90deg,rgba(50,30,56,.96) 0%,rgba(57,33,58,.80) 48%,rgba(59,32,56,.24) 100%),url("/desktop-preview/assets/kids-academy-hero-girls-v1.jpg")!important;
- border-color:rgba(247,190,226,.75)!important;
-}
-html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority .kids-academy-priority-art{
- background-color:rgba(58,32,58,.78)!important;border-color:rgba(248,203,230,.43)!important;
-}
-html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority .kids-academy-priority-copy > small,
-html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority .kids-academy-priority-copy > em{
- color:#ffd9e9!important;border-bottom-color:rgba(255,215,232,.59)!important;
-}
-/* The floating five-tab dock is the exact horizontal reference on phones.
-   No shorter Salaf/Quiz/Learning capsule and no uneven left/right edges. */
-@media(max-width:780px){
- #view-today > :is(#kidsAcademyPriority,.big-choice-grid,.kids-salaf-feature,#knowledgeCard){
-  box-sizing:border-box!important;width:calc(100vw - 28px)!important;max-width:none!important;
-  margin-left:calc(50% - 50vw + 14px)!important;
-  margin-right:0!important;
- }
-}
-@media(min-width:781px){
- #view-today > :is(#kidsAcademyPriority,.big-choice-grid,.kids-salaf-feature,#knowledgeCard){
-  box-sizing:border-box!important;width:min(100%,740px)!important;max-width:740px!important;
-  margin-left:auto!important;margin-right:auto!important;
- }
-}
-#view-today > .big-choice-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:15px!important}
-#view-today > .big-choice-grid > .choice,
-#view-today > .kids-salaf-feature{
- box-sizing:border-box!important;width:100%!important;max-width:100%!important;
- min-height:clamp(169px,29vw,205px)!important;
- height:clamp(169px,29vw,205px)!important;
- border-radius:clamp(23px,5vw,30px)!important;
- overflow:hidden!important;
-}
-#view-today > .big-choice-grid > .choice{
- padding:clamp(17px,4vw,25px)!important;
-}
-#view-today > .big-choice-grid > .choice :is(strong,small){
- min-width:0!important;max-width:100%!important;
-}
-#view-today > #knowledgeCard{
- box-sizing:border-box!important;min-height:clamp(133px,23vw,165px)!important;
- border-radius:clamp(23px,5vw,30px)!important;
-}
-@media(max-width:380px){
- #view-today > #kidsAcademyPriority.kids-academy-priority{
-  gap:10px!important;padding:17px!important;min-height:205px!important;
- }
- #view-today > #kidsAcademyPriority .kids-academy-priority-art{
-  flex-basis:53px!important;width:53px!important;height:53px!important;
- }
- #view-today > #kidsAcademyPriority .kids-academy-priority-copy > strong{font-size:25px!important}
-}
-@media(prefers-reduced-motion:reduce){
- #view-today > #kidsAcademyPriority{transition:none!important}
-}
-</style>
-<!-- KIDS_GIRL_PALETTE_AUTHORITY_V1427: LAST color layer, girl profile only; 3-ID Du'a audio selector guard -->
-<link rel="stylesheet" href="/kids/kids-girl-palette-authority-v1427.css?v=1428" data-kids-girl-palette="1427">
-<!-- KIDS_PARENTS_DASHBOARD_V1432: isolated parent administration, FINAL color layer -->
-<link rel="stylesheet" href="/kids/parents-dashboard-v1432.css?v=1435" data-kids-parents="1432">
-<script src="/kids/parents-dashboard-v1432.js?v=1441" defer></script>
-<!-- KIDS_PARENT_COMPACT_TIMER_V1436: inherits existing art, theme and five-tab navigation -->
-<link rel="stylesheet" href="/kids/parents-compact-timer-v1436.css?v=1440">
-<script src="/kids/parents-compact-timer-v1436.js?v=1440" defer></script>
-<!-- TAWḤĪD KIDS Visitor Settings v1: Parent notifications + Quick Qibla -->
-<link rel="stylesheet" href="/kids/parent-notifications-visitor-v1.css?v=1">
-<script src="/kids/parent-notifications-visitor-v1.js?v=1" defer></script>
-<!-- KIDS_QIBLA_FOCUS_V1442: kids-only compact home CTA, real GPS and sensor-based compass, profile color authority -->
-<link rel="stylesheet" href="/kids/kids-qibla-focus-v1442.css?v=1448">
-<script src="/kids/kids-qibla-focus-v1442.js?v=1448" defer></script>
-<!-- KIDS_PROFILE_LAYOUT_CONTRACT_V1447: automatic parent card width and boy/girl colour inheritance -->
-<link rel="stylesheet" href="/kids/kids-profile-layout-contract-v1447.css?v=1447">
+<script defer src="/kids/test-console/return-to-studio.js"></script>
+<!-- TAWḤĪD KIDS V2.0 · Creator-Test only: Salaf color/card/layout pilot -->
+<link rel="stylesheet" href="/kids/design-v2-salaf-pilot.css?v=20261014-3">
+<!-- KIDS V2.0 PROPHET PILOT · creator staging only; existing art & behavior intact -->
+<link rel="stylesheet" href="/kids/design-v2-prophets-pilot.css?v=20261015-1">
+<!-- KIDS V2 gender-profile palette parity: Salaf and Prophets only -->
+<link rel="stylesheet" href="/kids/design-v2-profile-parity-v1.css?v=20261015-1">
+<!-- KIDS TEST V2 · authoritative Girls-only color audit; no Home/nav changes -->
+<link rel="stylesheet" href="/kids/parent-notifications-test-v1.css?v=1">
+<link rel="stylesheet" href="/kids/quiz-test-premium-v1460.css?v=1460" data-kids-test-premium="1">
+<link rel="stylesheet" href="/kids/quiz-premium-v1.css?v=20261026-creator-premium1" data-kids-premium-dashboard="1">
+<link rel="stylesheet" href="/kids/girls-profile-v2-final-audit.css?v=20261015-2">
+<!-- KIDS TEST ONLY – Parent notifications and Quick Qibla; runtime guarded, no visitor effect -->
+
+<script defer src="/kids/parent-notifications-test-v1.js?v=1"></script>
 </html>

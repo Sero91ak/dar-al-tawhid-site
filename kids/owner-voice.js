@@ -255,24 +255,6 @@
 
   window.quizSpeak=function(text,options){
     options=options||{};
-    // The owner-voice module replaces the earlier global quizSpeak function.
-    // Route only explicit, matching question ID + segment to the approved V4 manifest.
-    var approved=window.DARKidsQuizV4Approved;
-    if(approved&&options.quizId&&options.quizPart){
-      var pool=Array.isArray(window.kidsQuizPool)?window.kidsQuizPool:
-        window.DARKidsQuizPack450&&window.DARKidsQuizPack450.items;
-      var question=options.quizQuestion&&options.quizQuestion.id===options.quizId?options.quizQuestion:null;
-      if(!question&&Array.isArray(pool))question=pool.find(function(q){
-        return q&&q.id===options.quizId;
-      });
-      if(question&&typeof approved.has==="function"&&approved.has(question,options.quizPart)){
-        return approved.play(question,options.quizPart,{
-          onended:options.onended,onerror:options.onerror
-        });
-      }
-    }
-    // Legacy audio remains available; stop any previous new-V4 clip first.
-    if(approved&&typeof approved.stop==="function")approved.stop();
     return play(text,{source:String(options.source||"quiz-or-kids-ui"),onended:options.onended,onerror:options.onerror});
   };
   window.stopKidsOwnerVoice=stop;
