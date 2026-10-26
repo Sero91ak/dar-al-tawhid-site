@@ -93,6 +93,42 @@ const base=process.env.DAR_AUDIT_BASE_URL||"http://127.0.0.1:8765/";
     await page.waitForTimeout(220);
     assert.equal((await check(1024,1366,true)).source,"capacity",
       "when fully open, remove physical fold avoidance but preserve paired reading");
+    // Hardware takes precedence over the old 900px "desktop" breakpoint:
+    // a partially folded 800px inner window still has two usable halves.
+    await page.setViewportSize({width:800,height:900});
+    await page.waitForTimeout(260);
+    await page.evaluate(()=>{
+      window.dispatchEvent(new CustomEvent("dar:native-fold-region",{detail:{
+        axis:"vertical",active:true,
+        frame:{x:385,y:0,width:30,height:900},
+        viewportWidth:800,viewportHeight:900
+      }}));
+    });
+    await page.waitForTimeout(300);
+    const narrowFold=await page.evaluate(()=>{
+      const shell=document.getElementById("darHingeBrowserFixture");
+      const left=shell.querySelector(".dar-fold__rail").getBoundingClientRect();
+      const right=shell.querySelector(".dar-fold__pane").getBoundingClientRect();
+      return {layout:document.documentElement.getAttribute("data-dar-hinge-layout"),
+        source:document.documentElement.getAttribute("data-dar-hinge-source"),
+        leftRight:left.right,rightLeft:right.left,
+        widthLeft:left.width,widthRight:right.width,
+        visibleLeft:getComputedStyle(shell.querySelector(".dar-fold__rail")).display!=="none",
+        visibleRight:getComputedStyle(shell.querySelector(".dar-fold__pane")).display!=="none"};
+    });
+    assert.equal(narrowFold.source,"native");
+    assert.equal(narrowFold.layout,"paired");
+    assert.ok(narrowFold.visibleLeft&&narrowFold.visibleRight,
+      "Measured narrow Fold must not hide either half");
+    assert.ok(narrowFold.leftRight<=386&&narrowFold.rightLeft>=414,
+      "Measured middle division must be kept empty");
+    assert.ok(narrowFold.widthLeft>270&&narrowFold.widthRight>270,
+      "Both narrow-fold pages must stay readable");
+    await page.evaluate(()=>{
+      window.dispatchEvent(new CustomEvent("dar:native-fold-region",{detail:{active:false}}));
+    });
+    await page.waitForTimeout(220);
+    assert.notEqual(await page.locator("html").getAttribute("data-dar-hinge-layout"),"paired");
     await context.close();
   }finally{await browser.close();}
 })().catch(e=>{console.error(e.stack||String(e));process.exitCode=1});
