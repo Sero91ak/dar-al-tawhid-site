@@ -322,7 +322,10 @@
     applyNavLayout(mode);
 
     var dualChanged = prevDual !== dual;
-    if (changed || force || dualChanged || externalOverride) {
+    /* An external native attribute reset is a presentation-only correction;
+       never broadcast an extra layoutchange that would cause native/WebView
+       route rendering to re-enter the DOM mutation observer. */
+    if (changed || force || dualChanged) {
       try {
         global.dispatchEvent(
           new CustomEvent("dar:layoutchange", {
