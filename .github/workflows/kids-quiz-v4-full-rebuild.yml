@@ -64,6 +64,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Install pinned MP3 inspection library
+        run: python3 -m pip install --disable-pip-version-check "mutagen==1.47.0"
       - name: Generate first question with Serhat Master V4 and verify playback encoding
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
@@ -95,8 +97,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Ensure audio probe exists
-        run: command -v ffprobe && ffprobe -version | head -n 1
+      - name: Install pinned MP3 inspection library
+        run: python3 -m pip install --disable-pip-version-check "mutagen==1.47.0"
       - name: Verify key is configured before spending credits
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
