@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>TAWḤĪD KIDS – Private V4-Hörfreigabe</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color-scheme:light dark;--accent:#226c5a}
+*{box-sizing:border-box}body{margin:0;line-height:1.5;min-height:100vh}
+main{max-width:1120px;margin:auto;padding:calc(20px + env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) calc(30px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+h1{font-size:clamp(1.4rem,4vw,2.1rem);line-height:1.25}h2{font-size:1.1rem}small,.hint{opacity:.76}
+.controls{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
+.controls label{flex:1 1 150px}.controls input,.controls select,.controls button{width:100%}
+input,select,button{padding:11px;border-radius:10px;border:1px solid #87958f;background:Canvas;color:CanvasText;font-size:1rem}
+button{cursor:pointer;min-height:44px}button.primary{background:var(--accent);color:white;border:0;font-weight:650}
+button:disabled{opacity:.5;cursor:not-allowed}
+.card{padding:16px;border:1px solid #84938b77;border-radius:16px;margin:12px 0;background:color-mix(in srgb,Canvas 94%,var(--accent))}
+.panes{display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.audio-panel{padding:14px;border:1px solid #84938b88;border-radius:14px;min-width:0}
+audio{display:block;width:100%;margin:12px 0}
+fieldset{border:1px solid #84938b88;border-radius:12px;min-width:0}fieldset legend{font-weight:650}
+.checks{display:grid;gap:10px}.checks label{display:flex;align-items:flex-start;gap:10px}
+.checks input{width:auto;min-width:19px;min-height:19px;margin-top:3px}
+.source{font-size:.93rem;opacity:.85}.status{font-weight:600}.ok{color:#308359}.warn{color:#ba7b1b}
+progress{width:100%;height:17px;accent-color:var(--accent)}
+@media(max-width:720px){.panes{grid-template-columns:1fr}.audio-panel{padding:12px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>TAWḤĪD KIDS – private V4-Hörkontrolle</h1>
+  <p><strong>Nur für die Prüfung.</strong> Keine Veröffentlichung, keine ElevenLabs-Generierung, kein OneSignal-Push. Die Quellen bleiben auf dem Bildschirm; sie wurden nicht zusätzlich eingesprochen.</p>
+  <p class="hint">Diese lokale Prüfseite benötigt die unveränderten Original-MP3-Dateien und das Review-Manifest auf demselben lokalen Webserver. Nicht auf der Kinder-Website bereitstellen, solange keine menschliche Freigabe dokumentiert ist.</p>
+</header>
+<section class="card">
+  <p class="status" id="loadStatus" role="status">Lade 450 Fragen und die genaue V4-Audiozuordnung …</p>
+  <progress id="progress" max="1217" value="0"></progress>
+  <p id="count" aria-live="polite">0 / 1.217 unterschiedliche MP3s geprüft</p>
+  <div class="controls">
+    <label>Altersgruppe<select id="age"><option value="">Alle</option><option>4-6</option><option>7-8</option><option>9-10</option></select></label>
+    <label>Fragen-ID oder Text suchen<input id="search" placeholder="z. B. Tawḥīd oder kids-quiz-001" autocomplete="off"></label>
+    <label>Frage auswählen<select id="pick" aria-label="Prüffrage auswählen"></select></label>
+    <label>Prüfperson / Kürzel<input id="reviewer" placeholder="Vorname/Kürzel, verpflichtend" autocomplete="off"></label>
+  </div>
+  <p class="hint">Eine identische MP3 wird auch bei mehrfacher Verwendung nur einmal geprüft. Die Quellendateien und Prüfsummen bleiben unverändert.</p>
+</section>
+<section id="questionView" hidden>
+  <div class="card">
+    <p class="hint" id="questionId"></p>
+    <h2 id="questionText"></h2>
+    <p id="answerText"></p>
+    <p class="source" id="sourceText"></p>
+    <div class="controls">
+      <button type="button" id="previous">Vorherige Frage</button>
+      <button type="button" id="next">Nächste Frage</button>
+      <button type="button" id="nextOpen">Nächste ungeprüfte Aufnahme</button>
+    </div>
+  </div>
+  <div class="panes" id="panes"></div>
+</section>
+<section class="card">
+  <h2>Prüfnachweis exportieren</h2>
+  <p>Nur tatsächlich angehörte und ausdrücklich geprüfte MP3s können als freigegeben exportiert werden. Die vier Schalter pro Aufnahme müssen einzeln bestätigt werden. Eine automatische Freigabe gibt es nicht.</p>
+  <button class="primary" type="button" id="export">Meine dokumentierten Hörfreigaben als JSON exportieren</button>
+  <p id="exportStatus" role="status" class="hint"></p>
+</section>
+</main>
+<script>
+(function(){
+"use strict";
+const prefix="kids-v4-human-listening-review-20261026-";
+const expectedVoice="DkU7j9uO4ZEtLD2iRZSH";
+const parts={question:"Frage und Antwortmöglichkeiten",correct:"Lob und richtige Antwort",retry:"Ermutigung beim Versuch",explanation:"Kindgerechte Erklärung"};
+const labels={listened:"Ich habe diese Aufnahme vollständig angehört.",arabicTermsChecked:"Fuṣḥā / Makhāriǧ und religiöse Wörter geprüft.",breathingChecked:"Atmung, Pausen, Nebengeräusche und Natürlichkeit geprüft.",childComprehensionChecked:"Für das jeweilige Alter freundlich und gut verständlich."};
+let source=null,questions=[],approved=new Map(),positions=new Map(),current=null,playing=null;
+const $=id=>document.getElementById(id);
+const simple=txt=>String(txt==null?"":txt);
+const qShort=q=>q.questionId+" · "+q.ageBand+" J. · "+simple(q.parts?.question?.text||q.parts?.question?.displayText||"").slice(0,85);
+function stateKey(){return prefix+expectedVoice}
+function restore(){
+  try{
+    const loaded=JSON.parse(localStorage.getItem(stateKey())||"{}");
+    Object.entries(loaded).forEach(([sha,flags])=>{
+      if(/^[a-f0-9]{64}$/.test(sha)&&flags&&typeof flags==="object")approved.set(sha,flags);
+    });
+  }catch(_){}
+}
+function persist(){
+  try{localStorage.setItem(stateKey(),JSON.stringify(Object.fromEntries(approved)))}catch(_){}
+}
+function isApproved(hash){
+  const a=approved.get(hash);
+  return !!(a&&Object.keys(labels).every(key=>a[key]===true));
+}
+function updateCount(){
+  const completed=[...approved.keys()].filter(isApproved).filter(sha=>positions.has(sha)).length;
+  $("progress").value=completed;
+  $("count").textContent=completed+" / "+positions.size+" unterschiedliche MP3-Dateien vollständig abgehört und markiert";
+}
+function clipItem(q,kind){
+  const c=q.clips[kind],hash=c.sha256;
+  const section=document.createElement("section");section.className="audio-panel";
+  const h=document.createElement("h3");h.textContent=parts[kind];section.appendChild(h);
+  const p=document.createElement("p");p.textContent=simple(c.text);section.appendChild(p);
+  const audio=document.createElement("audio");audio.controls=true;audio.preload="none";audio.src=c.url;audio.setAttribute("aria-label",parts[kind]);
+  audio.addEventListener("play",()=>{
+    if(playing&&playing!==audio){try{playing.pause()}catch(_){}}
+    playing=audio;
+  });section.appendChild(audio);
+  const meta=document.createElement("small");meta.textContent="Original-SHA-256: "+hash+" · "+Number(c.durationSeconds).toFixed(1)+" s";section.appendChild(meta);
+  const status=document.createElement("p");status.className="status";section.appendChild(status);
+  const checks=document.createElement("fieldset");const legend=document.createElement("legend");legend.textContent="Hörfreigabe";checks.appendChild(legend);
+  const wrap=document.createElement("div");wrap.className="checks";
+  Object.keys(labels).forEach(key=>{
+    const label=document.createElement("label"),input=document.createElement("input");input.type="checkbox";input.checked=approved.get(hash)?.[key]===true;
+    input.addEventListener("change",()=>{
+      const entry={...(approved.get(hash)||{})};entry[key]=input.checked;
+      approved.set(hash,entry);persist();updateCount();status.textContent=isApproved(hash)?"Alle Kriterien für diesen Ton bestätigt.":"Hörprüfung noch unvollständig.";
+      status.className="status "+(isApproved(hash)?"ok":"warn");
+    });
+    label.append(input,document.createTextNode(labels[key]));wrap.appendChild(label);
+  });
+  checks.appendChild(wrap);section.appendChild(checks);
+  status.textContent=isApproved(hash)?"Alle Kriterien für diesen Ton bestätigt.":"Hörprüfung noch unvollständig.";
+  status.className="status "+(isApproved(hash)?"ok":"warn");
+  return section;
+}
+function show(id){
+  let q=source.questions[id];if(!q)return;current=id;
+  if(playing)try{playing.pause()}catch(_){}
+  $("questionView").hidden=false;$("questionId").textContent=id+" · "+q.ageBand+" Jahre";
+  const script=questions.find(x=>x.questionId===id);
+  $("questionText").textContent=script?.parts?.question?.text||script?.parts?.question?.displayText||q.clips.question.text;
+  $("answerText").textContent="Richtige Antwort und Rückmeldung im entsprechenden Audioteil anhören.";
+  $("sourceText").textContent="Quellennachweis (nur Bildschirm): "+q.source;
+  const holder=$("panes");holder.replaceChildren();
+  Object.keys(parts).forEach(kind=>holder.appendChild(clipItem(q,kind)));
+  $("pick").value=id;
+}
+function selectNext(delta){
+  const opts=[...$("pick").options].map(x=>x.value).filter(Boolean);
+  if(!opts.length)return;
+  let pos=opts.indexOf(current);
+  show(opts[Math.max(0,Math.min(opts.length-1,pos+delta))]);
+}
+function refreshOptions(){
+  const age=$("age").value,query=$("search").value.trim().toLocaleLowerCase("de");
+  let ids=Object.keys(source.questions).filter(id=>{
+    const q=source.questions[id];
+    return (!age||q.ageBand===age) && (!query||[id,q.ageBand,q.source,...Object.values(q.clips).map(c=>c.text)].join(" ").toLocaleLowerCase("de").includes(query));
+  });
+  $("pick").replaceChildren();
+  ids.forEach(id=>{const o=document.createElement("option");o.value=id;o.textContent=id+" · "+source.questions[id].ageBand+" · "+source.questions[id].clips.question.text.slice(0,80);$("pick").appendChild(o)});
+  if(ids.length){show(ids.includes(current)?current:ids[0])}else{$("questionView").hidden=true;$("loadStatus").textContent="Keine Frage zu diesem Filter."}
+}
+function nextOpen(){
+  const sorted=Object.keys(source.questions);
+  for(let i=0;i<sorted.length;i++){
+    const id=sorted[(Math.max(0,sorted.indexOf(current))+i)%sorted.length],q=source.questions[id];
+    if(Object.values(q.clips).some(c=>!isApproved(c.sha256))){$("age").value="";$("search").value="";refreshOptions();show(id);return}
+  }
+  $("exportStatus").textContent="Alle Audio-Dateien sind laut deinen lokalen Prüfmarkierungen vollständig bewertet.";
+}
+function exportEvidence(){
+  const reviewer=$("reviewer").value.trim();
+  if(reviewer.length<2){$("exportStatus").textContent="Bitte zuerst den Namen oder das Kürzel der prüfenden Person angeben.";return}
+  let approvals={};
+  for(const [sha,flags] of approved)if(positions.has(sha)&&isApproved(sha))
+    approvals[sha]={sha256:sha,approved:true,...Object.fromEntries(Object.keys(labels).map(k=>[k,true]))};
+  const data={
+    purpose:"KIDS_V4_HUMAN_AUDIO_LISTENING_REVIEW",reviewer,reviewedAt:new Date().toISOString(),
+    voiceId:expectedVoice,modelId:"eleven_v4",originalQuestionCount:450,originalClipSlots:1800,
+    approvals,complete:Object.keys(approvals).length===positions.size
+  };
+  const blob=new Blob([JSON.stringify(data,null,2)+"\n"],{type:"application/json"});
+  const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;
+  a.download="kids-v4-manual-hearing-approval-20261026.json";a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),3000);
+  $("exportStatus").textContent=Object.keys(approvals).length+" / "+positions.size+" tatsächlich persönlich geprüfte MP3s exportiert. "+(data.complete?"Vollständige Hörfreigabe kann anschließend technisch geprüft werden.":"Unvollständige Freigabe darf nicht veröffentlicht werden.");
+}
+$("previous").addEventListener("click",()=>selectNext(-1));
+$("next").addEventListener("click",()=>selectNext(1));
+$("nextOpen").addEventListener("click",nextOpen);
+$("pick").addEventListener("change",()=>show($("pick").value));
+$("age").addEventListener("change",refreshOptions);
+$("search").addEventListener("input",refreshOptions);
+$("export").addEventListener("click",exportEvidence);
+(async()=>{
+try{
+ const url="../../data/quiz-v4-full-rebuild-review.json";
+ const r=await fetch(url,{cache:"no-store"});if(!r.ok)throw new Error("Manifest HTTP "+r.status);
+ source=await r.json();
+ if(source.releaseEnabled!==false||source.humanListeningApproved!==false||source.modelId!=="eleven_v4"||source.voiceId!==expectedVoice||Object.keys(source.questions||{}).length!==450)throw new Error("Review-Manifest entspricht nicht der gesperrten 450er-Produktion.");
+ questions=Object.entries(source.questions).map(([questionId,v])=>({questionId,...v}));
+ for(const q of questions)for(const kind of Object.keys(parts)){
+   const c=q.clips[kind];if(!c||c.voiceId!==expectedVoice||c.modelId!=="eleven_v4"||c.humanListeningApproved!==false||c.approvedForPlayback!==false||!/^[a-f0-9]{64}$/.test(c.sha256))throw new Error("Ungültige Audiozuordnung "+q.questionId+"/"+kind);
+   positions.set(c.sha256,(positions.get(c.sha256)||0)+1);
+ }
+ if(positions.size!==1217)throw new Error("Erwartete 1217 Originalaufnahmen fehlen.");
+ restore();updateCount();refreshOptions();
+ $("loadStatus").textContent="450 Fragen / 1.800 Audiozuordnungen / 1.217 unterschiedliche MP3s geladen; öffentliche Freigabe bleibt gesperrt.";
+}catch(e){$("loadStatus").textContent="Private Prüfansicht konnte nicht geladen werden: "+e.message+" — Lokalen Webserver und Originalarchive kontrollieren."}
+})();
+})();
+</script>
+</body>
+</html>
