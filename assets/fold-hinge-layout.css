@@ -115,7 +115,7 @@ html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"] {
 /* A real hardware division overrides the generic 900px workspace threshold.
    An 800px partially folded viewport still has TWO physical regions; do not
    obey legacy medium/single visibility rules and hide the right pane. */
-@media (min-width: 700px) and (min-height: 560px) {
+@media (min-width: 620px) and (min-height: 450px) {
   html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"]
   #appView .dar-fold[data-fold-mode="dual"] {
     display: grid !important;
