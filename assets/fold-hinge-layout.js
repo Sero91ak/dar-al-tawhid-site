@@ -122,6 +122,10 @@
     schedule();
   }
   function start() {
+    // A native document-start injection may precede DOMContentLoaded. Consume
+    // its latest region, then listen for posture updates without resetting
+    // the user's active page or scroll position.
+    lastNative = normalizedRegion(global.__DAR_NATIVE_FOLD_REGION);
     global.addEventListener("dar:native-fold-region", nativeRegion);
     global.addEventListener("resize", schedule, { passive: true });
     global.addEventListener("orientationchange", schedule, { passive: true });
