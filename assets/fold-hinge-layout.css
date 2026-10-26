@@ -112,6 +112,45 @@ html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"] {
     box-sizing: border-box !important;
   }
 }
+/* A real hardware division overrides the generic 900px workspace threshold.
+   An 800px partially folded viewport still has TWO physical regions; do not
+   obey legacy medium/single visibility rules and hide the right pane. */
+@media (min-width: 700px) and (min-height: 560px) {
+  html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"]
+  #appView .dar-fold[data-fold-mode="dual"] {
+    display: grid !important;
+    grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important;
+    column-gap: var(--dar-hinge-clearance) !important;
+    row-gap: 0 !important;
+    align-items: stretch !important;
+    inline-size: 100% !important;
+    max-inline-size: 100% !important;
+  }
+  html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"]
+  #appView .dar-fold[data-fold-mode="dual"][data-dar-hinge-measured="1"] {
+    grid-template-columns:
+      minmax(0,var(--dar-hinge-left-pane))
+      minmax(0,var(--dar-hinge-right-pane)) !important;
+    column-gap: var(--dar-hinge-local-gap) !important;
+  }
+  html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"]
+  #appView .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane) {
+    display: block !important;
+    position: relative !important;
+    min-inline-size: 0 !important;
+    max-inline-size: 100% !important;
+    inline-size: 100% !important;
+    overflow-y: auto !important;
+  }
+  html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"]
+  #appView .dar-fold[data-fold-mode="dual"] > .dar-fold__rail {
+    grid-column: 1 !important;
+  }
+  html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"]
+  #appView .dar-fold[data-fold-mode="dual"] > .dar-fold__pane {
+    grid-column: 2 !important;
+  }
+}
 /* Native horizontal folding region: upper reading/list plane and lower
    detail plane. Activate ONLY when UIKit reports a horizontal division. */
 html[data-dar-hinge-axis="horizontal"][data-dar-hinge-source="native"]
