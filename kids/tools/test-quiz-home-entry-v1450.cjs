@@ -9,7 +9,7 @@ const read=p=>fs.readFileSync(root+"/"+p,"utf8");
 const entry=read("kids/index.html");
 assert.equal(entry,read("kids/start.html"),"Kids start shell mismatch");
 assert.equal(entry,read("kids/shell.html"),"Kids shell mismatch");
-for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=1451','/kids/quiz-library.css?v=1451','/kids/sw.js?v=1451']){
+for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=1451','/kids/quiz-library.css?v=1450','/kids/sw.js?v=1451']){
   assert.ok(entry.includes(token),"Missing Kids shell token: "+token);
 }
 const sw=read("kids/sw.js");
