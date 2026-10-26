@@ -294,7 +294,29 @@ jobs:
           BASE="https://dar-al-tawhid-kids-creator.sero91ak.workers.dev"
           # KIDS QUIZ 450 test surface: preserve exactly 150 per age, block
           # editorial 900 and not-human-approved ElevenLabs V4 MP3 previews.
-          curl -fsSL "$BASE/kids/data/quiz-kids-public-450.json" -o /tmp/kids-quiz-450.json
+          # Cloudflare asset manifest propagation is not atomic with the Worker
+          # publish. Never fail on the first request after a successful upload.
+          QUIZ_READY=0
+          for ATTEMPT in $(seq 1 24); do
+            CODE="$(curl -sS -L -o /tmp/kids-quiz-450.json -w '%{http_code}' \
+              --connect-timeout 8 --max-time 25 -H 'Cache-Control: no-cache' \
+              "$BASE/kids/data/quiz-kids-public-450.json?v=1460" || true)"
+            if [ "$CODE" = "200" ] && cmp -s kids/data/quiz-kids-public-450.json /tmp/kids-quiz-450.json; then
+              QUIZ_READY=1
+              break
+            fi
+            echo "KIDS QUIZ 450 propagation: HTTP $CODE (attempt $ATTEMPT/24)"
+            if [ "$ATTEMPT" -lt 24 ]; then sleep 5; fi
+          done
+          if [ "$QUIZ_READY" != "1" ]; then
+            echo "::error::KIDS QUIZ 450 missing or stale on the deployed Worker after retries (HTTP $CODE)"
+            exit 1
+          fi
+          curl -fsSL -H 'Cache-Control: no-cache' "$BASE/kids/quiz-library.js?v=1460" -o /tmp/kids-quiz-v1460.js
+          curl -fsSL -H 'Cache-Control: no-cache' "$BASE/kids/quiz-test-premium-v1460.css?v=1460" -o /tmp/kids-quiz-v1460.css
+          cmp -s kids/quiz-library.js /tmp/kids-quiz-v1460.js || { echo "::error::Deployed quiz controller differs from staging"; exit 1; }
+          cmp -s kids/quiz-test-premium-v1460.css /tmp/kids-quiz-v1460.css || { echo "::error::Deployed quiz widescreen CSS differs from staging"; exit 1; }
+          echo "KIDS QUIZ V1460 runtime/CSS exact bytes: VERIFIED"
           node - <<'KIDSQUIZ'
           const q=require('/tmp/kids-quiz-450.json');
           if(q.items.length!==450||["4-6","7-8","9-10"].some(a=>q.items.filter(x=>x.ageBand===a).length!==150))
