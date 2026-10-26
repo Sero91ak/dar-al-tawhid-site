@@ -1,0 +1,260 @@
+name: KIDS 450 V4 Complete Audio Rebuild (review only)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+    paths:
+      - "kids/review-only/quiz-v4-full-rebuild-20261026/**"
+      - "kids/tools/rebuild_quiz_v4_450.py"
+      - ".github/workflows/kids-quiz-v4-full-rebuild.yml"
+  workflow_dispatch:
+    inputs:
+      confirm_paid_generation:
+        description: "Costly ElevenLabs V4 generation: choose YES only after approving your account's credit budget"
+        type: choice
+        required: true
+        default: "NO"
+        options:
+          - "NO"
+          - "YES_REBUILD_450"
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate canonical 450 and V4 speech contracts without spending credits
+        run: |
+          python3 -m py_compile kids/tools/rebuild_quiz_v4_450.py
+          python3 kids/tools/rebuild_quiz_v4_450.py --age-band 4-6
+          python3 kids/tools/rebuild_quiz_v4_450.py --age-band 7-8
+          python3 kids/tools/rebuild_quiz_v4_450.py --age-band 9-10
+          node --check kids/quiz-v4-approved-player.js
+          node kids/tools/test-v4-approved-player.cjs
+          node kids/tools/test-v4-owner-router.cjs
+          python3 -m py_compile kids/tools/import_rebuilt_quiz_v4.py kids/tools/promote_quiz_v4_after_human_review.py kids/tools/plan_quiz_audio_storage_cleanup.py
+          if python3 kids/tools/promote_quiz_v4_after_human_review.py --human-review-evidence /tmp/nonexistent-review-evidence.json; then echo 'Unexpected release without listening QA' >&2; exit 1; fi
+
+  key-preflight:
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.label.name == 'kids-v4-key-preflight-20261026' && github.event.pull_request.head.ref == 'codex/kids-quiz-v4-complete-speech-rebuild-20261026' && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' }}
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the paid voice provider WITHOUT exposing a secret or billing credits
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        shell: bash
+        run: |
+          if [ -z "${ELEVENLABS_API_KEY}" ]; then
+            echo "::error::ElevenLabs voice secret unavailable. No paid generation attempted."
+            exit 1
+          fi
+          echo "VOICE_PROVIDER_CONFIGURED=true; no paid generation attempted."
+
+  pilot-one-question:
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.label.name == 'kids-v4-one-question-pilot-20261026' && github.event.pull_request.head.ref == 'codex/kids-quiz-v4-complete-speech-rebuild-20261026' && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' }}
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install pinned MP3 inspection library
+        run: python3 -m pip install --disable-pip-version-check "mutagen==1.47.0"
+      - name: Generate first question with Serhat Master V4 and verify playback encoding
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          test -n "${ELEVENLABS_API_KEY}" || (echo "::error::Missing ElevenLabs secret" && exit 1)
+          python3 kids/tools/rebuild_quiz_v4_450.py --age-band 4-6 --max-questions 1 --execute
+      - name: Preserve generated private preview (not publicly served)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-quiz-v4-new-pilot-${{ github.run_id }}
+          path: kids/review-only/quiz-v4-full-rebuild-20261026/generated/4-6/
+          retention-days: 30
+          if-no-files-found: warn
+
+  generate-review-audio:
+    # Paid run only with explicit workflow input OR a precisely named human-added PR authorization label on a known branch.
+    if: ${{ (github.event_name == 'workflow_dispatch' && inputs.confirm_paid_generation == 'YES_REBUILD_450') || (github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.label.name == 'kids-v4-generate-full-20261026' && github.event.pull_request.head.ref == 'codex/kids-quiz-v4-complete-speech-rebuild-20261026' && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site') }}
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        age_band: ["4-6", "7-8", "9-10"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install pinned MP3 inspection library
+        run: python3 -m pip install --disable-pip-version-check "mutagen==1.47.0"
+      - name: Verify key is configured before spending credits
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: test -n "${ELEVENLABS_API_KEY}" || (echo "::error::Missing ElevenLabs secret" && exit 1)
+      - name: Generate V4 candidate audio for one age band; review only
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          python3 kids/tools/rebuild_quiz_v4_450.py \
+            --age-band "${{ matrix.age_band }}" \
+            --execute
+      - name: Save audio and progress even when one request fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-quiz-v4-new-${{ matrix.age_band }}-${{ github.run_id }}
+          path: kids/review-only/quiz-v4-full-rebuild-20261026/generated/${{ matrix.age_band }}/
+          retention-days: 30
+          if-no-files-found: warn
+
+  assemble-review-branch:
+    # Integration is review-only; no active kids navigation or published manifest changes.
+    if: ${{ (github.event_name == 'workflow_dispatch' && inputs.confirm_paid_generation == 'YES_REBUILD_450') || (github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.label.name == 'kids-v4-generate-full-20261026' && github.event.pull_request.head.ref == 'codex/kids-quiz-v4-complete-speech-rebuild-20261026' && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site') }}
+    needs: [validate, generate-review-audio]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout reviewed generation code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+      - name: Download all exact full age artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: kids-quiz-v4-new-*-${{ github.run_id }}
+          path: /tmp/kids-v4-450-complete
+          merge-multiple: false
+      - name: Verify all 1800 clips and materialize isolated QA manifest
+        run: |
+          python3 kids/tools/import_rebuilt_quiz_v4.py --artifacts-root /tmp/kids-v4-450-complete
+          python3 - <<'PY'
+          import json, pathlib
+          p=pathlib.Path('kids/data/quiz-v4-full-rebuild-review.json')
+          d=json.loads(p.read_text())
+          assert d['releaseEnabled'] is False and d['humanListeningApproved'] is False
+          assert len(d['questions']) == 450
+          assert sum(len(v['clips']) for v in d['questions'].values()) == 1800
+          print('PASS: 450 questions, 1800 clips, no public release')
+          PY
+      - name: Push immutable review-only audio candidate to separate GitHub branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c codex/kids-v4-generated-review-20261026
+          git add kids/data/quiz-v4-full-rebuild-review.json
+          git add -f kids/assets/kids-quiz-audio/v4-full-rebuild-20261026/
+          git commit -m "review(kids): store 450x4 brand-new V4 audio clips, unapproved for playback"
+          git push origin HEAD:refs/heads/codex/kids-v4-generated-review-20261026
+          echo "Generated assets pushed into isolated review branch, NOT published on main."
+
+  recover-previous-paid-artifacts:
+    # Content-only recovery from ONE previously paid completed run. Never call ElevenLabs.
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.label.name == 'kids-v4-recover-existing-artifacts-20261026' && github.event.pull_request.head.ref == 'codex/kids-quiz-v4-complete-speech-rebuild-20261026' && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' }}
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout exact review-approved importer source (not main)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+      - name: Download paid MP3 archives from original run 40327375164
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 40327375164
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: Sero91ak/dar-al-tawhid-site
+          pattern: kids-quiz-v4-new-*-40327375164
+          merge-multiple: false
+          path: /tmp/kids-v4-existing-paid-originals
+      - name: Verify all source hashes, script keys and age bands again
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 kids/tools/import_rebuilt_quiz_v4.py --artifacts-root /tmp/kids-v4-existing-paid-originals
+          python3 - <<'PY'
+          import json, pathlib
+          j=json.loads(pathlib.Path("kids/data/quiz-v4-full-rebuild-review.json").read_text())
+          assert j["humanListeningApproved"] is False and j["releaseEnabled"] is False
+          assert len(j["questions"]) == 450
+          assert sum(len(q["clips"]) for q in j["questions"].values()) == 1800
+          assert len(list(pathlib.Path("kids/assets/kids-quiz-audio/v4-full-rebuild-20261026").rglob("*.mp3"))) == 1217
+          print("PASS: original ElevenLabs assets intact, 450 questions, 1800 parts, 1217 distinct MP3, no billing")
+          PY
+      - name: Publish only original audio, review manifest and provenance on content-only branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          SOURCE_SHA="$(git rev-parse HEAD)"
+          git fetch --depth=1 origin main
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Start from production main, not from the PR, to avoid submitting
+          # unauthorized workflow-file modifications with a contents-only token.
+          git switch -c codex/kids-v4-generated-review-20261026 FETCH_HEAD
+          git checkout "$SOURCE_SHA" --             kids/tools/import_rebuilt_quiz_v4.py             kids/review-only/quiz-v4-full-rebuild-20261026/450-speech-scripts.json
+          git add kids/tools/import_rebuilt_quiz_v4.py
+          git add kids/review-only/quiz-v4-full-rebuild-20261026/450-speech-scripts.json
+          git add kids/data/quiz-v4-full-rebuild-review.json
+          git commit -m "review(kids): preserve 450x4 human-unapproved V4 manifest and script provenance"
+          git push origin HEAD:refs/heads/codex/kids-v4-generated-review-20261026
+          # Upload in smaller, audited batches, never generate paid audio again.
+          for band in 4-6 7-8 9-10; do
+            git add -f "kids/assets/kids-quiz-audio/v4-full-rebuild-20261026/$band/"
+            git commit -m "review(kids): preserve original V4 MP3 for age $band, not live"
+            git push origin HEAD:refs/heads/codex/kids-v4-generated-review-20261026
+          done
+          echo "RECOVERED: 450 questions x4, 1217 original MP3s; content-only review branch updated; no live release"
+
+  independent-offline-audio-qa:
+    # Review only, no chargeable APIs. Explicit audit label triggers this.
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.label.name == 'kids-v4-verify-1217-mp3-20261026' && github.event.pull_request.head.ref == 'codex/kids-quiz-v4-complete-speech-rebuild-20261026' && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' }}
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout saved originals and private review manifest
+        uses: actions/checkout@v4
+        with:
+          ref: codex/kids-v4-generated-review-20261026
+          fetch-depth: 1
+      - name: Load isolated QA implementation from reviewed PR
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --depth=1 origin codex/kids-quiz-v4-complete-speech-rebuild-20261026
+          git show FETCH_HEAD:kids/tools/audit_rebuilt_quiz_v4.py > kids/tools/audit_rebuilt_quiz_v4.py
+      - name: Install deterministic offline MP3 QA requirements
+        run: |
+          python3 -m pip install --disable-pip-version-check "mutagen==1.47.0" "imageio-ffmpeg==0.6.0"
+      - name: Audit all 1217 SHA checksums and full audio decodes
+        run: python3 kids/tools/audit_rebuilt_quiz_v4.py --report /tmp/kids-v4-original-audio-technical-audit.json
+      - name: Retain full independent QA report for approval
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-1217-original-mp3-technical-qa-${{ github.run_id }}
+          path: /tmp/kids-v4-original-audio-technical-audit.json
+          retention-days: 90
+          if-no-files-found: warn
