@@ -481,8 +481,9 @@
   }
   function syncPremiumGender(modal){
     if(!modal)return;
-    var app=document.querySelector(".app[data-gender]");
-    var value=String(app&&app.getAttribute("data-gender")||document.documentElement.dataset.kidsBootGender||"neutral");
+    var app=typeof document.querySelector==="function"?document.querySelector(".app[data-gender]"):null;
+    var root=document.documentElement;
+    var value=String(app&&app.getAttribute("data-gender")||root&&root.dataset&&root.dataset.kidsBootGender||"neutral");
     modal.setAttribute("data-quiz-persona",value==="girl"?"girl":value==="boy"?"boy":"neutral");
   }
   function showDashboard(){
