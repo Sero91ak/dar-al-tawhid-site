@@ -9,13 +9,13 @@ const read=p=>fs.readFileSync(root+"/"+p,"utf8");
 const entry=read("kids/index.html");
 assert.equal(entry,read("kids/start.html"),"Kids start shell mismatch");
 assert.equal(entry,read("kids/shell.html"),"Kids shell mismatch");
-for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=1451','/kids/quiz-library.css?v=1450','/kids/sw.js?v=1452']){
+for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=1451','/kids/quiz-library.css?v=1450','/kids/sw.js?v=1453']){
   assert.ok(entry.includes(token),"Missing Kids shell token: "+token);
 }
 const sw=read("kids/sw.js");
 const version=JSON.parse(read("kids/version.json"));
-assert.ok(sw.includes('dar-al-tawhid-kids-v1452'));
-assert.equal(version.visualSystem.serviceWorkerCache,"v1452");
+assert.ok(sw.includes('dar-al-tawhid-kids-v1453'));
+assert.equal(version.visualSystem.serviceWorkerCache,"v1453");
 assert.ok(sw.includes('/kids/quiz-library.js?v=1451'));
 assert.ok(sw.includes('url.pathname==="/kids/quiz-library.js"'));
 const originalQuestions=JSON.parse(read("kids/data/quiz-kids.json")).items;
@@ -23,6 +23,17 @@ assert.equal(originalQuestions.length,900,"900 canonical question IDs must stay 
 const publicData=JSON.parse(read("kids/data/quiz-kids-public-450.json"));
 assert.equal(publicData.counts.total,450);
 const questions=publicData.items;
+const embeddedStart=entry.indexOf('<script id="kidsQuiz450Inline" type="application/json"');
+assert.ok(embeddedStart>=0,"450 curated questions must be embedded directly in all three Kids shells");
+const jsonStart=entry.indexOf(">",embeddedStart)+1;
+const jsonEnd=entry.indexOf("</script>",jsonStart);
+assert.ok(jsonEnd>jsonStart,"Embedded Quiz data tag must be complete");
+const embeddedData=JSON.parse(entry.slice(jsonStart,jsonEnd));
+assert.equal(embeddedData.namespace,"dar-kids-quiz");
+assert.equal(embeddedData.items.length,450);
+assert.deepEqual(embeddedData.items,questions,"Live embedded Quiz must match the curated 450 source verbatim");
+assert.ok(entry.includes('var embedded=document.getElementById("kidsQuiz450Inline");'),"Embedded source must be primary, network only fallback");
+
 assert.equal(new Set(questions.map(q=>q.id)).size,450);
 const originalById=new Map(originalQuestions.map(q=>[q.id,q]));
 for(const q of questions)assert.deepEqual(q,originalById.get(q.id),"Original question texts and IDs must be preserved");
@@ -76,4 +87,4 @@ listeners.click[0].cb(ev);
 assert.equal(modal.open,true,"Quiz modal must open immediately before any data fetch");
 assert.equal(ev.prevented,true,"Home tile must handle tap independently");
 assert.equal(ev.stopped,true,"Legacy duplicate handler must be suppressed");
-console.log("PASS: Kids 3 shells equal, SW v1452, 450 published Quiz questions and 450 draft reserve preserved, home tile opens modal on captured tap");
+console.log("PASS: Kids 3 shells equal, SW v1453, 450 published Quiz questions and 450 draft reserve preserved, home tile opens modal on captured tap");
