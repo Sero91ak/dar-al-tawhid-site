@@ -5880,11 +5880,10 @@ function fetchKidsQuiz(force){
   if(kidsQuizFetchPending)return kidsQuizFetchPending;
   if(kidsQuizLoaded&&kidsQuizPool.length&&!force)return Promise.resolve(kidsQuizPool);
   window.kidsQuizLoadError="";
-  var base=fetch("/kids/data/quiz-kids.json?v=901",{cache:"no-store"})
+  var base=fetch("/kids/data/quiz-kids-public-450.json?v=20261026-450",{cache:"no-store"})
     .then(function(r){if(!r.ok)throw new Error("Quizdaten HTTP "+r.status);return r.json()});
-  var studio=fetch("/content/kids/content-index.json?v=1107",{cache:"force-cache"})
-    .then(function(r){return r.ok?r.json():{items:[]}})
-    .catch(function(){return{items:[]}});
+  // KIDS_PUBLIC_450_V1: Content Studio material must never extend the fixed Quiz set.
+  var studio=Promise.resolve({items:[]});
   kidsQuizFetchPending=Promise.all([base,studio]).then(function(parts){
     var data=parts[0],studioData=parts[1];
     if(!data||data.namespace!=="dar-kids-quiz"||data.adultQuizDependency!==false)
@@ -5902,7 +5901,11 @@ function fetchKidsQuiz(force){
       sceneMap:artwork.sceneMap||{},priorityCategoryMap:artwork.priorityCategoryMap||{},
       topicKeywords:artwork.topicKeywords||{}
     };
-    kidsQuizPool=baseItems.concat(normalizeStudioQuizItems(studioData));
+    var ageCount={"4-6":0,"7-8":0,"9-10":0};
+    baseItems.forEach(function(q){if(Object.prototype.hasOwnProperty.call(ageCount,q.ageBand))ageCount[q.ageBand]++;});
+    if(baseItems.length!==450||ageCount["4-6"]!==150||ageCount["7-8"]!==150||ageCount["9-10"]!==150)
+      throw new Error("Quiz: genau 150 freigegebene Fragen je Altersgruppe erforderlich");
+    kidsQuizPool=baseItems;
     window.kidsQuizPool=kidsQuizPool;
     kidsQuizLoaded=true;
     window.kidsQuizLoadError="";
@@ -7011,7 +7014,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1451",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1452",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
