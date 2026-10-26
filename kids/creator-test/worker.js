@@ -79,9 +79,9 @@ export default {
     // KIDS TEST QUIZ 450: the 900-item editorial catalog and unapproved
     // ElevenLabs V4 candidate audio must never be exposed on this
     // unauthenticated workers.dev preview.
-    if (/^\\/kids\\/data\\/(?:quiz-kids\\.json|quiz-kids-expansion-reserve-450\\.json|quiz-kids-curated-450-review\\.json|quiz-v4[^/]*)$/i.test(url.pathname)
-        || /^\\/kids\\/review-only(?:\\/|$)/i.test(url.pathname)
-        || /^\\/kids\\/assets\\/kids-quiz-audio\\/v4[^/]*(?:\\/|$)/i.test(url.pathname)) {
+    if (/^\/kids\/data\/(?:quiz-kids\.json|quiz-kids-expansion-reserve-450\.json|quiz-kids-curated-450-review\.json|quiz-v4[^/]*)$/i.test(url.pathname)
+        || /^\/kids\/review-only(?:\/|$)/i.test(url.pathname)
+        || /^\/kids\/assets\/kids-quiz-audio\/v4[^/]*(?:\/|$)/i.test(url.pathname)) {
       return textResponse("Quiz editorial or unapproved V4 asset unavailable", 404);
     }
     const asset = await env.ASSETS.fetch(request);
