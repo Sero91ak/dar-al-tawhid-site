@@ -3336,7 +3336,7 @@ body .nav-btn.kids-academy-nav .ico{background-image:url("/kids/assets/kids-icon
           <div class="parent-progress-stat"><strong id="parentTodayDone">0/3</strong><span>Heute geschafft</span></div>
           <div class="parent-progress-stat"><strong id="parentQuranResume">–</strong><span>Letzter Qurʾān-Stand</span></div>
         </div>
-        <p class="parent-note">Der Fortschritt bleibt auf diesem Gerät. Keine Rangliste und kein Vergleich mit anderen Kindern.</p>
+        <p class="parent-note" id="parentQuizProgressSummary" aria-live="polite">Der Quiz-Lernverlauf wird pro Kinderprofil gespeichert.</p><p class="parent-note">Der Fortschritt bleibt auf diesem Gerät. Keine Rangliste und kein Vergleich mit anderen Kindern.</p>
       </div>
 
 
@@ -3849,7 +3849,7 @@ function updateParentProgress(){
     try{if(duaProgress(d.id).stage==="secure")duaCount++}catch(e){}
   });
   var quizCount=0;
-  try{quizCount=Number(localStorage.getItem("kids.quiz.correct")||"0")}catch(e){}
+  try{quizCount=quizSavedCorrect()}catch(e){}
   var plan=dailyPlan();
   var todayCount=plan.filter(function(s){return dailyDone(s.id)}).length;
   var resume=readQuranResume();
@@ -3861,6 +3861,15 @@ function updateParentProgress(){
   if(s)s.textContent=String(storyCount);
   if(d)d.textContent=String(duaCount);
   if(q)q.textContent=String(quizCount);
+  var quizSummary=document.getElementById("parentQuizProgressSummary");
+  if(quizSummary&&Array.isArray(kidsQuizPool)){
+    var targetBand=currentKidsQuizAgeBand(),questions=kidsQuizPool.filter(function(x){return x.ageBand===targetBand});
+    var seen=0,secure=0,errors=0;
+    questions.forEach(function(item){var e=quizProgress(item.id);if(e.attempts>0)seen++;if(e.stage==="secure")secure++;errors+=Number(e.mistakeTaps||0)});
+    quizSummary.textContent="Quiz "+(targetBand==="4-6"?"4–6":targetBand==="7-8"?"7–8":"9–10")+" Jahre: "+
+      seen+" von "+questions.length+" kennengelernt · "+secure+" sicher · "+errors+" Fehlversuche · "+
+      quizHistoryRead().length+" gespeicherte Antworten. Nur dieses Kinderprofil auf diesem Gerät.";
+  }
   if(t)t.textContent=todayCount+"/"+plan.length;
   if(r)r.textContent=resume?(resume.label+" "+(Number(resume.ayah)+1)):"–";
 }
@@ -5612,14 +5621,36 @@ function currentKidsQuizAgeBand(){
 }
 var kidsQuizRoundCategory="all";
 var kidsQuizRoundMode="normal";
-var QUIZ_SESSION_KEY="kids.quiz.session.v1";
+// KIDS_TEST_QUIZ_PROFILES_V1460: all learning state belongs to one child.
+function kidsQuizProfileScope(){
+  try{
+    var id=String(localStorage.getItem("kids.activeProfile")||"").trim();
+    return id?"child."+encodeURIComponent(id):"guest";
+  }catch(_){return"guest"}
+}
+function quizSessionKey(){return"kids.quiz.session.v2."+kidsQuizProfileScope()}
+function kidsQuizCorrectKey(){return"kids.quiz.correct.v3."+kidsQuizProfileScope()}
+function kidsQuizHistoryKey(){return"kids.quiz.history.v1."+kidsQuizProfileScope()}
+function quizHistoryRead(){
+  try{var a=JSON.parse(localStorage.getItem(kidsQuizHistoryKey())||"[]");return Array.isArray(a)?a:[]}catch(_){return[]}
+}
+function quizHistorySave(q,correct){
+  try{
+    var all=quizHistoryRead();
+    all.push({id:String(q.id),ageBand:String(q.ageBand||""),category:String(q.category||"Quiz"),
+      correct:!!correct,at:Date.now()});
+    localStorage.setItem(kidsQuizHistoryKey(),JSON.stringify(all.slice(-500)));
+  }catch(_){}
+}
+window.DARKidsQuizProfileScope=kidsQuizProfileScope;
+window.DARKidsQuizReadHistory=quizHistoryRead;
 function normalizeKidsQuizCategory(value){
   value=String(value||"all").trim();
   return value||"all";
 }
 function loadKidsQuizSession(){
   try{
-    var raw=JSON.parse(localStorage.getItem(QUIZ_SESSION_KEY)||"null");
+    var raw=JSON.parse(localStorage.getItem(quizSessionKey())||"null");
     if(!raw||typeof raw!=="object")return null;
     if(raw.ageBand!==currentKidsQuizAgeBand())return null;
     if(!Array.isArray(raw.ids)||!raw.ids.length)return null;
@@ -5630,7 +5661,7 @@ function loadKidsQuizSession(){
 function saveKidsQuizSession(){
   if(!Array.isArray(currentQuiz)||!currentQuiz.length)return;
   try{
-    localStorage.setItem(QUIZ_SESSION_KEY,JSON.stringify({
+    localStorage.setItem(quizSessionKey(),JSON.stringify({
       ageBand:currentKidsQuizAgeBand(),
       category:normalizeKidsQuizCategory(kidsQuizRoundCategory),
       mode:String(kidsQuizRoundMode||"normal"),
@@ -5642,13 +5673,15 @@ function saveKidsQuizSession(){
   }catch(e){}
 }
 function clearKidsQuizSession(){
-  try{localStorage.removeItem(QUIZ_SESSION_KEY)}catch(e){}
+  try{localStorage.removeItem(quizSessionKey())}catch(e){}
 }
 function setKidsQuizRoundContext(category,mode){
   kidsQuizRoundCategory=normalizeKidsQuizCategory(category);
   kidsQuizRoundMode=String(mode||"normal");
 }
+var kidsQuizDirectQuestion=false;
 window.startKidsQuizRound=function(category,mode){
+  kidsQuizDirectQuestion=false;
   setKidsQuizRoundContext(category,mode);
   beginQuizSession();
 };
@@ -5683,7 +5716,17 @@ function renderKidsQuizAgePicker(){
      Im Quiz selbst gibt es bewusst keine zweite Altersauswahl. */
   var selected=currentKidsQuizAgeBand();
   var modal=document.getElementById("quizModal");
-  if(modal)modal.setAttribute("data-quiz-band",selected);
+  if(modal){
+    modal.setAttribute("data-quiz-band",selected);
+    var g=document.querySelector(".app[data-gender]"),gender=String(g&&g.getAttribute("data-gender")||document.documentElement.dataset.kidsBootGender||"boy");
+    try{
+      var id=localStorage.getItem("kids.activeProfile");
+      var ps=JSON.parse(localStorage.getItem("kids.profiles.v1")||"[]");
+      var p=Array.isArray(ps)?ps.find(function(x){return x&&String(x.id)===String(id)}):null;
+      if(p&&p.gender)gender=p.gender;
+    }catch(_){}
+    modal.setAttribute("data-quiz-gender",gender==="girl"?"girl":"boy");
+  }
 }
 function isYesNoAnswers(answers){
   var labels=(answers||[]).map(function(a){return String(a.label||"").trim().toLowerCase()});
@@ -5723,12 +5766,12 @@ function quizAgeRange(){
   if(band==="7-8")return{id:"7-8",min:7,max:8,limit:4,label:"7–8 Jahre · geprüfte Fragen"};
   return{id:"9-10",min:9,max:10,limit:5,label:"9–10 Jahre · geprüft & vertieft"};
 }
-var QUIZ_PROGRESS_PREFIX="kids.quiz.progress.v2.";
+var QUIZ_PROGRESS_PREFIX="kids.quiz.progress.v3.";
 function quizProgressDefault(){
   return {stage:"new",attempts:0,reviewPasses:0,wrong:0,mistakeTaps:0,lapses:0,dueAt:0,lastSeenAt:0,lastMistakeAt:0,consecutiveFirstTry:0};
 }
 function quizProgress(id){
-  var key=QUIZ_PROGRESS_PREFIX+id;
+  var key=QUIZ_PROGRESS_PREFIX+kidsQuizProfileScope()+"."+id;
   try{
     var raw=JSON.parse(localStorage.getItem(key)||"null");
     if(raw&&typeof raw==="object"){
@@ -5737,22 +5780,12 @@ function quizProgress(id){
       Object.keys(base).forEach(function(k){if(raw[k]===undefined)raw[k]=base[k]});
       return raw;
     }
-    var legacy=Number(localStorage.getItem("kids.quiz.mastery."+id)||"0");
-    if(legacy>0){
-      var migrated=quizProgressDefault();
-      migrated.stage="learning";
-      migrated.attempts=legacy;
-      migrated.reviewPasses=1;
-      migrated.dueAt=Date.now();
-      migrated.lastSeenAt=Date.now();
-      localStorage.setItem(key,JSON.stringify(migrated));
-      return migrated;
-    }
+    // Legacy progress was shared across children: never silently copy it to a profile.
   }catch(e){}
   return quizProgressDefault();
 }
 function saveQuizProgress(id,entry){
-  try{localStorage.setItem(QUIZ_PROGRESS_PREFIX+id,JSON.stringify(entry||quizProgressDefault()))}catch(e){}
+  try{localStorage.setItem(QUIZ_PROGRESS_PREFIX+kidsQuizProfileScope()+"."+id,JSON.stringify(entry||quizProgressDefault()))}catch(e){}
 }
 function quizMastery(id){
   return Number(quizProgress(id).reviewPasses||0);
@@ -5806,6 +5839,13 @@ function recordQuizAttempt(id,firstTry){
   else if(e.reviewPasses>=2)e.stage="review";
   else e.stage="learning";
   saveQuizProgress(id,e);
+  var question=Array.isArray(kidsQuizPool)?kidsQuizPool.find(function(q){return q&&q.id===id}):null;
+  if(question)quizHistorySave(question,!!firstTry);
+  if(firstTry){
+    try{localStorage.setItem(kidsQuizCorrectKey(),String(quizSavedCorrect()+1))}catch(_){}
+  }
+  try{updateParentProgress()}catch(_){}
+  try{window.dispatchEvent(new CustomEvent("dar-kids-quiz-progress",{detail:{id:id,correct:!!firstTry}}))}catch(_){}
   return{entry:e,counted:counted,firstTry:firstTry};
 }
 function deterministicQuizRank(id){
@@ -6003,6 +6043,7 @@ window.quizArtworkForBand=quizArtworkForBand;
 window.renderQuizQuestion=renderQuizQuestion;
 window.renderQuizFinish=renderQuizFinish;
 window.openKidsQuizQuestion=function(q){
+  kidsQuizDirectQuestion=true;
   if(!q||!q.id||!kidsQuizLoaded)return false;
   setKidsQuizRoundContext("all","normal");
   currentQuiz=[q];currentQuizIndex=0;quizCorrectCount=0;
@@ -6076,6 +6117,7 @@ function openQuiz(){
   beginQuizSession();
 }
 function beginQuizSession(){
+  kidsQuizDirectQuestion=false;
   renderKidsQuizAgePicker();
   currentQuiz=quizBankForAge();
   currentQuizIndex=0;
@@ -6098,7 +6140,7 @@ function beginQuizSession(){
   renderQuizQuestion();
 }
 function quizSavedCorrect(){
-  try{return Number(localStorage.getItem("kids.quiz.correct")||"0")}catch(e){return 0}
+  try{return Number(localStorage.getItem(kidsQuizCorrectKey())||"0")}catch(e){return 0}
 }
 function renderQuizProgress(){
   var box=document.getElementById("quizProgress");
@@ -6113,7 +6155,10 @@ function renderQuizProgress(){
   }).join("");
 }
 function renderQuizQuestion(){
-  if(currentQuizIndex>=currentQuiz.length){renderQuizFinish();return}
+  if(currentQuizIndex>=currentQuiz.length){
+    if(kidsQuizDirectQuestion&&typeof window.kidsQuizShowLibrary==="function"){window.kidsQuizShowLibrary();return}
+    renderQuizFinish();return
+  }
   renderKidsQuizAgePicker();
   saveKidsQuizSession();
   var ageLabel=document.getElementById("quizAgeLabel");
@@ -6152,7 +6197,8 @@ function renderQuizQuestion(){
     '<div id="quizExplanation" class="quiz-explanation"></div>'+ 
     '<div id="quizTermLearning" hidden></div>'+ 
     '<div id="quizSource" class="quiz-source"></div>'+
-    '<button id="quizNext" class="quiz-next" type="button">'+(currentQuizIndex===currentQuiz.length-1?'Auswertung ansehen':'Weiter')+' ›</button>';
+    '<button id="quizNext" class="quiz-next" type="button" disabled aria-disabled="true">'+
+      (kidsQuizDirectQuestion?'Zur Fragenübersicht':currentQuizIndex===currentQuiz.length-1?'Auswertung ansehen':'Nächste Frage')+' ›</button>';
   var scene=document.getElementById("quizScene");
   if(scene&&art.url){
     scene.style.setProperty("--quiz-art",'url("'+art.url.replace(/"/g,"%22")+'")');
@@ -6176,7 +6222,13 @@ function renderQuizQuestion(){
     if(this.disabled)return;
     quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question"});
   });
-  document.getElementById("quizNext").addEventListener("click",function(){window.DARKidsTermLearning?.stop?.();currentQuizIndex++;renderQuizQuestion()});
+  document.getElementById("quizNext").addEventListener("click",function(){
+    if(this.disabled||!quizLocked)return;
+    try{window.DARKidsOwnerVoice?.stop?.();window.DARKidsTermLearning?.stop?.()}catch(_){}
+    if(kidsQuizDirectQuestion&&typeof window.kidsQuizShowLibrary==="function"){window.kidsQuizShowLibrary();return}
+    currentQuizIndex++;renderQuizQuestion();
+    var body=document.getElementById("quizBody");if(body)body.scrollTop=0;
+  });
   setTimeout(function(){
     if(currentQuiz[currentQuizIndex]!==q)return;
     refreshQuizListenState();
@@ -6195,88 +6247,45 @@ function quizRewardBurst(){
   scene.appendChild(burst);
   setTimeout(function(){if(burst&&burst.parentNode)burst.remove()},950);
 }
+// KIDS_TEST_QUIZ_NEXT_V1460: a single answer unlocks the next step (right or wrong).
 function chooseQuizAnswer(index,button){
-  if(quizLocked)return;
-  var q=currentQuiz[currentQuizIndex];
-  var a=q.answers[index];
-  var buttons=[].slice.call(document.querySelectorAll("#quizAnswers .quiz-answer"));
-  if(a.correct){
-    quizLocked=true;
-    quizCorrectCount++;
-    button.classList.add("correct");
-    quizRewardBurst();
-    document.getElementById("quizFeedback").className="quiz-feedback good";
-    document.getElementById("quizFeedback").textContent="✓ "+quizAcademyPraiseText(q);
-    var explanation=document.getElementById("quizExplanation");
-    if(explanation&&q.explanation){
-      explanation.textContent=String(q.explanation);
-      explanation.classList.add("show");
-    }
-    // Erklärt Fachbegriffe beidseitig, ohne die freigegebenen Quiz-/Audio-Texte zu verändern.
-    var termSlot=document.getElementById("quizTermLearning");
-    if(termSlot&&window.DARKidsTermLearning&&typeof window.DARKidsTermLearning.render==="function"){
-      var correctTerms=(Array.isArray(q.answers)?q.answers:[]).filter(function(a){return a.correct}).map(function(a){return a.label||""});
-      window.DARKidsTermLearning.render(termSlot,
-        [q.question,q.explanation,q.topic,q.category].concat(correctTerms).join(" "),
-        {age:currentKidsQuizAgeBand(),max:2});
-    }
-    var src=document.getElementById("quizSource");
-    if(src)src.innerHTML='<strong>Quelle:</strong> '+String(q.source||"");
-    document.getElementById("quizNext").classList.add("show");
-    // Save mastery internally; don't replace the child's blessing with a technical learning state.
-    recordQuizAttempt(q.id,!quizQuestionHadError);
-    // Nach einer richtigen Antwort wird die kindgerechte Erklärung vollständig
-    // in der Serhat-Masterstimme vorgelesen, aber nur mit echtem freigegebenem Clip.
-    // Nicht auf System-TTS ausweichen und keine nächste Quizfrage übertönen.
-    var answeredQuestion=q,answeredIndex=currentQuizIndex;
-    var explanationAudio=quizV4Text(q,"explanationAudioText",q.explanation);
-    var canExplain=!!(q.explanation&&window.DARKidsOwnerVoice&&
-      typeof window.DARKidsOwnerVoice.has==="function"&&
-      window.DARKidsOwnerVoice.has(explanationAudio));
-    function questionStillOpen(){
-      var modal=document.getElementById("quizModal");
-      return !!(modal&&modal.classList.contains("open")&&
-        currentQuizIndex===answeredIndex&&currentQuiz[currentQuizIndex]===answeredQuestion);
-    }
-    function playQuizTermExplanation(){
-      if(!questionStillOpen()||!window.DARKidsTermLearning?.playFor)return;
-      var correctWords=(answeredQuestion.answers||[]).filter(function(x){return x.correct}).map(function(x){return x.label||""});
-      window.DARKidsTermLearning.playFor(
-        [answeredQuestion.question,answeredQuestion.explanation,answeredQuestion.topic,answeredQuestion.category].concat(correctWords).join(" "),
-        {age:currentKidsQuizAgeBand(),max:2,stillValid:questionStillOpen}
-      ).catch(function(){});
-    }
-    quizSpeak(quizV4Text(q,"correctAudioText",q.success),{
-      source:"kids-quiz-feedback",
-      onended:function(){
-        if(!questionStillOpen())return;
-        if(canExplain){
-          quizSpeak(explanationAudio,{
-            source:"kids-quiz-explanation",
-            onended:playQuizTermExplanation
-          });
-        }else{playQuizTermExplanation()}
-      }
-    });
-  }else{
-    quizQuestionHadError=true;
-    recordQuizMistake(q.id);
-    button.classList.add("wrong");
-    document.getElementById("quizFeedback").className="quiz-feedback bad";
-    document.getElementById("quizFeedback").textContent=quizAcademyRetryText(q);
-    quizSpeak(quizV4Text(q,"retryAudioText",q.retry));
-    // Leave encouragement visible while the child thinks; remove only the shake marker.
-    setTimeout(function(){
-      if(button&&button.isConnected)button.classList.remove("wrong");
-    },1100);
+  if(quizLocked||!currentQuiz||!currentQuiz[currentQuizIndex])return;
+  var q=currentQuiz[currentQuizIndex],answer=q.answers&&q.answers[index];
+  if(!answer)return;
+  quizLocked=true;
+  var correct=!!answer.correct,buttons=[].slice.call(document.querySelectorAll("#quizAnswers .quiz-answer"));
+  if(correct)quizCorrectCount++;
+  else{quizQuestionHadError=true;recordQuizMistake(q.id)}
+  buttons.forEach(function(el,i){
+    el.disabled=true;
+    el.setAttribute("aria-disabled","true");
+    if(q.answers[i]&&q.answers[i].correct)el.classList.add("correct");
+    else if(i===index)el.classList.add("wrong");
+  });
+  var feedback=document.getElementById("quizFeedback");
+  if(feedback){
+    feedback.className="quiz-feedback show "+(correct?"good":"bad");
+    feedback.textContent=correct?"✓ "+quizAcademyPraiseText(q):
+      "Guter Versuch! Richtig ist: "+(q.answers.find(function(a){return a.correct})||{}).label+".";
   }
+  var explanation=document.getElementById("quizExplanation");
+  if(explanation&&q.explanation){explanation.textContent=String(q.explanation);explanation.classList.add("show")}
+  var source=document.getElementById("quizSource");
+  if(source&&q.source)source.innerHTML='<strong>Quelle:</strong> '+quizText(q.source);
+  var next=document.getElementById("quizNext");
+  if(next){
+    next.disabled=false;next.setAttribute("aria-disabled","false");
+    next.classList.add("show");
+  }
+  recordQuizAttempt(q.id,correct);
+  if(correct)quizRewardBurst();
+  // Audio is strictly optional: missing/unapproved files must not block next.
+  var text=correct?quizV4Text(q,"correctAudioText",q.success):quizV4Text(q,"retryAudioText",q.retry);
+  try{if(window.DARKidsOwnerVoice?.has?.(text))quizSpeak(text,{source:"kids-quiz-feedback"})}catch(_){}
 }
 function renderQuizFinish(){
   clearKidsQuizSession();
-  try{
-    var total=quizSavedCorrect()+quizCorrectCount;
-    localStorage.setItem("kids.quiz.correct",String(total));
-  }catch(e){}
+  // Every answered question has already persisted its per-profile result.
   updateParentProgress();
   document.getElementById("quizProgress").innerHTML="";
   document.getElementById("quizBody").innerHTML=
