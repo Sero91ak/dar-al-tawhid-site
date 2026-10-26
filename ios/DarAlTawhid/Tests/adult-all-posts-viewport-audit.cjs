@@ -73,6 +73,7 @@ const report={generated:new Date().toISOString(),base,viewport:parts,
           const heading=main?.querySelector(".post-reader-title")?.textContent.trim()||"";
           return {hash:location.hash,route:[...document.body.classList].filter(c=>c.startsWith("is-")),
             mode:root.getAttribute("data-layout"),
+            expectedMode:window.DarAdaptiveLayout?.resolveLayoutMode?.(root.clientWidth,root.clientHeight)||null,
             heading:heading.slice(0,160),
             contentLength:view.textContent.trim().length,
             overflow:Math.max(0,root.scrollWidth-root.clientWidth,
@@ -81,6 +82,8 @@ const report={generated:new Date().toISOString(),base,viewport:parts,
             missing:/Beitrag (?:nicht gefunden|konnte nicht geladen)|Fehler beim Laden/i.test(view.textContent)};
         });
         if(!state.mode)result.issue="missing-layout-mode";
+        else if(!state.expectedMode)result.issue="missing-layout-resolver";
+        else if(state.mode!==state.expectedMode)result.issue="stale-layout-mode:"+state.mode+"!="+state.expectedMode;
         else if(state.overflow>3)result.issue="page-overflow:"+state.overflow;
         else if(state.readerWidth<25)result.issue="reader-collapsed";
         else if(state.missing)result.issue="missing-post-content";
@@ -117,13 +120,17 @@ const report={generated:new Date().toISOString(),base,viewport:parts,
         },number,{timeout:5000});
         const state=await page.evaluate(()=>{
           const root=document.documentElement,view=document.getElementById("appView");
-          return {layout:root.getAttribute("data-layout"),fold:root.getAttribute("data-fold-dual"),
+          return {layout:root.getAttribute("data-layout"),
+            expectedMode:window.DarAdaptiveLayout?.resolveLayoutMode?.(root.clientWidth,root.clientHeight)||null,
+            fold:root.getAttribute("data-fold-dual"),
             overflow:Math.max(0,root.scrollWidth-root.clientWidth,
               document.body.scrollWidth-root.clientWidth),
             arabicPresent:/[\u0600-\u06FF]/.test(view.textContent)};
         });
         if(state.overflow>3)throw Error("sūrah reader horizontal overflow: "+state.overflow);
         if(!state.layout)throw Error("missing reader layout");
+        if(!state.expectedMode)throw Error("missing reader layout resolver");
+        if(state.layout!==state.expectedMode)throw Error("stale sūrah layout: "+state.layout+" != "+state.expectedMode);
         if(!state.arabicPresent)throw Error("Arabic sūrah text missing");
         report.surahs.passed++;
       }catch(e){
