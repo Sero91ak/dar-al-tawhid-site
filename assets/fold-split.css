@@ -584,3 +584,81 @@ html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[
   min-width:0!important;
   font-size:max(14px,1rem)!important;
 }
+
+
+/* DAR_BOOK_HINGE_AWARE_V1 — Fold inner screen, 2026-10-26.
+   LEFT is the complete selection surface, RIGHT is the entire reader.
+   The old 300/700 tracks put the hardware crease through the reader on a
+   951px wide unfolded device. The two halves are balanced by default;
+   when WebKit supplies two real viewport segments, JS aligns each column
+   and reserves the *actual* gap. Never translate the app off-screen. */
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"])
+  #appView .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  column-gap: clamp(20px, 2.6vw, 34px) !important;
+  row-gap: 0 !important;
+  justify-content: stretch !important;
+  justify-items: stretch !important;
+  align-items: stretch !important;
+  inline-size: 100% !important;
+  min-inline-size: 0 !important;
+  max-inline-size: 100% !important;
+  margin-inline: 0 !important;
+  box-sizing: border-box !important;
+}
+html[data-fold-book="1"][data-fold-dual="1"]
+  #appView .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) {
+  grid-template-columns:
+    minmax(0, var(--dar-fold-left-track, 1fr))
+    minmax(0, var(--dar-fold-right-track, 1fr)) !important;
+  column-gap: var(--dar-fold-seam-gap, 24px) !important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"])
+  #appView .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail, .dar-fold__pane) {
+  grid-row: 1 !important;
+  min-inline-size: 0 !important;
+  max-inline-size: 100% !important;
+  box-sizing: border-box !important;
+  margin-inline: 0 !important;
+  transform: none !important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"])
+  #appView .dar-fold[data-fold-mode="dual"] > .dar-fold__rail {
+  grid-column: 1 !important;
+  padding-inline: max(8px, env(safe-area-inset-left, 0px))
+                  clamp(12px, 1.5vw, 20px) !important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"])
+  #appView .dar-fold[data-fold-mode="dual"] > .dar-fold__pane {
+  grid-column: 2 !important;
+  padding-inline: clamp(12px, 1.5vw, 20px)
+                  max(8px, env(safe-area-inset-right, 0px)) !important;
+}
+/* Reading content is confined to its own half, never to a centered max-width
+   calculated against the full double screen. Long Arabic words retain normal
+   shaping and the reader keeps its internal vertical scroll. */
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"])
+  #appView .dar-fold__pane :is(
+    .post-reader, .post-body, .qrc-shell, .quran-ayah-list,
+    .dua-detail-box, .hadith-detail, .lib-detail, .qsrc-detail
+  ) {
+  min-inline-size: 0 !important;
+  max-inline-size: 100% !important;
+  margin-inline: 0 !important;
+  box-sizing: border-box !important;
+}
+@media (horizontal-viewport-segments: 2) {
+  /* WebKit 27.1 preview: the physical center may be wider than a CSS gap. */
+  html[data-fold-dual="1"] #appView .dar-fold[data-fold-mode="dual"] {
+    column-gap: var(--dar-fold-seam-gap, 24px) !important;
+  }
+}
+/* No 2-column fold in the closed / narrow / split-window layout.
+   Avoid overriding the existing single-pane route's visibility state. */
+@media (max-width: 599.98px) {
+  html #appView .dar-fold[data-fold-mode="dual"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+    column-gap: 0 !important;
+  }
+}
