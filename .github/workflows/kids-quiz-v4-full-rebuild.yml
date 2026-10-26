@@ -54,6 +54,31 @@ jobs:
           fi
           echo "VOICE_PROVIDER_CONFIGURED=true; no paid generation attempted."
 
+  pilot-one-question:
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.label.name == 'kids-v4-one-question-pilot-20261026' && github.event.pull_request.head.ref == 'codex/kids-quiz-v4-complete-speech-rebuild-20261026' && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' }}
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Generate first question with Serhat Master V4 and verify playback encoding
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          test -n "${ELEVENLABS_API_KEY}" || (echo "::error::Missing ElevenLabs secret" && exit 1)
+          python3 kids/tools/rebuild_quiz_v4_450.py --age-band 4-6 --max-questions 1 --execute
+      - name: Preserve generated private preview (not publicly served)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-quiz-v4-new-pilot-${{ github.run_id }}
+          path: kids/review-only/quiz-v4-full-rebuild-20261026/generated/4-6/
+          retention-days: 30
+          if-no-files-found: warn
+
   generate-review-audio:
     # Paid run only with explicit workflow input OR a precisely named human-added PR authorization label on a known branch.
     if: ${{ (github.event_name == 'workflow_dispatch' && inputs.confirm_paid_generation == 'YES_REBUILD_450') || (github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.label.name == 'kids-v4-generate-full-20261026' && github.event.pull_request.head.ref == 'codex/kids-quiz-v4-complete-speech-rebuild-20261026' && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site') }}
