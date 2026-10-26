@@ -24,6 +24,7 @@ assert.ok(premiumCss.includes("minmax(0,1fr)"),"Responsive grid should not overf
 assert.ok(approvedPlayer.includes("humanListeningApproved!==true")&&approvedPlayer.includes("releaseEnabled!==true"),"Unheard V4 audio must fail closed");
 assert.ok(!read("kids/quiz-library.js").includes("var QUIZ_PACK_900="),"The 450 unpublished reserve is not visible");
 assert.ok(entry.includes("Quiz-Lernwelt")&&entry.includes("450 Fragen · neue Lernwelt"),"Visitor home must visibly expose new 450-question quiz entry");
+assert.ok(entry.includes("/kids/quiz-v4-test-preview.js?v=20261026-audition1"),"Kids visitor code must include host-isolated Test MP3 preview");
 const sw=read("kids/sw.js");
 const version=JSON.parse(read("kids/version.json"));
 assert.ok(sw.includes('dar-al-tawhid-kids-v1457'));
@@ -174,3 +175,6 @@ async function validateOfflineQuizLoader(){
 }
 validateOfflineQuizLoader().catch(err=>{console.error(err);process.exitCode=1});
 
+
+// Audition stage must be verified from the actual original 1217 MP3 bytes.
+require("node:child_process").execFileSync(process.execPath,["kids/tools/test-v4-test-preview.cjs"],{stdio:"inherit"});

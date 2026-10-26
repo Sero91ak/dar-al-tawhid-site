@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "product": "TAWHID_KIDS_450_ELEVEN_V4",
+  "channel": "test-only-dar-test-workers-origin",
+  "createdAt": "2026-10-26",
+  "questionCount": 450,
+  "ageBands": {
+    "4-6": 150,
+    "7-8": 150,
+    "9-10": 150
+  },
+  "totalAudioSlots": 1800,
+  "uniqueMp3": 1217,
+  "bytes": 198993239,
+  "audioRoot": "/kids/assets/kids-quiz-audio/v4-full-rebuild-20261026/",
+  "lockedReviewManifest": "/kids/data/quiz-v4-full-rebuild-review.json",
+  "previewScript": "/kids/quiz-v4-test-preview.js?v=20261026-audition1",
+  "productionPublicManifest": null,
+  "releaseEnabled": false,
+  "humanListeningApproved": false,
+  "testPreviewEnabled": true,
+  "sourceGitHubBranch": "codex/kids-v4-generated-review-20261026",
+  "sourceGeneratorRun": 40327375164,
+  "recoveryRun": 40337997792,
+  "technicalQaRun": 40338802075,
+  "releasePolicy": "Test origin plays original V4 audio visibly marked NOT human reviewed; public visitor origin keeps approved-only audio gate. Human Fuṣḥā listening approval and live end-to-end device tests required before a true public voice release.",
+  "note": "This file triggers isolated test deployment when merged to main; not a child-public audio approval.",
+  "appLaneAuthorization": "lanes-multi-freigabe (explicit user request on 2026-10-26: KIDS visitor and test quiz together)",
+  "publicAudioGateNote": "Audio bytes are deployable assets, but main-domain Kids player remains gated on genuine documented human listening QA."
+}
