@@ -518,6 +518,17 @@
     ensureUi();
     showDashboard();
     if(!canonicalItems().length)ensureQuizData();
+    // V4 is loaded on explicit Quiz entry, not through global boot.
+    // A real 450x4 production release manifest is still subject to the
+    // exact voice, SHA-256 and documented human listening approval gates.
+    var approvedV4=window.DARKidsQuizV4Approved;
+    if(approvedV4&&typeof approvedV4.load==="function"){
+      Promise.resolve(approvedV4.load()).then(function(ready){
+        if(!ready||!modal.classList.contains("open"))return;
+        if(mode==="library"&&!directQuestion)renderList();
+        else if(mode==="play"&&localRound[localIndex])refreshLocalQuizListen(localRound[localIndex]);
+      }).catch(function(){});
+    }
     return true;
   };
   // Bind the visible home tile independently of the legacy inline listener.
@@ -656,8 +667,9 @@
     if(newV4&&newV4.has(q,"question"))return"ready";
     var owner=window.DARKidsOwnerVoice;
     if(!owner||typeof owner.isReady!=="function"||!owner.isReady())return voiceRefreshAttempts<12?"loading":"missing";
-    if(typeof window.quizPrompt!=="function"||typeof owner.has!=="function")return"missing";
-    return owner.has(window.quizPrompt(q))?"ready":"missing";
+    // A legacy owner-voice match is not proof of the approved V4 quiz clip.
+    // Keep the availability badge aligned with the actual gated playback.
+    return localQuizApprovedAudioText(q,"questionAudioText")?"ready":"missing";
   }
   function rowArtwork(q){
     if(typeof window.quizArtworkForBand!=="function")return{url:"",position:"50% 50%",family:"age"};
