@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "mode": "DAR_TEST_KIDS_QUIZ_ISOLATED",
+  "target": "https://dar-al-tawhid.de/test/kids/",
+  "isolatedOrigin": "https://dar-al-tawhid-test.sero91ak.workers.dev",
+  "entry": "/kids/start",
+  "questionBank": "kids/data/quiz-kids-public-450.json",
+  "questions": 450,
+  "ageBands": {
+    "4-6": 150,
+    "7-8": 150,
+    "9-10": 150
+  },
+  "newVoice": "ElevenLabs eleven_v4 – Serhat Abu Malik – Master",
+  "bindings": 1800,
+  "generatedMp3s": 1217,
+  "reviewAudioAllowedForPublicPlayback": false,
+  "humanListeningApproved": false,
+  "noOneSignal": true,
+  "unpublishedQuestionsVisible": false,
+  "publicVisitorRouteChanged": false,
+  "note": "This file describes a test worker deployment only; not proof of delivery until GitHub deploy verification succeeds."
+}
