@@ -36,8 +36,8 @@
   }
   function browserSegmentRegion() {
     try {
-      var vv = global.visualViewport;
-      var segments = vv && vv.segments;
+      // Safari 27.1 exports physical segments through window.viewport.
+      var segments = global.viewport && global.viewport.segments;
       if (!segments || segments.length !== 2) return null;
       var a = segments[0], b = segments[1];
       if (!a || !b) return null;
@@ -90,7 +90,7 @@
     if (known && known.viewportWidth && Math.abs(known.viewportWidth - dims.w) > 4) known = null;
     if (known && known.viewportHeight && Math.abs(known.viewportHeight - dims.h) > 4) known = null;
     var paired = (dual && dims.w >= 900 && dims.h >= 560) ||
-      (!!known && dims.w >= 700 && dims.h >= 560);
+      (!!known && dual && dims.w >= 620 && dims.h >= 450);
     if (!paired) {
       root.removeAttribute("data-dar-hinge-layout");
       root.removeAttribute("data-dar-hinge-source");
@@ -131,6 +131,12 @@
     global.addEventListener("orientationchange", schedule, { passive: true });
     global.addEventListener("hashchange", schedule, { passive: true });
     global.addEventListener("dar:layoutchange", schedule, { passive: true });
+    try {
+      if (global.navigator && global.navigator.devicePosture &&
+          typeof global.navigator.devicePosture.addEventListener === "function") {
+        global.navigator.devicePosture.addEventListener("change", schedule, {passive:true});
+      }
+    } catch (ePosture) {}
     if (global.visualViewport) global.visualViewport.addEventListener("resize", schedule, {passive:true});
     if (typeof ResizeObserver === "function") {
       observer = new ResizeObserver(schedule);
