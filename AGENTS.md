@@ -347,6 +347,17 @@ Der wiederhergestellte Frauen-Hero wird von diesem Vertrag nicht überschrieben.
 
 ---
 
+## DĀR AL TAWḤĪD Zentrum – Besucher-KIDS-Quiz V1456 (26.10.2026)
+
+**Expliziter Nutzerauftrag:** 450 freigegebene Kinder-Quizfragen als hochwertiges islamisches, kindgerechtes Quiz-Dashboard mit Wide Screen, Edge-to-Edge, Mädchen-/Jungen-Palette, iPhone/iPad/Fold/Duo/Querformat und leichten barrierearmen Animationen im Besucher-KIDS bereitstellen.
+
+**Tatsächlich ausgeführt:** PR #1441 wurde als Commit `b9e388bbd11741af39477f32bb1069f4c7605b60` auf `main` zusammengeführt. `kids/quiz-premium-v1.css` enthält eigenständige geschlechtsspezifische Farbpaletten (Mädchen Pflaume/Rosé; Jungen Türkis/Dunkelblau), Wide-Screen-Grid, altersabhängige Quiz-Ansprache, islamisch-geometrisches Motiv, responsive Safe Areas, große Antwortbuttons und `prefers-reduced-motion`; `kids/quiz-library.js` übernimmt 450 unveränderte Fragen und 150 je Altersbereich, robustere Dashboard-, Weiter-/Zurück- und Erklärungskomponenten. `kids/index.html`, `kids/start.html`, `kids/shell.html`, `kids/sw.js` und `kids/version.json` teilen denselben neuen Quiz-/PWA-Cache V1456; die **kanonische KIDS Build-ID** wurde wegen existierender Salaf-/Duʿāʾ-/Navigationsverträge bewusst nicht geändert. `kids/owner-voice.js` und `kids/quiz-v4-approved-player.js` enthalten nur freigabegebundene V4-ID-Routen. GitHub-PR-CI: App Health, Canonical State, Kids Quiz Home Entry, Dua Runtime, Voice Studio, App Lane und Web Safety bestanden.
+
+**Cloudflare-Besucher-Deploy:** [GitHub Actions #40371077233](https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40371077233) wurde inklusive Cloudflare Workers Static Assets Upload und vorhandener allgemeiner Live-Deploy-Verifikation **erfolgreich** abgeschlossen. Buildlog enthält explizit `/kids/quiz-premium-v1.css`, `/kids/quiz-library.js`, `/kids/quiz-v4-approved-player.js`, `/kids/owner-voice.js`, `/kids/index.html` und `/kids/sw.js`. Die lokalen Web-/Geräte-Emulatoren wurden in diesem Lauf nicht physisch geprüft; Browser/DNS aus der Chat-Laufzeit nicht erreichbar. Daher keine unbelegte 100%-Aussage für alle echten Geräte.
+
+**Zwingende Audio-Freigabe:** 450×4 V4 und 1.217 Original-MP3s sind auf `codex/kids-v4-generated-review-20261026` **generiert, gesichert und technisch voll geprüft**, aber **noch nicht menschlich angehört/freigegeben**. Sie dürfen NICHT durch Umschreiben von `humanListeningApproved` oder `releaseEnabled` als öffentliches Besucheraudio freigeschaltet werden. Der neue öffentliche Player verweigert die Wiedergabe unfreigegebener V4-Clips; zulässige bestehende Audioquellen bleiben. Separate authentische Hörfreigabe und reales Test-/Besucher-Playback der V4-Audios bleiben offen; diese sind **nicht live veröffentlicht**. Keine OneSignal-Nachricht, keine neue bezahlte Generierung, keine alte MP3-Datei gelöscht. Speicherbereinigung erst nach echter Freigabe und nachgewiesener Referenznull.
+
+---
 ## J. TAWḤĪD KIDS – Quiz-Audio 200/450 (Zentrale 20.10.2026)
 
 **Nutzerauftrag (20.10.2026):** Die bereits laufende ElevenLabs-V4-Vertonung der 450 kuratierten Kinder-Quizfragen wird als EIN fortlaufender Auftrag der bestehenden stündlichen **DĀR AL TAWḤĪD Zentrale** verwaltet. **Erster ausdrücklich gewünschter Meilenstein:** 200 von 450 Fragen müssen jeweils alle vier echten Tonbestandteile `question`, `correct`, `retry`, `explanation` mit der eigenen Masterstimme technisch besitzen. 200/450 ist ein Zwischenziel, keine Behauptung einer vollständig veröffentlichten App.
