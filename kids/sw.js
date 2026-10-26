@@ -1,14 +1,28 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1460";
+const CACHE_NAME="dar-al-tawhid-kids-v1457";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
-const KIDS_BUILD_ID="kids-creator-quiz-450-profile-premium-v1460-20261026";
+const KIDS_BUILD_ID="kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
+  "/kids/splash-visitor-v1.css?v=20261018-1",
+  "/kids/splash-visitor-v1.js?v=20261018-1",
+  "/kids/assets/kids-splash-20261017-v1.jpg",
+  "/kids/kids-birth-month-v1431.js?v=1431",
+  "/kids/kids-birth-month-v1431.css?v=1431",
+  "/kids/kids-nav-v1421.css?v=1422",
+  "/kids/kids-motion-v1422.css?v=1422",
+  "/kids/kids-girl-palette-authority-v1427.css?v=1428",
+  "/kids/kids-academy-girl-seam-v1421.css?v=1422",
+  "/kids/kids-academy-portal-v1421.js?v=1425",
+  "/kids/assets/kids-icons/learning-book-3d-v1422.png?v=1422",
+  "/kids/assets/kids-icons/dua-real-v12.png?v=1421",
+  "/kids/kids-ui-contract-v1420.css?v=1425",
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1272",
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
   "/kids/akademie/index.html",
+  "/kids/akademie/girl-profile-authority-v1430.css?v=1430",
   "/kids/assets/kids-salah-v1272/hero-day.png?v=1277",
   "/kids/assets/kids-salah-v1272/fajr.png?v=1277",
   "/kids/assets/kids-salah-v1272/dhuhr.png?v=1277",
@@ -28,7 +42,6 @@ const CORE_PRECACHE=[
   "/kids/section-heroes-v1095.css?v=1256-parent-hero-full",
   "/kids/profile-stability-v1256.css?v=1258",
   "/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3",
-  "/kids/assets/kids-art/section-quran-v1090.jpg?v=1090",
   "/kids/assets/kids-art/section-parents-v1097.png?v=1097-real3",
   "/kids/assets/parents-hero/boy-profile-v1254.jpg",
   "/kids/assets/parents-hero/girl-profile-v1254.jpg",
@@ -43,7 +56,6 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1229",
   "/assets/fonts/cinzel-latin-600-normal.woff2",
   "/kids/assets/kids-home-v1176/world-stories.png",
-  "/kids/assets/kids-home-v1176/world-quran.png",
   "/kids/assets/kids-home-v1176/world-dua.png",
   "/kids/assets/kids-brand/hero-warm-world.png?v=1175",
   "/kids/assets/stories-home/prophets-v1133.webp?v=1136",
@@ -71,12 +83,14 @@ const CORE_PRECACHE=[
   "/kids/data/story-hub.json?v=7",
   "/kids/deen-learning-v1199.css?v=1199",
   "/kids/deen-lessons.css?v=2",
-  "/kids/deen-lessons.js?v=8",
-  "/kids/global-detail-dock-v1247.css?v=1411",
+  "/kids/deen-curriculum-v1.css?v=1",
+  "/kids/data/deen-curriculum-v1.json?v=3",
+  "/kids/deen-lessons.js?v=13",
+  "/kids/global-detail-dock-v1247.css?v=1428",
   "/kids/global-hero-seam-v1412.css?v=1413",
   "/kids/girls-profile-deep-fix-v1339.css?v=1339",
   "/kids/girls-profile-reader-v1340.css?v=1340",
-  "/kids/global-detail-dock-v1247.js?v=1414",
+  "/kids/global-detail-dock-v1247.js?v=1428",
   "/kids/data/deen-lessons.json?v=3",
   "/kids/assets/deen/deen-entry.jpg?v=1206",
   "/kids/assets/deen/tawhid.jpg?v=1206",
@@ -91,19 +105,19 @@ const CORE_PRECACHE=[
   "/kids/data/verified-content.json",
   "/kids/prophet-stories.css?v=43",
   "/kids/story-policy.js?v=2",
-  "/kids/prophet-stories.js?v=43",
+  "/kids/prophet-stories.js?v=43&outrofix=20261017",
   "/kids/mubashshirun-stories.css?v=29",
   "/kids/sahabiyyat-stories.css?v=7",
   "/kids/story-card-system.css?v=2",
-  "/kids/mubashshirun-stories.js?v=1414",
-  "/kids/sahabiyyat-stories.js?v=1414",
+  "/kids/mubashshirun-stories.js?v=1414&outrofix=20261017",
+  "/kids/sahabiyyat-stories.js?v=1414&outrofix=20261017",
   "/kids/story-follow-reader.css?v=11",
   "/kids/screen-awake.js?v=1",
-  "/kids/story-follow-reader.js?v=18-salaf1",
+  "/kids/story-follow-reader.js?v=19-salaf1",
   "/kids/story-hub.css?v=12",
   "/kids/stories-home-v1133.css?v=1152",
   "/kids/stories-home-v1138.css?v=1152",
-  "/kids/story-hub.js?v=28",
+  "/kids/story-hub.js?v=29",
   "/kids/global-story-glow-v1216.css?v=1218-calm",
   "/kids/global-story-glow-v1216.js?v=1218-calm",
   "/kids/dua-hub-v1219.css?v=1278",
@@ -147,7 +161,7 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-term-audio/shayatin-basic-61c60d5712f6.m4a",
   "/kids/assets/kids-term-audio/shayatin-deep-88325399338e.m4a",
     // KIDS_TERM_AUDIO_PRECACHE_END
-  "/kids/dua-hub-v1219.js?v=1318",
+  "/kids/dua-hub-v1219.js?v=1421",
   "/kids/assets/profile-avatars/boy-kufi-v1235.svg",
   "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg",
   "/kids/assets/dua-premium/hero-v1222.jpg?v=1233",
@@ -183,13 +197,13 @@ const CORE_PRECACHE=[
   "/kids/assets/dua-3d/home.svg?v=1221",
   "/kids/assets/dua-3d/mosque.svg?v=1221",
   "/kids/assets/dua-3d/shield.svg?v=1221",
-  "/kids/navigation-v1182.js?v=1410",
+  "/kids/navigation-v1182.js?v=1425",
   "/kids/kids-age-typography.css?v=5",
   "/kids/story-library-cards.css?v=9",
   "/kids/kids-touch-rail.css?v=17",
   "/kids/kids-card-interaction.js?v=7",
   "/kids/kids-age-typography.js?v=3",
-  "/kids/owner-voice.js?v=8",
+  "/kids/owner-voice.js?v=20261026-premium1",
   "/kids/dua-smart-learn.css?v=1261",
   "/kids/dua-layout-v1259.css?v=1311",
   "/kids/dua-learn-cinema-v1261.css?v=1261",
@@ -205,10 +219,6 @@ const CORE_PRECACHE=[
   "/kids/assets/prophets-v2/muhammad-card.jpg?v=22"
 ];
 const PRECACHE=CORE_PRECACHE.concat([
-  "/kids/assets/kids-art/quran-reise-v11-clean.png",
-  "/kids/assets/kids-art/quran-home-v1053.jpg",
-  "/kids/assets/kids-art/quran-surahs-v1053.jpg",
-  "/kids/assets/kids-art/quran-verses-v1053.jpg",
   "/kids/assets/kids-art/surah-001-al-fatihah-v13.jpg",
   "/kids/assets/kids-art/surah-112-al-ikhlas-v13.jpg",
   "/kids/assets/kids-art/surah-113-al-falaq-v13.jpg",
@@ -243,10 +253,11 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/data/quiz-audio.json",
   "/kids/data/dua-audio.json",
   "/kids/data/owner-voice-audio.json",
-  "/kids/quiz-library.css?v=1454",
-  "/kids/quiz-library.js?v=1460",
-  "/kids/quiz-test-premium-v1460.css?v=1460",
+  "/kids/quiz-library.css?v=20261026-premium1",
+  "/kids/quiz-library.js?v=20261026-premium1",
   "/kids/quiz-v4-bridge.js?v=20261013-academy1",
+  "/kids/quiz-premium-v1.css?v=20261026-premium1",
+  "/kids/quiz-v4-approved-player.js?v=20261026-v1",
   "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
   "/kids/assets/sahaba-mubashshirun/umar.jpg",
   "/kids/assets/sahaba-mubashshirun/uthman.jpg",
@@ -278,10 +289,32 @@ const PRECACHE=CORE_PRECACHE.concat([
 // KIDS_FAST_FIRST_PAINT_V1313: do not block SW installation on 255+ heavy
 // illustrations/audio clips. Save the EXACT image used by the final homepage CSS.
 // Larger visual and voice libraries download separately in resumable packs.
+/* KIDS_GLOBAL_TOP_SCROLL_BOUNDARY_V1428: shared scroll-stop cached for offline first paint. */
+/* V1430 GIRL ACADEMY BOOT: girls must have correct colors even offline on first load. */
 const KIDS_BOOT_PRECACHE=[
+  "/kids/kids-qibla-focus-v1442.js?v=1448",
+  "/kids/kids-qibla-focus-v1442.css?v=1448",
+  "/kids/kids-profile-layout-contract-v1447.css?v=1447",
+  "/kids/parents-dashboard-v1432.css?v=1435",
+  "/kids/parents-dashboard-v1432.js?v=1441",
+  "/kids/parents-compact-timer-v1436.css?v=1440",
+  "/kids/parents-compact-timer-v1436.js?v=1440",
+  "/kids/kids-birth-month-v1431.js?v=1431",
+  "/kids/kids-birth-month-v1431.css?v=1431",
+  "/kids/akademie/girl-profile-authority-v1430.css?v=1430",
+  "/kids/global-detail-dock-v1247.css?v=1428",
+  "/kids/global-detail-dock-v1247.js?v=1428",
+  "/kids/kids-ui-contract-v1420.css?v=1425",
+  "/kids/kids-academy-portal-v1421.js?v=1425",
+  "/kids/kids-academy-girl-seam-v1421.css?v=1422",
+  "/kids/kids-nav-v1421.css?v=1422",
   "/kids/start",
   "/kids/start.html",
   "/kids/index.html",
+  "/kids/dua-hub-v1219.js?v=1421",
+  "/kids/dua-hub-v1219.css?v=1278",
+  "/kids/assets/profile-avatars/boy-kufi-v1235.svg",
+  "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg",
   "/kids/quiz-v4-bridge.js?v=20261013-academy1",
   "/kids/akademie/index.html",
   "/kids/prayer-stage-v1261.css?v=1320",
@@ -289,12 +322,12 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
   "/kids/manifest.webmanifest",
-  "/kids/item-offline-v1.js?v=2",
+  "/kids/item-offline-v1.js?v=5",
   "/kids/item-offline-v1.css?v=2",
   "/kids/kids-story-action-contrast-v1345.css?v=1346",
   "/kids/offline-library-v1.js?v=1",
   "/kids/offline-library-v1.css?v=1",
-  "/kids/salaf-library-v1.js?v=1414",
+  "/kids/salaf-library-v1.js?v=1441",
   "/kids/kids-listening-polish-v1350.css?v=1350",
   "/kids/kids-listening-polish-v1350.js?v=1350",
   "/kids/assets/kids-icons/library-real-v12.png?v=cut1",
@@ -302,6 +335,8 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/salaf-library-v1.css?v=1",
   "/kids/salaf-master-v2.css?v=4",
   "/kids/salaf-open-world-v1353.css?v=1410",
+  "/kids/salaf-girl-palette-v1415.css?v=1417",
+  "/kids/girls-profile-global-seam-v1416.css?v=1416",
   "/kids/assets/salaf/salaf-cinema-hero-boy-v1353.jpg",
   "/kids/assets/salaf/salaf-cinema-hero-girl-v1353.jpg",
   "/kids/data/salaf-library-v1.json?v=2",
@@ -374,6 +409,9 @@ function isKidsRequest(url){
 }
 function networkFirst(request,fallback){
   return fetch(request,{cache:"no-store"}).then(function(response){
+    // HTTP failures must not replace a valid offline quiz catalog.
+    if((!response||!response.ok)&&new URL(request.url).pathname==="/kids/data/quiz-kids-public-450.json")
+      throw new Error("Quizdaten-HTTP-Fehler");
     if(response&&response.ok){
       var copy=response.clone();
       caches.open(CACHE_NAME).then(function(cache){cache.put(request,copy)}).catch(function(){});
@@ -431,6 +469,16 @@ self.addEventListener("fetch",function(event){
     event.respondWith(cacheFirst(request));return;
   }
   if(!isKidsRequest(url))return;
+  // KIDS_QUIZ_HOME_ENTRY_V1450: fetch the current interaction script online,
+  // and use the previous cached version only when the child is offline.
+  if(url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"){
+    // Stable offline fallback for a stale cache-busted HTML entry (iOS PWA).
+    var quizFallback=url.pathname==="/kids/quiz-library.js"
+      ?"/kids/quiz-library.js?v=20261026-premium1":"/kids/quiz-library.css?v=20261026-premium1";
+    event.respondWith(networkFirst(request,quizFallback));
+    return;
+  }
+ 
 
   if(request.mode==="navigate"||request.destination==="document"||url.pathname==="/kids/start"||url.pathname==="/kids/start.html"||url.pathname==="/kids/start/"||url.pathname==="/kids/"||url.pathname==="/kids/index.html"||url.pathname==="/kids/shell.html"){
     event.respondWith(networkFirst(request,"/kids/start"));
@@ -450,8 +498,60 @@ self.addEventListener("fetch",function(event){
   }
   // The quiz owner-voice router must update immediately after German speech fixes.
   // Network-first prevents an installed Kids PWA from retaining an obsolete
-  // audio lookup even while its 900-question catalogue and manifest are fresh.
+  // audio lookup even while its 450-question catalogue and manifest are fresh.
   // Keep the Kids Duʿāʾ V4 voice player fresh after an installed PWA update.
+  /* Keep profile avatars, parent profiles and Duʿāʾ hub current after learning-system retirement. */
+  if(url.pathname==="/kids/navigation-v1182.js"||url.pathname==="/kids/kids-motion-v1422.css"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
+  if(url.pathname==="/kids/kids-nav-v1421.css"||url.pathname==="/kids/assets/kids-icons/learning-book-3d-v1422.png"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
+  /* KIDS_VISITOR_PARENT_NOTIFICATIONS_V1: keep freshly released parental
+     notification controls and Quick Qibla current in installed PWAs; use offline fallback. */
+  /* Kids profile design/Qibla modules: fresh after deployment, offline from the
+     latest Kids-only precache. Never touch the adult worker or other app lanes. */
+  if(url.pathname==="/kids/kids-qibla-focus-v1442.js"||
+     url.pathname==="/kids/kids-qibla-focus-v1442.css"||
+     url.pathname==="/kids/kids-profile-layout-contract-v1447.css"){
+    event.respondWith(networkFirst(request));return;
+  }
+  if(url.pathname==="/kids/parent-notifications-visitor-v1.js"||
+     url.pathname==="/kids/parent-notifications-visitor-v1.css"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
+  /* Parent dashboard CSS and JS: fetch current online with offline fallback. */
+  if(url.pathname==="/kids/parents-dashboard-v1432.css"||url.pathname==="/kids/parents-dashboard-v1432.js"||url.pathname==="/kids/parents-compact-timer-v1436.css"||url.pathname==="/kids/parents-compact-timer-v1436.js"){
+    event.respondWith(networkFirst(request));return;
+  }
+  /* Month-year calculation stays current with offline cache fallback. */
+  if(url.pathname==="/kids/kids-birth-month-v1431.js"||url.pathname==="/kids/kids-birth-month-v1431.css"){
+    event.respondWith(networkFirst(request));return;
+  }
+  /* V1430 Girl Academy authority: online fresh, installed PWA offline fallback. */
+  if(url.pathname==="/kids/akademie/girl-profile-authority-v1430.css"){
+    event.respondWith(networkFirst(request));return;
+  }
+  /* Last girl-only palette is network first, with an offline cache fallback. */
+  if(url.pathname==="/kids/kids-girl-palette-authority-v1427.css"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
+  if(url.pathname==="/kids/kids-academy-girl-seam-v1421.css"||url.pathname==="/kids/kids-academy-portal-v1421.js"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
+  if(url.pathname==="/kids/kids-ui-contract-v1420.css"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
+  if(url.pathname==="/kids/dua-hub-v1219.js"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
   if(url.pathname==="/kids/dua-smart-learn.js"){
     event.respondWith(networkFirst(request));
     return;
@@ -464,8 +564,8 @@ self.addEventListener("fetch",function(event){
     event.respondWith(networkFirst(request));
     return;
   }
-  /* QUIZ LEARNING CENTER: network-first so 900-question data, dashboard logic and layout never regress to a stale pack. */
-  if(url.pathname==="/kids/data/quiz-kids-public-450.json"||url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"||url.pathname==="/kids/quiz-v4-bridge.js"){
+  /* QUIZ LEARNING CENTER: network-first so 450-question data, dashboard logic and layout never regress to a stale pack. */
+  if(url.pathname==="/kids/data/quiz-kids-public-450.json"||url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"||url.pathname==="/kids/quiz-v4-bridge.js"||url.pathname==="/kids/quiz-premium-v1.css"||url.pathname==="/kids/quiz-v4-approved-player.js"||url.pathname==="/kids/data/quiz-v4-full-rebuild-public.json"){
     event.respondWith(networkFirst(request));
     return;
   }
@@ -480,12 +580,12 @@ self.addEventListener("fetch",function(event){
     return;
   }
   /* DĪN category catalog: refresh exact six lessons online; keep offline fallback. */
-  if(url.pathname==="/kids/data/deen-lessons.json"){
+  if(url.pathname==="/kids/data/deen-lessons.json"||url.pathname==="/kids/data/deen-curriculum-v1.json"){
     event.respondWith(networkFirst(request));
     return;
   }
   /* DĪN DETAIL RUNTIME: network-first so reading/mode repairs are immediate. */
-  if(url.pathname==="/kids/deen-lessons.js"){
+  if(url.pathname==="/kids/deen-lessons.js"||url.pathname==="/kids/deen-curriculum-v1.css"||url.pathname==="/kids/item-offline-v1.js"){
     event.respondWith(networkFirst(request));
     return;
   }

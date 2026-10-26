@@ -62,28 +62,8 @@
       return ch==="&"?"&amp;":ch==="<"?"&lt;":ch===">"?"&gt;":"&quot;";
     });
   }
-  // KIDS_TEST_V1460: age and appearance remain correct even if legacy inline JS fails.
-  function profile(){
-    try{
-      var id=localStorage.getItem("kids.activeProfile"),a=JSON.parse(localStorage.getItem("kids.profiles.v1")||"[]");
-      return (Array.isArray(a)?a.find(function(p){return p&&String(p.id)===String(id)}):null)||null;
-    }catch(_){return null}
-  }
-  function scope(){
-    if(typeof window.DARKidsQuizProfileScope==="function")return window.DARKidsQuizProfileScope();
-    try{var id=String(localStorage.getItem("kids.activeProfile")||"").trim();return id?"child."+encodeURIComponent(id):"guest"}catch(_){return"guest"}
-  }
   function bandId(){
-    if(typeof window.currentKidsQuizAgeBand==="function")return window.currentKidsQuizAgeBand();
-    var p=profile(),a=String(p&&p.age||localStorage.getItem("kids.age")||"6–8");
-    return /(?:4|5)/.test(a.slice(0,1))?"4-6":/9/.test(a.slice(0,1))?"9-10":"7-8";
-  }
-  function syncQuizTheme(){
-    var modal=byId("quizModal");if(!modal)return;
-    var p=profile(),app=document.querySelector(".app[data-gender]");
-    var gender=String(p&&p.gender||app&&app.getAttribute("data-gender")||document.documentElement.dataset.kidsBootGender||"boy");
-    modal.setAttribute("data-quiz-gender",gender==="girl"?"girl":"boy");
-    modal.setAttribute("data-quiz-band",bandId());
+    return typeof window.currentKidsQuizAgeBand==="function"?window.currentKidsQuizAgeBand():"7-8";
   }
   function ageLabel(){
     var band=bandId();
@@ -105,54 +85,10 @@
   }
   function progressFor(q){
     try{
-      if(typeof window.quizProgress==="function")return window.quizProgress(q.id);
-      var saved=JSON.parse(localStorage.getItem("kids.quiz.progress.v3."+scope()+"."+q.id)||"null");
-      if(saved&&typeof saved==="object")return saved;
-    }catch(_){}
-    return{stage:"new",attempts:0,wrong:0,mistakeTaps:0,lapses:0,dueAt:0,lastSeenAt:0};
-  }
-  function readHistory(){
-    try{
-      if(typeof window.DARKidsQuizReadHistory==="function")return window.DARKidsQuizReadHistory();
-      var a=JSON.parse(localStorage.getItem("kids.quiz.history.v1."+scope())||"[]");
-      return Array.isArray(a)?a:[];
-    }catch(_){return[]}
-  }
-  function saveFallbackProgress(q,correct){
-    if(typeof window.DARKidsQuizRecordAnswer==="function"){
-      window.DARKidsQuizRecordAnswer(q.id,correct);return;
+      return typeof window.quizProgress==="function"?window.quizProgress(q.id):{stage:"new",attempts:0,wrong:0,lapses:0,dueAt:0,lastSeenAt:0};
+    }catch(_){
+      return{stage:"new",attempts:0,wrong:0,lapses:0,dueAt:0,lastSeenAt:0};
     }
-    var e=progressFor(q),now=Date.now();
-    e.attempts=Number(e.attempts||0)+1;
-    e.lastSeenAt=now;e.stage=correct?"learning":"learning";
-    if(correct){e.reviewPasses=Number(e.reviewPasses||0)+1;if(e.reviewPasses>=3)e.stage="secure";e.dueAt=now+86400000}
-    else{e.wrong=Number(e.wrong||0)+1;e.mistakeTaps=Number(e.mistakeTaps||0)+1;e.dueAt=now+300000}
-    try{
-      localStorage.setItem("kids.quiz.progress.v3."+scope()+"."+q.id,JSON.stringify(e));
-      var hist=readHistory();hist.push({id:q.id,ageBand:q.ageBand,category:q.category,correct:!!correct,at:now});
-      localStorage.setItem("kids.quiz.history.v1."+scope(),JSON.stringify(hist.slice(-500)));
-      if(correct){
-        var k="kids.quiz.correct.v3."+scope();
-        localStorage.setItem(k,String(Number(localStorage.getItem(k)||0)+1));
-      }
-    }catch(_){}
-    try{window.dispatchEvent(new CustomEvent("dar-kids-quiz-progress"))}catch(_){}
-  }
-  function historyMarkup(){
-    var all=readHistory().filter(function(x){return x&&x.ageBand===bandId()}),now=new Date(),days=[];
-    for(var d=6;d>=0;d--){
-      var date=new Date(now.getFullYear(),now.getMonth(),now.getDate()-d);
-      var key=date.getFullYear()+"-"+String(date.getMonth()+1).padStart(2,"0")+"-"+String(date.getDate()).padStart(2,"0");
-      var events=all.filter(function(x){var z=new Date(Number(x.at));return z.getFullYear()+"-"+String(z.getMonth()+1).padStart(2,"0")+"-"+String(z.getDate()).padStart(2,"0")===key});
-      days.push({label:["So","Mo","Di","Mi","Do","Fr","Sa"][date.getDay()],count:events.length,correct:events.filter(function(x){return x.correct}).length});
-    }
-    var max=Math.max(1,...days.map(function(d){return d.count}));
-    return '<section class="quiz-history-card" aria-label="Dein Lernverlauf">'+
-      '<div class="quiz-topic-head"><div><span class="quiz-dash-eyebrow">Deine Lernreise</span><h3>Deine letzten 7 Tage</h3></div><span class="quiz-history-total">'+all.length+' Antworten gespeichert</span></div>'+
-      '<div class="quiz-history-bars" role="img" aria-label="Quizfragen pro Wochentag">'+
-        days.map(function(x){return '<div class="quiz-history-day"><span class="quiz-history-number">'+(x.count?x.count:"·")+'</span><div class="quiz-history-rail"><i style="height:'+Math.round(100*x.count/max)+'%"></i></div><small>'+x.label+'</small></div>'}).join("")+
-      '</div><p class="quiz-history-note">'+(all.length?"Jede Antwort zählt: Übe in deinem Tempo.":"Deine erste Quizrunde macht den Anfang!")+' Dein Fortschritt bleibt in deinem Kinderprofil auf diesem Gerät.</p>'+
-    '</section>';
   }
   function statsFor(items){
     var now=Date.now();
@@ -283,6 +219,50 @@
   // Standalone quiz renderer: independent of the monolithic home script.
   // Used only if the legacy/native quiz functions cannot initialize.
   var localRound=[],localIndex=0,localCorrectCount=0,localAnswered=false;
+  // Accessibility-safe recovery player. It uses ONLY already approved V4
+  // Serhat master clips from the public manifest; private review clips stay hidden.
+  function localQuizApprovedAudioText(q,part){
+    var owner=window.DARKidsOwnerVoice;
+    if(!owner||typeof owner.entry!=="function")return "";
+    var speech=window.DARKidsQuizV4&&typeof window.DARKidsQuizV4.speech==="function"
+      ?window.DARKidsQuizV4.speech(q):null;
+    var fallback=part==="questionAudioText"
+      ?(typeof window.quizPrompt==="function"?window.quizPrompt(q):q.question)
+      :part==="correctAudioText"?q.success
+      :part==="retryAudioText"?q.retry
+      :"Das merken wir uns: "+String(q.explanation||"");
+    var candidate=String(speech&&speech[part]||"");
+    var options=candidate&&candidate!==fallback?[candidate,fallback]:[fallback];
+    for(var i=0;i<options.length;i++){
+      var entry=owner.entry(options[i]);
+      if(entry&&entry.url&&entry.modelId==="eleven_v4"&&
+        (entry.humanListeningApproved===true||entry.approvedForPlayback===true||
+         entry.qaStatus==="approved")&&
+        (entry.voiceProfileId==="serhat-owner-voice-2026"||
+         entry.voiceId==="DkU7j9uO4ZEtLD2iRZSH")){
+        return options[i];
+      }
+    }
+    return "";
+  }
+  function localQuizPlay(q,part,options){
+    options=options||{};
+    var newV4=window.DARKidsQuizV4Approved;
+    var key=part==="questionAudioText"?"question":part==="correctAudioText"?"correct":part==="retryAudioText"?"retry":"explanation";
+    if(newV4&&newV4.has(q,key))return newV4.play(q,key,options);
+    var text=localQuizApprovedAudioText(q,part);
+    if(!text||!window.DARKidsOwnerVoice||typeof window.DARKidsOwnerVoice.play!=="function")return false;
+    return !!window.DARKidsOwnerVoice.play(text,{source:"kids-quiz-fallback-"+part,onended:options.onended,onerror:options.onerror});
+  }
+  function refreshLocalQuizListen(q){
+    var listen=byId("quizLocalListen"),newV4=window.DARKidsQuizV4Approved;
+    var text=(newV4&&newV4.has(q,"question"))?"approved-v4":localQuizApprovedAudioText(q,"questionAudioText");
+    if(!listen)return;
+    listen.disabled=!text;
+    listen.textContent=text?"▶ Frage anhören":"Audio noch nicht freigegeben";
+    listen.setAttribute("aria-label",text?"Quizfrage mit Serhat-V4-Masterstimme abspielen":
+      "Diese Quizfrage hat noch keine zum Abspielen freigegebene V4-Aufnahme");
+  }
   function renderLocalQuizQuestion(){
     var body=byId("quizBody"),progress=byId("quizProgress");
     if(!body)return;
@@ -301,11 +281,23 @@
       return '<button class="quiz-answer quiz-local-answer" type="button" data-quiz-answer-index="'+i+'">'+
         escapeHtml(a.label)+'</button>';
     }).join("");
-    body.innerHTML='<div class="quiz-question">'+escapeHtml(q.question)+'</div>'+
+    body.innerHTML='<section class="quiz-local-learning" aria-label="Islamisches Wissensquiz" style="grid-column:1/-1!important">'+
+      '<div class="quiz-question">'+escapeHtml(q.question)+'</div>'+
       '<div class="quiz-help">'+escapeHtml(q.category||"Quiz")+' · '+escapeHtml(ageLabel())+'</div>'+
+      '<button id="quizLocalListen" type="button" class="quiz-library-audio" disabled>Audio wird geprüft</button>'+
       '<div class="quiz-answers">'+answerHtml+'</div>'+
-      '<div id="quizLocalFeedback" class="quiz-feedback" role="status"></div>'+
-      '<button id="quizLocalNext" class="quiz-next" type="button" style="display:none">Weiter ›</button>';
+      '<div id="quizLocalFeedback" class="quiz-feedback" role="status" aria-live="polite"></div>'+
+      '<section id="quizLocalLearning" class="quiz-local-explanation" hidden>'+
+        '<h3>Das lernen wir daraus</h3><p>'+escapeHtml(q.explanation||"")+'</p>'+
+        '<p class="quiz-local-source"><strong>Quelle:</strong> '+
+          escapeHtml([q.sourceType,q.source].filter(Boolean).join(" · ")||"Quellenprüfung ausstehend")+'</p>'+
+        '<button id="quizLocalExplainAudio" type="button" class="quiz-library-audio" disabled>Erklärung anhören</button>'+
+      '</section>'+
+      '<button id="quizLocalNext" class="quiz-next" type="button" disabled style="display:none">Nächste Frage ›</button>'+
+      '</section>';
+    refreshLocalQuizListen(q);
+    var listen=byId("quizLocalListen");
+    if(listen)listen.addEventListener("click",function(){localQuizPlay(q,"questionAudioText")});
     body.querySelectorAll(".quiz-local-answer").forEach(function(btn){
       btn.addEventListener("click",function(){
         if(localAnswered)return;
@@ -321,12 +313,35 @@
           else if(n===ix)el.classList.add("wrong");
         });
         var msg=byId("quizLocalFeedback");
-        if(msg){msg.textContent=correct?(q.success||"Richtig!"):((q.retry||"Schau dir die richtige Antwort an.")+" "+(q.explanation||""));msg.classList.add("show")}
-        var next=byId("quizLocalNext");if(next){next.style.display="block";next.classList.add("show")}
+        if(msg){
+          msg.textContent=correct?(q.success||"Richtig!"):q.retry||"Schau dir die richtige Antwort an.";
+          msg.classList.add("show");
+        }
+        var lesson=byId("quizLocalLearning");
+        if(lesson)lesson.hidden=false;
+        var explanationAudio=byId("quizLocalExplainAudio");
+        if(explanationAudio){
+          var newV4=window.DARKidsQuizV4Approved;
+          var approved=(newV4&&newV4.has(q,"explanation"))?"approved-v4":localQuizApprovedAudioText(q,"explanationAudioText");
+          explanationAudio.disabled=!approved;
+          explanationAudio.textContent=approved?"▶ Erklärung anhören":"Erklär-Audio noch nicht freigegeben";
+          explanationAudio.addEventListener("click",function(){localQuizPlay(q,"explanationAudioText")});
+        }
+        localQuizPlay(q,correct?"correctAudioText":"retryAudioText",{
+          onended:function(){
+            if(localRound[localIndex]===q&&localAnswered)localQuizPlay(q,"explanationAudioText");
+          }
+        });
+        var next=byId("quizLocalNext");
+        if(next){next.disabled=false;next.style.display="block";next.classList.add("show")}
       });
     });
     var next=byId("quizLocalNext");
-    if(next)next.addEventListener("click",function(){localIndex++;renderLocalQuizQuestion()});
+    if(next)next.addEventListener("click",function(){
+      try{window.DARKidsQuizV4Approved&&window.DARKidsQuizV4Approved.stop()}catch(_){}
+      try{window.DARKidsOwnerVoice&&window.DARKidsOwnerVoice.stop()}catch(_){}
+      localIndex++;renderLocalQuizQuestion();
+    });
   }
   function startLocalQuizRound(cat){
     var pool=bandItems().filter(function(q){return !cat||cat==="all"||q.category===cat});
@@ -349,7 +364,6 @@
     updateModeButtons();
     var modal=byId("quizModal");
     if(modal){
-      syncQuizTheme();
       modal.classList.remove("quiz-library-mode","quiz-dashboard-mode");
       modal.classList.add("quiz-round-mode");
     }
@@ -392,7 +406,9 @@
     var categoryHtml=cats.map(function(c){
       var st=c.stats;
       var pct=st.total?Math.round((st.secure/st.total)*100):0;
+      var motif=/(taw|allah|ʿaq|aqi|īmān|iman)/i.test(c.name)?"✦":/(qur|sūra|ayat|āya)/i.test(c.name)?"📖":/(adab|aḫlāq|akhl|verhalten)/i.test(c.name)?"🌿":/(duʿ|dua|gebet|ṣalāh)/i.test(c.name)?"🤲":/(ḥadīṯ|hadith|sunna)/i.test(c.name)?"☀":/(engel|malā)/i.test(c.name)?"☆":"✧";
       return '<button class="quiz-topic-card" type="button" data-quiz-topic="'+escapeHtml(c.name)+'">'+
+        '<span class="quiz-topic-symbol" aria-hidden="true">'+motif+'</span>'+
         '<span class="quiz-topic-name">'+escapeHtml(c.name)+'</span>'+
         '<span class="quiz-topic-meta">'+st.total+' Fragen · '+st.secure+' sicher'+(st.errors?' · '+st.errors+' Fehler':'')+'</span>'+
         '<span class="quiz-topic-progress"><i style="width:'+pct+'%"></i></span>'+
@@ -407,6 +423,15 @@
       '</section>':"";
 
     box.innerHTML=
+      '<section class="quiz-premium-welcome" aria-label="Islamische Quiz-Lernreise">'+
+        '<div class="quiz-premium-copy">'+
+          '<span class="quiz-premium-kicker"><span aria-hidden="true">✦</span> Bismi-llāh · '+escapeHtml(ageLabel())+'</span>'+
+          '<h2 class="quiz-premium-title">'+(bandId()==="4-6"?"Entdecke, was du schon weißt!":bandId()==="7-8"?"Deine Reise durch das Wissen":"Wissen entdecken. Dīn verstehen.")+'</h2>'+
+          '<p class="quiz-premium-description">'+(bandId()==="4-6"?"Höre zu, überlege und sammle neue Sterne. Jede Frage macht dich ein Stück wissender.":bandId()==="7-8"?"Entdecke Tawḥīd, Qurʾān und gute Taten. Du lernst Schritt für Schritt, in deinem Tempo.":"Fordere dein Wissen heraus, erkenne Zusammenhänge und festige dein Verständnis von Tawḥīd, Qurʾān und Sunnah.")+'</p>'+
+          '<div class="quiz-premium-actions"><button id="quizPremiumStart" type="button">✦ Quiz starten</button><button id="quizPremiumExplore" type="button">Themen entdecken</button></div>'+
+        '</div>'+
+        '<div class="quiz-premium-mark" aria-hidden="true"><span class="quiz-premium-spark one">✦</span><span class="quiz-premium-geometry"><span>۞</span></span><span class="quiz-premium-spark two">✧</span></div>'+
+      '</section>'+
       '<section class="quiz-dash-head">'+
         '<div class="quiz-dash-title"><span class="quiz-dash-eyebrow">'+escapeHtml(ageLabel())+' · aus den Einstellungen</span>'+
         '<h2>Dein Lernstand</h2><p>'+stats.seen+' von '+stats.total+' Fragen kennengelernt</p></div>'+
@@ -424,7 +449,6 @@
         '<div><strong>'+stats.firstTry+'%</strong><span>Direkt richtig</span></div>'+
       '</section>'+
       resumeHtml+
-      historyMarkup()+
       '<section class="quiz-review-card '+(reviewCount>0?"needs-review":"is-clear")+'">'+
         '<div><span class="quiz-dash-eyebrow">Deine Wiederholung</span><strong>'+escapeHtml(recommendation)+'</strong>'+
         '<small>'+stats.due+' fällig · '+stats.mistakeQuestions+' mit Fehlerhistorie</small></div>'+
@@ -445,6 +469,8 @@
       box.classList.remove("show");
       if(typeof window.resumeKidsQuizSession==="function")window.resumeKidsQuizSession();
     });
+    if(byId("quizPremiumStart"))byId("quizPremiumStart").addEventListener("click",function(){startRound("all","normal")});
+    if(byId("quizPremiumExplore"))byId("quizPremiumExplore").addEventListener("click",showLibrary);
     if(byId("quizStartMixed"))byId("quizStartMixed").addEventListener("click",function(){startRound("all","normal")});
     if(byId("quizReviewMistakes"))byId("quizReviewMistakes").addEventListener("click",function(){startRound("all","mistakes")});
     if(byId("quizReviewDue"))byId("quizReviewDue").addEventListener("click",function(){startRound("all","due")});
@@ -453,12 +479,19 @@
       btn.addEventListener("click",function(){startRound(btn.getAttribute("data-quiz-topic")||"all","normal")});
     });
   }
+  function syncPremiumGender(modal){
+    if(!modal)return;
+    var app=typeof document.querySelector==="function"?document.querySelector(".app[data-gender]"):null;
+    var root=document.documentElement;
+    var value=String(app&&app.getAttribute("data-gender")||root&&root.dataset&&root.dataset.kidsBootGender||"neutral");
+    modal.setAttribute("data-quiz-persona",value==="girl"?"girl":value==="boy"?"boy":"neutral");
+  }
   function showDashboard(){
     ensureUi();
     mode="dashboard";directQuestion=false;category="all";updateModeButtons();
     var modal=byId("quizModal");
     if(modal){
-      syncQuizTheme();
+      syncPremiumGender(modal);
       modal.classList.add("open","quiz-dashboard-mode");
       modal.classList.remove("quiz-library-mode","quiz-round-mode");
       modal.setAttribute("data-quiz-band",bandId());
@@ -481,7 +514,7 @@
     // even after an iOS standalone app resume or an old hidden-modal state.
     modal.setAttribute("aria-hidden","false");
     modal.setAttribute("aria-modal","true");
-    syncQuizTheme();
+    modal.setAttribute("data-quiz-band",bandId());
     ensureUi();
     showDashboard();
     if(!canonicalItems().length)ensureQuizData();
@@ -519,6 +552,7 @@
     modal.classList.remove("open","quiz-dashboard-mode","quiz-library-mode","quiz-round-mode");
     modal.setAttribute("aria-hidden","true");
     modal.removeAttribute("aria-modal");
+    try{if(window.DARKidsQuizV4Approved&&typeof window.DARKidsQuizV4Approved.stop==="function")window.DARKidsQuizV4Approved.stop()}catch(_){}
     try{if(window.DARKidsOwnerVoice&&typeof window.DARKidsOwnerVoice.stop==="function")window.DARKidsOwnerVoice.stop()}catch(_){}
     try{if(window.speechSynthesis&&typeof window.speechSynthesis.cancel==="function")window.speechSynthesis.cancel()}catch(_){}
     mode="dashboard";directQuestion=false;category="all";
@@ -618,6 +652,8 @@
     return hay.indexOf(needle)>=0;
   }
   function voiceState(q){
+    var newV4=window.DARKidsQuizV4Approved;
+    if(newV4&&newV4.has(q,"question"))return"ready";
     var owner=window.DARKidsOwnerVoice;
     if(!owner||typeof owner.isReady!=="function"||!owner.isReady())return voiceRefreshAttempts<12?"loading":"missing";
     if(typeof window.quizPrompt!=="function"||typeof owner.has!=="function")return"missing";
@@ -670,6 +706,8 @@
         audio.setAttribute("aria-label","Frage "+q.number+" mit Serhat-Stimme hören");
         audio.innerHTML='<span aria-hidden="true">▶</span><small>Hören</small>';
         audio.addEventListener("click",function(){
+          var newV4=window.DARKidsQuizV4Approved;
+          if(newV4&&newV4.has(q,"question")){newV4.play(q,"question");return}
           if(typeof window.quizSpeak==="function"&&typeof window.quizPrompt==="function"){
             window.quizSpeak(window.quizPrompt(q),{quizPrompt:true,source:"kids-quiz-library"});
           }
@@ -696,7 +734,7 @@
   function renderLibrary(){
     ensureUi();mode="library";directQuestion=false;visibleLimit=PAGE_SIZE;updateModeButtons();
     var modal=byId("quizModal"),panel=byId("quizLibraryPanel"),back=byId("quizLibraryBack");
-    if(modal){modal.classList.add("quiz-library-mode");modal.classList.remove("quiz-dashboard-mode","quiz-round-mode");modal.setAttribute("data-quiz-band",bandId())}
+    if(modal){syncPremiumGender(modal);modal.classList.add("quiz-library-mode");modal.classList.remove("quiz-dashboard-mode","quiz-round-mode");modal.setAttribute("data-quiz-band",bandId())}
     if(byId("quizLearningDashboard"))byId("quizLearningDashboard").classList.remove("show");
     if(panel)panel.classList.add("show");
     if(back)back.classList.remove("show");
@@ -705,12 +743,11 @@
     if(panel)panel.scrollTop=0;
   }
   function showLibrary(){renderLibrary()}
-  window.kidsQuizShowLibrary=showLibrary;
   function openQuestion(q){
     mode="library";directQuestion=true;updateModeButtons();
-    // Preserve the selected child\u0027s unfinished learning round.
+    try{localStorage.removeItem("kids.quiz.session.v1")}catch(_){}
     var modal=byId("quizModal"),panel=byId("quizLibraryPanel"),back=byId("quizLibraryBack");
-    if(modal){modal.classList.remove("quiz-library-mode","quiz-dashboard-mode");modal.classList.add("quiz-round-mode")}
+    if(modal){syncPremiumGender(modal);modal.classList.remove("quiz-library-mode","quiz-dashboard-mode");modal.classList.add("quiz-round-mode")}
     if(byId("quizLearningDashboard"))byId("quizLearningDashboard").classList.remove("show");
     if(panel)panel.classList.remove("show");
     if(back)back.classList.add("show");
@@ -721,7 +758,7 @@
       renderLocalQuizQuestion();
     }
     var label=byId("quizAgeLabel");if(label)label.textContent="Frage #"+String(q.number).padStart(3,"0")+" · "+String(q.category||"Quiz");
-    // Preserve the selected child\u0027s unfinished learning round.
+    try{localStorage.removeItem("kids.quiz.session.v1")}catch(_){}
     setTimeout(function(){var next=byId("quizNext");if(next)next.textContent="Zur Übersicht"},0);
   }
 
@@ -765,7 +802,6 @@
       if(attempts<24)setTimeout(waitForQuizData,250);
     })();
   }
-  window.addEventListener("dar-kids-quiz-progress",function(){if(mode==="dashboard")renderDashboard()});
   window.addEventListener("dar-kids-owner-voice-ready",function(){
     voiceRefreshAttempts=0;
     if(mode==="library"&&!directQuestion)renderList();
