@@ -10,6 +10,8 @@ on:
       - 'assets/fold-split.css'
       - 'ios/DarAlTawhid/Tests/adult-all-routes-*.cjs'
       - 'ios/DarAlTawhid/Tests/adult-all-posts-viewport-audit.cjs'
+      - 'ios/DarAlTawhid/Tests/native-layout-ownership-release-guard.cjs'
+      - 'ios/DarAlTawhid/DarAlTawhid/WebAppView.swift'
       - '.github/workflows/adult-all-routes-viewport-acceptance.yml'
   workflow_dispatch:
 
