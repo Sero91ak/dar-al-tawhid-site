@@ -155,6 +155,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-all-routes-adaptive-ci-20261026",
+      "at": "2026-10-26T18:25:00+01:00",
+      "approvedBy": "user-explicit-20261026-full-responsive-adult-visitor-all-pages",
+      "reason": "Narrowly authorize all-adult responsive viewport verification in the existing layout performance test. Adult iOS visitor only; no Kids, native push, service worker, backend or religious content changes.",
+      "paths": [
+        "scripts/adult-layout-performance-test.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-09T23:59:59.000Z"
+    },
+    {
       "id": "dar-test-duo-responsive-layout-20261025",
       "at": "2026-10-25T18:22:00+01:00",
       "approvedBy": "user-explicit-20261025-adapt-full-adult-test-webapp-to-iphone-duo",
