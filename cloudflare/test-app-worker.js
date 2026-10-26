@@ -788,17 +788,30 @@ export default {
       return gradeKidsRecitation(request, env);
     }
 
+    // DAR_TEST_KIDS_QUIZ_ISOLATED_V1: user-authorized KIDS preview.
+    // Do NOT redirect /test/kids to the visitor production origin.
+    // HTML, JS, CSS, 450 published question pack, and PWA storage all
+    // run under the separate DAR Test workers.dev origin.
+    // No unpublished/review-only MP3 files are copied into live assets.
     if (
       (request.method === "GET" || request.method === "HEAD") &&
       (url.pathname === "/test/kids" || url.pathname === "/test/kids/" || url.pathname.startsWith("/test/kids/"))
     ) {
-      const target = new URL("https://dar-al-tawhid.de" + url.pathname.replace(/^\/test\/kids/, "/kids") + url.search);
-      if (target.pathname === "/kids" || target.pathname === "/kids/") {
-        target.pathname = "/kids/start";
+      const previewOrigin = "https://dar-al-tawhid-test.sero91ak.workers.dev";
+      let path = url.pathname.replace(/^\/test\/kids/, "/kids");
+      if (path === "/kids" || path === "/kids/" || path === "/kids/start.html" || path === "/kids/quiz") {
+        path = "/kids/start";
       }
-      target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren");
-      return Response.redirect(target.toString(), 301);
+      const target = new URL(path, previewOrigin);
+      // No untrusted credential/query copying into the preview URL.
+      const headers = new Headers({
+        "Location": target.toString(),
+        "Cache-Control": "private, no-store, max-age=0",
+        "X-Robots-Tag": "noindex, nofollow, noarchive",
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "no-referrer"
+      });
+      return new Response(null, { status: 302, headers });
     }
 
     const asset = await env.ASSETS.fetch(request);
