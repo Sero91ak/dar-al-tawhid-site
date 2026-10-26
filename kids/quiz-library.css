@@ -499,3 +499,7 @@
 @media(max-width:899px){
   #quizModal.quiz-round-mode .quiz-local-learning{grid-template-columns:minmax(0,1fr)}
 }
+
+/* Explicit explanatory audio replay: visible only when the exact audio clip is ready. */
+#quizModal #quizExplanationListen[hidden]{display:none!important}
+#quizModal #quizExplanationListen:not([hidden]){display:inline-flex!important;align-items:center;justify-content:center;min-height:48px;max-width:100%;margin:10px auto 0;padding:10px 17px;white-space:normal}
