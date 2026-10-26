@@ -145,6 +145,10 @@ async function snapshot(page) {
       const queue = [...seeds];
       const seen = new Set();
       const routeNames = new Set();
+      // Screenshot every distinct visual family once in each device profile.
+      // Screenshots contain only public preview routes, never user secrets.
+      const capturedFamilies = new Set();
+      item.visualEvidence = [];
       while (queue.length && seen.size < MAX_LINKS) {
         const hash = queue.shift();
         if (!hash || seen.has(hash)) continue;
@@ -167,6 +171,18 @@ async function snapshot(page) {
           const row = { hash, route: state.route, size: [profile.w, profile.h],
             layout: state.mode, foldDual: state.foldDual, issues: pageIssues };
           item.pages.push(row);
+          if (process.env.DAR_AUDIT_CAPTURE_FAMILIES === "1") {
+            const family = state.route.filter(x => x !== "is-area-route" && x !== "is-catalog-route");
+            const key = family.length ? family.join("_") : hash;
+            if (!capturedFamilies.has(key) && capturedFamilies.size < 35) {
+              capturedFamilies.add(key);
+              const filename = safeName(profile.id + "-" + key + "-reference") + ".png";
+              await page.screenshot({ path: path.join(OUTPUT, filename), fullPage: false })
+                .then(() => item.visualEvidence.push({ family: key, hash, filename }))
+                .catch(e => item.failures.push({ type: "screenshot-evidence",
+                  hash, reason: String(e.message).slice(0,200) }));
+            }
+          }
           if (pageIssues.length) {
             const filename = safeName(profile.id + "-" + hash) + ".png";
             await page.screenshot({ path: path.join(OUTPUT, filename), fullPage: false }).catch(() => {});
