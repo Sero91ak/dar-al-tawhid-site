@@ -399,3 +399,37 @@
   pointer-events:auto!important;
   z-index:220!important;
 }
+
+/* KIDS_QUIZ_BACK_RECOVERY_V1454: modal controls remain tappable in iOS PWA. */
+#quizModal.open .modal-shell,
+#quizModal.open .quiz-stage,
+#quizModal.open .quiz-library-toolbar,
+#quizModal.open .quiz-learning-dashboard,
+#quizModal.open .quiz-library-panel,
+#quizModal.open #quizBody{pointer-events:auto!important}
+#quizModal.open .modal-top{
+  position:relative!important;z-index:60!important;
+  display:flex!important;align-items:center!important;
+  min-height:56px!important;flex-shrink:0!important;
+  pointer-events:auto!important
+}
+#quizModal.open .modal-top .close-btn,
+#quizModal.open .modal-top .quiz-global-back{
+  position:relative!important;z-index:61!important;
+  touch-action:manipulation!important;pointer-events:auto!important;
+  cursor:pointer!important;user-select:none;-webkit-user-select:none
+}
+#quizModal .quiz-global-back{
+  display:inline-flex;align-items:center;justify-content:center;
+  flex:0 0 auto;min-width:82px;min-height:44px;
+  border:1px solid rgba(241,202,108,.34);border-radius:14px;
+  padding:8px 10px;background:rgba(11,46,62,.86);
+  color:#ffe3a2;font:750 13px/1.2 system-ui,sans-serif
+}
+#quizModal .modal-title{min-width:0;flex:1}
+#quizModal .modal-top .top-spacer{display:none}
+@media(max-width:390px){
+  #quizModal .quiz-global-back{min-width:74px;padding:8px 5px;font-size:12px}
+  #quizModal .modal-top{gap:7px!important}
+  #quizModal .modal-title strong{font-size:13px}
+}
