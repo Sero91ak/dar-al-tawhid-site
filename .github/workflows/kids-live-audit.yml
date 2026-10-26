@@ -79,6 +79,35 @@ jobs:
           parentJS=live_asset('parents-dashboard-v1432.js')
           parentCSS=live_asset('parents-dashboard-v1432.css')
           liveSW=live_asset('sw.js')
+          premiumQuizCss=live_asset('quiz-premium-v1.css')
+          premiumQuizJs=live_asset('quiz-library.js')
+          premiumV4Player=live_asset('quiz-v4-approved-player.js')
+          quizLive={
+            'homeHasPremiumStyleRef':bool(premiumQuizCss['ref']),
+            'premiumStyleBytes':premiumQuizCss['bytes'],
+            'premiumScriptBytes':premiumQuizJs['bytes'],
+            'approvedOnlyAudioPlayerBytes':premiumV4Player['bytes'],
+            'htmlLinksPremiumStyle':'/kids/quiz-premium-v1.css?v=20261026-premium1' in home,
+            'htmlLinksPremiumJs':'/kids/quiz-library.js?v=20261026-premium1' in home,
+            'cssHasGirlPalette':'[data-quiz-persona="girl"]' in premiumQuizCss['text'],
+            'cssHasBoyPalette':'[data-quiz-persona="boy"]' in premiumQuizCss['text'],
+            'cssHasReducedMotion':'prefers-reduced-motion' in premiumQuizCss['text'],
+            'jsHasPremiumDashboard':'quiz-premium-welcome' in premiumQuizJs['text'],
+            'jsHas450QuestionPack':'var QUIZ_PACK_450=' in premiumQuizJs['text'],
+            'v4RequiresHumanListening':'humanListeningApproved!==true' in premiumV4Player['text'],
+            'v4RequiresReleaseEnabled':'releaseEnabled!==true' in premiumV4Player['text'],
+            'audioReleased':False
+          }
+          quizLive['newDashboardDeliveredToFreshBrowser']=all([
+            quizLive['htmlLinksPremiumStyle'],quizLive['htmlLinksPremiumJs'],
+            quizLive['premiumStyleBytes']>12000,quizLive['premiumScriptBytes']>200000,
+            quizLive['cssHasGirlPalette'],quizLive['cssHasBoyPalette'],
+            quizLive['cssHasReducedMotion'],quizLive['jsHasPremiumDashboard'],
+            quizLive['jsHas450QuestionPack']
+          ])
+          quizLive['unreviewedAudioCorrectlyBlocked']=bool(
+            premiumV4Player['bytes']>3500 and quizLive['v4RequiresHumanListening']
+            and quizLive['v4RequiresReleaseEnabled'])
           actualSWMatch=re.search(r'dar-al-tawhid-kids-v([0-9]+)',liveSW['text'])
           actualSWCacheVersion=actualSWMatch.group(1) if actualSWMatch else ''
           swRegistration=('navigator.serviceWorker.register("'+liveSW['ref']+'"') if liveSW['ref'] else ''
@@ -141,6 +170,7 @@ jobs:
                versionJsonReadable=bool(obj),
                trilingualWordLearningReady=wordLearningReady,
                parentsDashboard=parentLive,
+               visitorQuiz=quizLive,
                trilingualAssets={name:{'ref':value['ref'],'bytes':value['bytes']} for name,value in [('learning',learning),('trilingualCss',trilingual),('germanMeanings',german),('phonetic',phonetic)]}),
              lastDeployRuns=runs)
           (p/'report.json').write_text(json.dumps(doc,indent=2,ensure_ascii=False)+'\n')
