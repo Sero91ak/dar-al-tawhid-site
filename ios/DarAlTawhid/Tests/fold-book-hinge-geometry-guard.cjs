@@ -45,6 +45,17 @@ assert.equal(engine.getFoldGeometry(669,867),null,
   "Closing or laying screen flat must clear the book-mode seam");
 assert.equal(engine.resolveLayoutMode(951,620),"expanded","Wide unfolded window uses fluid two-pane fallback");
 assert.equal(engine.getFoldGeometry(951,620),null,"Ordinary large display has no artificial hardware gap");
+win.__DAR_NATIVE_FOLD_REGION={
+  active:true,axis:"vertical",frame:{x:385,y:0,width:30,height:900},
+  viewportWidth:800,viewportHeight:900
+};
+assert.equal(engine.getFoldGeometry(800,900).source,"native",
+  "The native UIKit physical region takes precedence");
+assert.equal(engine.resolveLayoutMode(800,900),"expanded",
+  "Real iOS reserved region may split a narrower window");
+win.__DAR_NATIVE_FOLD_REGION=null;
+assert.equal(engine.resolveLayoutMode(800,900),"medium",
+  "Native closed/flat event restores the ordinary viewport");
 assert.match(css,/DAR_BOOK_HINGE_AWARE_V1/);
 assert.match(css,/--dar-fold-left-track/);
 assert.match(css,/--dar-fold-right-track/);
