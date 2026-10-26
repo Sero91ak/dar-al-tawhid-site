@@ -340,7 +340,7 @@
       return '<button class="quiz-answer quiz-local-answer" type="button" data-quiz-answer-index="'+i+'">'+
         escapeHtml(a.label)+'</button>';
     }).join("");
-    body.innerHTML='<section class="quiz-local-learning" aria-label="Islamisches Wissensquiz">'+
+    body.innerHTML='<section class="quiz-local-learning" aria-label="Islamisches Wissensquiz" style="grid-column:1/-1!important">'+
       '<div class="quiz-question">'+escapeHtml(q.question)+'</div>'+
       '<div class="quiz-help">'+escapeHtml(q.category||"Quiz")+' · '+escapeHtml(ageLabel())+'</div>'+
       '<button id="quizLocalListen" type="button" class="quiz-library-audio" disabled>Audio wird geprüft</button>'+
