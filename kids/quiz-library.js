@@ -9,6 +9,35 @@
   var searchTimer=0;
   var voiceRefreshTimer=0;
   var originalFinish=window.renderQuizFinish;
+  var quizLoadPending=null;
+  var voiceRefreshAttempts=0;
+  function ensureQuizData(force){
+    if(canonicalItems().length&&!force)return Promise.resolve(true);
+    if(quizLoadPending)return quizLoadPending;
+    var loader=window.fetchKidsQuiz;
+    if(typeof loader!=="function"){
+      window.kidsQuizLoadError="Der Quiz-Player ist nicht vollständig geladen.";
+      if(mode==="dashboard")renderDashboard();
+      return Promise.resolve(false);
+    }
+    quizLoadPending=Promise.resolve().then(function(){return loader(!!force)}).then(function(){
+      if(!canonicalItems().length)throw new Error(window.kidsQuizLoadError||"Keine Fragen empfangen");
+      window.kidsQuizLoadError="";
+      return true;
+    }).catch(function(err){
+      window.kidsQuizLoadError=String(err&&err.message||"Quizfragen nicht erreichbar");
+      return false;
+    }).then(function(ok){
+      quizLoadPending=null;refreshSummary();
+      var modal=byId("quizModal");
+      if(modal&&modal.classList.contains("open")){
+        if(mode==="dashboard")renderDashboard();
+        if(mode==="library")renderLibrary();
+      }
+      return ok;
+    });
+    return quizLoadPending;
+  }
 
   function byId(id){return document.getElementById(id)}
   function escapeHtml(v){
@@ -168,6 +197,14 @@
     if(lib)lib.classList.toggle("active",mode==="library");
   }
   function startRound(cat,roundMode){
+    if(!canonicalItems().length){
+      showDashboard();
+      ensureQuizData().then(function(ok){
+        var modal=byId("quizModal");
+        if(ok&&modal&&modal.classList.contains("open"))startRound(cat,roundMode);
+      });
+      return;
+    }
     directQuestion=false;
     category=cat||"all";
     mode="play";
@@ -185,7 +222,21 @@
   function renderDashboard(){
     ensureUi();
     var box=byId("quizLearningDashboard");if(!box)return;
-    var items=bandItems(),stats=statsFor(items),cats=categories(),resume=sessionInfo();
+    var items=bandItems();
+    if(!items.length){
+      var failed=!!window.kidsQuizLoadError;
+      box.innerHTML='<section class="quiz-review-card is-clear" role="status">'+
+        '<div><span class="quiz-dash-eyebrow">Dein Wissensquiz</span>'+
+        '<strong>'+(failed?'Fragen konnten nicht geladen werden':'Quizfragen werden geladen …')+'</strong>'+
+        '<small>'+(failed?'Bitte die Verbindung prüfen oder erneut laden. Deine Lernfortschritte bleiben gespeichert.':'Die geprüften Fragen werden vorbereitet.')+'</small></div>'+
+        '<div class="quiz-review-actions"><button id="quizLoadRetry" class="primary" type="button">Erneut laden</button></div></section>';
+      var retry=byId("quizLoadRetry");
+      if(retry)retry.addEventListener("click",function(){
+        window.kidsQuizLoadError="";renderDashboard();ensureQuizData(true);
+      });
+      return;
+    }
+    var stats=statsFor(items),cats=categories(),resume=sessionInfo();
     var now=Date.now();
     var reviewCount=items.filter(function(q){
       var e=progressFor(q);
@@ -288,17 +339,7 @@
     modal.setAttribute("data-quiz-band",bandId());
     ensureUi();
     showDashboard();
-    if(!Array.isArray(window.kidsQuizPool)||!window.kidsQuizPool.length){
-      var label=byId("quizAgeLabel");
-      if(label)label.textContent="Quiz wird geladen …";
-      if(typeof window.fetchKidsQuiz==="function"){
-        Promise.resolve().then(function(){return window.fetchKidsQuiz()}).then(function(){
-          if(modal.classList.contains("open"))showDashboard();
-        }).catch(function(){
-          if(modal.classList.contains("open"))showDashboard();
-        });
-      }
-    }
+    if(!canonicalItems().length)ensureQuizData();
     return true;
   };
   // Bind the visible home tile independently of the legacy inline listener.
@@ -406,7 +447,13 @@
     list.innerHTML="";
     if(!items.length){
       if(more)more.classList.remove("show");
-      list.innerHTML='<div class="quiz-library-empty">Keine Frage passt zu dieser Suche.</div>';
+      list.innerHTML=allBand.length
+        ?'<div class="quiz-library-empty">Keine Frage passt zu dieser Suche.</div>'
+        :'<div class="quiz-library-empty">'+(window.kidsQuizLoadError
+          ?'Die Quizfragen sind derzeit nicht erreichbar.':'Quizfragen werden geladen …')+
+          ' <button id="quizLibraryLoadRetry" type="button">Erneut laden</button></div>';
+      var reload=byId("quizLibraryLoadRetry");
+      if(reload)reload.addEventListener("click",function(){ensureQuizData(true)});
       return;
     }
     var frag=document.createDocumentFragment(),waitingForVoice=false;
@@ -450,7 +497,9 @@
       more.textContent=remaining>0?"Weitere "+Math.min(PAGE_SIZE,remaining)+" Fragen anzeigen":"";
       more.setAttribute("aria-hidden",remaining>0?"false":"true");
     }
-    if(waitingForVoice)scheduleVoiceRefresh();
+    if(waitingForVoice&&voiceRefreshAttempts<12){
+      voiceRefreshAttempts++;scheduleVoiceRefresh();
+    }
   }
   function renderLibrary(){
     ensureUi();mode="library";directQuestion=false;visibleLimit=PAGE_SIZE;updateModeButtons();
@@ -472,13 +521,10 @@
     if(byId("quizLearningDashboard"))byId("quizLearningDashboard").classList.remove("show");
     if(panel)panel.classList.remove("show");
     if(back)back.classList.add("show");
-    window.currentQuiz=[q];
-    window.currentQuizIndex=0;
-    window.quizCorrectCount=0;
-    window.quizLocked=false;
-    window.quizQuestionHadError=false;
+    if(typeof window.openKidsQuizQuestion!=="function"||!window.openKidsQuizQuestion(q)){
+      directQuestion=false;renderLibrary();return;
+    }
     var label=byId("quizAgeLabel");if(label)label.textContent="Frage #"+String(q.number).padStart(3,"0")+" · "+String(q.category||"Quiz");
-    if(typeof window.renderQuizQuestion==="function")window.renderQuizQuestion();
     try{localStorage.removeItem("kids.quiz.session.v1")}catch(_){}
     setTimeout(function(){var next=byId("quizNext");if(next)next.textContent="Zur Übersicht"},0);
   }
@@ -521,6 +567,14 @@
       if(attempts<24)setTimeout(waitForQuizData,250);
     })();
   }
+  window.addEventListener("dar-kids-owner-voice-ready",function(){
+    voiceRefreshAttempts=0;
+    if(mode==="library"&&!directQuestion)renderList();
+  });
+  window.addEventListener("dar-kids-quiz-error",function(){
+    if(mode==="dashboard")renderDashboard();
+    if(mode==="library")renderLibrary();
+  });
   window.addEventListener("dar-kids-quiz-loaded",function(){
     refreshSummary();
     if(mode==="dashboard")renderDashboard();
