@@ -321,6 +321,13 @@ for (const regression of [
   }
 }
 
+try {
+  require("../test/tools/test-kids-quiz-preview.cjs");
+  ok("DAR Test Kids Quiz: isolated worker preview, 450 published questions, premium UI and locked V4 review audio");
+} catch (error) {
+  fail("DAR Test Kids Quiz: " + error.message);
+}
+
 if (failed) {
   console.error(`\n${failed} Test-App-Check(s) fehlgeschlagen – Deploy stoppen.`);
   process.exit(1);

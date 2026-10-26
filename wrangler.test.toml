@@ -22,7 +22,7 @@ directory = "."
 binding = "ASSETS"
 # The Dar-Test HTML shell MUST run the Worker before static assets. Otherwise\n# the HTML-only final styling layer never runs and the photo motifs stay invisible.\n# Only the three exact shell URLs are added, not all /test/* resources.\n# Owner-only QA files must always pass the Worker auth check BEFORE static assets.
 # Keep every other Dar Test/KIDS/visitor asset on its existing delivery path.
-run_worker_first = ["/test", "/test/", "/test/index.html", "/test/repair", "/test/repair.html", "/test/academy", "/test/academy/*", "/test/kids/akademie", "/test/kids/akademie/*"]
+run_worker_first = ["/test", "/test/", "/test/index.html", "/test/repair", "/test/repair.html", "/test/academy", "/test/academy/*", "/test/kids", "/test/kids/*", "/test/kids/akademie", "/test/kids/akademie/*"]
 
 # Workers AI: Qurʾān-Wortprüfung im Kids-Lernmodus.
 [ai]
