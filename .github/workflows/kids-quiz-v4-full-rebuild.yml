@@ -2,6 +2,7 @@ name: KIDS 450 V4 Complete Audio Rebuild (review only)
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, labeled]
     paths:
       - "kids/review-only/quiz-v4-full-rebuild-20261026/**"
       - "kids/tools/rebuild_quiz_v4_450.py"
@@ -19,6 +20,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   validate:
@@ -36,15 +38,31 @@ jobs:
           python3 kids/tools/rebuild_quiz_v4_450.py --age-band 7-8
           python3 kids/tools/rebuild_quiz_v4_450.py --age-band 9-10
 
+  key-preflight:
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.label.name == 'kids-v4-key-preflight-20261026' && github.event.pull_request.head.ref == 'codex/kids-quiz-v4-complete-speech-rebuild-20261026' && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' }}
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the paid voice provider WITHOUT exposing a secret or billing credits
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        shell: bash
+        run: |
+          if [ -z "${ELEVENLABS_API_KEY}" ]; then
+            echo "::error::ElevenLabs voice secret unavailable. No paid generation attempted."
+            exit 1
+          fi
+          echo "VOICE_PROVIDER_CONFIGURED=true; no paid generation attempted."
+
   generate-review-audio:
-    # Never run from a PR, push or schedule. Explicit consent for paid usage.
-    if: ${{ github.event_name == 'workflow_dispatch' && inputs.confirm_paid_generation == 'YES_REBUILD_450' }}
+    # Paid run only with explicit workflow input OR a precisely named human-added PR authorization label on a known branch.
+    if: ${{ (github.event_name == 'workflow_dispatch' && inputs.confirm_paid_generation == 'YES_REBUILD_450') || (github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.label.name == 'kids-v4-generate-full-20261026' && github.event.pull_request.head.ref == 'codex/kids-quiz-v4-complete-speech-rebuild-20261026' && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site') }}
     needs: validate
     runs-on: ubuntu-latest
     timeout-minutes: 300
     strategy:
       fail-fast: false
-      max-parallel: 1
+      max-parallel: 2
       matrix:
         age_band: ["4-6", "7-8", "9-10"]
     steps:
@@ -52,10 +70,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install ffprobe
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg
+      - name: Ensure audio probe exists
+        run: command -v ffprobe && ffprobe -version | head -n 1
+      - name: Verify key is configured before spending credits
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: test -n "${ELEVENLABS_API_KEY}" || (echo "::error::Missing ElevenLabs secret" && exit 1)
       - name: Generate V4 candidate audio for one age band; review only
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
