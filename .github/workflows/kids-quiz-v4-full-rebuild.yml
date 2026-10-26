@@ -166,3 +166,63 @@ jobs:
           git commit -m "review(kids): store 450x4 brand-new V4 audio clips, unapproved for playback"
           git push origin HEAD:refs/heads/codex/kids-v4-generated-review-20261026
           echo "Generated assets pushed into isolated review branch, NOT published on main."
+
+  recover-previous-paid-artifacts:
+    # Content-only recovery from ONE previously paid completed run. Never call ElevenLabs.
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.label.name == 'kids-v4-recover-existing-artifacts-20261026' && github.event.pull_request.head.ref == 'codex/kids-quiz-v4-complete-speech-rebuild-20261026' && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' }}
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout exact review-approved importer source (not main)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+      - name: Download paid MP3 archives from original run 40327375164
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 40327375164
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: Sero91ak/dar-al-tawhid-site
+          pattern: kids-quiz-v4-new-*-40327375164
+          merge-multiple: false
+          path: /tmp/kids-v4-existing-paid-originals
+      - name: Verify all source hashes, script keys and age bands again
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 kids/tools/import_rebuilt_quiz_v4.py --artifacts-root /tmp/kids-v4-existing-paid-originals
+          python3 - <<'PY'
+          import json, pathlib
+          j=json.loads(pathlib.Path("kids/data/quiz-v4-full-rebuild-review.json").read_text())
+          assert j["humanListeningApproved"] is False and j["releaseEnabled"] is False
+          assert len(j["questions"]) == 450
+          assert sum(len(q["clips"]) for q in j["questions"].values()) == 1800
+          assert len(list(pathlib.Path("kids/assets/kids-quiz-audio/v4-full-rebuild-20261026").rglob("*.mp3"))) == 1217
+          print("PASS: original ElevenLabs assets intact, 450 questions, 1800 parts, 1217 distinct MP3, no billing")
+          PY
+      - name: Publish only original audio, review manifest and provenance on content-only branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          SOURCE_SHA="$(git rev-parse HEAD)"
+          git fetch --depth=1 origin main
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Start from production main, not from the PR, to avoid submitting
+          # unauthorized workflow-file modifications with a contents-only token.
+          git switch -c codex/kids-v4-generated-review-20261026 FETCH_HEAD
+          git checkout "$SOURCE_SHA" --             kids/tools/import_rebuilt_quiz_v4.py             kids/review-only/quiz-v4-full-rebuild-20261026/450-speech-scripts.json
+          git add kids/tools/import_rebuilt_quiz_v4.py
+          git add kids/review-only/quiz-v4-full-rebuild-20261026/450-speech-scripts.json
+          git add kids/data/quiz-v4-full-rebuild-review.json
+          git commit -m "review(kids): preserve 450x4 human-unapproved V4 manifest and script provenance"
+          git push origin HEAD:refs/heads/codex/kids-v4-generated-review-20261026
+          # Upload in smaller, audited batches, never generate paid audio again.
+          for band in 4-6 7-8 9-10; do
+            git add -f "kids/assets/kids-quiz-audio/v4-full-rebuild-20261026/$band/"
+            git commit -m "review(kids): preserve original V4 MP3 for age $band, not live"
+            git push origin HEAD:refs/heads/codex/kids-v4-generated-review-20261026
+          done
+          echo "RECOVERED: 450 questions x4, 1217 original MP3s; content-only review branch updated; no live release"
