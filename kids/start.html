@@ -5537,6 +5537,12 @@ function setQuizListenState(state){
 function quizSpeak(text,options){
   options=options||{};
   try{if(speech)speech.cancel()}catch(e){}
+  var newV4=window.DARKidsQuizV4Approved;
+  var q=Array.isArray(currentQuiz)?currentQuiz[currentQuizIndex]:null;
+  if(newV4&&q&&options.quizPart&&options.quizId===q.id&&newV4.has(q,options.quizPart)){
+    return newV4.play(q,options.quizPart,{onended:options.onended,onerror:options.onerror});
+  }
+  if(newV4&&typeof newV4.stop==="function")newV4.stop();
   if(window.DARKidsOwnerVoice&&typeof window.DARKidsOwnerVoice.play==="function"){
     var ok=window.DARKidsOwnerVoice.play(String(text||""),{source:options.source||"kids-ui",onended:options.onended,onerror:options.onerror});
     if(options.quizPrompt&&ok===false)setQuizListenState("missing");
@@ -5558,9 +5564,15 @@ window.addEventListener("dar-kids-owner-voice-missing",function(event){
 function refreshQuizListenState(){
   var q=Array.isArray(currentQuiz)?currentQuiz[currentQuizIndex]:null;
   var owner=window.DARKidsOwnerVoice;
-  var available=!!(q&&owner&&typeof owner.has==="function"&&owner.has(quizPrompt(q)));
+  var newV4=window.DARKidsQuizV4Approved;
+  var available=!!(q&&((newV4&&newV4.has(q,"question"))||
+    (owner&&typeof owner.has==="function"&&owner.has(quizPrompt(q)))));
   setQuizListenState(available?"ready":"missing");
 }
+window.addEventListener("dar-kids-quiz-v4-approved-ready",function(){
+  var modal=document.getElementById("quizModal");
+  if(modal&&modal.classList.contains("open"))refreshQuizListenState();
+});
 window.addEventListener("dar-kids-owner-voice-ready",function(){
   var modal=document.getElementById("quizModal");
   if(modal&&modal.classList.contains("open"))refreshQuizListenState();
@@ -5667,11 +5679,15 @@ function quizV4Text(q,part,old){
   return window.DARKidsQuizV4?window.DARKidsQuizV4.pick(q,part,old):String(old||"");
 }
 function quizAcademyPraiseText(q){
+  var next=window.DARKidsQuizV4Approved;
+  if(next&&next.has(q,"correct"))return String(next.get(q,"correct").text);
   // The visible blessing is always Islamic. Only use newly rendered audio after the exact V4 clip exists.
   var voice=window.DARKidsQuizV4&&window.DARKidsQuizV4.speech(q);
   return String(voice&&voice.correctAudioText||q&&q.success||"Sehr gut!");
 }
 function quizAcademyRetryText(q){
+  var next=window.DARKidsQuizV4Approved;
+  if(next&&next.has(q,"retry"))return String(next.get(q,"retry").text);
   var voice=window.DARKidsQuizV4&&window.DARKidsQuizV4.speech(q);
   return String(voice&&voice.retryAudioText||q&&q.retry||"Versuch es noch einmal!");
 }
@@ -6137,13 +6153,13 @@ function renderQuizQuestion(){
   document.getElementById("quizListen").addEventListener("click",function(){
     refreshQuizListenState();
     if(this.disabled)return;
-    quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question"});
+    quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question",quizId:q.id,quizPart:"question"});
   });
-  document.getElementById("quizNext").addEventListener("click",function(){window.DARKidsTermLearning?.stop?.();currentQuizIndex++;renderQuizQuestion()});
+  document.getElementById("quizNext").addEventListener("click",function(){window.DARKidsQuizV4Approved?.stop?.();window.DARKidsTermLearning?.stop?.();currentQuizIndex++;renderQuizQuestion()});
   setTimeout(function(){
     if(currentQuiz[currentQuizIndex]!==q)return;
     refreshQuizListenState();
-    quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question"});
+    quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question",quizId:q.id,quizPart:"question"});
   },250);
 }
 function quizRewardBurst(){
@@ -6193,9 +6209,10 @@ function chooseQuizAnswer(index,button){
     // Nicht auf System-TTS ausweichen und keine nächste Quizfrage übertönen.
     var answeredQuestion=q,answeredIndex=currentQuizIndex;
     var explanationAudio=quizV4Text(q,"explanationAudioText",q.explanation);
-    var canExplain=!!(q.explanation&&window.DARKidsOwnerVoice&&
-      typeof window.DARKidsOwnerVoice.has==="function"&&
-      window.DARKidsOwnerVoice.has(explanationAudio));
+    var newV4=window.DARKidsQuizV4Approved;
+    var canExplain=!!(q.explanation&&((newV4&&newV4.has(q,"explanation"))||
+      (window.DARKidsOwnerVoice&&typeof window.DARKidsOwnerVoice.has==="function"&&
+      window.DARKidsOwnerVoice.has(explanationAudio))));
     function questionStillOpen(){
       var modal=document.getElementById("quizModal");
       return !!(modal&&modal.classList.contains("open")&&
@@ -6210,12 +6227,12 @@ function chooseQuizAnswer(index,button){
       ).catch(function(){});
     }
     quizSpeak(quizV4Text(q,"correctAudioText",q.success),{
-      source:"kids-quiz-feedback",
+      source:"kids-quiz-feedback",quizId:q.id,quizPart:"correct",
       onended:function(){
         if(!questionStillOpen())return;
         if(canExplain){
           quizSpeak(explanationAudio,{
-            source:"kids-quiz-explanation",
+            source:"kids-quiz-explanation",quizId:q.id,quizPart:"explanation",
             onended:playQuizTermExplanation
           });
         }else{playQuizTermExplanation()}
@@ -6227,7 +6244,7 @@ function chooseQuizAnswer(index,button){
     button.classList.add("wrong");
     document.getElementById("quizFeedback").className="quiz-feedback bad";
     document.getElementById("quizFeedback").textContent=quizAcademyRetryText(q);
-    quizSpeak(quizV4Text(q,"retryAudioText",q.retry));
+    quizSpeak(quizV4Text(q,"retryAudioText",q.retry),{source:"kids-quiz-retry",quizId:q.id,quizPart:"retry"});
     // Leave encouragement visible while the child thinks; remove only the shake marker.
     setTimeout(function(){
       if(button&&button.isConnected)button.classList.remove("wrong");
@@ -8089,6 +8106,8 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/story-hub.js?v=29"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-v4-bridge.js?v=20261013-academy1"></script>
+<script src="/kids/quiz-v4-approved-player.js?v=20261026-v1"></script>
+<script>window.DARKidsQuizV4Approved&&window.DARKidsQuizV4Approved.load();</script>
 <script src="/kids/quiz-library.js?v=1455"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1256-parent-hero-full" data-kids-section-heroes-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148" data-kids-stories-home-late="1">
