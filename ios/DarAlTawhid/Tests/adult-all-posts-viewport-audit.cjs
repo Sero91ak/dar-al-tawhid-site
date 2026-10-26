@@ -13,6 +13,9 @@ const base=(process.env.DAR_AUDIT_BASE_URL||"http://127.0.0.1:8765/").replace(/#
 const viewportRaw=process.env.DAR_POST_AUDIT_VIEWPORT||"390x844";
 const parts=viewportRaw.split("x").map(Number);
 if(parts.length!==2||parts.some(x=>!Number.isInteger(x)||x<320||x>2500))throw Error("Bad viewport");
+const shardSpec=String(process.env.DAR_POST_AUDIT_SHARD||"0/1").split("/").map(Number);
+if(shardSpec.length!==2||shardSpec.some(n=>!Number.isInteger(n))
+  ||shardSpec[1]<1||shardSpec[0]<0||shardSpec[0]>=shardSpec[1])throw Error("Bad shard i/n");
 const out=path.resolve(process.env.DAR_POST_AUDIT_OUTPUT||"dar-adult-post-evidence");
 fs.mkdirSync(out,{recursive:true});
 const records=[];
@@ -29,9 +32,12 @@ for(const file of source){
   ids.add(id);
   records.push({file,id});
 }
-const issues=records.filter(r=>r.reason);
+const inventoryIssues=records.filter(r=>r.reason);
+const shardRecords=records.filter((r,i)=>i%shardSpec[1]===shardSpec[0]);
+const issues=shardSpec[0]===0 ? inventoryIssues : [];
 const report={generated:new Date().toISOString(),base,viewport:parts,
-  indexed:source.length,uniqueIds:ids.size,passed:0,issues,visited:[]};
+  indexed:source.length,selected:shardRecords.length,shard:shardSpec.join("/"),
+  uniqueIds:ids.size,passed:0,issues,visited:[]};
 (async()=>{
   const browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
   try{
@@ -46,7 +52,7 @@ const report={generated:new Date().toISOString(),base,viewport:parts,
     await page.waitForFunction(()=>!!document.getElementById("appView"),null,{timeout:15000});
     // The master markdown catalogue is requested asynchronously.
     await page.waitForTimeout(1800);
-    for(const record of records){
+    for(const record of shardRecords){
       if(!record.id)continue;
       const hash="#post/"+encodeURIComponent(record.id);
       const result={id:record.id,file:record.file};
