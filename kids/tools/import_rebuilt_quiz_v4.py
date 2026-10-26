@@ -31,6 +31,7 @@ def main():
     if len(expected) != 450 or plan["modelId"] != "eleven_v4" or plan["voiceId"] != VOICE:
         raise SystemExit("Source plan incorrect")
     found = {}
+    location_by_band = {}
     checks = list(args.artifacts_root.rglob("checkpoint.json"))
     if len(checks) != 3:
         raise SystemExit(f"Expected 3 complete age artifacts; got {len(checks)}")
@@ -40,6 +41,7 @@ def main():
         if band not in BANDS or band in found or c["questionsCompleted"] != 150 or len(c["entries"]) != 150:
             raise SystemExit(f"Incomplete or duplicated band {band}")
         found[band] = c
+        location_by_band[band] = checkpoint_path.parent
     result = {"schemaVersion":1, "id":"TAWHID_KIDS_450_V4_NEW_REBUILD_REVIEW",
               "modelId":"eleven_v4", "voiceId":VOICE, "voiceName":"Serhat Abu Malik – Master",
               "releaseEnabled":False, "humanListeningApproved":False,
@@ -61,8 +63,7 @@ def main():
                     raise SystemExit(f"Unapproved data metadata changed: {qid}:{kind}")
                 if clip["ttsText"] != expected[qid]["parts"][kind]["ttsText"]:
                     raise SystemExit(f"Audio-to-script mismatch: {qid}:{kind}")
-                original = checkpoint_path = next(path for path in checks if json.loads(path.read_text(encoding="utf-8"))["band"] == band)
-                source = original.parent / clip["url"]
+                source = location_by_band[band] / clip["url"]
                 if not source.is_file() or digest(source) != clip["sha256"] or source.stat().st_size < 1700:
                     raise SystemExit(f"MP3 missing or corrupt: {qid}:{kind}")
                 target = args.destination / band / source.name
