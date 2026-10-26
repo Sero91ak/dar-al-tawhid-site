@@ -93,6 +93,24 @@
     var w = Math.max(0, Number(width) || 0);
     var h = Math.max(0, Number(height) || 0);
     if (w < 570 || h < 350) return null;
+    /* Native UIKit ReservedRegion wins over browser previews when available.
+       Validate coordinates against the *current* WebView window to reject
+       stale fold measurements after rotation or multitasking. */
+    try {
+      var native = global.__DAR_NATIVE_FOLD_REGION;
+      var frame = native && (native.frame || native);
+      if (native && native.active !== false && native.axis === "vertical" && frame &&
+          (!native.viewportWidth || Math.abs(native.viewportWidth-w)<5) &&
+          (!native.viewportHeight || Math.abs(native.viewportHeight-h)<5)) {
+        var x=Number(frame.x), gapPx=Number(frame.width);
+        var rightStart=x+gapPx;
+        if (Number.isFinite(x) && Number.isFinite(gapPx) && gapPx>=0 &&
+            x>=245 && w-rightStart>=245 && rightStart<=w) {
+          return {source:"native",left:{x:0,width:x},
+            right:{x:rightStart,width:w-rightStart},hinge:gapPx};
+        }
+      }
+    } catch (eNative) {}
     try {
       var segments = global.viewport && global.viewport.segments;
       if (segments && segments.length === 2) {
