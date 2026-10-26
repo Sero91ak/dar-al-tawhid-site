@@ -226,3 +226,35 @@ jobs:
             git push origin HEAD:refs/heads/codex/kids-v4-generated-review-20261026
           done
           echo "RECOVERED: 450 questions x4, 1217 original MP3s; content-only review branch updated; no live release"
+
+  independent-offline-audio-qa:
+    # Review only, no chargeable APIs. Explicit audit label triggers this.
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.label.name == 'kids-v4-verify-1217-mp3-20261026' && github.event.pull_request.head.ref == 'codex/kids-quiz-v4-complete-speech-rebuild-20261026' && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' }}
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout saved originals and private review manifest
+        uses: actions/checkout@v4
+        with:
+          ref: codex/kids-v4-generated-review-20261026
+          fetch-depth: 1
+      - name: Load isolated QA implementation from reviewed PR
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --depth=1 origin codex/kids-quiz-v4-complete-speech-rebuild-20261026
+          git show FETCH_HEAD:kids/tools/audit_rebuilt_quiz_v4.py > kids/tools/audit_rebuilt_quiz_v4.py
+      - name: Install deterministic offline MP3 QA requirements
+        run: |
+          python3 -m pip install --disable-pip-version-check "mutagen==1.47.0" "imageio-ffmpeg==0.6.0"
+      - name: Audit all 1217 SHA checksums and full audio decodes
+        run: python3 kids/tools/audit_rebuilt_quiz_v4.py --report /tmp/kids-v4-original-audio-technical-audit.json
+      - name: Retain full independent QA report for approval
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-1217-original-mp3-technical-qa-${{ github.run_id }}
+          path: /tmp/kids-v4-original-audio-technical-audit.json
+          retention-days: 90
+          if-no-files-found: warn
