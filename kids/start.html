@@ -3403,7 +3403,8 @@ body .nav-btn.kids-academy-nav .ico{background-image:url("/kids/assets/kids-icon
   <div id="quizModal" class="modal">
     <div class="modal-shell">
       <div class="modal-top">
-        <button class="close-btn" data-close="quiz">×</button>
+        <button class="close-btn" data-close="quiz" aria-label="Quiz schließen">×</button>
+        <button class="quiz-global-back" id="quizGlobalBack" type="button" aria-label="Zurück im Quiz">← Zurück</button>
         <div class="modal-title"><strong>Mein Quiz</strong><small id="quizAgeLabel">für deine Altersstufe</small></div>
         <div class="top-spacer"></div>
       </div>
@@ -5911,45 +5912,106 @@ function normalizeStudioQuizItems(data){
   });
   return out;
 }
-function fetchKidsQuiz(){
-  var base=fetch("/kids/data/quiz-kids.json?v=900",{cache:"no-store"})
-    .then(function(r){if(!r.ok)throw new Error("quiz-data");return r.json()});
-  var studio=fetch("/content/kids/content-index.json?v=1107",{cache:"force-cache"})
-    .then(function(r){return r.ok?r.json():{items:[]}})
-    .catch(function(){return{items:[]}});
-  return Promise.all([base,studio])
-    .then(function(parts){
-      var data=parts[0],studioData=parts[1];
-      if(!data||data.namespace!=="dar-kids-quiz"||data.adultQuizDependency!==false)throw new Error("kids-quiz-namespace");
-      var artwork=data.artwork||{};
-      kidsQuizArtwork=artwork.ageBands||{};
-      kidsQuizTopicArtwork={
-        families:artwork.topicFamilies||{},
-        categoryMap:artwork.categoryMap||{},
-        sceneMap:artwork.sceneMap||{},
-        priorityCategoryMap:artwork.priorityCategoryMap||{},
-        topicKeywords:artwork.topicKeywords||{}
-      };
-      var items=Array.isArray(data.items)?data.items:[];
-      var baseItems=items.filter(function(q){
-        return q &&
-          q.verification==="approved" &&
-          q.status==="published" &&
-          q.reviewStatus==="approved" &&
-          /^kids-quiz-\d{3}$/.test(String(q.id||""));
-      });
-      kidsQuizPool=baseItems.concat(normalizeStudioQuizItems(studioData));
-      window.kidsQuizPool=kidsQuizPool;
-      kidsQuizLoaded=true;
-      try{window.dispatchEvent(new CustomEvent("dar-kids-quiz-loaded",{detail:{count:kidsQuizPool.length}}))}catch(e){}
-      return kidsQuizPool;
-    }).catch(function(){
-      kidsQuizPool=[];
-      window.kidsQuizPool=kidsQuizPool;
-      kidsQuizLoaded=false;
-      return [];
+/* KIDS_QUIZ_RUNTIME_REPAIR_20261026: public API, resilient data loading. */
+var kidsQuizFetchPending=null;
+function fetchKidsQuiz(force){
+  if(kidsQuizFetchPending)return kidsQuizFetchPending;
+  if(kidsQuizLoaded&&kidsQuizPool.length&&!force)return Promise.resolve(kidsQuizPool);
+  window.kidsQuizLoadError="";
+  // KIDS_QUIZ_EMBEDDED_450_V1: the fixed 450-question pack travels with the
+  // HTML shell. This removes a second network/SW request that can strand iOS
+  // standalone kids at "Quizfragen werden geladen …" after a release.
+  // Never load the 900-question editorial source or the draft reserve.
+  // The independent quiz player supplies the 450-pack even when this large
+  // home-page script fails to initialize completely on iOS WebKit.
+  var base=window.DARKidsQuizPack450
+    ?Promise.resolve(window.DARKidsQuizPack450)
+    :fetch("/kids/data/quiz-kids-public-450.json?v=20261026-visitor-recovery",{cache:"no-store"})
+      .then(function(r){if(!r.ok)throw new Error("Quizdaten HTTP "+r.status);return r.json()});
+  // KIDS_PUBLIC_450_V1: Content Studio material must never extend the fixed Quiz set.
+  var studio=Promise.resolve({items:[]});
+  kidsQuizFetchPending=Promise.all([base,studio]).then(function(parts){
+    var data=parts[0],studioData=parts[1];
+    if(!data||data.namespace!=="dar-kids-quiz"||data.adultQuizDependency!==false)
+      throw new Error("Quizdaten-Format ungültig");
+    var items=Array.isArray(data.items)?data.items:[];
+    var baseItems=items.filter(function(q){
+      return q&&q.verification==="approved"&&q.status==="published"&&
+        q.reviewStatus==="approved"&&/^kids-quiz-[0-9]{3}$/.test(String(q.id||""));
     });
+    if(!baseItems.length)throw new Error("Keine freigegebenen Quizfragen gefunden");
+    var artwork=data.artwork||{};
+    kidsQuizArtwork=artwork.ageBands||{};
+    kidsQuizTopicArtwork={
+      families:artwork.topicFamilies||{},categoryMap:artwork.categoryMap||{},
+      sceneMap:artwork.sceneMap||{},priorityCategoryMap:artwork.priorityCategoryMap||{},
+      topicKeywords:artwork.topicKeywords||{}
+    };
+    var ageCount={"4-6":0,"7-8":0,"9-10":0};
+    baseItems.forEach(function(q){if(Object.prototype.hasOwnProperty.call(ageCount,q.ageBand))ageCount[q.ageBand]++;});
+    if(baseItems.length!==450||ageCount["4-6"]!==150||ageCount["7-8"]!==150||ageCount["9-10"]!==150)
+      throw new Error("Quiz: genau 150 freigegebene Fragen je Altersgruppe erforderlich");
+    kidsQuizPool=baseItems;
+    window.kidsQuizPool=kidsQuizPool;
+    kidsQuizLoaded=true;
+    window.kidsQuizLoadError="";
+    try{window.dispatchEvent(new CustomEvent("dar-kids-quiz-loaded",{detail:{count:kidsQuizPool.length}}))}catch(e){}
+    return kidsQuizPool;
+  }).catch(function(err){
+    // Preserve already downloaded questions when a refresh fails.
+    window.kidsQuizLoadError=String(err&&err.message||"Abruf fehlgeschlagen");
+    if(!kidsQuizPool.length){kidsQuizPool=[];window.kidsQuizPool=[];kidsQuizLoaded=false;}
+    try{console.warn("TAWḤĪD KIDS quiz load:",err)}catch(e){}
+    try{window.dispatchEvent(new CustomEvent("dar-kids-quiz-error",{detail:{reason:window.kidsQuizLoadError}}))}catch(e){}
+    return kidsQuizPool;
+  });
+  return kidsQuizFetchPending.then(function(result){
+    kidsQuizFetchPending=null;return result;
+  },function(err){kidsQuizFetchPending=null;throw err});
 }
+// All functions below live in this IIFE. The Quiz dashboard is a separate
+// script; writing window.currentQuiz would not change this real session.
+// Shared bridge: external Quiz library can rehydrate native learning rounds
+// without waiting for the home page's idle-fetch / service-worker cache.
+window.installKidsQuizPack=function(pack){
+  try{
+    var list=pack&&Array.isArray(pack.items)?pack.items:[];
+    var byAge={"4-6":0,"7-8":0,"9-10":0};
+    list.forEach(function(q){
+      if(q&&q.status==="published"&&q.reviewStatus==="approved"&&q.verification==="approved"&&
+        /^kids-quiz-[0-9]{3}$/.test(String(q.id||""))&&
+        Object.prototype.hasOwnProperty.call(byAge,q.ageBand))byAge[q.ageBand]++;
+    });
+    if(list.length!==450||byAge["4-6"]!==150||byAge["7-8"]!==150||byAge["9-10"]!==150)return false;
+    kidsQuizPool=list;
+    kidsQuizLoaded=true;
+    window.kidsQuizPool=list;
+    kidsQuizArtwork=pack.artwork&&pack.artwork.ageBands||{};
+    var art=pack.artwork||{};
+    kidsQuizTopicArtwork={families:art.topicFamilies||{},categoryMap:art.categoryMap||{},
+      sceneMap:art.sceneMap||{},priorityCategoryMap:art.priorityCategoryMap||{},
+      topicKeywords:art.topicKeywords||{}};
+    window.kidsQuizLoadError="";
+    return true;
+  }catch(_){return false}
+};
+window.fetchKidsQuiz=fetchKidsQuiz;
+window.currentKidsQuizAgeBand=currentKidsQuizAgeBand;
+window.quizProgress=quizProgress;
+window.quizPrompt=quizPrompt;
+window.quizArtworkForBand=quizArtworkForBand;
+window.renderQuizQuestion=renderQuizQuestion;
+window.renderQuizFinish=renderQuizFinish;
+window.openKidsQuizQuestion=function(q){
+  if(!q||!q.id||!kidsQuizLoaded)return false;
+  setKidsQuizRoundContext("all","normal");
+  currentQuiz=[q];currentQuizIndex=0;quizCorrectCount=0;
+  quizLocked=false;quizQuestionHadError=false;
+  var modal=document.getElementById("quizModal");
+  if(modal)modal.classList.add("open");
+  renderQuizQuestion();
+  return true;
+};
 function quizArtworkForBand(question){
   var band=currentKidsQuizAgeBand();
   var base=kidsQuizArtwork[band]||{};
@@ -6970,7 +7032,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1410",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1456",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -7997,7 +8059,7 @@ html[data-view="stories"] #view-stories > :last-child{
 
 </style>
 <link rel="stylesheet" href="/kids/dua-smart-learn.css?v=1261" data-kids-dua-smart="1">
-<link rel="stylesheet" href="/kids/quiz-library.css?v=1237">
+<link rel="stylesheet" href="/kids/quiz-library.css?v=1454">
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=5">
 <script src="/kids/screen-awake.js?v=1"></script>
 <script src="/kids/story-follow-reader.js?v=18-salaf1"></script>
@@ -8012,7 +8074,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/story-hub.js?v=28"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-v4-bridge.js?v=20261013-academy1"></script>
-<script src="/kids/quiz-library.js?v=9"></script>
+<script src="/kids/quiz-library.js?v=1455"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1256-parent-hero-full" data-kids-section-heroes-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148" data-kids-stories-home-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1138.css?v=1152" data-kids-stories-home-polish="1">
