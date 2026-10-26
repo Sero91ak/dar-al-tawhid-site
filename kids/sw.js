@@ -258,6 +258,7 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/quiz-v4-bridge.js?v=20261013-academy1",
   "/kids/quiz-premium-v1.css?v=20261026-premium1",
   "/kids/quiz-v4-approved-player.js?v=20261026-v1",
+  "/kids/quiz-v4-test-preview.js?v=20261026-audition1",
   "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
   "/kids/assets/sahaba-mubashshirun/umar.jpg",
   "/kids/assets/sahaba-mubashshirun/uthman.jpg",
@@ -565,7 +566,7 @@ self.addEventListener("fetch",function(event){
     return;
   }
   /* QUIZ LEARNING CENTER: network-first so 450-question data, dashboard logic and layout never regress to a stale pack. */
-  if(url.pathname==="/kids/data/quiz-kids-public-450.json"||url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"||url.pathname==="/kids/quiz-v4-bridge.js"||url.pathname==="/kids/quiz-premium-v1.css"||url.pathname==="/kids/quiz-v4-approved-player.js"||url.pathname==="/kids/data/quiz-v4-full-rebuild-public.json"){
+  if(url.pathname==="/kids/data/quiz-kids-public-450.json"||url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"||url.pathname==="/kids/quiz-v4-bridge.js"||url.pathname==="/kids/quiz-premium-v1.css"||url.pathname==="/kids/quiz-v4-approved-player.js"||url.pathname==="/kids/data/quiz-v4-full-rebuild-public.json"||url.pathname==="/kids/data/quiz-v4-full-rebuild-review.json"){
     event.respondWith(networkFirst(request));
     return;
   }
