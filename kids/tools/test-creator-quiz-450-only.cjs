@@ -29,9 +29,9 @@ assert.ok(shells.every(x=>x===shells[0]),"Entry shells must be byte-identical");
 const html=shells[0];
 for(const token of ['id="openQuizButton"','id="quizModal"','id="quizGlobalBack"',
   "window.fetchKidsQuiz=fetchKidsQuiz","KIDS_QUIZ_EMBEDDED_450_V1",
-  "/kids/quiz-library.js?v=1460","/kids/quiz-library.css?v=1454",
+  "/kids/quiz-library.js?v=1461","/kids/quiz-library.css?v=1461",
   "/kids/quiz-test-premium-v1460.css?v=1460",
-  "/kids/sw.js?v=1460"]){
+  "/kids/sw.js?v=1461"]){
   assert.ok(html.includes(token),"Missing test quiz marker: "+token);
 }
 assert.ok(!html.includes('fetch("/kids/data/quiz-kids.json'),"Legacy 900-item loader exposed");

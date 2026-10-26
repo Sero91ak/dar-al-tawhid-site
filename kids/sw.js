@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1460";
+const CACHE_NAME="dar-al-tawhid-kids-v1461";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -243,8 +243,8 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/data/quiz-audio.json",
   "/kids/data/dua-audio.json",
   "/kids/data/owner-voice-audio.json",
-  "/kids/quiz-library.css?v=1454",
-  "/kids/quiz-library.js?v=1460",
+  "/kids/quiz-library.css?v=1461",
+  "/kids/quiz-library.js?v=1461",
   "/kids/quiz-test-premium-v1460.css?v=1460",
   "/kids/quiz-premium-v1.css?v=20261026-creator-premium1",
   "/kids/quiz-v4-approved-player.js?v=20261026-v1",
