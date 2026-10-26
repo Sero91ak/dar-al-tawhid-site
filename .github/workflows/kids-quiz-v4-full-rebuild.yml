@@ -1,0 +1,73 @@
+name: KIDS 450 V4 Complete Audio Rebuild (review only)
+
+on:
+  pull_request:
+    paths:
+      - "kids/review-only/quiz-v4-full-rebuild-20261026/**"
+      - "kids/tools/rebuild_quiz_v4_450.py"
+      - ".github/workflows/kids-quiz-v4-full-rebuild.yml"
+  workflow_dispatch:
+    inputs:
+      confirm_paid_generation:
+        description: "Costly ElevenLabs V4 generation: choose YES only after approving your account's credit budget"
+        type: choice
+        required: true
+        default: "NO"
+        options:
+          - "NO"
+          - "YES_REBUILD_450"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate canonical 450 and V4 speech contracts without spending credits
+        run: |
+          python3 -m py_compile kids/tools/rebuild_quiz_v4_450.py
+          python3 kids/tools/rebuild_quiz_v4_450.py --age-band 4-6
+          python3 kids/tools/rebuild_quiz_v4_450.py --age-band 7-8
+          python3 kids/tools/rebuild_quiz_v4_450.py --age-band 9-10
+
+  generate-review-audio:
+    # Never run from a PR, push or schedule. Explicit consent for paid usage.
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.confirm_paid_generation == 'YES_REBUILD_450' }}
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        age_band: ["4-6", "7-8", "9-10"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install ffprobe
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+      - name: Generate V4 candidate audio for one age band; review only
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          python3 kids/tools/rebuild_quiz_v4_450.py \
+            --age-band "${{ matrix.age_band }}" \
+            --execute
+      - name: Save audio and progress even when one request fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-quiz-v4-new-${{ matrix.age_band }}-${{ github.run_id }}
+          path: kids/review-only/quiz-v4-full-rebuild-20261026/generated/${{ matrix.age_band }}/
+          retention-days: 30
+          if-no-files-found: warn
