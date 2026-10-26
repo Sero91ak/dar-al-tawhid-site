@@ -283,6 +283,45 @@
   // Standalone quiz renderer: independent of the monolithic home script.
   // Used only if the legacy/native quiz functions cannot initialize.
   var localRound=[],localIndex=0,localCorrectCount=0,localAnswered=false;
+  // Accessibility-safe recovery player. It uses ONLY already approved V4
+  // Serhat master clips from the public manifest; private review clips stay hidden.
+  function localQuizApprovedAudioText(q,part){
+    var owner=window.DARKidsOwnerVoice;
+    if(!owner||typeof owner.entry!=="function")return "";
+    var speech=window.DARKidsQuizV4&&typeof window.DARKidsQuizV4.speech==="function"
+      ?window.DARKidsQuizV4.speech(q):null;
+    var fallback=part==="questionAudioText"
+      ?(typeof window.quizPrompt==="function"?window.quizPrompt(q):q.question)
+      :part==="correctAudioText"?q.success
+      :part==="retryAudioText"?q.retry
+      :"Das merken wir uns: "+String(q.explanation||"");
+    var candidate=String(speech&&speech[part]||"");
+    var options=candidate&&candidate!==fallback?[candidate,fallback]:[fallback];
+    for(var i=0;i<options.length;i++){
+      var entry=owner.entry(options[i]);
+      if(entry&&entry.url&&entry.modelId==="eleven_v4"&&
+        (entry.humanListeningApproved===true||entry.approvedForPlayback===true||
+         entry.qaStatus==="approved")&&
+        (entry.voiceProfileId==="serhat-owner-voice-2026"||
+         entry.voiceId==="DkU7j9uO4ZEtLD2iRZSH")){
+        return options[i];
+      }
+    }
+    return "";
+  }
+  function localQuizPlay(q,part){
+    var text=localQuizApprovedAudioText(q,part);
+    if(!text||!window.DARKidsOwnerVoice||typeof window.DARKidsOwnerVoice.play!=="function")return false;
+    return !!window.DARKidsOwnerVoice.play(text,{source:"kids-quiz-fallback-"+part});
+  }
+  function refreshLocalQuizListen(q){
+    var listen=byId("quizLocalListen"),text=localQuizApprovedAudioText(q,"questionAudioText");
+    if(!listen)return;
+    listen.disabled=!text;
+    listen.textContent=text?"▶ Frage anhören":"Audio noch nicht freigegeben";
+    listen.setAttribute("aria-label",text?"Quizfrage mit Serhat-V4-Masterstimme abspielen":
+      "Diese Quizfrage hat noch keine zum Abspielen freigegebene V4-Aufnahme");
+  }
   function renderLocalQuizQuestion(){
     var body=byId("quizBody"),progress=byId("quizProgress");
     if(!body)return;
@@ -301,11 +340,23 @@
       return '<button class="quiz-answer quiz-local-answer" type="button" data-quiz-answer-index="'+i+'">'+
         escapeHtml(a.label)+'</button>';
     }).join("");
-    body.innerHTML='<div class="quiz-question">'+escapeHtml(q.question)+'</div>'+
+    body.innerHTML='<section class="quiz-local-learning" aria-label="Islamisches Wissensquiz">'+
+      '<div class="quiz-question">'+escapeHtml(q.question)+'</div>'+
       '<div class="quiz-help">'+escapeHtml(q.category||"Quiz")+' · '+escapeHtml(ageLabel())+'</div>'+
+      '<button id="quizLocalListen" type="button" class="quiz-library-audio" disabled>Audio wird geprüft</button>'+
       '<div class="quiz-answers">'+answerHtml+'</div>'+
-      '<div id="quizLocalFeedback" class="quiz-feedback" role="status"></div>'+
-      '<button id="quizLocalNext" class="quiz-next" type="button" style="display:none">Weiter ›</button>';
+      '<div id="quizLocalFeedback" class="quiz-feedback" role="status" aria-live="polite"></div>'+
+      '<section id="quizLocalLearning" class="quiz-local-explanation" hidden>'+
+        '<h3>Das lernen wir daraus</h3><p>'+escapeHtml(q.explanation||"")+'</p>'+
+        '<p class="quiz-local-source"><strong>Quelle:</strong> '+
+          escapeHtml([q.sourceType,q.source].filter(Boolean).join(" · ")||"Quellenprüfung ausstehend")+'</p>'+
+        '<button id="quizLocalExplainAudio" type="button" class="quiz-library-audio" disabled>Erklärung anhören</button>'+
+      '</section>'+
+      '<button id="quizLocalNext" class="quiz-next" type="button" disabled style="display:none">Nächste Frage ›</button>'+
+      '</section>';
+    refreshLocalQuizListen(q);
+    var listen=byId("quizLocalListen");
+    if(listen)listen.addEventListener("click",function(){localQuizPlay(q,"questionAudioText")});
     body.querySelectorAll(".quiz-local-answer").forEach(function(btn){
       btn.addEventListener("click",function(){
         if(localAnswered)return;
@@ -321,12 +372,29 @@
           else if(n===ix)el.classList.add("wrong");
         });
         var msg=byId("quizLocalFeedback");
-        if(msg){msg.textContent=correct?(q.success||"Richtig!"):((q.retry||"Schau dir die richtige Antwort an.")+" "+(q.explanation||""));msg.classList.add("show")}
-        var next=byId("quizLocalNext");if(next){next.style.display="block";next.classList.add("show")}
+        if(msg){
+          msg.textContent=correct?(q.success||"Richtig!"):q.retry||"Schau dir die richtige Antwort an.";
+          msg.classList.add("show");
+        }
+        var lesson=byId("quizLocalLearning");
+        if(lesson)lesson.hidden=false;
+        var explanationAudio=byId("quizLocalExplainAudio");
+        if(explanationAudio){
+          var approved=localQuizApprovedAudioText(q,"explanationAudioText");
+          explanationAudio.disabled=!approved;
+          explanationAudio.textContent=approved?"▶ Erklärung anhören":"Erklär-Audio noch nicht freigegeben";
+          explanationAudio.addEventListener("click",function(){localQuizPlay(q,"explanationAudioText")});
+        }
+        localQuizPlay(q,correct?"correctAudioText":"retryAudioText");
+        var next=byId("quizLocalNext");
+        if(next){next.disabled=false;next.style.display="block";next.classList.add("show")}
       });
     });
     var next=byId("quizLocalNext");
-    if(next)next.addEventListener("click",function(){localIndex++;renderLocalQuizQuestion()});
+    if(next)next.addEventListener("click",function(){
+      try{window.DARKidsOwnerVoice&&window.DARKidsOwnerVoice.stop()}catch(_){}
+      localIndex++;renderLocalQuizQuestion();
+    });
   }
   function startLocalQuizRound(cat){
     var pool=bandItems().filter(function(q){return !cat||cat==="all"||q.category===cat});
