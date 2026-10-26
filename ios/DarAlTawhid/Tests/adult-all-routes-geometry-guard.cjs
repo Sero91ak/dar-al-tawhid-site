@@ -10,6 +10,20 @@ const read = relative => fs.readFileSync(path.join(root, relative), "utf8");
 const css = read("assets/adaptive-layout.css");
 const adaptive = read("assets/adaptive-layout.js");
 const routeInventory = read("test/assets/test-global-edge-width-v1372.css");
+const visitorApp = read("index.html");
+const publishedRouteStates = [
+  "is-area-route", "is-calendar-route", "is-catalog-route",
+  "is-dua-route", "is-frauen-route", "is-hadith-route",
+  "is-home-route", "is-ilm-chat-route", "is-library-reader-route",
+  "is-library-route", "is-more-route", "is-post-route",
+  "is-propheten-route", "is-quiz-route", "is-quran-overview",
+  "is-quran-player-route", "is-quran-reader-route",
+  "is-scholar-route", "is-scholars-route", "is-settings-route",
+  "is-topic-route", "is-topics-route"
+];
+for (const route of publishedRouteStates) {
+  assert.ok(visitorApp.includes(route), "Published visitor route missing: " + route);
+}
 const marker = "DAR_ADULT_ALL_ROUTES_FLUID_V1";
 assert.equal(css.split(marker).length, 2, "Exactly one shared fluid route geometry layer");
 const block = css.split(marker)[1];
@@ -31,7 +45,9 @@ const shellClasses = [
   ".hadith-hub", ".dua-hub", ".frauen-page", ".quiz-shell",
   ".more-page", ".settings-page", ".notification-center-page",
   ".account-page", ".about-page", ".source-library-page",
-  ".lib-page", ".dar-fold", ".dar-fold__rail", ".dar-fold__pane"
+  ".lib-page", ".prophets-root", ".prophets-shell", ".prophets-detail",
+  ".scholars-index", ".profile-box--scholar",
+  ".dar-fold", ".dar-fold__rail", ".dar-fold__pane"
 ];
 for (const cls of shellClasses) {
   assert.ok(block.includes(cls), "Missing adaptive family shell " + cls);
@@ -64,5 +80,5 @@ for (const char of block) {
   assert.ok(braces >= 0, "Unexpected closing rule");
 }
 assert.equal(braces, 0, "Incomplete CSS rule");
-console.log("OK: " + routes.length + " adult route classes, " +
+console.log("OK: " + publishedRouteStates.length + " published states + " + routes.length + " staging route classes, " +
   shellClasses.length + " family shells, compact/fold/tablet/landscape/safe-area CSS contract");
