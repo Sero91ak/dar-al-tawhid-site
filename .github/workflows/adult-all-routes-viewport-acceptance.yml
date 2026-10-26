@@ -11,6 +11,8 @@ on:
       - 'assets/fold-hinge-layout.css'
       - 'assets/fold-hinge-layout.js'
       - 'ios/DarAlTawhid/Tests/fold-hinge-browser-acceptance.cjs'
+      - 'ios/DarAlTawhid/Tests/fold-book-hinge-geometry-guard.cjs'
+      - 'assets/fold-split.js'
       - 'ios/DarAlTawhid/Tests/adult-all-routes-*.cjs'
       - 'ios/DarAlTawhid/Tests/adult-all-posts-viewport-audit.cjs'
       - 'ios/DarAlTawhid/Tests/native-layout-ownership-release-guard.cjs'
@@ -35,6 +37,8 @@ jobs:
             profiles: fold-interior-portrait,fold-interior-landscape
           - id: tablets
             profiles: ipad-portrait,ipad-landscape,ipad-split-window
+          - id: book
+            profiles: book-portrait,book-landscape
     steps:
       - uses: actions/checkout@v4
         with:
