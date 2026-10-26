@@ -66,6 +66,8 @@ def validate(plan: dict, source: dict, production: dict) -> None:
             assert 16 <= len(clip["ttsText"]) <= 1000
             assert clip["displayText"] in clip["ttsText"]
     assert plan["counts"]["clips"] == 1800
+    assert not any("Die Quelle steht" in q["parts"]["explanation"]["ttsText"] for q in items), "Spoken citation is prohibited"
+    assert not any("Ḥadīṯ Nummer" in q["parts"]["explanation"]["ttsText"] for q in items), "Spoken reference number is prohibited"
 
 def mp3_duration(path: Path) -> float:
     data = path.read_bytes()
@@ -104,13 +106,16 @@ def convert(prompt: str, dictionary: dict, api_key: str) -> bytes:
             raise ValueError("TTS returned non-audio content type")
         return result.read()
 
-def build(plan: dict, band: str, target: Path, execute: bool) -> None:
+def build(plan: dict, band: str, target: Path, execute: bool, max_questions: int = 150) -> None:
     items = [q for q in plan["items"] if q["ageBand"] == band]
     assert len(items) == 150
+    if max_questions < 1 or max_questions > 150:
+        raise ValueError("Invalid max_questions")
+    items = items[:max_questions]
     prompts = [(q, kind, q["parts"][kind]["ttsText"]) for q in items for kind in PARTS]
     total_chars = sum(len(t) for _, _, t in prompts)
     distinct_hashes = {digest("|".join((MODEL, VOICE, plan["pronunciationDictionary"]["versionId"], text))) for _,_,text in prompts}
-    print(f"Age {band}: 150 questions / 600 slots / {len(distinct_hashes)} unique takes / {total_chars} characters")
+    print(f"Age {band}: {len(items)} questions / {len(prompts)} slots / {len(distinct_hashes)} unique takes / {total_chars} characters")
     if not execute:
         print("DRY RUN: no ElevenLabs requests or paid generations.")
         return
@@ -169,11 +174,12 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--age-band", choices=BANDS, required=True)
     parser.add_argument("--execute", action="store_true", help="Spend ElevenLabs credits; manual action only")
+    parser.add_argument("--max-questions", type=int, default=150, help="1 for paid pilot; 150 full age band")
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
     plan, source, production = read_json(PLAN), read_json(SOURCE), read_json(PRODUCTION)
     validate(plan, source, production)
-    build(plan, args.age_band, args.output_dir, args.execute)
+    build(plan, args.age_band, args.output_dir, args.execute, args.max_questions)
 
 if __name__ == "__main__":
     main()
