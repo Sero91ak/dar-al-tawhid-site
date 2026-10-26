@@ -39,6 +39,7 @@ jobs:
           python3 kids/tools/rebuild_quiz_v4_450.py --age-band 9-10
           node --check kids/quiz-v4-approved-player.js
           node kids/tools/test-v4-approved-player.cjs
+          node kids/tools/test-v4-owner-router.cjs
 
   key-preflight:
     if: ${{ github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.label.name == 'kids-v4-key-preflight-20261026' && github.event.pull_request.head.ref == 'codex/kids-quiz-v4-complete-speech-rebuild-20261026' && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' }}
