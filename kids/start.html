@@ -6128,7 +6128,8 @@ function renderQuizQuestion(){
     '<div id="quizHelp" class="quiz-help">'+help+'</div>'+
     '<div id="quizAnswers" class="quiz-answers" role="group" aria-label="Antworten"></div>'+
     '<div id="quizFeedback" class="quiz-feedback" aria-live="polite"></div>'+
-    '<div id="quizExplanation" class="quiz-explanation"></div>'+ 
+    '<div id="quizExplanation" class="quiz-explanation"></div>'+
+    '<button id="quizExplanationListen" class="quiz-listen" type="button" hidden disabled>Erklärung anhören</button>'+ 
     '<div id="quizTermLearning" hidden></div>'+ 
     '<div id="quizSource" class="quiz-source"></div>'+
     '<button id="quizNext" class="quiz-next" type="button">'+(currentQuizIndex===currentQuiz.length-1?'Auswertung ansehen':'Weiter')+' ›</button>';
@@ -6213,6 +6214,14 @@ function chooseQuizAnswer(index,button){
     var canExplain=!!(q.explanation&&((newV4&&newV4.has(q,"explanation"))||
       (window.DARKidsOwnerVoice&&typeof window.DARKidsOwnerVoice.has==="function"&&
       window.DARKidsOwnerVoice.has(explanationAudio))));
+    var listenExplanation=document.getElementById("quizExplanationListen");
+    if(listenExplanation){
+      listenExplanation.hidden=!canExplain;
+      listenExplanation.disabled=!canExplain;
+      if(canExplain)listenExplanation.addEventListener("click",function(){
+        quizSpeak(explanationAudio,{source:"kids-quiz-explanation",quizId:q.id,quizPart:"explanation"});
+      });
+    }
     function questionStillOpen(){
       var modal=document.getElementById("quizModal");
       return !!(modal&&modal.classList.contains("open")&&
