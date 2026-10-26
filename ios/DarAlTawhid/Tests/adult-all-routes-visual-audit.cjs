@@ -75,6 +75,25 @@ async function snapshot(page) {
           accessible: !inScreen || over === el || el.contains(over)
         };
       });
+    // Fullscreen Qurʾān playback owns navigation while its overlay is open.
+    // Do not mistake the intentionally hidden global tab bar for a defect:
+    // instead verify the actual close/back and play buttons are reachable.
+    const player = document.querySelector("#darQuranPlayer");
+    const playerActive = document.body.classList.contains("is-quran-player-route")
+      || document.documentElement.classList.contains("is-quran-player-route");
+    const playerControls = playerActive ? [".dqp-back", ".dqp-play"].map(selector => {
+      const button = player?.querySelector(selector);
+      if (!button) return { selector, exists: false, reachable: false };
+      const r = button.getBoundingClientRect();
+      const centerX = r.left + r.width / 2, centerY = r.top + r.height / 2;
+      const inScreen = r.width >= 28 && r.height >= 28
+        && centerX >= 0 && centerY >= 0 && centerX < innerWidth && centerY < innerHeight;
+      const hit = inScreen ? document.elementFromPoint(centerX, centerY) : null;
+      const style = getComputedStyle(button);
+      return { selector, exists: true, reachable: !!inScreen &&
+        style.visibility !== "hidden" && style.display !== "none" &&
+        !!hit && (hit === button || button.contains(hit)) };
+    }) : [];
     const route = [...document.body.classList].filter(x => /^is-[a-z0-9-]+-(route|overview)$/.test(x));
     const appRect = rect(view);
     const scrollWidth = Math.max(root.scrollWidth, document.body.scrollWidth);
@@ -97,7 +116,8 @@ async function snapshot(page) {
       foldDual: root.getAttribute("data-fold-dual"),
       orientation: root.getAttribute("data-orientation"),
       contentLength: (view?.textContent || "").trim().length,
-      appRect, navRect: rect(nav), navButtons, links,
+      appRect, navRect: rect(nav), navButtons, links, playerActive, playerControls,
+      expectedMode: window.DarAdaptiveLayout?.resolveLayoutMode?.(root.clientWidth, root.clientHeight) || null,
       horizontalOverflow: Math.max(0, scrollWidth - width),
       blocked: Boolean(document.querySelector("[aria-modal=true]:not([hidden]), #darTestLock"))
     };
@@ -139,7 +159,11 @@ async function snapshot(page) {
           if (state.horizontalOverflow > 3) pageIssues.push("horizontal-page-overflow:" + state.horizontalOverflow);
           if (state.appRect && state.appRect.x < -5) pageIssues.push("negative-content-offset");
           if (!state.mode) pageIssues.push("no-adaptive-layout");
+          if (state.expectedMode && state.mode !== state.expectedMode)
+            pageIssues.push("stale-layout-mode:" + state.mode + "!=" + state.expectedMode);
           if (state.navButtons.some(b => !b.accessible)) pageIssues.push("covered-navigation");
+          if (state.playerActive && state.playerControls.some(control => !control.reachable))
+            pageIssues.push("blocked-player-back-or-play");
           const row = { hash, route: state.route, size: [profile.w, profile.h],
             layout: state.mode, foldDual: state.foldDual, issues: pageIssues };
           item.pages.push(row);
@@ -228,6 +252,8 @@ async function snapshot(page) {
             if (!after.appRect || after.appRect.w < 30) issues.push("lost-app-content");
             if (after.hash !== before.hash) issues.push("lost-active-route");
             if (!after.mode) issues.push("lost-layout-controller");
+            if (after.expectedMode && after.mode !== after.expectedMode)
+              issues.push("stale-layout-after-fold:" + after.mode + "!=" + after.expectedMode);
             item.transitions.push({ hash: activeHash, target, beforeMode: before.mode,
               afterMode: after.mode, issues });
             if (issues.length) item.failures.push({ type: "fold-rotate-transition", hash: activeHash, target, issues });
