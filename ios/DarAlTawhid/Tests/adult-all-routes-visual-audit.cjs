@@ -23,7 +23,9 @@ const ALL_PROFILES = [
   { id: "fold-interior-landscape", w: 1366, h: 1024 },
   { id: "ipad-portrait", w: 820, h: 1180 },
   { id: "ipad-landscape", w: 1180, h: 820 },
-  { id: "ipad-split-window", w: 375, h: 1000 }
+  { id: "ipad-split-window", w: 375, h: 1000 },
+  { id: "book-portrait", w: 669, h: 867, segments: true },
+  { id: "book-landscape", w: 951, h: 620, segments: true }
 ];
 const seeds = [
   "#home", "#recent", "#topics", "#post", "#quran", "#quran-surah",
@@ -96,6 +98,13 @@ async function snapshot(page) {
     }) : [];
     const route = [...document.body.classList].filter(x => /^is-[a-z0-9-]+-(route|overview)$/.test(x));
     const appRect = rect(view);
+    const bookShell = document.querySelector("#appView .dar-fold[data-fold-mode='dual']");
+    const shellRect = bookShell && bookShell.getBoundingClientRect().width>1 ? rect(bookShell) : null;
+    const leftRect = shellRect ? rect(bookShell.querySelector(".dar-fold__rail")) : null;
+    const rightRect = shellRect ? rect(bookShell.querySelector(".dar-fold__pane")) : null;
+    const seg = window.viewport && window.viewport.segments;
+    const seam = seg && seg.length===2 && seg[0].x<seg[1].x
+      ? {start:Math.round(seg[0].right),end:Math.round(seg[1].left)} : null;
     const scrollWidth = Math.max(root.scrollWidth, document.body.scrollWidth);
     const width = root.clientWidth || innerWidth;
     const anchorLinks = [...document.querySelectorAll('#appView a[href^="#"],#bottomNav a[href^="#"]')]
@@ -111,6 +120,8 @@ async function snapshot(page) {
     const links = [...new Set(anchorLinks.concat(navLinks))].slice(0, 150);
     return {
       path: location.pathname, hash: location.hash, route,
+      foldBook: root.getAttribute("data-fold-book"), hingeSource: root.getAttribute("data-dar-hinge-source"),
+      shellRect,leftRect,rightRect,seam,
       width, height: root.clientHeight,
       mode: root.getAttribute("data-layout"),
       foldDual: root.getAttribute("data-fold-dual"),
@@ -135,6 +146,34 @@ async function snapshot(page) {
         userAgent: "DarAlTawhid-iOS/1.0 WKWebView",
         locale: "de-DE", reducedMotion: "reduce"
       });
+      if (profile.segments) {
+        // WebKit's optional viewport-segment hardware signal, emulated
+        // before any visitor-app scripts load. Fold/close resizes are
+        // calculated dynamically; we do not hard-code a device name in app.
+        await context.addInitScript(() => {
+          const region = () => {
+            const w = document.documentElement.clientWidth || innerWidth;
+            const h = document.documentElement.clientHeight || innerHeight;
+            if (w < 620 || h < 450) return [];
+            const gap = 22, half = (w-gap)/2;
+            return [
+              {x:0,y:0,width:half,height:h,left:0,right:half,top:0,bottom:h},
+              {x:half+gap,y:0,width:half,height:h,left:half+gap,right:w,top:0,bottom:h}
+            ];
+          };
+          Object.defineProperty(window, "viewport", {
+            configurable:true, value:{get segments(){return region();}}
+          });
+          try {
+            Object.defineProperty(navigator, "devicePosture", {
+              configurable:true, value:{
+                get type(){return region().length===2?"folded":"continuous";},
+                addEventListener(){},removeEventListener(){}
+              }
+            });
+          } catch (_) {}
+        });
+      }
       const page = await context.newPage();
       const item = { ...profile, pages: [], failures: [], visitedRoutes: [] };
       report.profiles.push(item);
@@ -163,6 +202,15 @@ async function snapshot(page) {
           if (state.horizontalOverflow > 3) pageIssues.push("horizontal-page-overflow:" + state.horizontalOverflow);
           if (state.appRect && state.appRect.x < -5) pageIssues.push("negative-content-offset");
           if (!state.mode) pageIssues.push("no-adaptive-layout");
+          if (profile.segments && !state.blocked && !state.playerActive) {
+            if (state.foldDual !== "1") pageIssues.push("book-left-right-not-activated");
+            if (state.seam && state.leftRect && state.rightRect) {
+              if (state.leftRect.x + state.leftRect.w > state.seam.start + 4)
+                pageIssues.push("left-pane-crosses-fold");
+              if (state.rightRect.x < state.seam.end - 4)
+                pageIssues.push("right-pane-crosses-fold");
+            }
+          }
           if (state.expectedMode && state.mode !== state.expectedMode)
             pageIssues.push("stale-layout-mode:" + state.mode + "!=" + state.expectedMode);
           if (state.navButtons.some(b => !b.accessible)) pageIssues.push("covered-navigation");
