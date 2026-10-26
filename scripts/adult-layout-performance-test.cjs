@@ -81,3 +81,8 @@ assert.match(boot,/function releaseChrome\(\) \{[\s\S]*?clearRamp\(\);\s*stopBoo
 assert.match(boot,/function finish\(\) \{[\s\S]*?clearRamp\(\);\s*stopBootObserver\(\);/,"Normal finish must disconnect observer");
 assert.match(boot,/if \(finished \|\| !bootObserver\) return;/,"Late DOMContentLoaded must not reattach a boot observer");
 console.log("OK: responsive layout, fold mutation filtering, boot timer/observer lifecycle");
+
+// All adult visitor surfaces share this viewport contract. Run both guards
+// in the existing PR check so a Fold/iPad route regression fails CI.
+require("../ios/DarAlTawhid/Tests/native-ios-adaptive-layout-guard.cjs");
+require("../ios/DarAlTawhid/Tests/adult-all-routes-geometry-guard.cjs");
