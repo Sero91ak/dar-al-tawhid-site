@@ -175,7 +175,8 @@ html[data-dar-hinge-axis="horizontal"][data-dar-hinge-source="native"]
 /* Compact cover display and narrow iPad multiwindow use existing one-pane
    routing; never keep an invisible second panel or a phantom hinge. */
 @media (max-width: 899.98px), (max-height: 559.98px) {
-  html[data-dar-hinge-layout="paired"] #appView .dar-fold[data-fold-mode="dual"] {
+  html[data-dar-hinge-layout="paired"]:not([data-dar-hinge-source="native"])
+  #appView .dar-fold[data-fold-mode="dual"] {
     grid-template-columns: minmax(0, 1fr) !important;
     column-gap: 0 !important;
   }
