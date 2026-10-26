@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_450_V4_INDEPENDENT_MP3_QA_20261026",
+  "scope": "review-only-originals",
+  "checkedAt": "2026-10-26",
+  "sourceWorkflow": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40338802075",
+  "reportArtifact": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40338802075/artifacts/12657019879",
+  "generatorWorkflow": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40327375164",
+  "recoveryWorkflow": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40337997792",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "ageBands": {
+    "4-6": 150,
+    "7-8": 150,
+    "9-10": 150
+  },
+  "questions": 450,
+  "clipBindings": 1800,
+  "uniqueMp3": 1217,
+  "uniquePerAge": {
+    "4-6": 314,
+    "7-8": 450,
+    "9-10": 453
+  },
+  "mp3Bytes": 198993239,
+  "uniqueDurationSeconds": 12402.05,
+  "checks": {
+    "sourceQuestionIds": "passed",
+    "clipBindings": "passed",
+    "sha256AllOriginals": "passed",
+    "fullyDecodedFramesAllOriginals": "passed",
+    "durationComparison": "passed",
+    "noAutomaticPublicRelease": "passed"
+  },
+  "human": {
+    "arabicPronunciation": "pending",
+    "makharij": "pending",
+    "breathingNaturalness": "pending",
+    "childComprehension": "pending",
+    "listeningApproval": false
+  },
+  "releaseEnabled": false,
+  "liveKidsDeployment": false,
+  "cleanupEnabled": false,
+  "note": "This is independent technical QA based on immutable saved originals, not proof of human listening, lexical pronunciation, certified Islamic content or iOS simulator playback."
+}
