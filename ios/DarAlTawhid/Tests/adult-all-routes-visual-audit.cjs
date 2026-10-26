@@ -98,6 +98,9 @@ async function snapshot(page) {
       const item = { ...profile, pages: [], failures: [], visitedRoutes: [] };
       report.profiles.push(item);
       page.on("pageerror", e => item.failures.push({ type: "runtime", message: String(e.message).slice(0, 300) }));
+      await page.goto(BASE + "#home", { waitUntil: "domcontentloaded", timeout: 45000 });
+      await page.waitForFunction(() => !!document.querySelector("#appView"), { timeout: 15000 });
+      await page.waitForTimeout(1000);
       const queue = [...seeds];
       const seen = new Set();
       const routeNames = new Set();
@@ -106,8 +109,8 @@ async function snapshot(page) {
         if (!hash || seen.has(hash)) continue;
         seen.add(hash);
         try {
-          await page.goto(BASE + hash, { waitUntil: "domcontentloaded", timeout: 45000 });
-          await page.waitForTimeout(650);
+          await page.evaluate(nextHash => { location.hash = nextHash; }, hash);
+          await page.waitForTimeout(750);
           const state = await snapshot(page);
           state.route.forEach(x => routeNames.add(x));
           const pageIssues = [];
