@@ -73,12 +73,19 @@ def mp3_duration(path: Path) -> float:
     data = path.read_bytes()
     assert len(data) > 1700, "Too-short MP3"
     assert data.startswith(b"ID3") or (data[0] == 0xff and (data[1] & 0xe0) == 0xe0), "Not MP3"
-    result = subprocess.run(
-        ["ffprobe", "-v", "error", "-show_entries", "format=duration",
-         "-of", "default=noprint_wrappers=1:nokey=1", str(path)],
-        check=True, capture_output=True, text=True, timeout=25,
-    )
-    seconds = float(result.stdout.strip())
+    # Hosted runner images do not guarantee ffprobe. Use the pinned Mutagen
+    # package (real MP3 frame inspection) when ffprobe is absent.
+    import shutil
+    if shutil.which("ffprobe"):
+        result = subprocess.run(
+            ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+             "-of", "default=noprint_wrappers=1:nokey=1", str(path)],
+            check=True, capture_output=True, text=True, timeout=25,
+        )
+        seconds = float(result.stdout.strip())
+    else:
+        from mutagen.mp3 import MP3
+        seconds = float(MP3(str(path)).info.length)
     if not 0.75 <= seconds <= 150:
         raise ValueError(f"Unexpected duration {seconds}")
     return round(seconds, 3)
