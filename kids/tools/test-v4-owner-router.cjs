@@ -11,14 +11,14 @@ const approved={
  play(question,part,opts){plays.push(["new",question.id,part]);return true},
  stop(){plays.push(["stop"])}
 };
-const win={DARKidsQuizV4Approved:approved,kidsQuizPool:[q]};
+const win={DARKidsQuizV4Approved:approved}; // Test without any globally published question pool.
 const legacy=(text,opts)=>{plays.push(["old",text]);return true};
 const assign=new Function("window","play",m[0]+"\nreturn window.quizSpeak;");
 const route=assign(win,legacy);
-assert.equal(route("old",{quizId:q.id,quizPart:"question",source:"kids-quiz-question"}),true);
+assert.equal(route("old",{quizId:q.id,quizQuestion:q,quizPart:"question",source:"kids-quiz-question"}),true);
 assert.equal(plays.filter(z=>z[0]==="new").length,1);
 assert.equal(plays.filter(z=>z[0]==="old").length,0);
-assert.equal(route("fallback",{quizId:"wrong-id",quizPart:"question"}),true);
+assert.equal(route("fallback",{quizId:"wrong-id",quizQuestion:q,quizPart:"question"}),true);
 assert.equal(plays.filter(z=>z[0]==="old").length,1);
 assert.equal(route("normal dua narration",{source:"dua"}),true);
 assert.equal(plays.filter(z=>z[0]==="old").length,2);
