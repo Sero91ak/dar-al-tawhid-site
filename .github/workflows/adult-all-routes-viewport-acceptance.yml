@@ -1,0 +1,61 @@
+name: Adult all-route Fold and iPad viewport acceptance
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'assets/adaptive-layout.css'
+      - 'assets/adaptive-layout.js'
+      - 'assets/adult-responsive-viewport-v1381.css'
+      - 'assets/fold-split.css'
+      - 'ios/DarAlTawhid/Tests/adult-all-routes-*.cjs'
+      - '.github/workflows/adult-all-routes-viewport-acceptance.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-viewport-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - id: phones
+            profiles: fold-exterior-portrait,fold-exterior-landscape,iphone-large-portrait,iphone-large-landscape
+          - id: unfolded
+            profiles: fold-interior-portrait,fold-interior-landscape
+          - id: tablets
+            profiles: ipad-portrait,ipad-landscape,ipad-split-window
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install headless browser (no app credentials)
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Serve this PR's adult visitor files locally
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-adult-viewport.log 2>&1 &
+          sleep 2
+      - name: Audit every discovered route on each device window
+        env:
+          DAR_AUDIT_BASE_URL: http://127.0.0.1:8765/
+          DAR_AUDIT_PROFILES: ${{ matrix.profiles }}
+          DAR_AUDIT_MAX_LINKS: '75'
+          DAR_AUDIT_OUTPUT: dar-adult-viewport-evidence
+        run: node ios/DarAlTawhid/Tests/adult-all-routes-visual-audit.cjs
+      - name: Store screenshots and diagnostics, including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-adult-viewport-${{ matrix.id }}
+          path: dar-adult-viewport-evidence/
+          if-no-files-found: ignore
+          retention-days: 7
