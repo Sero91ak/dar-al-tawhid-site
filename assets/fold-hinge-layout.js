@@ -90,7 +90,7 @@
     if (known && known.viewportWidth && Math.abs(known.viewportWidth - dims.w) > 4) known = null;
     if (known && known.viewportHeight && Math.abs(known.viewportHeight - dims.h) > 4) known = null;
     var paired = (dual && dims.w >= 900 && dims.h >= 560) ||
-      (!!known && dual && dims.w >= 620 && dims.h >= 450);
+      (!!known && dims.w >= 620 && dims.h >= 450);
     if (!paired) {
       root.removeAttribute("data-dar-hinge-layout");
       root.removeAttribute("data-dar-hinge-source");
@@ -119,6 +119,15 @@
     // Native reports inactive when the device lies completely flat. Keep the
     // two equal columns, but do not reserve a fictitious physical division.
     lastNative = normalizedRegion(payload);
+    global.__DAR_NATIVE_FOLD_REGION = lastNative
+      ? Object.assign({active:true}, payload) : null;
+    // The capacity engine must activate BOTH panes at the same time that
+    // the native hinge bridge reports its physical division.
+    try {
+      if (global.DarAdaptiveLayout && typeof global.DarAdaptiveLayout.apply === "function") {
+        global.DarAdaptiveLayout.apply();
+      }
+    } catch (eAdaptive) {}
     schedule();
   }
   function start() {
