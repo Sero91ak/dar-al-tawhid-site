@@ -261,9 +261,10 @@
     if(approved&&options.quizId&&options.quizPart){
       var pool=Array.isArray(window.kidsQuizPool)?window.kidsQuizPool:
         window.DARKidsQuizPack450&&window.DARKidsQuizPack450.items;
-      var question=Array.isArray(pool)?pool.find(function(q){
+      var question=options.quizQuestion&&options.quizQuestion.id===options.quizId?options.quizQuestion:null;
+      if(!question&&Array.isArray(pool))question=pool.find(function(q){
         return q&&q.id===options.quizId;
-      }):null;
+      });
       if(question&&typeof approved.has==="function"&&approved.has(question,options.quizPart)){
         return approved.play(question,options.quizPart,{
           onended:options.onended,onerror:options.onerror
