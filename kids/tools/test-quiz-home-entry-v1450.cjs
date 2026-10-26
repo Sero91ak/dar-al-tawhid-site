@@ -9,7 +9,7 @@ const read=p=>fs.readFileSync(root+"/"+p,"utf8");
 const entry=read("kids/index.html");
 assert.equal(entry,read("kids/start.html"),"Kids start shell mismatch");
 assert.equal(entry,read("kids/shell.html"),"Kids shell mismatch");
-for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=20261026-premium1','/kids/quiz-library.css?v=20261026-premium1','/kids/sw.js?v=1456']){
+for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=20261026-premium1','/kids/quiz-library.css?v=20261026-premium1','/kids/sw.js?v=1457']){
   assert.ok(entry.includes(token),"Missing Kids shell token: "+token);
 }
 const premiumCss=read("kids/quiz-premium-v1.css");
@@ -23,10 +23,11 @@ assert.ok(premiumCss.includes("env(safe-area-inset-bottom"),"Native notch/hinge 
 assert.ok(premiumCss.includes("minmax(0,1fr)"),"Responsive grid should not overflow narrow screens");
 assert.ok(approvedPlayer.includes("humanListeningApproved!==true")&&approvedPlayer.includes("releaseEnabled!==true"),"Unheard V4 audio must fail closed");
 assert.ok(!read("kids/quiz-library.js").includes("var QUIZ_PACK_900="),"The 450 unpublished reserve is not visible");
+assert.ok(entry.includes("Quiz-Lernwelt")&&entry.includes("450 Fragen · neue Lernwelt"),"Visitor home must visibly expose new 450-question quiz entry");
 const sw=read("kids/sw.js");
 const version=JSON.parse(read("kids/version.json"));
-assert.ok(sw.includes('dar-al-tawhid-kids-v1456'));
-assert.equal(version.visualSystem.serviceWorkerCache,"v1456");
+assert.ok(sw.includes('dar-al-tawhid-kids-v1457'));
+assert.equal(version.visualSystem.serviceWorkerCache,"v1457");
 assert.ok(sw.includes('/kids/quiz-library.js?v=20261026-premium1'));
 assert.ok(sw.includes('url.pathname==="/kids/quiz-library.js"'));
 const originalQuestions=JSON.parse(read("kids/data/quiz-kids.json")).items;
@@ -144,7 +145,7 @@ const touchBackEvent={
 listeners.pointerup[0].cb(touchBackEvent);
 assert.equal(modal.open,false,"iOS pointerup Back must close the quiz dashboard");
 assert.equal(touchBackEvent.prevented,true);
-console.log("PASS: Kids 3 shells equal, SW v1456, 450 question bundle, click and iOS pointerup Back");
+console.log("PASS: Kids 3 shells equal, SW v1457, 450 question bundle, click and iOS pointerup Back");
 
 // Simulate the real production quiz loader with all network requests blocked.
 // The embedded pack alone must populate all 450 selectable child questions.
