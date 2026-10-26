@@ -312,11 +312,27 @@ jobs:
             echo "::error::KIDS QUIZ 450 missing or stale on the deployed Worker after retries (HTTP $CODE)"
             exit 1
           fi
-          curl -fsSL -H 'Cache-Control: no-cache' "$BASE/kids/quiz-library.js?v=1460" -o /tmp/kids-quiz-v1460.js
+          # The updated quiz controller has a NEW versioned asset URL.
+          # Cloudflare Static Assets can propagate asynchronously after the Worker publish.
+          # Verify the exact served bytes of both premium layers, with bounded retries.
+          QUIZ_UI_READY=0
+          for ATTEMPT in $(seq 1 24); do
+            curl -fsSL -H 'Cache-Control: no-cache' "$BASE/kids/quiz-library.js?v=1461" -o /tmp/kids-quiz-v1461.js || true
+            curl -fsSL -H 'Cache-Control: no-cache' "$BASE/kids/quiz-premium-v1.css?v=20261026-creator-premium1" -o /tmp/kids-quiz-premium-v1461.css || true
+            curl -fsSL -H 'Cache-Control: no-cache' "$BASE/kids/quiz-v4-approved-player.js?v=20261026-v1" -o /tmp/kids-quiz-v4-approved-v1461.js || true
+            if cmp -s kids/quiz-library.js /tmp/kids-quiz-v1461.js &&
+               cmp -s kids/quiz-premium-v1.css /tmp/kids-quiz-premium-v1461.css &&
+               cmp -s kids/quiz-v4-approved-player.js /tmp/kids-quiz-v4-approved-v1461.js; then
+              QUIZ_UI_READY=1
+              break
+            fi
+            echo "KIDS QUIZ premium V1461 waiting for exact Cloudflare asset bytes (attempt $ATTEMPT/24)"
+            if [ "$ATTEMPT" -lt 24 ]; then sleep 5; fi
+          done
+          test "$QUIZ_UI_READY" = "1" || { echo "::error::Deployed V1461 quiz controller, premium CSS or approved-only V4 player differs from staging"; exit 1; }
           curl -fsSL -H 'Cache-Control: no-cache' "$BASE/kids/quiz-test-premium-v1460.css?v=1460" -o /tmp/kids-quiz-v1460.css
-          cmp -s kids/quiz-library.js /tmp/kids-quiz-v1460.js || { echo "::error::Deployed quiz controller differs from staging"; exit 1; }
-          cmp -s kids/quiz-test-premium-v1460.css /tmp/kids-quiz-v1460.css || { echo "::error::Deployed quiz widescreen CSS differs from staging"; exit 1; }
-          echo "KIDS QUIZ V1460 runtime/CSS exact bytes: VERIFIED"
+          cmp -s kids/quiz-test-premium-v1460.css /tmp/kids-quiz-v1460.css || { echo "::error::Existing V1460 native test premium theme changed"; exit 1; }
+          echo "KIDS QUIZ V1461 controller, premium responsive CSS, approved-only V4 and V1460 native profile styles: exact bytes VERIFIED"
           node - <<'KIDSQUIZ'
           const q=require('/tmp/kids-quiz-450.json');
           if(q.items.length!==450||["4-6","7-8","9-10"].some(a=>q.items.filter(x=>x.ageBand===a).length!==150))
