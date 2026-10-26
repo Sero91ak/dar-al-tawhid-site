@@ -94,3 +94,42 @@ jobs:
           path: dar-adult-webkit-evidence/
           if-no-files-found: ignore
           retention-days: 7
+
+  post-viewport-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        viewport: ["390x844", "1024x1366"]
+        shard: ["0/4", "1/4", "2/4", "3/4"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install headless browser
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Serve pull-request visitor app
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-posts-audit.log 2>&1 &
+          sleep 2
+      - name: Open each indexed published post in a real reader
+        env:
+          DAR_AUDIT_BASE_URL: http://127.0.0.1:8765/
+          DAR_POST_AUDIT_VIEWPORT: ${{ matrix.viewport }}
+          DAR_POST_AUDIT_SHARD: ${{ matrix.shard }}
+          DAR_POST_AUDIT_OUTPUT: dar-adult-post-evidence
+        run: node ios/DarAlTawhid/Tests/adult-all-posts-viewport-audit.cjs
+      - name: Upload per-post review and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-all-posts-${{ matrix.viewport }}-${{ strategy.job-index }}
+          path: dar-adult-post-evidence/
+          if-no-files-found: ignore
+          retention-days: 7
