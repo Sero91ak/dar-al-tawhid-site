@@ -72,7 +72,7 @@ async function snapshot(page) {
         return {
           label: (el.getAttribute("aria-label") || el.textContent || "").trim().slice(0, 45),
           w: Math.round(r.width), h: Math.round(r.height),
-          accessible: !inScreen || over === el || el.contains(over)
+          accessible: inScreen && !!over && (over === el || el.contains(over))
         };
       });
     // Fullscreen Qurʾān playback owns navigation while its overlay is open.
@@ -210,8 +210,11 @@ async function snapshot(page) {
           const target = page.locator(entry.selector).first();
           if (!await target.count() || !await target.isVisible()) {
             item.deepRoutes.push({ entry, result: "no-visible-card" });
+            item.failures.push({ type: "deep-reader-coverage-gap", entry,
+              reason: "No visible card: detail navigation was NOT verified" });
             continue;
           }
+          const before = await snapshot(page);
           // Route rendering may replace the button node while its cards load.
           // Re-query the selector on each attempt; do not force-click through
           // overlays or turn a genuinely blocked control into a false pass.
@@ -231,6 +234,11 @@ async function snapshot(page) {
           await page.waitForTimeout(650);
           const detail = await snapshot(page);
           const issues = [];
+          if (detail.hash === before.hash &&
+              detail.route.join(",") === before.route.join(",") &&
+              detail.blocked === before.blocked &&
+              Math.abs(detail.contentLength - before.contentLength) < 30)
+            issues.push("detail-click-did-not-open-new-content");
           if (detail.horizontalOverflow > 3) issues.push("detail-page-overflow:" + detail.horizontalOverflow);
           if (!detail.appRect || detail.appRect.w < 30) issues.push("detail-page-not-rendered");
           item.deepRoutes.push({ entry, actualRoute: detail.route, hash: detail.hash, issues });
