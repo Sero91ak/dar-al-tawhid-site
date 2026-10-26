@@ -34739,9 +34739,8 @@ html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-apply-btn{
     try{
       var root=document.documentElement;
       if(!root)return;
-      if(root.getAttribute("data-layout")==="medium"||root.getAttribute("data-layout")==="expanded"){
-        root.setAttribute("data-layout","compact");
-      }
+      // Layout mode is exclusively owned by DarAdaptiveLayout.
+      // Theme repaint must not force unfolded/iPad views back to compact.
       clearStickyFills();
       /* Nur CSS-Variablen — Farben folgen data-theme / --outer-bg-flat. */
       root.style.setProperty("--theme-feed-top","var(--dar-edge-fill)","important");
