@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1410";
+const CACHE_NAME="dar-al-tawhid-kids-v1456";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -239,12 +239,12 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/assets/quiz-scenes/topic-akhlaq.svg?v=20261004-topic2",
   "/kids/assets/quiz-scenes/topic-patience.svg?v=20261004-topic3",
   "/kids/assets/quiz-scenes/topic-justice.svg?v=20261004-topic3",
-  "/kids/data/quiz-kids.json",
+  "/kids/data/quiz-kids-public-450.json",
   "/kids/data/quiz-audio.json",
   "/kids/data/dua-audio.json",
   "/kids/data/owner-voice-audio.json",
-  "/kids/quiz-library.css?v=1237",
-  "/kids/quiz-library.js?v=9",
+  "/kids/quiz-library.css?v=1454",
+  "/kids/quiz-library.js?v=1455",
   "/kids/quiz-v4-bridge.js?v=20261013-academy1",
   "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
   "/kids/assets/sahaba-mubashshirun/umar.jpg",
@@ -464,7 +464,7 @@ self.addEventListener("fetch",function(event){
     return;
   }
   /* QUIZ LEARNING CENTER: network-first so 900-question data, dashboard logic and layout never regress to a stale pack. */
-  if(url.pathname==="/kids/data/quiz-kids.json"||url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"||url.pathname==="/kids/quiz-v4-bridge.js"){
+  if(url.pathname==="/kids/data/quiz-kids-public-450.json"||url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"||url.pathname==="/kids/quiz-v4-bridge.js"){
     event.respondWith(networkFirst(request));
     return;
   }
@@ -588,7 +588,7 @@ const KIDS_OFFLINE_SEEDS=[
   "/kids/data/dua-word-audio.json",
   "/kids/data/quiz-audio.json",
   "/kids/data/owner-voice-audio.json",
-  "/kids/data/quiz-kids.json",
+  "/kids/data/quiz-kids-public-450.json",
   "/kids/quiz-v4-bridge.js?v=20261013-academy1",
   "/kids/data/deen-lessons.json",
   "/kids/data/term-learning-audio.json",
