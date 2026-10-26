@@ -31,7 +31,7 @@ const seeds = [
   "#propheten", "#scholars", "#scholar", "#bibliothek", "#books",
   "#catalog", "#library", "#quiz", "#more", "#settings",
   "#notifications", "#account", "#about", "#news", "#calendar",
-  "#zakat", "#ramadan", "#prayer", "#jummah", "#wasiyyah",
+  "#zakat", "#ramadan", "#prayer", "#jummah", "#ilm", "#wasiyyah",
   "#sources", "#saved"
 ];
 const allow = new Set((process.env.DAR_AUDIT_PROFILES || "")
@@ -153,6 +153,36 @@ async function snapshot(page) {
           }
         } catch (e) {
           item.failures.push({ hash, error: String(e.message).slice(0, 240) });
+        }
+      }
+      // Read-only navigation into actual detail templates; merely setting a
+      // top-level hash would miss the card-to-reader path and related handlers.
+      item.deepRoutes = [];
+      for (const entry of [
+        { home: "#recent", selector: '#appView [data-nav="post"]' },
+        { home: "#quran", selector: '#appView [data-nav="quran-surah"]' },
+        { home: "#scholars", selector: '#appView [data-nav="scholar"]' },
+        { home: "#bibliothek", selector: '#appView [data-library-open]' }
+      ]) {
+        try {
+          await page.evaluate(h => { location.hash = h; }, entry.home);
+          await page.waitForTimeout(650);
+          const target = page.locator(entry.selector).first();
+          if (!await target.count() || !await target.isVisible()) {
+            item.deepRoutes.push({ entry, result: "no-visible-card" });
+            continue;
+          }
+          await target.click({ timeout: 3500 });
+          await page.waitForTimeout(650);
+          const detail = await snapshot(page);
+          const issues = [];
+          if (detail.horizontalOverflow > 3) issues.push("detail-page-overflow:" + detail.horizontalOverflow);
+          if (!detail.appRect || detail.appRect.w < 30) issues.push("detail-page-not-rendered");
+          item.deepRoutes.push({ entry, actualRoute: detail.route, hash: detail.hash, issues });
+          if (issues.length) item.failures.push({ type: "deep-reader-route", entry, issues });
+        } catch (e) {
+          item.failures.push({ type: "deep-reader-route", entry,
+            error: String(e.message).slice(0, 240) });
         }
       }
       // Actual fold/unfold/rotate transitions on the SAME SPA route.
