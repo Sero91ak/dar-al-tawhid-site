@@ -6154,13 +6154,13 @@ function renderQuizQuestion(){
   document.getElementById("quizListen").addEventListener("click",function(){
     refreshQuizListenState();
     if(this.disabled)return;
-    quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question",quizId:q.id,quizPart:"question"});
+    quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question",quizId:q.id,quizQuestion:q,quizPart:"question"});
   });
   document.getElementById("quizNext").addEventListener("click",function(){window.DARKidsQuizV4Approved?.stop?.();window.DARKidsTermLearning?.stop?.();currentQuizIndex++;renderQuizQuestion()});
   setTimeout(function(){
     if(currentQuiz[currentQuizIndex]!==q)return;
     refreshQuizListenState();
-    quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question",quizId:q.id,quizPart:"question"});
+    quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question",quizId:q.id,quizQuestion:q,quizPart:"question"});
   },250);
 }
 function quizRewardBurst(){
@@ -6219,7 +6219,7 @@ function chooseQuizAnswer(index,button){
       listenExplanation.hidden=!canExplain;
       listenExplanation.disabled=!canExplain;
       if(canExplain)listenExplanation.addEventListener("click",function(){
-        quizSpeak(explanationAudio,{source:"kids-quiz-explanation",quizId:q.id,quizPart:"explanation"});
+        quizSpeak(explanationAudio,{source:"kids-quiz-explanation",quizId:q.id,quizQuestion:q,quizPart:"explanation"});
       });
     }
     function questionStillOpen(){
@@ -6236,12 +6236,12 @@ function chooseQuizAnswer(index,button){
       ).catch(function(){});
     }
     quizSpeak(quizV4Text(q,"correctAudioText",q.success),{
-      source:"kids-quiz-feedback",quizId:q.id,quizPart:"correct",
+      source:"kids-quiz-feedback",quizId:q.id,quizQuestion:q,quizPart:"correct",
       onended:function(){
         if(!questionStillOpen())return;
         if(canExplain){
           quizSpeak(explanationAudio,{
-            source:"kids-quiz-explanation",quizId:q.id,quizPart:"explanation",
+            source:"kids-quiz-explanation",quizId:q.id,quizQuestion:q,quizPart:"explanation",
             onended:playQuizTermExplanation
           });
         }else{playQuizTermExplanation()}
@@ -6253,7 +6253,7 @@ function chooseQuizAnswer(index,button){
     button.classList.add("wrong");
     document.getElementById("quizFeedback").className="quiz-feedback bad";
     document.getElementById("quizFeedback").textContent=quizAcademyRetryText(q);
-    quizSpeak(quizV4Text(q,"retryAudioText",q.retry),{source:"kids-quiz-retry",quizId:q.id,quizPart:"retry"});
+    quizSpeak(quizV4Text(q,"retryAudioText",q.retry),{source:"kids-quiz-retry",quizId:q.id,quizQuestion:q,quizPart:"retry"});
     // Leave encouragement visible while the child thinks; remove only the shake marker.
     setTimeout(function(){
       if(button&&button.isConnected)button.classList.remove("wrong");
