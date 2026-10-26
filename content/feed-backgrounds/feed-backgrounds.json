@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T22:08:28.386Z",
+  "updatedAt": "2026-10-26T18:41:18.853Z",
   "cacheVersion": 99,
   "settings": {
     "autoDownloadEnabled": true,
@@ -33,17 +33,30 @@
     ]
   },
   "syncState": {
-    "lastSyncAt": "2026-10-03T14:19:23.942Z",
+    "lastSyncAt": "2026-10-26T18:40:56.851Z",
     "lastSyncStatus": "error",
-    "lastSyncError": "API-Keys fehlen: PEXELS_API_KEY, UNSPLASH_ACCESS_KEY, PIXABAY_API_KEY",
-    "nextSyncAt": "2026-10-04T14:19:24.698Z",
-    "dailyDownloadDate": "2026-07-16",
-    "dailyDownloadCount": 1,
-    "lastRunDownloads": 1,
-    "lastRunRejected": 13,
-    "lastRunErrors": [],
-    "totalDownloads": 1,
-    "totalRejected": 10
+    "lastSyncError": "unsplash:4igCpD-Lnfg: API rate limit exceeded for user ID 73606501. If you reach out to GitHub Support for help, please include the request ID 25EA:CED67:310C08:9C6524:6ADF9EB9 and timestamp 2026-10-26 18:40:57 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service)",
+    "nextSyncAt": "2026-10-27T18:41:18.853Z",
+    "dailyDownloadDate": "2026-10-26",
+    "dailyDownloadCount": 0,
+    "lastRunDownloads": 0,
+    "lastRunRejected": 64,
+    "lastRunErrors": [
+      "unsplash:4igCpD-Lnfg: API rate limit exceeded for user ID 73606501. If you reach out to GitHub Support for help, please include the request ID 25EA:CED67:310C08:9C6524:6ADF9EB9 and timestamp 2026-10-26 18:40:57 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service)",
+      "unsplash:RX3EZEGOzp4: API rate limit exceeded for user ID 73606501. If you reach out to GitHub Support for help, please include the request ID 25EA:CED67:310F05:9C6EBD:6ADF9EB9 and timestamp 2026-10-26 18:40:57 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service)",
+      "unsplash:GXod5uiYSDQ: API rate limit exceeded for user ID 73606501. If you reach out to GitHub Support for help, please include the request ID 25EA:CED67:3111F6:9C78E8:6ADF9EBA and timestamp 2026-10-26 18:40:58 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service)",
+      "unsplash:Q-e7tMrgHUM: API rate limit exceeded for user ID 73606501. If you reach out to GitHub Support for help, please include the request ID 25EA:CED67:31157D:9C83D5:6ADF9EBA and timestamp 2026-10-26 18:40:58 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service)",
+      "unsplash:b2a3XftR0hU: API rate limit exceeded for user ID 73606501. If you reach out to GitHub Support for help, please include the request ID 25EA:CED67:311940:9C9000:6ADF9EBB and timestamp 2026-10-26 18:40:59 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service)",
+      "unsplash:Ll1yMmxn-J4: API rate limit exceeded for user ID 73606501. If you reach out to GitHub Support for help, please include the request ID 25EA:CED67:311C5A:9C9975:6ADF9EBB and timestamp 2026-10-26 18:40:59 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service)",
+      "unsplash:hiag6hfz8Jw: API rate limit exceeded for user ID 73606501. If you reach out to GitHub Support for help, please include the request ID 25EA:CED67:311FA8:9CA4D4:6ADF9EBB and timestamp 2026-10-26 18:40:59 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service)",
+      "unsplash:9bd6LStI8ug: API rate limit exceeded for user ID 73606501. If you reach out to GitHub Support for help, please include the request ID 25EA:CED67:3123EE:9CB360:6ADF9EBC and timestamp 2026-10-26 18:41:00 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service)",
+      "unsplash:bbhMPVdkFCA: API rate limit exceeded for user ID 73606501. If you reach out to GitHub Support for help, please include the request ID 25EA:CED67:3126DC:9CBD12:6ADF9EBC and timestamp 2026-10-26 18:41:00 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service)",
+      "unsplash:xAWKLMXma7k: API rate limit exceeded for user ID 73606501. If you reach out to GitHub Support for help, please include the request ID 25EA:CED67:312A08:9CC73D:6ADF9EBD and timestamp 2026-10-26 18:41:01 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service)",
+      "unsplash:9aZOqgTOtwg: API rate limit exceeded for user ID 73606501. If you reach out to GitHub Support for help, please include the request ID 25EA:CED67:312D01:9CD0EA:6ADF9EBD and timestamp 2026-10-26 18:41:01 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service)",
+      "unsplash:7KN_LDP3JfE: API rate limit exceeded for user ID 73606501. If you reach out to GitHub Support for help, please include the request ID 25EA:CED67:313023:9CDB59:6ADF9EBE and timestamp 2026-10-26 18:41:02 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service)"
+    ],
+    "totalDownloads": 0,
+    "totalRejected": 15
   },
   "items": [
     {
