@@ -161,6 +161,7 @@
       "reason": "Narrowly authorize all-adult responsive viewport verification in the existing layout performance test. Adult iOS visitor only; no Kids, native push, service worker, backend or religious content changes.",
       "paths": [
         "scripts/adult-layout-performance-test.cjs",
+        ".github/workflows/adult-all-routes-viewport-acceptance.yml",
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-09T23:59:59.000Z"
