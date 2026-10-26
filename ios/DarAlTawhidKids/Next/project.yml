@@ -47,6 +47,8 @@ targets:
     settings:
       base:
         CODE_SIGNING_ALLOWED: "NO"
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/TawhidKidsNext.app/TawhidKidsNext"
+        BUNDLE_LOADER: "$(TEST_HOST)"
 schemes:
   TawhidKidsNext:
     build:
