@@ -92,6 +92,9 @@ async function snapshot(page) {
       const context = await browser.newContext({
         viewport: { width: profile.w, height: profile.h },
         deviceScaleFactor: 2, hasTouch: true, isMobile: true,
+        // Match the actual Swift WKWebView customUserAgent; without it the
+        // public desktop router redirects the browser to desktop-preview.
+        userAgent: "DarAlTawhid-iOS/1.0 WKWebView",
         locale: "de-DE", reducedMotion: "reduce"
       });
       const page = await context.newPage();
