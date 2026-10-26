@@ -87,3 +87,4 @@ console.log("OK: responsive layout, fold mutation filtering, boot timer/observer
 require("../ios/DarAlTawhid/Tests/native-ios-adaptive-layout-guard.cjs");
 require("../ios/DarAlTawhid/Tests/adult-all-routes-geometry-guard.cjs");
 require("../ios/DarAlTawhid/Tests/fold-hinge-geometry-guard.cjs");
+require("../ios/DarAlTawhid/Tests/fold-book-hinge-geometry-guard.cjs");
