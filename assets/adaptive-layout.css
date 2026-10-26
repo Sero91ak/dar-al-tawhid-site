@@ -976,7 +976,10 @@ html[data-theme] body.has-bottom-nav #appView :is(
 html[data-theme] body.has-bottom-nav #appView :is(
   .home-v380-lib-grid, .topics-theme-grid, .dua-theme-grid,
   .more-group-grid, .post-grid, .frauen-library-grid,
-  .frauen-library-area-grid, .lib-grid
+  .frauen-library-area-grid, .lib-grid, .feature-grid,
+  .more-feature-grid, .more-quick-access__list, .qov-surah-list,
+  .quran-surah-grid, .latest-grid, .home-v380-search-grid,
+  .library-grid, .scholars-grid, .quiz-home-metrics, .home-discover-grid
 ) > * {
   min-inline-size: 0;
   max-inline-size: 100%;
@@ -1015,6 +1018,36 @@ html[data-theme] body.has-bottom-nav #appView :is(
 ) :is(code, a) {
   overflow-wrap: anywhere;
 }
+/* Common header geometry only. Preserve the branded icon, backdrop,
+   prayer strip and existing header row ownership on both panels. */
+html[data-theme] body.has-bottom-nav > .app :is(
+  .top-shell, .header, .header-row, .brand, .brand-main,
+  .brand-title, .brand-kicker-row
+) {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+html[data-theme] body.has-bottom-nav > .app :is(
+  .brand-title, .brand-kicker-row
+) {
+  overflow-wrap: break-word;
+}
+/* Specialist immersive readers have their own navigation and scroll state,
+   but must also obey the current window's inline size. */
+html[data-theme] body:is(
+  .is-feed-fullscreen, .is-ilm-chat-route, .is-quran-player-route,
+  .is-library-reader-route, .is-quran-reader-route
+) #appView,
+html[data-theme] body.is-feed-fullscreen #appView :is(
+  .sf-app, .sf-feed, .sf-top, .sf-filters, .sf-post,
+  .sf-post__media, .sf-post__scene, .sf-post__textpanel,
+  .pf-mount-root
+) {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
 /* Compact exterior screen, smaller iPhones and iPad Split View:
    a panel must not keep a desktop card minimum across a narrow window. */
 @media (max-width: 599.98px) {
@@ -1025,7 +1058,10 @@ html[data-theme] body.has-bottom-nav #appView :is(
     .home-v380-lib-grid:not(.home-v380-lib-grid--slider),
     .topics-theme-grid, .dua-theme-grid, .more-group-grid,
     .post-grid, .frauen-library-grid, .frauen-library-area-grid,
-    .lib-grid
+    .lib-grid, .feature-grid, .more-feature-grid,
+    .more-quick-access__list, .qov-surah-list, .quran-surah-grid,
+    .latest-grid, .home-v380-search-grid, .library-grid,
+    .scholars-grid, .quiz-home-metrics, .home-discover-grid
   ) {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1043,7 +1079,10 @@ html[data-theme] body.has-bottom-nav #appView :is(
     .home-v380-lib-grid:not(.home-v380-lib-grid--slider),
     .topics-theme-grid, .dua-theme-grid, .more-group-grid,
     .post-grid, .frauen-library-grid, .frauen-library-area-grid,
-    .lib-grid
+    .lib-grid, .feature-grid, .more-feature-grid,
+    .more-quick-access__list, .qov-surah-list, .quran-surah-grid,
+    .latest-grid, .home-v380-search-grid, .library-grid,
+    .scholars-grid, .quiz-home-metrics, .home-discover-grid
   ) {
     grid-template-columns: repeat(auto-fit,
       minmax(min(100%, var(--dar-route-card-min)), 1fr));
@@ -1056,7 +1095,10 @@ html[data-theme] body.has-bottom-nav #appView :is(
     .home-v380-lib-grid:not(.home-v380-lib-grid--slider),
     .topics-theme-grid, .dua-theme-grid, .more-group-grid,
     .post-grid, .frauen-library-grid, .frauen-library-area-grid,
-    .lib-grid
+    .lib-grid, .feature-grid, .more-feature-grid,
+    .more-quick-access__list, .qov-surah-list, .quran-surah-grid,
+    .latest-grid, .home-v380-search-grid, .library-grid,
+    .scholars-grid, .quiz-home-metrics, .home-discover-grid
   ) {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
   }
