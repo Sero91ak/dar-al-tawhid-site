@@ -25,6 +25,8 @@ assert.match(css,/data-fold-dual="1"/);
 assert.match(css,/max-width:\s*899\.98px/);
 assert.match(js,/dar:native-fold-region/);
 assert.match(js,/visualViewport/);
+assert.match(js,/global\.viewport\s*&&\s*global\.viewport\.segments/,
+  "Safari 27.1 screen segment geometry must use window.viewport.segments");
 assert.match(js,/getBoundingClientRect/);
 assert.match(js,/lastNative/);
 assert.match(old,/grid-template-columns:var\(--fold-rail-current/,"Legacy 34/66 owner must be overridden, not silently deleted");
