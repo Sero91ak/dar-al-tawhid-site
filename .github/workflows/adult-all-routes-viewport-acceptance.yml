@@ -53,6 +53,7 @@ jobs:
           DAR_AUDIT_PROFILES: ${{ matrix.profiles }}
           DAR_AUDIT_MAX_LINKS: '75'
           DAR_AUDIT_OUTPUT: dar-adult-viewport-evidence
+          DAR_AUDIT_CAPTURE_FAMILIES: '1'
         run: node ios/DarAlTawhid/Tests/adult-all-routes-visual-audit.cjs
       - name: Store screenshots and diagnostics, including failures
         if: always()
@@ -88,6 +89,7 @@ jobs:
           DAR_AUDIT_PROFILES: fold-exterior-portrait,fold-interior-portrait,ipad-landscape
           DAR_AUDIT_MAX_LINKS: '65'
           DAR_AUDIT_OUTPUT: dar-adult-webkit-evidence
+          DAR_AUDIT_CAPTURE_FAMILIES: '1'
         run: node ios/DarAlTawhid/Tests/adult-all-routes-visual-audit.cjs
       - name: Save WebKit failure screenshots and route evidence
         if: always()
