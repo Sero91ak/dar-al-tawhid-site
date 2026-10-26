@@ -28,7 +28,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1410",
+    "serviceWorkerCache": "v1456",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -255,16 +255,16 @@
     "storyAudioSignedPreviewDependency": false,
     "kidsQuizSystem": "independent-v1",
     "kidsQuizAdultDependency": false,
-    "kidsQuizQuestionCount": 900,
+    "kidsQuizQuestionCount": 450,
     "kidsQuizAgeBands": [
       "4-6",
       "7-8",
       "9-10"
     ],
     "kidsQuizDistribution": {
-      "4-6": 300,
-      "7-8": 300,
-      "9-10": 300
+      "4-6": 150,
+      "7-8": 150,
+      "9-10": 150
     },
     "kidsQuizAudioFirstBand": "4-6",
     "kidsQuizAgeAdaptiveUx": "v1",
@@ -278,7 +278,7 @@
       "version": "age-adaptive-realistic-v19",
       "independentQuizNamespace": true,
       "adultQuizDependency": false,
-      "questionCount": 900,
+      "questionCount": 450,
       "ageBands": [
         "4-6",
         "7-8",
@@ -340,9 +340,9 @@
         "851-900"
       ],
       "distribution": {
-        "4-6": 300,
-        "7-8": 300,
-        "9-10": 300
+        "4-6": 150,
+        "7-8": 150,
+        "9-10": 150
       },
       "manifestDrivenArtwork": true,
       "sourcePolicy": "Qurʾān + authentische Ṣaḥīḥ-Sunnah; Quellen pro Frage",
@@ -357,7 +357,7 @@
       },
       "latestBatchHadithCrossCheck": "dorar.net",
       "fullQuestionCatalog": true,
-      "fullQuestionCatalogMode": "visible-in-app",
+      "fullQuestionCatalogMode": "450-selected-visible-450-draft-outside-app",
       "fullQuestionCatalogSearch": true,
       "fullQuestionCatalogCategoryFilter": true,
       "fullQuestionCatalogDirectTest": true,
@@ -413,7 +413,7 @@
       "neverEmptyRound": true,
       "installedEntryPointsSynced": true,
       "legacyCanonicalRuntimeRemoved": true,
-      "targetPerAge": 300,
+      "targetPerAge": 150,
       "newQuestionsThisRelease": 250,
       "ikhlasCategoryEnabled": true,
       "contentAgeAudit": "strict-child-only-v1",
@@ -432,9 +432,9 @@
       "stickyNext": true,
       "audioScriptRevision": "quiz-joy-serhat-v4-20261013",
       "newAudioPolicy": "eleven-v4-only",
-      "audioProgress": "prefer-manifest-v4-gradual"
+      "audioProgress": "test-safeguard-voice-v4-human-review-blocked"
     },
-    "kidsQuizContentRevision": "001-900",
+    "kidsQuizContentRevision": "kids-test-public-450-20261026",
     "kidsQuizGenerationPaused": true,
     "kidsQuizGenerationCap": 900,
     "kidsQuizNeverEmpty": true,
@@ -1022,7 +1022,7 @@
     "homeKidsBalloon": "preserved-v1229",
     "homeBackgroundMotion": false,
     "kidsQuizOwnerVoiceGeneration": "manual-after-900-content-freeze",
-    "kidsQuizTargetPerAge": 300,
+    "kidsQuizTargetPerAge": 150,
     "kidsQuizNewQuestionsThisRelease": 250,
     "kidsQuizNewQuestionSourcePolicy": "only-previously-approved-quran-source-refs",
     "globalTouchGlowIOSFallback": true,
@@ -1266,7 +1266,8 @@
     "duaWordMeaningReviewCount": 120,
     "duaElasticCenter": "v1286",
     "duaSeamlessAudio": "v1290",
-    "duaAdaptiveCenter": "v1291"
+    "duaAdaptiveCenter": "v1291",
+    "kidsQuizDataDelivery": "embedded-450-standalone-v1455-with-fallback"
   },
   "updatedAt": "2026-10-08T21:07:54.808Z",
   "deployTrigger": "kids-startup-stability-v1278",
@@ -1294,5 +1295,6 @@
     "fullBleedDua": true,
     "childFriendlyExplanationButtons": true,
     "sourceTextOnly": true
-  }
+  },
+  "kidsQuizTestAudit": "20261026-450x3-stage-only-no-review-audio-published"
 }
