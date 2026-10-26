@@ -99,7 +99,7 @@ async function snapshot(page) {
       report.profiles.push(item);
       page.on("pageerror", e => item.failures.push({ type: "runtime", message: String(e.message).slice(0, 300) }));
       await page.goto(BASE + "#home", { waitUntil: "domcontentloaded", timeout: 45000 });
-      await page.waitForFunction(() => !!document.querySelector("#appView"), { timeout: 15000 });
+      await page.waitForFunction(() => !!document.querySelector("#appView"), null, { timeout: 15000 });
       await page.waitForTimeout(1000);
       const queue = [...seeds];
       const seen = new Set();
