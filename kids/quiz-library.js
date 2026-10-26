@@ -427,7 +427,7 @@
   }
   function voiceState(q){
     var owner=window.DARKidsOwnerVoice;
-    if(!owner||typeof owner.isReady!=="function"||!owner.isReady())return"loading";
+    if(!owner||typeof owner.isReady!=="function"||!owner.isReady())return voiceRefreshAttempts<12?"loading":"missing";
     if(typeof window.quizPrompt!=="function"||typeof owner.has!=="function")return"missing";
     return owner.has(window.quizPrompt(q))?"ready":"missing";
   }
