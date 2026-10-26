@@ -62,8 +62,28 @@
       return ch==="&"?"&amp;":ch==="<"?"&lt;":ch===">"?"&gt;":"&quot;";
     });
   }
+  // KIDS_TEST_V1460: age and appearance remain correct even if legacy inline JS fails.
+  function profile(){
+    try{
+      var id=localStorage.getItem("kids.activeProfile"),a=JSON.parse(localStorage.getItem("kids.profiles.v1")||"[]");
+      return (Array.isArray(a)?a.find(function(p){return p&&String(p.id)===String(id)}):null)||null;
+    }catch(_){return null}
+  }
+  function scope(){
+    if(typeof window.DARKidsQuizProfileScope==="function")return window.DARKidsQuizProfileScope();
+    try{var id=String(localStorage.getItem("kids.activeProfile")||"").trim();return id?"child."+encodeURIComponent(id):"guest"}catch(_){return"guest"}
+  }
   function bandId(){
-    return typeof window.currentKidsQuizAgeBand==="function"?window.currentKidsQuizAgeBand():"7-8";
+    if(typeof window.currentKidsQuizAgeBand==="function")return window.currentKidsQuizAgeBand();
+    var p=profile(),a=String(p&&p.age||localStorage.getItem("kids.age")||"6–8");
+    return /(?:4|5)/.test(a.slice(0,1))?"4-6":/9/.test(a.slice(0,1))?"9-10":"7-8";
+  }
+  function syncQuizTheme(){
+    var modal=byId("quizModal");if(!modal)return;
+    var p=profile(),app=document.querySelector(".app[data-gender]");
+    var gender=String(p&&p.gender||app&&app.getAttribute("data-gender")||document.documentElement.dataset.kidsBootGender||"boy");
+    modal.setAttribute("data-quiz-gender",gender==="girl"?"girl":"boy");
+    modal.setAttribute("data-quiz-band",bandId());
   }
   function ageLabel(){
     var band=bandId();
@@ -85,10 +105,54 @@
   }
   function progressFor(q){
     try{
-      return typeof window.quizProgress==="function"?window.quizProgress(q.id):{stage:"new",attempts:0,wrong:0,lapses:0,dueAt:0,lastSeenAt:0};
-    }catch(_){
-      return{stage:"new",attempts:0,wrong:0,lapses:0,dueAt:0,lastSeenAt:0};
+      if(typeof window.quizProgress==="function")return window.quizProgress(q.id);
+      var saved=JSON.parse(localStorage.getItem("kids.quiz.progress.v3."+scope()+"."+q.id)||"null");
+      if(saved&&typeof saved==="object")return saved;
+    }catch(_){}
+    return{stage:"new",attempts:0,wrong:0,mistakeTaps:0,lapses:0,dueAt:0,lastSeenAt:0};
+  }
+  function readHistory(){
+    try{
+      if(typeof window.DARKidsQuizReadHistory==="function")return window.DARKidsQuizReadHistory();
+      var a=JSON.parse(localStorage.getItem("kids.quiz.history.v1."+scope())||"[]");
+      return Array.isArray(a)?a:[];
+    }catch(_){return[]}
+  }
+  function saveFallbackProgress(q,correct){
+    if(typeof window.DARKidsQuizRecordAnswer==="function"){
+      window.DARKidsQuizRecordAnswer(q.id,correct);return;
     }
+    var e=progressFor(q),now=Date.now();
+    e.attempts=Number(e.attempts||0)+1;
+    e.lastSeenAt=now;e.stage=correct?"learning":"learning";
+    if(correct){e.reviewPasses=Number(e.reviewPasses||0)+1;if(e.reviewPasses>=3)e.stage="secure";e.dueAt=now+86400000}
+    else{e.wrong=Number(e.wrong||0)+1;e.mistakeTaps=Number(e.mistakeTaps||0)+1;e.dueAt=now+300000}
+    try{
+      localStorage.setItem("kids.quiz.progress.v3."+scope()+"."+q.id,JSON.stringify(e));
+      var hist=readHistory();hist.push({id:q.id,ageBand:q.ageBand,category:q.category,correct:!!correct,at:now});
+      localStorage.setItem("kids.quiz.history.v1."+scope(),JSON.stringify(hist.slice(-500)));
+      if(correct){
+        var k="kids.quiz.correct.v3."+scope();
+        localStorage.setItem(k,String(Number(localStorage.getItem(k)||0)+1));
+      }
+    }catch(_){}
+    try{window.dispatchEvent(new CustomEvent("dar-kids-quiz-progress"))}catch(_){}
+  }
+  function historyMarkup(){
+    var all=readHistory().filter(function(x){return x&&x.ageBand===bandId()}),now=new Date(),days=[];
+    for(var d=6;d>=0;d--){
+      var date=new Date(now.getFullYear(),now.getMonth(),now.getDate()-d);
+      var key=date.getFullYear()+"-"+String(date.getMonth()+1).padStart(2,"0")+"-"+String(date.getDate()).padStart(2,"0");
+      var events=all.filter(function(x){var z=new Date(Number(x.at));return z.getFullYear()+"-"+String(z.getMonth()+1).padStart(2,"0")+"-"+String(z.getDate()).padStart(2,"0")===key});
+      days.push({label:["So","Mo","Di","Mi","Do","Fr","Sa"][date.getDay()],count:events.length,correct:events.filter(function(x){return x.correct}).length});
+    }
+    var max=Math.max(1,...days.map(function(d){return d.count}));
+    return '<section class="quiz-history-card" aria-label="Dein Lernverlauf">'+
+      '<div class="quiz-topic-head"><div><span class="quiz-dash-eyebrow">Deine Lernreise</span><h3>Deine letzten 7 Tage</h3></div><span class="quiz-history-total">'+all.length+' Antworten gespeichert</span></div>'+
+      '<div class="quiz-history-bars" role="img" aria-label="Quizfragen pro Wochentag">'+
+        days.map(function(x){return '<div class="quiz-history-day"><span class="quiz-history-number">'+(x.count?x.count:"·")+'</span><div class="quiz-history-rail"><i style="height:'+Math.round(100*x.count/max)+'%"></i></div><small>'+x.label+'</small></div>'}).join("")+
+      '</div><p class="quiz-history-note">'+(all.length?"Jede Antwort zählt: Übe in deinem Tempo.":"Deine erste Quizrunde macht den Anfang!")+' Dein Fortschritt bleibt in deinem Kinderprofil auf diesem Gerät.</p>'+
+    '</section>';
   }
   function statsFor(items){
     var now=Date.now();
@@ -249,6 +313,7 @@
         var ix=Number(btn.getAttribute("data-quiz-answer-index"));
         var correct=!!(q.answers[ix]&&q.answers[ix].correct);
         if(correct)localCorrectCount++;
+        saveFallbackProgress(q,correct);
         body.querySelectorAll(".quiz-local-answer").forEach(function(el){
           el.disabled=true;
           var n=Number(el.getAttribute("data-quiz-answer-index"));
@@ -284,6 +349,7 @@
     updateModeButtons();
     var modal=byId("quizModal");
     if(modal){
+      syncQuizTheme();
       modal.classList.remove("quiz-library-mode","quiz-dashboard-mode");
       modal.classList.add("quiz-round-mode");
     }
@@ -358,6 +424,7 @@
         '<div><strong>'+stats.firstTry+'%</strong><span>Direkt richtig</span></div>'+
       '</section>'+
       resumeHtml+
+      historyMarkup()+
       '<section class="quiz-review-card '+(reviewCount>0?"needs-review":"is-clear")+'">'+
         '<div><span class="quiz-dash-eyebrow">Deine Wiederholung</span><strong>'+escapeHtml(recommendation)+'</strong>'+
         '<small>'+stats.due+' fällig · '+stats.mistakeQuestions+' mit Fehlerhistorie</small></div>'+
@@ -391,6 +458,7 @@
     mode="dashboard";directQuestion=false;category="all";updateModeButtons();
     var modal=byId("quizModal");
     if(modal){
+      syncQuizTheme();
       modal.classList.add("open","quiz-dashboard-mode");
       modal.classList.remove("quiz-library-mode","quiz-round-mode");
       modal.setAttribute("data-quiz-band",bandId());
@@ -413,7 +481,7 @@
     // even after an iOS standalone app resume or an old hidden-modal state.
     modal.setAttribute("aria-hidden","false");
     modal.setAttribute("aria-modal","true");
-    modal.setAttribute("data-quiz-band",bandId());
+    syncQuizTheme();
     ensureUi();
     showDashboard();
     if(!canonicalItems().length)ensureQuizData();
@@ -637,9 +705,10 @@
     if(panel)panel.scrollTop=0;
   }
   function showLibrary(){renderLibrary()}
+  window.kidsQuizShowLibrary=showLibrary;
   function openQuestion(q){
     mode="library";directQuestion=true;updateModeButtons();
-    try{localStorage.removeItem("kids.quiz.session.v1")}catch(_){}
+    // Preserve the selected child\u0027s unfinished learning round.
     var modal=byId("quizModal"),panel=byId("quizLibraryPanel"),back=byId("quizLibraryBack");
     if(modal){modal.classList.remove("quiz-library-mode","quiz-dashboard-mode");modal.classList.add("quiz-round-mode")}
     if(byId("quizLearningDashboard"))byId("quizLearningDashboard").classList.remove("show");
@@ -652,7 +721,7 @@
       renderLocalQuizQuestion();
     }
     var label=byId("quizAgeLabel");if(label)label.textContent="Frage #"+String(q.number).padStart(3,"0")+" · "+String(q.category||"Quiz");
-    try{localStorage.removeItem("kids.quiz.session.v1")}catch(_){}
+    // Preserve the selected child\u0027s unfinished learning round.
     setTimeout(function(){var next=byId("quizNext");if(next)next.textContent="Zur Übersicht"},0);
   }
 
@@ -696,6 +765,7 @@
       if(attempts<24)setTimeout(waitForQuizData,250);
     })();
   }
+  window.addEventListener("dar-kids-quiz-progress",function(){if(mode==="dashboard")renderDashboard()});
   window.addEventListener("dar-kids-owner-voice-ready",function(){
     voiceRefreshAttempts=0;
     if(mode==="library"&&!directQuestion)renderList();
