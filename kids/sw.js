@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1454";
+const CACHE_NAME="dar-al-tawhid-kids-v1455";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -254,7 +254,7 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/data/dua-audio.json",
   "/kids/data/owner-voice-audio.json",
   "/kids/quiz-library.css?v=1454",
-  "/kids/quiz-library.js?v=1454",
+  "/kids/quiz-library.js?v=1455",
   "/kids/quiz-v4-bridge.js?v=20261013-academy1",
   "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
   "/kids/assets/sahaba-mubashshirun/umar.jpg",
@@ -472,7 +472,7 @@ self.addEventListener("fetch",function(event){
   if(url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"){
     // Stable offline fallback for a stale cache-busted HTML entry (iOS PWA).
     var quizFallback=url.pathname==="/kids/quiz-library.js"
-      ?"/kids/quiz-library.js?v=1454":"/kids/quiz-library.css?v=1454";
+      ?"/kids/quiz-library.js?v=1455":"/kids/quiz-library.css?v=1454";
     event.respondWith(networkFirst(request,quizFallback));
     return;
   }
