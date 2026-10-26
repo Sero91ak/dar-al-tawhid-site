@@ -1,0 +1,143 @@
+/* DAR FOLD HINGE WORKSPACE v1 (adult visitor only).
+   The fold is a DIVISION, not a single giant continuous reading column.
+   Never use fixed left offsets, mirror transforms or viewport-wide text.
+   Apple UIView.ReservedRegion provides true geometry when bridged to the WebView.
+   Until then, two equal content columns plus a VISUAL clearance (not a claimed
+   hinge measurement) preserve the reading area on larger windows. */
+html[data-dar-hinge-layout="paired"] {
+  --dar-hinge-clearance: clamp(24px, 3vw, 40px);
+}
+html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"] {
+  --dar-hinge-clearance: var(--dar-native-division-clearance, 28px);
+}
+/* Keep both halves inside their actual parent, rather than the full screen.
+   This overrides legacy fixed 300px left rails and the 34/66 split. */
+@media (min-width: 900px) and (min-height: 560px) {
+  html[data-dar-hinge-layout="paired"][data-fold-dual="1"]
+  #appView .dar-fold[data-fold-mode="dual"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    column-gap: var(--dar-hinge-clearance) !important;
+    row-gap: 0 !important;
+    inline-size: 100% !important;
+    max-inline-size: 100% !important;
+    min-inline-size: 0 !important;
+    margin-inline: 0 !important;
+    padding-inline: 0 !important;
+    box-sizing: border-box !important;
+    align-items: stretch !important;
+    justify-items: stretch !important;
+  }
+  /* When iOS supplies its physical division rectangle, exact pixel
+     columns are computed relative to the measured fold shell. */
+  html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"]
+  #appView .dar-fold[data-fold-mode="dual"][data-dar-hinge-measured="1"] {
+    grid-template-columns:
+      minmax(0, var(--dar-hinge-left-pane))
+      minmax(0, var(--dar-hinge-right-pane)) !important;
+    column-gap: var(--dar-hinge-local-gap) !important;
+  }
+  html[data-dar-hinge-layout="paired"] #appView
+  .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane) {
+    min-inline-size: 0 !important;
+    inline-size: 100% !important;
+    max-inline-size: 100% !important;
+    margin-inline: 0 !important;
+    box-sizing: border-box !important;
+    grid-row: 1 !important;
+    overflow-x: clip !important;
+    contain: layout style;
+  }
+  html[data-dar-hinge-layout="paired"] #appView
+  .dar-fold[data-fold-mode="dual"] > .dar-fold__rail {
+    grid-column: 1 !important;
+    padding-inline: 12px clamp(8px, 1.3vw, 16px) !important;
+    border-inline-end: 0 !important;
+    background-image: none !important;
+  }
+  html[data-dar-hinge-layout="paired"] #appView
+  .dar-fold[data-fold-mode="dual"] > .dar-fold__pane {
+    grid-column: 2 !important;
+    padding-inline: clamp(8px, 1.3vw, 16px) 12px !important;
+  }
+  /* Existing copy is readable within the SECOND half, not centered on the
+     full display or forced into a narrow 1-letter-per-line container. */
+  html[data-dar-hinge-layout="paired"] #appView
+  .dar-fold__pane :is(
+    .article, .post-reader, .post-body, .dua-detail-box, .qrc-shell,
+    .quran-ayah-list, .lib-detail, .hadith-detail, .qsrc-detail
+  ) {
+    inline-size: 100% !important;
+    max-inline-size: 100% !important;
+    min-inline-size: 0 !important;
+    margin-inline: 0 !important;
+    box-sizing: border-box !important;
+    overflow-wrap: break-word;
+  }
+  /* Lists use two or four cards, never an odd narrow middle card straddling
+     the center. Preserve carousels and immersive player layouts. */
+  html[data-dar-hinge-layout="paired"] body.has-bottom-nav #appView
+  :is(.topics-theme-grid,.dua-theme-grid,.more-group-grid,.frauen-library-grid,
+      .home-v380-lib-grid:not(.home-v380-lib-grid--slider),
+      .lib-grid,.post-grid,.qov-surah-list,.quran-surah-grid,.scholars-grid) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    column-gap: var(--dar-hinge-clearance) !important;
+  }
+  /* Do not re-split an already allocated half. It must own its local width. */
+  html[data-dar-hinge-layout="paired"] body.has-bottom-nav #appView
+  .dar-fold[data-fold-mode="dual"] :is(
+    .topics-theme-grid,.dua-theme-grid,.more-group-grid,.frauen-library-grid,
+    .home-v380-lib-grid,.lib-grid,.post-grid,.qov-surah-list,
+    .quran-surah-grid,.scholars-grid
+  ) {
+    grid-template-columns: minmax(0, 1fr) !important;
+    column-gap: 0 !important;
+  }
+  /* The prophets family also has a native master-detail shell. */
+  html[data-dar-hinge-layout="paired"] body.is-propheten-route
+  #appView .prophets-layout--dual {
+    display: grid !important;
+    grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important;
+    gap: var(--dar-hinge-clearance) !important;
+    inline-size: 100% !important;
+    max-inline-size: 100% !important;
+    min-inline-size: 0 !important;
+  }
+  html[data-dar-hinge-layout="paired"] body.is-propheten-route #appView
+  .prophets-layout--dual > :is(.prophets-rail,.prophets-pane) {
+    min-inline-size: 0 !important;
+    inline-size: 100% !important;
+    max-inline-size: 100% !important;
+    padding-inline: 12px !important;
+    box-sizing: border-box !important;
+  }
+}
+/* Native horizontal folding region: upper reading/list plane and lower
+   detail plane. Activate ONLY when UIKit reports a horizontal division. */
+html[data-dar-hinge-axis="horizontal"][data-dar-hinge-source="native"]
+#appView .dar-fold[data-fold-mode="dual"] {
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) !important;
+  grid-template-rows: minmax(0,1fr) minmax(0,1fr) !important;
+  row-gap: var(--dar-hinge-clearance) !important;
+  column-gap: 0 !important;
+  max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 32px);
+}
+html[data-dar-hinge-axis="horizontal"][data-dar-hinge-source="native"]
+#appView .dar-fold[data-fold-mode="dual"] > .dar-fold__rail {
+  grid-row: 1 !important;
+  grid-column: 1 !important;
+}
+html[data-dar-hinge-axis="horizontal"][data-dar-hinge-source="native"]
+#appView .dar-fold[data-fold-mode="dual"] > .dar-fold__pane {
+  grid-row: 2 !important;
+  grid-column: 1 !important;
+}
+/* Compact cover display and narrow iPad multiwindow use existing one-pane
+   routing; never keep an invisible second panel or a phantom hinge. */
+@media (max-width: 899.98px), (max-height: 559.98px) {
+  html[data-dar-hinge-layout="paired"] #appView .dar-fold[data-fold-mode="dual"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+    column-gap: 0 !important;
+  }
+}
