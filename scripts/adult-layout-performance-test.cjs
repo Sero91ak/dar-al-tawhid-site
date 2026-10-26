@@ -86,3 +86,4 @@ console.log("OK: responsive layout, fold mutation filtering, boot timer/observer
 // in the existing PR check so a Fold/iPad route regression fails CI.
 require("../ios/DarAlTawhid/Tests/native-ios-adaptive-layout-guard.cjs");
 require("../ios/DarAlTawhid/Tests/adult-all-routes-geometry-guard.cjs");
+require("../ios/DarAlTawhid/Tests/fold-hinge-geometry-guard.cjs");
