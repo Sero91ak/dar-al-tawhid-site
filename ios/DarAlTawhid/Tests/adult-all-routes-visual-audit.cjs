@@ -196,8 +196,22 @@ async function snapshot(page) {
             item.deepRoutes.push({ entry, result: "no-visible-card" });
             continue;
           }
-          await target.scrollIntoViewIfNeeded({ timeout: 3500 });
-          await target.click({ timeout: 6500 });
+          // Route rendering may replace the button node while its cards load.
+          // Re-query the selector on each attempt; do not force-click through
+          // overlays or turn a genuinely blocked control into a false pass.
+          let clicked = false, lastClickError = null;
+          for (let attempt = 0; attempt < 3 && !clicked; attempt++) {
+            try {
+              await page.locator(entry.selector).first().click({ timeout: 3000 });
+              clicked = true;
+            } catch (clickError) {
+              lastClickError = clickError;
+              const message = String(clickError.message || clickError);
+              if (!/not attached|not stable|timeout/i.test(message)) throw clickError;
+              await page.waitForTimeout(350);
+            }
+          }
+          if (!clicked) throw lastClickError || new Error("detail navigation button did not respond");
           await page.waitForTimeout(650);
           const detail = await snapshot(page);
           const issues = [];
