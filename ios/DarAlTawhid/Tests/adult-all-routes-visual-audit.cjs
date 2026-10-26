@@ -208,10 +208,16 @@ async function snapshot(page) {
           await page.evaluate(h => { location.hash = h; }, entry.home);
           await page.waitForTimeout(650);
           const target = page.locator(entry.selector).first();
+          // Asynchronous catalog and post lists may load after the route shell.
+          // Give the real card a bounded chance to become visible before
+          // classifying missing coverage; never fake a click or force overlays.
+          await target.waitFor({ state: "visible", timeout: 4500 }).catch(() => {});
           if (!await target.count() || !await target.isVisible()) {
+            const filename = safeName(profile.id + "-" + entry.home + "-missing-card") + ".png";
+            await page.screenshot({ path: path.join(OUTPUT, filename), fullPage: false }).catch(() => {});
             item.deepRoutes.push({ entry, result: "no-visible-card" });
-            item.failures.push({ type: "deep-reader-coverage-gap", entry,
-              reason: "No visible card: detail navigation was NOT verified" });
+            item.failures.push({ type: "deep-reader-coverage-gap", entry, screenshot: filename,
+              reason: "No visible card after bounded load wait: detail navigation NOT verified" });
             continue;
           }
           const before = await snapshot(page);
