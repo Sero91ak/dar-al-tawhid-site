@@ -1,5 +1,5 @@
 {
-  "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
+  "buildId": "kids-shell-v1456-premium-450-quiz",
   "quranLearningEnabled": false,
   "quranLearningRuntimeRemoved": true,
   "alifBaRuntimeRemoved": true,
@@ -33,7 +33,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1455",
+    "serviceWorkerCache": "v1456",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1282,9 +1282,13 @@
     "qiblaShortcutCapsule": "v1448-matches-prayer-pill-on-every-profile-device",
     "qiblaSensorAlignmentGlow": "v1448-confirmed-heading-6deg-250ms-9deg-exit",
     "kidsQuizDataDelivery": "standalone-independent-library-450-with-main-bridge-and-fallback-v1455",
-    "kidsQuizNavigationRecovery": "v1455-capture-click-and-pointerup"
+    "kidsQuizNavigationRecovery": "v1455-capture-click-and-pointerup",
+    "kidsQuizPremiumDashboard": "v1456-20261026",
+    "kidsQuizProfileTheming": "girl-purple-rose-boy-teal-blue",
+    "kidsQuizViewportSupport": "iphone-ipad-duo-fold-landscape-wide-desktop",
+    "kidsQuizAudios": "new-eleven-v4-review-only-until-human-listening-approved"
   },
-  "updatedAt": "2026-10-08T21:07:54.808Z",
+  "updatedAt": "2026-10-26",
   "deployTrigger": "kids-startup-stability-v1278",
   "globalDetailDock": {
     "version": "v1253",
