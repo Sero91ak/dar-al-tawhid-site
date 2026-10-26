@@ -24,6 +24,15 @@ on:
       - kids/index.html
       - kids/start.html
       - kids/shell.html
+      # Kids quiz is a separately bundled runtime: releasing JS/CSS/questions
+      # must publish the canonical Worker, not only GitHub Pages.
+      - kids/quiz-library.js
+      - kids/quiz-library.css
+      - kids/quiz-premium-v1.css
+      - kids/quiz-v4-bridge.js
+      - kids/quiz-v4-approved-player.js
+      - kids/data/quiz-kids-public-450.json
+      - kids/data/quiz-v4-full-rebuild-public.json
       # DĪN: future source-checked lessons and master-text changes must auto-deploy via the sole production Worker.
       - kids/deen-lessons.js
       - kids/deen-curriculum-v1.css
