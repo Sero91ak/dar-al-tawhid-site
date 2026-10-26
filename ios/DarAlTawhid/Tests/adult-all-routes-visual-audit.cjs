@@ -134,6 +134,36 @@ async function snapshot(page) {
           item.failures.push({ hash, error: String(e.message).slice(0, 240) });
         }
       }
+      // Actual fold/unfold/rotate transitions on the SAME SPA route.
+      // A matrix of separate loads would miss stale mode, lost content, or
+      // navigation state that only appears during dynamic window resizing.
+      item.transitions = [];
+      for (const activeHash of ["#home", "#quran", "#hadith", "#dua", "#quiz", "#frauen"]) {
+        try {
+          await page.evaluate(h => { location.hash = h; }, activeHash);
+          await page.waitForTimeout(650);
+          const before = await snapshot(page);
+          for (const target of [
+            { w: 390, h: 844 }, { w: 1024, h: 1366 },
+            { w: 1366, h: 1024 }, { w: 390, h: 844 }
+          ]) {
+            await page.setViewportSize({ width: target.w, height: target.h });
+            await page.waitForTimeout(500);
+            const after = await snapshot(page);
+            const issues = [];
+            if (after.horizontalOverflow > 3) issues.push("overflow-after-resize:" + after.horizontalOverflow);
+            if (!after.appRect || after.appRect.w < 30) issues.push("lost-app-content");
+            if (after.hash !== before.hash) issues.push("lost-active-route");
+            if (!after.mode) issues.push("lost-layout-controller");
+            item.transitions.push({ hash: activeHash, target, beforeMode: before.mode,
+              afterMode: after.mode, issues });
+            if (issues.length) item.failures.push({ type: "fold-rotate-transition", hash: activeHash, target, issues });
+          }
+        } catch (e) {
+          item.failures.push({ type: "fold-rotate-transition", hash: activeHash,
+            error: String(e.message).slice(0, 240) });
+        }
+      }
       item.visitedRoutes = [...routeNames].sort();
       await context.close();
       console.log(profile.id + ": " + item.pages.length + " pages, " +
