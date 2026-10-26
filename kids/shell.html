@@ -5874,45 +5874,71 @@ function normalizeStudioQuizItems(data){
   });
   return out;
 }
-function fetchKidsQuiz(){
-  var base=fetch("/kids/data/quiz-kids.json?v=900",{cache:"no-store"})
-    .then(function(r){if(!r.ok)throw new Error("quiz-data");return r.json()});
+/* KIDS_QUIZ_RUNTIME_REPAIR_20261026: public API, resilient data loading. */
+var kidsQuizFetchPending=null;
+function fetchKidsQuiz(force){
+  if(kidsQuizFetchPending)return kidsQuizFetchPending;
+  if(kidsQuizLoaded&&kidsQuizPool.length&&!force)return Promise.resolve(kidsQuizPool);
+  window.kidsQuizLoadError="";
+  var base=fetch("/kids/data/quiz-kids.json?v=901",{cache:"no-store"})
+    .then(function(r){if(!r.ok)throw new Error("Quizdaten HTTP "+r.status);return r.json()});
   var studio=fetch("/content/kids/content-index.json?v=1107",{cache:"force-cache"})
     .then(function(r){return r.ok?r.json():{items:[]}})
     .catch(function(){return{items:[]}});
-  return Promise.all([base,studio])
-    .then(function(parts){
-      var data=parts[0],studioData=parts[1];
-      if(!data||data.namespace!=="dar-kids-quiz"||data.adultQuizDependency!==false)throw new Error("kids-quiz-namespace");
-      var artwork=data.artwork||{};
-      kidsQuizArtwork=artwork.ageBands||{};
-      kidsQuizTopicArtwork={
-        families:artwork.topicFamilies||{},
-        categoryMap:artwork.categoryMap||{},
-        sceneMap:artwork.sceneMap||{},
-        priorityCategoryMap:artwork.priorityCategoryMap||{},
-        topicKeywords:artwork.topicKeywords||{}
-      };
-      var items=Array.isArray(data.items)?data.items:[];
-      var baseItems=items.filter(function(q){
-        return q &&
-          q.verification==="approved" &&
-          q.status==="published" &&
-          q.reviewStatus==="approved" &&
-          /^kids-quiz-\d{3}$/.test(String(q.id||""));
-      });
-      kidsQuizPool=baseItems.concat(normalizeStudioQuizItems(studioData));
-      window.kidsQuizPool=kidsQuizPool;
-      kidsQuizLoaded=true;
-      try{window.dispatchEvent(new CustomEvent("dar-kids-quiz-loaded",{detail:{count:kidsQuizPool.length}}))}catch(e){}
-      return kidsQuizPool;
-    }).catch(function(){
-      kidsQuizPool=[];
-      window.kidsQuizPool=kidsQuizPool;
-      kidsQuizLoaded=false;
-      return [];
+  kidsQuizFetchPending=Promise.all([base,studio]).then(function(parts){
+    var data=parts[0],studioData=parts[1];
+    if(!data||data.namespace!=="dar-kids-quiz"||data.adultQuizDependency!==false)
+      throw new Error("Quizdaten-Format ungültig");
+    var items=Array.isArray(data.items)?data.items:[];
+    var baseItems=items.filter(function(q){
+      return q&&q.verification==="approved"&&q.status==="published"&&
+        q.reviewStatus==="approved"&&/^kids-quiz-[0-9]{3}$/.test(String(q.id||""));
     });
+    if(!baseItems.length)throw new Error("Keine freigegebenen Quizfragen gefunden");
+    var artwork=data.artwork||{};
+    kidsQuizArtwork=artwork.ageBands||{};
+    kidsQuizTopicArtwork={
+      families:artwork.topicFamilies||{},categoryMap:artwork.categoryMap||{},
+      sceneMap:artwork.sceneMap||{},priorityCategoryMap:artwork.priorityCategoryMap||{},
+      topicKeywords:artwork.topicKeywords||{}
+    };
+    kidsQuizPool=baseItems.concat(normalizeStudioQuizItems(studioData));
+    window.kidsQuizPool=kidsQuizPool;
+    kidsQuizLoaded=true;
+    window.kidsQuizLoadError="";
+    try{window.dispatchEvent(new CustomEvent("dar-kids-quiz-loaded",{detail:{count:kidsQuizPool.length}}))}catch(e){}
+    return kidsQuizPool;
+  }).catch(function(err){
+    // Preserve already downloaded questions when a refresh fails.
+    window.kidsQuizLoadError=String(err&&err.message||"Abruf fehlgeschlagen");
+    if(!kidsQuizPool.length){kidsQuizPool=[];window.kidsQuizPool=[];kidsQuizLoaded=false;}
+    try{console.warn("TAWḤĪD KIDS quiz load:",err)}catch(e){}
+    try{window.dispatchEvent(new CustomEvent("dar-kids-quiz-error",{detail:{reason:window.kidsQuizLoadError}}))}catch(e){}
+    return kidsQuizPool;
+  });
+  return kidsQuizFetchPending.then(function(result){
+    kidsQuizFetchPending=null;return result;
+  },function(err){kidsQuizFetchPending=null;throw err});
 }
+// All functions below live in this IIFE. The Quiz dashboard is a separate
+// script; writing window.currentQuiz would not change this real session.
+window.fetchKidsQuiz=fetchKidsQuiz;
+window.currentKidsQuizAgeBand=currentKidsQuizAgeBand;
+window.quizProgress=quizProgress;
+window.quizPrompt=quizPrompt;
+window.quizArtworkForBand=quizArtworkForBand;
+window.renderQuizQuestion=renderQuizQuestion;
+window.renderQuizFinish=renderQuizFinish;
+window.openKidsQuizQuestion=function(q){
+  if(!q||!q.id||!kidsQuizLoaded)return false;
+  setKidsQuizRoundContext("all","normal");
+  currentQuiz=[q];currentQuizIndex=0;quizCorrectCount=0;
+  quizLocked=false;quizQuestionHadError=false;
+  var modal=document.getElementById("quizModal");
+  if(modal)modal.classList.add("open");
+  renderQuizQuestion();
+  return true;
+};
 function quizArtworkForBand(question){
   var band=currentKidsQuizAgeBand();
   var base=kidsQuizArtwork[band]||{};
@@ -6014,7 +6040,7 @@ function renderQuizProgress(){
   }).join("");
 }
 function renderQuizQuestion(){
-  if(currentQuizIndex>=currentQuiz.length){renderQuizFinish();return}
+  if(currentQuizIndex>=currentQuiz.length){(window.renderQuizFinish||renderQuizFinish)();return}
   renderKidsQuizAgePicker();
   saveKidsQuizSession();
   var ageLabel=document.getElementById("quizAgeLabel");
@@ -6985,7 +7011,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1450",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1451",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -8027,7 +8053,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/story-hub.js?v=29"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-v4-bridge.js?v=20261013-academy1"></script>
-<script src="/kids/quiz-library.js?v=1450"></script>
+<script src="/kids/quiz-library.js?v=1451"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1256-parent-hero-full" data-kids-section-heroes-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148" data-kids-stories-home-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1138.css?v=1152" data-kids-stories-home-polish="1">

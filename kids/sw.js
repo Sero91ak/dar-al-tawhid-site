@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1450";
+const CACHE_NAME="dar-al-tawhid-kids-v1451";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -254,7 +254,7 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/data/dua-audio.json",
   "/kids/data/owner-voice-audio.json",
   "/kids/quiz-library.css?v=1450",
-  "/kids/quiz-library.js?v=1450",
+  "/kids/quiz-library.js?v=1451",
   "/kids/quiz-v4-bridge.js?v=20261013-academy1",
   "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
   "/kids/assets/sahaba-mubashshirun/umar.jpg",
@@ -407,6 +407,9 @@ function isKidsRequest(url){
 }
 function networkFirst(request,fallback){
   return fetch(request,{cache:"no-store"}).then(function(response){
+    // HTTP failures must not replace a valid offline quiz catalog.
+    if((!response||!response.ok)&&new URL(request.url).pathname==="/kids/data/quiz-kids.json")
+      throw new Error("Quizdaten-HTTP-Fehler");
     if(response&&response.ok){
       var copy=response.clone();
       caches.open(CACHE_NAME).then(function(cache){cache.put(request,copy)}).catch(function(){});
@@ -469,7 +472,7 @@ self.addEventListener("fetch",function(event){
   if(url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"){
     // Stable offline fallback for a stale cache-busted HTML entry (iOS PWA).
     var quizFallback=url.pathname==="/kids/quiz-library.js"
-      ?"/kids/quiz-library.js?v=1450":"/kids/quiz-library.css?v=1450";
+      ?"/kids/quiz-library.js?v=1451":"/kids/quiz-library.css?v=1450";
     event.respondWith(networkFirst(request,quizFallback));
     return;
   }
