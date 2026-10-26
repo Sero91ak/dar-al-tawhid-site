@@ -268,6 +268,7 @@ jobs:
           node kids/quran-lernen/test-quran-lernen.cjs
           node kids/quran-lernen/check-studio-v3.cjs
           node kids/tools/test-creator-worker-v2.cjs
+          node kids/tools/test-creator-quiz-450-only.cjs
           node --check kids/parent-notifications-test-v1.js
           node kids/tools/test-parent-notifications-test-v1.cjs
           node kids/tools/test-creator-splash-v1.cjs
@@ -291,6 +292,21 @@ jobs:
         run: |
           set -euo pipefail
           BASE="https://dar-al-tawhid-kids-creator.sero91ak.workers.dev"
+          # KIDS QUIZ 450 test surface: preserve exactly 150 per age, block
+          # editorial 900 and not-human-approved ElevenLabs V4 MP3 previews.
+          curl -fsSL "$BASE/kids/data/quiz-kids-public-450.json" -o /tmp/kids-quiz-450.json
+          node - <<'KIDSQUIZ'
+          const q=require('/tmp/kids-quiz-450.json');
+          if(q.items.length!==450||["4-6","7-8","9-10"].some(a=>q.items.filter(x=>x.ageBand===a).length!==150))
+            throw Error("KIDS staging must show 150 questions per age");
+          console.log("KIDS QUIZ 450 staged: 150/150/150");
+          KIDSQUIZ
+          for BLOCKED in /kids/data/quiz-kids.json /kids/data/quiz-kids-expansion-reserve-450.json /kids/review-only/quiz-v4-450-actual-mp3-import.json /kids/assets/kids-quiz-audio/v4-final13-review/original.mp3; do
+            CODE="$(curl -sS -o /dev/null -w '%{http_code}' "$BASE$BLOCKED" || true)"
+            if [ "$CODE" != "404" ]; then echo "::error::Protected KIDS draft/audio accessible: $BLOCKED HTTP $CODE"; exit 1; fi
+          done
+          echo "KIDS editorial bank and unapproved audio isolation: VERIFIED"
+
           # A newly created workers.dev hostname can take time to propagate.
           for PAGE in /kids/start.html /kids/akademie/index.html /kids/version.json /kids/test-console/ /kids/test-console/index.html /kids/test-console/catalogue-v1.json /kids/test-console/manifest.webmanifest /kids/test-console/studio-v1.js /kids/test-console/studio-v1.css /kids/test-console/sw.js /kids/parent-notifications-test-v1.js /kids/parent-notifications-test-v1.css /kids/test-console/return-to-studio.js /kids/quran-lernen/index.html /kids/quran-lernen/catalog.json /kids/quran-lernen/suren.json /kids/quran-lernen/app.js /kids/quran-lernen/styles.css /kids/quran-lernen/home-card.css /kids/quran-lernen/mastertext-drafts-v1.json; do
             URL="$BASE$PAGE"
