@@ -26,9 +26,13 @@ const ALL_PROFILES = [
   { id: "ipad-split-window", w: 375, h: 1000 }
 ];
 const seeds = [
-  "#home", "#topics", "#quran", "#hadith", "#dua", "#frauen", "#quiz",
-  "#more", "#settings", "#notifications", "#account", "#about",
-  "#news", "#calendar", "#zakat", "#ramadan", "#sources"
+  "#home", "#recent", "#topics", "#post", "#quran", "#quran-surah",
+  "#quran-topic", "#quran-player", "#hadith", "#dua", "#duas", "#frauen",
+  "#propheten", "#scholars", "#scholar", "#bibliothek", "#books",
+  "#catalog", "#library", "#quiz", "#more", "#settings",
+  "#notifications", "#account", "#about", "#news", "#calendar",
+  "#zakat", "#ramadan", "#prayer", "#jummah", "#wasiyyah",
+  "#sources", "#saved"
 ];
 const allow = new Set((process.env.DAR_AUDIT_PROFILES || "")
   .split(",").map(s => s.trim()).filter(Boolean));
@@ -68,10 +72,17 @@ async function snapshot(page) {
     const appRect = rect(view);
     const scrollWidth = Math.max(root.scrollWidth, document.body.scrollWidth);
     const width = root.clientWidth || innerWidth;
-    const links = [...document.querySelectorAll('#appView a[href^="#"],#bottomNav a[href^="#"]')]
+    const anchorLinks = [...document.querySelectorAll('#appView a[href^="#"],#bottomNav a[href^="#"]')]
       .filter(a => a.getBoundingClientRect().width > 0)
-      .map(a => a.getAttribute("href")).filter(h => h && h !== "#" && !h.startsWith("#!"))
-      .slice(0, 150);
+      .map(a => a.getAttribute("href")).filter(h => h && h !== "#" && !h.startsWith("#!"));
+    // Most visitor pages navigate through data-nav buttons, not href anchors.
+    // Include those routes in discovery without clicking account/write actions.
+    const navLinks = [...document.querySelectorAll(
+      '#appView [data-nav],#bottomNav [data-bottom-nav]'
+    )].filter(el => el.getBoundingClientRect().width > 0)
+      .map(el => "#" + (el.getAttribute("data-nav") || el.getAttribute("data-bottom-nav") || ""))
+      .filter(h => h.length > 1 && !h.includes("{"));
+    const links = [...new Set(anchorLinks.concat(navLinks))].slice(0, 150);
     return {
       path: location.pathname, hash: location.hash, route,
       width, height: root.clientHeight,
