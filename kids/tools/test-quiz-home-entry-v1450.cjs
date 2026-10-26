@@ -88,3 +88,32 @@ assert.equal(modal.open,true,"Quiz modal must open immediately before any data f
 assert.equal(ev.prevented,true,"Home tile must handle tap independently");
 assert.equal(ev.stopped,true,"Legacy duplicate handler must be suppressed");
 console.log("PASS: Kids 3 shells equal, SW v1453, 450 published Quiz questions and 450 draft reserve preserved, home tile opens modal on captured tap");
+// Simulate the real production quiz loader with all network requests blocked.
+// The embedded pack alone must populate all 450 selectable child questions.
+async function validateOfflineQuizLoader(){
+  const start=entry.indexOf("var kidsQuizFetchPending=null;");
+  const end=entry.indexOf("// All functions below live in this IIFE",start);
+  assert.ok(start>=0&&end>start,"Real quiz loading function must exist");
+  let networkCalls=0;
+  const win={dispatchEvent(){}};
+  const dom={getElementById(id){
+    return id==="kidsQuiz450Inline"?{textContent:entry.slice(jsonStart,jsonEnd)}:null;
+  }};
+  const vmContext={
+    window:win,document:dom,Promise,JSON,console,
+    CustomEvent:function(name,params){this.type=name;this.detail=params&&params.detail},
+    fetch(){networkCalls++;throw new Error("No network available in quiz player smoke test")}
+  };
+  vm.runInNewContext(
+    "var kidsQuizPool=[]; var kidsQuizLoaded=false; var kidsQuizArtwork={}; var kidsQuizTopicArtwork={};\n"+
+    entry.slice(start,end),vmContext,{filename:"inline-quiz-player.js"});
+  const loaded=await vmContext.fetchKidsQuiz(false);
+  assert.equal(networkCalls,0,"Quiz must not request an external data URL to show questions");
+  assert.equal(loaded.length,450,"Real Quiz player must load all 450 questions from shell");
+  assert.equal(win.kidsQuizPool.length,450,"Dashboard must receive the loaded pool");
+  for(const band of ["4-6","7-8","9-10"])
+    assert.equal(loaded.filter(q=>q.ageBand===band).length,150);
+  console.log("PASS: actual Kids Quiz loader shows 150/150/150 questions with network disabled");
+}
+validateOfflineQuizLoader().catch(err=>{console.error(err);process.exitCode=1});
+
