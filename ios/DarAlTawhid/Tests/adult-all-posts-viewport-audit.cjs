@@ -98,12 +98,51 @@ const report={generated:new Date().toISOString(),base,viewport:parts,
           fullPage:false}).catch(()=>{});
       }
     }
+    // Every published Qurʾān sūrah uses the same canonical reader. The same
+    // four-way sharding keeps all 114 sūrahs within the existing device jobs.
+    report.surahs={total:114,selected:0,passed:0,issues:[]};
+    for(let number=1;number<=114;number++){
+      if((number-1)%shardSpec[1]!==shardSpec[0])continue;
+      report.surahs.selected++;
+      const hash="#quran/"+number;
+      try{
+        await page.evaluate(h=>{location.hash=h},hash);
+        await page.waitForFunction(n=>{
+          const view=document.getElementById("appView");
+          const reader=view?.querySelector(".qrc-page,.qrc-shell,.quran-reader-shell,.quran-ayah-list");
+          return document.body.classList.contains("is-quran-reader-route")
+            && !!reader && reader.getBoundingClientRect().width>20
+            && (view?.textContent||"").trim().length>70
+            && decodeURIComponent(location.hash)==="#quran/"+n;
+        },number,{timeout:5000});
+        const state=await page.evaluate(()=>{
+          const root=document.documentElement,view=document.getElementById("appView");
+          return {layout:root.getAttribute("data-layout"),fold:root.getAttribute("data-fold-dual"),
+            overflow:Math.max(0,root.scrollWidth-root.clientWidth,
+              document.body.scrollWidth-root.clientWidth),
+            arabicPresent:/[\u0600-\u06FF]/.test(view.textContent)};
+        });
+        if(state.overflow>3)throw Error("sūrah reader horizontal overflow: "+state.overflow);
+        if(!state.layout)throw Error("missing reader layout");
+        if(!state.arabicPresent)throw Error("Arabic sūrah text missing");
+        report.surahs.passed++;
+      }catch(e){
+        const issue={number,hash,reason:String(e.message).slice(0,420)};
+        report.surahs.issues.push(issue);
+        report.issues.push({type:"quran-surah-viewport",...issue});
+        if(report.surahs.issues.length<=5){
+          await page.screenshot({path:path.join(out,"surah-"+number+".png"),fullPage:false}).catch(()=>{});
+        }
+      }
+    }
     await context.close();
   }finally{
     await browser.close();
     report.completed=new Date().toISOString();
     fs.writeFileSync(path.join(out,"report.json"),JSON.stringify(report,null,2)+"\n");
-    console.log("Published adult posts:",report.indexed,"passed:",report.passed,"issues:",report.issues.length);
+    console.log("Published adult posts:",report.indexed,"passed:",report.passed,
+      "Qurʾān sūrahs:",report.surahs?.passed+"/"+report.surahs?.selected,
+      "total issues:",report.issues.length);
   }
   if(report.issues.length)process.exitCode=1;
 })().catch(e=>{console.error(e.stack||String(e));process.exitCode=1});
