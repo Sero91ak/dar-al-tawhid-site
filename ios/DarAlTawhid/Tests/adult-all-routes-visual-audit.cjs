@@ -172,7 +172,8 @@ async function snapshot(page) {
             item.deepRoutes.push({ entry, result: "no-visible-card" });
             continue;
           }
-          await target.click({ timeout: 3500 });
+          await target.scrollIntoViewIfNeeded({ timeout: 3500 });
+          await target.click({ timeout: 6500 });
           await page.waitForTimeout(650);
           const detail = await snapshot(page);
           const issues = [];
@@ -181,8 +182,29 @@ async function snapshot(page) {
           item.deepRoutes.push({ entry, actualRoute: detail.route, hash: detail.hash, issues });
           if (issues.length) item.failures.push({ type: "deep-reader-route", entry, issues });
         } catch (e) {
+          const diagnose = await page.evaluate(selector => {
+            const el = document.querySelector(selector);
+            if (!el) return { reason: "no-target-node" };
+            const r = el.getBoundingClientRect();
+            const x = r.left + r.width / 2, y = r.top + r.height / 2;
+            const at = document.elementFromPoint(x, y);
+            const cs = getComputedStyle(el);
+            const describe = element => element && {
+              tag: element.tagName, id: element.id,
+              className: String(element.className || "").slice(0, 120),
+              parentClass: String(element.parentElement?.className || "").slice(0, 120)
+            };
+            return { hash: location.hash, element: describe(el), hit: describe(at),
+              hitOwned: at === el || el.contains(at), pointerEvents: cs.pointerEvents,
+              opacity: cs.opacity, display: cs.display, x, y,
+              viewport: [innerWidth, innerHeight], rect: {
+                x: r.x, y: r.y, width: r.width, height: r.height
+              }};
+          }, entry.selector).catch(error => ({ diagnosticError: String(error).slice(0, 200) }));
+          const filename = safeName(profile.id + "-" + entry.home + "-detail-click") + ".png";
+          await page.screenshot({ path: path.join(OUTPUT, filename), fullPage: false }).catch(() => {});
           item.failures.push({ type: "deep-reader-route", entry,
-            error: String(e.message).slice(0, 240) });
+            error: String(e.message).slice(0, 550), diagnose, screenshot: filename });
         }
       }
       // Actual fold/unfold/rotate transitions on the SAME SPA route.
