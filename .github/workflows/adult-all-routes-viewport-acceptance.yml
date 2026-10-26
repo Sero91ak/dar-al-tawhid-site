@@ -134,3 +134,17 @@ jobs:
           path: dar-adult-post-evidence/
           if-no-files-found: ignore
           retention-days: 7
+
+  native-layout-release-gate:
+    # This protects the final iOS sign-off, not interim web-based QA.
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Reject any native hard-coded compact mode on unfolded devices
+        run: node ios/DarAlTawhid/Tests/native-layout-ownership-release-guard.cjs
