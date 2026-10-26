@@ -50,7 +50,11 @@ function load(){
     .then(function(r){if(!r||!r.ok)throw new Error("v4-not-released");return r.json()})
     .then(function(data){
       if(!validate(data))throw new Error("v4-approval-or-integrity-gate");
-      manifest=data;state="ready";return true;
+      manifest=data;state="ready";
+      try{if(typeof root.dispatchEvent==="function"&&typeof root.CustomEvent==="function")
+        root.dispatchEvent(new root.CustomEvent("dar-kids-quiz-v4-approved-ready",{detail:{questions:450,segments:1800}}));
+      }catch(_){}
+      return true;
     }).catch(function(){state="unavailable";return false})
     .then(function(ok){loading=null;return ok});
   return loading;
