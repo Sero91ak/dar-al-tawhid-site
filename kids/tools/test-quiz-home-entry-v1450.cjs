@@ -23,16 +23,17 @@ assert.equal(originalQuestions.length,900,"900 canonical question IDs must stay 
 const publicData=JSON.parse(read("kids/data/quiz-kids-public-450.json"));
 assert.equal(publicData.counts.total,450);
 const questions=publicData.items;
-const embeddedStart=entry.indexOf('<script id="kidsQuiz450Inline" type="application/json"');
-assert.ok(embeddedStart>=0,"450 curated questions must be embedded directly in all three Kids shells");
-const jsonStart=entry.indexOf(">",embeddedStart)+1;
-const jsonEnd=entry.indexOf("</script>",jsonStart);
-assert.ok(jsonEnd>jsonStart,"Embedded Quiz data tag must be complete");
+const publicConstant="const KIDS_QUIZ_PUBLIC_450=";
+const embeddedStart=entry.indexOf(publicConstant);
+assert.ok(embeddedStart>=0,"450 curated questions must live in the existing inline app script");
+const jsonStart=embeddedStart+publicConstant.length;
+const jsonEnd=entry.indexOf(";\nconst KIDS_QURAN_LEARNING_REMOVED",jsonStart);
+assert.ok(jsonEnd>jsonStart,"Embedded Quiz JavaScript object must be complete");
 const embeddedData=JSON.parse(entry.slice(jsonStart,jsonEnd));
 assert.equal(embeddedData.namespace,"dar-kids-quiz");
 assert.equal(embeddedData.items.length,450);
 assert.deepEqual(embeddedData.items,questions,"Live embedded Quiz must match the curated 450 source verbatim");
-assert.ok(entry.includes('var embedded=document.getElementById("kidsQuiz450Inline");'),"Embedded source must be primary, network only fallback");
+assert.ok(entry.includes('var base=typeof KIDS_QUIZ_PUBLIC_450!=="undefined"'),"Embedded source must be primary, network only fallback");
 
 assert.equal(new Set(questions.map(q=>q.id)).size,450);
 const originalById=new Map(originalQuestions.map(q=>[q.id,q]));
@@ -96,11 +97,9 @@ async function validateOfflineQuizLoader(){
   assert.ok(start>=0&&end>start,"Real quiz loading function must exist");
   let networkCalls=0;
   const win={dispatchEvent(){}};
-  const dom={getElementById(id){
-    return id==="kidsQuiz450Inline"?{textContent:entry.slice(jsonStart,jsonEnd)}:null;
-  }};
+  const dom={getElementById(){return null}};
   const vmContext={
-    window:win,document:dom,Promise,JSON,console,
+    window:win,document:dom,Promise,JSON,console,KIDS_QUIZ_PUBLIC_450:embeddedData,
     CustomEvent:function(name,params){this.type=name;this.detail=params&&params.detail},
     fetch(){networkCalls++;throw new Error("No network available in quiz player smoke test")}
   };
