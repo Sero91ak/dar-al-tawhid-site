@@ -9,31 +9,34 @@ const read=p=>fs.readFileSync(root+"/"+p,"utf8");
 const entry=read("kids/index.html");
 assert.equal(entry,read("kids/start.html"),"Kids start shell mismatch");
 assert.equal(entry,read("kids/shell.html"),"Kids shell mismatch");
-for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=1454','/kids/quiz-library.css?v=1454','/kids/sw.js?v=1454']){
+for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=1455','/kids/quiz-library.css?v=1454','/kids/sw.js?v=1455']){
   assert.ok(entry.includes(token),"Missing Kids shell token: "+token);
 }
 const sw=read("kids/sw.js");
 const version=JSON.parse(read("kids/version.json"));
-assert.ok(sw.includes('dar-al-tawhid-kids-v1454'));
-assert.equal(version.visualSystem.serviceWorkerCache,"v1454");
-assert.ok(sw.includes('/kids/quiz-library.js?v=1454'));
+assert.ok(sw.includes('dar-al-tawhid-kids-v1455'));
+assert.equal(version.visualSystem.serviceWorkerCache,"v1455");
+assert.ok(sw.includes('/kids/quiz-library.js?v=1455'));
 assert.ok(sw.includes('url.pathname==="/kids/quiz-library.js"'));
 const originalQuestions=JSON.parse(read("kids/data/quiz-kids.json")).items;
 assert.equal(originalQuestions.length,900,"900 canonical question IDs must stay available for editorial work");
 const publicData=JSON.parse(read("kids/data/quiz-kids-public-450.json"));
 assert.equal(publicData.counts.total,450);
 const questions=publicData.items;
-const publicConstant="const KIDS_QUIZ_PUBLIC_450=";
-const embeddedStart=entry.indexOf(publicConstant);
-assert.ok(embeddedStart>=0,"450 curated questions must live in the existing inline app script");
-const jsonStart=embeddedStart+publicConstant.length;
-const jsonEnd=entry.indexOf(";\nconst KIDS_QURAN_LEARNING_REMOVED",jsonStart);
-assert.ok(jsonEnd>jsonStart,"Embedded Quiz JavaScript object must be complete");
-const embeddedData=JSON.parse(entry.slice(jsonStart,jsonEnd));
+const librarySource=read("kids/quiz-library.js");
+const bundleMarker="var QUIZ_PACK_450=";
+const bundleStart=librarySource.indexOf(bundleMarker);
+assert.ok(bundleStart>=0,"Quiz bundle must be independent of the home page inline script");
+const jsonStart=bundleStart+bundleMarker.length;
+const jsonEnd=librarySource.indexOf(";\n  var storedQuizPool",jsonStart);
+assert.ok(jsonEnd>jsonStart,"Bundled Quiz data must be complete");
+const embeddedData=JSON.parse(librarySource.slice(jsonStart,jsonEnd));
 assert.equal(embeddedData.namespace,"dar-kids-quiz");
 assert.equal(embeddedData.items.length,450);
-assert.deepEqual(embeddedData.items,questions,"Live embedded Quiz must match the curated 450 source verbatim");
-assert.ok(entry.includes('var base=typeof KIDS_QUIZ_PUBLIC_450!=="undefined"'),"Embedded source must be primary, network only fallback");
+assert.deepEqual(embeddedData.items,questions,"Visitor Quiz bundle must exactly match the curated 450 source");
+assert.ok(!entry.includes("const KIDS_QUIZ_PUBLIC_450="),"Never inject 315KB Quiz pack into monolithic visitor inline script");
+assert.ok(entry.includes("window.installKidsQuizPack=function(pack)"),"Native quiz rounds must accept external bundle");
+assert.ok(entry.includes("var base=window.DARKidsQuizPack450"),"Main shell must consume independent quiz bundle");
 
 assert.equal(new Set(questions.map(q=>q.id)).size,450);
 const originalById=new Map(originalQuestions.map(q=>[q.id,q]));
@@ -67,7 +70,7 @@ const document={
   addEventListener:(type,cb,capture)=>{(listeners[type]??=[]).push({cb,capture})}
 };
 const window={kidsQuizPool:[],addEventListener:()=>{}};
-vm.runInNewContext(read("kids/quiz-library.js"),{window,document,console,Promise,setTimeout,clearTimeout},{
+vm.runInNewContext(read("kids/quiz-library.js"),{window,document,console,Promise,setTimeout,clearTimeout,Date},{
   filename:"kids/quiz-library.js"
 });
 assert.ok(entry.includes("window.fetchKidsQuiz=fetchKidsQuiz"),"Quiz fetch bridge missing");
@@ -91,7 +94,7 @@ assert.equal(ev.prevented,true,"Home tile must handle tap independently");
 assert.equal(ev.stopped,true,"Legacy duplicate handler must be suppressed");
 assert.ok(entry.includes('id="quizGlobalBack"'),"Quiz must expose a visible persistent header back control");
 assert.ok(entry.includes('data-close="quiz" aria-label="Quiz schließen"'),"Quiz must expose an accessible Close control");
-assert.ok(sw.includes("/kids/quiz-library.js?v=1454"),"PWA must use fresh navigation code");
+assert.ok(sw.includes("/kids/quiz-library.js?v=1455"),"PWA must use fresh navigation code");
 const backEvent={
   target:{closest:selector=>selector==="#quizGlobalBack"?{}:null},
   prevented:false,stopped:false,
@@ -115,7 +118,23 @@ assert.equal(modal.open,false,"Quiz close must work independently of legacy inli
 assert.equal(closeEvent.prevented,true);
 assert.equal(closeEvent.stopped,true);
 
-console.log("PASS: Kids 3 shells equal, SW v1454, 450 published Quiz questions and 450 draft reserve preserved, home tile opens modal on captured tap");
+
+assert.equal(window.kidsQuizPool.length,450,"Bundled Quiz must be published independently of main script");
+assert.equal(window.kidsQuizPool.filter(q=>q.ageBand==="7-8").length,150);
+assert.equal(listeners.pointerup?.length,1,"iOS pointerup navigation must be independently registered");
+modal.classList.add("open");
+const touchBackEvent={
+  type:"pointerup",
+  target:{closest:selector=>selector==="#quizGlobalBack"?{}:null},
+  prevented:false,stopped:false,
+  preventDefault(){this.prevented=true},
+  stopImmediatePropagation(){this.stopped=true}
+};
+listeners.pointerup[0].cb(touchBackEvent);
+assert.equal(modal.open,false,"iOS pointerup Back must close the quiz dashboard");
+assert.equal(touchBackEvent.prevented,true);
+console.log("PASS: Kids 3 shells equal, SW v1455, 450 question bundle, click and iOS pointerup Back");
+
 // Simulate the real production quiz loader with all network requests blocked.
 // The embedded pack alone must populate all 450 selectable child questions.
 async function validateOfflineQuizLoader(){
@@ -123,10 +142,10 @@ async function validateOfflineQuizLoader(){
   const end=entry.indexOf("// All functions below live in this IIFE",start);
   assert.ok(start>=0&&end>start,"Real quiz loading function must exist");
   let networkCalls=0;
-  const win={dispatchEvent(){}};
+  const win={dispatchEvent(){},DARKidsQuizPack450:embeddedData};
   const dom={getElementById(){return null}};
   const vmContext={
-    window:win,document:dom,Promise,JSON,console,KIDS_QUIZ_PUBLIC_450:embeddedData,
+    window:win,document:dom,Promise,JSON,console,
     CustomEvent:function(name,params){this.type=name;this.detail=params&&params.detail},
     fetch(){networkCalls++;throw new Error("No network available in quiz player smoke test")}
   };
