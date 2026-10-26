@@ -57,11 +57,14 @@ assert.ok(premium.includes("safe-area-inset-bottom"),"Safe-area inset required")
 assert.ok(premium.includes('data-quiz-gender="girl"'),"Girls theme required");
 assert.ok(premium.includes("--kq-panel:#102b3d"),"Boys theme required");
 assert.ok(read("kids/quiz-library.js").includes("quiz-history-bars"),"Learning history required");
+assert.ok(read("kids/quiz-library.js").includes("quiz-premium-welcome"),"Premium quiz hero required");
+assert.ok(html.includes("/kids/quiz-v4-approved-player.js?v=20261026-v1"),"Approved-only V4 router missing");
+assert.ok(html.includes("/kids/quiz-premium-v1.css?v=20261026-creator-premium1"),"2026 premium responsive design missing");
 const version=JSON.parse(read("kids/version.json"));
 assert.equal(version.visualSystem.kidsQuizQuestionCount,450);
-assert.equal(version.visualSystem.serviceWorkerCache,"v1460");
+assert.equal(version.visualSystem.serviceWorkerCache,"v1461");
 const sw=read("kids/sw.js");
-assert.ok(sw.includes("dar-al-tawhid-kids-v1460"));
+assert.ok(sw.includes("dar-al-tawhid-kids-v1461"));
 assert.ok(sw.includes("/kids/data/quiz-kids-public-450.json"));
 assert.ok(!sw.includes('"/kids/data/quiz-kids.json"'));
 const worker=read("kids/creator-test/worker.js");
