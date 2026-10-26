@@ -45,8 +45,8 @@ html[data-dar-hinge-layout="paired"][data-dar-hinge-source="native"] {
     margin-inline: 0 !important;
     box-sizing: border-box !important;
     grid-row: 1 !important;
-    overflow-x: clip !important;
-    contain: layout style;
+    overflow-x: auto !important;
+    /* Do not conceal long references or isolate sticky positioning. */
   }
   html[data-dar-hinge-layout="paired"] #appView
   .dar-fold[data-fold-mode="dual"] > .dar-fold__rail {
