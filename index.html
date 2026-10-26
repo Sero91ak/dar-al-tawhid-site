@@ -10549,10 +10549,11 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/dar-quran-player.js?v=1111" defer></script>
 <script src="/assets/dar-quran-learn-studio.js?v=2" defer></script>
 <link rel="stylesheet" href="/assets/dar-quran-learn-studio.css?v=2">
-<script src="/assets/adaptive-layout.js?v=17" defer></script>
+<script src="/assets/adaptive-layout.js?v=20261026-segment-book-v19" defer></script>
 <script src="/assets/qibla-quick-view.js?v=2" defer></script>
 <script src="/assets/global-update-banner.js?v=3"></script>
-<script src="/assets/fold-split.js?v=4" defer></script>
+<script src="/assets/fold-split.js?v=20261026-hinge-v5" defer></script>
+<script src="/assets/fold-hinge-layout.js?v=20261026-dual-screen-v2" defer></script>
 <script src="/assets/scholars-index.js?v=589" defer></script>
 <link rel="preload" href="/assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12171,7 +12172,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/prophets/prophets.css?v=17">
 <link rel="stylesheet" href="/assets/dar-account-visibility.css?v=11">
 <link rel="stylesheet" href="/assets/scholars-index.css?v=588">
-<link rel="stylesheet" href="/assets/adaptive-layout.css?v=18">
+<link rel="stylesheet" href="/assets/adaptive-layout.css?v=20261026-allroutes-v1">
 <link rel="stylesheet" href="/assets/dar-landscape-kids-shell.css?v=6"><!-- DAR_LANDSCAPE_KIDS_SHELL -->
 
 <link rel="stylesheet" href="/assets/qibla-quick-view.css?v=2">
@@ -12188,7 +12189,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/dar-top-chrome-fix.css?v=2"><!-- DAR_TOP_CHROME_FIX -->
 <link rel="stylesheet" href="/assets/dar-ios-oversize-copy.css?v=7"><!-- DAR_IOS_OVERSIZE_COPY -->
 <link rel="stylesheet" href="/assets/full-edge-appearance-polish.css?v=666">
-<link rel="stylesheet" href="/assets/fold-split.css?v=2">
+<link rel="stylesheet" href="/assets/fold-split.css?v=20261026-hinge-v3">
 <style id="typography-compact-fix-v310">
 /* Finale Typografie-Korrektur — gewinnt gegen Home-Compact-Overrides */
 .section-head h3,
@@ -27947,7 +27948,7 @@ const HOME_LIBRARY_DISCOVER_MAX=6;
 function homeLibraryDiscoverDataUrl(){return (isTestAppPath()?"/test":"")+"/data/library-publications.json"}
 function libraryCatalogSignature(pubs){return (pubs||[]).map(p=>`${p.id}|${p.updatedAt||""}|${p.pdfUrl||""}|${p.status||""}|${p.coverUrl||""}`).sort().join(";")}
 function invalidateHomeLibraryDiscoverCache(){window.__homeLibraryDiscoverPubs=null;try{sessionStorage.removeItem(HOME_LIBRARY_DISCOVER_CACHE_KEY)}catch(e){}}
-async function fetchLibraryCatalogRemote(){const res=await fetch(homeLibraryDiscoverDataUrl()+"?v="+Date.now(),{cache:"no-store"});if(!res.ok)throw new Error("catalog load failed");const data=await res.json();return homeLibraryVisiblePubs(data.publications||[])}
+async function fetchLibraryCatalogRemote(){const res=await fetch(homeLibraryDiscoverDataUrl()+"?v="+Date.now(),{cache:"no-store"});if(!res.ok)throw new Error("catalog load failed");const data=await res.json();if(!data||!Array.isArray(data.publications))throw new Error("invalid library catalog payload");return homeLibraryVisiblePubs(data.publications)}
 async function refreshLibraryCatalog({force=false}={}){if(!navigator.onLine)return false;try{const pubs=await fetchLibraryCatalogRemote();const sig=libraryCatalogSignature(pubs);const prevSig=window.__libraryCatalogSig||"";const changed=force||!prevSig||prevSig!==sig;if(!changed)return false;window.__libraryCatalogSig=sig;window.__homeLibraryDiscoverPubs=pubs;try{sessionStorage.setItem(HOME_LIBRARY_DISCOVER_CACHE_KEY,JSON.stringify({ts:Date.now(),pubs}))}catch(e){}if(window.DARLibraryApp&&typeof window.DARLibraryApp.invalidateCatalog==="function"){window.DARLibraryApp.invalidateCatalog();if(typeof window.DARLibraryApp.ensureCatalog==="function"){await window.DARLibraryApp.ensureCatalog();window.__libraryCatalogReady=true}}if(currentRoute.view==="home")fillHomeDiscoverLibraryBlock(pubs);else if(["bibliothek","bibliothek-detail"].includes(currentRoute.view)&&typeof render==="function")render();return true}catch(e){return false}}
 function homeLibraryVisiblePubs(pubs){return (pubs||[]).filter(p=>!["archived","draft","error","preparing"].includes(String(p.status||""))&&p.pdfUrl)}
 function sortHomeLibraryPubs(pubs){return [...pubs].sort((a,b)=>String(b.updatedAt||b.publishedAt||"").localeCompare(String(a.updatedAt||a.publishedAt||"")))}
@@ -28001,7 +28002,8 @@ async function fetchHomeLibraryDiscoverCatalog({force=false}={}){
     const res=await fetch(homeLibraryDiscoverDataUrl()+"?v="+Date.now(),{cache:"no-store"});
     if(!res.ok)throw new Error("catalog load failed");
     const data=await res.json();
-    const pubs=homeLibraryVisiblePubs(data.publications||[]);
+    if(!data||!Array.isArray(data.publications))throw new Error("invalid library catalog payload");
+    const pubs=homeLibraryVisiblePubs(data.publications);
     window.__homeLibraryDiscoverPubs=pubs;
     try{sessionStorage.setItem(HOME_LIBRARY_DISCOVER_CACHE_KEY,JSON.stringify({ts:Date.now(),pubs}))}catch(e){}
     return pubs;
@@ -34738,9 +34740,8 @@ html[data-theme="eisgold"] .qrc-sheet--picker .qrc-picker-apply-btn{
     try{
       var root=document.documentElement;
       if(!root)return;
-      if(root.getAttribute("data-layout")==="medium"||root.getAttribute("data-layout")==="expanded"){
-        root.setAttribute("data-layout","compact");
-      }
+      // Layout mode is exclusively owned by DarAdaptiveLayout.
+      // Theme repaint must not force unfolded/iPad views back to compact.
       clearStickyFills();
       /* Nur CSS-Variablen — Farben folgen data-theme / --outer-bg-flat. */
       root.style.setProperty("--theme-feed-top","var(--dar-edge-fill)","important");
@@ -36929,6 +36930,7 @@ html[data-theme] body:not(.is-home-route) > .app > footer.footer {
 
 <!-- DAR_ADULT_RESPONSIVE_VIEWPORT_V1381 · final geometry authority -->
 <link rel="stylesheet" id="darAdultResponsiveViewportV1381" href="/assets/adult-responsive-viewport-v1381.css?v=20261017-responsive-v1382">
+<link rel="stylesheet" href="/assets/fold-hinge-layout.css?v=20261026-dual-screen-v2">
 <style id="darPostHeroBleedV1">
 html[data-theme] body.is-area-route.is-post-route:not(.is-feed-fullscreen):not(.is-quran-overview):not(.is-quran-reader-route):not(.is-ilm-chat-route) #appView.view{padding-left:0!important;padding-right:0!important;overflow-x:visible!important}
 html[data-theme] body.is-post-route #appView .post-reader{width:100%!important;max-width:none!important;margin:0!important;padding-left:0!important;padding-right:0!important;border-radius:0!important;overflow:visible!important;box-sizing:border-box!important}

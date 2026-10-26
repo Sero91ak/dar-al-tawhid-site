@@ -135,6 +135,41 @@
       }
       var rail = capacity && capacity.rail ? capacity.rail : RAIL_MIN;
       var reader = capacity && capacity.reader ? capacity.reader : Math.max(0, metrics.width - rail - 16);
+      var segments = null;
+      try {
+        segments = global.DarAdaptiveLayout && global.DarAdaptiveLayout.getFoldGeometry
+          ? global.DarAdaptiveLayout.getFoldGeometry(metrics.width,metrics.height) : null;
+      } catch (eSegments) {}
+
+      /* Each half is its own reading surface. Align their inner edges to the
+         actual segment positions instead of centering a 34/66 split across
+         the hardware crease. Never set a phantom segment on an iPad. */
+      root.setAttribute("data-fold-book", dual && segments ? "1" : "0");
+      root.setAttribute("data-fold-source", segments ? segments.source : "none");
+      var shells = document.querySelectorAll(".dar-fold[data-fold-mode='dual']");
+      for (var si=0;si<shells.length;si++) {
+        var shell = shells[si];
+        if (!segments || !dual) {
+          shell.style.removeProperty("--dar-fold-left-track");
+          shell.style.removeProperty("--dar-fold-right-track");
+          shell.style.removeProperty("--dar-fold-seam-gap");
+          continue;
+        }
+        var rect=shell.getBoundingClientRect();
+        var padding=12;
+        var leftTrack=Math.max(0,segments.left.x+segments.left.width-rect.left-padding);
+        var rightTrack=Math.max(0,rect.right-segments.right.x-padding);
+        var seamGap=Math.max(0,rect.width-leftTrack-rightTrack);
+        if (leftTrack>=225 && rightTrack>=225 && seamGap>=0) {
+          shell.style.setProperty("--dar-fold-left-track",Math.floor(leftTrack)+"px");
+          shell.style.setProperty("--dar-fold-right-track",Math.floor(rightTrack)+"px");
+          shell.style.setProperty("--dar-fold-seam-gap",Math.ceil(seamGap)+"px");
+        } else {
+          shell.style.removeProperty("--dar-fold-left-track");
+          shell.style.removeProperty("--dar-fold-right-track");
+          shell.style.removeProperty("--dar-fold-seam-gap");
+        }
+      }
 
       root.classList.toggle("is-fold-dual", dual);
       root.setAttribute("data-fold-dual", dual ? "1" : "0");
@@ -209,6 +244,7 @@
             if ((node.matches && node.matches(".dar-fold[data-fold-mode='dual']")) ||
                 (node.querySelector && node.querySelector(".dar-fold[data-fold-mode='dual']"))) {
               restoreFoldScrollAfterRender();
+              scheduleSync(); // New route shell needs its own hinge coordinates.
               return;
             }
           }
@@ -234,6 +270,12 @@
       },
       { passive: true }
     );
+    try {
+      if (global.navigator && global.navigator.devicePosture &&
+          typeof global.navigator.devicePosture.addEventListener === "function") {
+        global.navigator.devicePosture.addEventListener("change", scheduleSync, {passive:true});
+      }
+    } catch (ePosture) {}
     global.addEventListener("resize", scheduleSync, { passive: true });
     global.addEventListener(
       "orientationchange",

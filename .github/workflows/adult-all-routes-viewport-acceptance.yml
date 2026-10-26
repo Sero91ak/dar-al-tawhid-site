@@ -1,0 +1,229 @@
+name: Adult all-route Fold and iPad viewport acceptance
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'assets/adaptive-layout.css'
+      - 'assets/adaptive-layout.js'
+      - 'assets/adult-responsive-viewport-v1381.css'
+      - 'assets/fold-split.css'
+      - 'assets/fold-hinge-layout.css'
+      - 'assets/fold-hinge-layout.js'
+      - 'ios/DarAlTawhid/Tests/fold-hinge-browser-acceptance.cjs'
+      - 'ios/DarAlTawhid/Tests/fold-book-hinge-geometry-guard.cjs'
+      - 'assets/fold-split.js'
+      - 'ios/DarAlTawhid/Tests/adult-all-routes-*.cjs'
+      - 'ios/DarAlTawhid/Tests/adult-all-posts-viewport-audit.cjs'
+      - 'ios/DarAlTawhid/Tests/native-layout-ownership-release-guard.cjs'
+      - 'ios/DarAlTawhid/DarAlTawhid/WebAppView.swift'
+      - '.github/workflows/adult-all-routes-viewport-acceptance.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-viewport-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - id: phones
+            profiles: fold-exterior-portrait,fold-exterior-landscape,iphone-large-portrait,iphone-large-landscape
+          - id: unfolded
+            profiles: fold-interior-portrait,fold-interior-landscape
+          - id: tablets
+            profiles: ipad-portrait,ipad-landscape,ipad-split-window
+          - id: book
+            profiles: book-portrait,book-landscape
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install headless browser (no app credentials)
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Serve this PR's adult visitor files locally
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-adult-viewport.log 2>&1 &
+          sleep 2
+      - name: Audit every discovered route on each device window
+        env:
+          DAR_AUDIT_BASE_URL: http://127.0.0.1:8765/
+          DAR_AUDIT_PROFILES: ${{ matrix.profiles }}
+          DAR_AUDIT_MAX_LINKS: '75'
+          DAR_AUDIT_OUTPUT: dar-adult-viewport-evidence
+          DAR_AUDIT_CAPTURE_FAMILIES: '1'
+        run: node ios/DarAlTawhid/Tests/adult-all-routes-visual-audit.cjs
+      - name: Store screenshots and diagnostics, including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-adult-viewport-${{ matrix.id }}
+          path: dar-adult-viewport-evidence/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  browser-webkit-ios-parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install WebKit browser engine
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps webkit
+      - name: Serve exact pull-request visitor files
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-webkit-viewport.log 2>&1 &
+          sleep 2
+      - name: Check WKWebView-compatible rendering in three device modes
+        env:
+          DAR_AUDIT_BASE_URL: http://127.0.0.1:8765/
+          DAR_AUDIT_ENGINE: webkit
+          DAR_AUDIT_PROFILES: fold-exterior-portrait,fold-interior-portrait,ipad-landscape
+          DAR_AUDIT_MAX_LINKS: '65'
+          DAR_AUDIT_OUTPUT: dar-adult-webkit-evidence
+          DAR_AUDIT_CAPTURE_FAMILIES: '1'
+        run: node ios/DarAlTawhid/Tests/adult-all-routes-visual-audit.cjs
+      - name: Save WebKit failure screenshots and route evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-adult-webkit-evidence
+          path: dar-adult-webkit-evidence/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  post-viewport-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        viewport: ["390x844", "844x390", "1024x1366", "1366x1024", "820x1180", "375x1000"]
+        shard: ["0/4", "1/4", "2/4", "3/4"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install headless browser
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Serve pull-request visitor app
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-posts-audit.log 2>&1 &
+          sleep 2
+      - name: Open each indexed published post in a real reader
+        env:
+          DAR_AUDIT_BASE_URL: http://127.0.0.1:8765/
+          DAR_POST_AUDIT_VIEWPORT: ${{ matrix.viewport }}
+          DAR_POST_AUDIT_SHARD: ${{ matrix.shard }}
+          DAR_POST_AUDIT_OUTPUT: dar-adult-post-evidence
+        run: node ios/DarAlTawhid/Tests/adult-all-posts-viewport-audit.cjs
+      - name: Upload per-post review and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-all-posts-${{ matrix.viewport }}-${{ strategy.job-index }}
+          path: dar-adult-post-evidence/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  webkit-post-viewport-parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        viewport: ["390x844", "1024x1366"]
+        shard: ["0/4", "1/4", "2/4", "3/4"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install iOS-compatible WebKit engine
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps webkit
+      - name: Serve this PR's adult visitor files
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-webkit-posts.log 2>&1 &
+          sleep 2
+      - name: Check all published posts and Qur'an readers in WebKit
+        env:
+          DAR_AUDIT_BASE_URL: http://127.0.0.1:8765/
+          DAR_POST_AUDIT_ENGINE: webkit
+          DAR_POST_AUDIT_VIEWPORT: ${{ matrix.viewport }}
+          DAR_POST_AUDIT_SHARD: ${{ matrix.shard }}
+          DAR_POST_AUDIT_OUTPUT: dar-adult-webkit-post-evidence
+        run: node ios/DarAlTawhid/Tests/adult-all-posts-viewport-audit.cjs
+      - name: Upload WebKit post and surah diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-webkit-posts-${{ matrix.viewport }}-${{ strategy.job-index }}
+          path: dar-adult-webkit-post-evidence/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  native-layout-release-gate:
+    # This protects the final iOS sign-off, not interim web-based QA.
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Reject any native hard-coded compact mode on unfolded devices
+        run: node ios/DarAlTawhid/Tests/native-layout-ownership-release-guard.cjs
+
+  hinge-geometry-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [chromium, webkit]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install browser
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps ${{ matrix.engine }}
+      - name: Serve actual visitor app in isolation
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-fold-hinge.log 2>&1 &
+          sleep 2
+      - name: Verify equal halves, compact fold, native division exclusion
+        env:
+          DAR_AUDIT_BASE_URL: http://127.0.0.1:8765/
+          DAR_HINGE_ENGINE: ${{ matrix.engine }}
+        run: node ios/DarAlTawhid/Tests/fold-hinge-browser-acceptance.cjs

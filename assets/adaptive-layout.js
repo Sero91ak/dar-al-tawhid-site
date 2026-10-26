@@ -85,6 +85,64 @@
     return true;
   }
 
+  /* Two physical screen segments: only use the Viewport Segments API if
+     the engine exposes real, side-by-side DOMRects. Safari 27.1 currently
+     keeps this behind a developer feature flag; never invent a hinge for
+     an ordinary wide iPad window. */
+  function getFoldGeometry(width, height) {
+    var w = Math.max(0, Number(width) || 0);
+    var h = Math.max(0, Number(height) || 0);
+    if (w < 570 || h < 350) return null;
+    /* Native UIKit ReservedRegion wins over browser previews when available.
+       Validate coordinates against the *current* WebView window to reject
+       stale fold measurements after rotation or multitasking. */
+    try {
+      var native = global.__DAR_NATIVE_FOLD_REGION;
+      var frame = native && (native.frame || native);
+      if (native && native.active !== false && native.axis === "vertical" && frame &&
+          (!native.viewportWidth || Math.abs(native.viewportWidth-w)<5) &&
+          (!native.viewportHeight || Math.abs(native.viewportHeight-h)<5)) {
+        var x=Number(frame.x), gapPx=Number(frame.width);
+        var rightStart=x+gapPx;
+        if (Number.isFinite(x) && Number.isFinite(gapPx) && gapPx>=0 &&
+            x>=245 && w-rightStart>=245 && rightStart<=w) {
+          return {source:"native",left:{x:0,width:x},
+            right:{x:rightStart,width:w-rightStart},hinge:gapPx};
+        }
+      }
+    } catch (eNative) {}
+    try {
+      var segments = global.viewport && global.viewport.segments;
+      if (segments && segments.length === 2) {
+        var ordered = [segments[0], segments[1]].sort(function (a,b) {return a.x-b.x;});
+        var left=ordered[0],right=ordered[1];
+        var gap=right.x-(left.x+left.width);
+        if (left.width >= 245 && right.width >= 245 && gap >= -1 &&
+            Math.abs(left.y-right.y) <= 3 &&
+            Math.abs(left.height-right.height) <= 8 &&
+            right.x+right.width <= w+8 && left.x >= -8) {
+          return {
+            source: "segments", left: {x:left.x, width:left.width},
+            right: {x:right.x, width:right.width},
+            hinge: Math.max(0,gap)
+          };
+        }
+      }
+    } catch (e) {}
+    /* A folded book posture may be reported before segments are available.
+       This is an explicitly approximate seam, not a hardware measurement. */
+    try {
+      if (global.navigator && global.navigator.devicePosture &&
+          global.navigator.devicePosture.type === "folded" &&
+          w >= 620 && h >= 450) {
+        var seam=24, half=(w-seam)/2;
+        return {source:"posture",left:{x:0,width:half},
+          right:{x:half+seam,width:half},hinge:seam};
+      }
+    } catch (e2) {}
+    return null;
+  }
+
   function computeLayoutCapacity(width, height) {
     var w = Math.max(0, Number(width) || 0);
     var h = Math.max(0, Number(height) || 0);
@@ -97,7 +155,8 @@
     /* Phone landscape stays a single app surface. A real master/detail split
        needs tablet/Fold-like short-edge height, not only a wide aspect ratio. */
     var phoneLandscape = w > h && h < EXPANDED_MIN_HEIGHT;
-    var dual = !phoneLandscape && w >= EXPANDED_MIN && h >= EXPANDED_MIN_HEIGHT && reader >= readerMin;
+    var fold = getFoldGeometry(w, h);
+    var dual = !!fold || (!phoneLandscape && w >= EXPANDED_MIN && h >= EXPANDED_MIN_HEIGHT && reader >= readerMin);
     return {
       width: w,
       height: h,
@@ -108,6 +167,7 @@
       gap: MASTER_GAP,
       reader: reader,
       readerMin: readerMin,
+      foldGeometry: fold,
       dual: dual
     };
   }
@@ -429,6 +489,14 @@
       });
     }
 
+    try {
+      if (global.navigator && global.navigator.devicePosture &&
+          typeof global.navigator.devicePosture.addEventListener === "function") {
+        global.navigator.devicePosture.addEventListener("change", function () {
+          scheduleApply(true);
+        }, {passive:true});
+      }
+    } catch (ePosture) {}
     global.addEventListener("resize", onResize, { passive: true });
     global.addEventListener("hashchange", function () { scheduleApply(true); }, { passive: true });
     global.addEventListener("pageshow", function () { scheduleApply(true); }, { passive: true });
@@ -490,6 +558,7 @@
       var m = measureViewport();
       return isPhoneLandscapeViewport(m.width, m.height);
     },
+    getFoldGeometry: getFoldGeometry,
     getLayoutCapacity: function (width, height) {
       if (arguments.length < 2) {
         var m = measureViewport();
