@@ -5,11 +5,14 @@
    For wide/different screen mode use DAR_POST_AUDIT_VIEWPORT=1024x1366.
 */
 const fs=require("node:fs"),path=require("node:path");
-const { chromium }=require("playwright");
+const { chromium, webkit }=require("playwright");
 const ROOT=path.resolve(__dirname,"../../..");
 const catalog=JSON.parse(fs.readFileSync(path.join(ROOT,"content/posts/posts-index.json"),"utf8"));
 const source=(catalog.files||[]).map(f=>typeof f==="string"?f:f.name).filter(Boolean);
 const base=(process.env.DAR_AUDIT_BASE_URL||"http://127.0.0.1:8765/").replace(/#.*$/,"");
+const engineName=process.env.DAR_POST_AUDIT_ENGINE||"chromium";
+if(!["chromium","webkit"].includes(engineName))throw Error("Bad browser engine");
+const engine=engineName==="webkit"?webkit:chromium;
 const viewportRaw=process.env.DAR_POST_AUDIT_VIEWPORT||"390x844";
 const parts=viewportRaw.split("x").map(Number);
 if(parts.length!==2||parts.some(x=>!Number.isInteger(x)||x<320||x>2500))throw Error("Bad viewport");
@@ -35,11 +38,11 @@ for(const file of source){
 const inventoryIssues=records.filter(r=>r.reason);
 const shardRecords=records.filter((r,i)=>i%shardSpec[1]===shardSpec[0]);
 const issues=shardSpec[0]===0 ? inventoryIssues : [];
-const report={generated:new Date().toISOString(),base,viewport:parts,
+const report={generated:new Date().toISOString(),base,engine:engineName,viewport:parts,
   indexed:source.length,selected:shardRecords.length,shard:shardSpec.join("/"),
   uniqueIds:ids.size,passed:0,issues,visited:[]};
 (async()=>{
-  const browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
+  const browser=await engine.launch({headless:true,...(engine===chromium?{args:["--no-sandbox"]}:{})});
   try{
     const context=await browser.newContext({viewport:{width:parts[0],height:parts[1]},
       userAgent:"DarAlTawhid-iOS/1.0 WKWebView",hasTouch:true,isMobile:true,
