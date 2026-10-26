@@ -1,8 +1,8 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1456";
+const CACHE_NAME="dar-al-tawhid-kids-v1460";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
-const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1410";
+const KIDS_BUILD_ID="kids-creator-quiz-450-profile-premium-v1460-20261026";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
@@ -244,7 +244,8 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/data/dua-audio.json",
   "/kids/data/owner-voice-audio.json",
   "/kids/quiz-library.css?v=1454",
-  "/kids/quiz-library.js?v=1455",
+  "/kids/quiz-library.js?v=1460",
+  "/kids/quiz-test-premium-v1460.css?v=1460",
   "/kids/quiz-v4-bridge.js?v=20261013-academy1",
   "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
   "/kids/assets/sahaba-mubashshirun/umar.jpg",
