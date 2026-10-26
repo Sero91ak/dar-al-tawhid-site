@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TAWḤĪD KIDS · Quiz V4 Hörprüfung</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,sans-serif;background:#101d29;color:#f2edde}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 0,#203b45,#101d29 75%);min-height:100svh}
+main{max-width:930px;margin:auto;padding:clamp(16px,4vw,38px)}header{border-bottom:1px solid #bda46a66;padding-bottom:20px}
+h1{font:600 clamp(23px,4vw,35px) Georgia,serif}h2{font:600 21px Georgia,serif}
+p,.hint{line-height:1.65}.hint,small{color:#c2cdd3}
+.warning{border-left:3px solid #e4bf72;background:#dcc78b13;padding:13px 17px;margin:22px 0}
+.controls{display:grid;grid-template-columns:1fr 2fr;gap:13px;margin:25px 0}
+label{display:grid;gap:7px;color:#e5d5b8;font-size:14px}select{width:100%;min-width:0;background:#162b39;border:1px solid #9d8758;border-radius:9px;color:#fff;padding:14px;font:inherit}
+section{border-top:1px solid #ffffff28;padding:22px 0}.question{font-size:21px;line-height:1.5}
+.answer{margin:12px 0 20px;color:#ccd9d4}.parts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+button{padding:15px 14px;border-radius:10px;border:1px solid #a99666;background:#24443d;color:#f6edda;text-align:left;font:inherit;cursor:pointer;line-height:1.4}
+button:hover,button:focus{background:#36685a;outline:2px solid #d5b67e;outline-offset:1px}
+button[aria-pressed="true"]{background:#567b64}
+#transcript{margin:20px 0;padding:16px;background:#ffffff10;border-radius:11px;line-height:1.65}
+footer{margin-top:25px;font-size:12px;color:#bac2c5}
+@media(max-width:580px){.controls,.parts{grid-template-columns:1fr}}
+</style></head><body>
+<main><header><small style="color:#d1b77d;letter-spacing:.16em">DĀR AL TAWḤĪD · NUR INTERNE HÖRPRÜFUNG</small>
+<h1>TAWḤĪD KIDS · Quiz V4</h1><p class="hint">450 ausgewählte Quizfragen · 1.800 Audioteile · Serhat Abu Malik – Master · eleven_v4</p></header>
+<p class="warning"><strong>Keine Besucherfreigabe!</strong> Technische MP3-Vollständigkeit ist keine Aussprachefreigabe. Alle Fragen warten auf menschliche Prüfung von Fuṣḥā, religiösen Begriffen, Atemgeräuschen und Verständlichkeit. Dieser Bildschirm ist nicht in der öffentlichen Kinder-Navigation verlinkt.</p>
+<div class="controls"><label>Altersgruppe<select id="age"><option value="4-6">4–6 Jahre</option><option value="7-8">7–8 Jahre</option><option value="9-10">9–10 Jahre</option></select></label>
+<label>Frage<select id="question"></select></label></div>
+<section><h2 id="title">Audiozuordnung laden …</h2><div class="question" id="questionText"></div><div class="answer" id="answers"></div>
+<div class="parts" id="parts"></div><div id="transcript" aria-live="polite">Bitte ein Audio auswählen.</div>
+<div id="status" class="hint" role="status"></div></section>
+<footer>Es wird nur die vorhandene MP3-Datei wiedergegeben. Keine KI-Neuerzeugung und kein Fallback auf Browser-Sprachsynthese. Bei Fehlern bitte Frage-ID und Audioteil notieren.</footer></main>
+<script>
+(function(){"use strict";
+var age=document.getElementById("age"),pick=document.getElementById("question"),parts=document.getElementById("parts"),status=document.getElementById("status"),transcript=document.getElementById("transcript");
+var audio=new Audio(),items=[],byID={},recipes={};
+audio.preload="none";audio.setAttribute("playsinline","");audio.setAttribute("webkit-playsinline","");
+var labels={question:"1 · Frage hören",correct:"2 · Lob / richtige Antwort",retry:"3 · Noch einmal versuchen",explanation:"4 · Erklärung hören"};
+function stop(){try{audio.pause();audio.removeAttribute("src");audio.load()}catch(e){}}
+function fill(){stop();pick.replaceChildren();items.filter(function(q){return q.ageBand===age.value}).forEach(function(q){
+var o=document.createElement("option");o.value=q.id;o.textContent="#"+q.number+" · "+q.category+" · "+q.question;pick.appendChild(o)});render()}
+function render(){stop();parts.replaceChildren();var q=items.find(function(v){return v.id===pick.value}),m=q&&byID[q.id],r=q&&recipes[q.id];
+if(!q||!m||!r||m.ageBand!==q.ageBand||r.ageBand!==q.ageBand){status.textContent="Ungültige Audio-/Alterszuordnung";return}
+document.getElementById("title").textContent=q.category+" · "+q.id+" · "+q.ageBand+" Jahre";
+document.getElementById("questionText").textContent=q.question;
+document.getElementById("answers").textContent=q.answers.map(function(a,i){return (i+1)+". "+a.label}).join("   |   ");
+transcript.textContent="Tippe eine der vier Aufnahmen an. Der Sprechtext erscheint hier.";
+Object.keys(labels).forEach(function(kind){var meta=m.parts[kind],row=r[kind],btn=document.createElement("button");
+if(!meta||!row||!meta.url){status.textContent="Fehlender Audioteil: "+kind;return}
+btn.type="button";btn.textContent=labels[kind]+" · "+Number(meta.durationSeconds||0).toFixed(1)+" s";
+btn.setAttribute("aria-pressed","false");btn.addEventListener("click",function(){stop();parts.querySelectorAll("button").forEach(function(b){b.setAttribute("aria-pressed","false")});
+btn.setAttribute("aria-pressed","true");transcript.textContent=row.text;status.textContent="Hörprüfung: "+q.id+" · "+kind;
+audio.src=meta.url;audio.play().catch(function(e){status.textContent="MP3 nicht verfügbar: "+e.message})});parts.appendChild(btn)});
+status.textContent="4 von 4 technisch vorhanden · menschliche Hörfreigabe offen";
+}
+pick.addEventListener("change",render);age.addEventListener("change",fill);
+Promise.all([
+fetch("/kids/data/quiz-kids-curated-450-review.json",{cache:"no-store"}).then(function(r){if(!r.ok)throw Error("450 Fragen fehlen");return r.json()}),
+fetch("/kids/review-only/quiz-v4-final13-450-candidate-review/candidate-450-playback-manifest.json",{cache:"no-store"}).then(function(r){if(!r.ok)throw Error("450 Audio-Zuordnungen fehlen");return r.json()}),
+fetch("/kids/data/quiz-v4-curated-450-production-review.json",{cache:"no-store"}).then(function(r){if(!r.ok)throw Error("Sprechtexte fehlen");return r.json()})
+]).then(function(all){items=all[0].items;byID=all[1].questions;all[2].recipes.forEach(function(r){recipes[r.questionId]=r});
+if(items.length!==450||Object.keys(byID).length!==450||Object.keys(recipes).length!==450||all[1].publicReleaseEnabled!==false)throw Error("Prüfdaten fehlerhaft");
+fill()}).catch(function(e){status.textContent="Laden fehlgeschlagen: "+e.message});
+})();
+</script></body></html>
