@@ -27,6 +27,7 @@
   var rafId = 0;
   var started = false;
   var resizeObserver = null;
+  var layoutAttributeObserver = null;
   var orientTimers = [];
   var lastAppliedViewportKey = "";
   var pendingForcedLayout = false;
@@ -288,12 +289,17 @@
        Forced route/orientation updates still run unconditionally. */
     var viewportKey = metrics.width + "|" + metrics.height + "|" + (metrics.offsetTop || 0) +
       "|" + navPreference();
-    if (!force && viewportKey === lastAppliedViewportKey) return;
+    /* Native WKWebView may overwrite data-layout on route changes without
+       changing the viewport. Reassert the measured mode in that case. */
+    if (!force && viewportKey === lastAppliedViewportKey &&
+        document.documentElement.getAttribute("data-layout") ===
+          resolveLayoutMode(metrics.width, metrics.height)) return;
     lastAppliedViewportKey = viewportKey;
     var mode = resolveLayoutMode(metrics.width, metrics.height);
     var dual = isDualViewport(metrics.width, metrics.height);
     var root = document.documentElement;
     var changed = mode !== currentMode;
+    var externalOverride = root.getAttribute("data-layout") !== mode;
     var prevDual = root.getAttribute("data-fold-dual") === "1";
 
     var capacity = computeLayoutCapacity(metrics.width, metrics.height);
@@ -305,7 +311,7 @@
     root.style.setProperty("--fold-content-usable", capacity.usable + "px");
     root.setAttribute("data-fold-capacity", capacity.dual ? "dual" : "single");
     root.setAttribute("data-fold-reader-px", String(Math.round(capacity.reader)));
-    if (changed || force) {
+    if (changed || force || externalOverride) {
       currentMode = mode;
       root.setAttribute("data-layout", mode);
       root.classList.remove("data-layout-expanded-legacy");
@@ -316,7 +322,7 @@
     applyNavLayout(mode);
 
     var dualChanged = prevDual !== dual;
-    if (changed || force || dualChanged) {
+    if (changed || force || dualChanged || externalOverride) {
       try {
         global.dispatchEvent(
           new CustomEvent("dar:layoutchange", {
@@ -406,7 +412,23 @@
       }
     }
 
+    /* Attribute-only overrides (notably in the native iOS shell) must not
+       strand tablets and unfolded screens in the compact breakpoint. Observe
+       only the one owned attribute, not subtree styles or DOM content. */
+    if (typeof MutationObserver === "function") {
+      layoutAttributeObserver = new MutationObserver(function () {
+        var metrics = measureViewport();
+        if (document.documentElement.getAttribute("data-layout") !==
+            resolveLayoutMode(metrics.width, metrics.height)) scheduleApply(false);
+      });
+      layoutAttributeObserver.observe(document.documentElement, {
+        attributes: true, attributeFilter: ["data-layout"]
+      });
+    }
+
     global.addEventListener("resize", onResize, { passive: true });
+    global.addEventListener("hashchange", function () { scheduleApply(true); }, { passive: true });
+    global.addEventListener("pageshow", function () { scheduleApply(true); }, { passive: true });
     global.addEventListener("orientationchange", scheduleOrientBurst, { passive: true });
 
     if (global.screen && global.screen.orientation && typeof global.screen.orientation.addEventListener === "function") {
