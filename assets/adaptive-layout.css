@@ -922,3 +922,169 @@ body.is-frauen-route .frauen-library-pinned-header{
   width:100%;
   max-width:100%;
 }
+
+
+/* DAR_ADULT_ALL_ROUTES_FLUID_V1 — 2026-10-26
+   Shared viewport geometry for every adult visitor route. Existing artwork,
+   route DOM, reader heights, audio/video behaviour and nav owner remain intact.
+   Layout width belongs to the actual app window, never to a device model or
+   orientation label. The specialized Fold/Qurʾān/reader CSS owns its children. */
+html[data-theme] body.has-bottom-nav {
+  --dar-route-inline-safe-start: max(12px, env(safe-area-inset-left, 0px));
+  --dar-route-inline-safe-end: max(12px, env(safe-area-inset-right, 0px));
+  --dar-route-reader-width: min(100%, 76ch);
+  --dar-route-card-min: 230px;
+}
+html[data-theme] body.has-bottom-nav #appView.view,
+html[data-theme] body.has-bottom-nav #appView.view > :is(
+  article, section, main, .qov-page, .qrc-page, .quran-topic-page,
+  .source-library-page, .sources-library-page, .lib-page, .lib-detail,
+  .books-library-shell, .more-page, .settings-page, .settings-one-page,
+  .notification-center-page, .account-page, .about-page,
+  .topics-hub, .topic-collection-page, .post-reader, .hadith-hub,
+  .dua-hub, .frauen-page, .home-v380-shell, .dv3-home,
+  .quiz-shell, .quiz-shell-pro, .scholars-index, .dar-fold
+) {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+html[data-theme] body.has-bottom-nav #appView.view {
+  inline-size: 100%;
+}
+/* A fixed child minimum can widen an entire folded page even when its parent
+   is fluid. Keep known route shells and panels shrinkable without changing
+   their original display mode, background, position, typography or scroll. */
+html[data-theme] body.has-bottom-nav #appView :is(
+  .home-v380-shell, .home-v380-section, .home-v380-lib-grid,
+  .qov-page, .qov-main, .qrc-page, .qrc-shell, .quran-reader-shell,
+  .quran-ayah-list, .quran-topic-page, .post-reader-main, .post-body,
+  .post-slide-window, .post-slide-track, .hadith-shell, .hadith-detail,
+  .dua-hub, .dua-detail, .dua-collection-page, .frauen-library-shell,
+  .frauen-library-grid, .frauen-library-area-grid, .topics-hub,
+  .topic-collection-page, .topic-collection, .post-grid,
+  .source-library-page, .sources-library-page, .lib-page, .lib-detail,
+  .library-shell, .books-library-shell, .more-page, .more-group-grid,
+  .quiz-shell, .quiz-shell-pro, .settings-page, .settings-one-page,
+  .notification-center-page, .account-page, .about-page,
+  .scholars-index, .dar-fold, .dar-fold__rail, .dar-fold__pane
+) {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+html[data-theme] body.has-bottom-nav #appView :is(
+  .home-v380-lib-grid, .topics-theme-grid, .dua-theme-grid,
+  .more-group-grid, .post-grid, .frauen-library-grid,
+  .frauen-library-area-grid, .lib-grid
+) > * {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+html[data-theme] body.has-bottom-nav #appView :is(
+  input:not([type="checkbox"]):not([type="radio"]),
+  select, textarea, .search-input-shell, .qov-search-wrap,
+  .qov-search-shell, .qov-jump-wrap, .qov-filter-bar,
+  .post-slide-footer, .dua-row, .dua-theme-card,
+  .hadith-hierarchy-card, .notification-center-page,
+  .settings-one-page, .more-feature-row
+) {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+/* Let writing and references wrap; never apply aggressive word-break or
+   automated hyphenation to Arabic Qurʾān/Ḥadīṯ text. */
+html[data-theme] body.has-bottom-nav #appView :is(
+  .post-body, .post-reader-main, .post-source, .dua-detail,
+  .hadith-detail, .frauen-article, .lib-detail, .about-page,
+  .settings-page, .notification-center-page, .more-page
+) {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+html[data-theme] body.has-bottom-nav #appView :is(
+  img, video, canvas, iframe, embed, object
+) {
+  max-inline-size: 100%;
+}
+/* Native scrollers and players keep their own size and touch actions.
+   For long source IDs/URLs, allow the inline code to wrap naturally. */
+html[data-theme] body.has-bottom-nav #appView :is(
+  .post-source, .qsrc-detail, .lib-detail, .hadith-detail, .dua-detail
+) :is(code, a) {
+  overflow-wrap: anywhere;
+}
+/* Compact exterior screen, smaller iPhones and iPad Split View:
+   a panel must not keep a desktop card minimum across a narrow window. */
+@media (max-width: 599.98px) {
+  html[data-theme] body.has-bottom-nav {
+    --dar-route-card-min: 210px;
+  }
+  html[data-theme] body.has-bottom-nav #appView :is(
+    .home-v380-lib-grid:not(.home-v380-lib-grid--slider),
+    .topics-theme-grid, .dua-theme-grid, .more-group-grid,
+    .post-grid, .frauen-library-grid, .frauen-library-area-grid,
+    .lib-grid
+  ) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  html[data-theme] body.has-bottom-nav #appView :is(
+    .post-slide-footer, .qov-filter-bar, .qov-nav-stack
+  ) {
+    min-inline-size: 0;
+    max-inline-size: 100%;
+  }
+}
+/* Unfolded display and full tablet: make as many existing dashboard/card
+   columns as *fit*; never force fixed 3/4-column rows or tiny text. */
+@media (min-width: 600px) {
+  html[data-theme] body.has-bottom-nav #appView :is(
+    .home-v380-lib-grid:not(.home-v380-lib-grid--slider),
+    .topics-theme-grid, .dua-theme-grid, .more-group-grid,
+    .post-grid, .frauen-library-grid, .frauen-library-area-grid,
+    .lib-grid
+  ) {
+    grid-template-columns: repeat(auto-fit,
+      minmax(min(100%, var(--dar-route-card-min)), 1fr));
+  }
+}
+/* Landscape does not mean desktop: preserve stacked reading instead of
+   splitting a shallow iPhone viewport into two unusable narrow panes. */
+@media (orientation: landscape) and (max-height: 559.98px) {
+  html[data-theme] body.has-bottom-nav #appView :is(
+    .home-v380-lib-grid:not(.home-v380-lib-grid--slider),
+    .topics-theme-grid, .dua-theme-grid, .more-group-grid,
+    .post-grid, .frauen-library-grid, .frauen-library-area-grid,
+    .lib-grid
+  ) {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  }
+  html[data-theme] body.has-bottom-nav #appView :is(
+    .qrc-shell, .qov-page, .post-reader-main, .quiz-shell, .quiz-shell-pro
+  ) {
+    min-block-size: 0;
+  }
+}
+/* Drawer/dialog safety across rotation and iPad multiwindow; do not recenter
+   or change fixed positioning of specialist reader and audio overlays. */
+html[data-theme] body.has-bottom-nav :is(
+  [role="dialog"], [aria-modal="true"]
+):not(.quran-player-fullscreen):not(.dar-quran-player-fullscreen) {
+  box-sizing: border-box;
+  max-inline-size: min(100%, calc(100dvw - 2 * max(12px, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px))));
+  max-block-size: calc(100dvh - max(12px, env(safe-area-inset-top, 0px)) - max(12px, env(safe-area-inset-bottom, 0px)));
+}
+/* Safe scrolling after keyboard dismissal/rotation and accessibility zoom. */
+html[data-theme] body.has-bottom-nav #appView {
+  scroll-padding-block-end: calc(var(--bottom-navigation-height, 64px) + 24px + env(safe-area-inset-bottom, 0px));
+}
+html[data-theme] body.has-bottom-nav[dir="rtl"] #appView,
+html[dir="rtl"][data-theme] body.has-bottom-nav #appView {
+  direction: rtl;
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme] body.has-bottom-nav #appView {
+    scroll-behavior: auto;
+  }
+}
