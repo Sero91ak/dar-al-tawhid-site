@@ -29,8 +29,9 @@ assert.ok(shells.every(x=>x===shells[0]),"Entry shells must be byte-identical");
 const html=shells[0];
 for(const token of ['id="openQuizButton"','id="quizModal"','id="quizGlobalBack"',
   "window.fetchKidsQuiz=fetchKidsQuiz","KIDS_QUIZ_EMBEDDED_450_V1",
-  "/kids/quiz-library.js?v=1455","/kids/quiz-library.css?v=1454",
-  "/kids/sw.js?v=1456"]){
+  "/kids/quiz-library.js?v=1460","/kids/quiz-library.css?v=1454",
+  "/kids/quiz-test-premium-v1460.css?v=1460",
+  "/kids/sw.js?v=1460"]){
   assert.ok(html.includes(token),"Missing test quiz marker: "+token);
 }
 assert.ok(!html.includes('fetch("/kids/data/quiz-kids.json'),"Legacy 900-item loader exposed");
@@ -44,11 +45,23 @@ const end=lib.indexOf(";\n",a);
 assert.ok(end>a);
 const embedded=JSON.parse(lib.slice(a+key.length,end));
 assert.deepEqual(embedded.items,questions,"Embedded 450 pack differs from canonical selection");
+assert.match(html,/KIDS_TEST_QUIZ_NEXT_V1460/,"Quiz answers must progress");
+assert.match(html,/kidsQuizProfileScope/,"Profile progress scope required");
+assert.match(html,/quizHistorySave/,"Per-profile history required");
+assert.match(html,/data-quiz-gender/,"Per-profile palette required");
+assert.match(html,/next.disabled=false/,"Next must unlock regardless of correctness");
+assert.ok(!html.includes('localStorage.getItem("kids.quiz.correct"'),"Global quiz count forbidden");
+const premium=read("kids/quiz-test-premium-v1460.css");
+assert.ok(premium.includes("@media(min-width:900px)"),"Wide-screen grid required");
+assert.ok(premium.includes("safe-area-inset-bottom"),"Safe-area inset required");
+assert.ok(premium.includes('data-quiz-gender="girl"'),"Girls theme required");
+assert.ok(premium.includes("--kq-panel:#102b3d"),"Boys theme required");
+assert.ok(read("kids/quiz-library.js").includes("quiz-history-bars"),"Learning history required");
 const version=JSON.parse(read("kids/version.json"));
 assert.equal(version.visualSystem.kidsQuizQuestionCount,450);
-assert.equal(version.visualSystem.serviceWorkerCache,"v1456");
+assert.equal(version.visualSystem.serviceWorkerCache,"v1460");
 const sw=read("kids/sw.js");
-assert.ok(sw.includes("dar-al-tawhid-kids-v1456"));
+assert.ok(sw.includes("dar-al-tawhid-kids-v1460"));
 assert.ok(sw.includes("/kids/data/quiz-kids-public-450.json"));
 assert.ok(!sw.includes('"/kids/data/quiz-kids.json"'));
 const worker=read("kids/creator-test/worker.js");
