@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1451";
+const CACHE_NAME="dar-al-tawhid-kids-v1452";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -249,7 +249,7 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/assets/quiz-scenes/topic-akhlaq.svg?v=20261004-topic2",
   "/kids/assets/quiz-scenes/topic-patience.svg?v=20261004-topic3",
   "/kids/assets/quiz-scenes/topic-justice.svg?v=20261004-topic3",
-  "/kids/data/quiz-kids.json",
+  "/kids/data/quiz-kids-public-450.json",
   "/kids/data/quiz-audio.json",
   "/kids/data/dua-audio.json",
   "/kids/data/owner-voice-audio.json",
@@ -408,7 +408,7 @@ function isKidsRequest(url){
 function networkFirst(request,fallback){
   return fetch(request,{cache:"no-store"}).then(function(response){
     // HTTP failures must not replace a valid offline quiz catalog.
-    if((!response||!response.ok)&&new URL(request.url).pathname==="/kids/data/quiz-kids.json")
+    if((!response||!response.ok)&&new URL(request.url).pathname==="/kids/data/quiz-kids-public-450.json")
       throw new Error("Quizdaten-HTTP-Fehler");
     if(response&&response.ok){
       var copy=response.clone();
@@ -496,7 +496,7 @@ self.addEventListener("fetch",function(event){
   }
   // The quiz owner-voice router must update immediately after German speech fixes.
   // Network-first prevents an installed Kids PWA from retaining an obsolete
-  // audio lookup even while its 900-question catalogue and manifest are fresh.
+  // audio lookup even while its 450-question catalogue and manifest are fresh.
   // Keep the Kids Duʿāʾ V4 voice player fresh after an installed PWA update.
   /* Keep profile avatars, parent profiles and Duʿāʾ hub current after learning-system retirement. */
   if(url.pathname==="/kids/navigation-v1182.js"||url.pathname==="/kids/kids-motion-v1422.css"){
@@ -562,8 +562,8 @@ self.addEventListener("fetch",function(event){
     event.respondWith(networkFirst(request));
     return;
   }
-  /* QUIZ LEARNING CENTER: network-first so 900-question data, dashboard logic and layout never regress to a stale pack. */
-  if(url.pathname==="/kids/data/quiz-kids.json"||url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"||url.pathname==="/kids/quiz-v4-bridge.js"){
+  /* QUIZ LEARNING CENTER: network-first so 450-question data, dashboard logic and layout never regress to a stale pack. */
+  if(url.pathname==="/kids/data/quiz-kids-public-450.json"||url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"||url.pathname==="/kids/quiz-v4-bridge.js"){
     event.respondWith(networkFirst(request));
     return;
   }
@@ -687,7 +687,7 @@ const KIDS_OFFLINE_SEEDS=[
   "/kids/data/dua-word-audio.json",
   "/kids/data/quiz-audio.json",
   "/kids/data/owner-voice-audio.json",
-  "/kids/data/quiz-kids.json",
+  "/kids/data/quiz-kids-public-450.json",
   "/kids/quiz-v4-bridge.js?v=20261013-academy1",
   "/kids/data/deen-lessons.json",
   "/kids/data/term-learning-audio.json",
