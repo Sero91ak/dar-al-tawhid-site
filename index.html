@@ -27947,7 +27947,7 @@ const HOME_LIBRARY_DISCOVER_MAX=6;
 function homeLibraryDiscoverDataUrl(){return (isTestAppPath()?"/test":"")+"/data/library-publications.json"}
 function libraryCatalogSignature(pubs){return (pubs||[]).map(p=>`${p.id}|${p.updatedAt||""}|${p.pdfUrl||""}|${p.status||""}|${p.coverUrl||""}`).sort().join(";")}
 function invalidateHomeLibraryDiscoverCache(){window.__homeLibraryDiscoverPubs=null;try{sessionStorage.removeItem(HOME_LIBRARY_DISCOVER_CACHE_KEY)}catch(e){}}
-async function fetchLibraryCatalogRemote(){const res=await fetch(homeLibraryDiscoverDataUrl()+"?v="+Date.now(),{cache:"no-store"});if(!res.ok)throw new Error("catalog load failed");const data=await res.json();return homeLibraryVisiblePubs(data.publications||[])}
+async function fetchLibraryCatalogRemote(){const res=await fetch(homeLibraryDiscoverDataUrl()+"?v="+Date.now(),{cache:"no-store"});if(!res.ok)throw new Error("catalog load failed");const data=await res.json();if(!data||!Array.isArray(data.publications))throw new Error("invalid library catalog payload");return homeLibraryVisiblePubs(data.publications)}
 async function refreshLibraryCatalog({force=false}={}){if(!navigator.onLine)return false;try{const pubs=await fetchLibraryCatalogRemote();const sig=libraryCatalogSignature(pubs);const prevSig=window.__libraryCatalogSig||"";const changed=force||!prevSig||prevSig!==sig;if(!changed)return false;window.__libraryCatalogSig=sig;window.__homeLibraryDiscoverPubs=pubs;try{sessionStorage.setItem(HOME_LIBRARY_DISCOVER_CACHE_KEY,JSON.stringify({ts:Date.now(),pubs}))}catch(e){}if(window.DARLibraryApp&&typeof window.DARLibraryApp.invalidateCatalog==="function"){window.DARLibraryApp.invalidateCatalog();if(typeof window.DARLibraryApp.ensureCatalog==="function"){await window.DARLibraryApp.ensureCatalog();window.__libraryCatalogReady=true}}if(currentRoute.view==="home")fillHomeDiscoverLibraryBlock(pubs);else if(["bibliothek","bibliothek-detail"].includes(currentRoute.view)&&typeof render==="function")render();return true}catch(e){return false}}
 function homeLibraryVisiblePubs(pubs){return (pubs||[]).filter(p=>!["archived","draft","error","preparing"].includes(String(p.status||""))&&p.pdfUrl)}
 function sortHomeLibraryPubs(pubs){return [...pubs].sort((a,b)=>String(b.updatedAt||b.publishedAt||"").localeCompare(String(a.updatedAt||a.publishedAt||"")))}
@@ -28001,7 +28001,8 @@ async function fetchHomeLibraryDiscoverCatalog({force=false}={}){
     const res=await fetch(homeLibraryDiscoverDataUrl()+"?v="+Date.now(),{cache:"no-store"});
     if(!res.ok)throw new Error("catalog load failed");
     const data=await res.json();
-    const pubs=homeLibraryVisiblePubs(data.publications||[]);
+    if(!data||!Array.isArray(data.publications))throw new Error("invalid library catalog payload");
+    const pubs=homeLibraryVisiblePubs(data.publications);
     window.__homeLibraryDiscoverPubs=pubs;
     try{sessionStorage.setItem(HOME_LIBRARY_DISCOVER_CACHE_KEY,JSON.stringify({ts:Date.now(),pubs}))}catch(e){}
     return pubs;
