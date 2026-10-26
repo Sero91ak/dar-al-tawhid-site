@@ -55,7 +55,14 @@ async function snapshot(page) {
       const r = el.getBoundingClientRect();
       return { x: Math.round(r.x), y: Math.round(r.y), w: Math.round(r.width), h: Math.round(r.height) };
     };
-    const navButtons = [...(nav?.querySelectorAll("button,a,[role=button]") || [])]
+    // Specialist fullscreen players intentionally replace the global dock.
+    // Their hidden/covered global nav is not a defect in its accessibility.
+    const immersive = document.body.classList.contains("is-quran-player-route")
+      || document.body.classList.contains("is-library-reader-route");
+    const navStyle = nav ? getComputedStyle(nav) : null;
+    const globalNavActive = !!nav && !immersive && navStyle.display !== "none"
+      && navStyle.visibility !== "hidden" && navStyle.pointerEvents !== "none";
+    const navButtons = [...(globalNavActive ? nav.querySelectorAll("button,a,[role=button]") : [])]
       .filter(el => el.getBoundingClientRect().width > 0)
       .slice(0, 18).map(el => {
         const r = el.getBoundingClientRect();
