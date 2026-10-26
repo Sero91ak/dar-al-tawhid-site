@@ -138,7 +138,7 @@ async function snapshot(page) {
       const page = await context.newPage();
       const item = { ...profile, pages: [], failures: [], visitedRoutes: [] };
       report.profiles.push(item);
-      page.on("pageerror", e => item.failures.push({ type: "runtime", message: String(e.message).slice(0, 300) }));
+      page.on("pageerror", e => item.failures.push({ type: "runtime", hash: new URL(page.url()).hash, message: String(e.message).slice(0, 300), stack: String(e.stack || "").slice(0, 900) }));
       await page.goto(BASE + "#home", { waitUntil: "domcontentloaded", timeout: 45000 });
       await page.waitForFunction(() => !!document.querySelector("#appView"), null, { timeout: 15000 });
       await page.waitForTimeout(1000);
