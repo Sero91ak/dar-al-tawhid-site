@@ -364,7 +364,48 @@
     var retry=byId("quizEntryRetry");
     if(retry)retry.addEventListener("click",function(){window.openKidsQuizHub()});
   }
+  // KIDS_QUIZ_BACK_RECOVERY_V1454: independent, always-present navigation.
+  // Header Back: question -> all questions; all questions -> dashboard;
+  // learning round -> dashboard; dashboard -> home. X always closes the modal.
+  // Capturing events makes controls work even when old inline handlers fail.
+  function closeKidsQuiz(){
+    var modal=byId("quizModal");
+    if(!modal)return false;
+    modal.classList.remove("open","quiz-dashboard-mode","quiz-library-mode","quiz-round-mode");
+    modal.setAttribute("aria-hidden","true");
+    modal.removeAttribute("aria-modal");
+    try{if(window.DARKidsOwnerVoice&&typeof window.DARKidsOwnerVoice.stop==="function")window.DARKidsOwnerVoice.stop()}catch(_){}
+    try{if(window.speechSynthesis&&typeof window.speechSynthesis.cancel==="function")window.speechSynthesis.cancel()}catch(_){}
+    mode="dashboard";directQuestion=false;category="all";
+    return true;
+  }
+  function navigateBackKidsQuiz(){
+    var modal=byId("quizModal");
+    if(!modal||!modal.classList.contains("open"))return false;
+    try{
+      if(mode==="library"&&directQuestion){showLibrary();return true}
+      if(mode==="library"||mode==="play"){showDashboard();return true}
+      return closeKidsQuiz();
+    }catch(err){
+      try{console.error("Kids quiz back navigation:",err)}catch(_){}
+      return closeKidsQuiz();
+    }
+  }
+  function kidsQuizNavigationCapture(event){
+    var el=event.target;
+    if(!el||typeof el.closest!=="function")return;
+    var back=el.closest("#quizGlobalBack");
+    var close=el.closest('#quizModal [data-close="quiz"]');
+    if(!back&&!close)return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    if(close)closeKidsQuiz();
+    else navigateBackKidsQuiz();
+  }
+  window.kidsQuizClose=closeKidsQuiz;
+  window.kidsQuizNavigateBack=navigateBackKidsQuiz;
   document.addEventListener("click",kidsHomeQuizEntryCapture,true);
+  document.addEventListener("click",kidsQuizNavigationCapture,true);
   window.onKidsQuizAgeChanged=function(){
     category="all";query="";visibleLimit=PAGE_SIZE;
     try{localStorage.removeItem("kids.quiz.ageBand")}catch(_){}
@@ -558,6 +599,8 @@
 
   function init(){
     ensureUi();
+    // Load the bundled 450-question source before the first tile tap.
+    if(!canonicalItems().length)ensureQuizData();
     try{localStorage.removeItem("kids.quiz.ageBand")}catch(_){}
     var attempts=0;
     (function waitForQuizData(){
