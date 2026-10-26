@@ -19,7 +19,7 @@ on:
           - "YES_REBUILD_450"
 
 permissions:
-  contents: read
+  contents: write
   actions: read
 
 jobs:
@@ -118,3 +118,46 @@ jobs:
           path: kids/review-only/quiz-v4-full-rebuild-20261026/generated/${{ matrix.age_band }}/
           retention-days: 30
           if-no-files-found: warn
+
+  assemble-review-branch:
+    # Integration is review-only; no active kids navigation or published manifest changes.
+    if: ${{ (github.event_name == 'workflow_dispatch' && inputs.confirm_paid_generation == 'YES_REBUILD_450') || (github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.label.name == 'kids-v4-generate-full-20261026' && github.event.pull_request.head.ref == 'codex/kids-quiz-v4-complete-speech-rebuild-20261026' && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site') }}
+    needs: [validate, generate-review-audio]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout reviewed generation code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+      - name: Download all exact full age artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: kids-quiz-v4-new-*-${{ github.run_id }}
+          path: /tmp/kids-v4-450-complete
+          merge-multiple: false
+      - name: Verify all 1800 clips and materialize isolated QA manifest
+        run: |
+          python3 kids/tools/import_rebuilt_quiz_v4.py --artifacts-root /tmp/kids-v4-450-complete
+          python3 - <<'PY'
+          import json, pathlib
+          p=pathlib.Path('kids/data/quiz-v4-full-rebuild-review.json')
+          d=json.loads(p.read_text())
+          assert d['releaseEnabled'] is False and d['humanListeningApproved'] is False
+          assert len(d['questions']) == 450
+          assert sum(len(v['clips']) for v in d['questions'].values()) == 1800
+          print('PASS: 450 questions, 1800 clips, no public release')
+          PY
+      - name: Push immutable review-only audio candidate to separate GitHub branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c codex/kids-v4-generated-review-20261026
+          git add kids/data/quiz-v4-full-rebuild-review.json
+          git add -f kids/assets/kids-quiz-audio/v4-full-rebuild-20261026/
+          git commit -m "review(kids): store 450x4 brand-new V4 audio clips, unapproved for playback"
+          git push origin HEAD:refs/heads/codex/kids-v4-generated-review-20261026
+          echo "Generated assets pushed into isolated review branch, NOT published on main."
