@@ -610,7 +610,7 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
   function paint(s) {
     s = s || current();
     var city = element("darPermissionCityText");
-    if (city) city.textContent = (s.city || "Ort wird ermittelt …") + (s.locationMode === "auto" ? " · GPS automatisch" : " · Stadt manuell");
+    if (city) city.textContent = (s.city || "Ort wird ermittelt …") + (s.locationMode === "auto" ? " · GPS automatisch" + (s.locationPrecision === "approximate" ? " · ungenau" : "") : " · Stadt manuell");
     try { if (typeof updateHeaderPrayerStatus === "function") updateHeaderPrayerStatus(); } catch (e) {}
     try { if (typeof updatePrayerCountdowns === "function") updatePrayerCountdowns(); } catch (e) {}
     try { window.dispatchEvent(new CustomEvent("dar:location-updated", {detail:{mode:s.locationMode,city:s.city}})); } catch (e) {}
@@ -656,7 +656,7 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
         if (!validCoords(lat, lon) || !Number.isFinite(accuracy) ||
             accuracy < 0 || accuracy > 100000) return;
         // A fresh device request should not silently reuse a stale GPS fix.
-        if (!Number.isFinite(stamp) || stamp < started - 60000 || stamp > Date.now() + 60000) return;
+        if (!Number.isFinite(stamp) || stamp < started - (accuracy > 2500 ? 3600000 : 60000) || stamp > Date.now() + 60000) return;
         finish({coords:{latitude:lat,longitude:lon,accuracy:accuracy}});
       }
       function onStatus(event) {
@@ -1162,13 +1162,13 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
     try{if(typeof updatePrayerCountdowns==="function")updatePrayerCountdowns();}catch(e){}
     try{window.dispatchEvent(new CustomEvent("dar:location-updated",{detail:{mode:"auto",city:s.city,source:"native"}}));}catch(e){}
     var el=document.getElementById("darPermissionCityText");
-    if(el)el.textContent=(s.city||"GPS erkannt · Ortsname wird gesucht")+" · GPS automatisch";
+    if(el)el.textContent=(s.city||"GPS erkannt · Ortsname wird gesucht")+" · GPS automatisch"+(s.locationPrecision==="approximate"?" · ungenau":"");
   }
   async function updatePosition(data){
     var lat=Number(data&&data.lat),lon=Number(data&&(data.lng!=null?data.lng:data.lon));
     var acc=Number(data&&data.acc), t=Number(data&&data.timestamp);
     if(!valid(lat,lon,acc))return;
-    if(t&&(t>Date.now()+60000||Date.now()-t>600000))return;
+    if(t&&(t>Date.now()+60000||Date.now()-t>(acc>2500?3600000:600000)))return;
     var s=current();
     // An explicit manually selected city is never replaced by CoreLocation.
     if(s.locationMode==="manual"&&(s.locationGranted===true||Number(s.locationUpdatedAt)>0))return;
