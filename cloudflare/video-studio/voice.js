@@ -332,7 +332,10 @@ export async function synthesizeDarVoice(env, text, options = {}) {
   const body = {
     text: ttsScript,
     model_id: modelId,
-    voice_settings: voiceSettings
+    voice_settings: voiceSettings,
+    // Eleven v4 supports language_code: German must be locked to German.
+    // Native, vocalized Fuṣḥā remains separately locked to Arabic below.
+    language_code: nativeArabicScriptOnly ? "ar" : "de"
   };
   if (nativeArabicScriptOnly) {
     body.language_code = "ar";
