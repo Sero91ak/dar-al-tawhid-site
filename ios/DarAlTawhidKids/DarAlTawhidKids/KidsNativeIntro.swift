@@ -143,6 +143,10 @@ private struct KidsCreatorPanel: View {
                         .font(.footnote)
                         .foregroundStyle(Color.white.opacity(0.88))
 
+                    button("Quiz · echte V4-Fuṣḥā-Hörvorschau", "waveform.circle.fill", "quiz-v4")
+                    Text("450 Fragen · Frage, Lob, Ermutigung und Erklärung. Audio ist nur zur Hörprüfung, nicht zur endgültigen Kinderfreigabe.")
+                        .font(.caption)
+                        .foregroundStyle(gold.opacity(0.9))
                     button("Prüfzentrale · Jahresplan & alle Bereiche", "square.grid.2x2.fill", "console")
                     button("Startseite & Testprofile", "house.fill", "home")
                     button("Qurʾān", "book.closed.fill", "quran")
