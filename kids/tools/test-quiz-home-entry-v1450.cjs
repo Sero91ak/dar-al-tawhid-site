@@ -9,7 +9,7 @@ const read=p=>fs.readFileSync(root+"/"+p,"utf8");
 const entry=read("kids/index.html");
 assert.equal(entry,read("kids/start.html"),"Kids start shell mismatch");
 assert.equal(entry,read("kids/shell.html"),"Kids shell mismatch");
-for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=20261026-premium1','/kids/quiz-library.css?v=20261026-premium1','/kids/sw.js?v=1466']){
+for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=20261026-premium1','/kids/quiz-library.css?v=20261026-premium1','/kids/sw.js?v=1467']){
   assert.ok(entry.includes(token),"Missing Kids shell token: "+token);
 }
 // Kids must display the age-appropriate new praise/encouragement even if
@@ -28,7 +28,7 @@ assert.ok(entry.includes("playback=20261027-v4"),"PWA must request the new spoke
 const premiumCss=read("kids/quiz-premium-v1.css");
 const approvedPlayer=read("kids/quiz-v4-approved-player.js");
 assert.ok(entry.includes("/kids/quiz-premium-v1.css?v=20261026-premium1"),"Premium UI style must load in each Kids shell");
-assert.ok(entry.includes("/kids/quiz-v4-approved-player.js?v=20261026-v1"),"Exact V4 player must load into Kids");
+assert.ok(entry.includes("/kids/quiz-v4-approved-player.js?v=20261027-owner-v4"),"Exact V4 player must load into Kids");
 assert.ok(entry.includes('quizPart:"question"')&&entry.includes('quizPart:"correct"')&&entry.includes('quizPart:"retry"')&&entry.includes('quizPart:"explanation"'),"Exact four V4 audio segments required");
 assert.ok(premiumCss.includes('[data-quiz-persona="girl"]')&&premiumCss.includes('[data-quiz-persona="boy"]'),"Boys/girls palette must both exist");
 assert.ok(premiumCss.includes("KIDS_QUIZ_RESPONSIVE_SEGMENTS_V2_20261027"),"Responsive V2 quiz release must be present");
@@ -49,14 +49,16 @@ assert.ok(premiumCss.includes("env(safe-area-inset-left"),"Notch padding require
 assert.ok(premiumCss.includes("prefers-reduced-motion"),"Respect reduced motion");
 assert.ok(premiumCss.includes("env(safe-area-inset-bottom"),"Native notch/hinge safe area required");
 assert.ok(premiumCss.includes("minmax(0,1fr)"),"Responsive grid should not overflow narrow screens");
-assert.ok(approvedPlayer.includes("humanListeningApproved!==true")&&approvedPlayer.includes("releaseEnabled!==true"),"Unheard V4 audio must fail closed");
+assert.ok(approvedPlayer.includes("humanListeningApproved!==true")&&approvedPlayer.includes("releaseEnabled!==true"),"Any unauthorized or incomplete V4 audio must fail closed");
+assert.ok(approvedPlayer.includes("ownerReleaseAuthorized===true"),"Explicit owner approval must be distinguished from human Fuṣḥā listening QA");
+assert.ok(approvedPlayer.includes("data.humanListeningApproved!==true&&!ownerRoute"),"Owner authorization must require exact provenance and not fake hearing QA");
 assert.ok(!read("kids/quiz-library.js").includes("var QUIZ_PACK_900="),"The 450 unpublished reserve is not visible");
 assert.ok(entry.includes("Quiz-Lernwelt")&&entry.includes("450 Fragen · neue Lernwelt"),"Visitor home must visibly expose new 450-question quiz entry");
 assert.ok(entry.includes("/kids/quiz-v4-test-preview.js?v=20261026-audition1&recovery=20261027-v1"),"Kids visitor code must include host-isolated Test MP3 preview");
 const sw=read("kids/sw.js");
 const version=JSON.parse(read("kids/version.json"));
-assert.ok(sw.includes('dar-al-tawhid-kids-v1466'));
-assert.equal(version.visualSystem.serviceWorkerCache,"v1466");
+assert.ok(sw.includes('dar-al-tawhid-kids-v1467'));
+assert.equal(version.visualSystem.serviceWorkerCache,"v1467");
 assert.ok(sw.includes('/kids/quiz-library.js?v=20261026-premium1'));
 assert.ok(sw.includes('url.pathname==="/kids/quiz-library.js"'));
 const originalQuestions=JSON.parse(read("kids/data/quiz-kids.json")).items;
@@ -288,3 +290,7 @@ assert.equal(recordedSuccess,1);
 assert.equal(explanationCopy.textContent,simpleQuestion.explanation);
 assert.equal(explain.classList.contains("show"),true,"Explanation must be visible after success");
 console.log("PASS: wrong answer retries, correct answer unlocks Next, explanation is readable, V4-only speech");
+
+// Full public release check: canonical 150/150/150, exact 450x4 clip metadata,
+// original 1217 SHA-256 MP3s; no paid rerender or fictional human QA.
+require("./test-v4-owner-public-release.cjs");
