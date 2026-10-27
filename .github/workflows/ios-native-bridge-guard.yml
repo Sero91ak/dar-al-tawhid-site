@@ -6,6 +6,8 @@ on:
     paths:
       - ios/DarAlTawhid/DarAlTawhid/DarNativePermissions.swift
       - ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift
+      - ios/DarAlTawhid/Shared/DarPrayerEngine.swift
+      - ios/DarAlTawhid/Shared/DarDailyContent.swift
       - ios/DarAlTawhid/DarAlTawhid/WebAppView.swift
       - ios/DarAlTawhid/DarAlTawhid/Info.plist
       - ios/DarAlTawhid/DarAlTawhid/Widgets/DarAlTawhidWidgets.swift
@@ -19,6 +21,8 @@ on:
     paths:
       - ios/DarAlTawhid/DarAlTawhid/DarNativePermissions.swift
       - ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift
+      - ios/DarAlTawhid/Shared/DarPrayerEngine.swift
+      - ios/DarAlTawhid/Shared/DarDailyContent.swift
       - ios/DarAlTawhid/DarAlTawhid/WebAppView.swift
       - ios/DarAlTawhid/DarAlTawhid/Info.plist
       - ios/DarAlTawhid/DarAlTawhid/Widgets/DarAlTawhidWidgets.swift
@@ -44,6 +48,8 @@ jobs:
           swiftc -frontend -parse \
             ios/DarAlTawhid/DarAlTawhid/DarNativePermissions.swift \
             ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift \
+            ios/DarAlTawhid/Shared/DarPrayerEngine.swift \
+            ios/DarAlTawhid/Shared/DarDailyContent.swift \
             ios/DarAlTawhid/DarAlTawhid/WebAppView.swift \
             ios/DarAlTawhid/DarAlTawhid/Widgets/DarAlTawhidWidgets.swift \
             ios/DarAlTawhid/Shared/DarWidgetTheme.swift
