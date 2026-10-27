@@ -656,7 +656,7 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
         if (!validCoords(lat, lon) || !Number.isFinite(accuracy) ||
             accuracy < 0 || accuracy > 100000) return;
         // A fresh device request should not silently reuse a stale GPS fix.
-        if (!Number.isFinite(stamp) || stamp < started - (accuracy > 2500 ? 3600000 : 60000) || stamp > Date.now() + 60000) return;
+        if (!Number.isFinite(stamp) || stamp < started - (accuracy > 2500 ? 3600000 : 900000) || stamp > Date.now() + 60000) return;
         finish({coords:{latitude:lat,longitude:lon,accuracy:accuracy}});
       }
       function onStatus(event) {
