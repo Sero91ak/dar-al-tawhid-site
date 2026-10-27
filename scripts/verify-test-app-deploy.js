@@ -612,6 +612,22 @@ async function fetchVersionBuild(base) {
     if (audioOrigin !== "https://dar-al-tawhid-test.sero91ak.workers.dev") {
       throw new Error("KIDS V4 audio audit refused unexpected Test origin: " + audioOrigin);
     }
+    // Check the actual browser resources, not just a manifest in GitHub.
+    const auditionShellResponse=await fetch(audioOrigin+"/kids/start?v4-audit="+Date.now(),{cache:"no-store"});
+    const auditionShell=await auditionShellResponse.text();
+    if(auditionShellResponse.status!==200||
+       !auditionShell.includes("/kids/quiz-v4-test-preview.js")||
+       !auditionShell.includes('id="quizModal"')){
+      throw new Error("KIDS V4: Test Quiz shell not publicly delivered, HTTP "+auditionShellResponse.status);
+    }
+    const auditionScriptResponse=await fetch(audioOrigin+"/kids/quiz-v4-test-preview.js?v4-audit="+Date.now(),{cache:"no-store"});
+    const auditionScript=await auditionScriptResponse.text();
+    if(auditionScriptResponse.status!==200||
+       !auditionScript.includes('isTestPreview:true')||
+       !auditionScript.includes('quiz-v4-full-rebuild-review.json')){
+      throw new Error("KIDS V4: Test preview player missing or gated, HTTP "+auditionScriptResponse.status);
+    }
+    console.log("KIDS V4 TEST PLAYER PASS — real browser shell and preview runtime HTTP 200");
     const auditionPath="/kids/data/quiz-v4-full-rebuild-review.json";
     const auditionResponse=await fetch(audioOrigin+auditionPath+"?delivery-audit="+Date.now(),{
       cache:"no-store",headers:{"Cache-Control":"no-cache",Pragma:"no-cache"}
