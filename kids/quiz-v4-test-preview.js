@@ -198,7 +198,10 @@ var preview={
     try{
       stop();
       if(root.DARKidsOwnerVoice&&root.DARKidsOwnerVoice.stop)root.DARKidsOwnerVoice.stop();
-      if(!player){player=new root.Audio();player.preload="auto";}
+      // A new Audio instance per deliberate tap avoids WebKit getting stuck on
+      // the preceding cancelled .load() call when the iPad quiz switches clips.
+      // No speech synthesis or old audio fallback is permitted.
+      player=new root.Audio();player.preload="auto";
       var current=seq;
       var labelMap={question:"Frage",correct:"Lob",retry:"Ermutigung",explanation:"Erklärung"};
       var heardLabel=(labelMap[p]||p)+" · "+String(q.ageBand||"")+" Jahre";
