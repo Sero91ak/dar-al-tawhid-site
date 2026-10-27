@@ -459,7 +459,8 @@
         if (!validCoords(lat, lon) || !Number.isFinite(accuracy) ||
             accuracy < 0 || accuracy > 100000) return;
         // A fresh device request should not silently reuse a stale GPS fix.
-        var ageLimit = accuracy > 2500 ? 3600000 : 60000;
+        // CoreLocation may legitimately suppress duplicate stationary fixes for 15 minutes.
+        var ageLimit = accuracy > 2500 ? 3600000 : 900000;
         if (!Number.isFinite(stamp) || stamp < started - ageLimit || stamp > Date.now() + 60000) return;
         finish({coords:{latitude:lat,longitude:lon,accuracy:accuracy}});
       }
