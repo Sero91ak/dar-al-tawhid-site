@@ -9,7 +9,7 @@ const read=p=>fs.readFileSync(root+"/"+p,"utf8");
 const entry=read("kids/index.html");
 assert.equal(entry,read("kids/start.html"),"Kids start shell mismatch");
 assert.equal(entry,read("kids/shell.html"),"Kids shell mismatch");
-for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=20261026-premium1','/kids/quiz-library.css?v=20261026-premium1','/kids/sw.js?v=1459']){
+for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=20261026-premium1','/kids/quiz-library.css?v=20261026-premium1','/kids/sw.js?v=1460']){
   assert.ok(entry.includes(token),"Missing Kids shell token: "+token);
 }
 const premiumCss=read("kids/quiz-premium-v1.css");
@@ -22,6 +22,12 @@ assert.ok(premiumCss.includes("KIDS_QUIZ_RESPONSIVE_SEGMENTS_V2_20261027"),"Resp
 assert.ok(premiumCss.includes("KIDS_QUIZ_LESSON_PRESENTATION_V1"),"Labeled explanation lesson must be visible on all device sizes");
 assert.ok(entry.includes('class="quiz-explanation quiz-lesson-card"'),"Full explanation card must exist in each Kids shell");
 assert.ok(entry.includes("quizExplanationAudioStatus"),"Text explanation and audio QA status must be separated");
+assert.ok(entry.includes('disabled aria-disabled="true" aria-label="Erst nach richtiger Antwort fortfahren"'),"Next must start disabled until correct");
+assert.ok(entry.includes("if(!quizLocked||this.disabled||currentQuiz[currentQuizIndex]!==q)return;"),"Next handler must enforce mastery gate");
+assert.ok(entry.includes('nextButton.disabled=false;'),"Correct response unlocks Next");
+assert.ok(entry.includes("// Never preload legacy Owner Voice / Flash TTS on question changes."),"Quiz must not preload old Flash voice");
+assert.ok(read("kids/quiz-premium-v1.css").includes("KIDS_QUIZ_CORRECT_TO_CONTINUE_V1460"),"Quiet success feedback and disabled Next CSS must be included");
+assert.ok(read("kids/quiz-library.js").includes("if(!localAnswered||this.disabled||localRound[localIndex]!==q)return;"),"Fallback Next must gate until correct");
 assert.ok(entry.includes("refreshQuizPraiseAudioState"),"The V4 praise replay control must update after late audio readiness");
 assert.ok(entry.includes("quiz-praise-replay"),"The child needs a user-initiated V4 praise replay button");
 assert.ok(read("kids/quiz-library.js").includes("quiz-v4-release-status"),"User must see the correct V4 voice status");
@@ -38,8 +44,8 @@ assert.ok(entry.includes("Quiz-Lernwelt")&&entry.includes("450 Fragen · neue Le
 assert.ok(entry.includes("/kids/quiz-v4-test-preview.js?v=20261026-audition1"),"Kids visitor code must include host-isolated Test MP3 preview");
 const sw=read("kids/sw.js");
 const version=JSON.parse(read("kids/version.json"));
-assert.ok(sw.includes('dar-al-tawhid-kids-v1459'));
-assert.equal(version.visualSystem.serviceWorkerCache,"v1459");
+assert.ok(sw.includes('dar-al-tawhid-kids-v1460'));
+assert.equal(version.visualSystem.serviceWorkerCache,"v1460");
 assert.ok(sw.includes('/kids/quiz-library.js?v=20261026-premium1'));
 assert.ok(sw.includes('url.pathname==="/kids/quiz-library.js"'));
 const originalQuestions=JSON.parse(read("kids/data/quiz-kids.json")).items;
