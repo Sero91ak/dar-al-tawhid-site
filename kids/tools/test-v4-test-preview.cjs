@@ -6,7 +6,10 @@ const vm=require("node:vm");
 const crypto=require("node:crypto");
 const source=fs.readFileSync("kids/quiz-v4-test-preview.js","utf8");
 assert.ok(source.includes("KIDS_V4_AGE_PART_AUDITION_V1463"),"Direct 3-age × 4-part V4 hearing test must ship");
-for(const part of ["question","correct","retry","explanation"])assert.ok(source.includes('data-quiz-v4-part"'),"V4 hearing buttons must be real controls");
+for(const part of ["question","correct","retry","explanation"]){
+  assert.ok(source.includes('["'+part+'",'),"Real V4 audition must expose speech part "+part);
+}
+assert.ok(source.includes('data-quiz-v4-part"'),"V4 hearing buttons must be real controls");
 assert.ok(source.includes("kidsV4AgePartBand")&&source.includes("kidsV4AgePartStatus"),"Age-band selector and honest playback status must exist");
 
 const manifest=JSON.parse(fs.readFileSync("kids/data/quiz-v4-full-rebuild-review.json","utf8"));
