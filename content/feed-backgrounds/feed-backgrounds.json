@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-27T04:53:08.844Z",
-  "cacheVersion": 91,
+  "updatedAt": "2026-10-27T04:53:09.819Z",
+  "cacheVersion": 92,
   "settings": {
     "autoDownloadEnabled": true,
     "strictIslamicMode": true,
@@ -33,19 +33,17 @@
     ]
   },
   "syncState": {
-    "lastSyncAt": "2026-10-27T04:52:54.058Z",
-    "lastSyncStatus": "ok",
-    "lastSyncError": "pexels:15103188: Download 404",
-    "nextSyncAt": "2026-10-28T04:53:08.844Z",
-    "dailyDownloadDate": "2026-10-27",
-    "dailyDownloadCount": 2,
-    "lastRunDownloads": 2,
-    "lastRunRejected": 41,
-    "lastRunErrors": [
-      "pexels:15103188: Download 404"
-    ],
-    "totalDownloads": 2,
-    "totalRejected": 36
+    "lastSyncAt": "",
+    "lastSyncStatus": "idle",
+    "lastSyncError": "",
+    "nextSyncAt": "",
+    "dailyDownloadDate": "",
+    "dailyDownloadCount": 0,
+    "lastRunDownloads": 0,
+    "lastRunRejected": 0,
+    "lastRunErrors": [],
+    "totalDownloads": 0,
+    "totalRejected": 0
   },
   "items": [
     {
@@ -5419,7 +5417,7 @@
       "sourcePhotoId": "n4imclmdELI",
       "sourceUrl": "https://unsplash.com/photos/river-winding-through-misty-lush-green-mountains-n4imclmdELI",
       "license": "Unsplash License",
-      "downloadedAt": "2026-10-27T04:53:02.351Z",
+      "downloadedAt": "2026-10-27T04:53:09.819Z",
       "autoSynced": true,
       "rejectionReasons": [],
       "dominantColor": "",
@@ -5428,8 +5426,8 @@
         "x": 50,
         "y": 50
       },
-      "createdAt": "2026-10-27T04:53:02.351Z",
-      "updatedAt": "2026-10-27T04:53:02.351Z",
+      "createdAt": "2026-10-27T04:53:09.819Z",
+      "updatedAt": "2026-10-27T04:53:09.819Z",
       "adminNote": "auto-sync nature-safe approved"
     }
   ]
