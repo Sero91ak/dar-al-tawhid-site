@@ -53,8 +53,9 @@ const blocked={DARKidsQuizV4Approved:{version:"strict-release-only"},location:{h
 vm.runInNewContext(source,{window:blocked,Promise,Error,Number,Object,Array,String,RegExp});
 assert.equal(blocked.DARKidsQuizV4Approved.version,"strict-release-only","public visitor must never enable test preview");
 const children=[];
+let playerCreations=0;
 class Audio{
- constructor(){this.src="";this.playbackRate=1}
+ constructor(){playerCreations++;this.src="";this.playbackRate=1}
  pause(){}
  removeAttribute(){this.src=""}
  load(){}
@@ -90,6 +91,7 @@ assert.equal(test.DARKidsQuizV4Approved.isTestPreview,true);
  }
  assert.equal(plays,24);
  assert.equal(children.length,24);
+ assert.equal(playerCreations,24,"Every user tap must create a fresh Safari audio instance");
  const q=public450.items.find(item=>item.ageBand==="4-6");
  assert.equal(test.DARKidsQuizV4Approved.has({...q,ageBand:"9-10"},"question"),false);
  assert.equal(test.DARKidsQuizV4Approved.has({...q,source:"Qurʾān 999"},"question"),false);
