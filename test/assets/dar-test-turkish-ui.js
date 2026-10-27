@@ -404,7 +404,10 @@ function isDynamicGermanUi(value){
   /^Frage \d+(?: von |\/)\d+$/.test(value)||
   /^\d+ \/ \d+ richtig$/.test(value)||
   /^\d+ Runden · \d+ Fragen beantwortet$/.test(value)||
-  /^.+ · Sync aktiv$/.test(value);
+  /^.+ · Sync aktiv$/.test(value)||
+  /^.{1,48} ist eingetreten$/.test(value)||
+  /^Passend: .+$/.test(value)||
+  /^Weitere Treffer anzeigen · \d+ von \d+$/.test(value);
 }
 function lookupPack(value,language){
  if(language==="tr"){
@@ -805,6 +808,41 @@ function translateSharedPatterns(value,language){
   const tail=lookupPack("Sync aktiv",language);
   if(tail)return syncLine[1]+" · "+tail;
  }
+ const entered=value.match(/^(.{1,48}) ist eingetreten$/);
+ if(entered){
+  const name=lookupPack(entered[1],language)||entered[1];
+  const forms={
+   ar:"دخل وقت "+name,
+   en:name+" has begun",
+   tr:name+" vakti girdi",
+   ku:"Dema "+name+" dest pê kir",
+   ckb:"کاتی "+name+" هات",
+   bs:name+" je nastupio",
+   fr:name+" a commencé",
+   es:name+" ha comenzado"
+  };
+  return forms[language]||null;
+ }
+ const fitting=value.match(/^Passend: (.+)$/);
+ if(fitting){
+  const head=lookupPack("Passend:",language);
+  const rest=lookupPack(fitting[1],language)||fitting[1];
+  if(head)return head+" "+rest;
+ }
+ const moreHits=value.match(/^Weitere Treffer anzeigen · (\d+) von (\d+)$/);
+ if(moreHits){
+  const forms={
+   ar:"عرض المزيد من النتائج · "+moreHits[1]+" من "+moreHits[2],
+   en:"Show more results · "+moreHits[1]+" of "+moreHits[2],
+   tr:"Daha fazla sonuç göster · "+moreHits[1]+" / "+moreHits[2],
+   ku:"Encamên zêdetir nîşan bide · "+moreHits[1]+" ji "+moreHits[2],
+   ckb:"ئەنجامی زیاتر پیشان بدە · "+moreHits[1]+" لە "+moreHits[2],
+   bs:"Prikaži više rezultata · "+moreHits[1]+" od "+moreHits[2],
+   fr:"Afficher plus de résultats · "+moreHits[1]+" sur "+moreHits[2],
+   es:"Mostrar más resultados · "+moreHits[1]+" de "+moreHits[2]
+  };
+  return forms[language]||null;
+ }
  return null;
 }
 function translateExact(value,language="tr"){
@@ -1089,7 +1127,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-20";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-21";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

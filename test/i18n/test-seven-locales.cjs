@@ -75,6 +75,9 @@ assert.equal(locales.translations.ckb["DĀR AL TAWḤĪD – Ḥadīṯ-Biblioth
 assert.equal(w.DarTestTurkishUI.translateValue("Frage 2 von 10","fr"),"Question 2 sur 10");
 assert.equal(w.DarTestTurkishUI.translateValue("4 Aussagen mit Quellen.","en"),"4 "+locales.translations.en["Aussagen mit Quellen."]);
 assert.equal(w.DarTestTurkishUI.translateValue("3 / 10 richtig","es"),"3 / 10 "+locales.translations.es.richtig);
+assert.equal(w.DarTestTurkishUI.translateValue("Fajr ist eingetreten","en"),"Fajr has begun");
+assert.equal(w.DarTestTurkishUI.translateValue("Weitere Treffer anzeigen · 40 von 120","ku"),"Encamên zêdetir nîşan bide · 40 ji 120");
+assert.equal(locales.translations.ar["Laylat al-Qadr"],"ليلة القدر");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
