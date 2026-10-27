@@ -566,7 +566,7 @@ self.addEventListener("fetch",function(event){
     return;
   }
   /* QUIZ LEARNING CENTER: network-first so 450-question data, dashboard logic and layout never regress to a stale pack. */
-  if(url.pathname==="/kids/data/quiz-kids-public-450.json"||url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"||url.pathname==="/kids/quiz-v4-bridge.js"||url.pathname==="/kids/quiz-premium-v1.css"||url.pathname==="/kids/quiz-v4-approved-player.js"||url.pathname==="/kids/data/quiz-v4-full-rebuild-public.json"||url.pathname==="/kids/data/quiz-v4-full-rebuild-review.json"){
+  if(url.pathname==="/kids/data/quiz-kids-public-450.json"||url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"||url.pathname==="/kids/quiz-v4-bridge.js"||url.pathname==="/kids/quiz-premium-v1.css"||url.pathname==="/kids/quiz-v4-approved-player.js"||url.pathname==="/kids/quiz-v4-test-preview.js"||url.pathname==="/kids/data/quiz-v4-full-rebuild-public.json"||url.pathname==="/kids/data/quiz-v4-full-rebuild-review.json"){
     event.respondWith(networkFirst(request));
     return;
   }
