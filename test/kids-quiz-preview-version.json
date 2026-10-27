@@ -19,11 +19,11 @@
   "noOneSignal": true,
   "unpublishedQuestionsVisible": false,
   "publicVisitorRouteChanged": false,
-  "note": "Dar Test Worker sync for Kids Quiz v1460 smart mastery, explicit Next-only-after-right, new V4-only question/praise/retry/explanation interactions, fold and iPad layout. Genuine V4 audio is test-only until listening QA, not public visitor release. Metadata triggers deploy; not proof of delivery.",
+  "note": "Dar Test Worker sync from canonical main for Kids Quiz v1461 age-specific praise & encouragement text; genuine V4 review audio remains audition-only and humanListeningApproved=false. A successful CI deploy must be verified separately.",
   "responsiveBuild": "kids-quiz-fold-ipad-v2-20261027",
-  "kidsServiceWorkerCache": "v1460",
-  "testWorkerSync": "requested-after-kids-quiz-v1460-smart-mastery",
-  "integrationCommit": "0b14cc5a299c11abee4261b2280a49563e4e3856",
+  "kidsServiceWorkerCache": "v1461",
+  "testWorkerSync": "requested-after-kids-quiz-v1461-merge",
+  "integrationCommit": "72f5cd7acd47178b58063fbb13882b5217c86e0f",
   "quizRetryBehavior": "wrong-answer-allows-second-attempt-v2",
   "quizPraiseSync": "v4-clip-text-correct-retry-explanation"
 }
