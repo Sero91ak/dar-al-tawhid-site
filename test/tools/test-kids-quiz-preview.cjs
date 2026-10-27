@@ -19,7 +19,11 @@ for (const p of ["kids/index.html","kids/start.html","kids/shell.html"]) {
  assert.ok(html.includes('id="openQuizButton"')&&html.includes('id="quizModal"'),p+": quiz entry");
 }
 assert.equal(manifest.mode,"DAR_TEST_KIDS_QUIZ_ISOLATED");
-assert.equal(manifest.publicVisitorRouteChanged,false);
+assert.equal(manifest.publicVisitorRouteChanged,true);
+assert.equal(manifest.ownerReleaseAuthorized,true);
+assert.equal(manifest.ownerAuthorizationDate,"2026-10-27");
+assert.equal(manifest.publicAudioQaStatus,"OWNER_AUTHORIZED_V4_TECHNICALLY_VERIFIED_FUSHA_LISTENING_UNVERIFIED");
+assert.equal(manifest.humanListeningApproved,false);
 assert.equal(manifest.reviewAudioAllowedForPublicPlayback,false);
 assert.ok(worker.includes("DAR_TEST_KIDS_QUIZ_ISOLATED_V1"));
 assert.ok(worker.includes('const previewOrigin = "https://dar-al-tawhid-test.sero91ak.workers.dev";'));
@@ -75,5 +79,5 @@ const review=JSON.parse(read("kids/data/quiz-v4-full-rebuild-review.json"));
 assert.equal(review.humanListeningApproved,false);
 assert.equal(review.releaseEnabled,false);
 assert.equal(Object.keys(review.questions).length,450);
-console.log("PASS: isolated TEST 401 removed for exact URLs; private/public QA gates remain blocked");
-console.log("PASS: separate DAR TEST Kids preview origin, 450 canonical questions, responsive profiles and V4 human-approval lock");
+console.log("PASS: isolated TEST preview remains gated and the visitor owner release is explicitly distinct from human hearing approval");
+console.log("PASS: separate DAR TEST Kids preview origin, 450 canonical questions and owner-authorized visitor V4 with human Fuṣḥā QA still pending");
