@@ -70,6 +70,19 @@ function isGatedPath(pathname) {
 export function gateHiddenSurfaces(request, url, env, mode) {
   const pathname = url.pathname || "/";
   const ua = request.headers.get("User-Agent") || "";
+  // KIDS_V4_TEST_WORKER_ROUTE_401_FIX_20261027:
+  // The already-isolated Test Worker is the ONLY place authorized to serve
+  // Kids Quiz V4 review audition. Do not un-gate adult Test, Academy owner,
+  // the 450 unpublished drafts, or any request on the visitor hostname.
+  // Keep this exact allowlist small: no /kids/* or /test/kids/* wildcards.
+  if (mode === "live" && url.hostname === "dar-al-tawhid-test.sero91ak.workers.dev" &&
+      (pathname === "/kids/start" ||
+       pathname === "/kids/version.json" ||
+       pathname === "/kids/quiz-v4-test-preview.js" ||
+       pathname === "/kids/data/quiz-v4-full-rebuild-review.json" ||
+       pathname === "/test/kids" || pathname === "/test/kids/" ||
+       pathname === "/test/kids/start" ||
+       pathname === "/test/kids/version.json")) return null;
   if (hasValidGateAuth(request, env)) return null;
   if (isKidsAssetPath(pathname)) return null;
   if (isDarTestPath(pathname) && pathname !== "/test/kids" && !pathname.startsWith("/test/kids/")) return null;
