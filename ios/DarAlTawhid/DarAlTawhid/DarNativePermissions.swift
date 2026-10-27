@@ -235,16 +235,30 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // Approximate location is a valid, user-selected iOS permission mode.
+        // Reject invalid fixes, but do not discard every reduced-accuracy result
+        // (which left Qibla/prayer times without any coordinates).
+        let approximate = manager.accuracyAuthorization == .reducedAccuracy
+        let maximumAccuracy: CLLocationAccuracy = approximate ? 100_000 : 2_500
+        let maximumAge: TimeInterval = approximate ? 3_600 : 600
         guard let loc = locations.last(where: {
             CLLocationCoordinate2DIsValid($0.coordinate) &&
-            $0.horizontalAccuracy >= 0 && $0.horizontalAccuracy <= 2500 &&
-            abs($0.timestamp.timeIntervalSinceNow) < 600
+            $0.horizontalAccuracy.isFinite &&
+            $0.horizontalAccuracy >= 0 && $0.horizontalAccuracy <= maximumAccuracy &&
+            abs($0.timestamp.timeIntervalSinceNow) < maximumAge
         }) else { return }
-        if let previous = mostRecentLocation,
-           loc.distance(from: previous) < 300,
-           abs(loc.timestamp.timeIntervalSince(previous.timestamp)) < 900 { return }
+        let unchangedForWidgets: Bool
+        if let previous = mostRecentLocation {
+            unchangedForWidgets = loc.distance(from: previous) < 300 &&
+                abs(loc.timestamp.timeIntervalSince(previous.timestamp)) < 900
+        } else {
+            unchangedForWidgets = false
+        }
         mostRecentLocation = loc
+        // Always deliver an accepted fix to the current WKWebView. A pending
+        // "Standort erkennen" request must not be starved by widget throttling.
         deliver(loc)
+        if unchangedForWidgets { return }
         DarPushNotifications.applyNativeLocation(loc)
         Task { @MainActor in DarPrayerLiveActivityController.refresh() }
         WidgetCenter.shared.reloadAllTimelines()
