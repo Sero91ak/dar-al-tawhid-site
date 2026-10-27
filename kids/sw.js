@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1462";
+const CACHE_NAME="dar-al-tawhid-kids-v1463";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -258,7 +258,7 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/quiz-v4-bridge.js?v=20261013-academy1",
   "/kids/quiz-premium-v1.css?v=20261026-premium1&responsive=20261027-v2&lesson=20261027-v1&smart=v1460&retry=v1462",
   "/kids/quiz-v4-approved-player.js?v=20261026-v1",
-  "/kids/quiz-v4-test-preview.js?v=20261026-audition1",
+  "/kids/quiz-v4-test-preview.js?v=20261026-audition1&recovery=20261027-v1",
   "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
   "/kids/assets/sahaba-mubashshirun/umar.jpg",
   "/kids/assets/sahaba-mubashshirun/uthman.jpg",

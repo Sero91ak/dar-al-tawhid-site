@@ -9,7 +9,7 @@ const read=p=>fs.readFileSync(root+"/"+p,"utf8");
 const entry=read("kids/index.html");
 assert.equal(entry,read("kids/start.html"),"Kids start shell mismatch");
 assert.equal(entry,read("kids/shell.html"),"Kids shell mismatch");
-for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=20261026-premium1','/kids/quiz-library.css?v=20261026-premium1','/kids/sw.js?v=1462']){
+for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=20261026-premium1','/kids/quiz-library.css?v=20261026-premium1','/kids/sw.js?v=1463']){
   assert.ok(entry.includes(token),"Missing Kids shell token: "+token);
 }
 // Kids must display the age-appropriate new praise/encouragement even if
@@ -47,11 +47,11 @@ assert.ok(premiumCss.includes("minmax(0,1fr)"),"Responsive grid should not overf
 assert.ok(approvedPlayer.includes("humanListeningApproved!==true")&&approvedPlayer.includes("releaseEnabled!==true"),"Unheard V4 audio must fail closed");
 assert.ok(!read("kids/quiz-library.js").includes("var QUIZ_PACK_900="),"The 450 unpublished reserve is not visible");
 assert.ok(entry.includes("Quiz-Lernwelt")&&entry.includes("450 Fragen · neue Lernwelt"),"Visitor home must visibly expose new 450-question quiz entry");
-assert.ok(entry.includes("/kids/quiz-v4-test-preview.js?v=20261026-audition1"),"Kids visitor code must include host-isolated Test MP3 preview");
+assert.ok(entry.includes("/kids/quiz-v4-test-preview.js?v=20261026-audition1&recovery=20261027-v1"),"Kids visitor code must include host-isolated Test MP3 preview");
 const sw=read("kids/sw.js");
 const version=JSON.parse(read("kids/version.json"));
-assert.ok(sw.includes('dar-al-tawhid-kids-v1462'));
-assert.equal(version.visualSystem.serviceWorkerCache,"v1462");
+assert.ok(sw.includes('dar-al-tawhid-kids-v1463'));
+assert.equal(version.visualSystem.serviceWorkerCache,"v1463");
 assert.ok(sw.includes('/kids/quiz-library.js?v=20261026-premium1'));
 assert.ok(sw.includes('url.pathname==="/kids/quiz-library.js"'));
 const originalQuestions=JSON.parse(read("kids/data/quiz-kids.json")).items;
