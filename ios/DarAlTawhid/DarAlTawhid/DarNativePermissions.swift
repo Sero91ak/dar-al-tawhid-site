@@ -240,11 +240,12 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
         // (which left Qibla/prayer times without any coordinates).
         let approximate = manager.accuracyAuthorization == .reducedAccuracy
         let maximumAccuracy: CLLocationAccuracy = approximate ? 100_000 : 2_500
+        let maximumAge: TimeInterval = approximate ? 3_600 : 600
         guard let loc = locations.last(where: {
             CLLocationCoordinate2DIsValid($0.coordinate) &&
             $0.horizontalAccuracy.isFinite &&
             $0.horizontalAccuracy >= 0 && $0.horizontalAccuracy <= maximumAccuracy &&
-            abs($0.timestamp.timeIntervalSinceNow) < 600
+            abs($0.timestamp.timeIntervalSinceNow) < maximumAge
         }) else { return }
         let unchangedForWidgets: Bool
         if let previous = mostRecentLocation {
