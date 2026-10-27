@@ -1,0 +1,26 @@
+# DĀR AL TAWḤĪD — sensitive infrastructure, owner approval required.
+# Enforced only if main ruleset requires Code Owner reviews.
+/.github/CODEOWNERS @Sero91ak
+/.github/CORE_SECURITY_LOCK.md @Sero91ak
+/.github/workflows/core-sensitive-change-lock.yml @Sero91ak
+/scripts/core-sensitive-change-lock.cjs @Sero91ak
+
+# Web / test location configuration
+/assets/dar-setup-hub.js @Sero91ak
+/test/assets/dar-setup-hub.js @Sero91ak
+/assets/*prayer* @Sero91ak
+/assets/*qibla* @Sero91ak
+/assets/*location* @Sero91ak
+/test/assets/*prayer* @Sero91ak
+/test/assets/*qibla* @Sero91ak
+/test/assets/*location* @Sero91ak
+
+# Native iOS GPS, prayer, bridge, widget invariants
+/ios/DarAlTawhid/DarAlTawhid/DarNativePermissions.swift @Sero91ak
+/ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift @Sero91ak
+/ios/DarAlTawhid/DarAlTawhid/WebAppView.swift @Sero91ak
+/ios/DarAlTawhid/DarAlTawhid/Info.plist @Sero91ak
+/ios/DarAlTawhid/Shared/DarPrayerEngine.swift @Sero91ak
+/ios/DarAlTawhid/Shared/DarDailyContent.swift @Sero91ak
+/ios/DarAlTawhid/Shared/DarWidgetTheme.swift @Sero91ak
+/ios/DarAlTawhid/DarAlTawhid/Widgets/DarAlTawhidWidgets.swift @Sero91ak
