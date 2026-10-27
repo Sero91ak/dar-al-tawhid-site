@@ -15,7 +15,7 @@ const tests=[
 ["test button not a website password or query unlock",!view.includes("password")&&!view.includes("creatorSandbox=")&&!view.includes("localStorage")],
 ["creator menu requires explicit user tap",view.includes("showCreatorPanel = true")&&view.includes(".sheet(isPresented: $showCreatorPanel)")],
 ["six visible module links",["home","quran","stories","dua","parents","academy","console"].every(id=>view.includes('"'+id+'"'))],
-["all module selectors backend-whitelisted",web.includes('["home", "quran", "stories", "dua", "parents", "academy", "console"].contains(key)')],
+["all module selectors backend-whitelisted",web.includes('["home", "quran", "stories", "dua", "parents", "academy", "console", "quiz-v4"].contains(key)')],
 ["owner notification exists only in compiled test",web.includes("#if KIDS_CREATOR_TEST\n            NotificationCenter.default.addObserver(")],
 ["home tab exists in live shell",home.includes('data-target="today"')],
 ["stories tab exists",home.includes('data-target="stories"')],
@@ -26,6 +26,13 @@ const tests=[
 ["test host separate from visitor",shell.includes("dar-al-tawhid-kids-creator.sero91ak.workers.dev")&&shell.includes("https://dar-al-tawhid.de/kids/start")],
 ["test app has independent bundle ID",pbx.includes("PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.kids.creator;")],
 ["visitor bundle unchanged",pbx.includes("PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.kids;")],
+["native V4 test button is Creator-only",view.includes('button("Quiz · echte V4-Fuṣḥā-Hörvorschau"')&&
+  view.indexOf('button("Quiz · echte V4-Fuṣḥā-Hörvorschau"')>view.indexOf("#if KIDS_CREATOR_TEST")],
+["native V4 real MP3 host is explicitly test-only",shell.includes('v4AuditionHost = "dar-al-tawhid-test.sero91ak.workers.dev"')&&
+  shell.includes('static let v4AuditionURL = URL(string: "https://dar-al-tawhid-test.sero91ak.workers.dev/kids/start")!')],
+["V4 preview inside native test app, never changing visitor app",web.includes('if key == "quiz-v4"')&&
+  web.includes('url: KidsAppShell.v4AuditionURL')&&web.includes('pendingCreatorTab = "quiz-v4"')],
+["host-remap preserves dedicated V4 preview",shell.includes('if incoming.host?.lowercased() == v4AuditionHost { return incoming }')],
 ["visitor native official marker remains",web.includes('let officialMarker = "window.DAR_OFFICIAL_IOS_APP=true;"')],
 ["creator native official marker absent",web.includes('let officialMarker = ""')],
 ["synchronous native test routes only on test host",web.includes('page.url?.host?.lowercased() == "dar-al-tawhid-kids-creator.sero91ak.workers.dev"')],
