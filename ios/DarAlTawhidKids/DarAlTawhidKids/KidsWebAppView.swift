@@ -167,8 +167,20 @@ struct KidsWebAppView: UIViewRepresentable {
         // to existing KIDS modules on the separate test Worker is permitted.
         @objc private func creatorNavigate(_ notice: Notification) {
             guard let key = notice.object as? String,
-                  ["home", "quran", "stories", "dua", "parents", "academy", "console"].contains(key),
+                  ["home", "quran", "stories", "dua", "parents", "academy", "console", "quiz-v4"].contains(key),
                   let page = webView else { return }
+            if key == "quiz-v4" {
+                // Strict native TEST-only route. No visitor app/web cookies and
+                // no review MP3s copied to public or Creator staging assets.
+                // The separate Dar Test Worker holds all genuine 450 × 4 clips.
+                pendingCreatorTab = "quiz-v4"
+                page.load(URLRequest(
+                    url: KidsAppShell.v4AuditionURL,
+                    cachePolicy: .reloadIgnoringLocalCacheData,
+                    timeoutInterval: 30
+                ))
+                return
+            }
             if key == "console" {
                 guard let url = URL(string: "https://dar-al-tawhid-kids-creator.sero91ak.workers.dev/kids/test-console/index.html") else { return }
                 pendingCreatorTab = nil
@@ -195,7 +207,12 @@ struct KidsWebAppView: UIViewRepresentable {
         private func activateCreatorTab(_ key: String, in page: WKWebView) {
             // Values come from the hardcoded whitelist, not from a web parameter.
             let query: String
-            if key == "dua" {
+            if key == "quiz-v4" {
+                // Only after the separate test page completed its initial load.
+                // The Test host's JS loads its genuine V4 review manifest and
+                // provides independent touch controls for all four segments.
+                query = "try{if(window.openKidsQuizHub){window.openKidsQuizHub()}else{document.getElementById('openQuizButton')?.click()}}catch(e){document.getElementById('openQuizButton')?.click()}"
+            } else if key == "dua" {
                 query = "document.getElementById('openDuaButton')?.click()"
             } else {
                 query = "document.querySelector('.bottom-nav .nav-btn[data-target=\"\(key)\"]')?.click()"
