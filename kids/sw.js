@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1463";
+const CACHE_NAME="dar-al-tawhid-kids-v1464";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -141,7 +141,7 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-term-audio/sunnah-basic-05495797ca64.m4a",
   "/kids/assets/kids-term-audio/sunnah-deep-ae42ef7042ca.m4a",
   "/kids/assets/kids-term-audio/hadith-basic-4ca8212fb47e.m4a",
-  "/kids/assets/kids-term-audio/hadith-deep-3ab14633e844.m4a",
+  "/kids/assets/kids-term-audio/hadith-deep-3ab14643e844.m4a",
   "/kids/assets/kids-term-audio/tawakkul-basic-9288f5008910.m4a",
   "/kids/assets/kids-term-audio/tawakkul-deep-794bd2fa787e.m4a",
   "/kids/assets/kids-term-audio/shirk-basic-64375cb12cba.m4a",
