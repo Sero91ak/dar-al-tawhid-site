@@ -6,7 +6,7 @@
     "uiComplete": false,
     "contentComplete": false,
     "platformPushComplete": false,
-    "reason": "2948 oder 2981 Katalogschlüssel sind kein Beleg für 100 % der Ansichten. Visuelle Prüfung je Route und Sprache steht aus. Religiöse Entwürfe sind nicht freigegeben."
+    "reason": "Die Zahl der Katalogschlüssel ist kein Beleg für 100 % der Ansichten. Visuelle Prüfung je Route und Sprache steht aus. Religiöse Entwürfe sind nicht freigegeben."
   },
   "locales": [
     "de",
@@ -20,7 +20,7 @@
     "es"
   ],
   "ui": {
-    "keys": 2981,
+    "keys": 3054,
     "filesScanned": 120,
     "germanLookingLiterals": 1246,
     "alreadyInCatalog": 1106,
@@ -84,8 +84,8 @@
         "text": "öffnen",
         "count": 2,
         "places": [
-          "test/assets/dar-test-turkish-ui.js:460",
-          "test/assets/dar-test-turkish-ui.js:787"
+          "test/assets/dar-test-turkish-ui.js:462",
+          "test/assets/dar-test-turkish-ui.js:810"
         ],
         "className": "pattern-or-code",
         "owner": "dar-test-ui"

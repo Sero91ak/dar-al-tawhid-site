@@ -55,7 +55,7 @@ const report = {
     uiComplete: false,
     contentComplete: false,
     platformPushComplete: false,
-    reason: "2948 oder 2981 Katalogschlüssel sind kein Beleg für 100 % der Ansichten. Visuelle Prüfung je Route und Sprache steht aus. Religiöse Entwürfe sind nicht freigegeben."
+    reason: "Die Zahl der Katalogschlüssel ist kein Beleg für 100 % der Ansichten. Visuelle Prüfung je Route und Sprache steht aus. Religiöse Entwürfe sind nicht freigegeben."
   },
   locales: catalog.availableLocales,
   ui: {

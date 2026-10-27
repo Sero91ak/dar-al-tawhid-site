@@ -397,7 +397,9 @@ function isDynamicGermanUi(value){
   /^Wetter für .+ wird geladen …$/.test(value)||
   /^Wetter · .+: derzeit nicht verfügbar$/.test(value)||
   /^Wetter · .+: \d+ °C · .+$/.test(value)||
-  /^\d+ Treffer$/.test(value);
+  /^\d+ Treffer$/.test(value)||
+  /^Live-Kompass nicht verfügbar\. Qibla: ca\. \d+(?:[.,]\d+)?° \([^)]+\)\. Öffne die Kompass-App deines Handys und richte dich auf \d+(?:[.,]\d+)?° aus\. Bitte Richtung prüfen\.$/.test(value)||
+  /^Offline fortsetzen \d+\/\d+$/.test(value);
 }
 function lookupPack(value,language){
  if(language==="tr"){
@@ -738,6 +740,27 @@ function translateSharedPatterns(value,language){
   const word=lookupPack("Treffer",language);
   if(word)return hits[1]+" "+word;
  }
+ const compass=value.match(/^Live-Kompass nicht verfügbar\. Qibla: ca\. (\d+(?:[.,]\d+)?)° \(([^)]+)\)\. Öffne die Kompass-App deines Handys und richte dich auf (\d+(?:[.,]\d+)?)° aus\. Bitte Richtung prüfen\.$/);
+ if(compass){
+  const dir=lookupPack(compass[2],language)||compass[2];
+  const deg=compass[1];
+  const forms={
+   ar:"البوصلة الحية غير متاحة. القبلة: نحو "+deg+"° ("+dir+"). افتح بوصلة هاتفك واتجه نحو "+deg+"°. يُرجى التحقق من الاتجاه.",
+   en:"Live compass is unavailable. Qibla: about "+deg+"° ("+dir+"). Open your phone’s compass and face "+deg+"°. Please check the direction.",
+   tr:"Canlı pusula kullanılamıyor. Kıble: yaklaşık "+deg+"° ("+dir+"). Telefonunun pusulasını aç ve "+deg+"° yönüne dön. Lütfen yönü kontrol et.",
+   ku:"Qitibnîşana zindî ne amade ye. Qible: nêzîkî "+deg+"° ("+dir+"). Qitibnîşana telefonê veke û ber bi "+deg+"° ve bizivire. Ji kerema xwe alî kontrol bike.",
+   ckb:"کۆمپاسی ڕاستەوخۆ بەردەست نییە. قیبلە: نزیکەی "+deg+"° ("+dir+"). کۆمپاسی مۆبایلەکەت بکەرەوە و ڕوو لە "+deg+"° بکە. تکایە ئاڕاستەکە بپشکنە.",
+   bs:"Kompas uživo nije dostupan. Kibla: oko "+deg+"° ("+dir+"). Otvori kompas telefona i okreni se prema "+deg+"°. Provjeri smjer.",
+   fr:"La boussole en direct n’est pas disponible. Qibla : environ "+deg+"° ("+dir+"). Ouvre la boussole du téléphone et oriente-toi vers "+deg+"°. Vérifie la direction.",
+   es:"La brújula en vivo no está disponible. Qibla: unos "+deg+"° ("+dir+"). Abre la brújula del teléfono y oriéntate hacia "+deg+"°. Comprueba la dirección."
+  };
+  return forms[language]||null;
+ }
+ const offlineResume=value.match(/^Offline fortsetzen (\d+)\/(\d+)$/);
+ if(offlineResume){
+  const head=lookupPack("Offline fortsetzen",language);
+  if(head)return head+" "+offlineResume[1]+"/"+offlineResume[2];
+ }
  return null;
 }
 function translateExact(value,language="tr"){
@@ -931,6 +954,21 @@ const PINNED_CHROME={
   es:"Conocimiento del Qurʾān y de la Sunnah"
  }
 };
+function localizeCompassRose(locale){
+ const doc=global.document;
+ if(!doc?.querySelector)return;
+ const rose=locale==="ar"||locale==="ckb"
+  ?{n:"ش",e:"ق",s:"ج",w:"غ"}
+  :locale==="de"?{n:"N",e:"O",s:"S",w:"W"}:{n:"N",e:"E",s:"S",w:"W"};
+ for(const [key,text] of Object.entries(rose)){
+  doc.querySelectorAll(".qibla-"+key).forEach(element=>{
+   if(element.childElementCount)return;
+   const label=String(element.textContent||"");
+   if(label.length>3)return;
+   if(label!==text)element.textContent=text;
+  });
+ }
+}
 function localizePinnedChrome(locale){
  const doc=global.document;
  if(!doc?.querySelectorAll||locale==="de")return;
@@ -980,6 +1018,7 @@ function apply(root=global.document?.body,locale=currentLocale()){
  const doc=global.document;
  if(root.nodeType===1&&!shouldSkip(root))transformAttributes(root,locale);
  localizePinnedChrome(locale);
+ localizeCompassRose(locale);
  renderHomeWelcome(locale);
  markPendingMeanings(locale);
  translateFragmented(root,locale);
@@ -1006,7 +1045,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-17";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-19";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

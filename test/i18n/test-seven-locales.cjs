@@ -68,6 +68,10 @@ assert.equal(w.DarTestTurkishUI.translateValue("Wetter · Berlin: derzeit nicht 
 assert.equal(w.DarTestTurkishUI.translateValue("Wetter · Köln: 12 °C · Klar","ku"),locales.translations.ku.Wetter+" · Köln: 12 °C · "+locales.translations.ku.Klar);
 assert.equal(locales.translations.es["Inhalt wird vorbereitet…"],"Preparando el contenido…");
 assert.equal(locales.translations.ku["Wissen durchsuchen"],"Li zanînê bigere");
+assert.equal(w.DarTestTurkishUI.translateValue("Norden","ku"),"Bakur");
+assert.equal(w.DarTestTurkishUI.translateValue("Live-Kompass nicht verfügbar. Qibla: ca. 42° (Norden). Öffne die Kompass-App deines Handys und richte dich auf 42° aus. Bitte Richtung prüfen.","ku"),"Qitibnîşana zindî ne amade ye. Qible: nêzîkî 42° (Bakur). Qitibnîşana telefonê veke û ber bi 42° ve bizivire. Ji kerema xwe alî kontrol bike.");
+assert.equal(w.DarTestTurkishUI.translateValue("Offline fortsetzen 3/114","es"),locales.translations.es["Offline fortsetzen"]+" 3/114");
+assert.equal(locales.translations.ckb["DĀR AL TAWḤĪD – Ḥadīṯ-Bibliothek"],"DĀR AL TAWḤĪD – کتێبخانەی حەدیث");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
