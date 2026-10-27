@@ -290,9 +290,9 @@ export async function synthesizeDarVoice(env, text, options = {}) {
   // requires separate reviewed language segments, not a global PLS override.
   const hasArabicScript = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/u.test(script);
   const hasGermanLatin = /[A-Za-zÄÖÜäöüß]/u.test(script);
+  const nativeArabicScriptOnly = hasArabicScript && !hasGermanLatin;
   if ((hasArabicScript && hasGermanLatin) ||
-      (arabicLearningProfile && !hasArabicScript) ||
-      (!arabicLearningProfile && hasArabicScript)) {
+      (arabicLearningProfile && !nativeArabicScriptOnly)) {
     return {ok:false,reason:"Sprachtrennung: Deutsch und Arabisch müssen als separate de-/ar-Sprachsegmente geprüft werden."};
   }
   const stripInitialArabicContextShadda = (value) => {
@@ -316,10 +316,12 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     }
     return chars.join("").normalize("NFC");
   };
-  let ttsScript = arabicLearningProfile
-    ? stripInitialArabicContextShadda(
-        String(script || "").normalize("NFC").replace(/[\u06D6-\u06DC]/g, "").replace(/\s+/g, " ").trim()
-      )
+  let ttsScript = nativeArabicScriptOnly
+    ? (arabicLearningProfile
+        ? stripInitialArabicContextShadda(
+            String(script || "").normalize("NFC").replace(/[\u06D6-\u06DC]/g, "").replace(/\s+/g, " ").trim()
+          )
+        : String(script || "").normalize("NFC"))
     : String(script || "").normalize("NFC");
   // Do not rewrite German lexical tokens using the Arabic pronunciation library.
   if (profile === "dua_arabic_slow") {
@@ -332,7 +334,7 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     model_id: modelId,
     voice_settings: voiceSettings
   };
-  if (arabicLearningProfile) {
+  if (nativeArabicScriptOnly) {
     body.language_code = "ar";
     body.apply_text_normalization = "off";
   }
@@ -377,7 +379,7 @@ export async function synthesizeDarVoice(env, text, options = {}) {
       pronunciationDictionaryId: pronunciationDictionaryApplied ? dictionaryId : null,
       pronunciationDictionaryVersionId: pronunciationDictionaryApplied ? dictionaryVersionId : null,
 
-      languageScope: arabicLearningProfile ? "ar" : "de",
+      languageScope: nativeArabicScriptOnly ? "ar" : "de",
       chars: script.length,
       timestamps: true,
       estimatedCostEur: Number(((script.length / 1000) * 0.18).toFixed(4))
@@ -394,7 +396,7 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     pronunciationDictionaryId: pronunciationDictionaryApplied ? dictionaryId : null,
     pronunciationDictionaryVersionId: pronunciationDictionaryApplied ? dictionaryVersionId : null,
 
-    languageScope: arabicLearningProfile ? "ar" : "de",
+    languageScope: nativeArabicScriptOnly ? "ar" : "de",
     chars: script.length,
     timestamps: false,
     estimatedCostEur: Number(((script.length / 1000) * 0.18).toFixed(4))
