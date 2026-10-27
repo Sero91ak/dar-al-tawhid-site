@@ -27,6 +27,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - name: Install MP3 ffprobe integrity tool
+        run: |
+          if ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get -qq update
+            sudo DEBIAN_FRONTEND=noninteractive apt-get -y -qq install ffmpeg
+          fi
       - name: Import exact human-reviewed V4 audio from original generated take
         env:
           KIDS_OWNER_APPROVED_V4_SIGNED_MP3_URL: 'https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/wE6AFK9oqImgAeKhJHw9/4vpdmlfHmhNx5f0aOoqQ/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261027%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261027T195014Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=31fbd66eecb546defb856fd0d391521c2acb3734d9c34baf4e34c7cc8c164d90a0b51ecf8f0838dc18c70969a7aac3029885e280dc3a178f22049d914d5afddf36bdf46645894fb012550f8bc0d055abadec2fa7dfb2be3e5a6c77ea2f3eb767fad3e8dcb49a6974bcb8d388f046cde9e29992019ce009885586e774c5a260402e0be4cbe04badcd434507f1be9cc278d33581ab8f6e2735005a8c1b379635a40e9f5143bcf9835e1a43207dea1bf27bdc23c1128e67bf0ff95bbf7087f33a52aa3f683783b069110c39c7a419605203f7b4fc502cdaceb76fd89456dcd4e26ef553e2debbd1b0bd522b78e218fc9d77203564410023a854a092f4266df57e76'
