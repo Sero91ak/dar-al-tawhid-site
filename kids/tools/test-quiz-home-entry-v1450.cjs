@@ -261,6 +261,8 @@ assert.equal(ctx.quizCorrectCount,0);
 assert.equal(rightButton.classList.contains("correct"),false,"Never reveal answer on mistake");
 ctx.chooseQuizAnswer(0,rightButton);
 assert.equal(ctx.quizLocked,true,"Right answer must lock the completed question");
+assert.equal(rightButton.disabled,true,"Successful answer must freeze the selection");
+assert.equal(wrongButton.disabled,true,"Unselected answers must be frozen after success");
 assert.equal(nextBtn.disabled,false,"Only the right answer unlocks Next");
 assert.equal(nextBtn.aria["aria-disabled"],"false");
 assert.equal(ctx.quizCorrectCount,1);
