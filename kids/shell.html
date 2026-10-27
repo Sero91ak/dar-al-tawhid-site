@@ -6152,17 +6152,9 @@ function renderQuizQuestion(){
   var ageLabel=document.getElementById("quizAgeLabel");
   if(ageLabel)ageLabel.textContent=quizAgeRange().label;
   var q=currentQuiz[currentQuizIndex];
-  try{
-    var quizVoice=window.DARKidsOwnerVoice;
-    if(quizVoice&&typeof quizVoice.preload==="function"){
-      quizVoice.preload(quizPrompt(q));
-      quizVoice.preload(quizV4Text(q,"correctAudioText",q.success));
-      quizVoice.preload(quizV4Text(q,"retryAudioText",q.retry));
-      quizVoice.preload(quizV4Text(q,"explanationAudioText",q.explanation));
-      var nextQuizVoice=currentQuiz[currentQuizIndex+1];
-      if(nextQuizVoice)quizVoice.preload(quizPrompt(nextQuizVoice));
-    }
-  }catch(e){}
+  // Kids Quiz plays only exact ElevenLabs V4 manifest segments.
+  // Never preload legacy Owner Voice / Flash TTS on question changes.
+  try{window.DARKidsQuizV4Approved?.stop?.()}catch(_){}
   quizLocked=false;
   quizQuestionHadError=false;
   renderQuizProgress();
@@ -6191,7 +6183,7 @@ function renderQuizQuestion(){
     '<button id="quizExplanationListen" class="quiz-listen" type="button" hidden disabled>Erklärung anhören</button>'+ 
     '<div id="quizTermLearning" hidden></div>'+ 
     '<div id="quizSource" class="quiz-source"></div>'+
-    '<button id="quizNext" class="quiz-next" type="button">'+(currentQuizIndex===currentQuiz.length-1?'Auswertung ansehen':'Weiter')+' ›</button>';
+    '<button id="quizNext" class="quiz-next" type="button" disabled aria-disabled="true" aria-label="Erst nach richtiger Antwort fortfahren">'+(currentQuizIndex===currentQuiz.length-1?'Auswertung ansehen':'Weiter zur nächsten Frage')+' ›</button>';
   var scene=document.getElementById("quizScene");
   if(scene&&art.url){
     scene.style.setProperty("--quiz-art",'url("'+art.url.replace(/"/g,"%22")+'")');
@@ -6215,7 +6207,15 @@ function renderQuizQuestion(){
     if(this.disabled)return;
     quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question",quizId:q.id,quizQuestion:q,quizPart:"question"});
   });
-  document.getElementById("quizNext").addEventListener("click",function(){window.DARKidsQuizV4Approved?.stop?.();window.DARKidsTermLearning?.stop?.();currentQuizIndex++;renderQuizQuestion()});
+  document.getElementById("quizNext").addEventListener("click",function(){
+    // Mastery gate: cannot advance before answering correctly, even via
+    // synthetic click, accessibility keyboard, resumed state or CSS overrides.
+    if(!quizLocked||this.disabled||currentQuiz[currentQuizIndex]!==q)return;
+    window.DARKidsQuizV4Approved?.stop?.();
+    window.DARKidsTermLearning?.stop?.();
+    currentQuizIndex++;
+    renderQuizQuestion();
+  });
   setTimeout(function(){
     if(currentQuiz[currentQuizIndex]!==q)return;
     refreshQuizListenState();
@@ -6263,7 +6263,13 @@ function chooseQuizAnswer(index,button){
     }
     var src=document.getElementById("quizSource");
     if(src)src.innerHTML='<strong>Quelle:</strong> '+String(q.source||"");
-    document.getElementById("quizNext").classList.add("show");
+    var nextButton=document.getElementById("quizNext");
+    if(nextButton){
+      nextButton.disabled=false;
+      nextButton.setAttribute("aria-disabled","false");
+      nextButton.removeAttribute("aria-label");
+      nextButton.classList.add("show");
+    }
     // Save mastery internally; don't replace the child's blessing with a technical learning state.
     recordQuizAttempt(q.id,!quizQuestionHadError);
     // Nach einer richtigen Antwort wird die kindgerechte Erklärung vollständig
