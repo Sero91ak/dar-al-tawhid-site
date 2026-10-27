@@ -618,7 +618,7 @@ enum DarPushNotifications {
         var candidates: [PrayerNotificationCandidate] = []
         for dayOffset in 0..<4 {
             guard let day = cal.date(byAdding: .day, value: dayOffset, to: now) else { continue }
-            let slots = DarPrayerEngine.times(for: day, lat: snap.latitude, lng: snap.longitude)
+            let slots = DarPrayerEngine.times(for: day, lat: snap.latitude, lng: snap.longitude, fajrAngle: snap.fajrAngle, asrFactor: snap.asrFactor)
             for slot in slots where slot.id != "sunrise" {
                 if slot.id == "tahajjud" {
                     let mode = settings["tahajjudMode"] as? String ?? "off"
