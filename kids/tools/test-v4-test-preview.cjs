@@ -27,6 +27,22 @@ for(const [id,q] of Object.entries(manifest.questions)){
 }
 assert.deepEqual(age,{"4-6":150,"7-8":150,"9-10":150});
 assert.equal(paths.size,1217);
+// Every published question MUST resolve to the matching genuine age/source V4
+// review entry. Previously, this was only exercised for kids-quiz-001.
+const public450=JSON.parse(fs.readFileSync("kids/data/quiz-kids-public-450.json","utf8"));
+assert.equal(public450.items.length,450);
+for(const q of public450.items){
+  const item=manifest.questions[q.id];
+  assert.ok(item,"Missing real V4 mapping for "+q.id);
+  assert.equal(item.ageBand,q.ageBand,"Age-specific V4 mismatch for "+q.id);
+  assert.equal(item.source,q.source,"Question source-specific V4 mismatch for "+q.id);
+  for(const part of ["question","correct","retry","explanation"]){
+    const clip=item.clips[part];
+    assert.ok(clip&&typeof clip.text==="string"&&clip.text.trim().length>6,
+      "Missing generated V4 "+part+" spoken script for "+q.id);
+    assert.ok(fs.existsSync(clip.url.slice(1)),"Missing actual V4 MP3 for "+q.id+"/"+part);
+  }
+}
 for(const [uri,hash] of paths){
   const path=uri.slice(1);
   const raw=fs.readFileSync(path);
@@ -37,8 +53,9 @@ const blocked={DARKidsQuizV4Approved:{version:"strict-release-only"},location:{h
 vm.runInNewContext(source,{window:blocked,Promise,Error,Number,Object,Array,String,RegExp});
 assert.equal(blocked.DARKidsQuizV4Approved.version,"strict-release-only","public visitor must never enable test preview");
 const children=[];
+let playerCreations=0;
 class Audio{
- constructor(){this.src="";this.playbackRate=1}
+ constructor(){playerCreations++;this.src="";this.playbackRate=1}
  pause(){}
  removeAttribute(){this.src=""}
  load(){}
@@ -56,13 +73,28 @@ assert.equal(test.DARKidsQuizV4Approved.isTestPreview,true);
 (async()=>{
  assert.equal(await test.DARKidsQuizV4Approved.load(),true);
  assert.equal(test.DARKidsQuizV4Approved.isReady(),true);
- const qid="kids-quiz-001";const q={id:qid,ageBand:manifest.questions[qid].ageBand,source:manifest.questions[qid].source};
- for(const part of ["question","correct","retry","explanation"]){
-   assert.equal(test.DARKidsQuizV4Approved.has(q,part),true);
-   assert.equal(test.DARKidsQuizV4Approved.play(q,part),true);
+ let plays=0;
+ for(const band of ["4-6","7-8","9-10"]){
+   const eligible=public450.items.filter(q=>q.ageBand===band);
+   // Exercise first and last actual child questions in every age band.
+   for(const q of [eligible[0],eligible[eligible.length-1]]){
+     for(const part of ["question","correct","retry","explanation"]){
+       assert.equal(test.DARKidsQuizV4Approved.has(q,part),true,
+         "Browser playback lookup failed "+q.id+"/"+part);
+       const clip=manifest.questions[q.id].clips[part];
+       assert.equal(test.DARKidsQuizV4Approved.get(q,part).url,clip.url);
+       assert.equal(test.DARKidsQuizV4Approved.play(q,part),true);
+       assert.equal(children[plays],clip.url,"Audio player selected wrong file");
+       plays++;
+     }
+   }
  }
- assert.equal(children.length,4);
+ assert.equal(plays,24);
+ assert.equal(children.length,24);
+ assert.equal(playerCreations,24,"Every user tap must create a fresh Safari audio instance");
+ const q=public450.items.find(item=>item.ageBand==="4-6");
  assert.equal(test.DARKidsQuizV4Approved.has({...q,ageBand:"9-10"},"question"),false);
  assert.equal(test.DARKidsQuizV4Approved.has({...q,source:"Qurʾān 999"},"question"),false);
- console.log("PASS: exact 450×4, 1217 SHA-256 MP3 originals, stage-only playable, visitor not enabled, source and age ID gates");
+ console.log("PASS: 450 original public questions match exact V4 age/source, 1800 scripts, 1217 SHA-256 files");
+ console.log("PASS: 24 genuine browser V4 play() calls across all three ages and four feedback types; production preview remains forbidden");
 })().catch(e=>{console.error(e);process.exitCode=1});
