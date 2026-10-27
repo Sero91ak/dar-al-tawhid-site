@@ -31,6 +31,8 @@ on:
       - kids/quiz-premium-v1.css
       - kids/quiz-v4-bridge.js
       - kids/quiz-v4-approved-player.js
+      # Optional V4 audio audition list (not a learning UI)
+      - kids/quiz-v4-audio-review.html
       - kids/data/quiz-kids-public-450.json
       - kids/data/quiz-v4-full-rebuild-public.json
       # DĪN: future source-checked lessons and master-text changes must auto-deploy via the sole production Worker.
