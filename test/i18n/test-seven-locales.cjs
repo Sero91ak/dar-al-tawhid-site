@@ -82,6 +82,9 @@ assert.equal(w.DarTestTurkishUI.translateValue("15 Min vorher","en"),"15 minutes
 assert.equal(w.DarTestTurkishUI.translateValue("Taḥajjud · 30 Min vor Fajr","tr"),"Teheccüd · Fecir’den 30 dk önce");
 assert.equal(locales.translations.ar["Botschaft aller Gesandten"],"رسالة جميع الرسل");
 assert.equal(locales.translations.ckb["Klassisches Ḥadīṯ-Werk"],"بەرهەمی کلاسیکی حەدیث");
+assert.equal(locales.translations.en["LESBAR"],"READABLE");
+assert.equal(w.DarTestTurkishUI.translateValue("Gebete deaktiviert · Duʿāʾ 09:00","en"),locales.translations.en["Gebete deaktiviert"]+" · "+locales.translations.en["Duʿāʾ 09:00"]);
+assert.equal(locales.translations.fr["Bildschirm darf ausgehen"],"L’écran peut s’éteindre");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);

@@ -411,7 +411,16 @@ function isDynamicGermanUi(value){
   /^\d+ Min vorher$/.test(value)||
   /^Taḥajjud · \d+ Min vor Fajr$/.test(value)||
   /^Wiederholen · .+$/.test(value)||
-  /^ḤADĪṮ-WERK · .+$/.test(value);
+  /^ḤADĪṮ-WERK · .+$/.test(value)||
+  compoundKnown(value);
+}
+function compoundKnown(value){
+ if(!value.includes(" · "))return false;
+ if(dictionary.has(value))return false;
+ for(const dict of languagePacks.values())if(dict.has(value))return false;
+ const bits=value.split(" · ").map(part=>part.trim());
+ if(bits.length<2||bits.length>6)return false;
+ return bits.every(part=>part&&part.length<=80&&(dictionary.has(part)||[...languagePacks.values()].some(dict=>dict.has(part))||isDynamicGermanUi(part)));
 }
 function lookupPack(value,language){
  if(language==="tr"){
@@ -425,6 +434,16 @@ function lookupPack(value,language){
 function translateComposed(value,language){
  const direct=lookupPack(value,language);
  if(direct!==undefined)return direct;
+ if(value.includes(" · ")){
+  const bits=value.split(" · ").map(part=>part.trim());
+  if(bits.length>=2&&bits.length<=6&&bits.every(part=>part&&part.length<=80)){
+   const mapped=bits.map(part=>{
+    const known=lookupPack(part,language);
+    return known!==undefined?known:translateSharedPatterns(part,language);
+   });
+   if(mapped.every(part=>part!==undefined&&part!==null))return mapped.join(" · ");
+  }
+ }
  const wrapped=value.match(/^(\s*(?:←|→|↗|‹|›)\s*)(.+?)(\s*(?:→|↗|›))?\s*$/);
  if(wrapped){
   const inner=lookupPack(wrapped[2].trim(),language);
@@ -1160,7 +1179,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-22";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-23";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
