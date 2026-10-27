@@ -45,33 +45,43 @@ def duration(path):
         "-of", "default=noprint_wrappers=1:nokey=1", str(path)
     ], text=True).strip())
 
-def timings(text, answer, source_duration, output_duration):
-    # Only use provably aligned character offsets. Never fake timestamps.
-    alignment = answer.get("alignment") or answer.get("normalizedAlignment") or {}
-    chars = alignment.get("characters") or []
-    starts = alignment.get("character_start_times_seconds") or []
-    joined = "".join(str(c) for c in chars)
-    if joined != text or len(starts) != len(chars):
+def speech_layout(text):
+    # ElevenLabs alignment uses one normalized speech script. Collapse ONLY
+    # whitespace while retaining every original word and punctuation mark.
+    sections = [" ".join(p.split()) for p in re.split(r"\n{2,}", text) if p.strip()]
+    speech = " ".join(sections)
+    offsets, position = [], 0
+    for n, part in enumerate(sections):
+        offsets.append(position)
+        position += len(part) + (1 if n < len(sections) - 1 else 0)
+    if not speech or not sections:
+        raise RuntimeError("Empty speech layout")
+    return speech, offsets
+
+def timings(text, speech, answer, source_duration, output_duration):
+    # Never estimate/fabricate synchronization when the provider response
+    # fails exact character correspondence with the spoken master text.
+    _, offsets = speech_layout(text)
+    if not source_duration or not output_duration:
         return [], "alignment-needs-review"
-    sections = [s for s in re.split(r"\n{2,}", text) if s.strip()]
-    offsets, pos = [], 0
-    for part in sections:
-        found = text.find(part, pos)
-        if found < pos:
-            return [], "alignment-needs-review"
-        offsets.append(found)
-        pos = found + len(part)
-    if not offsets or not source_duration or not output_duration:
-        return [], "alignment-needs-review"
-    scale = output_duration / source_duration
-    markers = [max(0.0, float(starts[i]) * scale) for i in offsets]
-    if any(b <= a for a, b in zip(markers, markers[1:])):
-        return [], "alignment-needs-review"
-    result = []
-    for n, start in enumerate(markers):
-        end = markers[n + 1] if n + 1 < len(markers) else output_duration
-        result.append({"paragraphIndex": n, "start": round(start, 3), "end": round(end, 3)})
-    return result, "character-alignment-exact"
+    for alignment in (answer.get("alignment"), answer.get("normalizedAlignment")):
+        alignment = alignment or {}
+        chars = alignment.get("characters") or []
+        starts = alignment.get("character_start_times_seconds") or []
+        if len(chars) != len(starts) or not chars:
+            continue
+        if "".join(str(c) for c in chars) != speech:
+            continue
+        scale = output_duration / source_duration
+        markers = [max(0.0, float(starts[i]) * scale) for i in offsets]
+        if any(b <= a for a, b in zip(markers, markers[1:])):
+            continue
+        cues = []
+        for n, start in enumerate(markers):
+            end = markers[n + 1] if n + 1 < len(markers) else output_duration
+            cues.append({"paragraphIndex": n, "start": round(start, 3), "end": round(end, 3)})
+        return cues, "character-alignment-exact"
+    return [], "alignment-needs-review"
 
 def verify_contract():
     req, data, policy, lang = load(REQUEST), load(SOURCE), load(POLICY), load(LANG_POLICY)
@@ -125,7 +135,8 @@ def verify_contract():
 def produce(sid, text, secret):
     # Send the exact original German narrative; do not run older Arabic PLS,
     # replace 'Nur', insert Arabic script, or rewrite any canonical master text.
-    payload = json.dumps({"text": text, "prepared": text, "profile": PROFILE},
+    speech, _ = speech_layout(text)
+    payload = json.dumps({"text": text, "prepared": speech, "profile": PROFILE},
                          ensure_ascii=False).encode("utf-8")
     request = urllib.request.Request(API, data=payload, method="POST", headers={
         "X-Admin-Secret": secret,
@@ -154,7 +165,7 @@ def produce(sid, text, secret):
     secs = duration(target)
     if not (25 <= secs <= 540) or target.stat().st_size < 8000:
         raise RuntimeError("Implausible technical audio duration/size; needs manual review")
-    cues, cue_status = timings(text, answer, source_secs, secs)
+    cues, cue_status = timings(text, speech, answer, source_secs, secs)
     return {
         "storyId": sid, "status": "technical-passed-awaiting-human-listening",
         "approvedForPlayback": False, "humanListeningApproved": False,
