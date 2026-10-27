@@ -112,6 +112,47 @@ function showNotice(){
     note.appendChild(sample);
   }
   sample.hidden=status!=="ready";
+  // Test-only, user-initiated listening controls: make EVERY V4 segment
+  // independently audible on iPad Safari, even if autoplay is denied.
+  var four=note.querySelector("#kidsV4FourParts");
+  if(!four){
+    four=root.document.createElement("div");four.id="kidsV4FourParts";
+    four.style.cssText="display:flex;flex-wrap:wrap;align-items:center;gap:8px;max-width:100%;margin-top:8px";
+    var label=root.document.createElement("label");
+    label.textContent="Altersgruppe ";
+    label.style.cssText="color:#fff5dd;font-weight:700;font-size:13px";
+    var select=root.document.createElement("select");
+    select.id="kidsV4AgeSelect";
+    select.style.cssText="min-height:44px;padding:7px;border-radius:10px;background:#203c47;color:#fff";
+    ["4-6","7-8","9-10"].forEach(function(b){
+      var option=root.document.createElement("option");
+      option.value=b;option.textContent=b+" Jahre";select.appendChild(option);
+    });
+    label.appendChild(select);four.appendChild(label);
+    [{part:"question",label:"Frage"},{part:"correct",label:"Lob"},
+     {part:"retry",label:"Ermutigung"},{part:"explanation",label:"Erklärung"}].forEach(function(item){
+      var button=root.document.createElement("button");
+      button.type="button";
+      button.textContent="▶ "+item.label+" hören";
+      button.style.cssText="min-height:44px;padding:8px 12px;border:1px solid #e8ba76;"+
+        "border-radius:10px;background:#174551;color:#fff8e8;font:800 12px/1.3 system-ui;touch-action:manipulation";
+      button.addEventListener("click",function(){
+        if(!manifest)return;
+        var band=select.value||"4-6";
+        var id=Object.keys(manifest.questions).find(function(candidate){
+          return manifest.questions[candidate].ageBand===band;
+        });
+        if(!id){lastError="Altersgruppe nicht gefunden";showNotice();return}
+        var q=manifest.questions[id];
+        preview.play({id:id,ageBand:q.ageBand,source:q.source},item.part,{
+          onerror:function(){lastError="Ton nicht gestartet: "+item.label+". Bitte Hörknopf erneut antippen.";showNotice();}
+        });
+      });
+      four.appendChild(button);
+    });
+    note.appendChild(four);
+  }
+  four.hidden=status!=="ready";
 }
 var preview={
   isTestPreview:true,version:"review-450x4-test-host-20261026",
