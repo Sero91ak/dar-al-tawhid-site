@@ -64,4 +64,17 @@ assert.ok(player.includes('data.humanListeningApproved!==true&&!ownerRoute'));
 assert.ok(player.includes('clip.modelId!=="eleven_v4"'));
 assert.ok(player.includes('data.releaseEnabled!==true'));
 assert.ok(!player.includes("speechSynthesis."),"No browser voice fallback for KIDS");
+const childProcess=require("node:child_process");
+for(const args of [
+  ["kids/tools/v4_language_isolation.py","--self-test"],
+  ["kids/tools/v4_language_isolation.py","--audit"],
+]){
+  const result=childProcess.spawnSync("python3",args,{stdio:"inherit",timeout:60000});
+  assert.equal(result.error,undefined,"KIDS language-boundary Python test could not start");
+  assert.equal(result.status,0,"KIDS de-DE/ar pronunciation boundary test failed: "+args.join(" "));
+}
+const languagePolicy=read("data/pronunciation/voice-language-isolation-v1.json");
+assert.equal(languagePolicy.id,"dar-voice-language-isolation-v1");
+assert.deepEqual(languagePolicy.german.pronunciationDictionaryLocators,[]);
+assert.deepEqual(languagePolicy.arabic.pronunciationDictionaryLocators,[]);
 console.log("PASS: OWNER-AUTHORIZED public Eleven V4 · 450/450 questions · 150/150/150 · 1,800 exact clips · 1,217 authentic SHA-256 MP3s · human Fuṣḥā hearing NOT certified");
