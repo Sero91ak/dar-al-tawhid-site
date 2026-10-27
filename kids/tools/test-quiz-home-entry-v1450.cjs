@@ -6,6 +6,11 @@ const fs=require("node:fs");
 const vm=require("node:vm");
 const root=process.cwd();
 const read=p=>fs.readFileSync(root+"/"+p,"utf8");
+// Coverage gate: exercise every one of 450 quiz bank rows and all 1800
+// public V4 slot mappings; audio quality itself still requires human QA.
+const {execFileSync:run}=require("node:child_process");
+run(process.execPath,["kids/tools/test-quiz-fallback-v1468.cjs"],{cwd:root,stdio:"inherit",timeout:60000});
+run("python3",["kids/tools/audit_quiz_450_language_and_integrity.py"],{cwd:root,stdio:"inherit",timeout:60000});
 const entry=read("kids/index.html");
 assert.equal(entry,read("kids/start.html"),"Kids start shell mismatch");
 assert.equal(entry,read("kids/shell.html"),"Kids shell mismatch");
