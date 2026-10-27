@@ -90,3 +90,49 @@ html.dar-home-v3 body.is-home-route .top-shell :is(.dt-hero-kicker,.isnad-label,
   color:var(--dv3-gold,var(--gold2))!important;
   -webkit-text-fill-color:var(--dv3-gold,var(--gold2))!important;
 }
+
+/* DAR_TEST_KIDS_REFERENCE_HOME_GEOMETRY_V1_20261027
+ * Mirror Kids' fluid/safe-area shell, without importing Kids palette,
+ * children's UI, audio state, native bridges or page markup. Home only.
+ * This is the last Test-only stylesheet injected by the isolated Worker. */
+html.dar-home-v3 body.is-home-route {
+  --dar-kids-reference-gutter:max(12px,2.2vw,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+  --dar-nav-max:560px;
+  --dar-nav-width:min(560px,calc(100vw - var(--dar-kids-reference-gutter) - var(--dar-kids-reference-gutter)));
+}
+html.dar-home-v3 body.is-home-route .top-shell,
+html.dar-home-v3 body.is-home-route #appView.view {
+  box-sizing:border-box!important;
+  inline-size:min(100%,900px)!important;
+  min-inline-size:0!important;
+  max-inline-size:900px!important;
+  margin-inline:auto!important;
+  padding-inline:var(--dar-kids-reference-gutter)!important;
+}
+html.dar-home-v3 body.is-home-route #appView .dv3-home,
+html.dar-home-v3 body.is-home-route #appView .dv3-home > *,
+html.dar-home-v3 body.is-home-route #appView :is(
+  .dv3-quick-grid,.dv3-quick,.dv3-tawhid,.dv3-search-box,
+  .dv3-post,.dv3-post-body,#dv3QuranSlot
+){
+  box-sizing:border-box!important;
+  min-inline-size:0!important;
+  max-inline-size:100%!important;
+}
+html.dar-home-v3 body.is-home-route #appView .dv3-quick-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+@media(max-width:390px){
+  html.dar-home-v3 body.is-home-route .top-shell,
+  html.dar-home-v3 body.is-home-route #appView.view{
+    inline-size:100%!important;
+  }
+  html.dar-home-v3 body.is-home-route #appView .dv3-quick{
+    min-inline-size:0!important;
+    gap:6px!important;
+  }
+  html.dar-home-v3 body.is-home-route #appView .dv3-quick :is(b,small){
+    min-inline-size:0!important;
+    overflow-wrap:anywhere!important;
+  }
+}
