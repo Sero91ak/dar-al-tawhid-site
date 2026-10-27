@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 "use strict";
 const fs=require("node:fs");
+const crypto=require("node:crypto");
 const path=require("node:path");
 const ROOT=path.resolve(__dirname,"..");
 const read=name=>JSON.parse(fs.readFileSync(path.join(ROOT,name),"utf8"));
@@ -30,7 +31,50 @@ const salaf=read("kids/data/salaf-library-v1.json").items;
 if(salaf.length!==34)throw Error("Unexpected Salaf story count");
 for(const item of salaf){
   check(item.masterStoryText,"Salaf:"+item.id);
-  if(item.audioMaster?.url)throw Error(item.id+": Salaf master audio exists; re-check parity");
+  const master=item.audioMaster;
+  if(!master?.url){
+    if(master!=null)throw Error(item.id+": incomplete Salaf audioMaster; use null before approval");
+    continue;
+  }
+  if(item.verification!=="approved"||item.editorialRelease!==true)
+    throw Error(item.id+": unreleased story must never receive a public recording");
+  if(master.modelId!=="eleven_v4"||master.voiceId!=="DkU7j9uO4ZEtLD2iRZSH"||
+     master.voiceProfileId!=="serhat-owner-voice-2026"||master.profile!=="kids_story")
+    throw Error(item.id+": Salaf wrong master voice/model");
+  if(master.humanListeningApproved!==true||master.approvedForPlayback!==true||
+     master.releaseEnabled!==true||master.languageCode!=="de"||
+     master.globalArabicDictionaryApplied!==false)
+    throw Error(item.id+": public Salaf audio lacks confirmed language-isolated human listening approval");
+  const approval=master.approvalEvidence||{};
+  if(!approval.reviewer||!approval.reviewedAt||approval.germanPronunciationPassed!==true||
+     approval.fushaTermsPassed!==true||approval.iphonePlaybackPassed!==true||
+     approval.ipadPlaybackPassed!==true||approval.textAudioParityPassed!==true)
+    throw Error(item.id+": missing real hearing, German/Fuṣḥā or iOS/iPad QA evidence");
+  const textHash=crypto.createHash("sha256").update(item.masterStoryText,"utf8").digest("hex");
+  if(master.textSha256!==textHash)
+    throw Error(item.id+": recording no longer matches the exact master text");
+  const expected="/kids/audio/salaf/"+item.id+".m4a";
+  const url=new URL(master.url,"https://dar-al-tawhid.de");
+  if(url.origin!=="https://dar-al-tawhid.de"||url.pathname!==expected)
+    throw Error(item.id+": public Salaf audio path must be canonical");
+  const file=path.join(ROOT,url.pathname.slice(1));
+  if(!fs.existsSync(file)||fs.statSync(file).size<8000)
+    throw Error(item.id+": approved audio file missing");
+  const fileSha=crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex");
+  if(master.sha256!==fileSha)
+    throw Error(item.id+": audio SHA256 changed after hearing approval");
+  const paragraphs=item.masterStoryText.split(/\n{2,}/).filter(Boolean);
+  const cues=master.timings;
+  if(!Array.isArray(cues)||cues.length!==paragraphs.length)
+    throw Error(item.id+": no exact paragraph count for read-along timing");
+  let previous=-1;
+  for(let n=0;n<cues.length;n++){
+    const t=cues[n],start=Number(t?.start),end=Number(t?.end);
+    if(t?.paragraphIndex!==n||!Number.isFinite(start)||!Number.isFinite(end)||
+       start<0||start<=previous||end<start)
+      throw Error(item.id+": invalid Salaf aligned paragraph "+n);
+    previous=start;
+  }
 }
 const other=read("kids/data/stories-authentic.json");
 if(other.items.length!==4)throw Error("Unexpected authentic story count");

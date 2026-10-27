@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "authorization": "OWNER_EXPLICIT_SALAF_AUDIO_2026_10_27",
+  "requestedOn": "2026-10-27",
+  "collection": "Schätze der Salaf",
+  "mode": "staging-review-only",
+  "allowLivePublication": false,
+  "retryPaidRequests": false,
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "voiceProfile": "kids_story",
+  "languagePolicy": "German de and romanized Fusha terms; no Arabic global dictionary; no synthetic Quran recitation",
+  "storyIds": [
+    "malik-mut-zur-wahrheit",
+    "shafii-freundschaft-trotz-unterschied",
+    "layth-das-grosse-honiggeschenk",
+    "ibn-sirin-sanfte-stimme-fuer-seine-mutter"
+  ],
+  "maxClips": 4,
+  "maxTotalCharacters": 18000,
+  "oneMasterAudioForAllProfiles": true,
+  "approvalGate": "human listening and text/audio/timing/device QA before public manifest"
+}
