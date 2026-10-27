@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-27T04:53:02.351Z",
+  "updatedAt": "2026-10-27T04:53:08.844Z",
   "cacheVersion": 91,
   "settings": {
     "autoDownloadEnabled": true,
@@ -33,17 +33,19 @@
     ]
   },
   "syncState": {
-    "lastSyncAt": "",
-    "lastSyncStatus": "idle",
-    "lastSyncError": "",
-    "nextSyncAt": "",
-    "dailyDownloadDate": "",
-    "dailyDownloadCount": 0,
-    "lastRunDownloads": 0,
-    "lastRunRejected": 0,
-    "lastRunErrors": [],
-    "totalDownloads": 0,
-    "totalRejected": 0
+    "lastSyncAt": "2026-10-27T04:52:54.058Z",
+    "lastSyncStatus": "ok",
+    "lastSyncError": "pexels:15103188: Download 404",
+    "nextSyncAt": "2026-10-28T04:53:08.844Z",
+    "dailyDownloadDate": "2026-10-27",
+    "dailyDownloadCount": 2,
+    "lastRunDownloads": 2,
+    "lastRunRejected": 41,
+    "lastRunErrors": [
+      "pexels:15103188: Download 404"
+    ],
+    "totalDownloads": 2,
+    "totalRejected": 36
   },
   "items": [
     {
