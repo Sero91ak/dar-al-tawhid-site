@@ -19,11 +19,11 @@
   "noOneSignal": true,
   "unpublishedQuestionsVisible": false,
   "publicVisitorRouteChanged": false,
-  "note": "Refresh isolated Dar Test Kids preview after the separately merged Kids Quiz repair. Release remains human-unapproved and must not enable public playback.",
+  "note": "Isolated Dar Test Worker must be redeployed against Kids Quiz v1459: real V4 review audio remains test-only, visitor audio release stays blocked until actual human listening approval. This metadata change is a deploy trigger, not proof of delivery.",
   "responsiveBuild": "kids-quiz-fold-ipad-v2-20261027",
-  "kidsServiceWorkerCache": "v1458",
-  "testWorkerSync": "requested-after-kids-quiz-pr-1449-merge",
-  "integrationCommit": "2f2960107cf92cd5ace702fab415ee52a7334c25",
+  "kidsServiceWorkerCache": "v1459",
+  "testWorkerSync": "requested-after-kids-quiz-lesson-pr-1451",
+  "integrationCommit": "4dba0b06eda4900c75a95d66c56cb90b492d2c2c",
   "quizRetryBehavior": "wrong-answer-allows-second-attempt-v2",
   "quizPraiseSync": "v4-clip-text-correct-retry-explanation"
 }
