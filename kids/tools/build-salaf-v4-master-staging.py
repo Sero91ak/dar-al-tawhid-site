@@ -12,6 +12,7 @@ import os
 import pathlib
 import re
 import subprocess
+import sys
 import tempfile
 import urllib.request
 
@@ -172,6 +173,12 @@ def produce(sid, text, secret):
 
 def main():
     stories, req = verify_contract()
+    if sys.argv[1:] == ["--preflight"]:
+        print("PREFLIGHT OK: exact master voice, 4 approved full stories, 0 paid calls",
+              "total characters:", sum(len(t) for _, t in stories))
+        return
+    if sys.argv[1:]:
+        raise RuntimeError("Only --preflight is accepted; no silent alternate modes")
     manifest = load(MANIFEST) if MANIFEST.exists() else {
         "schemaVersion": 1, "collection": "Schätze der Salaf",
         "mode": "staging-review-only", "publicRelease": False, "entries": {}
@@ -195,6 +202,8 @@ def main():
                 print(sid, "already staged, ZERO new credits", flush=True)
                 continue
             raise RuntimeError(sid + ": old stage/unknown charge; investigate before retry")
+        if (STAGE / (sid + ".m4a")).exists():
+            raise RuntimeError(sid + ": orphaned audio file exists; billing and hash review required")
         print("One V4 generation:", sid, "chars:", len(text), flush=True)
         try:
             row = produce(sid, text, secret)
