@@ -5573,6 +5573,27 @@ function refreshQuizListenState(){
   var available=!!(q&&newV4&&newV4.has(q,"question"));
   setQuizListenState(available?"ready":"missing");
 }
+function refreshQuizPraiseAudioState(){
+  // Child-triggered playback is required on iOS if autoplay was denied.
+  // Late review-manifest loading must still offer the matching V4 praise.
+  var q=Array.isArray(currentQuiz)?currentQuiz[currentQuizIndex]:null;
+  var box=document.getElementById("quizFeedback");
+  if(!quizLocked||!q||!box||!box.classList.contains("good"))return;
+  var audio=window.DARKidsQuizV4Approved;
+  if(!audio||!audio.has(q,"correct"))return;
+  if(box.querySelector(".quiz-praise-replay"))return;
+  var button=document.createElement("button");
+  button.type="button";button.className="quiz-praise-replay";
+  button.textContent="▶ Lob mit V4-Masterstimme anhören";
+  button.setAttribute("aria-label","Das gesprochene Lob noch einmal anhören");
+  button.addEventListener("click",function(){
+    if(currentQuiz[currentQuizIndex]!==q)return;
+    quizSpeak(quizV4Text(q,"correctAudioText",q.success),{
+      source:"kids-quiz-feedback",quizId:q.id,quizQuestion:q,quizPart:"correct"
+    });
+  });
+  box.appendChild(button);
+}
 function refreshQuizExplanationAudioState(){
   // The review manifest loads asynchronously. Never strand the completed
   // explanation without a listen button when it arrives after the answer.
@@ -5602,6 +5623,7 @@ window.addEventListener("dar-kids-quiz-v4-approved-ready",function(){
   var modal=document.getElementById("quizModal");
   if(modal&&modal.classList.contains("open")){
     refreshQuizListenState();
+    refreshQuizPraiseAudioState();
     refreshQuizExplanationAudioState();
   }
 });
@@ -6224,6 +6246,7 @@ function chooseQuizAnswer(index,button){
     quizRewardBurst();
     document.getElementById("quizFeedback").className="quiz-feedback good";
     document.getElementById("quizFeedback").textContent="✓ "+quizAcademyPraiseText(q);
+    refreshQuizPraiseAudioState();
     var explanation=document.getElementById("quizExplanation");
     if(explanation&&q.explanation){
       var lessonText=document.getElementById("quizExplanationText");
