@@ -219,6 +219,47 @@
   // Standalone quiz renderer: independent of the monolithic home script.
   // Used only if the legacy/native quiz functions cannot initialize.
   var localRound=[],localIndex=0,localCorrectCount=0,localAnswered=false;
+  var localHadError=false;
+  var localFallbackOffsets=Object.create(null);
+  // Accessibility recovery used ONLY if the canonical session player is absent.
+  // Keep identical kids.quiz.progress.v2.* records so the dashboard, spaced
+  // repetition and other device views do not lose the child's learning work.
+  function saveFallbackProgress(q,correct){
+    if(!q||!/^kids-quiz-\d{3}$/.test(String(q.id||"")))return;
+    var now=Date.now(),key="kids.quiz.progress.v2."+q.id;
+    var old=progressFor(q),e=Object.assign({
+      stage:"new",attempts:0,reviewPasses:0,wrong:0,mistakeTaps:0,
+      lapses:0,dueAt:0,lastSeenAt:0,lastMistakeAt:0,consecutiveFirstTry:0
+    },old);
+    if(!correct){
+      localHadError=true;
+      e.mistakeTaps=Math.max(0,Number(e.mistakeTaps||0))+1;
+      e.lastMistakeAt=now;
+      e.dueAt=now+5*60*1000;
+      if(e.stage==="new")e.stage="learning";
+    }else{
+      e.attempts=Math.max(0,Number(e.attempts||0))+1;
+      e.lastSeenAt=now;
+      if(localHadError){
+        e.wrong=Math.max(0,Number(e.wrong||0))+1;
+        e.lapses=Math.max(0,Number(e.lapses||0))+1;
+        e.lastMistakeAt=now;
+        e.consecutiveFirstTry=0;
+        e.reviewPasses=Math.max(0,Number(e.reviewPasses||0)-1);
+        e.dueAt=now+5*60*1000;
+      }else{
+        e.consecutiveFirstTry=Math.max(0,Number(e.consecutiveFirstTry||0))+1;
+        if(!e.dueAt||now>=Number(e.dueAt||0)){
+          e.reviewPasses=Math.max(0,Number(e.reviewPasses||0))+1;
+          if(e.reviewPasses===1)e.dueAt=now+10*60*1000;
+          else if(e.reviewPasses===2)e.dueAt=now+24*60*60*1000;
+          else e.dueAt=now+7*24*60*60*1000;
+        }
+      }
+      e.stage=e.reviewPasses>=3?"secure":e.reviewPasses>=2?"review":"learning";
+    }
+    try{localStorage.setItem(key,JSON.stringify(e))}catch(_){}
+  }
   // Accessibility-safe recovery player. It uses ONLY already approved V4
   // Serhat master clips from the public manifest; private review clips stay hidden.
   // No old text-keyed Quiz/Flash catalog. Only exact V4 ID+part audio.
@@ -287,6 +328,7 @@
       return;
     }
     localAnswered=false;
+    localHadError=false;
     if(progress)progress.textContent="Frage "+(localIndex+1)+" von "+localRound.length;
     var answerHtml=(q.answers||[]).map(function(a,i){
       return '<button class="quiz-answer quiz-local-answer" type="button" data-quiz-answer-index="'+i+'">'+
@@ -371,10 +413,30 @@
       localIndex++;renderLocalQuizQuestion();
     });
   }
-  function startLocalQuizRound(cat){
+  function startLocalQuizRound(cat,roundMode){
     var pool=bandItems().filter(function(q){return !cat||cat==="all"||q.category===cat});
-    localRound=pool.slice(0,bandId()==="4-6"?3:bandId()==="9-10"?5:4);
-    localIndex=0;localCorrectCount=0;
+    var count=bandId()==="4-6"?3:bandId()==="9-10"?5:4;
+    var now=Date.now(),name=String(roundMode||"normal"),key=bandId()+"|"+String(cat||"all");
+    // When the canonical player crashes, do not trap every session on the
+    // first three/four/five questions. Prefer overdue mistakes, then unseen.
+    // Every age band's entire 150-item bank remains playable from the library.
+    var ordered=pool.map(function(q){
+      var e=progressFor(q),attempts=Number(e.attempts||0),due=Number(e.dueAt||0);
+      var mistake=Number(e.wrong||0)>0||Number(e.lapses||0)>0;
+      var overdue=attempts>0&&due>0&&due<=now;
+      var bucket=mistake||overdue?0:attempts===0?1:2;
+      if(name==="new")bucket=attempts===0?0:2;
+      if(name==="review")bucket=mistake||overdue?0:attempts>0?2:3;
+      return{q:q,bucket:bucket,seen:Number(e.lastSeenAt||0)};
+    }).sort(function(a,b){
+      return a.bucket-b.bucket||a.seen-b.seen||Number(a.q.number||0)-Number(b.q.number||0);
+    }).map(function(entry){return entry.q});
+    // In storage-restricted browsers rotate the window as a last resort.
+    var tracked=pool.some(function(q){return Number(progressFor(q).attempts||0)>0});
+    var offset=tracked?0:Number(localFallbackOffsets[key]||0)%Math.max(1,ordered.length);
+    localRound=(ordered.slice(offset).concat(ordered.slice(0,offset))).slice(0,count);
+    localFallbackOffsets[key]=(offset+localRound.length)%Math.max(1,ordered.length);
+    localIndex=0;localCorrectCount=0;localHadError=false;
     renderLocalQuizQuestion();
   }
   function startRound(cat,roundMode){
@@ -402,7 +464,7 @@
       try{window.startKidsQuizRound(cat||"all",roundMode||"normal");return}
       catch(err){try{console.warn("KIDS quiz round fallback",err)}catch(_){}}
     }
-    startLocalQuizRound(cat);
+    startLocalQuizRound(cat,roundMode);
   }
   function renderDashboard(){
     ensureUi();
