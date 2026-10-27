@@ -203,7 +203,7 @@ var preview={
       var labelMap={question:"Frage",correct:"Lob",retry:"Ermutigung",explanation:"Erklärung"};
       var heardLabel=(labelMap[p]||p)+" · "+String(q.ageBand||"")+" Jahre";
       player.muted=false;player.volume=1;
-      player.setAttribute("playsinline","");
+      if(typeof player.setAttribute==="function")player.setAttribute("playsinline","");
       player.onplaying=function(){
         if(current!==seq)return;
         activeClip=heardLabel+" wird abgespielt";
