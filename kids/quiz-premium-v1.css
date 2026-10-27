@@ -604,3 +604,35 @@ body:has(.app[data-gender="boy"]) #quizModal,
     transition:none!important;animation:none!important;
   }
 }
+
+/* KIDS_QUIZ_V4_AUDIO_REPLAY_V1462 — use the same calm, touch-first
+   style for encouragement in both canonical and recovery quiz renderers. */
+#quizModal.quiz-round-mode .quiz-retry-replay,
+#quizModal.quiz-round-mode .quiz-local-audio-replay{
+  display:block!important;width:max-content!important;max-width:100%!important;
+  min-height:50px!important;margin:12px auto 4px!important;
+  padding:11px 18px!important;border-radius:16px!important;
+  border:1px solid var(--kqp-border)!important;
+  background:var(--kqp-surface2)!important;color:var(--kqp-bright)!important;
+  box-shadow:0 5px 16px rgba(0,0,0,.1)!important;
+  font:800 clamp(13px,1.12vw,17px)/1.4 system-ui,sans-serif!important;
+  text-align:center!important;white-space:normal!important;
+  touch-action:manipulation!important;-webkit-tap-highlight-color:transparent;
+}
+#quizModal.quiz-round-mode .quiz-retry-replay:focus-visible,
+#quizModal.quiz-round-mode .quiz-local-audio-replay:focus-visible{
+  outline:3px solid var(--kqp-accent)!important;outline-offset:3px!important;
+}
+#quizModal.quiz-round-mode .quiz-local-audio-replay{
+  background:color-mix(in srgb,var(--kqp-surface2) 88%,var(--kqp-accent))!important;
+}
+@media (max-width:759px){
+  #quizModal.quiz-round-mode .quiz-retry-replay,
+  #quizModal.quiz-round-mode .quiz-local-audio-replay{
+    width:100%!important;min-height:54px!important;
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  #quizModal.quiz-round-mode .quiz-retry-replay,
+  #quizModal.quiz-round-mode .quiz-local-audio-replay{transition:none!important}
+}
