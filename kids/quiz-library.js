@@ -271,7 +271,7 @@
           escapeHtml([q.sourceType,q.source].filter(Boolean).join(" · ")||"Quellenprüfung ausstehend")+'</p>'+
         '<button id="quizLocalExplainAudio" type="button" class="quiz-library-audio" disabled>Erklärung anhören</button>'+
       '</section>'+
-      '<button id="quizLocalNext" class="quiz-next" type="button" disabled style="display:none">Nächste Frage ›</button>'+
+      '<button id="quizLocalNext" class="quiz-next" type="button" disabled aria-disabled="true" style="display:none">Nächste Frage ›</button>'+
       '</section>';
     refreshLocalQuizListen(q);
     var listen=byId("quizLocalListen");
@@ -321,13 +321,18 @@
           }
         });
         var next=byId("quizLocalNext");
-        if(next){next.disabled=false;next.style.display="block";next.classList.add("show")}
+        if(next){
+          next.disabled=false;next.setAttribute("aria-disabled","false");
+          next.style.display="block";next.classList.add("show");
+        }
       });
     });
     var next=byId("quizLocalNext");
     if(next)next.addEventListener("click",function(){
       try{window.DARKidsQuizV4Approved&&window.DARKidsQuizV4Approved.stop()}catch(_){}
       try{window.DARKidsOwnerVoice&&window.DARKidsOwnerVoice.stop()}catch(_){}
+      if(!localAnswered||this.disabled||localRound[localIndex]!==q)return;
+      this.disabled=true;this.setAttribute("aria-disabled","true");
       localIndex++;renderLocalQuizQuestion();
     });
   }
