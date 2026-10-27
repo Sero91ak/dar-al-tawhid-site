@@ -15,6 +15,19 @@ on:
       - test/assets/dar-setup-hub.js
       - scripts/test-ios-native-gps-recovery.cjs
       - .github/workflows/ios-native-bridge-guard.yml
+  pull_request:
+    paths:
+      - ios/DarAlTawhid/DarAlTawhid/DarNativePermissions.swift
+      - ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift
+      - ios/DarAlTawhid/DarAlTawhid/WebAppView.swift
+      - ios/DarAlTawhid/DarAlTawhid/Info.plist
+      - ios/DarAlTawhid/DarAlTawhid/Widgets/DarAlTawhidWidgets.swift
+      - ios/DarAlTawhid/Shared/DarWidgetTheme.swift
+      - ios/DarAlTawhid/DarAlTawhid.xcodeproj/project.pbxproj
+      - assets/dar-setup-hub.js
+      - test/assets/dar-setup-hub.js
+      - scripts/test-ios-native-gps-recovery.cjs
+      - .github/workflows/ios-native-bridge-guard.yml
   workflow_dispatch:
 
 permissions:
