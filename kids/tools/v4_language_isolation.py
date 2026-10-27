@@ -95,6 +95,7 @@ def payload(text: str, language: str, policy: dict) -> dict:
         raise ValueError("Master voice/model mismatch")
     return {
         "text": text, "model_id": MODEL,
+        "language_code": language,  # V4 German must stay 'de', Fuṣḥā stays 'ar'.
         "voice_settings": {"stability": 0.58, "similarity_boost": 0.82},
         # Deliberately NO pronunciation_dictionary_locators for this request.
         # No global substitutions: Nur (German) is never Arabic Nūr.
@@ -269,7 +270,8 @@ def self_test(policy: dict) -> None:
     for s in ("Nur das Gebet.", "Antwort drei: Nur für Erwachsene.",
               "Ich bete nur zu Allah."):
         de = payload(s, "de", policy)
-        assert de["text"] == s and "pronunciation_dictionary_locators" not in de
+        assert de["text"] == s and de["language_code"] == "de" and "pronunciation_dictionary_locators" not in de
+    assert payload("نُور", "ar", policy)["language_code"] == "ar"
     assert "pronunciation_dictionary_locators" not in payload("نُور", "ar", policy)
     for bad in (("Nur das Gebet. نُور", "de"), ("Nur das Gebet.", "ar")):
         try:
