@@ -256,7 +256,7 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/quiz-library.css?v=20261026-premium1",
   "/kids/quiz-library.js?v=20261026-premium1&owner-v4=20261027&v4only=20261027&lesson=20261027-v1&smart=v1460&retry=v1462",
   "/kids/quiz-v4-bridge.js?v=20261013-academy1",
-  "/kids/quiz-premium-v1.css?v=20261026-premium1&responsive=20261027-v2&lesson=20261027-v1&smart=v1460&retry=v1462",
+  "/kids/quiz-premium-v1.css?v=20261026-premium1&responsive=20261027-v2&lesson=20261027-v1&smart=v1460&retry=v1462&v4owner=20261027",
   "/kids/quiz-v4-approved-player.js?v=20261027-owner-v4",
   "/kids/quiz-v4-test-preview.js?v=20261026-audition1&recovery=20261027-v1&listen=20261027-v2&playback=20261027-v4",
   "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
