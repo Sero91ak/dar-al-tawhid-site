@@ -112,6 +112,69 @@ function showNotice(){
     note.appendChild(sample);
   }
   sample.hidden=status!=="ready";
+
+  // KIDS_V4_AGE_PART_AUDITION_V1463: direct iPad/Fold/iPhone touch playback
+  // for one genuine sample per age-band and per segment (3 × 4). No TTS.
+  var audition=note.querySelector("#kidsV4AgePartAudition");
+  if(!audition){
+    audition=root.document.createElement("section");
+    audition.id="kidsV4AgePartAudition";
+    audition.style.cssText="display:grid;gap:10px;margin:12px 0 0;padding:12px;"+
+      "border:1px solid #d8bd8a;border-radius:12px;background:rgba(19,39,42,.44)";
+    var heading=root.document.createElement("strong");
+    heading.textContent="V4-Hörprüfung · drei Altersgruppen × vier Aufnahmen";
+    audition.appendChild(heading);
+    var chooser=root.document.createElement("select");
+    chooser.id="kidsV4AgePartBand";chooser.setAttribute("aria-label","Altersgruppe für V4-Hörtest");
+    chooser.style.cssText="width:100%;min-height:45px;border-radius:10px;padding:9px;"+
+      "background:#fffaf0;color:#21393a;border:1px solid #ba9c69;font:750 15px system-ui";
+    [["4-6","4–6 Jahre"],["7-8","7–8 Jahre"],["9-10","9–10 Jahre"]].forEach(function(pair){
+      var option=root.document.createElement("option");
+      option.value=pair[0];option.textContent=pair[1];chooser.appendChild(option);
+    });
+    audition.appendChild(chooser);
+    var controls=root.document.createElement("div");
+    controls.style.cssText="display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:8px";
+    [["question","Frage"],["correct","Gesprochenes Lob"],
+     ["retry","Ermutigung"],["explanation","Erklärung"]].forEach(function(pair){
+      var button=root.document.createElement("button");
+      button.type="button";button.className="kids-v4-age-part-button";
+      button.setAttribute("data-quiz-v4-part",pair[0]);
+      button.textContent="▶ "+pair[1]+" hören";
+      button.style.cssText="min-height:48px;padding:11px 9px;border-radius:10px;"+
+        "border:1px solid #caad77;background:#28584e;color:#f9f5e9;"+
+        "font:750 13px/1.3 system-ui;touch-action:manipulation;white-space:normal";
+      button.addEventListener("click",function(){
+        var label=audition.querySelector("#kidsV4AgePartStatus");
+        var band=chooser.value;
+        var id=manifest&&Object.keys(manifest.questions).find(function(k){
+          return manifest.questions[k].ageBand===band;
+        });
+        var q=id&&manifest.questions[id];
+        if(!q){if(label)label.textContent="V4-Manifest für diese Altersgruppe nicht geladen.";return;}
+        if(label)label.textContent="V4 "+band+" · "+id+" · "+pair[1]+" startet …";
+        var ok=preview.play({id:id,ageBand:q.ageBand,source:q.source},pair[0],{
+          onended:function(){if(label)label.textContent="V4 "+band+" · "+pair[1]+" vollständig abgespielt."},
+          onerror:function(err){
+            if(label)label.textContent="V4-Audiofehler: "+String(err&&err.message||err||"Audio blockiert");
+          }
+        });
+        if(!ok&&label)label.textContent="V4 nicht spielbar: "+band+" / "+pair[1]+
+          ". Bitte die Fehlermeldung oben prüfen.";
+      });
+      controls.appendChild(button);
+    });
+    audition.appendChild(controls);
+    var result=root.document.createElement("p");
+    result.id="kidsV4AgePartStatus";result.setAttribute("role","status");
+    result.setAttribute("aria-live","polite");
+    result.style.cssText="margin:0;font-weight:550;font-size:12px;line-height:1.4";
+    result.textContent="Altersgruppe auswählen und genau einen V4-Clip antippen.";
+    audition.appendChild(result);
+    note.appendChild(audition);
+  }
+  audition.hidden=status!=="ready";
+
 }
 var preview={
   isTestPreview:true,version:"review-450x4-test-host-20261026",
