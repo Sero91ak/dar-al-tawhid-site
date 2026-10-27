@@ -556,66 +556,56 @@ async function fetchVersionBuild(base) {
       );
     }
 
-    async function verifyKidsCinema(label, base) {
-      const startUrl = `${base}/kids/start?verify=${Date.now()}`;
-      const startRes = await fetch(startUrl, {
-        cache: "no-store",
-        headers: label.startsWith("workers.dev Kids preview")
-          ? nativeKidsTestHeaders
-          : { "Cache-Control": "no-cache", Pragma: "no-cache" }
-      });
-      const html = await startRes.text();
-      const forbiddenOverlay = [
-        "k77-brand","k77-letter","k77-spark","k77-copy","k77-sound",
-        "kidsLaunchAudio","kidsLaunchSound",
-        "As-Salāmu ʿalaykum wa raḥmatullāhi wa barakātuh, Kids"
+    // KIDS_QUIZ_CURRENT_SHELL_HTTP_GATE_20261027
+    // The old Kids Cinema V79 intro is retired from the real Quiz app.
+    // Validate the actual current test shell, 450-item quiz logic and responsive
+    // girl/boy styles instead of checking obsolete intro-video markup.
+    async function verifyKidsQuizShell(label,base){
+      const origin=new URL(base).origin;
+      const nonce=Date.now();
+      const urls=[
+        origin+"/kids/start?quiz-live-check="+nonce,
+        origin+"/kids/quiz-library.js?quiz-live-check="+nonce,
+        origin+"/kids/quiz-premium-v1.css?quiz-live-check="+nonce,
+        origin+"/kids/quiz-v4-test-preview.js?quiz-live-check="+nonce
       ];
-      const overlayFree = forbiddenOverlay.every((needle) => !html.includes(needle));
-      const htmlOk =
-        startRes.status === 200 &&
-        html.includes("kids-launch-v79") &&
-        html.includes('id="kidsCinemaV79"') &&
-        html.includes("/kids/assets/kids-cinema/intro-v74.mp4?v=79") &&
-        html.includes("if(!started)removeLaunch()") &&
-        html.includes("},3200)") &&
-        overlayFree;
-      console.log(
-        `${label} kids cinema HTML: ${startUrl} -> ${startRes.status} overlayFree=${overlayFree} ok=${htmlOk}`
-      );
-      if (!htmlOk) return false;
-
-      const videoUrl = `${base}/kids/assets/kids-cinema/intro-v74.mp4?verify=${Date.now()}`;
-      const videoRes = await fetch(videoUrl, {
-        cache: "no-store",
-        headers: {
-          "Cache-Control": "no-cache",
-          Pragma: "no-cache",
-          Range: "bytes=0-2047"
-        }
-      });
-      const contentType = String(videoRes.headers.get("content-type") || "").toLowerCase();
-      const buf = new Uint8Array(await videoRes.arrayBuffer());
-      const hasFtyp =
-        buf.length >= 12 &&
-        String.fromCharCode(...buf.slice(4, 8)) === "ftyp";
-      const videoOk =
-        (videoRes.status === 200 || videoRes.status === 206) &&
-        contentType.includes("video/mp4") &&
-        hasFtyp;
-      console.log(
-        `${label} kids cinema MP4: ${videoUrl} -> ${videoRes.status} type=${contentType || "?"} bytes=${buf.length} ftyp=${hasFtyp} ok=${videoOk}`
-      );
-      return videoOk;
+      const responses=await Promise.all(urls.map(url=>fetch(url,{
+        cache:"no-store",headers:nativeKidsTestHeaders
+      })));
+      const texts=await Promise.all(responses.map(res=>res.text()));
+      const [html,quizJs,quizCss,previewJs]=texts;
+      const shellOk=responses[0].status===200&&[
+        'id="openQuizButton"','id="quizModal"',
+        'quiz-library.js','quiz-premium-v1.css',
+        'quiz-v4-test-preview.js','quiz-v4-approved-player.js',
+        'id="quizExplanation"'
+      ].every(token=>html.includes(token));
+      const libraryOk=responses[1].status===200&&
+        quizJs.includes("var QUIZ_PACK_450=")&&
+        quizJs.includes("window.openKidsQuizHub")&&
+        quizJs.includes("quiz-local-explanation")&&
+        quizJs.includes("quizLocalNext");
+      const cssOk=responses[2].status===200&&
+        quizCss.includes("KIDS_QUIZ_RESPONSIVE_SEGMENTS_V2_20261027")&&
+        quizCss.includes("horizontal-viewport-segments:2")&&
+        quizCss.includes('[data-quiz-persona="girl"]')&&
+        quizCss.includes('[data-quiz-persona="boy"]')&&
+        quizCss.includes("KIDS_QUIZ_LESSON_PRESENTATION_V1");
+      const previewOk=responses[3].status===200&&
+        previewJs.includes("eleven_v4")&&
+        previewJs.includes("isTestPreview:true")&&
+        previewJs.includes("humanListeningApproved===false");
+      const ok=shellOk&&libraryOk&&cssOk&&previewOk;
+      console.log("KIDS QUIZ current shell "+label+": HTTP="+responses.map(r=>r.status).join(",")+
+        " shell="+shellOk+" 450library="+libraryOk+" foldCss="+cssOk+" v4preview="+previewOk+" ok="+ok);
+      return ok;
     }
-
-    const cinemaPub = kidsPub === "protected"
-      ? (console.log("public kids route is access-protected; cinema verification uses workers.dev mirror"), true)
-      : await verifyKidsCinema("public", publicBase);
-    const cinemaDev = await verifyKidsCinema("workers.dev Kids preview", kidsTestOrigin);
-    if (!cinemaPub || !cinemaDev) {
-      throw new Error(
-        `Kids Cinema Intro fehlt/ist nicht abspielbar. public=${cinemaPub} workers.dev=${cinemaDev}`
-      );
+    const quizPub=kidsPub==="protected"
+      ?(console.log("public /test/kids remains intentionally protected; checking isolated native Kids worker"),true)
+      :await verifyKidsQuizShell("public",publicBase);
+    const quizDev=await verifyKidsQuizShell("workers.dev",kidsTestOrigin);
+    if(!quizPub||!quizDev){
+      throw new Error("Current Kids Test Quiz UI missing from deployed Worker. public="+quizPub+" isolated="+quizDev);
     }
 
     // KIDS_V4_REAL_AUDIO_DELIVERY_AUDIT_20261027
@@ -703,7 +693,7 @@ async function fetchVersionBuild(base) {
     console.log("KIDS V4 REMOTE PASS — 450 question IDs, 1800 test-only segments, "+
       checkedClips+" sampled real MP3 HTTP files across all three ages; human listening remains PENDING.");
 
-    console.log(`Kids Test live OK — ${kidsExpect} + Cinema Intro MP4`);
+    console.log(`Kids Test live OK — ${kidsExpect}, 450 Quiz, responsive UI and real V4 MP3s`);
   } else if (fs.existsSync(kidsPath)) {
     console.log("Kids Test verification skipped — aktueller Commit hat keinen Kids-Scope.");
   }
