@@ -604,7 +604,9 @@ async function fetchVersionBuild(base) {
     const auditionScript=await auditionScriptResponse.text();
     if(auditionScriptResponse.status!==200||
        !auditionScript.includes('isTestPreview:true')||
-       !auditionScript.includes('quiz-v4-full-rebuild-review.json')){
+       !auditionScript.includes('quiz-v4-full-rebuild-review.json')||
+       !auditionScript.includes('kidsV4FourParts')||
+       !auditionScript.includes('kidsV4AgeSelect')){
       throw new Error("KIDS V4: Test preview player missing or gated, HTTP "+auditionScriptResponse.status);
     }
     console.log("KIDS V4 TEST PLAYER PASS — real browser shell and preview runtime HTTP 200");
