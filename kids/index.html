@@ -5573,6 +5573,12 @@ function refreshQuizListenState(){
   var available=!!(q&&newV4&&newV4.has(q,"question"));
   setQuizListenState(available?"ready":"missing");
 }
+function quizV4SpokenText(q,part,fallback){
+  var player=window.DARKidsQuizV4Approved;
+  var clip=player&&typeof player.get==="function"?player.get(q,part):null;
+  var spoken=clip&&typeof clip.text==="string"?clip.text.trim():"";
+  return spoken||String(fallback||"");
+}
 function refreshQuizPraiseAudioState(){
   // Child-triggered playback is required on iOS if autoplay was denied.
   // Late review-manifest loading must still offer the matching V4 praise.
@@ -5581,6 +5587,8 @@ function refreshQuizPraiseAudioState(){
   if(!quizLocked||!q||!box||!box.classList.contains("good"))return;
   var audio=window.DARKidsQuizV4Approved;
   if(!audio||!audio.has(q,"correct"))return;
+  var copy=box.querySelector(".quiz-feedback-copy");
+  if(copy)copy.textContent="✓ "+quizV4SpokenText(q,"correct",q.success||quizAcademyPraiseText(q));
   if(box.querySelector(".quiz-praise-replay"))return;
   var button=document.createElement("button");
   button.type="button";button.className="quiz-praise-replay";
@@ -6152,17 +6160,8 @@ function renderQuizQuestion(){
   var ageLabel=document.getElementById("quizAgeLabel");
   if(ageLabel)ageLabel.textContent=quizAgeRange().label;
   var q=currentQuiz[currentQuizIndex];
-  try{
-    var quizVoice=window.DARKidsOwnerVoice;
-    if(quizVoice&&typeof quizVoice.preload==="function"){
-      quizVoice.preload(quizPrompt(q));
-      quizVoice.preload(quizV4Text(q,"correctAudioText",q.success));
-      quizVoice.preload(quizV4Text(q,"retryAudioText",q.retry));
-      quizVoice.preload(quizV4Text(q,"explanationAudioText",q.explanation));
-      var nextQuizVoice=currentQuiz[currentQuizIndex+1];
-      if(nextQuizVoice)quizVoice.preload(quizPrompt(nextQuizVoice));
-    }
-  }catch(e){}
+  // V4_ONLY_20261027: do not preload legacy owner-voice MP3s for Quiz.
+  // Each Quiz segment is addressed only by the approved/test V4 ID+part manifest.
   quizLocked=false;
   quizQuestionHadError=false;
   renderQuizProgress();
@@ -6191,7 +6190,8 @@ function renderQuizQuestion(){
     '<button id="quizExplanationListen" class="quiz-listen" type="button" hidden disabled>Erklärung anhören</button>'+ 
     '<div id="quizTermLearning" hidden></div>'+ 
     '<div id="quizSource" class="quiz-source"></div>'+
-    '<button id="quizNext" class="quiz-next" type="button">'+(currentQuizIndex===currentQuiz.length-1?'Auswertung ansehen':'Weiter')+' ›</button>';
+    '<button id="quizNext" class="quiz-next" type="button" disabled aria-disabled="true" aria-label="Erst die Frage richtig beantworten, dann weiter">'+
+      (currentQuizIndex===currentQuiz.length-1?'Auswertung ansehen':'Weiter')+' ›</button>';
   var scene=document.getElementById("quizScene");
   if(scene&&art.url){
     scene.style.setProperty("--quiz-art",'url("'+art.url.replace(/"/g,"%22")+'")');
@@ -6215,7 +6215,14 @@ function renderQuizQuestion(){
     if(this.disabled)return;
     quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question",quizId:q.id,quizQuestion:q,quizPart:"question"});
   });
-  document.getElementById("quizNext").addEventListener("click",function(){window.DARKidsQuizV4Approved?.stop?.();window.DARKidsTermLearning?.stop?.();currentQuizIndex++;renderQuizQuestion()});
+  document.getElementById("quizNext").addEventListener("click",function(){
+    // Never skip a question (including rapid taps, keyboard or stale handlers).
+    if(!quizLocked||currentQuiz[currentQuizIndex]!==q||this.disabled)return;
+    this.disabled=true;this.setAttribute("aria-disabled","true");
+    window.DARKidsQuizV4Approved?.stop?.();
+    window.DARKidsTermLearning?.stop?.();
+    currentQuizIndex++;renderQuizQuestion();
+  });
   setTimeout(function(){
     if(currentQuiz[currentQuizIndex]!==q)return;
     refreshQuizListenState();
@@ -6243,9 +6250,16 @@ function chooseQuizAnswer(index,button){
     quizLocked=true;
     quizCorrectCount++;
     button.classList.add("correct");
+    // An answered question is final: freeze all answer choices and
+    // leave the explanation / Next as the two remaining actions.
+    buttons.forEach(function(answerButton){answerButton.disabled=true});
     quizRewardBurst();
     document.getElementById("quizFeedback").className="quiz-feedback good";
-    document.getElementById("quizFeedback").textContent="✓ "+quizAcademyPraiseText(q);
+    var praiseBox=document.getElementById("quizFeedback");
+    var praiseText=document.createElement("span");
+    praiseText.className="quiz-feedback-copy";
+    praiseText.textContent="✓ "+quizV4SpokenText(q,"correct",q.success||quizAcademyPraiseText(q));
+    praiseBox.replaceChildren(praiseText);
     refreshQuizPraiseAudioState();
     var explanation=document.getElementById("quizExplanation");
     if(explanation&&q.explanation){
@@ -6263,7 +6277,12 @@ function chooseQuizAnswer(index,button){
     }
     var src=document.getElementById("quizSource");
     if(src)src.innerHTML='<strong>Quelle:</strong> '+String(q.source||"");
-    document.getElementById("quizNext").classList.add("show");
+    var nextQuizButton=document.getElementById("quizNext");
+    if(nextQuizButton){
+      nextQuizButton.disabled=false;nextQuizButton.setAttribute("aria-disabled","false");
+      nextQuizButton.setAttribute("aria-label","Richtige Antwort erkannt. Jetzt zur nächsten Frage wechseln");
+      nextQuizButton.classList.add("show");
+    }
     // Save mastery internally; don't replace the child's blessing with a technical learning state.
     recordQuizAttempt(q.id,!quizQuestionHadError);
     // Nach einer richtigen Antwort wird die kindgerechte Erklärung vollständig
@@ -6283,14 +6302,8 @@ function chooseQuizAnswer(index,button){
       return !!(modal&&modal.classList.contains("open")&&
         currentQuizIndex===answeredIndex&&currentQuiz[currentQuizIndex]===answeredQuestion);
     }
-    function playQuizTermExplanation(){
-      if(!questionStillOpen()||!window.DARKidsTermLearning?.playFor)return;
-      var correctWords=(answeredQuestion.answers||[]).filter(function(x){return x.correct}).map(function(x){return x.label||""});
-      window.DARKidsTermLearning.playFor(
-        [answeredQuestion.question,answeredQuestion.explanation,answeredQuestion.topic,answeredQuestion.category].concat(correctWords).join(" "),
-        {age:currentKidsQuizAgeBand(),max:2,stillValid:questionStillOpen}
-      ).catch(function(){});
-    }
+    // Keep term explanations visually available, but do not autoplay
+    // separate or legacy term-audio clips after the exact V4 Quiz sequence.
     quizSpeak(quizV4Text(q,"correctAudioText",q.success),{
       source:"kids-quiz-feedback",quizId:q.id,quizQuestion:q,quizPart:"correct",
       onended:function(){
@@ -6298,9 +6311,9 @@ function chooseQuizAnswer(index,button){
         if(canExplain){
           quizSpeak(explanationAudio,{
             source:"kids-quiz-explanation",quizId:q.id,quizQuestion:q,quizPart:"explanation",
-            onended:playQuizTermExplanation
+            onended:function(){}
           });
-        }else{playQuizTermExplanation()}
+        }
       }
     });
   }else{
@@ -6308,7 +6321,7 @@ function chooseQuizAnswer(index,button){
     recordQuizMistake(q.id);
     button.classList.add("wrong");
     document.getElementById("quizFeedback").className="quiz-feedback bad";
-    document.getElementById("quizFeedback").textContent=quizAcademyRetryText(q);
+    document.getElementById("quizFeedback").textContent=quizV4SpokenText(q,"retry",q.retry||quizAcademyRetryText(q));
     quizSpeak(quizV4Text(q,"retryAudioText",q.retry),{source:"kids-quiz-retry",quizId:q.id,quizQuestion:q,quizPart:"retry"});
     // Leave encouragement visible while the child thinks; remove only the shake marker.
     setTimeout(function(){
@@ -7129,7 +7142,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1459",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1460",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -8157,7 +8170,7 @@ html[data-view="stories"] #view-stories > :last-child{
 </style>
 <link rel="stylesheet" href="/kids/dua-smart-learn.css?v=1261" data-kids-dua-smart="1">
 <link rel="stylesheet" href="/kids/quiz-library.css?v=20261026-premium1">
-<link rel="stylesheet" href="/kids/quiz-premium-v1.css?v=20261026-premium1&responsive=20261027-v2&lesson=20261027-v1">
+<link rel="stylesheet" href="/kids/quiz-premium-v1.css?v=20261026-premium1&responsive=20261027-v2&lesson=20261027-v1&smart=v1460">
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=5">
 <script src="/kids/screen-awake.js?v=1"></script>
 <script src="/kids/story-follow-reader.js?v=19-salaf1"></script>
@@ -8175,7 +8188,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/quiz-v4-approved-player.js?v=20261026-v1"></script>
 <script src="/kids/quiz-v4-test-preview.js?v=20261026-audition1"></script>
 <script>window.DARKidsQuizV4Approved&&window.DARKidsQuizV4Approved.load();</script>
-<script src="/kids/quiz-library.js?v=20261026-premium1&v4only=20261027&lesson=20261027-v1"></script>
+<script src="/kids/quiz-library.js?v=20261026-premium1&v4only=20261027&lesson=20261027-v1&smart=v1460"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1256-parent-hero-full" data-kids-section-heroes-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148" data-kids-stories-home-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1138.css?v=1152" data-kids-stories-home-polish="1">

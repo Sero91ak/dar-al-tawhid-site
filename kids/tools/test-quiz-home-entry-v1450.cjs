@@ -9,7 +9,7 @@ const read=p=>fs.readFileSync(root+"/"+p,"utf8");
 const entry=read("kids/index.html");
 assert.equal(entry,read("kids/start.html"),"Kids start shell mismatch");
 assert.equal(entry,read("kids/shell.html"),"Kids shell mismatch");
-for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=20261026-premium1','/kids/quiz-library.css?v=20261026-premium1','/kids/sw.js?v=1459']){
+for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=20261026-premium1','/kids/quiz-library.css?v=20261026-premium1','/kids/sw.js?v=1460']){
   assert.ok(entry.includes(token),"Missing Kids shell token: "+token);
 }
 const premiumCss=read("kids/quiz-premium-v1.css");
@@ -38,8 +38,8 @@ assert.ok(entry.includes("Quiz-Lernwelt")&&entry.includes("450 Fragen · neue Le
 assert.ok(entry.includes("/kids/quiz-v4-test-preview.js?v=20261026-audition1"),"Kids visitor code must include host-isolated Test MP3 preview");
 const sw=read("kids/sw.js");
 const version=JSON.parse(read("kids/version.json"));
-assert.ok(sw.includes('dar-al-tawhid-kids-v1459'));
-assert.equal(version.visualSystem.serviceWorkerCache,"v1459");
+assert.ok(sw.includes('dar-al-tawhid-kids-v1460'));
+assert.equal(version.visualSystem.serviceWorkerCache,"v1460");
 assert.ok(sw.includes('/kids/quiz-library.js?v=20261026-premium1'));
 assert.ok(sw.includes('url.pathname==="/kids/quiz-library.js"'));
 const originalQuestions=JSON.parse(read("kids/data/quiz-kids.json")).items;
@@ -157,7 +157,7 @@ const touchBackEvent={
 listeners.pointerup[0].cb(touchBackEvent);
 assert.equal(modal.open,false,"iOS pointerup Back must close the quiz dashboard");
 assert.equal(touchBackEvent.prevented,true);
-console.log("PASS: Kids 3 shells equal, SW v1459, 450 question bundle, click and iOS pointerup Back");
+console.log("PASS: Kids 3 shells equal, SW v1460, 450 question bundle, click and iOS pointerup Back");
 
 // Simulate the real production quiz loader with all network requests blocked.
 // The embedded pack alone must populate all 450 selectable child questions.
@@ -189,3 +189,84 @@ validateOfflineQuizLoader().catch(err=>{console.error(err);process.exitCode=1});
 
 // Audition stage must be verified from the actual original 1217 MP3 bytes.
 require("node:child_process").execFileSync(process.execPath,["kids/tools/test-v4-test-preview.cjs"],{stdio:"inherit"});
+
+
+// KIDS_QUIZ_MASTERY_GATE_TEST_V1460: exercise real answer handler with mock DOM.
+// Wrong answers must NOT reveal the solution, unlock Next or advance the round.
+assert.ok(entry.includes('id="quizNext" class="quiz-next" type="button" disabled aria-disabled="true"'),
+  "Quiz Next must start semantically disabled");
+assert.ok(entry.includes('if(!quizLocked||currentQuiz[currentQuizIndex]!==q||this.disabled)return;'),
+  "Quiz Next click must reject wrong, unanswered or stale questions");
+assert.ok(entry.includes('nextQuizButton.disabled=false;nextQuizButton.setAttribute("aria-disabled","false")'),
+  "Quiz Next must unlock only after a right answer");
+assert.ok(read("kids/quiz-library.js").includes('if(!localAnswered||this.disabled||localRound[localIndex]!==q)return;'),
+  "Fallback Quiz must enforce the same gate");
+assert.ok(entry.includes('V4_ONLY_20261027') && !entry.includes('quizVoice.preload(quizPrompt(q))'),
+  "Legacy Quiz speech preload is not allowed");
+assert.ok(premiumCss.includes('KIDS_QUIZ_SMART_FEEDBACK_V1460') &&
+  premiumCss.includes('.quiz-answer.correct') &&
+  premiumCss.includes('prefers-reduced-motion:reduce'),
+  "Profile-aware subtle success glow must remain accessible");
+
+const beginChoice=entry.indexOf("function chooseQuizAnswer(index,button){");
+const endChoice=entry.indexOf("function renderQuizFinish(){",beginChoice);
+assert.ok(beginChoice>0&&endChoice>beginChoice,"Real quiz response handler is required");
+const choiceCode=entry.slice(beginChoice,endChoice);
+function testClass(){
+  const set=new Set();
+  return {add(...keys){keys.forEach(k=>set.add(k))},remove(...keys){keys.forEach(k=>set.delete(k))},
+    contains(key){return set.has(key)}};
+}
+const wrongButton={classList:testClass(),isConnected:true,disabled:false};
+const rightButton={classList:testClass(),isConnected:true,disabled:false};
+const nextBtn={disabled:true,classList:testClass(),aria:{},setAttribute(k,v){this.aria[k]=v}};
+const fb={className:"",textContent:"",replaceChildren(...children){this.children=children}};
+const explain={classList:testClass()};
+const explanationCopy={textContent:""};
+const entries={quizFeedback:fb,quizExplanation:explain,quizExplanationText:explanationCopy,
+  quizNext:nextBtn,quizTermLearning:null,quizSource:null,quizExplanationAudioStatus:null};
+const simpleQuestion={id:"kids-quiz-001",ageBand:"4-6",source:"Qurʾān 1:5",
+  question:"Wen beten wir an?",explanation:"Wir dienen Allah allein.",
+  success:"Richtig. Sehr gut!",retry:"Versuche es noch einmal.",
+  answers:[{label:"Allah allein",correct:true},{label:"Menschen",correct:false}]};
+let recordedMistakes=0,recordedSuccess=0;
+const ctx={
+  currentQuiz:[simpleQuestion],currentQuizIndex:0,
+  quizLocked:false,quizCorrectCount:0,quizQuestionHadError:false,
+  document:{
+    querySelectorAll(sel){assert.equal(sel,"#quizAnswers .quiz-answer");return [rightButton,wrongButton]},
+    getElementById(id){return entries[id]||null},
+    createElement(){return {className:"",textContent:""}}
+  },
+  window:{DARKidsQuizV4Approved:{has(){return false}}},
+  quizRewardBurst(){},quizAcademyPraiseText(){return "Richtig!"},
+  quizAcademyRetryText(){return "Versuch es noch einmal."},
+  quizV4SpokenText(q,p,fallback){return fallback},
+  quizV4Text(q,p,fallback){return fallback},
+  refreshQuizPraiseAudioState(){},
+  refreshQuizExplanationAudioState(){},
+  recordQuizMistake(){recordedMistakes++},
+  recordQuizAttempt(){recordedSuccess++},
+  quizSpeak(){return false},
+  setTimeout(){},
+  console
+};
+vm.runInNewContext(choiceCode+";this.chooseQuizAnswer=chooseQuizAnswer;",ctx);
+ctx.chooseQuizAnswer(1,wrongButton);
+assert.equal(ctx.quizLocked,false,"Wrong answer must not complete the question");
+assert.equal(nextBtn.disabled,true,"Wrong answer must not unlock Next");
+assert.equal(recordedMistakes,1);
+assert.equal(recordedSuccess,0);
+assert.equal(ctx.quizCorrectCount,0);
+assert.equal(rightButton.classList.contains("correct"),false,"Never reveal answer on mistake");
+ctx.chooseQuizAnswer(0,rightButton);
+assert.equal(ctx.quizLocked,true,"Right answer must lock the completed question");
+assert.equal(rightButton.disabled,true,"Successful answer must freeze the selection");
+assert.equal(wrongButton.disabled,true,"Unselected answers must be frozen after success");
+assert.equal(nextBtn.disabled,false,"Only the right answer unlocks Next");
+assert.equal(nextBtn.aria["aria-disabled"],"false");
+assert.equal(ctx.quizCorrectCount,1);
+assert.equal(recordedSuccess,1);
+assert.equal(explanationCopy.textContent,simpleQuestion.explanation);
+assert.equal(explain.classList.contains("show"),true,"Explanation must be visible after success");
+console.log("PASS: wrong answer retries, correct answer unlocks Next, explanation is readable, V4-only speech");
