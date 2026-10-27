@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-10-27T18:07:42Z",
-  "trigger": "push",
-  "finishedDeployConclusion": null,
-  "finishedDeployRun": null,
+  "timestamp": "2026-10-27T18:12:36Z",
+  "trigger": "workflow_run",
+  "finishedDeployConclusion": "success",
+  "finishedDeployRun": "40557013991",
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
-    "homeBytes": 560066,
+    "homeBytes": 560107,
     "homeContainsPrayerAssets1275": false,
     "homeContainsBuild1275": false,
     "cssBytes": 109300,
@@ -24,12 +24,12 @@
     "versionJsonReadable": true,
     "trilingualWordLearningReady": true,
     "parentsDashboard": {
-      "expectedSWRef": "/kids/sw.js?v=1466",
+      "expectedSWRef": "/kids/sw.js?v=1467",
       "manifestSWCacheVersion": null,
-      "actualSWCacheVersion": "1466",
-      "workerBytes": 46467,
+      "actualSWCacheVersion": "1467",
+      "workerBytes": 46526,
       "observedSWRefs": [
-        "/kids/sw.js?v=1466"
+        "/kids/sw.js?v=1467"
       ],
       "hasServiceWorkerRegisterCall": true,
       "htmlReferencesNewDashboard": true,
@@ -52,9 +52,9 @@
     },
     "visitorQuiz": {
       "homeHasPremiumStyleRef": true,
-      "premiumStyleBytes": 35402,
-      "premiumScriptBytes": 366465,
-      "approvedOnlyAudioPlayerBytes": 4927,
+      "premiumStyleBytes": 37901,
+      "premiumScriptBytes": 366887,
+      "approvedOnlyAudioPlayerBytes": 5919,
       "htmlLinksPremiumStyle": true,
       "htmlLinksPremiumJs": true,
       "cssHasGirlPalette": true,
@@ -89,13 +89,13 @@
   },
   "lastDeployRuns": [
     {
-      "conclusion": null,
+      "conclusion": "success",
       "created_at": "2026-10-27T18:07:34Z",
       "head_sha": "b24e37c81a4e3f7418423d0f3635c0ddbcb911da",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40557013991",
       "id": 40557013991,
-      "status": "in_progress",
-      "updated_at": "2026-10-27T18:07:38Z"
+      "status": "completed",
+      "updated_at": "2026-10-27T18:12:24Z"
     },
     {
       "conclusion": "success",
