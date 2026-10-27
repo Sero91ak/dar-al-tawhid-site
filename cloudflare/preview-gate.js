@@ -79,6 +79,7 @@ export function gateHiddenSurfaces(request, url, env, mode) {
       (pathname === "/kids/start" ||
        pathname === "/kids/version.json" ||
        pathname === "/kids/quiz-v4-test-preview.js" ||
+       pathname === "/kids/v4-audio-check.html" ||
        pathname === "/kids/data/quiz-v4-full-rebuild-review.json" ||
        pathname === "/test/kids" || pathname === "/test/kids/" ||
        pathname === "/test/kids/start" ||
