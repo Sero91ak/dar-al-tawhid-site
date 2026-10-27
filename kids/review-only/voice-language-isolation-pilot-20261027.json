@@ -20,13 +20,22 @@
   "creditsChargedReported": 197.68948017621145,
   "requestHasPronunciationDictionaryLocators": false,
   "caveat": "The creative speech interface does not expose the exact API request payload; absence of a locator argument is not independently verified by request logs.",
-  "hearing": "pending-human-approval",
-  "germanNurVerified": false,
+  "hearing": "OWNER_CONFIRMED_CORRECT_2026-10-27",
+  "germanNurVerified": true,
   "arabicTermsVerified": false,
   "manifestUpdated": false,
   "sourceQuizChanged": false,
   "visitorAppChanged": false,
   "approvedForPlayback": false,
   "noFurtherChargesUntilListening": true,
-  "note": "This is a candidate produced from the public display transcript; original V4 takes stay byte-identical. A new MP3 must only replace the original after human listening, audio SHA, per-slot mapping and device checks."
+  "note": "This is a candidate produced from the public display transcript; original V4 takes stay byte-identical. A new MP3 must only replace the original after human listening, audio SHA, per-slot mapping and device checks.",
+  "humanListeningApproved": true,
+  "humanListeningApprovalScope": "ONLY_NEW_ELEVENLABS_PILOT_kids-quiz-178_question",
+  "humanListeningEvidence": {
+    "source": "owner-direct-chat-confirmation",
+    "statement": "Genau so war es richtig. Die Hörprobe hat gezeigt, dass es so richtig war.",
+    "date": "2026-10-27",
+    "scope": "German-only 'Nur' candidate; not 1,800 recordings or original MP3"
+  },
+  "nextStep": "New retakes need per-slot hearing QA and exact MP3 import before any public playback change."
 }
