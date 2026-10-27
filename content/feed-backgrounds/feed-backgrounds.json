@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-27T02:43:51.181Z",
+  "updatedAt": "2026-10-27T02:43:54.225Z",
   "cacheVersion": 98,
   "settings": {
     "autoDownloadEnabled": true,
@@ -33,17 +33,21 @@
     ]
   },
   "syncState": {
-    "lastSyncAt": "",
-    "lastSyncStatus": "idle",
-    "lastSyncError": "",
-    "nextSyncAt": "",
-    "dailyDownloadDate": "",
-    "dailyDownloadCount": 0,
-    "lastRunDownloads": 0,
-    "lastRunRejected": 0,
-    "lastRunErrors": [],
-    "totalDownloads": 0,
-    "totalRejected": 0
+    "lastSyncAt": "2026-10-27T02:43:30.905Z",
+    "lastSyncStatus": "ok",
+    "lastSyncError": "unsplash:rbhsKtBqrYo: Update is not a fast forward",
+    "nextSyncAt": "2026-10-28T02:43:54.225Z",
+    "dailyDownloadDate": "2026-10-27",
+    "dailyDownloadCount": 4,
+    "lastRunDownloads": 4,
+    "lastRunRejected": 28,
+    "lastRunErrors": [
+      "unsplash:rbhsKtBqrYo: Update is not a fast forward",
+      "unsplash:0QyCjIiEuq0: Update is not a fast forward",
+      "unsplash:S5uV7ro4UPY: Reference cannot be updated"
+    ],
+    "totalDownloads": 4,
+    "totalRejected": 23
   },
   "items": [
     {
