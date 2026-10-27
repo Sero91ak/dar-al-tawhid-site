@@ -426,6 +426,75 @@
     event.stopPropagation();
     event.stopImmediatePropagation();
   }
+  // Prefer the app's CoreLocation bridge in WKWebView. The browser GPS API
+  // remains a fallback for Safari/PWA and for transient native timeouts.
+  function requestDevicePosition() {
+    var nativeBridge = null;
+    try { nativeBridge = window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.darNative; } catch (e) {}
+    if (!nativeBridge) {
+      return typeof requestBrowserPosition === "function"
+        ? requestBrowserPosition() : Promise.reject(new Error("geo_unavailable"));
+    }
+    return new Promise(function (resolve, reject) {
+      var settled = false;
+      var started = Date.now();
+      var timer = null;
+      function cleanup() {
+        clearTimeout(timer);
+        window.removeEventListener("dar-native-location", onLocation);
+        window.removeEventListener("dar-native-location-status", onStatus);
+        window.removeEventListener("dar-native-location-error", onError);
+      }
+      function finish(value, error) {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        if (error) reject(error);
+        else resolve(value);
+      }
+      function onLocation(event) {
+        var data = event && event.detail || {};
+        var lat = Number(data.lat), lon = Number(data.lng != null ? data.lng : data.lon);
+        var accuracy = Number(data.acc), stamp = Number(data.timestamp);
+        if (!validCoords(lat, lon) || !Number.isFinite(accuracy) ||
+            accuracy < 0 || accuracy > 100000) return;
+        // A fresh device request should not silently reuse a stale GPS fix.
+        if (!Number.isFinite(stamp) || stamp < started - 60000 || stamp > Date.now() + 60000) return;
+        finish({coords:{latitude:lat,longitude:lon,accuracy:accuracy}});
+      }
+      function onStatus(event) {
+        var authorization = event && event.detail && event.detail.authorization;
+        if (authorization === "denied" || authorization === "restricted") {
+          var denied = new Error("location_denied");
+          denied.code = 1;
+          finish(null, denied);
+        }
+      }
+      function onError(event) {
+        // kCLErrorLocationUnknown is transient: leave CoreLocation time to retry.
+        var code = Number(event && event.detail && event.detail.code);
+        if (code === 1) {
+          var denied = new Error("location_denied");
+          denied.code = 1;
+          finish(null, denied);
+        }
+      }
+      window.addEventListener("dar-native-location", onLocation);
+      window.addEventListener("dar-native-location-status", onStatus);
+      window.addEventListener("dar-native-location-error", onError);
+      timer = setTimeout(function () {
+        var timeout = new Error("native_location_timeout");
+        timeout.code = 3;
+        finish(null, timeout);
+      }, 12000);
+      try { nativeBridge.postMessage({type:"location-resume"}); }
+      catch (e) { finish(null, e); }
+    }).catch(function (error) {
+      if (error && error.code === 1) throw error;
+      return typeof requestBrowserPosition === "function"
+        ? requestBrowserPosition() : Promise.reject(error);
+    });
+  }
   async function detectLocation() {
     if (gpsBusy) return;
     clearTimeout(locationSearchTimer);
@@ -435,8 +504,7 @@
     if (button) { button.disabled = true; button.textContent = "Standort wird ermittelt …"; }
     feedback("");
     try {
-      if (typeof requestBrowserPosition !== "function") throw new Error("geo_unavailable");
-      var pos = await requestBrowserPosition();
+      var pos = await requestDevicePosition();
       var lat = Number(pos && pos.coords && pos.coords.latitude);
       var lon = Number(pos && pos.coords && pos.coords.longitude);
       if (!validCoords(lat, lon)) throw new Error("invalid_gps");
@@ -445,8 +513,11 @@
         Math.abs(Number(old.lat)-lat) < .003 && Math.abs(Number(old.lon)-lon) < .003;
       var city = old.locationMode === "auto" && closeToOld && old.city && !/^(Ort wird|Ortsname|Aktueller Standort)/.test(old.city)
         ? old.city : "Ort wird ermittelt …";
-      save({lat:lat,lon:lon,city:city,locationMode:"auto",locationGranted:true,locationUpdatedAt:Date.now()});
+      save({lat:lat,lon:lon,city:city,locationMode:"auto",locationGranted:true,locationUpdatedAt:Date.now(),
+        locationAccuracy:Number(pos.coords.accuracy),
+        locationPrecision:Number(pos.coords.accuracy)>2500?"approximate":"precise"});
       paint();
+      if (Number(pos.coords.accuracy) > 2500) feedback("iOS liefert nur einen ungefähren Standort. Für präzisere Gebetszeiten aktiviere „Genauer Standort“ in iOS oder wähle deine Stadt.");
       try { if (typeof darGpsStartWatch === "function") darGpsStartWatch(); } catch (e) {}
       var name = "";
       try { if (typeof window.darResolveLocationCity === "function") name = await window.darResolveLocationCity(lat, lon);
@@ -786,7 +857,7 @@
   function current(){try{return typeof getPrayerSettings==="function"?(getPrayerSettings()||{}):{};}catch(e){return {};}}
   function valid(lat,lon,acc){
     return Number.isFinite(lat)&&Number.isFinite(lon)&&lat>=-90&&lat<=90&&lon>=-180&&lon<=180&&
-      Number.isFinite(acc)&&acc>=0&&acc<=2500;
+      Number.isFinite(acc)&&acc>=0&&acc<=100000;
   }
   function distance(a,b,c,d){
     var p=Math.PI/180, x=(c-a)*p, y=(d-b)*p*Math.cos((a+c)*p/2);
@@ -872,13 +943,15 @@
     var missingName=unresolved(s.city);
     // A recent coordinate fix MUST NOT suppress a missing-city retry.
     if(meters<700&&age<30*60000&&!missingName&&s.locationMode==="auto")return;
-    var shouldWrite=!hasOld||meters>=700||s.locationMode!=="auto"||s.locationGranted!==true;
+    var precision=acc<=2500?"precise":"approximate";
+    var shouldWrite=!hasOld||meters>=700||s.locationMode!=="auto"||s.locationGranted!==true||s.locationPrecision!==precision;
     if(shouldWrite&&Date.now()-lastApplied>=10000){
       lastApplied=Date.now();
       var city=meters<1500&&!missingName?s.city:cachedCity(lat,lon)||"GPS erkannt · Ortsname wird gesucht";
       try{
         setPrayerSettings({lat:lat,lon:lon,city:city,locationMode:"auto",
-          locationGranted:true,locationUpdatedAt:Date.now()});
+          locationGranted:true,locationUpdatedAt:Date.now(),
+          locationAccuracy:acc,locationPrecision:precision});
       }catch(e){return;}
       notifyPrayer(current());
     }
