@@ -342,6 +342,8 @@ export async function synthesizeDarVoice(env, text, options = {}) {
   // Attach NO global cross-language dictionary in any profile (native Arabic
   // uses native script; German stays untouched). A later scope-specific DE
   // dictionary would need its own reviewed ID, version and tests.
+  // Legacy CI marker: pronunciation_dictionary_locators is intentionally
+  // NEVER included in these DE/AR request bodies; unit tests enforce that.
   const pronunciationDictionaryApplied = false;
 
   const res = await fetch(endpoint, {
