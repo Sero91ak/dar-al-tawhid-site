@@ -60,7 +60,7 @@ enum DarDailyContent {
         var snap = base
         let keptDuaId = snap.duaId
         let keptPostId = snap.postId
-        let prayers = DarPrayerEngine.times(for: date, lat: snap.latitude, lng: snap.longitude)
+        let prayers = DarPrayerEngine.times(for: date, lat: snap.latitude, lng: snap.longitude, fajrAngle: snap.fajrAngle, asrFactor: snap.asrFactor)
         let next = DarPrayerEngine.next(from: prayers, now: date)
         snap.prayers = prayers
         snap.nextPrayerName = next.name

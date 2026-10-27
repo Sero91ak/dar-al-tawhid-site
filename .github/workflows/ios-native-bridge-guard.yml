@@ -6,6 +6,8 @@ on:
     paths:
       - ios/DarAlTawhid/DarAlTawhid/DarNativePermissions.swift
       - ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift
+      - ios/DarAlTawhid/Shared/DarPrayerEngine.swift
+      - ios/DarAlTawhid/Shared/DarDailyContent.swift
       - ios/DarAlTawhid/DarAlTawhid/WebAppView.swift
       - ios/DarAlTawhid/DarAlTawhid/Info.plist
       - ios/DarAlTawhid/DarAlTawhid/Widgets/DarAlTawhidWidgets.swift
@@ -13,6 +15,22 @@ on:
       - ios/DarAlTawhid/DarAlTawhid.xcodeproj/project.pbxproj
       - assets/dar-setup-hub.js
       - test/assets/dar-setup-hub.js
+      - scripts/test-ios-native-gps-recovery.cjs
+      - .github/workflows/ios-native-bridge-guard.yml
+  pull_request:
+    paths:
+      - ios/DarAlTawhid/DarAlTawhid/DarNativePermissions.swift
+      - ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift
+      - ios/DarAlTawhid/Shared/DarPrayerEngine.swift
+      - ios/DarAlTawhid/Shared/DarDailyContent.swift
+      - ios/DarAlTawhid/DarAlTawhid/WebAppView.swift
+      - ios/DarAlTawhid/DarAlTawhid/Info.plist
+      - ios/DarAlTawhid/DarAlTawhid/Widgets/DarAlTawhidWidgets.swift
+      - ios/DarAlTawhid/Shared/DarWidgetTheme.swift
+      - ios/DarAlTawhid/DarAlTawhid.xcodeproj/project.pbxproj
+      - assets/dar-setup-hub.js
+      - test/assets/dar-setup-hub.js
+      - scripts/test-ios-native-gps-recovery.cjs
       - .github/workflows/ios-native-bridge-guard.yml
   workflow_dispatch:
 
@@ -30,6 +48,8 @@ jobs:
           swiftc -frontend -parse \
             ios/DarAlTawhid/DarAlTawhid/DarNativePermissions.swift \
             ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift \
+            ios/DarAlTawhid/Shared/DarPrayerEngine.swift \
+            ios/DarAlTawhid/Shared/DarDailyContent.swift \
             ios/DarAlTawhid/DarAlTawhid/WebAppView.swift \
             ios/DarAlTawhid/DarAlTawhid/Widgets/DarAlTawhidWidgets.swift \
             ios/DarAlTawhid/Shared/DarWidgetTheme.swift
@@ -37,6 +57,8 @@ jobs:
         run: |
           node --check assets/dar-setup-hub.js
           node --check test/assets/dar-setup-hub.js
+      - name: Native GPS and prayer location regression cases
+        run: node scripts/test-ios-native-gps-recovery.cjs
       - name: Native capabilities and compiled bridge presence
         run: |
           python3 - <<'PY'
