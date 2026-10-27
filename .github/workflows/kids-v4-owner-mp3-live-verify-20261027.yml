@@ -1,0 +1,47 @@
+name: Verify KIDS V4 owner-corrected Nur MP3 LIVE
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/kids-v4-owner-mp3-live-verify-20261027.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-one-heard-audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify deployed corrected MP3 and exact public quiz manifest
+        env:
+          EXPECTED_SHA: '95ec3e2f7bdedd9779ff541f8145debd017c46a4dee55d4c3679ef92385ccf03'
+          EXPECTED_URL: '/kids/assets/kids-quiz-audio/v4-de-isolated-20261027/7-8/95ec3e2f7bdedd9779ff541f8145.mp3'
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kids-v4-live
+          curl --fail --location --silent --show-error --retry 2 --max-time 45 \
+             -H 'Cache-Control: no-cache' \
+             "https://dar-al-tawhid.de${EXPECTED_URL}?verify=${GITHUB_RUN_ID}" \
+             -o /tmp/kids-v4-live/replacement.mp3
+          test "$(wc -c </tmp/kids-v4-live/replacement.mp3)" -gt 4000
+          echo "${EXPECTED_SHA}  /tmp/kids-v4-live/replacement.mp3" | sha256sum --check
+          curl --fail --location --silent --show-error --retry 2 --max-time 45 \
+             -H 'Cache-Control: no-cache' \
+             "https://dar-al-tawhid.de/kids/data/quiz-v4-full-rebuild-public.json?verify=${GITHUB_RUN_ID}" \
+             -o /tmp/kids-v4-live/manifest.json
+          python3 - <<'PY'
+          import json,os,pathlib
+          m=json.loads(pathlib.Path('/tmp/kids-v4-live/manifest.json').read_text(encoding='utf-8'))
+          c=m['questions']['kids-quiz-178']['clips']['question']
+          assert c['url']==os.environ['EXPECTED_URL']
+          assert c['sha256']==os.environ['EXPECTED_SHA']
+          assert c['languageCode']=='de' and c['modelId']=='eleven_v4'
+          assert c['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+          assert c['humanListeningApproved'] is True
+          assert c['approvedForPlayback'] is True
+          assert c['ownerReviewedGenerationId']=='4vpdmlfHmhNx5f0aOoqQ'
+          assert m['humanListeningApproved'] is False
+          assert len(m['questions'])==450
+          assert sum(len(q['clips']) for q in m['questions'].values())==1800
+          print('PASS: actual LIVE MP3 byte-identical SHA-256, owner-approved ONE, 450 questions/1800 slots intact')
+          PY
