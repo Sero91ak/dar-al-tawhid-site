@@ -112,7 +112,7 @@ function showNotice(){
     note.appendChild(sample);
   }
   sample.hidden=status!=="ready";
-  // Test-only, user-initiated listening controls: make EVERY V4 segment
+  // KIDS_V4_LISTENING_DEVICE_STATUS_V1465: show real started/ended/error state.\n  // Test-only, user-initiated listening controls: make EVERY V4 segment
   // independently audible on iPad Safari, even if autoplay is denied.
   var four=note.querySelector("#kidsV4FourParts");
   if(!four){
@@ -137,19 +137,38 @@ function showNotice(){
       button.style.cssText="min-height:44px;padding:8px 12px;border:1px solid #e8ba76;"+
         "border-radius:10px;background:#174551;color:#fff8e8;font:800 12px/1.3 system-ui;touch-action:manipulation";
       button.addEventListener("click",function(){
-        if(!manifest)return;
+        var result=four.querySelector("#kidsV4FourPartStatus");
+        if(!manifest){if(result)result.textContent="V4-Manifest nicht geladen.";return}
         var band=select.value||"4-6";
         var id=Object.keys(manifest.questions).find(function(candidate){
           return manifest.questions[candidate].ageBand===band;
         });
-        if(!id){lastError="Altersgruppe nicht gefunden";showNotice();return}
+        if(!id){lastError="Altersgruppe nicht gefunden";if(result)result.textContent=lastError;showNotice();return}
         var q=manifest.questions[id];
-        preview.play({id:id,ageBand:q.ageBand,source:q.source},item.part,{
-          onerror:function(){lastError="Ton nicht gestartet: "+item.label+". Bitte Hörknopf erneut antippen.";showNotice();}
+        if(result)result.textContent="V4 · "+band+" · "+item.label+" wird abgespielt …";
+        var started=preview.play({id:id,ageBand:q.ageBand,source:q.source},item.part,{
+          onended:function(){
+            if(result)result.textContent="V4 · "+band+" · "+item.label+" vollständig abgespielt.";
+          },
+          onerror:function(error){
+            lastError="Ton nicht gestartet: "+item.label+".";
+            if(result)result.textContent="V4 "+band+" · "+item.label+
+              " konnte nicht abgespielt werden: "+String(error&&error.message||"Audiofehler");
+            showNotice();
+          }
         });
+        if(!started&&result)result.textContent="V4 "+band+" · "+item.label+
+          ": kein Ton gestartet. Bitte den Audiofehler oben prüfen.";
       });
       four.appendChild(button);
     });
+    var playState=root.document.createElement("p");
+    playState.id="kidsV4FourPartStatus";playState.setAttribute("role","status");
+    playState.setAttribute("aria-live","polite");
+    playState.style.cssText="flex:1 1 100%;margin:4px 0 0;color:#fff9e9;"+
+      "font:650 12px/1.5 system-ui";
+    playState.textContent="Altersgruppe wählen und genau eine V4-Aufnahme antippen.";
+    four.appendChild(playState);
     note.appendChild(four);
   }
   four.hidden=status!=="ready";
