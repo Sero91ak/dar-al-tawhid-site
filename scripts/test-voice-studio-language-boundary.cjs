@@ -37,11 +37,12 @@ async function test(){
   assert.equal(calls[0].text,"Nur das Gebet.");
   assert.equal(calls[0].model_id,"eleven_v4");
   assert.equal(Object.hasOwn(calls[0],"pronunciation_dictionary_locators"),false);
-  assert.equal(Object.hasOwn(calls[0],"language_code"),false);
+  assert.equal(calls[0].language_code,"de","German 'Nur' must be explicitly language-locked");
 
   result=await synth(env,"Antwort zwei: Nur für Erwachsene.",{profile:"quiz"});
   assert.equal(result.ok,true);
   assert.equal(calls[1].text,"Antwort zwei: Nur für Erwachsene.");
+  assert.equal(calls[1].language_code,"de");
   assert.equal(Object.hasOwn(calls[1],"pronunciation_dictionary_locators"),false);
 
   result=await synth(env,"نُور",{profile:"dua_arabic"});
