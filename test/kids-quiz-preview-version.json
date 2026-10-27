@@ -19,11 +19,11 @@
   "noOneSignal": true,
   "unpublishedQuestionsVisible": false,
   "publicVisitorRouteChanged": false,
-  "note": "Dar Test Worker sync from canonical main for Kids Quiz v1461 age-specific praise & encouragement text; genuine V4 review audio remains audition-only and humanListeningApproved=false. A successful CI deploy must be verified separately.",
+  "note": "Isolated Dar Test must serve Kids Quiz PWA v1462, touch replay of test-only unapproved V4 retry clips and readable explanations. Deployment and physical-device QA remain separate from metadata; visitor V4 playback still requires genuine human listening approval.",
   "responsiveBuild": "kids-quiz-fold-ipad-v2-20261027",
-  "kidsServiceWorkerCache": "v1461",
-  "testWorkerSync": "requested-after-kids-quiz-v1461-merge",
-  "integrationCommit": "72f5cd7acd47178b58063fbb13882b5217c86e0f",
+  "kidsServiceWorkerCache": "v1462",
+  "testWorkerSync": "requested-after-kids-quiz-v4-retry-pr-1456",
+  "integrationCommit": "7bc145c8275421f190c32f5bc1b62b0ac5680a13",
   "quizRetryBehavior": "wrong-answer-allows-second-attempt-v2",
   "quizPraiseSync": "v4-clip-text-correct-retry-explanation"
 }
