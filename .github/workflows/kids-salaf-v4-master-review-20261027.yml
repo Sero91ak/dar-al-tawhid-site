@@ -48,6 +48,7 @@ jobs:
           PY
           command -v ffmpeg
           command -v ffprobe
+          python3 kids/tools/build-salaf-v4-master-staging.py --preflight
 
       - name: Prepare isolated staging branch (never touch public main catalog)
         shell: bash
