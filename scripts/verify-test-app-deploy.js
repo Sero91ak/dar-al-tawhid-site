@@ -571,6 +571,18 @@ async function fetchVersionBuild(base) {
         "As-Salāmu ʿalaykum wa raḥmatullāhi wa barakātuh, Kids"
       ];
       const overlayFree = forbiddenOverlay.every((needle) => !html.includes(needle));
+      // The current Kids start has a static, accessible splash. The old V79
+      // cinema was intentionally retired. Never require its removed markup
+      // or run a redundant MP4 check when no cinema component exists.
+      const hasCinemaComponent=html.includes('id="kidsCinemaV79"') ||
+        html.includes("/kids/assets/kids-cinema/intro-v74.mp4?v=79");
+      if(!hasCinemaComponent){
+        const clean=startRes.status===200 && overlayFree &&
+          html.includes('id="quizModal"') && html.includes('id="openQuizButton"');
+        console.log(label+" kids static-start: status="+startRes.status+
+          " legacyCinemaAbsent=true quizVisible="+clean);
+        return clean;
+      }
       const htmlOk =
         startRes.status === 200 &&
         html.includes("kids-launch-v79") &&
