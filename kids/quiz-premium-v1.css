@@ -277,3 +277,177 @@ body:has(.app[data-gender="boy"]) #quizModal,
  #quizModal .quiz-topic-card,#quizModal .quiz-premium-actions button{transition:none!important}
  #quizModal .quiz-topic-card:hover,#quizModal .quiz-premium-actions button:hover{transform:none!important}
 }
+
+
+/* KIDS_QUIZ_RESPONSIVE_SEGMENTS_V2_20261027
+   Device-independent adaptive quiz geometry for iPad, foldable inner displays,
+   foldable cover displays and iPhone/compact portrait. Keep children, widgets,
+   Du'a, and the remainder of the Kids navigation entirely unchanged. */
+#quizModal.open,
+#quizModal.open .modal-shell,
+#quizModal.open .quiz-stage,
+#quizModal.open #quizBody,
+#quizModal.open .quiz-learning-dashboard,
+#quizModal.open .quiz-library-panel,
+#quizModal.open .quiz-local-learning{
+  box-sizing:border-box!important;
+  min-width:0!important;
+  max-width:100%!important;
+}
+#quizModal.open{inset:0!important;width:100%!important;height:100dvh!important;
+  padding:0!important;overflow:hidden!important;overscroll-behavior:contain!important}
+#quizModal.open .modal-shell{
+  display:flex!important;flex-direction:column!important;
+  width:100%!important;max-width:none!important;
+  height:100dvh!important;min-height:0!important;max-height:100dvh!important;
+  margin:0!important;border-radius:0!important;
+  overflow:hidden!important;padding-block:0!important;
+  padding-inline:max(10px,env(safe-area-inset-left,0px))
+    max(10px,env(safe-area-inset-right,0px))!important;
+}
+#quizModal.open .modal-top{width:100%!important;min-width:0!important;
+  flex:0 0 auto!important;min-height:58px!important;
+  padding-bottom:8px!important;gap:clamp(5px,1.2vw,15px)!important}
+#quizModal.open .modal-top .quiz-global-back,
+#quizModal.open .modal-top .close-btn{
+  flex:0 0 auto!important;min-width:44px;min-height:44px;
+  touch-action:manipulation!important;position:relative!important;z-index:65!important}
+#quizModal.open .modal-top .modal-title{min-width:0!important;overflow-wrap:anywhere}
+#quizModal.open .quiz-stage{
+  flex:1 1 auto!important;min-height:0!important;
+  height:auto!important;max-width:1800px!important;
+  width:100%!important;overflow-y:auto!important;overflow-x:hidden!important;
+  overscroll-behavior-y:contain!important;-webkit-overflow-scrolling:touch;
+  padding:clamp(8px,1.4vw,24px) clamp(6px,2.5vw,36px)
+    calc(26px + env(safe-area-inset-bottom,0px))!important;
+}
+#quizModal.open .quiz-learning-dashboard,
+#quizModal.open .quiz-library-panel{min-height:0!important;overflow-x:clip!important}
+#quizModal .quiz-stat-grid,#quizModal .quiz-topic-grid,
+#quizModal .quiz-answers,#quizModal .quiz-library-list{
+  min-width:0!important;max-width:100%!important}
+#quizModal .quiz-topic-card,#quizModal .quiz-answer,
+#quizModal .quiz-library-row,#quizModal .quiz-library-open{
+  min-width:0!important;overflow-wrap:anywhere!important}
+#quizModal .quiz-topic-card,#quizModal .quiz-library-open{
+  touch-action:manipulation!important}
+#quizModal.quiz-round-mode #quizBody{
+  width:100%!important;max-width:none!important;
+  min-width:0!important;overflow-x:hidden!important;
+  align-items:start!important;
+}
+#quizModal.quiz-round-mode .quiz-next.show{
+  z-index:70!important;touch-action:manipulation!important;
+}
+@media (min-width:760px){
+  /* Eliminate fixed 260+380px track minimums, which overflow iPad portrait,
+     narrow split-screen windows and foldables with asymmetric segments. */
+  #quizModal.quiz-round-mode #quizBody:not(:has(> .quiz-local-learning)){
+    grid-template-columns:minmax(0,min(39%,470px)) minmax(0,1fr)!important;
+    column-gap:clamp(16px,3vw,46px)!important;
+  }
+  #quizModal.quiz-round-mode .quiz-local-learning{
+    display:grid!important;grid-template-columns:minmax(0,42%) minmax(0,1fr)!important;
+    grid-template-areas:
+      "question answers"
+      "help answers"
+      "listen feedback"
+      ". learning"
+      ". next"!important;
+    column-gap:clamp(14px,2.6vw,38px)!important;
+    align-items:start!important;
+  }
+  #quizModal.quiz-round-mode .quiz-local-learning>.quiz-question{grid-area:question}
+  #quizModal.quiz-round-mode .quiz-local-learning>.quiz-help{grid-area:help}
+  #quizModal.quiz-round-mode .quiz-local-learning>#quizLocalListen{grid-area:listen}
+  #quizModal.quiz-round-mode .quiz-local-learning>.quiz-answers{grid-area:answers;
+    grid-template-columns:minmax(0,1fr)!important}
+  #quizModal.quiz-round-mode .quiz-local-learning>#quizLocalFeedback{grid-area:feedback}
+  #quizModal.quiz-round-mode .quiz-local-learning>#quizLocalLearning{grid-area:learning}
+  #quizModal.quiz-round-mode .quiz-local-learning>#quizLocalNext{grid-area:next}
+  #quizModal.quiz-round-mode .quiz-local-learning>*{min-width:0;max-width:100%}
+}
+@media (min-width:900px){
+  /* Dashboard master-detail: progress rail on the left, all learning themes
+     on the right. No fixed pixel column can push the content outside iPad. */
+  #quizModal.quiz-dashboard-mode .quiz-learning-dashboard.show{
+    display:grid!important;
+    grid-template-columns:minmax(0,min(35%,420px)) minmax(0,1fr)!important;
+    column-gap:clamp(16px,2.4vw,42px)!important;
+    row-gap:clamp(10px,1.2vw,18px)!important;
+    align-items:start!important;
+  }
+  #quizModal.quiz-dashboard-mode .quiz-learning-dashboard>.quiz-premium-welcome{
+    grid-column:1/-1!important;grid-row:1!important}
+  #quizModal.quiz-dashboard-mode .quiz-learning-dashboard>.quiz-dash-head{
+    grid-column:1!important;grid-row:2!important}
+  #quizModal.quiz-dashboard-mode .quiz-learning-dashboard>.quiz-dash-bar{
+    grid-column:1!important;grid-row:3!important;margin:0!important}
+  #quizModal.quiz-dashboard-mode .quiz-learning-dashboard>.quiz-stat-grid{
+    grid-column:1!important;grid-row:4!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #quizModal.quiz-dashboard-mode .quiz-learning-dashboard>.quiz-resume-card{
+    grid-column:1!important;grid-row:5!important}
+  #quizModal.quiz-dashboard-mode .quiz-learning-dashboard>.quiz-review-card{
+    grid-column:1!important;grid-row:6!important}
+  #quizModal.quiz-dashboard-mode .quiz-learning-dashboard>.quiz-topic-section{
+    grid-column:2!important;grid-row:2/span 5!important;
+    min-width:0!important;margin:0!important}
+  #quizModal.quiz-dashboard-mode .quiz-learning-dashboard .quiz-topic-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #quizModal.quiz-library-mode .quiz-library-list{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media (min-width:1330px){
+  #quizModal.quiz-dashboard-mode .quiz-learning-dashboard .quiz-topic-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  #quizModal.quiz-library-mode .quiz-library-list{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+/* When the browser reports two actual viewport segments, reserve the fold
+   gutter and keep tap targets entirely inside a single panel. */
+@media (horizontal-viewport-segments:2){
+  #quizModal{--quiz-fold-gutter:max(28px,calc(env(viewport-segment-left 1 0,52vw) - env(viewport-segment-right 0 0,48vw) + 24px))}
+  #quizModal.quiz-round-mode #quizBody:not(:has(> .quiz-local-learning)){
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    column-gap:var(--quiz-fold-gutter)!important}
+  #quizModal.quiz-round-mode .quiz-local-learning{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    column-gap:var(--quiz-fold-gutter)!important}
+  #quizModal.quiz-dashboard-mode .quiz-learning-dashboard.show{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    column-gap:var(--quiz-fold-gutter)!important}
+  #quizModal.quiz-dashboard-mode .quiz-premium-welcome{
+    padding-inline:clamp(20px,4vw,55px)!important}
+}
+@media (max-width:759px){
+  /* Cover screen and narrow iPhones are never forced into a two-pane layout. */
+  #quizModal.quiz-round-mode #quizBody{
+    display:block!important;width:100%!important;max-width:100%!important}
+  #quizModal.quiz-round-mode .quiz-local-learning{display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important}
+  #quizModal.quiz-dashboard-mode .quiz-learning-dashboard.show{
+    display:block!important}
+  #quizModal.quiz-round-mode .quiz-answers{grid-template-columns:minmax(0,1fr)!important}
+  #quizModal .quiz-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #quizModal .quiz-premium-welcome{max-width:100%!important}
+  #quizModal.quiz-round-mode .quiz-next.show,
+  #quizModal.quiz-round-mode #quizLocalNext.show{
+    position:sticky!important;bottom:max(8px,env(safe-area-inset-bottom,0px))!important;
+    left:auto!important;right:auto!important;width:100%!important;
+    margin-top:14px!important;box-shadow:0 12px 28px rgba(0,0,0,.30)!important}
+}
+@media (orientation:landscape) and (max-height:620px){
+  #quizModal.open .modal-top{min-height:48px!important}
+  #quizModal.open .quiz-stage{padding-block:6px!important}
+  #quizModal.quiz-round-mode .quiz-scene{height:clamp(70px,16vh,140px)!important;
+    max-height:25vh!important}
+  #quizModal .quiz-premium-welcome{min-height:0!important;padding-block:16px!important}
+}
+/* Do not place interactive controls under the hinge, notch or PWA home bar. */
+#quizModal.open button:focus-visible,#quizModal.open input:focus-visible{
+  outline:3px solid var(--kqp-accent)!important;outline-offset:2px!important}
+@media (prefers-reduced-motion:reduce){
+  #quizModal .quiz-topic-card,#quizModal .quiz-premium-geometry{
+    animation:none!important;transition:none!important}
+}
