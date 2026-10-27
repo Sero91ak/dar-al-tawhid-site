@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "id": "dar-voice-language-isolation-v1",
+  "adopted": "2026-10-27",
+  "scope": [
+    "kids-quiz-v4",
+    "kids-dua-audio",
+    "kids-lessons-future-voice",
+    "new-German-and-Arabic-voice-productions"
+  ],
+  "policy": "de-is-de; ar-is-ar; no cross-language pronunciation-dictionary application",
+  "canonicalTextIntegrity": "Never change canonical displayed words, question IDs, answer correctness, Quran/Hadith sourcing or Arabic originals to coerce TTS.",
+  "german": {
+    "languageTag": "de-DE",
+    "requiredVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+    "requiredModelId": "eleven_v4",
+    "pronunciationDictionaryLocators": [],
+    "speakGermanGrammarAsGerman": true,
+    "forbidArabicMasterDictionary": true,
+    "forbidAutoReplace": [
+      {
+        "from": "Nur",
+        "to": "النور"
+      },
+      {
+        "from": "nur",
+        "to": "نور"
+      },
+      {
+        "from": "nur",
+        "to": "Nūr"
+      }
+    ],
+    "homographPolicy": "The German particle 'nur', including sentence-initial 'Nur', remains German [nuːɐ̯]. German sentences must never run with an Arabic-global PLS.",
+    "arabicLoanTerms": "Transliterated Islamic terms inside German syntax remain unchanged in the displayed text. Flag pronunciation for listening; if ambiguous isolate as approved Arabic speech segment, not as a German dictionary replacement."
+  },
+  "arabic": {
+    "languageTag": "ar",
+    "requiredVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+    "requiredModelId": "eleven_v4",
+    "textForm": "Arabic script and verified Fuṣḥā with correct vocalization",
+    "forbidGermanLexicon": true,
+    "nativeTextPronunciation": true,
+    "pronunciationDictionaryLocators": [],
+    "requiredHearingReview": true,
+    "quranTilawah": "Never synthesize Qur'an recitation; use authorized real reciters."
+  },
+  "mixed": {
+    "automaticTtsAllowed": false,
+    "handling": "Human-edited list of separate nonempty {language:de|ar,text} segments. Each segment is generated with its own isolated language request and stitched only with verified joins and listening QA.",
+    "preserveOrdering": true,
+    "forbidMixedArabicAndGermanInOneTtsPayload": true,
+    "forbidUnverifiedTransliterationReplacement": true
+  },
+  "output": {
+    "newAudioAlwaysReviewOnly": true,
+    "ownerApprovalNeverMeansHumanHeard": true,
+    "mandatoryReview": [
+      "German n-u-r vowel & syntax",
+      "native Arabic terms & makharij",
+      "stress, pauses and transitions",
+      "correct ID/age/part/source",
+      "headphones and real iPhone/iPad testing"
+    ],
+    "immutableBackup": true,
+    "hashEachRetake": true,
+    "versionDictionaryAndPrompt": true
+  },
+  "safety": {
+    "noPaidMassReruns": true,
+    "noAutomaticNewCredits": true,
+    "noBrowserTTSFallback": true,
+    "doNotReplaceOriginalsBeforeReview": true,
+    "doNotClaimLiveBeforeDeployment": true,
+    "keep450Questions150Each": true,
+    "doNotAlterAppOrPush": true
+  },
+  "diagnosedCollision": {
+    "file": "data/pronunciation/DAR_AL_TAWHID_ElevenLabs_ARABIC_MASTER_29122.pls",
+    "badForGerman": "Nur",
+    "existingReplacement": "النور",
+    "allowedDistinctArabicName": "Nūr",
+    "affectedUppercaseAudioSlotsForHearing": 82,
+    "allNurCandidateSlots": 131,
+    "hearingStatus": "NOT_VERIFIED"
+  },
+  "referenceIssue": "https://github.com/Sero91ak/dar-al-tawhid-site/issues/1479"
+}
