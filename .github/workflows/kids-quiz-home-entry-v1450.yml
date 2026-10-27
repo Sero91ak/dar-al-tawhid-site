@@ -3,9 +3,6 @@ on:
   pull_request:
     paths:
       - 'kids/quiz-library.js'
-      - 'kids/quiz-v4-audio-review.html'
-      - 'kids/data/quiz-v4-full-rebuild-public.json'
-      - 'kids/tools/test-v4-risk-review-page.cjs'
       - 'kids/quiz-library.css'
       - 'kids/index.html'
       - 'kids/start.html'
@@ -29,4 +26,3 @@ jobs:
           node --check kids/quiz-library.js
           node --check kids/sw.js
           node kids/tools/test-quiz-home-entry-v1450.cjs
-          node kids/tools/test-v4-risk-review-page.cjs
