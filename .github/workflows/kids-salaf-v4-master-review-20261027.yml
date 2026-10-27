@@ -1,0 +1,107 @@
+name: Kids Salaf V4 Master Audio - review-only
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "kids/audio-jobs/salaf-v4-request-20261027.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-salaf-v4-review-only
+  cancel-in-progress: false
+
+jobs:
+  stage-master-audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    env:
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+      STAGE_BRANCH: audio/salaf-v4-review-20261027
+    steps:
+      - name: Checkout authorized main request
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 2
+
+      - name: Verify request and provider authorization without paid synthesis
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$ADMIN_PUBLISH_SECRET" || { echo "::error::Missing ADMIN_PUBLISH_SECRET; 0 credits used"; exit 1; }
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("kids/audio-jobs/salaf-v4-request-20261027.json")
+          r=json.loads(p.read_text(encoding="utf-8"))
+          assert r["authorization"]=="OWNER_EXPLICIT_SALAF_AUDIO_2026_10_27"
+          assert r["mode"]=="staging-review-only"
+          assert r["allowLivePublication"] is False
+          assert r["retryPaidRequests"] is False
+          assert 1<=len(r["storyIds"])<=4
+          assert r["maxClips"]==len(r["storyIds"])
+          print("Authorized exact V4 master batch:",len(r["storyIds"]))
+          PY
+          command -v ffmpeg
+          command -v ffprobe
+
+      - name: Prepare isolated staging branch (never touch public main catalog)
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main --depth=2
+          if git ls-remote --exit-code --heads origin "$STAGE_BRANCH" >/dev/null; then
+            git fetch origin "$STAGE_BRANCH"
+            git switch -c "$STAGE_BRANCH" "origin/$STAGE_BRANCH"
+            git merge --no-edit origin/main
+          else
+            git switch -c "$STAGE_BRANCH"
+          fi
+
+      - name: Generate each exact shared master once - no retry - no public release
+        id: generation
+        shell: bash
+        run: |
+          set +e
+          python3 kids/tools/build-salaf-v4-master-staging.py
+          code=$?
+          echo "return_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Commit durable staging and checksums to nonproduction branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add kids/review-only/salaf-v4-20261027/
+          if git diff --cached --quiet; then
+            echo "No new staged files"
+          else
+            git commit -m "Kids Salaf: stage original owner V4 masters for human listening (NOT LIVE)"
+          fi
+          git push origin HEAD:"$STAGE_BRANCH"
+
+      - name: Preserve review audio as workflow artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-salaf-v4-review-only
+          path: kids/review-only/salaf-v4-20261027/
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - name: Reject incomplete or uncertain billing stage
+        if: steps.generation.outputs.return_code != '0'
+        run: |
+          echo "::error::A paid request may have failed. Audit ElevenLabs billing/history before any retry."
+          exit 1
+
+      - name: Report safe stage
+        run: |
+          echo "V4 audio is on the nonproduction review branch, NOT in the Kids live audio manifest."
+          echo "Each story requires documented listening approval, text/timing parity and device playback before promotion."
