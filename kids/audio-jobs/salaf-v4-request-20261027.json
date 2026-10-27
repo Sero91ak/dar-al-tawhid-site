@@ -19,5 +19,7 @@
   "maxClips": 4,
   "maxTotalCharacters": 18000,
   "oneMasterAudioForAllProfiles": true,
-  "approvalGate": "human listening and text/audio/timing/device QA before public manifest"
+  "approvalGate": "human listening and text/audio/timing/device QA before public manifest",
+  "infrastructureRevision": "20261027-ffmpeg-runner-preflight-fix-v2",
+  "previousAttempt": "GitHub Actions 40598077344 stopped at ffmpeg availability check, no TTS calls"
 }
