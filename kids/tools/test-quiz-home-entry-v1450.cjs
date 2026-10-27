@@ -9,7 +9,7 @@ const read=p=>fs.readFileSync(root+"/"+p,"utf8");
 const entry=read("kids/index.html");
 assert.equal(entry,read("kids/start.html"),"Kids start shell mismatch");
 assert.equal(entry,read("kids/shell.html"),"Kids shell mismatch");
-for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=20261026-premium1','/kids/quiz-library.css?v=20261026-premium1','/kids/sw.js?v=1461']){
+for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=20261026-premium1','/kids/quiz-library.css?v=20261026-premium1','/kids/sw.js?v=1462']){
   assert.ok(entry.includes(token),"Missing Kids shell token: "+token);
 }
 // Kids must display the age-appropriate new praise/encouragement even if
@@ -32,6 +32,10 @@ assert.ok(entry.includes('class="quiz-explanation quiz-lesson-card"'),"Full expl
 assert.ok(entry.includes("quizExplanationAudioStatus"),"Text explanation and audio QA status must be separated");
 assert.ok(entry.includes("refreshQuizPraiseAudioState"),"The V4 praise replay control must update after late audio readiness");
 assert.ok(entry.includes("quiz-praise-replay"),"The child needs a user-initiated V4 praise replay button");
+assert.ok(entry.includes("refreshQuizRetryAudioState"),"Wrong answers must expose V4 retry replay for iOS user gesture");
+assert.ok(entry.includes("quiz-retry-replay"),"V4 encouragement replay control must exist in main quiz");
+assert.ok(read("kids/quiz-library.js").includes("quiz-local-audio-replay"),"Fallback Quiz must offer V4 touch replays");
+assert.ok(premiumCss.includes("KIDS_QUIZ_V4_AUDIO_REPLAY_V1462"),"Kids audio replay responsive touch styling must be loaded");
 assert.ok(read("kids/quiz-library.js").includes("quiz-v4-release-status"),"User must see the correct V4 voice status");
 assert.ok(premiumCss.includes("horizontal-viewport-segments:2"),"Fold viewport segment gutter required");
 assert.ok(premiumCss.includes("quiz-dashboard-mode .quiz-learning-dashboard.show"),"iPad dashboard master-detail required");
@@ -46,8 +50,8 @@ assert.ok(entry.includes("Quiz-Lernwelt")&&entry.includes("450 Fragen · neue Le
 assert.ok(entry.includes("/kids/quiz-v4-test-preview.js?v=20261026-audition1"),"Kids visitor code must include host-isolated Test MP3 preview");
 const sw=read("kids/sw.js");
 const version=JSON.parse(read("kids/version.json"));
-assert.ok(sw.includes('dar-al-tawhid-kids-v1461'));
-assert.equal(version.visualSystem.serviceWorkerCache,"v1461");
+assert.ok(sw.includes('dar-al-tawhid-kids-v1462'));
+assert.equal(version.visualSystem.serviceWorkerCache,"v1462");
 assert.ok(sw.includes('/kids/quiz-library.js?v=20261026-premium1'));
 assert.ok(sw.includes('url.pathname==="/kids/quiz-library.js"'));
 const originalQuestions=JSON.parse(read("kids/data/quiz-kids.json")).items;
