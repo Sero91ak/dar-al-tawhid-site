@@ -19,5 +19,9 @@
   "noOneSignal": true,
   "unpublishedQuestionsVisible": false,
   "publicVisitorRouteChanged": false,
-  "note": "This file describes a test worker deployment only; not proof of delivery until GitHub deploy verification succeeds."
+  "note": "Isolated Dar Test Worker sync requested from current main. File status does not imply deployed or device-QA passed; V4 QA flags remain pending.",
+  "responsiveBuild": "kids-quiz-fold-ipad-v2-20261027",
+  "kidsServiceWorkerCache": "v1458",
+  "testWorkerSync": "requested-after-kids-pr-1448-merge",
+  "integrationCommit": "262ee83025faa5b380ba85fe30b2ced5bd074d87"
 }
