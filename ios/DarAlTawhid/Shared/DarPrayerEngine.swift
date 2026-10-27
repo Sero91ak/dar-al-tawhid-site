@@ -15,7 +15,7 @@ enum DarPrayerEngine {
         return (deg * 10).rounded() / 10
     }
 
-    static func times(for date: Date, lat: Double, lng: Double, timeZone: TimeZone = .current) -> [DarPrayerSlot] {
+    static func times(for date: Date, lat: Double, lng: Double, fajrAngle: Double = 12, asrFactor: Double = 1, timeZone: TimeZone = .current) -> [DarPrayerSlot] {
         var cal = Calendar(identifier: .gregorian)
         cal.timeZone = timeZone
         let doy = Double(cal.ordinality(of: .day, in: .year, for: date) ?? 1)
@@ -36,13 +36,14 @@ enum DarPrayerEngine {
         }
 
         func asrClock() -> String {
-            let shadow = 1.0
+            let shadow = asrFactor == 2 ? 2.0 : 1.0
             let angle = atan(1.0 / (shadow + tan(abs(latR - decR)))) * 180 / .pi
-            return clock(angle: 90 - angle, rising: false)
+            // Asr uses the computed solar altitude, not its zenith complement.
+            return clock(angle: angle, rising: false)
         }
 
         return [
-            DarPrayerSlot(id: "fajr", name: "Fajr", time: clock(angle: -18, rising: true)),
+            DarPrayerSlot(id: "fajr", name: "Fajr", time: clock(angle: -abs(fajrAngle), rising: true)),
             DarPrayerSlot(id: "sunrise", name: "Sunrise", time: clock(angle: -0.833, rising: true)),
             DarPrayerSlot(id: "dhuhr", name: "Dhuhr", time: {
                 let solarNoon = 12 - lng / 15 - eqt / 60 + tzHours
@@ -50,7 +51,7 @@ enum DarPrayerEngine {
             }()),
             DarPrayerSlot(id: "asr", name: "Asr", time: asrClock()),
             DarPrayerSlot(id: "maghrib", name: "Maghrib", time: clock(angle: -0.833, rising: false)),
-            DarPrayerSlot(id: "isha", name: "Isha", time: clock(angle: -17, rising: false))
+            DarPrayerSlot(id: "isha", name: "Isha", time: clock(angle: -abs(fajrAngle), rising: false))
         ]
     }
 
