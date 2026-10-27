@@ -532,7 +532,11 @@ async function fetchVersionBuild(base) {
       return false;
     }
     const kidsPub = await waitKids("public", publicBase, true);
-    const kidsDev = await waitKids("workers.dev", workersBase, false);
+    // The isolated Kids preview uses /kids on the same dedicated workers.dev
+    // origin. /test/kids is an intentionally access-protected editor route:
+    // probing it anonymously always returns 401 and falsely fails every deploy.
+    const kidsTestOrigin = new URL(workersBase).origin;
+    const kidsDev = await waitKids("workers.dev Kids preview", kidsTestOrigin, false);
     if (!kidsPub || !kidsDev) {
       throw new Error(
         `Kids Test Cache noch alt (expect ${kidsExpect}). public=${kidsPub} workers.dev=${kidsDev}`
@@ -592,7 +596,7 @@ async function fetchVersionBuild(base) {
     const cinemaPub = kidsPub === "protected"
       ? (console.log("public kids route is access-protected; cinema verification uses workers.dev mirror"), true)
       : await verifyKidsCinema("public", publicBase);
-    const cinemaDev = await verifyKidsCinema("workers.dev", workersBase);
+    const cinemaDev = await verifyKidsCinema("workers.dev Kids preview", kidsTestOrigin);
     if (!cinemaPub || !cinemaDev) {
       throw new Error(
         `Kids Cinema Intro fehlt/ist nicht abspielbar. public=${cinemaPub} workers.dev=${cinemaDev}`
