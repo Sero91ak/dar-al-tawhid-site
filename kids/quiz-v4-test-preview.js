@@ -10,7 +10,7 @@ var VOICE="DkU7j9uO4ZEtLD2iRZSH";
 var ROOT="/kids/assets/kids-quiz-audio/v4-full-rebuild-20261026/";
 var SOURCE="/kids/data/quiz-v4-full-rebuild-review.json";
 var PARTS=["question","correct","retry","explanation"];
-var manifest=null, pending=null, status="unloaded", player=null,seq=0, lastError="";
+var manifest=null, pending=null, status="unloaded", player=null,seq=0, lastError="", activeClip="";
 function validClip(c,age){
   return c&&c.voiceId===VOICE&&c.modelId==="eleven_v4"
     &&c.humanListeningApproved===false&&c.approvedForPlayback===false
@@ -36,6 +36,7 @@ function valid(d){
 }
 function stop(){
   seq++;
+  activeClip="";
   if(player){try{player.pause();player.removeAttribute("src");player.load()}catch(_){}}
 }
 function clipFor(q,p){
@@ -69,7 +70,8 @@ function showNotice(){
   var p=note.querySelector("#kidsV4PreviewStatus");
   if(!p){p=root.document.createElement("p");p.id="kidsV4PreviewStatus";p.style.cssText="margin:0 0 8px";note.appendChild(p)}
   p.textContent=(messages[status]||messages.unavailable)+
-    (status==="ready"&&lastError?" · "+lastError:"");
+    (activeClip?" · 🔊 "+activeClip:"")+
+    (lastError?" · "+lastError:"");
   var retry=note.querySelector("#kidsV4PreviewRetry");
   if(!retry){
     retry=root.document.createElement("button");
@@ -197,9 +199,24 @@ var preview={
       stop();
       if(root.DARKidsOwnerVoice&&root.DARKidsOwnerVoice.stop)root.DARKidsOwnerVoice.stop();
       if(!player){player=new root.Audio();player.preload="auto";}
-      var current=seq;player.onended=function(){if(current===seq&&typeof opts.onended==="function")opts.onended()};
+      var current=seq;
+      var labelMap={question:"Frage",correct:"Lob",retry:"Ermutigung",explanation:"Erklärung"};
+      var heardLabel=(labelMap[p]||p)+" · "+String(q.ageBand||"")+" Jahre";
+      player.muted=false;player.volume=1;
+      player.setAttribute("playsinline","");
+      player.onplaying=function(){
+        if(current!==seq)return;
+        activeClip=heardLabel+" wird abgespielt";
+        lastError="";showNotice();
+      };
+      player.onended=function(){
+        if(current!==seq)return;
+        activeClip="";showNotice();
+        if(typeof opts.onended==="function")opts.onended();
+      };
       player.onerror=function(){
         if(current!==seq)return;
+        activeClip="";
         lastError="Audio-Datei nicht erreichbar: "+String(q&&q.id||"")+" / "+String(p);
         showNotice();
         if(typeof opts.onerror==="function")opts.onerror(new Error("Test MP3 missing"));
@@ -208,6 +225,7 @@ var preview={
       var task=player.play();
       if(task&&task.catch)task.catch(function(e){
         if(current!==seq)return;
+        activeClip="";
         lastError="Audiowiedergabe blockiert: bitte Hörknopf antippen";
         showNotice();
         if(typeof opts.onerror==="function")opts.onerror(e);
