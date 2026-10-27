@@ -19,6 +19,10 @@ assert.ok(entry.includes("/kids/quiz-v4-approved-player.js?v=20261026-v1"),"Exac
 assert.ok(entry.includes('quizPart:"question"')&&entry.includes('quizPart:"correct"')&&entry.includes('quizPart:"retry"')&&entry.includes('quizPart:"explanation"'),"Exact four V4 audio segments required");
 assert.ok(premiumCss.includes('[data-quiz-persona="girl"]')&&premiumCss.includes('[data-quiz-persona="boy"]'),"Boys/girls palette must both exist");
 assert.ok(premiumCss.includes("KIDS_QUIZ_RESPONSIVE_SEGMENTS_V2_20261027"),"Responsive V2 quiz release must be present");
+assert.ok(premiumCss.includes("KIDS_QUIZ_LESSON_PRESENTATION_V1"),"Labeled explanation lesson must be visible on all device sizes");
+assert.ok(entry.includes('class="quiz-explanation quiz-lesson-card"'),"Full explanation card must exist in each Kids shell");
+assert.ok(entry.includes("quizExplanationAudioStatus"),"Text explanation and audio QA status must be separated");
+assert.ok(read("kids/quiz-library.js").includes("quiz-v4-release-status"),"User must see the correct V4 voice status");
 assert.ok(premiumCss.includes("horizontal-viewport-segments:2"),"Fold viewport segment gutter required");
 assert.ok(premiumCss.includes("quiz-dashboard-mode .quiz-learning-dashboard.show"),"iPad dashboard master-detail required");
 assert.ok(premiumCss.includes("max-width:759px"),"Compact cover-screen layout required");
@@ -32,8 +36,8 @@ assert.ok(entry.includes("Quiz-Lernwelt")&&entry.includes("450 Fragen · neue Le
 assert.ok(entry.includes("/kids/quiz-v4-test-preview.js?v=20261026-audition1"),"Kids visitor code must include host-isolated Test MP3 preview");
 const sw=read("kids/sw.js");
 const version=JSON.parse(read("kids/version.json"));
-assert.ok(sw.includes('dar-al-tawhid-kids-v1458'));
-assert.equal(version.visualSystem.serviceWorkerCache,"v1458");
+assert.ok(sw.includes('dar-al-tawhid-kids-v1459'));
+assert.equal(version.visualSystem.serviceWorkerCache,"v1459");
 assert.ok(sw.includes('/kids/quiz-library.js?v=20261026-premium1'));
 assert.ok(sw.includes('url.pathname==="/kids/quiz-library.js"'));
 const originalQuestions=JSON.parse(read("kids/data/quiz-kids.json")).items;
@@ -151,7 +155,7 @@ const touchBackEvent={
 listeners.pointerup[0].cb(touchBackEvent);
 assert.equal(modal.open,false,"iOS pointerup Back must close the quiz dashboard");
 assert.equal(touchBackEvent.prevented,true);
-console.log("PASS: Kids 3 shells equal, SW v1458, 450 question bundle, click and iOS pointerup Back");
+console.log("PASS: Kids 3 shells equal, SW v1459, 450 question bundle, click and iOS pointerup Back");
 
 // Simulate the real production quiz loader with all network requests blocked.
 // The embedded pack alone must populate all 450 selectable child questions.
