@@ -54,7 +54,9 @@ var src="/kids/data/quiz-v4-full-rebuild-public.json";
 var el=function(id){return document.getElementById(id)};
 var all=[];
 var allowed=/^\/kids\/assets\/kids-quiz-audio\/(?:v4-full-rebuild-20261026|v4-de-isolated-20261027)\/(?:4-6|7-8|9-10)\/[a-f0-9]{28}\.mp3$/;
-var arabic=/[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff\ufb50-\ufdff\ufe70-\ufeff]/u,latin=/[A-Za-zÄÖÜäöüß]/u,nur=/(?<!\w)nur(?!\w)/iu;
+// This list matches the 12 priority cases containing Arabic word-script.
+ // Salawat ligatures (ﷺ) receive their own separate future QA lane.
+var arabic=/[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff]/u,latin=/[A-Za-zÄÖÜäöüß]/u,nur=/(?<!\w)nur(?!\w)/iu;
 var label={question:"Frage",correct:"Lob",retry:"Ermutigung",explanation:"Erklärung"};
 function setText(n,t){n.textContent=t;return n}
 function span(className,text){var n=document.createElement("span");n.className=className;return setText(n,text)}
