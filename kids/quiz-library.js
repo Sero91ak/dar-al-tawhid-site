@@ -221,42 +221,20 @@
   var localRound=[],localIndex=0,localCorrectCount=0,localAnswered=false;
   // Accessibility-safe recovery player. It uses ONLY already approved V4
   // Serhat master clips from the public manifest; private review clips stay hidden.
-  function localQuizApprovedAudioText(q,part){
-    var owner=window.DARKidsOwnerVoice;
-    if(!owner||typeof owner.entry!=="function")return "";
-    var speech=window.DARKidsQuizV4&&typeof window.DARKidsQuizV4.speech==="function"
-      ?window.DARKidsQuizV4.speech(q):null;
-    var fallback=part==="questionAudioText"
-      ?(typeof window.quizPrompt==="function"?window.quizPrompt(q):q.question)
-      :part==="correctAudioText"?q.success
-      :part==="retryAudioText"?q.retry
-      :"Das merken wir uns: "+String(q.explanation||"");
-    var candidate=String(speech&&speech[part]||"");
-    var options=candidate&&candidate!==fallback?[candidate,fallback]:[fallback];
-    for(var i=0;i<options.length;i++){
-      var entry=owner.entry(options[i]);
-      if(entry&&entry.url&&entry.modelId==="eleven_v4"&&
-        (entry.humanListeningApproved===true||entry.approvedForPlayback===true||
-         entry.qaStatus==="approved")&&
-        (entry.voiceProfileId==="serhat-owner-voice-2026"||
-         entry.voiceId==="DkU7j9uO4ZEtLD2iRZSH")){
-        return options[i];
-      }
-    }
-    return "";
-  }
+  // No old text-keyed Quiz/Flash catalog. Only exact V4 ID+part audio.
+  function localQuizApprovedAudioText(){return "";}
   function localQuizPlay(q,part,options){
     options=options||{};
-    var newV4=window.DARKidsQuizV4Approved;
-    var key=part==="questionAudioText"?"question":part==="correctAudioText"?"correct":part==="retryAudioText"?"retry":"explanation";
-    if(newV4&&newV4.has(q,key))return newV4.play(q,key,options);
-    var text=localQuizApprovedAudioText(q,part);
-    if(!text||!window.DARKidsOwnerVoice||typeof window.DARKidsOwnerVoice.play!=="function")return false;
-    return !!window.DARKidsOwnerVoice.play(text,{source:"kids-quiz-fallback-"+part,onended:options.onended,onerror:options.onerror});
+    var v4=window.DARKidsQuizV4Approved;
+    var key=part==="questionAudioText"?"question":part==="correctAudioText"?"correct":
+      part==="retryAudioText"?"retry":"explanation";
+    if(v4&&typeof v4.has==="function"&&v4.has(q,key))return v4.play(q,key,options);
+    if(typeof options.onerror==="function")options.onerror(new Error("kids-quiz-v4-audio-not-released"));
+    return false;
   }
   function refreshLocalQuizListen(q){
     var listen=byId("quizLocalListen"),newV4=window.DARKidsQuizV4Approved;
-    var text=(newV4&&newV4.has(q,"question"))?"approved-v4":localQuizApprovedAudioText(q,"questionAudioText");
+    var text=(newV4&&newV4.has(q,"question"))?"approved-v4":"";
     if(!listen)return;
     listen.disabled=!text;
     listen.textContent=text?"▶ Frage anhören":"Audio noch nicht freigegeben";
@@ -322,7 +300,7 @@
         var explanationAudio=byId("quizLocalExplainAudio");
         if(explanationAudio){
           var newV4=window.DARKidsQuizV4Approved;
-          var approved=(newV4&&newV4.has(q,"explanation"))?"approved-v4":localQuizApprovedAudioText(q,"explanationAudioText");
+          var approved=(newV4&&newV4.has(q,"explanation"))?"approved-v4":"";
           explanationAudio.disabled=!approved;
           explanationAudio.textContent=approved?"▶ Erklärung anhören":"Erklär-Audio noch nicht freigegeben";
           explanationAudio.addEventListener("click",function(){localQuizPlay(q,"explanationAudioText")});
@@ -663,13 +641,9 @@
     return hay.indexOf(needle)>=0;
   }
   function voiceState(q){
-    var newV4=window.DARKidsQuizV4Approved;
-    if(newV4&&newV4.has(q,"question"))return"ready";
-    var owner=window.DARKidsOwnerVoice;
-    if(!owner||typeof owner.isReady!=="function"||!owner.isReady())return voiceRefreshAttempts<12?"loading":"missing";
-    // A legacy owner-voice match is not proof of the approved V4 quiz clip.
-    // Keep the availability badge aligned with the actual gated playback.
-    return localQuizApprovedAudioText(q,"questionAudioText")?"ready":"missing";
+    var v4=window.DARKidsQuizV4Approved;
+    if(v4&&v4.has(q,"question"))return "ready";
+    return v4&&typeof v4.state==="function"&&v4.state()==="loading"?"loading":"missing";
   }
   function rowArtwork(q){
     if(typeof window.quizArtworkForBand!=="function")return{url:"",position:"50% 50%",family:"age"};
@@ -720,9 +694,6 @@
         audio.addEventListener("click",function(){
           var newV4=window.DARKidsQuizV4Approved;
           if(newV4&&newV4.has(q,"question")){newV4.play(q,"question");return}
-          if(typeof window.quizSpeak==="function"&&typeof window.quizPrompt==="function"){
-            window.quizSpeak(window.quizPrompt(q),{quizPrompt:true,source:"kids-quiz-library"});
-          }
         });
       }else{
         audio.disabled=true;

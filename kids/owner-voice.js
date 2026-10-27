@@ -233,7 +233,6 @@
   var loadCompletion=Promise.allSettled([
     academyReady,
     loadManifest("/kids/data/owner-voice-audio.json?v=2",1),
-    loadManifest("/kids/data/quiz-audio.json?v=2",2),
     loadManifest("/kids/data/dua-audio.json?v=8",3),
     loadManifest("/kids/data/dua-arabic-audio.json?v=8",4,isSerhatV4DuaArabic)
   ]).then(finishLoad).catch(finishLoad);
@@ -255,25 +254,31 @@
 
   window.quizSpeak=function(text,options){
     options=options||{};
-    // The owner-voice module replaces the earlier global quizSpeak function.
-    // Route only explicit, matching question ID + segment to the approved V4 manifest.
-    var approved=window.DARKidsQuizV4Approved;
-    if(approved&&options.quizId&&options.quizPart){
+    // KIDS QUIZ V4-ONLY (27.10.2026): never play legacy Flash, mixed,
+    // generic Owner-Voice or browser TTS in the children Quiz.
+    var modal=document.getElementById("quizModal");
+    var inQuiz=!!(modal&&modal.classList.contains("open"));
+    var v4=window.DARKidsQuizV4Approved;
+    if(options.quizId&&options.quizPart){
       var pool=Array.isArray(window.kidsQuizPool)?window.kidsQuizPool:
         window.DARKidsQuizPack450&&window.DARKidsQuizPack450.items;
-      var question=options.quizQuestion&&options.quizQuestion.id===options.quizId?options.quizQuestion:null;
-      if(!question&&Array.isArray(pool))question=pool.find(function(q){
-        return q&&q.id===options.quizId;
-      });
-      if(question&&typeof approved.has==="function"&&approved.has(question,options.quizPart)){
-        return approved.play(question,options.quizPart,{
-          onended:options.onended,onerror:options.onerror
-        });
+      var q=options.quizQuestion&&options.quizQuestion.id===options.quizId?options.quizQuestion:null;
+      if(!q&&Array.isArray(pool))q=pool.find(function(item){return item&&item.id===options.quizId});
+      if(q&&v4&&typeof v4.has==="function"&&v4.has(q,options.quizPart)){
+        return v4.play(q,options.quizPart,{onended:options.onended,onerror:options.onerror});
       }
+      if(v4&&typeof v4.stop==="function")v4.stop();
+      if(typeof options.onerror==="function")options.onerror(new Error("kids-quiz-v4-awaits-audio-approval"));
+      return false;
     }
-    // Legacy audio remains available; stop any previous new-V4 clip first.
-    if(approved&&typeof approved.stop==="function")approved.stop();
-    return play(text,{source:String(options.source||"quiz-or-kids-ui"),onended:options.onended,onerror:options.onerror});
+    // E.g. a generic completion sound while Quiz is open must not revive
+    // the old quiz-audio catalog behind the explicit question/part router.
+    if(inQuiz){
+      if(v4&&typeof v4.stop==="function")v4.stop();
+      if(typeof options.onerror==="function")options.onerror(new Error("kids-quiz-v4-only"));
+      return false;
+    }
+    return play(text,{source:String(options.source||"kids-ui"),onended:options.onended,onerror:options.onerror});
   };
   window.stopKidsOwnerVoice=stop;
 })();

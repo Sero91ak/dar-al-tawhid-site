@@ -203,7 +203,7 @@ const CORE_PRECACHE=[
   "/kids/kids-touch-rail.css?v=17",
   "/kids/kids-card-interaction.js?v=7",
   "/kids/kids-age-typography.js?v=3",
-  "/kids/owner-voice.js?v=20261026-premium1",
+  "/kids/owner-voice.js?v=20261026-premium1&v4only=20261027",
   "/kids/dua-smart-learn.css?v=1261",
   "/kids/dua-layout-v1259.css?v=1311",
   "/kids/dua-learn-cinema-v1261.css?v=1261",
@@ -254,7 +254,7 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/data/dua-audio.json",
   "/kids/data/owner-voice-audio.json",
   "/kids/quiz-library.css?v=20261026-premium1",
-  "/kids/quiz-library.js?v=20261026-premium1",
+  "/kids/quiz-library.js?v=20261026-premium1&v4only=20261027",
   "/kids/quiz-v4-bridge.js?v=20261013-academy1",
   "/kids/quiz-premium-v1.css?v=20261026-premium1",
   "/kids/quiz-v4-approved-player.js?v=20261026-v1",
@@ -475,7 +475,7 @@ self.addEventListener("fetch",function(event){
   if(url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"){
     // Stable offline fallback for a stale cache-busted HTML entry (iOS PWA).
     var quizFallback=url.pathname==="/kids/quiz-library.js"
-      ?"/kids/quiz-library.js?v=20261026-premium1":"/kids/quiz-library.css?v=20261026-premium1";
+      ?"/kids/quiz-library.js?v=20261026-premium1&v4only=20261027":"/kids/quiz-library.css?v=20261026-premium1";
     event.respondWith(networkFirst(request,quizFallback));
     return;
   }
@@ -675,7 +675,6 @@ const KIDS_OFFLINE_SEEDS=[
   "/kids/owner-voice.js?v=academy-serhat-v1-20261010",
   "/kids/data/academy-audio.json?v=1",
   "/kids/data/owner-voice-audio.json?v=2",
-  "/kids/data/quiz-audio.json?v=2",
   "/kids/data/dua-audio.json?v=8",
   "/kids/data/dua-arabic-audio.json?v=8",
   "/kids/data/academy-audio.json",

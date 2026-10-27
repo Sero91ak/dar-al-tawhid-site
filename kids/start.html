@@ -5528,7 +5528,7 @@ function setQuizListenState(state){
   if(!btn)return;
   if(state==="missing"){
     btn.disabled=true;
-    btn.textContent=" Audio wird vorbereitet";
+    btn.textContent=" V4-Audio noch nicht freigegeben";
     return;
   }
   btn.disabled=false;
@@ -5542,13 +5542,19 @@ function quizSpeak(text,options){
   if(newV4&&q&&options.quizPart&&options.quizId===q.id&&newV4.has(q,options.quizPart)){
     return newV4.play(q,options.quizPart,{onended:options.onended,onerror:options.onerror});
   }
-  if(newV4&&typeof newV4.stop==="function")newV4.stop();
-  if(window.DARKidsOwnerVoice&&typeof window.DARKidsOwnerVoice.play==="function"){
-    var ok=window.DARKidsOwnerVoice.play(String(text||""),{source:options.source||"kids-ui",onended:options.onended,onerror:options.onerror});
-    if(options.quizPrompt&&ok===false)setQuizListenState("missing");
-    return ok;
+  // KIDS QUIZ V4-ONLY: no generic/Flash/old-M4A fallback in the Quiz.
+  var quizModal=document.getElementById("quizModal");
+  if(options.quizPart||options.quizId||(quizModal&&quizModal.classList.contains("open"))){
+    if(newV4&&typeof newV4.stop==="function")newV4.stop();
+    if(options.quizPrompt)setQuizListenState("missing");
+    if(typeof options.onerror==="function")options.onerror(new Error("kids-quiz-v4-awaiting-approval"));
+    return false;
   }
-  if(options.quizPrompt)setQuizListenState("missing");
+  if(window.DARKidsOwnerVoice&&typeof window.DARKidsOwnerVoice.play==="function"){
+    return window.DARKidsOwnerVoice.play(String(text||""),{
+      source:options.source||"kids-ui",onended:options.onended,onerror:options.onerror
+    });
+  }
   return false;
 }
 window.addEventListener("dar-kids-owner-voice-missing",function(event){
@@ -5563,10 +5569,8 @@ window.addEventListener("dar-kids-owner-voice-missing",function(event){
 });
 function refreshQuizListenState(){
   var q=Array.isArray(currentQuiz)?currentQuiz[currentQuizIndex]:null;
-  var owner=window.DARKidsOwnerVoice;
   var newV4=window.DARKidsQuizV4Approved;
-  var available=!!(q&&((newV4&&newV4.has(q,"question"))||
-    (owner&&typeof owner.has==="function"&&owner.has(quizPrompt(q)))));
+  var available=!!(q&&newV4&&newV4.has(q,"question"));
   setQuizListenState(available?"ready":"missing");
 }
 window.addEventListener("dar-kids-quiz-v4-approved-ready",function(){
@@ -7062,7 +7066,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 <script src="/kids/content-studio-feed.js?v=studio8"></script>
-<script src="/kids/owner-voice.js?v=20261026-premium1"></script>
+<script src="/kids/owner-voice.js?v=20261026-premium1&v4only=20261027"></script>
 <script src="/kids/dua-word-meanings-v1.js?v=2"></script>
 <script src="/kids/dua-phonetic-alignment-v1.js?v=1"></script>
 <script src="/kids/dua-smart-learn.js?v=1312"></script>
@@ -8119,7 +8123,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/quiz-v4-approved-player.js?v=20261026-v1"></script>
 <script src="/kids/quiz-v4-test-preview.js?v=20261026-audition1"></script>
 <script>window.DARKidsQuizV4Approved&&window.DARKidsQuizV4Approved.load();</script>
-<script src="/kids/quiz-library.js?v=20261026-premium1"></script>
+<script src="/kids/quiz-library.js?v=20261026-premium1&v4only=20261027"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1256-parent-hero-full" data-kids-section-heroes-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148" data-kids-stories-home-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1138.css?v=1152" data-kids-stories-home-polish="1">
