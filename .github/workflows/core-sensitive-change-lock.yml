@@ -1,0 +1,63 @@
+name: Critical Core Change Lock
+
+# Trusted-base review gate: NEVER check out or run PR branch code.
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, reopened, synchronize, ready_for_review, edited]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  protect:
+    name: Protect core location, Qibla and prayer
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Use trusted main code, never pull request code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha || github.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Verify fail-closed lock code
+        run: node scripts/core-sensitive-change-lock.cjs --self-test
+
+      - name: Read proposed changes using GitHub read-only API
+        if: github.event_name == 'pull_request_target'
+        uses: actions/github-script@v7
+        env:
+          DAR_LOCK_INPUT: ${{ runner.temp }}/dar-core-changes.json
+        with:
+          script: |
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              per_page: 100
+            });
+            const safe = files.map(f => ({
+              filename: f.filename,
+              previous_filename: f.previous_filename,
+              patch: f.patch
+            }));
+            require("fs").writeFileSync(process.env.DAR_LOCK_INPUT, JSON.stringify(safe));
+
+      - name: Block sensitive PR changes by default
+        if: github.event_name == 'pull_request_target'
+        env:
+          DAR_LOCK_INPUT: ${{ runner.temp }}/dar-core-changes.json
+        run: node scripts/core-sensitive-change-lock.cjs --input "$DAR_LOCK_INPUT"
+
+      - name: Detect forbidden direct changes to main
+        if: github.event_name == 'push'
+        env:
+          DAR_CORE_BASE: ${{ github.event.before }}
+          DAR_CORE_HEAD: ${{ github.sha }}
+        run: node scripts/core-sensitive-change-lock.cjs --push
