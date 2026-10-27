@@ -18,7 +18,9 @@
     "capitalNurHighPriority": 82,
     "lowercaseNurOnlyToListen": 49,
     "humanAuditionsCompleted": 0,
-    "reRendersAuthorized": 0
+    "reRendersAuthorized": 0,
+    "newCandidatesHeardAndAccepted": 1,
+    "originalPublicMP3sApprovedByThisConfirmation": 0
   },
   "policy": {
     "doNotAutoRegenerate": true,
@@ -2124,5 +2126,14 @@
       "status": "pending-human-listening",
       "correctiveAction": "If faulty: German-context V4 pilot and single-slot replacement with revised dictionary version; do not overwrite originals."
     }
-  ]
+  ],
+  "referencePilot": {
+    "questionId": "kids-quiz-178",
+    "part": "question",
+    "providerGenerationId": "4vpdmlfHmhNx5f0aOoqQ",
+    "germanNuropenPassedByHumanOwner": true,
+    "ownerConfirmedDate": "2026-10-27",
+    "scope": "new isolated retake, NOT existing public MP3",
+    "originalSlotNeedsHearingReview": true
+  }
 }
