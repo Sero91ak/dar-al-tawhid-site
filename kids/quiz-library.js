@@ -450,10 +450,14 @@
         '<button id="quizResumeRound" type="button">Weiterlernen</button>'+
       '</section>':"";
 
-    var v4Preview=!!(window.DARKidsQuizV4Approved&&window.DARKidsQuizV4Approved.isTestPreview);
+    var voicePlayer=window.DARKidsQuizV4Approved;
+    var v4Preview=!!(voicePlayer&&voicePlayer.isTestPreview);
+    var ownerReleased=!!(voicePlayer&&typeof voicePlayer.isOwnerAuthorized==="function"&&voicePlayer.isOwnerAuthorized());
     var voiceNote=v4Preview
-      ?"TEST-HÖRVORSCHAU · Du kannst Frage, Lob, Ermutigung und Erklärung in der echten V4-Stimme anhören. Die Fuṣḥā-Hörprüfung ist noch offen."
-      :"ELEVENLABS V4 · Die neuen Audios warten noch auf ihre Hörfreigabe. Fragen und Erklärungen bleiben vollständig lesbar.";
+      ?"TEST-HÖRVORSCHAU · Frage, Lob, Ermutigung und Erklärung als echte ElevenLabs-V4-Aufnahme anhören. Die Fuṣḥā-Hörprüfung ist noch offen."
+      :ownerReleased
+      ?"NEUES ELEVENLABS V4 · 450 Fragen mit Frage, Lob, Ermutigung und Erklärung jetzt hörbar. Vom Eigentümer zur Veröffentlichung freigegeben; Fuṣḥā-Hörprüfung bleibt offen."
+      :"ELEVENLABS V4 · Die neuen Originalaufnahmen werden geladen. Frage, Lob, Ermutigung und Erklärung sind erst mit passendem V4-Manifest abspielbar.";
     box.innerHTML=
       '<p class="quiz-v4-release-status" role="status">'+escapeHtml(voiceNote)+'</p>'+
       '<section class="quiz-premium-welcome" aria-label="Islamische Quiz-Lernreise">'+
@@ -558,6 +562,7 @@
     if(approvedV4&&typeof approvedV4.load==="function"){
       Promise.resolve(approvedV4.load()).then(function(ready){
         if(!ready||!modal.classList.contains("open"))return;
+        if(mode==="dashboard")renderDashboard();
         if(mode==="library"&&!directQuestion)renderList();
         else if(mode==="play"&&localRound[localIndex])refreshLocalQuizAudioControls(localRound[localIndex]);
       }).catch(function(){});
