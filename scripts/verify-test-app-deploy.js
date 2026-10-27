@@ -610,6 +610,23 @@ async function fetchVersionBuild(base) {
       throw new Error("KIDS V4: Test preview player missing or gated, HTTP "+auditionScriptResponse.status);
     }
     console.log("KIDS V4 TEST PLAYER PASS — real browser shell and preview runtime HTTP 200");
+    // The iPad stand-alone QA page must be a real static Test-Worker page,
+    // not an HTML 404, Basic-Auth screen or a Github-only artifact.
+    const auditionPageResponse=await fetch(audioOrigin+"/kids/v4-audio-check.html?v="+Date.now(),{
+      cache:"no-store",headers:{"Cache-Control":"no-cache"}
+    });
+    const auditionPage=await auditionPageResponse.text();
+    if(auditionPageResponse.status!==200||
+       !auditionPage.includes("ElevenLabs V4 · Fuṣḥā-Hörprüfung")||
+       !auditionPage.includes('id="age"')||
+       !auditionPage.includes('id="item"')||
+       !auditionPage.includes('id="player"')||
+       !auditionPage.includes("quiz-v4-full-rebuild-review.json")||
+       !auditionPage.includes("location.hostname!==HOST")){
+      throw new Error("KIDS V4: iPad listening page not delivered by isolated Test Worker, HTTP "+
+        auditionPageResponse.status);
+    }
+    console.log("KIDS V4 iPad AUDITION PASS — isolated Test host serves independent 450×4 native audio player.");
     const auditionPath="/kids/data/quiz-v4-full-rebuild-review.json";
     const auditionResponse=await fetch(audioOrigin+auditionPath+"?delivery-audit="+Date.now(),{
       cache:"no-store",headers:nativeKidsTestHeaders
