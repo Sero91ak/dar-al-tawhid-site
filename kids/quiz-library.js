@@ -241,6 +241,39 @@
     listen.setAttribute("aria-label",text?"Quizfrage mit Serhat-V4-Masterstimme abspielen":
       "Diese Quizfrage hat noch keine zum Abspielen freigegebene V4-Aufnahme");
   }
+  function refreshLocalQuizAudioControls(q){
+    if(!q||localRound[localIndex]!==q)return;
+    refreshLocalQuizListen(q);
+    var v4=window.DARKidsQuizV4Approved;
+    var msg=byId("quizLocalFeedback");
+    if(msg&&(msg.classList.contains("bad")&&!localAnswered&&v4&&v4.has(q,"retry")
+          ||msg.classList.contains("good")&&localAnswered&&v4&&v4.has(q,"correct"))){
+      var part=localAnswered?"correct":"retry";
+      var existing=msg.querySelector(".quiz-local-audio-replay");
+      if(!existing){
+        var replay=document.createElement("button");
+        replay.type="button";
+        replay.className="quiz-local-audio-replay";
+        replay.textContent=part==="correct"?"▶ Lob anhören":"▶ Ermutigung anhören";
+        replay.addEventListener("click",function(){
+          if(localRound[localIndex]!==q)return;
+          localQuizPlay(q,part==="correct"?"correctAudioText":"retryAudioText");
+        });
+        msg.appendChild(replay);
+      }
+    }
+    var lesson=byId("quizLocalLearning"),btn=byId("quizLocalExplainAudio");
+    if(localAnswered&&lesson&&!lesson.hidden&&btn){
+      var available=!!(v4&&v4.has(q,"explanation"));
+      btn.disabled=!available;
+      btn.textContent=available?"▶ V4-Erklärung anhören":"V4-Erklärung noch nicht freigegeben";
+    }
+  }
+  window.addEventListener("dar-kids-quiz-v4-approved-ready",function(){
+    if(mode==="play"&&localRound[localIndex]){
+      refreshLocalQuizAudioControls(localRound[localIndex]);
+    }
+  });
   function renderLocalQuizQuestion(){
     var body=byId("quizBody"),progress=byId("quizProgress");
     if(!body)return;
@@ -292,6 +325,7 @@
           msg.className="quiz-feedback show "+(correct?"good":"bad");
         }
         if(!correct){
+          refreshLocalQuizAudioControls(q);
           // A mistake is a learning step, not the end of the question.
           // Keep all answer choices tappable and never reveal the right choice.
           btn.classList.add("wrong");
@@ -308,6 +342,7 @@
         });
         var lesson=byId("quizLocalLearning");
         if(lesson)lesson.hidden=false;
+        refreshLocalQuizAudioControls(q);
         var explanationAudio=byId("quizLocalExplainAudio");
         if(explanationAudio){
           var approved=!!(v4&&v4.has(q,"explanation"));
@@ -524,7 +559,7 @@
       Promise.resolve(approvedV4.load()).then(function(ready){
         if(!ready||!modal.classList.contains("open"))return;
         if(mode==="library"&&!directQuestion)renderList();
-        else if(mode==="play"&&localRound[localIndex])refreshLocalQuizListen(localRound[localIndex]);
+        else if(mode==="play"&&localRound[localIndex])refreshLocalQuizAudioControls(localRound[localIndex]);
       }).catch(function(){});
     }
     return true;
