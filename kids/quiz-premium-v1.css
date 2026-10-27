@@ -836,7 +836,7 @@ body:has(.app[data-gender="boy"]) #quizModal,
       max(12px,env(safe-area-inset-right,0px))!important;
   }
   #quizModal.quiz-round-mode #quizBody:not(:has(>.quiz-local-learning)){
-    column-gap:max(22px,env(viewport-segment-left 1 0) - env(viewport-segment-right 0 0))!important;
+    column-gap:max(22px,calc(env(viewport-segment-left 1 0) - env(viewport-segment-right 0 0)))!important;
   }
 }
 @media(prefers-reduced-motion:reduce){
