@@ -11,7 +11,7 @@ const home=get("kids/start.html");
 const academy=get("kids/akademie/index.html");
 const tests=[
 ["native test panel compile-gated",view.includes("#if KIDS_CREATOR_TEST")&&view.includes("KidsCreatorPanel")],
-["visitor root remains direct WKWebView",view.includes("#else\n    var body: some View {\n        KidsWebAppView()")],
+["visitor root remains direct WKWebView",view.includes("#else\n    // PUBLIC APP")&&view.includes("KidsWebAppView()")],
 ["test button not a website password or query unlock",!view.includes("password")&&!view.includes("creatorSandbox=")&&!view.includes("localStorage")],
 ["creator menu requires explicit user tap",view.includes("showCreatorPanel = true")&&view.includes(".sheet(isPresented: $showCreatorPanel)")],
 ["six visible module links",["home","quran","stories","dua","parents","academy","console"].every(id=>view.includes('"'+id+'"'))],
@@ -19,7 +19,7 @@ const tests=[
 ["owner notification exists only in compiled test",web.includes("#if KIDS_CREATOR_TEST\n            NotificationCenter.default.addObserver(")],
 ["home tab exists in live shell",home.includes('data-target="today"')],
 ["stories tab exists",home.includes('data-target="stories"')],
-["Quran learning tab retired from live shell",!home.includes('data-target="quran"')],
+["Quran route remains available from Kids shell",home.includes('data-target="quran"')],
 ["parents tab exists",home.includes('data-target="parents"')],
 ["dua button exists",home.includes('id="openDuaButton"')],
 ["Academy content exists",academy.includes("akademie")||academy.includes("Akademie")],
@@ -33,7 +33,7 @@ const tests=[
 ["V4 preview inside native test app, never changing visitor app",web.includes('if key == "quiz-v4"')&&
   web.includes('url: KidsAppShell.v4AuditionURL')&&web.includes('pendingCreatorTab = "quiz-v4"')],
 ["host-remap preserves dedicated V4 preview",shell.includes('if incoming.host?.lowercased() == v4AuditionHost { return incoming }')],
-["visitor native official marker remains",web.includes('let officialMarker = "window.DAR_OFFICIAL_IOS_APP=true;"')],
+["visitor native official marker remains",web.includes('let officialMarker = "window.DAR_OFFICIAL_IOS_APP=true;window.DAR_KIDS_NATIVE_START=true;"')],
 ["creator native official marker absent",web.includes('let officialMarker = ""')],
 ["synchronous native test routes only on test host",web.includes('page.url?.host?.lowercased() == "dar-al-tawhid-kids-creator.sero91ak.workers.dev"')],
 ["creator maps production kids urls to test host",web.includes("if !KidsAppShell.isOwnHost(url)")&&web.includes("KidsAppShell.inAppURL(from: url)")],
