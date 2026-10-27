@@ -5573,9 +5573,37 @@ function refreshQuizListenState(){
   var available=!!(q&&newV4&&newV4.has(q,"question"));
   setQuizListenState(available?"ready":"missing");
 }
+function refreshQuizExplanationAudioState(){
+  // The review manifest loads asynchronously. Never strand the completed
+  // explanation without a listen button when it arrives after the answer.
+  var q=Array.isArray(currentQuiz)?currentQuiz[currentQuizIndex]:null;
+  var explanation=document.getElementById("quizExplanation");
+  var button=document.getElementById("quizExplanationListen");
+  if(!quizLocked||!q||!q.explanation||!explanation||!explanation.classList.contains("show")||!button)return;
+  var player=window.DARKidsQuizV4Approved;
+  var available=!!(player&&player.has(q,"explanation"));
+  button.hidden=!available;button.disabled=!available;
+  var status=document.getElementById("quizExplanationAudioStatus");
+  if(status)status.textContent=available
+    ?"Die V4-Erklärung ist verfügbar. Tippe zum Anhören."
+    :"Der Erklärungstext ist bereit. Das V4-Audio ist noch nicht freigegeben.";
+  if(available&&!button.dataset.quizV4Bound){
+    button.dataset.quizV4Bound="true";
+    button.textContent="▶ Erklärung mit der V4-Masterstimme hören";
+    button.addEventListener("click",function(){
+      if(currentQuiz[currentQuizIndex]!==q)return;
+      quizSpeak(quizV4Text(q,"explanationAudioText",q.explanation),{
+        source:"kids-quiz-explanation",quizId:q.id,quizQuestion:q,quizPart:"explanation"
+      });
+    });
+  }
+}
 window.addEventListener("dar-kids-quiz-v4-approved-ready",function(){
   var modal=document.getElementById("quizModal");
-  if(modal&&modal.classList.contains("open"))refreshQuizListenState();
+  if(modal&&modal.classList.contains("open")){
+    refreshQuizListenState();
+    refreshQuizExplanationAudioState();
+  }
 });
 window.addEventListener("dar-kids-owner-voice-ready",function(){
   var modal=document.getElementById("quizModal");
@@ -6226,17 +6254,7 @@ function chooseQuizAnswer(index,button){
     if(audioStatus)audioStatus.textContent=canExplain
       ?"Die V4-Erklärung ist verfügbar. Du kannst sie anhören."
       :"Der Erklärungstext ist bereit. Das V4-Audio ist noch nicht freigegeben.";
-    var listenExplanation=document.getElementById("quizExplanationListen");
-    if(listenExplanation){
-      listenExplanation.hidden=!canExplain;
-      listenExplanation.disabled=!canExplain;
-      if(canExplain){
-        listenExplanation.textContent="▶ Erklärung mit der V4-Masterstimme hören";
-        listenExplanation.addEventListener("click",function(){
-          quizSpeak(explanationAudio,{source:"kids-quiz-explanation",quizId:q.id,quizQuestion:q,quizPart:"explanation"});
-        });
-      }
-    }
+    refreshQuizExplanationAudioState();
     function questionStillOpen(){
       var modal=document.getElementById("quizModal");
       return !!(modal&&modal.classList.contains("open")&&
