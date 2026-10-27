@@ -451,3 +451,56 @@ body:has(.app[data-gender="boy"]) #quizModal,
   #quizModal .quiz-topic-card,#quizModal .quiz-premium-geometry{
     animation:none!important;transition:none!important}
 }
+
+
+/* KIDS_QUIZ_LESSON_PRESENTATION_V1 — show the real explanation as a
+   dedicated accessible lesson even when unreviewed V4 audio is unavailable. */
+#quizModal .quiz-lesson-card{display:none!important;min-width:0!important;
+  width:100%!important;max-width:none!important;min-height:0!important;
+  margin:clamp(12px,1.4vw,24px) 0 8px!important;
+  padding:clamp(18px,2.1vw,34px)!important;
+  border:1px solid var(--kqp-border)!important;
+  border-left:5px solid var(--kqp-accent)!important;
+  border-radius:clamp(16px,1.7vw,25px)!important;
+  background:linear-gradient(135deg,var(--kqp-surface2),var(--kqp-surface))!important;
+  text-align:left!important;color:var(--kqp-bright)!important;
+  box-shadow:0 12px 24px rgba(0,0,0,.13)!important;overflow-wrap:anywhere}
+#quizModal .quiz-lesson-card.show{display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;gap:clamp(6px,0.8vw,12px)!important}
+#quizModal .quiz-lesson-eyebrow{display:block!important;font:800 clamp(10px,1vw,13px)/1.3 system-ui,sans-serif!important;
+  text-transform:uppercase!important;letter-spacing:.1em!important;
+  color:var(--kqp-accent)!important}
+#quizModal .quiz-lesson-heading{margin:0!important;font-size:clamp(20px,2.1vw,32px)!important;
+  line-height:1.22!important;color:var(--kqp-bright)!important;font-weight:850!important}
+#quizModal .quiz-lesson-copy{margin:0!important;font-size:clamp(16px,1.45vw,23px)!important;
+  line-height:1.55!important;color:var(--kqp-bright)!important;font-weight:550!important}
+#quizModal .quiz-lesson-audio-status{margin:7px 0 0!important;
+  font-size:clamp(12px,1vw,15px)!important;line-height:1.4!important;
+  color:var(--kqp-muted)!important}
+#quizModal.quiz-round-mode #quizExplanationListen:not([hidden]){
+  min-height:53px!important;width:max-content!important;max-width:100%!important;
+  padding:12px 20px!important;border-radius:16px!important;
+  background:var(--kqp-accent)!important;color:#182a36!important;
+  font-size:clamp(14px,1.15vw,18px)!important;font-weight:850!important;
+  touch-action:manipulation!important}
+#quizModal .quiz-v4-release-status{margin:0 0 13px!important;
+  padding:11px 15px!important;border:1px solid var(--kqp-border)!important;
+  border-radius:14px!important;background:var(--kqp-surface)!important;
+  color:var(--kqp-muted)!important;font-size:clamp(12px,1.05vw,15px)!important;
+  line-height:1.45!important;text-align:left!important}
+@media(min-width:760px){
+  #quizModal.quiz-round-mode .quiz-lesson-card.show{
+    grid-column:2!important;grid-row:auto!important}
+  #quizModal.quiz-round-mode #quizExplanationListen:not([hidden]){
+    grid-column:2!important}
+}
+@media(max-width:759px){
+  #quizModal .quiz-lesson-card.show{grid-column:1/-1!important;
+    padding:17px!important;gap:8px!important}
+  #quizModal.quiz-round-mode #quizExplanationListen:not([hidden]){
+    width:100%!important;text-align:center!important}
+}
+@media(prefers-reduced-motion:no-preference){
+  #quizModal .quiz-lesson-card.show{animation:kids-lesson-in .22s ease-out both}
+  @keyframes kids-lesson-in{from{opacity:.8;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+}
