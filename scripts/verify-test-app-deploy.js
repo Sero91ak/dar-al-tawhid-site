@@ -556,66 +556,31 @@ async function fetchVersionBuild(base) {
       );
     }
 
-    async function verifyKidsCinema(label, base) {
-      const startUrl = `${base}/kids/start?verify=${Date.now()}`;
-      const startRes = await fetch(startUrl, {
-        cache: "no-store",
-        headers: label.startsWith("workers.dev Kids preview")
-          ? nativeKidsTestHeaders
-          : { "Cache-Control": "no-cache", Pragma: "no-cache" }
-      });
-      const html = await startRes.text();
-      const forbiddenOverlay = [
-        "k77-brand","k77-letter","k77-spark","k77-copy","k77-sound",
-        "kidsLaunchAudio","kidsLaunchSound",
-        "As-Salāmu ʿalaykum wa raḥmatullāhi wa barakātuh, Kids"
-      ];
-      const overlayFree = forbiddenOverlay.every((needle) => !html.includes(needle));
-      const htmlOk =
-        startRes.status === 200 &&
-        html.includes("kids-launch-v79") &&
-        html.includes('id="kidsCinemaV79"') &&
-        html.includes("/kids/assets/kids-cinema/intro-v74.mp4?v=79") &&
-        html.includes("if(!started)removeLaunch()") &&
-        html.includes("},3200)") &&
-        overlayFree;
-      console.log(
-        `${label} kids cinema HTML: ${startUrl} -> ${startRes.status} overlayFree=${overlayFree} ok=${htmlOk}`
-      );
-      if (!htmlOk) return false;
-
-      const videoUrl = `${base}/kids/assets/kids-cinema/intro-v74.mp4?verify=${Date.now()}`;
-      const videoRes = await fetch(videoUrl, {
-        cache: "no-store",
-        headers: {
-          "Cache-Control": "no-cache",
-          Pragma: "no-cache",
-          Range: "bytes=0-2047"
-        }
-      });
-      const contentType = String(videoRes.headers.get("content-type") || "").toLowerCase();
-      const buf = new Uint8Array(await videoRes.arrayBuffer());
-      const hasFtyp =
-        buf.length >= 12 &&
-        String.fromCharCode(...buf.slice(4, 8)) === "ftyp";
-      const videoOk =
-        (videoRes.status === 200 || videoRes.status === 206) &&
-        contentType.includes("video/mp4") &&
-        hasFtyp;
-      console.log(
-        `${label} kids cinema MP4: ${videoUrl} -> ${videoRes.status} type=${contentType || "?"} bytes=${buf.length} ftyp=${hasFtyp} ok=${videoOk}`
-      );
-      return videoOk;
+    // Kids v146x removed the legacy Cinema/intro-v74 boot overlay. A video
+    // marker probe for that retired intro was causing a false negative and
+    // stopped before the essential V4 MP3 audit. Verify actual Quiz HTML instead.
+    async function verifyKidsQuizShell(label,base){
+      const src=base+"/kids/start?quiz-audit="+Date.now();
+      const response=await fetch(src,{cache:"no-store",headers:{"Cache-Control":"no-cache"}});
+      const html=await response.text();
+      const hasShell=html.includes('id="quizModal"')&&
+        html.includes('id="openQuizButton"')&&
+        html.includes("/kids/quiz-library.js")&&
+        html.includes("/kids/quiz-v4-approved-player.js")&&
+        html.includes("/kids/quiz-v4-test-preview.js");
+      const noObsoleteOverlay=!html.includes('id="kidsCinemaV79"')&&
+        !html.includes('id="kidsLaunchAudio"');
+      const good=response.status===200&&hasShell&&noObsoleteOverlay;
+      console.log(label+" Kids Quiz shell: HTTP="+response.status+
+        " quiz="+hasShell+" obsoleteOverlayAbsent="+noObsoleteOverlay+" ok="+good);
+      return good;
     }
-
-    const cinemaPub = kidsPub === "protected"
-      ? (console.log("public kids route is access-protected; cinema verification uses workers.dev mirror"), true)
-      : await verifyKidsCinema("public", publicBase);
-    const cinemaDev = await verifyKidsCinema("workers.dev Kids preview", kidsTestOrigin);
-    if (!cinemaPub || !cinemaDev) {
-      throw new Error(
-        `Kids Cinema Intro fehlt/ist nicht abspielbar. public=${cinemaPub} workers.dev=${cinemaDev}`
-      );
+    const quizShellPub = kidsPub === "protected"
+      ?(console.log("public Kids Test is access protected; preview checked on workers.dev"),true)
+      :await verifyKidsQuizShell("public",publicBase);
+    const quizShellDev = await verifyKidsQuizShell("workers.dev",workersBase);
+    if(!quizShellPub||!quizShellDev){
+      throw new Error("Kids Quiz shell missing: public="+quizShellPub+" workers.dev="+quizShellDev);
     }
 
     // KIDS_V4_REAL_AUDIO_DELIVERY_AUDIT_20261027
@@ -703,7 +668,7 @@ async function fetchVersionBuild(base) {
     console.log("KIDS V4 REMOTE PASS — 450 question IDs, 1800 test-only segments, "+
       checkedClips+" sampled real MP3 HTTP files across all three ages; human listening remains PENDING.");
 
-    console.log(`Kids Test live OK — ${kidsExpect} + Cinema Intro MP4`);
+    console.log(`Kids Test live OK — ${kidsExpect} + 450 Quiz question/MP3 review delivery`);
   } else if (fs.existsSync(kidsPath)) {
     console.log("Kids Test verification skipped — aktueller Commit hat keinen Kids-Scope.");
   }
