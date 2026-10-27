@@ -13,18 +13,30 @@ function isObject(o){return !!o&&typeof o==="object"&&!Array.isArray(o)}
 function validSource(src){
   return typeof src==="string"&&(src.indexOf("Qurʾān ")===0||src.indexOf("Ṣaḥīḥ ")===0);
 }
-function validClip(clip,ownerRoute){
+function validClip(clip,ownerRoute,qid,part){
   if(!isObject(clip))return false;
+  // Only the exact user-auditioned German-isolated V4 retake can be
+  // marked as heard. The other 1,799 segments remain unreviewed.
+  var ownerPilot=ownerRoute&&qid==="kids-quiz-178"&&part==="question"&&
+    clip.humanListeningApproved===true&&clip.approvedForPlayback===true&&
+    clip.ownerReviewedGenerationId==="4vpdmlfHmhNx5f0aOoqQ"&&
+    clip.reviewedByOwnerAt==="2026-10-27"&&
+    clip.languageCode==="de"&&
+    clip.pronunciationIsolationPolicy==="dar-voice-language-isolation-v1";
   var approved=ownerRoute
-    ?clip.humanListeningApproved===false&&clip.approvedForPlayback===false
+    ?(ownerPilot||(clip.humanListeningApproved===false&&clip.approvedForPlayback===false))
     :clip.humanListeningApproved===true&&clip.approvedForPlayback===true;
   if(!isObject(clip)||clip.modelId!=="eleven_v4"||clip.voiceId!==VOICE||
      !approved||
      !/^[0-9a-f]{64}$/.test(String(clip.sha256||""))||
      !Number.isFinite(Number(clip.durationSeconds))||Number(clip.durationSeconds)<=0)return false;
   var url=String(clip.url||"");
-  if(!url.startsWith(DIR)||url.indexOf("..")!==-1||/[?#]/.test(url))return false;
-  if(!/^\/kids\/assets\/kids-quiz-audio\/v4-full-rebuild-20261026\/(?:4-6|7-8|9-10)\/[0-9a-f]{28}\.mp3$/.test(url))return false;
+  if(url.indexOf("..")!==-1||/[?#]/.test(url))return false;
+  var originalUrl=/^\/kids\/assets\/kids-quiz-audio\/v4-full-rebuild-20261026\/(?:4-6|7-8|9-10)\/[0-9a-f]{28}\.mp3$/.test(url);
+  var reviewedUrl=ownerPilot&&
+    /^\/kids\/assets\/kids-quiz-audio\/v4-de-isolated-20261027\/7-8\/[0-9a-f]{28}\.mp3$/.test(url);
+  if(!originalUrl&&!reviewedUrl)return false;
+  if(ownerPilot!==reviewedUrl)return false;
   return true;
 }
 function validate(data){
@@ -46,7 +58,7 @@ function validate(data){
        !validSource(q.source)||!isObject(q.clips)||Object.keys(q.clips).length!==4)return false;
     for(var i=0;i<PARTS.length;i++){
       var clip=q.clips[PARTS[i]];
-      if(!validClip(clip,ownerRoute)||clip.url.indexOf("/"+q.ageBand+"/")<0)return false;
+      if(!validClip(clip,ownerRoute,id,PARTS[i])||clip.url.indexOf("/"+q.ageBand+"/")<0)return false;
     }
     counts[q.ageBand]++;
   }

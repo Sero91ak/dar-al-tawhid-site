@@ -95,6 +95,7 @@ def payload(text: str, language: str, policy: dict) -> dict:
         raise ValueError("Master voice/model mismatch")
     return {
         "text": text, "model_id": MODEL,
+        "language_code": language,  # V4 German must stay 'de', Fuṣḥā stays 'ar'.
         "voice_settings": {"stability": 0.58, "similarity_boost": 0.82},
         # Deliberately NO pronunciation_dictionary_locators for this request.
         # No global substitutions: Nur (German) is never Arabic Nūr.
@@ -172,7 +173,20 @@ def audit() -> dict:
         raise ValueError("Stale Nur queue or changed public quiz manifest")
     for key, clip in matched.items():
         recorded = queued[key]
-        if recorded["url"] != clip["url"] or recorded["sha256"] != clip["sha256"]:
+        # The single user-auditioned q178 retake may now be correctly live;
+        # keep comparing the original review/QA row with immutable original
+        # provenance, never pretend all 131 old MP3s were heard.
+        pilot = load(ROOT / "kids/review-only/voice-language-isolation-pilot-20261027.json")
+        is_imported = (key == ("kids-quiz-178", "question") and
+                       pilot.get("manifestUpdated") is True and
+                       clip.get("ownerReviewedGenerationId") == "4vpdmlfHmhNx5f0aOoqQ" and
+                       clip.get("sha256") == pilot.get("newAudioSha256") and
+                       clip.get("humanListeningApproved") is True)
+        if is_imported:
+            if (recorded["url"] != pilot.get("originalPublicAudioUrl") or
+                    recorded["sha256"] != pilot.get("originalSha256")):
+                raise ValueError("Owner-retake source provenance changed")
+        elif recorded["url"] != clip["url"] or recorded["sha256"] != clip["sha256"]:
             raise ValueError(f"{key}: QA row SHA-256 or URL no longer matches published source")
     return {"questions": len(source["questions"]), "totalSlots": len(slots),
             "affectedNunWordSlots": len(matched), "capitalNurSlots": capitals,
@@ -269,7 +283,8 @@ def self_test(policy: dict) -> None:
     for s in ("Nur das Gebet.", "Antwort drei: Nur für Erwachsene.",
               "Ich bete nur zu Allah."):
         de = payload(s, "de", policy)
-        assert de["text"] == s and "pronunciation_dictionary_locators" not in de
+        assert de["text"] == s and de["language_code"] == "de" and "pronunciation_dictionary_locators" not in de
+    assert payload("نُور", "ar", policy)["language_code"] == "ar"
     assert "pronunciation_dictionary_locators" not in payload("نُور", "ar", policy)
     for bad in (("Nur das Gebet. نُور", "de"), ("Nur das Gebet.", "ar")):
         try:

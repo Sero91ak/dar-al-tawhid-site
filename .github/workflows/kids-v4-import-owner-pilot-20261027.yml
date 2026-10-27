@@ -1,0 +1,58 @@
+name: Import one owner-approved KIDS German V4 MP3 (2026-10-27)
+# ONE-TIME: download PREVIOUSLY generated and owner-auditioned q178 take.
+# This workflow does NOT call text-to-speech or charge any credits.
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kids-v4-import-owner-pilot-20261027.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dar-kids-v4-approved-pilot-import-20261027
+  cancel-in-progress: false
+
+jobs:
+  import-approved-one-only:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Import exact human-reviewed V4 audio from original generated take
+        env:
+          KIDS_OWNER_APPROVED_V4_SIGNED_MP3_URL: 'https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/wE6AFK9oqImgAeKhJHw9/4vpdmlfHmhNx5f0aOoqQ/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261027%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261027T195014Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=31fbd66eecb546defb856fd0d391521c2acb3734d9c34baf4e34c7cc8c164d90a0b51ecf8f0838dc18c70969a7aac3029885e280dc3a178f22049d914d5afddf36bdf46645894fb012550f8bc0d055abadec2fa7dfb2be3e5a6c77ea2f3eb767fad3e8dcb49a6974bcb8d388f046cde9e29992019ce009885586e774c5a260402e0be4cbe04badcd434507f1be9cc278d33581ab8f6e2735005a8c1b379635a40e9f5143bcf9835e1a43207dea1bf27bdc23c1128e67bf0ff95bbf7087f33a52aa3f683783b069110c39c7a419605203f7b4fc502cdaceb76fd89456dcd4e26ef553e2debbd1b0bd522b78e218fc9d77203564410023a854a092f4266df57e76'
+        run: |
+          set -euo pipefail
+          python3 kids/tools/import_owner_approved_de_v4_pilot.py
+      - name: Verify all 450 questions, both DE/ar voice contracts, and 1217 audio mappings
+        run: |
+          set -euo pipefail
+          python3 kids/tools/v4_language_isolation.py --self-test
+          python3 kids/tools/v4_language_isolation.py --audit
+          python3 kids/tools/audit_quiz_450_language_and_integrity.py
+          node kids/tools/test-v4-owner-public-release.cjs
+          node kids/tools/test-quiz-home-entry-v1450.cjs
+      - name: Commit reviewed V4 MP3, matching SHA and changed manifest atomically
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name "dar-kids-owner-heard-v4-import"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/data/quiz-v4-full-rebuild-public.json
+          git add kids/review-only/voice-language-isolation-pilot-20261027.json
+          git add kids/assets/kids-quiz-audio/v4-de-isolated-20261027/7-8/*.mp3
+          test "$(git diff --cached --name-only | wc -l)" -eq 3
+          git commit -m "fix(kids-audio): publish owner-heard German V4 question 178, preserve original"
+          # Never force a competing developer's main updates. A failed push
+          # leaves this job red and requires manual reconciliation.
+          git push origin HEAD:main

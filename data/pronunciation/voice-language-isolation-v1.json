@@ -32,7 +32,9 @@
       }
     ],
     "homographPolicy": "The German particle 'nur', including sentence-initial 'Nur', remains German [nuːɐ̯]. German sentences must never run with an Arabic-global PLS.",
-    "arabicLoanTerms": "Transliterated Islamic terms inside German syntax remain unchanged in the displayed text. Flag pronunciation for listening; if ambiguous isolate as approved Arabic speech segment, not as a German dictionary replacement."
+    "arabicLoanTerms": "Transliterated Islamic terms inside German syntax remain unchanged in the displayed text. Flag pronunciation for listening; if ambiguous isolate as approved Arabic speech segment, not as a German dictionary replacement.",
+    "languageCodeProviderArgument": "de",
+    "prohibitionIncludesSilentLanguageInference": true
   },
   "arabic": {
     "languageTag": "ar",
@@ -43,14 +45,16 @@
     "nativeTextPronunciation": true,
     "pronunciationDictionaryLocators": [],
     "requiredHearingReview": true,
-    "quranTilawah": "Never synthesize Qur'an recitation; use authorized real reciters."
+    "quranTilawah": "Never synthesize Qur'an recitation; use authorized real reciters.",
+    "languageCodeProviderArgument": "ar"
   },
   "mixed": {
     "automaticTtsAllowed": false,
     "handling": "Human-edited list of separate nonempty {language:de|ar,text} segments. Each segment is generated with its own isolated language request and stitched only with verified joins and listening QA.",
     "preserveOrdering": true,
     "forbidMixedArabicAndGermanInOneTtsPayload": true,
-    "forbidUnverifiedTransliterationReplacement": true
+    "forbidUnverifiedTransliterationReplacement": true,
+    "humanHearingAfterSegmentJoinRequired": true
   },
   "output": {
     "newAudioAlwaysReviewOnly": true,
