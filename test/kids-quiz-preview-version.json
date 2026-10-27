@@ -19,13 +19,13 @@
   "noOneSignal": true,
   "unpublishedQuestionsVisible": false,
   "publicVisitorRouteChanged": false,
-  "note": "The isolated Test Worker deploy must now fetch the real 450x4 V4 review manifest and 24 remote MP3 samples (all three ages, four parts). Actual HTTP playback delivery remains distinct from human Fuṣḥā audio quality approval. Visitor audio unchanged, humanListeningApproved=false.",
+  "note": "Test worker V4 MP3 audit now checks the correct dedicated workers.dev /kids routes, not the access-protected /test/kids editorial entry. Strict 450x4 V4 test-only audio checks; human listening approval still false.",
   "responsiveBuild": "kids-quiz-fold-ipad-v2-20261027",
   "kidsServiceWorkerCache": "v1462",
-  "testWorkerSync": "requested-with-real-v4-http-audio-delivery-20261027",
+  "testWorkerSync": "real-v4-audio-audit-correct-isolated-kids-path-20261027",
   "integrationCommit": "7bc145c8275421f190c32f5bc1b62b0ac5680a13",
   "quizRetryBehavior": "wrong-answer-allows-second-attempt-v2",
   "quizPraiseSync": "v4-clip-text-correct-retry-explanation",
   "remoteAudioAudit": "V4_450_24_REAL_MP3_HTTP_TEST_V1",
-  "auditCommit": "15a8de48d909bdc543ed17eb700f0700153dc0f7"
+  "auditCommit": "fbb5e54e54a80eace22753937e3cff3c65cceffc"
 }
