@@ -68,7 +68,8 @@ function showNotice(){
   };
   var p=note.querySelector("#kidsV4PreviewStatus");
   if(!p){p=root.document.createElement("p");p.id="kidsV4PreviewStatus";p.style.cssText="margin:0 0 8px";note.appendChild(p)}
-  p.textContent=messages[status]||messages.unavailable;
+  p.textContent=(messages[status]||messages.unavailable)+
+    (status==="ready"&&lastError?" · "+lastError:"");
   var retry=note.querySelector("#kidsV4PreviewRetry");
   if(!retry){
     retry=root.document.createElement("button");
@@ -95,6 +96,22 @@ function showNotice(){
     note.appendChild(hint);
   }
   hint.textContent="Nur Test-App · echte V4-MP3s, Masterstimme Serhat · keine Systemstimme. Nicht als endgültig hörgeprüft freigegeben.";
+  var sample=note.querySelector("#kidsV4PreviewSample");
+  if(!sample){
+    sample=root.document.createElement("button");
+    sample.id="kidsV4PreviewSample";sample.type="button";
+    sample.style.cssText="min-height:44px;margin:0 10px 4px 0;border-radius:10px;padding:9px 15px;border:1px solid #e8ba76;background:#2c6052;color:#fff9e7;font-weight:850;touch-action:manipulation";
+    sample.textContent="▶ Echte V4-Frage 1 hören";
+    sample.addEventListener("click",function(){
+      var first=manifest&&manifest.questions&&manifest.questions["kids-quiz-001"];
+      if(!first){lastError="V4-Daten noch nicht geladen";showNotice();return}
+      preview.play({id:"kids-quiz-001",ageBand:first.ageBand,source:first.source},"question",{
+        onerror:function(){lastError="Ton nicht gestartet. Bitte Audio-/Stumm-Einstellungen prüfen.";showNotice()}
+      });
+    });
+    note.appendChild(sample);
+  }
+  sample.hidden=status!=="ready";
 }
 var preview={
   isTestPreview:true,version:"review-450x4-test-host-20261026",
@@ -143,7 +160,7 @@ var preview={
       player.onerror=function(){
         if(current!==seq)return;
         lastError="Audio-Datei nicht erreichbar: "+String(q&&q.id||"")+" / "+String(p);
-        status="unavailable";showNotice();
+        showNotice();
         if(typeof opts.onerror==="function")opts.onerror(new Error("Test MP3 missing"));
       };
       player.src=clip.url;player.playbackRate=1;player.currentTime=0;
