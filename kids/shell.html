@@ -6132,7 +6132,12 @@ function renderQuizQuestion(){
     '<div id="quizHelp" class="quiz-help">'+help+'</div>'+
     '<div id="quizAnswers" class="quiz-answers" role="group" aria-label="Antworten"></div>'+
     '<div id="quizFeedback" class="quiz-feedback" aria-live="polite"></div>'+
-    '<div id="quizExplanation" class="quiz-explanation"></div>'+
+    '<section id="quizExplanation" class="quiz-explanation quiz-lesson-card" aria-label="Deine Lernerklärung">'+
+      '<span class="quiz-lesson-eyebrow">DEIN WISSENSSCHATZ</span>'+
+      '<h3 class="quiz-lesson-heading">Das lernen wir daraus</h3>'+
+      '<p id="quizExplanationText" class="quiz-lesson-copy"></p>'+
+      '<p id="quizExplanationAudioStatus" class="quiz-lesson-audio-status"></p>'+
+    '</section>'+
     '<button id="quizExplanationListen" class="quiz-listen" type="button" hidden disabled>Erklärung anhören</button>'+ 
     '<div id="quizTermLearning" hidden></div>'+ 
     '<div id="quizSource" class="quiz-source"></div>'+
@@ -6193,7 +6198,8 @@ function chooseQuizAnswer(index,button){
     document.getElementById("quizFeedback").textContent="✓ "+quizAcademyPraiseText(q);
     var explanation=document.getElementById("quizExplanation");
     if(explanation&&q.explanation){
-      explanation.textContent=String(q.explanation);
+      var lessonText=document.getElementById("quizExplanationText");
+      if(lessonText)lessonText.textContent=String(q.explanation);
       explanation.classList.add("show");
     }
     // Erklärt Fachbegriffe beidseitig, ohne die freigegebenen Quiz-/Audio-Texte zu verändern.
@@ -6215,16 +6221,21 @@ function chooseQuizAnswer(index,button){
     var answeredQuestion=q,answeredIndex=currentQuizIndex;
     var explanationAudio=quizV4Text(q,"explanationAudioText",q.explanation);
     var newV4=window.DARKidsQuizV4Approved;
-    var canExplain=!!(q.explanation&&((newV4&&newV4.has(q,"explanation"))||
-      (window.DARKidsOwnerVoice&&typeof window.DARKidsOwnerVoice.has==="function"&&
-      window.DARKidsOwnerVoice.has(explanationAudio))));
+    var canExplain=!!(q.explanation&&newV4&&newV4.has(q,"explanation"));
+    var audioStatus=document.getElementById("quizExplanationAudioStatus");
+    if(audioStatus)audioStatus.textContent=canExplain
+      ?"Die V4-Erklärung ist verfügbar. Du kannst sie anhören."
+      :"Der Erklärungstext ist bereit. Das V4-Audio ist noch nicht freigegeben.";
     var listenExplanation=document.getElementById("quizExplanationListen");
     if(listenExplanation){
       listenExplanation.hidden=!canExplain;
       listenExplanation.disabled=!canExplain;
-      if(canExplain)listenExplanation.addEventListener("click",function(){
-        quizSpeak(explanationAudio,{source:"kids-quiz-explanation",quizId:q.id,quizQuestion:q,quizPart:"explanation"});
-      });
+      if(canExplain){
+        listenExplanation.textContent="▶ Erklärung mit der V4-Masterstimme hören";
+        listenExplanation.addEventListener("click",function(){
+          quizSpeak(explanationAudio,{source:"kids-quiz-explanation",quizId:q.id,quizQuestion:q,quizPart:"explanation"});
+        });
+      }
     }
     function questionStillOpen(){
       var modal=document.getElementById("quizModal");
