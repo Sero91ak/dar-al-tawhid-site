@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>TAWḤĪD KIDS · V4 Hörübersicht</title>
+<meta name="robots" content="noindex,nofollow">
+<style>
+:root{color-scheme:dark;--bg:#091923;--card:#132b34;--edge:#41616c;--gold:#f3cf83;--soft:#c1d4da;--font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{font-family:var(--font);background:var(--bg);color:#f4fafb}body{margin:0;min-height:100dvh;line-height:1.5;background:radial-gradient(ellipse at 12% -4%,#234954 0%,var(--bg) 52%)}
+a{color:var(--gold)}.wrap{max-width:1240px;margin:0 auto;padding:calc(20px + env(safe-area-inset-top)) max(14px,env(safe-area-inset-left)) calc(36px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-right))}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}.eyebrow{font-size:.75rem;text-transform:uppercase;letter-spacing:.13em;color:var(--gold);font-weight:800}h1{font-size:clamp(1.65rem,4.5vw,2.6rem);line-height:1.16;margin:.35rem 0 .55rem}p{margin:.4rem 0;color:var(--soft)}.button,a.button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;background:#254650;color:#faf9e7;border:1px solid #55747c;border-radius:12px;font-weight:700;text-decoration:none;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.counts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:21px 0}.count{padding:18px;border:1px solid var(--edge);background:#173440a8;border-radius:17px}.num{display:block;font-size:clamp(1.35rem,3vw,2.2rem);font-weight:900;font-variant-numeric:tabular-nums;color:#fff}.count small{font-size:.8rem;color:var(--soft)}
+.filters{display:flex;flex-wrap:wrap;gap:12px;padding:15px;border:1px solid var(--edge);border-radius:18px;background:#142e37;align-items:flex-end;position:sticky;top:0;z-index:3;box-shadow:0 8px 24px #050f1480}
+.filter{flex:1 1 180px;min-width:0}.filter label{display:block;color:var(--soft);font-size:.8rem;margin-bottom:6px;font-weight:800}.filter input,.filter select{display:block;width:100%;min-width:0;min-height:46px;border:1px solid #65818a;border-radius:10px;color:#fff;background:#09242e;padding:10px 13px;font:inherit}
+.result{font-size:.84rem;color:var(--soft);padding:15px 3px 10px}.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,350px),1fr));gap:13px;align-items:stretch}
+.item{background:#152e38;border:1px solid #405c67;border-radius:18px;padding:17px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.item[data-risk="mixed"]{border-color:#927452}.item .meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.78rem;font-weight:800;color:#e5ecf0}.tag{border-radius:999px;padding:3px 9px;background:#30525e}.tag.risk{background:#4d382c;color:#ffe2a6}.item h2{font-size:1rem;line-height:1.4;font-weight:780;margin:0;overflow-wrap:anywhere}
+.script{white-space:pre-wrap;color:#d3e3e5;font-size:.88rem;line-height:1.55;max-height:160px;overflow:auto;overflow-wrap:anywhere;margin:0}
+.media{margin-top:auto}.media audio{display:block;width:100%;height:54px;max-width:100%}.media a{display:inline-block;margin-top:7px;font-size:.81rem}
+.state{padding:18px;border:1px solid #7894a0;border-radius:16px;background:#15323b;color:#f4fafb}
+footer{padding:24px 3px;font-size:.8rem;color:#a7c0c6}
+@media(max-width:600px){.counts{gap:8px}.count{padding:10px}.count small{font-size:.68rem}.filters{position:static}.item{padding:14px}.wrap{padding-top:calc(12px + env(safe-area-inset-top))}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="top">
+ <div><div class="eyebrow">DĀR AL TAWḤĪD · Nur zur Qualitätskontrolle</div><h1>V4-Sprachaufnahmen einzeln anhören</h1></div>
+ <a href="/kids/" class="button">Zurück zur Kinder-App</a>
+</header>
+<p>Alle auffälligen Stellen aus den 450 Fragen, nach Altersgruppe und Sprachfehler filterbar. Die Aufnahmen hier sind <strong>bestehende Originale, keine bereits reparierten Audios</strong>. Niemand muss alle selbst prüfen; die Liste ist ein freiwilliger Einblick.</p>
+<section class="counts" aria-label="Prüfstatus">
+<div class="count"><span id="nurCount" class="num">…</span><small>Offen: deutsches „nur“</small></div>
+<div class="count"><span id="mixedCount" class="num">…</span><small>Offen: gemischte Schriften</small></div>
+<div class="count"><span id="doneCount" class="num">…</span><small>Bereits hörgeprüft und ersetzt</small></div>
+</section>
+<section class="filters" aria-label="Audio filtern">
+<div class="filter"><label for="age">Altersbereich</label><select id="age"><option value="all">Alle Altersgruppen</option><option value="4-6">4–6 Jahre</option><option value="7-8">7–8 Jahre</option><option value="9-10">9–10 Jahre</option></select></div>
+<div class="filter"><label for="risk">Fehlertyp</label><select id="risk"><option value="open">Alle offenen Stellen</option><option value="nur">Deutsches „nur“</option><option value="mixed">Deutsch + arabische Schrift</option><option value="fixed">Bereits korrigiert</option></select></div>
+<div class="filter"><label for="search">Frage oder Text suchen</label><input id="search" type="search" placeholder="z. B. Nur, Gebet, 178" autocomplete="off"></div>
+</section>
+<p id="results" class="result" role="status" aria-live="polite">V4-Aufnahmen werden geladen …</p>
+<div id="audioList" class="items"></div>
+<footer>Audio wird nur nach eigenem Tippen abgespielt. Keine Browser-Systemstimme, keine automatische Hörfreigabe, keine Änderung am Kinder-Lernfortschritt. Quelle: veröffentlichtes ElevenLabs-V4-Manifest.</footer>
+</main>
+<script>
+(function(){
+"use strict";
+var src="/kids/data/quiz-v4-full-rebuild-public.json";
+var el=function(id){return document.getElementById(id)};
+var all=[];
+var allowed=/^\/kids\/assets\/kids-quiz-audio\/(?:v4-full-rebuild-20261026|v4-de-isolated-20261027)\/(?:4-6|7-8|9-10)\/[a-f0-9]{28}\.mp3$/;
+var arabic=/[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff\ufb50-\ufdff\ufe70-\ufeff]/u,latin=/[A-Za-zÄÖÜäöüß]/u,nur=/(?<!\w)nur(?!\w)/iu;
+var label={question:"Frage",correct:"Lob",retry:"Ermutigung",explanation:"Erklärung"};
+function setText(n,t){n.textContent=t;return n}
+function span(className,text){var n=document.createElement("span");n.className=className;return setText(n,text)}
+function isCorrected(c){return c.humanListeningApproved===true&&c.approvedForPlayback===true&&c.ownerReviewedGenerationId==="4vpdmlfHmhNx5f0aOoqQ"}
+function validate(manifest){
+ if(!manifest||!manifest.questions||Object.keys(manifest.questions).length!==450)throw Error("450-Fragen-Manifest ist nicht verfügbar.");
+ var rows=[];
+ Object.keys(manifest.questions).forEach(function(id){
+  var q=manifest.questions[id];if(!q||!q.clips)return;
+  ["question","correct","retry","explanation"].forEach(function(part){
+   var c=q.clips[part];if(!c||typeof c.text!=="string"||!allowed.test(c.url))return;
+   var isNur=nur.test(c.text),isMixed=arabic.test(c.text)&&latin.test(c.text),fixed=isCorrected(c);
+   if(isNur||isMixed||fixed)rows.push({id:id,band:q.ageBand,part:part,text:c.text,url:c.url,
+      nur:isNur,mixed:isMixed,fixed:fixed,risk:fixed?"fixed":isMixed?"mixed":"nur"});
+  });
+ });
+ return rows;
+}
+function makeCard(item){
+ var a=document.createElement("article");a.className="item";a.dataset.risk=item.risk;
+ var meta=document.createElement("div");meta.className="meta";
+ meta.appendChild(span("tag",item.id+" · "+item.band+" Jahre"));
+ meta.appendChild(span("tag",label[item.part]||item.part));
+ meta.appendChild(span("tag risk",item.fixed?"Korrigiert":item.mixed?"Sprachmischung":"„nur“-Aussprache"));
+ a.appendChild(meta);
+ a.appendChild(setText(document.createElement("h2"),"V4-Aufnahme · "+(label[item.part]||item.part)));
+ var p=document.createElement("p");p.className="script";p.textContent=item.text;a.appendChild(p);
+ var media=document.createElement("div");media.className="media";
+ var audio=document.createElement("audio");audio.controls=true;audio.preload="none";audio.src=item.url;audio.setAttribute("aria-label","Originalaudio "+item.id+" "+item.part);
+ audio.addEventListener("play",function(){document.querySelectorAll("audio").forEach(function(other){if(other!==audio)other.pause()})});
+ media.appendChild(audio);
+ var link=document.createElement("a");link.href=item.url;link.target="_blank";link.rel="noopener noreferrer";link.textContent="MP3 einzeln öffnen";media.appendChild(link);a.appendChild(media);
+ return a;
+}
+function render(){
+ var age=el("age").value,risk=el("risk").value,term=el("search").value.trim().toLocaleLowerCase("de");
+ var found=all.filter(function(a){return(age==="all"||a.band===age)&&(
+ risk==="open"?!a.fixed:(risk==="nur"?!a.fixed&&a.nur:(risk==="mixed"?!a.fixed&&a.mixed:(risk==="fixed"?a.fixed:true)))
+ )&&(!term||(a.id+" "+a.text+" "+a.part+" "+a.band).toLocaleLowerCase("de").includes(term))});
+ var list=el("audioList");list.replaceChildren();
+ var fragment=document.createDocumentFragment();
+ found.forEach(function(x){fragment.appendChild(makeCard(x))});list.appendChild(fragment);
+ el("results").textContent=found.length+" einzelne V4-Aufnahmen angezeigt.";
+}
+["age","risk"].forEach(function(id){el(id).addEventListener("change",render)});
+el("search").addEventListener("input",render);
+fetch(src,{cache:"no-store",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).then(function(d){
+ all=validate(d);
+ var openNur=all.filter(function(a){return a.nur&&!a.fixed}).length;
+ var mixed=all.filter(function(a){return a.mixed&&!a.fixed}).length;
+ var fixed=all.filter(function(a){return a.fixed}).length;
+ el("nurCount").textContent=String(openNur);el("mixedCount").textContent=String(mixed);el("doneCount").textContent=String(fixed);
+ render();
+}).catch(function(e){el("results").textContent="Audioverzeichnis nicht verfügbar: "+String(e.message||e).slice(0,160)});
+})();
+</script>
+</body>
+</html>
