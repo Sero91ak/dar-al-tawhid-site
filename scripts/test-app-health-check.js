@@ -328,6 +328,17 @@ try {
   fail("DAR Test Kids Quiz: " + error.message);
 }
 
+// Voice Studio must NEVER remap German "Nur" using the Arabic master dictionary.
+try {
+  const {execFileSync}=require("node:child_process");
+  execFileSync(process.execPath,[require("node:path").join(__dirname,"test-voice-studio-language-boundary.cjs")],{
+    cwd:ROOT,stdio:"pipe",timeout:18000
+  });
+  ok("Voice-Studio: DE und Fuṣḥā separat, arabisches PLS nie in deutschen Sätzen");
+} catch(error){
+  fail("Voice-Studio Sprachtrennung: "+(error.stderr?String(error.stderr).slice(-800):error.message));
+}
+
 if (failed) {
   console.error(`\n${failed} Test-App-Check(s) fehlgeschlagen – Deploy stoppen.`);
   process.exit(1);
