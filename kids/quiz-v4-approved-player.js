@@ -1,6 +1,7 @@
-/* DĀR AL TAWḤĪD KIDS – strict public V4 ID/part player.
- * Intentionally NOT loaded by a live app until verified review promotion.
- * No synthesis, no key, no speechSynthesis fallback. */
+/* DĀR AL TAWḤĪD KIDS – exclusive public V4 ID/part player.
+ * Public distribution explicitly owner-authorized 2026-10-27.
+ * Human Fuṣḥā/Makhāriǧ listening QA is NOT claimed.
+ * No synthesis, no key, no speechSynthesis / legacy fallback. */
 (function(root){
 "use strict";
 var VOICE="DkU7j9uO4ZEtLD2iRZSH";
@@ -12,9 +13,13 @@ function isObject(o){return !!o&&typeof o==="object"&&!Array.isArray(o)}
 function validSource(src){
   return typeof src==="string"&&(src.indexOf("Qurʾān ")===0||src.indexOf("Ṣaḥīḥ ")===0);
 }
-function validClip(clip){
+function validClip(clip,ownerRoute){
+  if(!isObject(clip))return false;
+  var approved=ownerRoute
+    ?clip.humanListeningApproved===false&&clip.approvedForPlayback===false
+    :clip.humanListeningApproved===true&&clip.approvedForPlayback===true;
   if(!isObject(clip)||clip.modelId!=="eleven_v4"||clip.voiceId!==VOICE||
-     clip.humanListeningApproved!==true||clip.approvedForPlayback!==true||
+     !approved||
      !/^[0-9a-f]{64}$/.test(String(clip.sha256||""))||
      !Number.isFinite(Number(clip.durationSeconds))||Number(clip.durationSeconds)<=0)return false;
   var url=String(clip.url||"");
@@ -25,8 +30,14 @@ function validClip(clip){
 function validate(data){
   if(!isObject(data)||data.id!=="TAWHID_KIDS_450_V4_NEW_REBUILD_PUBLIC"||
      data.modelId!=="eleven_v4"||data.voiceId!==VOICE||
-     data.releaseEnabled!==true||data.humanListeningApproved!==true||
+     data.releaseEnabled!==true||
      !isObject(data.questions)||Object.keys(data.questions).length!==450)return false;
+  var ownerRoute=data.ownerReleaseAuthorized===true&&
+     data.ownerAuthorizationDate==="2026-10-27"&&
+     data.originReviewManifestSha==="05c9557c2f0d564a06c9b5769740c94ebd195526"&&
+     data.qaStatus==="OWNER_AUTHORIZED_V4_TECHNICALLY_VERIFIED_FUSHA_LISTENING_UNVERIFIED"&&
+     data.humanListeningApproved===false;
+  if(data.humanListeningApproved!==true&&!ownerRoute)return false;
   var counts={"4-6":0,"7-8":0,"9-10":0};
   for(var id in data.questions){
     if(!Object.prototype.hasOwnProperty.call(data.questions,id))return false;
@@ -35,7 +46,7 @@ function validate(data){
        !validSource(q.source)||!isObject(q.clips)||Object.keys(q.clips).length!==4)return false;
     for(var i=0;i<PARTS.length;i++){
       var clip=q.clips[PARTS[i]];
-      if(!validClip(clip)||clip.url.indexOf("/"+q.ageBand+"/")<0)return false;
+      if(!validClip(clip,ownerRoute)||clip.url.indexOf("/"+q.ageBand+"/")<0)return false;
     }
     counts[q.ageBand]++;
   }
@@ -51,6 +62,10 @@ function load(){
     .then(function(data){
       if(!validate(data))throw new Error("v4-approval-or-integrity-gate");
       manifest=data;state="ready";
+      try{
+        if(root.document&&data.ownerReleaseAuthorized===true)
+          root.document.documentElement.setAttribute("data-kids-quiz-v4-owner-released","unreviewed-fusha");
+      }catch(_){}
       try{if(typeof root.dispatchEvent==="function"&&typeof root.CustomEvent==="function")
         root.dispatchEvent(new root.CustomEvent("dar-kids-quiz-v4-approved-ready",{detail:{questions:450,segments:1800}}));
       }catch(_){}
@@ -100,6 +115,9 @@ function play(q,part,opts){
 root.DARKidsQuizV4Approved={
   load:load,play:play,stop:stop,has:function(q,part){return !!get(q,part)},
   state:function(){return state},get:function(q,part){return get(q,part)},
-  isReady:function(){return state==="ready"},version:"v4-id-gated-20261026"
+  isReady:function(){return state==="ready"},
+  isOwnerAuthorized:function(){return !!(manifest&&manifest.ownerReleaseAuthorized===true)},
+  isHumanListeningApproved:function(){return !!(manifest&&manifest.humanListeningApproved===true)},
+  version:"v4-id-owner-authorized-20261027"
 };
 })(window);
