@@ -59,6 +59,14 @@ jobs:
           git add kids/assets/kids-quiz-audio/v4-de-isolated-20261027/7-8/*.mp3
           test "$(git diff --cached --name-only | wc -l)" -eq 3
           git commit -m "fix(kids-audio): publish owner-heard German V4 question 178, preserve original"
-          # Never force a competing developer's main updates. A failed push
-          # leaves this job red and requires manual reconciliation.
-          git push origin HEAD:main
+          # Safely rebase the three validated artifacts on any concurrent
+          # main updates (for example ci-status auto-audits). NEVER force-push.
+          # If the manifest overlaps or no fast-forward can be established,
+          # stop without losing the other writer's commit.
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; exit 1; }
+            if git push origin HEAD:main; then exit 0; fi
+            sleep 2
+          done
+          exit 1
