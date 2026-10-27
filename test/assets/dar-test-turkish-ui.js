@@ -399,7 +399,12 @@ function isDynamicGermanUi(value){
   /^Wetter · .+: \d+ °C · .+$/.test(value)||
   /^\d+ Treffer$/.test(value)||
   /^Live-Kompass nicht verfügbar\. Qibla: ca\. \d+(?:[.,]\d+)?° \([^)]+\)\. Öffne die Kompass-App deines Handys und richte dich auf \d+(?:[.,]\d+)?° aus\. Bitte Richtung prüfen\.$/.test(value)||
-  /^Offline fortsetzen \d+\/\d+$/.test(value);
+  /^Offline fortsetzen \d+\/\d+$/.test(value)||
+  /^\d+\s+(?:Aussagen mit Quellen\.|bekannte Duʿāʾ nach Themen\.|Namen und Zuordnungen\.|gespeichert\.|Meldungen und Hinweise\.|geprüfte Werke und zitierte Gelehrte\.|Gebete aktiv)$/.test(value)||
+  /^Frage \d+(?: von |\/)\d+$/.test(value)||
+  /^\d+ \/ \d+ richtig$/.test(value)||
+  /^\d+ Runden · \d+ Fragen beantwortet$/.test(value)||
+  /^.+ · Sync aktiv$/.test(value);
 }
 function lookupPack(value,language){
  if(language==="tr"){
@@ -761,6 +766,45 @@ function translateSharedPatterns(value,language){
   const head=lookupPack("Offline fortsetzen",language);
   if(head)return head+" "+offlineResume[1]+"/"+offlineResume[2];
  }
+ const countedTail=value.match(/^(\d+)\s+(Aussagen mit Quellen\.|bekannte Duʿāʾ nach Themen\.|Namen und Zuordnungen\.|gespeichert\.|Meldungen und Hinweise\.|geprüfte Werke und zitierte Gelehrte\.|Gebete aktiv)$/);
+ if(countedTail){
+  const tail=lookupPack(countedTail[2],language);
+  if(tail)return countedTail[1]+" "+tail;
+ }
+ const questionOf=value.match(/^Frage (\d+) von (\d+)$/);
+ if(questionOf){
+  const forms={
+   ar:"السؤال "+questionOf[1]+" من "+questionOf[2],
+   en:"Question "+questionOf[1]+" of "+questionOf[2],
+   tr:"Soru "+questionOf[1]+" / "+questionOf[2],
+   ku:"Pirs "+questionOf[1]+" ji "+questionOf[2],
+   ckb:"پرسیاری "+questionOf[1]+" لە "+questionOf[2],
+   bs:"Pitanje "+questionOf[1]+" od "+questionOf[2],
+   fr:"Question "+questionOf[1]+" sur "+questionOf[2],
+   es:"Pregunta "+questionOf[1]+" de "+questionOf[2]
+  };
+  return forms[language]||null;
+ }
+ const questionSlash=value.match(/^Frage (\d+)\/(\d+)$/);
+ if(questionSlash){
+  const word=lookupPack("Frage",language)||"Frage";
+  return word+" "+questionSlash[1]+"/"+questionSlash[2];
+ }
+ const score=value.match(/^(\d+) \/ (\d+) richtig$/);
+ if(score){
+  const word=lookupPack("richtig",language);
+  if(word)return score[1]+" / "+score[2]+" "+word;
+ }
+ const rounds=value.match(/^(\d+) Runden · (\d+) Fragen beantwortet$/);
+ if(rounds){
+  const a=lookupPack("Runden",language),b=lookupPack("Fragen beantwortet",language);
+  if(a&&b)return rounds[1]+" "+a+" · "+rounds[2]+" "+b;
+ }
+ const syncLine=value.match(/^(.+) · Sync aktiv$/);
+ if(syncLine){
+  const tail=lookupPack("Sync aktiv",language);
+  if(tail)return syncLine[1]+" · "+tail;
+ }
  return null;
 }
 function translateExact(value,language="tr"){
@@ -1045,7 +1089,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-19";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-20";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

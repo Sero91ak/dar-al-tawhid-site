@@ -7,7 +7,7 @@ const path=String(global.location?.pathname||"");
 if(!/^\/test(?:\/|$)/.test(path)||/^\/test\/kids(?:\/|$)/.test(path))return;
 if(global.__DarTestSevenLocalesLoading)return;
 global.__DarTestSevenLocalesLoading=true;
-const endpoint="/test/i18n/adult-ui-locales-seven.json?v=20261024-ui-more-19";
+const endpoint="/test/i18n/adult-ui-locales-seven.json?v=20261024-ui-more-20";
 global.fetch(endpoint,{credentials:"same-origin",cache:"default"})
  .then(response=>{if(!response.ok)throw Error("Static language pack unavailable: "+response.status);return response.json()})
  .then(data=>{
