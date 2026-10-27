@@ -19,9 +19,11 @@
   "noOneSignal": true,
   "unpublishedQuestionsVisible": false,
   "publicVisitorRouteChanged": false,
-  "note": "Isolated Dar Test Worker sync requested from current main. File status does not imply deployed or device-QA passed; V4 QA flags remain pending.",
+  "note": "Refresh isolated Dar Test Kids preview after the separately merged Kids Quiz repair. Release remains human-unapproved and must not enable public playback.",
   "responsiveBuild": "kids-quiz-fold-ipad-v2-20261027",
   "kidsServiceWorkerCache": "v1458",
-  "testWorkerSync": "requested-after-kids-pr-1448-merge",
-  "integrationCommit": "262ee83025faa5b380ba85fe30b2ced5bd074d87"
+  "testWorkerSync": "requested-after-kids-quiz-pr-1449-merge",
+  "integrationCommit": "2f2960107cf92cd5ace702fab415ee52a7334c25",
+  "quizRetryBehavior": "wrong-answer-allows-second-attempt-v2",
+  "quizPraiseSync": "v4-clip-text-correct-retry-explanation"
 }
