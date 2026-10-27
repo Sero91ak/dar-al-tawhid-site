@@ -19,11 +19,9 @@
   "noOneSignal": true,
   "unpublishedQuestionsVisible": false,
   "publicVisitorRouteChanged": false,
-  "note": "Requested Dar Test worker refresh for V4 audio-preview and responsive Kids Quiz. NOT a proof of deployment or human audio approval. No public unreviewed audio enabled.",
+  "note": "Isolated Dar Test Worker sync requested from current main. File status does not imply deployed or device-QA passed; V4 QA flags remain pending.",
   "responsiveBuild": "kids-quiz-fold-ipad-v2-20261027",
   "kidsServiceWorkerCache": "v1458",
-  "testWorkerSync": "requested-after-quiz-retry-fix-20261027",
-  "integrationCommit": "recompute-from-published-main-on-deploy",
-  "quizRetryBehavior": "wrong-answer-allows-second-attempt-v2",
-  "quizPraiseSync": "question-id-v4-correct-retry-explanation-match"
+  "testWorkerSync": "requested-after-kids-pr-1448-merge",
+  "integrationCommit": "262ee83025faa5b380ba85fe30b2ced5bd074d87"
 }
