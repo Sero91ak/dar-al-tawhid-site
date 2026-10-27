@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-27T04:42:29Z",
+  "timestamp": "2026-10-27T04:43:49Z",
   "trigger": "workflow_run",
   "finishedDeployConclusion": "cancelled",
-  "finishedDeployRun": "40451161735",
+  "finishedDeployRun": "40451301262",
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
@@ -90,57 +90,57 @@
   "lastDeployRuns": [
     {
       "conclusion": null,
-      "created_at": "2026-10-27T04:42:25Z",
-      "head_sha": "f6f47a7515e65f1fd9c0fc7ecf8d44f7a958eb57",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40451205699",
-      "id": 40451205699,
+      "created_at": "2026-10-27T04:43:35Z",
+      "head_sha": "9bcbc672600f11093c898215f4d6cfd7bb6a3c88",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40451309690",
+      "id": 40451309690,
       "status": "pending",
-      "updated_at": "2026-10-27T04:42:26Z"
+      "updated_at": "2026-10-27T04:43:36Z"
     },
     {
       "conclusion": "cancelled",
-      "created_at": "2026-10-27T04:42:10Z",
-      "head_sha": "77e43371214ee0e4ceb46716e27893a60d4f3f0c",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40451181200",
-      "id": 40451181200,
+      "created_at": "2026-10-27T04:43:29Z",
+      "head_sha": "25738ae3e03c16c489c913bd451b2a61bb1afd18",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40451301262",
+      "id": 40451301262,
       "status": "completed",
-      "updated_at": "2026-10-27T04:42:26Z"
+      "updated_at": "2026-10-27T04:43:36Z"
     },
     {
       "conclusion": "cancelled",
-      "created_at": "2026-10-27T04:41:57Z",
-      "head_sha": "00b81cc319847d92564100ba1e1de7ccba72752f",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40451161735",
-      "id": 40451161735,
+      "created_at": "2026-10-27T04:43:23Z",
+      "head_sha": "5ab8233675321abff4bb73f045f36399cc70e825",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40451291633",
+      "id": 40451291633,
       "status": "completed",
-      "updated_at": "2026-10-27T04:42:11Z"
+      "updated_at": "2026-10-27T04:43:30Z"
     },
     {
       "conclusion": "cancelled",
-      "created_at": "2026-10-27T04:41:51Z",
-      "head_sha": "67cf4fd413dc77cc662260daa2c2a6b758dc9377",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40451153465",
-      "id": 40451153465,
+      "created_at": "2026-10-27T04:43:19Z",
+      "head_sha": "b50eedb24f14d03b54175bfb5b2b2d9cbf61c4ca",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40451285055",
+      "id": 40451285055,
       "status": "completed",
-      "updated_at": "2026-10-27T04:41:58Z"
+      "updated_at": "2026-10-27T04:43:24Z"
+    },
+    {
+      "conclusion": null,
+      "created_at": "2026-10-27T04:43:12Z",
+      "head_sha": "85ffb0b2c6e2af5797fa6853d363a90329d9095a",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40451275215",
+      "id": 40451275215,
+      "status": "in_progress",
+      "updated_at": "2026-10-27T04:43:42Z"
     },
     {
       "conclusion": "cancelled",
-      "created_at": "2026-10-27T04:41:46Z",
-      "head_sha": "4a4a5f0216147c272ba8c947889ea3176c7f4f2b",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40451145910",
-      "id": 40451145910,
+      "created_at": "2026-10-27T04:43:07Z",
+      "head_sha": "ce34dba3a674629cc75bf136011b3b6a7fec0cd6",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40451266203",
+      "id": 40451266203,
       "status": "completed",
-      "updated_at": "2026-10-27T04:41:52Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-27T04:41:41Z",
-      "head_sha": "2e06986443fa965f7f33bcf5c87542fdacf20e2a",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40451137179",
-      "id": 40451137179,
-      "status": "completed",
-      "updated_at": "2026-10-27T04:41:47Z"
+      "updated_at": "2026-10-27T04:43:14Z"
     }
   ]
 }
