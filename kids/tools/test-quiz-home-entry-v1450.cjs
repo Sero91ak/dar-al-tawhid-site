@@ -169,7 +169,7 @@ const touchBackEvent={
 listeners.pointerup[0].cb(touchBackEvent);
 assert.equal(modal.open,false,"iOS pointerup Back must close the quiz dashboard");
 assert.equal(touchBackEvent.prevented,true);
-console.log("PASS: Kids 3 shells equal, SW v1460, 450 question bundle, click and iOS pointerup Back");
+console.log("PASS: Kids 3 shells equal, SW v1462, 450 question bundle, click and iOS pointerup Back");
 
 // Simulate the real production quiz loader with all network requests blocked.
 // The embedded pack alone must populate all 450 selectable child questions.
@@ -256,6 +256,7 @@ const ctx={
   quizV4SpokenText(q,p,fallback){return fallback},
   quizV4Text(q,p,fallback){return fallback},
   refreshQuizPraiseAudioState(){},
+  refreshQuizRetryAudioState(){},
   refreshQuizExplanationAudioState(){},
   recordQuizMistake(){recordedMistakes++},
   recordQuizAttempt(){recordedSuccess++},
