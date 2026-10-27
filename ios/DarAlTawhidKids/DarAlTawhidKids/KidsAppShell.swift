@@ -8,7 +8,11 @@ enum KidsAppShell {
     static let isCreatorTest = true
     private static let canonicalHost = "dar-al-tawhid-kids-creator.sero91ak.workers.dev"
     static let launchURL = URL(string: "https://dar-al-tawhid-kids-creator.sero91ak.workers.dev/kids/start.html")!
-    static let hosts: Set<String> = [canonicalHost]
+    // A second exact, host-isolated QA destination is allowed ONLY in KIDS TEST.
+    // It serves genuine, explicitly unapproved V4 Fuṣḥā listening previews.
+    static let v4AuditionHost = "dar-al-tawhid-test.sero91ak.workers.dev"
+    static let v4AuditionURL = URL(string: "https://dar-al-tawhid-test.sero91ak.workers.dev/kids/start")!
+    static let hosts: Set<String> = [canonicalHost, v4AuditionHost]
 #else
     static let isCreatorTest = false
     private static let canonicalHost = "dar-al-tawhid.de"
@@ -47,6 +51,11 @@ enum KidsAppShell {
             return launchURL
         }
         if isKidsURL(incoming) {
+#if KIDS_CREATOR_TEST
+            // Keep the dedicated test-audio origin when its own /kids links
+            // open a new WebKit window. Never redirect V4 QA to Creator staging.
+            if incoming.host?.lowercased() == v4AuditionHost { return incoming }
+#endif
             var components = URLComponents(url: incoming, resolvingAgainstBaseURL: false) ?? URLComponents()
             components.scheme = "https"
             components.host = canonicalHost

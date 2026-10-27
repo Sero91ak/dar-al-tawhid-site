@@ -70,3 +70,33 @@ Er öffnet die Module Start, Qurʾān, Hörbücher, Duʿāʾ, Eltern und Akademi
 Diese Shortcuts ändern weder Besucher-Konfiguration noch öffentlich sichtbare
 Unterrichtssperren. Für KIDS-Test-Änderungen gilt ausschließlich der neue
 Staging-Branch, niemals ein direkter Live-Push.
+
+
+## 27.10.2026 · V4-Fuṣḥā-Hörvorschau in der nativen KIDS TEST App
+
+Die Test-App enthält nach einem **neuen Xcode Creator-Build** unter dem goldenen **TEST**-Menü den Eintrag
+**„Quiz · echte V4-Fuṣḥā-Hörvorschau“**. Der Eintrag lädt innerhalb
+der bestehenden Test-WKWebView die isolierte Dar-Test-Quizseite
+`https://dar-al-tawhid-test.sero91ak.workers.dev/kids/start`.
+Der Quizbereich wird nach erfolgreicher WebKit-Navigation geöffnet;
+Frage, Lob, Ermutigung und Erklärung sind über gesonderte
+Touch-Schaltflächen prüfbar (450 Fragen; 1.800 Zuordnungen).
+
+Die anderen Creator-Menüpunkte bleiben auf dem bisherigen Creator-Worker
+`dar-al-tawhid-kids-creator.sero91ak.workers.dev`; die separate iOS-Bundle-ID,
+die Besucher-Web-App, alle produktiven Push-/Widget-/App-Store-Ziele und die
+Kinderdaten bleiben unverändert. Der bisherige Creator-Staging-Branch wird
+nicht mit unfreigegebenen Audioressourcen überschrieben.
+
+**Hörprüfung und Veröffentlichung sind getrennt:** Die DAR-Test-Version darf
+die echten ElevenLabs-`eleven_v4`-Clips der Masterstimme mit
+`humanListeningApproved=false` ausdrücklich als Test abspielen.
+Die Besucher-App benötigt weiterhin die echte dokumentierte Fuṣḥā-Hörabnahme.
+Weder das Öffnen dieses Testbereichs noch technische HTTP-/MP3-Checks
+setzen Freigabeflags auf `true`.
+
+**Native Build-Grenze:** Eine Änderung in GitHub aktualisiert eine bereits
+installierte Xcode-App nicht automatisch. Für den neuen TEST-Menüpunkt
+muss der Xcode-Scheme `DarAlTawhidKidsCreator` neu gebaut und auf dem
+iPhone/iPad/Simulator installiert werden. Ein macOS-`xcodebuild` und ein
+echter iPad-Hörtest sind damit noch nicht nachgewiesen.
