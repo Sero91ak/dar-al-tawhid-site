@@ -407,7 +407,11 @@ function isDynamicGermanUi(value){
   /^.+ · Sync aktiv$/.test(value)||
   /^.{1,48} ist eingetreten$/.test(value)||
   /^Passend: .+$/.test(value)||
-  /^Weitere Treffer anzeigen · \d+ von \d+$/.test(value);
+  /^Weitere Treffer anzeigen · \d+ von \d+$/.test(value)||
+  /^\d+ Min vorher$/.test(value)||
+  /^Taḥajjud · \d+ Min vor Fajr$/.test(value)||
+  /^Wiederholen · .+$/.test(value)||
+  /^ḤADĪṮ-WERK · .+$/.test(value);
 }
 function lookupPack(value,language){
  if(language==="tr"){
@@ -843,6 +847,35 @@ function translateSharedPatterns(value,language){
   };
   return forms[language]||null;
  }
+ const minShort=value.match(/^(\d+) Min vorher$/);
+ if(minShort)return translateSharedPatterns(minShort[1]+" Minuten vorher",language);
+ const tahajjud=value.match(/^Taḥajjud · (\d+) Min vor Fajr$/);
+ if(tahajjud){
+  const n=tahajjud[1];
+  const fajr={ar:"الفجر",en:"Fajr",tr:"Fecir",ku:"Fecr",ckb:"فەجر",bs:"Fajr",fr:"Fajr",es:"Fajr"}[language]||"Fajr";
+  const forms={
+   ar:"تهجد · قبل "+n+" د من "+fajr,
+   en:"Tahajjud · "+n+" min before "+fajr,
+   tr:"Teheccüd · "+fajr+"’den "+n+" dk önce",
+   ku:"Teheccud · "+n+" deqe beriya "+fajr,
+   ckb:"تەهەججود · "+n+" خولەک پێش "+fajr,
+   bs:"Tehedždžud · "+n+" min prije "+fajr,
+   fr:"Tahajjud · "+n+" min avant "+fajr,
+   es:"Tahajjud · "+n+" min antes de "+fajr
+  };
+  return forms[language]||null;
+ }
+ const repeatLine=value.match(/^Wiederholen · (.+)$/);
+ if(repeatLine){
+  const head=lookupPack("Wiederholen",language);
+  const tail=lookupPack(repeatLine[1],language)||repeatLine[1];
+  if(head)return head+" · "+tail;
+ }
+ const hadithWork=value.match(/^ḤADĪṮ-WERK · (.+)$/);
+ if(hadithWork){
+  const head=lookupPack("ḤADĪṮ-WERK",language);
+  if(head)return head+" · "+hadithWork[1];
+ }
  return null;
 }
 function translateExact(value,language="tr"){
@@ -1127,7 +1160,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-21";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-22";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

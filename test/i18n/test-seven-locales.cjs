@@ -78,6 +78,10 @@ assert.equal(w.DarTestTurkishUI.translateValue("3 / 10 richtig","es"),"3 / 10 "+
 assert.equal(w.DarTestTurkishUI.translateValue("Fajr ist eingetreten","en"),"Fajr has begun");
 assert.equal(w.DarTestTurkishUI.translateValue("Weitere Treffer anzeigen · 40 von 120","ku"),"Encamên zêdetir nîşan bide · 40 ji 120");
 assert.equal(locales.translations.ar["Laylat al-Qadr"],"ليلة القدر");
+assert.equal(w.DarTestTurkishUI.translateValue("15 Min vorher","en"),"15 minutes before");
+assert.equal(w.DarTestTurkishUI.translateValue("Taḥajjud · 30 Min vor Fajr","tr"),"Teheccüd · Fecir’den 30 dk önce");
+assert.equal(locales.translations.ar["Botschaft aller Gesandten"],"رسالة جميع الرسل");
+assert.equal(locales.translations.ckb["Klassisches Ḥadīṯ-Werk"],"بەرهەمی کلاسیکی حەدیث");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
