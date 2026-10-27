@@ -54,6 +54,8 @@ function currentCommitTouchesKids() {
     if (changed.some((file) =>
       /^kids\//.test(file) ||
       /^test\/kids\//.test(file) ||
+      file === "test/kids-quiz-preview-version.json" ||
+      file === "scripts/verify-test-app-deploy.js" ||
       file === "scripts/purge-test-kids-cache.js"
     )) return true;
 
@@ -596,6 +598,75 @@ async function fetchVersionBuild(base) {
         `Kids Cinema Intro fehlt/ist nicht abspielbar. public=${cinemaPub} workers.dev=${cinemaDev}`
       );
     }
+
+    // KIDS_V4_REAL_AUDIO_DELIVERY_AUDIT_20261027
+    // A successful build, local SHA audit, or 450x4 JSON manifest alone does
+    // NOT establish that any child can hear the deployed ElevenLabs V4 MP3.
+    // Probe the isolated Test worker ONLY; never enable visitor playback,
+    // modify review flags, regenerate paid audio or touch other app lanes.
+    const audioOrigin = new URL(workersBase).origin;
+    if (audioOrigin !== "https://dar-al-tawhid-test.sero91ak.workers.dev") {
+      throw new Error("KIDS V4 audio audit refused unexpected Test origin: " + audioOrigin);
+    }
+    const auditionPath="/kids/data/quiz-v4-full-rebuild-review.json";
+    const auditionResponse=await fetch(audioOrigin+auditionPath+"?delivery-audit="+Date.now(),{
+      cache:"no-store",headers:{"Cache-Control":"no-cache",Pragma:"no-cache"}
+    });
+    if(auditionResponse.status!==200){
+      throw new Error("KIDS V4: Test manifest missing on real Worker, HTTP "+auditionResponse.status);
+    }
+    const audition=await auditionResponse.json();
+    const expectedVoice="DkU7j9uO4ZEtLD2iRZSH";
+    const keys=Object.keys(audition.questions||{});
+    if(audition.modelId!=="eleven_v4"||audition.voiceId!==expectedVoice||
+        audition.releaseEnabled!==false||audition.humanListeningApproved!==false||keys.length!==450){
+      throw new Error("KIDS V4: deployed review-only manifest identity/voice/QA gate invalid");
+    }
+    const byBand={"4-6":[],"7-8":[],"9-10":[]};
+    const parts=["question","correct","retry","explanation"];
+    for(const id of keys){
+      const q=audition.questions[id];
+      if(!q||!Object.prototype.hasOwnProperty.call(byBand,q.ageBand)||
+          !q.clips||Object.keys(q.clips).length!==4)throw new Error("KIDS V4: invalid question "+id);
+      byBand[q.ageBand].push({id,q});
+      for(const part of parts){
+        const clip=q.clips[part];
+        if(!clip||clip.modelId!=="eleven_v4"||clip.voiceId!==expectedVoice||
+            clip.humanListeningApproved!==false||clip.approvedForPlayback!==false||
+            !/^[a-f0-9]{64}$/.test(clip.sha256||"")||
+            !new RegExp("^/kids/assets/kids-quiz-audio/v4-full-rebuild-20261026/"+
+              q.ageBand+"/[a-f0-9]{28}\\.mp3$").test(clip.url)){
+          throw new Error("KIDS V4: bad deployed clip "+id+"/"+part);
+        }
+      }
+    }
+    if(!Object.values(byBand).every(items=>items.length===150)){
+      throw new Error("KIDS V4: deployed 150/150/150 age distribution missing");
+    }
+    let checkedClips=0;
+    // First and last questions in all ages, all four speech parts:
+    // 24 actual HTTP MP3 responses, without downloading the full 1,217 files.
+    for(const [band,items] of Object.entries(byBand)){
+      for(const picked of [items[0],items[items.length-1]]){
+        for(const part of parts){
+          const clip=picked.q.clips[part];
+          const response=await fetch(audioOrigin+clip.url,{
+            cache:"no-store",
+            headers:{Range:"bytes=0-2047","Cache-Control":"no-cache"}
+          });
+          const bytes=new Uint8Array(await response.arrayBuffer());
+          const id3=bytes.length>=3&&bytes[0]===73&&bytes[1]===68&&bytes[2]===51;
+          const mpeg=bytes.length>=2&&bytes[0]===255&&(bytes[1]&224)===224;
+          const ok=(response.status===200||response.status===206)&&bytes.length>=1000&&(id3||mpeg);
+          console.log("KIDS V4 remote MP3 "+band+"/"+picked.id+"/"+part+
+            " HTTP="+response.status+" bytes="+bytes.length+" mp3="+(id3||mpeg)+" ok="+ok);
+          if(!ok)throw new Error("KIDS V4 MP3 not delivered: "+clip.url);
+          checkedClips++;
+        }
+      }
+    }
+    console.log("KIDS V4 REMOTE PASS — 450 question IDs, 1800 test-only segments, "+
+      checkedClips+" sampled real MP3 HTTP files across all three ages; human listening remains PENDING.");
 
     console.log(`Kids Test live OK — ${kidsExpect} + Cinema Intro MP4`);
   } else if (fs.existsSync(kidsPath)) {
