@@ -271,7 +271,7 @@
           escapeHtml([q.sourceType,q.source].filter(Boolean).join(" · ")||"Quellenprüfung ausstehend")+'</p>'+
         '<button id="quizLocalExplainAudio" type="button" class="quiz-library-audio" disabled>Erklärung anhören</button>'+
       '</section>'+
-      '<button id="quizLocalNext" class="quiz-next" type="button" disabled style="display:none">Nächste Frage ›</button>'+
+      '<button id="quizLocalNext" class="quiz-next" type="button" disabled aria-disabled="true" style="display:none">Nächste Frage ›</button>'+
       '</section>';
     refreshLocalQuizListen(q);
     var listen=byId("quizLocalListen");
@@ -308,6 +308,18 @@
         });
         var lesson=byId("quizLocalLearning");
         if(lesson)lesson.hidden=false;
+        // Tap-to-replay authentic V4 praise (iOS blocks some autoplay paths).
+        if(msg&&v4&&v4.has(q,"correct")&&!byId("quizLocalPraise")){
+          var praise=document.createElement("button");
+          praise.id="quizLocalPraise";
+          praise.type="button";
+          praise.className="quiz-library-audio quiz-praise-replay";
+          praise.textContent="▶ Lob mit V4-Masterstimme anhören";
+          praise.addEventListener("click",function(){
+            if(localRound[localIndex]===q&&localAnswered)localQuizPlay(q,"correctAudioText");
+          });
+          msg.appendChild(praise);
+        }
         var explanationAudio=byId("quizLocalExplainAudio");
         if(explanationAudio){
           var approved=!!(v4&&v4.has(q,"explanation"));
@@ -321,11 +333,13 @@
           }
         });
         var next=byId("quizLocalNext");
-        if(next){next.disabled=false;next.style.display="block";next.classList.add("show")}
+        if(next){next.disabled=false;next.setAttribute("aria-disabled","false");next.style.display="block";next.classList.add("show")}
       });
     });
     var next=byId("quizLocalNext");
     if(next)next.addEventListener("click",function(){
+      // Same mastery contract in recovery renderer: only correct => Next.
+      if(!localAnswered||this.disabled||localRound[localIndex]!==q)return;
       try{window.DARKidsQuizV4Approved&&window.DARKidsQuizV4Approved.stop()}catch(_){}
       try{window.DARKidsOwnerVoice&&window.DARKidsOwnerVoice.stop()}catch(_){}
       localIndex++;renderLocalQuizQuestion();
