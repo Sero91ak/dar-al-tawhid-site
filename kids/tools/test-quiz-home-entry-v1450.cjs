@@ -24,7 +24,7 @@ const previewPlayerSource=read("kids/quiz-v4-test-preview.js");
 assert.ok(previewPlayerSource.includes("kidsV4FourParts"),"The real V4 test player needs touch-triggered audio for all four parts");
 assert.ok(previewPlayerSource.includes("kidsV4AgeSelect"),"The 450 V4 clips must be auditionable in all age groups");
 assert.ok(previewPlayerSource.includes("activeClip="),"Real V4 audio playback state must be visible to children and testers");
-assert.ok(entry.includes("playback=20261027-v3"),"PWA must request the new spoken V4 playback script");
+assert.ok(entry.includes("playback=20261027-v4"),"PWA must request the new spoken V4 playback script");
 const premiumCss=read("kids/quiz-premium-v1.css");
 const approvedPlayer=read("kids/quiz-v4-approved-player.js");
 assert.ok(entry.includes("/kids/quiz-premium-v1.css?v=20261026-premium1"),"Premium UI style must load in each Kids shell");
