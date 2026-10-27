@@ -94,6 +94,17 @@ async function main() {
   assert(swift.includes("let maximumAge: TimeInterval = approximate ? 3_600 : 600"));
   assert(swift.indexOf("deliver(loc)\n        if unchangedForWidgets { return }") >= 0,
     "Location delivery must not be suppressed by widget throttling");
+  const engine = fs.readFileSync(path.join(root, "ios/DarAlTawhid/Shared/DarPrayerEngine.swift"), "utf8");
+  const daily = fs.readFileSync(path.join(root, "ios/DarAlTawhid/Shared/DarDailyContent.swift"), "utf8");
+  const push = fs.readFileSync(path.join(root, "ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift"), "utf8");
+  assert(engine.includes("fajrAngle: Double = 12, asrFactor: Double = 1"));
+  assert(engine.includes("clock(angle: angle, rising: false)"),
+    "Asr must use the calculated sun altitude");
+  assert(!engine.includes("clock(angle: 90 - angle, rising: false)"));
+  assert(engine.includes('clock(angle: -abs(fajrAngle), rising: true)'));
+  assert(engine.includes('clock(angle: -abs(fajrAngle), rising: false)'));
+  assert(daily.includes("fajrAngle: snap.fajrAngle, asrFactor: snap.asrFactor"));
+  assert(push.includes("fajrAngle: snap.fajrAngle, asrFactor: snap.asrFactor"));
   for (const filename of scripts) await verifyScript(filename);
   console.log("iOS GPS and prayer location regression guard PASS");
 }
