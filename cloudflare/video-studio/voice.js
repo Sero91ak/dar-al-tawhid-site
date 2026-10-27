@@ -268,7 +268,8 @@ export async function synthesizeDarVoice(env, text, options = {}) {
   ).trim();
   const dictionaryReady = Boolean(dictionaryId && dictionaryVersionId);
   const modelId = String(env.ELEVENLABS_MODEL_ID || "eleven_v4").trim();
-  const requireDictionary = String(env.ELEVENLABS_REQUIRE_PRONUNCIATION_DICTIONARY || "true").trim().toLowerCase() !== "false";
+  // German voice output must not depend on the global Arabic dictionary.
+  const requireDictionary = false;
   if (modelId !== "eleven_v4") {
     return {
       ok: false,
@@ -284,6 +285,16 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     };
   }
   const arabicLearningProfile = ["dua_arabic", "dua_arabic_slow", "dua_word"].includes(profile);
+  // A single unchecked TTS request must contain only ONE language's script.
+  // A native Arabic script (including ﷺ ligatures) inside a German sentence
+  // requires separate reviewed language segments, not a global PLS override.
+  const hasArabicScript = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/u.test(script);
+  const hasGermanLatin = /[A-Za-zÄÖÜäöüß]/u.test(script);
+  if ((hasArabicScript && hasGermanLatin) ||
+      (arabicLearningProfile && !hasArabicScript) ||
+      (!arabicLearningProfile && hasArabicScript)) {
+    return {ok:false,reason:"Sprachtrennung: Deutsch und Arabisch müssen als separate de-/ar-Sprachsegmente geprüft werden."};
+  }
   const stripInitialArabicContextShadda = (value) => {
     const chars = Array.from(String(value || "").normalize("NFD"));
     let base = -1;
@@ -309,7 +320,8 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     ? stripInitialArabicContextShadda(
         String(script || "").normalize("NFC").replace(/[\u06D6-\u06DC]/g, "").replace(/\s+/g, " ").trim()
       )
-    : (dictionaryReady || withTimings ? script : prepareDarVoicePronunciation(script));
+    : String(script || "").normalize("NFC");
+  // Do not rewrite German lexical tokens using the Arabic pronunciation library.
   if (profile === "dua_arabic_slow") {
     ttsScript = "[slowly] " + ttsScript;
   } else if (profile === "dua_word") {
@@ -324,15 +336,11 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     body.language_code = "ar";
     body.apply_text_normalization = "off";
   }
-  // Arabic Du'a learning must preserve the fully vocalized Arabic source.
-  // The shared master dictionary contains transliteration aliases that can drop
-  // Arabic consonants/case endings, so it is intentionally excluded here.
-  if (dictionaryReady && !arabicLearningProfile) {
-    body.pronunciation_dictionary_locators = [{
-      pronunciation_dictionary_id: dictionaryId,
-      version_id: dictionaryVersionId
-    }];
-  }
+  // IMPORTANT: the global Arabic PLS maps German 'Nur' to Arabic 'النور'.
+  // Attach NO global cross-language dictionary in any profile (native Arabic
+  // uses native script; German stays untouched). A later scope-specific DE
+  // dictionary would need its own reviewed ID, version and tests.
+  const pronunciationDictionaryApplied = false;
 
   const res = await fetch(endpoint, {
     method: "POST",
@@ -366,8 +374,10 @@ export async function synthesizeDarVoice(env, text, options = {}) {
       contentType: "audio/mpeg",
       voiceId,
       modelId,
-      pronunciationDictionaryId: dictionaryId || null,
-      pronunciationDictionaryVersionId: dictionaryVersionId || null,
+      pronunciationDictionaryId: pronunciationDictionaryApplied ? dictionaryId : null,
+      pronunciationDictionaryVersionId: pronunciationDictionaryApplied ? dictionaryVersionId : null,
+
+      languageScope: arabicLearningProfile ? "ar" : "de",
       chars: script.length,
       timestamps: true,
       estimatedCostEur: Number(((script.length / 1000) * 0.18).toFixed(4))
@@ -381,8 +391,10 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     contentType: "audio/mpeg",
     voiceId,
     modelId,
-    pronunciationDictionaryId: dictionaryId || null,
-    pronunciationDictionaryVersionId: dictionaryVersionId || null,
+    pronunciationDictionaryId: pronunciationDictionaryApplied ? dictionaryId : null,
+    pronunciationDictionaryVersionId: pronunciationDictionaryApplied ? dictionaryVersionId : null,
+
+    languageScope: arabicLearningProfile ? "ar" : "de",
     chars: script.length,
     timestamps: false,
     estimatedCostEur: Number(((script.length / 1000) * 0.18).toFixed(4))
