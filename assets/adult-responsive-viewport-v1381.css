@@ -993,3 +993,53 @@ html[data-theme] body:is(
     display:none!important;
   }
 }
+
+/* DAR_ADULT_KIDS_REFERENCE_HOME_GEOMETRY_V1_20261027
+ * Kids reference: flexible containing block, centered tablet stage, minmax
+ * grid and symmetric safe-area gutters. Home only, no logic/theme changes. */
+html[data-theme] body.is-home-route {
+  --dar-kids-reference-gutter:max(12px,2.2vw,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+  --dar-nav-max:560px;
+  --dar-nav-width:min(560px,calc(100vw - var(--dar-kids-reference-gutter) - var(--dar-kids-reference-gutter)));
+}
+html[data-theme] body.is-home-route > .app,
+html[data-theme] body.is-home-route #appView.view,
+html[data-theme] body.is-home-route #appView .home-v380-shell {
+  box-sizing:border-box!important;
+  min-inline-size:0!important;
+  max-inline-size:100%!important;
+}
+html[data-theme] body.is-home-route #appView .home-v380-shell > *,
+html[data-theme] body.is-home-route #appView .home-v380-shell :is(
+  .home-v380-lib-grid,.home-v380-post-grid,.home-v380-post-preview,
+  .home-v380-lib-card,.home-v380-quran-hero,.home-v380-open-row
+) {
+  box-sizing:border-box!important;
+  min-inline-size:0!important;
+  max-inline-size:100%!important;
+}
+@media(max-width:1023px){
+  /* 100dvw inside an inset stage overflowed on foldables / split view. */
+  html[data-theme] body.is-home-route #appView .home-v380-shell::before{
+    inline-size:100%!important;
+    min-inline-size:0!important;
+    max-inline-size:100%!important;
+    margin-inline:0!important;
+  }
+}
+@media(min-width:700px) and (max-width:1199px){
+  html[data-theme] body.is-home-route #appView .home-v380-shell{
+    inline-size:min(100%,920px)!important;
+    margin-inline:auto!important;
+  }
+}
+@media(max-width:699px){
+  html[data-theme] body.is-home-route #appView .home-v380-shell{
+    inline-size:100%!important;
+    margin-inline:0!important;
+  }
+  html[data-theme] body.is-home-route #appView
+    .home-v380-lib-grid:not(.home-v380-lib-grid--slider){
+    grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))!important;
+  }
+}
