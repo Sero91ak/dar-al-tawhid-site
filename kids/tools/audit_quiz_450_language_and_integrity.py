@@ -43,8 +43,13 @@ def main() -> int:
         raise SystemExit("German voice text MUST NOT receive Arabic PLS")
     if pilot["hearing"]!="OWNER_CONFIRMED_CORRECT_2026-10-27" or not pilot["germanNurVerified"]:
         raise SystemExit("Owner-auditioned German Nur V4 reference provenance missing")
-    if pilot["manifestUpdated"] or pilot["visitorAppChanged"] or pilot["approvedForPlayback"]:
-        raise SystemExit("A pilot alone must never cause the public MP3/approval to be changed")
+    # The owner-approved q178 pilot may have been imported separately;
+    # it must not be mistaken for blanket consent for the remaining clips.
+    imported = pilot.get("manifestUpdated") is True
+    if imported and (not pilot.get("approvedForPlayback") or not pilot.get("newAudioSha256")):
+        raise SystemExit("Imported pilot missing exact human-reviewed SHA")
+    if not imported and (pilot.get("visitorAppChanged") or pilot.get("approvedForPlayback")):
+        raise SystemExit("Unimported pilot falsely marked live")
     root=ET.parse(PLS).getroot()
     ns="{http://www.w3.org/2005/01/pronunciation-lexicon}"
     collisions={}
@@ -94,8 +99,20 @@ def main() -> int:
                 raise SystemExit(f"{qid}:{part}: invalid voice script or master voice")
             if not re.fullmatch(r"[0-9a-f]{64}",str(clip.get("sha256") or "")):
                 raise SystemExit(f"{qid}:{part}: missing integrity hash")
-            if not str(clip.get("url") or "").startswith(f"/kids/assets/kids-quiz-audio/v4-full-rebuild-20261026/{band}/"):
+            url = str(clip.get("url") or "")
+            approved_pilot = (imported and qid=="kids-quiz-178" and part=="question"
+                              and clip.get("ownerReviewedGenerationId")=="4vpdmlfHmhNx5f0aOoqQ"
+                              and clip.get("sha256")==pilot.get("newAudioSha256")
+                              and clip.get("humanListeningApproved") is True
+                              and clip.get("approvedForPlayback") is True
+                              and clip.get("languageCode")=="de")
+            legacy_path=url.startswith(f"/kids/assets/kids-quiz-audio/v4-full-rebuild-20261026/{band}/")
+            review_path=approved_pilot and url.startswith(
+                "/kids/assets/kids-quiz-audio/v4-de-isolated-20261027/7-8/")
+            if not (legacy_path or review_path):
                 raise SystemExit(f"{qid}:{part}: wrong media lane")
+            if not approved_pilot and (clip.get("humanListeningApproved") or clip.get("approvedForPlayback")):
+                raise SystemExit(f"{qid}:{part}: unsupported human hearing claim")
             summary[band]["v4Clips"]+=1
             if NUR.search(text):
                 summary[band]["nurRiskClips"]+=1
