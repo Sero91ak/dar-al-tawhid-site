@@ -22,6 +22,8 @@ assert.ok(premiumCss.includes("KIDS_QUIZ_RESPONSIVE_SEGMENTS_V2_20261027"),"Resp
 assert.ok(premiumCss.includes("KIDS_QUIZ_LESSON_PRESENTATION_V1"),"Labeled explanation lesson must be visible on all device sizes");
 assert.ok(entry.includes('class="quiz-explanation quiz-lesson-card"'),"Full explanation card must exist in each Kids shell");
 assert.ok(entry.includes("quizExplanationAudioStatus"),"Text explanation and audio QA status must be separated");
+assert.ok(entry.includes("refreshQuizPraiseAudioState"),"The V4 praise replay control must update after late audio readiness");
+assert.ok(entry.includes("quiz-praise-replay"),"The child needs a user-initiated V4 praise replay button");
 assert.ok(read("kids/quiz-library.js").includes("quiz-v4-release-status"),"User must see the correct V4 voice status");
 assert.ok(premiumCss.includes("horizontal-viewport-segments:2"),"Fold viewport segment gutter required");
 assert.ok(premiumCss.includes("quiz-dashboard-mode .quiz-learning-dashboard.show"),"iPad dashboard master-detail required");
