@@ -10,7 +10,7 @@ var VOICE="DkU7j9uO4ZEtLD2iRZSH";
 var ROOT="/kids/assets/kids-quiz-audio/v4-full-rebuild-20261026/";
 var SOURCE="/kids/data/quiz-v4-full-rebuild-review.json";
 var PARTS=["question","correct","retry","explanation"];
-var manifest=null, pending=null, status="unloaded", player=null,seq=0, lastError="";
+var manifest=null, pending=null, status="unloaded", player=null,seq=0, lastError="",activeClip="";
 function validClip(c,age){
   return c&&c.voiceId===VOICE&&c.modelId==="eleven_v4"
     &&c.humanListeningApproved===false&&c.approvedForPlayback===false
@@ -36,7 +36,9 @@ function valid(d){
 }
 function stop(){
   seq++;
+  activeClip="";
   if(player){try{player.pause();player.removeAttribute("src");player.load()}catch(_){}}
+  player=null;
 }
 function clipFor(q,p){
   if(!manifest||!q||!PARTS.includes(p))return null;
@@ -96,6 +98,15 @@ function showNotice(){
     note.appendChild(hint);
   }
   hint.textContent="Nur Test-App · echte V4-MP3s, Masterstimme Serhat · keine Systemstimme. Nicht als endgültig hörgeprüft freigegeben.";
+  var now=note.querySelector("#kidsV4NowPlaying");
+  if(!now){
+    now=root.document.createElement("p");
+    now.id="kidsV4NowPlaying";now.setAttribute("role","status");
+    now.style.cssText="margin:8px 0 4px;font-size:13px;font-weight:800;overflow-wrap:anywhere";
+    note.appendChild(now);
+  }
+  now.textContent=activeClip?"▶ V4 läuft: "+activeClip:
+    (status==="ready"?"V4 bereit. Tippe auf Frage, Lob, Ermutigung oder Erklärung.":"");
   var sample=note.querySelector("#kidsV4PreviewSample");
   if(!sample){
     sample=root.document.createElement("button");
@@ -196,10 +207,21 @@ var preview={
     try{
       stop();
       if(root.DARKidsOwnerVoice&&root.DARKidsOwnerVoice.stop)root.DARKidsOwnerVoice.stop();
-      if(!player){player=new root.Audio();player.preload="auto";}
-      var current=seq;player.onended=function(){if(current===seq&&typeof opts.onended==="function")opts.onended()};
+      // iPad WKWebView / Safari: create a fresh media element INSIDE the tap
+      // gesture. Reusing an element after a cancelled .load() can leave its
+      // play promise suspended on iOS, despite genuine remote MP3 HTTP 200.
+      player=new root.Audio();player.preload="auto";
+      if(typeof player.setAttribute==="function")player.setAttribute("playsinline","");
+      activeClip=String(q&&q.ageBand||"?")+" Jahre · "+({question:"Frage",correct:"Lob",retry:"Ermutigung",explanation:"Erklärung"}[p]||p);
+      showNotice();
+      var current=seq;player.onended=function(){
+        if(current!==seq)return;
+        activeClip="";showNotice();
+        if(typeof opts.onended==="function")opts.onended();
+      };
       player.onerror=function(){
         if(current!==seq)return;
+        activeClip="";
         lastError="Audio-Datei nicht erreichbar: "+String(q&&q.id||"")+" / "+String(p);
         showNotice();
         if(typeof opts.onerror==="function")opts.onerror(new Error("Test MP3 missing"));
@@ -208,12 +230,13 @@ var preview={
       var task=player.play();
       if(task&&task.catch)task.catch(function(e){
         if(current!==seq)return;
+        activeClip="";
         lastError="Audiowiedergabe blockiert: bitte Hörknopf antippen";
         showNotice();
         if(typeof opts.onerror==="function")opts.onerror(e);
       });
       return true;
-    }catch(e){if(typeof opts.onerror==="function")opts.onerror(e);return false}
+    }catch(e){activeClip="";lastError=String(e&&e.message||e).slice(0,120);showNotice();if(typeof opts.onerror==="function")opts.onerror(e);return false}
   }
 };
 root.DARKidsQuizV4Approved=preview;
