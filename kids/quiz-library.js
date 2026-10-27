@@ -279,33 +279,43 @@
     body.querySelectorAll(".quiz-local-answer").forEach(function(btn){
       btn.addEventListener("click",function(){
         if(localAnswered)return;
-        localAnswered=true;
         var ix=Number(btn.getAttribute("data-quiz-answer-index"));
         var correct=!!(q.answers[ix]&&q.answers[ix].correct);
-        if(correct)localCorrectCount++;
         saveFallbackProgress(q,correct);
+        var msg=byId("quizLocalFeedback");
+        var v4=window.DARKidsQuizV4Approved;
+        var kind=correct?"correct":"retry";
+        var clip=v4&&v4.has(q,kind)&&typeof v4.get==="function"?v4.get(q,kind):null;
+        if(msg){
+          msg.textContent=clip&&clip.text?clip.text:
+            (correct?(q.success||"Richtig!"):q.retry||"Versuch es noch einmal.");
+          msg.className="quiz-feedback show "+(correct?"good":"bad");
+        }
+        if(!correct){
+          // A mistake is a learning step, not the end of the question.
+          // Keep all answer choices tappable and never reveal the right choice.
+          btn.classList.add("wrong");
+          window.setTimeout(function(){if(btn&&btn.isConnected)btn.classList.remove("wrong")},1100);
+          localQuizPlay(q,"retryAudioText");
+          return;
+        }
+        localAnswered=true;
+        localCorrectCount++;
         body.querySelectorAll(".quiz-local-answer").forEach(function(el){
           el.disabled=true;
           var n=Number(el.getAttribute("data-quiz-answer-index"));
           if(q.answers[n]&&q.answers[n].correct)el.classList.add("correct");
-          else if(n===ix)el.classList.add("wrong");
         });
-        var msg=byId("quizLocalFeedback");
-        if(msg){
-          msg.textContent=correct?(q.success||"Richtig!"):q.retry||"Schau dir die richtige Antwort an.";
-          msg.classList.add("show");
-        }
         var lesson=byId("quizLocalLearning");
         if(lesson)lesson.hidden=false;
         var explanationAudio=byId("quizLocalExplainAudio");
         if(explanationAudio){
-          var newV4=window.DARKidsQuizV4Approved;
-          var approved=(newV4&&newV4.has(q,"explanation"))?"approved-v4":"";
+          var approved=!!(v4&&v4.has(q,"explanation"));
           explanationAudio.disabled=!approved;
           explanationAudio.textContent=approved?"▶ Erklärung anhören":"Erklär-Audio noch nicht freigegeben";
           explanationAudio.addEventListener("click",function(){localQuizPlay(q,"explanationAudioText")});
         }
-        localQuizPlay(q,correct?"correctAudioText":"retryAudioText",{
+        localQuizPlay(q,"correctAudioText",{
           onended:function(){
             if(localRound[localIndex]===q&&localAnswered)localQuizPlay(q,"explanationAudioText");
           }
