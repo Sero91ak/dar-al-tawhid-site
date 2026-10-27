@@ -410,7 +410,12 @@
         '<button id="quizResumeRound" type="button">Weiterlernen</button>'+
       '</section>':"";
 
+    var v4Preview=!!(window.DARKidsQuizV4Approved&&window.DARKidsQuizV4Approved.isTestPreview);
+    var voiceNote=v4Preview
+      ?"TEST-HÖRVORSCHAU · Du kannst Frage, Lob, Ermutigung und Erklärung in der echten V4-Stimme anhören. Die Fuṣḥā-Hörprüfung ist noch offen."
+      :"ELEVENLABS V4 · Die neuen Audios warten noch auf ihre Hörfreigabe. Fragen und Erklärungen bleiben vollständig lesbar.";
     box.innerHTML=
+      '<p class="quiz-v4-release-status" role="status">'+escapeHtml(voiceNote)+'</p>'+
       '<section class="quiz-premium-welcome" aria-label="Islamische Quiz-Lernreise">'+
         '<div class="quiz-premium-copy">'+
           '<span class="quiz-premium-kicker"><span aria-hidden="true">✦</span> Bismi-llāh · '+escapeHtml(ageLabel())+'</span>'+

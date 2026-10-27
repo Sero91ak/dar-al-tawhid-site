@@ -5573,9 +5573,59 @@ function refreshQuizListenState(){
   var available=!!(q&&newV4&&newV4.has(q,"question"));
   setQuizListenState(available?"ready":"missing");
 }
+function refreshQuizPraiseAudioState(){
+  // Child-triggered playback is required on iOS if autoplay was denied.
+  // Late review-manifest loading must still offer the matching V4 praise.
+  var q=Array.isArray(currentQuiz)?currentQuiz[currentQuizIndex]:null;
+  var box=document.getElementById("quizFeedback");
+  if(!quizLocked||!q||!box||!box.classList.contains("good"))return;
+  var audio=window.DARKidsQuizV4Approved;
+  if(!audio||!audio.has(q,"correct"))return;
+  if(box.querySelector(".quiz-praise-replay"))return;
+  var button=document.createElement("button");
+  button.type="button";button.className="quiz-praise-replay";
+  button.textContent="▶ Lob mit V4-Masterstimme anhören";
+  button.setAttribute("aria-label","Das gesprochene Lob noch einmal anhören");
+  button.addEventListener("click",function(){
+    if(currentQuiz[currentQuizIndex]!==q)return;
+    quizSpeak(quizV4Text(q,"correctAudioText",q.success),{
+      source:"kids-quiz-feedback",quizId:q.id,quizQuestion:q,quizPart:"correct"
+    });
+  });
+  box.appendChild(button);
+}
+function refreshQuizExplanationAudioState(){
+  // The review manifest loads asynchronously. Never strand the completed
+  // explanation without a listen button when it arrives after the answer.
+  var q=Array.isArray(currentQuiz)?currentQuiz[currentQuizIndex]:null;
+  var explanation=document.getElementById("quizExplanation");
+  var button=document.getElementById("quizExplanationListen");
+  if(!quizLocked||!q||!q.explanation||!explanation||!explanation.classList.contains("show")||!button)return;
+  var player=window.DARKidsQuizV4Approved;
+  var available=!!(player&&player.has(q,"explanation"));
+  button.hidden=!available;button.disabled=!available;
+  var status=document.getElementById("quizExplanationAudioStatus");
+  if(status)status.textContent=available
+    ?"Die V4-Erklärung ist verfügbar. Tippe zum Anhören."
+    :"Der Erklärungstext ist bereit. Das V4-Audio ist noch nicht freigegeben.";
+  if(available&&!button.dataset.quizV4Bound){
+    button.dataset.quizV4Bound="true";
+    button.textContent="▶ Erklärung mit der V4-Masterstimme hören";
+    button.addEventListener("click",function(){
+      if(currentQuiz[currentQuizIndex]!==q)return;
+      quizSpeak(quizV4Text(q,"explanationAudioText",q.explanation),{
+        source:"kids-quiz-explanation",quizId:q.id,quizQuestion:q,quizPart:"explanation"
+      });
+    });
+  }
+}
 window.addEventListener("dar-kids-quiz-v4-approved-ready",function(){
   var modal=document.getElementById("quizModal");
-  if(modal&&modal.classList.contains("open"))refreshQuizListenState();
+  if(modal&&modal.classList.contains("open")){
+    refreshQuizListenState();
+    refreshQuizPraiseAudioState();
+    refreshQuizExplanationAudioState();
+  }
 });
 window.addEventListener("dar-kids-owner-voice-ready",function(){
   var modal=document.getElementById("quizModal");
@@ -6132,7 +6182,12 @@ function renderQuizQuestion(){
     '<div id="quizHelp" class="quiz-help">'+help+'</div>'+
     '<div id="quizAnswers" class="quiz-answers" role="group" aria-label="Antworten"></div>'+
     '<div id="quizFeedback" class="quiz-feedback" aria-live="polite"></div>'+
-    '<div id="quizExplanation" class="quiz-explanation"></div>'+
+    '<section id="quizExplanation" class="quiz-explanation quiz-lesson-card" aria-label="Deine Lernerklärung">'+
+      '<span class="quiz-lesson-eyebrow">DEIN WISSENSSCHATZ</span>'+
+      '<h3 class="quiz-lesson-heading">Das lernen wir daraus</h3>'+
+      '<p id="quizExplanationText" class="quiz-lesson-copy"></p>'+
+      '<p id="quizExplanationAudioStatus" class="quiz-lesson-audio-status"></p>'+
+    '</section>'+
     '<button id="quizExplanationListen" class="quiz-listen" type="button" hidden disabled>Erklärung anhören</button>'+ 
     '<div id="quizTermLearning" hidden></div>'+ 
     '<div id="quizSource" class="quiz-source"></div>'+
@@ -6191,9 +6246,11 @@ function chooseQuizAnswer(index,button){
     quizRewardBurst();
     document.getElementById("quizFeedback").className="quiz-feedback good";
     document.getElementById("quizFeedback").textContent="✓ "+quizAcademyPraiseText(q);
+    refreshQuizPraiseAudioState();
     var explanation=document.getElementById("quizExplanation");
     if(explanation&&q.explanation){
-      explanation.textContent=String(q.explanation);
+      var lessonText=document.getElementById("quizExplanationText");
+      if(lessonText)lessonText.textContent=String(q.explanation);
       explanation.classList.add("show");
     }
     // Erklärt Fachbegriffe beidseitig, ohne die freigegebenen Quiz-/Audio-Texte zu verändern.
@@ -6215,17 +6272,12 @@ function chooseQuizAnswer(index,button){
     var answeredQuestion=q,answeredIndex=currentQuizIndex;
     var explanationAudio=quizV4Text(q,"explanationAudioText",q.explanation);
     var newV4=window.DARKidsQuizV4Approved;
-    var canExplain=!!(q.explanation&&((newV4&&newV4.has(q,"explanation"))||
-      (window.DARKidsOwnerVoice&&typeof window.DARKidsOwnerVoice.has==="function"&&
-      window.DARKidsOwnerVoice.has(explanationAudio))));
-    var listenExplanation=document.getElementById("quizExplanationListen");
-    if(listenExplanation){
-      listenExplanation.hidden=!canExplain;
-      listenExplanation.disabled=!canExplain;
-      if(canExplain)listenExplanation.addEventListener("click",function(){
-        quizSpeak(explanationAudio,{source:"kids-quiz-explanation",quizId:q.id,quizQuestion:q,quizPart:"explanation"});
-      });
-    }
+    var canExplain=!!(q.explanation&&newV4&&newV4.has(q,"explanation"));
+    var audioStatus=document.getElementById("quizExplanationAudioStatus");
+    if(audioStatus)audioStatus.textContent=canExplain
+      ?"Die V4-Erklärung ist verfügbar. Du kannst sie anhören."
+      :"Der Erklärungstext ist bereit. Das V4-Audio ist noch nicht freigegeben.";
+    refreshQuizExplanationAudioState();
     function questionStillOpen(){
       var modal=document.getElementById("quizModal");
       return !!(modal&&modal.classList.contains("open")&&
@@ -7077,7 +7129,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1458",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1459",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -8105,7 +8157,7 @@ html[data-view="stories"] #view-stories > :last-child{
 </style>
 <link rel="stylesheet" href="/kids/dua-smart-learn.css?v=1261" data-kids-dua-smart="1">
 <link rel="stylesheet" href="/kids/quiz-library.css?v=20261026-premium1">
-<link rel="stylesheet" href="/kids/quiz-premium-v1.css?v=20261026-premium1&responsive=20261027-v2">
+<link rel="stylesheet" href="/kids/quiz-premium-v1.css?v=20261026-premium1&responsive=20261027-v2&lesson=20261027-v1">
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=5">
 <script src="/kids/screen-awake.js?v=1"></script>
 <script src="/kids/story-follow-reader.js?v=19-salaf1"></script>
@@ -8123,7 +8175,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/quiz-v4-approved-player.js?v=20261026-v1"></script>
 <script src="/kids/quiz-v4-test-preview.js?v=20261026-audition1"></script>
 <script>window.DARKidsQuizV4Approved&&window.DARKidsQuizV4Approved.load();</script>
-<script src="/kids/quiz-library.js?v=20261026-premium1&v4only=20261027"></script>
+<script src="/kids/quiz-library.js?v=20261026-premium1&v4only=20261027&lesson=20261027-v1"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1256-parent-hero-full" data-kids-section-heroes-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148" data-kids-stories-home-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1138.css?v=1152" data-kids-stories-home-polish="1">
