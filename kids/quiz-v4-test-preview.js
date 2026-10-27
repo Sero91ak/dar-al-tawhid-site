@@ -10,7 +10,7 @@ var VOICE="DkU7j9uO4ZEtLD2iRZSH";
 var ROOT="/kids/assets/kids-quiz-audio/v4-full-rebuild-20261026/";
 var SOURCE="/kids/data/quiz-v4-full-rebuild-review.json";
 var PARTS=["question","correct","retry","explanation"];
-var manifest=null, pending=null, status="unloaded", player=null,seq=0;
+var manifest=null, pending=null, status="unloaded", player=null,seq=0, lastError="";
 function validClip(c,age){
   return c&&c.voiceId===VOICE&&c.modelId==="eleven_v4"
     &&c.humanListeningApproved===false&&c.approvedForPlayback===false
@@ -47,34 +47,80 @@ function clipFor(q,p){
 function showNotice(){
   var modal=root.document&&root.document.getElementById("quizModal");
   if(!modal)return;
-  if(modal.querySelector("#kidsV4ReviewNotice"))return;
-  var note=root.document.createElement("div");note.id="kidsV4ReviewNotice";note.setAttribute("role","status");
-  note.style.cssText="color:#fff5dd;background:#693f26;border:1px solid #e8ba76;"+
-    "border-radius:13px;margin:8px 10px;padding:11px 14px;font:700 13px/1.5 system-ui;"+
-    "position:relative;z-index:90";
-  note.textContent="TEST-VORSCHAU · 450 Quizfragen / 1.800 echte ElevenLabs-V4-Tonzuordnungen. "+
-    "Arabische Aussprache, Atmung und kindgerechte Wirkung noch nicht menschlich hörgeprüft. "+
-    "Nicht zur endgültigen Kinderfreigabe.";
-  var parent=modal.querySelector("#quizStage")||modal;
-  parent.insertBefore(note,parent.firstChild);
+  var note=modal.querySelector("#kidsV4ReviewNotice");
+  if(!note){
+    note=root.document.createElement("section");
+    note.id="kidsV4ReviewNotice";note.setAttribute("role","status");
+    note.setAttribute("aria-live","polite");
+    note.style.cssText="color:#fff5dd;background:#603f35;border:1px solid #e8ba76;"+
+      "border-radius:13px;margin:8px 10px;padding:11px 14px;"+
+      "font:700 13px/1.5 system-ui;position:relative;z-index:90";
+    var parent=modal.querySelector("#quizStage")||modal;
+    parent.insertBefore(note,parent.firstChild);
+  }
+  // Never render the state as 'ready' before all 450x4 authentic V4
+  // manifest entries were validated. The visitor app never runs this file.
+  var messages={
+    unloaded:"Test-V4 noch nicht geladen. Aufnahmeprüfung starten.",
+    loading:"Test-V4 lädt: 450 Fragen, 1.800 Sprachzuordnungen …",
+    ready:"TEST · Echte ElevenLabs-V4-Aufnahmen geladen (Frage, Lob, Ermutigung, Erklärung). Hörprüfung Fuṣḥā weiterhin offen.",
+    unavailable:"Test-V4 konnte nicht geladen werden ("+String(lastError||"Verbindung")+" ). Keine alte Stimme wird abgespielt."
+  };
+  var p=note.querySelector("#kidsV4PreviewStatus");
+  if(!p){p=root.document.createElement("p");p.id="kidsV4PreviewStatus";p.style.cssText="margin:0 0 8px";note.appendChild(p)}
+  p.textContent=messages[status]||messages.unavailable;
+  var retry=note.querySelector("#kidsV4PreviewRetry");
+  if(!retry){
+    retry=root.document.createElement("button");
+    retry.id="kidsV4PreviewRetry";retry.type="button";
+    retry.style.cssText="min-height:44px;border-radius:10px;padding:9px 15px;border:1px solid #e8ba76;background:#efe0bf;color:#39251d;font-weight:850;touch-action:manipulation";
+    retry.addEventListener("click",function(){
+      preview.load().then(function(ok){
+        if(!ok)return;
+        var q=root.kidsQuizPool&&root.kidsQuizPool[0];
+        if(q&&root.DARKidsQuizV4Approved.has(q,"question")){
+          try{root.dispatchEvent(new root.CustomEvent("dar-kids-quiz-v4-approved-ready",{detail:{preview:true}}))}catch(_){}
+        }
+      });
+    });
+    note.appendChild(retry);
+  }
+  retry.disabled=status==="loading";
+  retry.textContent=status==="ready"?"V4-Dateien geladen ✓":"V4 erneut laden";
+  retry.hidden=status==="ready";
+  var hint=note.querySelector("#kidsV4PreviewInfo");
+  if(!hint){
+    hint=root.document.createElement("small");hint.id="kidsV4PreviewInfo";
+    hint.style.cssText="display:block;margin-top:6px;font-weight:500";
+    note.appendChild(hint);
+  }
+  hint.textContent="Nur Test-App · echte V4-MP3s, Masterstimme Serhat · keine Systemstimme. Nicht als endgültig hörgeprüft freigegeben.";
 }
 var preview={
   isTestPreview:true,version:"review-450x4-test-host-20261026",
   load:function(){
     if(manifest)return Promise.resolve(true);
     if(pending)return pending;
-    status="loading";
+    status="loading";lastError="";showNotice();
     pending=root.fetch(SOURCE,{cache:"no-store",credentials:"same-origin"})
-      .then(function(r){if(!r.ok)throw new Error("No review manifest");return r.json()})
+      .then(function(r){
+        if(!r||!r.ok)throw new Error("HTTP "+(r&&r.status||"Netzwerk")+" · V4-Manifest");
+        return r.json();
+      })
       .then(function(d){
         if(!valid(d))throw new Error("Invalid human-unapproved V4 review-only audio set");
-        manifest=d;status="ready";showNotice();
+        manifest=d;status="ready";lastError="";showNotice();
         try{root.dispatchEvent(new root.CustomEvent("dar-kids-quiz-v4-approved-ready",
           {detail:{preview:true,questions:450,segments:1800,humanListeningApproved:false}}))}
         catch(_){}
         try{root.dispatchEvent(new root.CustomEvent("dar-kids-owner-voice-ready",{detail:{preview:true}}))}catch(_){}
         return true;
-      }).catch(function(e){status="unavailable";showNotice();return false})
+      }).catch(function(e){
+        lastError=String(e&&e.message||e||"unbekannt").slice(0,160);
+        status="unavailable";showNotice();
+        try{root.dispatchEvent(new root.CustomEvent("dar-kids-quiz-v4-preview-error",{detail:{reason:lastError}}))}catch(_){}
+        return false;
+      })
       .then(function(ok){pending=null;return ok});
     return pending;
   },
@@ -83,17 +129,31 @@ var preview={
   get:clipFor,has:function(q,p){return !!clipFor(q,p)},
   stop:stop,
   play:function(q,p,opts){
-    var clip=clipFor(q,p);if(!clip||!root.Audio)return false;
+    var clip=clipFor(q,p);
+    if(!clip||!root.Audio){
+      lastError=!clip?"V4-"+String(p||"Clip")+" für Frage "+String(q&&q.id||"?")+" nicht geladen":"Audioplayer im Gerät nicht verfügbar";
+      showNotice();return false;
+    }
     opts=opts||{};
     try{
       stop();
       if(root.DARKidsOwnerVoice&&root.DARKidsOwnerVoice.stop)root.DARKidsOwnerVoice.stop();
       if(!player){player=new root.Audio();player.preload="auto";}
       var current=seq;player.onended=function(){if(current===seq&&typeof opts.onended==="function")opts.onended()};
-      player.onerror=function(){if(current===seq&&typeof opts.onerror==="function")opts.onerror(new Error("Test MP3 missing"))};
+      player.onerror=function(){
+        if(current!==seq)return;
+        lastError="Audio-Datei nicht erreichbar: "+String(q&&q.id||"")+" / "+String(p);
+        status="unavailable";showNotice();
+        if(typeof opts.onerror==="function")opts.onerror(new Error("Test MP3 missing"));
+      };
       player.src=clip.url;player.playbackRate=1;player.currentTime=0;
       var task=player.play();
-      if(task&&task.catch)task.catch(function(e){if(current===seq&&typeof opts.onerror==="function")opts.onerror(e)});
+      if(task&&task.catch)task.catch(function(e){
+        if(current!==seq)return;
+        lastError="Audiowiedergabe blockiert: bitte Hörknopf antippen";
+        showNotice();
+        if(typeof opts.onerror==="function")opts.onerror(e);
+      });
       return true;
     }catch(e){if(typeof opts.onerror==="function")opts.onerror(e);return false}
   }
