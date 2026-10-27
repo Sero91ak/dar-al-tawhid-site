@@ -47,7 +47,7 @@ const host="https://dar-al-tawhid-test.sero91ak.workers.dev";
 for(const uri of [
  "/test/kids","/test/kids/","/test/kids/start","/test/kids/version.json",
  "/kids/start","/kids/version.json",
- "/kids/quiz-v4-test-preview.js","/kids/data/quiz-v4-full-rebuild-review.json"
+ "/kids/quiz-v4-test-preview.js","/kids/v4-audio-check.html","/kids/data/quiz-v4-full-rebuild-review.json"
 ]) assert.equal(code(host+uri),200,"Kids V4 isolated test allowlist must not be HTTP 401: "+uri);
 for(const uri of ["/kids/data/quiz-v4-full-rebuild-public.json",
  "/kids/data/quiz-kids.json","/test/kids/akademie/archiv-daten.json"])
@@ -57,6 +57,17 @@ assert.equal(code("https://dar-al-tawhid.de/kids/data/quiz-v4-full-rebuild-revie
 for(const pathname of ["/kids/start","/kids/version.json",
  "/kids/quiz-v4-test-preview.js","/kids/data/quiz-v4-full-rebuild-review.json"])
  assert.ok(wrangler.includes('"'+pathname+'"'),"Worker-first delivery must cover "+pathname);
+const standalone=read("kids/v4-audio-check.html");
+assert.ok(standalone.includes("ElevenLabs V4 · Fuṣḥā-Hörprüfung") &&
+ standalone.includes("ROOT+q.ageBand") &&
+ standalone.includes("PARTS.forEach") &&
+ standalone.includes("player.play()") &&
+ standalone.includes("location.hostname!==HOST"),
+ "iPad Test-only standalone V4 auditor must support all 450 questions and every voice part");
+assert.ok(wrangler.includes('"/kids/v4-audio-check.html"'),
+ "the exact Test audio auditor must run through the Worker-first host gate");
+assert.equal(code("https://dar-al-tawhid.de/kids/v4-audio-check.html"),401,
+ "the V4 review-only audition route is forbidden on visitor origin");
 const preview = read("kids/quiz-v4-test-preview.js");
 assert.ok(preview.includes("dar-al-tawhid-test.sero91ak.workers.dev") &&
  preview.includes("quiz-v4-full-rebuild-review.json"));
