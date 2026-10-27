@@ -510,10 +510,23 @@ async function fetchVersionBuild(base) {
   const verifyKids = currentCommitTouchesKids();
   if (fs.existsSync(kidsPath) && verifyKids) {
     const kidsExpect = JSON.parse(fs.readFileSync(kidsPath, "utf8")).buildId;
+    // The Kids Test worker intentionally gates web-browser requests. A genuine
+    // Kids iOS shell supplies this native user agent, so CI must test the same
+    // authorized route rather than falsely classifying its 401 as stale assets.
+    const nativeKidsTestHeaders={
+      "User-Agent":"DarAlTawhidKids-iOS/CI-V4-Audio",
+      "Cache-Control":"no-cache",Pragma:"no-cache"
+    };
+    async function fetchNativeKidsTestText(url){
+      const response=await fetch(url,{cache:"no-store",headers:nativeKidsTestHeaders});
+      return {status:response.status,text:await response.text(),
+        cf:response.headers.get("cf-cache-status")||"n/a"};
+    }
     async function waitKids(label, base, allowProtected = false) {
       for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
         const url = `${base}/kids/version.json?v=${Date.now()}`;
-        const { status, text, cf } = await fetchText(url);
+        const { status, text, cf } = label.startsWith("workers.dev Kids preview")
+          ? await fetchNativeKidsTestText(url) : await fetchText(url);
         let buildId = "";
         try {
           buildId = JSON.parse(text).buildId || "";
@@ -547,7 +560,9 @@ async function fetchVersionBuild(base) {
       const startUrl = `${base}/kids/start?verify=${Date.now()}`;
       const startRes = await fetch(startUrl, {
         cache: "no-store",
-        headers: { "Cache-Control": "no-cache", Pragma: "no-cache" }
+        headers: label.startsWith("workers.dev Kids preview")
+          ? nativeKidsTestHeaders
+          : { "Cache-Control": "no-cache", Pragma: "no-cache" }
       });
       const html = await startRes.text();
       const forbiddenOverlay = [
@@ -614,7 +629,7 @@ async function fetchVersionBuild(base) {
     }
     const auditionPath="/kids/data/quiz-v4-full-rebuild-review.json";
     const auditionResponse=await fetch(audioOrigin+auditionPath+"?delivery-audit="+Date.now(),{
-      cache:"no-store",headers:{"Cache-Control":"no-cache",Pragma:"no-cache"}
+      cache:"no-store",headers:nativeKidsTestHeaders
     });
     if(auditionResponse.status!==200){
       throw new Error("KIDS V4: Test manifest missing on real Worker, HTTP "+auditionResponse.status);
