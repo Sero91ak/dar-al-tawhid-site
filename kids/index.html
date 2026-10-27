@@ -6250,6 +6250,9 @@ function chooseQuizAnswer(index,button){
     quizLocked=true;
     quizCorrectCount++;
     button.classList.add("correct");
+    // An answered question is final: freeze all answer choices and
+    // leave the explanation / Next as the two remaining actions.
+    buttons.forEach(function(answerButton){answerButton.disabled=true});
     quizRewardBurst();
     document.getElementById("quizFeedback").className="quiz-feedback good";
     var praiseBox=document.getElementById("quizFeedback");
