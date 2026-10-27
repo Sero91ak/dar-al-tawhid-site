@@ -14,6 +14,7 @@ function validSource(src){
   return typeof src==="string"&&(src.indexOf("Qurʾān ")===0||src.indexOf("Ṣaḥīḥ ")===0);
 }
 function validClip(clip,ownerRoute){
+  if(!isObject(clip))return false;
   var approved=ownerRoute
     ?clip.humanListeningApproved===false&&clip.approvedForPlayback===false
     :clip.humanListeningApproved===true&&clip.approvedForPlayback===true;
@@ -114,6 +115,9 @@ function play(q,part,opts){
 root.DARKidsQuizV4Approved={
   load:load,play:play,stop:stop,has:function(q,part){return !!get(q,part)},
   state:function(){return state},get:function(q,part){return get(q,part)},
-  isReady:function(){return state==="ready"},version:"v4-id-gated-20261026"
+  isReady:function(){return state==="ready"},
+  isOwnerAuthorized:function(){return !!(manifest&&manifest.ownerReleaseAuthorized===true)},
+  isHumanListeningApproved:function(){return !!(manifest&&manifest.humanListeningApproved===true)},
+  version:"v4-id-owner-authorized-20261027"
 };
 })(window);
