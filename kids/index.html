@@ -5588,7 +5588,7 @@ function refreshQuizPraiseAudioState(){
   var audio=window.DARKidsQuizV4Approved;
   if(!audio||!audio.has(q,"correct"))return;
   var copy=box.querySelector(".quiz-feedback-copy");
-  if(copy)copy.textContent="✓ "+quizV4SpokenText(q,"correct",q.success||quizAcademyPraiseText(q));
+  if(copy)copy.textContent="✓ "+quizV4SpokenText(q,"correct",quizAcademyPraiseText(q));
   if(box.querySelector(".quiz-praise-replay"))return;
   var button=document.createElement("button");
   button.type="button";button.className="quiz-praise-replay";
@@ -6258,7 +6258,7 @@ function chooseQuizAnswer(index,button){
     var praiseBox=document.getElementById("quizFeedback");
     var praiseText=document.createElement("span");
     praiseText.className="quiz-feedback-copy";
-    praiseText.textContent="✓ "+quizV4SpokenText(q,"correct",q.success||quizAcademyPraiseText(q));
+    praiseText.textContent="✓ "+quizV4SpokenText(q,"correct",quizAcademyPraiseText(q));
     praiseBox.replaceChildren(praiseText);
     refreshQuizPraiseAudioState();
     var explanation=document.getElementById("quizExplanation");
@@ -6321,7 +6321,7 @@ function chooseQuizAnswer(index,button){
     recordQuizMistake(q.id);
     button.classList.add("wrong");
     document.getElementById("quizFeedback").className="quiz-feedback bad";
-    document.getElementById("quizFeedback").textContent=quizV4SpokenText(q,"retry",q.retry||quizAcademyRetryText(q));
+    document.getElementById("quizFeedback").textContent=quizV4SpokenText(q,"retry",quizAcademyRetryText(q));
     quizSpeak(quizV4Text(q,"retryAudioText",q.retry),{source:"kids-quiz-retry",quizId:q.id,quizQuestion:q,quizPart:"retry"});
     // Leave encouragement visible while the child thinks; remove only the shake marker.
     setTimeout(function(){
@@ -7142,7 +7142,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1460",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1461",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
