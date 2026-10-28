@@ -13,16 +13,16 @@
 
   var COMPACT_MAX = 599;
   /* v1326: capacity based — no device-name or fixed desktop-only breakpoint. */
-  var EXPANDED_MIN = 840;
-  var EXPANDED_PORTRAIT_MIN = 840;
-  var EXPANDED_MIN_HEIGHT = 560;
+  var EXPANDED_MIN = 760;
+  var EXPANDED_PORTRAIT_MIN = 760;
+  var EXPANDED_MIN_HEIGHT = 540;
   var SIDE_NAV_RESERVE = 76;
   var SIDE_NAV_MIN_WIDTH = 760;
   var SIDE_NAV_MIN_HEIGHT = 360;
-  var RAIL_MIN = 270;
+  var RAIL_MIN = 240;
   var RAIL_MAX = 360;
   var MASTER_GAP = 18;
-  var READER_MIN = 480;
+  var READER_MIN = 440;
   var currentMode = "";
   var rafId = 0;
   var started = false;
@@ -88,8 +88,8 @@
   function computeLayoutCapacity(width, height) {
     var w = Math.max(0, Number(width) || 0);
     var h = Math.max(0, Number(height) || 0);
-    var sideReserve = sideNavEffective(w, h) ? SIDE_NAV_RESERVE : 0;
-    var outer = Math.round(Math.max(24, Math.min(48, w * 0.04)));
+    var sideReserve = w >= 980 && h >= 560 ? 106 : 0;
+    var outer = Math.round(Math.max(24, Math.min(40, w * 0.035)));
     var usable = Math.max(0, w - sideReserve - outer);
     var rail = Math.round(Math.min(RAIL_MAX, Math.max(RAIL_MIN, usable * 0.31)));
     var reader = Math.max(0, usable - rail - MASTER_GAP);
@@ -158,6 +158,8 @@
     var nav = document.getElementById("bottomNav");
     if (!nav) return;
     if (nav.classList.contains("is-tab-loupe")) return;
+    // DĀR Workspace V2 owns original five-tab positioning on expanded iPads/Folds.
+    if (global.DarAdultWorkspaceV2 && global.DarAdultWorkspaceV2.ownsNavigation()) return;
     // DUOS_SINGLE_OWNER_V1381 (Dar Test only).
     // The legacy bottom-bar controller must NEVER recenter a side rail,
     // including during SPA view replacement, orientation races and before
@@ -632,104 +634,136 @@
   }
 })(typeof window !== "undefined" ? window : this);
 
-
-/* DAR_ADULT_FOLD_WIDE_LIVE_V1_20261028 */
-/* The public adult web, WKWebView and Android-PWA share a single primary
-   five-tab node. Keep compact untouched; move that same DOM node into a
-   viewport-level side rail only when a 480px+ reader can coexist with a list. */
+/* DAR_ADULT_WORKSPACE_V2_20261028
+ * One viewport model for adult visitor WKWebView, Safari and Android WebView/PWA.
+ * Keeps original #bottomNav DOM node, real routes, colors and content unchanged.
+ * The fold pane split is rendered by existing DarFold.shell; this controller
+ * owns layout mode, parent for the same nav, keyboard and orientation changes.
+ */
 (function(global){
- "use strict";
- if(global.__DAR_ADULT_FOLD_WIDE_LIVE_V1)return;
- if(/^\/test(?:\/|$)/.test(String(global.location&&global.location.pathname||"")))return;
- // Static CI scripts that isolate the legacy slide-height controller omit
- // documentElement; live browsers always provide it before the scripts load.
- if(!document.documentElement)return;
- global.__DAR_ADULT_FOLD_WIDE_LIVE_V1=true;
- var root=document.documentElement, originalParent=null, originalNext=null;
- var originalStyles=null, observedNav=null, raf=0, sideActive=false;
- var styleKeys=["position","top","bottom","left","right","width","min-width","max-width","height","max-height","min-height","margin","transform","-webkit-transform","flex-direction","justify-content","align-items","gap","z-index","pointer-events"];
- function restore(nav){
-   if(!sideActive)return;
-   nav.classList.remove("dar-adult-fold-tabs");
-   if(originalStyles){
-     styleKeys.forEach(function(k){
-       var v=originalStyles[k];
-       if(v&&v[0])nav.style.setProperty(k,v[0],v[1]);
-       else nav.style.removeProperty(k);
-     });
-   }
-   if(originalParent&&originalParent.isConnected&&nav.parentNode===root){
-     if(originalNext&&originalNext.parentNode===originalParent)originalParent.insertBefore(nav,originalNext);
-     else originalParent.appendChild(nav);
-   }
-   sideActive=false;originalStyles=null;
-   try{global.DarAdaptiveLayout&&global.DarAdaptiveLayout.syncNav&&global.DarAdaptiveLayout.syncNav()}catch(e){}
- }
- function measure(){
-   var w=root.clientWidth||global.innerWidth||0;
-   var h=root.clientHeight||global.innerHeight||0;
-   var input=document.activeElement, vv=global.visualViewport;
-   var keyboard=!!(vv&&vv.height&&h-vv.height>140&&input&&
-     (input.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(input.tagName||"")));
-   var rail=Math.min(360,Math.max(270,(w-32)*.31));
-   var side=w>=1060&&h>=560&&!keyboard;
-   var reader=w-(side?126:0)-32-rail-18;
-   var dual=w>=840&&h>=560&&!keyboard&&reader>=480;
-   return {width:w,height:h,side:side&&dual,dual:dual};
- }
- function setSide(nav,right){
-   if(!sideActive){
-     originalParent=nav.parentNode;originalNext=nav.nextSibling;originalStyles={};
-     styleKeys.forEach(function(k){originalStyles[k]=[nav.style.getPropertyValue(k),nav.style.getPropertyPriority(k)]});
-     sideActive=true;
-   }
-   if(nav.parentNode!==root)root.appendChild(nav);
-   nav.classList.add("dar-adult-fold-tabs");
-   var props={
-     position:"fixed",top:"50%",bottom:"auto",
-     left:right?"auto":"max(12px,env(safe-area-inset-left,0px))",
-     right:right?"max(12px,env(safe-area-inset-right,0px))":"auto",
-     width:"82px","min-width":"82px","max-width":"82px",
-     height:"min(410px,calc(100dvh - 36px))", "min-height":"0","max-height":"410px",
-     margin:"0",transform:"translateY(-50%)","-webkit-transform":"translateY(-50%)",
-     "flex-direction":"column","justify-content":"space-around","align-items":"center",
-     gap:"2px","z-index":"96","pointer-events":"auto"
-   };
-   Object.keys(props).forEach(function(k){
-     if(nav.style.getPropertyValue(k)!==props[k]||nav.style.getPropertyPriority(k)!=="important")
-       nav.style.setProperty(k,props[k],"important");
-   });
- }
- function observe(nav){
-   if(observedNav===nav||typeof MutationObserver!=="function")return;
-   observedNav=nav;
-   var observer=new MutationObserver(function(){if(sideActive)schedule()});
-   observer.observe(nav,{attributes:true,attributeFilter:["style","class"]});
- }
- function sync(){
-   if(!document.body)return;
-   var m=measure(), right=root.dir==="rtl", nav=document.getElementById("bottomNav");
-   root.classList.toggle("dar-adult-fold-dual",m.dual);
-   root.classList.toggle("dar-adult-fold-side",m.side);
-   root.classList.toggle("dar-adult-fold-side-right",m.side&&right);
-   root.classList.toggle("dar-adult-fold-side-left",m.side&&!right);
-   if(!nav)return;
-   if(m.side){
-     setSide(nav,right);observe(nav);
-   }else restore(nav);
- }
- function schedule(){
-   if(raf)return;
-   raf=global.requestAnimationFrame(function(){raf=0;sync()});
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",schedule,{once:true});
- else schedule();
- ["resize","orientationchange","pageshow","hashchange","dar:layoutchange","dar:view-rendered"].forEach(function(e){
-   global.addEventListener(e,schedule,{passive:true});
- });
- if(global.visualViewport)global.visualViewport.addEventListener("resize",schedule,{passive:true});
- document.addEventListener("click",function(e){
-   if(e.target&&e.target.closest&&e.target.closest("#bottomNav .bottom-nav-btn"))schedule();
- },true);
- global.DarAdultFoldWide={measure:measure,sync:sync};
+  "use strict";
+  if(global.DarAdultWorkspaceV2)return;
+  var path=String(global.location&&global.location.pathname||"");
+  if(/^\/test(?:\/|$)/.test(path))return; // isolated DAR TEST navigation lane
+  var doc=global.document||document;
+  if(!doc||!doc.documentElement)return; // support isolated static VM tests
+  var root=doc.documentElement;
+  var originalParent=null, originalNext=null, originalStyles=null;
+  var navNode=null, side=false, pending=0, lastKey="", lastMode="";
+  var props=["position","left","right","top","bottom","width","min-width","max-width",
+    "height","min-height","max-height","margin","padding","transform","-webkit-transform",
+    "flex-direction","justify-content","align-items","gap","z-index","transition","pointer-events"];
+  function size(){
+    var w=Math.max(0,root.clientWidth||global.innerWidth||0);
+    var h=Math.max(0,root.clientHeight||global.innerHeight||0);
+    var vv=global.visualViewport,field=doc.activeElement;
+    var keyboard=!!(vv&&h-vv.height>140&&field&&
+      (field.isContentEditable||/^(INPUT|SELECT|TEXTAREA)$/.test(field.tagName||"")));
+    var cap=global.DarAdaptiveLayout&&global.DarAdaptiveLayout.getLayoutCapacity?
+      global.DarAdaptiveLayout.getLayoutCapacity(w,h):null;
+    var rail=cap&&cap.rail?cap.rail:Math.min(360,Math.max(240,(w-32)*.31));
+    var reserve=w>=980&&h>=560?106:0;
+    var reader=w-reserve-Math.max(24,Math.min(40,w*.035))-rail-18;
+    var dual=!keyboard&&w>=760&&h>=540&&reader>=440&&!!(!cap||cap.dual);
+    var vertical=dual&&w>=980&&h>=560;
+    var mode=vertical?"wide":dual?"dual":"single";
+    var rtl=root.getAttribute("dir")==="rtl"||root.dir==="rtl";
+    return {width:w,height:h,keyboard:keyboard,dual:dual,
+      vertical:vertical,mode:mode,rtl:rtl,rail:Math.round(rail),reader:Math.round(reader)};
+  }
+  function snapshot(nav){
+    originalParent=nav.parentNode;originalNext=nav.nextSibling;
+    originalStyles={};navNode=nav;
+    props.forEach(function(p){
+      originalStyles[p]=[nav.style.getPropertyValue(p),nav.style.getPropertyPriority(p)];
+    });
+  }
+  function restore(nav){
+    if(!side)return;
+    nav.classList.remove("dar-ws2-original-tabs");
+    if(originalStyles)props.forEach(function(p){
+      var v=originalStyles[p];
+      if(v&&v[0])nav.style.setProperty(p,v[0],v[1]);
+      else nav.style.removeProperty(p);
+    });
+    if(originalParent&&originalParent.isConnected&&nav.parentNode===root){
+      if(originalNext&&originalNext.parentNode===originalParent)
+        originalParent.insertBefore(nav,originalNext);
+      else originalParent.appendChild(nav);
+    }
+    side=false;originalStyles=null;navNode=null;
+    try{
+      if(global.DarAdaptiveLayout&&global.DarAdaptiveLayout.syncNav)
+        global.DarAdaptiveLayout.syncNav();
+    }catch(e){}
+  }
+  function moveToSide(nav){
+    if(!side||navNode!==nav){snapshot(nav);side=true;}
+    if(nav.parentNode!==root)root.appendChild(nav); // never clone the 3D tabs
+    nav.classList.remove("is-adaptive-centered");
+    nav.classList.add("dar-ws2-original-tabs");
+    var dirty=nav.style.getPropertyValue("position")!=="fixed"||
+      nav.style.getPropertyValue("transform")!=="translateY(-50%)";
+    if(!dirty)return;
+    var values={
+      position:"fixed",top:"50%",bottom:"auto",left:"auto",right:"auto",
+      width:"76px","min-width":"76px","max-width":"76px",
+      height:"min(404px,calc(100dvh - 36px))","min-height":"0","max-height":"404px",
+      margin:"0",padding:"6px",transform:"translateY(-50%)",
+      "-webkit-transform":"translateY(-50%)","flex-direction":"column",
+      "justify-content":"space-evenly","align-items":"center",gap:"2px",
+      "z-index":"96",transition:"none","pointer-events":"auto"
+    };
+    Object.keys(values).forEach(function(p){
+      nav.style.setProperty(p,values[p],"important");
+    });
+  }
+  function sync(){
+    if(!doc.body)return;
+    var m=size();
+    var nav=doc.getElementById("bottomNav");
+    var newKey=[m.width,m.height,m.mode,m.keyboard,m.rtl].join("|");
+    if(newKey!==lastKey){
+      root.setAttribute("data-dar-workspace",m.mode);
+      root.setAttribute("data-dar-workspace-nav",m.vertical?"side":"bottom");
+      root.setAttribute("data-dar-workspace-dir",m.rtl?"rtl":"ltr");
+      root.style.setProperty("--dar-ws2-list-width",m.rail+"px");
+      root.style.setProperty("--dar-ws2-reader-available",m.reader+"px");
+      lastKey=newKey;
+    }
+    if(m.vertical&&nav)moveToSide(nav);
+    else if(nav)restore(nav);
+    if(lastMode!==m.mode){
+      lastMode=m.mode;
+      // Existing master/detail route component retains selection and scroll.
+      if(global.DarFold&&typeof global.DarFold.sync==="function"){
+        try{global.DarFold.sync()}catch(e){}
+      }
+    }
+  }
+  function schedule(){
+    if(pending)return;
+    pending=global.requestAnimationFrame(function(){pending=0;sync()});
+  }
+  var api={
+    measure:size,
+    sync:sync,
+    ownsNavigation:function(){return side;},
+    getMode:function(){return lastMode||size().mode}
+  };
+  global.DarAdultWorkspaceV2=api;
+  // Compatibility for existing app status/introspection callers.
+  global.DarAdultFoldWide={measure:size,sync:sync};
+  if(doc.readyState==="loading")doc.addEventListener("DOMContentLoaded",schedule,{once:true});
+  else schedule();
+  ["resize","orientationchange","pageshow","hashchange","dar:view-rendered","dar:layoutchange"].forEach(function(k){
+    global.addEventListener(k,schedule,{passive:true});
+  });
+  if(global.visualViewport)
+    global.visualViewport.addEventListener("resize",schedule,{passive:true});
+  // After route navigation, original tab is never copied; retain its handlers.
+  doc.addEventListener("click",function(e){
+    if(e.target&&e.target.closest&&e.target.closest("#bottomNav .bottom-nav-btn"))
+      schedule();
+  },true);
 })(typeof window!=="undefined"?window:this);
