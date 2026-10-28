@@ -1,0 +1,91 @@
+name: Kids Salaf V4 - verify all 33 original masters (zero credits)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/kids-salaf-v4-33-master-technical-audit.yml"
+      - "kids/tools/release-salaf-v4-reviewed.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-salaf-v4-33-technical-audit
+  cancel-in-progress: false
+
+jobs:
+  check-all-originals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout latest canonical public Kids text and guarded release packer
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Import only immutable original pilot audio from earlier approved production
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin a998db41617dfeab8bd54153b3591a01a5d2da4d
+          git restore --source=FETCH_HEAD -- kids/review-only/salaf-v4-20261027/
+          test -s kids/review-only/salaf-v4-20261027/manifest.json
+
+      - name: Import eight batches from the single finished V4 production
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin refs/heads/audio/salaf-v4-complete-review-20261028
+          git restore --source=FETCH_HEAD -- kids/review-only/salaf-v4-complete-20261028/
+          for n in 01 02 03 04 05 06 07 08; do
+            test -s "kids/review-only/salaf-v4-complete-20261028/salaf-v4-pending-${n}/manifest.json" ||
+              { echo "::error::Staging batch ${n} missing"; exit 1; }
+          done
+
+      - name: Zero-credit 33-master technical audit with canonical text and exact audio SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          before="$(sha256sum kids/data/salaf-library-v1.json | awk '{print $1}')"
+          python3 kids/tools/release-salaf-v4-reviewed.py --audit
+          node scripts/kids-master-text-standard-v2-check.js
+          after="$(sha256sum kids/data/salaf-library-v1.json | awk '{print $1}')"
+          test "$before" = "$after" || { echo "::error::Audit modified public stories"; exit 1; }
+          test ! -d kids/audio/salaf || { echo "::error::Audit unexpectedly created live audio"; exit 1; }
+          echo "Verified original audios, exact SHA and paragraphs; no generation, no live publication." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Produce audit record linking all 33 unchanged original files
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,hashlib,pathlib
+          root=pathlib.Path('.')
+          entries={}
+          pilot=root/'kids/review-only/salaf-v4-20261027/manifest.json'
+          manifests=[pilot]+sorted((root/'kids/review-only/salaf-v4-complete-20261028').glob('salaf-v4-pending-*/manifest.json'))
+          assert len(manifests)==9
+          for p in manifests:
+              m=json.loads(p.read_text(encoding='utf-8'))
+              assert m['publicRelease'] is False and m['mode']=='staging-review-only'
+              for sid,e in m['entries'].items():
+                  assert sid not in entries
+                  audio=root/e['audioFile']
+                  assert audio.is_file()
+                  digest=hashlib.sha256(audio.read_bytes()).hexdigest()
+                  assert digest==e['audioSha256']
+                  entries[sid]={'audioSha256':digest,'textSha256':e['textSha256'],'durationSec':e['durationSec'],'paragraphCount':len(e['timings']),'reviewOnly':True}
+          assert len(entries)==33
+          out={'collection':'Schätze der Salaf','status':'technical-only-human-hearing-not-yet-approved','count':len(entries),'entries':entries}
+          pathlib.Path('salaf-v4-33-technical-audit.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('PASS 33/33 - technical metadata only, NOT a human QA approval or public deployment')
+          PY
+      - name: Store exact technical evidence without customer audio or TTS charges
+        uses: actions/upload-artifact@v4
+        with:
+          name: salaf-v4-33-technical-audit
+          path: salaf-v4-33-technical-audit.json
+          retention-days: 60
