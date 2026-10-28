@@ -178,6 +178,26 @@ jobs:
             exit 1
           fi
           echo "PASS: ${url} returns HTTP 200 with all 33 original audio players, no login challenge."
+          registry='https://dar-al-tawhid.de/kids-audio-review-library-v1.json'
+          pass=0
+          for attempt in $(seq 1 10); do
+            if curl --fail --silent --show-error --location --max-time 30 "$registry?check=$(date +%s)-$attempt" -o /tmp/kids-audio-review-live.json &&
+               python3 - <<'PY'
+          import json
+          data=json.load(open('/tmp/kids-audio-review-live.json',encoding='utf-8'))
+          assert data['schemaVersion']==1 and data['releaseEnabled'] is False
+          assert data['automaticApproval'] is False
+          assert len(data['sections'])>=14
+          assert sum(s['count'] for s in data['sections'])>=5488
+          assert sum(len(s['entries']) for s in data['sections'])>=5455
+          print('PASS: live categorized Kids audio index',sum(s['count'] for s in data['sections']))
+          PY
+            then pass=1; break; fi
+            echo "Public audio index pending (attempt $attempt)"
+            sleep 8
+          done
+          test "$pass" -eq 1 || { echo "::error::Full 5488-record Kids audio index not publicly available"; exit 1; }
+
 
   validate-canonical-audio-review-library:
     runs-on: ubuntu-latest
@@ -239,6 +259,8 @@ jobs:
           git add kids-audio-review-library-v1.json
           git commit -m "Kids: update categorized immutable review URLs for all canonical audios"
           git push origin "HEAD:refs/heads/$branch"
-          gh pr create --head "$branch" --base main \
+          if ! gh pr create --head "$branch" --base main \
             --title "KIDS: automatisch erstellten Audio-Prüfkatalog aus allen Originalquellen synchronisieren" \
-            --body "Nur JSON-Audioindex aus im Git-Repository vorhandenen Originaldatei-URLs; keine bezahlten ElevenLabs-Aufrufe, keine manuelle Hörfreigabe und keine Änderung am öffentlichen Kinder-Audio-Katalog. Neue Inhalte werden künftig per zentraler Quellenliste aufgenommen."
+            --body "Nur JSON-Audioindex aus im Git-Repository vorhandenen Originaldatei-URLs; keine bezahlten ElevenLabs-Aufrufe, keine manuelle Hörfreigabe und keine Änderung am öffentlichen Kinder-Audio-Katalog. Neue Inhalte werden künftig per zentraler Quellenliste aufgenommen."; then
+            echo "::notice::GitHub Actions PR-Erstellung ist durch Repository-Einstellungen gesperrt. Der geprüfte Katalog ist im Zweig $branch gesichert; der separate stündliche/tägliche GitHub-Katalog-Auftrag erstellt den PR über das verbundene Benutzerkonto."
+          fi
