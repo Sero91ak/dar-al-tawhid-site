@@ -5,6 +5,12 @@ on:
     branches: [main]
     paths:
       - "kids/audio-jobs/salaf-v4-complete-request-20261028.json"
+  pull_request:
+    paths:
+      - "kids/tools/build-salaf-v4-complete-staging.py"
+      - "kids/tools/build-salaf-v4-master-staging.py"
+      - "kids/audio-jobs/salaf-v4-complete-request-20261028.json"
+      - ".github/workflows/kids-salaf-v4-complete-master-review-20261028.yml"
   workflow_dispatch:
 
 permissions:
@@ -15,7 +21,19 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  zero-credit-pr-preflight:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout proposed code without provider secrets
+        uses: actions/checkout@v4
+      - name: Verify 29 canonical texts, exact 8 batches, language, voice and authorization for ZERO credits
+        run: |
+          set -euo pipefail
+          python3 kids/tools/build-salaf-v4-complete-staging.py --all-preflight
+
   stage-remaining-masters:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 115
     env:
