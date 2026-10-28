@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-salaf-33-public-audio-audition-link-fix-20261028",
+      "at": "2026-10-28T12:15:00+01:00",
+      "approvedBy": "user-explicit-20261028-salaf-original-audio-link-not-working-fix-and-live-audition",
+      "reason": "User explicitly reports the Salaf listening link does not work and requests playable original clips. Allow only the already merged isolated QA/listener test workflow that validates 33 audio URLs and immutable SHA. Do not unlock Kids public audio release, prayer, push, secrets, adult app or any other workflows.",
+      "paths": [
+        ".github/workflows/kids-salaf-v4-listener-link-check.yml"
+      ],
+      "expiresAt": "2026-11-02T23:59:59.000Z"
+    },
+    {
       "id": "dar-test-duo-responsive-layout-20261025",
       "at": "2026-10-25T18:22:00+01:00",
       "approvedBy": "user-explicit-20261025-adapt-full-adult-test-webapp-to-iphone-duo",
