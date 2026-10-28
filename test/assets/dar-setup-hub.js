@@ -1183,7 +1183,7 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
     // A recent coordinate fix MUST NOT suppress a missing-city retry.
     if(meters<700&&age<30*60000&&!missingName&&s.locationMode==="auto")return;
     var precision=acc<=2500?"precise":"approximate";
-    var shouldWrite=!hasOld||meters>=700||s.locationMode!=="auto"||s.locationGranted!==true||s.locationPrecision!==precision;
+    var shouldWrite=!hasOld||meters>=700||age>=30*60000||s.locationMode!=="auto"||s.locationGranted!==true||s.locationPrecision!==precision;
     if(shouldWrite&&Date.now()-lastApplied>=10000){
       lastApplied=Date.now();
       var city=meters<1500&&!missingName?s.city:cachedCity(lat,lon)||"GPS erkannt · Ortsname wird gesucht";
@@ -1227,10 +1227,44 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
     try{return window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.darNative;}
     catch(e){return null;}
   }
+  // Safari/PWA: recheck a previously accepted location whenever the page resumes.
+  // Do not prompt automatically for a new permission or override a manual city.
+  var browserGeoBusy=false, lastBrowserGeoAt=0;
+  function refreshBrowserLocation(){
+    if(document.hidden||!navigator.geolocation||browserGeoBusy)return;
+    var s=current();
+    if(s.locationMode==="manual"||nativeHandler()||Date.now()-lastBrowserGeoAt<12000)return;
+    function acquire(){
+      if(browserGeoBusy||document.hidden||current().locationMode==="manual")return;
+      browserGeoBusy=true;
+      lastBrowserGeoAt=Date.now();
+      try{
+        navigator.geolocation.getCurrentPosition(function(pos){
+          browserGeoBusy=false;
+          if(current().locationMode==="manual")return;
+          var c=pos&&pos.coords||{};
+          void updatePosition({lat:c.latitude,lng:c.longitude,acc:c.accuracy,
+            timestamp:Number(pos.timestamp)||Date.now()});
+        },function(){browserGeoBusy=false;},
+        {enableHighAccuracy:false,timeout:12000,maximumAge:60000});
+      }catch(e){browserGeoBusy=false;}
+    }
+    // A user who already enabled automatic GPS has explicitly chosen this mode.
+    if(s.locationMode==="auto"&&s.locationGranted===true){acquire();return;}
+    // Permission state may be unsupported (e.g. Safari): never show a new prompt
+    // just because a visitor opened the home page.
+    try{
+      if(navigator.permissions&&typeof navigator.permissions.query==="function"){
+        navigator.permissions.query({name:"geolocation"}).then(function(permission){
+          if(permission&&permission.state==="granted")acquire();
+        }).catch(function(){});
+      }
+    }catch(e){}
+  }
   function requestFresh(){
     var s=current(),handler=nativeHandler();
-    // First launch may not yet have locationMode=auto; request native fix anyway.
-    if(!handler||s.locationMode==="manual")return;
+    if(s.locationMode==="manual")return;
+    if(!handler){refreshBrowserLocation();return;}
     try{handler.postMessage({type:"location-resume"});}catch(e){}
   }
   window.addEventListener("dar-native-location",function(ev){void updatePosition(ev.detail);});

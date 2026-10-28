@@ -9,6 +9,7 @@ final class DarAppDelegate: NSObject, UIApplicationDelegate {
     ) -> Bool {
         DarInAppOpenGuard.install()
         DarPushNotifications.bootstrap(launchOptions: launchOptions)
+        DarNativePermissions.shared.restoreLocationMonitoringAtLaunch()
         if let shortcut = launchOptions?[.shortcutItem] as? UIApplicationShortcutItem,
            let destination = shortcutDestination(for: shortcut.type) {
             DarQuickActions.set(destination)
