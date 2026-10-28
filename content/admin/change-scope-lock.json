@@ -158,9 +158,10 @@
       "id": "kids-salaf-33-public-audio-audition-link-fix-20261028",
       "at": "2026-10-28T12:15:00+01:00",
       "approvedBy": "user-explicit-20261028-salaf-original-audio-link-not-working-fix-and-live-audition",
-      "reason": "User explicitly reports the Salaf listening link does not work and requests playable original clips. Allow only the already merged isolated QA/listener test workflow that validates 33 audio URLs and immutable SHA. Do not unlock Kids public audio release, prayer, push, secrets, adult app or any other workflows.",
+      "reason": "User explicitly reports the Salaf listening link does not work and requests playable original clips. Allow only the already merged isolated QA/listener test workflow that validates 33 audio URLs and immutable SHA. Do not unlock Kids public audio release, prayer, push, secrets, adult app or any other workflows. User explicitly authorized Richtig/Falsch audio-library expansion from all existing and future Kids source manifests; narrowly allow catalog generator only.",
       "paths": [
-        ".github/workflows/kids-salaf-v4-listener-link-check.yml"
+        ".github/workflows/kids-salaf-v4-listener-link-check.yml",
+        "scripts/build-kids-audio-review-library.cjs"
       ],
       "expiresAt": "2026-11-02T23:59:59.000Z"
     },
