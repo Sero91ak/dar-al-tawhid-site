@@ -1,0 +1,133 @@
+name: Kids Salaf V4 Complete 29 Masters - review-only
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "kids/audio-jobs/salaf-v4-complete-request-20261028.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-salaf-v4-29-master-review-only
+  cancel-in-progress: false
+
+jobs:
+  stage-remaining-masters:
+    runs-on: ubuntu-latest
+    timeout-minutes: 115
+    env:
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+      STAGE_BRANCH: audio/salaf-v4-complete-review-20261028
+    steps:
+      - name: Checkout committed exact authorization and original masters
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 2
+
+      - name: Install ffmpeg tools before any paid generation
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          command -v ffmpeg
+          command -v ffprobe
+
+      - name: Audit all 29 original masters, 8 bounded batches and provider secret without spending
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$ADMIN_PUBLISH_SECRET" || { echo "::error::Missing secret, no paid requests"; exit 1; }
+          python3 kids/tools/build-salaf-v4-complete-staging.py --all-preflight
+
+      - name: Prepare durable review branch isolated from public Kids
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main --depth=2
+          if git ls-remote --exit-code --heads origin "$STAGE_BRANCH" >/dev/null; then
+            git fetch origin "$STAGE_BRANCH"
+            git switch -c "$STAGE_BRANCH" "origin/$STAGE_BRANCH"
+            git merge --no-edit origin/main
+          else
+            git switch -c "$STAGE_BRANCH"
+          fi
+
+      - name: Synthesize 29 authorized masters sequentially - max 4 per invocation - checkpoint after each batch
+        shell: bash
+        run: |
+          set -euo pipefail
+          for index in 01 02 03 04 05 06 07 08; do
+            batch="salaf-v4-pending-$index"
+            echo "::group::Original V4 master batch $batch"
+            python3 kids/tools/build-salaf-v4-complete-staging.py --preflight "$batch"
+            set +e
+            python3 kids/tools/build-salaf-v4-complete-staging.py --batch "$batch"
+            code=$?
+            set -e
+            # Persist EVERY successfully billed file and any failure marker before deciding to stop.
+            git add kids/review-only/salaf-v4-complete-20261028/
+            if ! git diff --cached --quiet; then
+              git commit -m "Kids Salaf: checkpoint $batch for human listening - NOT LIVE"
+            fi
+            git push origin HEAD:"$STAGE_BRANCH"
+            if [ "$code" -ne 0 ]; then
+              echo "::error::$batch failed or billing uncertain. Stopped without retries; inspect provider billing and review branch."
+              exit "$code"
+            fi
+            echo "CHECKPOINT OK: $batch is stored, next bounded batch may begin."
+            echo "::endgroup::"
+          done
+
+      - name: Verify 29 saved masters and SHA fingerprints without synthesizing
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root=Path(".")
+          req=json.loads(Path("kids/audio-jobs/salaf-v4-complete-request-20261028.json").read_text())
+          expected=set(req["storyIds"])
+          seen=set()
+          for batch in req["batchIds"]:
+              folder=root/"kids/review-only/salaf-v4-complete-20261028"/batch
+              man=json.loads((folder/"manifest.json").read_text())
+              assert man["publicRelease"] is False and man["mode"]=="staging-review-only"
+              for sid, row in man["entries"].items():
+                  assert sid in expected and sid not in seen
+                  seen.add(sid)
+                  asset=root/row["audioFile"]
+                  assert asset.is_file() and hashlib.sha256(asset.read_bytes()).hexdigest()==row["audioSha256"]
+                  assert row["humanListeningApproved"] is False
+                  assert row["approvedForPlayback"] is False
+                  assert row["releaseEnabled"] is False
+                  assert row["timingStatus"]=="character-alignment-exact"
+                  assert row["timings"]
+                  assert row["modelId"]=="eleven_v4"
+                  assert row["languageCode"]=="de" and row["globalArabicDictionaryApplied"] is False
+          assert seen==expected and len(seen)==29
+          print("PASS: 29 unique verified SHA masters, exact timings; public release blocked")
+          PY
+
+      - name: Preserve audit artifacts for human review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-salaf-v4-29-review-only
+          path: kids/review-only/salaf-v4-complete-20261028/
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - name: Confirm strict public Kids release isolation
+        if: success()
+        run: |
+          echo "29 additional masters staged in an isolated branch only."
+          echo "No Kids catalog audioMaster updated, no changes to child-facing story player."
+          echo "Real documented human listening, iPhone/iPad playback and text parity required before promotion."
