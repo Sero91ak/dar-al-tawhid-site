@@ -1,9 +1,26 @@
-name: Kids Salaf 33 original audio listening link - validate
+name: Kids audio QA library - validate and maintain all future source manifests
 
 on:
   pull_request:
     paths:
       - "salaf-v4-33-hoeren-20261028.html"
+      - "kids/data/audio-review-sources-v1.json"
+      - "scripts/build-kids-audio-review-library.cjs"
+      - "kids/data/quiz-v4-full-rebuild-public.json"
+      - "kids/data/quiz-audio.json"
+      - "kids/data/dua-audio.json"
+      - "kids/data/dua-arabic-audio.json"
+      - "kids/data/dua-arabic-slow-audio.json"
+      - "kids/data/dua-word-audio.json"
+      - "kids/data/prophet-stories.json"
+      - "kids/data/sahabiyyat-stories.json"
+      - "kids/data/mubashshirun-stories.json"
+      - "kids/data/alphabet-audio.json"
+      - "kids/data/term-learning-audio.json"
+      - "kids/data/academy-audio.json"
+      - "kids/data/owner-voice-audio.json"
+      - "kids/data/audio-review-sources-v1.json"
+      - "scripts/build-kids-audio-review-library.cjs"
       - ".github/workflows/cloudflare-pages-deploy.yml"
       - ".github/workflows/kids-salaf-v4-listener-link-check.yml"
       - "kids/tools/test-salaf-v4-33-remote-audio.py"
@@ -15,7 +32,8 @@ on:
       - "kids/tools/test-salaf-v4-33-remote-audio.py"
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 
 jobs:
   independent-33-listener-syntax-data-audit:
@@ -30,6 +48,11 @@ jobs:
           const fs=require('node:fs'),crypto=require('node:crypto'),assert=require('node:assert/strict');
           const html=fs.readFileSync('salaf-v4-33-hoeren-20261028.html','utf8');
           assert.match(html,/<meta name="robots" content="noindex,nofollow,noarchive">/);
+          assert.match(html,/id="right"/);
+          assert.match(html,/id="wrong"/);
+          assert.match(html,/kids-audio-review-library-v1\.json/);
+          assert.doesNotMatch(html,/id="checklist"/);
+          assert.match(html,/localStorage/);
           assert.match(html,/id="audio" controls/);
           assert.match(html,/id="audio-direct"/);
           assert.doesNotMatch(html,/fetch\("\/kids\/data\/salaf-library-v1\.json/);
@@ -140,8 +163,8 @@ jobs:
             cb="$(date +%s)-${attempt}"
             code="$(curl -sS -L --max-time 28 -A "$agent" -D /tmp/salaf-headers.txt -o /tmp/salaf-page.html -w '%{http_code}' "${url}?verify=${cb}" || true)"
             if [ "$code" = "200" ] &&
-               grep -Fq 'TAWḤĪD KIDS · 33 Salaf-Hörproben direkt anhören' /tmp/salaf-page.html &&
-               grep -Fq '33 Hörproben direkt verfügbar' /tmp/salaf-page.html &&
+               grep -Fq 'TAWḤĪD KIDS · Audiobibliothek · Hörprüfung' /tmp/salaf-page.html &&
+               grep -Fq 'Alle Audios hören und freigeben' /tmp/salaf-page.html &&
                grep -Fq 'const SNAPSHOT=' /tmp/salaf-page.html &&
                ! grep -qi 'www-authenticate:' /tmp/salaf-headers.txt; then
               success=1
@@ -155,3 +178,67 @@ jobs:
             exit 1
           fi
           echo "PASS: ${url} returns HTTP 200 with all 33 original audio players, no login challenge."
+
+  validate-canonical-audio-review-library:
+    runs-on: ubuntu-latest
+    needs: independent-33-listener-syntax-data-audit
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate full categorized audio manifest without synthesizing or publishing
+        run: |
+          set -euo pipefail
+          node --check scripts/build-kids-audio-review-library.cjs
+          node scripts/build-kids-audio-review-library.cjs
+          node - <<'NODE'
+          const fs=require("fs"),assert=require("node:assert/strict");
+          const d=JSON.parse(fs.readFileSync("kids-audio-review-library-v1.json","utf8"));
+          assert.equal(d.schemaVersion,1);
+          assert.equal(d.automaticApproval,false);
+          assert.equal(d.releaseEnabled,false);
+          assert(d.sections.length>=13);
+          const vals=d.sections.filter(s=>s.id!=="salaf").flatMap(s=>s.entries);
+          assert(vals.length>1600,"The original quiz and Dua inventory must be present");
+          const keys=new Set(vals.map(v=>v.url.split("?")[0]));
+          assert.equal(keys.size,vals.length,"Identical assets cannot be reviewed twice");
+          assert(vals.every(v=>v.url.startsWith("/kids/assets/")));
+          assert(vals.every(v=>v.originalApproval===false||v.humanListeningApproved===true));
+          console.log("PASS: categorized existing audio manifest",d.sections.length,vals.length);
+          NODE
+      - name: Keep one exact repeatable file as build evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-audio-review-library-v1
+          path: kids-audio-review-library-v1.json
+          retention-days: 30
+
+  propose-updated-audio-registry:
+    if: github.event_name == 'push'
+    needs: validate-canonical-audio-review-library
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 2
+      - name: Prepare snapshot of all existing and future registered Kids originals
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          node scripts/build-kids-audio-review-library.cjs
+          if git diff --exit-code -- kids-audio-review-library-v1.json && git ls-files --error-unmatch kids-audio-review-library-v1.json >/dev/null 2>&1; then
+            echo "Registry already current. No duplicate PR."
+            exit 0
+          fi
+          branch="bot/kids-audio-review-library-$RUN_ID"
+          git switch -c "$branch"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids-audio-review-library-v1.json
+          git commit -m "Kids: update categorized immutable review URLs for all canonical audios"
+          git push origin "HEAD:refs/heads/$branch"
+          gh pr create --head "$branch" --base main \
+            --title "KIDS: automatisch erstellten Audio-Prüfkatalog aus allen Originalquellen synchronisieren" \
+            --body "Nur JSON-Audioindex aus im Git-Repository vorhandenen Originaldatei-URLs; keine bezahlten ElevenLabs-Aufrufe, keine manuelle Hörfreigabe und keine Änderung am öffentlichen Kinder-Audio-Katalog. Neue Inhalte werden künftig per zentraler Quellenliste aufgenommen."
