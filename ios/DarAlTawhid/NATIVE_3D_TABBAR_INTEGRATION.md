@@ -97,3 +97,5 @@ Ersatz für eine native Leiste, kein blau getöntes Icon und keine Verdopplung.
 Bilder. Menüposition, Tastaturüberlagerung, Auswahlzustand bei internen
 Web-Seitenwechseln, Langdruck-Schnellfunktionen, Accessibility, Dynamic Type und
 altinstallierte iOS-Versionen mit Webnavigation separat prüfen.
+
+Die Kinder-App besitzt für ihre separate native Migration einen **eigenen Draft-PR #1489** mit unveränderten Kinder-3D-PNGs und exakt fünf Kinder-Tabs **Heute · Hören · Lernen · Duʿāʾ · Eltern**. Keine Kinder-Swift-/Webdatei in diesem Erwachsenen-PR ändern; beide App-Tracks getrennt abnehmen.
