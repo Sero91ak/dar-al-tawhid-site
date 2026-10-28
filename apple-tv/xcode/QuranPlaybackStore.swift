@@ -288,6 +288,10 @@ final class QuranPlaybackStore: ObservableObject {
             currentIndex = entry.index
             persistReadingPosition()
         }
+        // Discard item IDs already consumed, preventing unbounded memory growth
+        // during 6,236-ayah playback and the perpetual Mushaf loop.
+        let liveItemIDs = Set(player.items().map { ObjectIdentifier($0) })
+        queuedVerses = queuedVerses.filter { liveItemIDs.contains($0.key) }
         // Refill behind the playing item so the next ayah is ready ahead of time.
         fillQueue()
     }
