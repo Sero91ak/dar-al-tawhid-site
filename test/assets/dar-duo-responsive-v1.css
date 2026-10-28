@@ -300,6 +300,12 @@ html[data-dar-duo-axis="landscape"] body.dar-duo-side-active #appView{
    International adaptive layout: Android window-size classes + Apple available
    window capacity. Last test-only layout authority. No effect on visitor or Kids.
    One PRIMARY navigation owner (fold-thumb-nav.js); these are CONTENT panes. */
+html[data-dar-duo-layout="dual"] {
+  --dar-test-split-footer-clearance:190px; /* Bottom floating five-tab dock. */
+}
+html[data-dar-duo-layout="dual"].dar-test-side-nav {
+  --dar-test-split-footer-clearance:135px; /* Vertical side navigation frees the bottom. */
+}
 html[data-dar-duo-layout="dual"] body #appView.view .dar-fold[data-fold-mode="dual"],
 html[data-dar-duo-layout="dual"] body #appView.view .prophets-layout--dual {
   display:grid!important;
@@ -326,7 +332,7 @@ html[data-dar-duo-layout="dual"] body #appView.view .prophets-layout--dual > .pr
   inline-size:100%!important;
   max-inline-size:100%!important;
   min-inline-size:0!important;
-  block-size:min(78dvh,calc(100dvh - 132px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)))!important;
+  block-size:min(78dvh,calc(100dvh - var(--dar-test-split-footer-clearance) - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)))!important;
   max-block-size:none!important;
   overflow-y:auto!important;
   overflow-x:clip!important;
