@@ -20,7 +20,7 @@ final class DarAppRouter: ObservableObject {
         switch id {
         case "home": openShortcut(.home)
         case "quiz": openShortcut(.hash("quiz"))
-        case "feed": openShortcut(.hash("feed"))
+        case "recent": openShortcut(.hash("recent"))
         case "quran": openShortcut(.quran)
         case "more": openShortcut(.more)
         default: return
@@ -35,7 +35,7 @@ final class DarAppRouter: ObservableObject {
         case "search": openShortcut(.search)
         case "duas": openShortcut(.duas)
         case "quiz": openShortcut(.hash("quiz"))
-        case "feed": openShortcut(.hash("feed"))
+        case "recent": openShortcut(.hash("recent"))
         case "quran": openShortcut(.quran)
         default: return
         }

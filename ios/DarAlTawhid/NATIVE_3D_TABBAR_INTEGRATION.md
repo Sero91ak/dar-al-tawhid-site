@@ -4,11 +4,12 @@
 
 - `Assets.xcassets/DarNav3D*.imageset`: fünf unveränderte Original-PNG-Dateien
   aus der vorhandenen Besucher-App (`home`, `quiz`, `posts`, `quran`, `more`).
+- Verbindliche sichtbare Reihenfolge: **Start · Quiz · Beiträge · Koran · Mehr**. Die dritte SPA-Route ist `#recent` (nicht die veraltete Feed-Routenkennung); das Originalbild ist `posts.png` im Asset `DarNav3DPosts`.
 - `DarNativeTabBar.swift`: echte `UITabBar` statt SF-Symbol-Buttons.
   28pt, `UIImage.RenderingMode.alwaysOriginal`, VoiceOver-Beschriftungen,
   separate `selectedImage` und SF-Symbol-Fallback.
 - Kontextmenüs über `UIContextMenuInteraction` für das Gedrückthalten.
-  Zunächst: Gebetszeiten, Qibla, Suche, Quiz, Feed, Duʿāʾ und Qurʾān.
+  Zunächst: Gebetszeiten, Qibla, Suche, Quiz, Beiträge, Duʿāʾ und Koran.
   **Vollständige Parität mit allen bisherigen Web-Schnellaktionen ist
   noch anhand der Web-Menüs und Interaktionen zu prüfen.**
 - Die Datei ist nun ausdrücklich in `DarAlTawhid.xcodeproj` als App-Source

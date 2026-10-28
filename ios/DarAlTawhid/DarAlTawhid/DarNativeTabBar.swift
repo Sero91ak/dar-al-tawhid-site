@@ -18,8 +18,8 @@ final class DarNativeTabBar: UIView, UITabBarDelegate, UIContextMenuInteractionD
     private let sections: [Item] = [
         Item(id: "home", title: "Start", asset: "DarNav3DHome", fallbackSymbol: "house.fill"),
         Item(id: "quiz", title: "Quiz", asset: "DarNav3DQuiz", fallbackSymbol: "brain"),
-        Item(id: "feed", title: "Feed", asset: "DarNav3DFeed", fallbackSymbol: "sparkles"),
-        Item(id: "quran", title: "Qurʾān", asset: "DarNav3DQuran", fallbackSymbol: "book.fill"),
+        Item(id: "recent", title: "Beiträge", asset: "DarNav3DPosts", fallbackSymbol: "text.book.closed"),
+        Item(id: "quran", title: "Koran", asset: "DarNav3DQuran", fallbackSymbol: "book.fill"),
         Item(id: "more", title: "Mehr", asset: "DarNav3DMore", fallbackSymbol: "line.3.horizontal")
     ]
 
@@ -120,14 +120,14 @@ final class DarNativeTabBar: UIView, UITabBarDelegate, UIContextMenuInteractionD
                 ("Quiz öffnen", "brain", "quiz"),
                 ("Duʿāʾ öffnen", "hands.sparkles", "duas")
             ]
-        case "feed":
+        case "recent":
             return [
-                ("Feed öffnen", "rectangle.stack", "feed"),
+                ("Beiträge öffnen", "text.book.closed", "recent"),
                 ("Suche", "magnifyingglass", "search")
             ]
         case "quran":
             return [
-                ("Qurʾān öffnen", "book", "quran"),
+                ("Koran öffnen", "book", "quran"),
                 ("Duʿāʾ öffnen", "hands.sparkles", "duas")
             ]
         case "more":
