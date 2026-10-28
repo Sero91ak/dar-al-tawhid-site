@@ -13,16 +13,16 @@
 
   var COMPACT_MAX = 599;
   /* v1326: capacity based — no device-name or fixed desktop-only breakpoint. */
-  var EXPANDED_MIN = 900;
-  var EXPANDED_PORTRAIT_MIN = 900;
+  var EXPANDED_MIN = 840;
+  var EXPANDED_PORTRAIT_MIN = 840;
   var EXPANDED_MIN_HEIGHT = 560;
   var SIDE_NAV_RESERVE = 76;
   var SIDE_NAV_MIN_WIDTH = 760;
   var SIDE_NAV_MIN_HEIGHT = 360;
-  var RAIL_MIN = 300;
+  var RAIL_MIN = 270;
   var RAIL_MAX = 360;
   var MASTER_GAP = 18;
-  var READER_MIN = 500;
+  var READER_MIN = 480;
   var currentMode = "";
   var rafId = 0;
   var started = false;
@@ -631,3 +631,105 @@
     start();
   }
 })(typeof window !== "undefined" ? window : this);
+
+
+/* DAR_ADULT_FOLD_WIDE_LIVE_V1_20261028 */
+/* The public adult web, WKWebView and Android-PWA share a single primary
+   five-tab node. Keep compact untouched; move that same DOM node into a
+   viewport-level side rail only when a 480px+ reader can coexist with a list. */
+(function(global){
+ "use strict";
+ if(global.__DAR_ADULT_FOLD_WIDE_LIVE_V1)return;
+ if(/^\/test(?:\/|$)/.test(String(global.location&&global.location.pathname||"")))return;
+ // Static CI scripts that isolate the legacy slide-height controller omit
+ // documentElement; live browsers always provide it before the scripts load.
+ if(!document.documentElement)return;
+ global.__DAR_ADULT_FOLD_WIDE_LIVE_V1=true;
+ var root=document.documentElement, originalParent=null, originalNext=null;
+ var originalStyles=null, observedNav=null, raf=0, sideActive=false;
+ var styleKeys=["position","top","bottom","left","right","width","min-width","max-width","height","max-height","min-height","margin","transform","-webkit-transform","flex-direction","justify-content","align-items","gap","z-index","pointer-events"];
+ function restore(nav){
+   if(!sideActive)return;
+   nav.classList.remove("dar-adult-fold-tabs");
+   if(originalStyles){
+     styleKeys.forEach(function(k){
+       var v=originalStyles[k];
+       if(v&&v[0])nav.style.setProperty(k,v[0],v[1]);
+       else nav.style.removeProperty(k);
+     });
+   }
+   if(originalParent&&originalParent.isConnected&&nav.parentNode===root){
+     if(originalNext&&originalNext.parentNode===originalParent)originalParent.insertBefore(nav,originalNext);
+     else originalParent.appendChild(nav);
+   }
+   sideActive=false;originalStyles=null;
+   try{global.DarAdaptiveLayout&&global.DarAdaptiveLayout.syncNav&&global.DarAdaptiveLayout.syncNav()}catch(e){}
+ }
+ function measure(){
+   var w=root.clientWidth||global.innerWidth||0;
+   var h=root.clientHeight||global.innerHeight||0;
+   var input=document.activeElement, vv=global.visualViewport;
+   var keyboard=!!(vv&&vv.height&&h-vv.height>140&&input&&
+     (input.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(input.tagName||"")));
+   var rail=Math.min(360,Math.max(270,(w-32)*.31));
+   var side=w>=1060&&h>=560&&!keyboard;
+   var reader=w-(side?126:0)-32-rail-18;
+   var dual=w>=840&&h>=560&&!keyboard&&reader>=480;
+   return {width:w,height:h,side:side&&dual,dual:dual};
+ }
+ function setSide(nav,right){
+   if(!sideActive){
+     originalParent=nav.parentNode;originalNext=nav.nextSibling;originalStyles={};
+     styleKeys.forEach(function(k){originalStyles[k]=[nav.style.getPropertyValue(k),nav.style.getPropertyPriority(k)]});
+     sideActive=true;
+   }
+   if(nav.parentNode!==root)root.appendChild(nav);
+   nav.classList.add("dar-adult-fold-tabs");
+   var props={
+     position:"fixed",top:"50%",bottom:"auto",
+     left:right?"auto":"max(12px,env(safe-area-inset-left,0px))",
+     right:right?"max(12px,env(safe-area-inset-right,0px))":"auto",
+     width:"82px","min-width":"82px","max-width":"82px",
+     height:"min(410px,calc(100dvh - 36px))", "min-height":"0","max-height":"410px",
+     margin:"0",transform:"translateY(-50%)","-webkit-transform":"translateY(-50%)",
+     "flex-direction":"column","justify-content":"space-around","align-items":"center",
+     gap:"2px","z-index":"96","pointer-events":"auto"
+   };
+   Object.keys(props).forEach(function(k){
+     if(nav.style.getPropertyValue(k)!==props[k]||nav.style.getPropertyPriority(k)!=="important")
+       nav.style.setProperty(k,props[k],"important");
+   });
+ }
+ function observe(nav){
+   if(observedNav===nav||typeof MutationObserver!=="function")return;
+   observedNav=nav;
+   var observer=new MutationObserver(function(){if(sideActive)schedule()});
+   observer.observe(nav,{attributes:true,attributeFilter:["style","class"]});
+ }
+ function sync(){
+   if(!document.body)return;
+   var m=measure(), right=root.dir==="rtl", nav=document.getElementById("bottomNav");
+   root.classList.toggle("dar-adult-fold-dual",m.dual);
+   root.classList.toggle("dar-adult-fold-side",m.side);
+   root.classList.toggle("dar-adult-fold-side-right",m.side&&right);
+   root.classList.toggle("dar-adult-fold-side-left",m.side&&!right);
+   if(!nav)return;
+   if(m.side){
+     setSide(nav,right);observe(nav);
+   }else restore(nav);
+ }
+ function schedule(){
+   if(raf)return;
+   raf=global.requestAnimationFrame(function(){raf=0;sync()});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",schedule,{once:true});
+ else schedule();
+ ["resize","orientationchange","pageshow","hashchange","dar:layoutchange","dar:view-rendered"].forEach(function(e){
+   global.addEventListener(e,schedule,{passive:true});
+ });
+ if(global.visualViewport)global.visualViewport.addEventListener("resize",schedule,{passive:true});
+ document.addEventListener("click",function(e){
+   if(e.target&&e.target.closest&&e.target.closest("#bottomNav .bottom-nav-btn"))schedule();
+ },true);
+ global.DarAdultFoldWide={measure:measure,sync:sync};
+})(typeof window!=="undefined"?window:this);
