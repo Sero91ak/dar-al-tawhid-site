@@ -155,19 +155,21 @@
   ],
   "unlockedScopes": [
     {
-      "id": "adult-fold-international-responsive-test-only-20261028",
-      "at": "2026-10-28T14:38:00+01:00",
-      "approvedBy": "user-explicit-20261028-research-apple-android-global-and-implement-adaptive-fold",
-      "reason": "Explicit adult foldable/iPhone Duo/Android responsive reconstruction request. ONLY DAR TEST layout, scoped navigation, existing adaptive guard and independent test fixtures. No live visitor, native/push/Kids/server/worker or production release.",
+      "id": "adult-fold-experimental-rollback-normal-tablet-20261028",
+      "at": "2026-10-28T18:42:00+01:00",
+      "approvedBy": "user-explicit-20261028-remove-all-experimental-fold-responsive-and-restore-regular-tablet-visitor-test",
+      "reason": "User explicitly requests to retire experimental Fold/Duo overrides from adult Besucher-App and DAR TEST, reverting shared geometry to its pre-Oct-28 tablet layout and disabling experimental DAR TEST Duo patch. Scope-only rollback: preserve 3D tabs, all content, themes, Kids, native binaries, push, prayer services, workers, data and offline storage. Do not auto-merge archived future workspace V2.",
       "paths": [
+        "assets/adaptive-layout.js",
+        "assets/adaptive-layout.css",
+        "assets/fold-split.css",
         "test/assets/fold-thumb-nav.js",
-        "test/assets/fold-thumb-nav.css",
-        "test/assets/dar-duo-responsive-v1.css",
         "test/assets/dar-duo-responsive-v1.js",
+        "test/assets/dar-duo-responsive-v1.css",
         "test/tools/dar-duo-responsive-guard.cjs",
         "content/admin/change-scope-lock.json"
       ],
-      "expiresAt": "2026-11-05T23:59:59.000Z"
+      "expiresAt": "2026-10-30T23:59:59.000Z"
     },
     {
       "id": "kids-salaf-33-public-audio-audition-link-fix-20261028",
