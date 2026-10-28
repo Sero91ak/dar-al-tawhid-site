@@ -19,6 +19,7 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 CATALOG = ROOT / "kids/data/salaf-library-v1.json"
 QA = ROOT / "kids/audio-jobs/salaf-v4-human-approval-20261028.json"
+BLOCKLIST = ROOT / "kids/data/audio-review-blockers-v1.json"
 PILOT = ROOT / "kids/review-only/salaf-v4-20261027"
 NEW_ROOT = ROOT / "kids/review-only/salaf-v4-complete-20261028"
 PLAN = ROOT / "kids/audio-jobs/salaf-v4-remaining-plan-20261028.json"
@@ -51,6 +52,24 @@ def sha(value: bytes):
 def check(condition, message):
     if not condition:
         raise ValueError(message)
+
+
+def check_known_audio_blocker(story_id: str, audio_sha: str):
+    """Refuse previously reported WRONG original recording even with a future QA JSON.
+
+    Only the immutable offending audio SHA is blocked. A newly generated, actually
+    listened-to recording with a different SHA may pass the independent QA gate.
+    """
+    check(BLOCKLIST.is_file(), "Missing canonical bad-audio blocklist; release prohibited.")
+    data = read(BLOCKLIST)
+    check(data.get("schemaVersion") == 1 and isinstance(data.get("recordings"), list),
+          "Invalid pronunciation fault blocklist")
+    for issue in data["recordings"]:
+        check(isinstance(issue.get("audioSha256"), str) and SHA.fullmatch(issue["audioSha256"]),
+              "Invalid blocked SHA")
+        if issue.get("storyId") == story_id and issue["audioSha256"] == audio_sha:
+            check(False, story_id + ": ORIGINAL AUDIO REJECTED – " + issue.get("expectedLatin", "wrong pronunciation") +
+                  " must be re-recorded and actually re-reviewed; GitHub issue #" + str(issue.get("issue", "?")))
 
 
 def review_entries():
@@ -150,6 +169,7 @@ def inspect(require_human):
                       id + ": unordered paragraphs")
 
         if require_human:
+            check_known_audio_blocker(id, entry["audioSha256"])
             vote = evidence[id]
             check(vote.get("storyId") == id and vote.get("audioSha256") == entry["audioSha256"]
                   and vote.get("textSha256") == entry["textSha256"],
