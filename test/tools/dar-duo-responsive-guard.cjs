@@ -68,4 +68,35 @@ assert(navJS.includes("var SIDE_MIN_WIDTH = 1060"),"Automatic side primary nav o
 assert(navJS.includes("var SIDE_MIN_HEIGHT = 560"),"Short landscape must keep bottom primary tabs");
 assert(js.includes("global.DarAdaptiveNavPlacement"),"One navigation geometry owner");
 assert(!js.includes('style(nav,"position","fixed")'),"DUO duplicate inline nav writer removed");
-console.log("DAR TEST Fold adaptive regression: 9 viewports + keyboard + nav owner PASS");
+// Real #bottomNav node must be portalled to the viewport at wide size and
+// restored to the original parent when folding back. Never duplicate tabs.
+const origin={isConnected:true,appendChild(n){n.parentNode=this},insertBefore(n){n.parentNode=this}};
+const hostRoot={
+ clientWidth:1060,clientHeight:720,attrs:{},classList:classes(),style:styles(),
+ setAttribute(k,v){this.attrs[k]=v},appendChild(n){n.parentNode=this}
+};
+const genuineNav={parentNode:origin,nextSibling:null,classList:classes(),style:styles()};
+const navDoc={
+ documentElement:hostRoot,body:{classList:classes()},readyState:"loading",activeElement:null,
+ addEventListener:()=>{},querySelector:()=>null,
+ getElementById:id=>id==="bottomNav"?genuineNav:null
+};
+const navWin={
+ location:{pathname:"/test/"},innerWidth:1060,innerHeight:720,
+ visualViewport:{height:720,addEventListener:()=>{}},
+ requestAnimationFrame:()=>1,addEventListener:()=>{},
+ setTimeout:()=>1,clearTimeout:()=>{}
+};
+vm.runInNewContext(navJS,{window:navWin,document:navDoc,console});
+assert.equal(navWin.DarAdaptiveNavPlacement.getPreference(),"left");
+assert.equal(navWin.DarAdaptiveNavPlacement.apply(),true);
+assert.equal(genuineNav.parentNode,hostRoot,"wide nav must be portal-fixed to viewport");
+assert.equal(hostRoot.attrs["data-dar-nav-position"],"left","wide icon rail");
+hostRoot.clientWidth=navWin.innerWidth=890;
+hostRoot.clientHeight=navWin.innerHeight=626;
+navWin.visualViewport.height=626;
+assert.equal(navWin.DarAdaptiveNavPlacement.apply(),true);
+assert.equal(genuineNav.parentNode,origin,"close fold must restore same nav DOM node");
+assert.equal(hostRoot.attrs["data-dar-nav-position"],"bottom","medium bottom tabs");
+assert(css.includes("display:block!important; /* Override legacy"),"Medium dual must reveal both independent panes");
+console.log("DAR TEST Fold adaptive regression: 9 viewports + keyboard + nav dock roundtrip PASS");
