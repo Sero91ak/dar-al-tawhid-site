@@ -105,8 +105,8 @@ jobs:
           agent='Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1'
           success=0
           for attempt in $(seq 1 12); do
-            cb="$(date +%s)-\${attempt}"
-            code="$(curl -sS -L --max-time 28 -A "$agent" -D /tmp/salaf-headers.txt -o /tmp/salaf-page.html -w '%{http_code}' "\${url}?verify=\${cb}" || true)"
+            cb="$(date +%s)-${attempt}"
+            code="$(curl -sS -L --max-time 28 -A "$agent" -D /tmp/salaf-headers.txt -o /tmp/salaf-page.html -w '%{http_code}' "${url}?verify=${cb}" || true)"
             if [ "$code" = "200" ] &&
                grep -Fq 'TAWḤĪD KIDS · 33 Salaf-Hörproben direkt anhören' /tmp/salaf-page.html &&
                grep -Fq '33 Hörproben direkt verfügbar' /tmp/salaf-page.html &&
@@ -115,11 +115,11 @@ jobs:
               success=1
               break
             fi
-            echo "Live listening page not confirmed yet (attempt \${attempt}: HTTP \${code})"
+            echo "Live listening page not confirmed yet (attempt ${attempt}: HTTP ${code})"
             sleep 8
           done
           if [ "$success" -ne 1 ]; then
             echo "::error::The public no-login Salaf audio listener is not delivered by canonical Cloudflare Worker."
             exit 1
           fi
-          echo "PASS: \${url} returns HTTP 200 with all 33 original audio players, no login challenge."
+          echo "PASS: ${url} returns HTTP 200 with all 33 original audio players, no login challenge."
