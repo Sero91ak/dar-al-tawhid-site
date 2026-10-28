@@ -18,7 +18,7 @@ import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "kids/data/salaf-library-v1.json"
-REQUEST = ROOT / "kids/audio-jobs/salaf-v4-request-20261027.json"
+REQUEST = ROOT / os.environ.get("SALAF_AUDIO_REQUEST_PATH", "kids/audio-jobs/salaf-v4-request-20261027.json")
 POLICY = ROOT / "kids/data/academy-voice-policy-v10.json"
 LANG_POLICY = ROOT / "data/pronunciation/voice-language-isolation-v1.json"
 STAGE = ROOT / "kids/review-only/salaf-v4-20261027"
@@ -38,6 +38,23 @@ def digest(value: bytes):
 def save(doc):
     STAGE.mkdir(parents=True, exist_ok=True)
     MANIFEST.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+def checkpoint(message):
+    """Durably persist the pre-charge marker and each success BEFORE another paid call."""
+    if os.environ.get("SALAF_PUSH_AFTER_EACH") != "true":
+        return
+    branch = os.environ.get("STAGE_BRANCH")
+    if branch != "audio/salaf-v4-all-review-20261028":
+        raise RuntimeError("Unexpected durable audio staging branch")
+    subprocess.run(["git", "add", "kids/review-only/salaf-v4-20261027/"], check=True, cwd=ROOT)
+    has_change = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=ROOT).returncode
+    if has_change not in (0, 1):
+        raise RuntimeError("Git staging check failed")
+    if has_change == 1:
+        subprocess.run(["git", "commit", "-m", "Kids Salaf V4 review: " + message],
+                       check=True, cwd=ROOT)
+    subprocess.run(["git", "push", "origin", "HEAD:" + branch], check=True, cwd=ROOT)
+
 
 def duration(path):
     return float(subprocess.check_output([
@@ -85,7 +102,7 @@ def timings(text, speech, answer, source_duration, output_duration):
 
 def verify_contract():
     req, data, policy, lang = load(REQUEST), load(SOURCE), load(POLICY), load(LANG_POLICY)
-    if (req.get("authorization") != "OWNER_EXPLICIT_SALAF_AUDIO_2026_10_27"
+    if (req.get("authorization") not in ("OWNER_EXPLICIT_SALAF_AUDIO_2026_10_27", "OWNER_EXPLICIT_SALAF_COMPLETE_2026_10_28")
         or req.get("mode") != "staging-review-only"
         or req.get("allowLivePublication") is not False
         or req.get("retryPaidRequests") is not False):
@@ -215,15 +232,23 @@ def main():
             raise RuntimeError(sid + ": old stage/unknown charge; investigate before retry")
         if (STAGE / (sid + ".m4a")).exists():
             raise RuntimeError(sid + ": orphaned audio file exists; billing and hash review required")
+        # IMPORTANT: the marker is pushed to GitHub BEFORE the charge.
+        # A failed/aborted run cannot inadvertently charge this story again.
+        entries[sid] = {
+            "storyId": sid, "status": "paid-request-in-flight",
+            "approvedForPlayback": False, "humanListeningApproved": False,
+            "releaseEnabled": False, "stagingOnly": True,
+            "textSha256": digest(text.encode("utf-8")),
+            "note": "Credit risk reserved before paid API call; no automatic retry."
+        }
+        save(manifest)
+        checkpoint("reserve " + sid + " before paid call")
         print("One V4 generation:", sid, "chars:", len(text), flush=True)
         try:
             row = produce(sid, text, secret)
-            entries[sid] = row
-            save(manifest)
-            print(sid, "staged", row["durationSec"], "secs", row["timingStatus"], flush=True)
         except Exception as error:
-            # Do not retry on any provider/network error: the provider may
-            # already have charged for the request.
+            # Even a request timeout might be billable. Persist the error
+            # durably and STOP; never re-run or skip to another paid request.
             entries[sid] = {
                 "storyId": sid, "status": "billing-investigation-required",
                 "approvedForPlayback": False, "humanListeningApproved": False,
@@ -233,8 +258,13 @@ def main():
                 "note": "No automatic retry. Check ElevenLabs billing/history first."
             }
             save(manifest)
+            checkpoint("halt billing review " + sid)
             failures.append(sid)
             break
+        entries[sid] = row
+        save(manifest)
+        checkpoint("complete " + sid + " SHA256 verified")
+        print(sid, "staged", row["durationSec"], "secs", row["timingStatus"], flush=True)
     if failures:
         raise RuntimeError("Staging interrupted. Inspect billing before retry: " + ",".join(failures))
     print("Staging ready; no audio published to children.", flush=True)
