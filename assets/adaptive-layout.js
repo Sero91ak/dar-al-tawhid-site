@@ -88,7 +88,7 @@
   function computeLayoutCapacity(width, height) {
     var w = Math.max(0, Number(width) || 0);
     var h = Math.max(0, Number(height) || 0);
-    var sideReserve = w >= 980 && h >= 560 ? 106 : 0;
+    var sideReserve = w >= 880 && h >= 560 ? 106 : 0;
     var outer = Math.round(Math.max(24, Math.min(40, w * 0.035)));
     var usable = Math.max(0, w - sideReserve - outer);
     var rail = Math.round(Math.min(RAIL_MAX, Math.max(RAIL_MIN, usable * 0.31)));
@@ -662,10 +662,10 @@
     var cap=global.DarAdaptiveLayout&&global.DarAdaptiveLayout.getLayoutCapacity?
       global.DarAdaptiveLayout.getLayoutCapacity(w,h):null;
     var rail=cap&&cap.rail?cap.rail:Math.min(360,Math.max(240,(w-32)*.31));
-    var reserve=w>=980&&h>=560?106:0;
+    var reserve=w>=880&&h>=560?106:0;
     var reader=w-reserve-Math.max(24,Math.min(40,w*.035))-rail-18;
     var dual=!keyboard&&w>=760&&h>=540&&reader>=440&&!!(!cap||cap.dual);
-    var vertical=dual&&w>=980&&h>=560;
+    var vertical=dual&&w>=880&&h>=560;
     var mode=vertical?"wide":dual?"dual":"single";
     var rtl=root.getAttribute("dir")==="rtl"||root.dir==="rtl";
     return {width:w,height:h,keyboard:keyboard,dual:dual,
