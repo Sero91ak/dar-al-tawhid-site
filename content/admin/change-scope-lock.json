@@ -155,6 +155,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-visitor-restore-prior-tablet-20261028",
+      "at": "2026-10-28T18:42:00+01:00",
+      "approvedBy": "user-explicit-remove-fold-special-responsive-restore-original-adult-tablet",
+      "reason": "Restore Oct-28 visitor adaptive layout assets to exact pre-Fold-release blobs, preserve previous tablet and phone responsiveness, content and all other app lanes. No push changes.",
+      "paths": [
+        "assets/adaptive-layout.js",
+        "assets/adaptive-layout.css",
+        "assets/fold-split.css",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-30T23:59:59.000Z"
+    },
+    {
       "id": "adult-fold-international-responsive-test-only-20261028",
       "at": "2026-10-28T14:38:00+01:00",
       "approvedBy": "user-explicit-20261028-research-apple-android-global-and-implement-adaptive-fold",
