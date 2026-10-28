@@ -88,7 +88,7 @@ jobs:
           import hashlib,json
           from pathlib import Path
           c=json.loads(Path("kids/data/salaf-library-v1.json").read_text(encoding="utf-8"))
-          live=[x for x in c["items"] if x.get("audioMaster",{}).get("url")]
+          live=[x for x in c["items"] if (x.get("audioMaster") or {}).get("url")]
           assert len(live)==33, "Not all 33 stories have approved original masters"
           for x in live:
               a=x["audioMaster"]
