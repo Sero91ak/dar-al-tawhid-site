@@ -239,6 +239,8 @@ jobs:
           git add kids-audio-review-library-v1.json
           git commit -m "Kids: update categorized immutable review URLs for all canonical audios"
           git push origin "HEAD:refs/heads/$branch"
-          gh pr create --head "$branch" --base main \
+          if ! gh pr create --head "$branch" --base main \
             --title "KIDS: automatisch erstellten Audio-Prüfkatalog aus allen Originalquellen synchronisieren" \
-            --body "Nur JSON-Audioindex aus im Git-Repository vorhandenen Originaldatei-URLs; keine bezahlten ElevenLabs-Aufrufe, keine manuelle Hörfreigabe und keine Änderung am öffentlichen Kinder-Audio-Katalog. Neue Inhalte werden künftig per zentraler Quellenliste aufgenommen."
+            --body "Nur JSON-Audioindex aus im Git-Repository vorhandenen Originaldatei-URLs; keine bezahlten ElevenLabs-Aufrufe, keine manuelle Hörfreigabe und keine Änderung am öffentlichen Kinder-Audio-Katalog. Neue Inhalte werden künftig per zentraler Quellenliste aufgenommen."; then
+            echo "::notice::GitHub Actions PR-Erstellung ist durch Repository-Einstellungen gesperrt. Der geprüfte Katalog ist im Zweig $branch gesichert; der separate stündliche/tägliche GitHub-Katalog-Auftrag erstellt den PR über das verbundene Benutzerkonto."
+          fi
