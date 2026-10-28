@@ -39,12 +39,12 @@ audio{width:100%;display:block}.modes,.speed{display:flex;flex-wrap:wrap;gap:7px
 .qa textarea{width:100%;border:1px solid #cadcd1;border-radius:11px;padding:10px;min-height:77px;resize:vertical;background:#fff;color:#25453c}
 .qa .action{border:0;background:#1f6d59;color:white;border-radius:12px;padding:11px 14px;margin-top:8px}
 .footnote{color:#58766a;font-size:12px;line-height:1.55}footer{font-size:12px;color:#58766a;padding:0 14px 26px}
-body[data-gender=girl] .item[aria-current=true],body[data-gender=girl] .para.active{background:#f2e4ee}body[data-gender=girl] .modes button[aria-pressed=true]{background:#92618b;color:white}
+body[data-gender=girl] .item[aria-current=true],body[data-gender=girl] .para.active{background:#f2e4ee}body[data-age="4-5"] .para{font-size:clamp(18px,3vw,21px);line-height:2.05}body[data-age="9-10"] .para{font-size:clamp(15px,2.2vw,16px);line-height:1.85}body[data-gender=girl] .modes button[aria-pressed=true]{background:#92618b;color:white}
 @media(max-width:760px){.layout{grid-template-columns:1fr}.catalog{display:flex;overflow-x:auto;max-height:125px;padding:8px;gap:8px}.item{flex:0 0 186px;margin:0}.panel-head,.listen,.reader,.qa{padding:15px}.reader{max-height:none}.counter{margin-left:0}.controls select{flex:1}}
 @media(prefers-reduced-motion:reduce){.reader{scroll-behavior:auto}}
 </style>
 </head>
-<body data-gender="boy">
+<body data-gender="boy" data-age="6-8">
 <header><div>
 <div class="eyebrow">TAWḤĪD KIDS · 33 Geschichten · interne Audio-Abnahme</div>
 <h1>Schätze der Salaf – Hören & Mitlesen</h1>
@@ -125,7 +125,7 @@ async function choose(id){
  const row=audioRow(id),parts=current.masterStoryText.split(/\n{2,}/).filter(Boolean);
  A("reader").hidden=mode==="listen";
  const fragment=document.createDocumentFragment();
- parts.forEach((s,i)=>{const p=document.createElement("button");p.type="button";p.className="para";p.textContent=s.trim();p.dataset.idx=i;p.addEventListener("click",()=>{if(cues[i]){audio.currentTime=cues[i].start;audio.play().catch(()=>{})}});fragment.append(p)});
+ parts.forEach((s,i)=>{const p=document.createElement("button");p.type="button";p.className="para";p.textContent=s.trim();p.dataset.idx=i;p.addEventListener("click",()=>{if(mode!=="read"&&cues[i]){audio.currentTime=cues[i].start;audio.play().catch(()=>{})}});fragment.append(p)});
  A("paragraphs").append(fragment);
  if(!row){A("feedback").textContent="Aufnahme noch nicht vollständig gesichert. Du kannst den Originaltext lesen.";A("meta").textContent+=" · Audio ausstehend";return}
  if(await hash(current.masterStoryText)!==row.textSha256){A("feedback").textContent="STOPP: Originaltext-SHA stimmt nicht mit dem Audio überein.";return}
@@ -174,7 +174,7 @@ audio.addEventListener("timeupdate",()=>{if(!cues.length||!current)return;const 
 });
 audio.addEventListener("error",()=>{A("feedback").textContent="Die Review-Audiodatei ist momentan nicht erreichbar. Keine Neugenerierung oder Änderung an der Kinder-App."});
 A("search").addEventListener("input",list);A("refresh").addEventListener("click",reload);
-A("gender").addEventListener("change",e=>document.body.dataset.gender=e.target.value);
+A("gender").addEventListener("change",e=>document.body.dataset.gender=e.target.value);A("age").addEventListener("change",e=>document.body.dataset.age=e.target.value);
 document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.mode;document.querySelectorAll("[data-mode]").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));A("reader").hidden=mode==="listen";if(mode==="read")audio.pause();if(mode==="both"&&cues.length)A("feedback").textContent="Mitlesen aktiv · synchronisierte Absätze";}));
 document.querySelectorAll("[data-rate]").forEach(b=>b.addEventListener("click",()=>{audio.playbackRate=Number(b.dataset.rate);document.querySelectorAll("[data-rate]").forEach(x=>x.setAttribute("aria-pressed",String(x===b)))}));
 A("download").addEventListener("click",()=>{if(!current)return;stash();const e=audioRow(current.id),report={schemaVersion:1,type:"kids-salaf-v4-manual-review",storyId:current.id,reviewedAt:new Date().toISOString(),audioSha256:e?.audioSha256||null,textSha256:e?.textSha256||null,manualChecks:reports[current.id].check,notes:reports[current.id].notes,automaticPublicationApproved:false,warning:"QA notes do not constitute human listening approval or live publication"};const data=new Blob([JSON.stringify(report,null,2)+"\n"],{type:"application/json"});const url=URL.createObjectURL(data);const link=document.createElement("a");link.href=url;link.download="salaf-v4-audio-qa-"+current.id+".json";link.click();URL.revokeObjectURL(url)});
