@@ -1,0 +1,129 @@
+name: Kids Salaf V4 - reviewed 33 live release PR (zero audio credits)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "kids/audio-jobs/salaf-v4-human-approval-20261028.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: kids-salaf-v4-human-qa-release
+  cancel-in-progress: false
+
+jobs:
+  release-only-if-all-33-listening-approved:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REVIEWED_BRANCH: release/kids-salaf-v4-33-reviewed-20261028
+    steps:
+      - name: Read trusted main release script and independently documented human QA
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 2
+
+      - name: Absolutely no TTS generation; fail if the human-review report is missing
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s kids/audio-jobs/salaf-v4-human-approval-20261028.json ||
+            { echo "::error::Human full listening report absent; PUBLICATION BLOCKED."; exit 1; }
+          python3 -m py_compile kids/tools/release-salaf-v4-reviewed.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          qa=json.loads(Path("kids/audio-jobs/salaf-v4-human-approval-20261028.json").read_text(encoding="utf-8"))
+          assert qa["schemaVersion"]==1 and qa["collection"]=="Schätze der Salaf"
+          assert qa["reviewMode"]=="manual-full-listening" and qa["ownerAuthorizedPublicRelease"] is True
+          assert len(qa["entries"])==33, "All 33 original recordings must actually be reviewed"
+          print("Manual review file present. Independent SHA/voice/recording/device gates follow.")
+          PY
+
+      - name: Copy only original 4 immutable pilot audios from their reviewed commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin refs/heads/audio/salaf-v4-review-20261027 --depth=1
+          pilot_commit="$(git rev-parse FETCH_HEAD)"
+          test "$pilot_commit" = "a998db41617dfeab8bd54153b3591a01a5d2da4d" ||
+            { echo "::error::Pilot staging branch changed; refuse automatic promotion"; exit 1; }
+          git restore --source="$pilot_commit" -- kids/review-only/salaf-v4-20261027/
+          test -f kids/review-only/salaf-v4-20261027/manifest.json
+
+      - name: Copy eight original 29-master batch outputs only from official staging branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin refs/heads/audio/salaf-v4-complete-review-20261028 --depth=1
+          review_commit="$(git rev-parse FETCH_HEAD)"
+          git restore --source="$review_commit" -- kids/review-only/salaf-v4-complete-20261028/
+          for n in 01 02 03 04 05 06 07 08; do
+            test -s "kids/review-only/salaf-v4-complete-20261028/salaf-v4-pending-${n}/manifest.json" ||
+              { echo "::error::Missing complete reviewed batch $n"; exit 1; }
+          done
+          echo "Exact original 4+29 staged files present at verified review paths; no synthesis invoked."
+
+      - name: Audit exactly 33 original audios without changing published Kids catalog
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 kids/tools/release-salaf-v4-reviewed.py --audit
+          node scripts/kids-master-text-standard-v2-check.js
+
+      - name: Require all original SHA matches and actual manual review before promotion
+        shell: bash
+        run: |
+          set -euo pipefail
+          git switch -c "$REVIEWED_BRANCH"
+          python3 kids/tools/release-salaf-v4-reviewed.py --promote
+          node scripts/kids-master-text-standard-v2-check.js
+          python3 - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          c=json.loads(Path("kids/data/salaf-library-v1.json").read_text(encoding="utf-8"))
+          live=[x for x in c["items"] if (x.get("audioMaster") or {}).get("url")]
+          assert len(live)==33, "Not all 33 stories have approved original masters"
+          for x in live:
+              a=x["audioMaster"]
+              assert a["approvedForPlayback"] is True and a["humanListeningApproved"] is True
+              assert a["releaseEnabled"] is True and a["modelId"]=="eleven_v4"
+              assert a["languageCode"]=="de" and a["globalArabicDictionaryApplied"] is False
+              p=Path("kids/audio/salaf")/(x["id"]+".m4a")
+              assert p.is_file() and hashlib.sha256(p.read_bytes()).hexdigest()==a["sha256"]
+          print("33/33 full human-review-bound masters ready for PR review")
+          PY
+
+      - name: Push only approved public media and catalog metadata, not staging masters
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- kids/data/salaf-library-v1.json kids/audio/salaf/
+          git diff --cached --quiet && { echo "::error::No reviewed public audio changes; abort"; exit 1; }
+          # Audio review-only source files were read but MUST NOT be committed.
+          if git diff --cached --name-only | grep -vE '^kids/(data/salaf-library-v1\.json|audio/salaf/[a-z0-9-]+\.m4a)$'; then
+            echo "::error::Unexpected staged path: abort"; exit 1
+          fi
+          git commit -m "Kids Salaf: 33 human-audited original V4 masters with exact read-along (release review)"
+          git push origin HEAD:"$REVIEWED_BRANCH"
+
+      - name: Open PR for required CI and deliberate live merge (never bypass)
+        shell: bash
+        run: |
+          set -euo pipefail
+          found="$(gh pr list --head "$REVIEWED_BRANCH" --base main --state open --json number --jq '.[0].number // empty')"
+          if [ -z "$found" ]; then
+            gh pr create --head "$REVIEWED_BRANCH" --base main \
+              --title "TAWḤĪD KIDS: LIVE 33 Schätze-der-Salaf Original-V4-Audios nach vollständiger Hörprüfung" \
+              --body "Alle 33 originalen master Audios SHA-/Text-/Timing-verifiziert, inklusive 29 Einmalproduktionen und vier Pilot-Dateien. Menschliche Vollabhörung, Deutsch/Fuṣḥā und iPhone/iPad-Tests laut genau an diese Audios gebundenem QA-Bericht geprüft. Kein ElevenLabs-Credit ausgegeben. Dieser PR muss alle CI-Tests bestehen und erfordert eine tatsächliche Review-/Merge-Freigabe vor dem Live-Deploy. Zentralauftrag: #1495."
+          else
+            echo "Existing open reviewed-audio release PR #$found; not duplicating."
+          fi
