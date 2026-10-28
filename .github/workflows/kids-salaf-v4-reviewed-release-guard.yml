@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - "kids/tools/release-salaf-v4-reviewed.py"
+      - "kids/data/audio-review-blockers-v1.json"
       - "kids/SALAF-V4-AUDIO-RELEASE-GATE.md"
       - ".github/workflows/kids-salaf-v4-reviewed-release-guard.yml"
   push:
@@ -21,6 +22,31 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m py_compile kids/tools/release-salaf-v4-reviewed.py
+
+      - name: Fail closed on user-rejected Abū ʿĀṣim original audio SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import importlib.util, json, pathlib
+          p=pathlib.Path('kids/tools/release-salaf-v4-reviewed.py')
+          spec=importlib.util.spec_from_file_location('salaf_v4_release',p)
+          mod=importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(mod)
+          block=json.loads(pathlib.Path('kids/data/audio-review-blockers-v1.json').read_text(encoding='utf-8'))
+          assert block['schemaVersion']==1 and len(block['recordings'])>=1
+          e=next(x for x in block['recordings'] if x['storyId']=='abu-asim-die-zunge-bewahren')
+          assert e['audioSha256']=='eaebc06624b95886afacdced30c1ab4cdbd04e629a20b2f0292169bb3d6deb14'
+          assert e['verdict']=='falsch' and e['publicReleaseBlocked'] is True
+          try:
+              mod.check_known_audio_blocker(e['storyId'],e['audioSha256'])
+          except ValueError as exc:
+              assert 'REJECTED' in str(exc)
+          else:
+              raise AssertionError('Previously rejected voice would be marked Richtig')
+          mod.check_known_audio_blocker(e['storyId'],'f'*64)
+          print('PASS: wrong original is blocked, targeted replacement with DIFFERENT SHA can be independently re-reviewed.')
+          PY
       - name: Refuse publication without 33 staged review masters and actual human QA
         shell: bash
         run: |

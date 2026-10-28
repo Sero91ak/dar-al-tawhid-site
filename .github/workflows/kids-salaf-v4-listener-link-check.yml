@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "salaf-v4-33-hoeren-20261028.html"
+      - "kids/data/audio-review-blockers-v1.json"
       - "kids/data/audio-review-sources-v1.json"
       - "scripts/build-kids-audio-review-library.cjs"
       - "kids/data/quiz-v4-full-rebuild-public.json"
@@ -31,6 +32,7 @@ on:
     branches: [main]
     paths:
       - "salaf-v4-33-hoeren-20261028.html"
+      - "kids/data/audio-review-blockers-v1.json"
       - ".github/workflows/kids-salaf-v4-listener-link-check.yml"
       - "kids/tools/test-salaf-v4-33-remote-audio.py"
       - "kids/data/salaf-library-v1.json"
@@ -59,6 +61,14 @@ jobs:
           assert.match(html,/kids-audio-review-library-v1\.json/);
           assert.doesNotMatch(html,/id="checklist"/);
           assert.match(html,/localStorage/);
+          assert.match(html,/const KNOWN_QA_ERRORS=/);
+          assert.match(html,/id="right"/);
+          const block=JSON.parse(fs.readFileSync("kids/data/audio-review-blockers-v1.json","utf8"));
+          const q=html.split('const KNOWN_QA_ERRORS=',2)[1].split(';\nconst STORAGE=',1)[0];
+          const embedded=JSON.parse(q);
+          assert.deepEqual(embedded,block.recordings,'Website must show current central pronunciation blocklist');
+          assert(block.recordings.some(x=>x.storyId==="abu-asim-die-zunge-bewahren"&&x.verdict==="falsch"&&x.publicReleaseBlocked===true));
+          assert.match(html,/if\(verdict==="richtig"&&blockedFor\(selected\)\)/);
           assert.match(html,/id="audio" controls/);
           assert.match(html,/id="audio-direct"/);
           assert.doesNotMatch(html,/fetch\("\/kids\/data\/salaf-library-v1\.json/);

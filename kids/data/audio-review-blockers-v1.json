@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "collection": "TAWḤĪD KIDS – zentrale Audiohörprüfung",
+  "policy": "Nur den exakten fehlerhaften Original-Audio-SHA sperren. Nutzermeldung ist kein vollständiges Hörprotokoll und keine iPhone-/iPad-Abnahme. Andere Originalaudios unverändert.",
+  "recordings": [
+    {
+      "section": "salaf",
+      "storyId": "abu-asim-die-zunge-bewahren",
+      "storyTitle": "Abū ʿĀṣim und die behütete Zunge",
+      "audioSha256": "eaebc06624b95886afacdced30c1ab4cdbd04e629a20b2f0292169bb3d6deb14",
+      "textSha256": "8e974d986c0db19b5b4f7434ee5c83fee1f41eb411deb439434a6bf8b4006356",
+      "verdict": "falsch",
+      "reason": "In der Aufnahme wird Ġībah/Ghībah (غِيبَة) laut Nutzermeldung als „Jhiba“ ausgesprochen. Der arabische Laut غ (ġayn) darf nicht als deutsches J gesprochen werden.",
+      "expectedArabic": "غِيبَة",
+      "expectedLatin": "Ġībah / Ghībah",
+      "reportedPronunciation": "Jhiba",
+      "paragraphIndex": 4,
+      "segmentStartSeconds": 48.643,
+      "segmentEndSeconds": 63.124,
+      "reportedAt": "2026-10-28",
+      "issue": 1511,
+      "source": "user-supplied-audio-review-feedback",
+      "fullAudioListened": false,
+      "iphonePlaybackPassed": null,
+      "ipadPlaybackPassed": null,
+      "humanListeningApproved": false,
+      "publicReleaseBlocked": true,
+      "remediation": "Gezielte V4-Neuaufnahme mit korrigiertem Ġayn, neuer SHA-256 und neuem Absatzalignment; keine anderen Audios neu erzeugen. Nach tatsächlicher Hörabnahme neu zur Freigabe vorlegen."
+    }
+  ]
+}
