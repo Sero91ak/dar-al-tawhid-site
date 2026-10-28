@@ -4,6 +4,11 @@ on:
   pull_request:
     paths:
       - "salaf-v4-33-hoeren-20261028.html"
+      - "kids/tools/build-audio-review-index-v1.py"
+      - "kids/data/*audio*.json"
+      - "kids/data/*voice*.json"
+      - "kids/data/*stories*.json"
+      - "kids/assets/**"
       - "kids/data/audio-review-sources-v1.json"
       - "scripts/build-kids-audio-review-library.cjs"
       - "kids/data/quiz-v4-full-rebuild-public.json"
@@ -54,13 +59,15 @@ jobs:
           assert.doesNotMatch(html,/id="checklist"/);
           assert.match(html,/localStorage/);
           assert.match(html,/id="audio" controls/);
-          assert.match(html,/id="audio-direct"/);
+          assert.match(html,/id="correct"/);assert.match(html,/id="wrong"/);
+          assert.match(html,/id="export"/);assert.match(html,/id="import"/);
+          assert.match(html,/localStorage/);assert.match(html,/INDEX_URL/);
           assert.doesNotMatch(html,/fetch\("\/kids\/data\/salaf-library-v1\.json/);
           assert.doesNotMatch(html,/await Promise\.all\(tasks/);
           const scripts=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];
           assert.equal(scripts.length,1);
           fs.writeFileSync('/tmp/kids-salaf-33-listener.js',scripts[0][1]);
-          const pre='const SNAPSHOT=',post=';\nconst BATCHES=';
+          const pre='const SNAPSHOT=',post=';\nconst INDEX_URL=';
           const begin=scripts[0][1].indexOf(pre);
           const end=scripts[0][1].indexOf(post,begin);
           assert(begin>0&&end>begin);
@@ -88,6 +95,8 @@ jobs:
           console.log('PASS: 33 immutable master-audio URLs, 33 original texts and SHA, all paragraph cues, no false release');
           NODE
           node --check /tmp/kids-salaf-33-listener.js
+          python3 -m py_compile kids/tools/build-audio-review-index-v1.py
+          python3 kids/tools/build-audio-review-index-v1.py
       - name: Confirm un-gated audio-preview path really triggers canonical Cloudflare publish
         shell: bash
         run: |
@@ -103,7 +112,7 @@ jobs:
           from pathlib import Path
           import json,re
           html=Path('salaf-v4-33-hoeren-20261028.html').read_text()
-          text=html.split('const SNAPSHOT=',1)[1].split(';\nconst BATCHES=',1)[0]
+          text=html.split('const SNAPSHOT=',1)[1].split(';\nconst INDEX_URL=',1)[0]
           data=json.loads(text)['entries']
           old=next(e for e in data.values() if 'complete-' not in e['audioFile'])
           new=next(e for e in data.values() if 'complete-' in e['audioFile'])
@@ -242,3 +251,63 @@ jobs:
           gh pr create --head "$branch" --base main \
             --title "KIDS: automatisch erstellten Audio-Prüfkatalog aus allen Originalquellen synchronisieren" \
             --body "Nur JSON-Audioindex aus im Git-Repository vorhandenen Originaldatei-URLs; keine bezahlten ElevenLabs-Aufrufe, keine manuelle Hörfreigabe und keine Änderung am öffentlichen Kinder-Audio-Katalog. Neue Inhalte werden künftig per zentraler Quellenliste aufgenommen."
+
+  maintain-universal-audio-index:
+    # On a canonical source change, refresh all future Kids audio categories.
+    # GITHUB_TOKEN commits do not trigger push workflows; explicitly dispatch Cloudflare.
+    if: github.event_name == 'push'
+    needs: independent-33-listener-syntax-data-audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    concurrency:
+      group: kids-audio-catalog-index-v1
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Generate categorized original-audio catalog without synthesis
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 kids/tools/build-audio-review-index-v1.py --write
+          python3 - <<'PY'
+          import json
+          d=json.load(open("audio-pruefzentrale-katalog-v1.json",encoding="utf-8"))
+          assert d["schemaVersion"]==1 and d["reviewOnly"] is True and d["humanApprovalAutomatic"] is False
+          assert d["salafEmbeddedSeparately"]==33 and d["statistics"]["audioFiles"]>=100
+          assert len({e["url"].split("?")[0] for e in d["entries"]})==len(d["entries"])
+          print("Audio-review index verified:",d["statistics"])
+          PY
+      - name: Push only the changed static review index
+        id: index
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git ls-files --error-unmatch audio-pruefzentrale-katalog-v1.json >/dev/null 2>&1 && \
+             git diff --quiet -- audio-pruefzentrale-katalog-v1.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- audio-pruefzentrale-katalog-v1.json
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -m "Kids: refresh review-only category catalog of original audio files"
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Publish new static index through canonical Cloudflare Worker
+        if: steps.index.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh workflow run "Deploy Besucher-App (Cloudflare Workers)" --ref main
+          echo "Canonical Worker deploy requested for audio review index"
