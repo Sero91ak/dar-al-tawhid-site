@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "collection": "Schätze der Salaf",
+  "mode": "staging-review-only",
+  "publicRelease": false,
+  "entries": {
+    "abu-hurayrah-und-die-freude-seiner-mutter": {
+      "storyId": "abu-hurayrah-und-die-freude-seiner-mutter",
+      "status": "technical-passed-awaiting-human-listening",
+      "approvedForPlayback": false,
+      "humanListeningApproved": false,
+      "releaseEnabled": false,
+      "stagingOnly": true,
+      "audioFile": "kids/review-only/salaf-v4-complete-20261028/salaf-v4-pending-08/abu-hurayrah-und-die-freude-seiner-mutter.m4a",
+      "audioSha256": "c12a139d6e2ca530aaeceec5f44ec70a9f191e3fe4cce172ad3126ed31b0968b",
+      "textSha256": "169774e5cc5de0081910c4df2e589c159eddbc04bf68be5ad74f020f0688f9b1",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "profile": "kids_story",
+      "languageCode": "de",
+      "globalArabicDictionaryApplied": false,
+      "durationSec": 165.1,
+      "timings": [
+        {
+          "paragraphIndex": 0,
+          "start": 0.0,
+          "end": 5.441
+        },
+        {
+          "paragraphIndex": 1,
+          "start": 5.441,
+          "end": 22.004
+        },
+        {
+          "paragraphIndex": 2,
+          "start": 22.004,
+          "end": 36.367
+        },
+        {
+          "paragraphIndex": 3,
+          "start": 36.367,
+          "end": 52.97
+        },
+        {
+          "paragraphIndex": 4,
+          "start": 52.97,
+          "end": 68.973
+        },
+        {
+          "paragraphIndex": 5,
+          "start": 68.973,
+          "end": 88.737
+        },
+        {
+          "paragraphIndex": 6,
+          "start": 88.737,
+          "end": 105.861
+        },
+        {
+          "paragraphIndex": 7,
+          "start": 105.861,
+          "end": 119.676
+        },
+        {
+          "paragraphIndex": 8,
+          "start": 119.676,
+          "end": 137.627
+        },
+        {
+          "paragraphIndex": 9,
+          "start": 137.627,
+          "end": 148.589
+        },
+        {
+          "paragraphIndex": 10,
+          "start": 148.589,
+          "end": 151.95
+        },
+        {
+          "paragraphIndex": 11,
+          "start": 151.95,
+          "end": 161.952
+        },
+        {
+          "paragraphIndex": 12,
+          "start": 161.952,
+          "end": 165.1
+        }
+      ],
+      "timingStatus": "character-alignment-exact",
+      "qaRequired": [
+        "full-text audio parity",
+        "German Nur not Arabic Nūr",
+        "natural Fuṣḥā loanword pronunciation",
+        "smooth endings",
+        "paragraph sync",
+        "iPhone/iPad listening"
+      ]
+    }
+  }
+}
