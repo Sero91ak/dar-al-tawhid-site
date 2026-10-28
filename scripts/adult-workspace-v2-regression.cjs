@@ -47,7 +47,7 @@ const win={document:doc,location:{pathname:"/index.html"},innerWidth:375,innerHe
  requestAnimationFrame:()=>1,addEventListener:()=>{},visualViewport:{height:812,addEventListener:()=>{}},
  DarFold:{sync:()=>{}},
  DarAdaptiveLayout:{getLayoutCapacity:(w,h)=>{
-   const reserve=w>=980&&h>=560?106:0;
+   const reserve=w>=880&&h>=560?106:0;
    const gutter=Math.max(24,Math.min(40,w*.035));
    const rail=Math.min(360,Math.max(240,(w-reserve-gutter)*.31));
    const reader=w-reserve-gutter-rail-18;
@@ -68,7 +68,9 @@ inspect(375,812,"single",false);
 inspect(640,900,"single",false);
 inspect(760,900,"dual",false);
 inspect(834,1112,"dual",false);
-inspect(900,650,"dual",false);
+inspect(879,650,"dual",false);
+inspect(880,650,"wide",true);
+inspect(900,650,"wide",true);
 inspect(980,640,"wide",true);
 inspect(1024,768,"wide",true);
 inspect(1194,834,"wide",true);
@@ -84,4 +86,4 @@ win.visualViewport.height=400;
 win.DarAdultWorkspaceV2.sync();
 assert.equal(el.attrs["data-dar-workspace"],"single","keyboard fallback");
 assert.equal(nav.parentNode,origin,"keyboard restores original nav");
-console.log("DAR WORKSPACE V2: 12 windows/orientations, RTL, keyboard, original tab identity PASS");
+console.log("DAR WORKSPACE V2: 14 windows/orientations, RTL, keyboard, original tab identity PASS");
