@@ -31,6 +31,10 @@ on:
       - kids/quiz-premium-v1.css
       - kids/quiz-v4-bridge.js
       - kids/quiz-v4-approved-player.js
+      # Direct Salaf V4 review links must ship with the CANONICAL production Worker.
+      # /kids/* is gated for normal browsers; the noindex listener lives at root.
+      - salaf-v4-33-hoeren-20261028.html
+      - kids/salaf-v4-all-33-review-20261028.html
       # Optional V4 audio audition list (not a learning UI)
       - kids/quiz-v4-audio-review.html
       - kids/data/quiz-kids-public-450.json
