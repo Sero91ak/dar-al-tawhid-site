@@ -5,10 +5,7 @@
  "use strict";
  if(global.DARTestDuoAdaptive)return;
  var root=document.documentElement;
- var navBackup=null,sideNav=null,raf=0,lastKey="";
- var styleKeys=["position","top","bottom","left","right","width","min-width","max-width",
-   "height","min-height","max-height","transform","-webkit-transform","display",
-   "flex-direction","grid-template-columns","margin","z-index"];
+ var raf=0,lastKey="";
  function measure(){
    var cw=document.documentElement.clientWidth||0,ch=document.documentElement.clientHeight||0;
    var iw=global.innerWidth||0,ih=global.innerHeight||0;
@@ -18,26 +15,6 @@
    return {width:w,height:h,aspect:w&&h?+(w/h).toFixed(3):1,
      keyboard:!!(vv&&h-vv.height>140),wide:w>h&&w>=620,
      landscape:w>h};
- }
- function backup(nav){
-   if(navBackup&&sideNav===nav)return;
-   var values={};
-   for(var i=0;i<styleKeys.length;i++){
-     var p=styleKeys[i];values[p]=[nav.style.getPropertyValue(p),nav.style.getPropertyPriority(p)];
-   }
-   navBackup=values;sideNav=nav;
- }
- function style(nav,p,v){nav.style.setProperty(p,v,"important")}
- function release(nav){
-   if(sideNav===nav&&navBackup){
-     for(var i=0;i<styleKeys.length;i++){
-       var p=styleKeys[i],entry=navBackup[p];
-       if(entry&&entry[0])nav.style.setProperty(p,entry[0],entry[1]);
-       else nav.style.removeProperty(p);
-     }
-   }
-   sideNav=null;navBackup=null;
-   document.body&&document.body.classList.remove("dar-duo-side-active");
  }
  // There is one navigation owner: fold-thumb-nav.js. The former DUO
  // inline 60px side rail fought that controller and re-centred the same node.
