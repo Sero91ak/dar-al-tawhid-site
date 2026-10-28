@@ -23,12 +23,46 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
         UserDefaults.standard.bool(forKey: backgroundPreferenceKey)
     }
 
+    // iOS may relaunch this app for a significant-location event without
+    // opening its WKWebView. Restore an already consented monitoring session.
+    func restoreLocationMonitoringAtLaunch() {
+        locationManager.delegate = self
+        reconcileBackgroundMonitoring()
+    }
+
+    private func allowsSignificantLocationMonitoring() -> Bool {
+        backgroundOptIn &&
+            DarPushNotifications.storedWebSettings()["locationMode"] as? String == "auto" &&
+            locationManager.authorizationStatus == .authorizedAlways
+    }
+
+    private func reconcileBackgroundMonitoring() {
+        if allowsSignificantLocationMonitoring() {
+            locationManager.startMonitoringSignificantLocationChanges()
+        } else {
+            locationManager.stopMonitoringSignificantLocationChanges()
+            locationManager.allowsBackgroundLocationUpdates = false
+        }
+    }
+
+    func prayerSettingsDidChange() {
+        reconcileBackgroundMonitoring()
+        if DarPushNotifications.storedWebSettings()["locationMode"] as? String == "manual" && !liveQibla {
+            locationManager.stopUpdatingLocation()
+            trackingRegularly = false
+        } else if UIApplication.shared.applicationState == .active {
+            startForegroundTracking()
+        }
+        sendLocationStatus()
+    }
+
     func attach(webView: WKWebView) {
         self.webView = webView
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.distanceFilter = 500
         locationManager.pausesLocationUpdatesAutomatically = true
+        reconcileBackgroundMonitoring()
         if !observingLifecycle {
             observingLifecycle = true
             NotificationCenter.default.addObserver(self, selector: #selector(appBecameActive),
@@ -42,13 +76,12 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
         guard let dict = body as? [String: Any], let type = dict["type"] as? String else { return }
         switch type {
         case "geolocation", "location", "prayer", "location-resume":
-            requestLocationIfNeeded()
+            requestLocationIfNeeded(userInitiated: true)
         case "location-background":
             enableBackgroundMonitoring()
         case "location-background-off":
             UserDefaults.standard.set(false, forKey: backgroundPreferenceKey)
-            locationManager.stopMonitoringSignificantLocationChanges()
-            locationManager.allowsBackgroundLocationUpdates = false
+            reconcileBackgroundMonitoring()
             sendLocationStatus()
         case "location-open-settings":
             if let url = URL(string: UIApplication.openSettingsURLString) {
@@ -122,7 +155,12 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
 
     /// Called after WKWebView is ready. First use requests When In Use, never
     /// quietly upgrades a user to Always authorization.
-    func requestLocationIfNeeded() {
+    func requestLocationIfNeeded(userInitiated: Bool = false) {
+        // Preserve a manually chosen prayer city on automatic app/page startup.
+        if !userInitiated && DarPushNotifications.storedWebSettings()["locationMode"] as? String == "manual" {
+            sendLocationStatus()
+            return
+        }
         switch locationManager.authorizationStatus {
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
@@ -138,15 +176,24 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
     private func startForegroundTracking() {
         guard UIApplication.shared.applicationState == .active else { return }
         guard CLLocationManager.locationServicesEnabled() else { return }
+        if DarPushNotifications.storedWebSettings()["locationMode"] as? String == "manual" && !liveQibla {
+            locationManager.stopUpdatingLocation()
+            trackingRegularly = false
+            reconcileBackgroundMonitoring()
+            sendLocationStatus()
+            return
+        }
         switch locationManager.authorizationStatus {
         case .authorizedWhenInUse, .authorizedAlways:
             locationManager.desiredAccuracy = liveQibla ? kCLLocationAccuracyBest : kCLLocationAccuracyHundredMeters
             locationManager.distanceFilter = liveQibla ? 20 : 500
             locationManager.startUpdatingLocation()
             trackingRegularly = true
-            if backgroundOptIn && DarPushNotifications.storedWebSettings()["locationMode"] as? String == "auto" && locationManager.authorizationStatus == .authorizedAlways {
+            if allowsSignificantLocationMonitoring() {
                 locationManager.allowsBackgroundLocationUpdates = true
                 locationManager.startMonitoringSignificantLocationChanges()
+            } else {
+                reconcileBackgroundMonitoring()
             }
         default: break
         }
@@ -169,7 +216,8 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
 
     @objc private func appBecameActive() {
         startForegroundTracking()
-        if locationManager.authorizationStatus == .authorizedWhenInUse || locationManager.authorizationStatus == .authorizedAlways {
+        if (locationManager.authorizationStatus == .authorizedWhenInUse || locationManager.authorizationStatus == .authorizedAlways) &&
+            DarPushNotifications.storedWebSettings()["locationMode"] as? String != "manual" {
             locationManager.requestLocation()
         }
         replayLastLocation()
@@ -179,9 +227,11 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
         locationManager.stopUpdatingHeading()
         locationManager.stopUpdatingLocation()
         trackingRegularly = false
-        if backgroundOptIn && DarPushNotifications.storedWebSettings()["locationMode"] as? String == "auto" && locationManager.authorizationStatus == .authorizedAlways {
+        if allowsSignificantLocationMonitoring() {
             locationManager.allowsBackgroundLocationUpdates = true
             locationManager.startMonitoringSignificantLocationChanges()
+        } else {
+            reconcileBackgroundMonitoring()
         }
     }
 
@@ -218,9 +268,11 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
         switch manager.authorizationStatus {
         case .authorizedWhenInUse, .authorizedAlways:
             if liveQibla { startLiveQibla() } else { startForegroundTracking() }
-            if backgroundOptIn && DarPushNotifications.storedWebSettings()["locationMode"] as? String == "auto" && manager.authorizationStatus == .authorizedAlways {
+            if allowsSignificantLocationMonitoring() {
                 manager.allowsBackgroundLocationUpdates = true
                 manager.startMonitoringSignificantLocationChanges()
+            } else {
+                reconcileBackgroundMonitoring()
             }
             manager.requestLocation()
             flushGeoDecisions(.grant)
