@@ -1233,7 +1233,7 @@
       logAudio("ended ignored: empty src");
       return false;
     }
-    if (Date.now() < ignoreEndedUntil) {
+    if (Date.now() < ignoreEndedUntil && !a.ended) {
       logAudio("ended ignored: src-change window");
       return false;
     }
@@ -1243,7 +1243,8 @@
     }
     return true;
   }
-  async function onEnded() {
+  async function onEnded(ev) {
+    if (ev && ev.currentTarget !== document.getElementById("darQuranPlayerAudio")) return;
     engine.endedAt = Date.now();
     logAudio("ended", snapAudio());
     if (!trackReallyFinished()) return;
