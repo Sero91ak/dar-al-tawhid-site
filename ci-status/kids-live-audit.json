@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-10-28T11:59:24Z",
+  "timestamp": "2026-10-28T12:04:54Z",
   "trigger": "workflow_run",
   "finishedDeployConclusion": "success",
-  "finishedDeployRun": "40683586118",
+  "finishedDeployRun": "40684545666",
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
-    "homeBytes": 24576,
+    "homeBytes": 560107,
     "homeContainsPrayerAssets1275": false,
     "homeContainsBuild1275": false,
     "cssBytes": 109300,
@@ -17,75 +17,86 @@
       "fajr": 1808212,
       "dhuhr": 1968042,
       "asr": 1879100,
-      "maghrib": 0,
+      "maghrib": 1973933,
       "isha": 2207575
     },
-    "allSevenArtworkFilesReachable": false,
+    "allSevenArtworkFilesReachable": true,
     "versionJsonReadable": true,
-    "trilingualWordLearningReady": false,
+    "trilingualWordLearningReady": true,
     "parentsDashboard": {
-      "expectedSWRef": null,
+      "expectedSWRef": "/kids/sw.js?v=1467",
       "manifestSWCacheVersion": null,
-      "actualSWCacheVersion": null,
-      "workerBytes": 0,
-      "observedSWRefs": [],
-      "hasServiceWorkerRegisterCall": false,
-      "htmlReferencesNewDashboard": false,
-      "htmlReferencesNewStyles": false,
-      "htmlRegistersNewSW": false,
-      "htmlHasProfileAndBirthFields": false,
+      "actualSWCacheVersion": "1467",
+      "workerBytes": 46526,
+      "observedSWRefs": [
+        "/kids/sw.js?v=1467"
+      ],
+      "hasServiceWorkerRegisterCall": true,
+      "htmlReferencesNewDashboard": true,
+      "htmlReferencesNewStyles": true,
+      "htmlRegistersNewSW": true,
+      "htmlHasProfileAndBirthFields": true,
       "dashboardJs": {
-        "ref": null,
-        "bytes": 0
+        "ref": "/kids/parents-dashboard-v1432.js?v=1441",
+        "bytes": 19219
       },
       "dashboardCss": {
-        "ref": null,
-        "bytes": 0
+        "ref": "/kids/parents-dashboard-v1432.css?v=1435",
+        "bytes": 19269
       },
-      "dashboardContainsProfileSummary": false,
-      "dashboardContainsSaveValidation": false,
-      "girlsSaveButtonContrast": false,
-      "stylesAreProfileScoped": false,
-      "ready": false
+      "dashboardContainsProfileSummary": true,
+      "dashboardContainsSaveValidation": true,
+      "girlsSaveButtonContrast": true,
+      "stylesAreProfileScoped": true,
+      "ready": true
     },
     "visitorQuiz": {
-      "homeHasPremiumStyleRef": false,
-      "premiumStyleBytes": 0,
-      "premiumScriptBytes": 0,
-      "approvedOnlyAudioPlayerBytes": 0,
-      "htmlLinksPremiumStyle": false,
-      "htmlLinksPremiumJs": false,
-      "cssHasGirlPalette": false,
-      "cssHasBoyPalette": false,
-      "cssHasReducedMotion": false,
-      "jsHasPremiumDashboard": false,
-      "jsHas450QuestionPack": false,
-      "v4RequiresHumanListening": false,
-      "v4RequiresReleaseEnabled": false,
+      "homeHasPremiumStyleRef": true,
+      "premiumStyleBytes": 43706,
+      "premiumScriptBytes": 370099,
+      "approvedOnlyAudioPlayerBytes": 6647,
+      "htmlLinksPremiumStyle": true,
+      "htmlLinksPremiumJs": true,
+      "cssHasGirlPalette": true,
+      "cssHasBoyPalette": true,
+      "cssHasReducedMotion": true,
+      "jsHasPremiumDashboard": true,
+      "jsHas450QuestionPack": true,
+      "v4RequiresHumanListening": true,
+      "v4RequiresReleaseEnabled": true,
       "audioReleased": false,
-      "newDashboardDeliveredToFreshBrowser": false,
-      "unreviewedAudioCorrectlyBlocked": false
+      "newDashboardDeliveredToFreshBrowser": true,
+      "unreviewedAudioCorrectlyBlocked": true
     },
     "trilingualAssets": {
       "learning": {
-        "ref": null,
-        "bytes": 0
+        "ref": "/kids/dua-smart-learn.js?v=1312",
+        "bytes": 44391
       },
       "trilingualCss": {
-        "ref": null,
-        "bytes": 0
+        "ref": "/kids/dua-learn-trilingual-v1282.css?v=1291",
+        "bytes": 9542
       },
       "germanMeanings": {
-        "ref": null,
-        "bytes": 0
+        "ref": "/kids/dua-word-meanings-v1.js?v=2",
+        "bytes": 30680
       },
       "phonetic": {
-        "ref": null,
-        "bytes": 0
+        "ref": "/kids/dua-phonetic-alignment-v1.js?v=1",
+        "bytes": 23770
       }
     }
   },
   "lastDeployRuns": [
+    {
+      "conclusion": "success",
+      "created_at": "2026-10-28T12:02:05Z",
+      "head_sha": "4e1c2851ca48d48856ba9783810f7beda19c746d",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40684545666",
+      "id": 40684545666,
+      "status": "completed",
+      "updated_at": "2026-10-28T12:04:42Z"
+    },
     {
       "conclusion": "success",
       "created_at": "2026-10-28T11:54:40Z",
@@ -130,15 +141,6 @@
       "id": 40642406192,
       "status": "completed",
       "updated_at": "2026-10-28T06:16:36Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-28T06:11:54Z",
-      "head_sha": "dc7be315646c90116f50c26bffcd166aef6ed9d8",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40642399394",
-      "id": 40642399394,
-      "status": "completed",
-      "updated_at": "2026-10-28T06:12:00Z"
     }
   ]
 }
