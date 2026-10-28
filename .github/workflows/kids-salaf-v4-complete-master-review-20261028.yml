@@ -99,7 +99,7 @@ jobs:
               asset=root/e["audioFile"]
               assert asset.is_file() and hashlib.sha256(asset.read_bytes()).hexdigest()==e["audioSha256"]
               assert e["timingStatus"]=="character-alignment-exact"
-              count=len([p for p in items[sid]["masterStoryText"].split("\\n\\n") if p.strip()])
+              count=len([p for p in items[sid]["masterStoryText"].split(chr(10)*2) if p.strip()])
               cues=e["timings"]
               assert len(cues)==count
               assert all(c["paragraphIndex"]==i and 0<=c["start"]<c["end"]<=e["durationSec"]+0.5 for i,c in enumerate(cues))
