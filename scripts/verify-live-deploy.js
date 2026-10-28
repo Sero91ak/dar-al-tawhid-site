@@ -206,9 +206,17 @@ async function main() {
       200
     );
 
-    if (!iosScrollHtmlOk || !iosScrollCssOk || !iosScrollJsOk || !responsiveHtmlOk || !responsiveCssOk || !publicWebsiteOk || !publicIsolationSwOk || !publicInstallManifestOk || !publicInstallWorkerOk || !visitorOk || !pwaOk || !pwaInstallerOk || !downloadButtonsOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
+    // Release gate: inspect the actual CDN-delivered Quran playback engine.
+    const quranGaplessOk = await waitForHtmlIncludes(
+      `${SITE_URL}/assets/dar-quran-player.js?cb=${Date.now()}`,
+      ["PLAYER_BUILD = 1112", "PLAYER_BUILD = 983",
+       "function beginWarmHandoff()", "function adoptWarmHandoff(",
+       "Date.now() < ignoreEndedUntil && !a.ended"]
+    );
+    console.log(`verify Quran audio deck handoff: ${quranGaplessOk ? "ok" : "FAIL"}`);
+    if (!iosScrollHtmlOk || !iosScrollCssOk || !iosScrollJsOk || !responsiveHtmlOk || !responsiveCssOk || !publicWebsiteOk || !publicIsolationSwOk || !publicInstallManifestOk || !publicInstallWorkerOk || !visitorOk || !pwaOk || !pwaInstallerOk || !downloadButtonsOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk || !quranGaplessOk) {
       console.error(
-        `verify: Besucher-App fehlgeschlagen (ios-scroll-html=${iosScrollHtmlOk ? "ok" : "fail"}, ios-scroll-css=${iosScrollCssOk ? "ok" : "fail"}, ios-scroll-js=${iosScrollJsOk ? "ok" : "fail"}, responsive-html=${responsiveHtmlOk ? "ok" : "fail"}, responsive-css=${responsiveCssOk ? "ok" : "fail"}, public=${publicWebsiteOk ? "ok" : "fail"}, web-sw-isolation=${publicIsolationSwOk ? "ok" : "fail"}, public-install-manifest=${publicInstallManifestOk ? "ok" : "fail"}, public-install-sw=${publicInstallWorkerOk ? "ok" : "fail"}, native-build=${visitorOk ? visitorBuild : "fail"}, android-pwa=${pwaOk ? "ok" : "fail"}, pwa-install=${pwaInstallerOk ? "ok" : "fail"}, downloads=${downloadButtonsOk ? "ok" : "fail"}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
+        `verify: Besucher-App fehlgeschlagen (ios-scroll-html=${iosScrollHtmlOk ? "ok" : "fail"}, ios-scroll-css=${iosScrollCssOk ? "ok" : "fail"}, ios-scroll-js=${iosScrollJsOk ? "ok" : "fail"}, responsive-html=${responsiveHtmlOk ? "ok" : "fail"}, responsive-css=${responsiveCssOk ? "ok" : "fail"}, public=${publicWebsiteOk ? "ok" : "fail"}, web-sw-isolation=${publicIsolationSwOk ? "ok" : "fail"}, public-install-manifest=${publicInstallManifestOk ? "ok" : "fail"}, public-install-sw=${publicInstallWorkerOk ? "ok" : "fail"}, native-build=${visitorOk ? visitorBuild : "fail"}, android-pwa=${pwaOk ? "ok" : "fail"}, pwa-install=${pwaInstallerOk ? "ok" : "fail"}, downloads=${downloadButtonsOk ? "ok" : "fail"}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"}, quran-gapless=${quranGaplessOk ? "ok" : "fail"})`
       );
       failed += 1;
     } else {
