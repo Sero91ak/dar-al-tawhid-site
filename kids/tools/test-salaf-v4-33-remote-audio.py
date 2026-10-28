@@ -23,7 +23,7 @@ def fail(message):
 
 def read_entries():
     html = HTML.read_text(encoding="utf-8")
-    match = re.search(r"const SNAPSHOT=(\{[^\n]+\});\nconst BATCHES=", html)
+    match = re.search(r"const SNAPSHOT=(\{[^\n]+\});\nconst INDEX_URL=", html)
     if not match:
         fail("33-story embedded audition data missing")
     data = json.loads(match.group(1))
