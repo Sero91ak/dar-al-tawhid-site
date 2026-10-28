@@ -641,6 +641,9 @@
  "use strict";
  if(global.__DAR_ADULT_FOLD_WIDE_LIVE_V1)return;
  if(/^\/test(?:\/|$)/.test(String(global.location&&global.location.pathname||"")))return;
+ // Static CI scripts that isolate the legacy slide-height controller omit
+ // documentElement; live browsers always provide it before the scripts load.
+ if(!document.documentElement)return;
  global.__DAR_ADULT_FOLD_WIDE_LIVE_V1=true;
  var root=document.documentElement, originalParent=null, originalNext=null;
  var originalStyles=null, observedNav=null, raf=0, sideActive=false;
