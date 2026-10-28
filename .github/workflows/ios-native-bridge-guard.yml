@@ -59,6 +59,8 @@ jobs:
           node --check test/assets/dar-setup-hub.js
       - name: Native GPS and prayer location regression cases
         run: node scripts/test-ios-native-gps-recovery.cjs
+      - name: Adult website and native resume regression cases
+        run: node scripts/test-adult-reentry.cjs
       - name: Native capabilities and compiled bridge presence
         run: |
           python3 - <<'PY'
