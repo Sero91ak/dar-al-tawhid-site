@@ -697,16 +697,20 @@
         global.DarAdaptiveLayout.syncNav();
     }catch(e){}
   }
-  function moveToSide(nav){
+  function moveToSide(nav,rtl){
     if(!side||navNode!==nav){snapshot(nav);side=true;}
     if(nav.parentNode!==root)root.appendChild(nav); // never clone the 3D tabs
     nav.classList.remove("is-adaptive-centered");
     nav.classList.add("dar-ws2-original-tabs");
     var dirty=nav.style.getPropertyValue("position")!=="fixed"||
-      nav.style.getPropertyValue("transform")!=="translateY(-50%)";
+      nav.style.getPropertyValue("transform")!=="translateY(-50%)"||
+      nav.style.getPropertyValue("left")!==(rtl?"auto":"max(10px,env(safe-area-inset-left,0px))")||
+      nav.style.getPropertyValue("right")!==(rtl?"max(10px,env(safe-area-inset-right,0px))":"auto");
     if(!dirty)return;
     var values={
-      position:"fixed",top:"50%",bottom:"auto",left:"auto",right:"auto",
+      position:"fixed",top:"50%",bottom:"auto",
+      left:rtl?"auto":"max(10px,env(safe-area-inset-left,0px))",
+      right:rtl?"max(10px,env(safe-area-inset-right,0px))":"auto",
       width:"76px","min-width":"76px","max-width":"76px",
       height:"min(404px,calc(100dvh - 36px))","min-height":"0","max-height":"404px",
       margin:"0",padding:"6px",transform:"translateY(-50%)",
@@ -731,7 +735,7 @@
       root.style.setProperty("--dar-ws2-reader-available",m.reader+"px");
       lastKey=newKey;
     }
-    if(m.vertical&&nav)moveToSide(nav);
+    if(m.vertical&&nav)moveToSide(nav,m.rtl);
     else if(nav)restore(nav);
     if(lastMode!==m.mode){
       lastMode=m.mode;
