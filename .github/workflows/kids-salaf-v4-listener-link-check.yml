@@ -1,0 +1,92 @@
+name: Kids Salaf 33 original audio listening link - validate
+
+on:
+  pull_request:
+    paths:
+      - "salaf-v4-33-hoeren-20261028.html"
+      - ".github/workflows/cloudflare-pages-deploy.yml"
+      - ".github/workflows/kids-salaf-v4-listener-link-check.yml"
+  push:
+    branches: [main]
+    paths:
+      - "salaf-v4-33-hoeren-20261028.html"
+      - ".github/workflows/kids-salaf-v4-listener-link-check.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  independent-33-listener-syntax-data-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify self-contained listening list, unmodified source and exact 33 cues
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs=require('node:fs'),crypto=require('node:crypto'),assert=require('node:assert/strict');
+          const html=fs.readFileSync('salaf-v4-33-hoeren-20261028.html','utf8');
+          assert.match(html,/<meta name="robots" content="noindex,nofollow,noarchive">/);
+          assert.match(html,/id="audio" controls/);
+          assert.match(html,/id="audio-direct"/);
+          assert.doesNotMatch(html,/fetch\("\/kids\/data\/salaf-library-v1\.json/);
+          assert.doesNotMatch(html,/await Promise\.all\(tasks/);
+          const scripts=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+          assert.equal(scripts.length,1);
+          fs.writeFileSync('/tmp/kids-salaf-33-listener.js',scripts[0][1]);
+          const pre='const SNAPSHOT=',post=';\nconst BATCHES=';
+          const begin=scripts[0][1].indexOf(pre);
+          const end=scripts[0][1].indexOf(post,begin);
+          assert(begin>0&&end>begin);
+          const snapshot=JSON.parse(scripts[0][1].slice(begin+pre.length,end));
+          assert.equal(snapshot.items.length,33);
+          assert.equal(Object.keys(snapshot.entries).length,33);
+          const ids=new Set();
+          for(const story of snapshot.items){
+            assert(!ids.has(story.id),'No duplicate story');
+            ids.add(story.id);
+            const row=snapshot.entries[story.id];
+            assert(row,'Missing exact source audio');
+            assert.equal(row.modelId,'eleven_v4');
+            assert.equal(row.languageCode,'de');
+            assert.equal(row.humanListeningApproved,false,'No fake human approval');
+            assert.equal(row.releaseEnabled,false,'No unreviewed live release');
+            assert.equal(row.audioSha256.length,64);
+            const actual=crypto.createHash('sha256').update(story.masterStoryText).digest('hex');
+            assert.equal(actual,row.textSha256,story.id+': exact master-text SHA changed');
+            assert.equal(row.timingStatus,'character-alignment-exact');
+            assert.equal(row.timings.length,story.masterStoryText.split(/\n{2,}/).length);
+            assert.match(row.audioFile,/^kids\/review-only\/salaf-v4-(?:20261027|complete-20261028\/salaf-v4-pending-0[1-8])\/[a-z0-9-]+\.m4a$/);
+            assert.match(row._root,/^https:\/\/raw\.githubusercontent\.com\/Sero91ak\/dar-al-tawhid-site\/[a-f0-9]{40}\/$/);
+          }
+          console.log('PASS: 33 immutable master-audio URLs, 33 original texts and SHA, all paragraph cues, no false release');
+          NODE
+          node --check /tmp/kids-salaf-33-listener.js
+      - name: Confirm un-gated audio-preview path really triggers canonical Cloudflare publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -Fq '      - salaf-v4-33-hoeren-20261028.html' .github/workflows/cloudflare-pages-deploy.yml
+          test -s cloudflare/site-router.js
+          echo "Root /salaf-v4-33-hoeren-20261028.html is outside /kids/* auth gate; production worker path configured."
+      - name: Verify two actual immutable original m4a sources are reachable to users
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,re
+          html=Path('salaf-v4-33-hoeren-20261028.html').read_text()
+          text=html.split('const SNAPSHOT=',1)[1].split(';\nconst BATCHES=',1)[0]
+          data=json.loads(text)['entries']
+          old=next(e for e in data.values() if 'complete-' not in e['audioFile'])
+          new=next(e for e in data.values() if 'complete-' in e['audioFile'])
+          for n,e in enumerate((old,new)):
+              Path(f'/tmp/salaf-audio-url-{n}.txt').write_text(e['_root']+e['audioFile'])
+          PY
+          for n in 0 1; do
+            url="$(cat "/tmp/salaf-audio-url-$n.txt")"
+            curl -fsSL --max-time 35 --retry 2 -r 0-2047 "$url" -o "/tmp/salaf-audio-sample-$n.bin"
+            test "$(wc -c < "/tmp/salaf-audio-sample-$n.bin")" -ge 2000
+          done
