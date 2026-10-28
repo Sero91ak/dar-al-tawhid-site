@@ -1,0 +1,37 @@
+name: Kids Salaf V4 reviewed release packer guard
+on:
+  pull_request:
+    paths:
+      - "kids/tools/release-salaf-v4-reviewed.py"
+      - "kids/SALAF-V4-AUDIO-RELEASE-GATE.md"
+      - ".github/workflows/kids-salaf-v4-reviewed-release-guard.yml"
+  push:
+    branches: [main]
+    paths:
+      - "kids/tools/release-salaf-v4-reviewed.py"
+      - "kids/SALAF-V4-AUDIO-RELEASE-GATE.md"
+permissions:
+  contents: read
+jobs:
+  release-script-fail-closed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile independent reviewer-gated release tool
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/release-salaf-v4-reviewed.py
+      - name: Refuse publication without 33 staged review masters and actual human QA
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha_before="$(sha256sum kids/data/salaf-library-v1.json | awk '{print $1}')"
+          set +e
+          python3 kids/tools/release-salaf-v4-reviewed.py --promote > /tmp/kids-salaf-release-test.stdout 2> /tmp/kids-salaf-release-test.stderr
+          status=$?
+          set -e
+          test "$status" -ne 0 || { echo "::error::Unreviewed publication must fail closed"; exit 1; }
+          sha_after="$(sha256sum kids/data/salaf-library-v1.json | awk '{print $1}')"
+          test "$sha_before" = "$sha_after" || { echo "::error::Blocked release wrote a public catalog"; exit 1; }
+          test ! -d kids/audio/salaf || { echo "::error::Blocked release created public audio directory"; exit 1; }
+          echo "PASS: no fake hearing approval, no credits, no published audio, no catalog edit."
