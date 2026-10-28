@@ -39,58 +39,43 @@
    sideNav=null;navBackup=null;
    document.body&&document.body.classList.remove("dar-duo-side-active");
  }
- function syncNavigation(nav){
-   nav=nav||document.getElementById("bottomNav");
-   if(!nav||!document.body)return;
-   var m=measure();
-   var body=document.body;
-   var exclude=body.classList.contains("is-ilm-chat-route")||
-     body.classList.contains("is-quran-player-route")||
-     body.classList.contains("is-library-reader-route")||
-     body.classList.contains("dar-test-reading-open")||
-     body.classList.contains("image-editor-mode")||
-     root.classList.contains("is-quran-player-route");
-   var active=m.wide&&m.width<=1200&&m.height>=380&&m.height<=760&&!m.keyboard&&!exclude;
-   if(!active){
-     if(sideNav===nav||body.classList.contains("dar-duo-side-active"))release(nav);
-     return;
-   }
-   backup(nav);
-   body.classList.add("dar-duo-side-active");
-   // Update only a handful of inline properties already owned by the test nav.
-   // ensureBottomNavDock() calls us when it resets the bottom tabbar.
-   style(nav,"position","fixed");
-   style(nav,"top","50%");
-   style(nav,"bottom","auto");
-   style(nav,"left","max(8px,env(safe-area-inset-left,0px))");
-   style(nav,"right","auto");
-   style(nav,"width","60px");
-   style(nav,"min-width","60px");
-   style(nav,"max-width","60px");
-   style(nav,"height","min(390px,calc(100dvh - 28px))");
-   style(nav,"min-height","0");
-   style(nav,"max-height","min(390px,calc(100dvh - 28px))");
-   style(nav,"transform","translateY(-50%)");
-   style(nav,"-webkit-transform","translateY(-50%)");
-   style(nav,"display","flex");
-   style(nav,"flex-direction","column");
-   style(nav,"grid-template-columns","none");
-   style(nav,"margin","0");
-   style(nav,"z-index","80");
+ // There is one navigation owner: fold-thumb-nav.js. The former DUO
+ // inline 60px side rail fought that controller and re-centred the same node.
+ function syncNavigation(){
+   var owner=global.DarAdaptiveNavPlacement;
+   if(owner && typeof owner.apply==="function") owner.apply();
  }
+
  function apply(){
    var m=measure();
    if(!m.width||!m.height)return;
    var axis=m.landscape?"landscape":"portrait";
-   var size=m.width<540?"compact":m.width<990?"medium":"wide";
-   var key=m.width+"x"+m.height+"|"+axis+"|"+size+"|"+m.keyboard;
+   // Android window-size-class principles, with a capacity check so the
+   // right reader never collapses into one-character-wide text.
+   var available=m.width-(m.width>=1060?148:0)-32;
+   var listWidth=Math.min(360,Math.max(270,available*.34));
+   var isDual=m.width>=840&&m.height>=560&&!m.keyboard&&
+     available-listWidth-18>=480;
+   var size=m.width<600?"compact":m.width<840?"medium":"expanded";
+   var segments=global.viewport&&global.viewport.segments;
+   var hingeGap=0;
+   if(segments&&segments.length===2){
+     var a=segments[0],b=segments[1];
+     if(a&&b&&Number(b.left)>Number(a.right)){
+       hingeGap=Math.max(0,Math.min(80,Number(b.left)-Number(a.right)));
+     }
+   }
+   var key=m.width+"x"+m.height+"|"+axis+"|"+size+"|"+m.keyboard+"|"+isDual+"|"+hingeGap;
    if(key!==lastKey){
      root.setAttribute("data-dar-duo-axis",axis);
      root.setAttribute("data-dar-duo-size",size);
+     root.setAttribute("data-dar-duo-layout",isDual?"dual":"single");
+     root.style.setProperty("--dar-duo-hinge-gap",hingeGap+"px");
      root.style.setProperty("--dar-duo-vw",m.width+"px");
      root.style.setProperty("--dar-duo-vh",m.height+"px");
      lastKey=key;
    }
+   // Reposition original five tabs only through the shared owner.
    syncNavigation();
  }
  function schedule(){
