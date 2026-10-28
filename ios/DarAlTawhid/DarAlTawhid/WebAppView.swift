@@ -298,9 +298,9 @@ struct WebAppView: UIViewRepresentable {
             if(root){
               root.classList.add("dar-ios-native-app");
               root.classList.remove("dar-soft-booting");
-              if(root.getAttribute("data-layout")==="medium"||root.getAttribute("data-layout")==="expanded"){
-                root.setAttribute("data-layout","compact");
-              }
+              // Adult iPad/Fold architecture: the Web viewport controller owns
+              // compact / dual / wide. Never force tablets back to compact.
+              // Content, native bridges and feature availability stay unchanged.
             }
             if(document.body)document.body.classList.add("dar-ios-native-app");
             if(document.head)document.head.appendChild(style);
