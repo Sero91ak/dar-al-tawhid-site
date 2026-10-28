@@ -264,3 +264,36 @@ jobs:
             --body "Nur JSON-Audioindex aus im Git-Repository vorhandenen Originaldatei-URLs; keine bezahlten ElevenLabs-Aufrufe, keine manuelle Hörfreigabe und keine Änderung am öffentlichen Kinder-Audio-Katalog. Neue Inhalte werden künftig per zentraler Quellenliste aufgenommen."; then
             echo "::notice::GitHub Actions PR-Erstellung ist durch Repository-Einstellungen gesperrt. Der geprüfte Katalog ist im Zweig $branch gesichert; der separate stündliche/tägliche GitHub-Katalog-Auftrag erstellt den PR über das verbundene Benutzerkonto."
           fi
+
+  verify-live-all-categorized-audio-groups:
+    if: github.event_name == 'push'
+    needs: validate-canonical-audio-review-library
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Verify the real public Cloudflare audio-review catalog loads without login
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://dar-al-tawhid.de/kids-audio-review-library-v1.json'
+          agent='Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1'
+          code="$(curl -fsSL -A "$agent" --max-time 55 -H 'Cache-Control: no-cache' -o /tmp/kids-review-live.json -w '%{http_code}' "$url?verify=$(date +%s)")"
+          test "$code" = "200"
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/kids-review-live.json').read_text(encoding='utf-8'))
+          groups=data.get('sections',[])
+          if data.get('schemaVersion')!=1 or len(groups)<14:
+              raise AssertionError('Live catalog does not contain the full categorized library')
+          salaf=[x for x in groups if x['id']=='salaf']
+          if len(salaf)!=1 or salaf[0].get('count')!=33:
+              raise AssertionError('Salaf reference category missing or changed')
+          listed=[y for x in groups if x['id']!='salaf' for y in x.get('entries',[])]
+          if len(listed)<5000: raise AssertionError('Full existing audio library is not published')
+          if any(not x.get('url','').startswith('/kids/assets/') for x in listed):
+              raise AssertionError('Unexpected untrusted audio reference')
+          if data.get('releaseEnabled') is True or data.get('automaticApproval') is True:
+              raise AssertionError('Technical review inventory must not auto-publish audio')
+          print('LIVE PASS: public audio QA index HTTP 200,',len(groups),'separate categories,',len(listed)+33,'referenced originals. No fake approvals.')
+          PY
