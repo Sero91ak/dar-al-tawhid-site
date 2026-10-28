@@ -22,7 +22,7 @@
   // V1109: this implementation is restricted to the official iOS visitor app.
   // Website, Dar Test, Kids and Apple TV retain their existing player engines.
   if (!isOfficialIosApp() || isAppleTvApp() || isTestAppPath()) return;
-    var PLAYER_BUILD = 1111;
+    var PLAYER_BUILD = 1112;
   if (!document.querySelector('link[data-dqp-v11-skin]')) {
     var v11Css = document.createElement('link');
     v11Css.rel = 'stylesheet';
@@ -875,6 +875,8 @@
   }
   function loadAudio(autoplay, keepTime) {
     var gen = ++playGen;
+    if (adoptWarmHandoff(autoplay, keepTime, gen)) return;
+    clearWarmAyah();
     urlIndex = 0;
     state.error = "";
     trackHeard = false;
@@ -956,6 +958,7 @@
       paintChrome();
       paintMini();
       followPlayingAyah(false);
+      preloadNext();
     }
     // Online sources are known locally: set src + play in the click gesture.
     // This avoids losing iOS WebKit audio user activation across a Promise.
@@ -971,7 +974,156 @@
       });
     }
   }
-  function preloadNext() {}
+  // Prepared second deck: the next ayah can start before any new media request.
+  // Kept separate from the visible/main <audio> until the current verse ends.
+  var warmNextAyah = null;
+  var warmHandoff = null;
+  function discardWarmAyah(slot) {
+    if (!slot) return;
+    var deck = slot.deck;
+    if (deck && deck !== document.getElementById("darQuranPlayerAudio")) {
+      try { deck.pause(); deck.removeAttribute("src"); deck.load(); deck.remove(); } catch (eDeck) {}
+    }
+    if (slot.saved && slot.url && deck !== document.getElementById("darQuranPlayerAudio")) {
+      try { URL.revokeObjectURL(slot.url); } catch (eBlob) {}
+    }
+  }
+  function clearWarmAyah() {
+    var old = warmNextAyah;
+    warmNextAyah = null;
+    discardWarmAyah(old);
+  }
+  function upcomingAyah() {
+    if (state.repeat === "ayah" || state.shuffle !== "off" ||
+        (state.learnMode && (state.learnLoop || state.learnStay))) return null;
+    var s = Number(state.surah), a = Number(state.ayah) + 1;
+    if (a > ayahCountHard(s)) {
+      a = 1;
+      if (state.repeat !== "surah") s = s >= 114 ? 1 : s + 1;
+    }
+    return { surah: s, ayah: a, reciter: state.reciter };
+  }
+  function preloadNext() {
+    if (!engine.wantPlay || !state.sessionActive || window.__DAR_ADHAN_ACTIVE === true) {
+      clearWarmAyah();
+      return;
+    }
+    var target = upcomingAyah();
+    if (!target) { clearWarmAyah(); return; }
+    if (warmNextAyah && warmNextAyah.gen === playGen &&
+        warmNextAyah.surah === target.surah && warmNextAyah.ayah === target.ayah &&
+        warmNextAyah.reciter === target.reciter) return;
+    clearWarmAyah();
+    var slot = {
+      surah: target.surah, ayah: target.ayah, reciter: target.reciter,
+      gen: playGen, deck: null, url: "", saved: false
+    };
+    warmNextAyah = slot;
+    function stage(url, saved) {
+      if (!url) return;
+      if (warmNextAyah !== slot || slot.gen !== playGen) {
+        if (saved) { try { URL.revokeObjectURL(url); } catch (eStale) {} }
+        return;
+      }
+      var deck = document.createElement("audio");
+      deck.id = "darQuranPlayerAudioNext";
+      deck.preload = "auto";
+      deck.setAttribute("playsinline", "");
+      deck.setAttribute("webkit-playsinline", "");
+      deck.playsInline = true;
+      deck.controls = false;
+      deck.muted = false;
+      deck.defaultMuted = false;
+      deck.volume = 1;
+      deck.style.display = "none";
+      slot.deck = deck;
+      slot.url = url;
+      slot.saved = !!saved;
+      document.body.appendChild(deck);
+      deck.src = url;
+      try { deck.load(); } catch (eLoad) {}
+    }
+    if (isOffline()) {
+      savedAyahUrl(target.reciter, target.surah, target.ayah)
+        .then(function (url) { stage(url, true); })
+        .catch(function () {});
+    } else {
+      var rec = reciterById(target.reciter);
+      var urls = urlsForWithRec(rec, target.surah, target.ayah);
+      stage(urls[0] || "", false);
+    }
+  }
+  function beginWarmHandoff() {
+    var slot = warmNextAyah;
+    var target = upcomingAyah();
+    if (!slot || !target || slot.gen !== playGen || !slot.deck ||
+        slot.deck.readyState < 2 || slot.deck.error ||
+        slot.surah !== target.surah || slot.ayah !== target.ayah ||
+        slot.reciter !== target.reciter || window.__DAR_ADHAN_ACTIVE === true) {
+      clearWarmAyah();
+      return false;
+    }
+    var old = audioEl();
+    var deck = slot.deck;
+    warmNextAyah = null;
+    warmHandoff = slot;
+    // Move the stable main-audio ID to the already-buffered second deck.
+    old.id = "darQuranPlayerAudioPrevious";
+    deck.id = "darQuranPlayerAudio";
+    bindAudioListeners(deck);
+    try { old.pause(); old.removeAttribute("src"); old.load(); old.remove(); } catch (eOld) {}
+    if (engine.objectUrl && engine.objectUrl !== slot.url) {
+      try { URL.revokeObjectURL(engine.objectUrl); } catch (eRevokeOld) {}
+    }
+    engine.objectUrl = slot.saved ? slot.url : "";
+    engine.lastUrl = slot.url;
+    engine.wantPlay = true;
+    ignoreEndedUntil = Date.now() + 1200;
+    try {
+      var started = deck.play();
+      if (started && started.catch) started.catch(function () {
+        // The normal loadAudio adoption path retains autoplay/error recovery.
+      });
+    } catch (ePlay) {}
+    return true;
+  }
+  function adoptWarmHandoff(autoplay, keepTime, gen) {
+    var slot = warmHandoff;
+    warmHandoff = null;
+    if (!slot) return false;
+    if (!autoplay || keepTime || !slot.deck ||
+        slot.deck !== document.getElementById("darQuranPlayerAudio") ||
+        slot.surah !== Number(state.surah) || slot.ayah !== Number(state.ayah) ||
+        slot.reciter !== state.reciter) return false;
+    urlIndex = 0;
+    state.error = "";
+    state.resumeAt = 0;
+    state.current = Number(slot.deck.currentTime) || 0;
+    state.playing = true;
+    state.sessionActive = true;
+    engine.wantPlay = true;
+    engine.started = !slot.deck.paused;
+    engine.lastUrl = slot.url;
+    engine.loadedSurah = slot.surah;
+    engine.loadedAyah = slot.ayah;
+    engine.blobTried = !!slot.saved;
+    engine.haltedOffline = false;
+    engine.lastProgressAt = Date.now();
+    trackHeard = false;
+    allowAdvance = false;
+    clearStallRetry();
+    ignoreEndedUntil = Date.now() + 1200;
+    if (slot.deck.paused) runPlay(slot.deck, gen);
+    applyLearnRate();
+    syncProgressSample(true);
+    startProgressClock();
+    paintAyah(false);
+    paintChrome();
+    paintMini();
+    followPlayingAyah(true);
+    preloadNext();
+    return true;
+  }
   function tryFallback() {
     if (!engine.blobTried) {
       engine.blobTried = true;
@@ -1141,7 +1293,7 @@
       logAudio("ended ignored: empty src");
       return false;
     }
-    if (Date.now() < ignoreEndedUntil) {
+    if (Date.now() < ignoreEndedUntil && !a.ended) {
       logAudio("ended ignored: src-change window");
       return false;
     }
@@ -1151,7 +1303,8 @@
     }
     return true;
   }
-  async function onEnded() {
+  async function onEnded(ev) {
+    if (ev && ev.currentTarget !== document.getElementById("darQuranPlayerAudio")) return;
     engine.endedAt = Date.now();
     logAudio("ended", snapAudio());
     if (!trackReallyFinished()) return;
@@ -1179,6 +1332,7 @@
       runPlay(b, playGen);
       return;
     }
+    beginWarmHandoff();
     await nextAyah(true);
     followPlayingAyah(true);
   }
@@ -2899,6 +3053,8 @@
     }
   }
   function stopSession() {
+    clearWarmAyah();
+    warmHandoff = null;
     playGen += 1;
     engine.wantPlay = false;
     ignoreEndedUntil = Date.now() + 4000;
@@ -4771,7 +4927,7 @@
   } else {
 (function () {
   "use strict";
-    var PLAYER_BUILD = 982;
+    var PLAYER_BUILD = 983;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -5591,6 +5747,8 @@
   }
   function loadAudio(autoplay, keepTime) {
     var gen = ++playGen;
+    if (adoptWarmHandoff(autoplay, keepTime, gen)) return;
+    clearWarmAyah();
     urlIndex = 0;
     state.error = "";
     trackHeard = false;
@@ -5671,9 +5829,159 @@
       paintChrome();
       paintMini();
       followPlayingAyah(false);
+      preloadNext();
     });
   }
-  function preloadNext() {}
+  // Prepared second deck: the next ayah can start before any new media request.
+  // Kept separate from the visible/main <audio> until the current verse ends.
+  var warmNextAyah = null;
+  var warmHandoff = null;
+  function discardWarmAyah(slot) {
+    if (!slot) return;
+    var deck = slot.deck;
+    if (deck && deck !== document.getElementById("darQuranPlayerAudio")) {
+      try { deck.pause(); deck.removeAttribute("src"); deck.load(); deck.remove(); } catch (eDeck) {}
+    }
+    if (slot.saved && slot.url && deck !== document.getElementById("darQuranPlayerAudio")) {
+      try { URL.revokeObjectURL(slot.url); } catch (eBlob) {}
+    }
+  }
+  function clearWarmAyah() {
+    var old = warmNextAyah;
+    warmNextAyah = null;
+    discardWarmAyah(old);
+  }
+  function upcomingAyah() {
+    if (state.repeat === "ayah" || state.shuffle !== "off" ||
+        (state.learnMode && (state.learnLoop || state.learnStay))) return null;
+    var s = Number(state.surah), a = Number(state.ayah) + 1;
+    if (a > ayahCountHard(s)) {
+      a = 1;
+      if (state.repeat !== "surah") s = s >= 114 ? 1 : s + 1;
+    }
+    return { surah: s, ayah: a, reciter: state.reciter };
+  }
+  function preloadNext() {
+    if (!engine.wantPlay || !state.sessionActive || window.__DAR_ADHAN_ACTIVE === true) {
+      clearWarmAyah();
+      return;
+    }
+    var target = upcomingAyah();
+    if (!target) { clearWarmAyah(); return; }
+    if (warmNextAyah && warmNextAyah.gen === playGen &&
+        warmNextAyah.surah === target.surah && warmNextAyah.ayah === target.ayah &&
+        warmNextAyah.reciter === target.reciter) return;
+    clearWarmAyah();
+    var slot = {
+      surah: target.surah, ayah: target.ayah, reciter: target.reciter,
+      gen: playGen, deck: null, url: "", saved: false
+    };
+    warmNextAyah = slot;
+    function stage(url, saved) {
+      if (!url) return;
+      if (warmNextAyah !== slot || slot.gen !== playGen) {
+        if (saved) { try { URL.revokeObjectURL(url); } catch (eStale) {} }
+        return;
+      }
+      var deck = document.createElement("audio");
+      deck.id = "darQuranPlayerAudioNext";
+      deck.preload = "auto";
+      deck.setAttribute("playsinline", "");
+      deck.setAttribute("webkit-playsinline", "");
+      deck.playsInline = true;
+      deck.controls = false;
+      deck.muted = false;
+      deck.defaultMuted = false;
+      deck.volume = 1;
+      deck.style.display = "none";
+      slot.deck = deck;
+      slot.url = url;
+      slot.saved = !!saved;
+      document.body.appendChild(deck);
+      deck.src = url;
+      try { deck.load(); } catch (eLoad) {}
+    }
+    if (isOffline()) {
+      savedAyahUrl(target.reciter, target.surah, target.ayah)
+        .then(function (url) { stage(url, true); })
+        .catch(function () {});
+    } else {
+      var rec = reciterById(target.reciter);
+      var urls = urlsForWithRec(rec, target.surah, target.ayah);
+      stage(urls[0] || "", false);
+    }
+  }
+  function beginWarmHandoff() {
+    var slot = warmNextAyah;
+    var target = upcomingAyah();
+    if (!slot || !target || slot.gen !== playGen || !slot.deck ||
+        slot.deck.readyState < 2 || slot.deck.error ||
+        slot.surah !== target.surah || slot.ayah !== target.ayah ||
+        slot.reciter !== target.reciter || window.__DAR_ADHAN_ACTIVE === true) {
+      clearWarmAyah();
+      return false;
+    }
+    var old = audioEl();
+    var deck = slot.deck;
+    warmNextAyah = null;
+    warmHandoff = slot;
+    // Move the stable main-audio ID to the already-buffered second deck.
+    old.id = "darQuranPlayerAudioPrevious";
+    deck.id = "darQuranPlayerAudio";
+    bindAudioListeners(deck);
+    try { old.pause(); old.removeAttribute("src"); old.load(); old.remove(); } catch (eOld) {}
+    if (engine.objectUrl && engine.objectUrl !== slot.url) {
+      try { URL.revokeObjectURL(engine.objectUrl); } catch (eRevokeOld) {}
+    }
+    engine.objectUrl = slot.saved ? slot.url : "";
+    engine.lastUrl = slot.url;
+    engine.wantPlay = true;
+    ignoreEndedUntil = Date.now() + 1200;
+    try {
+      var started = deck.play();
+      if (started && started.catch) started.catch(function () {
+        // The normal loadAudio adoption path retains autoplay/error recovery.
+      });
+    } catch (ePlay) {}
+    return true;
+  }
+  function adoptWarmHandoff(autoplay, keepTime, gen) {
+    var slot = warmHandoff;
+    warmHandoff = null;
+    if (!slot) return false;
+    if (!autoplay || keepTime || !slot.deck ||
+        slot.deck !== document.getElementById("darQuranPlayerAudio") ||
+        slot.surah !== Number(state.surah) || slot.ayah !== Number(state.ayah) ||
+        slot.reciter !== state.reciter) return false;
+    urlIndex = 0;
+    state.error = "";
+    state.resumeAt = 0;
+    state.current = Number(slot.deck.currentTime) || 0;
+    state.playing = true;
+    state.sessionActive = true;
+    engine.wantPlay = true;
+    engine.started = !slot.deck.paused;
+    engine.lastUrl = slot.url;
+    engine.loadedSurah = slot.surah;
+    engine.loadedAyah = slot.ayah;
+    engine.blobTried = !!slot.saved;
+    engine.haltedOffline = false;
+    engine.lastProgressAt = Date.now();
+    trackHeard = false;
+    allowAdvance = false;
+    clearStallRetry();
+    ignoreEndedUntil = Date.now() + 1200;
+    if (slot.deck.paused) runPlay(slot.deck, gen);
+    applyLearnRate();
+    syncProgressSample(true);
+    startProgressClock();
+    paintAyah(false);
+    paintChrome();
+    paintMini();
+    followPlayingAyah(true);
+    preloadNext();
+    return true;
+  }
   function tryFallback() {
     if (!engine.blobTried) {
       engine.blobTried = true;
@@ -5834,7 +6142,7 @@
       logAudio("ended ignored: empty src");
       return false;
     }
-    if (Date.now() < ignoreEndedUntil) {
+    if (Date.now() < ignoreEndedUntil && !a.ended) {
       logAudio("ended ignored: src-change window");
       return false;
     }
@@ -5844,7 +6152,8 @@
     }
     return true;
   }
-  async function onEnded() {
+  async function onEnded(ev) {
+    if (ev && ev.currentTarget !== document.getElementById("darQuranPlayerAudio")) return;
     engine.endedAt = Date.now();
     logAudio("ended", snapAudio());
     if (!trackReallyFinished()) return;
@@ -5872,6 +6181,7 @@
       runPlay(b, playGen);
       return;
     }
+    beginWarmHandoff();
     await nextAyah(true);
     followPlayingAyah(true);
   }
@@ -7435,6 +7745,8 @@
     }
   }
   function stopSession() {
+    clearWarmAyah();
+    warmHandoff = null;
     playGen += 1;
     engine.wantPlay = false;
     ignoreEndedUntil = Date.now() + 4000;
