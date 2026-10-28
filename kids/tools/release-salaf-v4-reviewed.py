@@ -134,7 +134,7 @@ def inspect(require_human):
         audio_bytes = audio_path.read_bytes()
         check(len(audio_bytes) > 8000 and SHA.fullmatch(entry.get("audioSha256", "")) and
               entry["audioSha256"] == sha(audio_bytes), id + ": review audio corrupted")
-        paragraph_count = len(re.split(r"\\n{2,}", story["masterStoryText"]))
+        paragraph_count = len(re.split(r"\n{2,}", story["masterStoryText"]))
         cues = entry.get("timings")
         check(entry.get("timingStatus") == "character-alignment-exact" and
               isinstance(cues, list) and len(cues) == paragraph_count,
@@ -157,7 +157,7 @@ def inspect(require_human):
             check(isinstance(vote.get("reviewer"), str) and len(vote["reviewer"].strip()) >= 3,
                   id + ": missing identifiable real reviewer")
             check(isinstance(vote.get("reviewedAt"), str) and
-                  re.match(r"^20\\d{2}-\\d{2}-\\d{2}T", vote["reviewedAt"]),
+                  re.match(r"^20\d{2}-\d{2}-\d{2}T", vote["reviewedAt"]),
                   id + ": missing actual review timestamp")
             check(isinstance(vote.get("qaEvidenceReference"), str) and
                   len(vote["qaEvidenceReference"].strip()) > 10,
@@ -226,7 +226,7 @@ def main():
         }
         story["audioStatus"] = "owner-human-review-approved"
     # Write the public manifest LAST, after every audio file has been validated/copied.
-    CATALOG.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    CATALOG.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("READY FOR REVIEW: 33 SHA-locked, human-listening-approved master audios + public catalog")
     print("Run node scripts/kids-master-text-standard-v2-check.js and all CI before merging release PR.")
 
