@@ -1,0 +1,38 @@
+name: Kids Salaf 33-story QA page syntax and single-export guard
+on:
+  pull_request:
+    paths:
+      - "kids/salaf-v4-all-33-review-20261028.html"
+      - ".github/workflows/kids-salaf-v4-qa-player-validate.yml"
+  push:
+    branches: [main]
+    paths:
+      - "kids/salaf-v4-all-33-review-20261028.html"
+permissions:
+  contents: read
+jobs:
+  verify-review-only-page:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse the complete reviewer page without paid synthesis
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          page=Path("kids/salaf-v4-all-33-review-20261028.html").read_text(encoding="utf-8")
+          inline=re.findall(r"<script>([\s\S]*?)</script>",page)
+          assert len(inline)==1, "Unexpected inline JavaScript count"
+          Path("/tmp/salaf-all-33-review.js").write_text(inline[0],encoding="utf-8")
+          assert 'ownerAuthorizedPublicRelease:true' in page
+          assert 'checks.every(([k])=>r.check[k]===true)' in page
+          assert 'catalog.length!==33' in page
+          assert 'manual-full-listening' in page
+          assert 'audioSha256:record.audioSha256,textSha256:record.textSha256' in page
+          assert 'false' in page and 'Keine automatische Live-Veröffentlichung' in page
+          assert 'voice-studio/api/generate' not in page
+          print("Single-file all-33 QA export requires 33 manually completed hearing checks; no paid generation")
+          PY
+          node --check /tmp/salaf-all-33-review.js

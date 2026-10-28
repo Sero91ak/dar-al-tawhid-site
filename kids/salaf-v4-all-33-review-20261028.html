@@ -78,7 +78,16 @@ body[data-gender=girl] .item[aria-current=true],body[data-gender=girl] .para.act
 <div class="qa"><h3>Manuelle Hörkontrolle</h3>
 <div id="checklist"></div>
 <textarea id="notes" placeholder="Auffällige Wörter oder Zeitstempel dokumentieren" aria-label="Prüfnotizen"></textarea>
-<button type="button" id="download" class="action">Hörprüfbericht als JSON sichern</button>
+<button type="button" id="download" class="action">Einzelnen Prüfbericht sichern</button>
+<hr style="border:0;border-top:1px solid #d5e7de;margin:17px 0">
+<h3>Gesamtfreigabe nach vollständiger Hörkontrolle</h3>
+<p class="footnote">Nur ausfüllen, wenn du alle 33 Originalaufnahmen und beide Apple-Gerätetypen tatsächlich geprüft hast. Ohne 33 vollständige Prüfungen wird kein Gesamtfreigabebericht erstellt.</p>
+<label for="reviewer">Name des tatsächlichen Hörprüfers</label>
+<input id="reviewer" type="text" autocomplete="name" placeholder="Vor- und Nachname" style="display:block;width:100%;padding:10px;border:1px solid #cadcd1;border-radius:11px;margin:5px 0 10px;background:#fff;color:#25453c">
+<label for="qaRef">Prüfnachweis / Prüfprotokoll-Referenz</label>
+<input id="qaRef" type="text" placeholder="Eindeutige Referenz der dokumentierten Hörkontrolle" style="display:block;width:100%;padding:10px;border:1px solid #cadcd1;border-radius:11px;margin:5px 0 10px;background:#fff;color:#25453c">
+<div id="qaProgress" class="footnote" role="status">0 von 33 vollständig geprüft.</div>
+<button type="button" id="download-all" class="action">Eine Gesamtfreigabe-Datei für alle 33 exportieren</button>
 <p class="footnote">Alle Notizen bleiben im aktuellen Browserfenster und werden nur auf deinen ausdrücklichen Klick als Datei exportiert. Kein automatisches Setzen von Freigaben oder Überschreiben der App.</p>
 </div></section>
 </div>
@@ -91,12 +100,26 @@ const PILOT=REPO+"a998db41617dfeab8bd54153b3591a01a5d2da4d/";
 const COMPLETE=REPO+"audio/salaf-v4-complete-review-20261028/";
 const BATCHES=["01","02","03","04","05","06","07","08"].map(x=>"salaf-v4-pending-"+x);
 const A=$=>document.getElementById($),audio=A("audio");
-const checks=[["full","Vollständiger Wortlaut und alle Abschnitte hörbar"],["de","Deutsch natürlich, insbesondere „nur“ korrekt"],["fusha","Fuṣḥā-Begriffe und Salām korrekt"],["end","Erzählfluss, Duʿāʾ und Abschluss vollständig"],["sync","Textabsätze und Audio laufen synchron"],["devices","iPhone- und iPad-Wiedergabe geprüft"]];
+const checks=[
+ ["full","Vollständiger Wortlaut und alle Abschnitte hörbar"],
+ ["de","Deutsch natürlich, insbesondere „nur“ korrekt"],
+ ["fusha","Fuṣḥā-Begriffe und Salām korrekt"],
+ ["end","Erzählfluss, Duʿāʾ und Abschluss vollständig"],
+ ["sync","Textabsätze und Audio laufen synchron"],
+ ["iphone","Auf einem echten iPhone vollständig erfolgreich geprüft"],
+ ["ipad","Auf einem echten iPad vollständig erfolgreich geprüft"],
+ ["listened","Ich habe diese gesamte Originalaufnahme selbst angehört"],
+ ["artifacts","Keine hörbaren Artefakte oder Abbrüche"]
+];
 let catalog=[],manifest=null,current=null,cues=[],active=-1,mode="both",reports={};
 const duration=n=>{n=Math.floor(Number(n)||0);return String(Math.floor(n/60)).padStart(2,"0")+":"+String(n%60).padStart(2,"0")};
 async function hash(t){let b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
 function loadChecks(){const e=A("checklist");e.replaceChildren();const existing=reports[current?.id]||{check:{},notes:""};for(const [key,text] of checks){const label=document.createElement("label");const input=document.createElement("input");input.type="checkbox";input.dataset.qa=key;input.checked=!!existing.check[key];const t=document.createElement("span");t.textContent=text;label.append(input,t);e.append(label)}A("notes").value=existing.notes}
-function stash(){if(!current)return;reports[current.id]={check:Object.fromEntries(checks.map(([k])=>[k,!!document.querySelector('[data-qa="'+k+'"]')?.checked])),notes:A("notes").value}}
+function updateQAProgress(){
+ const completed=catalog.filter(x=>audioRow(x.id)&&reports[x.id]&&checks.every(([k])=>reports[x.id].check[k]===true)).length;
+ A("qaProgress").textContent=completed+" / 33 vollständige manuelle Hörkontrollen dokumentiert.";
+}
+function stash(){if(!current)return;reports[current.id]={check:Object.fromEntries(checks.map(([k])=>[k,!!document.querySelector('[data-qa="'+k+'"]')?.checked])),notes:A("notes").value};updateQAProgress()}
 function audioRow(id){
  const e=manifest?.entries?.[id];
  if(!e||e.status!=="technical-passed-awaiting-human-listening"||e.releaseEnabled!==false||e.humanListeningApproved!==false||e.approvedForPlayback!==false)return null;
@@ -178,6 +201,39 @@ A("gender").addEventListener("change",e=>document.body.dataset.gender=e.target.v
 document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.mode;document.querySelectorAll("[data-mode]").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));A("reader").hidden=mode==="listen";if(mode==="read")audio.pause();if(mode==="both"&&cues.length)A("feedback").textContent="Mitlesen aktiv · synchronisierte Absätze";}));
 document.querySelectorAll("[data-rate]").forEach(b=>b.addEventListener("click",()=>{audio.playbackRate=Number(b.dataset.rate);document.querySelectorAll("[data-rate]").forEach(x=>x.setAttribute("aria-pressed",String(x===b)))}));
 A("download").addEventListener("click",()=>{if(!current)return;stash();const e=audioRow(current.id),report={schemaVersion:1,type:"kids-salaf-v4-manual-review",storyId:current.id,reviewedAt:new Date().toISOString(),audioSha256:e?.audioSha256||null,textSha256:e?.textSha256||null,manualChecks:reports[current.id].check,notes:reports[current.id].notes,automaticPublicationApproved:false,warning:"QA notes do not constitute human listening approval or live publication"};const data=new Blob([JSON.stringify(report,null,2)+"\n"],{type:"application/json"});const url=URL.createObjectURL(data);const link=document.createElement("a");link.href=url;link.download="salaf-v4-audio-qa-"+current.id+".json";link.click();URL.revokeObjectURL(url)});
+document.getElementById("checklist").addEventListener("change",stash);
+function saveJson(obj,name){
+ const blob=new Blob([JSON.stringify(obj,null,2)+"\n"],{type:"application/json"});
+ const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=name;a.click();URL.revokeObjectURL(url);
+}
+A("download-all").addEventListener("click",()=>{
+ stash();
+ const reviewer=A("reviewer").value.trim(),qaRef=A("qaRef").value.trim();
+ if(reviewer.length<3||qaRef.length<11){A("qaProgress").textContent="FEHLT: Name und tatsächliche Prüfprotokoll-Referenz müssen eingetragen werden.";return}
+ if(catalog.length!==33){A("qaProgress").textContent="STOPP: Originalkatalog hat nicht exakt 33 freigegebene Geschichten.";return}
+ const entries={};const missing=[];
+ for(const story of catalog){
+  const record=audioRow(story.id),r=reports[story.id];
+  if(!record||!r||!checks.every(([k])=>r.check[k]===true)){
+   missing.push(story.title);continue;
+  }
+  entries[story.id]={
+   storyId:story.id, audioSha256:record.audioSha256,textSha256:record.textSha256,
+   reviewer,reviewedAt:new Date().toISOString(),qaEvidenceReference:qaRef+" / "+story.id,
+   germanPronunciationPassed:r.check.de,fushaTermsPassed:r.check.fusha,
+   iphonePlaybackPassed:r.check.iphone,ipadPlaybackPassed:r.check.ipad,
+   textAudioParityPassed:r.check.full,paragraphTimingPassed:r.check.sync,
+   fullAudioListened:r.check.listened,noAudibleArtifacts:r.check.artifacts,
+   manualListeningNotes:r.notes
+  };
+ }
+ if(missing.length){A("qaProgress").textContent="Keine Gesamtfreigabe: "+missing.length+" Geschichten noch nicht vollständig geprüft, darunter "+missing.slice(0,2).join(", ")+".";
+  return}
+ const doc={schemaVersion:1,collection:"Schätze der Salaf",reviewMode:"manual-full-listening",
+ ownerAuthorizedPublicRelease:true,entries};
+ saveJson(doc,"salaf-v4-human-approval-20261028.json");
+ A("qaProgress").textContent="33 manuelle Hörkontrollen dokumentiert; JSON lokal exportiert. Keine automatische Live-Veröffentlichung.";
+});
 reload();
 </script>
 </body>
