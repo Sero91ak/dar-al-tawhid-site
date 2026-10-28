@@ -85,7 +85,7 @@ def timings(text, speech, answer, source_duration, output_duration):
 
 def verify_contract():
     req, data, policy, lang = load(REQUEST), load(SOURCE), load(POLICY), load(LANG_POLICY)
-    if (req.get("authorization") != "OWNER_EXPLICIT_SALAF_AUDIO_2026_10_27"
+    if (req.get("authorization") not in ("OWNER_EXPLICIT_SALAF_AUDIO_2026_10_27", "OWNER_EXPLICIT_SALAF_AUDIO_2026_10_28")
         or req.get("mode") != "staging-review-only"
         or req.get("allowLivePublication") is not False
         or req.get("retryPaidRequests") is not False):
