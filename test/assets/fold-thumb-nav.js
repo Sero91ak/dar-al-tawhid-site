@@ -22,11 +22,8 @@
   var VALID = { bottom: true, left: true, right: true };
   // Use real available CSS space, not model names or hardware pixels.
   // The rail needs 68px + 36px gutter and leaves >=536px for content.
-  // A primary icon rail is useful only when it leaves enough space for the
-  // separate list rail (>=280px) AND the reading pane (>=480px).
-  // Medium unfolded windows keep the five original tabs at the bottom.
-  var SIDE_MIN_WIDTH = 1060;
-  var SIDE_MIN_HEIGHT = 560;
+  var SIDE_MIN_WIDTH = 640;
+  var SIDE_MIN_HEIGHT = 390; // Five accessible tabs need vertical space
   var currentEffective = "bottom";
   var sideApplied = false;
   var lastRailSignature = "";
@@ -72,11 +69,11 @@
   ];
 
   function readPreference() {
-    // Automatic adaptive placement, not a hidden user setting.
-    // Only the existing five 3D tabs are repositioned; never clone the nav.
-    var metrics = measure();
-    return metrics.width >= SIDE_MIN_WIDTH && metrics.height >= SIDE_MIN_HEIGHT
-      ? "left" : "bottom";
+    /* SETTINGS_NAVI_REMOVED_TEST_ONLY_20261016 */
+    /* Position der Tab-Leiste nicht mehr konfigurierbar.
+       Auch ältere gespeicherte Rechts-/Links-Werte lösen keine Side-Rail aus.
+       Das ursprüngliche #bottomNav mit allen 3D-Icons bleibt unverändert. */
+    return "bottom";
   }
 
   function writePreference(value) {
