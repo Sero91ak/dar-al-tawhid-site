@@ -6,11 +6,13 @@ on:
       - "salaf-v4-33-hoeren-20261028.html"
       - ".github/workflows/cloudflare-pages-deploy.yml"
       - ".github/workflows/kids-salaf-v4-listener-link-check.yml"
+      - "kids/tools/test-salaf-v4-33-remote-audio.py"
   push:
     branches: [main]
     paths:
       - "salaf-v4-33-hoeren-20261028.html"
       - ".github/workflows/kids-salaf-v4-listener-link-check.yml"
+      - "kids/tools/test-salaf-v4-33-remote-audio.py"
 
 permissions:
   contents: read
@@ -90,6 +92,36 @@ jobs:
             curl -fsSL --max-time 35 --retry 2 -r 0-2047 "$url" -o "/tmp/salaf-audio-sample-$n.bin"
             test "$(wc -c < "/tmp/salaf-audio-sample-$n.bin")" -ge 2000
           done
+
+  audit-all-33-original-m4a-http-sources:
+    runs-on: ubuntu-latest
+    needs: independent-33-listener-syntax-data-audit
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify all 33 ORIGINAL immutable M4A endpoints without ElevenLabs calls
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/test-salaf-v4-33-remote-audio.py
+          python3 kids/tools/test-salaf-v4-33-remote-audio.py
+          python3 - <<'PY'
+          import json
+          with open('salaf-v4-33-remote-http-report.json',encoding='utf-8') as fp: r=json.load(fp)
+          assert r['originalAudioCount']==33
+          assert r['publicKidsPlaybackApproved'] is False
+          assert r['humanListeningCompleted'] is False
+          assert r['newGenerationInvoked'] is False
+          assert len({e['storyId'] for e in r['entries']})==33
+          assert all(e['container']=='mp4-ftyp' and len(e['audioSha256ExpectedFromIndependentProduction'])==64 for e in r['entries'])
+          print('PASS 33/33 original M4A HTTP streams available; human hearing still required.')
+          PY
+      - name: Persist independent nonrelease technical check for central master issue
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-salaf-v4-33-original-remote-audio-check
+          path: salaf-v4-33-remote-http-report.json
+          retention-days: 60
 
   live-https-audition-smoke:
     # Check the ACTUAL Cloudflare production URL, not merely GitHub Pages or Git blobs.
