@@ -81,3 +81,6 @@ assert.match(boot,/function releaseChrome\(\) \{[\s\S]*?clearRamp\(\);\s*stopBoo
 assert.match(boot,/function finish\(\) \{[\s\S]*?clearRamp\(\);\s*stopBootObserver\(\);/,"Normal finish must disconnect observer");
 assert.match(boot,/if \(finished \|\| !bootObserver\) return;/,"Late DOMContentLoaded must not reattach a boot observer");
 console.log("OK: responsive layout, fold mutation filtering, boot timer/observer lifecycle");
+
+// Adult iPad / Fold V2: run the same single-owner, scrollport and native guard in CI.
+require("./adult-workspace-v2-regression.cjs");
