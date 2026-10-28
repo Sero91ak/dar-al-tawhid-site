@@ -923,60 +923,160 @@ body.is-frauen-route .frauen-library-pinned-header{
   max-width:100%;
 }
 
-
-/* DAR_ADULT_FOLD_SIDE_LIVE_V1_20261028
-   Live visitor / Android-PWA / iOS web container; never DAR TEST or Kids.
-   Existing real five 3D-tab node moved by adaptive-layout.js, not cloned. */
-html.dar-adult-fold-side{
- --dar-adult-tab-reserve:106px;
+/* DAR_ADULT_WORKSPACE_V2 · single visual owner for adult iPad/Fold.
+   Existing five 3D icons, data and themes are preserved. Geometry only.
+   Do NOT style Kids, admin, native players or compact phone routes. */
+html[data-dar-workspace="dual"],
+html[data-dar-workspace="wide"]{
+  --dar-ws2-page-gutter:clamp(12px,2vw,28px);
+  --dar-ws2-rail:var(--dar-ws2-list-width,290px);
+  --dar-ws2-gap:clamp(12px,1.7vw,22px);
+  --dar-ws2-reader-max:54rem;
+  --dar-ws2-vertical-space:calc(100dvh - 128px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));
 }
-html.dar-adult-fold-side-left body.has-bottom-nav{
- padding-left:calc(var(--dar-adult-tab-reserve) + env(safe-area-inset-left,0px))!important;
- padding-right:env(safe-area-inset-right,0px)!important;
- box-sizing:border-box!important;
+html[data-dar-workspace="wide"]{
+  --dar-ws2-tab-width:76px;
+  --dar-ws2-tab-reserve:calc(var(--dar-ws2-tab-width) + 30px);
 }
-html.dar-adult-fold-side-right body.has-bottom-nav{
- padding-right:calc(var(--dar-adult-tab-reserve) + env(safe-area-inset-right,0px))!important;
- padding-left:env(safe-area-inset-left,0px)!important;
- box-sizing:border-box!important;
+/* Wide workspace is full-width. The shell reserves space for the ONE
+   original, viewport-fixed primary tab rail. No centering on 1180/860px. */
+html[data-dar-workspace="wide"][data-dar-workspace-dir="ltr"] body.has-bottom-nav{
+  padding-inline-start:calc(var(--dar-ws2-tab-reserve) + env(safe-area-inset-left,0px))!important;
+  padding-inline-end:env(safe-area-inset-right,0px)!important;
 }
-html.dar-adult-fold-side body.has-bottom-nav > .app,
-html.dar-adult-fold-side body.has-bottom-nav #appView.view,
-html.dar-adult-fold-side body.has-bottom-nav #appView{
- width:100%!important;max-width:100%!important;min-width:0!important;
- margin-left:0!important;margin-right:0!important;box-sizing:border-box!important;
+html[data-dar-workspace="wide"][data-dar-workspace-dir="rtl"] body.has-bottom-nav{
+  padding-inline-start:calc(var(--dar-ws2-tab-reserve) + env(safe-area-inset-right,0px))!important;
+  padding-inline-end:env(safe-area-inset-left,0px)!important;
 }
-html.dar-adult-fold-side > #bottomNav.bottom-nav,
-html.dar-adult-fold-side #bottomNav.dar-adult-fold-tabs{
- position:fixed!important;top:50%!important;bottom:auto!important;
- transform:translateY(-50%)!important;-webkit-transform:translateY(-50%)!important;
- width:82px!important;min-width:82px!important;max-width:82px!important;
- height:min(410px,calc(100dvh - 36px))!important;
- min-height:0!important;max-height:410px!important;
- flex-direction:column!important;justify-content:space-around!important;
- align-items:center!important;gap:2px!important;
- padding:6px!important;border-radius:26px!important;
- z-index:96!important;opacity:1!important;visibility:visible!important;
- pointer-events:auto!important;
- box-sizing:border-box!important;
+html[data-dar-workspace="wide"] body.has-bottom-nav{
+  inline-size:100%!important;
+  max-inline-size:100%!important;
+  box-sizing:border-box!important;
+  overflow-x:clip;
 }
-html.dar-adult-fold-side-left > #bottomNav.bottom-nav{
- left:max(12px,env(safe-area-inset-left,0px))!important;right:auto!important;
+html:is([data-dar-workspace="dual"],[data-dar-workspace="wide"]) body.has-bottom-nav > .app,
+html:is([data-dar-workspace="dual"],[data-dar-workspace="wide"]) body.has-bottom-nav #appView.view{
+  inline-size:100%!important;
+  max-inline-size:100%!important;
+  min-inline-size:0!important;
+  margin-inline:0!important;
+  box-sizing:border-box!important;
 }
-html.dar-adult-fold-side-right > #bottomNav.bottom-nav{
- right:max(12px,env(safe-area-inset-right,0px))!important;left:auto!important;
+/* Tabs stay at the leading safe edge. Never create a second nav element. */
+html[data-dar-workspace="wide"] > #bottomNav.dar-ws2-original-tabs,
+html[data-dar-workspace="wide"] #bottomNav.dar-ws2-original-tabs{
+  position:fixed!important;
+  top:50%!important;
+  bottom:auto!important;
+  transform:translateY(-50%)!important;
+  -webkit-transform:translateY(-50%)!important;
+  inline-size:76px!important;
+  min-inline-size:76px!important;
+  max-inline-size:76px!important;
+  block-size:min(404px,calc(100dvh - 36px))!important;
+  max-block-size:404px!important;
+  min-block-size:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:space-evenly!important;
+  align-items:center!important;
+  padding:6px!important;
+  border-radius:26px!important;
+  gap:2px!important;
+  z-index:96!important;
+  box-sizing:border-box!important;
+  opacity:1!important;
+  pointer-events:auto!important;
 }
-html.dar-adult-fold-side #bottomNav.bottom-nav .bottom-nav-btn{
- flex:1 1 0!important;display:flex!important;flex-direction:column!important;
- align-items:center!important;justify-content:center!important;
- width:100%!important;min-width:0!important;max-width:100%!important;
- min-height:50px!important;padding:4px!important;gap:0!important;
- box-sizing:border-box!important;
+html[data-dar-workspace="wide"] #bottomNav.dar-ws2-original-tabs .bottom-nav-btn{
+  flex:1 1 0!important;
+  inline-size:100%!important;
+  min-inline-size:0!important;
+  min-block-size:50px!important;
+  max-block-size:82px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:center!important;
+  padding:3px!important;
+  box-sizing:border-box!important;
 }
-html.dar-adult-fold-side #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
- flex:0 0 auto!important;max-width:48px!important;max-height:48px!important;
+html[data-dar-workspace="wide"] #bottomNav.dar-ws2-original-tabs .bottom-nav-btn .nav-icon{
+  max-inline-size:44px!important;max-block-size:44px!important;
 }
-html.dar-adult-fold-side #bottomNav.bottom-nav .bottom-nav-btn > span:last-child:not(.nav-icon){
- display:none!important;
+html[data-dar-workspace="wide"] #bottomNav.dar-ws2-original-tabs .bottom-nav-btn > span:last-child:not(.nav-icon){
+  display:none!important;
 }
-html.dar-adult-fold-side body{overflow-x:clip!important}
+/* One master-detail grid, one height budget, two independent scrollports.
+   Do not duplicate content or force desktop viewport-sized text. */
+html:is([data-dar-workspace="dual"],[data-dar-workspace="wide"]) body #appView.view .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]){
+  inline-size:100%!important;
+  max-inline-size:100%!important;
+  min-inline-size:0!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,var(--dar-ws2-rail)) minmax(0,1fr)!important;
+  grid-template-rows:minmax(0,1fr)!important;
+  column-gap:var(--dar-ws2-gap)!important;
+  align-items:stretch!important;
+  block-size:max(360px,var(--dar-ws2-vertical-space))!important;
+  max-block-size:none!important;
+  min-block-size:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+  isolation:isolate;
+}
+html[data-dar-workspace="wide"]{
+  --dar-ws2-vertical-space:calc(100dvh - 112px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));
+}
+html:is([data-dar-workspace="dual"],[data-dar-workspace="wide"]) body #appView.view .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > .dar-fold__rail,
+html:is([data-dar-workspace="dual"],[data-dar-workspace="wide"]) body #appView.view .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > .dar-fold__pane{
+  grid-column:auto!important;grid-row:auto!important;
+  display:block!important;
+  position:relative!important;
+  inset:auto!important;
+  inline-size:100%!important;
+  max-inline-size:100%!important;
+  min-inline-size:0!important;
+  block-size:100%!important;
+  max-block-size:100%!important;
+  min-block-size:0!important;
+  overflow-y:auto!important;
+  overflow-x:clip!important;
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-y;
+  scrollbar-gutter:stable;
+  scroll-padding-block:12px 80px;
+  padding:clamp(10px,1.45vw,22px)!important;
+  margin:0!important;
+  box-sizing:border-box!important;
+}
+html:is([data-dar-workspace="dual"],[data-dar-workspace="wide"]) body #appView.view .dar-fold[data-fold-mode="dual"] > .dar-fold__rail{
+  border-inline-end:1px solid color-mix(in srgb,var(--gold2,#e3cc8c) 26%,transparent);
+}
+html:is([data-dar-workspace="dual"],[data-dar-workspace="wide"]) body #appView.view .dar-fold__pane :is(.article,.post-reader,.post-reader-main,.post-body,.quran-ayah-list,.qrc-shell,.dua-detail-box,.hadith-detail,.lib-detail,.qsrc-detail){
+  min-inline-size:0!important;
+  max-inline-size:min(100%,var(--dar-ws2-reader-max))!important;
+  margin-inline:auto!important;
+  box-sizing:border-box!important;
+}
+/* Standalone post routes keep their full-bleed artwork and a readable text
+   stage rather than a broken 860px viewport wrapper on iPad landscape. */
+html:is([data-dar-workspace="dual"],[data-dar-workspace="wide"]) body.is-post-route #appView.view > .post-reader{
+  inline-size:100%!important;
+  max-inline-size:100%!important;
+  margin-inline:0!important;
+}
+html:is([data-dar-workspace="dual"],[data-dar-workspace="wide"]) body.is-post-route #appView.view > .post-reader > .post-reader-main{
+  inline-size:min(100%,var(--dar-ws2-reader-max))!important;
+  max-inline-size:100%!important;
+  margin-inline:auto!important;
+}
+/* Optional physical hinge gap: do not require experimental APIs. */
+@media (horizontal-viewport-segments:2){
+  html:is([data-dar-workspace="dual"],[data-dar-workspace="wide"]) body #appView.view .dar-fold[data-fold-mode="dual"]{
+    column-gap:max(var(--dar-ws2-gap),calc(env(viewport-segment-left 1 0) - env(viewport-segment-right 0 0)))!important;
+  }
+}
