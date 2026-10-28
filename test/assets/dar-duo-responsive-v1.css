@@ -320,6 +320,7 @@ html[data-dar-duo-layout="dual"] body #appView.view .prophets-layout--dual > .pr
 html[data-dar-duo-layout="dual"] body #appView.view .prophets-layout--dual > .prophets-pane {
   grid-column:auto!important;
   grid-row:auto!important;
+  display:block!important; /* Override legacy <=989px single-pane hiding only while dual. */
   position:relative!important;
   inset:auto!important;
   inline-size:100%!important;
@@ -364,4 +365,19 @@ html[data-dar-duo-layout="single"] body #appView.view .dar-fold[data-fold-mode="
   html[data-dar-duo-layout="dual"] body #appView.view .dar-fold[data-fold-mode="dual"] {
     column-gap:max(16px,calc(env(viewport-segment-left 1 0) - env(viewport-segment-right 0 0)))!important;
   }
+}
+
+/* Narrow or shallow mode: show exactly the requested master OR detail,
+   including the 990px+ shallow-landscape case. */
+html[data-dar-duo-layout="single"] body #appView.view .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__pane,
+html[data-dar-duo-layout="single"] body #appView.view .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__rail {
+  display:none!important;
+}
+html[data-dar-duo-layout="single"] body #appView.view .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__rail,
+html[data-dar-duo-layout="single"] body #appView.view .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__pane {
+  display:block!important;
+  position:static!important;
+  block-size:auto!important;
+  max-block-size:none!important;
+  overflow:visible!important;
 }
