@@ -1178,6 +1178,7 @@ struct WebAppView: UIViewRepresentable {
             if message.name == "darPushSettings" {
                 if let body = message.body as? [String: Any] {
                     DarPushNotifications.applyWebPrayerSettings(body)
+                    DarNativePermissions.shared.prayerSettingsDidChange()
                 }
                 return
             }
