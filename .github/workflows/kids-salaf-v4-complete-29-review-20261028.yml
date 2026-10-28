@@ -1,0 +1,139 @@
+name: Kids Salaf V4 29 remaining master audios - review only
+on:
+  push:
+    branches: [main]
+    paths:
+      - "kids/audio-jobs/salaf-v4-completion-request-20261028.json"
+permissions:
+  contents: write
+concurrency:
+  group: kids-salaf-v4-all-review-20261028
+  cancel-in-progress: false
+jobs:
+  stage-29:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    env:
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+      STAGE_BRANCH: audio/salaf-v4-all-review-20261028
+      PILOT_BRANCH: audio/salaf-v4-review-20261027
+      PILOT_COMMIT: a998db41617dfeab8bd54153b3591a01a5d2da4d
+      SALAF_PUSH_AFTER_EACH: "true"
+    steps:
+      - name: Checkout explicitly authorized source
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 2
+      - name: Install audio verifier
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          command -v ffprobe
+      - name: Zero-credit master authorization and budget preflight
+        run: |
+          set -euo pipefail
+          test -n "$ADMIN_PUBLISH_SECRET" || { echo "::error::No secret; zero paid calls"; exit 1; }
+          python3 - <<'PY'
+          import json,re
+          from pathlib import Path
+          req=json.loads(Path("kids/audio-jobs/salaf-v4-completion-request-20261028.json").read_text())
+          plan=json.loads(Path("kids/audio-jobs/salaf-v4-remaining-plan-20261028.json").read_text())
+          data=json.loads(Path("kids/data/salaf-library-v1.json").read_text())
+          approved={s["id"]:s for s in data["items"] if s.get("verification")=="approved" and s.get("editorialRelease") is True}
+          pilot=set(plan["pilot"]["storyIds"])
+          pending=[s for b in plan["batches"] for s in b["storyIds"]]
+          assert req["authorization"]=="OWNER_EXPLICIT_SALAF_COMPLETE_2026_10_28"
+          assert req["billableGenerationAllowed"] is True and req["stagingDespitePendingPilotQA"] is True
+          assert req["mode"]=="staging-review-only" and req["allowLivePublication"] is False and req["retryPaidRequests"] is False
+          assert req["voiceId"]=="DkU7j9uO4ZEtLD2iRZSH" and req["modelId"]=="eleven_v4" and req["voiceProfile"]=="kids_story"
+          assert req["languageCode"]=="de" and req["globalArabicDictionaryApplied"] is False
+          assert req["pilotImmutableCommit"]=="a998db41617dfeab8bd54153b3591a01a5d2da4d"
+          assert req["completionStagingBranch"]=="audio/salaf-v4-all-review-20261028"
+          assert len(data["items"])==34 and len(approved)==33 and len(pilot)==4
+          assert len(pending)==29 and len(set(pending))==29 and len(plan["batches"])==8
+          assert set(pending).isdisjoint(pilot) and set(pending)|pilot==set(approved) and pending==req["storyIds"]
+          assert req["expectedPaidNewClips"]==29 and req["maxClipsPerBatch"]==4 and req["maxTotalCharactersPerBatch"]==18000
+          for b in plan["batches"]:
+              assert 1<=len(b["storyIds"])==b["maxClips"]<=4
+              assert sum(len(approved[s]["masterStoryText"]) for s in b["storyIds"])==b["totalMasterCharacters"]<=18000
+          for sid in pending:
+              t=approved[sid]["masterStoryText"]
+              assert 350<=len(t.split())<=1000 and len(t)<=5000 and not approved[sid].get("audioMaster")
+              assert not re.search(r"[\u0600-\u06ff]",t)
+          assert sum(len(approved[s]["masterStoryText"]) for s in pending)==89722==req["maxTotalCharacters"]
+          print("ZERO-CREDIT PREFLIGHT OK: 29 authorized full stories, 8 bounded batches, 89722 chars")
+          PY
+      - name: Secure immutable pilot masters into separate completion review branch
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin "$STAGE_BRANCH" >/dev/null; then
+            git fetch origin "$STAGE_BRANCH" --depth=2
+            git switch -c "$STAGE_BRANCH" FETCH_HEAD
+          else
+            git fetch origin "$PILOT_BRANCH" --depth=1
+            test "$(git rev-parse FETCH_HEAD)" = "$PILOT_COMMIT"
+            git switch -c "$STAGE_BRANCH"
+            git restore --source="$PILOT_COMMIT" -- kids/review-only/salaf-v4-20261027/
+            git add kids/review-only/salaf-v4-20261027/
+            git commit -m "Kids Salaf: import verified pilot masters into nonproduction completion review"
+            git push origin HEAD:"$STAGE_BRANCH"
+          fi
+          python3 - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          plan=json.loads(Path("kids/audio-jobs/salaf-v4-remaining-plan-20261028.json").read_text())
+          manifest=json.loads(Path("kids/review-only/salaf-v4-20261027/manifest.json").read_text())
+          assert manifest["publicRelease"] is False and manifest["mode"]=="staging-review-only"
+          for sid in plan["pilot"]["storyIds"]:
+              row=manifest["entries"][sid]
+              p=Path(row["audioFile"])
+              assert p.is_file() and hashlib.sha256(p.read_bytes()).hexdigest()==row["audioSha256"]
+              assert row["humanListeningApproved"] is False and row["timingStatus"]=="character-alignment-exact"
+          print("4 pilot recordings and SHA-256 hashes intact; no paid requests made yet.")
+          PY
+      - name: Run 8 batches with durable per-story charge reservations
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,subprocess,sys,os,hashlib
+          from pathlib import Path
+          plan=json.loads(Path("kids/audio-jobs/salaf-v4-remaining-plan-20261028.json").read_text())
+          owner=json.loads(Path("kids/audio-jobs/salaf-v4-completion-request-20261028.json").read_text())
+          src=json.loads(Path("kids/data/salaf-library-v1.json").read_text())
+          text={x["id"]:x["masterStoryText"] for x in src["items"]}
+          env=dict(os.environ,SALAF_AUDIO_REQUEST_PATH="kids/audio-jobs/.salaf-v4-batch-runtime.json",SALAF_PUSH_AFTER_EACH="true")
+          for i,b in enumerate(plan["batches"],1):
+              request={"schemaVersion":1,"authorization":owner["authorization"],"mode":"staging-review-only",
+                       "allowLivePublication":False,"retryPaidRequests":False,"storyIds":b["storyIds"],
+                       "maxClips":b["maxClips"],"maxTotalCharacters":b["totalMasterCharacters"]}
+              Path(env["SALAF_AUDIO_REQUEST_PATH"]).write_text(json.dumps(request,ensure_ascii=False))
+              print("BATCH",i,"/",len(plan["batches"]),"zero-credit preflight",flush=True)
+              subprocess.run([sys.executable,"kids/tools/build-salaf-v4-master-staging.py","--preflight"],env=env,check=True)
+              print("BATCH",i,"begin; per-story credit marker before each paid call",flush=True)
+              subprocess.run([sys.executable,"kids/tools/build-salaf-v4-master-staging.py"],env=env,check=True)
+              m=json.loads(Path("kids/review-only/salaf-v4-20261027/manifest.json").read_text())
+              for sid in b["storyIds"]:
+                  row=m["entries"][sid]
+                  p=Path(row["audioFile"])
+                  assert row["status"]=="technical-passed-awaiting-human-listening" and row["approvedForPlayback"] is False
+                  assert row["textSha256"]==hashlib.sha256(text[sid].encode()).hexdigest()
+                  assert p.is_file() and hashlib.sha256(p.read_bytes()).hexdigest()==row["audioSha256"]
+                  assert row["timingStatus"]=="character-alignment-exact" and len(row["timings"])>0
+              print("BATCH",i,"verified and durably staged",flush=True)
+          m=json.loads(Path("kids/review-only/salaf-v4-20261027/manifest.json").read_text())
+          assert len(m["entries"])==33
+          assert all(x["humanListeningApproved"] is False and x["releaseEnabled"] is False for x in m["entries"].values())
+          print("ALL 33 technically staged; human listening and live release still required.",flush=True)
+          PY
+      - name: Archive staged audio and proof ledger
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-salaf-all-33-review-only
+          path: kids/review-only/salaf-v4-20261027/
+          if-no-files-found: warn
+          retention-days: 30
