@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "library": "TAWḤĪD KIDS – Audioabnahme",
+  "policy": {
+    "purpose": "Ausschließlich interne Prüfung vorhandener Originalaudios; keine automatische öffentliche Freigabe.",
+    "noNewTtsGeneration": true,
+    "reviewDecisionValues": [
+      "richtig",
+      "falsch"
+    ],
+    "neverEquateDecisionWithDeviceQa": true,
+    "neverAutoPublish": true,
+    "futureSourceRule": "Neue verbindliche kanonische Quelle hier als separates Objekt registrieren. Die Registry wird durch den zentralen GitHub-Builder automatisch neu erzeugt."
+  },
+  "sources": [
+    {
+      "id": "salaf",
+      "title": "Schätze der Salaf",
+      "subtitle": "33 vollständige V4-Geschichten mit Mitlesen",
+      "kind": "embedded",
+      "order": 10
+    },
+    {
+      "id": "quiz-v4",
+      "title": "Quiz · V4 Fragen",
+      "subtitle": "Fragen, richtige Antwort, Wiederholung, Erklärung · Altersbereiche",
+      "path": "kids/data/quiz-v4-full-rebuild-public.json",
+      "order": 20
+    },
+    {
+      "id": "quiz-master",
+      "title": "Quiz · weitere Audio-Bibliothek",
+      "subtitle": "Bereits vorhandene Quiz-Master",
+      "path": "kids/data/quiz-audio.json",
+      "order": 25
+    },
+    {
+      "id": "dua-de",
+      "title": "Duʿāʾ · Deutsch",
+      "subtitle": "Bedeutungen und kindgerechte Erklärung",
+      "path": "kids/data/dua-audio.json",
+      "order": 30
+    },
+    {
+      "id": "dua-ar",
+      "title": "Duʿāʾ · Fuṣḥā",
+      "subtitle": "Arabische Originalaussprache",
+      "path": "kids/data/dua-arabic-audio.json",
+      "order": 40
+    },
+    {
+      "id": "dua-slow",
+      "title": "Duʿāʾ · langsam",
+      "subtitle": "Langsames Mitsprechen",
+      "path": "kids/data/dua-arabic-slow-audio.json",
+      "order": 50
+    },
+    {
+      "id": "dua-word",
+      "title": "Duʿāʾ · Wörter",
+      "subtitle": "Wortweises arabisches Lernen",
+      "path": "kids/data/dua-word-audio.json",
+      "order": 60
+    },
+    {
+      "id": "prophets",
+      "title": "Prophetengeschichten",
+      "subtitle": "Gesicherte vorhandene Aufnahmen",
+      "path": "kids/data/prophet-stories.json",
+      "order": 70
+    },
+    {
+      "id": "sahabiyyat",
+      "title": "Ṣaḥābiyyāt",
+      "subtitle": "Geschichten der Gefährtinnen",
+      "path": "kids/data/sahabiyyat-stories.json",
+      "order": 80
+    },
+    {
+      "id": "companions",
+      "title": "Al-Mubaššarūn",
+      "subtitle": "Geschichten der zehn Gefährten",
+      "path": "kids/data/mubashshirun-stories.json",
+      "order": 90
+    },
+    {
+      "id": "alphabet",
+      "title": "Arabische Buchstaben",
+      "subtitle": "Arabisch lernen",
+      "path": "kids/data/alphabet-audio.json",
+      "order": 100
+    },
+    {
+      "id": "term",
+      "title": "Islamische Begriffe",
+      "subtitle": "Wort und Erklärung",
+      "path": "kids/data/term-learning-audio.json",
+      "order": 110
+    },
+    {
+      "id": "academy",
+      "title": "Akademie / Lernbereich",
+      "subtitle": "Lernaufnahmen",
+      "path": "kids/data/academy-audio.json",
+      "order": 120
+    },
+    {
+      "id": "owner-voice",
+      "title": "Weitere Masterstimme",
+      "subtitle": "Sonstige vorhandene Originalaufnahmen",
+      "path": "kids/data/owner-voice-audio.json",
+      "order": 130
+    }
+  ]
+}
