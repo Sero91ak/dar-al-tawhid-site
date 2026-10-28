@@ -73,3 +73,27 @@ Keine Änderung an Kids, DAR TEST, Website-Besuchern, Gebets-/Qibla-Engine,
 OneSignal oder Push-Berechtigungen für diese iOS-Navigationsmigration.
 Native Layoutänderungen benötigen einen **neuen Xcode-Build**. Ein
 Cloudflare-Web-Push installiert keine native Apple-Tab-Bar.
+
+## Bezug zur Kinder-App (verifizierter GitHub-Stand)
+
+Die freigegebene Kinder-Optik ist die **visuelle Referenz**: fünf gleich breite
+Bereiche, originale farbige 3D-Symbole, gut lesbare Beschriftungen, dezente aktive
+Markierung, präzise Safe-Area-Anpassung und ausreichend große Touch-Flächen.
+Im überprüften Kids-App-GitHub-Stand vom 28.10.2026 rendert
+`KidsRootView` lediglich `KidsWebAppView`; die untere Kids-Navigation wird
+durch HTML `<nav class="bottom-nav">` und
+`kids/bottom-nav-global-v1147.css` gestaltet. Dort existiert **noch keine**
+native `UITabBar`. Ein möglicherweise neuerer lokaler Xcode-Stand muss vor
+Übernahme geprüft werden. Es gibt daher keinen verifizierten nativen Kids-
+Tab-Code, den man ohne Prüfung einfach kopieren könnte.
+
+**Ziel Erwachsenen-App und DARNext:** Apple-echte `UITabBar`/`UITabBarItem`
+oder SwiftUI-`TabView` mit originalen farbigen Erwachsenen-3D-Icons; visuelle
+5-Tab-Parität zur Kinder-App, aber eigenständige erwachsene Farben und Labels
+**Start · Quiz · Beiträge · Koran · Mehr**. Keine Custom-Web-Navigation als
+Ersatz für eine native Leiste, kein blau getöntes Icon und keine Verdopplung.
+
+**Zusätzliche QA-Pflicht:** Kein Abnahme-Häkchen nur aufgrund fünf sichtbarer
+Bilder. Menüposition, Tastaturüberlagerung, Auswahlzustand bei internen
+Web-Seitenwechseln, Langdruck-Schnellfunktionen, Accessibility, Dynamic Type und
+altinstallierte iOS-Versionen mit Webnavigation separat prüfen.
