@@ -2,8 +2,8 @@
  * DĀR AL TAWḤĪD — Adaptive Layout Controller
  * Compact: Smartphone, Fold geschlossen, Tablet Hochformat → Einspalte
  * Expanded: Fold geöffnet, Tablet Querformat, große Breite → Zwei-Bereichs-Modus
- * Bottom-Nav bleibt unten — KEIN Left-Rail-Nav.
- * v9: Bottom-Nav immer zentrierte, adaptive Kapsel (Kids-Referenz, Fold/Tablet)
+ * Workspace V2: original five-tab navigation switches between bottom (compact)
+ * and a leading rail (wide); folded/iPad list-detail panes own separate scrolling.
  */
 (function (global) {
   "use strict";
