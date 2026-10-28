@@ -23,17 +23,43 @@
     {id:"shukr",title:"Dankbarkeit & Bescheidenheit",short:"Dankbarkeit",caption:"Das Gute erkennen",img:"/kids/assets/salaf/topics-v1380/shukr.jpg"}
   ];
   var INSIGHTS={"rahma":{"intro":{"4-5":"Barmherzig sein heißt: Du siehst, wenn jemand Hilfe braucht, und bist freundlich.","6-8":"Wer barmherzig ist, bemerkt, wenn andere Hilfe brauchen, und hilft mit einem guten Herzen.","9-10":"Barmherzigkeit zeigt sich darin, wie wir mit Menschen umgehen, besonders wenn sie unsere Hilfe brauchen."},"question":{"4-5":"Wem kannst du heute helfen?","6-8":"Welche kleine Hilfe könnte heute jemanden glücklich machen?","9-10":"Wie kannst du jemanden unterstützen, ohne dafür ein Lob zu erwarten?"}},"sidq":{"intro":{"4-5":"Ehrlich sein bedeutet: Du sagst die Wahrheit.","6-8":"Ehrlichkeit bedeutet, bei der Wahrheit zu bleiben – auch wenn es schwerfällt.","9-10":"Ehrlichkeit heißt, aufrichtig zu sprechen und zu handeln, selbst wenn wir einen Fehler zugeben müssen."},"question":{"4-5":"Was sagst du, wenn dir etwas kaputtgeht?","6-8":"Was hilft dir, einen Fehler ehrlich zuzugeben?","9-10":"Warum ist Vertrauen wichtig, wenn wir mit anderen umgehen?"}},"sabr":{"intro":{"4-5":"Geduld heißt: Du bleibst ruhig und gibst nicht gleich auf.","6-8":"Geduldig sein heißt, ruhig weiterzumachen, auch wenn etwas Zeit und Übung braucht.","9-10":"Geduld hilft uns, Schwierigkeiten mit Ruhe und Ausdauer zu begegnen, statt vorschnell aufzugeben."},"question":{"4-5":"Worauf kannst du geduldig warten?","6-8":"Wann hat dir Geduld schon einmal geholfen?","9-10":"Wie kannst du ruhig bleiben, wenn etwas nicht sofort gelingt?"}},"ilm":{"intro":{"4-5":"Lernen ist schön. Mit jeder neuen Sache weißt du ein bisschen mehr.","6-8":"Wissen hilft dir, deine Fragen zu verstehen, Gutes zu tun und Allah besser kennenzulernen.","9-10":"Wer Wissen sucht, lernt Fragen zu stellen, zuverlässig zu prüfen und das Gelernte gut anzuwenden."},"question":{"4-5":"Was willst du heute lernen?","6-8":"Welche Frage möchtest du heute jemandem stellen?","9-10":"Wie findest du heraus, ob eine Antwort zuverlässig ist?"}},"adab":{"intro":{"4-5":"Gute Freunde helfen sich und sprechen freundlich.","6-8":"Freundschaft wächst, wenn wir zuhören, freundlich reden und einander helfen.","9-10":"Guter Umgang zeigt sich durch Rücksicht, ehrliche Worte und Hilfe, auch wenn Freunde einmal verschiedener Meinung sind."},"question":{"4-5":"Wie machst du jemandem eine Freude?","6-8":"Was kannst du tun, wenn dein Freund traurig ist?","9-10":"Wie kannst du freundlich bleiben, wenn du anderer Meinung bist?"}},"family":{"intro":{"4-5":"In der Familie helfen wir einander und zeigen Liebe.","6-8":"Zu Hause zeigen wir Fürsorge, indem wir einander unterstützen und mit Respekt sprechen.","9-10":"Familie bedeutet Verantwortung füreinander: Wir achten aufeinander und helfen auch bei kleinen Alltagsaufgaben."},"question":{"4-5":"Wem hilfst du heute zu Hause?","6-8":"Welche Aufgabe könntest du heute für deine Familie übernehmen?","9-10":"Wie kannst du zu Hause Verantwortung übernehmen, ohne erst darum gebeten zu werden?"}},"hikma":{"intro":{"4-5":"Klug sein heißt: Erst denken, dann handeln.","6-8":"Eine kluge Entscheidung beginnt damit, dass du kurz nachdenkst, bevor du etwas tust.","9-10":"Verantwortung bedeutet, mögliche Folgen einer Entscheidung zu bedenken und das Gute bewusst zu wählen."},"question":{"4-5":"Was machst du, bevor du losrennst?","6-8":"Wer kann dir bei einer schweren Entscheidung helfen?","9-10":"Welche Fragen helfen dir, eine gute Entscheidung zu treffen?"}},"shukr":{"intro":{"4-5":"Dankbar sein heißt: Du freust dich über Gutes und sagst Danke.","6-8":"Dankbarkeit heißt, schöne Dinge und kleine Hilfen zu erkennen und dafür Danke zu sagen.","9-10":"Dankbarkeit zeigt sich nicht nur in Worten, sondern auch darin, wie sorgsam wir mit dem umgehen, was wir haben."},"question":{"4-5":"Wofür sagst du heute Danke?","6-8":"Für welche kleine Sache bist du heute dankbar?","9-10":"Wie kannst du deine Dankbarkeit durch eine gute Tat zeigen?"}}};
-  var MANIFEST="/kids/data/salaf-library-v1.json?v=2";
+  var MANIFEST="/kids/data/salaf-library-v1.json?v=salaf-v4-owner-preview-20261028";
   var items=[],tab="all",topic="",active=null,reader=null,audio=new Audio(),playing=false;
   audio.preload="metadata";audio.setAttribute("playsinline","");
   var esc=function(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})};
   var age=function(){return String(document.querySelector(".app")?.getAttribute("data-age")||"6–8").replace("–","-")};
   var gender=function(){return document.querySelector(".app")?.getAttribute("data-gender")==="girl"?"girl":"boy"};
   var textFor=function(i){return String(i?.masterStoryText||"").trim()};
-  var audioFor=function(i){var a=i?.audioMaster||i?.audio;return a&&typeof a==="object"&&a.url?a:null};
+  var audioFor=function(i){var a=i?.audioMaster||i?.audioPreview||i?.audio;return a&&typeof a==="object"&&a.url?a:null};
   function safeAsset(path){try{var u=new URL(path,location.origin);return u.origin===location.origin&&/^\/kids\/assets\/[\w\/.%+-]+\.(?:jpg|jpeg|png|webp|svg)$/i.test(u.pathname)?u.pathname:""}catch(_){return""}}
-  function safeAudio(path){try{var u=new URL(path,location.origin);return u.origin===location.origin&&/^\/kids\/[\w\/.%+-]+\.(?:mp3|m4a)$/i.test(u.pathname)?u.pathname+u.search:""}catch(_){return""}}
-  function soundFor(i){var a=audioFor(i);return a&&safeAudio(a.url)||""}
+  function safeAudio(path,preview){
+    try{
+      var u=new URL(path,location.origin);
+      if(u.origin===location.origin)
+        return /^\/kids\/[\w\/.%+-]+\.(?:mp3|m4a)$/i.test(u.pathname)?u.pathname+u.search:"";
+      if(preview===true&&u.protocol==="https:"&&u.hostname==="raw.githubusercontent.com"&&
+         !u.search&&!u.hash&&
+         /^\/Sero91ak\/dar-al-tawhid-site\/[a-f0-9]{40}\/kids\/review-only\/salaf-v4-(?:20261027|complete-20261028\/salaf-v4-pending-0[1-8])\/[a-z0-9-]+\.m4a$/.test(u.pathname))
+        return u.href;
+      return "";
+    }catch(_){return""}
+  }
+  function soundFor(i){
+    var a=audioFor(i);
+    if(!a)return "";
+    if(a===i.audioPreview){
+      /* Owner-authorized, SHA-bound live previews, NOT confirmed human QA. */
+      if(a.ownerAuthorizedPublicPreview!==true||a.humanListeningApproved!==false||
+         a.approvedForPlayback!==false||a.releaseEnabled!==false||
+         a.previewStatus!=="owner-direct-preview-pending-human-qa"||
+         a.modelId!=="eleven_v4"||a.voiceId!=="DkU7j9uO4ZEtLD2iRZSH"||
+         !/^[a-f0-9]{64}$/.test(a.sha256||"")||
+         !/^[a-f0-9]{64}$/.test(a.textSha256||"")||
+         !Array.isArray(a.timings)||a.timings.length===0)return "";
+      return safeAudio(a.url,true);
+    }
+    return safeAudio(a.url,false);
+  }
   function valid(i){
     return i&&/^[a-z0-9-]+$/.test(String(i.id||""))&&i.verification==="approved"&&i.editorialRelease===true&&
       CATEGORIES.some(function(c){return c.id===i.category})&&
@@ -99,7 +125,7 @@
       '<span class="salaf-story-art" style="background-image:url(&quot;'+esc(img)+'&quot;)"></span>'+
       '<span class="salaf-story-copy"><small>'+esc(i.person)+'</small><strong>'+esc(i.title)+'</strong>'+
       '<span>'+esc(i.summary||"Eine wahre Begebenheit entdecken")+'</span>'+
-      '<em>'+(soundFor(i)?"▶ Hören & lesen":"Geschichte lesen")+'</em></span><span aria-hidden="true">›</span></button>';
+      '<em>'+(i.audioPreview&&soundFor(i)?"▶ Vorhörfassung · Hören & lesen":soundFor(i)?"▶ Hören & lesen":"Geschichte lesen")+'</em></span><span aria-hidden="true">›</span></button>';
   }
   function renderCards(target,arr){
     target.innerHTML=arr.length?'<div class="salaf-story-grid">'+arr.map(card).join("")+'</div>':
@@ -230,7 +256,7 @@
   function showStory(i){
     if(!i||!textFor(i))return;closeStory();active=i;
     q("#salafDetailTitle").textContent=i.title;q("#salafDetailPerson").textContent=i.person;
-    q("#salafDetailKicker").textContent=soundFor(i)?"HÖRGESCHICHTE":"GESCHICHTE ZUM LESEN";
+    q("#salafDetailKicker").textContent=i.audioPreview&&soundFor(i)?"HÖRPROBE":soundFor(i)?"HÖRGESCHICHTE":"GESCHICHTE ZUM LESEN";
     q("#salafStoryNavTitle").textContent=i.title;
     /* KIDS_SALAF_GIRL_PALETTE_V1415: do not stamp blue inline gradients
        over the girl profile's approved plum/rose story cover. */
@@ -280,11 +306,16 @@ function compactSalafReference(raw){
     /* KIDS_SOURCE_TEXT_ONLY_V1414: verified sources are readable text, not links. */
     q("#salafRefs").innerHTML=src.map(function(s){return '<div class="salaf-ref"><strong>'+esc(s.author)+'</strong><span>'+esc(s.work)+" · "+esc(compactSalafReference(s.reference))+"</span></div>"}).join("");
     var url=soundFor(i);
-    if(url){audio.src=url;audio.preload="metadata";q("#salafAudioStatus").textContent="Deine Hörposition wird automatisch gespeichert."}
+    if(url){
+      audio.src=url;audio.preload="metadata";
+      q("#salafAudioStatus").textContent=i.audioPreview?
+        "Vorhörfassung · Noch ohne abschließende Sprach- und Geräteabnahme. Deine Hörposition wird gespeichert.":
+        "Deine Hörposition wird automatisch gespeichert.";
+    }
     else{audio.removeAttribute("src");audio.load();q("#salafAudioStatus").textContent="Diese Geschichte kannst du jetzt lesen. Hören ist noch nicht verfügbar."}
     renderModeButtons();
     var act=q(".salaf-actions");act.querySelector(".kids-offline-inline")?.remove();
-    if(url)window.DARKidsItemDownloads?.storyDetail(act,{category:"salaf",item:i,sourceUrl:MANIFEST,
+    if(url&&!i.audioPreview)window.DARKidsItemDownloads?.storyDetail(act,{category:"salaf",item:i,sourceUrl:MANIFEST,
       artwork:i.image,hero:i.hero||i.image,audioMeta:audioFor(i),readerUrl:"/kids/salaf-library-v1.js?v=1390"});
     reader?.setContent?.({key:"salaf:"+i.id,title:i.title,subtitle:i.person,
       album:"TAWḤĪD KIDS · Schätze der Salaf",text:textFor(i),artwork:art,
