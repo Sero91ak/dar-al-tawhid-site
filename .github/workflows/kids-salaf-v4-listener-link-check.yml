@@ -311,3 +311,40 @@ jobs:
               raise AssertionError('Technical review inventory must not auto-publish audio')
           print('LIVE PASS: public audio QA index HTTP 200,',len(groups),'separate categories,',len(listed)+33,'referenced originals. No fake approvals.')
           PY
+
+  live-kids-salaf-33-preview:
+    if: github.event_name == 'push'
+    needs: independent-33-listener-syntax-data-audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm all 33 previews actually reach the native Kids global production route
+        shell: bash
+        run: |
+          set -euo pipefail
+          ok=0
+          for attempt in $(seq 1 14); do
+            suffix="$(date +%s)-${attempt}"
+            manifest_code="$(curl -sSL --max-time 28 -A 'DarAlTawhidKids-iOS' -o /tmp/kids-salaf-preview-live.json -w '%{http_code}' "https://dar-al-tawhid.de/kids/data/salaf-library-v1.json?live-check=${suffix}" || true)"
+            js_code="$(curl -sSL --max-time 28 -A 'DarAlTawhidKids-iOS' -o /tmp/kids-salaf-preview-live.js -w '%{http_code}' "https://dar-al-tawhid.de/kids/salaf-library-v1.js?live-check=${suffix}" || true)"
+            if [ "$manifest_code" = 200 ] && [ "$js_code" = 200 ] && node - <<'NODE'
+          const fs=require('node:fs'),assert=require('node:assert/strict');
+          const x=JSON.parse(fs.readFileSync('/tmp/kids-salaf-preview-live.json','utf8'));
+          const a=x.items.filter(s=>s.verification==='approved'&&s.editorialRelease===true);
+          assert.equal(a.length,33);
+          assert.equal(a.filter(s=>s.audioPreview?.ownerAuthorizedPublicPreview&&s.audioPreview?.humanListeningApproved===false&&s.audioMaster===null).length,33);
+          assert(x.items.some(s=>s.verification!=='approved'&&!s.audioPreview));
+          const js=fs.readFileSync('/tmp/kids-salaf-preview-live.js','utf8');
+          assert(js.includes('owner-direct-preview-pending-human-qa'));
+          assert(js.includes('HÖRPROBE'));
+          console.log('33/33 original owner-authorized Kid previews live; manual hearing remains explicitly pending');
+          NODE
+            then
+              ok=1; break
+            fi
+            echo "Native Kids 33-preview deployment not yet confirmed (attempt ${attempt}, manifest ${manifest_code}, JS ${js_code})."
+            sleep 7
+          done
+          if [ "$ok" -ne 1 ]; then
+            echo "::error::33 Kids live previews not served by canonical Cloudflare Worker."
+            exit 1
+          fi
