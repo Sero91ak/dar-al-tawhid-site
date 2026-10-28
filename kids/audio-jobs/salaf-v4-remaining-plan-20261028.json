@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "collection": "Schätze der Salaf",
+  "createdAt": "2026-10-28",
+  "planningOnly": true,
+  "triggerPaidSynthesis": false,
+  "allowPublicRelease": false,
+  "allowAutomaticRetry": false,
+  "masterPolicy": {
+    "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+    "modelId": "eleven_v4",
+    "profile": "kids_story",
+    "languageCode": "de",
+    "globalArabicDictionary": false,
+    "oneMasterAcrossAges": true
+  },
+  "canonicalSource": "kids/data/salaf-library-v1.json",
+  "pilot": {
+    "storyIds": [
+      "malik-mut-zur-wahrheit",
+      "shafii-freundschaft-trotz-unterschied",
+      "layth-das-grosse-honiggeschenk",
+      "ibn-sirin-sanfte-stimme-fuer-seine-mutter"
+    ],
+    "status": "4-technical-pass-human-listening-pending",
+    "stagingBranch": "audio/salaf-v4-review-20261027",
+    "qaReviewPage": "/kids/salaf-v4-audio-review-20261028.html",
+    "newPaidCallsAllowedBeforeQA": false
+  },
+  "totalApprovedStories": 33,
+  "alreadyStagedStoryCount": 4,
+  "remainingStoryCount": 29,
+  "remainingTextCharacters": 89722,
+  "blockedStoryIds": [
+    "abu-hazim-den-segen-erkennen"
+  ],
+  "batches": [
+    {
+      "batchId": "salaf-v4-pending-01",
+      "status": "blocked-awaiting-pilot-human-listening",
+      "maxClips": 4,
+      "totalMasterCharacters": 14003,
+      "storyIds": [
+        "ahmad-ibn-hanbal-standhaft-im-glauben",
+        "umar-ibn-abd-al-aziz-und-sein-sohn",
+        "rabi-ibn-khuthaym-wissen-und-ehrlichkeit",
+        "fudayl-ibn-iyad-dankbar-fuer-die-hilfe"
+      ]
+    },
+    {
+      "batchId": "salaf-v4-pending-02",
+      "status": "blocked-awaiting-pilot-human-listening",
+      "maxClips": 4,
+      "totalMasterCharacters": 12799,
+      "storyIds": [
+        "mubarak-reisekasse-fuer-seine-freunde",
+        "ayyub-sakhtiyani-das-freundliche-laecheln",
+        "yunus-ibn-ubayd-ehrlich-verdientes-geld",
+        "sufyan-thawri-die-absicht-pruefen"
+      ]
+    },
+    {
+      "batchId": "salaf-v4-pending-03",
+      "status": "blocked-awaiting-pilot-human-listening",
+      "maxClips": 4,
+      "totalMasterCharacters": 12121,
+      "storyIds": [
+        "shabi-gedaechtnis-und-aufmerksames-lernen",
+        "uways-qurani-guter-sohn",
+        "mutarrif-gesundheit-und-dankbarkeit",
+        "urwa-ibn-zubayr-geduld-im-schweren-jahr"
+      ]
+    },
+    {
+      "batchId": "salaf-v4-pending-04",
+      "status": "blocked-awaiting-pilot-human-listening",
+      "maxClips": 4,
+      "totalMasterCharacters": 13878,
+      "storyIds": [
+        "ibn-al-munkadir-die-muede-mutter-pflegen",
+        "ibn-awn-seine-ruhige-antwort",
+        "sufyan-ibn-uyayna-acht-hadithe",
+        "shurayh-richter-der-brief-mit-rat"
+      ]
+    },
+    {
+      "batchId": "salaf-v4-pending-05",
+      "status": "blocked-awaiting-pilot-human-listening",
+      "maxClips": 4,
+      "totalMasterCharacters": 10702,
+      "storyIds": [
+        "hasan-al-basri-wissen-und-handeln",
+        "awzai-die-spuren-der-salaf",
+        "ata-ibn-abi-rabah-achtsame-worte",
+        "abu-bakr-ibn-ayyash-drei-jahre-lernen"
+      ]
+    },
+    {
+      "batchId": "salaf-v4-pending-06",
+      "status": "blocked-awaiting-pilot-human-listening",
+      "maxClips": 4,
+      "totalMasterCharacters": 12552,
+      "storyIds": [
+        "bukhari-der-elfjaehrige-und-das-richtige-wort",
+        "bakr-al-muzani-der-gute-rat-fuer-alle",
+        "shuba-und-das-offene-herz",
+        "abu-asim-die-zunge-bewahren"
+      ]
+    },
+    {
+      "batchId": "salaf-v4-pending-07",
+      "status": "blocked-awaiting-pilot-human-listening",
+      "maxClips": 4,
+      "totalMasterCharacters": 10808,
+      "storyIds": [
+        "mujahid-geduld-beim-verstehen",
+        "said-ibn-jubayr-gaben-richtig-nutzen",
+        "abu-al-aliyah-zwei-gaben",
+        "zuhri-grosszuegig-mit-gaesten"
+      ]
+    },
+    {
+      "batchId": "salaf-v4-pending-08",
+      "status": "blocked-awaiting-pilot-human-listening",
+      "maxClips": 1,
+      "totalMasterCharacters": 2859,
+      "storyIds": [
+        "abu-hurayrah-und-die-freude-seiner-mutter"
+      ]
+    }
+  ],
+  "gate": "Human pilot listening must be documented before new paid generation. Never charge an already staged or publicly approved story; each new 1-4 story batch needs verified immutable request, zero-credit preflight, durable per-story SHA ledger before next call and no retries on ambiguous provider failures."
+}
