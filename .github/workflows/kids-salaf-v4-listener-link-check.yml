@@ -24,12 +24,18 @@ on:
       - ".github/workflows/cloudflare-pages-deploy.yml"
       - ".github/workflows/kids-salaf-v4-listener-link-check.yml"
       - "kids/tools/test-salaf-v4-33-remote-audio.py"
+      - "kids/data/salaf-library-v1.json"
+      - "kids/salaf-library-v1.js"
+      - "kids/tools/test-salaf-v4-owner-preview-live.cjs"
   push:
     branches: [main]
     paths:
       - "salaf-v4-33-hoeren-20261028.html"
       - ".github/workflows/kids-salaf-v4-listener-link-check.yml"
       - "kids/tools/test-salaf-v4-33-remote-audio.py"
+      - "kids/data/salaf-library-v1.json"
+      - "kids/salaf-library-v1.js"
+      - "kids/tools/test-salaf-v4-owner-preview-live.cjs"
 
 permissions:
   contents: write
@@ -88,6 +94,14 @@ jobs:
           console.log('PASS: 33 immutable master-audio URLs, 33 original texts and SHA, all paragraph cues, no false release');
           NODE
           node --check /tmp/kids-salaf-33-listener.js
+      - name: Verify owner-authorized 33 story previews remain SHA-bound and not human-approved
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check kids/salaf-library-v1.js
+          node --check kids/tools/test-salaf-v4-owner-preview-live.cjs
+          node kids/tools/test-salaf-v4-owner-preview-live.cjs
+          node scripts/kids-master-text-standard-v2-check.js
       - name: Confirm un-gated audio-preview path really triggers canonical Cloudflare publish
         shell: bash
         run: |
