@@ -294,3 +294,74 @@ html[data-dar-duo-axis="landscape"] body.dar-duo-side-active #appView{
  html[data-dar-duo-axis] #appView *,
  html[data-dar-duo-axis] #bottomNav *{scroll-behavior:auto!important}
 }
+
+
+/* DAR_TEST_FOLD_WORKSPACE_V2_20261028
+   International adaptive layout: Android window-size classes + Apple available
+   window capacity. Last test-only layout authority. No effect on visitor or Kids.
+   One PRIMARY navigation owner (fold-thumb-nav.js); these are CONTENT panes. */
+html[data-dar-duo-layout="dual"] body #appView.view .dar-fold[data-fold-mode="dual"],
+html[data-dar-duo-layout="dual"] body #appView.view .prophets-layout--dual {
+  display:grid!important;
+  grid-template-columns:minmax(270px,clamp(270px,32%,360px)) minmax(0,1fr)!important;
+  grid-auto-flow:row!important;
+  column-gap:max(14px,var(--dar-duo-hinge-gap,0px))!important;
+  row-gap:0!important;
+  align-items:stretch!important;
+  inline-size:100%!important;
+  max-inline-size:100%!important;
+  min-inline-size:0!important;
+  margin-inline:0!important;
+  box-sizing:border-box!important;
+}
+html[data-dar-duo-layout="dual"] body #appView.view .dar-fold[data-fold-mode="dual"] > .dar-fold__rail,
+html[data-dar-duo-layout="dual"] body #appView.view .dar-fold[data-fold-mode="dual"] > .dar-fold__pane,
+html[data-dar-duo-layout="dual"] body #appView.view .prophets-layout--dual > .prophets-rail,
+html[data-dar-duo-layout="dual"] body #appView.view .prophets-layout--dual > .prophets-pane {
+  grid-column:auto!important;
+  grid-row:auto!important;
+  position:relative!important;
+  inset:auto!important;
+  inline-size:100%!important;
+  max-inline-size:100%!important;
+  min-inline-size:0!important;
+  block-size:min(78dvh,calc(100dvh - 132px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)))!important;
+  max-block-size:none!important;
+  overflow-y:auto!important;
+  overflow-x:clip!important;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-gutter:stable;
+  touch-action:pan-y;
+  box-sizing:border-box!important;
+  padding:clamp(10px,1.4vw,18px)!important;
+  margin:0!important;
+}
+html[data-dar-duo-layout="dual"] body #appView.view .dar-fold[data-fold-mode="dual"] > .dar-fold__rail,
+html[data-dar-duo-layout="dual"] body #appView.view .prophets-layout--dual > .prophets-rail {
+  border-inline-end:1px solid color-mix(in srgb,var(--gold2,#d5bb79) 25%,transparent);
+}
+html[data-dar-duo-layout="dual"] body #appView.view .dar-fold__pane :is(.post-reader,.post-reader-main,.article,.post-body,.quran-ayah-list,.dua-detail-box),
+html[data-dar-duo-layout="dual"] body #appView.view .prophets-pane :is(.post-reader,.post-reader-main,.article,.post-body) {
+  min-inline-size:0!important;
+  max-inline-size:min(100%,52rem)!important;
+  margin-inline:auto!important;
+  box-sizing:border-box!important;
+}
+html[data-dar-duo-layout="dual"] body.is-post-route #appView.view > .post-reader > .post-reader-main {
+  width:min(100%,52rem)!important;
+  max-width:100%!important;
+  margin-inline:auto!important;
+}
+/* With a short window there is not enough height for two usable independent panes. */
+html[data-dar-duo-layout="single"] body #appView.view .dar-fold[data-fold-mode="dual"] {
+  display:block!important;
+  grid-template-columns:minmax(0,1fr)!important;
+}
+/* Side-by-side viewport segments: reserve the hinge gap when browsers expose it.
+   Normal Android/iOS/Safari browsers fall back to a standard CSS grid. */
+@media (horizontal-viewport-segments:2) {
+  html[data-dar-duo-layout="dual"] body #appView.view .dar-fold[data-fold-mode="dual"] {
+    column-gap:max(16px,calc(env(viewport-segment-left 1 0) - env(viewport-segment-right 0 0)))!important;
+  }
+}
