@@ -20,7 +20,7 @@
     margin-right: 0 !important;
     box-sizing: border-box !important;
   }
-  html .dar-fold[data-fold-mode="dual"] {
+  html:not([data-dar-workspace="dual"]):not([data-dar-workspace="wide"]) .dar-fold[data-fold-mode="dual"] {
     grid-template-columns: 1fr !important;
   }
   html .dar-fold__pane {
@@ -99,9 +99,9 @@
 }
 
 @media (orientation: landscape) and (min-width: 1100px) {
-  html #appView.view,
-  html body #appView.view,
-  html .view {
+  html:not([data-dar-workspace="dual"]):not([data-dar-workspace="wide"]) #appView.view,
+  html:not([data-dar-workspace="dual"]):not([data-dar-workspace="wide"]) body #appView.view,
+  html:not([data-dar-workspace="dual"]):not([data-dar-workspace="wide"]) .view {
     width: min(860px, calc(100% - 48px)) !important;
     max-width: min(860px, calc(100% - 48px)) !important;
     margin-left: auto !important;
