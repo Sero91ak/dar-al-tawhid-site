@@ -64,7 +64,7 @@ jobs:
           assert.match(html,/const KNOWN_QA_ERRORS=/);
           assert.match(html,/id="right"/);
           const block=JSON.parse(fs.readFileSync("kids/data/audio-review-blockers-v1.json","utf8"));
-          const q=html.split('const KNOWN_QA_ERRORS=',2)[1].split(';\\nconst STORAGE=',1)[0];
+          const q=html.split('const KNOWN_QA_ERRORS=',2)[1].split(';\nconst STORAGE=',1)[0];
           const embedded=JSON.parse(q);
           assert.deepEqual(embedded,block.recordings,'Website must show current central pronunciation blocklist');
           assert(block.recordings.some(x=>x.storyId==="abu-asim-die-zunge-bewahren"&&x.verdict==="falsch"&&x.publicReleaseBlocked===true));
