@@ -155,6 +155,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-visitor-ipad-fold-architecture-rebuild-20261028",
+      "at": "2026-10-28T16:20:00+01:00",
+      "approvedBy": "user-explicit-20261028-rebuild-visitor-native-fold-ipad-architecture-keep-content-functions-design",
+      "reason": "Rebuild layout ownership for visitor large screens (native iOS/iPad and shared adult Web/PWA). Preserve all content, assets, themes, 3D icons, existing 5-tab action handlers and compact UI. Work on isolated branch/draft PR; no Kids, pushes, prayer engine, services, SW, live release or Xcode binary until tests.",
+      "paths": [
+        "assets/adaptive-layout.js",
+        "assets/adaptive-layout.css",
+        "assets/fold-split.css",
+        "assets/dar-landscape-kids-shell.css",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
+        "scripts/adult-workspace-v2-regression.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-30T23:59:59.000Z"
+    },
+    {
       "id": "adult-fold-international-responsive-test-only-20261028",
       "at": "2026-10-28T14:38:00+01:00",
       "approvedBy": "user-explicit-20261028-research-apple-android-global-and-implement-adaptive-fold",
