@@ -71,6 +71,44 @@ jobs:
             python3 kids/tools/build-salaf-v4-complete-staging.py --batch "$batch"
             code=$?
             set -e
+            # Check exact audio/text fingerprints and ALL paragraph alignments
+            # at this checkpoint, BEFORE spending anything on another batch.
+            if [ "$code" -eq 0 ]; then
+              set +e
+              python3 - "$batch" <<'PY'
+          import hashlib, json, sys
+          from pathlib import Path
+          batch=sys.argv[1]
+          root=Path(".")
+          auth=json.loads(Path("kids/audio-jobs/salaf-v4-complete-request-20261028.json").read_text())
+          catalog=json.loads(Path("kids/data/salaf-library-v1.json").read_text())
+          items={x["id"]:x for x in catalog["items"]}
+          plan=json.loads(Path("kids/audio-jobs/salaf-v4-remaining-plan-20261028.json").read_text())
+          expected=next(b["storyIds"] for b in plan["batches"] if b["batchId"]==batch)
+          folder=root/"kids/review-only/salaf-v4-complete-20261028"/batch
+          manifest=json.loads((folder/"manifest.json").read_text())
+          assert manifest["publicRelease"] is False and manifest["mode"]=="staging-review-only"
+          assert set(manifest["entries"])==set(expected)
+          for sid, e in manifest["entries"].items():
+              assert e["status"]=="technical-passed-awaiting-human-listening"
+              assert e["humanListeningApproved"] is False and e["approvedForPlayback"] is False
+              assert e["releaseEnabled"] is False and e["stagingOnly"] is True
+              assert e["modelId"]=="eleven_v4" and e["voiceId"]==auth["voiceId"]
+              assert e["languageCode"]=="de" and e["globalArabicDictionaryApplied"] is False
+              assert e["textSha256"]==hashlib.sha256(items[sid]["masterStoryText"].encode()).hexdigest()
+              asset=root/e["audioFile"]
+              assert asset.is_file() and hashlib.sha256(asset.read_bytes()).hexdigest()==e["audioSha256"]
+              assert e["timingStatus"]=="character-alignment-exact"
+              count=len([p for p in items[sid]["masterStoryText"].split("\\n\\n") if p.strip()])
+              cues=e["timings"]
+              assert len(cues)==count
+              assert all(c["paragraphIndex"]==i and 0<=c["start"]<c["end"]<=e["durationSec"]+0.5 for i,c in enumerate(cues))
+              assert all(cues[i]["end"]<=cues[i+1]["start"]+0.002 for i in range(len(cues)-1))
+          print("Batch complete and audio/text/SHA/timing-verified:",batch,len(expected))
+          PY
+              code=$?
+              set -e
+            fi
             # Persist EVERY successfully billed file and any failure marker before deciding to stop.
             git add kids/review-only/salaf-v4-complete-20261028/
             if ! git diff --cached --quiet; then
