@@ -14,6 +14,33 @@ final class DarAppRouter: ObservableObject {
         )
     }
 
+    /// All native Apple-tab selections reuse the existing single WebAppView
+    /// and its SPA navigation. No new WKWebView, push state or content copy.
+    func openNativeTab(_ id: String) {
+        switch id {
+        case "home": openShortcut(.home)
+        case "quiz": openShortcut(.hash("quiz"))
+        case "recent": openShortcut(.hash("recent"))
+        case "quran": openShortcut(.quran)
+        case "more": openShortcut(.more)
+        default: return
+        }
+    }
+
+    /// Long-press actions on native tabs reuse known iOS deep-link handlers.
+    func openNativeQuickAction(_ id: String) {
+        switch id {
+        case "prayer": openShortcut(.prayer)
+        case "qibla": openShortcut(.qibla)
+        case "search": openShortcut(.search)
+        case "duas": openShortcut(.duas)
+        case "quiz": openShortcut(.hash("quiz"))
+        case "recent": openShortcut(.hash("recent"))
+        case "quran": openShortcut(.quran)
+        default: return
+        }
+    }
+
     func openShortcut(_ destination: DarDeepLink.Destination) {
         _ = DarQuickActions.consume()
         webURL = nil
