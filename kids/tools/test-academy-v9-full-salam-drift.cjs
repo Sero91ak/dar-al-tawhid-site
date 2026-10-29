@@ -1,28 +1,23 @@
 #!/usr/bin/env node
 "use strict";
-/* KIDS Academy V9 frozen original versus current source: exactly the owner-
- * authorized complete-Salam substitutions are permitted. This is a read-only
- * comparison of the already produced /tmp export and original archived JSON. */
+/* Rebuild runs as a strictly read-only compatibility check. The V9 archive must
+ * NOT be overwritten: two current teaching phrases are assigned to new plans. */
 const fs=require("node:fs"),assert=require("node:assert/strict");
-const archive=JSON.parse(fs.readFileSync(process.argv[2]||"/tmp/kids-academy-v9-original.json","utf8"));
-const rebuilt=JSON.parse(fs.readFileSync("kids/data/academy-voice-plan-v9.json","utf8"));
-const short="As-salāmu ʿalaykum";
-const full="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh";
-assert.equal(archive.phraseCount,454,"Original V9 phrase count is frozen");
-assert.equal(rebuilt.phraseCount,archive.phraseCount,"Only wording changes, no dropped lessons or audio requests");
-const originalStrings=archive.phrases.filter(p=>p.text.includes(short));
-assert.equal(originalStrings.length,2,"Exactly two historical Salām teaching utterances must be identified");
-const projected=archive.phrases.map(p=>({...p,text:p.text.split(short).join(full)}));
-const byText=(items)=>new Map(items.map(p=>[p.text,p]));
-const expected=byText(projected),actual=byText(rebuilt.phrases);
-assert.equal(expected.size,archive.phrases.length,"No duplicate phrases introduced");
-assert.equal(actual.size,expected.size,"No phrases silently added or removed");
-for(const [text,p] of expected){
- assert(actual.has(text),"Unexpected lost/mutated phrase: "+text.slice(0,70));
- assert.deepEqual(actual.get(text),p,"Speech context/voice profile/age altered for "+text.slice(0,70));
-}
-for(const field of Object.keys(archive).filter(x=>x!=="phrases")){
- assert.deepEqual(rebuilt[field],archive[field],"Voice plan metadata changed: "+field);
-}
-assert(rebuilt.phrases.every(x=>x.reviewStatus==="not-generated"&&!x.url),"Never claim recorded/approved audio from a textual replacement");
-console.log("PASS: V9 historical 454-phrase inventory retained; only two owner-authorized full-Salam utterances differ in reproducible export. Archived plan stays unchanged.");
+const source=fs.readFileSync(process.argv[2]||"/tmp/kids-academy-v9-original.json","utf8");
+const present=fs.readFileSync("kids/data/academy-voice-plan-v9.json","utf8");
+assert.equal(present,source,"The original historical V9 archive must stay byte-for-byte immutable");
+const archive=JSON.parse(present);
+const short="As-salāmu ʿalaykum",full="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh";
+assert.equal(archive.phraseCount,454);
+assert.equal(archive.phrases.filter(p=>p.text.includes(short)).length,2,"Two historic old Salam texts remain archived, never approved for new synthesis");
+const current=fs.readFileSync("kids/akademie/curriculum-v1.js","utf8");
+for(const replacement of [
+ full+" ist ein islamischer Friedensgruß.",
+ "Jemand sagt zu dir "+full+". Was tust du?"
+])assert(current.includes(replacement),"The current Academy teaching content must use full greeting: "+replacement);
+const future=JSON.parse(fs.readFileSync("kids/data/academy-full-salam-voice-plan-v19.json","utf8"));
+assert(future.phrases.some(p=>p.text===full+"."&&p.reviewStatus==="not-generated"&&p.approvedForPlayback===false),"New canonical greeting is a pending V19 recording, never borrowed from V9");
+assert(future.voicePolicy.allowPaidGeneration===false,"Never charge ElevenLabs on a CI audit");
+const exporter=fs.readFileSync("kids/tools/export-academy-voice-plan.js","utf8");
+assert(exporter.includes("Unexpected changes to immutable V9 archive"),"The V9 generator must refuse all unapproved future drift");
+console.log("PASS: original 454 V9 phrases are byte-identical; two full-Salam teaching updates are source-only; new V19 greeting remains ungenerated.");
