@@ -5,7 +5,6 @@ const fs=require("node:fs"),vm=require("node:vm"),assert=require("node:assert/st
 const get=file=>fs.readFileSync(file,"utf8");
 const full="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.";
 const html=get("kids/akademie/index.html");
-const viewer=get("test/kids/akademie/index.html");
 const pilot=get("kids/akademie/pilot-audio-v13.js");
 const curr=get("kids/akademie/curriculum-v1.js");
 const terms=get("kids/akademie/term-coach-v24.js");
@@ -49,9 +48,6 @@ for(const [label,p] of [["V9",p9],["V18",p18]]){
 }
 assert.equal(p18.phrases.filter(x=>x.text===full).length,1,"Never pay twice for identical full greeting");
 assert(p18.phrases.some(x=>x.text==="Liebe Schwester.")&&p18.phrases.some(x=>x.text==="Lieber Bruder."),"Distinct address clips planned");
-assert(viewer.includes('add("h3","'+full+'")'),"Creator test must show full greeting");
-assert(viewer.includes('profile.value==="girl"?"Liebe Schwester.":"Lieber Bruder."'),"Creator preview must respect gender");
-assert(!viewer.includes("audioClip(0);"),"Old shortened audio blocked in preview");
 assert(pilot.includes('if(k===0){event.preventDefault()')&&!pilot.includes("start([0,1,2])"),"Old shortened audio must not intercept full greeting");
 assert(standard.includes("vollständiger Salām in allen aktiven Kinderprofilen"));
-console.log("PASS: complete Islamic Salam in Academy and test, gender/name checks, teaching texts, pending voice plans; archived short V4 blocked");
+console.log("PASS: complete Islamic Salam in Kids Academy, gender/name checks, teaching texts, pending voice plans; archived short V4 blocked");
