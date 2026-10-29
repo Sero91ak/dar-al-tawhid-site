@@ -19,9 +19,9 @@ jobs:
             "DAR TEST":"https://dar-al-tawhid-test.sero91ak.workers.dev/kids/akademie/index.html",
           }
           full="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh."
-          common=["Liebe Schwester.","Lieber Bruder.",full]
+          common=[full]
           variant={
-            "Besucher KIDS":['id="overviewSalam"','id="welcomeSalam"','id="overviewAddress"','id="welcomeAddress"','const spokenSalam=ACADEMY_FULL_SALAM;','greetingAddress()'],
+            "Besucher KIDS":['id="overviewSalam"','id="welcomeSalam"','id="overviewAddress"','id="welcomeAddress"','const spokenSalam=ACADEMY_FULL_SALAM;','greetingAddress()','gender==="girl"?"liebe Schwester":"lieber Bruder"'],
             "DAR TEST":['add("h3","'+full+'")','profile.value==="girl"?"Liebe Schwester.":"Lieber Bruder."','deprecatedForPlayback:true','if(clip?.deprecatedForPlayback)']
           }
           for label,url in targets.items():
