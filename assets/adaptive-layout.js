@@ -154,106 +154,23 @@
     return Math.min(cap, avail, Math.max(300, Math.round(short * frac)));
   }
 
+  /* DAR_NAV_GEOMETRY_SINGLE_OWNER_V1_20261030
+   * Both adult app lanes already define a stable #bottomNav geometry in CSS.
+   * Never write left/width/height/transform/transition into the bar on a
+   * route change. The old inline 'left:50%' conflicted with the TEST
+   * left:0/right:0 auto-margin layout; transition on width moved the entire
+   * five-tab glass capsule while a button was being tapped.
+   * Responsive dimensions are CSS viewport based, not route based. */
   function applyNavLayout(mode, opts) {
     var nav = document.getElementById("bottomNav");
-    if (!nav) return;
-    if (nav.classList.contains("is-tab-loupe")) return;
-    // DUOS_SINGLE_OWNER_V1381 (Dar Test only).
-    // The legacy bottom-bar controller must NEVER recenter a side rail,
-    // including during SPA view replacement, orientation races and before
-    // DarAdaptiveNavPlacement has published its next effective state.
-    // This is intentionally DOM/capacity based and independent of JS timing.
-    var testPath = String(global.location && global.location.pathname || "");
-    if (testPath === "/test" || testPath.indexOf("/test/") === 0) {
-      var rootForNav = document.documentElement;
-      var layoutW = Number(rootForNav && rootForNav.clientWidth) || Number(global.innerWidth) || 0;
-      var layoutH = Number(rootForNav && rootForNav.clientHeight) || Number(global.innerHeight) || 0;
-      var blockedSide = rootForNav && rootForNav.classList.contains("adaptive-keyboard-open");
-      var inChat = document.body && document.body.classList.contains("is-ilm-chat-route");
-      if (layoutW >= 640 && layoutH >= 340 && !blockedSide && !inChat) {
-        var prefSide = "bottom";
-        try {
-          prefSide = global.DarAdaptiveNavPlacement &&
-            typeof global.DarAdaptiveNavPlacement.getPreference === "function"
-            ? global.DarAdaptiveNavPlacement.getPreference()
-            : String(global.localStorage.getItem("darNavPositionV2") || "bottom");
-        } catch (_) {}
-        var domSide = rootForNav && rootForNav.getAttribute("data-dar-nav-position");
-        if (prefSide === "left" || prefSide === "right" ||
-            domSide === "left" || domSide === "right" ||
-            nav.classList.contains("is-adaptive-rail")) return;
-      }
-    }
-    try {
-      if (global.DarAdaptiveNavPlacement &&
-          typeof global.DarAdaptiveNavPlacement.getEffectivePosition === "function") {
-        var side = global.DarAdaptiveNavPlacement.getEffectivePosition();
-        if (side === "left" || side === "right") return;
-      }
-    } catch (e0) {}
-    try {
-      if (global.DarTestThumbNav && typeof global.DarTestThumbNav.isActive === "function" &&
-          global.DarTestThumbNav.isActive()) return;
-    } catch (e1) {}
-    if (document.body && document.body.classList.contains("is-ilm-chat-route")) {
-      return;
-    }
-    if (document.body && document.body.classList.contains("reader-mode")) {
-      return;
-    }
-
+    if (!nav || nav.classList.contains("is-tab-loupe")) return;
     var metrics = measureViewport();
     var landscape = metrics.height > 0 && metrics.width >= metrics.height;
-    var target = capsuleWidthPx(metrics.width, metrics.height);
-    var now = Date.now();
-    var orientChanged = lastLandscape !== null && lastLandscape !== landscape;
-    var forceWidth = opts && opts.forceWidth;
-
     nav.classList.toggle("is-nav-landscape", landscape);
     nav.classList.remove("is-adaptive-rail");
     nav.classList.add("is-adaptive-centered");
-    nav.style.setProperty("position", "fixed", "important");
-    nav.style.setProperty("left", "50%", "important");
-    nav.style.setProperty("right", "auto", "important");
-    nav.style.setProperty("transition", NAV_EASE, "important");
-    nav.style.setProperty("top", "auto", "important");
-    nav.style.setProperty("bottom", navBottomCompact(), "important");
-    nav.style.setProperty("height", "auto", "important");
-    nav.style.setProperty("min-height", "68px", "important");
-    nav.style.setProperty("max-height", "none", "important");
-    nav.style.setProperty("transform", "translateX(-50%)", "important");
-    nav.style.setProperty("-webkit-transform", "translateX(-50%)", "important");
-    nav.style.setProperty("flex-direction", "row", "important");
-    nav.style.setProperty("margin", "0", "important");
-    nav.style.setProperty("z-index", "40", "important");
-
-    if (target > 0 && (forceWidth || orientChanged || now >= widthLockUntil)) {
-      /* Layout reads force style calculation: only measure for actual rotation.
-         Ordinary resize/route checks can set the target width directly. */
-      var from = target;
-      if (orientChanged) {
-        var bounds = nav.getBoundingClientRect();
-        from = Math.round((bounds && bounds.width) || target);
-      }
-      if (orientChanged && Math.abs(from - target) > 8) {
-        nav.style.setProperty("width", from + "px", "important");
-        nav.style.setProperty("max-width", from + "px", "important");
-        try {
-          nav.offsetWidth;
-        } catch (e) {}
-        global.requestAnimationFrame(function () {
-          nav.style.setProperty("width", target + "px", "important");
-          nav.style.setProperty("max-width", target + "px", "important");
-        });
-        widthLockUntil = now + 500;
-      } else {
-        nav.style.setProperty("width", target + "px", "important");
-        nav.style.setProperty("max-width", target + "px", "important");
-      }
-      try {
-        document.documentElement.style.setProperty("--dar-nav-width", target + "px");
-      } catch (e2) {}
-    }
+    // No inline geometry. Preserve the original five button nodes, events,
+    // selected tab, active reader hiding and native iOS navigation bridge.
     lastLandscape = landscape;
   }
 
