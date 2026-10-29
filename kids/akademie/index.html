@@ -4857,6 +4857,16 @@ function mode(m){
  /* iOS: Keyboard nur auf expliziten Textfeld-Tap. */
  if(m==="voice")$("#micInfo").textContent="Tippe auf „Aufnahme starten“ und sprich. Danach kannst du dir deine Stimme anhören.";
 }
+/* Rotate only the DISPLAY order: canonical q.correct and source facts stay intact.
+   No paid voice content is rewritten; future option audio must follow this order. */
+function academyDisplayChoices(q,index){
+ const options=Array.isArray(q&&q.options)?q.options:[];
+ const n=options.length;
+ if(n<2)return options.map((text,originalIndex)=>({text,originalIndex}));
+ const start=(Number(index)+1)%n;
+ return options.map((text,originalIndex)=>({text,originalIndex})).slice(start)
+  .concat(options.map((text,originalIndex)=>({text,originalIndex})).slice(0,start));
+}
 function showQuestion(){
  const q=questions()[qIndex];if(!q){finish();return}
  choice=null;answered=false;attempts=0;stopMic();$("#voiceRetake").hidden=false;$("#retryChoice").hidden=true;
@@ -4867,7 +4877,7 @@ function showQuestion(){
  $("#answerModeCaption").textContent=q.type==="choice"?"Tippe auf eine Antwort oder sprich selbst:":"Du kannst sprechen oder schreiben:";
  $("#academyBuddyTitle").textContent=age==="4-5"?"Wir schaffen das!":age==="9-10"?"Jetzt bist du dran!":"Du schaffst das!";
  $("#academyBuddyText").textContent=age==="4-5"?"Tippe auf Hören. Dann wähle eine Antwort.":"Hör dir die Frage an oder lies selbst.";
- if(q.type==="choice")q.options.forEach((t,i)=>{
+ if(q.type==="choice")academyDisplayChoices(q,qIndex).forEach(({text:t,originalIndex:i},visibleIndex)=>{
   const row=document.createElement("div");row.className="choice-row";
   const select=document.createElement("button");select.type="button";select.className="choice-button";
   select.textContent=t;select.setAttribute("aria-pressed","false");
@@ -4885,7 +4895,7 @@ function showQuestion(){
       $("#feedback").textContent="Beende bitte zuerst deine Sprachaufnahme.";
       return;
     }
-    speak(3,["Antwort "+(i+1)+": "+t]);
+    speak(3,["Antwort "+(visibleIndex+1)+": "+t]);
     all(".choice-listen").forEach(x=>x.setAttribute("aria-pressed",String(x===listen)));
   };
   row.append(select,listen);$("#choices").appendChild(row);
@@ -4904,7 +4914,7 @@ function check(){
 
  if(answerMode==="choices"&&choice!==null&&choice!==q.correct&&attempts===0){
    attempts=1;score.neededHelp++;
-   $("#feedback").textContent="Das war noch nicht die gesuchte Antwort. "+q.explain+" Du darfst es noch einmal versuchen.";
+   $("#feedback").textContent="Das war noch nicht die gesuchte Antwort. Überlege, was die Frage wirklich meint. Du darfst erneut versuchen oder einen kleinen Hinweis auswählen.";
    $("#retryChoice").hidden=false;$("#check").hidden=true;$("#hint").hidden=true;$("#repeat").hidden=true;
    all(".choice-button").forEach(b=>b.disabled=true);return;
  }
@@ -4912,8 +4922,11 @@ function check(){
  if(answerMode==="choices"&&choice!==null){
   score.choices++;
   if(choice===q.correct){score.correct++;text="Sehr schön, "+address()+"! "+q.explain}
-  else text="Lass es uns noch einmal erklären: "+q.explain;
- }else text=(answerMode==="voice"&&voiceReady&&!typed?"Deine Antwort wurde auf diesem Gerät aufgenommen. Du kannst sie unten noch einmal anhören. ":"Danke fürs Mitdenken, "+address()+". ")+"Eine mögliche Erklärung lautet: "+(q.sample||q.explain)+" Vergleiche sie mit deiner Antwort.";
+  else text="Das war noch nicht richtig. Gemeinsam verstehen wir es: "+q.explain+" Du darfst diese Frage später erneut üben.";
+ }else{
+  score.unverified=(Number(score.unverified)||0)+1;
+  text=(answerMode==="voice"&&voiceReady&&!typed?"Deine Antwort wurde aufgenommen, aber nicht automatisch inhaltlich geprüft. Du kannst sie noch einmal anhören. ":"Danke für deine Überlegung, "+address()+". Deine Antwort wurde nicht automatisch fachlich bewertet. ")+"Eine mögliche Erklärung lautet: "+(q.sample||q.explain)+" Vergleiche sie in Ruhe mit deiner eigenen Antwort."; 
+ }
  $("#feedback").textContent=text;$("#bar").style.width=((qIndex+1)/questions().length*100)+"%";
  $("#check").hidden=true;$("#hint").hidden=true;$("#repeat").hidden=true;$("#retryChoice").hidden=true;$("#openWrite").hidden=true;$("#openVoice").hidden=true;
  all(".choice-button").forEach(b=>b.disabled=true);
@@ -4944,11 +4957,11 @@ function persist(level,automatic=false){
  if(!intervals||!sessionStamp)return;
  const sameAttempt=prev?.sessionStamp===sessionStamp;
  const baseIndex=sameAttempt&&Number.isInteger(prev?.baseIntervalIndex)?prev.baseIntervalIndex:(Number.isInteger(prev?.intervalIndex)?prev.intervalIndex:-1);
- const wrongChoices=score.choices>score.correct||score.neededHelp>0;
+ const wrongChoices=score.choices>score.correct||score.neededHelp>0||(Number(score.unverified)||0)>0;
  const n=(automatic||level==="help"||wrongChoices)?0:Math.min(Math.max(-1,baseIndex)+1,intervals.length-1);
  const due=new Date();due.setHours(12,0,0,0);due.setDate(due.getDate()+intervals[n]);
  const item={id,age,lessonId:activeLessonId,completedAt:Date.now(),firstCompletedAt:Number(prev?.firstCompletedAt||prev?.completedAt||Date.now()),nextDue:due.getTime(),intervalIndex:n,baseIntervalIndex:baseIndex,sessionStamp,
-  reviewCount:(Number(prev?.reviewCount)||0)+(sameAttempt?0:1),answerCount:score.done,choiceCorrect:score.correct,choiceAnswered:score.choices,neededHelp:score.neededHelp,selfReport:automatic?"pending":level};
+  reviewCount:(Number(prev?.reviewCount)||0)+(sameAttempt?0:1),answerCount:score.done,choiceCorrect:score.correct,choiceAnswered:score.choices,neededHelp:score.neededHelp,unverifiedAnswerCount:Number(score.unverified)||0,selfReport:automatic?"pending":level};
  try{
   localStorage.setItem(storageKey(),JSON.stringify(item));clearDraft();
   $("#nextDue").textContent=automatic?"Lektion gespeichert. Wähle unten, wie gut du es verstanden hast. Morgen kannst du bei Bedarf wiederholen.":"Nächste Erinnerung: "+due.toLocaleDateString("de-DE")+". Du kannst jederzeit vorher üben.";
@@ -5025,7 +5038,7 @@ $("#check").onclick=check;
    if(answered||step!==3)return;
    choice=null;all(".choice-button").forEach(b=>{b.disabled=false;b.setAttribute("aria-pressed","false")});
    $("#retryChoice").hidden=true;$("#check").hidden=false;$("#hint").hidden=false;$("#repeat").hidden=false;
-   $("#feedback").textContent="Versuch es in deinem Tempo noch einmal.";
+   $("#feedback").textContent="Versuche es in deinem Tempo noch einmal. Wenn du einen Denkanstoß möchtest, tippe auf „Kleiner Hinweis“.";
  };
  $("#hint").onclick=()=>{$("#feedback").textContent=questions()[qIndex].hint};
 $("#repeat").onclick=()=>speak(3,[questions()[qIndex].prompt]);
