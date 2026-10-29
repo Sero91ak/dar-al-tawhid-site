@@ -24,6 +24,9 @@ jobs:
             "Besucher KIDS":['id="overviewSalam"','id="welcomeSalam"','id="overviewAddress"','id="welcomeAddress"','const spokenSalam=ACADEMY_FULL_SALAM;','greetingAddress()','gender==="girl"?"liebe Schwester":"lieber Bruder"'],
             "DAR TEST":['id="overviewSalam"','id="welcomeSalam"','id="overviewAddress"','id="welcomeAddress"','const spokenSalam=ACADEMY_FULL_SALAM;','greetingAddress()','gender==="girl"?"liebe Schwester":"lieber Bruder"']
           }
+          # Exact newly released Academy pedagogy markers; verify visitors and Test both have the latest UI.
+          for label in targets:
+            variant[label] += ['const isLastReviewCard=i===parts.length-1;', 'function academyDisplayChoices(q,index,lessonScope=', 'academyDisplayChoices(q,qIndex,activeLessonId+":"+age)']
           for label,url in targets.items():
             for retry in range(1,13):
               try:
