@@ -1,5 +1,7 @@
 # TAWḤĪD KIDS NEXT · isolierter iOS-Simulator-Unterbau
 
+**NEU 29.10.2026 – Xcode-Gesamtauftrag und Wiederaufnahme:** Zuerst `kids/TAWHID-KIDS-NEXT-START-HIER.md` vollständig lesen. Den direkt kopierbaren Coding-Agent-Auftrag findest du unter `ios/DarAlTawhidKids/Next/XCODE-FORTSETZUNGSBEFEHL.md`. Gesicherte Wiederaufnahmepunkte gehören in `ios/DarAlTawhidKids/Next/IMPLEMENTATION-STATUS.md` und `PARITY-MATRIX.md`. Die bisherige README beschreibt weiterhin nur das **Scaffold** und sein One-Click-Simulator-Skript, nicht die vollständige native Umsetzung. Die Quell- und Hardwareparität muss durch den lokalen Coding-Agenten **tatsächlich implementiert und gemessen** werden.
+
 **Status 26.10.2026: Entwicklungs-Scaffold. Kein vollständig nativ migriertes KIDS-Produkt und keine geprüfte 100-%-Parität.** Die vorhandene WKWebView-/Audio-Bridge und das bestehende Creator-Testmenü werden direkt, ohne Veränderungen, aus dem getrennten iOS-Kids-Bestand verwendet. Erst der Xcode-Masterauftrag migriert die einzelnen Module in eigene SwiftUI-Komponenten.
 
 ## Aktualisierung 29.10.2026 · Recovery zuerst
