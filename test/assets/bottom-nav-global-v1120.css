@@ -209,6 +209,28 @@ html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.is-pressed{
 }
 
 
+/* DAR_TEST_DOCK_VIEWPORT_ANCHOR_V1: the same fixed viewport center
+   for Start, ʿIlm, Beiträge, Qurʾān, Mehr. Never depend on route layout.
+   Preserve intentional .post-nav-hidden reader state. */
+html[data-theme] body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav:not(.post-nav-hidden),
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav:not(.post-nav-hidden),
+html body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav:not(.post-nav-hidden),
+html body.has-bottom-nav #bottomNav.bottom-nav:not(.post-nav-hidden){
+  position:fixed!important;
+  left:50%!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:calc(7px + env(safe-area-inset-bottom,0px))!important;
+  margin:0!important;
+  width:var(--dar-nav-width)!important;
+  max-width:var(--dar-nav-width)!important;
+  height:var(--dar-nav-height)!important;
+  min-height:var(--dar-nav-height)!important;
+  max-height:var(--dar-nav-height)!important;
+  transform:translateX(-50%)!important;
+  -webkit-transform:translateX(-50%)!important;
+  transition:none!important;
+}
 /* DAR_TEST_FIVE_TAB_ICON_ONLY_MOTION_V1 · original five buttons.
    No dock/tab-field motion; only original 3D image scales on tap.
    Does NOT reactivate the removed Fold or Duo navigation experiments. */
