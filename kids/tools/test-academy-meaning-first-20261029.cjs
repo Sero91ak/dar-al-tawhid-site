@@ -40,6 +40,6 @@ assert(lessons["quran-al-fatihah-kennenlernen"].questions["4-5"][1].options[1]==
 assert(lessons["quran-al-fatihah-kennenlernen"].questions["9-10"][0].prompt.includes("besondere Stellung"));
 assert(lessons["adab-privatsphaere-andere-achten"].questions["9-10"][0].prompt.includes("fremden Raum"));
 assert(lessons["family-geschwister-unterstuetzen"].questions["6-8"][0].prompt.includes("gegenseitig unterstützen"));
-assert(lessons["dua-abend-dhikr-lernen"].questions["6-8"][2].prompt.includes("Bedeutung"));
+assert(lessons["dua-abend-dhikr-lernen"].questions["6-8"][2].prompt.includes("Was bedeutet"));
 assert(lessons["akhlaq-fehler-ehrlich-zugeben"].questions["6-8"][0].prompt.includes("beachten"));
 console.log("PASS: 520 academy questions remain structurally valid; meaning-first edits and stronger distractors present; all lesson IDs and source references untouched.");
