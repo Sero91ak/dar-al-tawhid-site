@@ -78,11 +78,14 @@
   if(pilot&&creatorPilot&&isGirl45()){
    const k=Number(pilot.dataset.academyPilot);
    if(!Number.isInteger(k)||k<0||k>=clips.length)return;
+   if(k===0){event.preventDefault();event.stopImmediatePropagation();stop();status("Die verkürzte historische Grußaufnahme ist gesperrt. Für den vollständigen islamischen Salām fehlt noch eine hörgeprüfte V4-Aufnahme.");return;}
    event.preventDefault();event.stopImmediatePropagation();start([k]);return;
   }
   const welcome=event.target.closest?.('[data-speak-stage="0"]');
   if(welcome&&creatorPilot&&isGirl45()&&matchesExactSidqText()&&!document.querySelector("#lessonMain")?.hidden){
-   event.preventDefault();event.stopImmediatePropagation();start([0,1,2]);return;
+   // Never play a shortened legacy Salam for the now fully spelled-out greeting.
+   // Leave the event to the canonical Academy player, which fails closed until a full V4 clip exists.
+   return;
   }
   const stage=event.target.closest?.('[data-speak-stage="1"]');
   if(stage&&creatorPilot&&isGirl45()&&matchesExactSidqText()&&!document.querySelector("#lessonMain")?.hidden&&
