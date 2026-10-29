@@ -7,6 +7,14 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 cd "$HERE"
 mkdir -p .qa
 echo "TAWḤĪD KIDS NEXT · NUR SIMULATOR / keine Live-Veröffentlichung"
+bash "$HERE/PRE-FLIGHT.command"
+# Existing generated project may contain uncommitted Xcode restoration work.
+# Preserve it before XcodeGen regenerates the project, even though it is git-ignored.
+if [ -d "TawhidKidsNext.xcodeproj" ]; then
+  BACKUP=".qa/TawhidKidsNext.xcodeproj.backup.$(date +%Y%m%d-%H%M%S)"
+  cp -R "TawhidKidsNext.xcodeproj" "$BACKUP"
+  echo "Existing generated simulator project secured: $BACKUP"
+fi
 
 if [ "$(uname -s)" != "Darwin" ]; then
   echo "STOP: Xcode und iOS Simulator benötigen einen Mac."
