@@ -84,6 +84,12 @@ assert.match(visitorNavCSS,/transform:scale\(1\.10\)!important/);
 assert.match(source,/DAR_NAV_GEOMETRY_SINGLE_OWNER_V1_20261030/);
 assert.doesNotMatch(source,/nav\.style\.setProperty\("(?:left|width|height|transform|transition)"/);
 assert.equal(navWrites,0,"Adult route/layout controller never repositions the original bottom bar");
+// The TEST lane shares the stable JS controller and owns its own bottom CSS.
+const testNavCSS=fs.readFileSync(path.join(__dirname,"../test/assets/bottom-nav-global-v1120.css"),"utf8");
+assert.match(testNavCSS,/DAR_TEST_NAV_STATIC_ICON_ONLY_V1_20261030/);
+assert.match(testNavCSS,/width:31px!important;height:31px!important/);
+assert.match(testNavCSS,/transform:scale\(1\.10\)!important/);
+assert.match(testNavCSS,/transition:none!important/);
 const boot=fs.readFileSync(path.join(__dirname,"../assets/app-soft-boot.js"),"utf8");
 assert.match(boot,/function stopBootObserver\(\)/,"Boot observer must have a cleanup function");
 assert.match(boot,/function releaseChrome\(\) \{[\s\S]*?clearRamp\(\);\s*stopBootObserver\(\);/,"Emergency release must cancel interval and observer");
