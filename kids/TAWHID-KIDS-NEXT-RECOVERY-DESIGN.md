@@ -1,6 +1,10 @@
 # TAWḤĪD KIDS NEXT · Wiederherstellung, visuelle Leitlinie und vollständige Seitenmigration
 Datum: 29.10.2026 · VERBINDLICH FÜR ENTWICKLUNG; kein Freigabenachweis.
 
+## Erweiterung: Automatische System-Foldable-Navigation
+
+Die Details gelten aus `kids/TAWHID-KIDS-NEXT-FOLD-NAVIGATION.md`. Native SwiftUI `TabView` ist auf iPhone Duo verpflichtend, damit die Tabs abhängig von äußerem/innerem Display, Quer-/Hochformat, Split View und Falz systemgesteuert an die Seite bzw. unten wandern. Android-Web/PWA übernimmt dagegen eine auf Fenster-/Falzsegmente reagierende Navigation Rail/Bottom Bar mit Feature Detection und fallbacks. Original-3D-Symbole und fünf Ziele bleiben durchgängig erhalten. Eine unveränderte WebView-Kapsel wäre keine Erfüllung dieses Ziels; die isolierte Preview allein ist nur Konzeptnachweis.
+
 ## Kontext: Xcode-Wiederherstellung / GitHub-Snapshot
 - Altes KIDS NEXT branch `codex/tawhid-kids-next-simulator-architecture-20261026` lag beim Abgleich am 29.10.2026 **638 Commits hinter main**. Nicht blind checkout/reset/merge und nicht zum Kanon erklären.
 - Neues KIDS NEXT branch `codex/tawhid-kids-next-recovery-20261029` wurde von aktuellem `main` abgezweigt und isolierte NEXT-Dateien dorthin übernommen. Der Live-KIDS-Web- und -iOS-Bestand auf main ist die Inhaltsreferenz; lokale Xcode-Wiederherstellungsstände können neue, nicht gepushte Änderungen enthalten.
