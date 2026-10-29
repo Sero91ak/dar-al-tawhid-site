@@ -1,0 +1,10 @@
+{
+  "purpose": "read-only signal to re-run the canonical production worker publisher after the 2026-10-29 GPS fixes",
+  "authorization": "owner-scoped",
+  "scope": "adult visitor and Dar Test mobile location delivery",
+  "productionAsset": "/assets/dar-setup-hub.js",
+  "testAsset": "/test/assets/dar-setup-hub.js",
+  "noNativeBinaryChanges": true,
+  "noSecrets": true,
+  "releaseStage": "pending-audit"
+}

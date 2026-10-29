@@ -155,6 +155,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "gps-production-delivery-audit-once-20261029",
+      "at": "2026-10-29T18:48:00+01:00",
+      "approvedBy": "user-explicit-20261029-test-every-global-live-app-and-repair-stalled-gps-production-delivery",
+      "reason": "Single narrowly owner-authorized release of read-only global app live-audit code and non-executable deployment marker. Existing GPS JS already approved and merged; production worker previously blocked on GPS regression test. Do not unlock GPS implementation, native code, secrets, Kids, prayer engine, push or core lock. Expires automatically; restore closed scope after verification.",
+      "paths": [
+        "scripts/global-live-app-delivery-audit.cjs",
+        ".github/workflows/global-app-live-audit.yml",
+        "assets/gps-delivery-recheck-20261029.json"
+      ],
+      "expiresAt": "2026-10-30T12:00:00.000Z"
+    },
+    {
       "id": "dar-test-fold-rollback-original-tablet-20261028",
       "at": "2026-10-28T18:42:00+01:00",
       "approvedBy": "user-explicit-remove-fold-settings-restore-tablet-in-test",
