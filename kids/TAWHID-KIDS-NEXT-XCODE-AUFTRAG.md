@@ -13,6 +13,10 @@ Adaptive Geräte: iPhone, iPad, iPhone Duo geschlossen/aufgeklappt/teilgefaltet/
 
 Der Ein-Klick-Launcher testet zunächst nur den isolierten Simulator-Unterbau. Der Coding-Agent muss die native Feature-Migration wirklich implementieren und die neue Paritätsmatrix mit echten Testnachweisen füllen. Keine Änderung an Live oder App Store ohne spätere Freigabe.
 
+## ERWEITERUNG 29.10.2026 · SYSTEMNATIVE FOLDABLE-TABS (PFLICHT)
+
+Lies die neue Datei `kids/TAWHID-KIDS-NEXT-FOLD-NAVIGATION.md` vollständig und behandle sie als verbindlichen Teil dieses einen autonomen Masterauftrags. iPhone Duo verlangt **echte SwiftUI TabView** (systemgesteuerte vertikale/horizontale Platzierung je Display/Pose; auch Split View mit linker/rechter Leiste); keine manuell an die Seite geschobene WebView-5er-Leiste. Alle fünf tatsächlichen Tabs bleiben mit **originalen 3D-Icon-Assets** erreichbar: Heute, Hören, Lernen, Duʿāʾ, Eltern. Bei Native+WKWebView **genau eine** sichtbare Navigation und einen geteilten Route-/Selection-State, andernfalls No-Go. Android Foldables betreffen zunächst die Web/PWA-Spur: CSS Viewport Segments/feature detection + adaptive Bottom/Navigation Rail und verifiziertes Falz-/Tisch-/Fensterverhalten, keine falsche Behauptung eines Android-native System-TabView. Alle Fold-Geräte/Posen, Audio-Resume, Lernprogress, Kinderprofile, Safe Areas und Falzfreiheit testen und Screenshots liefern. Nur Entwicklervorschau und isolierte KIDS NEXT-Version; Live-Änderungen weiterhin gesperrt.
+
 ## 0 · Absolute Priorität: Schutz
 Arbeite ausschließlich auf codex/tawhid-kids-next-recovery-20261029 oder einem davon abzweigenden privaten Arbeitsbranch. Keine Änderungen an main, kids-Live-Seiten, Erwachsenen-App, bestehendem App-Store-Bundle de.daraltawhid.kids, existierendem Besucher- oder Creator-Scheme, Apple-Signing, Store Connect, TestFlight, Cloudflare/Worker-Deploy oder OneSignal. Keine echten Kinderkonten importieren. Änderungen außerhalb des Kids-Next-Bereichs nur falls zwingend und nach Scope-Schutzkontrolle; niemals bestehende KIDS-Regeln überschreiben.
 
