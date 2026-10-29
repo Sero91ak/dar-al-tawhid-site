@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-29T16:30:25Z",
+  "timestamp": "2026-10-29T17:54:18Z",
   "trigger": "workflow_run",
   "finishedDeployConclusion": "failure",
-  "finishedDeployRun": "40911848218",
+  "finishedDeployRun": "40925436593",
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
@@ -89,6 +89,24 @@
   },
   "lastDeployRuns": [
     {
+      "conclusion": null,
+      "created_at": "2026-10-29T17:52:28Z",
+      "head_sha": "3a9b21cc4b77dfd9d74114ea1a3dcf2dde8153bd",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40925460019",
+      "id": 40925460019,
+      "status": "in_progress",
+      "updated_at": "2026-10-29T17:54:09Z"
+    },
+    {
+      "conclusion": "failure",
+      "created_at": "2026-10-29T17:52:19Z",
+      "head_sha": "c9f0c77fe874c407fc38c59d192dfd9aef6f5875",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40925436593",
+      "id": 40925436593,
+      "status": "completed",
+      "updated_at": "2026-10-29T17:54:06Z"
+    },
+    {
       "conclusion": "failure",
       "created_at": "2026-10-29T16:28:03Z",
       "head_sha": "2bf3b4e91346c918a19b89047c2edd80e91a5870",
@@ -123,24 +141,6 @@
       "id": 40871000894,
       "status": "completed",
       "updated_at": "2026-10-29T12:11:59Z"
-    },
-    {
-      "conclusion": "success",
-      "created_at": "2026-10-29T12:02:57Z",
-      "head_sha": "8503ed0218705c76c6e5ed63c12747162556e648",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40870100342",
-      "id": 40870100342,
-      "status": "completed",
-      "updated_at": "2026-10-29T12:05:29Z"
-    },
-    {
-      "conclusion": "failure",
-      "created_at": "2026-10-29T11:59:07Z",
-      "head_sha": "31eb2c802b16911478e3b428523afb08970a9460",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/40869586234",
-      "id": 40869586234,
-      "status": "completed",
-      "updated_at": "2026-10-29T12:00:54Z"
     }
   ]
 }
