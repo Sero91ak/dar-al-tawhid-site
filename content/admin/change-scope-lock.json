@@ -155,6 +155,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-stable-five-tab-nav-rebased-20261030",
+      "at": "2026-10-30T00:00:00+01:00",
+      "approvedBy": "user-explicit-nav-no-shift-icon-only-pop-test-and-visitor-20261029",
+      "reason": "Only DĀR TEST original five-tab navigation CSS size stability and pressed 3D image micro-pop, plus test guard. Visitor fix already landed on main in separate concurrent work and MUST NOT be overwritten. No Fold reactivation, native iOS, Kids, service worker, account, dashboard or content changes.",
+      "paths": [
+        "test/assets/bottom-nav-global-v1120.css",
+        "test/tools/dar-duo-responsive-guard.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-15T23:59:59.000Z"
+    },
+    {
       "id": "adult-visitor-navigation-static-icon-only-20261030",
       "at": "2026-10-30T00:10:00+01:00",
       "approvedBy": "user-explicit-navbar-stability-all-adult-app-lanes-20261029",
