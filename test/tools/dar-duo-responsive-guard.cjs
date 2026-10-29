@@ -55,3 +55,13 @@ assert.deepEqual(attrs,{},"Disable all temporary fold root override attributes")
 assert.equal(classSet.size,0,"Disable old left-side experimental dock");
 assert.equal(win.DARTestDuoAdaptive.audit().foldOverridesActive,false);
 console.log("DĀR TEST: Fold experiment disabled, normal tablet navigation retained PASS");
+
+
+/* DAR_TEST_NAV_MOTION_GUARD_V1 · test-only visual state parity. */
+const navCSS=read("test/assets/bottom-nav-global-v1120.css");
+assert.match(navCSS,/DAR_TEST_FIVE_TAB_ICON_ONLY_MOTION_V1/);
+assert.match(navCSS,/transform:scale\(1\.12\)!important/);
+assert.match(navCSS,/transition:none!important/);
+assert.match(navCSS,/width:31px!important;\s*height:31px!important;\s*min-width:31px!important;\s*min-height:31px!important/);
+assert.match(navCSS,/prefers-reduced-motion:reduce/);
+assert.doesNotMatch(navCSS,/scale\(\.94\)/);
