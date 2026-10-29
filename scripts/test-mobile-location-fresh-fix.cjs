@@ -60,6 +60,14 @@ async function testOne(file) {
     "Moving from cached GPS to a fresh fix must bypass the duplicate-write throttle");
   assert(source.includes("function requestWebFix()"),
     "Safari/Android/PWA foreground GPS is missing");
+  const detectStart=source.indexOf("  async function detectLocation() {");
+  const detectEnd=source.indexOf("  function toggleManual()",detectStart);
+  assert(detectStart>=0&&detectEnd>detectStart,"Mobile GPS action missing");
+  const detect=source.slice(detectStart,detectEnd);
+  const cancelled=detect.indexOf("if (serial !== requestId) return;");
+  const firstWrite=detect.indexOf("save({lat:lat,lon:lon");
+  assert(cancelled>0&&firstWrite>cancelled,
+    "Late GPS answer must not overwrite a city selected while the request was pending");
 
   const old = {lat:52.5,lng:13.4,acc:40,timestamp:NOW-8*60000};
   const fresh = {lat:50.7,lng:7.1,acc:22,timestamp:NOW};
