@@ -28,6 +28,7 @@ jobs:
           sparse-checkout: |
             .github/workflows
             kids/data/salaf-library-v1.json
+            kids/review-only/salaf-v4-ghibah-repair-20261029/
           sparse-checkout-cone-mode: false
       - name: Use existing ElevenLabs history item; create no paid speech
         shell: bash
