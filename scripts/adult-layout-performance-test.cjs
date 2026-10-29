@@ -81,3 +81,16 @@ assert.match(boot,/function releaseChrome\(\) \{[\s\S]*?clearRamp\(\);\s*stopBoo
 assert.match(boot,/function finish\(\) \{[\s\S]*?clearRamp\(\);\s*stopBootObserver\(\);/,"Normal finish must disconnect observer");
 assert.match(boot,/if \(finished \|\| !bootObserver\) return;/,"Late DOMContentLoaded must not reattach a boot observer");
 console.log("OK: responsive layout, fold mutation filtering, boot timer/observer lifecycle");
+
+
+/* DAR_NAV_STABLE_DOCK_GUARD_V1: user specifically requires pop only on
+ * existing 3D icon, never the 5-tab dock, its fields or label layout. */
+const navCSS=fs.readFileSync(path.join(__dirname,"../assets/bottom-nav-global-v1075.css"),"utf8");
+assert.match(source,/NAV_EASE = "none"/,"The outer navigation must never width-tween");
+assert.doesNotMatch(source,/widthLockUntil/,"Retired 500ms geometry width-lock must stay removed");
+assert.match(source,/stableWidth = \(root && root\.clientWidth\)/,"Use stable layout viewport for navigation");
+assert.match(navCSS,/DAR_FIVE_TAB_ICON_ONLY_MOTION_V1/);
+assert.match(navCSS,/\.nav-icon img\.dar3d-icon/,"Only original 3D images receive transforms");
+assert.match(navCSS,/transform:scale\(1\.12\)!important/,"Pressed glyph micro-pop");
+assert.match(navCSS,/transition:none!important/,"Dock transition disabled");
+assert.match(navCSS,/prefers-reduced-motion:reduce/,"Respect reduced motion");
