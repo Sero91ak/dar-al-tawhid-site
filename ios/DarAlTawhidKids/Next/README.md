@@ -2,6 +2,10 @@
 
 **Status 26.10.2026: Entwicklungs-Scaffold. Kein vollständig nativ migriertes KIDS-Produkt und keine geprüfte 100-%-Parität.** Die vorhandene WKWebView-/Audio-Bridge und das bestehende Creator-Testmenü werden direkt, ohne Veränderungen, aus dem getrennten iOS-Kids-Bestand verwendet. Erst der Xcode-Masterauftrag migriert die einzelnen Module in eigene SwiftUI-Komponenten.
 
+## Aktualisierung 29.10.2026 · Recovery zuerst
+
+Frischer Branch `codex/tawhid-kids-next-recovery-20261029` wurde vom aktuellen GitHub-main erstellt. Der alte NEXT-Branch war 638 Commits zurück. Vollständige Regeln: `kids/TAWHID-KIDS-NEXT-RECOVERY-DESIGN.md`. Der Ein-Klick-Launcher startet nun auch ein read-only Mac-Xcode-Inventar über `PRE-FLIGHT.command` und legt eine Sicherheitskopie eines vorhandenen generierten NEXT-Projekts vor jeder XcodeGen-Regeneration an. Die vollständige native Migration der Benutzeroberflächen ist weiterhin der Auftrag an den lokalen Xcode-Coding-Agenten, nicht die bereits bewiesene Funktion des Starter-Skripts.
+
 ## Ein Befehl auf dem Mac
 Im lokal ausgecheckten Repository vom Root-Verzeichnis aus:
 
