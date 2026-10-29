@@ -4884,15 +4884,24 @@ function mode(m){
  /* iOS: Keyboard nur auf expliziten Textfeld-Tap. */
  if(m==="voice")$("#micInfo").textContent="Tippe auf „Aufnahme starten“ und sprich. Danach kannst du dir deine Stimme anhören.";
 }
-/* Rotate only the DISPLAY order: canonical q.correct and source facts stay intact.
-   No paid voice content is rewritten; future option audio must follow this order. */
-function academyDisplayChoices(q,index){
+/* Shuffle only the DISPLAY order, with a stable per-lesson/age/question seed.
+   Unlike an index-only rotation, correct answers cannot be learned from a
+   recurring first-question position across lessons. Deterministic: retries,
+   saved drafts, and spoken numbering never shuffle under the child's finger.
+   Original q.correct and every source/recording remain unchanged. */
+function academyDisplayChoices(q,index,lessonScope=""){
  const options=Array.isArray(q&&q.options)?q.options:[];
  const n=options.length;
- if(n<2)return options.map((text,originalIndex)=>({text,originalIndex}));
- const start=(Number(index)+1)%n;
- return options.map((text,originalIndex)=>({text,originalIndex})).slice(start)
-  .concat(options.map((text,originalIndex)=>({text,originalIndex})).slice(0,start));
+ const original=options.map((text,originalIndex)=>({text,originalIndex}));
+ if(n<2)return original;
+ const seed=String(lessonScope)+":"+String(q?.prompt||"");
+ let hash=2166136261;
+ for(let i=0;i<seed.length;i++){
+  hash^=seed.charCodeAt(i);
+  hash=Math.imul(hash,16777619);
+ }
+ const start=((hash>>>0)+(Number(index)||0))%n;
+ return original.slice(start).concat(original.slice(0,start));
 }
 function showQuestion(){
  const q=questions()[qIndex];if(!q){finish();return}
@@ -4904,7 +4913,7 @@ function showQuestion(){
  $("#answerModeCaption").textContent=q.type==="choice"?"Tippe auf eine Antwort oder sprich selbst:":"Du kannst sprechen oder schreiben:";
  $("#academyBuddyTitle").textContent=age==="4-5"?"Wir schaffen das!":age==="9-10"?"Jetzt bist du dran!":"Du schaffst das!";
  $("#academyBuddyText").textContent=age==="4-5"?"Tippe auf Hören. Dann wähle eine Antwort.":"Hör dir die Frage an oder lies selbst.";
- if(q.type==="choice")academyDisplayChoices(q,qIndex).forEach(({text:t,originalIndex:i},visibleIndex)=>{
+ if(q.type==="choice")academyDisplayChoices(q,qIndex,activeLessonId+":"+age).forEach(({text:t,originalIndex:i},visibleIndex)=>{
   const row=document.createElement("div");row.className="choice-row";
   const select=document.createElement("button");select.type="button";select.className="choice-button";
   select.textContent=t;select.setAttribute("aria-pressed","false");
