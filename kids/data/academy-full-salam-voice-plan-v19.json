@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "version": "academy-full-islamic-salam-v19-20261029",
+  "scope": "kids-academy-new-releases-only",
+  "archiveImmutable": [
+    "kids/data/academy-voice-plan-v9.json",
+    "kids/data/academy-sidq-voice-plan-v18.json",
+    "kids/data/academy-audio-staging-v9.json"
+  ],
+  "status": "not-generated-awaiting-human-review",
+  "phraseCount": 3,
+  "uniqueGreetingCount": 1,
+  "voicePolicy": {
+    "canonicalFullSalam": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+    "neverShorten": true,
+    "noExistingAudioSubstitution": true,
+    "allowPaidGeneration": false,
+    "requireOwnerPaymentApproval": true,
+    "requireHumanFushaHearingReview": true,
+    "arabicQuranRecitationSeparate": true,
+    "preserveOldPilotFiles": true
+  },
+  "phrases": [
+    {
+      "text": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 0,
+      "reviewStatus": "not-generated",
+      "approvedForPlayback": false,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "greeting",
+          "age": "all",
+          "profile": "girl"
+        },
+        {
+          "lessonId": "sidq",
+          "kind": "greeting",
+          "age": "all",
+          "profile": "boy"
+        }
+      ]
+    },
+    {
+      "text": "Liebe Schwester.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 0,
+      "reviewStatus": "not-generated",
+      "approvedForPlayback": false,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "address",
+          "age": "all",
+          "profile": "girl"
+        }
+      ]
+    },
+    {
+      "text": "Lieber Bruder.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 0,
+      "reviewStatus": "not-generated",
+      "approvedForPlayback": false,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "address",
+          "age": "all",
+          "profile": "boy"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Greeting must be displayed verbatim and independent of gender/person name.",
+    "Greeting and optional profile name are separate text and audio segments.",
+    "Old short-Salam pilot archived and denied as canonical full greeting.",
+    "No generated audio file or paid request in this review-only voice plan."
+  ]
+}

@@ -81,15 +81,12 @@ function harness(search,who="girl",welcome="Heute geht es darum, die Wahrheit zu
 const p=harness("?previewProfil=maedchen&previewAlter=4-5&voicePilot=1&creatorSandbox=1");
 assert.equal(p.visible.panel.hidden,false);
 assert.ok(p.listeners.click);
-assert.deepEqual(p.tap('[data-speak-stage="0"]'),{stopped:true,prevented:true});
-assert.equal(p.playing.length,1,"First play() must happen before click handler returns");
-assert.ok(p.playing[0].includes(clipNames[0]),"Greeting must be the exact owner's Salām");
-p.FakeAudio.latest.onended();
-assert.equal(p.playing.length,2,"Follow-up may continue with same gesture-authorized player");
-assert.ok(p.playing[1].includes(clipNames[1]));
-p.FakeAudio.latest.onended();
-assert.equal(p.playing.length,3);
-assert.ok(p.playing[2].includes(clipNames[2]));
+// Since the displayed greeting is now the complete formula, the legacy
+// abbreviated recording MUST NOT override the canonical classroom narration.
+assert.deepEqual(p.tap('[data-speak-stage="0"]'),{stopped:false,prevented:false});
+assert.equal(p.playing.length,0,"Old short Salam must not play over the complete greeting");
+assert.deepEqual(p.tap("[data-academy-pilot]",0),{stopped:true,prevented:true});
+assert.equal(p.playing.length,0,"Old short greeting audio must be blocked even in creator sandbox");
 const q=harness("?previewProfil=maedchen&previewAlter=4-5&voicePilot=1&creatorSandbox=1");
 assert.deepEqual(q.tap("[data-academy-pilot]",3),{stopped:true,prevented:true});
 assert.equal(q.playing.length,1);
@@ -115,4 +112,4 @@ assert.equal(realGirl.playing.length,0);
 const ordinary=harness("?cb=v16-regular");
 assert.equal(ordinary.listeners.click,undefined,"No unapproved pilot override for normal signed-in pupils");
 assert.equal(ordinary.playing.length,0);
-console.log("KIDS ACADEMY V17 PASS: exact Serhat V4 first-tap greeting in explicit preview, subject match, real child profile protection, no regular lesson promotion.");
+console.log("KIDS ACADEMY V17 PASS: old abbreviated Salam blocked; other historical creator clips remain preview-only; real child and profile gating intact.");

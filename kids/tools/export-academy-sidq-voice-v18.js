@@ -48,9 +48,12 @@ function add(text,kind,age="all",profile="both"){
  if(!v.contexts.some(c=>c.kind===kind&&c.age===age&&c.profile===profile))
   v.contexts.push({lessonId:"sidq",kind,age,profile});
 }
-const salams={girl:"As-salāmu ʿalaykum, liebe Schwester.",
- boy:"As-salāmu ʿalaykum, lieber Bruder."};
+const salams={girl:"As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+ boy:"As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh."};
 for(const [profile,salam] of Object.entries(salams))add(salam,"greeting","all",profile);
+// Anrede ist ein eigener Sprachbaustein, nie Teil eines verkürzten Salām.
+add("Liebe Schwester.","address","all","girl");
+add("Lieber Bruder.","address","all","boy");
 for(const age of ageKeys){
  const u=ui[age],e=teaching[age],questions=exercises[age];
  if(!u?.welcomeNext||!u?.welcomeBody||!Array.isArray(e?.lines)||e.lines.length!==4||

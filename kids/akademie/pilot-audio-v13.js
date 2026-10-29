@@ -1,5 +1,5 @@
 /* KIDS Academy V16 – strict owner-preview: first play is synchronous with iOS tap.
- * This is a QA preview of FOUR still-unapproved recordings, not public lesson audio.
+ * This is a QA preview of three playable still-unapproved recordings; a fourth shortened legacy Salam is blocked, not public lesson audio.
  * Do not generate synthetic device speech or bill any ElevenLabs credits here.
  */
 (function(){
@@ -78,11 +78,14 @@
   if(pilot&&creatorPilot&&isGirl45()){
    const k=Number(pilot.dataset.academyPilot);
    if(!Number.isInteger(k)||k<0||k>=clips.length)return;
+   if(k===0){event.preventDefault();event.stopImmediatePropagation();stop();status("Die verkürzte historische Grußaufnahme ist gesperrt. Für den vollständigen islamischen Salām fehlt noch eine hörgeprüfte V4-Aufnahme.");return;}
    event.preventDefault();event.stopImmediatePropagation();start([k]);return;
   }
   const welcome=event.target.closest?.('[data-speak-stage="0"]');
   if(welcome&&creatorPilot&&isGirl45()&&matchesExactSidqText()&&!document.querySelector("#lessonMain")?.hidden){
-   event.preventDefault();event.stopImmediatePropagation();start([0,1,2]);return;
+   // Never play a shortened legacy Salam for the now fully spelled-out greeting.
+   // Leave the event to the canonical Academy player, which fails closed until a full V4 clip exists.
+   return;
   }
   const stage=event.target.closest?.('[data-speak-stage="1"]');
   if(stage&&creatorPilot&&isGirl45()&&matchesExactSidqText()&&!document.querySelector("#lessonMain")?.hidden&&
@@ -100,7 +103,7 @@
   if(panel){
    const show=creatorPilot&&isGirl45();
    panel.hidden=!show;
-   // Make the four genuine pilot clips discoverable in the explicit creator demo.
+   // Make only the three unaffected pilot clips available; the old shortened Salam remains blocked.
    const details=panel.closest?.("details");
    if(details&&show)details.open=true;
   }

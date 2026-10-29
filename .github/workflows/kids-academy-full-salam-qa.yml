@@ -1,0 +1,35 @@
+name: KIDS Academy Full Salam QA 20261029
+on:
+  pull_request:
+    paths:
+      - "kids/akademie/**"
+      - "kids/tools/test-academy-full-salam-v1.cjs"
+      - "kids/tools/export-academy-sidq-voice-v18.js"
+      - "kids/tools/build-academy-v9-staging.py"
+      - "kids/data/academy-voice-plan-v9.json"
+      - "kids/data/academy-sidq-voice-plan-v18.json"
+      - "kids/data/academy-audio-staging-v9.json"
+      - "kids/MASTER-TEXT-STANDARD-V2.md"
+      - "test/kids/akademie/index.html"
+      - ".github/workflows/kids-academy-full-salam-qa.yml"
+permissions:
+  contents: read
+jobs:
+  full-salam:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Academy full greeting / gender / voice regression
+        run: |
+          node --check kids/tools/test-academy-full-salam-v1.cjs
+          node --check kids/tools/export-academy-sidq-voice-v18.js
+          node --check kids/akademie/pilot-audio-v13.js
+          python3 -m py_compile kids/tools/build-academy-v9-staging.py
+          node kids/tools/test-academy-full-salam-v1.cjs
+          node kids/tools/test-academy-learning-pedagogy-v1.cjs
+      - name: Human review remains mandatory for NEW full Salam voice
+        run: echo "No ElevenLabs calls; no existing binary files changed. Full Salam audio remains unavailable until actual Fusha hearing QA."

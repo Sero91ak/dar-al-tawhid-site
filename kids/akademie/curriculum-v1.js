@@ -242,7 +242,7 @@ window.DARKidsAcademyCurriculum=Object.freeze({
   },
   "lines": [
    "Ich darf andere freundlich begrüßen.",
-   "As-salāmu ʿalaykum ist ein islamischer Friedensgruß.",
+   "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh ist ein islamischer Friedensgruß.",
    "Wenn ich gegrüßt werde, antworte ich freundlich.",
    "So zeigen wir einander Respekt und Frieden."
   ],
@@ -252,7 +252,7 @@ window.DARKidsAcademyCurriculum=Object.freeze({
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Jemand sagt zu dir As-salāmu ʿalaykum. Was tust du?",
+     "prompt": "Jemand sagt zu dir As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh. Was tust du?",
      "options": [
       "Ich grüße freundlich zurück.",
       "Ich sage absichtlich etwas Unfreundliches."
@@ -276,7 +276,7 @@ window.DARKidsAcademyCurriculum=Object.freeze({
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Jemand sagt zu dir As-salāmu ʿalaykum. Was tust du?",
+     "prompt": "Jemand sagt zu dir As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh. Was tust du?",
      "options": [
       "Ich grüße freundlich zurück.",
       "Ich sage absichtlich etwas Unfreundliches."
@@ -306,7 +306,7 @@ window.DARKidsAcademyCurriculum=Object.freeze({
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Jemand sagt zu dir As-salāmu ʿalaykum. Was tust du?",
+     "prompt": "Jemand sagt zu dir As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh. Was tust du?",
      "options": [
       "Ich grüße freundlich zurück.",
       "Ich sage absichtlich etwas Unfreundliches."

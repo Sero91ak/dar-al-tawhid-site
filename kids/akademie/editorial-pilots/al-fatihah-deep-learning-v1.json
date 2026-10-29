@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_ACADEMY_AL_FATIHAH_EDITORIAL_PILOT_V1",
+  "status": "editorial-draft-not-published",
+  "liveLessonId": "quran-al-fatihah-kennenlernen",
+  "audioProductionAllowed": false,
+  "humanIslamicReviewApproved": false,
+  "humanPedagogyReviewApproved": false,
+  "elevenLabsCreditsUsed": 0,
+  "purpose": "Beispiel für vollständige kindgerechte Lernarchitektur vor Voice-Freeze; niemals automatisch über bestehende Lektion schreiben",
+  "sources": [
+    {
+      "kind": "quran",
+      "reference": "Qurʾān 1:2",
+      "url": "https://quran.com/1/2",
+      "role": "original-verse-and-meaning",
+      "note": "Deutsche sinngemäße Erklärung klar vom arabischen Original trennen"
+    },
+    {
+      "kind": "hadith",
+      "reference": "Ṣaḥīḥ al-Buḫārī 4474",
+      "url": "https://sunnah.com/bukhari:4474",
+      "role": "authentic-hadith",
+      "note": "Überlieferung bezeichnet al-Fātiḥah als die bedeutendste Sūrah; der Hadith ist nicht auf die isolierte Āyah 1:2 zu verkürzen"
+    }
+  ],
+  "narratorProfile": "Serhat Abu Malik / ElevenLabs V4 – no synthesis until signed-off",
+  "quranAudioPolicy": "Arabic Qurʾān only from verified reciter recording; no synthetic recitation",
+  "ages": {
+    "4-5": {
+      "goal": "Das Kind nennt al-Fātiḥah als erste Sūrah und erklärt die Worte al-ḥamdu lillāh einfach.",
+      "introduction": "Kennst du den Anfang des Qurʾān? Dort steht Sūrat al-Fātiḥah. Wir hören zu und entdecken heute einen Satz aus dieser Sūrah. Du darfst langsam lernen und fragen.",
+      "teaching": "In dieser Sūrah hören wir die Worte: Al-ḥamdu lillāhi rabbi l-ʿālamīn. Die deutsche Bedeutung lautet sinngemäß: Alles Lob gebührt Allah, dem Herrn der Welten. Wenn wir al-ḥamdu lillāh sagen, loben wir Allah. Hör dir die arabischen Worte von einem echten Qurʾān-Rezitator an. Danach sprechen wir über ihre Bedeutung.",
+      "workedExample": "Du hast etwas Schönes erlebt und möchtest Allah loben. Du kannst al-ḥamdu lillāh sagen.",
+      "questions": [
+        {
+          "id": "a4-q1",
+          "kind": "understand",
+          "prompt": "Wir haben die erste Sūrah im Qurʾān kennengelernt. Wie heißt sie?",
+          "options": [
+            "Sūrat al-Fātiḥah",
+            "Sūrat al-Iḫlāṣ"
+          ],
+          "correct": 0,
+          "hint": "Denke an den Anfang unseres Unterrichts.",
+          "explanation": "Al-Fātiḥah ist die erste Sūrah im Qurʾān. Al-Iḫlāṣ ist ebenfalls eine echte Sūrah, steht aber nicht am Anfang."
+        },
+        {
+          "id": "a4-q2",
+          "kind": "meaning",
+          "prompt": "Wenn du die Worte „al-ḥamdu lillāh“ sagst, was drückst du damit aus?",
+          "options": [
+            "Ich bitte Allah um etwas.",
+            "Ich lobe Allah."
+          ],
+          "correct": 1,
+          "hint": "Überlege, ob du gerade lobst oder um etwas bittest.",
+          "explanation": "„Al-ḥamdu lillāh“ ist eine Form des Lobes Allahs. Es ist nicht dieselbe Formulierung wie eine Bitte."
+        },
+        {
+          "id": "a4-q3",
+          "kind": "teach",
+          "prompt": "Ein jüngeres Kind fragt: „Was heißt al-ḥamdu lillāh?“ Was kannst du ihm erklären?",
+          "options": [
+            "Alles Lob gebührt Allah.",
+            "Ich suche Schutz bei Allah."
+          ],
+          "correct": 0,
+          "hint": "Denk an die Bedeutung der Worte, die wir im Unterricht gehört haben.",
+          "explanation": "Die kurze Bedeutung lautet: Alles Lob gebührt Allah. Nun kannst du sie selbst einem anderen Kind erklären."
+        }
+      ],
+      "retention": "Erzähl heute einer vertrauten Person in einem Satz, was al-ḥamdu lillāh bedeutet. Wenn du es nicht weißt, höre die Erklärung noch einmal.",
+      "spacedRecall": "Morgen, ohne vorher nachzusehen: Welche Sūrah steht am Anfang des Qurʾān? Was bedeutet al-ḥamdu lillāh?"
+    },
+    "6-8": {
+      "goal": "Das Kind erkennt al-Fātiḥah und erklärt die Bedeutung von „Lob“ in Qurʾān 1:2 anhand eines Alltagsbeispiels.",
+      "introduction": "Heute lernst du, was die Worte „al-ḥamdu lillāhi rabbi l-ʿālamīn“ bedeuten und warum Sūrat al-Fātiḥah besonders ist. Du musst dazu keine Versnummer auswendig aufsagen.",
+      "teaching": "Sūrat al-Fātiḥah eröffnet den Qurʾān. Im zweiten Vers wird Allah als Herr der Welten gelobt. Das bedeutet sinngemäß: Alles Lob gebührt Allah, dem Herrn der Welten. Der Prophet ﷺ lehrte in einer authentischen Überlieferung die besondere Stellung der gesamten Sūrah. Wir unterscheiden dabei den einzelnen Vers vom ganzen Kapitel.",
+      "workedExample": "Du hörst einen schönen Qurʾān-Vers: Du kannst zuerst die Rezitation anhören, danach die deutsche Bedeutungsübersetzung lesen und mit eigenen Worten sagen, was du verstanden hast.",
+      "questions": [
+        {
+          "id": "a6-q1",
+          "kind": "distinguish",
+          "prompt": "Wir haben al-Fātiḥah und al-Iḫlāṣ kennengelernt. Welche der beiden Sūren steht am Anfang des Qurʾān?",
+          "options": [
+            "Al-Iḫlāṣ",
+            "Al-Fātiḥah"
+          ],
+          "correct": 1,
+          "hint": "Denke an die Sūrah, mit der unser Unterricht begonnen hat.",
+          "explanation": "Der Qurʾān beginnt mit Sūrat al-Fātiḥah. Sūrat al-Iḫlāṣ steht an einer späteren Stelle."
+        },
+        {
+          "id": "a6-q2",
+          "kind": "meaning",
+          "prompt": "Im Vers „al-ḥamdu lillāhi rabbi l-ʿālamīn“ geht es um das Lob Allahs. Welche Erklärung passt?",
+          "options": [
+            "Der Vers beschreibt, dass Menschen angebetet werden sollen.",
+            "Alles Lob gebührt Allah, dem Herrn der Welten.",
+            "Der Vers gibt uns nur eine historische Jahreszahl."
+          ],
+          "correct": 1,
+          "hint": "Welche Aussage spricht ausdrücklich über Allahs Lob und Seine Herrschaft?",
+          "explanation": "Der Vers lobt Allah, den Herrn der Welten. Darin steht keine historische Jahreszahl und kein Aufruf zur Anbetung von Menschen."
+        },
+        {
+          "id": "a6-q3",
+          "kind": "application",
+          "prompt": "Dein Freund fragt, wie er einen arabischen Qurʾān-Vers besser verstehen kann. Was ist ein guter nächster Schritt?",
+          "options": [
+            "Die echte Rezitation hören und die geprüfte Bedeutung mit einer Lehrperson besprechen.",
+            "Nur die Nummer des Verses auswendig lernen und den Inhalt auslassen."
+          ],
+          "correct": 0,
+          "hint": "Geht es bei unserem Lernen nur um Nummern oder um den Inhalt?",
+          "explanation": "Der arabische Originaltext und seine sinngemäße deutsche Erklärung helfen gemeinsam beim Verstehen. Wenn etwas unklar bleibt, darf man nachfragen."
+        }
+      ],
+      "retention": "Erkläre zu Hause einem vertrauten Menschen den Unterschied zwischen dem arabischen Qurʾān-Original und einer deutschen Bedeutungsübersetzung.",
+      "spacedRecall": "Morgen: Erkläre ohne Ablesen, was „al-ḥamdu lillāh“ bedeutet, und nenne ein Beispiel, wann du Allah loben möchtest."
+    },
+    "9-10": {
+      "goal": "Das Kind verbindet den Inhalt von Qurʾān 1:2 mit der authentischen Überlieferung zu al-Fātiḥah und kann die Verbindung jemand anderem erklären.",
+      "introduction": "Unser Lernziel ist nicht, Fundstellen zu erraten. Wir wollen erkennen, welche Aussage der Qurʾāntext vermittelt und worauf sich die authentische Überlieferung über al-Fātiḥah bezieht.",
+      "teaching": "Der Wortlaut „al-ḥamdu lillāhi rabbi l-ʿālamīn“ gehört zu Qurʾān 1:2. Die Bedeutung erklärt das Lob Allahs als Herrn der Welten. In Ṣaḥīḥ al-Buḫārī 4474 berichtet Abū Saʿīd ibn al-Muʿallā, wie der Prophet ﷺ die besondere Stellung von Sūrat al-Fātiḥah erläuterte. Die Überlieferung bezieht sich auf die ganze Sūrah; der zuvor gehörte einzelne Vers ist ein Teil davon. Eine Quelle verstehen heißt, ihren Inhalt und ihren Zusammenhang nicht zu verwechseln.",
+      "workedExample": "Du erklärst einem jüngeren Kind: „Al-Fātiḥah ist die erste Sūrah des Qurʾān. Ein Vers darin beginnt mit Allahs Lob. Der Prophet ﷺ hat die besondere Bedeutung der ganzen Sūrah gelehrt.“ So erklärst du verständlich, ohne die Quelle zu verändern.",
+      "questions": [
+        {
+          "id": "a9-q1",
+          "kind": "source-understanding",
+          "prompt": "Wir haben Qurʾān 1:2 und einen Hadith über al-Fātiḥah behandelt. Welche Aussage unterscheidet beide Quellen richtig?",
+          "options": [
+            "Der Hadith behandelt die besondere Bedeutung der ganzen Sūrah, während Qurʾān 1:2 ein Vers daraus ist.",
+            "Beide Quellen bestehen nur aus einer Versnummer; ihre Bedeutung spielt keine Rolle.",
+            "Der Hadith ersetzt die arabischen Worte des Qurʾāns."
+          ],
+          "correct": 0,
+          "hint": "Unterscheide zwischen einer ganzen Sūrah und einem einzelnen Vers.",
+          "explanation": "Der Hadith erläutert die Stellung der Sūrah insgesamt; Qurʾān 1:2 ist ein konkreter Vers. Wir verändern keine der beiden Quellen."
+        },
+        {
+          "id": "a9-q2",
+          "kind": "explain",
+          "prompt": "Wie würdest du einer jüngeren Person erklären, was „al-ḥamdu lillāh“ in unserem Vers bedeutet?",
+          "type": "text",
+          "sample": "Es bedeutet sinngemäß, dass alles Lob Allah gehört. Der Vers nennt Allah auch den Herrn der Welten.",
+          "hint": "Formuliere zuerst die Bedeutung in einem einfachen Satz. Eine Versnummer ist nicht nötig.",
+          "selfCheck": [
+            "Ich habe erklärt, dass Allah gelobt wird.",
+            "Ich habe keine andere religiöse Aussage als Originalvers ausgegeben."
+          ],
+          "autoGradeAllowed": false
+        },
+        {
+          "id": "a9-q3",
+          "kind": "teach",
+          "prompt": "Ein Freund denkt, er müsse nur „1:2“ auswendig wissen, um den Vers verstanden zu haben. Wie könntest du ihm den Unterschied zwischen Fundstelle und Bedeutung erklären?",
+          "type": "text",
+          "sample": "Die Fundstelle zeigt uns, wo der Vers steht. Zum Verstehen muss ich auch wissen, was der Vers über Allah aussagt.",
+          "hint": "Was verrät eine Zahl? Und was verrät die Bedeutung der Wörter?",
+          "selfCheck": [
+            "Ich habe Fundstelle und Versinhalt unterschieden.",
+            "Ich habe mich auf Qurʾān 1:2 bezogen."
+          ],
+          "autoGradeAllowed": false
+        }
+      ],
+      "retention": "Erzähle jemandem ohne Ablesen, warum al-Fātiḥah besonders ist und was die Worte „al-ḥamdu lillāh“ bedeuten. Lass die Person dir eine Rückfrage stellen.",
+      "spacedRecall": "In zwei Tagen: Welche Aussage ist durch den Vers belegt, welche durch den Hadith? Wie kannst du beide für ein jüngeres Kind sauber trennen?"
+    }
+  }
+}

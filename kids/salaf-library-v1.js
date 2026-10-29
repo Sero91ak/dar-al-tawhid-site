@@ -39,7 +39,8 @@
         return /^\/kids\/[\w\/.%+-]+\.(?:mp3|m4a)$/i.test(u.pathname)?u.pathname+u.search:"";
       if(preview===true&&u.protocol==="https:"&&u.hostname==="raw.githubusercontent.com"&&
          !u.search&&!u.hash&&
-         /^\/Sero91ak\/dar-al-tawhid-site\/[a-f0-9]{40}\/kids\/review-only\/salaf-v4-(?:20261027|complete-20261028\/salaf-v4-pending-0[1-8])\/[a-z0-9-]+\.m4a$/.test(u.pathname))
+         (/^\/Sero91ak\/dar-al-tawhid-site\/[a-f0-9]{40}\/kids\/review-only\/salaf-v4-(?:20261027|complete-20261028\/salaf-v4-pending-0[1-8])\/[a-z0-9-]+\.m4a$/.test(u.pathname)||
+          u.pathname==="/Sero91ak/dar-al-tawhid-site/619f60215146fdf687539a6ae140c0b917bd51a4/kids/review-only/salaf-v4-ghibah-repair-20261029/abu-asim-die-zunge-bewahren.m4a"))
         return u.href;
       return "";
     }catch(_){return""}
@@ -47,6 +48,8 @@
   function soundFor(i){
     var a=audioFor(i);
     if(!a)return "";
+    /* Never play the SHA-locked, owner-rejected original, even if a stale catalog is served. */
+    if(i?.id==="abu-asim-die-zunge-bewahren"&&a.sha256==="eaebc06624b95886afacdced30c1ab4cdbd04e629a20b2f0292169bb3d6deb14")return "";
     if(a===i.audioPreview){
       /* Owner-authorized, SHA-bound live previews, NOT confirmed human QA. */
       if(a.ownerAuthorizedPublicPreview!==true||a.humanListeningApproved!==false||

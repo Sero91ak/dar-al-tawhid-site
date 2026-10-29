@@ -105,7 +105,7 @@ def main():
         raise RuntimeError("Incomplete or changed voice plan")
     if args.pilot_first_lesson:
         pilot=[
-            "As-salāmu ʿalaykum, liebe Schwester.",
+            "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
             "Schön, dass du da bist!",
             "Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.",
             "Manchmal geht etwas aus Versehen kaputt."
@@ -114,7 +114,7 @@ def main():
             raise RuntimeError("Invalid bounded pilot request")
         academy=(ROOT/"kids/akademie/index.html").read_text("utf-8")
         for utterance in pilot:
-            if utterance not in academy and utterance!="As-salāmu ʿalaykum, liebe Schwester.":
+            if utterance not in academy:
                 raise RuntimeError("First lesson text changed: cannot generate "+utterance)
         phrases=[{"text":utterance,"priority":0} for utterance in pilot]
     # CRITICAL: the legacy 454-phrase generator used to overwrite the four
@@ -150,6 +150,13 @@ def main():
             path.is_file() and path.stat().st_size>=1800 and hashlib.sha256(path.read_bytes()).hexdigest()==entry["sha256"]):
             valid_current[phrase]=entry
     pending=[r for r in phrases if r["text"] not in valid_current]
+    # Legacy V9/V18 voice plans are historical and must remain immutable.
+    # Reject their shortened Islamic greetings before ANY paid API request.
+    # A future owner-approved canonical plan must spell the whole formula.
+    for row in pending:
+        phrase=str(row.get("text",""))
+        if not args.dry_run and "as-salāmu ʿalaykum" in phrase.casefold() and "wa raḥmatullāhi wa barakātuh" not in phrase.casefold():
+            raise RuntimeError("Legacy shortened Salam cannot be generated; use the owner-reviewed full-Salam voice plan (zero credits used)")
     print(f"Academy: {len(valid_current)}/{len(phrases)} staged, {len(pending)} waiting for synthesis",flush=True)
     if args.dry_run or not pending:
         return

@@ -39,3 +39,17 @@ Die anschließende Ansprache darf inhaltlich passen: „liebe Kinder“, „mein
 ## 5. Qualitätsgates
 
 `node scripts/kids-master-text-standard-v2-check.js` muss ohne Fehler durchlaufen. Zusätzlich vor Freigabe prüfen: vollständigen Salām, keine doppelte Schlussformel, identische Skripte je Altersgruppe, Ton-Text-Gleichheit und verlässliche Quellen.
+
+
+## 6. Lernakademie – vollständiger Salām in allen aktiven Kinderprofilen (29.10.2026)
+
+**Eigentümerregel:** Bei jeder von der KIDS-Lernakademie ausgegebenen **islamischen Begrüßung oder Abschiedsgrußformel** wird die festgelegte vollständige Form in UI, Lehrtext und Vorleseauftrag unverändert ausgeschrieben:
+
+> As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.
+
+- **Niemals** nur „As-Salāmu ʿalaykum“, „Salām“ oder die auf „ʿalaykum“ verkürzte Grußform als Ersatz für die volle Begrüßung ausgeben; die Anrede folgt **separat**.
+- Jungenprofil: „Lieber Bruder.“; Mädchenprofil: „Liebe Schwester.“. Vorhandene optionale Profilnamen erst in der Anrede, nicht zwischen Bestandteilen der vollständigen Grußformel einfügen.
+- Alle Altersstufen 4–5, 6–8, 9–10: derselbe vollständige Salām. Bei schmalen Displays natürlich über mehrere Zeilen umbrechen, **nie abschneiden, verkleinern bis unlesbar oder mit Auslassungspunkten ersetzen**.
+- Neue ElevenLabs-V4-Aufnahmen: **erst nach** exakt abgeglichenem Volltext, Fuṣḥā-Hörprüfung und Eigentümerfreigabe. Die bekannte, unfreigegebene alte `As-salāmu ʿalaykum, liebe Schwester.`-Pilotaufnahme ist **keine** freigegebene Aufnahme der vollständigen Formel; darf nicht im Academy-Begrüßungsknopf abgespielt werden. Bereits bezahlte Binärdateien und Prüfarchive nicht umschreiben.
+- **Quellenschutz:** Qurʾān-Original, authentische Ḥadīṯ-Zitate, historische Quellen und ältere bereits fertig freigegebene Ton-Text-Paare bleiben unverändert. Die Regel korrigiert die **redaktionellen Begrüßungen**, nicht wörtliche Belegtexte.
+- Änderungs-/QA-Schutz: `node kids/tools/test-academy-full-salam-v1.cjs` prüft Junge/Mädchen, Online-UI, Vorlesetext, altersabhängige Lehrfragen und die Sperre der unvollständigen Archivaufnahme. Teststatus ersetzt keine echte menschliche Hörprüfung und keine iPhone/iPad-Sichtung.

@@ -1,0 +1,16 @@
+{
+  "id": "KIDS_ACADEMY_FULL_SALAM_TEST_DEPLOY_20261029",
+  "scope": "test/kids/akademie only",
+  "fullGreeting": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+  "profileAddresses": {
+    "boy": "Lieber Bruder.",
+    "girl": "Liebe Schwester."
+  },
+  "legacyShortAudioPlayAllowed": false,
+  "publicKidsPullRequest": 1527,
+  "publicKidsMergeCommit": "7b5a675033fae8fcc1871a7fb51cabed9515da8e",
+  "testPreviewSourceAlreadyInMain": true,
+  "intent": "Trigger canonical Dar Test Worker deployment, then independently verify HTTP",
+  "audioGeneration": false,
+  "childrenProgressModified": false
+}
