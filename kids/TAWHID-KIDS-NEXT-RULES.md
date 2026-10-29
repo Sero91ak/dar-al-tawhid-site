@@ -1,6 +1,10 @@
 # TAWḤĪD KIDS NEXT · verbindlicher Architektur- und Freigabevertrag
 Stand: 26.10.2026 · Status: Entwicklungsauftrag, KEINE Produktivfreigabe.
 
+## Ergänzung vom 29.10.2026 · aktuelle Xcode-Wiederherstellung
+
+`kids/TAWHID-KIDS-NEXT-RECOVERY-DESIGN.md` ist verbindlicher Bestandteil dieser Regeln. Erst lokale Xcode-Quellen, Schemes, Assets und Simulatorstände sichern und den aktuellen main-/lokalen Recovery-Bestand vergleichen, dann native Migration. Keine Git-Hard-Resets und keine Überschreibung von User-Daten. Fünf Original-KIDS-Tabs (Heute, Hören, Lernen, Duʿāʾ, Eltern), alle Original-3D-Icons, Hero-Bilder, Gebetszeiten, Qibla, Inhalte, Profile, die komplette Story-/Qurʾān-/Duʿāʾ-/Quiz-/Akademie-Struktur erhalten. Mac-Kompatibilität ist ein zu testendes separates Ziel und nicht automatisch durch ein iOS-Build erreicht. Der ältere NEXT-Branch ist nicht mehr der aktuelle Ausgangsstand.
+
 ## Quelle der Wahrheit / Isolation
 - Eigenständige KIDS-App, kein Erwachsenen-DARNext, keine Erwachsenen-Quiz-/Datenbank-IDs.
 - Aktueller kanonischer Code liegt unter kids/** und ios/DarAlTawhidKids/**. Aktuelle Detailnormen stehen in kids/KIDS-DESIGN.md, kids/TERM-LEARNING-POLICY.md, KIDS.md und einschlägigen Tests. Diese haben Vorrang vor diesem kondensierten Vertrag, sofern sie genauer oder neuer sind.
