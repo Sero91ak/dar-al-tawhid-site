@@ -4,6 +4,14 @@ on:
     paths:
       - "kids/akademie/index.html"
       - "kids/akademie/curriculum-v*.js"
+      - "kids/akademie/pilot-audio-v13.js"
+      - "kids/akademie/term-coach-v24.js"
+      - "test/kids/akademie/index.html"
+      - "kids/data/academy-voice-plan-v9.json"
+      - "kids/data/academy-sidq-voice-plan-v18.json"
+      - "kids/tools/export-academy-sidq-voice-v18.js"
+      - "kids/tools/test-academy-full-salam-v1.cjs"
+      - "kids/MASTER-TEXT-STANDARD-V2.md"
       - "kids/akademie/LEARNING_ACADEMY_PEDAGOGY_MASTER_V1.md"
       - "kids/tools/audit-academy-learning-quality-v1.cjs"
       - "kids/tools/test-academy-learning-pedagogy-v1.cjs"
@@ -22,6 +30,8 @@ jobs:
           node --check kids/tools/audit-academy-learning-quality-v1.cjs
           node --check kids/tools/test-academy-learning-pedagogy-v1.cjs
           node kids/tools/test-academy-learning-pedagogy-v1.cjs
+          node --check kids/tools/test-academy-full-salam-v1.cjs
+          node kids/tools/test-academy-full-salam-v1.cjs
           node kids/tools/audit-academy-learning-quality-v1.cjs > /tmp/kids-academy-pedagogy-audit-v1.json
           node -e 'const d=require("/tmp/kids-academy-pedagogy-audit-v1.json");console.log(JSON.stringify({counts:d.counts,warnings:d.warningCount,errors:d.errorCount}));if(d.errorCount)process.exit(1)'
       - name: Preserve human review as a separate gate
