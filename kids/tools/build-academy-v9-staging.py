@@ -155,7 +155,7 @@ def main():
     # A future owner-approved canonical plan must spell the whole formula.
     for row in pending:
         phrase=str(row.get("text",""))
-        if "as-salāmu ʿalaykum" in phrase.casefold() and "wa raḥmatullāhi wa barakātuh" not in phrase.casefold():
+        if not args.dry_run and "as-salāmu ʿalaykum" in phrase.casefold() and "wa raḥmatullāhi wa barakātuh" not in phrase.casefold():
             raise RuntimeError("Legacy shortened Salam cannot be generated; use the owner-reviewed full-Salam voice plan (zero credits used)")
     print(f"Academy: {len(valid_current)}/{len(phrases)} staged, {len(pending)} waiting for synthesis",flush=True)
     if args.dry_run or not pending:
