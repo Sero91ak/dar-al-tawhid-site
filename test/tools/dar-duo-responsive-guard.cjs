@@ -65,3 +65,7 @@ assert.match(navCSS,/transition:none!important/);
 assert.match(navCSS,/width:31px!important;\s*height:31px!important;\s*min-width:31px!important;\s*min-height:31px!important/);
 assert.match(navCSS,/prefers-reduced-motion:reduce/);
 assert.doesNotMatch(navCSS,/scale\(\.94\)/);
+
+assert.match(navCSS,/DAR_TEST_DOCK_VIEWPORT_ANCHOR_V1/,"Keep test dock centered on the viewport");
+assert.match(navCSS,/bottom:calc\(7px \+ env\(safe-area-inset-bottom,0px\)\)!important/);
+assert.match(navCSS,/transform:translateX\(-50%\)!important/);
