@@ -16,8 +16,8 @@ jobs:
           python3 - <<'PY'
           import time,urllib.request
           targets={
-            "DAR TEST workers.dev":"https://dar-al-tawhid-test.sero91ak.workers.dev/kids/akademie/index.html",
             "Besucher KIDS":"https://dar-al-tawhid.de/kids/akademie/index.html",
+            "DAR TEST workers.dev":"https://dar-al-tawhid-test.sero91ak.workers.dev/kids/akademie/index.html",
           }
           required=[
             "function academyDisplayChoices(q,index)",
