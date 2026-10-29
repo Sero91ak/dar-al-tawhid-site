@@ -1,0 +1,58 @@
+name: KIDS Abū ʿĀṣim corrected audio independent live check
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/kids-abu-asim-live-smoke-20261029.yml"
+permissions:
+  contents: read
+jobs:
+  live-audio-sha:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify canonical Kids production serves corrected 2m32s audio and blocked old SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,time,urllib.request,urllib.error
+          SHA="773b5764884c5edb56b439dd7d92ecbaf234f781d4c14a08102f295668fe4d2e"
+          OLD="eaebc06624b95886afacdced30c1ab4cdbd04e629a20b2f0292169bb3d6deb14"
+          SID="abu-asim-die-zunge-bewahren"
+          PIN="619f60215146fdf687539a6ae140c0b917bd51a4"
+          ROOT="https://dar-al-tawhid.de"
+          HEADERS={"User-Agent":"DarAlTawhidKids-iOS","Cache-Control":"no-cache"}
+          def load(url):
+              with urllib.request.urlopen(urllib.request.Request(url,headers=HEADERS),timeout=26) as r:
+                  return r.read(),r.status
+          for attempt in range(1,19):
+              try:
+                  seed=str(int(time.time()))+"-"+str(attempt)
+                  cat,status=load(ROOT+"/kids/data/salaf-library-v1.json?kids-ghibah-live="+seed)
+                  js,jstatus=load(ROOT+"/kids/salaf-library-v1.js?kids-ghibah-live="+seed)
+                  if status!=200 or jstatus!=200: raise RuntimeError("Unexpected HTTP status")
+                  data=json.loads(cat)
+                  story=next(s for s in data["items"] if s["id"]==SID)
+                  p=story.get("audioPreview") or {}
+                  if p.get("sha256")!=SHA:
+                      raise RuntimeError("Cloudflare still serves old SHA: "+str(p.get("sha256")))
+                  if p.get("durationSec")!=152.529 or PIN not in p.get("url",""):
+                      raise RuntimeError("New full-length audio not available")
+                  if p.get("humanListeningApproved") is not False or p.get("releaseEnabled") is not False:
+                      raise RuntimeError("Unjustified human QA or automatic release")
+                  if OLD.encode() not in js or PIN.encode() not in js:
+                      raise RuntimeError("Player does not block old SHA or allow new pinned recording")
+                  if len([s for s in data["items"] if s.get("audioPreview")])!=33:
+                      raise RuntimeError("33 recordings invariant lost")
+                  print("LIVE CATALOG + PLAYER VERIFIED",status,jstatus,SHA)
+                  url=p["url"]
+                  audio,audio_status=load(url)
+                  assert audio_status==200 and len(audio)>8000, "Corrected audio unreachable"
+                  assert hashlib.sha256(audio).hexdigest()==SHA,"Remote audio SHA mismatch"
+                  print("LIVE AUDIO FILE SHA-256 VERIFIED",len(audio),"bytes")
+                  break
+              except Exception as exc:
+                  print("ATTEMPT",attempt,"not ready:",str(exc)[:220],flush=True)
+                  if attempt>=18: raise
+                  time.sleep(7)
+          PY
