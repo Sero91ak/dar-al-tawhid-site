@@ -1,5 +1,5 @@
 /* KIDS Academy V16 – strict owner-preview: first play is synchronous with iOS tap.
- * This is a QA preview of FOUR still-unapproved recordings, not public lesson audio.
+ * This is a QA preview of three playable still-unapproved recordings; a fourth shortened legacy Salam is blocked, not public lesson audio.
  * Do not generate synthetic device speech or bill any ElevenLabs credits here.
  */
 (function(){
@@ -103,7 +103,7 @@
   if(panel){
    const show=creatorPilot&&isGirl45();
    panel.hidden=!show;
-   // Make the four genuine pilot clips discoverable in the explicit creator demo.
+   // Make only the three unaffected pilot clips available; the old shortened Salam remains blocked.
    const details=panel.closest?.("details");
    if(details&&show)details.open=true;
   }
