@@ -155,6 +155,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-stable-five-tab-nav-icon-only-20261030",
+      "at": "2026-10-30T00:00:00+01:00",
+      "approvedBy": "user-explicit-fix-global-five-tab-nav-test-jumps-icon-only-pop-20261029",
+      "reason": "DĀR TEST original five 3D icon bar: no dock/field movement, same geometry when active/idle and pressed glyph-only scale; previous Fold/Duo experiment stays disabled. No dashboard, content, Kids, prayer, worker or SW changes.",
+      "paths": [
+        "test/assets/bottom-nav-global-v1120.css",
+        "test/tools/dar-duo-responsive-guard.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-15T23:59:59.000Z"
+    },
+    {
       "id": "dar-test-fold-rollback-original-tablet-20261028",
       "at": "2026-10-28T18:42:00+01:00",
       "approvedBy": "user-explicit-remove-fold-settings-restore-tablet-in-test",
