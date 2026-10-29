@@ -155,6 +155,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-visitor-navigation-static-icon-only-20261030",
+      "at": "2026-10-30T00:10:00+01:00",
+      "approvedBy": "user-explicit-navbar-stability-all-adult-app-lanes-20261029",
+      "reason": "User requires original five-button navigation fixed in place; only pressed icon may scale. JS and visitor CSS single geometry authority, no content/theme/homepage/Kids or Fold rebuild. Dedicated visitor lane release; DAR TEST in follow-up lane.",
+      "paths": [
+        "assets/adaptive-layout.js",
+        "assets/bottom-nav-global-v1075.css",
+        "scripts/adult-layout-performance-test.cjs",
+        "index.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-05T23:59:59.000Z"
+    },
+    {
       "id": "dar-test-fold-rollback-original-tablet-20261028",
       "at": "2026-10-28T18:42:00+01:00",
       "approvedBy": "user-explicit-remove-fold-settings-restore-tablet-in-test",
