@@ -545,10 +545,10 @@ const additions={
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Was lehrt Qurʾān 33:70?",
+          "prompt": "Du möchtest etwas erzählen, obwohl es schwerfällt, ehrlich zu sein. Was sollen wir nach dem Unterricht beim Sprechen beachten?",
           "options": [
             "Aufrichtig und richtig sprechen.",
-            "Absichtlich Unwahres sagen."
+            "Nur ehrlich sein, wenn es uns leichtfällt."
           ],
           "correct": 0,
           "hint": "Denk an die Worte.",
@@ -586,9 +586,9 @@ const additions={
         },
         {
           "type": "text",
-          "prompt": "Wie gehören Qurʾān 33:70 und al-Buḫārī 6094 zusammen?",
+          "prompt": "Wir haben einen Qurʾān-Vers über richtiges Sprechen und eine Überlieferung über Wahrhaftigkeit kennengelernt. Welche gemeinsame Lehre erkennst du darin?",
           "sample": "Beide bekräftigen wahrhaftiges Reden und seine gute Wirkung.",
-          "hint": "Nenne beide Fundstellen."
+          "hint": "Überlege, was beide Quellen über aufrichtiges Sprechen lehren."
         },
         {
           "type": "text",
