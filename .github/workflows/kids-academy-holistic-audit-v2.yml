@@ -23,5 +23,6 @@ jobs:
       - name: Existing progress and canonical Full Salam test
         run: |
           node kids/tools/test-academy-learning-pedagogy-v1.cjs
+          node kids/tools/test-academy-five-recap-focus-v1.cjs
           node kids/tools/test-academy-full-salam-v1.cjs
           node scripts/test-kids-academy-school-v11.js
