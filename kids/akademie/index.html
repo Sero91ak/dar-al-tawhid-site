@@ -4688,7 +4688,7 @@ function focusUpdate(stageNumber,target,{silent=false}={}){
   panel.querySelector("[data-focus-prev]").disabled=i===0;
   panel.querySelector("[data-focus-next]").disabled=i===parts.length-1 && stageNumber===4;
   panel.querySelector("[data-focus-next]").textContent=i===parts.length-1&&stageNumber===1?"Zum Qurʾān →":i===parts.length-1&&stageNumber===2?"Zur Frage →":"Weiter →";
-  const names=stageNumber===2?["Qurʾān","Sunnah","Erklärung"]:stageNumber===1?["Satz 1","Satz 2","Satz 3","Satz 4"]:["Merksatz","Qurʾān & Sunnah","Alltag","Abschluss"];
+  const names=stageNumber===2?["Qurʾān","Sunnah","Erklärung"]:stageNumber===1?["Satz 1","Satz 2","Satz 3","Satz 4"]:["Merksatz","Qurʾān & Sunnah","Alltag","Wissen weitergeben","Abschluss"];
   panel.querySelector(".focus-page-count").setAttribute("aria-label",names[i]+" – Seite "+(i+1)+" von "+parts.length);
  }
  if(stageNumber===2){
@@ -4696,8 +4696,9 @@ function focusUpdate(stageNumber,target,{silent=false}={}){
  }
  if(stageNumber===4){
   el.querySelector(".stage-audio").classList.toggle("is-focus-selected",i<3);
-  $("#summaryText").classList.toggle("is-focus-selected",i===3);
-  $("#backAfterLesson").classList.toggle("is-focus-selected",i===3);
+  const isLastReviewCard=i===parts.length-1;
+  $("#summaryText").classList.toggle("is-focus-selected",isLastReviewCard);
+  $("#backAfterLesson").classList.toggle("is-focus-selected",isLastReviewCard);
  }
  if(stageNumber===1){
   const title=$("#explainTitle");if(title)title.textContent=activeLesson()?activeLesson().topic+" verstehen":"Wahrhaftigkeit verstehen";
