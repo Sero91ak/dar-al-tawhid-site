@@ -36,7 +36,7 @@ Stand: 29.10.2026 · Branch `codex/tawhid-kids-next-completion-20261029` · Stat
 ## Git-/Freigabezustand
 
 - Arbeitsbranch ist vom Recovery-Branch abgeleitet und mit dem aktuellen Main-Stand integriert, damit nur der aktuelle Kids-NEXT-Diff als Kandidat verbleibt. Die ursprüngliche Recovery-Arbeitskopie und ihre lokalen Änderungen wurden nicht angerührt.
-- Code-/Dokumentationscommit `336d6b0cd0` erstellt; danach aktuelles `main` in Merge-Commit `562b7f7621` integriert. Der Arbeitsbranch wird als private Entwicklungsspur auf GitHub gesichert; kein PR, kein Merge in `main`, kein Live-Push, Cloudflare-Deploy, App Store Connect, TestFlight oder Apple-Signing-Schritt.
+- Code-/Dokumentationscommit `336d6b0cd0` erstellt; danach aktuelles `main` in Merge-Commit `562b7f7621` integriert und Verifikationscommit `6fb5273f69` ergänzt. Branch `codex/tawhid-kids-next-completion-20261029` ist auf GitHub gepusht; kein PR, kein Merge in `main`, kein Live-Push, Cloudflare-Deploy, App Store Connect, TestFlight oder Apple-Signing-Schritt.
 - Freigabestatus bleibt **SIMULATOR / NICHT FREIGEGEBEN**. Native Vollmigration und reale Geräte-/Audio-/Datenschutz-Abnahme sind vor einer Produktfreigabe erforderlich.
 
 ## Protokolle
