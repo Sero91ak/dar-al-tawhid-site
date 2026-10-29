@@ -49,13 +49,13 @@ jobs:
           story=next(x for x in cat['items'] if x['id']==SID)
           assert story['audioPreview']['sha256']==ORIGINAL and story['audioMaster'] is None
           assert story['masterStoryText'].split('\n\n')[4].startswith('Das arabische Wort dafür heißt Ġībah.')
-          eh={'xi-api-key':os.environ['ELEVENLABS_API_KEY'],'User-Agent':'DAR-Kids-one-clip-repair'}
+          eh={'xi-api-key':os.environ['ELEVENLABS_API_KEY'].strip(),'User-Agent':'DAR-Kids-one-clip-repair'}
           h=json.loads(get('https://api.elevenlabs.io/v1/history/'+H,eh))
           assert h.get('voice_id')==VOICE and h.get('model_id')=='eleven_v4'
           assert (h.get('text') or '').strip()==EXPECT, 'Wrong history item text: fail closed'
           patch=get('https://api.elevenlabs.io/v1/history/'+H+'/audio',eh)
           assert len(patch)>8000
-          gh={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','User-Agent':'DAR-Kids-Repair','X-GitHub-Api-Version':'2022-11-28'}
+          gh={'Authorization':'Bearer '+os.environ['GH_TOKEN'].strip(),'Accept':'application/vnd.github+json','User-Agent':'DAR-Kids-Repair','X-GitHub-Api-Version':'2022-11-28'}
           oldobj=json.loads(get('https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/'+urllib.parse.quote(SOURCE,safe='/')+'?ref=4e4eef2a051a87797960d5102373b200131bb1e8',gh))
           if oldobj.get('encoding')=='base64':
               old=base64.b64decode(oldobj['content'])
