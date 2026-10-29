@@ -1,0 +1,12 @@
+{
+  "id": "TAWHID_KIDS_ACADEMY_PEDAGOGY_V1_TEST_RELEASE",
+  "date": "2026-10-29",
+  "scope": "kids-academy-only",
+  "productionMerge": "fba442901987c640dfbeb71fc856c638ba7418ee",
+  "academyMaster": "kids/akademie/LEARNING_ACADEMY_PEDAGOGY_MASTER_V1.md",
+  "verification": "pending-cloudflare-test-worker",
+  "humanPedagogicalReviewApproved": false,
+  "humanAudioReviewApproved": false,
+  "voiceGenerationRequested": false,
+  "reason": "Owner explicitly authorized both DAR TEST and visitor KIDS deployment; trigger existing production-protected DAR TEST workflow with canonical post-merge source."
+}
