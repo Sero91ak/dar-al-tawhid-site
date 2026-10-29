@@ -11,7 +11,7 @@ permissions:
   contents: write
 concurrency:
   group: kids-ghibah-repair-once
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   fix-one-audio:
     if: github.ref == 'refs/heads/audio/abu-asim-ghibah-v4-repair-20261029' || github.head_ref == 'audio/abu-asim-ghibah-v4-repair-20261029'
@@ -25,6 +25,10 @@ jobs:
         with:
           ref: audio/abu-asim-ghibah-v4-repair-20261029
           persist-credentials: true
+          sparse-checkout: |
+            .github/workflows
+            kids/data/salaf-library-v1.json
+          sparse-checkout-cone-mode: false
       - name: Use existing ElevenLabs history item; create no paid speech
         shell: bash
         run: |
