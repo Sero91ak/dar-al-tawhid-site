@@ -4074,6 +4074,7 @@ const stages=all('.lesson-stage[data-lesson-step]');
 const questions=()=>activeLesson()?.questions?.[age]||exercises[age]||[];
 const ACADEMY_FULL_SALAM="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.";
 const address=()=>{const role=gender==="girl"?"liebe Schwester":"lieber Bruder";const first=profileName.split(/\s+/)[0];return first?role+" "+first:role;};
+const greetingAddress=()=>{const a=address();return a.charAt(0).toLocaleUpperCase("de-DE")+a.slice(1)+".";};
 const storageKey=()=>["kids",VERSION,id,age,activeLessonId].join(".");
 const oldRecord=()=>{try{return JSON.parse(localStorage.getItem(storageKey())||"null")}catch(_){return null}};
 const draftKey=()=>["kids",VERSION,id,age,activeLessonId,"draft-v1"].join(".");
@@ -4367,8 +4368,8 @@ function syncProfile(force=false){
  if(hero.complete&&hero.naturalWidth)hero.classList.add("is-ready");
  $("#overviewSalam").textContent=ACADEMY_FULL_SALAM;
  $("#welcomeSalam").textContent=ACADEMY_FULL_SALAM;
- $("#overviewAddress").textContent=address()+".";
- $("#welcomeAddress").textContent=address()+".";
+ $("#overviewAddress").textContent=greetingAddress();
+ $("#welcomeAddress").textContent=greetingAddress();
  applyAgeTeaching();
  if(activeLesson())applySelectedLesson();
  renderHome();
