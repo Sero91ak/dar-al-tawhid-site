@@ -233,7 +233,8 @@
     if (target > 0) {
       var shape = stableWidth + "x" + stableHeight;
       if (lastNavNode !== nav || lastNavShape !== shape ||
-          nav.style.getPropertyValue("width") !== target + "px") {
+          (typeof nav.style.getPropertyValue === "function" &&
+           nav.style.getPropertyValue("width") !== target + "px")) {
         /* No width tween on tab clicks; only a real window resize changes size. */
         nav.style.setProperty("width", target + "px", "important");
         nav.style.setProperty("max-width", target + "px", "important");
