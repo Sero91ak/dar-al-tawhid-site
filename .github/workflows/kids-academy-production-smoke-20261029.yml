@@ -1,0 +1,48 @@
+name: KIDS Academy visitor and test independent HTTP smoke 20261029
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/kids-academy-production-smoke-20261029.yml"
+permissions:
+  contents: read
+jobs:
+  verify-both-kids-academy-origins:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Check test and visitor academy code matches published build, no synthetic audio
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import time,urllib.request
+          targets={
+            "DAR TEST workers.dev":"https://dar-al-tawhid-test.sero91ak.workers.dev/kids/akademie/index.html",
+            "Besucher KIDS":"https://dar-al-tawhid.de/kids/akademie/index.html",
+          }
+          required=[
+            "function academyDisplayChoices(q,index)",
+            'academyDisplayChoices(q,qIndex).forEach',
+            'id="academyTeachBackPrompt"',
+            'unverifiedAnswerCount:Number(score.unverified)||0',
+            "Das war noch nicht die gesuchte Antwort. Überlege",
+            'const VERSION="academy-v4"'
+          ]
+          for name,original in targets.items():
+            for attempt in range(1,24):
+              try:
+                u=original+"?academy-review-publish="+str(int(time.time()))+"-"+str(attempt)
+                req=urllib.request.Request(u,headers={"User-Agent":"DarAlTawhidKids-iOS CreatorTest","Cache-Control":"no-cache"})
+                with urllib.request.urlopen(req,timeout=25) as resp:
+                  text=resp.read().decode("utf-8")
+                  status=resp.status
+                if status!=200:raise RuntimeError("HTTP "+str(status))
+                missing=[v for v in required if v not in text]
+                if missing:raise RuntimeError("Old or incomplete academy code: "+str(missing))
+                if '<title>' not in text:raise RuntimeError("Not actual HTML")
+                print("PASS",name,"HTTP",status,"bytes",len(text),"ALL",len(required),"MARKERS verified",flush=True)
+                break
+              except Exception as exc:
+                print(name,"attempt",attempt,"pending:",str(exc)[:200],flush=True)
+                if attempt>=23:raise
+                time.sleep(7)
+          PY
