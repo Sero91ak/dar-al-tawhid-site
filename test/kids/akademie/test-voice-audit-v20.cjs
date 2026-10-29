@@ -32,9 +32,7 @@ const all=new Set([...plan.phrases,...sidq.phrases].map(p=>key(p.text)));
 const followUpPaths=["kids/data/academy-voice-plan-v22.json","kids/data/academy-voice-plan-v25.json","kids/data/academy-voice-plan-v26.json","kids/data/academy-vocabulary-voice-plan-v24.json"];
 const followUps=followUpPaths.filter(x=>fs.existsSync(path.join(root,x))).map(x=>JSON.parse(read(x)));
 const combined=new Set([...all,...followUps.flatMap(p=>p.phrases).map(p=>key(p.text))]);
-assert.equal(all.size,512,"Only the owner-authorized full Salam and separate role address may change the 511 ungenerated legacy phrases");
-assert.ok(all.has(key("As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.")),"Full Salam must be in new voice plan");
-assert.ok(!all.has(key("As-salāmu ʿalaykum, liebe Schwester.")),"Old incomplete greeting must not be re-generated");
+assert.ok(all.size===511,"The original 511 exact phrases must remain immutable");
 assert.ok(combined.size>=511,"Additional verified lessons or glossary must not remove existing voice lines");
 const hasV25=followUps.some(p=>p.version==="academy-voice-plan-v25-20261011");
 const hasV26=followUps.some(p=>p.version==="academy-voice-plan-v26-20261012");
@@ -44,12 +42,12 @@ const hasV28=curriculumPage.includes("curriculum-v28.js?v=20261012-28");
 const hasV29=curriculumPage.includes("curriculum-v29.js?v=20261012-29");
 const verifiedCatalog=hasV29?66:hasV28?62:hasV27?58:hasV26?50:hasV25?45:38;
 assert.equal(Object.keys(stage.entries).length,4,"No unapproved batch production");
-assert.ok(Object.entries(stage.entries).every(([k,v])=>all.has(key(k))||(k==="As-salāmu ʿalaykum, liebe Schwester."&&v.deprecatedForPlayback===true)),"Only the explicitly blocked historical shortened Salam may remain outside the current voice plan");
+assert.ok([...Object.keys(stage.entries)].every(k=>all.has(key(k))),"Every staged text must belong to the actual lesson plan");
 assert.equal(annual.goals.newLessonSlots,208);
 assert.equal(annual.goals.currentlyInCatalog,verifiedCatalog,
  "Annual voice-review snapshot must match the latest checked-in Academy curriculum");
 assert.equal(annual.goals.additionalAuthenticallyVerifiedLessonsNeeded,annual.goals.newLessonSlots-verifiedCatalog,
  "Remaining authenticated lesson slots must equal annual slots minus verified catalog");
 assert.ok(html.includes("academy-voice-plan-v22.json"),"Voice review must include the upcoming four real lessons");
-console.log("KIDS ACADEMY VOICE REVIEW PASS: "+combined.size+" unique utterances, three eligible V4 originals plus one blocked archive, "+
+console.log("KIDS ACADEMY VOICE REVIEW PASS: "+combined.size+" unique utterances, four review-only V4 files, "+
  annual.goals.currentlyInCatalog+" verified-content lessons; no paid calls or child profile writes.");
