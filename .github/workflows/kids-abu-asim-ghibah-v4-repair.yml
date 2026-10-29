@@ -3,6 +3,9 @@ on:
   push:
     branches: [audio/abu-asim-ghibah-v4-repair-20261029]
     paths: [.github/workflows/kids-abu-asim-ghibah-v4-repair.yml]
+  pull_request:
+    branches: [main]
+    paths: [.github/workflows/kids-abu-asim-ghibah-v4-repair.yml]
   workflow_dispatch:
 permissions:
   contents: write
@@ -11,7 +14,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   fix-one-audio:
-    if: github.ref == 'refs/heads/audio/abu-asim-ghibah-v4-repair-20261029'
+    if: github.ref == 'refs/heads/audio/abu-asim-ghibah-v4-repair-20261029' || github.head_ref == 'audio/abu-asim-ghibah-v4-repair-20261029'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
@@ -19,6 +22,9 @@ jobs:
       GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: audio/abu-asim-ghibah-v4-repair-20261029
+          persist-credentials: true
       - name: Use existing ElevenLabs history item; create no paid speech
         shell: bash
         run: |
