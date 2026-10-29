@@ -40,7 +40,7 @@ footer{border-top:1px solid var(--border);margin-top:30px;padding-top:16px;color
 <div class="top"><div class="tag">DĀR AL TAWḤĪD KIDS · V17 · NUR ERSTELLERPRÜFUNG</div>
 <h1>Meine Lernakademie – Prüfstand</h1>
 <p>Hier kannst du <strong>alle vorhandenen Themen und Unterrichtsschritte</strong> unabhängig von den täglichen Kinder-Freischaltungen durchgehen. Diese Seite ist eine inhaltsbasierte Ersteller-Vorschau, keine zweite Besucher-Akademie.</p>
-<p class="note">Keine Änderungen an echten Kinderprofilen, Fortschritten oder Unterrichtssperren. Für die Original-Masterstimme sind bisher nur <strong>vier Aufnahmen</strong> für Ṣidq (Mädchen, 4–5 Jahre) nachgewiesen. Fehlende Aufnahmen werden klar bezeichnet – keine Ersatzstimme.</p>
+<p class="note">Keine Änderungen an echten Kinderprofilen, Fortschritten oder Unterrichtssperren. Für die Original-Masterstimme sind <strong>vier historische Pilotdateien</strong> dokumentiert. Die verkürzte alte Salām-Aufnahme bleibt gesperrt; nur die drei anderen Pilotclips können separat geprüft werden. Für den vollständigen Gruß fehlt noch die neue V4-Hörfreigabe. Fehlende Aufnahmen werden klar bezeichnet – keine Ersatzstimme.</p>
 <p><a href="/test/academy/unterrichtszentrale-v23.html">Unterrichtszentrale · 52-Wochen-Jahresplan, 208 Plätze, Quellen & Freigabestatus →</a></p>
 <p><a href="/test/academy/audio-audit-v18.html">Masterstimme prüfen · sämtliche erfassten Sprachtexte und echte Hörproben →</a></p>
 </div>
@@ -84,7 +84,7 @@ const extra={id:"sidq",subject:"akhlaq",topic:"Wahrhaftigkeit",title:"Ṣidq –
 const ids=Object.keys(data);ids.unshift("sidq");const lesson=id=>id==="sidq"?extra:data[id];
 let subject="akhlaq",id="sidq",step=0,player=null;
 const clips=[
- {name:"Salām",text:"As-salāmu ʿalaykum, liebe Schwester.",src:"/kids/assets/kids-academy-audio/00ff589726b166dff6a9.m4a"},
+ {name:"Historischer Kurzgruß – gesperrt",text:"As-salāmu ʿalaykum, liebe Schwester.",src:"/kids/assets/kids-academy-audio/00ff589726b166dff6a9.m4a",deprecatedForPlayback:true},
  {name:"Willkommen",text:"Schön, dass du da bist!",src:"/kids/assets/kids-academy-audio/f142bc78e8bcea3d8518.m4a"},
  {name:"Unterrichtseinleitung",text:"Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.",src:"/kids/assets/kids-academy-audio/08d1f46461d954d5e471.m4a"},
  {name:"Erster Erklärungssatz",text:"Manchmal geht etwas aus Versehen kaputt.",src:"/kids/assets/kids-academy-audio/1a6097339111c8ac475c.m4a"}];
@@ -93,7 +93,9 @@ function el(tag,content,cl){const n=document.createElement(tag);if(content!==und
 function add(tag,content,cl,to=stage){const n=el(tag,content,cl);to.appendChild(n);return n}
 function stop(){if(player){player.onended=player.onerror=player.onplaying=null;try{player.pause();player.removeAttribute("src");player.load()}catch(_){}player=null}}
 function audioClip(k){
- const clip=clips[k],box=add("div",undefined,"voice");add("strong",clip.name+": "+clip.text,"",box);
+ const clip=clips[k];
+ if(clip?.deprecatedForPlayback){missing("den vollständigen Salām; die alte Kurzfassung ist gesperrt");return}
+ const box=add("div",undefined,"voice");add("strong",clip.name+": "+clip.text,"",box);
  const row=add("div",undefined,"",box),button=add("button","▶ Masterstimme anhören","",row),status=add("span","Bereit · Original V4","state",row);
  button.type="button";button.onclick=()=>{
   stop();const p=new Audio();player=p;p.volume=1;p.muted=false;p.playsInline=true;p.src=clip.src+"?v=creator-v17";p.playbackRate=1;
@@ -133,10 +135,11 @@ function renderStage(){
  const names=["Hallo","Zuhören","Qurʾān & Sunnah","Mitdenken","Merken"];
  const buttons=$("#steps");buttons.replaceChildren();names.forEach((name,i)=>{const b=add("button",(i+1)+". "+name,"",buttons);b.type="button";b.classList.toggle("active",i===step);b.onclick=()=>{step=i;renderStage()}});
  if(step===0){
-  add("h3","As-salāmu ʿalaykum!");
+  add("h3","As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.");
+  add("p",profile.value==="girl"?"Liebe Schwester.":"Lieber Bruder.","quoted");
   add("p","Willkommen bei "+l.title+".", "quoted");
   add("p",l.ageText?.[age.value]?.intro||l.lead||"");
-  if(sd){audioClip(0);audioClip(1);audioClip(2)}else missing("Begrüßung und Unterrichtseinleitung in dieser Profil- und Alterskombination");
+  if(sd){missing("den vollständigen islamischen Gruß (die alte Kurzfassung wird nicht mehr als gültige Masteraufnahme angeboten)");audioClip(1);audioClip(2)}else missing("den vollständigen Gruß und die Unterrichtseinleitung in dieser Profil- und Alterskombination");
  }else if(step===1){
   add("h3","Heute lernen wir");
   add("p",l.ageText?.[age.value]?.intro||l.lead||l.goal||"", "quoted");
@@ -158,14 +161,14 @@ function renderStage(){
  }else if(step===3){add("h3","Fragen überprüfen");quiz(l)}
  else{add("h3","Das merke ich mir");add("p",l.goal||l.lead||"","quoted");if(l.sample)add("p",l.sample);if(l.ageText?.[age.value]?.lines)add("p",l.ageText[age.value].lines[3],"spoken");missing("die Zusammenfassung")}
  $("#previous").disabled=step===0;$("#next").disabled=step===4;
- $("#voiceStatus").textContent=sd?"Vier unabhängige Originalclips stehen bei Hallo und Zuhören bereit. Der übrige Unterricht benötigt weitere Aufnahmen.":"Für diese Kombination sind noch keine originalgetreu zugeordneten V4-Klassenaufnahmen freigegeben.";
+ $("#voiceStatus").textContent=sd?"Die frühere verkürzte Grußaufnahme ist gesperrt. Drei andere Pilotaufnahmen können separat geprüft werden; der vollständige Salām benötigt eine neue Hörfreigabe.":"Für diese Kombination sind noch keine originalgetreu zugeordneten V4-Klassenaufnahmen freigegeben.";
 }
 function render(){
  renderTopics();const l=selected();
  $("#subjectTitle").textContent=(cat[l.subject]||"Unterricht").toUpperCase()+" · NUR ERSTELLER";
  $("#lessonTitle").textContent=l.title||l.topic||id;
  $("#lessonIntro").textContent="Alle fünf Schritte sind in dieser Prüfversion offen. Es werden keine Kinder-Lernstände geändert.";
- $("#total").textContent=ids.length+" vorhandene Lektionen · 4 Original-Masterclips · übrige Audiozuordnung offen";
+ $("#total").textContent=ids.length+" vorhandene Lektionen · 3 andere Pilotclips prüfbar · vollständiger Gruß noch nicht vertont";
  renderStage();
 }
 const params=new URLSearchParams(location.search);
