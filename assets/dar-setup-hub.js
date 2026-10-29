@@ -507,6 +507,8 @@
     feedback("");
     try {
       var pos = await requestDevicePosition();
+      // A city selected while GPS was pending is newer than this request.
+      if (serial !== requestId) return;
       var lat = Number(pos && pos.coords && pos.coords.latitude);
       var lon = Number(pos && pos.coords && pos.coords.longitude);
       if (!validCoords(lat, lon)) throw new Error("invalid_gps");
