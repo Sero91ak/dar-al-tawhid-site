@@ -75,6 +75,15 @@ roController.cb();
 flushFrames();
 assert.ok(rootWrites>afterForce,"Viewport orientation change must recompute layout");
 assert.ok(navGeometryReads<=1,"Orientation reads nav geometry at most once per update");
+
+// Five-tab navigation V1: prevent route-triggered outer bar geometry writes.
+const visitorNavCSS=fs.readFileSync(path.join(__dirname,"../assets/bottom-nav-global-v1075.css"),"utf8");
+assert.match(visitorNavCSS,/DAR_NAV_OUTER_STATIC_ICON_ONLY_V1_20261030/);
+assert.match(visitorNavCSS,/\.nav-icon img\.dar3d-icon/);
+assert.match(visitorNavCSS,/transform:scale\(1\.10\)!important/);
+assert.match(source,/DAR_NAV_GEOMETRY_SINGLE_OWNER_V1_20261030/);
+assert.doesNotMatch(source,/nav\.style\.setProperty\("(?:left|width|height|transform|transition)"/);
+assert.equal(navWrites,0,"Adult route/layout controller never repositions the original bottom bar");
 const boot=fs.readFileSync(path.join(__dirname,"../assets/app-soft-boot.js"),"utf8");
 assert.match(boot,/function stopBootObserver\(\)/,"Boot observer must have a cleanup function");
 assert.match(boot,/function releaseChrome\(\) \{[\s\S]*?clearRamp\(\);\s*stopBootObserver\(\);/,"Emergency release must cancel interval and observer");
