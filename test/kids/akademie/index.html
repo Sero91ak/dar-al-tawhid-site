@@ -133,10 +133,11 @@ function renderStage(){
  const names=["Hallo","Zuhören","Qurʾān & Sunnah","Mitdenken","Merken"];
  const buttons=$("#steps");buttons.replaceChildren();names.forEach((name,i)=>{const b=add("button",(i+1)+". "+name,"",buttons);b.type="button";b.classList.toggle("active",i===step);b.onclick=()=>{step=i;renderStage()}});
  if(step===0){
-  add("h3","As-salāmu ʿalaykum!");
+  add("h3","As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.");
+  add("p",profile.value==="girl"?"Liebe Schwester.":"Lieber Bruder.","quoted");
   add("p","Willkommen bei "+l.title+".", "quoted");
   add("p",l.ageText?.[age.value]?.intro||l.lead||"");
-  if(sd){audioClip(0);audioClip(1);audioClip(2)}else missing("Begrüßung und Unterrichtseinleitung in dieser Profil- und Alterskombination");
+  if(sd){missing("den vollständigen islamischen Gruß (die alte Kurzfassung wird nicht mehr als gültige Masteraufnahme angeboten)");audioClip(1);audioClip(2)}else missing("den vollständigen Gruß und die Unterrichtseinleitung in dieser Profil- und Alterskombination");
  }else if(step===1){
   add("h3","Heute lernen wir");
   add("p",l.ageText?.[age.value]?.intro||l.lead||l.goal||"", "quoted");
@@ -158,14 +159,14 @@ function renderStage(){
  }else if(step===3){add("h3","Fragen überprüfen");quiz(l)}
  else{add("h3","Das merke ich mir");add("p",l.goal||l.lead||"","quoted");if(l.sample)add("p",l.sample);if(l.ageText?.[age.value]?.lines)add("p",l.ageText[age.value].lines[3],"spoken");missing("die Zusammenfassung")}
  $("#previous").disabled=step===0;$("#next").disabled=step===4;
- $("#voiceStatus").textContent=sd?"Vier unabhängige Originalclips stehen bei Hallo und Zuhören bereit. Der übrige Unterricht benötigt weitere Aufnahmen.":"Für diese Kombination sind noch keine originalgetreu zugeordneten V4-Klassenaufnahmen freigegeben.";
+ $("#voiceStatus").textContent=sd?"Die frühere verkürzte Grußaufnahme ist gesperrt. Drei andere Pilotaufnahmen können separat geprüft werden; der vollständige Salām benötigt eine neue Hörfreigabe.":"Für diese Kombination sind noch keine originalgetreu zugeordneten V4-Klassenaufnahmen freigegeben.";
 }
 function render(){
  renderTopics();const l=selected();
  $("#subjectTitle").textContent=(cat[l.subject]||"Unterricht").toUpperCase()+" · NUR ERSTELLER";
  $("#lessonTitle").textContent=l.title||l.topic||id;
  $("#lessonIntro").textContent="Alle fünf Schritte sind in dieser Prüfversion offen. Es werden keine Kinder-Lernstände geändert.";
- $("#total").textContent=ids.length+" vorhandene Lektionen · 4 Original-Masterclips · übrige Audiozuordnung offen";
+ $("#total").textContent=ids.length+" vorhandene Lektionen · 3 andere Pilotclips prüfbar · vollständiger Gruß noch nicht vertont";
  renderStage();
 }
 const params=new URLSearchParams(location.search);
