@@ -130,7 +130,8 @@ jobs:
         run: |
           python3 -m py_compile kids/tools/build-academy-v9-staging.py kids/tools/build-academy-audio.py
           python3 kids/tools/build-academy-v9-staging.py --dry-run
-      - name: Confirm reproducible voice plan remains unchanged
+      - name: Verify frozen V9 archive against exactly the owner-authorized full Salam replacements
         run: |
+          cp kids/data/academy-voice-plan-v9.json /tmp/kids-academy-v9-original.json
           node kids/tools/export-academy-voice-plan.js
-          git diff --exit-code -- kids/data/academy-voice-plan-v9.json
+          node kids/tools/test-academy-v9-full-salam-drift.cjs /tmp/kids-academy-v9-original.json
