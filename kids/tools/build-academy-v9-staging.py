@@ -150,6 +150,13 @@ def main():
             path.is_file() and path.stat().st_size>=1800 and hashlib.sha256(path.read_bytes()).hexdigest()==entry["sha256"]):
             valid_current[phrase]=entry
     pending=[r for r in phrases if r["text"] not in valid_current]
+    # Legacy V9/V18 voice plans are historical and must remain immutable.
+    # Reject their shortened Islamic greetings before ANY paid API request.
+    # A future owner-approved canonical plan must spell the whole formula.
+    for row in pending:
+        phrase=str(row.get("text",""))
+        if "as-salāmu ʿalaykum" in phrase.casefold() and "wa raḥmatullāhi wa barakātuh" not in phrase.casefold():
+            raise RuntimeError("Legacy shortened Salam cannot be generated; use the owner-reviewed full-Salam voice plan (zero credits used)")
     print(f"Academy: {len(valid_current)}/{len(phrases)} staged, {len(pending)} waiting for synthesis",flush=True)
     if args.dry_run or not pending:
         return
