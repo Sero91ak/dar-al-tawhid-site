@@ -1,0 +1,73 @@
+name: ONE SHOT Kids Lernakademie in DAR TEST 20261029
+on:
+  push:
+    branches:
+      - deploy/kids-akademie-test-20261029
+    paths:
+      - ".github/workflows/kids-academy-stage-once-20261029.yml"
+      - "kids/akademie/**"
+permissions:
+  contents: read
+concurrency:
+  group: dar-test-worker-release
+  cancel-in-progress: false
+jobs:
+  deploy-kids-test-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Verify this is the isolated Academy staging branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/deploy/kids-akademie-test-20261029"
+          node kids/tools/test-academy-learning-pedagogy-v1.cjs
+          node kids/tools/audit-academy-learning-quality-v1.cjs > /tmp/academy-editorial-audit.json
+          node -e 'let a=require("/tmp/academy-editorial-audit.json");if(a.errorCount)process.exit(1);console.log("Academy draft warnings (not religious approvals):",a.warningCount)'
+      - name: Install dependencies and build same static assets
+        run: |
+          npm install
+          npm run build
+      - name: Verify staging worker and target
+        run: |
+          node --check cloudflare/test-app-worker.js
+          node scripts/test-app-health-check.js
+          node scripts/push-system-guard.js
+          node scripts/library-deploy-guard.js
+      - name: Publish isolated DAR TEST worker only (NO visitor site)
+        env:
+          CLOUDFLARE_API_TOKEN: \${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: \${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          npx wrangler deploy -c wrangler.test.toml
+      - name: Verify public DAR TEST serves modified lesson engine
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import urllib.request,time
+          original="https://dar-al-tawhid-test.sero91ak.workers.dev/kids/akademie/index.html"
+          headers={"User-Agent":"DarAlTawhidKids-iOS CreatorTest","Cache-Control":"no-cache"}
+          for attempt in range(1,15):
+            try:
+              url=original+"?kids-academy-staging="+str(attempt)+"-"+str(int(time.time()))
+              with urllib.request.urlopen(urllib.request.Request(url,headers=headers),timeout=25) as res:
+                raw=res.read().decode("utf-8")
+                assert res.status==200, f"status {res.status}"
+                for marker in ["academyDisplayChoices(q,index)","academyTeachBackPrompt","unverifiedAnswerCount","Das war noch nicht die gesuchte Antwort. Überlege"]:
+                  assert marker in raw, "Missing staged Academy feature: "+marker
+                print("PASS: DAR TEST KIDS ACADEMY VERIFIED",original,"bytes",len(raw))
+                break
+            except Exception as exc:
+              print("DAR TEST attempt",attempt,str(exc)[:260],flush=True)
+              if attempt==14: raise
+              time.sleep(7)
+          PY
+          echo "Staging only: NO live visitor deploy, no audio generation."
