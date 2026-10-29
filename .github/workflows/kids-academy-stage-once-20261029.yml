@@ -1,5 +1,8 @@
 name: ONE SHOT Kids Lernakademie in DAR TEST 20261029
 on:
+  pull_request:
+    branches:
+      - review/kids-akademie-paedagogik-masterstandard-20261029
   push:
     branches:
       - deploy/kids-akademie-test-20261029
@@ -26,7 +29,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$GITHUB_REF" = "refs/heads/deploy/kids-akademie-test-20261029"
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            test "$GITHUB_HEAD_REF" = "deploy/kids-akademie-test-20261029"
+          else
+            test "$GITHUB_REF" = "refs/heads/deploy/kids-akademie-test-20261029"
+          fi
           node kids/tools/test-academy-learning-pedagogy-v1.cjs
           node kids/tools/audit-academy-learning-quality-v1.cjs > /tmp/academy-editorial-audit.json
           node -e 'let a=require("/tmp/academy-editorial-audit.json");if(a.errorCount)process.exit(1);console.log("Academy draft warnings (not religious approvals):",a.warningCount)'
