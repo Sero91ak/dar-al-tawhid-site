@@ -19,6 +19,7 @@ Stand: 29.10.2026 · Branch `codex/tawhid-kids-next-completion-20261029` · Stat
 
 - Xcode 27.1; iPhone Duo iOS 27.1: Build erfolgreich, XCTest **4 bestanden**, Swift Testing **5 bestanden**, 0 fehlgeschlagen. Vollständiges Log: `.qa/test-duo.log`; xcresult in `.qa/DerivedData/Logs/Test/`.
 - Device Hub Accessibility-Baum bestätigte „Salām“, originales Hero-Bild, Heute-Aktionen und fünf Tabs. Device-Hub-Ansicht zeigte das Motiv; installiert und gestartet wurde Bundle `de.daraltawhid.kids.next.dev`. Das ist eine Sichtprüfung der geschlossenen Duo-Pose, keine Interaktionsabnahme.
+- Der vollständige Ein-Klick-Launcher lief nachweislich durch: Preflight, XcodeGen-Regeneration, gemeinsamer Workspace/Scheme, Duo-Build, Test, Installation und `simctl launch` (PID protokolliert). Ergebnisse liegen unter `.qa/integrated-run/{build.log,test.log,launch.log}`. Nach dem zweiten Testlauf zeigte Device Hub keine aktualisierte Oberfläche mehr; der separate frühere Duo-Sichtnachweis bleibt der letzte tatsächlich sichtbare Nachweis.
 - Gates mit Exit 0: `kids/check-ui-contract-v1420.cjs`, `kids/tools/test-quiz-home-entry-v1450.cjs`, `kids/tools/quiz_v4_contract_guard.py`, `scripts/kids-design-guard.js`, `scripts/kids-dua-trilingual-guard.js`. App-Lane-Gate mit `INTEGRITY_BASE_REF=08e886d6e1e42dde834be1f8c581fd4125ffa86e` meldet nur Kids-Spur. Ausgaben liegen in `.qa/gate-*.log`.
 - Der app-lane Guard muss auf den tatsächlichen `main`-Ausgangspunkt gesetzt werden: der Branch hat einen Merge-Commit, und `HEAD~1` als Default vergleicht sonst den gesamten kanonischen Main-Merge mit seinem Elternstand und meldet fremde alte Spuren.
 - Staging-Origin `/kids/start.html` wurde read-only angefragt: Redirect 307 auf `/kids/start`, dann HTTP 200 HTML. Drei zufällig geprüfte M4A-URLs antworteten HTTP 200; keine Auth-/Inhalts-/Audio-Hörabnahme.
@@ -29,12 +30,13 @@ Stand: 29.10.2026 · Branch `codex/tawhid-kids-next-completion-20261029` · Stat
 - Im aktuellen Branch vorhandene Auftrags-Gates wurden ausgeführt und bestanden.
 - Die drei Pfade `scripts/kids-design-guard.js`, `scripts/kids-dua-trilingual-guard.js` und `scripts/app-lane-guard.js` existierten nach vollständiger Sparse-Checkout-Ergänzung; alle liefen. Der erste Designlauf scheiterte nur, weil `cloudflare/site-router.js` im Sparse-Checkout nicht vorhanden war; nach Ergänzung bestand er.
 - Keine physischen Geräte, kein iPad-Simulatorlauf und keine vollständige Duo-Auf/Teilfalt-/Rotationsprüfung. Keine Story-/Qurʾān-/Gebetszeit-/Eltern-End-to-End-Prüfung, keine systematische VoiceOver-/Dynamic-Type-/Offline-/Hintergrundaudio-/Performance-Abnahme und keine Hörprüfung.
+- Nach Integration des aktuellen `main`-Commits `98182524c2f8f7f269b5b4458d775f0912a1b9a4` erneut geprüft: Academy-Meaning-First-Gate PASS (520 Fragen strukturell valide); iPhone Duo `xcodebuild test` erneut **4 XCTest + 5 Swift Testing bestanden**, 0 Fehler (`.qa/test-duo-after-main.log`).
 - Keine belastbare vollständige Route-/Modal-/Fehlerseiteninventur mit Screenshots pro Screen/Profil/Alter. Die Paritätsmatrix ist daher Fortschrittsinventar, keine Vollständigkeitsbescheinigung.
 
 ## Git-/Freigabezustand
 
 - Arbeitsbranch ist vom Recovery-Branch abgeleitet und mit dem aktuellen Main-Stand integriert, damit nur der aktuelle Kids-NEXT-Diff als Kandidat verbleibt. Die ursprüngliche Recovery-Arbeitskopie und ihre lokalen Änderungen wurden nicht angerührt.
-- Änderungen sind noch nicht committed oder gepusht. Kein PR, Merge, Live-Push, Cloudflare-Deploy, App Store Connect, TestFlight oder Apple-Signing-Schritt.
+- Code-/Dokumentationscommit `336d6b0cd0` erstellt; danach aktuelles `main` in Merge-Commit `562b7f7621` integriert. Der Arbeitsbranch wird als private Entwicklungsspur auf GitHub gesichert; kein PR, kein Merge in `main`, kein Live-Push, Cloudflare-Deploy, App Store Connect, TestFlight oder Apple-Signing-Schritt.
 - Freigabestatus bleibt **SIMULATOR / NICHT FREIGEGEBEN**. Native Vollmigration und reale Geräte-/Audio-/Datenschutz-Abnahme sind vor einer Produktfreigabe erforderlich.
 
 ## Protokolle
@@ -43,4 +45,5 @@ Stand: 29.10.2026 · Branch `codex/tawhid-kids-next-completion-20261029` · Stat
 - `.qa/test-duo.log`
 - `.qa/gate-ui-contract.log`, `.qa/gate-quiz-home.log`, `.qa/gate-quiz-v4.log`
 - `.qa/gate-kids-design.log`, `.qa/gate-kids-dua.log`, `.qa/gate-app-lane.log`
-- `.qa/integrated-run/` wird vom vollständigen Launcher befüllt.
+- `.qa/integrated-run/` enthält den vollständigen Launcher-Build, Test und Launch-Log.
+- `.qa/test-duo-after-main.log`, `.qa/gate-academy-main.log` (Academy-Gate-Ausgabe im Turn geprüft).
