@@ -1,0 +1,48 @@
+name: KIDS Full Salam Public and Test Live Smoke 20261029
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/kids-full-salam-live-smoke-20261029.yml"
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Independently verify full greeting on both deployed Kids Academy surfaces
+        run: |
+          python3 - <<'PY'
+          import urllib.request,time
+          targets={
+            "Besucher KIDS":"https://dar-al-tawhid.de/kids/akademie/index.html",
+            "DAR TEST":"https://dar-al-tawhid-test.sero91ak.workers.dev/kids/akademie/index.html",
+          }
+          full="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh."
+          common=["Liebe Schwester.","Lieber Bruder.",full]
+          variant={
+            "Besucher KIDS":['id="overviewSalam"','id="welcomeSalam"','id="overviewAddress"','id="welcomeAddress"','const spokenSalam=ACADEMY_FULL_SALAM;','greetingAddress()'],
+            "DAR TEST":['add("h3","'+full+'")','profile.value==="girl"?"Liebe Schwester.":"Lieber Bruder."','deprecatedForPlayback:true','if(clip?.deprecatedForPlayback)']
+          }
+          for label,url in targets.items():
+            for retry in range(1,19):
+              try:
+                request=urllib.request.Request(url+"?full-salam-qa="+str(int(time.time()))+"-"+str(retry),
+                  headers={"User-Agent":"DarAlTawhidKids-iOS CreatorTest","Cache-Control":"no-cache"})
+                with urllib.request.urlopen(request,timeout=25) as response:
+                  txt=response.read().decode("utf-8")
+                  if response.status!=200:raise RuntimeError("HTTP "+str(response.status))
+                missing=[x for x in (common+variant[label]) if x not in txt]
+                if missing:raise RuntimeError("Old or incomplete build: "+repr(missing))
+                if label=="Besucher KIDS" and ('$("#welcomeSalam").textContent="As-salāmu ʿalaykum' in txt or 'As-salāmu ʿalaykum, lieber Bruder.' in txt):
+                  raise RuntimeError("Abbreviated production greeting still present")
+                if label=="DAR TEST" and "audioClip(0);" in txt:
+                  raise RuntimeError("Blocked abbreviated archival audio is still offered as welcome")
+                print("PASS",label,"HTTP 200","bytes",len(txt),"complete Salam, profile salutation, historical pilot blocked where applicable",flush=True)
+                break
+              except Exception as exc:
+                print(label,"attempt",retry,":",str(exc)[:220],flush=True)
+                if retry==18:raise
+                time.sleep(7)
+          PY
+          echo "Read only HTTP verification. No changes to profile, Push, test, visitor, or ElevenLabs."
