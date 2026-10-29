@@ -256,3 +256,65 @@ html[data-theme] body:not(.is-home-route):not(.is-feed-fullscreen):not(.is-quran
   margin-top:var(--dar-content-end-gap)!important;
 }
 
+
+
+/* DAR_FIVE_TAB_ICON_ONLY_MOTION_V1 · Visitor home AND every adult route.
+   Keep one unchanged 5-item floating dock. The ONLY pop/scale belongs to the
+   original 3D image inside the tapped tab. No per-route dock movement. */
+html[data-theme] body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav,
+html body.has-bottom-nav #bottomNav.bottom-nav{
+  transition:none!important;
+  -webkit-transition:none!important;
+  animation:none!important;
+  -webkit-animation:none!important;
+  will-change:auto!important;
+}
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn{
+  transform:none!important;
+  -webkit-transform:none!important;
+  animation:none!important;
+  transition:color 160ms ease!important;
+}
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn::before,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn::before,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active::before,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active::before{
+  transform:scale(1)!important;
+  -webkit-transform:scale(1)!important;
+  transition:opacity 150ms ease!important;
+}
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
+  width:29px!important;height:29px!important;
+  min-width:29px!important;min-height:29px!important;
+  max-width:29px!important;max-height:29px!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+}
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{
+  transform:scale(1)!important;
+  -webkit-transform:scale(1)!important;
+  transform-origin:center center!important;
+  transition:transform 165ms cubic-bezier(.22,.85,.3,1.12)!important;
+  will-change:transform;
+}
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon img.dar3d-icon,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon img.dar3d-icon{
+  transform:scale(1.055)!important;
+  -webkit-transform:scale(1.055)!important;
+}
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:is(:active,.is-pressed) .nav-icon img.dar3d-icon,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:is(:active,.is-pressed) .nav-icon img.dar3d-icon{
+  transform:scale(1.12)!important;
+  -webkit-transform:scale(1.12)!important;
+  transition-duration:100ms!important;
+}
+@media(prefers-reduced-motion:reduce){
+  html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{
+    transition:none!important;
+  }
+}
