@@ -1,4 +1,9 @@
 # XCODE / CODEX · EIN GESCHLOSSENER MASTER-AUFTRAG · TAWḤĪD KIDS NEXT
+
+## VERBINDLICHER EINSTIEG / FORTSETZUNG · 29.10.2026
+**START HIER:** `kids/TAWHID-KIDS-NEXT-START-HIER.md` bündelt den vollständigen aktuellen Auftrag und die Lesereihenfolge. **XCODE-PROMPT:** `ios/DarAlTawhidKids/Next/XCODE-FORTSETZUNGSBEFEHL.md`. **WIEDERAUFNAHME:** `ios/DarAlTawhidKids/Next/IMPLEMENTATION-STATUS.md`, `ios/DarAlTawhidKids/Next/PARITY-MATRIX.md`, danach den echten lokalen Git-Status lesen. Diese Dateien sind Bestandteile dieses Dokuments, keine getrennten Teilaufträge. Vollständig lesen, bevor Implementierung/Projektgenerierung beginnt.
+
+Der Auftrag soll **ohne wiederholte Einzelrückfragen** schrittweise autonom auf dem Mac abgearbeitet werden. Er ist keine Freigabe zum Überschreiben von lokalen Xcode-Recovery-Daten oder zum Live-Push. Die zuletzt aktiven Quellen und der aktuelle GitHub-main-Stand sowie die gesicherten lokalen Änderungen gehen älteren Snapshotannahmen vor. Alle Seiten und Originalassets auf Parität prüfen, echte SwiftUI TabView, Suchlupe, 3D-Icons, Duo- und PWA-Fold-Layouts, eine Audio-/Session-Zustandsquelle, Software-/Hardware-Performance nachweisen. Der neue NEXT-Branch darf bei vorhandenem Rückstand auf main niemals blind produktive Dateien ersetzen. 
 26.10.2026 · Copy/Paste in einen Xcode-fähigen Coding-Agenten mit Zugriff auf das lokale Git-Repository und einen macOS-27/Xcode-27.1-Simulator.
 
 Du bist der leitende iOS-Architekt, Qualitätsingenieur und Migrationsentwickler für die islamische Kinderlern-App TAWḤĪD KIDS. Führe diesen gesamten Auftrag in EINER autonomen Bearbeitung durch; arbeite erforderliche interne Teilschritte eigenständig ab und frage nicht bei jedem Modul nach. Keine Dummy-Seiten oder "fertig" ohne Beleg.
