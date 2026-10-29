@@ -9,7 +9,9 @@
     "nativeTtsFallback": false,
     "arabicQuranRecitationIsSeparate": true,
     "reviewRequiredBeforePublicPlayback": true,
-    "autoPublishUnreviewed": false
+    "autoPublishUnreviewed": false,
+    "fullIslamicSalamMandatory": true,
+    "shortenedGreetingAudioForbidden": true
   },
   "lessonCount": 34,
   "curriculumIds": [
@@ -230,7 +232,7 @@
       ]
     },
     {
-      "text": "As-salāmu ʿalaykum ist ein islamischer Friedensgruß.",
+      "text": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh ist ein islamischer Friedensgruß.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -5380,7 +5382,7 @@
       ]
     },
     {
-      "text": "Jemand sagt zu dir As-salāmu ʿalaykum. Was tust du?",
+      "text": "Jemand sagt zu dir As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh. Was tust du?",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -9154,5 +9156,7 @@
         }
       ]
     }
-  ]
+  ],
+  "revisedAt": "2026-10-29",
+  "revisionNote": "Only pending speech texts updated to complete Islamic greeting; no paid recordings produced or altered."
 }
