@@ -12,18 +12,20 @@
     "6-8",
     "9-10"
   ],
-  "phraseCount": 57,
+  "phraseCount": 58,
   "additionalTo": "kids/data/academy-voice-plan-v9.json",
   "existingPilotCount": 4,
   "policy": {
     "stagingOnly": true,
     "reviewRequiredBeforePublicPlayback": true,
     "autoPublishUnreviewed": false,
-    "nativeTtsFallback": false
+    "nativeTtsFallback": false,
+    "fullIslamicSalamMandatory": true,
+    "shortenedGreetingAudioForbidden": true
   },
   "phrases": [
     {
-      "text": "As-salāmu ʿalaykum, liebe Schwester.",
+      "text": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -35,11 +37,17 @@
           "kind": "greeting",
           "age": "all",
           "profile": "girl"
+        },
+        {
+          "lessonId": "sidq",
+          "kind": "greeting",
+          "age": "all",
+          "profile": "boy"
         }
       ]
     },
     {
-      "text": "As-salāmu ʿalaykum, lieber Bruder.",
+      "text": "Liebe Schwester.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -48,7 +56,23 @@
       "contexts": [
         {
           "lessonId": "sidq",
-          "kind": "greeting",
+          "kind": "address",
+          "age": "all",
+          "profile": "girl"
+        }
+      ]
+    },
+    {
+      "text": "Lieber Bruder.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 0,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "address",
           "age": "all",
           "profile": "boy"
         }
@@ -934,5 +958,7 @@
         }
       ]
     }
-  ]
+  ],
+  "revisedAt": "2026-10-29",
+  "revisionNote": "Only pending speech texts updated to complete Islamic greeting; no paid recordings produced or altered."
 }
