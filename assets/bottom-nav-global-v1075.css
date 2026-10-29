@@ -337,3 +337,17 @@ html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:is(:active,.is-pr
     transition:none!important;
   }
 }
+
+/* DAR_NAV_SELECTED_OVAL_NO_POP_V2_20261030
+   The selection oval can change color/opacity, but MUST NOT zoom. The user's
+   sole pop animation belongs to the inner 3D image when actively pressed. */
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn::before,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active::before,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.is-pressed::before,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn::before,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active::before,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.is-pressed::before{
+  transform:scale(1)!important;
+  -webkit-transform:scale(1)!important;
+  transition:opacity 130ms linear,background-color 130ms ease!important;
+}
