@@ -5,6 +5,10 @@ Stand: 26.10.2026 · Status: Entwicklungsauftrag, KEINE Produktivfreigabe.
 
 `kids/TAWHID-KIDS-NEXT-RECOVERY-DESIGN.md` ist verbindlicher Bestandteil dieser Regeln. Erst lokale Xcode-Quellen, Schemes, Assets und Simulatorstände sichern und den aktuellen main-/lokalen Recovery-Bestand vergleichen, dann native Migration. Keine Git-Hard-Resets und keine Überschreibung von User-Daten. Fünf Original-KIDS-Tabs (Heute, Hören, Lernen, Duʿāʾ, Eltern), alle Original-3D-Icons, Hero-Bilder, Gebetszeiten, Qibla, Inhalte, Profile, die komplette Story-/Qurʾān-/Duʿāʾ-/Quiz-/Akademie-Struktur erhalten. Mac-Kompatibilität ist ein zu testendes separates Ziel und nicht automatisch durch ein iOS-Build erreicht. Der ältere NEXT-Branch ist nicht mehr der aktuelle Ausgangsstand.
 
+## Native Foldable-Navigation ist verbindlich
+
+`kids/TAWHID-KIDS-NEXT-FOLD-NAVIGATION.md` ist der verbindliche neueste Foldable-Tab- und Web/PWA-Vertrag. Native iPhone-Duo-Tabs müssen durch **SwiftUI TabView** dem Apple-System automatisch folgen, ohne über das Scharnier oder die Safe Area zu laufen. Auf Android-Foldables ist die bestehende Kinder-Web/PWA an Fenstergröße, Falzsegmente und Browserfähigkeiten anzupassen; reines CSS simuliert kein echtes Android-Systemwidget. Bestehende fünf Navigationstabs einschließlich 3D-Originalicons und alle aktiven Audio-/Quiz-/Lernzustände müssen erhalten bleiben.
+
 ## Quelle der Wahrheit / Isolation
 - Eigenständige KIDS-App, kein Erwachsenen-DARNext, keine Erwachsenen-Quiz-/Datenbank-IDs.
 - Aktueller kanonischer Code liegt unter kids/** und ios/DarAlTawhidKids/**. Aktuelle Detailnormen stehen in kids/KIDS-DESIGN.md, kids/TERM-LEARNING-POLICY.md, KIDS.md und einschlägigen Tests. Diese haben Vorrang vor diesem kondensierten Vertrag, sofern sie genauer oder neuer sind.
