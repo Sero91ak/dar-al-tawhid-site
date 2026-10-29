@@ -138,9 +138,10 @@
   }
 
   /* Same absolute width as portrait: size from the short edge, never the wide landscape span. */
-  var NAV_EASE = "width .48s cubic-bezier(.22,1,.36,1), max-width .48s cubic-bezier(.22,1,.36,1)";
-  var widthLockUntil = 0;
-  var lastLandscape = null;
+  /* Only glyphs animate; the five-tab dock itself stays stationary. */
+  var NAV_EASE = "none";
+  var lastNavShape = "";
+  var lastNavNode = null;
 
   function capsuleWidthPx(width, height) {
     var w = Number(width) || 0;
@@ -204,10 +205,11 @@
 
     var metrics = measureViewport();
     var landscape = metrics.height > 0 && metrics.width >= metrics.height;
-    var target = capsuleWidthPx(metrics.width, metrics.height);
-    var now = Date.now();
-    var orientChanged = lastLandscape !== null && lastLandscape !== landscape;
-    var forceWidth = opts && opts.forceWidth;
+    /* Stable layout viewport, not shifting visualViewport toolbar dimensions. */
+    var root = document.documentElement;
+    var stableWidth = (root && root.clientWidth) || metrics.width;
+    var stableHeight = (root && root.clientHeight) || metrics.height;
+    var target = capsuleWidthPx(stableWidth, stableHeight);
 
     nav.classList.toggle("is-nav-landscape", landscape);
     nav.classList.remove("is-adaptive-rail");
@@ -218,43 +220,30 @@
     nav.style.setProperty("transition", NAV_EASE, "important");
     nav.style.setProperty("top", "auto", "important");
     nav.style.setProperty("bottom", navBottomCompact(), "important");
-    nav.style.setProperty("height", "auto", "important");
-    nav.style.setProperty("min-height", "68px", "important");
-    nav.style.setProperty("max-height", "none", "important");
+    var dockHeight = "var(--dar-global-nav-h,var(--dar-nav-height,70px))";
+    nav.style.setProperty("height", dockHeight, "important");
+    nav.style.setProperty("min-height", dockHeight, "important");
+    nav.style.setProperty("max-height", dockHeight, "important");
     nav.style.setProperty("transform", "translateX(-50%)", "important");
     nav.style.setProperty("-webkit-transform", "translateX(-50%)", "important");
     nav.style.setProperty("flex-direction", "row", "important");
     nav.style.setProperty("margin", "0", "important");
     nav.style.setProperty("z-index", "40", "important");
 
-    if (target > 0 && (forceWidth || orientChanged || now >= widthLockUntil)) {
-      /* Layout reads force style calculation: only measure for actual rotation.
-         Ordinary resize/route checks can set the target width directly. */
-      var from = target;
-      if (orientChanged) {
-        var bounds = nav.getBoundingClientRect();
-        from = Math.round((bounds && bounds.width) || target);
-      }
-      if (orientChanged && Math.abs(from - target) > 8) {
-        nav.style.setProperty("width", from + "px", "important");
-        nav.style.setProperty("max-width", from + "px", "important");
-        try {
-          nav.offsetWidth;
-        } catch (e) {}
-        global.requestAnimationFrame(function () {
-          nav.style.setProperty("width", target + "px", "important");
-          nav.style.setProperty("max-width", target + "px", "important");
-        });
-        widthLockUntil = now + 500;
-      } else {
+    if (target > 0) {
+      var shape = stableWidth + "x" + stableHeight;
+      if (lastNavNode !== nav || lastNavShape !== shape ||
+          nav.style.getPropertyValue("width") !== target + "px") {
+        /* No width tween on tab clicks; only a real window resize changes size. */
         nav.style.setProperty("width", target + "px", "important");
         nav.style.setProperty("max-width", target + "px", "important");
+        if (lastNavShape !== shape) {
+          try { root.style.setProperty("--dar-nav-width", target + "px"); } catch (e) {}
+        }
+        lastNavShape = shape;
+        lastNavNode = nav;
       }
-      try {
-        document.documentElement.style.setProperty("--dar-nav-width", target + "px");
-      } catch (e2) {}
     }
-    lastLandscape = landscape;
   }
 
   function applyKeyboardState(metrics) {
