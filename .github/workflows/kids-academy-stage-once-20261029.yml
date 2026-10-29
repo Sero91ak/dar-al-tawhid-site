@@ -53,6 +53,9 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: \${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -euo pipefail
+          node -e 'const t=process.env.CLOUDFLARE_API_TOKEN||"";console.log("Cloudflare staging token configured:",Boolean(t.trim()),"contains linebreak:",/[\\r\\n]/.test(t));if(!t.trim())process.exit(1)'
+          export CLOUDFLARE_API_TOKEN="$(node -e 'process.stdout.write((process.env.CLOUDFLARE_API_TOKEN||"").trim())')"
+          export CLOUDFLARE_ACCOUNT_ID="$(node -e 'process.stdout.write((process.env.CLOUDFLARE_ACCOUNT_ID||"").trim())')"
           npx wrangler deploy -c wrangler.test.toml
       - name: Verify public DAR TEST serves modified lesson engine
         shell: bash
