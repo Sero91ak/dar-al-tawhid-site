@@ -17,6 +17,19 @@ targets:
       - path: ../DarAlTawhidKids/KidsAppShell.swift
       - path: ../DarAlTawhidKids/KidsWebAppView.swift
       - path: ../DarAlTawhidKids/KidsNativeIntro.swift
+      # XcodeGen 2.46 silently drops a target's resources: list when sources
+      # has multiple entries. Non-Swift files are classified as resources here.
+      - path: ../../../kids/data/quiz-kids.json
+      - path: ../../../kids/data/quiz-audio.json
+      - path: ../../../kids/data/dua-kids.json
+      - path: ../../../kids/assets/kids-brand/home-title-hero.png
+      - path: ../../../kids/assets/kids-art/parents-hero-boy-v1254.jpg
+      - path: ../../../kids/assets/kids-art/parents-hero-girl-v1254.jpg
+      - path: ../../../kids/assets/kids-icons/home-real-v12.png
+      - path: ../../../kids/assets/kids-icons/headphones-real-v12.png
+      - path: ../../../kids/assets/kids-icons/learning-book-3d-v1422.png
+      - path: ../../../kids/assets/kids-icons/dua-real-v12.png
+      - path: ../../../kids/assets/kids-icons/parents-real-v12.png
     info:
       path: Generated/Info.plist
       properties:
@@ -24,9 +37,6 @@ targets:
         CFBundleName: TawhidKidsNext
         UILaunchScreen: {}
         UIRequiresFullScreen: false
-        UIBackgroundModes:
-          - audio
-        NSMicrophoneUsageDescription: "Das Mikrofon wird nur für eine ausdrücklich gestartete Mitsprech-Übung verwendet."
         NSAppTransportSecurity:
           NSAllowsArbitraryLoads: false
     settings:

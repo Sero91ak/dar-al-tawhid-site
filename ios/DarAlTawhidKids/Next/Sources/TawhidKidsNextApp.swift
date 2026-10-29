@@ -12,7 +12,7 @@ struct TawhidKidsNextApp: App {
 
     var body: some Scene {
         WindowGroup {
-            KidsRootView()
+            TawhidKidsNextRootView()
         }
     }
 }

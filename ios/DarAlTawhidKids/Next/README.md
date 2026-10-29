@@ -1,31 +1,31 @@
-# TAWḤĪD KIDS NEXT · isolierter iOS-Simulator-Unterbau
+# TAWḤĪD KIDS NEXT
 
-**Status 26.10.2026: Entwicklungs-Scaffold. Kein vollständig nativ migriertes KIDS-Produkt und keine geprüfte 100-%-Parität.** Die vorhandene WKWebView-/Audio-Bridge und das bestehende Creator-Testmenü werden direkt, ohne Veränderungen, aus dem getrennten iOS-Kids-Bestand verwendet. Erst der Xcode-Masterauftrag migriert die einzelnen Module in eigene SwiftUI-Komponenten.
+**Stand 29.10.2026: isolierte Simulator-App mit nativer Start-/Quiz-/Duʿāʾ-Fläche und ausdrücklich erreichbarem KIDS-Webadapter. Keine vollständige native Seitenmigration und keine Produktivfreigabe.**
 
-## Aktualisierung 29.10.2026 · Recovery zuerst
+## Ein gemeinsamer Xcode-Einstieg
 
-Frischer Branch `codex/tawhid-kids-next-recovery-20261029` wurde vom aktuellen GitHub-main erstellt. Der alte NEXT-Branch war 638 Commits zurück. Vollständige Regeln: `kids/TAWHID-KIDS-NEXT-RECOVERY-DESIGN.md`. Der Ein-Klick-Launcher startet nun auch ein read-only Mac-Xcode-Inventar über `PRE-FLIGHT.command` und legt eine Sicherheitskopie eines vorhandenen generierten NEXT-Projekts vor jeder XcodeGen-Regeneration an. Die vollständige native Migration der Benutzeroberflächen ist weiterhin der Auftrag an den lokalen Xcode-Coding-Agenten, nicht die bereits bewiesene Funktion des Starter-Skripts.
+Öffne `ios/DarAlTawhidKids/DarAlTawhidKids.xcworkspace`. Dieser Workspace enthält das bestehende Projekt `DarAlTawhidKids.xcodeproj` und das separat gehaltene NEXT-Projekt `Next/TawhidKidsNext.xcodeproj`. Die vorhandenen Schemes `DarAlTawhidKids`, `DarAlTawhidKidsCreator` und `TawhidKidsNext` bleiben eigenständig und erscheinen im selben Xcode-Fenster. Die Projekte und Bundle-IDs werden nicht vermischt.
 
-## Ein Befehl auf dem Mac
-Im lokal ausgecheckten Repository vom Root-Verzeichnis aus:
+NEXT verwendet ausschließlich das Debug-Simulator-Bundle `de.daraltawhid.kids.next.dev`, ohne Apple Signing. Das bestehende App-Store-Bundle `de.daraltawhid.kids` und Creator-Scheme werden nicht geändert.
 
-    bash ios/DarAlTawhidKids/Next/TAWHID-KIDS-NEXT.command
+## Ein-Klick-Aufbau und Start
 
-Dieser Befehl erzeugt mit XcodeGen das separate TawhidKidsNext.xcodeproj, testet auf verfügbaren iPhone-/iPad-/Duo-Simulatoren und startet KIDS NEXT im Simulator. Wenn XcodeGen fehlt, wird es über vorhandenes Homebrew installiert (sonst klarer Abbruch). Wenn ein Simulator fehlt, erfolgt ein nichtgrüner QA-Status statt Scheinerfolg. Build-/Testlogs und erster Screenshot werden unter Next/.qa/ gespeichert.
+Im Checkout des privaten Kids-NEXT-Branches:
 
-Voraussetzungen: macOS mit ausgewähltem vollständigem Xcode, für iPhone Duo Xcode 27.1 samt iOS-27.1-Simulator, Python 3, Homebrew oder installiertes XcodeGen, Netzwerkzugang zum **eigenen** KIDS-Creator-Test-Worker. Das Shell-Skript überträgt keine Änderungen auf Server.
+```sh
+bash ios/DarAlTawhidKids/Next/TAWHID-KIDS-NEXT.command
+```
 
-## Xcode
-- XcodeGen: project.yml
-- Generiertes Xcodeprojekt: TawhidKidsNext.xcodeproj
-- Scheme: TawhidKidsNext
-- App-Anzeigename: KIDS NEXT
-- Test-Bundle: de.daraltawhid.kids.next.dev
-- Origin: dar-al-tawhid-kids-creator.sero91ak.workers.dev/kids/start.html
-- Shared read-only native files: ../DarAlTawhidKids/{KidsNativeIntro,KidsAppShell,KidsWebAppView}.swift
-- Separater SwiftUI-Entry: Sources/TawhidKidsNextApp.swift
+Der Launcher führt zuerst den lesenden Recovery-Preflight aus, sichert das bisher generierte NEXT-Projekt in `.qa`, generiert das isolierte NEXT-Projekt mit XcodeGen, prüft das gemeinsame Workspace/Scheme, baut und testet auf einem verfügbaren iPhone-Simulator und installiert/startet NEXT. Er bootet Geräte bei Bedarf, führt keinen Simulator-Reset aus und ändert kein Signing. Protokolle und DerivedData bleiben unter `Next/.qa/integrated-run/`.
 
-## Grenzen
-Der heute angelegte Unterbau beweist noch NICHT, dass alle Quizfragen laden, Audios vollständig vorhanden sind, die Staging-Origin erreichbar/autorisiert ist oder iPad/iPhone Duo visuell korrekt sind. Automatisierte Unit-Tests prüfen nur Herkunft, Bundle-Isolation und Routing. Fachliche Parität braucht Vollinventar, SwiftUI-Module, echte Audiotests, Accessibility/Audio-/Offline- und Geräte-Sichtprüfung. Apple-Simulatoren ersetzen keine echten Geräte. Keine Migration auf das öffentliche Bundle ohne explizite gesonderte Freigabe.
+Voraussetzungen: macOS mit Xcode, XcodeGen (`xcodegen`), Python 3 und eine verfügbare iPhone-Simulator-Runtime. Ein fehlgeschlagener Build, Test oder Simulatorstart stoppt den Ablauf mit dem jeweiligen Logpfad.
 
-Die bindenden Regeln stehen in kids/TAWHID-KIDS-NEXT-RULES.md; der Gesamtauftrag für den Xcode-Coding-Agenten in kids/TAWHID-KIDS-NEXT-XCODE-AUFTRAG.md.
+## Verifizierte Funktionsgrenzen
+
+- Native Oberfläche: Heute, Quiz mit freigegebenem lokalen Datensatz, Duʿāʾ-Liste mit den deklarierten Originalaudiofeldern und fünf Original-KIDS-Tabs/-Icons.
+- Native Quizquelle: 900 freigegebene, eindeutige Fragen; 300 pro Quiz-Altersband 4–6, 7–8 und 9–10. Das Quiz-V4-Manifest enthält 1.884 eindeutige Audioeinträge; für 613 Fragen ist der exakte Prompt-Schlüssel ableitbar. Das ist Manifest-/Dateiabdeckung, keine menschliche Hörabnahme.
+- Duʿāʾ: 120 verifizierte eindeutige Einträge; drei Audio-URL-Felder je Eintrag. Vorhandensein im Manifest bedeutet nicht, dass jede Aufnahme gehört oder fachlich abgenommen wurde.
+- Nicht migrierte Story-, Akademie-, Qurʾān-, Gebetszeit-/Qibla- und Elternfunktionen bleiben über einen einzelnen KIDS-WebKit-Adapter erreichbar. Der Simulator-Build belegt keine vollständige Funktions-, Inhalts-, Audio-, Offline-, Datenschutz- oder Barrierefreiheitsparität.
+- Auf iPhone Duo geschlossen (iOS 27.1) wurde NEXT installiert und gestartet; der Device-Hub-AX-Baum zeigte Heute und fünf Tabs, das originale Hero-Bild war sichtbar. Andere Geräte, Duo-Posen, Profile, Altersdarstellungen und Ausrichtungen sind nicht vollständig geprüft.
+
+Siehe `IMPLEMENTATION-STATUS.md` für aktuelle Testresultate und Blocker sowie `PARITY-MATRIX.md` für den Quell-zu-Ziel-Status. Kein Merge, Live-Push, Store-/TestFlight-Upload oder physische Gerätefreigabe ist erfolgt.
