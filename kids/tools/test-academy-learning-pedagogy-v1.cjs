@@ -25,6 +25,9 @@ assert(!html.includes('"Das war noch nicht die gesuchte Antwort. "+q.explain'),"
 assert(html.includes('score.unverified=(Number(score.unverified)||0)+1;'),"Non-graded free answers must be recorded as unverified");
 assert(html.includes('unverifiedAnswerCount:Number(score.unverified)||0'),"Persist unverified counts without resetting prior records");
 assert(html.includes('score.choices>score.correct||score.neededHelp>0||(Number(score.unverified)||0)>0'),"Do not promote non-assessed answers to secure repetition");
+assert(html.includes('unverified:val(d.score.unverified)'),"Reading old drafts must default to zero while preserving ungraded answers");
+assert(html.includes('unverified:Number(score.unverified)||0'),"Draft saving must preserve ungraded answers across app restarts");
+assert(html.includes('id="academyTeachBackPrompt"')&&html.includes('const teach=$("#academyTeachBackPrompt")'),"Recap must invite age-adapted explanation and peer teaching");
 assert(html.includes('const VERSION="academy-v4"'),"Keep existing progress storage namespace");
 const doc=fs.readFileSync("kids/akademie/LEARNING_ACADEMY_PEDAGOGY_MASTER_V1.md","utf8");
 for(const marker of ["Qurʾān","Ṣaḥīḥ al-Buḫārī","4–5 Jahre","6–8 Jahre","9–10 Jahre","Weitergeben","Sprechsegment","Freigabegate"]){
