@@ -67,5 +67,20 @@ const output={
  phrases:[...unique.values()].sort((a,b)=>a.priority-b.priority||a.text.localeCompare(b.text,"de"))
 };
 const filename=path.join(ROOT,"kids/data/academy-voice-plan-v9.json");
-fs.writeFileSync(filename,JSON.stringify(output,null,2)+"\n","utf8");
-console.log("ACADEMY VOICE PLAN:",output.lessonCount,"lessons /",output.phraseCount,"unique German phrases; all pending human approval");
+const proposed=JSON.stringify(output,null,2)+"\n";
+if(fs.existsSync(filename)){
+ // Protect the historic 511 exact phrases. Two unreleased curriculum lines now
+ // contain the complete Islamic Salam. Validate their effect, but never rewrite V9.
+ const historic=fs.readFileSync(filename,"utf8");
+ const authorizedReplacement=historic
+  .replaceAll("As-salāmu ʿalaykum ist ein islamischer Friedensgruß.",
+    "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh ist ein islamischer Friedensgruß.")
+  .replaceAll("Jemand sagt zu dir As-salāmu ʿalaykum. Was tust du?",
+    "Jemand sagt zu dir As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh. Was tust du?");
+ if(proposed!==authorizedReplacement)throw Error("Unexpected changes to immutable V9 archive: release a separate reviewed voice plan");
+ console.log("ACADEMY V9: immutable historic archive verified; 2 complete-Salam teaching updates require separate future voice-plan approval; 0 credits");
+}else{
+ // Fresh seeding is only used when no archival plan exists.
+ fs.writeFileSync(filename,proposed,"utf8");
+ console.log("ACADEMY VOICE PLAN:",output.lessonCount,"lessons /",output.phraseCount,"unique German phrases; all pending human approval");
+}
