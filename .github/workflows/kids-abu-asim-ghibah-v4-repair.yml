@@ -30,6 +30,14 @@ jobs:
             kids/data/salaf-library-v1.json
             kids/review-only/salaf-v4-ghibah-repair-20261029/
           sparse-checkout-cone-mode: false
+      - name: Install FFmpeg and FFprobe for deterministic three-part AAC splice
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg
+          ffmpeg -version | head -n 1
+          ffprobe -version | head -n 1
       - name: Use existing ElevenLabs history item; create no paid speech
         shell: bash
         run: |
