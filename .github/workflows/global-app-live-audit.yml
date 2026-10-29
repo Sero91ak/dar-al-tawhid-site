@@ -1,0 +1,56 @@
+name: Global App Live Delivery Audit (read-only)
+
+# Strictly a monitoring / read-only audit. Never deploys, never sets permissions.
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - scripts/global-live-app-delivery-audit.cjs
+      - .github/workflows/global-app-live-audit.yml
+  workflow_dispatch:
+  schedule:
+    - cron: "45 5 * * *"
+  workflow_run:
+    workflows: ["Deploy Besucher-App (Cloudflare Workers)"]
+    types: [completed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: global-app-live-audit-${{ github.event_name }}
+  cancel-in-progress: false
+
+jobs:
+  live:
+    name: Verify published website, visitor iOS/PWA, Test, Kids and TV feeds
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout only read-only release verification code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && 'main' || github.ref }}
+          persist-credentials: false
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Verify audit can read checked-out canonical source
+        run: node scripts/global-live-app-delivery-audit.cjs --self-test
+
+      - name: Test real public HTTP delivery and deployed GPS JS hashes
+        env:
+          DAR_LIVE_SITE: https://dar-al-tawhid.de
+        run: node scripts/global-live-app-delivery-audit.cjs --strict
+
+      - name: Record exact limitations
+        if: always()
+        run: |
+          echo '### Scope of verification' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Read-only HTTP probes: public website, native visitor HTML, Android PWA, Dar Test, GPS JS checksum parity, Qibla, Apple TV feeds, Kids/Widgets/ Admin access.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'This is **NOT** a native binary, physical GPS, permission, offline, audio, Android, tvOS, watchOS or visual-device end-to-end pass.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'No passwords or location data are collected. Protected pages are never unlocked.' >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,29 @@
+name: Kids Academy Meaning-first Content & Learning Audit
+on:
+  pull_request:
+    paths:
+      - "kids/akademie/curriculum-v27.js"
+      - "kids/akademie/curriculum-v28.js"
+      - "kids/akademie/curriculum-v29.js"
+      - "kids/tools/test-academy-meaning-first-20261029.cjs"
+      - ".github/workflows/kids-academy-meaning-first-20261029.yml"
+permissions:
+  contents: read
+jobs:
+  meaning-first:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: All 520 lesson questions, canonical IDs, age differences and new meaning questions
+        run: |
+          node kids/tools/test-academy-meaning-first-20261029.cjs
+          node kids/tools/audit-academy-holistic-v2.cjs > /tmp/kids-academy-audit.json
+          node -e 'const d=require("/tmp/kids-academy-audit.json");if(d.blockers.length)process.exit(1);console.log("Age questions",JSON.stringify(d.statistics.questionsByAge),"editorial-review queue",d.editorialReviewCount,"source-audit pending",d.statistics.sourceAuditMissing)'
+          node kids/tools/test-academy-learning-pedagogy-v1.cjs
+          node kids/tools/test-academy-five-recap-focus-v1.cjs
+      - name: Important religious and acoustic limitations
+        run: echo "Automated question tests are not scholarly source verification, human developmental review or V4 Fusha listening approval."
