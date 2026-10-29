@@ -241,7 +241,7 @@ const entries=[
     "age": {
       "4-5": "Ein Friedensgruß.",
       "6-8": "Salām ist unser freundlicher Gruß. Wir wünschen Frieden.",
-      "9-10": "As-salāmu ʿalaykum ist ein islamischer Friedensgruß. Wir antworten respektvoll und freundlich."
+      "9-10": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh ist ein islamischer Friedensgruß. Wir antworten respektvoll und freundlich."
     },
     "source": {
       "reference": "Qurʾān 4:86",
