@@ -1092,6 +1092,7 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
   if(window.__darLocationContinuityV2)return;
   window.__darLocationContinuityV2=true;
   var lastApplied=0, lastGeocodeAttempt=0, geocodeSerial=0, retryTimer=0, resolving=false;
+  var lastAcceptedStamp=0, lastGpsEventAt=0, lastWebAttempt=0, browserBusy=false, bridgeFallbackTimer=0;
   var cacheKey="darLocationResolvedCityV2";
   function current(){try{return typeof getPrayerSettings==="function"?(getPrayerSettings()||{}):{};}catch(e){return {};}}
   function valid(lat,lon,acc){
@@ -1169,6 +1170,9 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
     var acc=Number(data&&data.acc), t=Number(data&&data.timestamp);
     if(!valid(lat,lon,acc))return;
     if(t&&(t>Date.now()+60000||Date.now()-t>(acc>2500?3600000:600000)))return;
+    // A cached native fix may arrive before a new fix: ignore reversed GPS callbacks.
+    if(t&&lastAcceptedStamp&&t+2000<lastAcceptedStamp)return;
+    lastGpsEventAt=Date.now();
     var s=current();
     // An explicit manually selected city is never replaced by CoreLocation.
     if(s.locationMode==="manual"&&(s.locationGranted===true||Number(s.locationUpdatedAt)>0))return;
@@ -1181,10 +1185,15 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
     var age=Date.now()-Number(s.locationUpdatedAt||0);
     var missingName=unresolved(s.city);
     // A recent coordinate fix MUST NOT suppress a missing-city retry.
-    if(meters<700&&age<30*60000&&!missingName&&s.locationMode==="auto")return;
+    if(meters<700&&age<30*60000&&!missingName&&s.locationMode==="auto"){
+      if(t)lastAcceptedStamp=Math.max(lastAcceptedStamp,t);
+      return;
+    }
     var precision=acc<=2500?"precise":"approximate";
     var shouldWrite=!hasOld||meters>=700||s.locationMode!=="auto"||s.locationGranted!==true||s.locationPrecision!==precision;
-    if(shouldWrite&&Date.now()-lastApplied>=10000){
+    // Throttle duplicate writes, never a real location change after cached replay.
+    if(shouldWrite&&(Date.now()-lastApplied>=10000||!hasOld||s.locationMode!=="auto"||meters>=700)){
+      if(t)lastAcceptedStamp=Math.max(lastAcceptedStamp,t);
       lastApplied=Date.now();
       var city=meters<1500&&!missingName?s.city:cachedCity(lat,lon)||"GPS erkannt · Ortsname wird gesucht";
       try{
@@ -1227,11 +1236,49 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
     try{return window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.darNative;}
     catch(e){return null;}
   }
+  // Safari, Android and foldable PWA need a browser request on foreground too.
+  function requestWebFix(){
+    var s=current();
+    if(s.locationMode==="manual"||browserBusy||Date.now()-lastWebAttempt<20000)return;
+    if(typeof navigator==="undefined"||!navigator.geolocation||
+      typeof navigator.geolocation.getCurrentPosition!=="function")return;
+    lastWebAttempt=Date.now();
+    browserBusy=true;
+    var attemptedLowAccuracy=false;
+    function success(position){
+      browserBusy=false;
+      var coords=position&&position.coords;
+      if(!coords)return;
+      var stamp=Number(position.timestamp);
+      if(!Number.isFinite(stamp)||stamp<=0)stamp=Date.now();
+      void updatePosition({lat:coords.latitude,lng:coords.longitude,
+        acc:coords.accuracy,timestamp:stamp});
+    }
+    function failure(error){
+      if(!attemptedLowAccuracy&&error&&error.code===3){
+        attemptedLowAccuracy=true;
+        try{navigator.geolocation.getCurrentPosition(success,function(){browserBusy=false;},
+          {enableHighAccuracy:false,timeout:8500,maximumAge:60000});return;}catch(e){}
+      }
+      browserBusy=false;
+    }
+    try{navigator.geolocation.getCurrentPosition(success,failure,
+      {enableHighAccuracy:true,timeout:10500,maximumAge:60000});}
+    catch(e){browserBusy=false;}
+  }
   function requestFresh(){
     var s=current(),handler=nativeHandler();
-    // First launch may not yet have locationMode=auto; request native fix anyway.
-    if(!handler||s.locationMode==="manual")return;
-    try{handler.postMessage({type:"location-resume"});}catch(e){}
+    if(s.locationMode==="manual")return;
+    if(bridgeFallbackTimer){clearTimeout(bridgeFallbackTimer);bridgeFallbackTimer=0;}
+    if(!handler){requestWebFix();return;}
+    try{handler.postMessage({type:"location-resume"});}
+    catch(e){requestWebFix();return;}
+    // Older iOS binaries may not deliver a usable native fix; recover via WKWebView GPS.
+    bridgeFallbackTimer=setTimeout(function(){
+      bridgeFallbackTimer=0;
+      if(current().locationMode!=="manual"&&Date.now()-lastGpsEventAt>7500)
+        requestWebFix();
+    },8000);
   }
   window.addEventListener("dar-native-location",function(ev){void updatePosition(ev.detail);});
   window.addEventListener("dar-native-location-status",function(ev){
@@ -1245,6 +1292,9 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
   window.addEventListener("pageshow",requestFresh);
   window.addEventListener("focus",requestFresh);
   document.addEventListener("visibilitychange",function(){if(!document.hidden)requestFresh();});
+  // A native fix can arrive before this script attaches its listener.
+  var bootFix=window.DAR_NATIVE_LOCATION||window.__darNativeLocation;
+  if(bootFix)void updatePosition(bootFix);
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",requestFresh,{once:true});
   else requestFresh();
 })();
