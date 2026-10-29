@@ -84,7 +84,7 @@ const extra={id:"sidq",subject:"akhlaq",topic:"Wahrhaftigkeit",title:"Ṣidq –
 const ids=Object.keys(data);ids.unshift("sidq");const lesson=id=>id==="sidq"?extra:data[id];
 let subject="akhlaq",id="sidq",step=0,player=null;
 const clips=[
- {name:"Salām",text:"As-salāmu ʿalaykum, liebe Schwester.",src:"/kids/assets/kids-academy-audio/00ff589726b166dff6a9.m4a"},
+ {name:"Historischer Kurzgruß – gesperrt",text:"As-salāmu ʿalaykum, liebe Schwester.",src:"/kids/assets/kids-academy-audio/00ff589726b166dff6a9.m4a",deprecatedForPlayback:true},
  {name:"Willkommen",text:"Schön, dass du da bist!",src:"/kids/assets/kids-academy-audio/f142bc78e8bcea3d8518.m4a"},
  {name:"Unterrichtseinleitung",text:"Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.",src:"/kids/assets/kids-academy-audio/08d1f46461d954d5e471.m4a"},
  {name:"Erster Erklärungssatz",text:"Manchmal geht etwas aus Versehen kaputt.",src:"/kids/assets/kids-academy-audio/1a6097339111c8ac475c.m4a"}];
@@ -93,7 +93,9 @@ function el(tag,content,cl){const n=document.createElement(tag);if(content!==und
 function add(tag,content,cl,to=stage){const n=el(tag,content,cl);to.appendChild(n);return n}
 function stop(){if(player){player.onended=player.onerror=player.onplaying=null;try{player.pause();player.removeAttribute("src");player.load()}catch(_){}player=null}}
 function audioClip(k){
- const clip=clips[k],box=add("div",undefined,"voice");add("strong",clip.name+": "+clip.text,"",box);
+ const clip=clips[k];
+ if(clip?.deprecatedForPlayback){missing("den vollständigen Salām; die alte Kurzfassung ist gesperrt");return}
+ const box=add("div",undefined,"voice");add("strong",clip.name+": "+clip.text,"",box);
  const row=add("div",undefined,"",box),button=add("button","▶ Masterstimme anhören","",row),status=add("span","Bereit · Original V4","state",row);
  button.type="button";button.onclick=()=>{
   stop();const p=new Audio();player=p;p.volume=1;p.muted=false;p.playsInline=true;p.src=clip.src+"?v=creator-v17";p.playbackRate=1;
