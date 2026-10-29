@@ -732,10 +732,10 @@ const additions={
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Was sagt Qurʾān 24:27 direkt?",
+          "prompt": "Du möchtest einen fremden Raum betreten. Wie sollen wir uns nach der Lehre dieses Qurʾān-Verses verhalten?",
           "options": [
             "Vor dem Betreten fremder Häuser um Erlaubnis bitten.",
-            "Niemand darf jemals einem Kind helfen."
+            "Erst hineingehen und danach um Erlaubnis bitten."
           ],
           "correct": 0,
           "hint": "Lies den Vers.",

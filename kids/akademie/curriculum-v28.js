@@ -76,10 +76,10 @@ const additions={
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Wie heißt die erste Sūrah?",
+          "prompt": "Wir haben den Anfang des Qurʾāns kennengelernt. Wie heißt die erste Sūrah im Qurʾān?",
           "options": [
             "Al-Fātiḥah",
-            "Ein Tiername"
+            "Al-Iḫlāṣ"
           ],
           "correct": 0,
           "hint": "Sie beginnt den Qurʾān.",
@@ -87,10 +87,10 @@ const additions={
         },
         {
           "type": "choice",
-          "prompt": "Was bedeutet 'Al-ḥamdu lillāh'?",
+          "prompt": "Wenn wir „al-ḥamdu lillāh“ sagen, was drücken wir damit aus?",
           "options": [
             "Alles Lob gehört Allah.",
-            "Ich suche meinen Schuh."
+            "Ich bitte Allah um Hilfe."
           ],
           "correct": 0,
           "hint": "Wir loben Allah.",
@@ -100,10 +100,10 @@ const additions={
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Was bedeutet al-Fātiḥah?",
+          "prompt": "Was bedeutet der Name Sūrat al-Fātiḥah auf Deutsch?",
           "options": [
             "Die Eröffnende",
-            "Eine Spielregel"
+            "Die Aufrichtige"
           ],
           "correct": 0,
           "hint": "Sie steht am Anfang.",
@@ -111,10 +111,10 @@ const additions={
         },
         {
           "type": "choice",
-          "prompt": "Was lernen wir aus Āyah 1:2?",
+          "prompt": "Wir haben den Vers über das Lob Allahs kennengelernt. Was sagt er über Allah aus?",
           "options": [
             "Allah gebührt das Lob.",
-            "Wir dürfen anderen absichtlich schaden."
+            "Wir bitten Allah in diesem Vers nur um etwas."
           ],
           "correct": 0,
           "hint": "Lies die Bedeutung.",
@@ -130,10 +130,10 @@ const additions={
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Worauf bezieht sich al-Buḫārī 4474?",
+          "prompt": "Wir haben eine Überlieferung über die besondere Stellung von al-Fātiḥah kennengelernt. Was erklärt sie?",
           "options": [
             "Die besondere Bedeutung der gesamten Sūrat al-Fātiḥah.",
-            "Eine frei erfundene Geschichte über eine andere Sūrah."
+            "Nur den einzelnen zweiten Vers, nicht die ganze Sūrah."
           ],
           "correct": 0,
           "hint": "Abū Saʿīd überlieferte dies.",
@@ -149,7 +149,7 @@ const additions={
           "type": "text",
           "prompt": "Was bedeutet 'rabbi l-ʿālamīn' im Unterricht?",
           "sample": "Allah ist der Herr der Welten.",
-          "hint": "Nenne Qurʾān 1:2 als Beleg."
+          "hint": "Überlege, wer in diesem Vers als Herr der Welten bezeichnet wird."
         }
       ]
     },
@@ -418,7 +418,7 @@ const additions={
         },
         {
           "type": "text",
-          "prompt": "Was sagt Qurʾān 33:41?",
+          "prompt": "Im Unterricht haben wir gelernt, dass Allah uns zum Gedenken aufruft. Was bedeutet diese Aussage in deinen Worten?",
           "sample": "Die Gläubigen sollen Allah häufig gedenken.",
           "hint": "Trenne Qurʾān von Ḥadīṯ."
         }
@@ -544,10 +544,10 @@ const additions={
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Was lehrt Qurʾān 5:2?",
+          "prompt": "Du möchtest gemeinsam mit anderen helfen. Bei welcher Art von Handlungen sollen wir uns nach der Bedeutung des Verses gegenseitig unterstützen?",
           "options": [
             "Im Guten zusammenzuhelfen.",
-            "Bei schlechtem Verhalten zu helfen."
+            "Bei allem mitmachen, auch wenn es jemandem schadet."
           ],
           "correct": 0,
           "hint": "Es geht um gute Hilfe.",
