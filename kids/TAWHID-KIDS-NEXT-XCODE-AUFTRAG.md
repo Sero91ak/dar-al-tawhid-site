@@ -3,6 +3,16 @@
 
 Du bist der leitende iOS-Architekt, Qualitätsingenieur und Migrationsentwickler für die islamische Kinderlern-App TAWḤĪD KIDS. Führe diesen gesamten Auftrag in EINER autonomen Bearbeitung durch; arbeite erforderliche interne Teilschritte eigenständig ab und frage nicht bei jedem Modul nach. Keine Dummy-Seiten oder "fertig" ohne Beleg.
 
+## PRIORITÄT 0 · XCODE WIEDERHERSTELLUNG VOR MIGRATION (29.10.2026)
+
+Dieses Dokument und `kids/TAWHID-KIDS-NEXT-RECOVERY-DESIGN.md` sind EIN zusammenhängender Masterauftrag. Vor jedem Xcode-Neuaufbau MUSS `bash ios/DarAlTawhidKids/Next/PRE-FLIGHT.command` laufen. Inventarisiere und sichere vorhandene lokale Xcode-Dateien, Schemes, Targets, Simulatoren, Änderungen, Sicherungen und Daten (nicht überschreiben, löschen oder resetten). Aktuelle GitHub-main-Version ist Kanon, lokale nicht eingecheckte Recovery-Änderungen sind zusätzlich zu prüfen und sicher zu übernehmen. Alter Next-Branch war beim Audit 638 Commits hinter main. Arbeite auf `codex/tawhid-kids-next-recovery-20261029` oder einem davon abzweigenden gesicherten Entwicklungsbranch.
+
+VOLLSTÄNDIG statt Demo: originale Start-Hero-Datei und Zuschnitt, Gebetszeiten und Qibla, Profilkarten und Originalillustrationen, alle fünf echten Tabs **Heute/Hören/Lernen/Duʿāʾ/Eltern**, alle 3D-Icon-Assets, alle Bibliotheken und Unterseiten, Hören, Qurʾān-Rezitation/Lernen, 900 Quizdatensätze als zuletzt auditierter Stand (Ist neu prüfen), Duʿāʾ, Mitsprechen/Mitlesen, Lernfortschritt, Elternverwaltung, Offline, originaler Klang und originale App-Designverträge. Keine Platzhalter, keine Dummy-Oberflächen und keine voreilige "100-%"-Bestätigung.
+
+Adaptive Geräte: iPhone, iPad, iPhone Duo geschlossen/aufgeklappt/teilgefaltet/gedreht und Fensteränderungen. MacBook-Web-/PWA zuerst; optional separates Designed-for-iPad/Apple-Silicon- oder Mac-Catalyst-Ziel nur nach Build/Tests. Standard-SwiftUI-Layouts und iOS-27.1-Falz-/ReservedRegion-APIs mit Availability-Gates nutzen. Keine generische Erwachsenen-DARNext-Optik, keine Ersetzung existierender 3D-Icons.
+
+Der Ein-Klick-Launcher testet zunächst nur den isolierten Simulator-Unterbau. Der Coding-Agent muss die native Feature-Migration wirklich implementieren und die neue Paritätsmatrix mit echten Testnachweisen füllen. Keine Änderung an Live oder App Store ohne spätere Freigabe.
+
 ## 0 · Absolute Priorität: Schutz
 Arbeite ausschließlich auf codex/tawhid-kids-next-recovery-20261029 oder einem davon abzweigenden privaten Arbeitsbranch. Keine Änderungen an main, kids-Live-Seiten, Erwachsenen-App, bestehendem App-Store-Bundle de.daraltawhid.kids, existierendem Besucher- oder Creator-Scheme, Apple-Signing, Store Connect, TestFlight, Cloudflare/Worker-Deploy oder OneSignal. Keine echten Kinderkonten importieren. Änderungen außerhalb des Kids-Next-Bereichs nur falls zwingend und nach Scope-Schutzkontrolle; niemals bestehende KIDS-Regeln überschreiben.
 
