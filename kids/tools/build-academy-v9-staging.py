@@ -105,7 +105,7 @@ def main():
         raise RuntimeError("Incomplete or changed voice plan")
     if args.pilot_first_lesson:
         pilot=[
-            "As-salāmu ʿalaykum, liebe Schwester.",
+            "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
             "Schön, dass du da bist!",
             "Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.",
             "Manchmal geht etwas aus Versehen kaputt."
@@ -114,7 +114,7 @@ def main():
             raise RuntimeError("Invalid bounded pilot request")
         academy=(ROOT/"kids/akademie/index.html").read_text("utf-8")
         for utterance in pilot:
-            if utterance not in academy and utterance!="As-salāmu ʿalaykum, liebe Schwester.":
+            if utterance not in academy:
                 raise RuntimeError("First lesson text changed: cannot generate "+utterance)
         phrases=[{"text":utterance,"priority":0} for utterance in pilot]
     # CRITICAL: the legacy 454-phrase generator used to overwrite the four
