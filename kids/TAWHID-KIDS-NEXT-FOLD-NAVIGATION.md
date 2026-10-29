@@ -1,6 +1,10 @@
 # TAWḤĪD KIDS NEXT · Systemnative Foldable-Navigation
 **29.10.2026 · verbindlicher Nachtrag zum Xcode-Masterauftrag · zunächst Entwicklungs- und Simulatorziel**
 
+## Präzisierung ORIGINAL Apple Systembar mit Search-Lupe
+
+`kids/TAWHID-KIDS-NEXT-APPLE-LIQUID-GLASS-SEARCH.md` hat Vorrang für die endgültige Gestaltung: *nicht nur* adaptive Platzierung, sondern Apple-eigene Liquid-Glass-`TabView`, System-Suche/Lupe (`Tab(role: .search)` und `.searchable` oder systemseitig geprüfte Toolbar-Suche), Original-3D-Bilder und keine Doppel-Tabbar. Der Android-PWA-Fall ist bewusst eine webbasierte optisch/ergonomisch angeglichene Implementierung, kein Apple-Systemwidget.
+
 ## 1. Unverhandelbares Ergebnis
 Die KIDS-Hauptnavigation ist NICHT als starre, frei positionierte Web-Kapsel in den nativen iOS-Frame zu übernehmen. Auf iPhone Duo muss sie auf allen Anzeigen und Faltposen dem tatsächlichen Apple-Systemverhalten folgen. Die vorhandenen **fünf** Inhaltsziele bleiben IMMER erreichbar:
 1. **Heute** — Originalicon \`kids/assets/kids-icons/home-real-v12.png\`
