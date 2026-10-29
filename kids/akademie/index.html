@@ -3683,6 +3683,28 @@ body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap >
 .academy-term-detail{border-top:1px solid color-mix(in srgb,var(--accent,#c9ab73) 33%,transparent);padding-top:8px;margin-top:9px;font-size:clamp(13px,3.4vw,15px);line-height:1.52}
 .academy-term-detail p{margin:5px 0 3px}
 .academy-term-source,.academy-term-audio-status{font-size:12px;opacity:.8}
+
+/* Full Islamic Salam – Academy contract: never abbreviate, no truncation on iPhone/iPad.
+   The profile-specific address is separate from the canonical, fully spelled-out greeting. */
+.overview-copy .greeting-salam,body[data-profile="girl"] .overview-copy .greeting-salam,
+.lesson-stage .stage-greeting-salam{
+  max-width:100%;white-space:normal!important;overflow-wrap:normal!important;
+  word-break:normal;hyphens:none;text-wrap:pretty;
+}
+.overview-copy .greeting-address,body[data-profile="girl"] .overview-copy .greeting-address{
+  display:block;max-width:100%;margin-top:6px;color:#fff4e6;
+  font-size:clamp(14px,3.8vw,18px);line-height:1.45;font-weight:700;
+  overflow-wrap:break-word;
+}
+.lesson-stage .stage-greeting-address{
+  display:block;margin-top:8px;font-size:clamp(17px,2.35vw,20px);
+  line-height:1.48;font-weight:690;color:var(--text);
+}
+.lesson-stage .welcome-greeting{max-width:100%;min-width:0}
+@media(max-width:480px){
+  .lesson-stage .stage-greeting-salam{font-size:clamp(18px,4.75vw,21px);line-height:1.5}
+  .overview-copy .greeting-address{font-size:clamp(14px,3.9vw,17px)}
+}
 </style><link rel="stylesheet" href="/kids/akademie/responsive-integrity-v29.css?v=29" data-kids-academy-responsive-integrity="29"><script data-kids-touch-focus-v83>
 (function(){
   "use strict";
@@ -3873,7 +3895,7 @@ body[data-kids-portal="true"][data-profile="girl"] .academy-header.kids-detail-a
  <section class="overview-hero" aria-label="Deine islamische Lernakademie">
   <img id="academyHeroImage" src="/desktop-preview/assets/kids-academy-hero-boys-v1.jpg" alt="" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.classList.add('is-ready');this.src='/desktop-preview/assets/kids-academy-hero-v1.jpg'">
   
-  <img class="academy-hero-character" id="academyHeroCharacter" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" aria-hidden="true" decoding="async"><div class="overview-copy"><div class="kicker" id="overviewKicker">Deine islamische Lernakademie</div><h1><span class="hero-title-line">Wissen</span> <span class="hero-title-line">entdecken</span></h1><p id="overviewGreeting" class="overview-greeting"><span id="overviewSalam" class="greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="overviewFollowup" class="greeting-followup">Heute lernen wir etwas Neues!</span></p><div class="hero-learning-pill">✦ Qurʾān &amp; Sunnah · Gemeinsam lernen</div></div>
+  <img class="academy-hero-character" id="academyHeroCharacter" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" aria-hidden="true" decoding="async"><div class="overview-copy"><div class="kicker" id="overviewKicker">Deine islamische Lernakademie</div><h1><span class="hero-title-line">Wissen</span> <span class="hero-title-line">entdecken</span></h1><p id="overviewGreeting" class="overview-greeting"><span id="overviewSalam" class="greeting-salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.</span><span id="overviewAddress" class="greeting-address">Lieber Bruder.</span><span id="overviewFollowup" class="greeting-followup">Heute lernen wir etwas Neues!</span></p><div class="hero-learning-pill">✦ Qurʾān &amp; Sunnah · Gemeinsam lernen</div></div>
  </section>
  <section class="today-class" aria-labelledby="todayTitle">
   <div class="today-text"><span class="kicker" id="todayKicker">Für dich vorbereitet</span><h2 id="todayTitle">Dein Unterricht heute</h2><p><strong id="todayTopicName">Ṣidq – Wahrhaftigkeit</strong><br><span id="todayTopicIntro">Warum ist es gut, die Wahrheit zu sagen?</span></p><div class="today-summary" id="todaySummary">Deine erste Lektion wartet auf dich.</div><div class="academy-time" id="academyTime">Lernzeit: 8–12 Minuten · Pausen jederzeit</div></div>
@@ -3919,7 +3941,7 @@ body[data-kids-portal="true"][data-profile="girl"] .academy-header.kids-detail-a
  <div class="lesson-heading" role="group" aria-label="Akhlāq-Unterricht Ṣidq – Wahrhaftigkeit"><span class="lesson-theme-tag">Akhlāq · Guter Charakter</span><h1>Ṣidq <span>· Wahrhaftigkeit</span></h1><p id="lessonIntroduction">Gemeinsam verstehen, nachdenken und üben.</p></div>
  <div class="stage-tracker" role="group" aria-label="Unterrichtsschritte"><button class="tracker-item is-current" data-jump-step="0"><b>1</b><span>Willkommen</span></button><button class="tracker-item" data-jump-step="1"><b>2</b><span>Verstehen</span></button><button class="tracker-item" data-jump-step="2"><b>3</b><span>Belege</span></button><button class="tracker-item" data-jump-step="3"><b>4</b><span>Mitdenken</span></button><button class="tracker-item" data-jump-step="4"><b>5</b><span>Merken</span></button></div>
  <p class="academy-audio-feedback" id="audioFeedback" role="status" aria-live="polite">Tippe auf „Anhören“, wenn du etwas hören möchtest.</p><div class="stage-surface" id="stageSurface">
-  <section class="lesson-stage" data-lesson-step="0" aria-labelledby="welcomeTitle"><span class="kicker">Schritt 1 · Willkommen</span><h2 id="welcomeTitle">Schön, dass du da bist!</h2><p class="stage-lead welcome-greeting" id="welcomeGreeting"><span id="welcomeSalam" class="stage-greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="welcomeFollowup" class="stage-greeting-followup">Schön, dass du heute mitlernst!</span></p><p class="stage-body" id="lessonWelcomeBody">Heute sprechen wir darüber, weshalb <strong>Wahrhaftigkeit</strong> wichtig ist. Du kannst jederzeit anhalten, noch einmal zuhören oder etwas in deinem eigenen Tempo lesen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="0">Begrüßung anhören</button><span class="voice-note" id="voiceStatus" aria-live="polite">Du kannst die Begrüßung noch einmal anhören.</span></div></section>
+  <section class="lesson-stage" data-lesson-step="0" aria-labelledby="welcomeTitle"><span class="kicker">Schritt 1 · Willkommen</span><h2 id="welcomeTitle">Schön, dass du da bist!</h2><p class="stage-lead welcome-greeting" id="welcomeGreeting"><span id="welcomeSalam" class="stage-greeting-salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.</span><span id="welcomeAddress" class="stage-greeting-address">Lieber Bruder.</span><span id="welcomeFollowup" class="stage-greeting-followup">Schön, dass du heute mitlernst!</span></p><p class="stage-body" id="lessonWelcomeBody">Heute sprechen wir darüber, weshalb <strong>Wahrhaftigkeit</strong> wichtig ist. Du kannst jederzeit anhalten, noch einmal zuhören oder etwas in deinem eigenen Tempo lesen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="0">Begrüßung anhören</button><span class="voice-note" id="voiceStatus" aria-live="polite">Du kannst die Begrüßung noch einmal anhören.</span></div></section>
   <section class="lesson-stage" data-lesson-step="1" aria-labelledby="explainTitle" hidden><span class="kicker">Schritt 2 · Heute lernen wir</span><h2 id="explainTitle">Was bedeutet Wahrhaftigkeit?</h2><p class="stage-lead">Die <strong>Wahrheit sagen</strong> – auch wenn es manchmal Mut kostet.</p><button type="button" class="pill soft-gold academy-serhat-lead" id="academySerhatLead" hidden aria-label="Einführung anhören">▶ Serhat hören</button><span class="academy-serhat-status" id="academySerhatStatus" aria-live="polite" hidden></span><div class="spoken-paragraph" id="explainWords"><p data-spoken>Manchmal passiert uns aus Versehen ein Fehler.</p><p data-spoken>Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.</p><p data-spoken>Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.</p><p data-spoken>Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.</p></div><div id="academyTermCoach" class="academy-term-coach" hidden aria-label="Arabische Wörter leicht erklärt"></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="1">Erklärung anhören</button><span class="voice-note">Beim Hören wird der aktuelle Satz sanft hervorgehoben.</span></div></section>
   <section class="lesson-stage" data-lesson-step="2" aria-labelledby="evidenceTitle" hidden><span class="kicker">Schritt 3 · Qurʾān und Sunnah</span><h2 id="evidenceTitle">Was lernen wir aus den Quellen?</h2><p class="stage-lead" id="evidenceLead">Wir hören zuerst einen Vers aus dem Qurʾān und betrachten danach eine authentische Überlieferung.</p><div class="evidence-region"><section class="lesson-source-block">
   <div class="eyebrow">Qurʾān · Sūrat at-Tawbah · Vers 119</div>
@@ -4050,6 +4072,7 @@ const humanAge=x=>String(x||"").replace(/-/g,"–");
 const TRACKS={"quran:9:119":{src:"/quran-audio/ar.alafasy/1354.mp3",fallback:"https://everyayah.com/data/Alafasy_128kbps/009119.mp3"}};
 const stages=all('.lesson-stage[data-lesson-step]');
 const questions=()=>activeLesson()?.questions?.[age]||exercises[age]||[];
+const ACADEMY_FULL_SALAM="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.";
 const address=()=>{const role=gender==="girl"?"liebe Schwester":"lieber Bruder";const first=profileName.split(/\s+/)[0];return first?role+" "+first:role;};
 const storageKey=()=>["kids",VERSION,id,age,activeLessonId].join(".");
 const oldRecord=()=>{try{return JSON.parse(localStorage.getItem(storageKey())||"null")}catch(_){return null}};
@@ -4342,8 +4365,10 @@ function syncProfile(force=false){
  hero.onload=()=>hero.classList.add("is-ready");
  hero.src=gender==="girl"?"/desktop-preview/assets/kids-academy-hero-girls-v1.jpg":"/desktop-preview/assets/kids-academy-hero-boys-v1.jpg";
  if(hero.complete&&hero.naturalWidth)hero.classList.add("is-ready");
- $("#overviewSalam").textContent="As-salāmu ʿalaykum, "+address()+".";
- $("#welcomeSalam").textContent="As-salāmu ʿalaykum, "+address()+".";
+ $("#overviewSalam").textContent=ACADEMY_FULL_SALAM;
+ $("#welcomeSalam").textContent=ACADEMY_FULL_SALAM;
+ $("#overviewAddress").textContent=address()+".";
+ $("#welcomeAddress").textContent=address()+".";
  applyAgeTeaching();
  if(activeLesson())applySelectedLesson();
  renderHome();
@@ -4788,8 +4813,8 @@ function speak(index,custom){
  }
  pauseVoiceClip();stopSpeech();stopAudio();
  const token=++voiceToken;
- const spokenSalam=gender==="girl"?"As-salāmu ʿalaykum, liebe Schwester.":"As-salāmu ʿalaykum, lieber Bruder.";
- const lines=custom||(index===0?[spokenSalam,$("#welcomeFollowup").textContent,$('[data-lesson-step="0"] .stage-body').textContent]:index===1?all("#explainWords [data-spoken]").map(x=>x.textContent):index===2?[$(".teacher-explainer").textContent]:index===4?all(".recap-lesson p").map(x=>x.textContent):[]);
+ const spokenSalam=ACADEMY_FULL_SALAM;
+ const lines=custom||(index===0?[spokenSalam,$("#welcomeAddress").textContent,$("#welcomeFollowup").textContent,$('[data-lesson-step="0"] .stage-body').textContent]:index===1?all("#explainWords [data-spoken]").map(x=>x.textContent):index===2?[$(".teacher-explainer").textContent]:index===4?all(".recap-lesson p").map(x=>x.textContent):[]);
  const highlights=index===1?(custom?[all("#explainWords [data-spoken]")[focusPages[1]]]:all("#explainWords [data-spoken]")):index===2?[$(".teacher-explainer")]:[];
  let k=0;
  const live=()=>token===voiceToken&&index===step;
