@@ -13,6 +13,10 @@ Stand: 26.10.2026 · Status: Entwicklungsauftrag, KEINE Produktivfreigabe.
 
 Der verbindliche Vertrag `kids/TAWHID-KIDS-NEXT-APPLE-LIQUID-GLASS-SEARCH.md` präzisiert die Foldable-Tab-Regel: echte Apple-System-`TabView` mit Liquid Glass und semantischer Lupen-Suche, **fünf ursprüngliche Kinder-Tabs** mit unveränderten 3D-Assets, iOS-Duo-/iPad-Systempositionierung, keine zweite Web-Leiste. Die Android-Web/PWA darf Apples Native-Komponente nicht als real ausgeben, muss aber entsprechende adaptive Navigation, 3D-Icons und echte Suche bereitstellen. Das vorherige reine WebKit-Scaffold ist nicht der Zielzustand.
 
+## Systemarchitektur und echte Laufzeitqualität
+
+Zusätzliche verbindliche Regel: `kids/TAWHID-KIDS-NEXT-NATIVE-PERFORMANCE-ARCHITECTURE.md`. KIDS NEXT soll die originalen Inhalte/Oberflächen mit den nativen Systemen harmonisieren, nicht nur Glass-/SwiftUI-Mockups darstellen. Single writer für Audio, Navigation, Profile, Fortschritt; versionierte native-WebKit-Nachrichten; OS-gerechte Insets, Gerätedrehung, Animationen, Fehler-/Offline-Lernzustand. Leistungsqualität mit reproduzierbaren Instruments-, Audio- und Hardwaretests beweisen; keine pauschale Behauptung absoluter Fehlerfreiheit.
+
 ## Quelle der Wahrheit / Isolation
 - Eigenständige KIDS-App, kein Erwachsenen-DARNext, keine Erwachsenen-Quiz-/Datenbank-IDs.
 - Aktueller kanonischer Code liegt unter kids/** und ios/DarAlTawhidKids/**. Aktuelle Detailnormen stehen in kids/KIDS-DESIGN.md, kids/TERM-LEARNING-POLICY.md, KIDS.md und einschlägigen Tests. Diese haben Vorrang vor diesem kondensierten Vertrag, sofern sie genauer oder neuer sind.
