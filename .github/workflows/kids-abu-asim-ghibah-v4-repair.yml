@@ -51,7 +51,9 @@ jobs:
           assert story['masterStoryText'].split('\n\n')[4].startswith('Das arabische Wort dafür heißt Ġībah.')
           eh={'xi-api-key':os.environ['ELEVENLABS_API_KEY'].strip(),'User-Agent':'DAR-Kids-one-clip-repair'}
           h=json.loads(get('https://api.elevenlabs.io/v1/history/'+H,eh))
-          assert h.get('voice_id')==VOICE and h.get('model_id')=='eleven_v4'
+          print('HISTORY_METADATA_SAFE', {k:h.get(k) for k in ('history_item_id','voice_id','model_id','voice_name','status')},flush=True)
+          assert h.get('voice_id')==VOICE, 'History item voice_id mismatches expected master'
+          assert h.get('model_id')=='eleven_v4', 'History item model_id mismatches eleven_v4'
           assert (h.get('text') or '').strip()==EXPECT, 'Wrong history item text: fail closed'
           patch=get('https://api.elevenlabs.io/v1/history/'+H+'/audio',eh)
           assert len(patch)>8000
