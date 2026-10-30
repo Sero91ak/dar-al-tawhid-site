@@ -427,3 +427,14 @@ html.dar-test-premium-header-v2 body.is-quiz-route #appView > .view-head,
 html.dar-test-premium-header-v2 body.is-more-route #appView > .view-head{
   margin-block-start:0!important;
 }
+
+
+/* FRAUEN_DIRECT_STICKY_FALLBACK_V6
+   During first paint the Frauen DOM adapter may not yet have wrapped the
+   existing sticky photograph/search in .dar-immersive-hero-stage.
+   Keep only that pre-wrapper hero below the measured fixed header.
+   Once wrapped, the existing stage remains its sole sticky authority.
+   Preserve every original image size, source and crop. */
+html.dar-test-premium-header-v2 body.is-frauen-route #appView :is(.frauen-library-shell,.frauen-library-list):not(:has(> .dar-immersive-hero-stage)) > .frauen-library-hero{
+ top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px))!important;
+}
