@@ -31,6 +31,13 @@ for(const [lane,src] of [["visitor",visitorHome],["test",testHome]]){
  assert.doesNotMatch(src,/SMART_PRAYER_INFORMATION_HIERARCHY_V2/,lane+" unwanted oversized design remains");
  assert.doesNotMatch(src,/var calendarLabels=/,lane+" extra calendar headings remain");
  assert.doesNotMatch(src,/data-calendar-label/,lane+" appended date headings remain");
+ const compactStart=src.indexOf("/* SMART_PRAYER_COMPACT_TYPOGRAPHY_V3");
+ const compactEnd=src.indexOf("`;",compactStart);
+ assert.ok(compactStart>=0&&compactEnd>compactStart,lane+" compact style block missing");
+ const colorOnly=src.slice(compactStart,compactEnd);
+ assert.doesNotMatch(colorOnly,/^\s*(?:padding(?:-[\w-]+)?|margin(?:-[\w-]+)?|gap|row-gap|column-gap|font-size|line-height|display|grid-template-columns|grid-template-rows|min-height|height|width|border-radius)\s*:/m,
+  lane+" enlarged prayer card / added rows in color-only enhancement");
+
  for(const component of [
   ".datp-item:not(.datp-right) .datp-number",
   ".datp-right .datp-number",
