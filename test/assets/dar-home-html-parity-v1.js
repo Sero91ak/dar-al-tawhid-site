@@ -38,7 +38,13 @@ function route(dest,val){if(dest==="library")dest="bibliothek"; // Open the real
  * Never navigate to the full Qibla settings/compass route on shortcut tap.
  * Reuse the established browser QiblaQuickView when the native sheet is absent. */
 function openQuickQibla(){
- /* Keep shared Qibla engine unchanged; add TEST-only theme layout after its stylesheet. */
+ /* Load shared Qibla styling first, then the TEST-only theme adaptation. */
+ if(!document.querySelector('link[data-dar-test-qibla-quick-v60]')){
+  var css=document.createElement("link");css.rel="stylesheet";
+  css.href="/assets/qibla-quick-view.css?v=test-qibla-v60";
+  css.setAttribute("data-dar-test-qibla-quick-v60","");
+  document.head.appendChild(css);
+ }
  if(!document.querySelector('link[data-dar-test-qibla-theme-v2]')){
   var quality=document.createElement("link");quality.rel="stylesheet";
   quality.href="/test/assets/dar-qibla-quick-v2.css?v=20261030-2";
@@ -52,12 +58,6 @@ function openQuickQibla(){
  }catch(e){console.warn("Qibla quick view initial open",e)}
  if(window.__darTestQiblaQuickLoading)return;
  window.__darTestQiblaQuickLoading=true;
- if(!document.querySelector('link[data-dar-test-qibla-quick-v60]')){
-  var css=document.createElement("link");css.rel="stylesheet";
-  css.href="/assets/qibla-quick-view.css?v=test-qibla-v60";
-  css.setAttribute("data-dar-test-qibla-quick-v60","");
-  document.head.appendChild(css);
- }
  function finish(){
   window.__darTestQiblaQuickLoading=false;
   if(window.DARQiblaQuickView&&typeof window.DARQiblaQuickView.open==="function"){
