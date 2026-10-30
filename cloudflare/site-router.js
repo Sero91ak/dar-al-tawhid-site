@@ -278,7 +278,7 @@ function adultCompactHeroAddon() {
  * Add a root-only scroll stop; preserve Hero, sticky search, and all carousels. */
 function adultTopScrollBoundaryAddon() {
   return '<link rel="stylesheet" id="darAdultTopScrollCssV1" href="/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-no-overlay-v8">' +
-    '<script defer id="darAdultTopScrollJsV1" src="/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-no-overlay-v8"></' + 'script>';
+    '<script defer id="darAdultTopScrollJsV1" src="/assets/dar-adult-top-scroll-boundary-v1.js?v=20261030-no-pull-hero-v9"></' + 'script>';
 }
 
 /* DĀR adult identity header v2 – mounted only in native iOS/Android and dedicated PWA.
