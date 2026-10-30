@@ -550,11 +550,32 @@
     else QiblaQuickView.resume();
   }
 
+  // The adult app's gold full-screen #darQiblaPop is the single canonical
+  // Schnell-Qibla experience. All pinned/quick entry points must use its
+  // existing GPS, sensor, orientation, exit and rendering lifecycle.
+  // Keep the original panel solely for hosts without that canonical shell.
+  function canonicalQiblaOpen() {
+    try { return !!document.getElementById("darQiblaPop"); }
+    catch (e) { return false; }
+  }
+
   var QiblaQuickView = {
     isOpen: function () {
-      return !!(ui.root && !ui.root.hidden);
+      return canonicalQiblaOpen() || !!(ui.root && !ui.root.hidden);
     },
     open: function () {
+      if (typeof root.openQiblaQuickSheet === "function") {
+        if (canonicalQiblaOpen()) return;
+        // Prevent two visible compass surfaces or competing heading listeners.
+        if (ui.root && !ui.root.hidden) {
+          this.stop();
+          ui.root.hidden = true;
+          document.documentElement.classList.remove("qibla-qv-open");
+          document.body.classList.remove("qibla-qv-open");
+        }
+        root.openQiblaQuickSheet();
+        return;
+      }
       try { if (typeof root.stopQiblaCompass === "function") root.stopQiblaCompass(); } catch (e) {}
       ui.root = ensureDom();
       ui.root.hidden = false;
@@ -579,6 +600,10 @@
       startCompass(false);
     },
     close: function () {
+      if (canonicalQiblaOpen() && typeof root.closeQiblaQuickSheet === "function") {
+        root.closeQiblaQuickSheet();
+        return;
+      }
       this.stop();
       if (ui.root) ui.root.hidden = true;
       document.documentElement.classList.remove("qibla-qv-open");
@@ -589,7 +614,10 @@
         }
       } catch (e) {}
     },
-    start: function () { startCompass(true); },
+    start: function () {
+      if (canonicalQiblaOpen()) return; // canonical sheet manages its own sensor
+      startCompass(true);
+    },
     stop: function () {
       engine.heading.stop();
       engine.location.stop();
@@ -602,6 +630,7 @@
       engine.heading.stop();
     },
     resume: function () {
+      if (canonicalQiblaOpen()) return; // canonical sheet owns resume/visibility
       if (!this.isOpen()) return;
       startCompass(false);
     },

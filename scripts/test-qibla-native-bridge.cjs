@@ -25,7 +25,7 @@ function boot({native, prayer = null, bridge = true, angle = 0} = {}) {
   const navigator = { geolocation: {getCurrentPosition(success) {
     success({coords:{latitude:50.7, longitude:7.1, accuracy:10}});
   }}};
-  const document = {getElementById: () => null};
+  const document = {getElementById: id => id === "darQiblaPop" && window.__testCanonicalVisible ? {} : null};
   const context = {window, navigator, document, screen: {orientation:{angle}}, Date,
     console, setTimeout, clearTimeout};
   vm.runInNewContext(source, context, {filename:"qibla-quick-view.js",timeout:3000});
@@ -85,6 +85,25 @@ async function main() {
   native.engine.heading.stop();
   assert.equal(native.messages.at(-1).type,"qibla-stop");
   assert.equal(native.intervals.size,0);
-  console.log("Qibla native GPS + compass bridge regression tests passed.");
+
+  // Pinned homepage and global quick action must open the identical gold
+  // full-screen #darQiblaPop, never create an independent blue compass.
+  const unified=boot({bridge:true});
+  let opened=0,closed=0;
+  unified.window.openQiblaQuickSheet=()=>{opened++;unified.window.__testCanonicalVisible=true;};
+  unified.window.closeQiblaQuickSheet=()=>{closed++;unified.window.__testCanonicalVisible=false;};
+  const view=unified.window.DARQiblaQuickView;
+  view.open();
+  assert.equal(opened,1,"Pinned Qibla must delegate to canonical gold quick search");
+  assert.equal(view.isOpen(),true,"Shared opening state must reflect canonical sheet");
+  assert.equal(unified.messages.length,0,"Do not create competing sensor bridge listeners");
+  view.open();
+  assert.equal(opened,1,"Second tap must not double-open the gold sheet");
+  view.start(); view.pause(); view.resume();
+  assert.equal(unified.messages.length,0,"Canonical sensor lifecycle must be exclusive");
+  view.close();
+  assert.equal(closed,1,"Close must use canonical close lifecycle");
+  assert.equal(view.isOpen(),false);
+  console.log("Qibla native GPS + compass bridge + unified home/quick entry tests passed.");
 }
 main().catch(err=>{console.error(err);process.exitCode=1;});

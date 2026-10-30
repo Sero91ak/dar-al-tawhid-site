@@ -155,6 +155,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-qibla-unified-quick-entry-owner-20261030",
+      "at": "2026-10-30T09:39:00+01:00",
+      "approvedBy": "user-explicit-20261030-video-qibla-home-and-global-quick-functional-parity",
+      "reason": "Exact owner authorized correction only: the adult visitor and Dar Test pinned/quick Qibla entry must invoke the same existing gold full-screen Qibla controller with identical GPS, heading, orientation, touch and close controls. Add regression to App Health Check. No changes to prayer calculations, Swift, Kids, widgets, app secrets or core protection. This scope never overrides the separate Core Sensitive Change Lock; an owner GitHub PR review and tightly authorized core release are still mandatory before merging.",
+      "paths": [
+        "assets/qibla-quick-view.js",
+        "scripts/test-qibla-native-bridge.cjs",
+        ".github/workflows/app-health-check.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-31T21:00:00.000Z"
+    },
+    {
       "id": "adult-visitor-dashboard-v31-jummah-preserved-20261030",
       "at": "2026-10-30T07:15:00+01:00",
       "approvedBy": "user-explicit-push-live-dashboard-v31-20261030",

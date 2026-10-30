@@ -22,6 +22,9 @@ jobs:
       - name: Kids visitor account registration guard
         run: node scripts/test-kids-account-registration-v1.js
 
+      - name: Canonical Qibla pinned/start quick-view parity test
+        run: node scripts/test-qibla-native-bridge.cjs
+
       - name: Run app health check
         run: node scripts/app-health-check.js
 
