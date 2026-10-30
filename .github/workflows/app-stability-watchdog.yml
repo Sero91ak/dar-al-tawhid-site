@@ -1,10 +1,10 @@
 name: App Stabilität Watchdog
 
-# Autonome Reparatur für alle Bereiche: Live-Parität prüfen, bei Abweichung Deploy + Cache-Purge auslösen.
+# KOSTENSPERRE 2026-10-30: Kein automatischer 5-Minuten-Check und kein
+# unbeaufsichtigter Reparatur-Deploy. Manuelles Ausführen bleibt möglich.
+# Cloudflare-Budgetwarnungen sind KEINE echte Kostenobergrenze.
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "*/5 * * * *"
 
 permissions:
   contents: read
