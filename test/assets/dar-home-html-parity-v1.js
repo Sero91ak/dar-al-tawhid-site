@@ -520,6 +520,16 @@ function loadTestSmartProfileV1(){
   script.src="/test/assets/dar-smart-profile-v1.js?v=20261030-v5";script.defer=true;
   document.head.appendChild(script);
  }
+ /* Responsive daily knowledge and profile-adaptive navigation: only adult DĀR TEST. */
+ if(!document.getElementById("darDailyHubStylesV1")){
+  var dailyStyles=document.createElement("link");dailyStyles.rel="stylesheet";dailyStyles.id="darDailyHubStylesV1";
+  dailyStyles.href="/test/assets/dar-daily-hub-v1.css?v=20261030-v1";document.head.appendChild(dailyStyles);
+ }
+ if(!document.getElementById("darDailyHubScriptV1")){
+  var dailyScript=document.createElement("script");dailyScript.id="darDailyHubScriptV1";
+  dailyScript.src="/test/assets/dar-daily-hub-v1.js?v=20261030-v1";dailyScript.defer=true;
+  document.head.appendChild(dailyScript);
+ }
 }
 function init(){
  loadTestSmartProfileV1();
