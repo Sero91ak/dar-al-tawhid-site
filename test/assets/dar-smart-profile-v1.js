@@ -114,12 +114,17 @@ function themeOptions(p){
  }).join("")
 }
 function interestOptions(p){return TOPICS.filter(a=>!(p.gender==="man"&&a[0]==="women")&&!(p.gender==="woman"&&a[0]==="men")).map(a=>'<button type="button" class="dsp-chip'+(p.interests.includes(a[0])?" is-active":"")+'" data-dsp-interest="'+a[0]+'" aria-pressed="'+p.interests.includes(a[0])+'">'+a[1]+'</button>').join("")}
-function card(p){var rs=picks(p);
- var top='<section class="dsp-home" aria-label="Dein Wissensweg heute"><div class="dsp-section-head"><h2>Dein Wissensweg heute</h2><time>'+new Date().toLocaleDateString("de-DE",{timeZone:"Europe/Berlin",day:"2-digit",month:"long"})+'</time></div>';
- if(rs.length){top+='<div class="dsp-recommend-list">'+rs.map(function(x,i){return '<div class="dsp-recommend-row"><button type="button" class="dsp-recommend-open" data-dsp-post="'+esc(x.id)+'"><span class="dsp-number">0'+(i+1)+'</span><span class="dsp-recommend-copy"><strong>'+esc(x.title)+'</strong><small>'+esc(x.sub||"Qurʾān · Sunnah · Āthār")+'</small></span><span class="dsp-recommend-arrow" aria-hidden="true">›</span></button><button type="button" class="dsp-save'+(p.saved.includes(x.id)?" is-active":"")+'" data-dsp-save="'+esc(x.id)+'" aria-label="'+(p.saved.includes(x.id)?"Aus Merkliste entfernen":"Beitrag merken")+'" aria-pressed="'+p.saved.includes(x.id)+'">'+(p.saved.includes(x.id)?"★":"☆")+'</button></div>'}).join("")+'</div>'}
- else top+='<p class="dsp-empty">Passende veröffentlichte Beiträge werden geladen.</p>';
- top+='<p class="dsp-footnote">Aus vorhandenen Beiträgen für dich zusammengestellt.</p></section>';
- return top}
+function card(p){
+ var rs=picks(p),intro=p.gender==="woman"?"Für deinen Frauen-Wissensbereich":p.gender==="man"?"Für deinen Männer-Wissensweg":"Deine tägliche Wissensauswahl";
+ var top='<section class="dsp-home" aria-label="Dein persönlicher Wissensweg"><div class="dsp-section-head"><div><h2>Dein Wissensweg heute</h2><small class="dsp-dashboard-context">'+esc(intro)+'</small></div><time>'+new Date().toLocaleDateString("de-DE",{timeZone:"Europe/Berlin",day:"2-digit",month:"long"})+'</time></div>';
+ if(rs.length){top+='<div class="dsp-recommend-list">'+rs.map(function(x,i){
+  var category=x.gender==="woman"?"Frauenwissen":x.gender==="man"?"Männerwissen":x.tags.includes("quran")?"Qurʾān":x.tags.includes("fiqh")?"Fiqh":x.tags.includes("tawhid")?"Tawḥīd":"Wissen";
+  return '<div class="dsp-recommend-row"><button type="button" class="dsp-recommend-open" data-dsp-post="'+esc(x.id)+'"><span class="dsp-number">0'+(i+1)+'</span><span class="dsp-recommend-copy"><span class="dsp-mini-topic">'+esc(category)+'</span><strong>'+esc(x.title)+'</strong><small>'+esc(x.sub||"Qurʾān · Sunnah · Āthār")+'</small></span><span class="dsp-recommend-arrow" aria-hidden="true">›</span></button><button type="button" class="dsp-save'+(p.saved.includes(x.id)?" is-active":"")+'" data-dsp-save="'+esc(x.id)+'" aria-label="'+(p.saved.includes(x.id)?"Aus Merkliste entfernen":"Beitrag merken")+'" aria-pressed="'+p.saved.includes(x.id)+'">'+(p.saved.includes(x.id)?"★":"☆")+'</button></div>'
+ }).join("")+'</div>'}
+ else top+='<p class="dsp-empty">Aus den veröffentlichten Beiträgen sind für diese Auswahl derzeit keine passenden Empfehlungen verfügbar. Die vollständige Bibliothek bleibt über „Beiträge“ erreichbar.</p>';
+ top+='<p class="dsp-footnote">Täglich neu zusammengestellt · ausschließlich vorhandene, veröffentlichte Quellen.</p></section>';
+ return top
+}
 var expanded={interests:false,saved:false,settings:false};
 function expandPanel(key,title,sub,content){
  return '<div class="dsp-expand"><button type="button" class="dsp-expand-toggle" data-dsp-toggle="'+key+'" aria-expanded="'+Boolean(expanded[key])+'" aria-controls="dspExpand-'+key+'"><span><strong>'+title+'</strong><small>'+sub+'</small></span><span class="dsp-chevron" aria-hidden="true"></span></button><div id="dspExpand-'+key+'" class="dsp-expand-body"'+(expanded[key]?'':' hidden')+'>'+content+'</div></div>'
@@ -145,38 +150,70 @@ function notesMarkup(){var p=read();return '<div class="dsp-notes-dialog" role="
 function openNotes(){var o=document.getElementById("dspNotesOverlay");if(!o){o=document.createElement("div");o.id="dspNotesOverlay";o.className="dsp-notes-overlay";document.body.appendChild(o)}o.innerHTML=notesMarkup();o.hidden=false;document.body.classList.add("dsp-notes-open");var close=o.querySelector("[data-dsp-close-notes]");if(close)close.focus()}
 function closeNotes(){var o=document.getElementById("dspNotesOverlay");if(o){o.hidden=true;o.innerHTML=""}document.body.classList.remove("dsp-notes-open");var b=document.querySelector("[data-dsp-open-notes]");if(b)b.focus()}
 function syncLatest(p,root){
- var target=root.querySelector("#dhpPosts"),source=inventory();
- if(!target||!source.length)return;
- // Keep publication order; women's topics are not shown on the men's homepage.
- var list=(p.gender==="man"?source.filter(x=>!x.tags.includes("women")):source).slice(0,2);
- if(!list.length)return;
+ var target=root.querySelector("#dhpPosts"),source=eligible(p,inventory());
+ if(!target||!source.length){if(target)target.replaceChildren();return}
+ var focus=p.gender==="woman"?"woman":p.gender==="man"?"man":null;
+ var list=source.slice(0,5);
+ if(focus){var priority=list.find(x=>x.gender===focus)||source.find(x=>x.gender===focus);if(priority)list=[priority].concat(list.filter(x=>x.id!==priority.id))}
+ list=list.slice(0,2);
  var sig=p.gender+"|"+list.map(x=>x.id+"|"+x.title).join(";");
  var old=target.querySelector("[data-dhp-value]");
- if(target.dataset.dspRecentSig===sig&&old&&old.dataset.dhpValue===list[0].id&&target.children.length===list.length)return;
- target.replaceChildren();
- list.forEach(function(post,i){
-  var btn=document.createElement("button");btn.type="button";
-  btn.className=i?"dhp-article dhp-post-capsule":"dhp-panel dhp-feature dhp-post-capsule";
-  btn.dataset.dhpRoute="post";btn.dataset.dhpValue=post.id;
-  if(!i){var label=document.createElement("span");label.className="dhp-kicker";label.textContent="NEUESTE VERÖFFENTLICHUNG";btn.append(label)}
-  var title=document.createElement("h3");title.textContent=post.title;
-  var sub=document.createElement("p");sub.textContent=post.sub||"Qurʾān · Sunnah · Āthār";
-  if(i){var div=document.createElement("div");div.append(title,sub);btn.append(div)}else btn.append(title,sub);
-  target.append(btn)
- });
- target.dataset.dspRecentSig=sig;
+ if(target.dataset.dspRecentSig!==sig||!old||old.dataset.dhpValue!==list[0].id||target.children.length!==list.length){
+  target.replaceChildren();
+  list.forEach(function(post,i){
+   var btn=document.createElement("button");btn.type="button";
+   btn.className=i?"dhp-article dhp-post-capsule":"dhp-panel dhp-feature dhp-post-capsule";
+   btn.dataset.dhpRoute="post";btn.dataset.dhpValue=post.id;
+   if(!i){var lab=document.createElement("span");lab.className="dhp-kicker";lab.textContent=post.gender==="woman"?"FRAUENWISSEN":post.gender==="man"?"MÄNNERWISSEN":"AUS DER BIBLIOTHEK";btn.append(lab)}
+   var title=document.createElement("h3");title.textContent=post.title;
+   var sub=document.createElement("p");sub.textContent=post.sub||"Qurʾān · Sunnah · Āthār";
+   if(i){var div=document.createElement("div");div.append(title,sub);btn.append(div)}else btn.append(title,sub);
+   target.append(btn)
+  });
+  target.dataset.dspRecentSig=sig
+ }
+ var title=root.querySelector("#dhpPostsTitle");
+ if(title)title.textContent=p.gender==="woman"?"Frauenwissen & weitere Beiträge":p.gender==="man"?"Wissen für Männer & weitere Beiträge":"Neueste Veröffentlichungen"
 }
-function updateHome(p){var root=document.getElementById("darHomeHtmlParityV1");if(!root)return;
- var widget=root.querySelector(".dsp-mount");if(!widget){widget=document.createElement("div");widget.className="dsp-mount";var welcome=root.querySelector(".dhp-welcome");if(!welcome)return;welcome.insertAdjacentElement("afterend",widget)}
- var sig=owner()+"|"+today()+"|"+JSON.stringify([p.gender,p.chosen,p.palette,p.interests,p.saved,p.opened])+ "|" + inventory().length;
+function syncLibrary(p,root){
+ var container=root.querySelector("#dhpLibrary .dhp-library");if(!container)return;
+ var women=container.querySelector('[data-dhp-route="frauen"]'),aqida=container.querySelector('[data-dhp-route="topics"]');
+ if(women){women.hidden=p.gender==="man";if(p.gender==="woman"){
+  var wTitle=women.querySelector("b"),wSub=women.querySelector("small");
+  if(wTitle)wTitle.textContent="Frauenwissen";
+  if(wSub)wSub.textContent="Fiqh · Familie · Quellen";
+  if(container.firstElementChild!==women)container.prepend(women)
+ }}
+ if(aqida&&p.gender==="man"&&container.firstElementChild!==aqida)container.prepend(aqida);
+ var focus=homeFocus(p),tile=container.querySelector("#dspAudienceLibraryTile");
+ if(!focus){if(tile)tile.remove();return}
+ if(!tile){tile=document.createElement("button");tile.type="button";tile.className="dhp-library-tile dsp-audience-tile";tile.id="dspAudienceLibraryTile";tile.setAttribute("aria-label","Passenden Beitrag öffnen");var icon=document.createElement("img");icon.className="dsp-library-avatar";icon.alt="";tile.append(icon,document.createElement("b"),document.createElement("small"))}
+ var category=p.gender==="woman"?"Frauenwissen für dich":"Männerwissen für dich";
+ tile.dataset.dspPost=focus.id;tile.querySelector("img").src=image(p.gender);
+ tile.querySelector("b").textContent=category;tile.querySelector("small").textContent=focus.title;
+ if(container.firstElementChild!==tile)container.prepend(tile)
+}
+function updateHome(p){
+ var root=document.getElementById("darHomeHtmlParityV1");if(!root)return;
+ var widget=root.querySelector(".dsp-mount");
+ if(!widget){widget=document.createElement("div");widget.className="dsp-mount";var welcome=root.querySelector(".dhp-welcome");if(!welcome)return;welcome.insertAdjacentElement("afterend",widget)}
+ var listed=inventory(),digest=listed.slice(0,100).map(x=>x.id+"|"+x.title+"|"+x.gender).join(";");
+ var sig=owner()+"|"+today()+"|"+JSON.stringify([p.gender,p.chosen,p.interests,p.saved,p.opened])+"|"+listed.length+"|"+hashText(digest);
  if(widget.dataset.dspSig!==sig){widget.innerHTML=card(p);widget.dataset.dspSig=sig}
  root.dataset.smartGender=p.gender;
+ root.setAttribute("aria-label","DĀR AL TAWḤĪD · "+(p.gender==="woman"?"Frauen-Wissensbereich":p.gender==="man"?"Männer-Wissensbereich":"Alle Wissensbereiche"));
+ var intro=root.querySelector(".dhp-intro");
+ if(intro){
+  var content=p.gender==="woman"?"Dein persönlicher Zugang zu <strong>Frauenwissen</strong>, Qurʾān, Sunnah, Fiqh und überprüften Aussagen der frühen Gelehrten.":p.gender==="man"?"Dein persönlicher Wissensweg durch <strong>Tawḥīd</strong>, Qurʾān, Sunnah, Fiqh und die Aussagen der frühen Gelehrten.":"Entdecke <strong>Qurʾān</strong>, <strong>Sunnah</strong>, <strong>Āthār der frühen Imāme</strong> und geprüfte islamische Wissensgebiete.";
+  if(intro.dataset.dspCopy!==p.gender){intro.innerHTML=content;intro.dataset.dspCopy=p.gender}
+ }
+ var todayTitle=root.querySelector("#dhpTodayTitle");
+ if(todayTitle)todayTitle.textContent=p.gender==="woman"?"Heute für dich als Frau":p.gender==="man"?"Heute für dich als Mann":"Heute für dich";
+ var selected=picks(p),rec=todayFeature(p,selected.map(x=>x.id));
+ var todayName=root.querySelector("#dhpTodayName"),todayRow=root.querySelector("#dhpTodayArticle");
+ if(todayName&&todayRow&&rec){todayName.textContent=rec.title;todayRow.dataset.dhpRoute="post";todayRow.dataset.dhpValue=rec.id}
  syncLatest(p,root);
- // Do not delete or move native routes. Women's library shortcut remains in Mehr.
- var women=root.querySelector('.dhp-library-tile[data-dhp-route="frauen"]');
- if(women)women.hidden=p.gender==="man";
- var rec=picks(p)[0],todayName=root.querySelector("#dhpTodayName"),todayRow=root.querySelector("#dhpTodayArticle");
- if(rec&&todayName&&todayRow){todayName.textContent=rec.title;todayRow.dataset.dhpRoute="post";todayRow.dataset.dhpValue=rec.id}
+ syncLibrary(p,root)
 }
 function syncHeaderAvatar(p){document.querySelectorAll("#darTestBrandHeaderV1 .dtbh-action-account .dtbh-icon-3d").forEach(function(icon){var src=image(p.gender);if(icon.getAttribute("src")!==src)icon.src=src;icon.classList.add("dsp-figure-icon");var btn=icon.closest("button");if(btn){btn.setAttribute("aria-label","Profil wählen: "+label(p.gender));btn.setAttribute("title","Profil: "+label(p.gender))}})}
 function updateAccount(p){if(!document.body.classList.contains("is-account-route"))return;
