@@ -2,11 +2,13 @@ name: Visitor Profile – Account Lock and Quick Dashboard
 on:
   push:
     branches: [main]
+  pull_request:
     paths:
       - 'assets/dar-visitor-profile-picker-v1.js'
       - 'assets/dar-visitor-profile-picker-v1.css'
       - 'assets/dar-visitor-smart-profile-v1.js'
       - 'assets/dar-visitor-smart-profile-v1.css'
+      - 'assets/dar-account-visibility.js'
       - 'assets/dar-visitor-onboarding-v1.js'
       - 'assets/dar-home-test-parity-visitor.js'
       - 'cloudflare/site-router.js'
@@ -27,5 +29,6 @@ jobs:
         run: |
           node --check assets/dar-visitor-profile-picker-v1.js
           node --check assets/dar-visitor-smart-profile-v1.js
+          node --check assets/dar-account-visibility.js
           node --check assets/dar-visitor-onboarding-v1.js
           node --check assets/dar-home-test-parity-visitor.js
