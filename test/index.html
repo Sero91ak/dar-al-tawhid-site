@@ -10452,8 +10452,122 @@ html[data-theme="light"] .quiz-shell.quiz-shell-pro{
   }
 }
 </style>
+<style id="darWideStageTestV1">
+/* DAR_WIDE_STAGE_TEST_V1 · nur Dar Test.
+   Handy hochkant: eine Spalte.
+   Fold offen, iPad quer, Duo aufgeklappt (breit und quer): Liste links, Inhalt rechts. */
+#darWideList{display:none}
+html.dar-wide-stage #darWideSplit{
+  display:flex;
+  align-items:stretch;
+  gap:12px;
+  min-width:0;
+}
+html.dar-wide-stage #darWideList{
+  display:block;
+  flex:0 0 34%;
+  width:34%;
+  min-width:260px;
+  max-width:420px;
+  max-height:calc(100dvh - 132px);
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+  padding:8px 10px 24px;
+  box-sizing:border-box;
+}
+html.dar-wide-stage #appView{
+  flex:1 1 auto;
+  min-width:0;
+  max-height:calc(100dvh - 132px);
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+}
+html.dar-wide-stage #darWideList,
+html.dar-wide-stage #appView{
+  font-size:16px;
+  line-height:1.45;
+}
+html.dar-wide-stage #darWideList .dar-wide-fallback{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+html.dar-wide-stage #darWideList .dar-wide-fallback button{
+  text-align:left;
+  min-height:44px;
+  font-size:16px;
+}
+</style>
 <link rel="stylesheet" href="/assets/dar-premium-depth.css?v=2">
 <link rel="stylesheet" href="/assets/dar-bottom-nav-glass.css?v=2">
+<script id="darWideStageTestScriptV1">
+/* DAR_WIDE_STAGE_TEST_V1 */
+(function(){
+  var DETAIL={
+    post:1,"quran-surah":1,"quran-topic":1,dua:1,"dua-cat":1,"news-detail":1,
+    scholar:1,book:1,topic:1,"bibliothek-detail":1,"bibliothek-reader":1
+  };
+  var lastList="";
+  function wide(){
+    var w=window.innerWidth||0,h=window.innerHeight||0;
+    return w>=840&&w>h;
+  }
+  function currentView(){
+    var hash=String(location.hash||"#home").replace(/^#/,"");
+    return (hash.split("/")[0]||"home");
+  }
+  function fallbackList(){
+    var items=[["home","Start"],["quran","Qurʾān"],["feed","Beiträge"],["quiz","Quiz"],["duas","Duʿāʾ"],["books","Bibliothek"],["more","Mehr"],["prayer","Gebetszeiten"]];
+    return '<div class="dar-wide-fallback"><strong>Bereiche</strong>'+items.map(function(row){
+      return '<button type="button" data-nav="'+row[0]+'">'+row[1]+'</button>';
+    }).join("")+"</div>";
+  }
+  function withoutIds(html){
+    var box=document.createElement("div");
+    box.innerHTML=html;
+    box.querySelectorAll("[id]").forEach(function(el){el.removeAttribute("id");});
+    return box.innerHTML;
+  }
+  window.__darWideStageSync=function(){
+    var app=document.getElementById("appView");
+    if(!app)return;
+    var split=document.getElementById("darWideSplit");
+    var list=document.getElementById("darWideList");
+    if(!split){
+      split=document.createElement("div");
+      split.id="darWideSplit";
+      list=document.createElement("aside");
+      list.id="darWideList";
+      list.setAttribute("aria-label","Liste");
+      app.parentNode.insertBefore(split,app);
+      split.appendChild(list);
+      split.appendChild(app);
+      list.addEventListener("click",function(ev){
+        var el=ev.target&&ev.target.closest?ev.target.closest("[data-nav]"):null;
+        if(!el||!list.contains(el))return;
+        var view=el.getAttribute("data-nav");
+        if(!view||typeof window.navigate!=="function")return;
+        ev.preventDefault();
+        ev.stopPropagation();
+        window.navigate(view,el.getAttribute("data-value")||"");
+      });
+    }
+    var on=wide();
+    document.documentElement.classList.toggle("dar-wide-stage",on);
+    if(!on)return;
+    var view=currentView();
+    if(DETAIL[view]){
+      if(!list.innerHTML)list.innerHTML=lastList||fallbackList();
+      return;
+    }
+    lastList=withoutIds(app.innerHTML||"");
+    list.innerHTML=lastList||fallbackList();
+  };
+  window.addEventListener("resize",function(){
+    if(window.__darWideStageSync)window.__darWideStageSync();
+  });
+})();
+</script>
 </head>
 <body class="has-bottom-nav">
 <div class="top-edge-fade" id="topEdgeFade" aria-hidden="true"></div>
@@ -15056,6 +15170,7 @@ function render(){
     else if(currentRoute.view==="statistik"){location.hash="more";return}
     else html=renderHome();
     $("appView").innerHTML=html;
+    if(window.__darWideStageSync)window.__darWideStageSync();
     if(currentRoute.view==="feed")stripFeedPageHeader();
     const appView=$("appView");
     const fromGesture=window.__tabSwipeFromGesture;
