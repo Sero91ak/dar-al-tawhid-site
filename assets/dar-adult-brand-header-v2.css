@@ -439,10 +439,17 @@ html.dar-adult-global-brand-ready body.is-dua-route #appView .dua-hub > :is(.mai
    - Only one in-flow brand spacer; native body inset must not duplicate it
    - Keep every 3D icon as its real clickable 44px capsule
    - Conservative width/orientation fallback: no experimental fold API needed */
-html.dar-ios-native-app.dar-adult-global-brand-ready body:is(
- .is-home-route,.is-area-route,.is-more-route,.is-quiz-route
-):not(.is-feed-fullscreen){
+/* NATIVE_HERO_TOP_SEAM_V2 · original iOS class is placed on BODY by
+   WebAppView.swift, not on HTML. All adult routes share one in-flow brand
+   spacer; a second native body safe-top caused a blank band above Heroes.
+   Keep OS status pixels inside the fixed header; preserve Hero dimensions. */
+html.dar-adult-global-brand-ready body.dar-ios-native-app.has-bottom-nav:not(.is-feed-fullscreen){
   padding-top:0!important;
+}
+/* Browser/PWA also use the same brand spacer; do not add another top inset
+   when the standalone visitor shell is running without the native class. */
+html.dar-adult-global-brand-ready body.has-bottom-nav #appView.view{
+  margin-top:0!important;
 }
 html.dar-adult-global-brand-ready #darAdultBrandHeaderV2{
   box-sizing:border-box!important;
