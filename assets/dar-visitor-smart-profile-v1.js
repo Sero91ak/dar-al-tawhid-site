@@ -201,7 +201,7 @@ function expandPanel(key,title,sub,content){
 function accountPanel(p){
  var g=p.gender,items=inventory(),recommended=picks(p).slice(0,3),recent=(p.opened||[]).map(function(id){return items.find(x=>x.id===id)}).filter(Boolean).slice(0,3);
  var area=g==="woman"?"Dein Frauen-Wissensbereich":g==="man"?"Dein Männer-Wissensbereich":"Dein persönlicher Wissensbereich";
- var profile=label(g),isSignedIn=!!account();
+ var profile=label(g),isSignedIn=!!account(),appFavorites=typeof savedIds==="function"?savedIds().length:0;
  var suggestion=recommended.length?recommended.map(function(x,i){
   var category=x.gender==="woman"?"Frauenwissen":x.gender==="man"?"Männerwissen":x.tags.includes("quran")?"Qurʾān":x.tags.includes("fiqh")?"Fiqh":x.tags.includes("tawhid")?"Tawḥīd":"Wissen";
   return '<div class="dsp-my-recommend"><button type="button" data-dsp-post="'+esc(x.id)+'"><small>'+esc(category)+' · 0'+(i+1)+'</small><strong>'+esc(x.title)+'</strong><span>'+esc(x.sub||"Aus den veröffentlichten Beiträgen")+'</span></button><button type="button" class="dsp-my-save" data-dsp-save="'+esc(x.id)+'" aria-pressed="'+p.saved.includes(x.id)+'" aria-label="'+(p.saved.includes(x.id)?"Aus Merkliste entfernen":"Beitrag merken")+'">'+(p.saved.includes(x.id)?"★":"☆")+'</button></div>'
@@ -209,7 +209,7 @@ function accountPanel(p){
  var history=recent.length?recent.map(function(x){return '<button type="button" class="dsp-my-history-row" data-dsp-post="'+esc(x.id)+'"><span>'+esc(x.title)+'</span><span aria-hidden="true">›</span></button>'}).join(""):'<p class="dsp-empty">Öffne einen empfohlenen Beitrag. Hier kannst du später direkt daran anknüpfen.</p>';
  return '<section id="darTestSmartAccount" class="dsp-account dsp-my-dar" data-dsp-gender="'+g+'" aria-label="Mein DĀR · persönliches Dashboard">'+
  '<header class="dsp-account-heading dsp-my-hero"><div class="dsp-account-heading-copy"><span class="dsp-eyebrow">MEIN DĀR · DEIN WISSENSRAUM</span><h2>Mein DĀR</h2><p>'+esc(area)+' · '+(isSignedIn?'mit deinem Konto verbunden':'ohne Anmeldung nutzbar')+'</p><button type="button" class="dsp-my-profile-button" data-dsp-switch-profile>Wissensprofil: '+esc(profile)+' <span aria-hidden="true">›</span></button></div><div class="dsp-account-figure" aria-hidden="true">'+iconSpan(g)+'</div></header>'+
- '<section class="dsp-my-stats" aria-label="Deine persönliche Übersicht"><div><strong>'+p.saved.length+'</strong><span>Lokale Merkliste</span></div><div><strong>'+p.notes.length+'</strong><span>Private Notizen</span></div><div><strong>'+recent.length+'</strong><span>Zuletzt geöffnet</span></div></section>'+
+ '<section class="dsp-my-stats" aria-label="Deine persönliche Übersicht"><div><strong>'+p.saved.length+'</strong><span>Lokale Merkliste</span></div><div><strong>'+p.notes.length+'</strong><span>Private Notizen</span></div><div><strong>'+appFavorites+'</strong><span>App-Favoriten</span></div><div><strong>'+recent.length+'</strong><span>Zuletzt geöffnet</span></div></section>'+
  '<section class="dsp-my-section" aria-labelledby="dspMyActionsTitle"><div class="dsp-my-section-heading"><h3 id="dspMyActionsTitle">Deine Schnellzugriffe</h3><small>Direkt dort fortfahren, wo du möchtest</small></div><div class="dsp-my-actions">'+
  '<button type="button" data-dsp-open-notes><span class="dsp-my-action-icon">✎</span><strong>Meine Notizen</strong><small>Gedanken festhalten</small></button>'+
  '<button type="button" data-dsp-open-saved><span class="dsp-my-action-icon">☆</span><strong>Meine Merkliste</strong><small>Beiträge wiederfinden</small></button>'+
