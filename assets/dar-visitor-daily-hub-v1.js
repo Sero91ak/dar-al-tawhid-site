@@ -96,7 +96,7 @@ function modalMarkup(){
 function open(){var x=dialog();lastFocus=document.activeElement;x.innerHTML=modalMarkup();x.hidden=false;x.setAttribute("aria-hidden","false");x.querySelector(".ddh-dialog").focus({preventScroll:true})}
 function close(skip){var x=dialog();if(skip&&!Number.isInteger(entry().answer))patch({skipped:true,seen:true});x.hidden=true;x.innerHTML="";x.setAttribute("aria-hidden","true");if(lastFocus&&lastFocus.isConnected&&lastFocus.focus)lastFocus.focus({preventScroll:true});syncCard()}
 function maybePrompt(){
- if(!homeRoot()||document.hidden||!profile())return;
+ if(!homeRoot()||document.hidden||!profile()||window.DAR_VISITOR_ONBOARDING_ACTIVE)return;
  var e=entry(),s=state();
  if(s.automaticOff||e.seen||e.skipped||Number.isInteger(e.answer))return;
  if(document.querySelector("#dtbhProfilePopover:not([hidden]),#dspNotesOverlay:not([hidden]),[role=dialog][aria-modal=true]"))return;
