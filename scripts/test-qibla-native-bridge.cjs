@@ -121,6 +121,53 @@ async function main() {
                   "../test/assets/dar-home-html-parity-v1.js"]){
     new vm.Script(fs.readFileSync(path.join(__dirname,f),"utf8"),{filename:f});
   }
+  // Exercise the private shared-sheet state transitions without live GPS
+  // or network calls. Failed GPS attempts may never discard a manual city.
+  const validCoordinate = (v,max) => v!==null && v!==undefined &&
+    String(v).trim()!=="" && Number.isFinite(Number(v)) && Math.abs(Number(v))<=max;
+  let state={lat:52.52,lon:13.405,city:"Berlin",locationMode:"manual"};
+  let recorded=[],lastDisplayed=null,lastMessage="";
+  const sheetUi={root:{querySelector:()=>({hidden:false})}};
+  const sheetRoot={
+    getPrayerSettings:()=>({...state}),
+    setPrayerSettings:patch=>{state={...state,...patch};recorded.push(patch);}
+  };
+  const updateUi=loc=>{lastDisplayed=loc};
+  const notify=msg=>{lastMessage=msg};
+  const a=source.indexOf("  function saveSelectedLocation(");
+  const b=source.indexOf("  function saveManualCoordinates(",a);
+  assert.ok(a>=0&&b>a,"Manual location helper not found");
+  const save=new Function("root","ui","validCoordinate","applyLoc","locationStatus",
+    source.slice(a,b)+"\nreturn saveSelectedLocation;")(
+    sheetRoot,sheetUi,validCoordinate,updateUi,notify);
+  assert.equal(save("","", "Empty"),false,"Empty coordinates must be rejected");
+  assert.equal(recorded.length,0,"An invalid city must not overwrite prayer location");
+  assert.equal(save("50.7374","7.0982","Bonn"),true);
+  assert.equal(state.locationMode,"manual");
+  assert.equal(state.city,"Bonn");
+  assert.equal(state.lat,50.7374);
+  assert.equal(lastDisplayed.lon,7.0982);
+
+  const c=source.indexOf("  async function switchToGps(");
+  const d=source.indexOf("  function openAppLocationSettings(",c);
+  assert.ok(c>=0&&d>c,"GPS mode switch helper not found");
+  const gpsFixture={location:{refresh:async()=>({lat:50.74,lon:7.12,city:"Bonn",source:"geo"})}};
+  const switchGps=new Function("root","ui","engine","validCoordinate","applyLoc",
+    "locationStatus","QiblaQuickView",
+    source.slice(c,d)+"\nreturn switchToGps;")(
+    sheetRoot,sheetUi,gpsFixture,validCoordinate,updateUi,notify,{isOpen:()=>true});
+  await switchGps();
+  assert.equal(state.locationMode,"auto","Explicit GPS selection must switch location mode");
+  assert.equal(state.lat,50.74);
+  assert.equal(state.lon,7.12);
+
+  const saved={...state,city:"Köln",locationMode:"manual"};
+  state=saved;
+  gpsFixture.location.refresh=async()=>{throw Error("GPS unavailable")};
+  await switchGps();
+  assert.equal(state.locationMode,"manual","Failed GPS must preserve manual place");
+  assert.equal(state.city,"Köln","Failed GPS must preserve original city");
+  assert.match(lastMessage,/bisherige Stadt bleibt erhalten/);
   console.log("Qibla native GPS + compass bridge regression tests passed.");
 }
 main().catch(err=>{console.error(err);process.exitCode=1;});
