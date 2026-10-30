@@ -7,8 +7,8 @@
 const fs=require("node:fs"), assert=require("node:assert/strict"),vm=require("node:vm");
 const read=p=>fs.readFileSync(p,"utf8");
 const lanes=[
- {name:"Besucher",css:read("assets/dar-adult-brand-header-v2.css"),js:read("assets/dar-adult-brand-header-v2.js"),token:"dar-adult-brand-header-v2.css?v=20261030-hero-route-matrix-v3"},
- {name:"Test",css:read("test/assets/dar-test-premium-header-v2.css"),js:read("test/assets/dar-test-premium-header-v2.js"),token:"dar-test-premium-header-v2.css?v=20261030-hero-route-matrix-v3"}
+ {name:"Besucher",css:read("assets/dar-adult-brand-header-v2.css"),js:read("assets/dar-adult-brand-header-v2.js"),token:"dar-adult-brand-header-v2.css?v=20261030-hero-route-matrix-v4"},
+ {name:"Test",css:read("test/assets/dar-test-premium-header-v2.css"),js:read("test/assets/dar-test-premium-header-v2.js"),token:"dar-test-premium-header-v2.css?v=20261030-hero-route-matrix-v4"}
 ];
 const routes=[
  "frauen","topics","topic","post","hadith","dua","settings",
@@ -29,6 +29,9 @@ for(const lane of lanes){
  const css=lane.css;
  assert(css.includes("GLOBAL_HERO_ROUTE_TOP_SEAM_V3"),lane.name+" route matrix missing");
  assert(css.includes("RELATIVE_HERO_STAYS_IN_FLOW_V4"),lane.name+" relative settings bug not fixed");
+ assert(css.includes("PRIMARY_PHOTO_SEAM_NO_MARGIN_V5"),lane.name+" quiz/more/topics top gutter not cleared");
+ assert(css.includes("FRAUEN_DIRECT_STICKY_FALLBACK_V6"),lane.name+" first-paint Frauen photo can fall under fixed header");
+ assert(css.includes("not(.is-quran-reader-route):not(.is-quran-overview):not(.is-ilm-chat-route)"),lane.name+" specialist reader exceptions absent");
  assert(css.includes("NATIVE_HERO_TOP_SEAM_V2")||css.includes("TEST_NATIVE_HERO_TOP_SEAM_V2"),lane.name+" double safe-top fix missing");
  assert(css.includes("body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-overview):not(.is-ilm-chat-route) > .app"),lane.name+" outer app gap guard missing");
  const match=css.match(/body\.has-bottom-nav:is\(([^)]*)\) #appView\.view\{/g);
@@ -47,7 +50,7 @@ for(const lane of lanes){
 }
 for(const [p,source] of [["Besucher",router],["Test",testWorker]]){
  const file=p==="Besucher"?"dar-adult-brand-header-v2.css":"dar-test-premium-header-v2.css";
- assert(source.includes(file+"?v=20261030-hero-route-matrix-v3"),p+" header CSS cache not refreshed");
+ assert(source.includes(file+"?v=20261030-hero-route-matrix-v4"),p+" header CSS cache not refreshed");
 }
 const boundary=read("assets/dar-adult-top-scroll-boundary-v1.js");
 assert.equal(boundary,read("test/assets/dar-adult-top-scroll-boundary-v1.js"),"Test and visitor scroll edge must match");
