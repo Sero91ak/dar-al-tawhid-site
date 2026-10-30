@@ -250,3 +250,34 @@
 @media(max-width:365px){
  #darTestBrandHeaderV1[data-premium-header-v2="ready"] .dtbh-action-account .dtbh-icon-3d{width:35px!important;height:38px!important}
 }
+
+
+/* TEST_HEADER_OCCLUSION_LAYOUT_V1
+   Shared native-like header overlays the page at z-index. All sticky inner
+   heads and scroll-to-elements must clear its measured physical bottom.
+   No blanket body padding (the existing in-flow spacer stays authoritative).
+   Scope /test adult only; untouched Kids/visitor component trees. */
+html.dar-test-premium-header-v2{
+  scroll-padding-top:calc(var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px)) + 12px)!important;
+}
+html.dar-test-premium-header-v2 body.is-ilm-chat-route #appView .ilm-chat-header{
+  position:sticky!important;
+  top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px))!important;
+  scroll-margin-top:calc(var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px)) + 12px)!important;
+}
+/* Existing late Majlis CSS also uses top:0, including its dynamic JS style.
+   This ID-scoped rule wins the cascade without changing its 3D controls. */
+html.dar-test-premium-header-v2 body.is-ilm-chat-route #appView .ilm-message-list{
+  scroll-padding-top:calc(var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px)) + 84px)!important;
+}
+html.dar-test-premium-header-v2 body.is-ilm-chat-route #appView :is(.ilm-user-row,.ilm-assistant-message,.ilm-history-archive,.ilm-welcome-card){
+  scroll-margin-top:calc(var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px)) + 84px)!important;
+}
+html.dar-test-premium-header-v2 body #appView :target{
+  scroll-margin-top:calc(var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px)) + 12px)!important;
+}
+@media (orientation:landscape) and (max-height:560px){
+ html.dar-test-premium-header-v2 body.is-ilm-chat-route #appView .ilm-chat-header{
+   top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px))!important;
+ }
+}
