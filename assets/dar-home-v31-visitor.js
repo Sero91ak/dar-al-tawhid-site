@@ -162,6 +162,8 @@ function sync(){
   lastPosts="";lastCity="";
   return;
  }
+ // Activates the existing V3.1 scoped CSS: required for compact card, search and icon geometry.
+ document.documentElement.classList.add("dar-home-v3");
  const shell=document.querySelector("#appView .home-v380-shell");
  if(!shell)return;
  /* Preserve existing visitor header prayer and complete Salām without reordering. */
