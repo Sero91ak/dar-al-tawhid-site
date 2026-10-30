@@ -155,17 +155,6 @@
   ],
   "unlockedScopes": [
     {
-      "id": "adult-gps-owner-approved-release-20261030",
-      "at": "2026-10-30T11:40:00+01:00",
-      "approvedBy": "user-explicit-20261030-fix-gps-and-protect-repository",
-      "reason": "Einmalige, ausdruecklich durch Eigentuemer angeordnete Freigabe: nur die in PR #1561 gemergte Core-Sicherheitspruefung und GPS-Regression ins Besucher-Produktionsdeploy uebernehmen. Keine generelle Entsperrung, keine neuen GPS- oder Push-Aenderungen. Scope nach erfolgreichem Deploy entfernen.",
-      "paths": [
-        "scripts/core-sensitive-change-lock.cjs",
-        "scripts/test-mobile-location-fresh-fix.cjs"
-      ],
-      "expiresAt": "2026-10-30T18:00:00.000Z"
-    },
-    {
       "id": "dar-test-smart-profiles-women-men-personalization-20261030",
       "at": "2026-10-30T10:00:00+01:00",
       "approvedBy": "user-explicit-implement-smart-personalization-in-dar-test-20261030",
