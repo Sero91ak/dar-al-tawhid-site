@@ -355,6 +355,8 @@ function isDynamicGermanUi(value){
   /^(Aussagen im Qurʾān|Aussagen in authentischer Sunnah) · \d+$/.test(value)||
   /^Belegte Aussagen · \d+$/.test(value)||
   /^\d+ Quellen · Quellen anzeigen$/.test(value)||
+  /^\d+ (?:Inhalt|Inhalte)$/.test(value)||
+  /^\d+ geprüfte Berichte$/.test(value)||
   /^\d+\s+(Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt|Funktionen|Ergebnisse)$/.test(value)||
   /^\d+\s+Āyāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
   /^\d+\s*·\s*\d+\s+Ayāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
@@ -970,6 +972,36 @@ function translateExact(value,language="tr"){
   };
   return forms[language]&&show?forms[language]+" · "+show:null;
  }
+ const contentCount=value.match(/^(\d+) (Inhalt|Inhalte)$/);
+ if(contentCount){
+  const n=contentCount[1];
+  const forms={
+   ar:n==="1"?"محتوى واحد":n+" محتويات",
+   en:n==="1"?"1 item":n+" items",
+   tr:n+" içerik",
+   ku:n+" naverok",
+   ckb:n==="1"?"ناوەرۆکێک":n+" ناوەرۆک",
+   bs:n==="1"?"1 sadržaj":n+" sadržaja",
+   fr:n==="1"?"1 contenu":n+" contenus",
+   es:n==="1"?"1 contenido":n+" contenidos"
+  };
+  return forms[language]||null;
+ }
+ const reviewedReports=value.match(/^(\d+) geprüfte Berichte$/);
+ if(reviewedReports){
+  const n=reviewedReports[1];
+  const forms={
+   ar:n==="1"?"تقرير مفحوص واحد":n+" تقارير مفحوصة",
+   en:n==="1"?"1 reviewed report":n+" reviewed reports",
+   tr:n+" incelenmiş rapor",
+   ku:n+" raporên kontrolkirî",
+   ckb:n==="1"?"ڕاپۆرتێکی پشکنراو":n+" ڕاپۆرتی پشکنراو",
+   bs:n==="1"?"1 provjeren izvještaj":n+" provjerena izvještaja",
+   fr:n==="1"?"1 rapport vérifié":n+" rapports vérifiés",
+   es:n==="1"?"1 informe revisado":n+" informes revisados"
+  };
+  return forms[language]||null;
+ }
  const dynamicLabels={
   Veröffentlichungen:{ar:"منشورات",ku:"weşan",ckb:"بڵاوکراوە",bs:"publikacija",fr:"publications",es:"publicaciones"},
   Beiträge:{ar:"مقالات",ku:"nivîs",ckb:"بابەت",bs:"tekstova",fr:"articles",es:"artículos"},
@@ -1233,7 +1265,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-26";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-27";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

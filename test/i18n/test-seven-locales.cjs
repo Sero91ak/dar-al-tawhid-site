@@ -96,6 +96,11 @@ assert.equal(w.DarTestTurkishUI.translateValue("Direkte Antwort","en"),"Direct a
 assert.equal(w.DarTestTurkishUI.translateValue("Belegte Aussagen · 4","fr"),"Propos établis · 4");
 assert.equal(w.DarTestTurkishUI.translateValue("3 Quellen · Quellen anzeigen","es"),"3 fuentes · "+locales.translations.es["Quellen anzeigen"]);
 assert.equal(w.DarTestTurkishUI.translateValue("Geprüfte Beziehungen","ar"),"علاقات تم فحصها");
+assert.equal(w.DarTestTurkishUI.translateValue("Diese Antwort ist nicht sichtbar.","en"),"This answer is not visible.");
+assert.equal(w.DarTestTurkishUI.translateValue("Links","ku"),"Çep");
+assert.equal(w.DarTestTurkishUI.translateValue("1 Inhalt","fr"),"1 contenu");
+assert.equal(w.DarTestTurkishUI.translateValue("4 geprüfte Berichte","es"),"4 informes revisados");
+assert.equal(w.DarTestTurkishUI.translateValue("Gespeichert: links · Auf schmalen Displays bleibt die Leiste automatisch unten.","ar"),"محفوظ: اليسار · على الشاشات الضيقة يبقى الشريط تلقائيًا في الأسفل.");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
