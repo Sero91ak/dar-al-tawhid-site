@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "id": "dar-wissensbereich-themen",
+  "effectiveDate": "2026-10-30",
+  "owner": "DĀR AL TAWḤĪD Zentrale",
+  "status": "binding",
+  "automation": "existing central only, never create second",
+  "commandMap": {
+    "Wissensbereich Themen": {
+      "operation": "inventory-and-gap-analysis",
+      "publication": false,
+      "notification": false
+    },
+    "Wissensbereich Thema erstellen": {
+      "operation": "sourced-verified-draft",
+      "targets": [
+        "woman",
+        "man"
+      ],
+      "publication": false,
+      "notification": false
+    },
+    "Wissensbereich live pushen": {
+      "operation": "publish-approved-drafts-over-existing-DAR-Admin",
+      "notification": "separate explicit authorized delivery only"
+    }
+  },
+  "targetProfiles": {
+    "woman": {
+      "tab": "frauen",
+      "topics": [
+        "Frauenfiqh",
+        "Ḥayḍ, Nifās, Istiḥāḍah",
+        "Gebet und Fasten",
+        "Ehe/Familie",
+        "Kleidung/Ḥijāb/Niqāb",
+        "Mutterschaft: Fiqh",
+        "Ṣaḥābiyyāt",
+        "Lernreihen"
+      ]
+    },
+    "man": {
+      "tab": "topics",
+      "label": "Entdecken",
+      "topics": [
+        "Gebet/Jumuʿah",
+        "Ehe/Vaterschaft",
+        "Unterhalt/Zakāt",
+        "Adab/Verantwortung",
+        "Ṣaḥābah",
+        "Fiqh/Uṣūl",
+        "Lernreihen"
+      ]
+    },
+    "neutral": {
+      "tab": "topics",
+      "label": "Entdecken",
+      "targetedKnowledgeNotifications": false
+    }
+  },
+  "sharedTopics": [
+    "Qurʾān",
+    "Sunnah",
+    "Tafsīr",
+    "Ḥadīṯ/Āthār",
+    "Tawḥīd/ʿAqīdah",
+    "Duʿāʾ",
+    "Fiqh",
+    "Akhlāq/Adab",
+    "Quellenkritik"
+  ],
+  "sourceInventory": [
+    "content/posts/posts-index.json",
+    "content/posts/*.md",
+    "q/_registry/shortlinks.json",
+    "q/*/index.html",
+    "data/library-publications.json",
+    "published learning lessons",
+    "existing pending drafts",
+    "published locales/versions"
+  ],
+  "noDuplicates": {
+    "order": [
+      "canonical post ID",
+      "existing Q link and precise source",
+      "normalized and transliterated title",
+      "original quotation fingerprint",
+      "semantic similarity review"
+    ],
+    "exactMatch": "reuse canonically; add target audience taxonomy without creating new post or Q",
+    "nearMatch": "block and review manually, do not silently create duplicate",
+    "shared": "one canonical post ID and Q link may appear in both female and male topics"
+  },
+  "scholarlyGates": [
+    "verified precise primary Arabic source and wording",
+    "direct source URL/book reference",
+    "accurate attributed German translation",
+    "Isnād/ʿIlal verification when relevant",
+    "explicit difference of evidenced opinions",
+    "source page Q link and corresponding existing learning lesson",
+    "editorial and translation approval"
+  ],
+  "draftContract": {
+    "pathPattern": "content/admin/wissensbereich-themen-drafts/YYYY-MM-DD-topic.json",
+    "schemaVersion": 1,
+    "required": [
+      "topic",
+      "targets",
+      "status",
+      "reuse",
+      "proposed"
+    ],
+    "statusMustBe": "draft",
+    "reuseEntry": {
+      "postId": "existing-canonical-id",
+      "audiences": [
+        "woman",
+        "man"
+      ]
+    },
+    "proposedEntry": {
+      "id": "new-unique-post-id",
+      "title": "title",
+      "audience": "woman or man or both",
+      "qRefs": [
+        1
+      ],
+      "sourceChecked": false,
+      "editoriallyApproved": false
+    },
+    "checkCommand": "node scripts/wissensbereich-themen.cjs check <draft.json>",
+    "scanCommand": "node scripts/wissensbereich-themen.cjs scan \"Thema\"",
+    "noAutoPublish": true
+  },
+  "ai": {
+    "state": "retrieval and workflow design only; no proprietary generative AI service claimed",
+    "localFirst": true,
+    "corpus": "canonical published and verified adult content only, incremental index by ID/contentHash/locale/target/source",
+    "capabilities": [
+      "search existing corpus",
+      "find scholarly sources",
+      "explain known source-backed topics",
+      "track corpus changes and missing topics"
+    ],
+    "limitations": [
+      "No source fabrication or unaudited fatwa",
+      "no undisclosed paid AI model calls",
+      "no auto-sharing private profiles/notes",
+      "no guaranteed semantic dedupe without review"
+    ],
+    "providerRequiresSeparateApproval": true
+  },
+  "publication": {
+    "existingGlobalPostRuleUnchanged": true,
+    "publicationBy": "existing DAR Admin publisher, explicit content approval",
+    "syncIndexAndLiveVerify": true,
+    "noImplicitDeviceNotification": true,
+    "separateOneSignalAuthorizationRequired": true
+  },
+  "notification": {
+    "implementationStatus": "not yet live: existing profile selection is stored locally and cannot reliably target OneSignal recipients",
+    "targetedAudiences": [
+      "woman",
+      "man"
+    ],
+    "neutralKnowledgePush": false,
+    "registration": "explicit voluntary consent, server/device synced per-installation audience tags, opt-in, revoke stale tag when switching or neutral",
+    "delivery": "verified matching audience AND knowledge-notification opt-in AND adult app; fail closed if unknown",
+    "neverFallbackTo": [
+      "Subscribed Users",
+      "DAR_PUSH",
+      "all",
+      "any unverified audience"
+    ],
+    "prerequisites": [
+      "existing push-lanes-lock password",
+      "push-global-freigabe",
+      "applicable lane unlock",
+      "separately approved notification text and audience",
+      "verified target subscription",
+      "live approved content",
+      "idempotency and audit"
+    ],
+    "noChangeToExistingGlobalNotifications": true,
+    "protectedPaths": [
+      "content/admin/push-lanes-lock.json",
+      "cloudflare/post-push-admin.js",
+      "cloudflare/ios-native-push-register.js"
+    ]
+  },
+  "scope": {
+    "included": [
+      "adult visitor",
+      "DĀR Admin editorial path",
+      "existing central rules"
+    ],
+    "excluded": [
+      "Kids",
+      "Dar Test",
+      "Apple TV",
+      "native store releases",
+      "prayer push engines"
+    ],
+    "oneAutomationOnly": true
+  }
+}

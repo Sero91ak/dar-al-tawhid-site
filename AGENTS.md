@@ -1,5 +1,12 @@
 # DAR AL TAWHID Projektregeln
 
+## Verbindliche DĀR-Zentrale-Erweiterung: „Wissensbereich Themen“ (30.10.2026)
+
+**Ablauf:** „Wissensbereich Themen“ → Bestand/Dubletten/Quellenlücken für Frau und Mann prüfen; „Wissensbereich Thema erstellen“ → nur fehlende, quellengeprüfte Entwürfe, gemeinsame kanonische Beiträge mehrfach *zuordnen*, nie duplizieren; „Wissensbereich live pushen“ → ausschließlich freigegebene Inhaltsveröffentlichung über bestehenden DĀR Admin. Vorher `node scripts/wissensbereich-themen.cjs scan "<Thema>"`; jeden Entwurf mit `check` prüfen. Vollständige Bindung: `content/admin/wissensbereich-themen-policy.json` und `docs/wissensbereich-themen.md`. Bestehende globale Beitragsregeln, Quellenkarten-/Mehrsprachigkeitsvorgaben, Zeitfenster und Push-Locks bleiben unverändert.
+
+**Eigene KI:** quellengebundene indexbasierte Wissenssuche über freigegebene App-Inhalte und geprüfte Q-Belege planen/verwenden; kein bereits vorhandenes generatives Modell vortäuschen, keine unbestätigten Originale erfinden und keine privaten Profildaten ungefragt indexieren. **Profile:** Frau → Frauen; Mann/Neutral → Entdecken; Quiz bleibt im Schnellzugriff/Mehr. Frau/Mann können dieselben kanonischen Quellen verwenden. Neutrale Profile: **keine Wissensbereich-Gerätebenachrichtigungen**. Profil-UI ist derzeit lokal und **noch nicht** verlässlich mit OneSignal-Zielgruppen synchronisiert; erst nach separater Einwilligung, sicherer Segment-Registrierung und vorhandener `push-lanes-lock`-Freigabe samt Kennwort gezielt senden. **Kein** Fallback auf alle Abonnenten. „Push live“ ohne separate Gerätefreigabe bleibt **nur Inhalt**, keine OneSignal-Nachricht. Keine zweite Automatik, keine Kids-/Test-/Apple-TV-Änderungen.
+
+
 ## Verbindliche Sprachtrennung bei ALLEN neuen Voice-Aufnahmen (27.10.2026)
 
 **Eigentümerregel:** **DEUTSCH BLEIBT DEUTSCH. ARABISCH BLEIBT ARABISCH.** Nie ein pauschales arabisches Aussprachewörterbuch auf einen deutschen Satz anwenden. Deutsche Wörter einschließlich **„nur“/„Nur“** niemals als arabisches **„Nūr“ (نُور)** behandeln. Arabische Sätze, Duʿāʾ-Formeln und Originalausdrücke in natürlichem geprüftem Fuṣḥā wiedergeben; deutsche Syntax, Vokale, Betonung und Satzfluss hingegen ausschließlich deutsch. Diese Produktionsregel gilt für KIDS-Quiz-V4, Kinder-Duʿāʾ, zukünftige Kids-Lernbereiche und alle NEU erzeugten Voice-Aufnahmen, sofern diese Sprachen vorkommen. Ältere Originalaudios/andere App-Spuren nur mit gesondertem QA- und Änderungsauftrag ersetzen.
