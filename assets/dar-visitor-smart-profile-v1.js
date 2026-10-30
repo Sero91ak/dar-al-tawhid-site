@@ -211,12 +211,12 @@ function accountPanel(p){
  '<header class="dsp-account-heading dsp-my-hero"><div class="dsp-account-heading-copy"><span class="dsp-eyebrow">MEIN DĀR · DEIN WISSENSRAUM</span><h2>Mein DĀR</h2><p>'+esc(area)+' · '+(isSignedIn?'mit deinem Konto verbunden':'ohne Anmeldung nutzbar')+'</p><button type="button" class="dsp-my-profile-button" data-dsp-switch-profile>Wissensprofil: '+esc(profile)+' <span aria-hidden="true">›</span></button></div><div class="dsp-account-figure" aria-hidden="true">'+iconSpan(g)+'</div></header>'+
  '<section class="dsp-my-stats" aria-label="Deine persönliche Übersicht"><div><strong>'+p.saved.length+'</strong><span>Lokale Merkliste</span></div><div><strong>'+p.notes.length+'</strong><span>Private Notizen</span></div><div><strong>'+appFavorites+'</strong><span>App-Favoriten</span></div><div><strong>'+recent.length+'</strong><span>Zuletzt geöffnet</span></div></section>'+
  '<section class="dsp-my-section" aria-labelledby="dspMyActionsTitle"><div class="dsp-my-section-heading"><h3 id="dspMyActionsTitle">Deine Schnellzugriffe</h3><small>Direkt dort fortfahren, wo du möchtest</small></div><div class="dsp-my-actions">'+
- '<button type="button" data-dsp-open-notes><span class="dsp-my-action-icon">✎</span><strong>Meine Notizen</strong><small>Gedanken festhalten</small></button>'+
- '<button type="button" data-dsp-open-saved><span class="dsp-my-action-icon">☆</span><strong>Meine Merkliste</strong><small>Beiträge wiederfinden</small></button>'+
- '<button type="button" data-dsp-open-route="quran"><span class="dsp-my-action-icon">۞</span><strong>Qurʾān</strong><small>Lesen und hören</small></button>'+
- '<button type="button" data-dsp-open-route="recent"><span class="dsp-my-action-icon">▤</span><strong>Beiträge</strong><small>Wissen vertiefen</small></button>'+
- '<button type="button" data-dsp-open-route="quiz"><span class="dsp-my-action-icon">◇</span><strong>Wissensquiz</strong><small>Wissen prüfen</small></button>'+
- '<button type="button" data-dsp-open-service><span class="dsp-my-action-icon">◎</span><strong>Konto & Sync</strong><small>Geräte verbinden</small></button></div></section>'+
+ '<button type="button" data-dsp-open-notes><span class="dsp-my-action-icon"><img src="/assets/dar-3d-icons/ilm.png" alt="" loading="lazy" decoding="async"></span><strong>Meine Notizen</strong><small>Gedanken festhalten</small></button>'+
+ '<button type="button" data-dsp-open-saved><span class="dsp-my-action-icon"><img src="/assets/dar-3d-icons/saved.png" alt="" loading="lazy" decoding="async"></span><strong>Meine Merkliste</strong><small>Beiträge wiederfinden</small></button>'+
+ '<button type="button" data-dsp-open-route="quran"><span class="dsp-my-action-icon"><img src="/assets/dar-3d-icons/quran.png" alt="" loading="lazy" decoding="async"></span><strong>Qurʾān</strong><small>Lesen und hören</small></button>'+
+ '<button type="button" data-dsp-open-route="recent"><span class="dsp-my-action-icon"><img src="/assets/dar-3d-icons/posts.png" alt="" loading="lazy" decoding="async"></span><strong>Beiträge</strong><small>Wissen vertiefen</small></button>'+
+ '<button type="button" data-dsp-open-route="quiz"><span class="dsp-my-action-icon"><img src="/assets/dar-3d-icons/quiz.png" alt="" loading="lazy" decoding="async"></span><strong>Wissensquiz</strong><small>Wissen prüfen</small></button>'+
+ '<button type="button" data-dsp-open-service><span class="dsp-my-action-icon"><img src="/assets/dar-3d-icons/shield.png" alt="" loading="lazy" decoding="async"></span><strong>Konto & Sync</strong><small>Geräte verbinden</small></button></div></section>'+
  '<section class="dsp-my-section" aria-labelledby="dspMyRecommendationsTitle"><div class="dsp-my-section-heading"><h3 id="dspMyRecommendationsTitle">Heute für dich ausgewählt</h3><small>Aus veröffentlichten Beiträgen · passend zu deinem Wissensprofil</small></div><div class="dsp-my-recommend-list">'+suggestion+'</div></section>'+
  '<section class="dsp-my-section dsp-my-history" aria-labelledby="dspMyHistoryTitle"><div class="dsp-my-section-heading"><h3 id="dspMyHistoryTitle">Zuletzt gelesen</h3><small>Deine über Mein DĀR geöffneten Beiträge</small></div>'+history+'</section>'+
  '<section class="dsp-my-section dsp-my-personalize" aria-labelledby="dspMyInterestsTitle"><div class="dsp-my-section-heading"><h3 id="dspMyInterestsTitle">Deine Wissensgebiete</h3><small>Interessen bestimmen die Reihenfolge der Empfehlungen, nicht den Zugang zu Inhalten.</small></div>'+
@@ -346,7 +346,7 @@ function updateAccount(p){
  var panel=document.querySelector("#appView .account-panel");if(!panel)return;
  var mount=panel.querySelector(":scope > .dsp-account-mount");
  if(!mount){mount=document.createElement("div");mount.className="dsp-account-mount";panel.insertBefore(mount,panel.firstChild)}
- var sig=owner()+"|"+today()+"|"+JSON.stringify([p.gender,p.palette,p.interests,p.notes,p.saved,p.opened])+"|"+inventory().length;
+ var sig=owner()+"|"+today()+"|"+JSON.stringify([p.gender,p.palette,p.interests,p.notes,p.saved,p.opened])+"|"+inventory().length+"|"+(typeof savedIds==="function"?savedIds().length:0);
  if(mount.dataset.dspSig!==sig){mount.innerHTML=accountPanel(p);mount.dataset.dspSig=sig}
  if(!panel.querySelector(":scope > .dsp-account-service-heading")){
   var heading=document.createElement("div");heading.className="dsp-account-service-heading";
