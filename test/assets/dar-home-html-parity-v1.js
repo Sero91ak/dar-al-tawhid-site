@@ -472,12 +472,19 @@ function updatePrayer(){
  if(place)root.querySelector("#dhpPrayerPlace").textContent=place;
 }
 function recent(){
- var box=document.getElementById(ID),src=document.querySelectorAll("#dv3Latest .dv3-post[data-dv3-nav='post']");
- if(!box||!src.length)return;
- var list=Array.from(src).map(function(n){return {
-  id:n.getAttribute("data-dv3-value")||"",
-  title:nativeText(n,".dv3-post-body b"),sub:nativeText(n,".dv3-post-body em")
- }}).filter(function(a){return a.title&&a.id});
+ var box=document.getElementById(ID);
+ if(!box)return;
+ // Read the same canonical posts collection used by the established V3 renderer.
+ // Never scrape the hidden V3 HTML tree to populate the visible DHP capsules.
+ var list=[];
+ try{
+  if(typeof posts!=="undefined"&&Array.isArray(posts)){
+   list=posts.filter(function(p){return p&&p.id&&p.title}).slice(0,2).map(function(p){
+    var sub=[p.scholar,p.category].filter(Boolean).join(" · ");
+    return {id:String(p.id),title:String(p.title),sub:sub||"Qurʾān · Sunnah · Aṯār"};
+   });
+  }
+ }catch(e){console.warn("DĀR TEST latest posts model",e)}
  if(!list.length)return;
  var sig=list.map(function(a){return a.id+"|"+a.title}).join(";");
  if(lastItems===sig)return;
