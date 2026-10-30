@@ -53,7 +53,7 @@ assert.ok(api,"Runtime exposed to Test QA");
 assert.equal(api.get().gender,"neutral");
 function click(name,value){
  const target={hasAttribute:(n)=>n===name,getAttribute:(n)=>n===name?value:null};
- listeners.click({target:{closest:()=>target},preventDefault(){},stopPropagation(){}});
+ listeners.click({target:{closest:(selector)=>selector.includes("["+name+"]")?target:null},preventDefault(){},stopPropagation(){}});
 }
 click("data-dsp-gender","woman");
 assert.equal(api.get().gender,"woman");
