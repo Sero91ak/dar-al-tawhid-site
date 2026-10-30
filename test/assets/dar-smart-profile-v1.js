@@ -111,7 +111,7 @@ function syncHeaderAvatar(p){document.querySelectorAll("#darTestBrandHeaderV1 .d
 function updateAccount(p){if(!document.body.classList.contains("is-account-route"))return;
  var panel=document.querySelector("#appView .account-panel");if(!panel)return;var el=panel.querySelector("#darTestSmartAccount");
  if(!el){el=document.createElement("div");el.className="dsp-account-mount";panel.insertBefore(el,panel.firstChild)}
- var sig=owner()+"|"+JSON.stringify([p.gender,p.palette,p.interests,p.notes,p.saved]);if(el.dataset.dspSig!==sig){el.innerHTML=accountPanel(p);el.dataset.dspSig=sig}
+ var sig=owner()+"|"+JSON.stringify([p.gender,p.palette,p.interests,p.notes,p.saved]);if(el.dataset.dspSig!==sig){var opened=Array.from(el.querySelectorAll("details[open]")).map(function(d){return d.id});el.innerHTML=accountPanel(p);opened.forEach(function(id){var detail=el.querySelector("#"+id);if(detail)detail.open=true});el.dataset.dspSig=sig}
 }
 function refresh(){if(scheduled)return;scheduled=true;requestAnimationFrame(function(){scheduled=false;try{var o=owner(),p=read();if(o!==lastOwner){lastOwner=o;if(p.palette!=="keep")chooseTheme(p.palette)}
  updateHome(p);updateAccount(p);syncHeaderAvatar(p)}catch(e){console.warn("DĀR TEST Smart Profile",e)}})}
