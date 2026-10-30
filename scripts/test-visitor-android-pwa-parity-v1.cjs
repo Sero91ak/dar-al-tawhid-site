@@ -33,7 +33,7 @@ for(const key of [
 assert.match(shell,/20261030-profile-shortcuts-v9/);
 assert.match(shell,/dar-home-test-parity-visitor\.js\?v=20261030-prayer-compact-colors-v3/);
 assert.match(shell,/dar-noble-3d-icons\.js\?v=20261030-android-global-parity-v8/);
-assert.match(shell,/dar-adult-brand-header-v2\.css\?v=20261030-duo-compact-v1/);
+assert.match(shell,/dar-adult-brand-header-v2\.css\?v=20261030-hero-top-seam-v2/);
 const manifest=JSON.parse(get("manifest.json"));
 assert.ok(manifest.start_url.startsWith("/pwa/"));
 assert.equal(manifest.scope,"/pwa/");
