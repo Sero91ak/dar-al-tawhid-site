@@ -649,3 +649,199 @@ function init(){
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
+
+/* DAT SMART PRAYER CLOCK V1 — same canonical prayer feed; no new calculation engine.
+   Adult visitor / Dar Test only. Locally hosted display font, reduced-motion safe. */
+;(function(){
+"use strict";
+var path=location.pathname||"/";
+var visitor=path==="/"||path==="/index.html"||path==="/pwa"||path.indexOf("/pwa/")===0;
+var test=/^\/test(?:\/|$)/.test(path)&&!/^\/test\/kids(?:\/|$)/.test(path);
+if(!visitor&&!test||window.__datSmartPrayerClockV1)return;
+window.__datSmartPrayerClockV1=true;
+var CSS=String.raw`
+@font-face{font-family:"DAT Prayer Numerals";src:url("/assets/fonts/fraunces-latin.woff2") format("woff2");font-style:normal;font-weight:400 900;font-display:swap}
+#darHomeHtmlParityV1 .dat-smart-prayer{
+ --dat-ink:var(--dhp-ink,var(--text,#243e31));
+ --dat-num:var(--gold2,var(--dat-ink));
+ --dat-muted:var(--muted,#66796b);
+ --dat-gold:var(--dhp-gold,var(--gold,#9c8552));
+ --dat-line:var(--line,rgba(100,120,100,.24));
+ --dat-capsule:var(--soft,rgba(100,140,100,.08));
+ box-sizing:border-box;display:block;width:100%;min-width:0;margin:7px 0 11px!important;
+ padding:11px 12px 10px!important;border:0!important;
+ border-top:1px solid var(--dat-line)!important;border-bottom:1px solid var(--dat-line)!important;
+ border-radius:0!important;background:transparent!important;background-image:none!important;box-shadow:none!important;
+ text-align:left;position:relative;color:var(--dat-ink);cursor:pointer;
+ font-family:"Manrope",-apple-system,BlinkMacSystemFont,sans-serif;
+ -webkit-tap-highlight-color:transparent;
+}
+#darHomeHtmlParityV1 .dat-smart-prayer:focus-visible{outline:2px solid var(--dat-gold)!important;outline-offset:3px}
+#darHomeHtmlParityV1 .datp-head,#darHomeHtmlParityV1 .datp-top,#darHomeHtmlParityV1 .datp-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;min-width:0}
+#darHomeHtmlParityV1 .datp-head{margin-bottom:8px}
+#darHomeHtmlParityV1 .datp-kicker{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:.13em;color:var(--dat-ink);white-space:nowrap}
+#darHomeHtmlParityV1 .datp-goldbar{width:3px;height:12px;border-radius:4px;background:var(--dat-gold)}
+#darHomeHtmlParityV1 .datp-location{font-size:10px;font-weight:650;line-height:1.25;color:var(--dat-muted);max-width:48%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#darHomeHtmlParityV1 .datp-live{display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:750;letter-spacing:.08em;color:var(--dat-muted)}
+#darHomeHtmlParityV1 .datp-beacon{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--dat-gold);animation:datp-breathe 2.8s ease-in-out infinite}
+#darHomeHtmlParityV1 .datp-grid{display:grid;grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr);gap:10px;align-items:center;min-width:0}
+#darHomeHtmlParityV1 .datp-item{min-width:0}
+#darHomeHtmlParityV1 .datp-right{text-align:right}
+#darHomeHtmlParityV1 .datp-caption{display:block;color:var(--dat-muted);font-size:10px;font-weight:750;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#darHomeHtmlParityV1 .datp-prayername{font-family:"Cormorant Garamond","Iowan Old Style",Georgia,serif;font-size:16px;font-weight:700;letter-spacing:0;color:var(--dat-ink)}
+#darHomeHtmlParityV1 .datp-dot{padding:0 3px;color:var(--dat-gold)}
+#darHomeHtmlParityV1 .datp-number,#darHomeHtmlParityV1 .datp-counter,#darHomeHtmlParityV1 .datp-now{
+ font-family:"DAT Prayer Numerals","Bodoni 72",Didot,Georgia,serif!important;
+ font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"lnum" 1,"tnum" 1;
+ font-weight:650;color:var(--dat-num);white-space:nowrap;
+}
+#darHomeHtmlParityV1 .datp-number{display:block;font-size:clamp(35px,10vw,44px);line-height:1.05;letter-spacing:-1.2px;margin-top:1px}
+#darHomeHtmlParityV1 .datp-colon{color:var(--dat-gold)}
+#darHomeHtmlParityV1 .datp-centerline{width:1px;min-height:49px;align-self:stretch;background:linear-gradient(transparent,var(--dat-line) 19%,var(--dat-line) 82%,transparent);position:relative}
+#darHomeHtmlParityV1 .datp-centerline:after{content:"";position:absolute;top:50%;left:-2px;width:5px;height:5px;border-radius:100%;background:var(--dat-gold)}
+#darHomeHtmlParityV1 .datp-capsule{position:relative;display:flex;justify-content:space-between;align-items:center;gap:8px;
+ margin-top:8px;padding:6px 10px 8px;min-width:0;overflow:hidden;border-radius:9px;background:var(--dat-capsule)}
+#darHomeHtmlParityV1 .datp-until{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:750;color:var(--dat-ink);white-space:nowrap;letter-spacing:.05em}
+#darHomeHtmlParityV1 .datp-ring{width:13px;height:13px;display:inline-grid;place-items:center;border:1px solid var(--dat-gold);border-radius:50%}
+#darHomeHtmlParityV1 .datp-ring:before{content:"";width:4px;height:4px;border-radius:50%;background:var(--dat-gold);animation:datp-breathe 3s ease-in-out infinite}
+#darHomeHtmlParityV1 .datp-counter{font-size:clamp(20px,6.7vw,26px);line-height:1.05;letter-spacing:.2px}
+#darHomeHtmlParityV1 .datp-track{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--dat-line)}
+#darHomeHtmlParityV1 .datp-fill{display:block;height:100%;background:var(--dat-gold);width:0%;transition:width 1s linear}
+#darHomeHtmlParityV1 .datp-foot{padding-top:8px;align-items:end}
+#darHomeHtmlParityV1 .datp-dates{display:flex;flex-direction:column;gap:1px;min-width:0}
+#darHomeHtmlParityV1 .datp-greg{font-size:11px;font-weight:750;line-height:1.35;color:var(--dat-ink);white-space:nowrap}
+#darHomeHtmlParityV1 .datp-hijri{font-size:10px;line-height:1.35;color:var(--dat-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#darHomeHtmlParityV1 .datp-local{display:flex;flex-direction:column;align-items:end;gap:1px;flex:none}
+#darHomeHtmlParityV1 .datp-local-label{font-size:9px;font-weight:750;letter-spacing:.1em;color:var(--dat-muted)}
+#darHomeHtmlParityV1 .datp-now{font-size:clamp(21px,6.9vw,27px);line-height:1.05}
+#darHomeHtmlParityV1 .datp-seconds{font-size:.64em;color:var(--dat-muted)}
+html[data-theme="light"][data-theme-variant="salbei"] #darHomeHtmlParityV1 .dat-smart-prayer{--dat-num:#3f5d4b;--dat-gold:#8b7648;--dat-capsule:#e8ede4;--dat-ink:#17211b;--dat-muted:#536057}
+html[data-theme="eisgold"] #darHomeHtmlParityV1 .dat-smart-prayer{--dat-num:#3d5664;--dat-gold:#977744;--dat-capsule:#edf3f5;--dat-ink:#233e4b;--dat-muted:#5c6a73}
+html[data-theme="royal"] #darHomeHtmlParityV1 .dat-smart-prayer{--dat-num:#eddaab;--dat-gold:#c7aa6d;--dat-capsule:rgba(196,175,120,.11);--dat-ink:#f4efe1;--dat-muted:#b8c8d6}
+html[data-theme="bordeaux"] #darHomeHtmlParityV1 .dat-smart-prayer{--dat-num:#e9ce9a;--dat-gold:#c8a16e;--dat-capsule:rgba(200,161,110,.12);--dat-ink:#fbefeb;--dat-muted:#d0bdbf}
+html[data-theme="dark"] #darHomeHtmlParityV1 .dat-smart-prayer,html[data-theme="dar-al-layl"] #darHomeHtmlParityV1 .dat-smart-prayer{--dat-num:#e6d5a9;--dat-gold:#c3a46b;--dat-capsule:rgba(195,164,107,.11);--dat-ink:#eee8da;--dat-muted:#bdbbb2}
+html[data-theme="soft"] #darHomeHtmlParityV1 .dat-smart-prayer{--dat-num:var(--gold2,#4d6257);--dat-capsule:var(--soft,#edf0e7)}
+body.is-home-route[data-dat-smart-prayer="ready"] #darHomeHtmlParityV1 .dhp-prayer{display:none!important}
+body.is-home-route[data-dat-smart-prayer="ready"] #darHomeHtmlParityV1 #dhpPrayerNativeMount{display:none!important}
+body.is-home-route[data-dat-smart-prayer="ready"] #headerPrayerStatus{
+ position:absolute!important;width:1px!important;height:1px!important;min-height:0!important;max-height:1px!important;
+ margin:0!important;padding:0!important;overflow:hidden!important;clip-path:inset(50%)!important;opacity:0!important;pointer-events:none!important
+}
+@keyframes datp-breathe{0%,100%{opacity:.48;transform:scale(.8)}50%{opacity:1;transform:scale(1.16)}}
+@media(max-width:360px){
+ #darHomeHtmlParityV1 .dat-smart-prayer{padding-inline:9px!important}
+ #darHomeHtmlParityV1 .datp-grid{gap:7px}
+ #darHomeHtmlParityV1 .datp-caption{font-size:9px}
+ #darHomeHtmlParityV1 .datp-prayername{font-size:14px}
+ #darHomeHtmlParityV1 .datp-number{font-size:34px}
+ #darHomeHtmlParityV1 .datp-counter{font-size:20px}
+ #darHomeHtmlParityV1 .datp-greg{font-size:10px}
+ #darHomeHtmlParityV1 .datp-now{font-size:21px}
+}
+@media(prefers-reduced-motion:reduce){#darHomeHtmlParityV1 .datp-beacon,#darHomeHtmlParityV1 .datp-ring:before{animation:none}#darHomeHtmlParityV1 .datp-fill{transition:none}}
+`;
+if(!document.getElementById("datSmartPrayerClockStyleV1")){
+ var style=document.createElement("style");style.id="datSmartPrayerClockStyleV1";
+ style.textContent=CSS;document.head.appendChild(style);
+}
+var labels={
+ de:["GEBETSZEITEN","LIVE","AKTUELL","NÄCHSTES","BIS","ORTSZEIT"],
+ en:["PRAYER TIMES","LIVE","CURRENT","NEXT","UNTIL","LOCAL TIME"],
+ tr:["NAMAZ VAKİTLERİ","CANLI","ŞİMDİ","SONRAKİ","KALAN","YEREL SAAT"],
+ ar:["مَوَاقِيتُ الصَّلَاة","مباشر","الحالية","القادمة","حتى","الوقت المحلي"],
+ ku:["DEMÊN NIMÊJÊ","LIVE","NIHA","PAŞÊ","HEYA","DEMA HERÊMÎ"],
+ ckb:["کاتەکانی نوێژ","ڕاستەوخۆ","ئێستا","دواتر","تا","کاتی ناوخۆیی"],
+ bs:["NAMASKA VREMENA","UŽIVO","TRENUTNO","SLJEDEĆE","DO","LOKALNO VRIJEME"]
+};
+function locale(){
+ var l="";try{l=localStorage.getItem("darAdultPreferredLocaleV1")||""}catch(e){}
+ return labels[l]?l:(labels[(document.documentElement.lang||"de").split("-")[0]]?(document.documentElement.lang||"de").split("-")[0]:"de");
+}
+var card=null,previousKey="",targetDate=null,prayerStartDate=null,lastSource=0,remainingTime=null;
+function text(node,sel){var el=node&&node.querySelector(sel);return el?String(el.textContent||"").replace(/\s+/g," ").trim():""}
+function clockText(s){var m=String(s||"").match(/(?:^|[^\d])(\d{1,2}):(\d{2})(?:[^\d]|$)/);return m?String(m[1]).padStart(2,"0")+":"+m[2]:""}
+function normalizePrayer(name){
+ var s=String(name||"").trim(),key=s.toLocaleLowerCase("en").replace(/[\s.\u0300-\u036f]/g,"");
+ var map={fajr:"Faǧr",fadschar:"Faǧr",dhuhr:"Ẓuhr",zuhr:"Ẓuhr",dohr:"Ẓuhr",asr:"ʿAṣr",asar:"ʿAṣr",maghrib:"Maghrib",magrib:"Maghrib",isha:"ʿIshāʾ",ischaa:"ʿIshāʾ",ischā:"ʿIshāʾ",ischāʾ:"ʿIshāʾ"};
+ if(locale()==="de")return map[key]||s;
+ return s;
+}
+function make(){
+ if(card)return card;
+ var root=document.getElementById("darHomeHtmlParityV1");
+ if(!root)return null;
+ card=document.createElement("button");
+ card.type="button";card.className="dat-smart-prayer";card.dataset.dhpRoute="prayer";
+ card.setAttribute("aria-label","Gebetszeiten öffnen");
+ card.innerHTML='<span class="datp-head"><span class="datp-kicker"><span class="datp-goldbar" aria-hidden="true"></span><span data-dat-label="0">GEBETSZEITEN</span><span class="datp-live"><span class="datp-beacon" aria-hidden="true"></span><span data-dat-label="1">LIVE</span></span></span><span class="datp-location" data-dat-place></span></span>'+
+ '<span class="datp-grid"><span class="datp-item"><span class="datp-caption"><span data-dat-label="2">AKTUELL</span><span class="datp-dot">·</span><span class="datp-prayername" data-dat-current-name></span></span><span class="datp-number" data-dat-current-time>--:--</span></span><span class="datp-centerline" aria-hidden="true"></span><span class="datp-item datp-right"><span class="datp-caption"><span data-dat-label="3">NÄCHSTES</span><span class="datp-dot">·</span><span class="datp-prayername" data-dat-next-name></span></span><span class="datp-number" data-dat-next-time>--:--</span></span></span>'+
+ '<span class="datp-capsule"><span class="datp-until"><span class="datp-ring" aria-hidden="true"></span><span data-dat-label="4">BIS</span> <span data-dat-until-name></span></span><span class="datp-counter" data-dat-counter>--:--:--</span><span class="datp-track" aria-hidden="true"><span class="datp-fill" data-dat-fill></span></span></span>'+
+ '<span class="datp-foot"><span class="datp-dates"><span class="datp-greg" data-dat-date></span><span class="datp-hijri" data-dat-hijri></span></span><span class="datp-local"><span class="datp-local-label" data-dat-label="5">ORTSZEIT</span><span class="datp-now"><span data-dat-now>--:--</span><span class="datp-seconds" data-dat-seconds>:--</span></span></span></span>';
+ return card;
+}
+function put(sel,v){var x=card&&card.querySelector(sel);if(x&&x.textContent!==v)x.textContent=v}
+function when(time,now,dayShift){
+ var p=time.split(":").map(Number),d=new Date(now);d.setHours(p[0],p[1],0,0);if(dayShift)d.setDate(d.getDate()+dayShift);return d;
+}
+function refreshSource(now){
+ var root=document.getElementById("darHomeHtmlParityV1"),hub=document.getElementById("headerPrayerStatus");
+ if(!root||!hub||!document.body.classList.contains("is-home-route"))return false;
+ var zones=Array.from(hub.querySelectorAll(".header-prayer-zone")).map(function(z){
+  return {caption:text(z,".header-prayer-zone__caption"),name:text(z,".header-prayer-name"),time:clockText(text(z,".header-prayer-hour"))};
+ });
+ var timed=zones.filter(function(z){return z.name&&z.time});
+ var current=timed.find(function(z){return /aktuell|current|jetzt|şimdi|trenut|الحالي|ئێستا/i.test(z.caption)})||timed[0];
+ var next=timed.find(function(z){return /nächste|next|sonraki|sljede|القادم|دواتر/i.test(z.caption)})||timed[1];
+ if(!current||!next||!next.time||!current.time)return false;
+ var x=make();if(!x)return false;
+ var source=root.querySelector(".dhp-home-source-v55");
+ if(!source)return false;
+ if(x.previousElementSibling!==source)source.insertAdjacentElement("afterend",x);
+ document.body.setAttribute("data-dat-smart-prayer","ready");
+ var signature=current.name+"|"+current.time+"|"+next.name+"|"+next.time+"|"+locale();
+ if(signature!==previousKey){
+  previousKey=signature;
+  var tgt=when(next.time,now,0);if(tgt.getTime()<=now.getTime()-1000)tgt.setDate(tgt.getDate()+1);
+  var beg=when(current.time,now,0);
+  if(beg>now)beg.setDate(beg.getDate()-1);
+  targetDate=tgt;prayerStartDate=beg;
+  put("[data-dat-current-name]",normalizePrayer(current.name));
+  put("[data-dat-current-time]",current.time);
+  put("[data-dat-next-name]",normalizePrayer(next.name));
+  put("[data-dat-next-time]",next.time);
+  put("[data-dat-until-name]",normalizePrayer(next.name));
+  var lbl=labels[locale()]||labels.de;
+  x.querySelectorAll("[data-dat-label]").forEach(function(e){e.textContent=lbl[Number(e.dataset.datLabel)]||""});
+ }
+ var place=text(hub,".header-prayer-hub__place").replace(/^[\s·➜→↗⌖📍]+/gu,"");
+ var hijri=text(hub,".header-prayer-hub__hijri");
+ var greg=text(hub,".header-prayer-hub__date");
+ if(!greg)greg=new Intl.DateTimeFormat(locale()==="de"?"de-DE":locale(),{weekday:"short",day:"2-digit",month:"2-digit",year:"numeric"}).format(now);
+ put("[data-dat-place]",place);
+ put("[data-dat-date]",greg);
+ put("[data-dat-hijri]",hijri);
+ x.setAttribute("aria-label",current.name+" "+current.time+", "+next.name+" "+next.time+". "+(place||"Gebetszeiten"));
+ return true;
+}
+function update(){
+ if(!document.body)return;
+ if(!document.body.classList.contains("is-home-route")){document.body.removeAttribute("data-dat-smart-prayer");return}
+ if(document.hidden)return;
+ var now=new Date();
+ if(!card||now.getTime()-lastSource>4500){lastSource=now.getTime();if(!refreshSource(now)){
+  document.body.removeAttribute("data-dat-smart-prayer");return;
+ }}
+ if(!card||!targetDate)return;
+ if(now.getTime()>=targetDate.getTime()+1000){lastSource=0;refreshSource(now)}
+ var diff=Math.max(0,Math.ceil((targetDate.getTime()-now.getTime())/1000));
+ var h=Math.floor(diff/3600),m=Math.floor(diff%3600/60),s=diff%60;
+ function two(n){return String(n).padStart(2,"0")}
+ put("[data-dat-counter]",two(h)+":"+two(m)+":"+two(s));
+ var progress=prayerStartDate&&targetDate>prayerStartDate?(now.getTime()-prayerStartDate.getTime())/(targetDate.getTime()-prayerStartDate.getTime()):0;
+ var fill=card.querySelector("[data-dat-fill]");if(fill)fill.style.width=(Math.max(0,Math.min(1,progress))*100).toFixed(3)+"%";
+ put("[data-dat-now]",two(now.getHours())+":"+two(now.getMinutes()));
+ put("[data-dat-seconds]",":"+two(now.getSeconds()));
+}
+function boot(){update();window.setInterval(update,1000);document.addEventListener("visibilitychange",function(){lastSource=0;update()});window.addEventListener("pageshow",function(){lastSource=0;update()});window.addEventListener("dar-adult-locale-changed",function(){previousKey="";lastSource=0;update()})}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
+})();
