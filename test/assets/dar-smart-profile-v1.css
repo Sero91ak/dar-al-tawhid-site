@@ -1,0 +1,93 @@
+/* DĀR TEST Smart Profile V1 · only the dedicated /test adult widgets */
+#darHomeHtmlParityV1 .dsp-mount{width:100%;min-width:0;margin:14px 0 5px;color:var(--dhp-ink)}
+#darHomeHtmlParityV1 .dsp-home,#appView .dsp-account{--dsp-gold:var(--dhp-capsule-accent,#b5a072);--dsp-rim:color-mix(in srgb,var(--dsp-gold) 45%,transparent);--dsp-text:var(--dhp-ink,var(--text,#f5f1e9));--dsp-muted:var(--dhp-muted,var(--muted,#aab0aa));color:var(--dsp-text);min-width:0}
+#darHomeHtmlParityV1 .dsp-home{display:block;width:100%;border:0;background:transparent;box-shadow:none}
+#darHomeHtmlParityV1 .dsp-home-hero,#appView .dsp-account-hero{position:relative;isolation:isolate;overflow:hidden;background:#142b2f;border-radius:21px;min-height:202px;display:flex;align-items:flex-end;box-sizing:border-box}
+#darHomeHtmlParityV1 .dsp-hero-art,#appView .dsp-account-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;pointer-events:none;z-index:-2}
+#darHomeHtmlParityV1 .dsp-home-hero::after,#appView .dsp-account-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,18,23,.93) 0%,rgba(8,24,30,.88) 45%,rgba(7,24,27,.28) 100%);z-index:-1;pointer-events:none}
+#darHomeHtmlParityV1 .dsp-home-copy{padding:22px clamp(15px,3.4vw,29px);width:min(610px,94%);box-sizing:border-box}
+#darHomeHtmlParityV1 .dsp-eyebrow,#appView .dsp-eyebrow{display:block;color:#d6c4a0;font-size:10px;font-weight:750;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+#darHomeHtmlParityV1 .dsp-home-copy h2,#appView .dsp-account-hero h2{font-size:clamp(21px,4.5vw,31px);line-height:1.16;color:#fff9eb;margin:0 0 9px;font-weight:760;letter-spacing:-.025em;text-wrap:balance}
+#darHomeHtmlParityV1 .dsp-home-copy p,#appView .dsp-account-hero p{font-size:clamp(12px,2.7vw,14px);line-height:1.53;color:#e9eee9;margin:0 0 16px;max-width:45ch}
+#darHomeHtmlParityV1 :is(.dsp-primary,.dsp-subtle,.dsp-gender,.dsp-chip,.dsp-recommend-open,.dsp-save),#appView .dsp-account :is(button,.dsp-note-input){touch-action:manipulation;transition:background-color .18s ease,border-color .18s ease,box-shadow .18s ease,transform .16s ease}
+#darHomeHtmlParityV1 :is(button):focus-visible,#appView .dsp-account :is(button,textarea):focus-visible{outline:2px solid var(--dsp-gold);outline-offset:3px}
+#darHomeHtmlParityV1 .dsp-actions{display:flex;flex-wrap:wrap;gap:9px}
+#darHomeHtmlParityV1 .dsp-primary,#appView .dsp-account .dsp-primary{font:700 12px/1.2 system-ui,sans-serif;border:1px solid #d4bd86;border-radius:999px;background:#cfb47b;color:#142226;padding:11px 15px;cursor:pointer}
+#darHomeHtmlParityV1 .dsp-subtle,#appView .dsp-account .dsp-subtle{font:650 12px/1.2 system-ui,sans-serif;border:1px solid rgba(228,217,185,.6);border-radius:999px;background:rgba(255,255,255,.08);color:#fff9ed;padding:11px 15px;cursor:pointer}
+#darHomeHtmlParityV1 .dsp-home button:hover,#appView .dsp-account button:hover{box-shadow:0 0 0 2px color-mix(in srgb,var(--dsp-gold) 17%,transparent)}
+#darHomeHtmlParityV1 .dsp-home button:active,#appView .dsp-account button:active{transform:scale(.985)}
+#darHomeHtmlParityV1 .dsp-onboarding,#darHomeHtmlParityV1 .dsp-recommendations{margin-top:14px}
+#darHomeHtmlParityV1 .dsp-onboarding>span{font-size:13px;font-weight:680}
+#darHomeHtmlParityV1 .dsp-choices,#appView .dsp-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 6px;min-width:0}
+#darHomeHtmlParityV1 .dsp-gender,#appView .dsp-account .dsp-gender{display:flex;align-items:center;text-align:left;gap:7px;min-width:0;padding:9px;border-radius:15px;background:color-mix(in srgb,var(--dsp-gold) 4%,transparent);border:1px solid var(--dsp-rim);color:inherit;cursor:pointer}
+#darHomeHtmlParityV1 .dsp-gender.is-active,#appView .dsp-account .dsp-gender.is-active{border-color:var(--dsp-gold);background:color-mix(in srgb,var(--dsp-gold) 12%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--dsp-gold) 15%,transparent)}
+#darHomeHtmlParityV1 .dsp-avatar,#appView .dsp-avatar{width:42px;height:42px;flex:0 0 42px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,.13))}
+#darHomeHtmlParityV1 .dsp-gender span,#appView .dsp-gender span{min-width:0}
+#darHomeHtmlParityV1 .dsp-gender strong,#appView .dsp-gender strong{display:block;font-size:12px;line-height:1.2}
+#darHomeHtmlParityV1 .dsp-gender small,#appView .dsp-gender small{display:block;font-size:10px;line-height:1.26;color:var(--dsp-muted);margin-top:3px;overflow-wrap:anywhere}
+#darHomeHtmlParityV1 .dsp-prefs-inline{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:10px 2px;font-size:11px;color:var(--dsp-muted)}
+#darHomeHtmlParityV1 .dsp-prefs-inline button{background:transparent;border:0;color:var(--dsp-gold);font-size:12px;text-decoration:underline;cursor:pointer;white-space:nowrap}
+#darHomeHtmlParityV1 .dsp-section-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;border-bottom:1px solid var(--dsp-rim);padding:1px 0 11px}
+#darHomeHtmlParityV1 .dsp-section-head h3{font-size:clamp(16px,3.6vw,19px);font-weight:740;margin:0}
+#darHomeHtmlParityV1 .dsp-section-head span{color:var(--dsp-muted);font-size:11px;white-space:nowrap}
+#darHomeHtmlParityV1 .dsp-recommend-list{display:grid;gap:9px;padding-top:11px}
+#darHomeHtmlParityV1 .dsp-recommend-row{display:flex;align-items:center;min-width:0;border:1px solid var(--dsp-rim);border-radius:17px;background:color-mix(in srgb,var(--dsp-gold) 3%,transparent);overflow:hidden}
+#darHomeHtmlParityV1 .dsp-recommend-open{flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:13px;min-height:63px;color:inherit;text-align:left;border:0;background:transparent;cursor:pointer}
+#darHomeHtmlParityV1 .dsp-recommend-copy{flex:1;min-width:0;display:block}
+#darHomeHtmlParityV1 .dsp-recommend-copy strong{display:block;font-size:13px;font-weight:680;line-height:1.38;overflow-wrap:break-word}
+#darHomeHtmlParityV1 .dsp-recommend-copy small{display:block;color:var(--dsp-muted);font-size:10px;margin-top:4px;line-height:1.3}
+#darHomeHtmlParityV1 .dsp-number{font-size:13px;font-variant-numeric:tabular-nums;color:var(--dsp-gold)}
+#darHomeHtmlParityV1 .dsp-save{width:40px;min-height:45px;flex:0 0 40px;font-size:22px;border:0;border-left:1px solid var(--dsp-rim);background:transparent;color:var(--dsp-gold);cursor:pointer}
+#darHomeHtmlParityV1 .dsp-save.is-active{background:color-mix(in srgb,var(--dsp-gold) 15%,transparent)}
+#darHomeHtmlParityV1 .dsp-footnote,#appView .dsp-local-hint{font-size:10px;color:var(--dsp-muted);line-height:1.52;margin:10px 2px}
+#darHomeHtmlParityV1 .dhp-library-tile[hidden]{display:none!important}
+/* Account panel: this is a new section inside the existing real login/dashboard, never a second auth flow. */
+#appView .dsp-account-mount{width:100%;min-width:0;box-sizing:border-box;margin:0 0 23px}
+#appView .dsp-account{width:100%;min-width:0;box-sizing:border-box;--dsp-gold:var(--accent,#aa9667);--dsp-rim:color-mix(in srgb,var(--dsp-gold) 40%,transparent);--dsp-text:var(--text,#202b25);--dsp-muted:var(--muted,#78847a)}
+#appView .dsp-account-hero{min-height:176px;border-radius:18px;padding:20px;gap:13px}
+#appView .dsp-account-hero::after{background:linear-gradient(90deg,rgba(7,21,26,.94),rgba(7,21,26,.76) 55%,rgba(7,21,26,.1))}
+#appView .dsp-account-hero p{margin-bottom:0}
+#appView .dsp-account-ident{width:64px;height:64px;display:grid;place-items:center;flex:0 0 64px;border:1px solid #c6b48c;border-radius:18px;background:rgba(255,255,255,.11);backdrop-filter:blur(8px)}
+#appView .dsp-account-ident .dsp-avatar{width:55px;height:55px}
+#appView .dsp-setting{margin-top:20px;padding-top:16px;border-top:1px solid var(--dsp-rim)}
+#appView .dsp-setting h3{font-size:16px;margin:0 0 7px;color:inherit}
+#appView .dsp-setting>p{font-size:12px;line-height:1.5;color:var(--dsp-muted);margin:0 0 10px}
+#appView .dsp-chip-set{display:flex;flex-wrap:wrap;gap:7px}
+#appView .dsp-chip{font-size:12px;padding:9px 11px;border-radius:999px;border:1px solid var(--dsp-rim);background:transparent;color:inherit;cursor:pointer}
+#appView .dsp-chip.is-active{border-color:var(--dsp-gold);background:color-mix(in srgb,var(--dsp-gold) 13%,transparent)}
+#appView .dsp-note-input{display:block;width:100%;min-width:0;box-sizing:border-box;resize:vertical;background:color-mix(in srgb,var(--dsp-gold) 4%,transparent);border:1px solid var(--dsp-rim);color:inherit;border-radius:14px;padding:13px;font:14px/1.5 system-ui,sans-serif}
+#appView .dsp-field-label{font-size:12px;font-weight:600;display:block;margin:6px 0}
+#appView .dsp-note-actions{display:flex;align-items:center;gap:12px;margin-top:10px}
+#appView .dsp-note-status{font-size:11px;color:var(--dsp-muted)}
+#appView .dsp-notes-list{display:grid;gap:8px;margin:10px 0}
+#appView .dsp-note{padding:12px;border:1px solid var(--dsp-rim);border-radius:14px;background:transparent}
+#appView .dsp-note p{font-size:13px;line-height:1.5;overflow-wrap:anywhere;white-space:normal;margin:0 0 6px}
+#appView .dsp-note small{color:var(--dsp-muted);font-size:10px}
+#appView .dsp-note button,#appView .dsp-saved-line button{background:transparent;border:0;color:var(--dsp-gold);cursor:pointer;font-size:12px}
+#appView .dsp-note button{float:right}
+#appView .dsp-saved-line{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--dsp-rim);padding:11px 0}
+#appView .dsp-saved-line button:first-child{text-align:left;flex:1;min-width:0;overflow-wrap:anywhere}
+#appView .dsp-count{color:var(--dsp-muted);font-size:12px}
+#appView .dsp-empty,#darHomeHtmlParityV1 .dsp-empty{font-size:12px;color:var(--dsp-muted);padding:8px 0}
+@media(max-width:540px){
+ #darHomeHtmlParityV1 .dsp-home-hero{min-height:196px}
+ #darHomeHtmlParityV1 .dsp-home-copy{width:100%;padding:18px 15px}
+ #darHomeHtmlParityV1 .dsp-home-hero::after{background:linear-gradient(90deg,rgba(5,17,22,.96),rgba(5,17,22,.8) 69%,rgba(5,17,22,.42))}
+ #darHomeHtmlParityV1 .dsp-choices,#appView .dsp-choices{gap:5px}
+ #darHomeHtmlParityV1 .dsp-gender,#appView .dsp-gender{flex-direction:column;text-align:center;padding:8px 3px;gap:4px}
+ #darHomeHtmlParityV1 .dsp-gender .dsp-avatar,#appView .dsp-gender .dsp-avatar{width:39px;height:39px;flex-basis:39px}
+ #darHomeHtmlParityV1 .dsp-gender small,#appView .dsp-gender small{font-size:9px}
+ #appView .dsp-account-hero{padding:16px}
+ #appView .dsp-account-ident{width:48px;height:48px;flex-basis:48px}
+ #appView .dsp-account-ident .dsp-avatar{width:43px;height:43px}
+}
+@media(min-width:740px){
+ #darHomeHtmlParityV1 .dsp-home-hero{min-height:230px}
+ #darHomeHtmlParityV1 .dsp-recommend-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+ #darHomeHtmlParityV1 .dsp-recommend-row{min-width:0;align-items:stretch}
+ #darHomeHtmlParityV1 .dsp-recommend-open{gap:9px}
+}
+@media(prefers-reduced-motion:reduce){
+ #darHomeHtmlParityV1 .dsp-home button,#appView .dsp-account button{transition:none!important;transform:none!important}
+}
+/* Artwork is static: no parallax, position:fixed or extra scrolling container. */
