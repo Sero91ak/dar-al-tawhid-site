@@ -516,6 +516,7 @@ jobs:
           DAR_PUSH_UNLOCK_PASSWORD: ${{ secrets.DAR_PUSH_UNLOCK_PASSWORD }}
         run: |
           node scripts/app-health-check.js
+          node scripts/check-visitor-home-capsule-edges.cjs
           if [ "${{ needs.classify.outputs.kids_touched }}" = "true" ]; then
             echo "Kids-Spur geändert – Kids Release Guards ausführen."
             node scripts/kids-prophet-release-guard.js
