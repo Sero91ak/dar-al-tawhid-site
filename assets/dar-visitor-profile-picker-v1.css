@@ -18,3 +18,25 @@
 #darAdultBrandHeaderV2 .dvp-chooser-foot{border-top:1px solid var(--line,#425750);margin:15px 0 0;padding-top:11px;font-size:10px;opacity:.7;line-height:1.5}
 @media(max-width:390px){#darAdultBrandHeaderV2 .dvp-trigger{width:37px;height:39px}#darAdultBrandHeaderV2 .dvp-trigger img{width:33px;height:36px}}
 @media(prefers-reduced-motion:reduce){#darAdultBrandHeaderV2 .dvp-chooser *{transition:none!important}}
+
+/* dvp-mobile-header-grid-fix: coexist with original two-row brand header. */
+@media(max-width:699px){
+ #darAdultBrandHeaderV2 .dtbh-row{
+  grid-template-columns:42px minmax(0,1fr) 40px 40px!important;
+  grid-template-rows:auto 42px!important;
+  column-gap:clamp(4px,1.65vw,9px)!important;
+ }
+ #darAdultBrandHeaderV2 .dvp-trigger{
+  grid-row:2!important;grid-column:3!important;align-self:center!important;
+  width:40px!important;height:40px!important;margin:0!important;
+ }
+ #darAdultBrandHeaderV2 .dtbh-toggle{
+  grid-row:2!important;grid-column:4!important;
+  width:40px!important;height:40px!important;
+ }
+ #darAdultBrandHeaderV2 .dtbh-name{
+  font-size:clamp(15px,4.5vw,21px)!important;
+  letter-spacing:-.035em!important;
+  min-width:0!important;overflow:hidden!important;
+ }
+}
