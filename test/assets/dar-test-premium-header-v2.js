@@ -53,7 +53,7 @@ function chooserMarkup(){
  var smart=window.DAR_TEST_SMART_PROFILE_V1;
  var current=smart&&typeof smart.get==="function"?smart.get().gender:"neutral";
  var items=[["neutral","Neutral","Alle Inhalte"],["woman","Frau","Frauenwissen"],["man","Mann","Wissensweg"]];
- return '<div class="dtbh-profile-head"><strong>Mein Profil</strong><small>Deinen Wissensbereich wählen</small></div><div class="dtbh-profile-options">'+items.map(function(item){return '<button type="button" class="dtbh-profile-choice'+(current===item[0]?" is-active":"")+'" data-dtbh-profile="'+item[0]+'" aria-pressed="'+String(current===item[0])+'"><img src="/test/assets/smart-profile/avatar-'+item[0]+'.svg" alt="" aria-hidden="true"><span><strong>'+item[1]+'</strong><small>'+item[2]+'</small></span></button>'}).join("")+'</div><button type="button" class="dtbh-profile-account" data-dtbh-open-account>Konto & Synchronisierung öffnen</button>';
+ return '<div class="dtbh-profile-head"><strong>Mein Profil</strong><small>Deinen Wissensbereich wählen</small></div><div class="dtbh-profile-options">'+items.map(function(item){return '<button type="button" class="dtbh-profile-choice'+(current===item[0]?" is-active":"")+'" data-dtbh-profile="'+item[0]+'" aria-pressed="'+String(current===item[0])+'"><img src="/test/assets/smart-profile/avatar-'+item[0]+'.svg" alt="" aria-hidden="true"><span><strong>'+item[1]+'</strong><small>'+item[2]+'</small></span></button>'}).join("")+'</div><button type="button" class="dtbh-profile-account" data-dtbh-open-account>Mein Profil & Konto öffnen</button>';
 }
 function setupChooser(h,account){
  var pop=document.createElement("div");
@@ -63,6 +63,7 @@ function setupChooser(h,account){
  h.appendChild(pop);
  function close(){pop.hidden=true;account.setAttribute("aria-expanded","false")}
  function open(){pop.innerHTML=chooserMarkup();pop.hidden=false;account.setAttribute("aria-expanded","true")}
+ window.DAR_TEST_PROFILE_CHOOSER={open:open,close:close};
  account.setAttribute("aria-haspopup","dialog");account.setAttribute("aria-controls","dtbhProfilePopover");account.setAttribute("aria-expanded","false");
  account.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();if(pop.hidden)open();else close()});
  pop.addEventListener("click",function(e){
