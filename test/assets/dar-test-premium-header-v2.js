@@ -106,6 +106,23 @@ function setup(){
  row.appendChild(actions);
  h.dataset.premiumHeaderV2="ready";
  document.documentElement.classList.add("dar-test-premium-header-v2");
+ /* TEST_HEADER_OCCLUSION_V1: fixed brand and nested sticky headings share a
+    measured boundary across iOS, Android, tablets, split view and zoom. */
+ function updateFixedTop(){
+  var rect=h.getBoundingClientRect();
+  var height=Math.ceil(rect.height),bottom=Math.ceil(Math.max(0,rect.bottom));
+  if(height>0&&height<260){
+   document.documentElement.style.setProperty("--dar-test-brand-header-height",height+"px");
+   document.documentElement.style.setProperty("--dar-test-occlusion-top",bottom+"px");
+  }
+ }
+ updateFixedTop();
+ if(typeof ResizeObserver==="function")new ResizeObserver(updateFixedTop).observe(h);
+ window.addEventListener("resize",updateFixedTop,{passive:true});
+ window.addEventListener("orientationchange",updateFixedTop,{passive:true});
+ window.addEventListener("pageshow",updateFixedTop);
+ document.addEventListener("dar:view-rendered",updateFixedTop);
+ if(window.visualViewport)window.visualViewport.addEventListener("resize",updateFixedTop,{passive:true});
  return true;
 }
 if(!setup()){
