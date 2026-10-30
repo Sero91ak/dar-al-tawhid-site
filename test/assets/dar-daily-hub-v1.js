@@ -45,17 +45,17 @@ function syncNav(p){
  var slot=navSlot();if(!slot)return;
  if(!slot.dataset.darOriginalTab)slot.dataset.darOriginalTab=slot.getAttribute("data-bottom-nav")||"quiz";
  var female=p.gender==="woman",male=p.gender==="man";
- var target=female?"frauen":male?"topics":"quiz",text=female?"Frauen":male?"Entdecken":"Quiz";
+ var target=female?"frauen":"topics",text=female?"Frauen":"Entdecken";
  // Neutral stays on the original route: never introduce an inaccessible destination.
  if(slot.getAttribute("data-bottom-nav")!==target)slot.setAttribute("data-bottom-nav",target);
  slot.dataset.darAdaptiveTab=target;
- slot.setAttribute("aria-label",female?"Frauenbereich öffnen":male?"Wissensbereiche entdecken":"Quiz öffnen");
+ slot.setAttribute("aria-label",female?"Frauenbereich öffnen":"Wissensbereiche entdecken");
  slot.setAttribute("title",text);
  var label=slot.querySelector(".nav-label")||Array.from(slot.children).find(function(e){return e.classList&&e.classList.contains("nav-text")})||Array.from(slot.children).find(function(e){return e.tagName==="SPAN"&&!e.classList.contains("nav-icon")});
  if(label&&label.textContent!==text)label.textContent=text;
  var icon=slot.querySelector(".nav-icon");
  if(icon){
-  var src="/test/assets/dar-3d-icons/"+(female?"frauen.png":male?"topics.png":"quiz.png");
+  var src="/test/assets/dar-3d-icons/"+(female?"frauen.png":"topics.png");
   var img=icon.querySelector("img");
   if(img){if(img.getAttribute("src")!==src)img.setAttribute("src",src)}
   else{icon.textContent="";img=document.createElement("img");img.src=src;img.alt="";img.className="dar3d-icon";img.setAttribute("aria-hidden","true");img.decoding="async";icon.appendChild(img)}
@@ -79,7 +79,7 @@ function syncCard(){
  if(!seenHome){seenHome=true;setTimeout(maybePrompt,1350)}
 }
 function moreButton(){
- var more=document.querySelector("#appView .dar-more-v15");if(!more||!document.body.classList.contains("is-more-route"))return;
+ var more=document.querySelector("#appView .dar-more-v15");if(!more)return;
  if(more.querySelector(".ddh-more-quiz"))return;
  var section=document.createElement("section");section.className="ddh-more-quiz";
  section.innerHTML='<div><span class="ddh-kicker">WISSEN VERTIEFEN</span><h3>Quiz & tägliche Wissensfrage</h3><p>Prüfe dein Wissen oder beantworte die heutige Frage.</p></div><div class="ddh-more-actions"><button type="button" data-ddh-open="true">Tagesfrage</button><button type="button" data-ddh-navigate="quiz">Zum Quiz</button></div>';
@@ -113,7 +113,7 @@ function sync(){
 document.addEventListener("click",function(event){
  var slot=event.target.closest&&event.target.closest("#bottomNav [data-dar-adaptive-tab]");
  if(slot){
-  var p=profile(),dest=p&&p.gender==="woman"?"frauen":p&&p.gender==="man"?"topics":"quiz";
+  var p=profile(),dest=p&&p.gender==="woman"?"frauen":"topics";
   event.preventDefault();event.stopImmediatePropagation();navigateTo(dest);setTimeout(sync,60);return;
  }
  var openButton=event.target.closest&&event.target.closest("[data-ddh-open]");
@@ -151,6 +151,6 @@ function init(){
  new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:["class"]});
  setTimeout(sync,500);setTimeout(sync,1800);setTimeout(sync,3000);
 }
-window.DAR_TEST_DAILY_HUB_V1={question:daily,state:entry,refresh:sync,open:open,profileTab:function(){return profile()&&profile().gender==="woman"?"frauen":profile()&&profile().gender==="man"?"topics":"quiz"},bankSize:QUESTIONS.length};
+window.DAR_TEST_DAILY_HUB_V1={question:daily,state:entry,refresh:sync,open:open,profileTab:function(){return profile()&&profile().gender==="woman"?"frauen":"topics"},bankSize:QUESTIONS.length};
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
