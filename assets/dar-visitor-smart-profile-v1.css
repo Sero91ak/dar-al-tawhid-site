@@ -247,3 +247,16 @@ body.is-account-route #appView .account-sync-list{font-size:11px!important;line-
  #appView .dsp-my-actions>button .dsp-my-action-icon{width:32px;height:34px;font-size:20px}
 }
 @media(prefers-reduced-motion:reduce){#appView .dsp-my-actions>button:active{transform:none!important}}
+
+
+/* Large-screen composition and legibility improvements for personal page. */
+body.is-account-route #appView .account-panel{
+ width:min(100%,1120px)!important;max-width:1120px!important;margin-inline:auto!important;
+}
+#appView .dsp-my-section-heading small{font-size:12px!important}
+#appView .dsp-my-actions>button strong{font-size:13px!important}
+#appView .dsp-my-actions>button small{font-size:11px!important}
+#appView .dsp-my-stats span{font-size:11px!important}
+#appView .dsp-my-recommend button span{font-size:11px!important}
+#appView .dsp-my-privacy{font-size:12px!important}
+@media(max-width:380px){#appView .dsp-my-stats span{font-size:10px!important}}
