@@ -557,7 +557,7 @@ async function finalizeDarTestHomeV1193(asset) {
   // Enhance the original brand bar without changing its palette handler,
   // account routes, language availability, prayer updater or spacer.
   const premiumHeaderAssets =
-    '<link rel="stylesheet" id="darTestPremiumHeaderCssV2" href="/test/assets/dar-test-premium-header-v2.css?v=20261030-hero-route-matrix-v3">' +
+    '<link rel="stylesheet" id="darTestPremiumHeaderCssV2" href="/test/assets/dar-test-premium-header-v2.css?v=20261030-hero-route-matrix-v4">' +
     '<script defer id="darTestPremiumHeaderJsV2" src="/test/assets/dar-test-premium-header-v2.js?v=20261030-smart-v3"><\/script>';
   if (!html.includes('id="darTestPremiumHeaderJsV2"')) {
     const at = html.lastIndexOf("</html>");
