@@ -39,6 +39,23 @@ assert.match(header,/setupChooser\(h,account\)/,"Middle header icon must open pr
 assert.match(header,/DAR_TEST_PROFILE_CHOOSER/,"Account profile switch must open existing header chooser");
 const headerCSS=read("test/assets/dar-test-premium-header-v2.css");
 assert.match(headerCSS,/border:1px solid var\(--dtbh-line\)!important;background:var\(--dtbh-btn\)!important/,"Middle profile icon needs native theme capsule");
+
+assert.match(script,/approved-woman-v1\.webp/,"Chosen woman's actual image must be used in account and header");
+assert.match(script,/approved-man-v1\.webp/,"Chosen man's actual image must be used in account and header");
+assert.match(header,/approved-woman-v1\.webp/,"Header chooser must display woman's approved avatar");
+assert.match(header,/approved-man-v1\.webp/,"Header chooser must display man's approved avatar");
+const hashes={
+ "approved-man-v1.webp":"21178597cdd5cd12b7c7ddb88f071d914d6c09d3935b6328510cae7363d45de2",
+ "approved-woman-v1.webp":"3279f2fdde0559a08eb936d66de08a3088c2079f41994b40f95ece8241db2a63"
+};
+for(const [filename,digest] of Object.entries(hashes)){
+ const original=fs.readFileSync(path.join(root,"test/assets/smart-profile",filename));
+ assert.equal(original.toString("ascii",0,4),"RIFF","Approved avatar must be a real WebP file");
+ assert.equal(original.toString("ascii",8,12),"WEBP","Approved avatar must be decodable as WebP");
+ assert.equal(original[20]&0x10,0x10,"Approved avatar must preserve its transparent alpha channel");
+ assert.equal(require("node:crypto").createHash("sha256").update(original).digest("hex"),digest,"Do not replace selected user's original illustration");
+}
+
 for(const file of ["avatar-neutral.svg","avatar-woman.svg","avatar-man.svg"]){
  const source=read("test/assets/smart-profile/"+file);
  assert.match(source,/<svg/);assert.match(source,/<\/svg>/);
@@ -85,6 +102,7 @@ function click(name,value){
 }
 click("data-dsp-gender","woman");
 assert.equal(api.get().gender,"woman");
+assert.equal(api.image("woman"),"/test/assets/smart-profile/approved-woman-v1.webp");
 assert.equal(api.get().palette,"keep","Selecting a profile must not override the user’s appearance");
 assert.ok(api.recommendations().some(x=>x.tags.includes("women")),"Women's home must highlight women's knowledge");
 click("data-dsp-add-note","");
@@ -94,6 +112,7 @@ assert.equal(api.get().gender,"neutral");
 assert.equal(api.get().notes.length,0,"Another account must not read guest notes");
 click("data-dsp-gender","man");
 assert.equal(api.get().gender,"man");
+assert.equal(api.image("man"),"/test/assets/smart-profile/approved-man-v1.webp");
 assert.ok(api.recommendations().every(x=>!x.tags.includes("women")),"Men's home excludes women-specific recommendations");
 const r1=api.recommendations().map(x=>x.id).join(",");
 const r2=api.recommendations().map(x=>x.id).join(",");
