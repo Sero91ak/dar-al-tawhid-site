@@ -89,6 +89,7 @@ jobs:
           node --check test/assets/dar-home-html-parity-v1.js
           node test/tools/check-home-css-architecture.cjs
           node test/tools/check-home-direct-post-data.cjs
+          node test/tools/check-smart-profile-v1.cjs
 
       # Keep the approved adult Test Quran Player independent of other branches.
       # This affects only /test resources, never visitor or KIDS application code.
