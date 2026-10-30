@@ -53,7 +53,7 @@ function card(p){var g=p.gender,chosen=p.chosen,rs=picks(p);
  var top='<section class="dsp-home" aria-label="Persönlicher Wissensbereich" data-dsp-gender="'+g+'">'+
  '<div class="dsp-home-hero"><img class="dsp-hero-art" alt="" src="'+hero(g)+'" loading="lazy" decoding="async"><div class="dsp-home-copy"><span class="dsp-eyebrow">DĀR SMART · PERSÖNLICH</span>'+
  '<h2>'+(chosen?display(g):"Dein persönlicher Wissensbereich")+'</h2><p>'+(chosen?"Dein täglicher Zugang zu ausgewählten, bereits veröffentlichten Quellen und Lerninhalten.":"Wähle freiwillig dein Profil. Deine Startseite stellt daraufhin passende Inhalte zusammen.")+'</p>'+
- '<div class="dsp-actions"><button type="button" class="dsp-primary" data-dsp-open-account>'+(chosen?"Profil & Notizen":"Jetzt einrichten")+'</button><button type="button" class="dsp-subtle" data-dsp-open-more>Bibliothek öffnen</button></div></div></div>';
+ '<div class="dsp-actions"><button type="button" class="dsp-primary" data-dsp-open-account>'+(chosen?"Profil & Notizen":"Jetzt einrichten")+'</button><button type="button" class="dsp-subtle" data-dsp-open-more>Bibliothek öffnen</button>'+(g==="woman"?'<button type="button" class="dsp-subtle" data-dsp-open-women>Frauen-Fiqh</button>':'')+'</div></div></div>';
  if(!chosen)top+='<div class="dsp-onboarding"><span>Wie möchtest du deine Startseite nutzen?</span><div class="dsp-choices">'+choice("woman",g)+choice("man",g)+choice("neutral",g)+'</div></div>';
  else top+='<div class="dsp-prefs-inline"><span>'+label(g)+' · '+p.interests.map(x=>TOPICS.find(y=>y[0]===x)?.[1]||x).slice(0,3).join(" · ")+'</span><button type="button" data-dsp-open-account>Ändern</button></div>';
  top+='<div class="dsp-recommendations"><div class="dsp-section-head"><h3>Dein Wissensweg heute</h3><span>'+new Date().toLocaleDateString("de-DE",{timeZone:"Europe/Berlin",day:"2-digit",month:"long"})+'</span></div>';
@@ -71,11 +71,34 @@ function accountPanel(p){var g=p.gender;return '<section id="darTestSmartAccount
  '<div class="dsp-notes-list">'+(p.notes.length?p.notes.slice().reverse().map((n,i)=>'<article class="dsp-note"><p>'+esc(n.text).replace(/\n/g,"<br>")+'</p><small>'+esc(n.date)+'</small><button type="button" data-dsp-remove-note="'+(p.notes.length-i-1)+'" aria-label="Notiz löschen">Löschen</button></article>').join(""):'<p class="dsp-empty">Noch keine Notizen gespeichert.</p>')+'</div></div>'+
  '<div class="dsp-setting"><h3>Meine Merkliste <span class="dsp-count">'+p.saved.length+'</span></h3><div class="dsp-notes-list">'+(p.saved.length?p.saved.map(id=>{var item=inventory().find(x=>x.id===id);return '<div class="dsp-saved-line"><button type="button" data-dsp-post="'+esc(id)+'">'+esc(item?item.title:"Gespeicherter Beitrag · "+id)+'</button><button type="button" data-dsp-save="'+esc(id)+'" aria-label="Aus Merkliste entfernen">×</button></div>'}).join(""):'<p class="dsp-empty">Beiträge auf der Startseite mit dem Stern speichern.</p>')+'</div></div>'+
  '<div class="dsp-setting"><h3>Meine Einstellungen</h3><button class="dsp-subtle" type="button" data-dsp-reset>Interessen und Profilauswahl zurücksetzen</button></div></section>'}
+function syncLatest(p,root){
+ var target=root.querySelector("#dhpPosts"),source=inventory();
+ if(!target||!source.length)return;
+ // Keep publication order; women's topics are not shown on the men's homepage.
+ var list=(p.gender==="man"?source.filter(x=>!x.tags.includes("women")):source).slice(0,2);
+ if(!list.length)return;
+ var sig=p.gender+"|"+list.map(x=>x.id+"|"+x.title).join(";");
+ var old=target.querySelector("[data-dhp-value]");
+ if(target.dataset.dspRecentSig===sig&&old&&old.dataset.dhpValue===list[0].id&&target.children.length===list.length)return;
+ target.replaceChildren();
+ list.forEach(function(post,i){
+  var btn=document.createElement("button");btn.type="button";
+  btn.className=i?"dhp-article dhp-post-capsule":"dhp-panel dhp-feature dhp-post-capsule";
+  btn.dataset.dhpRoute="post";btn.dataset.dhpValue=post.id;
+  if(!i){var label=document.createElement("span");label.className="dhp-kicker";label.textContent="NEUESTE VERÖFFENTLICHUNG";btn.append(label)}
+  var title=document.createElement("h3");title.textContent=post.title;
+  var sub=document.createElement("p");sub.textContent=post.sub||"Qurʾān · Sunnah · Āthār";
+  if(i){var div=document.createElement("div");div.append(title,sub);btn.append(div)}else btn.append(title,sub);
+  target.append(btn)
+ });
+ target.dataset.dspRecentSig=sig;
+}
 function updateHome(p){var root=document.getElementById("darHomeHtmlParityV1");if(!root)return;
  var widget=root.querySelector(".dsp-mount");if(!widget){widget=document.createElement("div");widget.className="dsp-mount";var welcome=root.querySelector(".dhp-welcome");if(!welcome)return;welcome.insertAdjacentElement("afterend",widget)}
  var sig=owner()+"|"+today()+"|"+JSON.stringify([p.gender,p.chosen,p.palette,p.interests,p.saved,p.opened])+ "|" + inventory().length;
  if(widget.dataset.dspSig!==sig){widget.innerHTML=card(p);widget.dataset.dspSig=sig}
  root.dataset.smartGender=p.gender;
+ syncLatest(p,root);
  // Do not delete or move native routes. Women's library shortcut remains in Mehr.
  var women=root.querySelector('.dhp-library-tile[data-dhp-route="frauen"]');
  if(women)women.hidden=p.gender==="man";
@@ -96,7 +119,7 @@ document.addEventListener("click",function(e){
  if(nativePost&&nativePost.dataset.dhpValue){var opened=read(),pid=nativePost.dataset.dhpValue;opened.opened=[pid].concat(opened.opened.filter(x=>x!==pid)).slice(0,30);write(opened);return}
  var nativeTheme=e.target.closest("[data-dtbh-theme],[data-theme-select]");
  if(nativeTheme){var chosen=nativeTheme.getAttribute("data-dtbh-theme")||nativeTheme.getAttribute("data-theme-select");if(THEMES.includes(chosen)){var current=read();if(current.palette!==chosen){current.palette=chosen;write(current)}}return}
- var b=e.target.closest("[data-dsp-gender],[data-dsp-theme],[data-dsp-interest],[data-dsp-open-account],[data-dsp-open-more],[data-dsp-post],[data-dsp-save],[data-dsp-add-note],[data-dsp-remove-note],[data-dsp-reset]");
+ var b=e.target.closest("[data-dsp-gender],[data-dsp-theme],[data-dsp-interest],[data-dsp-open-account],[data-dsp-open-more],[data-dsp-open-women],[data-dsp-post],[data-dsp-save],[data-dsp-add-note],[data-dsp-remove-note],[data-dsp-reset]");
  if(!b)return;
  e.preventDefault();e.stopPropagation();
  if(b.hasAttribute("data-dsp-gender")){saveGender(b.getAttribute("data-dsp-gender"));return}
@@ -104,6 +127,7 @@ document.addEventListener("click",function(e){
  if(b.hasAttribute("data-dsp-interest")){var p=read(),tag=b.getAttribute("data-dsp-interest");p.interests=p.interests.includes(tag)?p.interests.filter(x=>x!==tag):p.interests.concat([tag]);write(p);return}
  if(b.hasAttribute("data-dsp-open-account")){nav("account");return}
  if(b.hasAttribute("data-dsp-open-more")){nav("more");return}
+ if(b.hasAttribute("data-dsp-open-women")){nav("frauen");return}
  if(b.hasAttribute("data-dsp-post")){var id=b.getAttribute("data-dsp-post"),p=read();p.opened=[id].concat(p.opened.filter(x=>x!==id)).slice(0,30);write(p);nav("post",id);return}
  if(b.hasAttribute("data-dsp-save")){var p=read(),id=b.getAttribute("data-dsp-save");p.saved=p.saved.includes(id)?p.saved.filter(x=>x!==id):p.saved.concat([id]).slice(-100);write(p);return}
  if(b.hasAttribute("data-dsp-add-note")){var input=document.getElementById("dspNoteText"),value=input&&input.value.trim();if(!value)return;var p=read();p.notes.push({text:value.slice(0,1600),date:new Date().toLocaleDateString("de-DE",{timeZone:"Europe/Berlin"})});p.notes=p.notes.slice(-40);write(p);return}
