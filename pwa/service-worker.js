@@ -87,6 +87,25 @@ function liveLocaleAsset(u){
     '/assets/dar-more-v15.js'
   ]).has(u.pathname);
 }
+/* Global adult dashboard assets must never be permanently frozen by
+ * previously installed Android PWA cache-first behavior. Keep the v3 cache
+ * and user offline files; go network-first with cached fallback for UI only. */
+const ADULT_VISITOR_LIVE_UI=new Set([
+ '/assets/dar-home-test-parity-visitor.js',
+ '/assets/dar-visitor-smart-profile-v1.js',
+ '/assets/dar-visitor-smart-profile-v1.css',
+ '/assets/dar-visitor-profile-picker-v1.js',
+ '/assets/dar-visitor-profile-picker-v1.css',
+ '/assets/dar-visitor-daily-hub-v1.js',
+ '/assets/dar-visitor-daily-hub-v1.css',
+ '/assets/dar-visitor-onboarding-v1.js',
+ '/assets/dar-visitor-onboarding-v1.css',
+ '/assets/dar-adult-brand-header-v2.js',
+ '/assets/dar-adult-brand-header-v2.css',
+ '/assets/dar-noble-3d-icons.js',
+ '/assets/dar-noble-3d-icons.css'
+]);
+function isAdultVisitorLiveUiAsset(u){return ADULT_VISITOR_LIVE_UI.has(u.pathname)}
 function staticVersionedAsset(u){
   // Only cache-first assets with explicit version keys: a changed URL
   // receives fresh files. Mutable data and media remain network-first.
@@ -126,13 +145,14 @@ self.addEventListener('fetch',event=>{
   event.respondWith((async()=>{
     const cache=await caches.open(CACHE_VERSION);
     // Previously opened, versioned CSS, JS and images open immediately offline.
-    const staticAsset=staticVersionedAsset(u)&&!liveLocaleAsset(u);
+    const staticAsset=staticVersionedAsset(u)&&!liveLocaleAsset(u)&&!isAdultVisitorLiveUiAsset(u);
     if(staticAsset){
       const stored=await cache.match(request);
       if(stored)return stored;
     }
     try{
       const live=await fetch(request,{cache:'no-store'});
+      if(isAdultVisitorLiveUiAsset(u)&&(!live||!live.ok))return (await cache.match(request))||live||Response.error();
       if(live&&live.ok&&live.type!=='opaque'){
         // A cache write must never hold up the returned resource.
         event.waitUntil(cache.put(request,live.clone()).catch(()=>null));
