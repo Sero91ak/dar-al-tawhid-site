@@ -47,11 +47,16 @@ for(const file of ["avatar-neutral.svg","avatar-woman.svg","avatar-man.svg"]){
 const memory=new Map(),listeners={},win={},loc={pathname:"/test/"};
 let user=null;
 const overlay={hidden:true,innerHTML:"",querySelector:()=>({focus(){}})};
+const panels={"dspExpand-interests":{hidden:true},"dspExpand-saved":{hidden:true}};
+const controls={
+ '[data-dsp-toggle="interests"]':{setAttribute(name,value){this[name]=value}},
+ '[data-dsp-toggle="saved"]':{setAttribute(name,value){this[name]=value}}
+};
 const doc={
  readyState:"loading",body:{appendChild(){},classList:{add(){},remove(){}}},createElement:()=>overlay,
  addEventListener:(type,fn)=>{listeners[type]=fn},
- querySelector:()=>null,
- getElementById:(id)=>id==="dspNoteText"?{value:"Notiz zum Quellenstudium"}:id==="dspNotesOverlay"?overlay:null
+ querySelector:selector=>controls[selector]||null,
+ getElementById:id=>id==="dspNoteText"?{value:"Notiz zum Quellenstudium"}:id==="dspNotesOverlay"?overlay:panels[id]||null
 };
 const records=[
  {id:"w1",title:"Frauenwissen: Stellung der Frau",category:"Fiqh"},
@@ -96,6 +101,16 @@ assert.equal(r1,r2,"Daily ranking must remain stable within one day");
 user=null;
 assert.equal(api.get().gender,"woman");
 assert.equal(api.get().notes[0].text,"Notiz zum Quellenstudium");
+click("data-dsp-toggle","interests");
+assert.equal(panels["dspExpand-interests"].hidden,false,"Interest options must visually expand");
+click("data-dsp-toggle","interests");
+assert.equal(panels["dspExpand-interests"].hidden,true,"Interest options must visually collapse");
+click("data-dsp-open-saved","");
+assert.equal(panels["dspExpand-saved"].hidden,false,"Saved shortcut must expand bookmark list");
+let chooserCalls=0;
+win.DAR_TEST_PROFILE_CHOOSER={open(){chooserCalls++}};
+click("data-dsp-switch-profile","");
+assert.equal(chooserCalls,1,"Account profile change must invoke the existing header selector");
 click("data-dsp-interest","adab");
 assert.ok(api.get().interests.includes("adab"),"Interest toggle persists");
 click("data-dsp-interest","adab");
