@@ -155,6 +155,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "dar-test-smart-profiles-women-men-personalization-20261030",
+      "at": "2026-10-30T10:00:00+01:00",
+      "approvedBy": "user-explicit-implement-smart-personalization-in-dar-test-20261030",
+      "reason": "Nur DĀR TEST: freiwillige Frauen-/Männer-/neutrale Profilwahl, getrennte SVG-Avatare und ruhende Hero-Bilder, persönliche farbliche Anpassung, automatische tägliche Empfehlungen aus vorhandenen Beiträgen, lokale Notizen und Merkliste sowie Regressionen. Bestehendes Konto wiederverwenden; keine Besucher-/Kids-/Push-/Worker-/iOS-Binärfreigabe.",
+      "paths": [
+        "test/assets/dar-home-html-parity-v1.js",
+        "test/assets/dar-smart-profile-v1.js",
+        "test/assets/dar-smart-profile-v1.css",
+        "test/assets/smart-profile/avatar-woman.svg",
+        "test/assets/smart-profile/avatar-man.svg",
+        "test/assets/smart-profile/hero-woman.svg",
+        "test/assets/smart-profile/hero-man.svg",
+        "test/tools/check-smart-profile-v1.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-07T23:59:00.000Z"
+    },
+    {
       "id": "adult-visitor-dashboard-v31-jummah-preserved-20261030",
       "at": "2026-10-30T07:15:00+01:00",
       "approvedBy": "user-explicit-push-live-dashboard-v31-20261030",
