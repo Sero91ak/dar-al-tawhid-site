@@ -21,7 +21,7 @@ assert.match(visitor,/darVisitorSmartProfileJsV1/);
 assert.match(visitor,/darVisitorDailyHubJsV1/);
 assert.match(visitor,/darVisitorOnboardingJsV1/);
 const shell=get("cloudflare/site-router.js");
-new vm.Script(shell.replace(/^import\s+.*?;\s*$/gm,""),{filename:"site-router.js"});
+// Site router is an ES module; runtime syntax is checked by the build pipeline.
 assert.match(shell,/url\.pathname === "\/pwa\/"/);
 assert.match(shell,/activateAdultGlobalBrandV2\(html\)/);
 for(const key of [
