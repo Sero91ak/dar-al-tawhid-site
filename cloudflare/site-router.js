@@ -1492,6 +1492,7 @@ export default {
           '<script id="darDedicatedPwaBootV2">' +
           'window.__DAR_PWA_STANDARD_BOOT=true;' +
           'window.__DAR_PWA_DEDICATED_APP=true;' +
+          'window.__DAR_PWA_VISITOR_RELEASE="visitor-android-20261030-v8";' +
           'window.__DAR_PWA_LAUNCH_MARKER=true;' +
           'try{sessionStorage.setItem("dar_pwa_launch_session_v1","1")}catch(e){}' +
           // Ask Chrome to retain offline cache only after the PWA has loaded.
