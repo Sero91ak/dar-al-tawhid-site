@@ -572,6 +572,10 @@ var lastNativePrayerMarkup="",lastNativePrayerAria="";
 function mirrorNativePrayer(){
  var root=document.getElementById(ID),hub=document.getElementById("headerPrayerStatus");
  if(!root||!hub)return;
+ /* SMART_PRAYER_SINGLE_SOURCE_V2: never re-create the old visible mirror once the new clock is ready. */
+ if(document.body&&document.body.getAttribute("data-dat-smart-prayer")==="ready"){
+  var stale=root.querySelector("#dhpPrayerNativeMount");if(stale)stale.remove();return;
+ }
  var source=root.querySelector(".dhp-home-source-v55");
  if(!source)return;
  var shell=root.querySelector("#dhpPrayerNativeMount");
@@ -600,7 +604,7 @@ function mirrorFriday(){
  if(!root)return;
  var original=document.querySelector("#appView #darJummahFridayHome");
  var target=root.querySelector("#dhpFridayMirror");
- var prayer=root.querySelector("#dhpPrayerNativeMount")||root.querySelector(".dhp-prayer");
+ var prayer=root.querySelector(".dat-smart-prayer")||root.querySelector("#dhpPrayerNativeMount")||root.querySelector(".dhp-prayer");
  if(!prayer)return;
  if(!target){
   target=document.createElement("section");
@@ -708,13 +712,17 @@ var CSS=String.raw`
 #darHomeHtmlParityV1 .datp-track{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--dat-line)}
 #darHomeHtmlParityV1 .datp-fill{display:block;height:100%;background:var(--dat-gold);width:0%;transition:width 1s linear}
 #darHomeHtmlParityV1 .datp-foot{padding-top:8px;align-items:end}
-#darHomeHtmlParityV1 .datp-dates{display:flex;flex-direction:column;gap:1px;min-width:0}
-#darHomeHtmlParityV1 .datp-greg{font-size:11px;font-weight:750;line-height:1.35;color:var(--dat-ink);white-space:nowrap}
-#darHomeHtmlParityV1 .datp-hijri{font-size:10px;line-height:1.35;color:var(--dat-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#darHomeHtmlParityV1 .datp-local{display:flex;flex-direction:column;align-items:end;gap:1px;flex:none}
-#darHomeHtmlParityV1 .datp-local-label{font-size:9px;font-weight:750;letter-spacing:.1em;color:var(--dat-muted)}
-#darHomeHtmlParityV1 .datp-now{font-size:clamp(21px,6.9vw,27px);line-height:1.05}
-#darHomeHtmlParityV1 .datp-seconds{font-size:.64em;color:var(--dat-muted)}
+#darHomeHtmlParityV1 .datp-dates{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:baseline;gap:5px;min-width:0;flex:1 1 auto;overflow:hidden;white-space:nowrap}
+#darHomeHtmlParityV1 .datp-greg{font-size:clamp(9px,2.8vw,11px);font-weight:750;line-height:1.35;color:var(--dat-ink);white-space:nowrap;flex:none}
+#darHomeHtmlParityV1 .datp-hijri{font-size:clamp(9px,2.55vw,10px);line-height:1.35;color:var(--dat-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+#darHomeHtmlParityV1 .datp-local{display:flex;flex-direction:row;align-items:baseline;gap:5px;flex:none}
+#darHomeHtmlParityV1 .datp-local-label{font-size:8px;font-weight:750;letter-spacing:.06em;color:var(--dat-muted)}
+#darHomeHtmlParityV1 .datp-now{font-size:clamp(20px,5.8vw,25px);line-height:1.05}
+#darHomeHtmlParityV1 .datp-seconds{font-size:.52em;color:var(--dat-muted)}
+#darHomeHtmlParityV1 .datp-date-dot{font-size:11px;color:var(--dat-gold);flex:none}
+@media(max-width:430px){#darHomeHtmlParityV1 .datp-local-label{display:none}}
+@media(max-width:359px){#darHomeHtmlParityV1 .datp-foot{display:block}#darHomeHtmlParityV1 .datp-dates{width:100%;justify-content:center}#darHomeHtmlParityV1 .datp-local{margin-top:3px;justify-content:center}#darHomeHtmlParityV1 .datp-local-label{display:inline}}
+@media(min-width:700px){#darHomeHtmlParityV1 .dat-smart-prayer{padding:14px 22px!important}#darHomeHtmlParityV1 .datp-number{font-size:clamp(46px,5vw,64px)}#darHomeHtmlParityV1 .datp-counter{font-size:32px}#darHomeHtmlParityV1 .datp-greg,#darHomeHtmlParityV1 .datp-hijri{font-size:13px}#darHomeHtmlParityV1 .datp-now{font-size:30px}#darHomeHtmlParityV1 .datp-foot{padding-top:11px}}
 html[data-theme="light"][data-theme-variant="salbei"] #darHomeHtmlParityV1 .dat-smart-prayer{--dat-num:#3f5d4b;--dat-gold:#8b7648;--dat-capsule:#e8ede4;--dat-ink:#17211b;--dat-muted:#536057}
 html[data-theme="eisgold"] #darHomeHtmlParityV1 .dat-smart-prayer{--dat-num:#3d5664;--dat-gold:#977744;--dat-capsule:#edf3f5;--dat-ink:#233e4b;--dat-muted:#5c6a73}
 html[data-theme="royal"] #darHomeHtmlParityV1 .dat-smart-prayer{--dat-num:#eddaab;--dat-gold:#c7aa6d;--dat-capsule:rgba(196,175,120,.11);--dat-ink:#f4efe1;--dat-muted:#b8c8d6}
@@ -722,7 +730,8 @@ html[data-theme="bordeaux"] #darHomeHtmlParityV1 .dat-smart-prayer{--dat-num:#e9
 html[data-theme="dark"] #darHomeHtmlParityV1 .dat-smart-prayer,html[data-theme="dar-al-layl"] #darHomeHtmlParityV1 .dat-smart-prayer{--dat-num:#e6d5a9;--dat-gold:#c3a46b;--dat-capsule:rgba(195,164,107,.11);--dat-ink:#eee8da;--dat-muted:#bdbbb2}
 html[data-theme="soft"] #darHomeHtmlParityV1 .dat-smart-prayer{--dat-num:var(--gold2,#4d6257);--dat-capsule:var(--soft,#edf0e7)}
 body.is-home-route[data-dat-smart-prayer="ready"] #darHomeHtmlParityV1 .dhp-prayer{display:none!important}
-body.is-home-route[data-dat-smart-prayer="ready"] #darHomeHtmlParityV1 #dhpPrayerNativeMount{display:none!important}
+body.is-home-route[data-dat-smart-prayer="ready"] #darHomeHtmlParityV1 #dhpPrayerNativeMount.top-shell.theme-hero-shell{display:none!important}
+body.is-home-route[data-dat-smart-prayer="ready"] #darHomeHtmlParityV1 #dhpNativePrayerStatus{display:none!important}
 body.is-home-route[data-dat-smart-prayer="ready"] #headerPrayerStatus{
  position:absolute!important;width:1px!important;height:1px!important;min-height:0!important;max-height:1px!important;
  margin:0!important;padding:0!important;overflow:hidden!important;clip-path:inset(50%)!important;opacity:0!important;pointer-events:none!important
@@ -758,6 +767,18 @@ function locale(){
  return labels[l]?l:(labels[(document.documentElement.lang||"de").split("-")[0]]?(document.documentElement.lang||"de").split("-")[0]:"de");
 }
 var card=null,previousKey="",targetDate=null,prayerStartDate=null,lastSource=0,remainingTime=null;
+var canonicalHub=null,canonicalOldDisplay="",canonicalOldPriority="";
+function hideCanonicalSource(hub){
+ if(canonicalHub&&canonicalHub!==hub)restoreCanonicalSource();
+ if(!canonicalHub){canonicalHub=hub;canonicalOldDisplay=hub.style.getPropertyValue("display");canonicalOldPriority=hub.style.getPropertyPriority("display")}
+ hub.style.setProperty("display","none","important");
+}
+function restoreCanonicalSource(){
+ if(!canonicalHub)return;
+ if(canonicalOldDisplay)canonicalHub.style.setProperty("display",canonicalOldDisplay,canonicalOldPriority);
+ else canonicalHub.style.removeProperty("display");
+ canonicalHub=null;canonicalOldDisplay="";canonicalOldPriority="";
+}
 function text(node,sel){var el=node&&node.querySelector(sel);return el?String(el.textContent||"").replace(/\s+/g," ").trim():""}
 function clockText(s){var m=String(s||"").match(/(?:^|[^\d])(\d{1,2}):(\d{2})(?:[^\d]|$)/);return m?String(m[1]).padStart(2,"0")+":"+m[2]:""}
 function normalizePrayer(name){
@@ -776,7 +797,7 @@ function make(){
  card.innerHTML='<span class="datp-head"><span class="datp-kicker"><span class="datp-goldbar" aria-hidden="true"></span><span data-dat-label="0">GEBETSZEITEN</span><span class="datp-live"><span class="datp-beacon" aria-hidden="true"></span><span data-dat-label="1">LIVE</span></span></span><span class="datp-location" data-dat-place></span></span>'+
  '<span class="datp-grid"><span class="datp-item"><span class="datp-caption"><span data-dat-label="2">AKTUELL</span><span class="datp-dot">·</span><span class="datp-prayername" data-dat-current-name></span></span><span class="datp-number" data-dat-current-time>--:--</span></span><span class="datp-centerline" aria-hidden="true"></span><span class="datp-item datp-right"><span class="datp-caption"><span data-dat-label="3">NÄCHSTES</span><span class="datp-dot">·</span><span class="datp-prayername" data-dat-next-name></span></span><span class="datp-number" data-dat-next-time>--:--</span></span></span>'+
  '<span class="datp-capsule"><span class="datp-until"><span class="datp-ring" aria-hidden="true"></span><span data-dat-label="4">BIS</span> <span data-dat-until-name></span></span><span class="datp-counter" data-dat-counter>--:--:--</span><span class="datp-track" aria-hidden="true"><span class="datp-fill" data-dat-fill></span></span></span>'+
- '<span class="datp-foot"><span class="datp-dates"><span class="datp-greg" data-dat-date></span><span class="datp-hijri" data-dat-hijri></span></span><span class="datp-local"><span class="datp-local-label" data-dat-label="5">ORTSZEIT</span><span class="datp-now"><span data-dat-now>--:--</span><span class="datp-seconds" data-dat-seconds>:--</span></span></span></span>';
+ '<span class="datp-foot"><span class="datp-dates"><span class="datp-greg" data-dat-date></span><span class="datp-date-dot" aria-hidden="true">·</span><span class="datp-hijri" data-dat-hijri></span></span><span class="datp-local"><span class="datp-local-label" data-dat-label="5">ORTSZEIT</span><span class="datp-now"><span data-dat-now>--:--</span><span class="datp-seconds" data-dat-seconds>:--</span></span></span></span>';
  return card;
 }
 function put(sel,v){var x=card&&card.querySelector(sel);if(x&&x.textContent!==v)x.textContent=v}
@@ -797,6 +818,10 @@ function refreshSource(now){
  var source=root.querySelector(".dhp-home-source-v55");
  if(!source)return false;
  if(x.previousElementSibling!==source)source.insertAdjacentElement("afterend",x);
+ /* Never let the previous visible mirror survive or reappear beneath Smart Prayer. */
+ var oldMirror=root.querySelector("#dhpPrayerNativeMount");if(oldMirror)oldMirror.remove();
+ var friday=root.querySelector("#dhpFridayMirror");if(friday&&friday.previousElementSibling!==x)x.insertAdjacentElement("afterend",friday);
+ hideCanonicalSource(hub); /* The original engine stays mounted and keeps supplying live values. */
  document.body.setAttribute("data-dat-smart-prayer","ready");
  var signature=current.name+"|"+current.time+"|"+next.name+"|"+next.time+"|"+locale();
  if(signature!==previousKey){
@@ -814,8 +839,8 @@ function refreshSource(now){
   x.querySelectorAll("[data-dat-label]").forEach(function(e){e.textContent=lbl[Number(e.dataset.datLabel)]||""});
  }
  var place=text(hub,".header-prayer-hub__place").replace(/^[\s·➜→↗⌖📍]+/gu,"");
- var hijri=text(hub,".header-prayer-hub__hijri");
- var greg=text(hub,".header-prayer-hub__date");
+ var hijri=text(hub,".header-prayer-hub__hijri").replace(/^[^\p{L}\p{N}]+/gu,"").trim();
+ var greg=text(hub,".header-prayer-hub__date").replace(/^[^\p{L}\p{N}]+/gu,"").trim();
  if(!greg)greg=new Intl.DateTimeFormat(locale()==="de"?"de-DE":locale(),{weekday:"short",day:"2-digit",month:"2-digit",year:"numeric"}).format(now);
  put("[data-dat-place]",place);
  put("[data-dat-date]",greg);
@@ -825,11 +850,11 @@ function refreshSource(now){
 }
 function update(){
  if(!document.body)return;
- if(!document.body.classList.contains("is-home-route")){document.body.removeAttribute("data-dat-smart-prayer");return}
+ if(!document.body.classList.contains("is-home-route")){document.body.removeAttribute("data-dat-smart-prayer");restoreCanonicalSource();return}
  if(document.hidden)return;
  var now=new Date();
  if(!card||now.getTime()-lastSource>4500){lastSource=now.getTime();if(!refreshSource(now)){
-  document.body.removeAttribute("data-dat-smart-prayer");return;
+  document.body.removeAttribute("data-dat-smart-prayer");restoreCanonicalSource();return;
  }}
  if(!card||!targetDate)return;
  if(now.getTime()>=targetDate.getTime()+1000){lastSource=0;refreshSource(now)}
