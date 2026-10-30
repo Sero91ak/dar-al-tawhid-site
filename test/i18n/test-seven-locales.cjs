@@ -88,6 +88,10 @@ assert.equal(locales.translations.fr["Bildschirm darf ausgehen"],"L’écran peu
 assert.equal(w.DarTestTurkishUI.translateValue("3 Titel","en"),"3 titles");
 assert.equal(w.DarTestTurkishUI.translateValue("Bildbeitrag zu: Beitrag","fr"),locales.translations.fr["Bildbeitrag zu:"]+" "+locales.translations.fr.Beitrag);
 assert.equal(locales.translations.ar["Tawḥīd & ʿAqīdah"],"التوحيد ثم العقيدة");
+assert.equal(w.DarTestTurkishUI.translateValue("Wird geöffnet…","en"),"Opening…");
+assert.equal(w.DarTestTurkishUI.translateValue("Rezitator suchen","fr"),"Chercher un récitateur");
+assert.equal(w.DarTestTurkishUI.translateValue("Suḥūr · Fajr","tr"),"Sahur · Fecir");
+assert.equal(locales.translations.ckb["Qurʾān, Ḥadīṯ, Gelehrte und Themen durchsuchen"].includes("حەدیث"),true);
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
