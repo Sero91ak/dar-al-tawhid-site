@@ -166,7 +166,7 @@ struct WebAppView: UIViewRepresentable {
               if(document.querySelector('link[href*="'+name+'"]'))return;
               var link=document.createElement("link");
               link.rel="stylesheet";
-              link.href="/assets/"+name+"?v=ios-visitor-dashboard-20261030";
+              link.href="/assets/"+name+"?v=ios-visitor-header-single-row-20261030";
               (document.head||document.documentElement).appendChild(link);
             }
             function next(index){
