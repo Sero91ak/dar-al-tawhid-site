@@ -44,6 +44,32 @@ async function main() {
   assert.ok(valid.calculator.qiblaBearing(50.7,7.1)<160);
   assert.equal((await valid.engine.location.refresh()).lon,7.1);
 
+  // Both the pinned home shortcut and the existing global quick finder must
+  // invoke one and the same gold full-screen compass, without a blue dialog.
+  const unified=boot({native:{lat:50.7,lng:7.1,timestamp:now}});
+  let quickCalls=0,closeCalls=0;
+  unified.window.openQiblaQuickSheet=()=>{quickCalls++};
+  unified.window.closeQiblaQuickSheet=()=>{closeCalls++};
+  unified.window.DARQiblaQuickView.open();
+  assert.equal(quickCalls,1,"Pinned Qibla must enter the canonical gold finder");
+  assert.equal(unified.window.__DAR_QIBLA_HOME_ENTRY,true);
+  assert.equal(unified.messages.length,0,"Do not start a second sensor provider or blue dialog");
+  unified.window.DARQiblaQuickView.close();
+  assert.equal(closeCalls,1,"Pinned Qibla closes its overlay instead of leaving the native app");
+  assert.equal(unified.window.__DAR_QIBLA_HOME_ENTRY,false);
+  for(const htmlPath of ["../index.html","../test/index.html"]){
+    const html=fs.readFileSync(path.join(__dirname,htmlPath),"utf8");
+    assert.match(html,/function openQiblaQuickSheet\(\)/);
+    assert.match(html,/window\.__DAR_QIBLA_HOME_ENTRY===true/);
+    assert.match(html,/window\.__DAR_QIBLA_HOME_ENTRY=false/);
+    assert.match(html,/darQiblaLive\.bearing=null/);
+    assert.match(html,/shown==null\?"—":shown\+"°"/);
+    assert.match(html,/id="darQiblaDeg">—<\/p>/);
+    assert.doesNotMatch(html,/nearRheinbach\|\|\/rheinbach/i);
+    assert.match(html,/if\(!manual&&typeof requestBrowserPosition==="function"\)/);
+    assert.match(html,/removeEventListener\("dar-native-location",darQiblaLive.locationHandler\)/);
+  }
+
   // A visitor-selected city must never be silently replaced by native GPS.
   const manual=boot({native:{lat:50.7,lng:7.1,timestamp:now},
     prayer:{lat:52.5,lon:13.4,city:"Berlin",locationMode:"manual"}});
