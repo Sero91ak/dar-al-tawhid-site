@@ -357,7 +357,7 @@ html.dar-test-premium-header-v2 #darTestBrandHeaderV1[data-premium-header-v2="re
    Native WebAppView sets dar-ios-native-app on BODY; the existing Test
    brand spacer already reserves its entire fixed height in document flow.
    No second body padding before Frauen, settings or any other Hero. */
-html.dar-test-premium-header-v2 body.dar-ios-native-app.has-bottom-nav:not(.is-feed-fullscreen){
+html.dar-test-premium-header-v2 body.dar-ios-native-app.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-overview):not(.is-ilm-chat-route){
  padding-top:0!important;
 }
 html.dar-test-premium-header-v2 body.has-bottom-nav #appView.view{
