@@ -41,7 +41,7 @@ function quick(){
 }
 function markup(){
  var g=gender(),isLocked=locked(),s=account();
- return '<div class="dvp-chooser-head"><span>MEIN DĀR · PERSÖNLICH</span><h2>Mein Wissensprofil</h2><p>Wähle deinen Bereich oder öffne deinen persönlichen Wissensraum.</p></div>'+
+ return '<div class="dvp-chooser-head"><span>MEIN DĀR · PERSÖNLICH</span><h2>Mein Wissensprofil</h2><p>Wähle links dein Wissensprofil. Rechts öffnest du Mein DĀR und bei Bedarf die Anmeldung.</p></div>'+
  '<div class="dvp-composite">'+
  '<section class="dvp-select" aria-label="Profilauswahl"><span class="dvp-column-label">WISSENSPROFIL</span>'+options()+'</section>'+
  '<div class="dvp-column-rule" aria-hidden="true"></div>'+quick()+'</div>'+
