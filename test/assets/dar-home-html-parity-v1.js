@@ -513,11 +513,11 @@ function loadTestSmartProfileV1(){
  /* Only this active adult /test renderer owns the enhancement; no Visitor/Kids. */
  if(!document.getElementById("darTestSmartProfileCssV1")){
   var css=document.createElement("link");css.rel="stylesheet";css.id="darTestSmartProfileCssV1";
-  css.href="/test/assets/dar-smart-profile-v1.css?v=20261030-v3";document.head.appendChild(css);
+  css.href="/test/assets/dar-smart-profile-v1.css?v=20261030-v5";document.head.appendChild(css);
  }
  if(!document.getElementById("darTestSmartProfileScriptV1")){
   var script=document.createElement("script");script.id="darTestSmartProfileScriptV1";
-  script.src="/test/assets/dar-smart-profile-v1.js?v=20261030-v3";script.defer=true;
+  script.src="/test/assets/dar-smart-profile-v1.js?v=20261030-v5";script.defer=true;
   document.head.appendChild(script);
  }
 }

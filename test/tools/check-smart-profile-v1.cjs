@@ -47,6 +47,25 @@ assert.match(script,/approved-woman-v1\.webp/,"The selected female icon must be 
 assert.match(script,/approved-man-v1\.webp/,"The selected male icon must be wired in the account");
 assert.match(header,/approved-woman-v1\.webp/,"Header must use the approved female icon");
 assert.match(header,/approved-man-v1\.webp/,"Header must use the approved male icon");
+
+assert.match(script,/approved-neutral-v1\.webp/,"The new neutral 3D portrait must be wired in");
+assert.match(header,/approved-neutral-v1\.webp/,"Header must use the neutral 3D portrait");
+const neutral=fs.readFileSync(path.join(root,"test/assets/smart-profile/approved-neutral-v1.webp"));
+assert.equal(neutral.toString("ascii",0,4),"RIFF","Neutral 3D portrait is a genuine WebP file");
+assert.equal(neutral.toString("ascii",8,12),"WEBP","Neutral 3D portrait must have the WebP format");
+assert.equal(neutral[20]&16,16,"Neutral portrait must preserve transparency");
+assert.equal(require("node:crypto").createHash("sha256").update(neutral).digest("hex"),
+ "c69f75cc271f4fe991225322fab7ac2b0cdab93095d1921434c0b8eaf85fe2dc",
+ "Neutral 3D portrait must not be replaced silently");
+assert.match(script,/function homeFocus\(/,"Profile-specific learning focus is missing");
+assert.match(script,/function syncLibrary\(/,"Profile-specific library discovery is missing");
+assert.match(script,/function todayFeature\(/,"Daily contextual feature is missing");
+assert.match(script,/function eligible\(/,"Audience filter is missing");
+assert.match(script,/function ranking\(/,"Personal interest ranking is missing");
+assert.match(css,/dsp-audience-tile/,"Profile-specific theme capsule missing");
+assert.match(script,/function syncLatest\(/,"Home publications must respond to the selected audience");
+assert.match(script,/function updateHome\(/,"Home intro and daily content must respond to the selected audience");
+
 for(const [name,sha256] of Object.entries({
  "approved-man-v1.webp":"21178597cdd5cd12b7c7ddb88f071d914d6c09d3935b6328510cae7363d45de2",
  "approved-woman-v1.webp":"3279f2fdde0559a08eb936d66de08a3088c2079f41994b40f95ece8241db2a63"
@@ -98,6 +117,7 @@ vm.runInContext(script,ctx);
 const api=win.DAR_TEST_SMART_PROFILE_V1;
 assert.ok(api,"Runtime exposed to Test QA");
 assert.equal(api.get().gender,"neutral");
+assert.equal(api.image("neutral"),"/test/assets/smart-profile/approved-neutral-v1.webp");
 function click(name,value){
  const target={hasAttribute:(n)=>n===name,getAttribute:(n)=>n===name?value:null};
  listeners.click({target:{closest:(selector)=>selector.includes("["+name+"]")?target:null},preventDefault(){},stopPropagation(){}});
@@ -140,4 +160,30 @@ click("data-dsp-save","q1");
 assert.ok(api.get().saved.includes("q1"),"Save to smart reading list");
 click("data-dsp-save","q1");
 assert.ok(!api.get().saved.includes("q1"),"Remove from smart reading list");
-console.log("PASS DĀR TEST smart profile V3: native capsules, no duplicate profile, theme, interests, list, account isolation.");
+// Regression corpus: future articles must enter recommendations without a manual app update.
+records.push({id:"men-2026",title:"Pflichten des Ehemanns",category:"Männerwissen"});
+records.push({id:"women-2026",title:"Frauen-Fiqh und Niqāb",category:"Frauenwissen"});
+click("data-dsp-gender","man");
+const mans=api.recommendations();
+assert.ok(mans.some(x=>x.id==="men-2026"),"New male-specific content should surface automatically");
+assert.ok(mans.every(x=>!x.tags.includes("women")),"Male dashboard must never surface women-specific content");
+assert.ok(mans.every(x=>x.id!=="women-2026"),"New women's knowledge must be absent from male recommendations");
+const maleHome=api.dashboard();
+for(const row of [...maleHome.daily,...maleHome.publications,...(maleHome.today?[maleHome.today]:[]),...(maleHome.focus?[maleHome.focus]:[])])
+ assert.ok(!row.tags.includes("women"),"Women's knowledge leaked into a male Home section: "+row.title);
+assert.equal(maleHome.gender,"man");
+
+click("data-dsp-gender","woman");
+const womens=api.recommendations();
+assert.ok(womens.some(x=>x.id==="women-2026"),"New female-specific content should surface automatically");
+assert.ok(womens.every(x=>x.gender!=="man"),"Female dashboard must not emphasize male-only material");
+const femaleHome=api.dashboard();
+assert.equal(femaleHome.gender,"woman");
+assert.ok(femaleHome.daily.some(x=>x.tags.includes("women")),"Female Home must prioritize women's topics");
+assert.ok(femaleHome.publications.every(x=>x.gender!=="man"),"Men-only publications must not be promoted on women's Home");
+assert.ok(femaleHome.focus&&femaleHome.focus.tags.includes("women"),"Women's library focus must use an actual women's article");
+
+click("data-dsp-gender","neutral");
+assert.ok(api.recommendations().length>=3,"Neutral includes the general corpus without topic restrictions");
+assert.equal(api.dashboard().gender,"neutral");
+console.log("PASS DĀR TEST smart profile V4: native capsules, no duplicate profile, theme, interests, list, account isolation.");
