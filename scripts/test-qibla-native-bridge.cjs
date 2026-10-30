@@ -67,6 +67,8 @@ async function main() {
     assert.match(html,/id="darQiblaDeg">—<\/p>/);
     assert.doesNotMatch(html,/nearRheinbach\|\|\/rheinbach/i);
     assert.match(html,/if\(!manual&&typeof requestBrowserPosition==="function"\)/);
+    assert.doesNotMatch(html,/else if\(!darQiblaLive.source&&typeof ev.alpha/);
+    assert.match(html,/if\(!active\(\)\|\|\(typeof getPrayerSettings/);
     assert.match(html,/removeEventListener\("dar-native-location",darQiblaLive.locationHandler\)/);
   }
 
