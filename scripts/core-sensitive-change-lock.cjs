@@ -109,7 +109,7 @@ function approvedQiblaCapsuleMigration(base, head) {
     "assets/dar-home-v31-visitor.js": "8918b29ef7e676c2830a665ced0dee6962f96178",
     "assets/dar-home-v31-visitor.css": "2bf3e9cd554c930e2fb2d1c2ba9c456e71652a12",
     "test/assets/dar-home-html-parity-v1.js": "8ae661b0f454b32f8aa5c345f13519c415e8ed2d",
-    "scripts/test-qibla-native-bridge.cjs": "057ad859114e49552bb70bbf2d996086fa4f1549",
+    "scripts/test-qibla-native-bridge.cjs": "b2a102216fd7354bdda29b2a02c1677c946bec6a",
     "scripts/app-health-check.js": "f171402dc277c2345345b16d1633988b2db6be74",
     "content/admin/change-scope-lock.json": "6623093240da4ec57aa095c18d2702480debcdca"
   };
