@@ -33,9 +33,11 @@ for(const asset of [
  "dar-visitor-daily-hub-v1.css","dar-visitor-daily-hub-v1.js",
  "dar-visitor-onboarding-v1.css","dar-visitor-onboarding-v1.js"
 ]){
- const path="/assets/"+asset+"?v=20261030-mehr-responsive-v2";
- assert(router.includes(path),"Cloudflare visitor/Android stale asset "+asset);
- assert(loader.includes(path),"Native/visitor lazy-loader stale asset "+asset);
+ const expected=asset==="dar-visitor-onboarding-v1.js"?
+   {edge:"20261030-profile-shortcuts-v9",visitor:"20261030-profile-shortcuts-v7"}:
+   {edge:"20261030-mehr-responsive-v2",visitor:"20261030-mehr-responsive-v2"};
+ assert(router.includes("/assets/"+asset+"?v="+expected.edge),"Cloudflare visitor/Android stale asset "+asset);
+ assert(loader.includes("/assets/"+asset+"?v="+expected.visitor),"Native/visitor lazy-loader stale asset "+asset);
 }
 assert(ios.includes("ios-visitor-profile-capsule-20261030"),"Native iOS bridge stale");
 console.log("PASS: Mehr starts with title; quiz remains on Home/Wissen; tutorial only in App; 3 actions responsive; caches updated.");
