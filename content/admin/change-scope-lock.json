@@ -8981,6 +8981,24 @@
         ".github/workflows/visitor-pwa-global-parity.yml"
       ],
       "expiresAt": "2026-11-12T23:59:00.000Z"
+    },
+    {
+      "id": "adult-global-neutral-profile-icon-selector-login-separation-20261030",
+      "at": "2026-10-30T21:00:00+01:00",
+      "approvedBy": "user-explicit-image-two-neutral-icon-all-adult-apps-and-profile-selection-left-login-only-on-right-20261030",
+      "reason": "Only adult visitor/iOS WebView/Android PWA and DAR Test: place the user-supplied beige/gold faceless transparent neutral portrait in the central avatar map and both adult profile header/pickers; profile choice on left only selects/previews and must not immediately open PIN; only the right Mein DĀR account entry can request PIN for signed-in profile changes. Existing account verifier, PIN lock, private notes, kids, OneSignal, prayers, service workers and unrelated layouts untouched.",
+      "paths": [
+        "assets/smart-profile/approved-neutral-faceless-v2.webp",
+        "test/assets/smart-profile/approved-neutral-faceless-v2.webp",
+        "assets/dar-visitor-profile-picker-v1.js",
+        "assets/dar-visitor-smart-profile-v1.js",
+        "test/assets/dar-smart-profile-v1.js",
+        "test/assets/dar-test-premium-header-v2.js",
+        "scripts/test-visitor-profile-lock-shortcuts-v1.cjs",
+        "test/tools/check-smart-profile-v1.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-20T23:59:00.000Z"
     }
   ],
   "enabled": true

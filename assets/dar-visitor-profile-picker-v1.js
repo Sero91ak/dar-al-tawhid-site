@@ -10,22 +10,25 @@ function account(){try{return api()?.account?.()||null}catch(_){return null}}
 function locked(){return !!api()?.isLocked?.()}
 function gender(){return api()?.get?.()?.gender||"neutral"}
 function name(g){return g==="woman"?"Frau":g==="man"?"Mann":"Neutral"}
+/* Profile cards may preview a locked account change; PIN is requested ONLY by Mein DĀR. */
+var previewGender="";
+function selectedGender(){return previewGender||gender()}
 function image(g){return api()?.image?.(g)||"/assets/dar-3d-icons/library.png"}
 function esc(x){return String(x==null?"":x).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function nav(route){try{if(typeof window.navigate==="function"){window.navigate(route);return}}catch(_){}
  try{if(typeof navigate==="function"){navigate(route);return}}catch(_){}location.hash="#"+route}
 function options(){
- var current=gender(),isLocked=locked();
+ var current=selectedGender();
  return '<div class="dvp-chooser-options" role="group" aria-label="Wissensprofil">'+
  [["woman","Frau","Frauenwissen"],["man","Mann","Wissen entdecken"],["neutral","Neutral","Alle Bereiche"]].map(function(x){
  var chosen=x[0]===current;
- return '<button type="button" data-dvp-gender="'+x[0]+'" aria-pressed="'+chosen+'" class="'+(chosen?"is-active":"")+'" title="'+(isLocked?"Änderung nur nach erneuter Anmeldung":"Wissensprofil auswählen")+'">'+
+ return '<button type="button" data-dvp-gender="'+x[0]+'" aria-pressed="'+chosen+'" class="'+(chosen?"is-active":"")+'" title="Wissensprofil auswählen">'+
  '<img src="'+image(x[0])+'" alt="" decoding="async"><span class="dvp-option-copy"><strong>'+x[1]+'</strong><small>'+x[2]+'</small></span>'+
  '<span class="dvp-check" aria-hidden="true">'+(chosen?"✓":"")+'</span></button>'
  }).join("")+'</div>'
 }
 function quick(){
- var g=gender(),person=name(g),s=account(),loggedIn=!!s;
+ var g=selectedGender(),person=name(g),s=account(),loggedIn=!!s;
  return '<section class="dvp-quick" aria-label="Mein DĀR persönlich öffnen">'+
  '<span class="dvp-quick-eyebrow">DEIN WISSENSBEREICH</span>'+
  '<button type="button" class="dvp-hub-entry" data-dvp-quick="hub" aria-label="Mein DĀR öffnen: Notizen, Merkliste, Konto und Synchronisierung, Interessen">'+
@@ -38,11 +41,11 @@ function quick(){
 }
 function markup(){
  var g=gender(),isLocked=locked(),s=account();
- return '<div class="dvp-chooser-head"><span>MEIN DĀR · PERSÖNLICH</span><h2>Mein Wissensprofil</h2><p>Wähle deinen Bereich oder öffne deinen persönlichen Wissensraum.</p></div>'+
+ return '<div class="dvp-chooser-head"><span>MEIN DĀR · PERSÖNLICH</span><h2>Mein Wissensprofil</h2><p>Wähle links dein Wissensprofil. Rechts öffnest du Mein DĀR und bei Bedarf die Anmeldung.</p></div>'+
  '<div class="dvp-composite">'+
  '<section class="dvp-select" aria-label="Profilauswahl"><span class="dvp-column-label">WISSENSPROFIL</span>'+options()+'</section>'+
  '<div class="dvp-column-rule" aria-hidden="true"></div>'+quick()+'</div>'+
- '<div class="dvp-foot"><span>'+(isLocked?'Konto: '+esc(String(s?.username||""))+' · Wechsel nur mit erneuter PIN-Anmeldung.':s?'Dein gewähltes Konto-Profil wird geschützt.':'Gastmodus · Profil jederzeit wählbar.')+'</span></div>'
+ '<div class="dvp-foot"><span>'+(previewGender&&isLocked?'Profil ausgewählt · Zum Bestätigen rechts „Mein DĀR“ öffnen.':isLocked?'Konto: '+esc(String(s?.username||""))+' · Profilwahl links, Anmeldung rechts.':s?'Dein gewähltes Konto-Profil wird geschützt.':'Gastmodus · Profil jederzeit wählbar.')+'</span></div>'
 }
 function reauthMarkup(g){
  var s=account();
@@ -80,13 +83,15 @@ function setup(){
   trigger.title="Profil: "+name(g)+" · Mein DĀR";
   if(!panel.hidden&&!pending)panel.innerHTML=markup();
  }
- function close(focus){pending="";panel.hidden=true;panel.innerHTML="";trigger.setAttribute("aria-expanded","false");if(focus)trigger.focus({preventScroll:true})}
- function open(){pending="";panel.innerHTML=markup();panel.hidden=false;trigger.setAttribute("aria-expanded","true");panel.querySelector(".dvp-chooser-options .is-active")?.focus({preventScroll:true})}
+ function close(focus){pending="";previewGender="";panel.hidden=true;panel.innerHTML="";trigger.setAttribute("aria-expanded","false");if(focus)trigger.focus({preventScroll:true})}
+ function open(){pending="";previewGender="";panel.innerHTML=markup();panel.hidden=false;trigger.setAttribute("aria-expanded","true");panel.querySelector(".dvp-chooser-options .is-active")?.focus({preventScroll:true})}
  function switchStart(g){
   if(!["woman","man","neutral"].includes(g))return;
-  if(g===gender()){sync();return}
-  if(!locked()){api()?.setGender?.(g);sync();return}
-  pending=g;panel.innerHTML=reauthMarkup(g);panel.querySelector("#dvpProfilePin")?.focus({preventScroll:true});
+  if(g===gender()){pending="";previewGender="";panel.innerHTML=markup();return}
+  if(!locked()){pending="";previewGender="";api()?.setGender?.(g);sync();return}
+  // Selecting a profile is NEVER an authentication action. Confirm at the right-hand hub.
+  pending=g;previewGender=g;panel.innerHTML=markup();
+  panel.querySelector('[data-dvp-gender="'+g+'"]')?.focus({preventScroll:true});
  }
  async function verify(g){
   if(submitting||!pending||g!==pending)return;
@@ -96,7 +101,7 @@ function setup(){
   var button=panel.querySelector("[data-dvp-confirm]");if(button){button.disabled=true;button.textContent="Anmeldung wird geprüft …"}
   try{
    await api().changeGenderWithLogin(g,pin);
-   field.value="";pending="";close(true);sync();
+   field.value="";pending="";close(true);sync();nav("account");
   }catch(e){
    field.value="";if(error){error.hidden=false;error.textContent=String(e?.message||"Anmeldung fehlgeschlagen.")}
    if(button){button.disabled=false;button.textContent="Erneut anmelden & ändern"}
@@ -111,6 +116,10 @@ function setup(){
   if(b.hasAttribute("data-dvp-confirm")){verify(b.dataset.dvpConfirm);return}
   if(b.hasAttribute("data-dvp-onboarding")){close(false);window.DAR_VISITOR_ONBOARDING_V1?.open?.();return}
   var type=b.dataset.dvpQuick;if(!type)return;
+  if((type==="hub"||type==="account")&&pending&&locked()){
+   panel.innerHTML=reauthMarkup(pending);
+   panel.querySelector("#dvpProfilePin")?.focus({preventScroll:true});return;
+  }
   close(false);
   if(type==="notes"){api()?.openNotes?.();return}
   if(type==="saved"){api()?.openSaved?.();return}
