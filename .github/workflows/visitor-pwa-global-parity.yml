@@ -12,6 +12,7 @@ on:
       - 'assets/dar-visitor-*.css'
       - 'assets/dar-noble-3d-icons.js'
       - 'scripts/test-visitor-android-pwa-parity-v1.cjs'
+      - 'scripts/test-visitor-frontstage-v1.cjs'
       - '.github/workflows/visitor-pwa-global-parity.yml'
   workflow_dispatch:
 
@@ -26,9 +27,12 @@ jobs:
       - uses: actions/checkout@v4
       - name: Verify shared adult dashboard, 3D tab and first-use flow
         run: node scripts/test-visitor-android-pwa-parity-v1.cjs
+      - name: Verify narrow cover display, iPhone and Android layout parity
+        run: node scripts/test-visitor-frontstage-v1.cjs
       - name: Validate Android worker and website router syntax
         run: |
           node --check pwa/service-worker.js
+          node --check assets/dar-visitor-frontstage-v1.js
           node --check assets/dar-visitor-smart-profile-v1.js
           node --check assets/dar-visitor-profile-picker-v1.js
           node --check assets/dar-visitor-daily-hub-v1.js
