@@ -8944,6 +8944,24 @@
         "scripts/test-visitor-android-pwa-parity-v1.cjs"
       ],
       "expiresAt": "2026-11-10T23:59:00.000Z"
+    },
+    {
+      "id": "visitor-profile-chooser-compact-shortcuts-login-reauth-20261030",
+      "at": "2026-10-30T19:19:00+01:00",
+      "approvedBy": "user-explicit-visitor-chooser-compact-split-profile-note-account-sync-return-login-locked-switch-20261030",
+      "reason": "Adult visitor iOS WebView and Android PWA: restore quick Notes/Saved/Account-Sync/Interests buttons into responsive split profile chooser, retain existing note data and account sync, profile switching free for guests but require re-entry of the existing account PIN for a signed-in account with a selected profile; same chooser controls used across app; no unverified cross-device Smart-Profile sync claim or risky DB/RLS write. Test only current source and allow global visitor rollout per ongoing user's explicit request.",
+      "paths": [
+        "assets/dar-visitor-profile-picker-v1.js",
+        "assets/dar-visitor-profile-picker-v1.css",
+        "assets/dar-visitor-smart-profile-v1.js",
+        "assets/dar-visitor-onboarding-v1.js",
+        "assets/dar-home-test-parity-visitor.js",
+        "cloudflare/site-router.js",
+        "scripts/test-visitor-profile-lock-shortcuts-v1.cjs",
+        ".github/workflows/visitor-profile-lock-shortcuts.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-12T23:59:00.000Z"
     }
   ],
   "enabled": true
