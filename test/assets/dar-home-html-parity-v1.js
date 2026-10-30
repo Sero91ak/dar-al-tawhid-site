@@ -12,7 +12,7 @@ var ID="darHomeHtmlParityV1", pending=false, lastItems="", inputTimer=null, cloc
 /* DAR TEST HOME SHORTCUTS V60: no duplicate appearance/settings tiles.
  * The fixed header owns appearance; Einstellungen remains in Mehr. */
 var quicks=[
- ["qibla","qibla.png","Qibla-Suche"],
+ ["qibla","qibla.png","Qibla-Schnellsuche"],
  ["library","library.png","Bibliothek"]
 ];
 var links=[
@@ -69,7 +69,7 @@ function openQuickQibla(){
 }
 function nativeText(node,query){var el=node&&node.querySelector(query);return el?String(el.textContent||"").replace(/\s+/g," ").trim():""}
 function html(){
- var q=quicks.map(function(a){return '<button type="button" class="dhp-quick" data-dhp-route="'+a[0]+'"><span class="dhp-icon3d" aria-hidden="true"><img src="/test/assets/dar-3d-icons/'+a[1]+'" alt="" loading="lazy" decoding="async"></span><b>'+a[2]+'</b></button>'}).join("");
+ var q=quicks.map(function(a){return '<button type="button" class="dhp-quick'+(a[0]==="qibla"?" dhp-quick-qibla":"")+'" data-dhp-route="'+a[0]+'"'+(a[0]==="qibla"?' aria-label="Qibla-Schnellsuche öffnen"':'')+'><span class="dhp-icon3d" aria-hidden="true"><img src="/test/assets/dar-3d-icons/'+a[1]+'" alt="" loading="lazy" decoding="async"></span><span class="dhp-quick-label"><b>'+a[2]+'</b><small>'+(a[0]==="qibla"?"Ausrichtung direkt prüfen":"Wissen öffnen")+'</small></span></button>'}).join("");
  var l=links.map(function(a){return '<button type="button" class="dhp-library-tile" data-dhp-route="'+a[0]+'"><span class="dhp-icon3d" aria-hidden="true"><img src="/test/assets/dar-3d-icons/'+a[1]+'" alt="" loading="lazy" decoding="async"></span><b>'+a[2]+'</b><small>'+a[3]+'</small></button>'}).join("");
  return '<div class="dhp-content">'+
   /* Only one logo/name in fixed app header; home has its own source line. */
@@ -346,11 +346,15 @@ function stylesheet(){
  "#darHomeHtmlParityV1 .dhp-quickbar{margin-top:0!important;}",
  "@media(max-width:359px){#darHomeHtmlParityV1 .dhp-greeting{font-size:19px!important;}#darHomeHtmlParityV1 .dhp-isnad{padding-inline:12px!important;}#darHomeHtmlParityV1 .dhp-home-source-v55{letter-spacing:.06em!important;}}",
  "@media(min-width:700px){#darHomeHtmlParityV1 .dhp-welcome{margin-top:18px!important;}#darHomeHtmlParityV1 .dhp-isnad{margin-top:18px!important;}}",
- /* DAR TEST SHORTCUT DENSITY V60: two useful large shortcuts, no duplicated theme/settings. */
+ /* DAR TEST SHORTCUTS: quick Qibla opens the existing camera/compass sheet, not the settings page. */
  "#darHomeHtmlParityV1 .dhp-quickbar{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;margin:10px 0 13px!important;}",
  "#darHomeHtmlParityV1 .dhp-quick{min-height:66px!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:10px!important;padding:9px 13px!important;border-radius:17px!important;text-align:start!important;}",
  "#darHomeHtmlParityV1 .dhp-quick .dhp-icon3d{width:38px!important;height:38px!important;flex:0 0 38px!important;}",
- "#darHomeHtmlParityV1 .dhp-quick b{font-size:clamp(12px,2.8vw,14px)!important;line-height:1.25!important;}",
+ "#darHomeHtmlParityV1 .dhp-quick b{font-size:clamp(11px,2.8vw,14px)!important;line-height:1.25!important;}",
+ "#darHomeHtmlParityV1 .dhp-quick-label{min-width:0!important;display:flex!important;flex-direction:column!important;gap:3px!important;justify-content:center!important;}",
+ "#darHomeHtmlParityV1 .dhp-quick-label small{display:block!important;font-size:10px!important;line-height:1.2!important;color:var(--dhp-muted)!important;font-weight:450!important;}",
+ "#darHomeHtmlParityV1 .dhp-quick-qibla{justify-content:flex-start!important;border-color:var(--dhp-capsule-accent,var(--dhp-line))!important;}",
+ "#darHomeHtmlParityV1 .dhp-quick-qibla .dhp-icon3d{width:43px!important;height:43px!important;flex-basis:43px!important;}",
  "@media(max-width:359px){#darHomeHtmlParityV1 .dhp-quick{padding:8px!important;gap:6px!important;}#darHomeHtmlParityV1 .dhp-quick .dhp-icon3d{width:32px!important;height:32px!important;flex-basis:32px!important;}}",
  "html,html body{overscroll-behavior-y:none!important;}",
  ].join("\n");
