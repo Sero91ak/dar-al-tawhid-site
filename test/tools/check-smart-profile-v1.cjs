@@ -22,6 +22,12 @@ assert.doesNotMatch(script,/dsp-account-hero/,"Nested account hero must not retu
 assert.match(script,/dsp-notes-dialog/,"Notes need an independent modal view");
 assert.match(script,/function syncHeaderAvatar/,"Header profile avatar must follow selection");
 assert.match(home,/dhp-quick-qibla/,"Qibla needs a styled quick-search entry");
+assert.match(home,/dar-qibla-quick-v2\.css/,"Test Qibla quick view theme CSS must load on tap");
+const qiblaQuickTheme=read("test/assets/dar-qibla-quick-v2.css");
+assert.match(qiblaQuickTheme,/qibla-qv__panel/,"Quick Qibla theme must style the opened sheet");
+assert.match(qiblaQuickTheme,/var\(--card/,"Qibla quick view must respect the selected appearance");
+assert.doesNotMatch(qiblaQuickTheme,/\/kids\//,"Adult Qibla quick view cannot touch Kids");
+
 const header=read("test/assets/dar-test-premium-header-v2.js");
 new vm.Script(header,{filename:"dar-test-premium-header-v2.js"});
 assert.match(header,/setupChooser\(h,account\)/,"Middle header icon must open profile choice");
