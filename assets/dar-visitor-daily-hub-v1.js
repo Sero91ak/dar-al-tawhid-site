@@ -78,12 +78,12 @@ function syncCard(){
  if(card.dataset.ddhSig!==sig){card.innerHTML=cardMarkup();card.dataset.ddhSig=sig}
  if(!seenHome){seenHome=true;setTimeout(maybePrompt,1350)}
 }
+/* Mehr has a dedicated Quiz tile. The daily question stays on Home, not
+   ahead of the Mehr page title. Remove any stale injection from prior renders. */
 function moreButton(){
- var more=document.querySelector("#appView .dar-more-v15");if(!more)return;
- if(more.querySelector(".ddh-more-quiz"))return;
- var section=document.createElement("section");section.className="ddh-more-quiz";
- section.innerHTML='<div><span class="ddh-kicker">WISSEN VERTIEFEN</span><h3>Quiz & tägliche Wissensfrage</h3><p>Prüfe dein Wissen oder beantworte die heutige Frage.</p></div><div class="ddh-more-actions"><button type="button" data-ddh-open="true">Tagesfrage</button><button type="button" data-ddh-navigate="quiz">Zum Quiz</button></div>';
- more.insertAdjacentElement("afterbegin",section);
+ var more=document.querySelector("#appView .dar-more-v15, #appView .dm15-shell");
+ if(!more)return;
+ more.querySelectorAll(".ddh-more-quiz").forEach(function(card){card.remove()});
 }
 function dialog(){var x=document.getElementById("darDailyKnowledgeDialogV1");if(x)return x;x=document.createElement("div");x.id="darDailyKnowledgeDialogV1";x.className="ddh-dialog-backdrop";x.hidden=true;x.setAttribute("aria-hidden","true");document.body.appendChild(x);return x}
 var lastFocus=null;
