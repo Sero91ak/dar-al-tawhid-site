@@ -9,13 +9,13 @@ var HEADER_ID="darTestBrandHeaderV1";
 var LOGO="/app-logo-original.png";
 var ICONS={
  language:"/test/assets/header-icons/language-classic-v7.png",
- account:"/test/assets/header-icons/account-classic-v7.png",
+ account:"/test/assets/smart-profile/avatar-neutral.svg",
  palette:"/test/assets/header-icons/appearance-classic-v7.png"
 };
 function icon(kind){
  var i=document.createElement("img");
  i.className="dtbh-icon-3d";
- i.src=ICONS[kind]+"?v=20261023-real-3d-png-v7";
+ i.src=kind==="account"?ICONS.account:ICONS[kind]+"?v=20261023-real-3d-png-v7";
  i.alt="";i.setAttribute("aria-hidden","true");
  i.width=36;i.height=36;i.decoding="async";i.draggable=false;
  return i;
@@ -44,10 +44,34 @@ function picker(trigger,remaining){
 }
 function openAccount(){
  try{
-  if(typeof navigate==="function"){navigate("account","login");return;}
+  if(typeof navigate==="function"){navigate("account","");return;}
   if(typeof window.navigate==="function"){window.navigate("account","login");return;}
  }catch(e){console.warn("DAR Test account shortcut",e);}
- location.hash="#account/login";
+ location.hash="#account";
+}
+function chooserMarkup(){
+ var smart=window.DAR_TEST_SMART_PROFILE_V1;
+ var current=smart&&typeof smart.get==="function"?smart.get().gender:"neutral";
+ var items=[["neutral","Neutral","Alle Inhalte"],["woman","Frau","Frauenwissen"],["man","Mann","Wissensweg"]];
+ return '<div class="dtbh-profile-head"><strong>Mein Profil</strong><small>Deinen Wissensbereich wählen</small></div><div class="dtbh-profile-options">'+items.map(function(item){return '<button type="button" class="dtbh-profile-choice'+(current===item[0]?" is-active":"")+'" data-dtbh-profile="'+item[0]+'" aria-pressed="'+String(current===item[0])+'"><img src="/test/assets/smart-profile/avatar-'+item[0]+'.svg" alt="" aria-hidden="true"><span><strong>'+item[1]+'</strong><small>'+item[2]+'</small></span></button>'}).join("")+'</div><button type="button" class="dtbh-profile-account" data-dtbh-open-account>Konto & Synchronisierung öffnen</button>';
+}
+function setupChooser(h,account){
+ var pop=document.createElement("div");
+ pop.className="dtbh-profile-popover";
+ pop.id="dtbhProfilePopover";
+ pop.hidden=true;
+ h.appendChild(pop);
+ function close(){pop.hidden=true;account.setAttribute("aria-expanded","false")}
+ function open(){pop.innerHTML=chooserMarkup();pop.hidden=false;account.setAttribute("aria-expanded","true")}
+ account.setAttribute("aria-haspopup","dialog");account.setAttribute("aria-controls","dtbhProfilePopover");account.setAttribute("aria-expanded","false");
+ account.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();if(pop.hidden)open();else close()});
+ pop.addEventListener("click",function(e){
+  var choice=e.target.closest("[data-dtbh-profile]");
+  if(choice){var api=window.DAR_TEST_SMART_PROFILE_V1;if(api&&typeof api.setGender==="function"){api.setGender(choice.dataset.dtbhProfile);close()}return}
+  if(e.target.closest("[data-dtbh-open-account]")){close();openAccount()}
+ });
+ document.addEventListener("click",function(e){if(!pop.hidden&&!pop.contains(e.target)&&!account.contains(e.target))close()});
+ document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!pop.hidden){close();account.focus()}});
 }
 function setup(){
  var h=document.getElementById(HEADER_ID);
@@ -72,7 +96,7 @@ function setup(){
  var language=button("Sprache auswählen","language");
  language.addEventListener("click",function(e){e.preventDefault();picker(language);});
  var account=button("Konto und Anmeldung","account");
- account.addEventListener("click",function(e){e.preventDefault();openAccount();});
+ setupChooser(h,account);
  theme.setAttribute("title","Erscheinungsbild auswählen");
  theme.setAttribute("aria-label","Erscheinungsbild auswählen");
  // Preserve the original toggle element and its bound palette click listener.
