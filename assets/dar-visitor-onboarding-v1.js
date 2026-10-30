@@ -38,7 +38,7 @@ function choices(){var g=gender();return '<div class="dvo-choices" role="group" 
  ["woman","Frau","Frauenwissen"],["man","Mann","Wissen entdecken"],["neutral","Neutral","Alle Bereiche"]].map(function(x){return '<button type="button" data-dvo-gender="'+x[0]+'" aria-pressed="'+(g===x[0])+'" class="'+(g===x[0]?"dvo-active":"")+'"><span class="dvo-choice-icon"><img src="'+(profileApi()?.image?.(x[0])||iconSrc("library"))+'" alt=""></span><strong>'+x[1]+'</strong><small>'+x[2]+'</small></button>'}).join("")+'</div>'}
 function navPreview(){
  var second=gender()==="woman"?"Frauen":"Entdecken";
- return '<div class="dvo-tabs" aria-label="Die fünf App-Bereiche">'+[["Start","home"],[second,gender()==="woman"?"frauen":"topics"],["Beiträge","posts"],["Qurʾān","quran"],["Mehr","library"]].map(function(a){return '<span><img src="'+iconSrc(a[1])+'.png" alt=""><b>'+esc(a[0])+'</b></span>'}).join("")+'</div>'
+ return '<div class="dvo-tabs" aria-label="Die fünf App-Bereiche">'+[["Start","home"],[second,gender()==="woman"?"frauen":"topics"],["Beiträge","posts"],["Qurʾān","quran"],["Mehr","library"]].map(function(a){return '<span><img src="'+iconSrc(a[1])+'" alt=""><b>'+esc(a[0])+'</b></span>'}).join("")+'</div>'
 }
 function content(){
  var d=details(),first=at===0,last=at===STEPS.length-1;
