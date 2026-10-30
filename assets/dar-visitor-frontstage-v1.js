@@ -5,7 +5,7 @@
 "use strict";
 var p=global.location&&global.location.pathname||"/";
 if(!(/^(\/|\/index\.html|\/pwa(?:\/|\/index\.html)?)$/.test(p))||global.DAR_VISITOR_FRONTSTAGE_V1)return;
-var queued=false,last="";
+var queued=false,last="",lastViewport="",latchedCompact=false;
 function measure(){
  var doc=document.documentElement,client=doc.clientWidth||0,inner=global.innerWidth||0;
  var view=global.visualViewport;
@@ -16,8 +16,17 @@ function measure(){
  var viewport=client||inner||vv;
  if(vv>0&&vv<viewport&&Math.abs(vv-viewport)<viewport*.45)viewport=vv;
  // A phone's folded cover can be a narrow app stage inside a wider CSS canvas.
- var effective=stage>180&&stage<viewport*.85?stage:viewport;
- return {viewport:viewport,stage:stage,effective:effective,compact:effective>0&&effective<=710}
+ var currentViewport=String(viewport)+"|"+String(inner)+"|"+String(client);
+ // If a narrow stage was the only correctly reported front cover width,
+ // keep that interpretation until the actual viewport changes. The CSS
+ // below expands the app stage, so stage alone must never flip this class.
+ if(currentViewport!==lastViewport){
+  lastViewport=currentViewport;
+  latchedCompact=stage>180&&stage<viewport*.85&&stage<=710;
+ }
+ var effective=latchedCompact?Math.min(stage||viewport,710):viewport;
+ var compact=viewport>0&&(viewport<=710||latchedCompact);
+ return {viewport:viewport,stage:stage,effective:effective,compact:compact}
 }
 function apply(){
  queued=false;
