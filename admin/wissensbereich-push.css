@@ -1,0 +1,26 @@
+/* DĀR Admin · Wissensbereich Themen – independent, theme-adaptive admin panel */
+.wkp-admin{display:grid;gap:14px;max-width:1200px;margin:0 auto;color:var(--ink,#f4eee2)}
+.wkp-heading{padding:12px 3px 2px}.wkp-heading h2{font:600 clamp(24px,5vw,34px)/1.1 Georgia,serif;margin:5px 0;color:var(--ink,#f4eee2)}
+.wkp-heading p{font-size:12px;line-height:1.65;color:var(--soft,#b9c3c2);margin:5px 0}
+.wkp-eyebrow{font-size:10px;font-weight:800;letter-spacing:.15em;color:var(--gold,#d8bd80)}
+.wkp-panel{padding:clamp(13px,2.5vw,22px);border:1px solid var(--line2,rgba(210,190,140,.23));border-radius:18px;background:rgba(40,70,78,.14);min-width:0}
+.wkp-title{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px;margin-bottom:12px}
+.wkp-title h3{font-size:17px;margin:0}.wkp-title>span{font-size:10px;color:var(--soft,#afc2bf)}
+.wkp-status{border:1px solid rgba(221,177,122,.32);background:rgba(221,177,122,.09);color:#e8ca9d!important;border-radius:999px;padding:5px 9px}
+.wkp-scroll{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.wkp-admin table{width:100%;min-width:320px;border-collapse:collapse;font-size:12px}
+.wkp-admin th,.wkp-admin td{padding:11px 7px;text-align:center;border-bottom:1px solid var(--line2,rgba(140,150,155,.18))}
+.wkp-admin th:first-child{text-align:left;font-weight:700}
+.wkp-admin td{font-size:16px;font-weight:800}.wkp-yes{color:#abd9b7}.wkp-no{color:var(--soft,#92a1a5);opacity:.65}
+.wkp-note{font-size:11px;line-height:1.65;color:var(--soft,#a8bdbb);margin:11px 0 0}
+.wkp-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.wkp-fields label{display:grid;gap:6px;font-size:11px;font-weight:700;color:var(--soft,#cad4d4)}
+.wkp-fields .field{margin:0;font-size:13px;min-height:41px;width:100%}
+.wkp-checks{display:flex;flex-wrap:wrap;gap:12px;margin:15px 0}
+.wkp-checks label{display:flex;align-items:center;gap:7px;font-size:11px;line-height:1.4}
+.wkp-checks input{accent-color:var(--gold,#c0ac79)}
+.wkp-result{background:rgba(0,0,0,.16);border-inline-start:3px solid var(--gold,#bba06d);padding:10px 12px;border-radius:8px;font-size:12px;line-height:1.6}
+.wkp-result[data-allowed="no"]{border-inline-start-color:#e2a08c}
+.wkp-admin ol{padding-left:22px;margin:5px 0 9px;display:grid;gap:9px;font-size:12px;line-height:1.6}
+.wkp-warning{font-size:11px;line-height:1.7;margin:14px 0 0;color:var(--soft,#ddd);border-top:1px solid var(--line2,rgba(255,255,255,.16));padding-top:11px}
+@media(max-width:440px){.wkp-fields{grid-template-columns:minmax(0,1fr)}.wkp-admin th,.wkp-admin td{padding:10px 4px;font-size:11px}.wkp-admin td{font-size:16px}}

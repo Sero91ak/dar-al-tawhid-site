@@ -29,3 +29,17 @@ Das gegenwärtige Besucherprofil lebt **lokal** in der App. Eine bloße Auswahl 
 ## Zentrale und Qualitätskontrolle
 
 Die vorhandene DĀR-AL-TAWḤĪD-Zentrale bleibt die einzige zentrale Automatik mit ihrem aktuellen Rhythmus/Status und ihren bestehenden Sicherheits-/Zeitfenstern. Diese Anleitung ist für **nutzerinitiierte** Wissensbereich-Aufträge verbindlich, nicht für ungefragtes Dauerpublizieren. GitHub-Commit ist kein Nachweis für Live-Auslieferung; Cloudflare-Deploy ist kein Beweis für zugestellte Geräte-Pushs. Kids, Dar Test, Apple TV, native Store-Release, Gebetszeiten und bestehende Push-Spuren bleiben unverändert.
+
+## DĀR Admin – verbindliche getrennte Push-Matrix (30.10.2026)
+
+Die Admin-App bietet einen **Wissensbereich Themen**-Bereich mit einer deterministischen Vorschau (keine Sende-Funktion). Die neue Matrix gilt für die spätere echte Profilsegmentierung:
+
+| Nachricht | Frau | Mann | Neutral |
+|---|---|---|---|
+| Allgemeiner Beitrag | Ja bei bestehendem globalem Push-Opt-in | Ja bei bestehendem globalem Push-Opt-in | Ja bei bestehendem globalem Push-Opt-in |
+| Wissensbereich Frauen | Nur mit Frauenprofil + Wissens-Opt-in | Nein | Nein |
+| Wissensbereich Männer | Nein | Nur mit Männerprofil + Wissens-Opt-in | Nein |
+
+Bei Frau→Mann muss die Frau-Zuordnung entfernt werden, ehe Mann aktiviert wird; bei Mann→Frau umgekehrt. Bei Wechsel zu Neutral sind beide Zielgruppentags zu entfernen und **alle** Wissensbereich-Pushs auszuschließen. Keine Profilwahl/kein überprüftes Gerätesegment = **kein** zielgruppenbezogener Versand, aber normale globale Meldungen bleiben separat verfügbar. Identischer Beitrag in beiden Bereichen bekommt eine kanonische ID; falls ein separater Geräteversand später freigegeben wird, muss die Zustellung je Installation/Version idempotent sein.
+
+**Implementierungsstand:** DĀR Admin zeigt die Regel und einen datenschutzfreundlichen, nicht-sendenden Routingsimulator. Es existiert noch **keine** verifizierte serverseitige Zuordnung von Besucherprofil zu OneSignal-Subscription. Die bisherige OneSignal-Schutzsperre wird nicht geändert; deshalb **keine tatsächliche Wissensbereich-Benachrichtigung** und kein Empfängercount. Die normale Inhaltsveröffentlichung bleibt unangetastet.

@@ -694,6 +694,8 @@ main#panel.panel{
 <script src="/admin/quiz-stats-manager.js?v=2"></script>
 <script src="/admin/live-edit.js?v=1"></script>
 <script src="/admin/social-review.js?v=6"></script>
+<script src="/admin/wissensbereich-push.js?v=20261030-a1"></script>
+<link rel="stylesheet" href="/admin/wissensbereich-push.css?v=20261030-a1">
 <script src="/admin/secure-vault.js?v=3"></script>
 <link rel="stylesheet" href="/admin/library-admin.css?v=14">
 <link rel="stylesheet" href="/admin/live-edit.css?v=1">
@@ -731,6 +733,7 @@ const DEFAULT_ADMIN_TABS=[
   ["start","Start"],
   ["quellen","Beiträge"],
   ["social","Redaktionsatelier"],
+  ["wissensbereich","Wissensbereich Themen"],
   ["actions","Neuer Beitrag"],
   ["news","News"],
   ["ordner","Ordner"],
@@ -3043,7 +3046,7 @@ function renderShell(){
   currentTab=normalizeAdminTab(currentTab);
   if(currentTab==="schedule")currentTab="actions";
   const refreshSec=currentTab==="besucher"?15:30;
-  const body=currentTab==="social"&&window.DARAdminSocialReview?window.DARAdminSocialReview.render():currentTab==="kennwoerter"?renderKennwoerter():currentTab==="live-edit"&&window.DARLiveEdit?window.DARLiveEdit.renderLiveEditTab():currentTab==="besucher"?renderVisitors(ctx):currentTab==="wochenanalyse"?renderWeeklyReport():currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"?(window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():'<section class="lib-admin"><p class="lib-admin-category">Bibliothek-Modul wird geladen…</p></section>'):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const body=currentTab==="wissensbereich"&&window.DARWissensbereichPushAdmin?window.DARWissensbereichPushAdmin.render():currentTab==="social"&&window.DARAdminSocialReview?window.DARAdminSocialReview.render():currentTab==="kennwoerter"?renderKennwoerter():currentTab==="live-edit"&&window.DARLiveEdit?window.DARLiveEdit.renderLiveEditTab():currentTab==="besucher"?renderVisitors(ctx):currentTab==="wochenanalyse"?renderWeeklyReport():currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"?(window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():'<section class="lib-admin"><p class="lib-admin-category">Bibliothek-Modul wird geladen…</p></section>'):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tab-picker" aria-label="Admin-Bereich wählen">
       <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
@@ -3055,6 +3058,7 @@ function renderShell(){
     <div class="meta-line">Aktualisiert (Europe/Berlin): ${esc(formatAdminBerlin(data.updated,true))} · Auto-Refresh alle ${refreshSec} Sekunden${currentTab==="besucher"?" · Besucher-Live":""}</div>`;
   bindUi();
   if(currentTab==="social"&&window.DARAdminSocialReview)window.DARAdminSocialReview.bind();
+  if(currentTab==="wissensbereich"&&window.DARWissensbereichPushAdmin)window.DARWissensbereichPushAdmin.bind();
   bindWeeklyReport();
   enhanceAdminCollapsibles();
   updateAdminBackButton();
@@ -3144,6 +3148,7 @@ function renderStart(ctx){
   <section class="folder-grid">
     ${folderCard("①","Beiträge","Suchen, öffnen, speichern.","quellen","Editor")}
     ${folderCard("🌐","Redaktionsatelier","Neun Sprachen · Beiträge · Originalnachweise.","social","Widescreen-Studio")}
+    ${folderCard("◈","Wissensbereich Themen","Frauen-/Männer-Zielgruppen prüfen; neutral bleibt ausgeschlossen.","wissensbereich","Push-Regel · Vorschau")}
     ${folderCard("②","Neuer Beitrag","Markdown einfügen und veröffentlichen.","actions","Veröffentlichen")}
     ${folderCard("③","News","Kurzhinweise für Besucher.","news",newsSummaryLabel())}
     ${folderCard("④","Ordner","Kategorien sortieren und Texte korrigieren.","ordner","Studio")}

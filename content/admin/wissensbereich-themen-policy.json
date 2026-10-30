@@ -22,7 +22,7 @@
     },
     "Wissensbereich live pushen": {
       "operation": "publish-approved-drafts-over-existing-DAR-Admin",
-      "notification": "separate explicit authorized delivery only"
+      "notification": "Never automatic: separate explicit approved OneSignal command with exact woman/man recipients only"
     }
   },
   "targetProfiles": {
@@ -186,7 +186,54 @@
       "content/admin/push-lanes-lock.json",
       "cloudflare/post-push-admin.js",
       "cloudflare/ios-native-push-register.js"
-    ]
+    ],
+    "routingRuleVersion": 1,
+    "categories": {
+      "global-article": {
+        "audiences": [
+          "woman",
+          "man",
+          "neutral"
+        ],
+        "requires": "existing global opt-in; existing global sending rules unchanged"
+      },
+      "knowledge-woman": {
+        "audiences": [
+          "woman"
+        ],
+        "requires": "knowledge opt-in AND verified woman recipient segment AND separate approved sender-lane"
+      },
+      "knowledge-man": {
+        "audiences": [
+          "man"
+        ],
+        "requires": "knowledge opt-in AND verified man recipient segment AND separate approved sender-lane"
+      }
+    },
+    "neutralMeansNoKnowledgeNotifications": true,
+    "missingProfileMeansNoKnowledgeNotifications": true,
+    "denyOnProfileMismatch": true,
+    "profileTransition": {
+      "womanToMan": "remove woman segment and activate man only after consent/verification",
+      "manToWoman": "remove man segment and activate woman only after consent/verification",
+      "eitherToNeutral": "revoke all targeted knowledge segments",
+      "neutralToTarget": "require fresh knowledge opt-in and verified active tag"
+    },
+    "perInstallation": true,
+    "globalMessages": "Remain available for opted-in woman/man/neutral under preexisting independent global send rules",
+    "adminApp": {
+      "tab": "wissensbereich",
+      "module": "admin/wissensbereich-push.js",
+      "status": "routing preview only, no live targeted sender",
+      "publishRoute": "existing DAR Admin editorial publisher remains unchanged"
+    },
+    "requiredDenyFallback": [
+      "Subscribed Users",
+      "DAR_PUSH",
+      "all",
+      "unknown/neutral"
+    ],
+    "safeRollout": "No OneSignal API/SDK updates until existing password/global/lane authorizations and profile-to-subscription server synchronization"
   },
   "scope": {
     "included": [
