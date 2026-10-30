@@ -312,7 +312,7 @@ function updateAccount(p){if(!document.body.classList.contains("is-account-route
  if(!el){el=document.createElement("div");el.className="dsp-account-mount";panel.insertBefore(el,panel.firstChild)}
  var sig=owner()+"|"+JSON.stringify([p.gender,p.palette,p.interests,p.notes,p.saved]);if(el.dataset.dspSig!==sig){el.innerHTML=accountPanel(p);el.dataset.dspSig=sig}
 }
-function refresh(){if(scheduled)return;scheduled=true;requestAnimationFrame(function(){scheduled=false;try{var o=owner();if(o!==lastOwner){lastOwner=o;adoptGuestChoiceAfterLogin()}var p=read();if(o!==lastOwner&&p.palette!=="keep")chooseTheme(p.palette)
+function refresh(){if(scheduled)return;scheduled=true;requestAnimationFrame(function(){scheduled=false;try{var o=owner(),ownerChanged=o!==lastOwner;if(ownerChanged){lastOwner=o;adoptGuestChoiceAfterLogin()}var p=read();if(ownerChanged&&p.palette!=="keep")chooseTheme(p.palette)
  updateHome(p);updateAccount(p);syncHeaderAvatar(p)}catch(e){console.warn("DĀR VISITOR Smart Profile",e)}})}
 function nav(view,value){try{if(typeof navigate==="function"){navigate(view,value||"");return}}catch(_){}location.hash="#"+view}
 document.addEventListener("click",function(e){
