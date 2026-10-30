@@ -314,3 +314,78 @@ html.dar-adult-global-brand-ready body.is-home-route .top-shell > .isnad.dt-isna
  html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 .dar-adult-home-salam-v5{font-size:19px!important}
  html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 p{font-size:13px!important}
 }
+
+/* DAR ADULT COMPACT MARK HEADER V20261030 FIRST-RUN */
+
+/* Native iOS, Android/PWA and tablet: one authoritative horizontal brand rail.
+   Keep status-bar safe area. No layout changes to scroll content or prayer. */
+html body #darAdultBrandHeaderV2{
+ padding-block-start:max(env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;
+ padding-block-end:3px!important;
+ padding-inline:clamp(10px,2.5vw,22px)!important;
+ min-height:0!important;
+}
+html body #darAdultBrandHeaderV2 .dtbh-row{
+ display:grid!important;
+ grid-template-columns:clamp(35px,10vw,45px) minmax(0,1fr) clamp(34px,9.2vw,42px) clamp(34px,9.2vw,42px)!important;
+ grid-template-rows:minmax(43px,auto)!important;
+ gap:clamp(4px,1.4vw,10px)!important;
+ align-items:center!important;
+ max-width:1440px!important;
+ min-height:43px!important;
+}
+html body #darAdultBrandHeaderV2 .dtbh-logo{
+ grid-column:1!important;grid-row:1!important;
+ width:clamp(35px,10vw,45px)!important;height:clamp(35px,10vw,45px)!important;
+ min-width:0!important;max-width:100%!important;object-fit:contain!important;
+ margin:0!important;align-self:center!important;
+}
+html body #darAdultBrandHeaderV2 .dtbh-copy{
+ grid-column:2!important;grid-row:1!important;
+ display:flex!important;flex-direction:column!important;justify-content:center!important;
+ min-width:0!important;gap:0!important;overflow:visible!important;
+}
+html body #darAdultBrandHeaderV2 .dtbh-tagline{display:none!important;}
+html body #darAdultBrandHeaderV2 .dtbh-name{
+ grid-column:auto!important;grid-row:auto!important;
+ display:block!important;min-width:0!important;
+ margin:0!important;padding:0!important;
+ color:var(--dtbh-ink)!important;
+ font:750 clamp(16px,4.7vw,25px)/1.15 Georgia,"Iowan Old Style",serif!important;
+ letter-spacing:-.04em!important;
+ white-space:nowrap!important;text-overflow:clip!important;overflow:visible!important;
+}
+html body #darAdultBrandHeaderV2 .dvp-trigger{
+ grid-column:3!important;grid-row:1!important;
+ width:clamp(34px,9.2vw,42px)!important;height:clamp(36px,9.2vw,42px)!important;
+ max-width:100%!important;margin:0!important;justify-self:center!important;
+ align-self:center!important;
+}
+html body #darAdultBrandHeaderV2 .dtbh-toggle{
+ grid-column:4!important;grid-row:1!important;
+ width:clamp(34px,9.2vw,42px)!important;height:clamp(36px,9.2vw,42px)!important;
+ flex:0 0 auto!important;margin:0!important;justify-self:center!important;
+ align-self:center!important;
+}
+@media (min-width:720px){
+ html body #darAdultBrandHeaderV2{padding-inline:clamp(16px,3vw,45px)!important;padding-block-end:5px!important}
+ html body #darAdultBrandHeaderV2 .dtbh-row{
+   grid-template-columns:54px minmax(0,1fr) 48px 48px!important;
+   grid-template-rows:54px!important;min-height:54px!important;
+   gap:15px!important;
+ }
+ html body #darAdultBrandHeaderV2 .dtbh-logo{width:54px!important;height:54px!important}
+ html body #darAdultBrandHeaderV2 .dtbh-name{font-size:clamp(24px,2.4vw,29px)!important;letter-spacing:-.025em!important}
+ html body #darAdultBrandHeaderV2 .dvp-trigger,
+ html body #darAdultBrandHeaderV2 .dtbh-toggle{width:48px!important;height:48px!important}
+}
+@media(max-width:355px){
+ html body #darAdultBrandHeaderV2{padding-inline:9px!important}
+ html body #darAdultBrandHeaderV2 .dtbh-row{grid-template-columns:34px minmax(0,1fr) 34px 34px!important;gap:4px!important}
+ html body #darAdultBrandHeaderV2 .dtbh-logo{width:34px!important;height:34px!important}
+ html body #darAdultBrandHeaderV2 .dtbh-name{font-size:clamp(14px,4.6vw,17px)!important}
+ html body #darAdultBrandHeaderV2 .dvp-trigger,html body #darAdultBrandHeaderV2 .dtbh-toggle{width:34px!important;height:36px!important}
+}
+@media (orientation:landscape) and (max-height:560px){
+ html body #darAdultBrandHeaderV2{padding-block-start:env(safe-area-inset-top,0px)!important}
+}
