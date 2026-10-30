@@ -138,6 +138,87 @@ struct WebAppView: UIViewRepresentable {
                 forMainFrameOnly: true
             )
         )
+        // DAR_IOS_VISITOR_ADAPTIVE_DASHBOARD_V1
+        // Installed visitor app: load the same released adult UI even when an
+        // older cached HTML shell does not include the new visitor asset loader.
+        // Web-owned layout and canonical prayer calculations remain unchanged.
+        let iosVisitorAdaptiveDashboardBridge = """
+        (function(){
+          try{
+            if(window.__darIosVisitorAdaptiveDashboardBridgeV1)return;
+            if(location.hostname!=="dar-al-tawhid.de"&&location.hostname!=="www.dar-al-tawhid.de")return;
+            var path=location.pathname||"/";
+            if(path!=="/"&&path!=="/index.html"&&path!=="/pwa"&&path.indexOf("/pwa/")!==0)return;
+            window.__darIosVisitorAdaptiveDashboardBridgeV1=true;
+
+            var css=[
+              "dar-visitor-smart-profile-v1.css",
+              "dar-visitor-profile-picker-v1.css",
+              "dar-visitor-daily-hub-v1.css"
+            ];
+            var scripts=[
+              ["dar-visitor-smart-profile-v1.js","DAR_VISITOR_SMART_PROFILE_V1"],
+              ["dar-visitor-profile-picker-v1.js","DAR_VISITOR_PROFILE_PICKER_V1"],
+              ["dar-visitor-daily-hub-v1.js","DAR_VISITOR_DAILY_HUB_V1"]
+            ];
+
+            function addStyle(name){
+              if(document.querySelector('link[href*="'+name+'"]'))return;
+              var link=document.createElement("link");
+              link.rel="stylesheet";
+              link.href="/assets/"+name+"?v=ios-visitor-dashboard-20261030";
+              (document.head||document.documentElement).appendChild(link);
+            }
+            function next(index){
+              if(index>=scripts.length){
+                try{window.DAR_VISITOR_SMART_PROFILE_V1?.refresh?.()}catch(e){}
+                try{window.DAR_VISITOR_DAILY_HUB_V1?.refresh?.()}catch(e){}
+                return;
+              }
+              var item=scripts[index];
+              if(window[item[1]]){next(index+1);return;}
+              var prior=document.querySelector('script[src*="'+item[0]+'"]');
+              if(prior){
+                var attempts=0;
+                function awaitExisting(){
+                  if(window[item[1]]||attempts>=16){next(index+1);return;}
+                  attempts+=1;setTimeout(awaitExisting,125);
+                }
+                awaitExisting();
+                return;
+              }
+              var script=document.createElement("script");
+              script.src="/assets/"+item[0]+"?v=ios-visitor-dashboard-20261030";
+              script.async=false;
+              script.onload=function(){next(index+1)};
+              script.onerror=function(){console.warn("DĀR iOS: Besucher-Dashboard fehlt",item[0]);next(index+1)};
+              (document.head||document.documentElement).appendChild(script);
+            }
+            function init(){
+              css.forEach(addStyle);
+              // Only legacy duplicate visual clock components are hidden.
+              // The canonical headerPrayerStatus data feed and the compact
+              // .dat-smart-prayer remain available to every theme and widget.
+              if(!document.getElementById("darIosSinglePrayerDisplayV1")){
+                var style=document.createElement("style");
+                style.id="darIosSinglePrayerDisplayV1";
+                style.textContent="html.dar-ios-native-app body.is-home-route #darHomeHtmlParityV1 #dhpPrayerNativeMount,html.dar-ios-native-app body.is-home-route #darHomeHtmlParityV1 .dhp-prayer{display:none!important}";
+                (document.head||document.documentElement).appendChild(style);
+              }
+              next(0);
+            }
+            if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
+            else init();
+          }catch(error){console.warn("DĀR iOS Dashboard-Bridge",error)}
+        })();
+        """
+        userContentController.addUserScript(
+            WKUserScript(
+                source: iosVisitorAdaptiveDashboardBridge,
+                injectionTime: .atDocumentEnd,
+                forMainFrameOnly: true
+            )
+        )
         let iosHapticBridge = """
         (function(){
           if(window.__darIosHapticInstalled)return;
