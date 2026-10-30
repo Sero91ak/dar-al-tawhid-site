@@ -43,6 +43,41 @@ const nativeNav=(name,val)=>{
  try{if(typeof navigate==="function"){navigate(name,val||"");return}}catch(e){}
  location.hash="#"+name+(val?"/"+encodeURIComponent(val):"");
 };
+function openVisitorQiblaQuick(){
+  const v="20261030-city-v1";
+  function style(){
+    if(document.querySelector('link[data-dar-visitor-qibla-quick]'))return;
+    const css=document.createElement("link");css.rel="stylesheet";
+    css.href="/assets/qibla-quick-view.css?v="+v;
+    css.setAttribute("data-dar-visitor-qibla-quick",v);
+    document.head.appendChild(css);
+  }
+  function show(){
+    const sheet=window.DARQiblaQuickView;
+    if(!sheet||typeof sheet.open!=="function")return false;
+    sheet.open();
+    const h=document.getElementById("qiblaQvTitle");
+    if(h)h.textContent="Qibla-Schnellsuche";
+    return true;
+  }
+  style();
+  if(window.DARQiblaQuickVersion===v&&show())return;
+  if(window.__darVisitorQiblaLoading)return;
+  window.__darVisitorQiblaLoading=true;
+  const script=document.createElement("script");
+  script.src="/assets/qibla-quick-view.js?v="+v;
+  script.async=true;
+  script.setAttribute("data-dar-visitor-qibla-script",v);
+  script.onload=function(){
+    window.__darVisitorQiblaLoading=false;
+    if(!show())nativeNav("qibla");
+  };
+  script.onerror=function(){
+    window.__darVisitorQiblaLoading=false;
+    nativeNav("qibla");
+  };
+  document.head.appendChild(script);
+}
 function isHome(){return !!(document.body&&document.body.classList.contains("is-home-route"))}
 function make(){
 const quick=LINKS.slice(0,4).map((x,i)=>'<button type="button" class="dv3-quick" data-dv3-nav="'+x[0]+'"><span class="dv3-quick-icon">'+icon(["quran","library","library","scholars"][i])+'</span><span><b>'+esc(x[1])+'</b><small>'+esc(x[2])+'</small></span></button>').join("");
@@ -57,7 +92,7 @@ return '<div id="dv3Home" class="dv3-home" data-v3-version="3.1">'+
   '<div class="dv3-search-box"><label class="dv3-search-label" for="homeSearchInput"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.7" cy="10.7" r="7"/><path d="m16 16 5 5"/></svg></label><input id="homeSearchInput" type="search" autocomplete="off" enterkeyhint="search" placeholder="Suche Wissen, Beiträge, Bücher, Gelehrte …" aria-label="Beiträge, Gelehrte und Bücher suchen"><button type="button" id="dv3SearchClear" aria-label="Suche löschen" hidden>×</button></div>'+
   '<button type="button" class="dv3-tawhid" data-dv3-nav="tawhid-guide"><span class="dv3-ornament" aria-hidden="true"></span><span class="dv3-kicker">GRUNDLAGEN DES GLAUBENS</span><strong>Tawḥīd &amp; ʿAqīdah</strong><span class="dv3-description">Allah allein anbeten. Die Glaubensgrundlagen nach Qurʾān, Sunnah und dem Verständnis der Salaf.</span><span class="dv3-tawhid-footer">Bedeutung, Belege &amp; Quellen entdecken <b>→</b></span></button>'+
   '<section class="dv3-section" aria-labelledby="dv3LatestTitle"><div class="dv3-section-title"><h3 id="dv3LatestTitle">Neueste Beiträge</h3><button type="button" data-dv3-nav="recent">Alle lesen →</button></div><div id="dv3Latest" class="dv3-posts" aria-live="polite"><span>Beiträge werden geladen …</span></div></section>'+
-  '<section class="dv3-section" aria-labelledby="dv3QuickTitle"><div class="dv3-section-title"><h3 id="dv3QuickTitle">Schnellzugriff</h3><button type="button" data-dv3-nav="more">Alle Bereiche →</button></div><div class="dv3-quick-grid">'+quick+'</div><details class="dv3-more"><summary>Weitere Bereiche direkt öffnen <span aria-hidden="true">＋</span></summary><div class="dv3-more-grid">'+more+'</div></details></section>'+
+  '<section class="dv3-section" aria-labelledby="dv3QuickTitle"><div class="dv3-section-title"><h3 id="dv3QuickTitle">Schnellzugriff</h3><button type="button" data-dv3-nav="more">Alle Bereiche →</button></div><div class="dv3-qibla-capsules" role="group" aria-label="Schnellzugriffe Qibla und Bibliothek"><button type="button" class="dv3-qibla-capsule" data-dv3-qibla-quick="1" aria-haspopup="dialog" aria-label="Qibla-Schnellsuche mit Standort, Koordinaten und Stadtwahl öffnen"><span class="dv3-qibla-icon">'+icon("qibla")+'</span><span><strong>Qibla-Schnellsuche</strong><small>Kompass · Stadt · Koordinaten</small></span></button><button type="button" class="dv3-qibla-capsule" data-dv3-nav="bibliothek" aria-label="Bibliothek öffnen"><span class="dv3-qibla-icon">'+icon("library")+'</span><span><strong>Bibliothek</strong><small>Wissen &amp; Quellen öffnen</small></span></button></div><div class="dv3-quick-grid">'+quick+'</div><details class="dv3-more"><summary>Weitere Bereiche direkt öffnen <span aria-hidden="true">＋</span></summary><div class="dv3-more-grid">'+more+'</div></details></section>'+
   '<section class="dv3-bottom"><div class="dv3-extras"><div class="dv3-resume-card"><h3>Dein Qurʾān</h3><div id="dv3QuranSlot"></div></div><button type="button" class="dv3-today-card" data-dv3-nav="duas"><small>HEUTE FÜR DICH</small><strong>Duʿāʾ &amp; Empfehlung</strong><span>Dein täglicher Wissensimpuls und aktuelle Bittgebete.</span><b>Duʿāʾ des Tages öffnen →</b></button></div><div class="dv3-bottom-row"><button data-dv3-nav="calendar" type="button">Kalender &amp; Hijrī-Datum →</button><button data-dv3-nav="settings" type="button">Einstellungen →</button></div></section>'+
   '<div id="dv3ThemePanel" class="dv3-theme-panel" hidden role="dialog" aria-label="Erscheinungsbild wählen"><div><strong>Erscheinungsbild</strong><button type="button" data-dv3-close aria-label="Schließen">×</button></div><div class="dv3-theme-grid">'+swatches+'</div></div>'+
 '</div>';
@@ -182,8 +217,9 @@ function queue(){
  if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;try{sync()}catch(e){console.warn("DAR test home v3:",e)}});
 }
 document.addEventListener("click",function(e){
- const button=e.target.closest?.("[data-dv3-locale],[data-dv3-nav],[data-dv3-theme-open],[data-dv3-theme],[data-dv3-close],#dv3SearchClear");
+ const button=e.target.closest?.("[data-dv3-qibla-quick],[data-dv3-locale],[data-dv3-nav],[data-dv3-theme-open],[data-dv3-theme],[data-dv3-close],#dv3SearchClear");
  if(!button||!isVisitorPath())return;
+ if(button.hasAttribute("data-dv3-qibla-quick")){e.preventDefault();e.stopPropagation();openVisitorQiblaQuick();return;}
  if(button.hasAttribute("data-dv3-locale")){e.preventDefault();e.stopPropagation();setLanguage(button.dataset.dv3Locale);return;}
  if(button.hasAttribute("data-dv3-nav")){
   e.preventDefault();e.stopPropagation();nativeNav(button.dataset.dv3Nav,button.dataset.dv3Value);return;
