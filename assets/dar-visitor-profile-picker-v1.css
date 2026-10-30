@@ -475,3 +475,7 @@ html body #darAdultBrandHeaderV2 .dvp-chooser{
  #darAdultBrandHeaderV2 .dvp-hub-entry{transition:none!important}
  #darAdultBrandHeaderV2 .dvp-hub-entry:active{transform:none!important}
 }
+
+/* Stable one-button portal for small front displays: no inner carousel, no second row. */
+html body #darAdultBrandHeaderV2 .dvp-chooser{overscroll-behavior:contain!important;scrollbar-gutter:stable;}
+#darAdultBrandHeaderV2 .dvp-hub-entry{touch-action:manipulation!important;}
