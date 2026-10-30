@@ -8,13 +8,18 @@ if(!/^\/test(?:\/|$)/.test(location.pathname)||/^\/test\/kids(?:\/|$)/.test(loca
 if(window.DAR_TEST_SMART_PROFILE_V1)return;
 var K="darTestSmartProfileV1:", body=document.body, scheduled=false, lastOwner="";
 var THEMES=["keep","light","salbei","soft","eisgold","royal","bordeaux","dark","dar-al-layl"];
+function availableThemes(){
+ var names=THEMES.slice();
+ try{document.querySelectorAll("[data-dtbh-theme],[data-theme-select]").forEach(function(item){var v=item.getAttribute("data-dtbh-theme")||item.getAttribute("data-theme-select");if(v&&/^[a-z0-9-]{2,48}$/.test(v)&&!names.includes(v))names.push(v)})}catch(_){}
+ return names
+}
 var TOPICS=[["tawhid","Tawḥīd"],["quran","Qurʾān"],["sunnah","Sunnah & Ḥadīṯ"],["fiqh","Fiqh"],["women","Frauenwissen"],["family","Ehe & Familie"],["adab","Adab & Akhlāq"],["dua","Duʿāʾ"],["history","Geschichte"]];
 function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}
 function account(){try{return typeof accountSession==="function"?accountSession():null}catch(_){return null}}
 function owner(){var s=account();return s&&String(s.id||s.username||"").trim()?"account-"+String(s.id||s.username).replace(/[^a-zA-Z0-9_-]/g,"").slice(0,96):"guest"}
 function key(){return K+owner()}
 function fresh(){return {gender:"neutral",palette:"keep",chosen:false,interests:[],notes:[],saved:[],opened:[],updated:Date.now()}}
-function read(){var p=fresh();try{var item=JSON.parse(localStorage.getItem(key())||"null");if(item&&typeof item==="object"){p.gender=["neutral","woman","man"].includes(item.gender)?item.gender:"neutral";p.palette=THEMES.includes(item.palette)?item.palette:"keep";p.chosen=item.chosen===true;p.interests=Array.isArray(item.interests)?item.interests.filter(x=>TOPICS.some(y=>y[0]===x)).slice(0,9):[];p.notes=Array.isArray(item.notes)?item.notes.filter(x=>x&&typeof x.text==="string").slice(0,40).map(x=>({text:x.text.slice(0,1600),date:String(x.date||"").slice(0,30)})):[];p.saved=Array.isArray(item.saved)?item.saved.filter(x=>typeof x==="string").slice(0,100):[];p.opened=Array.isArray(item.opened)?item.opened.filter(x=>typeof x==="string").slice(0,30):[]}}catch(_){}
+function read(){var p=fresh();try{var item=JSON.parse(localStorage.getItem(key())||"null");if(item&&typeof item==="object"){p.gender=["neutral","woman","man"].includes(item.gender)?item.gender:"neutral";p.palette=availableThemes().includes(item.palette)?item.palette:"keep";p.chosen=item.chosen===true;p.interests=Array.isArray(item.interests)?item.interests.filter(x=>TOPICS.some(y=>y[0]===x)).slice(0,9):[];p.notes=Array.isArray(item.notes)?item.notes.filter(x=>x&&typeof x.text==="string").slice(0,40).map(x=>({text:x.text.slice(0,1600),date:String(x.date||"").slice(0,30)})):[];p.saved=Array.isArray(item.saved)?item.saved.filter(x=>typeof x==="string").slice(0,100):[];p.opened=Array.isArray(item.opened)?item.opened.filter(x=>typeof x==="string").slice(0,30):[]}}catch(_){}
 return p}
 function write(p){p.updated=Date.now();try{localStorage.setItem(key(),JSON.stringify(p))}catch(e){console.warn("DĀR TEST: Profil kann nicht gespeichert werden",e)}refresh()}
 function saveGender(gender){if(!["woman","man","neutral"].includes(gender))return;var p=read(),previous=p.gender;p.gender=gender;p.chosen=true;if(!p.interests.length){p.interests=gender==="woman"?["women","quran","family"]:["tawhid","quran","sunnah"]}write(p)}
@@ -25,7 +30,7 @@ function chooseTheme(value){if(value==="keep")return false;
  try{if(typeof window.applyTheme==="function"){window.applyTheme(value);return true}}catch(_){}
  return false
 }
-function themePick(v){if(!THEMES.includes(v))return;var p=read();p.palette=v;write(p);if(v!=="keep")chooseTheme(v)}
+function themePick(v){if(!availableThemes().includes(v))return;var p=read();p.palette=v;write(p);if(v!=="keep")chooseTheme(v)}
 function image(g){return "/test/assets/smart-profile/avatar-"+(g==="woman"?"woman":g==="man"?"man":"neutral")+".svg"}
 function display(g){return g==="woman"?"Mein Frauenbereich":g==="man"?"Mein Männerbereich":"Mein DĀR"}
 function label(g){return g==="woman"?"Frau":g==="man"?"Mann":"Neutral"}
@@ -45,30 +50,41 @@ function picks(p){var arr=inventory();if(!arr.length)return[];if(p.gender==="man
  return selected}
 function iconSpan(g){return '<img class="dsp-avatar" src="'+image(g)+'" alt="" loading="lazy" decoding="async">'}
 function choice(g,active){return '<button type="button" class="dsp-gender'+(active===g?" is-active":"")+'" data-dsp-gender="'+g+'" aria-pressed="'+String(active===g)+'">'+iconSpan(g)+'<span><strong>'+label(g)+'</strong><small>'+(g==="woman"?"Frauenwissen zuerst":g==="man"?"Allgemeines Wissen zuerst":"Alles gleichberechtigt")+'</small></span></button>'}
-function themeOptions(p){var items=[["keep","Wie bisher"],["salbei","Salbei · Elfenbein"],["royal","Royal Nachtblau"],["soft","Sanft Elegant"],["eisgold","Eisgold"],["bordeaux","Bordeaux"],["dark","Dunkel"],["light","Hell"],["dar-al-layl","Dār al-Layl"]];
- return items.map(a=>'<button type="button" class="dsp-chip'+(p.palette===a[0]?" is-active":"")+'" data-dsp-theme="'+a[0]+'" aria-pressed="'+(p.palette===a[0])+'">'+a[1]+'</button>').join("")}
+function themeOptions(p){
+ var labels={keep:"Wie bisher",salbei:"Salbei · Elfenbein",royal:"Royal Nachtblau",soft:"Sanft Elegant",eisgold:"Eisgold",bordeaux:"Bordeaux",dark:"Dunkel",light:"Hell","dar-al-layl":"Dār al-Layl"};
+ return availableThemes().map(function(value){
+  var actual=document.querySelector('[data-dtbh-theme="'+value+'"],[data-theme-select="'+value+'"]');
+  var label=actual&&String(actual.getAttribute("aria-label")||actual.textContent||"").trim()||labels[value]||value.replace(/-/g," ");
+  return '<button type="button" class="dsp-chip'+(p.palette===value?" is-active":"")+'" data-dsp-theme="'+esc(value)+'" aria-pressed="'+(p.palette===value)+'">'+esc(label.slice(0,46))+'</button>'
+ }).join("")
+}
 function interestOptions(p){return TOPICS.map(a=>'<button type="button" class="dsp-chip'+(p.interests.includes(a[0])?" is-active":"")+'" data-dsp-interest="'+a[0]+'" aria-pressed="'+p.interests.includes(a[0])+'">'+a[1]+'</button>').join("")}
-function card(p){var g=p.gender,chosen=p.chosen,rs=picks(p);
- var top='<section class="dsp-home" aria-label="Persönlicher Wissensbereich" data-dsp-gender="'+g+'">'+
- '<div class="dsp-home-hero"><div class="dsp-home-copy"><span class="dsp-eyebrow">DĀR SMART · PERSÖNLICH</span>'+
- '<h2>'+(chosen?display(g):"Dein persönlicher Wissensbereich")+'</h2><p>'+(chosen?"Dein täglicher Zugang zu ausgewählten, bereits veröffentlichten Quellen und Lerninhalten.":"Wähle freiwillig dein Profil. Deine Startseite stellt daraufhin passende Inhalte zusammen.")+'</p>'+
- '<div class="dsp-actions"><button type="button" class="dsp-primary" data-dsp-open-account>'+(chosen?"Profil öffnen":"Jetzt einrichten")+'</button><button type="button" class="dsp-subtle" data-dsp-open-more>Bibliothek</button>'+(g==="woman"?'<button type="button" class="dsp-subtle" data-dsp-open-women>Frauen-Fiqh</button>':'')+'</div></div><div class="dsp-home-figure" aria-hidden="true">'+iconSpan(g)+'</div></div>';
- if(!chosen)top+='<div class="dsp-onboarding"><span>Wie möchtest du deine Startseite nutzen?</span><div class="dsp-choices">'+choice("woman",g)+choice("man",g)+choice("neutral",g)+'</div></div>';
- else top+='<div class="dsp-prefs-inline"><span>'+label(g)+' · '+p.interests.map(x=>TOPICS.find(y=>y[0]===x)?.[1]||x).slice(0,3).join(" · ")+'</span><button type="button" data-dsp-open-account>Ändern</button></div>';
- top+='<div class="dsp-recommendations"><div class="dsp-section-head"><h3>Dein Wissensweg heute</h3><span>'+new Date().toLocaleDateString("de-DE",{timeZone:"Europe/Berlin",day:"2-digit",month:"long"})+'</span></div>';
- if(rs.length){top+='<div class="dsp-recommend-list">'+rs.map((x,i)=>'<div class="dsp-recommend-row"><span class="dsp-number">0'+(i+1)+'</span><button type="button" class="dsp-recommend-open" data-dsp-post="'+esc(x.id)+'"><span class="dsp-recommend-copy"><strong>'+esc(x.title)+'</strong><small>'+esc(x.sub||"Qurʾān · Sunnah · Āthār")+'</small></span><span aria-hidden="true" class="dsp-recommend-arrow">›</span></button><button type="button" class="dsp-save'+(p.saved.includes(x.id)?" is-active":"")+'" data-dsp-save="'+esc(x.id)+'" aria-label="'+(p.saved.includes(x.id)?"Aus Merkliste entfernen":"Beitrag merken")+'" aria-pressed="'+p.saved.includes(x.id)+'">'+(p.saved.includes(x.id)?"★":"☆")+'</button></div>').join("")+'</div>'}
- else top+='<p class="dsp-empty">Veröffentlichte Beiträge werden geladen. Die vorhandene Bibliothek bleibt über „Beiträge“ erreichbar.</p>';
- top+='</div><p class="dsp-footnote">Automatisch aus vorhandenen Beiträgen zusammengestellt · keine automatisch erfundenen religiösen Aussagen.</p></section>';
+function card(p){var rs=picks(p);
+ var top='<section class="dsp-home" aria-label="Dein Wissensweg heute"><div class="dsp-section-head"><h2>Dein Wissensweg heute</h2><time>'+new Date().toLocaleDateString("de-DE",{timeZone:"Europe/Berlin",day:"2-digit",month:"long"})+'</time></div>';
+ if(rs.length){top+='<div class="dsp-recommend-list">'+rs.map(function(x,i){return '<div class="dsp-recommend-row"><button type="button" class="dsp-recommend-open" data-dsp-post="'+esc(x.id)+'"><span class="dsp-number">0'+(i+1)+'</span><span class="dsp-recommend-copy"><strong>'+esc(x.title)+'</strong><small>'+esc(x.sub||"Qurʾān · Sunnah · Āthār")+'</small></span><span class="dsp-recommend-arrow" aria-hidden="true">›</span></button><button type="button" class="dsp-save'+(p.saved.includes(x.id)?" is-active":"")+'" data-dsp-save="'+esc(x.id)+'" aria-label="'+(p.saved.includes(x.id)?"Aus Merkliste entfernen":"Beitrag merken")+'" aria-pressed="'+p.saved.includes(x.id)+'">'+(p.saved.includes(x.id)?"★":"☆")+'</button></div>'}).join("")+'</div>'}
+ else top+='<p class="dsp-empty">Passende veröffentlichte Beiträge werden geladen.</p>';
+ top+='<p class="dsp-footnote">Aus vorhandenen Beiträgen für dich zusammengestellt.</p></section>';
  return top}
-
-function accountPanel(p){var g=p.gender;return '<section id="darTestSmartAccount" class="dsp-account" data-dsp-gender="'+g+'" aria-label="Mein persönlicher DĀR-Bereich">'+
- '<div class="dsp-account-heading"><div class="dsp-account-heading-copy"><span class="dsp-eyebrow">MEIN DĀR · PERSÖNLICH</span><h2>'+display(g)+'</h2><p>Dein Wissen. Dein Erscheinungsbild. Deine Auswahl.</p></div><div class="dsp-account-figure" aria-hidden="true">'+iconSpan(g)+'</div></div>'+
- '<div class="dsp-account-shortcuts"><button type="button" class="dsp-shortcut" data-dsp-open-notes><span>✎</span><strong>Notizen</strong><small>'+p.notes.length+' gespeichert</small></button><button type="button" class="dsp-shortcut" data-dsp-open-saved><span>☆</span><strong>Merkliste</strong><small>'+p.saved.length+' Beiträge</small></button></div>'+
- '<div class="dsp-setting dsp-setting--profile"><h3>Profil wählen</h3><div class="dsp-choices">'+choice("woman",g)+choice("man",g)+choice("neutral",g)+'</div></div>'+
+var expanded={interests:false,saved:false,settings:false};
+function expandPanel(key,title,sub,content){
+ return '<div class="dsp-expand"><button type="button" class="dsp-expand-toggle" data-dsp-toggle="'+key+'" aria-expanded="'+Boolean(expanded[key])+'" aria-controls="dspExpand-'+key+'"><span><strong>'+title+'</strong><small>'+sub+'</small></span><span class="dsp-chevron" aria-hidden="true"></span></button><div id="dspExpand-'+key+'" class="dsp-expand-body"'+(expanded[key]?'':' hidden')+'>'+content+'</div></div>'
+}
+function accountPanel(p){var g=p.gender,profile=label(g);
+ return '<section id="darTestSmartAccount" class="dsp-account" data-dsp-gender="'+g+'" aria-label="Mein persönlicher DĀR-Bereich">'+
+ '<header class="dsp-account-heading"><div class="dsp-account-heading-copy"><span class="dsp-eyebrow">MEIN DĀR · PERSÖNLICH</span><h2>'+display(g)+'</h2><p>Persönliche Sammlungen und dein Wissensweg.</p></div><div class="dsp-account-figure" aria-hidden="true">'+iconSpan(g)+'</div></header>'+
+ '<div class="dsp-account-shortcuts"><button type="button" class="dsp-shortcut" data-dsp-open-notes><span class="dsp-shortcut-icon" aria-hidden="true">✎</span><strong>Notizen</strong><small>'+p.notes.length+' gespeichert</small></button><button type="button" class="dsp-shortcut" data-dsp-open-saved><span class="dsp-shortcut-icon" aria-hidden="true">☆</span><strong>Merkliste</strong><small>'+p.saved.length+' Beiträge</small></button></div>'+
+ '<div class="dsp-profile-line"><span><strong>Profil: '+profile+'</strong><small>Empfehlungen individuell für dich</small></span><button type="button" data-dsp-switch-profile>Profil wechseln</button></div>'+
  '<div class="dsp-setting dsp-setting--theme"><h3>Erscheinungsbild</h3><div class="dsp-chip-set dsp-theme-rail" aria-label="Farbschema auswählen">'+themeOptions(p)+'</div></div>'+
- '<details class="dsp-fold" id="dspInterests"><summary>Meine Interessen <span>'+p.interests.length+' gewählt</span></summary><p>Die Auswahl ordnet Empfehlungen, schränkt aber keine Bibliothek ein.</p><div class="dsp-chip-set">'+interestOptions(p)+'</div></details>'+
- '<details class="dsp-fold" id="dspSaved"><summary>Merkliste <span>'+p.saved.length+' gespeichert</span></summary><div class="dsp-notes-list">'+(p.saved.length?p.saved.map(id=>{var item=inventory().find(x=>x.id===id);return '<div class="dsp-saved-line"><button type="button" data-dsp-post="'+esc(id)+'">'+esc(item?item.title:"Gespeicherter Beitrag · "+id)+'</button><button type="button" data-dsp-save="'+esc(id)+'" aria-label="Aus Merkliste entfernen">×</button></div>'}).join(""):'<p class="dsp-empty">Mit ☆ auf der Startseite Beiträge merken.</p>')+'</div></details>'+
- '<details class="dsp-fold dsp-fold--settings"><summary>Weitere Einstellungen</summary><button class="dsp-subtle" type="button" data-dsp-reset>Profil und Interessen zurücksetzen</button></details></section>'}
+ expandPanel("interests","Meine Interessen",p.interests.length+" Themen gewählt",'<p class="dsp-explain">Mehrfachauswahl · Alle Wissensgebiete bleiben zugänglich.</p><div class="dsp-chip-set">'+interestOptions(p)+'</div>')+
+ expandPanel("saved","Merkliste",p.saved.length+" Beiträge gespeichert",'<div class="dsp-saved-list">'+(p.saved.length?p.saved.map(function(id){var item=inventory().find(x=>x.id===id);return '<div class="dsp-saved-line"><button type="button" data-dsp-post="'+esc(id)+'">'+esc(item?item.title:"Gespeicherter Beitrag")+'</button><button type="button" data-dsp-save="'+esc(id)+'" aria-label="Aus Merkliste entfernen">×</button></div>'}).join(""):'<p class="dsp-empty">Du hast noch keine Beiträge gemerkt. Nutze ☆ auf der Startseite.</p>')+'</div>')+
+ expandPanel("settings","Weitere Einstellungen","Personalisierung verwalten",'<button type="button" class="dsp-subtle" data-dsp-reset>Interessen und Profilauswahl zurücksetzen</button>')+
+ '</section>'
+}
+function toggleSection(name,forceOpen){if(!Object.prototype.hasOwnProperty.call(expanded,name))return;expanded[name]=typeof forceOpen==="boolean"?forceOpen:!expanded[name];
+ var panel=document.getElementById("dspExpand-"+name),trigger=document.querySelector('[data-dsp-toggle="'+name+'"]');
+ if(panel)panel.hidden=!expanded[name];
+ if(trigger)trigger.setAttribute("aria-expanded",String(expanded[name]));
+}
 function noteRows(p){return p.notes.length?p.notes.slice().reverse().map((n,i)=>'<article class="dsp-note"><p>'+esc(n.text).replace(/\n/g,"<br>")+'</p><small>'+esc(n.date)+'</small><button type="button" data-dsp-remove-note="'+(p.notes.length-i-1)+'" aria-label="Notiz löschen">Löschen</button></article>').join(""):'<p class="dsp-empty">Noch keine Notizen gespeichert.</p>'}
 function notesMarkup(){var p=read();return '<div class="dsp-notes-dialog" role="dialog" aria-modal="true" aria-labelledby="dspNotesTitle"><div class="dsp-notes-top"><div><span class="dsp-eyebrow">MEIN DĀR · PRIVAT</span><h2 id="dspNotesTitle">Meine Notizen</h2></div><button type="button" class="dsp-notes-close" data-dsp-close-notes aria-label="Notizen schließen">×</button></div><label class="dsp-field-label" for="dspNoteText">Neuer Eintrag</label><textarea id="dspNoteText" class="dsp-note-input" maxlength="1600" rows="4" placeholder="Gedanken, Lernnotizen oder Quellenhinweise …"></textarea><div class="dsp-note-actions"><button type="button" class="dsp-primary" data-dsp-add-note>Notiz speichern</button><span class="dsp-note-status" role="status">'+p.notes.length+' Einträge auf diesem Gerät</span></div><p class="dsp-local-hint">Lokal gespeichert, nicht verschlüsselt und nicht mit deinem Konto synchronisiert. Keine vertraulichen Informationen eingeben.</p><div class="dsp-notes-list">'+noteRows(p)+'</div></div>'}
 function openNotes(){var o=document.getElementById("dspNotesOverlay");if(!o){o=document.createElement("div");o.id="dspNotesOverlay";o.className="dsp-notes-overlay";document.body.appendChild(o)}o.innerHTML=notesMarkup();o.hidden=false;document.body.classList.add("dsp-notes-open");var close=o.querySelector("[data-dsp-close-notes]");if(close)close.focus()}
@@ -111,7 +127,7 @@ function syncHeaderAvatar(p){document.querySelectorAll("#darTestBrandHeaderV1 .d
 function updateAccount(p){if(!document.body.classList.contains("is-account-route"))return;
  var panel=document.querySelector("#appView .account-panel");if(!panel)return;var el=panel.querySelector("#darTestSmartAccount");
  if(!el){el=document.createElement("div");el.className="dsp-account-mount";panel.insertBefore(el,panel.firstChild)}
- var sig=owner()+"|"+JSON.stringify([p.gender,p.palette,p.interests,p.notes,p.saved]);if(el.dataset.dspSig!==sig){var opened=Array.from(el.querySelectorAll("details[open]")).map(function(d){return d.id});el.innerHTML=accountPanel(p);opened.forEach(function(id){var detail=el.querySelector("#"+id);if(detail)detail.open=true});el.dataset.dspSig=sig}
+ var sig=owner()+"|"+JSON.stringify([p.gender,p.palette,p.interests,p.notes,p.saved]);if(el.dataset.dspSig!==sig){el.innerHTML=accountPanel(p);el.dataset.dspSig=sig}
 }
 function refresh(){if(scheduled)return;scheduled=true;requestAnimationFrame(function(){scheduled=false;try{var o=owner(),p=read();if(o!==lastOwner){lastOwner=o;if(p.palette!=="keep")chooseTheme(p.palette)}
  updateHome(p);updateAccount(p);syncHeaderAvatar(p)}catch(e){console.warn("DĀR TEST Smart Profile",e)}})}
@@ -121,8 +137,8 @@ document.addEventListener("click",function(e){
  var nativePost=e.target.closest('#darHomeHtmlParityV1 [data-dhp-route="post"]');
  if(nativePost&&nativePost.dataset.dhpValue){var opened=read(),pid=nativePost.dataset.dhpValue;opened.opened=[pid].concat(opened.opened.filter(x=>x!==pid)).slice(0,30);write(opened);return}
  var nativeTheme=e.target.closest("[data-dtbh-theme],[data-theme-select]");
- if(nativeTheme){var chosen=nativeTheme.getAttribute("data-dtbh-theme")||nativeTheme.getAttribute("data-theme-select");if(THEMES.includes(chosen)){var current=read();if(current.palette!==chosen){current.palette=chosen;write(current)}}return}
- var b=e.target.closest("[data-dsp-gender],[data-dsp-theme],[data-dsp-interest],[data-dsp-open-account],[data-dsp-open-more],[data-dsp-open-women],[data-dsp-post],[data-dsp-save],[data-dsp-add-note],[data-dsp-remove-note],[data-dsp-reset],[data-dsp-open-notes],[data-dsp-close-notes],[data-dsp-open-saved]");
+ if(nativeTheme){var chosen=nativeTheme.getAttribute("data-dtbh-theme")||nativeTheme.getAttribute("data-theme-select");if(availableThemes().includes(chosen)){var current=read();if(current.palette!==chosen){current.palette=chosen;write(current)}}return}
+ var b=e.target.closest("[data-dsp-gender],[data-dsp-theme],[data-dsp-interest],[data-dsp-open-account],[data-dsp-open-more],[data-dsp-open-women],[data-dsp-post],[data-dsp-save],[data-dsp-add-note],[data-dsp-remove-note],[data-dsp-reset],[data-dsp-open-notes],[data-dsp-close-notes],[data-dsp-open-saved],[data-dsp-toggle],[data-dsp-switch-profile]");
  if(!b)return;
  e.preventDefault();e.stopPropagation();
  if(b.hasAttribute("data-dsp-gender")){saveGender(b.getAttribute("data-dsp-gender"));return}
@@ -131,7 +147,9 @@ document.addEventListener("click",function(e){
  if(b.hasAttribute("data-dsp-open-account")){nav("account");return}
  if(b.hasAttribute("data-dsp-open-notes")){openNotes();return}
  if(b.hasAttribute("data-dsp-close-notes")){closeNotes();return}
- if(b.hasAttribute("data-dsp-open-saved")){var saved=document.getElementById("dspSaved");if(saved){saved.open=true;saved.scrollIntoView({block:"nearest",behavior:"smooth"})}return}
+ if(b.hasAttribute("data-dsp-open-saved")){toggleSection("saved",true);return}
+ if(b.hasAttribute("data-dsp-toggle")){toggleSection(b.getAttribute("data-dsp-toggle"));return}
+ if(b.hasAttribute("data-dsp-switch-profile")){var chooser=window.DAR_TEST_PROFILE_CHOOSER;if(chooser&&typeof chooser.open==="function"){chooser.open()}else{var headerButton=document.querySelector("#darTestBrandHeaderV1 .dtbh-action-account");if(headerButton)headerButton.click()}return}
  if(b.hasAttribute("data-dsp-open-more")){nav("more");return}
  if(b.hasAttribute("data-dsp-open-women")){nav("frauen");return}
  if(b.hasAttribute("data-dsp-post")){var id=b.getAttribute("data-dsp-post"),p=read();p.opened=[id].concat(p.opened.filter(x=>x!==id)).slice(0,30);write(p);nav("post",id);return}
