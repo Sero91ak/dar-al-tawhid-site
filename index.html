@@ -25929,9 +25929,8 @@ function darQiblaWebHeading(ev){
   }else if(ev.absolute&&typeof ev.alpha==="number"&&!Number.isNaN(ev.alpha)){
     darQiblaLive.source="absolute";
     h=(360-ev.alpha+360)%360;
-  }else if(!darQiblaLive.source&&typeof ev.alpha==="number"&&!Number.isNaN(ev.alpha)){
-    h=(360-ev.alpha+360)%360;
   }
+  // Relative alpha is not an absolute heading and cannot prove alignment.
   if(h==null)return;
   darQiblaAcceptHeading(h,ev.timeStamp);
 }
@@ -26095,8 +26094,12 @@ function darQiblaLiveBoot(orientPromise){
   darQiblaStartCompass();
   Promise.resolve(orientPromise).catch(function(){});
   try{if(window.webkit&&webkit.messageHandlers&&webkit.messageHandlers.darNative)webkit.messageHandlers.darNative.postMessage({type:"qibla"})}catch(e){}
+  var active=function(){
+    return darQiblaLive.phase==="opening"||darQiblaLive.phase==="open";
+  };
   if(!manual){
     darQiblaLive.locationHandler=function(ev){
+      if(!active())return;
       var d=ev&&ev.detail||{};
       if(typeof getPrayerSettings==="function"&&(getPrayerSettings()||{}).locationMode==="manual")return;
       darQiblaApplyLoc(d.lat??d.latitude,d.lng??d.lon??d.longitude,d.city||s.city,d.acc);
@@ -26105,13 +26108,17 @@ function darQiblaLiveBoot(orientPromise){
   }
   if(!manual&&typeof requestBrowserPosition==="function"){
     requestBrowserPosition().then(function(pos){
+      if(!active()||(typeof getPrayerSettings==="function"&&(getPrayerSettings()||{}).locationMode==="manual"))return;
       var lat=pos.coords.latitude,lon=pos.coords.longitude,acc=pos.coords.accuracy;
       var city=s.city;
-      var apply=function(c){darQiblaApplyLoc(lat,lon,c||city,acc)};
+      var apply=function(c){
+        if(active()&&!(typeof getPrayerSettings==="function"&&(getPrayerSettings()||{}).locationMode==="manual"))
+          darQiblaApplyLoc(lat,lon,c||city,acc);
+      };
       if(typeof reversePrayerCity==="function") reversePrayerCity(lat,lon).then(apply).catch(function(){apply(city)});
       else apply(city);
     }).catch(function(){
-      if(status&&!(s&&s.lat))status.textContent="Standort erlauben, dann startet die Suche.";
+      if(active()&&status&&!(s&&s.lat))status.textContent="Standort erlauben, dann startet die Suche.";
     });
   }
 }
