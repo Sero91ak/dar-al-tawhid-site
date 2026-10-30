@@ -1,132 +1,121 @@
-/* DĀR TEST · Smart Profile V2 · one semantic, theme-aware style owner.
- * Only /test/ adult. No overlays inside account/profile backgrounds. */
-#darHomeHtmlParityV1 .dsp-mount{width:100%;min-width:0;margin:10px 0 4px}
-#darHomeHtmlParityV1 .dsp-home,#appView .dsp-account{
- --dsp-ink:var(--dhp-ink,var(--text,#26352d));
- --dsp-muted:var(--dhp-muted,var(--muted,#66736b));
- --dsp-gold:var(--dhp-capsule-accent,var(--gold2,#a08b60));
- --dsp-rule:color-mix(in srgb,var(--dsp-gold) 31%,transparent);
- --dsp-paper:var(--dhp-paper,var(--card,var(--bg,#f8f7ef)));
- color:var(--dsp-ink);min-width:0}
-#darHomeHtmlParityV1 .dsp-home{border:0;background:transparent;box-shadow:none;max-width:100%}
-#darHomeHtmlParityV1 .dsp-home-hero{
- display:flex;justify-content:space-between;align-items:center;gap:4px;min-height:150px;
- background:linear-gradient(125deg,color-mix(in srgb,var(--dsp-paper) 89%,var(--dsp-gold) 11%),color-mix(in srgb,var(--dsp-paper) 96%,transparent));
- border:1px solid var(--dsp-rule);border-radius:17px;overflow:hidden;isolation:isolate}
-#darHomeHtmlParityV1 .dsp-home-copy{padding:19px 0 18px 18px;min-width:0;flex:1}
-#darHomeHtmlParityV1 .dsp-home-copy h2,#appView .dsp-account-heading h2{font:700 clamp(18px,4.5vw,25px)/1.2 "Iowan Old Style",Georgia,serif;letter-spacing:-.018em;color:var(--dsp-ink);margin:3px 0 6px}
-#darHomeHtmlParityV1 .dsp-home-copy p,#appView .dsp-account-heading p{font:400 12px/1.43 system-ui,sans-serif;color:var(--dsp-muted);margin:0 0 11px;max-width:49ch}
-#darHomeHtmlParityV1 .dsp-eyebrow,#appView .dsp-eyebrow,.dsp-notes-dialog .dsp-eyebrow{display:block;color:var(--dsp-gold,#ad996b);font:750 9px/1.25 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}
-#darHomeHtmlParityV1 .dsp-home-figure{width:91px;min-width:60px;flex:0 1 91px;align-self:stretch;display:flex;align-items:center;justify-content:center;margin-right:10px;pointer-events:none}
-#darHomeHtmlParityV1 .dsp-home-figure .dsp-avatar{width:100%;height:min(110px,100%);object-fit:contain}
-#darHomeHtmlParityV1 .dsp-actions{display:flex;flex-wrap:wrap;gap:7px}
-#darHomeHtmlParityV1 .dsp-primary,#appView .dsp-account .dsp-primary,.dsp-notes-dialog .dsp-primary{
- color:var(--dsp-paper,#fff);background:var(--dsp-ink,#26352d);border:1px solid var(--dsp-ink,#26352d);border-radius:10px;padding:9px 12px;font:700 11px/1.2 system-ui,sans-serif;cursor:pointer}
-#darHomeHtmlParityV1 .dsp-subtle,#appView .dsp-account .dsp-subtle{color:var(--dsp-ink);background:transparent;border:1px solid var(--dsp-rule);border-radius:10px;padding:9px 12px;font:650 11px/1.2 system-ui,sans-serif;cursor:pointer}
-#darHomeHtmlParityV1 button:focus-visible,#appView .dsp-account button:focus-visible,#appView .dsp-account summary:focus-visible,.dsp-notes-dialog :is(button,textarea):focus-visible{outline:2px solid var(--dsp-gold,#ac925e);outline-offset:3px}
-#darHomeHtmlParityV1 .dsp-onboarding{margin:12px 0 0}
-#darHomeHtmlParityV1 .dsp-onboarding>span{font-size:12px;font-weight:650}
-#darHomeHtmlParityV1 .dsp-choices,#appView .dsp-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;min-width:0;margin-top:9px}
-#darHomeHtmlParityV1 .dsp-gender,#appView .dsp-account .dsp-gender{display:flex;align-items:center;gap:7px;min-width:0;min-height:66px;padding:8px;border:1px solid var(--dsp-rule);border-radius:13px;background:transparent;color:inherit;text-align:left;cursor:pointer}
-#darHomeHtmlParityV1 .dsp-gender.is-active,#appView .dsp-account .dsp-gender.is-active{border-color:var(--dsp-gold);background:color-mix(in srgb,var(--dsp-gold) 9%,transparent)}
-#darHomeHtmlParityV1 .dsp-avatar,#appView .dsp-avatar{width:43px;height:52px;flex:0 0 43px;object-fit:contain;filter:drop-shadow(0 2px 3px rgba(0,0,0,.1))}
-#darHomeHtmlParityV1 .dsp-gender span,#appView .dsp-gender span{min-width:0}
-#darHomeHtmlParityV1 .dsp-gender strong,#appView .dsp-gender strong{display:block;font-size:12px;line-height:1.16}
-#darHomeHtmlParityV1 .dsp-gender small,#appView .dsp-gender small{display:block;font-size:10px;line-height:1.25;color:var(--dsp-muted);margin-top:3px}
-#darHomeHtmlParityV1 .dsp-prefs-inline{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:9px 1px;color:var(--dsp-muted);font-size:11px}
-#darHomeHtmlParityV1 .dsp-prefs-inline button{background:none;border:0;color:var(--dsp-gold);text-decoration:underline;padding:4px;font-size:11px}
-#darHomeHtmlParityV1 .dsp-recommendations{margin-top:15px}
-#darHomeHtmlParityV1 .dsp-section-head{display:flex;align-items:baseline;justify-content:space-between;gap:9px;padding:0 0 6px;border-bottom:1px solid var(--dsp-rule)}
-#darHomeHtmlParityV1 .dsp-section-head h3{margin:0;font:700 clamp(16px,3.8vw,19px)/1.24 "Iowan Old Style",Georgia,serif}
-#darHomeHtmlParityV1 .dsp-section-head span{color:var(--dsp-muted);font-size:10px;white-space:nowrap}
-#darHomeHtmlParityV1 .dsp-recommend-list{display:grid;gap:0;margin:3px 0 0}
-#darHomeHtmlParityV1 .dsp-recommend-row{display:flex;align-items:center;min-width:0;min-height:52px;gap:8px;border-bottom:1px solid var(--dsp-rule);background:transparent;border-radius:0;padding:3px 0}
-#darHomeHtmlParityV1 .dsp-number{font-size:11px;font-weight:700;color:var(--dsp-gold);font-variant-numeric:tabular-nums}
-#darHomeHtmlParityV1 .dsp-recommend-open{display:flex;align-items:center;gap:9px;flex:1;min-width:0;padding:7px 0;border:0;background:transparent;color:var(--dsp-ink);text-align:left;cursor:pointer}
-#darHomeHtmlParityV1 .dsp-recommend-copy{display:block;flex:1;min-width:0}
-#darHomeHtmlParityV1 .dsp-recommend-copy strong{display:block;font-size:12px;font-weight:670;line-height:1.35;overflow-wrap:break-word}
-#darHomeHtmlParityV1 .dsp-recommend-copy small{display:block;font-size:10px;color:var(--dsp-muted);line-height:1.25;margin-top:2px}
-#darHomeHtmlParityV1 .dsp-recommend-arrow{color:var(--dsp-muted);font-size:18px}
-#darHomeHtmlParityV1 .dsp-save{width:37px;min-height:44px;flex:0 0 37px;border:0;border-radius:0;background:transparent;color:var(--dsp-gold);font-size:22px;cursor:pointer;line-height:1}
-#darHomeHtmlParityV1 .dsp-save.is-active{color:var(--dsp-gold)}
-#darHomeHtmlParityV1 .dsp-footnote{font-size:10px;color:var(--dsp-muted);margin:8px 0;line-height:1.45}
-#darHomeHtmlParityV1 .dsp-empty,#appView .dsp-empty{font-size:12px;color:var(--dsp-muted)}
+/* DĀR TEST Smart Dashboard V3.
+ * Same capsule tokens as current Home (Qibla / Qurʾān / Library).
+ * No new appearance-specific colors, white cards or duplicated profile hero. */
+#darHomeHtmlParityV1 .dsp-mount{width:100%;min-width:0;margin:13px 0 8px}
+#darHomeHtmlParityV1 .dsp-home{
+ --dsp-ink:var(--dhp-ink);--dsp-muted:var(--dhp-muted);
+ --dsp-rim:var(--dhp-capsule-rim,var(--dhp-line));
+ --dsp-accent:var(--dhp-capsule-accent,var(--dhp-accent));
+ --dsp-fill:var(--dhp-capsule-fill,var(--dhp-paper));
+ width:100%;min-width:0;background:transparent;border:0;box-shadow:none;color:var(--dsp-ink)}
+#darHomeHtmlParityV1 .dsp-section-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:0 1px 9px}
+#darHomeHtmlParityV1 .dsp-section-head h2{margin:0;color:var(--dsp-ink);font:700 clamp(16px,3.7vw,19px)/1.25 "Iowan Old Style",Georgia,serif;letter-spacing:-.012em}
+#darHomeHtmlParityV1 .dsp-section-head time{font:500 10px/1.2 system-ui,sans-serif;color:var(--dsp-muted);white-space:nowrap}
+#darHomeHtmlParityV1 .dsp-recommend-list{display:grid;grid-template-columns:1fr;gap:9px;width:100%;min-width:0}
+#darHomeHtmlParityV1 .dsp-recommend-row{
+ display:flex!important;align-items:stretch!important;min-width:0;width:100%;min-height:63px;box-sizing:border-box;
+ border:1px solid var(--dsp-rim)!important;border-image:none!important;border-radius:clamp(16px,3vw,21px)!important;
+ background:var(--dsp-fill)!important;background-image:none!important;overflow:visible!important;
+ box-shadow:inset 0 1px 0 color-mix(in srgb,var(--dsp-accent) 10%,transparent)!important;
+ transition:border-color 170ms ease,box-shadow 170ms ease,transform 170ms ease}
+#darHomeHtmlParityV1 .dsp-recommend-row:is(:hover,:focus-within){border-color:var(--dhp-capsule-active-rim,var(--dsp-accent))!important;box-shadow:0 0 0 3px var(--dhp-capsule-glow,var(--dhp-halo))!important}
+#darHomeHtmlParityV1 .dsp-recommend-open{
+ display:flex;align-items:center;gap:12px;min-width:0;flex:1;min-height:60px;padding:10px 8px 10px 15px;
+ color:var(--dsp-ink)!important;text-align:left;background:transparent!important;border:0!important;box-shadow:none!important;cursor:pointer}
+#darHomeHtmlParityV1 .dsp-number{color:var(--dsp-accent);font:700 11px/1.3 system-ui,sans-serif;white-space:nowrap;flex:none;font-variant-numeric:tabular-nums}
+#darHomeHtmlParityV1 .dsp-recommend-copy{flex:1;min-width:0;display:block}
+#darHomeHtmlParityV1 .dsp-recommend-copy strong{display:block;font:650 13px/1.35 "Iowan Old Style",Georgia,serif;color:var(--dsp-ink);overflow-wrap:break-word}
+#darHomeHtmlParityV1 .dsp-recommend-copy small{display:block;color:var(--dsp-muted);font:500 10px/1.3 system-ui,sans-serif;margin-top:3px;overflow-wrap:anywhere}
+#darHomeHtmlParityV1 .dsp-recommend-arrow{font-size:18px;color:var(--dsp-muted);flex:none}
+#darHomeHtmlParityV1 .dsp-save{align-self:center;flex:0 0 38px;width:38px;min-height:44px;padding:5px;margin-right:7px;border:0!important;background:transparent!important;box-shadow:none!important;border-radius:999px;color:var(--dsp-accent)!important;font-size:22px;cursor:pointer;transition:transform 160ms ease}
+#darHomeHtmlParityV1 .dsp-save.is-active{transform:scale(1.05)}
+#darHomeHtmlParityV1 .dsp-footnote{color:var(--dsp-muted);font:500 10px/1.45 system-ui,sans-serif;margin:8px 3px 0}
+#darHomeHtmlParityV1 .dsp-empty{font-size:12px;color:var(--dsp-muted)}
+#darHomeHtmlParityV1 :is(.dsp-save,.dsp-recommend-open):focus-visible{outline:2px solid var(--dsp-accent)!important;outline-offset:2px!important}
 #darHomeHtmlParityV1 .dhp-library-tile[hidden]{display:none!important}
-/* Account integrates with the native page. No nested hero artwork, no second background. */
-#appView .dsp-account-mount{width:100%;min-width:0;margin:0 0 12px}
-#appView .dsp-account{--dsp-ink:var(--text,#26352d);--dsp-muted:var(--muted,#66736b);--dsp-paper:var(--card,var(--bg));--dsp-gold:var(--gold2,var(--accent,#a08b60))}
-#appView .dsp-account-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0 11px;border-bottom:1px solid var(--dsp-rule);background:none}
-#appView .dsp-account-heading-copy{flex:1;min-width:0}
-#appView .dsp-account-heading h2{font-size:clamp(19px,4.2vw,25px);margin:4px 0}
-#appView .dsp-account-heading p{margin:0}
-#appView .dsp-account-figure{display:flex;align-items:center;justify-content:center;flex:0 0 66px;width:66px;height:77px}
-#appView .dsp-account-figure .dsp-avatar{width:64px;height:74px;flex-basis:64px}
-#appView .dsp-account-shortcuts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
-#appView .dsp-shortcut{display:grid;grid-template-columns:23px 1fr;grid-template-rows:repeat(2,auto);gap:2px 7px;align-content:center;text-align:left;min-height:51px;padding:8px 11px;border:1px solid var(--dsp-rule);border-radius:12px;color:var(--dsp-ink);background:color-mix(in srgb,var(--dsp-paper) 96%,transparent);cursor:pointer}
-#appView .dsp-shortcut>span{grid-row:1/3;align-self:center;font-size:22px;color:var(--dsp-gold)}
-#appView .dsp-shortcut strong{font-size:12px;line-height:1.2}
-#appView .dsp-shortcut small{font-size:10px;color:var(--dsp-muted)}
-#appView .dsp-setting{margin-top:13px}
-#appView .dsp-setting h3{font-size:14px;margin:0;font-weight:700}
-#appView .dsp-account .dsp-choices{margin:8px 0}
-#appView .dsp-chip-set{display:flex;gap:6px;flex-wrap:wrap}
-#appView .dsp-chip{font-size:11px;padding:8px 10px;border-radius:9px;border:1px solid var(--dsp-rule);background:transparent;color:var(--dsp-ink);white-space:nowrap;cursor:pointer}
-#appView .dsp-chip.is-active{border-color:var(--dsp-gold);background:color-mix(in srgb,var(--dsp-gold) 13%,transparent)}
-#appView .dsp-theme-rail{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;padding:8px 0 5px}
-#appView .dsp-theme-rail .dsp-chip{flex:0 0 auto}
-#appView .dsp-fold{margin-top:12px;border-top:1px solid var(--dsp-rule);color:var(--dsp-ink);padding:9px 0 0}
-#appView .dsp-fold summary{display:flex;align-items:center;justify-content:space-between;gap:7px;cursor:pointer;font-size:12px;font-weight:680;list-style:none;min-height:33px}
-#appView .dsp-fold summary::-webkit-details-marker{display:none}
-#appView .dsp-fold summary::after{content:"⌄";color:var(--dsp-gold);font-size:17px}
-#appView .dsp-fold[open] summary::after{content:"⌃"}
-#appView .dsp-fold summary span{margin-left:auto;font-size:10px;color:var(--dsp-muted);font-weight:400}
-#appView .dsp-fold p{font-size:11px;line-height:1.4;color:var(--dsp-muted);margin:6px 0}
-#appView .dsp-fold .dsp-chip-set{padding:6px 0}
-#appView .dsp-saved-line{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--dsp-rule);padding:9px 0}
-#appView .dsp-saved-line button{border:0;background:transparent;color:var(--dsp-ink);text-align:left;font-size:12px}
-#appView .dsp-fold--settings .dsp-subtle{margin:6px 0 3px}
-/* An independent notes sheet; account page remains short. */
+
+/* Account: one surface / no separate hero, theme follows existing account tokens. */
+#appView .dsp-account-mount{width:100%;min-width:0;margin:0 0 10px}
+#appView .dsp-account{
+ --dsp-ink:var(--text,var(--theme-text,#26352d));
+ --dsp-muted:var(--muted,var(--theme-text-muted,#6e7c73));
+ --dsp-accent:var(--gold2,var(--accent,#a08b60));
+ --dsp-rim:color-mix(in srgb,var(--dsp-accent) 38%,transparent);
+ --dsp-fill:var(--card,var(--bg,transparent));
+ width:100%;min-width:0;box-sizing:border-box;color:var(--dsp-ink);background:transparent;border:0;box-shadow:none}
+#appView .dsp-account-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0 10px;border-bottom:1px solid var(--dsp-rim)}
+#appView .dsp-account-heading-copy{min-width:0;flex:1}
+#appView .dsp-eyebrow,.dsp-notes-dialog .dsp-eyebrow{display:block;color:var(--dsp-accent);font:750 9px/1.25 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+#appView .dsp-account-heading h2{color:var(--dsp-ink);margin:5px 0 4px;font:700 clamp(20px,4.5vw,26px)/1.15 "Iowan Old Style",Georgia,serif;letter-spacing:-.02em}
+#appView .dsp-account-heading p{font:500 11px/1.4 system-ui,sans-serif;color:var(--dsp-muted);margin:0}
+#appView .dsp-account-figure{width:68px;flex:0 0 68px;display:flex;align-items:center;justify-content:center}
+#appView .dsp-account-figure .dsp-avatar{width:66px;height:78px;object-fit:contain}
+#appView .dsp-account-shortcuts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:13px 0}
+#appView .dsp-shortcut{min-width:0;display:grid;grid-template-columns:23px minmax(0,1fr);grid-template-rows:auto auto;gap:2px 7px;align-content:center;text-align:left;padding:10px 11px;min-height:60px;background:var(--dsp-fill)!important;border:1px solid var(--dsp-rim)!important;border-radius:15px!important;box-shadow:inset 0 1px 0 color-mix(in srgb,var(--dsp-accent) 8%,transparent);color:var(--dsp-ink);cursor:pointer}
+#appView .dsp-shortcut-icon{grid-row:1/3;align-self:center;color:var(--dsp-accent);font-size:21px}
+#appView .dsp-shortcut strong{font-size:12px;line-height:1.25}
+#appView .dsp-shortcut small{font-size:10px;line-height:1.25;color:var(--dsp-muted)}
+#appView .dsp-profile-line{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 1px;border-top:1px solid var(--dsp-rim);border-bottom:1px solid var(--dsp-rim)}
+#appView .dsp-profile-line span{display:block;min-width:0}
+#appView .dsp-profile-line strong{display:block;font-size:12px;font-weight:700}
+#appView .dsp-profile-line small{display:block;font-size:10px;color:var(--dsp-muted);margin-top:3px}
+#appView .dsp-profile-line button{flex:0 0 auto;border:1px solid var(--dsp-rim);color:var(--dsp-ink);background:transparent;border-radius:999px;padding:9px 12px;font:650 11px/1.2 system-ui,sans-serif;cursor:pointer}
+#appView .dsp-setting--theme{margin:12px 0 9px}
+#appView .dsp-setting--theme h3{font:700 13px/1.3 system-ui,sans-serif;color:var(--dsp-ink);margin:0 0 8px}
+#appView .dsp-chip-set{display:flex;flex-wrap:wrap;gap:7px}
+#appView .dsp-theme-rail{flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:thin;padding:2px 1px 6px;overscroll-behavior-x:contain}
+#appView .dsp-chip{flex:0 0 auto;min-height:36px;padding:8px 10px;border:1px solid var(--dsp-rim);border-radius:999px;background:transparent;color:var(--dsp-ink);font:600 11px/1.2 system-ui,sans-serif;cursor:pointer}
+#appView .dsp-chip.is-active{background:color-mix(in srgb,var(--dsp-accent) 12%,transparent)!important;border-color:var(--dsp-accent)!important}
+#appView .dsp-expand{border-top:1px solid var(--dsp-rim)}
+#appView .dsp-expand-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:49px;gap:10px;padding:9px 3px;text-align:left;border:0;background:transparent;color:var(--dsp-ink);cursor:pointer}
+#appView .dsp-expand-toggle>span:first-child{min-width:0;flex:1;display:block}
+#appView .dsp-expand-toggle strong{display:block;font:700 12px/1.25 system-ui,sans-serif}
+#appView .dsp-expand-toggle small{display:block;font:500 10px/1.35 system-ui,sans-serif;color:var(--dsp-muted);margin-top:2px}
+#appView .dsp-chevron{border:solid var(--dsp-accent);border-width:0 1.8px 1.8px 0;display:block;width:8px;height:8px;transform:rotate(45deg);margin:0 8px 5px;transition:transform 160ms ease}
+#appView .dsp-expand-toggle[aria-expanded="true"] .dsp-chevron{transform:rotate(225deg);margin-top:7px}
+#appView .dsp-expand-body{padding:5px 4px 15px}
+#appView .dsp-expand-body[hidden]{display:none!important}
+#appView .dsp-explain{font:500 11px/1.45 system-ui,sans-serif;color:var(--dsp-muted);margin:0 0 10px}
+#appView .dsp-saved-list{display:grid;gap:3px}
+#appView .dsp-saved-line{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--dsp-rim);padding:7px 0}
+#appView .dsp-saved-line button{color:var(--dsp-ink);background:transparent;border:0;font-size:12px;cursor:pointer}
+#appView .dsp-saved-line button:first-child{text-align:left;flex:1;min-width:0;overflow-wrap:anywhere}
+#appView .dsp-empty{font-size:11px;color:var(--dsp-muted);margin:0;padding:8px 0}
+#appView .dsp-subtle{border:1px solid var(--dsp-rim);border-radius:12px;background:transparent;color:var(--dsp-ink);padding:9px 12px;font-size:11px;cursor:pointer}
+#appView .dsp-account button:is(:hover,:focus-visible){border-color:var(--dsp-accent)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--dsp-accent) 14%,transparent)!important}
+#appView .dsp-account button:focus-visible{outline:2px solid var(--dsp-accent);outline-offset:2px}
+
+/* Independent notes sheet: always inherits active user theme. */
 body.dsp-notes-open{overflow:hidden!important}
-.dsp-notes-overlay{position:fixed;inset:0;z-index:9998;display:flex;align-items:center;justify-content:center;padding:calc(16px + env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:rgba(8,17,20,.68);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+.dsp-notes-overlay{position:fixed;inset:0;z-index:9998;display:flex;align-items:center;justify-content:center;padding:calc(12px + env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:rgba(8,17,20,.64);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .dsp-notes-overlay[hidden]{display:none!important}
-.dsp-notes-dialog{--dsp-ink:var(--text,#26352d);--dsp-muted:var(--muted,#66736b);--dsp-paper:var(--card,var(--bg,#fff));--dsp-gold:var(--gold2,#a08b60);width:min(100%,570px);max-height:min(85dvh,800px);overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box;border:1px solid color-mix(in srgb,var(--dsp-gold) 32%,transparent);border-radius:18px;background:var(--dsp-paper);color:var(--dsp-ink);padding:19px;box-shadow:0 20px 65px rgba(0,0,0,.22)}
-.dsp-notes-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:1px solid color-mix(in srgb,var(--dsp-gold) 30%,transparent);margin-bottom:12px}
+.dsp-notes-dialog{--dsp-ink:var(--text,#26352d);--dsp-muted:var(--muted,#66736b);--dsp-paper:var(--card,var(--bg,#fff));--dsp-accent:var(--gold2,#a08b60);width:min(100%,570px);max-height:min(86dvh,800px);overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box;border:1px solid color-mix(in srgb,var(--dsp-accent) 34%,transparent);border-radius:18px;background:var(--dsp-paper);color:var(--dsp-ink);padding:19px;box-shadow:0 20px 65px rgba(0,0,0,.22)}
+.dsp-notes-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:1px solid color-mix(in srgb,var(--dsp-accent) 30%,transparent);margin-bottom:12px}
 .dsp-notes-top h2{margin:4px 0 0;font:700 22px/1.18 "Iowan Old Style",Georgia,serif}
 .dsp-notes-close{width:42px;height:42px;border:0;background:transparent;color:var(--dsp-ink);font-size:29px;cursor:pointer}
 .dsp-notes-dialog .dsp-field-label{display:block;font-size:12px;font-weight:650;margin:0 0 6px}
-.dsp-notes-dialog .dsp-note-input{display:block;width:100%;min-width:0;box-sizing:border-box;resize:vertical;border:1px solid color-mix(in srgb,var(--dsp-gold) 38%,transparent);border-radius:11px;background:transparent;color:var(--dsp-ink);padding:12px;font:14px/1.55 system-ui,sans-serif}
+.dsp-notes-dialog .dsp-note-input{display:block;width:100%;min-width:0;box-sizing:border-box;resize:vertical;border:1px solid color-mix(in srgb,var(--dsp-accent) 38%,transparent);border-radius:11px;background:transparent;color:var(--dsp-ink);padding:12px;font:14px/1.55 system-ui,sans-serif}
 .dsp-notes-dialog .dsp-note-actions{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-top:9px}
+.dsp-notes-dialog .dsp-primary{color:var(--dsp-paper);background:var(--dsp-ink);border:1px solid var(--dsp-ink);border-radius:12px;padding:10px 12px;font-size:12px;cursor:pointer}
 .dsp-notes-dialog .dsp-note-status,.dsp-notes-dialog .dsp-local-hint{font-size:10px;color:var(--dsp-muted);line-height:1.42}
 .dsp-notes-dialog .dsp-local-hint{margin:11px 0}
 .dsp-notes-dialog .dsp-notes-list{display:grid;gap:8px}
-.dsp-notes-dialog .dsp-note{padding:11px 0;border-top:1px solid color-mix(in srgb,var(--dsp-gold) 27%,transparent);background:transparent}
+.dsp-notes-dialog .dsp-note{padding:11px 0;border-top:1px solid color-mix(in srgb,var(--dsp-accent) 27%,transparent);background:transparent}
 .dsp-notes-dialog .dsp-note p{font-size:13px;line-height:1.48;margin:0 0 4px;overflow-wrap:anywhere}
 .dsp-notes-dialog .dsp-note small{font-size:10px;color:var(--dsp-muted)}
-.dsp-notes-dialog .dsp-note button{float:right;border:0;background:transparent;color:var(--dsp-gold);font-size:12px;cursor:pointer}
-@media(max-width:570px){
- #darHomeHtmlParityV1 .dsp-home-hero{min-height:135px}
- #darHomeHtmlParityV1 .dsp-home-copy{padding:14px 0 14px 13px}
- #darHomeHtmlParityV1 .dsp-home-figure{flex-basis:74px;margin-right:4px}
- #darHomeHtmlParityV1 .dsp-home-figure .dsp-avatar{height:92px}
- #darHomeHtmlParityV1 .dsp-choices,#appView .dsp-choices{gap:5px}
- #darHomeHtmlParityV1 .dsp-gender,#appView .dsp-account .dsp-gender{flex-direction:column;justify-content:center;gap:2px;text-align:center;padding:6px 3px;min-height:83px}
- #darHomeHtmlParityV1 .dsp-gender small,#appView .dsp-gender small{font-size:9px;line-height:1.2}
- #darHomeHtmlParityV1 .dsp-gender .dsp-avatar,#appView .dsp-gender .dsp-avatar{width:39px;height:44px;flex-basis:44px}
+.dsp-notes-dialog .dsp-note button{float:right;border:0;background:transparent;color:var(--dsp-accent);font-size:12px;cursor:pointer}
+@media(max-width:540px){
+ #darHomeHtmlParityV1 .dsp-recommend-open{padding:9px 6px 9px 12px}
+ #darHomeHtmlParityV1 .dsp-recommend-row{min-height:60px}
+ #appView .dsp-account-heading h2{font-size:21px}
  .dsp-notes-overlay{align-items:flex-end;padding-bottom:0}
  .dsp-notes-dialog{max-height:calc(91dvh - env(safe-area-inset-top,0px));border-radius:20px 20px 0 0;padding-bottom:max(18px,env(safe-area-inset-bottom,0px))}
 }
-@media(min-width:740px){
- #darHomeHtmlParityV1 .dsp-recommend-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
- #darHomeHtmlParityV1 .dsp-recommend-row{min-width:0}
- #appView .dsp-account .dsp-choices{max-width:650px}
-}
-@media(prefers-reduced-motion:reduce){#darHomeHtmlParityV1 .dsp-home button,#appView .dsp-account button{transition:none!important;transform:none!important}}
+@media(min-width:800px){#darHomeHtmlParityV1 .dsp-recommend-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}#darHomeHtmlParityV1 .dsp-recommend-row{min-width:0}}
+@media(prefers-reduced-motion:reduce){#darHomeHtmlParityV1 .dsp-recommend-row,#appView .dsp-chevron{transition:none!important}}
 
-/* Existing account synchronization dashboard: preserve authentication and actual sync logic.
- * Remove superfluous nested surfaces and reduce mobile height without hiding data. */
-body.is-account-route #appView .account-panel.account-panel-dashboard{
- border:0!important;border-radius:0!important;box-shadow:none!important;
- background:transparent!important;padding:12px 0 16px!important}
+/* Existing account synchronization — tighter but preserves controls and data. */
+body.is-account-route #appView .account-panel.account-panel-dashboard{border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;padding:12px 0 16px!important}
 body.is-account-route #appView .account-dashboard-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 5px!important;padding:0!important}
 body.is-account-route #appView .account-dashboard-head h3{font-size:15px!important;margin:0 0 3px!important;line-height:1.28!important}
 body.is-account-route #appView .account-dashboard-head .account-hub-status{font-size:11px!important;margin:0!important}
