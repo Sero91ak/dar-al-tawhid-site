@@ -13,7 +13,7 @@ function availableThemes(){
  try{document.querySelectorAll("[data-dtbh-theme],[data-theme-select]").forEach(function(item){var v=item.getAttribute("data-dtbh-theme")||item.getAttribute("data-theme-select");if(v&&/^[a-z0-9-]{2,48}$/.test(v)&&!names.includes(v))names.push(v)})}catch(_){}
  return names
 }
-var TOPICS=[["tawhid","Tawḥīd"],["quran","Qurʾān"],["sunnah","Sunnah & Ḥadīṯ"],["fiqh","Fiqh"],["women","Frauenwissen"],["family","Ehe & Familie"],["adab","Adab & Akhlāq"],["dua","Duʿāʾ"],["history","Geschichte"]];
+var TOPICS=[["tawhid","Tawḥīd"],["men","Männerwissen"],["quran","Qurʾān"],["sunnah","Sunnah & Ḥadīṯ"],["fiqh","Fiqh"],["women","Frauenwissen"],["family","Ehe & Familie"],["adab","Adab & Akhlāq"],["dua","Duʿāʾ"],["history","Geschichte"]];
 function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}
 function account(){try{return typeof accountSession==="function"?accountSession():null}catch(_){return null}}
 function owner(){var s=account();return s&&String(s.id||s.username||"").trim()?"account-"+String(s.id||s.username).replace(/[^a-zA-Z0-9_-]/g,"").slice(0,96):"guest"}
@@ -22,7 +22,7 @@ function fresh(){return {gender:"neutral",palette:"keep",chosen:false,interests:
 function read(){var p=fresh();try{var item=JSON.parse(localStorage.getItem(key())||"null");if(item&&typeof item==="object"){p.gender=["neutral","woman","man"].includes(item.gender)?item.gender:"neutral";p.palette=availableThemes().includes(item.palette)?item.palette:"keep";p.chosen=item.chosen===true;p.interests=Array.isArray(item.interests)?item.interests.filter(x=>TOPICS.some(y=>y[0]===x)).slice(0,9):[];p.notes=Array.isArray(item.notes)?item.notes.filter(x=>x&&typeof x.text==="string").slice(0,40).map(x=>({text:x.text.slice(0,1600),date:String(x.date||"").slice(0,30)})):[];p.saved=Array.isArray(item.saved)?item.saved.filter(x=>typeof x==="string").slice(0,100):[];p.opened=Array.isArray(item.opened)?item.opened.filter(x=>typeof x==="string").slice(0,30):[]}}catch(_){}
 return p}
 function write(p){p.updated=Date.now();try{localStorage.setItem(key(),JSON.stringify(p))}catch(e){console.warn("DĀR TEST: Profil kann nicht gespeichert werden",e)}refresh()}
-function saveGender(gender){if(!["woman","man","neutral"].includes(gender))return;var p=read(),previous=p.gender;p.gender=gender;p.chosen=true;if(!p.interests.length){p.interests=gender==="woman"?["women","quran","family"]:["tawhid","quran","sunnah"]}write(p)}
+function saveGender(gender){if(!["woman","man","neutral"].includes(gender))return;var p=read(),previous=p.gender;p.gender=gender;p.chosen=true;if(gender==="man"){p.interests=p.interests.filter(x=>x!=="women");if(previous!=="man"&&!p.interests.includes("tawhid"))p.interests.unshift("tawhid")}if(gender==="woman"&&!p.interests.includes("women"))p.interests.unshift("women");if(!p.interests.length)p.interests=gender==="woman"?["women","quran","family"]:["tawhid","quran","sunnah"];p.interests=p.interests.slice(0,9);write(p)}
 function chooseTheme(value){if(value==="keep")return false;
  var actual=document.querySelector('.dtbh-choice[data-dtbh-theme="'+value+'"]')||document.querySelector('.theme-switch-btn[data-theme-select="'+value+'"]');
  if(actual){actual.click();return true}
@@ -36,18 +36,73 @@ function display(g){return g==="woman"?"Mein Frauenbereich":g==="man"?"Mein Män
 function label(g){return g==="woman"?"Frau":g==="man"?"Mann":"Neutral"}
 function hashText(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
 function today(){return new Date().toLocaleDateString("sv-SE",{timeZone:"Europe/Berlin"})}
-function classification(x){var s=[x.title,x.category,x.scholar,x.tags,x.description,x.topic].filter(Boolean).join(" ").toLowerCase();var a=[];if(/frau|schwester|ḥiǧāb|hijab|niq[aā]b|menstru|ḥaiḍ|haidh|nik[aā]h|ehefrau|mutter|mütter|tochter|schwanger/.test(s))a.push("women");if(/taw[hḥ]id|ʿaq[iī]da|aqid|širk|shirk|glaubens/.test(s))a.push("tawhid");if(/qur|koran|s[uū]ra|āya|aya|vers/.test(s))a.push("quran");if(/sunn|ḥad[iī][tṯh]|hadith|prophet|salaf|bukh[aā]r|muslim/.test(s))a.push("sunnah");if(/fiqh|gebet|wu[dḍ]u|fasten|zak[aā]t|pflicht|reinheit/.test(s))a.push("fiqh");if(/famil|ehe|kind|eltern|erzieh|mutter|vater/.test(s))a.push("family");if(/adab|akhl[aā]q|charakter|geduld|benehmen|herz|aufrichtig/.test(s))a.push("adab");if(/du[aʿ]|bittgebet|dhikr|[dḏ]ikr/.test(s))a.push("dua");if(/geschichte|ṣaḥ[aā]b|sahab|im[aā]m|gelehrte|biograf/.test(s))a.push("history");return a}
-function inventory(){var raw=[];try{if(typeof posts!=="undefined"&&Array.isArray(posts))raw=posts;else if(Array.isArray(window.posts))raw=window.posts}catch(_){}
-return raw.filter(x=>x&&x.id&&x.title).map(x=>({id:String(x.id),title:String(x.title),sub:[x.scholar,x.category].filter(Boolean).join(" · "),tags:classification(x)}))}
-function picks(p){var arr=inventory();if(!arr.length)return[];if(p.gender==="man"){var general=arr.filter(x=>!x.tags.includes("women"));if(general.length>=3)arr=general}var date=today(),seen=new Set(p.opened);
- arr=arr.map(x=>{var score=hashText(date+"|"+owner()+"|"+x.id)%300;
- x.tags.forEach(tag=>{if(p.interests.includes(tag))score+=450;if(p.gender==="woman"&&tag==="women")score+=650;if(p.gender==="man"&&tag==="women")score-=350});
- if(seen.has(x.id))score-=1000;if(p.saved.includes(x.id))score-=200;
- return {item:x,score:score}
- }).sort((a,b)=>b.score-a.score||a.item.id.localeCompare(b.item.id));
- var selected=[],groups=new Set();for(var row of arr){if(selected.length>=3)break;var cat=row.item.tags[0]||"all";if(groups.has(cat)&&arr.length>8)continue;groups.add(cat);selected.push(row.item)}
- if(selected.length<3)for(var another of arr){if(selected.length>=3)break;if(!selected.some(x=>x.id===another.item.id))selected.push(another.item)}
- return selected}
+function canonicalWords(s){return String(s==null?"":s).toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/ʿ|ʾ|[‘’]/g,"").replace(/[‐‑‒–—]/g,"-")}
+function classification(x){
+ var title=canonicalWords([x.title,x.category,x.topic,x.section,x.tags,x.keywords].filter(Boolean).join(" "));
+ var detail=canonicalWords([x.description,x.excerpt].filter(Boolean).join(" "));
+ var s=title+" "+detail,a=[];
+ var female=/(?:frau|frauen|schwester|schwestern|muslima|niqab|hijab|khimar|menstru|haidh|ha[id]d|ehefrau|mutter|mutterrechte|tochter|schwanger|stillzeit|wochenbett|weiblich|bint |umm )/i.test(title);
+ var male=/(?:manner|mann|bruder|bruderpflicht|ehemann|vater|vaterpflicht|sohn|bartpflicht|mannlich|mannerfiqh)/i.test(title);
+ var audience=canonicalWords(x.audience||x.targetAudience||x.for||"");
+ // Explicit author-controlled metadata is authoritative. Text signals otherwise
+ // remain conservative: gender-exclusive subjects must never be promoted to the other dashboard.
+ if(/women|female|frau/.test(audience)){female=true;male=false}
+ if(/men|male|manner/.test(audience)){male=true;female=false}
+ var gender=female&&!male?"woman":male&&!female?"man":female&&male?"both":"general";
+ if(female)a.push("women");
+ if(male)a.push("men");
+ if(/tawhid|aqida|aqid|schirk|shirk|glaubens/.test(s))a.push("tawhid");
+ if(/qur|koran|sura|aya|vers/.test(s))a.push("quran");
+ if(/sunn|hadith|hadit|prophet|salaf|bukhari|muslim/.test(s))a.push("sunnah");
+ if(/fiqh|gebet|wudu|fasten|zakat|pflicht|reinheit/.test(s))a.push("fiqh");
+ if(/famil|ehe|kind|eltern|erzieh|mutter|vater/.test(s))a.push("family");
+ if(/adab|akhlaq|charakter|geduld|benehmen|herz|aufrichtig/.test(s))a.push("adab");
+ if(/dua|bittgebet|dhikr|d[h]ikr/.test(s))a.push("dua");
+ if(/geschichte|sahab|imam|gelehrte|biograf/.test(s))a.push("history");
+ return {tags:a,gender:gender}
+}
+function inventory(){
+ var raw=[];try{if(typeof posts!=="undefined"&&Array.isArray(posts))raw=posts;else if(Array.isArray(window.posts))raw=window.posts}catch(_){}
+ var used=new Set();
+ return raw.filter(x=>x&&x.id&&x.title).map(function(x,i){
+  var id=String(x.id),meta=classification(x);
+  return {id:id,title:String(x.title),sub:[x.scholar,x.category].filter(Boolean).join(" · "),tags:meta.tags,gender:meta.gender,order:i}
+ }).filter(x=>{if(used.has(x.id))return false;used.add(x.id);return true})
+}
+function eligible(p,items){return items.filter(x=>p.gender==="man"?x.gender!=="woman":p.gender==="woman"?x.gender!=="man":true)}
+function ranking(p){
+ var date=today(),seen=new Set(p.opened),topics=new Set(p.interests);
+ return eligible(p,inventory()).map(function(item){
+  var score=hashText(date+"|"+owner()+"|"+p.gender+"|"+item.id)%490;
+  for(var tag of item.tags){if(topics.has(tag))score+=410}
+  if(p.gender==="woman"&&item.gender==="woman")score+=1100;
+  if(p.gender==="man"&&item.gender==="man")score+=1100;
+  if(item.gender==="both"&&p.gender!=="neutral")score+=100;
+  if(seen.has(item.id))score-=1300;
+  if(p.saved.includes(item.id))score-=450;
+  // Rotate daily; never invent titles or religious references.
+  return {item:item,score:score}
+ }).sort((a,b)=>b.score-a.score||a.item.id.localeCompare(b.item.id))
+}
+function picks(p){
+ var ranked=ranking(p),selected=[],tags=new Set();
+ var primary=p.gender==="woman"?"woman":p.gender==="man"?"man":"";
+ if(primary){var focus=ranked.find(x=>x.item.gender===primary);if(focus){selected.push(focus.item);focus.item.tags.forEach(t=>tags.add(t))}}
+ for(var entry of ranked){
+  if(selected.length===3)break;
+  if(selected.some(x=>x.id===entry.item.id))continue;
+  var group=entry.item.tags.find(t=>t!=="women"&&t!=="men")||"general";
+  if(tags.has(group)&&ranked.length>6)continue;
+  tags.add(group);selected.push(entry.item)
+ }
+ for(var fallback of ranked){if(selected.length===3)break;if(!selected.some(x=>x.id===fallback.item.id))selected.push(fallback.item)}
+ return selected
+}
+function todayFeature(p,excluded){
+ return ranking(p).map(x=>x.item).find(x=>!excluded.includes(x.id))||ranking(p).map(x=>x.item)[0]||null
+}
+function homeFocus(p){var primary=p.gender==="woman"?"woman":p.gender==="man"?"man":null;
+ if(!primary)return null;return ranking(p).map(x=>x.item).find(x=>x.gender===primary)||null}
 function iconSpan(g){return '<img class="dsp-avatar" src="'+image(g)+'" alt="" loading="lazy" decoding="async">'}
 function choice(g,active){return '<button type="button" class="dsp-gender'+(active===g?" is-active":"")+'" data-dsp-gender="'+g+'" aria-pressed="'+String(active===g)+'">'+iconSpan(g)+'<span><strong>'+label(g)+'</strong><small>'+(g==="woman"?"Frauenwissen zuerst":g==="man"?"Allgemeines Wissen zuerst":"Alles gleichberechtigt")+'</small></span></button>'}
 function themeOptions(p){
@@ -58,7 +113,7 @@ function themeOptions(p){
   return '<button type="button" class="dsp-chip'+(p.palette===value?" is-active":"")+'" data-dsp-theme="'+esc(value)+'" aria-pressed="'+(p.palette===value)+'">'+esc(label.slice(0,46))+'</button>'
  }).join("")
 }
-function interestOptions(p){return TOPICS.map(a=>'<button type="button" class="dsp-chip'+(p.interests.includes(a[0])?" is-active":"")+'" data-dsp-interest="'+a[0]+'" aria-pressed="'+p.interests.includes(a[0])+'">'+a[1]+'</button>').join("")}
+function interestOptions(p){return TOPICS.filter(a=>!(p.gender==="man"&&a[0]==="women")&&!(p.gender==="woman"&&a[0]==="men")).map(a=>'<button type="button" class="dsp-chip'+(p.interests.includes(a[0])?" is-active":"")+'" data-dsp-interest="'+a[0]+'" aria-pressed="'+p.interests.includes(a[0])+'">'+a[1]+'</button>').join("")}
 function card(p){var rs=picks(p);
  var top='<section class="dsp-home" aria-label="Dein Wissensweg heute"><div class="dsp-section-head"><h2>Dein Wissensweg heute</h2><time>'+new Date().toLocaleDateString("de-DE",{timeZone:"Europe/Berlin",day:"2-digit",month:"long"})+'</time></div>';
  if(rs.length){top+='<div class="dsp-recommend-list">'+rs.map(function(x,i){return '<div class="dsp-recommend-row"><button type="button" class="dsp-recommend-open" data-dsp-post="'+esc(x.id)+'"><span class="dsp-number">0'+(i+1)+'</span><span class="dsp-recommend-copy"><strong>'+esc(x.title)+'</strong><small>'+esc(x.sub||"Qurʾān · Sunnah · Āthār")+'</small></span><span class="dsp-recommend-arrow" aria-hidden="true">›</span></button><button type="button" class="dsp-save'+(p.saved.includes(x.id)?" is-active":"")+'" data-dsp-save="'+esc(x.id)+'" aria-label="'+(p.saved.includes(x.id)?"Aus Merkliste entfernen":"Beitrag merken")+'" aria-pressed="'+p.saved.includes(x.id)+'">'+(p.saved.includes(x.id)?"★":"☆")+'</button></div>'}).join("")+'</div>'}
@@ -143,7 +198,7 @@ document.addEventListener("click",function(e){
  e.preventDefault();e.stopPropagation();
  if(b.hasAttribute("data-dsp-gender")){saveGender(b.getAttribute("data-dsp-gender"));return}
  if(b.hasAttribute("data-dsp-theme")){themePick(b.getAttribute("data-dsp-theme"));return}
- if(b.hasAttribute("data-dsp-interest")){var p=read(),tag=b.getAttribute("data-dsp-interest");p.interests=p.interests.includes(tag)?p.interests.filter(x=>x!==tag):p.interests.concat([tag]);write(p);return}
+ if(b.hasAttribute("data-dsp-interest")){var p=read(),tag=b.getAttribute("data-dsp-interest");if(tag==="women"&&p.gender==="man")return;if(tag==="men"&&p.gender==="woman")return;p.interests=p.interests.includes(tag)?p.interests.filter(x=>x!==tag):p.interests.concat([tag]);write(p);return}
  if(b.hasAttribute("data-dsp-open-account")){nav("account");return}
  if(b.hasAttribute("data-dsp-open-notes")){openNotes();return}
  if(b.hasAttribute("data-dsp-close-notes")){closeNotes();return}
