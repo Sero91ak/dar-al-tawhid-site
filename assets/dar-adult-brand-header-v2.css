@@ -562,3 +562,15 @@ html.dar-adult-global-brand-ready body.is-settings-route #appView.view > .view-h
   top:auto!important;
   inset-block-start:auto!important;
 }
+
+
+/* PRIMARY_PHOTO_SEAM_NO_MARGIN_V5
+   Original primary-area CSS reserves 8px above category/Quiz/Mehr Heroes.
+   With the global fixed brand this became a detached white strip.
+   Zero ONLY the top outer margin; do not change photo dimensions/crop. */
+html.dar-adult-global-brand-ready body.is-topics-route #appView .topics-hub > .view-head,
+html.dar-adult-global-brand-ready body.is-topic-route #appView .topic-collection-page > .view-head,
+html.dar-adult-global-brand-ready body.is-quiz-route #appView > .view-head,
+html.dar-adult-global-brand-ready body.is-more-route #appView > .view-head{
+  margin-block-start:0!important;
+}
