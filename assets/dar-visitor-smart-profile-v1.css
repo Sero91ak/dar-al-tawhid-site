@@ -260,3 +260,10 @@ body.is-account-route #appView .account-panel{
 #appView .dsp-my-recommend button span{font-size:11px!important}
 #appView .dsp-my-privacy{font-size:12px!important}
 @media(max-width:380px){#appView .dsp-my-stats span{font-size:10px!important}}
+
+/* Use the existing native-looking 3D asset family, without emoji fallback. */
+#appView .dsp-my-actions>button .dsp-my-action-icon img {
+ display:block;width:32px;height:32px;max-width:100%;max-height:100%;
+ object-fit:contain;object-position:center;
+}
+@media(max-width:380px){#appView .dsp-my-actions>button .dsp-my-action-icon img{width:28px;height:28px}}
