@@ -257,8 +257,8 @@ function registerLocaleData(pack){
   if(!value||typeof value!=="object"||Array.isArray(value))return false;
   const dict=new Map();
   for(const [de,tr] of Object.entries(value)){
-   if(typeof de==="string"&&de.trim()&&de.length<=240&&
-      typeof tr==="string"&&tr.trim()&&tr.length<=400&&
+   if(typeof de==="string"&&de.trim()&&de.length<=420&&
+      typeof tr==="string"&&tr.trim()&&tr.length<=800&&
       !/[<>]/.test(de+tr))dict.set(de,tr);
   }
   prepared.set(code,dict);
@@ -353,6 +353,8 @@ function rebuildReversePacks(){
 function isDynamicGermanUi(value){
  return /^Qurʾān · \d+ Fundstellen$/.test(value)||
   /^(Aussagen im Qurʾān|Aussagen in authentischer Sunnah) · \d+$/.test(value)||
+  /^Belegte Aussagen · \d+$/.test(value)||
+  /^\d+ Quellen · Quellen anzeigen$/.test(value)||
   /^\d+\s+(Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt|Funktionen|Ergebnisse)$/.test(value)||
   /^\d+\s+Āyāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
   /^\d+\s*·\s*\d+\s+Ayāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
@@ -939,6 +941,35 @@ function translateExact(value,language="tr"){
     languagePacks.get(language)?.get(statements[1]);
   return head?head+" · "+statements[2]:null;
  }
+ const attested=value.match(/^Belegte Aussagen · (\d+)$/);
+ if(attested){
+  const forms={
+   ar:"أقوال ثابتة",
+   en:"Established reports",
+   tr:"Sabit sözler",
+   ku:"Gotinên sabit",
+   ckb:"وتە سەلمێنراوەکان",
+   bs:"Utvrđene izjave",
+   fr:"Propos établis",
+   es:"Dichos establecidos"
+  };
+  return forms[language]?forms[language]+" · "+attested[1]:null;
+ }
+ const sourceButton=value.match(/^(\d+) Quellen · Quellen anzeigen$/);
+ if(sourceButton){
+  const show=lookupPack("Quellen anzeigen",language);
+  const forms={
+   ar:sourceButton[1]==="1"?"مصدر واحد":sourceButton[1]+" مصادر",
+   en:sourceButton[1]==="1"?"1 source":sourceButton[1]+" sources",
+   tr:sourceButton[1]+" kaynak",
+   ku:sourceButton[1]+" çavkanî",
+   ckb:sourceButton[1]==="1"?"سەرچاوەیەک":sourceButton[1]+" سەرچاوە",
+   bs:sourceButton[1]==="1"?"1 izvor":sourceButton[1]+" izvora",
+   fr:sourceButton[1]==="1"?"1 source":sourceButton[1]+" sources",
+   es:sourceButton[1]==="1"?"1 fuente":sourceButton[1]+" fuentes"
+  };
+  return forms[language]&&show?forms[language]+" · "+show:null;
+ }
  const dynamicLabels={
   Veröffentlichungen:{ar:"منشورات",ku:"weşan",ckb:"بڵاوکراوە",bs:"publikacija",fr:"publications",es:"publicaciones"},
   Beiträge:{ar:"مقالات",ku:"nivîs",ckb:"بابەت",bs:"tekstova",fr:"articles",es:"artículos"},
@@ -1063,7 +1094,7 @@ function translateFragmented(root,locale){
   if(shouldSkip(element)||!element.children?.length)return;
   if([...element.children].some(child=>!inline.test(child.tagName)||child.children?.length))return;
   const text=String(element.textContent||"").replace(/\s+/g," ").trim();
-  if(text.length<8||text.length>240)return;
+  if(text.length<8||text.length>420)return;
   const translated=translateExact(text,locale);
   if(!translated||translated===text)return;
   element.textContent=translated;
@@ -1202,7 +1233,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-25";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-26";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

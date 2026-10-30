@@ -92,6 +92,10 @@ assert.equal(w.DarTestTurkishUI.translateValue("Wird geöffnet…","en"),"Openin
 assert.equal(w.DarTestTurkishUI.translateValue("Rezitator suchen","fr"),"Chercher un récitateur");
 assert.equal(w.DarTestTurkishUI.translateValue("Suḥūr · Fajr","tr"),"Sahur · Fecir");
 assert.equal(locales.translations.ckb["Qurʾān, Ḥadīṯ, Gelehrte und Themen durchsuchen"].includes("حەدیث"),true);
+assert.equal(w.DarTestTurkishUI.translateValue("Direkte Antwort","en"),"Direct answer");
+assert.equal(w.DarTestTurkishUI.translateValue("Belegte Aussagen · 4","fr"),"Propos établis · 4");
+assert.equal(w.DarTestTurkishUI.translateValue("3 Quellen · Quellen anzeigen","es"),"3 fuentes · "+locales.translations.es["Quellen anzeigen"]);
+assert.equal(w.DarTestTurkishUI.translateValue("Geprüfte Beziehungen","ar"),"علاقات تم فحصها");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
