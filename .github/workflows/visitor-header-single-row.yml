@@ -4,6 +4,12 @@ on:
     branches: [main]
     paths:
       - 'assets/dar-visitor-profile-picker-v1.css'
+      - 'assets/dar-visitor-daily-hub-v1.js'
+      - 'assets/dar-visitor-onboarding-v1.js'
+      - 'assets/dar-visitor-onboarding-v1.css'
+      - 'assets/dar-more-final-v15.js'
+      - 'assets/dar-more-v15.js'
+      - 'scripts/check-visitor-more-responsive.cjs'
       - 'assets/dar-visitor-profile-picker-v1.js'
       - 'assets/dar-adult-brand-header-v2.css'
       - 'assets/dar-home-test-parity-visitor.js'
@@ -16,6 +22,12 @@ on:
     branches: [main]
     paths:
       - 'assets/dar-visitor-profile-picker-v1.css'
+      - 'assets/dar-visitor-daily-hub-v1.js'
+      - 'assets/dar-visitor-onboarding-v1.js'
+      - 'assets/dar-visitor-onboarding-v1.css'
+      - 'assets/dar-more-final-v15.js'
+      - 'assets/dar-more-v15.js'
+      - 'scripts/check-visitor-more-responsive.cjs'
       - 'assets/dar-visitor-profile-picker-v1.js'
       - 'assets/dar-adult-brand-header-v2.css'
       - 'assets/dar-home-test-parity-visitor.js'
@@ -36,4 +48,6 @@ jobs:
         with:
           persist-credentials: false
       - name: Check visitor header layout, controls and cache versions
-        run: node scripts/check-visitor-header-single-row.cjs
+        run: |
+          node scripts/check-visitor-header-single-row.cjs
+          node scripts/check-visitor-more-responsive.cjs
