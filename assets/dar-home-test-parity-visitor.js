@@ -651,8 +651,8 @@ function loadVisitorSmartDashboard(){
   var link=document.createElement("link");link.rel="stylesheet";link.id=pair[0];link.href=pair[1];root.appendChild(link)
  });
  var scripts=[
-  ["darVisitorSmartProfileJsV1","/assets/dar-visitor-smart-profile-v1.js?v=20261030-my-dar-dashboard-v11"],
-  ["darVisitorProfilePickerJsV1","/assets/dar-visitor-profile-picker-v1.js?v=20261030-profile-single-hub-v10"],
+  ["darVisitorSmartProfileJsV1","/assets/dar-visitor-smart-profile-v1.js?v=20261030-neutral-icon-v12"],
+  ["darVisitorProfilePickerJsV1","/assets/dar-visitor-profile-picker-v1.js?v=20261030-left-select-v12"],
   ["darVisitorDailyHubJsV1","/assets/dar-visitor-daily-hub-v1.js?v=20261030-mehr-responsive-v2"],
   ["darVisitorOnboardingJsV1","/assets/dar-visitor-onboarding-v1.js?v=20261030-profile-single-hub-v10"]
  ];
