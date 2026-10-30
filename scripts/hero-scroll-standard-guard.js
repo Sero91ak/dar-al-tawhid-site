@@ -198,10 +198,12 @@ if(edgeJs[0]!==edgeJs[1]||edgeCss[0]!==edgeCss[1])
  fail("Test und Besucher müssen denselben globalen Scroll-Stopp ohne Hero-Kopie verwenden");
 for(let i=0;i<edgeJs.length;i++){
  const js=edgeJs[i],css=edgeCss[i];
- if(!js.includes("DAR_ADULT_TOP_SCROLL_BOUNDARY_V3")||
+ if(!js.includes("DAR_ADULT_TOP_SCROLL_BOUNDARY_V4")||
     !js.includes("function canScroll(direction)")||
     !js.includes("touchmove")||
-    !js.includes('if(!canScroll(stepY>0?"up":"down"))event.preventDefault()'))
+    !js.includes('if(!canScroll(stepY>0?"up":"down"))event.preventDefault()')||
+    !js.includes('dy>0.15')||
+    !js.includes('event.cancelable && !event.defaultPrevented && !canScroll("up")'))
   fail(edgeCodeFiles[i]+": beidseitige Scroll-Kantensperre fehlt");
  if(!css.includes("overscroll-behavior-y:none!important")||
     !css.includes("DAR_ADULT_SCROLL_EDGE_NO_OVERLAY_20261020"))
@@ -219,9 +221,10 @@ for(const hostFile of [
 }
 for(const hostFile of ["cloudflare/site-router.js","cloudflare/test-app-worker.js"]){
  const source=fs.readFileSync(path.join(root,hostFile),"utf8");
- if(!source.includes("20261020-no-overlay-v8")||
+ if(!source.includes("20261030-no-pull-hero-v9")||
+    !source.includes("20261020-no-overlay-v8")||
     !source.includes("dar-adult-top-scroll-boundary-v1.css")||
     !source.includes("dar-adult-top-scroll-boundary-v1.js"))
   fail(hostFile+": zentralen no-overlay-v8 Scroll-Stopp in der HTML-Auslieferung vermisst");
 }
-ok("No-duplicated-hero v8: original image once, scroll-clamp preserved, Test/Visitor parity and native bounce=false");
+ok("No-duplicated-hero v9: original image once, scroll-clamp preserved, Test/Visitor parity and native bounce=false");
