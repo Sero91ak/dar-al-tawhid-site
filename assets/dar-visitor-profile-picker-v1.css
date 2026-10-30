@@ -19,82 +19,86 @@
 @media(max-width:390px){#darAdultBrandHeaderV2 .dvp-trigger{width:37px;height:39px}#darAdultBrandHeaderV2 .dvp-trigger img{width:33px;height:36px}}
 @media(prefers-reduced-motion:reduce){#darAdultBrandHeaderV2 .dvp-chooser *{transition:none!important}}
 
-/* dvp-mobile-header-grid-fix: coexist with original two-row brand header. */
-@media(max-width:699px){
- #darAdultBrandHeaderV2 .dtbh-row{
-  grid-template-columns:42px minmax(0,1fr) 40px 40px!important;
-  grid-template-rows:auto 42px!important;
-  column-gap:clamp(4px,1.65vw,9px)!important;
- }
- #darAdultBrandHeaderV2 .dvp-trigger{
-  grid-row:2!important;grid-column:3!important;align-self:center!important;
-  width:40px!important;height:40px!important;margin:0!important;
- }
- #darAdultBrandHeaderV2 .dtbh-toggle{
-  grid-row:2!important;grid-column:4!important;
-  width:40px!important;height:40px!important;
- }
- #darAdultBrandHeaderV2 .dtbh-name{
-  font-size:clamp(15px,4.5vw,21px)!important;
-  letter-spacing:-.035em!important;
-  min-width:0!important;overflow:hidden!important;
- }
-}
 
-/* DAR VISITOR / TEST ICON PARITY V2: icons only, no language control. */
-#darAdultBrandHeaderV2 .dtbh-toggle .dvp-palette-icon{
- display:block!important;width:36px!important;height:36px!important;
- max-width:100%!important;object-fit:contain!important;pointer-events:none!important
+/* VISITOR_HEADER_SINGLE_ROW_V5 · 2026-10-30
+   Mirrors the compact Test brand rail, with visitor-only profile + appearance.
+   Replaces conflicting historical two-row rules; no language shortcut here.
+   Scope: adult visitor shell; Kids and /test keep their own components. */
+html body #darAdultBrandHeaderV2 .dtbh-row{
+ display:grid!important;
+ grid-template-columns:clamp(35px,10vw,45px) minmax(0,1fr) clamp(36px,9.2vw,42px) clamp(36px,9.2vw,42px)!important;
+ grid-template-rows:minmax(44px,auto)!important;
+ align-items:center!important;
+ justify-content:stretch!important;
+ column-gap:clamp(4px,1.4vw,10px)!important;
+ row-gap:0!important;
+ min-height:44px!important;
+ min-width:0!important;
+ max-width:1440px!important;
+ width:100%!important;
 }
-#darAdultBrandHeaderV2 .dvp-trigger{
+html body #darAdultBrandHeaderV2 .dtbh-logo{
+ grid-column:1!important;grid-row:1!important;
+ width:clamp(35px,10vw,45px)!important;height:clamp(35px,10vw,45px)!important;
+ min-width:0!important;align-self:center!important;justify-self:center!important;
+ margin:0!important;object-fit:contain!important;
+}
+html body #darAdultBrandHeaderV2 .dtbh-copy{
+ grid-column:2!important;grid-row:1!important;
+ display:flex!important;flex-direction:column!important;
+ justify-content:center!important;align-self:center!important;
+ min-width:0!important;width:100%!important;
+ overflow:visible!important;gap:0!important;
+}
+html body #darAdultBrandHeaderV2 .dtbh-tagline{display:none!important}
+html body #darAdultBrandHeaderV2 .dtbh-name{
+ display:block!important;
+ font:750 clamp(14px,4.3vw,23px)/1.12 Georgia,"Iowan Old Style",serif!important;
+ letter-spacing:-.04em!important;
+ white-space:nowrap!important;
+ min-width:0!important;max-width:100%!important;
+ overflow:hidden!important;text-overflow:clip!important;
+ color:var(--dtbh-ink)!important;-webkit-text-fill-color:var(--dtbh-ink)!important;
+}
+html body #darAdultBrandHeaderV2 #darVisitorProfileButtonV1,
+html body #darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle{
+ grid-row:1!important;
  display:grid!important;place-items:center!important;
- flex:0 0 43px!important;width:43px!important;height:43px!important;
- margin:0!important;padding:2px!important;
- background:var(--dtbh-btn,var(--card))!important;
- border:1px solid var(--dtbh-line,var(--line))!important;
- color:var(--dtbh-ink,var(--text))!important;border-radius:13px!important
+ min-width:0!important;max-width:100%!important;
+ width:clamp(36px,9.2vw,42px)!important;
+ height:clamp(40px,9.2vw,44px)!important;
+ margin:0!important;align-self:center!important;justify-self:center!important;
 }
-#darAdultBrandHeaderV2 .dvp-trigger img{
- display:block!important;width:38px!important;height:39px!important;
- object-fit:contain!important;pointer-events:none!important
+html body #darAdultBrandHeaderV2 #darVisitorProfileButtonV1{grid-column:3!important}
+html body #darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle{grid-column:4!important}
+html body #darAdultBrandHeaderV2 .dtbh-toggle .dvp-palette-icon{
+ display:block!important;max-width:100%!important;max-height:100%!important;
+ object-fit:contain!important;pointer-events:none!important;
 }
 @media(min-width:700px){
- #darAdultBrandHeaderV2 .dtbh-row{display:flex!important;align-items:center!important;gap:clamp(8px,1.5vw,16px)!important}
- #darAdultBrandHeaderV2 .dvp-trigger{width:48px!important;height:48px!important;flex-basis:48px!important}
- #darAdultBrandHeaderV2 .dtbh-toggle{width:48px!important;height:48px!important;flex-basis:48px!important}
+ html body #darAdultBrandHeaderV2 .dtbh-row{
+  grid-template-columns:54px minmax(0,1fr) 48px 48px!important;
+  grid-template-rows:54px!important;min-height:54px!important;
+  column-gap:clamp(12px,1.5vw,20px)!important;
+ }
+ html body #darAdultBrandHeaderV2 .dtbh-logo{width:54px!important;height:54px!important}
+ html body #darAdultBrandHeaderV2 .dtbh-name{font-size:clamp(24px,2.4vw,29px)!important;letter-spacing:-.025em!important}
+ html body #darAdultBrandHeaderV2 #darVisitorProfileButtonV1,
+ html body #darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle{
+  width:48px!important;height:48px!important;max-width:48px!important;max-height:48px!important;
+ }
 }
-@media(max-width:699px){
- #darAdultBrandHeaderV2 .dtbh-row{
-  display:grid!important;
-  grid-template-columns:clamp(40px,11vw,48px) minmax(0,1fr) 41px 41px!important;
-  grid-template-rows:minmax(34px,auto) 41px!important;
-  column-gap:clamp(4px,1.8vw,9px)!important;row-gap:2px!important;
-  align-items:center!important
+@media(max-width:355px){
+ html body #darAdultBrandHeaderV2 .dtbh-row{
+  grid-template-columns:34px minmax(0,1fr) 36px 36px!important;
+  grid-template-rows:minmax(40px,auto)!important;
+  column-gap:4px!important;
  }
- #darAdultBrandHeaderV2 .dtbh-logo{
-  grid-column:1!important;grid-row:1/3!important;
-  width:clamp(40px,11vw,48px)!important;height:clamp(40px,11vw,48px)!important;
-  flex:none!important;align-self:start!important;margin-top:4px!important
- }
- #darAdultBrandHeaderV2 .dtbh-copy{
-  grid-column:2/5!important;grid-row:1!important;
-  min-width:0!important;flex:none!important;align-self:end!important
- }
- #darAdultBrandHeaderV2 .dvp-trigger{
-  grid-column:3!important;grid-row:2!important;
-  width:41px!important;height:41px!important;flex:none!important;align-self:center!important
- }
- #darAdultBrandHeaderV2 .dtbh-toggle{
-  grid-column:4!important;grid-row:2!important;
-  width:41px!important;height:41px!important;flex:none!important;align-self:center!important
- }
- #darAdultBrandHeaderV2 .dtbh-name{font-size:clamp(17px,4.85vw,24px)!important;white-space:nowrap!important}
- #darAdultBrandHeaderV2 .dtbh-tagline{font-size:clamp(9px,2.4vw,11px)!important}
+ html body #darAdultBrandHeaderV2 .dtbh-logo{width:34px!important;height:34px!important}
+ html body #darAdultBrandHeaderV2 .dtbh-name{font-size:clamp(13px,4.25vw,15px)!important}
+ html body #darAdultBrandHeaderV2 #darVisitorProfileButtonV1,
+ html body #darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle{width:36px!important;height:40px!important;max-width:36px!important}
 }
-@media(max-width:370px){
- #darAdultBrandHeaderV2 .dtbh-name{font-size:clamp(15px,4.5vw,18px)!important}
-}
-
 
 /* PROFILE_ICON_SAFE_AREA_V4 — both original Test images stay inside their own
    appearance/profile capsule, not just inside the fixed app header. No popup
@@ -151,32 +155,4 @@
   max-width:38px!important;max-height:38px!important;
  }
 }
-@media(max-width:699px){
- #darAdultBrandHeaderV2{
-  padding-inline-start:max(11px,env(safe-area-inset-left,0px))!important;
-  padding-inline-end:max(11px,env(safe-area-inset-right,0px))!important;
-  padding-top:max(env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;
- }
- #darAdultBrandHeaderV2 .dtbh-row{
-  grid-template-columns:clamp(40px,11vw,48px) minmax(0,1fr) 41px 41px!important;
-  grid-template-rows:minmax(34px,auto) 41px!important;
-  min-width:0!important;max-width:100%!important;
-  column-gap:clamp(4px,1.8vw,9px)!important;
- }
- #darAdultBrandHeaderV2 #darVisitorProfileButtonV1,
- #darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle{
-  width:41px!important;height:41px!important;
-  max-width:41px!important;max-height:41px!important;
-  padding:3px!important;
- }
- #darAdultBrandHeaderV2 #darVisitorProfileButtonV1{
-  grid-column:3!important;grid-row:2!important;
- }
- #darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle{
-  grid-column:4!important;grid-row:2!important;
- }
- #darAdultBrandHeaderV2 .dtbh-copy{
-  min-width:0!important;
-  overflow:hidden!important;
- }
-}
+
