@@ -8851,6 +8851,23 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-03T23:59:00.000Z"
+    },
+    {
+      "id": "adult-visitor-profile-adaptive-dashboard-daily-quiz-prayer-clock-single-20261030",
+      "at": "2026-10-30T14:31:00+01:00",
+      "approvedBy": "user-explicit-visitor-live-push-profile-female-male-dashboard-and-remove-old-duplicate-prayer-clock-20261030",
+      "reason": "Adult visitor only: activate existing tested profile-aware home recommendations and dynamic second tab (Frauen for woman, Entdecken for man/neutral), a daily source-referenced knowledge question with existing Quiz in Mehr, and remove redundant home copy of original prayer clock while retaining canonical prayer data and the new live smart prayer display. No changes to Kids, Qibla, original header prayer source, content, OneSignal, native Swift or push systems. User explicitly requests immediate visitor publication and reliable verification.",
+      "paths": [
+        "assets/dar-home-test-parity-visitor.js",
+        "assets/dar-visitor-smart-profile-v1.js",
+        "assets/dar-visitor-smart-profile-v1.css",
+        "assets/dar-visitor-daily-hub-v1.js",
+        "assets/dar-visitor-daily-hub-v1.css",
+        "assets/dar-visitor-profile-picker-v1.js",
+        "assets/dar-visitor-profile-picker-v1.css",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-07T23:59:00.000Z"
     }
   ],
   "enabled": true
