@@ -215,6 +215,16 @@ try {
   fail("Adult Qibla full-screen focus and capsule routing regression");
 }
 
+// Screenshot regression: the gold Qibla fullscreen must cover the entire
+// iPhone/landscape viewport rather than being clipped by the fixed page body.
+try {
+  require("child_process").execFileSync(process.execPath,
+    [path.join(__dirname, "../test/tools/test-qibla-fullscreen-viewport.cjs")],
+    {stdio: "inherit"});
+} catch (e) {
+  fail("Qibla fullscreen viewport / iOS half-screen regression");
+}
+
 if (failed) {
   console.error(`\n${failed} check(s) failed – Deploy stoppen.`);
   process.exit(1);
