@@ -185,7 +185,7 @@ body.is-account-route #appView .account-sync-list{font-size:11px!important;line-
  color:var(--text,#233d34)!important;font:650 11px/1.2 system-ui,sans-serif!important;
 }
 #appView .dsp-my-profile-button span{font-size:19px;color:var(--gold2,#a78d59)}
-#appView .dsp-my-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:14px 0 22px}
+#appView .dsp-my-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0 22px}
 #appView .dsp-my-stats>div{
  min-width:0;display:grid;gap:5px;align-content:center;
  min-height:77px;padding:13px 14px;border-radius:16px;
@@ -233,6 +233,7 @@ body.is-account-route #appView .account-sync-list{font-size:11px!important;line-
 #appView .dsp-my-dar button:focus-visible{outline:2px solid var(--gold2,#b69a64)!important;outline-offset:3px!important}
 #appView .dsp-my-actions>button:active,#appView .dsp-my-recommend>button:active{transform:scale(.995)}
 @media(min-width:760px){
+ #appView .dsp-my-stats{grid-template-columns:repeat(4,minmax(0,1fr))}
  #appView .dsp-my-actions{grid-template-columns:repeat(3,minmax(0,1fr))}
  #appView .dsp-my-recommend-list{grid-template-columns:repeat(2,minmax(0,1fr))}
  #appView .dsp-my-recommend-list .dsp-my-recommend:first-child{grid-column:1/-1}
