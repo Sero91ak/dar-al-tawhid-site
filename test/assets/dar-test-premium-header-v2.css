@@ -312,7 +312,7 @@ html.dar-test-premium-header-v2 #darTestBrandHeaderV1[data-premium-header-v2="re
  padding-inline-start:max(9px,env(safe-area-inset-left,0px),var(--dar-ios-safe-left,0px))!important;
  padding-inline-end:max(9px,env(safe-area-inset-right,0px),var(--dar-ios-safe-right,0px))!important;
 }
-@media(min-width:600px) and (max-height:920px) and (orientation:landscape){
+@media(min-width:520px) and (max-height:920px) and (orientation:landscape){
  html.dar-test-premium-header-v2 #darTestBrandHeaderV1[data-premium-header-v2="ready"]{
   padding-block-end:3px!important;
  }
