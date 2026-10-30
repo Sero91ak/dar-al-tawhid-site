@@ -933,8 +933,9 @@
   async function updatePosition(data){
     // Reject incomplete native payloads: Number(null) is 0 and could otherwise
     // silently move prayer times to coordinates 0,0.
-    if(!data||typeof data!=="object"||data.lat==null||
-       (data.lng==null&&data.lon==null)||data.acc==null||data.timestamp==null)return;
+    if(!data||typeof data!=="object")return;
+    var fields=[data.lat,data.lng!=null?data.lng:data.lon,data.acc,data.timestamp];
+    if(fields.some(function(x){return x==null||(typeof x==="string"&&!x.trim());}))return;
     var lat=Number(data.lat),lon=Number(data.lng!=null?data.lng:data.lon);
     var acc=Number(data.acc), t=Number(data.timestamp);
     if(!valid(lat,lon,acc)||!Number.isFinite(t)||t<=0)return;
