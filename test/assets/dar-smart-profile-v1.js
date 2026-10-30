@@ -169,13 +169,15 @@ function noteRows(p){return p.notes.length?p.notes.slice().reverse().map((n,i)=>
 function notesMarkup(){var p=read();return '<div class="dsp-notes-dialog" role="dialog" aria-modal="true" aria-labelledby="dspNotesTitle"><div class="dsp-notes-top"><div><span class="dsp-eyebrow">MEIN DĀR · PRIVAT</span><h2 id="dspNotesTitle">Meine Notizen</h2></div><button type="button" class="dsp-notes-close" data-dsp-close-notes aria-label="Notizen schließen">×</button></div><label class="dsp-field-label" for="dspNoteText">Neuer Eintrag</label><textarea id="dspNoteText" class="dsp-note-input" maxlength="1600" rows="4" placeholder="Gedanken, Lernnotizen oder Quellenhinweise …"></textarea><div class="dsp-note-actions"><button type="button" class="dsp-primary" data-dsp-add-note>Notiz speichern</button><span class="dsp-note-status" role="status">'+p.notes.length+' Einträge auf diesem Gerät</span></div><p class="dsp-local-hint">Lokal gespeichert, nicht verschlüsselt und nicht mit deinem Konto synchronisiert. Keine vertraulichen Informationen eingeben.</p><div class="dsp-notes-list">'+noteRows(p)+'</div></div>'}
 function openNotes(){var o=document.getElementById("dspNotesOverlay");if(!o){o=document.createElement("div");o.id="dspNotesOverlay";o.className="dsp-notes-overlay";document.body.appendChild(o)}o.innerHTML=notesMarkup();o.hidden=false;document.body.classList.add("dsp-notes-open");var close=o.querySelector("[data-dsp-close-notes]");if(close)close.focus()}
 function closeNotes(){var o=document.getElementById("dspNotesOverlay");if(o){o.hidden=true;o.innerHTML=""}document.body.classList.remove("dsp-notes-open");var b=document.querySelector("[data-dsp-open-notes]");if(b)b.focus()}
-function syncLatest(p,root){
- var target=root.querySelector("#dhpPosts"),source=eligible(p,inventory());
- if(!target||!source.length){if(target)target.replaceChildren();return}
- var focus=p.gender==="woman"?"woman":p.gender==="man"?"man":null;
+function publishedFor(p){
+ var source=eligible(p,inventory()),focus=p.gender==="woman"?"woman":p.gender==="man"?"man":null;
  var list=source.slice(0,5);
  if(focus){var priority=list.find(x=>x.gender===focus)||source.find(x=>x.gender===focus);if(priority)list=[priority].concat(list.filter(x=>x.id!==priority.id))}
- list=list.slice(0,2);
+ return list.slice(0,2)
+}
+function syncLatest(p,root){
+ var target=root.querySelector("#dhpPosts"),list=publishedFor(p);
+ if(!target||!list.length){if(target){target.replaceChildren();target.dataset.dspRecentSig="empty"}return}
  var sig=p.gender+"|"+list.map(x=>x.id+"|"+x.title).join(";");
  var old=target.querySelector("[data-dhp-value]");
  if(target.dataset.dspRecentSig!==sig||!old||old.dataset.dhpValue!==list[0].id||target.children.length!==list.length){
@@ -277,6 +279,6 @@ function init(){body=document.body;refresh();document.addEventListener("dar:view
  // The last post content may arrive after the shell; refresh once when data finishes.
  setTimeout(refresh,700);setTimeout(refresh,1700);
 }
-window.DAR_TEST_SMART_PROFILE_V1={get:read,setGender:saveGender,image:image,recommendations:function(){return picks(read())},refresh:refresh};
+window.DAR_TEST_SMART_PROFILE_V1={get:read,setGender:saveGender,image:image,recommendations:function(){return picks(read())},dashboard:function(){var p=read(),cards=picks(p),today=todayFeature(p,cards.map(x=>x.id));return {gender:p.gender,daily:cards,today:today,publications:publishedFor(p),focus:homeFocus(p)}},refresh:refresh};
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
