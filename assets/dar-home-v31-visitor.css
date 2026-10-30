@@ -197,3 +197,15 @@ body.is-home-route .dv3-language button:focus-visible{
  outline:2px solid var(--gold,#bba273);outline-offset:3px
 }
 html.dar-home-v3 body.is-home-route .home-v380-shell > #darJummahFridayHome{order:-1;width:100%;flex:0 0 auto;margin-bottom:14px}
+
+/* VISITOR QIBLA/BIBLIOTHEK V1: same calm two-capsule quick access as adult DAR TEST. */
+html.dar-home-v3 body.is-home-route .dv3-qibla-capsules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:11px 0 13px}
+html.dar-home-v3 body.is-home-route .dv3-qibla-capsule{appearance:none;display:flex;align-items:center;gap:9px;min-width:0;min-height:70px;padding:10px 11px;border:1px solid color-mix(in srgb,var(--dv3-gold,var(--dv3-line)) 45%,var(--dv3-line));border-radius:17px;background:var(--dv3-card);color:var(--dv3-ink);text-align:left;cursor:pointer;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+html.dar-home-v3 body.is-home-route .dv3-qibla-capsule:is(:hover,:focus-visible,:active){border-color:var(--dv3-gold,var(--dv3-ink));box-shadow:0 0 0 3px color-mix(in srgb,var(--dv3-gold,var(--dv3-ink)) 15%,transparent)}
+html.dar-home-v3 body.is-home-route .dv3-qibla-capsule:focus-visible{outline:2px solid var(--dv3-gold,var(--dv3-ink));outline-offset:2px}
+html.dar-home-v3 body.is-home-route .dv3-qibla-capsule .dv3-qibla-icon{display:grid;place-items:center;flex:0 0 38px;width:38px;height:38px}
+html.dar-home-v3 body.is-home-route .dv3-qibla-capsule .dv3-qibla-icon img{width:100%;height:100%;object-fit:contain}
+html.dar-home-v3 body.is-home-route .dv3-qibla-capsule strong{display:block;font-size:clamp(11px,2.5vw,14px);line-height:1.23;font-weight:720}
+html.dar-home-v3 body.is-home-route .dv3-qibla-capsule small{display:block;margin-top:3px;color:var(--dv3-muted);font-size:clamp(9px,2.2vw,11px);line-height:1.23}
+@media(max-width:350px){html.dar-home-v3 body.is-home-route .dv3-qibla-capsule{padding:8px 7px;gap:5px}html.dar-home-v3 body.is-home-route .dv3-qibla-capsule .dv3-qibla-icon{flex-basis:30px;width:30px;height:30px}}
+@media(prefers-reduced-motion:reduce){html.dar-home-v3 body.is-home-route .dv3-qibla-capsule{transition:none}}
