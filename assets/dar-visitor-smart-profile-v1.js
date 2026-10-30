@@ -218,6 +218,26 @@ function noteRows(p){return p.notes.length?p.notes.slice().reverse().map((n,i)=>
 function notesMarkup(){var p=read();return '<div class="dsp-notes-dialog" role="dialog" aria-modal="true" aria-labelledby="dspNotesTitle"><div class="dsp-notes-top"><div><span class="dsp-eyebrow">MEIN DĀR · PRIVAT</span><h2 id="dspNotesTitle">Meine Notizen</h2></div><button type="button" class="dsp-notes-close" data-dsp-close-notes aria-label="Notizen schließen">×</button></div><label class="dsp-field-label" for="dspNoteText">Neuer Eintrag</label><textarea id="dspNoteText" class="dsp-note-input" maxlength="1600" rows="4" placeholder="Gedanken, Lernnotizen oder Quellenhinweise …"></textarea><div class="dsp-note-actions"><button type="button" class="dsp-primary" data-dsp-add-note>Notiz speichern</button><span class="dsp-note-status" role="status">'+p.notes.length+' Einträge auf diesem Gerät</span></div><p class="dsp-local-hint">Lokal gespeichert, nicht verschlüsselt und nicht mit deinem Konto synchronisiert. Keine vertraulichen Informationen eingeben.</p><div class="dsp-notes-list">'+noteRows(p)+'</div></div>'}
 function openNotes(){var o=document.getElementById("dspNotesOverlay");if(!o){o=document.createElement("div");o.id="dspNotesOverlay";o.className="dsp-notes-overlay";document.body.appendChild(o)}o.innerHTML=notesMarkup();o.hidden=false;document.body.classList.add("dsp-notes-open");var close=o.querySelector("[data-dsp-close-notes]");if(close)close.focus()}
 function closeNotes(){var o=document.getElementById("dspNotesOverlay");if(o){o.hidden=true;o.innerHTML=""}document.body.classList.remove("dsp-notes-open");var b=document.querySelector("[data-dsp-open-notes]");if(b)b.focus()}
+
+function savedMarkup(){
+ var p=read(),ids=p.saved.slice();
+ var items=ids.map(function(id){var match=inventory().find(x=>x.id===id);return '<button type="button" data-dsp-post="'+esc(id)+'" class="dsp-saved-direct-row"><span>'+esc(match?match.title:"Gespeicherter Beitrag")+'</span><span aria-hidden="true">›</span></button>'}).join("");
+ return '<div class="dsp-notes-dialog dsp-saved-dialog" role="dialog" aria-modal="true" aria-labelledby="dspSavedTitle"><div class="dsp-notes-top"><div><span class="dsp-eyebrow">MEIN DĀR · WISSENSARCHIV</span><h2 id="dspSavedTitle">Meine Merkliste</h2></div><button type="button" class="dsp-notes-close" data-dsp-close-saved aria-label="Merkliste schließen">×</button></div>'+
+ '<p class="dsp-local-hint">Deine persönliche Schnell-Merkliste auf diesem Gerät. Synchronisierte Kontofavoriten findest du zusätzlich unter „Konto & Sync“.</p>'+
+ '<div class="dsp-saved-direct-list">'+(items||'<p class="dsp-empty">Noch keine Beiträge in dieser Merkliste. Markiere interessante Beiträge mit ☆.</p>')+'</div>'+
+ '<button type="button" class="dsp-primary" data-dsp-open-account>Gespeicherte Kontodaten ansehen</button></div>'
+}
+function openSaved(){
+ var el=document.getElementById("dspSavedOverlay");
+ if(!el){el=document.createElement("div");el.id="dspSavedOverlay";el.className="dsp-notes-overlay";document.body.appendChild(el)}
+ el.innerHTML=savedMarkup();el.hidden=false;document.body.classList.add("dsp-notes-open");
+ el.querySelector("[data-dsp-close-saved]")?.focus({preventScroll:true})
+}
+function closeSaved(){
+ var el=document.getElementById("dspSavedOverlay");
+ if(el){el.hidden=true;el.innerHTML=""}
+ if(!document.querySelector("#dspNotesOverlay:not([hidden])"))document.body.classList.remove("dsp-notes-open");
+}
 function publishedFor(p){
  var source=eligible(p,inventory()),focus=p.gender==="woman"?"woman":p.gender==="man"?"man":null;
  var list=source.slice(0,5);
@@ -297,6 +317,8 @@ function refresh(){if(scheduled)return;scheduled=true;requestAnimationFrame(func
 function nav(view,value){try{if(typeof navigate==="function"){navigate(view,value||"");return}}catch(_){}location.hash="#"+view}
 document.addEventListener("click",function(e){
  if(e.target&&e.target.id==="dspNotesOverlay"){closeNotes();return}
+ if(e.target&&e.target.id==="dspSavedOverlay"){closeSaved();return}
+ if(e.target.closest&&e.target.closest("[data-dsp-close-saved]")){e.preventDefault();closeSaved();return}
  var nativePost=e.target.closest('#darHomeHtmlParityV1 [data-dhp-route="post"]');
  if(nativePost&&nativePost.dataset.dhpValue){var opened=read(),pid=nativePost.dataset.dhpValue;opened.opened=[pid].concat(opened.opened.filter(x=>x!==pid)).slice(0,30);write(opened);return}
  var nativeTheme=e.target.closest("[data-dtbh-theme],[data-theme-select]");
@@ -307,28 +329,28 @@ document.addEventListener("click",function(e){
  if(b.hasAttribute("data-dsp-gender")){saveGender(b.getAttribute("data-dsp-gender"));return}
  if(b.hasAttribute("data-dsp-theme")){themePick(b.getAttribute("data-dsp-theme"));return}
  if(b.hasAttribute("data-dsp-interest")){var p=read(),tag=b.getAttribute("data-dsp-interest");if(tag==="women"&&p.gender==="man")return;if(tag==="men"&&p.gender==="woman")return;p.interests=p.interests.includes(tag)?p.interests.filter(x=>x!==tag):p.interests.concat([tag]);write(p);return}
- if(b.hasAttribute("data-dsp-open-account")){nav("account");return}
+ if(b.hasAttribute("data-dsp-open-account")){closeSaved();nav("account");return}
  if(b.hasAttribute("data-dsp-open-notes")){openNotes();return}
  if(b.hasAttribute("data-dsp-close-notes")){closeNotes();return}
- if(b.hasAttribute("data-dsp-open-saved")){toggleSection("saved",true);return}
+ if(b.hasAttribute("data-dsp-open-saved")){openSaved();return}
  if(b.hasAttribute("data-dsp-toggle")){toggleSection(b.getAttribute("data-dsp-toggle"));return}
  if(b.hasAttribute("data-dsp-switch-profile")){var chooser=window.DAR_VISITOR_PROFILE_PICKER_V1;if(chooser&&typeof chooser.open==="function")chooser.open();else document.getElementById("darVisitorProfileButtonV1")?.click()return}
  if(b.hasAttribute("data-dsp-open-more")){nav("more");return}
  if(b.hasAttribute("data-dsp-open-women")){nav("frauen");return}
  if(b.hasAttribute("data-dsp-open-discovery")){nav("topics");return}
- if(b.hasAttribute("data-dsp-post")){var id=b.getAttribute("data-dsp-post"),p=read();p.opened=[id].concat(p.opened.filter(x=>x!==id)).slice(0,30);write(p);nav("post",id);return}
+ if(b.hasAttribute("data-dsp-post")){closeSaved();var id=b.getAttribute("data-dsp-post"),p=read();p.opened=[id].concat(p.opened.filter(x=>x!==id)).slice(0,30);write(p);nav("post",id);return}
  if(b.hasAttribute("data-dsp-save")){var p=read(),id=b.getAttribute("data-dsp-save");p.saved=p.saved.includes(id)?p.saved.filter(x=>x!==id):p.saved.concat([id]).slice(-100);write(p);return}
  if(b.hasAttribute("data-dsp-add-note")){var input=document.getElementById("dspNoteText"),value=input&&input.value.trim();if(!value)return;var p=read();p.notes.push({text:value.slice(0,1600),date:new Date().toLocaleDateString("de-DE",{timeZone:"Europe/Berlin"})});p.notes=p.notes.slice(-40);write(p);openNotes();return}
  if(b.hasAttribute("data-dsp-remove-note")){var p=read(),n=Number(b.getAttribute("data-dsp-remove-note"));if(Number.isInteger(n)&&n>=0&&n<p.notes.length){p.notes.splice(n,1);write(p);openNotes()}return}
  if(b.hasAttribute("data-dsp-reset")){if(isProfileLocked()){window.DAR_VISITOR_PROFILE_PICKER_V1?.open?.();return}var p=read();p.gender="neutral";p.chosen=false;p.interests=[];p.palette="keep";write(p)}
 });
-document.addEventListener("keydown",function(e){if(e.key==="Escape"&&document.querySelector("#dspNotesOverlay:not([hidden])")){e.preventDefault();closeNotes()}});
+document.addEventListener("keydown",function(e){if(e.key!=="Escape")return;if(document.querySelector("#dspNotesOverlay:not([hidden])")){e.preventDefault();closeNotes()}else if(document.querySelector("#dspSavedOverlay:not([hidden])")){e.preventDefault();closeSaved()}});
 function init(){body=document.body;refresh();document.addEventListener("dar:view-rendered",refresh);window.addEventListener("hashchange",refresh);window.addEventListener("pageshow",refresh);window.addEventListener("focus",refresh);document.addEventListener("visibilitychange",function(){if(!document.hidden)refresh()});
  var view=document.getElementById("appView");if(view)new MutationObserver(refresh).observe(view,{childList:true,subtree:false});
  new MutationObserver(refresh).observe(document.body,{attributes:true,attributeFilter:["class"]});
  // The last post content may arrive after the shell; refresh once when data finishes.
  setTimeout(refresh,700);setTimeout(refresh,1700);
 }
-window.DAR_VISITOR_SMART_PROFILE_V1={get:read,setGender:saveGender,isLocked:isProfileLocked,changeGenderWithLogin:changeGenderWithLogin,openNotes:openNotes,openSaved:function(){expanded.saved=true;nav("account");setTimeout(function(){toggleSection("saved",true)},350)},account:account,image:image,recommendations:function(){return picks(read())},dashboard:function(){var p=read(),cards=picks(p),today=todayFeature(p,cards.map(x=>x.id));return {gender:p.gender,daily:cards,today:today,publications:publishedFor(p),focus:homeFocus(p)}},refresh:refresh};
+window.DAR_VISITOR_SMART_PROFILE_V1={get:read,setGender:saveGender,isLocked:isProfileLocked,changeGenderWithLogin:changeGenderWithLogin,openNotes:openNotes,openSaved:openSaved,account:account,image:image,recommendations:function(){return picks(read())},dashboard:function(){var p=read(),cards=picks(p),today=todayFeature(p,cards.map(x=>x.id));return {gender:p.gender,daily:cards,today:today,publications:publishedFor(p),focus:homeFocus(p)}},refresh:refresh};
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
