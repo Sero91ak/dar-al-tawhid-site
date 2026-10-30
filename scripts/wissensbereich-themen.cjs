@@ -4,7 +4,9 @@
 const fs=require("node:fs"),path=require("node:path");
 const ROOT=path.resolve(__dirname,".."),DRAFTS=path.join(ROOT,"content/admin/wissensbereich-themen-drafts");
 const json=p=>JSON.parse(fs.readFileSync(p,"utf8"));
-const norm=s=>String(s||"").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[ʿʾ‘’']/g,"").replace(/ß/g,"ss").replace(/[^\p{L}\p{N}]+/gu," ").toLowerCase().replace(/\s+/g," ").trim();
+const norm=s=>String(s||"").toLowerCase()
+ .replace(/ṯ/g,"th").replace(/ḏ/g,"dh").replace(/ḫ/g,"kh").replace(/ǧ/g,"j").replace(/š/g,"sh")
+ .normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[ʿʾ‘’']/g,"").replace(/ß/g,"ss").replace(/[^\p{L}\p{N}]+/gu," ").replace(/\s+/g," ").trim();
 const STOP=new Set("und mit ein eine einer der die das den dem des zum zur fuer fur aus von was wer wie sich nicht bei ueber uber allah quran sunnah wissen beitrag islam ibn".split(" "));
 const tokens=s=>[...new Set(norm(s).split(" ").filter(t=>t.length>2&&!STOP.has(t)))];
 function score(a,b){let x=new Set(tokens(a)),y=new Set(tokens(b));if(!x.size||!y.size)return 0;let n=0;for(let t of x)if(y.has(t))n++;return n/Math.max(x.size,y.size)}
