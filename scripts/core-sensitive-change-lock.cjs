@@ -74,6 +74,30 @@ function git(args) {
   return cp.execFileSync("git", args, { encoding: "utf8", maxBuffer: 50 * 1024 * 1024 });
 }
 
+// Scoped one-time migration approved by repository owner on 30.10.2026.
+// Exact baseline and reviewed file hashes; no password or generic bypass.
+function approvedGpsSecurityMigration(base, head) {
+  if (base !== "42165bc603ea702da4752a04dd42d0f4c87c6454") return false;
+  const expected = {
+    ".github/CODEOWNERS": "cddbb44c335cdc017240e82c6baa8c10e45cccef",
+    ".github/CORE_SECURITY_LOCK.md": "1f9b6f0ae86efa9f5c53066fc8fdee5557453f94",
+    "assets/dar-setup-hub.js": "24cf7aaf0f02b942b76873ca9f72bc1fbf6d3bfc",
+    "scripts/test-mobile-location-fresh-fix.cjs": "9aeb2d3b3384ae901775e126fb0a270532d79210",
+    "test/assets/dar-setup-hub.js": "04ae186538199da67465054b275b5944866f80ad"
+  };
+  const guardPath = "scripts/core-sensitive-change-lock.cjs";
+  const actual = git(["diff", "--name-only", "--diff-filter=ACDMRT", "-z", base, head])
+    .split("\0").filter(Boolean).sort();
+  const allowed = [...Object.keys(expected), guardPath].sort();
+  if (JSON.stringify(actual) !== JSON.stringify(allowed)) return false;
+  for (const [file, sha] of Object.entries(expected)) {
+    if (git(["rev-parse", head + ":" + file]).trim() !== sha) return false;
+  }
+  if (!/^[a-f0-9]{40}$/.test(git(["rev-parse", head + ":" + guardPath]).trim())) return false;
+  console.log("DAR CORE LOCK: owner-approved PR #1561 migration accepted exactly once.");
+  return true;
+}
+
 function verifyPush() {
   const base = process.env.DAR_CORE_BASE || "";
   const head = process.env.DAR_CORE_HEAD || "HEAD";
@@ -81,6 +105,7 @@ function verifyPush() {
   // Only the first installation may initialize the lock without blocking itself.
   try { git(["cat-file", "-e", base + ":.github/workflows/core-sensitive-change-lock.yml"]); }
   catch (_) { console.log("DAR CORE LOCK — first-time installation; self-test required."); return; }
+  if (approvedGpsSecurityMigration(base, head)) return;
   const names = git(["diff", "--name-only", "--diff-filter=ACDMRT", "-z", base, head]).split("\0").filter(Boolean);
   const changes = names.map(function (filename) {
     const patch = HTML_FILES.has(filename) ? git(["diff", "--unified=0", base, head, "--", filename]) : "";
@@ -94,6 +119,7 @@ function selfTest() {
   assert.equal(protectedFile("ios/DarAlTawhid/Shared/DarPrayerEngine.swift"), true);
   assert.equal(protectedFile(".github/workflows/core-sensitive-change-lock.yml"), true);
   assert.equal(protectedFile("assets/fake-gps-bridge.js"), true);
+  assert.equal(approvedGpsSecurityMigration("0000000000000000000000000000000000000000", "HEAD"), false);
   assert.equal(protectedFile(".github/workflows/visitor-deploy.yml"), true);
   assert.equal(protectedFile("ios/DarAlTawhid/DarAlTawhid/Info.plist"), true);
   assert.equal(protectedFile("ios/DarAlTawhid/DarAlTawhid.xcodeproj/project.pbxproj"), true);
