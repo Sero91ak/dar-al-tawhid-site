@@ -26,12 +26,22 @@ function start(){
  spacer.id="darAdultBrandHeaderSpacerV2";
  spacer.setAttribute("aria-hidden","true");
  app.insertBefore(spacer,app.firstChild);
+ /* FIXED_HEADER_OCCLUSION_V1: measure the actual native/browser header
+    once, for the spacer, nested sticky sections and scroll targets. */
  function sizing(){
-  var height=Math.ceil(header.getBoundingClientRect().height);
-  if(height>0&&height<250)document.documentElement.style.setProperty("--dar-adult-brand-header-height",height+"px");
+  var rect=header.getBoundingClientRect();
+  var height=Math.ceil(rect.height);
+  if(height>0&&height<260){
+   document.documentElement.style.setProperty("--dar-adult-brand-header-height",height+"px");
+   document.documentElement.style.setProperty("--dar-adult-header-obscured-top",Math.ceil(Math.max(0,rect.bottom))+"px");
+  }
  }
  if(typeof ResizeObserver==="function")new ResizeObserver(sizing).observe(header);
  window.addEventListener("resize",sizing,{passive:true});
+ window.addEventListener("orientationchange",sizing,{passive:true});
+ window.addEventListener("pageshow",sizing);
+ document.addEventListener("dar:view-rendered",sizing);
+ if(window.visualViewport)window.visualViewport.addEventListener("resize",sizing,{passive:true});
  var panel=header.querySelector(".dtbh-panel");
  var toggle=header.querySelector(".dtbh-toggle");
  var grid=header.querySelector(".dtbh-grid");
