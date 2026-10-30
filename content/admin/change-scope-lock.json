@@ -155,6 +155,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "dar-test-smart-profile-native-ui-fix-20261030",
+      "at": "2026-10-30T12:00:00+01:00",
+      "approvedBy": "user-urgent-dar-test-video-and-text-corrections-20261030",
+      "reason": "User requested strict Test-app profile icon, themed header capsule, no duplicate home profile, functional Interests and Merkliste, redesign daily capsule cards, native theme inheritance. Restrict to adult /test sources and cache-busting /test worker injection. No visitor, Kids, cloud account models or production content changes.",
+      "paths": [
+        "test/assets/dar-smart-profile-v1.js",
+        "test/assets/dar-smart-profile-v1.css",
+        "test/assets/dar-test-premium-header-v2.js",
+        "test/assets/dar-test-premium-header-v2.css",
+        "test/assets/dar-home-html-parity-v1.js",
+        "test/assets/smart-profile/avatar-man.svg",
+        "test/tools/check-smart-profile-v1.cjs",
+        "cloudflare/test-app-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-07T23:59:00.000Z"
+    },
+    {
       "id": "dar-test-smart-profiles-women-men-personalization-20261030",
       "at": "2026-10-30T10:00:00+01:00",
       "approvedBy": "user-explicit-implement-smart-personalization-in-dar-test-20261030",
