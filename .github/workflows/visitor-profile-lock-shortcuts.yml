@@ -1,0 +1,31 @@
+name: Visitor Profile – Account Lock and Quick Dashboard
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/dar-visitor-profile-picker-v1.js'
+      - 'assets/dar-visitor-profile-picker-v1.css'
+      - 'assets/dar-visitor-smart-profile-v1.js'
+      - 'assets/dar-visitor-smart-profile-v1.css'
+      - 'assets/dar-visitor-onboarding-v1.js'
+      - 'assets/dar-home-test-parity-visitor.js'
+      - 'cloudflare/site-router.js'
+      - 'scripts/test-visitor-profile-lock-shortcuts-v1.cjs'
+      - '.github/workflows/visitor-profile-lock-shortcuts.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check-visitor-profile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check profile-PIN, notes, account separation, responsive UI
+        run: node scripts/test-visitor-profile-lock-shortcuts-v1.cjs
+      - name: Check visitor JS syntax
+        run: |
+          node --check assets/dar-visitor-profile-picker-v1.js
+          node --check assets/dar-visitor-smart-profile-v1.js
+          node --check assets/dar-visitor-onboarding-v1.js
+          node --check assets/dar-home-test-parity-visitor.js
