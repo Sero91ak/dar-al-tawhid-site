@@ -27,7 +27,9 @@ assert.doesNotMatch(script,/dsp-account-hero/,"Nested account hero must not retu
 assert.match(script,/dsp-notes-dialog/,"Notes need an independent modal view");
 assert.match(script,/function syncHeaderAvatar/,"Header profile avatar must follow selection");
 assert.match(home,/dhp-quick-qibla/,"Qibla needs a styled quick-search entry");
-assert.match(home,/dar-qibla-quick-v2\.css/,"Test Qibla quick view theme CSS must load on tap");
+assert.match(home,/openQiblaFromFloat/,"Test Qibla capsule must use the existing fullscreen focus");
+assert.match(home,/openQiblaQuickSheet/,"Native Qibla focus fallback must remain available");
+assert.doesNotMatch(home,/script\.src=.*qibla-quick-view\.js/,"Home must not open the miniature compass");
 const qiblaQuickTheme=read("test/assets/dar-qibla-quick-v2.css");
 assert.match(qiblaQuickTheme,/qibla-qv__panel/,"Quick Qibla theme must style the opened sheet");
 assert.match(qiblaQuickTheme,/var\(--card/,"Qibla quick view must respect the selected appearance");
