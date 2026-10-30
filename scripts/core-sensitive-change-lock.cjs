@@ -126,6 +126,33 @@ function approvedQiblaCapsuleMigration(base, head) {
   return true;
 }
 
+// Scoped 30.10.2026: owner-approved wiring of adult Home capsules to
+// the already existing fullscreen Qibla focus; no sensor/engine changes.
+// The old mini-popup-specific regression test is updated in the same PR.
+function approvedFullscreenQiblaEntryMigration(base, head) {
+  if (base !== "e958fad53ededa0e467bd1841d5f30f946c0c830") return false;
+  const expected = {
+    "assets/dar-home-v31-visitor.js": "0dca696af0f52d5c25212eb37b81f6da3a29fbc2",
+    "test/assets/dar-home-html-parity-v1.js": "5bf5ff12f7c26822e088011f36647f837c03ce2f",
+    "test/tools/check-smart-profile-v1.cjs": "d764724e268b401fa7740bbb2dfba96924bba7d8",
+    "test/tools/test-adult-fullscreen-entrypoints.cjs": "081ea992366060afb70959fdb15ddf44d9a45271",
+    "scripts/test-qibla-native-bridge.cjs": "af41467419e8f4f14fd6e8bc6729075eeeda1ede",
+    "scripts/app-health-check.js": "dd51b552def4b1b907bf4ddfda85c7d66f14e5a7",
+    "content/admin/change-scope-lock.json": "3b904003087f10921778bb53c5b7674b1062de64"
+  };
+  const guardPath = "scripts/core-sensitive-change-lock.cjs";
+  const actual = git(["diff","--name-only","--diff-filter=ACDMRT","-z",base,head])
+    .split("\0").filter(Boolean).sort();
+  if (JSON.stringify(actual) !== JSON.stringify([...Object.keys(expected),guardPath].sort()))
+    return false;
+  for (const [file,sha] of Object.entries(expected)) {
+    if (git(["rev-parse",head+":"+file]).trim() !== sha) return false;
+  }
+  if (!/^[a-f0-9]{40}$/.test(git(["rev-parse",head+":"+guardPath]).trim())) return false;
+  console.log("DAR CORE LOCK: one-time owner-approved fullscreen Qibla focus PR.");
+  return true;
+}
+
 function verifyPush() {
   const base = process.env.DAR_CORE_BASE || "";
   const head = process.env.DAR_CORE_HEAD || "HEAD";
@@ -135,6 +162,7 @@ function verifyPush() {
   catch (_) { console.log("DAR CORE LOCK — first-time installation; self-test required."); return; }
   if (approvedGpsSecurityMigration(base, head)) return;
   if (approvedQiblaCapsuleMigration(base, head)) return;
+  if (approvedFullscreenQiblaEntryMigration(base, head)) return;
   const names = git(["diff", "--name-only", "--diff-filter=ACDMRT", "-z", base, head]).split("\0").filter(Boolean);
   const changes = names.map(function (filename) {
     const patch = HTML_FILES.has(filename) ? git(["diff", "--unified=0", base, head, "--", filename]) : "";
@@ -150,6 +178,7 @@ function selfTest() {
   assert.equal(protectedFile("assets/fake-gps-bridge.js"), true);
   assert.equal(approvedGpsSecurityMigration("0000000000000000000000000000000000000000", "HEAD"), false);
   assert.equal(approvedQiblaCapsuleMigration("0000000000000000000000000000000000000000", "HEAD"), false);
+  assert.equal(approvedFullscreenQiblaEntryMigration("0000000000000000000000000000000000000000", "HEAD"), false);
   assert.equal(protectedFile(".github/workflows/visitor-deploy.yml"), true);
   assert.equal(protectedFile("ios/DarAlTawhid/DarAlTawhid/Info.plist"), true);
   assert.equal(protectedFile("ios/DarAlTawhid/DarAlTawhid.xcodeproj/project.pbxproj"), true);

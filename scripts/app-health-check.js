@@ -205,6 +205,16 @@ try {
   fail("Shared Qibla quick-view / Visitor and DAR TEST capsule regression");
 }
 
+// Fullscreen Qibla focus must stay the single Home entry point in both
+// adult lanes. Keep this regression separate from GPS/heading calculations.
+try {
+  require("child_process").execFileSync(process.execPath,
+    [path.join(__dirname, "../test/tools/test-adult-fullscreen-entrypoints.cjs")],
+    {stdio: "inherit"});
+} catch (e) {
+  fail("Adult Qibla full-screen focus and capsule routing regression");
+}
+
 if (failed) {
   console.error(`\n${failed} check(s) failed – Deploy stoppen.`);
   process.exit(1);

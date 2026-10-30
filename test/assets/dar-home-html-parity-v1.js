@@ -34,49 +34,24 @@ function route(dest,val){if(dest==="library")dest="bibliothek"; // Open the real
  try{if(typeof navigate==="function"){navigate(dest,val||"");return}}catch(e){}
  location.hash="#"+dest+(val?"/"+encodeURIComponent(val):"");
 }
-/* DAR TEST QIBLA QUICK V60: prefer the existing native quick sheet.
- * Never navigate to the full Qibla settings/compass route on shortcut tap.
- * Reuse the established browser QiblaQuickView when the native sheet is absent. */
+/* The two Home quick capsules must invoke the exact fullscreen Qibla
+ * focus already used by Mehr / iOS. Never open a secondary small popup. */
 function openQuickQibla(){
- /* Load shared Qibla styling first, then the TEST-only theme adaptation. */
- if(!document.querySelector('link[data-dar-test-qibla-quick-v61]')){
-  var css=document.createElement("link");css.rel="stylesheet";
-  css.href="/assets/qibla-quick-view.css?v=test-qibla-city-v61";
-  css.setAttribute("data-dar-test-qibla-quick-v61","");
-  document.head.appendChild(css);
- }
- if(!document.querySelector('link[data-dar-test-qibla-theme-v2]')){
-  var quality=document.createElement("link");quality.rel="stylesheet";
-  quality.href="/test/assets/dar-qibla-quick-v2.css?v=20261030-2";
-  quality.setAttribute("data-dar-test-qibla-theme-v2","");
-  document.head.appendChild(quality);
- }
  try{
-  if(window.DARQiblaQuickVersion==="20261030-city-v1"&&window.DARQiblaQuickView&&typeof window.DARQiblaQuickView.open==="function"){
-   window.DARQiblaQuickView.open();var title=document.getElementById("qiblaQvTitle");if(title)title.textContent="Qibla-Schnellsuche";return;
-  }
- }catch(e){console.warn("Qibla quick view initial open",e)}
- if(window.__darTestQiblaCityQuickLoading)return;
- window.__darTestQiblaCityQuickLoading=true;
- function finish(){
-  window.__darTestQiblaCityQuickLoading=false;
-  if(window.DARQiblaQuickView&&typeof window.DARQiblaQuickView.open==="function"){
-   window.DARQiblaQuickView.open();var title=document.getElementById("qiblaQvTitle");if(title)title.textContent="Qibla-Schnellsuche";return;
-  }
-  route("qibla");
- }
- var existing=document.querySelector('script[data-dar-test-qibla-quick-v61]');
- if(existing){existing.addEventListener("load",finish,{once:true});existing.addEventListener("error",function(){window.__darTestQiblaCityQuickLoading=false;route("qibla")},{once:true});return}
- var script=document.createElement("script");
- script.src="/assets/qibla-quick-view.js?v=test-qibla-city-v61";
- script.async=true;script.setAttribute("data-dar-test-qibla-quick-v61","");
- script.onload=finish;
- script.onerror=function(){window.__darTestQiblaCityQuickLoading=false;route("qibla")};
- document.head.appendChild(script);
+  var mini=window.DARQiblaQuickView;
+  if(mini&&typeof mini.isOpen==="function"&&mini.isOpen()&&typeof mini.close==="function")mini.close();
+ }catch(_){}
+ try{
+  if(typeof openQiblaFromFloat==="function"){openQiblaFromFloat();return;}
+ }catch(err){console.warn("Qibla fullscreen shortcut",err)}
+ try{
+  if(typeof openQiblaQuickSheet==="function"){openQiblaQuickSheet();return;}
+ }catch(err){console.warn("Qibla native quick-sheet shortcut",err)}
+ route("qibla");
 }
 function nativeText(node,query){var el=node&&node.querySelector(query);return el?String(el.textContent||"").replace(/\s+/g," ").trim():""}
 function html(){
- var q=quicks.map(function(a){return '<button type="button" class="dhp-quick'+(a[0]==="qibla"?" dhp-quick-qibla":"")+'" data-dhp-route="'+a[0]+'"'+(a[0]==="qibla"?' aria-label="Qibla-Schnellsuche öffnen"':'')+'><span class="dhp-icon3d" aria-hidden="true"><img src="/test/assets/dar-3d-icons/'+a[1]+'" alt="" loading="lazy" decoding="async"></span><span class="dhp-quick-label"><b>'+a[2]+'</b><small>'+(a[0]==="qibla"?"Ausrichtung direkt prüfen":"Wissen öffnen")+'</small></span></button>'}).join("");
+ var q=quicks.map(function(a){return '<button type="button" class="dhp-quick'+(a[0]==="qibla"?" dhp-quick-qibla":"")+'" data-dhp-route="'+a[0]+'"'+(a[0]==="qibla"?' aria-label="Qibla-Schnellsuche öffnen"':'')+'><span class="dhp-icon3d" aria-hidden="true"><img src="/test/assets/dar-3d-icons/'+a[1]+'" alt="" loading="lazy" decoding="async"></span><span class="dhp-quick-label"><b>'+a[2]+'</b><small>'+(a[0]==="qibla"?"Vollbild öffnen":"Wissen öffnen")+'</small></span></button>'}).join("");
  var l=links.map(function(a){return '<button type="button" class="dhp-library-tile" data-dhp-route="'+a[0]+'"><span class="dhp-icon3d" aria-hidden="true"><img src="/test/assets/dar-3d-icons/'+a[1]+'" alt="" loading="lazy" decoding="async"></span><b>'+a[2]+'</b><small>'+a[3]+'</small></button>'}).join("");
  return '<div class="dhp-content">'+
   /* Only one logo/name in fixed app header; home has its own source line. */
