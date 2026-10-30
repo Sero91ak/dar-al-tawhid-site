@@ -33,28 +33,24 @@ assert.match(testJs,/TEST_HEADER_OCCLUSION_V1/);
 assert.match(testJs,/--dar-test-occlusion-top/);
 assert.match(testJs,/visualViewport/);
 assert.match(testCss,/TEST_HEADER_OCCLUSION_LAYOUT_V1/);
-assert.match(visitorCss,/GLOBAL_ADULT_STICKY_CLEARANCE_V1/);
-assert.match(testCss,/GLOBAL_ADULT_STICKY_CLEARANCE_V1/);
+/* A previous global sticky rule shifted first-frame photographic Heroes
+   and detached the Frauen search. Only the Majlis scroll-anchor protection
+   stays in the brand CSS; specialist Hero modules own their layout. */
 for(const [name,css] of [["visitor",visitorCss],["test",testCss]]){
- for(const marker of [
-  ".is-frauen-route #appView .dar-immersive-hero-stage",
-  ".is-topics-route #appView .topics-hub > .view-head",
-  ".is-topic-route #appView .topic-collection-page > .view-head",
-  ".is-post-route #appView .post-reader > .post-reader-title",
-  ".is-hadith-route #appView .hadith-hub > .view-head",
-  ".is-dua-route #appView .dua-hub > .view-head",
-  ".is-settings-route #appView.view > .view-head.settings-page-head",
-  '[data-hero-scroll="sticky"] > .dar-hero-stage',
-  "--dar-immersive-hero-height"
- ])assert(css.includes(marker),name+" missing sticky clearance "+marker);
+ assert.doesNotMatch(css,/GLOBAL_ADULT_STICKY_CLEARANCE_V1/,name+" reintroduced broad sticky override");
+ assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/,name+" reintroduced broad app/hero shift");
+ assert.doesNotMatch(css,/FRAUEN_DIRECT_STICKY_FALLBACK_V6/,name+" reintroduced pre-wrapper shift");
 }
+const originalHero=load("assets/adult-immersive-hero-v1.css");
+assert.match(originalHero,/\.dar-immersive-hero-stage\{/,"Existing Frauen Hero owns sticky");
+assert.match(originalHero,/\.dar-immersive-hero-stage > :is\(\.frauen-library-search-wrap/,"Search must remain owned by single stage");
 assert.match(testCss,/#appView \.ilm-chat-header\{[\s\S]*?top:var\(--dar-test-occlusion-top/);
 assert.match(testCss,/\.ilm-message-list\{[\s\S]*?scroll-padding-top/);
 assert.doesNotMatch(majlisJs,/\.ilm-chat-header\{position:sticky!important;top:0!important/,"Late override may not reset to top zero");
 assert.match(majlisJs,/top:var\(--dar-test-occlusion-top/);
 assert.doesNotMatch(majlisJs,/last\.getBoundingClientRect\(\)\.top - 110/,"Hardcoded scroll offset caused clipped questions");
 assert.match(majlisJs,/var globalBottom=globalHeader\?/);
-assert.match(router,/dar-adult-brand-header-v2\.css\?v=20261030-hero-route-matrix-v4/);
+assert.match(router,/dar-adult-brand-header-v2\.css\?v=20261030-restore-original-hero-rail-v5/);
 assert.match(router,/dar-adult-brand-header-v2\.js\?v=20261030-fixed-occlusion-v1/);
 assert.doesNotMatch(testCss,/body\s*\{\s*padding-top:/,"No blanket body padding");
-console.log("PASS: visitor/Test header measured; Majlis sticky+scroll clear it; desktop/mobile assets current; no duplicate body spacer.");
+console.log("PASS: brand header preserves original Hero/search authority; Majlis independently retains scroll clearance.");

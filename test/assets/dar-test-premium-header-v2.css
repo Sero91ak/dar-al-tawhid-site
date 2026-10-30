@@ -283,28 +283,6 @@ html.dar-test-premium-header-v2 body #appView :target{
 }
 
 
-/* GLOBAL_ADULT_STICKY_CLEARANCE_V1 · measured safe-area-aware sticky stack.
-   Fixed brand -> existing route hero -> existing sticky search. Preserve the
-   original page components, clickable controls and their stacking order.
-   Never add global body padding or independent scrolling to .app/#appView. */
-html.dar-test-premium-header-v2 body.is-frauen-route #appView .dar-immersive-hero-stage,
-html.dar-test-premium-header-v2 body.is-topics-route #appView .topics-hub > .view-head,
-html.dar-test-premium-header-v2 body.is-topic-route #appView .topic-collection-page > .view-head,
-html.dar-test-premium-header-v2 body.is-hadith-route #appView .hadith-hub > .view-head,
-html.dar-test-premium-header-v2 body.is-dua-route #appView .dua-hub > .view-head,
-html.dar-test-premium-header-v2 body.is-post-route #appView .post-reader > .post-reader-title,
-/* Settings image is relative and must not be translated by sticky header offset. */
-html.dar-test-premium-header-v2 body.has-bottom-nav #appView [data-hero-kind][data-hero-scroll="sticky"] > .dar-hero-stage{
-  top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px))!important;
-}
-html.dar-test-premium-header-v2 body.is-topics-route #appView .topics-hub > :is(.search-panel,.search-pro-panel,.main-search,#homeSearchBlock),
-html.dar-test-premium-header-v2 body.is-topic-route #appView .topic-collection-page > :is(.search-panel,.search-pro-panel,.main-search),
-html.dar-test-premium-header-v2 body.is-hadith-route #appView .hadith-hub > :is(.main-search,#hadithSearchBlock),
-html.dar-test-premium-header-v2 body.is-dua-route #appView .dua-hub > :is(.main-search,.search-panel,.search-pro-panel){
-  top:calc(var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px)) + var(--dar-immersive-hero-height,190px))!important;
-}
-
-
 /* TEST_DUO_FOLD_COMPACT_RAIL_V1 · keep the Test-only language shortcut.
    Respect system safe inset; fit logo/title/three capsules in a single row
    on Duo, Android fold, compact iPad and landscape devices. */
@@ -350,18 +328,6 @@ html.dar-test-premium-header-v2 #darTestBrandHeaderV1[data-premium-header-v2="re
  html.dar-test-premium-header-v2 #darTestBrandHeaderV1[data-premium-header-v2="ready"] .dtbh-name{
   font-size:clamp(18px,2.75vw,24px)!important;
  }
-}
-
-
-/* TEST_NATIVE_HERO_TOP_SEAM_V2 · Test header owns the iOS safe top.
-   Native WebAppView sets dar-ios-native-app on BODY; the existing Test
-   brand spacer already reserves its entire fixed height in document flow.
-   No second body padding before Frauen, settings or any other Hero. */
-html.dar-test-premium-header-v2 body.dar-ios-native-app.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-overview):not(.is-ilm-chat-route){
- padding-top:0!important;
-}
-html.dar-test-premium-header-v2 body.has-bottom-nav #appView.view{
- margin-top:0!important;
 }
 
 

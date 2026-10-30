@@ -1,65 +1,46 @@
 #!/usr/bin/env node
 "use strict";
-/* Adult DĀR hero route matrix — style/source guards, not a claim of physical
-   iPhone Duo acceptance. Every declared photo-bearing family is enumerated.
-   Reading covers keep original relative flow; true sticky covers clear brand.
-   No hero image dimension, crop, filename, content, or palette changes. */
-const fs=require("node:fs"), assert=require("node:assert/strict"),vm=require("node:vm");
+/* Adult Hero rollback regression.
+ * INVENTORY != physical-device acceptance.
+ * The fixed brand must not take over original sticky photographic Heroes
+ * with broad global CSS. Only the owning page controls its Hero and search.
+ */
+const fs=require("node:fs"),assert=require("node:assert/strict"),vm=require("node:vm");
 const read=p=>fs.readFileSync(p,"utf8");
 const lanes=[
- {name:"Besucher",css:read("assets/dar-adult-brand-header-v2.css"),js:read("assets/dar-adult-brand-header-v2.js"),token:"dar-adult-brand-header-v2.css?v=20261030-hero-route-matrix-v4"},
- {name:"Test",css:read("test/assets/dar-test-premium-header-v2.css"),js:read("test/assets/dar-test-premium-header-v2.js"),token:"dar-test-premium-header-v2.css?v=20261030-hero-route-matrix-v4"}
+ ["Visitor","assets/dar-adult-brand-header-v2.css","cloudflare/site-router.js","dar-adult-brand-header-v2.css"],
+ ["Test","test/assets/dar-test-premium-header-v2.css","cloudflare/test-app-worker.js","dar-test-premium-header-v2.css"]
 ];
-const routes=[
- "frauen","topics","topic","post","hadith","dua","settings",
- "calendar","ramadan","notifications","account","about",
- "news","news-detail","zakat","source-library","quran-topic","more","quiz"
-];
-const sticky=["frauen","topics","topic","post","hadith","dua"];
-const flow=["settings","calendar","ramadan","notifications","account","about","news","news-detail","zakat","source-library","quran-topic","more","quiz"];
-const variant=[
- ".hadith-detail > .post-reader-title", ".dua-detail > .post-reader-title",
- ".frauen-library-hero", ".frauen-library-pinned-header",
- '[data-hero-kind][data-hero-scroll="sticky"]'
-];
-const router=read("cloudflare/site-router.js");
-const testWorker=read("cloudflare/test-app-worker.js");
-for(const lane of lanes){
- new vm.Script(lane.js);
- const css=lane.css;
- assert(css.includes("GLOBAL_HERO_ROUTE_TOP_SEAM_V3"),lane.name+" route matrix missing");
- assert(css.includes("RELATIVE_HERO_STAYS_IN_FLOW_V4"),lane.name+" relative settings bug not fixed");
- assert(css.includes("PRIMARY_PHOTO_SEAM_NO_MARGIN_V5"),lane.name+" quiz/more/topics top gutter not cleared");
- assert(css.includes("FRAUEN_DIRECT_STICKY_FALLBACK_V6"),lane.name+" first-paint Frauen photo can fall under fixed header");
- assert(css.includes("not(.is-quran-reader-route):not(.is-quran-overview):not(.is-ilm-chat-route)"),lane.name+" specialist reader exceptions absent");
- assert(css.includes("NATIVE_HERO_TOP_SEAM_V2")||css.includes("TEST_NATIVE_HERO_TOP_SEAM_V2"),lane.name+" double safe-top fix missing");
- assert(css.includes("body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-overview):not(.is-ilm-chat-route) > .app"),lane.name+" outer app gap guard missing");
- const match=css.match(/body\.has-bottom-nav:is\(([^)]*)\) #appView\.view\{/g);
- assert(match&&match.some(v=>routes.every(k=>v.includes(".is-"+k+"-route"))),lane.name+" incomplete route selector");
- for(const key of [...sticky,...flow])
-  assert(css.includes(".is-"+key+"-route"),lane.name+" uncovered route "+key);
- for(const name of variant)assert(css.includes(name),lane.name+" missing hero variant "+name);
- const rel=css.slice(css.indexOf("/* RELATIVE_HERO_STAYS_IN_FLOW_V4"));
- assert(/settings-page-head\s*\{\s*top:auto!important;/.test(rel),lane.name+" relative image shifted with top offset");
- assert(/inset-block-start:auto!important/.test(rel),lane.name+" logical top not cleared");
- assert(!/body\.is-settings-route[^\n]*settings-page-head,\s*\n[^\n]*top:var\(/.test(css),lane.name+" old settings sticky offset returned");
- const added=css.slice(css.indexOf("/* GLOBAL_HERO_ROUTE_TOP_SEAM_V3"));
- assert(!/(?:background-image|background-size|background-position|object-fit|object-position|height|min-height|max-height|aspect-ratio)\s*:/i.test(added),
-  lane.name+" new CSS must not resize/change imagery");
- assert.equal([...css].reduce((n,c)=>n+(c==="{")-(c==="}"),0),0);
+const inventory=["frauen","topics","topic","post","hadith","dua","settings","calendar",
+ "ramadan","notifications","account","about","news","news-detail","zakat",
+ "source-library","quran-topic","more","quiz"];
+for(const [name,cssPath,loaderPath,asset] of lanes){
+ const css=read(cssPath),loader=read(loaderPath);
+ assert.equal([...css].reduce((n,c)=>n+(c==="{")-(c==="}"),0),0,name+" unbalanced CSS");
+ assert.doesNotMatch(css,/GLOBAL_ADULT_STICKY_CLEARANCE_V1|GLOBAL_HERO_ROUTE_TOP_SEAM_V3|FRAUEN_DIRECT_STICKY_FALLBACK_V6/,
+   name+" must not globally translate original Hero or detached search");
+ assert.doesNotMatch(css,/NATIVE_HERO_TOP_SEAM_V2|TEST_NATIVE_HERO_TOP_SEAM_V2/,
+   name+" must not duplicate native safe-area resetting");
+ assert(loader.includes(asset+"?v=20261030-restore-original-hero-rail-v5"),
+   name+" must request rollback-safe CSS version");
 }
-for(const [p,source] of [["Besucher",router],["Test",testWorker]]){
- const file=p==="Besucher"?"dar-adult-brand-header-v2.css":"dar-test-premium-header-v2.css";
- assert(source.includes(file+"?v=20261030-hero-route-matrix-v4"),p+" header CSS cache not refreshed");
-}
-const boundary=read("assets/dar-adult-top-scroll-boundary-v1.js");
-assert.equal(boundary,read("test/assets/dar-adult-top-scroll-boundary-v1.js"),"Test and visitor scroll edge must match");
-assert(boundary.includes("DAR_ADULT_TOP_SCROLL_BOUNDARY_V4"));
-const immutableProtected=[
- "assets/dar-hero-scroll-standard-v1.css",
- "assets/frauen/frauen-authority-v1292.css",
- "test/assets/frauen/frauen-authority-v1292.css",
- "assets/dar-adult-top-scroll-boundary-v1.js"
-];
-for(const f of immutableProtected)assert(read(f).length>0,f+" missing");
-console.log("PASS: 19 named adult photo/page families + 5 Hero variants inventoried; sticky versus flow preserved; image geometry untouched; Test/visitor cache paths updated.");
+const heroCss=read("assets/adult-immersive-hero-v1.css");
+const heroJs=read("assets/adult-immersive-hero-v1.js");
+const original=read("assets/frauen/frauen-authority-v1292.css");
+const visitorResponsive=read("assets/adult-responsive-viewport-v1381.css");
+const testResponsive=read("test/assets/test-global-edge-width-v1372.css");
+new vm.Script(heroJs);
+assert.match(heroCss,/\.dar-immersive-hero-stage\{[\s\S]*?position:sticky!important/);
+assert.match(heroCss,/\.dar-immersive-hero-stage > :is\(\.frauen-library-search-wrap/);
+assert.match(heroCss,/position:relative!important/,"Own original search instead of second global sticky rail");
+assert(heroJs.includes("stage.appendChild(hero)")&&heroJs.includes("if(search)stage.appendChild(search)"),
+  "Hero and search must stay in one shared DOM stage");
+assert(original.includes("--frauen-hero-img")&&original.includes("background-position:center 46%"),
+  "Historical Frauen artwork and positioning unchanged");
+assert(visitorResponsive.includes("DAR_VISITOR_HERO_RAIL_CONNECTED_V1403"));
+assert(testResponsive.includes("DAR_ADULT_HERO_COMPACT_STICKY_AXIS_V1402"));
+const edge=read("assets/dar-adult-top-scroll-boundary-v1.js");
+assert.equal(edge,read("test/assets/dar-adult-top-scroll-boundary-v1.js"));
+assert(edge.includes("DAR_ADULT_TOP_SCROLL_BOUNDARY_V4"));
+assert.equal(inventory.length,19);
+console.log("PASS: 19 route families inventoried; original Hero and search co-owned, no global displacement, image sources unchanged. Individual physical-device acceptance still required.");

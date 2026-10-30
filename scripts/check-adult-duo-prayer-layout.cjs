@@ -16,8 +16,7 @@ for(const [file,src] of [
 ])new vm.Script(src,{filename:file});
 assert.match(visitorHeader,/ADULT_DUO_FOLD_COMPACT_RAIL_V1/);
 assert.match(testHeader,/TEST_DUO_FOLD_COMPACT_RAIL_V1/);
-assert.match(visitorHeader,/padding-top:0!important/,"Remove duplicate native body padding only when visitor brand active");
-assert.match(visitorHeader,/dar-ios-native-app\.dar-adult-global-brand-ready/);
+assert.doesNotMatch(visitorHeader,/GLOBAL_ADULT_STICKY_CLEARANCE_V1|NATIVE_HERO_TOP_SEAM_V2/,"Broad Hero override must stay rolled back");
 assert.match(visitorHeader,/@media \(min-width:520px\) and \(max-height:920px\) and \(orientation:landscape\)/);
 assert.match(testHeader,/@media\(min-width:520px\) and \(max-height:920px\) and \(orientation:landscape\)/);
 assert.match(visitorHeader,/@media \(horizontal-viewport-segments:2\)/);
@@ -56,9 +55,9 @@ for(const [lane,src] of [["visitor",visitorHome],["test",testHome]]){
  assert.match(src,/window\.setInterval\(update,1000\)/,"Live countdown must still tick");
  assert.match(src,/card\.dataset\.dhpRoute="prayer"/,"Prayer click navigation must remain");
 }
-assert.match(siteRouter,/dar-adult-brand-header-v2\.css\?v=20261030-hero-route-matrix-v4/);
+assert.match(siteRouter,/dar-adult-brand-header-v2\.css\?v=20261030-restore-original-hero-rail-v5/);
 assert.match(siteRouter,/dar-home-test-parity-visitor\.js\?v=20261030-prayer-compact-colors-v3/);
-assert.match(testWorker,/dar-test-premium-header-v2\.css\?v=20261030-hero-route-matrix-v4/);
+assert.match(testWorker,/dar-test-premium-header-v2\.css\?v=20261030-restore-original-hero-rail-v5/);
 assert.match(testWorker,/dar-home-html-parity-v1\.js\?v=20261030-prayer-compact-colors-v3/);
 assert.doesNotMatch(visitorHeader,/body\s*\{\s*padding-top:0!important/,"Do not reset body safe area indiscriminately");
 console.log("PASS: both adult apps support compact Duo/Fold safe header, compact, differentiated prayer colors with unchanged date/footer layout, and versioned delivery.");
