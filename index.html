@@ -13709,6 +13709,37 @@ html.dar-qibla-pop-open #appView,html.dar-qibla-pop-open #bottomNav,html.dar-qib
 }
 #darQiblaPop.is-locked .dq-status{color:#fff8dc;text-shadow:0 0 16px rgba(255,230,150,.7)}
 #darQiblaPop .dq-hint{margin:8px 0 0;text-align:center;max-width:280px;font:500 12px/1.45 system-ui;color:#b8ae97}
+
+/* 2026-10-30 iOS/Fold fullscreen Qibla: portal is a direct <html> child.
+   Never resolve its height against a fixed/scrolled body or a half viewport. */
+html.dar-qibla-pop-open{background:#08090b!important;color-scheme:dark;touch-action:auto!important}
+html.dar-qibla-pop-open body{background:#08090b!important}
+html.dar-qibla-pop-open > #darQiblaPop{
+  position:fixed!important;top:0!important;right:0!important;bottom:0!important;left:0!important;
+  width:100vw!important;height:100vh!important;
+  width:100dvw!important;height:100dvh!important;min-height:100dvh!important;max-height:none!important;
+  box-sizing:border-box!important;overflow-x:hidden!important;overflow-y:auto!important;
+  align-items:safe center!important;justify-content:safe center!important;
+  overscroll-behavior:contain!important;touch-action:pan-y!important;
+  -webkit-overflow-scrolling:touch;
+}
+html.dar-qibla-pop-open > #darQiblaPop .dq-frame{
+  box-sizing:border-box!important;flex:0 0 auto!important;
+  max-height:100dvh!important;overflow-y:auto!important;
+  padding-top:max(24px,env(safe-area-inset-top,0px))!important;
+  padding-bottom:max(28px,env(safe-area-inset-bottom,0px))!important;
+  margin-block:auto!important;
+}
+@media (max-height:620px),(orientation:landscape){
+  html.dar-qibla-pop-open > #darQiblaPop .dq-svg{
+    width:min(64vw,42dvh,300px)!important;height:min(64vw,42dvh,300px)!important;
+    min-width:0!important;min-height:0!important;
+  }
+  html.dar-qibla-pop-open > #darQiblaPop .dq-frame{
+    padding-top:max(12px,env(safe-area-inset-top,0px))!important;
+    padding-bottom:max(14px,env(safe-area-inset-bottom,0px))!important;
+  }
+}
 </style>
 <style id="home-push-reminders-v379">
 /* Startseite: kompakte Erinnerungszeile, themeabhängig */
@@ -26145,7 +26176,8 @@ function openQiblaQuickSheet(){
   var root=document.createElement("div");
   root.id="darQiblaPop";
   root.innerHTML='<div class="dq-frame"><div class="dq-bar"><div><p class="dq-kicker">Qibla</p><h3 class="dq-title">Suche</h3></div><button type="button" class="dq-x" data-qibla-live-close aria-label="Schließen">×</button></div>'+darQiblaSvg()+'<p class="dq-deg" id="darQiblaDeg">126°</p><p class="dq-city" id="darQiblaCity">Rheinbach</p><p class="dq-status" id="darQiblaStatus">Ausrichten</p><p class="dq-hint">Die Kerbe oben markiert die Blickrichtung. Drehe, bis die Qibla dort steht.</p></div>';
-  document.body.appendChild(root);
+  // Mount above the fixed body so the sheet cannot inherit a clipped height.
+  document.documentElement.appendChild(root);
   darQiblaLive.scrollY=window.scrollY||document.documentElement.scrollTop||0;
   document.body.style.top=(-darQiblaLive.scrollY)+"px";
   document.documentElement.classList.add("dar-qibla-pop-open");
@@ -26153,7 +26185,9 @@ function openQiblaQuickSheet(){
   if(!darQiblaLive.blockMove){
     darQiblaLive.blockMove=function(ev){
       var t=ev.target;
-      if(t&&t.closest&&t.closest("[data-qibla-live-close]"))return;
+      // Scroll is permitted INSIDE the fullscreen Qibla dialog on short
+      // screens; all touches behind the dialog remain locked.
+      if(t&&t.closest&&t.closest("#darQiblaPop"))return;
       ev.preventDefault();
     };
     document.addEventListener("touchmove",darQiblaLive.blockMove,{passive:false,capture:true});
