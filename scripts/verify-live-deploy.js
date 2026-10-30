@@ -166,7 +166,7 @@ async function main() {
     // A successful Worker deploy alone cannot prove that the native shell
     // receives the CSS/JS. Only the TestFlight binary can disable UIKit bounce.
     const scrollCssHref = "/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-no-overlay-v8";
-    const scrollJsHref = "/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-no-overlay-v8";
+    const scrollJsHref = "/assets/dar-adult-top-scroll-boundary-v1.js?v=20261030-no-pull-hero-v9";
     const iosScrollHtmlOk = await waitForHtmlIncludes(
       `${SITE_URL}/?ios-scroll-v2=${Date.now()}`,
       [
@@ -182,7 +182,7 @@ async function main() {
     );
     const iosScrollJsOk = await waitForHtmlIncludes(
       `${SITE_URL}${scrollJsHref}`,
-      ["DAR_ADULT_TOP_SCROLL_BOUNDARY_V3", "DAR_ADULT_SCROLL_EDGE_NO_OVERLAY_20261020", "window.innerHeight", "function canScroll(direction)", 'stepY>0?"up":"down"', "Math.abs(dy)>=1"]
+      ["DAR_ADULT_TOP_SCROLL_BOUNDARY_V4", "DAR_ADULT_SCROLL_EDGE_NO_OVERLAY_20261020", "window.innerHeight", "function canScroll(direction)", 'stepY>0?"up":"down"', "dy>0.15"]
     );
     console.log(
       `verify iOS scroll boundary: native-html=${iosScrollHtmlOk ? "ok" : "FAIL"}, ` +
