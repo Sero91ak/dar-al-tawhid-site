@@ -17,10 +17,10 @@ for(const declaration of ["overflow:visible", "border:1px solid var(--dv3-line)"
 }
 assert(!postGroup[1].includes("overflow:hidden"), "V3 posts container clips its lower rim");
 for(const component of [".home-v380-post-preview", ".home-v380-lib-card"]) {
- const selector = premium.split("\n").find(line => line.trimStart().startsWith(component + "{"));
- assert(selector, "Premium component missing: " + component);
- const rule = selector + premium.slice(premium.indexOf(selector) + selector.length,
-   premium.indexOf("}", premium.indexOf(selector)) + 1);
+ const lines = premium.split("\n");
+ const index = lines.findIndex(line => line.trimStart() === component + "{");
+ assert(index>=0, "Premium component missing: " + component);
+ const rule = lines.slice(index).join("\n").split("}")[0];
  for(const declaration of ["box-sizing:border-box", "border-image:none", "border-radius:14px"]) {
   assert(rule.includes(declaration), component + " loses part of resting outline: " + declaration);
  }
