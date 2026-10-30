@@ -17,7 +17,7 @@ ROUTES=[
  "frauen","topics","topic","post","hadith","hadith-detail","dua",
  "dua-detail","settings","calendar","ramadan","notifications",
  "account","about","news","news-detail","zakat","source-library",
- "quran-topic","more","quiz"
+ "quran-topic","more","quiz","generic-sticky","generic-normal"
 ]
 SIZES=[("phone",390,844),("duo",594,800),("fold",768,1024),("tablet",1024,768)]
 class Silent(SimpleHTTPRequestHandler):
@@ -73,6 +73,9 @@ def markup(route):
  if route in ("hadith-detail","dua-detail"):
   cls=route
   return '<section class="'+cls+'"><header class="post-reader-title hero-fixture" data-qa-hero="1">'+button+'</header><section class="fixture-content">Inhalt</section></section>',"."+cls+" > .post-reader-title"
+ if route in ("generic-sticky","generic-normal"):
+  kind="sticky" if route=="generic-sticky" else "normal"
+  return '<section data-hero-kind="category" data-hero-scroll="'+kind+'"><div class="dar-hero-stage" data-qa-hero="1"><div class="dar-hero hero-fixture">'+button+'</div></div><section class="fixture-content">Inhalt</section></section>','[data-hero-kind] > .dar-hero-stage'
  if route=="calendar":
   return '<header class="cal-tl-head hero-fixture" data-qa-hero="1">'+button+'</header><section class="fixture-content">Inhalt</section>',".cal-tl-head"
  cls="view-head hero-fixture"+(" settings-page-head" if route=="settings" else "")
