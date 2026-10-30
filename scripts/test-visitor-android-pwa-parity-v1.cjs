@@ -30,9 +30,9 @@ for(const key of [
  "darVisitorSmartProfileCssV1","darVisitorProfilePickerCssV1",
  "darVisitorDailyHubCssV1","darVisitorOnboardingCssV1"
 ])assert.ok(shell.includes(key),"missing Android PWA app module: "+key);
-assert.match(shell,/20261030-android-global-parity-v8/);
+assert.match(shell,/20261030-profile-shortcuts-v9/);
 assert.match(shell,/dar-home-test-parity-visitor\.js\?v=20261030-prayer-compact-colors-v3/);
-assert.match(shell,/dar-noble-3d-icons\.js\?v=20261030-android-global-parity-v8/);
+assert.match(shell,/dar-noble-3d-icons\.js\?v=20261030-profile-shortcuts-v9/);
 assert.match(shell,/dar-adult-brand-header-v2\.css\?v=20261030-duo-compact-v1/);
 const manifest=JSON.parse(get("manifest.json"));
 assert.ok(manifest.start_url.startsWith("/pwa/"));
@@ -47,7 +47,7 @@ assert.match(sw,/cache\.match\(request\)/);
 assert.match(sw,/DAR_PWA_VISITOR_SHELL_UPDATED/,"Existing Android app must receive visitor release notification");
 assert.match(sw,/X-Dar-PWA-Revision/,"Scoped Android PWA needs a revision-aware shell cache");
 assert.match(sw,/new URL\(client\.url\)\.pathname\.startsWith\('\/pwa'\)/,"Updates must never affect browser/Kids clients");
-assert.match(shell,/visitor-android-20261030-v8/,"Revision header missing from Android app response");
+assert.match(shell,/visitor-android-20261030-v9/,"Revision header missing from Android app response");
 assert.match(shell,/darPwaReleaseNoticeJsV1/,"Android release notice must load at boot");
 assert.match(shell,/darPwaReleaseNoticeCssV1/,"Android release notice styling missing");
 const notice=get("assets/dar-pwa-release-notice-v1.js");
