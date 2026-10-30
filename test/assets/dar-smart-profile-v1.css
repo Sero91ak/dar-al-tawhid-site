@@ -130,3 +130,17 @@ body.is-account-route #appView .account-status{font-size:11px!important;line-hei
 body.is-account-route #appView .account-details-block{margin:4px 0!important;border-top:1px solid color-mix(in srgb,var(--gold2) 25%,transparent)!important}
 body.is-account-route #appView .account-details-block summary{font-size:12px!important;line-height:1.3!important;padding:10px 2px!important}
 body.is-account-route #appView .account-sync-list{font-size:11px!important;line-height:1.42!important;margin:4px 0 10px!important}
+
+
+/* Smart Dashboard V2 — the home composition follows the selected audience without
+ * replacing the user's light/dark/royal/bordeaux/etc appearance. */
+#darHomeHtmlParityV1 .dsp-section-head>div{display:flex;flex-direction:column;gap:3px;min-width:0}
+#darHomeHtmlParityV1 .dsp-dashboard-context{color:var(--dhp-muted);font:500 11px/1.3 system-ui,sans-serif}
+#darHomeHtmlParityV1 .dsp-mini-topic{display:block;color:var(--dhp-capsule-accent,var(--dhp-accent));font:750 9px/1.2 system-ui,sans-serif;letter-spacing:.065em;text-transform:uppercase;margin:0 0 3px}
+#darHomeHtmlParityV1 .dhp-library-tile.dsp-audience-tile{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:4px!important;min-width:0;padding:10px 8px!important}
+#darHomeHtmlParityV1 .dsp-audience-tile .dsp-library-avatar{display:block;max-height:44px;width:48px;height:44px;max-width:100%;object-fit:contain;filter:drop-shadow(0 2px 3px rgba(0,0,0,.09));pointer-events:none}
+#darHomeHtmlParityV1 .dsp-audience-tile b{font:700 12px/1.2 Georgia,serif!important;overflow-wrap:anywhere;color:var(--dhp-ink)}
+#darHomeHtmlParityV1 .dsp-audience-tile small{display:-webkit-box!important;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;max-width:100%;font:500 10px/1.22 system-ui,sans-serif!important;color:var(--dhp-muted)!important}
+#darHomeHtmlParityV1[data-smart-gender="woman"] .dhp-library-tile[data-dhp-route="frauen"]{border-color:var(--dhp-capsule-active-rim,var(--dhp-accent))!important}
+#darHomeHtmlParityV1 .dsp-audience-tile[hidden],#darHomeHtmlParityV1 .dhp-library-tile[hidden]{display:none!important}
+@media(min-width:800px){#darHomeHtmlParityV1 .dsp-recommend-list{grid-template-columns:repeat(3,minmax(0,1fr))}}
