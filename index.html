@@ -28398,11 +28398,13 @@ function stripFeedPageHeader(){document.querySelectorAll("#appView>.view-head").
 function initPremiumFeedTab(force){if(currentRoute.view!=="feed")return;stripFeedPageHeader();const run=()=>{if(!window.DAR_PREMIUM_FEED)return false;(window.DAR_PREMIUM_FEED.onAppReady||window.DAR_PREMIUM_FEED.rebuild).call(window.DAR_PREMIUM_FEED,{force:!!force});return true};if(!run()){requestAnimationFrame(()=>{stripFeedPageHeader();if(!run())setTimeout(()=>{stripFeedPageHeader();if(!run())setTimeout(run,400)},150)})}}
 window.addEventListener("load",()=>{if(readRoute().view==="feed")initPremiumFeedTab(true)});
 function renderHome(){
- const base=typeof window.DARHomeV3Markup==="function" ? window.DARHomeV3Markup() : null;
- if(!base)return`${renderStagingBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div><div class="home-v380-shell">${safeHomeTile(renderProphetsHomeFocusTile)}${safeHomeTile(renderLibraryHomeFocusTile)}${renderOfflineBox()}${renderHomeQuranHero()}${renderHomeTodaySection()}${renderHomeDiscoverSection()}${renderHomePopularSection()}${renderHomeLibrariesSection()}${renderHomeSearchSection()}<section id="homeSearchBlock" class="home-v380-section home-v380-search-results" style="display:none"><div class="home-v380-section-head"><h3 class="home-v380-section-title" style="font-size:clamp(18px,4vw,22px)">Suchergebnisse</h3><span id="homeSearchCount" class="home-v380-open-row__meta">0 Treffer</span></div><div id="homeSearchResults" class="home-v380-search-grid post-grid"></div></section></div>`;
- const quran=typeof renderHomeQuranHero==="function"?renderHomeQuranHero():"";
- const core=base.replace('<div id="dv3QuranSlot"></div>','<div id="dv3QuranSlot">'+quran+'</div>');
- return `${renderStagingBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div><div class="home-v380-shell">${core}<section id="homeSearchBlock" class="home-v380-section home-v380-search-results" style="display:none"><div class="home-v380-section-head"><h3 class="home-v380-section-title">Suchergebnisse</h3><span id="homeSearchCount" class="home-v380-open-row__meta">0 Treffer</span></div><div id="homeSearchResults" class="home-v380-search-grid post-grid"></div></section></div>`;
+  // V3 is the single canonical TEST home structure. No legacy home lists or overlays.
+  const base=typeof window.DARHomeV3Markup==="function"
+    ?window.DARHomeV3Markup()
+    :'<section class="dv3-home"><p>Startseite wird vorbereitet …</p></section>';
+  const quran=typeof renderHomeQuranHero==="function"?renderHomeQuranHero():"";
+  const core=base.replace('<div id="dv3QuranSlot"></div>','<div id="dv3QuranSlot">'+quran+'</div>');
+  return `${renderStagingBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div><div class="home-v380-shell">${core}<section id="homeSearchBlock" class="home-v380-section home-v380-search-results" style="display:none"><div class="home-v380-section-head"><h3 class="home-v380-section-title">Suchergebnisse</h3><span id="homeSearchCount" class="home-v380-open-row__meta">0 Treffer</span></div><div id="homeSearchResults" class="home-v380-search-grid post-grid"></div></section></div>`;
 }
 function renderTopics(){
   const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));
@@ -36951,4 +36953,8 @@ html[data-theme] body.is-post-route #appView .post-reader > :not(.post-reader-ti
 <link rel="stylesheet" id="darHeroScrollStandardV1" href="/assets/dar-hero-scroll-standard-v1.css?v=20261017-hero-standard-v1">
 
 <script defer id="darHadithVisitorParityV1397" src="/assets/hadith-visitor-parity-v1397.js?v=20261018-v1397"></script>
+<!-- VISITOR: actual current DAR TEST V4.9 start-page renderer, not obsolete dashboard -->
+<script defer id="darVisitorFuzzyCore" src="/assets/dar-fuzzy-search-core-visitor.js?v=20261030-test-parity-v1"></script>
+<script defer id="darVisitorFuzzyAPI" src="/assets/dar-fuzzy-search-api-visitor.js?v=20261030-test-parity-v1"></script>
+<script defer id="darVisitorTestParity" src="/assets/dar-home-test-parity-visitor.js?v=20261030-test-parity-v1"></script>
 </html>

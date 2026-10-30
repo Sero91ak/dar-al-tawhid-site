@@ -8800,6 +8800,20 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-23T23:59:00.000Z"
+    },
+    {
+      "id": "adult-visitor-test-v49-real-home-parity-fix-20261030",
+      "at": "2026-10-30T08:00:00+01:00",
+      "approvedBy": "user-explicit-restore-current-DAR-TEST-home-from-complete-salam-to-knowledge-grid-live",
+      "reason": "Port actual V4.9 Test HTML-Parity start page from user's screen recording; maintain Friday controller, prayer, native five tabs and search; no Kids or Test changes.",
+      "paths": [
+        "index.html",
+        "assets/dar-home-test-parity-visitor.js",
+        "assets/dar-fuzzy-search-core-visitor.js",
+        "assets/dar-fuzzy-search-api-visitor.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-03T23:59:00.000Z"
     }
   ],
   "enabled": true
