@@ -25,7 +25,8 @@ assert.match(pickerCSS,/DVP SPLIT DASHBOARD V2/);
 assert.match(pickerCSS,/@media\(max-width:450px\)/,"Compact iPhone/PWA responsive layout absent");
 assert.match(onboarding,/profileApi\(\)\?\.isLocked\?\.\(\)/,"First-run choices must respect signed-in profile lock");
 
-const local=new Map(),listeners={},events=[],user={id:"acct-22",username:"testaccount"},win={},document={
+let user={id:"acct-22",username:"testaccount"};
+const local=new Map(),listeners={},events=[],win={},document={
  readyState:"loading",body:{classList:{contains:()=>false}},addEventListener:(key,cb)=>{listeners[key]=cb},
  dispatchEvent:e=>events.push(e.type),querySelectorAll:()=>[],querySelector:()=>null,getElementById:()=>null
 };
