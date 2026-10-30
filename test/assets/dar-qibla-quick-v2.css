@@ -1,0 +1,36 @@
+/* DĀR TEST ONLY · Qibla-Schnellsuche.
+ * One theme-aware style owner for the existing compass quick view.
+ * Shared /assets/qibla-quick-view.js and geolocation/orientation logic are unchanged. */
+html:has(#darTestBrandHeaderV1) .qibla-qv{
+ --qibla-bg:var(--bg,#f8f7f0);
+ --qibla-surface:var(--card,var(--bg,#fff));
+ --qibla-text:var(--text,#27362e);
+ --qibla-muted:var(--muted,#70776f);
+ --qibla-accent:var(--gold2,#b6a077);
+ --qibla-line:color-mix(in srgb,var(--qibla-accent) 35%,transparent);
+ color:var(--qibla-text);
+ background:color-mix(in srgb,var(--qibla-bg) 83%,rgba(0,0,0,.38));
+ backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+html:has(#darTestBrandHeaderV1) .qibla-qv__panel{
+ width:min(100%,385px);max-height:min(91dvh,710px);
+ box-sizing:border-box;overflow-y:auto;overscroll-behavior:contain;
+ padding:14px clamp(14px,3vw,22px) 19px;
+ border:1px solid var(--qibla-line);border-radius:20px;
+ background:var(--qibla-surface);color:var(--qibla-text);
+ box-shadow:0 18px 46px rgba(0,0,0,.18)}
+html:has(#darTestBrandHeaderV1) .qibla-qv__top{align-items:center;grid-template-columns:1fr 40px;margin-bottom:4px}
+html:has(#darTestBrandHeaderV1) .qibla-qv__kicker{font:740 15px/1.18 "Iowan Old Style",Georgia,serif;letter-spacing:.025em;text-transform:none;color:var(--qibla-text)}
+html:has(#darTestBrandHeaderV1) .qibla-qv__sub{font-size:11px;margin-top:3px;color:var(--qibla-muted)}
+html:has(#darTestBrandHeaderV1) .qibla-qv__close{width:40px;height:40px;border:0;border-radius:12px;background:transparent;color:var(--qibla-text)}
+html:has(#darTestBrandHeaderV1) .qibla-qv__dial-wrap{width:min(61vw,225px);margin:8px auto 6px}
+html:has(#darTestBrandHeaderV1) .qibla-qv__dial{box-shadow:inset 0 0 0 4px color-mix(in srgb,var(--qibla-accent) 10%,transparent)}
+html:has(#darTestBrandHeaderV1) .qibla-qv__readout{margin-top:5px}
+html:has(#darTestBrandHeaderV1) .qibla-qv__meta{margin-top:9px}
+html:has(#darTestBrandHeaderV1) .qibla-qv__gate{margin-top:8px}
+@media(max-height:680px){
+ html:has(#darTestBrandHeaderV1) .qibla-qv__panel{max-height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 14px)}
+ html:has(#darTestBrandHeaderV1) .qibla-qv__dial-wrap{width:min(48vw,170px)}
+}
+@media(prefers-reduced-motion:reduce){
+ html:has(#darTestBrandHeaderV1) .qibla-qv__panel{scroll-behavior:auto!important}
+}
