@@ -34,7 +34,8 @@ function make(width,height,stage,pathName="/"){
   setAttribute:(k,v)=>{attr[k]=String(v);applied++},
   classList:{contains(){return false}}
  };
- const app={getBoundingClientRect:()=>({width:stage})};
+ let stageWidth=stage;
+ const app={getBoundingClientRect:()=>({width:stageWidth})};
  const document={
   readyState:"complete",
   documentElement:rootEl,
@@ -51,7 +52,7 @@ function make(width,height,stage,pathName="/"){
  };
  const sandbox={window,document,ResizeObserver:window.ResizeObserver,console};
  vm.runInNewContext(code,sandbox);
- return {window,rootEl,attr,listeners,app,setWidth:(w)=>{rootEl.clientWidth=w;window.innerWidth=w;window.visualViewport.width=w},getApplies:()=>applied}
+ return {window,rootEl,attr,listeners,app,setWidth:(w)=>{rootEl.clientWidth=w;window.innerWidth=w;window.visualViewport.width=w;stageWidth=w},getApplies:()=>applied}
 }
 let small=make(352,812,352);
 assert.equal(small.attr["data-dar-visitor-frontstage"],"1","closed fold/phone must be narrow");
