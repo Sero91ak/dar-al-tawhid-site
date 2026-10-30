@@ -21,7 +21,7 @@ assert.equal(edge,edgeTest,"No scroll stop drift between Test and visitor");
 assert.match(visitor,/NATIVE_HERO_TOP_SEAM_V2/);
 assert.match(test,/TEST_NATIVE_HERO_TOP_SEAM_V2/);
 for(const [lane,css] of [["visitor",visitor],["Test",test]]){
- assert.match(css,/body\.dar-ios-native-app\.has-bottom-nav:not\(\.is-feed-fullscreen\)\s*\{\s*padding-top:0!important/,
+ assert.match(css,/body\.dar-ios-native-app\.has-bottom-nav:not\(\.is-feed-fullscreen\):not\(\.is-quran-reader-route\):not\(\.is-quran-overview\):not\(\.is-ilm-chat-route\)\s*\{\s*padding-top:0!important/,
  lane+" native body must drop DUPLICATE inset when brand spacer is active");
  assert.match(css,/#appView\.view\s*\{\s*margin-top:0!important/);
  assert.doesNotMatch(css,/NATIVE_HERO_TOP_SEAM_V2[\s\S]*?(?:\.frauen-library-hero|\.dar-hero\s*\{)[^}]*?(?:height:|background-image:|background-size:|background-position:)/,
