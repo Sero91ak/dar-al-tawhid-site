@@ -217,3 +217,135 @@ html body #darAdultBrandHeaderV2 .dtbh-row > #darVisitorProfileButtonV1[aria-exp
  border-color:var(--dtbh-muted,var(--gold2,#b69c69))!important;
  box-shadow:0 0 0 2px color-mix(in srgb,var(--dtbh-muted,#b69c69) 15%,transparent)!important;
 }
+
+/* DVP SPLIT DASHBOARD V2 · a single, compact personal control for iOS, Android PWA and web.
+   Original 3D avatar and palette controls, account session, and other overlays stay intact. */
+html body #darAdultBrandHeaderV2 .dvp-chooser{
+ width:min(94vw,640px)!important;
+ max-width:calc(100vw - 18px)!important;
+ max-height:min(77dvh,700px)!important;
+ padding:clamp(15px,3vw,24px)!important;
+ border:1px solid color-mix(in srgb,var(--gold2,#bba278) 42%,var(--line,#425750))!important;
+ border-radius:25px!important;
+ overflow-y:auto!important;
+ box-shadow:0 24px 65px rgba(8,25,25,.20)!important;
+}
+#darAdultBrandHeaderV2 .dvp-chooser-head{margin-bottom:14px}
+#darAdultBrandHeaderV2 .dvp-chooser-head h2{
+ margin:6px 0!important;font:600 clamp(23px,3.8vw,30px)/1.2 Georgia,serif!important;
+ letter-spacing:-.026em!important;
+}
+#darAdultBrandHeaderV2 .dvp-chooser-head p{margin:3px 0 0!important;font-size:12px!important;line-height:1.48!important}
+#darAdultBrandHeaderV2 .dvp-composite{
+ display:grid!important;grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr)!important;
+ align-items:start!important;gap:clamp(10px,2.2vw,20px)!important;
+ border-top:1px solid color-mix(in srgb,var(--line,#425750) 70%,transparent);
+ padding-top:15px!important;min-width:0!important;
+}
+#darAdultBrandHeaderV2 .dvp-column-rule{
+ height:100%;min-height:253px;
+ background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--gold2,#bba278) 47%,var(--line,#425750)),transparent)
+}
+#darAdultBrandHeaderV2 .dvp-column-label,
+#darAdultBrandHeaderV2 .dvp-quick-eyebrow{
+ display:block;margin-bottom:10px;color:var(--gold2,#bba278);
+ font:750 9px/1.35 system-ui,sans-serif;letter-spacing:.13em;text-transform:uppercase;
+}
+#darAdultBrandHeaderV2 .dvp-select,#darAdultBrandHeaderV2 .dvp-quick{min-width:0}
+#darAdultBrandHeaderV2 .dvp-chooser-options{display:grid;gap:9px!important}
+#darAdultBrandHeaderV2 .dvp-chooser-options button{
+ display:grid!important;grid-template-columns:43px minmax(0,1fr) 15px!important;
+ align-items:center!important;gap:9px!important;
+ min-height:62px!important;min-width:0!important;
+ padding:7px 9px!important;border-radius:14px!important;
+}
+#darAdultBrandHeaderV2 .dvp-chooser-options img{
+ width:42px!important;height:47px!important;max-width:100%!important;
+ object-fit:contain!important;object-position:center bottom!important
+}
+#darAdultBrandHeaderV2 .dvp-option-copy{min-width:0!important;display:grid!important;gap:3px!important}
+#darAdultBrandHeaderV2 .dvp-option-copy strong{font-size:13px!important;line-height:1.2}
+#darAdultBrandHeaderV2 .dvp-option-copy small{font-size:10px!important;line-height:1.35}
+#darAdultBrandHeaderV2 .dvp-profile-rule{
+ margin:11px 0 0!important;font-size:10px!important;line-height:1.5!important;
+ color:var(--text,#5b685e);opacity:.72;
+}
+#darAdultBrandHeaderV2 .dvp-quick h3{
+ margin:0 0 8px!important;font:600 clamp(18px,3.2vw,22px)/1.2 Georgia,serif!important;
+ color:var(--text,#233e37)!important;
+}
+#darAdultBrandHeaderV2 .dvp-quick-list{display:grid;gap:7px}
+#darAdultBrandHeaderV2 .dvp-quick-list button{
+ display:grid!important;grid-template-columns:31px minmax(0,1fr) 10px!important;align-items:center!important;
+ gap:8px!important;width:100%;min-height:52px!important;max-width:100%;
+ padding:8px!important;text-align:left!important;
+ border-radius:13px!important;border:1px solid var(--line,#e0e2db)!important;
+ background:color-mix(in srgb,var(--card,#ffffff) 93%,var(--gold2,#c8ab70))!important;
+ color:var(--text,#26392e)!important;cursor:pointer;
+}
+#darAdultBrandHeaderV2 .dvp-quick-list button:active{transform:scale(.99)}
+#darAdultBrandHeaderV2 .dvp-quick-symbol{
+ width:30px;height:30px;display:grid;place-items:center;
+ font-size:18px!important;color:var(--gold2,#a9915c);
+ border-radius:10px;background:color-mix(in srgb,var(--gold2,#c8ab70) 11%,transparent)
+}
+#darAdultBrandHeaderV2 .dvp-quick-list button>span:nth-child(2){min-width:0;display:grid;gap:2px}
+#darAdultBrandHeaderV2 .dvp-quick-list strong{font-size:12px!important;line-height:1.23!important}
+#darAdultBrandHeaderV2 .dvp-quick-list small{font-size:10px!important;line-height:1.35!important;opacity:.72;overflow-wrap:anywhere}
+#darAdultBrandHeaderV2 .dvp-quick-chevron{font-size:19px!important;color:var(--gold2,#b7a274)}
+#darAdultBrandHeaderV2 .dvp-foot{
+ display:flex;justify-content:space-between;align-items:center;gap:12px;
+ flex-wrap:wrap;margin:16px 0 0;padding-top:13px;
+ border-top:1px solid var(--line,#d8ded7)
+}
+#darAdultBrandHeaderV2 .dvp-foot>span{font-size:10px;line-height:1.45;opacity:.7}
+#darAdultBrandHeaderV2 .dvp-foot button{
+ min-height:36px;padding:8px 12px;border:1px solid var(--line,#d8ded7);
+ border-radius:12px;background:color-mix(in srgb,var(--card,#fff) 93%,var(--gold2,#bbab7b));
+ color:var(--text,#243f35);font-weight:700;font-size:11px;cursor:pointer
+}
+#darAdultBrandHeaderV2 .dvp-reauth h3{
+ margin:7px 0!important;font:600 22px/1.3 Georgia,serif!important;color:inherit!important
+}
+#darAdultBrandHeaderV2 .dvp-reauth p{font-size:12px;line-height:1.6;opacity:.85}
+#darAdultBrandHeaderV2 .dvp-reauth-account{display:inline-flex;margin:7px 0 12px;padding:7px 12px;border-radius:20px;border:1px solid var(--line,#d9d8ce);font-size:11px;font-weight:700}
+#darAdultBrandHeaderV2 .dvp-reauth label{display:block;margin:0 0 7px;font-size:12px;font-weight:700}
+#darAdultBrandHeaderV2 #dvpProfilePin{
+ display:block;width:100%;min-height:46px;padding:12px;border:1px solid var(--line,#c7cfc9);
+ border-radius:12px;background:var(--card,#fff);color:var(--text,#1f3830);
+ font-size:17px;outline-offset:3px
+}
+#darAdultBrandHeaderV2 .dvp-reauth-error{color:#aa5444;font-weight:650;opacity:1}
+#darAdultBrandHeaderV2 .dvp-reauth-actions{display:flex;gap:10px;margin-top:15px}
+#darAdultBrandHeaderV2 .dvp-reauth-actions button{
+ min-height:42px;flex:1;cursor:pointer;padding:10px;border-radius:12px;
+ border:1px solid var(--line,#cbd0cc);background:var(--card,#fff);
+ color:var(--text,#1f3830);font-size:12px;font-weight:650
+}
+#darAdultBrandHeaderV2 .dvp-reauth-actions button:last-child{
+ background:var(--gold2,#bba278);color:#102d28;border-color:var(--gold2,#bba278)
+}
+#darAdultBrandHeaderV2 .dvp-reauth-actions button:disabled{opacity:.58;cursor:wait}
+@media(max-width:450px){
+ html body #darAdultBrandHeaderV2 .dvp-chooser{padding:15px 12px!important;right:9px!important;max-height:75dvh!important}
+ #darAdultBrandHeaderV2 .dvp-composite{grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr)!important;gap:8px!important;padding-top:12px!important}
+ #darAdultBrandHeaderV2 .dvp-chooser-options button{grid-template-columns:32px minmax(0,1fr) 9px!important;gap:4px!important;padding:5px!important;min-height:55px!important}
+ #darAdultBrandHeaderV2 .dvp-chooser-options img{width:32px!important;height:38px!important}
+ #darAdultBrandHeaderV2 .dvp-option-copy strong{font-size:12px!important}
+ #darAdultBrandHeaderV2 .dvp-option-copy small{font-size:9px!important}
+ #darAdultBrandHeaderV2 .dvp-quick-list button{grid-template-columns:24px minmax(0,1fr) 8px!important;gap:5px!important;min-height:50px!important;padding:6px!important}
+ #darAdultBrandHeaderV2 .dvp-quick-symbol{width:24px;height:26px;font-size:15px!important}
+ #darAdultBrandHeaderV2 .dvp-quick-list strong{font-size:11px!important}
+ #darAdultBrandHeaderV2 .dvp-quick-list small{font-size:9px!important}
+ #darAdultBrandHeaderV2 .dvp-quick h3{font-size:18px!important}
+ #darAdultBrandHeaderV2 .dvp-column-label,#darAdultBrandHeaderV2 .dvp-quick-eyebrow{font-size:8px}
+}
+@media(max-width:338px){
+ #darAdultBrandHeaderV2 .dvp-chooser-options button{grid-template-columns:28px minmax(0,1fr) 8px!important}
+ #darAdultBrandHeaderV2 .dvp-chooser-options img{width:28px!important}
+ #darAdultBrandHeaderV2 .dvp-option-copy small{display:none}
+ #darAdultBrandHeaderV2 .dvp-quick-list small{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+ #darAdultBrandHeaderV2 .dvp-quick-list button{transition:none!important;animation:none!important}
+}
