@@ -772,11 +772,149 @@ body.is-home-route[data-dat-smart-prayer="ready"] #headerPrayerStatus{
  #darHomeHtmlParityV1 .datp-now{font-size:21px}
 }
 @media(prefers-reduced-motion:reduce){#darHomeHtmlParityV1 .datp-beacon,#darHomeHtmlParityV1 .datp-ring:before{animation:none}#darHomeHtmlParityV1 .datp-fill{transition:none}}
+
+
+/* SMART_PRAYER_INFORMATION_HIERARCHY_V2 · Adult Test + visitor only.
+   Primary=current, secondary=next, live=countdown, tertiary=local clock.
+   Calm theme-aware gold contrast; both calendars get explicit labels.
+   Preserve the ORIGINAL source timetable, timer, place and click handler. */
+#darHomeHtmlParityV1 .dat-smart-prayer{
+ --datp-current-color:var(--dat-ink);
+ --datp-next-color:var(--dat-gold);
+ --datp-live-color:var(--dat-gold);
+ --datp-clock-color:var(--dat-muted);
+}
+#darHomeHtmlParityV1 .datp-item:not(.datp-right) .datp-number{
+ color:var(--datp-current-color)!important;
+ -webkit-text-fill-color:var(--datp-current-color)!important;
+ font-weight:750!important;
+}
+#darHomeHtmlParityV1 .datp-right .datp-number{
+ color:var(--datp-next-color)!important;
+ -webkit-text-fill-color:var(--datp-next-color)!important;
+ font-weight:700!important;
+}
+#darHomeHtmlParityV1 .datp-right .datp-prayername{
+ color:var(--datp-next-color)!important;
+ -webkit-text-fill-color:var(--datp-next-color)!important;
+}
+#darHomeHtmlParityV1 .datp-capsule{
+ border:1px solid color-mix(in srgb,var(--dat-gold) 30%,transparent)!important;
+ background:var(--dat-capsule)!important;
+ background:color-mix(in srgb,var(--dat-gold) 10%,var(--dat-capsule))!important;
+ border-radius:12px!important;
+ padding:clamp(8px,1.7vw,12px) clamp(10px,2vw,16px)!important;
+ gap:10px!important;
+ min-height:46px!important;
+}
+#darHomeHtmlParityV1 .datp-counter{
+ color:var(--datp-live-color)!important;
+ -webkit-text-fill-color:var(--datp-live-color)!important;
+ font-weight:760!important;
+ font-size:clamp(21px,4vw,32px)!important;
+ font-variant-numeric:tabular-nums!important;
+}
+#darHomeHtmlParityV1 .datp-until{
+ color:var(--dat-ink)!important;
+ font-weight:780!important;
+ min-width:0!important;
+ max-width:50%!important;
+ overflow:hidden!important;
+ text-overflow:ellipsis!important;
+}
+#darHomeHtmlParityV1 .datp-foot{
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr) auto!important;
+ align-items:center!important;
+ gap:8px 14px!important;
+ padding-top:12px!important;
+}
+#darHomeHtmlParityV1 .datp-dates{
+ display:flex!important;flex-wrap:wrap!important;
+ align-items:stretch!important;gap:8px!important;
+ min-width:0!important;width:auto!important;
+ white-space:normal!important;overflow:visible!important;
+}
+#darHomeHtmlParityV1 :is(.datp-greg,.datp-hijri){
+ display:flex!important;
+ flex-direction:column!important;
+ justify-content:center!important;
+ gap:3px!important;
+ flex:0 1 auto!important;
+ min-width:0!important;
+ max-width:100%!important;
+ padding:4px 10px!important;
+ border-inline-start:2px solid color-mix(in srgb,var(--dat-gold) 62%,transparent)!important;
+ border-radius:5px!important;
+ background:color-mix(in srgb,var(--dat-capsule) 52%,transparent)!important;
+ white-space:normal!important;
+ overflow-wrap:break-word!important;
+ text-overflow:clip!important;
+ line-height:1.3!important;
+ font-size:clamp(10px,1.3vw,13px)!important;
+}
+#darHomeHtmlParityV1 .datp-hijri{
+ color:var(--dat-ink)!important;
+ opacity:.88!important;
+ border-inline-start-color:color-mix(in srgb,var(--dat-gold) 30%,transparent)!important;
+}
+#darHomeHtmlParityV1 :is(.datp-greg,.datp-hijri)::before{
+ content:attr(data-calendar-label);
+ display:block!important;
+ font:750 clamp(8px,.85vw,10px)/1.2 system-ui,-apple-system,sans-serif!important;
+ letter-spacing:.055em!important;
+ color:var(--dat-muted)!important;
+ -webkit-text-fill-color:var(--dat-muted)!important;
+ text-transform:uppercase!important;
+}
+#darHomeHtmlParityV1 .datp-date-dot{display:none!important}
+#darHomeHtmlParityV1 .datp-local{
+ align-self:center!important;justify-self:end!important;
+ gap:8px!important;
+}
+#darHomeHtmlParityV1 .datp-local-label{
+ display:inline!important;
+ color:var(--dat-muted)!important;
+ font-size:clamp(9px,1vw,11px)!important;
+}
+#darHomeHtmlParityV1 .datp-now{
+ color:var(--datp-clock-color)!important;
+ -webkit-text-fill-color:var(--datp-clock-color)!important;
+ font-weight:600!important;
+ font-size:clamp(17px,2.3vw,23px)!important;
+}
+#darHomeHtmlParityV1 .datp-seconds{font-size:.63em!important;opacity:.82!important}
+@media(max-width:580px){
+ #darHomeHtmlParityV1 .datp-foot{grid-template-columns:minmax(0,1fr)!important;gap:7px!important}
+ #darHomeHtmlParityV1 .datp-dates{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  gap:5px!important;
+  width:100%!important;
+ }
+ #darHomeHtmlParityV1 :is(.datp-greg,.datp-hijri){padding:5px 7px!important}
+ #darHomeHtmlParityV1 .datp-local{width:100%!important;justify-content:flex-end!important}
+ #darHomeHtmlParityV1 .datp-counter{font-size:clamp(19px,5.6vw,26px)!important}
+ #darHomeHtmlParityV1 .datp-now{font-size:clamp(16px,4.5vw,20px)!important}
+}
+@media(max-width:350px){
+ #darHomeHtmlParityV1 .datp-capsule{gap:5px!important;padding-inline:7px!important}
+ #darHomeHtmlParityV1 .datp-until{font-size:9px!important}
+ #darHomeHtmlParityV1 .datp-counter{font-size:19px!important}
+ #darHomeHtmlParityV1 :is(.datp-greg,.datp-hijri){font-size:10px!important;padding:5px 6px!important}
+}
+
 `;
 if(!document.getElementById("datSmartPrayerClockStyleV1")){
  var style=document.createElement("style");style.id="datSmartPrayerClockStyleV1";
  style.textContent=CSS;document.head.appendChild(style);
 }
+
+var calendarLabels={
+ de:["Bürgerlich","Hiǧrī"],en:["Civil date","Hijri date"],
+ tr:["Miladî","Hicrî"],ar:["ميلادي","هجري"],ku:["Mîladî","Hicrî"],
+ ckb:["زایینی","کۆچی"],bs:["Građanski","Hidžretski"]
+};
 var labels={
  de:["GEBETSZEITEN","LIVE","AKTUELL","NÄCHSTES","BIS","ORTSZEIT"],
  en:["PRAYER TIMES","LIVE","CURRENT","NEXT","UNTIL","LOCAL TIME"],
@@ -869,6 +1007,10 @@ function refreshSource(now){
  put("[data-dat-place]",place);
  put("[data-dat-date]",greg);
  put("[data-dat-hijri]",hijri);
+ var calendarNames=calendarLabels[locale()]||calendarLabels.de;
+ var gregNode=x.querySelector(".datp-greg"),hijriNode=x.querySelector(".datp-hijri");
+ if(gregNode)gregNode.setAttribute("data-calendar-label",calendarNames[0]);
+ if(hijriNode)hijriNode.setAttribute("data-calendar-label",calendarNames[1]);
  x.setAttribute("aria-label",current.name+" "+current.time+", "+next.name+" "+next.time+". "+(place||"Gebetszeiten"));
  return true;
 }
