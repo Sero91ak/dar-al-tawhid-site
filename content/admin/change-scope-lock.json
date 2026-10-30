@@ -8966,6 +8966,20 @@
         "scripts/check-visitor-more-responsive.cjs"
       ],
       "expiresAt": "2026-11-12T23:59:00.000Z"
+    },
+    {
+      "id": "visitor-front-display-full-width-mobile-layout-20261030",
+      "at": "2026-10-30T19:45:00+01:00",
+      "approvedBy": "user-explicit-fold-front-closed-narrow-smartphone-content-cramped-every-page-fix-20261030",
+      "reason": "Adult visitor iOS/PWA/web only: fix front cover display narrow-screen compact stage, remove accidental inset/dual width constraints and prevent date/prayer/nav/cards clipping; use measured available viewport, keep fold unfolded/tablet layout and users' data, account and nav actions unchanged. Isolate Kids/Test/admin.",
+      "paths": [
+        "assets/dar-visitor-frontstage-v1.css",
+        "assets/dar-visitor-frontstage-v1.js",
+        "cloudflare/site-router.js",
+        "scripts/test-visitor-frontstage-v1.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-12T23:59:00.000Z"
     }
   ],
   "enabled": true
