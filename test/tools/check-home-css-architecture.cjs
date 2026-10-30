@@ -43,8 +43,9 @@ for (const name of removed) {
 for (const id of ["dhpPosts", "dhpTodayArticle", "dhpLibrary", "dhpQResume"]) {
   assert(source.includes(id), "Required existing home function missing: " + id);
 }
-assert(source.includes('document.querySelectorAll("#dv3Latest') ||
-  source.includes('document.querySelectorAll(\"#dv3Latest'),
-  "V3 post-data adapter unexpectedly deleted");
+assert(!source.includes('document.querySelectorAll("#dv3Latest .dv3-post'),
+  "Active Home must never scrape hidden V3 publication markup");
+assert(source.includes('typeof posts!=="undefined"'),
+  "Canonical posts data source must be used directly");
 
 console.log("PASS — DĀR TEST active Home CSS: dead selectors absent, capsules intact, routes isolated.");
