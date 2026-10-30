@@ -389,3 +389,24 @@ html body #darAdultBrandHeaderV2 .dtbh-toggle{
 @media (orientation:landscape) and (max-height:560px){
  html body #darAdultBrandHeaderV2{padding-block-start:env(safe-area-inset-top,0px)!important}
 }
+
+
+/* DAR_FIXED_HEADER_OCCLUSION_V1
+   The fixed adult rail has one measured spacer. Do not add a second body
+   padding or alter touch targets. Scroll anchors/sticky page controls must
+   respect its actual bottom edge (incl. native safe-area inset). */
+html.dar-adult-global-brand-ready{
+  scroll-padding-top:calc(var(--dar-adult-header-obscured-top,var(--dar-adult-brand-header-height,80px)) + 12px)!important;
+}
+html.dar-adult-global-brand-ready body #appView :target,
+html.dar-adult-global-brand-ready body #appView [id]:target{
+  scroll-margin-top:calc(var(--dar-adult-header-obscured-top,var(--dar-adult-brand-header-height,80px)) + 12px)!important;
+}
+/* Shared ʿIlm/secondary sticky toolbar: never occupy the same screen pixels
+   as the global branded rail. Applies only if route exists in visitor shell. */
+html.dar-adult-global-brand-ready body.is-ilm-chat-route #appView .ilm-chat-header{
+  top:var(--dar-adult-header-obscured-top,var(--dar-adult-brand-header-height,80px))!important;
+}
+html.dar-adult-global-brand-ready body.is-ilm-chat-route #appView .ilm-message-list{
+  scroll-padding-top:calc(var(--dar-adult-header-obscured-top,var(--dar-adult-brand-header-height,80px)) + 88px)!important;
+}
