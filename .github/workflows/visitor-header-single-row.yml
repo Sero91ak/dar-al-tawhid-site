@@ -1,0 +1,39 @@
+name: Besucher Header – Ein-Zeilen-Vertrag
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/dar-visitor-profile-picker-v1.css'
+      - 'assets/dar-visitor-profile-picker-v1.js'
+      - 'assets/dar-adult-brand-header-v2.css'
+      - 'assets/dar-home-test-parity-visitor.js'
+      - 'cloudflare/site-router.js'
+      - 'ios/DarAlTawhid/DarAlTawhid/WebAppView.swift'
+      - 'test/assets/dar-test-premium-header-v2.js'
+      - 'scripts/check-visitor-header-single-row.cjs'
+      - '.github/workflows/visitor-header-single-row.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'assets/dar-visitor-profile-picker-v1.css'
+      - 'assets/dar-visitor-profile-picker-v1.js'
+      - 'assets/dar-adult-brand-header-v2.css'
+      - 'assets/dar-home-test-parity-visitor.js'
+      - 'cloudflare/site-router.js'
+      - 'ios/DarAlTawhid/DarAlTawhid/WebAppView.swift'
+      - 'test/assets/dar-test-premium-header-v2.js'
+      - 'scripts/check-visitor-header-single-row.cjs'
+      - '.github/workflows/visitor-header-single-row.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  header-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check visitor header layout, controls and cache versions
+        run: node scripts/check-visitor-header-single-row.cjs
