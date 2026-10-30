@@ -35,6 +35,7 @@ Falls irgendwann eine Änderung gewünscht ist:
 - Zusaetzlich schuetzt `core-sensitive-change-lock.cjs` Standort, Gebetszeiten, Qibla, native Berechtigungen, Projektkonfiguration, CI-Workflows und Sicherheits-Guards.
 - Die Regeln werden nur vorbeugend erzwungen, wenn GitHub eine aktive Main-Ruleset-Pruefung mit verpflichtendem PR, Code-Owner-Review und Statuschecks durchsetzt.
 - Alle Aenderungen bleiben nachvollziehbar und beduerfen der ausdruecklichen Freigabe des Eigentuemers. Kein genereller Bypass.
+- Dieser PR umfasst ausnahmsweise die Besucher- und Test-App gleichzeitig, weil derselbe gezielte GPS-Fix beide wieder in Einklang bringen muss. Die Mehrspur-Freigabe betrifft nur die App-Lane-Pruefung; sie hebt den kritischen Kern-Schutz nicht auf.
 - GitHub verbietet dem Autor einer PR, die eigene PR zu reviewen. Fuer Eigentuemer-PRs ist ein unabhaengiger Reviewer oder ein gesonderter Bot-PR-Autor erforderlich.
 
 ## OBLIGATORISCHE GITHUB-EINSTELLUNG — ohne diese NICHT vollständig erzwungen
