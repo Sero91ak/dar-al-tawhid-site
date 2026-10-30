@@ -4,7 +4,7 @@
  */
 (function(){
 "use strict";
-if(!(/^(\/|\/index\.html|\/pwa(?:\/|$))$/.test(location.pathname)))return;
+if(!(/^(\/|\/index\.html|\/pwa(?:\/|\/index\.html)?)$/.test(location.pathname)))return;
 if(window.DAR_VISITOR_SMART_PROFILE_V1)return;
 var K="darVisitorSmartProfileV1:", body=document.body, scheduled=false, lastOwner="";
 var THEMES=["keep","light","salbei","soft","eisgold","royal","bordeaux","dark","dar-al-layl"];

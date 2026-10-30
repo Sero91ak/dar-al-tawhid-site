@@ -1,7 +1,7 @@
 /* DĀR AL TAWḤĪD VISITOR · classical gender profile selector · adult only */
 (function(){
 "use strict";
-if(!(/^(\/|\/index\.html|\/pwa(?:\/|$))$/.test(location.pathname)))return;
+if(!(/^(\/|\/index\.html|\/pwa(?:\/|\/index\.html)?)$/.test(location.pathname)))return;
 if(window.DAR_VISITOR_PROFILE_PICKER_V1)return;
 function api(){return window.DAR_VISITOR_SMART_PROFILE_V1}
 function gender(){var p=api();return p&&p.get?p.get().gender:"neutral"}

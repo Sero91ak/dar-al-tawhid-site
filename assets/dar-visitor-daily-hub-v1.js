@@ -4,7 +4,7 @@
  */
 (function(){
 "use strict";
-if(!(/^(\/|\/index\.html|\/pwa(?:\/|$))$/.test(location.pathname)))return;
+if(!(/^(\/|\/index\.html|\/pwa(?:\/|\/index\.html)?)$/.test(location.pathname)))return;
 if(window.DAR_VISITOR_DAILY_HUB_V1)return;
 var KEY="darVisitorDailyKnowledgeV1:", lastProfile="", scheduled=false, seenHome=false;
 var QUESTIONS=[

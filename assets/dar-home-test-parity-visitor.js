@@ -5,7 +5,7 @@
  */
 (function(){
 "use strict";
-if(!(/^(\/|\/index\.html|\/pwa(?:\/|$))$/.test(location.pathname)))return;
+if(!(/^(\/|\/index\.html|\/pwa(?:\/|\/index\.html)?)$/.test(location.pathname)))return;
 if(window.__darHomeHtmlParityV1)return;
 window.__darHomeHtmlParityV1=true;
 var ID="darHomeHtmlParityV1", pending=false, lastItems="", inputTimer=null, clock=0;
