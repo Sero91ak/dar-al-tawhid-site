@@ -166,7 +166,7 @@ struct WebAppView: UIViewRepresentable {
               if(document.querySelector('link[href*="'+name+'"]'))return;
               var link=document.createElement("link");
               link.rel="stylesheet";
-              link.href="/assets/"+name+"?v=ios-visitor-header-single-row-20261030";
+              link.href="/assets/"+name+"?v=ios-visitor-mehr-responsive-20261030";
               (document.head||document.documentElement).appendChild(link);
             }
             function next(index){
@@ -188,7 +188,7 @@ struct WebAppView: UIViewRepresentable {
                 return;
               }
               var script=document.createElement("script");
-              script.src="/assets/"+item[0]+"?v=ios-visitor-dashboard-20261030";
+              script.src="/assets/"+item[0]+"?v=ios-visitor-mehr-responsive-20261030";
               script.async=false;
               script.onload=function(){next(index+1)};
               script.onerror=function(){console.warn("DĀR iOS: Besucher-Dashboard fehlt",item[0]);next(index+1)};
