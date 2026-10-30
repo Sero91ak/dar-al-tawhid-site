@@ -1,4 +1,8 @@
 # DĀR AL TAWḤĪD — sensitive infrastructure, owner approval required.
+# Owner approval for ALL app, web, native, admin, workflow and test changes.
+# Effective only when 'Require review from Code Owners' is enabled for main.
+* @Sero91ak
+
 # Enforced only if main ruleset requires Code Owner reviews.
 /.github/CODEOWNERS @Sero91ak
 /.github/CORE_SECURITY_LOCK.md @Sero91ak

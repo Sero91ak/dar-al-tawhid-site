@@ -1168,13 +1168,21 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
     if(el)el.textContent=(s.city||"GPS erkannt · Ortsname wird gesucht")+" · GPS automatisch"+(s.locationPrecision==="approximate"?" · ungenau":"");
   }
   async function updatePosition(data){
-    var lat=Number(data&&data.lat),lon=Number(data&&(data.lng!=null?data.lng:data.lon));
-    var acc=Number(data&&data.acc), t=Number(data&&data.timestamp);
-    if(!valid(lat,lon,acc))return;
-    if(t&&(t>Date.now()+60000||Date.now()-t>(acc>2500?3600000:600000)))return;
+    // Reject incomplete native payloads: Number(null) is 0 and could otherwise
+    // silently move prayer times to coordinates 0,0.
+    if(!data||typeof data!=="object")return;
+    var fields=[data.lat,data.lng!=null?data.lng:data.lon,data.acc,data.timestamp];
+    if(fields.some(function(x){return x==null||(typeof x==="string"&&!x.trim());}))return;
+    var lat=Number(data.lat),lon=Number(data.lng!=null?data.lng:data.lon);
+    var acc=Number(data.acc), t=Number(data.timestamp);
+    if(!valid(lat,lon,acc)||!Number.isFinite(t)||t<=0)return;
+    if(t>Date.now()+60000||Date.now()-t>(acc>2500?3600000:600000))return;
     // A cached native fix may arrive before a new fix: ignore reversed GPS callbacks.
     if(t&&lastAcceptedStamp&&t+2000<lastAcceptedStamp)return;
-    lastGpsEventAt=Date.now();
+    // Replayed cached fixes are useful for display, but do not prove that
+    // the fresh-on-resume request succeeded. Allow the web GPS fallback.
+    var gpsAge=Date.now()-t;
+    if(gpsAge>=-2000&&gpsAge<=30000)lastGpsEventAt=Date.now();
     var s=current();
     // An explicit manually selected city is never replaced by CoreLocation.
     if(s.locationMode==="manual"&&(s.locationGranted===true||Number(s.locationUpdatedAt)>0))return;

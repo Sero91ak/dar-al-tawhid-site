@@ -109,6 +109,29 @@ async function testOne(file) {
   assert.equal(browserFallback,1,"Native bridge timeout must fall back to browser GPS");
   assert.equal(olderApp.state.lat,50.74);
 
+  // A cached CoreLocation replay can be valid for display, but it must
+  // not suppress the fresh browser-GPS recovery when the native bridge stalls.
+  const staleReplay=boot(source,{locationMode:"auto",city:"Berlin",
+    lat:52.5,lon:13.4,locationGranted:true,locationUpdatedAt:NOW-8*60000},
+    {native:true,browser:success=>success({coords:{latitude:50.74,longitude:7.11,accuracy:30},timestamp:NOW})});
+  staleReplay.start();
+  staleReplay.fire("dar-native-location",old);
+  const staleFallback=staleReplay.tasks.find(fn=>/requestWebFix/.test(fn.toString()));
+  assert(staleFallback,"Cached replay should still schedule a new GPS request");
+  staleFallback();
+  assert.equal(staleReplay.browserCalls(),1,
+    "A stale native replay must not suppress fresh GPS recovery");
+  assert.equal(staleReplay.state.lat,50.74);
+
+  // Invalid/null native messages must not silently produce 0,0 coordinates.
+  const invalid=boot(source,{locationMode:"auto"}, {native:true});
+  invalid.start();
+  invalid.fire("dar-native-location",{lat:null,lng:null,acc:null,timestamp:null});
+  invalid.fire("dar-native-location",{lat:50,lng:7,acc:20,timestamp:null});
+  invalid.fire("dar-native-location",{lat:"",lng:"",acc:"",timestamp:""});
+  assert.equal(invalid.writes.length,0,
+    "Invalid GPS payloads must never overwrite prayer settings");
+
   const timedOut=boot(source,{locationMode:"auto"},{
     browser:(success,failure,opts)=>{
       if(opts.enableHighAccuracy) failure({code:3});
