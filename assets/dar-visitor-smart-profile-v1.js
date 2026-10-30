@@ -198,17 +198,36 @@ var expanded={interests:false,saved:false,settings:false};
 function expandPanel(key,title,sub,content){
  return '<div class="dsp-expand"><button type="button" class="dsp-expand-toggle" data-dsp-toggle="'+key+'" aria-expanded="'+Boolean(expanded[key])+'" aria-controls="dspExpand-'+key+'"><span><strong>'+title+'</strong><small>'+sub+'</small></span><span class="dsp-chevron" aria-hidden="true"></span></button><div id="dspExpand-'+key+'" class="dsp-expand-body"'+(expanded[key]?'':' hidden')+'>'+content+'</div></div>'
 }
-function accountPanel(p){var g=p.gender,profile=label(g);
- return '<section id="darTestSmartAccount" class="dsp-account" data-dsp-gender="'+g+'" aria-label="Mein persönlicher DĀR-Bereich">'+
- '<header class="dsp-account-heading"><div class="dsp-account-heading-copy"><span class="dsp-eyebrow">MEIN DĀR · PERSÖNLICH</span><h2>'+display(g)+'</h2><p>Persönliche Sammlungen und dein Wissensweg.</p></div><div class="dsp-account-figure" aria-hidden="true">'+iconSpan(g)+'</div></header>'+
- '<div class="dsp-account-shortcuts"><button type="button" class="dsp-shortcut" data-dsp-open-notes><span class="dsp-shortcut-icon" aria-hidden="true">✎</span><strong>Notizen</strong><small>'+p.notes.length+' gespeichert</small></button><button type="button" class="dsp-shortcut" data-dsp-open-saved><span class="dsp-shortcut-icon" aria-hidden="true">☆</span><strong>Merkliste</strong><small>'+p.saved.length+' Beiträge</small></button></div>'+
- '<div class="dsp-profile-line"><span><strong>Profil: '+profile+'</strong><small>Empfehlungen individuell für dich</small></span><button type="button" data-dsp-switch-profile>Profil wechseln</button></div>'+
- '<div class="dsp-setting dsp-setting--theme"><h3>Erscheinungsbild</h3><div class="dsp-chip-set dsp-theme-rail" aria-label="Farbschema auswählen">'+themeOptions(p)+'</div></div>'+
+function accountPanel(p){
+ var g=p.gender,items=inventory(),recommended=picks(p).slice(0,3),recent=(p.opened||[]).map(function(id){return items.find(x=>x.id===id)}).filter(Boolean).slice(0,3);
+ var area=g==="woman"?"Dein Frauen-Wissensbereich":g==="man"?"Dein Männer-Wissensbereich":"Dein persönlicher Wissensbereich";
+ var profile=label(g),isSignedIn=!!account(),appFavorites=typeof savedIds==="function"?savedIds().length:0;
+ var suggestion=recommended.length?recommended.map(function(x,i){
+  var category=x.gender==="woman"?"Frauenwissen":x.gender==="man"?"Männerwissen":x.tags.includes("quran")?"Qurʾān":x.tags.includes("fiqh")?"Fiqh":x.tags.includes("tawhid")?"Tawḥīd":"Wissen";
+  return '<div class="dsp-my-recommend"><button type="button" data-dsp-post="'+esc(x.id)+'"><small>'+esc(category)+' · 0'+(i+1)+'</small><strong>'+esc(x.title)+'</strong><span>'+esc(x.sub||"Aus den veröffentlichten Beiträgen")+'</span></button><button type="button" class="dsp-my-save" data-dsp-save="'+esc(x.id)+'" aria-pressed="'+p.saved.includes(x.id)+'" aria-label="'+(p.saved.includes(x.id)?"Aus Merkliste entfernen":"Beitrag merken")+'">'+(p.saved.includes(x.id)?"★":"☆")+'</button></div>'
+ }).join(""):'<p class="dsp-empty">Für diese Auswahl liegen derzeit keine passenden veröffentlichten Beiträge vor. Die Bibliothek bleibt vollständig erreichbar.</p>';
+ var history=recent.length?recent.map(function(x){return '<button type="button" class="dsp-my-history-row" data-dsp-post="'+esc(x.id)+'"><span>'+esc(x.title)+'</span><span aria-hidden="true">›</span></button>'}).join(""):'<p class="dsp-empty">Öffne einen empfohlenen Beitrag. Hier kannst du später direkt daran anknüpfen.</p>';
+ return '<section id="darTestSmartAccount" class="dsp-account dsp-my-dar" data-dsp-gender="'+g+'" aria-label="Mein DĀR · persönliches Dashboard">'+
+ '<header class="dsp-account-heading dsp-my-hero"><div class="dsp-account-heading-copy"><span class="dsp-eyebrow">MEIN DĀR · DEIN WISSENSRAUM</span><h2>Mein DĀR</h2><p>'+esc(area)+' · '+(isSignedIn?'mit deinem Konto verbunden':'ohne Anmeldung nutzbar')+'</p><button type="button" class="dsp-my-profile-button" data-dsp-switch-profile>Wissensprofil: '+esc(profile)+' <span aria-hidden="true">›</span></button></div><div class="dsp-account-figure" aria-hidden="true">'+iconSpan(g)+'</div></header>'+
+ '<section class="dsp-my-stats" aria-label="Deine persönliche Übersicht"><div><strong>'+p.saved.length+'</strong><span>Lokale Merkliste</span></div><div><strong>'+p.notes.length+'</strong><span>Private Notizen</span></div><div><strong>'+appFavorites+'</strong><span>App-Favoriten</span></div><div><strong>'+recent.length+'</strong><span>Zuletzt geöffnet</span></div></section>'+
+ '<section class="dsp-my-section" aria-labelledby="dspMyActionsTitle"><div class="dsp-my-section-heading"><h3 id="dspMyActionsTitle">Deine Schnellzugriffe</h3><small>Direkt dort fortfahren, wo du möchtest</small></div><div class="dsp-my-actions">'+
+ '<button type="button" data-dsp-open-notes><span class="dsp-my-action-icon"><img src="/assets/dar-3d-icons/ilm.png" alt="" loading="lazy" decoding="async"></span><strong>Meine Notizen</strong><small>Gedanken festhalten</small></button>'+
+ '<button type="button" data-dsp-open-saved><span class="dsp-my-action-icon"><img src="/assets/dar-3d-icons/saved.png" alt="" loading="lazy" decoding="async"></span><strong>Meine Merkliste</strong><small>Beiträge wiederfinden</small></button>'+
+ '<button type="button" data-dsp-open-route="quran"><span class="dsp-my-action-icon"><img src="/assets/dar-3d-icons/quran.png" alt="" loading="lazy" decoding="async"></span><strong>Qurʾān</strong><small>Lesen und hören</small></button>'+
+ '<button type="button" data-dsp-open-route="recent"><span class="dsp-my-action-icon"><img src="/assets/dar-3d-icons/posts.png" alt="" loading="lazy" decoding="async"></span><strong>Beiträge</strong><small>Wissen vertiefen</small></button>'+
+ '<button type="button" data-dsp-open-route="quiz"><span class="dsp-my-action-icon"><img src="/assets/dar-3d-icons/quiz.png" alt="" loading="lazy" decoding="async"></span><strong>Wissensquiz</strong><small>Wissen prüfen</small></button>'+
+ '<button type="button" data-dsp-open-service><span class="dsp-my-action-icon"><img src="/assets/dar-3d-icons/shield.png" alt="" loading="lazy" decoding="async"></span><strong>Konto & Sync</strong><small>Geräte verbinden</small></button></div></section>'+
+ '<section class="dsp-my-section" aria-labelledby="dspMyRecommendationsTitle"><div class="dsp-my-section-heading"><h3 id="dspMyRecommendationsTitle">Heute für dich ausgewählt</h3><small>Aus veröffentlichten Beiträgen · passend zu deinem Wissensprofil</small></div><div class="dsp-my-recommend-list">'+suggestion+'</div></section>'+
+ '<section class="dsp-my-section dsp-my-history" aria-labelledby="dspMyHistoryTitle"><div class="dsp-my-section-heading"><h3 id="dspMyHistoryTitle">Zuletzt gelesen</h3><small>Deine über Mein DĀR geöffneten Beiträge</small></div>'+history+'</section>'+
+ '<section class="dsp-my-section dsp-my-personalize" aria-labelledby="dspMyInterestsTitle"><div class="dsp-my-section-heading"><h3 id="dspMyInterestsTitle">Deine Wissensgebiete</h3><small>Interessen bestimmen die Reihenfolge der Empfehlungen, nicht den Zugang zu Inhalten.</small></div>'+
  expandPanel("interests","Meine Interessen",p.interests.length+" Themen gewählt",'<p class="dsp-explain">Mehrfachauswahl · Alle Wissensgebiete bleiben zugänglich.</p><div class="dsp-chip-set">'+interestOptions(p)+'</div>')+
- expandPanel("saved","Merkliste",p.saved.length+" Beiträge gespeichert",'<div class="dsp-saved-list">'+(p.saved.length?p.saved.map(function(id){var item=inventory().find(x=>x.id===id);return '<div class="dsp-saved-line"><button type="button" data-dsp-post="'+esc(id)+'">'+esc(item?item.title:"Gespeicherter Beitrag")+'</button><button type="button" data-dsp-save="'+esc(id)+'" aria-label="Aus Merkliste entfernen">×</button></div>'}).join(""):'<p class="dsp-empty">Du hast noch keine Beiträge gemerkt. Nutze ☆ auf der Startseite.</p>')+'</div>')+
- expandPanel("settings","Weitere Einstellungen","Personalisierung verwalten",'<button type="button" class="dsp-subtle" data-dsp-reset>Interessen und Profilauswahl zurücksetzen</button>')+
+ expandPanel("saved","Gespeicherte Beiträge",p.saved.length+" lokale Einträge",'<div class="dsp-saved-list">'+(p.saved.length?p.saved.map(function(id){var x=items.find(y=>y.id===id);return '<div class="dsp-saved-line"><button type="button" data-dsp-post="'+esc(id)+'">'+esc(x?x.title:"Gespeicherter Beitrag")+'</button><button type="button" data-dsp-save="'+esc(id)+'" aria-label="Aus Merkliste entfernen">×</button></div>'}).join(""):'<p class="dsp-empty">Noch keine lokalen Einträge vorhanden.</p>')+'</div>')+
+ '<div class="dsp-setting dsp-setting--theme"><h3>Erscheinungsbild</h3><div class="dsp-chip-set dsp-theme-rail" aria-label="Farbschema auswählen">'+themeOptions(p)+'</div></div>'+
+ expandPanel("settings","Weitere Einstellungen","Persönliche Auswahl verwalten",'<button type="button" class="dsp-subtle" data-dsp-reset>Interessen und Profilauswahl zurücksetzen</button>')+
+ '<p class="dsp-my-privacy">Notizen, lokale Merkliste, Interessen und dieser Leseverlauf werden auf dem aktuellen Gerät gespeichert. Kontofavoriten, Qurʾān-Lesestand und Quiz-Synchronisierung findest du im Kontobereich darunter.</p></section>'+
  '</section>'
 }
+
 function toggleSection(name,forceOpen){if(!Object.prototype.hasOwnProperty.call(expanded,name))return;expanded[name]=typeof forceOpen==="boolean"?forceOpen:!expanded[name];
  var panel=document.getElementById("dspExpand-"+name),trigger=document.querySelector('[data-dsp-toggle="'+name+'"]');
  if(panel)panel.hidden=!expanded[name];
@@ -321,10 +340,19 @@ function updateHome(p){
  syncLibrary(p,root)
 }
 function syncHeaderAvatar(p){document.querySelectorAll("#darAdultBrandHeaderV2 .dtbh-action-account .dtbh-icon-3d").forEach(function(icon){var src=image(p.gender);if(icon.getAttribute("src")!==src)icon.src=src;icon.classList.add("dsp-figure-icon");var btn=icon.closest("button");if(btn){btn.setAttribute("aria-label","Profil wählen: "+label(p.gender));btn.setAttribute("title","Profil: "+label(p.gender))}})}
-function updateAccount(p){if(!document.body.classList.contains("is-account-route"))return;
- var panel=document.querySelector("#appView .account-panel");if(!panel)return;var el=panel.querySelector("#darTestSmartAccount");
- if(!el){el=document.createElement("div");el.className="dsp-account-mount";panel.insertBefore(el,panel.firstChild)}
- var sig=owner()+"|"+JSON.stringify([p.gender,p.palette,p.interests,p.notes,p.saved]);if(el.dataset.dspSig!==sig){el.innerHTML=accountPanel(p);el.dataset.dspSig=sig}
+function updateAccount(p){
+ // The real account page is the mounting point; don't rely solely on route CSS classes.
+ // Keep one wrapper and never nest a second #darTestSmartAccount on refresh.
+ var panel=document.querySelector("#appView .account-panel");if(!panel)return;
+ var mount=panel.querySelector(":scope > .dsp-account-mount");
+ if(!mount){mount=document.createElement("div");mount.className="dsp-account-mount";panel.insertBefore(mount,panel.firstChild)}
+ var sig=owner()+"|"+today()+"|"+JSON.stringify([p.gender,p.palette,p.interests,p.notes,p.saved,p.opened])+"|"+inventory().length+"|"+(typeof savedIds==="function"?savedIds().length:0);
+ if(mount.dataset.dspSig!==sig){mount.innerHTML=accountPanel(p);mount.dataset.dspSig=sig}
+ if(!panel.querySelector(":scope > .dsp-account-service-heading")){
+  var heading=document.createElement("div");heading.className="dsp-account-service-heading";
+  heading.innerHTML='<h3>Konto &amp; Synchronisierung</h3><p>Kontozugang, gesicherte Favoriten und Gerätestatus verwalten.</p>';
+  mount.insertAdjacentElement("afterend",heading)
+ }
 }
 function refresh(){if(scheduled)return;scheduled=true;requestAnimationFrame(function(){scheduled=false;try{var o=owner(),ownerChanged=o!==lastOwner;if(ownerChanged){lastOwner=o;adoptGuestChoiceAfterLogin()}var p=read();if(ownerChanged&&p.palette!=="keep")chooseTheme(p.palette)
  updateHome(p);updateAccount(p);syncHeaderAvatar(p)}catch(e){console.warn("DĀR VISITOR Smart Profile",e)}})}
@@ -337,7 +365,7 @@ document.addEventListener("click",function(e){
  if(nativePost&&nativePost.dataset.dhpValue){var opened=read(),pid=nativePost.dataset.dhpValue;opened.opened=[pid].concat(opened.opened.filter(x=>x!==pid)).slice(0,30);write(opened);return}
  var nativeTheme=e.target.closest("[data-dtbh-theme],[data-theme-select]");
  if(nativeTheme){var chosen=nativeTheme.getAttribute("data-dtbh-theme")||nativeTheme.getAttribute("data-theme-select");if(availableThemes().includes(chosen)){var current=read();if(current.palette!==chosen){current.palette=chosen;write(current)}}return}
- var b=e.target.closest("[data-dsp-gender],[data-dsp-theme],[data-dsp-interest],[data-dsp-open-account],[data-dsp-open-more],[data-dsp-open-women],[data-dsp-open-discovery],[data-dsp-post],[data-dsp-save],[data-dsp-add-note],[data-dsp-remove-note],[data-dsp-reset],[data-dsp-open-notes],[data-dsp-close-notes],[data-dsp-open-saved],[data-dsp-import-guest-notes],[data-dsp-toggle],[data-dsp-switch-profile]");
+ var b=e.target.closest("[data-dsp-gender],[data-dsp-theme],[data-dsp-interest],[data-dsp-open-account],[data-dsp-open-more],[data-dsp-open-women],[data-dsp-open-discovery],[data-dsp-post],[data-dsp-save],[data-dsp-add-note],[data-dsp-remove-note],[data-dsp-reset],[data-dsp-open-notes],[data-dsp-close-notes],[data-dsp-open-saved],[data-dsp-import-guest-notes],[data-dsp-toggle],[data-dsp-switch-profile],[data-dsp-open-route],[data-dsp-open-service]");
  if(!b)return;
  e.preventDefault();e.stopPropagation();
  if(b.hasAttribute("data-dsp-gender")){saveGender(b.getAttribute("data-dsp-gender"));return}
@@ -348,6 +376,8 @@ document.addEventListener("click",function(e){
  if(b.hasAttribute("data-dsp-close-notes")){closeNotes();return}
  if(b.hasAttribute("data-dsp-open-saved")){openSaved();return}
  if(b.hasAttribute("data-dsp-toggle")){toggleSection(b.getAttribute("data-dsp-toggle"));return}
+ if(b.hasAttribute("data-dsp-open-route")){var route=b.getAttribute("data-dsp-open-route");if(["quran","recent","quiz","topics"].includes(route))nav(route);return}
+ if(b.hasAttribute("data-dsp-open-service")){var target=document.querySelector("#appView .dsp-account-service-heading");if(target)target.scrollIntoView({block:"start",behavior:window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches?"auto":"smooth"});return}
  if(b.hasAttribute("data-dsp-switch-profile")){var chooser=window.DAR_VISITOR_PROFILE_PICKER_V1;if(chooser&&typeof chooser.open==="function")chooser.open();else document.getElementById("darVisitorProfileButtonV1")?.click();return}
  if(b.hasAttribute("data-dsp-open-more")){nav("more");return}
  if(b.hasAttribute("data-dsp-open-women")){nav("frauen");return}

@@ -163,3 +163,107 @@ body.is-account-route #appView .account-sync-list{font-size:11px!important;line-
 #dspSavedOverlay .dsp-saved-direct-row span:last-child{color:var(--gold2,#b7a16f);font-size:23px}
 #dspSavedOverlay .dsp-notes-dialog>.dsp-primary{display:block;width:100%;margin:10px 0 0;min-height:42px}
 #dspSavedOverlay .dsp-notes-close:focus-visible,#dspSavedOverlay .dsp-saved-direct-row:focus-visible{outline:2px solid var(--gold2,#b7a16f);outline-offset:2px}
+
+
+/* MEIN DAR PERSONAL DASHBOARD V1 · source-backed, theme adaptive, mobile/fold/tablet. */
+#appView .dsp-my-dar{width:100%;max-width:1080px;margin:0 auto 24px;color:var(--text,#233d34)}
+#appView .dsp-my-hero{
+ padding:clamp(17px,3vw,30px)!important;
+ background:linear-gradient(125deg,color-mix(in srgb,var(--card,#fff) 93%,var(--gold2,#b69a64)),color-mix(in srgb,var(--card,#fff) 89%,var(--bg,#e5eee7)))!important;
+ border:1px solid color-mix(in srgb,var(--gold2,#b69a64) 35%,var(--line,#d7dfd7))!important;
+ border-radius:23px!important;box-shadow:0 12px 30px rgba(15,35,27,.06)!important;
+}
+#appView .dsp-my-hero h2{font-size:clamp(25px,5vw,39px)!important}
+#appView .dsp-my-hero p{font-size:clamp(11px,2vw,13px)!important;line-height:1.6!important}
+#appView .dsp-my-hero .dsp-account-figure{width:clamp(68px,15vw,112px)!important;flex:0 0 clamp(68px,15vw,112px)!important}
+#appView .dsp-my-hero .dsp-avatar{width:100%!important;height:clamp(76px,17vw,122px)!important;object-fit:contain!important}
+#appView .dsp-my-profile-button{
+ display:inline-flex!important;align-items:center!important;gap:8px!important;
+ padding:9px 12px!important;min-height:40px!important;margin-top:13px!important;
+ border:1px solid color-mix(in srgb,var(--gold2,#b69a64) 36%,var(--line,#d7dfd7))!important;
+ border-radius:999px!important;background:color-mix(in srgb,var(--card,#fff) 95%,var(--gold2,#b69a64))!important;
+ color:var(--text,#233d34)!important;font:650 11px/1.2 system-ui,sans-serif!important;
+}
+#appView .dsp-my-profile-button span{font-size:19px;color:var(--gold2,#a78d59)}
+#appView .dsp-my-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0 22px}
+#appView .dsp-my-stats>div{
+ min-width:0;display:grid;gap:5px;align-content:center;
+ min-height:77px;padding:13px 14px;border-radius:16px;
+ border:1px solid color-mix(in srgb,var(--gold2,#ad9362) 24%,var(--line,#d9e0d8));
+ background:color-mix(in srgb,var(--card,#fff) 96%,var(--gold2,#b69a64));
+}
+#appView .dsp-my-stats strong{font:700 clamp(21px,4vw,30px)/1.05 Georgia,serif;color:var(--text,#233d34);font-variant-numeric:tabular-nums}
+#appView .dsp-my-stats span{font:600 10px/1.4 system-ui,sans-serif;color:var(--muted,#657469)}
+#appView .dsp-my-section{margin:20px 0 26px;min-width:0}
+#appView .dsp-my-section-heading{display:flex;align-items:start;justify-content:space-between;flex-wrap:wrap;gap:5px 14px;margin:0 0 13px}
+#appView .dsp-my-section-heading h3{font:650 clamp(19px,3.5vw,25px)/1.2 Georgia,serif!important;color:var(--text,#233d34)!important;margin:0!important;letter-spacing:-.015em}
+#appView .dsp-my-section-heading small{font:500 11px/1.5 system-ui,sans-serif;color:var(--muted,#657469)!important}
+#appView .dsp-my-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#appView .dsp-my-actions>button{
+ min-width:0;display:grid!important;grid-template-columns:40px minmax(0,1fr)!important;
+ grid-template-rows:auto auto!important;gap:2px 11px!important;align-content:center!important;
+ padding:14px!important;min-height:88px!important;border-radius:17px!important;
+ background:var(--card,#fff)!important;border:1px solid var(--line,#d7dfd7)!important;
+ color:var(--text,#233d34)!important;text-align:left!important;box-shadow:none!important;
+ cursor:pointer!important;
+}
+#appView .dsp-my-actions>button .dsp-my-action-icon{
+ grid-row:1/3;display:grid;place-items:center;align-self:center;
+ width:39px;height:39px;border-radius:13px;
+ background:color-mix(in srgb,var(--gold2,#b69a64) 14%,var(--card,#fff));
+ color:var(--gold2,#a78d59);font:500 25px/1 Georgia,serif;
+}
+#appView .dsp-my-actions>button strong{align-self:end;font:700 12px/1.35 system-ui,sans-serif;color:inherit}
+#appView .dsp-my-actions>button small{font:500 10px/1.4 system-ui,sans-serif;color:var(--muted,#657469)}
+#appView .dsp-my-recommend-list{display:grid;gap:10px}
+#appView .dsp-my-recommend{display:flex;align-items:center;min-width:0;border-radius:16px;border:1px solid var(--line,#d7dfd7);background:var(--card,#fff);overflow:hidden}
+#appView .dsp-my-recommend>button:first-child{flex:1;min-width:0;display:grid;gap:5px;padding:15px!important;border:0!important;background:transparent!important;color:var(--text,#233d34)!important;text-align:left;cursor:pointer}
+#appView .dsp-my-recommend small{color:var(--gold2,#a78d59)!important;font:700 10px/1.2 system-ui,sans-serif}
+#appView .dsp-my-recommend strong{font:650 clamp(13px,2.5vw,15px)/1.4 Georgia,serif;overflow-wrap:anywhere}
+#appView .dsp-my-recommend button span{font:500 10px/1.4 system-ui,sans-serif;color:var(--muted,#657469)}
+#appView .dsp-my-recommend .dsp-my-save{flex:0 0 44px;align-self:stretch;min-height:54px;border:0!important;border-left:1px solid var(--line,#d7dfd7)!important;background:transparent!important;color:var(--gold2,#b69a64)!important;font-size:23px!important;cursor:pointer!important}
+#appView .dsp-my-history-row{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px!important;width:100%!important;min-height:52px!important;margin:0 0 7px!important;padding:11px 14px!important;border:1px solid var(--line,#d7dfd7)!important;border-radius:14px!important;background:var(--card,#fff)!important;color:var(--text,#233d34)!important;text-align:left!important;font:600 12px/1.4 system-ui,sans-serif!important;cursor:pointer!important}
+#appView .dsp-my-history-row span:first-child{min-width:0;overflow-wrap:anywhere}
+#appView .dsp-my-history-row span:last-child{color:var(--gold2,#a78d59);font-size:19px}
+#appView .dsp-my-personalize{margin-bottom:15px!important}
+#appView .dsp-my-privacy{border-top:1px solid var(--line,#d7dfd7);padding-top:14px;color:var(--muted,#657469);font:500 11px/1.6 system-ui,sans-serif}
+#appView .dsp-account-service-heading{display:block!important;max-width:1080px;margin:32px auto 12px;padding-top:17px;border-top:1px solid var(--line,#d7dfd7)}
+#appView .dsp-account-service-heading h3{font:650 clamp(18px,3.5vw,23px)/1.25 Georgia,serif!important;color:var(--text,#233d34)!important;margin:0 0 4px!important}
+#appView .dsp-account-service-heading p{font:500 11px/1.5 system-ui,sans-serif!important;color:var(--muted,#657469)!important;margin:0!important}
+#appView .dsp-my-dar button:focus-visible{outline:2px solid var(--gold2,#b69a64)!important;outline-offset:3px!important}
+#appView .dsp-my-actions>button:active,#appView .dsp-my-recommend>button:active{transform:scale(.995)}
+@media(min-width:760px){
+ #appView .dsp-my-stats{grid-template-columns:repeat(4,minmax(0,1fr))}
+ #appView .dsp-my-actions{grid-template-columns:repeat(3,minmax(0,1fr))}
+ #appView .dsp-my-recommend-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #appView .dsp-my-recommend-list .dsp-my-recommend:first-child{grid-column:1/-1}
+}
+@media(max-width:380px){
+ #appView .dsp-my-hero{padding:14px!important}
+ #appView .dsp-my-hero .dsp-account-figure{width:66px!important;flex-basis:66px!important}
+ #appView .dsp-my-stats>div{padding:10px 8px;min-height:70px}
+ #appView .dsp-my-stats span{font-size:9px}
+ #appView .dsp-my-actions>button{grid-template-columns:32px minmax(0,1fr)!important;gap:2px 6px!important;padding:10px!important}
+ #appView .dsp-my-actions>button .dsp-my-action-icon{width:32px;height:34px;font-size:20px}
+}
+@media(prefers-reduced-motion:reduce){#appView .dsp-my-actions>button:active{transform:none!important}}
+
+
+/* Large-screen composition and legibility improvements for personal page. */
+body.is-account-route #appView .account-panel{
+ width:min(100%,1120px)!important;max-width:1120px!important;margin-inline:auto!important;
+}
+#appView .dsp-my-section-heading small{font-size:12px!important}
+#appView .dsp-my-actions>button strong{font-size:13px!important}
+#appView .dsp-my-actions>button small{font-size:11px!important}
+#appView .dsp-my-stats span{font-size:11px!important}
+#appView .dsp-my-recommend button span{font-size:11px!important}
+#appView .dsp-my-privacy{font-size:12px!important}
+@media(max-width:380px){#appView .dsp-my-stats span{font-size:10px!important}}
+
+/* Use the existing native-looking 3D asset family, without emoji fallback. */
+#appView .dsp-my-actions>button .dsp-my-action-icon img {
+ display:block;width:32px;height:32px;max-width:100%;max-height:100%;
+ object-fit:contain;object-position:center;
+}
+@media(max-width:380px){#appView .dsp-my-actions>button .dsp-my-action-icon img{width:28px;height:28px}}

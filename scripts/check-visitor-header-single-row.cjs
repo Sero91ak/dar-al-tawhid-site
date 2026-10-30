@@ -44,9 +44,13 @@ assert(visitorPicker.includes('row.insertBefore(trigger,theme)'), "Profile butto
 assert(visitorPicker.includes('row.querySelector(".dtbh-toggle")'), "Original palette handler must be reused");
 assert(!visitorPicker.includes("language-classic-v7"), "Visitor must not add language selector");
 assert(testHeader.includes('button("Sprache auswählen","language")'), "Test language shortcut was changed");
-const visitorURL = "/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-shortcuts-v7";
-const pwaURL = "/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-shortcuts-v9";
-assert(visitorLoader.includes(visitorURL), "Visitor lazy-loader still uses old CSS");
-assert(edgeRouter.includes(pwaURL), "Android/PWA edge response still uses old CSS");
-assert(iosWebView.includes("ios-visitor-profile-capsule-20261030"), "Native iOS fallback cache key outdated");
+const pickerURL = "/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-single-hub-v10";
+const dashboardCSS = "/assets/dar-visitor-smart-profile-v1.css?v=20261030-my-dar-dashboard-v11";
+const dashboardJS = "/assets/dar-visitor-smart-profile-v1.js?v=20261030-my-dar-dashboard-v11";
+for(const [name,file] of [["Visitor lazy-loader",visitorLoader],["PWA edge response",edgeRouter]]){
+ assert(file.includes(pickerURL),name+" does not load approved profile-picker style");
+ assert(file.includes(dashboardCSS),name+" does not load current dashboard style");
+ assert(file.includes(dashboardJS),name+" does not load current personal dashboard logic");
+}
+assert(iosWebView.includes("ios-visitor-my-dar-dashboard-20261030"), "Native iOS fallback cache key outdated");
 console.log("PASS: adult visitor brand + profile + palette share one row; no Test/Kids or language regression.");

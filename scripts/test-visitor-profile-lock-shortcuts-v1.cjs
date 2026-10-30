@@ -32,6 +32,24 @@ assert.match(pickerCSS,/540px/,"Keep original compact popup width");
 assert.match(pickerCSS,/@media\(max-width:450px\)/,"Compact iPhone/PWA responsive layout absent");
 assert.match(onboarding,/profileApi\(\)\?\.isLocked\?\.\(\)/,"First-run choices must respect signed-in profile lock");
 
+/* Mein DĀR must remain a first-class dashboard instead of an account-only form. */
+const accountUI=read("assets/dar-account-visibility.js");
+assert.match(accountUI,/setPageHeader\("Mein DĀR"/,"The route must be labelled Mein DĀR");
+assert.match(js,/function accountPanel\(p\)/,"Dashboard rendering missing");
+for(const feature of ["Deine Schnellzugriffe","Heute für dich ausgewählt","Zuletzt gelesen","Deine Wissensgebiete","Konto & Sync","Meine Notizen","Meine Merkliste"]){
+ assert.ok(js.includes(feature),"Mein DĀR feature missing: "+feature);
+}
+for(const route of ["quran","recent","quiz"])assert.ok(js.includes('data-dsp-open-route="'+route+'"'),"Missing actual navigation: "+route);
+assert.match(js,/dsp-account-mount/,"The existing account surface must contain the personal dashboard");
+assert.match(js,/panel\.querySelector\(":scope > \.dsp-account-mount"\)/,"Idempotent mount is required");
+assert.doesNotMatch(js,/panel\.querySelector\("#darTestSmartAccount"\)/,"Never nest duplicate dashboard sections");
+assert.match(js,/Kontofavoriten, Qurʾān-Lesestand und Quiz-Synchronisierung/,"Local profile data and sync must not be conflated");
+assert.match(js,/var area=g==="woman"/,"Gender-adapted content missing");
+assert.match(js,/g==="man"\?"Dein Männer-Wissensbereich"/,"Men's dashboard missing");
+assert.match(smartCSS,/MEIN DAR PERSONAL DASHBOARD V1/);
+assert.match(smartCSS,/@media\(min-width:760px\)/,"Tablet and unfolded Fold layout missing");
+assert.match(smartCSS,/@media\(max-width:380px\)/,"Narrow front-display layout missing");
+
 let user={id:"acct-22",username:"testaccount"};
 const local=new Map(),listeners={},events=[],win={},document={
  readyState:"loading",body:{classList:{contains:()=>false}},addEventListener:(key,cb)=>{listeners[key]=cb},
