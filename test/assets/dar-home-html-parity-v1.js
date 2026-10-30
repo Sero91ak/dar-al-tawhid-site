@@ -517,7 +517,7 @@ function loadTestSmartProfileV1(){
  }
  if(!document.getElementById("darTestSmartProfileScriptV1")){
   var script=document.createElement("script");script.id="darTestSmartProfileScriptV1";
-  script.src="/test/assets/dar-smart-profile-v1.js?v=20261030-v5";script.defer=true;
+  script.src="/test/assets/dar-smart-profile-v1.js?v=20261030-neutral-profile-v6";script.defer=true;
   document.head.appendChild(script);
  }
  /* Responsive daily knowledge and profile-adaptive navigation: only adult DĀR TEST. */

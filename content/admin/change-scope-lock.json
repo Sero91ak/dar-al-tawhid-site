@@ -8999,6 +8999,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-20T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-neutral-profile-cache-release-20261030",
+      "at": "2026-10-30T21:15:00+01:00",
+      "approvedBy": "user-current-request-visitor-and-test-app-changes-must-appear-20261030",
+      "reason": "Enable test-only current neutral icon and no-login-on-profile-choose update, plus only cache-versioned Test HTML/router/worker delivery. Keep Kids, privacy, PIN, OneSignal and SW untouched.",
+      "paths": [
+        "test/assets/dar-home-html-parity-v1.js",
+        "cloudflare/test-app-worker.js",
+        "cloudflare/site-router.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-08T23:59:00.000Z"
     }
   ],
   "enabled": true
