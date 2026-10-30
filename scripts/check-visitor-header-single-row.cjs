@@ -25,17 +25,27 @@ for(const marker of [
   "grid-row:1!important",
   ".dvp-chooser",
   ".dvp-palette-icon",
-  "PROFILE_ICON_SAFE_AREA_V4"
+  "PROFILE_ICON_SAFE_AREA_V4",
+  "VISITOR_PROFILE_CAPSULE_PARITY_V6"
 ]){
   assert(css.includes(marker), "Missing visitor header/popup contract: "+marker);
 }
+for(const property of [
+ "border:1px solid var(--dtbh-line,rgba(128,91,104,.28))!important;",
+ "background:var(--dtbh-btn,rgba(128,91,104,.10))!important;",
+ "border-radius:13px!important;",
+ "padding:3px!important;"
+]){
+ assert(css.includes(property),"Capsule parity broken: "+property);
+}
+assert(css.includes(".dtbh-row > #darVisitorProfileButtonV1")&&css.includes(".dtbh-row > .dtbh-toggle"),"Profile and palette must use same capsule selector");
 assert(sharedCss.includes("dar-adult-brand-header-height"), "Header spacer height synchronization removed");
 assert(visitorPicker.includes('row.insertBefore(trigger,theme)'), "Profile button order before palette changed");
 assert(visitorPicker.includes('row.querySelector(".dtbh-toggle")'), "Original palette handler must be reused");
 assert(!visitorPicker.includes("language-classic-v7"), "Visitor must not add language selector");
 assert(testHeader.includes('button("Sprache auswählen","language")'), "Test language shortcut was changed");
-const url = "/assets/dar-visitor-profile-picker-v1.css?v=20261030-header-single-row-v5";
+const url = "/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-capsule-parity-v6";
 assert(visitorLoader.includes(url), "Visitor lazy-loader still uses old CSS");
 assert(edgeRouter.includes(url), "Android/PWA edge response still uses old CSS");
-assert(iosWebView.includes("ios-visitor-header-single-row-20261030"), "Native iOS fallback cache key outdated");
+assert(iosWebView.includes("ios-visitor-profile-capsule-20261030"), "Native iOS fallback cache key outdated");
 console.log("PASS: adult visitor brand + profile + palette share one row; no Test/Kids or language regression.");
