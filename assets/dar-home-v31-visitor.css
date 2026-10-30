@@ -1,0 +1,199 @@
+/* Visitor V3.1: dashboard rules only; existing header, prayer, Salām and tab-bar untouched. */
+html.dar-home-v3[data-theme="light"],html.dar-home-v3[data-theme="soft"],html.dar-home-v3[data-theme="eisgold"],html.dar-home-v3[data-theme="light"][data-theme-variant="salbei"]{
+ --dv3-bg:#f1f0e9;--dv3-card:#fffefa;--dv3-ink:#263a32;--dv3-muted:#747c72;--dv3-line:#dbd7cb;--dv3-gold:#a48649;--dv3-hover:#f4f1e9;--dv3-hero:#173d36;--dv3-hero2:#345b4c;
+ color-scheme:light;
+}
+html.dar-home-v3[data-theme="eisgold"]{--dv3-bg:#f5f0e4;--dv3-card:#fff9ed;--dv3-line:#dacdaf;--dv3-hero:#293e42;--dv3-hero2:#47656a}
+html.dar-home-v3[data-theme="light"][data-theme-variant="salbei"]{--dv3-bg:#e9f0e9;--dv3-card:#f8fff8;--dv3-ink:#203c32;--dv3-hero:#315346;--dv3-hero2:#537868}
+html.dar-home-v3[data-theme="dark"],html.dar-home-v3[data-theme="dar-al-layl"]{
+ --dv3-bg:#0c100e;--dv3-card:#191e1a;--dv3-ink:#f0e7d6;--dv3-muted:#b6b3a8;--dv3-line:#464539;--dv3-gold:#d5b776;--dv3-hover:#222920;--dv3-hero:#112f2c;--dv3-hero2:#255448;
+ color-scheme:dark;
+}
+html.dar-home-v3[data-theme="royal"]{--dv3-bg:#081629;--dv3-card:#12233b;--dv3-ink:#f6ebd7;--dv3-muted:#b4c0ca;--dv3-line:#33435a;--dv3-gold:#e4c580;--dv3-hover:#1a2d48;--dv3-hero:#0c2e45;--dv3-hero2:#235b71;color-scheme:dark}
+html.dar-home-v3[data-theme="bordeaux"]{--dv3-bg:#20161b;--dv3-card:#342630;--dv3-ink:#f3e9dc;--dv3-muted:#c1b4b9;--dv3-line:#58424a;--dv3-gold:#e0b786;--dv3-hover:#4c3340;--dv3-hero:#40262f;--dv3-hero2:#69414d;color-scheme:dark}
+html.dar-home-v3 body.is-home-route #dv3HeaderActions{display:flex;gap:5px;flex:0 0 auto}
+html.dar-home-v3 body.is-home-route .dv3-tool{display:grid;place-items:center;width:32px;height:34px;padding:0;border:1px solid var(--dv3-line);border-radius:11px;background:var(--dv3-card);color:var(--dv3-ink);font-size:18px;cursor:pointer}
+html.dar-home-v3 body.is-home-route .dv3-home{width:100%;max-width:900px;margin:0 auto;color:var(--dv3-ink);display:flex;flex-direction:column;gap:12px}
+html.dar-home-v3 body.is-home-route .dv3-home *{box-sizing:border-box}
+html.dar-home-v3 body.is-home-route .dv3-home :is(button,input){font:inherit}
+html.dar-home-v3 body.is-home-route .dv3-home button{cursor:pointer}
+html.dar-home-v3 body.is-home-route .dv3-hometitle{display:flex;align-items:center;justify-content:space-between;gap:8px}
+html.dar-home-v3 body.is-home-route .dv3-hometitle small{display:block;font-size:9px;font-weight:900;letter-spacing:.1em;color:var(--dv3-gold)}
+html.dar-home-v3 body.is-home-route .dv3-hometitle h2{font:750 21px/1.15 Georgia,serif;margin:2px 0 0;color:var(--dv3-ink)}
+html.dar-home-v3 body.is-home-route .dv3-accountlink{display:flex;align-items:center;gap:6px;padding:8px 10px;max-width:57%;border:1px solid var(--dv3-line);border-radius:12px;background:var(--dv3-card);color:var(--dv3-ink);font-size:11px!important;font-weight:760!important;text-align:left}
+html.dar-home-v3 body.is-home-route .dv3-accountlink img{width:18px;height:18px;object-fit:contain}
+html.dar-home-v3 body.is-home-route .dv3-accountlink b{color:var(--dv3-gold)}
+html.dar-home-v3 body.is-home-route .dv3-services{margin-top:-4px}
+html.dar-home-v3 body.is-home-route .dv3-services-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+html.dar-home-v3 body.is-home-route .dv3-services-top span{font-size:9px;font-weight:900;letter-spacing:.1em;color:var(--dv3-muted)}
+html.dar-home-v3 body.is-home-route .dv3-services-top button{border:0;background:transparent;color:var(--dv3-gold);font-weight:800;font-size:10px!important}
+html.dar-home-v3 body.is-home-route .dv3-weather{font-size:11px;line-height:1.25;color:var(--dv3-muted);margin-top:3px}
+html.dar-home-v3 body.is-home-route .dv3-search-box{display:flex;align-items:center;gap:9px;padding:0 12px;background:var(--dv3-card);border:1px solid var(--dv3-line);border-radius:15px;height:44px;min-height:44px}
+html.dar-home-v3 body.is-home-route .dv3-search-label svg{display:block;width:19px;height:19px;color:var(--dv3-gold)}
+html.dar-home-v3 body.is-home-route #homeSearchInput{display:block;min-width:0;width:100%;height:38px;padding:0;border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important;color:var(--dv3-ink)!important;font-size:14px!important}
+html.dar-home-v3 body.is-home-route #homeSearchInput::placeholder{color:var(--dv3-muted)!important}
+html.dar-home-v3 body.is-home-route #dv3SearchClear{background:transparent;border:0;color:var(--dv3-ink);font-size:18px!important}
+html.dar-home-v3 body.is-home-route .dv3-tawhid{display:flex!important;flex-direction:column!important;align-items:flex-start!important;position:relative;overflow:hidden;width:100%;min-height:169px;margin:0;padding:20px 22px 16px;border:1px solid color-mix(in srgb,var(--dv3-gold) 40%,transparent);border-radius:20px;text-align:left;color:#fff8e8!important;background:radial-gradient(ellipse at 92% 10%,rgba(234,217,169,.16),transparent 45%),linear-gradient(115deg,var(--dv3-hero),var(--dv3-hero2))!important;box-shadow:0 12px 24px rgba(0,0,0,.12)!important}
+html.dar-home-v3 body.is-home-route .dv3-tawhid .dv3-kicker{font-size:9px!important;font-weight:900;letter-spacing:.17em;color:#e8d2a2!important}
+html.dar-home-v3 body.is-home-route .dv3-tawhid strong{font:700 clamp(25px,5.7vw,34px)/1.12 Georgia,serif;margin:10px 0 7px;color:#fff9ed!important}
+html.dar-home-v3 body.is-home-route .dv3-description{font-size:12px!important;line-height:1.46;color:#f2ede1!important;max-width:43ch}
+html.dar-home-v3 body.is-home-route .dv3-tawhid-footer{display:flex;align-items:center;justify-content:space-between;gap:14px;font-size:11px!important;font-weight:900;color:#e9d2a0!important;margin-top:13px}
+html.dar-home-v3 body.is-home-route .dv3-tawhid-footer b{font-size:18px}
+html.dar-home-v3 body.is-home-route .dv3-ornament{position:absolute;right:-12px;top:-31px;font-size:205px;line-height:1;color:rgba(251,236,188,.07);font-family:serif;pointer-events:none}
+html.dar-home-v3 body.is-home-route .dv3-section{margin:0;padding:0;min-width:0}
+html.dar-home-v3 body.is-home-route .dv3-section-title{display:flex;align-items:center;justify-content:space-between;gap:7px;margin:0 0 8px}
+html.dar-home-v3 body.is-home-route .dv3-section-title h3{margin:0;color:var(--dv3-ink)!important;font:700 clamp(20px,4.8vw,26px)/1.08 Georgia,serif}
+html.dar-home-v3 body.is-home-route .dv3-section-title button{padding:5px 0;border:0;background:transparent;color:var(--dv3-gold)!important;font-size:11px!important;font-weight:900}
+html.dar-home-v3 body.is-home-route .dv3-posts{overflow:hidden;background:var(--dv3-card);border:1px solid var(--dv3-line);border-radius:16px}
+html.dar-home-v3 body.is-home-route .dv3-post{display:flex;gap:11px;align-items:center;width:100%;min-width:0;min-height:65px;text-align:left;padding:10px 12px;border:0;background:transparent;color:var(--dv3-ink)}
+html.dar-home-v3 body.is-home-route .dv3-post+.dv3-post{border-top:1px solid var(--dv3-line)}
+html.dar-home-v3 body.is-home-route .dv3-post-icon{display:grid;place-items:center;flex:0 0 35px;width:35px;height:35px;background:var(--dv3-hover);border-radius:10px;color:var(--dv3-gold);font-size:20px}
+html.dar-home-v3 body.is-home-route .dv3-post-body{display:block;flex:1 1 auto;min-width:0}
+html.dar-home-v3 body.is-home-route .dv3-post-body small{display:block;color:var(--dv3-gold);font-size:9px;font-weight:900;letter-spacing:.09em}
+html.dar-home-v3 body.is-home-route .dv3-post-body b{display:block;color:var(--dv3-ink);font:700 15px/1.2 Georgia,serif;overflow-wrap:anywhere}
+html.dar-home-v3 body.is-home-route .dv3-post-body em{display:block;font-style:normal;color:var(--dv3-muted);font-size:10px}
+html.dar-home-v3 body.is-home-route .dv3-post-arrow{color:var(--dv3-gold);font-size:18px}
+html.dar-home-v3 body.is-home-route .dv3-quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+html.dar-home-v3 body.is-home-route .dv3-quick{min-width:0;display:flex;align-items:center;gap:8px;min-height:62px;padding:9px;border:1px solid var(--dv3-line);border-radius:13px;background:var(--dv3-card);color:var(--dv3-ink);text-align:left}
+html.dar-home-v3 body.is-home-route .dv3-quick-icon{display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;background:var(--dv3-hover);border-radius:9px}
+html.dar-home-v3 body.is-home-route .dv3-quick-icon img,.dv3-mini-ico img{max-width:27px;max-height:27px;object-fit:contain}
+html.dar-home-v3 body.is-home-route .dv3-quick b{display:block;color:var(--dv3-ink);font-size:12px;font-weight:830;line-height:1.1}
+html.dar-home-v3 body.is-home-route .dv3-quick small{display:block;color:var(--dv3-muted);font-size:9px;line-height:1.25}
+html.dar-home-v3 body.is-home-route .dv3-more{margin-top:8px;padding:0 10px;border:1px solid var(--dv3-line);border-radius:12px;background:var(--dv3-card)}
+html.dar-home-v3 body.is-home-route .dv3-more summary{display:flex;align-items:center;justify-content:space-between;cursor:pointer;min-height:38px;font-size:11px;font-weight:800}
+html.dar-home-v3 body.is-home-route .dv3-more-grid{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--dv3-line);gap:4px;padding:8px 0}
+html.dar-home-v3 body.is-home-route .dv3-more-link{display:flex;align-items:center;gap:5px;padding:5px 4px;border:0;background:transparent;color:var(--dv3-ink);text-align:left;font-size:10px!important}
+html.dar-home-v3 body.is-home-route .dv3-more-link b{margin-left:auto;color:var(--dv3-gold)}
+html.dar-home-v3 body.is-home-route .dv3-mini-ico{flex:0 0 22px}
+html.dar-home-v3 body.is-home-route .dv3-mini-ico img{width:20px;height:20px}
+html.dar-home-v3 body.is-home-route .dv3-bottom{margin:0 0 18px}
+html.dar-home-v3 body.is-home-route #dv3QuranSlot .home-v380-quran-hero{width:100%!important;min-height:62px!important;margin:4px 0!important;padding:9px 12px!important;border:1px solid var(--dv3-line)!important;border-radius:12px!important;background:var(--dv3-card)!important;color:var(--dv3-ink)!important}
+html.dar-home-v3 body.is-home-route .dv3-bottom-row{display:flex;justify-content:space-between;gap:7px;margin-top:6px}
+html.dar-home-v3 body.is-home-route .dv3-bottom-row button{border:0;background:none;color:var(--dv3-gold);font-size:11px!important}
+html.dar-home-v3 body.is-home-route #homeSearchBlock{margin-top:8px!important}
+html.dar-home-v3 body.is-home-route .dv3-theme-panel[hidden]{display:none!important}
+html.dar-home-v3 body.is-home-route .dv3-theme-panel{position:fixed;inset:auto 10px calc(70px + env(safe-area-inset-bottom)) 10px;z-index:9997;max-height:65dvh;overflow:auto;max-width:600px;margin:0 auto;padding:16px;background:var(--dv3-card);border:1px solid var(--dv3-line);border-radius:19px;box-shadow:0 12px 45px rgba(0,0,0,.28);color:var(--dv3-ink)}
+html.dar-home-v3 body.is-home-route .dv3-theme-panel>div:first-child{display:flex;justify-content:space-between;align-items:center}
+html.dar-home-v3 body.is-home-route .dv3-theme-panel>div:first-child button{border:0;background:none;color:var(--dv3-ink);font-size:22px}
+html.dar-home-v3 body.is-home-route .dv3-theme-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:12px}
+html.dar-home-v3 body.is-home-route .dv3-theme-grid button{display:flex;align-items:center;gap:7px;min-height:42px;padding:7px;border:1px solid var(--dv3-line);border-radius:10px;background:var(--dv3-card);color:var(--dv3-ink);text-align:left;font-size:11px!important}
+html.dar-home-v3 body.is-home-route .dv3-theme-grid button[aria-pressed="true"]{border-color:var(--dv3-gold);box-shadow:inset 0 0 0 1px var(--dv3-gold)}
+html.dar-home-v3 body.is-home-route .dv3-color{display:block;flex:0 0 21px;width:21px;height:21px;border:1px solid var(--dv3-line);border-radius:50%;background:#e7e6df}
+html.dar-home-v3 body.is-home-route .dv3-color--dark{background:#17241f}
+html.dar-home-v3 body.is-home-route .dv3-color--soft{background:#f1e9e1}
+html.dar-home-v3 body.is-home-route .dv3-color--eisgold{background:#ddd0ab}
+html.dar-home-v3 body.is-home-route .dv3-color--salbei{background:#a6bfa7}
+html.dar-home-v3 body.is-home-route .dv3-color--royal{background:#162b49}
+html.dar-home-v3 body.is-home-route .dv3-color--bordeaux{background:#4d303e}
+html.dar-home-v3 body.is-home-route .dv3-color--dar-al-layl{background:#09100f}
+@media(max-width:420px){html.dar-home-v3 body.is-home-route #dv3HeaderActions{gap:3px}
+html.dar-home-v3 body.is-home-route .dv3-tool{width:29px;height:30px;font-size:15px}
+html.dar-home-v3 body.is-home-route .dv3-accountlink span{display:none}
+html.dar-home-v3 body.is-home-route .dv3-accountlink{min-width:55px;justify-content:center}}
+html.dar-home-v3 body.is-home-route .dv3-tool img{width:19px;height:19px;object-fit:contain}
+html.dar-home-v3 body.is-home-route .dv3-accountlink img{width:19px;height:19px}
+@media(max-width:420px){html.dar-home-v3 body.is-home-route .dv3-accountlink span{display:block!important;white-space:nowrap;font-size:10px}
+html.dar-home-v3 body.is-home-route .dv3-accountlink{min-width:0;max-width:55%;padding:8px}}
+html.dar-home-v3 body.is-home-route .dv3-ornament{display:none!important}
+html.dar-home-v3 body.is-home-route .dv3-home{
+ gap:13px!important;max-width:920px!important;
+}
+html.dar-home-v3 body.is-home-route .dv3-search-box{
+ background:var(--dv3-card)!important;
+ box-shadow:0 4px 16px rgba(0,0,0,.025)!important;
+ border-radius:15px!important;
+}
+html.dar-home-v3 body.is-home-route .dv3-tawhid{
+ min-height:188px!important;padding:23px 21px 21px!important;border-radius:22px!important;
+ background:radial-gradient(circle at 95% 0%,rgba(215,189,127,.20),transparent 34%),linear-gradient(115deg,var(--dv3-hero),var(--dv3-hero2))!important;
+ box-shadow:0 15px 26px rgba(32,70,54,.14)!important;
+}
+html.dar-home-v3 body.is-home-route .dv3-tawhid strong{
+ font-family:"Iowan Old Style",Georgia,serif!important;
+ font-size:clamp(27px,5.6vw,35px)!important;font-weight:500!important;
+ line-height:1.14!important;margin:11px 0 8px!important;
+}
+html.dar-home-v3 body.is-home-route .dv3-tawhid .dv3-description{
+ font-size:clamp(12px,2.9vw,14px)!important;line-height:1.55!important;
+}
+html.dar-home-v3 body.is-home-route .dv3-tawhid-footer{
+ margin-top:13px!important;font-size:12px!important;
+ border-bottom:1px solid rgba(233,210,160,.40)!important;
+ padding-bottom:5px!important;
+}
+html.dar-home-v3 body.is-home-route .dv3-section-title h3{
+ font-family:"Iowan Old Style",Georgia,serif!important;
+ font-weight:500!important;font-size:clamp(23px,5vw,27px)!important;
+}
+html.dar-home-v3 body.is-home-route .dv3-posts{
+ box-shadow:0 4px 17px rgba(0,0,0,.045)!important;
+}
+html.dar-home-v3 body.is-home-route .dv3-post{min-height:70px!important;padding:12px 14px!important}
+html.dar-home-v3 body.is-home-route .dv3-quick{min-height:63px!important;border-radius:14px!important}
+html.dar-home-v3 body.is-home-route .dv3-post-body b{
+ font-family:"Iowan Old Style",Georgia,serif!important;font-weight:700!important;
+}
+@media(max-width:420px){html.dar-home-v3 body.is-home-route .dv3-tawhid{padding:20px 17px 19px!important}}
+html.dar-home-v3 body.is-home-route .dv3-extras{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:9px!important;margin:4px 0 9px!important;
+}
+html.dar-home-v3 body.is-home-route .dv3-resume-card,
+html.dar-home-v3 body.is-home-route .dv3-today-card{
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;
+ min-width:0!important;text-align:left!important;gap:6px!important;
+ padding:12px 13px!important;margin:0!important;
+ background:var(--dv3-card)!important;
+ color:var(--dv3-ink)!important;border:1px solid var(--dv3-line)!important;
+ border-radius:15px!important;box-shadow:0 3px 13px rgba(0,0,0,.025)!important;
+}
+html.dar-home-v3 body.is-home-route .dv3-resume-card h3,
+html.dar-home-v3 body.is-home-route .dv3-today-card strong{
+ color:var(--dv3-ink)!important;
+ font:500 clamp(16px,3.6vw,20px)/1.15 "Iowan Old Style",Georgia,serif!important;
+ margin:0!important;
+}
+html.dar-home-v3 body.is-home-route .dv3-today-card small{
+ color:var(--dv3-gold)!important;
+ font-size:9px!important;letter-spacing:.09em!important;font-weight:830!important;
+}
+html.dar-home-v3 body.is-home-route .dv3-today-card span{
+ color:var(--dv3-muted)!important;font-size:11px!important;line-height:1.4!important;
+}
+html.dar-home-v3 body.is-home-route .dv3-today-card b{
+ display:block!important;align-self:stretch!important;margin-top:auto!important;
+ padding-top:7px!important;border-top:1px solid var(--dv3-line)!important;
+ color:var(--dv3-gold)!important;font-size:10px!important;
+}
+html.dar-home-v3 body.is-home-route #dv3QuranSlot{width:100%!important}
+html.dar-home-v3 body.is-home-route #dv3QuranSlot .home-v380-quran-hero{
+ width:100%!important;min-height:52px!important;padding:7px 0!important;
+ border:0!important;border-radius:0!important;box-shadow:none!important;
+ background:none!important;background-image:none!important;
+ color:var(--dv3-ink)!important;
+}
+html.dar-home-v3 body.is-home-route #dv3QuranSlot .home-v380-quran-hero__title{
+ font-size:clamp(12px,2.7vw,14px)!important;color:var(--dv3-ink)!important;
+}
+@media(max-width:350px){html.dar-home-v3 body.is-home-route .dv3-extras{grid-template-columns:1fr!important}}
+body.is-home-route .dv3-language{
+ display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:9px 0 12px;
+ margin:4px 0 9px;border-bottom:1px solid color-mix(in srgb,currentColor 18%,transparent);
+ font:600 12px/1.45 system-ui,-apple-system,sans-serif;color:inherit
+}
+body.is-home-route .dv3-language>span{opacity:.78;margin-inline-end:3px}
+body.is-home-route .dv3-language button{
+ min-height:40px;padding:8px 13px;border-radius:999px;
+ border:1px solid color-mix(in srgb,currentColor 27%,transparent);
+ background:transparent;color:inherit;cursor:pointer;
+ font:600 12px/1.3 system-ui,-apple-system,sans-serif;
+ -webkit-tap-highlight-color:transparent;touch-action:manipulation
+}
+body.is-home-route .dv3-language button[aria-pressed="true"]{
+ background:color-mix(in srgb,var(--gold,#bba273) 13%,transparent);
+ border-color:var(--gold,#bba273)
+}
+body.is-home-route .dv3-language button:focus-visible{
+ outline:2px solid var(--gold,#bba273);outline-offset:3px
+}
+html.dar-home-v3 body.is-home-route .home-v380-shell > #darJummahFridayHome{order:-1;width:100%;flex:0 0 auto;margin-bottom:14px}

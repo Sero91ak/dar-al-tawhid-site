@@ -155,6 +155,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-visitor-dashboard-v31-jummah-preserved-20261030",
+      "at": "2026-10-30T07:15:00+01:00",
+      "approvedBy": "user-explicit-push-live-dashboard-v31-20261030",
+      "reason": "Publish existing adult DAR TEST dashboard V3.1 to visitor live. Preserve original Gebetszeiten and full Salām header, Friday Jumuʿah program first until Maghrib, verified-only Friday fallback, five-button bottom navigation. No Kids, native binaries, push/prayer algorithms or religious editorial approvals.",
+      "paths": [
+        "index.html",
+        "assets/dar-home-v31-visitor.js",
+        "assets/dar-home-v31-visitor.css",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-03T23:59:00.000Z"
+    },
+    {
       "id": "adult-test-navigation-static-icon-only-20261030",
       "at": "2026-10-30T00:20:00+01:00",
       "approvedBy": "user-explicit-navbar-stability-test-and-visitor-20261029",
