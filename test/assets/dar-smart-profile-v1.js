@@ -70,14 +70,34 @@ function inventory(){
  }).filter(x=>{if(used.has(x.id))return false;used.add(x.id);return true})
 }
 function eligible(p,items){return items.filter(x=>p.gender==="man"?!x.tags.includes("women"):p.gender==="woman"?x.gender!=="man":true)}
+function catalogPulse(items){
+ // Watch the same canonical published collection used by the app, without
+ // background requests, paid APIs or generated religious claims.
+ var key=K+"known-publications:"+owner(),now=Date.now(),stored;
+ try{stored=JSON.parse(localStorage.getItem(key)||"null")}catch(_){}
+ var ids=items.map(x=>x.id),newIds=new Set(),latest=stored&&stored.newest&&typeof stored.newest==="object"?stored.newest:{};
+ if(!stored||!Array.isArray(stored.ids)){
+  try{localStorage.setItem(key,JSON.stringify({ids:ids.slice(0,1500),newest:{}}))}catch(_){}
+  return newIds
+ }
+ var previous=new Set(stored.ids);
+ var changed=false;
+ ids.forEach(function(id){if(!previous.has(id)){latest[id]=now;newIds.add(id);changed=true}});
+ Object.keys(latest).forEach(function(id){if(now-Number(latest[id])>14*86400000||!ids.includes(id)){delete latest[id];changed=true}else newIds.add(id)});
+ if(changed||stored.ids.length!==ids.length){
+  try{localStorage.setItem(key,JSON.stringify({ids:ids.slice(0,1500),newest:latest}))}catch(_){}
+ }
+ return newIds
+}
 function ranking(p){
- var date=today(),seen=new Set(p.opened),topics=new Set(p.interests);
- return eligible(p,inventory()).map(function(item){
+ var date=today(),seen=new Set(p.opened),topics=new Set(p.interests),source=inventory(),newItems=catalogPulse(source);
+ return eligible(p,source).map(function(item){
   var score=hashText(date+"|"+owner()+"|"+p.gender+"|"+item.id)%490;
   for(var tag of item.tags){if(topics.has(tag))score+=410}
   if(p.gender==="woman"&&item.gender==="woman")score+=1100;
   if(p.gender==="man"&&item.gender==="man")score+=1100;
   if(item.gender==="both"&&p.gender!=="neutral")score+=100;
+  if(newItems.has(item.id))score+=1750;
   if(seen.has(item.id))score-=1300;
   if(p.saved.includes(item.id))score-=450;
   // Rotate daily; never invent titles or religious references.
