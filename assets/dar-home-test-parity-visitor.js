@@ -644,7 +644,7 @@ function loadVisitorSmartDashboard(){
  var styles=[
   ["darVisitorSmartProfileCssV1","/assets/dar-visitor-smart-profile-v1.css?v=20261030-safearea-compact-v4"],
   ["darVisitorDailyHubCssV1","/assets/dar-visitor-daily-hub-v1.css?v=20261030-mehr-responsive-v2"],
-  ["darVisitorProfilePickerCssV1","/assets/dar-visitor-profile-picker-v1.css?v=20261030-header-single-row-v5"],
+  ["darVisitorProfilePickerCssV1","/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-capsule-parity-v6"],
   ["darVisitorOnboardingCssV1","/assets/dar-visitor-onboarding-v1.css?v=20261030-mehr-responsive-v2"]
  ];
  styles.forEach(function(pair){if(document.getElementById(pair[0]))return;
