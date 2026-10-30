@@ -8928,6 +8928,21 @@
         "assets/dar-visitor-daily-hub-v1.js"
       ],
       "expiresAt": "2026-11-08T23:59:00.000Z"
+    },
+    {
+      "id": "adult-android-pwa-global-parity-live-shell-refresh-20261030",
+      "at": "2026-10-30T16:00:00+01:00",
+      "approvedBy": "user-explicit-global-ios-android-pwa-visitor-parity-and-live-push-20261030",
+      "reason": "PWA visitor only: ensure installed Android app uses same adult visitor gender-aware tabs, header icons, home, daily question and onboarding; deliver safe update notice for already-installed Android PWA when worker detects newly published shell. Keep offline/cache v3, existing accounts, user notes, native iOS, Kids, canonical prayer and push unchanged. Explicit global visitor PWA release requested.",
+      "paths": [
+        "pwa/service-worker.js",
+        "assets/dar-pwa-release-notice-v1.js",
+        "assets/dar-pwa-release-notice-v1.css",
+        "cloudflare/site-router.js",
+        "test/tools/check-android-visitor-parity.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-10T23:59:00.000Z"
     }
   ],
   "enabled": true
