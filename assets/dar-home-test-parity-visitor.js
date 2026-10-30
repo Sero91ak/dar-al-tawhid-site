@@ -71,7 +71,7 @@ function nativeText(node,query){var el=node&&node.querySelector(query);return el
 function html(){
  var q=quicks.map(function(a){return '<button type="button" class="dhp-quick" data-dhp-route="'+a[0]+'"><span class="dhp-icon3d" aria-hidden="true"><img src="/assets/dar-3d-icons/'+a[1]+'" alt="" loading="lazy" decoding="async"></span><b>'+a[2]+'</b></button>'}).join("");
  var l=links.map(function(a){return '<button type="button" class="dhp-library-tile" data-dhp-route="'+a[0]+'"><span class="dhp-icon3d" aria-hidden="true"><img src="/assets/dar-3d-icons/'+a[1]+'" alt="" loading="lazy" decoding="async"></span><b>'+a[2]+'</b><small>'+a[3]+'</small></button>'}).join("");
- return '<div class="dhp-content"><div id="dhpFridayMirror" hidden></div>'+
+ return '<div class="dhp-content">'+
   /* Only one logo/name in fixed app header; home has its own source line. */
   '<div class="dhp-home-source-v55">Beiträge nach Qurʾān, Sunnah und Āthār</div>'+ 
   '<button type="button" class="dhp-prayer" data-dhp-route="prayer" aria-label="Gebetszeiten öffnen"><div class="dhp-prayer-top"><div><div class="dhp-kicker">NÄCHSTES GEBET</div><b id="dhpPrayerName">Gebetszeiten</b><div class="dhp-tiny dhp-muted">Standortabhängige Gebetszeiten</div></div><div class="dhp-prayer-right"><div class="dhp-clock" id="dhpPrayerClock">–</div><div class="dhp-tiny dhp-muted" id="dhpPrayerRemain"></div></div></div><div class="dhp-prayer-footer"><span id="dhpPrayerDate">Gebetskalender</span><span id="dhpPrayerHijri"></span><span id="dhpPrayerPlace">Standort</span></div></button>'+
@@ -91,8 +91,7 @@ function html(){
 function stylesheet(){
  return [
 'body.is-home-route .top-shell,body.is-home-route #appView{display:none!important;}',
-'#dhpFridayMirror[hidden]{display:none!important;}',
-'#dhpFridayMirror{width:100%;margin:0 0 12px;border-radius:12px!important;}',
+/* Visible Friday is mounted AFTER the original prayer clock, never above the source line. */
 
 'body:not(.is-home-route) #darHomeHtmlParityV1{display:none!important;}',
 '#darHomeHtmlParityV1{--dhp-bg:var(--dt-page,var(--bg,#f6f5ed));--dhp-paper:var(--dt-card,var(--card,#fffef9));--dhp-ink:var(--dt-ink,var(--text,#243b2d));--dhp-muted:var(--dt-muted,var(--muted,#6e796d));--dhp-accent:var(--dt-accent,var(--gold2,#42674d));--dhp-line:var(--dt-rule,#d8dfd3);--dhp-gold:var(--gold2,#a08a5c);display:block;position:relative;isolation:isolate;width:100%;min-height:calc(100svh - 60px);background:var(--dhp-bg)!important;color:var(--dhp-ink)!important;box-shadow:none!important;overflow:visible!important;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;-webkit-text-size-adjust:100%;}',
@@ -386,6 +385,28 @@ function stylesheet(){
  "#darHomeHtmlParityV1 .dhp-quick .dhp-icon3d{width:38px!important;height:38px!important;flex:0 0 38px!important;}",
  "#darHomeHtmlParityV1 .dhp-quick b{font-size:clamp(12px,2.8vw,14px)!important;line-height:1.25!important;}",
  "@media(max-width:359px){#darHomeHtmlParityV1 .dhp-quick{padding:8px!important;gap:6px!important;}#darHomeHtmlParityV1 .dhp-quick .dhp-icon3d{width:32px!important;height:32px!important;flex-basis:32px!important;}}",
+
+ /* Home parity: original 3-column native prayer clock from hidden canonical header. */
+ "#darHomeHtmlParityV1 .dhp-prayer{display:none!important;}",
+ "body.is-home-route #darHomeHtmlParityV1 #dhpPrayerNativeMount.top-shell.theme-hero-shell{display:block!important;position:relative!important;inset:auto!important;max-width:none!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;margin:8px 0 12px!important;padding:0!important;background:none!important;background-image:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;transform:none!important;opacity:1!important;}",
+ "#darHomeHtmlParityV1 #dhpPrayerNativeMount:before,#darHomeHtmlParityV1 #dhpPrayerNativeMount:after{content:none!important;display:none!important;}",
+ "#darHomeHtmlParityV1 #dhpPrayerNativeMount .header-prayer-hub{display:block!important;width:100%!important;max-width:none!important;margin:0!important;cursor:pointer!important;}",
+ /* Compact Friday card, strictly following the source line and native clock. */
+ "#dhpFridayMirror[hidden]{display:none!important;}",
+ "body.is-home-route #darHomeHtmlParityV1 #dhpFridayMirror.dar-jf-home{display:block!important;max-width:100%!important;margin:0 0 14px!important;padding:0!important;border:1px solid color-mix(in srgb,var(--dhp-gold) 55%,var(--dhp-line))!important;border-radius:17px!important;background:linear-gradient(115deg,color-mix(in srgb,var(--dhp-paper) 95%,var(--dhp-gold) 5%),var(--dhp-paper))!important;box-shadow:0 5px 18px rgba(14,29,21,.06)!important;overflow:hidden!important;color:var(--dhp-ink)!important;}",
+ "#darHomeHtmlParityV1 #dhpFridayMirror .dar-jf-inner{display:flex!important;flex-direction:column!important;gap:4px!important;padding:12px 14px!important;}",
+ "#darHomeHtmlParityV1 #dhpFridayMirror .dar-jf-kicker{font-size:9px!important;font-weight:850!important;letter-spacing:.14em!important;color:var(--dhp-accent)!important;}",
+ "#darHomeHtmlParityV1 #dhpFridayMirror h2{font:700 clamp(18px,4.3vw,21px)/1.18 Georgia,serif!important;margin:0!important;color:var(--dhp-ink)!important;}",
+ "#darHomeHtmlParityV1 #dhpFridayMirror .dar-jf-lead{display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;margin:2px 0 4px!important;font:500 11px/1.45 system-ui,-apple-system,sans-serif!important;color:var(--dhp-muted)!important;}",
+ "#darHomeHtmlParityV1 #dhpFridayMirror .dar-jf-more-wrap{margin:4px 0 0!important;padding:5px 0 0!important;border-top:1px solid var(--dhp-line)!important;}",
+ "#darHomeHtmlParityV1 #dhpFridayMirror .dar-jf-more{display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:27px!important;width:100%!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;color:var(--dhp-ink)!important;}",
+ "#darHomeHtmlParityV1 #dhpFridayMirror .dar-jf-more-title{font-size:11px!important;font-weight:760!important;color:var(--dhp-accent)!important;}",
+ "#darHomeHtmlParityV1 #dhpFridayMirror .dar-jf-more-copy small{font-size:9px!important;color:var(--dhp-muted)!important;}",
+ "#darHomeHtmlParityV1 #dhpFridayMirror .dar-jf-more-arrow{font-size:20px!important;color:var(--dhp-accent)!important;}",
+ /* Remove the 90-115px phantom empty scroll region before the existing footer. */
+ "body.is-home-route #darHomeHtmlParityV1 .dhp-content{height:auto!important;min-height:0!important;max-height:none!important;padding-bottom:12px!important;}",
+ "body.is-home-route #darHomeHtmlParityV1 .dhp-library{margin-bottom:0!important;padding-bottom:0!important;}",
+ "body.is-home-route #darHomeHtmlParityV1 .dhp-section:last-child{margin-bottom:0!important;padding-bottom:0!important;}",
  "html,html body{overscroll-behavior-y:none!important;}",
  ].join("\n");
 }
@@ -544,23 +565,74 @@ function modal(){
  var root=document.getElementById(ID),p=document.getElementById("dv3ThemePanel");
  if(root&&p&&p.parentElement!==root)root.appendChild(p);
 }
+/* Use the ORIGINAL visitor prayer clock, never a second calculation or redesigned time card.
+ * It remains in the hidden canonical header and is mirrored without changing its markup,
+ * its countdown, its settings, or its listeners. The original page owns every update. */
+var lastNativePrayerMarkup="",lastNativePrayerAria="";
+function mirrorNativePrayer(){
+ var root=document.getElementById(ID),hub=document.getElementById("headerPrayerStatus");
+ if(!root||!hub)return;
+ var source=root.querySelector(".dhp-home-source-v55");
+ if(!source)return;
+ var shell=root.querySelector("#dhpPrayerNativeMount");
+ if(!shell){
+  shell=document.createElement("div");
+  shell.id="dhpPrayerNativeMount";
+  shell.className="top-shell theme-hero-shell";
+  shell.setAttribute("aria-label","Originale Gebetszeiten-Uhr");
+  source.insertAdjacentElement("afterend",shell);
+ }
+ var markup=hub.innerHTML,aria=hub.getAttribute("aria-label")||"Gebetszeiten öffnen";
+ if(markup===lastNativePrayerMarkup&&aria===lastNativePrayerAria&&shell.firstElementChild)return;
+ var clone=hub.cloneNode(true);
+ clone.id="dhpNativePrayerStatus";
+ clone.removeAttribute("data-nav");
+ clone.setAttribute("data-dhp-route","prayer");
+ clone.setAttribute("aria-label",aria);
+ clone.querySelectorAll("[id]").forEach(function(node){node.id="dhpNative-"+node.id});
+ shell.replaceChildren(clone);
+ lastNativePrayerMarkup=markup;lastNativePrayerAria=aria;
+}
+/* Official Jumuʿah source remains the single authority for Friday/Maghrib and valid episode.
+ * Display only its actual title and description plus a link to the complete original hub. */
 function mirrorFriday(){
- // Show the official Friday announcement only while the original Jumuʿah controller displays it.
+ var root=document.getElementById(ID);
+ if(!root)return;
  var original=document.querySelector("#appView #darJummahFridayHome");
- var target=document.getElementById("dhpFridayMirror");
- if(!target)return;
- if(!original){if(!target.hidden){target.hidden=true;target.replaceChildren();target.removeAttribute("data-jf-sig")}return}
+ var target=root.querySelector("#dhpFridayMirror");
+ var prayer=root.querySelector("#dhpPrayerNativeMount")||root.querySelector(".dhp-prayer");
+ if(!prayer)return;
+ if(!target){
+  target=document.createElement("section");
+  target.id="dhpFridayMirror";
+  target.className="dar-jf-home";
+  target.setAttribute("aria-label","Jumuʿah am Freitag");
+ }
+ if(target.previousElementSibling!==prayer)prayer.insertAdjacentElement("afterend",target);
+ if(!original){target.hidden=true;target.replaceChildren();target.removeAttribute("data-jf-sig");return}
  var sig=original.getAttribute("data-jf-sig")||"";
  if(!target.hidden&&target.getAttribute("data-jf-sig")===sig)return;
- target.className="dar-jf-home";
  target.setAttribute("data-jf-sig",sig);
- target.innerHTML=original.innerHTML;
  target.hidden=false;
+ var inner=document.createElement("div");inner.className="dar-jf-inner";
+ [".dar-jf-kicker","h2",".dar-jf-lead"].forEach(function(sel){
+  var node=original.querySelector(sel);
+  if(node)inner.appendChild(node.cloneNode(true));
+ });
+ var originalAction=original.querySelector("[data-dar-jf-open]");
+ if(originalAction){
+  var actionWrap=document.createElement("div");
+  actionWrap.className="dar-jf-more-wrap";
+  actionWrap.appendChild(originalAction.cloneNode(true));
+  inner.appendChild(actionWrap);
+ }
+ target.replaceChildren(inner);
 }
+
 function sync(){
  if(!document.body||!document.body.classList.contains("is-home-route"))return;
  var root=create();if(!root)return;
- updateBrand();updatePrayer();recent();quran();modal();mirrorFriday();
+ updateBrand();updatePrayer();recent();quran();modal();mirrorNativePrayer();mirrorFriday();
 }
 function queue(){if(pending)return;pending=true;requestAnimationFrame(function(){pending=false;try{sync()}catch(e){console.warn("Visitor Home parity",e)}})}
 function init(){
