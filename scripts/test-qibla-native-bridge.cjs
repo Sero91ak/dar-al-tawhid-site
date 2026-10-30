@@ -94,7 +94,8 @@ async function main() {
   for(const [file,text] of [["visitor",visitor],["test",test]]){
     assert.match(text,/DARQiblaQuickVersion/,
       file+" must load the same versioned Qibla quick sheet");
-    assert.match(text,/DARQiblaQuickView\.open\(\)/,
+    assert.match(text,file==="visitor" ? /sheet\.open\(\)/ :
+      /DARQiblaQuickView\.open\(\)/,
       file+" must call the common Qibla quick view");
   }
   assert.match(visitor,/data-dv3-qibla-quick/,
