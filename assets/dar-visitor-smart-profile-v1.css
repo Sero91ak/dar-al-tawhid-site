@@ -146,16 +146,6 @@ body.is-account-route #appView .account-sync-list{font-size:11px!important;line-
 @media(min-width:800px){#darHomeHtmlParityV1 .dsp-recommend-list{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
 
-/* Classical profile focus · one prominent, live-linked audience entry */
-#darHomeHtmlParityV1 .dvp-focus{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:172px;margin:12px 0 17px;padding:22px 18px;border-radius:23px;border:1px solid color-mix(in srgb,var(--dhp-gold,#b69d6c) 48%,var(--dhp-line,#394e4e));background:linear-gradient(117deg,#112c35,#173847 70%,#2a4143);color:#f7f0e1;box-shadow:0 8px 28px rgba(9,26,30,.15)}
-#darHomeHtmlParityV1 .dvp-focus--woman{background:linear-gradient(115deg,#183b34,#1b433b 67%,#3b4e42)}
-#darHomeHtmlParityV1 .dvp-focus:before{content:"";position:absolute;inset:9px;border:1px solid rgba(225,197,134,.18);border-radius:17px;pointer-events:none}
-#darHomeHtmlParityV1 .dvp-focus-copy{position:relative;z-index:1;min-width:0;flex:1}
-#darHomeHtmlParityV1 .dvp-focus-kicker{display:block;font-size:9px;font-weight:730;letter-spacing:.14em;color:#debe80}
-#darHomeHtmlParityV1 .dvp-focus h2{margin:7px 0 8px!important;font:600 clamp(21px,4.9vw,29px)/1.2 Georgia,serif!important;color:#faf3e2!important}
-#darHomeHtmlParityV1 .dvp-focus p{max-width:34ch;margin:0 0 13px!important;color:#e4e9df!important;font-size:12px;line-height:1.55}
-#darHomeHtmlParityV1 .dvp-focus button{border:1px solid rgba(220,192,128,.55)!important;background:rgba(214,179,112,.13)!important;color:#f5e6c7!important;border-radius:999px;padding:9px 12px;font-size:11px;font-weight:650;min-height:38px}
-#darHomeHtmlParityV1 .dvp-focus button span{margin-left:7px}
-#darHomeHtmlParityV1 .dvp-focus img{align-self:flex-end;width:clamp(69px,22vw,132px);max-height:176px;object-fit:contain;object-position:bottom;filter:drop-shadow(0 9px 16px rgba(0,0,0,.20));pointer-events:none}
-@media(max-width:375px){#darHomeHtmlParityV1 .dvp-focus{padding:16px 12px}#darHomeHtmlParityV1 .dvp-focus img{width:70px}#darHomeHtmlParityV1 .dvp-focus h2{font-size:20px!important}}
-@media(prefers-reduced-motion:reduce){#darHomeHtmlParityV1 .dvp-focus *{transition:none!important}}
+/* PERSONAL_HOME_COMPACT_V4: fallback for a cached, older profile script.
+   Home never displays a gender focus billboard. Recommendations remain visible. */
+#darHomeHtmlParityV1 .dvp-focus{display:none!important}

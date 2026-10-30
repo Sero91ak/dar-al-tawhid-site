@@ -642,17 +642,17 @@ function loadVisitorSmartDashboard(){
  /* The active adult visitor home owns this bundle. No visitor index duplication. */
  var root=document.head||document.documentElement;
  var styles=[
-  ["darVisitorSmartProfileCssV1","/assets/dar-visitor-smart-profile-v1.css?v=20261030-profile-visitor-v2"],
-  ["darVisitorDailyHubCssV1","/assets/dar-visitor-daily-hub-v1.css?v=20261030-profile-visitor-v2"],
-  ["darVisitorProfilePickerCssV1","/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-visitor-v2"]
+  ["darVisitorSmartProfileCssV1","/assets/dar-visitor-smart-profile-v1.css?v=20261030-safearea-compact-v4"],
+  ["darVisitorDailyHubCssV1","/assets/dar-visitor-daily-hub-v1.css?v=20261030-safearea-compact-v4"],
+  ["darVisitorProfilePickerCssV1","/assets/dar-visitor-profile-picker-v1.css?v=20261030-safearea-compact-v4"]
  ];
  styles.forEach(function(pair){if(document.getElementById(pair[0]))return;
   var link=document.createElement("link");link.rel="stylesheet";link.id=pair[0];link.href=pair[1];root.appendChild(link)
  });
  var scripts=[
-  ["darVisitorSmartProfileJsV1","/assets/dar-visitor-smart-profile-v1.js?v=20261030-profile-visitor-v2"],
-  ["darVisitorProfilePickerJsV1","/assets/dar-visitor-profile-picker-v1.js?v=20261030-profile-visitor-v2"],
-  ["darVisitorDailyHubJsV1","/assets/dar-visitor-daily-hub-v1.js?v=20261030-profile-visitor-v2"]
+  ["darVisitorSmartProfileJsV1","/assets/dar-visitor-smart-profile-v1.js?v=20261030-safearea-compact-v4"],
+  ["darVisitorProfilePickerJsV1","/assets/dar-visitor-profile-picker-v1.js?v=20261030-safearea-compact-v4"],
+  ["darVisitorDailyHubJsV1","/assets/dar-visitor-daily-hub-v1.js?v=20261030-safearea-compact-v4"]
  ];
  scripts.forEach(function(pair){if(document.getElementById(pair[0]))return;
   var script=document.createElement("script");script.id=pair[0];script.src=pair[1];script.async=false;

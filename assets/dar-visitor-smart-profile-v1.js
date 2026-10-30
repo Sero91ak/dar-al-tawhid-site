@@ -135,7 +135,8 @@ function themeOptions(p){
 }
 function interestOptions(p){return TOPICS.filter(a=>!(p.gender==="man"&&a[0]==="women")&&!(p.gender==="woman"&&a[0]==="men")).map(a=>'<button type="button" class="dsp-chip'+(p.interests.includes(a[0])?" is-active":"")+'" data-dsp-interest="'+a[0]+'" aria-pressed="'+p.interests.includes(a[0])+'">'+a[1]+'</button>').join("")}
 function card(p){
- var focusHero=p.gender==="woman"?'<section class="dvp-focus dvp-focus--woman" aria-label="Dein Frauenwissen"><span class="dvp-focus-copy"><span class="dvp-focus-kicker">DEIN PERSÖNLICHER WISSENSBEREICH</span><h2>Wissen für Frauen</h2><p>Fiqh, Wissen, Familie und authentisch belegte Beiträge – direkt und geordnet.</p><button type="button" data-dsp-open-women>Frauenbereich öffnen <span aria-hidden="true">›</span></button></span><img src="'+image("woman")+'" alt="" loading="lazy"></section>':p.gender==="man"?'<section class="dvp-focus dvp-focus--man" aria-label="Dein Wissensweg"><span class="dvp-focus-copy"><span class="dvp-focus-kicker">DEIN PERSÖNLICHER WISSENSWEG</span><h2>Wissen entdecken</h2><p>Tawḥīd, Qurʾān, Sunnah und Fiqh – Themen und geprüfte Veröffentlichungen.</p><button type="button" data-dsp-open-discovery>Wissensbereiche öffnen <span aria-hidden="true">›</span></button></span><img src="'+image("man")+'" alt="" loading="lazy"></section>':'';
+ /* PERSONAL_HOME_COMPACT_V4: no oversized women/man hero. The adaptive tab,
+    profile chooser and source-linked daily recommendations remain fully active. */
  var rs=picks(p),intro=p.gender==="woman"?"Für deinen Frauen-Wissensbereich":p.gender==="man"?"Für deinen Männer-Wissensweg":"Deine tägliche Wissensauswahl";
  var top='<section class="dsp-home" aria-label="Dein persönlicher Wissensweg"><div class="dsp-section-head"><div><h2>Dein Wissensweg heute</h2><small class="dsp-dashboard-context">'+esc(intro)+'</small></div><time>'+new Date().toLocaleDateString("de-DE",{timeZone:"Europe/Berlin",day:"2-digit",month:"long"})+'</time></div>';
  if(rs.length){top+='<div class="dsp-recommend-list">'+rs.map(function(x,i){
@@ -144,7 +145,7 @@ function card(p){
  }).join("")+'</div>'}
  else top+='<p class="dsp-empty">Aus den veröffentlichten Beiträgen sind für diese Auswahl derzeit keine passenden Empfehlungen verfügbar. Die vollständige Bibliothek bleibt über „Beiträge“ erreichbar.</p>';
  top+='<p class="dsp-footnote">Täglich neu zusammengestellt · ausschließlich vorhandene, veröffentlichte Quellen.</p></section>';
- return focusHero+top
+ return top
 }
 var expanded={interests:false,saved:false,settings:false};
 function expandPanel(key,title,sub,content){

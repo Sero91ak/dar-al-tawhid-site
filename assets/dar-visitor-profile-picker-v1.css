@@ -94,3 +94,89 @@
 @media(max-width:370px){
  #darAdultBrandHeaderV2 .dtbh-name{font-size:clamp(15px,4.5vw,18px)!important}
 }
+
+
+/* PROFILE_ICON_SAFE_AREA_V4 — both original Test images stay inside their own
+   appearance/profile capsule, not just inside the fixed app header. No popup
+   clipping: panel remains a separate sibling of the button. */
+#darAdultBrandHeaderV2 #darVisitorProfileButtonV1,
+#darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle{
+ box-sizing:border-box!important;
+ position:relative!important;
+ display:grid!important;
+ place-items:center!important;
+ justify-items:center!important;
+ align-items:center!important;
+ overflow:hidden!important;
+ overflow:clip!important;
+ isolation:isolate!important;
+ padding:3px!important;
+ border-radius:13px!important;
+ -webkit-clip-path:inset(0 round 13px)!important;
+ clip-path:inset(0 round 13px)!important;
+ min-width:0!important;
+ min-height:0!important;
+ transform:none!important;
+}
+#darAdultBrandHeaderV2 #darVisitorProfileButtonV1 > img,
+#darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle > .dvp-palette-icon{
+ display:block!important;
+ position:static!important;
+ box-sizing:border-box!important;
+ width:100%!important;
+ height:100%!important;
+ max-width:35px!important;
+ max-height:35px!important;
+ min-width:0!important;
+ min-height:0!important;
+ margin:0!important;
+ padding:0!important;
+ object-fit:contain!important;
+ object-position:center center!important;
+ vertical-align:middle!important;
+ overflow:hidden!important;
+ transform:none!important;
+ filter:none!important;
+ -webkit-filter:none!important;
+ pointer-events:none!important;
+}
+@media(min-width:700px){
+ #darAdultBrandHeaderV2 #darVisitorProfileButtonV1,
+ #darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle{
+  width:48px!important;height:48px!important;flex:0 0 48px!important;
+  padding:4px!important;
+ }
+ #darAdultBrandHeaderV2 #darVisitorProfileButtonV1 > img,
+ #darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle > .dvp-palette-icon{
+  max-width:38px!important;max-height:38px!important;
+ }
+}
+@media(max-width:699px){
+ #darAdultBrandHeaderV2{
+  padding-inline-start:max(11px,env(safe-area-inset-left,0px))!important;
+  padding-inline-end:max(11px,env(safe-area-inset-right,0px))!important;
+  padding-top:max(env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;
+ }
+ #darAdultBrandHeaderV2 .dtbh-row{
+  grid-template-columns:clamp(40px,11vw,48px) minmax(0,1fr) 41px 41px!important;
+  grid-template-rows:minmax(34px,auto) 41px!important;
+  min-width:0!important;max-width:100%!important;
+  column-gap:clamp(4px,1.8vw,9px)!important;
+ }
+ #darAdultBrandHeaderV2 #darVisitorProfileButtonV1,
+ #darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle{
+  width:41px!important;height:41px!important;
+  max-width:41px!important;max-height:41px!important;
+  padding:3px!important;
+ }
+ #darAdultBrandHeaderV2 #darVisitorProfileButtonV1{
+  grid-column:3!important;grid-row:2!important;
+ }
+ #darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle{
+  grid-column:4!important;grid-row:2!important;
+ }
+ #darAdultBrandHeaderV2 .dtbh-copy{
+  min-width:0!important;
+  overflow:hidden!important;
+ }
+}
