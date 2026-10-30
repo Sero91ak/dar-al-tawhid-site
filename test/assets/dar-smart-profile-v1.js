@@ -26,8 +26,8 @@ function chooseTheme(value){if(value==="keep")return false;
  return false
 }
 function themePick(v){if(!THEMES.includes(v))return;var p=read();p.palette=v;write(p);if(v!=="keep")chooseTheme(v)}
-function image(g){return g==="woman"?"/test/assets/smart-profile/avatar-woman.svg":"/test/assets/smart-profile/avatar-man.svg"}
-function hero(g){return g==="woman"?"/test/assets/smart-profile/hero-woman.svg":"/test/assets/smart-profile/hero-man.svg"}
+function image(g){return g==="woman"?"/test/assets/smart-profile/avatar-woman.svg":g==="man"?"/test/assets/smart-profile/avatar-man.svg":"/test/assets/dar-3d-icons/ilm.png"}
+function hero(g){return g==="woman"?"/test/assets/smart-profile/hero-woman.svg":g==="man"?"/test/assets/smart-profile/hero-man.svg":"/test/assets/dar-3d-icons/dar-home-cinematic-hero.png"}
 function display(g){return g==="woman"?"Mein Frauenbereich":g==="man"?"Mein Männerbereich":"Mein DĀR"}
 function label(g){return g==="woman"?"Frau":g==="man"?"Mann":"Neutral"}
 function hashText(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
@@ -35,7 +35,7 @@ function today(){return new Date().toLocaleDateString("sv-SE",{timeZone:"Europe/
 function classification(x){var s=[x.title,x.category,x.scholar,x.tags,x.description,x.topic].filter(Boolean).join(" ").toLowerCase();var a=[];if(/frau|schwester|ḥiǧāb|hijab|niq[aā]b|menstru|ḥaiḍ|haidh|nik[aā]h|ehefrau|mutter|mütter|tochter|schwanger/.test(s))a.push("women");if(/taw[hḥ]id|ʿaq[iī]da|aqid|širk|shirk|glaubens/.test(s))a.push("tawhid");if(/qur|koran|s[uū]ra|āya|aya|vers/.test(s))a.push("quran");if(/sunn|ḥad[iī][tṯh]|hadith|prophet|salaf|bukh[aā]r|muslim/.test(s))a.push("sunnah");if(/fiqh|gebet|wu[dḍ]u|fasten|zak[aā]t|pflicht|reinheit/.test(s))a.push("fiqh");if(/famil|ehe|kind|eltern|erzieh|mutter|vater/.test(s))a.push("family");if(/adab|akhl[aā]q|charakter|geduld|benehmen|herz|aufrichtig/.test(s))a.push("adab");if(/du[aʿ]|bittgebet|dhikr|[dḏ]ikr/.test(s))a.push("dua");if(/geschichte|ṣaḥ[aā]b|sahab|im[aā]m|gelehrte|biograf/.test(s))a.push("history");return a}
 function inventory(){var raw=[];try{if(typeof posts!=="undefined"&&Array.isArray(posts))raw=posts;else if(Array.isArray(window.posts))raw=window.posts}catch(_){}
 return raw.filter(x=>x&&x.id&&x.title).map(x=>({id:String(x.id),title:String(x.title),sub:[x.scholar,x.category].filter(Boolean).join(" · "),tags:classification(x)}))}
-function picks(p){var arr=inventory();if(!arr.length)return[];var date=today(),seen=new Set(p.opened);
+function picks(p){var arr=inventory();if(!arr.length)return[];if(p.gender==="man"){var general=arr.filter(x=>!x.tags.includes("women"));if(general.length>=3)arr=general}var date=today(),seen=new Set(p.opened);
  arr=arr.map(x=>{var score=hashText(date+"|"+owner()+"|"+x.id)%300;
  x.tags.forEach(tag=>{if(p.interests.includes(tag))score+=450;if(p.gender==="woman"&&tag==="women")score+=650;if(p.gender==="man"&&tag==="women")score-=350});
  if(seen.has(x.id))score-=1000;if(p.saved.includes(x.id))score-=200;
@@ -82,13 +82,14 @@ function updateHome(p){var root=document.getElementById("darHomeHtmlParityV1");i
  var rec=picks(p)[0],todayName=root.querySelector("#dhpTodayName"),todayRow=root.querySelector("#dhpTodayArticle");
  if(rec&&todayName&&todayRow){todayName.textContent=rec.title;todayRow.dataset.dhpRoute="post";todayRow.dataset.dhpValue=rec.id}
 }
+function syncHeaderAvatar(p){document.querySelectorAll(".home-account-pill").forEach(function(pill){var old=pill.querySelector(".dsp-header-avatar");if(p.gender!=="woman"){if(old)old.remove();return}if(!old){old=document.createElement("img");old.className="dsp-header-avatar";old.alt="";old.setAttribute("aria-hidden","true");pill.prepend(old)}old.src=image(p.gender)})}
 function updateAccount(p){if(!document.body.classList.contains("is-account-route"))return;
  var panel=document.querySelector("#appView .account-panel");if(!panel)return;var el=panel.querySelector("#darTestSmartAccount");
  if(!el){el=document.createElement("div");el.className="dsp-account-mount";panel.insertBefore(el,panel.firstChild)}
  var sig=owner()+"|"+JSON.stringify([p.gender,p.palette,p.interests,p.notes,p.saved]);if(el.dataset.dspSig!==sig){el.innerHTML=accountPanel(p);el.dataset.dspSig=sig}
 }
 function refresh(){if(scheduled)return;scheduled=true;requestAnimationFrame(function(){scheduled=false;try{var o=owner(),p=read();if(o!==lastOwner){lastOwner=o;if(p.palette!=="keep")chooseTheme(p.palette)}
- updateHome(p);updateAccount(p)}catch(e){console.warn("DĀR TEST Smart Profile",e)}})}
+ updateHome(p);updateAccount(p);syncHeaderAvatar(p)}catch(e){console.warn("DĀR TEST Smart Profile",e)}})}
 function nav(view,value){try{if(typeof navigate==="function"){navigate(view,value||"");return}}catch(_){}location.hash="#"+view}
 document.addEventListener("click",function(e){
  var b=e.target.closest("[data-dsp-gender],[data-dsp-theme],[data-dsp-interest],[data-dsp-open-account],[data-dsp-open-more],[data-dsp-post],[data-dsp-save],[data-dsp-add-note],[data-dsp-remove-note],[data-dsp-reset]");
