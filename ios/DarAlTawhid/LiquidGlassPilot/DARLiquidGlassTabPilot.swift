@@ -48,6 +48,7 @@ final class DARLiquidGlassTabPilot: UITabBarController, UITabBarControllerDelega
     private var pages: [UIViewController] = []
     private var lastSelectedIndex = 0
     private var isWoman = false
+    private var hostConstraints: [NSLayoutConstraint] = []
 
     init(existingWebAppHost: UIViewController) {
         contentHost = existingWebAppHost
@@ -82,20 +83,25 @@ final class DARLiquidGlassTabPilot: UITabBarController, UITabBarControllerDelega
     // its WKWebsiteDataStore, audio and native WebKit message handlers survive.
     private func attachSingleWebApp(to page: UIViewController) {
         if contentHost.parent === page { return }
-        contentHost.willMove(toParent: nil)
-        contentHost.view.removeFromSuperview()
-        contentHost.removeFromParent()
+        if contentHost.parent != nil {
+            contentHost.willMove(toParent: nil)
+            NSLayoutConstraint.deactivate(hostConstraints)
+            hostConstraints.removeAll()
+            contentHost.view.removeFromSuperview()
+            contentHost.removeFromParent()
+        }
 
         page.addChild(contentHost)
         let view = contentHost.view!
         view.translatesAutoresizingMaskIntoConstraints = false
         page.view.addSubview(view)
-        NSLayoutConstraint.activate([
+        hostConstraints = [
             view.leadingAnchor.constraint(equalTo: page.view.leadingAnchor),
             view.trailingAnchor.constraint(equalTo: page.view.trailingAnchor),
             view.topAnchor.constraint(equalTo: page.view.topAnchor),
             view.bottomAnchor.constraint(equalTo: page.view.bottomAnchor)
-        ])
+        ]
+        NSLayoutConstraint.activate(hostConstraints)
         contentHost.didMove(toParent: page)
     }
 
