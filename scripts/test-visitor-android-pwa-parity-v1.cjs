@@ -31,9 +31,9 @@ for(const key of [
  "darVisitorDailyHubCssV1","darVisitorOnboardingCssV1"
 ])assert.ok(shell.includes(key),"missing Android PWA app module: "+key);
 assert.match(shell,/20261030-android-global-parity-v8/);
-assert.match(shell,/dar-home-test-parity-visitor\.js\?v=20261030-android-global-parity-v8/);
+assert.match(shell,/dar-home-test-parity-visitor\.js\?v=20261030-prayer-hierarchy-v2/);
 assert.match(shell,/dar-noble-3d-icons\.js\?v=20261030-android-global-parity-v8/);
-assert.match(shell,/dar-adult-brand-header-v2\.css\?v=20261030-fixed-occlusion-v2/);
+assert.match(shell,/dar-adult-brand-header-v2\.css\?v=20261030-duo-compact-v1/);
 const manifest=JSON.parse(get("manifest.json"));
 assert.ok(manifest.start_url.startsWith("/pwa/"));
 assert.equal(manifest.scope,"/pwa/");
