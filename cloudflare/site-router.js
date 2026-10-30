@@ -293,15 +293,15 @@ function activateAdultGlobalBrandV2(html) {
    * Reuse the lazy-loader's IDs so each module is loaded at most once. */
   const addons = [
     ['darAdultGlobalBrandStyleV2','<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261030-compact-horizontal-v1">'],
-    ['darVisitorSmartProfileCssV1','<link rel="stylesheet" id="darVisitorSmartProfileCssV1" href="/assets/dar-visitor-smart-profile-v1.css?v=20261030-android-global-parity-v5">'],
+    ['darVisitorSmartProfileCssV1','<link rel="stylesheet" id="darVisitorSmartProfileCssV1" href="/assets/dar-visitor-smart-profile-v1.css?v=20261030-android-global-parity-v8">'],
     ['darVisitorProfilePickerCssV1','<link rel="stylesheet" id="darVisitorProfilePickerCssV1" href="/assets/dar-visitor-profile-picker-v1.css?v=20261030-header-single-row-v5">'],
-    ['darVisitorDailyHubCssV1','<link rel="stylesheet" id="darVisitorDailyHubCssV1" href="/assets/dar-visitor-daily-hub-v1.css?v=20261030-android-global-parity-v5">'],
-    ['darVisitorOnboardingCssV1','<link rel="stylesheet" id="darVisitorOnboardingCssV1" href="/assets/dar-visitor-onboarding-v1.css?v=20261030-android-global-parity-v5">'],
+    ['darVisitorDailyHubCssV1','<link rel="stylesheet" id="darVisitorDailyHubCssV1" href="/assets/dar-visitor-daily-hub-v1.css?v=20261030-android-global-parity-v8">'],
+    ['darVisitorOnboardingCssV1','<link rel="stylesheet" id="darVisitorOnboardingCssV1" href="/assets/dar-visitor-onboarding-v1.css?v=20261030-android-global-parity-v8">'],
     ['darAdultGlobalBrandScriptV2','<script defer id="darAdultGlobalBrandScriptV2" src="/assets/dar-adult-brand-header-v2.js?v=20261022-source-greeting-v5"></' + 'script>'],
-    ['darVisitorSmartProfileJsV1','<script defer id="darVisitorSmartProfileJsV1" src="/assets/dar-visitor-smart-profile-v1.js?v=20261030-android-global-parity-v5"></' + 'script>'],
-    ['darVisitorProfilePickerJsV1','<script defer id="darVisitorProfilePickerJsV1" src="/assets/dar-visitor-profile-picker-v1.js?v=20261030-android-global-parity-v5"></' + 'script>'],
-    ['darVisitorDailyHubJsV1','<script defer id="darVisitorDailyHubJsV1" src="/assets/dar-visitor-daily-hub-v1.js?v=20261030-android-global-parity-v5"></' + 'script>'],
-    ['darVisitorOnboardingJsV1','<script defer id="darVisitorOnboardingJsV1" src="/assets/dar-visitor-onboarding-v1.js?v=20261030-android-global-parity-v5"></' + 'script>']
+    ['darVisitorSmartProfileJsV1','<script defer id="darVisitorSmartProfileJsV1" src="/assets/dar-visitor-smart-profile-v1.js?v=20261030-android-global-parity-v8"></' + 'script>'],
+    ['darVisitorProfilePickerJsV1','<script defer id="darVisitorProfilePickerJsV1" src="/assets/dar-visitor-profile-picker-v1.js?v=20261030-android-global-parity-v8"></' + 'script>'],
+    ['darVisitorDailyHubJsV1','<script defer id="darVisitorDailyHubJsV1" src="/assets/dar-visitor-daily-hub-v1.js?v=20261030-android-global-parity-v8"></' + 'script>'],
+    ['darVisitorOnboardingJsV1','<script defer id="darVisitorOnboardingJsV1" src="/assets/dar-visitor-onboarding-v1.js?v=20261030-android-global-parity-v8"></' + 'script>']
   ];
   const addon = addons.filter(([id]) => !html.includes('id="' + id + '"')).map(([,tag]) => tag).join("");
   if (!addon) return html;
@@ -1428,6 +1428,7 @@ export default {
       headers.set("Cloudflare-CDN-Cache-Control", "no-store");
       headers.set("Pragma", "no-cache");
       headers.set("X-Dar-Surface", "android-pwa-app");
+      headers.set("X-Dar-PWA-Revision", "visitor-android-20261030-v8");
       headers.delete("ETag");
       headers.delete("Content-Length");
       headers.delete("Content-Encoding");
@@ -1471,9 +1472,9 @@ export default {
         html = html.replace('/assets/fold-split.js?v=4', '/assets/fold-split.js?v=5');
         // Android installed PWA: bump URLs for the shared visitor home and 3D icon renderer.
         // An old v3 PWA worker may otherwise return a permanently stale cache-first asset.
-        html = html.replace('/assets/dar-home-test-parity-visitor.js?v=20261030-home-order-clock-v2', '/assets/dar-home-test-parity-visitor.js?v=20261030-android-global-parity-v5');
-        html = html.replaceAll('/assets/dar-noble-3d-icons.js?v=1095', '/assets/dar-noble-3d-icons.js?v=20261030-android-global-parity-v5');
-        html = html.replace('/assets/dar-noble-3d-icons.css?v=1095', '/assets/dar-noble-3d-icons.css?v=20261030-android-global-parity-v5');
+        html = html.replace('/assets/dar-home-test-parity-visitor.js?v=20261030-home-order-clock-v2', '/assets/dar-home-test-parity-visitor.js?v=20261030-android-global-parity-v8');
+        html = html.replaceAll('/assets/dar-noble-3d-icons.js?v=1095', '/assets/dar-noble-3d-icons.js?v=20261030-android-global-parity-v8');
+        html = html.replace('/assets/dar-noble-3d-icons.css?v=1095', '/assets/dar-noble-3d-icons.css?v=20261030-android-global-parity-v8');
         // iPadOS desktop-class Safari identifies as Macintosh, even on a tablet.
         // Check touch capability synchronously before the Android PWA bootstrap.
         const iosPwaGuard =
@@ -1486,6 +1487,8 @@ export default {
           '}catch(e){}})();<\/script>';
         const pwaHead =
           '<base href="/">' +
+          '<link rel="stylesheet" id="darPwaReleaseNoticeCssV1" href="/assets/dar-pwa-release-notice-v1.css?v=20261030-android-v8">' +
+          '<script defer id="darPwaReleaseNoticeJsV1" src="/assets/dar-pwa-release-notice-v1.js?v=20261030-android-v8"></' + 'script>' +
           '<script id="darDedicatedPwaBootV2">' +
           'window.__DAR_PWA_STANDARD_BOOT=true;' +
           'window.__DAR_PWA_DEDICATED_APP=true;' +
