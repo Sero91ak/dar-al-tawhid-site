@@ -12,6 +12,8 @@ on:
       - 'scripts/check-fixed-header-occlusion-browser.py'
       - 'scripts/check-adult-hero-seam.cjs'
       - 'scripts/check-adult-hero-seam-browser.py'
+      - 'scripts/check-adult-hero-route-matrix.cjs'
+      - 'scripts/check-adult-hero-route-matrix-browser.py'
       - 'assets/adult-immersive-hero-v1.css'
       - 'test/assets/adult-immersive-hero-v1.css'
       - 'scripts/check-adult-duo-prayer-layout.cjs'
@@ -44,6 +46,8 @@ on:
       - 'scripts/check-fixed-header-occlusion-browser.py'
       - 'scripts/check-adult-hero-seam.cjs'
       - 'scripts/check-adult-hero-seam-browser.py'
+      - 'scripts/check-adult-hero-route-matrix.cjs'
+      - 'scripts/check-adult-hero-route-matrix-browser.py'
       - 'assets/adult-immersive-hero-v1.css'
       - 'test/assets/adult-immersive-hero-v1.css'
       - 'scripts/check-adult-duo-prayer-layout.cjs'
@@ -81,6 +85,7 @@ jobs:
           node scripts/check-visitor-more-responsive.cjs
           node scripts/check-fixed-header-occlusion.cjs
           node scripts/check-adult-hero-seam.cjs
+          node scripts/check-adult-hero-route-matrix.cjs
           node scripts/check-adult-duo-prayer-layout.cjs
 
   browser-hit-test:
@@ -96,3 +101,4 @@ jobs:
         run: |
           python3 scripts/check-fixed-header-occlusion-browser.py
           python3 scripts/check-adult-hero-seam-browser.py
+          python3 scripts/check-adult-hero-route-matrix-browser.py
