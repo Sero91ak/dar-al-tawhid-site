@@ -42,7 +42,7 @@ function markup(){
  return '<div class="dvp-chooser-head"><span>MEIN DĀR · PERSÖNLICH</span><h2>Mein Wissensprofil</h2><p>Dein Profil und deine persönlichen Funktionen – direkt erreichbar.</p></div>'+
  '<div class="dvp-composite">'+
  '<section class="dvp-select" aria-label="Profilauswahl"><span class="dvp-column-label">WISSENSPROFIL</span>'+options()+
- '<p class="dvp-profile-rule">'+(isLocked?'Mit deinem Konto verbunden. Profilwechsel nur mit erneuter PIN-Anmeldung.':s?'Lege dein Wissensprofil einmalig fest. Danach nur über deine Kontoanmeldung änderbar.':'Als Gast kannst du jederzeit zwischen Frau, Mann und Neutral wechseln.')+'</p></section>'+
+ '<p class="dvp-profile-rule">'+(isLocked?'Für dieses Konto auf diesem Gerät gespeichert. Wechsel nur mit erneuter PIN-Anmeldung.':s?'Lege dein Wissensprofil einmalig fest. Danach nur über deine Kontoanmeldung änderbar.':'Als Gast kannst du jederzeit zwischen Frau, Mann und Neutral wechseln.')+'</p></section>'+
  '<div class="dvp-column-rule" aria-hidden="true"></div>'+quick()+'</div>'+
  '<div class="dvp-foot"><span>'+(s?'Angemeldet: '+esc(String(s.username||"Konto"))+' · Profil '+esc(name(g)):'Gastmodus · '+esc(name(g)))+'</span>'+
  '<button type="button" data-dvp-onboarding>App-Einführung ansehen</button></div>'
