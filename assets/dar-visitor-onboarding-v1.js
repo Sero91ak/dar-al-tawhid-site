@@ -99,6 +99,7 @@ function init(){
    open(0);
   },1800)
  }
+ document.addEventListener("click",function(e){if(e.target&&e.target.closest&&e.target.closest("#darVisitorProfileButtonV1"))setTimeout(launcher,35)},true);
  document.addEventListener("dar:view-rendered",launcher);
  window.addEventListener("hashchange",launcher);
  var view=document.getElementById("appView");
