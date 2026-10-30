@@ -80,11 +80,26 @@ function launcher(){
  if(panel&&!panel.querySelector("[data-dvo-restart]")){
   var b=document.createElement("button");b.type="button";b.className="dvo-profile-replay";b.dataset.dvoRestart="true";b.textContent="App-Einführung ansehen";panel.appendChild(b);
  }
- var more=document.querySelector("#appView .dar-more-v15");
- if(more&&!more.querySelector("[data-dvo-restart]")){
-  var box=document.createElement("section");box.className="dvo-more-replay";box.innerHTML='<div><b>Neu hier?</b><p>Die DĀR-App Schritt für Schritt kennenlernen</p></div><button type="button" data-dvo-restart="true">Einführung starten</button>';
-  more.insertAdjacentElement("afterbegin",box);
+ /* No first-screen promotional block: show one compact replay entry only
+    in Mehr > App. The profile popup retains its own replay shortcut. */
+ var view=document.getElementById("appView");
+ if(!view)return;
+ view.querySelectorAll(".dvo-more-replay:not(.dvo-more-replay--compact)").forEach(function(el){el.remove()});
+ var more=view.querySelector(".dm15-shell")||view.querySelector(".dar-more-v15");
+ if(!more)return;
+ var modern=more.classList.contains("dm15-shell");
+ var target=modern?more.querySelector(".dm15-results"):
+   more.querySelector('.dm-group[data-dm-group="app"] .dm-grid');
+ if(!target)return;
+ var box=more.querySelector(".dvo-more-replay--compact");
+ if(!box){
+  box=document.createElement("div");box.className="dvo-more-replay dvo-more-replay--compact";
+  box.setAttribute("role","group");box.setAttribute("aria-label","App-Einführung erneut ansehen");
+  box.innerHTML='<span><b>App-Einführung</b><small>Die Funktionen kennenlernen</small></span><button type="button" data-dvo-restart="true">Ansehen</button>';
  }
+ if(box.parentElement!==target)target.appendChild(box);
+ box.hidden=modern?!Boolean(more.querySelector('.dm15-category[data-dm15-category="App"].is-current'))||Boolean(more.querySelector('#moreFeatureSearch')?.value):
+  Boolean(more.querySelector('.dm-group[data-dm-group="app"]')?.hidden);
 }
 function init(){
  launcher();
@@ -101,6 +116,14 @@ function init(){
  }
  document.addEventListener("click",function(e){if(e.target&&e.target.closest&&e.target.closest("#darVisitorProfileButtonV1"))setTimeout(launcher,35)},true);
  document.addEventListener("dar:view-rendered",launcher);
+ /* Category and search updates repaint inside the same root (no childList event
+    on #appView). Refresh the compact entry after the existing app handlers. */
+ document.addEventListener("click",function(e){
+  if(e.target?.closest?.("[data-dm15-category],[data-dm-category]"))requestAnimationFrame(launcher);
+ });
+ document.addEventListener("input",function(e){
+  if(e.target?.id==="moreFeatureSearch")requestAnimationFrame(launcher);
+ });
  window.addEventListener("hashchange",launcher);
  var view=document.getElementById("appView");
  if(view)new MutationObserver(launcher).observe(view,{childList:true,subtree:false});
