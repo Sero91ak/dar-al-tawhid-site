@@ -228,3 +228,6 @@ for(const hostFile of ["cloudflare/site-router.js","cloudflare/test-app-worker.j
   fail(hostFile+": zentralen no-overlay-v8 Scroll-Stopp in der HTML-Auslieferung vermisst");
 }
 ok("No-duplicated-hero v9: original image once, scroll-clamp preserved, Test/Visitor parity and native bounce=false");
+
+/* Global edge-gesture acceptance: top stays under fixed Header, no Hero clone. */
+require("./test-adult-top-scroll-boundary-v4.cjs");
