@@ -1,0 +1,93 @@
+/* DĀR TEST · Royal/Classical Daily Knowledge + Adaptive Tab · isolated /test */
+#darDailyKnowledgeCardV1,
+.ddh-dialog-backdrop,
+.ddh-more-quiz{--ddh-ink:var(--dt-ink,var(--text,#29372e));--ddh-surface:var(--dt-card,var(--card,#fffefa));--ddh-border:var(--dt-rule,#d9dacc);--ddh-gold:var(--gold2,#a28b59);color:var(--ddh-ink);box-sizing:border-box;font-family:inherit}
+#darDailyKnowledgeCardV1 *, .ddh-dialog-backdrop *, .ddh-more-quiz *{box-sizing:border-box}
+#darDailyKnowledgeCardV1{
+ display:block;width:100%;max-width:100%;min-width:0;margin:clamp(13px,3vw,21px) auto 18px;
+ padding:0;text-align:left;cursor:pointer;overflow:hidden;position:relative;isolation:isolate;
+ border:1px solid color-mix(in srgb,var(--ddh-gold) 44%,var(--ddh-border));
+ border-radius:clamp(18px,4vw,27px);
+ background:linear-gradient(128deg,color-mix(in srgb,var(--ddh-surface) 95%,#c8ac70) 0%,var(--ddh-surface) 64%,color-mix(in srgb,var(--ddh-surface) 89%,var(--ddh-gold)) 100%);
+ box-shadow:0 8px 32px rgba(8,20,17,.055),0 1px 3px rgba(8,20,17,.035);
+ color:var(--ddh-ink);outline-offset:3px;
+ transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease
+}
+#darDailyKnowledgeCardV1:before{content:"";position:absolute;inset:9px;border:1px solid color-mix(in srgb,var(--ddh-gold) 16%,transparent);border-radius:inherit;pointer-events:none}
+#darDailyKnowledgeCardV1:hover{transform:translateY(-2px);border-color:var(--ddh-gold);box-shadow:0 13px 34px rgba(8,20,17,.095)}
+#darDailyKnowledgeCardV1:active{transform:scale(.994)}
+#darDailyKnowledgeCardV1:focus-visible,.ddh-dialog button:focus-visible,.ddh-more-quiz button:focus-visible{outline:3px solid var(--ddh-gold);outline-offset:3px}
+#darDailyKnowledgeCardV1 .ddh-card-inner{display:grid;grid-template-columns:clamp(48px,13vw,66px) minmax(0,1fr) 16px;align-items:center;column-gap:clamp(10px,2.6vw,20px);min-height:137px;padding:clamp(15px,3.4vw,24px)}
+#darDailyKnowledgeCardV1 .ddh-card-symbol{width:clamp(48px,12vw,66px);aspect-ratio:1;display:grid;place-items:center;border-radius:19px;background:color-mix(in srgb,var(--ddh-gold) 13%,transparent);border:1px solid color-mix(in srgb,var(--ddh-gold) 24%,transparent)}
+#darDailyKnowledgeCardV1 .ddh-card-symbol img{display:block;max-width:86%;max-height:86%;width:57px;height:57px;object-fit:contain}
+#darDailyKnowledgeCardV1 .ddh-card-content{min-width:0;display:grid;gap:5px}
+#darDailyKnowledgeCardV1 .ddh-kicker,.ddh-dialog .ddh-kicker,.ddh-more-quiz .ddh-kicker{display:block;font-size:10px!important;font-weight:750!important;letter-spacing:.15em;text-transform:uppercase;color:var(--ddh-gold);line-height:1.5}
+#darDailyKnowledgeCardV1 h2{margin:0!important;padding:0!important;font-family:Georgia,"Times New Roman",serif;font-size:clamp(18px,4.2vw,23px)!important;font-weight:650!important;line-height:1.25!important;letter-spacing:-.02em;color:inherit!important}
+#darDailyKnowledgeCardV1 p{margin:0!important;font-size:clamp(12px,3vw,14px)!important;font-weight:450;line-height:1.48!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+#darDailyKnowledgeCardV1 .ddh-caption{display:inline-flex;align-items:center;gap:7px;margin-top:2px;font-size:11px!important;opacity:.75}
+#darDailyKnowledgeCardV1 .ddh-caption:before{content:"";height:5px;width:5px;border-radius:100%;background:var(--ddh-gold)}
+#darDailyKnowledgeCardV1 .ddh-card-arrow{font-size:28px;font-weight:300;align-self:center;color:var(--ddh-gold)}
+/* Dark appearance: rich navy, antique gold; never turn the original theme light. */
+html[data-theme="royal"] #darDailyKnowledgeCardV1,
+html[data-theme="dark"] #darDailyKnowledgeCardV1,
+html[data-theme="dar-al-layl"] #darDailyKnowledgeCardV1{
+ --ddh-ink:#f4efe0;--ddh-surface:#152b42;--ddh-border:#3a4a51;--ddh-gold:#d4b77a;
+ background:linear-gradient(127deg,#132b43,#14253a 67%,#203949);
+ box-shadow:inset 0 1px 0 rgba(255,242,203,.10),0 12px 34px rgba(4,12,18,.17)
+}
+.ddh-dialog-backdrop[hidden]{display:none!important}
+.ddh-dialog-backdrop{
+ --ddh-ink:#233a31;--ddh-surface:#fffdf7;--ddh-border:#e4decc;--ddh-gold:#987b45;
+ position:fixed!important;inset:0!important;z-index:2147483001!important;display:grid!important;
+ place-items:center!important;overflow-y:auto!important;overscroll-behavior:contain;
+ padding:max(16px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));
+ background:rgba(5,17,22,.67)!important;backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px)
+}
+.ddh-dialog{width:min(100%,530px)!important;max-height:calc(100dvh - 32px);overflow:auto!important;overscroll-behavior:contain;padding:clamp(19px,4vw,31px)!important;position:relative;background:var(--ddh-surface)!important;border:1px solid color-mix(in srgb,var(--ddh-gold) 38%,var(--ddh-border))!important;border-radius:25px!important;box-shadow:0 25px 95px rgba(0,0,0,.3)!important;color:var(--ddh-ink)!important;outline:none}
+.ddh-dialog:before{content:"";position:absolute;inset:8px;border:1px solid color-mix(in srgb,var(--ddh-gold) 17%,transparent);border-radius:19px;pointer-events:none}
+.ddh-dialog .ddh-dialog-top{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;padding-bottom:16px;border-bottom:1px solid var(--ddh-border)}
+.ddh-dialog h2{margin:5px 0 0!important;font:600 clamp(24px,5vw,32px)/1.14 Georgia,"Times New Roman",serif!important;letter-spacing:-.025em;color:inherit!important}
+.ddh-dialog .ddh-close{appearance:none;border:1px solid var(--ddh-border)!important;border-radius:13px;width:37px;height:37px;flex:none;background:transparent;color:inherit;font-size:26px;line-height:1;cursor:pointer}
+.ddh-question{padding:22px 0 20px}
+.ddh-question>span{font-size:10px;font-weight:700;letter-spacing:.13em;color:var(--ddh-gold)}
+.ddh-question h3{margin:9px 0 0!important;font:600 clamp(19px,4vw,23px)/1.4 Georgia,"Times New Roman",serif!important;color:inherit!important}
+.ddh-answers{display:grid;gap:10px}
+.ddh-answers button{appearance:none;width:100%;min-height:56px;display:grid;grid-template-columns:34px minmax(0,1fr) 18px;align-items:center;gap:11px;text-align:left;border:1px solid var(--ddh-border)!important;background:color-mix(in srgb,var(--ddh-surface) 92%,var(--ddh-gold));border-radius:14px!important;padding:11px 12px!important;color:inherit!important;font-size:14px!important;line-height:1.5;cursor:pointer;transition:border-color .18s ease,background .18s ease}
+.ddh-answers button:hover:not(:disabled){border-color:var(--ddh-gold)!important;background:color-mix(in srgb,var(--ddh-surface) 83%,var(--ddh-gold))}
+.ddh-answers button:disabled{cursor:default;opacity:.8}
+.ddh-answers button.is-correct{border-color:#59856b!important;background:color-mix(in srgb,var(--ddh-surface) 84%,#78ad89)!important;opacity:1}
+.ddh-answers button.is-wrong{border-color:#b67c73!important;background:color-mix(in srgb,var(--ddh-surface) 87%,#d39c92)!important;opacity:1}
+.ddh-answer-letter{width:31px;height:31px;border-radius:10px;border:1px solid var(--ddh-border);display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--ddh-gold)}
+.ddh-result{margin-top:15px;background:color-mix(in srgb,var(--ddh-surface) 90%,var(--ddh-gold));border-left:3px solid var(--ddh-gold);border-radius:0 10px 10px 0;padding:13px 15px}
+.ddh-result strong{font-size:14px;font-weight:700;color:inherit}.ddh-result p{margin:6px 0!important;line-height:1.65;font-size:13px}.ddh-result small{opacity:.7;font-size:11px}
+.ddh-note{font-size:11px;line-height:1.6;opacity:.75;margin:12px 0!important}
+.ddh-dialog-footer{display:flex;justify-content:space-between;gap:12px;margin-top:21px}
+.ddh-dialog-footer button,.ddh-more-actions button{border-radius:12px!important;min-height:43px;padding:11px 15px!important;font-weight:650;font-size:12px;line-height:1.35;cursor:pointer}
+.ddh-dialog-footer .ddh-secondary,.ddh-more-actions button:first-child{color:inherit;border:1px solid var(--ddh-border)!important;background:transparent!important}
+.ddh-dialog-footer .ddh-primary,.ddh-more-actions button:last-child{color:#fffef6!important;background:#1d403b!important;border:1px solid #1d403b!important}
+.ddh-pref{display:flex;align-items:center;gap:10px;margin-top:19px;padding-top:14px;border-top:1px solid var(--ddh-border);font-size:11px;line-height:1.4;opacity:.77;cursor:pointer}
+.ddh-pref input{width:16px;height:16px;accent-color:#1d403b;flex:none}
+html[data-theme="royal"] .ddh-dialog-backdrop,html[data-theme="dark"] .ddh-dialog-backdrop,html[data-theme="dar-al-layl"] .ddh-dialog-backdrop{
+ --ddh-ink:#f4ebda;--ddh-surface:#142b3b;--ddh-border:#3c4c52;--ddh-gold:#dec18b
+}
+html[data-theme="royal"] .ddh-dialog-footer .ddh-primary,html[data-theme="dark"] .ddh-dialog-footer .ddh-primary{background:#9c8054!important;border-color:#9c8054!important;color:#fff!important}
+.ddh-more-quiz{padding:18px;margin:0 0 20px;border-radius:21px;border:1px solid color-mix(in srgb,var(--ddh-gold) 31%,var(--ddh-border));background:var(--ddh-surface);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.ddh-more-quiz h3{margin:5px 0;font:600 19px/1.3 Georgia,"Times New Roman",serif;color:inherit}
+.ddh-more-quiz p{margin:0;font-size:12px;opacity:.75}
+.ddh-more-actions{display:flex;gap:9px;flex-wrap:wrap}
+@media(min-width:720px){
+ #darDailyKnowledgeCardV1 .ddh-card-inner{min-height:154px}
+ #darDailyKnowledgeCardV1{max-width:920px}
+}
+@media(max-width:390px){
+ #darDailyKnowledgeCardV1 .ddh-card-inner{grid-template-columns:43px minmax(0,1fr) 10px;gap:10px;padding:14px}
+ #darDailyKnowledgeCardV1 .ddh-card-symbol{width:43px;border-radius:13px}
+ #darDailyKnowledgeCardV1 .ddh-kicker{font-size:8px!important;letter-spacing:.08em}
+ .ddh-dialog{padding:16px!important}
+ .ddh-dialog-footer{flex-wrap:wrap}
+ .ddh-dialog-footer button{flex:1 1 140px}
+}
+@media(prefers-reduced-motion:reduce){
+ #darDailyKnowledgeCardV1,.ddh-answers button{transition:none!important;animation:none!important}
+ #darDailyKnowledgeCardV1:hover,#darDailyKnowledgeCardV1:active{transform:none}
+}
