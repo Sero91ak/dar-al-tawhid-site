@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#142d32"/><stop offset=".54" stop-color="#42655f"/><stop offset="1" stop-color="#213e3d"/></linearGradient><radialGradient id="light"><stop stop-color="#e2d1a2" stop-opacity=".66"/><stop offset="1" stop-color="#e2d1a2" stop-opacity="0"/></radialGradient><linearGradient id="wall"><stop stop-color="#a8b5a3"/><stop offset="1" stop-color="#4b6863"/></linearGradient></defs>
+<rect width="1200" height="480" fill="url(#bg)"/><circle cx="905" cy="120" r="340" fill="url(#light)"/>
+<g fill="none" stroke="#d9c59f" stroke-opacity=".13" stroke-width="2"><path d="M0 82h1200M0 398h1200M550 0v480M1150 0v480"/><path d="M650 0v480m100-480v480m100-480v480"/></g>
+<path d="M790 478V177Q790 117 850 85Q910 117 910 177v301Z" fill="#adc0ad" opacity=".17"/><path d="M794 478V177Q794 120 850 91Q906 120 906 177v301" stroke="#dac9a5" stroke-width="6" fill="none"/>
+<path d="M905 480V116Q905 55 983 19Q1061 55 1061 116v364" stroke="#d3c59f" stroke-width="9" fill="url(#wall)" opacity=".78"/>
+<path d="M924 480V127Q924 81 983 48Q1042 81 1042 127v353" stroke="#203e3b" stroke-width="6" fill="#1c4142"/>
+<path d="M1008 78l-25-30-25 30" fill="none" stroke="#e8dfbc" stroke-width="4"/>
+<path d="M1089 480V145l43-53 43 53v335" fill="#bdc1a9" opacity=".38"/><path d="M1100 480V152l32-39 31 39v328" fill="#183d41"/>
+<path d="M746 464h454" stroke="#e8d9b2" stroke-opacity=".34" stroke-width="8"/><path d="M773 442h402" stroke="#e8d9b2" stroke-opacity=".22" stroke-width="4"/>
+<path d="M726 472V353h474v119Z" fill="#2e554f" opacity=".62"/>
+<g transform="translate(820 235)"><rect x="0" y="0" width="74" height="156" rx="4" fill="#bca776" opacity=".35"/><rect x="10" y="7" width="54" height="142" rx="5" fill="#36574b"/><path d="M37 20v112m-23-56h46" stroke="#cfbc95" stroke-opacity=".6"/><circle cx="37" cy="74" r="20" fill="none" stroke="#cfbc95" stroke-opacity=".7" stroke-width="2"/></g>
+<g fill="#f6e8bd"><circle cx="798" cy="75" r="2"/><circle cx="1100" cy="65" r="1.8"/><circle cx="753" cy="176" r="1.2"/><circle cx="1174" cy="212" r="1.5"/></g>
+<path d="M0 460Q350 420 680 458T1200 451v29H0Z" fill="#102b31" opacity=".55"/>
+</svg>

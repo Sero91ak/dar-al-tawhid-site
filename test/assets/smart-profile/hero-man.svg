@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#091a2d"/><stop offset=".5" stop-color="#1b3a4c"/><stop offset="1" stop-color="#102838"/></linearGradient><radialGradient id="lit"><stop stop-color="#f0ce89" stop-opacity=".67"/><stop offset="1" stop-color="#eac487" stop-opacity="0"/></radialGradient><linearGradient id="marble"><stop stop-color="#9b987f"/><stop offset="1" stop-color="#435c61"/></linearGradient></defs>
+<rect width="1200" height="480" fill="url(#bg)"/><circle cx="950" cy="90" r="310" fill="url(#lit)"/>
+<g stroke="#d9c49a" opacity=".23" fill="none" stroke-width="2"><path d="M600 0v480M675 0v480m75-480v480m75-480v480m75-480v480"/><path d="M0 413h1200M0 72h1200"/></g>
+<path d="M672 480V170Q672 110 750 78Q828 110 828 170v310" fill="url(#marble)" stroke="#ceb990" stroke-width="7" opacity=".7"/>
+<path d="M693 480V181Q693 131 750 102Q807 131 807 181v299" fill="#112c3b" stroke="#d0b888" stroke-width="3"/>
+<path d="M850 480V117Q850 57 943 15Q1036 57 1036 117v363" fill="url(#marble)" stroke="#d9bf8f" stroke-width="10"/>
+<path d="M878 480V132Q878 86 943 47Q1008 86 1008 132v348" fill="#173b44" stroke="#cfb98f" stroke-width="5"/>
+<path d="M1060 480V136h97v344" fill="#354f56"/><path d="M1072 480V142l37-47 36 47v338" fill="#092537" stroke="#bda77d" stroke-width="4"/>
+<path d="M1041 116h140m-70-36v-35" stroke="#dec58d" stroke-width="4"/>
+<path d="M1111 14c-17 0-26 15-26 28s9 28 26 28c-10-4-15-16-15-28s5-23 15-28" fill="#e4ce9c"/>
+<g transform="translate(889 258)"><path d="M0 108l54-27 54 27-54 31Z" fill="#cab383"/><path d="M8 104l46-28 46 28-46 21Z" fill="#f0e5d0"/><path d="M54 125v52" stroke="#c9ad76" stroke-width="5"/><path d="M0 175h109" stroke="#b5a57d" stroke-width="9"/></g>
+<g fill="#e7d3a2"><circle cx="764" cy="26" r="2"/><circle cx="832" cy="96" r="1.3"/><circle cx="1135" cy="57" r="2"/><circle cx="1025" cy="26" r="1.3"/></g>
+<path d="M0 462Q300 431 600 461T1200 455v25H0Z" fill="#0a1c2d" opacity=".7"/>
+</svg>
