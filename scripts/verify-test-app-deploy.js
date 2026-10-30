@@ -413,21 +413,21 @@ async function fetchVersionBuild(base) {
     for (let attempt=1;attempt<=5;attempt++) {
       try {
         const shell=await fetchText(base+"/?scroll-v4-check="+Date.now());
-        const js=await fetchText(base+"/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-no-overlay-v8");
+        const js=await fetchText(base+"/assets/dar-adult-top-scroll-boundary-v1.js?v=20261030-no-pull-hero-v9");
         const css=await fetchText(base+"/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-no-overlay-v8");
         const htmlOk=shell.status===200
           &&shell.text.includes("darAdultTopBoundaryJsV1")
-          &&shell.text.includes("20261020-no-overlay-v8");
-        const jsOk=js.status===200&&js.text.includes("DAR_ADULT_TOP_SCROLL_BOUNDARY_V3")
+          &&shell.text.includes("20261030-no-pull-hero-v9");
+        const jsOk=js.status===200&&js.text.includes("DAR_ADULT_TOP_SCROLL_BOUNDARY_V4")
           &&js.text.includes("window.innerHeight")&&js.text.includes('stepY>0?"up":"down"')&&js.text.includes("DAR_ADULT_SCROLL_EDGE_NO_OVERLAY_20261020")&&!js.text.includes("darHeroSafeTopFill");
         const cssOk=css.status===200&&css.text.includes("overscroll-behavior-y:none")&&css.text.includes("DAR_ADULT_SCROLL_EDGE_NO_OVERLAY_20261020")&&!css.text.includes("darHeroSafeTopFill")&&css.text.includes("overscroll-behavior-y:none");
         ok=htmlOk&&jsOk&&cssOk;
-        console.log("adult no-cloned-hero v8 "+label+": html="+htmlOk+" js="+jsOk+" css="+cssOk+" attempt="+attempt+"/5");
+        console.log("adult no-cloned-hero v9 "+label+": html="+htmlOk+" js="+jsOk+" css="+cssOk+" attempt="+attempt+"/5");
         if(ok)break;
-      }catch(error){console.log("adult no-cloned-hero v8 "+label+": "+(error.message||error))}
+      }catch(error){console.log("adult no-cloned-hero v9 "+label+": "+(error.message||error))}
       if(attempt<5)await sleep(DELAY_MS);
     }
-    if(!ok)throw new Error("Adult no-cloned-hero V8 not live at "+base);
+    if(!ok)throw new Error("Adult no-cloned-hero V9 not live at "+base);
   }
 
   // HTML_V3_PARITY_LIVE_GUARD: verify real HTML and JS, not just buildId.
