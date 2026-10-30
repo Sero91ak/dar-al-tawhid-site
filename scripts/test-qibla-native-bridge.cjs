@@ -85,6 +85,41 @@ async function main() {
   native.engine.heading.stop();
   assert.equal(native.messages.at(-1).type,"qibla-stop");
   assert.equal(native.intervals.size,0);
+  // Both adult entry points must open this single shared quick sheet, not
+  // duplicate Qibla calculations or silently navigate to a settings-only page.
+  const visitor = fs.readFileSync(path.join(__dirname, "../assets/dar-home-v31-visitor.js"),"utf8");
+  const visitorCss = fs.readFileSync(path.join(__dirname, "../assets/dar-home-v31-visitor.css"),"utf8");
+  const test = fs.readFileSync(path.join(__dirname, "../test/assets/dar-home-html-parity-v1.js"),"utf8");
+  const sharedCss = fs.readFileSync(path.join(__dirname, "../assets/qibla-quick-view.css"),"utf8");
+  for(const [file,text] of [["visitor",visitor],["test",test]]){
+    assert.match(text,/DARQiblaQuickVersion/,
+      file+" must load the same versioned Qibla quick sheet");
+    assert.match(text,/DARQiblaQuickView\.open\(\)/,
+      file+" must call the common Qibla quick view");
+  }
+  assert.match(visitor,/data-dv3-qibla-quick/,
+    "Visitor quick capsule next to the library is required");
+  assert.match(visitor,/dv3-qibla-capsules/,
+    "Visitor quick capsule pair missing");
+  assert.match(visitorCss,/dv3-qibla-capsule/,
+    "Responsive visitor quick capsule layout missing");
+  assert.match(test,/dhp-quick-qibla/,
+    "DAR TEST Qibla capsule must stay");
+  assert.match(source,/data-qibla-coordinates/);
+  assert.match(source,/data-qibla-city-choice/);
+  assert.match(source,/function searchCity\(/);
+  assert.match(source,/function saveManualCoordinates\(/);
+  assert.match(source,/function switchToGps\(/);
+  assert.match(source,/function openAppLocationSettings\(/);
+  assert.match(source,/locationMode: "manual"/);
+  assert.match(source,/locationMode: "auto"/);
+  assert.match(sharedCss,/qibla-qv__city-results/);
+  assert.match(sharedCss,/qibla-qv__coordinates/);
+  assert.equal(valid.window.DARQiblaQuickVersion,"20261030-city-v1");
+  for(const f of ["../assets/dar-home-v31-visitor.js",
+                  "../test/assets/dar-home-html-parity-v1.js"]){
+    new vm.Script(fs.readFileSync(path.join(__dirname,f),"utf8"),{filename:f});
+  }
   console.log("Qibla native GPS + compass bridge regression tests passed.");
 }
 main().catch(err=>{console.error(err);process.exitCode=1;});
