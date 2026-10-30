@@ -8879,6 +8879,22 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-05T23:59:00.000Z"
+    },
+    {
+      "id": "adult-visitor-onboarding-compact-header-secure-sync-review-20261030",
+      "at": "2026-10-30T15:42:00+01:00",
+      "approvedBy": "user-explicit-global-push-github-responsive-header-first-user-tutorial-secure-cross-device-account-sync-20261030",
+      "reason": "Responsive adult visitor fixed header: mark logo, adjacent brand and controls horizontally compact at all smartphone, tablet and fold widths. First-time multi-step guided adult visitor introduction to profile, Quran, Qibla, search, Mehr, quiz, account with safe restart, device local preference and truthful sync descriptions; no Kids or push/location behavior. No remote notes sync before proven authenticated private RLS. User explicitly authorizes production visitor push. Files limited to listed paths.",
+      "paths": [
+        "assets/dar-adult-brand-header-v2.css",
+        "assets/dar-adult-brand-header-v2.js",
+        "assets/dar-visitor-onboarding-v1.css",
+        "assets/dar-visitor-onboarding-v1.js",
+        "assets/dar-visitor-daily-hub-v1.js",
+        "cloudflare/site-router.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-15T23:59:00.000Z"
     }
   ],
   "enabled": true
