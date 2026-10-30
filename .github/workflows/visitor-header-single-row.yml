@@ -9,6 +9,7 @@ on:
       - 'test/assets/dar-test-premium-header-v2.js'
       - 'test/assets/ilm-research-chat.js'
       - 'scripts/check-fixed-header-occlusion.cjs'
+      - 'scripts/check-fixed-header-occlusion-browser.py'
       - 'assets/dar-visitor-daily-hub-v1.js'
       - 'assets/dar-visitor-onboarding-v1.js'
       - 'assets/dar-visitor-onboarding-v1.css'
@@ -32,6 +33,7 @@ on:
       - 'test/assets/dar-test-premium-header-v2.js'
       - 'test/assets/ilm-research-chat.js'
       - 'scripts/check-fixed-header-occlusion.cjs'
+      - 'scripts/check-fixed-header-occlusion-browser.py'
       - 'assets/dar-visitor-daily-hub-v1.js'
       - 'assets/dar-visitor-onboarding-v1.js'
       - 'assets/dar-visitor-onboarding-v1.css'
@@ -62,3 +64,15 @@ jobs:
           node scripts/check-visitor-header-single-row.cjs
           node scripts/check-visitor-more-responsive.cjs
           node scripts/check-fixed-header-occlusion.cjs
+
+  browser-hit-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install browser test driver
+        run: python3 -m pip install --quiet selenium
+      - name: Test actual Chromium hit areas at five device viewports (Test and Visitor)
+        run: python3 scripts/check-fixed-header-occlusion-browser.py
