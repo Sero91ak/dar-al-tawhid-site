@@ -1,5 +1,5 @@
 /* DĀR VISITOR · Smart Profile V1 · 2026-10-30
- * Only /test/ adult. No push, SW, live/visitor, or account authentication changes.
+ * Adult Visitor app only, no Kids, push, service worker or account authentication changes.
  * Per-account settings/notes are DEVICE-LOCAL in this first stage; no false sync claims.
  */
 (function(){
@@ -22,7 +22,7 @@ function fresh(){return {gender:"neutral",palette:"keep",chosen:false,interests:
 function read(){var p=fresh();try{var item=JSON.parse(localStorage.getItem(key())||"null");if(item&&typeof item==="object"){p.gender=["neutral","woman","man"].includes(item.gender)?item.gender:"neutral";p.palette=availableThemes().includes(item.palette)?item.palette:"keep";p.chosen=item.chosen===true;p.interests=Array.isArray(item.interests)?item.interests.filter(x=>TOPICS.some(y=>y[0]===x)).slice(0,9):[];p.notes=Array.isArray(item.notes)?item.notes.filter(x=>x&&typeof x.text==="string").slice(0,40).map(x=>({text:x.text.slice(0,1600),date:String(x.date||"").slice(0,30)})):[];p.saved=Array.isArray(item.saved)?item.saved.filter(x=>typeof x==="string").slice(0,100):[];p.opened=Array.isArray(item.opened)?item.opened.filter(x=>typeof x==="string").slice(0,30):[]}}catch(_){}
 return p}
 function write(p){p.updated=Date.now();try{localStorage.setItem(key(),JSON.stringify(p))}catch(e){console.warn("DĀR VISITOR: Profil kann nicht gespeichert werden",e)}refresh()}
-function saveGender(gender){if(!["woman","man","neutral"].includes(gender))return;var p=read(),previous=p.gender;p.gender=gender;p.chosen=true;if(gender==="man"){p.interests=p.interests.filter(x=>x!=="women");if(previous!=="man"&&!p.interests.includes("tawhid"))p.interests.unshift("tawhid")}if(gender==="woman"&&!p.interests.includes("women"))p.interests.unshift("women");if(!p.interests.length)p.interests=gender==="woman"?["women","quran","family"]:["tawhid","quran","sunnah"];p.interests=p.interests.slice(0,9);write(p)}
+function saveGender(gender){if(!["woman","man","neutral"].includes(gender))return;var p=read(),previous=p.gender;p.gender=gender;p.chosen=true;if(gender==="man"){p.interests=p.interests.filter(x=>x!=="women");if(previous!=="man"&&!p.interests.includes("tawhid"))p.interests.unshift("tawhid")}if(gender==="woman"&&!p.interests.includes("women"))p.interests.unshift("women");if(!p.interests.length)p.interests=gender==="woman"?["women","quran","family"]:["tawhid","quran","sunnah"];p.interests=p.interests.slice(0,9);write(p);document.dispatchEvent(new CustomEvent("dar:visitor-profile-changed",{detail:{gender:p.gender}}))}
 function chooseTheme(value){if(value==="keep")return false;
  var actual=document.querySelector('.dtbh-choice[data-dtbh-theme="'+value+'"]')||document.querySelector('.theme-switch-btn[data-theme-select="'+value+'"]');
  if(actual){actual.click();return true}
@@ -31,7 +31,7 @@ function chooseTheme(value){if(value==="keep")return false;
  return false
 }
 function themePick(v){if(!availableThemes().includes(v))return;var p=read();p.palette=v;write(p);if(v!=="keep")chooseTheme(v)}
-function image(g){return g==="woman"?"/test/assets/smart-profile/approved-woman-v1.webp":g==="man"?"/test/assets/smart-profile/approved-man-v1.webp":"/test/assets/smart-profile/approved-neutral-v1.webp"}
+function image(g){return g==="woman"?"/assets/smart-profile/approved-woman-v1.webp":g==="man"?"/assets/smart-profile/approved-man-v1.webp":"/assets/smart-profile/approved-neutral-v1.webp"}
 function display(g){return g==="woman"?"Mein Frauenbereich":g==="man"?"Mein Männerbereich":"Mein DĀR"}
 function label(g){return g==="woman"?"Frau":g==="man"?"Mann":"Neutral"}
 function hashText(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}

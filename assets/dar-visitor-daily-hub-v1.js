@@ -44,9 +44,9 @@ function navSlot(){
 function syncNav(p){
  var slot=navSlot();if(!slot)return;
  if(!slot.dataset.darOriginalTab)slot.dataset.darOriginalTab=slot.getAttribute("data-bottom-nav")||"quiz";
- var female=p.gender==="woman",male=p.gender==="man";
+ var female=p.gender==="woman";
  var target=female?"frauen":"topics",text=female?"Frauen":"Entdecken";
- // Neutral stays on the original route: never introduce an inaccessible destination.
+ // Male/neutral share Entdecken; Quiz remains reachable from Home and Mehr.
  if(slot.getAttribute("data-bottom-nav")!==target)slot.setAttribute("data-bottom-nav",target);
  slot.dataset.darAdaptiveTab=target;
  slot.setAttribute("aria-label",female?"Frauenbereich öffnen":"Wissensbereiche entdecken");

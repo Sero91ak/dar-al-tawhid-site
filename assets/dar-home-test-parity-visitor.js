@@ -642,17 +642,17 @@ function loadVisitorSmartDashboard(){
  /* The active adult visitor home owns this bundle. No visitor index duplication. */
  var root=document.head||document.documentElement;
  var styles=[
-  ["darVisitorSmartProfileCssV1","/assets/dar-visitor-smart-profile-v1.css?v=20261030-live-v1"],
-  ["darVisitorDailyHubCssV1","/assets/dar-visitor-daily-hub-v1.css?v=20261030-live-v1"],
-  ["darVisitorProfilePickerCssV1","/assets/dar-visitor-profile-picker-v1.css?v=20261030-live-v1"]
+  ["darVisitorSmartProfileCssV1","/assets/dar-visitor-smart-profile-v1.css?v=20261030-profile-visitor-v2"],
+  ["darVisitorDailyHubCssV1","/assets/dar-visitor-daily-hub-v1.css?v=20261030-profile-visitor-v2"],
+  ["darVisitorProfilePickerCssV1","/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-visitor-v2"]
  ];
  styles.forEach(function(pair){if(document.getElementById(pair[0]))return;
   var link=document.createElement("link");link.rel="stylesheet";link.id=pair[0];link.href=pair[1];root.appendChild(link)
  });
  var scripts=[
-  ["darVisitorSmartProfileJsV1","/assets/dar-visitor-smart-profile-v1.js?v=20261030-live-v1"],
-  ["darVisitorProfilePickerJsV1","/assets/dar-visitor-profile-picker-v1.js?v=20261030-live-v1"],
-  ["darVisitorDailyHubJsV1","/assets/dar-visitor-daily-hub-v1.js?v=20261030-live-v1"]
+  ["darVisitorSmartProfileJsV1","/assets/dar-visitor-smart-profile-v1.js?v=20261030-profile-visitor-v2"],
+  ["darVisitorProfilePickerJsV1","/assets/dar-visitor-profile-picker-v1.js?v=20261030-profile-visitor-v2"],
+  ["darVisitorDailyHubJsV1","/assets/dar-visitor-daily-hub-v1.js?v=20261030-profile-visitor-v2"]
  ];
  scripts.forEach(function(pair){if(document.getElementById(pair[0]))return;
   var script=document.createElement("script");script.id=pair[0];script.src=pair[1];script.async=false;

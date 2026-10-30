@@ -26,7 +26,16 @@ function setup(){
  trigger.setAttribute("aria-haspopup","dialog");trigger.setAttribute("aria-controls","darVisitorProfilePanelV1");trigger.setAttribute("aria-expanded","false");
  var avatar=document.createElement("img");avatar.alt="";avatar.decoding="async";avatar.width=36;avatar.height=40;trigger.appendChild(avatar);
  var theme=row.querySelector(".dtbh-toggle");
- if(theme)row.insertBefore(trigger,theme);else row.appendChild(trigger);
+ if(theme){
+  /* Keep original palette action/listener, only replace old SVG by approved Test icon. */
+  var palette=document.createElement("img");palette.className="dvp-palette-icon";
+  palette.src="/assets/header-icons/appearance-classic-v7.png";palette.alt="";
+  palette.width=36;palette.height=36;palette.decoding="async";palette.draggable=false;
+  theme.replaceChildren(palette);
+  theme.setAttribute("aria-label","Erscheinungsbild auswählen");
+  theme.setAttribute("title","Erscheinungsbild auswählen");
+  row.insertBefore(trigger,theme);
+ }else row.appendChild(trigger);
  h.appendChild(panel);
  function sync(){var g=gender();if(avatar.getAttribute("src")!==image(g))avatar.src=image(g);trigger.setAttribute("aria-label","Wissensprofil: "+name(g)+". Ändern");trigger.title="Profil: "+name(g);if(!panel.hidden)panel.innerHTML=markup()}
  function close(focus){panel.hidden=true;trigger.setAttribute("aria-expanded","false");if(focus)trigger.focus()}
@@ -34,7 +43,7 @@ function setup(){
  trigger.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();panel.hidden?open():close(false)});
  panel.addEventListener("click",function(e){var b=e.target.closest("[data-dvp-gender]");if(!b)return;
   e.preventDefault();var a=api();if(a&&a.setGender)a.setGender(b.dataset.dvpGender);
-  document.dispatchEvent(new CustomEvent("dar:visitor-profile-changed",{detail:{gender:b.dataset.dvpGender}}));
+  /* Smart Profile notifies the adaptive tab, recommendations and avatar. */
   close(true);sync();
  });
  document.addEventListener("click",function(e){if(!panel.hidden&&!panel.contains(e.target)&&!trigger.contains(e.target))close(false)});
