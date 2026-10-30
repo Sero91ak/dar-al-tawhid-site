@@ -155,6 +155,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "qibla-shared-quick-capsules-owner-release-20261030",
+      "at": "2026-10-30T13:00:00+01:00",
+      "approvedBy": "user-explicit-qibla-quick-visitor-and-test-global-fix-20261030",
+      "reason": "User expressly commissioned adult Visitor plus DAR TEST Qibla capsule parity with the established shared quick compass. Release only: shared Qibla panel UI city search, GPS/manual coordinates + settings; visitor two-capsule entry; test cache/version parity; regression test and health check. No Kids, prayer algorithm, push, native permissions, secret or unrelated changes. Remove scope after verified release.",
+      "paths": [
+        "assets/qibla-quick-view.js",
+        "assets/qibla-quick-view.css",
+        "assets/dar-home-v31-visitor.js",
+        "assets/dar-home-v31-visitor.css",
+        "test/assets/dar-home-html-parity-v1.js",
+        "scripts/test-qibla-native-bridge.cjs",
+        "scripts/app-health-check.js",
+        "scripts/core-sensitive-change-lock.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-31T12:00:00.000Z"
+    },
+    {
       "id": "dar-test-smart-profiles-women-men-personalization-20261030",
       "at": "2026-10-30T10:00:00+01:00",
       "approvedBy": "user-explicit-implement-smart-personalization-in-dar-test-20261030",

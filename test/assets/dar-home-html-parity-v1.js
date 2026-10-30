@@ -39,10 +39,10 @@ function route(dest,val){if(dest==="library")dest="bibliothek"; // Open the real
  * Reuse the established browser QiblaQuickView when the native sheet is absent. */
 function openQuickQibla(){
  /* Load shared Qibla styling first, then the TEST-only theme adaptation. */
- if(!document.querySelector('link[data-dar-test-qibla-quick-v60]')){
+ if(!document.querySelector('link[data-dar-test-qibla-quick-v61]')){
   var css=document.createElement("link");css.rel="stylesheet";
-  css.href="/assets/qibla-quick-view.css?v=test-qibla-v60";
-  css.setAttribute("data-dar-test-qibla-quick-v60","");
+  css.href="/assets/qibla-quick-view.css?v=test-qibla-city-v61";
+  css.setAttribute("data-dar-test-qibla-quick-v61","");
   document.head.appendChild(css);
  }
  if(!document.querySelector('link[data-dar-test-qibla-theme-v2]')){
@@ -52,26 +52,26 @@ function openQuickQibla(){
   document.head.appendChild(quality);
  }
  try{
-  if(window.DARQiblaQuickView&&typeof window.DARQiblaQuickView.open==="function"){
+  if(window.DARQiblaQuickVersion==="20261030-city-v1"&&window.DARQiblaQuickView&&typeof window.DARQiblaQuickView.open==="function"){
    window.DARQiblaQuickView.open();var title=document.getElementById("qiblaQvTitle");if(title)title.textContent="Qibla-Schnellsuche";return;
   }
  }catch(e){console.warn("Qibla quick view initial open",e)}
- if(window.__darTestQiblaQuickLoading)return;
- window.__darTestQiblaQuickLoading=true;
+ if(window.__darTestQiblaCityQuickLoading)return;
+ window.__darTestQiblaCityQuickLoading=true;
  function finish(){
-  window.__darTestQiblaQuickLoading=false;
+  window.__darTestQiblaCityQuickLoading=false;
   if(window.DARQiblaQuickView&&typeof window.DARQiblaQuickView.open==="function"){
    window.DARQiblaQuickView.open();var title=document.getElementById("qiblaQvTitle");if(title)title.textContent="Qibla-Schnellsuche";return;
   }
   route("qibla");
  }
- var existing=document.querySelector('script[data-dar-test-qibla-quick-v60]');
- if(existing){existing.addEventListener("load",finish,{once:true});existing.addEventListener("error",function(){window.__darTestQiblaQuickLoading=false;route("qibla")},{once:true});return}
+ var existing=document.querySelector('script[data-dar-test-qibla-quick-v61]');
+ if(existing){existing.addEventListener("load",finish,{once:true});existing.addEventListener("error",function(){window.__darTestQiblaCityQuickLoading=false;route("qibla")},{once:true});return}
  var script=document.createElement("script");
- script.src="/assets/qibla-quick-view.js?v=test-qibla-v60";
- script.async=true;script.setAttribute("data-dar-test-qibla-quick-v60","");
+ script.src="/assets/qibla-quick-view.js?v=test-qibla-city-v61";
+ script.async=true;script.setAttribute("data-dar-test-qibla-quick-v61","");
  script.onload=finish;
- script.onerror=function(){window.__darTestQiblaQuickLoading=false;route("qibla")};
+ script.onerror=function(){window.__darTestQiblaCityQuickLoading=false;route("qibla")};
  document.head.appendChild(script);
 }
 function nativeText(node,query){var el=node&&node.querySelector(query);return el?String(el.textContent||"").replace(/\s+/g," ").trim():""}

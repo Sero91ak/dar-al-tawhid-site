@@ -281,7 +281,9 @@
     alignedOnce: false,
     visBound: false,
     nativeLocBound: false,
-    swipeY: null
+    swipeY: null,
+    cityMatches: [],
+    cityRequest: 0
   };
 
   function esc(s) {
@@ -328,6 +330,14 @@
 
   function ensureDom() {
     var el = document.getElementById("qiblaQuickView");
+    // Upgrade a sheet mounted by an older cached JS bundle; do not leave
+    // the new controls invisible after an in-app hot update.
+    if (el && !el.querySelector("[data-qibla-coordinates]")) {
+      try { if (root.DARQiblaQuickView && root.DARQiblaQuickView !== QiblaQuickView)
+        root.DARQiblaQuickView.close(); } catch (e) {}
+      el.remove();
+      el = null;
+    }
     if (el) return el;
     el = document.createElement("div");
     el.id = "qiblaQuickView";
@@ -363,6 +373,25 @@
           '<p class="qibla-qv__hint" data-qibla-hint="1">Live-Kompass startet</p>' +
         "</div>" +
         '<p class="qibla-qv__meta" data-qibla-meta="1"></p>' +
+        '<section class="qibla-qv__location" aria-label="Qibla-Standort und Koordinaten">' +
+          '<p class="qibla-qv__coordinates" data-qibla-coordinates="1" aria-live="polite">Koordinaten werden ermittelt …</p>' +
+          '<div class="qibla-qv__actions">' +
+            '<button type="button" data-qibla-act="gps">GPS aktualisieren</button>' +
+            '<button type="button" data-qibla-act="city">Stadt / Koordinaten</button>' +
+            '<button type="button" data-qibla-act="app-settings">Einstellungen</button>' +
+          '</div>' +
+          '<div class="qibla-qv__city" data-qibla-city="1" hidden>' +
+            '<label for="qiblaQvCitySearch">Stadt oder Postleitzahl suchen</label>' +
+            '<div class="qibla-qv__city-search"><input id="qiblaQvCitySearch" type="search" autocomplete="off" placeholder="z. B. Bonn" /><button type="button" data-qibla-act="search-city">Suchen</button></div>' +
+            '<div class="qibla-qv__city-results" data-qibla-city-results="1" role="group" aria-label="Gefundene Städte"></div>' +
+            '<div class="qibla-qv__city-coords">' +
+              '<label>Breitengrad<input type="number" step="any" min="-90" max="90" data-qibla-lat="1" inputmode="decimal" /></label>' +
+              '<label>Längengrad<input type="number" step="any" min="-180" max="180" data-qibla-lon="1" inputmode="decimal" /></label>' +
+            '</div>' +
+            '<button type="button" class="qibla-qv__save" data-qibla-act="save-coordinates">Koordinaten übernehmen</button>' +
+          '</div>' +
+          '<p class="qibla-qv__location-status" data-qibla-location-status="1" role="status" aria-live="polite"></p>' +
+        '</section>' +
         '<div class="qibla-qv__cal" data-qibla-cal="1">' +
           "<strong>Kompass kalibrieren</strong><br>Bewege das Gerät kurz in Form einer Acht." +
           '<div class="qibla-qv__figure" aria-hidden="true"></div>' +
@@ -374,7 +403,7 @@
       if (ev.target === el) QiblaQuickView.close();
     });
     el.addEventListener("click", function (ev) {
-      var t = ev.target.closest("[data-qibla-close],[data-qibla-act]");
+      var t = ev.target.closest("[data-qibla-close],[data-qibla-act],[data-qibla-city-choice]");
       if (!t) return;
       if (t.getAttribute("data-qibla-close")) {
         QiblaQuickView.close();
@@ -384,6 +413,13 @@
       if (act === "loc") requestLoc(true);
       if (act === "compass") startCompass(true);
       if (act === "settings") engine.permissions.openSettings();
+      if (act === "gps") switchToGps();
+      if (act === "city") toggleCitySearch();
+      if (act === "search-city") searchCity();
+      if (act === "save-coordinates") saveManualCoordinates();
+      if (act === "app-settings") openAppLocationSettings();
+      var choice = t.getAttribute("data-qibla-city-choice");
+      if (choice != null) chooseCity(Number(choice));
     });
     el.addEventListener("touchstart", function (ev) {
       var handle = ev.target.closest("[data-qibla-swipe],.qibla-qv__top");
@@ -401,6 +437,166 @@
       if (ev.key === "Escape" && QiblaQuickView.isOpen()) QiblaQuickView.close();
     }, { passive: true });
     return el;
+  }
+
+  function locationStatus(message) {
+    var el = ui.root && ui.root.querySelector("[data-qibla-location-status]");
+    if (el) el.textContent = String(message || "");
+  }
+
+  function coordinatesText(loc) {
+    if (!loc || !Number.isFinite(loc.lat) || !Number.isFinite(loc.lon)) return "Koordinaten werden ermittelt …";
+    var label = loc.manual || loc.source === "prayer" ? "Gewählter Standort" : "Aktueller Standort";
+    return label + " · " + loc.lat.toFixed(5) + "°, " + loc.lon.toFixed(5) + "°";
+  }
+
+  function toggleCitySearch() {
+    var panel = ui.root && ui.root.querySelector("[data-qibla-city]");
+    if (!panel) return;
+    panel.hidden = !panel.hidden;
+    if (!panel.hidden) {
+      var settings = savedPrayerLocation();
+      var lat = ui.root.querySelector("[data-qibla-lat]");
+      var lon = ui.root.querySelector("[data-qibla-lon]");
+      if (lat && settings) lat.value = String(settings.lat);
+      if (lon && settings) lon.value = String(settings.lon);
+      var input = ui.root.querySelector("#qiblaQvCitySearch");
+      if (input) input.focus();
+    }
+  }
+
+  function saveSelectedLocation(lat, lon, city) {
+    if (!validCoordinate(lat, 90) || !validCoordinate(lon, 180)) {
+      locationStatus("Bitte gültige Koordinaten eingeben.");
+      return false;
+    }
+    if (typeof root.setPrayerSettings !== "function") {
+      locationStatus("Die Standort-Einstellungen stehen gerade nicht zur Verfügung.");
+      return false;
+    }
+    var name = String(city || "").trim() || "Manuell gewählte Koordinaten";
+    try {
+      root.setPrayerSettings({lat: Number(lat), lon: Number(lon), city: name,
+        locationMode: "manual", locationGranted: true,
+        locationUpdatedAt: Date.now()});
+      applyLoc({lat: Number(lat), lon: Number(lon), city: name,
+        source: "prayer", manual: true});
+      var panel = ui.root.querySelector("[data-qibla-city]");
+      if (panel) panel.hidden = true;
+      locationStatus("Standort übernommen. Die Qibla-Richtung wurde aktualisiert.");
+      return true;
+    } catch (err) {
+      locationStatus("Standort konnte nicht gespeichert werden.");
+      return false;
+    }
+  }
+
+  function saveManualCoordinates() {
+    var el = ui.root;
+    if (!el) return;
+    var lat = el.querySelector("[data-qibla-lat]");
+    var lon = el.querySelector("[data-qibla-lon]");
+    var name = el.querySelector("#qiblaQvCitySearch");
+    saveSelectedLocation(lat && lat.value, lon && lon.value, name && name.value);
+  }
+
+  function chooseCity(index) {
+    var hit = ui.cityMatches[index];
+    if (!hit) return;
+    saveSelectedLocation(hit.latitude, hit.longitude,
+      [hit.name, hit.admin1, hit.country].filter(Boolean).join(", "));
+  }
+
+  async function searchCity() {
+    var panel = ui.root;
+    if (!panel) return;
+    var input = panel.querySelector("#qiblaQvCitySearch");
+    var results = panel.querySelector("[data-qibla-city-results]");
+    var term = input ? String(input.value || "").trim() : "";
+    if (term.length < 2 || term.length > 90) {
+      locationStatus("Bitte mindestens zwei Zeichen für die Stadt eingeben.");
+      return;
+    }
+    if (!results) return;
+    results.replaceChildren();
+    locationStatus("Städte werden gesucht …");
+    var serial = ++ui.cityRequest;
+    try {
+      var res = await fetch("https://geocoding-api.open-meteo.com/v1/search?name=" +
+        encodeURIComponent(term) + "&count=8&language=de", {cache: "no-store"});
+      if (!res.ok) throw new Error("city_http");
+      var data = await res.json();
+      if (serial !== ui.cityRequest || !QiblaQuickView.isOpen()) return;
+      ui.cityMatches = (data && Array.isArray(data.results) ? data.results : [])
+        .filter(function(x) {
+          return x && validCoordinate(x.latitude, 90) && validCoordinate(x.longitude, 180);
+        }).slice(0, 8);
+      ui.cityMatches.forEach(function(hit, i) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.setAttribute("data-qibla-city-choice", String(i));
+        button.textContent = [hit.name, hit.admin1, hit.country].filter(Boolean).join(" · ");
+        results.appendChild(button);
+      });
+      locationStatus(ui.cityMatches.length ? "Stadt auswählen, um den Standort zu übernehmen." :
+        "Keine Stadt gefunden. Bitte genauer suchen oder Koordinaten eingeben.");
+    } catch (err) {
+      if (serial === ui.cityRequest) locationStatus("Stadtsuche nicht erreichbar. Koordinaten können direkt eingegeben werden.");
+    }
+  }
+
+  async function switchToGps() {
+    locationStatus("Aktueller GPS-Standort wird ermittelt …");
+    try {
+      var bridge = root.webkit && root.webkit.messageHandlers && root.webkit.messageHandlers.darNative;
+      if (bridge) bridge.postMessage({type: "location-resume"});
+    } catch (e) {}
+    try {
+      var loc = await engine.location.refresh(true);
+      if (!loc || !validCoordinate(loc.lat, 90) || !validCoordinate(loc.lon, 180)) throw new Error("invalid_position");
+      if (typeof root.setPrayerSettings === "function") {
+        root.setPrayerSettings({lat: loc.lat, lon: loc.lon, city: loc.city || "GPS-Standort",
+          locationMode: "auto", locationGranted: true, locationUpdatedAt: Date.now()});
+      }
+      loc.manual = false;
+      applyLoc(loc);
+      // Keep the shared prayer-location label synchronized after changing
+      // from an explicitly chosen city back to automatic GPS.
+      var lookup = typeof root.darResolveLocationCity === "function"
+        ? root.darResolveLocationCity : root.reversePrayerCity;
+      if (typeof lookup === "function") {
+        Promise.resolve(lookup(loc.lat, loc.lon)).then(function(city) {
+          if (!city || !QiblaQuickView.isOpen()) return;
+          var saved = typeof root.getPrayerSettings === "function" ? root.getPrayerSettings() : null;
+          if (!saved || saved.locationMode !== "auto" ||
+              Math.abs(Number(saved.lat) - loc.lat) > 0.003 ||
+              Math.abs(Number(saved.lon) - loc.lon) > 0.003) return;
+          if (typeof root.setPrayerSettings === "function") root.setPrayerSettings({city: String(city)});
+          loc.city = String(city);
+          applyLoc(loc);
+        }).catch(function(){});
+      }
+      var panel = ui.root && ui.root.querySelector("[data-qibla-city]");
+      if (panel) panel.hidden = true;
+      locationStatus("GPS aktiv. Standort und Qibla-Richtung wurden aktualisiert.");
+    } catch (err) {
+      locationStatus("GPS derzeit nicht verfügbar. Die bisherige Stadt bleibt erhalten.");
+    }
+  }
+
+  function openAppLocationSettings() {
+    QiblaQuickView.close();
+    try {
+      if (typeof root.navigate === "function") {
+        root.navigate("settings", "location");
+        return;
+      }
+      if (typeof root.go === "function") {
+        root.go("settings");
+        return;
+      }
+    } catch (e) {}
+    location.hash = "#settings";
   }
 
   function setGate(kind) {
@@ -435,6 +631,8 @@
     var bEl = el.querySelector("[data-qibla-bearing]");
     var hEl = el.querySelector("[data-qibla-hint]");
     var mEl = el.querySelector("[data-qibla-meta]");
+    var coordsEl = el.querySelector("[data-qibla-coordinates]");
+    if (coordsEl) coordsEl.textContent = coordinatesText(engine.loc);
     var dial = el.querySelector("[data-qibla-dial]");
     var kaaba = el.querySelector("[data-qibla-kaaba]");
     if (bearing == null) {
@@ -561,6 +759,9 @@
       document.documentElement.classList.add("qibla-qv-open");
       document.body.classList.add("qibla-qv-open");
       ui.alignedOnce = false;
+      ui.cityMatches = [];
+      ui.cityRequest++;
+      locationStatus("");
       engine.headingDeg = null;
       engine.offset = null;
       if (!ui.visBound) {
@@ -579,6 +780,7 @@
       startCompass(false);
     },
     close: function () {
+      ui.cityRequest++;
       this.stop();
       if (ui.root) ui.root.hidden = true;
       document.documentElement.classList.remove("qibla-qv-open");
@@ -623,5 +825,6 @@
 
   root.DARQiblaCalculator = QiblaCalculator;
   root.DARQiblaEngine = engine;
+  root.DARQiblaQuickVersion = "20261030-city-v1";
   root.DARQiblaQuickView = QiblaQuickView;
 })(typeof window !== "undefined" ? window : globalThis);

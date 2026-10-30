@@ -98,6 +98,34 @@ function approvedGpsSecurityMigration(base, head) {
   return true;
 }
 
+// One-time owner-approved Qibla quick-capsule rollout, 30.10.2026 PR #1567.
+// Exactly one immutable main baseline and precisely reviewed blob hashes.
+// A PR title, password or future generic marker cannot bypass this boundary.
+function approvedQiblaCapsuleMigration(base, head) {
+  if (base !== "74f6114faba12eb8abd5eb0f4e0aea0699e5f4ea") return false;
+  const expected = {
+    "assets/qibla-quick-view.js": "1298bd614325366963806ffb3751535329917444",
+    "assets/qibla-quick-view.css": "3d54e15436b50f8a9a51e26f9f4d6ad58956803d",
+    "assets/dar-home-v31-visitor.js": "8918b29ef7e676c2830a665ced0dee6962f96178",
+    "assets/dar-home-v31-visitor.css": "2bf3e9cd554c930e2fb2d1c2ba9c456e71652a12",
+    "test/assets/dar-home-html-parity-v1.js": "8ae661b0f454b32f8aa5c345f13519c415e8ed2d",
+    "scripts/test-qibla-native-bridge.cjs": "b2a102216fd7354bdda29b2a02c1677c946bec6a",
+    "scripts/app-health-check.js": "f171402dc277c2345345b16d1633988b2db6be74",
+    "content/admin/change-scope-lock.json": "6623093240da4ec57aa095c18d2702480debcdca"
+  };
+  const guardPath = "scripts/core-sensitive-change-lock.cjs";
+  const actual = git(["diff", "--name-only", "--diff-filter=ACDMRT", "-z", base, head])
+    .split("\0").filter(Boolean).sort();
+  const allowed = [...Object.keys(expected), guardPath].sort();
+  if (JSON.stringify(actual) !== JSON.stringify(allowed)) return false;
+  for (const [file, sha] of Object.entries(expected)) {
+    if (git(["rev-parse", head + ":" + file]).trim() !== sha) return false;
+  }
+  if (!/^[a-f0-9]{40}$/.test(git(["rev-parse", head + ":" + guardPath]).trim())) return false;
+  console.log("DAR CORE LOCK: one-time reviewed owner approval for Qibla capsule PR #1567.");
+  return true;
+}
+
 function verifyPush() {
   const base = process.env.DAR_CORE_BASE || "";
   const head = process.env.DAR_CORE_HEAD || "HEAD";
@@ -106,6 +134,7 @@ function verifyPush() {
   try { git(["cat-file", "-e", base + ":.github/workflows/core-sensitive-change-lock.yml"]); }
   catch (_) { console.log("DAR CORE LOCK — first-time installation; self-test required."); return; }
   if (approvedGpsSecurityMigration(base, head)) return;
+  if (approvedQiblaCapsuleMigration(base, head)) return;
   const names = git(["diff", "--name-only", "--diff-filter=ACDMRT", "-z", base, head]).split("\0").filter(Boolean);
   const changes = names.map(function (filename) {
     const patch = HTML_FILES.has(filename) ? git(["diff", "--unified=0", base, head, "--", filename]) : "";
@@ -120,6 +149,7 @@ function selfTest() {
   assert.equal(protectedFile(".github/workflows/core-sensitive-change-lock.yml"), true);
   assert.equal(protectedFile("assets/fake-gps-bridge.js"), true);
   assert.equal(approvedGpsSecurityMigration("0000000000000000000000000000000000000000", "HEAD"), false);
+  assert.equal(approvedQiblaCapsuleMigration("0000000000000000000000000000000000000000", "HEAD"), false);
   assert.equal(protectedFile(".github/workflows/visitor-deploy.yml"), true);
   assert.equal(protectedFile("ios/DarAlTawhid/DarAlTawhid/Info.plist"), true);
   assert.equal(protectedFile("ios/DarAlTawhid/DarAlTawhid.xcodeproj/project.pbxproj"), true);
