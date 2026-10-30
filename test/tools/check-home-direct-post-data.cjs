@@ -23,6 +23,7 @@ function el(tag) {
  return {
   tagName: tag, className: "", textContent: "", dataset: {}, children: [],
   append(...nodes) { this.children.push(...nodes); },
+  appendChild(node) { this.children.push(node); return node; },
   replaceChildren(...nodes) { this.children = [...nodes]; }
  };
 }
