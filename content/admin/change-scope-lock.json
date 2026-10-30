@@ -155,6 +155,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-qibla-existing-fullscreen-focus-release-20261030",
+      "at": "2026-10-30T12:39:00+01:00",
+      "approvedBy": "user-explicit-20261030-qibla-focus-use-exact-screenshot-mehr",
+      "reason": "Only rewire existing Visitor and DAR TEST Qibla capsules to the already implemented fullscreen golden compass used in Mehr/native shortcut; update existing regression tests and health check. Do not change GPS, prayer methods, the Qibla engine, Kids, Swift or Push. Remove this temporary scope after verified deployment.",
+      "paths": [
+        "assets/dar-home-v31-visitor.js",
+        "test/assets/dar-home-html-parity-v1.js",
+        "scripts/test-qibla-native-bridge.cjs",
+        "scripts/app-health-check.js",
+        "scripts/core-sensitive-change-lock.cjs",
+        "test/tools/test-adult-fullscreen-entrypoints.cjs",
+        "test/tools/check-smart-profile-v1.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-31T12:00:00.000Z"
+    },
+    {
       "id": "dar-test-smart-profile-native-ui-fix-20261030",
       "at": "2026-10-30T12:00:00+01:00",
       "approvedBy": "user-urgent-dar-test-video-and-text-corrections-20261030",
