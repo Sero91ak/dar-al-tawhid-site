@@ -82,7 +82,7 @@
       var style = document.createElement("style");
       style.id = id;
       style.textContent = [
-        'html body.is-ilm-chat-route .ilm-chat-header{position:sticky!important;top:0!important;z-index:48!important;display:grid!important;grid-template-columns:88px minmax(0,1fr) 88px!important;align-items:center!important;gap:3px!important;width:100%!important;max-width:100%!important;min-height:70px!important;height:auto!important;margin:0!important;padding:10px max(12px,env(safe-area-inset-right,0px)) 10px max(12px,env(safe-area-inset-left,0px))!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:linear-gradient(180deg,color-mix(in srgb,var(--ilm-header-bg) 64%,var(--ilm-page-bg)),var(--ilm-page-bg))!important;overflow:visible!important}',
+        'html body.is-ilm-chat-route .ilm-chat-header{position:sticky!important;top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,0px))!important;z-index:48!important;display:grid!important;grid-template-columns:88px minmax(0,1fr) 88px!important;align-items:center!important;gap:3px!important;width:100%!important;max-width:100%!important;min-height:70px!important;height:auto!important;margin:0!important;padding:10px max(12px,env(safe-area-inset-right,0px)) 10px max(12px,env(safe-area-inset-left,0px))!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:linear-gradient(180deg,color-mix(in srgb,var(--ilm-header-bg) 64%,var(--ilm-page-bg)),var(--ilm-page-bg))!important;overflow:visible!important}',
         'html body.is-ilm-chat-route .ilm-chat-header::before,html body.is-ilm-chat-route .ilm-chat-header::after{display:none!important;content:none!important}',
         'html body.is-ilm-chat-route .ilm-chat-header .ilm-header-title{justify-self:center!important;min-width:0!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:2px!important}',
         'html body.is-ilm-chat-route .ilm-chat-header .ilm-header-title b{font-size:clamp(1.24rem,4.7vw,1.55rem)!important;line-height:1.08!important;font-weight:620!important;white-space:nowrap!important;text-shadow:none!important}',
@@ -1265,8 +1265,14 @@
           var top = last.getBoundingClientRect().top - scroller.getBoundingClientRect().top + scroller.scrollTop - 20;
           scroller.scrollTo({top:Math.max(0,top),behavior:"instant"});
         } else {
-          var y = window.scrollY + last.getBoundingClientRect().top - 110;
-          if (y > 0) window.scrollTo({top:y,behavior:"instant"});
+          /* The former fixed -110px constant could scroll behind the branded
+             rail and local sticky Majlis header on other devices. */
+          var globalHeader=document.getElementById("darTestBrandHeaderV1")||document.getElementById("darAdultBrandHeaderV2");
+          var globalBottom=globalHeader?Math.max(0,globalHeader.getBoundingClientRect().bottom):0;
+          var localHeader=shell.querySelector(".ilm-chat-header");
+          var localHeight=localHeader?Math.max(0,localHeader.getBoundingClientRect().height):0;
+          var y=window.scrollY+last.getBoundingClientRect().top-globalBottom-localHeight-14;
+          if(y>0)window.scrollTo({top:y,behavior:"instant"});
         }
       }
       var observer = new MutationObserver(function () {
