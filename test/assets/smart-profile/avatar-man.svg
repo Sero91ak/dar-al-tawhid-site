@@ -1,18 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Freistehende anonyme Männerfigur mit sehr langem Vollbart">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Stilisiertes Männerprofil in weißem Gewand mit mittellangem Vollbart, ohne Gesicht">
 <defs>
- <linearGradient id="robe" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4efe3"/><stop offset=".42" stop-color="#d8d4ca"/><stop offset="1" stop-color="#9baeb0"/></linearGradient>
- <linearGradient id="beard" x1=".2" y1="0" x2=".8" y2="1"><stop stop-color="#3e3533"/><stop offset=".45" stop-color="#171f27"/><stop offset="1" stop-color="#111b24"/></linearGradient>
- <linearGradient id="face" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#9f8370"/><stop offset="1" stop-color="#534e49"/></linearGradient>
+<linearGradient id="robe" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffef8"/><stop offset=".35" stop-color="#e7e1d2"/><stop offset=".78" stop-color="#b9b2a5"/><stop offset="1" stop-color="#a2a299"/></linearGradient>
+<linearGradient id="sleeve" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5f0e7"/><stop offset=".62" stop-color="#d6cec0"/><stop offset="1" stop-color="#9da6a1"/></linearGradient>
+<linearGradient id="beard" x1=".15" y1=".1" x2=".85" y2="1"><stop stop-color="#584740"/><stop offset=".45" stop-color="#2d292c"/><stop offset="1" stop-color="#161f2a"/></linearGradient>
+<linearGradient id="hood" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f9f4e9"/><stop offset=".7" stop-color="#c5bfb1"/><stop offset="1" stop-color="#a39988"/></linearGradient>
+<radialGradient id="face"><stop stop-color="#343138"/><stop offset=".77" stop-color="#1d232a"/><stop offset="1" stop-color="#121a20"/></radialGradient>
 </defs>
-<!-- Open-air isolated silhouette: no circle, background, halo, plinth or border -->
-<path d="M15 249c6-41 24-70 56-83l34-14h48l34 14c31 14 50 42 55 83Z" fill="url(#robe)"/>
-<path d="M70 170c-7 21-10 47-10 79M185 170c8 23 10 45 10 79" stroke="#a9a49b" stroke-width="4" opacity=".65" fill="none"/>
-<path d="M96 152l32 28 32-28-9 97h-46Z" fill="#efe6d2"/>
-<path d="M90 102c0-43 13-69 38-69 28 0 40 26 40 68l-4 44-36 35-34-35Z" fill="url(#face)"/>
-<path d="M88 83c4-37 18-61 40-61 22 0 38 20 43 61-17-10-29-14-43-14-15 0-29 5-40 14Z" fill="#24282c"/>
-<path d="M89 99c-2 23-3 41 4 57 9 7 16 19 19 36l5 30 12 25 11-25 6-31c3-18 11-29 18-35 6-17 6-35 4-57-13 10-24 12-40 12-15 0-27-3-39-12Z" fill="url(#beard)"/>
-<path d="M92 128c6 9 13 14 20 19l-5 28m57-47c-7 12-13 15-22 20l5 29" stroke="#5d5350" stroke-width="3" fill="none" opacity=".45"/>
-<path d="M111 156c-2 30 9 59 17 81 9-24 18-52 17-81" fill="#1c2630"/>
-<path d="M123 180l5 49 6-49" fill="none" stroke="#8b7865" stroke-width="1.5" opacity=".45"/>
-<path d="M83 167l18 9m73-9-17 9" fill="none" stroke="#b59a70" stroke-width="3"/>
+<!-- Isolated, fully nonidentifying sculpted 3D figure, no surrounding medallion. -->
+<path d="M16 250c5-42 25-72 60-83l25-12h53l25 12c35 11 55 41 61 83Z" fill="url(#robe)"/>
+<path d="M16 250c6-38 20-64 59-83l31-3c-23 14-34 42-40 86Z" fill="url(#sleeve)"/>
+<path d="M240 250c-6-38-20-64-59-83l-31-3c23 14 34 42 40 86Z" fill="url(#sleeve)"/>
+<path d="M85 168l43 32 42-32-16 82h-53Z" fill="#f6f0e4"/>
+<path d="M112 202h32m-16 2v42" fill="none" stroke="#c0a775" stroke-width="2"/>
+<!-- Hood creates no facial identity; no eyes, eyebrows, nose, mouth or skin. -->
+<path d="M81 139c-7-38-2-79 18-101 8-10 18-15 29-15 35 0 51 40 50 93l-9 46-41 20-41-20Z" fill="url(#hood)"/>
+<path d="M96 110c0-33 12-61 32-61s32 28 32 61v41l-32 19-32-19Z" fill="url(#face)"/>
+<path d="M90 107c1-39 12-64 38-72 26 8 37 33 38 72-11-9-24-15-38-15-14 0-27 6-38 15Z" fill="#b9b2a5"/>
+<!-- Full beard, medium length to upper chest; stylized broad sculptural locks. -->
+<path d="M91 119c8 13 22 19 37 19s29-6 37-19c5 18 6 33-1 49-7 12-13 20-17 31-6 15-12 29-19 37-7-8-13-22-19-37-4-11-10-19-17-31-7-16-6-31-1-49Z" fill="url(#beard)"/>
+<path d="M104 144c1 30 13 62 24 83 11-21 23-53 24-83" fill="#29262c"/>
+<path d="M112 148c-1 22 9 47 16 64 7-17 17-42 16-64" fill="#383237"/>
+<path d="M116 166c4 17 8 24 12 34 4-10 8-17 12-34" fill="#4a3935" opacity=".6"/>
+<path d="M95 144c7 18 14 27 18 44m48-44c-7 18-14 27-18 44" fill="none" stroke="#746056" stroke-width="2" opacity=".55"/>
+<path d="M76 179c-15 19-24 46-25 71m129-71c15 19 24 46 25 71" fill="none" stroke="#e9e1d4" stroke-width="3" opacity=".8"/>
+<path d="M96 46c7-8 20-14 32-14s25 6 32 14" fill="none" stroke="#fffdf3" stroke-width="3" opacity=".7"/>
 </svg>
