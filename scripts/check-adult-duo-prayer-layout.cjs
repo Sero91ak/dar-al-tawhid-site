@@ -27,23 +27,30 @@ assert.match(visitorHeader,/min-height:44px!important/);
 assert.match(testHeader,/min-height:44px!important/);
 assert.match(native,/resolvedSafeAreaInsets\(for: webView\)/,"Native safe inset bridge must remain");
 for(const [lane,src] of [["visitor",visitorHome],["test",testHome]]){
- assert.match(src,/SMART_PRAYER_INFORMATION_HIERARCHY_V2/,lane+" prayer hierarchy absent");
- assert.match(src,/\.datp-item:not\(\.datp-right\) \.datp-number/);
- assert.match(src,/\.datp-right \.datp-number/);
- assert.match(src,/\.datp-counter\{/);
- assert.match(src,/\.datp-now\{/);
- assert.match(src,/\.datp-dates\{/);
- assert.match(src,/content:attr\(data-calendar-label\)/);
- assert.match(src,/var calendarLabels=/);
- assert.match(src,/setAttribute\("data-calendar-label",calendarNames\[0\]\)/);
- assert.match(src,/setAttribute\("data-calendar-label",calendarNames\[1\]\)/);
+ assert.match(src,/SMART_PRAYER_COMPACT_TYPOGRAPHY_V3/,lane+" compact typography missing");
+ assert.doesNotMatch(src,/SMART_PRAYER_INFORMATION_HIERARCHY_V2/,lane+" unwanted oversized design remains");
+ assert.doesNotMatch(src,/var calendarLabels=/,lane+" extra calendar headings remain");
+ assert.doesNotMatch(src,/data-calendar-label/,lane+" appended date headings remain");
+ for(const component of [
+  ".datp-item:not(.datp-right) .datp-number",
+  ".datp-right .datp-number",
+  ".datp-counter{",
+  ".datp-now{",
+  ".datp-greg{",
+  ".datp-hijri{",
+  ".datp-date-dot{"
+ ])assert.ok(src.includes(component),lane+" color priority missing: "+component);
+ assert.match(src,/\.datp-foot\{padding-top:8px;align-items:end\}/,lane+" original single-line date footer required");
+ assert.match(src,/\.datp-dates\{display:flex;flex-direction:row;flex-wrap:nowrap/,lane+" date row must stay compact");
+ assert.match(src,/\.datp-capsule\{position:relative;display:flex/,lane+" original countdown capsule preserved");
+ assert.match(src,/\.datp-number\{display:block;font-size:clamp\(35px,10vw,44px\)/,lane+" preserve font dimensions");
  assert.match(src,/hideCanonicalSource\(hub\)/,"Prayer timing authority must not be removed");
  assert.match(src,/window\.setInterval\(update,1000\)/,"Live countdown must still tick");
  assert.match(src,/card\.dataset\.dhpRoute="prayer"/,"Prayer click navigation must remain");
 }
 assert.match(siteRouter,/dar-adult-brand-header-v2\.css\?v=20261030-duo-compact-v1/);
-assert.match(siteRouter,/dar-home-test-parity-visitor\.js\?v=20261030-prayer-hierarchy-v2/);
+assert.match(siteRouter,/dar-home-test-parity-visitor\.js\?v=20261030-prayer-compact-colors-v3/);
 assert.match(testWorker,/dar-test-premium-header-v2\.css\?v=20261030-duo-compact-v1/);
-assert.match(testWorker,/dar-home-html-parity-v1\.js\?v=20261030-prayer-hierarchy-v2/);
+assert.match(testWorker,/dar-home-html-parity-v1\.js\?v=20261030-prayer-compact-colors-v3/);
 assert.doesNotMatch(visitorHeader,/body\s*\{\s*padding-top:0!important/,"Do not reset body safe area indiscriminately");
-console.log("PASS: both adult apps support compact Duo/Fold safe header, separate live prayer/calendar hierarchy, and versioned delivery.");
+console.log("PASS: both adult apps support compact Duo/Fold safe header, compact, differentiated prayer colors with unchanged date/footer layout, and versioned delivery.");
