@@ -330,6 +330,14 @@
 
   function ensureDom() {
     var el = document.getElementById("qiblaQuickView");
+    // Upgrade a sheet mounted by an older cached JS bundle; do not leave
+    // the new controls invisible after an in-app hot update.
+    if (el && !el.querySelector("[data-qibla-coordinates]")) {
+      try { if (root.DARQiblaQuickView && root.DARQiblaQuickView !== QiblaQuickView)
+        root.DARQiblaQuickView.close(); } catch (e) {}
+      el.remove();
+      el = null;
+    }
     if (el) return el;
     el = document.createElement("div");
     el.id = "qiblaQuickView";
@@ -552,7 +560,22 @@
       }
       loc.manual = false;
       applyLoc(loc);
-      fillCity(loc).then(function(next) { if (next && QiblaQuickView.isOpen()) applyLoc(next); });
+      // Keep the shared prayer-location label synchronized after changing
+      // from an explicitly chosen city back to automatic GPS.
+      var lookup = typeof root.darResolveLocationCity === "function"
+        ? root.darResolveLocationCity : root.reversePrayerCity;
+      if (typeof lookup === "function") {
+        Promise.resolve(lookup(loc.lat, loc.lon)).then(function(city) {
+          if (!city || !QiblaQuickView.isOpen()) return;
+          var saved = typeof root.getPrayerSettings === "function" ? root.getPrayerSettings() : null;
+          if (!saved || saved.locationMode !== "auto" ||
+              Math.abs(Number(saved.lat) - loc.lat) > 0.003 ||
+              Math.abs(Number(saved.lon) - loc.lon) > 0.003) return;
+          if (typeof root.setPrayerSettings === "function") root.setPrayerSettings({city: String(city)});
+          loc.city = String(city);
+          applyLoc(loc);
+        }).catch(function(){});
+      }
       var panel = ui.root && ui.root.querySelector("[data-qibla-city]");
       if (panel) panel.hidden = true;
       locationStatus("GPS aktiv. Standort und Qibla-Richtung wurden aktualisiert.");
@@ -802,5 +825,6 @@
 
   root.DARQiblaCalculator = QiblaCalculator;
   root.DARQiblaEngine = engine;
+  root.DARQiblaQuickVersion = "20261030-city-v1";
   root.DARQiblaQuickView = QiblaQuickView;
 })(typeof window !== "undefined" ? window : globalThis);
