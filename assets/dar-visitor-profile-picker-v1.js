@@ -25,27 +25,24 @@ function options(){
  }).join("")+'</div>'
 }
 function quick(){
- var p=api()?.get?.()||{notes:[],saved:[]},s=account(),noteCount=Array.isArray(p.notes)?p.notes.length:0;
- var user=s&&String(s.username||"").trim();
- return '<section class="dvp-quick" aria-label="Persönlicher Schnellzugriff">'+
- '<span class="dvp-quick-eyebrow">MEIN WISSENSBEREICH</span>'+
- '<h3>Mein DĀR</h3>'+
- '<div class="dvp-quick-list">'+
- '<button type="button" data-dvp-quick="notes"><span class="dvp-quick-symbol">✎</span><span><strong>Notizen</strong><small>'+noteCount+' auf diesem Gerät</small></span><span class="dvp-quick-chevron">›</span></button>'+
- '<button type="button" data-dvp-quick="saved"><span class="dvp-quick-symbol">☆</span><span><strong>Merkliste</strong><small>Gespeicherte Beiträge</small></span><span class="dvp-quick-chevron">›</span></button>'+
- '<button type="button" data-dvp-quick="account"><span class="dvp-quick-symbol">☁</span><span><strong>Konto & Sync</strong><small>'+(user?esc(user):"Anmelden / Konto")+'</small></span><span class="dvp-quick-chevron">›</span></button>'+
- '<button type="button" data-dvp-quick="interests"><span class="dvp-quick-symbol">✧</span><span><strong>Interessen</strong><small>Wissen verwalten</small></span><span class="dvp-quick-chevron">›</span></button>'+
- '</div></section>'
+ var g=gender(),person=name(g),s=account(),loggedIn=!!s;
+ return '<section class="dvp-quick" aria-label="Mein DĀR persönlich öffnen">'+
+ '<span class="dvp-quick-eyebrow">DEIN WISSENSBEREICH</span>'+
+ '<button type="button" class="dvp-hub-entry" data-dvp-quick="hub" aria-label="Mein DĀR öffnen: Notizen, Merkliste, Konto und Synchronisierung, Interessen">'+
+ '<span class="dvp-hub-avatar"><img src="'+image(g)+'" alt="" decoding="async"></span>'+
+ '<span class="dvp-hub-title">Mein DĀR</span>'+
+ '<span class="dvp-hub-person">'+esc(person)+(loggedIn?' · Konto':' · Gast')+'</span>'+
+ '<span class="dvp-hub-description">Notizen · Merkliste<br>Konto & Sync · Interessen</span>'+
+ '<span class="dvp-hub-open">Bereich öffnen <span aria-hidden="true">›</span></span>'+
+ '</button></section>'
 }
 function markup(){
  var g=gender(),isLocked=locked(),s=account();
- return '<div class="dvp-chooser-head"><span>MEIN DĀR · PERSÖNLICH</span><h2>Mein Wissensprofil</h2><p>Dein Profil und deine persönlichen Funktionen – direkt erreichbar.</p></div>'+
+ return '<div class="dvp-chooser-head"><span>MEIN DĀR · PERSÖNLICH</span><h2>Mein Wissensprofil</h2><p>Wähle deinen Bereich oder öffne deinen persönlichen Wissensraum.</p></div>'+
  '<div class="dvp-composite">'+
- '<section class="dvp-select" aria-label="Profilauswahl"><span class="dvp-column-label">WISSENSPROFIL</span>'+options()+
- '<p class="dvp-profile-rule">'+(isLocked?'Für dieses Konto auf diesem Gerät gespeichert. Wechsel nur mit erneuter PIN-Anmeldung.':s?'Lege dein Wissensprofil einmalig fest. Danach nur über deine Kontoanmeldung änderbar.':'Als Gast kannst du jederzeit zwischen Frau, Mann und Neutral wechseln.')+'</p></section>'+
+ '<section class="dvp-select" aria-label="Profilauswahl"><span class="dvp-column-label">WISSENSPROFIL</span>'+options()+'</section>'+
  '<div class="dvp-column-rule" aria-hidden="true"></div>'+quick()+'</div>'+
- '<div class="dvp-foot"><span>'+(s?'Angemeldet: '+esc(String(s.username||"Konto"))+' · Profil '+esc(name(g)):'Gastmodus · '+esc(name(g)))+'</span>'+
- '<button type="button" data-dvp-onboarding>App-Einführung ansehen</button></div>'
+ '<div class="dvp-foot"><span>'+(isLocked?'Konto: '+esc(String(s?.username||""))+' · Wechsel nur mit erneuter PIN-Anmeldung.':s?'Dein gewähltes Konto-Profil wird geschützt.':'Gastmodus · Profil jederzeit wählbar.')+'</span></div>'
 }
 function reauthMarkup(g){
  var s=account();
@@ -118,7 +115,7 @@ function setup(){
   if(type==="notes"){api()?.openNotes?.();return}
   if(type==="saved"){api()?.openSaved?.();return}
   if(type==="interests"){nav("account");setTimeout(function(){document.querySelector('[data-dsp-toggle="interests"]')?.click()},500);return}
-  if(type==="account")nav("account");
+  if(type==="hub"||type==="account")nav("account");
  });
  panel.addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target.id==="dvpProfilePin"){e.preventDefault();verify(pending)}});
  document.addEventListener("click",function(e){if(!panel.hidden&&!panel.contains(e.target)&&!trigger.contains(e.target))close(false)});
