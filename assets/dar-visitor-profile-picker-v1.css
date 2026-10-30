@@ -211,3 +211,9 @@ html body #darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle:focus-visible{
   max-height:38px!important;
  }
 }
+
+/* The open personal-profile capsule matches the Test button's active focus. */
+html body #darAdultBrandHeaderV2 .dtbh-row > #darVisitorProfileButtonV1[aria-expanded="true"]{
+ border-color:var(--dtbh-muted,var(--gold2,#b69c69))!important;
+ box-shadow:0 0 0 2px color-mix(in srgb,var(--dtbh-muted,#b69c69) 15%,transparent)!important;
+}
