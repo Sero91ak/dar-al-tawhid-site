@@ -44,7 +44,7 @@ html.dar-home-v3 body.is-home-route .dv3-section{margin:0;padding:0;min-width:0}
 html.dar-home-v3 body.is-home-route .dv3-section-title{display:flex;align-items:center;justify-content:space-between;gap:7px;margin:0 0 8px}
 html.dar-home-v3 body.is-home-route .dv3-section-title h3{margin:0;color:var(--dv3-ink)!important;font:700 clamp(20px,4.8vw,26px)/1.08 Georgia,serif}
 html.dar-home-v3 body.is-home-route .dv3-section-title button{padding:5px 0;border:0;background:transparent;color:var(--dv3-gold)!important;font-size:11px!important;font-weight:900}
-html.dar-home-v3 body.is-home-route .dv3-posts{overflow:hidden;background:var(--dv3-card);border:1px solid var(--dv3-line);border-radius:16px}
+html.dar-home-v3 body.is-home-route .dv3-posts{overflow:visible;background:var(--dv3-card);border:1px solid var(--dv3-line);border-image:none;border-radius:16px}
 html.dar-home-v3 body.is-home-route .dv3-post{display:flex;gap:11px;align-items:center;width:100%;min-width:0;min-height:65px;text-align:left;padding:10px 12px;border:0;background:transparent;color:var(--dv3-ink)}
 html.dar-home-v3 body.is-home-route .dv3-post+.dv3-post{border-top:1px solid var(--dv3-line)}
 html.dar-home-v3 body.is-home-route .dv3-post-icon{display:grid;place-items:center;flex:0 0 35px;width:35px;height:35px;background:var(--dv3-hover);border-radius:10px;color:var(--dv3-gold);font-size:20px}
