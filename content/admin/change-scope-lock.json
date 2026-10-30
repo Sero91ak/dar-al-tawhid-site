@@ -8908,6 +8908,22 @@
         "content/admin/wissensbereich-themen-policy.json"
       ],
       "expiresAt": "2026-11-15T23:59:00.000Z"
+    },
+    {
+      "id": "visitor-android-pwa-global-profile-dashboard-parity-20261030",
+      "at": "2026-10-30T16:00:00+01:00",
+      "approvedBy": "user-explicit-global-visitors-ios-android-pwa-website-20261030",
+      "reason": "Adult Visitor parity on installed Android PWA and iOS WebKit: fix stale cache-first 3D dashboard modules; deliver female, male and neutral adaptive second tab, first-run guide, classic header, home question and layout across smartphone/tablet/fold, without altering Accounts, private notes, Kids, notifications, payment, media or canonical prayer logic. Maintain existing offline cache/storage; update user-installed Android PWAs automatically on online visit. Scope strictly to listed visitor/PWA assets and tests.",
+      "paths": [
+        "cloudflare/site-router.js",
+        "pwa/service-worker.js",
+        "assets/dar-noble-3d-icons.js",
+        "assets/dar-home-test-parity-visitor.js",
+        "assets/dar-visitor-onboarding-v1.js",
+        "scripts/test-visitor-android-pwa-parity-v1.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-08T23:59:00.000Z"
     }
   ],
   "enabled": true
