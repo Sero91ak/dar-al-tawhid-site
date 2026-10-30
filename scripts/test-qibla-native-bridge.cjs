@@ -85,19 +85,15 @@ async function main() {
   native.engine.heading.stop();
   assert.equal(native.messages.at(-1).type,"qibla-stop");
   assert.equal(native.intervals.size,0);
-  // Both adult entry points must open this single shared quick sheet, not
-  // duplicate Qibla calculations or silently navigate to a settings-only page.
+  // The shared engine remains covered here, but the Home shortcuts now
+  // intentionally open the pre-existing fullscreen Mehr Qibla focus.
+  // The focus launcher is tested behaviorally by the adult fullscreen suite.
   const visitor = fs.readFileSync(path.join(__dirname, "../assets/dar-home-v31-visitor.js"),"utf8");
   const visitorCss = fs.readFileSync(path.join(__dirname, "../assets/dar-home-v31-visitor.css"),"utf8");
   const test = fs.readFileSync(path.join(__dirname, "../test/assets/dar-home-html-parity-v1.js"),"utf8");
   const sharedCss = fs.readFileSync(path.join(__dirname, "../assets/qibla-quick-view.css"),"utf8");
-  for(const [file,text] of [["visitor",visitor],["test",test]]){
-    assert.match(text,/DARQiblaQuickVersion/,
-      file+" must load the same versioned Qibla quick sheet");
-    assert.match(text,file==="visitor" ? /sheet\.open\(\)/ :
-      /DARQiblaQuickView\.open\(\)/,
-      file+" must call the common Qibla quick view");
-  }
+  assert.match(visitor,/openQiblaFromFloat/);
+  assert.match(test,/openQiblaFromFloat/);
   assert.match(visitor,/data-dv3-qibla-quick/,
     "Visitor quick capsule next to the library is required");
   assert.match(visitor,/dv3-qibla-capsules/,
