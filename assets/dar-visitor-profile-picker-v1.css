@@ -349,3 +349,129 @@ html body #darAdultBrandHeaderV2 .dvp-chooser{
 @media(prefers-reduced-motion:reduce){
  #darAdultBrandHeaderV2 .dvp-quick-list button{transition:none!important;animation:none!important}
 }
+
+
+/* DĀR COMPACT PROFILE V3 · same elegant capsule as original, two equal halves.
+   Left = woman/man/neutral. Right = one button to the EXISTING Mein DĀR page. */
+html body #darAdultBrandHeaderV2 .dvp-chooser{
+ width:min(94vw,540px)!important;
+ max-width:calc(100vw - 18px)!important;
+ padding:clamp(15px,3vw,21px)!important;
+ max-height:min(75dvh,600px)!important;
+ border-radius:24px!important;
+}
+#darAdultBrandHeaderV2 .dvp-chooser-head{margin-bottom:10px!important}
+#darAdultBrandHeaderV2 .dvp-chooser-head h2{
+ font-size:clamp(23px,4.4vw,29px)!important;
+ margin:5px 0!important;
+}
+#darAdultBrandHeaderV2 .dvp-chooser-head p{
+ font-size:11px!important;
+ line-height:1.45!important;
+ margin:4px 0 0!important;
+}
+#darAdultBrandHeaderV2 .dvp-composite{
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr)!important;
+ align-items:stretch!important;
+ gap:clamp(7px,1.8vw,14px)!important;
+ padding-top:12px!important;
+}
+#darAdultBrandHeaderV2 .dvp-chooser-options{gap:7px!important}
+#darAdultBrandHeaderV2 .dvp-chooser-options button{
+ min-height:59px!important;
+ grid-template-columns:40px minmax(0,1fr) 10px!important;
+ gap:6px!important;
+ padding:6px!important;
+ border-radius:13px!important;
+}
+#darAdultBrandHeaderV2 .dvp-chooser-options img{
+ width:40px!important;height:45px!important;
+}
+#darAdultBrandHeaderV2 .dvp-column-rule{
+ min-height:0!important;
+ height:100%!important;
+ background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--gold2,#bba278) 44%,var(--line,#425750)),transparent)!important;
+}
+#darAdultBrandHeaderV2 .dvp-quick{
+ display:flex!important;
+ flex-direction:column!important;
+ min-height:0!important;
+}
+#darAdultBrandHeaderV2 .dvp-quick-eyebrow{margin-bottom:8px!important}
+#darAdultBrandHeaderV2 .dvp-hub-entry{
+ appearance:none!important;
+ cursor:pointer!important;
+ display:flex!important;
+ flex-direction:column!important;
+ justify-content:center!important;
+ align-items:center!important;
+ text-align:center!important;
+ flex:1 1 auto!important;
+ width:100%!important;
+ min-width:0!important;
+ padding:clamp(10px,2vw,18px) 7px!important;
+ border:1px solid color-mix(in srgb,var(--gold2,#bda474) 44%,var(--line,#d6d8d2))!important;
+ border-radius:17px!important;
+ color:var(--text,#2b3b32)!important;
+ background:linear-gradient(155deg,color-mix(in srgb,var(--card,#fff) 92%,var(--gold2,#b7a475)),var(--card,#fff))!important;
+ box-shadow:0 4px 16px rgba(17,34,27,.06)!important;
+ transition:transform .2s ease,border-color .2s ease!important;
+}
+#darAdultBrandHeaderV2 .dvp-hub-entry:hover{
+ border-color:var(--gold2,#baa371)!important;
+}
+#darAdultBrandHeaderV2 .dvp-hub-entry:active{transform:scale(.987)}
+#darAdultBrandHeaderV2 .dvp-hub-entry:focus-visible{outline:2px solid var(--gold2,#baa371);outline-offset:2px}
+#darAdultBrandHeaderV2 .dvp-hub-avatar{
+ width:clamp(48px,11vw,65px);height:clamp(48px,11vw,65px);
+ display:grid;place-items:center;
+ border-radius:17px;
+ background:color-mix(in srgb,var(--gold2,#bba371) 12%,transparent);
+}
+#darAdultBrandHeaderV2 .dvp-hub-avatar img{
+ width:92%;height:92%;object-fit:contain;
+}
+#darAdultBrandHeaderV2 .dvp-hub-title{
+ font:600 clamp(18px,4vw,23px)/1.2 Georgia,"Iowan Old Style",serif!important;
+ margin-top:9px!important;color:inherit!important;
+}
+#darAdultBrandHeaderV2 .dvp-hub-person{
+ font-size:11px;line-height:1.5;opacity:.65;margin:3px 0 6px;
+}
+#darAdultBrandHeaderV2 .dvp-hub-description{
+ font-size:10px;line-height:1.5;opacity:.78;
+}
+#darAdultBrandHeaderV2 .dvp-hub-open{
+ display:inline-flex;align-items:center;gap:7px;
+ font-size:11px;font-weight:750;color:var(--gold2,#aa925d);
+ margin-top:12px!important;
+}
+#darAdultBrandHeaderV2 .dvp-hub-open span{font-size:19px;line-height:1}
+#darAdultBrandHeaderV2 .dvp-foot{margin-top:12px!important;padding-top:9px!important}
+#darAdultBrandHeaderV2 .dvp-foot>span{font-size:10px!important}
+@media(max-width:450px){
+ html body #darAdultBrandHeaderV2 .dvp-chooser{
+  padding:12px!important;
+  right:max(8px,env(safe-area-inset-right,0px))!important;
+ }
+ #darAdultBrandHeaderV2 .dvp-composite{gap:7px!important;padding-top:10px!important}
+ #darAdultBrandHeaderV2 .dvp-chooser-options button{
+  grid-template-columns:33px minmax(0,1fr) 9px!important;
+  min-height:54px!important;gap:4px!important;padding:5px!important;
+ }
+ #darAdultBrandHeaderV2 .dvp-chooser-options img{width:33px!important;height:40px!important}
+ #darAdultBrandHeaderV2 .dvp-hub-entry{padding:7px 5px!important}
+ #darAdultBrandHeaderV2 .dvp-hub-avatar{width:45px;height:45px}
+ #darAdultBrandHeaderV2 .dvp-hub-title{font-size:19px!important}
+ #darAdultBrandHeaderV2 .dvp-hub-description{font-size:9px}
+}
+@media(max-width:355px){
+ #darAdultBrandHeaderV2 .dvp-option-copy small{display:none!important}
+ #darAdultBrandHeaderV2 .dvp-hub-person{font-size:9px}
+ #darAdultBrandHeaderV2 .dvp-hub-description{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+ #darAdultBrandHeaderV2 .dvp-hub-entry{transition:none!important}
+ #darAdultBrandHeaderV2 .dvp-hub-entry:active{transform:none!important}
+}
