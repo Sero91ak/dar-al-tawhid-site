@@ -26,7 +26,7 @@ function chooseTheme(value){if(value==="keep")return false;
  return false
 }
 function themePick(v){if(!THEMES.includes(v))return;var p=read();p.palette=v;write(p);if(v!=="keep")chooseTheme(v)}
-function image(g){return g==="woman"?"/test/assets/smart-profile/avatar-woman.svg":"/test/assets/dar-3d-icons/ilm.png"}
+function image(g){return g==="woman"?"/test/assets/smart-profile/avatar-woman.svg":"/test/assets/smart-profile/avatar-man.svg"}
 function hero(g){return g==="woman"?"/test/assets/smart-profile/hero-woman.svg":"/test/assets/smart-profile/hero-man.svg"}
 function display(g){return g==="woman"?"Mein Frauenbereich":g==="man"?"Mein Männerbereich":"Mein DĀR"}
 function label(g){return g==="woman"?"Frau":g==="man"?"Mann":"Neutral"}
@@ -72,7 +72,7 @@ function accountPanel(p){var g=p.gender;return '<section id="darTestSmartAccount
  '<div class="dsp-setting"><h3>Meine Merkliste <span class="dsp-count">'+p.saved.length+'</span></h3><div class="dsp-notes-list">'+(p.saved.length?p.saved.map(id=>{var item=inventory().find(x=>x.id===id);return '<div class="dsp-saved-line"><button type="button" data-dsp-post="'+esc(id)+'">'+esc(item?item.title:"Gespeicherter Beitrag · "+id)+'</button><button type="button" data-dsp-save="'+esc(id)+'" aria-label="Aus Merkliste entfernen">×</button></div>'}).join(""):'<p class="dsp-empty">Beiträge auf der Startseite mit dem Stern speichern.</p>')+'</div></div>'+
  '<div class="dsp-setting"><h3>Meine Einstellungen</h3><button class="dsp-subtle" type="button" data-dsp-reset>Interessen und Profilauswahl zurücksetzen</button></div></section>'}
 function updateHome(p){var root=document.getElementById("darHomeHtmlParityV1");if(!root)return;
- var widget=root.querySelector(".dsp-home");if(!widget){widget=document.createElement("div");widget.className="dsp-mount";var welcome=root.querySelector(".dhp-welcome");if(!welcome)return;welcome.insertAdjacentElement("afterend",widget)}
+ var widget=root.querySelector(".dsp-mount");if(!widget){widget=document.createElement("div");widget.className="dsp-mount";var welcome=root.querySelector(".dhp-welcome");if(!welcome)return;welcome.insertAdjacentElement("afterend",widget)}
  var sig=owner()+"|"+today()+"|"+JSON.stringify([p.gender,p.chosen,p.palette,p.interests,p.saved,p.opened])+ "|" + inventory().length;
  if(widget.dataset.dspSig!==sig){widget.innerHTML=card(p);widget.dataset.dspSig=sig}
  root.dataset.smartGender=p.gender;
