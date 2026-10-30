@@ -71,4 +71,18 @@ for (const line of actualCss.split("\n")) {
   seenDeclarations.set(match[1], declarations);
 }
 
+// A capsule must have its full perimeter BEFORE touch/focus.
+// The retired 120deg fading pseudo-rim is not a legitimate capsule border.
+assert(!actualCss.includes("linear-gradient(120deg,var(--dhp-rim)"),
+  "Fading pseudo-border was reintroduced");
+const capsuleRule = actualCss.split("\n").find(line => line.includes(".dhp-post-capsule{position:relative"));
+const capsuleGroup = actualCss.split("\n").find(line => line.includes(".dhp-posts{display:grid"));
+const uniformRim = actualCss.split("\n").find(line =>
+  line.includes(":is(.dhp-prayer,.dhp-quick,.dhp-search-pill,.dhp-quran-capsule,.dhp-panel,.dhp-today-row,.dhp-post-capsule,.dhp-library-tile,.dhp-head button){"));
+assert(capsuleRule && capsuleRule.includes("overflow:visible!important"), "Capsule content clipped in normal state");
+assert(capsuleGroup && capsuleGroup.includes("overflow:visible!important"), "Capsule parent still clips the edge");
+assert(uniformRim && uniformRim.includes("border:1px solid var(--dhp-capsule-rim)!important"),
+  "Resting capsule border is not complete");
+assert(uniformRim.includes("border-image:none!important"), "Gradient border image can hide capsule edges");
+
 console.log("PASS — DĀR TEST active Home CSS: dead selectors absent, capsules intact, routes isolated.");
