@@ -155,20 +155,6 @@
   ],
   "unlockedScopes": [
     {
-      "id": "adult-qibla-full-viewport-no-half-screen-release-20261030",
-      "at": "2026-10-30T13:00:00+01:00",
-      "approvedBy": "owner-requested-20261030-real-iphone-half-screen-qibla-fix",
-      "reason": "Owner supplies an iPhone screenshot showing the fullscreen gold Qibla only in upper half, lower half blank. Scope solely Visitor & DAR TEST HTML portal attachment, viewport/safe-area CSS, scrolling; accompanying regression and CI. No sensor/GPS/prayer engine, Kids, native Swift or Push changes. Remove immediately after verified live deployments.",
-      "paths": [
-        "index.html",
-        "test/index.html",
-        "test/tools/test-qibla-fullscreen-viewport.cjs",
-        "scripts/app-health-check.js",
-        "content/admin/change-scope-lock.json"
-      ],
-      "expiresAt": "2026-10-31T12:00:00.000Z"
-    },
-    {
       "id": "dar-test-smart-profile-native-ui-fix-20261030",
       "at": "2026-10-30T12:00:00+01:00",
       "approvedBy": "user-urgent-dar-test-video-and-text-corrections-20261030",
