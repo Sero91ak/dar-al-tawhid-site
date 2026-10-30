@@ -16,5 +16,23 @@
     "title": "Leite mich zu rechtschaffenen Taten",
     "snippet": "Und dass ich rechtschaffen handle, womit Du zufrieden bist.",
     "category": "Taten"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 481,
+      "remaining": 445
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 62,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
