@@ -1,0 +1,61 @@
+/* DĀR AL TAWḤĪD · First-run Academy · classical navy, evergreen & muted gold */
+#darVisitorOnboardingV1[hidden]{display:none!important}
+#darVisitorOnboardingV1{
+ --dvo-gold:#c8aa70;--dvo-ink:#f6f0e4;--dvo-line:rgba(222,194,142,.34);
+ position:fixed!important;inset:0!important;z-index:2147483100!important;
+ display:grid;place-items:center;overflow-y:auto;overscroll-behavior:contain;
+ padding:max(12px,env(safe-area-inset-top,0px)) max(11px,env(safe-area-inset-right,0px)) max(12px,env(safe-area-inset-bottom,0px)) max(11px,env(safe-area-inset-left,0px));
+ background:rgba(5,15,20,.79)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+ color:var(--dvo-ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+#darVisitorOnboardingV1 *{box-sizing:border-box}
+#darVisitorOnboardingV1 .dvo-panel{
+ width:min(100%,530px);max-height:calc(100dvh - 24px);overflow:auto;
+ outline:none;position:relative;isolation:isolate;
+ padding:clamp(19px,4vw,31px);border-radius:26px;
+ background:linear-gradient(158deg,#172f40 0%,#112b36 60%,#173b35 100%);
+ border:1px solid var(--dvo-line);color:var(--dvo-ink);
+ box-shadow:0 28px 90px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.09);
+}
+#darVisitorOnboardingV1 .dvo-panel:before{content:"";position:absolute;inset:8px;border:1px solid rgba(213,182,129,.14);border-radius:20px;pointer-events:none}
+#darVisitorOnboardingV1 .dvo-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+#darVisitorOnboardingV1 .dvo-mark{font:750 10px/1.45 system-ui,sans-serif;letter-spacing:.12em;color:var(--dvo-gold)}
+#darVisitorOnboardingV1 .dvo-mark span{opacity:.65;margin:0 3px}
+#darVisitorOnboardingV1 button{cursor:pointer;font-family:inherit}
+#darVisitorOnboardingV1 button:focus-visible,.dvo-profile-replay:focus-visible,.dvo-more-replay button:focus-visible{outline:2px solid #e7cd92;outline-offset:3px}
+#darVisitorOnboardingV1 .dvo-top button{appearance:none;display:grid;place-items:center;width:36px;height:36px;flex:none;border:1px solid var(--dvo-line);border-radius:12px;background:transparent;color:inherit;font-size:25px}
+#darVisitorOnboardingV1 .dvo-progress{height:3px;background:rgba(235,217,168,.14);border-radius:50px;margin:21px 0 23px;overflow:hidden}
+#darVisitorOnboardingV1 .dvo-progress>span{display:block;height:100%;background:var(--dvo-gold);border-radius:50px;transition:width .22s ease}
+#darVisitorOnboardingV1 .dvo-count{display:block;color:var(--dvo-gold);font:750 10px/1.5 system-ui;letter-spacing:.16em}
+#darVisitorOnboardingV1 .dvo-body h2{margin:10px 0 12px!important;color:var(--dvo-ink)!important;font:600 clamp(25px,6vw,36px)/1.13 Georgia,"Iowan Old Style",serif!important;letter-spacing:-.03em}
+#darVisitorOnboardingV1 .dvo-body>p{margin:0 0 19px!important;font:400 clamp(13px,3.45vw,15px)/1.72 system-ui,sans-serif!important;color:#e0e6dd!important}
+#darVisitorOnboardingV1 .dvo-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:19px 0}
+#darVisitorOnboardingV1 .dvo-choices button{min-width:0;display:grid;justify-items:center;gap:6px;padding:12px 5px;border-radius:16px;color:#f5ecdd;border:1px solid rgba(219,186,122,.24);background:rgba(255,255,255,.045)}
+#darVisitorOnboardingV1 .dvo-choices button.dvo-active{border-color:#dec08c;background:rgba(207,173,109,.16)}
+#darVisitorOnboardingV1 .dvo-choices .dvo-choice-icon{height:67px;max-width:100%;display:grid;place-items:center}
+#darVisitorOnboardingV1 .dvo-choices img{width:65px;height:65px;max-width:100%;object-fit:contain}
+#darVisitorOnboardingV1 .dvo-choices strong{font-size:12px;font-weight:700}
+#darVisitorOnboardingV1 .dvo-choices small{font-size:10px;line-height:1.45;text-align:center;opacity:.75}
+#darVisitorOnboardingV1 .dvo-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin:20px 0;padding:13px 7px;border-radius:20px;border:1px solid rgba(228,199,150,.22);background:rgba(255,255,255,.055)}
+#darVisitorOnboardingV1 .dvo-tabs span{display:grid;justify-items:center;gap:5px;min-width:0}
+#darVisitorOnboardingV1 .dvo-tabs img{width:clamp(33px,9vw,48px);height:46px;max-width:100%;object-fit:contain}
+#darVisitorOnboardingV1 .dvo-tabs b{font-size:clamp(9px,2.5vw,12px);font-weight:650;color:#e9e2d2;white-space:nowrap}
+#darVisitorOnboardingV1 .dvo-feature{display:flex;align-items:center;gap:15px;margin:19px 0;padding:15px;border-radius:17px;background:rgba(245,224,179,.065);border:1px solid rgba(212,177,114,.25)}
+#darVisitorOnboardingV1 .dvo-feature img{width:65px;height:65px;object-fit:contain;flex:none}
+#darVisitorOnboardingV1 .dvo-feature span{font:750 11px/1.7 system-ui;letter-spacing:.085em;color:#dec28c}
+#darVisitorOnboardingV1 .dvo-open-area{display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:41px;padding:8px 15px;border-radius:14px;border:1px solid var(--dvo-line);color:#e7d5ac;background:rgba(200,170,112,.065);font-weight:650;font-size:12px}
+#darVisitorOnboardingV1 .dvo-bottom{display:flex;align-items:center;gap:12px;margin:22px 0 12px}
+#darVisitorOnboardingV1 .dvo-bottom button{min-height:48px;border-radius:14px;padding:11px 15px;font-weight:700;font-size:13px}
+#darVisitorOnboardingV1 .dvo-muted{flex:1;border:1px solid var(--dvo-line);background:transparent;color:var(--dvo-ink)}
+#darVisitorOnboardingV1 .dvo-muted:disabled{opacity:.27;cursor:default}
+#darVisitorOnboardingV1 .dvo-continue{flex:1.6;background:#cdb07b;border:1px solid #cdb07b;color:#152c32}
+#darVisitorOnboardingV1 .dvo-continue span{font-size:19px;margin-left:5px}
+#darVisitorOnboardingV1 .dvo-skip{display:block;margin:0 auto;border:0;background:transparent;color:#d1d5c9;font-size:11px;opacity:.8;padding:7px;line-height:1.5}
+#darAdultBrandHeaderV2 .dvo-profile-replay{width:100%;min-height:37px;margin-top:12px;padding:9px 11px;border-radius:13px;border:1px solid color-mix(in srgb,var(--gold2,#b69c69) 43%,transparent);background:transparent;color:var(--text,#f5eddf);font-size:12px;font-weight:650;text-align:center}
+.dvo-more-replay{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:15px 18px;margin-bottom:14px;border-radius:18px;border:1px solid color-mix(in srgb,var(--gold2,#b5a075) 32%,var(--line,#3c4a47));background:var(--card,#152b31);color:var(--text,#f0eee4)}
+.dvo-more-replay b{display:block;font:650 17px/1.3 Georgia,serif;color:inherit}
+.dvo-more-replay p{margin:4px 0 0;font-size:12px;opacity:.78}
+.dvo-more-replay button{min-height:39px;border:1px solid var(--gold2,#c7ad74);border-radius:12px;padding:8px 13px;background:transparent;color:inherit;font-size:12px;font-weight:700}
+@media(min-width:720px){#darVisitorOnboardingV1 .dvo-panel{width:min(100%,600px);padding:33px}#darVisitorOnboardingV1 .dvo-tabs img{width:54px;height:55px}}
+@media(max-width:360px){#darVisitorOnboardingV1 .dvo-panel{padding:15px}#darVisitorOnboardingV1 .dvo-choices{gap:5px}#darVisitorOnboardingV1 .dvo-choices img{width:50px;height:50px}#darVisitorOnboardingV1 .dvo-choices small{font-size:9px}}
+@media(prefers-reduced-motion:reduce){#darVisitorOnboardingV1 .dvo-progress>span{transition:none!important}}
