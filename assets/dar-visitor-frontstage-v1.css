@@ -1,0 +1,143 @@
+/* DĀR VISITOR FRONT COVER WIDTH V1 / 2026-10-30
+   No new nav DOM, no theme changes and no forced zoom. On constrained/front
+   screens one real content column fills the available width with equal gutters.
+   Tablet/unfolded two-pane mode remains governed by DarAdaptiveLayout. */
+html[data-dar-visitor-frontstage="1"] body.has-bottom-nav:not(.is-feed-fullscreen){
+ --dar-front-gutter:max(11px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+ --layout-page-gutter:var(--dar-front-gutter);
+ --layout-rail-width:0px;
+ --layout-shell-max:100%;
+ --layout-content-max:100%;
+ --layout-reader-max:100%;
+ --dar-nav-gutter:var(--dar-front-gutter);
+ overflow-x:clip!important;max-width:100%!important;min-width:0!important;
+}
+html[data-dar-visitor-frontstage="1"] body.has-bottom-nav > .app{
+ box-sizing:border-box!important;min-width:0!important;width:100%!important;max-width:100%!important;
+ margin-inline:0!important;padding-inline:0!important;
+ left:auto!important;right:auto!important;transform:none!important;
+}
+html[data-dar-visitor-frontstage="1"] body.has-bottom-nav #appView.view{
+ box-sizing:border-box!important;min-width:0!important;width:100%!important;max-width:100%!important;
+ margin-inline:0!important;padding-inline:0!important;
+}
+/* The visitor home is a sibling of the historical .top-shell, not a child
+   of #appView. Give that real rendered home exactly the same width. */
+html[data-dar-visitor-frontstage="1"] body.is-home-route #darHomeHtmlParityV1{
+ display:block!important;position:relative!important;inset-inline:auto!important;
+ box-sizing:border-box!important;width:100%!important;max-width:100%!important;
+ min-width:0!important;margin-inline:0!important;
+}
+html[data-dar-visitor-frontstage="1"] body.is-home-route #darHomeHtmlParityV1 .dhp-content{
+ box-sizing:border-box!important;width:100%!important;max-width:100%!important;
+ min-width:0!important;margin-inline:0!important;
+ padding-inline:var(--dar-front-gutter)!important;
+}
+/* Avoid writing 2 columns to a one-column available stage. */
+html[data-dar-visitor-frontstage="1"] body.has-bottom-nav #appView.view > :is(
+ .topics-hub,.topic-collection-page,.post-reader,.frauen-hub,
+ .hadith-hub,.dua-hub,.quran-hub,.books-library-shell,
+ .account-panel,.dar-responsive-page
+){
+ min-width:0!important;max-width:100%!important;width:100%!important;
+ box-sizing:border-box!important;margin-inline:0!important;
+}
+html[data-dar-visitor-frontstage="1"] body.has-bottom-nav #appView.view :is(
+ .topic-collection,.topic-collection-list,.post-grid,
+ .dua-theme-grid,.hadith-list,.hadith-catalog-list,
+ .frauen-library-grid,.frauen-library-list,.books-library-list,
+ .library-list,.lib-main-content,.post-reader-main,
+ .related-compact-list,.quran-ayah-list
+){
+ min-width:0!important;max-width:100%!important;
+ box-sizing:border-box!important;
+}
+/* Any narrow actual fold stage must show a single reading pane. This is not
+   a destructive DOM split or a new desktop breakpoint. */
+html[data-dar-visitor-frontstage="1"] body.has-bottom-nav .dar-fold[data-fold-mode="dual"]{
+ grid-template-columns:minmax(0,1fr)!important;
+ width:100%!important;min-width:0!important;max-width:100%!important;
+}
+html[data-dar-visitor-frontstage="1"] body.has-bottom-nav .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane){
+ grid-column:1!important;min-width:0!important;max-width:100%!important;
+}
+/* Home typography and metadata scale to the actual cover width instead of
+   the visual screenshot pixels or a stale tablet @media breakpoint. */
+html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .dhp-home-source-v55{
+ max-width:100%!important;overflow-wrap:break-word!important;
+ font-size:clamp(11px,2.8vw,13px)!important;
+ line-height:1.4!important;letter-spacing:.06em!important;
+}
+html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .dhp-greeting{
+ font-size:clamp(22px,5.8vw,32px)!important;line-height:1.23!important;
+ overflow-wrap:break-word!important;
+}
+html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .dat-smart-prayer{
+ container-type:inline-size;container-name:dar-cover-prayer;
+ width:100%!important;max-width:100%!important;min-width:0!important;
+ box-sizing:border-box!important;padding-inline:clamp(8px,2.7vw,13px)!important;
+}
+html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-grid{
+ grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr)!important;
+ gap:clamp(5px,2.3cqw,10px)!important;min-width:0!important;
+}
+html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-item{min-width:0!important}
+html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-number{
+ font-size:clamp(29px,8.6cqw,43px)!important;
+ line-height:1.05!important;letter-spacing:-.03em!important;max-width:100%!important;
+}
+html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-counter{
+ font-size:clamp(21px,6.5cqw,27px)!important;
+ letter-spacing:-.025em!important;white-space:nowrap!important;
+}
+html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-capsule{
+ gap:5px!important;min-width:0!important;
+}
+html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-until{
+ font-size:clamp(9px,2.6cqw,11px)!important;gap:4px!important;min-width:0!important;
+}
+html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-caption{
+ font-size:clamp(9px,2.6cqw,11px)!important;
+ min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;
+}
+html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-prayername{
+ font-size:clamp(14px,4cqw,18px)!important;
+}
+html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-foot{
+ display:flex!important;flex-wrap:wrap!important;gap:5px 8px!important;
+ align-items:center!important;justify-content:space-between!important;
+}
+html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-dates{
+ flex:1 1 145px!important;min-width:0!important;overflow:hidden!important;
+}
+html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-local{flex:0 0 auto!important;min-width:0!important}
+html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-now{
+ font-size:clamp(18px,5.6cqw,26px)!important;white-space:nowrap!important
+}
+html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-hijri{
+ min-width:0!important;text-overflow:ellipsis!important;
+}
+html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 :is(
+ .dsp-mount,.dsp-home,.dhp-welcome,.dhp-isnad,.dhp-search-box,
+ .dhp-quickbar,.dhp-posts,.dhp-today-stack,.dhp-library,.dhp-section
+){
+ min-width:0!important;max-width:100%!important;
+ box-sizing:border-box!important;
+}
+/* Five tabs continue as five equally hit-testable controls; no off-screen
+   rail, tiny 3D artwork, or clipped active pill on cover screens. */
+html[data-dar-visitor-frontstage="1"] body.has-bottom-nav #bottomNav.bottom-nav{
+ width:calc(100% - 2 * var(--dar-front-gutter))!important;
+ max-width:560px!important;min-width:0!important;
+}
+html[data-dar-visitor-frontstage="1"] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn{
+ min-width:0!important;flex:1 1 20%!important;
+}
+@container dar-cover-prayer (max-width:300px){
+ html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-number{font-size:27px!important}
+ html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-foot{gap:3px!important}
+ html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-local-label{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 *{scroll-behavior:auto!important}
+}
