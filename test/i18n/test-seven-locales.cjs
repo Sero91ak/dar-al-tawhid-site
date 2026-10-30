@@ -101,6 +101,7 @@ assert.equal(w.DarTestTurkishUI.translateValue("Links","ku"),"Çep");
 assert.equal(w.DarTestTurkishUI.translateValue("1 Inhalt","fr"),"1 contenu");
 assert.equal(w.DarTestTurkishUI.translateValue("4 geprüfte Berichte","es"),"4 informes revisados");
 assert.equal(w.DarTestTurkishUI.translateValue("Gespeichert: links · Auf schmalen Displays bleibt die Leiste automatisch unten.","ar"),"محفوظ: اليسار · على الشاشات الضيقة يبقى الشريط تلقائيًا في الأسفل.");
+assert.equal(w.DarTestTurkishUI.translateValue("Dieser Bereich ist sensibel. Trauer, Tod, Janāzah, Iḥdād, Weinen, Klage, Friedhofsbesuch und Todesfälle von Kindern oder Ehemännern werden nur angezeigt, wenn Quelle und Direktnachweis streng geprüft wurden.","en"),"This section is sensitive. Grief, death, janāzah, iḥdād, weeping, lamentation, visiting the cemetery and the deaths of children or husbands are shown only when the Source and the direct evidence have been checked strictly.");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
