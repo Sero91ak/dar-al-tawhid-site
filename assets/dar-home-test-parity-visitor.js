@@ -74,8 +74,7 @@ function html(){
  return '<div class="dhp-content">'+
   /* Only one logo/name in fixed app header; home has its own source line. */
   '<div class="dhp-home-source-v55">Beiträge nach Qurʾān, Sunnah und Āthār</div>'+ 
-  '<button type="button" class="dhp-prayer" data-dhp-route="prayer" aria-label="Gebetszeiten öffnen"><div class="dhp-prayer-top"><div><div class="dhp-kicker">NÄCHSTES GEBET</div><b id="dhpPrayerName">Gebetszeiten</b><div class="dhp-tiny dhp-muted">Standortabhängige Gebetszeiten</div></div><div class="dhp-prayer-right"><div class="dhp-clock" id="dhpPrayerClock">–</div><div class="dhp-tiny dhp-muted" id="dhpPrayerRemain"></div></div></div><div class="dhp-prayer-footer"><span id="dhpPrayerDate">Gebetskalender</span><span id="dhpPrayerHijri"></span><span id="dhpPrayerPlace">Standort</span></div></button>'+
-  '<section class="dhp-welcome" aria-label="Begrüßung bei DĀR AL TAWḤĪD"><h2 class="dhp-greeting">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</h2><div class="dhp-welcome-rule" aria-hidden="true"></div><p class="dhp-intro">Willkommen bei <strong>DĀR AL TAWḤĪD</strong> – einer geordneten Wissens-App mit Beiträgen aus <strong>Qurʾān</strong>, <strong>Sunnah</strong>, den <strong>Āthār der frühen Imāme</strong> und einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah.</p></section>'+
+    '<section class="dhp-welcome" aria-label="Begrüßung bei DĀR AL TAWḤĪD"><h2 class="dhp-greeting">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</h2><div class="dhp-welcome-rule" aria-hidden="true"></div><p class="dhp-intro">Willkommen bei <strong>DĀR AL TAWḤĪD</strong> – einer geordneten Wissens-App mit Beiträgen aus <strong>Qurʾān</strong>, <strong>Sunnah</strong>, den <strong>Āthār der frühen Imāme</strong> und einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah.</p></section>'+
   '<section class="dhp-isnad" aria-labelledby="dhpQuoteTitle"><div class="dhp-isnad-label" id="dhpQuoteTitle">ÜBERLIEFERUNGSMAẞSTAB</div><blockquote class="dhp-quote"><span class="dhp-quote-text">„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“</span><div class="dhp-tiny dhp-quote-source">Muḥammad ibn Sīrīn</div></blockquote></section>'+
   '<div class="dhp-quickbar" aria-label="Schnellzugriffe">'+q+'</div>'+
   '<section class="dhp-search-box" aria-label="Intelligente Wissenssuche"><div class="dhp-search-pill"><span aria-hidden="true" class="dhp-search-icon">⌕</span><input id="dhpSearch" type="search" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" placeholder="Wissen, Qurʾān, Ḥadīṯ, Themen suchen …" aria-label="Intelligente Suche in allen Bereichen" aria-controls="dhpResults" aria-expanded="false"><button type="button" id="dhpSearchClear" aria-label="Suchtext löschen" hidden>×</button></div><div id="dhpResults" class="dhp-results" hidden role="listbox" aria-label="Suchergebnisse"></div></section>'+
@@ -604,7 +603,7 @@ function mirrorFriday(){
  if(!root)return;
  var original=document.querySelector("#appView #darJummahFridayHome");
  var target=root.querySelector("#dhpFridayMirror");
- var prayer=root.querySelector(".dat-smart-prayer")||root.querySelector("#dhpPrayerNativeMount")||root.querySelector(".dhp-prayer");
+ var prayer=root.querySelector(".dat-smart-prayer")||root.querySelector(".dhp-home-source-v55");
  if(!prayer)return;
  if(!target){
   target=document.createElement("section");
@@ -636,10 +635,33 @@ function mirrorFriday(){
 function sync(){
  if(!document.body||!document.body.classList.contains("is-home-route"))return;
  var root=create();if(!root)return;
- updateBrand();updatePrayer();recent();quran();modal();mirrorNativePrayer();mirrorFriday();
+ updateBrand();recent();quran();modal();mirrorFriday();
 }
 function queue(){if(pending)return;pending=true;requestAnimationFrame(function(){pending=false;try{sync()}catch(e){console.warn("Visitor Home parity",e)}})}
+function loadVisitorSmartDashboard(){
+ /* The active adult visitor home owns this bundle. No visitor index duplication. */
+ var root=document.head||document.documentElement;
+ var styles=[
+  ["darVisitorSmartProfileCssV1","/assets/dar-visitor-smart-profile-v1.css?v=20261030-live-v1"],
+  ["darVisitorDailyHubCssV1","/assets/dar-visitor-daily-hub-v1.css?v=20261030-live-v1"],
+  ["darVisitorProfilePickerCssV1","/assets/dar-visitor-profile-picker-v1.css?v=20261030-live-v1"]
+ ];
+ styles.forEach(function(pair){if(document.getElementById(pair[0]))return;
+  var link=document.createElement("link");link.rel="stylesheet";link.id=pair[0];link.href=pair[1];root.appendChild(link)
+ });
+ var scripts=[
+  ["darVisitorSmartProfileJsV1","/assets/dar-visitor-smart-profile-v1.js?v=20261030-live-v1"],
+  ["darVisitorProfilePickerJsV1","/assets/dar-visitor-profile-picker-v1.js?v=20261030-live-v1"],
+  ["darVisitorDailyHubJsV1","/assets/dar-visitor-daily-hub-v1.js?v=20261030-live-v1"]
+ ];
+ scripts.forEach(function(pair){if(document.getElementById(pair[0]))return;
+  var script=document.createElement("script");script.id=pair[0];script.src=pair[1];script.async=false;
+  script.onerror=function(){console.warn("DĀR Besucher: persönliches Dashboard konnte nicht geladen werden",pair[1])};
+  root.appendChild(script)
+ });
+}
 function init(){
+ loadVisitorSmartDashboard();
  queue();
  var view=document.getElementById("appView");
  if(view)new MutationObserver(queue).observe(view,{subtree:true,childList:true});
