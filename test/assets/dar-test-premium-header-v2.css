@@ -293,7 +293,7 @@ html.dar-test-premium-header-v2 body.is-topic-route #appView .topic-collection-p
 html.dar-test-premium-header-v2 body.is-hadith-route #appView .hadith-hub > .view-head,
 html.dar-test-premium-header-v2 body.is-dua-route #appView .dua-hub > .view-head,
 html.dar-test-premium-header-v2 body.is-post-route #appView .post-reader > .post-reader-title,
-html.dar-test-premium-header-v2 body.is-settings-route #appView.view > .view-head.settings-page-head,
+/* Settings image is relative and must not be translated by sticky header offset. */
 html.dar-test-premium-header-v2 body.has-bottom-nav #appView [data-hero-kind][data-hero-scroll="sticky"] > .dar-hero-stage{
   top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px))!important;
 }
@@ -404,4 +404,14 @@ html.dar-test-premium-header-v2 body.is-hadith-route #appView .hadith-hub > .vie
 html.dar-test-premium-header-v2 body.is-frauen-route #appView .frauen-library-pinned-header,
 html.dar-test-premium-header-v2 body.has-bottom-nav #appView [data-hero-kind][data-hero-scroll="sticky"] > .dar-hero-stage{
   top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px))!important;
+}
+
+
+/* RELATIVE_HERO_STAYS_IN_FLOW_V4
+   Prior global sticky group included settings-page-head (position:relative).
+   A nonzero top physically shifted its image and left an empty strip.
+   Reset only that accidental displacement; untouched image size and crop. */
+html.dar-test-premium-header-v2 body.is-settings-route #appView.view > .view-head.settings-page-head{
+  top:auto!important;
+  inset-block-start:auto!important;
 }
