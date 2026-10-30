@@ -8868,6 +8868,17 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-07T23:59:00.000Z"
+    },
+    {
+      "id": "adult-ios-visitor-native-profile-dashboard-bridge-20261030",
+      "at": "2026-10-30T14:31:00+01:00",
+      "approvedBy": "user-explicit-original-installed-ios-visitor-app-not-website-20261030",
+      "reason": "Narrow Xcode source change only to the shipping adult DarAlTawhid iOS WebAppView: ensure the already-live visitor adaptive female/male profile dashboard, native WebKit tab and daily quiz scripts are loaded reliably in the installed iOS visitor wrapper, and hide only obsolete duplicate home prayer clock elements while preserving canonical prayer data and new compact live prayer clock. Do not change Kids, targets/schemes, signing, notifications, geolocation, builds, app versions or publish Apple Store binaries without proper archive.",
+      "paths": [
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-05T23:59:00.000Z"
     }
   ],
   "enabled": true
