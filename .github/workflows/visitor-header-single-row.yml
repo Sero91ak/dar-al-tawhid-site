@@ -10,6 +10,10 @@ on:
       - 'test/assets/ilm-research-chat.js'
       - 'scripts/check-fixed-header-occlusion.cjs'
       - 'scripts/check-fixed-header-occlusion-browser.py'
+      - 'scripts/check-adult-hero-seam.cjs'
+      - 'scripts/check-adult-hero-seam-browser.py'
+      - 'assets/adult-immersive-hero-v1.css'
+      - 'test/assets/adult-immersive-hero-v1.css'
       - 'scripts/check-adult-duo-prayer-layout.cjs'
       - 'assets/dar-home-test-parity-visitor.js'
       - 'test/assets/dar-home-html-parity-v1.js'
@@ -38,6 +42,10 @@ on:
       - 'test/assets/ilm-research-chat.js'
       - 'scripts/check-fixed-header-occlusion.cjs'
       - 'scripts/check-fixed-header-occlusion-browser.py'
+      - 'scripts/check-adult-hero-seam.cjs'
+      - 'scripts/check-adult-hero-seam-browser.py'
+      - 'assets/adult-immersive-hero-v1.css'
+      - 'test/assets/adult-immersive-hero-v1.css'
       - 'scripts/check-adult-duo-prayer-layout.cjs'
       - 'assets/dar-home-test-parity-visitor.js'
       - 'test/assets/dar-home-html-parity-v1.js'
@@ -72,6 +80,7 @@ jobs:
           node scripts/check-visitor-header-single-row.cjs
           node scripts/check-visitor-more-responsive.cjs
           node scripts/check-fixed-header-occlusion.cjs
+          node scripts/check-adult-hero-seam.cjs
           node scripts/check-adult-duo-prayer-layout.cjs
 
   browser-hit-test:
@@ -84,4 +93,6 @@ jobs:
       - name: Install browser test driver
         run: python3 -m pip install --quiet selenium
       - name: Test actual Chromium hit areas at five device viewports (Test and Visitor)
-        run: python3 scripts/check-fixed-header-occlusion-browser.py
+        run: |
+          python3 scripts/check-fixed-header-occlusion-browser.py
+          python3 scripts/check-adult-hero-seam-browser.py
