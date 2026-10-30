@@ -91,3 +91,5 @@
  #darHomeHtmlParityV1 .dsp-home button,#appView .dsp-account button{transition:none!important;transform:none!important}
 }
 /* Artwork is static: no parallax, position:fixed or extra scrolling container. */
+/* Preserve native account action while showing a woman's chosen avatar. */
+body .home-account-pill .dsp-header-avatar{display:inline-block;width:23px;height:23px;max-width:23px;object-fit:contain;vertical-align:middle;margin-inline-end:6px;flex:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,.1))}
