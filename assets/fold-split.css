@@ -633,3 +633,37 @@ html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[
 html.is-fold-dual:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="posts"] .dar-fold__rail :is(h1,h2,h3,p,a,button,span){
   overflow-wrap:anywhere!important;
 }
+
+/* v1333 · One posture per hardware.
+   hinge-book: browser reports two viewport segments (Fold/Duo spanned).
+   fold-book: Samsung inner display, nearly square, split on the crease.
+   duo-book: two portrait screens side by side, wider hinge gap.
+   span-stack: two screens one above the other.
+   tablet-book: iPad landscape, continuous glass, list narrower than the reader.
+   Cover, one Duo screen and phone portrait stay a single column. */
+html[data-device-posture="fold-book"],
+html[data-device-posture="duo-book"],
+html[data-device-posture="hinge-book"]{
+  --fold-rail-min:0px;
+  --fold-rail-max:none;
+}
+html[data-fold-dual="1"][data-device-posture="fold-book"] .dar-fold[data-fold-mode="dual"],
+html[data-fold-dual="1"][data-device-posture="duo-book"] .dar-fold[data-fold-mode="dual"],
+html[data-fold-dual="1"][data-device-posture="hinge-book"] .dar-fold[data-fold-mode="dual"]{
+  grid-template-columns:minmax(0,var(--fold-rail-current,1fr)) minmax(0,1fr)!important;
+  column-gap:var(--fold-hinge,18px)!important;
+  gap:var(--fold-hinge,18px)!important;
+}
+html[data-device-posture="hinge-book"] .dar-fold[data-fold-mode="dual"]{
+  grid-template-columns:minmax(0,env(viewport-segment-width 0 0, var(--fold-rail-current, 1fr))) minmax(0,env(viewport-segment-width 1 0, 1fr))!important;
+}
+html[data-device-posture="span-stack"] .dar-fold[data-fold-mode="dual"]{
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-rows:minmax(0,46%) minmax(0,1fr)!important;
+  row-gap:var(--fold-hinge,24px)!important;
+  column-gap:0!important;
+}
+html[data-device-posture="span-stack"] .dar-fold[data-fold-mode="dual"] > .dar-fold__rail{
+  border-inline-end:0!important;
+  border-bottom:1px solid var(--fold-divider, transparent)!important;
+}

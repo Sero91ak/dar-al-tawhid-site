@@ -10549,7 +10549,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/dar-quran-player.js?v=1111" defer></script>
 <script src="/assets/dar-quran-learn-studio.js?v=2" defer></script>
 <link rel="stylesheet" href="/assets/dar-quran-learn-studio.css?v=2">
-<script src="/assets/adaptive-layout.js?v=20261030-nav-static-v1" defer></script>
+<script src="/assets/adaptive-layout.js?v=20261030-posture-v1" defer></script>
 <script src="/assets/qibla-quick-view.js?v=2" defer></script>
 <script src="/assets/global-update-banner.js?v=3"></script>
 <script src="/assets/fold-split.js?v=4" defer></script>
@@ -12188,7 +12188,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/dar-top-chrome-fix.css?v=2"><!-- DAR_TOP_CHROME_FIX -->
 <link rel="stylesheet" href="/assets/dar-ios-oversize-copy.css?v=7"><!-- DAR_IOS_OVERSIZE_COPY -->
 <link rel="stylesheet" href="/assets/full-edge-appearance-polish.css?v=666">
-<link rel="stylesheet" href="/assets/fold-split.css?v=1332-read">
+<link rel="stylesheet" href="/assets/fold-split.css?v=1333-posture">
 <style id="typography-compact-fix-v310">
 /* Finale Typografie-Korrektur — gewinnt gegen Home-Compact-Overrides */
 .section-head h3,
@@ -29387,8 +29387,11 @@ window.addEventListener("dar:layoutchange",function(ev){
     var d=ev&&ev.detail||{};
     var prev=window.__darLastFoldDual;
     var now=!!(d.dual!=null?d.dual:(window.DarFold&&DarFold.isDual()));
-    if(prev===now)return;
+    var posture=String(d.posture||document.documentElement.getAttribute("data-device-posture")||"");
+    var prevPosture=window.__darLastFoldPosture||"";
+    if(prev===now&&prevPosture===posture)return;
     window.__darLastFoldDual=now;
+    window.__darLastFoldPosture=posture;
     /* Zustand beim Drehen/Fold behalten: Scroll, Rail, Suche, Route bleibt in Hash */
     try{
       window.__darPreserveLayoutScrollY=window.scrollY||0;
