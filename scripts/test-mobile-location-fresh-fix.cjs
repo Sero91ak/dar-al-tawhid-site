@@ -128,6 +128,7 @@ async function testOne(file) {
   invalid.start();
   invalid.fire("dar-native-location",{lat:null,lng:null,acc:null,timestamp:null});
   invalid.fire("dar-native-location",{lat:50,lng:7,acc:20,timestamp:null});
+  invalid.fire("dar-native-location",{lat:"",lng:"",acc:"",timestamp:""});
   assert.equal(invalid.writes.length,0,
     "Invalid GPS payloads must never overwrite prayer settings");
 
