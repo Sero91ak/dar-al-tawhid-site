@@ -44,7 +44,7 @@ assert(visitorPicker.includes('row.insertBefore(trigger,theme)'), "Profile butto
 assert(visitorPicker.includes('row.querySelector(".dtbh-toggle")'), "Original palette handler must be reused");
 assert(!visitorPicker.includes("language-classic-v7"), "Visitor must not add language selector");
 assert(testHeader.includes('button("Sprache auswählen","language")'), "Test language shortcut was changed");
-const url = "/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-capsule-parity-v6";
+const url = "/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-shortcuts-v9";
 assert(visitorLoader.includes(url), "Visitor lazy-loader still uses old CSS");
 assert(edgeRouter.includes(url), "Android/PWA edge response still uses old CSS");
 assert(iosWebView.includes("ios-visitor-profile-capsule-20261030"), "Native iOS fallback cache key outdated");
