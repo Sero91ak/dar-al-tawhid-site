@@ -295,13 +295,13 @@ function activateAdultGlobalBrandV2(html) {
     ['darAdultGlobalBrandStyleV2','<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261030-compact-horizontal-v1">'],
     ['darVisitorSmartProfileCssV1','<link rel="stylesheet" id="darVisitorSmartProfileCssV1" href="/assets/dar-visitor-smart-profile-v1.css?v=20261030-android-global-parity-v8">'],
     ['darVisitorProfilePickerCssV1','<link rel="stylesheet" id="darVisitorProfilePickerCssV1" href="/assets/dar-visitor-profile-picker-v1.css?v=20261030-header-single-row-v5">'],
-    ['darVisitorDailyHubCssV1','<link rel="stylesheet" id="darVisitorDailyHubCssV1" href="/assets/dar-visitor-daily-hub-v1.css?v=20261030-android-global-parity-v8">'],
-    ['darVisitorOnboardingCssV1','<link rel="stylesheet" id="darVisitorOnboardingCssV1" href="/assets/dar-visitor-onboarding-v1.css?v=20261030-android-global-parity-v8">'],
+    ['darVisitorDailyHubCssV1','<link rel="stylesheet" id="darVisitorDailyHubCssV1" href="/assets/dar-visitor-daily-hub-v1.css?v=20261030-mehr-responsive-v2">'],
+    ['darVisitorOnboardingCssV1','<link rel="stylesheet" id="darVisitorOnboardingCssV1" href="/assets/dar-visitor-onboarding-v1.css?v=20261030-mehr-responsive-v2">'],
     ['darAdultGlobalBrandScriptV2','<script defer id="darAdultGlobalBrandScriptV2" src="/assets/dar-adult-brand-header-v2.js?v=20261022-source-greeting-v5"></' + 'script>'],
     ['darVisitorSmartProfileJsV1','<script defer id="darVisitorSmartProfileJsV1" src="/assets/dar-visitor-smart-profile-v1.js?v=20261030-android-global-parity-v8"></' + 'script>'],
     ['darVisitorProfilePickerJsV1','<script defer id="darVisitorProfilePickerJsV1" src="/assets/dar-visitor-profile-picker-v1.js?v=20261030-android-global-parity-v8"></' + 'script>'],
-    ['darVisitorDailyHubJsV1','<script defer id="darVisitorDailyHubJsV1" src="/assets/dar-visitor-daily-hub-v1.js?v=20261030-android-global-parity-v8"></' + 'script>'],
-    ['darVisitorOnboardingJsV1','<script defer id="darVisitorOnboardingJsV1" src="/assets/dar-visitor-onboarding-v1.js?v=20261030-android-global-parity-v8"></' + 'script>']
+    ['darVisitorDailyHubJsV1','<script defer id="darVisitorDailyHubJsV1" src="/assets/dar-visitor-daily-hub-v1.js?v=20261030-mehr-responsive-v2"></' + 'script>'],
+    ['darVisitorOnboardingJsV1','<script defer id="darVisitorOnboardingJsV1" src="/assets/dar-visitor-onboarding-v1.js?v=20261030-mehr-responsive-v2"></' + 'script>']
   ];
   const addon = addons.filter(([id]) => !html.includes('id="' + id + '"')).map(([,tag]) => tag).join("");
   if (!addon) return html;
