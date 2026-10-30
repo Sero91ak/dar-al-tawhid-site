@@ -412,6 +412,8 @@ function isDynamicGermanUi(value){
   /^Taḥajjud · \d+ Min vor Fajr$/.test(value)||
   /^Wiederholen · .+$/.test(value)||
   /^ḤADĪṮ-WERK · .+$/.test(value)||
+  /^\d+ Titel$/.test(value)||
+  /^Bildbeitrag zu: .+$/.test(value)||
   compoundKnown(value);
 }
 function compoundKnown(value){
@@ -895,6 +897,27 @@ function translateSharedPatterns(value,language){
   const head=lookupPack("ḤADĪṮ-WERK",language);
   if(head)return head+" · "+hadithWork[1];
  }
+ const titleCount=value.match(/^(\d+) Titel$/);
+ if(titleCount){
+  const n=titleCount[1];
+  const forms={
+   ar:n==="1"?"عنوان واحد":n+" عناوين",
+   en:n==="1"?"1 title":n+" titles",
+   tr:n+" başlık",
+   ku:n+" sernav",
+   ckb:n==="1"?"ناونیشانێک":n+" ناونیشان",
+   bs:n==="1"?"1 naslov":n+" naslova",
+   fr:n==="1"?"1 titre":n+" titres",
+   es:n==="1"?"1 título":n+" títulos"
+  };
+  return forms[language]||null;
+ }
+ const picture=value.match(/^Bildbeitrag zu: (.+)$/);
+ if(picture){
+  const head=lookupPack("Bildbeitrag zu:",language);
+  const rest=lookupPack(picture[1],language)||picture[1];
+  if(head)return head+" "+rest;
+ }
  return null;
 }
 function translateExact(value,language="tr"){
@@ -1179,7 +1202,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-23";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-24";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

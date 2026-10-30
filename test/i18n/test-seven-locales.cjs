@@ -85,6 +85,9 @@ assert.equal(locales.translations.ckb["Klassisches Ḥadīṯ-Werk"],"بەرهە
 assert.equal(locales.translations.en["LESBAR"],"READABLE");
 assert.equal(w.DarTestTurkishUI.translateValue("Gebete deaktiviert · Duʿāʾ 09:00","en"),locales.translations.en["Gebete deaktiviert"]+" · "+locales.translations.en["Duʿāʾ 09:00"]);
 assert.equal(locales.translations.fr["Bildschirm darf ausgehen"],"L’écran peut s’éteindre");
+assert.equal(w.DarTestTurkishUI.translateValue("3 Titel","en"),"3 titles");
+assert.equal(w.DarTestTurkishUI.translateValue("Bildbeitrag zu: Beitrag","fr"),locales.translations.fr["Bildbeitrag zu:"]+" "+locales.translations.fr.Beitrag);
+assert.equal(locales.translations.ar["Tawḥīd & ʿAqīdah"],"التوحيد ثم العقيدة");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
