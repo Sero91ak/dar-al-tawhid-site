@@ -197,6 +197,14 @@ function checkAdultCopyInk(file) {
 checkAdultCopyInk("test/index.html");
 checkAdultCopyInk("index.html");
 
+try {
+  require("child_process").execFileSync(process.execPath,
+    [path.join(__dirname, "test-qibla-native-bridge.cjs")],
+    {stdio: "inherit"});
+} catch (e) {
+  fail("Shared Qibla quick-view / Visitor and DAR TEST capsule regression");
+}
+
 if (failed) {
   console.error(`\n${failed} check(s) failed – Deploy stoppen.`);
   process.exit(1);
