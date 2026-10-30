@@ -48,4 +48,27 @@ assert(!source.includes('document.querySelectorAll("#dv3Latest .dv3-post'),
 assert(source.includes('typeof posts!=="undefined"'),
   "Canonical posts data source must be used directly");
 
+// Never add the same unconditional selector/property/value twice again.
+// A redundant declaration is an obsolete style layer, not a fallback.
+// Content pseudo-element compatibility is checked separately.
+const actualCss = vm.runInNewContext(source.slice(start, end) + "\nstylesheet()");
+const seenDeclarations = new Map();
+for (const line of actualCss.split("\n")) {
+  const match = line.match(/^(#darHomeHtmlParityV1[^{]*?)\{([^{}]*)\}$/);
+  if (!match) continue; // Media queries have independent conditions.
+  const declarations = seenDeclarations.get(match[1]) || new Map();
+  for (const d of match[2].split(";").map(s => s.trim()).filter(Boolean)) {
+    const sep = d.indexOf(":");
+    if (sep < 0) continue;
+    const property = d.slice(0, sep);
+    const value = d.slice(sep + 1);
+    if (property !== "content" && property !== "src") {
+      assert.notEqual(declarations.get(property), value,
+        "Duplicate CSS declaration in active Home: " + match[1] + " / " + property);
+    }
+    declarations.set(property, value);
+  }
+  seenDeclarations.set(match[1], declarations);
+}
+
 console.log("PASS — DĀR TEST active Home CSS: dead selectors absent, capsules intact, routes isolated.");
