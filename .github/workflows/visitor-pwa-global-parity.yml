@@ -1,0 +1,36 @@
+name: Adult Visitor Android PWA Global Parity
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'pwa/service-worker.js'
+      - 'cloudflare/site-router.js'
+      - 'assets/dar-home-test-parity-visitor.js'
+      - 'assets/dar-adult-brand-header-v2.css'
+      - 'assets/dar-visitor-*.js'
+      - 'assets/dar-visitor-*.css'
+      - 'assets/dar-noble-3d-icons.js'
+      - 'scripts/test-visitor-android-pwa-parity-v1.cjs'
+      - '.github/workflows/visitor-pwa-global-parity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-android-ios-visitor-parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify shared adult dashboard, 3D tab and first-use flow
+        run: node scripts/test-visitor-android-pwa-parity-v1.cjs
+      - name: Validate Android worker and website router syntax
+        run: |
+          node --check pwa/service-worker.js
+          node --check assets/dar-visitor-smart-profile-v1.js
+          node --check assets/dar-visitor-profile-picker-v1.js
+          node --check assets/dar-visitor-daily-hub-v1.js
+          node --check assets/dar-visitor-onboarding-v1.js
+          node --check assets/dar-home-test-parity-visitor.js
