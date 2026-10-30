@@ -22,7 +22,54 @@ function fresh(){return {gender:"neutral",palette:"keep",chosen:false,interests:
 function read(){var p=fresh();try{var item=JSON.parse(localStorage.getItem(key())||"null");if(item&&typeof item==="object"){p.gender=["neutral","woman","man"].includes(item.gender)?item.gender:"neutral";p.palette=availableThemes().includes(item.palette)?item.palette:"keep";p.chosen=item.chosen===true;p.interests=Array.isArray(item.interests)?item.interests.filter(x=>TOPICS.some(y=>y[0]===x)).slice(0,9):[];p.notes=Array.isArray(item.notes)?item.notes.filter(x=>x&&typeof x.text==="string").slice(0,40).map(x=>({text:x.text.slice(0,1600),date:String(x.date||"").slice(0,30)})):[];p.saved=Array.isArray(item.saved)?item.saved.filter(x=>typeof x==="string").slice(0,100):[];p.opened=Array.isArray(item.opened)?item.opened.filter(x=>typeof x==="string").slice(0,30):[]}}catch(_){}
 return p}
 function write(p){p.updated=Date.now();try{localStorage.setItem(key(),JSON.stringify(p))}catch(e){console.warn("DĀR VISITOR: Profil kann nicht gespeichert werden",e)}refresh()}
-function saveGender(gender){if(!["woman","man","neutral"].includes(gender))return;var p=read(),previous=p.gender;p.gender=gender;p.chosen=true;if(gender==="man"){p.interests=p.interests.filter(x=>x!=="women");if(previous!=="man"&&!p.interests.includes("tawhid"))p.interests.unshift("tawhid")}if(gender==="woman"&&!p.interests.includes("women"))p.interests.unshift("women");if(!p.interests.length)p.interests=gender==="woman"?["women","quran","family"]:["tawhid","quran","sunnah"];p.interests=p.interests.slice(0,9);write(p);document.dispatchEvent(new CustomEvent("dar:visitor-profile-changed",{detail:{gender:p.gender}}))}
+var PROFILE_REAUTH_TOKEN={};var failedProfilePin=0,blockedProfilePinUntil=0;
+function isProfileLocked(){var s=account();return !!(s&&String(s.id||s.username||"").trim()&&read().chosen)}
+function saveGender(gender,permit){if(!["woman","man","neutral"].includes(gender))return false;
+ if(isProfileLocked()&&permit!==PROFILE_REAUTH_TOKEN)return false;
+ var p=read(),previous=p.gender;p.gender=gender;p.chosen=true;if(gender==="man"){p.interests=p.interests.filter(x=>x!=="women");if(previous!=="man"&&!p.interests.includes("tawhid"))p.interests.unshift("tawhid")}if(gender==="woman"&&!p.interests.includes("women"))p.interests.unshift("women");if(!p.interests.length)p.interests=gender==="woman"?["women","quran","family"]:["tawhid","quran","sunnah"];p.interests=p.interests.slice(0,9);write(p);document.dispatchEvent(new CustomEvent("dar:visitor-profile-changed",{detail:{gender:p.gender}}));return true}
+
+async function changeGenderWithLogin(gender,pin){
+ if(!["woman","man","neutral"].includes(gender))throw new Error("Ungültiger Wissensbereich.");
+ var session=account();
+ if(!session||!read().chosen){saveGender(gender);return true}
+ var now=Date.now();
+ if(blockedProfilePinUntil>now)throw new Error("Zu viele Versuche. Bitte später erneut anmelden.");
+ if(!/^\d{4,8}$/.test(String(pin||"")))throw new Error("Bitte die Konto-PIN (4–8 Ziffern) eingeben.");
+ if(typeof accountFindProfile!=="function"||typeof accountPinHash!=="function")throw new Error("Kontoanmeldung nicht verfügbar. Bitte den Kontobereich öffnen.");
+ // Use the existing account's same live login verifier; this does NOT create
+ // a parallel account system or pretend to make client-side PINs server auth.
+ var username=String(session.username||"");
+ if(!username)throw new Error("Kontoanmeldung konnte nicht bestätigt werden.");
+ try{
+  var live=await accountFindProfile(username);
+  if(!live||String(live.id)!==String(session.id))throw new Error("Anmeldung nicht bestätigt.");
+  var hash=await accountPinHash(username,String(pin),live.pin_salt);
+  if(hash!==live.pin_hash)throw new Error("PIN stimmt nicht.");
+ }catch(err){
+  failedProfilePin++;if(failedProfilePin>=3){blockedProfilePinUntil=Date.now()+60000;failedProfilePin=0}
+  throw err
+ }
+ // A stale login must not mutate a different account if the session changed
+ // while authentication was in progress.
+ if(!account()||String(account().id)!==String(session.id))throw new Error("Die Kontositzung hat sich geändert.");
+ failedProfilePin=0;blockedProfilePinUntil=0;
+ return saveGender(gender,PROFILE_REAUTH_TOKEN)
+}
+function adoptGuestChoiceAfterLogin(){
+ var s=account();if(!s||!String(s.id||"").trim())return;
+ var active=read();
+ if(active.chosen)return;
+ try{
+  var prior=JSON.parse(localStorage.getItem(K+"guest")||"null");
+  if(!prior||prior.chosen!==true||!["woman","man","neutral"].includes(prior.gender))return;
+  // Import preference only. Existing guest notes remain untouched and
+  // available in Guest; never silently merge or overwrite private entries.
+  active.gender=prior.gender;active.chosen=true;
+  active.interests=Array.isArray(prior.interests)?prior.interests.filter(x=>TOPICS.some(t=>t[0]===x)).slice(0,9):[];
+  active.palette=availableThemes().includes(prior.palette)?prior.palette:"keep";
+  write(active);
+ }catch(_){}
+}
 function chooseTheme(value){if(value==="keep")return false;
  var actual=document.querySelector('.dtbh-choice[data-dtbh-theme="'+value+'"]')||document.querySelector('.theme-switch-btn[data-theme-select="'+value+'"]');
  if(actual){actual.click();return true}
@@ -245,7 +292,7 @@ function updateAccount(p){if(!document.body.classList.contains("is-account-route
  if(!el){el=document.createElement("div");el.className="dsp-account-mount";panel.insertBefore(el,panel.firstChild)}
  var sig=owner()+"|"+JSON.stringify([p.gender,p.palette,p.interests,p.notes,p.saved]);if(el.dataset.dspSig!==sig){el.innerHTML=accountPanel(p);el.dataset.dspSig=sig}
 }
-function refresh(){if(scheduled)return;scheduled=true;requestAnimationFrame(function(){scheduled=false;try{var o=owner(),p=read();if(o!==lastOwner){lastOwner=o;if(p.palette!=="keep")chooseTheme(p.palette)}
+function refresh(){if(scheduled)return;scheduled=true;requestAnimationFrame(function(){scheduled=false;try{var o=owner();if(o!==lastOwner){lastOwner=o;adoptGuestChoiceAfterLogin()}var p=read();if(o!==lastOwner&&p.palette!=="keep")chooseTheme(p.palette)
  updateHome(p);updateAccount(p);syncHeaderAvatar(p)}catch(e){console.warn("DĀR VISITOR Smart Profile",e)}})}
 function nav(view,value){try{if(typeof navigate==="function"){navigate(view,value||"");return}}catch(_){}location.hash="#"+view}
 document.addEventListener("click",function(e){
@@ -265,7 +312,7 @@ document.addEventListener("click",function(e){
  if(b.hasAttribute("data-dsp-close-notes")){closeNotes();return}
  if(b.hasAttribute("data-dsp-open-saved")){toggleSection("saved",true);return}
  if(b.hasAttribute("data-dsp-toggle")){toggleSection(b.getAttribute("data-dsp-toggle"));return}
- if(b.hasAttribute("data-dsp-switch-profile")){var chooser=window.DAR_TEST_PROFILE_CHOOSER;if(chooser&&typeof chooser.open==="function"){chooser.open()}else{var headerButton=document.querySelector("#darAdultBrandHeaderV2 .dtbh-action-account");if(headerButton)headerButton.click()}return}
+ if(b.hasAttribute("data-dsp-switch-profile")){var chooser=window.DAR_VISITOR_PROFILE_PICKER_V1;if(chooser&&typeof chooser.open==="function")chooser.open();else document.getElementById("darVisitorProfileButtonV1")?.click()return}
  if(b.hasAttribute("data-dsp-open-more")){nav("more");return}
  if(b.hasAttribute("data-dsp-open-women")){nav("frauen");return}
  if(b.hasAttribute("data-dsp-open-discovery")){nav("topics");return}
@@ -273,7 +320,7 @@ document.addEventListener("click",function(e){
  if(b.hasAttribute("data-dsp-save")){var p=read(),id=b.getAttribute("data-dsp-save");p.saved=p.saved.includes(id)?p.saved.filter(x=>x!==id):p.saved.concat([id]).slice(-100);write(p);return}
  if(b.hasAttribute("data-dsp-add-note")){var input=document.getElementById("dspNoteText"),value=input&&input.value.trim();if(!value)return;var p=read();p.notes.push({text:value.slice(0,1600),date:new Date().toLocaleDateString("de-DE",{timeZone:"Europe/Berlin"})});p.notes=p.notes.slice(-40);write(p);openNotes();return}
  if(b.hasAttribute("data-dsp-remove-note")){var p=read(),n=Number(b.getAttribute("data-dsp-remove-note"));if(Number.isInteger(n)&&n>=0&&n<p.notes.length){p.notes.splice(n,1);write(p);openNotes()}return}
- if(b.hasAttribute("data-dsp-reset")){var p=read();p.gender="neutral";p.chosen=false;p.interests=[];p.palette="keep";write(p)}
+ if(b.hasAttribute("data-dsp-reset")){if(isProfileLocked()){window.DAR_VISITOR_PROFILE_PICKER_V1?.open?.();return}var p=read();p.gender="neutral";p.chosen=false;p.interests=[];p.palette="keep";write(p)}
 });
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&document.querySelector("#dspNotesOverlay:not([hidden])")){e.preventDefault();closeNotes()}});
 function init(){body=document.body;refresh();document.addEventListener("dar:view-rendered",refresh);window.addEventListener("hashchange",refresh);window.addEventListener("pageshow",refresh);window.addEventListener("focus",refresh);document.addEventListener("visibilitychange",function(){if(!document.hidden)refresh()});
@@ -282,6 +329,6 @@ function init(){body=document.body;refresh();document.addEventListener("dar:view
  // The last post content may arrive after the shell; refresh once when data finishes.
  setTimeout(refresh,700);setTimeout(refresh,1700);
 }
-window.DAR_VISITOR_SMART_PROFILE_V1={get:read,setGender:saveGender,image:image,recommendations:function(){return picks(read())},dashboard:function(){var p=read(),cards=picks(p),today=todayFeature(p,cards.map(x=>x.id));return {gender:p.gender,daily:cards,today:today,publications:publishedFor(p),focus:homeFocus(p)}},refresh:refresh};
+window.DAR_VISITOR_SMART_PROFILE_V1={get:read,setGender:saveGender,isLocked:isProfileLocked,changeGenderWithLogin:changeGenderWithLogin,openNotes:openNotes,openSaved:function(){expanded.saved=true;nav("account");setTimeout(function(){toggleSection("saved",true)},350)},account:account,image:image,recommendations:function(){return picks(read())},dashboard:function(){var p=read(),cards=picks(p),today=todayFeature(p,cards.map(x=>x.id));return {gender:p.gender,daily:cards,today:today,publications:publishedFor(p),focus:homeFocus(p)}},refresh:refresh};
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
