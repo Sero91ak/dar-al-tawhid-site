@@ -56,9 +56,9 @@ for(const [lane,src] of [["visitor",visitorHome],["test",testHome]]){
  assert.match(src,/window\.setInterval\(update,1000\)/,"Live countdown must still tick");
  assert.match(src,/card\.dataset\.dhpRoute="prayer"/,"Prayer click navigation must remain");
 }
-assert.match(siteRouter,/dar-adult-brand-header-v2\.css\?v=20261030-hero-top-seam-v2/);
+assert.match(siteRouter,/dar-adult-brand-header-v2\.css\?v=20261030-hero-route-matrix-v3/);
 assert.match(siteRouter,/dar-home-test-parity-visitor\.js\?v=20261030-prayer-compact-colors-v3/);
-assert.match(testWorker,/dar-test-premium-header-v2\.css\?v=20261030-hero-top-seam-v2/);
+assert.match(testWorker,/dar-test-premium-header-v2\.css\?v=20261030-hero-route-matrix-v3/);
 assert.match(testWorker,/dar-home-html-parity-v1\.js\?v=20261030-prayer-compact-colors-v3/);
 assert.doesNotMatch(visitorHeader,/body\s*\{\s*padding-top:0!important/,"Do not reset body safe area indiscriminately");
 console.log("PASS: both adult apps support compact Duo/Fold safe header, compact, differentiated prayer colors with unchanged date/footer layout, and versioned delivery.");
