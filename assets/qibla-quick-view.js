@@ -552,9 +552,26 @@
 
   var QiblaQuickView = {
     isOpen: function () {
-      return !!(ui.root && !ui.root.hidden);
+      // Both entrypoints use the same gold full-screen quick finder when it exists.
+      var live = document.getElementById("darQiblaPop");
+      return !!(live || (ui.root && !ui.root.hidden));
     },
     open: function () {
+      // Never start the second blue compass when the main application is ready.
+      // Keep the older standalone fallback only for pages without the main route.
+      if (typeof root.openQiblaQuickSheet === "function") {
+        if (this.isOpen()) return;
+        if (ui.root && !ui.root.hidden) this.stop();
+        if (ui.root) ui.root.hidden = true;
+        root.__DAR_QIBLA_HOME_ENTRY = true;
+        try {
+          root.openQiblaQuickSheet();
+        } catch (err) {
+          root.__DAR_QIBLA_HOME_ENTRY = false;
+          throw err;
+        }
+        return;
+      }
       try { if (typeof root.stopQiblaCompass === "function") root.stopQiblaCompass(); } catch (e) {}
       ui.root = ensureDom();
       ui.root.hidden = false;
@@ -579,6 +596,11 @@
       startCompass(false);
     },
     close: function () {
+      if (root.__DAR_QIBLA_HOME_ENTRY && typeof root.closeQiblaQuickSheet === "function") {
+        root.__DAR_QIBLA_HOME_ENTRY = false;
+        root.closeQiblaQuickSheet();
+        return;
+      }
       this.stop();
       if (ui.root) ui.root.hidden = true;
       document.documentElement.classList.remove("qibla-qv-open");
