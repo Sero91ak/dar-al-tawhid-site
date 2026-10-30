@@ -333,6 +333,17 @@ function activateAdultCompactHero(html) {
     const scrollAddon = adultTopScrollBoundaryAddon();
     html = html.includes("</body>") ? html.replace("</body>", scrollAddon + "</body>") : html + scrollAddon;
   }
+  /* Visitor front-display width correction: always install independently of
+     the older hero tags. Native iOS WKWebView, Android PWA and visitor website
+     receive the same narrow-stage rules; Kids/Test and admin remain excluded. */
+  if(!html.includes('id="darVisitorFrontstageCssV1"')){
+    const style='<link rel="stylesheet" id="darVisitorFrontstageCssV1" href="/assets/dar-visitor-frontstage-v1.css?v=20261030-frontstage-v2">';
+    html=html.includes("</body>")?html.replace("</body>",style+"</body>"):html+style;
+  }
+  if(!html.includes('id="darVisitorFrontstageJsV1"')){
+    const script='<script defer id="darVisitorFrontstageJsV1" src="/assets/dar-visitor-frontstage-v1.js?v=20261030-frontstage-v2"></' + 'script>';
+    html=html.includes("</body>")?html.replace("</body>",script+"</body>"):html+script;
+  }
   return html;
 }
 function liveFrauenNativeAddon() {
