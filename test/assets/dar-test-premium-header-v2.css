@@ -281,3 +281,25 @@ html.dar-test-premium-header-v2 body #appView :target{
    top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px))!important;
  }
 }
+
+
+/* GLOBAL_ADULT_STICKY_CLEARANCE_V1 · measured safe-area-aware sticky stack.
+   Fixed brand -> existing route hero -> existing sticky search. Preserve the
+   original page components, clickable controls and their stacking order.
+   Never add global body padding or independent scrolling to .app/#appView. */
+html.dar-test-premium-header-v2 body.is-frauen-route #appView .dar-immersive-hero-stage,
+html.dar-test-premium-header-v2 body.is-topics-route #appView .topics-hub > .view-head,
+html.dar-test-premium-header-v2 body.is-topic-route #appView .topic-collection-page > .view-head,
+html.dar-test-premium-header-v2 body.is-hadith-route #appView .hadith-hub > .view-head,
+html.dar-test-premium-header-v2 body.is-dua-route #appView .dua-hub > .view-head,
+html.dar-test-premium-header-v2 body.is-post-route #appView .post-reader > .post-reader-title,
+html.dar-test-premium-header-v2 body.is-settings-route #appView.view > .view-head.settings-page-head,
+html.dar-test-premium-header-v2 body.has-bottom-nav #appView [data-hero-kind][data-hero-scroll="sticky"] > .dar-hero-stage{
+  top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px))!important;
+}
+html.dar-test-premium-header-v2 body.is-topics-route #appView .topics-hub > :is(.search-panel,.search-pro-panel,.main-search,#homeSearchBlock),
+html.dar-test-premium-header-v2 body.is-topic-route #appView .topic-collection-page > :is(.search-panel,.search-pro-panel,.main-search),
+html.dar-test-premium-header-v2 body.is-hadith-route #appView .hadith-hub > :is(.main-search,#hadithSearchBlock),
+html.dar-test-premium-header-v2 body.is-dua-route #appView .dua-hub > :is(.main-search,.search-panel,.search-pro-panel){
+  top:calc(var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px)) + var(--dar-immersive-hero-height,190px))!important;
+}
