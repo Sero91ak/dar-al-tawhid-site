@@ -76,12 +76,8 @@ document.addEventListener("keydown",function(e){
  if(!e.shiftKey&&document.activeElement===b[b.length-1]){e.preventDefault();b[0].focus()}
 });
 function launcher(){
- var panel=document.getElementById("darVisitorProfilePanelV1");
- if(panel&&!panel.querySelector("[data-dvo-restart]")){
-  var b=document.createElement("button");b.type="button";b.className="dvo-profile-replay";b.dataset.dvoRestart="true";b.textContent="App-Einführung ansehen";panel.appendChild(b);
- }
- /* No first-screen promotional block: show one compact replay entry only
-    in Mehr > App. The profile popup retains its own replay shortcut. */
+ /* Keep the compact profile capsule focused: only the three profile options
+    and one Mein DĀR entry. Replay lives under Mehr > App, not inside popup. */
  var view=document.getElementById("appView");
  if(!view)return;
  view.querySelectorAll(".dvo-more-replay:not(.dvo-more-replay--compact)").forEach(function(el){el.remove()});
