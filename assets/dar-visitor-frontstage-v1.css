@@ -141,3 +141,70 @@ html[data-dar-visitor-frontstage="1"] body.has-bottom-nav #bottomNav.bottom-nav 
 @media(prefers-reduced-motion:reduce){
  html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 *{scroll-behavior:auto!important}
 }
+/* DAR_VISITOR_FRONTSTAGE_SECONDARY_PAGES_AND_DATE_V2 */
+/* Secondary adult sections must use the same actual front-display
+   containing block as Start. Preserve their own text padding and colors. */
+html[data-dar-visitor-frontstage="1"] body.has-bottom-nav #appView.view > :is(
+ .more-page,.account-page,.qov-page,.quran-overview,.quran-reader-shell,
+ .quiz-shell,.quiz-shell-pro,.prayer-overview,.library-shell,
+ .scholars-index,.frauen-page,.frauen-library-shell
+){
+ min-width:0!important;min-inline-size:0!important;
+ max-width:100%!important;max-inline-size:100%!important;
+ width:100%!important;box-sizing:border-box!important;
+ margin-inline:0!important;
+}
+html[data-dar-visitor-frontstage="1"] body.has-bottom-nav #appView.view :is(
+ .more-section,.more-page-content,.more-grid,.more-card,.account-panel,
+ .account-summary,.account-details-block,.dsp-account-mount,
+ .qov-surah-list,.quran-ayah-list,.quran-verse-list,
+ .ql-card,.quiz-card,.frauen-library-area-grid,.post-reader-main
+){
+ min-width:0!important;min-inline-size:0!important;
+ max-width:100%!important;max-inline-size:100%!important;
+ box-sizing:border-box!important;
+}
+html[data-dar-visitor-frontstage="1"] body.has-bottom-nav #appView.view :is(
+ .more-grid,.frauen-library-area-grid,.quran-verse-grid
+){
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,155px),1fr))!important;
+}
+@container dar-cover-prayer (max-width:380px){
+ html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-foot{
+   display:grid!important;
+   grid-template-columns:minmax(0,1fr)!important;
+   align-items:center!important;
+   gap:5px!important;
+ }
+ html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-dates{
+   display:flex!important;flex-wrap:wrap!important;
+   width:100%!important;max-width:100%!important;
+   overflow:visible!important;white-space:normal!important;
+ }
+ html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-hijri{
+   overflow:visible!important;white-space:normal!important;
+   text-overflow:clip!important;overflow-wrap:anywhere!important;
+ }
+ html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-local{
+   display:flex!important;justify-content:flex-end!important;
+   max-width:100%!important;
+ }
+}
+@media(max-width:420px){
+ html[data-dar-visitor-frontstage="1"] #darAdultBrandHeaderV2 .dvp-composite{
+   grid-template-columns:minmax(0,1fr)!important;
+   gap:11px!important;
+ }
+ html[data-dar-visitor-frontstage="1"] #darAdultBrandHeaderV2 .dvp-column-rule{
+   width:100%!important;height:1px!important;min-height:1px!important;
+   background:linear-gradient(90deg,transparent,var(--gold2,#b59a6c),transparent)!important;
+ }
+ html[data-dar-visitor-frontstage="1"] #darAdultBrandHeaderV2 .dvp-chooser{
+   max-height:75dvh!important;overflow-y:auto!important;
+ }
+}
+@media(min-width:711px){
+ html[data-dar-visitor-frontstage="0"] .dar-fold{
+   --dar-visitor-frontstage-narrow:initial;
+ }
+}
