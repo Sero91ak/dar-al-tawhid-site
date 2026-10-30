@@ -4,6 +4,11 @@ on:
     branches: [main]
     paths:
       - 'assets/dar-visitor-profile-picker-v1.css'
+      - 'assets/dar-adult-brand-header-v2.js'
+      - 'test/assets/dar-test-premium-header-v2.css'
+      - 'test/assets/dar-test-premium-header-v2.js'
+      - 'test/assets/ilm-research-chat.js'
+      - 'scripts/check-fixed-header-occlusion.cjs'
       - 'assets/dar-visitor-daily-hub-v1.js'
       - 'assets/dar-visitor-onboarding-v1.js'
       - 'assets/dar-visitor-onboarding-v1.css'
@@ -22,6 +27,11 @@ on:
     branches: [main]
     paths:
       - 'assets/dar-visitor-profile-picker-v1.css'
+      - 'assets/dar-adult-brand-header-v2.js'
+      - 'test/assets/dar-test-premium-header-v2.css'
+      - 'test/assets/dar-test-premium-header-v2.js'
+      - 'test/assets/ilm-research-chat.js'
+      - 'scripts/check-fixed-header-occlusion.cjs'
       - 'assets/dar-visitor-daily-hub-v1.js'
       - 'assets/dar-visitor-onboarding-v1.js'
       - 'assets/dar-visitor-onboarding-v1.css'
@@ -51,3 +61,4 @@ jobs:
         run: |
           node scripts/check-visitor-header-single-row.cjs
           node scripts/check-visitor-more-responsive.cjs
+          node scripts/check-fixed-header-occlusion.cjs
