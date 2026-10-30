@@ -116,7 +116,7 @@ body.is-home-route #appView.view{
 /* Typ A: Post preview / slider */
 .home-v380-post-preview{
   display:flex;flex-direction:column;gap:6px;min-height:100%;padding:14px 14px 12px;
-  border:1px solid color-mix(in srgb,var(--theme-border) 70%,transparent);border-radius:14px;
+  box-sizing:border-box;border:1px solid color-mix(in srgb,var(--theme-border) 70%,transparent);border-image:none;border-radius:14px;
   background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 86%,var(--theme-text) 4%));
   color:var(--theme-text);cursor:pointer;text-align:left;
 }
@@ -154,15 +154,15 @@ body.is-home-route #appView.view{
 /* Bibliotheken */
 .home-v380-lib-grid{display:grid;grid-template-columns:1fr;gap:12px}
 @media(min-width:760px){.home-v380-lib-grid{grid-template-columns:1fr 1fr}}
-.home-v380-lib-slider{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.home-v380-lib-slider{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-block:2px}
 .home-v380-lib-slider::-webkit-scrollbar{display:none}
 @media(max-width:759px){
-  .home-v380-lib-grid.home-v380-lib-grid--slider{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .home-v380-lib-grid.home-v380-lib-grid--slider{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-block:2px}
   .home-v380-lib-grid.home-v380-lib-grid--slider > .home-v380-lib-card{flex:0 0 clamp(82%,85vw,88%);scroll-snap-align:start}
 }
 .home-v380-lib-card{
   display:flex;flex-direction:column;gap:8px;min-height:120px;height:100%;padding:14px 14px 12px;
-  border:1px solid color-mix(in srgb,var(--theme-border) 70%,transparent);border-radius:14px;
+  box-sizing:border-box;border:1px solid color-mix(in srgb,var(--theme-border) 70%,transparent);border-image:none;border-radius:14px;
   background:linear-gradient(168deg,color-mix(in srgb,var(--theme-surface) 94%,transparent),color-mix(in srgb,var(--theme-surface) 86%,var(--theme-text) 4%));
   color:var(--theme-text);cursor:pointer;text-align:left;
 }
