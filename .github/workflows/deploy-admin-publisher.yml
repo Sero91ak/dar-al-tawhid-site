@@ -126,7 +126,9 @@ jobs:
           grep -n "deployMarker" worker.js | head -5
           grep -q "deployMarker: \"$EXPECT_DEPLOY_MARKER\"" worker.js
           hold_ok=0
-          for attempt in $(seq 1 30); do
+          # KOSTENSPERRE 2026-10-30: keine unbegrenzte Reclaim-Schleife.
+          # Maximal zwei gezielte Wiederholungen statt 30 Cloudflare-Deploys.
+          for attempt in $(seq 1 2); do
             echo "=== Reclaim attempt $attempt ==="
             wrangler deploy --name dar-admin-publisher
             for wait in 1 2 4 8; do
