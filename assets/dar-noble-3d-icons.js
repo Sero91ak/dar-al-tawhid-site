@@ -18,7 +18,7 @@
     duas:"dua.png",dua:"dua.png","dua-cat":"dua.png",
     hadith:"hadith.png",scholars:"scholars.png",scholar:"scholars.png",
     books:"library.png",book:"library.png",bibliothek:"library.png","bibliothek-detail":"library.png",
-    topics:"ilm.png",topic:"ilm.png",
+    topics:"topics.png",topic:"ilm.png",
     prayer:"prayer.png",jummah:"jummah.png",qibla:"compass.png",zakat:"zakat.png",
     ramadan:"ramadan.png",saved:"saved.png",settings:"settings.png",quiz:"quiz.png",
     calendar:"calendar.png",notifications:"bell.png",account:"lock.png",about:"scale.png",
