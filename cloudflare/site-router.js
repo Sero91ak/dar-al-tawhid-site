@@ -286,13 +286,17 @@ function adultTopScrollBoundaryAddon() {
  * No Kids, native OS code, push, prayer calculation, SW or scroll handlers changed. */
 function activateAdultGlobalBrandV2(html) {
   if (typeof html !== "string") return html;
+  /* Native iOS and PWA must use the same fresh prayer presentation as Test.
+     Keep desktop public browser, Kids and the original prayer engine isolated. */
+  html = html.replace(/\/assets\/dar-home-test-parity-visitor\.js\?v=[a-zA-Z0-9-]+/g,
+    "/assets/dar-home-test-parity-visitor.js?v=20261030-prayer-hierarchy-v2");
   /* VISITOR_PROFILE_HEADER_BOOT_V4: adult visitor native/PWA only.
    * Guarantee the approved palette icon, profile picker, smart personalization
    * and adaptive Frauen/Entdecken tab load with the original branded header.
    * Keep the public website, Kids and Test in their existing isolated lanes.
    * Reuse the lazy-loader's IDs so each module is loaded at most once. */
   const addons = [
-    ['darAdultGlobalBrandStyleV2','<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261030-fixed-occlusion-v2">'],
+    ['darAdultGlobalBrandStyleV2','<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261030-duo-compact-v1">'],
     ['darVisitorSmartProfileCssV1','<link rel="stylesheet" id="darVisitorSmartProfileCssV1" href="/assets/dar-visitor-smart-profile-v1.css?v=20261030-android-global-parity-v8">'],
     ['darVisitorProfilePickerCssV1','<link rel="stylesheet" id="darVisitorProfilePickerCssV1" href="/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-capsule-parity-v6">'],
     ['darVisitorDailyHubCssV1','<link rel="stylesheet" id="darVisitorDailyHubCssV1" href="/assets/dar-visitor-daily-hub-v1.css?v=20261030-mehr-responsive-v2">'],
@@ -1472,7 +1476,7 @@ export default {
         html = html.replace('/assets/fold-split.js?v=4', '/assets/fold-split.js?v=5');
         // Android installed PWA: bump URLs for the shared visitor home and 3D icon renderer.
         // An old v3 PWA worker may otherwise return a permanently stale cache-first asset.
-        html = html.replace('/assets/dar-home-test-parity-visitor.js?v=20261030-home-order-clock-v2', '/assets/dar-home-test-parity-visitor.js?v=20261030-android-global-parity-v8');
+        html = html.replace('/assets/dar-home-test-parity-visitor.js?v=20261030-home-order-clock-v2', '/assets/dar-home-test-parity-visitor.js?v=20261030-prayer-hierarchy-v2');
         html = html.replaceAll('/assets/dar-noble-3d-icons.js?v=1095', '/assets/dar-noble-3d-icons.js?v=20261030-android-global-parity-v8');
         html = html.replace('/assets/dar-noble-3d-icons.css?v=1095', '/assets/dar-noble-3d-icons.css?v=20261030-android-global-parity-v8');
         // iPadOS desktop-class Safari identifies as Macintosh, even on a tablet.
