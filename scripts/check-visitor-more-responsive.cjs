@@ -37,5 +37,5 @@ for(const asset of [
  assert(router.includes(path),"Cloudflare visitor/Android stale asset "+asset);
  assert(loader.includes(path),"Native/visitor lazy-loader stale asset "+asset);
 }
-assert(ios.includes("ios-visitor-mehr-responsive-20261030"),"Native iOS bridge stale");
+assert(ios.includes("ios-visitor-profile-capsule-20261030"),"Native iOS bridge stale");
 console.log("PASS: Mehr starts with title; quiz remains on Home/Wissen; tutorial only in App; 3 actions responsive; caches updated.");
