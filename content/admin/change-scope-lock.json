@@ -8896,6 +8896,18 @@
         "assets/dar-home-test-parity-visitor.js"
       ],
       "expiresAt": "2026-11-15T23:59:00.000Z"
+    },
+    {
+      "id": "dar-admin-wissensbereich-profile-notification-routing-policy-20261030",
+      "at": "2026-10-30T15:31:00+01:00",
+      "approvedBy": "user-explicit-dar-admin-wissensbereich-frau-mann-neutral-rule",
+      "reason": "Adult DAR Admin Wissensbereich Themen non-sending matrix and central policy, explicitly requested. Neutral excluded from targeted topics; general global opt-ins unchanged; locked OneSignal sender, push password and native clients untouched.",
+      "paths": [
+        "admin/wissensbereich-push.js",
+        "admin/wissensbereich-push.css",
+        "content/admin/wissensbereich-themen-policy.json"
+      ],
+      "expiresAt": "2026-11-15T23:59:00.000Z"
     }
   ],
   "enabled": true
