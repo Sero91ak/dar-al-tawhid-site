@@ -10,13 +10,27 @@ const CACHE_VERSION=CACHE_PREFIX+'v3';
 const SHELL_URL='/pwa/?pwa=1';
 const SHELL_META='/pwa/__cached_shell_freshness_v1';
 const SHELL_NETWORK_BUDGET_MS=1600;
-async function storeShell(response){
+async function storeShell(response,previous){
   if(!response||!response.ok||response.redirected)return;
+  const revision=String(response.headers.get('X-Dar-PWA-Revision')||'');
+  const prior=previous?String(previous.headers.get('X-Dar-PWA-Revision')||''):'';
   const cache=await caches.open(CACHE_VERSION);
   await cache.put(SHELL_URL,response);
   await cache.put(SHELL_META,new Response(String(Date.now()),{
     headers:{'Content-Type':'text/plain','Cache-Control':'no-store'}
   }));
+  // Existing installations may have opened cached HTML before this new
+  // network response completed. Notify them only when a new release lands.
+  // Never wipe the offline v3 cache or automatically reload a user's notes.
+  if(previous&&revision&&revision!==prior){
+    try{
+      const windows=await self.clients.matchAll({type:'window',includeUncontrolled:true});
+      for(const client of windows){
+        if(new URL(client.url).pathname.startsWith('/pwa'))
+          client.postMessage({type:'DAR_PWA_VISITOR_SHELL_UPDATED',revision});
+      }
+    }catch(_){}
+  }
 }
 // Online-first canonical visitor shell. A timed offline/cache fallback retains
 // fast launches and preserves every existing downloaded page or audio file.
@@ -26,7 +40,7 @@ async function freshShellWithOfflineFallback(request,event){
   const update=fetch(request,{cache:'no-store'})
     .then(async response=>{
       if(!response||!response.ok||response.redirected)return null;
-      await storeShell(response.clone());
+      await storeShell(response.clone(),stored);
       return response;
     }).catch(()=>null);
   event.waitUntil(update.then(()=>null));
@@ -98,6 +112,8 @@ const ADULT_VISITOR_LIVE_UI=new Set([
  '/assets/dar-visitor-profile-picker-v1.css',
  '/assets/dar-visitor-daily-hub-v1.js',
  '/assets/dar-visitor-daily-hub-v1.css',
+ '/assets/dar-pwa-release-notice-v1.js',
+ '/assets/dar-pwa-release-notice-v1.css',
  '/assets/dar-visitor-onboarding-v1.js',
  '/assets/dar-visitor-onboarding-v1.css',
  '/assets/dar-adult-brand-header-v2.js',
