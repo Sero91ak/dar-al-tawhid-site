@@ -17,18 +17,27 @@ assert.match(home,/dar-smart-profile-v1\.js\?v=/,"Active Test Home must load Sma
 assert.match(home,/dar-smart-profile-v1\.css\?v=/,"Active Test Home must load Smart Profile styles");
 assert.match(css,/prefers-reduced-motion/,"Reduced motion safety required");
 assert.match(css,/dsp-home-hero/,"Home hero required");
-assert.match(css,/dsp-account-hero/,"Account hero required");
-for(const file of ["avatar-woman.svg","avatar-man.svg","hero-woman.svg","hero-man.svg"]){
+assert.match(css,/dsp-account-heading/,"Single open account heading required");
+assert.doesNotMatch(script,/dsp-account-hero/,"Nested account hero must not return");
+assert.match(script,/dsp-notes-dialog/,"Notes need an independent modal view");
+assert.match(script,/function syncHeaderAvatar/,"Header profile avatar must follow selection");
+assert.match(home,/dhp-quick-qibla/,"Qibla needs a styled quick-search entry");
+const header=read("test/assets/dar-test-premium-header-v2.js");
+new vm.Script(header,{filename:"dar-test-premium-header-v2.js"});
+assert.match(header,/setupChooser\(h,account\)/,"Middle header icon must open profile choice");
+for(const file of ["avatar-neutral.svg","avatar-woman.svg","avatar-man.svg"]){
  const source=read("test/assets/smart-profile/"+file);
  assert.match(source,/<svg/);assert.match(source,/<\/svg>/);
+ assert.doesNotMatch(source,/<circle|<rect|<ellipse/i,"Avatar must not contain a medallion/background");
 }
 const memory=new Map(),listeners={},win={},loc={pathname:"/test/"};
 let user=null;
+const overlay={hidden:true,innerHTML:"",querySelector:()=>({focus(){}})};
 const doc={
- readyState:"loading",
+ readyState:"loading",body:{appendChild(){},classList:{add(){},remove(){}}},createElement:()=>overlay,
  addEventListener:(type,fn)=>{listeners[type]=fn},
  querySelector:()=>null,
- getElementById:(id)=>id==="dspNoteText"?{value:"Notiz zum Quellenstudium"}:null
+ getElementById:(id)=>id==="dspNoteText"?{value:"Notiz zum Quellenstudium"}:id==="dspNotesOverlay"?overlay:null
 };
 const records=[
  {id:"w1",title:"Frauenwissen: Stellung der Frau",category:"Fiqh"},
@@ -57,7 +66,7 @@ function click(name,value){
 }
 click("data-dsp-gender","woman");
 assert.equal(api.get().gender,"woman");
-assert.equal(api.get().palette,"salbei");
+assert.equal(api.get().palette,"keep","Selecting a profile must not override the user’s appearance");
 assert.ok(api.recommendations().some(x=>x.tags.includes("women")),"Women's home must highlight women's knowledge");
 click("data-dsp-add-note","");
 assert.equal(api.get().notes.length,1);
@@ -73,4 +82,4 @@ assert.equal(r1,r2,"Daily ranking must remain stable within one day");
 user=null;
 assert.equal(api.get().gender,"woman");
 assert.equal(api.get().notes[0].text,"Notiz zum Quellenstudium");
-console.log("PASS DĀR TEST smart profile: routes, assets, gender, themes, daily recommendations, notes, account isolation.");
+console.log("PASS DĀR TEST smart profile V2: routes, free-form avatars, gender, independent themes, quick Qibla, notes overlay, account isolation.");
