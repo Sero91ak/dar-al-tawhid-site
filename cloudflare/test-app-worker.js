@@ -563,6 +563,17 @@ async function finalizeDarTestHomeV1193(asset) {
     const at = html.lastIndexOf("</html>");
     html = at >= 0 ? html.slice(0, at) + premiumHeaderAssets + html.slice(at) : html + premiumHeaderAssets;
   }
+  // DAR_TEST_MEIN_DAR_V12: Test profile retains its own storage and existing account/PIN system.
+  // Load the new dashboard at the final HTML authority, without touching Kids/Push/native code.
+  html = html.replace(/<script[^>]+dar-smart-profile-v1\.js[^>]*><\/script>\s*/gi, "");
+  html = html.replace(/<link[^>]+dar-smart-profile-v1\.css[^>]*>\s*/gi, "");
+  const myDarAssetsV12 = [
+    '<link rel="stylesheet" id="darTestSmartProfileCssV12" href="/test/assets/dar-smart-profile-v1.css?v=20261030-mein-dar-v12">',
+    '<link rel="stylesheet" id="darTestMyDarCssV12" href="/assets/dar-visitor-smart-profile-v1.css?v=20261030-mein-dar-v12">',
+    '<script defer id="darTestSmartProfileJsV12" src="/test/assets/dar-smart-profile-v1.js?v=20261030-mein-dar-v12"></' + 'script>'
+  ].join("\n");
+  const myDarInsert = html.lastIndexOf("</html>");
+  html = myDarInsert >= 0 ? html.slice(0,myDarInsert) + myDarAssetsV12 + html.slice(myDarInsert) : html + myDarAssetsV12;
   const headers = new Headers(asset.headers);
   headers.set("X-DAR-Test-Scroll-Boundary", "v3");
   headers.set("X-DAR-Test-Home", "html-parity-v50-20261020");
