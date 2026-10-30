@@ -33,13 +33,28 @@ assert.match(testJs,/TEST_HEADER_OCCLUSION_V1/);
 assert.match(testJs,/--dar-test-occlusion-top/);
 assert.match(testJs,/visualViewport/);
 assert.match(testCss,/TEST_HEADER_OCCLUSION_LAYOUT_V1/);
+assert.match(visitorCss,/GLOBAL_ADULT_STICKY_CLEARANCE_V1/);
+assert.match(testCss,/GLOBAL_ADULT_STICKY_CLEARANCE_V1/);
+for(const [name,css] of [["visitor",visitorCss],["test",testCss]]){
+ for(const marker of [
+  ".is-frauen-route #appView .dar-immersive-hero-stage",
+  ".is-topics-route #appView .topics-hub > .view-head",
+  ".is-topic-route #appView .topic-collection-page > .view-head",
+  ".is-post-route #appView .post-reader > .post-reader-title",
+  ".is-hadith-route #appView .hadith-hub > .view-head",
+  ".is-dua-route #appView .dua-hub > .view-head",
+  ".is-settings-route #appView.view > .view-head.settings-page-head",
+  '[data-hero-scroll="sticky"] > .dar-hero-stage',
+  "--dar-immersive-hero-height"
+ ])assert(css.includes(marker),name+" missing sticky clearance "+marker);
+}
 assert.match(testCss,/#appView \.ilm-chat-header\{[\s\S]*?top:var\(--dar-test-occlusion-top/);
 assert.match(testCss,/\.ilm-message-list\{[\s\S]*?scroll-padding-top/);
 assert.doesNotMatch(majlisJs,/\.ilm-chat-header\{position:sticky!important;top:0!important/,"Late override may not reset to top zero");
 assert.match(majlisJs,/top:var\(--dar-test-occlusion-top/);
 assert.doesNotMatch(majlisJs,/last\.getBoundingClientRect\(\)\.top - 110/,"Hardcoded scroll offset caused clipped questions");
 assert.match(majlisJs,/var globalBottom=globalHeader\?/);
-assert.match(router,/dar-adult-brand-header-v2\.css\?v=20261030-fixed-occlusion-v1/);
+assert.match(router,/dar-adult-brand-header-v2\.css\?v=20261030-fixed-occlusion-v2/);
 assert.match(router,/dar-adult-brand-header-v2\.js\?v=20261030-fixed-occlusion-v1/);
 assert.doesNotMatch(testCss,/body\s*\{\s*padding-top:/,"No blanket body padding");
 console.log("PASS: visitor/Test header measured; Majlis sticky+scroll clear it; desktop/mobile assets current; no duplicate body spacer.");
