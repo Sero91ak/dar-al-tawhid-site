@@ -334,7 +334,7 @@ document.addEventListener("click",function(e){
  if(b.hasAttribute("data-dsp-close-notes")){closeNotes();return}
  if(b.hasAttribute("data-dsp-open-saved")){openSaved();return}
  if(b.hasAttribute("data-dsp-toggle")){toggleSection(b.getAttribute("data-dsp-toggle"));return}
- if(b.hasAttribute("data-dsp-switch-profile")){var chooser=window.DAR_VISITOR_PROFILE_PICKER_V1;if(chooser&&typeof chooser.open==="function")chooser.open();else document.getElementById("darVisitorProfileButtonV1")?.click()return}
+ if(b.hasAttribute("data-dsp-switch-profile")){var chooser=window.DAR_VISITOR_PROFILE_PICKER_V1;if(chooser&&typeof chooser.open==="function")chooser.open();else document.getElementById("darVisitorProfileButtonV1")?.click();return}
  if(b.hasAttribute("data-dsp-open-more")){nav("more");return}
  if(b.hasAttribute("data-dsp-open-women")){nav("frauen");return}
  if(b.hasAttribute("data-dsp-open-discovery")){nav("topics");return}
