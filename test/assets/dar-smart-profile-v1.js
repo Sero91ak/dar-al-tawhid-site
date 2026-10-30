@@ -92,6 +92,10 @@ function refresh(){if(scheduled)return;scheduled=true;requestAnimationFrame(func
  updateHome(p);updateAccount(p);syncHeaderAvatar(p)}catch(e){console.warn("DĀR TEST Smart Profile",e)}})}
 function nav(view,value){try{if(typeof navigate==="function"){navigate(view,value||"");return}}catch(_){}location.hash="#"+view}
 document.addEventListener("click",function(e){
+ var nativePost=e.target.closest('#darHomeHtmlParityV1 [data-dhp-route="post"]');
+ if(nativePost&&nativePost.dataset.dhpValue){var opened=read(),pid=nativePost.dataset.dhpValue;opened.opened=[pid].concat(opened.opened.filter(x=>x!==pid)).slice(0,30);write(opened);return}
+ var nativeTheme=e.target.closest("[data-dtbh-theme],[data-theme-select]");
+ if(nativeTheme){var chosen=nativeTheme.getAttribute("data-dtbh-theme")||nativeTheme.getAttribute("data-theme-select");if(THEMES.includes(chosen)){var current=read();if(current.palette!==chosen){current.palette=chosen;write(current)}}return}
  var b=e.target.closest("[data-dsp-gender],[data-dsp-theme],[data-dsp-interest],[data-dsp-open-account],[data-dsp-open-more],[data-dsp-post],[data-dsp-save],[data-dsp-add-note],[data-dsp-remove-note],[data-dsp-reset]");
  if(!b)return;
  e.preventDefault();e.stopPropagation();
@@ -106,7 +110,7 @@ document.addEventListener("click",function(e){
  if(b.hasAttribute("data-dsp-remove-note")){var p=read(),n=Number(b.getAttribute("data-dsp-remove-note"));if(Number.isInteger(n)&&n>=0&&n<p.notes.length){p.notes.splice(n,1);write(p)}return}
  if(b.hasAttribute("data-dsp-reset")){var p=read();p.gender="neutral";p.chosen=false;p.interests=[];p.palette="keep";write(p)}
 });
-function init(){body=document.body;refresh();document.addEventListener("dar:view-rendered",refresh);window.addEventListener("hashchange",refresh);window.addEventListener("pageshow",refresh);window.addEventListener("focus",refresh);
+function init(){body=document.body;refresh();document.addEventListener("dar:view-rendered",refresh);window.addEventListener("hashchange",refresh);window.addEventListener("pageshow",refresh);window.addEventListener("focus",refresh);document.addEventListener("visibilitychange",function(){if(!document.hidden)refresh()});
  var view=document.getElementById("appView");if(view)new MutationObserver(refresh).observe(view,{childList:true,subtree:false});
  new MutationObserver(refresh).observe(document.body,{attributes:true,attributeFilter:["class"]});
  // The last post content may arrive after the shell; refresh once when data finishes.
