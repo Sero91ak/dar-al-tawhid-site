@@ -284,6 +284,7 @@ function adultTopScrollBoundaryAddon() {
 /* DĀR adult identity header v2 – mounted only in native iOS/Android and dedicated PWA.
  * The public browser website keeps its own navigation and is not overlaid.
  * No Kids, native OS code, push, prayer calculation, SW or scroll handlers changed. */
+/* VISITOR_PROFILE_SHORTCUTS_V9_FINAL_RELEASE_20261030: horizontal profile + notes/account quick capsule; PIN-gated account switch, iOS/PWA parity. */
 function activateAdultGlobalBrandV2(html) {
   if (typeof html !== "string") return html;
   /* Native iOS and PWA must use the same fresh prayer presentation as Test.
