@@ -1,4 +1,4 @@
-/* DAR_ADULT_TOP_SCROLL_BOUNDARY_V3 · first-touch two-ended scroll stop for adult visitor and Dar Test.
+/* DAR_ADULT_TOP_SCROLL_BOUNDARY_V4 · first-touch two-ended scroll stop for adult visitor and Dar Test.
  * Block the very FIRST outward vertical touch movement at both document edges.
  * Previous 7px axis delay let the native iOS spring gesture activate first.
  * Does not scrollTo, clone/reparent DOM, lock body overflow or alter sticky Heroes.
@@ -67,10 +67,20 @@ document.addEventListener("touchmove",function(event){
  var point=event.touches[0],dx=point.clientX-initialX,dy=point.clientY-initialY;
  var stepY=point.clientY-lastY;
  lastY=point.clientY;
+ /* V4: At document top, block the FIRST outward finger movement before
+    axis detection. Fractional Safari/WebKit deltas can trigger spring
+    before a full pixel is reported; fixed brand then exposes a blank gap.
+    Do not intercept sideways swipes, nested panes or inward scroll. */
+ if(!axis && dy>0.15 && Math.abs(dy)>=Math.abs(dx)*0.78 &&
+    event.cancelable && !event.defaultPrevented && !canScroll("up")){
+  axis="vertical";
+  event.preventDefault();
+  return;
+ }
  // Decide direction on the first clear movement (not after 7px).
  // The former threshold could start UIKit rubber-banding before preventDefault.
  if(!axis){
-  if(Math.abs(dy)>=1&&Math.abs(dy)>=Math.abs(dx)*1.12)axis="vertical";
+  if(Math.abs(dy)>=0.25&&Math.abs(dy)>=Math.abs(dx)*0.82)axis="vertical";
   else if(Math.abs(dx)>=2&&Math.abs(dx)>=Math.abs(dy)*1.25)axis="horizontal";
  }
  if(axis!=="vertical"||stepY===0||event.defaultPrevented||!event.cancelable)return;
