@@ -285,9 +285,24 @@ function adultTopScrollBoundaryAddon() {
  * The public browser website keeps its own navigation and is not overlaid.
  * No Kids, native OS code, push, prayer calculation, SW or scroll handlers changed. */
 function activateAdultGlobalBrandV2(html) {
-  if (typeof html !== "string" || html.includes('id="darAdultGlobalBrandStyleV2"')) return html;
-  const addon = '<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261022-compact-welcome-v6">' +
-                '<script defer id="darAdultGlobalBrandScriptV2" src="/assets/dar-adult-brand-header-v2.js?v=20261022-source-greeting-v5"></' + 'script>';
+  if (typeof html !== "string") return html;
+  /* VISITOR_PROFILE_HEADER_BOOT_V3: adult visitor native/PWA only.
+   * Guarantee the approved palette icon, profile picker, smart personalization
+   * and adaptive Frauen/Entdecken tab load with the original branded header.
+   * Keep the public website, Kids and Test in their existing isolated lanes.
+   * Reuse the lazy-loader's IDs so each module is loaded at most once. */
+  const addons = [
+    ['darAdultGlobalBrandStyleV2','<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261022-compact-welcome-v6">'],
+    ['darVisitorSmartProfileCssV1','<link rel="stylesheet" id="darVisitorSmartProfileCssV1" href="/assets/dar-visitor-smart-profile-v1.css?v=20261030-headerboot-v3">'],
+    ['darVisitorProfilePickerCssV1','<link rel="stylesheet" id="darVisitorProfilePickerCssV1" href="/assets/dar-visitor-profile-picker-v1.css?v=20261030-headerboot-v3">'],
+    ['darVisitorDailyHubCssV1','<link rel="stylesheet" id="darVisitorDailyHubCssV1" href="/assets/dar-visitor-daily-hub-v1.css?v=20261030-headerboot-v3">'],
+    ['darAdultGlobalBrandScriptV2','<script defer id="darAdultGlobalBrandScriptV2" src="/assets/dar-adult-brand-header-v2.js?v=20261022-source-greeting-v5"></' + 'script>'],
+    ['darVisitorSmartProfileJsV1','<script defer id="darVisitorSmartProfileJsV1" src="/assets/dar-visitor-smart-profile-v1.js?v=20261030-headerboot-v3"></' + 'script>'],
+    ['darVisitorProfilePickerJsV1','<script defer id="darVisitorProfilePickerJsV1" src="/assets/dar-visitor-profile-picker-v1.js?v=20261030-headerboot-v3"></' + 'script>'],
+    ['darVisitorDailyHubJsV1','<script defer id="darVisitorDailyHubJsV1" src="/assets/dar-visitor-daily-hub-v1.js?v=20261030-headerboot-v3"></' + 'script>']
+  ];
+  const addon = addons.filter(([id]) => !html.includes('id="' + id + '"')).map(([,tag]) => tag).join("");
+  if (!addon) return html;
   return html.includes("</html>") ? html.replace("</html>", addon + "</html>") : html + addon;
 }
 
