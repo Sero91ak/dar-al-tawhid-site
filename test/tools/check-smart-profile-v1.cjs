@@ -187,3 +187,6 @@ click("data-dsp-gender","neutral");
 assert.ok(api.recommendations().length>=3,"Neutral includes the general corpus without topic restrictions");
 assert.equal(api.dashboard().gender,"neutral");
 console.log("PASS DĀR TEST smart profile V4: native capsules, no duplicate profile, theme, interests, list, account isolation.");
+
+// The existing test-deploy workflow runs this regression automatically.
+require("./check-daily-hub-v1.cjs");
