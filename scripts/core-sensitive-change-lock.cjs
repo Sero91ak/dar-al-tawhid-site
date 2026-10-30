@@ -29,11 +29,14 @@ const EXACT = new Set([
 ]);
 
 const SENSITIVE_FILE = /^(?:(?:assets|test\/assets)\/[^/]*(?:prayer|qibla|geoloc|location|gps)[^/]*\.(?:js|mjs|ts)|(?:cloudflare|scripts)\/[^/]*(?:prayer|qibla|geoloc|location|gps)[^/]*\.(?:js|mjs|cjs|ts)|ios\/DarAlTawhid\/[^/]+\/[^/]*(?:Prayer|Qibla|Location|Permission)[^/]*\.swift)$/i;
+// Guard broad security boundaries against accidental AI edits, automation
+// workflows and direct pushes. CODEOWNERS + an active ruleset protect ALL paths.
+const CRITICAL_CONFIG = /^(?:\.github\/workflows\/|\.github\/(?:CODEOWNERS|CORE_SECURITY_LOCK\.md|dependabot\.ya?ml)$|(?:ios|android|apps)\/.*(?:Info\.plist|\.entitlements|AndroidManifest\.xml|\.xcodeproj\/project\.pbxproj|\/build\.gradle(?:\.kts)?)$|(?:scripts)\/[^/]*(?:security|integrity|guard|lock)[^/]*\.(?:js|cjs|mjs|ts)$)/i;
 const HTML_FILES = new Set(["index.html", "test/index.html"]);
 const SENSITIVE_CHANGE = /\b(?:getPrayerSettings|savePrayerSettings|hasPrayerLocation|updatePrayerCountdowns|updateHeaderPrayerStatus|syncPrayerPushTags|syncPrayerPush|requestGeolocationPermissionFor|navigator\.geolocation|geolocation|dar-native-location|DAR_SETUP_HUB|qiblaDegrees|qiblaHeading|qiblaCompass|prayerTimes|prayerSettings|locationGranted|requestBrowserPosition|detectLocation)\b/i;
 
 function protectedFile(name) {
-  return EXACT.has(name) || SENSITIVE_FILE.test(name);
+  return EXACT.has(name) || SENSITIVE_FILE.test(name) || CRITICAL_CONFIG.test(name);
 }
 
 function sensitiveHtmlChange(patch) {
@@ -91,12 +94,16 @@ function selfTest() {
   assert.equal(protectedFile("ios/DarAlTawhid/Shared/DarPrayerEngine.swift"), true);
   assert.equal(protectedFile(".github/workflows/core-sensitive-change-lock.yml"), true);
   assert.equal(protectedFile("assets/fake-gps-bridge.js"), true);
+  assert.equal(protectedFile(".github/workflows/visitor-deploy.yml"), true);
+  assert.equal(protectedFile("ios/DarAlTawhid/DarAlTawhid/Info.plist"), true);
+  assert.equal(protectedFile("ios/DarAlTawhid/DarAlTawhid.xcodeproj/project.pbxproj"), true);
+  assert.equal(protectedFile("scripts/push-system-guard.js"), true);
   assert.equal(protectedFile("content/q/314.json"), false);
   assert.equal(classify({ filename: "index.html", patch: "@@ -9 +9 @@\n-function getPrayerSettings() {}\n+function getPrayerSettings() { return {}; }\n" }), "index.html");
   assert.equal(classify({ filename: "index.html", patch: "@@ -9 +9 @@\n-<p>Old editorial paragraph</p>\n+<p>New editorial paragraph</p>\n" }), null);
   assert.equal(classify({ filename: "index.html" }), "index.html");
   assert.equal(classify({ filename: "test/assets/dar-setup-hub.js", patch: "" }), "test/assets/dar-setup-hub.js");
-  console.log("DAR CORE LOCK self-test: 9/9 passed");
+  console.log("DAR CORE LOCK self-test: PASS");
 }
 
 try {
