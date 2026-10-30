@@ -149,3 +149,17 @@ body.is-account-route #appView .account-sync-list{font-size:11px!important;line-
 /* PERSONAL_HOME_COMPACT_V4: fallback for a cached, older profile script.
    Home never displays a gender focus billboard. Recommendations remain visible. */
 #darHomeHtmlParityV1 .dvp-focus{display:none!important}
+
+/* DĀR SAVED QUICK SHEET V2: reuses the existing private notes sheet visual language. */
+#dspSavedOverlay .dsp-saved-direct-list{display:grid;gap:9px;margin:15px 0 20px}
+#dspSavedOverlay .dsp-saved-direct-row{
+ display:flex;align-items:center;justify-content:space-between;gap:15px;width:100%;
+ min-height:49px;padding:12px 14px;text-align:left;cursor:pointer;
+ border-radius:14px;border:1px solid color-mix(in srgb,var(--gold2,#b7a16f) 27%,var(--line,#ced8d2));
+ background:color-mix(in srgb,var(--card,#fff) 92%,var(--gold2,#b6a477));
+ color:var(--text,#21392e);font:550 13px/1.5 system-ui,sans-serif
+}
+#dspSavedOverlay .dsp-saved-direct-row span:first-child{min-width:0;overflow-wrap:anywhere}
+#dspSavedOverlay .dsp-saved-direct-row span:last-child{color:var(--gold2,#b7a16f);font-size:23px}
+#dspSavedOverlay .dsp-notes-dialog>.dsp-primary{display:block;width:100%;margin:10px 0 0;min-height:42px}
+#dspSavedOverlay .dsp-notes-close:focus-visible,#dspSavedOverlay .dsp-saved-direct-row:focus-visible{outline:2px solid var(--gold2,#b7a16f);outline-offset:2px}
