@@ -28,6 +28,9 @@ jobs:
       - name: Public website isolation guard
         run: node scripts/public-website-isolation-guard.js
 
+      - name: Adult unified gold Qibla entry and native bridge regression
+        run: node scripts/test-qibla-native-bridge.cjs
+
       - name: Adult mobile GPS resume and location replay regression
         run: node scripts/test-mobile-location-fresh-fix.cjs
 
