@@ -84,6 +84,11 @@ jobs:
           node scripts/overlay-test-staging-from-branch.js
           node scripts/app-stability-repair.js
 
+      - name: Aktive DĀR-TEST-Startseite und CSS-Altlasten prüfen
+        run: |
+          node --check test/assets/dar-home-html-parity-v1.js
+          node test/tools/check-home-css-architecture.cjs
+
       # Keep the approved adult Test Quran Player independent of other branches.
       # This affects only /test resources, never visitor or KIDS application code.
       - name: Dar Test Adult Quran V10.8-R canonical assets
