@@ -25816,7 +25816,7 @@ async function startQiblaCompass(){
   }
   enableQiblaStaticFallback(getBearing(),settings,status,startBtn,stopBtn);
 }
-var darQiblaLive={phase:"closed",headingHandler:null,watchId:null,visHandler:null,raf:0,openTimer:0,closeTimer:0,bearing:126,rawHeading:null,targetU:null,displayU:null,lastStamp:0,aligned:false,source:null,lastHeading:null,rejectH:null,fixLat:null,fixLon:null};
+var darQiblaLive={phase:"closed",headingHandler:null,watchId:null,visHandler:null,locationHandler:null,raf:0,openTimer:0,closeTimer:0,bearing:null,rawHeading:null,targetU:null,displayU:null,lastStamp:0,aligned:false,source:null,lastHeading:null,rejectH:null,fixLat:null,fixLon:null};
 function darQiblaNorm(d){d=Number(d);if(!Number.isFinite(d))return 0;d%=360;if(d<0)d+=360;return d}
 function darQiblaDelta(from,to){return ((darQiblaNorm(to)-darQiblaNorm(from)+540)%360)-180}
 function darQiblaUnwrap(prev,sample){sample=darQiblaNorm(sample);if(prev==null)return sample;return prev+darQiblaDelta(prev,sample)}
@@ -25848,6 +25848,10 @@ function darQiblaStopCompass(){
       darQiblaLive.visHandler=null;
     }
   }catch(e){}
+  if(darQiblaLive.locationHandler){
+    window.removeEventListener("dar-native-location",darQiblaLive.locationHandler);
+    darQiblaLive.locationHandler=null;
+  }
   darQiblaLive.source=null;
 }
 function darQiblaTeardown(){
@@ -25873,6 +25877,8 @@ function darQiblaTeardown(){
     darQiblaLive.scrollY=null;
   }
   darQiblaLive.phase="closed";
+  darQiblaLive.exiting=false;
+  window.__DAR_QIBLA_HOME_ENTRY=false;
 }
 function closeQiblaQuickSheet(){
   if(darQiblaLive.phase==="closed"||darQiblaLive.phase==="closing")return;
@@ -25940,11 +25946,11 @@ function darQiblaTick(){
   var degEl=document.getElementById("darQiblaDeg");
   var status=document.getElementById("darQiblaStatus");
   var root=document.getElementById("darQiblaPop");
-  var b=darQiblaNorm(darQiblaLive.bearing);
-  var shown=Math.floor(b+1e-6);
+  var b=darQiblaLive.bearing==null?null:darQiblaNorm(darQiblaLive.bearing);
+  var shown=b==null?null:Math.floor(b+1e-6);
   if(degEl&&darQiblaLive.shownDeg!==shown){
     darQiblaLive.shownDeg=shown;
-    degEl.textContent=shown+"°";
+    degEl.textContent=shown==null?"—":shown+"°";
   }
   if(darQiblaLive.targetU!=null){
     if(darQiblaLive.displayU==null)darQiblaLive.displayU=darQiblaLive.targetU;
@@ -25962,7 +25968,7 @@ function darQiblaTick(){
   }
   var heading=darQiblaLive.rawHeading;
   var aligned=false;
-  if(typeof heading==="number"){
+  if(typeof heading==="number"&&b!=null){
     var off=Math.abs(darQiblaDelta(heading,b));
     if(!darQiblaLive.aligned&&off<=2.5){
       darQiblaLive.aligned=true;
@@ -25976,7 +25982,7 @@ function darQiblaTick(){
     darQiblaLive.paintLocked=aligned;
     root.classList.toggle("is-locked",aligned);
   }
-  var label=typeof heading!=="number"?"Suche… Handy flach halten":(aligned?"Qibla gefunden":"Ausrichten");
+  var label=b==null?"Standort wird ermittelt":(typeof heading!=="number"?"Suche… Handy flach halten":(aligned?"Qibla gefunden":"Ausrichten"));
   if(status&&darQiblaLive.paintStatus!==label){
     darQiblaLive.paintStatus=label;
     status.textContent=label;
@@ -25984,15 +25990,15 @@ function darQiblaTick(){
   darQiblaLive.raf=requestAnimationFrame(darQiblaTick);
 }
 function darQiblaPinBearing(lat,lon,city){
-  var nearRheinbach=Math.abs(lat-50.625)<0.32&&Math.abs(lon-6.949)<0.45;
-  if(nearRheinbach||/rheinbach/i.test(String(city||"")))return 126;
-  var next=typeof qiblaBearing==="function"?qiblaBearing(lat,lon):126;
-  if(!Number.isFinite(next)||next<=0)return 126;
-  return Math.round(darQiblaNorm(next));
+  // The location determines the Qibla angle, never a hard-coded city shortcut.
+  var calc=window.DARQiblaCalculator;
+  var next=calc&&typeof calc.qiblaBearing==="function"?calc.qiblaBearing(lat,lon)
+    :(typeof qiblaBearing==="function"?qiblaBearing(lat,lon):null);
+  return typeof next==="number"&&Number.isFinite(next)?darQiblaNorm(next):null;
 }
 function darQiblaApplyLoc(lat,lon,city,accuracy){
   lat=Number(lat);lon=Number(lon);
-  if(!Number.isFinite(lat)||!Number.isFinite(lon))return;
+  if(!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>90||Math.abs(lon)>180)return;
   if(typeof accuracy==="number"&&Number.isFinite(accuracy)&&accuracy>150)return;
   if(darQiblaLive.fixLat!=null){
     var moved=Math.hypot((lat-darQiblaLive.fixLat)*111,(lon-darQiblaLive.fixLon)*70);
@@ -26075,11 +26081,12 @@ function darQiblaStartCompass(){
 }
 function darQiblaLiveBoot(orientPromise){
   var status=document.getElementById("darQiblaStatus");
-  var s=typeof getPrayerSettings==="function"?getPrayerSettings():{};
-  try{
+  var s=typeof getPrayerSettings==="function"?(getPrayerSettings()||{}):{};
+  var manual=s.locationMode==="manual";
+  if(!manual)try{
     var n=window.DAR_NATIVE_LOCATION;
-    if(n&&Number.isFinite(Number(n.latitude||n.lat))&&Number.isFinite(Number(n.longitude||n.lon))){
-      s={lat:Number(n.latitude||n.lat),lon:Number(n.longitude||n.lon),city:n.city||s.city};
+    if(n&&Number.isFinite(Number(n.latitude??n.lat))&&Number.isFinite(Number(n.longitude??n.lon??n.lng))){
+      s={lat:Number(n.latitude??n.lat),lon:Number(n.longitude??n.lon??n.lng),city:n.city||s.city};
     }
   }catch(e){}
   if(typeof hasPrayerLocation==="function"?hasPrayerLocation(s):Number.isFinite(Number(s&&s.lat))){
@@ -26088,11 +26095,15 @@ function darQiblaLiveBoot(orientPromise){
   darQiblaStartCompass();
   Promise.resolve(orientPromise).catch(function(){});
   try{if(window.webkit&&webkit.messageHandlers&&webkit.messageHandlers.darNative)webkit.messageHandlers.darNative.postMessage({type:"qibla"})}catch(e){}
-  window.addEventListener("dar-native-location",function(ev){
-    var d=ev&&ev.detail||{};
-    darQiblaApplyLoc(d.lat||d.latitude,d.lng||d.lon||d.longitude,d.city||s.city,d.acc);
-  });
-  if(typeof requestBrowserPosition==="function"){
+  if(!manual){
+    darQiblaLive.locationHandler=function(ev){
+      var d=ev&&ev.detail||{};
+      if(typeof getPrayerSettings==="function"&&(getPrayerSettings()||{}).locationMode==="manual")return;
+      darQiblaApplyLoc(d.lat??d.latitude,d.lng??d.lon??d.longitude,d.city||s.city,d.acc);
+    };
+    window.addEventListener("dar-native-location",darQiblaLive.locationHandler);
+  }
+  if(!manual&&typeof requestBrowserPosition==="function"){
     requestBrowserPosition().then(function(pos){
       var lat=pos.coords.latitude,lon=pos.coords.longitude,acc=pos.coords.accuracy;
       var city=s.city;
@@ -26107,6 +26118,13 @@ function darQiblaLiveBoot(orientPromise){
 function darQiblaExitQuick(){
   if(darQiblaLive.exiting)return;
   darQiblaLive.exiting=true;
+  // A start-page overlay must close inside the app, not exit the iOS host.
+  if(window.__DAR_QIBLA_HOME_ENTRY===true){
+    window.__DAR_QIBLA_HOME_ENTRY=false;
+    closeQiblaQuickSheet();
+    darQiblaLive.exiting=false;
+    return;
+  }
   var native=!!(window.DAR_OFFICIAL_IOS_APP||window.DAR_IOS_NATIVE_APP||/DarAlTawhid-iOS/i.test(navigator.userAgent||""));
   var sent=false;
   try{
@@ -26136,6 +26154,8 @@ function openQiblaQuickSheet(){
     }
   }catch(e){}
   darQiblaLive.phase="opening";
+  darQiblaLive.fixLat=null;darQiblaLive.fixLon=null;
+  darQiblaLive.bearing=null;darQiblaLive.shownDeg=null;
   darQiblaLive.aligned=false;
   darQiblaLive.rawHeading=null;
   darQiblaLive.targetU=null;
@@ -26144,7 +26164,7 @@ function openQiblaQuickSheet(){
   darQiblaLive.source=null;
   var root=document.createElement("div");
   root.id="darQiblaPop";
-  root.innerHTML='<div class="dq-frame"><div class="dq-bar"><div><p class="dq-kicker">Qibla</p><h3 class="dq-title">Suche</h3></div><button type="button" class="dq-x" data-qibla-live-close aria-label="Schließen">×</button></div>'+darQiblaSvg()+'<p class="dq-deg" id="darQiblaDeg">126°</p><p class="dq-city" id="darQiblaCity">Rheinbach</p><p class="dq-status" id="darQiblaStatus">Ausrichten</p><p class="dq-hint">Die Kerbe oben markiert die Blickrichtung. Drehe, bis die Qibla dort steht.</p></div>';
+  root.innerHTML='<div class="dq-frame"><div class="dq-bar"><div><p class="dq-kicker">Qibla</p><h3 class="dq-title">Suche</h3></div><button type="button" class="dq-x" data-qibla-live-close aria-label="Schließen">×</button></div>'+darQiblaSvg()+'<p class="dq-deg" id="darQiblaDeg">—</p><p class="dq-city" id="darQiblaCity">Standort wird ermittelt</p><p class="dq-status" id="darQiblaStatus">Ausrichten</p><p class="dq-hint">Die Kerbe oben markiert die Blickrichtung. Drehe, bis die Qibla dort steht.</p></div>';
   document.body.appendChild(root);
   darQiblaLive.scrollY=window.scrollY||document.documentElement.scrollTop||0;
   document.body.style.top=(-darQiblaLive.scrollY)+"px";
