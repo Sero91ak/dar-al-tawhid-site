@@ -63,6 +63,8 @@ assert.match(script,/function todayFeature\(/,"Daily contextual feature is missi
 assert.match(script,/function eligible\(/,"Audience filter is missing");
 assert.match(script,/function ranking\(/,"Personal interest ranking is missing");
 assert.match(css,/dsp-audience-tile/,"Profile-specific theme capsule missing");
+assert.match(script,/function syncLatest\(/,"Home publications must respond to the selected audience");
+assert.match(script,/function updateHome\(/,"Home intro and daily content must respond to the selected audience");
 
 for(const [name,sha256] of Object.entries({
  "approved-man-v1.webp":"21178597cdd5cd12b7c7ddb88f071d914d6c09d3935b6328510cae7363d45de2",
@@ -166,10 +168,22 @@ const mans=api.recommendations();
 assert.ok(mans.some(x=>x.id==="men-2026"),"New male-specific content should surface automatically");
 assert.ok(mans.every(x=>!x.tags.includes("women")),"Male dashboard must never surface women-specific content");
 assert.ok(mans.every(x=>x.id!=="women-2026"),"New women's knowledge must be absent from male recommendations");
+const maleHome=api.dashboard();
+for(const row of [...maleHome.daily,...maleHome.publications,...(maleHome.today?[maleHome.today]:[]),...(maleHome.focus?[maleHome.focus]:[])])
+ assert.ok(!row.tags.includes("women"),"Women's knowledge leaked into a male Home section: "+row.title);
+assert.equal(maleHome.gender,"man");
+
 click("data-dsp-gender","woman");
 const womens=api.recommendations();
 assert.ok(womens.some(x=>x.id==="women-2026"),"New female-specific content should surface automatically");
 assert.ok(womens.every(x=>x.gender!=="man"),"Female dashboard must not emphasize male-only material");
+const femaleHome=api.dashboard();
+assert.equal(femaleHome.gender,"woman");
+assert.ok(femaleHome.daily.some(x=>x.tags.includes("women")),"Female Home must prioritize women's topics");
+assert.ok(femaleHome.publications.every(x=>x.gender!=="man"),"Men-only publications must not be promoted on women's Home");
+assert.ok(femaleHome.focus&&femaleHome.focus.tags.includes("women"),"Women's library focus must use an actual women's article");
+
 click("data-dsp-gender","neutral");
 assert.ok(api.recommendations().length>=3,"Neutral includes the general corpus without topic restrictions");
+assert.equal(api.dashboard().gender,"neutral");
 console.log("PASS DĀR TEST smart profile V4: native capsules, no duplicate profile, theme, interests, list, account isolation.");
