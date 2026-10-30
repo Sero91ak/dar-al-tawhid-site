@@ -43,7 +43,7 @@ function classification(x){
  var s=title+" "+detail,a=[];
  var female=/(?:frau|frauen|schwester|schwestern|muslima|niqab|hijab|khimar|menstru|haidh|ha[id]d|ehefrau|mutter|mutterrechte|tochter|schwanger|stillzeit|wochenbett|weiblich|bint |umm )/i.test(title);
  var male=/(?:manner|mann|bruder|bruderpflicht|ehemann|vater|vaterpflicht|sohn|bartpflicht|mannlich|mannerfiqh)/i.test(title);
- var audience=canonicalWords(x.audience||x.targetAudience||x.for||"");
+ var audience=canonicalWords(x.audience||x.targetAudience||x.gender||x.for||"");
  // Explicit author-controlled metadata is authoritative. Text signals otherwise
  // remain conservative: gender-exclusive subjects must never be promoted to the other dashboard.
  if(/women|female|frau/.test(audience)){female=true;male=false}
@@ -202,9 +202,9 @@ function syncLibrary(p,root){
   var wTitle=women.querySelector("b"),wSub=women.querySelector("small");
   if(wTitle)wTitle.textContent="Frauenwissen";
   if(wSub)wSub.textContent="Fiqh · Familie · Quellen";
-  if(container.firstElementChild!==women)container.prepend(women)
+  if(container.firstElementChild!==women&&!(container.firstElementChild&&container.firstElementChild.id==="dspAudienceLibraryTile"&&container.children[1]===women))container.prepend(women)
  }}
- if(aqida&&p.gender==="man"&&container.firstElementChild!==aqida)container.prepend(aqida);
+ if(aqida&&p.gender==="man"&&container.firstElementChild!==aqida&&!(container.firstElementChild&&container.firstElementChild.id==="dspAudienceLibraryTile"&&container.children[1]===aqida))container.prepend(aqida);
  var focus=homeFocus(p),tile=container.querySelector("#dspAudienceLibraryTile");
  if(!focus){if(tile)tile.remove();return}
  if(!tile){tile=document.createElement("button");tile.type="button";tile.className="dhp-library-tile dsp-audience-tile";tile.id="dspAudienceLibraryTile";tile.setAttribute("aria-label","Passenden Beitrag öffnen");var icon=document.createElement("img");icon.className="dsp-library-avatar";icon.alt="";tile.append(icon,document.createElement("b"),document.createElement("small"))}
