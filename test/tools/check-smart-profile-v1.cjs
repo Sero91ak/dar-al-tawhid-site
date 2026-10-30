@@ -16,7 +16,12 @@ assert.match(script,/\/test\\\/kids/,"Kids must stay excluded");
 assert.match(home,/dar-smart-profile-v1\.js\?v=/,"Active Test Home must load Smart Profile script");
 assert.match(home,/dar-smart-profile-v1\.css\?v=/,"Active Test Home must load Smart Profile styles");
 assert.match(css,/prefers-reduced-motion/,"Reduced motion safety required");
-assert.match(css,/dsp-home-hero/,"Home hero required");
+assert.match(css,/dsp-recommend-row/,"Daily recommendations require native capsules");
+assert.doesNotMatch(script,/dsp-home-hero/,"Home must not contain a duplicate gender profile hero");
+assert.match(script,/data-dsp-switch-profile/,"Account needs one explicit profile-change action");
+assert.doesNotMatch(script,/Profil wählen<\/h3>/,"Account must not duplicate the entire gender picker");
+assert.match(script,/function toggleSection/,"Interest and saved panels must be interactive");
+assert.match(css,/--dhp-capsule-fill/,"Daily cards must inherit existing DĀR capsule palette");
 assert.match(css,/dsp-account-heading/,"Single open account heading required");
 assert.doesNotMatch(script,/dsp-account-hero/,"Nested account hero must not return");
 assert.match(script,/dsp-notes-dialog/,"Notes need an independent modal view");
@@ -31,6 +36,9 @@ assert.doesNotMatch(qiblaQuickTheme,/\/kids\//,"Adult Qibla quick view cannot to
 const header=read("test/assets/dar-test-premium-header-v2.js");
 new vm.Script(header,{filename:"dar-test-premium-header-v2.js"});
 assert.match(header,/setupChooser\(h,account\)/,"Middle header icon must open profile choice");
+assert.match(header,/DAR_TEST_PROFILE_CHOOSER/,"Account profile switch must open existing header chooser");
+const headerCSS=read("test/assets/dar-test-premium-header-v2.css");
+assert.match(headerCSS,/border:1px solid var\(--dtbh-line\)!important;background:var\(--dtbh-btn\)!important/,"Middle profile icon needs native theme capsule");
 for(const file of ["avatar-neutral.svg","avatar-woman.svg","avatar-man.svg"]){
  const source=read("test/assets/smart-profile/"+file);
  assert.match(source,/<svg/);assert.match(source,/<\/svg>/);
@@ -39,11 +47,16 @@ for(const file of ["avatar-neutral.svg","avatar-woman.svg","avatar-man.svg"]){
 const memory=new Map(),listeners={},win={},loc={pathname:"/test/"};
 let user=null;
 const overlay={hidden:true,innerHTML:"",querySelector:()=>({focus(){}})};
+const panels={"dspExpand-interests":{hidden:true},"dspExpand-saved":{hidden:true}};
+const controls={
+ '[data-dsp-toggle="interests"]':{setAttribute(name,value){this[name]=value}},
+ '[data-dsp-toggle="saved"]':{setAttribute(name,value){this[name]=value}}
+};
 const doc={
  readyState:"loading",body:{appendChild(){},classList:{add(){},remove(){}}},createElement:()=>overlay,
  addEventListener:(type,fn)=>{listeners[type]=fn},
- querySelector:()=>null,
- getElementById:(id)=>id==="dspNoteText"?{value:"Notiz zum Quellenstudium"}:id==="dspNotesOverlay"?overlay:null
+ querySelector:selector=>controls[selector]||null,
+ getElementById:id=>id==="dspNoteText"?{value:"Notiz zum Quellenstudium"}:id==="dspNotesOverlay"?overlay:panels[id]||null
 };
 const records=[
  {id:"w1",title:"Frauenwissen: Stellung der Frau",category:"Fiqh"},
@@ -88,4 +101,22 @@ assert.equal(r1,r2,"Daily ranking must remain stable within one day");
 user=null;
 assert.equal(api.get().gender,"woman");
 assert.equal(api.get().notes[0].text,"Notiz zum Quellenstudium");
-console.log("PASS DĀR TEST smart profile V2: routes, free-form avatars, gender, independent themes, quick Qibla, notes overlay, account isolation.");
+click("data-dsp-toggle","interests");
+assert.equal(panels["dspExpand-interests"].hidden,false,"Interest options must visually expand");
+click("data-dsp-toggle","interests");
+assert.equal(panels["dspExpand-interests"].hidden,true,"Interest options must visually collapse");
+click("data-dsp-open-saved","");
+assert.equal(panels["dspExpand-saved"].hidden,false,"Saved shortcut must expand bookmark list");
+let chooserCalls=0;
+win.DAR_TEST_PROFILE_CHOOSER={open(){chooserCalls++}};
+click("data-dsp-switch-profile","");
+assert.equal(chooserCalls,1,"Account profile change must invoke the existing header selector");
+click("data-dsp-interest","adab");
+assert.ok(api.get().interests.includes("adab"),"Interest toggle persists");
+click("data-dsp-interest","adab");
+assert.ok(!api.get().interests.includes("adab"),"Interest toggle removes interest");
+click("data-dsp-save","q1");
+assert.ok(api.get().saved.includes("q1"),"Save to smart reading list");
+click("data-dsp-save","q1");
+assert.ok(!api.get().saved.includes("q1"),"Remove from smart reading list");
+console.log("PASS DĀR TEST smart profile V3: native capsules, no duplicate profile, theme, interests, list, account isolation.");
