@@ -1,13 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Stilisiertes Männerprofil mit Kufiya">
-<defs><radialGradient id="a" cx=".35" cy=".22" r=".82"><stop stop-color="#e8dfd0"/><stop offset="1" stop-color="#c6af87"/></radialGradient><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e9eadf"/><stop offset=".5" stop-color="#c8d0c8"/><stop offset="1" stop-color="#aebeb8"/></linearGradient><linearGradient id="c" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#2d474c"/><stop offset="1" stop-color="#152d32"/></linearGradient></defs>
-<circle cx="128" cy="128" r="121" fill="#e9e6d9"/><circle cx="128" cy="128" r="111" fill="url(#a)" opacity=".38"/><circle cx="128" cy="128" r="108" fill="none" stroke="#bba77c" stroke-width="2"/>
-<path d="M23 233c9-58 38-78 69-83l36 30 36-30c33 6 61 27 69 83Z" fill="url(#b)"/>
-<path d="M87 145l41 43 41-43-9 82H96Z" fill="#e6e5db"/><path d="M117 186h22" stroke="#b4a47b" stroke-width="3"/>
-<path d="M81 99c0-39 18-59 47-59s47 20 47 59v29c0 36-25 58-47 58s-47-22-47-58Z" fill="#b88965"/>
-<path d="M84 106c13 9 29 13 44 13s31-4 44-13l-6 43c-9 19-21 26-38 26s-29-7-38-26Z" fill="url(#c)"/>
-<path d="M75 90c1-42 18-63 53-63s52 21 53 63c-32 9-74 9-106 0Z" fill="#f9f7eb" stroke="#bca779" stroke-width="2"/>
-<path d="M83 80c31 8 58 8 90 0" fill="none" stroke="#c3b293" stroke-width="2"/>
-<path d="M109 123h8m22 0h8" stroke="#273b3f" stroke-width="3" stroke-linecap="round"/>
-<path d="M124 142q4 5 8 0" fill="none" stroke="#8e604a" stroke-width="2"/>
-<path d="M103 169c11 12 39 12 50 0" fill="none" stroke="#9b785c" stroke-width="1.4"/>
-<path d="M45 219l27-47m139 47-27-47" stroke="#c1b08c" stroke-width="2" opacity=".65"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Freistehende anonyme Männerfigur mit sehr langem Vollbart">
+<defs>
+ <linearGradient id="robe" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4efe3"/><stop offset=".42" stop-color="#d8d4ca"/><stop offset="1" stop-color="#9baeb0"/></linearGradient>
+ <linearGradient id="beard" x1=".2" y1="0" x2=".8" y2="1"><stop stop-color="#3e3533"/><stop offset=".45" stop-color="#171f27"/><stop offset="1" stop-color="#111b24"/></linearGradient>
+ <linearGradient id="face" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#9f8370"/><stop offset="1" stop-color="#534e49"/></linearGradient>
+</defs>
+<!-- Open-air isolated silhouette: no circle, background, halo, plinth or border -->
+<path d="M15 249c6-41 24-70 56-83l34-14h48l34 14c31 14 50 42 55 83Z" fill="url(#robe)"/>
+<path d="M70 170c-7 21-10 47-10 79M185 170c8 23 10 45 10 79" stroke="#a9a49b" stroke-width="4" opacity=".65" fill="none"/>
+<path d="M96 152l32 28 32-28-9 97h-46Z" fill="#efe6d2"/>
+<path d="M90 102c0-43 13-69 38-69 28 0 40 26 40 68l-4 44-36 35-34-35Z" fill="url(#face)"/>
+<path d="M88 83c4-37 18-61 40-61 22 0 38 20 43 61-17-10-29-14-43-14-15 0-29 5-40 14Z" fill="#24282c"/>
+<path d="M89 99c-2 23-3 41 4 57 9 7 16 19 19 36l5 30 12 25 11-25 6-31c3-18 11-29 18-35 6-17 6-35 4-57-13 10-24 12-40 12-15 0-27-3-39-12Z" fill="url(#beard)"/>
+<path d="M92 128c6 9 13 14 20 19l-5 28m57-47c-7 12-13 15-22 20l5 29" stroke="#5d5350" stroke-width="3" fill="none" opacity=".45"/>
+<path d="M111 156c-2 30 9 59 17 81 9-24 18-52 17-81" fill="#1c2630"/>
+<path d="M123 180l5 49 6-49" fill="none" stroke="#8b7865" stroke-width="1.5" opacity=".45"/>
+<path d="M83 167l18 9m73-9-17 9" fill="none" stroke="#b59a70" stroke-width="3"/>
+</svg>

@@ -211,3 +211,37 @@
 /* Compact brand subtitle integrated in fixed header, not a second page banner. */
 #darTestBrandHeaderV1[data-premium-header-v2="ready"] .dtbh-tagline{display:block!important;opacity:1!important;letter-spacing:0!important;text-transform:none!important;}
 @media(max-width:599px){#darTestBrandHeaderV1[data-premium-header-v2="ready"] .dtbh-tagline{font-size:clamp(8px,2.1vw,10px)!important;line-height:1.2!important;}}
+
+/* Middle header action is a standalone human silhouette, not a framed capsule. */
+#darTestBrandHeaderV1[data-premium-header-v2="ready"]{overflow:visible!important}
+#darTestBrandHeaderV1[data-premium-header-v2="ready"] .dtbh-action-account{
+ border-color:transparent!important;background:transparent!important;box-shadow:none!important;border-radius:0!important}
+#darTestBrandHeaderV1[data-premium-header-v2="ready"] .dtbh-action-account .dtbh-icon-3d{
+ width:38px!important;height:41px!important;object-fit:contain!important;filter:drop-shadow(0 2px 2px rgba(0,0,0,.12))!important}
+#darTestBrandHeaderV1[data-premium-header-v2="ready"] .dtbh-profile-popover{
+ --dpp-text:var(--dtbh-ink,var(--text,#243b2d));
+ --dpp-muted:var(--dtbh-muted,var(--muted,#748177));
+ --dpp-gold:var(--gold2,var(--accent,#b29e72));
+ position:absolute;inset-inline-end:max(8px,env(safe-area-inset-right,0px));inset-block-start:calc(100% + 4px);
+ z-index:9000;width:min(310px,calc(100vw - 16px));box-sizing:border-box;
+ border:1px solid color-mix(in srgb,var(--dpp-gold) 36%,transparent);
+ border-radius:16px;background:var(--dtbh-bg,var(--card,var(--bg,#fff)));
+ box-shadow:0 12px 32px rgba(0,0,0,.16);
+ padding:14px;color:var(--dpp-text);text-align:left}
+#darTestBrandHeaderV1 .dtbh-profile-popover[hidden]{display:none!important}
+#darTestBrandHeaderV1 .dtbh-profile-head strong{display:block;font:700 17px/1.2 "Iowan Old Style",Georgia,serif;color:var(--dpp-text)}
+#darTestBrandHeaderV1 .dtbh-profile-head small{font:11px/1.4 system-ui,sans-serif;color:var(--dpp-muted)}
+#darTestBrandHeaderV1 .dtbh-profile-options{display:grid;gap:3px;margin:10px 0}
+#darTestBrandHeaderV1 .dtbh-profile-choice{
+ display:flex;align-items:center;gap:11px;min-height:58px;padding:4px 7px;width:100%;
+ border:1px solid transparent;border-radius:10px;color:var(--dpp-text);background:transparent;text-align:left;cursor:pointer}
+#darTestBrandHeaderV1 .dtbh-profile-choice.is-active{border-color:color-mix(in srgb,var(--dpp-gold) 45%,transparent);background:color-mix(in srgb,var(--dpp-gold) 9%,transparent)}
+#darTestBrandHeaderV1 .dtbh-profile-choice img{width:43px;height:49px;object-fit:contain;flex:0 0 43px}
+#darTestBrandHeaderV1 .dtbh-profile-choice span{display:block;min-width:0}
+#darTestBrandHeaderV1 .dtbh-profile-choice strong{display:block;font:700 13px/1.2 system-ui,sans-serif;color:var(--dpp-text)}
+#darTestBrandHeaderV1 .dtbh-profile-choice small{display:block;font:11px/1.28 system-ui,sans-serif;color:var(--dpp-muted);margin-top:2px}
+#darTestBrandHeaderV1 .dtbh-profile-account{width:100%;padding:11px 8px;border:0;border-top:1px solid color-mix(in srgb,var(--dpp-gold) 25%,transparent);color:var(--dpp-text);background:transparent;text-align:left;font:650 12px/1.25 system-ui,sans-serif;cursor:pointer}
+#darTestBrandHeaderV1 :is(.dtbh-profile-choice,.dtbh-profile-account):focus-visible{outline:2px solid var(--dpp-gold);outline-offset:1px}
+@media(max-width:365px){
+ #darTestBrandHeaderV1[data-premium-header-v2="ready"] .dtbh-action-account .dtbh-icon-3d{width:35px!important;height:38px!important}
+}

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Freistehende geschlechtsneutrale Profilfigur">
+<defs>
+ <linearGradient id="fabric" x1=".1" y1=".1" x2=".85" y2="1"><stop stop-color="#e8ddc8"/><stop offset=".55" stop-color="#baa98d"/><stop offset="1" stop-color="#667b77"/></linearGradient>
+ <linearGradient id="head" x1=".1" y1=".1" x2=".9" y2="1"><stop stop-color="#c0af94"/><stop offset="1" stop-color="#847f72"/></linearGradient>
+ <linearGradient id="shadow" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c1ad88"/><stop offset="1" stop-color="#344f4c"/></linearGradient>
+</defs>
+<!-- Gender-neutral human figure, no identity, base, container or medallion -->
+<path d="M18 249c4-45 33-74 71-90l39 26 39-26c39 18 65 45 71 90Z" fill="url(#fabric)"/>
+<path d="M95 155l33 31 34-31-11 94h-47Z" fill="#efe7d5"/>
+<path d="M83 92c0-40 17-64 45-64s45 24 45 64v35c0 39-17 61-45 61s-45-22-45-61Z" fill="url(#head)"/>
+<path d="M83 95c12-21 28-30 45-30s33 9 45 30v38c-8 22-24 35-45 35s-37-13-45-35Z" fill="url(#shadow)" opacity=".55"/>
+<path d="M79 94c0-41 19-69 49-69s49 28 49 69c-13-13-31-18-49-18s-36 5-49 18Z" fill="#596c67"/>
+<path d="M64 171l-10 78m138-78 10 78" stroke="#988d7a" stroke-width="3" opacity=".5"/>
+</svg>
