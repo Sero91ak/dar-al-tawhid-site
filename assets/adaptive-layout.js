@@ -49,13 +49,14 @@
        keeps the whole app in the old breakpoint after rotating back. */
     var w = clientW || innerW || vvW || 0;
     var h = clientH || innerH || vvH || 0;
-    if (vvW > 0 && vvH > 0 && clientW > 0 && clientH > 0) {
-      var vvLandscape = vvW >= vvH;
-      var clientLandscape = clientW >= clientH;
-      if (vvLandscape === clientLandscape) {
-        w = vvW;
-        h = vvH;
-      }
+    /* Layout capacity is based on the stable layout viewport, not a
+       keyboard/toolbar/pinch-reduced visual viewport. Even matching aspect
+       ratios can be misleading while the on-screen keyboard is visible.
+       Still accept visualViewport when it actually matches the layout box. */
+    if (vvW > 0 && vvH > 0 && clientW > 0 && clientH > 0 &&
+        Math.abs(vvW - clientW) <= 2 && Math.abs(vvH - clientH) <= 2) {
+      w = vvW;
+      h = vvH;
     }
     var offsetTop = vv && typeof vv.offsetTop === "number" ? vv.offsetTop : 0;
     return { width: w, height: h, offsetTop: offsetTop };
@@ -178,10 +179,10 @@
     var root = document.documentElement;
     var layoutH =
       document.documentElement.clientHeight || global.innerHeight || metrics.height;
-    var keyboardLikely =
-      metrics.height > 0 && layoutH > 0 && metrics.height < layoutH - 120;
+    var visualH = global.visualViewport && Number(global.visualViewport.height) || 0;
+    var keyboardLikely = visualH > 0 && layoutH > 0 && visualH < layoutH - 120;
     root.classList.toggle("adaptive-keyboard-open", !!keyboardLikely);
-    root.style.setProperty("--layout-vv-height", metrics.height + "px");
+    root.style.setProperty("--layout-vv-height", (visualH || metrics.height) + "px");
     root.style.setProperty("--layout-vv-offset-top", (metrics.offsetTop || 0) + "px");
   }
 
