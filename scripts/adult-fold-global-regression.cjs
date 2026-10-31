@@ -132,4 +132,75 @@ assert.equal(attrs["data-fold-dual"], "1", "Pinch zoom cannot collapse layout ca
 
 resize(390, 844, false, "compact");
 assert.equal(attrs["data-layout-surface"], "single");
-console.log("OK: adult Fold/Duo measured capacity and keyboard/zoom stability");
+
+/* The DOM may stay mounted while a device folds. Validate that returning
+   from a one-pane layout restores scrollTop of both surviving pane nodes. */
+const foldEvents = Object.create(null);
+const docEvents = Object.create(null);
+const foldFrames = [];
+let foldDual = true;
+const trackShell = {
+  isConnected:true,
+  getAttribute(name) { return name === "data-fold-family" ? "quran" : ""; },
+  querySelector(name) {
+    return name === ".dar-fold__rail" ? trackRail :
+      name === ".dar-fold__pane" ? trackPane : null;
+  }
+};
+function scrollPart(name) {
+  return {
+    scrollTop:0,
+    classList:{ contains(value) { return value === name; } },
+    closest() { return trackShell; }
+  };
+}
+const trackRail=scrollPart("dar-fold__rail");
+const trackPane=scrollPart("dar-fold__pane");
+const scrollDoc = {
+  readyState:"complete",
+  documentElement:{
+    classList:{toggle(){}},
+    style:{setProperty(){}},
+    setAttribute(){}
+  },
+  body:{},
+  addEventListener(type, handler) { docEvents[type]=handler; },
+  querySelector() { return trackShell; },
+  getElementById() { return null; }
+};
+const foldWindow = {
+  location:{hash:"#/quran/1"},
+  DarAdaptiveLayout:{
+    measure() { return {width:1024,height:800}; },
+    isDual() { return foldDual; },
+    isDualViewport() { return foldDual; },
+    getLayoutCapacity() { return {rail:320,reader:600}; }
+  },
+  requestAnimationFrame(fn) { foldFrames.push(fn);return foldFrames.length; },
+  cancelAnimationFrame() {},
+  addEventListener(type, handler) { foldEvents[type]=handler; }
+};
+vm.runInNewContext(foldJS,{window:foldWindow,document:scrollDoc,setTimeout(){return 1;}});
+function flushFoldFrames() {
+  for (let i=0; foldFrames.length && i<12; i++) {
+    for (const frame of foldFrames.splice(0)) frame();
+  }
+  assert.equal(foldFrames.length,0,"Fold restore frames must settle");
+}
+flushFoldFrames();
+trackRail.scrollTop=265;
+trackPane.scrollTop=740;
+docEvents.scroll({target:trackRail});
+docEvents.scroll({target:trackPane});
+foldDual=false;
+foldEvents["dar:layoutchange"]();
+flushFoldFrames();
+trackRail.scrollTop=0; trackPane.scrollTop=0; // browser loses scroller on compact
+foldDual=true;
+foldEvents["dar:layoutchange"]();
+flushFoldFrames();
+assert.equal(trackRail.scrollTop,265,"Surah list position restored after unfolding");
+assert.equal(trackPane.scrollTop,740,"Qur'an reader position restored after unfolding");
+assert.equal(foldWindow.DarFold.isDual(),true,"DOM shell never needs replacement");
+
+console.log("OK: adult Fold/Duo measured capacity, hinge and independent scroll retention");
