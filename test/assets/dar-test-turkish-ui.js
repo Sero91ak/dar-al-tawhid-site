@@ -378,6 +378,16 @@ function isDynamicGermanUi(value){
   value==="Eid"||
   value==="Ehe"||
   value==="Sūren filtern"||
+  value==="MEISTE BEITRÄGE"||
+  value==="WENIGSTE BEITRÄGE"||
+  value==="ZULETZT ANGESEHEN"||
+  value==="Sync"||
+  /^\d+ Beitrag$/.test(value)||
+  /^Zuletzt synchronisiert: .+$/.test(value)||
+  /^Zuletzt: .+$/.test(value)||
+  /^Favoriten auf diesem Gerät: \d+\. Bei Anmeldung werden lokale und Kontodaten standardmäßig zusammengeführt\.$/.test(value)||
+  /^Angemeldet als .+\. Unterstützte Daten werden auf allen Geräten synchronisiert\.$/.test(value)||
+  /^Ich kann derzeit \d+ überprüfte Fundstellen? zeigen\. Weitere verlangte Belege sind bislang nicht ausreichend überprüft\. Unten findest du die vorhandenen Fundstellen mit ihrem Prüfstatus\.$/.test(value)||
   /^Diese Āyah ist bei diesem Qāriʾ nicht verfügbar\. Es wird vorübergehend .+ abgespielt\.$/.test(value)||
   /^Ausgangsfrage: .+\. Nachfrage dazu: .+$/.test(value)||
   /^Inhalte aktuell · zuletzt .+$/.test(value)||
@@ -550,6 +560,22 @@ function translateSharedPatterns(value,language){
  if(value==="Ehe"){
   const marriage=lookupPack("Heirat",language);
   if(marriage)return marriage;
+ }
+ if(value==="MEISTE BEITRÄGE"){
+  const most=lookupPack("Meiste Beiträge",language);
+  if(most)return most;
+ }
+ if(value==="WENIGSTE BEITRÄGE"){
+  const least=lookupPack("Wenigste Beiträge",language);
+  if(least)return least;
+ }
+ if(value==="ZULETZT ANGESEHEN"){
+  const recent=lookupPack("Zuletzt angesehen",language);
+  if(recent)return recent;
+ }
+ if(value==="Sync"){
+  const sync=lookupPack("Synchronisieren",language);
+  if(sync)return sync;
  }
  const surahs=value.match(/^(\d+)\s+Sūren\s*·\s*(\d+)\s+Āyāt$/);
  if(surahs){
@@ -806,6 +832,84 @@ function translateSharedPatterns(value,language){
    bs:"Početno pitanje: "+subject+". Naknadno pitanje o tome: "+current,
    fr:"Question de départ : "+subject+". Question de suivi : "+current,
    es:"Pregunta inicial: "+subject+". Pregunta de seguimiento: "+current
+  };
+  if(forms[language])return forms[language];
+ }
+ const oneBeitrag=value.match(/^(\d+) Beitrag$/);
+ if(oneBeitrag){
+  const word=lookupPack("Beitrag",language);
+  if(word)return oneBeitrag[1]+" "+word;
+ }
+ const lastSync=value.match(/^Zuletzt synchronisiert: (.+)$/);
+ if(lastSync){
+  const head={
+   ar:"آخر مزامنة: ",
+   en:"Last synchronized: ",
+   tr:"Son eşitleme: ",
+   ku:"Hevahengiya dawî: ",
+   ckb:"دوایین هاوتاکردن: ",
+   bs:"Zadnja sinhronizacija: ",
+   fr:"Dernière synchronisation : ",
+   es:"Última sincronización: "
+  }[language];
+  if(head)return head+lastSync[1];
+ }
+ const lastSeen=value.match(/^Zuletzt: (.+)$/);
+ if(lastSeen){
+  const head={
+   ar:"آخر مرة: ",
+   en:"Last: ",
+   tr:"Son: ",
+   ku:"Dawî: ",
+   ckb:"دوایین: ",
+   bs:"Zadnje: ",
+   fr:"Dernière fois : ",
+   es:"Última vez: "
+  }[language];
+  if(head)return head+lastSeen[1];
+ }
+ const localFavorites=value.match(/^Favoriten auf diesem Gerät: (\d+)\. Bei Anmeldung werden lokale und Kontodaten standardmäßig zusammengeführt\.$/);
+ if(localFavorites){
+  const n=localFavorites[1];
+  const forms={
+   ar:"المفضلة على هذا الجهاز: "+n+". عند تسجيل الدخول تُدمج البيانات المحلية وبيانات الحساب افتراضيًا.",
+   en:"Favorites on this device: "+n+". On sign-in, local data and account data are merged by default.",
+   tr:"Bu cihazdaki favoriler: "+n+". Girişte yerel veriler ve hesap verileri varsayılan olarak birleştirilir.",
+   ku:"Bijarteyên li ser vî cîhazî: "+n+". Di têketinê de daneyên herêmî û yên hesabê bi awayê standard tên yekkirin.",
+   ckb:"دڵخوازەکانی ئەم ئامێرە: "+n+". لە کاتی چوونەژوورەوەدا زانیاری ناوخۆیی و زانیاری هەژمار بە شێوەی بنەڕەت تێکەڵ دەکرێن.",
+   bs:"Omiljeno na ovom uređaju: "+n+". Pri prijavi lokalni podaci i podaci računa se uobičajeno spajaju.",
+   fr:"Favoris sur cet appareil : "+n+". À la connexion, les données locales et celles du compte sont fusionnées par défaut.",
+   es:"Favoritos en este dispositivo: "+n+". Al iniciar sesión, los datos locales y los de la cuenta se combinan de forma predeterminada."
+  };
+  if(forms[language])return forms[language];
+ }
+ const signedInAs=value.match(/^Angemeldet als (.+)\. Unterstützte Daten werden auf allen Geräten synchronisiert\.$/);
+ if(signedInAs){
+  const name=signedInAs[1];
+  const forms={
+   ar:"تم تسجيل الدخول باسم "+name+". البيانات المدعومة تُزامَن على جميع الأجهزة.",
+   en:"Signed in as "+name+". Supported data is synchronized on all devices.",
+   tr:name+" olarak giriş yapıldı. Desteklenen veriler tüm cihazlarda eşitlenir.",
+   ku:"Wekî "+name+" têketî ye. Daneyên piştgirîkirî li ser hemû cîhazan tên hevahengkirin.",
+   ckb:"وەک "+name+" چوویتە ژوورەوە. زانیاری پاڵپشتیکراو لەسەر هەموو ئامێرەکان هاوتا دەکرێت.",
+   bs:"Prijavljen kao "+name+". Podržani podaci se sinhronizuju na svim uređajima.",
+   fr:"Connecté en tant que "+name+". Les données prises en charge sont synchronisées sur tous les appareils.",
+   es:"Sesión iniciada como "+name+". Los datos compatibles se sincronizan en todos los dispositivos."
+  };
+  if(forms[language])return forms[language];
+ }
+ const shownRefs=value.match(/^Ich kann derzeit (\d+) überprüfte (Fundstelle|Fundstellen) zeigen\. Weitere verlangte Belege sind bislang nicht ausreichend überprüft\. Unten findest du die vorhandenen Fundstellen mit ihrem Prüfstatus\.$/);
+ if(shownRefs){
+  const n=shownRefs[1];
+  const forms={
+   ar:"يمكنني حاليًا إظهار "+n+" "+(n==="1"?"موضع استشهاد مراجع":"مواضع استشهاد مراجعة")+". الأدلة الأخرى المطلوبة لم تُراجع بعد بما يكفي. في الأسفل تجد المواضع الموجودة مع حالة فحصها.",
+   en:"I can currently show "+n+" reviewed "+(n==="1"?"reference":"references")+". Further requested evidence has not yet been reviewed sufficiently. Below you will find the available references with their review status.",
+   tr:"Şu anda "+n+" incelenmiş kaynak yeri gösterebiliyorum. İstenen diğer deliller henüz yeterince incelenmedi. Aşağıda mevcut kaynak yerlerini inceleme durumlarıyla bulursun.",
+   ku:"Niha ez dikarim "+n+" cihên çavkaniyê yên kontrolkirî nîşan bidim. Delîlên din ên xwestî hê bi têra xwe nehatine kontrolkirin. Li jêr cihên heyî bi rewşa kontrolê dibînî.",
+   ckb:"ئێستا دەتوانم "+n+" شوێنی سەرچاوەی پشکنراو پیشان بدەم. بەڵگە داواکراوەکانی تر هێشتا بە پێی پێویست نەپشکنراون. لە خوارەوە شوێنە بەردەستەکان لەگەڵ دۆخی پشکنینەکەیان دەبینیت.",
+   bs:"Trenutno mogu pokazati "+n+" "+(n==="1"?"provjerenu referencu":"provjerene reference")+". Ostali traženi dokazi još nisu dovoljno provjereni. Ispod su dostupne reference s njihovim statusom provjere.",
+   fr:"Je peux actuellement montrer "+n+" "+(n==="1"?"référence vérifiée":"références vérifiées")+". Les autres preuves demandées ne sont pas encore suffisamment vérifiées. Plus bas se trouvent les références disponibles avec leur état de contrôle.",
+   es:"Ahora puedo mostrar "+n+" "+(n==="1"?"referencia revisada":"referencias revisadas")+". Las demás pruebas solicitadas aún no están suficientemente revisadas. Abajo están las referencias disponibles con su estado de revisión."
   };
   if(forms[language])return forms[language];
  }
@@ -1560,7 +1664,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-34";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-35";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

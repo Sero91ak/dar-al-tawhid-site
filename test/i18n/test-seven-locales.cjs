@@ -147,6 +147,14 @@ assert.equal(w.DarTestTurkishUI.translateValue("Diese Āyah ist bei diesem Qāri
 assert.equal(w.DarTestTurkishUI.translateValue("Ausgangsfrage: Tawḥīd. Nachfrage dazu: die Bedeutung","fr"),"Question de départ : Tawḥīd. Question de suivi : die Bedeutung");
 assert.equal(w.DarTestTurkishUI.translateValue("☀️ Bildschirm bleibt an","en"),"☀️ Screen stays on");
 assert.equal(w.DarTestTurkishUI.translateValue("Ḥayḍ","ar"),"الحيض");
+assert.equal(w.DarTestTurkishUI.translateValue("Nicht angemeldet","en"),"Not signed in");
+assert.equal(w.DarTestTurkishUI.translateValue("MEISTE BEITRÄGE","en"),locales.translations.en["Meiste Beiträge"]);
+assert.equal(w.DarTestTurkishUI.translateValue("1 Beitrag","fr"),"1 Article");
+assert.equal(w.DarTestTurkishUI.translateValue("Sync","tr"),locales.translations.tr["Synchronisieren"]);
+assert.equal(w.DarTestTurkishUI.translateValue("Zuletzt: heute, 19:40 Uhr","en"),"Last: heute, 19:40 Uhr");
+assert.equal(w.DarTestTurkishUI.translateValue("Standort wird geladen","ar"),"جارٍ تحميل الموقع");
+assert.equal(w.DarTestTurkishUI.translateValue("Ich kann derzeit 2 überprüfte Fundstellen zeigen. Weitere verlangte Belege sind bislang nicht ausreichend überprüft. Unten findest du die vorhandenen Fundstellen mit ihrem Prüfstatus.","es"),"Ahora puedo mostrar 2 referencias revisadas. Las demás pruebas solicitadas aún no están suficientemente revisadas. Abajo están las referencias disponibles con su estado de revisión.");
+assert.equal(w.DarTestTurkishUI.translateValue("Keine Zakāt fällig","ckb"),"زەکات واجب نییە");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);

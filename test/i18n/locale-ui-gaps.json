@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "scope": "dar-test-adult-ui-literals",
-  "catalogKeys": 3934,
+  "catalogKeys": 4037,
   "filesScanned": 120,
-  "germanLookingLiterals": 1249,
-  "alreadyInCatalog": 1109,
-  "missingDistinct": 21,
+  "germanLookingLiterals": 1256,
+  "alreadyInCatalog": 1112,
+  "missingDistinct": 23,
   "note": "Fehlende Literale sind Inventur, kein 100-%-Nachweis und keine Freigabe. Religiöse Originaltexte können in dieser Liste stehen und dürfen nicht maschinell ersetzt werden.",
   "topGaps": [
     {
@@ -45,6 +45,14 @@
       ]
     },
     {
+      "text": "MEISTE BEITRÄGE",
+      "count": 2,
+      "places": [
+        "test/assets/dar-test-turkish-ui.js:381",
+        "test/assets/dar-test-turkish-ui.js:564"
+      ]
+    },
+    {
       "text": "nicht",
       "count": 2,
       "places": [
@@ -56,8 +64,16 @@
       "text": "öffnen",
       "count": 2,
       "places": [
-        "test/assets/dar-test-turkish-ui.js:528",
-        "test/assets/dar-test-turkish-ui.js:1325"
+        "test/assets/dar-test-turkish-ui.js:538",
+        "test/assets/dar-test-turkish-ui.js:1429"
+      ]
+    },
+    {
+      "text": "WENIGSTE BEITRÄGE",
+      "count": 2,
+      "places": [
+        "test/assets/dar-test-turkish-ui.js:382",
+        "test/assets/dar-test-turkish-ui.js:568"
       ]
     },
     {
