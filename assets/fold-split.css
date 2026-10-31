@@ -584,3 +584,56 @@ html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[
   min-width:0!important;
   font-size:max(14px,1rem)!important;
 }
+
+/* DAR_FOLD_CAPACITY_AUTHORITY_V1340_20261031
+ * Definitive fallback for standalone iOS WebViews, direct PWA HTML, and the
+ * injected adult Worker shell. Legacy 'expanded', 'is-fold-dual' and
+ * data-fold-force='dual' are NOT proof of two usable columns.
+ * Only DarAdaptiveLayout's measured capacity may enable master/detail.
+ * Keep both DOM subtrees mounted so surah, ayah, player and scroll state survive.
+ */
+html[data-fold-capacity="single"][data-layout-surface] body .dar-fold[data-fold-mode="dual"],
+html[data-layout-surface="phone-landscape"][data-fold-capacity] body .dar-fold[data-fold-mode="dual"]{
+  display:block!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:0!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
+html[data-fold-capacity="single"][data-layout-surface] body .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane),
+html[data-layout-surface="phone-landscape"][data-fold-capacity] body .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane){
+  position:static!important;
+  grid-column:auto!important;
+  grid-row:auto!important;
+  width:100%!important;
+  height:auto!important;
+  min-width:0!important;
+  min-height:0!important;
+  max-width:100%!important;
+  max-height:none!important;
+  overflow:visible!important;
+  padding-inline:0!important;
+  background:none!important;
+}
+html[data-fold-capacity="single"][data-layout-surface] body .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__pane,
+html[data-layout-surface="phone-landscape"][data-fold-capacity] body .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__pane,
+html[data-fold-capacity="single"][data-layout-surface] body .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__rail,
+html[data-layout-surface="phone-landscape"][data-fold-capacity] body .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__rail{
+  display:none!important;
+}
+html[data-fold-capacity="single"][data-layout-surface] body .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__rail,
+html[data-layout-surface="phone-landscape"][data-fold-capacity] body .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__rail,
+html[data-fold-capacity="single"][data-layout-surface] body .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__pane,
+html[data-layout-surface="phone-landscape"][data-fold-capacity] body .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__pane{
+  display:block!important;
+}
+html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]){
+  display:grid!important;
+  grid-template-columns:minmax(300px,var(--fold-rail-current,320px)) minmax(0,1fr)!important;
+  gap:var(--fold-gap,18px)!important;
+}
+html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > :is(.dar-fold__rail,.dar-fold__pane){
+  display:block!important;
+}
