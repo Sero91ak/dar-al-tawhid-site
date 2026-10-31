@@ -34,6 +34,7 @@ data-dar-visitor-frontstage="1" class="is-fold-dual">
 <link rel="stylesheet" href="${href("assets/fold-split.css")}">
 <link rel="stylesheet" href="${href("assets/adult-fold-global-v1.css")}">
 <link rel="stylesheet" href="${href("assets/dar-visitor-frontstage-v1.css")}">
+<link rel="stylesheet" href="${href("assets/bottom-nav-global-v1075.css")}">
 <style>
 html,body{margin:0;padding:0;width:100%}
 body>.app{width:100%;max-width:100%;margin:0;padding:0}
@@ -48,7 +49,7 @@ html[data-dar-visitor-frontstage="1"].stage-inset body.has-bottom-nav > .app{
 </style></head><body class="has-bottom-nav"><div class="app"><main id="appView"><div
 class="dar-fold" data-fold-family="quran" data-fold-mode="dual"
 data-fold-force="dual" data-fold-single-show="rail"><aside class="dar-fold__rail">Sūrenliste</aside><section
-class="dar-fold__pane">Qurʾān-Leser</section></div></main></div><pre id="foldSmoke"></pre>
+class="dar-fold__pane">Qurʾān-Leser</section></div></main></div><nav id="bottomNav" class="bottom-nav"><button class="bottom-nav-btn" data-bottom-nav="home">Start</button><button class="bottom-nav-btn" data-bottom-nav="quiz">Quiz</button><button class="bottom-nav-btn" data-bottom-nav="recent">Beiträge</button><button class="bottom-nav-btn" data-bottom-nav="quran">Qurʾān</button><button class="bottom-nav-btn" data-bottom-nav="more">Mehr</button></nav><pre id="foldSmoke"></pre>
 <script>
 try {
 const root=document.documentElement;
@@ -88,7 +89,22 @@ const dual=phase("dual","auto",true);      // frontstage MUST NOT collapse dual
 const inset=phase("dual","auto",true,true);
 const forced=phase("dual","single",true);
 const ordinary=phase("dual","auto",false);
-document.getElementById("foldSmoke").textContent=btoa(JSON.stringify({compact,dual,inset,forced,ordinary,otherTransition,postsTransition}));
+rail.innerHTML="<p>Sūrah Liste</p>".repeat(100);
+pane.innerHTML="<p>Āyah im Leser</p>".repeat(100);
+rail.scrollTop=170;
+const railScroll={extent:rail.scrollHeight-rail.clientHeight,top:rail.scrollTop,paneTop:pane.scrollTop,css:getComputedStyle(rail).overflowY};
+pane.scrollTop=230;
+const paneScroll={extent:pane.scrollHeight-pane.clientHeight,top:pane.scrollTop,railTop:rail.scrollTop,css:getComputedStyle(pane).overflowY};
+const navEl=document.getElementById("bottomNav");
+const nav=Array.from(navEl.querySelectorAll(".bottom-nav-btn")).map(btn=>{
+ const r=btn.getBoundingClientRect();
+ const top=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
+ return {label:btn.textContent,width:r.width,height:r.height,x:r.left,y:r.top,
+  hittable:!!(top&&(top===btn||btn.contains(top))),viewportWidth:window.innerWidth,viewportHeight:window.innerHeight};
+});
+const navBox=navEl.getBoundingClientRect();
+const navBounds={x:navBox.x,right:navBox.right,top:navBox.top,bottom:navBox.bottom};
+document.getElementById("foldSmoke").textContent=btoa(JSON.stringify({compact,dual,inset,forced,ordinary,otherTransition,postsTransition,railScroll,paneScroll,nav,navBounds}));
 } catch(e) {
  document.getElementById("foldSmoke").textContent=btoa(JSON.stringify({error:String(e)}));
 }
@@ -108,6 +124,17 @@ try {
   assert.equal(result.otherTransition,"pageEnterForward","Other routes must retain their page animation");
   assert.equal(result.postsTransition.animation,"none","Beiträge transition must be disabled");
   assert.equal(result.postsTransition.transform,"none","Beiträge view must not translate over the dark shell");
+  assert.ok(result.railScroll.extent>100&&result.railScroll.top>100,"Master must independently scroll with real CSS");
+  assert.equal(result.railScroll.paneTop,0,"Master scroll must not scroll reader");
+  assert.ok(result.paneScroll.extent>100&&result.paneScroll.top>100,"Reader must independently scroll with real CSS");
+  assert.equal(result.paneScroll.railTop,result.railScroll.top,"Reader scroll must preserve master");
+  assert.equal(result.nav.length,5,"Five original bottom nav fields required");
+  for(const tab of result.nav){
+    assert.ok(tab.hittable,"Tab "+tab.label+" must receive center hit test");
+    assert.ok(tab.width>=44&&tab.height>=44,"Tab "+tab.label+" minimum 44px hit target");
+  }
+  assert.ok(result.navBounds.x>=-2&&result.navBounds.right<=1026,"Bottom nav within viewport");
+  assert.ok(result.navBounds.top>=0&&result.navBounds.bottom<=802,"Bottom nav safe within viewport");
   assert.equal(result.compact.display,"block","Compact must be a single pane even with stale forceDual");
   assert.equal(result.compact.paneDisplay,"none","Inactive reader hidden in compact");
   assert.notEqual(result.compact.railDisplay,"none","Active Surah list visible in compact");
