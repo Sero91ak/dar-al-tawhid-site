@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-10-18T13:40:56.000Z",
+  "generated": "2026-10-31T23:30:08Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1552,6 +1552,34 @@
       "status": "pending",
       "pushApproved": false,
       "note": "No OneSignal authorization: global publishing is content-only. Separate approval required."
+    },
+    "ibn-abbas-mutter-wahltun-20261031-q49": {
+      "kind": "post",
+      "postId": "ibn-abbas-mutter-wahltun-20261031-q49",
+      "filename": "ibn-abbas-mutter-wahltun-20261031-q49.md",
+      "postPath": "content/posts/ibn-abbas-mutter-wahltun-20261031-q49.md",
+      "postTitle": "📖 DIE BESONDERE STELLUNG DER MUTTER",
+      "sourcePage": "https://dar-al-tawhid.de/q/49/",
+      "status": "sent",
+      "pushApproved": true,
+      "pushApprovedAt": "2026-10-31T23:30:06Z",
+      "approvalOrigin": "User explicitly clarified on 2026-11-01 that 'Push live' for contributions includes an OneSignal notification; Q49 publication had been requested immediately beforehand.",
+      "sentAt": "2026-10-31T23:30:08Z",
+      "updatedAt": "2026-10-31T23:30:08Z",
+      "lastError": "",
+      "pushResult": {
+        "provider": "OneSignal",
+        "appId": "786d7cd6-0455-4434-ab14-0c10a7bc6b1e",
+        "notificationId": "44598b6a-7734-45db-acfb-7a6ca5566e2c",
+        "target": "segment:DAR_PUSH",
+        "targetUrl": "https://dar-al-tawhid.de/?post=ibn-abbas-mutter-wahltun-20261031-q49#post/ibn-abbas-mutter-wahltun-20261031-q49",
+        "idempotencyKey": "99bce5ed-936f-5cb2-808c-88786f8ef156",
+        "successful": 100,
+        "failed": 2,
+        "errored": 0,
+        "confirmedReceived": 0,
+        "note": "Provider accepted and completed submission. Successful means provider accepted/processed, not confirmed device display. No separate external Cloudflare availability verification from this ChatGPT environment."
+      }
     }
   }
 }
