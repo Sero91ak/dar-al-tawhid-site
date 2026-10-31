@@ -21,3 +21,13 @@ Neue Audios ausschließlich nach textlicher Endabnahme. Qurʾān vom vorhandenen
 
 ## Release-Gate
 Getrennte Profile, Mädchenfarben, arabische Schrift, Hoch-/Querformat, Scroll, Tastatur, Offline, 3 Altersgruppen und Kinderschutz auf iPhone/iPad tatsächlich testen. Keine Veröffentlichung an Besucher, bevor Issue #1535 sowie die einzelnen Lektionstexte fachlich geklärt sind.
+
+## Umsetzungsstand dieses Drafts
+- Zwölf **themenspezifische** Karteikarten-Situationen mit je drei **verschiedenen** Altersfassungen (36 redaktionelle Szenarien): die elf Grundlagen aus Curriculum V1 plus Ṣidq.
+- Für weitere vorhandene modulare Lektionen greift vorerst nur ein **neutraler allgemeiner Gesprächsanstoß**. Das ist eine sichere Übergangslösung, **keine fertige individuelle Didaktik-Freigabe** für alle 66 Lektionen.
+- Quellenfelder werden ausschließlich aus dem bereits geladenen, unveränderten Unterrichtsdatensatz übernommen; die Kinder können mit einem Button den echten Quellen-Unterrichtsschritt 3 erneut öffnen.
+- Freiwilliger Elternhinweis öffnet nur die bestehende interne Route `/kids/`. Keine WhatsApp-/Social-Automatik, keine öffentliche Kinder-URL, keine Profilinformationen im Link.
+- Die separat geladene Dialogdatei enthält keine neue Audioerzeugung. Solange die genaue Text-/Aussprachefreigabe offen ist, bleibt der neue Dialog **Text** und darf nicht als vollständig vertonte Funktion beworben werden.
+
+## Abnahme auf echten Geräten
+Für 4–5, 6–8 und 9–10 jeweils männliches und weibliches Profil: alle drei Dialogbuttons bedienen, große Schrift, horizontale/vertikale Orientierung, Seitenfokus 4 und 5, Rücksprung zum Quellenunterricht, Rückkehr zum Abschluss, Safe-Area-Scrollen hinter der Navigation, Offline-Verhalten, Screenreader und Quellenlinks prüfen. Die neue JS/CSS-Datei muss vor einer Freigabe in den Offline-/Service-Worker-Cache aufgenommen und die produktive PWA-Version korrekt angehoben werden. **Dieser Draft hat weder diesen Cache-Release noch eine Gerätetestfreigabe durchgeführt.**
