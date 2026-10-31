@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="de" data-q-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Die Rechte der Mutter · Lernbereich | DĀR AL TAWḤĪD</title><meta name="description" content="Vier klare Verständnisfragen über die Rechte der Mutter und beider Eltern nach authentischen Überlieferungen.">
+<meta name="robots" content="index,follow"><link rel="canonical" href="https://dar-al-tawhid.de/lernen/recht-der-mutter/">
+<link rel="stylesheet" href="/assets/learning-heritage.css?v=20261018a">
+<script>try{const t=localStorage.getItem("dar-quellen-royal-theme");document.documentElement.dataset.qTheme=t==="dark"?"dark":"light"}catch(e){}</script>
+<style>
+*{box-sizing:border-box}body.heritage-learning{margin:0;min-height:100dvh;font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif;color:#253c31;background:#f7f4ec}
+html[data-q-theme="dark"] body.heritage-learning{color:#f3e8d0;background:#101c21}
+main{width:min(100% - 28px,710px);margin:0 auto;padding:clamp(18px,5vw,32px) 0 calc(48px + env(safe-area-inset-bottom,0px))}
+header{text-align:center;padding:12px 0 18px}.logo{width:64px;height:64px;object-fit:contain;margin:0 auto 10px;display:block}
+.brand{font:700 clamp(19px,4vw,26px)/1.3 Georgia,serif;letter-spacing:.05em}.sign{margin:3px 0;color:#947442;font-style:italic}.kicker{margin:8px 0 0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#93734b;font-weight:700}
+h1{font:700 clamp(26px,5vw,39px)/1.2 Georgia,serif;margin:10px 0}
+.card{border:1px solid #bba985;border-radius:20px;background:#fffdf8;padding:clamp(18px,4vw,26px);box-shadow:0 8px 28px #44371914;margin:18px 0}
+html[data-q-theme="dark"] .card{background:#1c3037;border-color:#847454}
+h2{margin:0 0 12px;font:700 clamp(19px,4vw,25px)/1.35 Georgia,serif}
+.progress{display:flex;justify-content:space-between;gap:12px;color:#9b7c46;font-size:.9rem;font-weight:700}
+.options{display:grid;gap:10px;margin:16px 0}
+.option{width:100%;min-height:52px;text-align:left;background:#f9f5ed;border:1px solid #ad9c7b;border-radius:12px;color:#293d32;padding:12px;font:600 15px/1.4 system-ui,sans-serif;cursor:pointer}
+html[data-q-theme="dark"] .option{background:#283d43;color:#f3e8d0;border-color:#7e755c}
+.option[data-state="right"]{border:2px solid #33835b}.option[data-state="wrong"]{border:2px solid #b9654f}
+.option:focus-visible,.next:focus-visible{outline:3px solid #ba964f;outline-offset:3px}
+.feedback{min-height:24px;font-size:.93rem;font-weight:600;margin:12px 0}
+.next{min-height:48px;border:0;border-radius:11px;background:#d9bc7f;color:#15272d;padding:11px 19px;font-weight:800;cursor:pointer}
+.next:disabled{opacity:.45;cursor:default}[hidden]{display:none!important}
+</style></head>
+<body class="heritage-learning">
+<main><header><img class="logo" src="/watermark-my-logo-full.png" alt="DĀR AL TAWḤĪD"><div class="brand">DĀR AL TAWḤĪD</div><p class="sign">by Serhat Abu Malik</p><p class="kicker">Lernbereich · 4 Fragen</p><h1>Die Rechte der Mutter</h1></header>
+<section class="card" id="quiz" aria-live="polite"><div class="progress"><span id="count"></span><span id="score"></span></div><h2 id="question"></h2><div id="options" class="options"></div><p id="feedback" class="feedback" role="status"></p><button id="next" class="next" type="button" disabled>Nächste Frage</button></section>
+<section class="card" id="result" hidden><h2>Die Lerneinheit ist abgeschlossen</h2><p id="final"></p><button id="retry" class="next" type="button">Erneut üben</button></section>
+</main><script>
+(()=>{"use strict";const questions=[{"q":"Welche Tat hob Ibn ʿAbbās besonders hervor?","a":["Gutes gegenüber der Mutter tun","Viel Besitz sammeln","Den Vater grundsätzlich ignorieren","Nur öffentlich Gutes tun"],"correct":0,"why":"Ibn ʿAbbās betonte den besonderen Rang des Wohltuns an der Mutter."},{"q":"Wie oft nannte der Prophet ﷺ in der überlieferten Antwort zuerst die Mutter?","a":["Einmal","Zweimal","Dreimal","Fünfmal"],"correct":2,"why":"Der Prophet ﷺ sagte dreimal „Deine Mutter“ und anschließend „Dann dein Vater“."},{"q":"Welche drei besonderen Mühen hob Ibn Baṭṭāl in seiner Erklärung hervor?","a":["Reisen, Handel und Bau","Schwangerschaft, Geburt und Stillzeit","Kochen, Schreiben und Lesen","Anbau, Ernte und Lagerung"],"correct":1,"why":"Er nannte Schwangerschaft, Geburt und Stillzeit und erwähnte anschließend die gemeinsame Erziehung."},{"q":"Wie sollen die Rechte von Mutter und Vater behandelt werden?","a":["Das Recht des Vaters entfällt","Nur ein Elternteil besitzt Rechte","Beide Eltern haben Rechte, die nach Möglichkeit erfüllt werden müssen","Es sind keine Elternrechte zu beachten"],"correct":2,"why":"Die Quellen betonen den besonderen Vorrang der Mutter, ohne das Recht des Vaters aufzuheben."}];
+let index=0,points=0,answered=false;const el=id=>document.getElementById(id),quiz=el("quiz"),result=el("result");
+function render(){answered=false;const q=questions[index];el("count").textContent="Frage "+(index+1)+" von "+questions.length;el("score").textContent=points+" richtig";el("question").textContent=q.q;el("feedback").textContent="";el("next").disabled=true;el("next").textContent=index===questions.length-1?"Ergebnis anzeigen":"Nächste Frage";const box=el("options");box.replaceChildren();q.a.forEach((answer,n)=>{const b=document.createElement("button");b.type="button";b.className="option";b.textContent=String.fromCharCode(65+n)+". "+answer;b.addEventListener("click",()=>{if(answered)return;answered=true;if(n===q.correct)points++;box.querySelectorAll("button").forEach((x,i)=>{x.disabled=true;if(i===q.correct)x.dataset.state="right";else if(i===n)x.dataset.state="wrong"});el("feedback").textContent=(n===q.correct?"Richtig. ":"Noch nicht richtig. ")+q.why;el("score").textContent=points+" richtig";el("next").disabled=false});box.appendChild(b)})}
+el("next").addEventListener("click",()=>{if(!answered)return;if(index<questions.length-1){index++;render()}else{quiz.hidden=true;result.hidden=false;el("final").textContent=points+" von "+questions.length+" Fragen richtig beantwortet."}});
+el("retry").addEventListener("click",()=>{index=0;points=0;result.hidden=true;quiz.hidden=false;render()});render()})();
+</script></body></html>
