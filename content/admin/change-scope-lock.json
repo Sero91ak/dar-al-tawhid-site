@@ -9073,6 +9073,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-17T23:59:00.000Z"
+    },
+    {
+      "id": "adult-visitor-global-fold-all-areas-capacity-v1-20261031",
+      "at": "2026-10-31T06:37:00+01:00",
+      "approvedBy": "user-all-adult-areas-fold-duo-confirmation-20261031",
+      "reason": "Visitor Web / installed Android PWA / shared iOS WKWebView: load the already committed global adult Fold/Duo responsive axis on each adult route. No Kids, tvOS, native OS, profile, prayer, push or storage changes.",
+      "paths": [
+        "cloudflare/site-router.js",
+        "assets/adult-fold-global-v1.css",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-17T23:59:00.000Z"
     }
   ],
   "enabled": true

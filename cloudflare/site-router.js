@@ -311,7 +311,9 @@ function activateAdultGlobalBrandV2(html) {
     ['darVisitorDailyHubJsV1','<script defer id="darVisitorDailyHubJsV1" src="/assets/dar-visitor-daily-hub-v1.js?v=20261030-mehr-responsive-v2"></' + 'script>'],
     ['darVisitorOnboardingJsV1','<script defer id="darVisitorOnboardingJsV1" src="/assets/dar-visitor-onboarding-v1.js?v=20261030-profile-single-hub-v10"></' + 'script>']
   ];
-  const addon = addons.filter(([id]) => !html.includes('id="' + id + '"')).map(([,tag]) => tag).join("");
+  const foldLink = html.includes('id="darAdultGlobalFoldAxisV1"') ? "" :
+    '<link rel="stylesheet" id="darAdultGlobalFoldAxisV1" href="/assets/adult-fold-global-v1.css?v=20261031-fold-axis-v1">';
+  const addon = addons.filter(([id]) => !html.includes('id="' + id + '"')).map(([,tag]) => tag).join("") + foldLink;
   if (!addon) return html;
   return html.includes("</body>") ? html.replace("</body>", addon + "</body>") : html.includes("</html>") ? html.replace("</html>", addon + "</html>") : html + addon;
 }
