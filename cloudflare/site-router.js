@@ -313,7 +313,10 @@ function activateAdultGlobalBrandV2(html) {
   ];
   const foldLink = html.includes('id="darAdultGlobalFoldAxisV1"') ? "" :
     '<link rel="stylesheet" id="darAdultGlobalFoldAxisV1" href="/assets/adult-fold-global-v1.css?v=20261031-fold-axis-v1">';
-  const addon = addons.filter(([id]) => !html.includes('id="' + id + '"')).map(([,tag]) => tag).join("") + foldLink;
+  const moreReading = html.includes('id="darAdultMoreReadingJsV1"') ? "" :
+    '<link rel="stylesheet" id="darAdultMoreReadingStyleV1" href="/assets/dar-adult-more-reading-v1.css?v=20261031-mehr-compact-v1">' +
+    '<script defer id="darAdultMoreReadingJsV1" src="/assets/dar-adult-more-reading-v1.js?v=20261031-mehr-compact-v1"></' + 'script>';
+  const addon = addons.filter(([id]) => !html.includes('id="' + id + '"')).map(([,tag]) => tag).join("") + foldLink + moreReading;
   if (!addon) return html;
   return html.includes("</body>") ? html.replace("</body>", addon + "</body>") : html.includes("</html>") ? html.replace("</html>", addon + "</html>") : html + addon;
 }

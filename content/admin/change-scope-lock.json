@@ -9098,6 +9098,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-16T23:59:00.000Z"
+    },
+    {
+      "id": "adult-visitor-mehr-reading-compact-top-20261031",
+      "at": "2026-10-31T08:46:00+01:00",
+      "approvedBy": "user-request-mehr-global-arabic-translit-german-and-no-gaps-20261031",
+      "reason": "Only adult visitor browser, Android PWA, shared iOS WebView Mehr: load compact header and three persisted Quran viewing controls in More. No Kids, account/PIN, prayer/location, device native or service worker changes.",
+      "paths": [
+        "assets/dar-adult-more-reading-v1.js",
+        "assets/dar-adult-more-reading-v1.css",
+        "cloudflare/site-router.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-16T23:59:00.000Z"
     }
   ],
   "enabled": true
