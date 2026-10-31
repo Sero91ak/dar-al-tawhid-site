@@ -9,6 +9,10 @@ on:
       - 'scripts/adult-footer-route-guard.cjs'
       - 'assets/adaptive-layout.js'
       - 'assets/fold-split.js'
+      - 'assets/fold-split.css'
+      - 'assets/adult-fold-global-v1.css'
+      - 'assets/dar-visitor-frontstage-v1.css'
+      - 'scripts/adult-fold-global-regression.cjs'
       - 'assets/app-soft-boot.js'
       - 'ios/DarAlTawhid/**'
       - 'scripts/adult-touch-navigation-guard-test.cjs'
@@ -17,6 +21,12 @@ on:
   push:
     branches: [main]
     paths:
+      - 'assets/adaptive-layout.js'
+      - 'assets/fold-split.js'
+      - 'assets/fold-split.css'
+      - 'assets/adult-fold-global-v1.css'
+      - 'assets/dar-visitor-frontstage-v1.css'
+      - 'scripts/adult-fold-global-regression.cjs'
       - 'assets/dar-app-chrome.js'
       - 'assets/dar-app-chrome.css'
       - 'index.html'
@@ -39,4 +49,5 @@ jobs:
           node --check assets/app-soft-boot.js
           node scripts/adult-touch-navigation-guard-test.cjs
           node scripts/adult-layout-performance-test.cjs
+          node scripts/adult-fold-global-regression.cjs
           node scripts/adult-footer-route-guard.cjs
