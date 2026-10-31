@@ -119,6 +119,16 @@ assert.equal(w.DarTestTurkishUI.translateValue("Tawḥīd im Mittelpunkt.","ar")
 assert.equal(w.DarTestTurkishUI.translateValue("Lesung beginnen →","ku"),"Xwendinê dest pê bike →");
 assert.equal(w.DarTestTurkishUI.translateValue("Aktuell · zuletzt synchronisiert um 31.10.2026, 19:05","tr"),"Güncel · son eşitleme 31.10.2026, 19:05");
 assert.equal(w.DarTestTurkishUI.translateValue("DĀR AL TAWḤĪD · WISSENSBIBLIOTHEK","ckb"),"DĀR AL TAWḤĪD · کتێبخانەی زانست");
+assert.equal(w.DarTestTurkishUI.translateValue("5 Min","tr"),"5 dk");
+assert.equal(w.DarTestTurkishUI.translateValue("Sleep-Timer · 3:05","en"),"Sleep-timer · 3:05");
+assert.equal(w.DarTestTurkishUI.translateValue("Lernen · Āyah 12","fr"),"Apprentissage · āyah 12");
+assert.equal(w.DarTestTurkishUI.translateValue("Beleg 2 öffnen","en"),"Open evidence 2");
+assert.equal(w.DarTestTurkishUI.translateValue("Zufall · Sūrah + Rezitator","en"),"Random · Sūrah + reciter");
+assert.equal(w.DarTestTurkishUI.translateValue("SPRECHEN","ar"),"تكلم");
+assert.equal(w.DarTestTurkishUI.translateValue("Vorige Āyah","es"),"Āyah anterior");
+assert.equal(w.DarTestTurkishUI.translateValue("Ich höre: Bismillāh","ku"),"Ez dibihîzim: Bismillāh");
+assert.equal(w.DarTestTurkishUI.translateValue("Āyah 2 / 7 · gelernt 1/7","es"),"aleya 2 / 7 · aprendido 1/7");
+assert.equal(w.DarTestTurkishUI.translateValue("Gespeichert: Links · Auf diesem schmalen Display bleibt die Leiste automatisch unten.","en"),"Saved: Left · On this narrow screen the bar stays at the bottom.");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);

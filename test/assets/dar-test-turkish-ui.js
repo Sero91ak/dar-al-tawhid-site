@@ -366,6 +366,14 @@ function isDynamicGermanUi(value){
   /^Aktuell · zuletzt synchronisiert um .+$/.test(value)||
   /^Offline · Stand vom .+$/.test(value)||
   /^Fast fertig · \d+\/\d+ Dateien · Download fortsetzen$/.test(value)||
+  /^\d+ Min$/.test(value)||
+  /^Sleep-Timer · \d+:\d{2}$/.test(value)||
+  /^Lernen · Āyah \d+$/.test(value)||
+  /^Āyah \d+ \/ \d+ · gelernt \d+\/\d+$/.test(value)||
+  /^Gespeichert: (?:Links|Rechts) · Auf diesem schmalen Display bleibt die Leiste automatisch unten\.$/.test(value)||
+  /^Beleg \d+ öffnen$/.test(value)||
+  /^Auswertung: \d+ korrekt, \d+ ähnlich, \d+ offen\.$/.test(value)||
+  /^Ich höre: .+$/.test(value)||
   /^\d+\s+(Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt|Funktionen|Ergebnisse)$/.test(value)||
   /^\d+\s+Āyāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
   /^\d+\s*·\s*\d+\s+Ayāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
@@ -598,6 +606,79 @@ function translateSharedPatterns(value,language){
    es:"Casi listo · "+n+" archivos"
   };
   if(forms[language]&&cont)return forms[language]+" · "+cont;
+ }
+ const shortMin=value.match(/^(\d+) Min$/);
+ if(shortMin){
+  const unit={ar:"د",en:"min",tr:"dk",ku:"deq",ckb:"دق",bs:"min",fr:"min",es:"min"}[language];
+  if(unit)return shortMin[1]+" "+unit;
+ }
+ const sleepLeft=value.match(/^Sleep-Timer · (\d+:\d{2})$/);
+ if(sleepLeft){
+  const head=lookupPack("Sleep-Timer",language);
+  if(head)return head+" · "+sleepLeft[1];
+ }
+ const learnAyah=value.match(/^Lernen · Āyah (\d+)$/);
+ if(learnAyah){
+  const head=lookupPack("Lernen",language);
+  const word=uiWord(language,"Āyah");
+  if(head&&word)return head+" · "+word+" "+learnAyah[1];
+ }
+ const learned=value.match(/^Āyah (\d+) \/ (\d+) · gelernt (\d+)\/(\d+)$/);
+ if(learned){
+  const word=uiWord(language,"Āyah");
+  const done={ar:"تُعلّم",en:"learned",tr:"öğrenildi",ku:"hatiye fêrkirin",ckb:"فێرکرا",bs:"naučeno",fr:"appris",es:"aprendido"}[language];
+  if(word&&done)return word+" "+learned[1]+" / "+learned[2]+" · "+done+" "+learned[3]+"/"+learned[4];
+ }
+ const narrowBar=value.match(/^Gespeichert: (Links|Rechts) · Auf diesem schmalen Display bleibt die Leiste automatisch unten\.$/);
+ if(narrowBar){
+  const side=lookupPack(narrowBar[1],language);
+  const head={ar:"حُفظ: ",en:"Saved: ",tr:"Kaydedildi: ",ku:"Tomar bû: ",ckb:"پاشەکەوت کرا: ",bs:"Sačuvano: ",fr:"Enregistré : ",es:"Guardado: "}[language];
+  const tail={
+   ar:" · على هذه الشاشة الضيقة يبقى الشريط تلقائيًا في الأسفل.",
+   en:" · On this narrow screen the bar stays at the bottom.",
+   tr:" · Bu dar ekranda çubuk kendiliğinden altta kalır.",
+   ku:" · Li vî ekranê teng şiv bi xwe dikeve jêr.",
+   ckb:" · لەم شاشە تەسکەدا شریت خۆکارانە لە خوارەوە دەمێنێتەوە.",
+   bs:" · Na ovom uskom ekranu traka sama ostaje dolje.",
+   fr:" · Sur cet écran étroit, la barre reste en bas d’elle-même.",
+   es:" · En esta pantalla estrecha la barra permanece abajo por sí sola."
+  }[language];
+  if(head&&side&&tail)return head+side+tail;
+ }
+ const openProof=value.match(/^Beleg (\d+) öffnen$/);
+ if(openProof){
+  const n=openProof[1];
+  const forms={
+   ar:"افتح الدليل "+n,
+   en:"Open evidence "+n,
+   tr:n+". delili aç",
+   ku:"Delîl "+n+" veke",
+   ckb:"بەڵگەی "+n+" بکەرەوە",
+   bs:"Otvori dokaz "+n,
+   fr:"Ouvrir le justificatif "+n,
+   es:"Abrir la prueba "+n
+  };
+  if(forms[language])return forms[language];
+ }
+ const scoreLine=value.match(/^Auswertung: (\d+) korrekt, (\d+) ähnlich, (\d+) offen\.$/);
+ if(scoreLine){
+  const a=scoreLine[1],b=scoreLine[2],c=scoreLine[3];
+  const forms={
+   ar:"النتيجة: "+a+" صحيح، "+b+" قريب، "+c+" مفتوح.",
+   en:"Result: "+a+" correct, "+b+" close, "+c+" open.",
+   tr:"Sonuç: "+a+" doğru, "+b+" yakın, "+c+" açık.",
+   ku:"Encam: "+a+" durust, "+b+" nêzîk, "+c+" vekirî.",
+   ckb:"ئەنجام: "+a+" ڕاست، "+b+" نزیک، "+c+" کراوە.",
+   bs:"Rezultat: "+a+" tačno, "+b+" blisko, "+c+" otvoreno.",
+   fr:"Résultat : "+a+" correct, "+b+" proche, "+c+" ouvert.",
+   es:"Resultado: "+a+" correcto, "+b+" cercano, "+c+" abierto."
+  };
+  if(forms[language])return forms[language];
+ }
+ const heard=value.match(/^Ich höre: (.+)$/);
+ if(heard){
+  const head={ar:"أسمع: ",en:"I hear: ",tr:"Duyuyorum: ",ku:"Ez dibihîzim: ",ckb:"دەبیستم: ",bs:"Čujem: ",fr:"J’entends : ",es:"Oigo: "}[language];
+  if(head)return head+heard[1];
  }
  const range=value.match(/^Sūrenbereich wechseln(?:, aktuell|\s+)(.+?)(?:\s*[⌄])?$/);
  if(range){
@@ -1350,7 +1431,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-31";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-32";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
