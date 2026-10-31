@@ -291,7 +291,7 @@ function activateAdultGlobalBrandV2(html) {
      Separate layout revision for visitor, TEST and Android PWA, without
      reintroducing removed reading modules or touching Kids/permissions. */
   html = html.replace(
-    /((?:src|href)=["'])(\/assets\/(?:adaptive-layout\.js|fold-split\.(?:js|css)|dar-visitor-frontstage-v1\.css))(?:\?[^"']*)?(["'])/g,
+    /((?:src|href)=["'])(\/assets\/(?:adaptive-layout\.js|fold-split\.(?:js|css)|dar-visitor-frontstage-v1\.css|dar-adult-brand-header-v2\.css))(?:\?[^"']*)?(["'])/g,
     '$1$2?v=20261031-fold-duo-v2$3'
   );
   // Refresh only adult profile module URLs, preserving all account and prayer logic.
@@ -307,7 +307,7 @@ function activateAdultGlobalBrandV2(html) {
    * Keep the public website, Kids and Test in their existing isolated lanes.
    * Reuse the lazy-loader's IDs so each module is loaded at most once. */
   const addons = [
-    ['darAdultGlobalBrandStyleV2','<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261030-restore-original-hero-rail-v5">'],
+    ['darAdultGlobalBrandStyleV2','<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261031-fold-duo-v2">'],
     ['darVisitorSmartProfileCssV1','<link rel="stylesheet" id="darVisitorSmartProfileCssV1" href="/assets/dar-visitor-smart-profile-v1.css?v=20261030-my-dar-dashboard-v11">'],
     ['darVisitorProfilePickerCssV1','<link rel="stylesheet" id="darVisitorProfilePickerCssV1" href="/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-single-hub-v10">'],
     ['darVisitorDailyHubCssV1','<link rel="stylesheet" id="darVisitorDailyHubCssV1" href="/assets/dar-visitor-daily-hub-v1.css?v=20261030-mehr-responsive-v2">'],
