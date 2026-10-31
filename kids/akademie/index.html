@@ -3972,7 +3972,7 @@ body[data-kids-portal="true"][data-profile="girl"] .academy-header.kids-detail-a
    </div>
   </section>
   <section class="lesson-stage" data-lesson-step="4" aria-labelledby="recapTitle" hidden><div class="academy-completion-kicker">★ Geschafft! Das hast du gelernt</div><span class="kicker">Schritt 5 · Das nehme ich mit</span><h2 id="recapTitle">Das habe ich heute gelernt</h2><div class="recap-lesson"><div class="recap-item"><span class="recap-label">1 · Das merke ich mir</span><p class="stage-lead"><strong>Wahrhaftigkeit</strong> bedeutet, ehrlich zu sprechen.</p></div><div class="recap-item"><span class="recap-label">2 · Qurʾān und Sunnah</span><p>Wir haben gelernt, dass Allah uns aufruft, mit den Wahrhaftigen zu sein, und dass der Prophet ﷺ die Wahrhaftigkeit als Weg zur Rechtschaffenheit erklärte.</p></div><div class="recap-item"><span class="recap-label">3 · So handle ich</span><p>Wenn mir ein Fehler passiert, sage ich die Wahrheit und versuche, ihn wiedergutzumachen.</p></div></div>
-   <p id="summaryText" class="feedback-final"></p><div class="recap-reflection academy-teach-back" aria-label="Wissen weitergeben"><h3>Dein Wissen lebt weiter</h3><p id="academyTeachBackPrompt">Wenn du möchtest, erkläre einem vertrauten Menschen mit deinen Worten, was du heute verstanden hast. Du kannst ihm danach selbst eine Frage stellen.</p></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="4">Merksatz anhören</button></div>
+   <p id="summaryText" class="feedback-final"></p><div class="recap-reflection academy-teach-back" aria-label="Wissen weitergeben"><h3>Dein Wissen lebt weiter</h3><p id="academyTeachBackPrompt">Wenn du möchtest, erkläre einem vertrauten Menschen mit deinen Worten, was du heute verstanden hast. Du kannst ihm danach selbst eine Frage stellen.</p><div id="academyTeachBackInteractive" aria-label="Denken, Belege nachsehen und Wissen weitergeben"></div></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="4">Merksatz anhören</button></div>
    <div class="recap-reflection"><h3>Wie geht es dir mit diesem Thema?</h3><p>Du darfst es jederzeit noch einmal üben.</p><div class="answers"><button class="pill" type="button" data-reflect="ready">Ich habe es verstanden</button><button class="pill" type="button" data-reflect="help">Ich möchte mehr üben</button></div><p id="nextDue" class="small" aria-live="polite">Deine Wiederholung wird nach deinem Lernstand vorgeschlagen.</p></div>
    <button class="pill primary" type="button" id="backAfterLesson">Zur Lernakademie</button>
   </section>
@@ -3991,6 +3991,8 @@ body[data-kids-portal="true"][data-profile="girl"] .academy-header.kids-detail-a
 <script src="/kids/akademie/curriculum-v29.js?v=20261012-29"></script>
 <script src="/kids/akademie/term-coach-v24.js?v=20261011-01"></script>
 <script src="/kids/akademie/school-progress-v11.js?v=20261012-30"></script>
+<link rel="stylesheet" href="/kids/akademie/teachback-v1.css?v=20261031-01">
+<script src="/kids/akademie/teachback-v1.js?v=20261031-01"></script>
 <script src="/kids/kids-birth-month-v1431.js?v=1431"></script>
 <script>
 (()=>{
@@ -4673,7 +4675,7 @@ const focusPages={1:0,2:0,4:0};
 function focusPieces(stageNumber){
  if(stageNumber===1)return all("#explainWords [data-spoken]");
  if(stageNumber===2)return [...all('[data-lesson-step="2"] .lesson-source-block'),$('.teacher-explainer')];
- if(stageNumber===4)return [...all('[data-lesson-step="4"] .recap-item'),$('.recap-reflection')];
+ if(stageNumber===4)return [...all('[data-lesson-step="4"] .recap-item'),...all('[data-lesson-step="4"] .recap-reflection')];
  return [];
 }
 function focusUpdate(stageNumber,target,{silent=false}={}){
@@ -4988,6 +4990,11 @@ function showRecap(){
   age==="6-8"?("Wie würdest du einem Freund oder einem Geschwisterkind erklären, was du über "+topic+" gelernt hast? Überlege dir auch eine kleine Frage, die du ihm stellen könntest."):
   ("Fasse das wichtigste Wissen über "+topic+" ohne Ablesen in deinen Worten zusammen. Stelle einer vertrauten Person eine Frage dazu und prüfe gemeinsam, ob deine Erklärung verständlich war.");
  const teach=$("#academyTeachBackPrompt");if(teach)teach.textContent=invite;
+  const coach=window.DARKidsAcademyTeachBack;
+  if(coach)coach.mount($("#academyTeachBackInteractive"),{
+   lessonId:activeLessonId,lesson:activeLesson(),age,
+   onEvidence:()=>{if(step===4){focusPages[2]=0;showStep(2);}}
+  });
  all("[data-reflect]").forEach(b=>{b.classList.remove("active");b.setAttribute("aria-pressed","false")});
 }
 function persist(level,automatic=false){
