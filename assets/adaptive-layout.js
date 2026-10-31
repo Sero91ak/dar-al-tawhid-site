@@ -141,11 +141,13 @@
          sides of the hardware hinge. Never cap the master at 360px here:
          doing so would put the reader over the hinge. */
       var hingePad = 8;
-      rail = Math.max(0, Math.floor(segments.left.width - outer/2 - hingePad - sideReserve));
-      /* The app shell may begin at x=0 or behind an inner gutter.
-         Reserve half of the nominal outer gutter as well, so either
-         coordinate convention keeps the reading pane past the hinge. */
-      gap = segments.gap + Math.round(outer/2) + 2 * hingePad;
+      /* The app shell can be full-bleed or inset by its page gutter.
+         A conservative outer-gutter reserve prevents the master from entering
+         the physical left-screen hinge even when the shell starts inset. */
+      rail = Math.max(0, Math.floor(segments.left.width - outer - hingePad - sideReserve));
+      /* The wider gap also keeps the reader OUT of the hinge when the
+         shell starts at viewport x=0. Inset shells gain extra clearance. */
+      gap = segments.gap + outer + 2 * hingePad;
       readerMin = Math.min(READER_MIN, Math.max(420,Math.round(segments.right.width*0.84)));
     }
     var reader = Math.max(0, usable - rail - gap);
