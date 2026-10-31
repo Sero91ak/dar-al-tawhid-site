@@ -8981,6 +8981,23 @@
         ".github/workflows/visitor-pwa-global-parity.yml"
       ],
       "expiresAt": "2026-11-12T23:59:00.000Z"
+    },
+    {
+      "id": "adult-visitor-global-area-routing-stability-live-20261031",
+      "at": "2026-10-31T03:37:00+01:00",
+      "approvedBy": "user-explicit-fix-push-live-global-20261031",
+      "reason": "Correct adult visitor home area destinations, freeze daily recommendations while reading, preserve return position, prevent dual-view overflow; translate Turkish UI string; include previously approved neutral avatar and PIN flow. Do not change Kids, prayer engine, push, accounts or service workers.",
+      "paths": [
+        "assets/dar-home-test-parity-visitor.js",
+        "assets/dar-visitor-smart-profile-v1.js",
+        "assets/dar-visitor-profile-picker-v1.js",
+        "assets/smart-profile/approved-neutral-faceless-v2.webp",
+        "assets/i18n/adult-ui-de-tr.json",
+        "scripts/test-visitor-profile-lock-shortcuts-v1.cjs",
+        "cloudflare/site-router.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-15T23:59:00.000Z"
     }
   ],
   "enabled": true

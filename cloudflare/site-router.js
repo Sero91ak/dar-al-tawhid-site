@@ -287,10 +287,13 @@ function adultTopScrollBoundaryAddon() {
 /* VISITOR_PROFILE_SHORTCUTS_V9_FINAL_RELEASE_20261030: horizontal profile + notes/account quick capsule; PIN-gated account switch, iOS/PWA parity. */
 function activateAdultGlobalBrandV2(html) {
   if (typeof html !== "string") return html;
+  // Refresh only adult profile module URLs, preserving all account and prayer logic.
+  html = html.replaceAll("dar-visitor-smart-profile-v1.js?v=20261030-my-dar-dashboard-v11", "dar-visitor-smart-profile-v1.js?v=20261030-neutral-icon-v12");
+  html = html.replaceAll("dar-visitor-profile-picker-v1.js?v=20261030-profile-single-hub-v10", "dar-visitor-profile-picker-v1.js?v=20261030-left-select-v12");
   /* Native iOS and PWA must use the same fresh prayer presentation as Test.
      Keep desktop public browser, Kids and the original prayer engine isolated. */
   html = html.replace(/\/assets\/dar-home-test-parity-visitor\.js\?v=[a-zA-Z0-9-]+/g,
-    "/assets/dar-home-test-parity-visitor.js?v=20261030-prayer-compact-colors-v3");
+    "/assets/dar-home-test-parity-visitor.js?v=20261030-neutral-icon-v12");
   /* VISITOR_PROFILE_HEADER_BOOT_V4: adult visitor native/PWA only.
    * Guarantee the approved palette icon, profile picker, smart personalization
    * and adaptive Frauen/Entdecken tab load with the original branded header.
@@ -303,8 +306,8 @@ function activateAdultGlobalBrandV2(html) {
     ['darVisitorDailyHubCssV1','<link rel="stylesheet" id="darVisitorDailyHubCssV1" href="/assets/dar-visitor-daily-hub-v1.css?v=20261030-mehr-responsive-v2">'],
     ['darVisitorOnboardingCssV1','<link rel="stylesheet" id="darVisitorOnboardingCssV1" href="/assets/dar-visitor-onboarding-v1.css?v=20261030-mehr-responsive-v2">'],
     ['darAdultGlobalBrandScriptV2','<script defer id="darAdultGlobalBrandScriptV2" src="/assets/dar-adult-brand-header-v2.js?v=20261030-fixed-occlusion-v1"></' + 'script>'],
-    ['darVisitorSmartProfileJsV1','<script defer id="darVisitorSmartProfileJsV1" src="/assets/dar-visitor-smart-profile-v1.js?v=20261030-my-dar-dashboard-v11"></' + 'script>'],
-    ['darVisitorProfilePickerJsV1','<script defer id="darVisitorProfilePickerJsV1" src="/assets/dar-visitor-profile-picker-v1.js?v=20261030-profile-single-hub-v10"></' + 'script>'],
+    ['darVisitorSmartProfileJsV1','<script defer id="darVisitorSmartProfileJsV1" src="/assets/dar-visitor-smart-profile-v1.js?v=20261030-neutral-icon-v12"></' + 'script>'],
+    ['darVisitorProfilePickerJsV1','<script defer id="darVisitorProfilePickerJsV1" src="/assets/dar-visitor-profile-picker-v1.js?v=20261030-left-select-v12"></' + 'script>'],
     ['darVisitorDailyHubJsV1','<script defer id="darVisitorDailyHubJsV1" src="/assets/dar-visitor-daily-hub-v1.js?v=20261030-mehr-responsive-v2"></' + 'script>'],
     ['darVisitorOnboardingJsV1','<script defer id="darVisitorOnboardingJsV1" src="/assets/dar-visitor-onboarding-v1.js?v=20261030-profile-single-hub-v10"></' + 'script>']
   ];
@@ -1488,7 +1491,7 @@ export default {
         html = html.replace('/assets/fold-split.js?v=4', '/assets/fold-split.js?v=5');
         // Android installed PWA: bump URLs for the shared visitor home and 3D icon renderer.
         // An old v3 PWA worker may otherwise return a permanently stale cache-first asset.
-        html = html.replace('/assets/dar-home-test-parity-visitor.js?v=20261030-home-order-clock-v2', '/assets/dar-home-test-parity-visitor.js?v=20261030-prayer-compact-colors-v3');
+        html = html.replace('/assets/dar-home-test-parity-visitor.js?v=20261030-home-order-clock-v2', '/assets/dar-home-test-parity-visitor.js?v=20261030-neutral-icon-v12');
         html = html.replaceAll('/assets/dar-noble-3d-icons.js?v=1095', '/assets/dar-noble-3d-icons.js?v=20261030-android-global-parity-v8');
         html = html.replace('/assets/dar-noble-3d-icons.css?v=1095', '/assets/dar-noble-3d-icons.css?v=20261030-android-global-parity-v8');
         // iPadOS desktop-class Safari identifies as Macintosh, even on a tablet.

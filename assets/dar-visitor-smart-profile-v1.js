@@ -78,7 +78,7 @@ function chooseTheme(value){if(value==="keep")return false;
  return false
 }
 function themePick(v){if(!availableThemes().includes(v))return;var p=read();p.palette=v;write(p);if(v!=="keep")chooseTheme(v)}
-function image(g){return g==="woman"?"/assets/smart-profile/approved-woman-v1.webp":g==="man"?"/assets/smart-profile/approved-man-v1.webp":"/assets/smart-profile/approved-neutral-v1.webp"}
+function image(g){return g==="woman"?"/assets/smart-profile/approved-woman-v1.webp":g==="man"?"/assets/smart-profile/approved-man-v1.webp":"/assets/smart-profile/approved-neutral-faceless-v2.webp"}
 function display(g){return g==="woman"?"Mein Frauenbereich":g==="man"?"Mein Männerbereich":"Mein DĀR"}
 function label(g){return g==="woman"?"Frau":g==="man"?"Mann":"Neutral"}
 function hashText(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
@@ -137,7 +137,7 @@ function catalogPulse(items){
  return newIds
 }
 function ranking(p){
- var date=today(),seen=new Set(p.opened),topics=new Set(p.interests),source=inventory(),newItems=catalogPulse(source);
+ var date=today(),topics=new Set(p.interests),source=inventory(),newItems=catalogPulse(source);
  return eligible(p,source).map(function(item){
   var score=hashText(date+"|"+owner()+"|"+p.gender+"|"+item.id)%490;
   for(var tag of item.tags){if(topics.has(tag))score+=410}
@@ -145,7 +145,6 @@ function ranking(p){
   if(p.gender==="man"&&item.gender==="man")score+=1100;
   if(item.gender==="both"&&p.gender!=="neutral")score+=100;
   if(newItems.has(item.id))score+=1750;
-  if(seen.has(item.id))score-=1300;
   if(p.saved.includes(item.id))score-=450;
   // Rotate daily; never invent titles or religious references.
   return {item:item,score:score}
@@ -322,7 +321,7 @@ function updateHome(p){
  var widget=root.querySelector(".dsp-mount");
  if(!widget){widget=document.createElement("div");widget.className="dsp-mount";var welcome=root.querySelector(".dhp-welcome");if(!welcome)return;welcome.insertAdjacentElement("afterend",widget)}
  var listed=inventory(),digest=listed.slice(0,100).map(x=>x.id+"|"+x.title+"|"+x.gender).join(";");
- var sig=owner()+"|"+today()+"|"+JSON.stringify([p.gender,p.chosen,p.interests,p.saved,p.opened])+"|"+listed.length+"|"+hashText(digest);
+ var sig=owner()+"|"+today()+"|"+JSON.stringify([p.gender,p.chosen,p.interests,p.saved])+"|"+listed.length+"|"+hashText(digest);
  if(widget.dataset.dspSig!==sig){widget.innerHTML=card(p);widget.dataset.dspSig=sig}
  root.dataset.smartGender=p.gender;
  root.setAttribute("aria-label","DĀR AL TAWḤĪD · "+(p.gender==="woman"?"Frauen-Wissensbereich":p.gender==="man"?"Männer-Wissensbereich":"Alle Wissensbereiche"));
