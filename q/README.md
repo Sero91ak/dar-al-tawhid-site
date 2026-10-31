@@ -4,11 +4,13 @@ Dieser Ordner ist die zentrale Ablage für alle nummerierten Quellenlinks.
 
 ## Regel
 
-- Öffentlich sichtbar bleibt immer nur: `dar-al-tawhid.de/q/<nummer>`
+- Öffentlich sichtbar bleibt immer nur: `dar-al-tawhid.de/q/<nummer>/` (mit abschließendem Schrägstrich)
 - Die Ordnernamen bleiben technisch kurz: `q/1`, `q/2`, `q/3`, ...
 - Die GitHub-Übersicht steht hier in dieser Datei: Nummer, Thema, Sprecher und Kernaussage.
 - Neue Quellenlinks werden immer fortlaufend angelegt und in `q/_registry/shortlinks.json` eingetragen.
 - Besucher-Seiten enthalten keine internen Arbeitsnotizen.
+- Für verbundene Aussagen enthält der öffentliche Erwachsenen-Beitrag ausschließlich die erste Aussage (oder ausdrücklich vom Nutzer ausgewählte andere). Die Q-Seite enthält die gesamte Zusammenstellung mit allen Aussagen, arabischem Original, vollständigem Kontext, Isnād-/Statusprüfung, frühem geprüftem Šarḥ und verifizierten Originalquellen. Quelle und Kurzlink stehen im separaten Quellenbereich des Beitrags, nicht im Aussagekörper.
+- Die Erstellung einer Q-Quellenkarte ist keine Genehmigung für den Live-Push des zugehörigen Erwachsenenbeitrags, keine globale Sprachfreigabe und keine Gerätebenachrichtigung.
 - PDF-/Scan-Karten werden nur mit direkter geprüfter Seitenführung gesetzt.
 - Unten steht immer die anklickbare Social-Icon-Leiste.
 
