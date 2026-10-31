@@ -287,6 +287,13 @@ function adultTopScrollBoundaryAddon() {
 /* VISITOR_PROFILE_SHORTCUTS_V9_FINAL_RELEASE_20261030: horizontal profile + notes/account quick capsule; PIN-gated account switch, iOS/PWA parity. */
 function activateAdultGlobalBrandV2(html) {
   if (typeof html !== "string") return html;
+  /* DAR_ADULT_FOLD_CACHE_COHERENCE_V2: only adult HTML asset attributes.
+     Separate layout revision for visitor, TEST and Android PWA, without
+     reintroducing removed reading modules or touching Kids/permissions. */
+  html = html.replace(
+    /((?:src|href)=["'])(\/assets\/(?:adaptive-layout\.js|fold-split\.(?:js|css)|dar-visitor-frontstage-v1\.css|dar-adult-brand-header-v2\.css))(?:\?[^"']*)?(["'])/g,
+    '$1$2?v=20261031-fold-duo-v2$3'
+  );
   // Refresh only adult profile module URLs, preserving all account and prayer logic.
   html = html.replaceAll("dar-visitor-smart-profile-v1.js?v=20261030-my-dar-dashboard-v11", "dar-visitor-smart-profile-v1.js?v=20261031-neutral-hooded-v14");
   html = html.replaceAll("dar-visitor-profile-picker-v1.js?v=20261030-profile-single-hub-v10", "dar-visitor-profile-picker-v1.js?v=20261030-left-select-v12");
@@ -300,7 +307,7 @@ function activateAdultGlobalBrandV2(html) {
    * Keep the public website, Kids and Test in their existing isolated lanes.
    * Reuse the lazy-loader's IDs so each module is loaded at most once. */
   const addons = [
-    ['darAdultGlobalBrandStyleV2','<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261030-restore-original-hero-rail-v5">'],
+    ['darAdultGlobalBrandStyleV2','<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261031-fold-duo-v2">'],
     ['darVisitorSmartProfileCssV1','<link rel="stylesheet" id="darVisitorSmartProfileCssV1" href="/assets/dar-visitor-smart-profile-v1.css?v=20261030-my-dar-dashboard-v11">'],
     ['darVisitorProfilePickerCssV1','<link rel="stylesheet" id="darVisitorProfilePickerCssV1" href="/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-single-hub-v10">'],
     ['darVisitorDailyHubCssV1','<link rel="stylesheet" id="darVisitorDailyHubCssV1" href="/assets/dar-visitor-daily-hub-v1.css?v=20261030-mehr-responsive-v2">'],
@@ -312,7 +319,7 @@ function activateAdultGlobalBrandV2(html) {
     ['darVisitorOnboardingJsV1','<script defer id="darVisitorOnboardingJsV1" src="/assets/dar-visitor-onboarding-v1.js?v=20261030-profile-single-hub-v10"></' + 'script>']
   ];
   const foldLink = html.includes('id="darAdultGlobalFoldAxisV1"') ? "" :
-    '<link rel="stylesheet" id="darAdultGlobalFoldAxisV1" href="/assets/adult-fold-global-v1.css?v=20261031-fold-axis-v1">';
+    '<link rel="stylesheet" id="darAdultGlobalFoldAxisV1" href="/assets/adult-fold-global-v1.css?v=20261031-fold-duo-v2">';
   // Do not globally inject reading-language controls. Arabic, transliteration and
   // German display settings belong exclusively to the dedicated Quran/text reader.
   const addon = addons.filter(([id]) => !html.includes('id="' + id + '"')).map(([,tag]) => tag).join("") + foldLink;
