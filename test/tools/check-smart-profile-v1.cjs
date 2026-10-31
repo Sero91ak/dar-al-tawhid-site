@@ -48,8 +48,8 @@ assert.match(script,/approved-man-v1\.webp/,"The selected male icon must be wire
 assert.match(header,/approved-woman-v1\.webp/,"Header must use the approved female icon");
 assert.match(header,/approved-man-v1\.webp/,"Header must use the approved male icon");
 
-assert.match(script,/approved-neutral-faceless-v2\.webp/,"The new neutral 3D portrait must be wired in");
-assert.match(header,/approved-neutral-faceless-v2\.webp/,"Header must use the neutral 3D portrait");
+assert.match(script,/approved-neutral-hooded-20261031\.webp/,"The new neutral 3D portrait must be wired in");
+assert.match(header,/approved-neutral-hooded-20261031\.webp/,"Header must use the neutral 3D portrait");
 const neutral=fs.readFileSync(path.join(root,"test/assets/smart-profile/approved-neutral-hooded-20261031.webp"));
 assert.equal(neutral.toString("ascii",0,4),"RIFF","Neutral 3D portrait is a genuine WebP file");
 assert.equal(neutral.toString("ascii",8,12),"WEBP","Neutral 3D portrait must have the WebP format");

@@ -9049,6 +9049,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-15T23:59:00.000Z"
+    },
+    {
+      "id": "adult-neutral-avatar-test-contract-and-existing-loader-version-fix-20261031",
+      "at": "2026-10-31T06:35:00+01:00",
+      "approvedBy": "user-explicit-global-neutral-live-github-20261031",
+      "reason": "Maintain verified neutral image regression assertion and correct preexisting outdated onboarding lazy loader version contract; no runtime app code changed.",
+      "paths": [
+        "test/tools/check-smart-profile-v1.cjs",
+        "scripts/check-visitor-more-responsive.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-15T23:59:00.000Z"
     }
   ],
   "enabled": true

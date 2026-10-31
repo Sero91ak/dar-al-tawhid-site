@@ -34,7 +34,7 @@ for(const asset of [
  "dar-visitor-onboarding-v1.css","dar-visitor-onboarding-v1.js"
 ]){
  const expected=asset==="dar-visitor-onboarding-v1.js"?
-   {edge:"20261030-profile-shortcuts-v9",visitor:"20261030-profile-shortcuts-v7"}:
+   {edge:"20261030-profile-single-hub-v10",visitor:"20261030-profile-single-hub-v10"}:
    {edge:"20261030-mehr-responsive-v2",visitor:"20261030-mehr-responsive-v2"};
  assert(router.includes("/assets/"+asset+"?v="+expected.edge),"Cloudflare visitor/Android stale asset "+asset);
  assert(loader.includes("/assets/"+asset+"?v="+expected.visitor),"Native/visitor lazy-loader stale asset "+asset);
