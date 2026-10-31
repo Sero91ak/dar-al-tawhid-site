@@ -142,7 +142,10 @@
          doing so would put the reader over the hinge. */
       var hingePad = 8;
       rail = Math.max(0, Math.floor(segments.left.width - outer/2 - hingePad - sideReserve));
-      gap = segments.gap + 2 * hingePad;
+      /* The app shell may begin at x=0 or behind an inner gutter.
+         Reserve half of the nominal outer gutter as well, so either
+         coordinate convention keeps the reading pane past the hinge. */
+      gap = segments.gap + Math.round(outer/2) + 2 * hingePad;
       readerMin = Math.min(READER_MIN, Math.max(420,Math.round(segments.right.width*0.84)));
     }
     var reader = Math.max(0, usable - rail - gap);
