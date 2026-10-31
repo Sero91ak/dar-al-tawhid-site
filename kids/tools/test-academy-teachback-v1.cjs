@@ -33,6 +33,12 @@ for(const id of api.curatedIds){
   assert.equal(p.excerpt,true);
  }
 }
+for(const id of api.curatedIds){
+ const ages=["4-5","6-8","9-10"];
+ const cases=ages.map(age=>api.plan({lessonId:id,age,lesson:{topic:"Probenthema"}}).scenario);
+ assert.equal(new Set(cases).size,3,"Each age band must have a DISTINCT scenario: "+id);
+ assert.ok(cases[0].length<cases[2].length,"4–5 must be shorter than 9–10: "+id);
+}
 const fallback=api.plan({lessonId:"neue-lektion-2027",lesson:{topic:"Neue Lektion"},age:"9-10"});
 assert.match(fallback.scenario,/Neue Lektion/);
 let callback=0;
@@ -61,4 +67,4 @@ assert.ok(html.includes('...all(\'[data-lesson-step="4"] .recap-reflection\')'))
 assert.ok(css.includes("var(--gold)")&&css.includes("min-height:49px"));
 assert.ok(!/\blocalStorage\b|\bsessionStorage\b|\bfetch\s*\(|\bspeechSynthesis\b|\bWebSocket\b|\bnavigator\.share\b/.test(code));
 assert.ok(!code.includes("elevenlabs")&&!code.includes("new Audio("));
-console.log("PASS: 12 curated topics × 3 age variants; fallback, 3-step interaction, parent reveal, source callback, 5 recap focus pages; no tracking/audio");
+console.log("PASS: 12 curated topics × 3 distinct age scenarios; fallback, 3-step interaction, parent reveal, source callback, 5 recap focus pages; no tracking/audio");
