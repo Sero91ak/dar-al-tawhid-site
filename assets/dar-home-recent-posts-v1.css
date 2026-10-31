@@ -1,3 +1,4 @@
+#darHomeHtmlParityV1 .dhp-section.dar-recent-legacy-hidden{display:none!important}
 /* DĀR adult home: compact latest post + expandable 2–5-day history.
    Only own module is styled; inherit current theme instead of replacing it. */
 #darRecentPublicationsV1{--rp-ink:var(--dt-ink,var(--text,#e9e5d7));--rp-line:var(--dt-rule,var(--theme-border,#ab986e));--rp-gold:var(--gold2,#ae9563);--rp-paper:var(--dt-card,var(--theme-surface,transparent));position:relative;display:block;width:min(100%,1080px);margin:18px auto 24px;padding:clamp(16px,3vw,25px);color:var(--rp-ink);border:1px solid color-mix(in srgb,var(--rp-line) 48%,transparent);border-radius:22px;background:color-mix(in srgb,var(--rp-paper) 94%,transparent);box-sizing:border-box;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;text-align:start;direction:inherit}
