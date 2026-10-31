@@ -31,7 +31,7 @@ function render(){var mount=d.getElementById("darRecentPublicationsV1"),h=host()
  mount.hidden=false;mount.setAttribute("aria-label",t(1));mount.replaceChildren();
  // Supersede the old limited four-post teaser only after the full dataset loads.
  var oldList=d.getElementById("dhpPosts");var oldBlock=oldList&&oldList.closest(".dhp-section");
- if(oldBlock)oldBlock.classList.toggle("dar-recent-legacy-hidden",state.posts.length>0);
+ if(oldBlock&&oldBlock.classList.contains("dar-recent-legacy-hidden")!==(state.posts.length>0))oldBlock.classList.toggle("dar-recent-legacy-hidden",state.posts.length>0);
  section(mount,t(0),t(1));
  var items=recent(state.posts,state.days),last=recent(state.posts,5)[0],headline=e("div","dar-recent-highlight");
  if(last){addPost(headline,last,true)}else headline.appendChild(e("p","dar-recent-empty",t(6)));
@@ -41,7 +41,7 @@ function render(){var mount=d.getElementById("darRecentPublicationsV1"),h=host()
  var panel=e("div","dar-recent-panel");
  var heading=e("h3","dar-recent-panel-title",t(2));panel.appendChild(heading);
  var tabs=e("div","dar-recent-days");tabs.setAttribute("role","group");tabs.setAttribute("aria-label",t(2));
- [2,3,5].forEach(function(n,i){var b=e("button","dar-recent-day"+(state.days===n?" is-selected":""),t(i+3));b.type="button";b.setAttribute("aria-pressed",String(state.days===n));b.addEventListener("click",function(){state.days=n;render()});tabs.appendChild(b)});panel.appendChild(tabs);
+ [2,3,4,5].forEach(function(n,i){var dayLabels={de:"4 Tage",ar:"4 أيام",en:"4 days",tr:"4 gün",ku:"4 roj",ckb:"٤ ڕۆژ",bs:"4 dana",fr:"4 jours",es:"4 días"};var b=e("button","dar-recent-day"+(state.days===n?" is-selected":""),n===4?dayLabels[locale()]:t(n===5?5:i+3));b.type="button";b.setAttribute("aria-pressed",String(state.days===n));b.addEventListener("click",function(){state.days=n;render()});tabs.appendChild(b)});panel.appendChild(tabs);
  if(!items.length){panel.appendChild(e("p","dar-recent-empty",t(6)))}else{
  var groups=new Map();items.forEach(function(p){var k=dayKey(new Date(p.date));if(!groups.has(k))groups.set(k,[]);groups.get(k).push(p)});
  groups.forEach(function(posts,key){var title=e("h4","dar-recent-day-title",dateLabel(posts[0])+" · "+posts.length+" "+t(15));panel.appendChild(title);var rows=e("div","dar-recent-list");posts.forEach(function(p){addPost(rows,p,false)});panel.appendChild(rows)});
