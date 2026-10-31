@@ -96,7 +96,7 @@ window.viewport.segments = [
 ];
 resize(1024, 800, true, "expanded");
 assert.equal(attrs["data-fold-segments"], "horizontal");
-assert.equal(cssVars["--fold-gap-current"], "40px", "24px hinge plus 16px safety clearance");
+assert.equal(cssVars["--fold-gap-current"], "61px", "24px hinge plus inset and 16px safety clearance");
 assert.ok(parseFloat(cssVars["--fold-rail-current"]) > 450,
   "Left master must fill its physical segment, not leak reader over the hinge");
 assert.ok(parseFloat(cssVars["--fold-reader-available"]) >= 420,
