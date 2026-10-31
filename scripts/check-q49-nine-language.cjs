@@ -46,7 +46,7 @@ for(const code of expected){
 assert.equal(postIds.size,1);assert.equal(ids.size,4);
 assert.ok(page.includes('class="qsource-section"')&&page.includes('al-Adab al-Mufrad')&&page.includes('q49-localized.js'));
 assert.ok(page.includes("DIE BESONDERE STELLUNG DER MUTTER"));
-assert.equal((page.match(/class="qsource-link web"/g)||[]).length,7);
+assert.equal((page.match(/class="qsource-link web"/g)||[]).length,6);
 assert.ok(page.includes("إِنِّي لَا أَعْلَمُ"));
 assert.ok(test.includes("DIE RECHTE DER MUTTER")&&test.includes("q49-localized.js"));
 assert.ok(test.includes("const questions="),"German no-network fallback must remain");
