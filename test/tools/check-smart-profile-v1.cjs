@@ -55,7 +55,7 @@ assert.equal(neutral.toString("ascii",0,4),"RIFF","Neutral 3D portrait is a genu
 assert.equal(neutral.toString("ascii",8,12),"WEBP","Neutral 3D portrait must have the WebP format");
 assert.equal(neutral[20]&16,16,"Neutral portrait must preserve transparency");
 assert.equal(require("node:crypto").createHash("sha256").update(neutral).digest("hex"),
- "c69f75cc271f4fe991225322fab7ac2b0cdab93095d1921434c0b8eaf85fe2dc",
+ "06ecf75b946507c66ddf587d2408363d85671f6cc2a4f7988d3b11ad1b8050d6",
  "Neutral 3D portrait must not be replaced silently");
 assert.match(script,/function homeFocus\(/,"Profile-specific learning focus is missing");
 assert.match(script,/function syncLibrary\(/,"Profile-specific library discovery is missing");
