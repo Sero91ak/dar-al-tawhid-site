@@ -75,12 +75,20 @@ function phase(state,force,front,inset) {
   shellWidth:shell.getBoundingClientRect().width
  };
 }
+const view=document.getElementById("appView");
+view.className="view page-enter-forward";
+document.body.classList.remove("is-topics-route");
+const otherTransition=getComputedStyle(view).animationName;
+document.body.classList.add("is-topics-route");
+const postsTransition={animation:getComputedStyle(view).animationName,transform:getComputedStyle(view).transform};
+document.body.classList.remove("is-topics-route");
+view.className="view";
 const compact=phase("single","dual",true); // stale forceDual MUST NOT win
 const dual=phase("dual","auto",true);      // frontstage MUST NOT collapse dual
 const inset=phase("dual","auto",true,true);
 const forced=phase("dual","single",true);
 const ordinary=phase("dual","auto",false);
-document.getElementById("foldSmoke").textContent=btoa(JSON.stringify({compact,dual,inset,forced,ordinary}));
+document.getElementById("foldSmoke").textContent=btoa(JSON.stringify({compact,dual,inset,forced,ordinary,otherTransition,postsTransition}));
 } catch(e) {
  document.getElementById("foldSmoke").textContent=btoa(JSON.stringify({error:String(e)}));
 }
