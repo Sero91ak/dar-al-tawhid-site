@@ -70,8 +70,9 @@ function phase(state,force,front) {
 }
 const compact=phase("single","dual",true); // stale forceDual MUST NOT win
 const dual=phase("dual","auto",true);      // frontstage MUST NOT collapse dual
+const forced=phase("dual","single",true);
 const ordinary=phase("dual","auto",false);
-document.getElementById("foldSmoke").textContent=btoa(JSON.stringify({compact,dual,ordinary}));
+document.getElementById("foldSmoke").textContent=btoa(JSON.stringify({compact,dual,forced,ordinary}));
 } catch(e) {
  document.getElementById("foldSmoke").textContent=btoa(JSON.stringify({error:String(e)}));
 }
@@ -91,6 +92,8 @@ try {
   assert.equal(result.compact.display,"block","Compact must be a single pane even with stale forceDual");
   assert.equal(result.compact.paneDisplay,"none","Inactive reader hidden in compact");
   assert.notEqual(result.compact.railDisplay,"none","Active Surah list visible in compact");
+  assert.equal(result.forced.display,"block","Explicit forced single must stay one-pane on a wide screen");
+  assert.equal(result.forced.paneDisplay,"none","Forced single hides inactive pane");
   for(const [label,g] of [["dual",result.dual],["ordinary",result.ordinary]]) {
     assert.equal(g.display,"grid",label+" must resolve to two actual columns");
     assert.ok(g.railWidth>=300,label+" rail readable: "+g.railWidth);
