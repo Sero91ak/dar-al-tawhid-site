@@ -79,7 +79,7 @@ function localizedSource(pack,code,data){
  [pack.ui.sourceGroupA,pack.ui.sourceGroupB,pack.ui.sourceGroupC].forEach(function(title,i){
  label(e,String.fromCharCode(65+i)+" · "+title);
  var g=sourceGroups[i];
- var offset=i===0?0:(i===1?3:5);
+ var offset=i===0?0:(i===1?2:4);
  Array.prototype.forEach.call(g.querySelectorAll(".qsource-link-title"),function(title,n){if(data.sourceLinkTitles&&data.sourceLinkTitles[offset+n])title.textContent=data.sourceLinkTitles[offset+n]});
  Array.prototype.forEach.call(g.querySelectorAll(".qsource-link-sub"),function(sub){sub.textContent=pack.ui.sourceAction});
  e.appendChild(g);
