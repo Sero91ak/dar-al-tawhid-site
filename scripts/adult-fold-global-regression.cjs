@@ -23,8 +23,12 @@ assert.match(foldCSS, /html\[data-fold-capacity="dual"\]\[data-layout-surface="w
 assert.match(frontCSS, /html\[data-dar-visitor-frontstage="1"\]\[data-fold-capacity="single"\] body\.has-bottom-nav \.dar-fold/);
 assert.doesNotMatch(frontCSS, /html\[data-dar-visitor-frontstage="1"\] body\.has-bottom-nav \.dar-fold/);
 assert.match(globalCSS, /data-fold-capacity="dual"/);
+assert.match(globalCSS, /--fold-gap-current/);
+assert.match(foldCSS, /--fold-gap-current/);
+assert.match(adaptive, /global\.viewport && global\.viewport\.segments/);
 
 const attrs = Object.create(null);
+const cssVars = Object.create(null);
 const classNames = new Set();
 const viewport = { width: 390, height: 844, offsetTop: 0, scale: 1,
   addEventListener() {} };
@@ -36,7 +40,7 @@ const root = {
     remove(name) { classNames.delete(name); },
     toggle(name, on) { if (on) classNames.add(name); else classNames.delete(name); }
   },
-  style: { setProperty() {} },
+  style: { setProperty(name,value) { cssVars[name] = value; } },
   getAttribute(name) { return attrs[name] || null; },
   setAttribute(name, value) { attrs[name] = String(value); }
 };
@@ -49,6 +53,7 @@ const document = {
 const window = {
   innerWidth: 390, innerHeight: 844,
   visualViewport: viewport,
+  viewport: { segments: [] },
   localStorage: { getItem() { return "bottom"; } },
   requestAnimationFrame(cb) { cb(); return 1; },
   addEventListener() {}, dispatchEvent() {}
@@ -83,6 +88,37 @@ resize(1024, 768, true, "expanded");        // tablet landscape / Fold open
 resize(1024, 1366, true, "expanded");       // wide tablet portrait
 resize(900, 520, false, "medium");          // short window, no two columns
 resize(940, 700, true, "expanded");         // real 2-pane capacity
+
+// Modern viewport.segments API: actual Duo/Fold hinge must lie IN THE GAP.
+window.viewport.segments = [
+  { x:0, y:0, width:500, height:800 },
+  { x:524, y:0, width:500, height:800 }
+];
+resize(1024, 800, true, "expanded");
+assert.equal(attrs["data-fold-segments"], "horizontal");
+assert.equal(cssVars["--fold-gap-current"], "40px", "24px hinge plus 16px safety clearance");
+assert.ok(parseFloat(cssVars["--fold-rail-current"]) > 450,
+  "Left master must fill its physical segment, not leak reader over the hinge");
+assert.ok(parseFloat(cssVars["--fold-reader-available"]) >= 420,
+  "Right reader must have minimum usable physical-segment width");
+
+// A stacked Duo is never a side-by-side master/detail surface.
+window.viewport.segments = [
+  { x:0, y:0, width:1024, height:500 },
+  { x:0, y:520, width:1024, height:500 }
+];
+resize(1024, 1040, false, "medium");
+assert.equal(attrs["data-fold-segments"], "vertical");
+
+// Bad/unavailable segment metadata must fall back to ordinary measured layout.
+window.viewport.segments = [
+  { x:0, y:0, width:500, height:700 },
+  { x:990, y:0, width:500, height:700 }
+];
+resize(1024, 800, true, "expanded");
+assert.equal(attrs["data-fold-segments"], "none");
+window.viewport.segments = [];
+resize(940, 700, true, "expanded");
 
 viewport.width = 610; viewport.height = 420; viewport.scale = 1;
 layout.apply();
