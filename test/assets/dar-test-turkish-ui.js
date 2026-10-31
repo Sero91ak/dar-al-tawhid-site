@@ -375,7 +375,11 @@ function isDynamicGermanUi(value){
   /^Auswertung: \d+ korrekt, \d+ ähnlich, \d+ offen\.$/.test(value)||
   /^Ich höre: .+$/.test(value)||
   value==="Qiblah"||
+  value==="Eid"||
+  value==="Ehe"||
   value==="Sūren filtern"||
+  /^Diese Āyah ist bei diesem Qāriʾ nicht verfügbar\. Es wird vorübergehend .+ abgespielt\.$/.test(value)||
+  /^Ausgangsfrage: .+\. Nachfrage dazu: .+$/.test(value)||
   /^Inhalte aktuell · zuletzt .+$/.test(value)||
   /^Inhalte aktuell\. Zuletzt synchronisiert um .+\.$/.test(value)||
   /^\d Stern$/.test(value)||
@@ -538,6 +542,14 @@ function translateSharedPatterns(value,language){
  if(value==="Sūren filtern"){
   const surahFilter=lookupPack("Suren filtern",language);
   if(surahFilter)return surahFilter;
+ }
+ if(value==="Eid"){
+  const eid=lookupPack("ʿĪd",language);
+  if(eid)return eid;
+ }
+ if(value==="Ehe"){
+  const marriage=lookupPack("Heirat",language);
+  if(marriage)return marriage;
  }
  const surahs=value.match(/^(\d+)\s+Sūren\s*·\s*(\d+)\s+Āyāt$/);
  if(surahs){
@@ -766,6 +778,36 @@ function translateSharedPatterns(value,language){
    es:"Si el estado está en rojo: "
   }[language];
   if(tail&&head)return head+tail;
+ }
+ const missingAyah=value.match(/^Diese Āyah ist bei diesem Qāriʾ nicht verfügbar\. Es wird vorübergehend (.+) abgespielt\.$/);
+ if(missingAyah){
+  const name=missingAyah[1];
+  const forms={
+   ar:"هذه الآية غير متاحة عند هذا القارئ. يُشغَّل "+name+" مؤقتًا.",
+   en:"This āyah is not available for this reciter. "+name+" is played for now.",
+   tr:"Bu âyet bu kâride yok. Geçici olarak "+name+" çalınıyor.",
+   ku:"Ev aye li ba vî qârî tune ye. Demkî "+name+" tê lêdan.",
+   ckb:"ئەم ئایەتە لەم قورئانخوێنەدا بەردەست نییە. بۆ ماوەیەک "+name+" دەخرێتە کار.",
+   bs:"Ovaj ajet nije dostupan kod ovog učača. Privremeno se pušta "+name+".",
+   fr:"Cette āyah n’est pas disponible chez ce récitateur. "+name+" est lu pour le moment.",
+   es:"Esta aleya no está disponible con este recitador. Mientras tanto se reproduce "+name+"."
+  };
+  if(forms[language])return forms[language];
+ }
+ const followUp=value.match(/^Ausgangsfrage: (.+)\. Nachfrage dazu: (.+)$/);
+ if(followUp){
+  const subject=followUp[1],current=followUp[2];
+  const forms={
+   ar:"السؤال الأصلي: "+subject+". سؤال لاحق عنه: "+current,
+   en:"Opening question: "+subject+". Follow-up on it: "+current,
+   tr:"Başlangıç sorusu: "+subject+". Buna dair ek soru: "+current,
+   ku:"Pirsa destpêkê: "+subject+". Pirs li ser wê: "+current,
+   ckb:"پرسیاری سەرەتایی: "+subject+". پرسیاری دوایی لەسەر ئەوە: "+current,
+   bs:"Početno pitanje: "+subject+". Naknadno pitanje o tome: "+current,
+   fr:"Question de départ : "+subject+". Question de suivi : "+current,
+   es:"Pregunta inicial: "+subject+". Pregunta de seguimiento: "+current
+  };
+  if(forms[language])return forms[language];
  }
  const range=value.match(/^Sūrenbereich wechseln(?:, aktuell|\s+)(.+?)(?:\s*[⌄])?$/);
  if(range){
@@ -1518,7 +1560,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-33";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-34";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

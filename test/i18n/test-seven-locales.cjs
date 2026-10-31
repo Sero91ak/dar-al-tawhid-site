@@ -139,6 +139,14 @@ assert.equal(w.DarTestTurkishUI.translateValue("Slide 2 von 5","ar"),"الشري
 assert.equal(w.DarTestTurkishUI.translateValue("Bei rotem Status: Startseite → ↻ Sync in der Statusleiste, dann erneut testen.","en"),"When the status is red: Home → ↻ Sync in the status bar, then test again.");
 assert.equal(w.DarTestTurkishUI.translateValue("Erscheinungsbild wechseln","ckb"),"دەرکەوتن بگۆڕە");
 assert.equal(w.DarTestTurkishUI.translateValue("Tagesvers","tr"),"Günün Âyeti");
+assert.equal(w.DarTestTurkishUI.translateValue("Adab","tr"),"Edep");
+assert.equal(w.DarTestTurkishUI.translateValue("Ehe","en"),locales.translations.en.Heirat);
+assert.equal(w.DarTestTurkishUI.translateValue("Eid","tr"),"Bayram");
+assert.equal(w.DarTestTurkishUI.translateValue("Farbwelt","en"),"Color theme");
+assert.equal(w.DarTestTurkishUI.translateValue("Diese Āyah ist bei diesem Qāriʾ nicht verfügbar. Es wird vorübergehend Alafasy abgespielt.","en"),"This āyah is not available for this reciter. Alafasy is played for now.");
+assert.equal(w.DarTestTurkishUI.translateValue("Ausgangsfrage: Tawḥīd. Nachfrage dazu: die Bedeutung","fr"),"Question de départ : Tawḥīd. Question de suivi : die Bedeutung");
+assert.equal(w.DarTestTurkishUI.translateValue("☀️ Bildschirm bleibt an","en"),"☀️ Screen stays on");
+assert.equal(w.DarTestTurkishUI.translateValue("Ḥayḍ","ar"),"الحيض");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
