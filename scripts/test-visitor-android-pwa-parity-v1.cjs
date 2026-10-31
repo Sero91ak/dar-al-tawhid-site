@@ -33,7 +33,7 @@ for(const key of [
 assert.match(shell,/20261030-profile-single-hub-v10/);
 assert.match(get("assets/dar-visitor-profile-picker-v1.js"),/data-dvp-quick="hub"/,"One Mein DĀR entry missing");
 assert.equal((get("assets/dar-visitor-profile-picker-v1.js").match(/data-dvp-quick="/g)||[]).length,1,"Profile popup should not display four separate shortcuts");
-assert.match(shell,/dar-home-test-parity-visitor\.js\?v=20261030-prayer-compact-colors-v3/);
+assert.match(shell,/dar-home-test-parity-visitor\.js\?v=20261030-neutral-icon-v12/);
 assert.match(shell,/dar-noble-3d-icons\.js\?v=20261030-android-global-parity-v8/);
 assert.match(shell,/dar-adult-brand-header-v2\.css\?v=20261030-hero-route-matrix-v4/);
 const manifest=JSON.parse(get("manifest.json"));

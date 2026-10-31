@@ -9015,6 +9015,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-15T23:59:00.000Z"
+    },
+    {
+      "id": "adult-visitor-ci-cache-version-regression-20261031",
+      "at": "2026-10-31T03:42:00+01:00",
+      "approvedBy": "user-explicit-global-fix-live-20261031",
+      "reason": "Update only stale hardcoded CI guards after approving cache-busted JS, keep every underlying check.",
+      "paths": [
+        "scripts/check-visitor-header-single-row.cjs",
+        "scripts/test-visitor-android-pwa-parity-v1.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-14T23:59:00.000Z"
     }
   ],
   "enabled": true
