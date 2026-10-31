@@ -26,7 +26,7 @@ html[data-q-theme="dark"] .option{background:#283d43;color:#f3e8d0;border-color:
 .next:disabled{opacity:.45;cursor:default}[hidden]{display:none!important}
 </style></head>
 <body class="heritage-learning">
-<main><header><img class="logo" src="/watermark-my-logo-full.png" alt="DĀR AL TAWḤĪD"><div class="brand">DĀR AL TAWḤĪD</div><p class="sign">by Serhat Abu Malik</p><p class="kicker">Lernbereich · 4 Fragen</p><h1>Die Rechte der Mutter</h1></header>
+<main><header><img class="logo" src="/watermark-my-logo-full.png" alt="DĀR AL TAWḤĪD"><div class="brand">DĀR AL TAWḤĪD</div><p class="sign">by Serhat Abu Malik</p><p class="kicker">Lernbereich · 4 Fragen</p><h1>DIE RECHTE DER MUTTER</h1></header>
 <section class="card" id="quiz" aria-live="polite"><div class="progress"><span id="count"></span><span id="score"></span></div><h2 id="question"></h2><div id="options" class="options"></div><p id="feedback" class="feedback" role="status"></p><button id="next" class="next" type="button" disabled>Nächste Frage</button></section>
 <section class="card" id="result" hidden><h2>Die Lerneinheit ist abgeschlossen</h2><p id="final"></p><button id="retry" class="next" type="button">Erneut üben</button></section>
 </main><script>
@@ -35,4 +35,4 @@ let index=0,points=0,answered=false;const el=id=>document.getElementById(id),qui
 function render(){answered=false;const q=questions[index];el("count").textContent="Frage "+(index+1)+" von "+questions.length;el("score").textContent=points+" richtig";el("question").textContent=q.q;el("feedback").textContent="";el("next").disabled=true;el("next").textContent=index===questions.length-1?"Ergebnis anzeigen":"Nächste Frage";const box=el("options");box.replaceChildren();q.a.forEach((answer,n)=>{const b=document.createElement("button");b.type="button";b.className="option";b.textContent=String.fromCharCode(65+n)+". "+answer;b.addEventListener("click",()=>{if(answered)return;answered=true;if(n===q.correct)points++;box.querySelectorAll("button").forEach((x,i)=>{x.disabled=true;if(i===q.correct)x.dataset.state="right";else if(i===n)x.dataset.state="wrong"});el("feedback").textContent=(n===q.correct?"Richtig. ":"Noch nicht richtig. ")+q.why;el("score").textContent=points+" richtig";el("next").disabled=false});box.appendChild(b)})}
 el("next").addEventListener("click",()=>{if(!answered)return;if(index<questions.length-1){index++;render()}else{quiz.hidden=true;result.hidden=false;el("final").textContent=points+" von "+questions.length+" Fragen richtig beantwortet."}});
 el("retry").addEventListener("click",()=>{index=0;points=0;result.hidden=true;quiz.hidden=false;render()});render()})();
-</script></body></html>
+</script><script src="/assets/q49-localized.js?v=20261031-1" defer></script></body></html>

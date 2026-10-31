@@ -6,7 +6,7 @@
 ---
 id: "ibn-abbas-mutter-wahltun-20261031-q49"
 date: "2026-10-31T20:29:00.000Z"
-title: "📖 Die besondere Stellung der Mutter"
+title: "📖 DIE BESONDERE STELLUNG DER MUTTER"
 category: "Adab"
 topic: "Birr al-Wālidayn – das Recht der Mutter"
 scholar: "ʿAbdullāh ibn ʿAbbās (raḍiya Allāhu ʿanhumā)"
@@ -21,6 +21,9 @@ links:
 draftStatus: "prepared-not-published"
 primaryStatementIndex: 1
 qSourceReference: "qsource:49"
+localizationManifest: "/assets/q49-locales.json"
+learningRoute: "/lernen/recht-der-mutter/"
+chatContextKey: "darIlmQ49ContextV1"
 ---
 
 „Ich kenne keine Tat, die einen Allah näherbringt, als seiner Mutter Gutes zu tun.“
