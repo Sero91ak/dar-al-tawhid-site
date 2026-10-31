@@ -404,3 +404,13 @@ html.dar-test-premium-header-v2 body.is-more-route #appView > .view-head{
 html.dar-test-premium-header-v2 body.is-frauen-route #appView :is(.frauen-library-shell,.frauen-library-list):not(:has(> .dar-immersive-hero-stage)) > .frauen-library-hero{
  top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px))!important;
 }
+
+/* DAR_NATIVE_BRAND_SPACER_SINGLE_OWNER_V2_20261031
+ * The existing fixed-brand spacer already owns the header clearance.
+ * Do not add a second 126px native body padding on top. Only apply while
+ * the matching native brand spacer is actually mounted in this adult lane.
+ * This never changes native Swift permissions, header art or Kids layouts. */
+html.dar-ios-native-app.dar-test-premium-header-v2 body.dar-ios-native-app.has-bottom-nav.is-area-route:has(> .app > #darTestBrandHeaderSpacerV1){
+ padding-block-start:0!important;
+ padding-top:0!important;
+}
