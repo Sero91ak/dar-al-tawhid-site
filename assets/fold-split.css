@@ -632,7 +632,7 @@ html[data-layout-surface="phone-landscape"][data-fold-capacity] body .dar-fold[d
 html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]){
   display:grid!important;
   grid-template-columns:minmax(300px,var(--fold-rail-current,320px)) minmax(0,1fr)!important;
-  gap:var(--fold-gap,18px)!important;
+  gap:var(--fold-gap-current,var(--fold-gap,18px))!important;
 }
 html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > :is(.dar-fold__rail,.dar-fold__pane){
   display:block!important;
