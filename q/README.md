@@ -87,3 +87,4 @@ Neue nummerierte Quellenlinks gehören immer in `q/<nummer>/`.
 | `q/47` | Tawḥīd, Īmān und Akhlāq – ein Dīn | `Ibn ʿAbbās; Qatādah` | Tafsīr zu an-Naḥl 16:90: Tawḥīd, Pflichten und guter Charakter. |
 
 | `q/48` | Die Seele zur Rechenschaft ziehen | `al-Ḥasan al-Baṣrī` | Ibn al-Mubārak, az-Zuhd Nr. 307, 1/104; Ibn Abī Shaybah, al-Muṣannaf Nr. 5047, 8/257 – Selbstprüfung vor dem Tag der Abrechnung. |
+| `q/49` | Die besondere Stellung der Mutter | `Ibn ʿAbbās; Prophet ﷺ über Abū Hurayrah` | Al-Adab al-Mufrad Nr. 4 und al-Buḫārī Nr. 5971; vollständiger Kontext und klassischer Šarḥ auf Q49. |
