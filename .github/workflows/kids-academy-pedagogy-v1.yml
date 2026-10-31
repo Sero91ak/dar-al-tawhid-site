@@ -15,6 +15,9 @@ on:
       - "kids/akademie/LEARNING_ACADEMY_PEDAGOGY_MASTER_V1.md"
       - "kids/tools/audit-academy-learning-quality-v1.cjs"
       - "kids/tools/test-academy-learning-pedagogy-v1.cjs"
+      - "kids/akademie/guided-lesson-v1.js"
+      - "kids/akademie/guided-lesson-v1.css"
+      - "kids/tools/test-academy-guided-lesson-v1.cjs"
       - "kids/akademie/teachback-v1.js"
       - "kids/akademie/teachback-v1.css"
       - "kids/tools/test-academy-teachback-v1.cjs"
@@ -36,6 +39,8 @@ jobs:
           node kids/tools/test-academy-learning-pedagogy-v1.cjs
           node --check kids/akademie/teachback-v1.js
           node kids/tools/test-academy-teachback-v1.cjs
+          node --check kids/akademie/guided-lesson-v1.js
+          node kids/tools/test-academy-guided-lesson-v1.cjs
           node --check kids/tools/test-academy-full-salam-v1.cjs
           node kids/tools/test-academy-full-salam-v1.cjs
           node kids/tools/audit-academy-learning-quality-v1.cjs > /tmp/kids-academy-pedagogy-audit-v1.json
