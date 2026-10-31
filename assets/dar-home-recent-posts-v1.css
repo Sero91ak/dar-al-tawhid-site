@@ -1,0 +1,25 @@
+/* DĀR adult home: compact latest post + expandable 2–5-day history.
+   Only own module is styled; inherit current theme instead of replacing it. */
+#darRecentPublicationsV1{--rp-ink:var(--dt-ink,var(--text,#e9e5d7));--rp-line:var(--dt-rule,var(--theme-border,#ab986e));--rp-gold:var(--gold2,#ae9563);--rp-paper:var(--dt-card,var(--theme-surface,transparent));position:relative;display:block;width:min(100%,1080px);margin:18px auto 24px;padding:clamp(16px,3vw,25px);color:var(--rp-ink);border:1px solid color-mix(in srgb,var(--rp-line) 48%,transparent);border-radius:22px;background:color-mix(in srgb,var(--rp-paper) 94%,transparent);box-sizing:border-box;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;text-align:start;direction:inherit}
+#darRecentPublicationsV1[hidden]{display:none!important}
+#darRecentPublicationsV1 .dar-recent-kicker{font-size:.66rem;font-weight:750;letter-spacing:.19em;color:var(--rp-gold)}
+#darRecentPublicationsV1 .dar-recent-heading{font-size:clamp(1.12rem,2.5vw,1.4rem);font-weight:700;line-height:1.35;letter-spacing:.01em;color:inherit;margin:6px 0 16px}
+#darRecentPublicationsV1 .dar-recent-highlight{border-top:1px solid color-mix(in srgb,var(--rp-line) 32%,transparent);padding-top:10px}
+#darRecentPublicationsV1 .dar-recent-post{display:flex;flex-direction:column;gap:4px;min-width:0;padding:14px 10px;border-bottom:1px solid color-mix(in srgb,var(--rp-line) 23%,transparent);text-decoration:none!important;color:inherit!important;border-radius:11px;outline-offset:1px}
+#darRecentPublicationsV1 .dar-recent-post:hover,#darRecentPublicationsV1 .dar-recent-post:focus-visible{background:color-mix(in srgb,var(--rp-gold) 11%,transparent);outline:1px solid color-mix(in srgb,var(--rp-gold) 50%,transparent)}
+#darRecentPublicationsV1 .dar-recent-meta,#darRecentPublicationsV1 .dar-recent-speaker{font-size:.78rem;color:inherit;opacity:.73;overflow-wrap:anywhere}
+#darRecentPublicationsV1 .dar-recent-title{font-size:clamp(.95rem,2.2vw,1.1rem);font-weight:730;line-height:1.5;overflow-wrap:anywhere}
+#darRecentPublicationsV1 .dar-recent-open{font-size:.8rem;color:var(--rp-gold);font-weight:700}
+#darRecentPublicationsV1 .dar-recent-toggle{font:inherit;font-size:.89rem;font-weight:720;color:inherit;background:transparent;border:1px solid color-mix(in srgb,var(--rp-line) 57%,transparent);border-radius:999px;padding:11px 18px;margin-top:14px;min-height:44px;cursor:pointer;width:100%;text-align:center}
+#darRecentPublicationsV1 .dar-recent-toggle:hover,#darRecentPublicationsV1 .dar-recent-toggle:focus-visible{border-color:var(--rp-gold);background:color-mix(in srgb,var(--rp-gold) 9%,transparent)}
+#darRecentPublicationsV1 .dar-recent-panel{padding-top:19px}
+#darRecentPublicationsV1 .dar-recent-panel-title{font-size:1rem;margin:0 0 13px;font-weight:700;color:inherit}
+#darRecentPublicationsV1 .dar-recent-days{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+#darRecentPublicationsV1 .dar-recent-day{font:inherit;color:inherit;border:1px solid color-mix(in srgb,var(--rp-line) 50%,transparent);background:transparent;border-radius:999px;min-height:40px;padding:8px 16px;cursor:pointer}
+#darRecentPublicationsV1 .dar-recent-day.is-selected{border-color:var(--rp-gold);background:color-mix(in srgb,var(--rp-gold) 16%,transparent);font-weight:750}
+#darRecentPublicationsV1 .dar-recent-day-title{font-size:.84rem;font-weight:750;margin:18px 0 6px;color:var(--rp-gold)}
+#darRecentPublicationsV1 .dar-recent-list{display:grid;grid-template-columns:1fr}
+#darRecentPublicationsV1 .dar-recent-empty{font-size:.9rem;opacity:.83;margin:12px 0;line-height:1.6}
+html[dir=rtl] #darRecentPublicationsV1{text-align:right}
+@media(min-width:780px){#darRecentPublicationsV1 .dar-recent-list{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:12px}}
+@media(prefers-reduced-motion:reduce){#darRecentPublicationsV1 *{scroll-behavior:auto!important;transition:none!important}}
