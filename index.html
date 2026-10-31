@@ -25212,6 +25212,7 @@ let darGpsRequestPromise=null;
 let darGpsReverseSequence=0;
 let darGpsReversePromise=null;
 let darGpsRetryNameTimer=null;
+let darGpsIssue=null;
 function darGpsCoords(v){
   const c=v&&v.coords?v.coords:v||{};
   const lat=Number(c.latitude??c.lat),lon=Number(c.longitude??c.lon??c.lng);
@@ -25227,7 +25228,9 @@ function darGpsNativeFresh(){
 function requestBrowserPosition(){
   return new Promise((resolve,reject)=>{
     const nativeFix=()=>darGpsNativeFresh();
-    if(!navigator.geolocation){const n=nativeFix();if(n)resolve(n);else reject(new Error("geo_unsupported"));return;}
+    const freshNative=nativeFix();
+    if(freshNative){resolve(freshNative);return;}
+    if(!navigator.geolocation){reject(new Error("geo_unsupported"));return;}
     navigator.geolocation.getCurrentPosition(resolve,error=>{
       const n=nativeFix();
       if(n)resolve(n);else reject(error);
@@ -25240,13 +25243,24 @@ function darGpsDistanceMeters(a,b,c,d){
   const h=Math.sin(dy/2)**2+Math.cos(a*toR)*Math.cos(c*toR)*Math.sin(dx/2)**2;
   return 12742000*Math.asin(Math.min(1,Math.sqrt(h)));
 }
+function darGpsSetIssue(issue){
+  darGpsIssue=issue==="denied"||issue==="unavailable"?issue:null;
+  if(darGpsIssue==="denied")darGpsStopWatch();
+  darGpsUpdateDisplay();
+}
+function darGpsNativeStatusEvent(event){
+  if(!darGpsIsAuto())return;
+  const authorization=String(event&&event.detail&&event.detail.authorization||"");
+  if(authorization==="denied"||authorization==="restricted")darGpsSetIssue("denied");
+  else if(authorization==="when-in-use"||authorization==="always")darGpsSetIssue(null);
+}
 function darGpsUpdateDisplay(){
   const s=getPrayerSettings(),ready=hasPrayerLocation(s);
   const cityText=document.getElementById("darPermissionCityText");
   if(cityText){
     cityText.textContent=ready
-      ? (s.city||"Ort gespeichert")+(s.locationMode==="auto"?" · GPS automatisch":" · Stadt manuell")
-      : "Kein Standort festgelegt · GPS aktivieren oder Stadt wählen";
+      ? (s.city||"Ort gespeichert")+(s.locationMode==="auto"?(darGpsIssue==="denied"?" · GPS gesperrt; letzter Standort":darGpsIssue==="unavailable"?" · GPS derzeit nicht verfügbar; letzter Standort":" · GPS automatisch"):" · Stadt manuell")
+      : (darGpsIssue==="denied"?"GPS gesperrt · Stadt wählen":darGpsIssue==="unavailable"?"GPS derzeit nicht verfügbar · Stadt wählen":"Kein Standort festgelegt · GPS aktivieren oder Stadt wählen");
   }
   if(ready){
     const today=calculatePrayerTimes(new Date(),s);
@@ -25286,11 +25300,15 @@ function darGpsCommitFix(pos,{activate=false}={}){
   const prev=darGpsCoords(s);
   const distance=prev?darGpsDistanceMeters(prev.lat,prev.lon,c.lat,c.lon):Infinity;
   const age=Date.now()-Number(s.locationUpdatedAt||0);
-  if(!activate&&prev&&distance<350&&age<5*60*1000)return true;
+  if(!activate&&prev&&distance<350&&age<5*60*1000){
+    if(darGpsIssue){darGpsIssue=null;darGpsUpdateDisplay()}
+    return true;
+  }
   const time=Date.now();
   const shouldName=!prev||distance>=1000||!s.city||s.city==="Standort freigeben"||/^(Aktueller Standort|Ort wird ermittelt|Ortsname derzeit)/.test(s.city);
   const city=shouldName?"Ort wird ermittelt …":s.city;
   setPrayerSettings({lat:c.lat,lon:c.lon,city,locationMode:"auto",locationUpdatedAt:time,locationGranted:true});
+  darGpsIssue=null;
   darGpsLastAcceptAt=time;
   darGpsUpdateDisplay();
   if(shouldName){
@@ -25305,7 +25323,18 @@ function darGpsCommitFix(pos,{activate=false}={}){
       if(!name){darGpsRetryNameTimer=setTimeout(()=>{
         if(darGpsIsAuto()&&!document.hidden)darGpsRetryCity();
       },60000)}
-    }).catch(()=>{});
+    }).catch(()=>{
+      if(seq!==darGpsReverseSequence||!darGpsIsAuto())return;
+      const current=getPrayerSettings(),coords=darGpsCoords(current);
+      if(!coords||darGpsDistanceMeters(coords.lat,coords.lon,c.lat,c.lon)>300)return;
+      if(current.city==="Ort wird ermittelt …"){
+        setPrayerSettings({city:"Ortsname derzeit nicht verfügbar"});
+        darGpsUpdateDisplay();
+      }
+      darGpsRetryNameTimer=setTimeout(()=>{
+        if(darGpsIsAuto()&&!document.hidden)darGpsRetryCity();
+      },60000);
+    });
   }
   return true;
 }
@@ -25325,7 +25354,7 @@ function darGpsStartWatch(){
   try{
     darGpsWatchId=navigator.geolocation.watchPosition(
       pos=>{darGpsCommitFix(pos)},
-      err=>{if(Number(err&&err.code)===1)darGpsStopWatch()},
+      err=>{darGpsSetIssue(Number(err&&err.code)===1?"denied":"unavailable")},
       {enableHighAccuracy:false,maximumAge:0,timeout:25000}
     );
   }catch(e){darGpsWatchId=null}
@@ -25339,12 +25368,16 @@ async function darGpsAutoResume(force=false){
     try{
       if(navigator.permissions&&navigator.permissions.query){
         const perm=await navigator.permissions.query({name:"geolocation"}).catch(()=>null);
-        if(perm&&perm.state==="denied"){darGpsStopWatch();return}
+        if(perm&&perm.state==="denied"){
+          darGpsSetIssue("denied");
+          return;
+        }
+        if(perm&&perm.state!=="denied")darGpsIssue=null;
       }
       darGpsStartWatch();
       const pos=await requestBrowserPosition();
       darGpsCommitFix(pos);
-    }catch(e){if(Number(e&&e.code)===1)darGpsStopWatch()}
+    }catch(e){darGpsSetIssue(Number(e&&e.code)===1?"denied":"unavailable")}
   })();
   try{await darGpsRequestPromise}finally{darGpsRequestPromise=null}
 }
@@ -25366,6 +25399,7 @@ function darGpsNativeLocationEvent(event){
 }
 window.addEventListener("darNativeLocationUpdated",darGpsNativeLocationEvent);
 window.addEventListener("dar-native-location",darGpsNativeLocationEvent);
+window.addEventListener("dar-native-location-status",darGpsNativeStatusEvent);
 document.addEventListener("visibilitychange",()=>{if(document.hidden)darGpsStopWatch();else void darGpsAutoResume(true)});
 window.addEventListener("pageshow",()=>{void darGpsAutoResume(true);if(darGpsIsAuto()&&/^(Ort wird ermittelt|Ortsname derzeit)/.test(getPrayerSettings().city||""))darGpsRetryCity()});
 window.addEventListener("focus",()=>{void darGpsAutoResume()});
@@ -27643,10 +27677,11 @@ function bindNotificationCenter(){
     gps.disabled=true;gps.textContent="Ort wird erkannt …";feedback("");
     try{
       await darGpsActivate();
-      darGpsUpdateDisplay();
+      darGpsSetIssue(null);
       feedback("GPS-Standort aktualisiert.");
     }catch(e){
       const code=Number(e?.code||0);
+      darGpsSetIssue(code===1?"denied":"unavailable");
       feedback(code===1?"Standortzugriff gesperrt. Bitte in den Geräteeinstellungen freigeben oder eine Stadt auswählen.":code===3?"Standortbestimmung dauert zu lange. Bitte erneut versuchen.":"GPS konnte nicht ermittelt werden. Bitte Standortfreigabe prüfen oder Stadt auswählen.");
     }finally{gps.disabled=false;gps.textContent="Standort erkennen"}
   };
