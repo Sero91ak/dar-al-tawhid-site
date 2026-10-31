@@ -384,6 +384,12 @@ function isDynamicGermanUi(value){
   value==="Sync"||
   /^Nächster Termin: \d{4}-\d{2}-\d{2}(?: · \d+ Tage)?$/.test(value)||
   /^Preisabruf: .+$/.test(value)||
+  /^Aktuell: Folge \d+ \/ \d+$/.test(value)||
+  /^Verbleibend: \d+$/.test(value)||
+  /^Nächster Wechsel: Freitag .+$/.test(value)||
+  /^Serienende: .+$/.test(value)||
+  /^Noch: \d+ Tage$/.test(value)||
+  /^Noch 7 Tage bis zum Ende der aktuell vorbereiteten Serie\. \d+ \/ \d+ Folgen vorbereitet\. Neue Freitagsimpulse vorbereiten\.$/.test(value)||
   /^\d+ Beitrag$/.test(value)||
   /^Zuletzt synchronisiert: .+$/.test(value)||
   /^Zuletzt: .+$/.test(value)||
@@ -617,6 +623,101 @@ function translateSharedPatterns(value,language){
    es:"Consulta de precio: "
   }[language];
   if(head)return head+priceFetch[1];
+ }
+ const episodeNow=value.match(/^Aktuell: Folge (\d+) \/ (\d+)$/);
+ if(episodeNow){
+  const head={
+   ar:"الآن: الحلقة ",
+   en:"Now: episode ",
+   tr:"Şimdi: bölüm ",
+   ku:"Niha: beş ",
+   ckb:"ئێستا: بەشی ",
+   bs:"Sada: nastavak ",
+   fr:"Actuellement : épisode ",
+   es:"Ahora: episodio "
+  }[language];
+  if(head)return head+episodeNow[1]+" / "+episodeNow[2];
+ }
+ const remainingEp=value.match(/^Verbleibend: (\d+)$/);
+ if(remainingEp){
+  const head={
+   ar:"المتبقي: ",
+   en:"Remaining: ",
+   tr:"Kalan: ",
+   ku:"Mayî: ",
+   ckb:"ماوە: ",
+   bs:"Preostalo: ",
+   fr:"Restant : ",
+   es:"Restante: "
+  }[language];
+  if(head)return head+remainingEp[1];
+ }
+ const nextSwitch=value.match(/^Nächster Wechsel: Freitag (.+)$/);
+ if(nextSwitch){
+  const head={
+   ar:"التبديل التالي: الجمعة ",
+   en:"Next change: Friday ",
+   tr:"Sonraki değişim: ",
+   ku:"Guhertina paşîn: ",
+   ckb:"گۆڕینی داهاتوو: ",
+   bs:"Sljedeća izmjena: ",
+   fr:"Prochain changement : ",
+   es:"Próximo cambio: "
+  }[language];
+  if(head)return head+nextSwitch[1];
+ }
+ const seriesEnd=value.match(/^Serienende: (.+)$/);
+ if(seriesEnd){
+  const head={
+   ar:"نهاية السلسلة: ",
+   en:"Series end: ",
+   tr:"Seri sonu: ",
+   ku:"Dawiya rêzê: ",
+   ckb:"کۆتایی زنجیرە: ",
+   bs:"Kraj serije: ",
+   fr:"Fin de la série : ",
+   es:"Fin de la serie: "
+  }[language];
+  if(head)return head+seriesEnd[1];
+ }
+ const daysStill=value.match(/^Noch: (\d+) Tage$/);
+ if(daysStill){
+  const n=daysStill[1];
+  const head={
+   ar:"بقي: ",
+   en:"Left: ",
+   tr:"Kaldı: ",
+   ku:"Ma: ",
+   ckb:"ماوەتەوە: ",
+   bs:"Još: ",
+   fr:"Encore : ",
+   es:"Quedan: "
+  }[language];
+  const dayWord={
+   ar:n==="1"?"يوم":"أيام",
+   en:n==="1"?"day":"days",
+   tr:"gün",
+   ku:"roj",
+   ckb:"ڕۆژ",
+   bs:n==="1"?"dan":"dana",
+   fr:n==="1"?"jour":"jours",
+   es:n==="1"?"día":"días"
+  }[language];
+  if(head)return head+n+" "+dayWord;
+ }
+ const weekWarn=value.match(/^Noch 7 Tage bis zum Ende der aktuell vorbereiteten Serie\. (\d+) \/ (\d+) Folgen vorbereitet\. Neue Freitagsimpulse vorbereiten\.$/);
+ if(weekWarn){
+  const line={
+   ar:"تبقّى 7 أيام حتى نهاية السلسلة المُعدّة حالياً. أُعدّت "+weekWarn[1]+" / "+weekWarn[2]+" حلقات. جهّز خواطر جمعة جديدة.",
+   en:"7 days remain until the end of the series prepared now. "+weekWarn[1]+" / "+weekWarn[2]+" episodes are prepared. Prepare new Friday reminders.",
+   tr:"Şu an hazırlanan serinin bitmesine 7 gün kaldı. "+weekWarn[1]+" / "+weekWarn[2]+" bölüm hazır. Yeni cuma hatırlatmaları hazırla.",
+   ku:"Heta dawiya rêza niha amadekirî 7 roj mane. "+weekWarn[1]+" / "+weekWarn[2]+" beş amade ne. Bîranînên înê yên nû amade bike.",
+   ckb:"7 ڕۆژ ماوە تا کۆتایی زنجیرەی ئێستا ئامادەکراو. "+weekWarn[1]+" / "+weekWarn[2]+" بەش ئامادەیە. بیرخستنەوەی هەینیی نوێ ئامادە بکە.",
+   bs:"Ostaje 7 dana do kraja trenutno pripremljene serije. Pripremljeno je "+weekWarn[1]+" / "+weekWarn[2]+" nastavaka. Pripremi nove petkovne podsjetnike.",
+   fr:"Il reste 7 jours avant la fin de la série actuellement préparée. "+weekWarn[1]+" / "+weekWarn[2]+" épisodes sont prêts. Prépare de nouveaux rappels du vendredi.",
+   es:"Quedan 7 días hasta el fin de la serie preparada ahora. Hay "+weekWarn[1]+" / "+weekWarn[2]+" episodios listos. Prepara nuevos recordatorios del viernes."
+  }[language];
+  if(line)return line;
  }
  const surahs=value.match(/^(\d+)\s+Sūren\s*·\s*(\d+)\s+Āyāt$/);
  if(surahs){
@@ -1705,7 +1806,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-36";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-37";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
