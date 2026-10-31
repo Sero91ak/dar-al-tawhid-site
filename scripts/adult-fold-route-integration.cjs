@@ -19,11 +19,12 @@ const fixture=`<!doctype html><html><head>
 <link rel="stylesheet" href="/assets/fold-split.css?v=2">
 <script defer src="/assets/fold-split.js?v=4"></script>
 <link rel="stylesheet" href="/assets/dar-visitor-frontstage-v1.css?v=old">
+<link rel="stylesheet" href="/assets/dar-adult-brand-header-v2.css?v=old">
 <script defer src="/test/assets/kids-no-change.js?v=1"></script>
 </head><body><main id="appView"></main></body></html>`;
 const output=context.transform(fixture);
 for(const file of [
- "adaptive-layout.js","fold-split.js","fold-split.css","dar-visitor-frontstage-v1.css"
+ "adaptive-layout.js","fold-split.js","fold-split.css","dar-visitor-frontstage-v1.css","dar-adult-brand-header-v2.css"
 ]){
  assert.ok(output.includes("/assets/"+file+"?v=20261031-fold-duo-v2"),
   "Adult "+file+" must get coherent cache revision");
