@@ -1,0 +1,135 @@
+/* DAR_ADULT_GLOBAL_FOLD_AXIS_V1 — 2026-10-31
+ * Shared adult visitor / DĀR TEST / iOS WKWebView / Android PWA.
+ * The capacity controller owns the choice between single and dual panes.
+ * A route, device orientation, nav preference or legacy CSS must never
+ * force unreadably narrow columns. Kids, tvOS and account data untouched.
+ */
+html[data-layout] body :is(.app,#appView,#appView.view,.view){
+  min-width:0!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
+html[data-layout] body :is(
+  .dar-fold,.dar-fold__rail,.dar-fold__pane,
+  .prophets-layout,.prophets-rail,.prophets-pane,
+  .quiz-shell,.quiz-shell-pro,.qov-page,.qrc-page,
+  .topics-hub,.topic-collection-page,.books-library-shell,
+  .library-shell,.post-reader,.dua-hub,.account-panel,.more-page
+){
+  min-width:0!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
+html[data-layout] body :is(.dar-fold__rail,.dar-fold__pane,.prophets-rail,.prophets-pane) :is(
+  h1,h2,h3,p,button,input,select,.qov-segment-btn,.qov-search-shell,.qov-search-wrap
+){
+  max-width:100%;
+  box-sizing:border-box;
+}
+html[data-layout] body :is(.dar-fold__rail,.prophets-rail) :is(h1,h2,h3,p,button){
+  overflow-wrap:anywhere;
+}
+/* SINGLE: a closed Fold, narrow split-screen, phone and short-edge landscape
+ * show only the active rail OR reader; never stack two full app pages. */
+html[data-fold-capacity="single"] body .dar-fold[data-fold-mode="dual"],
+html[data-layout-surface="phone-landscape"] body .dar-fold[data-fold-mode="dual"]{
+  display:block!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  gap:0!important;
+}
+html[data-fold-capacity="single"] body .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane),
+html[data-layout-surface="phone-landscape"] body .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane){
+  position:static!important;
+  grid-column:auto!important;
+  grid-row:auto!important;
+  min-width:0!important;
+  max-width:100%!important;
+  width:100%!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+  padding-inline:0!important;
+  background:none!important;
+}
+html[data-fold-capacity="single"] body .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__pane,
+html[data-layout-surface="phone-landscape"] body .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__pane,
+html[data-fold-capacity="single"] body .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__rail,
+html[data-layout-surface="phone-landscape"] body .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__rail{
+  display:none!important;
+}
+html[data-fold-capacity="single"] body .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__rail,
+html[data-layout-surface="phone-landscape"] body .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__rail,
+html[data-fold-capacity="single"] body .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__pane,
+html[data-layout-surface="phone-landscape"] body .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__pane{
+  display:block!important;
+}
+/* Other legacy two-column templates use a full-width vertical flow when
+ * there is not enough actual capacity; do not discard accessible controls. */
+html[data-fold-capacity="single"] body .prophets-layout--dual,
+html[data-layout-surface="phone-landscape"] body .prophets-layout--dual{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:16px!important;
+}
+html[data-fold-capacity="single"] body .prophets-layout--dual > :is(.prophets-rail,.prophets-pane),
+html[data-layout-surface="phone-landscape"] body .prophets-layout--dual > :is(.prophets-rail,.prophets-pane){
+  grid-column:1!important;
+  grid-row:auto!important;
+  min-width:0!important;
+}
+/* DUAL: the same geometry is authoritative everywhere, including Test's
+ * user-selectable side-tab placement. Selection is ALWAYS left, reading right.
+ * Fold hinge stays between columns; no child may grow beyond its track. */
+html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"]{
+  display:grid!important;
+  grid-template-columns:minmax(300px,var(--fold-rail-current,320px)) minmax(0,1fr)!important;
+  column-gap:clamp(12px,1.6vw,18px)!important;
+  align-items:stretch!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+}
+html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"] > .dar-fold__rail{
+  display:block!important;
+  grid-column:1!important;
+  grid-row:1!important;
+  min-width:0!important;
+  max-width:100%!important;
+}
+html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"] > .dar-fold__pane{
+  display:block!important;
+  grid-column:2!important;
+  grid-row:1!important;
+  min-width:0!important;
+  max-width:100%!important;
+}
+html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold__rail :is(
+ .qov-header,.qov-main,.qov-page,.qov-nav-stack,.view-head,.qov-search-wrap,.qov-search-shell
+){
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:0!important;
+  box-sizing:border-box!important;
+}
+/* A screen turned sideways must not activate desktop grid widths or leave
+ * the final controls hidden behind the five-tab native/PWA navigation. */
+html[data-layout-surface="phone-landscape"] body :is(
+ .folder-grid,.latest-grid,.dua-theme-grid,.topics-theme-grid,.lib-grid,
+ .qov-surah-list,.books-library-list,.hadith-list
+){
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))!important;
+  min-width:0!important;
+  max-width:100%!important;
+}
+html[data-layout-surface="phone-landscape"]:not(.dar-test-side-nav) body.has-bottom-nav #appView{
+  padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))!important;
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-layout] body .dar-fold,
+ html[data-layout] body .dar-fold__rail,
+ html[data-layout] body .dar-fold__pane{transition:none!important}
+}

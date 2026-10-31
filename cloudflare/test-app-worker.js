@@ -574,6 +574,12 @@ async function finalizeDarTestHomeV1193(asset) {
   ].join("\n");
   const myDarInsert = html.lastIndexOf("</html>");
   html = myDarInsert >= 0 ? html.slice(0,myDarInsert) + myDarAssetsV12 + html.slice(myDarInsert) : html + myDarAssetsV12;
+  // DAR_ADULT_GLOBAL_FOLD_AXIS_V1: last presentation authority for all adult
+  // TEST routes, after legacy side-nav and adaptive CSS. Keep Kids untouched.
+  if (!html.includes('id="darAdultGlobalFoldAxisV1"')) {
+    const foldLink = '<link rel="stylesheet" id="darAdultGlobalFoldAxisV1" href="/assets/adult-fold-global-v1.css?v=20261031-fold-axis-v1">';
+    html = html.includes("</html>") ? html.replace("</html>", foldLink + "</html>") : html + foldLink;
+  }
   const headers = new Headers(asset.headers);
   headers.set("X-DAR-Test-Scroll-Boundary", "v3");
   headers.set("X-DAR-Test-Home", "html-parity-v50-20261020");

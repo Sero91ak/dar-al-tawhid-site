@@ -9061,6 +9061,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-15T23:59:00.000Z"
+    },
+    {
+      "id": "adult-test-global-fold-all-areas-capacity-v1-20261031",
+      "at": "2026-10-31T06:37:00+01:00",
+      "approvedBy": "user-global-fold-and-duo-all-app-areas-confirmation-20261031",
+      "reason": "Adult DĀR Test: unify Fold/phone landscape/split capacity across every adult area. One active single pane when cramped; master left/detail right only in real dual mode; no navigation/PIN data, Kids, prayers, push or service-worker change.",
+      "paths": [
+        "assets/adult-fold-global-v1.css",
+        "cloudflare/test-app-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-17T23:59:00.000Z"
     }
   ],
   "enabled": true
