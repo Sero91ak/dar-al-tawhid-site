@@ -97,4 +97,5 @@ assert.match(boot,/function finish\(\) \{[\s\S]*?clearRamp\(\);\s*stopBootObserv
 assert.match(boot,/if \(finished \|\| !bootObserver\) return;/,"Late DOMContentLoaded must not reattach a boot observer");
 /* Fold/Duo checks run inside the pre-existing approved CI job. */
 require("./adult-fold-global-regression.cjs");
+require("./adult-fold-browser-smoke.cjs");
 console.log("OK: responsive layout, fold mutation filtering, boot timer/observer lifecycle");
