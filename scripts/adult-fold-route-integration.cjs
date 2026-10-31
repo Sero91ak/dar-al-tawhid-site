@@ -38,4 +38,16 @@ assert.equal((output.match(/id="darAdultGlobalFoldAxisV1"/g)||[]).length,1,
   "Exactly one global Fold CSS authority should be attached");
 const workerReferences = router.match(/activateAdultGlobalBrandV2\(html\)/g)||[];
 assert.ok(workerReferences.length>=3,"Shared adapter called by Test/visitor HTML routes");
+
+/* The third bottom tab is Beiträge => #topics, never the legacy empty feed.
+   This guards the actual route targeted by the black-transition mitigation. */
+const visitorHtml=fs.readFileSync(path.resolve(__dirname,"../index.html"),"utf8");
+assert.match(visitorHtml,/data-bottom-nav="recent" aria-label="Beiträge"/);
+assert.match(visitorHtml,/recent:\{view:"topics",value:""\}/);
+assert.match(visitorHtml,/function renderTopicsFoldRoute\(view,value\)/);
+assert.match(visitorHtml,/document\.body\.classList\.toggle\("is-topics-route",route\.view==="topics"\)/);
+const adultCss=fs.readFileSync(path.resolve(__dirname,"../assets/adult-fold-global-v1.css"),"utf8");
+assert.match(adultCss,/DAR_POSTS_ROUTE_NO_BLACK_SWIPE_V1_20261101/);
+assert.match(adultCss,/body\.is-topics-route #appView\.view:is/);
+
 console.log("OK: adult Cloudflare router cache-coherence / visitor+test and idempotent fold asset linkage");
