@@ -20,6 +20,9 @@ function paragraph(parent,value,klass){return text(parent,"p",klass||"q49-note",
 function label(parent,value){return text(parent,"p","q49-label",value)}
 function original(parent,value){if(!value)return;var p=paragraph(parent,value,"q49-ar qsource-arabic");p.lang="ar";p.dir="rtl"}
 function addChoiceControl(parent,pack,code){
+ // Source Q49 has a static, accessible language selector even when JS/data fail.
+ var manual=document.getElementById("q49SourceLanguageControl"), picker=document.getElementById("q49-language-select");
+ if(isSource&&manual&&picker){picker.value=code;var note=manual.querySelector(".q49-draft-note");if(note)note.textContent=pack.ui.draftNotice;return}
  var bar=node("div","q49-language-bar"),lab=node("label","q49-language-label",pack.ui.language+" · ");
  lab.htmlFor="q49-language-select";
  var sel=node("select","q49-language-select");sel.id="q49-language-select";sel.setAttribute("aria-label",pack.ui.language);
