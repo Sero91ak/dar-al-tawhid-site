@@ -9085,6 +9085,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-17T23:59:00.000Z"
+    },
+    {
+      "id": "adult-test-mehr-reading-compact-top-20261031",
+      "at": "2026-10-31T08:46:00+01:00",
+      "approvedBy": "user-request-adult-mehr-global-arabic-translit-german-and-no-gaps-20261031",
+      "reason": "Only adult Test Mehr: add compact persisted Quran text-display controls inside More, remove tall header gap via scoped CSS. No Kids, core Quran sources, PIN, prayer/location, native or service-worker changes.",
+      "paths": [
+        "assets/dar-adult-more-reading-v1.js",
+        "assets/dar-adult-more-reading-v1.css",
+        "cloudflare/test-app-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-16T23:59:00.000Z"
     }
   ],
   "enabled": true

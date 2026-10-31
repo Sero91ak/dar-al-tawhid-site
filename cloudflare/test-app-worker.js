@@ -580,6 +580,15 @@ async function finalizeDarTestHomeV1193(asset) {
     const foldLink = '<link rel="stylesheet" id="darAdultGlobalFoldAxisV1" href="/assets/adult-fold-global-v1.css?v=20261031-fold-axis-v1">';
     html = html.includes("</html>") ? html.replace("</html>", foldLink + "</html>") : html + foldLink;
   }
+  // DAR_MORE_READING_COMPACT_V1: adult Test only, after legacy More hero CSS.
+  if (!html.includes('id="darAdultMoreReadingStyleV1"')) {
+    const css = '<link rel="stylesheet" id="darAdultMoreReadingStyleV1" href="/assets/dar-adult-more-reading-v1.css?v=20261031-mehr-compact-v1">';
+    html = html.includes("</html>") ? html.replace("</html>",css+"</html>") : html+css;
+  }
+  if (!html.includes('id="darAdultMoreReadingJsV1"')) {
+    const script = '<script defer id="darAdultMoreReadingJsV1" src="/assets/dar-adult-more-reading-v1.js?v=20261031-mehr-compact-v1"></'+'script>';
+    html = html.includes("</body>") ? html.replace("</body>",script+"</body>") : html+script;
+  }
   const headers = new Headers(asset.headers);
   headers.set("X-DAR-Test-Scroll-Boundary", "v3");
   headers.set("X-DAR-Test-Home", "html-parity-v50-20261020");
