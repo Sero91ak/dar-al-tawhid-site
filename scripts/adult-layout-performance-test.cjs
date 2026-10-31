@@ -98,4 +98,5 @@ assert.match(boot,/if \(finished \|\| !bootObserver\) return;/,"Late DOMContentL
 /* Fold/Duo checks run inside the pre-existing approved CI job. */
 require("./adult-fold-global-regression.cjs");
 require("./adult-fold-browser-smoke.cjs");
+require("./adult-fold-route-integration.cjs");
 console.log("OK: responsive layout, fold mutation filtering, boot timer/observer lifecycle");
