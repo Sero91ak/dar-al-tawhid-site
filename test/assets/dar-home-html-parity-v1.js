@@ -18,7 +18,7 @@ var quicks=[
 var links=[
  ["frauen","frauen.png","Frauen","Wissen & Fiqh"],["hadith","hadith.png","Ḥadīṯ-Werke","Sammlungen"],
  ["books","library.png","Bibliothek","Bücher & PDFs"],["scholars","scholars.png","Gelehrte","Biografien"],
- ["books","scale.png","Quellen","Nachweise"],["duas","dua.png","Duʿāʾ","Bittgebete"],
+ ["quellen","scale.png","Quellen","Nachweise"],["duas","dua.png","Duʿāʾ","Bittgebete"],
  ["topics","topics.png","ʿAqīdah","Grundlagen"],["quran","quran.png","Qurʾān","Lesen & hören"],
  ["quiz","quiz.png","Quiz","Wissen prüfen"],
  ["bibliothek","library.png","DĀR-Bibliothek","Eigene PDFs"],
@@ -29,7 +29,7 @@ var links=[
  ["prayer","prayer.png","Gebetszeiten","Kalender"]
 ];
 function esc(x){return String(x==null?"":x).replace(/[&<>"']/g,function(z){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[z]})}
-function route(dest,val){if(dest==="library")dest="bibliothek"; // Open the real app library, not only the home-page tile grid.
+function route(dest,val){if(dest==="quellen"){location.assign("/quellen/");return}if(dest==="library")dest="bibliothek"; // Open the real app library, not only the home-page tile grid.
  try{if(typeof window.navigate==="function"){window.navigate(dest,val||"");return}}catch(e){}
  try{if(typeof navigate==="function"){navigate(dest,val||"");return}}catch(e){}
  location.hash="#"+dest+(val?"/"+encodeURIComponent(val):"");
@@ -73,7 +73,9 @@ function html(){
 function stylesheet(){
  return [
 'body.is-home-route .top-shell,body.is-home-route #appView{display:none!important;}',
-'body:not(.is-home-route) #darHomeHtmlParityV1{display:none!important;}',
+'body:not(.is-home-route) #darHomeHtmlParityV1{display:none!important;visibility:hidden!important;pointer-events:none!important;}',
+'body:not(.is-home-route) #appView{max-width:100vw!important;overflow-x:clip!important;}',
+'body.is-home-route #darHomeHtmlParityV1{transform:none!important;animation:none!important;transition:none!important;}',
 '#darHomeHtmlParityV1{--dhp-bg:var(--dt-page,var(--bg,#f6f5ed));--dhp-paper:var(--dt-card,var(--card,#fffef9));--dhp-ink:var(--dt-ink,var(--text,#243b2d));--dhp-muted:var(--dt-muted,var(--muted,#6e796d));--dhp-accent:var(--dt-accent,var(--gold2,#42674d));--dhp-line:var(--dt-rule,#d8dfd3);--dhp-gold:var(--gold2,#a08a5c);display:block;position:relative;isolation:isolate;width:100%;min-height:calc(100svh - 60px);background:var(--dhp-bg)!important;color:var(--dhp-ink)!important;box-shadow:none!important;overflow:visible!important;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;-webkit-text-size-adjust:100%;}',
 'html[data-theme="light"][data-theme-variant="salbei"] #darHomeHtmlParityV1{--dhp-bg:#f6f5ed;--dhp-paper:#fffef9;--dhp-ink:#243b2d;--dhp-muted:#6e796d;--dhp-accent:#42674d;--dhp-line:#d8dfd3;--dhp-gold:#a08a5c;}',
 'html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"]) #darHomeHtmlParityV1{--dhp-bg:var(--bg,#111e1c);--dhp-paper:var(--card,#1b2c29);--dhp-ink:var(--text,#e9f0e7);--dhp-muted:var(--muted,#aebeb3);--dhp-accent:var(--gold2,#b8d4bb);--dhp-line:var(--line,#344942);}',
@@ -365,6 +367,11 @@ function create(){
  }
  return root;
 }
+var darReturnScroll=0,darReturnArmed=false;
+function restoreDarHomeScroll(){if(!darReturnArmed||!document.body?.classList.contains("is-home-route"))return;
+ darReturnArmed=false;var target=darReturnScroll;
+ requestAnimationFrame(function(){setTimeout(function(){if(document.body?.classList.contains("is-home-route"))window.scrollTo(0,target)},80)});
+}
 function click(e){
  var root=document.getElementById(ID);
  if(e.target.closest("#dhpSearchClear")){var inp=root.querySelector("#dhpSearch");inp.value="";input();inp.focus();return}
@@ -372,6 +379,7 @@ function click(e){
  if(!btn)return;
  e.preventDefault();
  var name=btn.getAttribute("data-dhp-route");
+ if(name!=="qibla"&&name!=="theme"&&name!=="hash"){darReturnScroll=window.scrollY||0;darReturnArmed=true;}
  if(name==="qibla"){openQuickQibla();return}
  if(name==="theme"){
   var old=document.querySelector("#dv3HeaderActions [data-dv3-theme-open]");
@@ -506,7 +514,7 @@ function modal(){
 function sync(){
  if(!document.body||!document.body.classList.contains("is-home-route"))return;
  var root=create();if(!root)return;
- updateBrand();updatePrayer();recent();quran();modal();
+ updateBrand();updatePrayer();recent();quran();modal();restoreDarHomeScroll();
 }
 function queue(){if(pending)return;pending=true;requestAnimationFrame(function(){pending=false;try{sync()}catch(e){console.warn("Test Home parity",e)}})}
 function loadTestSmartProfileV1(){
@@ -517,7 +525,7 @@ function loadTestSmartProfileV1(){
  }
  if(!document.getElementById("darTestSmartProfileScriptV1")){
   var script=document.createElement("script");script.id="darTestSmartProfileScriptV1";
-  script.src="/test/assets/dar-smart-profile-v1.js?v=20261030-v5";script.defer=true;
+  script.src="/test/assets/dar-smart-profile-v1.js?v=20261030-neutral-profile-v6";script.defer=true;
   document.head.appendChild(script);
  }
  /* Responsive daily knowledge and profile-adaptive navigation: only adult DĀR TEST. */

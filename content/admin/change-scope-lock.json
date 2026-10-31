@@ -8998,6 +8998,23 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-15T23:59:00.000Z"
+    },
+    {
+      "id": "adult-dar-test-global-area-routing-stability-live-20261031",
+      "at": "2026-10-31T03:39:00+01:00",
+      "approvedBy": "user-explicit-global-live-fix-20261031",
+      "reason": "Test adult area navigation: nonmoving daily recommendation, precise source destination, preserved back position, clipped side-by-side transitions, existing approved neutral icon and isolated public /test Worker cache upgrades. No Kids, prayers, push, privacy, account or SW changes.",
+      "paths": [
+        "test/assets/dar-home-html-parity-v1.js",
+        "test/assets/dar-smart-profile-v1.js",
+        "test/assets/dar-test-premium-header-v2.js",
+        "test/tools/check-smart-profile-v1.cjs",
+        "test/assets/smart-profile/approved-neutral-faceless-v2.webp",
+        "cloudflare/test-app-worker.js",
+        "cloudflare/site-router.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-15T23:59:00.000Z"
     }
   ],
   "enabled": true

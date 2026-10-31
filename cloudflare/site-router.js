@@ -1817,6 +1817,13 @@ export default {
         (url.pathname === "/test" || url.pathname === "/test/" || url.pathname === "/test/index.html");
       if (testHomeHtml && assetResponse.ok) {
         let html = await assetResponse.text();
+        // Refresh the public DĀR TEST profile modules across iOS/Android caches.
+        html = html.replace(/(\/test\/assets\/dar-test-premium-header-v2\.js\?v=)[^"'\s<>]+/g,
+          "$1" + "20261030-neutral-profile-v4");
+        html = html.replace(/(\/test\/assets\/dar-home-html-parity-v1\.js\?v=)[^"'\s<>]+/g,
+          "$1" + "20261030-neutral-profile-v4");
+        html = html.replace(/(\/test\/assets\/dar-smart-profile-v1\.js\?v=)[^"'\s<>]+/g,
+          "$1" + "20261030-neutral-profile-v6");
         if (!html.includes("dar-onesignal-language-sync.js")) {
           const tag = '<script defer id="darTestOneSignalLocaleV1" src="/assets/dar-onesignal-language-sync.js?v=1"></script>';
           html = html.includes("</body>") ? html.replace("</body>", tag + "</body>") : html + tag;
