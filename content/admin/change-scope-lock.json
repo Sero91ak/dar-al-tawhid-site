@@ -155,6 +155,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-home-recent-posts-q49-manual-lang-20261101",
+      "at": "2026-11-01T00:30:00+01:00",
+      "approvedBy": "user-explicit-request-home-2-to-5-days-and-manual-q49-language-selector-20261101",
+      "reason": "Targeted adult visitor homepage window for every recent publication (2/3/5 days) and a permanent manual Q49 language selector on source card. Existing nav, Kids, push, worker scheduling and other source pages unchanged.",
+      "paths": [
+        "scripts/build-desktop-posts-index.js",
+        "assets/dar-home-recent-posts-v1.js",
+        "assets/dar-home-recent-posts-v1.css",
+        "q/49/index.html",
+        "assets/q49-localized.js",
+        "cloudflare/site-router.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-08T23:59:00.000Z"
+    },
+    {
       "id": "dar-test-smart-profile-native-ui-fix-20261030",
       "at": "2026-10-30T12:00:00+01:00",
       "approvedBy": "user-urgent-dar-test-video-and-text-corrections-20261030",
