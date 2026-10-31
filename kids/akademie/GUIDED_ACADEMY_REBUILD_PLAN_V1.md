@@ -1,52 +1,58 @@
-# TAWḤĪD KIDS · Lernakademie – Unterrichtsumbau ohne Verlust bestehender Funktionen
+# TAWḤĪD KIDS · Lernplan und Unterrichtsinhalte – Inhaltsauftrag ohne Layout-/Architekturänderungen
 
-**Stand:** 31.10.2026 · **Status:** Draft PR #1588, nicht veröffentlicht · **Geltung:** ausschließlich `kids/akademie/**` und passende Kids-Tests.
+**Stand: 31.10.2026 · Verbindliche Nutzerkorrektur · Draft-PR #1588 · NICHT LIVE**
 
-## Bildungsziel
+## 1. Nicht verhandelbarer Schutz der bestehenden Kinder-App
 
-Nach dem Unterricht kann ein Kind: (1) das Thema nennen, (2) es verstehen, (3) einen belegten Gedanken aus Qurʾān oder Sunnah zuordnen, (4) in einer eigenen Alltagssituation nachdenken, (5) den richtigen Unterschied erklären und (6) einer vertrauten Person eine eigene Frage stellen.
+**Es darf sich an der Kinder-App äußerlich und technisch nichts ändern.** Dieser Auftrag erweitert ausschließlich den vorhandenen **Lernplan** und die **künftig hinzugefügten Unterrichtsinhalte**.
 
-**Keine beliebig generierten religiösen Antworten** und keine Selbstbewertung offener Kinderantworten als religiös richtig. Ein Kind darf nachfragen und eine Antwort noch nicht wissen. Eine falsche Wahl darf nicht beschämen.
+Unverändert bleiben:
+- `kids/akademie/index.html`, bestehende fünf Unterrichtsschritte, Titel-/Navigationsleiste, alle Profile, Farben, 3D-Icons, Scrollen und Safe-Areas.
+- Sämtliche Layouts, CSS, Laufzeitmodule, Routen, Datenstrukturen, APIs, Widgets und Service-Worker.
+- Fragen- und Lernstands-IDs, lokale Speicherung, Lektionenreihenfolge, Freischaltlogik, bestehende Quiz- und Sprachbedienung.
+- Qurʾān-Rezitator, bisherige Audios, Aussprachebibliothek und alle anderen Bereiche von TAWḤĪD KIDS.
+- Alles in der Erwachsenen-App DĀR AL TAWḤĪD, in DĀR Admin, tvOS oder weiteren App-Spuren.
 
-## Technische Umsetzung auf dem Reviewzweig
+**Kein HTML-, CSS-, Navigations-, Komponenten-, Laufzeit-, Speicher-, API- oder Architekturumbau.** Auch eine neue Karte, ein zusätzlicher Button oder eine andere Bildschirmstruktur ist außerhalb des Auftrags. Inhalt darf ausschließlich in die **bereits existierenden Felder und Darstellungsschritte** gelangen, sobald Quellen und Sprache freigegeben sind.
 
-| Bereich | Umsetzung | Reifestatus |
-|---|---|---|
-| 1. Willkommen | Neue Lernzielkarte mit optionaler Einstiegsfrage | Implementiert, Geräte-QA offen |
-| 2. Verstehen | Altersgerechter Denkanstoß mit optionaler Gedankenhilfe; sichtbar nach vier bestehenden Inhaltssätzen | Implementiert, Text-QA offen |
-| 3. Qurʾān und Sunnah | Quellenkarte mit tatsächlich geladenen Fundstellen und Textauszug-Markierung, sichtbar auf Erklärungsseite | Implementiert, Quellenreview offen |
-| 4. Mitdenken | Bestehendes Quiz, Auswahl/Schreiben/Sprechen, Antworten prüfen und Wiederholung nicht überschrieben | Bestehendes Verhalten; individuelle Fragen weiterhin redaktionell zu verbessern |
-| 5. Festigen | Drei Datenerklärungs-Karten, quellenbezogene Weitergabefrage, separate Abschlussreflexion | Implementiert; Geräte-QA offen |
-| Musterlektion Ṣidq | 3 altersgenaue Fassungen × 5 Lernschritte, mit Szenarien, guten/falschen Optionen, Begründung, geprüften Quellenfundstellen und Lehr-einem-Freund-Fragen | **Nur JSON-Redaktionspilot**, bewusst nicht auf bestehende Fragen/Audios geschaltet |
-| Andere 11 ursprünglichen Grundlagen | Themengebundene Gesprächsanlässe je Alter, bestehende Quellenmetadaten | Entwurf: Review #1535/#1587 offen |
-| Übrige modulare Akademielektionen | Altersabhängige sichere Unterrichtsstruktur, Quellenkarte aus kanonischen Metadaten, neutrale Weitergabefrage | Architektur vorhanden; individualisierte Texte, Quellenreview, Voice und Geräte-QA noch offen |
+### Nachträgliche Korrektur am PR
 
-## Qualitätskontrollen
+Die zu Beginn von #1588 vorbereiteten zusätzlichen UI-, CSS- und JavaScript-Laufzeitmodule sowie ihre UI-Tests wurden wieder entfernt. `kids/akademie/index.html` und die ursprünglich geänderte GitHub-Workflow-Datei wurden **bytegenau auf den unveränderten `main`-Stand** zurückgesetzt. Die PR enthält nur redaktionelle Piloten, Lernplanung und eigenständige Inhaltsprüfung.
 
-- **4–5 Jahre:** kurze alltagsbezogene Sätze, zwei eindeutige Entscheidungsoptionen, große Trefferflächen, keine Schreibpflicht; Audio-Pflicht vor endgültiger selbstständiger Kinderfreigabe.
-- **6–8 Jahre:** Begründung in einem Satz, freundliche Rückmeldung, Wiederholung nach Bedarf, keine suggestiven Unsinnsantworten.
-- **9–10 Jahre:** belegte Aussage von pädagogischem Beispiel unterscheiden; keine willkürliche Quellenzahl abfragen; einen Irrtum argumentativ prüfen.
-- **Islamische Genauigkeit:** Qurʾān-Original und vorhandenen Rezitator nicht ändern; arabischer Vollvers bei Auszügen; deutsche Bedeutung als Bedeutung kennzeichnen; Hadith als authentische Quelle oder **sinngemäße Wiedergabe** markieren; keinerlei erfundene Sunnah.
-- **Sprachen und Stimme:** Serhat-Master ElevenLabs V4 nur nach manueller Fuṣḥā-/Deutsch-Trennungs-Hörprüfung; niemals deutsches „nur“ arabisch als „Nūr“ aussprechen; neue Karten bleiben ohne eigene Audios. Der Bedarf an echten freigegebenen Aufnahmen ist ausdrücklich **offen**.
-- **Kinderschutz:** keine Datenübertragung, keine identifizierbaren Links, keine Kinderantworten öffentlich, Einladungen nur optional zu vertrauten Personen/Eltern.
-- **UX:** fünf vorhandene Hauptschritte beibehalten; die fünf Abschlussfokus-Karten navigierbar; iOS/Android Safe Areas, Keyboard, Voice Playback und Bottom-Dock-Scroll müssen auf Geräten geprüft werden.
-- **Persistenz:** `academy-v4`-Schlüssel, Lektion-IDs, Fragezahl, Quellen-Arabisch und vorhandene Audio-Dateien nicht überschreiben.
-- **Rollout:** zuerst separater DAR TEST-Build / QA, danach formale Freigaben; **kein automatischer Merge nach main** oder Besucher-Push durch dieses Dokument.
+## 2. Pädagogisches Ziel
 
-## Abnahme vor produktiver Freigabe
+Jede fertige Unterrichtseinheit führt im **unveränderten** fünfstufigen System zu: Wissen → Verstehen → Qurʾān/Sunnah-Beleg erkennen → eine sichere Alltagssituation selbst beurteilen → mit eigenen Worten erklären und einer vertrauten Person eine Frage stellen. Die Verbesserung geschieht durch **bessere bestehende Inhalte und Fragen**, nicht durch neue UI.
 
-- [ ] Fachkundiges Quellen- und ʿAqīdah-/Fiqh-Review der tatsächlich verwendeten Lerntexte und Antwortalternativen
-- [ ] Alle altersabhängigen Unterrichtsskripte einschließlich der weiteren Modul-Lektionen individuell redigiert
-- [ ] Vier alte zu generische Fragemuster und alle verbleibenden fachlich unbrauchbaren Distraktoren entfernt (Frageanzahl und Fortschrittsvertrag bewahren)
-- [ ] Audio-Textabgleich mit SHA, isolierte deutsche und arabische Sprachsegmente, V4-Fuṣḥā-Hörabnahme durch Person
-- [ ] iPhone mit/ohne Portal, iPad, Mädchen-/Jungenprofil, Zoom, VoiceOver, Offline, Fold/Android-PWA soweit dieselbe Weboberfläche verwendet wird, und Tastatur-/Tab-Bar-Scroll getestet
-- [ ] Realer DAR TEST-Deploy und Bedienung dokumentiert, keine HTTP-200-Aussage als UI-Test ausgegeben
-- [ ] Positive Release-Entscheidung separat bestätigt
+## 3. Altersangemessene Redaktion
 
-## Nachweise und Zuordnung
+- **4–5 Jahre:** kurze klare Sätze, eine Alltagshandlung, zwei sinnvolle Antwortmöglichkeiten, keine Schreibpflicht und keine Angstszenarien.
+- **6–8 Jahre:** ein greifbarer Sachverhalt, Begründung und Transfer, bis zu drei geeignete Optionen.
+- **9–10 Jahre:** eine belegbare Aussage prüfen, einen plausiblen Irrtum unterscheiden, Quelle von kindgerechter Erklärung trennen und eine eigene Frage zum Thema formulieren.
+- **Alle:** keine beleidigenden oder unsinnigen Distraktoren, keine Spekulation über das Verborgene, keine schamfördernde Pädagogik, keine Erwachsenen-Takfīr- oder Streitfälle im Kinderunterricht.
 
-- `kids/akademie/guided-lesson-v1.js`: allgemeine Quellen- und Denkführung.
-- `kids/akademie/teachback-v1.js`: 12 Pilot-Themen und neutrale Fallbacks.
-- `kids/akademie/editorial-pilots/sidq-deep-learning-v2.json`: ausgearbeitete Musterstunde, noch kein produktives Audio.
-- `kids/tools/test-academy-guided-lesson-v1.cjs` und `kids/tools/test-academy-sidq-deep-learning-v2.cjs`: maschinell ausführbare Tests.
-- GitHub Issues: #1535 individuelle pädagogische Reviews; PR #1587 11 Grundlagen-Quellennachweise; PR #1588 aktueller Umbau-Draft.
+## 4. Islamische und akustische Genauigkeit
+
+- Arabischer Qurʾān-Originaltext unverändert; bei Auszügen eindeutige Kennzeichnung; vollständige authentische Rezitation nur vom bestehenden Rezitator.
+- Überlieferungen mit korrekter Quelle und Status; deutsche Paraphrase niemals als wörtlicher Hadith ausgegeben. Qurʾān und Sunnah von eigenen pädagogischen Beispielen trennen.
+- Fiqh- und ʿAqīdah-Aussagen vor Veröffentlichung fachkundig prüfen. Offene Quelle oder zweifelhaftes Zitat bleibt **nicht freigegeben**.
+- Fuṣḥā-Terminologie kontrollieren; deutsche Sprache bleibt deutsch; deutsche Wörter wie „nur“ niemals als arabisches „Nūr“ rendern.
+- Bestehende ElevenLabs-V4-Masteraudios nicht ändern. Neue kostenpflichtige Sprachaufnahmen erst nach redaktionellem Text-Freeze und expliziter Audio-/Kostenfreigabe. Keine synthetische Qurʾān-Rezitation.
+
+## 5. Konkreter Arbeitsbestand
+
+**Ausgangsbestand:** 66 Lektionen, 520 Fragen. Die 11 Grundlagenlektionen aus `curriculum-v1.js` sind in Quellenreview #1587 dokumentiert, aber nicht endgültig islamwissenschaftlich freigegeben (Issue #1535).
+
+**Aktueller Content-Pilot:** `kids/akademie/editorial-pilots/sidq-deep-learning-v2.json`. Diese Datei enthält drei Altersfassungen der Musterlektion Ṣidq mit je fünf pädagogischen Phasen sowie Prüfantworten und Quellenhinweisen. Es ist ein **redaktioneller Entwurf**, noch kein Ersatz der live geladenen Lektion und kein neues Layout.
+
+**Fortsetzung nur mit Inhaltsdateien:** Fragenqualität der 11 Grundlagen verbessern, fachlich fehlerfreie drei Altersvarianten formulieren, vorhandene Curriculum-Felder nutzen, unveränderte Fragezahl/Schlüssel gewährleisten; danach schrittweise die übrigen Lektionen. Bis zur formalen Abnahme in **eigenen redaktionellen Pilotdateien**, nicht unkontrolliert in produktive Lehrdaten schreiben.
+
+## 6. Veröffentlichungs-Gates
+
+1. [ ] Individuelle fachliche Überprüfung aller betroffenen Qurʾān-, Ḥadīṯ-, ʿAqīdah- und Fiqh-Aussagen.
+2. [ ] Redaktionelle Frageprüfung: eindeutig, altersgerecht, unterrichtsbezogen, plausible Fehlantworten.
+3. [ ] Kompatibilität mit den **bestehenden** Datenfeldern, IDs und der Fortschrittsverwaltung geprüft.
+4. [ ] Nur die ausdrücklich genehmigten Lerninhalte werden in DAR TEST geprüft; UI/Architektur-Diff **muss null sein**.
+5. [ ] Für neue gesprochene Inhalte: geprüfte Aussprachebibliothek, manuelle Fuṣḥā-Hörfreigabe und gesonderte Audiofreigabe.
+6. [ ] Freigabe vor Besucher-Veröffentlichung; keine stillschweigende Übernahme in `main`.
+
+**Fazit: Die App bleibt identisch. Ausschließlich das Wissen im bereits vorhandenen Unterricht wird professioneller.**
