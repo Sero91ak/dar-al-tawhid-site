@@ -34,7 +34,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "20"
 
       - name: Install dependencies
         run: npm install
@@ -65,7 +65,6 @@ jobs:
           CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
           CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
           SITE_URL: "https://dar-al-tawhid.de"
-          PURGE_SCOPE: "test"
           CLOUDFLARE_DEV_MODE: "1"
         run: node scripts/purge-cloudflare-cache.js
         continue-on-error: true
