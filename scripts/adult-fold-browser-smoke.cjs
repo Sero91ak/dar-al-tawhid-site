@@ -39,6 +39,10 @@ html,body{margin:0;padding:0;width:100%}
 body>.app{width:100%;max-width:100%;margin:0;padding:0}
 #appView{width:100%;max-width:100%;margin:0;padding:0}
 .dar-fold__rail,.dar-fold__pane{box-sizing:border-box}
+html[data-dar-visitor-frontstage="1"].stage-inset body.has-bottom-nav > .app{
+ width:calc(100% - 64px)!important;max-width:calc(100% - 64px)!important;
+ margin-left:32px!important;margin-right:32px!important;
+}
 </style></head><body class="has-bottom-nav"><div class="app"><main id="appView"><div
 class="dar-fold" data-fold-family="quran" data-fold-mode="dual"
 data-fold-force="dual" data-fold-single-show="rail"><aside class="dar-fold__rail">Sūrenliste</aside><section
@@ -49,30 +53,32 @@ const root=document.documentElement;
 const shell=document.querySelector(".dar-fold");
 const rail=shell.querySelector(".dar-fold__rail");
 const pane=shell.querySelector(".dar-fold__pane");
-function phase(state,force,front) {
+function phase(state,force,front,inset) {
+ root.classList.toggle("stage-inset",!!inset);
  root.setAttribute("data-fold-capacity",state);
  root.setAttribute("data-fold-dual",state==="dual"?"1":"0");
  root.setAttribute("data-layout",state==="dual"?"expanded":"medium");
  root.setAttribute("data-layout-surface",state==="dual"?"workspace":"single");
  root.setAttribute("data-dar-visitor-frontstage",front?"1":"0");
  shell.setAttribute("data-fold-force",force);
- root.style.setProperty("--fold-rail-current","471px");
- root.style.setProperty("--fold-gap-current","61px");
+ root.style.setProperty("--fold-rail-current","451px");
+ root.style.setProperty("--fold-gap-current","81px");
  const style=getComputedStyle(shell);
  const ra=getComputedStyle(rail),pa=getComputedStyle(pane);
  const rr=rail.getBoundingClientRect(),pr=pane.getBoundingClientRect();
  return {
   display:style.display,template:style.gridTemplateColumns,gap:parseFloat(style.columnGap),
   railDisplay:ra.display,paneDisplay:pa.display,
-  railWidth:rr.width,paneWidth:pr.width,railLeft:rr.left,paneLeft:pr.left,
+  railWidth:rr.width,paneWidth:pr.width,railLeft:rr.left,railRight:rr.right,paneLeft:pr.left,
   shellWidth:shell.getBoundingClientRect().width
  };
 }
 const compact=phase("single","dual",true); // stale forceDual MUST NOT win
 const dual=phase("dual","auto",true);      // frontstage MUST NOT collapse dual
+const inset=phase("dual","auto",true,true);
 const forced=phase("dual","single",true);
 const ordinary=phase("dual","auto",false);
-document.getElementById("foldSmoke").textContent=btoa(JSON.stringify({compact,dual,forced,ordinary}));
+document.getElementById("foldSmoke").textContent=btoa(JSON.stringify({compact,dual,inset,forced,ordinary}));
 } catch(e) {
  document.getElementById("foldSmoke").textContent=btoa(JSON.stringify({error:String(e)}));
 }
@@ -94,13 +100,14 @@ try {
   assert.notEqual(result.compact.railDisplay,"none","Active Surah list visible in compact");
   assert.equal(result.forced.display,"block","Explicit forced single must stay one-pane on a wide screen");
   assert.equal(result.forced.paneDisplay,"none","Forced single hides inactive pane");
-  for(const [label,g] of [["dual",result.dual],["ordinary",result.ordinary]]) {
+  for(const [label,g] of [["dual",result.dual],["ordinary",result.ordinary],["inset",result.inset]]) {
     assert.equal(g.display,"grid",label+" must resolve to two actual columns");
     assert.ok(g.railWidth>=300,label+" rail readable: "+g.railWidth);
     assert.ok(g.paneWidth>=420,label+" reader readable: "+g.paneWidth);
-    assert.ok(g.paneLeft>=524,label+" reading pane must clear hardware hinge [500,524]");
+    assert.ok(g.railRight<=492,label+" master must clear hinge start 500 with 8px buffer");
+    assert.ok(g.paneLeft>=532,label+" reading pane must clear hinge end 524 with 8px buffer");
     assert.ok(g.paneLeft+g.paneWidth<=1026,label+" must not overflow viewport");
-    assert.ok(g.gap>=60,label+" must preserve measured hinge clearance");
+    assert.ok(g.gap>=81,label+" must preserve measured hinge + inset clearance");
   }
   console.log("OK: real Chromium CSS layout, visitor frontstage and 24px Duo hinge");
 } finally {
