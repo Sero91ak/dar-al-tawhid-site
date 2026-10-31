@@ -457,6 +457,15 @@ function isDynamicGermanUi(value){
   /^Tag \d+ im Fastenmonat$/.test(value)||
   /^Tag \d+$/.test(value)||
   /^Noch ca\. \d+ Tage bis Ramaḍān$/.test(value)||
+  /^Noch ca\. \d+ Tage$/.test(value)||
+  /^Beleg \d+$/.test(value)||
+  /^\d+ Aufrufe$/.test(value)||
+  /^\d+ Aufrufe · .+$/.test(value)||
+  /^\d+ Tage$/.test(value)||
+  /^\d+ Std\.$/.test(value)||
+  /^\d+ neu$/.test(value)||
+  /^\d+\/\d+ Dateien · \d+%(?: · .+)?$/.test(value)||
+  /^Meist gelesen Platz \d+: .+$/.test(value)||
   /^Noch \d+ Tage$/.test(value)||
   /^Noch \d+ Tage im Fokus$/.test(value)||
   /^Noch ca\. \d+ Std\. im Fokus$/.test(value)||
@@ -751,8 +760,10 @@ function translateSharedPatterns(value,language){
  const hijriDated=value.match(new RegExp("^(\\\d+)\\\. ("+hijriMonth+") (\\\d{3,4}) · (.+)$"));
  if(hijriDated){
   const month=lookupPack(hijriDated[2],language)||hijriDated[2];
-  const greg=localizeGermanCalendarLabel(hijriDated[4],language)||hijriDated[4];
-  return hijriDated[1]+". "+month+" "+hijriDated[3]+" · "+greg;
+  const rawTail=hijriDated[4];
+  const greg=localizeGermanCalendarLabel(rawTail,language);
+  const tail=(greg&&greg!==rawTail)?greg:(lookupPack(rawTail,language)||translateSharedPatterns(rawTail,language)||rawTail);
+  return hijriDated[1]+". "+month+" "+hijriDated[3]+" · "+tail;
  }
  const hijriOnly=value.match(new RegExp("^(\\\d+)\\\. ("+hijriMonth+") (\\\d{3,4})$"));
  if(hijriOnly){
@@ -1603,13 +1614,15 @@ function translateSharedPatterns(value,language){
  const season=value.match(/^(.+) · Suḥūr, Iftār, Duʿāʾ & Beiträge$/);
  if(season){
   const tail=lookupPack("Suḥūr, Iftār, Duʿāʾ & Beiträge",language);
-  const head=lookupPack(season[1].trim(),language)||season[1].trim();
+  const raw=season[1].trim();
+  const head=lookupPack(raw,language)||translateSharedPatterns(raw,language)||raw;
   if(tail)return head+" · "+tail;
  }
  const fast=value.match(/^(.+) · Möge Allah dein Fasten annehmen\.$/);
  if(fast){
   const tail=lookupPack("Möge Allah dein Fasten annehmen.",language);
-  const head=lookupPack(fast[1].trim(),language)||fast[1].trim();
+  const raw=fast[1].trim();
+  const head=lookupPack(raw,language)||translateSharedPatterns(raw,language)||raw;
   if(tail)return head+" · "+tail;
  }
  const area=value.match(/^Bereich: (.+)$/);
@@ -1665,6 +1678,59 @@ function translateSharedPatterns(value,language){
   const n=dayOnly[1];
   const forms={ar:"اليوم "+n,en:"Day "+n,tr:n+". gün",ku:"Roja "+n,ckb:"ڕۆژی "+n,bs:"Dan "+n,fr:"Jour "+n,es:"Día "+n};
   return forms[language]||null;
+ }
+ const aboutDays=value.match(/^Noch ca\. (\d+) Tage$/);
+ if(aboutDays){
+  const n=aboutDays[1];
+  const forms={ar:"بقي نحو "+n+" أيام",en:"About "+n+" days left",tr:"Yaklaşık "+n+" gün kaldı",ku:"Nêzîkî "+n+" roj man",ckb:"نزیکەی "+n+" ڕۆژ ماوە",bs:"Još oko "+n+" dana",fr:"Encore environ "+n+" jours",es:"Faltan unos "+n+" días"};
+  return forms[language]||null;
+ }
+ const proofLabel=value.match(/^Beleg (\d+)$/);
+ if(proofLabel){
+  const word=lookupPack("Beleg",language)||"Beleg";
+  return proofLabel[1]+" "+word;
+ }
+ const viewsOnly=value.match(/^(\d+) Aufrufe$/);
+ if(viewsOnly){
+  const n=viewsOnly[1];
+  const forms={ar:n+" مشاهدات",en:n+" views",tr:n+" görüntüleme",ku:n+" dîtin",ckb:n+" بینین",bs:n+" pregleda",fr:n+" vues",es:n+" vistas"};
+  return forms[language]||null;
+ }
+ const viewsOf=value.match(/^(\d+) Aufrufe · (.+)$/);
+ if(viewsOf){
+  const views=translateSharedPatterns(viewsOf[1]+" Aufrufe",language);
+  const name=lookupPack(viewsOf[2],language)||viewsOf[2];
+  if(views)return views+" · "+name;
+ }
+ const dayCount=value.match(/^(\d+) Tage$/);
+ if(dayCount){
+  const n=dayCount[1];
+  const forms={ar:n+" أيام",en:n+" days",tr:n+" gün",ku:n+" roj",ckb:n+" ڕۆژ",bs:n+" dana",fr:n+" jours",es:n+" días"};
+  return forms[language]||null;
+ }
+ const hourCount=value.match(/^(\d+) Std\.$/);
+ if(hourCount){
+  const n=hourCount[1];
+  const forms={ar:n+" س",en:n+" h",tr:n+" sa",ku:n+" saet",ckb:n+" کاتژمێر",bs:n+" h",fr:n+" h",es:n+" h"};
+  return forms[language]||null;
+ }
+ const freshCount=value.match(/^(\d+) neu$/);
+ if(freshCount){
+  const n=freshCount[1];
+  const forms={ar:n+" جديد",en:n+" new",tr:n+" yeni",ku:n+" nû",ckb:n+" نوێ",bs:n+" novo",fr:n+" nouveau",es:n+" nuevo"};
+  return forms[language]||null;
+ }
+ const filePct=value.match(/^(\d+)\/(\d+) Dateien · (\d+)%(?: · (.+))?$/);
+ if(filePct){
+  const word=lookupPack("Dateien",language)||"Dateien";
+  const size=filePct[4]?" · "+filePct[4]:"";
+  return filePct[1]+"/"+filePct[2]+" "+word+" · "+filePct[3]+"%"+size;
+ }
+ const popularPlace=value.match(/^Meist gelesen Platz (\d+): (.+)$/);
+ if(popularPlace){
+  const head=lookupPack("Meist gelesen",language)||"Meist gelesen";
+  const place={ar:"المرتبة",en:"place",tr:"sıra",ku:"cih",ckb:"پلە",bs:"mjesto",fr:"place",es:"puesto"}[language];
+  if(place)return head+" "+place+" "+popularPlace[1]+": "+popularPlace[2];
  }
  const untilRamadan=value.match(/^Noch ca\. (\d+) Tage bis Ramaḍān$/);
  if(untilRamadan){
@@ -2218,7 +2284,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-39";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-40";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

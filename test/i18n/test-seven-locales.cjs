@@ -186,6 +186,15 @@ assert.equal(w.DarTestTurkishUI.translateValue("12 Überlieferungen · 9 Ḥadī
 assert.equal(w.DarTestTurkishUI.translateValue("2 Veröffentlichungen in diesem Themenregal.","en"),"2 publications on this shelf.");
 assert.equal(w.DarTestTurkishUI.translateValue("Aktualisiert: 31.10.2026, 21:00:00 · Auto-Refresh alle 30 Sekunden","en"),"Updated: 31.10.2026, 21:00:00 · auto-refresh every 30 seconds");
 assert.equal(w.DarTestTurkishUI.translateValue("Ohne Bewegungssensor: Nutze die Kompass-App deines Handys und suche 42° Norden. Vergleiche mit einer verlässlichen Quelle, bevor du betest.","en"),"Without a motion sensor: use your phone’s Compass app and look for 42° North. Compare with a reliable source before you pray.");
+assert.equal(w.DarTestTurkishUI.translateValue("Noch ca. 12 Tage","fr"),"Encore environ 12 jours");
+assert.equal(w.DarTestTurkishUI.translateValue("Beleg 3","ckb"),"3 بەڵگە");
+assert.equal(w.DarTestTurkishUI.translateValue("4 Aufrufe · Adab","en"),"4 views · Adab");
+assert.equal(w.DarTestTurkishUI.translateValue("2 Tage · 3 neu","es"),"2 días · 3 nuevo");
+assert.equal(w.DarTestTurkishUI.translateValue("12/80 Dateien · 40% · 2 MB","en"),"12/80 files · 40% · 2 MB");
+assert.equal(w.DarTestTurkishUI.translateValue("Meist gelesen Platz 01: Wissen und Adab","en"),"Most read place 01: Wissen und Adab");
+assert.equal(w.DarTestTurkishUI.translateValue("Noch ca. 12 Tage · Suḥūr, Iftār, Duʿāʾ & Beiträge","en"),"About 12 days left · "+locales.translations.en["Suḥūr, Iftār, Duʿāʾ & Beiträge"]);
+assert.equal(w.DarTestTurkishUI.translateValue("Zuklappen","tr"),"Daralt");
+assert.equal(w.DarTestTurkishUI.translateValue("Suḥūr · Fajr","tr"),"Sahur · Fecir");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
