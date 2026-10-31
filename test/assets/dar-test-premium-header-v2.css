@@ -404,3 +404,11 @@ html.dar-test-premium-header-v2 body.is-more-route #appView > .view-head{
 html.dar-test-premium-header-v2 body.is-frauen-route #appView :is(.frauen-library-shell,.frauen-library-list):not(:has(> .dar-immersive-hero-stage)) > .frauen-library-hero{
  top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px))!important;
 }
+
+/* DAR_NATIVE_BRAND_SPACER_SINGLE_OWNER_V2_20261031
+ * Native extra top padding duplicates the already mounted TEST brand spacer.
+ * Reset only with a verified spacer, never on Kids or unmounted views. */
+html.dar-ios-native-app.dar-test-premium-header-v2 body.dar-ios-native-app.has-bottom-nav.is-area-route:has(> .app > #darTestBrandHeaderSpacerV1){
+ padding-block-start:0!important;
+ padding-top:0!important;
+}
