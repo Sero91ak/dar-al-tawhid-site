@@ -382,6 +382,8 @@ function isDynamicGermanUi(value){
   value==="WENIGSTE BEITRÄGE"||
   value==="ZULETZT ANGESEHEN"||
   value==="Sync"||
+  /^Nächster Termin: \d{4}-\d{2}-\d{2}(?: · \d+ Tage)?$/.test(value)||
+  /^Preisabruf: .+$/.test(value)||
   /^\d+ Beitrag$/.test(value)||
   /^Zuletzt synchronisiert: .+$/.test(value)||
   /^Zuletzt: .+$/.test(value)||
@@ -576,6 +578,45 @@ function translateSharedPatterns(value,language){
  if(value==="Sync"){
   const sync=lookupPack("Synchronisieren",language);
   if(sync)return sync;
+ }
+ const nextDue=value.match(/^Nächster Termin: (\d{4}-\d{2}-\d{2})(?: · (\d+) Tage)?$/);
+ if(nextDue){
+  const date=nextDue[1],days=nextDue[2];
+  const head={
+   ar:"الموعد التالي: ",
+   en:"Next date: ",
+   tr:"Sonraki tarih: ",
+   ku:"Dema paşîn: ",
+   ckb:"وادەی داهاتوو: ",
+   bs:"Sljedeći datum: ",
+   fr:"Prochaine date : ",
+   es:"Próxima fecha: "
+  }[language];
+  const dayWord={
+   ar:days==="1"?"يوم":"أيام",
+   en:days==="1"?"day":"days",
+   tr:"gün",
+   ku:"roj",
+   ckb:"ڕۆژ",
+   bs:days==="1"?"dan":"dana",
+   fr:days==="1"?"jour":"jours",
+   es:days==="1"?"día":"días"
+  }[language];
+  if(head)return head+date+(days?" · "+days+" "+dayWord:"");
+ }
+ const priceFetch=value.match(/^Preisabruf: (.+)$/);
+ if(priceFetch){
+  const head={
+   ar:"طلب السعر: ",
+   en:"Price request: ",
+   tr:"Fiyat sorgusu: ",
+   ku:"Daxwaza bihayê: ",
+   ckb:"داواکاری نرخ: ",
+   bs:"Upit cijene: ",
+   fr:"Demande de prix : ",
+   es:"Consulta de precio: "
+  }[language];
+  if(head)return head+priceFetch[1];
  }
  const surahs=value.match(/^(\d+)\s+Sūren\s*·\s*(\d+)\s+Āyāt$/);
  if(surahs){
@@ -1664,7 +1705,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-35";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-36";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

@@ -155,6 +155,14 @@ assert.equal(w.DarTestTurkishUI.translateValue("Zuletzt: heute, 19:40 Uhr","en")
 assert.equal(w.DarTestTurkishUI.translateValue("Standort wird geladen","ar"),"جارٍ تحميل الموقع");
 assert.equal(w.DarTestTurkishUI.translateValue("Ich kann derzeit 2 überprüfte Fundstellen zeigen. Weitere verlangte Belege sind bislang nicht ausreichend überprüft. Unten findest du die vorhandenen Fundstellen mit ihrem Prüfstatus.","es"),"Ahora puedo mostrar 2 referencias revisadas. Las demás pruebas solicitadas aún no están suficientemente revisadas. Abajo están las referencias disponibles con su estado de revisión.");
 assert.equal(w.DarTestTurkishUI.translateValue("Keine Zakāt fällig","ckb"),"زەکات واجب نییە");
+assert.equal(w.DarTestTurkishUI.translateValue("Konto öffnen","en"),"Open the account");
+assert.equal(w.DarTestTurkishUI.translateValue("Zakāt fällig","en"),"Zakāt due");
+assert.equal(w.DarTestTurkishUI.translateValue("Niṣāb erreicht","fr"),"Niṣāb atteint");
+assert.equal(w.DarTestTurkishUI.translateValue("← Zurück zum Beitrag","ckb"),"→ گەڕانەوە بۆ بابەت");
+assert.equal(w.DarTestTurkishUI.translateValue("Silber","fr"),"Argent métal");
+assert.equal(w.DarTestTurkishUI.translateValue("Nächster Termin: 2026-10-31 · 12 Tage","en"),"Next date: 2026-10-31 · 12 days");
+assert.equal(w.DarTestTurkishUI.translateValue("Preisabruf: timeout","ar"),"طلب السعر: timeout");
+assert.equal(w.DarTestTurkishUI.translateValue("Keine sichere Aussage ohne Beleg.","es"),"No hay una afirmación segura sin prueba.");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
