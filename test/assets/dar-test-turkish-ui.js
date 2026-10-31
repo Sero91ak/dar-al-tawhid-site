@@ -374,6 +374,14 @@ function isDynamicGermanUi(value){
   /^Beleg \d+ öffnen$/.test(value)||
   /^Auswertung: \d+ korrekt, \d+ ähnlich, \d+ offen\.$/.test(value)||
   /^Ich höre: .+$/.test(value)||
+  value==="Qiblah"||
+  value==="Sūren filtern"||
+  /^Inhalte aktuell · zuletzt .+$/.test(value)||
+  /^Inhalte aktuell\. Zuletzt synchronisiert um .+\.$/.test(value)||
+  /^\d Stern$/.test(value)||
+  /^\d Sterne$/.test(value)||
+  /^Slide \d+ von \d+$/.test(value)||
+  value==="Bei rotem Status: Startseite → ↻ Sync in der Statusleiste, dann erneut testen."||
   /^\d+\s+(Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt|Funktionen|Ergebnisse)$/.test(value)||
   /^\d+\s+Āyāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
   /^\d+\s*·\s*\d+\s+Ayāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
@@ -523,6 +531,14 @@ function uiWord(language,de){
  return row?.[language]||null;
 }
 function translateSharedPatterns(value,language){
+ if(value==="Qiblah"){
+  const qibla=lookupPack("Qibla",language);
+  if(qibla)return qibla;
+ }
+ if(value==="Sūren filtern"){
+  const surahFilter=lookupPack("Suren filtern",language);
+  if(surahFilter)return surahFilter;
+ }
  const surahs=value.match(/^(\d+)\s+Sūren\s*·\s*(\d+)\s+Āyāt$/);
  if(surahs){
   const a=uiWord(language,"Sūren"),b=uiWord(language,"Āyāt");
@@ -679,6 +695,77 @@ function translateSharedPatterns(value,language){
  if(heard){
   const head={ar:"أسمع: ",en:"I hear: ",tr:"Duyuyorum: ",ku:"Ez dibihîzim: ",ckb:"دەبیستم: ",bs:"Čujem: ",fr:"J’entends : ",es:"Oigo: "}[language];
   if(head)return head+heard[1];
+ }
+ const freshLine=value.match(/^Inhalte aktuell · zuletzt (.+)$/);
+ if(freshLine){
+  const head=lookupPack("Inhalte aktuell",language);
+  const tail={
+   ar:" · آخر تحديث ",
+   en:" · last updated ",
+   tr:" · son güncelleme ",
+   ku:" · nûkirina dawî ",
+   ckb:" · دوایین نوێکردنەوە ",
+   bs:" · zadnje ažuriranje ",
+   fr:" · dernière mise à jour ",
+   es:" · última actualización "
+  }[language];
+  if(head&&tail)return head+tail+freshLine[1];
+ }
+ const freshSentence=value.match(/^Inhalte aktuell\. Zuletzt synchronisiert um (.+)\.$/);
+ if(freshSentence){
+  const stamp=freshSentence[1];
+  const forms={
+   ar:"المحتوى محدّث. آخر مزامنة في "+stamp+".",
+   en:"Content is current. Last synced at "+stamp+".",
+   tr:"İçerik güncel. Son eşitleme "+stamp+".",
+   ku:"Naverok nûjen e. Hevdengkirina dawî "+stamp+".",
+   ckb:"ناوەڕۆک نوێیە. دوایین هاوکاتکردن "+stamp+".",
+   bs:"Sadržaj je ažuran. Zadnja sinhronizacija "+stamp+".",
+   fr:"Contenu à jour. Dernière synchronisation à "+stamp+".",
+   es:"Contenido actualizado. Última sincronización a las "+stamp+"."
+  };
+  if(forms[language])return forms[language];
+ }
+ const oneStar=value.match(/^(\d) Stern$/);
+ if(oneStar){
+  const n=oneStar[1];
+  const forms={ar:n+" نجمة",en:n+" star",tr:n+" yıldız",ku:n+" stêrk",ckb:n+" ئەستێرە",bs:n+" zvijezda",fr:n+" étoile",es:n+" estrella"};
+  if(forms[language])return forms[language];
+ }
+ const manyStars=value.match(/^(\d) Sterne$/);
+ if(manyStars){
+  const n=manyStars[1];
+  const forms={ar:n+" نجوم",en:n+" stars",tr:n+" yıldız",ku:n+" stêrk",ckb:n+" ئەستێرە",bs:n+" zvijezde",fr:n+" étoiles",es:n+" estrellas"};
+  if(forms[language])return forms[language];
+ }
+ const slideCount=value.match(/^Slide (\d+) von (\d+)$/);
+ if(slideCount){
+  const n=slideCount[1],m=slideCount[2];
+  const forms={
+   ar:"الشريحة "+n+" من "+m,
+   en:"Slide "+n+" of "+m,
+   tr:"Slayt "+n+" / "+m,
+   ku:"Slayt "+n+" ji "+m,
+   ckb:"سلاید "+n+" لە "+m,
+   bs:"Slajd "+n+" od "+m,
+   fr:"Diapositive "+n+" sur "+m,
+   es:"Diapositiva "+n+" de "+m
+  };
+  if(forms[language])return forms[language];
+ }
+ if(value==="Bei rotem Status: Startseite → ↻ Sync in der Statusleiste, dann erneut testen."){
+  const tail=lookupPack("Startseite → ↻ Sync in der Statusleiste, dann erneut testen.",language);
+  const head={
+   ar:"عند الحالة الحمراء: ",
+   en:"When the status is red: ",
+   tr:"Kırmızı durumda: ",
+   ku:"Dema rewş sor be: ",
+   ckb:"کاتێک دۆخ سوورە: ",
+   bs:"Kad je status crven: ",
+   fr:"Si le statut est rouge : ",
+   es:"Si el estado está en rojo: "
+  }[language];
+  if(tail&&head)return head+tail;
  }
  const range=value.match(/^Sūrenbereich wechseln(?:, aktuell|\s+)(.+?)(?:\s*[⌄])?$/);
  if(range){
@@ -1431,7 +1518,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-32";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-33";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

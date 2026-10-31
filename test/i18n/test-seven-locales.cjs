@@ -129,6 +129,16 @@ assert.equal(w.DarTestTurkishUI.translateValue("Vorige Āyah","es"),"Āyah anter
 assert.equal(w.DarTestTurkishUI.translateValue("Ich höre: Bismillāh","ku"),"Ez dibihîzim: Bismillāh");
 assert.equal(w.DarTestTurkishUI.translateValue("Āyah 2 / 7 · gelernt 1/7","es"),"aleya 2 / 7 · aprendido 1/7");
 assert.equal(w.DarTestTurkishUI.translateValue("Gespeichert: Links · Auf diesem schmalen Display bleibt die Leiste automatisch unten.","en"),"Saved: Left · On this narrow screen the bar stays at the bottom.");
+assert.equal(w.DarTestTurkishUI.translateValue("Imāme & Salaf","tr"),"İmamlar ve Selef");
+assert.equal(w.DarTestTurkishUI.translateValue("Qiblah","en"),"Qibla");
+assert.equal(w.DarTestTurkishUI.translateValue("Sūren filtern","fr"),"Filtrer les sourates");
+assert.equal(w.DarTestTurkishUI.translateValue("1 Stern","en"),"1 star");
+assert.equal(w.DarTestTurkishUI.translateValue("3 Sterne","es"),"3 estrellas");
+assert.equal(w.DarTestTurkishUI.translateValue("Inhalte aktuell · zuletzt 19:40","en"),"Content is current · last updated 19:40");
+assert.equal(w.DarTestTurkishUI.translateValue("Slide 2 von 5","ar"),"الشريحة 2 من 5");
+assert.equal(w.DarTestTurkishUI.translateValue("Bei rotem Status: Startseite → ↻ Sync in der Statusleiste, dann erneut testen.","en"),"When the status is red: Home → ↻ Sync in the status bar, then test again.");
+assert.equal(w.DarTestTurkishUI.translateValue("Erscheinungsbild wechseln","ckb"),"دەرکەوتن بگۆڕە");
+assert.equal(w.DarTestTurkishUI.translateValue("Tagesvers","tr"),"Günün Âyeti");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
