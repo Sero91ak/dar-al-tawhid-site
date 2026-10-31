@@ -466,6 +466,18 @@ function isDynamicGermanUi(value){
   /^\d+ neu$/.test(value)||
   /^\d+\/\d+ Dateien · \d+%(?: · .+)?$/.test(value)||
   /^Meist gelesen Platz \d+: .+$/.test(value)||
+  /^\d+ Ḥadīṯe – nach Werken geordnet\.$/.test(value)||
+  /^\d+ von \d+ (?:Bücher|Gelehrte|Werke)$/.test(value)||
+  /^\d+ (?:Bücher|Gelehrte|Werke)$/.test(value)||
+  /^\d+ Werke · Gesamtkatalog$/.test(value)||
+  /^\d+ Beiträge, \d+ Duʿāʾ$/.test(value)||
+  /^Seite \d+ von \d+$/.test(value)||
+  /^Seite \d+$/.test(value)||
+  /^0 von \d+$/.test(value)||
+  /^Herausgegeben von .+$/.test(value)||
+  /^Weiterlesen · S\. \d+$/.test(value)||
+  /^Version .+$/.test(value)||
+  /^PDF-Leser: .+$/.test(value)||
   /^Noch \d+ Tage$/.test(value)||
   /^Noch \d+ Tage im Fokus$/.test(value)||
   /^Noch ca\. \d+ Std\. im Fokus$/.test(value)||
@@ -1732,6 +1744,112 @@ function translateSharedPatterns(value,language){
   const place={ar:"المرتبة",en:"place",tr:"sıra",ku:"cih",ckb:"پلە",bs:"mjesto",fr:"place",es:"puesto"}[language];
   if(place)return head+" "+place+" "+popularPlace[1]+": "+popularPlace[2];
  }
+ const orderedHadith=value.match(/^(\d+) Ḥadīṯe – nach Werken geordnet\.$/);
+ if(orderedHadith){
+  const n=orderedHadith[1],word=lookupPack("Ḥadīṯe",language)||"Ḥadīṯe";
+  const forms={
+   ar:n+" "+word+" — مرتبة حسب المصنفات.",
+   en:n+" "+word+" — ordered by works.",
+   tr:"Eserlere göre sıralı "+n+" "+word+".",
+   ku:n+" "+word+" — li gorî berheman rêzkirî.",
+   ckb:n+" "+word+" — بەپێی بەرهەمەکان ڕیزکراو.",
+   bs:n+" "+word+" — poredano po djelima.",
+   fr:n+" "+word+" — classés par ouvrages.",
+   es:n+" "+word+" — ordenados por obras."
+  };
+  return forms[language]||null;
+ }
+ const countedOf=value.match(/^(\d+) von (\d+) (Bücher|Gelehrte|Werke)$/);
+ if(countedOf){
+  const n=countedOf[1],m=countedOf[2],word=lookupPack(countedOf[3],language)||countedOf[3];
+  const forms={
+   ar:n+" من "+m+" "+word,
+   en:n+" of "+m+" "+word,
+   tr:m+" "+word+" içinden "+n,
+   ku:n+" ji "+m+" "+word,
+   ckb:n+" لە "+m+" "+word,
+   bs:n+" od "+m+" "+word,
+   fr:n+" sur "+m+" "+word,
+   es:n+" de "+m+" "+word
+  };
+  return forms[language]||null;
+ }
+ const countedNoun=value.match(/^(\d+) (Bücher|Gelehrte|Werke)$/);
+ if(countedNoun){
+  const word=lookupPack(countedNoun[2],language)||countedNoun[2];
+  return countedNoun[1]+" "+word;
+ }
+ const fullCatalog=value.match(/^(\d+) Werke · Gesamtkatalog$/);
+ if(fullCatalog){
+  const works=translateSharedPatterns(fullCatalog[1]+" Werke",language);
+  const cat=lookupPack("Gesamtkatalog",language);
+  if(works&&cat)return works+" · "+cat;
+ }
+ const postDua=value.match(/^(\d+) Beiträge, (\d+) Duʿāʾ$/);
+ if(postDua){
+  const posts=lookupPack("Beiträge",language)||"Beiträge";
+  const duas=lookupPack("Duʿāʾ",language)||"Duʿāʾ";
+  return postDua[1]+" "+posts+", "+postDua[2]+" "+duas;
+ }
+ const pageOf=value.match(/^Seite (\d+) von (\d+)$/);
+ if(pageOf){
+  const page=lookupPack("Seite",language)||"Seite";
+  const n=pageOf[1],m=pageOf[2];
+  const forms={
+   ar:page+" "+n+" من "+m,
+   en:page+" "+n+" of "+m,
+   tr:page+" "+n+" / "+m,
+   ku:page+" "+n+" ji "+m,
+   ckb:page+" "+n+" لە "+m,
+   bs:page+" "+n+" od "+m,
+   fr:page+" "+n+" sur "+m,
+   es:page+" "+n+" de "+m
+  };
+  return forms[language]||null;
+ }
+ const pageOnly=value.match(/^Seite (\d+)$/);
+ if(pageOnly){
+  const page=lookupPack("Seite",language)||"Seite";
+  return page+" "+pageOnly[1];
+ }
+ const zeroOf=value.match(/^0 von (\d+)$/);
+ if(zeroOf){
+  const n=zeroOf[1];
+  const forms={ar:"0 من "+n,en:"0 of "+n,tr:"0 / "+n,ku:"0 ji "+n,ckb:"0 لە "+n,bs:"0 od "+n,fr:"0 sur "+n,es:"0 de "+n};
+  return forms[language]||null;
+ }
+ const editedBy=value.match(/^Herausgegeben von (.+)$/);
+ if(editedBy){
+  const name=editedBy[1];
+  const forms={
+   ar:"بإشراف "+name,
+   en:"Edited by "+name,
+   tr:name+" yayına hazırladı",
+   ku:"Ji aliyê "+name+" ve hatiye amadekirin",
+   ckb:"ئامادەکراوی "+name,
+   bs:"Priredio "+name,
+   fr:"Édité par "+name,
+   es:"Editado por "+name
+  };
+  return forms[language]||null;
+ }
+ const continuePage=value.match(/^Weiterlesen · S\. (\d+)$/);
+ if(continuePage){
+  const head=lookupPack("Weiterlesen",language)||"Weiterlesen";
+  const n=continuePage[1];
+  const mark={ar:"ص",en:"p.",tr:"s.",ku:"r.",ckb:"لا",bs:"str.",fr:"p.",es:"p."}[language];
+  if(mark)return head+" · "+mark+" "+n;
+ }
+ const versionLine=value.match(/^Version (.+)$/);
+ if(versionLine){
+  const head=lookupPack("Version",language)||"Version";
+  return head+" "+versionLine[1];
+ }
+ const pdfReader=value.match(/^PDF-Leser: (.+)$/);
+ if(pdfReader){
+  const head=lookupPack("PDF-Leser",language)||"PDF-Leser";
+  return head+": "+pdfReader[1];
+ }
  const untilRamadan=value.match(/^Noch ca\. (\d+) Tage bis Ramaḍān$/);
  if(untilRamadan){
   const n=untilRamadan[1],name=lookupPack("Ramaḍān",language)||"Ramaḍān";
@@ -2284,7 +2402,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-40";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-41";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

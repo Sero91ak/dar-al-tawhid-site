@@ -195,6 +195,14 @@ assert.equal(w.DarTestTurkishUI.translateValue("Meist gelesen Platz 01: Wissen u
 assert.equal(w.DarTestTurkishUI.translateValue("Noch ca. 12 Tage · Suḥūr, Iftār, Duʿāʾ & Beiträge","en"),"About 12 days left · "+locales.translations.en["Suḥūr, Iftār, Duʿāʾ & Beiträge"]);
 assert.equal(w.DarTestTurkishUI.translateValue("Zuklappen","tr"),"Daralt");
 assert.equal(w.DarTestTurkishUI.translateValue("Suḥūr · Fajr","tr"),"Sahur · Fecir");
+assert.equal(w.DarTestTurkishUI.translateValue("120 Ḥadīṯe – nach Werken geordnet.","en"),"120 Hadiths — ordered by works.");
+assert.equal(w.DarTestTurkishUI.translateValue("4 von 18 Bücher","fr"),"4 sur 18 "+locales.translations.fr.Bücher);
+assert.equal(w.DarTestTurkishUI.translateValue("12 Beiträge, 8 Duʿāʾ","es"),"12 "+locales.translations.es.Beiträge+", 8 "+locales.translations.es["Duʿāʾ"]);
+assert.equal(w.DarTestTurkishUI.translateValue("Seite 4 von 120","en"),"Page 4 of 120");
+assert.equal(w.DarTestTurkishUI.translateValue("Herausgegeben von Serhat Abu Malik","en"),"Edited by Serhat Abu Malik");
+assert.equal(w.DarTestTurkishUI.translateValue("Version 3","tr"),"Sürüm 3");
+assert.equal(w.DarTestTurkishUI.translateValue("5 geprüfte Werke und zitierte Gelehrte.","en"),"5 Reviewed works and cited scholars.");
+assert.equal(w.DarTestTurkishUI.translateValue("PDF-Leser: Wissen","ckb"),"خوێنەری PDF: Wissen");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
