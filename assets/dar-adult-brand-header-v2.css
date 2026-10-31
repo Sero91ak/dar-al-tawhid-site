@@ -488,3 +488,9 @@ html.dar-ios-native-app.dar-adult-global-brand-ready body.dar-ios-native-app.has
  padding-block-start:0!important;
  padding-top:0!important;
 }
+
+/* Native fixed-brand + immersive women rail: the photo/search stay sticky
+ * BELOW the real brand, not behind it. Keep the original first-paint seam. */
+html.dar-ios-native-app.dar-adult-global-brand-ready body.dar-ios-native-app.has-bottom-nav.is-area-route.is-frauen-route:has(> .app > #darAdultBrandHeaderSpacerV2) #appView .dar-immersive-hero-stage{
+ top:var(--dar-adult-header-obscured-top,var(--dar-adult-brand-header-height,80px))!important;
+}
