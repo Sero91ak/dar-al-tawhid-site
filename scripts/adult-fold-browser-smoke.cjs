@@ -39,6 +39,8 @@ html,body{margin:0;padding:0;width:100%}
 body>.app{width:100%;max-width:100%;margin:0;padding:0}
 #appView{width:100%;max-width:100%;margin:0;padding:0}
 .dar-fold__rail,.dar-fold__pane{box-sizing:border-box}
+.view.page-enter-forward{animation:pageEnterForward .36s both}
+@keyframes pageEnterForward{from{opacity:.9;transform:translate3d(9%,0,0)}to{opacity:1;transform:translate3d(0,0,0)}
 html[data-dar-visitor-frontstage="1"].stage-inset body.has-bottom-nav > .app{
  width:calc(100% - 64px)!important;max-width:calc(100% - 64px)!important;
  margin-left:32px!important;margin-right:32px!important;
