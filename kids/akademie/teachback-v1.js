@@ -16,9 +16,63 @@
   "aqidah-ikhlas":["Du hilfst einem Menschen, obwohl niemand zuschaut. Was ist dir dabei wichtig?","Welche Rolle spielt die Absicht bei guten Taten?"]
  };
  const AGES=["4-5","6-8","9-10"];
+ const SITUATIONS_BY_AGE=Object.freeze({
+ "sidq": [
+  "Ein Spielzeug geht kaputt. Was kannst du ehrlich sagen?",
+  "Ein Freund wird beschuldigt, aber du warst Zeuge. Wie prüfst und erklärst du die Wahrheit fair?"
+ ],
+ "akhlaq-sabr": [
+  "Du wartest auf ein Spiel. Was kannst du geduldig tun?",
+  "Was unterscheidet Geduld von dem Versuch, alle Gefühle zu verbergen? Wann ist Hilfe sinnvoll?"
+ ],
+ "akhlaq-amanah": [
+  "Du leihst ein Buch. Wie passt du darauf auf?",
+  "Ein Freund vertraut dir etwas an. Wann gehört Verantwortung auch dazu, bei Gefahr Hilfe zu holen?"
+ ],
+ "adab-salam": [
+  "Jemand grüßt dich mit Salām. Wie grüßt du zurück?",
+  "Wie kann man einen guten Gruß erwidern, ohne jemanden wegen einer unsicheren Aussprache bloßzustellen?"
+ ],
+ "adab-worte": [
+  "Dein Freund möchte etwas anderes spielen. Wie sprichst du freundlich?",
+  "Du siehst, dass jemand unfair behandelt wird. Wie sagst du mutig die Wahrheit, ohne zu beleidigen?"
+ ],
+ "adab-respekt": [
+  "Jemand fragt freundlich nach Hilfe. Was kannst du sagen?",
+  "Was bedeutet Respekt, wenn ein Erwachsener etwas fordert, womit du dich unsicher fühlst?"
+ ],
+ "fiqh-taharah": [
+  "Deine Hände sind schmutzig. Was kannst du machen?",
+  "Welche Unterschiede zwischen Alltagsreinigung und ritueller Reinheit sind im Unterricht tatsächlich erklärt?"
+ ],
+ "fiqh-wudu": [
+  "Du kennst einen Schritt von Wuḍūʾ nicht. Wen fragst du?",
+  "Warum ist ein kurzer Ausschnitt aus Qurʾān 5:6 nicht automatisch eine vollständige Waschungsanleitung?"
+ ],
+ "fiqh-salah": [
+  "Du möchtest beten lernen. Wer hilft dir dabei?",
+  "Wie verbindest du den Sinn der Ṣalāh mit dem überlieferten Vorbild ihrer Ausführung?"
+ ],
+ "aqidah-tawhid": [
+  "Du möchtest Duʿāʾ machen. An wen richtest du es?",
+  "Welche Aussage über Allahs Einheit steht im behandelten Vers, und was erläutert der Hadith zur Anbetung?"
+ ],
+ "aqidah-iman": [
+  "Jemand fragt, woran Muslime glauben. Was kannst du erzählen?",
+  "Warum ist Qurʾān 2:3 nicht dieselbe vollständige Aufzählung wie der Hadith über die sechs Glaubensgrundlagen?"
+ ],
+ "aqidah-ikhlas": [
+  "Du hilfst ohne Publikum. Warum ist deine Absicht wichtig?",
+  "Wenn eine Person Lob bekommt, warum kannst du ihre verborgene Absicht nicht sicher beurteilen?"
+ ]
+});
  function plan({lessonId,lesson,age}={}){
   const level=AGES.includes(age)?age:"6-8",entry=DATA[lessonId],topic=lesson?.topic||"dein Thema";
-  const scenario=entry?.[0]||"Erinnere dich an ein Beispiel zum Thema "+topic+". Was würdest du tun?";
+  const curated=entry?.[0];
+  const ageVariant=SITUATIONS_BY_AGE[lessonId];
+  const scenario=curated?(level==="4-5"?ageVariant?.[0]||curated:level==="9-10"?ageVariant?.[1]||curated:curated):
+   level==="4-5"?"Was hast du über "+topic+" gelernt?":level==="9-10"?"Wie kannst du "+topic+" mit einem Beispiel und den behandelten Quellen erklären?":
+   "Erinnere dich an ein Beispiel zum Thema "+topic+". Was würdest du tun und warum?";
   const question=entry?.[1]||"Wie würdest du "+topic+" einem Freund erklären?";
   return Object.freeze({level,scenario,question,
    quran:lesson?.quran?.label||(lessonId==="sidq"?"Qurʾān 9:119":""),
