@@ -412,3 +412,9 @@ html.dar-ios-native-app.dar-test-premium-header-v2 body.dar-ios-native-app.has-b
  padding-block-start:0!important;
  padding-top:0!important;
 }
+
+/* Native TEST sticky women photo/search must remain below fixed brand
+ * after vertical scrolling, never behind the header or underlaid on top. */
+html.dar-ios-native-app.dar-test-premium-header-v2 body.dar-ios-native-app.has-bottom-nav.is-area-route.is-frauen-route:has(> .app > #darTestBrandHeaderSpacerV1) #appView .dar-immersive-hero-stage{
+ top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px))!important;
+}
