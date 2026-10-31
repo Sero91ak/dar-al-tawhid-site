@@ -105,6 +105,9 @@ try {
   assert.ok(match,"Browser did not return CSS geometry");
   const result=JSON.parse(Buffer.from(match[1],"base64").toString("utf8"));
   assert.equal(result.error,undefined,"Browser DOM exception: "+result.error);
+  assert.equal(result.otherTransition,"pageEnterForward","Other routes must retain their page animation");
+  assert.equal(result.postsTransition.animation,"none","Beiträge transition must be disabled");
+  assert.equal(result.postsTransition.transform,"none","Beiträge view must not translate over the dark shell");
   assert.equal(result.compact.display,"block","Compact must be a single pane even with stale forceDual");
   assert.equal(result.compact.paneDisplay,"none","Inactive reader hidden in compact");
   assert.notEqual(result.compact.railDisplay,"none","Active Surah list visible in compact");
