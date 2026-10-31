@@ -107,6 +107,10 @@ assert.equal(w.DarTestTurkishUI.translateValue("Im Qurʾān öffnen · al-Baqara
 assert.equal(w.DarTestTurkishUI.translateValue("Der Prophet Muḥammad ﷺ über ihn · 3","ar"),locales.translations.ar["Der Prophet Muḥammad ﷺ über ihn"]+" · 3");
 assert.equal(w.DarTestTurkishUI.translateValue("Mūsā (Vorschau · nicht freigegeben)","en"),"Mūsā "+locales.translations.en["(Vorschau · nicht freigegeben)"]);
 assert.equal(w.DarTestTurkishUI.translateValue("Verstanden","fr"),"Compris");
+assert.equal(w.DarTestTurkishUI.translateValue("Serien","en"),"Series");
+assert.equal(w.DarTestTurkishUI.translateValue("Vorlauf","fr"),"Avance");
+assert.equal(w.DarTestTurkishUI.translateValue("Im Qurʾān genannt","ar"),"مذكور في القرآن");
+assert.equal(w.DarTestTurkishUI.translateValue("Qāriʾ wechseln","es"),"Cambiar recitador");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
