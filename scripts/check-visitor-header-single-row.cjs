@@ -46,7 +46,7 @@ assert(!visitorPicker.includes("language-classic-v7"), "Visitor must not add lan
 assert(testHeader.includes('button("Sprache auswählen","language")'), "Test language shortcut was changed");
 const pickerURL = "/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-single-hub-v10";
 const dashboardCSS = "/assets/dar-visitor-smart-profile-v1.css?v=20261030-my-dar-dashboard-v11";
-const dashboardJS = "/assets/dar-visitor-smart-profile-v1.js?v=20261030-neutral-icon-v12";
+const dashboardJS = "/assets/dar-visitor-smart-profile-v1.js?v=20261031-neutral-hooded-v14";
 for(const [name,file] of [["Visitor lazy-loader",visitorLoader],["PWA edge response",edgeRouter]]){
  assert(file.includes(pickerURL),name+" does not load approved profile-picker style");
  assert(file.includes(dashboardCSS),name+" does not load current dashboard style");

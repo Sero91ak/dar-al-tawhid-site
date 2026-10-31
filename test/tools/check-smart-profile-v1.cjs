@@ -50,7 +50,7 @@ assert.match(header,/approved-man-v1\.webp/,"Header must use the approved male i
 
 assert.match(script,/approved-neutral-faceless-v2\.webp/,"The new neutral 3D portrait must be wired in");
 assert.match(header,/approved-neutral-faceless-v2\.webp/,"Header must use the neutral 3D portrait");
-const neutral=fs.readFileSync(path.join(root,"test/assets/smart-profile/approved-neutral-faceless-v2.webp"));
+const neutral=fs.readFileSync(path.join(root,"test/assets/smart-profile/approved-neutral-hooded-20261031.webp"));
 assert.equal(neutral.toString("ascii",0,4),"RIFF","Neutral 3D portrait is a genuine WebP file");
 assert.equal(neutral.toString("ascii",8,12),"WEBP","Neutral 3D portrait must have the WebP format");
 assert.equal(neutral[20]&16,16,"Neutral portrait must preserve transparency");
@@ -117,7 +117,7 @@ vm.runInContext(script,ctx);
 const api=win.DAR_TEST_SMART_PROFILE_V1;
 assert.ok(api,"Runtime exposed to Test QA");
 assert.equal(api.get().gender,"neutral");
-assert.equal(api.image("neutral"),"/test/assets/smart-profile/approved-neutral-faceless-v2.webp");
+assert.equal(api.image("neutral"),"/test/assets/smart-profile/approved-neutral-hooded-20261031.webp");
 function click(name,value){
  const target={hasAttribute:(n)=>n===name,getAttribute:(n)=>n===name?value:null};
  listeners.click({target:{closest:(selector)=>selector.includes("["+name+"]")?target:null},preventDefault(){},stopPropagation(){}});

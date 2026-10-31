@@ -9027,6 +9027,28 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-14T23:59:00.000Z"
+    },
+    {
+      "id": "adult-global-user-original-neutral-avatar-v14-20261031",
+      "at": "2026-10-31T06:20:00+01:00",
+      "approvedBy": "user-explicit-github-push-global-live-neutral-image-20261031",
+      "reason": "Replace neutral adult profile icon with the verified same uploaded hooded portrait in visitor, iOS adult WebView, Android PWA and DĀR Test. New asset filenames and JS version cache bust; preserve female/male avatars, accounts/PIN, Kids, prayer/location, push and existing service-worker caches.",
+      "paths": [
+        "assets/dar-visitor-smart-profile-v1.js",
+        "test/assets/dar-smart-profile-v1.js",
+        "test/assets/dar-test-premium-header-v2.js",
+        "assets/dar-home-test-parity-visitor.js",
+        "test/assets/dar-home-html-parity-v1.js",
+        "cloudflare/site-router.js",
+        "cloudflare/test-app-worker.js",
+        "scripts/check-visitor-header-single-row.cjs",
+        "scripts/test-visitor-android-pwa-parity-v1.cjs",
+        "test/tools/check-smart-profile-v1.cjs",
+        "assets/smart-profile/approved-neutral-hooded-20261031.webp",
+        "test/assets/smart-profile/approved-neutral-hooded-20261031.webp",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-15T23:59:00.000Z"
     }
   ],
   "enabled": true

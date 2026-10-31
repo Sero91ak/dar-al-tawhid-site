@@ -536,7 +536,7 @@ async function finalizeDarTestHomeV1193(asset) {
   // <script id="darTestHomeHtmlParityV1"> from cached HTML before reinjecting.
   // A bare includes(id) skipped version upgrades, leaving the old visible UI.
   html = html.replace(/<script\b(?=[^>]*\bid=["']darTestHomeHtmlParityV1["'])[^>]*>\s*<\/script>\s*/gi, "");
-  const parityScript = '<script defer id="darTestHomeHtmlParityV1" src="/test/assets/dar-home-html-parity-v1.js?v=20261030-neutral-profile-v4"></script>';
+  const parityScript = '<script defer id="darTestHomeHtmlParityV1" src="/test/assets/dar-home-html-parity-v1.js?v=20261031-neutral-hooded-test-v14"></script>';
   html = html.includes("</body>") ? html.replace("</body>", parityScript + "\n</body>") : html + parityScript;
   // DAR_ADULT_TOP_SCROLL_BOUNDARY_V1: every adult Dar Test route uses
   // the real document scroll; clamp downward drags at the top without
@@ -558,7 +558,7 @@ async function finalizeDarTestHomeV1193(asset) {
   // account routes, language availability, prayer updater or spacer.
   const premiumHeaderAssets =
     '<link rel="stylesheet" id="darTestPremiumHeaderCssV2" href="/test/assets/dar-test-premium-header-v2.css?v=20261030-restore-original-hero-rail-v5">' +
-    '<script defer id="darTestPremiumHeaderJsV2" src="/test/assets/dar-test-premium-header-v2.js?v=20261030-neutral-profile-v4"><\/script>';
+    '<script defer id="darTestPremiumHeaderJsV2" src="/test/assets/dar-test-premium-header-v2.js?v=20261031-neutral-hooded-test-v14"><\/script>';
   if (!html.includes('id="darTestPremiumHeaderJsV2"')) {
     const at = html.lastIndexOf("</html>");
     html = at >= 0 ? html.slice(0, at) + premiumHeaderAssets + html.slice(at) : html + premiumHeaderAssets;
@@ -570,7 +570,7 @@ async function finalizeDarTestHomeV1193(asset) {
   const myDarAssetsV12 = [
     '<link rel="stylesheet" id="darTestSmartProfileCssV12" href="/test/assets/dar-smart-profile-v1.css?v=20261030-mein-dar-v12">',
     '<link rel="stylesheet" id="darTestMyDarCssV12" href="/assets/dar-visitor-smart-profile-v1.css?v=20261030-mein-dar-v12">',
-    '<script defer id="darTestSmartProfileJsV12" src="/test/assets/dar-smart-profile-v1.js?v=20261030-neutral-profile-v13"></' + 'script>'
+    '<script defer id="darTestSmartProfileJsV12" src="/test/assets/dar-smart-profile-v1.js?v=20261031-neutral-hooded-test-v14"></' + 'script>'
   ].join("\n");
   const myDarInsert = html.lastIndexOf("</html>");
   html = myDarInsert >= 0 ? html.slice(0,myDarInsert) + myDarAssetsV12 + html.slice(myDarInsert) : html + myDarAssetsV12;

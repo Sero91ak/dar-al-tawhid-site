@@ -31,7 +31,7 @@ function chooseTheme(value){if(value==="keep")return false;
  return false
 }
 function themePick(v){if(!availableThemes().includes(v))return;var p=read();p.palette=v;write(p);if(v!=="keep")chooseTheme(v)}
-function image(g){return g==="woman"?"/test/assets/smart-profile/approved-woman-v1.webp":g==="man"?"/test/assets/smart-profile/approved-man-v1.webp":"/test/assets/smart-profile/approved-neutral-faceless-v2.webp"}
+function image(g){return g==="woman"?"/test/assets/smart-profile/approved-woman-v1.webp":g==="man"?"/test/assets/smart-profile/approved-man-v1.webp":"/test/assets/smart-profile/approved-neutral-hooded-20261031.webp"}
 function display(g){return g==="woman"?"Mein Frauenbereich":g==="man"?"Mein Männerbereich":"Mein DĀR"}
 function label(g){return g==="woman"?"Frau":g==="man"?"Mann":"Neutral"}
 function hashText(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}

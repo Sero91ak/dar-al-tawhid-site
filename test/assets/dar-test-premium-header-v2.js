@@ -9,7 +9,7 @@ var HEADER_ID="darTestBrandHeaderV1";
 var LOGO="/app-logo-original.png";
 var ICONS={
  language:"/test/assets/header-icons/language-classic-v7.png",
- account:"/test/assets/smart-profile/approved-neutral-faceless-v2.webp",
+ account:"/test/assets/smart-profile/approved-neutral-hooded-20261031.webp",
  palette:"/test/assets/header-icons/appearance-classic-v7.png"
 };
 function icon(kind){
@@ -53,7 +53,7 @@ function chooserMarkup(){
  var smart=window.DAR_TEST_SMART_PROFILE_V1;
  var current=smart&&typeof smart.get==="function"?smart.get().gender:"neutral";
  var items=[["neutral","Neutral","Alle Inhalte"],["woman","Frau","Frauenwissen"],["man","Mann","Wissensweg"]];
- return '<div class="dtbh-profile-head"><strong>Mein Profil</strong><small>Deinen Wissensbereich wählen</small></div><div class="dtbh-profile-options">'+items.map(function(item){return '<button type="button" class="dtbh-profile-choice'+(current===item[0]?" is-active":"")+'" data-dtbh-profile="'+item[0]+'" aria-pressed="'+String(current===item[0])+'"><img src="'+(smart&&typeof smart.image==="function"?smart.image(item[0]):item[0]==="woman"?"/test/assets/smart-profile/approved-woman-v1.webp":item[0]==="man"?"/test/assets/smart-profile/approved-man-v1.webp":"/test/assets/smart-profile/approved-neutral-faceless-v2.webp")+'" alt="" aria-hidden="true" width="43" height="49" loading="eager" decoding="async"><span><strong>'+item[1]+'</strong><small>'+item[2]+'</small></span></button>'}).join("")+'</div><button type="button" class="dtbh-profile-account" data-dtbh-open-account>Mein Profil & Konto öffnen</button>';
+ return '<div class="dtbh-profile-head"><strong>Mein Profil</strong><small>Deinen Wissensbereich wählen</small></div><div class="dtbh-profile-options">'+items.map(function(item){return '<button type="button" class="dtbh-profile-choice'+(current===item[0]?" is-active":"")+'" data-dtbh-profile="'+item[0]+'" aria-pressed="'+String(current===item[0])+'"><img src="'+(smart&&typeof smart.image==="function"?smart.image(item[0]):item[0]==="woman"?"/test/assets/smart-profile/approved-woman-v1.webp":item[0]==="man"?"/test/assets/smart-profile/approved-man-v1.webp":"/test/assets/smart-profile/approved-neutral-hooded-20261031.webp")+'" alt="" aria-hidden="true" width="43" height="49" loading="eager" decoding="async"><span><strong>'+item[1]+'</strong><small>'+item[2]+'</small></span></button>'}).join("")+'</div><button type="button" class="dtbh-profile-account" data-dtbh-open-account>Mein Profil & Konto öffnen</button>';
 }
 function setupChooser(h,account){
  var pop=document.createElement("div");
