@@ -4,8 +4,8 @@ Diese Branch vorbereitet eine sichere Weiterleitung von ChatGPT an den vorhanden
 
 - Nur der Erwachsenen-Besucherfeed: iOS (nativ und Web), Android-PWA, Webseite/Desktop.
 - Kids, Apple TV und Dar Test sind ausdrücklich ausgeschlossen.
-- **DĀR-Admin-Push / „Push live“ = nur Inhaltsveröffentlichung bzw. Aktualisierung in der Besucher-App/Website.** Keine OneSignal-Gerätebenachrichtigung durch dieses Kommando.
-- Quellen- und Indexregeln bleiben verbindlich. Gerätebenachrichtigungen sind ein strikt getrennter Vorgang und benötigen einen **separaten eindeutigen Versandauftrag** mit freigegebenem Text und Empfängergruppe.
+- **DĀR-Admin-Push / „Push live“ für einen ausdrücklich freigegebenen neuen Erwachsenen-Beitrag = Inhaltsveröffentlichung plus einmalige OneSignal-Gerätebenachrichtigung an das bestehende opt-in Segment `DAR_PUSH` nach erfolgreicher Live-Prüfung.** Die beiden Operationen sind getrennt zu protokollieren; ein GitHub-Merge allein ist kein bestätigter OneSignal-Versand.
+- Quellen- und Indexregeln bleiben verbindlich. OneSignal darf nur nach überprüfbarer Live-Erreichbarkeit, Dubletten-/Idempotenzprüfung, identifizierter Empfängergruppe und eigenem OneSignal-Send-Resultat als gesendet gemeldet werden. Die bestehende `scripts/chat-admin-publish.js`-Bridge erstellt nur Inhalte; die tatsächliche Benachrichtigung muss die vorhandene getrennte freigegebene Beitrags-Push-Schnittstelle ausführen. KIDS/andere Push-Spuren bleiben unberührt.
 - Keine Zugangsdaten in GitHub-Dateien speichern.
 
 ## Verbindlicher Veröffentlichungsinhalt
