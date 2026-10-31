@@ -106,8 +106,7 @@ function localizedQuiz(pack,code){
  var kicker=document.querySelector(".kicker");if(kicker)kicker.textContent=ui.title+" · 4";
  document.title=ui.title+" | Q49 · DĀR AL TAWḤĪD";
  var header=document.querySelector("main header");
- if(header){addChoiceControl(header,pack,code);var source=node("p","q49-return");
- action(source,ui.sources,link("/q/49/",code));header.appendChild(source)}
+ if(header)addChoiceControl(header,pack,code);
  function render(){
  answered=false;var q=pack.questions[index];el("count").textContent=ui.question+" "+(index+1)+" "+ui.of+" "+pack.questions.length;
  el("score").textContent=points+" "+ui.correct;el("question").textContent=q.question;
