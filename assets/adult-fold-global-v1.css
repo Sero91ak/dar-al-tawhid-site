@@ -148,3 +148,20 @@ html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[
 }
 html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"][data-fold-force="single"][data-fold-single-show="rail"] > .dar-fold__pane,
 html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"][data-fold-force="single"][data-fold-single-show="pane"] > .dar-fold__rail{display:none!important}
+
+/* DAR_POSTS_ROUTE_NO_BLACK_SWIPE_V1_20261101
+ * The five-tab "Beiträge" button opens #topics (NOT the legacy feed).
+ * The old page-enter transforms the entire #appView by 9%, exposing the
+ * underlying near-black app shell for a moment. Keep the entire topics page
+ * painted in-place; do not alter other routes or the bottom-nav animation. */
+html[data-layout] body.is-topics-route #appView.view:is(
+ .page-enter-forward,.page-enter-back,.tab-swipe-left,.tab-swipe-right
+){
+ animation:none!important;
+ -webkit-animation:none!important;
+ transform:none!important;
+ -webkit-transform:none!important;
+ transition:none!important;
+ will-change:auto!important;
+ opacity:1!important;
+}
