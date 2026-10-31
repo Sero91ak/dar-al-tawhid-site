@@ -29,6 +29,9 @@ function addPost(parent,p,compact){var a=e("a","dar-recent-post");a.href=openLin
 function section(parent,kicker,title){var h=e("div","dar-recent-header");h.appendChild(e("span","dar-recent-kicker",kicker));h.appendChild(e("h2","dar-recent-heading",title));parent.appendChild(h)}
 function render(){var mount=d.getElementById("darRecentPublicationsV1"),h=host();if(!h){if(mount)mount.hidden=true;return}if(!mount){mount=e("section","dar-recent-publications");mount.id="darRecentPublicationsV1";mount.setAttribute("aria-label",t(1));if(h.anchor&&h.anchor.parentNode)h.anchor.parentNode.insertBefore(mount,h.anchor);else h.root.appendChild(mount)}else if(!mount.isConnected||!h.root.contains(mount)){if(h.anchor&&h.anchor.parentNode)h.anchor.parentNode.insertBefore(mount,h.anchor);else h.root.appendChild(mount)}
  mount.hidden=false;mount.setAttribute("aria-label",t(1));mount.replaceChildren();
+ // Supersede the old limited four-post teaser only after the full dataset loads.
+ var oldList=d.getElementById("dhpPosts");var oldBlock=oldList&&oldList.closest(".dhp-section");
+ if(oldBlock)oldBlock.classList.toggle("dar-recent-legacy-hidden",state.posts.length>0);
  section(mount,t(0),t(1));
  var items=recent(state.posts,state.days),last=recent(state.posts,5)[0],headline=e("div","dar-recent-highlight");
  if(last){addPost(headline,last,true)}else headline.appendChild(e("p","dar-recent-empty",t(6)));
