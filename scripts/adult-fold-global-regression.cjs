@@ -1,0 +1,99 @@
+#!/usr/bin/env node
+"use strict";
+/* Adult/Fold/Duo regression: capacity is owned by adaptive-layout.js.
+ * No hardware or UI screenshots are simulated by this guard. */
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
+const vm = require("node:vm");
+
+const base = path.resolve(__dirname, "..");
+const read = name => fs.readFileSync(path.join(base, name), "utf8");
+const adaptive = read("assets/adaptive-layout.js");
+const foldJS = read("assets/fold-split.js");
+const foldCSS = read("assets/fold-split.css");
+const frontCSS = read("assets/dar-visitor-frontstage-v1.css");
+const globalCSS = read("assets/adult-fold-global-v1.css");
+new vm.Script(adaptive);
+new vm.Script(foldJS);
+
+assert.match(foldCSS, /DAR_FOLD_CAPACITY_AUTHORITY_V1340_20261031/);
+assert.match(foldCSS, /html\[data-fold-capacity="single"\]\[data-layout-surface\] body \.dar-fold/);
+assert.match(foldCSS, /html\[data-fold-capacity="dual"\]\[data-layout-surface="workspace"\] body \.dar-fold/);
+assert.match(frontCSS, /html\[data-dar-visitor-frontstage="1"\]\[data-fold-capacity="single"\] body\.has-bottom-nav \.dar-fold/);
+assert.doesNotMatch(frontCSS, /html\[data-dar-visitor-frontstage="1"\] body\.has-bottom-nav \.dar-fold/);
+assert.match(globalCSS, /data-fold-capacity="dual"/);
+
+const attrs = Object.create(null);
+const classNames = new Set();
+const viewport = { width: 390, height: 844, offsetTop: 0, scale: 1,
+  addEventListener() {} };
+const root = {
+  clientWidth: 390, clientHeight: 844,
+  classList: {
+    contains(name) { return classNames.has(name); },
+    add(name) { classNames.add(name); },
+    remove(name) { classNames.delete(name); },
+    toggle(name, on) { if (on) classNames.add(name); else classNames.delete(name); }
+  },
+  style: { setProperty() {} },
+  getAttribute(name) { return attrs[name] || null; },
+  setAttribute(name, value) { attrs[name] = String(value); }
+};
+const document = {
+  readyState: "loading", documentElement: root,
+  body: { classList: { contains() { return false; } } },
+  addEventListener() {}, getElementById() { return null; },
+  querySelectorAll() { return []; }
+};
+const window = {
+  innerWidth: 390, innerHeight: 844,
+  visualViewport: viewport,
+  localStorage: { getItem() { return "bottom"; } },
+  requestAnimationFrame(cb) { cb(); return 1; },
+  addEventListener() {}, dispatchEvent() {}
+};
+vm.runInNewContext(adaptive, {
+  window, document,
+  CustomEvent: class { constructor(type, opts) { this.type = type; this.detail = opts.detail; } },
+  setTimeout() { return 1; }, clearTimeout() {}
+}, { filename: "adaptive-layout.js" });
+vm.runInNewContext(foldJS, {
+  window, document,
+  setTimeout() { return 1; }
+}, { filename: "fold-split.js" });
+const layout = window.DarAdaptiveLayout;
+const fold = window.DarFold;
+function resize(width, height, expectedDual, expectedMode) {
+  root.clientWidth = window.innerWidth = width;
+  root.clientHeight = window.innerHeight = height;
+  viewport.width = width; viewport.height = height; viewport.scale = 1;
+  layout.apply();
+  assert.equal(attrs["data-fold-capacity"], expectedDual ? "dual" : "single",
+    "Capacity " + width + "x" + height);
+  assert.equal(attrs["data-fold-dual"], expectedDual ? "1" : "0",
+    "Fold flag " + width + "x" + height);
+  assert.equal(attrs["data-layout"], expectedMode, "Mode " + width + "x" + height);
+  assert.equal(fold.isDual(), expectedDual, "Controllers agree " + width + "x" + height);
+}
+resize(390, 844, false, "compact");         // iPhone / Fold closed
+resize(896, 414, false, "medium");          // ordinary landscape phone
+resize(834, 1194, false, "medium");         // portrait tablet, insufficient width
+resize(1024, 768, true, "expanded");        // tablet landscape / Fold open
+resize(1024, 1366, true, "expanded");       // wide tablet portrait
+resize(900, 520, false, "medium");          // short window, no two columns
+resize(940, 700, true, "expanded");         // real 2-pane capacity
+
+viewport.width = 610; viewport.height = 420; viewport.scale = 1;
+layout.apply();
+assert.equal(attrs["data-fold-dual"], "1",
+  "On-screen keyboard must not collapse a viable 940px master/detail window");
+assert.equal(classNames.has("adaptive-keyboard-open"), true,
+  "Keyboard state still uses the visual viewport");
+viewport.width = 620; viewport.height = 450; viewport.scale = 1.4;
+layout.apply();
+assert.equal(attrs["data-fold-dual"], "1", "Pinch zoom cannot collapse layout capacity");
+
+resize(390, 844, false, "compact");
+assert.equal(attrs["data-layout-surface"], "single");
+console.log("OK: adult Fold/Duo measured capacity and keyboard/zoom stability");
