@@ -170,6 +170,15 @@ assert.equal(w.DarTestTurkishUI.translateValue("Aktuell: Folge 3 / 12","es"),"Ah
 assert.equal(w.DarTestTurkishUI.translateValue("Noch: 2 Tage","fr"),"Encore : 2 jours");
 assert.equal(w.DarTestTurkishUI.translateValue("Laden fehlgeschlagen","ckb"),"بارکردن سەرنەکەوت");
 assert.equal(w.DarTestTurkishUI.translateValue("Nächster Wechsel: Freitag 7. November","en"),"Next change: Friday 7. November");
+assert.equal(w.DarTestTurkishUI.translateValue("Aussprachehilfe","en"),"Pronunciation aid");
+assert.equal(w.DarTestTurkishUI.translateValue("Lehrer","fr"),"Enseignant");
+assert.equal(w.DarTestTurkishUI.translateValue("1. Muḥarram 1447","ar"),"1. محرم 1447");
+assert.equal(w.DarTestTurkishUI.translateValue("Tag 5 · Ramaḍān 1447","es"),"Día 5 · Ramaḍān 1447");
+assert.equal(w.DarTestTurkishUI.translateValue("8. Tag · Hajj-Saison","tr"),"8. gün · Hac mevsimi");
+assert.equal(w.DarTestTurkishUI.translateValue("Angemeldet als Sara. Neue gespeicherte Beiträge werden automatisch synchronisiert.","en"),"Signed in as Sara. Newly saved articles are synced automatically.");
+assert.equal(w.DarTestTurkishUI.translateValue("3 passende Beiträge öffnen","ckb"),"3 بابەتی گونجاو بکەرەوە");
+assert.equal(w.DarTestTurkishUI.translateValue("Sure 2 wird geladen…","fr"),"La sourate 2 se charge…");
+assert.equal(w.DarTestTurkishUI.translateValue("Live-Statistik","es"),"Estadísticas en vivo");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);

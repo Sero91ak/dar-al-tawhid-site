@@ -390,6 +390,21 @@ function isDynamicGermanUi(value){
   /^Serienende: .+$/.test(value)||
   /^Noch: \d+ Tage$/.test(value)||
   /^Noch 7 Tage bis zum Ende der aktuell vorbereiteten Serie\. \d+ \/ \d+ Folgen vorbereitet\. Neue Freitagsimpulse vorbereiten\.$/.test(value)||
+  /^\d+\. (?:Muḥarram|Ṣafar|Rabīʿ al-Awwal|Rabīʿ ath-Thānī|Jumādā al-Ūlā|Jumādā ath-Thāniyah|Rajab|Shaʿbān|Ramaḍān|Shawwāl|Dhū al-Qaʿdah|Dhū al-Ḥijjah) \d{3,4}$/.test(value)||
+  /^\d+\. (?:Muḥarram|Ṣafar|Rabīʿ al-Awwal|Rabīʿ ath-Thānī|Jumādā al-Ūlā|Jumādā ath-Thāniyah|Rajab|Shaʿbān|Ramaḍān|Shawwāl|Dhū al-Qaʿdah|Dhū al-Ḥijjah) \d{3,4} · .+$/.test(value)||
+  /^Tag \d+ · (?:Muḥarram|Ṣafar|Rabīʿ al-Awwal|Rabīʿ ath-Thānī|Jumādā al-Ūlā|Jumādā ath-Thāniyah|Rajab|Shaʿbān|Ramaḍān|Shawwāl|Dhū al-Qaʿdah|Dhū al-Ḥijjah) \d{3,4}$/.test(value)||
+  /^\d+\. Tag · Hajj-Saison$/.test(value)||
+  /^Angemeldet als .+\. Neue gespeicherte Beiträge werden automatisch synchronisiert\.$/.test(value)||
+  /^\d+ Zeilen? · Speichern übernimmt den Text direkt in die Vorschau\.$/.test(value)||
+  /^\d+ passende Beiträge öffnen$/.test(value)||
+  /^\d+ Beiträge in dieser Serie\.$/.test(value)||
+  /^Cloud-Sync nicht bereit \(.+\)\. Bitte später erneut testen\.$/.test(value)||
+  /^\d+ für Wiederholung bereit$/.test(value)||
+  /^\d+ neue Beiträge verfügbar · Aktualisieren$/.test(value)||
+  /^Sure \d+ wird geladen…$/.test(value)||
+  /^Wenig freier Speicher: .+ verfügbar\. Vorbereitung läuft trotzdem\.$/.test(value)||
+  /^Gebetszeiten öffnen\. Aktuell .+, nächstes Gebet .+ um .+\.$/.test(value)||
+  /^Push-Erinnerungen öffnen\. .+\.$/.test(value)||
   /^\d+ Beitrag$/.test(value)||
   /^Zuletzt synchronisiert: .+$/.test(value)||
   /^Zuletzt: .+$/.test(value)||
@@ -718,6 +733,220 @@ function translateSharedPatterns(value,language){
    es:"Quedan 7 días hasta el fin de la serie preparada ahora. Hay "+weekWarn[1]+" / "+weekWarn[2]+" episodios listos. Prepara nuevos recordatorios del viernes."
   }[language];
   if(line)return line;
+ }
+ const hijriMonth="Muḥarram|Ṣafar|Rabīʿ al-Awwal|Rabīʿ ath-Thānī|Jumādā al-Ūlā|Jumādā ath-Thāniyah|Rajab|Shaʿbān|Ramaḍān|Shawwāl|Dhū al-Qaʿdah|Dhū al-Ḥijjah";
+ const hijriDated=value.match(new RegExp("^(\\\d+)\\\. ("+hijriMonth+") (\\\d{3,4}) · (.+)$"));
+ if(hijriDated){
+  const month=lookupPack(hijriDated[2],language)||hijriDated[2];
+  const greg=localizeGermanCalendarLabel(hijriDated[4],language)||hijriDated[4];
+  return hijriDated[1]+". "+month+" "+hijriDated[3]+" · "+greg;
+ }
+ const hijriOnly=value.match(new RegExp("^(\\\d+)\\\. ("+hijriMonth+") (\\\d{3,4})$"));
+ if(hijriOnly){
+  const month=lookupPack(hijriOnly[2],language)||hijriOnly[2];
+  return hijriOnly[1]+". "+month+" "+hijriOnly[3];
+ }
+ const hijriTag=value.match(new RegExp("^Tag (\\\d+) · ("+hijriMonth+") (\\\d{3,4})$"));
+ if(hijriTag){
+  const month=lookupPack(hijriTag[2],language)||hijriTag[2];
+  const n=hijriTag[1];
+  const forms={
+   ar:"اليوم "+n+" · "+month+" "+hijriTag[3],
+   en:"Day "+n+" · "+month+" "+hijriTag[3],
+   tr:n+". gün · "+month+" "+hijriTag[3],
+   ku:"Roja "+n+" · "+month+" "+hijriTag[3],
+   ckb:"ڕۆژی "+n+" · "+month+" "+hijriTag[3],
+   bs:"Dan "+n+" · "+month+" "+hijriTag[3],
+   fr:"Jour "+n+" · "+month+" "+hijriTag[3],
+   es:"Día "+n+" · "+month+" "+hijriTag[3]
+  };
+  return forms[language]||null;
+ }
+ const hajjDay=value.match(/^(\d+)\. Tag · Hajj-Saison$/);
+ if(hajjDay){
+  const season=lookupPack("Hajj-Saison",language)||"Hajj-Saison";
+  const n=hajjDay[1];
+  const forms={
+   ar:"اليوم "+n+" · "+season,
+   en:"Day "+n+" · "+season,
+   tr:n+". gün · "+season,
+   ku:"Roja "+n+" · "+season,
+   ckb:"ڕۆژی "+n+" · "+season,
+   bs:"Dan "+n+" · "+season,
+   fr:"Jour "+n+" · "+season,
+   es:"Día "+n+" · "+season
+  };
+  return forms[language]||null;
+ }
+ const signedSaved=value.match(/^Angemeldet als (.+)\. Neue gespeicherte Beiträge werden automatisch synchronisiert\.$/);
+ if(signedSaved){
+  const name=signedSaved[1];
+  const forms={
+   ar:"تم تسجيل الدخول باسم "+name+". تُزامن المقالات المحفوظة الجديدة تلقائياً.",
+   en:"Signed in as "+name+". Newly saved articles are synced automatically.",
+   tr:name+" olarak giriş yapıldı. Yeni kaydedilen yazılar otomatik eşitlenir.",
+   ku:"Wekî "+name+" têketî ye. Nivîsên nû yên tomarkirî bixweber tên hevdengkirin.",
+   ckb:"چوویتە ژوورەوە وەک "+name+". بابەتە هەڵگیراوە نوێیەکان خۆکارانە هاوکات دەکرێن.",
+   bs:"Prijavljen kao "+name+". Novi sačuvani tekstovi se automatski usklađuju.",
+   fr:"Connecté en tant que "+name+". Les nouveaux articles enregistrés sont synchronisés automatiquement.",
+   es:"Sesión iniciada como "+name+". Los artículos guardados nuevos se sincronizan solos."
+  };
+  return forms[language]||null;
+ }
+ const editorLines=value.match(/^(\d+) Zeilen? · Speichern übernimmt den Text direkt in die Vorschau\.$/);
+ if(editorLines){
+  const n=editorLines[1];
+  const forms={
+   ar:n+" سطر · الحفظ ينقل النص مباشرة إلى المعاينة.",
+   en:n+" "+(n==="1"?"line":"lines")+" · Save applies the text directly in the preview.",
+   tr:n+" satır · Kaydet metni doğrudan önizlemeye alır.",
+   ku:n+" rêzik · Tomarkirin nivîsê rasterast di pêşdîtina de digire.",
+   ckb:n+" دێڕ · پاشەکەوتکردن دەقەکە ڕاستەوخۆ دەخاتە پێشبینین.",
+   bs:n+" "+(n==="1"?"red":"reda")+" · Spremanje preuzima tekst izravno u pregled.",
+   fr:n+" "+(n==="1"?"ligne":"lignes")+" · Enregistrer reprend le texte directement dans l’aperçu.",
+   es:n+" "+(n==="1"?"línea":"líneas")+" · Guardar aplica el texto directamente en la vista previa."
+  };
+  return forms[language]||null;
+ }
+ const matchingPosts=value.match(/^(\d+) passende Beiträge öffnen$/);
+ if(matchingPosts){
+  const n=matchingPosts[1];
+  const forms={
+   ar:"افتح "+n+" مقالات مناسبة",
+   en:"Open "+n+" matching articles",
+   tr:n+" uygun yazıyı aç",
+   ku:n+" nivîsên guncaw veke",
+   ckb:n+" بابەتی گونجاو بکەرەوە",
+   bs:"Otvori "+n+" odgovarajućih tekstova",
+   fr:"Ouvrir "+n+" articles correspondants",
+   es:"Abrir "+n+" artículos coincidentes"
+  };
+  return forms[language]||null;
+ }
+ const seriesCount=value.match(/^(\d+) Beiträge in dieser Serie\.$/);
+ if(seriesCount){
+  const n=seriesCount[1];
+  const forms={
+   ar:n+" مقالات في هذه السلسلة.",
+   en:n+" articles in this series.",
+   tr:"Bu dizide "+n+" yazı.",
+   ku:n+" nivîs di vê rêzê de.",
+   ckb:n+" بابەت لەم زنجیرەیەدا.",
+   bs:n+" tekstova u ovoj seriji.",
+   fr:n+" articles dans cette série.",
+   es:n+" artículos en esta serie."
+  };
+  return forms[language]||null;
+ }
+ const cloudWait=value.match(/^Cloud-Sync nicht bereit \((.+)\)\. Bitte später erneut testen\.$/);
+ if(cloudWait){
+  const status=cloudWait[1];
+  const forms={
+   ar:"مزامنة السحابة غير جاهزة ("+status+"). يُرجى المحاولة لاحقاً.",
+   en:"Cloud sync is not ready ("+status+"). Please try again later.",
+   tr:"Bulut eşitlemesi hazır değil ("+status+"). Lütfen daha sonra yeniden dene.",
+   ku:"Hevdengkirina ewr ne amade ye ("+status+"). Ji kerema xwe paşê dîsa biceribîne.",
+   ckb:"هاوکاتکردنی هەور ئامادە نییە ("+status+"). تکایە دواتر دووبارە تاقی بکەرەوە.",
+   bs:"Sinkronizacija u oblaku nije spremna ("+status+"). Pokušaj kasnije ponovo.",
+   fr:"La synchronisation cloud n’est pas prête ("+status+"). Réessaie plus tard.",
+   es:"La sincronización en la nube no está lista ("+status+"). Prueba de nuevo más tarde."
+  };
+  return forms[language]||null;
+ }
+ const repeatReady=value.match(/^(\d+) für Wiederholung bereit$/);
+ if(repeatReady){
+  const n=repeatReady[1];
+  const forms={
+   ar:n+" جاهزة للإعادة",
+   en:n+" ready to review",
+   tr:n+" tekrar için hazır",
+   ku:n+" ji bo dubarekirinê amade ne",
+   ckb:n+" ئامادەیە بۆ دووبارەکردنەوە",
+   bs:n+" spremno za ponavljanje",
+   fr:n+" prêt à répéter",
+   es:n+" listo para repetir"
+  };
+  return forms[language]||null;
+ }
+ const freshPosts=value.match(/^(\d+) neue Beiträge verfügbar · Aktualisieren$/);
+ if(freshPosts){
+  const n=freshPosts[1];
+  const refresh=lookupPack("Aktualisieren",language)||"Aktualisieren";
+  const forms={
+   ar:n+" مقالات جديدة متاحة · "+refresh,
+   en:n+" new articles available · "+refresh,
+   tr:n+" yeni yazı hazır · "+refresh,
+   ku:n+" nivîsên nû amade ne · "+refresh,
+   ckb:n+" بابەتی نوێ ئامادەیە · "+refresh,
+   bs:n+" novih tekstova dostupno · "+refresh,
+   fr:n+" nouveaux articles disponibles · "+refresh,
+   es:n+" artículos nuevos disponibles · "+refresh
+  };
+  return forms[language]||null;
+ }
+ const surahLoad=value.match(/^Sure (\d+) wird geladen…$/);
+ if(surahLoad){
+  const n=surahLoad[1];
+  const forms={
+   ar:"تُحمَّل السورة "+n+"…",
+   en:"Surah "+n+" is loading…",
+   tr:n+". sure yükleniyor…",
+   ku:"Sûreya "+n+" tê barkirin…",
+   ckb:"سوورەی "+n+" باردەکرێت…",
+   bs:"Sura "+n+" se učitava…",
+   fr:"La sourate "+n+" se charge…",
+   es:"La sura "+n+" se está cargando…"
+  };
+  return forms[language]||null;
+ }
+ const lowStorage=value.match(/^Wenig freier Speicher: (.+) verfügbar\. Vorbereitung läuft trotzdem\.$/);
+ if(lowStorage){
+  const free=lowStorage[1];
+  const forms={
+   ar:"مساحة حرة قليلة: "+free+" متاحة. التحضير يستمر رغم ذلك.",
+   en:"Little free storage: "+free+" available. Preparation continues anyway.",
+   tr:"Az boş alan: "+free+" kullanılabilir. Hazırlık yine de sürüyor.",
+   ku:"Cihê vala kêm e: "+free+" berdest e. Amadekirin dîsa didome.",
+   ckb:"شوێنی بەتاڵ کەمە: "+free+" بەردەستە. ئامادەکردن هەر بەردەوامە.",
+   bs:"Malo slobodnog prostora: "+free+" dostupno. Priprema ipak traje.",
+   fr:"Peu d’espace libre : "+free+" disponible. La préparation continue quand même.",
+   es:"Poco espacio libre: "+free+" disponible. La preparación sigue de todos modos."
+  };
+  return forms[language]||null;
+ }
+ const prayerAria=value.match(/^Gebetszeiten öffnen\. Aktuell (.+), nächstes Gebet (.+) um (.+)\.$/);
+ if(prayerAria){
+  const open=lookupPack("Gebetszeiten öffnen",language)||"Gebetszeiten öffnen";
+  const nowName=lookupPack(prayerAria[1],language)||prayerAria[1];
+  const nextName=lookupPack(prayerAria[2],language)||prayerAria[2];
+  const clock=prayerAria[3];
+  const forms={
+   ar:open+". الآن "+nowName+"، الصلاة التالية "+nextName+" عند "+clock+".",
+   en:open+". Now "+nowName+", next prayer "+nextName+" at "+clock+".",
+   tr:open+". Şu an "+nowName+", sonraki namaz "+nextName+" saat "+clock+".",
+   ku:open+". Niha "+nowName+", nimêja pêş "+nextName+" di "+clock+" de.",
+   ckb:open+". ئێستا "+nowName+"، نوێژی داهاتوو "+nextName+" لە "+clock+".",
+   bs:open+". Sada "+nowName+", sljedeći namaz "+nextName+" u "+clock+".",
+   fr:open+". Maintenant "+nowName+", prière suivante "+nextName+" à "+clock+".",
+   es:open+". Ahora "+nowName+", oración siguiente "+nextName+" a las "+clock+"."
+  };
+  return forms[language]||null;
+ }
+ const pushAria=value.match(/^Push-Erinnerungen öffnen\. (.+)\.$/);
+ if(pushAria){
+  const parts=pushAria[1].split(", ").map(part=>lookupPack(part,language)||part);
+  const body=parts.join(", ");
+  const forms={
+   ar:"افتح تذكيرات Push. "+body+".",
+   en:"Open Push reminders. "+body+".",
+   tr:"Push hatırlatmalarını aç. "+body+".",
+   ku:"Bîranînên Push veke. "+body+".",
+   ckb:"بیرخستنەوەکانی Push بکەرەوە. "+body+".",
+   bs:"Otvori Push podsjetnike. "+body+".",
+   fr:"Ouvrir les rappels Push. "+body+".",
+   es:"Abrir los recordatorios Push. "+body+"."
+  };
+  return forms[language]||null;
  }
  const surahs=value.match(/^(\d+)\s+Sūren\s*·\s*(\d+)\s+Āyāt$/);
  if(surahs){
@@ -1806,7 +2035,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-37";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-38";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
