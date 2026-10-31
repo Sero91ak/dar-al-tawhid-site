@@ -360,6 +360,12 @@ function isDynamicGermanUi(value){
   /^Im Qurʾān öffnen · .+$/.test(value)||
   /^.+ \(Vorschau · nicht freigegeben\)$/.test(value)||
   /^Der Prophet Muḥammad ﷺ über ihn · \d+$/.test(value)||
+  /^\d+ Suren$/.test(value)||
+  /^\d+\s+Ayāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
+  /^Übersetzung: .+$/.test(value)||
+  /^Aktuell · zuletzt synchronisiert um .+$/.test(value)||
+  /^Offline · Stand vom .+$/.test(value)||
+  /^Fast fertig · \d+\/\d+ Dateien · Download fortsetzen$/.test(value)||
   /^\d+\s+(Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt|Funktionen|Ergebnisse)$/.test(value)||
   /^\d+\s+Āyāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
   /^\d+\s*·\s*\d+\s+Ayāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
@@ -533,6 +539,65 @@ function translateSharedPatterns(value,language){
  if(juz){
   const word=uiWord(language,"Juzʾ");
   if(word)return word+" "+juz[1];
+ }
+ const surenCount=value.match(/^(\d+) Suren$/);
+ if(surenCount){
+  const word=uiWord(language,"Sūren");
+  if(word)return surenCount[1]+" "+word;
+ }
+ const ayahKind=value.match(/^(\d+)\s+Ayāt\s*·\s*(Mekkanisch|Medinensisch)$/);
+ if(ayahKind){
+  const a=uiWord(language,"Ayāt"),b=uiWord(language,ayahKind[2]);
+  if(a&&b)return ayahKind[1]+" "+a+" · "+b;
+ }
+ const translationCredit=value.match(/^Übersetzung: (.+)$/);
+ if(translationCredit){
+  const head=lookupPack("Übersetzung",language);
+  if(head)return head+": "+translationCredit[1];
+ }
+ const syncedAt=value.match(/^Aktuell · zuletzt synchronisiert um (.+)$/);
+ if(syncedAt){
+  const forms={
+   ar:"الحالي · آخر مزامنة في ",
+   en:"Current · last synced at ",
+   tr:"Güncel · son eşitleme ",
+   ku:"Niha · hevdengkirina dawî ",
+   ckb:"ئێستا · دوایین هاوکاتکردن ",
+   bs:"Trenutno · zadnja sinhronizacija ",
+   fr:"Actuel · dernière synchronisation à ",
+   es:"Actual · última sincronización a las "
+  };
+  if(forms[language])return forms[language]+syncedAt[1];
+ }
+ const offlineStamp=value.match(/^Offline · Stand vom (.+)$/);
+ if(offlineStamp){
+  const forms={
+   ar:"دون اتصال · الحالة من ",
+   en:"Offline · state from ",
+   tr:"Çevrimdışı · durum ",
+   ku:"Negirêdayî · rewş ji ",
+   ckb:"ئۆفلاین · بار لە ",
+   bs:"Izvan mreže · stanje od ",
+   fr:"Hors ligne · état du ",
+   es:"Sin conexión · estado del "
+  };
+  if(forms[language])return forms[language]+offlineStamp[1];
+ }
+ const almost=value.match(/^Fast fertig · (\d+)\/(\d+) Dateien · Download fortsetzen$/);
+ if(almost){
+  const cont=lookupPack("Download fortsetzen",language);
+  const n=almost[1]+"/"+almost[2];
+  const forms={
+   ar:"أوشك على الانتهاء · "+n+" ملفات",
+   en:"Almost done · "+n+" files",
+   tr:"Neredeyse bitti · "+n+" dosya",
+   ku:"Hema qediya · "+n+" pel",
+   ckb:"نزیکە تەواو بێت · "+n+" پەڕگە",
+   bs:"Skoro gotovo · "+n+" datoteka",
+   fr:"Presque terminé · "+n+" fichiers",
+   es:"Casi listo · "+n+" archivos"
+  };
+  if(forms[language]&&cont)return forms[language]+" · "+cont;
  }
  const range=value.match(/^Sūrenbereich wechseln(?:, aktuell|\s+)(.+?)(?:\s*[⌄])?$/);
  if(range){
@@ -1285,7 +1350,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-30";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-31";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
