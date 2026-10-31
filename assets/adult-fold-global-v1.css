@@ -86,7 +86,7 @@ html[data-layout-surface="phone-landscape"] body .prophets-layout--dual > :is(.p
 html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"]{
   display:grid!important;
   grid-template-columns:minmax(300px,var(--fold-rail-current,320px)) minmax(0,1fr)!important;
-  column-gap:clamp(12px,1.6vw,18px)!important;
+  column-gap:var(--fold-gap-current,clamp(12px,1.6vw,18px))!important;
   align-items:stretch!important;
   width:100%!important;
   max-width:100%!important;
