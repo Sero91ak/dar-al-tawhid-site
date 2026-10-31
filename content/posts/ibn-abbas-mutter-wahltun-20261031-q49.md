@@ -28,6 +28,6 @@ feed:
 
 🖋️ **ʿAbdullāh ibn ʿAbbās** (möge Allah mit ihm und seinem Vater zufrieden sein) sagte:
 
-„Ich kenne keine Tat, die einen Allah näherbringt, als seiner **𝑴𝒖𝒕𝒕𝒆𝒓 𝑮𝒖𝒕𝒆𝒔 𝒛𝒖 𝒕𝒖𝒏**.“
+„Ich kenne keine Tat, die einen Allah näherbringt, als seiner **Mutter Gutes zu tun**.“
 
-🌙 **𝑭𝒂𝒛𝒊𝒕:** Das **𝑾𝒐𝒉𝒍𝒕𝒖𝒏 𝒂𝒏 𝒅𝒆𝒓 𝑴𝒖𝒕𝒕𝒆𝒓** gehört zu den besonders wertvollen Taten, durch die sich der Diener Allah nähert. Ihr Recht zu achten, hebt die Rechte des Vaters nicht auf.
+🌙 **Fazit:** Das **Wohltun an der Mutter** gehört zu den besonders wertvollen Taten, durch die sich der Diener Allah nähert. Ihr Recht zu achten, hebt die Rechte des Vaters nicht auf.
