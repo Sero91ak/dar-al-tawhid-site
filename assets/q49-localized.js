@@ -4,7 +4,7 @@
    No external translator, backend AI, notification, or Kids dependency. */
 (function(){
 "use strict";
-var DATA="/assets/q49-locales.json";
+var DATA="/assets/q49-locales.json?v=20261101-live1";
 var LANGUAGES=["de","ar","en","tr","ku","ckb","bs","fr","es"];
 var root=document.documentElement, path=location.pathname;
 var isSource=/^\/(?:test\/)?q\/49\/?(?:index\.html)?$/.test(path);
