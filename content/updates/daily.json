@@ -16,5 +16,23 @@
     "title": "Lass mich durch Deine Barmherzigkeit unter Deine rechtschaffenen Diener eintreten",
     "snippet": "Und lass mich durch Deine Barmherzigkeit unter Deine rechtschaffenen Diener eintreten.",
     "category": "Barmherzigkeit"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 481,
+      "remaining": 445
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 62,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
