@@ -86,19 +86,73 @@
     return true;
   }
 
+  /* Viewport Segments API (Chrome 138+/supported WebViews): only real
+     horizontal viewport segments may define a physical Duo hinge. The former
+     window.getWindowSegments() proposal is deprecated. Keep non-supporting
+     iOS/Android browsers on ordinary capacity-based layout. */
+  function measureViewportSegments(width, height) {
+    var raw;
+    try {
+      raw = global.viewport && global.viewport.segments;
+      if (!raw || raw.length !== 2) return null;
+    } catch (e) { return null; }
+    var a = raw[0], b = raw[1];
+    if (!a || !b) return null;
+    var first = { x: Number(a.x), y: Number(a.y), width: Number(a.width), height: Number(a.height) };
+    var second = { x: Number(b.x), y: Number(b.y), width: Number(b.width), height: Number(b.height) };
+    var numbers = [first.x,first.y,first.width,first.height,second.x,second.y,second.width,second.height];
+    if (!numbers.every(function (n) { return Number.isFinite(n); })) return null;
+    if (first.width <= 0 || second.width <= 0 || first.height <= 0 || second.height <= 0) return null;
+    if (first.x > second.x) { var swap=first; first=second; second=swap; }
+    var overlapY = Math.min(first.y+first.height,second.y+second.height)-Math.max(first.y,second.y);
+    var horizontal = second.x >= first.x + first.width - 2 &&
+      overlapY >= Math.min(first.height,second.height)*0.6;
+    if (horizontal) {
+      var gap = Math.max(0, second.x-first.x-first.width);
+      if (second.x+second.width > width+4 || first.x < -4) return null;
+      return {
+        axis:"horizontal", left:first, right:second, gap:gap,
+        key:"h:"+Math.round(first.width)+":"+Math.round(second.x)+":"+Math.round(second.width)
+      };
+    }
+    var upper = first.y <= second.y ? first : second;
+    var lower = upper === first ? second : first;
+    var overlapX = Math.min(upper.x+upper.width,lower.x+lower.width)-Math.max(upper.x,lower.x);
+    if (lower.y >= upper.y+upper.height-2 &&
+        overlapX >= Math.min(upper.width,lower.width)*0.6 &&
+        lower.y+lower.height <= height+4) {
+      return { axis:"vertical", key:"v:"+Math.round(upper.height)+":"+Math.round(lower.y) };
+    }
+    return null;
+  }
+
   function computeLayoutCapacity(width, height) {
     var w = Math.max(0, Number(width) || 0);
     var h = Math.max(0, Number(height) || 0);
     var sideReserve = sideNavEffective(w, h) ? SIDE_NAV_RESERVE : 0;
     var outer = Math.round(Math.max(24, Math.min(48, w * 0.04)));
     var usable = Math.max(0, w - sideReserve - outer);
+    var segments = measureViewportSegments(w,h);
     var rail = Math.round(Math.min(RAIL_MAX, Math.max(RAIL_MIN, usable * 0.31)));
-    var reader = Math.max(0, usable - rail - MASTER_GAP);
+    var gap = MASTER_GAP;
     var readerMin = READER_MIN;
-    /* Phone landscape stays a single app surface. A real master/detail split
-       needs tablet/Fold-like short-edge height, not only a wide aspect ratio. */
+    if (segments && segments.axis === "horizontal") {
+      /* Match a physical left/right screen, leaving a safety buffer on BOTH
+         sides of the hardware hinge. Never cap the master at 360px here:
+         doing so would put the reader over the hinge. */
+      var hingePad = 8;
+      rail = Math.max(0, Math.floor(segments.left.width - outer/2 - hingePad - sideReserve));
+      gap = segments.gap + 2 * hingePad;
+      readerMin = Math.min(READER_MIN, Math.max(420,Math.round(segments.right.width*0.84)));
+    }
+    var reader = Math.max(0, usable - rail - gap);
+    /* Stacked (top/bottom) screens cannot safely display a horizontal split.
+       Phone landscape also stays a single app surface. */
     var phoneLandscape = w > h && h < EXPANDED_MIN_HEIGHT;
-    var dual = !phoneLandscape && w >= EXPANDED_MIN && h >= EXPANDED_MIN_HEIGHT && reader >= readerMin;
+    var segmentOK = !segments || segments.axis === "horizontal";
+    var railOK = !segments || segments.axis !== "horizontal" || rail >= RAIL_MIN;
+    var dual = segmentOK && railOK && !phoneLandscape && w >= EXPANDED_MIN &&
+      h >= EXPANDED_MIN_HEIGHT && reader >= readerMin;
     return {
       width: w,
       height: h,
@@ -106,9 +160,11 @@
       outerGutter: outer,
       usable: usable,
       rail: rail,
-      gap: MASTER_GAP,
+      gap: gap,
       reader: reader,
       readerMin: readerMin,
+      segments: segments,
+      segmentKey: segments ? segments.key : "none",
       dual: dual
     };
   }
@@ -205,8 +261,9 @@
     /* The body/document ResizeObservers fire frequently on content rendering,
        but only actual viewport changes require recalculating root CSS tokens.
        Forced route/orientation updates still run unconditionally. */
+    var capacity = computeLayoutCapacity(metrics.width, metrics.height);
     var viewportKey = metrics.width + "|" + metrics.height + "|" + (metrics.offsetTop || 0) +
-      "|" + navPreference();
+      "|" + navPreference() + "|" + capacity.segmentKey;
     /* Native WKWebView may overwrite data-layout on route changes without
        changing the viewport. Reassert the measured mode in that case. */
     if (!force && viewportKey === lastAppliedViewportKey &&
@@ -220,10 +277,11 @@
     var externalOverride = root.getAttribute("data-layout") !== mode;
     var prevDual = root.getAttribute("data-fold-dual") === "1";
 
-    var capacity = computeLayoutCapacity(metrics.width, metrics.height);
     root.style.setProperty("--layout-vw", metrics.width + "px");
     root.style.setProperty("--layout-vh", metrics.height + "px");
     root.style.setProperty("--fold-rail-current", capacity.rail + "px");
+    root.style.setProperty("--fold-gap-current", capacity.gap + "px");
+    root.setAttribute("data-fold-segments", capacity.segments ? capacity.segments.axis : "none");
     root.style.setProperty("--fold-reader-available", capacity.reader + "px");
     root.style.setProperty("--fold-side-reserve", capacity.sideReserve + "px");
     root.style.setProperty("--fold-content-usable", capacity.usable + "px");
@@ -351,6 +409,13 @@
     global.addEventListener("hashchange", function () { scheduleApply(true); }, { passive: true });
     global.addEventListener("pageshow", function () { scheduleApply(true); }, { passive: true });
     global.addEventListener("orientationchange", scheduleOrientBurst, { passive: true });
+    /* Device posture may change without a resize event (especially Duo). */
+    try {
+      if (global.navigator && global.navigator.devicePosture &&
+          typeof global.navigator.devicePosture.addEventListener === "function") {
+        global.navigator.devicePosture.addEventListener("change", scheduleOrientBurst);
+      }
+    } catch (e) {}
 
     if (global.screen && global.screen.orientation && typeof global.screen.orientation.addEventListener === "function") {
       try {
@@ -441,6 +506,10 @@
     RAIL_MIN: RAIL_MIN,
     RAIL_MAX: RAIL_MAX,
     READER_MIN: READER_MIN,
+    getViewportSegments: function () {
+      var m = measureViewport();
+      return measureViewportSegments(m.width,m.height);
+    },
   };
 
   global.DarAdaptiveLayout = api;
