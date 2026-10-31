@@ -179,6 +179,13 @@ assert.equal(w.DarTestTurkishUI.translateValue("Angemeldet als Sara. Neue gespei
 assert.equal(w.DarTestTurkishUI.translateValue("3 passende Beiträge öffnen","ckb"),"3 بابەتی گونجاو بکەرەوە");
 assert.equal(w.DarTestTurkishUI.translateValue("Sure 2 wird geladen…","fr"),"La sourate 2 se charge…");
 assert.equal(w.DarTestTurkishUI.translateValue("Live-Statistik","es"),"Estadísticas en vivo");
+assert.equal(w.DarTestTurkishUI.translateValue("Ḥadīṯe","ckb"),"فەرموودەکان");
+assert.equal(w.DarTestTurkishUI.translateValue("4 Beiträge in diesem Ordner. Über den Zurückbutton kommst du zur vorherigen Übersicht.","en"),"4 articles in this folder. The back button returns to the previous overview.");
+assert.equal(w.DarTestTurkishUI.translateValue("3 Beiträge aus diesem Werk","fr"),"3 articles de cet ouvrage");
+assert.equal(w.DarTestTurkishUI.translateValue("12 Überlieferungen · 9 Ḥadīṯe · 3 Āṯār","es"),"12 Transmisiones · 9 Ḥadīṯes · 3 Āthār");
+assert.equal(w.DarTestTurkishUI.translateValue("2 Veröffentlichungen in diesem Themenregal.","en"),"2 publications on this shelf.");
+assert.equal(w.DarTestTurkishUI.translateValue("Aktualisiert: 31.10.2026, 21:00:00 · Auto-Refresh alle 30 Sekunden","en"),"Updated: 31.10.2026, 21:00:00 · auto-refresh every 30 seconds");
+assert.equal(w.DarTestTurkishUI.translateValue("Ohne Bewegungssensor: Nutze die Kompass-App deines Handys und suche 42° Norden. Vergleiche mit einer verlässlichen Quelle, bevor du betest.","en"),"Without a motion sensor: use your phone’s Compass app and look for 42° North. Compare with a reliable source before you pray.");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);

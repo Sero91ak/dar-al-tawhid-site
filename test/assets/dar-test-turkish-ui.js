@@ -405,6 +405,19 @@ function isDynamicGermanUi(value){
   /^Wenig freier Speicher: .+ verfügbar\. Vorbereitung läuft trotzdem\.$/.test(value)||
   /^Gebetszeiten öffnen\. Aktuell .+, nächstes Gebet .+ um .+\.$/.test(value)||
   /^Push-Erinnerungen öffnen\. .+\.$/.test(value)||
+  /^\d+ Beiträge in diesem Ordner\. Über den Zurückbutton kommst du zur vorherigen Übersicht\.$/.test(value)||
+  /^\d+ Beiträge aus diesem Werk$/.test(value)||
+  /^\d+ Beiträge auf DĀR AL TAWḤĪD$/.test(value)||
+  /^\d+ Überlieferungen · \d+ Ḥadīṯe · \d+ Āṯār$/.test(value)||
+  /^\d+ Ḥadīṯe · \d+ Hauptwerke$/.test(value)||
+  /^Veröffentlichungen im Bereich .+$/.test(value)||
+  /^\d+ Veröffentlichungen? in diesem Themenregal\.$/.test(value)||
+  /^Dieses Themenregal bündelt die vorhandenen Veröffentlichungen zu .+\.$/.test(value)||
+  /^Aktualisiert: .+ · Auto-Refresh alle 30 Sekunden$/.test(value)||
+  /^Statistik konnte nicht geladen werden \(.+\)\.$/.test(value)||
+  /^\d+ Zeilen? · Änderungen erscheinen nach dem Speichern in der Vorschau\.$/.test(value)||
+  /^Ohne Bewegungssensor: Nutze die Kompass-App deines Handys und suche .+° .+\. Vergleiche mit einer verlässlichen Quelle, bevor du betest\.$/.test(value)||
+  /^\d+ Einträge$/.test(value)||
   /^\d+ Beitrag$/.test(value)||
   /^Zuletzt synchronisiert: .+$/.test(value)||
   /^Zuletzt: .+$/.test(value)||
@@ -947,6 +960,176 @@ function translateSharedPatterns(value,language){
    es:"Abrir los recordatorios Push. "+body+"."
   };
   return forms[language]||null;
+ }
+ const folderBack=value.match(/^(\d+) Beiträge in diesem Ordner\. Über den Zurückbutton kommst du zur vorherigen Übersicht\.$/);
+ if(folderBack){
+  const n=folderBack[1];
+  const forms={
+   ar:n+" مقالات في هذا المجلد. عبر زر الرجوع تعود إلى العرض السابق.",
+   en:n+" articles in this folder. The back button returns to the previous overview.",
+   tr:"Bu klasörde "+n+" yazı. Geri düğmesi önceki özete götürür.",
+   ku:n+" nivîs di vê peldankê de. Bişkoka vegerê vedigere kurteya berê.",
+   ckb:n+" بابەت لەم بوخچەیەدا. دوگمەی گەڕانەوە دەگەڕێتەوە بۆ پوختەی پێشوو.",
+   bs:n+" tekstova u ovoj fascikli. Dugme nazad vraća na prethodni pregled.",
+   fr:n+" articles dans ce dossier. Le bouton retour ramène à l’aperçu précédent.",
+   es:n+" artículos en esta carpeta. El botón atrás vuelve al resumen anterior."
+  };
+  return forms[language]||null;
+ }
+ const fromWork=value.match(/^(\d+) Beiträge aus diesem Werk$/);
+ if(fromWork){
+  const n=fromWork[1];
+  const forms={
+   ar:n+" مقالات من هذا العمل",
+   en:n+" articles from this work",
+   tr:"Bu eserden "+n+" yazı",
+   ku:n+" nivîs ji vê berhemê",
+   ckb:n+" بابەت لەم بەرهەمە",
+   bs:n+" tekstova iz ovog djela",
+   fr:n+" articles de cet ouvrage",
+   es:n+" artículos de esta obra"
+  };
+  return forms[language]||null;
+ }
+ const onDar=value.match(/^(\d+) Beiträge auf DĀR AL TAWḤĪD$/);
+ if(onDar){
+  const n=onDar[1];
+  const forms={
+   ar:n+" مقالات على DĀR AL TAWḤĪD",
+   en:n+" articles on DĀR AL TAWḤĪD",
+   tr:"DĀR AL TAWḤĪD üzerinde "+n+" yazı",
+   ku:n+" nivîs li ser DĀR AL TAWḤĪD",
+   ckb:n+" بابەت لە DĀR AL TAWḤĪD",
+   bs:n+" tekstova na DĀR AL TAWḤĪD",
+   fr:n+" articles sur DĀR AL TAWḤĪD",
+   es:n+" artículos en DĀR AL TAWḤĪD"
+  };
+  return forms[language]||null;
+ }
+ const mixCounts=value.match(/^(\d+) Überlieferungen · (\d+) Ḥadīṯe · (\d+) Āṯār$/);
+ if(mixCounts){
+  const reports=lookupPack("Überlieferungen",language)||"Überlieferungen";
+  const hadiths=lookupPack("Ḥadīṯe",language)||"Ḥadīṯe";
+  const athar=lookupPack("Āthār",language)||"Āthār";
+  return mixCounts[1]+" "+reports+" · "+mixCounts[2]+" "+hadiths+" · "+mixCounts[3]+" "+athar;
+ }
+ const mainWorks=value.match(/^(\d+) Ḥadīṯe · (\d+) Hauptwerke$/);
+ if(mainWorks){
+  const hadiths=lookupPack("Ḥadīṯe",language)||"Ḥadīṯe";
+  const works=lookupPack("Hauptwerke",language)||"Hauptwerke";
+  return mainWorks[1]+" "+hadiths+" · "+mainWorks[2]+" "+works;
+ }
+ const shelfArea=value.match(/^Veröffentlichungen im Bereich (.+)$/);
+ if(shelfArea){
+  const name=lookupPack(shelfArea[1],language)||shelfArea[1];
+  const forms={
+   ar:"إصدارات في مجال "+name,
+   en:"Publications in "+name,
+   tr:name+" alanında yayınlar",
+   ku:"Weşan di qada "+name+" de",
+   ckb:"بڵاوکراوەکان لە بواری "+name,
+   bs:"Publikacije u oblasti "+name,
+   fr:"Publications dans "+name,
+   es:"Publicaciones en "+name
+  };
+  return forms[language]||null;
+ }
+ const shelfCount=value.match(/^(\d+) (Veröffentlichung|Veröffentlichungen) in diesem Themenregal\.$/);
+ if(shelfCount){
+  const n=shelfCount[1];
+  const forms={
+   ar:n+" إصدارات في هذا الرف.",
+   en:n+" "+(n==="1"?"publication":"publications")+" on this shelf.",
+   tr:"Bu konu rafında "+n+" yayın.",
+   ku:n+" weşan di vê refika mijarê de.",
+   ckb:n+" بڵاوکراوە لەم رفەی بابەتەدا.",
+   bs:n+" publikacija na ovoj tematskoj polici.",
+   fr:n+" "+(n==="1"?"publication":"publications")+" dans ce rayon.",
+   es:n+" "+(n==="1"?"publicación":"publicaciones")+" en este estante."
+  };
+  return forms[language]||null;
+ }
+ const shelfAbout=value.match(/^Dieses Themenregal bündelt die vorhandenen Veröffentlichungen zu (.+)\.$/);
+ if(shelfAbout){
+  const name=lookupPack(shelfAbout[1],language)||shelfAbout[1];
+  const forms={
+   ar:"يجمع هذا الرف الإصدارات الموجودة حول "+name+".",
+   en:"This shelf gathers the publications on "+name+".",
+   tr:"Bu konu rafı "+name+" hakkındaki yayınları bir araya getirir.",
+   ku:"Ev refika mijarê weşanên heyî yên "+name+" dicivîne.",
+   ckb:"ئەم رفەی بابەتە بڵاوکراوەکانی "+name+" کۆدەکاتەوە.",
+   bs:"Ova tematska polica okuplja publikacije o "+name+".",
+   fr:"Ce rayon rassemble les publications sur "+name+".",
+   es:"Este estante reúne las publicaciones sobre "+name+"."
+  };
+  return forms[language]||null;
+ }
+ const statsStamp=value.match(/^Aktualisiert: (.+) · Auto-Refresh alle 30 Sekunden$/);
+ if(statsStamp){
+  const when=localizeGermanCalendarLabel(statsStamp[1],language)||statsStamp[1];
+  const forms={
+   ar:"آخر تحديث: "+when+" · تحديث تلقائي كل 30 ثانية",
+   en:"Updated: "+when+" · auto-refresh every 30 seconds",
+   tr:"Güncellendi: "+when+" · her 30 saniyede otomatik yenileme",
+   ku:"Hat nûkirin: "+when+" · her 30 çirkeyan nûkirina xweber",
+   ckb:"نوێکرایەوە: "+when+" · نوێکردنەوەی خۆکار هەر 30 چرکە",
+   bs:"Ažurirano: "+when+" · automatsko osvježavanje svakih 30 sekundi",
+   fr:"Mis à jour : "+when+" · actualisation automatique toutes les 30 secondes",
+   es:"Actualizado: "+when+" · actualización automática cada 30 segundos"
+  };
+  return forms[language]||null;
+ }
+ const statsFail=value.match(/^Statistik konnte nicht geladen werden \((.+)\)\.$/);
+ if(statsFail){
+  const msg=statsFail[1];
+  const forms={
+   ar:"تعذّر تحميل الإحصاءات ("+msg+").",
+   en:"Statistics could not be loaded ("+msg+").",
+   tr:"İstatistik yüklenemedi ("+msg+").",
+   ku:"Amar nehatin barkirin ("+msg+").",
+   ckb:"ئامارەکان نەتوانرا باربکرێن ("+msg+").",
+   bs:"Statistika nije učitana ("+msg+").",
+   fr:"Les statistiques n’ont pas pu être chargées ("+msg+").",
+   es:"No se pudieron cargar las estadísticas ("+msg+")."
+  };
+  return forms[language]||null;
+ }
+ const previewLines=value.match(/^(\d+) Zeilen? · Änderungen erscheinen nach dem Speichern in der Vorschau\.$/);
+ if(previewLines){
+  const n=previewLines[1];
+  const forms={
+   ar:n+" سطر · تظهر التغييرات في المعاينة بعد الحفظ.",
+   en:n+" "+(n==="1"?"line":"lines")+" · Changes appear in the preview after saving.",
+   tr:n+" satır · Değişiklikler kayıttan sonra önizlemede görünür.",
+   ku:n+" rêzik · Guhertin piştî tomarkirinê di pêşdîtina de xuya dibin.",
+   ckb:n+" دێڕ · گۆڕانکارییەکان دوای پاشەکەوتکردن لە پێشبینین دەردەکەون.",
+   bs:n+" "+(n==="1"?"red":"reda")+" · Promjene se nakon spremanja vide u pregledu.",
+   fr:n+" "+(n==="1"?"ligne":"lignes")+" · Les changements apparaissent dans l’aperçu après l’enregistrement.",
+   es:n+" "+(n==="1"?"línea":"líneas")+" · Los cambios aparecen en la vista previa después de guardar."
+  };
+  return forms[language]||null;
+ }
+ const noSensor=value.match(/^Ohne Bewegungssensor: Nutze die Kompass-App deines Handys und suche (.+)° (.+)\. Vergleiche mit einer verlässlichen Quelle, bevor du betest\.$/);
+ if(noSensor){
+  const deg=noSensor[1];
+  const dir=lookupPack(noSensor[2],language)||noSensor[2];
+  const app=lookupPack("Kompass-App",language)||"Kompass-App";
+  const forms={
+   ar:"بدون مستشعر حركة: استخدم "+app+" في هاتفك وابحث عن "+deg+"° "+dir+". قارن بمصدر موثوق قبل أن تصلي.",
+   en:"Without a motion sensor: use your phone’s "+app+" and look for "+deg+"° "+dir+". Compare with a reliable source before you pray.",
+   tr:"Hareket sensörü yok: telefonundaki "+app+" ile "+deg+"° "+dir+" yönünü ara. Namazdan önce güvenilir bir kaynakla karşılaştır.",
+   ku:"Bê senzora tevgerê: "+app+" a telefonê bikar bîne û "+deg+"° "+dir+" bigere. Berî nimêjê bi çavkaniyeke pêbawer re bide ber hev.",
+   ckb:"بێ هەستەوەری جووڵە: "+app+"ی مۆبایلەکەت بەکاربهێنە و "+deg+"° "+dir+" بگەڕێ. پێش نوێژ لەگەڵ سەرچاوەیەکی متمانەپێکراو بەراوردی بکە.",
+   bs:"Bez senzora pokreta: koristi "+app+" telefona i traži "+deg+"° "+dir+". Prije namaza uporedi s pouzdanim izvorom.",
+   fr:"Sans capteur de mouvement : utilise "+app+" du téléphone et cherche "+deg+"° "+dir+". Compare avec une source fiable avant de prier.",
+   es:"Sin sensor de movimiento: usa la "+app+" del teléfono y busca "+deg+"° "+dir+". Compara con una fuente fiable antes de orar."
+  };
+  return forms[language]||null;
+ }
+ const entries=value.match(/^(\d+) Einträge$/);
+ if(entries){
+  const word=lookupPack("Einträge",language);
+  if(word)return entries[1]+" "+word;
  }
  const surahs=value.match(/^(\d+)\s+Sūren\s*·\s*(\d+)\s+Āyāt$/);
  if(surahs){
@@ -2035,7 +2218,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-38";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-39";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
