@@ -7,7 +7,7 @@ const js=fs.readFileSync(path.join(ROOT,"kids/akademie/guided-lesson-v1.js"),"ut
 const css=fs.readFileSync(path.join(ROOT,"kids/akademie/guided-lesson-v1.css"),"utf8");
 const html=fs.readFileSync(path.join(ROOT,"kids/akademie/index.html"),"utf8");
 class FakeElement{
- constructor(name){this.tagName=name;this.className="";this.textContent="";this.children=[];this.attributes={};this.events={};this.hidden=false}
+ constructor(name){this.tagName=name;this.className="";this.textContent="";this.children=[];this.attributes={};this.events={};this.hidden=false;this.classList={add:(v)=>{this.className=(this.className+" "+v).trim()}}}
  append(...nodes){this.children.push(...nodes)}
  replaceChildren(...nodes){this.children=nodes}
  setAttribute(name,value){this.attributes[name]=value}
