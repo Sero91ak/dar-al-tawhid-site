@@ -104,7 +104,7 @@ const nav=Array.from(navEl.querySelectorAll(".bottom-nav-btn")).map(btn=>{
 });
 const navBox=navEl.getBoundingClientRect();
 const navBounds={x:navBox.x,right:navBox.right,top:navBox.top,bottom:navBox.bottom};
-document.getElementById("foldSmoke").textContent=btoa(JSON.stringify({compact,dual,inset,forced,ordinary,otherTransition,postsTransition,railScroll,paneScroll,nav,navBounds}));
+document.getElementById("foldSmoke").textContent=btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify({compact,dual,inset,forced,ordinary,otherTransition,postsTransition,railScroll,paneScroll,nav,navBounds}))));
 } catch(e) {
  document.getElementById("foldSmoke").textContent=btoa(JSON.stringify({error:String(e)}));
 }
