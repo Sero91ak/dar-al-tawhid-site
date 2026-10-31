@@ -357,6 +357,9 @@ function isDynamicGermanUi(value){
   /^\d+ Quellen · Quellen anzeigen$/.test(value)||
   /^\d+ (?:Inhalt|Inhalte)$/.test(value)||
   /^\d+ geprüfte Berichte$/.test(value)||
+  /^Im Qurʾān öffnen · .+$/.test(value)||
+  /^.+ \(Vorschau · nicht freigegeben\)$/.test(value)||
+  /^Der Prophet Muḥammad ﷺ über ihn · \d+$/.test(value)||
   /^\d+\s+(Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt|Funktionen|Ergebnisse)$/.test(value)||
   /^\d+\s+Āyāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
   /^\d+\s*·\s*\d+\s+Ayāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
@@ -1002,6 +1005,23 @@ function translateExact(value,language="tr"){
   };
   return forms[language]||null;
  }
+ const quranOpen=value.match(/^Im Qurʾān öffnen · (.+)$/);
+ if(quranOpen){
+  const head=lookupPack("Im Qurʾān öffnen",language);
+  const rest=lookupPack(quranOpen[1],language)||quranOpen[1];
+  return head?head+" · "+rest:null;
+ }
+ const previewWrap=value.match(/^(.+) \(Vorschau · nicht freigegeben\)$/);
+ if(previewWrap){
+  const tail=lookupPack("(Vorschau · nicht freigegeben)",language);
+  const name=lookupPack(previewWrap[1],language)||previewWrap[1];
+  return tail?name+" "+tail:null;
+ }
+ const aboutHim=value.match(/^Der Prophet Muḥammad ﷺ über ihn · (\d+)$/);
+ if(aboutHim){
+  const head=lookupPack("Der Prophet Muḥammad ﷺ über ihn",language);
+  return head?head+" · "+aboutHim[1]:null;
+ }
  const dynamicLabels={
   Veröffentlichungen:{ar:"منشورات",ku:"weşan",ckb:"بڵاوکراوە",bs:"publikacija",fr:"publications",es:"publicaciones"},
   Beiträge:{ar:"مقالات",ku:"nivîs",ckb:"بابەت",bs:"tekstova",fr:"articles",es:"artículos"},
@@ -1265,7 +1285,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-28";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-29";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
