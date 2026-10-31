@@ -1,0 +1,996 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-24T20:10:00Z",
+  "scope": "dar-test-adult",
+  "acceptance": {
+    "uiComplete": false,
+    "contentComplete": false,
+    "platformPushComplete": false,
+    "reason": "Die Zahl der Katalogschlüssel ist kein Beleg für 100 % der Ansichten. Visuelle Prüfung je Route und Sprache steht aus. Religiöse Entwürfe sind nicht freigegeben."
+  },
+  "locales": [
+    "de",
+    "tr",
+    "en",
+    "ar",
+    "ku",
+    "ckb",
+    "bs",
+    "fr",
+    "es"
+  ],
+  "ui": {
+    "keys": 3727,
+    "filesScanned": 120,
+    "germanLookingLiterals": 1249,
+    "alreadyInCatalog": 1109,
+    "missingDistinct": 21,
+    "gaps": [
+      {
+        "text": "alle",
+        "count": 103,
+        "places": [
+          "test/assets/frauen/frauen-fiqh.js:107",
+          "test/assets/frauen/frauen-fiqh.js:116",
+          "test/assets/frauen/frauen-fiqh.js:163"
+        ],
+        "className": "search-index-or-fragment",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "gebet",
+        "count": 8,
+        "places": [
+          "test/assets/frauen/frauen-fiqh.js:110",
+          "test/assets/frauen/frauen-fiqh.js:142",
+          "test/assets/frauen/frauen-fiqh.js:146"
+        ],
+        "className": "search-index-or-fragment",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "Noch",
+        "count": 6,
+        "places": [
+          "test/assets/ramadan-series-test.js:218",
+          "test/index.html:24881",
+          "test/index.html:24882"
+        ],
+        "className": "pattern-or-code",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "Noch ca.",
+        "count": 4,
+        "places": [
+          "test/assets/ramadan-series-test.js:162",
+          "test/index.html:25770",
+          "test/index.html:25778"
+        ],
+        "className": "pattern-or-code",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "nicht",
+        "count": 2,
+        "places": [
+          "test/assets/prophets/prophets.js:1278",
+          "test/index.html:23130"
+        ],
+        "className": "search-index-or-fragment",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "öffnen",
+        "count": 2,
+        "places": [
+          "test/assets/dar-test-turkish-ui.js:502",
+          "test/assets/dar-test-turkish-ui.js:1050"
+        ],
+        "className": "pattern-or-code",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "· öffnen",
+        "count": 1,
+        "places": [
+          "test/index.html:28913"
+        ],
+        "className": "pattern-or-code",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "/5 gewählt",
+        "count": 1,
+        "places": [
+          "test/index.html:27517"
+        ],
+        "className": "pattern-or-code",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "\\\\s+sagte(?:\\\\s+sinngemäß)?\\\\s*:\\\\s*",
+        "count": 1,
+        "places": [
+          "test/assets/premium-feed-app.js:868"
+        ],
+        "className": "pattern-or-code",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "anfänger",
+        "count": 1,
+        "places": [
+          "test/index.html:27646"
+        ],
+        "className": "search-index-or-fragment",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "apps apple tv fernseher kids tawhid kinder iphone ipad familie verfügbar bald entdecken",
+        "count": 1,
+        "places": [
+          "test/assets/dar-more-v15.js:49"
+        ],
+        "className": "search-index-or-fragment",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "auswählen",
+        "count": 1,
+        "places": [
+          "test/index.html:27946"
+        ],
+        "className": "search-index-or-fragment",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "Für eine Beurteilung des persönlichen Einzelfalls müssen der tatsächliche Grund und die Umstände geprüft werden. Wa-Allāhu aʿlam.",
+        "count": 1,
+        "places": [
+          "test/assets/ilm-research-chat.js:523"
+        ],
+        "className": "protected-religious-text",
+        "owner": "redaktion-quellenpruefung"
+      },
+      {
+        "text": "gläubigen",
+        "count": 1,
+        "places": [
+          "test/index.html:21535"
+        ],
+        "className": "search-index-or-fragment",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "keine",
+        "count": 1,
+        "places": [
+          "test/index.html:23130"
+        ],
+        "className": "search-index-or-fragment",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "märz",
+        "count": 1,
+        "places": [
+          "test/index.html:28096"
+        ],
+        "className": "pattern-or-code",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "nicht nach dem richtet",
+        "count": 1,
+        "places": [
+          "test/index.html:21776"
+        ],
+        "className": "protected-religious-text",
+        "owner": "redaktion-quellenpruefung"
+      },
+      {
+        "text": "noch",
+        "count": 1,
+        "places": [
+          "test/index.html:23130"
+        ],
+        "className": "search-index-or-fragment",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "salah salat namaz gebet",
+        "count": 1,
+        "places": [
+          "test/assets/dar-smart-search-core-v48.js:13"
+        ],
+        "className": "search-index-or-fragment",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "ungläubigen",
+        "count": 1,
+        "places": [
+          "test/index.html:21535"
+        ],
+        "className": "search-index-or-fragment",
+        "owner": "dar-test-ui"
+      },
+      {
+        "text": "wird",
+        "count": 1,
+        "places": [
+          "test/index.html:23130"
+        ],
+        "className": "pattern-or-code",
+        "owner": "dar-test-ui"
+      }
+    ],
+    "note": "Der Scanner sieht Zeichenketten, keine gerenderten Bildschirme. Kurze Suchfragmente und geschützte religiöse Sätze bleiben absichtlich ohne neuen Schlüssel."
+  },
+  "routes": [
+    {
+      "route": "home",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "recent",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "topics",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "topic",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "post",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "quran",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "quran-surah",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "quran-player",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "quran-topic",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "duas",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "dua",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "hadith",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "bibliothek",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "bibliothek-detail",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "bibliothek-reader",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "books",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "scholars",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "prayer",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "qibla",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "quiz",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "zakat",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "wasiyyah",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "propheten",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "frauen",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "news",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "news-detail",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "settings",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "more",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "account",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "statistik",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "jummah",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "ramadan",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "quellen-book",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    },
+    {
+      "route": "quellen-scholar",
+      "locales": {
+        "de": "not-tested",
+        "ar": "not-tested",
+        "en": "not-tested",
+        "tr": "not-tested",
+        "ku": "not-tested",
+        "ckb": "not-tested",
+        "bs": "not-tested",
+        "fr": "not-tested",
+        "es": "not-tested"
+      },
+      "visual": "not-tested",
+      "automated": "string-inventory-only",
+      "blocker": "Kein Browser-Durchlauf dieser Route in den neun Sprachen."
+    }
+  ],
+  "content": {
+    "posts": {
+      "records": 480,
+      "byKind": {
+        "unknown": 480
+      },
+      "approved": 0,
+      "drafts": 480,
+      "humanApproval": false,
+      "status": "draft"
+    },
+    "surface": {
+      "records": 4055,
+      "byKind": {
+        "dua": 97,
+        "quiz": 600,
+        "qsource": 48,
+        "learning": 16,
+        "hadith": 3294
+      },
+      "approved": 0,
+      "drafts": 4055,
+      "humanApproval": false,
+      "status": "draft",
+      "locales": [
+        "ar",
+        "en",
+        "tr",
+        "ku",
+        "ckb",
+        "bs",
+        "fr",
+        "es"
+      ]
+    },
+    "blocked": {
+      "blockedItems": 69,
+      "blockedTranslationTasks": 552,
+      "byKind": {
+        "post": 4,
+        "hadith": 65
+      }
+    },
+    "quranMeanings": {
+      "targetAyat": 6236,
+      "reviewedEightLanguagePack": false,
+      "arabicOriginalUnchanged": true,
+      "shownState": "deutsche Fassung mit Hinweis, keine erfundenen Bedeutungen",
+      "blocker": "Keine fachlich freigegebene Acht-Sprachen-Bedeutung je Āyah."
+    },
+    "approvalRule": "humanApproval true wurde nicht gesetzt und nicht behauptet."
+  },
+  "push": {
+    "liveSend": false,
+    "plans": {
+      "de": {
+        "locale": "de",
+        "send": false,
+        "claimedDelivered": false,
+        "providerLanguage": "de",
+        "tag": "dar_app_locale=de",
+        "status": "dry-run-only",
+        "doubleDelivery": false,
+        "note": "Der vorhandene Client kann setLanguage für diese Kennung aufrufen. Dieser Plan ruft ihn nicht auf und versendet nichts."
+      },
+      "ar": {
+        "locale": "ar",
+        "send": false,
+        "claimedDelivered": false,
+        "providerLanguage": "ar",
+        "tag": "dar_app_locale=ar",
+        "status": "dry-run-only",
+        "doubleDelivery": false,
+        "note": "Der vorhandene Client kann setLanguage für diese Kennung aufrufen. Dieser Plan ruft ihn nicht auf und versendet nichts."
+      },
+      "en": {
+        "locale": "en",
+        "send": false,
+        "claimedDelivered": false,
+        "providerLanguage": "en",
+        "tag": "dar_app_locale=en",
+        "status": "dry-run-only",
+        "doubleDelivery": false,
+        "note": "Der vorhandene Client kann setLanguage für diese Kennung aufrufen. Dieser Plan ruft ihn nicht auf und versendet nichts."
+      },
+      "tr": {
+        "locale": "tr",
+        "send": false,
+        "claimedDelivered": false,
+        "providerLanguage": "tr",
+        "tag": "dar_app_locale=tr",
+        "status": "dry-run-only",
+        "doubleDelivery": false,
+        "note": "Der vorhandene Client kann setLanguage für diese Kennung aufrufen. Dieser Plan ruft ihn nicht auf und versendet nichts."
+      },
+      "ku": {
+        "locale": "ku",
+        "send": false,
+        "claimedDelivered": false,
+        "providerLanguage": null,
+        "tag": "dar_app_locale=ku",
+        "status": "blocked-provider",
+        "doubleDelivery": false,
+        "blocker": "OneSignal hat keine Sprachkennung für ku oder ckb. Der bestehende Sync setzt die Anbieter-Sprache auf de, damit keine veraltete andere Sprache stehen bleibt. Das ist keine Zustellung auf Kurmancî oder Soranî. Ein eigener Abo-Tag ist hier nur der Prüfplan; der geschützte Versandweg wurde nicht verändert und es wird keine zweite Nachricht erzeugt."
+      },
+      "ckb": {
+        "locale": "ckb",
+        "send": false,
+        "claimedDelivered": false,
+        "providerLanguage": null,
+        "tag": "dar_app_locale=ckb",
+        "status": "blocked-provider",
+        "doubleDelivery": false,
+        "blocker": "OneSignal hat keine Sprachkennung für ku oder ckb. Der bestehende Sync setzt die Anbieter-Sprache auf de, damit keine veraltete andere Sprache stehen bleibt. Das ist keine Zustellung auf Kurmancî oder Soranî. Ein eigener Abo-Tag ist hier nur der Prüfplan; der geschützte Versandweg wurde nicht verändert und es wird keine zweite Nachricht erzeugt."
+      },
+      "bs": {
+        "locale": "bs",
+        "send": false,
+        "claimedDelivered": false,
+        "providerLanguage": "bs",
+        "tag": "dar_app_locale=bs",
+        "status": "dry-run-only",
+        "doubleDelivery": false,
+        "note": "Der vorhandene Client kann setLanguage für diese Kennung aufrufen. Dieser Plan ruft ihn nicht auf und versendet nichts."
+      },
+      "fr": {
+        "locale": "fr",
+        "send": false,
+        "claimedDelivered": false,
+        "providerLanguage": "fr",
+        "tag": "dar_app_locale=fr",
+        "status": "dry-run-only",
+        "doubleDelivery": false,
+        "note": "Der vorhandene Client kann setLanguage für diese Kennung aufrufen. Dieser Plan ruft ihn nicht auf und versendet nichts."
+      },
+      "es": {
+        "locale": "es",
+        "send": false,
+        "claimedDelivered": false,
+        "providerLanguage": "es",
+        "tag": "dar_app_locale=es",
+        "status": "dry-run-only",
+        "doubleDelivery": false,
+        "note": "Der vorhandene Client kann setLanguage für diese Kennung aufrufen. Dieser Plan ruft ihn nicht auf und versendet nichts."
+      }
+    },
+    "blocker": "ku und ckb haben keinen OneSignal-Sprachcode. Der Dry-Run versendet nichts und meldet keine Zustellung."
+  },
+  "platforms": [
+    {
+      "id": "dar-test",
+      "changed": true,
+      "visual": "not-tested"
+    },
+    {
+      "id": "visitor-app",
+      "changed": false,
+      "visual": "not-tested",
+      "blocker": "Keine Live-Freigabe."
+    },
+    {
+      "id": "pwa-android",
+      "changed": false,
+      "visual": "not-tested",
+      "blocker": "Gemeinsamer Webcode, in diesem Lauf nicht auf dem Gerät geprüft."
+    },
+    {
+      "id": "ios-webview",
+      "changed": false,
+      "visual": "not-tested",
+      "blocker": "Keine Xcode- oder Widget-Änderung."
+    },
+    {
+      "id": "kids",
+      "changed": false,
+      "visual": "not-tested",
+      "blocker": "Kids ist eine eigene App und wurde nicht angefasst."
+    },
+    {
+      "id": "widgets",
+      "changed": false,
+      "visual": "not-tested",
+      "blocker": "Widget-Ziele und Entitlements bleiben unverändert."
+    }
+  ]
+}

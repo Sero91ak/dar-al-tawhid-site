@@ -257,8 +257,8 @@ function registerLocaleData(pack){
   if(!value||typeof value!=="object"||Array.isArray(value))return false;
   const dict=new Map();
   for(const [de,tr] of Object.entries(value)){
-   if(typeof de==="string"&&de.trim()&&de.length<=240&&
-      typeof tr==="string"&&tr.trim()&&tr.length<=400&&
+   if(typeof de==="string"&&de.trim()&&de.length<=420&&
+      typeof tr==="string"&&tr.trim()&&tr.length<=800&&
       !/[<>]/.test(de+tr))dict.set(de,tr);
   }
   prepared.set(code,dict);
@@ -353,6 +353,13 @@ function rebuildReversePacks(){
 function isDynamicGermanUi(value){
  return /^Qurʾān · \d+ Fundstellen$/.test(value)||
   /^(Aussagen im Qurʾān|Aussagen in authentischer Sunnah) · \d+$/.test(value)||
+  /^Belegte Aussagen · \d+$/.test(value)||
+  /^\d+ Quellen · Quellen anzeigen$/.test(value)||
+  /^\d+ (?:Inhalt|Inhalte)$/.test(value)||
+  /^\d+ geprüfte Berichte$/.test(value)||
+  /^Im Qurʾān öffnen · .+$/.test(value)||
+  /^.+ \(Vorschau · nicht freigegeben\)$/.test(value)||
+  /^Der Prophet Muḥammad ﷺ über ihn · \d+$/.test(value)||
   /^\d+\s+(Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt|Funktionen|Ergebnisse)$/.test(value)||
   /^\d+\s+Āyāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
   /^\d+\s*·\s*\d+\s+Ayāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
@@ -393,7 +400,36 @@ function isDynamicGermanUi(value){
   /^(?:←|→|↗|‹|›)\s+\S/.test(value)||
   /^Alle\s+\S/.test(value)||
   /\swird geladen/.test(value)||
-  /^\d+\s+Duʿāʾ$/.test(value);
+  /^\d+\s+Duʿāʾ$/.test(value)||
+  /^Wetter für .+ wird geladen …$/.test(value)||
+  /^Wetter · .+: derzeit nicht verfügbar$/.test(value)||
+  /^Wetter · .+: \d+ °C · .+$/.test(value)||
+  /^\d+ Treffer$/.test(value)||
+  /^Live-Kompass nicht verfügbar\. Qibla: ca\. \d+(?:[.,]\d+)?° \([^)]+\)\. Öffne die Kompass-App deines Handys und richte dich auf \d+(?:[.,]\d+)?° aus\. Bitte Richtung prüfen\.$/.test(value)||
+  /^Offline fortsetzen \d+\/\d+$/.test(value)||
+  /^\d+\s+(?:Aussagen mit Quellen\.|bekannte Duʿāʾ nach Themen\.|Namen und Zuordnungen\.|gespeichert\.|Meldungen und Hinweise\.|geprüfte Werke und zitierte Gelehrte\.|Gebete aktiv)$/.test(value)||
+  /^Frage \d+(?: von |\/)\d+$/.test(value)||
+  /^\d+ \/ \d+ richtig$/.test(value)||
+  /^\d+ Runden · \d+ Fragen beantwortet$/.test(value)||
+  /^.+ · Sync aktiv$/.test(value)||
+  /^.{1,48} ist eingetreten$/.test(value)||
+  /^Passend: .+$/.test(value)||
+  /^Weitere Treffer anzeigen · \d+ von \d+$/.test(value)||
+  /^\d+ Min vorher$/.test(value)||
+  /^Taḥajjud · \d+ Min vor Fajr$/.test(value)||
+  /^Wiederholen · .+$/.test(value)||
+  /^ḤADĪṮ-WERK · .+$/.test(value)||
+  /^\d+ Titel$/.test(value)||
+  /^Bildbeitrag zu: .+$/.test(value)||
+  compoundKnown(value);
+}
+function compoundKnown(value){
+ if(!value.includes(" · "))return false;
+ if(dictionary.has(value))return false;
+ for(const dict of languagePacks.values())if(dict.has(value))return false;
+ const bits=value.split(" · ").map(part=>part.trim());
+ if(bits.length<2||bits.length>6)return false;
+ return bits.every(part=>part&&part.length<=80&&(dictionary.has(part)||[...languagePacks.values()].some(dict=>dict.has(part))||isDynamicGermanUi(part)));
 }
 function lookupPack(value,language){
  if(language==="tr"){
@@ -407,6 +443,16 @@ function lookupPack(value,language){
 function translateComposed(value,language){
  const direct=lookupPack(value,language);
  if(direct!==undefined)return direct;
+ if(value.includes(" · ")){
+  const bits=value.split(" · ").map(part=>part.trim());
+  if(bits.length>=2&&bits.length<=6&&bits.every(part=>part&&part.length<=80)){
+   const mapped=bits.map(part=>{
+    const known=lookupPack(part,language);
+    return known!==undefined?known:translateSharedPatterns(part,language);
+   });
+   if(mapped.every(part=>part!==undefined&&part!==null))return mapped.join(" · ");
+  }
+ }
  const wrapped=value.match(/^(\s*(?:←|→|↗|‹|›)\s*)(.+?)(\s*(?:→|↗|›))?\s*$/);
  if(wrapped){
   const inner=lookupPack(wrapped[2].trim(),language);
@@ -711,6 +757,174 @@ function translateSharedPatterns(value,language){
   const forms={ar:"بقي نحو "+n+" ساعة في الواجهة",en:"About "+n+" hours left in focus",tr:"Odakta yaklaşık "+n+" saat kaldı",ku:"Nêzîkî "+n+" saet di berçavê de man",ckb:"نزیکەی "+n+" کاتژمێر لە پێشەوە ماوە",bs:"Još oko "+n+" sati u fokusu",fr:"Encore environ "+n+" h en avant",es:"Faltan unas "+n+" horas en destacado"};
   return forms[language]||null;
  }
+ const weatherLoad=value.match(/^Wetter für (.+) wird geladen …$/);
+ if(weatherLoad){
+  const head=lookupPack("Wetter für",language);
+  const verb=uiWord(language,"wird geladen");
+  if(head&&verb)return head+" "+weatherLoad[1]+" "+verb+" …";
+ }
+ const weatherDown=value.match(/^Wetter · (.+): derzeit nicht verfügbar$/);
+ if(weatherDown){
+  const wetter=lookupPack("Wetter",language);
+  const tail=lookupPack("derzeit nicht verfügbar",language);
+  if(wetter&&tail)return wetter+" · "+weatherDown[1]+": "+tail;
+ }
+ const weatherNow=value.match(/^Wetter · (.+): (\d+) °C · (.+)$/);
+ if(weatherNow){
+  const wetter=lookupPack("Wetter",language);
+  const desc=lookupPack(weatherNow[3],language);
+  if(wetter&&desc)return wetter+" · "+weatherNow[1]+": "+weatherNow[2]+" °C · "+desc;
+ }
+ const hits=value.match(/^(\d+) Treffer$/);
+ if(hits){
+  const word=lookupPack("Treffer",language);
+  if(word)return hits[1]+" "+word;
+ }
+ const compass=value.match(/^Live-Kompass nicht verfügbar\. Qibla: ca\. (\d+(?:[.,]\d+)?)° \(([^)]+)\)\. Öffne die Kompass-App deines Handys und richte dich auf (\d+(?:[.,]\d+)?)° aus\. Bitte Richtung prüfen\.$/);
+ if(compass){
+  const dir=lookupPack(compass[2],language)||compass[2];
+  const deg=compass[1];
+  const forms={
+   ar:"البوصلة الحية غير متاحة. القبلة: نحو "+deg+"° ("+dir+"). افتح بوصلة هاتفك واتجه نحو "+deg+"°. يُرجى التحقق من الاتجاه.",
+   en:"Live compass is unavailable. Qibla: about "+deg+"° ("+dir+"). Open your phone’s compass and face "+deg+"°. Please check the direction.",
+   tr:"Canlı pusula kullanılamıyor. Kıble: yaklaşık "+deg+"° ("+dir+"). Telefonunun pusulasını aç ve "+deg+"° yönüne dön. Lütfen yönü kontrol et.",
+   ku:"Qitibnîşana zindî ne amade ye. Qible: nêzîkî "+deg+"° ("+dir+"). Qitibnîşana telefonê veke û ber bi "+deg+"° ve bizivire. Ji kerema xwe alî kontrol bike.",
+   ckb:"کۆمپاسی ڕاستەوخۆ بەردەست نییە. قیبلە: نزیکەی "+deg+"° ("+dir+"). کۆمپاسی مۆبایلەکەت بکەرەوە و ڕوو لە "+deg+"° بکە. تکایە ئاڕاستەکە بپشکنە.",
+   bs:"Kompas uživo nije dostupan. Kibla: oko "+deg+"° ("+dir+"). Otvori kompas telefona i okreni se prema "+deg+"°. Provjeri smjer.",
+   fr:"La boussole en direct n’est pas disponible. Qibla : environ "+deg+"° ("+dir+"). Ouvre la boussole du téléphone et oriente-toi vers "+deg+"°. Vérifie la direction.",
+   es:"La brújula en vivo no está disponible. Qibla: unos "+deg+"° ("+dir+"). Abre la brújula del teléfono y oriéntate hacia "+deg+"°. Comprueba la dirección."
+  };
+  return forms[language]||null;
+ }
+ const offlineResume=value.match(/^Offline fortsetzen (\d+)\/(\d+)$/);
+ if(offlineResume){
+  const head=lookupPack("Offline fortsetzen",language);
+  if(head)return head+" "+offlineResume[1]+"/"+offlineResume[2];
+ }
+ const countedTail=value.match(/^(\d+)\s+(Aussagen mit Quellen\.|bekannte Duʿāʾ nach Themen\.|Namen und Zuordnungen\.|gespeichert\.|Meldungen und Hinweise\.|geprüfte Werke und zitierte Gelehrte\.|Gebete aktiv)$/);
+ if(countedTail){
+  const tail=lookupPack(countedTail[2],language);
+  if(tail)return countedTail[1]+" "+tail;
+ }
+ const questionOf=value.match(/^Frage (\d+) von (\d+)$/);
+ if(questionOf){
+  const forms={
+   ar:"السؤال "+questionOf[1]+" من "+questionOf[2],
+   en:"Question "+questionOf[1]+" of "+questionOf[2],
+   tr:"Soru "+questionOf[1]+" / "+questionOf[2],
+   ku:"Pirs "+questionOf[1]+" ji "+questionOf[2],
+   ckb:"پرسیاری "+questionOf[1]+" لە "+questionOf[2],
+   bs:"Pitanje "+questionOf[1]+" od "+questionOf[2],
+   fr:"Question "+questionOf[1]+" sur "+questionOf[2],
+   es:"Pregunta "+questionOf[1]+" de "+questionOf[2]
+  };
+  return forms[language]||null;
+ }
+ const questionSlash=value.match(/^Frage (\d+)\/(\d+)$/);
+ if(questionSlash){
+  const word=lookupPack("Frage",language)||"Frage";
+  return word+" "+questionSlash[1]+"/"+questionSlash[2];
+ }
+ const score=value.match(/^(\d+) \/ (\d+) richtig$/);
+ if(score){
+  const word=lookupPack("richtig",language);
+  if(word)return score[1]+" / "+score[2]+" "+word;
+ }
+ const rounds=value.match(/^(\d+) Runden · (\d+) Fragen beantwortet$/);
+ if(rounds){
+  const a=lookupPack("Runden",language),b=lookupPack("Fragen beantwortet",language);
+  if(a&&b)return rounds[1]+" "+a+" · "+rounds[2]+" "+b;
+ }
+ const syncLine=value.match(/^(.+) · Sync aktiv$/);
+ if(syncLine){
+  const tail=lookupPack("Sync aktiv",language);
+  if(tail)return syncLine[1]+" · "+tail;
+ }
+ const entered=value.match(/^(.{1,48}) ist eingetreten$/);
+ if(entered){
+  const name=lookupPack(entered[1],language)||entered[1];
+  const forms={
+   ar:"دخل وقت "+name,
+   en:name+" has begun",
+   tr:name+" vakti girdi",
+   ku:"Dema "+name+" dest pê kir",
+   ckb:"کاتی "+name+" هات",
+   bs:name+" je nastupio",
+   fr:name+" a commencé",
+   es:name+" ha comenzado"
+  };
+  return forms[language]||null;
+ }
+ const fitting=value.match(/^Passend: (.+)$/);
+ if(fitting){
+  const head=lookupPack("Passend:",language);
+  const rest=lookupPack(fitting[1],language)||fitting[1];
+  if(head)return head+" "+rest;
+ }
+ const moreHits=value.match(/^Weitere Treffer anzeigen · (\d+) von (\d+)$/);
+ if(moreHits){
+  const forms={
+   ar:"عرض المزيد من النتائج · "+moreHits[1]+" من "+moreHits[2],
+   en:"Show more results · "+moreHits[1]+" of "+moreHits[2],
+   tr:"Daha fazla sonuç göster · "+moreHits[1]+" / "+moreHits[2],
+   ku:"Encamên zêdetir nîşan bide · "+moreHits[1]+" ji "+moreHits[2],
+   ckb:"ئەنجامی زیاتر پیشان بدە · "+moreHits[1]+" لە "+moreHits[2],
+   bs:"Prikaži više rezultata · "+moreHits[1]+" od "+moreHits[2],
+   fr:"Afficher plus de résultats · "+moreHits[1]+" sur "+moreHits[2],
+   es:"Mostrar más resultados · "+moreHits[1]+" de "+moreHits[2]
+  };
+  return forms[language]||null;
+ }
+ const minShort=value.match(/^(\d+) Min vorher$/);
+ if(minShort)return translateSharedPatterns(minShort[1]+" Minuten vorher",language);
+ const tahajjud=value.match(/^Taḥajjud · (\d+) Min vor Fajr$/);
+ if(tahajjud){
+  const n=tahajjud[1];
+  const fajr={ar:"الفجر",en:"Fajr",tr:"Fecir",ku:"Fecr",ckb:"فەجر",bs:"Fajr",fr:"Fajr",es:"Fajr"}[language]||"Fajr";
+  const forms={
+   ar:"تهجد · قبل "+n+" د من "+fajr,
+   en:"Tahajjud · "+n+" min before "+fajr,
+   tr:"Teheccüd · "+fajr+"’den "+n+" dk önce",
+   ku:"Teheccud · "+n+" deqe beriya "+fajr,
+   ckb:"تەهەججود · "+n+" خولەک پێش "+fajr,
+   bs:"Tehedždžud · "+n+" min prije "+fajr,
+   fr:"Tahajjud · "+n+" min avant "+fajr,
+   es:"Tahajjud · "+n+" min antes de "+fajr
+  };
+  return forms[language]||null;
+ }
+ const repeatLine=value.match(/^Wiederholen · (.+)$/);
+ if(repeatLine){
+  const head=lookupPack("Wiederholen",language);
+  const tail=lookupPack(repeatLine[1],language)||repeatLine[1];
+  if(head)return head+" · "+tail;
+ }
+ const hadithWork=value.match(/^ḤADĪṮ-WERK · (.+)$/);
+ if(hadithWork){
+  const head=lookupPack("ḤADĪṮ-WERK",language);
+  if(head)return head+" · "+hadithWork[1];
+ }
+ const titleCount=value.match(/^(\d+) Titel$/);
+ if(titleCount){
+  const n=titleCount[1];
+  const forms={
+   ar:n==="1"?"عنوان واحد":n+" عناوين",
+   en:n==="1"?"1 title":n+" titles",
+   tr:n+" başlık",
+   ku:n+" sernav",
+   ckb:n==="1"?"ناونیشانێک":n+" ناونیشان",
+   bs:n==="1"?"1 naslov":n+" naslova",
+   fr:n==="1"?"1 titre":n+" titres",
+   es:n==="1"?"1 título":n+" títulos"
+  };
+  return forms[language]||null;
+ }
+ const picture=value.match(/^Bildbeitrag zu: (.+)$/);
+ if(picture){
+  const head=lookupPack("Bildbeitrag zu:",language);
+  const rest=lookupPack(picture[1],language)||picture[1];
+  if(head)return head+" "+rest;
+ }
  return null;
 }
 function translateExact(value,language="tr"){
@@ -731,6 +945,82 @@ function translateExact(value,language="tr"){
   const head=language==="tr"?(dictionary.get(statements[1])||languagePacks.get("tr")?.get(statements[1])):
     languagePacks.get(language)?.get(statements[1]);
   return head?head+" · "+statements[2]:null;
+ }
+ const attested=value.match(/^Belegte Aussagen · (\d+)$/);
+ if(attested){
+  const forms={
+   ar:"أقوال ثابتة",
+   en:"Established reports",
+   tr:"Sabit sözler",
+   ku:"Gotinên sabit",
+   ckb:"وتە سەلمێنراوەکان",
+   bs:"Utvrđene izjave",
+   fr:"Propos établis",
+   es:"Dichos establecidos"
+  };
+  return forms[language]?forms[language]+" · "+attested[1]:null;
+ }
+ const sourceButton=value.match(/^(\d+) Quellen · Quellen anzeigen$/);
+ if(sourceButton){
+  const show=lookupPack("Quellen anzeigen",language);
+  const forms={
+   ar:sourceButton[1]==="1"?"مصدر واحد":sourceButton[1]+" مصادر",
+   en:sourceButton[1]==="1"?"1 source":sourceButton[1]+" sources",
+   tr:sourceButton[1]+" kaynak",
+   ku:sourceButton[1]+" çavkanî",
+   ckb:sourceButton[1]==="1"?"سەرچاوەیەک":sourceButton[1]+" سەرچاوە",
+   bs:sourceButton[1]==="1"?"1 izvor":sourceButton[1]+" izvora",
+   fr:sourceButton[1]==="1"?"1 source":sourceButton[1]+" sources",
+   es:sourceButton[1]==="1"?"1 fuente":sourceButton[1]+" fuentes"
+  };
+  return forms[language]&&show?forms[language]+" · "+show:null;
+ }
+ const contentCount=value.match(/^(\d+) (Inhalt|Inhalte)$/);
+ if(contentCount){
+  const n=contentCount[1];
+  const forms={
+   ar:n==="1"?"محتوى واحد":n+" محتويات",
+   en:n==="1"?"1 item":n+" items",
+   tr:n+" içerik",
+   ku:n+" naverok",
+   ckb:n==="1"?"ناوەرۆکێک":n+" ناوەرۆک",
+   bs:n==="1"?"1 sadržaj":n+" sadržaja",
+   fr:n==="1"?"1 contenu":n+" contenus",
+   es:n==="1"?"1 contenido":n+" contenidos"
+  };
+  return forms[language]||null;
+ }
+ const reviewedReports=value.match(/^(\d+) geprüfte Berichte$/);
+ if(reviewedReports){
+  const n=reviewedReports[1];
+  const forms={
+   ar:n==="1"?"تقرير مفحوص واحد":n+" تقارير مفحوصة",
+   en:n==="1"?"1 reviewed report":n+" reviewed reports",
+   tr:n+" incelenmiş rapor",
+   ku:n+" raporên kontrolkirî",
+   ckb:n==="1"?"ڕاپۆرتێکی پشکنراو":n+" ڕاپۆرتی پشکنراو",
+   bs:n==="1"?"1 provjeren izvještaj":n+" provjerena izvještaja",
+   fr:n==="1"?"1 rapport vérifié":n+" rapports vérifiés",
+   es:n==="1"?"1 informe revisado":n+" informes revisados"
+  };
+  return forms[language]||null;
+ }
+ const quranOpen=value.match(/^Im Qurʾān öffnen · (.+)$/);
+ if(quranOpen){
+  const head=lookupPack("Im Qurʾān öffnen",language);
+  const rest=lookupPack(quranOpen[1],language)||quranOpen[1];
+  return head?head+" · "+rest:null;
+ }
+ const previewWrap=value.match(/^(.+) \(Vorschau · nicht freigegeben\)$/);
+ if(previewWrap){
+  const tail=lookupPack("(Vorschau · nicht freigegeben)",language);
+  const name=lookupPack(previewWrap[1],language)||previewWrap[1];
+  return tail?name+" "+tail:null;
+ }
+ const aboutHim=value.match(/^Der Prophet Muḥammad ﷺ über ihn · (\d+)$/);
+ if(aboutHim){
+  const head=lookupPack("Der Prophet Muḥammad ﷺ über ihn",language);
+  return head?head+" · "+aboutHim[1]:null;
  }
  const dynamicLabels={
   Veröffentlichungen:{ar:"منشورات",ku:"weşan",ckb:"بڵاوکراوە",bs:"publikacija",fr:"publications",es:"publicaciones"},
@@ -819,7 +1109,10 @@ function transformText(node,locale){
  if(!state){
   const match=current.match(/^(\s*)(.*?)(\s*)$/s);
   const german=match&&germanSourceOf(match[2]);
-  if(!match||!german)return;
+  if(!match||!german){
+   if(locale!=="de"&&match&&/[äöüÄÖÜß]/.test(match[2])&&!/[\u0600-\u06ff<>]/.test(match[2]))noteGap(match[2]);
+   return;
+  }
   state={source:match[1]+german+match[3],rendered:current};originals.set(node,state);
  }
  const value=state.source.match(/^(\s*)(.*?)(\s*)$/s),translated=translateExact(value[2],locale);
@@ -853,7 +1146,7 @@ function translateFragmented(root,locale){
   if(shouldSkip(element)||!element.children?.length)return;
   if([...element.children].some(child=>!inline.test(child.tagName)||child.children?.length))return;
   const text=String(element.textContent||"").replace(/\s+/g," ").trim();
-  if(text.length<8||text.length>240)return;
+  if(text.length<8||text.length>420)return;
   const translated=translateExact(text,locale);
   if(!translated||translated===text)return;
   element.textContent=translated;
@@ -885,9 +1178,9 @@ const PINNED_CHROME={
   en:"App is loading…",
   tr:"Uygulama yükleniyor…",
   ku:"Sepan tê barkirin…",
-  ckb:"ئەپەکە دادەگیرێت…",
+  ckb:"ئەپ باردەکرێت…",
   bs:"Aplikacija se učitava…",
-  fr:"L’application est en cours de chargement…",
+  fr:"Chargement de l'application…",
   es:"La aplicación se está cargando…"
  },
  ".dar-library-brandbar__sub":{
@@ -901,6 +1194,21 @@ const PINNED_CHROME={
   es:"Conocimiento del Qurʾān y de la Sunnah"
  }
 };
+function localizeCompassRose(locale){
+ const doc=global.document;
+ if(!doc?.querySelector)return;
+ const rose=locale==="ar"||locale==="ckb"
+  ?{n:"ش",e:"ق",s:"ج",w:"غ"}
+  :locale==="de"?{n:"N",e:"O",s:"S",w:"W"}:{n:"N",e:"E",s:"S",w:"W"};
+ for(const [key,text] of Object.entries(rose)){
+  doc.querySelectorAll(".qibla-"+key).forEach(element=>{
+   if(element.childElementCount)return;
+   const label=String(element.textContent||"");
+   if(label.length>3)return;
+   if(label!==text)element.textContent=text;
+  });
+ }
+}
 function localizePinnedChrome(locale){
  const doc=global.document;
  if(!doc?.querySelectorAll||locale==="de")return;
@@ -914,12 +1222,45 @@ function localizePinnedChrome(locale){
   });
  }
 }
+const MEANING_PENDING="Geprüfte Bedeutungsübersetzung in dieser Sprache folgt. Angezeigt bleibt die deutsche Fassung.";
+const gapLog=[];
+function noteGap(text){
+ const value=String(text||"").replace(/\s+/g," ").trim();
+ if(!value||value.length>180||gapLog.includes(value)||gapLog.length>=80)return;
+ gapLog.push(value);
+}
+function markPendingMeanings(locale){
+ const doc=global.document;
+ if(typeof doc?.querySelectorAll!=="function"||typeof doc.createElement!=="function")return;
+ if(typeof doc.getElementById==="function"&&doc.head&&!doc.getElementById("dar-meaning-pending-style")){
+  const style=doc.createElement("style");
+  style.id="dar-meaning-pending-style";
+  style.textContent=".dar-meaning-pending{margin:0 0 8px;padding:8px 10px;border-radius:12px;font-size:12px;line-height:1.45;text-align:start}";
+  doc.head.appendChild(style);
+ }
+ let bodies=[];
+ try{bodies=doc.querySelectorAll(".qrc-body")}catch(_){return}
+ bodies.forEach(body=>{
+  if(typeof body?.querySelector!=="function"||typeof body.prepend!=="function")return;
+  if(!body.querySelector(".quran-ayah-de"))return;
+  const note=body.querySelector(":scope > .dar-meaning-pending");
+  if(locale==="de"){if(note)note.remove();return}
+  if(note)return;
+  const el=doc.createElement("p");
+  el.className="dar-meaning-pending";
+  el.setAttribute("data-dar-ui-label","meaning-pending");
+  el.textContent=MEANING_PENDING;
+  body.prepend(el);
+ });
+}
 function apply(root=global.document?.body,locale=currentLocale()){
  if(!root)return 0;
  const doc=global.document;
  if(root.nodeType===1&&!shouldSkip(root))transformAttributes(root,locale);
  localizePinnedChrome(locale);
+ localizeCompassRose(locale);
  renderHomeWelcome(locale);
+ markPendingMeanings(locale);
  translateFragmented(root,locale);
  const walker=doc.createTreeWalker(root,global.NodeFilter.SHOW_ELEMENT|global.NodeFilter.SHOW_TEXT);
  let node,seen=0;
@@ -944,7 +1285,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-15";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-29";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
@@ -985,5 +1326,6 @@ global.DarTestTurkishUI={apply,schedule,locale:currentLocale,loadCatalog,
   get localizedDraftTitleCount(){return titleByGerman.size},
   translatePrayerName:(source,locale=currentLocale())=>translateExact(source,locale)||source,
   translatedFor:code=>code==="tr"?dictionary.size:(languagePacks.get(code)?.size||0),
+  gaps:()=>gapLog.slice(),
   contentStore:()=>global.DarAdultCentralContent?.create()||null,scope:"adult-test-only"};
 })(window);

@@ -23,9 +23,29 @@
   }
   var html=document.documentElement;
   var bootLang="de";
-  try{bootLang=localStorage.getItem("darAdultPreferredLocaleV1")||"de";}catch(e){}
+  function supportedBootLocale(raw){
+    var code=String(raw||"").toLowerCase().replace(/_/g,"-");
+    if(code==="ckb"||code.indexOf("ckb-")===0)return "ckb";
+    if(code==="ku"||code.indexOf("ku-")===0||code==="kmr"||code.indexOf("kmr-")===0)return "ku";
+    var primary=code.split("-")[0];
+    if(primary==="de"||primary==="tr"||primary==="en"||primary==="ar"||primary==="bs"||primary==="fr"||primary==="es")return primary;
+    return "";
+  }
+  var stored=null;
+  try{stored=localStorage.getItem("darAdultPreferredLocaleV1");}catch(e){}
+  if(!stored){
+    var detected="";
+    try{
+      var langs=[].concat(navigator.languages||[],navigator.language?[navigator.language]:[]);
+      for(var i=0;i<langs.length&&!detected;i++)detected=supportedBootLocale(langs[i]);
+    }catch(e){}
+    bootLang=detected||"de";
+    try{localStorage.setItem("darAdultPreferredLocaleV1",bootLang);}catch(e){}
+  }else bootLang=stored;
+  window.__DAR_BOOT_LOCALE=bootLang;
   if(bootLang==="ar"||bootLang==="ckb"){html.lang=bootLang;html.dir="rtl";}
-  else if(bootLang&&bootLang!=="de"){html.lang=bootLang;html.dir="ltr";}
+  else {html.lang=bootLang||"de";html.dir="ltr";}
+  if(bootLang&&bootLang!=="de")html.classList.add("dar-boot-locale-pending");
   if(readUntil()>Date.now())return;
   html.style.visibility="hidden";
   function unlock(){
@@ -119,6 +139,7 @@
 })();
 </script>
 <style id="dar-soft-boot-inline-v670">
+html.dar-boot-locale-pending #darBootLoading,html.dar-boot-locale-pending #darBootKicker,html.dar-boot-locale-pending #darBootIntro{visibility:hidden}
 html.dar-soft-booting,html.dar-soft-booting body{background-color:var(--dar-boot-fill,var(--theme-page-bg,#080806))!important;overflow:hidden!important}
 html.dar-soft-booting #bottomNav,html.dar-soft-booting .bottom-nav,html.dar-soft-booting .footer,html.dar-soft-booting .home-discover,html.dar-soft-booting .home-v380{visibility:hidden!important;opacity:0!important;pointer-events:none!important}
 html.dar-ios-native-app.dar-soft-booting,html.dar-ios-native-app.dar-soft-booting body{overflow:visible!important}
@@ -131,12 +152,13 @@ html.dar-ios-native-app #bottomNav,html.dar-ios-native-app #bottomNav.bottom-nav
 #dar-soft-boot .dar-soft-boot__track{width:min(300px,78vw);height:6px;border-radius:999px;margin-top:8px;background:linear-gradient(90deg,rgba(201,168,106,.22),rgba(201,168,106,.08));box-shadow:none;overflow:hidden}
 #dar-soft-boot .dar-soft-boot__bar{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,#c4a66a 0%,#efd78e 46%,rgba(239,215,142,.82) 100%);box-shadow:0 0 5px rgba(201,168,106,.22);transition:width .08s linear}
 #dar-soft-boot .dar-soft-boot__pct{margin:0;font-size:16px;font-weight:800;letter-spacing:.08em;color:rgba(244,234,210,.78)}
+#dar-soft-boot .dar-soft-boot__status{margin:0;font-size:13px;font-weight:700;letter-spacing:.04em;text-align:center;color:rgba(244,234,210,.82)}
 html[data-theme="light"] #dar-soft-boot,html[data-theme="soft"] #dar-soft-boot,html[data-theme="eisgold"] #dar-soft-boot{color:#3a2f24}
 html[data-theme="light"] #dar-soft-boot .dar-soft-boot__title,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__title{color:var(--gold2,#9b7a3c)}
-html[data-theme="light"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="light"] #dar-soft-boot .dar-soft-boot__pct,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__pct{color:rgba(58,47,36,.72)}
+html[data-theme="light"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="light"] #dar-soft-boot .dar-soft-boot__pct,html[data-theme="light"] #dar-soft-boot .dar-soft-boot__status,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__sub,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__pct,html[data-theme="soft"] #dar-soft-boot .dar-soft-boot__status{color:rgba(58,47,36,.72)}
 </style>
 <script>/* ANDROID_NATIVE_EARLY_V672: UA sofort als Native markieren — verhindert OneSignal-Reload-Hang am Logo */(function(){try{var ua=String(navigator.userAgent||"");if(!/Android/i.test(ua))return;document.documentElement.classList.add("is-android");if(/DarAlTawhidAndroid/i.test(ua)){window.DAR_ANDROID_NATIVE_APP=true;document.documentElement.classList.add("dar-android-native-app");}}catch(e){}})();</script>
-<script src="/test/assets/app-soft-boot.js?v=938"></script>
+<script src="/test/assets/app-soft-boot.js?v=20261024-locale-shell"></script>
 <script>/* SOFTBOOT_UNSTICK_V937 */(function(){function wipe(){try{document.documentElement.classList.remove("dar-soft-booting");document.documentElement.style.removeProperty("background-color");document.querySelectorAll("#dar-soft-boot").forEach(function(n){n.parentNode&&n.parentNode.removeChild(n)})}catch(e){}}var native=/DarAlTawhidAndroid/i.test(String(navigator.userAgent||""))||!!window.DAR_ANDROID_NATIVE_APP;if(native){wipe();return}setTimeout(function(){wipe()},1200);setTimeout(function(){wipe()},2800)})();</script>
 
 <script>/* ANDROID_FULL_RELOAD_V665: PWA/Standalone wie iOS — kein Hängen auf Chrome-Splash */(function(){try{var ua=String(navigator.userAgent||"");if(!/Android/i.test(ua))return;document.documentElement.classList.add("is-android");window.addEventListener("pageshow",function(ev){if(ev&&ev.persisted)location.reload()});}catch(e){}})();</script>
@@ -21073,7 +21095,7 @@ body.is-quran-reader-route .quran-ayah-action-btn--tafsir.is-loading::after{cont
 </style>
 
 <!-- DĀR TEST · COMPACT HOME V3.1 · never include in public visitor build -->
-<script defer id="darTestHomeV3CompactScript" src="/test/assets/dar-home-v3-compact.js?v=20261024-ui-more-15"></script>
+<script defer id="darTestHomeV3CompactScript" src="/test/assets/dar-home-v3-compact.js?v=20261024-ui-more-29"></script>
 <body class="has-bottom-nav">
 <div id="newPostsBanner" class="new-posts-banner hidden" role="button" tabindex="0" aria-label="Aktualisieren" style="display:none">
   <span class="new-posts-icon">&#x23F3;</span>
@@ -21105,14 +21127,14 @@ body.is-quran-reader-route .quran-ayah-action-btn--tafsir.is-loading::after{cont
     var code="de";
     try{code=localStorage.getItem("darAdultPreferredLocaleV1")||"de";}catch(e){}
     var pack={
-      ar:{kicker:"التوحيد · القرآن · السنة · الآثار",intro:"التوحيد في الصدارة. علم من القرآن، ومن السنة الصحيحة، ومن آثار الأئمة المتقدمين.",loading:"جارٍ تحميل التطبيق…",area:"منطقة داخلية",password:"كلمة المرور",open:"فتح",bad:"غير صحيحة"},
-      en:{kicker:"Tawḥīd · Qurʾān · Sunnah · Āthār",intro:"Tawḥīd at the center. Knowledge from the Qurʾān, the authentic Sunnah, and the Āthār of the early imams.",loading:"App is loading…",area:"Internal area",password:"Password",open:"Open",bad:"Not correct"},
-      tr:{kicker:"Tevhid · Kur'an · Sünnet · Āsār",intro:"Merkezde Tevhid. İlim; Kur'an'dan, sahih Sünnet'ten ve ilk dönem imamlarının Āsārından.",loading:"Uygulama yükleniyor…",area:"Dahili alan",password:"Şifre",open:"Aç",bad:"Doğru değil"},
-      ku:{kicker:"Tawḥīd · Qurʾān · Sunnah · Āthār",intro:"Tawḥīd di navendê de ye. Zanîn ji Qurʾān, ji Sunneta rast û ji Āthārên îmamên pêşîn.",loading:"Sepan tê barkirin…",area:"Qada navxweyî",password:"Şîfre",open:"Veke",bad:"Ne rast e"},
-      ckb:{kicker:"تەوحید · قورئان · سوننەت · ئاسار",intro:"تەوحید لە ناوەنددایە. زانست لە قورئان، لە سوننەتی ڕەسەن و لە ئاسارەکانی ئیمامانی پێشین.",loading:"ئەپەکە دادەگیرێت…",area:"ناوچەی ناوخۆیی",password:"وشەی نهێنی",open:"کردنەوە",bad:"ڕاست نییە"},
-      bs:{kicker:"Tawḥīd · Kur'an · Sunnet · Āthār",intro:"Tawḥīd u središtu. Znanje iz Kur'ana, vjerodostojnog sunneta i Āthāra ranih imama.",loading:"Aplikacija se učitava…",area:"Interno područje",password:"Lozinka",open:"Otvori",bad:"Nije tačno"},
-      fr:{kicker:"Tawḥīd · Qurʾān · Sunnah · Āthār",intro:"Le Tawḥīd au centre. Un savoir tiré du Qurʾān, de la Sunnah authentique et des Āthār des premiers imams.",loading:"L’application est en cours de chargement…",area:"Espace interne",password:"Mot de passe",open:"Ouvrir",bad:"Incorrect"},
-      es:{kicker:"Tawḥīd · Qurʾān · Sunnah · Āthār",intro:"El Tawḥīd en el centro. Conocimiento del Qurʾān, de la Sunnah auténtica y de los Āthār de los primeros imames.",loading:"La aplicación se está cargando…",area:"Área interna",password:"Contraseña",open:"Abrir",bad:"No es correcto"}
+      ar:{kicker:"مشاركات وفق القرآن والسنة والآثار",intro:"التوحيد في الصدارة. علم من القرآن، ومن السنة الصحيحة، ومن آثار الأئمة المتقدمين.",loading:"جارٍ تحميل التطبيق…",area:"منطقة داخلية",password:"كلمة المرور",open:"فتح",bad:"غير صحيحة"},
+      en:{kicker:"CONTRIBUTIONS FROM THE QURʾĀN, SUNNAH & ĀTHĀR",intro:"Tawḥīd at the center. Knowledge from the Qurʾān, the authentic Sunnah, and the Āthār of the early imams.",loading:"App is loading…",area:"Internal area",password:"Password",open:"Open",bad:"Not correct"},
+      tr:{kicker:"KUR'AN, SÜNNET VE ÂSÂRA GÖRE YAZILAR",intro:"Merkezde Tevhid. İlim; Kur'an'dan, sahih Sünnet'ten ve ilk dönem imamlarının Āsārından.",loading:"Uygulama yükleniyor…",area:"Dahili alan",password:"Şifre",open:"Aç",bad:"Doğru değil"},
+      ku:{kicker:"NIVÎS LI GOR QUR'AN, SUNNAH Û ESERAN",intro:"Tawḥīd di navendê de ye. Zanîn ji Qurʾān, ji Sunneta rast û ji Āthārên îmamên pêşîn.",loading:"Sepan tê barkirin…",area:"Qada navxweyî",password:"Şîfre",open:"Veke",bad:"Ne rast e"},
+      ckb:{kicker:"بەشدارییەکان بەپێی قورئان، سوننەت و ئاسار",intro:"تەوحید لە ناوەنددایە. زانست لە قورئان، لە سوننەتی ڕەسەن و لە ئاسارەکانی ئیمامانی پێشین.",loading:"ئەپ باردەکرێت…",area:"ناوچەی ناوخۆیی",password:"وشەی نهێنی",open:"کردنەوە",bad:"ڕاست نییە"},
+      bs:{kicker:"TEKSTOVI PREMA KUR'ANU, SUNNETU I PREDAJAMA",intro:"Tawḥīd u središtu. Znanje iz Kur'ana, vjerodostojnog sunneta i Āthāra ranih imama.",loading:"Aplikacija se učitava…",area:"Interno područje",password:"Lozinka",open:"Otvori",bad:"Nije tačno"},
+      fr:{kicker:"ARTICLES SELON LE QURʾĀN, LA SUNNAH ET LES ĀTHĀR",intro:"Le Tawḥīd au centre. Un savoir tiré du Qurʾān, de la Sunnah authentique et des Āthār des premiers imams.",loading:"Chargement de l'application…",area:"Espace interne",password:"Mot de passe",open:"Ouvrir",bad:"Incorrect"},
+      es:{kicker:"ARTÍCULOS SEGÚN EL QURʾĀN, LA SUNNAH Y LOS ĀTHĀR",intro:"El Tawḥīd en el centro. Conocimiento del Qurʾān, de la Sunnah auténtica y de los Āthār de los primeros imames.",loading:"La aplicación se está cargando…",area:"Área interna",password:"Contraseña",open:"Abrir",bad:"No es correcto"}
     };
     var row=pack[code];
     if(!row)return;
@@ -21122,6 +21144,7 @@ body.is-quran-reader-route .quran-ayah-action-btn--tafsir.is-loading::after{cont
     if(kicker)kicker.textContent=row.kicker;
     if(intro)intro.textContent=row.intro;
     if(loading)loading.textContent=row.loading;
+    document.documentElement.classList.remove("dar-boot-locale-pending");
     var area=document.getElementById("darTestLockArea");
     var input=document.getElementById("darTestLockInput");
     var button=document.getElementById("darTestLockBtn");
