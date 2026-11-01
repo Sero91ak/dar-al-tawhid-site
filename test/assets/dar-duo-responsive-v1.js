@@ -148,9 +148,9 @@
       var value=el.getAttribute("data-value")||"";
       var library=el.getAttribute("data-library-open")||"";
       var source=el.getAttribute("data-qsrc-open")||"";
-      if(hash && (!/^#[\\w/\\-:]{2,150}$/.test(hash)||family(hash)!==current))continue;
+      if(hash && (!hash.startsWith("#")||hash.length>150||hash.includes(" ")||family(hash)!==current))continue;
       if(!hash&&!nav&&!library&&!source)continue;
-      var title=String(el.innerText||el.textContent||"").replace(/\\s+/g," ").trim();
+      var title=String(el.innerText||el.textContent||"").replace(/\s+/g," ").trim();
       if(title.length<3)continue;
       title=title.slice(0,96);
       var key=hash||[nav,value,library,source].join("|");
