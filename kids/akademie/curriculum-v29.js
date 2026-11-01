@@ -29,7 +29,7 @@ const additions={
       "text": "Wer sät oder pflanzt und dessen Pflanzen Menschen oder Tiere ernähren, dem wird dies als gute Wohltat angerechnet. (Sinngemäße Bedeutung)"
     },
     "sourceAudit": {
-      "hadithUrl": "https://dorar.net/hadith/sharh/4998",
+      "hadithUrl": "https://sunnah.com/bukhari:2320",
       "hadithNumber": "2320",
       "narrator": "Anas ibn Mālik",
       "authenticity": "Ṣaḥīḥ",
@@ -177,7 +177,7 @@ const additions={
       "text": "Der Prophet ﷺ erklärte den Īmān: an Allah, Seine Engel, Seine Bücher, Seine Gesandten, den Jüngsten Tag und die Bestimmung zu glauben. (Sinngemäß)"
     },
     "sourceAudit": {
-      "hadithUrl": "https://dorar.net/hadith/sharh/1189",
+      "hadithUrl": "https://sunnah.com/muslim:8a",
       "hadithNumber": "8",
       "narrator": "ʿUmar ibn al-Khaṭṭāb",
       "authenticity": "Ṣaḥīḥ",
@@ -1323,7 +1323,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Was lehren Sūrat al-Māʾidah · 5:6 (Textauszug) und die genannte Sunnah? Was ist unser eigenes Beispiel?",
-     "sample": "Qurʾān-Bedeutung: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln. Sunnah (sinngemäß): Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Eigenes Lernbeispiel: Wir erkennen die grundlegenden Glieder der Gebetswaschung, ohne einzelne Sonderfälle vorwegzunehmen.",
+     "sample": "Qurʾān-Bedeutung: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Sunnah (sinngemäß): Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Eigenes Lernbeispiel: Wir erkennen die grundlegenden Glieder der Gebetswaschung, ohne einzelne Sonderfälle vorwegzunehmen.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
    ]
@@ -1347,7 +1347,7 @@ const editorialContentV30={
      "Wir streichen über den Kopf und waschen die Füße.",
      "Wir üben das Thema mit einer passenden Alltagssituation: Die genaue Ausführung üben wir mit einer erwachsenen Lehrperson."
     ],
-    "evidence": "Qurʾān: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln. Die Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt."
+    "evidence": "Qurʾān: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Die Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt."
    },
    "9-10": {
     "intro": "Wir prüfen, wie Qurʾān, Sunnah und unsere eigene Alltagsübung bei „Wuḍūʾ“ zusammenhängen.",
@@ -1357,7 +1357,7 @@ const editorialContentV30={
      "Die genannte authentische Überlieferung stammt aus Ṣaḥīḥ al-Buḫārī, Nr. 135.",
      "Anwendung im Alltag: Wir erkennen die grundlegenden Glieder der Gebetswaschung, ohne einzelne Sonderfälle vorwegzunehmen."
     ],
-    "evidence": "Sūrat al-Māʾidah · 5:6 (Textauszug): Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln. Ṣaḥīḥ al-Buḫārī, Nr. 135: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Wir kennzeichnen unseren Unterrichtsalltag ausdrücklich als eigenes Beispiel."
+    "evidence": "Sūrat al-Māʾidah · 5:6 (Textauszug): Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Ṣaḥīḥ al-Buḫārī, Nr. 135: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Wir kennzeichnen unseren Unterrichtsalltag ausdrücklich als eigenes Beispiel."
    }
   }
  },
@@ -3111,7 +3111,7 @@ const editorialContentV30={
      "type": "choice",
      "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Gesicht und Arme“?",
      "options": [
-      "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln.",
+      "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln.",
       "Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt.",
       "Unser Übungsziel: Ich erkenne Gesicht und Arme als Teile des Wuḍūʾ."
      ],
@@ -3142,7 +3142,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Was lehren Sūrat al-Māʾidah · 5:6 (Textauszug) und die genannte Sunnah? Was ist unser eigenes Beispiel?",
-     "sample": "Qurʾān-Bedeutung: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln. Sunnah (sinngemäß): Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Eigenes Lernbeispiel: Ich erkenne Gesicht und Arme als Teile des Wuḍūʾ.",
+     "sample": "Qurʾān-Bedeutung: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Sunnah (sinngemäß): Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Eigenes Lernbeispiel: Ich erkenne Gesicht und Arme als Teile des Wuḍūʾ.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
    ]
@@ -3166,7 +3166,7 @@ const editorialContentV30={
      "Er nennt auch die Arme.",
      "Wir üben das Thema mit einer passenden Alltagssituation: Wir lernen die Handlung Schritt für Schritt."
     ],
-    "evidence": "Qurʾān: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln. Die Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt."
+    "evidence": "Qurʾān: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Die Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt."
    },
    "9-10": {
     "intro": "Wir prüfen, wie Qurʾān, Sunnah und unsere eigene Alltagsübung bei „Gesicht und Arme“ zusammenhängen.",
@@ -3176,7 +3176,7 @@ const editorialContentV30={
      "Die genannte authentische Überlieferung stammt aus Ṣaḥīḥ al-Buḫārī, Nr. 135.",
      "Anwendung im Alltag: Ich erkenne Gesicht und Arme als Teile des Wuḍūʾ."
     ],
-    "evidence": "Sūrat al-Māʾidah · 5:6 (Textauszug): Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln. Ṣaḥīḥ al-Buḫārī, Nr. 135: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Wir kennzeichnen unseren Unterrichtsalltag ausdrücklich als eigenes Beispiel."
+    "evidence": "Sūrat al-Māʾidah · 5:6 (Textauszug): Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Ṣaḥīḥ al-Buḫārī, Nr. 135: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Wir kennzeichnen unseren Unterrichtsalltag ausdrücklich als eigenes Beispiel."
    }
   }
  },
@@ -3218,7 +3218,7 @@ const editorialContentV30={
      "type": "choice",
      "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Kopf und Füße“?",
      "options": [
-      "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln.",
+      "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln.",
       "Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt.",
       "Unser Übungsziel: Ich erkenne das Streichen über den Kopf."
      ],
@@ -3249,7 +3249,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Was lehren Sūrat al-Māʾidah · 5:6 (Textauszug) und die genannte Sunnah? Was ist unser eigenes Beispiel?",
-     "sample": "Qurʾān-Bedeutung: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln. Sunnah (sinngemäß): Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Eigenes Lernbeispiel: Ich erkenne das Streichen über den Kopf.",
+     "sample": "Qurʾān-Bedeutung: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Sunnah (sinngemäß): Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Eigenes Lernbeispiel: Ich erkenne das Streichen über den Kopf.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
    ]
@@ -3273,7 +3273,7 @@ const editorialContentV30={
      "Wir lernen außerdem die Reinigung der Füße.",
      "Wir üben das Thema mit einer passenden Alltagssituation: Praktische Übungen machen wir mit Anleitung."
     ],
-    "evidence": "Qurʾān: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln. Die Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt."
+    "evidence": "Qurʾān: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Die Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt."
    },
    "9-10": {
     "intro": "Wir prüfen, wie Qurʾān, Sunnah und unsere eigene Alltagsübung bei „Kopf und Füße“ zusammenhängen.",
@@ -3283,7 +3283,7 @@ const editorialContentV30={
      "Die genannte authentische Überlieferung stammt aus Ṣaḥīḥ al-Buḫārī, Nr. 135.",
      "Anwendung im Alltag: Ich erkenne das Streichen über den Kopf."
     ],
-    "evidence": "Sūrat al-Māʾidah · 5:6 (Textauszug): Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln. Ṣaḥīḥ al-Buḫārī, Nr. 135: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Wir kennzeichnen unseren Unterrichtsalltag ausdrücklich als eigenes Beispiel."
+    "evidence": "Sūrat al-Māʾidah · 5:6 (Textauszug): Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Ṣaḥīḥ al-Buḫārī, Nr. 135: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Wir kennzeichnen unseren Unterrichtsalltag ausdrücklich als eigenes Beispiel."
    }
   }
  },
