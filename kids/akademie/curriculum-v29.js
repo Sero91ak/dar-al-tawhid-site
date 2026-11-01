@@ -3751,15 +3751,14 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Die Engel“?",
+     "prompt": "Welche Quelle in dieser Lektion nennt Engel ausdrücklich?",
      "options": [
-      "Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
-      "Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
-      "Unser Übungsziel: Ich kann die Engel als einen Bestandteil des Īmān nennen."
+      "Den Ḥadīṯ Ǧibrīl in Ṣaḥīḥ Muslim 8a.",
+      "Den hier gezeigten Vers 2:3."
      ],
      "correct": 0,
-     "hint": "Sieh zuerst auf den Qurʾān-Beleg: Sūrat al-Baqarah · 2:3.",
-     "explain": "Die erste Antwort gibt die Bedeutung von Sūrat al-Baqarah · 2:3 wieder. Die zweite bezieht sich auf die Sunnah, die dritte auf unsere Übung."
+     "hint": "Welche Worte stehen wirklich im gezeigten Vers 2:3? Vergleiche mit Muslim 8a.",
+     "explain": "Der Qurʾān-Vers 2:3 spricht vom Verborgenen. Der Ḥadīṯ Ǧibrīl nennt den Glauben an Engel ausdrücklich."
     }
    ],
    "9-10": [
@@ -3858,15 +3857,14 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Die Gesandten“?",
+     "prompt": "Welche Quelle nennt hier die Gesandten ausdrücklich als Glaubensgrundlage?",
      "options": [
-      "Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
-      "Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
-      "Unser Übungsziel: Ich kenne einen weiteren Bestandteil des Īmān."
+      "Den Ḥadīṯ Ǧibrīl in Ṣaḥīḥ Muslim 8a.",
+      "Den hier gezeigten Vers 2:3."
      ],
      "correct": 0,
-     "hint": "Sieh zuerst auf den Qurʾān-Beleg: Sūrat al-Baqarah · 2:3.",
-     "explain": "Die erste Antwort gibt die Bedeutung von Sūrat al-Baqarah · 2:3 wieder. Die zweite bezieht sich auf die Sunnah, die dritte auf unsere Übung."
+     "hint": "Welche Worte stehen wirklich im gezeigten Vers 2:3? Vergleiche mit Muslim 8a.",
+     "explain": "Der Vers 2:3 beschreibt Glaubende. Der Ḥadīṯ Ǧibrīl nennt die Gesandten ausdrücklich."
     }
    ],
    "9-10": [
