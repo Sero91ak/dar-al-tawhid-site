@@ -1,0 +1,698 @@
+{
+  "kind": "kids-academy-content-only-question-review",
+  "schemaVersion": 1,
+  "createdAt": "2026-10-31",
+  "status": "EDITORIAL_DRAFT_NOT_PUBLISHED",
+  "appliesTo": "kids/akademie/curriculum-v1.js",
+  "layoutChangesAllowed": false,
+  "architectureChangesAllowed": false,
+  "modifiesExistingIds": false,
+  "audioGenerationAllowed": false,
+  "reviewIssue": 1535,
+  "sourcesVerifiedByHuman": false,
+  "description": "33 inhaltsbezogene Vorschläge für drei auffällige Aufgaben-Slots je Grundlagenlektion; keine Laufzeit- oder Layoutänderung. 4–5 Frage 2, 6–8 Frage 3, 9–10 Frage 1. Reihenfolge, Fragenanzahl, Antwort-Kanons und Audios der Besucher bleiben unverändert, bis ein separat geprüfter Inhaltspatch freigegeben ist.",
+  "lessons": [
+    {
+      "lessonId": "akhlaq-sabr",
+      "topic": "Geduld",
+      "sourceReferences": {
+        "quran": "2:153",
+        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 1469",
+        "quranExcerpt": false
+      },
+      "status": "pending-human-islamic-and-pedagogical-review",
+      "questionSlots": [
+        {
+          "age": "4-5",
+          "index": 1,
+          "originalPrompt": "Was möchten wir uns heute merken?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Du bist traurig, weil du warten musst. Was zeigt Geduld?",
+            "options": [
+              "Ich darf traurig sein und trotzdem freundlich warten.",
+              "Ich muss so tun, als wäre ich nicht traurig."
+            ],
+            "correct": 0,
+            "hint": "Darf man sich traurig fühlen und trotzdem geduldig handeln?",
+            "explain": "Geduld bedeutet nicht, Gefühle zu verstecken. Ich darf freundlich bleiben und um Hilfe bitten."
+          }
+        },
+        {
+          "age": "6-8",
+          "index": 2,
+          "originalPrompt": "Wo lernen wir mehr über dieses Thema?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Welche Aussage passt zu Qurʾān 2:153 und zu Ṣabr?",
+            "options": [
+              "Ich kann durch Geduld und Gebet Hilfe suchen.",
+              "Geduld bedeutet, nie um Hilfe zu bitten.",
+              "Wer geduldig ist, muss nicht mehr beten."
+            ],
+            "correct": 0,
+            "hint": "Denke an die beiden Wege der Hilfe, die im Vers genannt werden.",
+            "explain": "Im Vers werden Geduld und Gebet gemeinsam als Hilfe genannt."
+          }
+        },
+        {
+          "age": "9-10",
+          "index": 0,
+          "originalPrompt": "Du musst auf etwas warten. Was tust du?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Ein Kind sagt: „Wer geduldig ist, wird niemals traurig.“ Was antwortest du?",
+            "options": [
+              "Geduld zeigt sich im Verhalten; Traurigkeit darf trotzdem da sein.",
+              "Geduld bedeutet, jedes Gefühl zu unterdrücken.",
+              "Geduld ist nur wichtig, wenn alles leicht ist."
+            ],
+            "correct": 0,
+            "hint": "Trenne Gefühle von bewusstem Verhalten.",
+            "explain": "Ein Mensch darf traurig sein und dennoch freundlich und geduldig handeln."
+          }
+        }
+      ]
+    },
+    {
+      "lessonId": "akhlaq-amanah",
+      "topic": "Vertrauen",
+      "sourceReferences": {
+        "quran": "23:8",
+        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 33",
+        "quranExcerpt": false
+      },
+      "status": "pending-human-islamic-and-pedagogical-review",
+      "questionSlots": [
+        {
+          "age": "4-5",
+          "index": 1,
+          "originalPrompt": "Was möchten wir uns heute merken?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Ein Freund leiht dir ein Buch. Wie achtest du darauf?",
+            "options": [
+              "Ich behandle es vorsichtig und gebe es zurück.",
+              "Ich gebe es ohne zu fragen an jemand anderen weiter."
+            ],
+            "correct": 0,
+            "hint": "Wem gehört das Buch?",
+            "explain": "Ein geliehenes Buch ist mir anvertraut. Ich gehe sorgfältig damit um."
+          }
+        },
+        {
+          "age": "6-8",
+          "index": 2,
+          "originalPrompt": "Wo lernen wir mehr über dieses Thema?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Was lehrt der behandelte Vers über anvertraute Dinge?",
+            "options": [
+              "Wir achten auf anvertraute Dinge und Vereinbarungen.",
+              "Wir dürfen sie weitergeben, sobald wir sie gut finden.",
+              "Es genügt, sie am Ende irgendwann zurückzugeben."
+            ],
+            "correct": 0,
+            "hint": "Gehört zu Vertrauen auch, eine Absprache einzuhalten?",
+            "explain": "Qurʾān 23:8 betont Zuverlässigkeit bei anvertrauten Dingen und Vereinbarungen."
+          }
+        },
+        {
+          "age": "9-10",
+          "index": 0,
+          "originalPrompt": "Du bekommst ein Buch geliehen. Was tust du?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Du hast ein geliehenes Buch vorsichtig benutzt. Eine Freundin möchte es mitnehmen. Was ist zuverlässig?",
+            "options": [
+              "Ich frage zuerst die Person, von der ich es geliehen habe.",
+              "Ich gebe es weiter, weil ich damit schon vorsichtig war.",
+              "Ich gebe es heimlich weiter und lege später ein anderes Buch hin."
+            ],
+            "correct": 0,
+            "hint": "Wer hat erlaubt, das Buch zu benutzen?",
+            "explain": "Amānah betrifft auch die Vereinbarung, nicht nur den Zustand der Sache."
+          }
+        }
+      ]
+    },
+    {
+      "lessonId": "adab-salam",
+      "topic": "Grüßen",
+      "sourceReferences": {
+        "quran": "4:86",
+        "hadith": "Ṣaḥīḥ Muslim, Nr. 54a",
+        "quranExcerpt": false
+      },
+      "status": "pending-human-islamic-and-pedagogical-review",
+      "questionSlots": [
+        {
+          "age": "4-5",
+          "index": 1,
+          "originalPrompt": "Was möchten wir uns heute merken?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Jemand sagt den Salām zu dir. Was ist eine gute Antwort?",
+            "options": [
+              "Ich erwidere den Friedensgruß freundlich.",
+              "Ich nicke nur und sage gar nichts, obwohl ich antworten kann."
+            ],
+            "correct": 0,
+            "hint": "Überlege: Was machst du, wenn jemand dich freundlich grüßt?",
+            "explain": "Wir erwidern den Salām freundlich und lernen die passende Antwort."
+          }
+        },
+        {
+          "age": "6-8",
+          "index": 2,
+          "originalPrompt": "Wo lernen wir mehr über dieses Thema?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Welche Antwort passt zur Bedeutung von Qurʾān 4:86?",
+            "options": [
+              "Wir erwidern einen Gruß mit einem gleichwertigen oder besseren.",
+              "Wir erwidern Grüße nur, wenn wir die Person gut kennen.",
+              "Wir antworten nur, wenn der Gruß besonders laut gesprochen wurde."
+            ],
+            "correct": 0,
+            "hint": "Was bedeutet: gleichwertig oder besser?",
+            "explain": "Der Vers lehrt, den Gruß gut zu erwidern."
+          }
+        },
+        {
+          "age": "9-10",
+          "index": 0,
+          "originalPrompt": "Jemand sagt zu dir As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh. Was tust du?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Ein Kind erwidert einen Gruß freundlich, aber leiser als sein Freund. Wie beurteilst du das?",
+            "options": [
+              "Entscheidend ist, dass der Gruß angemessen erwidert wird; ich sollte niemanden bloßstellen.",
+              "Ein Gruß zählt nur, wenn er lauter als der erste gesprochen wird.",
+              "Wer unsicher spricht, sollte keinen Salām erwidern."
+            ],
+            "correct": 0,
+            "hint": "Wovon spricht der Qurʾān-Vers wirklich?",
+            "explain": "Die Bedeutung des Grußes ist wichtiger als eine laute Vorführung."
+          }
+        }
+      ]
+    },
+    {
+      "lessonId": "adab-worte",
+      "topic": "Freundlich sprechen",
+      "sourceReferences": {
+        "quran": "17:53",
+        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 6018",
+        "quranExcerpt": false
+      },
+      "status": "pending-human-islamic-and-pedagogical-review",
+      "questionSlots": [
+        {
+          "age": "4-5",
+          "index": 1,
+          "originalPrompt": "Was möchten wir uns heute merken?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Dein Freund möchte etwas anderes spielen. Wie kannst du sprechen?",
+            "options": [
+              "Ich sage freundlich, was ich möchte, und höre zu.",
+              "Ich sage einfach Ja, obwohl ich Nein meine."
+            ],
+            "correct": 0,
+            "hint": "Darfst du anderer Meinung sein und trotzdem freundlich reden?",
+            "explain": "Freundlich sprechen und ehrlich sein passen zusammen."
+          }
+        },
+        {
+          "age": "6-8",
+          "index": 2,
+          "originalPrompt": "Wo lernen wir mehr über dieses Thema?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Was passt zur Aufforderung, auf die beste Weise zu sprechen?",
+            "options": [
+              "Ich spreche freundlich und wahrheitsgemäß, auch bei anderer Meinung.",
+              "Ich muss immer zustimmen, damit kein Streit entsteht.",
+              "Ich sage nichts mehr, sobald ich anderer Meinung bin."
+            ],
+            "correct": 0,
+            "hint": "Gute Worte müssen nicht bedeuten, immer Ja zu sagen.",
+            "explain": "Gute Worte können ehrlich, ruhig und respektvoll zugleich sein."
+          }
+        },
+        {
+          "age": "9-10",
+          "index": 0,
+          "originalPrompt": "Du bist anderer Meinung als ein Freund. Was tust du?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Du weißt, dass eine Aussage falsch ist, aber du möchtest höflich bleiben. Was ist geeignet?",
+            "options": [
+              "Ich widerspreche sachlich und erkläre freundlich meinen Grund.",
+              "Ich bestätige die falsche Aussage, damit niemand verärgert ist.",
+              "Ich beleidige die Person, weil die Aussage falsch ist."
+            ],
+            "correct": 0,
+            "hint": "Welche Antwort vermeidet Lüge und Beleidigung zugleich?",
+            "explain": "Gute Rede verbindet Wahrhaftigkeit mit einem freundlichen Umgang."
+          }
+        }
+      ]
+    },
+    {
+      "lessonId": "adab-respekt",
+      "topic": "Respekt",
+      "sourceReferences": {
+        "quran": "17:23",
+        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 5971",
+        "quranExcerpt": false
+      },
+      "status": "pending-human-islamic-and-pedagogical-review",
+      "questionSlots": [
+        {
+          "age": "4-5",
+          "index": 1,
+          "originalPrompt": "Was möchten wir uns heute merken?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Ein Elternteil bittet dich um eine kleine, sichere Hilfe. Was kannst du sagen?",
+            "options": [
+              "Ich antworte freundlich und helfe, wenn ich kann.",
+              "Ich sage freundlich Ja, tue aber absichtlich nichts."
+            ],
+            "correct": 0,
+            "hint": "Welche Antwort ist nicht nur freundlich, sondern auch verlässlich?",
+            "explain": "Respekt kann sich darin zeigen, freundlich zu antworten und zuverlässig zu helfen."
+          }
+        },
+        {
+          "age": "6-8",
+          "index": 2,
+          "originalPrompt": "Wo lernen wir mehr über dieses Thema?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Was zeigen Qurʾān 17:23 und die besprochene Sunnah?",
+            "options": [
+              "Allah lehrt einen guten Umgang mit Eltern; die Sunnah betont ihre gute Behandlung.",
+              "Respekt zählt nur, wenn man dieselbe Meinung hat.",
+              "Eltern muss man nie etwas erklären oder um Hilfe bitten."
+            ],
+            "correct": 0,
+            "hint": "Welche Aussage verbindet guten Umgang und Eltern?",
+            "explain": "Die Quellen betonen Güte und ehrerbietige Worte gegenüber den Eltern."
+          }
+        },
+        {
+          "age": "9-10",
+          "index": 0,
+          "originalPrompt": "Ein Elternteil bittet dich freundlich um Hilfe. Was tust du?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Du sollst etwas tun, das dir Angst macht und unsicher erscheint. Wie verbindest du Respekt und Sicherheit?",
+            "options": [
+              "Ich bleibe möglichst höflich, sage Nein und suche Hilfe bei einer sicheren Vertrauensperson.",
+              "Ich muss jede Anweisung ausführen, auch wenn ich dadurch gefährdet werde.",
+              "Ich schweige immer, damit mein Nein nicht unhöflich klingt."
+            ],
+            "correct": 0,
+            "hint": "Respekt und sichere Grenzen dürfen zusammengehören.",
+            "explain": "Respekt hebt persönliche Sicherheit und das Recht auf Hilfe nicht auf."
+          }
+        }
+      ]
+    },
+    {
+      "lessonId": "fiqh-taharah",
+      "topic": "Reinheit",
+      "sourceReferences": {
+        "quran": "74:4",
+        "hadith": "Ṣaḥīḥ Muslim, Nr. 223",
+        "quranExcerpt": false
+      },
+      "status": "pending-human-islamic-and-pedagogical-review",
+      "questionSlots": [
+        {
+          "age": "4-5",
+          "index": 1,
+          "originalPrompt": "Was möchten wir uns heute merken?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Deine Kleidung ist schmutzig. Was kannst du tun?",
+            "options": [
+              "Ich lasse sie reinigen oder bitte um Hilfe beim Reinigen.",
+              "Ich lege sie in den Schrank und tue so, als sei sie sauber."
+            ],
+            "correct": 0,
+            "hint": "Was hilft gegen Schmutz an der Kleidung?",
+            "explain": "Saubere Kleidung ist Teil des Unterrichts über Reinheit."
+          }
+        },
+        {
+          "age": "6-8",
+          "index": 2,
+          "originalPrompt": "Wo lernen wir mehr über dieses Thema?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Worauf weist der behandelte Qurʾān-Vers 74:4 hin?",
+            "options": [
+              "Die Kleidung soll gereinigt werden.",
+              "Es genügt, den Raum aufzuräumen.",
+              "Es genügt, nur die Hände zu reinigen."
+            ],
+            "correct": 0,
+            "hint": "Es geht im Vers um ein bestimmtes Kleidungsstück-Thema.",
+            "explain": "Der behandelte Vers erwähnt ausdrücklich das Reinigen der Kleidung."
+          }
+        },
+        {
+          "age": "9-10",
+          "index": 0,
+          "originalPrompt": "Deine Kleidung ist verschmutzt. Was tust du?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Ein Freund sagt: „Mein Zimmer ist ordentlich, also weiß ich bereits alles über Ṭahārah.“ Was ist genauer?",
+            "options": [
+              "Ordnung ist gut, aber rituelle Reinheit hat eigene Regeln, die man lernen muss.",
+              "Ein ordentliches Zimmer ersetzt die rituelle Reinigung.",
+              "Rituelle Reinheit bedeutet nur, dass nichts sichtbar schmutzig ist."
+            ],
+            "correct": 0,
+            "hint": "Gibt es Reinheitsfragen, die man nicht nur mit den Augen sieht?",
+            "explain": "Allgemeine Sauberkeit und die Regeln der rituellen Reinheit werden unterschieden."
+          }
+        }
+      ]
+    },
+    {
+      "lessonId": "fiqh-wudu",
+      "topic": "Wuḍūʾ",
+      "sourceReferences": {
+        "quran": "5:6",
+        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 135",
+        "quranExcerpt": true
+      },
+      "status": "pending-human-islamic-and-pedagogical-review",
+      "questionSlots": [
+        {
+          "age": "4-5",
+          "index": 1,
+          "originalPrompt": "Was möchten wir uns heute merken?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Du möchtest Wuḍūʾ lernen. Wie gehst du vor?",
+            "options": [
+              "Ich lasse mir die Waschung richtig zeigen.",
+              "Ich erfinde die Schritte, die ich noch nicht kenne."
+            ],
+            "correct": 0,
+            "hint": "Was machst du, wenn du einen Schritt noch nicht weißt?",
+            "explain": "Wuḍūʾ lernen wir nach zuverlässiger Anleitung."
+          }
+        },
+        {
+          "age": "6-8",
+          "index": 2,
+          "originalPrompt": "Wo lernen wir mehr über dieses Thema?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Du siehst in der Lektion nur einen arabischen Auszug aus Qurʾān 5:6. Was ist richtig?",
+            "options": [
+              "Ich weiß: Für den vollständigen Vers und die genaue Anleitung muss ich weiter nachsehen.",
+              "Der Auszug beschreibt allein alle Einzelheiten des Wuḍūʾ.",
+              "Ich darf aus dem Auszug neue Pflichtschritte erfinden."
+            ],
+            "correct": 0,
+            "hint": "Ist ein Auszug immer der ganze Text?",
+            "explain": "Ein Versauszug ist nicht die vollständige praktische Anleitung."
+          }
+        },
+        {
+          "age": "9-10",
+          "index": 0,
+          "originalPrompt": "Du möchtest beten und brauchst Wuḍūʾ. Was tust du?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Ein Kind behauptet, aus einem kurzen Auszug alle Waschungs-Einzelheiten zu kennen. Was wäre eine quellentreue Antwort?",
+            "options": [
+              "Wir lesen den vollständigen Vers und lernen die Praxis zusätzlich aus authentischer Sunnah und zuverlässiger Anleitung.",
+              "Der Auszug macht weitere Quellen unnötig.",
+              "Was nicht im Auszug steht, darf jedes Kind selbst bestimmen."
+            ],
+            "correct": 0,
+            "hint": "Welche Texte fehlen bei einem Auszug?",
+            "explain": "Für die praktische Ausführung betrachten wir die überlieferten Quellen sorgfältig."
+          }
+        }
+      ]
+    },
+    {
+      "lessonId": "fiqh-salah",
+      "topic": "Gebet",
+      "sourceReferences": {
+        "quran": "20:14",
+        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 631",
+        "quranExcerpt": false
+      },
+      "status": "pending-human-islamic-and-pedagogical-review",
+      "questionSlots": [
+        {
+          "age": "4-5",
+          "index": 1,
+          "originalPrompt": "Was möchten wir uns heute merken?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Du möchtest das Gebet lernen. Was ist ein guter Anfang?",
+            "options": [
+              "Ich lasse mir die Gebetsweise Schritt für Schritt zeigen.",
+              "Ich denke mir eigene Gebetsbewegungen aus."
+            ],
+            "correct": 0,
+            "hint": "Woher lernen wir, wie der Prophet ﷺ betete?",
+            "explain": "Wir lernen die Gebetsweise nach zuverlässigem Vorbild."
+          }
+        },
+        {
+          "age": "6-8",
+          "index": 2,
+          "originalPrompt": "Wo lernen wir mehr über dieses Thema?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Was hebt der behandelte Qurʾān-Vers 20:14 hervor?",
+            "options": [
+              "Das Gebet dient dem Gedenken Allahs.",
+              "Beim Gebet geht es nur um Körperbewegungen.",
+              "Gebet bedeutet, sich nur an Menschen zu erinnern."
+            ],
+            "correct": 0,
+            "hint": "Welche Absicht hinter dem Gebet wurde erklärt?",
+            "explain": "Allah nennt im Vers das Gebet zu Seinem Gedenken."
+          }
+        },
+        {
+          "age": "9-10",
+          "index": 0,
+          "originalPrompt": "Was ist ein guter erster Schritt beim Gebetslernen?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Jemand sagt: „Wichtig ist allein, dass ich mich bewege; die Bedeutung des Gebets spielt keine Rolle.“ Wie antwortest du?",
+            "options": [
+              "Wir lernen sowohl den Sinn des Gebets aus dem Qurʾān als auch seine Ausführung nach der Sunnah.",
+              "Nur die Bewegung zählt, der Sinn ist nicht wichtig.",
+              "Nur die persönliche Idee zählt, das prophetische Vorbild ist unwichtig."
+            ],
+            "correct": 0,
+            "hint": "Brauchen wir Sinn und ein verlässliches Vorbild?",
+            "explain": "Im Unterricht lernen wir die Bedeutung und die überlieferte Ausführung des Gebets."
+          }
+        }
+      ]
+    },
+    {
+      "lessonId": "aqidah-tawhid",
+      "topic": "Tawḥīd",
+      "sourceReferences": {
+        "quran": "112:1",
+        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 2856",
+        "quranExcerpt": false
+      },
+      "status": "pending-human-islamic-and-pedagogical-review",
+      "questionSlots": [
+        {
+          "age": "4-5",
+          "index": 1,
+          "originalPrompt": "Was möchten wir uns heute merken?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Du möchtest Allah um etwas Gutes bitten. An wen richtest du dein Duʿāʾ?",
+            "options": [
+              "An Allah allein.",
+              "An jemanden, der Allah angeblich ersetzen kann."
+            ],
+            "correct": 0,
+            "hint": "Wen beten wir an?",
+            "explain": "Tawḥīd lehrt uns, Allah allein anzubeten und unser Duʿāʾ an Ihn zu richten."
+          }
+        },
+        {
+          "age": "6-8",
+          "index": 2,
+          "originalPrompt": "Wo lernen wir mehr über dieses Thema?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Was sagt der behandelte Vers aus Sūrat al-Ikhlāṣ?",
+            "options": [
+              "Allah ist der Eine.",
+              "Der Vers zählt die sechs Īmān-Grundlagen auf.",
+              "Der Vers erklärt alle Gebetsbewegungen."
+            ],
+            "correct": 0,
+            "hint": "Welche grundlegende Aussage steht in dem kurzen Vers?",
+            "explain": "Qurʾān 112:1 bezeugt Allahs Einzigkeit."
+          }
+        },
+        {
+          "age": "9-10",
+          "index": 0,
+          "originalPrompt": "Wem allein gebührt die Anbetung?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Ein Freund verbindet die Quellen so: „Qurʾān 112:1 sagt, Allah ist Einer; der Ḥadīṯ erklärt Sein Recht auf alleinige Anbetung.“ Was ist daran richtig?",
+            "options": [
+              "Er unterscheidet die Aussage des Verses von der Erklärung des Hadiths.",
+              "Der Vers nennt wortwörtlich alle Einzelheiten des Hadiths.",
+              "Die beiden Quellen handeln nur von der Gebetszeit."
+            ],
+            "correct": 0,
+            "hint": "Welche Aussage stammt aus welchem Beleg?",
+            "explain": "Die Quellen sind verbunden, enthalten aber unterschiedliche konkrete Aussagen."
+          }
+        }
+      ]
+    },
+    {
+      "lessonId": "aqidah-iman",
+      "topic": "Īmān",
+      "sourceReferences": {
+        "quran": "2:3",
+        "hadith": "Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl)",
+        "quranExcerpt": false
+      },
+      "status": "pending-human-islamic-and-pedagogical-review",
+      "questionSlots": [
+        {
+          "age": "4-5",
+          "index": 1,
+          "originalPrompt": "Was möchten wir uns heute merken?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Ein Kind fragt, ob der Glaube an die Engel zum Īmān gehört. Was sagst du?",
+            "options": [
+              "Ja, den Glauben an Engel lernen wir aus authentischen Quellen.",
+              "Nein, Īmān bedeutet nur, dass wir das Gebet lernen."
+            ],
+            "correct": 0,
+            "hint": "Was wurde über die Engel gelernt?",
+            "explain": "Die Sunnah nennt den Glauben an die Engel unter den Grundlagen des Īmān."
+          }
+        },
+        {
+          "age": "6-8",
+          "index": 2,
+          "originalPrompt": "Wo lernen wir mehr über dieses Thema?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Welche Aussage gehört zum behandelten Qurʾān-Vers 2:3?",
+            "options": [
+              "Die Gläubigen glauben an das Verborgene, beten und geben von ihrer Versorgung.",
+              "Dieser Vers zählt ausdrücklich alle sechs Īmān-Grundlagen vollständig auf.",
+              "Der Vers erklärt allein die genaue Gebetswaschung."
+            ],
+            "correct": 0,
+            "hint": "Welche drei Dinge werden im Vers genannt?",
+            "explain": "Der Vers nennt Eigenschaften der Gläubigen; die sechs Grundlagen stehen in der besprochenen Überlieferung."
+          }
+        },
+        {
+          "age": "9-10",
+          "index": 0,
+          "originalPrompt": "Was gehört zu unserem Glauben?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Ein Freund verwechselt Qurʾān 2:3 und den Ḥadīṯ Ǧibrīl. Wie kannst du richtig unterscheiden?",
+            "options": [
+              "Der Vers nennt Merkmale der Gläubigen, während der Ḥadīṯ die Grundlagen des Īmān ausdrücklich erklärt.",
+              "Qurʾān 2:3 enthält dieselbe vollständige Aufzählung wie der Hadith.",
+              "Der Ḥadīṯ Ǧibrīl handelt in dieser Lektion nur von Sauberkeit."
+            ],
+            "correct": 0,
+            "hint": "Welcher Beleg nennt ausdrücklich die Īmān-Grundlagen?",
+            "explain": "Qurʾān und Sunnah ergänzen unser Wissen, müssen aber korrekt zugeordnet werden."
+          }
+        }
+      ]
+    },
+    {
+      "lessonId": "aqidah-ikhlas",
+      "topic": "Ikhlāṣ",
+      "sourceReferences": {
+        "quran": "39:11",
+        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 1",
+        "quranExcerpt": false
+      },
+      "status": "pending-human-islamic-and-pedagogical-review",
+      "questionSlots": [
+        {
+          "age": "4-5",
+          "index": 1,
+          "originalPrompt": "Was möchten wir uns heute merken?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Du hilfst jemandem, ohne dass andere dich sehen. Warum kann das gut sein?",
+            "options": [
+              "Meine gute Absicht ist wichtig, auch ohne Lob.",
+              "Eine Tat kann nur gut sein, wenn mich jemand lobt."
+            ],
+            "correct": 0,
+            "hint": "Wird jede gute Tat von anderen gesehen?",
+            "explain": "Gute Taten und ihre Absichten sind nicht vom Applaus abhängig."
+          }
+        },
+        {
+          "age": "6-8",
+          "index": 2,
+          "originalPrompt": "Wo lernen wir mehr über dieses Thema?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Was erklärt die genannte Sunnah über die Taten?",
+            "options": [
+              "Die Absicht ist bei Taten wichtig.",
+              "Nur die Zahl der Zuschauer entscheidet über eine Tat.",
+              "Eine gute Tat ist erst nach einem Lob wertvoll."
+            ],
+            "correct": 0,
+            "hint": "Denke darüber nach, warum jemand eine Tat macht.",
+            "explain": "Der Ḥadīṯ lehrt, dass Taten nach ihren Absichten beurteilt werden."
+          }
+        },
+        {
+          "age": "9-10",
+          "index": 0,
+          "originalPrompt": "Warum tun wir gute Taten?",
+          "proposed": {
+            "type": "choice",
+            "prompt": "Ein Kind wird für eine gute Tat gelobt. Können wir dadurch seine innere Absicht sicher kennen?",
+            "options": [
+              "Nein. Wir sehen die Tat, aber die verborgene Absicht kennen wir nicht sicher.",
+              "Ja. Wer gelobt wird, tut es immer nur für das Lob.",
+              "Ja. Wer keinen Applaus erhält, hatte automatisch eine bessere Absicht."
+            ],
+            "correct": 0,
+            "hint": "Was siehst du außen, und was bleibt im Herzen verborgen?",
+            "explain": "Wir dürfen nicht behaupten, die verborgenen Absichten anderer Menschen sicher zu kennen."
+          }
+        }
+      ]
+    }
+  ]
+}

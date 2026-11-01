@@ -28,7 +28,7 @@ const additions={
       "text": "Der Prophet ﷺ erklärte, dass Sūrat al-Fātiḥah eine besonders bedeutende Sūrah des Qurʾān ist."
     },
     "sourceAudit": {
-      "hadithUrl": "https://dorar.net/hadith/sharh/138127",
+      "hadithUrl": "https://sunnah.com/bukhari:4474",
       "hadithNumber": "4474",
       "narrator": "Abū Saʿīd ibn al-Muʿallā",
       "authenticity": "Ṣaḥīḥ",
