@@ -41,6 +41,7 @@
   var contextMemory = Object.create(null);
   var observer = null;
   var appObserver = null;
+  var layoutStyleObserver = null;
   var shiftedView = null;
   var originalViewStyles = null;
   var shiftedBottomNav = null;
@@ -369,6 +370,12 @@
     if(view&&typeof MutationObserver==="function"){
       appObserver=new MutationObserver(function(){global.setTimeout(refreshContext,80);});
       appObserver.observe(view,{childList:true});
+      // Legacy SPA controllers can reapply inline "100%" after a tab click.
+      // Watch ONLY the two owned style attributes (not subtree or all DOM).
+      layoutStyleObserver=new MutationObserver(schedule);
+      layoutStyleObserver.observe(view,{attributes:true,attributeFilter:["style"]});
+      var bottom=doc.getElementById("bottomNav");
+      if(bottom)layoutStyleObserver.observe(bottom,{attributes:true,attributeFilter:["style"]});
     }
     doc.addEventListener("visibilitychange",function(){if(!doc.hidden)schedule();});
     doc.addEventListener("click",function(event){
