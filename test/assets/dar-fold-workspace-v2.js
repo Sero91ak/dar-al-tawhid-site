@@ -214,10 +214,12 @@
       var hash=el.getAttribute("href")||"";
       if(hash && (!hash.startsWith("#")||hash.length>170))return;
       var route=el.dataset.nav||el.dataset.libraryOpen||el.dataset.qsrcOpen||"";
+      var value=el.getAttribute("data-value")||el.getAttribute("data-surah-id")||el.getAttribute("data-id")||"";
       if(hash && category(hash)!==selectedCategory && category(hash)!=="home")return;
-      var key=(hash||route||title).slice(0,180);
+      // quran-surah is a shared action; data-value distinguishes all 114 surahs.
+      var key=(hash||[route,value,title].filter(Boolean).join("|")).slice(0,180);
       if(seen.has(key))return;seen.add(key);
-      result.push({text:title,el:el,key:key,hash:hash,route:route});
+      result.push({text:title,el:el,key:key,hash:hash,route:route,value:value});
     });
     if(result.length){
       optionCache[selectedCategory]=result;
@@ -237,7 +239,11 @@
         var match=nodes.find(function(node){
           var name=String(node.getAttribute("aria-label")||node.innerText||node.textContent||"").replace(/\s+/g," ").trim();
           var route=node.getAttribute("href")||node.dataset.nav||node.dataset.libraryOpen||node.dataset.qsrcOpen||"";
-          return name===wanted&&(route===item.key||(!route&&item.key===wanted.slice(0,180)));
+          var value=node.getAttribute("data-value")||node.getAttribute("data-surah-id")||node.getAttribute("data-id")||"";
+          return name===wanted &&
+            (!item.route || route===item.route) &&
+            (!item.value || value===item.value);
+
         });
         if(match&&!match.disabled){match.click();clicked=true;}
       }
