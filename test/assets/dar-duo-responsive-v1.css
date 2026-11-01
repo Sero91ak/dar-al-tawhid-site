@@ -1,5 +1,194 @@
-/* DĀR TEST Fold/Duo override retired 2026-10-28.
-   All experimental fold split / side-rail / viewport override declarations
-   have been removed. The normal tablet CSS and five-tab navigation remain.
-   File retained only because the existing large test/index.html references it;
-   no cache deletion, layout mutation, content or service-worker change. */
+/* DĀR TEST only · isolated dual workspace v2 · 2026-11-01
+ * Right = the ONE existing SPA appView. Left = independent route selector.
+ * No iframe, copied page tree, alternate #bottomNav or global breakpoints.
+ * Enabled only by JS when two useful columns actually fit the viewport. */
+html.dar-test-duo-active {
+  --dar-test-duo-rail: 236px;
+  --dar-test-duo-gap: 14px;
+  --dar-test-duo-nav-bottom: calc(92px + env(safe-area-inset-bottom, 0px));
+}
+html.dar-test-duo-active body:not(.is-feed-fullscreen):not(.is-ilm-chat-route):not(.dar-test-reading-open) > .app {
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:0!important;
+  box-sizing:border-box!important;
+}
+html.dar-test-duo-active body:not(.is-feed-fullscreen):not(.is-ilm-chat-route):not(.dar-test-reading-open) #appView,
+html.dar-test-duo-active body:not(.is-feed-fullscreen):not(.is-ilm-chat-route):not(.dar-test-reading-open) #appView.view {
+  position:relative!important;
+  inset-inline:auto!important;
+  left:auto!important;
+  right:auto!important;
+  transform:none!important;
+  translate:none!important;
+  box-sizing:border-box!important;
+  width:calc(100% - var(--dar-test-duo-rail) - var(--dar-test-duo-gap) * 3)!important;
+  max-width:calc(100% - var(--dar-test-duo-rail) - var(--dar-test-duo-gap) * 3)!important;
+  min-width:0!important;
+  margin-left:calc(var(--dar-test-duo-rail) + var(--dar-test-duo-gap) * 2)!important;
+  margin-right:var(--dar-test-duo-gap)!important;
+  padding-inline:0!important;
+  overflow-x:clip!important;
+}
+/* RTL languages keep the physical selection on the LEFT, as requested. */
+html.dar-test-duo-active[dir="rtl"] body #appView,
+html.dar-test-duo-active[dir="rtl"] body #appView.view {
+  margin-left:calc(var(--dar-test-duo-rail) + var(--dar-test-duo-gap) * 2)!important;
+  margin-right:var(--dar-test-duo-gap)!important;
+}
+#darTestDuoWorkspaceNav[hidden]{display:none!important}
+#darTestDuoWorkspaceNav{
+  display:none;
+  box-sizing:border-box;
+}
+html.dar-test-duo-active #darTestDuoWorkspaceNav{
+  display:flex!important;
+  position:fixed!important;
+  z-index:90;
+  left:max(var(--dar-test-duo-gap),env(safe-area-inset-left,0px));
+  top:calc(max(16px,env(safe-area-inset-top,0px)) + 44px);
+  bottom:var(--dar-test-duo-nav-bottom);
+  width:var(--dar-test-duo-rail);
+  min-width:0;
+  max-width:calc(100vw - 40px);
+  flex-direction:column;
+  align-items:stretch;
+  gap:7px;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  scrollbar-gutter:stable;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-y;
+  padding:clamp(13px,1.8vw,20px);
+  border-radius:20px;
+  border:1px solid color-mix(in srgb,var(--gold2,#bca36c) 28%,transparent);
+  background:var(--card,var(--theme-card-bg,var(--outer-bg-flat,var(--bg,#07131a))));
+  color:var(--text,var(--theme-text,#e9e1d1));
+  box-shadow:0 8px 24px rgba(0,0,0,.10);
+  direction:ltr;
+}
+#darTestDuoWorkspaceNav .dar-test-duo-brand{
+  font-size:11px;
+  letter-spacing:.115em;
+  font-weight:800;
+  line-height:1.4;
+  color:var(--gold2,var(--theme-accent,#c6a66b));
+  overflow-wrap:anywhere;
+}
+#darTestDuoWorkspaceNav .dar-test-duo-caption{
+  font-size:13px;
+  font-weight:750;
+  margin:4px 0 0;
+  line-height:1.45;
+}
+#darTestDuoWorkspaceNav .dar-test-duo-legend{
+  font-size:11px;
+  font-weight:600;
+  opacity:.7;
+  margin:0 0 8px;
+}
+#darTestDuoWorkspaceNav .dar-test-duo-links{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  padding-bottom:14px;
+}
+#darTestDuoWorkspaceNav .dar-test-duo-link{
+  display:flex;
+  align-items:center;
+  box-sizing:border-box;
+  min-height:44px;
+  width:100%;
+  gap:9px;
+  border:1px solid transparent;
+  border-radius:11px;
+  padding:10px 11px;
+  text-decoration:none!important;
+  color:inherit!important;
+  font-size:14px;
+  font-weight:650;
+  overflow-wrap:anywhere;
+  background:transparent;
+  -webkit-tap-highlight-color:transparent;
+}
+#darTestDuoWorkspaceNav .dar-test-duo-link::before{
+  content:"";
+  width:6px;
+  height:6px;
+  flex:0 0 6px;
+  border-radius:50%;
+  background:color-mix(in srgb,var(--gold2,#c7a76d) 45%,transparent);
+}
+#darTestDuoWorkspaceNav .dar-test-duo-link:is(:hover,:focus-visible,.is-current){
+  background:color-mix(in srgb,var(--gold2,#c7a76d) 10%,var(--card,var(--bg,#10171c)));
+  border-color:color-mix(in srgb,var(--gold2,#c7a76d) 34%,transparent);
+}
+#darTestDuoWorkspaceNav .dar-test-duo-link:focus-visible{
+  outline:2px solid var(--gold2,#c7a76d);
+  outline-offset:2px;
+}
+#darTestDuoWorkspaceNav .dar-test-duo-link.is-current::before{
+  background:var(--gold2,#c7a76d);
+}
+/* The content column must not inherit a 100vw breakout or nested desktop split. */
+html.dar-test-duo-active body #appView > :is(.view,.dar-responsive-page,.qov-page,.topics-hub,.post-reader),
+html.dar-test-duo-active body #appView :is(.home-v380-shell,.qov-page,.books-library-shell,.topics-hub,.hadith-hub,.dua-hub,.post-reader) {
+  min-width:0!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
+html.dar-test-duo-active body #appView .dar-fold[data-fold-mode="dual"]{
+  display:block!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  overflow:visible!important;
+}
+html.dar-test-duo-active body #appView .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane){
+  position:static!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+  padding-inline:0!important;
+  background:none!important;
+}
+html.dar-test-duo-active body #appView .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__pane,
+html.dar-test-duo-active body #appView .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__rail{
+  display:none!important;
+}
+html.dar-test-duo-active body #appView .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__rail,
+html.dar-test-duo-active body #appView .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__pane{
+  display:block!important;
+}
+/* Compact, accessible grids INSIDE the reading column (not viewport-wide). */
+html.dar-test-duo-active body #appView :is(
+  .folder-grid,.latest-grid,.dua-theme-grid,.topics-theme-grid,.lib-grid
+){
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))!important;
+  max-width:100%!important;
+}
+html.dar-test-duo-active body #appView :is(img,video,canvas,iframe){
+  max-width:100%;
+}
+html.dar-test-duo-active body #appView :is(
+  .post-reader-main,.article,.post-body,.quran-ayah-list,.dua-detail-box,.hadith-detail
+){
+  min-width:0!important;
+  max-inline-size:min(100%,52rem)!important;
+}
+/* Wide content can scroll locally, not force the entire split beyond the screen. */
+html.dar-test-duo-active body #appView :is(pre,table){
+  max-width:100%;
+  overflow-x:auto;
+}
+@media (prefers-reduced-motion:reduce){
+  #darTestDuoWorkspaceNav,html.dar-test-duo-active #appView{
+    transition:none!important;
+  }
+}
