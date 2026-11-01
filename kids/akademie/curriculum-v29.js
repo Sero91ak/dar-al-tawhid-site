@@ -1498,9 +1498,9 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie kannst du „Tawḥīd“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich bete Allah allein an. Wir richten unser Duʿāʾ und unsere ʿIbādah an Allah.",
-     "hint": "Allah ist Einer und hat keinen Teilhaber."
+     "prompt": "Wie erklärst du: Nur Allah wird angebetet? Nenne ein Beispiel aus dem Unterricht.",
+     "sample": "Muslime beten Allah allein an. Auch das Duʿāʾ als Anbetung richten wir an Ihn.",
+     "hint": "Unser Beispiel erklärt die Anbetung; wir erfinden keinen neuen Offenbarungstext."
     },
     {
      "type": "choice",
@@ -1559,7 +1559,7 @@ const editorialContentV30={
      "Allah ist Einer.",
      "Nur Allah gebührt die Anbetung.",
      "Wir richten unser Duʿāʾ und unsere ʿIbādah an Allah.",
-     "Wir üben das Thema mit einer passenden Alltagssituation: Wir lernen Allahs Namen und Eigenschaften aus Qurʾān und Sunnah."
+     "Wir stellen Fragen, prüfen die Belege und erklären das Gelernte in eigenen Worten."
     ],
     "evidence": "Qurʾān: Sag: Er ist Allah, der Eine. Die Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass Allahs Recht darin besteht, Ihn allein anzubeten und Ihm nichts beizugesellen."
    },
@@ -1569,7 +1569,7 @@ const editorialContentV30={
      "Allah ist Einer.",
      "Der Qurʾān nennt in Sūrat al-Iḫlāṣ · 112:1 eine Grundlage des Themas.",
      "Die genannte authentische Überlieferung stammt aus Ṣaḥīḥ al-Buḫārī, Nr. 2856.",
-     "Anwendung im Alltag: Wir lernen, dass nur Allah angebetet wird."
+     "Unser Lernschritt: Wir lernen Allahs Namen und Eigenschaften aus Qurʾān und Sunnah."
     ],
     "evidence": "Sūrat al-Iḫlāṣ · 112:1: Sag: Er ist Allah, der Eine. Ṣaḥīḥ al-Buḫārī, Nr. 2856: Der Prophet ﷺ erklärte, dass Allahs Recht darin besteht, Ihn allein anzubeten und Ihm nichts beizugesellen. Wir kennzeichnen unseren Unterrichtsalltag ausdrücklich als eigenes Beispiel."
    }
@@ -1605,9 +1605,9 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie kannst du „Īmān“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich lerne die Grundlagen des Glaubens aus Qurʾān und Sunnah. Die Engel, Bücher und Gesandten gehören zum Glauben.",
-     "hint": "Wir lernen, woran Muslime glauben."
+     "prompt": "Nenne drei Dinge, an die Muslime glauben. Woher lernen wir davon?",
+     "sample": "Wir glauben an Allah, Seine Engel und Seine Gesandten. Wir lernen diese Grundlagen aus Qurʾān und Sunnah.",
+     "hint": "Die Glaubensgrundlagen sind überliefert; ich denke mir keine weiteren aus."
     },
     {
      "type": "choice",
@@ -1666,7 +1666,7 @@ const editorialContentV30={
      "Īmān bedeutet Glaube.",
      "Wir glauben an Allah und an das, was Er offenbart hat.",
      "Die Engel, Bücher und Gesandten gehören zum Glauben.",
-     "Wir üben das Thema mit einer passenden Alltagssituation: Wir lernen auch über den Jüngsten Tag und die Vorherbestimmung."
+     "Wir stellen Fragen, prüfen die Belege und erklären das Gelernte in eigenen Worten."
     ],
     "evidence": "Qurʾān: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Die Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung."
    },
@@ -1676,7 +1676,7 @@ const editorialContentV30={
      "Īmān bedeutet Glaube.",
      "Der Qurʾān nennt in Sūrat al-Baqarah · 2:3 eine Grundlage des Themas.",
      "Die genannte authentische Überlieferung stammt aus Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl).",
-     "Anwendung im Alltag: Der Glaube umfasst die im Qurʾān und in der Sunnah genannten Grundlagen."
+     "Unser Lernschritt: Wir lernen auch über den Jüngsten Tag und die Vorherbestimmung."
     ],
     "evidence": "Sūrat al-Baqarah · 2:3: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl): Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung. Wir kennzeichnen unseren Unterrichtsalltag ausdrücklich als eigenes Beispiel."
    }
@@ -3531,9 +3531,9 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie kannst du „Allah ist Einer“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich lerne, dass nur Allah angebetet wird. Wir gesellen Ihm nichts bei.",
-     "hint": "Denke daran: Wir lernen, dass nur Allah angebetet wird."
+     "prompt": "Was bedeutet Sūrat al-Iḫlāṣ 112:1? Wie würdest du es einem Freund sagen?",
+     "sample": "Allah ist Einer und hat keinen Teilhaber. Das steht sinngemäß in Sūrat al-Iḫlāṣ.",
+     "hint": "Ich kann die belegte Aussage wiedergeben, ohne neue Eigenschaften Allahs zu erfinden."
     },
     {
      "type": "choice",
@@ -3592,7 +3592,7 @@ const editorialContentV30={
      "Allah ist Einer.",
      "Wir beten Allah allein an.",
      "Wir gesellen Ihm nichts bei.",
-     "Wir üben das Thema mit einer passenden Alltagssituation: Das nennen wir Tawḥīd."
+     "Wir stellen Fragen, prüfen die Belege und erklären das Gelernte in eigenen Worten."
     ],
     "evidence": "Qurʾān: Sag: Er ist Allah, der Eine. Die Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass Allahs Recht darin besteht, Ihn allein anzubeten und Ihm nichts beizugesellen."
    },
@@ -3602,7 +3602,7 @@ const editorialContentV30={
      "Allah ist Einer.",
      "Der Qurʾān nennt in Sūrat al-Iḫlāṣ · 112:1 eine Grundlage des Themas.",
      "Die genannte authentische Überlieferung stammt aus Ṣaḥīḥ al-Buḫārī, Nr. 2856.",
-     "Anwendung im Alltag: Ich lerne, dass nur Allah angebetet wird."
+     "Unser Lernschritt: Das nennen wir Tawḥīd."
     ],
     "evidence": "Sūrat al-Iḫlāṣ · 112:1: Sag: Er ist Allah, der Eine. Ṣaḥīḥ al-Buḫārī, Nr. 2856: Der Prophet ﷺ erklärte, dass Allahs Recht darin besteht, Ihn allein anzubeten und Ihm nichts beizugesellen. Wir kennzeichnen unseren Unterrichtsalltag ausdrücklich als eigenes Beispiel."
    }
@@ -3638,9 +3638,9 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie kannst du „Nur Allah anbeten“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich erkenne die Bedeutung des Tawḥīd im Gebet. Der Prophet ﷺ lehrte uns Allahs Recht.",
-     "hint": "Denke daran: Wir lernen, dass nur Allah angebetet wird."
+     "prompt": "Nenne eine Form der Anbetung. Wem allein gehört sie?",
+     "sample": "Ein Bittgebet als Anbetung richtet sich an Allah allein.",
+     "hint": "Andere Menschen darf ich um praktische Hilfe bei alltäglichen Dingen bitten."
     },
     {
      "type": "choice",
@@ -3699,7 +3699,7 @@ const editorialContentV30={
      "Wir wenden uns im Gebet an Allah.",
      "Niemand hat das Recht, neben Ihm angebetet zu werden.",
      "Der Prophet ﷺ lehrte uns Allahs Recht.",
-     "Wir üben das Thema mit einer passenden Alltagssituation: Wir lernen Tawḥīd mit Qurʾān und Sunnah."
+     "Wir stellen Fragen, prüfen die Belege und erklären das Gelernte in eigenen Worten."
     ],
     "evidence": "Qurʾān: Sag: Er ist Allah, der Eine. Die Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass Allahs Recht darin besteht, Ihn allein anzubeten und Ihm nichts beizugesellen."
    },
@@ -3709,7 +3709,7 @@ const editorialContentV30={
      "Wir wenden uns im Gebet an Allah.",
      "Der Qurʾān nennt in Sūrat al-Iḫlāṣ · 112:1 eine Grundlage des Themas.",
      "Die genannte authentische Überlieferung stammt aus Ṣaḥīḥ al-Buḫārī, Nr. 2856.",
-     "Anwendung im Alltag: Ich erkenne die Bedeutung des Tawḥīd im Gebet."
+     "Unser Lernschritt: Wir lernen Tawḥīd mit Qurʾān und Sunnah."
     ],
     "evidence": "Sūrat al-Iḫlāṣ · 112:1: Sag: Er ist Allah, der Eine. Ṣaḥīḥ al-Buḫārī, Nr. 2856: Der Prophet ﷺ erklärte, dass Allahs Recht darin besteht, Ihn allein anzubeten und Ihm nichts beizugesellen. Wir kennzeichnen unseren Unterrichtsalltag ausdrücklich als eigenes Beispiel."
    }
@@ -3745,9 +3745,9 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie kannst du „Die Engel“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich kann die Engel als einen Bestandteil des Īmān nennen. Dazu gehört der Glaube an Allahs Engel.",
-     "hint": "Denke daran: Der Glaube umfasst die im Qurʾān und in der Sunnah genannten Grundlagen."
+     "prompt": "Warum glauben Muslime an Engel, obwohl wir sie nicht sehen?",
+     "sample": "Qurʾān und die authentische Sunnah berichten uns von Engeln. Wir glauben daran, ohne ihr Aussehen zu erfinden.",
+     "hint": "Wir sprechen nur über das Verborgene, soweit es uns offenbart wurde."
     },
     {
      "type": "choice",
@@ -3806,7 +3806,7 @@ const editorialContentV30={
      "Īmān bedeutet Glaube.",
      "Der Prophet ﷺ erklärte seine Grundlagen.",
      "Dazu gehört der Glaube an Allahs Engel.",
-     "Wir üben das Thema mit einer passenden Alltagssituation: Wir lernen die Grundlagen Schritt für Schritt."
+     "Wir stellen Fragen, prüfen die Belege und erklären das Gelernte in eigenen Worten."
     ],
     "evidence": "Qurʾān: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Die Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung."
    },
@@ -3816,7 +3816,7 @@ const editorialContentV30={
      "Īmān bedeutet Glaube.",
      "Der Qurʾān nennt in Sūrat al-Baqarah · 2:3 eine Grundlage des Themas.",
      "Die genannte authentische Überlieferung stammt aus Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl).",
-     "Anwendung im Alltag: Ich kann die Engel als einen Bestandteil des Īmān nennen."
+     "Unser Lernschritt: Wir lernen die Grundlagen Schritt für Schritt."
     ],
     "evidence": "Sūrat al-Baqarah · 2:3: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl): Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung. Wir kennzeichnen unseren Unterrichtsalltag ausdrücklich als eigenes Beispiel."
    }
@@ -3852,9 +3852,9 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie kannst du „Die Gesandten“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich kenne einen weiteren Bestandteil des Īmān. Wir hören auf die Botschaft des Propheten ﷺ.",
-     "hint": "Denke daran: Der Glaube umfasst die im Qurʾān und in der Sunnah genannten Grundlagen."
+     "prompt": "Wie weißt du, dass der Glaube an Allahs Gesandte zum Īmān gehört?",
+     "sample": "Das erklärt der Prophet ﷺ im Ḥadīṯ Ǧibrīl. Wir glauben an Allahs Gesandte.",
+     "hint": "Wir folgen den überlieferten Grundlagen und erfinden keine neuen Gesandten."
     },
     {
      "type": "choice",
@@ -3913,7 +3913,7 @@ const editorialContentV30={
      "Allah sandte Gesandte.",
      "Der Glaube an sie gehört zum Īmān.",
      "Wir hören auf die Botschaft des Propheten ﷺ.",
-     "Wir üben das Thema mit einer passenden Alltagssituation: Dabei lernen wir aus Qurʾān und Sunnah."
+     "Wir stellen Fragen, prüfen die Belege und erklären das Gelernte in eigenen Worten."
     ],
     "evidence": "Qurʾān: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Die Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung."
    },
@@ -3923,7 +3923,7 @@ const editorialContentV30={
      "Allah sandte Gesandte.",
      "Der Qurʾān nennt in Sūrat al-Baqarah · 2:3 eine Grundlage des Themas.",
      "Die genannte authentische Überlieferung stammt aus Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl).",
-     "Anwendung im Alltag: Ich kenne einen weiteren Bestandteil des Īmān."
+     "Unser Lernschritt: Dabei lernen wir aus Qurʾān und Sunnah."
     ],
     "evidence": "Sūrat al-Baqarah · 2:3: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl): Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung. Wir kennzeichnen unseren Unterrichtsalltag ausdrücklich als eigenes Beispiel."
    }
@@ -4345,9 +4345,9 @@ const editorialContentV30={
     null,
     {
      "type": "text",
-     "prompt": "Wie kannst du „Allah allein anbeten“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten. Duʿāʾ gehört zur Anbetung; gewöhnliche Hilfe dürfen wir von Menschen erbitten.",
-     "hint": "Tawḥīd heißt: Allah allein anbeten."
+     "prompt": "Was ist Allahs Recht auf die Menschen laut dem Ḥadīṯ von Muʿāḏ?",
+     "sample": "Dass sie Allah allein anbeten und Ihm nichts beigesellen.",
+     "hint": "Praktische Hilfe bei Menschen zu suchen ist nicht dasselbe wie Anbetung."
     },
     {
      "type": "choice",
@@ -4394,9 +4394,9 @@ const editorialContentV30={
     null,
     {
      "type": "text",
-     "prompt": "Wie kannst du „Die sechs Glaubenssäulen“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich kann die Glaubensgrundlagen nach und nach nennen. Wir glauben an den Jüngsten Tag.",
-     "hint": "Īmān bedeutet Glaube. Schwierige Wörter kann dir der Begriffshelfer erklären."
+     "prompt": "Welche zwei Glaubensgrundlagen nennt der Ḥadīṯ Ǧibrīl zusätzlich zum angeführten Versauszug?",
+     "sample": "Den Jüngsten Tag und Allahs Vorherbestimmung.",
+     "hint": "Der Versauszug 2:285 nennt vier Grundlagen; Muslim 8 erläutert alle sechs."
     },
     {
      "type": "choice",
@@ -4727,9 +4727,9 @@ const editorialContentV30={
     null,
     {
      "type": "text",
-     "prompt": "Wie kannst du „Der Qurʾān – Allahs Wort“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich höre Qurʾān mit Respekt und lerne Schritt für Schritt. Beim Hören hören wir eine echte Rezitation.",
-     "hint": "Zum Anhören wählen wir eine wirkliche Qurʾān-Rezitation, nie eine künstliche nachgesprochene Qurʾān-Stimme."
+     "prompt": "Wie unterscheidest du einen arabischen Qurʾān-Vers von seiner deutschen Bedeutungsübersetzung?",
+     "sample": "Der arabische Qurʾān ist der Offenbarungstext; die deutsche Übersetzung erklärt seine Bedeutung.",
+     "hint": "Eine deutsche Bedeutung darf nicht als arabische Qurʾān-Rezitation ausgegeben werden."
     },
     {
      "type": "choice",
@@ -4766,9 +4766,9 @@ const editorialContentV30={
     null,
     {
      "type": "text",
-     "prompt": "Wie kannst du „Ādam عليه السلام kennenlernen“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Allah erschuf Ādam. Wir lernen nur, was Qurʾān und authentische Sunnah darüber berichten. Der Prophet ﷺ berichtete auch vom Friedensgruß Ādams.",
-     "hint": "Wir stellen Propheten nicht als Personen dar und beschreiben nicht unbelegte Einzelheiten."
+     "prompt": "Ein Freund erzählt etwas Unbekanntes über Ādam. Wie kannst du es prüfen?",
+     "sample": "Ich frage, ob es im Qurʾān oder in der authentischen Sunnah steht, und bitte um die Quelle.",
+     "hint": "Wir erzählen über Propheten keine ausgedachten Einzelheiten."
     },
     {
      "type": "choice",
