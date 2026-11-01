@@ -158,7 +158,7 @@
       "id": "adult-new-posts-popup-nine-language-interaction-20261101",
       "at": "2026-11-01T06:02:00+01:00",
       "approvedBy": "user-explicit-20261101-screenshot-clicks-background-focus-theme-and-all-nine-new-ui-languages",
-      "reason": "Repair visible live adult latest-posts notice actions and inaccessible background; match every existing appearance; enforce automatic UI translations across all nine adult languages and reuse post localization manifests; no OneSignal/Kids/native tabs changes.",
+      "reason": "Repair visible live adult latest-posts notice actions and inaccessible background; match every existing appearance; enforce automatic UI translations across all nine adult languages and reuse post localization manifests; no OneSignal/Kids/native tabs changes. Native modal regression: dedicated Selenium/Chromium test verifies real button clicks, top layer, theme, background touch/scroll lock and nine-language UI without touching Kids or OneSignal.",
       "paths": [
         "assets/dar-home-recent-posts-v1.js",
         "assets/dar-home-recent-posts-v1.css",
@@ -167,7 +167,9 @@
         "scripts/check-adult-component-locales-v1.cjs",
         "AGENTS.md",
         "cloudflare/site-router.js",
-        "content/admin/change-scope-lock.json"
+        "content/admin/change-scope-lock.json",
+        "scripts/check-adult-recent-dialog-browser.py",
+        ".github/workflows/adult-recent-dialog-browser.yml"
       ],
       "expiresAt": "2026-11-09T23:59:00.000Z"
     },
