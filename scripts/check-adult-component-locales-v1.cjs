@@ -21,9 +21,9 @@ assert(first>=0&&last>first,"Latest-posts UI translation dictionary missing");
 const labels=vm.runInNewContext("("+moduleJs.slice(first+"var labels=".length,last+2)+")");
 assert.deepEqual(Object.keys(labels),languages,"Nine adult UI locale catalogues required in exact app order");
 for(const code of languages){
- assert(Array.isArray(labels[code])&&labels[code].length===17,code+" must have 17 UI strings");
+ assert(Array.isArray(labels[code])&&labels[code].length===18,code+" must have 18 UI strings");
  assert(labels[code].every(x=>typeof x==="string"&&x.trim()),code+" has empty UI label");
- for(const index of [0,1,2,3,4,5,7,8,9,11,12,13,14,15,16])assert(labels[code][index],code+" missing UI label "+index);
+ for(const index of [0,1,2,3,4,5,7,8,9,11,12,13,14,15,16,17])assert(labels[code][index],code+" missing UI label "+index);
 }
 const win={localStorage:{getItem:()=> "tr"},addEventListener:()=>{}};
 vm.runInNewContext(registryJs,{window:win});
@@ -43,6 +43,7 @@ assert(moduleJs.includes("unlockNoticeBackground()")&&moduleJs.includes("item.no
 assert(moduleJs.includes('state.expanded?t(9):t(8)'),"View-all / close labels reversed");
 assert(moduleJs.includes('t(7)+" ›"'),"Read post label must use correct translation");
 assert(moduleJs.includes('function fetchTitleManifests(posts)'),"Localized titles not supported");
+assert(moduleJs.includes('dar-recent-manual-open')&&moduleJs.includes('openNewPostsNotice(true)'),"Visitors must be able to manually reopen the notice after dismiss/skip");
 assert(builder.includes('localeManifest:/^\\/assets\\/'),"Canonical per-post locale manifest missing from generated index");
 assert(moduleCss.includes("var(--notice-paper")&&moduleCss.includes("dialog#darRecentNoticeV1::backdrop")&&moduleJs.includes("applyNoticeTheme(layer)"),"Modern native modal appearance palette missing");
 assert(router.indexOf('id="darAdultComponentI18nV1"')<router.indexOf('id="darHomeRecentPostsV1Js"'),"Shared locale registry must load before latest-posts component");
