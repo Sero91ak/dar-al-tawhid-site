@@ -160,35 +160,68 @@ function render(){
  if(!mount){mount=e("section","dar-recent-publications");mount.id="darRecentPublicationsV1"}
  placeCompact(h,mount);
  if(h.root&&h.root.id==="darHomeHtmlParityV1")enforceCanonicalHomeOrder(h.root,mount);
- // Keep permanent native sequence intact: Salām → Ibn Sīrīn → Qibla/Bibliothek
- // → original search → Qurʾān → compact publications → all optional home sections.
  mount.hidden=false;
  var oldList=d.getElementById("dhpPosts"),oldBlock=oldList&&oldList.closest(".dhp-section");
  if(oldBlock&&oldBlock.classList.contains("dar-recent-legacy-hidden")!==(state.posts.length>0))oldBlock.classList.toggle("dar-recent-legacy-hidden",state.posts.length>0);
- var hits=recent(state.posts,5);
- /* HOME_SCROLL_STATIC_RECENT_ENTRY_V1_20261101
-    Route/scroll/other-widget mutations must never destroy/rebuild an
-    unchanged home card. During iOS momentum scrolling, repeated
-    replaceChildren() causes reflow and dislodges scroll anchoring. */
- var compactSig=locale()+"|"+hits.map(function(p){return p.id+"@"+(p.date||"")}).join(";");
- if(mount.dataset.darRecentCompactSig===compactSig &&
-    mount.querySelector(":scope > .dar-recent-compact-link"))return;
- mount.className="dar-recent-publications dar-recent-compact";
- mount.setAttribute("aria-label",t(1));
- mount.replaceChildren();
- // Only one compact tap target; all lists and date filters live on their own page.
- var a=e("a","dar-recent-compact-link");
- a.href="#";a.setAttribute("aria-label",t(1)+" – "+t(8));
- a.addEventListener("click",function(ev){ev.preventDefault();openInlineList(false)});
- var icon=e("span","dar-recent-compact-icon","✦");icon.setAttribute("aria-hidden","true");a.appendChild(icon);
- var info=e("span","dar-recent-compact-content");info.appendChild(e("span","dar-recent-compact-kicker",t(0)));
- info.appendChild(e("strong","dar-recent-compact-title",t(1)));
- if(hits.length){info.appendChild(e("small","dar-recent-compact-sub",hits.length+" "+(hits.length===1?t(18):t(14))))}
- else info.appendChild(e("small","dar-recent-compact-sub",t(6)));
- a.appendChild(info);
- var action=e("span","dar-recent-compact-arrow","›");action.setAttribute("aria-hidden","true");a.appendChild(action);
- mount.appendChild(a);
- mount.dataset.darRecentCompactSig=compactSig;
+ var recentHits=recent(state.posts,5);
+ var hits=recentHits.length?recentHits:publishedPosts(state.posts).slice().sort(function(a,b){return Date.parse(b.date)-Date.parse(a.date)}).slice(0,1);
+ var signature=locale()+"|"+hits.map(function(p){return p.id+"@"+p.date+"@"+displayTitle(p)+"@"+String(p.excerpt||"")}).join(";");
+ if(mount.dataset.darRecentPremiumSig===signature&&mount.querySelector(".dar-recent-premium-track"))return;
+ mount.className="dar-recent-publications dar-recent-premium";
+ mount.lang=locale();mount.dir=["ar","ckb"].includes(locale())?"rtl":"ltr";
+ mount.setAttribute("aria-label",t(1));mount.replaceChildren();
+ var heading=e("header","dar-recent-premium-heading");
+ heading.appendChild(e("span","dar-recent-premium-kicker",t(0)));
+ heading.appendChild(e("h2","dar-recent-premium-section-title",t(1)));
+ mount.appendChild(heading);
+ mount.appendChild(e("div","dar-recent-premium-line"));
+ if(!recentHits.length&&hits.length)mount.appendChild(e("p","dar-recent-premium-older",t(6)));
+ var viewport=e("div","dar-recent-premium-viewport");
+ var track=e("div","dar-recent-premium-track");
+ track.setAttribute("aria-label",t(1));track.tabIndex=0;
+ hits.forEach(function(p,i){
+  var slide=e("article","dar-recent-premium-slide");
+  slide.setAttribute("aria-label",(i+1)+" / "+hits.length);
+  slide.appendChild(e("span","dar-recent-premium-meta",dateLabel(p)+" · "+(p.category||t(14))));
+  slide.appendChild(e("h3","dar-recent-premium-title",displayTitle(p)));
+  var excerpt=String(p.excerpt||"").replace(/\s+/g," ").trim();
+  if(excerpt)slide.appendChild(e("p","dar-recent-premium-excerpt",excerpt.slice(0,310)));
+  if(p.speaker)slide.appendChild(e("span","dar-recent-premium-source",p.speaker));
+  if(untranslated(p))slide.appendChild(e("small","dar-recent-premium-original",t(11)));
+  var actions=e("div","dar-recent-premium-actions");
+  var link=e("a","dar-recent-premium-read",t(7)+" ›");link.href=openLink(p);
+  link.addEventListener("click",function(ev){if(d.getElementById("pageRoot"))return;ev.preventDefault();openPostById(p.id)});
+  actions.appendChild(link);
+  if(p.sourceUrl&&/^\/q\/\d+\/?$/.test(p.sourceUrl)){var src=e("a","dar-recent-premium-source-link",t(10));src.href=p.sourceUrl;actions.appendChild(src)}
+  slide.appendChild(actions);track.appendChild(slide);
+ });
+ if(!hits.length){var empty=e("p","dar-recent-premium-empty",t(6));track.appendChild(empty)}
+ viewport.appendChild(track);mount.appendChild(viewport);
+ if(hits.length>1){
+  var navigation=e("nav","dar-recent-premium-nav");
+  navigation.setAttribute("aria-label",t(1));
+  var previous=e("button","dar-recent-premium-previous","‹");previous.type="button";previous.setAttribute("aria-label",t(1)+" – 1");
+  var counter=e("span","dar-recent-premium-counter","01 / "+String(hits.length).padStart(2,"0"));counter.setAttribute("aria-live","polite");
+  var next=e("button","dar-recent-premium-next","›");next.type="button";next.setAttribute("aria-label",t(1)+" – "+hits.length);
+  navigation.appendChild(previous);navigation.appendChild(counter);navigation.appendChild(next);mount.appendChild(navigation);
+  var index=0,rtl=mount.dir==="rtl",scrollQueued=false;
+  function update(){counter.textContent=String(index+1).padStart(2,"0")+" / "+String(hits.length).padStart(2,"0");previous.disabled=index===0;next.disabled=index===hits.length-1}
+  function go(n){index=Math.max(0,Math.min(hits.length-1,n));track.scrollTo({left:(rtl?-1:1)*index*track.clientWidth,behavior:w.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});update()}
+  previous.addEventListener("click",function(){go(index-1)});
+  next.addEventListener("click",function(){go(index+1)});
+  track.addEventListener("scroll",function(){if(scrollQueued)return;scrollQueued=true;requestAnimationFrame(function(){scrollQueued=false;index=Math.max(0,Math.min(hits.length-1,Math.round(Math.abs(track.scrollLeft)/(track.clientWidth||1))));update()})},{passive:true});
+  track.addEventListener("keydown",function(ev){if(ev.key==="ArrowRight"){ev.preventDefault();go(index+(rtl?-1:1))}else if(ev.key==="ArrowLeft"){ev.preventDefault();go(index+(rtl?1:-1))}});
+  update();
+ }
+ if(hits.length){
+  var divider=e("div","dar-recent-premium-line");mount.appendChild(divider);
+  var toggle=e("button","dar-recent-premium-toggle",t(8));toggle.type="button";toggle.setAttribute("aria-expanded","false");toggle.setAttribute("aria-controls","darRecentPremiumFlatList");mount.appendChild(toggle);
+  var flat=e("div","dar-recent-premium-list");flat.id="darRecentPremiumFlatList";flat.hidden=true;
+  hits.forEach(function(p,i){var a=e("a","dar-recent-premium-list-row");a.href=openLink(p);a.appendChild(e("span","dar-recent-premium-list-index",String(i+1).padStart(2,"0")));a.appendChild(e("strong","dar-recent-premium-list-name",displayTitle(p)));a.appendChild(e("span","dar-recent-premium-list-arrow","›"));a.addEventListener("click",function(ev){if(d.getElementById("pageRoot"))return;ev.preventDefault();openPostById(p.id)});flat.appendChild(a)});
+  toggle.addEventListener("click",function(){flat.hidden=!flat.hidden;toggle.setAttribute("aria-expanded",String(!flat.hidden));toggle.textContent=flat.hidden?t(8):t(9)});
+  mount.appendChild(flat);
+ }
+ mount.dataset.darRecentPremiumSig=signature;
 }
 
 function refresh(){if(state.loading||Date.now()-state.lastFetch<90000)return;state.loading=true;state.lastFetch=Date.now();fetch(DATA+"?t="+Math.floor(Date.now()/60000),{cache:"no-store",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("index "+r.status);return r.json()}).then(function(j){if(j.schemaVersion!==1||!Array.isArray(j.posts))throw Error("invalid recent index");state.posts=j.posts;initializeSeen(j.posts);if(unreadPosts().length)state.modalShown=false;render();fetchTitleManifests(j.posts);scheduleNotice()}).catch(function(){state.lastFetch=0;render()}).finally(function(){state.loading=false})}
