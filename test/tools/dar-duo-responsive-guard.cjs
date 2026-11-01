@@ -18,10 +18,10 @@ const thumb=read("test/assets/fold-thumb-nav.js");
 
 new vm.Script(js,{filename:"test/assets/dar-duo-responsive-v1.js"});
 new vm.Script(liveJS);
-assert.match(js,/__DAR_TEST_DUO_WORKSPACE_V2/);
+assert.match(js,/__DAR_TEST_DUO_WORKSPACE_V4/);
 assert.match(js,/testOnly:true/);
 assert.match(js,/location\.hash/);
-assert.match(js,/createElement\("nav"\)/);
+assert.match(js,/make\("nav","dar-test-duo-workspace-nav"\)/);
 assert.match(js,/darAdultPreferredLocaleV1/);
 assert.match(js,/is-feed-fullscreen/);
 assert.match(js,/is-ilm-chat-route/);
@@ -35,7 +35,7 @@ assert.match(css,/body[^\n]*#appView/);
 assert.doesNotMatch(css,/#bottomNav\.bottom-nav\s*\{/,
   "Do not replace or reposition existing five-tab glass nav");
 assert.match(worker,/DAR_TEST_DUO_WORKSPACE_V2_20261101/);
-assert.match(worker,/20261101-dual-workspace-v2/);
+assert.match(worker,/20261101-true-half-half-v4/);
 assert.match(worker,/finalizeDarTestHomeV1193/);
 assert.match(html,/id="bottomNav"/);
 assert.match(html,/darTestDuoResponsiveCSSV1/);
@@ -60,19 +60,24 @@ assert.equal(getApi("/kids/"),undefined,"Never run on KIDS");
 const api=getApi("/test/");
 assert.ok(api,"Test API must exist");
 const cases=[
-  [390,844,false],[512,870,false],     // Fold closed / phone
-  [844,390,false],                      // Phone landscape
-  [680,850,true],                       // Fold opened portrait
-  [820,1180,true],                      // Tablet portrait
-  [1024,768,true],                      // Tablet landscape
-  [1194,834,true],                      // Wide window
-  [600,900,false],                      // Narrow split-view
-  [900,500,false]                       // Short landscape, not a desktop
+  [390,844,false],[512,870,false],  // Fold closed / phone
+  [844,390,false],                   // Short mobile landscape
+  [726,512,true],                    // Actual Galaxy Fold screen recording
+  [680,850,true],                    // Fold open portrait
+  [820,1180,true],                   // Tablet portrait
+  [1024,768,true],                   // Tablet landscape
+  [1194,834,true],                   // Wide window
+  [600,900,false],                   // Narrow split-view
+  [900,500,true]                     // Actual workspace if short edge >=480
 ];
 for(const [w,h,expected] of cases){
   const c=api.capacity(w,h);
   assert.equal(c.dual,expected,w+"x"+h+" incorrect");
-  if(c.dual)assert.ok(c.reader>=390,w+"x"+h+" reader too narrow");
+  if(c.dual){
+    assert.equal(c.rail,w/2,w+"x"+h+" selection not exactly half");
+    assert.equal(c.reader,w/2,w+"x"+h+" reader not exactly half");
+    assert.ok(c.reader>=320,w+"x"+h+" reader too narrow");
+  }
 }
 for(const locale of ["de","ar","en","tr","ku","ckb","bs","fr","es"]){
   assert.match(js,new RegExp("^\\s*"+locale+":\\s*\\{","m"),"missing "+locale);
