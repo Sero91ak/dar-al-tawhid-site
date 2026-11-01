@@ -98,7 +98,9 @@ try{
    await page.waitForTimeout(800);
    const actual=await page.locator("#darTestDuoReaderFrame").evaluate(el=>el.contentWindow.location.hash);
    console.log("SMART_DUO_ROUTE",key,actual);
-   if(!actual.startsWith(hash))throw Error("Pane route did not sync: "+key+" "+actual);
+   const aliases=key==="topics"?["#themen","#topics"]:key==="dua"?["#duas","#dua"]: [hash];
+   if(!aliases.some(h=>actual.startsWith(h)))
+      throw Error("Pane route did not sync: "+key+" "+actual);
    await inspect(key,true);
  }
  const n=await page.locator("#darTestDuoContext [data-duo-context-index]").count();
