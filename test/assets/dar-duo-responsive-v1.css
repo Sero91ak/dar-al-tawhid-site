@@ -42,7 +42,7 @@ html.dar-test-duo-active body #appView.view {
   overflow-y:auto!important;
   overscroll-behavior-y:contain!important;
   -webkit-overflow-scrolling:touch;
-  touch-action:pan-y;
+  touch-action:auto;
   box-sizing:border-box!important;
   border-left:1px solid var(--dar-duo-divider);
   border-radius:0!important;
