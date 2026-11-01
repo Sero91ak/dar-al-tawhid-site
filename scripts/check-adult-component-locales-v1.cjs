@@ -13,6 +13,7 @@ const moduleJs=read("assets/dar-home-recent-posts-v1.js");
 const moduleCss=read("assets/dar-home-recent-posts-v1.css");
 const builder=read("scripts/build-desktop-posts-index.js");
 const router=read("cloudflare/site-router.js");
+assert(router.includes("/assets/dar-home-recent-posts-v1.js?v=20261101-scroll-observer-v9"),"Current adult Worker must bust cached pre-scroll-fix JS in iOS/PWA");
 const dailyHub=read("assets/dar-visitor-daily-hub-v1.js");
 const archiveJs=read("assets/dar-recent-archive-v1.js");
 const archiveHtml=read("neueste-beitraege/index.html");
