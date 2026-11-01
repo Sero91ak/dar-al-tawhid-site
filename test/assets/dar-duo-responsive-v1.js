@@ -30,6 +30,7 @@
   var left=null, view=null, bottom=null, active=false, started=false, frame=0;
   var savedView=null,savedBottom=null,lastHash="",lastLang="",lastContext="";
   var contextHistory=Object.create(null),timer=0,layoutObserver=null;
+  var pendingContextSelection=null;
   var geometryObserver=null,observedView=null,observedDock=null;
   var resizeRecovery=[];
   var viewProps=["position","top","bottom","left","right","width","min-width","max-width","height","max-height",
@@ -131,36 +132,90 @@
     lastLang=language();lastContext="";
   }
   function collectContext(){
-    if(!view || !view.isConnected)return;
+    if(!view || !view.isConnected || !left)return;
     var current=family(global.location.hash);
     var list=[],seen=Object.create(null);
-    var nodes=view.querySelectorAll('a[href^="#"]');
-    for(var i=0;i<nodes.length&&list.length<35;i++){
-      var a=nodes[i],hash=a.getAttribute("href")||"";
-      if(!/^#[\w/\-:]{2,150}$/.test(hash)||family(hash)!==current||seen[hash])continue;
-      var title=String(a.textContent||"").replace(/\s+/g," ").trim();
-      if(title.length<3||title.length>95)continue;
-      seen[hash]=true;list.push({hash:hash,title:title});
+    // Match real existing SPA controls; Qurʾān surahs are BUTTONS with
+    // data-nav="quran-surah" + data-value, NOT hash anchors. The previous
+    // controller consequently showed no actual selection items at all.
+    var nodes=view.querySelectorAll(
+      '[data-nav][data-value],[data-library-open],[data-qsrc-open],a[href^="#"]'
+    );
+    for(var i=0;i<nodes.length&&list.length<70;i++){
+      var el=nodes[i];
+      var hash=el.getAttribute("href")||"";
+      var nav=el.getAttribute("data-nav")||"";
+      var value=el.getAttribute("data-value")||"";
+      var library=el.getAttribute("data-library-open")||"";
+      var source=el.getAttribute("data-qsrc-open")||"";
+      if(hash && (!/^#[\\w/\\-:]{2,150}$/.test(hash)||family(hash)!==current))continue;
+      if(!hash&&!nav&&!library&&!source)continue;
+      var title=String(el.innerText||el.textContent||"").replace(/\\s+/g," ").trim();
+      if(title.length<3)continue;
+      title=title.slice(0,96);
+      var key=hash||[nav,value,library,source].join("|");
+      if(seen[key])continue;
+      seen[key]=true;
+      list.push({key:key,hash:hash,nav:nav,value:value,library:library,
+        sourceKey:source,title:title,original:el});
     }
     if(list.length>=3)contextHistory[current]=list;
     var entries=contextHistory[current]||list;
-    var sig=current+"|"+entries.map(function(e){return e.hash;}).join("|")+"|"+language();
+    var sig=current+"|"+entries.map(function(e){return e.key;}).join(";")+"|"+language();
     if(sig!==lastContext){
       lastContext=sig;
-      var box=left&&left.querySelector("#darTestDuoContext");
+      var box=left.querySelector("#darTestDuoContext");
       if(!box)return;
       box.replaceChildren();
       if(entries.length){
         box.appendChild(make("h2","dar-test-duo-context-title",dict()[current]||current));
         var section=make("div","dar-test-duo-context-links");
-        entries.forEach(function(entry){
-          var a=make("a","dar-test-duo-context-link",entry.title);
-          a.href=entry.hash;section.appendChild(a);
+        entries.forEach(function(entry,idx){
+          var btn=make("button","dar-test-duo-context-link",entry.title);
+          btn.type="button";
+          btn.setAttribute("data-duo-context-index",String(idx));
+          section.appendChild(btn);
         });
         box.appendChild(section);
       }
       box.hidden=!entries.length;
     }
+    // After a detail route is replaced by its category overview, replay
+    // the pending real app selection instead of fabricating deep links.
+    if(pendingContextSelection && pendingContextSelection.family===current){
+      var pending=pendingContextSelection;
+      var match=nodes && Array.from(nodes).find(function(el){
+        var hash=el.getAttribute("href")||"";
+        var key=hash||[
+          el.getAttribute("data-nav")||"",el.getAttribute("data-value")||"",
+          el.getAttribute("data-library-open")||"",el.getAttribute("data-qsrc-open")||""
+        ].join("|");
+        return key===pending.key && el.isConnected;
+      });
+      if(match){
+        pendingContextSelection=null;
+        global.setTimeout(function(){if(match.isConnected)match.click();},30);
+      }
+    }
+  }
+  function activateContext(index){
+    var current=family(global.location.hash);
+    var entries=contextHistory[current]||[];
+    var entry=entries[index];
+    if(!entry)return;
+    focusPane("right");
+    if(view)view.scrollTop=0;
+    if(entry.original && entry.original.isConnected){
+      entry.original.click();return;
+    }
+    if(entry.hash){global.location.hash=entry.hash;return;}
+    // The SPA replaces its source DOM on opening a chapter. First navigate
+    // back to the legitimate category, then use its ORIGINAL control.
+    var route=NAV.find(function(item){return item[0]===current;});
+    if(!route)return;
+    pendingContextSelection={family:current,key:entry.key};
+    global.location.hash=route[1];
+    global.setTimeout(function(){if(pendingContextSelection)collectContext();},200);
   }
   function focusPane(which){
     if(!active)return;
@@ -342,7 +397,14 @@
     },true);
     doc.addEventListener("click",function(e){
       var a=e.target&&e.target.closest&&e.target.closest("a[href^='#']");
-      if(!a || !e.target.closest("#darTestDuoWorkspaceNav"))return;
+      var fromLeft=e.target.closest("#darTestDuoWorkspaceNav");
+      if(!fromLeft)return;
+      var contextButton=e.target.closest("[data-duo-context-index]");
+      if(contextButton){
+        activateContext(Number(contextButton.getAttribute("data-duo-context-index")));
+        return;
+      }
+      if(!a)return;
       focusPane("right");
       if(view)view.scrollTop=0;
       if(global.location.hash===a.getAttribute("href")){apply();updateSelection();}
