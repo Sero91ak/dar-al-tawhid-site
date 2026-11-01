@@ -39,6 +39,12 @@
   body.heritage-learning main{width:min(calc(100% - 24px),820px)!important;padding-top:7px!important}
   body.heritage-learning main>header{padding:5px 0 12px!important}
   body.heritage-learning main>header .logo{width:38px!important;height:38px!important}
+  /* A single-screen teaching quiz must share its 100dvh with this header,
+     not have a second 100dvh canvas clipped beneath it. */
+  body.heritage-learning.wqa-page{display:flex!important;flex-direction:column!important;height:100dvh!important;min-height:0!important;overflow:hidden!important}
+  body.heritage-learning.wqa-page #darDirectReaderBarV1{flex:0 0 auto!important}
+  body.heritage-learning.wqa-page main.wqa-shell{flex:1 1 auto!important;height:auto!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior-y:contain!important}
+
   @media(max-width:370px){#darDirectReaderBarV1 .dar-direct-reader-actions{gap:2px}#darDirectReaderBarV1 button{font-size:11px;padding-inline:8px}#darDirectReaderBarV1 .dar-direct-reader-caption{font-size:9px}}
   @media(prefers-color-scheme:dark){html[data-q-theme="dark"] #darDirectReaderBarV1{background:#14221c;color:#f2ecdf;border-color:#544a35}}
   `;
