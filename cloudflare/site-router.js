@@ -1866,19 +1866,6 @@ export default {
         if (!html.includes('id="darTestHomeNoPhotosActualRouteV2"')) {
           html = html.includes("</body>") ? html.replace("</body>", noPhotos + "\n</body>") : html + noPhotos;
         }
-        // DAR_PUBLIC_TEST_FOLD_V2_20261101 — this router owns dar-al-tawhid.de/test/.
-        // Only the Test HTML is modified. Preserve public visitor and Kids HTML.
-        html = html.replace(/<script\b[^>]*\bsrc=(["'])[^"']*(?:\/assets\/(?:adaptive-layout|fold-split)\.js|\/test\/assets\/(?:fold-thumb-nav|dar-duo-responsive-v1)\.js)[^"']*\1[^>]*>\s*<\/script>\s*/gi, "");
-        html = html.replace(/<link\b[^>]*\bhref=(["'])[^"']*(?:\/assets\/(?:adaptive-layout|fold-split|adult-fold-global-v1)\.css|\/test\/assets\/(?:fold-thumb-nav|dar-duo-responsive-v1)\.css)[^"']*\1[^>]*>\s*/gi, "");
-        html = html.replace(/<style\b[^>]*\bid=(["'])darAdaptive(?:FoldAuthorityV1326|NavStyleV1325)\1[^>]*>[\s\S]*?<\/style>\s*/gi, "");
-        const testFoldEarly = '<script id="darTestFoldV2Early">if(new URLSearchParams(location.search).get("darFoldPane")==="reader")document.documentElement.classList.add("dar-fold-v2-reader");<\/script>';
-        const testFoldCss = '<link rel="stylesheet" id="darTestFoldWorkspaceV2Css" href="/test/assets/dar-fold-workspace-v2.css?v=20261101-v2">';
-        const testFoldJs = '<script defer id="darTestFoldWorkspaceV2Js" src="/test/assets/dar-fold-workspace-v2.js?v=20261101-v2"><\/script>';
-        if (html.includes("</head>")) html=html.replace("</head>",testFoldEarly+"\n"+testFoldCss+"\n</head>");
-        else html=testFoldEarly+testFoldCss+html;
-        if (html.includes("</body>")) html=html.replace("</body>",testFoldJs+"\n</body>");
-        else html+=testFoldJs;
-        headers.set("X-DAR-Test-Fold", "v2-20261101");
         headers.set("X-DAR-Test-Home", "smart-v3-20261020");
         headers.set("Content-Type", "text/html; charset=utf-8");
         headers.delete("Content-Length");
