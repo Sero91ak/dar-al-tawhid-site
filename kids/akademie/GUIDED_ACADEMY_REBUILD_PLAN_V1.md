@@ -46,9 +46,17 @@ Jede fertige Unterrichtseinheit führt im **unveränderten** fünfstufigen Syste
 
 **Umsetzung V30 auf Draft-Branch:** 65 Curriculumeinträge und 520 Frageslots wurden auf Vollständigkeit geprüft. 274 Slots (einschließlich der 33 zuvor vorgeschlagenen Fragen) wurden redaktionell in den bereits geladenen `curriculum-v29.js`-Inhaltsfeldern aktualisiert; 246 konkret passende Slots blieben unverändert. Für 33 ältere Einträge wurden die bestehenden `ageText`-Felder ergänzt, sodass 65 Curriculum-Lektionen über Altersfassungen 4–5 / 6–8 / 9–10 verfügen. Ṣidq in der unveränderten `index.html` enthält weitere acht Fragen. Die Reproduktion der Prüfungen ist unter `kids/tools/test-academy-content-v30.cjs` angelegt, die 66 Quellenreferenzen stehen im `CONTENT_V30_PRE_AUDIO_AUDIT.md`. **Nicht veröffentlicht; keine Audios.** Vor der Veröffentlichung bleibt die individuelle fachliche Freigabe obligatorisch.
 
+## 5a. Ergänzender islamwissenschaftlicher Quellenreview (01.11.2026)
+
+Der Nutzer verlangt die fachliche Überprüfung vor jeder Audioproduktion. Deshalb wurden die Qurʾān-Belege und die Ṣaḥīḥ-Sunnah-Fundstellen des gesamten 66-Lektionen-Inventars mit Primärankern erfasst und auf theologische beziehungsweise fiqh-bezogene Formulierungsrisiken geprüft. Die Ergebnisse stehen im `ISLAMIC_SCHOLARLY_CONTENT_REVIEW_V30_2026-11-01.md`; der unabhängige Quellen-Regressionscheck ist `kids/tools/test-academy-islamic-source-review-v30.cjs`.
+
+Konkrete Reparatur: deutsche Wuḍūʾ-Deutung zu 5:6 präzisiert (Füße **waschen**, Kopf **streichen**); fehlverknüpften Niyyah-Hadith-Sekundärnachweis von einer abweichenden munkar-Überlieferung auf den passenden Buḫārī-1-Nachweis zurückgeführt; weitere Quellenlinks auf zutreffende Direktnachweise umgestellt. Arabischer Qurʾān und Hadith-Wortlaute, Lektionskennungen, Nutzerfortschritt, Oberflächen und Audios wurden dabei nicht geändert.
+
+Fachstatus: AI-gestützter dokumentierter Quellen- und Tafsīr-Abgleich; **keine** unabhängige persönliche Fachfreigabe durch eine reale muslimische Gelehrtenperson und keine vollständige isnādkritische Kollation aller arabischen Textvarianten. Die entsprechenden offenen Prüfvermerke dürfen nicht als erledigt umetikettiert werden.
+
 ## 6. Veröffentlichungs-Gates
 
-1. [ ] Individuelle externe fachliche Überprüfung aller Qurʾān-, Ḥadīṯ-, ʿAqīdah- und Fiqh-Aussagen (Quelleninventar erstellt; Stichproben, keine Vollfreigabe).
+1. [x] Dokumentierter AI-gestützter Qurʾān-/Sunnah-/Tafsīr-Quellenabgleich des vollständigen Inventars und Behebung belegter Fehler; [ ] externe individuelle Endabnahme/Isnād-Kollation nicht abgeschlossen.
 2. [x] Redaktioneller Fragen-Durchlauf aller 520 Slots: 274 überarbeitet; [ ] abschließender manueller pädagogischer Review.
 3. [x] Statische Kompatibilitätsprüfung der **bestehenden** Datenfelder, IDs und Anzahl erfolgreich; [ ] Realgerät-/Fortschrittsintegration noch ausstehend.
 4. [ ] Nur die ausdrücklich genehmigten Lerninhalte werden in DAR TEST geprüft; UI/Architektur-Diff **muss null sein**.
