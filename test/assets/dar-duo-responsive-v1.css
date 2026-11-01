@@ -192,3 +192,44 @@ html.dar-test-duo-active body #appView :is(pre,table){
     transition:none!important;
   }
 }
+
+/* Context links are sourced from the real SPA anchors and remembered while
+ * their detail reader replaces the right-hand list. Scroll stays left-only. */
+#darTestDuoContext[hidden]{display:none!important}
+#darTestDuoContext{
+  display:block;
+  min-width:0;
+  padding-top:10px;
+  margin-top:6px;
+  border-top:1px solid color-mix(in srgb,var(--gold2,#c7a76d) 24%,transparent);
+}
+#darTestDuoContext .dar-test-duo-context-title{
+  font:750 12px/1.4 system-ui,sans-serif;
+  letter-spacing:.03em;
+  padding:4px 5px 8px;
+  color:var(--gold2,var(--theme-accent,#c7a76d));
+}
+#darTestDuoContext .dar-test-duo-context-links{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+#darTestDuoContext .dar-test-duo-context-link{
+  display:block;
+  min-height:38px;
+  padding:9px 8px;
+  border-radius:9px;
+  border:1px solid transparent;
+  font:600 12px/1.45 system-ui,sans-serif;
+  overflow-wrap:anywhere;
+  text-decoration:none!important;
+  color:inherit!important;
+}
+#darTestDuoContext .dar-test-duo-context-link:is(:hover,:focus-visible,.is-current){
+  border-color:color-mix(in srgb,var(--gold2,#c7a76d) 30%,transparent);
+  background:color-mix(in srgb,var(--gold2,#c7a76d) 9%,var(--card,var(--bg,#10171c)));
+}
+#darTestDuoContext .dar-test-duo-context-link:focus-visible{
+  outline:2px solid var(--gold2,#c7a76d);
+  outline-offset:1px;
+}
