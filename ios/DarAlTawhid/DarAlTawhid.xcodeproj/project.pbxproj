@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A10000000000000000000001 /* DarAlTawhidApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000011 /* DarAlTawhidApp.swift */; };
+		DADCA000000000000000001 /* DarAdhanCinematicDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADCA000000000000000011 /* DarAdhanCinematicDemo.swift */; };
 		A10000000000000000000002 /* WebAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000012 /* WebAppView.swift */; };
 		A10000000000000000000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000013 /* Assets.xcassets */; };
 		A10000000000000000000004 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A10000000000000000000014 /* WebKit.framework */; };
@@ -173,6 +174,7 @@
 /* Begin PBXFileReference section */
 		A10000000000000000000010 /* DAR AL TAWḤID.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "DAR AL TAWḤID.app"; path = DarAlTawhid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A10000000000000000000011 /* DarAlTawhidApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAlTawhidApp.swift; sourceTree = "<group>"; };
+		DADCA000000000000000011 /* DarAdhanCinematicDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAdhanCinematicDemo.swift; sourceTree = "<group>"; };
 		A10000000000000000000012 /* WebAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAppView.swift; sourceTree = "<group>"; };
 		A10000000000000000000013 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A10000000000000000000014 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -338,6 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				A10000000000000000000011 /* DarAlTawhidApp.swift */,
+				DADCA000000000000000011 /* DarAdhanCinematicDemo.swift */,
 				D46100000000000000000011 /* DarNativePermissions.swift */,
 				A40000000000000000000011 /* DarPushNotifications.swift */,
 				A70000000000000000000011 /* DarHaptics.swift */,
@@ -694,6 +697,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A10000000000000000000001 /* DarAlTawhidApp.swift in Sources */,
+				DADCA000000000000000001 /* DarAdhanCinematicDemo.swift in Sources */,
 				D46100000000000000000001 /* DarNativePermissions.swift in Sources */,
 				A40000000000000000000001 /* DarPushNotifications.swift in Sources */,
 				A70000000000000000000001 /* DarHaptics.swift in Sources */,
