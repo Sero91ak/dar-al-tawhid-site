@@ -9,6 +9,21 @@
   "use strict";
   var doc=global.document;
   if(!doc || !/^\/test(?:\/|$)/.test(String(global.location && global.location.pathname||"")))return;
+  var qp;try{qp=new URLSearchParams(global.location.search||"");}catch(_){qp=null;}
+  // The reading frame is an independent same-origin /test page whose media
+  // queries receive the true pane width. Never nest the two-column controller.
+  if(qp&&qp.get("duoPane")==="reader"){
+    doc.documentElement.classList.add("dar-duo-reader-embedded");
+    function reportRoute(){
+      if(global.parent!==global)global.parent.postMessage(
+        {type:"dar-test-duo-reader-route-v5",hash:String(global.location.hash||"#home")},
+        global.location.origin);
+    }
+    global.addEventListener("hashchange",reportRoute);
+    global.addEventListener("pageshow",reportRoute);
+    global.addEventListener("load",reportRoute);
+    return;
+  }
   if(global.__DAR_TEST_DUO_WORKSPACE_V4)return;
   global.__DAR_TEST_DUO_WORKSPACE_V4=true;
 
@@ -27,7 +42,7 @@
     fr:{choose:"Choisir",read:"Lire",home:"Accueil",quran:"Coran",hadith:"Ḥadith",library:"Bibliothèque",topics:"Sujets",dua:"Duʿāʾ",more:"Plus",test:"TEST · 50 / 50"},
     es:{choose:"Elegir",read:"Leer",home:"Inicio",quran:"Corán",hadith:"Hadiz",library:"Biblioteca",topics:"Temas",dua:"Duʿāʾ",more:"Más",test:"TEST · 50 / 50"}
   };
-  var left=null, view=null, bottom=null, active=false, started=false, frame=0;
+  var left=null, view=null, bottom=null, readerFrame=null, active=false, started=false, frame=0;
   var savedView=null,savedBottom=null,lastHash="",lastLang="",lastContext="";
   var contextHistory=Object.create(null),timer=0,layoutObserver=null;
   var pendingContextSelection=null;
@@ -51,9 +66,9 @@
   }
   function capacity(w,h){
     w=Math.max(0,Number(w)||0);h=Math.max(0,Number(h)||0);
-    // Each half must be a usable touch/reading surface. Galaxy Fold open:
-    // 726 x 512 => exactly 363 + 363, with 0px column overlap.
-    return {dual:w>=680&&h>=480&&w/2>=320,rail:w/2,reader:w/2,gap:0};
+    var rail=Math.round(Math.max(210,Math.min(300,w*.30)));
+    var reader=w-rail;
+    return {dual:w>=670&&h>=475&&reader>=440,rail:rail,reader:reader,gap:0};
   }
   function disabled(){
     try{return new URLSearchParams(global.location.search||"").get("duo")==="0";}catch(_){return false;}
@@ -113,6 +128,18 @@
       routes.appendChild(a);
     });
     left.appendChild(routes);
+    var sw=make("div","dar-test-duo-search-wrap");
+    var search=make("input","dar-test-duo-search");
+    search.type="search";search.id="darTestDuoFilter";
+    search.placeholder="Auswahl durchsuchen …";
+    search.setAttribute("aria-label","Einträge durchsuchen");
+    search.addEventListener("input",function(){
+      var q=String(search.value||"").toLocaleLowerCase();
+      left.querySelectorAll(".dar-test-duo-context-link").forEach(function(btn){
+        btn.hidden=!!q&&!String(btn.textContent||"").toLocaleLowerCase().includes(q);
+      });
+    });
+    sw.appendChild(search);left.appendChild(sw);
     var context=make("section","dar-test-duo-context");
     context.id="darTestDuoContext";
     context.setAttribute("aria-label",dict().choose);
@@ -125,7 +152,9 @@
     if(!left)return;
     var t=dict();left.setAttribute("aria-label",t.choose);
     left.querySelector("#darTestDuoCaption").textContent=t.test;
-    left.querySelector("#darTestDuoLegend").textContent=t.choose+"  /  "+t.read;
+    left.querySelector("#darTestDuoLegend").textContent=t.choose+" · "+t.read;
+    var filter=left.querySelector("#darTestDuoFilter");
+    if(filter)filter.placeholder=t.choose+" …";
     NAV.forEach(function(pair){
       var a=left.querySelector('[data-duo-route="'+pair[0]+'"]');if(a)a.textContent=t[pair[0]];
     });
@@ -270,13 +299,15 @@
       if(view)restoreStyles(view,savedView,viewProps);
       view=v;savedView=saveStyles(view,viewProps);
     }
+    // Original SPA remains as the live source of category controls, but
+    // is not shown. The reader is a separate responsive browsing context.
     var values={
-      "position":"fixed","top":"var(--dar-duo-header-height, 52px)","bottom":"0px",
-      "left":"50%","right":"0px","width":"50%","min-width":"0px","max-width":"50%",
-      "height":"calc(100dvh - var(--dar-duo-header-height, 52px))","max-height":"none",
-      "margin":"0px","margin-left":"0px","margin-right":"0px",
-      "overflow":"auto","overflow-x":"hidden","overflow-y":"auto",
-      "transform":"none","translate":"none","z-index":"20","box-sizing":"border-box",
+      "position":"fixed","top":"0px","bottom":"auto","left":"-200vw","right":"auto",
+      "width":"100vw","min-width":"0px","max-width":"100vw",
+      "height":"100dvh","max-height":"none","margin":"0px",
+      "margin-left":"0px","margin-right":"0px","overflow":"hidden",
+      "overflow-x":"hidden","overflow-y":"hidden","transform":"none",
+      "translate":"none","z-index":"-1","box-sizing":"border-box",
       "overscroll-behavior-y":"contain","touch-action":"auto"
     };
     Object.keys(values).forEach(function(p){set(view,p,values[p]);});
@@ -309,6 +340,35 @@
     set(bottom,"translate","none");
     observeGeometry();
   }
+  function embeddedUrl(){
+    var url=new URL(global.location.href);
+    url.searchParams.set("duoPane","reader");
+    url.searchParams.set("duo","0");
+    url.hash=global.location.hash||"#home";
+    return url.toString();
+  }
+  function syncReader(){
+    if(!readerFrame||!readerFrame.isConnected)return;
+    try{
+      var win=readerFrame.contentWindow;
+      var hash=global.location.hash||"#home";
+      if(win&&win.location.hash!==hash)win.location.hash=hash;
+    }catch(_){}
+  }
+  function ensureReader(){
+    if(readerFrame&&readerFrame.isConnected)return;
+    readerFrame=doc.getElementById("darTestDuoReaderFrame");
+    if(readerFrame)return;
+    readerFrame=make("iframe","dar-test-duo-reader-frame");
+    readerFrame.id="darTestDuoReaderFrame";
+    readerFrame.setAttribute("title","DĀR AL TAWḤĪD · "+dict().read);
+    readerFrame.setAttribute("data-duo-pane","detail");
+    readerFrame.setAttribute("loading","eager");
+    readerFrame.setAttribute("allow","autoplay; fullscreen");
+    readerFrame.addEventListener("load",syncReader);
+    readerFrame.src=embeddedUrl();
+    doc.body.appendChild(readerFrame);
+  }
   function deactivate(){
     if(!active)return;
     active=false;
@@ -320,6 +380,7 @@
     restoreStyles(bottom,savedBottom,bottomProps);
     savedView=null;savedBottom=null;view=null;bottom=null;
     if(left)left.hidden=true;
+    if(readerFrame)readerFrame.hidden=true;
   }
   function apply(){
     if(!started)return false;
@@ -327,6 +388,7 @@
     if(!calc.dual||disabled()||blocked()||!doc.getElementById("appView")){
       deactivate();return false;
     }
+    root.style.setProperty("--dar-duo-rail-width",calc.rail+"px");
     if(!active){
       root.style.setProperty("--dar-duo-header-height",headerOffset()+"px");
       active=true;
@@ -335,13 +397,17 @@
       if(global.scrollY)global.scrollTo(0,0);
     }
     ensureLeft();
+    ensureReader();
     left.hidden=false;
+    if(readerFrame)readerFrame.hidden=false;
     positionView();
-    positionBottom();
+    // The original 5-tab dock is hidden only in dual mode. All category
+    // routes remain accessible from the compact selection control panel.
     if(lastLang!==language())updateLabels();
     if(lastHash!==String(global.location.hash||"")){
       lastHash=String(global.location.hash||"");
       updateSelection();
+      syncReader();
     }
     return true;
   }
@@ -358,7 +424,7 @@
     resizeRecovery=[100,260,430,700,1100].map(function(delay){
       return global.setTimeout(function(){
         apply();
-        if(active){positionBottom();positionView();}
+        if(active){positionView();syncReader();}
       },delay);
     });
   }
@@ -378,6 +444,16 @@
     global.addEventListener("resize",afterResize,{passive:true});
     global.addEventListener("orientationchange",afterResize,{passive:true});
     global.addEventListener("hashchange",onRoute,{passive:true});
+    global.addEventListener("message",function(event){
+      if(!readerFrame||event.origin!==global.location.origin||
+        event.source!==readerFrame.contentWindow)return;
+      var data=event.data;
+      if(data&&data.type==="dar-test-duo-reader-route-v5"){
+        var h=String(data.hash||"");
+        if(h.startsWith("#")&&h.length<250&&global.location.hash!==h)
+          global.location.hash=h;
+      }
+    });
     global.addEventListener("pageshow",schedule,{passive:true});
     global.addEventListener("dar:localechange",schedule,{passive:true});
     global.addEventListener("dar:layoutchange",schedule,{passive:true});
@@ -434,7 +510,7 @@
         focusedPane:root.getAttribute("data-dar-duo-focus"),
         route:String(global.location.hash||"")};
     },
-    version:"test-dual-workspace-v4-50-50",testOnly:true
+    version:"test-smart-chooser-responsive-reader-v5",testOnly:true
   };
   if(doc.readyState==="loading")doc.addEventListener("DOMContentLoaded",start,{once:true});
   else start();
