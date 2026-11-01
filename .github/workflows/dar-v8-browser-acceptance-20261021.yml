@@ -56,6 +56,10 @@ jobs:
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-v8-browser.log 2>&1 &
           sleep 2
+      - name: Check desktop premium posts on phone, fold, tablet and desktop
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 scripts/check-desktop-premium-browser.py
       - name: Check actual Chrome DOM and interactions on all viewports
         run: |
           python3 -m pip install --quiet selenium
@@ -218,8 +222,6 @@ jobs:
           finally:
             driver.quit()
           PY
-      - name: Check desktop premium posts on phone, fold, tablet and desktop
-        run: python3 scripts/check-desktop-premium-browser.py
       - name: Save screenshots
         if: always()
         uses: actions/upload-artifact@v4
