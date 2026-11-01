@@ -4,6 +4,9 @@ on:
     paths:
       - 'test/assets/dar-duo-responsive-v1.js'
       - 'test/assets/dar-duo-responsive-v1.css'
+      - 'test/assets/dar-fold-workspace-v2.js'
+      - 'test/assets/dar-fold-workspace-v2.css'
+      - 'test/tools/dar-fold-workspace-v2-guard.cjs'
       - 'test/tools/dar-duo-responsive-guard.cjs'
       - 'cloudflare/test-app-worker.js'
       - '.github/workflows/dar-test-duo-workspace-guard.yml'
@@ -12,6 +15,9 @@ on:
     paths:
       - 'test/assets/dar-duo-responsive-v1.js'
       - 'test/assets/dar-duo-responsive-v1.css'
+      - 'test/assets/dar-fold-workspace-v2.js'
+      - 'test/assets/dar-fold-workspace-v2.css'
+      - 'test/tools/dar-fold-workspace-v2-guard.cjs'
       - 'test/tools/dar-duo-responsive-guard.cjs'
       - 'cloudflare/test-app-worker.js'
       - '.github/workflows/dar-test-duo-workspace-guard.yml'
@@ -28,3 +34,6 @@ jobs:
           node --check test/assets/dar-duo-responsive-v1.js
           node --check test/tools/dar-duo-responsive-guard.cjs
           node test/tools/dar-duo-responsive-guard.cjs
+          node --check test/assets/dar-fold-workspace-v2.js
+          node --check test/tools/dar-fold-workspace-v2-guard.cjs
+          node test/tools/dar-fold-workspace-v2-guard.cjs
