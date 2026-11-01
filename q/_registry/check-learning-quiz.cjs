@@ -37,7 +37,7 @@ assertHas(html,/next\.addEventListener\("click"/,"next question logic missing");
 assertHas(html,/aria-live="polite"/,"feedback accessible live text missing");
 assert.ok(!/id="quiz-panel"/.test(html),"legacy tall article-style quiz still present");
 assert.ok(!/class="card quiz-panel"/.test(html),"legacy long-scrolling section still present");
-const scripts=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
+const scripts=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].filter(m=>! /\bsrc\s*=/.test(m[0].split(">")[0]));
 assert.equal(scripts.length,2,"expected inline theme init and quiz logic scripts");
 for(const script of scripts)new vm.Script(script[1],{filename:"lernen/wissen-adab/index.html"});
 const quiz=scripts[1][1];

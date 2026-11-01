@@ -360,11 +360,11 @@ function activateAdultCompactHero(html) {
   // DĀR_HOME_RECENT_POSTS_V1: lightweight 2–5-day publications timeline in
   // public visitor, iOS WKWebView and Android PWA. No Test/Kids/push routes.
   if (!html.includes('id="darHomeRecentPostsV1Css"')) {
-    const css = '<link rel="stylesheet" id="darHomeRecentPostsV1Css" href="/assets/dar-home-recent-posts-v1.css?v=20261101-premium-home-v10">';
+    const css = '<link rel="stylesheet" id="darHomeRecentPostsV1Css" href="/assets/dar-home-recent-posts-v1.css?v=20261101-premium-home-v11">';
     html = html.includes("</head>") ? html.replace("</head>", css + "</head>") : css + html;
   }
   if (!html.includes('id="darHomeRecentPostsV1Js"')) {
-    const js = '<script defer id="darHomeRecentPostsV1Js" src="/assets/dar-home-recent-posts-v1.js?v=20261101-premium-home-v10"></' + 'script>';
+    const js = '<script defer id="darHomeRecentPostsV1Js" src="/assets/dar-home-recent-posts-v1.js?v=20261101-premium-home-v11"></' + 'script>';
     html = html.includes("</body>") ? html.replace("</body>", js + "</body>") : html + js;
   }
   return html;
@@ -1304,14 +1304,14 @@ export default {
               documentHtml = documentHtml.replace(/<\/head>/i,
                 '<link rel="stylesheet" href="/assets/q-royal-manuscript-v42.css?v=qapp-20261013-2" data-q-royal="v42">' +
                 '<script src="/assets/q-royal-manuscript-v42.js?v=qapp-20261013-1" defer><\\/script>'.replace('<\\/script>', '</script>') +
-                '<script src="/assets/q-source-app-view.js?v=20261013-1" defer></script>' +
+                '<script src="/assets/q-source-app-view.js?v=20261101-reader-v2" defer></script>' +
                 '</head>');
             }
             // Future Q pages may already link Royal CSS. The in-app route
             // handler must still be injected exactly once in those pages.
             if (!documentHtml.includes("q-source-app-view.js") && documentHtml.toLowerCase().includes("</head>")) {
               documentHtml = documentHtml.replace(new RegExp("</head>", "i"),
-                '<script src="/assets/q-source-app-view.js?v=20261013-1" defer></script></head>');
+                '<script src="/assets/q-source-app-view.js?v=20261101-reader-v2" defer></script></head>');
             }
             headers.set("Content-Type", "text/html; charset=utf-8");
             headers.set("X-DAR-Q-Layout", "royal-manuscript-v42");

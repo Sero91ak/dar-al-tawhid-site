@@ -3,18 +3,20 @@
    External primary sources retain their explicit destinations. */
 (function(){
   "use strict";
+  /* Numbered Q pages in a real browser get the compact Back/Home bar.
+     In the native internal reader the parent app already owns that bar. */
+  if(window.self===window.top){
+    var readerScript=document.createElement("script");
+    readerScript.src="/assets/dar-reading-surface-v1.js?v=20261101-1";
+    document.head.appendChild(readerScript);
+  }
   var coarse = false;
   try { coarse = matchMedia("(pointer: coarse)").matches; } catch (_) {}
   var mobileOrTablet = coarse || /Android|iPhone|iPad|iPod|DarAlTawhid/i.test(navigator.userAgent || "");
   if (!mobileOrTablet) return;
   var viewport = document.querySelector('meta[name="viewport"]');
-  if (viewport) viewport.content = "width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover";
-  ["gesturestart","gesturechange","gestureend"].forEach(function(type){
-    document.addEventListener(type,function(event){if(event.cancelable)event.preventDefault();},{capture:true,passive:false});
-  });
-  document.addEventListener("touchmove",function(event){
-    if(event.touches && event.touches.length > 1 && event.cancelable) event.preventDefault();
-  },{capture:true,passive:false});
+  if (viewport) viewport.content = "width=device-width,initial-scale=1,viewport-fit=cover";
+  // Preserve native zoom and text accessibility on a long source manuscript.
   document.addEventListener("click",function(event){
     if(event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
     var anchor=event.target && event.target.closest ? event.target.closest("a[href]") : null;
