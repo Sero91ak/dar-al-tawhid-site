@@ -37,7 +37,7 @@ html,body{margin:0;min-height:100%;font-family:system-ui;background:#0d1b16;colo
 <script defer src="/assets/dar-home-recent-posts-v1.js"></script>
 </head><body class="is-home-route">
 <main id="darHomeHtmlParityV1"><section class="dhp-welcome">Test Home</section>
-<section class="dhp-isnad">Original quotation</section><div id="dhpLibrary">Library</div></main>
+<section class="dhp-isnad">Original quotation</section><div class="dhp-quickbar">Qibla &amp; Library</div><section class="dhp-quran-section">Qurʾān</section><div id="dhpLibrary">Library</div></main>
 <div id="appView"></div>
 <script>
 window.__openedPost=null;
@@ -131,9 +131,17 @@ def test():
         fresh(driver, base)
         driver.find_element(By.CSS_SELECTOR, ".dar-recent-notice-all").click()
         expect(driver, lambda d: not d.find_elements(By.ID, "darRecentNoticeV1"), "View all did not close")
-        assert driver.find_element(By.CSS_SELECTOR, ".dar-recent-toggle").get_attribute("aria-expanded") == "true"
-        assert len(driver.find_elements(By.CSS_SELECTOR, ".dar-recent-list .dar-recent-post")) == 3
-        print("PASS: all three same-day articles visible after View All")
+        expect(driver, lambda d: "/neueste-beitraege/" in d.current_url,
+               "View All must navigate to its dedicated route")
+        expect(driver, lambda d: len(d.find_elements(By.CSS_SELECTOR, ".dar-archive-article")) == 3,
+               "Dedicated archive must list every same-day publication")
+        assert len(driver.find_elements(By.CSS_SELECTOR, ".dar-archive-tab")) == 3
+        assert driver.find_element(By.ID, "darArchiveTabs").text.count("Tage") == 3
+        assert len(driver.find_elements(By.CSS_SELECTOR, ".dar-archive-day")) == 1
+        assert driver.find_element(By.CSS_SELECTOR, ".dar-archive-tab[aria-pressed='true']").text.startswith("5")
+        driver.find_element(By.CSS_SELECTOR, ".dar-archive-tab:first-child").click()
+        assert driver.find_element(By.CSS_SELECTOR, ".dar-archive-tab[aria-pressed='true']").text.startswith("3")
+        print("PASS: separate 3/4/5-day archive, all same-day articles retained")
 
         driver.execute_script("sessionStorage.clear();localStorage.clear()")
         fresh(driver, base)
@@ -149,15 +157,20 @@ def test():
         time.sleep(2)
         assert not driver.find_elements(By.ID, "darRecentNoticeV1"), "Skipped batch reopened"
         print("PASS: 9-language UI integration (TR), skip persists until next post")
-        manual_button = driver.find_element(By.CSS_SELECTOR, ".dar-recent-manual-open")
-        assert manual_button.text.strip() == "Yeni yazıları aç", "Manual reopen button not localized"
-        manual_button.click()
-        expect(driver, lambda d: d.execute_script(
-            "var x=document.getElementById('darRecentNoticeV1');return !!(x&&x.open&&x.matches(':modal'))"),
-            "Manual popup should reopen even after skipping existing batch")
-        driver.find_element(By.CSS_SELECTOR, ".dar-recent-notice-x").click()
-        expect(driver, lambda d: not d.find_elements(By.ID, "darRecentNoticeV1"), "Manual close failed")
-        print("PASS: manually reopen new-post dialog after dismiss / skip, nine-language title")
+        compact = driver.find_element(By.CSS_SELECTOR, "#darRecentPublicationsV1 .dar-recent-compact-link")
+        assert compact.is_displayed(), "Compact home entry not visible"
+        assert driver.execute_script("""
+          var m=document.getElementById('darRecentPublicationsV1'),
+              q=document.querySelector('.dhp-quran-section');
+          return m&&q&&m.previousElementSibling===q
+        """), "Qurʾān must precede compact news entry – Ibn Sīrīn/Qibla remain above Qurʾān"
+        compact.click()
+        expect(driver, lambda d: "/neueste-beitraege/" in d.current_url,
+               "Compact entry must open dedicated recent-posts page")
+        expect(driver, lambda d: "Son yayınlananlar" in d.find_element(By.ID,"darArchiveTitle").text,
+               "Archive must use selected Turkish UI")
+        assert driver.find_element(By.ID,"darArchiveLanguage").get_attribute("value") == "tr"
+        print("PASS: compact post entry after Quran + separate page + 9-language UI")
 
         driver.execute_script("sessionStorage.clear();localStorage.clear()")
         fresh(driver, base)
