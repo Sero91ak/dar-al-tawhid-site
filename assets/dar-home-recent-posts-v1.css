@@ -53,3 +53,35 @@ html:is([data-theme="dark"],[data-theme="royal"],[data-theme="dar-al-layl"],[dat
 html:is([data-theme="dark"],[data-theme="royal"],[data-theme="dar-al-layl"],[data-theme="bordeaux"]) .dar-recent-notice-arrow{color:#e2cb97}
 @media(max-width:600px){.dar-recent-notice-overlay{align-items:flex-end;padding:8px 0 0}.dar-recent-notice-card{width:100%!important;max-height:min(82dvh,700px)!important;border-radius:27px 27px 0 0!important;padding:21px 19px calc(23px + env(safe-area-inset-bottom,0px))!important}}
 @media(prefers-reduced-motion:reduce){.dar-recent-notice-overlay{backdrop-filter:none;-webkit-backdrop-filter:none}}
+
+
+/* Appearance-native bulletin sheet V2: source palette is read from the selected
+   adult home theme at runtime, including named appearance variants. The old
+   hard-coded forest/cream and dark overrides are intentionally superseded. */
+#darRecentNoticeV1{touch-action:pan-y;overscroll-behavior:contain;pointer-events:auto!important}
+#darRecentNoticeV1 .dar-recent-notice-card{
+ --dar-notice-fg:var(--notice-ink,#f0ead9);
+ color:var(--dar-notice-fg)!important;
+ background:var(--notice-paper,#142b26)!important;
+ border:1px solid var(--notice-gold,#ad9865)!important;
+ box-shadow:0 20px 65px rgba(0,0,0,.32),0 0 0 1px color-mix(in srgb,var(--notice-gold,#ad9865) 24%,transparent) inset!important;
+ position:relative;isolation:isolate;overflow-x:hidden;
+}
+#darRecentNoticeV1 .dar-recent-notice-header{border-color:color-mix(in srgb,var(--notice-line,#987d55) 42%,transparent)}
+#darRecentNoticeV1 .dar-recent-notice-kicker{color:var(--notice-gold,#ad9865)!important}
+#darRecentNoticeV1 .dar-recent-notice-x{color:var(--notice-ink)!important;background:color-mix(in srgb,var(--notice-ink) 6%,transparent)!important;border:1px solid color-mix(in srgb,var(--notice-line) 67%,transparent)!important}
+#darRecentNoticeV1 .dar-recent-notice-subtitle{color:var(--notice-ink)!important;opacity:.79}
+#darRecentNoticeV1 .dar-recent-notice-article{color:var(--notice-ink)!important;background:color-mix(in srgb,var(--notice-gold) 9%,var(--notice-paper))!important;border:1px solid color-mix(in srgb,var(--notice-line) 49%,transparent)!important;transition:background .15s ease,border-color .15s ease}
+#darRecentNoticeV1 .dar-recent-notice-article:is(:active,:hover,:focus-visible){background:color-mix(in srgb,var(--notice-gold) 17%,var(--notice-paper))!important;border-color:var(--notice-gold)!important}
+#darRecentNoticeV1 .dar-recent-notice-article strong{color:var(--notice-ink)!important}
+#darRecentNoticeV1 .dar-recent-notice-date{color:var(--notice-gold)!important;opacity:1}
+#darRecentNoticeV1 .dar-recent-notice-arrow{color:var(--notice-gold)!important}
+#darRecentNoticeV1 .dar-recent-notice-all{background:color-mix(in srgb,var(--notice-gold) 23%,var(--notice-paper))!important;color:var(--notice-ink)!important;border-color:var(--notice-gold)!important}
+#darRecentNoticeV1 .dar-recent-notice-skip{background:transparent!important;color:var(--notice-ink)!important;border-color:color-mix(in srgb,var(--notice-line) 66%,transparent)!important}
+#darRecentNoticeV1 .dar-recent-notice-actions button{font-weight:650;min-height:48px;line-height:1.35}
+#darRecentNoticeV1 .dar-recent-notice-card button:is(:active,:hover){filter:brightness(1.08)}
+#darRecentNoticeV1 .dar-recent-notice-card :focus-visible{outline:3px solid var(--notice-gold)!important;outline-offset:3px!important}
+html.dar-notice-is-open,html.dar-notice-is-open body{overscroll-behavior:none!important}
+#darRecentPublicationsV1 :is(button,a){cursor:pointer;touch-action:manipulation}
+@media(max-width:600px){#darRecentNoticeV1 .dar-recent-notice-card{border-inline:0!important;border-bottom:0!important}}
+@media(prefers-reduced-motion:reduce){#darRecentNoticeV1 .dar-recent-notice-article{transition:none}}
