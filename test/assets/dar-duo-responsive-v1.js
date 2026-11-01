@@ -19,6 +19,12 @@
         {type:"dar-test-duo-reader-route-v5",hash:String(global.location.hash||"#home")},
         global.location.origin);
     }
+    function reportFocus(){
+      if(global.parent!==global)global.parent.postMessage(
+        {type:"dar-test-duo-reader-focus-v5"},global.location.origin);
+    }
+    doc.addEventListener("pointerdown",reportFocus,{passive:true});
+    doc.addEventListener("focusin",reportFocus,true);
     global.addEventListener("hashchange",reportRoute);
     global.addEventListener("pageshow",reportRoute);
     global.addEventListener("load",reportRoute);
@@ -482,6 +488,10 @@
       if(!readerFrame||event.origin!==global.location.origin||
         event.source!==readerFrame.contentWindow)return;
       var data=event.data;
+      if(data&&data.type==="dar-test-duo-reader-focus-v5"){
+        focusPane("right");
+        return;
+      }
       if(data&&data.type==="dar-test-duo-reader-route-v5"){
         var h=String(data.hash||"");
         if(h.startsWith("#")&&h.length<250&&global.location.hash!==h)
