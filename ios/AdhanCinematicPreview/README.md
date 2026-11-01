@@ -22,6 +22,6 @@ xcrun simctl install booted "/PFAD/DarAdhanCinematicPreview.app"
 xcrun simctl launch booted de.daraltawhid.cinematicpreview
 ```
 
-Die fünf Runway-Clips werden aus dem laufenden Simulator über **Video importieren** oder über den App-Container eingefügt. Ohne importierte MP4 wird eine klar bezeichnete Hintergrundvorschau angezeigt; das ist **nicht** das finale Originalvideo. Hinweise zu den genauen Original-Runway-Task-IDs: `../DarAlTawhid/ADHAN-CINEMATIC-SIMULATOR-TEST.md`.
+**Ab sofort sind alle fünf ursprünglichen Runway-MP4-Dateien bereits im GitHub-Testbranch enthalten.** XcodeGen übernimmt den gemeinsamen Ressourcenordner `../DarAlTawhid/Shared/CinematicMedia/` vollständig ins Simulator-App-Bundle. Die App lädt Fajr, Ẓuhr, ʿAṣr, Maghrib und ʿIšāʾ deshalb direkt beim ersten Start automatisch – ohne Runway, Zusatzdownload oder manuellen Files-Picker. Der optionale Dateiimport bleibt für lokale Vergleichsvideos bestehen. Details und Original-Task-IDs: `../DarAlTawhid/ADHAN-CINEMATIC-SIMULATOR-TEST.md`.
 
 Der Code enthält bewusst **keine** automatische AlarmKit-Auslösung, keine Push-Veränderung und keine Modifikation an der echten Besucher-App-UI.
