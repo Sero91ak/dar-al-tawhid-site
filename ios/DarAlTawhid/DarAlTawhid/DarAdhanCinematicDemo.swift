@@ -114,7 +114,7 @@ private final class DarCinematicLoopHost: UIView {
     private var videoLayer: AVPlayerLayer?
     private var sourceURL: URL?
 
-    func configure(url: URL?, active: Bool) {
+    func configure(url: URL?, active: Bool, gravity: AVLayerVideoGravity) {
         if sourceURL != url {
             queue?.pause()
             videoLayer?.removeFromSuperlayer()
@@ -129,13 +129,14 @@ private final class DarCinematicLoopHost: UIView {
                 player.actionAtItemEnd = .none
                 let looping = AVPlayerLooper(player: player, templateItem: AVPlayerItem(url: url))
                 let surface = AVPlayerLayer(player: player)
-                surface.videoGravity = .resizeAspectFill
+                surface.videoGravity = gravity
                 layer.addSublayer(surface)
                 queue = player
                 looper = looping
                 videoLayer = surface
             }
         }
+        videoLayer?.videoGravity = gravity
         if active { queue?.play() } else { queue?.pause() }
         setNeedsLayout()
     }
@@ -151,15 +152,16 @@ private final class DarCinematicLoopHost: UIView {
 private struct DarCinematicLoopSurface: UIViewRepresentable {
     let url: URL?
     let active: Bool
+    let gravity: AVLayerVideoGravity
 
     func makeUIView(context: Context) -> DarCinematicLoopHost {
         let view = DarCinematicLoopHost()
-        view.configure(url: url, active: active)
+        view.configure(url: url, active: active, gravity: gravity)
         return view
     }
 
     func updateUIView(_ view: DarCinematicLoopHost, context: Context) {
-        view.configure(url: url, active: active)
+        view.configure(url: url, active: active, gravity: gravity)
     }
 
     static func dismantleUIView(_ view: DarCinematicLoopHost, coordinator: ()) {
@@ -226,7 +228,8 @@ struct DarAdhanCinematicDemo: View {
                     .ignoresSafeArea()
 
                 if let movie {
-                    DarCinematicLoopSurface(url: movie, active: playingVideo)
+                    DarCinematicLoopSurface(url: movie, active: playingVideo,
+                                             gravity: wide ? .resizeAspect : .resizeAspectFill)
                         .id(prayer.rawValue + String(media.version))
                         .ignoresSafeArea()
                         .accessibilityHidden(true)
