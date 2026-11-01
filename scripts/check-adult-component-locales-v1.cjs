@@ -71,15 +71,15 @@ function fakeStyle(){const values={},priority={};return{
  setProperty:(k,v,p)=>{values[k]=String(v);priority[k]=p||""},
  removeProperty:k=>{delete values[k];delete priority[k]}
 }}
-const root={style:fakeStyle(),classList:{add(){},remove(){}},scrollTop:0};
+const lockRoot={style:fakeStyle(),classList:{add(){},remove(){}},scrollTop:0};
 const body={style:fakeStyle(),children:[],scrollTop:35};
 const content={tagName:"MAIN",inert:false,isConnected:true},dialog={tagName:"DIALOG"};
 body.children=[content,dialog];
-root.style.setProperty("overflow","auto","important");
+lockRoot.style.setProperty("overflow","auto","important");
 body.style.setProperty("position","relative","");
 const listeners={};
 const mockDocument={
- body,documentElement:root,scrollingElement:root,
+ body,documentElement:lockRoot,scrollingElement:lockRoot,
  addEventListener:(k,fn)=>{(listeners[k]??=[]).push(fn)},
  removeEventListener:()=>{},getElementById:()=>dialog
 };
@@ -88,7 +88,7 @@ const mockState={inertItems:[],scrollLock:null};
 const testLock=new Function("d","w","state",lockSource+";return {lockNoticeBackground,unlockNoticeBackground}")(mockDocument,mockWindow,mockState);
 testLock.lockNoticeBackground(dialog);
 assert(content.inert,"Background not inert during native dialog");
-assert.equal(root.style.getPropertyValue("overflow"),"hidden","iPhone root scroll not locked");
+assert.equal(lockRoot.style.getPropertyValue("overflow"),"hidden","iPhone root scroll not locked");
 assert.equal(body.style.getPropertyValue("position"),"fixed","iPhone body scroll not locked");
 assert.equal(listeners.touchmove.length,1,"Nonpassive touch guard missing");
 let prevented=false;
@@ -96,8 +96,8 @@ listeners.touchmove[0]({target:content,touches:[{clientY:8}],cancelable:true,pre
 assert(prevented,"Touchmove on background must be cancelled");
 testLock.unlockNoticeBackground();
 assert.equal(content.inert,false,"Background remains inert after closing");
-assert.equal(root.style.getPropertyValue("overflow"),"auto","Original root overflow not restored");
+assert.equal(lockRoot.style.getPropertyValue("overflow"),"auto","Original root overflow not restored");
 assert.equal(body.style.getPropertyValue("position"),"relative","Original body position not restored");
-assert.equal(root.style.getPropertyPriority("overflow"),"important","Original overflow priority not restored");
+assert.equal(lockRoot.style.getPropertyPriority("overflow"),"important","Original overflow priority not restored");
 
 console.log("ADULT_UI_NINE_LOCALES_AND_POPUP OK: 9 languages, native dialog, direct touch actions, WKWebView lock, theme, localized titles and executed interaction tests.");
