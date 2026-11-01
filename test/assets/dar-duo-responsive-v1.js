@@ -391,6 +391,8 @@
     root.style.setProperty("--dar-duo-rail-width",calc.rail+"px");
     if(!active){
       root.style.setProperty("--dar-duo-header-height",headerOffset()+"px");
+      // Persist a marker only to correct the old glass dock after folding back.
+      root.classList.add("dar-test-duo-ever-active");
       active=true;
       root.classList.add("dar-test-duo-active");
       root.setAttribute("data-dar-duo-focus","left");
