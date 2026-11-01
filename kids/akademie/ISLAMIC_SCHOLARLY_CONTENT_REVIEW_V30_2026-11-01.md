@@ -116,8 +116,17 @@ Die Links der Qurʾān-Fundstellen und die direkten Hadith-Fundstellen sind für
 
 1. Die hier aufgeführten **66** Quellenbeziehungen wurden inventarisiert und an Primärfundstellen verlinkt; **nicht** für alle 43 verschiedenen Hadith-Zitationsstrings wurden die vollständigen arabischen Überlieferungstexte, alle Wortlautvarianten und die Unterschiede zwischen Druckausgaben lückenlos isnād-kritisch neu kollationiert.
 2. Die Qurʾān-Sätze wurden mit Fundstellen verglichen; nicht jede orthographische Diakritik und nicht jeder ʿUṯmānī-Rasm-Unterschied ist mit einer unabhängigen maschinellen Versdatenbank-Zeichenprüfung abgenommen.
-3. Die vorhandenen 274 überarbeiteten Fragetexte sind strukturell erfolgreich getestet, aber eine externe Fachperson hat die pädagogischen Nuancen und alle verknüpften Aussagen nicht individuell abgezeichnet.
+3. Die vorhandenen 295 überarbeiteten Fragetexte sind strukturell erfolgreich getestet, aber eine externe Fachperson hat die pädagogischen Nuancen und alle verknüpften Aussagen nicht individuell abgezeichnet.
 4. In der App bleiben die bisherigen `voiceApproved`-Werte und Audioreferenzen unverändert. Für ein späteres ElevenLabs-Skript sind zusätzlich Begriffssammlungen, vollständige Rezitatorreferenzen, Fuṣḥā-Aussprachebibliothek und manuelle Hörfreigabe abzugleichen.
 5. Die Anpassungen sind auf PR #1588 geschützt. **Kein Merge, keine Live-Auslieferung, kein TTS.**
 
 **Ergebnis:** Quellenrisiken und konkrete Fehler sind identifiziert und dokumentiert, bewiesene Funde im vorhandenen Inhalt korrigiert. Die sachlich korrekte Einstufung ist: dokumentierte KI-gestützte Quellen- und Konsistenzprüfung, noch nicht unabhängige endgültige religionswissenschaftliche Gelehrtenprüfung.
+
+
+### Redaktionelle Fortsetzung: Runde 2 (01.11.2026)
+
+- Stand: **295 von 520** Curriculum-Frageslots gegenüber dem unveränderten Ausgangskanon überarbeitet, die übrigen 225 bleiben erhalten. Das ersetzt die vorherige Zählung 274; es sind nicht 295 neue Fragen, sondern inhaltliche Änderungen an vorhandenen Slots.
+- Davon zusätzlich kindgerechte Fragen für 4–5-Jährige, **49 Musterantworten sprachlich bereinigt** und **zehn 6–8-Jahre-Fragen über ʿAqīdah** quellenbezogen überarbeitet; keine Aussagen über das Verborgene hinzuerfunden.
+- Besonders wichtig: In der aktuellen Auswahl für Engel/Gesandte wird der Qurʾān-Beleg **2:3** vom ausdrücklich nennenden **Ḥadīṯ Ǧibrīl, Muslim 8a**, unterschieden.
+- Fachliche Primärquellen-Vergleichstabelle mit konkreten Prüfpunkten: `kids/akademie/ISLAMIC_SOURCE_REVIEW_ROUND2_2026-11-01.md`.
+- Audioproduktion weiterhin ausdrücklich **nicht begonnen**; Draft-PR bleibt ungemergt.
