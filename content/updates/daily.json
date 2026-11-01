@@ -16,5 +16,23 @@
     "title": "Unser Herr, entscheide zwischen uns in Wahrheit",
     "snippet": "Unser Herr, entscheide zwischen uns und unserem Volk in Wahrheit, und Du bist der Beste der Entscheidenden.",
     "category": "Urteil & Wahrheit"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 482,
+      "remaining": 446
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 62,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
