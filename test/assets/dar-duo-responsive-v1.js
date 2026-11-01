@@ -31,6 +31,7 @@
   var savedView=null,savedBottom=null,lastHash="",lastLang="",lastContext="";
   var contextHistory=Object.create(null),timer=0,layoutObserver=null;
   var geometryObserver=null,observedView=null,observedDock=null;
+  var resizeRecovery=[];
   var viewProps=["position","top","bottom","left","right","width","min-width","max-width","height","max-height",
     "margin","margin-left","margin-right","overflow","overflow-x","overflow-y","transform","translate",
     "z-index","box-sizing","overscroll-behavior-y","touch-action"];
@@ -289,6 +290,19 @@
     if(frame)return;
     frame=global.requestAnimationFrame(function(){frame=0;apply();});
   }
+  // Other old Test controllers rewrite the five-tab dock after a Fold
+  // orientation change (after the initial resize callback). Recheck the
+  // measured viewport in a few coalesced phases, not on a perpetual timer.
+  function afterResize(){
+    schedule();
+    resizeRecovery.forEach(function(id){global.clearTimeout(id);});
+    resizeRecovery=[100,260,430,700,1100].map(function(delay){
+      return global.setTimeout(function(){
+        apply();
+        if(active){positionBottom();positionView();}
+      },delay);
+    });
+  }
   function onRoute(){
     var h=String(global.location.hash||"");
     if(view&&h!==lastHash){
@@ -302,13 +316,13 @@
   function start(){
     if(started)return;
     started=true;apply();
-    global.addEventListener("resize",schedule,{passive:true});
-    global.addEventListener("orientationchange",schedule,{passive:true});
+    global.addEventListener("resize",afterResize,{passive:true});
+    global.addEventListener("orientationchange",afterResize,{passive:true});
     global.addEventListener("hashchange",onRoute,{passive:true});
     global.addEventListener("pageshow",schedule,{passive:true});
     global.addEventListener("dar:localechange",schedule,{passive:true});
     global.addEventListener("dar:layoutchange",schedule,{passive:true});
-    if(global.visualViewport)global.visualViewport.addEventListener("resize",schedule,{passive:true});
+    if(global.visualViewport)global.visualViewport.addEventListener("resize",afterResize,{passive:true});
     // Listen to actual reader DOM replacement; do not query the full body
     // on every attribute/style change (avoids mutation/animation loops).
     var reader=doc.getElementById("appView");
