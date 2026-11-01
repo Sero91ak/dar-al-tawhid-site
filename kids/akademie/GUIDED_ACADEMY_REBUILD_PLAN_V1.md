@@ -44,7 +44,7 @@ Jede fertige Unterrichtseinheit führt im **unveränderten** fünfstufigen Syste
 
 **Aktueller Content-Pilot:** `kids/akademie/editorial-pilots/sidq-deep-learning-v2.json`. Diese Datei enthält drei Altersfassungen der Musterlektion Ṣidq mit je fünf pädagogischen Phasen sowie Prüfantworten und Quellenhinweisen. Es ist ein **redaktioneller Entwurf**, noch kein Ersatz der live geladenen Lektion und kein neues Layout.
 
-**Umsetzung V30 auf Draft-Branch:** 65 Curriculumeinträge und 520 Frageslots wurden auf Vollständigkeit geprüft. 274 Slots (einschließlich der 33 zuvor vorgeschlagenen Fragen) wurden redaktionell in den bereits geladenen `curriculum-v29.js`-Inhaltsfeldern aktualisiert; 246 konkret passende Slots blieben unverändert. Für 33 ältere Einträge wurden die bestehenden `ageText`-Felder ergänzt, sodass 65 Curriculum-Lektionen über Altersfassungen 4–5 / 6–8 / 9–10 verfügen. Ṣidq in der unveränderten `index.html` enthält weitere acht Fragen. Die Reproduktion der Prüfungen ist unter `kids/tools/test-academy-content-v30.cjs` angelegt, die 66 Quellenreferenzen stehen im `CONTENT_V30_PRE_AUDIO_AUDIT.md`. **Nicht veröffentlicht; keine Audios.** Vor der Veröffentlichung bleibt die individuelle fachliche Freigabe obligatorisch.
+**Umsetzung V30 auf Draft-Branch:** 65 Curriculumeinträge und 520 Frageslots wurden auf Vollständigkeit geprüft. 295 Slots (einschließlich der 33 zuvor vorgeschlagenen Fragen) wurden redaktionell in den bereits geladenen `curriculum-v29.js`-Inhaltsfeldern aktualisiert; 246 konkret passende Slots blieben unverändert. Für 33 ältere Einträge wurden die bestehenden `ageText`-Felder ergänzt, sodass 65 Curriculum-Lektionen über Altersfassungen 4–5 / 6–8 / 9–10 verfügen. Ṣidq in der unveränderten `index.html` enthält weitere acht Fragen. Die Reproduktion der Prüfungen ist unter `kids/tools/test-academy-content-v30.cjs` angelegt, die 66 Quellenreferenzen stehen im `CONTENT_V30_PRE_AUDIO_AUDIT.md`. **Nicht veröffentlicht; keine Audios.** Vor der Veröffentlichung bleibt die individuelle fachliche Freigabe obligatorisch.
 
 ## 5a. Ergänzender islamwissenschaftlicher Quellenreview (01.11.2026)
 
@@ -57,10 +57,19 @@ Fachstatus: AI-gestützter dokumentierter Quellen- und Tafsīr-Abgleich; **keine
 ## 6. Veröffentlichungs-Gates
 
 1. [x] Dokumentierter AI-gestützter Qurʾān-/Sunnah-/Tafsīr-Quellenabgleich des vollständigen Inventars und Behebung belegter Fehler; [ ] externe individuelle Endabnahme/Isnād-Kollation nicht abgeschlossen.
-2. [x] Redaktioneller Fragen-Durchlauf aller 520 Slots: 274 überarbeitet; [ ] abschließender manueller pädagogischer Review.
+2. [x] Redaktioneller Fragen-Durchlauf aller 520 Slots: 295 überarbeitet; [ ] abschließender manueller pädagogischer Review.
 3. [x] Statische Kompatibilitätsprüfung der **bestehenden** Datenfelder, IDs und Anzahl erfolgreich; [ ] Realgerät-/Fortschrittsintegration noch ausstehend.
 4. [ ] Nur die ausdrücklich genehmigten Lerninhalte werden in DAR TEST geprüft; UI/Architektur-Diff **muss null sein**.
 5. [ ] Für neue gesprochene Inhalte: geprüfte Aussprachebibliothek, manuelle Fuṣḥā-Hörfreigabe und gesonderte Audiofreigabe.
 6. [ ] Freigabe vor Besucher-Veröffentlichung; keine stillschweigende Übernahme in `main`.
 
 **Fazit: Die App bleibt identisch. Ausschließlich das Wissen im bereits vorhandenen Unterricht wird professioneller.**
+
+
+### Redaktionelle Fortsetzung: Runde 2 (01.11.2026)
+
+- Stand: **295 von 520** Curriculum-Frageslots gegenüber dem unveränderten Ausgangskanon überarbeitet, die übrigen 225 bleiben erhalten. Das ersetzt die vorherige Zählung 274; es sind nicht 295 neue Fragen, sondern inhaltliche Änderungen an vorhandenen Slots.
+- Davon zusätzlich kindgerechte Fragen für 4–5-Jährige, **49 Musterantworten sprachlich bereinigt** und **zehn 6–8-Jahre-Fragen über ʿAqīdah** quellenbezogen überarbeitet; keine Aussagen über das Verborgene hinzuerfunden.
+- Besonders wichtig: In der aktuellen Auswahl für Engel/Gesandte wird der Qurʾān-Beleg **2:3** vom ausdrücklich nennenden **Ḥadīṯ Ǧibrīl, Muslim 8a**, unterschieden.
+- Fachliche Primärquellen-Vergleichstabelle mit konkreten Prüfpunkten: `kids/akademie/ISLAMIC_SOURCE_REVIEW_ROUND2_2026-11-01.md`.
+- Audioproduktion weiterhin ausdrücklich **nicht begonnen**; Draft-PR bleibt ungemergt.
