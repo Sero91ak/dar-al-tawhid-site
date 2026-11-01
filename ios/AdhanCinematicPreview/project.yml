@@ -18,6 +18,8 @@ targets:
     sources:
       - path: PreviewApp.swift
       - path: ../DarAlTawhid/DarAlTawhid/DarAdhanCinematicDemo.swift
+      - path: ../DarAlTawhid/Shared/CinematicMedia
+        type: folder
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: de.daraltawhid.cinematicpreview
