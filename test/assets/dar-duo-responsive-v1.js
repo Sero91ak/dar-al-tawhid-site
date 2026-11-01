@@ -234,9 +234,10 @@
       if(bottom)restoreStyles(bottom,savedBottom,bottomProps);
       bottom=v;savedBottom=saveStyles(bottom,bottomProps);
     }
-    var w=viewport().width, cap=Math.max(260,Math.min(420,Math.floor(w/2)-20));
+    var w=viewport().width, cap=Math.max(240,Math.min(420,Math.floor(w/2)-20));
     set(bottom,"position","fixed");
-    set(bottom,"left","75%");
+    // All controls belong to the LEFT half; the reader stays unobstructed.
+    set(bottom,"left","25%");
     set(bottom,"right","auto");
     set(bottom,"width",cap+"px");
     set(bottom,"max-width",cap+"px");
