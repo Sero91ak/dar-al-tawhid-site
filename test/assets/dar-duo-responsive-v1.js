@@ -308,9 +308,9 @@
       if(e.target.closest("#darTestDuoWorkspaceNav"))focusPane("left");
       else if(e.target.closest("#appView,#darTestReadingOverlay"))focusPane("right");
     },true);
-    left&&left.addEventListener("click",function(e){
+    doc.addEventListener("click",function(e){
       var a=e.target&&e.target.closest&&e.target.closest("a[href^='#']");
-      if(!a)return;
+      if(!a || !e.target.closest("#darTestDuoWorkspaceNav"))return;
       focusPane("right");
       if(view)view.scrollTop=0;
       if(global.location.hash===a.getAttribute("href")){apply();updateSelection();}
