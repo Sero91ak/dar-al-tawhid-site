@@ -30,6 +30,7 @@
   var left=null, view=null, bottom=null, active=false, started=false, frame=0;
   var savedView=null,savedBottom=null,lastHash="",lastLang="",lastContext="";
   var contextHistory=Object.create(null),timer=0,layoutObserver=null;
+  var geometryObserver=null,observedView=null,observedDock=null;
   var viewProps=["position","top","bottom","left","right","width","min-width","max-width","height","max-height",
     "margin","margin-left","margin-right","overflow","overflow-x","overflow-y","transform","translate",
     "z-index","box-sizing","overscroll-behavior-y","touch-action"];
@@ -192,6 +193,20 @@
     }
     return 52;
   }
+  function observeGeometry(){
+    if(typeof MutationObserver!=="function")return;
+    if(!geometryObserver)geometryObserver=new MutationObserver(function(){
+      if(active)schedule();
+    });
+    if(view && observedView!==view){
+      geometryObserver.observe(view,{attributes:true,attributeFilter:["style"]});
+      observedView=view;
+    }
+    if(bottom && observedDock!==bottom){
+      geometryObserver.observe(bottom,{attributes:true,attributeFilter:["style","class"]});
+      observedDock=bottom;
+    }
+  }
   function positionView(){
     var v=doc.getElementById("appView");
     if(!v)return;
@@ -210,6 +225,7 @@
     };
     Object.keys(values).forEach(function(p){set(view,p,values[p]);});
     view.setAttribute("data-duo-pane","detail");
+    observeGeometry();
   }
   function positionBottom(){
     var v=doc.getElementById("bottomNav");
@@ -230,6 +246,7 @@
     set(bottom,"margin-right","0px");
     set(bottom,"transform","translateX(-50%)");
     set(bottom,"translate","none");
+    observeGeometry();
   }
   function deactivate(){
     if(!active)return;
