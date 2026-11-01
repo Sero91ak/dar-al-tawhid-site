@@ -73,8 +73,8 @@ const URL="https://dar-al-tawhid.de/test/?env=staging&source=duo-half-qa#quran";
         throw Error(label+" not exact 50/50");
       if(d.left.overflowY!=="auto"||d.right.overflowY!=="auto")
         throw Error(label+" panes do not have independent scroll");
-      if(d.tabs.x<half-1||d.tabs.x+d.tabs.width>d.width+1)
-        throw Error(label+" original five-tab dock escapes right pane");
+      if(d.tabs.x< -1||d.tabs.x+d.tabs.width>half+1)
+        throw Error(label+" original five-tab dock escapes left control pane");
     }else if(d.right&&Math.abs(d.right.width-d.width)>2){
       throw Error(label+" cover view not restored to 100%");
     }
