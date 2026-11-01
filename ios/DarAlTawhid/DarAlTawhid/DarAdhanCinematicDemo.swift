@@ -71,8 +71,16 @@ final class DarCinematicMediaStore: ObservableObject {
     }
 
     func movie(for prayer: DarCinematicPrayer) -> URL? {
-        let url = directory.appendingPathComponent(prayer.localName + ".mp4")
-        return FileManager.default.fileExists(atPath: url.path) ? url : nil
+        // An explicitly imported movie can override the bundled original.
+        let local = directory.appendingPathComponent(prayer.localName + ".mp4")
+        if FileManager.default.fileExists(atPath: local.path) { return local }
+        // Both iOS visitor app (DEBUG only) and standalone QA app bundle the
+        // exact same CinematicMedia folder from ios/DarAlTawhid/Shared/.
+        return Bundle.main.url(
+            forResource: prayer.localName,
+            withExtension: "mp4",
+            subdirectory: "CinematicMedia"
+        ) ?? Bundle.main.url(forResource: prayer.localName, withExtension: "mp4")
     }
 
     func importMovie(_ source: URL, for prayer: DarCinematicPrayer) throws {
