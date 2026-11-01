@@ -54,7 +54,7 @@ function openArchive(){w.location.assign(archiveUrl())}
    We intentionally do NOT reorder top-level prayer clock, fixed header or tabs. */
 function enforceCanonicalHomeOrder(native,mount){
  if(!native)return false;
- var content=native.querySelector(".dhp-content");if(!content)return false;
+ var content=native.querySelector(".dhp-content")||native;
  var names=[".dhp-welcome",".dhp-isnad",".dhp-quickbar",".dhp-search-box",".dhp-quran-section"];
  var chain=names.map(function(x){return content.querySelector(x)});
  if(chain.some(function(x){return !x||x.parentElement!==content}))return false;
