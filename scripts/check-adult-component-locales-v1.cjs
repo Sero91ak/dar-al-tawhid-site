@@ -54,6 +54,7 @@ assert(moduleJs.includes("acknowledgeCurrentPosts();")&&moduleJs.includes("w.loc
 assert(moduleJs.includes("if(!force&&!unreadPosts().length)return false"),"Same contribution must never pop up again after app restart");
 assert(moduleJs.includes("if(unreadPosts().length)state.modalShown=false"),"App foreground must notice genuinely new content");
 assert(moduleJs.includes("function enforceCanonicalHomeOrder(native,mount)")&&moduleJs.includes('".dhp-welcome",".dhp-isnad",".dhp-quickbar",".dhp-search-box",".dhp-quran-section"'),"Fixed Salām→Ibn Sīrīn→Qibla/Library→Search→Qurʾān sequence not enforced");
+assert(moduleJs.includes('content.querySelector(".dat-smart-prayer")')&&moduleJs.includes('content.querySelector("#dhpPrayerNativeMount")')&&moduleJs.includes('preWelcome=prayer')&&moduleJs.includes('preWelcome.insertAdjacentElement("afterend",chain[0])'),"Prayer-time card must remain BEFORE Salām, never behind recent posts");
 assert(dailyHub.includes('root.querySelector("#darRecentPublicationsV1")')&&dailyHub.includes('root.querySelector(".dhp-quran-section")')&&!dailyHub.includes('(mount||welcome).insertAdjacentElement("afterend",card)'),"Daily question must not interrupt the fixed Salām-to-Qurʾān home sequence");
 
 assert(moduleJs.includes('dar-recent-compact-link')&&moduleJs.includes('anchor:q||native.querySelector("#dhpLibrary")'),"Home article entry must be compact, anchored directly after Quran");
