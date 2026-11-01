@@ -277,7 +277,7 @@
       "margin":"0px","margin-left":"0px","margin-right":"0px",
       "overflow":"auto","overflow-x":"hidden","overflow-y":"auto",
       "transform":"none","translate":"none","z-index":"20","box-sizing":"border-box",
-      "overscroll-behavior-y":"contain","touch-action":"pan-y"
+      "overscroll-behavior-y":"contain","touch-action":"auto"
     };
     Object.keys(values).forEach(function(p){set(view,p,values[p]);});
     view.setAttribute("data-duo-pane","detail");
