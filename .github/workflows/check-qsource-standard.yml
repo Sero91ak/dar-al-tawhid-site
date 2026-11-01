@@ -46,3 +46,8 @@ jobs:
 
       - name: Q46 single-screen learning and appearance regression
         run: node q/_registry/check-learning-quiz.cjs
+
+      - name: Check legacy iOS/PWA source and learning overlay on four Chromium viewports
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 q/_registry/check-reader-overlay-browser.py
