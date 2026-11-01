@@ -1,5 +1,11 @@
 # DAR AL TAWHID Projektregeln
 
+## NEUE VORRANGREGEL 01.11.2026 · Website/Desktop, iOS, Android-PWA und DAR Test sauber zuordnen
+
+**Verbindlich vor jeder neuen Erwachsenen-UI-Arbeit:** [docs/adult-responsive-layout-contract.md](docs/adult-responsive-layout-contract.md) lesen und die vorhandenen jeweiligen Surface-/Route-Owner prüfen. Die **Website-Shell** entscheidet das Desktoplayout, die iOS-/PWA-Shell ihren eigenen responsiven Aufbau. Inhalt, Quellen, kanonische IDs, Theme-Tokens und Bedienlogik bleiben semantisch konsistent; Desktop darf NICHT eine unveränderte verbreiterte Mobile-Kapsel sein. Neue Komponenten dürfen keine globalen Layout-Overrides, horizontalen Überläufe, Touch-Kollisionen oder Reorderings fremder Bereiche erzeugen. Eine Hauptkapsel, innen feine Linien statt Karten-in-Karten. Vor Freigabe verpflichtend Mobile/Fold/Tablet/Desktop, RTL, Theme, Tastatur, Interaktionen und bestehende Kernbereiche im echten Browser testen. ZUERST DAR Test/isolierte Vorschau; kein Live- oder OneSignal-Push aus diesem Regelauftrag.
+
+**Neueste Beiträge:** Die am 01.11.2026 weiter unten dokumentierte Forderung nach *nur kompakter Einstiegszeile* ist durch diese neuere Nutzervorgabe **ausschließlich für die visuelle Darstellung** ersetzt: Nach der Qurʾān-Kachel bleibt genau ein responsiver, lesbarer Hauptbereich mit Datum, Titel, kurzem Auszug, Quellenzeile, horizontalem Wechsel (ohne Auto-Rotation) und optional aufklappbarer **flacher** Übersicht. Fünf Berliner Kalendertage, Mehrfachveröffentlichungen, die feste Home-Reihenfolge, vorhandene Beitragsdetailnavigation, neun Sprachen und gesonderte Push-Freigaben gelten weiter. Bei Plattformunterschieden eigene Präsentationsadapter, keine Zwangsgleichheit der CSS-/DOM-Geometrie.
+
 ## Dauerregel (01.11.2026): Jede neue Erwachsenen-Funktion standardmäßig in allen neun Sprachen
 
 - **Pflicht ab dem ersten Commit, nicht nachträglich:** Jede neue Komponente, jeder Dialog, Popup, Startseitenbereich, Button, Navigationshinweis, Status, Fehlermeldung und jeder künftig erweiterte Erwachsenen-Funktionsbereich wird **gleichzeitig** mit allen neun App-Sprachen ausgeliefert: Deutsch (`de`), Arabisch (`ar`), Englisch (`en`), Türkisch (`tr`), Kurmanji (`ku`), Sorani (`ckb`), Bosnisch (`bs`), Französisch (`fr`) und Spanisch (`es`). Eine Neuimplementierung mit nur deutschem UI-Text ist nicht fertig.
