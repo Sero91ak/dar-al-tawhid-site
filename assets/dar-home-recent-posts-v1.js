@@ -59,7 +59,23 @@ function enforceCanonicalHomeOrder(native,mount){
  var chain=names.map(function(x){return content.querySelector(x)});
  if(chain.some(function(x){return !x||x.parentElement!==content}))return false;
  var source=content.querySelector(".dhp-home-source-v55");
- if(source&&source.parentElement===content&&source.nextElementSibling!==chain[0])source.insertAdjacentElement("afterend",chain[0]);
+ // The prayer times have their original FRONT-STAGE slot directly below the
+ // source strapline and ABOVE Salām. The previous forced source→Salām move
+ // accidentally pushed this live prayer clock behind recent posts.
+ var prayer=content.querySelector(".dat-smart-prayer")||content.querySelector("#dhpPrayerNativeMount");
+ var preWelcome=source&&source.parentElement===content?source:null;
+ if(prayer&&prayer.parentElement===content){
+  if(preWelcome&&prayer.previousElementSibling!==preWelcome)preWelcome.insertAdjacentElement("afterend",prayer);
+  preWelcome=prayer;
+ }
+ // Friday information belongs after the original prayer clock, not behind the
+ // news strip. Preserve that existing clock→Friday adjacency when present.
+ var friday=content.querySelector("#dhpFridayMirror");
+ if(friday&&preWelcome===prayer&&friday.parentElement===content&&!friday.hidden){
+  if(friday.previousElementSibling!==prayer)prayer.insertAdjacentElement("afterend",friday);
+  preWelcome=friday;
+ }
+ if(preWelcome&&preWelcome.nextElementSibling!==chain[0])preWelcome.insertAdjacentElement("afterend",chain[0]);
  for(var i=1;i<chain.length;i++){if(chain[i-1].nextElementSibling!==chain[i])chain[i-1].insertAdjacentElement("afterend",chain[i])}
  if(mount&&mount.parentElement===content&&chain[4].nextElementSibling!==mount)chain[4].insertAdjacentElement("afterend",mount);
  return true;
