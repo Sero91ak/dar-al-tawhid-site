@@ -3,7 +3,7 @@
 (function(w,d){"use strict";
 if(w.__darRecentPublicationsV1)return;w.__darRecentPublicationsV1=true;
 if(!/^\/(?:index\.html)?$/.test(location.pathname)&&!/^\/pwa(?:\/(?:index\.html)?)?$/.test(location.pathname))return;
-var KEY="darAdultPreferredLocaleV1", DATA="/data/recent-posts.json", state={posts:[],days:5,expanded:false,loading:false,lastFetch:0,modalShown:false,modalOpen:false,lastFocus:null,scrollLock:null,inertItems:[],lastModalSignature:"",titleLocales:{},manifestLoaded:{}};
+var KEY="darAdultPreferredLocaleV1", DATA="/data/recent-posts.json", state={posts:[],days:5,expanded:false,loading:false,lastFetch:0,modalShown:false,modalOpen:false,lastFocus:null,scrollLock:null,inertItems:[],lastModalSignature:"",titleLocales:{},manifestLoaded:{},inlineOpen:false,returnToInline:false,homeScrollY:0};
 var labels={
  de:["NEUE BEITRÄGE","Aktuelle Veröffentlichungen","Alle Beiträge der letzten Tage","2 Tage","3 Tage","5 Tage","Keine neuen Beiträge im gewählten Zeitraum.","Beitrag lesen","Beiträge ansehen","Schließen","Quelle öffnen","Original: Deutsch","Heute","Gestern","Beiträge","4 Tage","Für diese Beiträge überspringen","Neuigkeiten öffnen"],
  ar:["المقالات الجديدة","أحدث المنشورات","جميع منشورات الأيام الماضية","يومان","3 أيام","5 أيام","لا توجد منشورات جديدة في هذه المدة.","اقرأ المقال","عرض المقالات","إغلاق","افتح المصدر","الأصل بالألمانية","اليوم","أمس","مقالات","4 أيام","تخطي هذه المقالات","عرض أحدث المقالات"],
@@ -40,15 +40,83 @@ function fetchTitleManifests(posts){
  if(data.contentId!=="post:"+p.id||!data.locales)return;
  var titles={};["de","ar","en","tr","ku","ckb","bs","fr","es"].forEach(function(code){
  if(data.locales[code]&&typeof data.locales[code].title==="string")titles[code]=data.locales[code].title});
- state.titleLocales[p.id]=titles;render();refreshOpenNotice();
+ state.titleLocales[p.id]=titles;render();refreshOpenNotice();paintInlineList();
  }).catch(function(){delete state.manifestLoaded[key]});
  });
 }
 
 function addPost(parent,p,compact){var a=e("a","dar-recent-post");a.href=openLink(p);a.dataset.postId=p.id;var meta=e("span","dar-recent-meta",dateLabel(p)+" · "+(p.category||t(14)));a.appendChild(meta);a.appendChild(e("strong","dar-recent-title",displayTitle(p)));if(!compact&&p.speaker)a.appendChild(e("span","dar-recent-speaker",p.speaker));if(untranslated(p))a.appendChild(e("small","dar-recent-untranslated",t(11)));a.appendChild(e("span","dar-recent-open",t(7)+" ›"));a.addEventListener("click",function(ev){if(d.getElementById("pageRoot"))return;if(typeof w.navigate==="function"){ev.preventDefault();w.navigate("post",p.id)}});parent.appendChild(a)}
 function section(parent,kicker,title){var h=e("div","dar-recent-header");h.appendChild(e("span","dar-recent-kicker",kicker));h.appendChild(e("h2","dar-recent-heading",title));parent.appendChild(h)}
-function archiveUrl(){return /^\/pwa(?:\/|$)/.test(location.pathname)?"/pwa/neueste-beitraege/":"/neueste-beitraege/"}
-function openArchive(){w.location.assign(archiveUrl())}
+/* The recent-posts list is an INTERNAL app view. Never navigate to an
+   extra HTML page, never show day selectors or a loading state. */
+function internalHost(){
+ return d.getElementById("darHomeHtmlParityV1")||d.getElementById("pageRoot")||d.getElementById("appView");
+}
+function recentInlinePosts(){return recent(state.posts,5)}
+function inlineEntry(p){
+ var a=e("a","dar-recent-inline-entry");a.href=openLink(p);
+ var body=e("span","dar-recent-inline-entry-text");
+ body.appendChild(e("strong","dar-recent-inline-entry-title",displayTitle(p)));
+ if(untranslated(p))body.appendChild(e("small","dar-recent-inline-original",t(11)));
+ a.appendChild(body);
+ var arrow=e("span","dar-recent-inline-entry-arrow","›");arrow.setAttribute("aria-hidden","true");a.appendChild(arrow);
+ a.addEventListener("click",function(ev){
+  ev.preventDefault();
+  closeInlineList(true);
+  openPostById(p.id);
+ });
+ return a;
+}
+function paintInlineList(){
+ if(!state.inlineOpen)return;
+ var root=d.getElementById("darRecentInlineListV2");
+ if(!root)return;
+ root.lang=locale();root.dir=["ar","ckb"].includes(locale())?"rtl":"ltr";
+ root.replaceChildren();
+ var top=e("header","dar-recent-inline-top");
+ var back=e("button","dar-recent-inline-back","‹");back.type="button";
+ back.setAttribute("aria-label",t(9));back.addEventListener("click",function(){closeInlineList(false)});
+ top.appendChild(back);
+ top.appendChild(e("h1","dar-recent-inline-heading",t(1)));
+ root.appendChild(top);
+ var list=e("div","dar-recent-inline-entries");
+ var posts=recentInlinePosts();
+ if(!posts.length)list.appendChild(e("p","dar-recent-inline-empty",t(6)));
+ else posts.forEach(function(p){list.appendChild(inlineEntry(p))});
+ root.appendChild(list);
+}
+function openInlineList(returning){
+ var host=internalHost();
+ if(!host)return;
+ if(!returning)state.homeScrollY=w.scrollY||0;
+ state.inlineOpen=true;state.returnToInline=false;
+ var root=d.getElementById("darRecentInlineListV2");
+ if(!root){root=e("section","dar-recent-inline-view");root.id="darRecentInlineListV2";
+  root.setAttribute("aria-label",t(1));host.insertAdjacentElement("afterend",root)}
+ root.hidden=false;
+ d.body.classList.add("dar-recent-inline-open");
+ paintInlineList();
+ w.scrollTo({top:Math.max(0,host.getBoundingClientRect().top+(w.scrollY||0)),behavior:"instant"});
+ var back=root.querySelector(".dar-recent-inline-back");if(back)back.focus({preventScroll:true});
+}
+function closeInlineList(toPost){
+ if(!state.inlineOpen)return;
+ state.inlineOpen=false;
+ state.returnToInline=!!toPost;
+ d.body.classList.remove("dar-recent-inline-open");
+ var root=d.getElementById("darRecentInlineListV2");
+ if(root){root.hidden=true;root.replaceChildren()}
+ if(!toPost)w.scrollTo({top:state.homeScrollY||0,behavior:"instant"});
+}
+function openArchive(){openInlineList(false)}
+function syncInlineAfterRoute(){
+ // Native post-reader back navigation must restore the existing in-memory list;
+ // no new network request, new HTML document, spinner or date-filter screen.
+ if(state.returnToInline&&isHome()&&!state.inlineOpen){
+  state.returnToInline=false;openInlineList(true);
+ }else if(state.inlineOpen&&!isHome()){closeInlineList(false)}
+}
+
 /* Rebuild-safe invariant: these are DOM siblings in one uninterrupted
    section on all visitor shells. Other widgets are pushed below Qurʾān.
    We intentionally do NOT reorder top-level prayer clock, fixed header or tabs. */
@@ -100,11 +168,12 @@ function render(){
  var hits=recent(state.posts,5);
  // Only one compact tap target; all lists and date filters live on their own page.
  var a=e("a","dar-recent-compact-link");
- a.href=archiveUrl();a.setAttribute("aria-label",t(1)+" – "+t(8));
+ a.href="#";a.setAttribute("aria-label",t(1)+" – "+t(8));
+ a.addEventListener("click",function(ev){ev.preventDefault();openInlineList(false)});
  var icon=e("span","dar-recent-compact-icon","✦");icon.setAttribute("aria-hidden","true");a.appendChild(icon);
  var info=e("span","dar-recent-compact-content");info.appendChild(e("span","dar-recent-compact-kicker",t(0)));
  info.appendChild(e("strong","dar-recent-compact-title",t(1)));
- if(hits.length){info.appendChild(e("small","dar-recent-compact-sub",hits.length+" "+t(14)+" · "+dateLabel(hits[0])))}
+ if(hits.length){info.appendChild(e("small","dar-recent-compact-sub",hits.length+" "+(hits.length===1?t(18):t(14))))}
  else info.appendChild(e("small","dar-recent-compact-sub",t(6)));
  a.appendChild(info);
  var action=e("span","dar-recent-compact-arrow","›");action.setAttribute("aria-hidden","true");a.appendChild(action);
@@ -300,7 +369,7 @@ function refreshOpenNotice(){
  applyNoticeTheme(layer);
 }
 function skipText(){return t(16)}
-function syncLocale(){render();refreshOpenNotice()}
+function syncLocale(){render();refreshOpenNotice();paintInlineList()}
 
 function openNewPostsNotice(force){if(!canAnnounce(force===true))return;
  var hits=recent(state.posts,5);if(!hits.length)return;
