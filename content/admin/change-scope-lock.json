@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "desktop-premium-browser-release-fix-20261101",
+      "at": "2026-11-01T15:11:00+01:00",
+      "approvedBy": "user-explicit-20261101-correct-all-pages-and-push-live",
+      "reason": "Narrow temporary release approval solely for the new desktop-responsive premium publication Chromium regression test bundled with the explicitly requested Website and adult visitor app layout repair PR #1620. No secrets, core worker changes, Kids, push, iOS native projects or unrelated scripts unlocked.",
+      "paths": [
+        "scripts/check-desktop-premium-browser.py"
+      ],
+      "expiresAt": "2026-11-08T23:59:00.000Z"
+    },
+    {
       "id": "adult-internal-recent-article-list-native-no-reload-20261101",
       "at": "2026-11-01T10:25:00+01:00",
       "approvedBy": "user-explicit-20261101-inline-native-recent-articles-no-extra-page-no-day-filter-auto-nine-app-languages",
