@@ -589,6 +589,19 @@ async function finalizeDarTestHomeV1193(asset) {
     const script = '<script defer id="darAdultMoreReadingJsV1" src="/assets/dar-adult-more-reading-v1.js?v=20261031-mehr-compact-v1"></'+'script>';
     html = html.includes("</body>") ? html.replace("</body>",script+"</body>") : html+script;
   }
+  // DAR_TEST_DUO_WORKSPACE_V2_20261101: final TEST-only adaptive selector.
+  // Remove previous cached v1 file tags and load exactly one cache-busted copy
+  // after the legacy test inline styles. No changes to visitor/Kids/iOS HTML.
+  html = html.replace(/<link\b[^>]*dar-duo-responsive-v1\.css[^>]*>/gi, "");
+  html = html.replace(/<script\b[^>]*dar-duo-responsive-v1\.js[^>]*><\/script>\s*/gi, "");
+  const duoV2 =
+    '<link rel="stylesheet" id="darTestDuoWorkspaceCSSV2" href="/test/assets/dar-duo-responsive-v1.css?v=20261101-dual-workspace-v2">' +
+    '<script defer id="darTestDuoWorkspaceJSV2" src="/test/assets/dar-duo-responsive-v1.js?v=20261101-dual-workspace-v2"></script>';
+  const finalHtmlTag = html.toLowerCase().lastIndexOf("</html>");
+  html = finalHtmlTag >= 0
+    ? html.slice(0, finalHtmlTag) + duoV2 + html.slice(finalHtmlTag)
+    : html + duoV2;
+
   const headers = new Headers(asset.headers);
   headers.set("X-DAR-Test-Scroll-Boundary", "v3");
   headers.set("X-DAR-Test-Home", "html-parity-v50-20261020");

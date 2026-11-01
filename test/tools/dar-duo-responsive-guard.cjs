@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 "use strict";
-/* DĀR TEST temporary Fold/Duo experiment retired on owner's request.
-   Guard ensures the old normal tablet CSS and five original 3D tabs remain. */
+/* DĀR TEST dual workspace: keep five existing bottom tabs, independent
+   selection/reading surfaces and strictly zero changes to visitor/KIDS. */
 const assert=require("node:assert/strict");
 const fs=require("node:fs");
 const path=require("node:path");
@@ -10,48 +10,71 @@ const root=path.resolve(__dirname,"../..");
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const js=read("test/assets/dar-duo-responsive-v1.js");
 const css=read("test/assets/dar-duo-responsive-v1.css");
-const thumb=read("test/assets/fold-thumb-nav.js");
+const worker=read("cloudflare/test-app-worker.js");
+const html=read("test/index.html");
 const liveJS=read("assets/adaptive-layout.js");
 const liveCSS=read("assets/adaptive-layout.css");
-const splitCSS=read("assets/fold-split.css");
-const html=read("test/index.html");
-new vm.Script(js);
-new vm.Script(thumb);
+const thumb=read("test/assets/fold-thumb-nav.js");
+
+new vm.Script(js,{filename:"test/assets/dar-duo-responsive-v1.js"});
 new vm.Script(liveJS);
-assert.match(js,/retired:true/);
-assert.match(js,/syncNavigation:function\(\)\{return false;\}/);
-assert.doesNotMatch(css,/(?:@media|grid-template-columns|position:fixed!important|data-dar-duo-axis)/);
-assert.doesNotMatch(liveJS,/DAR_ADULT_FOLD_WIDE_LIVE_V1_20261028/);
-assert.doesNotMatch(liveJS,/DAR_ADULT_WORKSPACE_V2_20261028/);
-assert.doesNotMatch(liveCSS,/DAR_ADULT_FOLD_SIDE_LIVE_V1_20261028/);
-assert.doesNotMatch(splitCSS,/DAR_ADULT_FOLD_DUAL_LIVE_V1_20261028/);
-assert.match(thumb,/return "bottom";/);
+assert.match(js,/__DAR_TEST_DUO_WORKSPACE_V2/);
+assert.match(js,/testOnly:true/);
+assert.match(js,/location\.hash/);
+assert.match(js,/createElement\("nav"\)/);
+assert.match(js,/darAdultPreferredLocaleV1/);
+assert.match(js,/is-feed-fullscreen/);
+assert.match(js,/is-ilm-chat-route/);
+assert.doesNotMatch(js,/(?:createElement\(["\x27]iframe|location\.replace|innerHTML\s*=)/i,
+  "Do not load a second app or replace SPA content");
+assert.match(css,/\.dar-test-duo-active/);
+assert.match(css,/#darTestDuoWorkspaceNav/);
+assert.match(css,/position:fixed!important/);
+assert.match(css,/overflow-y:auto!important/);
+assert.match(css,/body[^\n]*#appView/);
+assert.doesNotMatch(css,/#bottomNav\.bottom-nav\s*\{/,
+  "Do not replace or reposition existing five-tab glass nav");
+assert.match(worker,/DAR_TEST_DUO_WORKSPACE_V2_20261101/);
+assert.match(worker,/20261101-dual-workspace-v2/);
+assert.match(worker,/finalizeDarTestHomeV1193/);
 assert.match(html,/id="bottomNav"/);
 assert.match(html,/darTestDuoResponsiveCSSV1/);
 assert.match(html,/darTestDuoResponsiveJSV1/);
-const attrs={
- "data-dar-duo-axis":"landscape",
- "data-dar-duo-size":"wide",
- "data-dar-duo-layout":"dual"
-};
-const classSet=new Set(["dar-duo-side-active"]);
-const rootEl={
- clientWidth:1024,clientHeight:768,
- removeAttribute(name){delete attrs[name]},
- style:{removeProperty(name){}}
-};
-const doc={
- documentElement:rootEl,
- readyState:"loading",
- body:{classList:{remove(name){classSet.delete(name)}}},
- addEventListener(){}
-};
-const win={document:doc,innerWidth:1024,innerHeight:768};
-vm.runInNewContext(js,{window:win,document:doc});
-assert.equal(win.DARTestDuoAdaptive.retired,true);
-assert.equal(win.DARTestDuoAdaptive.syncNavigation(),false);
-win.DARTestDuoAdaptive.apply();
-assert.deepEqual(attrs,{},"Disable all temporary fold root override attributes");
-assert.equal(classSet.size,0,"Disable old left-side experimental dock");
-assert.equal(win.DARTestDuoAdaptive.audit().foldOverridesActive,false);
-console.log("DĀR TEST: Fold experiment disabled, normal tablet navigation retained PASS");
+assert.match(thumb,/return "bottom";/);
+assert.doesNotMatch(liveJS,/DAR_ADULT_FOLD_WIDE_LIVE_V1_20261028/);
+assert.doesNotMatch(liveCSS,/DAR_ADULT_FOLD_SIDE_LIVE_V1_20261028/);
+
+function getApi(pathname){
+  const listeners={};
+  const document={
+    readyState:"loading",
+    documentElement:{clientWidth:1024,clientHeight:768,classList:{contains:()=>false}},
+    addEventListener:(k,fn)=>{listeners[k]=fn}
+  };
+  const window={document,location:{pathname,hash:"#home",search:""},innerWidth:1024,innerHeight:768};
+  vm.runInNewContext(js,{window,document,console});
+  return window.DARTestDuoAdaptive;
+}
+assert.equal(getApi("/"),undefined,"Never run on live visitor path");
+assert.equal(getApi("/kids/"),undefined,"Never run on KIDS");
+const api=getApi("/test/");
+assert.ok(api,"Test API must exist");
+const cases=[
+  [390,844,false],[512,870,false],     // Fold closed / phone
+  [844,390,false],                      // Phone landscape
+  [680,850,true],                       // Fold opened portrait
+  [820,1180,true],                      // Tablet portrait
+  [1024,768,true],                      // Tablet landscape
+  [1194,834,true],                      // Wide window
+  [600,900,false],                      // Narrow split-view
+  [900,500,false]                       // Short landscape, not a desktop
+];
+for(const [w,h,expected] of cases){
+  const c=api.capacity(w,h);
+  assert.equal(c.dual,expected,w+"x"+h+" incorrect");
+  if(c.dual)assert.ok(c.reader>=390,w+"x"+h+" reader too narrow");
+}
+for(const locale of ["de","ar","en","tr","ku","ckb","bs","fr","es"]){
+  assert.match(js,new RegExp("^\\s*"+locale+":\\s*\\{","m"),"missing "+locale);
+}
+console.log("PASS: DĀR Test-only adaptive dual workspace; viewport tests, locale coverage, original navigation preserved.");
