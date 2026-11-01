@@ -155,6 +155,25 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-compact-global-home-archive-3-5-days-20261101",
+      "at": "2026-11-01T07:04:00+01:00",
+      "approvedBy": "user-explicit-20261101-0704-three-screenshots-home-fixed-salam-to-quran-compact-global-3-to-5-day-page",
+      "reason": "User explicitly requests tiny article entry AFTER permanently fixed Salam/Ibn Sirin/Qibla/Library/Quran home sequence, separate full article page of 3/4/5 days, global across same visitor app web/PWA/iOS, all 9 UI languages. No Kids, no native tabbar, no OneSignal notification.",
+      "paths": [
+        "assets/dar-home-recent-posts-v1.js",
+        "assets/dar-home-recent-posts-v1.css",
+        "assets/dar-recent-archive-v1.js",
+        "assets/dar-recent-archive-v1.css",
+        "neueste-beitraege/index.html",
+        "cloudflare/site-router.js",
+        "scripts/check-adult-component-locales-v1.cjs",
+        "scripts/check-adult-recent-dialog-browser.py",
+        "AGENTS.md",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-09T23:59:00.000Z"
+    },
+    {
       "id": "adult-new-posts-popup-nine-language-interaction-20261101",
       "at": "2026-11-01T06:02:00+01:00",
       "approvedBy": "user-explicit-20261101-screenshot-clicks-background-focus-theme-and-all-nine-new-ui-languages",
