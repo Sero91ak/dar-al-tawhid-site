@@ -159,7 +159,12 @@ jobs:
                 new MutationObserver(()=>window.__darPlayerClickAudit.push(document.body.className))
                   .observe(document.body,{attributes:true,attributeFilter:['class']});
               """)
-              driver.find_element(By.ID,'darV8PlayerFullscreen').click()
+              full=driver.find_element(By.ID,'darV8PlayerFullscreen')
+              driver.execute_script("document.documentElement.style.scrollBehavior='auto';arguments[0].scrollIntoView({block:'center',behavior:'instant'})",full)
+              hit=driver.execute_script("""const b=arguments[0],r=b.getBoundingClientRect(),el=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
+                return {rect:{top:r.top,bottom:r.bottom,height:innerHeight},hit:el&&el.className,ok:!!(el&&(el===b||b.contains(el)))}""",full)
+              if not hit['ok']:raise RuntimeError('Fullscreen control is obstructed: '+str(hit))
+              full.click()
               visible=driver.execute_script("return document.body.classList.contains('dar-v8-player-fullscreen') && getComputedStyle(document.querySelector('.v8-real-player')).display!=='none'")
               if not visible:
                 diag=driver.execute_script("""const p=document.querySelector('.v8-real-player'),b=document.getElementById('darV8PlayerFullscreen');
