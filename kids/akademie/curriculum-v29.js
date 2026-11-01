@@ -631,7 +631,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Geduld“: Du musst auf etwas warten. Was tust du? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Geduld“: Du musst auf etwas warten. Was tust du?",
      "options": [
       "Ich warte ruhig und bleibe freundlich.",
       "Ich schimpfe alle an."
@@ -674,13 +674,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Geduld“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Geduld“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich kann ruhig warten und freundlich bleiben. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Baqarah · 2:153 und Ṣaḥīḥ al-Buḫārī, Nr. 1469: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Baqarah · 2:153 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen. Sunnah (sinngemäß): Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht. Eigenes Lernbeispiel: Ich übe Geduld, wenn etwas nicht sofort klappt.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -738,7 +738,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Vertrauen“: Du bekommst ein Buch geliehen. Was tust du? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Vertrauen“: Du bekommst ein Buch geliehen. Was tust du?",
      "options": [
       "Ich behandle es gut und gebe es zurück.",
       "Ich gebe es ohne Fragen weiter."
@@ -781,13 +781,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Vertrauen“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Vertrauen“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich gehe gut mit geliehenen Sachen um. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Muʾminūn · 23:8 und Ṣaḥīḥ al-Buḫārī, Nr. 33: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Muʾminūn · 23:8 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten. Sunnah (sinngemäß): Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten. Eigenes Lernbeispiel: Ich bin zuverlässig, wenn mir jemand etwas anvertraut.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -845,7 +845,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Grüßen“: Jemand sagt zu dir As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh. Was tust du? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Grüßen“: Jemand sagt zu dir As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh. Was tust du?",
      "options": [
       "Ich grüße freundlich zurück.",
       "Ich sage absichtlich etwas Unfreundliches."
@@ -888,13 +888,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Grüßen“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Grüßen“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich kann mit einem guten Gruß beginnen und antworten. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat an-Nisāʾ · 4:86 und Ṣaḥīḥ Muslim, Nr. 54a: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat an-Nisāʾ · 4:86 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Wenn ihr freundlich gegrüßt werdet, antwortet mit einem besseren oder gleichwertigen Gruß. Sunnah (sinngemäß): Der Prophet ﷺ ermutigte dazu, den Salām untereinander zu verbreiten. Eigenes Lernbeispiel: Wir üben den islamischen Friedensgruß und eine gute Antwort.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -952,7 +952,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Freundlich sprechen“: Du bist anderer Meinung als ein Freund. Was tust du? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Freundlich sprechen“: Du bist anderer Meinung als ein Freund. Was tust du?",
      "options": [
       "Ich spreche ruhig und freundlich.",
       "Ich beleidige ihn."
@@ -995,13 +995,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Freundlich sprechen“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Freundlich sprechen“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich will ruhig und freundlich sprechen. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Isrāʾ · 17:53 und Ṣaḥīḥ al-Buḫārī, Nr. 6018: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Isrāʾ · 17:53 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Sunnah (sinngemäß): Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen. Eigenes Lernbeispiel: Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -1059,7 +1059,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Respekt“: Ein Elternteil bittet dich freundlich um Hilfe. Was tust du? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Respekt“: Ein Elternteil bittet dich freundlich um Hilfe. Was tust du?",
      "options": [
       "Ich antworte respektvoll und helfe, soweit ich kann.",
       "Ich beschimpfe ihn."
@@ -1102,13 +1102,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Respekt“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Respekt“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich höre zu und gehe freundlich mit anderen um. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Isrāʾ · 17:23 und Ṣaḥīḥ al-Buḫārī, Nr. 5971: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Isrāʾ · 17:23 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen. Sunnah (sinngemäß): Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters. Eigenes Lernbeispiel: Wir üben Respekt für Eltern, Familie und Mitmenschen.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -1166,7 +1166,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Reinheit“: Deine Kleidung ist verschmutzt. Was tust du? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Reinheit“: Deine Kleidung ist verschmutzt. Was tust du?",
      "options": [
       "Ich reinige sie oder bitte um Hilfe.",
       "Ich beachte es absichtlich nie."
@@ -1209,13 +1209,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Reinheit“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Reinheit“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich achte auf Reinheit und frage, wenn ich Hilfe brauche. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Muddaṯṯir · 74:4 und Ṣaḥīḥ Muslim, Nr. 223: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Muddaṯṯir · 74:4 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Und reinige deine Kleidung. Sunnah (sinngemäß): Der Prophet ﷺ erklärte, dass die rituelle Reinigung ein wichtiger Teil des Glaubens ist. Eigenes Lernbeispiel: Wir lernen, uns selbst, unsere Kleidung und unsere Umgebung sauber zu halten.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -1273,7 +1273,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Wuḍūʾ“: Du möchtest beten und brauchst Wuḍūʾ. Was tust du? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Wuḍūʾ“: Du möchtest beten und brauchst Wuḍūʾ. Was tust du?",
      "options": [
       "Ich mache die Gebetswaschung und frage bei Unsicherheit.",
       "Ich lasse die Gebetswaschung absichtlich weg."
@@ -1316,13 +1316,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Wuḍūʾ“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Wuḍūʾ“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich möchte die Gebetswaschung richtig lernen. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Māʾidah · 5:6 (Textauszug) und Ṣaḥīḥ al-Buḫārī, Nr. 135: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Māʾidah · 5:6 (Textauszug) und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln. Sunnah (sinngemäß): Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Eigenes Lernbeispiel: Wir erkennen die grundlegenden Glieder der Gebetswaschung, ohne einzelne Sonderfälle vorwegzunehmen.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -1380,7 +1380,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Gebet“: Was ist ein guter erster Schritt beim Gebetslernen? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Gebet“: Was ist ein guter erster Schritt beim Gebetslernen?",
      "options": [
       "Ich lasse mir das Gebet Schritt für Schritt zeigen.",
       "Ich erfinde eigene Gebetsbewegungen."
@@ -1423,13 +1423,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Gebet“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Gebet“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich lerne das Gebet nach dem Vorbild des Propheten ﷺ. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat Ṭā Hā · 20:14 und Ṣaḥīḥ al-Buḫārī, Nr. 631: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat Ṭā Hā · 20:14 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Sunnah (sinngemäß): Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat. Eigenes Lernbeispiel: Wir beginnen mit dem Sinn des Gebets und lernen die Praxis anschließend Schritt für Schritt.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -1487,7 +1487,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Tawḥīd“: Wem allein gebührt die Anbetung? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Tawḥīd“: Wem allein gebührt die Anbetung?",
      "options": [
       "Allah allein.",
       "Anderen neben Allah."
@@ -1530,13 +1530,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Tawḥīd“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Tawḥīd“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich bete Allah allein an. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Iḫlāṣ · 112:1 und Ṣaḥīḥ al-Buḫārī, Nr. 2856: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Iḫlāṣ · 112:1 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Sag: Er ist Allah, der Eine. Sunnah (sinngemäß): Der Prophet ﷺ erklärte, dass Allahs Recht darin besteht, Ihn allein anzubeten und Ihm nichts beizugesellen. Eigenes Lernbeispiel: Wir lernen, dass nur Allah angebetet wird.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -1594,7 +1594,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Īmān“: Was gehört zu unserem Glauben? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Īmān“: Was gehört zu unserem Glauben?",
      "options": [
       "Der Glaube an Allah und Seine Gesandten.",
       "Wir erfinden selbst die Glaubensgrundlagen."
@@ -1637,13 +1637,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Īmān“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Īmān“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich lerne die Grundlagen des Glaubens aus Qurʾān und Sunnah. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Baqarah · 2:3 und Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl): Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Baqarah · 2:3 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Sunnah (sinngemäß): Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung. Eigenes Lernbeispiel: Der Glaube umfasst die im Qurʾān und in der Sunnah genannten Grundlagen.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -1701,7 +1701,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Ikhlāṣ“: Warum tun wir gute Taten? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Ikhlāṣ“: Warum tun wir gute Taten?",
      "options": [
       "Wir bemühen uns um Aufrichtigkeit gegenüber Allah.",
       "Nur damit alle uns bewundern."
@@ -1744,13 +1744,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Ikhlāṣ“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Ikhlāṣ“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich bemühe mich, Allah aufrichtig zu dienen. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat az-Zumar · 39:11 und Ṣaḥīḥ al-Buḫārī, Nr. 1: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat az-Zumar · 39:11 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein. Sunnah (sinngemäß): Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden. Eigenes Lernbeispiel: Gute Taten sollen nicht nur zum Angeben getan werden.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -1795,7 +1795,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Geduldig warten“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Geduldig warten“?",
      "options": [
       "Ich kann warten, ohne andere anzuschreien.",
       "Ich reiße es einem anderen Kind weg."
@@ -1808,7 +1808,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Geduldig warten“: Du wartest auf dein Spielzeug. Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Geduldig warten“: Du wartest auf dein Spielzeug. Was machst du?",
      "options": [
       "Ich warte ruhig und frage freundlich.",
       "Ich reiße es einem anderen Kind weg."
@@ -1825,7 +1825,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Geduldig warten“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Geduldig warten“?",
      "options": [
       "Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen.",
       "Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht.",
@@ -1839,7 +1839,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Geduldig warten“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Geduldig warten“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich kann warten, ohne andere anzuschreien. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -1851,13 +1851,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Geduldig warten“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Geduldig warten“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich kann warten, ohne andere anzuschreien. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Baqarah · 2:153 und Ṣaḥīḥ al-Buḫārī, Nr. 1469: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Baqarah · 2:153 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen. Sunnah (sinngemäß): Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht. Eigenes Lernbeispiel: Ich kann warten, ohne andere anzuschreien.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -1902,7 +1902,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Nicht aufgeben“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Nicht aufgeben“?",
      "options": [
       "Ich kann bei einem Fehler erneut üben.",
       "Ich werfe alles wütend weg."
@@ -1915,7 +1915,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Nicht aufgeben“: Eine Aufgabe klappt beim ersten Mal nicht. Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Nicht aufgeben“: Eine Aufgabe klappt beim ersten Mal nicht. Was machst du?",
      "options": [
       "Ich bitte um Hilfe und probiere es erneut.",
       "Ich werfe alles wütend weg."
@@ -1932,7 +1932,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Nicht aufgeben“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Nicht aufgeben“?",
      "options": [
       "Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen.",
       "Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht.",
@@ -1946,7 +1946,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Nicht aufgeben“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Nicht aufgeben“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich kann bei einem Fehler erneut üben. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -1958,13 +1958,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Nicht aufgeben“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Nicht aufgeben“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich kann bei einem Fehler erneut üben. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Baqarah · 2:153 und Ṣaḥīḥ al-Buḫārī, Nr. 1469: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Baqarah · 2:153 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen. Sunnah (sinngemäß): Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht. Eigenes Lernbeispiel: Ich kann bei einem Fehler erneut üben.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -2009,7 +2009,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Geliehene Dinge“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Geliehene Dinge“?",
      "options": [
       "Ich gebe Geliehenes verlässlich zurück.",
       "Ich behalte es heimlich."
@@ -2022,7 +2022,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Geliehene Dinge“: Du bekommst ein Buch ausgeliehen. Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Geliehene Dinge“: Du bekommst ein Buch ausgeliehen. Was machst du?",
      "options": [
       "Ich behandle es sorgfältig und gebe es zurück.",
       "Ich behalte es heimlich."
@@ -2039,7 +2039,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Geliehene Dinge“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Geliehene Dinge“?",
      "options": [
       "Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten.",
       "Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten.",
@@ -2053,7 +2053,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Geliehene Dinge“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Geliehene Dinge“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich gebe Geliehenes verlässlich zurück. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -2065,13 +2065,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Geliehene Dinge“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Geliehene Dinge“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich gebe Geliehenes verlässlich zurück. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Muʾminūn · 23:8 und Ṣaḥīḥ al-Buḫārī, Nr. 33: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Muʾminūn · 23:8 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten. Sunnah (sinngemäß): Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten. Eigenes Lernbeispiel: Ich gebe Geliehenes verlässlich zurück.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -2116,7 +2116,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Mein Versprechen“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Mein Versprechen“?",
      "options": [
       "Ich bemühe mich, Zusagen einzuhalten.",
       "Ich tue so, als hätte ich nie etwas gesagt."
@@ -2129,7 +2129,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Mein Versprechen“: Du hast versprochen, beim Aufräumen zu helfen. Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Mein Versprechen“: Du hast versprochen, beim Aufräumen zu helfen. Was machst du?",
      "options": [
       "Ich halte meine Zusage oder erkläre ehrlich ein Problem.",
       "Ich tue so, als hätte ich nie etwas gesagt."
@@ -2146,7 +2146,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Mein Versprechen“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Mein Versprechen“?",
      "options": [
       "Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten.",
       "Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten.",
@@ -2160,7 +2160,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Mein Versprechen“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Mein Versprechen“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich bemühe mich, Zusagen einzuhalten. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -2172,13 +2172,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Mein Versprechen“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Mein Versprechen“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich bemühe mich, Zusagen einzuhalten. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Muʾminūn · 23:8 und Ṣaḥīḥ al-Buḫārī, Nr. 33: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Muʾminūn · 23:8 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten. Sunnah (sinngemäß): Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten. Eigenes Lernbeispiel: Ich bemühe mich, Zusagen einzuhalten.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -2223,7 +2223,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Salām erwidern“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Salām erwidern“?",
      "options": [
       "Ich übe eine gute Antwort auf den Salām.",
       "Ich mache mich über den Gruß lustig."
@@ -2236,7 +2236,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Salām erwidern“: Jemand grüßt dich mit Salām. Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Salām erwidern“: Jemand grüßt dich mit Salām. Was machst du?",
      "options": [
       "Ich antworte freundlich mit Salām.",
       "Ich mache mich über den Gruß lustig."
@@ -2253,7 +2253,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Salām erwidern“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Salām erwidern“?",
      "options": [
       "Wenn ihr freundlich gegrüßt werdet, antwortet mit einem besseren oder gleichwertigen Gruß.",
       "Der Prophet ﷺ ermutigte dazu, den Salām untereinander zu verbreiten.",
@@ -2267,7 +2267,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Salām erwidern“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Salām erwidern“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich übe eine gute Antwort auf den Salām. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -2279,13 +2279,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Salām erwidern“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Salām erwidern“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich übe eine gute Antwort auf den Salām. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat an-Nisāʾ · 4:86 und Ṣaḥīḥ Muslim, Nr. 54a: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat an-Nisāʾ · 4:86 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Wenn ihr freundlich gegrüßt werdet, antwortet mit einem besseren oder gleichwertigen Gruß. Sunnah (sinngemäß): Der Prophet ﷺ ermutigte dazu, den Salām untereinander zu verbreiten. Eigenes Lernbeispiel: Ich übe eine gute Antwort auf den Salām.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -2330,7 +2330,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Zuerst grüßen“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Zuerst grüßen“?",
      "options": [
       "Ich grüße Menschen höflich.",
       "Ich beleidige sie zur Begrüßung."
@@ -2343,7 +2343,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Zuerst grüßen“: Du triffst eine bekannte Person. Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Zuerst grüßen“: Du triffst eine bekannte Person. Was machst du?",
      "options": [
       "Ich begrüße sie freundlich.",
       "Ich beleidige sie zur Begrüßung."
@@ -2360,7 +2360,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Zuerst grüßen“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Zuerst grüßen“?",
      "options": [
       "Wenn ihr freundlich gegrüßt werdet, antwortet mit einem besseren oder gleichwertigen Gruß.",
       "Der Prophet ﷺ ermutigte dazu, den Salām untereinander zu verbreiten.",
@@ -2374,7 +2374,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Zuerst grüßen“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Zuerst grüßen“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich grüße Menschen höflich. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -2386,13 +2386,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Zuerst grüßen“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Zuerst grüßen“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich grüße Menschen höflich. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat an-Nisāʾ · 4:86 und Ṣaḥīḥ Muslim, Nr. 54a: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat an-Nisāʾ · 4:86 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Wenn ihr freundlich gegrüßt werdet, antwortet mit einem besseren oder gleichwertigen Gruß. Sunnah (sinngemäß): Der Prophet ﷺ ermutigte dazu, den Salām untereinander zu verbreiten. Eigenes Lernbeispiel: Ich grüße Menschen höflich.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -2437,7 +2437,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Bei Streit sprechen“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Bei Streit sprechen“?",
      "options": [
       "Ich spreche ohne Beleidigungen.",
       "Ich beschimpfe meinen Freund."
@@ -2450,7 +2450,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Bei Streit sprechen“: Du bist mit einem Freund uneinig. Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Bei Streit sprechen“: Du bist mit einem Freund uneinig. Was machst du?",
      "options": [
       "Ich sage ruhig, was ich meine.",
       "Ich beschimpfe meinen Freund."
@@ -2467,7 +2467,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Bei Streit sprechen“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Bei Streit sprechen“?",
      "options": [
       "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen.",
       "Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
@@ -2481,7 +2481,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Bei Streit sprechen“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Bei Streit sprechen“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich spreche ohne Beleidigungen. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -2493,13 +2493,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Bei Streit sprechen“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Bei Streit sprechen“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich spreche ohne Beleidigungen. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Isrāʾ · 17:53 und Ṣaḥīḥ al-Buḫārī, Nr. 6018: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Isrāʾ · 17:53 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Sunnah (sinngemäß): Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen. Eigenes Lernbeispiel: Ich spreche ohne Beleidigungen.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -2544,7 +2544,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Erst nachdenken“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Erst nachdenken“?",
      "options": [
       "Ich lerne, unnötige verletzende Worte zu vermeiden.",
       "Ich verletze jemanden absichtlich."
@@ -2557,7 +2557,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Erst nachdenken“: Dir fällt ein gemeiner Satz ein. Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Erst nachdenken“: Dir fällt ein gemeiner Satz ein. Was machst du?",
      "options": [
       "Ich denke nach und sage etwas Freundliches.",
       "Ich verletze jemanden absichtlich."
@@ -2574,7 +2574,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Erst nachdenken“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Erst nachdenken“?",
      "options": [
       "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen.",
       "Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
@@ -2588,7 +2588,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Erst nachdenken“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Erst nachdenken“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich lerne, unnötige verletzende Worte zu vermeiden. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -2600,13 +2600,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Erst nachdenken“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Erst nachdenken“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich lerne, unnötige verletzende Worte zu vermeiden. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Isrāʾ · 17:53 und Ṣaḥīḥ al-Buḫārī, Nr. 6018: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Isrāʾ · 17:53 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Sunnah (sinngemäß): Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen. Eigenes Lernbeispiel: Ich lerne, unnötige verletzende Worte zu vermeiden.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -2651,7 +2651,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Eltern zuhören“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Eltern zuhören“?",
      "options": [
       "Ich antworte respektvoll, auch wenn ich müde bin.",
       "Ich schreie ihn absichtlich an."
@@ -2664,7 +2664,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Eltern zuhören“: Dein Vater bittet dich um Hilfe. Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Eltern zuhören“: Dein Vater bittet dich um Hilfe. Was machst du?",
      "options": [
       "Ich antworte freundlich und höre zu.",
       "Ich schreie ihn absichtlich an."
@@ -2681,7 +2681,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Eltern zuhören“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Eltern zuhören“?",
      "options": [
       "Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen.",
       "Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters.",
@@ -2695,7 +2695,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Eltern zuhören“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Eltern zuhören“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich antworte respektvoll, auch wenn ich müde bin. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -2707,13 +2707,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Eltern zuhören“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Eltern zuhören“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich antworte respektvoll, auch wenn ich müde bin. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Isrāʾ · 17:23 und Ṣaḥīḥ al-Buḫārī, Nr. 5971: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Isrāʾ · 17:23 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen. Sunnah (sinngemäß): Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters. Eigenes Lernbeispiel: Ich antworte respektvoll, auch wenn ich müde bin.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -2758,7 +2758,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Hilfsbereit sein“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Hilfsbereit sein“?",
      "options": [
       "Ich bemerke, wenn jemand Unterstützung braucht.",
       "Ich lache sie aus."
@@ -2771,7 +2771,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Hilfsbereit sein“: Deine Mutter trägt mehrere leichte Sachen. Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Hilfsbereit sein“: Deine Mutter trägt mehrere leichte Sachen. Was machst du?",
      "options": [
       "Ich frage freundlich, ob ich helfen kann.",
       "Ich lache sie aus."
@@ -2788,7 +2788,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Hilfsbereit sein“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Hilfsbereit sein“?",
      "options": [
       "Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen.",
       "Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters.",
@@ -2802,7 +2802,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Hilfsbereit sein“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Hilfsbereit sein“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich bemerke, wenn jemand Unterstützung braucht. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -2814,13 +2814,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Hilfsbereit sein“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Hilfsbereit sein“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich bemerke, wenn jemand Unterstützung braucht. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Isrāʾ · 17:23 und Ṣaḥīḥ al-Buḫārī, Nr. 5971: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Isrāʾ · 17:23 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen. Sunnah (sinngemäß): Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters. Eigenes Lernbeispiel: Ich bemerke, wenn jemand Unterstützung braucht.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -2865,7 +2865,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Saubere Kleidung“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Saubere Kleidung“?",
      "options": [
       "Ich lerne, warum saubere Kleidung wichtig ist.",
       "Ich verteile den Schmutz absichtlich."
@@ -2878,7 +2878,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Saubere Kleidung“: Du bemerkst Schmutz an deinem Ärmel. Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Saubere Kleidung“: Du bemerkst Schmutz an deinem Ärmel. Was machst du?",
      "options": [
       "Ich sage es und reinige ihn, wenn es möglich ist.",
       "Ich verteile den Schmutz absichtlich."
@@ -2895,7 +2895,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Saubere Kleidung“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Saubere Kleidung“?",
      "options": [
       "Und reinige deine Kleidung.",
       "Der Prophet ﷺ erklärte, dass die rituelle Reinigung ein wichtiger Teil des Glaubens ist.",
@@ -2909,7 +2909,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Saubere Kleidung“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Saubere Kleidung“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich lerne, warum saubere Kleidung wichtig ist. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -2921,13 +2921,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Saubere Kleidung“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Saubere Kleidung“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich lerne, warum saubere Kleidung wichtig ist. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Muddaṯṯir · 74:4 und Ṣaḥīḥ Muslim, Nr. 223: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Muddaṯṯir · 74:4 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Und reinige deine Kleidung. Sunnah (sinngemäß): Der Prophet ﷺ erklärte, dass die rituelle Reinigung ein wichtiger Teil des Glaubens ist. Eigenes Lernbeispiel: Ich lerne, warum saubere Kleidung wichtig ist.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -2972,7 +2972,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Sauberer Lernplatz“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Sauberer Lernplatz“?",
      "options": [
       "Ich übe sorgsamen Umgang mit meiner Umgebung.",
       "Ich werfe noch mehr auf den Boden."
@@ -2985,7 +2985,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Sauberer Lernplatz“: Nach dem Basteln liegen Papierschnipsel herum. Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Sauberer Lernplatz“: Nach dem Basteln liegen Papierschnipsel herum. Was machst du?",
      "options": [
       "Ich helfe beim Aufräumen.",
       "Ich werfe noch mehr auf den Boden."
@@ -3002,7 +3002,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Sauberer Lernplatz“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Sauberer Lernplatz“?",
      "options": [
       "Und reinige deine Kleidung.",
       "Der Prophet ﷺ erklärte, dass die rituelle Reinigung ein wichtiger Teil des Glaubens ist.",
@@ -3016,7 +3016,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Sauberer Lernplatz“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Sauberer Lernplatz“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich übe sorgsamen Umgang mit meiner Umgebung. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -3028,13 +3028,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Sauberer Lernplatz“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Sauberer Lernplatz“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich übe sorgsamen Umgang mit meiner Umgebung. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Muddaṯṯir · 74:4 und Ṣaḥīḥ Muslim, Nr. 223: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Muddaṯṯir · 74:4 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Und reinige deine Kleidung. Sunnah (sinngemäß): Der Prophet ﷺ erklärte, dass die rituelle Reinigung ein wichtiger Teil des Glaubens ist. Eigenes Lernbeispiel: Ich übe sorgsamen Umgang mit meiner Umgebung.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -3079,7 +3079,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Gesicht und Arme“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Gesicht und Arme“?",
      "options": [
       "Ich erkenne Gesicht und Arme als Teile des Wuḍūʾ.",
       "Die Haare müssen abgeschnitten werden."
@@ -3092,7 +3092,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Gesicht und Arme“: Welches Körperteil wird in Qurʾān 5:6 ausdrücklich erwähnt? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Gesicht und Arme“: Welches Körperteil wird in Qurʾān 5:6 ausdrücklich erwähnt?",
      "options": [
       "Das Gesicht gehört zum Wuḍūʾ.",
       "Die Haare müssen abgeschnitten werden."
@@ -3109,7 +3109,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Gesicht und Arme“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Gesicht und Arme“?",
      "options": [
       "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln.",
       "Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt.",
@@ -3123,7 +3123,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Gesicht und Arme“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Gesicht und Arme“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich erkenne Gesicht und Arme als Teile des Wuḍūʾ. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -3135,13 +3135,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Gesicht und Arme“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Gesicht und Arme“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich erkenne Gesicht und Arme als Teile des Wuḍūʾ. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Māʾidah · 5:6 (Textauszug) und Ṣaḥīḥ al-Buḫārī, Nr. 135: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Māʾidah · 5:6 (Textauszug) und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln. Sunnah (sinngemäß): Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Eigenes Lernbeispiel: Ich erkenne Gesicht und Arme als Teile des Wuḍūʾ.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -3186,7 +3186,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Kopf und Füße“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Kopf und Füße“?",
      "options": [
       "Ich erkenne das Streichen über den Kopf.",
       "Den Kopf mit Seife schrubben."
@@ -3199,7 +3199,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Kopf und Füße“: Was gehört laut Qurʾān 5:6 zur Gebetswaschung? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Kopf und Füße“: Was gehört laut Qurʾān 5:6 zur Gebetswaschung?",
      "options": [
       "Über den Kopf streichen.",
       "Den Kopf mit Seife schrubben."
@@ -3216,7 +3216,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Kopf und Füße“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Kopf und Füße“?",
      "options": [
       "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln.",
       "Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt.",
@@ -3230,7 +3230,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Kopf und Füße“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Kopf und Füße“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich erkenne das Streichen über den Kopf. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -3242,13 +3242,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Kopf und Füße“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Kopf und Füße“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich erkenne das Streichen über den Kopf. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Māʾidah · 5:6 (Textauszug) und Ṣaḥīḥ al-Buḫārī, Nr. 135: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Māʾidah · 5:6 (Textauszug) und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln. Sunnah (sinngemäß): Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Eigenes Lernbeispiel: Ich erkenne das Streichen über den Kopf.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -3293,7 +3293,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Allah gedenken“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Allah gedenken“?",
      "options": [
       "Ich verstehe, warum das Gebet wichtig ist.",
       "Wir beten nur zum Zeitvertreib."
@@ -3306,7 +3306,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Allah gedenken“: Woran denken wir im Gebet? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Allah gedenken“: Woran denken wir im Gebet?",
      "options": [
       "Wir gedenken Allahs.",
       "Wir beten nur zum Zeitvertreib."
@@ -3323,7 +3323,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Allah gedenken“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Allah gedenken“?",
      "options": [
       "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
       "Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
@@ -3337,7 +3337,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Allah gedenken“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Allah gedenken“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich verstehe, warum das Gebet wichtig ist. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -3349,13 +3349,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Allah gedenken“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Allah gedenken“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich verstehe, warum das Gebet wichtig ist. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat Ṭā Hā · 20:14 und Ṣaḥīḥ al-Buḫārī, Nr. 631: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat Ṭā Hā · 20:14 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Sunnah (sinngemäß): Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat. Eigenes Lernbeispiel: Ich verstehe, warum das Gebet wichtig ist.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -3400,7 +3400,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Gebet lernen“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Gebet lernen“?",
      "options": [
       "Ich übe das Gebet Schritt für Schritt.",
       "Wir erfinden die Gebetsschritte selbst."
@@ -3413,7 +3413,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Gebet lernen“: Woher lernen wir die Gebetspraxis? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Gebet lernen“: Woher lernen wir die Gebetspraxis?",
      "options": [
       "Aus der authentischen Sunnah des Propheten ﷺ.",
       "Wir erfinden die Gebetsschritte selbst."
@@ -3430,7 +3430,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Gebet lernen“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Gebet lernen“?",
      "options": [
       "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
       "Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
@@ -3444,7 +3444,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Gebet lernen“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Gebet lernen“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich übe das Gebet Schritt für Schritt. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -3456,13 +3456,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Gebet lernen“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Gebet lernen“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich übe das Gebet Schritt für Schritt. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat Ṭā Hā · 20:14 und Ṣaḥīḥ al-Buḫārī, Nr. 631: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat Ṭā Hā · 20:14 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Sunnah (sinngemäß): Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat. Eigenes Lernbeispiel: Ich übe das Gebet Schritt für Schritt.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -3507,7 +3507,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Allah ist Einer“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Allah ist Einer“?",
      "options": [
       "Ich lerne, dass nur Allah angebetet wird.",
       "Wir beten beliebige Dinge an."
@@ -3520,7 +3520,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Allah ist Einer“: Wer allein wird angebetet? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Allah ist Einer“: Wer allein wird angebetet?",
      "options": [
       "Allah allein.",
       "Wir beten beliebige Dinge an."
@@ -3537,7 +3537,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Allah ist Einer“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Allah ist Einer“?",
      "options": [
       "Sag: Er ist Allah, der Eine.",
       "Der Prophet ﷺ erklärte, dass Allahs Recht darin besteht, Ihn allein anzubeten und Ihm nichts beizugesellen.",
@@ -3551,7 +3551,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Allah ist Einer“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Allah ist Einer“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich lerne, dass nur Allah angebetet wird. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -3563,13 +3563,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Allah ist Einer“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Allah ist Einer“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich lerne, dass nur Allah angebetet wird. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Iḫlāṣ · 112:1 und Ṣaḥīḥ al-Buḫārī, Nr. 2856: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Iḫlāṣ · 112:1 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Sag: Er ist Allah, der Eine. Sunnah (sinngemäß): Der Prophet ﷺ erklärte, dass Allahs Recht darin besteht, Ihn allein anzubeten und Ihm nichts beizugesellen. Eigenes Lernbeispiel: Ich lerne, dass nur Allah angebetet wird.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -3614,7 +3614,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Nur Allah anbeten“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Nur Allah anbeten“?",
      "options": [
       "Ich erkenne die Bedeutung des Tawḥīd im Gebet.",
       "Einem geschaffenen Gegenstand."
@@ -3627,7 +3627,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Nur Allah anbeten“: Wem gilt unsere Anbetung? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Nur Allah anbeten“: Wem gilt unsere Anbetung?",
      "options": [
       "Allah allein.",
       "Einem geschaffenen Gegenstand."
@@ -3644,7 +3644,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Nur Allah anbeten“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Nur Allah anbeten“?",
      "options": [
       "Sag: Er ist Allah, der Eine.",
       "Der Prophet ﷺ erklärte, dass Allahs Recht darin besteht, Ihn allein anzubeten und Ihm nichts beizugesellen.",
@@ -3658,7 +3658,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Nur Allah anbeten“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Nur Allah anbeten“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich erkenne die Bedeutung des Tawḥīd im Gebet. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -3670,13 +3670,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Nur Allah anbeten“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Nur Allah anbeten“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich erkenne die Bedeutung des Tawḥīd im Gebet. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Iḫlāṣ · 112:1 und Ṣaḥīḥ al-Buḫārī, Nr. 2856: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Iḫlāṣ · 112:1 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Sag: Er ist Allah, der Eine. Sunnah (sinngemäß): Der Prophet ﷺ erklärte, dass Allahs Recht darin besteht, Ihn allein anzubeten und Ihm nichts beizugesellen. Eigenes Lernbeispiel: Ich erkenne die Bedeutung des Tawḥīd im Gebet.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -3721,7 +3721,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Die Engel“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Die Engel“?",
      "options": [
       "Ich kann die Engel als einen Bestandteil des Īmān nennen.",
       "Der Glaube nur an Spielzeug."
@@ -3734,7 +3734,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Die Engel“: Was gehört zu den Grundlagen des Īmān? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Die Engel“: Was gehört zu den Grundlagen des Īmān?",
      "options": [
       "Der Glaube an die Engel.",
       "Der Glaube nur an Spielzeug."
@@ -3751,7 +3751,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Die Engel“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Die Engel“?",
      "options": [
       "Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
       "Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
@@ -3765,7 +3765,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Die Engel“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Die Engel“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich kann die Engel als einen Bestandteil des Īmān nennen. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -3777,13 +3777,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Die Engel“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Die Engel“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich kann die Engel als einen Bestandteil des Īmān nennen. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Baqarah · 2:3 und Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl): Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Baqarah · 2:3 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Sunnah (sinngemäß): Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung. Eigenes Lernbeispiel: Ich kann die Engel als einen Bestandteil des Īmān nennen.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -3828,7 +3828,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Die Gesandten“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Die Gesandten“?",
      "options": [
       "Ich kenne einen weiteren Bestandteil des Īmān.",
       "Nur die eigenen Wünsche entscheiden."
@@ -3841,7 +3841,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Die Gesandten“: Was gehört zum Īmān? Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Die Gesandten“: Was gehört zum Īmān?",
      "options": [
       "Der Glaube an Allahs Gesandte.",
       "Nur die eigenen Wünsche entscheiden."
@@ -3858,7 +3858,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Die Gesandten“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Die Gesandten“?",
      "options": [
       "Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
       "Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
@@ -3872,7 +3872,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Die Gesandten“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Die Gesandten“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich kenne einen weiteren Bestandteil des Īmān. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -3884,13 +3884,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Die Gesandten“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Die Gesandten“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich kenne einen weiteren Bestandteil des Īmān. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat al-Baqarah · 2:3 und Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl): Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat al-Baqarah · 2:3 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Sunnah (sinngemäß): Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung. Eigenes Lernbeispiel: Ich kenne einen weiteren Bestandteil des Īmān.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -3935,7 +3935,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Gutes ohne Lob“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Gutes ohne Lob“?",
      "options": [
       "Ich helfe mit guter Absicht.",
       "Ich helfe nur, wenn ich gelobt werde."
@@ -3948,7 +3948,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Gutes ohne Lob“: Du hilfst beim Aufräumen und niemand sieht es. Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Gutes ohne Lob“: Du hilfst beim Aufräumen und niemand sieht es. Was machst du?",
      "options": [
       "Ich helfe trotzdem mit guter Absicht.",
       "Ich helfe nur, wenn ich gelobt werde."
@@ -3965,7 +3965,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Gutes ohne Lob“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Gutes ohne Lob“?",
      "options": [
       "Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein.",
       "Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden.",
@@ -3979,7 +3979,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Gutes ohne Lob“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Gutes ohne Lob“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich helfe mit guter Absicht. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -3991,13 +3991,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Gutes ohne Lob“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Gutes ohne Lob“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich helfe mit guter Absicht. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat az-Zumar · 39:11 und Ṣaḥīḥ al-Buḫārī, Nr. 1: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat az-Zumar · 39:11 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein. Sunnah (sinngemäß): Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden. Eigenes Lernbeispiel: Ich helfe mit guter Absicht.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -4042,7 +4042,7 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Du erzählst einem Freund von „Gute Absichten“. Was ist eine gute Erklärung?",
+     "prompt": "Was sagst du einem Freund über „Gute Absichten“?",
      "options": [
       "Ich denke darüber nach, warum ich Gutes tue.",
       "Ich tue es nur, um damit anzugeben."
@@ -4055,7 +4055,7 @@ const editorialContentV30={
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Du erklärst einem Freund das Thema „Gute Absichten“: Du möchtest etwas Gutes tun. Welche Handlung passt zum Unterricht?",
+     "prompt": "Zum Thema „Gute Absichten“: Du möchtest etwas Gutes tun. Was machst du?",
      "options": [
       "Ich bemühe mich um eine aufrichtige Absicht.",
       "Ich tue es nur, um damit anzugeben."
@@ -4072,7 +4072,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Gute Absichten“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Gute Absichten“?",
      "options": [
       "Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein.",
       "Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden.",
@@ -4086,7 +4086,7 @@ const editorialContentV30={
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Ein jüngeres Kind fragt nach „Gute Absichten“. Welche Aussage unterscheidet Unterrichtsbeispiel und Offenbarung richtig?",
+     "prompt": "Welche Aussage trennt bei „Gute Absichten“ die Quelle von unserem Beispiel?",
      "options": [
       "Unser Ziel ist: Ich denke darüber nach, warum ich Gutes tue. Das Alltagsbeispiel ist eine Übung, kein wörtliches Qurʾān-Zitat.",
       "Jede konkrete Übung im Unterricht ist als eigenes Gebot im Qurʾān wortwörtlich erwähnt.",
@@ -4098,13 +4098,13 @@ const editorialContentV30={
     },
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Gute Absichten“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Gute Absichten“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich denke darüber nach, warum ich Gutes tue. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     },
     {
      "type": "text",
-     "prompt": "Vergleiche Sūrat az-Zumar · 39:11 und Ṣaḥīḥ al-Buḫārī, Nr. 1: Was lehrt jede Quelle? Welche Alltagshandlung ist lediglich unser Lernbeispiel?",
+     "prompt": "Was lehren Sūrat az-Zumar · 39:11 und die genannte Sunnah? Was ist unser eigenes Beispiel?",
      "sample": "Qurʾān-Bedeutung: Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein. Sunnah (sinngemäß): Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden. Eigenes Lernbeispiel: Ich denke darüber nach, warum ich Gutes tue.",
      "hint": "Fasse die beiden Quellen getrennt zusammen; eine Alltagsübung ist kein eigenes Prophetenzitat."
     }
@@ -4155,7 +4155,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Essen mit Bismillāh“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Essen mit Bismillāh“?",
      "options": [
       "Esst und trinkt, aber seid nicht maßlos.",
       "Der Prophet ﷺ lehrte den jungen ʿUmar ibn Abī Salamah: Nenne Allahs Namen, iss mit deiner rechten Hand und iss von dem, was vor dir liegt.",
@@ -4171,7 +4171,7 @@ const editorialContentV30={
     null,
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Essen mit Bismillāh“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Essen mit Bismillāh“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich sage Bismillāh und esse achtsam. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
@@ -4190,7 +4190,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Barmherzig zu Tieren“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Barmherzig zu Tieren“?",
      "options": [
       "Auch die Tiere auf der Erde und die Vögel sind Gemeinschaften wie ihr.",
       "Der Prophet ﷺ berichtete von einem Mann, der einem durstigen Hund Wasser gab, und erklärte, dass es für Güte gegenüber Lebewesen Lohn gibt.",
@@ -4206,7 +4206,7 @@ const editorialContentV30={
     null,
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Barmherzig zu Tieren“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Barmherzig zu Tieren“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich tue Tieren nicht weh und bitte bei einem hilfsbedürftigen Tier um Hilfe. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
@@ -4225,7 +4225,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Gute Nachbarschaft“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Gute Nachbarschaft“?",
      "options": [
       "Und seid gut zu nahen und ferneren Nachbarn.",
       "Der Prophet ﷺ sagte, dass Ǧibrīl ihm die gute Behandlung des Nachbarn so oft ans Herz legte, dass er annahm, der Nachbar könne erbberechtigt werden.",
@@ -4241,7 +4241,7 @@ const editorialContentV30={
     null,
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Gute Nachbarschaft“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Gute Nachbarschaft“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich grüße höflich und nehme Rücksicht auf andere im Haus. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
@@ -4260,7 +4260,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Allah um Hilfe bitten“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Allah um Hilfe bitten“?",
      "options": [
       "Dir allein dienen wir, und Dich allein bitten wir um Hilfe.",
       "Der Prophet ﷺ lehrte, beim Bittgebet nicht ungeduldig zu werden und nicht vorschnell zu sagen, man habe gebetet, aber keine Antwort erhalten.",
@@ -4276,7 +4276,7 @@ const editorialContentV30={
     null,
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Allah um Hilfe bitten“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Allah um Hilfe bitten“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich bitte Allah im Duʿāʾ und darf Menschen um praktische Hilfe bitten. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
@@ -4295,7 +4295,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Allah allein anbeten“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Allah allein anbeten“?",
      "options": [
       "Ich habe die Ǧinn und die Menschen nur erschaffen, damit sie Mir dienen.",
       "Der Prophet ﷺ erklärte Muʿāḏ ibn Ǧabal, dass Allahs Recht gegenüber den Menschen darin besteht, dass sie Ihn anbeten und Ihm nichts beigesellen.",
@@ -4311,7 +4311,7 @@ const editorialContentV30={
     null,
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Allah allein anbeten“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Allah allein anbeten“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
@@ -4330,7 +4330,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Die sechs Glaubenssäulen“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Die sechs Glaubenssäulen“?",
      "options": [
       "Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
       "Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung.",
@@ -4346,7 +4346,7 @@ const editorialContentV30={
     null,
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Die sechs Glaubenssäulen“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Die sechs Glaubenssäulen“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich kann die Glaubensgrundlagen nach und nach nennen. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
@@ -4365,7 +4365,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Gutes mit richtiger Absicht“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Gutes mit richtiger Absicht“?",
      "options": [
       "Ihnen wurde aufgetragen, Allah zu dienen und Ihm gegenüber aufrichtig zu sein.",
       "Der Prophet ﷺ erklärte, dass der Wert einer Handlung mit der Absicht zusammenhängt, mit der sie ausgeführt wird.",
@@ -4381,7 +4381,7 @@ const editorialContentV30={
     null,
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Gutes mit richtiger Absicht“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Gutes mit richtiger Absicht“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich helfe, weil ich Gutes für Allah tun möchte, nicht nur für Applaus. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
@@ -4400,7 +4400,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Stark sein bei Wut“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Stark sein bei Wut“?",
      "options": [
       "Diejenigen, die ihren Zorn zurückhalten und den Menschen vergeben.",
       "Der Prophet ﷺ erklärte, dass wahre Stärke nicht darin besteht, andere zu besiegen, sondern sich bei Wut zu beherrschen.",
@@ -4416,7 +4416,7 @@ const editorialContentV30={
     null,
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Stark sein bei Wut“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Stark sein bei Wut“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich sage, dass ich wütend bin, und bitte bei Bedarf um Hilfe. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
@@ -4435,7 +4435,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Erst um Erlaubnis bitten“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Erst um Erlaubnis bitten“?",
      "options": [
       "Betretet keine fremden Häuser, bevor ihr um Erlaubnis gebeten und ihre Bewohner begrüßt habt.",
       "Der Prophet ﷺ lehrte, beim Eintritt um Erlaubnis zu bitten und nach höchstens drei erfolglosen Bitten wieder zu gehen.",
@@ -4451,7 +4451,7 @@ const editorialContentV30={
     null,
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Erst um Erlaubnis bitten“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Erst um Erlaubnis bitten“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich klopfe an und frage, ob ich eintreten darf. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
@@ -4470,7 +4470,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Tarbiyah – freundlich lernen“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Tarbiyah – freundlich lernen“?",
      "options": [
       "Fordere deine Familie zum Gebet auf und bleibe dabei geduldig und beständig.",
       "Der Prophet ﷺ lehrte, Dinge zu erleichtern statt sie unnötig schwer zu machen, und Menschen zu ermutigen statt abzuschrecken.",
@@ -4486,7 +4486,7 @@ const editorialContentV30={
     null,
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Tarbiyah – freundlich lernen“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Tarbiyah – freundlich lernen“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich lerne Schritt für Schritt und frage, wenn ich ein Wort nicht verstehe. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
@@ -4505,7 +4505,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Tazkiyah – gute innere Haltung“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Tazkiyah – gute innere Haltung“?",
      "options": [
       "Erfolg hat gewiss, wer seine Seele läutert.",
       "Der Prophet ﷺ erklärte, dass nicht Aussehen und Besitz das Entscheidende sind, sondern Herzen und Taten.",
@@ -4521,7 +4521,7 @@ const editorialContentV30={
     null,
     {
      "type": "text",
-     "prompt": "Wie würdest du einem jüngeren Kind „Tazkiyah – gute innere Haltung“ anhand eines selbst gewählten Alltagsbeispiels verständlich erklären? Welche Frage würdest du ihm danach stellen?",
+     "prompt": "Wie erklärst du „Tazkiyah – gute innere Haltung“ einem jüngeren Kind? Gib ein Beispiel und stelle ihm eine Frage.",
      "sample": "Ich denke über mein Verhalten nach und versuche eine kleine gute Tat. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
@@ -4540,7 +4540,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Reinheit und Sauberkeit“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Reinheit und Sauberkeit“?",
      "options": [
       "Wenn ihr zum Gebet aufsteht, wascht eure Gesichter und Hände bis zu den Ellenbogen. (Auszug)",
       "Der Prophet ﷺ betonte die große Bedeutung der rituellen Reinheit für den Glauben.",
@@ -4565,7 +4565,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Der Qurʾān – Allahs Wort“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Der Qurʾān – Allahs Wort“?",
      "options": [
       "Dies ist das Buch, an dem kein Zweifel besteht: eine Rechtleitung für die Gottesfürchtigen.",
       "Der Prophet ﷺ lehrte den besonderen Wert dessen, der den Qurʾān lernt und ihn weiterlehrt.",
@@ -4590,7 +4590,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Ādam عليه السلام kennenlernen“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Ādam عليه السلام kennenlernen“?",
      "options": [
       "Bei Allah ist das Beispiel von ʿĪsā wie das von Ādam. Er erschuf ihn aus Erde, dann sagte Er zu ihm: Sei!, und er war.",
       "Der Prophet ﷺ berichtete, dass Allah Ādam erschuf und ihn lehrte, die Engel mit dem Friedensgruß zu begrüßen.",
@@ -4615,7 +4615,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Morgens Allah gedenken“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Morgens Allah gedenken“?",
      "options": [
       "O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken.",
       "Der Prophet ﷺ nannte die Lobpreisung Subḥāna llāhi wa-bi-ḥamdihī für den Morgen und Abend und erwähnte den besonderen Lohn für hundert Wiederholungen.",
@@ -4640,7 +4640,7 @@ const editorialContentV30={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist die Bedeutung des Qurʾān-Verses aus „Mit Eltern liebevoll umgehen“ – und nicht die Ḥadīṯ-Zusammenfassung oder unsere Unterrichtsübung?",
+     "prompt": "Welche Antwort erklärt den Qurʾān-Vers zu „Mit Eltern liebevoll umgehen“?",
      "options": [
       "Und zu den Eltern sollt ihr gütig sein. (Auszug)",
       "Auf die Frage nach der Person, die besonders gute Behandlung verdient, nannte der Prophet ﷺ dreimal die Mutter und dann den Vater.",
