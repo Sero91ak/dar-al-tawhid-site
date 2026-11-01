@@ -25,8 +25,10 @@ function within(p){var date=new Date(p.date||"");if(!p.id||!p.title||!Number.isF
 function latest(){return state.posts.filter(within).sort(function(a,b){return Date.parse(b.date)-Date.parse(a.date)||String(a.id).localeCompare(String(b.id))})}
 function dateText(post){var n=Math.round(dayNum(new Date())-dayNum(new Date(post.date)));if(n===0)return t("today");if(n===1)return t("yesterday");return new Intl.DateTimeFormat(locale()==="ckb"?"ckb-IQ":locale()==="ku"?"ku-TR":locale(),{day:"2-digit",month:"short",year:"numeric",timeZone:"Europe/Berlin"}).format(new Date(post.date))}
 function title(p){var v=state.titles[p.id]||{},l=locale();return l!=="de"&&v[l]?v[l]:p.title}
-function postLink(p){var id=encodeURIComponent(p.id);return "/?post="+id+"#post/"+id}
-function refreshLabels(){var lang=locale(),rtl=lang==="ar"||lang==="ckb";d.documentElement.lang=lang;d.documentElement.dir=rtl?"rtl":"ltr";by("darArchiveLanguage").value=lang;by("darArchiveBackText").textContent=t("back");by("darArchiveBack").setAttribute("aria-label",t("back"));by("darArchiveEyebrow").textContent=t("kicker");by("darArchiveTitle").textContent=t("heading");by("darArchiveDescription").textContent=t("desc");by("darArchiveFooterBack").textContent=t("foot");d.title=t("heading")+" · DĀR AL TAWḤĪD"}
+function isPwa(){return /^\/pwa(?:\/|$)/.test(location.pathname)}
+function homeUrl(){return isPwa()?"/pwa/?pwa=1":"/"}
+function postLink(p){var id=encodeURIComponent(p.id);return isPwa()?"/pwa/?pwa=1&post="+id+"#post/"+id:"/?post="+id+"#post/"+id}
+function refreshLabels(){var lang=locale(),rtl=lang==="ar"||lang==="ckb";d.documentElement.lang=lang;d.documentElement.dir=rtl?"rtl":"ltr";by("darArchiveLanguage").value=lang;by("darArchiveBack").href=homeUrl();by("darArchiveFooterBack").href=homeUrl();by("darArchiveBackText").textContent=t("back");by("darArchiveBack").setAttribute("aria-label",t("back"));by("darArchiveEyebrow").textContent=t("kicker");by("darArchiveTitle").textContent=t("heading");by("darArchiveDescription").textContent=t("desc");by("darArchiveFooterBack").textContent=t("foot");d.title=t("heading")+" · DĀR AL TAWḤĪD"}
 function render(){
  refreshLabels();var posts=latest(),tabs=by("darArchiveTabs");tabs.replaceChildren();
  [3,4,5].forEach(function(n){var b=el("button","dar-archive-tab",n+" "+t("days"));b.type="button";b.setAttribute("aria-pressed",String(state.days===n));b.addEventListener("click",function(){state.days=n;render()});tabs.appendChild(b)});
