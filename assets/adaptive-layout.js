@@ -47,18 +47,26 @@
     /* iOS/PWA orientation fix: visualViewport can keep the previous landscape
        width for a few frames. Never use max(), otherwise one stale source
        keeps the whole app in the old breakpoint after rotating back. */
+    /* DAR_IOS_SCROLL_GEOMETRY_STABLE_V1_20261101
+       visualViewport height changes while Safari chrome expands/collapses
+       during a finger scroll. It is NOT a new layout viewport. Feeding it
+       back into --layout-vh and ResizeObserver induces repeated relayout
+       of the fixed header, page and tab dock (visible iPhone jitter).
+       The document layout viewport changes on actual rotation/folding. */
     var w = clientW || innerW || vvW || 0;
     var h = clientH || innerH || vvH || 0;
-    if (vvW > 0 && vvH > 0 && clientW > 0 && clientH > 0) {
-      var vvLandscape = vvW >= vvH;
-      var clientLandscape = clientW >= clientH;
-      if (vvLandscape === clientLandscape) {
-        w = vvW;
-        h = vvH;
-      }
-    }
     var offsetTop = vv && typeof vv.offsetTop === "number" ? vv.offsetTop : 0;
-    return { width: w, height: h, offsetTop: offsetTop };
+    return { width: w, height: h, visualHeight: vvH || h, offsetTop: offsetTop };
+  }
+
+  function keyboardIsVisible(metrics) {
+    var el = document.activeElement;
+    var focusedEditable = !!(el &&
+      (el.isContentEditable ||
+       (typeof el.matches === "function" &&
+        el.matches('input:not([type="hidden"]),textarea,select,[contenteditable="true"]'))));
+    return focusedEditable && metrics.visualHeight > 0 && metrics.height > 0 &&
+      metrics.height - metrics.visualHeight > 120;
   }
 
   function navPreference() {
@@ -176,13 +184,14 @@
 
   function applyKeyboardState(metrics) {
     var root = document.documentElement;
-    var layoutH =
-      document.documentElement.clientHeight || global.innerHeight || metrics.height;
-    var keyboardLikely =
-      metrics.height > 0 && layoutH > 0 && metrics.height < layoutH - 120;
+    var keyboardLikely = keyboardIsVisible(metrics);
     root.classList.toggle("adaptive-keyboard-open", !!keyboardLikely);
-    root.style.setProperty("--layout-vv-height", metrics.height + "px");
-    root.style.setProperty("--layout-vv-offset-top", (metrics.offsetTop || 0) + "px");
+    /* Ignore moving browser toolbars while scrolling. Only a focused
+       editable field may opt into the keyboard's smaller visual height. */
+    root.style.setProperty("--layout-vv-height",
+      (keyboardLikely ? metrics.visualHeight : metrics.height) + "px");
+    root.style.setProperty("--layout-vv-offset-top",
+      (keyboardLikely ? metrics.offsetTop || 0 : 0) + "px");
   }
 
   function applyOrientationAttrs(metrics) {
@@ -204,8 +213,11 @@
     /* The body/document ResizeObservers fire frequently on content rendering,
        but only actual viewport changes require recalculating root CSS tokens.
        Forced route/orientation updates still run unconditionally. */
-    var viewportKey = metrics.width + "|" + metrics.height + "|" + (metrics.offsetTop || 0) +
-      "|" + navPreference();
+    var keyboardKey = keyboardIsVisible(metrics)
+      ? "keyboard:" + Math.round(metrics.visualHeight) + ":" + Math.round(metrics.offsetTop || 0)
+      : "keyboard:closed";
+    var viewportKey = metrics.width + "|" + metrics.height + "|" +
+      navPreference() + "|" + keyboardKey;
     /* Native WKWebView may overwrite data-layout on route changes without
        changing the viewport. Reassert the measured mode in that case. */
     if (!force && viewportKey === lastAppliedViewportKey &&
@@ -360,6 +372,9 @@
     if (global.visualViewport) {
       global.visualViewport.addEventListener("resize", onResize, { passive: true });
     }
+    /* Keyboard focus can change without a window resize on iOS. */
+    document.addEventListener("focusin", onResize, { passive: true });
+    document.addEventListener("focusout", onResize, { passive: true });
 
     document.addEventListener("visibilitychange", function () {
       if (!document.hidden) scheduleOrientBurst();
