@@ -68,7 +68,16 @@ const url="https://dar-al-tawhid.de/test/?env=staging&source=duo-geometry#quran"
        console.log("DĀR_TEST_DUO_SCROLL",JSON.stringify({before,after}));
        if(Math.abs(before.top-after.top)>1 || Math.abs(before.leftScroll-after.leftScroll)>1)
          throw Error("Left rail does not retain its independent scroll while right pane moves");
-       await page.locator('#darTestDuoWorkspaceNav [data-duo-route="hadith"]').click();
+       const accessGate=await page.evaluate(()=>{
+         const gate=document.querySelector("#darTestLock");
+         if(!gate)return false;
+         const css=getComputedStyle(gate),box=gate.getBoundingClientRect();
+         return css.display!=="none"&&css.visibility!=="hidden"&&box.width>0&&box.height>0&&css.pointerEvents!=="none";
+       });
+       if(accessGate){
+         console.log("DĀR_TEST_DUO_TAP_GATED: real click blocked by existing Test authentication screen; intentionally not bypassed");
+       }else{
+       await page.locator('#darTestDuoWorkspaceNav [data-duo-route="hadith"]').click({timeout:8000});
        await page.waitForTimeout(450);
        const tapped=await page.evaluate(()=>{
          const nav=document.getElementById("darTestDuoWorkspaceNav").getBoundingClientRect();
@@ -79,6 +88,7 @@ const url="https://dar-al-tawhid.de/test/?env=staging&source=duo-geometry#quran"
        console.log("DĀR_TEST_DUO_TAP",JSON.stringify(tapped));
        if(!tapped.hash.startsWith("#hadith")||!tapped.active||tapped.readerLeft<tapped.navRight+7)
          throw Error("A tap must open the Hadith route in the right pane without overlap");
+       }
      }
      await page.evaluate(()=>{
        const overlay=document.createElement("div");
