@@ -49,6 +49,21 @@ function addPost(parent,p,compact){var a=e("a","dar-recent-post");a.href=openLin
 function section(parent,kicker,title){var h=e("div","dar-recent-header");h.appendChild(e("span","dar-recent-kicker",kicker));h.appendChild(e("h2","dar-recent-heading",title));parent.appendChild(h)}
 function archiveUrl(){return /^\/pwa(?:\/|$)/.test(location.pathname)?"/pwa/neueste-beitraege/":"/neueste-beitraege/"}
 function openArchive(){w.location.assign(archiveUrl())}
+/* Rebuild-safe invariant: these are DOM siblings in one uninterrupted
+   section on all visitor shells. Other widgets are pushed below Qurʾān.
+   We intentionally do NOT reorder top-level prayer clock, fixed header or tabs. */
+function enforceCanonicalHomeOrder(native,mount){
+ if(!native)return false;
+ var content=native.querySelector(".dhp-content");if(!content)return false;
+ var names=[".dhp-welcome",".dhp-isnad",".dhp-quickbar",".dhp-search-box",".dhp-quran-section"];
+ var chain=names.map(function(x){return content.querySelector(x)});
+ if(chain.some(function(x){return !x||x.parentElement!==content}))return false;
+ var source=content.querySelector(".dhp-home-source-v55");
+ if(source&&source.parentElement===content&&source.nextElementSibling!==chain[0])source.insertAdjacentElement("afterend",chain[0]);
+ for(var i=1;i<chain.length;i++){if(chain[i-1].nextElementSibling!==chain[i])chain[i-1].insertAdjacentElement("afterend",chain[i])}
+ if(mount&&mount.parentElement===content&&chain[4].nextElementSibling!==mount)chain[4].insertAdjacentElement("afterend",mount);
+ return true;
+}
 function placeCompact(h,mount){
  if(!mount.isConnected){if(h.anchor&&h.anchor.parentNode){if(h.after)h.anchor.insertAdjacentElement("afterend",mount);else h.anchor.parentNode.insertBefore(mount,h.anchor)}else h.root.appendChild(mount);return}
  if(!h.root.contains(mount)){if(h.anchor&&h.anchor.parentNode){if(h.after)h.anchor.insertAdjacentElement("afterend",mount);else h.anchor.parentNode.insertBefore(mount,h.anchor)}else h.root.appendChild(mount);return}
@@ -59,6 +74,7 @@ function render(){
  if(!h){if(mount)mount.hidden=true;return}
  if(!mount){mount=e("section","dar-recent-publications");mount.id="darRecentPublicationsV1"}
  placeCompact(h,mount);
+ if(h.root&&h.root.id==="darHomeHtmlParityV1")enforceCanonicalHomeOrder(h.root,mount);
  // Keep permanent native sequence intact: Salām → Ibn Sīrīn → Qibla/Bibliothek
  // → original search → Qurʾān → compact publications → all optional home sections.
  mount.hidden=false;mount.className="dar-recent-publications dar-recent-compact";
@@ -79,20 +95,42 @@ function render(){
  mount.appendChild(a);
 }
 
-function refresh(){if(state.loading||Date.now()-state.lastFetch<90000)return;state.loading=true;state.lastFetch=Date.now();fetch(DATA+"?t="+Math.floor(Date.now()/60000),{cache:"no-store",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("index "+r.status);return r.json()}).then(function(j){if(j.schemaVersion!==1||!Array.isArray(j.posts))throw Error("invalid recent index");state.posts=j.posts;render();fetchTitleManifests(j.posts);scheduleNotice()}).catch(function(){state.lastFetch=0;render()}).finally(function(){state.loading=false})}
+function refresh(){if(state.loading||Date.now()-state.lastFetch<90000)return;state.loading=true;state.lastFetch=Date.now();fetch(DATA+"?t="+Math.floor(Date.now()/60000),{cache:"no-store",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("index "+r.status);return r.json()}).then(function(j){if(j.schemaVersion!==1||!Array.isArray(j.posts))throw Error("invalid recent index");state.posts=j.posts;initializeSeen(j.posts);render();fetchTitleManifests(j.posts);scheduleNotice()}).catch(function(){state.lastFetch=0;render()}).finally(function(){state.loading=false})}
 
-/* On-device/in-app announcement, independent of OneSignal permission.
-   Once per launch session; "skip" silences exactly this published batch until
-   a newer article arrives. No popup for empty/failed publication indexes. */
+/* Persistent per-installation publication acknowledgement. This is NOT a
+   session flag: clicking, closing, reading or skipping a batch stores every
+   currently published post ID. Reopening the app must not re-advertise it.
+   Bootstrap from the currently published index for users migrating from the
+   old session-only system, so historic Q49 is not shown again after upgrade. */
 var NOTICE_SESSION="darRecentNoticeOpenedSessionV1",NOTICE_SKIPPED="darRecentNoticeSkippedPostV1";
+var NOTICE_READ="darAdultLatestPostsSeenIdsV2";
+var seenPostIds=null;
+function publishedPosts(posts){return (posts||[]).filter(function(p){var d=new Date(p.date||"");return !!p.id&&Number.isFinite(d.getTime())&&dayNumber(d)<=dayNumber(new Date())})}
+function parseSeen(){try{var v=JSON.parse(w.localStorage.getItem(NOTICE_READ)||"null");if(v&&v.version===2&&Array.isArray(v.ids))return new Set(v.ids.filter(function(id){return typeof id==="string"}))}catch(_){}return null}
+function writeSeen(set){try{w.localStorage.setItem(NOTICE_READ,JSON.stringify({version:2,ids:Array.from(set),updatedAt:new Date().toISOString()}))}catch(_){}}
+function initializeSeen(posts){
+ if(seenPostIds)return;
+ seenPostIds=parseSeen();
+ if(seenPostIds)return;
+ // One-time migration: existing articles are the baseline, not a fresh alert.
+ seenPostIds=new Set(publishedPosts(posts).map(function(p){return String(p.id)}));
+ writeSeen(seenPostIds);
+}
+function unreadPosts(){if(!seenPostIds)return[];return recent(state.posts,5).filter(function(p){return !seenPostIds.has(String(p.id))})}
+function acknowledgeCurrentPosts(){
+ initializeSeen(state.posts);
+ publishedPosts(state.posts).forEach(function(p){seenPostIds.add(String(p.id))});
+ writeSeen(seenPostIds);
+}
 function latestSignature(posts){var hits=recent(posts,5);return hits.length?hits[0].id+"|"+hits[0].date:""}
 function canAnnounce(force){if(!isHome()||(!force&&state.modalShown)||state.modalOpen||d.hidden||!recent(state.posts,5).length)return false;
- var sig=latestSignature(state.posts);
- try{if(!force&&(w.sessionStorage.getItem(NOTICE_SESSION)===sig||w.localStorage.getItem(NOTICE_SKIPPED)===sig))return false}catch(_){}
+ initializeSeen(state.posts);
+ if(!force&&!unreadPosts().length)return false;
  var otherModal=Array.from(d.querySelectorAll('[role="dialog"]:not(#darRecentNoticeV1),[aria-modal="true"]:not(#darRecentNoticeV1),.dar-onboarding-overlay:not([hidden]),.modal.show,.modal.open')).some(function(el){var st=w.getComputedStyle(el);return st.display!=="none"&&st.visibility!=="hidden"&&el.getClientRects().length>0});if(otherModal)return false;
  return true}
 function dismissNotice(skip){var layer=d.getElementById("darRecentNoticeV1");if(!layer)return;
- var sig=latestSignature(state.posts);try{w.sessionStorage.setItem(NOTICE_SESSION,sig);if(skip)w.localStorage.setItem(NOTICE_SKIPPED,sig)}catch(_){}
+ var sig=latestSignature(state.posts);acknowledgeCurrentPosts();
+ try{w.sessionStorage.setItem(NOTICE_SESSION,sig);if(skip)w.localStorage.setItem(NOTICE_SKIPPED,sig)}catch(_){}
  try{if(layer.open&&typeof layer.close==="function")layer.close()}catch(_){}layer.remove();unlockNoticeBackground();state.modalOpen=false;state.modalShown=true;d.removeEventListener("keydown",noticeKeydown,true);d.removeEventListener("focusin",noticeFocus,true);
  if(state.lastFocus&&state.lastFocus.isConnected&&typeof state.lastFocus.focus==="function")state.lastFocus.focus({preventScroll:true});
  state.lastFocus=null}
@@ -250,6 +288,9 @@ function syncLocale(){render();refreshOpenNotice()}
 
 function openNewPostsNotice(force){if(!canAnnounce(force===true))return;
  var hits=recent(state.posts,5);if(!hits.length)return;
+ // Acknowledgement occurs as soon as the alert is displayed, so even an app
+ // termination or WebView recreation does not present the same batch again.
+ acknowledgeCurrentPosts();
  var sig=latestSignature(state.posts);try{w.sessionStorage.setItem(NOTICE_SESSION,sig)}catch(_){}
  state.modalOpen=true;state.lastFocus=d.activeElement;
  var layer=e("dialog","dar-recent-notice-overlay");layer.id="darRecentNoticeV1";
