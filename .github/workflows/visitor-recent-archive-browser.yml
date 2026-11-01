@@ -1,0 +1,43 @@
+name: Adult Global Recent Archive Browser Regression
+on:
+  pull_request:
+    paths:
+      - "assets/dar-home-recent-posts-v1.js"
+      - "assets/dar-home-recent-posts-v1.css"
+      - "assets/dar-recent-archive-v1.js"
+      - "assets/dar-recent-archive-v1.css"
+      - "neueste-beitraege/**"
+      - "pwa/neueste-beitraege/**"
+      - "scripts/check-adult-recent-dialog-browser.py"
+      - ".github/workflows/visitor-recent-archive-browser.yml"
+  push:
+    branches: [main]
+    paths:
+      - "assets/dar-home-recent-posts-v1.js"
+      - "assets/dar-recent-archive-v1.js"
+      - "neueste-beitraege/**"
+      - "pwa/neueste-beitraege/**"
+      - "scripts/check-adult-recent-dialog-browser.py"
+      - ".github/workflows/visitor-recent-archive-browser.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compact-home-global-archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Selenium
+        run: python3 -m pip install --quiet selenium
+      - name: Test native dialog, fixed Quran home hierarchy, 3–5 day page, nine languages
+        run: python3 scripts/check-adult-recent-dialog-browser.py
+      - name: Save failure screenshot
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-compact-global-archive-failure
+          path: /tmp/dar-recent-popup-regression.png
+          if-no-files-found: ignore
