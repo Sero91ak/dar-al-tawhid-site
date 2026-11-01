@@ -108,6 +108,9 @@ jobs:
         run: |
           APP="$RUNNER_TEMP/DarAdhanPreviewDerived/Build/Products/Debug-iphonesimulator/DarAdhanCinematicPreview.app"
           test -d "$APP"
+          test -d "$APP/CinematicMedia"
+          test -f "$APP/CinematicMedia/manifest.json"
+          echo 'PASS: shared CinematicMedia folder embedded in compiled iOS app bundle'
           ditto -c -k --sequesterRsrc --keepParent "$APP" "$RUNNER_TEMP/DarAdhanCinematicPreview-simulator.zip"
       - uses: actions/upload-artifact@v4
         with:
