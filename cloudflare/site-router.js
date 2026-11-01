@@ -364,7 +364,7 @@ function activateAdultCompactHero(html) {
     html = html.includes("</head>") ? html.replace("</head>", css + "</head>") : css + html;
   }
   if (!html.includes('id="darHomeRecentPostsV1Js"')) {
-    const js = '<script defer id="darHomeRecentPostsV1Js" src="/assets/dar-home-recent-posts-v1.js?v=20261101-native-list-v8"></' + 'script>';
+    const js = '<script defer id="darHomeRecentPostsV1Js" src="/assets/dar-home-recent-posts-v1.js?v=20261101-scroll-observer-v9"></' + 'script>';
     html = html.includes("</body>") ? html.replace("</body>", js + "</body>") : html + js;
   }
   return html;
