@@ -47,6 +47,13 @@ assert(moduleJs.includes("unlockNoticeBackground()")&&moduleJs.includes("item.no
 assert(moduleJs.includes('function archiveUrl(){return /^\\/pwa')&&moduleJs.includes('"/pwa/neueste-beitraege/"')&&moduleJs.includes('"/neueste-beitraege/"'),"Dedicated archive must preserve installed-PWA scope");
 assert(moduleJs.includes('t(7)+" ›"'),"Read post label must use correct translation");
 assert(moduleJs.includes('function fetchTitleManifests(posts)'),"Localized titles not supported");
+assert(moduleJs.includes("var NOTICE_READ=\"darAdultLatestPostsSeenIdsV2\""),"Persistent per-app read-state missing");
+assert(moduleJs.includes("function initializeSeen(posts)")&&moduleJs.includes("function unreadPosts()")&&moduleJs.includes("function acknowledgeCurrentPosts()"),"New-post-only acknowledgement logic missing");
+assert(moduleJs.includes("acknowledgeCurrentPosts();")&&moduleJs.includes("w.localStorage.setItem(NOTICE_READ"),"Notification interactions must persist read status");
+assert(moduleJs.includes("if(!force&&!unreadPosts().length)return false"),"Same contribution must never pop up again after app restart");
+assert(moduleJs.includes("if(unreadPosts().length)state.modalShown=false"),"App foreground must notice genuinely new content");
+assert(moduleJs.includes("function enforceCanonicalHomeOrder(native,mount)")&&moduleJs.includes('".dhp-welcome",".dhp-isnad",".dhp-quickbar",".dhp-search-box",".dhp-quran-section"'),"Fixed Salām→Ibn Sīrīn→Qibla/Library→Search→Qurʾān sequence not enforced");
+
 assert(moduleJs.includes('dar-recent-compact-link')&&moduleJs.includes('anchor:q||native.querySelector("#dhpLibrary")'),"Home article entry must be compact, anchored directly after Quran");
 assert(builder.includes('localeManifest:/^\\/assets\\/'),"Canonical per-post locale manifest missing from generated index");
 assert(moduleCss.includes("var(--notice-paper")&&moduleCss.includes("dialog#darRecentNoticeV1::backdrop")&&moduleJs.includes("applyNoticeTheme(layer)"),"Modern native modal appearance palette missing");
