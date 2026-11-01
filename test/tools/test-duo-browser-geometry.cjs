@@ -44,6 +44,10 @@ const url="https://dar-al-tawhid.de/test/?env=staging&source=duo-geometry#quran"
      if(!nav||!view)throw Error("Missing reader/rail");
      if(view[0]<nav[0]+nav[2]+7)throw Error("Reader overlaps selection: "+JSON.stringify({nav,view}));
      if(view[0]+view[2]>width-6)throw Error("Reader extends past viewport: "+JSON.stringify(view));
+     const dock=report.elems.navBottom?.rect;
+     if(!dock || dock[0]<view[0]-1 || dock[0]+dock[2]>Math.min(width,view[0]+view[2])+1){
+       throw Error("Five-tab dock clipped or outside reader: "+JSON.stringify({dock,view}));
+     }
      if(report.audit.viewport.height!==height)throw Error("Scroll height misidentified as viewport height");
      await page.evaluate(()=>{
        const overlay=document.createElement("div");
