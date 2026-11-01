@@ -20,8 +20,7 @@ permissions:
   contents: read
 jobs:
   browser:
-    # Only test the isolated V8 browser review lane.
-    if: github.event_name != 'pull_request' || github.head_ref == 'review/browser-v8-preview-isolation-20261021' || github.head_ref == 'fix/v8-immersive-mobile-tablet-20261021' || github.head_ref == 'fix/browser-v8-visual-audit-1905-20261021' || github.head_ref == 'fix/v8-quran-player-modal-20261021' || github.head_ref == 'fix/v8-player-phone-selector-clip-20261021'
+    # Every public desktop-preview PR must execute the actual browser matrix.
     runs-on: ubuntu-latest
     timeout-minutes: 18
     steps:
@@ -37,7 +36,7 @@ jobs:
           new Function(route);
           new Function(fs.readFileSync('desktop-preview/assets/dar-v8-portal-live.js','utf8'));
           if(!html.includes('class="v8-player-label"')||!html.includes('id="qaSurah"')||!html.includes('id="qaReciter"'))throw Error('Player DOM contract');
-          if(!html.includes('maximum-scale=1')||!html.includes('user-scalable=no'))throw Error('Mobile zoom contract missing');
+          if(html.includes('maximum-scale=1')||html.includes('user-scalable=no'))throw Error('Website zoom must remain accessible');
           const scripts=[...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
             .filter(x=>!/(?:^|\s)src\s*=/.test(x[1])&&x[2].trim());
           for(const s of scripts)new Function(s[2]);
@@ -51,10 +50,16 @@ jobs:
           }
           console.log('OK: '+scripts.length+' browser scripts, router and all V8 DOM/icon contracts');
           NODE
+      - name: Generate canonical adult post indices for browser acceptance
+        run: node scripts/build-desktop-posts-index.js
       - name: Start local site
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-v8-browser.log 2>&1 &
           sleep 2
+      - name: Check desktop premium posts on phone, fold, tablet and desktop
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 scripts/check-desktop-premium-browser.py
       - name: Check actual Chrome DOM and interactions on all viewports
         run: |
           python3 -m pip install --quiet selenium
@@ -149,9 +154,37 @@ jobs:
               driver.find_element(By.ID,'darV8PlayerExpand').click()
               expanded=driver.execute_script("return document.getElementById('darV8PlayerExpand').getAttribute('aria-expanded')")
               if expanded!='true':raise RuntimeError('Mini player expand did not respond')
-              driver.find_element(By.ID,'darV8PlayerFullscreen').click()
+              driver.execute_script("""
+                window.__darPlayerClickAudit=[];
+                new MutationObserver(()=>window.__darPlayerClickAudit.push(document.body.className))
+                  .observe(document.body,{attributes:true,attributeFilter:['class']});
+              """)
+              full=driver.find_element(By.ID,'darV8PlayerFullscreen')
+              driver.execute_script("""
+                window.__darPlayerEventAudit=[];
+                document.addEventListener('click',e=>window.__darPlayerEventAudit.push('doc-capture:'+e.target.id),true);
+                document.getElementById('darV8PlayerFullscreen').addEventListener('click',
+                  e=>window.__darPlayerEventAudit.push('element-target:'+e.target.id));
+              """)
+              driver.execute_script("document.documentElement.style.scrollBehavior='auto';arguments[0].scrollIntoView({block:'center',behavior:'instant'})",full)
+              hit=driver.execute_script("""const b=arguments[0],r=b.getBoundingClientRect(),el=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
+                return {rect:{top:r.top,bottom:r.bottom,height:innerHeight},hit:el&&el.className,ok:!!(el&&(el===b||b.contains(el)))}""",full)
+              if not hit['ok']:raise RuntimeError('Fullscreen control is obstructed: '+str(hit))
+              full.click()
               visible=driver.execute_script("return document.body.classList.contains('dar-v8-player-fullscreen') && getComputedStyle(document.querySelector('.v8-real-player')).display!=='none'")
-              if not visible:raise RuntimeError('Full Quran player did not open')
+              if not visible:
+                diag=driver.execute_script("""const p=document.querySelector('.v8-real-player'),b=document.getElementById('darV8PlayerFullscreen');
+                  return {bodyClass:document.body.className,route:document.body.dataset.darV8Route,
+                  playerDisplay:p?getComputedStyle(p).display:'missing',playerVisibility:p?getComputedStyle(p).visibility:'missing',
+                  playerRect:p?{width:p.getBoundingClientRect().width,height:p.getBoundingClientRect().height}:null,
+                  buttonExpanded:b&&b.getAttribute('aria-expanded'),buttonText:b&&b.textContent,audit:window.__darPlayerClickAudit,eventAudit:window.__darPlayerEventAudit,apiAvailable:!!window.DARV8Portal?.togglePlayer,
+                  elementFromPoint:b&&document.elementFromPoint(b.getBoundingClientRect().x+5,b.getBoundingClientRect().y+5)?.className};""")
+                diag["apiDirect"]=driver.execute_script("""
+                  let thrown=null;
+                  try{window.DARV8Portal.togglePlayer(true)}catch(error){thrown=String(error)}
+                  return {thrown,body:document.body.className,expanded:document.getElementById('darV8PlayerFullscreen')?.getAttribute('aria-expanded')};
+                """)
+                raise RuntimeError('Full Quran player did not open: '+str(diag))
               geometry=driver.execute_script("""const p=document.querySelector('.v8-real-player'), b=document.getElementById('darV8PlayerFullscreen'),
                 h=p.querySelector('.v8-player-label'), controls=p.querySelector('.qa26-controls'),
                 selects=[...p.querySelectorAll('#qaSurah,#qaAyah,#qaReciter')];

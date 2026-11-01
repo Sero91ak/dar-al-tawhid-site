@@ -290,6 +290,20 @@ function togglePlayer(force){
  }
 }
 function installPlayer(){
+ // Bind to the stable document, not to a player button that may be recreated
+ // when the public homepage rerenders after its async content index loads.
+ if(!w.__darV8FullscreenDelegatedV1){
+  w.__darV8FullscreenDelegatedV1=true;
+  // Capture on WINDOW, above document/router capture handlers that can
+  // prevent the button's target click on mobile public-browser routes.
+  w.addEventListener("click",function(ev){
+   var btn=ev.target&&ev.target.closest&&ev.target.closest("#darV8PlayerFullscreen");
+   if(!btn)return;
+   ev.preventDefault();ev.stopPropagation();
+   if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();
+   togglePlayer();
+  },true);
+ }
  if(d.getElementById("darV8PlayerFullscreen"))return;
  const player=d.querySelector(".v8-real-player");if(!player)return;
  const label=player.querySelector(".v8-player-label");
@@ -299,7 +313,7 @@ function installPlayer(){
  b.setAttribute("aria-controls","quranAudioPlayer");b.setAttribute("aria-label","Qurʾān-Player in voller Ansicht öffnen");
  // The button is a header control. Never position it over the label or audio content.
  label.append(b);
- b.addEventListener("click",()=>togglePlayer());
+ // Click is handled by the stable capture listener above.
  const close=d.createElement("button");close.id="darV8PlayerBackdrop";close.type="button";
  close.className="dar-v8-player-backdrop";close.setAttribute("aria-label","Player schließen");
  close.addEventListener("click",()=>togglePlayer(false));d.body.append(close);
@@ -452,7 +466,7 @@ function syncV8Route(){
 
 function init(key){
  if(currentPage && currentPage!==key){closePicker();if(d.body.classList.contains("dar-v8-player-fullscreen"))togglePlayer(false)}
- currentPage=key;setupLanguages();installPlayer();setupVisualViewport();installMobileGestureGuard();setupTouchPlayerPicker();colorLocale();updateLocaleNotice();syncV8Route();
+ currentPage=key;setupLanguages();installPlayer();setupVisualViewport();setupTouchPlayerPicker();colorLocale();updateLocaleNotice();syncV8Route();
  if(key==="suche")initChat();
  if(key==="quran")initQuran();
  if(key==="einstellungen")settings();
