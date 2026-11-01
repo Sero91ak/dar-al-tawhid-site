@@ -46,4 +46,58 @@ assert(moduleJs.includes('function fetchTitleManifests(posts)'),"Localized title
 assert(builder.includes('localeManifest:/^\\/assets\\/'),"Canonical per-post locale manifest missing from generated index");
 assert(moduleCss.includes("var(--notice-paper")&&moduleCss.includes("dialog#darRecentNoticeV1::backdrop")&&moduleJs.includes("applyNoticeTheme(layer)"),"Modern native modal appearance palette missing");
 assert(router.indexOf('id="darAdultComponentI18nV1"')<router.indexOf('id="darHomeRecentPostsV1Js"'),"Shared locale registry must load before latest-posts component");
-console.log("ADULT_UI_NINE_LOCALES_AND_POPUP OK: 9 languages, native dialog, direct touch actions, WKWebView lock, theme, localized titles.");
+
+
+/* Executed, not only string-matched: reproduce the WKWebView interaction
+   contract for touch, synthetic click, and scroll lock restoration. */
+const actionSource=moduleJs.slice(moduleJs.indexOf("function bindNoticeAction(el,fn){"),moduleJs.indexOf("function noticeClick(ev){"));
+assert(actionSource.includes("function bindNoticeAction"),"Missing direct click action source");
+const bindNoticeAction=new Function(actionSource+";return bindNoticeAction")();
+const handlers={};const button={addEventListener:(name,fn)=>(handlers[name]??=[]).push(fn)};
+let fired=0;
+bindNoticeAction(button,()=>{fired++});
+const ev=(x=10,y=9)=>({clientX:x,clientY:y,key:"Enter",preventDefault(){},stopPropagation(){}});
+handlers.pointerdown[0](ev());handlers.pointerup[0](ev());handlers.click[0](ev());
+assert.equal(fired,1,"Touch plus synthetic click must fire once");
+const drag={handlers:{},addEventListener:function(n,f){(this.handlers[n]??=[]).push(f)}};let dragged=0;
+bindNoticeAction(drag,()=>{dragged++});
+drag.handlers.pointerdown[0](ev());drag.handlers.pointerup[0](ev(37,10));
+assert.equal(dragged,0,"Scroll gesture must not activate a post");
+
+const lockSource=moduleJs.slice(moduleJs.indexOf("function lockNoticeBackground(layer){"),moduleJs.indexOf("function noticeFocus(ev){"));
+assert(lockSource.includes("function unlockNoticeBackground"),"Missing scroll restoration logic");
+function fakeStyle(){const values={},priority={};return{
+ getPropertyValue:k=>values[k]||"",getPropertyPriority:k=>priority[k]||"",
+ setProperty:(k,v,p)=>{values[k]=String(v);priority[k]=p||""},
+ removeProperty:k=>{delete values[k];delete priority[k]}
+}}
+const root={style:fakeStyle(),classList:{add(){},remove(){}},scrollTop:0};
+const body={style:fakeStyle(),children:[],scrollTop:35};
+const content={tagName:"MAIN",inert:false,isConnected:true},dialog={tagName:"DIALOG"};
+body.children=[content,dialog];
+root.style.setProperty("overflow","auto","important");
+body.style.setProperty("position","relative","");
+const listeners={};
+const mockDocument={
+ body,documentElement:root,scrollingElement:root,
+ addEventListener:(k,fn)=>{(listeners[k]??=[]).push(fn)},
+ removeEventListener:()=>{},getElementById:()=>dialog
+};
+const mockWindow={scrollY:35,scrollTo(){}};
+const mockState={inertItems:[],scrollLock:null};
+const testLock=new Function("d","w","state",lockSource+";return {lockNoticeBackground,unlockNoticeBackground}")(mockDocument,mockWindow,mockState);
+testLock.lockNoticeBackground(dialog);
+assert(content.inert,"Background not inert during native dialog");
+assert.equal(root.style.getPropertyValue("overflow"),"hidden","iPhone root scroll not locked");
+assert.equal(body.style.getPropertyValue("position"),"fixed","iPhone body scroll not locked");
+assert.equal(listeners.touchmove.length,1,"Nonpassive touch guard missing");
+let prevented=false;
+listeners.touchmove[0]({target:content,touches:[{clientY:8}],cancelable:true,preventDefault(){prevented=true}});
+assert(prevented,"Touchmove on background must be cancelled");
+testLock.unlockNoticeBackground();
+assert.equal(content.inert,false,"Background remains inert after closing");
+assert.equal(root.style.getPropertyValue("overflow"),"auto","Original root overflow not restored");
+assert.equal(body.style.getPropertyValue("position"),"relative","Original body position not restored");
+assert.equal(root.style.getPropertyPriority("overflow"),"important","Original overflow priority not restored");
+
+console.log("ADULT_UI_NINE_LOCALES_AND_POPUP OK: 9 languages, native dialog, direct touch actions, WKWebView lock, theme, localized titles and executed interaction tests.");
