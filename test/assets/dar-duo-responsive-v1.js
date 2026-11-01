@@ -240,7 +240,9 @@
     if(view)view.scrollTop=0;
     if(current==="more"&&readerFrame&&readerFrame.contentWindow){
       var child=readerFrame.contentWindow;
+      var moreActivated=false;
       function triggerMore(){
+        if(moreActivated)return true;
         try{
           var doc=child.document;
           var candidates=Array.from(doc.querySelectorAll(
@@ -252,6 +254,7 @@
             return normalized(el.innerText||el.textContent)===entry.title;
           });
           if(!match)return false;
+          moreActivated=true;
           match.click();return true;
         }catch(_){return false;}
       }
