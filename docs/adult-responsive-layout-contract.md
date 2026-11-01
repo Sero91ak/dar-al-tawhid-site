@@ -1,8 +1,25 @@
-# DĀR AL TAWḤĪD · verbindlicher Erwachsenen-Layoutvertrag
+# DĀR AL TAWḤĪD · globaler Layout- und Plattformvertrag
 Stand: 01.11.2026 · Status: Architektur- und Abnahmeregel, keine Live-Implementierung
 
 ## Ziel und Geltungsbereich
-Diese Regel gilt für jede künftige Änderung am öffentlichen Erwachsenen-Webauftritt, an der nativen iOS-Besucher-App/WebView, an der Android-PWA und an DAR Test, sofern die Komponente dort existiert. Sie ersetzt ältere, widersprechende Layoutanweisungen (insbesondere „Neueste Beiträge nur als winziger Einstieg“), **nicht** die festen Inhalts-, Quellen-, Neunsprachen-, Veröffentlichungs- und Push-Sicherheitsregeln. Kids, tvOS und Admin bleiben ohne eigenen Auftrag unverändert.
+**Übergeordnete Dauerregel für jede NEUE oder GEÄNDERTE UI-Funktion in diesem Repository:** Jede Seite und jedes Produkt muss sich an die für ihre Plattform und Route geltende Architektur anpassen. Das gilt ausdrücklich für die öffentliche Desktop-/Mobil-Website, iOS-Besucher-App (native + WebView), iPad, Android-PWA, DAR Test, DAR Kids, Apple Watch, Widgets/Live Activities, Apple TV/tvOS und DĀR Admin, soweit die jeweilige Oberfläche hier gepflegt wird. Neue Produkte sind ab ihrem ersten Commit eingeschlossen. Die globale Regel verlangt **keine identische UI** auf ungleichen Plattformen: Jede Surface behält ihre eigenen Gestaltungs-, Navigations-, Eingabe- und Accessibility-Regeln.
+
+Sie ersetzt ältere widersprechende Layoutanweisungen (insbesondere „Neueste Beiträge nur als winziger Einstieg“), **nicht** Quellen-, Inhalts-, Neunsprachen-**für Erwachsenenoberflächen**, Kinderpädagogik-, Datenschutz-, Veröffentlichungs-, Push-, Gebetszeit-, Navigations- oder Sicherheitsvorschriften. **Bestehende Kids-, tvOS-, Watch- und Admin-Funktionen jetzt nicht ungefragt ändern**; wenn sie später erstellt oder geändert werden, MUSS jede solche Änderung diesen globalen Vertrag **und** ihren strengeren eigenen Plattformvertrag erfüllen. Plattformregeln gehen bei plattformspezifischen UI-Details vor, Sicherheits- und Inhaltsregeln niemals verloren.
+
+## Plattformzuordnung – zuerst den richtigen Eigentümer bestimmen
+
+| Surface/Produkt | Verbindliche Orientierung | Nicht übergreifen auf |
+| --- | --- | --- |
+| Öffentliche Website (Desktop und mobiler Browser) | Eigene Web-Shell, responsives Desktop-/Web-Grid, Maus/Tastatur, Zoom, Desktopnavigation | App-WebView-/PWA-spezifische CSS- und Navigationseingriffe |
+| iOS-Besucher-App (iPhone/iPad) | Native Container, SwiftUI/UIKit/WKWebView-Grenzen, Safe Areas, Systemnavigation | Öffentliche Desktop-Shell |
+| Android-PWA / Foldables | PWA-Shell, eigenes Routing, nutzbare Pane-Breite, Touch- und Falzverhalten | iOS-native Gesten/Navigation |
+| DAR Test | Isolierte Test-Surface mit derselben fachlichen Logik | Produktive Seiten und Push-Spuren ohne Freigabe |
+| Kids-App | Eigenes Kindersicherheits-, Alters-, Lern-, Voice- und Navigationssystem | Erwachsenenprofile, Erwachsene-Themes oder Lehrplan |
+| Apple TV/tvOS | Fokusgesteuerte Fernbedienungs-/TV-Architektur, 10-foot UI, Rezitationssynchronität | Touch-Swiper, Mobilnavigation |
+| Watch, Widgets, Live Activities | Plattform-Lifecycle, kleine Leseflächen, echte Plattform-APIs | Websites, blockierende Popups |
+| DĀR Admin | Redaktionelle Rollen, Schutz-/Freigabemechanismen, Verwaltungsshell | Besucher-UI und öffentliche Datenzustände |
+
+**Jede Änderung muss vor Umsetzung beantworten:** Welche Surface? Welche echte Route? Welcher Parent-/Layout-Owner? Welche Komponenten-/CSS-Namespace? Welche vorhandenen Daten, Berechtigungen, Theme- und Sprachregeln? Welche Nachbarbereiche sind regressionsgefährdet? Wo wird getestet? Wer gibt den Live-Schritt frei?
 
 ## 1. Grundgesetz: Shell steuert, Feature fügt sich ein
 - Jede Oberfläche hat genau einen Layout-Eigentümer (Shell/Route). Ein Feature darf seine übergeordnete Seitenbreite, Navigationsleiste, globale Scrollachse, Safe Areas, Headerstruktur oder Geschwisterreihenfolge nicht autonom überschreiben.
@@ -44,10 +61,17 @@ Diese Regel gilt für jede künftige Änderung am öffentlichen Erwachsenen-Weba
 ## 6. Pflichtprüfung vor jeder Freigabe
 1. **Inventar/Auswirkungsanalyse:** echte Route/Shell/Einfügeposition und bestehende CSS-/JS-Owner erfassen; Konflikte mit alten Regeln benennen.
 2. **Staging zuerst:** nur DAR Test oder eigener Branch/Preview; niemals durch bloßes Designbriefing einen Live-Deploy oder Beitrags-Push auslösen.
-3. **Visuell:** mobile, Fold außen/innen, Tablet (Portrait/Landscape), Desktop (schmal/breit), Zoom und RTL; keine Überläufe, Layoutverschiebungen, abgeschnittene Texte oder überdeckten Controls.
+3. **Visuell:** alle **betroffenen** Surfaces samt mobiler Website, Fold außen/innen, Tablet (Portrait/Landscape), Desktop (schmal/breit), Zoom und RTL; bei tvOS/Watch/Widgets deren eigene plattformtypischen Geräte-/Fokus-/Größenmatrix; keine Überläufe, Layoutverschiebungen, abgeschnittene Texte oder überdeckten Controls.
 4. **Funktional:** Öffnen/Schließen, horizontales Swipen vs. vertikales Scrollen, Keyboard, Screenreader, Fokus, Zurücknavigation, Browserhistorie, Sprachen, Themes, Laden/Fehler/Leerzustand; Gebetszeiten, GPS, Suche, Qurʾān und fünf Navigationstabs nicht beschädigen.
 5. **Automatisiert:** vorhandene Regression-Skripte im Repository plus echten Browser-E2E-/Screenshot-Diff-Check je Surface ausführen; fehlende Tests ergänzen. String-/Quelltextasserts sind **kein Ersatz** für laufende Browser-Interaktionstests.
 6. **Rollout/Beweis:** veröffentlichte Assets und korrekte Surface/Cache-Version nachweisen. Bei Fehlschlag Rollback, keine Behauptung „repariert“ ohne geprüften Browserbefund.
 
 ## 7. Änderungsdisziplin
 Erst Analyse, dann kleinen isolierten Patch, dann Tests, dann Vorschau, dann separate Live-Freigabe. Keine Komplettneuerstellung der Website, keine Änderung an Kids, Push, Gebetszeitberechnung oder anderen Bereichen nur zur Reparatur der Beitragskapsel. Jede neue Komponente ist erst fertig, wenn die **richtige Zuordnung an jeder betroffenen Surface** nachweislich funktioniert.
+
+## 8. Dauerhafte Änderungsvorgabe für neue Seiten und Funktionen
+- Diese Regel gilt bei **jedem** neuen Feature, jedem Redesign, jeder Reparatur, jedem Beitragsslot und jeder Erweiterung. Keine Ausnahme, weil eine Funktion „nur klein“ sei.
+- In jedem PR die betroffenen Surfaces sowie nicht betroffene aber potenziell gefährdete Nachbarbereiche festhalten; nachweisbare Checks zu Geometrie, Funktion, Accessibility, i18n und vorhandener Navigation durchführen.
+- Dieselben Daten müssen nicht zu erzwungener Pixelidentität führen. Eine zentrale fachliche Quelle mit klar getrennten Surface-Adaptern ist der Standard.
+- Wenn eine neue Anforderung einer Plattformregel widerspricht: zuerst den Konflikt dokumentieren, dann die passende **plattformspezifische** Regel ergänzen und gegen Nachbarbereiche testen, statt ein globales CSS-Override anzuhängen.
+- **Keine Freigabebehauptung ohne Testnachweise** und keine automatische Live-Auslieferung allein wegen einer dokumentierten Regel.
