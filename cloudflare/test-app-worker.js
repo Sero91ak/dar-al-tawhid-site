@@ -592,8 +592,8 @@ async function finalizeDarTestHomeV1193(asset) {
   // DAR_TEST_DUO_WORKSPACE_V2_20261101: final TEST-only adaptive selector.
   // Remove previous cached v1 file tags and load exactly one cache-busted copy
   // after the legacy test inline styles. No changes to visitor/Kids/iOS HTML.
-  html = html.replace(/<link\\b[^>]*dar-duo-responsive-v1\\.css[^>]*>/gi, "");
-  html = html.replace(/<script\\b[^>]*dar-duo-responsive-v1\\.js[^>]*><\\/script>\\s*/gi, "");
+  html = html.replace(/<link\b[^>]*dar-duo-responsive-v1\.css[^>]*>/gi, "");
+  html = html.replace(/<script\b[^>]*dar-duo-responsive-v1\.js[^>]*><\/script>\s*/gi, "");
   const duoV2 =
     '<link rel="stylesheet" id="darTestDuoWorkspaceCSSV2" href="/test/assets/dar-duo-responsive-v1.css?v=20261101-dual-workspace-v2">' +
     '<script defer id="darTestDuoWorkspaceJSV2" src="/test/assets/dar-duo-responsive-v1.js?v=20261101-dual-workspace-v2"></script>';
