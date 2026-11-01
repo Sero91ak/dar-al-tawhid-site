@@ -29,59 +29,84 @@ html[dir=rtl] #darRecentPublicationsV1{text-align:right}
    Keep the original root font size and preserve all 5 native nav buttons. */
 body.is-home-route #darHomeHtmlParityV1 #darRecentPublicationsV1{margin:12px 0 22px!important;width:100%;max-width:none;scroll-margin-top:95px;background:color-mix(in srgb,var(--dhp-paper,var(--card,#faf8f0)) 88%,transparent);border-color:color-mix(in srgb,var(--dhp-gold,#a99058) 61%,transparent);box-shadow:0 8px 25px rgba(0,0,0,.035)}
 #pageRoot #darRecentPublicationsV1{--rp-ink:var(--ink,#292c26);--rp-line:var(--line,#c9bead);--rp-paper:var(--paper2,#faf7ee);--rp-gold:var(--gold2,#967b4c);margin:20px auto 25px;max-width:1180px}
-.dar-recent-notice-overlay{position:fixed!important;inset:0!important;z-index:2147483646!important;background:rgba(4,15,14,.66)!important;backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);display:flex;align-items:center;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 18px) 12px calc(env(safe-area-inset-bottom,0px) + 18px);box-sizing:border-box;overflow:auto}
-.dar-recent-notice-card{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif!important;color:#24392f!important;background:#fcfaf2!important;border:1px solid #c5ab71!important;border-radius:25px!important;box-shadow:0 25px 80px rgba(0,0,0,.33)!important;padding:clamp(18px,4vw,28px)!important;width:min(100%,500px)!important;max-height:min(85dvh,720px);overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box;text-align:start}
-.dar-recent-notice-header{display:flex;align-items:start;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:1px solid #d6c8a8}
-.dar-recent-notice-kicker{color:#92723d;letter-spacing:.14em;font-weight:800;font-size:.68rem}
-.dar-recent-notice-header h2{color:inherit;font-size:clamp(1.24rem,5vw,1.55rem);line-height:1.35;letter-spacing:-.02em;margin:5px 0 0;font-weight:760}
-.dar-recent-notice-x{flex:none;display:grid;place-items:center;border:1px solid #c5b99c!important;background:transparent!important;color:inherit!important;border-radius:50%!important;font-size:25px!important;width:44px!important;height:44px!important;cursor:pointer}
-.dar-recent-notice-subtitle{font-size:.91rem;opacity:.8;line-height:1.6;margin:13px 0}
-.dar-recent-notice-list{display:flex;flex-direction:column;gap:7px}
-.dar-recent-notice-article{display:flex!important;flex-direction:column;gap:4px;text-decoration:none!important;border:1px solid #ded4bc;border-radius:16px;padding:14px;color:inherit!important;background:rgba(149,123,72,.035);min-height:63px}
-.dar-recent-notice-article:focus-visible,.dar-recent-notice-article:hover{border-color:#a38b5b;background:rgba(149,123,72,.09)}
-.dar-recent-notice-article strong{font-size:.96rem;line-height:1.43;font-weight:730;overflow-wrap:anywhere}
-.dar-recent-notice-date{font-size:.74rem;color:#7b6948;font-weight:600}
-.dar-recent-notice-arrow{font-size:.8rem;color:#806333;font-weight:750}
-.dar-recent-notice-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:17px}
-.dar-recent-notice-actions button{font:inherit;min-height:44px;padding:11px 15px;flex:1 1 150px;border-radius:999px;border:1px solid #b9a576;cursor:pointer}
-.dar-recent-notice-all{color:#fff!important;background:#264d3e!important;font-weight:740}
-.dar-recent-notice-skip{color:inherit!important;background:transparent!important}
-.dar-recent-notice-card button:focus-visible,.dar-recent-notice-card a:focus-visible{outline:3px solid #b79a56!important;outline-offset:2px}
-html:is([data-theme="dark"],[data-theme="royal"],[data-theme="dar-al-layl"],[data-theme="bordeaux"]) .dar-recent-notice-card{background:#142922!important;color:#f1e9d8!important;border-color:#a7905d!important}
-html:is([data-theme="dark"],[data-theme="royal"],[data-theme="dar-al-layl"],[data-theme="bordeaux"]) .dar-recent-notice-article{border-color:#415c50;background:rgba(163,139,91,.055)}
-html:is([data-theme="dark"],[data-theme="royal"],[data-theme="dar-al-layl"],[data-theme="bordeaux"]) .dar-recent-notice-date{color:#d3c18e}
-html:is([data-theme="dark"],[data-theme="royal"],[data-theme="dar-al-layl"],[data-theme="bordeaux"]) .dar-recent-notice-arrow{color:#e2cb97}
-@media(max-width:600px){.dar-recent-notice-overlay{align-items:flex-end;padding:8px 0 0}.dar-recent-notice-card{width:100%!important;max-height:min(82dvh,700px)!important;border-radius:27px 27px 0 0!important;padding:21px 19px calc(23px + env(safe-area-inset-bottom,0px))!important}}
-@media(prefers-reduced-motion:reduce){.dar-recent-notice-overlay{backdrop-filter:none;-webkit-backdrop-filter:none}}
 
-
-/* Appearance-native bulletin sheet V2: source palette is read from the selected
-   adult home theme at runtime, including named appearance variants. The old
-   hard-coded forest/cream and dark overrides are intentionally superseded. */
-#darRecentNoticeV1{touch-action:pan-y;overscroll-behavior:contain;pointer-events:auto!important}
-#darRecentNoticeV1 .dar-recent-notice-card{
- --dar-notice-fg:var(--notice-ink,#f0ead9);
- color:var(--dar-notice-fg)!important;
- background:var(--notice-paper,#142b26)!important;
- border:1px solid var(--notice-gold,#ad9865)!important;
- box-shadow:0 20px 65px rgba(0,0,0,.32),0 0 0 1px color-mix(in srgb,var(--notice-gold,#ad9865) 24%,transparent) inset!important;
- position:relative;isolation:isolate;overflow-x:hidden;
-}
-#darRecentNoticeV1 .dar-recent-notice-header{border-color:color-mix(in srgb,var(--notice-line,#987d55) 42%,transparent)}
-#darRecentNoticeV1 .dar-recent-notice-kicker{color:var(--notice-gold,#ad9865)!important}
-#darRecentNoticeV1 .dar-recent-notice-x{color:var(--notice-ink)!important;background:color-mix(in srgb,var(--notice-ink) 6%,transparent)!important;border:1px solid color-mix(in srgb,var(--notice-line) 67%,transparent)!important}
-#darRecentNoticeV1 .dar-recent-notice-subtitle{color:var(--notice-ink)!important;opacity:.79}
-#darRecentNoticeV1 .dar-recent-notice-article{color:var(--notice-ink)!important;background:color-mix(in srgb,var(--notice-gold) 9%,var(--notice-paper))!important;border:1px solid color-mix(in srgb,var(--notice-line) 49%,transparent)!important;transition:background .15s ease,border-color .15s ease}
-#darRecentNoticeV1 .dar-recent-notice-article:is(:active,:hover,:focus-visible){background:color-mix(in srgb,var(--notice-gold) 17%,var(--notice-paper))!important;border-color:var(--notice-gold)!important}
-#darRecentNoticeV1 .dar-recent-notice-article strong{color:var(--notice-ink)!important}
-#darRecentNoticeV1 .dar-recent-notice-date{color:var(--notice-gold)!important;opacity:1}
-#darRecentNoticeV1 .dar-recent-notice-arrow{color:var(--notice-gold)!important}
-#darRecentNoticeV1 .dar-recent-notice-all{background:color-mix(in srgb,var(--notice-gold) 23%,var(--notice-paper))!important;color:var(--notice-ink)!important;border-color:var(--notice-gold)!important}
-#darRecentNoticeV1 .dar-recent-notice-skip{background:transparent!important;color:var(--notice-ink)!important;border-color:color-mix(in srgb,var(--notice-line) 66%,transparent)!important}
-#darRecentNoticeV1 .dar-recent-notice-actions button{font-weight:650;min-height:48px;line-height:1.35}
-#darRecentNoticeV1 .dar-recent-notice-card button:is(:active,:hover){filter:brightness(1.08)}
-#darRecentNoticeV1 .dar-recent-notice-card :focus-visible{outline:3px solid var(--notice-gold)!important;outline-offset:3px!important}
-html.dar-notice-is-open,html.dar-notice-is-open body{overscroll-behavior:none!important}
+/* Visitor-first surface; never change the five native bottom navigation tabs. */
+body.is-home-route #darHomeHtmlParityV1 #darRecentPublicationsV1{margin:12px 0 22px!important;width:100%;max-width:none;scroll-margin-top:95px;background:color-mix(in srgb,var(--dhp-paper,var(--card,#faf8f0)) 88%,transparent);border-color:color-mix(in srgb,var(--dhp-gold,#a99058) 61%,transparent);box-shadow:0 8px 25px rgba(0,0,0,.035)}
+#pageRoot #darRecentPublicationsV1{--rp-ink:var(--ink,#292c26);--rp-line:var(--line,#c9bead);--rp-paper:var(--paper2,#faf7ee);--rp-gold:var(--gold2,#967b4c);margin:20px auto 25px;max-width:1180px}
 #darRecentPublicationsV1 :is(button,a){cursor:pointer;touch-action:manipulation}
-@media(max-width:600px){#darRecentNoticeV1 .dar-recent-notice-card{border-inline:0!important;border-bottom:0!important}}
-@media(prefers-reduced-motion:reduce){#darRecentNoticeV1 .dar-recent-notice-article{transition:none}}
+#darRecentPublicationsV1 .dar-recent-untranslated{opacity:.75;font-size:.72rem}
+
+/* DAR DASHBOARD MODAL v3 · browser top-layer dialog, not a z-index overlay.
+   Theme tokens are calculated from the selected visitor appearance in JS. */
+dialog#darRecentNoticeV1:not([open]){display:none!important}
+dialog#darRecentNoticeV1[open]{
+ --notice-ink:#f3eee1;--notice-paper:#152720;--notice-gold:#c9ab71;--notice-line:#506050;--notice-accent:#325848;
+ box-sizing:border-box!important;display:flex!important;flex-direction:column;align-items:center;justify-content:center;
+ position:fixed!important;inset:0!important;top:0!important;right:0!important;bottom:0!important;left:0!important;
+ width:100%!important;max-width:none!important;height:100%!important;height:100dvh!important;max-height:none!important;
+ margin:0!important;padding:calc(env(safe-area-inset-top,0px) + 16px) 16px calc(env(safe-area-inset-bottom,0px) + 16px)!important;
+ border:0!important;outline:0!important;background:transparent!important;color:var(--notice-ink)!important;
+ overflow:hidden!important;overscroll-behavior:none!important;pointer-events:auto!important;z-index:2147483647!important;
+ -webkit-tap-highlight-color:transparent;touch-action:pan-y;
+}
+dialog#darRecentNoticeV1::backdrop{background:rgba(4,14,13,.78)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+dialog#darRecentNoticeV1 .dar-recent-notice-card{
+ box-sizing:border-box!important;position:relative!important;isolation:isolate;flex:0 1 auto;
+ width:min(100%,486px)!important;max-width:none!important;max-height:min(85dvh,760px)!important;
+ overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain!important;touch-action:pan-y;
+ padding:clamp(21px,4vw,31px)!important;margin:0 auto!important;
+ color:var(--notice-ink)!important;
+ background:
+   radial-gradient(ellipse 93% 48% at 110% -20%,color-mix(in srgb,var(--notice-gold) 15%,transparent),transparent),
+   linear-gradient(165deg,color-mix(in srgb,var(--notice-paper) 96%,var(--notice-gold)),var(--notice-paper) 72%)!important;
+ border:1px solid color-mix(in srgb,var(--notice-gold) 67%,transparent)!important;
+ border-radius:28px!important;
+ box-shadow:0 28px 90px rgba(0,0,0,.34),0 4px 20px rgba(0,0,0,.12),inset 0 1px color-mix(in srgb,var(--notice-gold) 28%,transparent)!important;
+ font:400 15px/1.52 -apple-system,BlinkMacSystemFont,Inter,"Segoe UI",sans-serif!important;text-align:start!important;
+ scrollbar-width:thin;scrollbar-color:var(--notice-gold) transparent;
+}
+dialog#darRecentNoticeV1 .dar-recent-notice-card::before{
+ content:"";position:absolute;top:0;left:12%;right:12%;height:2px;border-radius:999px;
+ background:linear-gradient(90deg,transparent,var(--notice-gold),transparent);opacity:.94;pointer-events:none;
+}
+dialog#darRecentNoticeV1 .dar-recent-notice-header{display:flex;gap:14px;align-items:flex-start;justify-content:space-between;padding:0 0 17px;border-bottom:1px solid color-mix(in srgb,var(--notice-line) 37%,transparent)}
+dialog#darRecentNoticeV1 .dar-recent-notice-intro{min-width:0}
+dialog#darRecentNoticeV1 .dar-recent-notice-kicker{display:inline-flex;align-items:center;gap:8px;color:var(--notice-gold)!important;font-size:10px!important;font-weight:850;letter-spacing:.19em;text-transform:uppercase}
+dialog#darRecentNoticeV1 .dar-recent-notice-kicker::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--notice-gold);box-shadow:0 0 0 5px color-mix(in srgb,var(--notice-gold) 12%,transparent)}
+dialog#darRecentNoticeV1 .dar-recent-notice-header h2{font:750 clamp(1.3rem,5vw,1.8rem)/1.24 -apple-system,BlinkMacSystemFont,Inter,"Segoe UI",sans-serif!important;letter-spacing:-.034em;margin:10px 0 0!important;color:var(--notice-ink)!important;overflow-wrap:anywhere}
+dialog#darRecentNoticeV1 .dar-recent-notice-x{flex:none;appearance:none;width:42px!important;height:42px!important;min-width:42px!important;padding:0!important;display:grid!important;place-items:center;cursor:pointer;pointer-events:auto!important;touch-action:manipulation;
+ font:400 24px/1 sans-serif!important;color:var(--notice-ink)!important;
+ background:color-mix(in srgb,var(--notice-ink) 5%,transparent)!important;
+ border:1px solid color-mix(in srgb,var(--notice-line) 49%,transparent)!important;border-radius:15px!important;
+}
+dialog#darRecentNoticeV1 .dar-recent-notice-subtitle{margin:16px 0 5px!important;color:var(--notice-ink)!important;opacity:.73;font-size:.88rem;line-height:1.5}
+dialog#darRecentNoticeV1 .dar-recent-notice-count{display:inline-flex;align-items:center;margin:7px 0 12px;padding:5px 11px;border-radius:999px;border:1px solid color-mix(in srgb,var(--notice-gold) 37%,transparent);
+ background:color-mix(in srgb,var(--notice-gold) 10%,transparent);color:var(--notice-gold)!important;font-weight:740;font-size:.72rem;letter-spacing:.015em}
+dialog#darRecentNoticeV1 .dar-recent-notice-list{display:flex;flex-direction:column;gap:9px}
+dialog#darRecentNoticeV1 .dar-recent-notice-article{position:relative;display:flex!important;flex-direction:column;gap:7px;min-width:0;padding:17px 18px!important;cursor:pointer;pointer-events:auto!important;touch-action:manipulation;
+ color:var(--notice-ink)!important;background:color-mix(in srgb,var(--notice-gold) 7%,var(--notice-paper))!important;
+ border:1px solid color-mix(in srgb,var(--notice-line) 43%,transparent)!important;border-radius:17px!important;
+ text-decoration:none!important;box-shadow:inset 3px 0 color-mix(in srgb,var(--notice-gold) 72%,transparent);
+ transition:transform .16s ease,border-color .16s ease,background .16s ease;
+}
+dialog#darRecentNoticeV1 .dar-recent-notice-article:is(:hover,:focus-visible){transform:translateY(-1px);border-color:var(--notice-gold)!important;background:color-mix(in srgb,var(--notice-gold) 13%,var(--notice-paper))!important}
+dialog#darRecentNoticeV1 .dar-recent-notice-date{color:var(--notice-gold)!important;font-size:.7rem;font-weight:800;letter-spacing:.04em}
+dialog#darRecentNoticeV1 .dar-recent-notice-article strong{font-weight:780;font-size:clamp(.94rem,3vw,1.07rem);line-height:1.43;color:var(--notice-ink)!important;overflow-wrap:anywhere}
+dialog#darRecentNoticeV1 .dar-recent-notice-arrow{display:inline-flex;align-items:center;align-self:flex-start;margin-top:3px;padding:6px 11px;border-radius:10px;color:var(--notice-ink)!important;
+ background:color-mix(in srgb,var(--notice-gold) 20%,transparent)!important;font-size:.79rem;font-weight:770}
+dialog#darRecentNoticeV1 .dar-recent-untranslated{color:var(--notice-ink)!important;font-size:.73rem;opacity:.74}
+dialog#darRecentNoticeV1 .dar-recent-notice-actions{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:18px}
+dialog#darRecentNoticeV1 .dar-recent-notice-actions button{appearance:none;display:grid;place-items:center;min-height:50px!important;padding:12px 14px!important;cursor:pointer;pointer-events:auto!important;touch-action:manipulation;
+ font:730 .88rem/1.33 -apple-system,BlinkMacSystemFont,Inter,system-ui,sans-serif!important;
+ border:1px solid color-mix(in srgb,var(--notice-line) 56%,transparent)!important;border-radius:14px!important;box-sizing:border-box;text-align:center}
+dialog#darRecentNoticeV1 .dar-recent-notice-all{border-color:var(--notice-gold)!important;background:color-mix(in srgb,var(--notice-gold) 25%,var(--notice-paper))!important;color:var(--notice-ink)!important}
+dialog#darRecentNoticeV1 .dar-recent-notice-skip{background:transparent!important;color:var(--notice-ink)!important;opacity:.83}
+dialog#darRecentNoticeV1 :is(button,a):focus-visible{outline:2px solid var(--notice-gold)!important;outline-offset:3px!important}
+html.dar-notice-is-open,html.dar-notice-is-open body{overscroll-behavior:none!important}
+@media(max-width:450px){
+ dialog#darRecentNoticeV1[open]{padding:calc(env(safe-area-inset-top,0px) + 12px) 12px calc(env(safe-area-inset-bottom,0px) + 12px)!important}
+ dialog#darRecentNoticeV1 .dar-recent-notice-card{padding:20px!important;border-radius:23px!important;max-height:86dvh!important}
+ dialog#darRecentNoticeV1 .dar-recent-notice-actions{gap:8px}
+ dialog#darRecentNoticeV1 .dar-recent-notice-actions button{font-size:.8rem!important;padding:10px 7px!important}
+}
+@media(prefers-reduced-motion:reduce){dialog#darRecentNoticeV1 *{transition:none!important}}
