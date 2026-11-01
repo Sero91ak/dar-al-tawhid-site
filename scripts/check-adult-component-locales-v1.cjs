@@ -13,7 +13,7 @@ const moduleJs=read("assets/dar-home-recent-posts-v1.js");
 const moduleCss=read("assets/dar-home-recent-posts-v1.css");
 const builder=read("scripts/build-desktop-posts-index.js");
 const router=read("cloudflare/site-router.js");
-assert(router.includes("/assets/dar-home-recent-posts-v1.js?v=20261101-premium-home-v10"),"Current adult Worker must bust cached pre-scroll-fix JS in iOS/PWA");
+assert(router.includes("/assets/dar-home-recent-posts-v1.js?v=20261101-premium-home-v11"),"Current adult Worker must bust cached pre-scroll-fix JS in iOS/PWA");
 const dailyHub=read("assets/dar-visitor-daily-hub-v1.js");
 const archiveJs=read("assets/dar-recent-archive-v1.js");
 const archiveHtml=read("neueste-beitraege/index.html");
@@ -63,7 +63,7 @@ assert(dailyHub.includes('root.querySelector("#darRecentPublicationsV1")')&&dail
 
 assert(moduleJs.includes('dar-recent-premium-track')&&moduleJs.includes('dar-recent-premium-toggle')&&moduleJs.includes('anchor:q||native.querySelector("#dhpLibrary")'),"Home publication capsule must be readable and anchored directly after Quran");
 assert(moduleCss.includes("HOME_RECENT_PREMIUM_V1")&&moduleCss.includes("scroll-snap-type:x mandatory"),"Responsive premium post slider missing");
-assert(router.includes("/assets/dar-home-recent-posts-v1.css?v=20261101-premium-home-v10"),"Premium CSS cache bust missing");
+assert(router.includes("/assets/dar-home-recent-posts-v1.css?v=20261101-premium-home-v11"),"Premium CSS cache bust missing");
 assert(builder.includes('localeManifest:/^\\/assets\\/'),"Canonical per-post locale manifest missing from generated index");
 assert(moduleCss.includes("var(--notice-paper")&&moduleCss.includes("dialog#darRecentNoticeV1::backdrop")&&moduleJs.includes("applyNoticeTheme(layer)"),"Modern native modal appearance palette missing");
 assert(router.indexOf('id="darAdultComponentI18nV1"')<router.indexOf('id="darHomeRecentPostsV1Js"'),"Shared locale registry must load before latest-posts component");
