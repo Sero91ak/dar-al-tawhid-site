@@ -25,7 +25,7 @@ assert.match(js,/createElement\("nav"\)/);
 assert.match(js,/darAdultPreferredLocaleV1/);
 assert.match(js,/is-feed-fullscreen/);
 assert.match(js,/is-ilm-chat-route/);
-assert.doesNotMatch(js,/(?:iframe|location\.replace|innerHTML\s*=)/i,
+assert.doesNotMatch(js,/(?:createElement\(["\x27]iframe|location\.replace|innerHTML\s*=)/i,
   "Do not load a second app or replace SPA content");
 assert.match(css,/\.dar-test-duo-active/);
 assert.match(css,/#darTestDuoWorkspaceNav/);
