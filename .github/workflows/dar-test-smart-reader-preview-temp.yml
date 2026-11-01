@@ -1,0 +1,22 @@
+name: DĀR Test · Smart Reader Preview QA
+on:
+  pull_request:
+    paths:
+      - 'test/assets/dar-duo-responsive-v1.js'
+      - 'test/assets/dar-duo-responsive-v1.css'
+      - 'test/tools/duo-smart-reader-preview-qa.cjs'
+      - '.github/workflows/dar-test-smart-reader-preview-temp.yml'
+permissions:
+  contents: read
+jobs:
+  fold-smart-reader:
+    runs-on: ubuntu-latest
+    timeout-minutes: 13
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --ignore-scripts playwright
+      - run: npx playwright install --with-deps chromium
+      - run: node test/tools/duo-smart-reader-preview-qa.cjs
