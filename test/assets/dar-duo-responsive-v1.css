@@ -249,3 +249,65 @@ html.dar-test-duo-active body.dar-test-reading-open #darTestDuoWorkspaceNav{
   html.dar-test-duo-active #appView,
   html.dar-test-duo-active #darTestDuoWorkspaceNav{transition:none!important;}
 }
+
+/* One 50%-wide detail surface cannot contain a second global Fold grid.
+ * Disable only the nested dual template INSIDE DĀR TEST right pane; never
+ * modify the shared responsive controller used by the native/live apps. */
+html.dar-test-duo-active body #appView .dar-fold[data-fold-mode="dual"]{
+  display:block!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  width:100%!important;
+  max-width:100%!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+  gap:0!important;
+}
+html.dar-test-duo-active body #appView .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane){
+  position:static!important;
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+  grid-column:1!important;
+  grid-row:auto!important;
+  padding-inline:0!important;
+  margin:0!important;
+  background:none!important;
+}
+html.dar-test-duo-active body #appView .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__pane,
+html.dar-test-duo-active body #appView .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__rail{
+  display:none!important;
+}
+html.dar-test-duo-active body #appView .prophets-layout--dual {
+  grid-template-columns:minmax(0,1fr)!important;
+  max-width:100%!important;
+}
+html.dar-test-duo-active body #appView :is(
+ .view-head,.post-reader-title,.hadith-hub>.view-head,
+ .topics-hub>.view-head,.topic-collection-page>.view-head
+){
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  transform:none!important;
+  left:auto!important;
+  right:auto!important;
+  box-sizing:border-box!important;
+}
+/* The Test header remains full-screen width; all cards and toolbars below it
+ * must use the new half-width parent, never an old 100vw desktop breakout. */
+html.dar-test-duo-active body #appView :is(
+  .qov-search-wrap,.qov-search-shell,.qov-nav-stack,.search-panel,
+  .search-pro-panel,.lib-grid,.hadith-detail,.topics-hub__label,
+  .qrc-context-bar,.quran-surah-card
+){
+  min-width:0!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
