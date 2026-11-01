@@ -43,8 +43,9 @@ html,body{margin:0;min-height:100%;font-family:system-ui;background:#0d1b16;colo
 window.__openedPost=null;
 window.navigate=function(route,id){
  if(route==="post"){window.__openedPost=id;document.body.classList.remove("is-home-route");
- history.replaceState(null,"","#post/"+encodeURIComponent(id));}
+ history.pushState({view:"post",id:id},"","#post/"+encodeURIComponent(id));}
 };
+window.addEventListener("popstate",function(){document.body.classList.add("is-home-route")});
 </script>
 </body></html>"""
 
@@ -176,19 +177,32 @@ def test():
         """)
         assert fixed, "Source → original prayer clock → Salām → Ibn Sīrīn → Qibla/Bibliothek → Search → Qurʾān → compact news was interrupted"
 
+        current_document = driver.execute_script("return performance.timeOrigin")
+        current_url = driver.current_url
         driver.find_element(By.CSS_SELECTOR, ".dar-recent-notice-all").click()
         expect(driver, lambda d: not d.find_elements(By.ID, "darRecentNoticeV1"), "View all did not close")
-        expect(driver, lambda d: "/neueste-beitraege/" in d.current_url,
-               "View All must navigate to its dedicated route")
-        expect(driver, lambda d: len(d.find_elements(By.CSS_SELECTOR, ".dar-archive-article")) == 3,
-               "Dedicated archive must list every same-day publication")
-        assert len(driver.find_elements(By.CSS_SELECTOR, ".dar-archive-tab")) == 3
-        assert driver.find_element(By.ID, "darArchiveTabs").text.count("Tage") == 3
-        assert len(driver.find_elements(By.CSS_SELECTOR, ".dar-archive-day")) == 1
-        assert driver.find_element(By.CSS_SELECTOR, ".dar-archive-tab[aria-pressed='true']").text.startswith("5")
-        driver.find_element(By.CSS_SELECTOR, ".dar-archive-tab:first-child").click()
-        assert driver.find_element(By.CSS_SELECTOR, ".dar-archive-tab[aria-pressed='true']").text.startswith("3")
-        print("PASS: separate 3/4/5-day archive, all same-day articles retained")
+        expect(driver, lambda d: len(d.find_elements(By.CSS_SELECTOR, "#darRecentInlineListV2 .dar-recent-inline-entry")) == 3,
+               "Internal app list must include all current same-day posts")
+        assert driver.current_url == current_url, "List opening navigated to another webpage"
+        assert driver.execute_script("return performance.timeOrigin") == current_document
+        assert not driver.find_elements(By.CSS_SELECTOR, ".dar-archive-tab,#darArchiveLanguage,.dar-recent-day")
+        assert "Tage" not in driver.find_element(By.ID, "darRecentInlineListV2").text
+        assert "geladen" not in driver.find_element(By.ID, "darRecentInlineListV2").text.lower()
+        assert not driver.find_element(By.ID, "darHomeHtmlParityV1").is_displayed()
+        print("PASS: instant internal list, all 3 same-day articles, no loading or day filters")
+        driver.find_element(By.CSS_SELECTOR, "#darRecentInlineListV2 .dar-recent-inline-entry").click()
+        expect(driver, lambda d: d.execute_script("return window.__openedPost") is not None,
+               "Internal article entry did not open native post reader")
+        assert driver.execute_script("return performance.timeOrigin") == current_document
+        driver.back()
+        expect(driver, lambda d: len(d.find_elements(By.CSS_SELECTOR, "#darRecentInlineListV2 .dar-recent-inline-entry")) == 3
+               and d.find_element(By.ID, "darRecentInlineListV2").is_displayed(),
+               "Native back from article must restore internal list")
+        driver.find_element(By.CSS_SELECTOR, ".dar-recent-inline-back").click()
+        expect(driver, lambda d: d.find_element(By.ID, "darHomeHtmlParityV1").is_displayed(),
+               "Internal back must return to home without reload")
+        assert driver.execute_script("return performance.timeOrigin") == current_document
+        print("PASS: in-app post reader, back to existing list, back to original home, no webpage reload")
 
         driver.execute_script("sessionStorage.clear();localStorage.clear()")
         fresh(driver, base)
@@ -211,13 +225,23 @@ def test():
               q=document.querySelector('.dhp-quran-section');
           return m&&q&&m.previousElementSibling===q
         """), "Qurʾān must precede compact news entry – Ibn Sīrīn/Qibla remain above Qurʾān"
+        url_before = driver.current_url
         compact.click()
-        expect(driver, lambda d: "/neueste-beitraege/" in d.current_url,
-               "Compact entry must open dedicated recent-posts page")
-        expect(driver, lambda d: "Son yayınlananlar" in d.find_element(By.ID,"darArchiveTitle").text,
-               "Archive must use selected Turkish UI")
-        assert driver.find_element(By.ID,"darArchiveLanguage").get_attribute("value") == "tr"
-        print("PASS: compact post entry after Quran + separate page + 9-language UI")
+        expect(driver, lambda d: "En son yayınlananlar" in d.find_element(By.CSS_SELECTOR, ".dar-recent-inline-heading").text,
+               "Internal list must use Turkish adult app language")
+        assert url_before == driver.current_url, "Compact capsule reloaded a website"
+        expect(driver, lambda d: "ANNENİN ÖZEL KONUMU" in d.find_element(By.ID, "darRecentInlineListV2").text,
+               "Existing Q49 Turkish post manifest was not applied")
+        assert not driver.find_elements(By.CSS_SELECTOR, "#darRecentInlineListV2 select")
+        driver.execute_script("""
+          localStorage.setItem('darAdultPreferredLocaleV1','ar');
+          dispatchEvent(new CustomEvent('dar-adult-locale-changed',{detail:{locale:'ar'}}));
+        """)
+        expect(driver, lambda d: "أحدث المنشورات" in d.find_element(By.ID, "darRecentInlineListV2").text,
+               "Switching adult app to Arabic did not translate internal post list")
+        assert driver.find_element(By.ID, "darRecentInlineListV2").get_attribute("dir") == "rtl"
+        assert driver.current_url == url_before
+        print("PASS: compact entry after Quran, existing Q49 translation, auto app locale in TR/AR and no manual picker")
 
         driver.execute_script("sessionStorage.clear();localStorage.clear()")
         fresh(driver, base)
