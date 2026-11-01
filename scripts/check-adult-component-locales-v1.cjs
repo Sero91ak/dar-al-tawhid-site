@@ -15,6 +15,7 @@ const builder=read("scripts/build-desktop-posts-index.js");
 const router=read("cloudflare/site-router.js");
 const archiveJs=read("assets/dar-recent-archive-v1.js");
 const archiveHtml=read("neueste-beitraege/index.html");
+const pwaArchiveHtml=read("pwa/neueste-beitraege/index.html");
 
 const languages=["de","ar","en","tr","ku","ckb","bs","fr","es"];
 assert.deepEqual(languages,["de","ar","en","tr","ku","ckb","bs","fr","es"]);
@@ -43,7 +44,7 @@ assert(moduleJs.includes('bindNoticeAction(all,function(){dismissNotice(false);o
 assert(moduleJs.includes('bindNoticeAction(skip,function(){dismissNotice(true)})'),"Skip new-post batch missing");
 assert(moduleJs.includes("child.inert=true")&&moduleJs.includes('root.style.setProperty("overflow","hidden","important")')&&moduleJs.includes('d.addEventListener("touchmove",noticeTouchGuard,{capture:true,passive:false})'),"WKWebView scroll/focus not locked");
 assert(moduleJs.includes("unlockNoticeBackground()")&&moduleJs.includes("item.node.inert=item.inert")&&moduleJs.includes("restore(d.documentElement,lock.html)"),"Background not restored after close");
-assert(moduleJs.includes('function archiveUrl(){return "/neueste-beitraege/"}'),"Dedicated article archive navigation missing");
+assert(moduleJs.includes('function archiveUrl(){return /^\\/pwa')&&moduleJs.includes('"/pwa/neueste-beitraege/"')&&moduleJs.includes('"/neueste-beitraege/"'),"Dedicated archive must preserve installed-PWA scope");
 assert(moduleJs.includes('t(7)+" ›"'),"Read post label must use correct translation");
 assert(moduleJs.includes('function fetchTitleManifests(posts)'),"Localized titles not supported");
 assert(moduleJs.includes('dar-recent-compact-link')&&moduleJs.includes('anchor:q||native.querySelector("#dhpLibrary")'),"Home article entry must be compact, anchored directly after Quran");
@@ -51,6 +52,8 @@ assert(builder.includes('localeManifest:/^\\/assets\\/'),"Canonical per-post loc
 assert(moduleCss.includes("var(--notice-paper")&&moduleCss.includes("dialog#darRecentNoticeV1::backdrop")&&moduleJs.includes("applyNoticeTheme(layer)"),"Modern native modal appearance palette missing");
 assert(router.indexOf('id="darAdultComponentI18nV1"')<router.indexOf('id="darHomeRecentPostsV1Js"'),"Shared locale registry must load before latest-posts component");
 assert(archiveHtml.includes('id="darRecentArchiveApp"')&&archiveHtml.includes('dar-recent-archive-v1.js'),"Independent archive HTML missing");
+assert(archiveHtml===pwaArchiveHtml,"PWA scoped archive must be identical to global adult website archive");
+assert(archiveJs.includes('function isPwa()')&&archiveJs.includes('isPwa()?"/pwa/?pwa=1&post="'),"Post deep links must stay inside installed PWA");
 assert(archiveJs.includes('[3,4,5].forEach')&&archiveJs.includes('function postLink(p)'),"Archive must offer 3/4/5 days and each canonical article");
 assert(archiveJs.includes('reg.register("recent-archive",words)'),"Archive must use shared nine-language UI registry");
 const archiveStart=archiveJs.indexOf("var words={"),archiveEnd=archiveJs.indexOf("};",archiveStart);
