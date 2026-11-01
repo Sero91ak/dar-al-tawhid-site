@@ -72,6 +72,7 @@ function paintInlineList(){
  var root=d.getElementById("darRecentInlineListV2");
  if(!root)return;
  root.lang=locale();root.dir=["ar","ckb"].includes(locale())?"rtl":"ltr";
+ var host=internalHost();if(host){var cs=w.getComputedStyle(host);[["--inline-bg","--dhp-bg"],["--inline-paper","--dhp-paper"],["--inline-ink","--dhp-ink"],["--inline-gold","--dhp-gold"],["--inline-line","--dhp-line"]].forEach(function(k){var v=cs.getPropertyValue(k[1]).trim();if(v)root.style.setProperty(k[0],v)})}
  root.replaceChildren();
  var top=e("header","dar-recent-inline-top");
  var back=e("button","dar-recent-inline-back","‹");back.type="button";
