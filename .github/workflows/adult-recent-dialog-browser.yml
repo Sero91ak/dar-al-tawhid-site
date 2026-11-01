@@ -1,0 +1,39 @@
+name: Adult recent articles · real browser dialog test
+
+on:
+  pull_request:
+    paths:
+      - "assets/dar-home-recent-posts-v1.js"
+      - "assets/dar-home-recent-posts-v1.css"
+      - "assets/i18n/adult-component-i18n-v1.js"
+      - "scripts/check-adult-recent-dialog-browser.py"
+      - ".github/workflows/adult-recent-dialog-browser.yml"
+  push:
+    branches: [main]
+    paths:
+      - "assets/dar-home-recent-posts-v1.js"
+      - "assets/dar-home-recent-posts-v1.css"
+      - "assets/i18n/adult-component-i18n-v1.js"
+      - "scripts/check-adult-recent-dialog-browser.py"
+      - ".github/workflows/adult-recent-dialog-browser.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  native-dialog-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Selenium
+        run: python3 -m pip install --quiet selenium
+      - name: Test real Chrome clicks, dismiss, modal touch lock and nine-language UI
+        run: python3 scripts/check-adult-recent-dialog-browser.py
+      - name: Save failure screenshot
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-adult-recent-modal-error
+          path: /tmp/dar-recent-popup-regression.png
+          if-no-files-found: ignore
