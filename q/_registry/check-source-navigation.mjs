@@ -93,7 +93,7 @@ let lesson=await simulate('/lernen/ikhlas/',learning);
 assert.equal(lesson.event.defaultPrevented,true);
 assert.equal(lesson.panel.hidden,false);
 assert.ok(lesson.frame.srcdoc.includes('Lernfragen'));
-assert.match(lesson.frame.srcdoc,/body\\.heritage-learning main/,"Learning page needs safe-area reading style");
+assert.match(lesson.frame.srcdoc,/body\.heritage-learning main/,"Learning page needs safe-area reading style");
 let missing=await simulate('/q/45/','404',404);
 assert.equal(missing.event.defaultPrevented,true);
 assert.equal(missing.panel,undefined);
