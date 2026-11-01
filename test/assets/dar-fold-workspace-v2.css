@@ -247,3 +247,7 @@ html.dar-fold-v2-reader body #appView :is(
 @media(prefers-reduced-motion:reduce){
   #darFoldV2Rail :is(button,input){transition:none!important}
 }
+
+/* The selected view is exclusive: CSS specificity must not unhide a panel. */
+html.dar-fold-v2-active #darFoldV2Rail #darFoldV2Menu[hidden],
+html.dar-fold-v2-active #darFoldV2Rail #darFoldV2Context[hidden]{display:none!important}
