@@ -176,6 +176,7 @@ private final class DarCinematicAudioPreview: ObservableObject {
     @Published var isPlaying = false
     @Published var errorText: String?
     private var player: AVPlayer?
+    private var finishObserver: NSObjectProtocol?
 
     func toggle(prayer: DarCinematicPrayer) {
         if isPlaying { stop(); return }
@@ -189,6 +190,14 @@ private final class DarCinematicAudioPreview: ObservableObject {
             let audio = AVPlayer(url: url)
             player = audio
             errorText = nil
+            if let item = audio.currentItem {
+                finishObserver = NotificationCenter.default.addObserver(
+                    forName: .AVPlayerItemDidPlayToEndTime,
+                    object: item, queue: .main
+                ) { [weak self] _ in
+                    Task { @MainActor [weak self] in self?.stop() }
+                }
+            }
             audio.play()
             isPlaying = true
         } catch {
@@ -199,6 +208,10 @@ private final class DarCinematicAudioPreview: ObservableObject {
     func stop() {
         player?.pause()
         player = nil
+        if let finishObserver {
+            NotificationCenter.default.removeObserver(finishObserver)
+            self.finishObserver = nil
+        }
         isPlaying = false
     }
 }
