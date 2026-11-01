@@ -5,6 +5,6 @@
  if(window.__darDesktopRepairLoaderV1)return;window.__darDesktopRepairLoaderV1=true;
  var vp=document.querySelector('meta[name="viewport"]');
  if(vp)vp.setAttribute("content","width=device-width,initial-scale=1,viewport-fit=cover");
- var css=document.createElement("link");css.rel="stylesheet";css.href="/desktop-preview/dar-desktop-recent-premium-v1.css?v=20261101-1";css.id="darDesktopRecentPremiumCSS";document.head.appendChild(css);
- var script=document.createElement("script");script.src="/desktop-preview/dar-desktop-recent-premium-v1.js?v=20261101-1";script.defer=true;script.id="darDesktopRecentPremiumJS";document.head.appendChild(script);
+ var css=document.createElement("link");css.rel="stylesheet";css.href="/desktop-preview/dar-desktop-recent-premium-v1.css?v=20261101-2";css.id="darDesktopRecentPremiumCSS";document.head.appendChild(css);
+ var script=document.createElement("script");script.src="/desktop-preview/dar-desktop-recent-premium-v1.js?v=20261101-2";script.defer=true;script.id="darDesktopRecentPremiumJS";document.head.appendChild(script);
 })();
