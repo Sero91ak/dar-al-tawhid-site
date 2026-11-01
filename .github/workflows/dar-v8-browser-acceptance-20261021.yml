@@ -160,6 +160,12 @@ jobs:
                   .observe(document.body,{attributes:true,attributeFilter:['class']});
               """)
               full=driver.find_element(By.ID,'darV8PlayerFullscreen')
+              driver.execute_script("""
+                window.__darPlayerEventAudit=[];
+                document.addEventListener('click',e=>window.__darPlayerEventAudit.push('doc-capture:'+e.target.id),true);
+                document.getElementById('darV8PlayerFullscreen').addEventListener('click',
+                  e=>window.__darPlayerEventAudit.push('element-target:'+e.target.id));
+              """)
               driver.execute_script("document.documentElement.style.scrollBehavior='auto';arguments[0].scrollIntoView({block:'center',behavior:'instant'})",full)
               hit=driver.execute_script("""const b=arguments[0],r=b.getBoundingClientRect(),el=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
                 return {rect:{top:r.top,bottom:r.bottom,height:innerHeight},hit:el&&el.className,ok:!!(el&&(el===b||b.contains(el)))}""",full)
@@ -171,7 +177,7 @@ jobs:
                   return {bodyClass:document.body.className,route:document.body.dataset.darV8Route,
                   playerDisplay:p?getComputedStyle(p).display:'missing',playerVisibility:p?getComputedStyle(p).visibility:'missing',
                   playerRect:p?{width:p.getBoundingClientRect().width,height:p.getBoundingClientRect().height}:null,
-                  buttonExpanded:b&&b.getAttribute('aria-expanded'),buttonText:b&&b.textContent,audit:window.__darPlayerClickAudit,
+                  buttonExpanded:b&&b.getAttribute('aria-expanded'),buttonText:b&&b.textContent,audit:window.__darPlayerClickAudit,eventAudit:window.__darPlayerEventAudit,apiAvailable:!!window.DARV8Portal?.togglePlayer,
                   elementFromPoint:b&&document.elementFromPoint(b.getBoundingClientRect().x+5,b.getBoundingClientRect().y+5)?.className};""")
                 raise RuntimeError('Full Quran player did not open: '+str(diag))
               geometry=driver.execute_script("""const p=document.querySelector('.v8-real-player'), b=document.getElementById('darV8PlayerFullscreen'),
