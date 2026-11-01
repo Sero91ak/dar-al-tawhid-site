@@ -83,6 +83,21 @@ const URL="https://dar-al-tawhid.de/test/?env=staging&source=duo-half-qa#quran";
     return d;
   }
   await inspect("fold-open",true);
+  const sources=await page.evaluate(()=>{
+    const selectors=[
+      '#appView a[href^="#"]','#appView [data-nav]','#appView .quran-surah-card',
+      '#appView [data-library-open]','#appView [data-qsrc-open]','#appView button'
+    ];
+    return selectors.map(q=>({
+      selector:q,count:document.querySelectorAll(q).length,
+      first:[...document.querySelectorAll(q)].slice(0,3).map(x=>({
+        tag:x.tagName,className:String(x.className).slice(0,100),
+        href:x.getAttribute("href"),nav:x.getAttribute("data-nav"),
+        value:x.getAttribute("data-value"),text:(x.textContent||"").trim().slice(0,80)
+      }))
+    }));
+  });
+  console.log("DAR_HALF_QA_CONTEXT_SOURCES "+JSON.stringify(sources));
   const leftBefore=await page.evaluate(()=>{
     const l=document.querySelector("#darTestDuoWorkspaceNav");
     const r=document.querySelector("#appView");
