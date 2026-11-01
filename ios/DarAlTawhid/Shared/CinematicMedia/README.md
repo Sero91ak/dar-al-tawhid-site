@@ -12,8 +12,8 @@ Dieser Ordner ist die **zentrale, feste Quelle** für den nativen iOS-Adhān-Cin
 | `dar-adhan-maghrib.mp4` | Maghrib | `d2dcf692-950c-4e3b-ab81-6bb6a55c5382` | 1080×1920, 8 s | stumm |
 | `dar-adhan-isha.mp4` | ʿIšāʾ | `387c0c44-bd03-4014-9671-628f3fe6aa18` | 1080×1920, 8 s | stumm |
 
-Die Originalvideos liegen bislang in **Runway**, nicht als MP4s in GitHub. Um sie zu sichern und im Xcode-Projekt verfügbar zu machen, nutze das **private Installer-Paket**, das mit den Original-Downloadadressen erstellt wurde. Die Runway-Downloadsignaturen verfallen; danach die Videos direkt aus Runway exportieren und mit obigen Namen hier ablegen.
+**Status 01.11.2026: Alle fünf Original-MP4-Dateien wurden tatsächlich aus den verifizierten Runway-Tasks heruntergeladen und in diesem GitHub-Testbranch mit genau diesen Namen dauerhaft gespeichert.** Der einmalige Import hat Breite, Höhe, Laufzeit und die fehlende Audiospur kontrolliert. Es sind keine neuen Exporte oder manuellen Umbenennungen erforderlich. Die signierten temporären Download-URLs werden zur Laufzeit nicht verwendet.
 
 **Xcode-Integration:** Die Debug-Cinematic-Ansicht liest zuerst lokal importierte MP4s aus Application Support und dann `Bundle.main/CinematicMedia/dar-adhan-*.mp4`. Der Ordner wird als Ressourcenverzeichnis in das App-Bundle aufgenommen (auch für die eigenständige Simulator-Test-App). Nach Einfügen der fünf MP4-Dateien muss ein neuer Xcode-Debug-Build erzeugt werden, um sie direkt ohne manuellen Import in der App zu sehen.
 
-**Sicherheit:** Das Verzeichnis ist lokal als nicht versioniert vorgesehen, keine kurzlebigen signierten Runway-URLs, keine Videobinaries oder private Token in GitHub veröffentlichen. Keine Änderung an Kids, Apple TV, Web oder App Store.
+**Sicherheit:** Die endgültig heruntergeladenen, verifizierten MP4s sind im isolierten Testbranch versioniert. Der einmalige Download-Workflow mit befristeten URLs wurde anschließend entfernt. `.gitignore` verhindert versehentliche spätere Videoimporte; die fünf gezielt eingecheckten Originale bleiben getrackt. Keine Änderung an Kids, Apple TV, Web oder der App-Store-Produktion.
