@@ -1,320 +1,196 @@
-/* DĀR TEST · one authoritative 50/50 workspace · 2026-11-01.
- * The two panes own exactly half of the usable viewport. No floating card
- * overlays the old 100% page. No extra Fold tablet layout is generated.
- * Root class is set ONLY on /test by dar-duo-responsive-v1.js. */
+/* DĀR TEST ONLY · Smart Master/Detail v5
+   Premium compact chooser + true independent responsive reader viewport.
+   The reader iframe loads the actual same-origin /test route at its own
+   physical CSS width. Its existing media queries and mobile components can
+   therefore reflow properly; NOT cropped with overflow:hidden hacks. */
 html.dar-test-duo-active {
-  --dar-duo-header-height: 52px;
-  --dar-duo-divider:color-mix(in srgb,var(--gold2,#ad8d58) 35%,transparent);
+  --dar-duo-rail-width:216px;
+  --dar-duo-header-height:52px;
+  --dar-duo-gold:var(--gold2,#ab8d56);
+  --dar-duo-line:color-mix(in srgb,var(--dar-duo-gold) 24%,transparent);
 }
 html.dar-test-duo-active,
-html.dar-test-duo-active body {
-  width:100%!important;
-  height:100dvh!important;
-  max-height:100dvh!important;
-  overflow:hidden!important;
-  overscroll-behavior:none;
+html.dar-test-duo-active body{
+  width:100%!important;height:100dvh!important;max-height:100dvh!important;
+  overflow:hidden!important;overscroll-behavior:none!important;
 }
 html.dar-test-duo-active body>.app {
-  max-width:100%!important;
-  width:100%!important;
-  height:100%!important;
-  margin:0!important;
-  transform:none!important;
-  box-sizing:border-box!important;
+  width:100%!important;max-width:100%!important;height:100%!important;
+  box-sizing:border-box!important;margin:0!important;transform:none!important;
 }
+/* Keep the original app DOM and event handlers for the master list, but never
+   show it behind the left selection or squeeze it into the detail surface. */
 html.dar-test-duo-active body #appView,
 html.dar-test-duo-active body #appView.view {
-  position:fixed!important;
-  left:50%!important;
-  top:var(--dar-duo-header-height)!important;
-  right:0!important;
-  bottom:0!important;
-  width:50%!important;
-  max-width:50%!important;
-  min-width:0!important;
-  height:calc(100dvh - var(--dar-duo-header-height))!important;
-  max-height:none!important;
-  margin:0!important;
-  transform:none!important;
-  translate:none!important;
-  z-index:20!important;
-  overflow-x:hidden!important;
-  overflow-y:auto!important;
-  overscroll-behavior-y:contain!important;
-  -webkit-overflow-scrolling:touch;
-  touch-action:auto;
-  box-sizing:border-box!important;
-  border-left:1px solid var(--dar-duo-divider);
-  border-radius:0!important;
-  scroll-padding-top:12px;
+  position:fixed!important;top:0!important;left:-200vw!important;
+  bottom:auto!important;right:auto!important;width:100vw!important;
+  max-width:100vw!important;height:100dvh!important;
+  overflow:hidden!important;visibility:hidden!important;
+  pointer-events:none!important;opacity:0!important;z-index:-1!important;
+  transform:none!important;translate:none!important;margin:0!important;
 }
-html.dar-test-duo-active #darTestDuoWorkspaceNav {
-  position:fixed!important;
-  top:var(--dar-duo-header-height)!important;
-  bottom:0!important;
-  left:0!important;
-  right:50%!important;
-  width:50%!important;
-  max-width:50%!important;
-  min-width:0!important;
+/* The ONLY displayed detail view has its OWN window/document/media queries. */
+html.dar-test-duo-active #darTestDuoReaderFrame{
+  display:block!important;position:fixed!important;
+  left:var(--dar-duo-rail-width)!important;
+  right:0!important;top:var(--dar-duo-header-height)!important;bottom:0!important;
+  width:calc(100vw - var(--dar-duo-rail-width))!important;
   height:calc(100dvh - var(--dar-duo-header-height))!important;
-  max-height:none!important;
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:stretch!important;
-  gap:3px!important;
-  padding:12px clamp(12px,2.5vw,23px) calc(110px + env(safe-area-inset-bottom,0px))!important;
-  border:0!important;
-  border-right:1px solid var(--dar-duo-divider)!important;
-  border-radius:0!important;
-  box-shadow:none!important;
-  background:var(--outer-bg-flat,var(--bg,#f7f4ee))!important;
-  background-image:none!important;
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
-  color:var(--text,#1a2732)!important;
-  opacity:1!important;
-  overflow-x:hidden!important;
-  overflow-y:auto!important;
-  overscroll-behavior-y:contain!important;
-  -webkit-overflow-scrolling:touch;
-  touch-action:pan-y;
-  direction:ltr;
-  z-index:40!important;
-  box-sizing:border-box!important;
-  scrollbar-width:thin;
+  min-width:0!important;max-width:none!important;max-height:none!important;
+  border:0!important;border-left:1px solid var(--dar-duo-line)!important;
+  border-radius:0!important;box-sizing:border-box!important;
+  background:var(--bg,var(--card,#f7f5ef))!important;
+  overflow:hidden!important;z-index:52!important;
 }
-#darTestDuoWorkspaceNav[hidden]{display:none!important}
+#darTestDuoReaderFrame[hidden]{display:none!important;}
+/* All seven route selections fit in a compact 2-column dashboard; the active
+   category supplies a FULL searchable, independently scrolling item list. */
+html.dar-test-duo-active #darTestDuoWorkspaceNav{
+  display:flex!important;flex-direction:column!important;gap:0!important;
+  position:fixed!important;
+  top:var(--dar-duo-header-height)!important;bottom:0!important;
+  left:0!important;right:auto!important;
+  width:var(--dar-duo-rail-width)!important;
+  min-width:0!important;max-width:var(--dar-duo-rail-width)!important;
+  height:calc(100dvh - var(--dar-duo-header-height))!important;
+  padding:12px 10px max(14px,env(safe-area-inset-bottom,0px))!important;
+  border:0!important;border-radius:0!important;
+  background:var(--card,var(--outer-bg-flat,var(--bg,#f9f7f1)))!important;
+  color:var(--text,#22313a)!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  box-shadow:none!important;opacity:1!important;
+  z-index:80!important;overflow-y:auto!important;overflow-x:hidden!important;
+  overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch;
+  touch-action:pan-y;box-sizing:border-box!important;
+  scrollbar-width:thin;direction:ltr;
+}
+#darTestDuoWorkspaceNav[hidden]{display:none!important;}
 #darTestDuoWorkspaceNav .dar-test-duo-brand{
-  font:800 11px/1.4 system-ui,sans-serif;
-  color:var(--gold2,#a88246);
-  letter-spacing:.08em;
-  padding-bottom:4px;
+  font:800 10px/1.2 ui-sans-serif,system-ui,-apple-system,sans-serif;
+  letter-spacing:.16em;color:var(--dar-duo-gold,#a58b5d);margin:1px 0 5px;
 }
 #darTestDuoWorkspaceNav .dar-test-duo-caption{
-  font:750 clamp(13px,1.5vw,17px)/1.35 system-ui,sans-serif;
-  margin:0!important;
-  padding:0 0 3px!important;
+  display:block;margin:0!important;padding:0!important;
+  color:var(--text,#1d2d30);
+  font:750 12px/1.35 ui-serif,Georgia,serif;letter-spacing:.02em;
 }
-#darTestDuoWorkspaceNav .dar-test-duo-legend {
-  font:600 11px/1.4 system-ui,sans-serif;
-  color:var(--muted,var(--text,#5c6064));
-  opacity:.75;
-  margin:0 0 10px!important;
+#darTestDuoWorkspaceNav .dar-test-duo-legend{
+  margin:2px 0 8px!important;padding:0;
+  font:600 9px/1.4 ui-sans-serif,system-ui,sans-serif;
+  color:var(--muted,#64716d);letter-spacing:.05em;
 }
 #darTestDuoWorkspaceNav .dar-test-duo-links{
-  display:grid!important;
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,132px),1fr));
-  gap:5px!important;
-  width:100%;
+  flex:0 0 auto;display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:5px!important;padding-bottom:10px;
+  border-bottom:1px solid var(--dar-duo-line);
 }
 #darTestDuoWorkspaceNav .dar-test-duo-link{
-  display:flex!important;
-  align-items:center;
-  gap:8px;
-  min-height:42px;
-  padding:10px 12px!important;
-  font:700 13px/1.3 system-ui,sans-serif;
-  border-radius:10px;
-  border:1px solid transparent;
-  color:inherit!important;
-  text-decoration:none!important;
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-  overflow-wrap:anywhere;
+  display:flex!important;align-items:center;justify-content:flex-start;
+  gap:5px;min-width:0;width:100%;min-height:36px;
+  margin:0;padding:7px 6px!important;
+  border:1px solid var(--dar-duo-line)!important;border-radius:10px;
+  color:inherit!important;text-decoration:none!important;
+  font:700 11px/1.3 system-ui,-apple-system,sans-serif;
+  background:color-mix(in srgb,var(--dar-duo-gold) 2%,transparent);
+  overflow-wrap:anywhere;box-sizing:border-box;transition:background .12s ease;
 }
 #darTestDuoWorkspaceNav .dar-test-duo-link::before{
-  content:"";
-  display:inline-block;
-  width:6px;height:6px;flex:0 0 6px;
-  border-radius:50%;
-  background:color-mix(in srgb,var(--gold2,#bfa579) 55%,transparent);
+  content:"";flex:0 0 5px;width:5px;height:5px;
+  border-radius:50%;background:var(--dar-duo-gold);
+  opacity:.45;
 }
-#darTestDuoWorkspaceNav :is(.dar-test-duo-link,.dar-test-duo-context-link):is(.is-current,:hover,:focus-visible){
-  border-color:color-mix(in srgb,var(--gold2,#bfa579) 45%,transparent)!important;
-  background:color-mix(in srgb,var(--gold2,#bfa579) 10%,transparent)!important;
+#darTestDuoWorkspaceNav :is(.dar-test-duo-link,.dar-test-duo-context-link):is(:focus-visible,.is-current){
+  border-color:color-mix(in srgb,var(--dar-duo-gold) 58%,transparent)!important;
+  background:color-mix(in srgb,var(--dar-duo-gold) 13%,transparent)!important;
 }
+#darTestDuoWorkspaceNav .dar-test-duo-link.is-current::before{opacity:1;}
 #darTestDuoWorkspaceNav :is(.dar-test-duo-link,.dar-test-duo-context-link):focus-visible{
-  outline:2px solid var(--gold2,#c6a66b);
-  outline-offset:2px;
+  outline:2px solid var(--dar-duo-gold);outline-offset:1px;
+}
+#darTestDuoWorkspaceNav .dar-test-duo-search-wrap{
+  position:sticky;top:-12px;z-index:2;
+  padding:9px 0 5px;background:var(--card,var(--bg,#f9f7f1));
+}
+#darTestDuoWorkspaceNav .dar-test-duo-search{
+  width:100%;height:34px;border-radius:9px;
+  padding:4px 9px;border:1px solid var(--dar-duo-line);
+  background:var(--card,var(--bg,#fff));
+  color:var(--text,#24362f);font:500 11px system-ui,-apple-system,sans-serif;
+  box-sizing:border-box;
+}
+#darTestDuoWorkspaceNav .dar-test-duo-search:focus{
+  outline:1px solid var(--dar-duo-gold);outline-offset:0;
 }
 #darTestDuoWorkspaceNav .dar-test-duo-context{
-  display:block;
-  margin-top:13px;
-  border-top:1px solid var(--dar-duo-divider);
-  padding-top:12px;
-  min-width:0;
+  display:block;min-width:0;flex:0 0 auto;
+  margin:0;padding:2px 0 0;border:0!important;
 }
-#darTestDuoWorkspaceNav .dar-test-duo-context[hidden]{display:none!important}
+#darTestDuoContext[hidden]{display:none!important;}
 #darTestDuoWorkspaceNav .dar-test-duo-context-title{
-  font:750 13px/1.4 system-ui,sans-serif;
-  color:var(--gold2,#a88246);
-  margin:0 0 8px;
+  margin:4px 0 7px;padding-left:2px;
+  color:var(--dar-duo-gold);
+  font:750 11px/1.4 ui-serif,Georgia,serif;
 }
 #darTestDuoWorkspaceNav .dar-test-duo-context-links{
-  display:flex;
-  flex-direction:column;
-  gap:4px;
+  display:flex;flex-direction:column;gap:0;
 }
 #darTestDuoWorkspaceNav .dar-test-duo-context-link{
-  display:block;
-  width:100%;
-  text-align:left;
-  background:transparent;
-  cursor:pointer;
-  min-height:40px;
-  border:1px solid transparent;
-  padding:10px;
-  border-radius:10px;
-  font:600 12px/1.4 system-ui,sans-serif;
-  text-decoration:none!important;
+  display:block!important;width:100%;min-width:0;
+  padding:9px 7px!important;margin:0;text-align:left;
+  min-height:38px;border:0!important;
+  border-bottom:1px solid var(--dar-duo-line)!important;
+  border-radius:0;background:transparent;
   color:inherit!important;
-  overflow-wrap:anywhere;
+  font:560 11px/1.45 system-ui,-apple-system,sans-serif;
+  overflow-wrap:anywhere;white-space:normal;cursor:pointer;
+  box-sizing:border-box;
 }
-html.dar-test-duo-active[data-dar-duo-focus="left"] #darTestDuoWorkspaceNav{
-  border-right-color:var(--gold2,#c6a66b)!important;
-}
-html.dar-test-duo-active[data-dar-duo-focus="right"] body #appView{
-  border-left-color:var(--gold2,#c6a66b)!important;
-}
-/* Every desktop-width grid inside the 50%-width reader must reflow as
- * a genuine phone-width card group; never clip right-side touch targets. */
-html.dar-test-duo-active body #appView > *,
-html.dar-test-duo-active body #appView :is(
-  .view,.view-content,.qov-page,.qov-main,.qov-header,.qov-shell,
-  .qrc-shell,.quran-ayah-list,.post-reader,.post-reader-main,.article,
-  .lib-page,.lib-detail,.books-library-shell,.topics-hub,.hadith-hub,
-  .dua-hub,.dua-detail-box,.folder-grid,.latest-grid,.books-library-list
-){
-  max-width:100%!important;
-  min-width:0!important;
-  box-sizing:border-box!important;
-}
-html.dar-test-duo-active body #appView :is(
-  .folder-grid,.latest-grid,.dua-theme-grid,.topics-theme-grid,.lib-grid,
-  .qov-surah-list,.books-library-list,.hadith-list
-){
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))!important;
-}
-html.dar-test-duo-active body #appView :is(
-  img,video,canvas,iframe,pre,table
-){max-width:100%!important;}
-html.dar-test-duo-active body #appView :is(pre,table){overflow-x:auto!important;}
-html.dar-test-duo-active body #appView :is(
-  .post-reader-title,.hadith-detail,.article,.quran-ayah-list,.dua-detail-box
-){
-  width:100%!important;
-  max-inline-size:100%!important;
-  min-inline-size:0!important;
-}
-/* Keep the SAME original five-tab dock in the LEFT control pane:
- * navigation belongs with selection, leaving the right reader clear.
- * No clone, no replacement of the original event handlers. */
-html.dar-test-duo-active #bottomNav{
-  position:fixed!important;
-  left:25%!important;
-  right:auto!important;
-  transform:translateX(-50%)!important;
-  translate:none!important;
-  width:min(420px,calc(50vw - 20px))!important;
-  min-width:0!important;
-  max-width:calc(50vw - 20px)!important;
-  margin:0!important;
-  box-sizing:border-box!important;
-  z-index:180!important;
-  transition:none!important;
-  animation:none!important;
-}
-html.dar-test-duo-active #bottomNav>*{min-width:0!important;}
-/* A reading dialog on the right does not blank the left chooser. */
-html.dar-test-duo-active body.dar-test-reading-open #darTestReadingOverlay{
-  position:fixed!important;
-  left:50%!important;
-  right:0!important;
-  top:var(--dar-duo-header-height)!important;
-  bottom:0!important;
-  width:50%!important;
-  height:calc(100dvh - var(--dar-duo-header-height))!important;
-  box-sizing:border-box!important;
-  padding:0!important;
-  max-width:none!important;
-  z-index:2147483000!important;
-}
-html.dar-test-duo-active body.dar-test-reading-open #darTestReadingOverlay .dar-test-reader-dialog{
-  width:100%!important;
-  max-width:100%!important;
-  height:100%!important;
-  max-height:100%!important;
-  min-height:0!important;
-  border-radius:0!important;
-  transform:none!important;
-}
-html.dar-test-duo-active body.dar-test-reading-open #darTestDuoWorkspaceNav{
-  z-index:2147483001!important;
-}
-@media (prefers-reduced-motion:reduce){
-  html.dar-test-duo-active #appView,
-  html.dar-test-duo-active #darTestDuoWorkspaceNav{transition:none!important;}
-}
-
-/* One 50%-wide detail surface cannot contain a second global Fold grid.
- * Disable only the nested dual template INSIDE DĀR TEST right pane; never
- * modify the shared responsive controller used by the native/live apps. */
-html.dar-test-duo-active body #appView .dar-fold[data-fold-mode="dual"]{
-  display:block!important;
-  grid-template-columns:minmax(0,1fr)!important;
-  width:100%!important;
-  max-width:100%!important;
-  height:auto!important;
-  max-height:none!important;
-  overflow:visible!important;
-  gap:0!important;
-}
-html.dar-test-duo-active body #appView .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane){
-  position:static!important;
-  display:block!important;
-  width:100%!important;
-  min-width:0!important;
-  max-width:100%!important;
-  height:auto!important;
-  max-height:none!important;
-  overflow:visible!important;
-  grid-column:1!important;
-  grid-row:auto!important;
-  padding-inline:0!important;
-  margin:0!important;
-  background:none!important;
-}
-html.dar-test-duo-active body #appView .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__pane,
-html.dar-test-duo-active body #appView .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__rail{
+#darTestDuoWorkspaceNav .dar-test-duo-context-link[hidden]{
   display:none!important;
 }
-html.dar-test-duo-active body #appView .prophets-layout--dual {
-  grid-template-columns:minmax(0,1fr)!important;
-  max-width:100%!important;
+/* The original five-tab dock cannot provide usable 44px touch targets
+   inside a 210px rail. The seven direct route buttons above replace it ONLY
+   in the expanded test workspace; the original dock returns on the cover. */
+html.dar-test-duo-active #bottomNav,
+html.dar-test-duo-active #appChromeDock{
+  display:none!important;visibility:hidden!important;pointer-events:none!important;
 }
-html.dar-test-duo-active body #appView :is(
- .view-head,.post-reader-title,.hadith-hub>.view-head,
- .topics-hub>.view-head,.topic-collection-page>.view-head
-){
-  width:100%!important;
-  max-width:100%!important;
-  min-width:0!important;
-  margin-left:0!important;
-  margin-right:0!important;
-  transform:none!important;
-  left:auto!important;
-  right:auto!important;
-  box-sizing:border-box!important;
+/* An actual reader page inside the right viewport. Hide its duplicate app
+   chrome and use a normal, self-contained mobile responsive content region. */
+html.dar-duo-reader-embedded,
+html.dar-duo-reader-embedded body{
+  width:100%!important;max-width:100%!important;
+  min-width:0!important;min-height:100dvh!important;
+  overflow-x:clip!important;
+  overflow-y:auto!important;
 }
-/* The Test header remains full-screen width; all cards and toolbars below it
- * must use the new half-width parent, never an old 100vw desktop breakout. */
-html.dar-test-duo-active body #appView :is(
-  .qov-search-wrap,.qov-search-shell,.qov-nav-stack,.search-panel,
-  .search-pro-panel,.lib-grid,.hadith-detail,.topics-hub__label,
-  .qrc-context-bar,.quran-surah-card
-){
-  min-width:0!important;
-  max-width:100%!important;
-  box-sizing:border-box!important;
+html.dar-duo-reader-embedded body>.app{
+  display:block!important;width:100%!important;max-width:100%!important;
+  min-width:0!important;min-height:100dvh!important;
+  height:auto!important;margin:0!important;padding:0!important;
+  transform:none!important;overflow:visible!important;
+}
+html.dar-duo-reader-embedded :is(
+  #bottomNav,#appChromeDock,#darTestDuoWorkspaceNav,#darTestDuoReaderFrame,
+  .bottom-nav,.app-header,#appHeader,#topBar
+){display:none!important;visibility:hidden!important;pointer-events:none!important;}
+html.dar-duo-reader-embedded body #appView,
+html.dar-duo-reader-embedded body #appView.view{
+  position:relative!important;inset:auto!important;
+  top:0!important;left:0!important;right:auto!important;bottom:auto!important;
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  height:auto!important;max-height:none!important;
+  margin:0!important;padding:10px 9px 24px!important;
+  transform:none!important;translate:none!important;
+  overflow:visible!important;box-sizing:border-box!important;
+}
+html.dar-duo-reader-embedded body #appView :is(
+ .view,.qov-page,.quran-page,.qrc-shell,.hadith-hub,.hadith-detail,
+ .topics-hub,.topic-collection-page,.post-reader,.lib-page,.dua-hub,.dua-detail
+){max-width:100%!important;min-width:0!important;box-sizing:border-box!important;}
+/* The iframe's actual width (not whole 726px Fold screen) selects the
+   application's existing mobile style breakpoints: do not set CSS 50vw. */
+@media(prefers-reduced-motion:reduce){
+  #darTestDuoWorkspaceNav :is(a,button){transition:none!important;}
 }
