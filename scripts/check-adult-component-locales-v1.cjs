@@ -26,9 +26,9 @@ assert(first>=0&&last>first,"Latest-posts UI translation dictionary missing");
 const labels=vm.runInNewContext("("+moduleJs.slice(first+"var labels=".length,last+2)+")");
 assert.deepEqual(Object.keys(labels),languages,"Nine adult UI locale catalogues required in exact app order");
 for(const code of languages){
- assert(Array.isArray(labels[code])&&labels[code].length===18,code+" must have 18 UI strings");
+ assert(Array.isArray(labels[code])&&labels[code].length===19,code+" must have 19 UI strings");
  assert(labels[code].every(x=>typeof x==="string"&&x.trim()),code+" has empty UI label");
- for(const index of [0,1,2,3,4,5,7,8,9,11,12,13,14,15,16,17])assert(labels[code][index],code+" missing UI label "+index);
+ for(const index of [0,1,2,3,4,5,7,8,9,11,12,13,14,15,16,17,18])assert(labels[code][index],code+" missing UI label "+index);
 }
 const win={localStorage:{getItem:()=> "tr"},addEventListener:()=>{}};
 vm.runInNewContext(registryJs,{window:win});
@@ -41,11 +41,14 @@ assert(moduleJs.includes('var registry=w.DARAdultComponentI18nV1'),"Latest-posts
 assert(moduleJs.includes('var layer=e("dialog","dar-recent-notice-overlay")')&&moduleJs.includes("layer.showModal()"),"Popup must use the native top-layer dialog");
 assert(moduleJs.includes("function bindNoticeAction(el,fn)")&&moduleJs.includes('el.addEventListener("pointerup"')&&moduleJs.includes('el.addEventListener("click"'),"Per-control iOS touch/click handlers missing");
 assert(moduleJs.includes('bindNoticeAction(a,function(){dismissNotice(false);openPostById(p.id)})'),"Popup must dismiss before opening post");
-assert(moduleJs.includes('bindNoticeAction(all,function(){dismissNotice(false);openArchive()})'),"View-all popup must open separate archive, not expand the home");
+assert(moduleJs.includes('bindNoticeAction(all,function(){dismissNotice(false);openArchive()})')&&moduleJs.includes('function openArchive(){openInlineList(false)}'),"View all popup must use the internal app post list");
 assert(moduleJs.includes('bindNoticeAction(skip,function(){dismissNotice(true)})'),"Skip new-post batch missing");
 assert(moduleJs.includes("child.inert=true")&&moduleJs.includes('root.style.setProperty("overflow","hidden","important")')&&moduleJs.includes('d.addEventListener("touchmove",noticeTouchGuard,{capture:true,passive:false})'),"WKWebView scroll/focus not locked");
 assert(moduleJs.includes("unlockNoticeBackground()")&&moduleJs.includes("item.node.inert=item.inert")&&moduleJs.includes("restore(d.documentElement,lock.html)"),"Background not restored after close");
-assert(moduleJs.includes('function archiveUrl(){return /^\\/pwa')&&moduleJs.includes('"/pwa/neueste-beitraege/"')&&moduleJs.includes('"/neueste-beitraege/"'),"Dedicated archive must preserve installed-PWA scope");
+assert(moduleJs.includes('function openInlineList(returning)')&&moduleJs.includes('function closeInlineList(toPost)')&&moduleJs.includes('function syncInlineAfterRoute()'),"In-app posts list and back-navigation missing");
+assert(!moduleJs.includes('location.assign(archiveUrl())')&&!moduleJs.includes('a.href=archiveUrl()'),"Opening recent posts must never load a separate web page");
+assert(moduleJs.includes('function recentInlinePosts(){return recent(state.posts,5)}'),"Recent list must internally use recent publications without visible day selector");
+assert(!moduleJs.includes('dar-archive-tab')&&!moduleJs.includes('darArchiveLanguage'),"Internal recent list must never show manual language or day filter");
 assert(moduleJs.includes('t(7)+" ›"'),"Read post label must use correct translation");
 assert(moduleJs.includes('function fetchTitleManifests(posts)'),"Localized titles not supported");
 assert(moduleJs.includes("var NOTICE_READ=\"darAdultLatestPostsSeenIdsV2\""),"Persistent per-app read-state missing");
@@ -61,17 +64,13 @@ assert(moduleJs.includes('dar-recent-compact-link')&&moduleJs.includes('anchor:q
 assert(builder.includes('localeManifest:/^\\/assets\\/'),"Canonical per-post locale manifest missing from generated index");
 assert(moduleCss.includes("var(--notice-paper")&&moduleCss.includes("dialog#darRecentNoticeV1::backdrop")&&moduleJs.includes("applyNoticeTheme(layer)"),"Modern native modal appearance palette missing");
 assert(router.indexOf('id="darAdultComponentI18nV1"')<router.indexOf('id="darHomeRecentPostsV1Js"'),"Shared locale registry must load before latest-posts component");
-assert(archiveHtml.includes('id="darRecentArchiveApp"')&&archiveHtml.includes('dar-recent-archive-v1.js'),"Independent archive HTML missing");
-assert(archiveHtml===pwaArchiveHtml,"PWA scoped archive must be identical to global adult website archive");
-assert(archiveJs.includes('function isPwa()')&&archiveJs.includes('isPwa()?"/pwa/?pwa=1&post="'),"Post deep links must stay inside installed PWA");
-assert(archiveJs.includes('[3,4,5].forEach')&&archiveJs.includes('function postLink(p)'),"Archive must offer 3/4/5 days and each canonical article");
-assert(archiveJs.includes('reg.register("recent-archive",words)'),"Archive must use shared nine-language UI registry");
-const archiveStart=archiveJs.indexOf("var words={"),archiveEnd=archiveJs.indexOf("};",archiveStart);
-assert(archiveStart>=0&&archiveEnd>archiveStart,"Archive nine-language dictionary missing");
-const archiveWords=vm.runInNewContext("("+archiveJs.slice(archiveStart+"var words=".length,archiveEnd+1)+")");
-assert.deepEqual(Object.keys(archiveWords),languages,"Archive missing one of nine languages");
-for(const lang of languages){for(const key of Object.keys(archiveWords.de))assert(typeof archiveWords[lang][key]==="string"&&archiveWords[lang][key].trim(),lang+" missing archive UI key "+key)}
-
+assert(archiveHtml.includes('location.replace("/?recent=1")')&&pwaArchiveHtml.includes('location.replace("/pwa/?pwa=1&recent=1")'),"Legacy archive URL must lead to the same internal visitor view");
+assert(!archiveHtml.includes("darArchiveTabs")&&!pwaArchiveHtml.includes("darArchiveTabs"),"No separate day-filter archive screens may be linked");
+assert(moduleJs.includes('a.addEventListener("click",function(ev){ev.preventDefault();openInlineList(false)})'),"Home capsule must open the in-memory post list");
+assert(moduleJs.includes('a.addEventListener("click",function(ev){')&&moduleJs.includes('closeInlineList(true);')&&moduleJs.includes('openPostById(p.id);'),"Post row must open original app post reader, without full page load");
+assert(moduleJs.includes('state.renderedInlineLocale=locale()')&&moduleJs.includes('paintInlineList()')&&moduleJs.includes('dar-adult-locale-changed'),"Inline post titles must follow the chosen app language");
+assert(moduleCss.includes('body.dar-recent-inline-open #darHomeHtmlParityV1')&&moduleCss.includes('#darRecentInlineListV2 .dar-recent-inline-entry'),"Native inline post list visual style missing");
+assert(!moduleCss.includes('darArchiveLanguage'),"Internal list must have no standalone language picker");
 
 
 /* Executed, not only string-matched: reproduce the WKWebView interaction
