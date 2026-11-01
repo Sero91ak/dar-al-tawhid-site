@@ -98,6 +98,11 @@ console.log("PASS DAR Test Fold V2: syntax, sole authority, responsive capacity,
       getAttribute(k){return this.attributes[k]||null;},
       remove(){if(!this.parentNode)return;const i=this.parentNode.children.indexOf(this);if(i>=0)this.parentNode.children.splice(i,1);this.parentNode=null;}
     };
+    Object.defineProperty(e,"nextSibling",{get(){
+      if(!this.parentNode)return null;
+      const list=this.parentNode.children,idx=list.indexOf(this);
+      return list[idx+1]||null;
+    }});
     return e;
   };
   const html=node("html"), body=node("body");
