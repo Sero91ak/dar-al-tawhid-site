@@ -13,7 +13,7 @@ const moduleJs=read("assets/dar-home-recent-posts-v1.js");
 const moduleCss=read("assets/dar-home-recent-posts-v1.css");
 const builder=read("scripts/build-desktop-posts-index.js");
 const router=read("cloudflare/site-router.js");
-assert(router.includes("/assets/dar-home-recent-posts-v1.js?v=20261101-scroll-observer-v9"),"Current adult Worker must bust cached pre-scroll-fix JS in iOS/PWA");
+assert(router.includes("/assets/dar-home-recent-posts-v1.js?v=20261101-premium-home-v10"),"Current adult Worker must bust cached pre-scroll-fix JS in iOS/PWA");
 const dailyHub=read("assets/dar-visitor-daily-hub-v1.js");
 const archiveJs=read("assets/dar-recent-archive-v1.js");
 const archiveHtml=read("neueste-beitraege/index.html");
@@ -61,13 +61,15 @@ assert(moduleJs.includes("function enforceCanonicalHomeOrder(native,mount)")&&mo
 assert(moduleJs.includes('content.querySelector(".dat-smart-prayer")')&&moduleJs.includes('content.querySelector("#dhpPrayerNativeMount")')&&moduleJs.includes('preWelcome=prayer')&&moduleJs.includes('preWelcome.insertAdjacentElement("afterend",chain[0])'),"Prayer-time card must remain BEFORE Salām, never behind recent posts");
 assert(dailyHub.includes('root.querySelector("#darRecentPublicationsV1")')&&dailyHub.includes('root.querySelector(".dhp-quran-section")')&&!dailyHub.includes('(mount||welcome).insertAdjacentElement("afterend",card)'),"Daily question must not interrupt the fixed Salām-to-Qurʾān home sequence");
 
-assert(moduleJs.includes('dar-recent-compact-link')&&moduleJs.includes('anchor:q||native.querySelector("#dhpLibrary")'),"Home article entry must be compact, anchored directly after Quran");
+assert(moduleJs.includes('dar-recent-premium-track')&&moduleJs.includes('dar-recent-premium-toggle')&&moduleJs.includes('anchor:q||native.querySelector("#dhpLibrary")'),"Home publication capsule must be readable and anchored directly after Quran");
+assert(moduleCss.includes("HOME_RECENT_PREMIUM_V1")&&moduleCss.includes("scroll-snap-type:x mandatory"),"Responsive premium post slider missing");
+assert(router.includes("/assets/dar-home-recent-posts-v1.css?v=20261101-premium-home-v10"),"Premium CSS cache bust missing");
 assert(builder.includes('localeManifest:/^\\/assets\\/'),"Canonical per-post locale manifest missing from generated index");
 assert(moduleCss.includes("var(--notice-paper")&&moduleCss.includes("dialog#darRecentNoticeV1::backdrop")&&moduleJs.includes("applyNoticeTheme(layer)"),"Modern native modal appearance palette missing");
 assert(router.indexOf('id="darAdultComponentI18nV1"')<router.indexOf('id="darHomeRecentPostsV1Js"'),"Shared locale registry must load before latest-posts component");
 assert(archiveHtml.includes('location.replace("/?recent=1")')&&pwaArchiveHtml.includes('location.replace("/pwa/?pwa=1&recent=1")'),"Legacy archive URL must lead to the same internal visitor view");
 assert(!archiveHtml.includes("darArchiveTabs")&&!pwaArchiveHtml.includes("darArchiveTabs"),"No separate day-filter archive screens may be linked");
-assert(moduleJs.includes('a.addEventListener("click",function(ev){ev.preventDefault();openInlineList(false)})'),"Home capsule must open the in-memory post list");
+assert(moduleJs.includes('toggle.addEventListener("click",function(){flat.hidden=!flat.hidden;')&&moduleJs.includes('var link=e("a","dar-recent-premium-read"'),"Premium capsule must expand a flat list and open the native post reader");
 assert(moduleJs.includes('a.addEventListener("click",function(ev){')&&moduleJs.includes('closeInlineList(true);')&&moduleJs.includes('openPostById(p.id);'),"Post row must open original app post reader, without full page load");
 assert(moduleJs.includes('state.renderedInlineLocale=locale()')&&moduleJs.includes('paintInlineList()')&&moduleJs.includes('dar-adult-locale-changed'),"Inline post titles must follow the chosen app language");
 assert(moduleCss.includes('body.dar-recent-inline-open #darHomeHtmlParityV1')&&moduleCss.includes('#darRecentInlineListV2 .dar-recent-inline-entry'),"Native inline post list visual style missing");
