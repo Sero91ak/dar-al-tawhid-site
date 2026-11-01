@@ -21,9 +21,9 @@ assert(first>=0&&last>first,"Latest-posts UI translation dictionary missing");
 const labels=vm.runInNewContext("("+moduleJs.slice(first+"var labels=".length,last+2)+")");
 assert.deepEqual(Object.keys(labels),languages,"Nine adult UI locale catalogues required in exact app order");
 for(const code of languages){
- assert(Array.isArray(labels[code])&&labels[code].length===15,code+" must have 15 UI strings");
+ assert(Array.isArray(labels[code])&&labels[code].length===17,code+" must have 17 UI strings");
  assert(labels[code].every(x=>typeof x==="string"&&x.trim()),code+" has empty UI label");
- for(const index of [0,1,2,3,4,5,7,8,9,11,12,13,14])assert(labels[code][index],code+" missing UI label "+index);
+ for(const index of [0,1,2,3,4,5,7,8,9,11,12,13,14,15,16])assert(labels[code][index],code+" missing UI label "+index);
 }
 const win={localStorage:{getItem:()=> "tr"},addEventListener:()=>{}};
 vm.runInNewContext(registryJs,{window:win});
