@@ -452,7 +452,7 @@ function syncV8Route(){
 
 function init(key){
  if(currentPage && currentPage!==key){closePicker();if(d.body.classList.contains("dar-v8-player-fullscreen"))togglePlayer(false)}
- currentPage=key;setupLanguages();installPlayer();setupVisualViewport();installMobileGestureGuard();setupTouchPlayerPicker();colorLocale();updateLocaleNotice();syncV8Route();
+ currentPage=key;setupLanguages();installPlayer();setupVisualViewport();setupTouchPlayerPicker();colorLocale();updateLocaleNotice();syncV8Route();
  if(key==="suche")initChat();
  if(key==="quran")initQuran();
  if(key==="einstellungen")settings();
