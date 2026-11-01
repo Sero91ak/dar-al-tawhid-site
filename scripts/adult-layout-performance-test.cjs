@@ -15,10 +15,11 @@ const handles={};
 const raf=[];
 let rootWrites=0,navGeometryReads=0,navWrites=0;
 const attributes={};
+const styleVars={};
 const root={
   clientWidth:390,clientHeight:844,
   classList:{contains(){return false},add(){},remove(){},toggle(){}},
-  style:{setProperty(){rootWrites++}},
+  style:{setProperty(name,value){rootWrites++;styleVars[name]=String(value)}},
   getAttribute(name){return attributes[name]||null},
   setAttribute(name,value){attributes[name]=String(value)}
 };
@@ -42,6 +43,8 @@ class ResizeObserver {
 }
 const win={
   innerWidth:390,innerHeight:844,
+  visualViewport:{width:390,height:844,offsetTop:0,
+    addEventListener(type,fn){handles["visual:"+type]=fn}},
   localStorage:{getItem(){return "bottom"}},
   requestAnimationFrame(fn){raf.push(fn);return raf.length},
   addEventListener(type,fn){handles["window:"+type]=fn},
@@ -75,6 +78,43 @@ roController.cb();
 flushFrames();
 assert.ok(rootWrites>afterForce,"Viewport orientation change must recompute layout");
 assert.ok(navGeometryReads<=1,"Orientation reads nav geometry at most once per update");
+
+/* Real user recording: iOS browser visual viewport changes as the toolbar
+ * collapses/reappears during scrolling. The document layout viewport has
+ * not rotated or resized; the fixed header/content/tab geometry MUST remain
+ * identical, with no root CSS mutation or new layoutchange event. */
+win.visualViewport.width=932;
+win.visualViewport.height=640;
+const afterOrientation=rootWrites;
+for(const visualH of [590,525,610,640,490,630]){
+  win.visualViewport.height=visualH;
+  win.visualViewport.offsetTop=visualH===525?24:0;
+  handles["visual:resize"]();
+  roController.cb();
+  flushFrames();
+  assert.equal(rootWrites,afterOrientation,
+    "Collapsing Safari toolbar at "+visualH+"px must not mutate page layout");
+}
+assert.equal(styleVars["--layout-vh"],"640px",
+  "Stable document height must own layout-vh despite Safari toolbar changes");
+assert.equal(styleVars["--layout-vv-height"],"640px",
+  "Visual viewport shrinkage without keyboard must not resize app content");
+
+/* True on-screen keyboard: focused editable element plus >120px visual
+ * shrink remains supported; opening and closing restore the correct CSS. */
+doc.activeElement={matches(selector){return selector.includes("input")},isContentEditable:false};
+win.visualViewport.height=340;
+handles["doc:focusin"]();
+flushFrames();
+assert.equal(styleVars["--layout-vv-height"],"340px",
+  "Focused software keyboard may use visual viewport height");
+assert.ok(rootWrites>afterOrientation,"Focused keyboard must reflow");
+doc.activeElement=null;
+handles["doc:focusout"]();
+flushFrames();
+assert.equal(styleVars["--layout-vv-height"],"640px",
+  "Closing keyboard restores stable page height");
+
 
 // Five-tab navigation V1: prevent route-triggered outer bar geometry writes.
 const visitorNavCSS=fs.readFileSync(path.join(__dirname,"../assets/bottom-nav-global-v1075.css"),"utf8");
