@@ -13,6 +13,9 @@ const moduleJs=read("assets/dar-home-recent-posts-v1.js");
 const moduleCss=read("assets/dar-home-recent-posts-v1.css");
 const builder=read("scripts/build-desktop-posts-index.js");
 const router=read("cloudflare/site-router.js");
+const archiveJs=read("assets/dar-recent-archive-v1.js");
+const archiveHtml=read("neueste-beitraege/index.html");
+
 const languages=["de","ar","en","tr","ku","ckb","bs","fr","es"];
 assert.deepEqual(languages,["de","ar","en","tr","ku","ckb","bs","fr","es"]);
 const first=moduleJs.indexOf("var labels={");
@@ -36,17 +39,26 @@ assert(moduleJs.includes('var registry=w.DARAdultComponentI18nV1'),"Latest-posts
 assert(moduleJs.includes('var layer=e("dialog","dar-recent-notice-overlay")')&&moduleJs.includes("layer.showModal()"),"Popup must use the native top-layer dialog");
 assert(moduleJs.includes("function bindNoticeAction(el,fn)")&&moduleJs.includes('el.addEventListener("pointerup"')&&moduleJs.includes('el.addEventListener("click"'),"Per-control iOS touch/click handlers missing");
 assert(moduleJs.includes('bindNoticeAction(a,function(){dismissNotice(false);openPostById(p.id)})'),"Popup must dismiss before opening post");
-assert(moduleJs.includes('bindNoticeAction(all,function(){dismissNotice(false);state.expanded=true;'),"View-all popup action missing");
+assert(moduleJs.includes('bindNoticeAction(all,function(){dismissNotice(false);openArchive()})'),"View-all popup must open separate archive, not expand the home");
 assert(moduleJs.includes('bindNoticeAction(skip,function(){dismissNotice(true)})'),"Skip new-post batch missing");
 assert(moduleJs.includes("child.inert=true")&&moduleJs.includes('root.style.setProperty("overflow","hidden","important")')&&moduleJs.includes('d.addEventListener("touchmove",noticeTouchGuard,{capture:true,passive:false})'),"WKWebView scroll/focus not locked");
 assert(moduleJs.includes("unlockNoticeBackground()")&&moduleJs.includes("item.node.inert=item.inert")&&moduleJs.includes("restore(d.documentElement,lock.html)"),"Background not restored after close");
-assert(moduleJs.includes('state.expanded?t(9):t(8)'),"View-all / close labels reversed");
+assert(moduleJs.includes('function archiveUrl(){return "/neueste-beitraege/"}'),"Dedicated article archive navigation missing");
 assert(moduleJs.includes('t(7)+" ›"'),"Read post label must use correct translation");
 assert(moduleJs.includes('function fetchTitleManifests(posts)'),"Localized titles not supported");
-assert(moduleJs.includes('dar-recent-manual-open')&&moduleJs.includes('openNewPostsNotice(true)'),"Visitors must be able to manually reopen the notice after dismiss/skip");
+assert(moduleJs.includes('dar-recent-compact-link')&&moduleJs.includes('anchor:q||native.querySelector("#dhpLibrary")'),"Home article entry must be compact, anchored directly after Quran");
 assert(builder.includes('localeManifest:/^\\/assets\\/'),"Canonical per-post locale manifest missing from generated index");
 assert(moduleCss.includes("var(--notice-paper")&&moduleCss.includes("dialog#darRecentNoticeV1::backdrop")&&moduleJs.includes("applyNoticeTheme(layer)"),"Modern native modal appearance palette missing");
 assert(router.indexOf('id="darAdultComponentI18nV1"')<router.indexOf('id="darHomeRecentPostsV1Js"'),"Shared locale registry must load before latest-posts component");
+assert(archiveHtml.includes('id="darRecentArchiveApp"')&&archiveHtml.includes('dar-recent-archive-v1.js'),"Independent archive HTML missing");
+assert(archiveJs.includes('[3,4,5].forEach')&&archiveJs.includes('function postLink(p)'),"Archive must offer 3/4/5 days and each canonical article");
+assert(archiveJs.includes('reg.register("recent-archive",words)'),"Archive must use shared nine-language UI registry");
+const archiveStart=archiveJs.indexOf("var words={"),archiveEnd=archiveJs.indexOf("\\n};\\n",archiveStart);
+assert(archiveStart>=0&&archiveEnd>archiveStart,"Archive nine-language dictionary missing");
+const archiveWords=vm.runInNewContext("("+archiveJs.slice(archiveStart+"var words=".length,archiveEnd+2)+")");
+assert.deepEqual(Object.keys(archiveWords),languages,"Archive missing one of nine languages");
+for(const lang of languages){for(const key of Object.keys(archiveWords.de))assert(typeof archiveWords[lang][key]==="string"&&archiveWords[lang][key].trim(),lang+" missing archive UI key "+key)}
+
 
 
 /* Executed, not only string-matched: reproduce the WKWebView interaction
