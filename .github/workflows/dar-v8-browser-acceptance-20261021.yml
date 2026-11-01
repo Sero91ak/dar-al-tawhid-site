@@ -50,6 +50,8 @@ jobs:
           }
           console.log('OK: '+scripts.length+' browser scripts, router and all V8 DOM/icon contracts');
           NODE
+      - name: Generate canonical adult post indices for browser acceptance
+        run: node scripts/build-desktop-posts-index.js
       - name: Start local site
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-v8-browser.log 2>&1 &
@@ -209,6 +211,8 @@ jobs:
           finally:
             driver.quit()
           PY
+      - name: Check desktop premium posts on phone, fold, tablet and desktop
+        run: python3 scripts/check-desktop-premium-browser.py
       - name: Save screenshots
         if: always()
         uses: actions/upload-artifact@v4
