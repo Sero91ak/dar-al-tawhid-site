@@ -25,8 +25,12 @@ assert.match(js,/make\("nav","dar-test-duo-workspace-nav"\)/);
 assert.match(js,/darAdultPreferredLocaleV1/);
 assert.match(js,/is-feed-fullscreen/);
 assert.match(js,/is-ilm-chat-route/);
-assert.doesNotMatch(js,/(?:createElement\(["\x27]iframe|location\.replace|innerHTML\s*=)/i,
-  "Do not load a second app or replace SPA content");
+assert.doesNotMatch(js,/(?:location\.replace|innerHTML\s*=)/i,
+  "Do not replace SPA content destructively");
+assert.match(js,/duoPane/);
+assert.match(js,/dar-test-duo-reader-route-v5/);
+assert.match(js,/ensureReader/);
+assert.match(css,/dar-duo-reader-embedded/);
 assert.match(css,/\.dar-test-duo-active/);
 assert.match(css,/#darTestDuoWorkspaceNav/);
 assert.match(css,/position:fixed!important/);
@@ -35,7 +39,7 @@ assert.match(css,/body[^\n]*#appView/);
 assert.doesNotMatch(css,/#bottomNav\.bottom-nav\s*\{/,
   "Do not replace or reposition existing five-tab glass nav");
 assert.match(worker,/DAR_TEST_DUO_WORKSPACE_V2_20261101/);
-assert.match(worker,/20261101-true-half-half-v4/);
+assert.match(worker,/20261101-smart-reader-v5/);
 assert.match(worker,/finalizeDarTestHomeV1193/);
 assert.match(html,/id="bottomNav"/);
 assert.match(html,/darTestDuoResponsiveCSSV1/);
@@ -74,12 +78,13 @@ for(const [w,h,expected] of cases){
   const c=api.capacity(w,h);
   assert.equal(c.dual,expected,w+"x"+h+" incorrect");
   if(c.dual){
-    assert.equal(c.rail,w/2,w+"x"+h+" selection not exactly half");
-    assert.equal(c.reader,w/2,w+"x"+h+" reader not exactly half");
-    assert.ok(c.reader>=320,w+"x"+h+" reader too narrow");
+    assert.ok(c.rail>=210&&c.rail<=300,w+"x"+h+" selector outside compact range");
+    assert.ok(c.reader>c.rail,w+"x"+h+" reader not prioritised");
+    assert.equal(c.reader+c.rail,w,w+"x"+h+" layout uses incorrect viewport");
+    assert.ok(c.reader>=440,w+"x"+h+" reader too narrow");
   }
 }
 for(const locale of ["de","ar","en","tr","ku","ckb","bs","fr","es"]){
   assert.match(js,new RegExp("^\\s*"+locale+":\\s*\\{","m"),"missing "+locale);
 }
-console.log("PASS: DĀR Test-only adaptive dual workspace; viewport tests, locale coverage, original navigation preserved.");
+console.log("PASS: DĀR Test adaptive compact selection and independently responsive same-origin reader; viewport, locale, test isolation.");
