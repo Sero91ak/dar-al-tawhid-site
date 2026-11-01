@@ -64,14 +64,26 @@ assert.equal(Object.keys(changed).length,65);
 assert.equal(questionCount,520);
 assert.deepEqual(totals,{"4-5":130,"6-8":195,"9-10":195});
 assert.equal(newAgeText,33);
-assert.equal(modified,274);
+assert.equal(modified,295);
 assert.equal(duplicates,0,"Repeated question within same lesson and age");
+for(const [id,lesson] of Object.entries(changed)){
+ for(const q of lesson.questions["4-5"]){
+  const corpus=[q.prompt,...(q.options||[])].join(" ");
+  assert.ok(!/Ich (darf|muss) andere absichtlich verletzen|Ein Spielzeugauto|Ein Getränk/.test(corpus),"Unsuitable preschool distractor "+id);
+ }
+ for(const age of ages)for(const q of lesson.questions[age]){
+  assert.ok(!q.sample?.includes(".."),"Doubled punctuation in sample "+id+" "+age);
+ }
+}
+assert.equal(changed["aqidah-iman-die-engel"].questions["6-8"][1].type,"text");
+assert.ok(changed["aqidah-iman-die-engel"].questions["6-8"][1].prompt.includes("obwohl wir sie nicht sehen"));
+
 const html=fs.readFileSync(path.join(academy,"index.html"),"utf8");
 for(const v of files)assert.ok(html.includes("/kids/akademie/curriculum-"+v+".js"),"Loader missing "+v);
 assert.ok(html.includes("const exercises="),"Original separate Ṣidq classroom entry missing");
 assert.ok(!src[7].includes("ElevenLabs")&&!src[7].includes("generateAudio("),"Audio generation not permitted");
 console.log("PASS · 65 existing curriculum lessons + independent Ṣidq = 66");
-console.log("PASS · 520 curriculum questions + 8 Ṣidq = 528; 274 changed question slots; 33 new age-text sets");
+console.log("PASS · 520 curriculum questions + 8 Ṣidq = 528; 295 changed question slots; 33 new age-text sets");
 console.log("PASS · all original IDs, ordering, Qurʾān, Hadith, lesson sources and audio-approval values invariant");
 console.log("PASS · no new app loader, layout, storage model, API, TTS or navigation changes");
 console.log("SOURCE REVIEW STILL REQUIRED: this structural test does not authenticate Qurʾān/Hadith text.");
