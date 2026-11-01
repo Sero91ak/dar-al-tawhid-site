@@ -179,6 +179,11 @@ jobs:
                   playerRect:p?{width:p.getBoundingClientRect().width,height:p.getBoundingClientRect().height}:null,
                   buttonExpanded:b&&b.getAttribute('aria-expanded'),buttonText:b&&b.textContent,audit:window.__darPlayerClickAudit,eventAudit:window.__darPlayerEventAudit,apiAvailable:!!window.DARV8Portal?.togglePlayer,
                   elementFromPoint:b&&document.elementFromPoint(b.getBoundingClientRect().x+5,b.getBoundingClientRect().y+5)?.className};""")
+                diag["apiDirect"]=driver.execute_script("""
+                  let thrown=null;
+                  try{window.DARV8Portal.togglePlayer(true)}catch(error){thrown=String(error)}
+                  return {thrown,body:document.body.className,expanded:document.getElementById('darV8PlayerFullscreen')?.getAttribute('aria-expanded')};
+                """)
                 raise RuntimeError('Full Quran player did not open: '+str(diag))
               geometry=driver.execute_script("""const p=document.querySelector('.v8-real-player'), b=document.getElementById('darV8PlayerFullscreen'),
                 h=p.querySelector('.v8-player-label'), controls=p.querySelector('.qa26-controls'),
