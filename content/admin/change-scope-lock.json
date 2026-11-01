@@ -158,7 +158,7 @@
       "id": "adult-compact-global-home-archive-3-5-days-20261101",
       "at": "2026-11-01T07:04:00+01:00",
       "approvedBy": "user-explicit-20261101-0704-three-screenshots-home-fixed-salam-to-quran-compact-global-3-to-5-day-page",
-      "reason": "User explicitly requests tiny article entry AFTER permanently fixed Salam/Ibn Sirin/Qibla/Library/Quran home sequence, separate full article page of 3/4/5 days, global across same visitor app web/PWA/iOS, all 9 UI languages. No Kids, no native tabbar, no OneSignal notification.",
+      "reason": "User explicitly requests tiny article entry AFTER permanently fixed Salam/Ibn Sirin/Qibla/Library/Quran home sequence, separate full article page of 3/4/5 days, global across same visitor app web/PWA/iOS, all 9 UI languages. No Kids, no native tabbar, no OneSignal notification. Root-cause daily question placement corrected after compact Home article row instead of after Salām, preserving existing question functionality.",
       "paths": [
         "assets/dar-home-recent-posts-v1.js",
         "assets/dar-home-recent-posts-v1.css",
@@ -171,7 +171,8 @@
         "AGENTS.md",
         "content/admin/change-scope-lock.json",
         "pwa/neueste-beitraege/index.html",
-        ".github/workflows/visitor-recent-archive-browser.yml"
+        ".github/workflows/visitor-recent-archive-browser.yml",
+        "assets/dar-visitor-daily-hub-v1.js"
       ],
       "expiresAt": "2026-11-09T23:59:00.000Z"
     },
