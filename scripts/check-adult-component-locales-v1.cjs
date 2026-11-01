@@ -13,6 +13,7 @@ const moduleJs=read("assets/dar-home-recent-posts-v1.js");
 const moduleCss=read("assets/dar-home-recent-posts-v1.css");
 const builder=read("scripts/build-desktop-posts-index.js");
 const router=read("cloudflare/site-router.js");
+const dailyHub=read("assets/dar-visitor-daily-hub-v1.js");
 const archiveJs=read("assets/dar-recent-archive-v1.js");
 const archiveHtml=read("neueste-beitraege/index.html");
 const pwaArchiveHtml=read("pwa/neueste-beitraege/index.html");
@@ -47,6 +48,14 @@ assert(moduleJs.includes("unlockNoticeBackground()")&&moduleJs.includes("item.no
 assert(moduleJs.includes('function archiveUrl(){return /^\\/pwa')&&moduleJs.includes('"/pwa/neueste-beitraege/"')&&moduleJs.includes('"/neueste-beitraege/"'),"Dedicated archive must preserve installed-PWA scope");
 assert(moduleJs.includes('t(7)+" ›"'),"Read post label must use correct translation");
 assert(moduleJs.includes('function fetchTitleManifests(posts)'),"Localized titles not supported");
+assert(moduleJs.includes("var NOTICE_READ=\"darAdultLatestPostsSeenIdsV2\""),"Persistent per-app read-state missing");
+assert(moduleJs.includes("function initializeSeen(posts)")&&moduleJs.includes("function unreadPosts()")&&moduleJs.includes("function acknowledgeCurrentPosts()"),"New-post-only acknowledgement logic missing");
+assert(moduleJs.includes("acknowledgeCurrentPosts();")&&moduleJs.includes("w.localStorage.setItem(NOTICE_READ"),"Notification interactions must persist read status");
+assert(moduleJs.includes("if(!force&&!unreadPosts().length)return false"),"Same contribution must never pop up again after app restart");
+assert(moduleJs.includes("if(unreadPosts().length)state.modalShown=false"),"App foreground must notice genuinely new content");
+assert(moduleJs.includes("function enforceCanonicalHomeOrder(native,mount)")&&moduleJs.includes('".dhp-welcome",".dhp-isnad",".dhp-quickbar",".dhp-search-box",".dhp-quran-section"'),"Fixed Salām→Ibn Sīrīn→Qibla/Library→Search→Qurʾān sequence not enforced");
+assert(dailyHub.includes('root.querySelector("#darRecentPublicationsV1")')&&dailyHub.includes('root.querySelector(".dhp-quran-section")')&&!dailyHub.includes('(mount||welcome).insertAdjacentElement("afterend",card)'),"Daily question must not interrupt the fixed Salām-to-Qurʾān home sequence");
+
 assert(moduleJs.includes('dar-recent-compact-link')&&moduleJs.includes('anchor:q||native.querySelector("#dhpLibrary")'),"Home article entry must be compact, anchored directly after Quran");
 assert(builder.includes('localeManifest:/^\\/assets\\/'),"Canonical per-post locale manifest missing from generated index");
 assert(moduleCss.includes("var(--notice-paper")&&moduleCss.includes("dialog#darRecentNoticeV1::backdrop")&&moduleJs.includes("applyNoticeTheme(layer)"),"Modern native modal appearance palette missing");

@@ -37,7 +37,7 @@ html,body{margin:0;min-height:100%;font-family:system-ui;background:#0d1b16;colo
 <script defer src="/assets/dar-home-recent-posts-v1.js"></script>
 </head><body class="is-home-route">
 <main id="darHomeHtmlParityV1"><section class="dhp-welcome">Test Home</section>
-<section class="dhp-isnad">Original quotation</section><div class="dhp-quickbar">Qibla &amp; Library</div><section class="dhp-quran-section">Qurʾān</section><div id="dhpLibrary">Library</div></main>
+<aside class="daily-question-fixture">Daily question injected before Ibn Sīrīn</aside><section class="dhp-isnad">Original quotation</section><div class="dhp-quickbar">Qibla &amp; Library</div><aside class="other-widget-fixture">Separate optional widget</aside><section class="dhp-search-box">Search</section><section class="dhp-quran-section">Qurʾān</section><div id="dhpLibrary">Library</div></main>
 <div id="appView"></div>
 <script>
 window.__openedPost=null;
@@ -88,6 +88,10 @@ def dialog(driver):
 
 def fresh(driver, url):
     driver.get(url)
+    # New-post fixture: seed the persistent baseline to simulate a post
+    # published after this visitor first opened the app.
+    driver.execute_script("localStorage.setItem('darAdultLatestPostsSeenIdsV2',JSON.stringify({version:2,ids:[],updatedAt:Date.now()}))")
+    driver.refresh()
     return expect(driver, lambda d: d.execute_script(
         "var x=document.getElementById('darRecentNoticeV1');return !!(x&&x.open&&x.matches(':modal'))"),
         "native HTML dialog did not open")
@@ -126,9 +130,51 @@ def test():
         assert driver.execute_script("return document.documentElement.style.getPropertyValue('overflow')") != "hidden"
         assert not driver.execute_script("return document.querySelector('main').inert")
         print("PASS: native modal, theme, touch lock, direct post navigation, cleanup")
+        # Acknowledging the alert must survive a complete browser/WebView reload.
+        driver.get(base)
+        time.sleep(2)
+        assert not driver.find_elements(By.ID, "darRecentNoticeV1"), (
+            "Previously opened post notification reappeared on a new app launch"
+        )
+        persisted = driver.execute_script("""
+          return JSON.parse(localStorage.getItem('darAdultLatestPostsSeenIdsV2')||'{}')
+        """)
+        assert persisted["version"] == 2 and POST in persisted["ids"]
+        print("PASS: once acknowledged, the same post never reopens after restart")
+
+        # A genuinely new publication triggers once, even after the first was seen.
+        new_id = "newly-published-after-acknowledged-batch"
+        POSTS.insert(0, {"id": new_id, "date": datetime.now(timezone.utc).isoformat(),
+                         "title": "A GENUINELY NEW ARTICLE", "category": "Wissen"})
+        driver.get(base)
+        expect(driver, lambda d: d.execute_script(
+            "var x=document.getElementById('darRecentNoticeV1');return !!(x&&x.open&&x.matches(':modal'))"),
+            "Newly published post did not trigger a fresh notification")
+        driver.find_element(By.CSS_SELECTOR, ".dar-recent-notice-x").click()
+        driver.get(base)
+        time.sleep(2)
+        assert not driver.find_elements(By.ID, "darRecentNoticeV1"), (
+            "Second notification reappeared after acknowledgement"
+        )
+        POSTS.pop(0)
+        print("PASS: genuinely new online post notifies once, then stays acknowledged")
+
 
         driver.execute_script("sessionStorage.clear();localStorage.clear()")
         fresh(driver, base)
+
+        # Check actual DOM sequence, including an unrelated daily quiz inserted
+        # between two fixed home elements by another application widget.
+        fixed = driver.execute_script("""
+          var nodes=['.dhp-welcome','.dhp-isnad','.dhp-quickbar',
+            '.dhp-search-box','.dhp-quran-section','#darRecentPublicationsV1']
+            .map(s=>document.querySelector(s));
+          return nodes.every(n=>!!n) &&
+            nodes.every((n,i)=>i===0 || nodes[i-1].nextElementSibling===n) &&
+            nodes.every((n,i)=>i===0 || nodes[i-1].getBoundingClientRect().top<=n.getBoundingClientRect().top);
+        """)
+        assert fixed, "Salām → Ibn Sīrīn → Qibla/Bibliothek → Search → Qurʾān → compact news was interrupted"
+
         driver.find_element(By.CSS_SELECTOR, ".dar-recent-notice-all").click()
         expect(driver, lambda d: not d.find_elements(By.ID, "darRecentNoticeV1"), "View all did not close")
         expect(driver, lambda d: "/neueste-beitraege/" in d.current_url,
