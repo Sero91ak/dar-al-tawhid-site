@@ -110,3 +110,8 @@ html.dar-notice-is-open,html.dar-notice-is-open body{overscroll-behavior:none!im
  dialog#darRecentNoticeV1 .dar-recent-notice-actions button{font-size:.8rem!important;padding:10px 7px!important}
 }
 @media(prefers-reduced-motion:reduce){dialog#darRecentNoticeV1 *{transition:none!important}}
+
+/* Always-visible manual route back to the new-post dashboard. */
+#darRecentPublicationsV1 .dar-recent-manual-open{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:43px;max-width:100%;margin:0 0 12px;padding:9px 15px;border-radius:999px;border:1px solid color-mix(in srgb,var(--rp-gold) 68%,transparent);background:color-mix(in srgb,var(--rp-gold) 13%,var(--rp-paper));color:var(--rp-ink);font:730 .82rem/1.25 -apple-system,BlinkMacSystemFont,system-ui,sans-serif;cursor:pointer;touch-action:manipulation}
+#darRecentPublicationsV1 .dar-recent-manual-open::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--rp-gold);box-shadow:0 0 0 5px color-mix(in srgb,var(--rp-gold) 14%,transparent)}
+#darRecentPublicationsV1 .dar-recent-manual-open:is(:hover,:focus-visible){border-color:var(--rp-gold);background:color-mix(in srgb,var(--rp-gold) 21%,var(--rp-paper));outline-offset:3px}
