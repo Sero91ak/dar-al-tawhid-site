@@ -1,6 +1,6 @@
 # TAWḤĪD KIDS · Lernplan und Unterrichtsinhalte – Inhaltsauftrag ohne Layout-/Architekturänderungen
 
-**Stand: 31.10.2026 · Verbindliche Nutzerkorrektur · Draft-PR #1588 · NICHT LIVE**
+**Stand: 01.11.2026 · Redaktionsstand V30 · Draft-PR #1588 · NICHT LIVE**
 
 ## 1. Nicht verhandelbarer Schutz der bestehenden Kinder-App
 
@@ -40,17 +40,17 @@ Jede fertige Unterrichtseinheit führt im **unveränderten** fünfstufigen Syste
 
 ## 5. Konkreter Arbeitsbestand
 
-**Ausgangsbestand:** 66 Lektionen, 520 Fragen. Die 11 Grundlagenlektionen aus `curriculum-v1.js` sind in Quellenreview #1587 dokumentiert, aber nicht endgültig islamwissenschaftlich freigegeben (Issue #1535).
+**Ausgangsbestand:** 66 Lektionen und 528 Fragen (65 Curriculum-Lektionen mit 520 Fragen; außerdem 1 fest integrierte Ṣidq-Lektion mit acht Fragen). Die 11 Grundlagenlektionen aus `curriculum-v1.js` sind in Quellenreview #1587 dokumentiert, aber nicht endgültig islamwissenschaftlich freigegeben (Issue #1535).
 
 **Aktueller Content-Pilot:** `kids/akademie/editorial-pilots/sidq-deep-learning-v2.json`. Diese Datei enthält drei Altersfassungen der Musterlektion Ṣidq mit je fünf pädagogischen Phasen sowie Prüfantworten und Quellenhinweisen. Es ist ein **redaktioneller Entwurf**, noch kein Ersatz der live geladenen Lektion und kein neues Layout.
 
-**Fortsetzung nur mit Inhaltsdateien:** Fragenqualität der 11 Grundlagen verbessern, fachlich fehlerfreie drei Altersvarianten formulieren, vorhandene Curriculum-Felder nutzen, unveränderte Fragezahl/Schlüssel gewährleisten; danach schrittweise die übrigen Lektionen. Bis zur formalen Abnahme in **eigenen redaktionellen Pilotdateien**, nicht unkontrolliert in produktive Lehrdaten schreiben.
+**Umsetzung V30 auf Draft-Branch:** 65 Curriculumeinträge und 520 Frageslots wurden auf Vollständigkeit geprüft. 274 Slots (einschließlich der 33 zuvor vorgeschlagenen Fragen) wurden redaktionell in den bereits geladenen `curriculum-v29.js`-Inhaltsfeldern aktualisiert; 246 konkret passende Slots blieben unverändert. Für 33 ältere Einträge wurden die bestehenden `ageText`-Felder ergänzt, sodass 65 Curriculum-Lektionen über Altersfassungen 4–5 / 6–8 / 9–10 verfügen. Ṣidq in der unveränderten `index.html` enthält weitere acht Fragen. Die Reproduktion der Prüfungen ist unter `kids/tools/test-academy-content-v30.cjs` angelegt, die 66 Quellenreferenzen stehen im `CONTENT_V30_PRE_AUDIO_AUDIT.md`. **Nicht veröffentlicht; keine Audios.** Vor der Veröffentlichung bleibt die individuelle fachliche Freigabe obligatorisch.
 
 ## 6. Veröffentlichungs-Gates
 
-1. [ ] Individuelle fachliche Überprüfung aller betroffenen Qurʾān-, Ḥadīṯ-, ʿAqīdah- und Fiqh-Aussagen.
-2. [ ] Redaktionelle Frageprüfung: eindeutig, altersgerecht, unterrichtsbezogen, plausible Fehlantworten.
-3. [ ] Kompatibilität mit den **bestehenden** Datenfeldern, IDs und der Fortschrittsverwaltung geprüft.
+1. [ ] Individuelle externe fachliche Überprüfung aller Qurʾān-, Ḥadīṯ-, ʿAqīdah- und Fiqh-Aussagen (Quelleninventar erstellt; Stichproben, keine Vollfreigabe).
+2. [x] Redaktioneller Fragen-Durchlauf aller 520 Slots: 274 überarbeitet; [ ] abschließender manueller pädagogischer Review.
+3. [x] Statische Kompatibilitätsprüfung der **bestehenden** Datenfelder, IDs und Anzahl erfolgreich; [ ] Realgerät-/Fortschrittsintegration noch ausstehend.
 4. [ ] Nur die ausdrücklich genehmigten Lerninhalte werden in DAR TEST geprüft; UI/Architektur-Diff **muss null sein**.
 5. [ ] Für neue gesprochene Inhalte: geprüfte Aussprachebibliothek, manuelle Fuṣḥā-Hörfreigabe und gesonderte Audiofreigabe.
 6. [ ] Freigabe vor Besucher-Veröffentlichung; keine stillschweigende Übernahme in `main`.
