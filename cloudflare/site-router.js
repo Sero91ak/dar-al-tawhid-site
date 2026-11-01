@@ -360,11 +360,11 @@ function activateAdultCompactHero(html) {
   // DĀR_HOME_RECENT_POSTS_V1: lightweight 2–5-day publications timeline in
   // public visitor, iOS WKWebView and Android PWA. No Test/Kids/push routes.
   if (!html.includes('id="darHomeRecentPostsV1Css"')) {
-    const css = '<link rel="stylesheet" id="darHomeRecentPostsV1Css" href="/assets/dar-home-recent-posts-v1.css?v=20261101-9theme">';
+    const css = '<link rel="stylesheet" id="darHomeRecentPostsV1Css" href="/assets/dar-home-recent-posts-v1.css?v=20261101-dashboard-v3">';
     html = html.includes("</head>") ? html.replace("</head>", css + "</head>") : css + html;
   }
   if (!html.includes('id="darHomeRecentPostsV1Js"')) {
-    const js = '<script defer id="darHomeRecentPostsV1Js" src="/assets/dar-home-recent-posts-v1.js?v=20261101-9fix"></' + 'script>';
+    const js = '<script defer id="darHomeRecentPostsV1Js" src="/assets/dar-home-recent-posts-v1.js?v=20261101-dialog-v3"></' + 'script>';
     html = html.includes("</body>") ? html.replace("</body>", js + "</body>") : html + js;
   }
   return html;

@@ -82,7 +82,7 @@ function canAnnounce(){if(!isHome()||state.modalShown||state.modalOpen||d.hidden
  return true}
 function dismissNotice(skip){var layer=d.getElementById("darRecentNoticeV1");if(!layer)return;
  var sig=latestSignature(state.posts);try{w.sessionStorage.setItem(NOTICE_SESSION,sig);if(skip)w.localStorage.setItem(NOTICE_SKIPPED,sig)}catch(_){}
- layer.remove();unlockNoticeBackground();state.modalOpen=false;state.modalShown=true;d.removeEventListener("keydown",noticeKeydown,true);d.removeEventListener("focusin",noticeFocus,true);
+ try{if(layer.open&&typeof layer.close==="function")layer.close()}catch(_){}layer.remove();unlockNoticeBackground();state.modalOpen=false;state.modalShown=true;d.removeEventListener("keydown",noticeKeydown,true);d.removeEventListener("focusin",noticeFocus,true);
  if(state.lastFocus&&state.lastFocus.isConnected&&typeof state.lastFocus.focus==="function")state.lastFocus.focus({preventScroll:true});
  state.lastFocus=null}
 
@@ -103,20 +103,69 @@ function applyNoticeTheme(layer){
  layer.style.setProperty("--notice-accent",accent);
  layer.dataset.darAppearance=(root.getAttribute("data-theme-variant")||root.getAttribute("data-theme")||d.body.getAttribute("data-theme")||"system");
 }
+/* WKWebView: lock both scrollingElement and nested document scroll, with native
+   non-passive touch guard. Capturing existing styles including !important is
+   essential because some official app themes use body overflow !important. */
 function lockNoticeBackground(layer){
- var y=w.scrollY||d.documentElement.scrollTop||0,b=d.body,old={position:b.style.position,top:b.style.top,left:b.style.left,right:b.style.right,width:b.style.width,overflow:b.style.overflow};
- state.scrollLock={y:y,style:old};state.inertItems=[];
- Array.from(b.children).forEach(function(child){if(child===layer||child.tagName==="SCRIPT"||child.tagName==="STYLE")return;
- state.inertItems.push({node:child,inert:child.inert});child.inert=true});
- b.style.position="fixed";b.style.top="-"+y+"px";b.style.left="0";b.style.right="0";b.style.width="100%";b.style.overflow="hidden";
+ var b=d.body,root=d.documentElement,y=w.scrollY||d.scrollingElement&&d.scrollingElement.scrollTop||0;
+ var props=["position","top","left","right","width","overflow","overscroll-behavior"];
+ function take(el){var data={};props.forEach(function(k){data[k]=[el.style.getPropertyValue(k),el.style.getPropertyPriority(k)]});return data}
+ state.scrollLock={y:y,body:take(b),html:take(root)};
+ state.inertItems=[];
+ Array.from(b.children).forEach(function(child){
+  if(child===layer||child.tagName==="SCRIPT"||child.tagName==="STYLE")return;
+  state.inertItems.push({node:child,inert:child.inert});child.inert=true;
+ });
+ root.style.setProperty("overflow","hidden","important");
+ root.style.setProperty("overscroll-behavior","none","important");
+ b.style.setProperty("position","fixed","important");
+ b.style.setProperty("top","-"+y+"px","important");
+ b.style.setProperty("left","0","important");
+ b.style.setProperty("right","0","important");
+ b.style.setProperty("width","100%","important");
+ b.style.setProperty("overflow","hidden","important");
+ b.style.setProperty("overscroll-behavior","none","important");
  d.documentElement.classList.add("dar-notice-is-open");
+ d.addEventListener("touchstart",noticeTouchStart,{capture:true,passive:true});
+ d.addEventListener("touchmove",noticeTouchGuard,{capture:true,passive:false});
+ d.addEventListener("wheel",noticeWheelGuard,{capture:true,passive:false});
+}
+var noticeTouchY=null;
+function noticeTouchStart(ev){if(ev.touches&&ev.touches.length===1)noticeTouchY=ev.touches[0].clientY;else noticeTouchY=null}
+function cardCanScroll(ev,dy){
+ var target=ev.target&&ev.target.nodeType===1?ev.target:ev.target&&ev.target.parentElement;
+ var card=target&&target.closest&&target.closest("#darRecentNoticeV1 .dar-recent-notice-card");
+ if(!card||card.scrollHeight<=card.clientHeight+1)return false;
+ if(dy>0)return card.scrollTop>0.5;
+ if(dy<0)return card.scrollTop<card.scrollHeight-card.clientHeight-0.5;
+ return true;
+}
+function noticeTouchGuard(ev){
+ if(!d.getElementById("darRecentNoticeV1")||!ev.cancelable)return;
+ var next=ev.touches&&ev.touches[0]?ev.touches[0].clientY:null;
+ var dy=next!=null&&noticeTouchY!=null?next-noticeTouchY:0;noticeTouchY=next;
+ if(!cardCanScroll(ev,dy))ev.preventDefault();
+}
+function noticeWheelGuard(ev){
+ if(!d.getElementById("darRecentNoticeV1")||!ev.cancelable)return;
+ if(!cardCanScroll(ev,-ev.deltaY))ev.preventDefault();
 }
 function unlockNoticeBackground(){
+ d.removeEventListener("touchstart",noticeTouchStart,true);
+ d.removeEventListener("touchmove",noticeTouchGuard,true);
+ d.removeEventListener("wheel",noticeWheelGuard,true);
+ noticeTouchY=null;
  state.inertItems.forEach(function(item){if(item.node&&item.node.isConnected)item.node.inert=item.inert});state.inertItems=[];
- var lock=state.scrollLock;state.scrollLock=null;if(lock){
- var b=d.body;Object.keys(lock.style).forEach(function(k){b.style[k]=lock.style[k]});w.scrollTo(0,lock.y)}
+ var lock=state.scrollLock;state.scrollLock=null;
+ if(lock){
+  var props=["position","top","left","right","width","overflow","overscroll-behavior"];
+  function restore(el,data){props.forEach(function(k){var old=data[k];if(!old||!old[0])el.style.removeProperty(k);else el.style.setProperty(k,old[0],old[1])})}
+  restore(d.body,lock.body);restore(d.documentElement,lock.html);
+  w.scrollTo(0,lock.y);
+ }
  d.documentElement.classList.remove("dar-notice-is-open");
 }
+
 function noticeFocus(ev){var layer=d.getElementById("darRecentNoticeV1");if(layer&&!layer.contains(ev.target)){
  var close=layer.querySelector(".dar-recent-notice-x");if(close)close.focus({preventScroll:true})}}
 function openPostById(id){
@@ -126,6 +175,26 @@ function openPostById(id){
  // Official app post route, also used by the existing premium feed.
  w.location.hash="#post/"+encodeURIComponent(id);
 }
+
+/* Direct native click + iOS pointer-up fallback. The first event wins; a second
+   synthetic click after pointer-up cannot fire the action again. */
+function bindNoticeAction(el,fn){
+ var activated=0,started=null;
+ function invoke(ev){
+  var now=Date.now();if(now-activated<650){ev.preventDefault();return}
+  activated=now;ev.preventDefault();ev.stopPropagation();
+  try{fn()}catch(error){console.error("DAR new-post action",error)}
+ }
+ el.addEventListener("pointerdown",function(ev){started={x:ev.clientX,y:ev.clientY}},{passive:true});
+ el.addEventListener("pointerup",function(ev){
+  if(!started)return;
+  var dist=Math.hypot(ev.clientX-started.x,ev.clientY-started.y);started=null;
+  if(dist>11)return;invoke(ev)
+ });
+ el.addEventListener("click",invoke);
+ el.addEventListener("keydown",function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();invoke(ev)}});
+}
+
 function noticeClick(ev){
  var layer=d.getElementById("darRecentNoticeV1");if(!layer||!layer.contains(ev.target))return;
  var post=ev.target.closest&&ev.target.closest("[data-dar-post-id]"),
@@ -146,7 +215,7 @@ function noticeKeydown(ev){var layer=d.getElementById("darRecentNoticeV1");if(!l
  if(ev.shiftKey&&d.activeElement===first){ev.preventDefault();last.focus()}
  else if(!ev.shiftKey&&d.activeElement===last){ev.preventDefault();first.focus()}
  }}
-function noticeLink(p){var a=e("a","dar-recent-notice-article");a.href=openLink(p);a.dataset.darPostId=p.id;a.appendChild(e("span","dar-recent-notice-date",dateLabel(p)));
+function noticeLink(p){var a=e("a","dar-recent-notice-article");a.href=openLink(p);a.dataset.darPostId=p.id;a.setAttribute("aria-label",displayTitle(p)+" – "+t(7));bindNoticeAction(a,function(){dismissNotice(false);openPostById(p.id)});a.appendChild(e("span","dar-recent-notice-date",dateLabel(p)));
  a.appendChild(e("strong","",displayTitle(p)));if(untranslated(p))a.appendChild(e("small","dar-recent-untranslated",t(11)));a.appendChild(e("span","dar-recent-notice-arrow",t(7)+" ›"));
  return a}
 
@@ -172,21 +241,26 @@ function openNewPostsNotice(){if(!canAnnounce())return;
  var hits=recent(state.posts,5);if(!hits.length)return;
  var sig=latestSignature(state.posts);try{w.sessionStorage.setItem(NOTICE_SESSION,sig)}catch(_){}
  state.modalOpen=true;state.lastFocus=d.activeElement;
- var layer=e("div","dar-recent-notice-overlay");layer.id="darRecentNoticeV1";
- layer.setAttribute("role","presentation");
- var card=e("section","dar-recent-notice-card");card.setAttribute("role","dialog");card.setAttribute("aria-modal","true");card.setAttribute("aria-labelledby","darRecentNoticeHeadingV1");
- card.setAttribute("aria-describedby","darRecentNoticeDescV1");card.setAttribute("dir",["ar","ckb"].includes(locale())?"rtl":"ltr");
+ var layer=e("dialog","dar-recent-notice-overlay");layer.id="darRecentNoticeV1";
+ layer.setAttribute("role","dialog");layer.setAttribute("aria-modal","true");layer.setAttribute("aria-labelledby","darRecentNoticeHeadingV1");layer.setAttribute("aria-describedby","darRecentNoticeDescV1");
+ var card=e("section","dar-recent-notice-card");card.setAttribute("dir",["ar","ckb"].includes(locale())?"rtl":"ltr");
  var header=e("div","dar-recent-notice-header");
  var intro=e("div","dar-recent-notice-intro");intro.appendChild(e("span","dar-recent-notice-kicker",t(0)));var h=e("h2","",t(1));h.id="darRecentNoticeHeadingV1";intro.appendChild(h);header.appendChild(intro);
- var close=e("button","dar-recent-notice-x","×");close.type="button";close.dataset.darNoticeAction="close";close.setAttribute("aria-label",t(9));header.appendChild(close);card.appendChild(header);
+ var close=e("button","dar-recent-notice-x","×");close.type="button";close.dataset.darNoticeAction="close";close.setAttribute("aria-label",t(9));header.appendChild(close);card.appendChild(header);bindNoticeAction(close,function(){dismissNotice(false)});
  var desc=e("p","dar-recent-notice-subtitle",t(2));desc.id="darRecentNoticeDescV1";card.appendChild(desc);
+ var count=e("div","dar-recent-notice-count",hits.length+" · "+t(14));card.appendChild(count);
  var list=e("div","dar-recent-notice-list");hits.slice(0,4).forEach(function(p){list.appendChild(noticeLink(p))});card.appendChild(list);
  var actions=e("div","dar-recent-notice-actions");
- var all=e("button","dar-recent-notice-all",t(8));all.type="button";all.dataset.darNoticeAction="all";actions.appendChild(all);
- var skip=e("button","dar-recent-notice-skip",skipText());skip.type="button";skip.dataset.darNoticeAction="skip";actions.appendChild(skip);
+ var all=e("button","dar-recent-notice-all",t(8));all.type="button";all.dataset.darNoticeAction="all";actions.appendChild(all);bindNoticeAction(all,function(){dismissNotice(false);state.expanded=true;state.days=5;render();var target=d.getElementById("darRecentPublicationsV1");if(target)target.scrollIntoView({behavior:"smooth",block:"start"})});
+ var skip=e("button","dar-recent-notice-skip",skipText());skip.type="button";skip.dataset.darNoticeAction="skip";actions.appendChild(skip);bindNoticeAction(skip,function(){dismissNotice(true)});
  card.appendChild(actions);layer.appendChild(card);
- layer.addEventListener("click",noticeClick,true);
- d.body.appendChild(layer);lockNoticeBackground(layer);applyNoticeTheme(layer);d.addEventListener("keydown",noticeKeydown,true);d.addEventListener("focusin",noticeFocus,true);close.focus({preventScroll:true});
+ d.body.appendChild(layer);
+ // Native HTMLDialogElement is promoted into the browser top layer. Unlike a div
+ // overlay it cannot sit behind another app compositing/scroll/touch surface.
+ try{if(typeof layer.showModal==="function")layer.showModal();else layer.setAttribute("open","")}catch(_){layer.setAttribute("open","")}
+ lockNoticeBackground(layer);applyNoticeTheme(layer);
+ layer.addEventListener("cancel",function(ev){ev.preventDefault();dismissNotice(false)});
+ d.addEventListener("keydown",noticeKeydown,true);d.addEventListener("focusin",noticeFocus,true);close.focus({preventScroll:true});
 }
 
 var noticeScheduled=false;function scheduleNotice(){if(noticeScheduled||state.modalShown||state.modalOpen||!state.posts.length||!isHome())return;noticeScheduled=true;w.setTimeout(function(){noticeScheduled=false;openNewPostsNotice()},1100)}
