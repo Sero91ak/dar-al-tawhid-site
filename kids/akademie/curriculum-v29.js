@@ -643,7 +643,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Geduld“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich kann ruhig warten und freundlich bleiben.. Ich darf um Hilfe bitten und geduldig weiterüben.",
+     "sample": "Ich kann ruhig warten und freundlich bleiben. Ich darf um Hilfe bitten und geduldig weiterüben.",
      "hint": "Allah hilft den Geduldigen."
     },
     {
@@ -750,7 +750,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Vertrauen“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich gehe gut mit geliehenen Sachen um.. Ich frage, bevor ich etwas weitergebe.",
+     "sample": "Ich gehe gut mit geliehenen Sachen um. Ich frage, bevor ich etwas weitergebe.",
      "hint": "Eine anvertraute Sache soll ich sorgfältig behandeln."
     },
     {
@@ -857,7 +857,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Grüßen“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich kann mit einem guten Gruß beginnen und antworten.. Wenn ich gegrüßt werde, antworte ich freundlich.",
+     "sample": "Ich kann mit einem guten Gruß beginnen und antworten. Wenn ich gegrüßt werde, antworte ich freundlich.",
      "hint": "Ein schöner Gruß bringt Freundlichkeit in unsere Begegnung."
     },
     {
@@ -964,7 +964,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Freundlich sprechen“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich will ruhig und freundlich sprechen.. Ich muss niemanden verspotten oder beleidigen.",
+     "sample": "Ich will ruhig und freundlich sprechen. Ich muss niemanden verspotten oder beleidigen.",
      "hint": "Freundliche Worte sind Teil guten Benehmens."
     },
     {
@@ -1071,7 +1071,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Respekt“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich höre zu und gehe freundlich mit anderen um.. Ich bin hilfsbereit gegenüber meiner Familie.",
+     "sample": "Ich höre zu und gehe freundlich mit anderen um. Ich bin hilfsbereit gegenüber meiner Familie.",
      "hint": "Menschen verdienen einen freundlichen Umgang."
     },
     {
@@ -1178,7 +1178,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Reinheit“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich achte auf Reinheit und frage, wenn ich Hilfe brauche.. Nach dem Toilettengang reinigen wir uns.",
+     "sample": "Ich achte auf Reinheit und frage, wenn ich Hilfe brauche. Nach dem Toilettengang reinigen wir uns.",
      "hint": "Reinheit hat im Islam einen hohen Stellenwert."
     },
     {
@@ -1285,7 +1285,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Wuḍūʾ“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich möchte die Gebetswaschung richtig lernen.. Wir streichen über den Kopf und waschen die Füße.",
+     "sample": "Ich möchte die Gebetswaschung richtig lernen. Wir streichen über den Kopf und waschen die Füße.",
      "hint": "Für das Gebet lernen wir die rituelle Waschung."
     },
     {
@@ -1392,7 +1392,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Gebet“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich lerne das Gebet nach dem Vorbild des Propheten ﷺ.. Im Gebet wenden wir uns Allah zu.",
+     "sample": "Ich lerne das Gebet nach dem Vorbild des Propheten ﷺ. Im Gebet wenden wir uns Allah zu.",
      "hint": "Das Gebet erinnert uns an Allah."
     },
     {
@@ -1499,7 +1499,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Tawḥīd“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich bete Allah allein an.. Wir richten unser Duʿāʾ und unsere ʿIbādah an Allah.",
+     "sample": "Ich bete Allah allein an. Wir richten unser Duʿāʾ und unsere ʿIbādah an Allah.",
      "hint": "Allah ist Einer und hat keinen Teilhaber."
     },
     {
@@ -1606,7 +1606,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Īmān“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich lerne die Grundlagen des Glaubens aus Qurʾān und Sunnah.. Die Engel, Bücher und Gesandten gehören zum Glauben.",
+     "sample": "Ich lerne die Grundlagen des Glaubens aus Qurʾān und Sunnah. Die Engel, Bücher und Gesandten gehören zum Glauben.",
      "hint": "Wir lernen, woran Muslime glauben."
     },
     {
@@ -1713,7 +1713,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Ikhlāṣ“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich bemühe mich, Allah aufrichtig zu dienen.. Ich darf Gutes tun, auch wenn niemand zuschaut.",
+     "sample": "Ich bemühe mich, Allah aufrichtig zu dienen. Ich darf Gutes tun, auch wenn niemand zuschaut.",
      "hint": "Wir bemühen uns, Allah aufrichtig zu dienen."
     },
     {
@@ -1795,14 +1795,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Geduldig warten“?",
+     "prompt": "Ein Freund spielt noch. Was fragst du?",
      "options": [
-      "Ich kann warten, ohne andere anzuschreien.",
-      "Ich reiße es einem anderen Kind weg."
+      "Darf ich danach spielen?",
+      "Gib es mir sofort!"
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich kann warten, ohne andere anzuschreien.",
-     "explain": "Ich warte ruhig und frage freundlich. Ich übe Geduld, wenn etwas nicht sofort klappt."
+     "hint": "Geduldig warten heißt freundlich fragen.",
+     "explain": "Geduldig warten heißt freundlich fragen."
     }
    ],
    "6-8": [
@@ -1820,7 +1820,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Geduldig warten“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich kann warten, ohne andere anzuschreien.. Ich bleibe freundlich und versuche es erneut.",
+     "sample": "Ich kann warten, ohne andere anzuschreien. Ich bleibe freundlich und versuche es erneut.",
      "hint": "Denke daran: Ich übe Geduld, wenn etwas nicht sofort klappt."
     },
     {
@@ -1902,14 +1902,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Nicht aufgeben“?",
+     "prompt": "Dein Turm fällt um. Was hilft?",
      "options": [
-      "Ich kann bei einem Fehler erneut üben.",
-      "Ich werfe alles wütend weg."
+      "Ich versuche es noch einmal.",
+      "Ich höre für immer auf."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich kann bei einem Fehler erneut üben.",
-     "explain": "Ich bitte um Hilfe und probiere es erneut. Ich übe Geduld, wenn etwas nicht sofort klappt."
+     "hint": "Einen Fehler darf ich verbessern.",
+     "explain": "Einen Fehler darf ich verbessern."
     }
    ],
    "6-8": [
@@ -1927,7 +1927,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Nicht aufgeben“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich kann bei einem Fehler erneut üben.. Ich darf um Hilfe bitten.",
+     "sample": "Ich kann bei einem Fehler erneut üben. Ich darf um Hilfe bitten.",
      "hint": "Denke daran: Ich übe Geduld, wenn etwas nicht sofort klappt."
     },
     {
@@ -2009,14 +2009,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Geliehene Dinge“?",
+     "prompt": "Du hast einen Stift geliehen. Was machst du danach?",
      "options": [
-      "Ich gebe Geliehenes verlässlich zurück.",
-      "Ich behalte es heimlich."
+      "Ich gebe ihn zurück.",
+      "Ich lege ihn zu meinen Sachen."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich gebe Geliehenes verlässlich zurück.",
-     "explain": "Ich behandle es sorgfältig und gebe es zurück. Ich bin zuverlässig, wenn mir jemand etwas anvertraut."
+     "hint": "Geliehene Dinge gehören anderen.",
+     "explain": "Geliehene Dinge gehören anderen."
     }
    ],
    "6-8": [
@@ -2034,7 +2034,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Geliehene Dinge“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich gebe Geliehenes verlässlich zurück.. Ich achte darauf, dass sie heil bleibt.",
+     "sample": "Ich gebe Geliehenes verlässlich zurück. Ich achte darauf, dass sie heil bleibt.",
      "hint": "Denke daran: Ich bin zuverlässig, wenn mir jemand etwas anvertraut."
     },
     {
@@ -2116,14 +2116,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Mein Versprechen“?",
+     "prompt": "Du kannst deine Zusage nicht halten. Was machst du?",
      "options": [
-      "Ich bemühe mich, Zusagen einzuhalten.",
-      "Ich tue so, als hätte ich nie etwas gesagt."
+      "Ich sage ehrlich Bescheid.",
+      "Ich sage einfach nichts."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich bemühe mich, Zusagen einzuhalten.",
-     "explain": "Ich halte meine Zusage oder erkläre ehrlich ein Problem. Ich bin zuverlässig, wenn mir jemand etwas anvertraut."
+     "hint": "Versprechen soll man ernst nehmen.",
+     "explain": "Versprechen soll man ernst nehmen."
     }
    ],
    "6-8": [
@@ -2141,7 +2141,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Mein Versprechen“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich bemühe mich, Zusagen einzuhalten.. Wenn etwas nicht klappt, sage ich es ehrlich.",
+     "sample": "Ich bemühe mich, Zusagen einzuhalten. Wenn etwas nicht klappt, sage ich es ehrlich.",
      "hint": "Denke daran: Ich bin zuverlässig, wenn mir jemand etwas anvertraut."
     },
     {
@@ -2223,14 +2223,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Salām erwidern“?",
+     "prompt": "Ein Kind grüßt mit Salām. Was antwortest du?",
      "options": [
-      "Ich übe eine gute Antwort auf den Salām.",
-      "Ich mache mich über den Gruß lustig."
+      "Wa ʿalaykum as-Salām.",
+      "Ich bleibe absichtlich still."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich übe eine gute Antwort auf den Salām.",
-     "explain": "Ich antworte freundlich mit Salām. Wir üben den islamischen Friedensgruß und eine gute Antwort."
+     "hint": "Wir erwidern den Friedensgruß.",
+     "explain": "Wir erwidern den Friedensgruß."
     }
    ],
    "6-8": [
@@ -2248,7 +2248,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Salām erwidern“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich übe eine gute Antwort auf den Salām.. Der Friedensgruß verbindet uns.",
+     "sample": "Ich übe eine gute Antwort auf den Salām. Der Friedensgruß verbindet uns.",
      "hint": "Denke daran: Wir üben den islamischen Friedensgruß und eine gute Antwort."
     },
     {
@@ -2330,14 +2330,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Zuerst grüßen“?",
+     "prompt": "Du triffst einen muslimischen Freund. Was kannst du sagen?",
      "options": [
-      "Ich grüße Menschen höflich.",
-      "Ich beleidige sie zur Begrüßung."
+      "As-Salāmu ʿalaykum.",
+      "Ich gehe ohne Gruß vorbei."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich grüße Menschen höflich.",
-     "explain": "Ich begrüße sie freundlich. Wir üben den islamischen Friedensgruß und eine gute Antwort."
+     "hint": "Ein guter Gruß verbindet uns.",
+     "explain": "Ein guter Gruß verbindet uns."
     }
    ],
    "6-8": [
@@ -2355,7 +2355,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Zuerst grüßen“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich grüße Menschen höflich.. Ich spreche den Gruß deutlich.",
+     "sample": "Ich grüße Menschen höflich. Ich spreche den Gruß deutlich.",
      "hint": "Denke daran: Wir üben den islamischen Friedensgruß und eine gute Antwort."
     },
     {
@@ -2437,14 +2437,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Bei Streit sprechen“?",
+     "prompt": "Du möchtest anders spielen. Was sagst du?",
      "options": [
-      "Ich spreche ohne Beleidigungen.",
-      "Ich beschimpfe meinen Freund."
+      "Ich sage freundlich meine Meinung.",
+      "Ich rede nicht mehr mit dir!"
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich spreche ohne Beleidigungen.",
-     "explain": "Ich sage ruhig, was ich meine. Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind."
+     "hint": "Ich darf freundlich widersprechen.",
+     "explain": "Ich darf freundlich widersprechen."
     }
    ],
    "6-8": [
@@ -2462,7 +2462,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Bei Streit sprechen“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich spreche ohne Beleidigungen.. Ich muss niemanden beleidigen.",
+     "sample": "Ich spreche ohne Beleidigungen. Ich muss niemanden beleidigen.",
      "hint": "Denke daran: Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind."
     },
     {
@@ -2544,14 +2544,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Erst nachdenken“?",
+     "prompt": "Du bist verärgert. Was hilft vor dem Reden?",
      "options": [
-      "Ich lerne, unnötige verletzende Worte zu vermeiden.",
-      "Ich verletze jemanden absichtlich."
+      "Kurz überlegen.",
+      "Sofort schimpfen."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich lerne, unnötige verletzende Worte zu vermeiden.",
-     "explain": "Ich denke nach und sage etwas Freundliches. Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind."
+     "hint": "Gute Worte beginnen mit Nachdenken.",
+     "explain": "Gute Worte beginnen mit Nachdenken."
     }
    ],
    "6-8": [
@@ -2569,7 +2569,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Erst nachdenken“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich lerne, unnötige verletzende Worte zu vermeiden.. Ich sage etwas Gutes, wenn ich kann.",
+     "sample": "Ich lerne, unnötige verletzende Worte zu vermeiden. Ich sage etwas Gutes, wenn ich kann.",
      "hint": "Denke daran: Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind."
     },
     {
@@ -2651,14 +2651,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Eltern zuhören“?",
+     "prompt": "Du verstehst eine Bitte nicht. Was tust du?",
      "options": [
-      "Ich antworte respektvoll, auch wenn ich müde bin.",
-      "Ich schreie ihn absichtlich an."
+      "Ich frage freundlich nach.",
+      "Ich tue so, als hätte ich zugehört."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich antworte respektvoll, auch wenn ich müde bin.",
-     "explain": "Ich antworte freundlich und höre zu. Wir üben Respekt für Eltern, Familie und Mitmenschen."
+     "hint": "Nachfragen kann respektvoll sein.",
+     "explain": "Nachfragen kann respektvoll sein."
     }
    ],
    "6-8": [
@@ -2676,7 +2676,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Eltern zuhören“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich antworte respektvoll, auch wenn ich müde bin.. Ich spreche freundlich und ehrlich.",
+     "sample": "Ich antworte respektvoll, auch wenn ich müde bin. Ich spreche freundlich und ehrlich.",
      "hint": "Denke daran: Wir üben Respekt für Eltern, Familie und Mitmenschen."
     },
     {
@@ -2758,14 +2758,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Hilfsbereit sein“?",
+     "prompt": "Du siehst, dass jemand Hilfe braucht. Was fragst du?",
      "options": [
-      "Ich bemerke, wenn jemand Unterstützung braucht.",
-      "Ich lache sie aus."
+      "Kann ich helfen?",
+      "Du schaffst das sowieso nicht!"
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich bemerke, wenn jemand Unterstützung braucht.",
-     "explain": "Ich frage freundlich, ob ich helfen kann. Wir üben Respekt für Eltern, Familie und Mitmenschen."
+     "hint": "Freundlich helfen beginnt mit Nachfragen.",
+     "explain": "Freundlich helfen beginnt mit Nachfragen."
     }
    ],
    "6-8": [
@@ -2783,7 +2783,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Hilfsbereit sein“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich bemerke, wenn jemand Unterstützung braucht.. Freundliche Worte sind dabei wichtig.",
+     "sample": "Ich bemerke, wenn jemand Unterstützung braucht. Freundliche Worte sind dabei wichtig.",
      "hint": "Denke daran: Wir üben Respekt für Eltern, Familie und Mitmenschen."
     },
     {
@@ -2865,14 +2865,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Saubere Kleidung“?",
+     "prompt": "Dein Ärmel ist schmutzig. Was kannst du tun?",
      "options": [
-      "Ich lerne, warum saubere Kleidung wichtig ist.",
-      "Ich verteile den Schmutz absichtlich."
+      "Ich bitte beim Reinigen um Hilfe.",
+      "Ich verstecke den Ärmel."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich lerne, warum saubere Kleidung wichtig ist.",
-     "explain": "Ich sage es und reinige ihn, wenn es möglich ist. Wir lernen, uns selbst, unsere Kleidung und unsere Umgebung sauber zu halten."
+     "hint": "Saubere Kleidung ist gut.",
+     "explain": "Saubere Kleidung ist gut."
     }
    ],
    "6-8": [
@@ -2890,7 +2890,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Saubere Kleidung“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich lerne, warum saubere Kleidung wichtig ist.. Ich bitte bei Bedarf um Hilfe.",
+     "sample": "Ich lerne, warum saubere Kleidung wichtig ist. Ich bitte bei Bedarf um Hilfe.",
      "hint": "Denke daran: Wir lernen, uns selbst, unsere Kleidung und unsere Umgebung sauber zu halten."
     },
     {
@@ -2972,14 +2972,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Sauberer Lernplatz“?",
+     "prompt": "Du hast fertig gebastelt. Was machst du?",
      "options": [
-      "Ich übe sorgsamen Umgang mit meiner Umgebung.",
-      "Ich werfe noch mehr auf den Boden."
+      "Ich räume meinen Platz auf.",
+      "Ich lasse alles liegen."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich übe sorgsamen Umgang mit meiner Umgebung.",
-     "explain": "Ich helfe beim Aufräumen. Wir lernen, uns selbst, unsere Kleidung und unsere Umgebung sauber zu halten."
+     "hint": "Ich sorge mit für meinen Platz.",
+     "explain": "Ich sorge mit für meinen Platz."
     }
    ],
    "6-8": [
@@ -2997,7 +2997,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Sauberer Lernplatz“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich übe sorgsamen Umgang mit meiner Umgebung.. Ich achte auf Sauberkeit.",
+     "sample": "Ich übe sorgsamen Umgang mit meiner Umgebung. Ich achte auf Sauberkeit.",
      "hint": "Denke daran: Wir lernen, uns selbst, unsere Kleidung und unsere Umgebung sauber zu halten."
     },
     {
@@ -3079,14 +3079,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Gesicht und Arme“?",
+     "prompt": "Was wird beim Wuḍūʾ gewaschen?",
      "options": [
-      "Ich erkenne Gesicht und Arme als Teile des Wuḍūʾ.",
-      "Die Haare müssen abgeschnitten werden."
+      "Das Gesicht und die Arme.",
+      "Nur die Haare."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich erkenne Gesicht und Arme als Teile des Wuḍūʾ.",
-     "explain": "Das Gesicht gehört zum Wuḍūʾ. Wir erkennen die grundlegenden Glieder der Gebetswaschung, ohne einzelne Sonderfälle vorwegzunehmen."
+     "hint": "Im Qurʾān werden Gesicht und Arme genannt.",
+     "explain": "Im Qurʾān werden Gesicht und Arme genannt."
     }
    ],
    "6-8": [
@@ -3104,7 +3104,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Gesicht und Arme“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich erkenne Gesicht und Arme als Teile des Wuḍūʾ.. Er nennt auch die Arme.",
+     "sample": "Ich erkenne Gesicht und Arme als Teile des Wuḍūʾ. Er nennt auch die Arme.",
      "hint": "Denke daran: Wir erkennen die grundlegenden Glieder der Gebetswaschung, ohne einzelne Sonderfälle vorwegzunehmen."
     },
     {
@@ -3186,14 +3186,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Kopf und Füße“?",
+     "prompt": "Was machen wir beim Wuḍūʾ am Kopf?",
      "options": [
-      "Ich erkenne das Streichen über den Kopf.",
-      "Den Kopf mit Seife schrubben."
+      "Wir streichen mit nassen Händen darüber.",
+      "Wir waschen nur den Hals."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich erkenne das Streichen über den Kopf.",
-     "explain": "Über den Kopf streichen. Wir erkennen die grundlegenden Glieder der Gebetswaschung, ohne einzelne Sonderfälle vorwegzunehmen."
+     "hint": "Das Streichen über den Kopf gehört dazu.",
+     "explain": "Das Streichen über den Kopf gehört dazu."
     }
    ],
    "6-8": [
@@ -3211,7 +3211,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Kopf und Füße“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich erkenne das Streichen über den Kopf.. Wir lernen außerdem die Reinigung der Füße.",
+     "sample": "Ich erkenne das Streichen über den Kopf. Wir lernen außerdem die Reinigung der Füße.",
      "hint": "Denke daran: Wir erkennen die grundlegenden Glieder der Gebetswaschung, ohne einzelne Sonderfälle vorwegzunehmen."
     },
     {
@@ -3293,14 +3293,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Allah gedenken“?",
+     "prompt": "Wen gedenken wir im Gebet?",
      "options": [
-      "Ich verstehe, warum das Gebet wichtig ist.",
-      "Wir beten nur zum Zeitvertreib."
+      "Allah.",
+      "Unserem Spielzeug."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich verstehe, warum das Gebet wichtig ist.",
-     "explain": "Wir gedenken Allahs. Wir beginnen mit dem Sinn des Gebets und lernen die Praxis anschließend Schritt für Schritt."
+     "hint": "Das Gebet ist Gottesdienst.",
+     "explain": "Das Gebet ist Gottesdienst."
     }
    ],
    "6-8": [
@@ -3318,7 +3318,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Allah gedenken“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich verstehe, warum das Gebet wichtig ist.. Der Prophet ﷺ zeigte uns das Gebet.",
+     "sample": "Ich verstehe, warum das Gebet wichtig ist. Der Prophet ﷺ zeigte uns das Gebet.",
      "hint": "Denke daran: Wir beginnen mit dem Sinn des Gebets und lernen die Praxis anschließend Schritt für Schritt."
     },
     {
@@ -3400,14 +3400,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Gebet lernen“?",
+     "prompt": "Wie lernst du die Gebetsbewegungen?",
      "options": [
-      "Ich übe das Gebet Schritt für Schritt.",
-      "Wir erfinden die Gebetsschritte selbst."
+      "Ich lasse sie mir zeigen.",
+      "Ich denke mir neue Bewegungen aus."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich übe das Gebet Schritt für Schritt.",
-     "explain": "Aus der authentischen Sunnah des Propheten ﷺ. Wir beginnen mit dem Sinn des Gebets und lernen die Praxis anschließend Schritt für Schritt."
+     "hint": "Das Gebet lernen wir nach der Sunnah.",
+     "explain": "Das Gebet lernen wir nach der Sunnah."
     }
    ],
    "6-8": [
@@ -3425,7 +3425,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Gebet lernen“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich übe das Gebet Schritt für Schritt.. Wir üben die Bewegungen mit Begleitung.",
+     "sample": "Ich übe das Gebet Schritt für Schritt. Wir üben die Bewegungen mit Begleitung.",
      "hint": "Denke daran: Wir beginnen mit dem Sinn des Gebets und lernen die Praxis anschließend Schritt für Schritt."
     },
     {
@@ -3507,14 +3507,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Allah ist Einer“?",
+     "prompt": "Was bedeutet Allah ist Einer?",
      "options": [
-      "Ich lerne, dass nur Allah angebetet wird.",
-      "Wir beten beliebige Dinge an."
+      "Allah hat keinen Teilhaber.",
+      "Viele Götter teilen sich die Anbetung."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich lerne, dass nur Allah angebetet wird.",
-     "explain": "Allah allein. Wir lernen, dass nur Allah angebetet wird."
+     "hint": "Wir beten Allah allein an.",
+     "explain": "Wir beten Allah allein an."
     }
    ],
    "6-8": [
@@ -3532,7 +3532,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Allah ist Einer“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich lerne, dass nur Allah angebetet wird.. Wir gesellen Ihm nichts bei.",
+     "sample": "Ich lerne, dass nur Allah angebetet wird. Wir gesellen Ihm nichts bei.",
      "hint": "Denke daran: Wir lernen, dass nur Allah angebetet wird."
     },
     {
@@ -3614,14 +3614,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Nur Allah anbeten“?",
+     "prompt": "An wen richten wir die Anbetung?",
      "options": [
-      "Ich erkenne die Bedeutung des Tawḥīd im Gebet.",
-      "Einem geschaffenen Gegenstand."
+      "An Allah allein.",
+      "An Allah und die Sterne."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich erkenne die Bedeutung des Tawḥīd im Gebet.",
-     "explain": "Allah allein. Wir lernen, dass nur Allah angebetet wird."
+     "hint": "ʿIbādah gilt Allah allein.",
+     "explain": "ʿIbādah gilt Allah allein."
     }
    ],
    "6-8": [
@@ -3639,7 +3639,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Nur Allah anbeten“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich erkenne die Bedeutung des Tawḥīd im Gebet.. Der Prophet ﷺ lehrte uns Allahs Recht.",
+     "sample": "Ich erkenne die Bedeutung des Tawḥīd im Gebet. Der Prophet ﷺ lehrte uns Allahs Recht.",
      "hint": "Denke daran: Wir lernen, dass nur Allah angebetet wird."
     },
     {
@@ -3721,14 +3721,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Die Engel“?",
+     "prompt": "Gehört der Glaube an Engel zum Īmān?",
      "options": [
-      "Ich kann die Engel als einen Bestandteil des Īmān nennen.",
-      "Der Glaube nur an Spielzeug."
+      "Ja, das gehört dazu.",
+      "Nein, wir glauben nur, was wir sehen."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich kann die Engel als einen Bestandteil des Īmān nennen.",
-     "explain": "Der Glaube an die Engel. Der Glaube umfasst die im Qurʾān und in der Sunnah genannten Grundlagen."
+     "hint": "Wir glauben an das im Qurʾān und der Sunnah Berichtete.",
+     "explain": "Wir glauben an das im Qurʾān und der Sunnah Berichtete."
     }
    ],
    "6-8": [
@@ -3746,7 +3746,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Die Engel“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich kann die Engel als einen Bestandteil des Īmān nennen.. Dazu gehört der Glaube an Allahs Engel.",
+     "sample": "Ich kann die Engel als einen Bestandteil des Īmān nennen. Dazu gehört der Glaube an Allahs Engel.",
      "hint": "Denke daran: Der Glaube umfasst die im Qurʾān und in der Sunnah genannten Grundlagen."
     },
     {
@@ -3828,14 +3828,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Die Gesandten“?",
+     "prompt": "An wen glauben Muslime auch?",
      "options": [
-      "Ich kenne einen weiteren Bestandteil des Īmān.",
-      "Nur die eigenen Wünsche entscheiden."
+      "An Allahs Gesandte.",
+      "Nur an Menschen, die heute leben."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich kenne einen weiteren Bestandteil des Īmān.",
-     "explain": "Der Glaube an Allahs Gesandte. Der Glaube umfasst die im Qurʾān und in der Sunnah genannten Grundlagen."
+     "hint": "Die Gesandten gehören zum Īmān.",
+     "explain": "Die Gesandten gehören zum Īmān."
     }
    ],
    "6-8": [
@@ -3853,7 +3853,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Die Gesandten“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich kenne einen weiteren Bestandteil des Īmān.. Wir hören auf die Botschaft des Propheten ﷺ.",
+     "sample": "Ich kenne einen weiteren Bestandteil des Īmān. Wir hören auf die Botschaft des Propheten ﷺ.",
      "hint": "Denke daran: Der Glaube umfasst die im Qurʾān und in der Sunnah genannten Grundlagen."
     },
     {
@@ -3935,14 +3935,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Gutes ohne Lob“?",
+     "prompt": "Du hast geholfen. Niemand hat es gesehen. Und jetzt?",
      "options": [
-      "Ich helfe mit guter Absicht.",
-      "Ich helfe nur, wenn ich gelobt werde."
+      "Ich freue mich, dass ich helfen konnte.",
+      "Dann war die Hilfe umsonst."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich helfe mit guter Absicht.",
-     "explain": "Ich helfe trotzdem mit guter Absicht. Gute Taten sollen nicht nur zum Angeben getan werden."
+     "hint": "Gute Taten brauchen keinen Applaus.",
+     "explain": "Gute Taten brauchen keinen Applaus."
     }
    ],
    "6-8": [
@@ -3960,7 +3960,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Gutes ohne Lob“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich helfe mit guter Absicht.. Allah kennt meine Absicht.",
+     "sample": "Ich helfe mit guter Absicht. Allah kennt meine Absicht.",
      "hint": "Denke daran: Gute Taten sollen nicht nur zum Angeben getan werden."
     },
     {
@@ -4042,14 +4042,14 @@ const editorialContentV30={
     null,
     {
      "type": "choice",
-     "prompt": "Was sagst du einem Freund über „Gute Absichten“?",
+     "prompt": "Du willst jemandem helfen. Woran denkst du?",
      "options": [
-      "Ich denke darüber nach, warum ich Gutes tue.",
-      "Ich tue es nur, um damit anzugeben."
+      "Ich möchte Gutes für Allah tun.",
+      "Alle müssen mir dafür danken."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an das Lernziel: Ich denke darüber nach, warum ich Gutes tue.",
-     "explain": "Ich bemühe mich um eine aufrichtige Absicht. Gute Taten sollen nicht nur zum Angeben getan werden."
+     "hint": "Eine gute Absicht ist wichtig.",
+     "explain": "Eine gute Absicht ist wichtig."
     }
    ],
    "6-8": [
@@ -4067,7 +4067,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Gute Absichten“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich denke darüber nach, warum ich Gutes tue.. Ich möchte Allah aufrichtig dienen.",
+     "sample": "Ich denke darüber nach, warum ich Gutes tue. Ich möchte Allah aufrichtig dienen.",
      "hint": "Denke daran: Gute Taten sollen nicht nur zum Angeben getan werden."
     },
     {
@@ -4150,7 +4150,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Essen mit Bismillāh“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich sage Bismillāh und esse achtsam.. Ich esse mit meiner rechten Hand und nehme von meiner Seite.",
+     "sample": "Ich sage Bismillāh und esse achtsam. Ich esse mit meiner rechten Hand und nehme von meiner Seite.",
      "hint": "Der Prophet ﷺ erklärte die Tischsitten freundlich einem Kind."
     },
     {
@@ -4175,6 +4175,20 @@ const editorialContentV30={
      "sample": "Ich sage Bismillāh und esse achtsam. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
+   ],
+   "4-5": [
+    null,
+    {
+     "type": "choice",
+     "prompt": "Du fängst an zu essen. Was sagst du?",
+     "options": [
+      "Bismillāh.",
+      "Ich sage lieber gar nichts."
+     ],
+     "correct": 0,
+     "hint": "Bismillāh gehört zur Sunnah beim Essen.",
+     "explain": "Bismillāh gehört zur Sunnah beim Essen."
+    }
    ]
   }
  },
@@ -4185,7 +4199,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Barmherzig zu Tieren“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich tue Tieren nicht weh und bitte bei einem hilfsbedürftigen Tier um Hilfe.. Ich erschrecke oder verletze Tiere nicht.",
+     "sample": "Ich tue Tieren nicht weh und bitte bei einem hilfsbedürftigen Tier um Hilfe. Ich erschrecke oder verletze Tiere nicht.",
      "hint": "Bei fremden oder verletzten Tieren holen Kinder zuerst Erwachsene zu Hilfe."
     },
     {
@@ -4210,6 +4224,20 @@ const editorialContentV30={
      "sample": "Ich tue Tieren nicht weh und bitte bei einem hilfsbedürftigen Tier um Hilfe. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
+   ],
+   "4-5": [
+    null,
+    {
+     "type": "choice",
+     "prompt": "Du siehst einen fremden Hund. Was ist sicher?",
+     "options": [
+      "Abstand halten und einen Erwachsenen fragen.",
+      "Sofort hinrennen und streicheln."
+     ],
+     "correct": 0,
+     "hint": "Tieren helfen wir vorsichtig.",
+     "explain": "Tieren helfen wir vorsichtig."
+    }
    ]
   }
  },
@@ -4220,7 +4248,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Gute Nachbarschaft“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich grüße höflich und nehme Rücksicht auf andere im Haus.. Wir sprechen höflich und vermeiden absichtliche Störungen.",
+     "sample": "Ich grüße höflich und nehme Rücksicht auf andere im Haus. Wir sprechen höflich und vermeiden absichtliche Störungen.",
      "hint": "Freundlichkeit heißt nicht, dass Kinder die Tür öffnen oder Fremde allein besuchen sollen."
     },
     {
@@ -4245,6 +4273,20 @@ const editorialContentV30={
      "sample": "Ich grüße höflich und nehme Rücksicht auf andere im Haus. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
+   ],
+   "4-5": [
+    null,
+    {
+     "type": "choice",
+     "prompt": "Ein Nachbar braucht Ruhe. Was machst du?",
+     "options": [
+      "Ich spreche leiser.",
+      "Ich rede absichtlich lauter."
+     ],
+     "correct": 0,
+     "hint": "Wir nehmen Rücksicht auf Nachbarn.",
+     "explain": "Wir nehmen Rücksicht auf Nachbarn."
+    }
    ]
   }
  },
@@ -4255,7 +4297,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Allah um Hilfe bitten“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich bitte Allah im Duʿāʾ und darf Menschen um praktische Hilfe bitten.. Menschen dürfen wir um alltägliche Hilfe bitten, zum Beispiel beim Lernen.",
+     "sample": "Ich bitte Allah im Duʿāʾ und darf Menschen um praktische Hilfe bitten. Menschen dürfen wir um alltägliche Hilfe bitten, zum Beispiel beim Lernen.",
      "hint": "Menschen um alltägliche Hilfe zu bitten ist etwas anderes als das Bittgebet als Anbetung an Allah."
     },
     {
@@ -4280,6 +4322,20 @@ const editorialContentV30={
      "sample": "Ich bitte Allah im Duʿāʾ und darf Menschen um praktische Hilfe bitten. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
+   ],
+   "4-5": [
+    null,
+    {
+     "type": "choice",
+     "prompt": "Du brauchst Hilfe beim Schuheanziehen. Was darfst du tun?",
+     "options": [
+      "Allah bitten und einen Erwachsenen fragen.",
+      "Nur beten und niemanden fragen."
+     ],
+     "correct": 0,
+     "hint": "Duʿāʾ und praktische Hilfe schließen sich nicht aus.",
+     "explain": "Duʿāʾ und praktische Hilfe schließen sich nicht aus."
+    }
    ]
   }
  },
@@ -4290,7 +4346,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Allah allein anbeten“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten.. Duʿāʾ gehört zur Anbetung; gewöhnliche Hilfe dürfen wir von Menschen erbitten.",
+     "sample": "Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten. Duʿāʾ gehört zur Anbetung; gewöhnliche Hilfe dürfen wir von Menschen erbitten.",
      "hint": "Tawḥīd heißt: Allah allein anbeten."
     },
     {
@@ -4315,6 +4371,20 @@ const editorialContentV30={
      "sample": "Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
+   ],
+   "4-5": [
+    null,
+    {
+     "type": "choice",
+     "prompt": "Du brauchst ein Glas Wasser. Wen kannst du fragen?",
+     "options": [
+      "Einen Erwachsenen, der dir helfen kann.",
+      "Niemanden: Nur Duʿāʾ ist erlaubt."
+     ],
+     "correct": 0,
+     "hint": "Praktische Hilfe von Menschen ist erlaubt.",
+     "explain": "Praktische Hilfe von Menschen ist erlaubt."
+    }
    ]
   }
  },
@@ -4325,7 +4395,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Die sechs Glaubenssäulen“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich kann die Glaubensgrundlagen nach und nach nennen.. Wir glauben an den Jüngsten Tag.",
+     "sample": "Ich kann die Glaubensgrundlagen nach und nach nennen. Wir glauben an den Jüngsten Tag.",
      "hint": "Īmān bedeutet Glaube. Schwierige Wörter kann dir der Begriffshelfer erklären."
     },
     {
@@ -4350,6 +4420,20 @@ const editorialContentV30={
      "sample": "Ich kann die Glaubensgrundlagen nach und nach nennen. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
+   ],
+   "4-5": [
+    null,
+    {
+     "type": "choice",
+     "prompt": "Was gehört zum Īmān?",
+     "options": [
+      "Der Glaube an Engel.",
+      "Nur das Lernen der Gebetsbewegungen."
+     ],
+     "correct": 0,
+     "hint": "Der Prophet ﷺ erklärte die Glaubensgrundlagen.",
+     "explain": "Der Prophet ﷺ erklärte die Glaubensgrundlagen."
+    }
    ]
   }
  },
@@ -4360,7 +4444,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Gutes mit richtiger Absicht“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich helfe, weil ich Gutes für Allah tun möchte, nicht nur für Applaus.. Wenn ich gelobt werde, darf ich mich bedanken und bescheiden bleiben.",
+     "sample": "Ich helfe, weil ich Gutes für Allah tun möchte, nicht nur für Applaus. Wenn ich gelobt werde, darf ich mich bedanken und bescheiden bleiben.",
      "hint": "Niyyah heißt Absicht. Ikhlāṣ heißt Aufrichtigkeit."
     },
     {
@@ -4385,6 +4469,20 @@ const editorialContentV30={
      "sample": "Ich helfe, weil ich Gutes für Allah tun möchte, nicht nur für Applaus. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
+   ],
+   "4-5": [
+    null,
+    {
+     "type": "choice",
+     "prompt": "Du hilfst, und niemand lobt dich. Was machst du?",
+     "options": [
+      "Ich kann trotzdem Gutes tun.",
+      "Dann zählt meine Tat gar nicht."
+     ],
+     "correct": 0,
+     "hint": "Die Absicht ist wichtig.",
+     "explain": "Die Absicht ist wichtig."
+    }
    ]
   }
  },
@@ -4395,7 +4493,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Stark sein bei Wut“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich sage, dass ich wütend bin, und bitte bei Bedarf um Hilfe.. Stärke bedeutet nicht, bei jedem Streit zu gewinnen.",
+     "sample": "Ich sage, dass ich wütend bin, und bitte bei Bedarf um Hilfe. Stärke bedeutet nicht, bei jedem Streit zu gewinnen.",
      "hint": "Gefühle darfst du sagen. Niemand muss sich verletzen lassen."
     },
     {
@@ -4420,6 +4518,20 @@ const editorialContentV30={
      "sample": "Ich sage, dass ich wütend bin, und bitte bei Bedarf um Hilfe. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
+   ],
+   "4-5": [
+    null,
+    {
+     "type": "choice",
+     "prompt": "Du bist sehr ärgerlich. Was hilft?",
+     "options": [
+      "Eine Pause und bei Bedarf Hilfe holen.",
+      "Sofort zurückschubsen."
+     ],
+     "correct": 0,
+     "hint": "Man darf wütend sein, aber niemanden verletzen.",
+     "explain": "Man darf wütend sein, aber niemanden verletzen."
+    }
    ]
   }
  },
@@ -4430,7 +4542,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Erst um Erlaubnis bitten“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich klopfe an und frage, ob ich eintreten darf.. Ich respektiere es, wenn jemand gerade nicht öffnen möchte.",
+     "sample": "Ich klopfe an und frage, ob ich eintreten darf. Ich respektiere es, wenn jemand gerade nicht öffnen möchte.",
      "hint": "Nur bei Personen, zu denen du gehen darfst, anklopfen. Fremde Türen öffnest du nicht selbst."
     },
     {
@@ -4455,6 +4567,20 @@ const editorialContentV30={
      "sample": "Ich klopfe an und frage, ob ich eintreten darf. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
+   ],
+   "4-5": [
+    null,
+    {
+     "type": "choice",
+     "prompt": "Eine Zimmertür ist geschlossen. Was machst du?",
+     "options": [
+      "Ich klopfe an und warte.",
+      "Ich öffne ohne zu fragen."
+     ],
+     "correct": 0,
+     "hint": "Wir achten auf Privatsphäre.",
+     "explain": "Wir achten auf Privatsphäre."
+    }
    ]
   }
  },
@@ -4465,7 +4591,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Tarbiyah – freundlich lernen“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich lerne Schritt für Schritt und frage, wenn ich ein Wort nicht verstehe.. Eine gute Lehrperson erklärt klar und freundlich.",
+     "sample": "Ich lerne Schritt für Schritt und frage, wenn ich ein Wort nicht verstehe. Eine gute Lehrperson erklärt klar und freundlich.",
      "hint": "Du darfst fragen und Pausen machen. Lernen soll verständlich sein."
     },
     {
@@ -4490,6 +4616,20 @@ const editorialContentV30={
      "sample": "Ich lerne Schritt für Schritt und frage, wenn ich ein Wort nicht verstehe. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
+   ],
+   "4-5": [
+    null,
+    {
+     "type": "choice",
+     "prompt": "Ein neues Wort ist schwer. Was kannst du sagen?",
+     "options": [
+      "Kannst du es mir erklären?",
+      "Ich muss so tun, als wüsste ich es."
+     ],
+     "correct": 0,
+     "hint": "Fragen ist beim Lernen erlaubt.",
+     "explain": "Fragen ist beim Lernen erlaubt."
+    }
    ]
   }
  },
@@ -4500,7 +4640,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Tazkiyah – gute innere Haltung“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich denke über mein Verhalten nach und versuche eine kleine gute Tat.. Wenn ich einen Fehler mache, kann ich ihn ehrlich zugeben und verbessern.",
+     "sample": "Ich denke über mein Verhalten nach und versuche eine kleine gute Tat. Wenn ich einen Fehler mache, kann ich ihn ehrlich zugeben und verbessern.",
      "hint": "Du bist mehr als dein Aussehen. Gute Gedanken und Taten sind wichtig."
     },
     {
@@ -4525,6 +4665,20 @@ const editorialContentV30={
      "sample": "Ich denke über mein Verhalten nach und versuche eine kleine gute Tat. Ich frage danach: Kannst du mir ein eigenes gutes Beispiel nennen?",
      "hint": "Verwende eigene Worte. Sprich freundlich, ohne Angst oder Druck zu erzeugen."
     }
+   ],
+   "4-5": [
+    null,
+    {
+     "type": "choice",
+     "prompt": "Du hast einen Freund traurig gemacht. Was hilft?",
+     "options": [
+      "Entschuldigen und es besser versuchen.",
+      "Sagen, dass er sich nicht traurig fühlen darf."
+     ],
+     "correct": 0,
+     "hint": "Wir können gute Taten lernen.",
+     "explain": "Wir können gute Taten lernen."
+    }
    ]
   }
  },
@@ -4535,7 +4689,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Reinheit und Sauberkeit“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich halte mich sauber und lerne die Gebetswaschung.. In Qurʾān 5:6 werden Gesicht und Arme genannt.",
+     "sample": "Ich halte mich sauber und lerne die Gebetswaschung. In Qurʾān 5:6 werden Gesicht und Arme genannt.",
      "hint": "Händewaschen nach dem Spielen ist gut. Wuḍūʾ ist die besondere Waschung vor dem Gebet."
     },
     {
@@ -4550,6 +4704,20 @@ const editorialContentV30={
      "hint": "Sieh zuerst auf den Qurʾān-Beleg: Sūrat al-Māʾidah · 5:6.",
      "explain": "Die erste Antwort gibt die Bedeutung von Sūrat al-Māʾidah · 5:6 wieder. Die zweite bezieht sich auf die Sunnah, die dritte auf unsere Übung."
     }
+   ],
+   "4-5": [
+    null,
+    {
+     "type": "choice",
+     "prompt": "Du hast deine Hände gewaschen. Ist das schon immer Wuḍūʾ?",
+     "options": [
+      "Nein, Wuḍūʾ hat eigene Schritte.",
+      "Ja, jede Handwäsche ist Wuḍūʾ."
+     ],
+     "correct": 0,
+     "hint": "Normales Waschen und Wuḍūʾ unterscheiden sich.",
+     "explain": "Normales Waschen und Wuḍūʾ unterscheiden sich."
+    }
    ]
   }
  },
@@ -4560,7 +4728,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Der Qurʾān – Allahs Wort“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich höre Qurʾān mit Respekt und lerne Schritt für Schritt.. Beim Hören hören wir eine echte Rezitation.",
+     "sample": "Ich höre Qurʾān mit Respekt und lerne Schritt für Schritt. Beim Hören hören wir eine echte Rezitation.",
      "hint": "Zum Anhören wählen wir eine wirkliche Qurʾān-Rezitation, nie eine künstliche nachgesprochene Qurʾān-Stimme."
     },
     {
@@ -4575,6 +4743,20 @@ const editorialContentV30={
      "hint": "Sieh zuerst auf den Qurʾān-Beleg: Sūrat al-Baqarah · 2:2.",
      "explain": "Die erste Antwort gibt die Bedeutung von Sūrat al-Baqarah · 2:2 wieder. Die zweite bezieht sich auf die Sunnah, die dritte auf unsere Übung."
     }
+   ],
+   "4-5": [
+    null,
+    {
+     "type": "choice",
+     "prompt": "Du hörst einen Qurʾān-Vers. Was kannst du tun?",
+     "options": [
+      "Aufmerksam zuhören.",
+      "Sofort etwas anderes darüber rufen."
+     ],
+     "correct": 0,
+     "hint": "Wir begegnen dem Qurʾān mit Respekt.",
+     "explain": "Wir begegnen dem Qurʾān mit Respekt."
+    }
    ]
   }
  },
@@ -4585,7 +4767,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Ādam عليه السلام kennenlernen“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Allah erschuf Ādam. Wir lernen nur, was Qurʾān und authentische Sunnah darüber berichten.. Der Prophet ﷺ berichtete auch vom Friedensgruß Ādams.",
+     "sample": "Allah erschuf Ādam. Wir lernen nur, was Qurʾān und authentische Sunnah darüber berichten. Der Prophet ﷺ berichtete auch vom Friedensgruß Ādams.",
      "hint": "Wir stellen Propheten nicht als Personen dar und beschreiben nicht unbelegte Einzelheiten."
     },
     {
@@ -4600,6 +4782,20 @@ const editorialContentV30={
      "hint": "Sieh zuerst auf den Qurʾān-Beleg: Sūrat Āl ʿImrān · 3:59.",
      "explain": "Die erste Antwort gibt die Bedeutung von Sūrat Āl ʿImrān · 3:59 wieder. Die zweite bezieht sich auf die Sunnah, die dritte auf unsere Übung."
     }
+   ],
+   "4-5": [
+    null,
+    {
+     "type": "choice",
+     "prompt": "Du hörst eine Geschichte über Ādam. Was darfst du fragen?",
+     "options": [
+      "Steht das im Qurʾān oder in der Sunnah?",
+      "Darf ich mir neue Ereignisse ausdenken?"
+     ],
+     "correct": 0,
+     "hint": "Wir erfinden keine Propheten-Geschichten.",
+     "explain": "Wir erfinden keine Propheten-Geschichten."
+    }
    ]
   }
  },
@@ -4610,7 +4806,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Morgens Allah gedenken“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich gedenke Allahs ohne Eile und lerne die Bedeutung von Subḥāna llāhi wa-bi-ḥamdihī.. Der Prophet ﷺ lehrte Subḥāna llāhi wa-bi-ḥamdihī.",
+     "sample": "Ich gedenke Allahs ohne Eile und lerne die Bedeutung von Subḥāna llāhi wa-bi-ḥamdihī. Der Prophet ﷺ lehrte Subḥāna llāhi wa-bi-ḥamdihī.",
      "hint": "Die Überlieferung nennt hundert Wiederholungen für einen bestimmten Lohn; für kleine Kinder ist das keine Pflicht oder Leistungsprüfung."
     },
     {
@@ -4625,6 +4821,20 @@ const editorialContentV30={
      "hint": "Sieh zuerst auf den Qurʾān-Beleg: Sūrat al-Aḥzāb · 33:41.",
      "explain": "Die erste Antwort gibt die Bedeutung von Sūrat al-Aḥzāb · 33:41 wieder. Die zweite bezieht sich auf die Sunnah, die dritte auf unsere Übung."
     }
+   ],
+   "4-5": [
+    null,
+    {
+     "type": "choice",
+     "prompt": "Du lernst einen Morgen-Ḏikr. Wie übst du?",
+     "options": [
+      "Ruhig und mit seiner Bedeutung.",
+      "Du musst sofort alles fehlerfrei können."
+     ],
+     "correct": 0,
+     "hint": "Wir lernen ohne Druck; freiwillig ist nicht Pflicht.",
+     "explain": "Wir lernen ohne Druck; freiwillig ist nicht Pflicht."
+    }
    ]
   }
  },
@@ -4635,7 +4845,7 @@ const editorialContentV30={
     {
      "type": "text",
      "prompt": "Wie kannst du „Mit Eltern liebevoll umgehen“ in einer eigenen, sicheren Alltagssituation anwenden? Erkläre auch, warum du so handelst.",
-     "sample": "Ich spreche freundlich mit meinen Eltern und hole Hilfe, wenn ich sie brauche.. Auch dem Vater begegnen wir mit Respekt.",
+     "sample": "Ich spreche freundlich mit meinen Eltern und hole Hilfe, wenn ich sie brauche. Auch dem Vater begegnen wir mit Respekt.",
      "hint": "Freundlich sein bedeutet nicht, bei Angst, Gefahr oder unerlaubten Forderungen schweigen zu müssen. Kinder dürfen immer vertrauenswürdige Erwachsene um Hilfe bitten."
     },
     {
@@ -4650,6 +4860,110 @@ const editorialContentV30={
      "hint": "Sieh zuerst auf den Qurʾān-Beleg: Sūrat al-Isrāʾ · 17:23.",
      "explain": "Die erste Antwort gibt die Bedeutung von Sūrat al-Isrāʾ · 17:23 wieder. Die zweite bezieht sich auf die Sunnah, die dritte auf unsere Übung."
     }
+   ],
+   "4-5": [
+    null,
+    {
+     "type": "choice",
+     "prompt": "Du brauchst Hilfe. Wie sprichst du mit deinen Eltern?",
+     "options": [
+      "Ich frage freundlich nach Hilfe.",
+      "Ich sage nichts, auch wenn ich Angst habe."
+     ],
+     "correct": 0,
+     "hint": "Bei Sorgen darfst du um Hilfe bitten.",
+     "explain": "Bei Sorgen darfst du um Hilfe bitten."
+    }
+   ]
+  }
+ },
+ "aqidah-allah-erschuf-tiere": {
+  "questionPatches": {
+   "4-5": [
+    {
+     "type": "choice",
+     "prompt": "Wer hat die Tiere erschaffen?",
+     "options": [
+      "Allah.",
+      "Ein Tierarzt."
+     ],
+     "correct": 0,
+     "hint": "Allah ist der Schöpfer.",
+     "explain": "Allah ist der Schöpfer."
+    },
+    null
+   ]
+  }
+ },
+ "aqidah-iman-an-allah-vertiefen": {
+  "questionPatches": {
+   "4-5": [
+    {
+     "type": "choice",
+     "prompt": "Was bedeutet Īmān?",
+     "options": [
+      "Glaube.",
+      "Nur Händewaschen."
+     ],
+     "correct": 0,
+     "hint": "Īmān bedeutet Glaube.",
+     "explain": "Īmān bedeutet Glaube."
+    },
+    null
+   ]
+  }
+ },
+ "fiqh-wudu-schritte-reihenfolge": {
+  "questionPatches": {
+   "4-5": [
+    {
+     "type": "choice",
+     "prompt": "Was bedeutet Wuḍūʾ?",
+     "options": [
+      "Die Gebetswaschung.",
+      "Nur Hände mit Seife waschen."
+     ],
+     "correct": 0,
+     "hint": "Wuḍūʾ ist die rituelle Waschung.",
+     "explain": "Wuḍūʾ ist die rituelle Waschung."
+    },
+    null
+   ]
+  }
+ },
+ "sirah-nuh-geduldig-einladen": {
+  "questionPatches": {
+   "4-5": [
+    {
+     "type": "choice",
+     "prompt": "Wer war Nūḥ?",
+     "options": [
+      "Ein Gesandter Allahs.",
+      "Ein gewöhnlicher König."
+     ],
+     "correct": 0,
+     "hint": "Nūḥ war ein Gesandter Allahs.",
+     "explain": "Nūḥ war ein Gesandter Allahs."
+    },
+    null
+   ]
+  }
+ },
+ "aqidah-allah-pflanzen-wachsen": {
+  "questionPatches": {
+   "4-5": [
+    {
+     "type": "choice",
+     "prompt": "Wer hat die Pflanzen erschaffen?",
+     "options": [
+      "Allah.",
+      "Ein Gärtner."
+     ],
+     "correct": 0,
+     "hint": "Allah ist der Schöpfer der Pflanzen.",
+     "explain": "Allah ist der Schöpfer der Pflanzen."
+    },
+    null
    ]
   }
  }
