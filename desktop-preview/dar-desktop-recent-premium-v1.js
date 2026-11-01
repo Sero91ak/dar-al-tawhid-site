@@ -10,7 +10,7 @@ function node(tag,klass,text){var x=document.createElement(tag);if(klass)x.class
 function berlinDay(d){var a=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d),m={};a.forEach(function(x){m[x.type]=x.value});return Date.parse(m.year+"-"+m.month+"-"+m.day+"T00:00:00Z")/86400000}
 function pick(posts,now){
  var today=berlinDay(now||new Date()),seen=new Set();
- var valid=(posts||[]).filter(function(p){var date=new Date(p.date||"");if(!p||!p.id||!p.title||!Number.isFinite(date.getTime())||berlinDay(date)>today||seen.has(String(p.id)))return false;seen.add(String(p.id));return true})
+ var valid=(posts||[]).filter(function(p){var date=new Date(p&&p.date||"");if(!p||!p.id||!p.title||!Number.isFinite(date.getTime())||berlinDay(date)>today||seen.has(String(p.id)))return false;seen.add(String(p.id));return true})
   .sort(function(a,b){return Date.parse(b.date)-Date.parse(a.date)||String(a.id).localeCompare(String(b.id))});
  var fresh=valid.filter(function(p){return today-berlinDay(new Date(p.date))<5});
  return {posts:fresh.length?fresh:valid.slice(0,1),isFresh:!!fresh.length};
