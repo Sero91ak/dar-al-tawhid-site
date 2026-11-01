@@ -141,7 +141,7 @@
       button.dataset.foldCategory=entry[0];
       button.append(pictogram(entry[0]),make("span","dar-fold-v2-menu-copy",entry[2]),pictogram("chevron"));
       button.addEventListener("click",function(){
-        setMenu(false);
+        setMenu(false);menuToggle.focus();
         if(selectedCategory!==entry[0]&&list)scrollByCategory[selectedCategory]=list.scrollTop;
         if(win.location.hash!==entry[1])win.location.hash=entry[1];else onRoute(true);
       });
@@ -163,7 +163,6 @@
     listHeader.append(contextTitle,countEl);
     contextPanel.appendChild(listHeader);
     list=make("div","dar-fold-v2-options");
-    list.setAttribute("role","list");
     contextPanel.appendChild(list);nav.appendChild(contextPanel);
     frame=make("iframe","dar-fold-v2-frame");frame.id="darFoldV2Frame";
     frame.title="DĀR AL TAWḤĪD – unabhängiger Lesebereich";
@@ -265,7 +264,7 @@
     var fragment=doc.createDocumentFragment();
     shown.forEach(function(item,i){
       var button=make("button","dar-fold-v2-option");
-      button.type="button";button.setAttribute("role","listitem");
+      button.type="button";
       var label=make("span","dar-fold-v2-option-label",item.text);
       var side=make("span","dar-fold-v2-option-symbol");
       side.setAttribute("aria-hidden","true");side.appendChild(pictogram("chevron"));
