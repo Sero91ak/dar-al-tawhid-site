@@ -54,11 +54,12 @@ for(const file of files){
   const speaker=field(fm,"scholar")||field(fm,"speaker");
   const work=field(fm,"book")||field(fm,"work");
   const source=String(field(fm,"source")||"").replace(/^📝\s*/,"");
+  const localeManifest=field(fm,"localizationManifest");
   const date=field(fm,"date");
   const links=parseLinks(fm);
   const plain=cleanMd(body);
   rows.push({
-    id,file,date,title,category,topic,speaker,work,reference:source,
+    id,file,date,title,category,topic,speaker,work,reference:source,localeManifest,
     excerpt:plain.slice(0,560),
     body:plain.slice(0,7000),
     links
@@ -97,7 +98,8 @@ const compact=rows.filter(r=>{
   speaker:r.speaker,
   excerpt:r.excerpt.slice(0,220),
   sourceUrl:(r.links.find(x=>/^\/q\/\d+\/?$/.test(x.url))||{}).url||"",
-  language:"de"
+  language:"de",
+  localeManifest:/^\/assets\/[a-zA-Z0-9-]+-locales\.json$/.test(r.localeManifest||"")?r.localeManifest:""
 }));
 fs.writeFileSync(RECENT_OUT,JSON.stringify({schemaVersion:1,generatedAt:new Date().toISOString(),timezone:"Europe/Berlin",windowDays:45,count:compact.length,posts:compact},null,2)+"\n");
 console.log("home recent posts index:",compact.length,"→",path.relative(ROOT,RECENT_OUT));
