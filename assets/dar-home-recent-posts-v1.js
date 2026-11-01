@@ -82,7 +82,7 @@ function canAnnounce(){if(!isHome()||state.modalShown||state.modalOpen||d.hidden
  return true}
 function dismissNotice(skip){var layer=d.getElementById("darRecentNoticeV1");if(!layer)return;
  var sig=latestSignature(state.posts);try{w.sessionStorage.setItem(NOTICE_SESSION,sig);if(skip)w.localStorage.setItem(NOTICE_SKIPPED,sig)}catch(_){}
- layer.remove();unlockNoticeBackground();state.modalOpen=false;state.modalShown=true;d.removeEventListener("keydown",noticeKeydown,true);d.removeEventListener("focusin",noticeFocus,true);
+ try{if(layer.open&&typeof layer.close==="function")layer.close()}catch(_){}layer.remove();unlockNoticeBackground();state.modalOpen=false;state.modalShown=true;d.removeEventListener("keydown",noticeKeydown,true);d.removeEventListener("focusin",noticeFocus,true);
  if(state.lastFocus&&state.lastFocus.isConnected&&typeof state.lastFocus.focus==="function")state.lastFocus.focus({preventScroll:true});
  state.lastFocus=null}
 
@@ -126,6 +126,26 @@ function openPostById(id){
  // Official app post route, also used by the existing premium feed.
  w.location.hash="#post/"+encodeURIComponent(id);
 }
+
+/* Direct native click + iOS pointer-up fallback. The first event wins; a second
+   synthetic click after pointer-up cannot fire the action again. */
+function bindNoticeAction(el,fn){
+ var activated=0,started=null;
+ function invoke(ev){
+  var now=Date.now();if(now-activated<650){ev.preventDefault();return}
+  activated=now;ev.preventDefault();ev.stopPropagation();
+  try{fn()}catch(error){console.error("DAR new-post action",error)}
+ }
+ el.addEventListener("pointerdown",function(ev){started={x:ev.clientX,y:ev.clientY}},{passive:true});
+ el.addEventListener("pointerup",function(ev){
+  if(!started)return;
+  var dist=Math.hypot(ev.clientX-started.x,ev.clientY-started.y);started=null;
+  if(dist>11)return;invoke(ev)
+ });
+ el.addEventListener("click",invoke);
+ el.addEventListener("keydown",function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();invoke(ev)}});
+}
+
 function noticeClick(ev){
  var layer=d.getElementById("darRecentNoticeV1");if(!layer||!layer.contains(ev.target))return;
  var post=ev.target.closest&&ev.target.closest("[data-dar-post-id]"),
@@ -146,7 +166,7 @@ function noticeKeydown(ev){var layer=d.getElementById("darRecentNoticeV1");if(!l
  if(ev.shiftKey&&d.activeElement===first){ev.preventDefault();last.focus()}
  else if(!ev.shiftKey&&d.activeElement===last){ev.preventDefault();first.focus()}
  }}
-function noticeLink(p){var a=e("a","dar-recent-notice-article");a.href=openLink(p);a.dataset.darPostId=p.id;a.appendChild(e("span","dar-recent-notice-date",dateLabel(p)));
+function noticeLink(p){var a=e("a","dar-recent-notice-article");a.href=openLink(p);a.dataset.darPostId=p.id;a.setAttribute("aria-label",displayTitle(p)+" – "+t(7));bindNoticeAction(a,function(){dismissNotice(false);openPostById(p.id)});a.appendChild(e("span","dar-recent-notice-date",dateLabel(p)));
  a.appendChild(e("strong","",displayTitle(p)));if(untranslated(p))a.appendChild(e("small","dar-recent-untranslated",t(11)));a.appendChild(e("span","dar-recent-notice-arrow",t(7)+" ›"));
  return a}
 
@@ -172,21 +192,26 @@ function openNewPostsNotice(){if(!canAnnounce())return;
  var hits=recent(state.posts,5);if(!hits.length)return;
  var sig=latestSignature(state.posts);try{w.sessionStorage.setItem(NOTICE_SESSION,sig)}catch(_){}
  state.modalOpen=true;state.lastFocus=d.activeElement;
- var layer=e("div","dar-recent-notice-overlay");layer.id="darRecentNoticeV1";
- layer.setAttribute("role","presentation");
- var card=e("section","dar-recent-notice-card");card.setAttribute("role","dialog");card.setAttribute("aria-modal","true");card.setAttribute("aria-labelledby","darRecentNoticeHeadingV1");
- card.setAttribute("aria-describedby","darRecentNoticeDescV1");card.setAttribute("dir",["ar","ckb"].includes(locale())?"rtl":"ltr");
+ var layer=e("dialog","dar-recent-notice-overlay");layer.id="darRecentNoticeV1";
+ layer.setAttribute("role","dialog");layer.setAttribute("aria-modal","true");layer.setAttribute("aria-labelledby","darRecentNoticeHeadingV1");layer.setAttribute("aria-describedby","darRecentNoticeDescV1");
+ var card=e("section","dar-recent-notice-card");card.setAttribute("dir",["ar","ckb"].includes(locale())?"rtl":"ltr");
  var header=e("div","dar-recent-notice-header");
  var intro=e("div","dar-recent-notice-intro");intro.appendChild(e("span","dar-recent-notice-kicker",t(0)));var h=e("h2","",t(1));h.id="darRecentNoticeHeadingV1";intro.appendChild(h);header.appendChild(intro);
- var close=e("button","dar-recent-notice-x","×");close.type="button";close.dataset.darNoticeAction="close";close.setAttribute("aria-label",t(9));header.appendChild(close);card.appendChild(header);
+ var close=e("button","dar-recent-notice-x","×");close.type="button";close.dataset.darNoticeAction="close";close.setAttribute("aria-label",t(9));header.appendChild(close);card.appendChild(header);bindNoticeAction(close,function(){dismissNotice(false)});
  var desc=e("p","dar-recent-notice-subtitle",t(2));desc.id="darRecentNoticeDescV1";card.appendChild(desc);
+ var count=e("div","dar-recent-notice-count",hits.length+" · "+t(14));card.appendChild(count);
  var list=e("div","dar-recent-notice-list");hits.slice(0,4).forEach(function(p){list.appendChild(noticeLink(p))});card.appendChild(list);
  var actions=e("div","dar-recent-notice-actions");
- var all=e("button","dar-recent-notice-all",t(8));all.type="button";all.dataset.darNoticeAction="all";actions.appendChild(all);
- var skip=e("button","dar-recent-notice-skip",skipText());skip.type="button";skip.dataset.darNoticeAction="skip";actions.appendChild(skip);
+ var all=e("button","dar-recent-notice-all",t(8));all.type="button";all.dataset.darNoticeAction="all";actions.appendChild(all);bindNoticeAction(all,function(){dismissNotice(false);state.expanded=true;state.days=5;render();var target=d.getElementById("darRecentPublicationsV1");if(target)target.scrollIntoView({behavior:"smooth",block:"start"})});
+ var skip=e("button","dar-recent-notice-skip",skipText());skip.type="button";skip.dataset.darNoticeAction="skip";actions.appendChild(skip);bindNoticeAction(skip,function(){dismissNotice(true)});
  card.appendChild(actions);layer.appendChild(card);
- layer.addEventListener("click",noticeClick,true);
- d.body.appendChild(layer);lockNoticeBackground(layer);applyNoticeTheme(layer);d.addEventListener("keydown",noticeKeydown,true);d.addEventListener("focusin",noticeFocus,true);close.focus({preventScroll:true});
+ d.body.appendChild(layer);
+ // Native HTMLDialogElement is promoted into the browser top layer. Unlike a div
+ // overlay it cannot sit behind another app compositing/scroll/touch surface.
+ try{if(typeof layer.showModal==="function")layer.showModal();else layer.setAttribute("open","")}catch(_){layer.setAttribute("open","")}
+ lockNoticeBackground(layer);applyNoticeTheme(layer);
+ layer.addEventListener("cancel",function(ev){ev.preventDefault();dismissNotice(false)});
+ d.addEventListener("keydown",noticeKeydown,true);d.addEventListener("focusin",noticeFocus,true);close.focus({preventScroll:true});
 }
 
 var noticeScheduled=false;function scheduleNotice(){if(noticeScheduled||state.modalShown||state.modalOpen||!state.posts.length||!isHome())return;noticeScheduled=true;w.setTimeout(function(){noticeScheduled=false;openNewPostsNotice()},1100)}
