@@ -53,7 +53,7 @@ assert(router.indexOf('id="darAdultComponentI18nV1"')<router.indexOf('id="darHom
 assert(archiveHtml.includes('id="darRecentArchiveApp"')&&archiveHtml.includes('dar-recent-archive-v1.js'),"Independent archive HTML missing");
 assert(archiveJs.includes('[3,4,5].forEach')&&archiveJs.includes('function postLink(p)'),"Archive must offer 3/4/5 days and each canonical article");
 assert(archiveJs.includes('reg.register("recent-archive",words)'),"Archive must use shared nine-language UI registry");
-const archiveStart=archiveJs.indexOf("var words={"),archiveEnd=archiveJs.indexOf("\\n};\\n",archiveStart);
+const archiveStart=archiveJs.indexOf("var words={"),archiveEnd=archiveJs.indexOf("};",archiveStart);
 assert(archiveStart>=0&&archiveEnd>archiveStart,"Archive nine-language dictionary missing");
 const archiveWords=vm.runInNewContext("("+archiveJs.slice(archiveStart+"var words=".length,archiveEnd+2)+")");
 assert.deepEqual(Object.keys(archiveWords),languages,"Archive missing one of nine languages");
