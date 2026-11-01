@@ -547,8 +547,8 @@ async function finalizeDarTestHomeV1193(asset) {
   // An iframe receives its own true layout viewport and uses the original
   // /test app, with the new split controller disabled to prevent recursion.
   const foldBootstrap = '<script id="darTestFoldV2Early">if(new URLSearchParams(location.search).get("darFoldPane")==="reader")document.documentElement.classList.add("dar-fold-v2-reader");<\/script>';
-  const foldCssV2 = '<link rel="stylesheet" id="darTestFoldWorkspaceV2Css" href="/test/assets/dar-fold-workspace-v2.css?v=20261101-vision-rail-v3">';
-  const foldJsV2 = '<script defer id="darTestFoldWorkspaceV2Js" src="/test/assets/dar-fold-workspace-v2.js?v=20261101-vision-rail-v3"><\/script>';
+  const foldCssV2 = '<link rel="stylesheet" id="darTestFoldWorkspaceV2Css" href="/test/assets/dar-fold-workspace-v2.css?v=20261101-real-content-v4">';
+  const foldJsV2 = '<script defer id="darTestFoldWorkspaceV2Js" src="/test/assets/dar-fold-workspace-v2.js?v=20261101-real-content-v4"><\/script>';
   if (html.includes("</head>")) html=html.replace("</head>",foldBootstrap+"\n"+foldCssV2+"\n</head>");
   else html=foldBootstrap+foldCssV2+html;
   if (html.includes("</body>")) html=html.replace("</body>",foldJsV2+"\n</body>");
