@@ -5,15 +5,15 @@ if(w.__darRecentPublicationsV1)return;w.__darRecentPublicationsV1=true;
 if(!/^\/(?:index\.html)?$/.test(location.pathname)&&!/^\/pwa(?:\/(?:index\.html)?)?$/.test(location.pathname))return;
 var KEY="darAdultPreferredLocaleV1", DATA="/data/recent-posts.json", state={posts:[],days:5,expanded:false,loading:false,lastFetch:0,modalShown:false,modalOpen:false,lastFocus:null,scrollLock:null,inertItems:[],lastModalSignature:"",titleLocales:{},manifestLoaded:{}};
 var labels={
- de:["NEUE BEITRÄGE","Aktuelle Veröffentlichungen","Alle Beiträge der letzten Tage","2 Tage","3 Tage","5 Tage","Keine neuen Beiträge im gewählten Zeitraum.","Beitrag lesen","Beiträge ansehen","Schließen","Quelle öffnen","Original: Deutsch","Heute","Gestern","Beiträge"],
- ar:["المقالات الجديدة","أحدث المنشورات","جميع منشورات الأيام الماضية","يومان","3 أيام","5 أيام","لا توجد منشورات جديدة في هذه المدة.","اقرأ المقال","عرض المقالات","إغلاق","افتح المصدر","الأصل بالألمانية","اليوم","أمس","مقالات"],
- en:["NEW POSTS","Latest publications","All posts from recent days","2 days","3 days","5 days","No new posts in this period.","Read post","View posts","Close","Open source","Original: German","Today","Yesterday","posts"],
- tr:["YENİ YAZILAR","En son yayınlananlar","Son günlerdeki tüm yazılar","2 gün","3 gün","5 gün","Bu dönemde yeni yazı yok.","Yazıyı oku","Yazıları göster","Kapat","Kaynağı aç","Aslı: Almanca","Bugün","Dün","yazı"],
- ku:["NIVÎSÊN NÛ","Weşanên herî nû","Hemû nivîsên rojên dawî","2 roj","3 roj","5 roj","Di vê demê de nivîsa nû tune.","Nivîsê bixwîne","Nivîsan bibîne","Bigire","Çavkaniyê veke","Esl: Almanî","Îro","Duh","nivîs"],
- ckb:["بابەتە نوێیەکان","نوێترین بڵاوکراوەکان","هەموو بابەتەکانی ڕۆژانی ڕابردوو","٢ ڕۆژ","٣ ڕۆژ","٥ ڕۆژ","بابەتی نوێ نییە.","بابەت بخوێنەوە","بابەتەکان ببینە","داخستن","سەرچاوە بکەرەوە","دەقی ڕەسەن: ئەڵمانی","ئەمڕۆ","دوێنێ","بابەت"],
- bs:["NOVI ČLANCI","Najnovije objave","Sve objave posljednjih dana","2 dana","3 dana","5 dana","Nema novih objava u ovom periodu.","Pročitaj članak","Prikaži članke","Zatvori","Otvori izvor","Izvornik: njemački","Danas","Jučer","objava"],
- fr:["NOUVEAUX ARTICLES","Dernières publications","Tous les articles des derniers jours","2 jours","3 jours","5 jours","Aucune nouvelle publication sur cette période.","Lire l’article","Voir les articles","Fermer","Ouvrir la source","Original : allemand","Aujourd’hui","Hier","articles"],
- es:["ARTÍCULOS NUEVOS","Publicaciones recientes","Todos los artículos de los últimos días","2 días","3 días","5 días","No hay publicaciones nuevas en este período.","Leer artículo","Ver artículos","Cerrar","Abrir fuente","Original: alemán","Hoy","Ayer","artículos"]
+ de:["NEUE BEITRÄGE","Aktuelle Veröffentlichungen","Alle Beiträge der letzten Tage","2 Tage","3 Tage","5 Tage","Keine neuen Beiträge im gewählten Zeitraum.","Beitrag lesen","Beiträge ansehen","Schließen","Quelle öffnen","Original: Deutsch","Heute","Gestern","Beiträge","4 Tage","Für diese Beiträge überspringen"],
+ ar:["المقالات الجديدة","أحدث المنشورات","جميع منشورات الأيام الماضية","يومان","3 أيام","5 أيام","لا توجد منشورات جديدة في هذه المدة.","اقرأ المقال","عرض المقالات","إغلاق","افتح المصدر","الأصل بالألمانية","اليوم","أمس","مقالات","4 أيام","تخطي هذه المقالات"],
+ en:["NEW POSTS","Latest publications","All posts from recent days","2 days","3 days","5 days","No new posts in this period.","Read post","View posts","Close","Open source","Original: German","Today","Yesterday","posts","4 days","Skip these posts"],
+ tr:["YENİ YAZILAR","En son yayınlananlar","Son günlerdeki tüm yazılar","2 gün","3 gün","5 gün","Bu dönemde yeni yazı yok.","Yazıyı oku","Yazıları göster","Kapat","Kaynağı aç","Aslı: Almanca","Bugün","Dün","yazı","4 gün","Bu yazıları atla"],
+ ku:["NIVÎSÊN NÛ","Weşanên herî nû","Hemû nivîsên rojên dawî","2 roj","3 roj","5 roj","Di vê demê de nivîsa nû tune.","Nivîsê bixwîne","Nivîsan bibîne","Bigire","Çavkaniyê veke","Esl: Almanî","Îro","Duh","nivîs","4 roj","Van nivîsan derbas bike"],
+ ckb:["بابەتە نوێیەکان","نوێترین بڵاوکراوەکان","هەموو بابەتەکانی ڕۆژانی ڕابردوو","٢ ڕۆژ","٣ ڕۆژ","٥ ڕۆژ","بابەتی نوێ نییە.","بابەت بخوێنەوە","بابەتەکان ببینە","داخستن","سەرچاوە بکەرەوە","دەقی ڕەسەن: ئەڵمانی","ئەمڕۆ","دوێنێ","بابەت","٤ ڕۆژ","ئەم بابەتانە تێپەڕێنە"],
+ bs:["NOVI ČLANCI","Najnovije objave","Sve objave posljednjih dana","2 dana","3 dana","5 dana","Nema novih objava u ovom periodu.","Pročitaj članak","Prikaži članke","Zatvori","Otvori izvor","Izvornik: njemački","Danas","Jučer","objava","4 dana","Preskoči ove članke"],
+ fr:["NOUVEAUX ARTICLES","Dernières publications","Tous les articles des derniers jours","2 jours","3 jours","5 jours","Aucune nouvelle publication sur cette période.","Lire l’article","Voir les articles","Fermer","Ouvrir la source","Original : allemand","Aujourd’hui","Hier","articles","4 jours","Ignorer ces articles"],
+ es:["ARTÍCULOS NUEVOS","Publicaciones recientes","Todos los artículos de los últimos días","2 días","3 días","5 días","No hay publicaciones nuevas en este período.","Leer artículo","Ver artículos","Cerrar","Abrir fuente","Original: alemán","Hoy","Ayer","artículos","4 días","Omitir estos artículos"]
 };
 var registry=w.DARAdultComponentI18nV1||null;
 if(registry)registry.register("recent-posts",labels);
@@ -61,7 +61,7 @@ function render(){var mount=d.getElementById("darRecentPublicationsV1"),h=host()
  var panel=e("div","dar-recent-panel");
  var heading=e("h3","dar-recent-panel-title",t(2));panel.appendChild(heading);
  var tabs=e("div","dar-recent-days");tabs.setAttribute("role","group");tabs.setAttribute("aria-label",t(2));
- [2,3,4,5].forEach(function(n,i){var dayLabels={de:"4 Tage",ar:"4 أيام",en:"4 days",tr:"4 gün",ku:"4 roj",ckb:"٤ ڕۆژ",bs:"4 dana",fr:"4 jours",es:"4 días"};var b=e("button","dar-recent-day"+(state.days===n?" is-selected":""),n===4?dayLabels[locale()]:t(n===5?5:i+3));b.type="button";b.setAttribute("aria-pressed",String(state.days===n));b.addEventListener("click",function(){state.days=n;render()});tabs.appendChild(b)});panel.appendChild(tabs);
+ [2,3,4,5].forEach(function(n,i){var b=e("button","dar-recent-day"+(state.days===n?" is-selected":""),n===4?t(15):t(n===5?5:i+3));b.type="button";b.setAttribute("aria-pressed",String(state.days===n));b.addEventListener("click",function(){state.days=n;render()});tabs.appendChild(b)});panel.appendChild(tabs);
  if(!items.length){panel.appendChild(e("p","dar-recent-empty",t(6)))}else{
  var groups=new Map();items.forEach(function(p){var k=dayKey(new Date(p.date));if(!groups.has(k))groups.set(k,[]);groups.get(k).push(p)});
  groups.forEach(function(posts,key){var title=e("h4","dar-recent-day-title",dateLabel(posts[0])+" · "+posts.length+" "+t(14));panel.appendChild(title);var rows=e("div","dar-recent-list");posts.forEach(function(p){addPost(rows,p,false)});panel.appendChild(rows)});
@@ -165,7 +165,7 @@ function refreshOpenNotice(){
  });
  applyNoticeTheme(layer);
 }
-function skipText(){return ({"de":"Für diese Beiträge überspringen","en":"Skip these posts","tr":"Bu yazıları atla","ar":"تخطي هذه المقالات","ku":"Van nivîsan derbas bike","ckb":"ئەم بابەتانە تێپەڕێنە","bs":"Preskoči ove članke","fr":"Ignorer ces articles","es":"Omitir estos artículos"})[locale()]||"Überspringen"}
+function skipText(){return t(16)}
 function syncLocale(){render();refreshOpenNotice()}
 
 function openNewPostsNotice(){if(!canAnnounce())return;
