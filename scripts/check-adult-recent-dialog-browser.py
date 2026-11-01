@@ -177,6 +177,55 @@ def test():
         """)
         assert fixed, "Source → original prayer clock → Salām → Ibn Sīrīn → Qibla/Bibliothek → Search → Qurʾān → compact news was interrupted"
 
+        # 2026-11-01 iOS scroll-jitter regression: unrelated sticky-header,
+        # tab and widget class changes MUST NOT rebuild the home card or
+        # reparent any of the fixed home sections during a user scroll.
+        stable = driver.execute_async_script("""
+          const done=arguments[arguments.length-1];
+          const mount=document.querySelector("#darRecentPublicationsV1");
+          const card=mount&&mount.firstElementChild;
+          const root=document.querySelector("#darHomeHtmlParityV1");
+          const homeNodes=Array.from(root.querySelectorAll(
+            ".dhp-welcome,.dhp-isnad,.dhp-quickbar,.dhp-search-box,.dhp-quran-section"));
+          let cardMutations=0,homeMutations=0;
+          const cardObserver=new MutationObserver(function(records){
+            cardMutations+=records.filter(function(r){return r.type==="childList"}).length;
+          });
+          const homeObserver=new MutationObserver(function(records){
+            homeMutations+=records.filter(function(r){
+              return r.type==="childList"&&Array.from(r.addedNodes).some(
+                function(n){return homeNodes.includes(n)});
+            }).length;
+          });
+          cardObserver.observe(mount,{childList:true});
+          homeObserver.observe(root,{childList:true,subtree:true});
+          window.scrollTo({top:325,behavior:"instant"});
+          const initialY=window.scrollY;
+          let n=0;
+          function frame(){
+            document.body.classList.toggle("sticky-scrolling-fixture");
+            root.querySelector(".dhp-welcome").classList.toggle("is-compact");
+            root.querySelector(".dhp-isnad").classList.toggle("is-visible");
+            if(++n<28){requestAnimationFrame(frame);return}
+            requestAnimationFrame(function(){
+              requestAnimationFrame(function(){
+                cardObserver.disconnect();
+                homeObserver.disconnect();
+                done({cardMutations,homeMutations,initialY,endY:window.scrollY,
+                  identical:mount.firstElementChild===card,
+                  mounted:mount.isConnected});
+              });
+            });
+          }
+          requestAnimationFrame(frame);
+        """)
+        assert stable["cardMutations"] == 0, f"Global scroll/sticky updates rebuilt news card: {stable}"
+        assert stable["homeMutations"] == 0, f"Scroll updates reparented home sections: {stable}"
+        assert stable["identical"] and stable["mounted"], f"Home card replaced during scrolling: {stable}"
+        assert abs(stable["endY"]-stable["initialY"]) <= 2, f"Scroll position jumped: {stable}"
+        print("PASS: 28 live sticky/scroll mutations, zero home reflow, unchanged card and scroll position")
+
+
         current_document = driver.execute_script("return performance.timeOrigin")
         current_url = driver.current_url
         driver.find_element(By.CSS_SELECTOR, ".dar-recent-notice-all").click()
