@@ -102,6 +102,18 @@ try{
    if(!aliases.some(h=>actual.startsWith(h)))
       throw Error("Pane route did not sync: "+key+" "+actual);
    await inspect(key,true);
+   const chooser=await page.evaluate(()=>{
+     const root=document.getElementById("appView");
+     return {count:document.querySelectorAll("#darTestDuoContext [data-duo-context-index]").length,
+       options:[...document.querySelectorAll("#darTestDuoContext [data-duo-context-index]")]
+         .slice(0,8).map(e=>e.textContent.slice(0,70)),
+       controls:[...(root?.querySelectorAll("button,a,[role='button']")||[])]
+         .filter(e=>String(e.textContent||"").trim().length>3).slice(0,24)
+         .map(e=>({text:String(e.textContent||"").trim().slice(0,58),
+           nav:e.getAttribute("data-nav"),value:e.getAttribute("data-value"),
+           action:e.getAttribute("data-action"),id:e.id,cls:String(e.className).slice(0,70)}))};
+   });
+   console.log("SMART_DUO_CHOOSER "+key+" "+JSON.stringify(chooser));
  }
  const n=await page.locator("#darTestDuoContext [data-duo-context-index]").count();
  console.log("SMART_DUO_CONTEXT_COUNT",n);
@@ -126,6 +138,10 @@ try{
  await page.waitForTimeout(180);
  const finalLeft=await page.locator("#darTestDuoWorkspaceNav").evaluate(e=>e.scrollTop);
  if(Math.abs(finalLeft-leftTop)>2)throw Error("Reader scroll moved left chooser");
+ for(const [w,h,label] of [[820,1180,"tablet-portrait"],[1024,768,"tablet-landscape"]]){
+   await page.setViewportSize({width:w,height:h});
+   await inspect(label,true);
+ }
  await page.setViewportSize({width:390,height:844});
  await inspect("fold-cover",false);
  await page.setViewportSize({width:726,height:512});
