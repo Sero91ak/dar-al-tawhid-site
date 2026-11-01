@@ -55,3 +55,6 @@ assert.deepEqual(attrs,{},"Disable all temporary fold root override attributes")
 assert.equal(classSet.size,0,"Disable old left-side experimental dock");
 assert.equal(win.DARTestDuoAdaptive.audit().foldOverridesActive,false);
 console.log("DĀR TEST: Fold experiment disabled, normal tablet navigation retained PASS");
+
+// Run the new isolated V2 contract from the existing, protected CI entrypoint.
+require("./dar-fold-workspace-v2-guard.cjs");
