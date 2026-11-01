@@ -52,6 +52,21 @@ def check() -> None:
             assert "mandatory" in v["snap"], f"{name}: CSS Scroll Snap missing"
             assert "user-scalable=no" not in (v["viewport"] or ""), f"{name}: browser zoom disabled"
             toggle = capsule.find_element(By.CSS_SELECTOR, ".dar-desktop-recent-toggle")
+            # The legacy website sets scroll-behavior:smooth globally. Browser
+            # automation (and keyboard activation) must reach this deeply placed
+            # control before trying to click it.
+            browser.execute_script("""
+                document.documentElement.style.scrollBehavior='auto';
+                arguments[0].scrollIntoView({block:'center',inline:'nearest',behavior:'instant'});
+            """, toggle)
+            hit = browser.execute_script("""
+                const b=arguments[0],r=b.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+                const target=document.elementFromPoint(cx,cy);
+                return {top:r.top,bottom:r.bottom,height:innerHeight,scrollY:scrollY,
+                    hit:target&&target.tagName+' '+target.className,
+                    clickable:!!(target&&(target===b||b.contains(target)))};
+            """, toggle)
+            assert hit["clickable"], f"{name}: toggle obstructed or out of viewport {hit}"
             toggle.click()
             assert toggle.get_attribute("aria-expanded") == "true", f"{name}: disclosure not expanded"
             assert capsule.find_element(By.ID, "darDesktopRecentFlatList").is_displayed(), f"{name}: flat list hidden"
