@@ -75,3 +75,39 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             build 2>&1 | tee "$RUNNER_TEMP/adhan-cinematic-xcodebuild.log"
           test "${PIPESTATUS[0]}" -eq 0
+
+  standalone-preview:
+    name: Standalone iOS Simulator App
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate dependency-free QA preview app
+        run: |
+          cd ios/AdhanCinematicPreview
+          xcodegen generate
+      - name: Build standalone app for iOS Simulator
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project ios/AdhanCinematicPreview/DarAdhanCinematicPreview.xcodeproj \
+            -scheme DarAdhanCinematicPreview \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath "$RUNNER_TEMP/DarAdhanPreviewDerived" \
+            CODE_SIGNING_ALLOWED=NO \
+            build 2>&1 | tee "$RUNNER_TEMP/DarAdhanPreviewBuild.log"
+      - name: Package installable Simulator app
+        run: |
+          APP="$RUNNER_TEMP/DarAdhanPreviewDerived/Build/Products/Debug-iphonesimulator/DarAdhanCinematicPreview.app"
+          test -d "$APP"
+          ditto -c -k --sequesterRsrc --keepParent "$APP" "$RUNNER_TEMP/DarAdhanCinematicPreview-simulator.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DarAdhanCinematicPreview-simulator
+          path: ${{ runner.temp }}/DarAdhanCinematicPreview-simulator.zip
+          if-no-files-found: error
+          retention-days: 7
