@@ -41,7 +41,7 @@ jobs:
           code=(project/'DarAlTawhid/DarAdhanCinematicDemo.swift').read_text()
           app=(project/'DarAlTawhid/DarAlTawhidApp.swift').read_text()
           pbx=(project/'DarAlTawhid.xcodeproj/project.pbxproj').read_text()
-          assert all(('case '+p) in code for p in ['fajr','dhuhr','asr','maghrib','isha'])
+          assert 'case fajr, dhuhr, asr, maghrib, isha' in code
           assert 'AVPlayerLooper' in code and 'player.isMuted = true' in code
           assert 'Die Gebetszeit ist eingetreten.' in code
           assert 'fileImporter' in code and 'startAccessingSecurityScopedResource' in code
