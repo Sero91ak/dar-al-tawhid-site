@@ -595,8 +595,8 @@ async function finalizeDarTestHomeV1193(asset) {
   html = html.replace(/<link\b[^>]*dar-duo-responsive-v1\.css[^>]*>/gi, "");
   html = html.replace(/<script\b[^>]*dar-duo-responsive-v1\.js[^>]*><\/script>\s*/gi, "");
   const duoV2 =
-    '<link rel="stylesheet" id="darTestDuoWorkspaceCSSV2" href="/test/assets/dar-duo-responsive-v1.css?v=20261101-dual-workspace-v2">' +
-    '<script defer id="darTestDuoWorkspaceJSV2" src="/test/assets/dar-duo-responsive-v1.js?v=20261101-dual-workspace-v2"></script>';
+    '<link rel="stylesheet" id="darTestDuoWorkspaceCSSV2" href="/test/assets/dar-duo-responsive-v1.css?v=20261101-true-half-half-v4">' +
+    '<script defer id="darTestDuoWorkspaceJSV2" src="/test/assets/dar-duo-responsive-v1.js?v=20261101-true-half-half-v4"></script>';
   const finalHtmlTag = html.toLowerCase().lastIndexOf("</html>");
   html = finalHtmlTag >= 0
     ? html.slice(0, finalHtmlTag) + duoV2 + html.slice(finalHtmlTag)
