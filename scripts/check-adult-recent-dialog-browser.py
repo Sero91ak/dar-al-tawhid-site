@@ -36,8 +36,8 @@ html,body{margin:0;min-height:100%;font-family:system-ui;background:#0d1b16;colo
 <script defer src="/assets/i18n/adult-component-i18n-v1.js"></script>
 <script defer src="/assets/dar-home-recent-posts-v1.js"></script>
 </head><body class="is-home-route">
-<main id="darHomeHtmlParityV1"><section class="dhp-welcome">Test Home</section>
-<aside class="daily-question-fixture">Daily question injected before Ibn Sīrīn</aside><section class="dhp-isnad">Original quotation</section><div class="dhp-quickbar">Qibla &amp; Library</div><aside class="other-widget-fixture">Separate optional widget</aside><section class="dhp-search-box">Search</section><section class="dhp-quran-section">Qurʾān</section><div id="dhpLibrary">Library</div></main>
+<main id="darHomeHtmlParityV1"><div class="dhp-home-source-v55">Source strapline</div><section class="dhp-welcome">Test Home</section>
+<aside class="daily-question-fixture">Daily question injected before Ibn Sīrīn</aside><section class="dhp-isnad">Original quotation</section><div class="dhp-quickbar">Qibla &amp; Library</div><aside class="other-widget-fixture">Separate optional widget</aside><section class="dhp-search-box">Search</section><section class="dhp-quran-section">Qurʾān</section><section class="dat-smart-prayer">LIVE PRAYER CLOCK, deliberately misplaced after Qurʾān in test fixture</section><div id="dhpLibrary">Library</div></main>
 <div id="appView"></div>
 <script>
 window.__openedPost=null;
@@ -166,14 +166,15 @@ def test():
         # Check actual DOM sequence, including an unrelated daily quiz inserted
         # between two fixed home elements by another application widget.
         fixed = driver.execute_script("""
-          var nodes=['.dhp-welcome','.dhp-isnad','.dhp-quickbar',
-            '.dhp-search-box','.dhp-quran-section','#darRecentPublicationsV1']
+          var nodes=['.dhp-home-source-v55','.dat-smart-prayer','.dhp-welcome',
+            '.dhp-isnad','.dhp-quickbar','.dhp-search-box',
+            '.dhp-quran-section','#darRecentPublicationsV1']
             .map(s=>document.querySelector(s));
           return nodes.every(n=>!!n) &&
             nodes.every((n,i)=>i===0 || nodes[i-1].nextElementSibling===n) &&
             nodes.every((n,i)=>i===0 || nodes[i-1].getBoundingClientRect().top<=n.getBoundingClientRect().top);
         """)
-        assert fixed, "Salām → Ibn Sīrīn → Qibla/Bibliothek → Search → Qurʾān → compact news was interrupted"
+        assert fixed, "Source → original prayer clock → Salām → Ibn Sīrīn → Qibla/Bibliothek → Search → Qurʾān → compact news was interrupted"
 
         driver.find_element(By.CSS_SELECTOR, ".dar-recent-notice-all").click()
         expect(driver, lambda d: not d.find_elements(By.ID, "darRecentNoticeV1"), "View all did not close")
