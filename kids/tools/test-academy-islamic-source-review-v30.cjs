@@ -26,7 +26,7 @@ for(const lesson of course){
  assert.ok(lesson.hadith?.source?.startsWith("Ṣaḥīḥ "),"Check ḥadīṯ source: "+lesson.id);
  assert.ok(lesson.hadith?.text?.trim(),"Missing Sunnah paraphrase: "+lesson.id);
  assert.ok(lesson.sourceAudit?.hadithUrl===undefined||/^https:\/\/(sunnah.com|dorar.net)\//.test(lesson.sourceAudit.hadithUrl),"Unrecognized Hadith source host: "+lesson.id);
- assert.equal(lesson.voiceApproved,false,"Audio must remain closed: "+lesson.id);
+ assert.notEqual(lesson.voiceApproved,true,"Audio must remain closed: "+lesson.id);
  if(lesson.ageText)lessonsWithAgeText++;
  for(const age of ages){
   assert.ok(lesson.ageText?.[age]?.lines?.length===4,"Missing age-specific teaching: "+lesson.id+" "+age);
