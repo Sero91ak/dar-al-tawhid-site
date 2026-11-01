@@ -48,7 +48,7 @@ function render(){var mount=d.getElementById("darRecentPublicationsV1"),h=host()
  }
  mount.appendChild(panel);
 }
-function refresh(){if(state.loading||Date.now()-state.lastFetch<90000)return;state.loading=true;state.lastFetch=Date.now();fetch(DATA+"?t="+Math.floor(Date.now()/60000),{cache:"no-store",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("index "+r.status);return r.json()}).then(function(j){if(j.schemaVersion!==1||!Array.isArray(j.posts))throw Error("invalid recent index");state.posts=j.posts;render();openNewPostsNotice()}).catch(function(){state.lastFetch=0;render()}).finally(function(){state.loading=false})}
+function refresh(){if(state.loading||Date.now()-state.lastFetch<90000)return;state.loading=true;state.lastFetch=Date.now();fetch(DATA+"?t="+Math.floor(Date.now()/60000),{cache:"no-store",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("index "+r.status);return r.json()}).then(function(j){if(j.schemaVersion!==1||!Array.isArray(j.posts))throw Error("invalid recent index");state.posts=j.posts;render();if(!state.modalShown&&!state.modalOpen)w.setTimeout(openNewPostsNotice,850)}).catch(function(){state.lastFetch=0;render()}).finally(function(){state.loading=false})}
 
 /* On-device/in-app announcement, independent of OneSignal permission.
    Once per launch session; "skip" silences exactly this published batch until
@@ -58,7 +58,7 @@ function latestSignature(posts){var hits=recent(posts,5);return hits.length?hits
 function canAnnounce(){if(!isHome()||state.modalShown||state.modalOpen||d.hidden||!recent(state.posts,5).length)return false;
  var sig=latestSignature(state.posts);
  try{if(w.sessionStorage.getItem(NOTICE_SESSION)===sig||w.localStorage.getItem(NOTICE_SKIPPED)===sig)return false}catch(_){}
- if(d.querySelector('[role="dialog"]:not(#darRecentNoticeV1),[aria-modal="true"]:not(#darRecentNoticeV1),.dar-onboarding-overlay:not([hidden]),.modal.show,.modal.open'))return false;
+ var otherModal=Array.from(d.querySelectorAll('[role="dialog"]:not(#darRecentNoticeV1),[aria-modal="true"]:not(#darRecentNoticeV1),.dar-onboarding-overlay:not([hidden]),.modal.show,.modal.open')).some(function(el){var st=w.getComputedStyle(el);return st.display!=="none"&&st.visibility!=="hidden"&&el.getClientRects().length>0});if(otherModal)return false;
  return true}
 function dismissNotice(skip){var layer=d.getElementById("darRecentNoticeV1");if(!layer)return;
  var sig=latestSignature(state.posts);try{w.sessionStorage.setItem(NOTICE_SESSION,sig);if(skip)w.localStorage.setItem(NOTICE_SKIPPED,sig)}catch(_){}
