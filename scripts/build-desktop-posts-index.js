@@ -103,3 +103,6 @@ const compact=rows.filter(r=>{
 }));
 fs.writeFileSync(RECENT_OUT,JSON.stringify({schemaVersion:1,generatedAt:new Date().toISOString(),timezone:"Europe/Berlin",windowDays:45,count:compact.length,posts:compact},null,2)+"\n");
 console.log("home recent posts index:",compact.length,"→",path.relative(ROOT,RECENT_OUT));
+
+// Production deploy gate: every new adult home UI module must be complete in all nine languages.
+require("./check-adult-component-locales-v1.cjs");
