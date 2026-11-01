@@ -152,7 +152,14 @@ jobs:
               if expanded!='true':raise RuntimeError('Mini player expand did not respond')
               driver.find_element(By.ID,'darV8PlayerFullscreen').click()
               visible=driver.execute_script("return document.body.classList.contains('dar-v8-player-fullscreen') && getComputedStyle(document.querySelector('.v8-real-player')).display!=='none'")
-              if not visible:raise RuntimeError('Full Quran player did not open')
+              if not visible:
+                diag=driver.execute_script("""const p=document.querySelector('.v8-real-player'),b=document.getElementById('darV8PlayerFullscreen');
+                  return {bodyClass:document.body.className,route:document.body.dataset.darV8Route,
+                  playerDisplay:p?getComputedStyle(p).display:'missing',playerVisibility:p?getComputedStyle(p).visibility:'missing',
+                  playerRect:p?{width:p.getBoundingClientRect().width,height:p.getBoundingClientRect().height}:null,
+                  buttonExpanded:b&&b.getAttribute('aria-expanded'),buttonText:b&&b.textContent,
+                  elementFromPoint:b&&document.elementFromPoint(b.getBoundingClientRect().x+5,b.getBoundingClientRect().y+5)?.className};""")
+                raise RuntimeError('Full Quran player did not open: '+str(diag))
               geometry=driver.execute_script("""const p=document.querySelector('.v8-real-player'), b=document.getElementById('darV8PlayerFullscreen'),
                 h=p.querySelector('.v8-player-label'), controls=p.querySelector('.qa26-controls'),
                 selects=[...p.querySelectorAll('#qaSurah,#qaAyah,#qaReciter')];
