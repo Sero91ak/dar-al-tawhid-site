@@ -267,30 +267,40 @@ def test():
         time.sleep(2)
         assert not driver.find_elements(By.ID, "darRecentNoticeV1"), "Skipped batch reopened"
         print("PASS: 9-language UI integration (TR), skip persists until next post")
-        compact = driver.find_element(By.CSS_SELECTOR, "#darRecentPublicationsV1 .dar-recent-compact-link")
-        assert compact.is_displayed(), "Compact home entry not visible"
+        premium = driver.find_element(By.CSS_SELECTOR, "#darRecentPublicationsV1.dar-recent-premium")
+        assert premium.is_displayed(), "Premium home publication capsule not visible"
         assert driver.execute_script("""
           var m=document.getElementById('darRecentPublicationsV1'),
               q=document.querySelector('.dhp-quran-section');
           return m&&q&&m.previousElementSibling===q
-        """), "Qurʾān must precede compact news entry – Ibn Sīrīn/Qibla remain above Qurʾān"
+        """), "Qurʾān must precede premium news – other home modules remain fixed"
         url_before = driver.current_url
-        compact.click()
-        expect(driver, lambda d: "En son yayınlananlar" in d.find_element(By.CSS_SELECTOR, ".dar-recent-inline-heading").text,
-               "Internal list must use Turkish adult app language")
-        assert url_before == driver.current_url, "Compact capsule reloaded a website"
-        expect(driver, lambda d: "ANNENİN ÖZEL KONUMU" in d.find_element(By.ID, "darRecentInlineListV2").text,
-               "Existing Q49 Turkish post manifest was not applied")
-        assert not driver.find_elements(By.CSS_SELECTOR, "#darRecentInlineListV2 select")
+        expect(driver, lambda d: "En son yayınlananlar" in d.find_element(By.CSS_SELECTOR, ".dar-recent-premium-section-title").text,
+               "Premium capsule must use the Turkish adult app language")
+        expect(driver, lambda d: "ANNENİN ÖZEL KONUMU" in d.find_element(By.ID, "darRecentPublicationsV1").text,
+               "Q49 Turkish localized title must appear directly in the home capsule")
+        assert len(driver.find_elements(By.CSS_SELECTOR, ".dar-recent-premium-slide")) == 3
+        next_button = driver.find_element(By.CSS_SELECTOR, ".dar-recent-premium-next")
+        next_button.click()
+        expect(driver, lambda d: "02 / 03" in d.find_element(By.CSS_SELECTOR, ".dar-recent-premium-counter").text,
+               "Horizontal post navigation did not advance")
+        toggle = driver.find_element(By.CSS_SELECTOR, ".dar-recent-premium-toggle")
+        toggle.click()
+        expect(driver, lambda d: len(d.find_elements(By.CSS_SELECTOR, ".dar-recent-premium-list-row")) == 3
+               and d.find_element(By.ID, "darRecentPremiumFlatList").is_displayed(),
+               "One-capsule flat list did not expand")
+        assert toggle.get_attribute("aria-expanded") == "true"
+        assert driver.current_url == url_before, "Premium capsule unexpectedly navigated to a separate website"
+        assert not driver.find_elements(By.CSS_SELECTOR, "#darRecentPublicationsV1 select")
         driver.execute_script("""
           localStorage.setItem('darAdultPreferredLocaleV1','ar');
           dispatchEvent(new CustomEvent('dar-adult-locale-changed',{detail:{locale:'ar'}}));
         """)
-        expect(driver, lambda d: "أحدث المنشورات" in d.find_element(By.ID, "darRecentInlineListV2").text,
-               "Switching adult app to Arabic did not translate internal post list")
-        assert driver.find_element(By.ID, "darRecentInlineListV2").get_attribute("dir") == "rtl"
+        expect(driver, lambda d: "أحدث المنشورات" in d.find_element(By.CSS_SELECTOR, ".dar-recent-premium-section-title").text,
+               "Switching adult app to Arabic did not update premium capsule")
+        assert driver.find_element(By.ID, "darRecentPublicationsV1").get_attribute("dir") == "rtl"
         assert driver.current_url == url_before
-        print("PASS: compact entry after Quran, existing Q49 translation, auto app locale in TR/AR and no manual picker")
+        print("PASS: premium capsule after Quran, Q49 Turkish translation, Arabic RTL, navigation and flat expand")
 
         driver.execute_script("sessionStorage.clear();localStorage.clear()")
         fresh(driver, base)
