@@ -66,14 +66,24 @@ function cardMarkup(){
  var e=entry(),q=daily(),answered=Number.isInteger(e.answer),status=answered?"Heute beantwortet":e.skipped?"Heute übersprungen":"Deine tägliche Wissensfrage";
  return '<div class="ddh-card-inner"><div class="ddh-card-symbol" aria-hidden="true"><img src="/assets/dar-3d-icons/quiz.png" alt=""></div><div class="ddh-card-content"><span class="ddh-kicker">EIN MOMENT WISSEN · '+esc(day())+'</span><h2>Die Frage des Tages</h2><p>'+esc(q.q)+'</p><span class="ddh-caption">'+esc(status)+'</span></div><span class="ddh-card-arrow" aria-hidden="true">›</span></div>'
 }
+/* The historic visitor start sequence is fixed: Salām → Ibn Sīrīn →
+   Qibla/Bibliothek → Suche → Qurʾān → compact recent-posts. Daily Quiz
+   must NEVER insert after Salām and interrupt those fixed essentials. */
+function dailyHomeAnchor(root){
+ return root.querySelector("#darRecentPublicationsV1") ||
+        root.querySelector(".dhp-quran-section") ||
+        root.querySelector(".dhp-welcome");
+}
 function syncCard(){
  var root=homeRoot();if(!root)return;
  var card=root.querySelector("#darDailyKnowledgeCardV1");
+ var anchor=dailyHomeAnchor(root);if(!anchor)return;
  if(!card){
-  var welcome=root.querySelector(".dhp-welcome");if(!welcome)return;
-  card=document.createElement("button");card.type="button";card.id="darDailyKnowledgeCardV1";card.className="ddh-card";card.dataset.ddhOpen="true";card.setAttribute("aria-haspopup","dialog");card.setAttribute("aria-label","Frage des Tages beantworten");
-  var mount=root.querySelector(".dsp-mount");(mount||welcome).insertAdjacentElement("afterend",card);
+  card=document.createElement("button");card.type="button";card.id="darDailyKnowledgeCardV1";card.className="ddh-card";
+  card.dataset.ddhOpen="true";card.setAttribute("aria-haspopup","dialog");card.setAttribute("aria-label","Frage des Tages beantworten");
  }
+ // This direct sibling position is the contract across iOS WKWebView / PWA / web.
+ if(anchor.nextElementSibling!==card)anchor.insertAdjacentElement("afterend",card);
  var sig=owner()+"|"+day()+"|"+JSON.stringify(entry());
  if(card.dataset.ddhSig!==sig){card.innerHTML=cardMarkup();card.dataset.ddhSig=sig}
  if(!seenHome){seenHome=true;setTimeout(maybePrompt,1350)}
