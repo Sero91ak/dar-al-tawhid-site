@@ -58,6 +58,9 @@ try{
    if(!dual) {
      if(d.reader&&d.reader.display!=="none")throw Error("Narrow view kept iframe");
      if(!d.app || d.app.w<d.viewport-3)throw Error("Narrow view did not restore original app");
+     if(!d.bottom||d.bottom.display==="none"||d.bottom.x< -2||
+        d.bottom.x+d.bottom.w>d.viewport+2)
+       throw Error("Original bottom navigation clipped on Fold cover");
      return null;
    }
    if(!d.reader||!d.left)throw Error(label+" reader/chooser missing");
