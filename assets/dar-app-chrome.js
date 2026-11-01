@@ -70,15 +70,21 @@
     var actions=document.createElement("div");actions.className="dar-source-actions";
     var home=document.createElement("button");home.type="button";home.className="dar-source-home";home.textContent="⌂ Startseite";
     home.addEventListener("click",function(){
-      closeInternalSource(false);
-      setTimeout(function(){
-        try{
-          if(typeof window.navigate==="function"){window.navigate("home");return}
-          var nav=document.querySelector('[data-nav="home"],[data-nav="start"]');
-          if(nav){nav.click();return}
-          location.hash="#home";
-        }catch(_){}
-      },0);
+      var wasPushed=sourcePanelHistory;
+      // Home is a *new internal app route*, not a browser back followed by
+      // a competing route push (which could undo the intended Home action).
+      closeInternalSource(true);
+      try{
+        if(wasPushed&&window.history&&typeof window.history.replaceState==="function"){
+          var nextState=Object.assign({},window.history.state||{});
+          delete nextState.__darInternalSourceV3;
+          window.history.replaceState(nextState,"",location.href);
+        }
+        if(typeof window.navigate==="function"){window.navigate("home");return}
+        var nav=document.querySelector('[data-nav="home"],[data-nav="start"]');
+        if(nav){nav.click();return}
+        location.hash="#home";
+      }catch(_){}
     });
     actions.appendChild(back);actions.appendChild(home);
     toolbar.appendChild(actions);toolbar.appendChild(caption);
