@@ -149,6 +149,15 @@ def test():
         time.sleep(2)
         assert not driver.find_elements(By.ID, "darRecentNoticeV1"), "Skipped batch reopened"
         print("PASS: 9-language UI integration (TR), skip persists until next post")
+        manual_button = driver.find_element(By.CSS_SELECTOR, ".dar-recent-manual-open")
+        assert manual_button.text.strip() == "Yeni yazıları aç", "Manual reopen button not localized"
+        manual_button.click()
+        expect(driver, lambda d: d.execute_script(
+            "var x=document.getElementById('darRecentNoticeV1');return !!(x&&x.open&&x.matches(':modal'))"),
+            "Manual popup should reopen even after skipping existing batch")
+        driver.find_element(By.CSS_SELECTOR, ".dar-recent-notice-x").click()
+        expect(driver, lambda d: not d.find_elements(By.ID, "darRecentNoticeV1"), "Manual close failed")
+        print("PASS: manually reopen new-post dialog after dismiss / skip, nine-language title")
 
         driver.execute_script("sessionStorage.clear();localStorage.clear()")
         fresh(driver, base)
