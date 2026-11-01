@@ -194,3 +194,16 @@ html.dar-duo-reader-embedded body #appView :is(
 @media(prefers-reduced-motion:reduce){
   #darTestDuoWorkspaceNav :is(a,button){transition:none!important;}
 }
+
+/* Fold cover return: the original legacy dock can otherwise be left at
+ * x=195 with width=328 on a 390px viewport (123px clipped). This touches
+ * ONLY a Test session that previously entered the new expanded workspace. */
+html.dar-test-duo-ever-active:not(.dar-test-duo-active) #bottomNav {
+  position:fixed!important;
+  left:50%!important;right:auto!important;
+  width:min(420px,calc(100vw - 28px))!important;
+  max-width:calc(100vw - 28px)!important;
+  transform:translateX(-50%)!important;translate:none!important;
+  margin-left:0!important;margin-right:0!important;
+  transition:none!important;
+}
