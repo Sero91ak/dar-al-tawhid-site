@@ -47,7 +47,7 @@ function fetchTitleManifests(posts){
 
 function addPost(parent,p,compact){var a=e("a","dar-recent-post");a.href=openLink(p);a.dataset.postId=p.id;var meta=e("span","dar-recent-meta",dateLabel(p)+" · "+(p.category||t(14)));a.appendChild(meta);a.appendChild(e("strong","dar-recent-title",displayTitle(p)));if(!compact&&p.speaker)a.appendChild(e("span","dar-recent-speaker",p.speaker));if(untranslated(p))a.appendChild(e("small","dar-recent-untranslated",t(11)));a.appendChild(e("span","dar-recent-open",t(7)+" ›"));a.addEventListener("click",function(ev){if(d.getElementById("pageRoot"))return;if(typeof w.navigate==="function"){ev.preventDefault();w.navigate("post",p.id)}});parent.appendChild(a)}
 function section(parent,kicker,title){var h=e("div","dar-recent-header");h.appendChild(e("span","dar-recent-kicker",kicker));h.appendChild(e("h2","dar-recent-heading",title));parent.appendChild(h)}
-function archiveUrl(){return "/neueste-beitraege/"}
+function archiveUrl(){return /^\/pwa(?:\/|$)/.test(location.pathname)?"/pwa/neueste-beitraege/":"/neueste-beitraege/"}
 function openArchive(){w.location.assign(archiveUrl())}
 function placeCompact(h,mount){
  if(!mount.isConnected){if(h.anchor&&h.anchor.parentNode){if(h.after)h.anchor.insertAdjacentElement("afterend",mount);else h.anchor.parentNode.insertBefore(mount,h.anchor)}else h.root.appendChild(mount);return}
