@@ -98,6 +98,18 @@ const URL="https://dar-al-tawhid.de/test/?env=staging&source=duo-half-qa#quran";
     }));
   });
   console.log("DAR_HALF_QA_CONTEXT_SOURCES "+JSON.stringify(sources));
+  const realSurahs=await page.locator('#darTestDuoContext [data-duo-context-index]').count();
+  if(realSurahs<10)throw Error("Left pane has no real selectable Qurʾān entries");
+  const beforeSurah=await page.evaluate(()=>location.hash);
+  await page.locator('#darTestDuoContext [data-duo-context-index]').first().tap({timeout:10000});
+  await page.waitForTimeout(800);
+  const afterSurah=await page.evaluate(()=>({hash:location.hash,
+    content:document.querySelector('#appView')?.textContent?.trim().length||0}));
+  console.log("DAR_HALF_QA_SURAH_TAP "+JSON.stringify({beforeSurah,afterSurah,realSurahs}));
+  if(afterSurah.hash===beforeSurah)throw Error("Selecting a real surah on the left did not open right reader");
+  await page.evaluate(()=>{location.hash="#quran";});
+  await page.waitForTimeout(650);
+  await inspect("quran-return",true);
   const leftBefore=await page.evaluate(()=>{
     const l=document.querySelector("#darTestDuoWorkspaceNav");
     const r=document.querySelector("#appView");
