@@ -36,6 +36,8 @@
       else document.body.style.overflow=sourcePreviousOverflow;
     }
     sourcePreviousOverflow=null;
+    if(document.body&&document.body.classList)document.body.classList.remove("dar-internal-reader-open");
+    if(document.documentElement&&document.documentElement.classList)document.documentElement.classList.remove("dar-internal-reader-open");
     var pushed=sourcePanelHistory;
     sourcePanelHistory=false;
     sourceNavPending=false;
@@ -47,16 +49,8 @@
     if(sourcePanel)return sourcePanel;
     var style=document.createElement("style");
     style.id="darInternalSourceStylesV3";
-    style.textContent=[
-      "#darInternalSourceV3{position:fixed;inset:0 0 calc(80px + env(safe-area-inset-bottom,0px)) 0;z-index:1100;background:#f8f5ec;color:#24352c;display:flex;flex-direction:column;overflow:hidden}",
-      "#darInternalSourceV3[hidden]{display:none!important}",
-      "#darInternalSourceV3 .dar-source-toolbar{flex:none;display:flex;align-items:center;gap:10px;justify-content:space-between;padding:calc(8px + env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-left,0px)) 9px max(12px,env(safe-area-inset-right,0px));background:#f9f6ef;border-bottom:1px solid #d8c9ab;min-height:53px}",
-      "#darInternalSourceV3 .dar-source-back{background:#eee5d5;color:#463b27;border:1px solid #a6977b;border-radius:999px;min-height:42px;padding:8px 18px;font:700 14px/1.2 -apple-system,BlinkMacSystemFont,system-ui,sans-serif;cursor:pointer}",
-      "#darInternalSourceV3 .dar-source-label{font:700 11px/1.3 -apple-system,BlinkMacSystemFont,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;text-align:right;color:#665735}",
-      "#darInternalSourceV3 iframe{display:block;width:100%;height:100%;flex:1 1 auto;min-height:0;border:0;background:#f8f5ec}",
-      "@media(prefers-color-scheme:dark){html[data-theme='dark'] #darInternalSourceV3,html[data-theme='dar-al-layl'] #darInternalSourceV3{background:#121714;color:#f4eddb}html[data-theme='dark'] #darInternalSourceV3 .dar-source-toolbar,html[data-theme='dar-al-layl'] #darInternalSourceV3 .dar-source-toolbar{background:#18201a;border-color:#5a5036}html[data-theme='dark'] #darInternalSourceV3 .dar-source-back,html[data-theme='dar-al-layl'] #darInternalSourceV3 .dar-source-back{background:#273329;color:#f5e6c8;border-color:#6f664a}}",
-      "@media(max-width:390px){#darInternalSourceV3{bottom:calc(76px + env(safe-area-inset-bottom,0px))}}"
-    ].join("\n");
+    /* DAR_READING_EDGE_TO_EDGE_V4 */
+    style.textContent="#darInternalSourceV3{position:fixed!important;inset:0!important;width:100%!important;height:100dvh!important;z-index:2147483000!important;background:#f8f5ef;color:#24352c;display:flex;flex-direction:column;overflow:hidden}\n#darInternalSourceV3[hidden]{display:none!important}\nhtml.dar-internal-reader-open,body.dar-internal-reader-open{overflow:hidden!important}\nbody.dar-internal-reader-open :is(#bottomNav,#bottomNavigation,#appBottomNav,.bottom-nav,.bottom-nav-global,.dar-bottom-nav,[data-bottom-nav-root]){visibility:hidden!important;pointer-events:none!important}\n#darInternalSourceV3 .dar-source-toolbar{flex:none;display:flex;align-items:center;justify-content:space-between;gap:7px;min-height:46px;padding:calc(5px + env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) 5px max(12px,env(safe-area-inset-left,0px));background:#f8f5ef;border-bottom:1px solid #d9d1c2;box-sizing:border-box}\n#darInternalSourceV3 .dar-source-actions{display:flex;align-items:center;gap:5px;min-width:0}\n#darInternalSourceV3 .dar-source-back,#darInternalSourceV3 .dar-source-home{appearance:none;display:inline-flex;align-items:center;justify-content:center;min-height:40px;background:transparent;color:#453b2b;border:1px solid #d8cbb4;border-radius:12px;padding:7px 11px;font:650 12px/1.25 -apple-system,BlinkMacSystemFont,system-ui,sans-serif;white-space:nowrap;cursor:pointer;box-shadow:none}\n#darInternalSourceV3 .dar-source-home{color:#705930;border-color:transparent}\n#darInternalSourceV3 .dar-source-label{font:750 10px/1.3 -apple-system,BlinkMacSystemFont,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;text-align:end;color:#7e6b46;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n#darInternalSourceV3 :is(.dar-source-back,.dar-source-home):focus-visible{outline:2px solid #a88b54!important;outline-offset:2px!important}\n#darInternalSourceV3 iframe{display:block;width:100%;height:100%;flex:1 1 auto;min-height:0;border:0;background:#f8f5ef;overscroll-behavior:contain}\n@media(max-width:370px){#darInternalSourceV3 .dar-source-actions{gap:2px}#darInternalSourceV3 :is(.dar-source-back,.dar-source-home){font-size:11px;padding-inline:8px}#darInternalSourceV3 .dar-source-label{font-size:9px}}\n@media(prefers-color-scheme:dark){html[data-theme='dark'] #darInternalSourceV3,html[data-theme='dar-al-layl'] #darInternalSourceV3{background:#121714;color:#f4eddb}html[data-theme='dark'] #darInternalSourceV3 .dar-source-toolbar,html[data-theme='dar-al-layl'] #darInternalSourceV3 .dar-source-toolbar{background:#18201a;border-color:#5a5036}}";
     (document.head||document.documentElement).appendChild(style);
     var panel=document.createElement("section");
     panel.id="darInternalSourceV3";
@@ -68,12 +62,26 @@
     var back=document.createElement("button");
     back.className="dar-source-back";
     back.type="button";
-    back.textContent="← Zurück zum Beitrag";
+    back.textContent="← Zurück";
     back.addEventListener("click",function(){closeInternalSource(false)});
     var caption=document.createElement("span");
     caption.className="dar-source-label";
     caption.textContent="DĀR AL TAWḤĪD · Quellen";
-    toolbar.appendChild(back);toolbar.appendChild(caption);
+    var actions=document.createElement("div");actions.className="dar-source-actions";
+    var home=document.createElement("button");home.type="button";home.className="dar-source-home";home.textContent="⌂ Startseite";
+    home.addEventListener("click",function(){
+      closeInternalSource(false);
+      setTimeout(function(){
+        try{
+          if(typeof window.navigate==="function"){window.navigate("home");return}
+          var nav=document.querySelector('[data-nav="home"],[data-nav="start"]');
+          if(nav){nav.click();return}
+          location.hash="#home";
+        }catch(_){}
+      },0);
+    });
+    actions.appendChild(back);actions.appendChild(home);
+    toolbar.appendChild(actions);toolbar.appendChild(caption);
     var frame=document.createElement("iframe");
     frame.id="darInternalSourceFrameV3";
     frame.setAttribute("title","Quellenkarte und Lernbereich");
@@ -87,12 +95,17 @@
   function openInternalSource(target,html){
     var panel=ensureInternalSourcePanel();
     if(document.body&&panel.hidden)sourcePreviousOverflow=document.body.style.overflow||"";
-    if(document.body)document.body.style.overflow="hidden";
+    if(document.body){document.body.style.overflow="hidden";if(document.body.classList)document.body.classList.add("dar-internal-reader-open")}
+    if(document.documentElement&&document.documentElement.classList)document.documentElement.classList.add("dar-internal-reader-open");
     // Base tag keeps /assets/, /q/, /lernen/ and anchored links resolving correctly.
     // srcdoc presents the *already checked* HTML without another network round-trip
     // and, crucially, without reloading the application's soft boot.
     var base='<base href="'+location.origin+target.replace(/"/g,"&quot;")+'">';
     var src=/<head\b[^>]*>/i.test(html)?html.replace(/<head\b[^>]*>/i,function(m){return m+base;}):base+html;
+    // Embedded reading mode stays inside the already mounted app, without boot loader.
+    var readerCss='<style id="darEmbeddedReaderEdgeV4">'+"html,body{min-height:100%;overscroll-behavior-y:contain!important}body.qsource-body .qsource-page{width:min(calc(100% - 24px),820px)!important;max-width:100%!important;padding:5px 0 calc(24px + env(safe-area-inset-bottom,0px))!important;margin:auto!important}body.qsource-body .qsource-header{min-height:55px!important;padding:6px 0!important;gap:8px!important}body.qsource-body .qsource-logo{width:38px!important;height:38px!important;flex:0 0 38px!important}body.qsource-body .qsource-brand{font-size:clamp(18px,4vw,25px)!important;line-height:1.08!important}body.qsource-body .qsource-brand-top{font-size:8px!important;letter-spacing:.07em!important}body.qsource-body .qsource-sign{font-size:13px!important;margin:1px 0 0!important}body.qsource-body .qsource-hero{padding:10px 0 6px!important;margin-top:5px!important}body.qsource-body .qsource-title{font-size:clamp(24px,5.2vw,34px)!important}body.qsource-body .q49-language-static{margin:10px 0!important;padding:10px 12px!important;border-radius:13px!important}body.heritage-learning main{width:min(calc(100% - 24px),820px)!important;max-width:100%!important;min-height:100dvh!important;padding:10px 0 calc(24px + env(safe-area-inset-bottom,0px))!important}body.heritage-learning main>header{padding:4px 0 12px!important;margin:0!important}body.heritage-learning main>header .logo{width:39px!important;height:39px!important;margin:0 auto 4px!important}body.heritage-learning main>header h1{font-size:clamp(24px,5vw,34px)!important;margin:8px 0!important}body.heritage-learning main .card{margin:12px 0!important}@media(min-width:920px){body.qsource-body .qsource-page,body.heritage-learning main{width:min(calc(100% - 64px),900px)!important}}"+'</style>';
+    var headEnd=src.toLowerCase().indexOf("</head>");
+    src=headEnd>=0?src.slice(0,headEnd)+readerCss+src.slice(headEnd):readerCss+src;
     sourceFrame.srcdoc=src;
     panel.hidden=false;
     var caption=panel.querySelector(".dar-source-label");
