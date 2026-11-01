@@ -233,3 +233,60 @@ html.dar-test-duo-active body #appView :is(pre,table){
   outline:2px solid var(--gold2,#c7a76d);
   outline-offset:1px;
 }
+
+/* DAR_TEST_VIDEO_FOLD_REAL_SPLIT_V3
+ * Browser measurement: #appView remained x=0 width=viewport in the first
+ * release even though the test selector was fixed on the left. The JS now
+ * applies the reader rectangle via inline !important, which outranks old
+ * #appView width:100%!important cascade. These styles scope its children.
+ * The left rail must be OPAQUE to avoid texts visibly shining through. */
+html.dar-test-duo-active #darTestDuoWorkspaceNav {
+  background:var(--outer-bg-flat,var(--bg,#f5f1e8))!important;
+  background-image:none!important;
+  opacity:1!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html.dar-test-duo-active #darTestDuoWorkspaceNav :is(
+ .dar-test-duo-brand,.dar-test-duo-caption,.dar-test-duo-legend,
+ .dar-test-duo-link,.dar-test-duo-context-title,.dar-test-duo-context-link
+) {opacity:1}
+html.dar-test-duo-active body #appView,
+html.dar-test-duo-active body #appView.view {
+  float:none!important;
+  clear:none!important;
+  box-sizing:border-box!important;
+  min-width:0!important;
+  overflow-x:clip!important;
+}
+html.dar-test-duo-active body #appView :is(
+ .view-content,.home-content,.app-content,.qov-page,.qov-main,.qov-shell,
+ .quran-page,.lib-page,.lib-detail,.topics-hub,.hadith-hub,.dua-hub
+) {
+  max-inline-size:100%!important;
+  min-inline-size:0!important;
+  box-sizing:border-box!important;
+}
+/* Dialogs belong to the reading side, not across the navigation. */
+html.dar-test-duo-active body.dar-test-reading-open #darTestReadingOverlay {
+  position:fixed!important;
+  left:calc(var(--dar-test-duo-rail) + var(--dar-test-duo-gap) * 2)!important;
+  right:0!important;
+  top:0!important;
+  bottom:0!important;
+  width:calc(100% - var(--dar-test-duo-rail) - var(--dar-test-duo-gap) * 2)!important;
+  max-width:none!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+  padding:12px max(12px,env(safe-area-inset-right,0px)) 12px 0!important;
+}
+html.dar-test-duo-active body.dar-test-reading-open #darTestReadingOverlay .dar-test-reader-dialog {
+  max-width:100%!important;
+  width:100%!important;
+  max-height:calc(100dvh - 24px)!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+html.dar-test-duo-active body.dar-test-reading-open #darTestDuoWorkspaceNav {
+  z-index:2147483001!important;
+}

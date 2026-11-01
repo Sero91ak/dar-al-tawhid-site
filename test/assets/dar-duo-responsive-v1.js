@@ -41,6 +41,13 @@
   var contextMemory = Object.create(null);
   var observer = null;
   var appObserver = null;
+  var layoutStyleObserver = null;
+  var shiftedView = null;
+  var originalViewStyles = null;
+  var shiftedBottomNav = null;
+  var originalNavStyles = null;
+  var bottomNavProps = ["left","right","width","max-width","margin-left","margin-right","transform","translate"];
+  var viewProps = ["width","max-width","min-width","margin-left","margin-right","left","right","transform","translate","box-sizing"];
   var pendingTimeouts = [];
 
   function lang() {
@@ -53,7 +60,9 @@
   function measure() {
     // Use the layout viewport rather than a stale visualViewport after rotation.
     var width = Math.round(root.clientWidth || global.innerWidth || 0);
-    var height = Math.round(root.clientHeight || global.innerHeight || 0);
+    // documentElement.clientHeight can equal the full document scroll height
+    // (e.g. 2165px with a real 512px Fold landscape viewport).
+    var height = Math.round(global.innerHeight || (global.visualViewport && global.visualViewport.height) || root.clientHeight || 0);
     return { width: width, height: height, landscape: width > height };
   }
   function capacity(width,height) {
@@ -62,7 +71,7 @@
     var gutter = Math.max(12,Math.min(20,Math.round(w*0.02)));
     var remaining = w - railWidth - gutter*3;
     // Narrow cover and short phone landscape must remain the original app.
-    var dual = w >= 640 && h >= 560 && remaining >= 390;
+    var dual = w >= 640 && h >= 510 && remaining >= 390;
     return {dual:dual,rail:railWidth,gutter:gutter,reader:remaining};
   }
   function forcedOff() {
@@ -72,8 +81,8 @@
   function eligible() {
     if (forcedOff() || !doc.body || !doc.getElementById("appView")) return false;
     var b = doc.body.classList;
-    if (b.contains("is-feed-fullscreen") || b.contains("is-ilm-chat-route") ||
-        b.contains("dar-test-reading-open")) return false;
+    if (b.contains("is-feed-fullscreen") || b.contains("is-ilm-chat-route")) return false;
+    // Keep the left selection visible while a reader dialog opens on the right.
     var m = measure();
     return capacity(m.width,m.height).dual;
   }
@@ -223,6 +232,92 @@
     lastHash=hash;
     refreshContext();
   }
+  function rememberOriginalView(view) {
+    if(shiftedView===view && originalViewStyles)return;
+    restoreView();
+    shiftedView=view;
+    originalViewStyles=Object.create(null);
+    viewProps.forEach(function(key){
+      originalViewStyles[key]={
+        value:view.style.getPropertyValue(key),
+        priority:view.style.getPropertyPriority(key)
+      };
+    });
+  }
+  function restoreView() {
+    restoreBottomNav();
+    if(!shiftedView||!originalViewStyles)return;
+    viewProps.forEach(function(key){
+      var previous=originalViewStyles[key];
+      if(previous.value)shiftedView.style.setProperty(key,previous.value,previous.priority);
+      else shiftedView.style.removeProperty(key);
+    });
+    shiftedView=null;
+    originalViewStyles=null;
+  }
+  function setImportant(view,key,value){
+    if(view.style.getPropertyValue(key)!==value ||
+       view.style.getPropertyPriority(key)!=="important"){
+      view.style.setProperty(key,value,"important");
+    }
+  }
+  function restoreBottomNav(){
+    if(!shiftedBottomNav||!originalNavStyles)return;
+    bottomNavProps.forEach(function(key){
+      var v=originalNavStyles[key];
+      if(v.value)shiftedBottomNav.style.setProperty(key,v.value,v.priority);
+      else shiftedBottomNav.style.removeProperty(key);
+    });
+    shiftedBottomNav=null;
+    originalNavStyles=null;
+  }
+  function positionBottomNav(c){
+    var nav=doc.getElementById("bottomNav");
+    if(!nav)return;
+    if(shiftedBottomNav!==nav){
+      restoreBottomNav();
+      shiftedBottomNav=nav;
+      originalNavStyles=Object.create(null);
+      bottomNavProps.forEach(function(key){
+        originalNavStyles[key]={
+          value:nav.style.getPropertyValue(key),
+          priority:nav.style.getPropertyPriority(key)
+        };
+      });
+    }
+    // The original Test dock was measured offscreen: left=363,width=457
+    // on a 726px viewport, extending to 820px. Re-center the SAME dock
+    // in the right reader; do not clone its buttons or replace their taps.
+    var readerStart=c.rail+c.gutter*2;
+    var dockWidth=Math.max(240,Math.min(460,c.reader-18));
+    setImportant(nav,"left",Math.round(readerStart+c.reader/2)+"px");
+    setImportant(nav,"right","auto");
+    setImportant(nav,"width",Math.round(dockWidth)+"px");
+    setImportant(nav,"max-width",Math.round(dockWidth)+"px");
+    setImportant(nav,"margin-left","0px");
+    setImportant(nav,"margin-right","0px");
+    setImportant(nav,"transform","translateX(-50%)");
+    setImportant(nav,"translate","none");
+  }
+  // Inline important is used only in the TEST feature because legacy Test CSS
+  // still sets #appView width:100%!important at higher specificity. The actual
+  // browser regression proved that our external CSS did not win that cascade.
+  function positionReader(c) {
+    var view=doc.getElementById("appView");
+    if(!view)return;
+    rememberOriginalView(view);
+    var offset=c.rail+c.gutter*2;
+    setImportant(view,"box-sizing","border-box");
+    setImportant(view,"width",c.reader+"px");
+    setImportant(view,"max-width",c.reader+"px");
+    setImportant(view,"min-width","0px");
+    setImportant(view,"margin-left",offset+"px");
+    setImportant(view,"margin-right",c.gutter+"px");
+    setImportant(view,"left","auto");
+    setImportant(view,"right","auto");
+    setImportant(view,"transform","none");
+    setImportant(view,"translate","none");
+  }
   function apply() {
     if(!started)return false;
     var m=measure(), c=capacity(m.width,m.height);
@@ -233,11 +328,14 @@
       root.style.setProperty("--dar-test-duo-rail",c.rail+"px");
       root.style.setProperty("--dar-test-duo-gap",c.gutter+"px");
       el.hidden=false;
+      positionReader(c);
+      positionBottomNav(c);
       if(lastLocale!==lang()) updateLabels();
       if(lastHash!==String(global.location.hash||"#home").toLowerCase()) updateActive();
       else if(lastContext.indexOf("|"+lang())<0) refreshContext();
-    }else if(rail){
-      rail.hidden=true;
+    }else{
+      restoreView();
+      if(rail)rail.hidden=true;
     }
     return on;
   }
@@ -272,6 +370,12 @@
     if(view&&typeof MutationObserver==="function"){
       appObserver=new MutationObserver(function(){global.setTimeout(refreshContext,80);});
       appObserver.observe(view,{childList:true});
+      // Legacy SPA controllers can reapply inline "100%" after a tab click.
+      // Watch ONLY the two owned style attributes (not subtree or all DOM).
+      layoutStyleObserver=new MutationObserver(schedule);
+      layoutStyleObserver.observe(view,{attributes:true,attributeFilter:["style"]});
+      var bottom=doc.getElementById("bottomNav");
+      if(bottom)layoutStyleObserver.observe(bottom,{attributes:true,attributeFilter:["style"]});
     }
     doc.addEventListener("visibilitychange",function(){if(!doc.hidden)schedule();});
     doc.addEventListener("click",function(event){
