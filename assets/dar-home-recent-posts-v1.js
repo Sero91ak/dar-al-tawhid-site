@@ -3,7 +3,7 @@
 (function(w,d){"use strict";
 if(w.__darRecentPublicationsV1)return;w.__darRecentPublicationsV1=true;
 if(!/^\/(?:index\.html)?$/.test(location.pathname)&&!/^\/pwa(?:\/(?:index\.html)?)?$/.test(location.pathname))return;
-var KEY="darAdultPreferredLocaleV1", DATA="/data/recent-posts.json", state={posts:[],days:5,expanded:false,loading:false,lastFetch:0,modalShown:false,modalOpen:false,lastFocus:null,scrollLock:null,inertItems:[],lastModalSignature:"",titleLocales:{},manifestLoaded:{},inlineOpen:false,returnToInline:false,homeScrollY:0};
+var KEY="darAdultPreferredLocaleV1", DATA="/data/recent-posts.json", state={posts:[],days:5,expanded:false,loading:false,lastFetch:0,modalShown:false,modalOpen:false,lastFocus:null,scrollLock:null,inertItems:[],lastModalSignature:"",titleLocales:{},manifestLoaded:{},inlineOpen:false,returnToInline:false,homeScrollY:0,renderedInlineLocale:""};
 var labels={
  de:["NEUE BEITRÄGE","Aktuelle Veröffentlichungen","Alle Beiträge der letzten Tage","2 Tage","3 Tage","5 Tage","Keine neuen Beiträge im gewählten Zeitraum.","Beitrag lesen","Beiträge ansehen","Schließen","Quelle öffnen","Original: Deutsch","Heute","Gestern","Beiträge","4 Tage","Für diese Beiträge überspringen","Neuigkeiten öffnen","Beitrag"],
  ar:["المقالات الجديدة","أحدث المنشورات","جميع منشورات الأيام الماضية","يومان","3 أيام","5 أيام","لا توجد منشورات جديدة في هذه المدة.","اقرأ المقال","عرض المقالات","إغلاق","افتح المصدر","الأصل بالألمانية","اليوم","أمس","مقالات","4 أيام","تخطي هذه المقالات","عرض أحدث المقالات","مقال"],
@@ -71,7 +71,7 @@ function paintInlineList(){
  if(!state.inlineOpen)return;
  var root=d.getElementById("darRecentInlineListV2");
  if(!root)return;
- root.lang=locale();root.dir=["ar","ckb"].includes(locale())?"rtl":"ltr";
+ root.lang=locale();root.dir=["ar","ckb"].includes(locale())?"rtl":"ltr";state.renderedInlineLocale=locale();
  var host=internalHost();if(host){var cs=w.getComputedStyle(host);[["--inline-bg","--dhp-bg"],["--inline-paper","--dhp-paper"],["--inline-ink","--dhp-ink"],["--inline-gold","--dhp-gold"],["--inline-line","--dhp-line"]].forEach(function(k){var v=cs.getPropertyValue(k[1]).trim();if(v)root.style.setProperty(k[0],v)})}
  root.replaceChildren();
  var top=e("header","dar-recent-inline-top");
@@ -402,7 +402,7 @@ function openNewPostsNotice(force){if(state.inlineOpen||!canAnnounce(force===tru
 }
 
 var noticeScheduled=false;function scheduleNotice(){if(noticeScheduled||state.modalShown||state.modalOpen||!state.posts.length||!isHome())return;noticeScheduled=true;w.setTimeout(function(){noticeScheduled=false;openNewPostsNotice()},1100)}
-var queued=false;function queue(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;if(isHome()){render();refresh();syncInlineAfterRoute();if(!state.inlineOpen)scheduleNotice()}else{var x=d.getElementById("darRecentPublicationsV1");if(x)x.hidden=true;if(state.inlineOpen)closeInlineList(false)}})}
-function start(){queue();var obs=new MutationObserver(function(m){if(m.some(function(x){return x.target.id==="darRecentPublicationsV1"||x.target.closest&&x.target.closest("#darRecentPublicationsV1")}))return;queue()});obs.observe(d.body,{attributes:true,attributeFilter:["class"],childList:true,subtree:true});w.addEventListener("hashchange",queue);w.addEventListener("popstate",queue);w.addEventListener("dar-adult-locale-changed",syncLocale);w.addEventListener("storage",function(ev){if(ev.key===KEY)syncLocale()});w.addEventListener("pageshow",queue);d.addEventListener("dar:view-rendered",queue);d.addEventListener("visibilitychange",function(){if(!d.hidden){state.lastFetch=0;queue()}})}
+var queued=false;function queue(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;if(isHome()){render();refresh();syncInlineAfterRoute();if(state.inlineOpen&&state.renderedInlineLocale!==locale())paintInlineList();if(!state.inlineOpen)scheduleNotice()}else{var x=d.getElementById("darRecentPublicationsV1");if(x)x.hidden=true;if(state.inlineOpen)closeInlineList(false)}})}
+function start(){queue();if(new URLSearchParams(location.search).get("recent")==="1"){var check=0;var opening=setInterval(function(){if(state.posts.length||++check>16){clearInterval(opening);openInlineList(false);var u=new URL(location.href);u.searchParams.delete("recent");history.replaceState(history.state,"",u.pathname+u.search+u.hash)}},100)}d.addEventListener("click",function(ev){if(ev.target.closest&&ev.target.closest("[data-dal-locale],[data-v3-locale],[data-dv3-locale]"))setTimeout(function(){if(state.inlineOpen&&state.renderedInlineLocale!==locale())paintInlineList()},0)},true);d.addEventListener("change",function(){setTimeout(function(){if(state.inlineOpen&&state.renderedInlineLocale!==locale())paintInlineList()},0)},true);var obs=new MutationObserver(function(m){if(m.some(function(x){return x.target.id==="darRecentPublicationsV1"||x.target.closest&&x.target.closest("#darRecentPublicationsV1")}))return;queue()});obs.observe(d.body,{attributes:true,attributeFilter:["class"],childList:true,subtree:true});w.addEventListener("hashchange",queue);w.addEventListener("popstate",queue);w.addEventListener("dar-adult-locale-changed",syncLocale);w.addEventListener("storage",function(ev){if(ev.key===KEY)syncLocale()});w.addEventListener("pageshow",queue);d.addEventListener("dar:view-rendered",queue);d.addEventListener("visibilitychange",function(){if(!d.hidden){state.lastFetch=0;queue()}})}
 if(d.readyState==="loading")d.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })(window,document);
