@@ -43,6 +43,9 @@
   var appObserver = null;
   var shiftedView = null;
   var originalViewStyles = null;
+  var shiftedBottomNav = null;
+  var originalNavStyles = null;
+  var bottomNavProps = ["left","right","width","max-width","margin-left","margin-right","transform","translate"];
   var viewProps = ["width","max-width","min-width","margin-left","margin-right","left","right","transform","translate","box-sizing"];
   var pendingTimeouts = [];
 
@@ -241,6 +244,7 @@
     });
   }
   function restoreView() {
+    restoreBottomNav();
     if(!shiftedView||!originalViewStyles)return;
     viewProps.forEach(function(key){
       var previous=originalViewStyles[key];
@@ -255,6 +259,44 @@
        view.style.getPropertyPriority(key)!=="important"){
       view.style.setProperty(key,value,"important");
     }
+  }
+  function restoreBottomNav(){
+    if(!shiftedBottomNav||!originalNavStyles)return;
+    bottomNavProps.forEach(function(key){
+      var v=originalNavStyles[key];
+      if(v.value)shiftedBottomNav.style.setProperty(key,v.value,v.priority);
+      else shiftedBottomNav.style.removeProperty(key);
+    });
+    shiftedBottomNav=null;
+    originalNavStyles=null;
+  }
+  function positionBottomNav(c){
+    var nav=doc.getElementById("bottomNav");
+    if(!nav)return;
+    if(shiftedBottomNav!==nav){
+      restoreBottomNav();
+      shiftedBottomNav=nav;
+      originalNavStyles=Object.create(null);
+      bottomNavProps.forEach(function(key){
+        originalNavStyles[key]={
+          value:nav.style.getPropertyValue(key),
+          priority:nav.style.getPropertyPriority(key)
+        };
+      });
+    }
+    // The original Test dock was measured offscreen: left=363,width=457
+    // on a 726px viewport, extending to 820px. Re-center the SAME dock
+    // in the right reader; do not clone its buttons or replace their taps.
+    var readerStart=c.rail+c.gutter*2;
+    var dockWidth=Math.max(240,Math.min(460,c.reader-18));
+    setImportant(nav,"left",Math.round(readerStart+c.reader/2)+"px");
+    setImportant(nav,"right","auto");
+    setImportant(nav,"width",Math.round(dockWidth)+"px");
+    setImportant(nav,"max-width",Math.round(dockWidth)+"px");
+    setImportant(nav,"margin-left","0px");
+    setImportant(nav,"margin-right","0px");
+    setImportant(nav,"transform","translateX(-50%)");
+    setImportant(nav,"translate","none");
   }
   // Inline important is used only in the TEST feature because legacy Test CSS
   // still sets #appView width:100%!important at higher specificity. The actual
@@ -286,6 +328,7 @@
       root.style.setProperty("--dar-test-duo-gap",c.gutter+"px");
       el.hidden=false;
       positionReader(c);
+      positionBottomNav(c);
       if(lastLocale!==lang()) updateLabels();
       if(lastHash!==String(global.location.hash||"#home").toLowerCase()) updateActive();
       else if(lastContext.indexOf("|"+lang())<0) refreshContext();
