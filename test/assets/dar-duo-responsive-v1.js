@@ -84,7 +84,7 @@
     if(h.indexOf("#bibliothek")===0||h.indexOf("#library")===0)return "library";
     if(h.indexOf("#themen")===0||h.indexOf("#topic")===0||h.indexOf("#post")===0)return "topics";
     if(h.indexOf("#dua")===0)return "dua";
-    if(h.indexOf("#more")===0)return "more";
+    if(h.indexOf("#more")===0 || /^#(?:propheten|frauen|feed|ilm|quiz|scholars|books|prayer|jummah|settings|profile|account)/.test(h))return "more";
     return "home";
   }
   function saveStyles(el,props){
@@ -168,7 +168,9 @@
     // data-nav="quran-surah" + data-value, NOT hash anchors. The previous
     // controller consequently showed no actual selection items at all.
     var nodes=view.querySelectorAll(
-      '[data-nav][data-value],[data-library-open],[data-qsrc-open],a[href^="#"]'
+      current==="more"
+        ? '[data-nav],.dm-cat,.dal-row-quick,[data-library-open],a[href^="#"]'
+        : '[data-nav][data-value],[data-library-open],[data-qsrc-open],a[href^="#"]'
     );
     for(var i=0;i<nodes.length&&list.length<70;i++){
       var el=nodes[i];
@@ -178,11 +180,13 @@
       var library=el.getAttribute("data-library-open")||"";
       var source=el.getAttribute("data-qsrc-open")||"";
       if(hash && (!hash.startsWith("#")||hash.length>150||hash.includes(" ")||family(hash)!==current))continue;
-      if(!hash&&!nav&&!library&&!source)continue;
+      if(!hash&&!nav&&!library&&!source &&
+         !(current==="more"&&el.matches(".dm-cat,.dal-row-quick")))continue;
       var title=String(el.innerText||el.textContent||"").replace(/\s+/g," ").trim();
       if(title.length<3)continue;
       title=title.slice(0,96);
       var key=hash||[nav,value,library,source].join("|");
+      if(key==="|||")key="label|"+title;
       if(seen[key])continue;
       seen[key]=true;
       list.push({key:key,hash:hash,nav:nav,value:value,library:library,
@@ -234,6 +238,31 @@
     if(!entry)return;
     focusPane("right");
     if(view)view.scrollTop=0;
+    if(current==="more"&&readerFrame&&readerFrame.contentWindow){
+      var child=readerFrame.contentWindow;
+      function triggerMore(){
+        try{
+          var doc=child.document;
+          var candidates=Array.from(doc.querySelectorAll(
+            "#appView [data-nav],#appView .dm-cat,#appView .dal-row-quick"
+          ));
+          var normalized=function(s){return String(s||"").replace(/\\s+/g," ").trim().slice(0,96);};
+          var match=candidates.find(function(el){
+            if(entry.nav && el.getAttribute("data-nav")===entry.nav)return true;
+            return normalized(el.innerText||el.textContent)===entry.title;
+          });
+          if(!match)return false;
+          match.click();return true;
+        }catch(_){return false;}
+      }
+      if(triggerMore())return;
+      // If the reader is inside a subpage, reopen its real More menu before
+      // activating the exact native control; never fabricate settings routes.
+      try{child.location.hash="#more";}catch(_){}
+      global.setTimeout(triggerMore,320);
+      global.setTimeout(triggerMore,900);
+      return;
+    }
     if(entry.original && entry.original.isConnected){
       entry.original.click();return;
     }
