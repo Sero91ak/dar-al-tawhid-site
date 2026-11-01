@@ -1,0 +1,56 @@
+/* DĀR desktop website surface: single capsule, independent of iOS/PWA/Kids. */
+@layer dar-desktop-recent {
+ .dar-desktop-premium-recent{--dr-gold:var(--dt-gold,var(--gold,#ab894f));--dr-line:rgba(133,108,62,.32);
+  width:100%;min-width:0;max-width:100%;box-sizing:border-box;container-type:inline-size;
+  padding:clamp(20px,3vw,36px);margin-block:clamp(22px,3vw,38px);
+  border:1px solid var(--dr-line);border-radius:clamp(18px,2.6vw,30px);
+  background:linear-gradient(145deg,rgba(255,252,246,.90),rgba(245,237,223,.55));box-shadow:0 16px 44px rgba(47,37,20,.035);
+  overflow:hidden}
+ .dar-desktop-recent-heading,.dar-desktop-recent-footer,.dar-desktop-recent-controls{display:flex;align-items:center;justify-content:space-between;gap:16px;min-width:0}
+ .dar-desktop-recent-heading-copy{min-width:0}
+ .dar-desktop-recent-kicker{display:block;font-size:10px;font-weight:760;letter-spacing:.15em;color:var(--dr-gold)}
+ .dar-desktop-recent-heading-title{margin:7px 0 0;font:500 clamp(23px,2.6vw,35px)/1.14 Georgia,serif;color:var(--dt-ink,#24211d)}
+ .dar-desktop-recent-all,.dar-desktop-recent-read{white-space:nowrap;color:#806125;font-weight:730;text-decoration:none}
+ .dar-desktop-recent-all{font-size:12px}
+ .dar-desktop-recent-rule{height:1px;background:linear-gradient(90deg,transparent,var(--dr-line),transparent);margin:20px 0}
+ .dar-desktop-recent-older,.dar-desktop-recent-empty{font-size:13px;color:#6e6554}
+ .dar-desktop-recent-viewport{min-width:0;outline-offset:5px}
+ .dar-desktop-recent-track{display:grid;grid-auto-flow:column;grid-auto-columns:100%;width:100%;min-width:0;overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+ .dar-desktop-recent-track::-webkit-scrollbar{display:none}
+ .dar-desktop-recent-slide{scroll-snap-align:start;min-width:0;max-width:100%;padding:0 2px;box-sizing:border-box}
+ .dar-desktop-recent-meta{font-size:12px;color:#8e6d35;font-weight:750;letter-spacing:.025em;overflow-wrap:anywhere}
+ .dar-desktop-recent-title{font:550 clamp(22px,3.5vw,38px)/1.22 Georgia,serif;overflow-wrap:anywhere;margin:12px 0 10px;color:var(--dt-ink,#28231c);max-width:35ch}
+ .dar-desktop-recent-excerpt{font-size:clamp(14px,1.25vw,17px);line-height:1.65;max-width:75ch;margin:0 0 10px;color:#4d4840;overflow-wrap:anywhere;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
+ .dar-desktop-recent-source{color:#72654e;font-size:12px;line-height:1.5;overflow-wrap:anywhere;margin:8px 0 20px}
+ .dar-desktop-recent-read{display:inline-flex;align-items:center;min-height:44px;font-size:14px}
+ .dar-desktop-recent-footer{margin-top:15px;border-top:1px solid var(--dr-line);padding-top:14px}
+ .dar-desktop-recent-controls{justify-content:flex-start;gap:15px}
+ .dar-desktop-recent-prev,.dar-desktop-recent-next{background:transparent;border:1px solid transparent;color:#8a6a35;font-size:26px;font-weight:300;
+  line-height:1;width:44px;height:44px;cursor:pointer;border-radius:12px}
+ .dar-desktop-recent-prev:hover:not(:disabled),.dar-desktop-recent-next:hover:not(:disabled){border-color:var(--dr-line);background:rgba(156,121,55,.05)}
+ .dar-desktop-recent-prev:disabled,.dar-desktop-recent-next:disabled{opacity:.35;cursor:default}
+ .dar-desktop-recent-count{font-size:13px;font-variant-numeric:tabular-nums;color:#655c4d;min-width:52px;text-align:center}
+ .dar-desktop-recent-toggle{color:#7c5f31;border:0;background:none;min-height:44px;padding:5px 0;text-align:end;cursor:pointer;font-weight:650;font-size:12px}
+ .dar-desktop-recent-flat-list{border-top:1px solid var(--dr-line);margin-top:10px}
+ .dar-desktop-recent-flat-list[hidden]{display:none}
+ .dar-desktop-recent-list-row{display:grid;grid-template-columns:40px minmax(0,1fr) 25px;align-items:center;gap:12px;text-decoration:none;padding:15px 0;color:inherit}
+ .dar-desktop-recent-list-row+.dar-desktop-recent-list-row{border-top:1px solid rgba(133,108,62,.18)}
+ .dar-desktop-recent-list-index,.dar-desktop-recent-list-arrow{color:#9a7b49;font-size:12px}
+ .dar-desktop-recent-list-title{font:550 16px/1.45 Georgia,serif;overflow-wrap:anywhere}
+ .dar-desktop-premium-recent :is(a,button,.dar-desktop-recent-viewport):focus-visible{
+  outline:2px solid #7d632d!important;outline-offset:3px!important;border-radius:4px}
+ @container (max-width:600px){
+  .dar-desktop-recent-heading-title{font-size:25px}
+  .dar-desktop-recent-footer{flex-wrap:wrap}
+  .dar-desktop-recent-toggle{width:100%;text-align:start}
+  .dar-desktop-recent-title{font-size:25px}
+ }
+ @media(prefers-reduced-motion:reduce){.dar-desktop-recent-track{scroll-behavior:auto!important}}
+}
+/* Restore accessibility removed by legacy public-browser tap overrides. */
+@media (hover:none) and (pointer:coarse){
+ :where(a,button,input,select,textarea,summary,[role="button"]):focus-visible{
+  outline:2px solid currentColor!important;outline-offset:3px!important
+ }
+}
