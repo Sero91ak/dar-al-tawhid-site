@@ -6,9 +6,19 @@ import MediaPlayer
 
 final class InsetAwareWebView: WKWebView {
     var onInsetsChange: (() -> Void)?
+    private var lastLayoutSize: CGSize = .zero
 
     override func safeAreaInsetsDidChange() {
         super.safeAreaInsetsDidChange()
+        onInsetsChange?()
+    }
+
+    // iPad rotation / Stage Manager can change width without changing insets.
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let currentSize = bounds.size
+        guard currentSize != lastLayoutSize else { return }
+        lastLayoutSize = currentSize
         onInsetsChange?()
     }
 }
@@ -379,9 +389,10 @@ struct WebAppView: UIViewRepresentable {
             if(root){
               root.classList.add("dar-ios-native-app");
               root.classList.remove("dar-soft-booting");
-              if(root.getAttribute("data-layout")==="medium"||root.getAttribute("data-layout")==="expanded"){
-                root.setAttribute("data-layout","compact");
-              }
+              // DAR_IOS_PWA_ADAPTIVE_PARITY_V1: never override the web layout
+              // controller's compact / medium / expanded decision here.
+              // Android PWA and native WKWebView share adaptive-layout.js.
+              // Forced compact previously broke wide iPad and landscape panes.
             }
             if(document.body)document.body.classList.add("dar-ios-native-app");
             if(document.head)document.head.appendChild(style);
@@ -832,7 +843,7 @@ struct WebAppView: UIViewRepresentable {
         private var libraryCatalogTask: Task<[LibraryPublication], Error>?
         private var viewportInsets: UIEdgeInsets = .zero
         private var viewportInsetWorkItem: DispatchWorkItem?
-        private var lastAppliedTopInset: CGFloat = -1
+        private var lastAppliedSafeInsets: UIEdgeInsets?
         private var lastAppearanceKey: String = ""
         private var lastOpenedDestination: DarDeepLink.Destination?
         private var lastLoadedPushURL: URL?
@@ -1399,7 +1410,7 @@ struct WebAppView: UIViewRepresentable {
             hasCompletedInitialLoad = true
             didShowErrorState = false
             hideLoadingOverlay()
-            lastAppliedTopInset = -1
+            lastAppliedSafeInsets = nil
             updateViewportInsets()
             // Appearance after overlay finishes, so boot screen stays visible until 100%.
             handlePossibleLibraryReaderRoute(currentURL)
@@ -1634,10 +1645,22 @@ struct WebAppView: UIViewRepresentable {
             webView.scrollView.backgroundColor = pageSurfaceColor
 
             let topInset = max(resolvedInsets.top, 59)
-            if abs(topInset - lastAppliedTopInset) < 0.5, lastAppliedTopInset >= 0 {
+            // All four safe-area edges may change in landscape or iPad multiwindow.
+            // Comparing only top would leave stale horizontal/keyboard gutters.
+            let appliedInsets = UIEdgeInsets(
+                top: topInset,
+                left: resolvedInsets.left,
+                bottom: resolvedInsets.bottom,
+                right: resolvedInsets.right
+            )
+            if let previous = lastAppliedSafeInsets,
+               abs(previous.top - appliedInsets.top) < 0.5,
+               abs(previous.left - appliedInsets.left) < 0.5,
+               abs(previous.bottom - appliedInsets.bottom) < 0.5,
+               abs(previous.right - appliedInsets.right) < 0.5 {
                 return
             }
-            lastAppliedTopInset = topInset
+            lastAppliedSafeInsets = appliedInsets
 
             let top = String(format: "%.2f", topInset)
             let right = String(format: "%.2f", resolvedInsets.right)
