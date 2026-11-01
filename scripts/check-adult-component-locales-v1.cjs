@@ -55,7 +55,7 @@ assert(archiveJs.includes('[3,4,5].forEach')&&archiveJs.includes('function postL
 assert(archiveJs.includes('reg.register("recent-archive",words)'),"Archive must use shared nine-language UI registry");
 const archiveStart=archiveJs.indexOf("var words={"),archiveEnd=archiveJs.indexOf("};",archiveStart);
 assert(archiveStart>=0&&archiveEnd>archiveStart,"Archive nine-language dictionary missing");
-const archiveWords=vm.runInNewContext("("+archiveJs.slice(archiveStart+"var words=".length,archiveEnd+2)+")");
+const archiveWords=vm.runInNewContext("("+archiveJs.slice(archiveStart+"var words=".length,archiveEnd+1)+")");
 assert.deepEqual(Object.keys(archiveWords),languages,"Archive missing one of nine languages");
 for(const lang of languages){for(const key of Object.keys(archiveWords.de))assert(typeof archiveWords[lang][key]==="string"&&archiveWords[lang][key].trim(),lang+" missing archive UI key "+key)}
 
