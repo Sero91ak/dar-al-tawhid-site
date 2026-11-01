@@ -20,8 +20,7 @@ permissions:
   contents: read
 jobs:
   browser:
-    # Only test the isolated V8 browser review lane.
-    if: github.event_name != 'pull_request' || github.head_ref == 'review/browser-v8-preview-isolation-20261021' || github.head_ref == 'fix/v8-immersive-mobile-tablet-20261021' || github.head_ref == 'fix/browser-v8-visual-audit-1905-20261021' || github.head_ref == 'fix/v8-quran-player-modal-20261021' || github.head_ref == 'fix/v8-player-phone-selector-clip-20261021'
+    # Every public desktop-preview PR must execute the actual browser matrix.
     runs-on: ubuntu-latest
     timeout-minutes: 18
     steps:
@@ -37,7 +36,7 @@ jobs:
           new Function(route);
           new Function(fs.readFileSync('desktop-preview/assets/dar-v8-portal-live.js','utf8'));
           if(!html.includes('class="v8-player-label"')||!html.includes('id="qaSurah"')||!html.includes('id="qaReciter"'))throw Error('Player DOM contract');
-          if(!html.includes('maximum-scale=1')||!html.includes('user-scalable=no'))throw Error('Mobile zoom contract missing');
+          if(html.includes('maximum-scale=1')||html.includes('user-scalable=no'))throw Error('Website zoom must remain accessible');
           const scripts=[...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
             .filter(x=>!/(?:^|\s)src\s*=/.test(x[1])&&x[2].trim());
           for(const s of scripts)new Function(s[2]);
