@@ -192,8 +192,8 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
   // Exercise real navigation through Work > Kitab > Bab > individual Hadith,
   // not just URL or CSS success. Never touches Kids or the visitor app.
   findings.hadithContinuity=[];
-  for(const width of [390,1024]){
-    const height=width===390?844:768;
+  for(const width of [390,726,1024]){
+    const height=width===390?844:width===726?512:768;
     await page.setViewportSize({width,height});
     await page.evaluate(()=>{location.hash="#hadith";});
     await page.waitForFunction(()=>document.body.classList.contains("is-hadith-route") &&
@@ -208,7 +208,10 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
         const hero=document.querySelector(".hadith-hub > .view-head,.hadith-detail > .post-reader-title");
         const rect=hero?.getBoundingClientRect();
         const c=hero&&getComputedStyle(hero);
-        return {hash:location.hash,route:document.body.className,
+        const reader=document.getElementById("appView").getBoundingClientRect();
+        const dual=document.documentElement.classList.contains("dar-test-duo-active");
+        return {hash:location.hash,route:document.body.className,dual,
+          reader:{left:reader.left,right:reader.right,width:reader.width},
           viewport:document.documentElement.clientWidth,scrollWidth:document.documentElement.scrollWidth,
           rect:rect&&{x:rect.x,right:rect.right,width:rect.width,height:rect.height},
           radius:c?.borderRadius,border:c?.borderLeftWidth,shadow:c?.boxShadow,
@@ -216,8 +219,13 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
       });
       let error="";
       if(!g.rect)error="missing Hadith hero";
-      else if(g.rect.x< -3||g.rect.right>g.viewport+3||Math.abs(g.rect.x-(g.viewport-g.rect.right))>4)error="cropped or asymmetric hero";
-      else if(g.rect.width<g.viewport-8)error="hero not full viewport width";
+      else if(g.rect.x<(g.dual?g.reader.left:0)-3||
+              g.rect.right>(g.dual?g.reader.right:g.viewport)+3||
+              Math.abs((g.rect.x-(g.dual?g.reader.left:0))-
+                ((g.dual?g.reader.right:g.viewport)-g.rect.right))>5)
+        error="cropped or asymmetric hero inside actual content pane";
+      else if(g.rect.width<(g.dual?g.reader.width:g.viewport)-16)
+        error="hero does not fill its content pane";
       else if(g.scrollWidth>g.viewport+3)error="horizontal overflow";
       else if(!/cover/.test(g.backgroundSize||""))error="not CSS background cover";
       else if(g.radius!=="0px"||g.border!=="0px"||g.shadow!=="none")error="floating image card border/shadow";
@@ -242,9 +250,9 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
   // DAR_ADULT_RESPONSIVE_SIX_WIDTH_VISUAL_QA_V1383: real rendered DOM
   // in Android/touch Chromium. Keep this isolated to adult Dar Test.
   findings.responsive=[];
-  const widths=[375,390,430,768,1024,1440];
+  const widths=[375,390,430,726,768,1024,1440];
   const matrix=widths.map(width=>({width,height:width<600?844:width<1100?1024:900}));
-  matrix.push({width:844,height:390},{width:1024,height:768});
+  matrix.push({width:844,height:390},{width:726,height:512},{width:1024,height:768});
   for(const {width,height} of matrix){
     await page.setViewportSize({width,height});
     await page.waitForTimeout(460);
@@ -265,8 +273,11 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
       const label=document.querySelector("body.is-topics-route #appView .topics-hub > .topics-hub__label");
       const heroBg=hero?getComputedStyle(hero):null;
       const appRect=measure(app),heroRect=measure(hero),searchRect=measure(search),labelRect=measure(label);
-      const centerDelta=(rect)=>rect?Math.round((rect.left-(vw-rect.right))*10)/10:null;
-      return {vw,scrollWidth:doc.scrollWidth,bodyScrollWidth:document.body.scrollWidth,
+      const dual=doc.classList.contains("dar-test-duo-active");
+      const pane=measure(document.querySelector("#appView"));
+      const paneLeft=dual?pane?.left||0:0, paneRight=dual?pane?.right||vw:vw;
+      const centerDelta=(rect)=>rect?Math.round(((rect.left-paneLeft)-(paneRight-rect.right))*10)/10:null;
+      return {vw,dual,pane,scrollWidth:doc.scrollWidth,bodyScrollWidth:document.body.scrollWidth,
         app:appRect,stage:measure(stage),hero:heroRect,search:searchRect,label:labelRect,
         heroCenterDelta:centerDelta(heroRect),searchCenterDelta:centerDelta(searchRect),
         labelCenterDelta:centerDelta(labelRect),
@@ -278,7 +289,16 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
     if(Math.abs(geometry.vw-width)>2)errors.push("unexpected viewport "+geometry.vw+" vs "+width);
     if(!geometry.hero)errors.push("missing topics CSS hero");
     if(geometry.hero && Math.abs(geometry.heroCenterDelta)>3)errors.push("hero asymmetric "+geometry.heroCenterDelta+"px");
-    if(geometry.hero && geometry.hero.width>geometry.vw+2)errors.push("hero wider than viewport");
+    if(geometry.hero && geometry.hero.width>(geometry.dual?geometry.pane.width:geometry.vw)+2)
+      errors.push("hero wider than its reading pane");
+    if(geometry.dual){
+      if(Math.abs(geometry.pane.left-geometry.vw/2)>2||
+         Math.abs(geometry.pane.width-geometry.vw/2)>2)
+        errors.push("reader is not exactly 50/50");
+      if(geometry.hero&&(geometry.hero.left<geometry.pane.left-3||
+                         geometry.hero.right>geometry.pane.right+3))
+        errors.push("hero escaped right 50% pane");
+    }
     if(!/cover/.test(geometry.heroBackgroundSize))errors.push("hero background not cover");
     if(geometry.search&&Math.abs(geometry.searchCenterDelta)>3)errors.push("search asymmetric "+geometry.searchCenterDelta+"px");
     if(geometry.label&&Math.abs(geometry.labelCenterDelta)>3)errors.push("topics label asymmetric "+geometry.labelCenterDelta+"px");
@@ -302,7 +322,7 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
   findings.responsive=[];
   const sizes=[
    [375,812,"iphone-small"],[390,844,"iphone"],[430,932,"iphone-large"],
-   [768,1024,"ipad"],[1024,768,"ipad-landscape"],[1440,900,"desktop"],
+   [726,512,"fold-video"],[768,1024,"ipad"],[1024,768,"ipad-landscape"],[1440,900,"desktop"],
    [812,375,"iphone-landscape"]
   ];
   async function geometry(label){
@@ -316,18 +336,28 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
     const hero=keys.map(q=>document.querySelector(q)).find(Boolean);
     const content=document.querySelector(".topics-hub__label,.topic-collection-page .topic-collection,.post-reader .post-reader-main");
     function box(el){if(!el)return null;const r=el.getBoundingClientRect();return {left:r.left,right:r.right,width:r.width,height:r.height};}
-    return {width,scrollWidth:document.documentElement.scrollWidth,bodyClass:document.body.className,
+    const dual=document.documentElement.classList.contains("dar-test-duo-active");
+    return {width,dual,pane:box(document.querySelector("#appView")),
+      scrollWidth:document.documentElement.scrollWidth,bodyClass:document.body.className,
       hero:box(hero),content:box(content),hasCover:!!(hero&&getComputedStyle(hero).backgroundImage!=="none"),
       horizontalRail:!!document.querySelector(".dar-tl-filterbar")};
    });
    const fail=(why)=>{throw Error("Responsive "+label+": "+why+" "+JSON.stringify(result));};
    if(!result.hero||result.hero.width<120)fail("missing visible route hero");
    if(result.scrollWidth>result.width+3)fail("horizontal document overflow");
-   if(result.hero.left< -3||result.hero.right>result.width+3)fail("hero cropped");
-   if(Math.abs(result.hero.left-(result.width-result.hero.right))>4)fail("asymmetric hero margins");
-   if(result.hero.left>24||result.width-result.hero.right>24)fail("hero not edge-filling");
+   const start=result.dual?result.pane?.left||0:0;
+   const end=result.dual?result.pane?.right||result.width:result.width;
+   if(result.dual && (Math.abs(start-result.width/2)>2||
+                      Math.abs(result.pane.width-result.width/2)>2))
+     fail("true half-and-half reader width violated");
+   if(result.hero.left<start-3||result.hero.right>end+3)fail("hero cropped outside reader");
+   if(Math.abs((result.hero.left-start)-(end-result.hero.right))>5)
+     fail("asymmetric hero margins inside reader");
+   if(result.hero.left-start>24||end-result.hero.right>24)
+     fail("hero does not fill reader width");
    if(!result.hasCover)fail("hero background missing");
-   if(result.content&&(result.content.left< -3||result.content.right>result.width+3))fail("content cropped");
+   if(result.content&&(result.content.left<start-3||result.content.right>end+3))
+     fail("content escaped reader");
    findings.responsive.push({label,...result});
    await page.screenshot({path:path.join(out,"responsive-"+label+".png"),fullPage:false});
   }
