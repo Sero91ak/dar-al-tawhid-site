@@ -38,7 +38,9 @@
   var lastLocale = "";
   var lastHash = "";
   var lastContext = "";
+  var contextMemory = Object.create(null);
   var observer = null;
+  var appObserver = null;
   var pendingTimeouts = [];
 
   function lang() {
@@ -76,6 +78,72 @@
     return capacity(m.width,m.height).dual;
   }
   function itemLabel(key) { return (words[lang()] || words.de)[key] || words.de[key] || key; }
+  function familyFromHash(hash) {
+    var h=String(hash||"").toLowerCase();
+    if(h.indexOf("#quran")===0)return "quran";
+    if(h.indexOf("#hadith")===0)return "hadith";
+    if(h.indexOf("#bibliothek")===0||h.indexOf("#library")===0)return "library";
+    if(h.indexOf("#themen")===0||h.indexOf("#topic")===0||h.indexOf("#post")===0)return "topics";
+    if(h.indexOf("#dua")===0)return "dua";
+    return "";
+  }
+  // Existing in-app anchors are the source of contextual links, not copies
+  // of controls or a second application renderer. Keep the last real list when
+  // an SPA detail route replaces the navigation DOM with a reader.
+  function discoverLinks(family) {
+    var view=doc.getElementById("appView");
+    if(!view||!family)return [];
+    var nodes=view.querySelectorAll('a[href^="#"]');
+    var seen=Object.create(null), entries=[];
+    for(var i=0;i<nodes.length && entries.length<30;i++){
+      var a=nodes[i],href=a.getAttribute("href")||"";
+      if(!/^#[^#?\s]{2,160}$/.test(href)||familyFromHash(href)!==family||seen[href])continue;
+      var label=String(a.textContent||"").replace(/\s+/g," ").trim();
+      if(label.length<3||label.length>90)continue;
+      seen[href]=true;
+      entries.push({href:href,label:label});
+    }
+    return entries;
+  }
+  function refreshContext() {
+    if(!rail || !rail.isConnected)return;
+    var family=familyFromHash(global.location.hash), holder=doc.getElementById("darTestDuoContext");
+    if(!holder)return;
+    if(!family){holder.hidden=true;lastContext="";return;}
+    var discovered=discoverLinks(family);
+    // A detail page often exposes only Back; do not discard the last usable list.
+    if(discovered.length>=3)contextMemory[family]=discovered;
+    var links=contextMemory[family]||discovered;
+    var signature=family+"|"+links.map(function(x){return x.href;}).join("|")+"|"+lang();
+    if(signature!==lastContext){
+      lastContext=signature;
+      holder.textContent="";
+      if(links.length){
+        var title=doc.createElement("div");
+        title.className="dar-test-duo-context-title";
+        title.textContent=itemLabel(family);
+        holder.appendChild(title);
+        var list=doc.createElement("div");
+        list.className="dar-test-duo-context-links";
+        links.forEach(function(entry){
+          var a=doc.createElement("a");
+          a.href=entry.href;
+          a.className="dar-test-duo-context-link";
+          a.textContent=entry.label;
+          list.appendChild(a);
+        });
+        holder.appendChild(list);
+      }
+    }
+    holder.hidden=!links.length;
+    var hash=String(global.location.hash||"");
+    holder.querySelectorAll("a").forEach(function(a){
+      var active=a.getAttribute("href")===hash;
+      a.classList.toggle("is-current",active);
+      if(active)a.setAttribute("aria-current","page");
+      else a.removeAttribute("aria-current");
+    });
+  }
   function button(key,hash) {
     var a=doc.createElement("a");
     a.className="dar-test-duo-link";
@@ -110,6 +178,11 @@
     list.id="darTestDuoLinks";
     NAV.forEach(function(pair){ list.appendChild(button(pair[0],pair[1])); });
     rail.appendChild(list);
+    var context=doc.createElement("div");
+    context.id="darTestDuoContext";
+    context.className="dar-test-duo-context";
+    context.hidden=true;
+    rail.appendChild(context);
     // Mount outside the SPA renderer to preserve scroll and DOM identity.
     doc.body.appendChild(rail);
     return rail;
@@ -127,6 +200,7 @@
     });
     rail.setAttribute("aria-label",t.choose+" · "+t.read);
     lastLocale=lang();
+    lastContext="";
   }
   function updateActive() {
     if(!rail)return;
@@ -147,6 +221,7 @@
       else link.removeAttribute("aria-current");
     });
     lastHash=hash;
+    refreshContext();
   }
   function apply() {
     if(!started)return false;
@@ -160,6 +235,7 @@
       el.hidden=false;
       if(lastLocale!==lang()) updateLabels();
       if(lastHash!==String(global.location.hash||"#home").toLowerCase()) updateActive();
+      else if(lastContext.indexOf("|"+lang())<0) refreshContext();
     }else if(rail){
       rail.hidden=true;
     }
@@ -171,10 +247,10 @@
   }
   function afterRoute() {
     schedule();
-    pendingTimeouts.forEach(global.clearTimeout);
+    pendingTimeouts.forEach(function(id){global.clearTimeout(id);});
     pendingTimeouts=[
-      global.setTimeout(schedule,160),
-      global.setTimeout(schedule,430)
+      global.setTimeout(function(){schedule();refreshContext();},160),
+      global.setTimeout(function(){schedule();refreshContext();},430)
     ];
   }
   function start() {
@@ -191,6 +267,11 @@
     if(typeof MutationObserver==="function" && doc.body){
       observer=new MutationObserver(function(){schedule();});
       observer.observe(doc.body,{attributes:true,attributeFilter:["class"]});
+    }
+    var view=doc.getElementById("appView");
+    if(view&&typeof MutationObserver==="function"){
+      appObserver=new MutationObserver(function(){global.setTimeout(refreshContext,80);});
+      appObserver.observe(view,{childList:true});
     }
     doc.addEventListener("visibilitychange",function(){if(!doc.hidden)schedule();});
     doc.addEventListener("click",function(event){
