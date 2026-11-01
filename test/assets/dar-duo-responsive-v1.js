@@ -32,15 +32,15 @@
     ["library","#bibliothek"],["topics","#themen"],["dua","#duas"],["more","#more"]
   ];
   var words={
-    de:{choose:"Auswählen",read:"Lesen",home:"Start",quran:"Qurʾān",hadith:"Ḥadīṯ",library:"Bibliothek",topics:"Themen",dua:"Duʿāʾ",more:"Mehr",test:"TEST · 50 / 50"},
-    ar:{choose:"اختيار",read:"قراءة",home:"الرئيسية",quran:"القرآن",hadith:"الحديث",library:"المكتبة",topics:"المواضيع",dua:"الدعاء",more:"المزيد",test:"اختبار · ٥٠ / ٥٠"},
-    en:{choose:"Select",read:"Read",home:"Home",quran:"Qurʾān",hadith:"Ḥadīth",library:"Library",topics:"Topics",dua:"Duʿāʾ",more:"More",test:"TEST · 50 / 50"},
-    tr:{choose:"Seç",read:"Oku",home:"Ana sayfa",quran:"Kurʾân",hadith:"Hadis",library:"Kütüphane",topics:"Konular",dua:"Duâ",more:"Diğer",test:"TEST · 50 / 50"},
-    ku:{choose:"Hilbijêre",read:"Bixwîne",home:"Destpêk",quran:"Qurʾan",hadith:"Hedîs",library:"Pirtûkxane",topics:"Mijar",dua:"Duʿa",more:"Zêdetir",test:"TEST · 50 / 50"},
-    ckb:{choose:"هەڵبژێرە",read:"بخوێنەوە",home:"سەرەکی",quran:"قورئان",hadith:"حەدیس",library:"کتێبخانە",topics:"بابەتەکان",dua:"دوعا",more:"زیاتر",test:"تاقیکردنەوە · ٥٠ / ٥٠"},
-    bs:{choose:"Odaberi",read:"Čitaj",home:"Početna",quran:"Kurʾan",hadith:"Hadis",library:"Biblioteka",topics:"Teme",dua:"Dova",more:"Više",test:"TEST · 50 / 50"},
-    fr:{choose:"Choisir",read:"Lire",home:"Accueil",quran:"Coran",hadith:"Ḥadith",library:"Bibliothèque",topics:"Sujets",dua:"Duʿāʾ",more:"Plus",test:"TEST · 50 / 50"},
-    es:{choose:"Elegir",read:"Leer",home:"Inicio",quran:"Corán",hadith:"Hadiz",library:"Biblioteca",topics:"Temas",dua:"Duʿāʾ",more:"Más",test:"TEST · 50 / 50"}
+    de:{choose:"Auswählen",read:"Lesen",home:"Start",quran:"Qurʾān",hadith:"Ḥadīṯ",library:"Bibliothek",topics:"Themen",dua:"Duʿāʾ",more:"Mehr",test:"SMART · AUSWAHL"},
+    ar:{choose:"اختيار",read:"قراءة",home:"الرئيسية",quran:"القرآن",hadith:"الحديث",library:"المكتبة",topics:"المواضيع",dua:"الدعاء",more:"المزيد",test:"اختبار · اختيار ذكي"},
+    en:{choose:"Select",read:"Read",home:"Home",quran:"Qurʾān",hadith:"Ḥadīth",library:"Library",topics:"Topics",dua:"Duʿāʾ",more:"More",test:"SMART · SELECT"},
+    tr:{choose:"Seç",read:"Oku",home:"Ana sayfa",quran:"Kurʾân",hadith:"Hadis",library:"Kütüphane",topics:"Konular",dua:"Duâ",more:"Diğer",test:"AKILLI · SEÇİM"},
+    ku:{choose:"Hilbijêre",read:"Bixwîne",home:"Destpêk",quran:"Qurʾan",hadith:"Hedîs",library:"Pirtûkxane",topics:"Mijar",dua:"Duʿa",more:"Zêdetir",test:"SMART · HILBIJARTIN"},
+    ckb:{choose:"هەڵبژێرە",read:"بخوێنەوە",home:"سەرەکی",quran:"قورئان",hadith:"حەدیس",library:"کتێبخانە",topics:"بابەتەکان",dua:"دوعا",more:"زیاتر",test:"هەڵبژاردنی زیرەک"},
+    bs:{choose:"Odaberi",read:"Čitaj",home:"Početna",quran:"Kurʾan",hadith:"Hadis",library:"Biblioteka",topics:"Teme",dua:"Dova",more:"Više",test:"SMART · ODABIR"},
+    fr:{choose:"Choisir",read:"Lire",home:"Accueil",quran:"Coran",hadith:"Ḥadith",library:"Bibliothèque",topics:"Sujets",dua:"Duʿāʾ",more:"Plus",test:"SMART · CHOISIR"},
+    es:{choose:"Elegir",read:"Leer",home:"Inicio",quran:"Corán",hadith:"Hadiz",library:"Biblioteca",topics:"Temas",dua:"Duʿāʾ",more:"Más",test:"SMART · ELEGIR"}
   };
   var left=null, view=null, bottom=null, readerFrame=null, active=false, started=false, frame=0;
   var savedView=null,savedBottom=null,lastHash="",lastLang="",lastContext="";
