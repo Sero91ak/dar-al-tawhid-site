@@ -3,7 +3,7 @@
 (function(w,d){"use strict";
 if(w.__darRecentPublicationsV1)return;w.__darRecentPublicationsV1=true;
 if(!/^\/(?:index\.html)?$/.test(location.pathname)&&!/^\/pwa(?:\/(?:index\.html)?)?$/.test(location.pathname))return;
-var KEY="darAdultPreferredLocaleV1", DATA="/data/recent-posts.json", state={posts:[],days:5,expanded:false,loading:false,lastFetch:0,modalShown:false,modalOpen:false,lastFocus:null,scrollLock:null,inertItems:[],lastModalSignature:""};
+var KEY="darAdultPreferredLocaleV1", DATA="/data/recent-posts.json", state={posts:[],days:5,expanded:false,loading:false,lastFetch:0,modalShown:false,modalOpen:false,lastFocus:null,scrollLock:null,inertItems:[],lastModalSignature:"",titleLocales:{},manifestLoaded:{}};
 var labels={
  de:["NEUE BEITRÄGE","Aktuelle Veröffentlichungen","Alle Beiträge der letzten Tage","2 Tage","3 Tage","5 Tage","Keine neuen Beiträge im gewählten Zeitraum.","Beitrag lesen","Beiträge ansehen","Schließen","Quelle öffnen","Original: Deutsch","Heute","Gestern","Beiträge"],
  ar:["المقالات الجديدة","أحدث المنشورات","جميع منشورات الأيام الماضية","يومان","3 أيام","5 أيام","لا توجد منشورات جديدة في هذه المدة.","اقرأ المقال","عرض المقالات","إغلاق","افتح المصدر","الأصل بالألمانية","اليوم","أمس","مقالات"],
@@ -15,8 +15,10 @@ var labels={
  fr:["NOUVEAUX ARTICLES","Dernières publications","Tous les articles des derniers jours","2 jours","3 jours","5 jours","Aucune nouvelle publication sur cette période.","Lire l’article","Voir les articles","Fermer","Ouvrir la source","Original : allemand","Aujourd’hui","Hier","articles"],
  es:["ARTÍCULOS NUEVOS","Publicaciones recientes","Todos los artículos de los últimos días","2 días","3 días","5 días","No hay publicaciones nuevas en este período.","Leer artículo","Ver artículos","Cerrar","Abrir fuente","Original: alemán","Hoy","Ayer","artículos"]
 };
-function locale(){try{var v=String(localStorage.getItem(KEY)||"de").trim().toLowerCase();return labels[v]?v:"de"}catch(_){return"de"}}
-function t(i){return labels[locale()][i]||labels.de[i]||""}
+var registry=w.DARAdultComponentI18nV1||null;
+if(registry)registry.register("recent-posts",labels);
+function locale(){if(registry)return registry.locale();try{var v=String(localStorage.getItem(KEY)||"de").trim().toLowerCase();return labels[v]?v:"de"}catch(_){return"de"}}
+function t(i){return registry?registry.t("recent-posts",String(i),locale()):(labels[locale()][i]||labels.de[i]||"")}
 function normalizedLanguage(code){return labels[code]?code:"de"}
 function dayKey(date){var pts=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(date),m={};pts.forEach(function(p){m[p.type]=p.value});return m.year+"-"+m.month+"-"+m.day}
 function dayNumber(date){return Date.parse(dayKey(date)+"T00:00:00Z")/86400000}
@@ -26,7 +28,24 @@ function host(){if(!isHome())return null;var native=d.getElementById("darHomeHtm
 function e(tag,cls,txt){var x=d.createElement(tag);if(cls)x.className=cls;if(txt!=null)x.textContent=String(txt);return x}
 function dateLabel(p){var dt=new Date(p.date),today=dayNumber(new Date()),age=Math.round(today-dayNumber(dt));if(age===0)return t(12);if(age===1)return t(13);return new Intl.DateTimeFormat(locale()==="ckb"?"ckb-IQ":locale()==="ku"?"ku-TR":locale(),{day:"2-digit",month:"short",timeZone:"Europe/Berlin"}).format(dt)}
 function openLink(p){if(d.getElementById("pageRoot"))return "/?page=beitrag&id="+encodeURIComponent(p.id);return "/?post="+encodeURIComponent(p.id)+"#post/"+encodeURIComponent(p.id)}
-function addPost(parent,p,compact){var a=e("a","dar-recent-post");a.href=openLink(p);a.dataset.postId=p.id;var meta=e("span","dar-recent-meta",dateLabel(p)+" · "+(p.category||t(14)));a.appendChild(meta);a.appendChild(e("strong","dar-recent-title",p.title));if(!compact&&p.speaker)a.appendChild(e("span","dar-recent-speaker",p.speaker));a.appendChild(e("span","dar-recent-open",t(7)+" ›"));a.addEventListener("click",function(ev){if(d.getElementById("pageRoot"))return;if(typeof w.navigate==="function"){ev.preventDefault();w.navigate("post",p.id)}});parent.appendChild(a)}
+
+function displayTitle(p){var trans=state.titleLocales[p.id]||{},l=locale();
+ if(l!=="de"&&typeof trans[l]==="string"&&trans[l].trim())return trans[l].toLocaleUpperCase(l==="tr"?"tr":l);
+ return p.title}
+function untranslated(p){return locale()!=="de"&&!(state.titleLocales[p.id]||{})[locale()]}
+function fetchTitleManifests(posts){
+ posts.filter(function(p){return p.localeManifest&&/^\/assets\/[A-Za-z0-9-]+-locales\.json$/.test(p.localeManifest)}).slice(0,24).forEach(function(p){
+ var key=p.localeManifest;if(state.manifestLoaded[key])return;state.manifestLoaded[key]=true;
+ fetch(key,{cache:"force-cache",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("locale manifest");return r.json()}).then(function(data){
+ if(data.contentId!=="post:"+p.id||!data.locales)return;
+ var titles={};["de","ar","en","tr","ku","ckb","bs","fr","es"].forEach(function(code){
+ if(data.locales[code]&&typeof data.locales[code].title==="string")titles[code]=data.locales[code].title});
+ state.titleLocales[p.id]=titles;render();refreshOpenNotice();
+ }).catch(function(){delete state.manifestLoaded[key]});
+ });
+}
+
+function addPost(parent,p,compact){var a=e("a","dar-recent-post");a.href=openLink(p);a.dataset.postId=p.id;var meta=e("span","dar-recent-meta",dateLabel(p)+" · "+(p.category||t(14)));a.appendChild(meta);a.appendChild(e("strong","dar-recent-title",displayTitle(p)));if(!compact&&p.speaker)a.appendChild(e("span","dar-recent-speaker",p.speaker));if(untranslated(p))a.appendChild(e("small","dar-recent-untranslated",t(11)));a.appendChild(e("span","dar-recent-open",t(7)+" ›"));a.addEventListener("click",function(ev){if(d.getElementById("pageRoot"))return;if(typeof w.navigate==="function"){ev.preventDefault();w.navigate("post",p.id)}});parent.appendChild(a)}
 function section(parent,kicker,title){var h=e("div","dar-recent-header");h.appendChild(e("span","dar-recent-kicker",kicker));h.appendChild(e("h2","dar-recent-heading",title));parent.appendChild(h)}
 function render(){var mount=d.getElementById("darRecentPublicationsV1"),h=host();if(!h){if(mount)mount.hidden=true;return}if(!mount){mount=e("section","dar-recent-publications");mount.id="darRecentPublicationsV1";mount.setAttribute("aria-label",t(1));if(h.anchor&&h.anchor.parentNode)h.anchor.parentNode.insertBefore(mount,h.anchor);else h.root.appendChild(mount)}else if(!mount.isConnected||!h.root.contains(mount)){if(h.anchor&&h.anchor.parentNode)h.anchor.parentNode.insertBefore(mount,h.anchor);else h.root.appendChild(mount)}
  mount.hidden=false;mount.setAttribute("aria-label",t(1));mount.replaceChildren();
@@ -49,7 +68,7 @@ function render(){var mount=d.getElementById("darRecentPublicationsV1"),h=host()
  }
  mount.appendChild(panel);
 }
-function refresh(){if(state.loading||Date.now()-state.lastFetch<90000)return;state.loading=true;state.lastFetch=Date.now();fetch(DATA+"?t="+Math.floor(Date.now()/60000),{cache:"no-store",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("index "+r.status);return r.json()}).then(function(j){if(j.schemaVersion!==1||!Array.isArray(j.posts))throw Error("invalid recent index");state.posts=j.posts;render();scheduleNotice()}).catch(function(){state.lastFetch=0;render()}).finally(function(){state.loading=false})}
+function refresh(){if(state.loading||Date.now()-state.lastFetch<90000)return;state.loading=true;state.lastFetch=Date.now();fetch(DATA+"?t="+Math.floor(Date.now()/60000),{cache:"no-store",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("index "+r.status);return r.json()}).then(function(j){if(j.schemaVersion!==1||!Array.isArray(j.posts))throw Error("invalid recent index");state.posts=j.posts;render();fetchTitleManifests(j.posts);scheduleNotice()}).catch(function(){state.lastFetch=0;render()}).finally(function(){state.loading=false})}
 
 /* On-device/in-app announcement, independent of OneSignal permission.
    Once per launch session; "skip" silences exactly this published batch until
@@ -128,8 +147,27 @@ function noticeKeydown(ev){var layer=d.getElementById("darRecentNoticeV1");if(!l
  else if(!ev.shiftKey&&d.activeElement===last){ev.preventDefault();first.focus()}
  }}
 function noticeLink(p){var a=e("a","dar-recent-notice-article");a.href=openLink(p);a.dataset.darPostId=p.id;a.appendChild(e("span","dar-recent-notice-date",dateLabel(p)));
- a.appendChild(e("strong","",p.title));a.appendChild(e("span","dar-recent-notice-arrow",t(7)+" ›"));
+ a.appendChild(e("strong","",displayTitle(p)));if(untranslated(p))a.appendChild(e("small","dar-recent-untranslated",t(11)));a.appendChild(e("span","dar-recent-notice-arrow",t(7)+" ›"));
  return a}
+
+function refreshOpenNotice(){
+ var layer=d.getElementById("darRecentNoticeV1");if(!layer)return;
+ var fields={".dar-recent-notice-kicker":t(0),".dar-recent-notice-header h2":t(1),".dar-recent-notice-subtitle":t(2),".dar-recent-notice-all":t(8)};
+ Object.keys(fields).forEach(function(s){var el=layer.querySelector(s);if(el)el.textContent=fields[s]});
+ var close=layer.querySelector(".dar-recent-notice-x");if(close)close.setAttribute("aria-label",t(9));
+ var skip=layer.querySelector(".dar-recent-notice-skip");if(skip)skip.textContent=skipText();
+ var card=layer.querySelector(".dar-recent-notice-card");if(card)card.dir=["ar","ckb"].includes(locale())?"rtl":"ltr";
+ layer.querySelectorAll("[data-dar-post-id]").forEach(function(el){
+ var p=state.posts.find(function(x){return x.id===el.dataset.darPostId});if(!p)return;
+ var title=el.querySelector("strong"),meta=el.querySelector(".dar-recent-notice-date"),arrow=el.querySelector(".dar-recent-notice-arrow");
+ if(title)title.textContent=displayTitle(p);if(meta)meta.textContent=dateLabel(p);if(arrow)arrow.textContent=t(7)+" ›";
+ var note=el.querySelector(".dar-recent-untranslated");if(untranslated(p)){if(!note){note=e("small","dar-recent-untranslated");el.insertBefore(note,arrow)}note.textContent=t(11)}else if(note)note.remove()
+ });
+ applyNoticeTheme(layer);
+}
+function skipText(){return ({"de":"Für diese Beiträge überspringen","en":"Skip these posts","tr":"Bu yazıları atla","ar":"تخطي هذه المقالات","ku":"Van nivîsan derbas bike","ckb":"ئەم بابەتانە تێپەڕێنە","bs":"Preskoči ove članke","fr":"Ignorer ces articles","es":"Omitir estos artículos"})[locale()]||"Überspringen"}
+function syncLocale(){render();refreshOpenNotice()}
+
 function openNewPostsNotice(){if(!canAnnounce())return;
  var hits=recent(state.posts,5);if(!hits.length)return;
  var sig=latestSignature(state.posts);try{w.sessionStorage.setItem(NOTICE_SESSION,sig)}catch(_){}
@@ -145,7 +183,7 @@ function openNewPostsNotice(){if(!canAnnounce())return;
  var list=e("div","dar-recent-notice-list");hits.slice(0,4).forEach(function(p){list.appendChild(noticeLink(p))});card.appendChild(list);
  var actions=e("div","dar-recent-notice-actions");
  var all=e("button","dar-recent-notice-all",t(8));all.type="button";all.dataset.darNoticeAction="all";actions.appendChild(all);
- var skip=e("button","dar-recent-notice-skip",({"de":"Für diese Beiträge überspringen","en":"Skip these posts","tr":"Bu yazıları atla","ar":"تخطي هذه المقالات","ku":"Van nivîsan derbas bike","ckb":"ئەم بابەتانە تێپەڕێنە","bs":"Preskoči ove članke","fr":"Ignorer ces articles","es":"Omitir estos artículos"})[locale()]||"Überspringen");skip.type="button";skip.dataset.darNoticeAction="skip";actions.appendChild(skip);
+ var skip=e("button","dar-recent-notice-skip",skipText());skip.type="button";skip.dataset.darNoticeAction="skip";actions.appendChild(skip);
  card.appendChild(actions);layer.appendChild(card);
  layer.addEventListener("click",noticeClick,true);
  d.body.appendChild(layer);lockNoticeBackground(layer);applyNoticeTheme(layer);d.addEventListener("keydown",noticeKeydown,true);d.addEventListener("focusin",noticeFocus,true);close.focus({preventScroll:true});
@@ -153,6 +191,6 @@ function openNewPostsNotice(){if(!canAnnounce())return;
 
 var noticeScheduled=false;function scheduleNotice(){if(noticeScheduled||state.modalShown||state.modalOpen||!state.posts.length||!isHome())return;noticeScheduled=true;w.setTimeout(function(){noticeScheduled=false;openNewPostsNotice()},1100)}
 var queued=false;function queue(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;if(isHome()){render();refresh();scheduleNotice()}else{var x=d.getElementById("darRecentPublicationsV1");if(x)x.hidden=true}})}
-function start(){queue();var obs=new MutationObserver(function(m){if(m.some(function(x){return x.target.id==="darRecentPublicationsV1"||x.target.closest&&x.target.closest("#darRecentPublicationsV1")}))return;queue()});obs.observe(d.body,{attributes:true,attributeFilter:["class"],childList:true,subtree:true});w.addEventListener("hashchange",queue);w.addEventListener("popstate",queue);w.addEventListener("pageshow",queue);d.addEventListener("dar:view-rendered",queue);d.addEventListener("visibilitychange",function(){if(!d.hidden){state.lastFetch=0;queue()}})}
+function start(){queue();var obs=new MutationObserver(function(m){if(m.some(function(x){return x.target.id==="darRecentPublicationsV1"||x.target.closest&&x.target.closest("#darRecentPublicationsV1")}))return;queue()});obs.observe(d.body,{attributes:true,attributeFilter:["class"],childList:true,subtree:true});w.addEventListener("hashchange",queue);w.addEventListener("popstate",queue);w.addEventListener("dar-adult-locale-changed",syncLocale);w.addEventListener("storage",function(ev){if(ev.key===KEY)syncLocale()});w.addEventListener("pageshow",queue);d.addEventListener("dar:view-rendered",queue);d.addEventListener("visibilitychange",function(){if(!d.hidden){state.lastFetch=0;queue()}})}
 if(d.readyState==="loading")d.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })(window,document);
