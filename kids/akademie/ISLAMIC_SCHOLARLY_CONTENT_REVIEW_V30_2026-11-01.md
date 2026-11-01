@@ -20,6 +20,16 @@ Die Links der Qurʾān-Fundstellen und die direkten Hadith-Fundstellen sind für
 
 **Kein neuer Isnād erfunden:** Für Belege aus den Ṣaḥīḥayn bleibt der bestehende konkrete Hadith-Verweis der Ausgangspunkt; die pauschale Aussage über Authentizität der Sammlungen ersetzt keine Bewertung jeder davon abgeleiteten Unterrichtsformulierung.
 
+## Frühere Tafsīr- und Salaf-Auslegung als weitere Gegenprüfung
+
+**Zum Wuḍūʾ (5:6):** In [Tafsīr aṭ-Ṭabarī, 5:6](https://tafsir.app/tabari/5/6) sind Lesarten und Aussagen früherer Ausleger dokumentiert, unter anderem von Ibn ʿAbbās, ʿAlī, Ibrāhīm an-Naḫaʿī, ʿUrwah und anderen. Der Tafsīr dokumentiert auch Unterschiede in der Lesart der Fußpassage; gerade deshalb darf die kindliche praktische Anleitung nicht aus einer mehrdeutigen deutschen Kurzfassung abgeleitet werden. Im Ṣaḥīḥ-Ḥadīṯ [al-Buḫārī 164](https://sunnah.com/bukhari:164) zeigt ʿUṯmān die Fußwaschung beim Wuḍūʾ des Propheten ﷺ. Die Unterrichtsfassung benennt diese praktische Handlung.
+
+**Zum Salām (4:86):** [aṭ-Ṭabarī, 4:86](https://tafsir.app/tabari/4/86) führt Überlieferungen früher Ausleger zum Erwideren des Friedensgrußes an, etwa von ʿAṭāʾ, Ibrāhīm und Ibn ʿAbbās. Die Frage der Antwort auf Grüße von Angehörigen anderer Religionen ist eine getrennte Fiqh-Frage und darf Kindern nicht als pauschale Gleichsetzung vermittelt werden. Die grundlegende Kinderlektion übt den Salām zwischen Muslimen.
+
+**Wissenschaftlicher Status der Āṯār:** Dass aṭ-Ṭabarī einen frühen Bericht erwähnt, beweist **noch nicht**, dass jede dort angeführte Überlieferung einen eigenständig geprüften ṣaḥīḥen Isnād besitzt. Einzelne Āṯār werden daher hier als dokumentierte frühe Exegese, nicht als unbesehen authentifiziertes Prophetenwort oder einmütiger Konsens, verwendet.
+
+**Grenze:** Es erfolgte kein vollständiger Isnād- und Rijāl-Abgleich sämtlicher aṭ-Ṭabarī-Überlieferungen zu allen 34 Qurʾān-Fundstellen. Das würde eine separate quellenkritische Monografie darstellen und wird nicht fälschlich als erledigt ausgegeben.
+
 ## Hermeneutische und pädagogische Prüfregeln
 
 - Nur Allah wird angebetet; erlaubte praktische Hilfe durch Eltern, Lehrkräfte oder Helfende ist davon zu unterscheiden.
