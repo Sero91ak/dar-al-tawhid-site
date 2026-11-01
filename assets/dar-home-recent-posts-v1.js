@@ -162,11 +162,20 @@ function render(){
  if(h.root&&h.root.id==="darHomeHtmlParityV1")enforceCanonicalHomeOrder(h.root,mount);
  // Keep permanent native sequence intact: Salām → Ibn Sīrīn → Qibla/Bibliothek
  // → original search → Qurʾān → compact publications → all optional home sections.
- mount.hidden=false;mount.className="dar-recent-publications dar-recent-compact";
- mount.setAttribute("aria-label",t(1));mount.replaceChildren();
+ mount.hidden=false;
  var oldList=d.getElementById("dhpPosts"),oldBlock=oldList&&oldList.closest(".dhp-section");
  if(oldBlock&&oldBlock.classList.contains("dar-recent-legacy-hidden")!==(state.posts.length>0))oldBlock.classList.toggle("dar-recent-legacy-hidden",state.posts.length>0);
  var hits=recent(state.posts,5);
+ /* HOME_SCROLL_STATIC_RECENT_ENTRY_V1_20261101
+    Route/scroll/other-widget mutations must never destroy/rebuild an
+    unchanged home card. During iOS momentum scrolling, repeated
+    replaceChildren() causes reflow and dislodges scroll anchoring. */
+ var compactSig=locale()+"|"+hits.map(function(p){return p.id+"@"+(p.date||"")}).join(";");
+ if(mount.dataset.darRecentCompactSig===compactSig &&
+    mount.querySelector(":scope > .dar-recent-compact-link"))return;
+ mount.className="dar-recent-publications dar-recent-compact";
+ mount.setAttribute("aria-label",t(1));
+ mount.replaceChildren();
  // Only one compact tap target; all lists and date filters live on their own page.
  var a=e("a","dar-recent-compact-link");
  a.href="#";a.setAttribute("aria-label",t(1)+" – "+t(8));
@@ -179,6 +188,7 @@ function render(){
  a.appendChild(info);
  var action=e("span","dar-recent-compact-arrow","›");action.setAttribute("aria-hidden","true");a.appendChild(action);
  mount.appendChild(a);
+ mount.dataset.darRecentCompactSig=compactSig;
 }
 
 function refresh(){if(state.loading||Date.now()-state.lastFetch<90000)return;state.loading=true;state.lastFetch=Date.now();fetch(DATA+"?t="+Math.floor(Date.now()/60000),{cache:"no-store",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("index "+r.status);return r.json()}).then(function(j){if(j.schemaVersion!==1||!Array.isArray(j.posts))throw Error("invalid recent index");state.posts=j.posts;initializeSeen(j.posts);if(unreadPosts().length)state.modalShown=false;render();fetchTitleManifests(j.posts);scheduleNotice()}).catch(function(){state.lastFetch=0;render()}).finally(function(){state.loading=false})}
@@ -403,6 +413,20 @@ function openNewPostsNotice(force){if(state.inlineOpen||!canAnnounce(force===tru
 
 var noticeScheduled=false;function scheduleNotice(){if(noticeScheduled||state.modalShown||state.modalOpen||!state.posts.length||!isHome())return;noticeScheduled=true;w.setTimeout(function(){noticeScheduled=false;openNewPostsNotice()},1100)}
 var queued=false;function queue(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;if(isHome()){render();refresh();syncInlineAfterRoute();if(state.inlineOpen&&state.renderedInlineLocale!==locale())paintInlineList();if(!state.inlineOpen)scheduleNotice()}else{var x=d.getElementById("darRecentPublicationsV1");if(x)x.hidden=true;if(state.inlineOpen)closeInlineList(false)}})}
-function start(){queue();if(new URLSearchParams(location.search).get("recent")==="1"){var check=0;var opening=setInterval(function(){if(state.posts.length||++check>16){clearInterval(opening);openInlineList(false);var u=new URL(location.href);u.searchParams.delete("recent");history.replaceState(history.state,"",u.pathname+u.search+u.hash)}},100)}d.addEventListener("click",function(ev){if(ev.target.closest&&ev.target.closest("[data-dal-locale],[data-v3-locale],[data-dv3-locale]"))setTimeout(function(){if(state.inlineOpen&&state.renderedInlineLocale!==locale())paintInlineList()},0)},true);d.addEventListener("change",function(){setTimeout(function(){if(state.inlineOpen&&state.renderedInlineLocale!==locale())paintInlineList()},0)},true);var obs=new MutationObserver(function(m){if(m.some(function(x){return x.target.id==="darRecentPublicationsV1"||x.target.closest&&x.target.closest("#darRecentPublicationsV1")}))return;queue()});obs.observe(d.body,{attributes:true,attributeFilter:["class"],childList:true,subtree:true});w.addEventListener("hashchange",queue);w.addEventListener("popstate",queue);w.addEventListener("dar-adult-locale-changed",syncLocale);w.addEventListener("storage",function(ev){if(ev.key===KEY)syncLocale()});w.addEventListener("pageshow",queue);d.addEventListener("dar:view-rendered",queue);d.addEventListener("visibilitychange",function(){if(!d.hidden){state.lastFetch=0;queue()}})}
+function start(){queue();if(new URLSearchParams(location.search).get("recent")==="1"){var check=0;var opening=setInterval(function(){if(state.posts.length||++check>16){clearInterval(opening);openInlineList(false);var u=new URL(location.href);u.searchParams.delete("recent");history.replaceState(history.state,"",u.pathname+u.search+u.hash)}},100)}d.addEventListener("click",function(ev){if(ev.target.closest&&ev.target.closest("[data-dal-locale],[data-v3-locale],[data-dv3-locale]"))setTimeout(function(){if(state.inlineOpen&&state.renderedInlineLocale!==locale())paintInlineList()},0)},true);d.addEventListener("change",function(){setTimeout(function(){if(state.inlineOpen&&state.renderedInlineLocale!==locale())paintInlineList()},0)},true);/* HOME_RECENT_OBSERVER_NO_GLOBAL_SCROLL_FEEDBACK_V1_20261101
+   Previously we observed *every* class and descendant change of body.
+   Sticky headers, active tabs and live widgets update during scroll;
+   each change queued a full Home re-order and card reconstruction.
+   Only root view replacements require a fallback observer. Hash, popstate,
+   dar:view-rendered, pageshow and locale events already cover routing. */
+ var view=d.getElementById("appView")||d.getElementById("pageRoot");
+ if(view){
+  var obs=new MutationObserver(function(m){
+   if(m.some(function(x){return x.type==="childList"&&
+     (x.addedNodes.length||x.removedNodes.length)}))queue();
+  });
+  obs.observe(view,{childList:true,subtree:false});
+ }
+ w.addEventListener("hashchange",queue);w.addEventListener("popstate",queue);w.addEventListener("dar-adult-locale-changed",syncLocale);w.addEventListener("storage",function(ev){if(ev.key===KEY)syncLocale()});w.addEventListener("pageshow",queue);d.addEventListener("dar:view-rendered",queue);d.addEventListener("visibilitychange",function(){if(!d.hidden){state.lastFetch=0;queue()}})}
 if(d.readyState==="loading")d.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })(window,document);
