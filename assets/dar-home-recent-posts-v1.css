@@ -1,40 +1,44 @@
+/* Adult visitor home · ultra-compact global article entry.
+   The historic Salām / Ibn Sīrīn / Qibla / Qurʾān section is immutable. */
 #darHomeHtmlParityV1 .dhp-section.dar-recent-legacy-hidden{display:none!important}
-/* DĀR adult home: compact latest post + expandable 2–5-day history.
-   Only own module is styled; inherit current theme instead of replacing it. */
-#darRecentPublicationsV1{--rp-ink:var(--dhp-ink,var(--dt-ink,var(--ink,var(--text,#243b2d))));--rp-line:var(--dhp-line,var(--dt-rule,var(--theme-border,#ab986e)));--rp-gold:var(--dhp-gold,var(--gold2,#ae9563));--rp-paper:var(--dhp-paper,var(--dt-card,var(--theme-surface,transparent)));position:relative;display:block;width:min(100%,1080px);margin:18px auto 24px;padding:clamp(16px,3vw,25px);color:var(--rp-ink);border:1px solid color-mix(in srgb,var(--rp-line) 48%,transparent);border-radius:22px;background:color-mix(in srgb,var(--rp-paper) 94%,transparent);box-sizing:border-box;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;text-align:start;direction:inherit}
+#darRecentPublicationsV1.dar-recent-compact{
+ --r-bg:var(--dhp-paper,var(--card,#101c16));
+ --r-ink:var(--dhp-ink,var(--text,#e9e6d8));
+ --r-gold:var(--dhp-gold,var(--gold2,#b89d67));
+ --r-line:var(--dhp-line,var(--line,#56604b));
+ position:relative;box-sizing:border-box;display:block;max-width:100%;width:100%;
+ margin:10px 0 16px!important;padding:0!important;border:0!important;
+ background:transparent!important;box-shadow:none!important;color:var(--r-ink);
+ border-radius:0!important;font-family:-apple-system,BlinkMacSystemFont,Inter,system-ui,sans-serif;
+}
 #darRecentPublicationsV1[hidden]{display:none!important}
-#darRecentPublicationsV1 .dar-recent-kicker{font-size:.66rem;font-weight:750;letter-spacing:.19em;color:var(--rp-gold)}
-#darRecentPublicationsV1 .dar-recent-heading{font-size:clamp(1.12rem,2.5vw,1.4rem);font-weight:700;line-height:1.35;letter-spacing:.01em;color:inherit;margin:6px 0 16px}
-#darRecentPublicationsV1 .dar-recent-highlight{border-top:1px solid color-mix(in srgb,var(--rp-line) 32%,transparent);padding-top:10px}
-#darRecentPublicationsV1 .dar-recent-post{display:flex;flex-direction:column;gap:4px;min-width:0;padding:14px 10px;border-bottom:1px solid color-mix(in srgb,var(--rp-line) 23%,transparent);text-decoration:none!important;color:inherit!important;border-radius:11px;outline-offset:1px}
-#darRecentPublicationsV1 .dar-recent-post:hover,#darRecentPublicationsV1 .dar-recent-post:focus-visible{background:color-mix(in srgb,var(--rp-gold) 11%,transparent);outline:1px solid color-mix(in srgb,var(--rp-gold) 50%,transparent)}
-#darRecentPublicationsV1 .dar-recent-meta,#darRecentPublicationsV1 .dar-recent-speaker{font-size:.78rem;color:inherit;opacity:.73;overflow-wrap:anywhere}
-#darRecentPublicationsV1 .dar-recent-title{font-size:clamp(.95rem,2.2vw,1.1rem);font-weight:730;line-height:1.5;overflow-wrap:anywhere}
-#darRecentPublicationsV1 .dar-recent-open{font-size:.8rem;color:var(--rp-gold);font-weight:700}
-#darRecentPublicationsV1 .dar-recent-toggle{font:inherit;font-size:.89rem;font-weight:720;color:inherit;background:transparent;border:1px solid color-mix(in srgb,var(--rp-line) 57%,transparent);border-radius:999px;padding:11px 18px;margin-top:14px;min-height:44px;cursor:pointer;width:100%;text-align:center}
-#darRecentPublicationsV1 .dar-recent-toggle:hover,#darRecentPublicationsV1 .dar-recent-toggle:focus-visible{border-color:var(--rp-gold);background:color-mix(in srgb,var(--rp-gold) 9%,transparent)}
-#darRecentPublicationsV1 .dar-recent-panel{padding-top:19px}
-#darRecentPublicationsV1 .dar-recent-panel-title{font-size:1rem;margin:0 0 13px;font-weight:700;color:inherit}
-#darRecentPublicationsV1 .dar-recent-days{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-#darRecentPublicationsV1 .dar-recent-day{font:inherit;color:inherit;border:1px solid color-mix(in srgb,var(--rp-line) 50%,transparent);background:transparent;border-radius:999px;min-height:40px;padding:8px 16px;cursor:pointer}
-#darRecentPublicationsV1 .dar-recent-day.is-selected{border-color:var(--rp-gold);background:color-mix(in srgb,var(--rp-gold) 16%,transparent);font-weight:750}
-#darRecentPublicationsV1 .dar-recent-day-title{font-size:.84rem;font-weight:750;margin:18px 0 6px;color:var(--rp-gold)}
-#darRecentPublicationsV1 .dar-recent-list{display:grid;grid-template-columns:1fr}
-#darRecentPublicationsV1 .dar-recent-empty{font-size:.9rem;opacity:.83;margin:12px 0;line-height:1.6}
-html[dir=rtl] #darRecentPublicationsV1{text-align:right}
-@media(min-width:780px){#darRecentPublicationsV1 .dar-recent-list{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:12px}}
-@media(prefers-reduced-motion:reduce){#darRecentPublicationsV1 *{scroll-behavior:auto!important;transition:none!important}}
-
-/* First-screen prominence: the home title is placed directly after the existing welcome.
-   Keep the original root font size and preserve all 5 native nav buttons. */
-body.is-home-route #darHomeHtmlParityV1 #darRecentPublicationsV1{margin:12px 0 22px!important;width:100%;max-width:none;scroll-margin-top:95px;background:color-mix(in srgb,var(--dhp-paper,var(--card,#faf8f0)) 88%,transparent);border-color:color-mix(in srgb,var(--dhp-gold,#a99058) 61%,transparent);box-shadow:0 8px 25px rgba(0,0,0,.035)}
-#pageRoot #darRecentPublicationsV1{--rp-ink:var(--ink,#292c26);--rp-line:var(--line,#c9bead);--rp-paper:var(--paper2,#faf7ee);--rp-gold:var(--gold2,#967b4c);margin:20px auto 25px;max-width:1180px}
-
-/* Visitor-first surface; never change the five native bottom navigation tabs. */
-body.is-home-route #darHomeHtmlParityV1 #darRecentPublicationsV1{margin:12px 0 22px!important;width:100%;max-width:none;scroll-margin-top:95px;background:color-mix(in srgb,var(--dhp-paper,var(--card,#faf8f0)) 88%,transparent);border-color:color-mix(in srgb,var(--dhp-gold,#a99058) 61%,transparent);box-shadow:0 8px 25px rgba(0,0,0,.035)}
-#pageRoot #darRecentPublicationsV1{--rp-ink:var(--ink,#292c26);--rp-line:var(--line,#c9bead);--rp-paper:var(--paper2,#faf7ee);--rp-gold:var(--gold2,#967b4c);margin:20px auto 25px;max-width:1180px}
-#darRecentPublicationsV1 :is(button,a){cursor:pointer;touch-action:manipulation}
-#darRecentPublicationsV1 .dar-recent-untranslated{opacity:.75;font-size:.72rem}
+#darRecentPublicationsV1 .dar-recent-compact-link{
+ display:flex;align-items:center;gap:13px;box-sizing:border-box;min-height:76px;
+ width:100%;max-width:100%;padding:12px 15px;border-radius:16px;
+ border:1px solid color-mix(in srgb,var(--r-line) 83%,transparent);
+ background:color-mix(in srgb,var(--r-bg) 92%,transparent);
+ text-decoration:none!important;color:var(--r-ink)!important;
+ box-shadow:inset 2px 0 color-mix(in srgb,var(--r-gold) 70%,transparent);
+ -webkit-tap-highlight-color:transparent;touch-action:manipulation;cursor:pointer;
+}
+#darRecentPublicationsV1 .dar-recent-compact-link:hover,#darRecentPublicationsV1 .dar-recent-compact-link:focus-visible{
+ background:color-mix(in srgb,var(--r-gold) 12%,var(--r-bg));border-color:var(--r-gold);outline-offset:3px}
+#darRecentPublicationsV1 .dar-recent-compact-icon{
+ flex:0 0 35px;display:grid;place-items:center;width:35px;height:35px;
+ border-radius:11px;color:var(--r-gold);
+ background:color-mix(in srgb,var(--r-gold) 12%,transparent);
+ border:1px solid color-mix(in srgb,var(--r-gold) 38%,transparent);
+ font-size:17px;line-height:1}
+#darRecentPublicationsV1 .dar-recent-compact-content{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1;text-align:start}
+#darRecentPublicationsV1 .dar-recent-compact-kicker{font-size:.6rem;letter-spacing:.13em;color:var(--r-gold);font-weight:850}
+#darRecentPublicationsV1 .dar-recent-compact-title{font-size:.95rem;font-weight:750;line-height:1.26;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--r-ink)}
+#darRecentPublicationsV1 .dar-recent-compact-sub{font-size:.73rem;line-height:1.2;opacity:.75;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#darRecentPublicationsV1 .dar-recent-compact-arrow{display:grid;place-items:center;flex:0 0 19px;font-size:27px;font-weight:300;color:var(--r-gold);line-height:1}
+#pageRoot #darRecentPublicationsV1.dar-recent-compact{--r-bg:var(--paper2,#121a14);--r-ink:var(--ink,#edebdf);--r-gold:var(--gold2,#c9ac76);--r-line:var(--line,#56604b);width:min(100%,820px);margin:12px auto 16px!important}
+html[dir=rtl] #darRecentPublicationsV1 .dar-recent-compact-link{direction:rtl}
+html[dir=rtl] #darRecentPublicationsV1 .dar-recent-compact-arrow{transform:scaleX(-1)}
+@media(max-width:430px){#darRecentPublicationsV1 .dar-recent-compact-link{min-height:69px;padding:10px 12px;gap:10px}}
+@media(prefers-reduced-motion:reduce){#darRecentPublicationsV1 *{transition:none!important}}
 
 /* DAR DASHBOARD MODAL v3 · browser top-layer dialog, not a z-index overlay.
    Theme tokens are calculated from the selected visitor appearance in JS. */
