@@ -7,7 +7,7 @@
 - Bestehende `kids/akademie/index.html` (einschließlich der acht Ṣidq-Einstiegsfragen) unverändert; keine CSS-, HTML-, Navigations-, Profil- oder Architekturänderungen.
 - Insgesamt **66 Lektionen**: 65 Curriculumeinträge plus 1 fest integrierte Ṣidq-Einführung.
 - Insgesamt **528 Altersfragen**: 520 Curriculumsfragen (130 / 195 / 195) plus 8 Ṣidq-Fragen (2 / 3 / 3).
-- **274 von 520 Curriculums-Frageslots inhaltlich überarbeitet**; die übrigen **246** unverändert belassen, weil bestehende Aufgaben bereits thematisch konkret waren.
+- **295 von 520 Curriculums-Frageslots inhaltlich überarbeitet**; die übrigen **246** unverändert belassen, weil bestehende Aufgaben bereits thematisch konkret waren.
 - **33 bisher nicht altersgetrennte Curriculum-Lektionen** haben nun bestehende `ageText`-Felder für 4–5, 6–8, 9–10. Damit weisen alle 65 Curriculumeinträge Altersfassungen auf.
 - Mechanische Kompatibilitätsprüfung erfolgreich: IDs, Reihenfolge, Anzahl, Typen, religiöse Originalreferenzen, Audiofreigabewerte, alle anderen bestehenden Lektionsfelder sind unverändert.
 - Der V30-Inhalt liegt innerhalb der bestehenden `curriculum-v29.js` und verwendet nur bekannte Datenfelder. Er enthält keine neue UI, keine neue Navigation, keine neuen APIs oder TTS-Dienste.
@@ -120,3 +120,12 @@ Ein eigenständiges 66-Lektionen-Fachgutachten einschließlich Primärquellenlin
 **Prüfungen bestanden:** Struktur-/Inhaltsregression und Quellen-/Sperrenregression für die geladene Lernakademie mit unveränderten 66 Lektionen und 528 Frageslots. Diese Regressionen wurden als aus den echten GitHub-Dateien gelesene JavaScript-Tests ausgeführt; regulärer Node-Lauf im GitHub-CI und reale Gerätetests müssen separat bestätigt werden.
 
 **Präzise Freigabegrenze:** Die AI-unterstützte Primärquellenkontrolle und klassische Tafsīr-Gegenprüfung sind dokumentiert. Weder eine unabhängige menschliche ʿĀlim-/Muftī-Begutachtung noch eine vollständige Isnād-Kollation sämtlicher 43 Hadith-Zitationsstrings oder vollständige diakritische Zeichen-für-Zeichen-Kollation aller Qurʾān-Wortlaute darf als abgeschlossen bezeichnet werden. Keine Veröffentlichung und kein Audio ohne gesonderte Freigabe.
+
+
+### Redaktionelle Fortsetzung: Runde 2 (01.11.2026)
+
+- Stand: **295 von 520** Curriculum-Frageslots gegenüber dem unveränderten Ausgangskanon überarbeitet, die übrigen 225 bleiben erhalten. Das ersetzt die vorherige Zählung 274; es sind nicht 295 neue Fragen, sondern inhaltliche Änderungen an vorhandenen Slots.
+- Davon zusätzlich kindgerechte Fragen für 4–5-Jährige, **49 Musterantworten sprachlich bereinigt** und **zehn 6–8-Jahre-Fragen über ʿAqīdah** quellenbezogen überarbeitet; keine Aussagen über das Verborgene hinzuerfunden.
+- Besonders wichtig: In der aktuellen Auswahl für Engel/Gesandte wird der Qurʾān-Beleg **2:3** vom ausdrücklich nennenden **Ḥadīṯ Ǧibrīl, Muslim 8a**, unterschieden.
+- Fachliche Primärquellen-Vergleichstabelle mit konkreten Prüfpunkten: `kids/akademie/ISLAMIC_SOURCE_REVIEW_ROUND2_2026-11-01.md`.
+- Audioproduktion weiterhin ausdrücklich **nicht begonnen**; Draft-PR bleibt ungemergt.
