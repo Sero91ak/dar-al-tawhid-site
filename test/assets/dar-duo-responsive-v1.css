@@ -158,6 +158,10 @@ html.dar-test-duo-active #darTestDuoWorkspaceNav {
 }
 #darTestDuoWorkspaceNav .dar-test-duo-context-link{
   display:block;
+  width:100%;
+  text-align:left;
+  background:transparent;
+  cursor:pointer;
   min-height:40px;
   border:1px solid transparent;
   padding:10px;
