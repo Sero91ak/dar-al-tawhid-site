@@ -63,7 +63,7 @@ html.dar-test-duo-active #darTestDuoWorkspaceNav {
   flex-direction:column!important;
   align-items:stretch!important;
   gap:3px!important;
-  padding:12px clamp(12px,2.5vw,23px) 20px!important;
+  padding:12px clamp(12px,2.5vw,23px) calc(110px + env(safe-area-inset-bottom,0px))!important;
   border:0!important;
   border-right:1px solid var(--dar-duo-divider)!important;
   border-radius:0!important;
@@ -203,11 +203,12 @@ html.dar-test-duo-active body #appView :is(
   max-inline-size:100%!important;
   min-inline-size:0!important;
 }
-/* Keep the SAME original five-tab dock in the right HALF and above the
- * reader. No clone, no replacement of the original event handlers. */
+/* Keep the SAME original five-tab dock in the LEFT control pane:
+ * navigation belongs with selection, leaving the right reader clear.
+ * No clone, no replacement of the original event handlers. */
 html.dar-test-duo-active #bottomNav{
   position:fixed!important;
-  left:75%!important;
+  left:25%!important;
   right:auto!important;
   transform:translateX(-50%)!important;
   translate:none!important;
