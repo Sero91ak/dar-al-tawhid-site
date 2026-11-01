@@ -16,6 +16,8 @@ assert.match(js,/dar-fold-v2-route/);
 assert.match(js,/scrollByCategory/);
 assert.match(js,/Bereich wechseln/);
 assert.match(js,/optionCache/);
+assert.match(js,/getAttribute\("data-value"\)/); // Qurʾān surahs share data-nav and must remain distinct
+assert.match(js,/result\.push\(\{text:title,el:el,key:key,hash:hash,route:route,value:value\}\)/);
 assert.match(js,/aria-expanded/);
 assert.match(css,/dar-fold-v2-menu-row/);
 assert.match(css,/dar-fold-v2-context/);
