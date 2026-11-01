@@ -34,7 +34,7 @@
   if (disabled || !/^\/test(?:\/|$)/.test(win.location.pathname)) return;
 
   var nav, frame, topbar, source, list, filter, contextTitle, active = false, raf = 0;
-  var lastItems = "", lastHash = "", lastWidth = 0, lastHeight = 0, resizeObserver, sourceObserver;
+  var lastItems = "", lastContextEls = [], lastHash = "", lastWidth = 0, lastHeight = 0, resizeObserver, sourceObserver;
   var scrollByCategory = Object.create(null);
   var selectedCategory = "home";
   function viewport() {
@@ -146,16 +146,38 @@
     var items=candidates(), query=(filter.value||"").trim().toLocaleLowerCase();
     var shown=items.filter(function(x){return x.text.toLocaleLowerCase().includes(query);}).slice(0,90);
     var signature=selectedCategory+"|"+query+"|"+shown.map(function(x){return x.key+"="+x.text;}).join(";");
-    if(signature===lastItems)return;lastItems=signature;
+    if(signature===lastItems && shown.length===lastContextEls.length && shown.every(function(x,i){return x.el===lastContextEls[i];}))return;
+    lastItems=signature;lastContextEls=shown.map(function(x){return x.el;});
     var fragment=doc.createDocumentFragment();
     shown.forEach(function(item){
       var b=make("button","dar-fold-v2-option",item.text);b.type="button";
       b.addEventListener("click",function(){
         var el=item.el;
-        if(!el.isConnected){renderContext();return;}
-        try{el.click();}catch(_){}
-        if(el.getAttribute("href")&&el.getAttribute("href").startsWith("#"))
-          win.location.hash=el.getAttribute("href");
+        if(!el.isConnected){lastItems="";renderContext();return;}
+        // The visible right frame owns real interactions. Trigger its matching
+        // route/card control first, including route-local dialogs and reader UI.
+        // The hidden source is a metadata fallback, never the primary action.
+        var clicked=false;
+        try {
+          var child=frame && frame.contentDocument;
+          if(child){
+            var matches=Array.from(child.querySelectorAll(
+              "[data-nav],[data-library-open],[data-qsrc-open],a[href^='#'],.quran-surah-card,.dua-card,.lib-card,.post-card,.qsrc-card,button"
+            ));
+            var wanted=String(item.text).replace(/\s+/g," ").trim();
+            var match=matches.find(function(node){
+              var label=String(node.getAttribute("aria-label")||node.innerText||node.textContent||"").replace(/\s+/g," ").trim();
+              var route=node.getAttribute("href")||node.dataset.nav||node.dataset.libraryOpen||node.dataset.qsrcOpen||"";
+              return label===wanted && (route===item.key || (!route && item.key===wanted.slice(0,180)));
+            });
+            if(match && !match.disabled){match.click();clicked=true;}
+          }
+        }catch(_){}
+        if(!clicked){
+          try{el.click();}catch(_){}
+          var href=el.getAttribute("href");
+          if(href && href.startsWith("#"))win.location.hash=href;
+        }
         onRoute();
       });
       fragment.appendChild(b);
