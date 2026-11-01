@@ -48,7 +48,7 @@
  @media(prefers-reduced-motion:reduce){.dar-desktop-recent-track{scroll-behavior:auto!important}}
 /* Restore accessibility removed by legacy public-browser tap overrides. */
 @media (hover:none) and (pointer:coarse){
- :where(a,button,input,select,textarea,summary,[role="button"]):focus-visible{
+ html body :is(a,button,input,select,textarea,summary,[role="button"],[tabindex]):focus-visible{
   outline:2px solid currentColor!important;outline-offset:3px!important
  }
 }
