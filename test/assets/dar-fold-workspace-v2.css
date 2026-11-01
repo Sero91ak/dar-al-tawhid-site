@@ -14,19 +14,39 @@ html.dar-fold-v2-active,html.dar-fold-v2-active body{
   width:100%!important;max-width:100%!important;height:100dvh!important;
   overflow:hidden!important;overscroll-behavior:none!important;
 }
+/* Hide the inactive shell, not the actual view: #appView is moved outside it. */
 html.dar-fold-v2-active body>.app{
-  width:100%!important;max-width:100%!important;min-width:0!important;transform:none!important;
+  position:fixed!important;left:-250vw!important;top:0!important;
+  right:auto!important;width:100vw!important;height:100dvh!important;
+  visibility:hidden!important;opacity:0!important;pointer-events:none!important;
+  transform:none!important;overflow:hidden!important;
 }
-html.dar-fold-v2-active body #appView{
-  position:fixed!important;left:-200vw!important;top:0!important;
-  width:100vw!important;max-width:100vw!important;height:100dvh!important;
-  visibility:hidden!important;pointer-events:none!important;overflow:hidden!important;
-  opacity:0!important;z-index:-1!important;transform:none!important;
+html.dar-fold-v2-active body :is(#topEdgeFade,#topSwimAura){
+  display:none!important;visibility:hidden!important;pointer-events:none!important;
+}
+/* The one existing appView lives inside this right-hand scroll container. */
+html.dar-fold-v2-active body #darFoldV2Pane > #appView,
+html.dar-fold-v2-active body #darFoldV2Pane > #appView.view{
+  display:block!important;position:relative!important;inset:auto!important;
+  left:0!important;right:auto!important;top:0!important;bottom:auto!important;
+  width:100%!important;min-width:0!important;max-width:100%!important;
+  height:auto!important;min-height:100%!important;max-height:none!important;
+  margin:0!important;padding:12px 12px max(32px,env(safe-area-inset-bottom,0px))!important;
+  visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+  overflow:visible!important;transform:none!important;translate:none!important;
+  z-index:auto!important;box-sizing:border-box!important;
+}
+html.dar-fold-v2-active body #darFoldV2Pane #appView :is(
+ .view,.qov-page,.quran-page,.qrc-shell,.hadith-hub,.hadith-detail,
+ .topics-hub,.topic-collection-page,.post-reader,.lib-page,
+ .dua-hub,.dua-detail,.library-page,.prayer-page-noble
+){
+  min-width:0!important;max-width:100%!important;box-sizing:border-box!important;
 }
 html.dar-fold-v2-active :is(#bottomNav,#appChromeDock,.bottom-nav){display:none!important;}
-#darFoldV2Topbar[hidden],#darFoldV2Rail[hidden],#darFoldV2Frame[hidden],
+#darFoldV2Topbar[hidden],#darFoldV2Rail[hidden],#darFoldV2Pane[hidden],
 #darFoldV2Menu[hidden],#darFoldV2Context[hidden]{display:none!important;}
-html.dar-fold-v2-active :is(#darFoldV2Topbar,#darFoldV2Rail,#darFoldV2Frame){
+html.dar-fold-v2-active :is(#darFoldV2Topbar,#darFoldV2Rail,#darFoldV2Pane){
   box-sizing:border-box!important;transform:none!important;max-width:none!important;
 }
 html.dar-fold-v2-active #darFoldV2Topbar{
@@ -59,14 +79,26 @@ html.dar-fold-v2-active #darFoldV2Rail{
   border-radius:0!important;z-index:2147483000!important;
   color:var(--dar-fold-v2-ink)!important;box-shadow:none!important;
 }
-html.dar-fold-v2-active #darFoldV2Frame{
+html.dar-fold-v2-active #darFoldV2Pane{
   position:fixed!important;top:var(--dar-fold-v2-top)!important;bottom:0!important;
   left:var(--dar-fold-v2-rail)!important;right:0!important;
-  width:calc(100% - var(--dar-fold-v2-rail))!important;
+  width:calc(100% - var(--dar-fold-v2-rail))!important;min-width:0!important;
   height:calc(100dvh - var(--dar-fold-v2-top))!important;
-  overflow:hidden!important;border:0!important;
+  overflow-x:clip!important;overflow-y:auto!important;
+  overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch;
+  touch-action:pan-y;scrollbar-width:thin!important;
+  padding:0!important;margin:0!important;border:0!important;
   background:var(--bg,#0d2224)!important;
-  z-index:2147482999!important;
+  isolation:isolate!important;box-sizing:border-box!important;
+  z-index:2147482999!important;transform:none!important;
+  container-type:inline-size;container-name:dar-fold-reader;
+}
+@container dar-fold-reader (max-width:660px){
+  #appView .stats-grid,#appView .quran-overview-grid,
+  #appView .hadith-grid,#appView .library-grid,
+  #appView .topics-grid,#appView .dua-grid{
+    grid-template-columns:repeat(auto-fit,minmax(min(100%,185px),1fr))!important;
+  }
 }
 /* Calm editorial header: one strong name, one fine divider, no stacked cards. */
 #darFoldV2Rail .dar-fold-v2-intro{
@@ -218,7 +250,8 @@ html.dar-fold-v2-active #darFoldV2Frame{
   #darFoldV2Rail .dar-fold-v2-subtitle{margin-top:3px!important}
   #darFoldV2Rail .dar-fold-v2-switch{margin-bottom:8px!important}
 }
-/* The right reader is a full independent responsive browser viewport. */
+/* Historic embedded-reader styles retained as harmless compatibility only.
+   Live Fold V4 no longer creates an embedded document. */
 html.dar-fold-v2-reader,html.dar-fold-v2-reader body{
   width:100%!important;max-width:100%!important;min-width:0!important;
   overflow-x:clip!important;overflow-y:auto!important;
@@ -237,7 +270,7 @@ html.dar-fold-v2-reader body #appView{
 }
 html.dar-fold-v2-reader :is(
   #bottomNav,#appChromeDock,.bottom-nav,.app-header,#appHeader,#topBar,
-  #darFoldV2Topbar,#darFoldV2Rail,#darFoldV2Frame
+  #darFoldV2Topbar,#darFoldV2Rail,#darFoldV2Pane
 ){display:none!important}
 html.dar-fold-v2-reader body #appView :is(
   .view,.qov-page,.quran-page,.qrc-shell,.hadith-hub,.hadith-detail,
