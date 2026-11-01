@@ -222,6 +222,8 @@ html.dar-test-duo-active #bottomNav{
   margin:0!important;
   box-sizing:border-box!important;
   z-index:180!important;
+  transition:none!important;
+  animation:none!important;
 }
 html.dar-test-duo-active #bottomNav>*{min-width:0!important;}
 /* A reading dialog on the right does not blank the left chooser. */
