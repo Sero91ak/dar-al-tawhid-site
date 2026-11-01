@@ -114,6 +114,23 @@ try{
            action:e.getAttribute("data-action"),id:e.id,cls:String(e.className).slice(0,70)}))};
    });
    console.log("SMART_DUO_CHOOSER "+key+" "+JSON.stringify(chooser));
+   if(key==="more"){
+     if(chooser.count<10)throw Error("More menu has no real left-side subnavigation");
+     const propheten=page.locator("#darTestDuoContext [data-duo-context-index]")
+       .filter({hasText:"Die Propheten"}).first();
+     if(!(await propheten.count()))throw Error("More's Propheten item missing from master");
+     await propheten.tap({timeout:8000});
+     await page.waitForTimeout(1200);
+     const opened=await page.locator("#darTestDuoReaderFrame")
+       .evaluate(el=>el.contentWindow.location.hash);
+     console.log("SMART_DUO_MORE_DETAIL",opened);
+     if(!opened.startsWith("#propheten")&&!opened.startsWith("#prophets"))
+       throw Error("More selection did not open its real reader route");
+     if((await page.locator("#darTestDuoContext [data-duo-context-index]").count())<10)
+       throw Error("More master choices disappeared after opening right detail");
+     await page.locator('#darTestDuoWorkspaceNav [data-duo-route="more"]').tap({timeout:8000});
+     await page.waitForTimeout(650);
+   }
  }
  const n=await page.locator("#darTestDuoContext [data-duo-context-index]").count();
  console.log("SMART_DUO_CONTEXT_COUNT",n);
