@@ -36,7 +36,7 @@
   var viewProps=["position","top","bottom","left","right","width","min-width","max-width","height","max-height",
     "margin","margin-left","margin-right","overflow","overflow-x","overflow-y","transform","translate",
     "z-index","box-sizing","overscroll-behavior-y","touch-action"];
-  var bottomProps=["position","left","right","width","max-width","min-width","margin","margin-left","margin-right","transform","translate"];
+  var bottomProps=["position","left","right","width","max-width","min-width","margin","margin-left","margin-right","transform","translate","transition","animation"];
   function language(){
     var l="";
     try {l=String(global.localStorage.getItem("darAdultPreferredLocaleV1")||"");} catch(_){}
@@ -302,6 +302,10 @@
     set(bottom,"margin-left","0px");
     set(bottom,"margin-right","0px");
     set(bottom,"transform","translateX(-50%)");
+    // CSS transitions used to outrank the split geometry for several frames
+    // after a Fold reopen. Do not animate the existing dock in workspace mode.
+    set(bottom,"transition","none");
+    set(bottom,"animation","none");
     set(bottom,"translate","none");
     observeGeometry();
   }
