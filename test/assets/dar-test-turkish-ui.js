@@ -433,6 +433,7 @@ function isDynamicGermanUi(value){
   /^Slide \d+ von \d+$/.test(value)||
   value==="Bei rotem Status: Startseite → ↻ Sync in der Statusleiste, dann erneut testen."||
   /^\d+\s+(Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt|Funktionen|Ergebnisse)$/.test(value)||
+  /^Alle \d+ geprüften Werke mit verifiziertem Autor\. Zitierte Gelehrte werden getrennt ausgewiesen\.$/.test(value)||
   /^\d+\s+Āyāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
   /^\d+\s*·\s*\d+\s+Ayāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
   /^\d+\s+Sūren\s*·\s*\d+\s+Āyāt$/.test(value)||
@@ -2042,6 +2043,21 @@ function translateSharedPatterns(value,language){
   const rest=lookupPack(picture[1],language)||picture[1];
   if(head)return head+" "+rest;
  }
+ const reviewedWorks=value.match(/^Alle (\d+) geprüften Werke mit verifiziertem Autor\. Zitierte Gelehrte werden getrennt ausgewiesen\.$/);
+ if(reviewedWorks){
+  const n=reviewedWorks[1];
+  const forms={
+   ar:"جميع "+n+" الأعمال المفحوصة مع مؤلف موثّق. العلماء المذكورون يُعرضون منفصلين.",
+   en:"All "+n+" reviewed works with a verified author. Cited scholars are listed separately.",
+   tr:"Yazarı doğrulanmış "+n+" incelenen eser. Anılan âlimler ayrı gösterilir.",
+   ku:"Hemû "+n+" berhemên kontrolkirî bi nivîskarekî piştrast. Alimên gotî cuda tên nîşandan.",
+   ckb:"هەموو "+n+" بەرهەمی پشکنراو لەگەڵ نووسەرێکی پشتڕاستکراو. زانایانی هاتوو جیا دەخرێنەڕوو.",
+   bs:"Svih "+n+" provjerenih djela s potvrđenim autorom. Navedeni učenjaci su prikazani odvojeno.",
+   fr:"Les "+n+" ouvrages vérifiés ont un auteur confirmé. Les savants cités sont indiqués à part.",
+   es:"Las "+n+" obras revisadas tienen un autor verificado. Los sabios citados se muestran aparte."
+  };
+  return forms[language]||null;
+ }
  return null;
 }
 function translateExact(value,language="tr"){
@@ -2140,14 +2156,14 @@ function translateExact(value,language="tr"){
   return head?head+" · "+aboutHim[1]:null;
  }
  const dynamicLabels={
-  Veröffentlichungen:{ar:"منشورات",ku:"weşan",ckb:"بڵاوکراوە",bs:"publikacija",fr:"publications",es:"publicaciones"},
-  Beiträge:{ar:"مقالات",ku:"nivîs",ckb:"بابەت",bs:"tekstova",fr:"articles",es:"artículos"},
-  Seiten:{ar:"صفحات",ku:"rûpel",ckb:"لاپەڕە",bs:"stranice",fr:"pages",es:"páginas"},
-  Themenbereiche:{ar:"مجالات",ku:"qadên mijaran",ckb:"بوارەکانی بابەت",bs:"tematske oblasti",fr:"thèmes",es:"áreas temáticas"},
-  Aussagen:{ar:"أقوال",ku:"gotin",ckb:"وتەکان",bs:"izjave",fr:"paroles",es:"afirmaciones"},
-  gemerkt:{ar:"محفوظ",ku:"tomarkirî",ckb:"هەڵگیراو",bs:"sačuvano",fr:"enregistré",es:"guardado"},
-  Funktionen:{ar:"وظائف",ku:"fonksiyon",ckb:"کارەکان",bs:"funkcija",fr:"fonctions",es:"funciones"},
-  Ergebnisse:{ar:"نتائج",ku:"encam",ckb:"ئەنجام",bs:"rezultata",fr:"résultats",es:"resultados"}
+  Veröffentlichungen:{ar:"منشورات",en:"Publications",ku:"weşan",ckb:"بڵاوکراوە",bs:"publikacija",fr:"publications",es:"publicaciones"},
+  Beiträge:{ar:"مقالات",en:"Articles",ku:"nivîs",ckb:"بابەت",bs:"tekstova",fr:"articles",es:"artículos"},
+  Seiten:{ar:"صفحات",en:"pages",ku:"rûpel",ckb:"لاپەڕە",bs:"stranice",fr:"pages",es:"páginas"},
+  Themenbereiche:{ar:"مجالات",en:"topic areas",ku:"qadên mijaran",ckb:"بوارەکانی بابەت",bs:"tematske oblasti",fr:"thèmes",es:"áreas temáticas"},
+  Aussagen:{ar:"أقوال",en:"statements",ku:"gotin",ckb:"وتەکان",bs:"izjave",fr:"paroles",es:"afirmaciones"},
+  gemerkt:{ar:"محفوظ",en:"saved",ku:"tomarkirî",ckb:"هەڵگیراو",bs:"sačuvano",fr:"enregistré",es:"guardado"},
+  Funktionen:{ar:"وظائف",en:"Features",ku:"fonksiyon",ckb:"کارەکان",bs:"funkcija",fr:"fonctions",es:"funciones"},
+  Ergebnisse:{ar:"نتائج",en:"Results",ku:"encam",ckb:"ئەنجام",bs:"rezultata",fr:"résultats",es:"resultados"}
  };
  const dynamic=value.match(/^(\d+)\s+(Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt|Funktionen|Ergebnisse)$/);
  if(dynamic&&dynamicLabels[dynamic[2]]?.[language])return dynamic[1]+" "+dynamicLabels[dynamic[2]][language];
@@ -2159,6 +2175,23 @@ function translateExact(value,language="tr"){
  if(editorialLabels[value]?.[language])return editorialLabels[value][language];
  const composed=translateComposed(value,language);
  if(composed!==null&&composed!==undefined)return composed;
+ const accuracy=value.match(/^(\d+(?:[.,]\d+)?)%\s+Trefferquote$/);
+ if(accuracy&&language!=="tr"){
+  const word=lookupPack("Trefferquote",language)||"Trefferquote";
+  return accuracy[1]+"% "+word;
+ }
+ const listed=value.match(/^(.{2,90}),\s*(\d+)\s+Veröffentlichungen$/);
+ if(listed&&language!=="tr"){
+  const name=lookupPack(listed[1],language)||listed[1];
+  const word=dynamicLabels.Veröffentlichungen[language]||lookupPack("Veröffentlichungen",language)||"Veröffentlichungen";
+  return name+", "+listed[2]+" "+word;
+ }
+ const paged=value.match(/^(.{2,90})\s*·\s*(\d+)\s+Seiten$/);
+ if(paged&&language!=="tr"){
+  const name=lookupPack(paged[1],language)||paged[1];
+  const word=dynamicLabels.Seiten[language]||"Seiten";
+  return name+" · "+paged[2]+" "+word;
+ }
  if(language!=="tr"){
   const exact=languagePacks.get(language)?.get(value);
   if(exact!==undefined)return exact;
@@ -2402,7 +2435,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-41";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-42";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

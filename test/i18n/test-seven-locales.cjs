@@ -203,6 +203,12 @@ assert.equal(w.DarTestTurkishUI.translateValue("Herausgegeben von Serhat Abu Mal
 assert.equal(w.DarTestTurkishUI.translateValue("Version 3","tr"),"Sürüm 3");
 assert.equal(w.DarTestTurkishUI.translateValue("5 geprüfte Werke und zitierte Gelehrte.","en"),"5 Reviewed works and cited scholars.");
 assert.equal(w.DarTestTurkishUI.translateValue("PDF-Leser: Wissen","ckb"),"خوێنەری PDF: Wissen");
+assert.equal(w.DarTestTurkishUI.translateValue("7 Veröffentlichungen","en"),"7 Publications");
+assert.equal(w.DarTestTurkishUI.translateValue("40% Trefferquote","en"),"40% Accuracy");
+assert.equal(w.DarTestTurkishUI.translateValue("Adab, 6 Veröffentlichungen","fr"),"Adab, 6 publications");
+assert.equal(w.DarTestTurkishUI.translateValue("Alle 40 geprüften Werke mit verifiziertem Autor. Zitierte Gelehrte werden getrennt ausgewiesen.","en"),"All 40 reviewed works with a verified author. Cited scholars are listed separately.");
+assert.equal(w.DarTestTurkishUI.translateValue("Gebetsbenachrichtigungen","es"),"Avisos de oración");
+assert.equal(w.DarTestTurkishUI.translateValue("7 Veröffentlichungen","tr"),"7 yayın");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
