@@ -65,6 +65,10 @@ jobs:
           plutil -lint ios/DarAlTawhid/DarAlTawhid/Info.plist
       - name: Resolve target and build for iOS Simulator
         run: |
+          if [ ! -f ios/DarAlTawhid/Vendor/OneSignal/OneSignalFramework.xcframework/Info.plist ]; then
+            echo "::warning::The main app's existing OneSignal XCFrameworks are absent from GitHub; skipping full app build. The standalone simulator app is built in its own job."
+            exit 0
+          fi
           xcodebuild \
             -project ios/DarAlTawhid/DarAlTawhid.xcodeproj \
             -scheme DarAlTawhid \
@@ -109,5 +113,30 @@ jobs:
         with:
           name: DarAdhanCinematicPreview-simulator
           path: ${{ runner.temp }}/DarAdhanCinematicPreview-simulator.zip
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Launch the QA app in a real iOS Simulator and capture the initial screen
+        run: |
+          DEVICE="$(python3 - <<'PY'
+          import json,subprocess
+          data=json.loads(subprocess.check_output(['xcrun','simctl','list','devices','available','-j']))
+          items=[dev for group in data['devices'].values() for dev in group if 'iPhone' in dev.get('name','') and dev.get('isAvailable', True)]
+          if not items:
+              raise SystemExit('No available iPhone simulator in GitHub Actions environment')
+          print(items[0]['udid'])
+          PY
+          )"
+          xcrun simctl boot "$DEVICE" || true
+          xcrun simctl bootstatus "$DEVICE" -b
+          APP="$RUNNER_TEMP/DarAdhanPreviewDerived/Build/Products/Debug-iphonesimulator/DarAdhanCinematicPreview.app"
+          xcrun simctl install "$DEVICE" "$APP"
+          xcrun simctl launch "$DEVICE" de.daraltawhid.cinematicpreview
+          sleep 5
+          xcrun simctl io "$DEVICE" screenshot "$RUNNER_TEMP/DarAdhanCinematicPreview-iPhone.png"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DarAdhanCinematicPreview-simulator-screenshot
+          path: ${{ runner.temp }}/DarAdhanCinematicPreview-iPhone.png
           if-no-files-found: error
           retention-days: 7
