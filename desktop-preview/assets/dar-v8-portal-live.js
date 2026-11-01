@@ -294,10 +294,13 @@ function installPlayer(){
  // when the public homepage rerenders after its async content index loads.
  if(!w.__darV8FullscreenDelegatedV1){
   w.__darV8FullscreenDelegatedV1=true;
-  d.addEventListener("click",function(ev){
+  // Capture on WINDOW, above document/router capture handlers that can
+  // prevent the button's target click on mobile public-browser routes.
+  w.addEventListener("click",function(ev){
    var btn=ev.target&&ev.target.closest&&ev.target.closest("#darV8PlayerFullscreen");
    if(!btn)return;
    ev.preventDefault();ev.stopPropagation();
+   if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();
    togglePlayer();
   },true);
  }
