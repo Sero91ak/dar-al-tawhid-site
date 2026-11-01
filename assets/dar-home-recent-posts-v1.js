@@ -24,7 +24,7 @@ function dayKey(date){var pts=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/
 function dayNumber(date){return Date.parse(dayKey(date)+"T00:00:00Z")/86400000}
 function recent(posts,days,now){var today=dayNumber(now||new Date());return (posts||[]).filter(function(p){var dt=new Date(p.date||"");if(!p.id||!p.title||!Number.isFinite(dt.getTime()))return false;var age=Math.round(today-dayNumber(dt));return age>=0&&age<days}).sort(function(a,b){return Date.parse(b.date)-Date.parse(a.date)||String(a.id).localeCompare(String(b.id))})}
 function isHome(){var qs=new URLSearchParams(location.search);if(d.body&&d.body.classList.contains("is-home-route"))return true;if(d.getElementById("pageRoot"))return (qs.get("page")||"start").toLowerCase()==="start";return false}
-function host(){if(!isHome())return null;var native=d.getElementById("darHomeHtmlParityV1");if(native)return {root:native,anchor:native.querySelector(".dhp-isnad")||native.querySelector(".dhp-quickbar")||native.querySelector("#dhpLibrary")||null};var basic=d.getElementById("dv3Latest");if(basic)return {root:basic.parentElement||basic,anchor:basic};var desktop=d.getElementById("pageRoot");if(desktop)return {root:desktop,anchor:desktop.querySelector(".dar-v8-recent")||desktop.querySelector(".dar-v8-discover")||desktop.querySelector(".site-footer")||null};return d.getElementById("appView")?{root:d.getElementById("appView"),anchor:null}:null}
+function host(){if(!isHome())return null;var native=d.getElementById("darHomeHtmlParityV1");if(native){var q=native.querySelector(".dhp-quran-section");return {root:native,anchor:q||native.querySelector("#dhpLibrary"),after:!!q}}var basic=d.getElementById("dv3Latest");if(basic)return {root:basic.parentElement||basic,anchor:basic,after:true};var desktop=d.getElementById("pageRoot");if(desktop)return {root:desktop,anchor:desktop.querySelector(".dar-v8-discover")||desktop.querySelector(".site-footer")||null};return d.getElementById("appView")?{root:d.getElementById("appView"),anchor:null}:null}
 function e(tag,cls,txt){var x=d.createElement(tag);if(cls)x.className=cls;if(txt!=null)x.textContent=String(txt);return x}
 function dateLabel(p){var dt=new Date(p.date),today=dayNumber(new Date()),age=Math.round(today-dayNumber(dt));if(age===0)return t(12);if(age===1)return t(13);return new Intl.DateTimeFormat(locale()==="ckb"?"ckb-IQ":locale()==="ku"?"ku-TR":locale(),{day:"2-digit",month:"short",timeZone:"Europe/Berlin"}).format(dt)}
 function openLink(p){if(d.getElementById("pageRoot"))return "/?page=beitrag&id="+encodeURIComponent(p.id);return "/?post="+encodeURIComponent(p.id)+"#post/"+encodeURIComponent(p.id)}
@@ -47,35 +47,38 @@ function fetchTitleManifests(posts){
 
 function addPost(parent,p,compact){var a=e("a","dar-recent-post");a.href=openLink(p);a.dataset.postId=p.id;var meta=e("span","dar-recent-meta",dateLabel(p)+" · "+(p.category||t(14)));a.appendChild(meta);a.appendChild(e("strong","dar-recent-title",displayTitle(p)));if(!compact&&p.speaker)a.appendChild(e("span","dar-recent-speaker",p.speaker));if(untranslated(p))a.appendChild(e("small","dar-recent-untranslated",t(11)));a.appendChild(e("span","dar-recent-open",t(7)+" ›"));a.addEventListener("click",function(ev){if(d.getElementById("pageRoot"))return;if(typeof w.navigate==="function"){ev.preventDefault();w.navigate("post",p.id)}});parent.appendChild(a)}
 function section(parent,kicker,title){var h=e("div","dar-recent-header");h.appendChild(e("span","dar-recent-kicker",kicker));h.appendChild(e("h2","dar-recent-heading",title));parent.appendChild(h)}
-function render(){var mount=d.getElementById("darRecentPublicationsV1"),h=host();if(!h){if(mount)mount.hidden=true;return}if(!mount){mount=e("section","dar-recent-publications");mount.id="darRecentPublicationsV1";mount.setAttribute("aria-label",t(1));if(h.anchor&&h.anchor.parentNode)h.anchor.parentNode.insertBefore(mount,h.anchor);else h.root.appendChild(mount)}else if(!mount.isConnected||!h.root.contains(mount)){if(h.anchor&&h.anchor.parentNode)h.anchor.parentNode.insertBefore(mount,h.anchor);else h.root.appendChild(mount)}
- mount.hidden=false;mount.setAttribute("aria-label",t(1));mount.replaceChildren();
- // Supersede the old limited four-post teaser only after the full dataset loads.
- var oldList=d.getElementById("dhpPosts");var oldBlock=oldList&&oldList.closest(".dhp-section");
- if(oldBlock&&oldBlock.classList.contains("dar-recent-legacy-hidden")!==(state.posts.length>0))oldBlock.classList.toggle("dar-recent-legacy-hidden",state.posts.length>0);
- section(mount,t(0),t(1));
- // A permanent, explicit re-open affordance, even after this post batch was skipped.
- // It does not trigger a second OneSignal notification.
- if(recent(state.posts,5).length){
-  var manual=e("button","dar-recent-manual-open",t(17));manual.type="button";
-  manual.setAttribute("aria-haspopup","dialog");
-  manual.addEventListener("click",function(ev){ev.preventDefault();openNewPostsNotice(true)});
-  mount.appendChild(manual);
- }
- var items=recent(state.posts,state.days),last=recent(state.posts,5)[0],headline=e("div","dar-recent-highlight");
- if(last){addPost(headline,last,true)}else headline.appendChild(e("p","dar-recent-empty",t(6)));
- mount.appendChild(headline);
- var btn=e("button","dar-recent-toggle",state.expanded?t(9):t(8));btn.type="button";btn.setAttribute("aria-expanded",String(state.expanded));btn.addEventListener("click",function(){state.expanded=!state.expanded;render()});mount.appendChild(btn);
- if(!state.expanded)return;
- var panel=e("div","dar-recent-panel");
- var heading=e("h3","dar-recent-panel-title",t(2));panel.appendChild(heading);
- var tabs=e("div","dar-recent-days");tabs.setAttribute("role","group");tabs.setAttribute("aria-label",t(2));
- [2,3,4,5].forEach(function(n,i){var b=e("button","dar-recent-day"+(state.days===n?" is-selected":""),n===4?t(15):t(n===5?5:i+3));b.type="button";b.setAttribute("aria-pressed",String(state.days===n));b.addEventListener("click",function(){state.days=n;render()});tabs.appendChild(b)});panel.appendChild(tabs);
- if(!items.length){panel.appendChild(e("p","dar-recent-empty",t(6)))}else{
- var groups=new Map();items.forEach(function(p){var k=dayKey(new Date(p.date));if(!groups.has(k))groups.set(k,[]);groups.get(k).push(p)});
- groups.forEach(function(posts,key){var title=e("h4","dar-recent-day-title",dateLabel(posts[0])+" · "+posts.length+" "+t(14));panel.appendChild(title);var rows=e("div","dar-recent-list");posts.forEach(function(p){addPost(rows,p,false)});panel.appendChild(rows)});
- }
- mount.appendChild(panel);
+function archiveUrl(){return /^\/pwa(?:\/|$)/.test(location.pathname)?"/pwa/neueste-beitraege/":"/neueste-beitraege/"}
+function openArchive(){w.location.assign(archiveUrl())}
+function placeCompact(h,mount){
+ if(!mount.isConnected){if(h.anchor&&h.anchor.parentNode){if(h.after)h.anchor.insertAdjacentElement("afterend",mount);else h.anchor.parentNode.insertBefore(mount,h.anchor)}else h.root.appendChild(mount);return}
+ if(!h.root.contains(mount)){if(h.anchor&&h.anchor.parentNode){if(h.after)h.anchor.insertAdjacentElement("afterend",mount);else h.anchor.parentNode.insertBefore(mount,h.anchor)}else h.root.appendChild(mount);return}
+ if(h.after&&h.anchor&&mount.previousElementSibling!==h.anchor)h.anchor.insertAdjacentElement("afterend",mount);
 }
+function render(){
+ var mount=d.getElementById("darRecentPublicationsV1"),h=host();
+ if(!h){if(mount)mount.hidden=true;return}
+ if(!mount){mount=e("section","dar-recent-publications");mount.id="darRecentPublicationsV1"}
+ placeCompact(h,mount);
+ // Keep permanent native sequence intact: Salām → Ibn Sīrīn → Qibla/Bibliothek
+ // → original search → Qurʾān → compact publications → all optional home sections.
+ mount.hidden=false;mount.className="dar-recent-publications dar-recent-compact";
+ mount.setAttribute("aria-label",t(1));mount.replaceChildren();
+ var oldList=d.getElementById("dhpPosts"),oldBlock=oldList&&oldList.closest(".dhp-section");
+ if(oldBlock&&oldBlock.classList.contains("dar-recent-legacy-hidden")!==(state.posts.length>0))oldBlock.classList.toggle("dar-recent-legacy-hidden",state.posts.length>0);
+ var hits=recent(state.posts,5);
+ // Only one compact tap target; all lists and date filters live on their own page.
+ var a=e("a","dar-recent-compact-link");
+ a.href=archiveUrl();a.setAttribute("aria-label",t(1)+" – "+t(8));
+ var icon=e("span","dar-recent-compact-icon","✦");icon.setAttribute("aria-hidden","true");a.appendChild(icon);
+ var info=e("span","dar-recent-compact-content");info.appendChild(e("span","dar-recent-compact-kicker",t(0)));
+ info.appendChild(e("strong","dar-recent-compact-title",t(1)));
+ if(hits.length){info.appendChild(e("small","dar-recent-compact-sub",hits.length+" "+t(14)+" · "+dateLabel(hits[0])))}
+ else info.appendChild(e("small","dar-recent-compact-sub",t(6)));
+ a.appendChild(info);
+ var action=e("span","dar-recent-compact-arrow","›");action.setAttribute("aria-hidden","true");a.appendChild(action);
+ mount.appendChild(a);
+}
+
 function refresh(){if(state.loading||Date.now()-state.lastFetch<90000)return;state.loading=true;state.lastFetch=Date.now();fetch(DATA+"?t="+Math.floor(Date.now()/60000),{cache:"no-store",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("index "+r.status);return r.json()}).then(function(j){if(j.schemaVersion!==1||!Array.isArray(j.posts))throw Error("invalid recent index");state.posts=j.posts;render();fetchTitleManifests(j.posts);scheduleNotice()}).catch(function(){state.lastFetch=0;render()}).finally(function(){state.loading=false})}
 
 /* On-device/in-app announcement, independent of OneSignal permission.
@@ -259,7 +262,7 @@ function openNewPostsNotice(force){if(!canAnnounce(force===true))return;
  var count=e("div","dar-recent-notice-count",hits.length+" · "+t(14));card.appendChild(count);
  var list=e("div","dar-recent-notice-list");hits.slice(0,4).forEach(function(p){list.appendChild(noticeLink(p))});card.appendChild(list);
  var actions=e("div","dar-recent-notice-actions");
- var all=e("button","dar-recent-notice-all",t(8));all.type="button";all.dataset.darNoticeAction="all";actions.appendChild(all);bindNoticeAction(all,function(){dismissNotice(false);state.expanded=true;state.days=5;render();var target=d.getElementById("darRecentPublicationsV1");if(target)target.scrollIntoView({behavior:"smooth",block:"start"})});
+ var all=e("button","dar-recent-notice-all",t(8));all.type="button";all.dataset.darNoticeAction="all";actions.appendChild(all);bindNoticeAction(all,function(){dismissNotice(false);openArchive()});
  var skip=e("button","dar-recent-notice-skip",skipText());skip.type="button";skip.dataset.darNoticeAction="skip";actions.appendChild(skip);bindNoticeAction(skip,function(){dismissNotice(true)});
  card.appendChild(actions);layer.appendChild(card);
  d.body.appendChild(layer);
