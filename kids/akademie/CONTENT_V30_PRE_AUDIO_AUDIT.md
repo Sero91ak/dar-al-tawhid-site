@@ -107,3 +107,16 @@ Alle neuen deutschen Erklärungssätze und Beispiele sind Unterrichtssprache; ni
 5. Nach Audioerstellung getrennte Hörprüfung pro Alter und Fragetyp mit vollständig synchroner App-Wiedergabe durchführen.
 
 **Aktueller Stopp:** Audio nicht begonnen; keine Synthesekosten angefallen. PR #1588 bleibt Draft bis Quellenprüfung, Test-App-/Integrationscheck und ausdrücklicher Veröffentlichungsfreigabe.
+
+## Fachlicher Quellenreview / 01.11.2026
+
+Ein eigenständiges 66-Lektionen-Fachgutachten einschließlich Primärquellenlinks, früher Tafsīr-Auslegung und sauberer Grenze zwischen Offenbarung / Sunnah / Unterrichtsanwendung wurde ergänzt:
+
+- `kids/akademie/ISLAMIC_SCHOLARLY_CONTENT_REVIEW_V30_2026-11-01.md`
+- `kids/tools/test-academy-islamic-source-review-v30.cjs`
+
+**Konkrete Korrekturen:** Der deutsche Unterrichtsauszug zu Qurʾān 5:6 unterscheidet jetzt klar das Streichen über den Kopf vom Waschen der Füße (gestützt durch die ʿUṯmān-Wuḍūʾ-Überlieferung, al-Buḫārī 164). Der vorher falsch zugeordnete Sekundärlink über Niyyah, der eine andere als munkar bewertete Erzählung betraf, wurde auf einen passenden Nachweis der authentischen Überlieferung bei al-Buḫārī 1 (ʿUmar) korrigiert. Weitere zuvor nicht genau passende Sekundärlinks sind zu direkten Ṣaḥīḥ-Fundstellen geändert.
+
+**Prüfungen bestanden:** Struktur-/Inhaltsregression und Quellen-/Sperrenregression für die geladene Lernakademie mit unveränderten 66 Lektionen und 528 Frageslots. Diese Regressionen wurden als aus den echten GitHub-Dateien gelesene JavaScript-Tests ausgeführt; regulärer Node-Lauf im GitHub-CI und reale Gerätetests müssen separat bestätigt werden.
+
+**Präzise Freigabegrenze:** Die AI-unterstützte Primärquellenkontrolle und klassische Tafsīr-Gegenprüfung sind dokumentiert. Weder eine unabhängige menschliche ʿĀlim-/Muftī-Begutachtung noch eine vollständige Isnād-Kollation sämtlicher 43 Hadith-Zitationsstrings oder vollständige diakritische Zeichen-für-Zeichen-Kollation aller Qurʾān-Wortlaute darf als abgeschlossen bezeichnet werden. Keine Veröffentlichung und kein Audio ohne gesonderte Freigabe.
