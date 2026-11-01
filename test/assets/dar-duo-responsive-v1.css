@@ -207,3 +207,12 @@ html.dar-test-duo-ever-active:not(.dar-test-duo-active) #bottomNav {
   margin-left:0!important;margin-right:0!important;
   transition:none!important;
 }
+
+/* Focus follows actual touches, including inside the responsive iframe. */
+html.dar-test-duo-active[data-dar-duo-focus="right"] #darTestDuoReaderFrame{
+  border-left-color:var(--dar-duo-gold)!important;
+  box-shadow:-2px 0 0 color-mix(in srgb,var(--dar-duo-gold) 20%,transparent);
+}
+html.dar-test-duo-active[data-dar-duo-focus="left"] #darTestDuoWorkspaceNav{
+  box-shadow:inset -2px 0 0 var(--dar-duo-line)!important;
+}
