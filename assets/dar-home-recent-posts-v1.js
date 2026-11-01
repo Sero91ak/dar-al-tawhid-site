@@ -103,20 +103,69 @@ function applyNoticeTheme(layer){
  layer.style.setProperty("--notice-accent",accent);
  layer.dataset.darAppearance=(root.getAttribute("data-theme-variant")||root.getAttribute("data-theme")||d.body.getAttribute("data-theme")||"system");
 }
+/* WKWebView: lock both scrollingElement and nested document scroll, with native
+   non-passive touch guard. Capturing existing styles including !important is
+   essential because some official app themes use body overflow !important. */
 function lockNoticeBackground(layer){
- var y=w.scrollY||d.documentElement.scrollTop||0,b=d.body,old={position:b.style.position,top:b.style.top,left:b.style.left,right:b.style.right,width:b.style.width,overflow:b.style.overflow};
- state.scrollLock={y:y,style:old};state.inertItems=[];
- Array.from(b.children).forEach(function(child){if(child===layer||child.tagName==="SCRIPT"||child.tagName==="STYLE")return;
- state.inertItems.push({node:child,inert:child.inert});child.inert=true});
- b.style.position="fixed";b.style.top="-"+y+"px";b.style.left="0";b.style.right="0";b.style.width="100%";b.style.overflow="hidden";
+ var b=d.body,root=d.documentElement,y=w.scrollY||d.scrollingElement&&d.scrollingElement.scrollTop||0;
+ var props=["position","top","left","right","width","overflow","overscroll-behavior"];
+ function take(el){var data={};props.forEach(function(k){data[k]=[el.style.getPropertyValue(k),el.style.getPropertyPriority(k)]});return data}
+ state.scrollLock={y:y,body:take(b),html:take(root)};
+ state.inertItems=[];
+ Array.from(b.children).forEach(function(child){
+  if(child===layer||child.tagName==="SCRIPT"||child.tagName==="STYLE")return;
+  state.inertItems.push({node:child,inert:child.inert});child.inert=true;
+ });
+ root.style.setProperty("overflow","hidden","important");
+ root.style.setProperty("overscroll-behavior","none","important");
+ b.style.setProperty("position","fixed","important");
+ b.style.setProperty("top","-"+y+"px","important");
+ b.style.setProperty("left","0","important");
+ b.style.setProperty("right","0","important");
+ b.style.setProperty("width","100%","important");
+ b.style.setProperty("overflow","hidden","important");
+ b.style.setProperty("overscroll-behavior","none","important");
  d.documentElement.classList.add("dar-notice-is-open");
+ d.addEventListener("touchstart",noticeTouchStart,{capture:true,passive:true});
+ d.addEventListener("touchmove",noticeTouchGuard,{capture:true,passive:false});
+ d.addEventListener("wheel",noticeWheelGuard,{capture:true,passive:false});
+}
+var noticeTouchY=null;
+function noticeTouchStart(ev){if(ev.touches&&ev.touches.length===1)noticeTouchY=ev.touches[0].clientY;else noticeTouchY=null}
+function cardCanScroll(ev,dy){
+ var target=ev.target&&ev.target.nodeType===1?ev.target:ev.target&&ev.target.parentElement;
+ var card=target&&target.closest&&target.closest("#darRecentNoticeV1 .dar-recent-notice-card");
+ if(!card||card.scrollHeight<=card.clientHeight+1)return false;
+ if(dy>0)return card.scrollTop>0.5;
+ if(dy<0)return card.scrollTop<card.scrollHeight-card.clientHeight-0.5;
+ return true;
+}
+function noticeTouchGuard(ev){
+ if(!d.getElementById("darRecentNoticeV1")||!ev.cancelable)return;
+ var next=ev.touches&&ev.touches[0]?ev.touches[0].clientY:null;
+ var dy=next!=null&&noticeTouchY!=null?next-noticeTouchY:0;noticeTouchY=next;
+ if(!cardCanScroll(ev,dy))ev.preventDefault();
+}
+function noticeWheelGuard(ev){
+ if(!d.getElementById("darRecentNoticeV1")||!ev.cancelable)return;
+ if(!cardCanScroll(ev,-ev.deltaY))ev.preventDefault();
 }
 function unlockNoticeBackground(){
+ d.removeEventListener("touchstart",noticeTouchStart,true);
+ d.removeEventListener("touchmove",noticeTouchGuard,true);
+ d.removeEventListener("wheel",noticeWheelGuard,true);
+ noticeTouchY=null;
  state.inertItems.forEach(function(item){if(item.node&&item.node.isConnected)item.node.inert=item.inert});state.inertItems=[];
- var lock=state.scrollLock;state.scrollLock=null;if(lock){
- var b=d.body;Object.keys(lock.style).forEach(function(k){b.style[k]=lock.style[k]});w.scrollTo(0,lock.y)}
+ var lock=state.scrollLock;state.scrollLock=null;
+ if(lock){
+  var props=["position","top","left","right","width","overflow","overscroll-behavior"];
+  function restore(el,data){props.forEach(function(k){var old=data[k];if(!old||!old[0])el.style.removeProperty(k);else el.style.setProperty(k,old[0],old[1])})}
+  restore(d.body,lock.body);restore(d.documentElement,lock.html);
+  w.scrollTo(0,lock.y);
+ }
  d.documentElement.classList.remove("dar-notice-is-open");
 }
+
 function noticeFocus(ev){var layer=d.getElementById("darRecentNoticeV1");if(layer&&!layer.contains(ev.target)){
  var close=layer.querySelector(".dar-recent-notice-x");if(close)close.focus({preventScroll:true})}}
 function openPostById(id){
