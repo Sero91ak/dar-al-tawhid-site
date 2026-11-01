@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "source": "Original Runway cinematic first five",
+  "aspectRatio": "9:16",
+  "resolution": "1080x1920",
+  "audio": false,
+  "items": [
+    {
+      "prayer": "fajr",
+      "displayName": "Fajr",
+      "filename": "dar-adhan-fajr.mp4",
+      "taskId": "03f541e3-e7cf-47f5-9bcc-ce7d97ff24a6",
+      "durationSeconds": 10
+    },
+    {
+      "prayer": "dhuhr",
+      "displayName": "Ẓuhr",
+      "filename": "dar-adhan-dhuhr.mp4",
+      "taskId": "d182c3c9-5e13-4c7e-9675-95ca6b07ce2b",
+      "durationSeconds": 8
+    },
+    {
+      "prayer": "asr",
+      "displayName": "ʿAṣr",
+      "filename": "dar-adhan-asr.mp4",
+      "taskId": "b3a7718d-66d0-415b-a803-d481053b90a1",
+      "durationSeconds": 8
+    },
+    {
+      "prayer": "maghrib",
+      "displayName": "Maghrib",
+      "filename": "dar-adhan-maghrib.mp4",
+      "taskId": "d2dcf692-950c-4e3b-ab81-6bb6a55c5382",
+      "durationSeconds": 8
+    },
+    {
+      "prayer": "isha",
+      "displayName": "ʿIšāʾ",
+      "filename": "dar-adhan-isha.mp4",
+      "taskId": "387c0c44-bd03-4014-9671-628f3fe6aa18",
+      "durationSeconds": 8
+    }
+  ]
+}
