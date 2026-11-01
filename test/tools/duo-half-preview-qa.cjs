@@ -107,6 +107,18 @@ const URL="https://dar-al-tawhid.de/test/?env=staging&source=duo-half-qa#quran";
     content:document.querySelector('#appView')?.textContent?.trim().length||0}));
   console.log("DAR_HALF_QA_SURAH_TAP "+JSON.stringify({beforeSurah,afterSurah,realSurahs}));
   if(afterSurah.hash===beforeSurah)throw Error("Selecting a real surah on the left did not open right reader");
+  await page.waitForTimeout(2500);
+  const readerProof=await page.evaluate(()=>{
+    const view=document.querySelector("#appView");
+    return {hash:location.hash,textLength:view?.innerText?.trim().length||0,
+      childCount:view?.querySelectorAll("*").length||0,
+      quranReader:!!view?.querySelector(".qrc-shell,.quran-ayah-list,.quran-reader,.quran-verse,.qrc-ayah"),
+      fragment:view?.innerText?.trim().slice(0,200)||"",
+      geometry:view?.getBoundingClientRect().width||0};
+  });
+  console.log("DAR_HALF_QA_REAL_SURAH_READER "+JSON.stringify(readerProof));
+  if(readerProof.textLength<80 || readerProof.geometry>365)
+    throw Error("Real surah reader did not show readable content inside right pane");
   await page.evaluate(()=>{location.hash="#quran";});
   await page.waitForTimeout(650);
   await inspect("quran-return",true);
