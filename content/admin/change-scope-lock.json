@@ -155,6 +155,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-internal-recent-article-list-native-no-reload-20261101",
+      "at": "2026-11-01T10:25:00+01:00",
+      "approvedBy": "user-explicit-20261101-inline-native-recent-articles-no-extra-page-no-day-filter-auto-nine-app-languages",
+      "reason": "Replace standalone latest-post HTML page with instant in-app list and existing canonical post reader; preserve original prayer position, Salam/Ibn Sirin/Qibla/Quran order, native header/bottom nav, one-time news popup, nine app locales and back restoration. No Kids/OneSignal changes.",
+      "paths": [
+        "assets/dar-home-recent-posts-v1.js",
+        "assets/dar-home-recent-posts-v1.css",
+        "neueste-beitraege/index.html",
+        "pwa/neueste-beitraege/index.html",
+        "scripts/check-adult-component-locales-v1.cjs",
+        "scripts/check-adult-recent-dialog-browser.py",
+        "cloudflare/site-router.js",
+        "AGENTS.md",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-09T23:59:00.000Z"
+    },
+    {
       "id": "adult-compact-global-home-archive-3-5-days-20261101",
       "at": "2026-11-01T07:04:00+01:00",
       "approvedBy": "user-explicit-20261101-0704-three-screenshots-home-fixed-salam-to-quran-compact-global-3-to-5-day-page",

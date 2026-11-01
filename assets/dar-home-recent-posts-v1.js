@@ -3,17 +3,17 @@
 (function(w,d){"use strict";
 if(w.__darRecentPublicationsV1)return;w.__darRecentPublicationsV1=true;
 if(!/^\/(?:index\.html)?$/.test(location.pathname)&&!/^\/pwa(?:\/(?:index\.html)?)?$/.test(location.pathname))return;
-var KEY="darAdultPreferredLocaleV1", DATA="/data/recent-posts.json", state={posts:[],days:5,expanded:false,loading:false,lastFetch:0,modalShown:false,modalOpen:false,lastFocus:null,scrollLock:null,inertItems:[],lastModalSignature:"",titleLocales:{},manifestLoaded:{}};
+var KEY="darAdultPreferredLocaleV1", DATA="/data/recent-posts.json", state={posts:[],days:5,expanded:false,loading:false,lastFetch:0,modalShown:false,modalOpen:false,lastFocus:null,scrollLock:null,inertItems:[],lastModalSignature:"",titleLocales:{},manifestLoaded:{},inlineOpen:false,returnToInline:false,homeScrollY:0,renderedInlineLocale:""};
 var labels={
- de:["NEUE BEITRÄGE","Aktuelle Veröffentlichungen","Alle Beiträge der letzten Tage","2 Tage","3 Tage","5 Tage","Keine neuen Beiträge im gewählten Zeitraum.","Beitrag lesen","Beiträge ansehen","Schließen","Quelle öffnen","Original: Deutsch","Heute","Gestern","Beiträge","4 Tage","Für diese Beiträge überspringen","Neuigkeiten öffnen"],
- ar:["المقالات الجديدة","أحدث المنشورات","جميع منشورات الأيام الماضية","يومان","3 أيام","5 أيام","لا توجد منشورات جديدة في هذه المدة.","اقرأ المقال","عرض المقالات","إغلاق","افتح المصدر","الأصل بالألمانية","اليوم","أمس","مقالات","4 أيام","تخطي هذه المقالات","عرض أحدث المقالات"],
- en:["NEW POSTS","Latest publications","All posts from recent days","2 days","3 days","5 days","No new posts in this period.","Read post","View posts","Close","Open source","Original: German","Today","Yesterday","posts","4 days","Skip these posts","Open latest posts"],
- tr:["YENİ YAZILAR","En son yayınlananlar","Son günlerdeki tüm yazılar","2 gün","3 gün","5 gün","Bu dönemde yeni yazı yok.","Yazıyı oku","Yazıları göster","Kapat","Kaynağı aç","Aslı: Almanca","Bugün","Dün","yazı","4 gün","Bu yazıları atla","Yeni yazıları aç"],
- ku:["NIVÎSÊN NÛ","Weşanên herî nû","Hemû nivîsên rojên dawî","2 roj","3 roj","5 roj","Di vê demê de nivîsa nû tune.","Nivîsê bixwîne","Nivîsan bibîne","Bigire","Çavkaniyê veke","Esl: Almanî","Îro","Duh","nivîs","4 roj","Van nivîsan derbas bike","Nivîsên nû veke"],
- ckb:["بابەتە نوێیەکان","نوێترین بڵاوکراوەکان","هەموو بابەتەکانی ڕۆژانی ڕابردوو","٢ ڕۆژ","٣ ڕۆژ","٥ ڕۆژ","بابەتی نوێ نییە.","بابەت بخوێنەوە","بابەتەکان ببینە","داخستن","سەرچاوە بکەرەوە","دەقی ڕەسەن: ئەڵمانی","ئەمڕۆ","دوێنێ","بابەت","٤ ڕۆژ","ئەم بابەتانە تێپەڕێنە","بابەتە نوێیەکان بکەرەوە"],
- bs:["NOVI ČLANCI","Najnovije objave","Sve objave posljednjih dana","2 dana","3 dana","5 dana","Nema novih objava u ovom periodu.","Pročitaj članak","Prikaži članke","Zatvori","Otvori izvor","Izvornik: njemački","Danas","Jučer","objava","4 dana","Preskoči ove članke","Otvori nove članke"],
- fr:["NOUVEAUX ARTICLES","Dernières publications","Tous les articles des derniers jours","2 jours","3 jours","5 jours","Aucune nouvelle publication sur cette période.","Lire l’article","Voir les articles","Fermer","Ouvrir la source","Original : allemand","Aujourd’hui","Hier","articles","4 jours","Ignorer ces articles","Ouvrir les nouveaux articles"],
- es:["ARTÍCULOS NUEVOS","Publicaciones recientes","Todos los artículos de los últimos días","2 días","3 días","5 días","No hay publicaciones nuevas en este período.","Leer artículo","Ver artículos","Cerrar","Abrir fuente","Original: alemán","Hoy","Ayer","artículos","4 días","Omitir estos artículos","Abrir artículos recientes"]
+ de:["NEUE BEITRÄGE","Aktuelle Veröffentlichungen","Alle Beiträge der letzten Tage","2 Tage","3 Tage","5 Tage","Keine neuen Beiträge im gewählten Zeitraum.","Beitrag lesen","Beiträge ansehen","Schließen","Quelle öffnen","Original: Deutsch","Heute","Gestern","Beiträge","4 Tage","Für diese Beiträge überspringen","Neuigkeiten öffnen","Beitrag"],
+ ar:["المقالات الجديدة","أحدث المنشورات","جميع منشورات الأيام الماضية","يومان","3 أيام","5 أيام","لا توجد منشورات جديدة في هذه المدة.","اقرأ المقال","عرض المقالات","إغلاق","افتح المصدر","الأصل بالألمانية","اليوم","أمس","مقالات","4 أيام","تخطي هذه المقالات","عرض أحدث المقالات","مقال"],
+ en:["NEW POSTS","Latest publications","All posts from recent days","2 days","3 days","5 days","No new posts in this period.","Read post","View posts","Close","Open source","Original: German","Today","Yesterday","posts","4 days","Skip these posts","Open latest posts","post"],
+ tr:["YENİ YAZILAR","En son yayınlananlar","Son günlerdeki tüm yazılar","2 gün","3 gün","5 gün","Bu dönemde yeni yazı yok.","Yazıyı oku","Yazıları göster","Kapat","Kaynağı aç","Aslı: Almanca","Bugün","Dün","yazı","4 gün","Bu yazıları atla","Yeni yazıları aç","yazı"],
+ ku:["NIVÎSÊN NÛ","Weşanên herî nû","Hemû nivîsên rojên dawî","2 roj","3 roj","5 roj","Di vê demê de nivîsa nû tune.","Nivîsê bixwîne","Nivîsan bibîne","Bigire","Çavkaniyê veke","Esl: Almanî","Îro","Duh","nivîs","4 roj","Van nivîsan derbas bike","Nivîsên nû veke","nivîs"],
+ ckb:["بابەتە نوێیەکان","نوێترین بڵاوکراوەکان","هەموو بابەتەکانی ڕۆژانی ڕابردوو","٢ ڕۆژ","٣ ڕۆژ","٥ ڕۆژ","بابەتی نوێ نییە.","بابەت بخوێنەوە","بابەتەکان ببینە","داخستن","سەرچاوە بکەرەوە","دەقی ڕەسەن: ئەڵمانی","ئەمڕۆ","دوێنێ","بابەت","٤ ڕۆژ","ئەم بابەتانە تێپەڕێنە","بابەتە نوێیەکان بکەرەوە","بابەت"],
+ bs:["NOVI ČLANCI","Najnovije objave","Sve objave posljednjih dana","2 dana","3 dana","5 dana","Nema novih objava u ovom periodu.","Pročitaj članak","Prikaži članke","Zatvori","Otvori izvor","Izvornik: njemački","Danas","Jučer","objava","4 dana","Preskoči ove članke","Otvori nove članke","objava"],
+ fr:["NOUVEAUX ARTICLES","Dernières publications","Tous les articles des derniers jours","2 jours","3 jours","5 jours","Aucune nouvelle publication sur cette période.","Lire l’article","Voir les articles","Fermer","Ouvrir la source","Original : allemand","Aujourd’hui","Hier","articles","4 jours","Ignorer ces articles","Ouvrir les nouveaux articles","article"],
+ es:["ARTÍCULOS NUEVOS","Publicaciones recientes","Todos los artículos de los últimos días","2 días","3 días","5 días","No hay publicaciones nuevas en este período.","Leer artículo","Ver artículos","Cerrar","Abrir fuente","Original: alemán","Hoy","Ayer","artículos","4 días","Omitir estos artículos","Abrir artículos recientes","artículo"]
 };
 var registry=w.DARAdultComponentI18nV1||null;
 if(registry)registry.register("recent-posts",labels);
@@ -40,15 +40,84 @@ function fetchTitleManifests(posts){
  if(data.contentId!=="post:"+p.id||!data.locales)return;
  var titles={};["de","ar","en","tr","ku","ckb","bs","fr","es"].forEach(function(code){
  if(data.locales[code]&&typeof data.locales[code].title==="string")titles[code]=data.locales[code].title});
- state.titleLocales[p.id]=titles;render();refreshOpenNotice();
+ state.titleLocales[p.id]=titles;render();refreshOpenNotice();paintInlineList();
  }).catch(function(){delete state.manifestLoaded[key]});
  });
 }
 
 function addPost(parent,p,compact){var a=e("a","dar-recent-post");a.href=openLink(p);a.dataset.postId=p.id;var meta=e("span","dar-recent-meta",dateLabel(p)+" · "+(p.category||t(14)));a.appendChild(meta);a.appendChild(e("strong","dar-recent-title",displayTitle(p)));if(!compact&&p.speaker)a.appendChild(e("span","dar-recent-speaker",p.speaker));if(untranslated(p))a.appendChild(e("small","dar-recent-untranslated",t(11)));a.appendChild(e("span","dar-recent-open",t(7)+" ›"));a.addEventListener("click",function(ev){if(d.getElementById("pageRoot"))return;if(typeof w.navigate==="function"){ev.preventDefault();w.navigate("post",p.id)}});parent.appendChild(a)}
 function section(parent,kicker,title){var h=e("div","dar-recent-header");h.appendChild(e("span","dar-recent-kicker",kicker));h.appendChild(e("h2","dar-recent-heading",title));parent.appendChild(h)}
-function archiveUrl(){return /^\/pwa(?:\/|$)/.test(location.pathname)?"/pwa/neueste-beitraege/":"/neueste-beitraege/"}
-function openArchive(){w.location.assign(archiveUrl())}
+/* The recent-posts list is an INTERNAL app view. Never navigate to an
+   extra HTML page, never show day selectors or a loading state. */
+function internalHost(){
+ return d.getElementById("darHomeHtmlParityV1")||d.getElementById("pageRoot")||d.getElementById("appView");
+}
+function recentInlinePosts(){return recent(state.posts,5)}
+function inlineEntry(p){
+ var a=e("a","dar-recent-inline-entry");a.href=openLink(p);
+ var body=e("span","dar-recent-inline-entry-text");
+ body.appendChild(e("strong","dar-recent-inline-entry-title",displayTitle(p)));
+ if(untranslated(p))body.appendChild(e("small","dar-recent-inline-original",t(11)));
+ a.appendChild(body);
+ var arrow=e("span","dar-recent-inline-entry-arrow","›");arrow.setAttribute("aria-hidden","true");a.appendChild(arrow);
+ a.addEventListener("click",function(ev){
+  ev.preventDefault();
+  closeInlineList(true);
+  openPostById(p.id);
+ });
+ return a;
+}
+function paintInlineList(){
+ if(!state.inlineOpen)return;
+ var root=d.getElementById("darRecentInlineListV2");
+ if(!root)return;
+ root.lang=locale();root.dir=["ar","ckb"].includes(locale())?"rtl":"ltr";state.renderedInlineLocale=locale();
+ var host=internalHost();if(host){var cs=w.getComputedStyle(host);[["--inline-bg","--dhp-bg"],["--inline-paper","--dhp-paper"],["--inline-ink","--dhp-ink"],["--inline-gold","--dhp-gold"],["--inline-line","--dhp-line"]].forEach(function(k){var v=cs.getPropertyValue(k[1]).trim();if(v)root.style.setProperty(k[0],v)})}
+ root.replaceChildren();
+ var top=e("header","dar-recent-inline-top");
+ var back=e("button","dar-recent-inline-back","‹");back.type="button";
+ back.setAttribute("aria-label",t(9));back.addEventListener("click",function(){closeInlineList(false)});
+ top.appendChild(back);
+ top.appendChild(e("h1","dar-recent-inline-heading",t(1)));
+ root.appendChild(top);
+ var list=e("div","dar-recent-inline-entries");
+ var posts=recentInlinePosts();
+ if(!posts.length)list.appendChild(e("p","dar-recent-inline-empty",t(6)));
+ else posts.forEach(function(p){list.appendChild(inlineEntry(p))});
+ root.appendChild(list);
+}
+function openInlineList(returning){
+ var host=internalHost();
+ if(!host)return;
+ if(!returning)state.homeScrollY=w.scrollY||0;
+ state.inlineOpen=true;state.returnToInline=false;
+ var root=d.getElementById("darRecentInlineListV2");
+ if(!root){root=e("section","dar-recent-inline-view");root.id="darRecentInlineListV2";
+  root.setAttribute("aria-label",t(1));host.insertAdjacentElement("afterend",root)}
+ root.hidden=false;
+ d.body.classList.add("dar-recent-inline-open");
+ paintInlineList();
+ w.scrollTo({top:Math.max(0,host.getBoundingClientRect().top+(w.scrollY||0)),behavior:"instant"});
+ var back=root.querySelector(".dar-recent-inline-back");if(back)back.focus({preventScroll:true});
+}
+function closeInlineList(toPost){
+ if(!state.inlineOpen)return;
+ state.inlineOpen=false;
+ state.returnToInline=!!toPost;
+ d.body.classList.remove("dar-recent-inline-open");
+ var root=d.getElementById("darRecentInlineListV2");
+ if(root){root.hidden=true;root.replaceChildren()}
+ if(!toPost)w.scrollTo({top:state.homeScrollY||0,behavior:"instant"});
+}
+function openArchive(){openInlineList(false)}
+function syncInlineAfterRoute(){
+ // Native post-reader back navigation must restore the existing in-memory list;
+ // no new network request, new HTML document, spinner or date-filter screen.
+ if(state.returnToInline&&isHome()&&!state.inlineOpen){
+  state.returnToInline=false;openInlineList(true);
+ }else if(state.inlineOpen&&!isHome()){closeInlineList(false)}
+}
+
 /* Rebuild-safe invariant: these are DOM siblings in one uninterrupted
    section on all visitor shells. Other widgets are pushed below Qurʾān.
    We intentionally do NOT reorder top-level prayer clock, fixed header or tabs. */
@@ -100,11 +169,12 @@ function render(){
  var hits=recent(state.posts,5);
  // Only one compact tap target; all lists and date filters live on their own page.
  var a=e("a","dar-recent-compact-link");
- a.href=archiveUrl();a.setAttribute("aria-label",t(1)+" – "+t(8));
+ a.href="#";a.setAttribute("aria-label",t(1)+" – "+t(8));
+ a.addEventListener("click",function(ev){ev.preventDefault();openInlineList(false)});
  var icon=e("span","dar-recent-compact-icon","✦");icon.setAttribute("aria-hidden","true");a.appendChild(icon);
  var info=e("span","dar-recent-compact-content");info.appendChild(e("span","dar-recent-compact-kicker",t(0)));
  info.appendChild(e("strong","dar-recent-compact-title",t(1)));
- if(hits.length){info.appendChild(e("small","dar-recent-compact-sub",hits.length+" "+t(14)+" · "+dateLabel(hits[0])))}
+ if(hits.length){info.appendChild(e("small","dar-recent-compact-sub",hits.length+" "+(hits.length===1?t(18):t(14))))}
  else info.appendChild(e("small","dar-recent-compact-sub",t(6)));
  a.appendChild(info);
  var action=e("span","dar-recent-compact-arrow","›");action.setAttribute("aria-hidden","true");a.appendChild(action);
@@ -300,9 +370,9 @@ function refreshOpenNotice(){
  applyNoticeTheme(layer);
 }
 function skipText(){return t(16)}
-function syncLocale(){render();refreshOpenNotice()}
+function syncLocale(){render();refreshOpenNotice();paintInlineList()}
 
-function openNewPostsNotice(force){if(!canAnnounce(force===true))return;
+function openNewPostsNotice(force){if(state.inlineOpen||!canAnnounce(force===true))return;
  var hits=recent(state.posts,5);if(!hits.length)return;
  // Acknowledgement occurs as soon as the alert is displayed, so even an app
  // termination or WebView recreation does not present the same batch again.
@@ -332,7 +402,7 @@ function openNewPostsNotice(force){if(!canAnnounce(force===true))return;
 }
 
 var noticeScheduled=false;function scheduleNotice(){if(noticeScheduled||state.modalShown||state.modalOpen||!state.posts.length||!isHome())return;noticeScheduled=true;w.setTimeout(function(){noticeScheduled=false;openNewPostsNotice()},1100)}
-var queued=false;function queue(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;if(isHome()){render();refresh();scheduleNotice()}else{var x=d.getElementById("darRecentPublicationsV1");if(x)x.hidden=true}})}
-function start(){queue();var obs=new MutationObserver(function(m){if(m.some(function(x){return x.target.id==="darRecentPublicationsV1"||x.target.closest&&x.target.closest("#darRecentPublicationsV1")}))return;queue()});obs.observe(d.body,{attributes:true,attributeFilter:["class"],childList:true,subtree:true});w.addEventListener("hashchange",queue);w.addEventListener("popstate",queue);w.addEventListener("dar-adult-locale-changed",syncLocale);w.addEventListener("storage",function(ev){if(ev.key===KEY)syncLocale()});w.addEventListener("pageshow",queue);d.addEventListener("dar:view-rendered",queue);d.addEventListener("visibilitychange",function(){if(!d.hidden){state.lastFetch=0;queue()}})}
+var queued=false;function queue(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;if(isHome()){render();refresh();syncInlineAfterRoute();if(state.inlineOpen&&state.renderedInlineLocale!==locale())paintInlineList();if(!state.inlineOpen)scheduleNotice()}else{var x=d.getElementById("darRecentPublicationsV1");if(x)x.hidden=true;if(state.inlineOpen)closeInlineList(false)}})}
+function start(){queue();if(new URLSearchParams(location.search).get("recent")==="1"){var check=0;var opening=setInterval(function(){if(state.posts.length||++check>16){clearInterval(opening);openInlineList(false);var u=new URL(location.href);u.searchParams.delete("recent");history.replaceState(history.state,"",u.pathname+u.search+u.hash)}},100)}d.addEventListener("click",function(ev){if(ev.target.closest&&ev.target.closest("[data-dal-locale],[data-v3-locale],[data-dv3-locale]"))setTimeout(function(){if(state.inlineOpen&&state.renderedInlineLocale!==locale())paintInlineList()},0)},true);d.addEventListener("change",function(){setTimeout(function(){if(state.inlineOpen&&state.renderedInlineLocale!==locale())paintInlineList()},0)},true);var obs=new MutationObserver(function(m){if(m.some(function(x){return x.target.id==="darRecentPublicationsV1"||x.target.closest&&x.target.closest("#darRecentPublicationsV1")}))return;queue()});obs.observe(d.body,{attributes:true,attributeFilter:["class"],childList:true,subtree:true});w.addEventListener("hashchange",queue);w.addEventListener("popstate",queue);w.addEventListener("dar-adult-locale-changed",syncLocale);w.addEventListener("storage",function(ev){if(ev.key===KEY)syncLocale()});w.addEventListener("pageshow",queue);d.addEventListener("dar:view-rendered",queue);d.addEventListener("visibilitychange",function(){if(!d.hidden){state.lastFetch=0;queue()}})}
 if(d.readyState==="loading")d.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })(window,document);

@@ -119,3 +119,53 @@ html.dar-notice-is-open,html.dar-notice-is-open body{overscroll-behavior:none!im
 #darRecentPublicationsV1 .dar-recent-manual-open{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:43px;max-width:100%;margin:0 0 12px;padding:9px 15px;border-radius:999px;border:1px solid color-mix(in srgb,var(--rp-gold) 68%,transparent);background:color-mix(in srgb,var(--rp-gold) 13%,var(--rp-paper));color:var(--rp-ink);font:730 .82rem/1.25 -apple-system,BlinkMacSystemFont,system-ui,sans-serif;cursor:pointer;touch-action:manipulation}
 #darRecentPublicationsV1 .dar-recent-manual-open::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--rp-gold);box-shadow:0 0 0 5px color-mix(in srgb,var(--rp-gold) 14%,transparent)}
 #darRecentPublicationsV1 .dar-recent-manual-open:is(:hover,:focus-visible){border-color:var(--rp-gold);background:color-mix(in srgb,var(--rp-gold) 21%,var(--rp-paper));outline-offset:3px}
+
+
+/* INTERNAL ADULT POST LIST · no separate HTML page, no day chips, no spinner.
+   Preserves the existing app header, bottom tabs, prayer clock and theme. */
+body.dar-recent-inline-open #darHomeHtmlParityV1{display:none!important}
+body.dar-recent-inline-open #pageRoot{display:none!important}
+body.dar-recent-inline-open #appView{display:none!important}
+#darRecentInlineListV2[hidden]{display:none!important}
+#darRecentInlineListV2.dar-recent-inline-view{
+ --inline-bg:var(--dt-page,var(--bg,#0a130e));
+ --inline-paper:var(--dt-card,var(--card,#101d16));
+ --inline-ink:var(--dt-ink,var(--text,#eee8d9));
+ --inline-gold:var(--gold2,#c6a874);
+ --inline-line:var(--line,#495643);
+ position:relative;display:block;box-sizing:border-box;
+ width:100%;max-width:860px;margin:0 auto!important;
+ min-height:calc(100dvh - 150px);
+ padding:18px clamp(15px,4vw,32px) calc(100px + env(safe-area-inset-bottom,0px));
+ color:var(--inline-ink)!important;background:transparent!important;
+ font-family:-apple-system,BlinkMacSystemFont,Inter,"Segoe UI",system-ui,sans-serif;
+ overflow:visible!important;isolation:isolate
+}
+#darRecentInlineListV2 .dar-recent-inline-top{display:flex;align-items:center;gap:15px;padding:6px 0 18px;border-bottom:1px solid color-mix(in srgb,var(--inline-line) 75%,transparent)}
+#darRecentInlineListV2 .dar-recent-inline-back{
+ width:42px;min-width:42px;height:42px;display:grid;place-items:center;
+ background:color-mix(in srgb,var(--inline-gold) 7%,var(--inline-paper));
+ border:1px solid var(--inline-line);border-radius:13px;cursor:pointer;touch-action:manipulation;
+ padding:0;color:var(--inline-ink);font-size:29px;line-height:1
+}
+#darRecentInlineListV2 .dar-recent-inline-heading{margin:0;font-size:clamp(1.17rem,4.8vw,1.42rem);line-height:1.3;font-weight:750;letter-spacing:-.025em;overflow-wrap:anywhere}
+#darRecentInlineListV2 .dar-recent-inline-entries{display:flex;flex-direction:column;gap:10px;padding-top:18px}
+#darRecentInlineListV2 .dar-recent-inline-entry{
+ display:flex;align-items:center;gap:16px;min-height:75px;padding:15px 16px;
+ color:var(--inline-ink)!important;background:color-mix(in srgb,var(--inline-paper) 95%,transparent)!important;
+ border:1px solid color-mix(in srgb,var(--inline-line) 82%,transparent);border-radius:15px;
+ text-decoration:none!important;cursor:pointer;touch-action:manipulation;
+ box-shadow:inset 2px 0 color-mix(in srgb,var(--inline-gold) 66%,transparent)
+}
+#darRecentInlineListV2 .dar-recent-inline-entry:hover,
+#darRecentInlineListV2 .dar-recent-inline-entry:focus-visible{border-color:var(--inline-gold);background:color-mix(in srgb,var(--inline-gold) 8%,var(--inline-paper))!important}
+#darRecentInlineListV2 .dar-recent-inline-entry-text{display:flex;flex:1;min-width:0;flex-direction:column;gap:5px}
+#darRecentInlineListV2 .dar-recent-inline-entry-title{font-size:.94rem;font-weight:720;line-height:1.5;overflow-wrap:anywhere}
+#darRecentInlineListV2 .dar-recent-inline-original{font-size:.75rem;opacity:.66}
+#darRecentInlineListV2 .dar-recent-inline-entry-arrow{font-size:24px;line-height:1;color:var(--inline-gold);flex:0 0 auto}
+#darRecentInlineListV2 .dar-recent-inline-empty{padding:18px 10px;font-size:.9rem;color:var(--inline-ink);opacity:.73;text-align:center}
+#darRecentInlineListV2 :is(button,a):focus-visible{outline:2px solid var(--inline-gold);outline-offset:3px}
+#darRecentInlineListV2[dir=rtl] .dar-recent-inline-back,
+#darRecentInlineListV2[dir=rtl] .dar-recent-inline-entry-arrow{transform:scaleX(-1)}
+@media(max-width:430px){#darRecentInlineListV2.dar-recent-inline-view{padding-top:9px}}
+@media(prefers-reduced-motion:reduce){#darRecentInlineListV2 *{transition:none!important}}
