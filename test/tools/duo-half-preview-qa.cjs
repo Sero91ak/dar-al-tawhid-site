@@ -44,6 +44,9 @@ const URL="https://dar-al-tawhid.de/test/?env=staging&source=duo-half-qa#quran";
         const r=el.getBoundingClientRect(),style=getComputedStyle(el);
         return {x:r.x,y:r.y,width:r.width,height:r.height,overflowY:style.overflowY,
           visible:style.display!=="none"&&style.visibility!=="hidden",
+          cssLeft:style.left,inlineLeft:el.style.left,
+          transform:style.transform,translate:style.translate,
+          parent:el.parentElement&&el.parentElement.id,
           scrollTop:el.scrollTop,scrollHeight:el.scrollHeight,clientHeight:el.clientHeight};
       };
       return {width:document.documentElement.clientWidth,
