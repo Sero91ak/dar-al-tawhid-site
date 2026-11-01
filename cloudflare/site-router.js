@@ -1227,6 +1227,19 @@ async function serveKidsIntroVideo(request, url, env) {
   }
 }
 
+
+/* DAR_READER_OVERLAY_RUNTIME_V5: patch already-cached V3 readers at delivery time.
+ * Shared adult HTML only; never Kids/tvOS/admin. Distinct script URL defeats
+ * stale script cache without hard-reloading the mounted visitor app. */
+function injectAdultReaderRuntimeV5(html) {
+  if(typeof html!=="string"||!html)return html;
+  html=html.replace(/(\/assets\/dar-app-chrome\.js)(?:\?v=[^"'\s<>]*)?/g,
+    "$1?v=20261101-reader-runtime-v5");
+  if(html.includes('id="darReaderOverlayRuntimeV5"'))return html;
+  const tag='<script defer id="darReaderOverlayRuntimeV5" src="/assets/dar-reader-overlay-runtime-v5.js?v=20261101-v5"></'+'script>';
+  return html.includes("</body>")?html.replace("</body>",tag+"</body>"):html+tag;
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -1549,6 +1562,7 @@ export default {
       headers.set("Content-Type", "text/html; charset=utf-8");
       html = assetResponse.ok ? activateAdultCompactHero(html) : html;
       if (assetResponse.ok) html = activateAdultGlobalBrandV2(html);
+      if (assetResponse.ok) html = injectAdultReaderRuntimeV5(html);
       if (assetResponse.ok && !html.includes("dar-onesignal-language-sync.js")) {
         const localeTag = '<script defer id="darAdultOneSignalLocaleV1" src="/assets/dar-onesignal-language-sync.js?v=1"></script>';
         html = html.includes("</body>") ? html.replace("</body>", localeTag + "</body>") : html + localeTag;
@@ -1767,6 +1781,7 @@ export default {
       let html = await assetResponse.text();
       if (assetResponse.ok) html = activateAdultCompactHero(html);
       if (assetResponse.ok) html = activateAdultGlobalBrandV2(html);
+      if (assetResponse.ok) html = injectAdultReaderRuntimeV5(html);
       if (assetResponse.ok && !html.includes("frauen-live-adapter.js")) {
         const frauenAddon = liveFrauenNativeAddon();
         html = html.includes("</body>") ? html.replace("</body>", frauenAddon + "</body>") : html + frauenAddon;
@@ -1805,6 +1820,7 @@ export default {
         if (!html.includes("dar-onesignal-language-sync.js")) html = html.replace("</body>", '<script defer src="/assets/dar-onesignal-language-sync.js?v=1"></script></body>');
         if (!html.includes("darPublicWebsiteGuardV1")) html = html.replace("</body>", publicWebsiteAddon() + "</body>");
         html = activateAdultCompactHero(html);
+        html = injectAdultReaderRuntimeV5(html);
       }
       headers.set("Content-Type", "text/html; charset=utf-8");
       return new Response(html, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
@@ -1866,6 +1882,7 @@ export default {
         if (!html.includes('id="darTestHomeNoPhotosActualRouteV2"')) {
           html = html.includes("</body>") ? html.replace("</body>", noPhotos + "\n</body>") : html + noPhotos;
         }
+        html = injectAdultReaderRuntimeV5(html);
         headers.set("X-DAR-Test-Home", "smart-v3-20261020");
         headers.set("Content-Type", "text/html; charset=utf-8");
         headers.delete("Content-Length");
