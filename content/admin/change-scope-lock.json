@@ -155,6 +155,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-new-posts-popup-nine-language-interaction-20261101",
+      "at": "2026-11-01T06:02:00+01:00",
+      "approvedBy": "user-explicit-20261101-screenshot-clicks-background-focus-theme-and-all-nine-new-ui-languages",
+      "reason": "Repair visible live adult latest-posts notice actions and inaccessible background; match every existing appearance; enforce automatic UI translations across all nine adult languages and reuse post localization manifests; no OneSignal/Kids/native tabs changes.",
+      "paths": [
+        "assets/dar-home-recent-posts-v1.js",
+        "assets/dar-home-recent-posts-v1.css",
+        "assets/i18n/adult-component-i18n-v1.js",
+        "scripts/build-desktop-posts-index.js",
+        "scripts/check-adult-component-locales-v1.cjs",
+        "AGENTS.md",
+        "cloudflare/site-router.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-09T23:59:00.000Z"
+    },
+    {
       "id": "adult-home-recent-posts-q49-manual-lang-20261101",
       "at": "2026-11-01T00:30:00+01:00",
       "approvedBy": "user-explicit-request-home-2-to-5-days-and-manual-q49-language-selector-20261101",
