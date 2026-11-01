@@ -407,6 +407,26 @@
     readerFrame.src=embeddedUrl();
     doc.body.appendChild(readerFrame);
   }
+  function centerCoverDock(){
+    // The old test nav controller restores inline left:50% BUT transform:none
+    // after Fold close. On 390px, x=195+328 extends to 523px. Inline !important
+    // is necessary here because legacy DOM style rules outrank external CSS.
+    if(!root.classList.contains("dar-test-duo-ever-active"))return;
+    if(viewport().width>=670)return;
+    var dock=doc.getElementById("bottomNav");
+    if(!dock)return;
+    set(dock,"position","fixed");
+    set(dock,"left","50%");
+    set(dock,"right","auto");
+    set(dock,"width","min(420px, calc(100vw - 28px))");
+    set(dock,"max-width","calc(100vw - 28px)");
+    set(dock,"min-width","0px");
+    set(dock,"transform","translateX(-50%)");
+    set(dock,"translate","none");
+    set(dock,"margin-left","0px");
+    set(dock,"margin-right","0px");
+    set(dock,"transition","none");
+  }
   function deactivate(){
     if(!active)return;
     active=false;
@@ -419,12 +439,15 @@
     savedView=null;savedBottom=null;view=null;bottom=null;
     if(left)left.hidden=true;
     if(readerFrame)readerFrame.hidden=true;
+    centerCoverDock();
   }
   function apply(){
     if(!started)return false;
     var dim=viewport(),calc=capacity(dim.width,dim.height);
     if(!calc.dual||disabled()||blocked()||!doc.getElementById("appView")){
-      deactivate();return false;
+      deactivate();
+      if(root.classList.contains("dar-test-duo-ever-active"))centerCoverDock();
+      return false;
     }
     root.style.setProperty("--dar-duo-rail-width",calc.rail+"px");
     if(!active){
@@ -465,6 +488,7 @@
       return global.setTimeout(function(){
         apply();
         if(active){positionView();syncReader();}
+        else centerCoverDock();
       },delay);
     });
   }
