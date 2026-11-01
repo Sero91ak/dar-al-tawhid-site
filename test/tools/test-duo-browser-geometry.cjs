@@ -2,6 +2,11 @@
 "use strict";
 /* Diagnose the actual deployed DĀR Test viewport geometry, not a mockup. */
 const {chromium}=require("playwright");
+const fs=require("node:fs");
+const path=require("node:path");
+const root=path.resolve(__dirname,"../..");
+const localJS=fs.readFileSync(path.join(root,"test/assets/dar-duo-responsive-v1.js"),"utf8");
+const localCSS=fs.readFileSync(path.join(root,"test/assets/dar-duo-responsive-v1.css"),"utf8");
 const url="https://dar-al-tawhid.de/test/?env=staging&source=duo-geometry#quran";
 (async()=>{
  const browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
@@ -9,6 +14,12 @@ const url="https://dar-al-tawhid.de/test/?env=staging&source=duo-geometry#quran"
   for(const [width,height] of [[726,512],[820,1180],[1024,768],[390,844]]){
    const page=await browser.newPage({viewport:{width,height},deviceScaleFactor:1});
    page.on("console",msg=>{if(msg.type()==="error") console.log("PAGE ERROR",msg.text().slice(0,250))});
+   // Test the CURRENT PR assets against the deployed app shell without
+   // publishing speculative fixes to production.
+   await page.route(/\/test\/assets\/dar-duo-responsive-v1\.(js|css)(?:\?|$)/,async route=>{
+     const css=route.request().url().includes(".css");
+     await route.fulfill({status:200,contentType:css?"text/css":"application/javascript",body:css?localCSS:localJS});
+   });
    const response=await page.goto(url,{waitUntil:"domcontentloaded",timeout:60000});
    await page.waitForTimeout(2400);
    const report=await page.evaluate(()=>{
@@ -26,6 +37,30 @@ const url="https://dar-al-tawhid.de/test/?env=staging&source=duo-geometry#quran"
     };
    });
    console.log("DĀR_TEST_DUO_DIAG",width,height,response.status(),JSON.stringify(report));
+   const expected=width!==390;
+   if(report.active!==expected)throw Error("Wrong active mode at "+width+"x"+height+": "+JSON.stringify(report.audit));
+   if(expected){
+     const nav=report.elems.nav?.rect,view=report.elems.appView?.rect;
+     if(!nav||!view)throw Error("Missing reader/rail");
+     if(view[0]<nav[0]+nav[2]+7)throw Error("Reader overlaps selection: "+JSON.stringify({nav,view}));
+     if(view[0]+view[2]>width-6)throw Error("Reader extends past viewport: "+JSON.stringify(view));
+     if(report.audit.viewport.height!==height)throw Error("Scroll height misidentified as viewport height");
+     await page.evaluate(()=>{
+       const overlay=document.createElement("div");
+       overlay.id="darTestReadingOverlay";
+       overlay.innerHTML='<div class="dar-test-reader-dialog">Test reader</div>';
+       document.body.appendChild(overlay);
+       document.body.classList.add("dar-test-reading-open");
+     });
+     await page.waitForTimeout(190);
+     const modal=await page.evaluate(()=>{
+       const o=document.querySelector("#darTestReadingOverlay"),r=o.getBoundingClientRect();
+       const n=document.querySelector("#darTestDuoWorkspaceNav").getBoundingClientRect();
+       return {left:r.left,right:r.right,railRight:n.right,active:document.documentElement.classList.contains("dar-test-duo-active")};
+     });
+     console.log("DĀR_TEST_DUO_MODAL",width,height,JSON.stringify(modal));
+     if(!modal.active || modal.left<modal.railRight-1)throw Error("Reader dialog covers left selection");
+   }
    await page.close();
   }
  } finally{await browser.close();}
