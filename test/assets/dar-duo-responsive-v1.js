@@ -246,7 +246,7 @@
           var candidates=Array.from(doc.querySelectorAll(
             "#appView [data-nav],#appView .dm-cat,#appView .dal-row-quick"
           ));
-          var normalized=function(s){return String(s||"").replace(/\\s+/g," ").trim().slice(0,96);};
+          var normalized=function(s){return String(s||"").replace(/\s+/g," ").trim().slice(0,96);};
           var match=candidates.find(function(el){
             if(entry.nav && el.getAttribute("data-nav")===entry.nav)return true;
             return normalized(el.innerText||el.textContent)===entry.title;
