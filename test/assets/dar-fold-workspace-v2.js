@@ -37,6 +37,7 @@
   var lastItems = "", lastContextEls = [], lastHash = "", lastWidth = 0, lastHeight = 0, resizeObserver, sourceObserver;
   var scrollByCategory = Object.create(null);
   var optionCache = Object.create(null);
+  var selectedOptionKeys = Object.create(null);
   var menuOpen = false;
   var selectedCategory = "home";
   var pendingSelection = null;
@@ -271,13 +272,20 @@
     shown.forEach(function(item,i){
       var button=make("button","dar-fold-v2-option");
       button.type="button";
+      if(selectedOptionKeys[selectedCategory]===item.key){
+        button.classList.add("is-selected");button.setAttribute("aria-current","true");
+      }
       var label=make("span","dar-fold-v2-option-label",item.text);
       var side=make("span","dar-fold-v2-option-symbol");
       side.setAttribute("aria-hidden","true");side.appendChild(pictogram("chevron"));
       button.append(label,side);
       button.addEventListener("click",function(){
-        list.querySelectorAll(".is-selected").forEach(function(old){old.classList.remove("is-selected");});
-        button.classList.add("is-selected");clickOption(item);
+        list.querySelectorAll(".is-selected").forEach(function(old){
+          old.classList.remove("is-selected");old.removeAttribute("aria-current");
+        });
+        selectedOptionKeys[selectedCategory]=item.key;
+        button.classList.add("is-selected");button.setAttribute("aria-current","true");
+        clickOption(item);
       });
       fragment.appendChild(button);
     });
