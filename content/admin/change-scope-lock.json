@@ -155,6 +155,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "tvos-canonical-daily-remote-catalog-20261102",
+      "at": "2026-11-02T12:15:00+01:00",
+      "approvedBy": "user-explicit-20261102-same-daily-dua-verse-on-apple-tv",
+      "reason": "One Apple-TV-only commit: configure TVHomeView remote catalog for the shared daily content route, no independent religious selection, no change to tvOS player, screensaver rotation, other apps, Kids or push.",
+      "paths": [
+        "apple-tv/home/catalog.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-16T23:59:00.000Z"
+    },
+    {
       "id": "canonical-global-daily-dua-quran-tadabbur-20261102",
       "at": "2026-11-02T12:00:00+01:00",
       "approvedBy": "user-explicit-20261102-global-canonical-daily-all-apps-apple-tv",
