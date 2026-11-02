@@ -3,6 +3,11 @@
 (function(w,d){"use strict";
 if(w.DARCanonicalDailyV1)return;
 var BASE="/content/updates/daily.json",DUAS="/content/duas/duas.json",SITE="https://dar-al-tawhid.de";
+var DICT={"de":{"label":"DUʿĀʾ DES TAGES","read":"Heutige Duʿāʾ lesen","missing":"Tagesinhalt derzeit nicht verfügbar","original":"Original: Deutsch"},"ar":{"label":"دُعَاءُ الْيَوْمِ","read":"اقرأ دعاء اليوم","missing":"محتوى اليوم غير متاح حاليًا","original":"الأصل بالألمانية"},"en":{"label":"DUʿĀʾ OF THE DAY","read":"Read today's duʿāʾ","missing":"Today's content is currently unavailable","original":"Original: German"},"tr":{"label":"GÜNÜN DUASI","read":"Günün duasını oku","missing":"Günlük içerik şu anda kullanılamıyor","original":"Aslı: Almanca"},"ku":{"label":"DUʿAYA ÎRO","read":"Duʿaya îro bixwîne","missing":"Naveroka îro niha ne berdest e","original":"Orîjînal: Almanî"},"ckb":{"label":"دوعای ئەمڕۆ","read":"دوعای ئەمڕۆ بخوێنەوە","missing":"ناوەڕۆکی ئەمڕۆ ئێستا بەردەست نییە","original":"دەقی ڕەسەن: ئەڵمانی"},"bs":{"label":"DOVA DANA","read":"Pročitaj dovu dana","missing":"Današnji sadržaj trenutno nije dostupan","original":"Izvornik: njemački"},"fr":{"label":"DUʿĀʾ DU JOUR","read":"Lire l'invocation du jour","missing":"Le contenu du jour est indisponible","original":"Original : allemand"},"es":{"label":"DUʿĀʾ DEL DÍA","read":"Leer la súplica de hoy","missing":"El contenido de hoy no está disponible","original":"Original: alemán"}},I18N=w.DARAdultComponentI18nV1;
+if(I18N)I18N.register("canonical-daily",DICT);
+function locale(){try{var k=I18N?.locale?.()||w.localStorage.getItem("darAdultPreferredLocaleV1");return DICT[k]?k:"de"}catch(_){return "de"}}
+function t(k){return I18N?.t("canonical-daily",k,locale())||DICT[locale()][k]}
+
 var state={date:"",daily:null,dua:null,valid:false,loading:null,lastCheck:0,reason:"not-loaded"};
 function berlinDate(at){var parts=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(at||new Date()),v={};parts.forEach(function(z){v[z.type]=z.value});return v.year+"-"+v.month+"-"+v.day}
 function text(x){return String(x==null?"":x).trim()}
@@ -29,17 +34,17 @@ function snapshot(){return state.valid?{date:state.date,dua:{id:state.dua.id,tit
 function nodes(){return Array.from(d.querySelectorAll(".dv3-today-card,[data-nav='dua'].home-v380-open-row,#darV8Daily a[href*='page=dua']"))}
 function setAria(el,s){el.setAttribute("aria-label",s)}
 function render(){nodes().forEach(function(el){
-if(!state.valid){el.removeAttribute("data-dar-daily-id");if(el.matches(".dv3-today-card,.home-v380-open-row")){el.setAttribute("aria-disabled","true");setAria(el,"Der geprüfte Tagesinhalt ist derzeit nicht verfügbar");}return}
+if(!state.valid){el.removeAttribute("data-dar-daily-id");if(el.matches(".dv3-today-card,.home-v380-open-row")){el.setAttribute("aria-disabled","true");setAria(el,t("missing"));var title=el.querySelector("strong,h3");if(title)title.textContent=t("missing");var copy=el.querySelector("span,p");if(copy)copy.textContent="";}return}
 el.setAttribute("data-dar-daily-id",state.dua.id);el.removeAttribute("aria-disabled");
 if(el.matches(".dv3-today-card")){
 var strong=el.querySelector("strong"),small=el.querySelector("small"),copy=el.querySelector("span"),act=el.querySelector("b");
-if(strong)strong.textContent=state.dua.title;if(small)small.textContent="DUʿĀʾ DES TAGES · "+state.date;if(copy)copy.textContent=state.dua.de;if(act)act.textContent="Heutige Duʿāʾ lesen ›";
+if(strong)strong.textContent=state.dua.title;if(small)small.textContent=t("label")+" · "+state.date;if(copy)copy.textContent=state.dua.de;if(act)act.textContent=t("read")+" ›";
 }
 if(el.matches(".home-v380-open-row")){
 el.dataset.value=state.dua.id;
 var h=el.querySelector("h3"),p=el.querySelector("p");if(h)h.textContent=state.dua.title;if(p)p.textContent=state.dua.de;
 }
-setAria(el,"Duʿāʾ des Tages: "+state.dua.title);
+setAria(el,t("label")+": "+state.dua.title);
 })}
 function navigateDua(duaId){var id=encodeURIComponent(duaId);try{if(typeof w.navigate==="function"){w.navigate("dua",duaId);return}}catch(_){}
 if(d.getElementById("pageRoot")||/^\?page=/.test(w.location.search||"")){w.location.assign("/?page=dua&id="+id);return}
@@ -52,7 +57,7 @@ e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
 update(false).then(function(result){if(result?.dua?.id)navigateDua(result.dua.id)});
 }
 function onDayChange(){if(state.date!==berlinDate())update(true);else render()}
-function init(){d.addEventListener("click",click,true);d.addEventListener("dar:view-rendered",render);
+function init(){d.addEventListener("click",click,true);d.addEventListener("dar:view-rendered",render);d.addEventListener("dar-adult-locale-changed",render);
 d.addEventListener("visibilitychange",function(){if(!d.hidden)update(true)});
 w.addEventListener("pageshow",function(){update(true)});
 w.setInterval(function(){if(!d.hidden)onDayChange()},60000);
