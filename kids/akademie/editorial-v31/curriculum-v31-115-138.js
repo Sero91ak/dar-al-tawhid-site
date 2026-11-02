@@ -2517,7 +2517,7 @@ const additions={
   },
   "hadith": {
    "source": "Ṣaḥīḥ al-Buḫārī, Nr. 46",
-   "text": "Der Prophet ﷺ erklärte, dass fünf Gebete während des Tages und der Nacht vorgeschrieben sind."
+   "text": "Der Prophet ﷺ erwähnte fünf tägliche Pflichtgebete."
   },
   "sourceAudit": {
    "quranReference": "20:14",
@@ -2550,7 +2550,7 @@ const additions={
     "lines": [
      "Heute untersuchen wir das Thema „Die Gebetszeiten kennenlernen“.",
      "Der Qurʾān sagt in 20:14 sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Die Sunnah lehrt in Ṣaḥīḥ al-Buḫārī, Nr. 46 sinngemäß: Der Prophet ﷺ erklärte, dass fünf Gebete während des Tages und der Nacht vorgeschrieben sind.",
+     "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 46 sinngemäß: Der Prophet ﷺ erwähnte fünf tägliche Pflichtgebete.",
      "Unser eigenes Beispiel: Auf einem Gebetsplan die Tagesgebete erkennen. Wir überlegen gemeinsam, warum es passt."
     ],
     "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
@@ -2560,7 +2560,7 @@ const additions={
     "lines": [
      "Ausgangssituation: Auf einem Gebetsplan die Tagesgebete erkennen.",
      "Qurʾān 20:14: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 46), deutsche Bedeutungswiedergabe: Der Prophet ﷺ erklärte, dass fünf Gebete während des Tages und der Nacht vorgeschrieben sind.",
+     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 46): Der Prophet ﷺ erwähnte fünf tägliche Pflichtgebete.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
     "evidence": "Quellen: https://quran.com/20/14 und https://sunnah.com/bukhari:46. Die Alltagsübung ist kein wörtlicher Offenbarungstext."
@@ -2615,7 +2615,7 @@ const additions={
      "options": [
       "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
       "Unsere eigene Unterrichtsübung: Bei „Die Gebetszeiten kennenlernen“ übe ich: auf einem Gebetsplan die Tagesgebete erkennen.",
-      "Die Sunnah erläutert sinngemäß: Der Prophet ﷺ erklärte, dass fünf Gebete während des Tages und der Nacht vorgeschrieben sind."
+      "Die Sunnah berichtet: Der Prophet ﷺ erwähnte fünf tägliche Pflichtgebete."
      ],
      "correct": 0,
      "hint": "Vergleiche die Bedeutung von Qurʾān 20:14 mit unserem Alltagsbeispiel.",
@@ -2638,7 +2638,7 @@ const additions={
     {
      "type": "text",
      "prompt": "Was lehrt Qurʾān 20:14? Was berichtet Ṣaḥīḥ al-Buḫārī, Nr. 46?",
-     "sample": "Der Vers bedeutet: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die Sunnah berichtet sinngemäß: Der Prophet ﷺ erklärte, dass fünf Gebete während des Tages und der Nacht vorgeschrieben sind.",
+     "sample": "Der Vers bedeutet: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die Sunnah berichtet sinngemäß: Der Prophet ﷺ erwähnte fünf tägliche Pflichtgebete.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
@@ -3015,7 +3015,7 @@ const additions={
   },
   "hadith": {
    "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5458",
-   "text": "Abū Umāmah berichtete, dass der Prophet ﷺ Allah nach dem Essen lobpries."
+   "text": "Der Prophet ﷺ sprach nach dem Essen eine überlieferte Lobpreisung Allahs."
   },
   "sourceAudit": {
    "quranReference": "7:31",
@@ -3048,7 +3048,7 @@ const additions={
     "lines": [
      "Heute untersuchen wir das Thema „Nach dem Essen danken“.",
      "Der Qurʾān sagt in 7:31 sinngemäß: Esst und trinkt, aber seid nicht maßlos.",
-     "Die Sunnah lehrt in Ṣaḥīḥ al-Buḫārī, Nr. 5458 sinngemäß: Abū Umāmah berichtete, dass der Prophet ﷺ Allah nach dem Essen lobpries.",
+     "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 5458 sinngemäß: Der Prophet ﷺ sprach nach dem Essen eine überlieferte Lobpreisung Allahs.",
      "Unser eigenes Beispiel: Eine authentische Dankformel nach Quellenprüfung üben. Wir überlegen gemeinsam, warum es passt."
     ],
     "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
@@ -3058,7 +3058,7 @@ const additions={
     "lines": [
      "Ausgangssituation: Eine authentische Dankformel nach Quellenprüfung üben.",
      "Qurʾān 7:31: Esst und trinkt, aber seid nicht maßlos.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 5458), deutsche Bedeutungswiedergabe: Abū Umāmah berichtete, dass der Prophet ﷺ Allah nach dem Essen lobpries.",
+     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 5458): Der Prophet ﷺ sprach nach dem Essen eine überlieferte Lobpreisung Allahs.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
     "evidence": "Quellen: https://quran.com/7/31 und https://sunnah.com/bukhari:5458. Die Alltagsübung ist kein wörtlicher Offenbarungstext."
@@ -3113,7 +3113,7 @@ const additions={
      "options": [
       "Esst und trinkt, aber seid nicht maßlos.",
       "Unsere eigene Unterrichtsübung: Bei „Nach dem Essen danken“ übe ich: eine authentische Dankformel nach Quellenprüfung üben.",
-      "Die Sunnah erläutert sinngemäß: Abū Umāmah berichtete, dass der Prophet ﷺ Allah nach dem Essen lobpries."
+      "Die Sunnah berichtet: Der Prophet ﷺ sprach nach dem Essen eine überlieferte Lobpreisung Allahs."
      ],
      "correct": 0,
      "hint": "Vergleiche die Bedeutung von Qurʾān 7:31 mit unserem Alltagsbeispiel.",
@@ -3136,7 +3136,7 @@ const additions={
     {
      "type": "text",
      "prompt": "Was lehrt Qurʾān 7:31? Was berichtet Ṣaḥīḥ al-Buḫārī, Nr. 5458?",
-     "sample": "Der Vers bedeutet: Esst und trinkt, aber seid nicht maßlos. Die Sunnah berichtet sinngemäß: Abū Umāmah berichtete, dass der Prophet ﷺ Allah nach dem Essen lobpries.",
+     "sample": "Der Vers bedeutet: Esst und trinkt, aber seid nicht maßlos. Die Sunnah berichtet sinngemäß: Der Prophet ﷺ sprach nach dem Essen eine überlieferte Lobpreisung Allahs.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
