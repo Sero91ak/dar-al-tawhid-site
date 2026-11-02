@@ -337,6 +337,31 @@ function localizeGermanCalendarLabel(value,language){
  }
  return changed?result:null;
 }
+const INTL_HIJRI_MONTH={
+ "Muharram":"Muḥarram",
+ "Safar":"Ṣafar",
+ "Rabiʻ I":"Rabīʿ al-Awwal",
+ "Rabiʻ II":"Rabīʿ ath-Thānī",
+ "Dschumada I":"Jumādā al-Ūlā",
+ "Dschumada II":"Jumādā ath-Thāniyah",
+ "Radschab":"Rajab",
+ "Shaʻban":"Shaʿbān",
+ "Ramadan":"Ramaḍān",
+ "Shawwal":"Shawwāl",
+ "Dhu l-qaʿda":"Dhū al-Qaʿdah",
+ "Dhu l-Hiddscha":"Dhū al-Ḥijjah"
+};
+function localizedIntlHijriMonth(name,language){
+ const canon=INTL_HIJRI_MONTH[name];
+ if(!canon)return null;
+ return lookupPack(canon,language)||canon;
+}
+function formatIntlHijriLine(day,monthName,year,language){
+ const month=localizedIntlHijriMonth(monthName,language);
+ if(!month)return null;
+ if(language==="ar")return day+". "+month+" "+year+" هـ";
+ return day+". "+month+" "+year+" AH";
+}
 const reversePacks=new Map();
 function rebuildReversePacks(){
  reversePacks.clear();
@@ -434,6 +459,22 @@ function isDynamicGermanUi(value){
   value==="Bei rotem Status: Startseite → ↻ Sync in der Statusleiste, dann erneut testen."||
   /^\d+\s+(Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt|Funktionen|Ergebnisse)$/.test(value)||
   /^Alle \d+ geprüften Werke mit verifiziertem Autor\. Zitierte Gelehrte werden getrennt ausgewiesen\.$/.test(value)||
+  Object.prototype.hasOwnProperty.call(INTL_HIJRI_MONTH,value)||
+  /^\d+\. (?:Muharram|Safar|Rabiʻ I|Rabiʻ II|Dschumada I|Dschumada II|Radschab|Shaʻban|Ramadan|Shawwal|Dhu l-qaʿda|Dhu l-Hiddscha) \d{3,4} AH$/.test(value)||
+  /^Islamisches Datum heute: \d+\. (?:Muharram|Safar|Rabiʻ I|Rabiʻ II|Dschumada I|Dschumada II|Radschab|Shaʻban|Ramadan|Shawwal|Dhu l-qaʿda|Dhu l-Hiddscha) \d{3,4} AH$/.test(value)||
+  /^\d+ Kitāb$/.test(value)||
+  /^\d+ Kitāb · \d+ Ḥadīṯe$/.test(value)||
+  /^\d+ Ḥadīṯe$/.test(value)||
+  /^\d+ im Werk$/.test(value)||
+  /^\d+ Bāb$/.test(value)||
+  /^\d+ Kapitelbereiche$/.test(value)||
+  /^Alle \d+ Werke anzeigen$/.test(value)||
+  /^Qurʾān weiterlesen · Sūrat .+ \d+$/.test(value)||
+  /^Qurʾān weiterlesen: Sūrat .+ \d+$/.test(value)||
+  /^Qurʾān weiterlesen\. Sūrah .+ · Āyah \d+(?: · Juzʾ \d+)?(?:\. Zuletzt .+)?$/.test(value)||
+  /^Sūrah .+ · Āyah \d+(?: · Juzʾ \d+)?$/.test(value)||
+  /^Zuletzt \d{2}\.\d{2}\., \d{2}:\d{2}$/.test(value)||
+  /^(?:Filter\s+)?.{1,60} entfernen$/.test(value)||
   /^\d+\s+Āyāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
   /^\d+\s*·\s*\d+\s+Ayāt\s*·\s*(Mekkanisch|Medinensisch)$/.test(value)||
   /^\d+\s+Sūren\s*·\s*\d+\s+Āyāt$/.test(value)||
@@ -2058,6 +2099,174 @@ function translateSharedPatterns(value,language){
   };
   return forms[language]||null;
  }
+ if(INTL_HIJRI_MONTH[value])return localizedIntlHijriMonth(value,language);
+ const intlHijri=value.match(/^(\d+)\. (Muharram|Safar|Rabiʻ I|Rabiʻ II|Dschumada I|Dschumada II|Radschab|Shaʻban|Ramadan|Shawwal|Dhu l-qaʿda|Dhu l-Hiddscha) (\d{3,4}) AH$/);
+ if(intlHijri)return formatIntlHijriLine(intlHijri[1],intlHijri[2],intlHijri[3],language);
+ const intlHijriAria=value.match(/^Islamisches Datum heute: (\d+)\. (Muharram|Safar|Rabiʻ I|Rabiʻ II|Dschumada I|Dschumada II|Radschab|Shaʻban|Ramadan|Shawwal|Dhu l-qaʿda|Dhu l-Hiddscha) (\d{3,4}) AH$/);
+ if(intlHijriAria){
+  const line=formatIntlHijriLine(intlHijriAria[1],intlHijriAria[2],intlHijriAria[3],language);
+  const forms={
+   ar:"التاريخ الإسلامي اليوم: ",
+   en:"Islamic date today: ",
+   tr:"Bugünün hicrî tarihi: ",
+   ku:"Dîroka îslamî ya îro: ",
+   ckb:"بەرواری ئیسلامی ئەمڕۆ: ",
+   bs:"Islamski datum danas: ",
+   fr:"Date islamique aujourd’hui : ",
+   es:"Fecha islámica de hoy: "
+  };
+  return line&&forms[language]?forms[language]+line:null;
+ }
+ const kitabCount=value.match(/^(\d+) Kitāb$/);
+ if(kitabCount){
+  const n=kitabCount[1];
+  const forms={
+   ar:n==="1"?"كتاب واحد":n+" كتب",
+   en:n+" Kitāb",
+   tr:n+" kitâb",
+   ku:n+" kitāb",
+   ckb:n==="1"?"کتێبێک":n+" کتێب",
+   bs:n+" Kitāb",
+   fr:n+" kitāb",
+   es:n+" kitāb"
+  };
+  return forms[language]||null;
+ }
+ const hadithCount=value.match(/^(\d+) Ḥadīṯe$/);
+ if(hadithCount){
+  const word=lookupPack("Ḥadīṯe",language);
+  return word?hadithCount[1]+" "+word:null;
+ }
+ const inWork=value.match(/^(\d+) im Werk$/);
+ if(inWork){
+  const n=inWork[1];
+  const forms={
+   ar:n+" في هذا المصنّف",
+   en:n+" in this work",
+   tr:n+" bu eserde",
+   ku:n+" di berhemê de",
+   ckb:n+" لەم بەرهەمەدا",
+   bs:n+" u ovom djelu",
+   fr:n+" dans cet ouvrage",
+   es:n+" en esta obra"
+  };
+  return forms[language]||null;
+ }
+ const babCount=value.match(/^(\d+) Bāb$/);
+ if(babCount){
+  const n=babCount[1];
+  const forms={
+   ar:n==="1"?"باب واحد":n+" أبواب",
+   en:n+" Bāb",
+   tr:n+" bâb",
+   ku:n+" bab",
+   ckb:n==="1"?"بابێک":n+" باب",
+   bs:n+" Bāb",
+   fr:n+" bāb",
+   es:n+" bāb"
+  };
+  return forms[language]||null;
+ }
+ const chapterAreas=value.match(/^(\d+) Kapitelbereiche$/);
+ if(chapterAreas){
+  const n=chapterAreas[1];
+  const forms={
+   ar:n==="1"?"قسم واحد":n+" أقسام",
+   en:n==="1"?"1 chapter section":n+" chapter sections",
+   tr:n+" bölüm alanı",
+   ku:n+" beşên beşê",
+   ckb:n==="1"?"بەشێکی باب":n+" بەشی باب",
+   bs:n==="1"?"1 odjeljak":n+" odjeljka",
+   fr:n==="1"?"1 section":n+" sections",
+   es:n==="1"?"1 sección":n+" secciones"
+  };
+  return forms[language]||null;
+ }
+ const allWorks=value.match(/^Alle (\d+) Werke anzeigen$/);
+ if(allWorks){
+  const n=allWorks[1];
+  const forms={
+   ar:"عرض كل الأعمال ("+n+")",
+   en:"Show all "+n+" works",
+   tr:n+" eserin tümünü göster",
+   ku:"Hemû "+n+" berheman nîşan bide",
+   ckb:"هەموو "+n+" بەرهەم پیشان بدە",
+   bs:"Prikaži svih "+n+" djela",
+   fr:"Afficher les "+n+" ouvrages",
+   es:"Mostrar las "+n+" obras"
+  };
+  return forms[language]||null;
+ }
+ const resumeSurat=value.match(/^Qurʾān weiterlesen · Sūrat (.+) (\d+)$/);
+ if(resumeSurat){
+  const head=lookupPack("Qurʾān weiterlesen",language);
+  return head?head+" · Sūrat "+resumeSurat[1]+" "+resumeSurat[2]:null;
+ }
+ const resumeAria=value.match(/^Qurʾān weiterlesen: Sūrat (.+) (\d+)$/);
+ if(resumeAria){
+  const head=lookupPack("Qurʾān weiterlesen",language);
+  return head?head+": Sūrat "+resumeAria[1]+" "+resumeAria[2]:null;
+ }
+ const quranMeta=value.match(/^Sūrah (.+?) · Āyah (\d+)(?: · Juzʾ (\d+))?$/);
+ if(quranMeta){
+  const surah=lookupPack("Sūrah",language)||"Sūrah";
+  const ayah=lookupPack("Āyah",language)||"Āyah";
+  let line=surah+" "+quranMeta[1]+" · "+ayah+" "+quranMeta[2];
+  if(quranMeta[3]){
+   const juz=lookupPack("Juzʾ",language)||"Juzʾ";
+   line+=" · "+juz+" "+quranMeta[3];
+  }
+  return line;
+ }
+ const continueMeta=value.match(/^Qurʾān weiterlesen\. (Sūrah .+ · Āyah \d+(?: · Juzʾ \d+)?)(?:\. Zuletzt (.+))?$/);
+ if(continueMeta){
+  const head=lookupPack("Qurʾān weiterlesen",language);
+  const meta=translateSharedPatterns(continueMeta[1],language);
+  if(!head||!meta)return null;
+  if(!continueMeta[2])return head+". "+meta;
+  const when=translateSharedPatterns("Zuletzt "+continueMeta[2],language)||("Zuletzt "+continueMeta[2]);
+  return head+". "+meta+". "+when;
+ }
+ const lastRead=value.match(/^Zuletzt (\d{2}\.\d{2}\., \d{2}:\d{2})$/);
+ if(lastRead){
+  const stamp=lastRead[1];
+  const forms={
+   ar:"آخر قراءة "+stamp,
+   en:"Last read "+stamp,
+   tr:"Son okuma "+stamp,
+   ku:"Dawî xwendin "+stamp,
+   ckb:"دوایین خوێندنەوە "+stamp,
+   bs:"Posljednje čitanje "+stamp,
+   fr:"Dernière lecture "+stamp,
+   es:"Última lectura "+stamp
+  };
+  return forms[language]||null;
+ }
+ const chipRemove=value.match(/^(Filter\s+)?(.{1,60}) entfernen$/);
+ if(chipRemove&&lookupPack(value,language)===undefined&&!/[.!?«»]/.test(chipRemove[2])){
+  const name=lookupPack(chipRemove[2],language)||chipRemove[2];
+  const filter=!!chipRemove[1];
+  const forms=filter?{
+   ar:"إزالة مرشح "+name,
+   en:"Remove "+name+" filter",
+   tr:name+" süzgecini kaldır",
+   ku:"Parzûna "+name+" rake",
+   ckb:"فلتەری "+name+" لاببە",
+   bs:"Ukloni filter "+name,
+   fr:"Retirer le filtre "+name,
+   es:"Quitar el filtro "+name
+  }:{
+   ar:"إزالة "+name,
+   en:"Remove "+name,
+   tr:name+" kaldır",
+   ku:name+" rake",
+   ckb:name+" لاببە",
+   bs:"Ukloni "+name,
+   fr:"Retirer "+name,
+   es:"Quitar "+name
+  };
+  return forms[language]||null;
+ }
  return null;
 }
 function translateExact(value,language="tr"){
@@ -2435,7 +2644,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-42";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-43";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
