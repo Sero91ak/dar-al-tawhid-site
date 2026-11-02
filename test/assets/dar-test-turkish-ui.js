@@ -505,7 +505,7 @@ function isDynamicGermanUi(value){
   /^Tag \d+ im Fastenmonat$/.test(value)||
   /^Tag \d+$/.test(value)||
   /^Noch ca\. \d+ Tage bis Ramaḍān$/.test(value)||
-  /^Noch ca\. \d+ Tage$/.test(value)||
+  /^Noch ca\. \d+ Tage\.?$/.test(value)||
   /^Beleg \d+$/.test(value)||
   /^\d+ Aufrufe$/.test(value)||
   /^\d+ Aufrufe · .+$/.test(value)||
@@ -547,6 +547,11 @@ function isDynamicGermanUi(value){
   /^Sūrah .+ öffnen$/.test(value)||
   (/^(.*?)(\s*(?:…|\.{3}))$/.test(value)&&catalogHas(value.replace(/\s*(?:…|\.{3})$/,"").trim()))||
   (/^(.*?)(\s*›)$/.test(value)&&catalogHas(value.replace(/\s*›$/,"").trim()))||
+  /^Zuletzt gelesen (?:heute|gestern) um \d{1,2}:\d{2} Uhr$/.test(value)||
+  /^Zuletzt gelesen am \d{1,2}\.\d{1,2}\.\d{4} um \d{1,2}:\d{2} Uhr$/.test(value)||
+  /^[👁↗♡]\uFE0F? \d+ (?:gelesen|geteilt|gespeichert)$/u.test(value)||
+  /^Heute: \d+\. (?:Muharram|Safar|Rabiʻ I|Rabiʻ II|Dschumada I|Dschumada II|Radschab|Shaʻban|Ramadan|Shawwal|Dhu l-qaʿda|Dhu l-Hiddscha) \d{3,4} AH · .+$/.test(value)||
+  (/^\p{Extended_Pictographic}\uFE0F?\s+\S/u.test(value)&&catalogHas(value.replace(/^\p{Extended_Pictographic}\uFE0F?\s+/u,"")))||
   /^(?:←|→|↗|‹|›)\s+\S/.test(value)||
   /^Alle\s+\S/.test(value)||
   /\swird geladen/.test(value)||
@@ -1748,11 +1753,11 @@ function translateSharedPatterns(value,language){
   const forms={ar:"اليوم "+n,en:"Day "+n,tr:n+". gün",ku:"Roja "+n,ckb:"ڕۆژی "+n,bs:"Dan "+n,fr:"Jour "+n,es:"Día "+n};
   return forms[language]||null;
  }
- const aboutDays=value.match(/^Noch ca\. (\d+) Tage$/);
+ const aboutDays=value.match(/^Noch ca\. (\d+) Tage(\.)?$/);
  if(aboutDays){
   const n=aboutDays[1];
   const forms={ar:"بقي نحو "+n+" أيام",en:"About "+n+" days left",tr:"Yaklaşık "+n+" gün kaldı",ku:"Nêzîkî "+n+" roj man",ckb:"نزیکەی "+n+" ڕۆژ ماوە",bs:"Još oko "+n+" dana",fr:"Encore environ "+n+" jours",es:"Faltan unos "+n+" días"};
-  return forms[language]||null;
+  return forms[language]?forms[language]+(aboutDays[2]||""):null;
  }
  const proofLabel=value.match(/^Beleg (\d+)$/);
  if(proofLabel){
@@ -2404,7 +2409,7 @@ function translateSharedPatterns(value,language){
    };
    return forms[language]||null;
   }
-  const surahOpen=value.match(/^Sūrah (.+) öffnen$/);
+   const surahOpen=value.match(/^Sūrah (.+) öffnen$/);
   if(surahOpen&&!/[<>]/.test(surahOpen[1])){
    const name=surahOpen[1];
    const forms={
@@ -2418,6 +2423,68 @@ function translateSharedPatterns(value,language){
     es:"Abrir la sura "+name
    };
    return forms[language]||null;
+  }
+  const readRel=value.match(/^Zuletzt gelesen (heute|gestern) um (\d{1,2}:\d{2}) Uhr$/);
+  if(readRel){
+   const time=readRel[2];
+   const forms=readRel[1].startsWith("heu")?{
+    ar:"آخر قراءة اليوم عند "+time,
+    en:"Last read today at "+time,
+    tr:"Bugün saat "+time+" son okuma",
+    ku:"Dawî îro saet "+time+" hat xwendin",
+    ckb:"دوایین خوێندنەوە ئەمڕۆ کاتژمێر "+time,
+    bs:"Posljednje čitanje danas u "+time,
+    fr:"Dernière lecture aujourd’hui à "+time,
+    es:"Última lectura hoy a las "+time
+   }:{
+    ar:"آخر قراءة أمس عند "+time,
+    en:"Last read yesterday at "+time,
+    tr:"Dün saat "+time+" son okuma",
+    ku:"Dawî duh saet "+time+" hat xwendin",
+    ckb:"دوایین خوێندنەوە دوێنێ کاتژمێر "+time,
+    bs:"Posljednje čitanje jučer u "+time,
+    fr:"Dernière lecture hier à "+time,
+    es:"Última lectura ayer a las "+time
+   };
+   return forms[language]||null;
+  }
+  const readOn=value.match(/^Zuletzt gelesen am (\d{1,2}\.\d{1,2}\.\d{4}) um (\d{1,2}:\d{2}) Uhr$/);
+  if(readOn){
+   const date=readOn[1],time=readOn[2];
+   const forms={
+    ar:"آخر قراءة في "+date+" عند "+time,
+    en:"Last read on "+date+" at "+time,
+    tr:date+" tarihinde saat "+time+" son okuma",
+    ku:"Dawî di "+date+" de saet "+time+" hat xwendin",
+    ckb:"دوایین خوێندنەوە لە "+date+" کاتژمێر "+time,
+    bs:"Posljednje čitanje "+date+" u "+time,
+    fr:"Dernière lecture le "+date+" à "+time,
+    es:"Última lectura el "+date+" a las "+time
+   };
+   return forms[language]||null;
+  }
+  const metric=value.match(/^([👁↗♡])\uFE0F? (\d+) (gelesen|geteilt|gespeichert)$/u);
+  if(metric){
+   const n=metric[2];
+   const words={
+    gelesen:{ar:"قُرئ",en:"read",tr:"okundu",ku:"xwendî",ckb:"خوێندراوەتەوە",bs:"pročitano",fr:"lus",es:"leídos"},
+    geteilt:{ar:"مشارَكة",en:"shared",tr:"paylaşıldı",ku:"parvekirî",ckb:"هاوبەشکراو",bs:"podijeljeno",fr:"partagés",es:"compartidos"},
+    gespeichert:{ar:"محفوظ",en:"saved",tr:"kaydedildi",ku:"tomarkirî",ckb:"هەڵگیراو",bs:"sačuvano",fr:"enregistrés",es:"guardados"}
+   };
+   const word=words[metric[3]]?.[language];
+   return word?metric[1]+" "+n+" "+word:null;
+  }
+  const todayHijri=value.match(/^Heute: (\d+)\. (Muharram|Safar|Rabiʻ I|Rabiʻ II|Dschumada I|Dschumada II|Radschab|Shaʻban|Ramadan|Shawwal|Dhu l-qaʿda|Dhu l-Hiddscha) (\d{3,4}) AH · (.+)$/);
+  if(todayHijri){
+   const line=formatIntlHijriLine(todayHijri[1],todayHijri[2],todayHijri[3],language);
+   const head=lookupPack("Heute",language)||"Heute";
+   const greg=localizeGermanCalendarLabel(todayHijri[4],language)||lookupPack(todayHijri[4],language)||todayHijri[4];
+   if(line)return head+": "+line+" · "+greg;
+  }
+  const emojiLabel=value.match(/^(\p{Extended_Pictographic}\uFE0F?)\s+(.+)$/u);
+  if(emojiLabel){
+   const inner=lookupPack(emojiLabel[2],language);
+   if(inner!==undefined)return emojiLabel[1]+" "+inner;
   }
  }
  return null;
@@ -2797,7 +2864,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-44";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-45";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
