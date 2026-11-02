@@ -856,20 +856,20 @@ const additions={
    "excerpt": false
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 631",
-   "text": "Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 789",
+   "text": "Beim Aufrichten aus dem Rukūʿ sagte der Prophet ﷺ: Samiʿa llāhu liman ḥamidah."
   },
   "sourceAudit": {
    "quranReference": "20:14",
    "quranUrl": "https://quran.com/20/14",
-   "hadithUrl": "https://sunnah.com/bukhari:631",
+   "hadithUrl": "https://sunnah.com/bukhari:789",
    "sourceAnchorLessonId": "fiqh-salah",
    "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
-   "hasNewIndependentHadithVerification": false,
+   "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
   "hint": "Die aufrechte Haltung nach der Verbeugung üben.",
@@ -890,7 +890,7 @@ const additions={
     "lines": [
      "Heute untersuchen wir das Thema „Aus dem Rukūʿ aufrichten“.",
      "Der Qurʾān spricht in 20:14 darüber: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 631 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
+     "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 789: Beim Aufrichten aus dem Rukūʿ sagte der Prophet ﷺ: Samiʿa llāhu liman ḥamidah.",
      "Unser eigenes Beispiel: Die aufrechte Haltung nach der Verbeugung üben. Wir überlegen gemeinsam, warum es passt."
     ],
     "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
@@ -900,10 +900,10 @@ const additions={
     "lines": [
      "Ausgangssituation: Die aufrechte Haltung nach der Verbeugung üben.",
      "Qurʾān 20:14: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 631): Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat. Dies ist eine deutsche Bedeutungswiedergabe.",
+     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 789): Beim Aufrichten aus dem Rukūʿ sagte der Prophet ﷺ: Samiʿa llāhu liman ḥamidah. (sinngemäß)",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/20/14 und https://sunnah.com/bukhari:631. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Quellenprüfung: https://quran.com/20/14 und https://sunnah.com/bukhari:789. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
    }
   },
   "questions": {
@@ -955,7 +955,7 @@ const additions={
      "options": [
       "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
       "Unser Übungsbeispiel ist: Die aufrechte Haltung nach der Verbeugung üben.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+      "Die Sunnah berichtet: Beim Aufrichten aus dem Rukūʿ sagte der Prophet ﷺ: Samiʿa llāhu liman ḥamidah."
      ],
      "correct": 0,
      "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
@@ -978,7 +978,7 @@ const additions={
     {
      "type": "text",
      "prompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
+     "sample": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Beim Aufrichten aus dem Rukūʿ sagte der Prophet ﷺ: Samiʿa llāhu liman ḥamidah.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
@@ -1852,20 +1852,20 @@ const additions={
    "excerpt": false
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 631",
-   "text": "Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 812",
+   "text": "Der Prophet ﷺ beschrieb die Niederwerfung auf sieben Körperteilen."
   },
   "sourceAudit": {
    "quranReference": "20:14",
    "quranUrl": "https://quran.com/20/14",
-   "hadithUrl": "https://sunnah.com/bukhari:631",
+   "hadithUrl": "https://sunnah.com/bukhari:812",
    "sourceAnchorLessonId": "fiqh-salah",
    "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
-   "hasNewIndependentHadithVerification": false,
+   "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
   "hint": "Stirn und Nase sicher auf die Gebetsunterlage bringen.",
@@ -1886,7 +1886,7 @@ const additions={
     "lines": [
      "Heute untersuchen wir das Thema „Suǧūd kennenlernen“.",
      "Der Qurʾān spricht in 20:14 darüber: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 631 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
+     "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 812: Der Prophet ﷺ beschrieb die Niederwerfung auf sieben Körperteilen.",
      "Unser eigenes Beispiel: Stirn und Nase sicher auf die Gebetsunterlage bringen. Wir überlegen gemeinsam, warum es passt."
     ],
     "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
@@ -1896,10 +1896,10 @@ const additions={
     "lines": [
      "Ausgangssituation: Stirn und Nase sicher auf die Gebetsunterlage bringen.",
      "Qurʾān 20:14: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 631): Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat. Dies ist eine deutsche Bedeutungswiedergabe.",
+     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 812): Der Prophet ﷺ beschrieb die Niederwerfung auf sieben Körperteilen. (sinngemäß)",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/20/14 und https://sunnah.com/bukhari:631. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Quellenprüfung: https://quran.com/20/14 und https://sunnah.com/bukhari:812. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
    }
   },
   "questions": {
@@ -1951,7 +1951,7 @@ const additions={
      "options": [
       "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
       "Unser Übungsbeispiel ist: Stirn und Nase sicher auf die Gebetsunterlage bringen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+      "Die Sunnah berichtet: Der Prophet ﷺ beschrieb die Niederwerfung auf sieben Körperteilen."
      ],
      "correct": 0,
      "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
@@ -1974,7 +1974,7 @@ const additions={
     {
      "type": "text",
      "prompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
+     "sample": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ beschrieb die Niederwerfung auf sieben Körperteilen.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
@@ -2848,20 +2848,20 @@ const additions={
    "excerpt": false
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 631",
-   "text": "Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 831",
+   "text": "Der Prophet ﷺ lehrte den Tashahhud im Sitzen."
   },
   "sourceAudit": {
    "quranReference": "20:14",
    "quranUrl": "https://quran.com/20/14",
-   "hadithUrl": "https://sunnah.com/bukhari:631",
+   "hadithUrl": "https://sunnah.com/bukhari:831",
    "sourceAnchorLessonId": "fiqh-salah",
    "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
-   "hasNewIndependentHadithVerification": false,
+   "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
   "hint": "Die Sitzphase im Gebet wiedererkennen.",
@@ -2882,7 +2882,7 @@ const additions={
     "lines": [
      "Heute untersuchen wir das Thema „Tashahhud als Gebetsbestandteil“.",
      "Der Qurʾān spricht in 20:14 darüber: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 631 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
+     "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 831: Der Prophet ﷺ lehrte den Tashahhud im Sitzen.",
      "Unser eigenes Beispiel: Die Sitzphase im Gebet wiedererkennen. Wir überlegen gemeinsam, warum es passt."
     ],
     "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
@@ -2892,10 +2892,10 @@ const additions={
     "lines": [
      "Ausgangssituation: Die Sitzphase im Gebet wiedererkennen.",
      "Qurʾān 20:14: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 631): Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat. Dies ist eine deutsche Bedeutungswiedergabe.",
+     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 831): Der Prophet ﷺ lehrte den Tashahhud im Sitzen. (sinngemäß)",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/20/14 und https://sunnah.com/bukhari:631. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Quellenprüfung: https://quran.com/20/14 und https://sunnah.com/bukhari:831. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
    }
   },
   "questions": {
@@ -2947,7 +2947,7 @@ const additions={
      "options": [
       "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
       "Unser Übungsbeispiel ist: Die Sitzphase im Gebet wiedererkennen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+      "Die Sunnah berichtet: Der Prophet ﷺ lehrte den Tashahhud im Sitzen."
      ],
      "correct": 0,
      "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
@@ -2970,7 +2970,7 @@ const additions={
     {
      "type": "text",
      "prompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
+     "sample": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte den Tashahhud im Sitzen.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
@@ -3014,20 +3014,20 @@ const additions={
    "excerpt": false
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 631",
-   "text": "Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+   "source": "Ṣaḥīḥ Muslim, Nr. 582",
+   "text": "Der Prophet ﷺ schloss das Gebet mit Taslīm ab."
   },
   "sourceAudit": {
    "quranReference": "20:14",
    "quranUrl": "https://quran.com/20/14",
-   "hadithUrl": "https://sunnah.com/bukhari:631",
+   "hadithUrl": "https://sunnah.com/muslim:582",
    "sourceAnchorLessonId": "fiqh-salah",
    "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
-   "hasNewIndependentHadithVerification": false,
+   "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
   "hint": "Taslīm als Abschluss erkennen.",
@@ -3048,7 +3048,7 @@ const additions={
     "lines": [
      "Heute untersuchen wir das Thema „Den Gebetsabschluss kennenlernen“.",
      "Der Qurʾān spricht in 20:14 darüber: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 631 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
+     "Die Sunnah berichtet in Ṣaḥīḥ Muslim, Nr. 582: Der Prophet ﷺ schloss das Gebet mit Taslīm ab.",
      "Unser eigenes Beispiel: Taslīm als Abschluss erkennen. Wir überlegen gemeinsam, warum es passt."
     ],
     "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
@@ -3058,10 +3058,10 @@ const additions={
     "lines": [
      "Ausgangssituation: Taslīm als Abschluss erkennen.",
      "Qurʾān 20:14: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 631): Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat. Dies ist eine deutsche Bedeutungswiedergabe.",
+     "Sunnah (Ṣaḥīḥ Muslim, Nr. 582): Der Prophet ﷺ schloss das Gebet mit Taslīm ab. (sinngemäß)",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/20/14 und https://sunnah.com/bukhari:631. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Quellenprüfung: https://quran.com/20/14 und https://sunnah.com/muslim:582. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
    }
   },
   "questions": {
@@ -3113,7 +3113,7 @@ const additions={
      "options": [
       "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
       "Unser Übungsbeispiel ist: Taslīm als Abschluss erkennen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+      "Die Sunnah berichtet: Der Prophet ﷺ schloss das Gebet mit Taslīm ab."
      ],
      "correct": 0,
      "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
@@ -3136,7 +3136,7 @@ const additions={
     {
      "type": "text",
      "prompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
+     "sample": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ schloss das Gebet mit Taslīm ab.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
@@ -3346,20 +3346,20 @@ const additions={
    "excerpt": true
   },
   "hadith": {
-   "source": "Ṣaḥīḥ Muslim, Nr. 8 · Ḥadīṯ Ǧibrīl, überliefert von ʿUmar ibn al-Ḫaṭṭāb",
-   "text": "Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 8",
+   "text": "Das Fasten im Ramaḍān gehört zu den fünf Säulen des Islam."
   },
   "sourceAudit": {
    "quranReference": "2:285",
    "quranUrl": "https://quran.com/2/285",
-   "hadithUrl": "https://sunnah.com/muslim:8a",
+   "hadithUrl": "https://sunnah.com/bukhari:8",
    "sourceAnchorLessonId": "aqidah-iman-sechs-grundlagen",
    "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
    "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
-   "hasNewIndependentHadithVerification": false,
+   "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
   "hint": "Mit Rücksicht auf das Alter über den Fastenmonat sprechen.",
@@ -3380,7 +3380,7 @@ const additions={
     "lines": [
      "Heute untersuchen wir das Thema „Ramaḍān und Fasten kennenlernen“.",
      "Der Qurʾān spricht in 2:285 darüber: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ Muslim, Nr. 8 · Ḥadīṯ Ǧibrīl, überliefert von ʿUmar ibn al-Ḫaṭṭāb nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
+     "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 8: Das Fasten im Ramaḍān gehört zu den fünf Säulen des Islam.",
      "Unser eigenes Beispiel: Mit Rücksicht auf das Alter über den Fastenmonat sprechen. Wir überlegen gemeinsam, warum es passt."
     ],
     "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
@@ -3390,10 +3390,10 @@ const additions={
     "lines": [
      "Ausgangssituation: Mit Rücksicht auf das Alter über den Fastenmonat sprechen.",
      "Qurʾān 2:285: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
-     "Sunnah (Ṣaḥīḥ Muslim, Nr. 8 · Ḥadīṯ Ǧibrīl, überliefert von ʿUmar ibn al-Ḫaṭṭāb): Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung. Dies ist eine deutsche Bedeutungswiedergabe.",
+     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 8): Das Fasten im Ramaḍān gehört zu den fünf Säulen des Islam. (sinngemäß)",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/2/285 und https://sunnah.com/muslim:8a. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Quellenprüfung: https://quran.com/2/285 und https://sunnah.com/bukhari:8. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
    }
   },
   "questions": {
@@ -3445,7 +3445,7 @@ const additions={
      "options": [
       "Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
       "Unser Übungsbeispiel ist: Mit Rücksicht auf das Alter über den Fastenmonat sprechen.",
-      "Die Hadith-Bedeutung lautet: Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung."
+      "Die Sunnah berichtet: Das Fasten im Ramaḍān gehört zu den fünf Säulen des Islam."
      ],
      "correct": 0,
      "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
@@ -3468,7 +3468,7 @@ const additions={
     {
      "type": "text",
      "prompt": "Was lehrt Qurʾān 2:285 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Die angegebene Sunnah lehrt sinngemäß: Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung.",
+     "sample": "Der Vers bedeutet sinngemäß: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Die angegebene Sunnah lehrt sinngemäß: Das Fasten im Ramaḍān gehört zu den fünf Säulen des Islam.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
@@ -3512,20 +3512,20 @@ const additions={
    "excerpt": true
   },
   "hadith": {
-   "source": "Ṣaḥīḥ Muslim, Nr. 8 · Ḥadīṯ Ǧibrīl, überliefert von ʿUmar ibn al-Ḫaṭṭāb",
-   "text": "Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 8",
+   "text": "Zakāh und Ḥaǧǧ gehören zu den fünf Säulen des Islam."
   },
   "sourceAudit": {
    "quranReference": "2:285",
    "quranUrl": "https://quran.com/2/285",
-   "hadithUrl": "https://sunnah.com/muslim:8a",
+   "hadithUrl": "https://sunnah.com/bukhari:8",
    "sourceAnchorLessonId": "aqidah-iman-sechs-grundlagen",
    "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
    "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
-   "hasNewIndependentHadithVerification": false,
+   "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
   "hint": "Die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen.",
@@ -3546,7 +3546,7 @@ const additions={
     "lines": [
      "Heute untersuchen wir das Thema „Zakāh und Ḥaǧǧ als Säulen“.",
      "Der Qurʾān spricht in 2:285 darüber: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ Muslim, Nr. 8 · Ḥadīṯ Ǧibrīl, überliefert von ʿUmar ibn al-Ḫaṭṭāb nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
+     "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 8: Zakāh und Ḥaǧǧ gehören zu den fünf Säulen des Islam.",
      "Unser eigenes Beispiel: Die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen. Wir überlegen gemeinsam, warum es passt."
     ],
     "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
@@ -3556,10 +3556,10 @@ const additions={
     "lines": [
      "Ausgangssituation: Die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen.",
      "Qurʾān 2:285: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
-     "Sunnah (Ṣaḥīḥ Muslim, Nr. 8 · Ḥadīṯ Ǧibrīl, überliefert von ʿUmar ibn al-Ḫaṭṭāb): Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung. Dies ist eine deutsche Bedeutungswiedergabe.",
+     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 8): Zakāh und Ḥaǧǧ gehören zu den fünf Säulen des Islam. (sinngemäß)",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/2/285 und https://sunnah.com/muslim:8a. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Quellenprüfung: https://quran.com/2/285 und https://sunnah.com/bukhari:8. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
    }
   },
   "questions": {
@@ -3611,7 +3611,7 @@ const additions={
      "options": [
       "Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
       "Unser Übungsbeispiel ist: Die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen.",
-      "Die Hadith-Bedeutung lautet: Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung."
+      "Die Sunnah berichtet: Zakāh und Ḥaǧǧ gehören zu den fünf Säulen des Islam."
      ],
      "correct": 0,
      "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
@@ -3634,7 +3634,7 @@ const additions={
     {
      "type": "text",
      "prompt": "Was lehrt Qurʾān 2:285 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Die angegebene Sunnah lehrt sinngemäß: Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung.",
+     "sample": "Der Vers bedeutet sinngemäß: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Die angegebene Sunnah lehrt sinngemäß: Zakāh und Ḥaǧǧ gehören zu den fünf Säulen des Islam.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
