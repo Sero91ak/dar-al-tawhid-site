@@ -1,15 +1,12 @@
 {
   "project": "DĀR AL TAWḤĪD – Apple TV Startseite",
-  "schemaVersion": "1.3",
+  "schemaVersion": "1.2",
   "status": "active",
   "hold": {
     "unit": "seconds",
     "forbidMillisecondSkip": true,
     "neverUseMillisecondsForAdvance": true,
-    "appliesTo": [
-      "quranVerse",
-      "tadabbur"
-    ],
+    "appliesTo": ["quranVerse", "tadabbur"],
     "note": "Auf der Startseite bei Gebetszeiten: Vers und Tadabbur nicht im Millisekunden-Takt wechseln. Dieselbe Wort-Sekunden-Formel wie der Bildschirmschoner.",
     "duration": {
       "unit": "seconds",
@@ -24,11 +21,7 @@
   "view": "TVHomeView",
   "liveURL": "https://dar-al-tawhid.de/apple-tv/home/catalog.json",
   "rule": "Bei Gebetszeiten auf der Startseite: oben Gebetszeiten, darunter der aktuelle Qurʾān-Vers, darunter nur Tadabbur zu genau diesem Vers.",
-  "layout": [
-    "prayerTimes",
-    "quranVerse",
-    "tadabbur"
-  ],
+  "layout": ["prayerTimes", "quranVerse", "tadabbur"],
   "slots": {
     "prayerTimes": {
       "id": "prayerTimes",
@@ -44,20 +37,10 @@
       "source": "quran.reader",
       "arabicEdition": "quran-uthmani",
       "germanEdition": "de.bubenheim",
-      "fields": [
-        "arabic",
-        "german",
-        "reference"
-      ],
+      "fields": ["arabic", "german", "reference"],
       "holdUnit": "seconds",
       "forbidMillisecondSkip": true,
-      "note": "Arabisch und Deutsch NUR aus dem Qurʾān-Reader. Niemals tadabbur.text als Vers rendern. Nicht in Millisekunden weiterschalten.",
-      "dailyMode": {
-        "enabled": true,
-        "source": "dailyContent.verse",
-        "referenceMatchRequired": true,
-        "onlyWhenShowingDailyVerse": true
-      }
+      "note": "Arabisch und Deutsch NUR aus dem Qurʾān-Reader. Niemals tadabbur.text als Vers rendern. Nicht in Millisekunden weiterschalten."
     },
     "tadabbur": {
       "id": "tadabbur",
@@ -68,13 +51,7 @@
       "entriesIndexPath": "quran/tadabbur/entries-index.json",
       "lookup": "exact-surah-ayah",
       "referenceFormat": "Sūrah:Āyah",
-      "fields": [
-        "text",
-        "narrator",
-        "generation",
-        "source",
-        "grading"
-      ],
+      "fields": ["text", "narrator", "generation", "source", "grading"],
       "holdUnit": "seconds",
       "forbidMillisecondSkip": true,
       "fallback": "Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor.",
@@ -86,13 +63,7 @@
         "HadithScreensaverProvider",
         "sharhText",
         "sharh"
-      ],
-      "dailyMode": {
-        "enabled": true,
-        "lookupReference": "dailyContent.verse.tadabburReference",
-        "forbidUnrelatedEntries": true,
-        "onlyWhenShowingDailyVerse": true
-      }
+      ]
     }
   },
   "forbidden": {
@@ -108,40 +79,5 @@
     "doNotDelete": true,
     "keepHadithScreensaverProvider": true,
     "note": "HadithScreensaverProvider nur für den tvOS-Bildschirmschoner. Nicht löschen, nicht mit Tadabbur-Filter leeren. Niemals für den Tadabbur-Bereich der Startseite."
-  },
-  "dailyContent": {
-    "status": "canonical-remote",
-    "source": "/content/updates/daily.json",
-    "absoluteUrl": "https://dar-al-tawhid.de/content/updates/daily.json",
-    "timezone": "Europe/Berlin",
-    "refreshOn": [
-      "appStart",
-      "appForeground",
-      "calendarDayChange",
-      "reconnect"
-    ],
-    "maxAgeMinutes": 5,
-    "offlineRule": "show last verified date; never label stale content as today",
-    "dua": {
-      "idField": "dua.id",
-      "indexUrl": "https://dar-al-tawhid.de/content/duas/duas.json",
-      "mustMatchId": true,
-      "requireFields": [
-        "ar",
-        "de",
-        "src"
-      ],
-      "openMode": "exact-dua-id"
-    },
-    "verse": {
-      "referenceField": "verse.reference",
-      "arabicField": "verse.ar",
-      "germanField": "verse.de",
-      "mustMatchReaderSource": true,
-      "tadabburReferenceField": "verse.tadabburReference",
-      "tadabburLookup": "exact-reference-only",
-      "missingTadabbur": "fixed-existing-fallback"
-    },
-    "rule": "Daily cards only: same dated canonical record on Web, iOS, Android, Widgets and tvOS; never select own independent daily text. Continuous Quran playback and screensaver rotation remain separate."
   }
 }
