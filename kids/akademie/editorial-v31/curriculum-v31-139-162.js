@@ -525,7 +525,7 @@ const additions={
   },
   "hadith": {
    "source": "Ṣaḥīḥ al-Buḫārī, Nr. 46",
-   "text": "Der Prophet ﷺ nannte fünf tägliche Gebete; die einzelnen Gebetsnamen lernen wir mit einem geprüften Gebetsplan."
+   "text": "Der Prophet ﷺ lehrte, dass fünf tägliche Gebete vorgeschrieben sind."
   },
   "sourceAudit": {
    "quranReference": "20:14",
@@ -558,7 +558,7 @@ const additions={
     "lines": [
      "Heute untersuchen wir das Thema „Die Namen der fünf Gebete“.",
      "Der Qurʾān sagt in 20:14 sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Die Sunnah lehrt in Ṣaḥīḥ al-Buḫārī, Nr. 46 sinngemäß: Der Prophet ﷺ nannte fünf tägliche Gebete; die einzelnen Gebetsnamen lernen wir mit einem geprüften Gebetsplan.",
+     "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 46 sinngemäß: Der Prophet ﷺ lehrte, dass fünf tägliche Gebete vorgeschrieben sind.",
      "Unser eigenes Beispiel: Fajr, Ẓuhr, ʿAṣr, Maghrib und ʿIshāʾ zuordnen. Wir überlegen gemeinsam, warum es passt."
     ],
     "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
@@ -568,7 +568,7 @@ const additions={
     "lines": [
      "Ausgangssituation: Fajr, Ẓuhr, ʿAṣr, Maghrib und ʿIshāʾ zuordnen.",
      "Qurʾān 20:14: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 46), deutsche Bedeutungswiedergabe: Der Prophet ﷺ nannte fünf tägliche Gebete; die einzelnen Gebetsnamen lernen wir mit einem geprüften Gebetsplan.",
+     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 46): Der Prophet ﷺ lehrte, dass fünf tägliche Gebete vorgeschrieben sind.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
     "evidence": "Quellen: https://quran.com/20/14 und https://sunnah.com/bukhari:46. Die Alltagsübung ist kein wörtlicher Offenbarungstext."
@@ -623,7 +623,7 @@ const additions={
      "options": [
       "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
       "Unsere eigene Unterrichtsübung: Bei „Die Namen der fünf Gebete“ übe ich: fajr, Ẓuhr, ʿAṣr, Maghrib und ʿIshāʾ zuordnen.",
-      "Die Sunnah erläutert sinngemäß: Der Prophet ﷺ nannte fünf tägliche Gebete; die einzelnen Gebetsnamen lernen wir mit einem geprüften Gebetsplan."
+      "Die Sunnah berichtet: Der Prophet ﷺ lehrte, dass fünf tägliche Gebete vorgeschrieben sind."
      ],
      "correct": 0,
      "hint": "Vergleiche die Bedeutung von Qurʾān 20:14 mit unserem Alltagsbeispiel.",
@@ -646,7 +646,7 @@ const additions={
     {
      "type": "text",
      "prompt": "Was lehrt Qurʾān 20:14? Was berichtet Ṣaḥīḥ al-Buḫārī, Nr. 46?",
-     "sample": "Der Vers bedeutet: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die Sunnah berichtet sinngemäß: Der Prophet ﷺ nannte fünf tägliche Gebete; die einzelnen Gebetsnamen lernen wir mit einem geprüften Gebetsplan.",
+     "sample": "Der Vers bedeutet: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die Sunnah berichtet sinngemäß: Der Prophet ﷺ lehrte, dass fünf tägliche Gebete vorgeschrieben sind.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
