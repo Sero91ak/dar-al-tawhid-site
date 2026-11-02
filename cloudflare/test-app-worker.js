@@ -296,6 +296,7 @@ async function finalizeDarTestHomeV1193(asset) {
       '@import url("/test/assets/qibla-v1259.css?v=area-authority-v1300");' +
       '@import url("/test/assets/prayer-v1254.css?v=20261016-motifs-v5");' +
       '@import url("/test/assets/frauen/frauen-authority-v1292.css?v=frauen-rollback-20261016-1500");' +
+      '@import url("/assets/frauen/frauen-originalbilder-v1400.css?v=frauen-originalbilder-v1400");' +
       '@import url("/test/assets/library/library-app.css?v=library-base-v1293");' +
       '@import url("/test/assets/library/library-authority-v1293.css?v=library-authority-v1293");' +
       '@import url("/test/assets/area-shell-v1294.css?v=area-shell-v1314-settings-edge");' +
