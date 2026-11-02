@@ -521,6 +521,21 @@ function isDynamicGermanUi(value){
   /^.{1,80} · Āyah \d+(?: · zuletzt \d{1,2}\.\d{1,2}\., \d{1,2}:\d{2})?$/.test(value)||
   /^Lernen mit Wiedergabe: .{1,80} · Āyah \d+(?: · zuletzt \d{1,2}\.\d{1,2}\., \d{1,2}:\d{2})?$/.test(value)||
   /^z\. B\. [\d:]+$/.test(value)||
+  (value.length===5&&value.startsWith("jet")&&value.endsWith("zt"))||
+  /^in \d+ Min\.$/.test(value)||
+  /^in \d+ Std\.$/.test(value)||
+  /^in \d+ Std\. \d+ Min\.$/.test(value)||
+  /^in \d+:\d{2} Std\.$/.test(value)||
+  /^\d+ Std\. \d+ Min\.$/.test(value)||
+  /^\d+ Min\.$/.test(value)||
+  /^(?:Sehr gut|Sicher|Nur Orientierung|Abweichung) · Δ \d+°$/.test(value)||
+  /^\d+ Treffer für „[^“]{1,80}“$/.test(value)||
+  /^in \d+ Tagen$/.test(value)||
+  /^Sūrah \d+$/.test(value)||
+  /^Sūrah \d+ · \d+ Āyāt · (?:Mekkanisch|Medinensisch)$/.test(value)||
+  /^\d+ Āyāt$/.test(value)||
+  /^\d+\. Fundstelle$/.test(value)||
+  /^Qurʾān \d{1,3}:\d{1,3}(?: · [^<>]{1,80})?$/.test(value)||
   /^\d+ (?:Bücher|Gelehrte|Werke)$/.test(value)||
   /^\d+ Werke · Gesamtkatalog$/.test(value)||
   /^\d+ Beiträge, \d+ Duʿāʾ$/.test(value)||
@@ -2528,6 +2543,100 @@ function translateSharedPatterns(value,language){
    const forms={ar:"مثال: ",en:"e.g. ",tr:"ör. ",ku:"mînak ",ckb:"بۆ نموونە ",bs:"npr. ",fr:"p. ex. ",es:"p. ej. "};
    return forms[language]?forms[language]+forExample[1]:null;
   }
+  if(value.length===5&&value.startsWith("jet")&&value.endsWith("zt")){
+   const forms={ar:"الآن",en:"now",tr:"şimdi",ku:"niha",ckb:"ئێستا",bs:"sada",fr:"maintenant",es:"ahora"};
+   return forms[language]||null;
+  }
+  const inMin=value.match(/^in (\d+) Min\.$/);
+  if(inMin){
+   const n=inMin[1];
+   const forms={ar:"بعد "+n+" د",en:"in "+n+" min",tr:n+" dk içinde",ku:"di "+n+" deq de",ckb:"لە "+n+" خولەکدا",bs:"za "+n+" min",fr:"dans "+n+" min",es:"en "+n+" min"};
+   return forms[language]||null;
+  }
+  const inHour=value.match(/^in (\d+) Std\.$/);
+  if(inHour){
+   const n=inHour[1];
+   const forms={ar:"بعد "+n+" س",en:"in "+n+" h",tr:n+" sa içinde",ku:"di "+n+" saet de",ckb:"لە "+n+" کاتژمێردا",bs:"za "+n+" h",fr:"dans "+n+" h",es:"en "+n+" h"};
+   return forms[language]||null;
+  }
+  const inHourMin=value.match(/^in (\d+) Std\. (\d+) Min\.$/);
+  if(inHourMin){
+   const h=inHourMin[1],m=inHourMin[2];
+   const forms={ar:"بعد "+h+" س "+m+" د",en:"in "+h+" h "+m+" min",tr:h+" sa "+m+" dk içinde",ku:"di "+h+" saet û "+m+" deq de",ckb:"لە "+h+" کاتژمێر و "+m+" خولەکدا",bs:"za "+h+" h "+m+" min",fr:"dans "+h+" h "+m+" min",es:"en "+h+" h "+m+" min"};
+   return forms[language]||null;
+  }
+  const inNarrow=value.match(/^in (\d+):(\d{2}) Std\.$/);
+  if(inNarrow){
+   const hm=inNarrow[1]+":"+inNarrow[2];
+   const forms={ar:"بعد "+hm+" س",en:"in "+hm+" h",tr:hm+" sa içinde",ku:"di "+hm+" saet de",ckb:"لە "+hm+" کاتژمێردا",bs:"za "+hm+" h",fr:"dans "+hm+" h",es:"en "+hm+" h"};
+   return forms[language]||null;
+  }
+  const hourMin=value.match(/^(\d+) Std\. (\d+) Min\.$/);
+  if(hourMin){
+   const h=hourMin[1],m=hourMin[2];
+   const forms={ar:h+" س "+m+" د",en:h+" h "+m+" min",tr:h+" sa "+m+" dk",ku:h+" saet "+m+" deq",ckb:h+" کاتژمێر "+m+" خولەک",bs:h+" h "+m+" min",fr:h+" h "+m+" min",es:h+" h "+m+" min"};
+   return forms[language]||null;
+  }
+  const minDot=value.match(/^(\d+) Min\.$/);
+  if(minDot){
+   const n=minDot[1];
+   const forms={ar:n+" د",en:n+" min",tr:n+" dk",ku:n+" deq",ckb:n+" خولەک",bs:n+" min",fr:n+" min",es:n+" min"};
+   return forms[language]||null;
+  }
+  const qiblaDelta=value.match(/^(Sehr gut|Sicher|Nur Orientierung|Abweichung) · Δ (\d+)°$/);
+  if(qiblaDelta){
+   const head=lookupPack(qiblaDelta[1],language);
+   if(head)return head+" · Δ "+qiblaDelta[2]+"°";
+  }
+  const hitsFor=value.match(/^(\d+) Treffer für „([^“]{1,80})“$/);
+  if(hitsFor){
+   const n=hitsFor[1],q=hitsFor[2],word=lookupPack("Treffer",language);
+   if(word){
+    const forms={
+     ar:n+" "+word+" عن „"+q+"“",
+     en:n+" "+word+" for „"+q+"“",
+     tr:"„"+q+"“ için "+n+" "+word,
+     ku:n+" "+word+" ji bo „"+q+"“",
+     ckb:n+" "+word+" بۆ „"+q+"“",
+     bs:n+" "+word+" za „"+q+"“",
+     fr:n+" "+word+" pour „"+q+"“",
+     es:n+" "+word+" para „"+q+"“"
+    };
+    if(forms[language])return forms[language];
+   }
+  }
+  const inDays=value.match(/^in (\d+) Tagen$/);
+  if(inDays){
+   const n=inDays[1];
+   const forms={ar:"بعد "+n+" أيام",en:"in "+n+" days",tr:n+" gün içinde",ku:"di "+n+" rojan de",ckb:"لە "+n+" ڕۆژدا",bs:"za "+n+" dana",fr:"dans "+n+" jours",es:"en "+n+" días"};
+   return forms[language]||null;
+  }
+  const surahNum=value.match(/^Sūrah (\d+)$/);
+  if(surahNum){
+   const word=lookupPack("Sūrah",language);
+   if(word)return word+" "+surahNum[1];
+  }
+  const surahHit=value.match(/^Sūrah (\d+) · (\d+) Āyāt · (Mekkanisch|Medinensisch)$/);
+  if(surahHit){
+   const word=lookupPack("Sūrah",language);
+   const tail=translateSharedPatterns(surahHit[2]+" Āyāt · "+surahHit[3],language);
+   if(word&&tail)return word+" "+surahHit[1]+" · "+tail;
+  }
+  const ayatCount=value.match(/^(\d+) Āyāt$/);
+  if(ayatCount){
+   const word=uiWord(language,"Āyāt");
+   if(word)return ayatCount[1]+" "+word;
+  }
+  const numberedPlace=value.match(/^(\d+)\. Fundstelle$/);
+  if(numberedPlace){
+   const word=lookupPack("Fundstelle",language);
+   if(word)return numberedPlace[1]+". "+word;
+  }
+  const quranRef=value.match(/^Qurʾān (\d{1,3}:\d{1,3})(?: · ([^<>]{1,80}))?$/);
+  if(quranRef){
+   const word=lookupPack("Qurʾān",language);
+   if(word)return word+" "+quranRef[1]+(quranRef[2]?" · "+quranRef[2]:"");
+  }
   const emojiLabel=value.match(/^(\p{Extended_Pictographic}\uFE0F?)\s+(.+)$/u);
   if(emojiLabel){
    const inner=lookupPack(emojiLabel[2],language);
@@ -2911,7 +3020,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-46";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-47";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
