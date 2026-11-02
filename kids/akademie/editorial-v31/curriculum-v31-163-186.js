@@ -26,20 +26,20 @@ const additions={
    "excerpt": true
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5376; Ṣaḥīḥ Muslim, Nr. 2022",
-   "text": "Der Prophet ﷺ lehrte den jungen ʿUmar ibn Abī Salamah: Nenne Allahs Namen, iss mit deiner rechten Hand und iss von dem, was vor dir liegt."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5458",
+   "text": "Nach dem Essen lobpries der Prophet ﷺ Allah."
   },
   "sourceAudit": {
    "quranReference": "7:31",
    "quranUrl": "https://quran.com/7/31",
-   "hadithUrl": "https://sunnah.com/bukhari:5376",
+   "hadithUrl": "https://sunnah.com/bukhari:5458",
    "sourceAnchorLessonId": "adab-essen-bismillah",
    "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
    "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
-   "hasNewIndependentHadithVerification": false,
+   "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
   "hint": "Eine authentisch belegte Dankformel erst nach Quellenprüfung lernen.",
@@ -60,7 +60,7 @@ const additions={
     "lines": [
      "Heute untersuchen wir das Thema „Nach dem Essen dankbar sein“.",
      "Der Qurʾān spricht in 7:31 darüber: Esst und trinkt, aber seid nicht maßlos.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 5376; Ṣaḥīḥ Muslim, Nr. 2022 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
+     "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 5458 sinngemäß: Nach dem Essen lobpries der Prophet ﷺ Allah.",
      "Unser eigenes Beispiel: Eine authentisch belegte Dankformel erst nach Quellenprüfung lernen. Wir überlegen gemeinsam, warum es passt."
     ],
     "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
@@ -70,10 +70,10 @@ const additions={
     "lines": [
      "Ausgangssituation: Eine authentisch belegte Dankformel erst nach Quellenprüfung lernen.",
      "Qurʾān 7:31: Esst und trinkt, aber seid nicht maßlos.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 5376; Ṣaḥīḥ Muslim, Nr. 2022): Der Prophet ﷺ lehrte den jungen ʿUmar ibn Abī Salamah: Nenne Allahs Namen, iss mit deiner rechten Hand und iss von dem, was vor dir liegt. Dies ist eine deutsche Bedeutungswiedergabe.",
+     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 5458): Nach dem Essen lobpries der Prophet ﷺ Allah.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/7/31 und https://sunnah.com/bukhari:5376. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Quellenprüfung: https://quran.com/7/31 und https://sunnah.com/bukhari:5458. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
    }
   },
   "questions": {
@@ -125,7 +125,7 @@ const additions={
      "options": [
       "Esst und trinkt, aber seid nicht maßlos.",
       "Unser Übungsbeispiel ist: Eine authentisch belegte Dankformel erst nach Quellenprüfung lernen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte den jungen ʿUmar ibn Abī Salamah: Nenne Allahs Namen, iss mit deiner rechten Hand und iss von dem, was vor dir liegt."
+      "Die Sunnah berichtet: Nach dem Essen lobpries der Prophet ﷺ Allah."
      ],
      "correct": 0,
      "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
@@ -148,7 +148,7 @@ const additions={
     {
      "type": "text",
      "prompt": "Was lehrt Qurʾān 7:31 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Esst und trinkt, aber seid nicht maßlos. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte den jungen ʿUmar ibn Abī Salamah: Nenne Allahs Namen, iss mit deiner rechten Hand und iss von dem, was vor dir liegt.",
+     "sample": "Der Vers bedeutet sinngemäß: Esst und trinkt, aber seid nicht maßlos. Die angegebene Sunnah lehrt sinngemäß: Nach dem Essen lobpries der Prophet ﷺ Allah.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
@@ -524,20 +524,20 @@ const additions={
    "excerpt": false
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 631",
-   "text": "Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 789",
+   "text": "Der Prophet ﷺ begann das Gebet mit dem Takbīr."
   },
   "sourceAudit": {
    "quranReference": "20:14",
    "quranUrl": "https://quran.com/20/14",
-   "hadithUrl": "https://sunnah.com/bukhari:631",
+   "hadithUrl": "https://sunnah.com/bukhari:789",
    "sourceAnchorLessonId": "fiqh-salah",
    "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
-   "hasNewIndependentHadithVerification": false,
+   "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
   "hint": "Mit ruhiger Körperhaltung zum Gebet bereitstehen.",
@@ -558,7 +558,7 @@ const additions={
     "lines": [
      "Heute untersuchen wir das Thema „Zum Gebet stehen“.",
      "Der Qurʾān spricht in 20:14 darüber: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 631 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
+     "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 789 sinngemäß: Der Prophet ﷺ begann das Gebet mit dem Takbīr.",
      "Unser eigenes Beispiel: Mit ruhiger Körperhaltung zum Gebet bereitstehen. Wir überlegen gemeinsam, warum es passt."
     ],
     "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
@@ -568,10 +568,10 @@ const additions={
     "lines": [
      "Ausgangssituation: Mit ruhiger Körperhaltung zum Gebet bereitstehen.",
      "Qurʾān 20:14: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 631): Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat. Dies ist eine deutsche Bedeutungswiedergabe.",
+     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 789): Der Prophet ﷺ begann das Gebet mit dem Takbīr.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/20/14 und https://sunnah.com/bukhari:631. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Quellenprüfung: https://quran.com/20/14 und https://sunnah.com/bukhari:789. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
    }
   },
   "questions": {
@@ -623,7 +623,7 @@ const additions={
      "options": [
       "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
       "Unser Übungsbeispiel ist: Mit ruhiger Körperhaltung zum Gebet bereitstehen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+      "Die Sunnah berichtet: Der Prophet ﷺ begann das Gebet mit dem Takbīr."
      ],
      "correct": 0,
      "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
@@ -646,7 +646,7 @@ const additions={
     {
      "type": "text",
      "prompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
+     "sample": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ begann das Gebet mit dem Takbīr.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
@@ -1852,20 +1852,20 @@ const additions={
    "excerpt": false
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 631",
-   "text": "Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 789",
+   "text": "Der Prophet ﷺ eröffnete das Gebet mit dem Takbīr."
   },
   "sourceAudit": {
    "quranReference": "20:14",
    "quranUrl": "https://quran.com/20/14",
-   "hadithUrl": "https://sunnah.com/bukhari:631",
+   "hadithUrl": "https://sunnah.com/bukhari:789",
    "sourceAnchorLessonId": "fiqh-salah",
    "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
-   "hasNewIndependentHadithVerification": false,
+   "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
   "hint": "Den Beginn des Gebets aufmerksam beobachten.",
@@ -1886,7 +1886,7 @@ const additions={
     "lines": [
      "Heute untersuchen wir das Thema „Takbīrat al-Iḥrām kennenlernen“.",
      "Der Qurʾān spricht in 20:14 darüber: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 631 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
+     "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 789 sinngemäß: Der Prophet ﷺ eröffnete das Gebet mit dem Takbīr.",
      "Unser eigenes Beispiel: Den Beginn des Gebets aufmerksam beobachten. Wir überlegen gemeinsam, warum es passt."
     ],
     "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
@@ -1896,10 +1896,10 @@ const additions={
     "lines": [
      "Ausgangssituation: Den Beginn des Gebets aufmerksam beobachten.",
      "Qurʾān 20:14: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 631): Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat. Dies ist eine deutsche Bedeutungswiedergabe.",
+     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 789): Der Prophet ﷺ eröffnete das Gebet mit dem Takbīr.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/20/14 und https://sunnah.com/bukhari:631. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Quellenprüfung: https://quran.com/20/14 und https://sunnah.com/bukhari:789. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
    }
   },
   "questions": {
@@ -1951,7 +1951,7 @@ const additions={
      "options": [
       "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
       "Unser Übungsbeispiel ist: Den Beginn des Gebets aufmerksam beobachten.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+      "Die Sunnah berichtet: Der Prophet ﷺ eröffnete das Gebet mit dem Takbīr."
      ],
      "correct": 0,
      "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
@@ -1974,7 +1974,7 @@ const additions={
     {
      "type": "text",
      "prompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
+     "sample": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ eröffnete das Gebet mit dem Takbīr.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
@@ -2848,20 +2848,20 @@ const additions={
    "excerpt": false
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 4474 · Abū Saʿīd ibn al-Muʿallā",
-   "text": "Der Prophet ﷺ erklärte, dass Sūrat al-Fātiḥah eine besonders bedeutende Sūrah des Qurʾān ist."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 756",
+   "text": "Der Prophet ﷺ lehrte den Stellenwert der Rezitation von al-Fātiḥah im Gebet."
   },
   "sourceAudit": {
    "quranReference": "1:2",
    "quranUrl": "https://quran.com/1/2",
-   "hadithUrl": "https://sunnah.com/bukhari:4474",
+   "hadithUrl": "https://sunnah.com/bukhari:756",
    "sourceAnchorLessonId": "quran-al-fatihah-kennenlernen",
    "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
-   "hasNewIndependentHadithVerification": false,
+   "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
   "hint": "Al-Fātiḥah behutsam und korrekt lernen.",
@@ -2882,7 +2882,7 @@ const additions={
     "lines": [
      "Heute untersuchen wir das Thema „Die Qurʾān-Rezitation im Gebet“.",
      "Der Qurʾān spricht in 1:2 darüber: Alles Lob gebührt Allah, dem Herrn der Welten.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 4474 · Abū Saʿīd ibn al-Muʿallā nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
+     "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 756 sinngemäß: Der Prophet ﷺ lehrte den Stellenwert der Rezitation von al-Fātiḥah im Gebet.",
      "Unser eigenes Beispiel: Al-Fātiḥah behutsam und korrekt lernen. Wir überlegen gemeinsam, warum es passt."
     ],
     "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
@@ -2892,10 +2892,10 @@ const additions={
     "lines": [
      "Ausgangssituation: Al-Fātiḥah behutsam und korrekt lernen.",
      "Qurʾān 1:2: Alles Lob gebührt Allah, dem Herrn der Welten.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 4474 · Abū Saʿīd ibn al-Muʿallā): Der Prophet ﷺ erklärte, dass Sūrat al-Fātiḥah eine besonders bedeutende Sūrah des Qurʾān ist. Dies ist eine deutsche Bedeutungswiedergabe.",
+     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 756): Der Prophet ﷺ lehrte den Stellenwert der Rezitation von al-Fātiḥah im Gebet.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/1/2 und https://sunnah.com/bukhari:4474. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Quellenprüfung: https://quran.com/1/2 und https://sunnah.com/bukhari:756. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
    }
   },
   "questions": {
@@ -2947,7 +2947,7 @@ const additions={
      "options": [
       "Alles Lob gebührt Allah, dem Herrn der Welten.",
       "Unser Übungsbeispiel ist: Al-Fātiḥah behutsam und korrekt lernen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ erklärte, dass Sūrat al-Fātiḥah eine besonders bedeutende Sūrah des Qurʾān ist."
+      "Die Sunnah berichtet: Der Prophet ﷺ lehrte den Stellenwert der Rezitation von al-Fātiḥah im Gebet."
      ],
      "correct": 0,
      "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
@@ -2970,7 +2970,7 @@ const additions={
     {
      "type": "text",
      "prompt": "Was lehrt Qurʾān 1:2 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Alles Lob gebührt Allah, dem Herrn der Welten. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass Sūrat al-Fātiḥah eine besonders bedeutende Sūrah des Qurʾān ist.",
+     "sample": "Der Vers bedeutet sinngemäß: Alles Lob gebührt Allah, dem Herrn der Welten. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte den Stellenwert der Rezitation von al-Fātiḥah im Gebet.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
@@ -3844,20 +3844,20 @@ const additions={
    "excerpt": false
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 631",
-   "text": "Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 789",
+   "text": "Beim Übergang zum Rukūʿ sprach der Prophet ﷺ den Takbīr."
   },
   "sourceAudit": {
    "quranReference": "20:14",
    "quranUrl": "https://quran.com/20/14",
-   "hadithUrl": "https://sunnah.com/bukhari:631",
+   "hadithUrl": "https://sunnah.com/bukhari:789",
    "sourceAnchorLessonId": "fiqh-salah",
    "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
-   "hasNewIndependentHadithVerification": false,
+   "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
   "hint": "Die Verbeugung unter Anleitung üben.",
@@ -3878,7 +3878,7 @@ const additions={
     "lines": [
      "Heute untersuchen wir das Thema „Rukūʿ kennenlernen“.",
      "Der Qurʾān spricht in 20:14 darüber: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 631 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
+     "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 789 sinngemäß: Beim Übergang zum Rukūʿ sprach der Prophet ﷺ den Takbīr.",
      "Unser eigenes Beispiel: Die Verbeugung unter Anleitung üben. Wir überlegen gemeinsam, warum es passt."
     ],
     "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
@@ -3888,10 +3888,10 @@ const additions={
     "lines": [
      "Ausgangssituation: Die Verbeugung unter Anleitung üben.",
      "Qurʾān 20:14: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 631): Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat. Dies ist eine deutsche Bedeutungswiedergabe.",
+     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 789): Beim Übergang zum Rukūʿ sprach der Prophet ﷺ den Takbīr.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/20/14 und https://sunnah.com/bukhari:631. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Quellenprüfung: https://quran.com/20/14 und https://sunnah.com/bukhari:789. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
    }
   },
   "questions": {
@@ -3943,7 +3943,7 @@ const additions={
      "options": [
       "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
       "Unser Übungsbeispiel ist: Die Verbeugung unter Anleitung üben.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+      "Die Sunnah berichtet: Beim Übergang zum Rukūʿ sprach der Prophet ﷺ den Takbīr."
      ],
      "correct": 0,
      "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
@@ -3966,7 +3966,7 @@ const additions={
     {
      "type": "text",
      "prompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
+     "sample": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Beim Übergang zum Rukūʿ sprach der Prophet ﷺ den Takbīr.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
