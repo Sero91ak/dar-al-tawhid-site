@@ -1,0 +1,44 @@
+/* Men-only knowledge discovery. Scoped to its standalone view. */
+body.dar-men-discovery-active #appView > :not(#darMenDiscoveryV1){display:none!important}
+#darMenDiscoveryV1{display:block;max-width:100%;min-width:0;box-sizing:border-box;padding:clamp(14px,3.2vw,30px) max(12px,env(safe-area-inset-left),env(safe-area-inset-right)) calc(110px + env(safe-area-inset-bottom));color:var(--text,#24362f);overflow-wrap:anywhere;animation:dmdIn .25s ease-out}
+#darMenDiscoveryV1 *{box-sizing:border-box;min-width:0}
+#darMenDiscoveryV1 .dmd-container{width:min(100%,1050px);margin-inline:auto;display:grid;gap:clamp(18px,3vw,28px)}
+#darMenDiscoveryV1 .dmd-head{padding:18px 2px 5px}
+#darMenDiscoveryV1 .dmd-overline{display:block;font-size:11px;letter-spacing:.17em;font-weight:750;color:var(--gold2,#a38c61);margin-bottom:12px}
+#darMenDiscoveryV1 h1,#darMenDiscoveryV1 h2{font-family:Georgia,serif;line-height:1.2;letter-spacing:-.02em;overflow-wrap:break-word}
+#darMenDiscoveryV1 h1{font-size:clamp(28px,5vw,44px);margin:0 0 9px}
+#darMenDiscoveryV1 h2{font-size:clamp(23px,3.5vw,31px);margin:0 0 16px}
+#darMenDiscoveryV1 h3{font-size:17px;margin:24px 0 10px}
+#darMenDiscoveryV1 p{font-size:clamp(15px,1.65vw,17px);line-height:1.65;margin:0;color:var(--muted,#69736b)}
+#darMenDiscoveryV1 .dmd-today,#darMenDiscoveryV1 .dmd-detail{border:1px solid color-mix(in srgb,var(--gold2,#b59b70) 32%,transparent);border-radius:24px;padding:clamp(16px,3vw,26px);background:color-mix(in srgb,var(--gold2,#b49b74) 4%,var(--surface,#fffefb))}
+#darMenDiscoveryV1 .dmd-sectionhead{display:flex;justify-content:space-between;gap:9px;align-items:center;margin-bottom:14px;font-size:12px;letter-spacing:.06em;font-weight:750;color:var(--gold2,#9d855e)}
+#darMenDiscoveryV1 .dmd-sectionhead small{font-size:11px;font-weight:500;letter-spacing:0}
+#darMenDiscoveryV1 .dmd-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#darMenDiscoveryV1 .dmd-topic{width:100%;display:grid;grid-template-columns:38px minmax(0,1fr) 12px;align-items:start;gap:12px;text-align:start;padding:18px 14px;border:1px solid color-mix(in srgb,var(--gold2,#b69e7a) 26%,transparent);border-radius:18px;background:var(--surface,#fffdfa);color:var(--text,#24362f);min-height:132px;cursor:pointer;transition:transform .2s,background .2s,border-color .2s}
+#darMenDiscoveryV1 .dmd-featured{border-color:color-mix(in srgb,var(--gold2,#b69e7a) 42%,transparent);background:color-mix(in srgb,var(--gold2,#b69e7a) 8%,var(--surface,#fffdfa));min-height:155px}
+#darMenDiscoveryV1 .dmd-topic:hover{border-color:var(--gold2,#b49b74);transform:translateY(-2px)}
+#darMenDiscoveryV1 .dmd-symbol{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:color-mix(in srgb,var(--gold2,#b49b74) 13%,transparent);color:var(--gold2,#a18863);font-size:23px}
+#darMenDiscoveryV1 .dmd-topic-copy{display:grid;gap:7px}
+#darMenDiscoveryV1 .dmd-topic-copy strong{font:700 clamp(17px,2vw,21px)/1.26 Georgia,serif}
+#darMenDiscoveryV1 .dmd-topic-copy>span{font-size:13px;line-height:1.5;color:var(--muted,#69736b)}
+#darMenDiscoveryV1 .dmd-content-indicator{font-size:11px;color:var(--gold2,#9d855e)}
+#darMenDiscoveryV1 .dmd-chevron{font-size:23px;color:var(--gold2,#9d855e)}
+#darMenDiscoveryV1 .dmd-back{border:0;background:transparent;color:var(--gold2,#9d855e);font-size:15px;font-weight:700;padding:10px 4px;text-align:start;justify-self:start;cursor:pointer}
+#darMenDiscoveryV1 .dmd-detail>p{margin:0 0 20px}
+#darMenDiscoveryV1 .dmd-question{display:grid;gap:5px;border-inline-start:3px solid var(--gold2,#af9470);padding:14px;background:color-mix(in srgb,var(--gold2,#b49b74) 7%,transparent);border-radius:4px 12px 12px 4px}
+#darMenDiscoveryV1 .dmd-question small{font-size:12px;color:var(--muted,#69736b)}
+#darMenDiscoveryV1 .dmd-question strong{font-size:16px}
+#darMenDiscoveryV1 .dmd-path{display:grid;gap:12px;margin:0;padding-inline-start:24px;font-size:15px;line-height:1.6}
+#darMenDiscoveryV1 .dmd-related{display:grid;gap:12px}
+#darMenDiscoveryV1 .dmd-sourcecard{display:grid;gap:9px;border:1px solid color-mix(in srgb,var(--gold2,#b49b74) 22%,transparent);border-radius:15px;background:var(--surface,#fffdfa);padding:16px}
+#darMenDiscoveryV1 .dmd-sourcecard>small{font-size:11px;color:var(--muted,#69736b)}
+#darMenDiscoveryV1 .dmd-sourcecard>strong{font-size:16px;line-height:1.45}
+#darMenDiscoveryV1 .dmd-actions{display:flex;flex-wrap:wrap;gap:10px}
+#darMenDiscoveryV1 .dmd-actions button,#darMenDiscoveryV1 .dmd-actions a{font:700 13px/1.4 inherit;color:var(--gold2,#9d855e);padding:9px 12px;border:1px solid color-mix(in srgb,var(--gold2,#b49b74) 32%,transparent);background:transparent;border-radius:9px;text-decoration:none;cursor:pointer}
+#darMenDiscoveryV1 button:focus-visible,#darMenDiscoveryV1 a:focus-visible{outline:3px solid var(--gold2,#b49b74);outline-offset:3px}
+#darMenDiscoveryV1 .dmd-empty{padding:12px 0}
+#darMenDiscoveryV1 .dmd-foot{font-size:12px;text-align:center;padding-top:6px}
+@media(max-width:680px){#darMenDiscoveryV1 .dmd-grid{grid-template-columns:minmax(0,1fr)}#darMenDiscoveryV1 .dmd-topic{min-height:0;padding:14px 12px}#darMenDiscoveryV1 .dmd-sectionhead{flex-wrap:wrap}#darMenDiscoveryV1 .dmd-head{padding-top:6px}}
+@media(min-width:850px){#darMenDiscoveryV1 .dmd-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#darMenDiscoveryV1 .dmd-container{padding-inline:10px}}
+@media(prefers-reduced-motion:reduce){#darMenDiscoveryV1{animation:none}#darMenDiscoveryV1 .dmd-topic{transition:none}#darMenDiscoveryV1 .dmd-topic:hover{transform:none}}
+@keyframes dmdIn{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:none}}
