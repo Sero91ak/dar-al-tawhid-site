@@ -155,6 +155,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "frauen-originalbilder-responsive-global-20261102",
+      "at": "2026-11-02T21:25:00+01:00",
+      "approvedBy": "user-explicit-20261102-frauen-images-global-push-preserve-architecture",
+      "reason": "Owner-provided nine historical women-themed images in the existing women section only, separate scoped style, static images, preserve pinned women renderer, visitor app/test/desktop link references and Cloudflare canonical production worker. No navigation, Kids, push system, sources, prayer, app shells, binaries or unrelated UI changes.",
+      "paths": [
+        "assets/frauen/library-v1400/",
+        "assets/frauen/frauen-originalbilder-v1400.css",
+        "desktop-preview/index.html",
+        "cloudflare/site-router.js",
+        "cloudflare/test-app-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-16T23:59:00.000Z"
+    },
+    {
       "id": "tvos-canonical-daily-remote-catalog-20261102",
       "at": "2026-11-02T12:15:00+01:00",
       "approvedBy": "user-explicit-20261102-same-daily-dua-verse-on-apple-tv",
