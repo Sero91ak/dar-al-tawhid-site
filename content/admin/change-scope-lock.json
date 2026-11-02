@@ -155,6 +155,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "men-discovery-daily-scoped-20261102",
+      "at": "2026-11-02T11:10:00+01:00",
+      "approvedBy": "user-explicit-20261102-men-discover-exclusively-daily-dynamic-no-notes",
+      "reason": "User explicitly requests ONLY men's Discover tab to become independent intelligent daily topic compass using already published verified post metadata. No private notes, account dashboard, female or neutral profile, Kids, push, release binaries, calendar or prayer logic. New scoped asset and narrow loader only. Cache-bust only the existing adult visitor daily-hub script URL in cloudflare/site-router.js for the cross-platform app release.",
+      "paths": [
+        "assets/dar-men-discovery-v1.js",
+        "assets/dar-men-discovery-v1.css",
+        "assets/dar-visitor-daily-hub-v1.js",
+        "content/admin/change-scope-lock.json",
+        "cloudflare/site-router.js"
+      ],
+      "expiresAt": "2026-11-16T23:59:00.000Z"
+    },
+    {
       "id": "desktop-premium-browser-release-fix-20261101",
       "at": "2026-11-01T15:11:00+01:00",
       "approvedBy": "user-explicit-20261101-correct-all-pages-and-push-live",
