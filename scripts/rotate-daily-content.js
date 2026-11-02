@@ -158,6 +158,37 @@ function pickWithoutRepeat(items, keyFn, state = {}, fallbackLast = "", seed = "
   };
 }
 
+/* Same exact verse key on Web, native iOS/Android, Widgets and tvOS.
+   Arabic/German are read from the existing approved Qurʾān corpus, never composed. */
+function dailyVerse(date, duaPool, selectedDua) {
+  const refs = unique((duaPool || []).filter(item => /Qur/i.test(String(item.type||"")))
+    .map(item => {
+      const m=String(item.src||"").match(/\b(\d{1,3}):(\d{1,3})\b/);
+      return m ? { surah:Number(m[1]), ayah:Number(m[2]) } : null;
+    }).filter(Boolean),item => item.surah+":"+item.ayah);
+  const preferred = selectedDua && /Qur/i.test(String(selectedDua.type||""))
+    ? String(selectedDua.src||"").match(/\b(\d{1,3}):(\d{1,3})\b/) : null;
+  const chosen=preferred?{surah:Number(preferred[1]),ayah:Number(preferred[2])}
+    :refs[hashIndex(date+"|quran-daily-verse",refs.length)];
+  if(!chosen)throw new Error("Kein geprüfter Qurʾān-Vers für Tagesauswahl");
+  const source="/content/quran/"+String(chosen.surah).padStart(3,"0")+".json";
+  const doc=readJson(path.join(ROOT,source.slice(1)),null);
+  const verse=Array.isArray(doc?.verses)?doc.verses.find(row=>Number(row.id)===chosen.ayah):null;
+  if(!verse?.ar||!verse?.de||Number(doc.id)!==chosen.surah)throw new Error("Kanonischer Tagesvers nicht verfügbar: "+chosen.surah+":"+chosen.ayah);
+  return {
+    reference:chosen.surah+":"+chosen.ayah,
+    surah:chosen.surah,
+    ayah:chosen.ayah,
+    ar:verse.ar,
+    de:verse.de,
+    transliteration:verse.tr_academic||verse.tr||"",
+    arabicEdition:"content/quran/"+String(chosen.surah).padStart(3,"0")+".json",
+    germanEdition:"content/quran/"+String(chosen.surah).padStart(3,"0")+".json",
+    tadabburReference:chosen.surah+":"+chosen.ayah,
+    tadabburCatalog:"/apple-tv/quran/tadabbur/catalog.json"
+  };
+}
+
 function run() {
   const now = new Date();
   const date = dayKey(now);
@@ -186,6 +217,7 @@ function run() {
     });
     writeJson(DAILY_FILE, {
       ...previous,
+      verse: previous.verse && previous.verse.reference ? previous.verse : dailyVerse(date, duaSources.items, duaSources.items.find(item => item.id === previous.dua.id)),
       rotation: {
         recommendation: { cycle: recommendation.cycle, poolSize: recommendation.poolSize, remaining: recommendation.remaining },
         dua: { cycle: dua.cycle, poolSize: dua.poolSize, remaining: dua.remaining, sources: sourceStats }
@@ -222,6 +254,7 @@ function run() {
     source: "dar-daily-no-repeat-rotation",
     recommendation,
     dua,
+    verse: dailyVerse(date, duaSources.items, selected),
     rotation: {
       recommendation: postPick.state ? { cycle: postPick.state.cycle, poolSize: postPick.state.poolSize, remaining: postPick.state.remaining } : null,
       dua: duaPick.state ? { cycle: duaPick.state.cycle, poolSize: duaPick.state.poolSize, remaining: duaPick.state.remaining, sources: sourceStats } : null
