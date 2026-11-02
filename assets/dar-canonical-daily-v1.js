@@ -57,7 +57,7 @@ e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
 update(false).then(function(result){if(result?.dua?.id)navigateDua(result.dua.id)});
 }
 function onDayChange(){if(state.date!==berlinDate())update(true);else render()}
-function init(){d.addEventListener("click",click,true);d.addEventListener("dar:view-rendered",render);d.addEventListener("dar-adult-locale-changed",render);
+function init(){w.addEventListener("click",click,true);d.addEventListener("dar:view-rendered",render);d.addEventListener("dar-adult-locale-changed",render);
 d.addEventListener("visibilitychange",function(){if(!d.hidden)update(true)});
 w.addEventListener("pageshow",function(){update(true)});
 w.setInterval(function(){if(!d.hidden)onDayChange()},60000);
