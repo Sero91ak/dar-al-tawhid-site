@@ -1,0 +1,253 @@
+/* DAR_FRAUEN_CAPSULE_RESTORE_V1402
+ * Only Frauen hub and group cards. Replaces incorrect v1401 experiment.
+ * Existing imagery, DOM, navigation, reader, data and source links untouched.
+ * User requirements: original generous height; ALWAYS one column; NO text on imagery;
+ * original photographs softly embedded in the right-hand part, never a hard cut.
+ */
+
+/* One wide capsule per row at every breakpoint — including foldable panes. */
+html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-view="group"])
+ :is(.frauen-library-grid,.frauen-library-area-grid){
+  width:min(960px,100%)!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:14px!important;
+  margin-inline:auto!important;
+  padding:0 2px!important;
+}
+
+/* Restore the earlier, generously sized silhouette. Cards can GROW for long text. */
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-card.has-visual,.frauen-library-area-card.has-visual){
+  box-sizing:border-box!important;
+  position:relative!important;
+  isolation:isolate!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:stretch!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  margin:0!important;
+  overflow:hidden!important;
+  border:1px solid color-mix(in srgb,var(--gold2,#c4a76d) 20%,transparent)!important;
+  border-radius:25px!important;
+  background-color:var(--card,var(--bg))!important;
+  background-repeat:no-repeat!important;
+  background-size:auto 100%!important;
+  background-position:right center!important;
+  box-shadow:0 9px 28px rgba(4,16,15,.085)!important;
+  transform:none!important;
+  transition:box-shadow .2s ease,border-color .2s ease!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual{
+  min-height:205px!important;
+  padding:20px 46px 20px 20px!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual{
+  min-height:174px!important;
+  padding:18px 46px 18px 20px!important;
+  border-radius:23px!important;
+}
+
+/* Important: the real image stays as the element background. The opaque left
+ * wash completely covers its left edge; a LONG fade REVEALS the right photograph.
+ * The blend begins only AFTER the protected typography zone ends. */
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-card.has-visual,.frauen-library-area-card.has-visual)::before{
+  display:none!important;
+}
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-card.has-visual,.frauen-library-area-card.has-visual)::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  background:linear-gradient(90deg,
+    var(--card,var(--bg)) 0%,
+    var(--card,var(--bg)) 60%,
+    color-mix(in srgb,var(--card,var(--bg)) 99%,transparent) 65%,
+    color-mix(in srgb,var(--card,var(--bg)) 94%,transparent) 69%,
+    color-mix(in srgb,var(--card,var(--bg)) 78%,transparent) 75%,
+    color-mix(in srgb,var(--card,var(--bg)) 49%,transparent) 84%,
+    color-mix(in srgb,var(--card,var(--bg)) 15%,transparent) 95%,
+    transparent 100%)!important;
+}
+
+/* Physical text boundary: at most 66% of the INNER content width.
+ * This is narrower than the opaque wash, so headings, paragraphs and counters
+ * cannot enter the photograph even when titles wrap or Dynamic Type grows. */
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-card.has-visual .frauen-library-card__copy,
+     .frauen-library-area-card.has-visual .frauen-library-area-card__copy){
+  position:relative!important;
+  z-index:2!important;
+  display:block!important;
+  width:66%!important;
+  max-width:66%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  text-align:left!important;
+  overflow:visible!important;
+}
+
+/* No clamped text; the capsule grows rather than pushing into the image. */
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__kicker{
+  min-height:0!important;
+  margin:0 0 6px!important;
+  padding:0!important;
+  font-size:9.5px!important;
+  line-height:1.23!important;
+  letter-spacing:.11em!important;
+}
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-card.has-visual .frauen-library-card__copy h3,
+     .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3){
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  overflow-wrap:break-word!important;
+  word-break:normal!important;
+  hyphens:auto!important;
+  -webkit-line-clamp:unset!important;
+  font-size:22px!important;
+  line-height:1.14!important;
+  letter-spacing:-.015em!important;
+}
+html[data-theme] body.is-frauen-route #appView
+ .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{
+  font-size:20px!important;
+}
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-card.has-visual .frauen-library-card__desc,
+     .frauen-library-area-card.has-visual .frauen-library-area-card__copy > p){
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:8px 0 0!important;
+  padding:0!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  overflow-wrap:anywhere!important;
+  word-break:normal!important;
+  -webkit-line-clamp:unset!important;
+  font-size:12.8px!important;
+  line-height:1.45!important;
+}
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-card.has-visual .frauen-library-card__meta,
+     .frauen-library-area-card.has-visual .frauen-library-area-card__meta){
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:9px 0 0!important;
+  font-size:10.8px!important;
+  line-height:1.3!important;
+  overflow:visible!important;
+  white-space:normal!important;
+  word-break:normal!important;
+}
+
+/* Actions remain on the image, outside the protected reading surface. */
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-card.has-visual .frauen-library-card__nr,
+     .frauen-library-area-card.has-visual .frauen-library-area-card__nr){
+  z-index:3!important;
+  top:14px!important;
+  right:14px!important;
+  min-width:28px!important;
+  height:22px!important;
+  font-size:8.5px!important;
+  opacity:1!important;
+}
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-card.has-visual .frauen-library-card__arrow,
+     .frauen-library-area-card.has-visual .frauen-library-area-card__arrow){
+  z-index:3!important;
+  right:12px!important;
+  bottom:12px!important;
+  width:34px!important;
+  height:34px!important;
+  font-size:22px!important;
+}
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-card.has-visual:hover,.frauen-library-card.has-visual:focus-visible,
+     .frauen-library-area-card.has-visual:not(.is-pending):hover,
+     .frauen-library-area-card.has-visual:not(.is-pending):focus-visible){
+  border-color:color-mix(in srgb,var(--gold2,#c4a76d) 40%,transparent)!important;
+  box-shadow:0 12px 30px rgba(4,16,15,.14)!important;
+}
+
+/* On phones both levels return to their original tall single-column cards. */
+@media (max-width:600px){
+  html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-view="group"])
+   :is(.frauen-library-grid,.frauen-library-area-grid){
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:13px!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual{
+    min-height:214px!important;
+    padding:18px 44px 18px 17px!important;
+    border-radius:23px!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual{
+    min-height:184px!important;
+    padding:17px 44px 17px 16px!important;
+    border-radius:22px!important;
+  }
+  html[data-theme] body.is-frauen-route #appView
+   :is(.frauen-library-card.has-visual .frauen-library-card__copy,
+       .frauen-library-area-card.has-visual .frauen-library-area-card__copy){
+    width:66%!important;
+    max-width:66%!important;
+  }
+  html[data-theme] body.is-frauen-route #appView
+   .frauen-library-card.has-visual .frauen-library-card__copy h3{
+    font-size:20px!important;
+  }
+  html[data-theme] body.is-frauen-route #appView
+   .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{
+    font-size:18.5px!important;
+  }
+  html[data-theme] body.is-frauen-route #appView
+   :is(.frauen-library-card.has-visual .frauen-library-card__desc,
+       .frauen-library-area-card.has-visual .frauen-library-area-card__copy > p){
+    font-size:12px!important;
+    line-height:1.4!important;
+  }
+  html[data-theme] body.is-frauen-route #appView
+   :is(.frauen-library-card.has-visual .frauen-library-card__nr,
+       .frauen-library-area-card.has-visual .frauen-library-area-card__nr){
+    top:13px!important;
+    right:13px!important;
+  }
+}
+@media (min-width:760px){
+  html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-view="group"])
+   :is(.frauen-library-grid,.frauen-library-area-grid){
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual{
+    min-height:230px!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual{
+    min-height:195px!important;
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  html[data-theme] body.is-frauen-route #appView
+   :is(.frauen-library-card.has-visual,.frauen-library-area-card.has-visual){
+    transition:none!important;
+  }
+}
