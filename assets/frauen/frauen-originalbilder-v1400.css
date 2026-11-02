@@ -1,0 +1,71 @@
+/* DAR_FRAUEN_ORIGINALBILDER_V1400
+ * Nur Frauen-Hub und bestehende Wissenswelten/Kapitel.
+ * Historische Symbolbilder, keine Darstellung namentlich genannter Personen.
+ * Bestand: keine DOM-Änderung, keine neue Route, kein neuer Reader.
+ * Originalmotive bleiben als Fallback im vorherigen Renderer erhalten.
+ */
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"] .frauen-library-hero {
+  background-color:#17231e!important;
+  background-image:
+    linear-gradient(90deg,rgba(5,19,17,.88) 0%,rgba(5,19,17,.68) 44%,rgba(5,19,17,.10) 90%),
+    url("/assets/frauen/library-v1400/01-oase-reiterin.jpg")!important;
+  background-size:100% 100%,auto 140%!important;
+  background-position:center,right center!important;
+  background-repeat:no-repeat!important;
+}
+/* Porträtmotive vollständig innerhalb der bereits vorhandenen Karten sichtbar halten. */
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual {
+  background-color:var(--card,var(--bg))!important;
+  background-size:auto 100%!important;
+  background-position:right center!important;
+  background-repeat:no-repeat!important;
+}
+/* Die bestehende linksbündige Textzone, Textschutzverläufe, Buttons und
+   responsiven Spalten werden nicht verändert. Sieben bestehende Gruppen. */
+html[data-theme] body.is-frauen-route #appView .frauen-library-card--din.has-visual {
+  background-image:url("/assets/frauen/library-v1400/06-grundlagen.jpg")!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card--fiqh.has-visual {
+  background-image:url("/assets/frauen/library-v1400/04-fiqh-alltag.jpg")!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card--generationen.has-visual {
+  background-image:url("/assets/frauen/library-v1400/03-erste-generationen.jpg")!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card--familie.has-visual {
+  background-image:url("/assets/frauen/library-v1400/05-familie.jpg")!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card--wissen.has-visual {
+  background-image:url("/assets/frauen/library-v1400/08-wissen.jpg")!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card--alltag.has-visual {
+  background-image:url("/assets/frauen/library-v1400/07-alltag.jpg")!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card--lebensphasen.has-visual {
+  background-image:url("/assets/frauen/library-v1400/09-lebensphasen.jpg")!important;
+}
+/* Kapitelbilder der unveränderten bestehenden Wissensnavigation. */
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual[data-value="reise-mahram-schutz"] {
+  background-image:url("/assets/frauen/library-v1400/02-reise-gebirge.jpg")!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual[data-value="hijab-schamhaftigkeit"] {
+  background-image:url("/assets/frauen/library-v1400/04-fiqh-alltag.jpg")!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual[data-value="wissen-lernen"] {
+  background-image:url("/assets/frauen/library-v1400/08-wissen.jpg")!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual[data-value="ehe-familie"] {
+  background-image:url("/assets/frauen/library-v1400/05-familie.jpg")!important;
+}
+/* Nur das vorhandene Hero-Motiv variiert in den Gruppensichten. */
+html[data-theme] body.is-frauen-route .frauen-library-hero--tone-generationen {
+  --frauen-hero-img:url("/assets/frauen/library-v1400/03-erste-generationen.jpg")!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-hero--tone-familie {
+  --frauen-hero-img:url("/assets/frauen/library-v1400/05-familie.jpg")!important;
+}
+@media (prefers-reduced-data:reduce) {
+  /* Keine zusätzlichen Bild-Downloads/Animationen erzwingen. */
+  html[data-theme] body.is-frauen-route .frauen-library-card,
+  html[data-theme] body.is-frauen-route .frauen-library-area-card{transition:none!important}
+}
