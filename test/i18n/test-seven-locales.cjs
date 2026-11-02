@@ -292,6 +292,18 @@ assert.equal(w.DarTestTurkishUI.translateValue("1. Fundstelle","fr"),"1. Lieu ci
 assert.equal(w.DarTestTurkishUI.translateValue("2. Fundstelle","en"),"2. Cited passage");
 assert.equal(w.DarTestTurkishUI.translateValue("Qurʾān 2:255 · Al-Baqarah","en"),locales.translations.en["Qurʾān"]+" 2:255 · Al-Baqarah");
 assert.equal(w.DarTestTurkishUI.translateValue("Qurʾān 2:255","ar"),"القرآن 2:255");
+assert.equal(w.DarTestTurkishUI.translateValue("· Āyah 255 ·","en"),"· "+locales.translations.en["Āyah"]+" 255 ·");
+assert.equal(w.DarTestTurkishUI.translateValue("Āyah 255","fr"),locales.translations.fr["Āyah"]+" 255");
+assert.equal(w.DarTestTurkishUI.translateValue("Themenbegriff · Beispiel 2:255","es"),locales.translations.es.Themenbegriff+" · ejemplo 2:255");
+assert.equal(w.DarTestTurkishUI.translateValue("3 Quellen","ar"),"3 "+locales.translations.ar.Quellen);
+assert.equal(w.DarTestTurkishUI.translateValue("3 Quellen · Quellen anzeigen","en"),"3 sources · "+locales.translations.en["Quellen anzeigen"]);
+assert.equal(w.DarTestTurkishUI.translateValue("Aus Thema:","tr"),"Konudan:");
+assert.equal(w.DarTestTurkishUI.translateValue("Aus Thema: Wissen","fr"),"Du thème : Wissen");
+assert.equal(w.DarTestTurkishUI.translateValue("Noch","en"),"Left");
+assert.equal(w.DarTestTurkishUI.translateValue("Noch ca. 4 Tage","es"),"Faltan unos 4 días");
+assert.equal(w.DarTestTurkishUI.translateValue("Aktiv","ckb"),"چالاک");
+assert.equal(w.DarTestTurkishUI.translateValue("Duʿāʾ-Eintrag","en"),"Supplication entry");
+assert.equal(w.DarTestTurkishUI.translateValue("Āyāt ansehen →","ku"),"Âyetan bibîne →");
 assert.equal(w.DarTestTurkishUI.translateValue("Fundstelle","fr"),"Lieu cité");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);

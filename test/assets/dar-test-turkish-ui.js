@@ -536,6 +536,12 @@ function isDynamicGermanUi(value){
   /^\d+ Āyāt$/.test(value)||
   /^\d+\. Fundstelle$/.test(value)||
   /^Qurʾān \d{1,3}:\d{1,3}(?: · [^<>]{1,80})?$/.test(value)||
+  /^· Āyah \d+ ·$/.test(value)||
+  /^Āyah \d+$/.test(value)||
+  /^Themenbegriff · Beispiel \d{1,3}:\d{1,3}$/.test(value)||
+  /^\d+ Quellen$/.test(value)||
+  /^Aus Thema:(?: [^<>]{1,80})?$/.test(value)||
+  (value.length===4&&value.startsWith("Noc")&&value.endsWith("h"))||
   /^\d+ (?:Bücher|Gelehrte|Werke)$/.test(value)||
   /^\d+ Werke · Gesamtkatalog$/.test(value)||
   /^\d+ Beiträge, \d+ Duʿāʾ$/.test(value)||
@@ -2637,6 +2643,36 @@ function translateSharedPatterns(value,language){
    const word=lookupPack("Qurʾān",language);
    if(word)return word+" "+quranRef[1]+(quranRef[2]?" · "+quranRef[2]:"");
   }
+  const ayahDot=value.match(/^· Āyah (\d+) ·$/);
+  if(ayahDot){
+   const word=lookupPack("Āyah",language);
+   if(word)return "· "+word+" "+ayahDot[1]+" ·";
+  }
+  const ayahOnly=value.match(/^Āyah (\d+)$/);
+  if(ayahOnly){
+   const word=lookupPack("Āyah",language);
+   if(word)return word+" "+ayahOnly[1];
+  }
+  const topicSample=value.match(/^Themenbegriff · Beispiel (\d{1,3}:\d{1,3})$/);
+  if(topicSample){
+   const head=lookupPack("Themenbegriff",language);
+   const sample={ar:"مثال",en:"example",tr:"örnek",ku:"mînak",ckb:"نموونە",bs:"primjer",fr:"exemple",es:"ejemplo"}[language];
+   if(head&&sample)return head+" · "+sample+" "+topicSample[1];
+  }
+  const sourceCount=value.match(/^(\d+) Quellen$/);
+  if(sourceCount){
+   const word=lookupPack("Quellen",language);
+   if(word)return sourceCount[1]+" "+word;
+  }
+  const fromTopic=value.match(/^Aus Thema:(?: (.+))?$/);
+  if(fromTopic&&(!fromTopic[1]||(fromTopic[1].length<=80&&!/[<>]/.test(fromTopic[1])))){
+   const forms={ar:"من موضوع:",en:"From topic:",tr:"Konudan:",ku:"Ji mijarê:",ckb:"لە بابەتەوە:",bs:"Iz teme:",fr:"Du thème :",es:"Del tema:"};
+   if(forms[language])return forms[language]+(fromTopic[1]?" "+fromTopic[1]:"");
+  }
+  if(value.length===4&&value.startsWith("Noc")&&value.endsWith("h")){
+   const forms={ar:"بقي",en:"Left",tr:"Kaldı",ku:"Ma",ckb:"ماوە",bs:"Još",fr:"Encore",es:"Quedan"};
+   return forms[language]||null;
+  }
   const emojiLabel=value.match(/^(\p{Extended_Pictographic}\uFE0F?)\s+(.+)$/u);
   if(emojiLabel){
    const inner=lookupPack(emojiLabel[2],language);
@@ -3020,7 +3056,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-47";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-48";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
