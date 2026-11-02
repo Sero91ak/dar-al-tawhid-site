@@ -41,10 +41,25 @@ function navSlot(){
  if(slot)return slot;
  return buttons.find(function(b){return /^quiz$/i.test(String(b.textContent||"").trim())})||null
 }
+/* Exclusive men Discover: lazy-load the daily knowledge compass, never Notes/Beiträge. */
+function ensureMenDiscoveryV1(){
+ if(window.DARMenDiscoveryV1)return;
+ if(!document.getElementById("darMenDiscoveryV1Css")){
+  var css=document.createElement("link");css.id="darMenDiscoveryV1Css";css.rel="stylesheet";
+  css.href="/assets/dar-men-discovery-v1.css?v=20261102-men-compass-v1";document.head.appendChild(css);
+ }
+ if(!document.getElementById("darMenDiscoveryV1Loader")){
+  var js=document.createElement("script");js.id="darMenDiscoveryV1Loader";
+  js.src="/assets/dar-men-discovery-v1.js?v=20261102-men-compass-v1";js.defer=true;
+  js.onload=function(){if(window.__DAR_MEN_DISCOVERY_PENDING&&window.DARMenDiscoveryV1)window.DARMenDiscoveryV1.open()};
+  document.head.appendChild(js);
+ }
+}
 function syncNav(p){
  var slot=navSlot();if(!slot)return;
  if(!slot.dataset.darOriginalTab)slot.dataset.darOriginalTab=slot.getAttribute("data-bottom-nav")||"quiz";
  var female=p.gender==="woman";
+ if(p.gender==="man")ensureMenDiscoveryV1();
  var target=female?"frauen":"topics",text=female?"Frauen":"Entdecken";
  // Male/neutral share Entdecken; Quiz remains reachable from Home and Mehr.
  if(slot.getAttribute("data-bottom-nav")!==target)slot.setAttribute("data-bottom-nav",target);
@@ -124,7 +139,7 @@ document.addEventListener("click",function(event){
  var slot=event.target.closest&&event.target.closest("#bottomNav [data-dar-adaptive-tab]");
  if(slot){
   var p=profile(),dest=p&&p.gender==="woman"?"frauen":"topics";
-  event.preventDefault();event.stopImmediatePropagation();navigateTo(dest);setTimeout(sync,60);return;
+  event.preventDefault();event.stopImmediatePropagation();if(p&&p.gender==="man"){window.__DAR_MEN_DISCOVERY_PENDING=true;ensureMenDiscoveryV1();if(window.DARMenDiscoveryV1)window.DARMenDiscoveryV1.open()}else{window.__DAR_MEN_DISCOVERY_PENDING=false;if(window.DARMenDiscoveryV1)window.DARMenDiscoveryV1.close()}navigateTo(dest);setTimeout(sync,60);return;
  }
  var openButton=event.target.closest&&event.target.closest("[data-ddh-open]");
  if(openButton){event.preventDefault();event.stopPropagation();open();return}
