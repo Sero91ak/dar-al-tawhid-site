@@ -304,6 +304,16 @@ assert.equal(w.DarTestTurkishUI.translateValue("Noch ca. 4 Tage","es"),"Faltan u
 assert.equal(w.DarTestTurkishUI.translateValue("Aktiv","ckb"),"چالاک");
 assert.equal(w.DarTestTurkishUI.translateValue("Duʿāʾ-Eintrag","en"),"Supplication entry");
 assert.equal(w.DarTestTurkishUI.translateValue("Āyāt ansehen →","ku"),"Âyetan bibîne →");
+assert.equal(w.DarTestTurkishUI.translateValue("🧭 Kompass starten","en"),"🧭 Start compass");
+assert.equal(w.DarTestTurkishUI.translateValue("Kompass starten","ar"),"ابدأ البوصلة");
+assert.equal(w.DarTestTurkishUI.translateValue("Fortschritt","fr"),"Progression");
+assert.equal(w.DarTestTurkishUI.translateValue("Praktisch","es"),"Práctico");
+assert.equal(w.DarTestTurkishUI.translateValue("Wasiyyah","tr"),"Vasiyetname");
+assert.equal(w.DarTestTurkishUI.translateValue("Test","ckb"),"تێست");
+assert.equal(w.DarTestTurkishUI.translateValue("Einordnung: Mekkanisch","en"),locales.translations.en.Einordnung+": "+locales.translations.en.Mekkanisch);
+assert.equal(w.DarTestTurkishUI.translateValue("Einordnung: Medinensisch","ar"),locales.translations.ar.Einordnung+": "+locales.translations.ar.Medinensisch);
+assert.equal(w.DarTestTurkishUI.translateValue("Einordnung: 622 · Mekka · Mekkanisch","es"),locales.translations.es.Einordnung+": 622 · Mekka · "+locales.translations.es.Mekkanisch);
+assert.equal(w.DarTestTurkishUI.translateValue("Der Vers wurde in Mekka offenbart.\n\nEinordnung: Mekkanisch","en"),null);
 assert.equal(w.DarTestTurkishUI.translateValue("Fundstelle","fr"),"Lieu cité");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);

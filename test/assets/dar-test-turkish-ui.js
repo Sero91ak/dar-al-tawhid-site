@@ -541,6 +541,7 @@ function isDynamicGermanUi(value){
   /^Themenbegriff · Beispiel \d{1,3}:\d{1,3}$/.test(value)||
   /^\d+ Quellen$/.test(value)||
   /^Aus Thema:(?: [^<>]{1,80})?$/.test(value)||
+  /^Einordnung: [^<>\n]{1,120}$/.test(value)||
   (value.length===4&&value.startsWith("Noc")&&value.endsWith("h"))||
   /^\d+ (?:Bücher|Gelehrte|Werke)$/.test(value)||
   /^\d+ Werke · Gesamtkatalog$/.test(value)||
@@ -2673,6 +2674,17 @@ function translateSharedPatterns(value,language){
    const forms={ar:"بقي",en:"Left",tr:"Kaldı",ku:"Ma",ckb:"ماوە",bs:"Još",fr:"Encore",es:"Quedan"};
    return forms[language]||null;
   }
+  const einordnung=value.match(/^Einordnung: ([^<>\n]{1,120})$/);
+  if(einordnung){
+   const head=lookupPack("Einordnung",language);
+   if(head){
+    const rest=einordnung[1].split(" · ").map(part=>{
+     const known=uiWord(language,part);
+     return known||part;
+    }).join(" · ");
+    return head+": "+rest;
+   }
+  }
   const emojiLabel=value.match(/^(\p{Extended_Pictographic}\uFE0F?)\s+(.+)$/u);
   if(emojiLabel){
    const inner=lookupPack(emojiLabel[2],language);
@@ -3056,7 +3068,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-48";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-49";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
