@@ -308,7 +308,7 @@ function activateAdultGlobalBrandV2(html) {
     ['darAdultGlobalBrandScriptV2','<script defer id="darAdultGlobalBrandScriptV2" src="/assets/dar-adult-brand-header-v2.js?v=20261030-fixed-occlusion-v1"></' + 'script>'],
     ['darVisitorSmartProfileJsV1','<script defer id="darVisitorSmartProfileJsV1" src="/assets/dar-visitor-smart-profile-v1.js?v=20261031-neutral-hooded-v14"></' + 'script>'],
     ['darVisitorProfilePickerJsV1','<script defer id="darVisitorProfilePickerJsV1" src="/assets/dar-visitor-profile-picker-v1.js?v=20261030-left-select-v12"></' + 'script>'],
-    ['darVisitorDailyHubJsV1','<script defer id="darVisitorDailyHubJsV1" src="/assets/dar-visitor-daily-hub-v1.js?v=20261030-mehr-responsive-v2"></' + 'script>'],
+    ['darVisitorDailyHubJsV1','<script defer id="darVisitorDailyHubJsV1" src="/assets/dar-visitor-daily-hub-v1.js?v=20261102-men-discovery-v1"></' + 'script>'],
     ['darVisitorOnboardingJsV1','<script defer id="darVisitorOnboardingJsV1" src="/assets/dar-visitor-onboarding-v1.js?v=20261030-profile-single-hub-v10"></' + 'script>']
   ];
   const foldLink = html.includes('id="darAdultGlobalFoldAxisV1"') ? "" :
