@@ -2056,8 +2056,9 @@
     });
 
     try {
-      if (typeof dailyDua === 'function') {
-        var dd = dailyDua();
+      if (global.DARCanonicalDailyV1 && typeof global.DARCanonicalDailyV1.snapshot === 'function') {
+        var canonical = global.DARCanonicalDailyV1.snapshot();
+        var dd = canonical && canonical.dua;
         if (dd) {
           pools.dua.push({
             uid: 'dua-day-' + dd.id,
@@ -3653,6 +3654,7 @@
     if (observer) observer.disconnect();
   }
 
+  document.addEventListener('dar:canonical-daily-ready', function () { if (isFeedRoute() && global.DAR_PREMIUM_FEED) global.DAR_PREMIUM_FEED.onPostsUpdated(); });
   global.DAR_PREMIUM_FEED = {
     mount: renderPage,
     rebuild: rebuild,
