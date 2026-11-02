@@ -3339,23 +3339,23 @@ const additions={
   "goal": "Ich kann mit Rücksicht auf das Alter über den Fastenmonat sprechen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
   "quran": {
    "surah": 2,
-   "ayah": 285,
-   "label": "Sūrat al-Baqarah · 2:285",
-   "arabic": "كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ",
-   "meaning": "Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
-   "excerpt": true
+   "ayah": 183,
+   "arabic": "يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ كَمَا كُتِبَ عَلَى الَّذِينَ مِنْ قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ",
+   "meaning": "Den Gläubigen wurde das Fasten vorgeschrieben, damit sie gottesfürchtig werden.",
+   "label": "Qurʾān 2:183",
+   "excerpt": false
   },
   "hadith": {
    "source": "Ṣaḥīḥ al-Buḫārī, Nr. 8",
    "text": "Das Fasten im Ramaḍān gehört zu den fünf Säulen des Islam."
   },
   "sourceAudit": {
-   "quranReference": "2:285",
-   "quranUrl": "https://quran.com/2/285",
+   "quranReference": "2:183",
+   "quranUrl": "https://quran.com/2/183",
    "hadithUrl": "https://sunnah.com/bukhari:8",
    "sourceAnchorLessonId": "aqidah-iman-sechs-grundlagen",
    "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
-   "quranTextType": "excerpt",
+   "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
@@ -3373,13 +3373,13 @@ const additions={
      "Ich darf Fragen stellen und um Hilfe bitten.",
      "Wir gehen freundlich und sicher miteinander um."
     ],
-    "evidence": "Qurʾān 2:285 lehrt: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 2:183 bedeutet sinngemäß: Den Gläubigen wurde das Fasten vorgeschrieben, damit sie gottesfürchtig werden. Unsere Übung ist ein Beispiel."
    },
    "6-8": {
     "intro": "Eine Situation aus unserem Alltag: Mit Rücksicht auf das Alter über den Fastenmonat sprechen.",
     "lines": [
      "Heute untersuchen wir das Thema „Ramaḍān und Fasten kennenlernen“.",
-     "Der Qurʾān spricht in 2:285 darüber: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
+     "Qurʾān 2:183: Den Gläubigen wurde das Fasten vorgeschrieben, damit sie gottesfürchtig werden.",
      "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 8: Das Fasten im Ramaḍān gehört zu den fünf Säulen des Islam.",
      "Unser eigenes Beispiel: Mit Rücksicht auf das Alter über den Fastenmonat sprechen. Wir überlegen gemeinsam, warum es passt."
     ],
@@ -3389,11 +3389,11 @@ const additions={
     "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Ramaḍān und Fasten kennenlernen“.",
     "lines": [
      "Ausgangssituation: Mit Rücksicht auf das Alter über den Fastenmonat sprechen.",
-     "Qurʾān 2:285: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
+     "Qurʾān 2:183: Den Gläubigen wurde das Fasten vorgeschrieben, damit sie gottesfürchtig werden.",
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 8): Das Fasten im Ramaḍān gehört zu den fünf Säulen des Islam. (sinngemäß)",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/2/285 und https://sunnah.com/bukhari:8. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Quellen: https://quran.com/2/183 und https://sunnah.com/bukhari:8. Das Beispiel ist keine wörtliche Offenbarung."
    }
   },
   "questions": {
@@ -3441,9 +3441,9 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:285?",
+     "prompt": "Welche Aussage stammt aus Qurʾān 2:183?",
      "options": [
-      "Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
+      "Den Gläubigen wurde das Fasten vorgeschrieben, damit sie gottesfürchtig werden.",
       "Unser Übungsbeispiel ist: Mit Rücksicht auf das Alter über den Fastenmonat sprechen.",
       "Die Sunnah berichtet: Das Fasten im Ramaḍān gehört zu den fünf Säulen des Islam."
      ],
@@ -3467,8 +3467,8 @@ const additions={
     },
     {
      "type": "text",
-     "prompt": "Was lehrt Qurʾān 2:285 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Die angegebene Sunnah lehrt sinngemäß: Das Fasten im Ramaḍān gehört zu den fünf Säulen des Islam.",
+     "prompt": "Was lehrt Qurʾān 2:183? Was steht in der Sunnah?",
+     "sample": "Qurʾān: Den Gläubigen wurde das Fasten vorgeschrieben, damit sie gottesfürchtig werden. Sunnah: Das Fasten im Ramaḍān gehört zu den fünf Säulen des Islam.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
@@ -3505,23 +3505,23 @@ const additions={
   "goal": "Ich kann die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
   "quran": {
    "surah": 2,
-   "ayah": 285,
-   "label": "Sūrat al-Baqarah · 2:285",
-   "arabic": "كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ",
-   "meaning": "Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
-   "excerpt": true
+   "ayah": 43,
+   "arabic": "وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ وَارْكَعُوا مَعَ الرَّاكِعِينَ",
+   "meaning": "Verrichtet das Gebet, entrichtet die Zakāh und verbeugt euch mit den sich Verbeugenden.",
+   "label": "Qurʾān 2:43",
+   "excerpt": false
   },
   "hadith": {
    "source": "Ṣaḥīḥ al-Buḫārī, Nr. 8",
    "text": "Zakāh und Ḥaǧǧ gehören zu den fünf Säulen des Islam."
   },
   "sourceAudit": {
-   "quranReference": "2:285",
-   "quranUrl": "https://quran.com/2/285",
+   "quranReference": "2:43",
+   "quranUrl": "https://quran.com/2/43",
    "hadithUrl": "https://sunnah.com/bukhari:8",
    "sourceAnchorLessonId": "aqidah-iman-sechs-grundlagen",
    "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
-   "quranTextType": "excerpt",
+   "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
@@ -3539,13 +3539,13 @@ const additions={
      "Ich darf Fragen stellen und um Hilfe bitten.",
      "Wir gehen freundlich und sicher miteinander um."
     ],
-    "evidence": "Qurʾān 2:285 lehrt: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 2:43 bedeutet sinngemäß: Verrichtet das Gebet, entrichtet die Zakāh und verbeugt euch mit den sich Verbeugenden. Unsere Übung ist ein Beispiel."
    },
    "6-8": {
     "intro": "Eine Situation aus unserem Alltag: Die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen.",
     "lines": [
      "Heute untersuchen wir das Thema „Zakāh und Ḥaǧǧ als Säulen“.",
-     "Der Qurʾān spricht in 2:285 darüber: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
+     "Qurʾān 2:43: Verrichtet das Gebet, entrichtet die Zakāh und verbeugt euch mit den sich Verbeugenden.",
      "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 8: Zakāh und Ḥaǧǧ gehören zu den fünf Säulen des Islam.",
      "Unser eigenes Beispiel: Die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen. Wir überlegen gemeinsam, warum es passt."
     ],
@@ -3555,11 +3555,11 @@ const additions={
     "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Zakāh und Ḥaǧǧ als Säulen“.",
     "lines": [
      "Ausgangssituation: Die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen.",
-     "Qurʾān 2:285: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
+     "Qurʾān 2:43: Verrichtet das Gebet, entrichtet die Zakāh und verbeugt euch mit den sich Verbeugenden.",
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 8): Zakāh und Ḥaǧǧ gehören zu den fünf Säulen des Islam. (sinngemäß)",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/2/285 und https://sunnah.com/bukhari:8. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Quellen: https://quran.com/2/43 und https://sunnah.com/bukhari:8. Das Beispiel ist keine wörtliche Offenbarung."
    }
   },
   "questions": {
@@ -3607,9 +3607,9 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:285?",
+     "prompt": "Welche Aussage stammt aus Qurʾān 2:43?",
      "options": [
-      "Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
+      "Verrichtet das Gebet, entrichtet die Zakāh und verbeugt euch mit den sich Verbeugenden.",
       "Unser Übungsbeispiel ist: Die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen.",
       "Die Sunnah berichtet: Zakāh und Ḥaǧǧ gehören zu den fünf Säulen des Islam."
      ],
@@ -3633,8 +3633,8 @@ const additions={
     },
     {
      "type": "text",
-     "prompt": "Was lehrt Qurʾān 2:285 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Die angegebene Sunnah lehrt sinngemäß: Zakāh und Ḥaǧǧ gehören zu den fünf Säulen des Islam.",
+     "prompt": "Was lehrt Qurʾān 2:43? Was steht in der Sunnah?",
+     "sample": "Qurʾān: Verrichtet das Gebet, entrichtet die Zakāh und verbeugt euch mit den sich Verbeugenden. Sunnah: Zakāh und Ḥaǧǧ gehören zu den fünf Säulen des Islam.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
