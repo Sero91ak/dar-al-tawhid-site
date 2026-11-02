@@ -2516,20 +2516,20 @@ const additions={
    "excerpt": false
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 631",
-   "text": "Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 46",
+   "text": "Der Prophet ﷺ erklärte, dass fünf Gebete während des Tages und der Nacht vorgeschrieben sind."
   },
   "sourceAudit": {
    "quranReference": "20:14",
    "quranUrl": "https://quran.com/20/14",
-   "hadithUrl": "https://sunnah.com/bukhari:631",
+   "hadithUrl": "https://sunnah.com/bukhari:46",
    "sourceAnchorLessonId": "fiqh-salah",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
+   "sourceScope": "Konkreter thematischer Ṣaḥīḥ-Primärbeleg neu abgeglichen; weitergehende Fiqh-Fragen bleiben prüfpflichtig.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
-   "hasNewIndependentHadithVerification": false,
+   "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
   "hint": "Auf einem Gebetsplan die Tagesgebete erkennen.",
@@ -2543,14 +2543,14 @@ const additions={
      "Ich darf Fragen stellen und um Hilfe bitten.",
      "Wir gehen freundlich und sicher miteinander um."
     ],
-    "evidence": "Qurʾān 20:14 lehrt: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 20:14 bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die heutige Übung ist unser Beispiel."
    },
    "6-8": {
     "intro": "Eine Situation aus unserem Alltag: Auf einem Gebetsplan die Tagesgebete erkennen.",
     "lines": [
      "Heute untersuchen wir das Thema „Die Gebetszeiten kennenlernen“.",
-     "Der Qurʾān spricht in 20:14 darüber: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 631 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
+     "Der Qurʾān sagt in 20:14 sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
+     "Die Sunnah lehrt in Ṣaḥīḥ al-Buḫārī, Nr. 46 sinngemäß: Der Prophet ﷺ erklärte, dass fünf Gebete während des Tages und der Nacht vorgeschrieben sind.",
      "Unser eigenes Beispiel: Auf einem Gebetsplan die Tagesgebete erkennen. Wir überlegen gemeinsam, warum es passt."
     ],
     "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
@@ -2560,10 +2560,10 @@ const additions={
     "lines": [
      "Ausgangssituation: Auf einem Gebetsplan die Tagesgebete erkennen.",
      "Qurʾān 20:14: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 631): Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat. Dies ist eine deutsche Bedeutungswiedergabe.",
+     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 46), deutsche Bedeutungswiedergabe: Der Prophet ﷺ erklärte, dass fünf Gebete während des Tages und der Nacht vorgeschrieben sind.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/20/14 und https://sunnah.com/bukhari:631. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Quellen: https://quran.com/20/14 und https://sunnah.com/bukhari:46. Die Alltagsübung ist kein wörtlicher Offenbarungstext."
    }
   },
   "questions": {
@@ -2611,14 +2611,14 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
+     "prompt": "Welche Aussage stammt aus Qurʾān 20:14?",
      "options": [
       "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-      "Unser Übungsbeispiel ist: Auf einem Gebetsplan die Tagesgebete erkennen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+      "Unsere eigene Unterrichtsübung: Bei „Die Gebetszeiten kennenlernen“ übe ich: auf einem Gebetsplan die Tagesgebete erkennen.",
+      "Die Sunnah erläutert sinngemäß: Der Prophet ﷺ erklärte, dass fünf Gebete während des Tages und der Nacht vorgeschrieben sind."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
+     "hint": "Vergleiche die Bedeutung von Qurʾān 20:14 mit unserem Alltagsbeispiel.",
      "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
     }
    ],
@@ -2637,8 +2637,8 @@ const additions={
     },
     {
      "type": "text",
-     "prompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
+     "prompt": "Was lehrt Qurʾān 20:14? Was berichtet Ṣaḥīḥ al-Buḫārī, Nr. 46?",
+     "sample": "Der Vers bedeutet: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die Sunnah berichtet sinngemäß: Der Prophet ﷺ erklärte, dass fünf Gebete während des Tages und der Nacht vorgeschrieben sind.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
@@ -3014,15 +3014,15 @@ const additions={
    "excerpt": true
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5376",
-   "text": "Der Prophet ﷺ lehrte ein Kind die guten Sitten beim Essen; eine besondere Dankformel nach dem Essen ist damit nicht belegt."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5458",
+   "text": "Abū Umāmah berichtete, dass der Prophet ﷺ Allah nach dem Essen lobpries."
   },
   "sourceAudit": {
    "quranReference": "7:31",
    "quranUrl": "https://quran.com/7/31",
-   "hadithUrl": "https://sunnah.com/bukhari:5376",
+   "hadithUrl": "https://sunnah.com/bukhari:5458",
    "sourceAnchorLessonId": "adab-essen-bismillah",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
+   "sourceScope": "Konkreter thematischer Ṣaḥīḥ-Primärbeleg neu abgeglichen; weitergehende Fiqh-Fragen bleiben prüfpflichtig.",
    "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -3041,14 +3041,14 @@ const additions={
      "Ich darf Fragen stellen und um Hilfe bitten.",
      "Wir gehen freundlich und sicher miteinander um."
     ],
-    "evidence": "Qurʾān 7:31 lehrt: Esst und trinkt, aber seid nicht maßlos. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 7:31 bedeutet sinngemäß: Esst und trinkt, aber seid nicht maßlos. Die heutige Übung ist unser Beispiel."
    },
    "6-8": {
     "intro": "Eine Situation aus unserem Alltag: Eine authentische Dankformel nach Quellenprüfung üben.",
     "lines": [
      "Heute untersuchen wir das Thema „Nach dem Essen danken“.",
-     "Der Qurʾān spricht in 7:31 darüber: Esst und trinkt, aber seid nicht maßlos.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 5376 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
+     "Der Qurʾān sagt in 7:31 sinngemäß: Esst und trinkt, aber seid nicht maßlos.",
+     "Die Sunnah lehrt in Ṣaḥīḥ al-Buḫārī, Nr. 5458 sinngemäß: Abū Umāmah berichtete, dass der Prophet ﷺ Allah nach dem Essen lobpries.",
      "Unser eigenes Beispiel: Eine authentische Dankformel nach Quellenprüfung üben. Wir überlegen gemeinsam, warum es passt."
     ],
     "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
@@ -3058,10 +3058,10 @@ const additions={
     "lines": [
      "Ausgangssituation: Eine authentische Dankformel nach Quellenprüfung üben.",
      "Qurʾān 7:31: Esst und trinkt, aber seid nicht maßlos.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 5376): Der Prophet ﷺ lehrte ein Kind die guten Sitten beim Essen; eine besondere Dankformel nach dem Essen ist damit nicht belegt. Dies ist eine deutsche Bedeutungswiedergabe.",
+     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 5458), deutsche Bedeutungswiedergabe: Abū Umāmah berichtete, dass der Prophet ﷺ Allah nach dem Essen lobpries.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/7/31 und https://sunnah.com/bukhari:5376. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Quellen: https://quran.com/7/31 und https://sunnah.com/bukhari:5458. Die Alltagsübung ist kein wörtlicher Offenbarungstext."
    }
   },
   "questions": {
@@ -3109,14 +3109,14 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 7:31?",
+     "prompt": "Welche Aussage stammt aus Qurʾān 7:31?",
      "options": [
       "Esst und trinkt, aber seid nicht maßlos.",
-      "Unser Übungsbeispiel ist: Eine authentische Dankformel nach Quellenprüfung üben.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte ein Kind die guten Sitten beim Essen; eine besondere Dankformel nach dem Essen ist damit nicht belegt."
+      "Unsere eigene Unterrichtsübung: Bei „Nach dem Essen danken“ übe ich: eine authentische Dankformel nach Quellenprüfung üben.",
+      "Die Sunnah erläutert sinngemäß: Abū Umāmah berichtete, dass der Prophet ﷺ Allah nach dem Essen lobpries."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
+     "hint": "Vergleiche die Bedeutung von Qurʾān 7:31 mit unserem Alltagsbeispiel.",
      "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
     }
    ],
@@ -3135,8 +3135,8 @@ const additions={
     },
     {
      "type": "text",
-     "prompt": "Was lehrt Qurʾān 7:31 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Esst und trinkt, aber seid nicht maßlos. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte ein Kind die guten Sitten beim Essen; eine besondere Dankformel nach dem Essen ist damit nicht belegt.",
+     "prompt": "Was lehrt Qurʾān 7:31? Was berichtet Ṣaḥīḥ al-Buḫārī, Nr. 5458?",
+     "sample": "Der Vers bedeutet: Esst und trinkt, aber seid nicht maßlos. Die Sunnah berichtet sinngemäß: Abū Umāmah berichtete, dass der Prophet ﷺ Allah nach dem Essen lobpries.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
