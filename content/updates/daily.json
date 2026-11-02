@@ -16,5 +16,23 @@
     "title": "Lass uns als Muslime sterben",
     "snippet": "Unser Herr, gieße Geduld über uns aus und lass uns als Muslime sterben.",
     "category": "Standhaftigkeit"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 482,
+      "remaining": 446
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 62,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
