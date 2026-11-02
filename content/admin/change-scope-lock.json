@@ -155,6 +155,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "canonical-global-daily-dua-quran-tadabbur-20261102",
+      "at": "2026-11-02T12:00:00+01:00",
+      "approvedBy": "user-explicit-20261102-global-canonical-daily-all-apps-apple-tv",
+      "reason": "User directly requests all adult apps and Apple TV consume exactly one verified daily Dua/verse; repair current day card routing, refresh, canonical verse/Tadabbur refs and share remote TV catalog. No push engine, Kids, screensaver rotation, private profile data or unrelated navigation.",
+      "paths": [
+        "assets/dar-canonical-daily-v1.js",
+        "scripts/rotate-daily-content.js",
+        "content/updates/daily.json",
+        "apple-tv/home/catalog.json",
+        "cloudflare/site-router.js",
+        "content/admin/change-scope-lock.json",
+        "assets/premium-feed-app.js",
+        "assets/focus-feed-app.js"
+      ],
+      "expiresAt": "2026-11-16T23:59:00.000Z"
+    },
+    {
       "id": "men-discovery-daily-scoped-20261102",
       "at": "2026-11-02T11:10:00+01:00",
       "approvedBy": "user-explicit-20261102-men-discover-exclusively-daily-dynamic-no-notes",

@@ -367,6 +367,12 @@ function activateAdultCompactHero(html) {
     const js = '<script defer id="darHomeRecentPostsV1Js" src="/assets/dar-home-recent-posts-v1.js?v=20261101-premium-home-v11"></' + 'script>';
     html = html.includes("</body>") ? html.replace("</body>", js + "</body>") : html + js;
   }
+  // Canonical daily entrypoint across public website, visitor WKWebView and Android PWA.
+  // No Kids, Admin, TV native shell, push or other navigation is modified.
+  if (!html.includes('id="darCanonicalDailyV1"')) {
+    const daily = '<script defer id="darCanonicalDailyV1" src="/assets/dar-canonical-daily-v1.js?v=20261102-cross-app-v1"></' + 'script>';
+    html = html.includes("</body>") ? html.replace("</body>", daily + "</body>") : html + daily;
+  }
   return html;
 }
 function liveFrauenNativeAddon() {

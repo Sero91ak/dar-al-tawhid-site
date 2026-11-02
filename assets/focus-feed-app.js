@@ -432,15 +432,16 @@
 
     /* Daily duʿāʾ */
     try {
-      if (typeof dailyDua === 'function') {
-        var dd = dailyDua();
+      if (window.DARCanonicalDailyV1 && typeof window.DARCanonicalDailyV1.snapshot === 'function') {
+        var canonical = window.DARCanonicalDailyV1.snapshot();
+        var dd = canonical && canonical.dua;
         if (dd) {
           out.push({
             id: 'auto-dua-' + (dd.id || seed),
             type: 'dua',
             variant: 'premium',
             title: dd.title || 'Duʿāʾ des Tages',
-            preview: clampText(dd.text || dd.arabic || '', 100),
+            preview: clampText(dd.ar || dd.de || '', 100),
             tag: 'Duʿāʾ',
             date: hijri || seed,
             image: sanitizeImageUrl(dd.image || ''),
@@ -1009,6 +1010,7 @@
       });
   }
 
+  document.addEventListener('dar:canonical-daily-ready', function () { if (window.DAR_FOCUS_FEED) window.DAR_FOCUS_FEED.refresh({force:true}); });
   window.DAR_FOCUS_FEED = {
     refresh: function (opts) {
       loadAndRender(opts && opts.force);
