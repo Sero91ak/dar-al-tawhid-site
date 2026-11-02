@@ -379,6 +379,7 @@ function liveFrauenNativeAddon() {
   return [
     '<link rel="stylesheet" href="/assets/frauen/frauen-fiqh.css?v=frauen-rollback-20261016-1500">',
     '<link rel="stylesheet" href="/assets/frauen/frauen-authority-v1292.css?v=frauen-rollback-20261016-1500">',
+    '<link rel="stylesheet" href="/assets/frauen/frauen-originalbilder-v1400.css?v=frauen-originalbilder-v1400">',
     '<script defer src="/test/assets/frauen/frauen-fiqh.js?v=frauen-rollback-20261016-1500"><\/script>',
     '<script defer src="/assets/frauen/frauen-live-adapter.js?v=mehr-frauen-duplicate-fix-20261019"><\/script>'
   ].join("");
