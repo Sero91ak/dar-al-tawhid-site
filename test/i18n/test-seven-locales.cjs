@@ -258,6 +258,16 @@ assert.equal(w.DarTestTurkishUI.translateValue("🧭 Einordnung lesen","fr"),"�
 assert.equal(w.DarTestTurkishUI.translateValue("Heute: 1. Muharram 1448 AH · Montag, 02. November 2026","en"),"Today: 1. Muḥarram 1448 AH · Monday, 02. November 2026");
 assert.equal(w.DarTestTurkishUI.translateValue("Download PNG","tr"),"PNG indir");
 assert.equal(w.DarTestTurkishUI.translateValue("Offline:","ar"),"دون اتصال:");
+assert.equal(w.DarTestTurkishUI.translateValue("3 Beiträge in der Serie Wissen auf DĀR AL TAWḤĪD.","en"),"3 "+locales.translations.en.Beiträge+" in the series Wissen on DĀR AL TAWḤĪD.");
+assert.equal(w.DarTestTurkishUI.translateValue("12 von 40 Sūren","fr"),"12 sur 40 "+locales.translations.fr.Sūren);
+assert.equal(w.DarTestTurkishUI.translateValue("Al-Fātiḥah · Āyah 3 · zuletzt 02.11., 10:28","en"),"Al-Fātiḥah · "+locales.translations.en["Āyah"]+" 3 · last read 02.11., 10:28");
+assert.equal(w.DarTestTurkishUI.translateValue("Lernen mit Wiedergabe: Al-Fātiḥah · Āyah 3 · zuletzt 02.11., 10:28","es"),locales.translations.es["Lernen mit Wiedergabe"]+": Al-Fātiḥah · "+locales.translations.es["Āyah"]+" 3 · última lectura 02.11., 10:28");
+assert.equal(w.DarTestTurkishUI.translateValue("Ǧuzʾ · Sūrah · Āyah","en"),locales.translations.en["Juzʾ"]+" · "+locales.translations.en.Sūrah+" · "+locales.translations.en["Āyah"]);
+assert.equal(w.DarTestTurkishUI.translateValue("z. B. 2:255","tr"),"ör. 2:255");
+assert.equal(w.DarTestTurkishUI.translateValue("✅ Quelle geprüft","en"),"✅ Source reviewed");
+assert.equal(w.DarTestTurkishUI.translateValue("12 Einträge · tippen zum Öffnen","en"),w.DarTestTurkishUI.translateValue("12 Einträge","en")+" · tap to open");
+assert.equal(w.DarTestTurkishUI.translateValue("in der Liste","ar"),"في القائمة");
+assert.equal(w.DarTestTurkishUI.translateValue("Fundstelle","fr"),"Lieu cité");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);

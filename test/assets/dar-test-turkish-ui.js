@@ -515,7 +515,12 @@ function isDynamicGermanUi(value){
   /^\d+\/\d+ Dateien · \d+%(?: · .+)?$/.test(value)||
   /^Meist gelesen Platz \d+: .+$/.test(value)||
   /^\d+ Ḥadīṯe – nach Werken geordnet\.$/.test(value)||
-  /^\d+ von \d+ (?:Bücher|Gelehrte|Werke)$/.test(value)||
+  /^\d+ von \d+ (?:Bücher|Gelehrte|Werke|Sūren)$/.test(value)||
+  value==="Ǧuzʾ"||
+  /^\d+ Beiträge in der Serie .+ auf DĀR AL TAWḤĪD\.$/.test(value)||
+  /^.{1,80} · Āyah \d+(?: · zuletzt \d{1,2}\.\d{1,2}\., \d{1,2}:\d{2})?$/.test(value)||
+  /^Lernen mit Wiedergabe: .{1,80} · Āyah \d+(?: · zuletzt \d{1,2}\.\d{1,2}\., \d{1,2}:\d{2})?$/.test(value)||
+  /^z\. B\. [\d:]+$/.test(value)||
   /^\d+ (?:Bücher|Gelehrte|Werke)$/.test(value)||
   /^\d+ Werke · Gesamtkatalog$/.test(value)||
   /^\d+ Beiträge, \d+ Duʿāʾ$/.test(value)||
@@ -1821,7 +1826,7 @@ function translateSharedPatterns(value,language){
   };
   return forms[language]||null;
  }
- const countedOf=value.match(/^(\d+) von (\d+) (Bücher|Gelehrte|Werke)$/);
+ const countedOf=value.match(/^(\d+) von (\d+) (Bücher|Gelehrte|Werke|Sūren)$/);
  if(countedOf){
   const n=countedOf[1],m=countedOf[2],word=lookupPack(countedOf[3],language)||countedOf[3];
   const forms={
@@ -2481,6 +2486,48 @@ function translateSharedPatterns(value,language){
    const greg=localizeGermanCalendarLabel(todayHijri[4],language)||lookupPack(todayHijri[4],language)||todayHijri[4];
    if(line)return head+": "+line+" · "+greg;
   }
+  if(value==="Ǧuzʾ"){
+   const juz=lookupPack("Juzʾ",language);
+   if(juz)return juz;
+  }
+  const seriesOnDar=value.match(/^(\d+) Beiträge in der Serie (.+) auf DĀR AL TAWḤĪD\.$/);
+  if(seriesOnDar&&!/[<>]/.test(seriesOnDar[2])){
+   const n=seriesOnDar[1],title=seriesOnDar[2];
+   const posts=lookupPack("Beiträge",language)||"Beiträge";
+   const forms={
+    ar:n+" "+posts+" في سلسلة "+title+" على DĀR AL TAWḤĪD.",
+    en:n+" "+posts+" in the series "+title+" on DĀR AL TAWḤĪD.",
+    tr:title+" serisinde "+n+" "+posts+", DĀR AL TAWḤĪD.",
+    ku:n+" "+posts+" di rêza "+title+" de li ser DĀR AL TAWḤĪD.",
+    ckb:n+" "+posts+" لە زنجیرەی "+title+" لەسەر DĀR AL TAWḤĪD.",
+    bs:n+" "+posts+" u seriji "+title+" na DĀR AL TAWḤĪD.",
+    fr:n+" "+posts+" dans la série "+title+" sur DĀR AL TAWḤĪD.",
+    es:n+" "+posts+" en la serie "+title+" en DĀR AL TAWḤĪD."
+   };
+   return forms[language]||null;
+  }
+  const ayahLast=value.match(/^(.{1,80}) · Āyah (\d+)(?: · zuletzt (\d{1,2}\.\d{1,2}\., \d{1,2}:\d{2}))?$/);
+  if(ayahLast&&!/^Lernen mit Wiedergabe:/.test(value)&&!/[<>]/.test(ayahLast[1])){
+   const ayah=lookupPack("Āyah",language)||"Āyah";
+   let line=ayahLast[1]+" · "+ayah+" "+ayahLast[2];
+   if(ayahLast[3]){
+    const last={ar:"آخر قراءة",en:"last read",tr:"son okuma",ku:"dawî xwendin",ckb:"دوایین خوێندنەوە",bs:"zadnje čitanje",fr:"dernière lecture",es:"última lectura"}[language];
+    if(!last)return null;
+    line+=" · "+last+" "+ayahLast[3];
+   }
+   return line;
+  }
+  const learnAria=value.match(/^Lernen mit Wiedergabe: (.+)$/);
+  if(learnAria){
+   const head=lookupPack("Lernen mit Wiedergabe",language);
+   const rest=translateSharedPatterns(learnAria[1],language);
+   if(head&&rest)return head+": "+rest;
+  }
+  const forExample=value.match(/^z\. B\. ([\d:]+)$/);
+  if(forExample){
+   const forms={ar:"مثال: ",en:"e.g. ",tr:"ör. ",ku:"mînak ",ckb:"بۆ نموونە ",bs:"npr. ",fr:"p. ex. ",es:"p. ej. "};
+   return forms[language]?forms[language]+forExample[1]:null;
+  }
   const emojiLabel=value.match(/^(\p{Extended_Pictographic}\uFE0F?)\s+(.+)$/u);
   if(emojiLabel){
    const inner=lookupPack(emojiLabel[2],language);
@@ -2864,7 +2911,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-45";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-46";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
