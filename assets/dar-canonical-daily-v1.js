@@ -31,14 +31,22 @@ return snapshot();
 }).catch(function(){return fail("fetch-error",key)}).finally(function(){state.loading=null});
 return state.loading}
 function snapshot(){return state.valid?{date:state.date,dua:{id:state.dua.id,title:state.dua.title,ar:state.dua.ar,tr:state.dua.tr,de:state.dua.de,src:state.dua.src,cat:state.dua.cat},verse:state.daily.verse||null}:null}
-function nodes(){return Array.from(d.querySelectorAll(".dv3-today-card,[data-nav='dua'].home-v380-open-row,#darV8Daily a[href*='page=dua']"))}
+/* Actual visitor Home daily tile, across iOS WKWebView/PWA/browser. */
+var DAILY_TARGETS=".dhp-today-stack [data-dhp-route='duas'],.dv3-today-card,[data-nav='dua'].home-v380-open-row,#darV8Daily a[href*='page=dua']";
+function nodes(){return Array.from(d.querySelectorAll(DAILY_TARGETS))}
 function setAria(el,s){el.setAttribute("aria-label",s)}
 function render(){nodes().forEach(function(el){
-if(!state.valid){el.removeAttribute("data-dar-daily-id");if(el.matches(".dv3-today-card,.home-v380-open-row")){el.setAttribute("aria-disabled","true");setAria(el,t("missing"));var title=el.querySelector("strong,h3");if(title)title.textContent=t("missing");var copy=el.querySelector("span,p");if(copy)copy.textContent="";}return}
+if(!state.valid){el.removeAttribute("data-dar-daily-id");if(el.matches(".dhp-today-stack [data-dhp-route='duas'],.dv3-today-card,.home-v380-open-row")){el.setAttribute("aria-disabled","true");setAria(el,t("missing"));var title=el.querySelector("strong,h3");if(title)title.textContent=t("missing");var copy=el.querySelector("span,p");if(copy)copy.textContent="";}return}
 el.setAttribute("data-dar-daily-id",state.dua.id);el.removeAttribute("aria-disabled");
 if(el.matches(".dv3-today-card")){
 var strong=el.querySelector("strong"),small=el.querySelector("small"),copy=el.querySelector("span"),act=el.querySelector("b");
 if(strong)strong.textContent=state.dua.title;if(small)small.textContent=t("label")+" · "+state.date;if(copy)copy.textContent=state.dua.de;if(act)act.textContent=t("read")+" ›";
+}
+if(el.matches(".dhp-today-stack [data-dhp-route='duas']")){
+ var heading=el.querySelector(".dhp-today-copy strong"),kicker=el.querySelector(".dhp-kicker");
+ if(heading&&heading.textContent!==state.dua.title)heading.textContent=state.dua.title;
+ if(kicker&&kicker.textContent!==t("label"))kicker.textContent=t("label");
+ el.setAttribute("data-dhp-value",state.dua.id);
 }
 if(el.matches(".home-v380-open-row")){
 el.dataset.value=state.dua.id;
@@ -49,7 +57,7 @@ setAria(el,t("label")+": "+state.dua.title);
 function navigateDua(duaId){var id=encodeURIComponent(duaId);try{if(typeof w.navigate==="function"){w.navigate("dua",duaId);return}}catch(_){}
 if(d.getElementById("pageRoot")||/^\?page=/.test(w.location.search||"")){w.location.assign("/?page=dua&id="+id);return}
 w.location.hash="#dua/"+id}
-function isDailyTarget(el){if(!el||!el.closest)return null;var button=el.closest(".dv3-today-card,[data-nav='dua'].home-v380-open-row,#darV8Daily a[href*='page=dua']");return button&&button.isConnected?button:null}
+function isDailyTarget(el){if(!el||!el.closest)return null;var button=el.closest(DAILY_TARGETS);return button&&button.isConnected?button:null}
 function click(e){var button=isDailyTarget(e.target);if(!button)return;
 // The global day card always resolves its own canonical ID. Never open
 // the generic Duʿāʾ list or a previous hard-coded daily item.
