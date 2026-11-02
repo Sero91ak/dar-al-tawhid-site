@@ -524,20 +524,20 @@ const additions={
    "excerpt": false
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 631",
-   "text": "Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 46",
+   "text": "Der Prophet ﷺ nannte fünf tägliche Gebete; die einzelnen Gebetsnamen lernen wir mit einem geprüften Gebetsplan."
   },
   "sourceAudit": {
    "quranReference": "20:14",
    "quranUrl": "https://quran.com/20/14",
-   "hadithUrl": "https://sunnah.com/bukhari:631",
+   "hadithUrl": "https://sunnah.com/bukhari:46",
    "sourceAnchorLessonId": "fiqh-salah",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
+   "sourceScope": "Konkreter thematischer Ṣaḥīḥ-Primärbeleg neu abgeglichen; weitergehende Fiqh-Fragen bleiben prüfpflichtig.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
-   "hasNewIndependentHadithVerification": false,
+   "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
   "hint": "Fajr, Ẓuhr, ʿAṣr, Maghrib und ʿIshāʾ zuordnen.",
@@ -551,14 +551,14 @@ const additions={
      "Ich darf Fragen stellen und um Hilfe bitten.",
      "Wir gehen freundlich und sicher miteinander um."
     ],
-    "evidence": "Qurʾān 20:14 lehrt: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 20:14 bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die heutige Übung ist unser Beispiel."
    },
    "6-8": {
     "intro": "Eine Situation aus unserem Alltag: Fajr, Ẓuhr, ʿAṣr, Maghrib und ʿIshāʾ zuordnen.",
     "lines": [
      "Heute untersuchen wir das Thema „Die Namen der fünf Gebete“.",
-     "Der Qurʾān spricht in 20:14 darüber: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 631 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
+     "Der Qurʾān sagt in 20:14 sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
+     "Die Sunnah lehrt in Ṣaḥīḥ al-Buḫārī, Nr. 46 sinngemäß: Der Prophet ﷺ nannte fünf tägliche Gebete; die einzelnen Gebetsnamen lernen wir mit einem geprüften Gebetsplan.",
      "Unser eigenes Beispiel: Fajr, Ẓuhr, ʿAṣr, Maghrib und ʿIshāʾ zuordnen. Wir überlegen gemeinsam, warum es passt."
     ],
     "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
@@ -568,10 +568,10 @@ const additions={
     "lines": [
      "Ausgangssituation: Fajr, Ẓuhr, ʿAṣr, Maghrib und ʿIshāʾ zuordnen.",
      "Qurʾān 20:14: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 631): Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat. Dies ist eine deutsche Bedeutungswiedergabe.",
+     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 46), deutsche Bedeutungswiedergabe: Der Prophet ﷺ nannte fünf tägliche Gebete; die einzelnen Gebetsnamen lernen wir mit einem geprüften Gebetsplan.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/20/14 und https://sunnah.com/bukhari:631. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Quellen: https://quran.com/20/14 und https://sunnah.com/bukhari:46. Die Alltagsübung ist kein wörtlicher Offenbarungstext."
    }
   },
   "questions": {
@@ -619,14 +619,14 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
+     "prompt": "Welche Aussage stammt aus Qurʾān 20:14?",
      "options": [
       "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-      "Unser Übungsbeispiel ist: Fajr, Ẓuhr, ʿAṣr, Maghrib und ʿIshāʾ zuordnen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+      "Unsere eigene Unterrichtsübung: Bei „Die Namen der fünf Gebete“ übe ich: fajr, Ẓuhr, ʿAṣr, Maghrib und ʿIshāʾ zuordnen.",
+      "Die Sunnah erläutert sinngemäß: Der Prophet ﷺ nannte fünf tägliche Gebete; die einzelnen Gebetsnamen lernen wir mit einem geprüften Gebetsplan."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
+     "hint": "Vergleiche die Bedeutung von Qurʾān 20:14 mit unserem Alltagsbeispiel.",
      "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
     }
    ],
@@ -645,8 +645,8 @@ const additions={
     },
     {
      "type": "text",
-     "prompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
+     "prompt": "Was lehrt Qurʾān 20:14? Was berichtet Ṣaḥīḥ al-Buḫārī, Nr. 46?",
+     "sample": "Der Vers bedeutet: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die Sunnah berichtet sinngemäß: Der Prophet ﷺ nannte fünf tägliche Gebete; die einzelnen Gebetsnamen lernen wir mit einem geprüften Gebetsplan.",
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
     },
     {
