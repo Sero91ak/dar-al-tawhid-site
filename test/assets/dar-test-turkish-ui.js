@@ -351,6 +351,12 @@ const INTL_HIJRI_MONTH={
  "Dhu l-qaʿda":"Dhū al-Qaʿdah",
  "Dhu l-Hiddscha":"Dhū al-Ḥijjah"
 };
+function catalogHas(value){
+ if(!value)return false;
+ if(dictionary.has(value))return true;
+ for(const dict of languagePacks.values())if(dict.has(value))return true;
+ return false;
+}
 function localizedIntlHijriMonth(name,language){
  const canon=INTL_HIJRI_MONTH[name];
  if(!canon)return null;
@@ -531,7 +537,16 @@ function isDynamicGermanUi(value){
   /^.{2,90}, \d+ Veröffentlichungen$/.test(value)||
   /^.{2,90} · \d+ Seiten$/.test(value)||
   /^(Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonntag), \d{1,2}\. (Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember) /.test(value)||
-  (/^.{2,160} öffnen$/.test(value)&&!/[\u0600-\u06ff<>]/.test(value))||
+  (/^.{2,160} öffnen(?:\s*[→›])?$/.test(value)&&!/[\u0600-\u06ff<>]/.test(value))||
+  /^\d+ Kapitel$/.test(value)||
+  /^✓ \d+\/\d+ Tage inhaltlich geprüft$/.test(value)||
+  /^Weitere \d+ Treffer anzeigen$/.test(value)||
+  /^Duʿāʾ des Tages öffnen: .+$/.test(value)||
+  /^Heute empfohlen lesen: .+$/.test(value)||
+  /^.{1,90} in der Bibliothek öffnen$/.test(value)||
+  /^Sūrah .+ öffnen$/.test(value)||
+  (/^(.*?)(\s*(?:…|\.{3}))$/.test(value)&&catalogHas(value.replace(/\s*(?:…|\.{3})$/,"").trim()))||
+  (/^(.*?)(\s*›)$/.test(value)&&catalogHas(value.replace(/\s*›$/,"").trim()))||
   /^(?:←|→|↗|‹|›)\s+\S/.test(value)||
   /^Alle\s+\S/.test(value)||
   /\swird geladen/.test(value)||
@@ -2267,6 +2282,144 @@ function translateSharedPatterns(value,language){
   };
   return forms[language]||null;
  }
+ if(lookupPack(value,language)===undefined){
+  const ellipsis=value.match(/^(.*?)(\s*(?:…|\.{3}))$/);
+  if(ellipsis){
+   const known=lookupPack(ellipsis[1].trim(),language);
+   if(known!==undefined)return known+ellipsis[2];
+  }
+  const chevron=value.match(/^(.*?)(\s*›)$/);
+  if(chevron){
+   const known=lookupPack(chevron[1].trim(),language);
+   if(known!==undefined)return known+chevron[2];
+  }
+  const chapters=value.match(/^(\d+) Kapitel$/);
+  if(chapters){
+   const n=chapters[1];
+   const forms={
+    ar:n==="1"?"فصل واحد":n+" فصول",
+    en:n==="1"?"1 chapter":n+" chapters",
+    tr:n+" fasıl",
+    ku:n+" kapîtel",
+    ckb:n==="1"?"فەسلێک":n+" فەسل",
+    bs:n==="1"?"1 poglavlje":n+" poglavlja",
+    fr:n==="1"?"1 chapitre":n+" chapitres",
+    es:n==="1"?"1 capítulo":n+" capítulos"
+   };
+   return forms[language]||null;
+  }
+  const itemCount=value.match(/^(\d+) (Inhalt|Inhalte)$/);
+  if(itemCount){
+   const n=itemCount[1];
+   const forms={
+    ar:n==="1"?"محتوى واحد":n+" محتويات",
+    en:n==="1"?"1 item":n+" items",
+    tr:n+" içerik",
+    ku:n+" naverok",
+    ckb:n==="1"?"ناوەرۆکێک":n+" ناوەرۆک",
+    bs:n==="1"?"1 sadržaj":n+" sadržaja",
+    fr:n==="1"?"1 contenu":n+" contenus",
+    es:n==="1"?"1 contenido":n+" contenidos"
+   };
+   return forms[language]||null;
+  }
+  const chapterMix=value.match(/^(\d+) Kapitel · (\d+) (Inhalt|Inhalte)$/);
+  if(chapterMix){
+   const left=translateSharedPatterns(chapterMix[1]+" Kapitel",language);
+   const right=translateSharedPatterns(chapterMix[2]+" "+chapterMix[3],language);
+   if(left&&right)return left+" · "+right;
+  }
+  const reviewedDays=value.match(/^✓ (\d+)\/(\d+) Tage inhaltlich geprüft$/);
+  if(reviewedDays){
+   const a=reviewedDays[1],b=reviewedDays[2];
+   const forms={
+    ar:"✓ "+a+"/"+b+" يوماً فُحص مضمونها",
+    en:"✓ "+a+"/"+b+" days reviewed for content",
+    tr:"✓ "+a+"/"+b+" gün içerik olarak incelendi",
+    ku:"✓ "+a+"/"+b+" roj ji aliyê naverokê ve hatin kontrolkirin",
+    ckb:"✓ "+a+"/"+b+" ڕۆژ لە ڕووی ناوەڕۆکەوە پشکنرا",
+    bs:"✓ "+a+"/"+b+" dana sadržajno provjereno",
+    fr:"✓ "+a+"/"+b+" jours vérifiés quant au contenu",
+    es:"✓ "+a+"/"+b+" días revisados en el contenido"
+   };
+   return forms[language]||null;
+  }
+  const morePlain=value.match(/^Weitere (\d+) Treffer anzeigen$/);
+  if(morePlain){
+   const n=morePlain[1];
+   const forms={
+    ar:"عرض "+n+" نتائج إضافية",
+    en:"Show "+n+" more results",
+    tr:n+" sonuç daha göster",
+    ku:n+" encamên din nîşan bide",
+    ckb:n+" ئەنجامی تر پیشان بدە",
+    bs:"Prikaži još "+n+" rezultata",
+    fr:"Afficher "+n+" résultats de plus",
+    es:"Mostrar "+n+" resultados más"
+   };
+   return forms[language]||null;
+  }
+  const dayDua=value.match(/^Duʿāʾ des Tages öffnen: (.+)$/);
+  if(dayDua){
+   const head=lookupPack("Duʿāʾ des Tages",language)||"Duʿāʾ des Tages";
+   const forms={
+    ar:"افتح "+head+": "+dayDua[1],
+    en:"Open "+head+": "+dayDua[1],
+    tr:head+" aç: "+dayDua[1],
+    ku:head+" veke: "+dayDua[1],
+    ckb:head+" بکەرەوە: "+dayDua[1],
+    bs:"Otvori "+head+": "+dayDua[1],
+    fr:"Ouvrir "+head+" : "+dayDua[1],
+    es:"Abrir "+head+": "+dayDua[1]
+   };
+   return forms[language]||null;
+  }
+  const todayRead=value.match(/^Heute empfohlen lesen: (.+)$/);
+  if(todayRead){
+   const title=todayRead[1];
+   const forms={
+    ar:"اقرأ توصية اليوم: "+title,
+    en:"Read today's recommendation: "+title,
+    tr:"Bugünün önerisini oku: "+title,
+    ku:"Pêşniyaza îro bixwîne: "+title,
+    ckb:"پێشنیاری ئەمڕۆ بخوێنەوە: "+title,
+    bs:"Pročitaj današnju preporuku: "+title,
+    fr:"Lire la recommandation du jour : "+title,
+    es:"Leer la recomendación de hoy: "+title
+   };
+   return forms[language]||null;
+  }
+  const libraryOpen=value.match(/^(.{1,90}) in der Bibliothek öffnen$/);
+  if(libraryOpen&&!/[<>]/.test(libraryOpen[1])){
+   const name=lookupPack(libraryOpen[1],language)||libraryOpen[1];
+   const forms={
+    ar:"افتح "+name+" في المكتبة",
+    en:"Open "+name+" in the library",
+    tr:name+" kitaplıkta aç",
+    ku:name+" di pirtûkxaneyê de veke",
+    ckb:name+" لە کتێبخانە بکەرەوە",
+    bs:"Otvori "+name+" u biblioteci",
+    fr:"Ouvrir "+name+" dans la bibliothèque",
+    es:"Abrir "+name+" en la biblioteca"
+   };
+   return forms[language]||null;
+  }
+  const surahOpen=value.match(/^Sūrah (.+) öffnen$/);
+  if(surahOpen&&!/[<>]/.test(surahOpen[1])){
+   const name=surahOpen[1];
+   const forms={
+    ar:"افتح السورة "+name,
+    en:"Open sūrah "+name,
+    tr:name+" sûresini aç",
+    ku:"Sûreya "+name+" veke",
+    ckb:"سورەتی "+name+" بکەرەوە",
+    bs:"Otvori suru "+name,
+    fr:"Ouvrir la sourate "+name,
+    es:"Abrir la sura "+name
+   };
+   return forms[language]||null;
+  }
+ }
  return null;
 }
 function translateExact(value,language="tr"){
@@ -2404,11 +2557,11 @@ function translateExact(value,language="tr"){
  if(language!=="tr"){
   const exact=languagePacks.get(language)?.get(value);
   if(exact!==undefined)return exact;
-  const openLabel=value.match(/^(.{2,160}) öffnen$/);
+  const openLabel=value.match(/^(.{2,160}) öffnen(\s*[→›])?$/);
   if(openLabel&&!/[<>\u0600-\u06ff]/.test(openLabel[1])){
-   const verb=languagePacks.get(language)?.get("öffnen");
+   const verb=languagePacks.get(language)?.get("öffnen")||uiWord(language,"öffnen");
    const head=languagePacks.get(language)?.get(openLabel[1]);
-   if(verb)return (head||openLabel[1])+" "+verb;
+   if(verb)return (head||openLabel[1])+" "+verb+(openLabel[2]||"");
   }
   return localizeGermanCalendarLabel(value,language);
  }
@@ -2440,9 +2593,9 @@ function translateExact(value,language="tr"){
  if(pageCount)return (dictionary.get(pageCount[1])||pageCount[1])+" · "+pageCount[2]+" sayfa";
  const range=value.match(/^Sūrenbereich wechseln, aktuell (\d+)[–-](\d+)$/);
  if(range)return "Sûre aralığını değiştir, şu an "+range[1]+"–"+range[2];
- const action=value.match(/^(.{2,160}) öffnen$/);
+ const action=value.match(/^(.{2,160}) öffnen(\s*[→›])?$/);
  if(action&&!/[<>\u0600-\u06ff]/.test(action[1]))
-   return action[1]+" aç";
+   return action[1]+" aç"+(action[2]||"");
  return localizeGermanCalendarLabel(value,language);
 }
 
@@ -2644,7 +2797,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-43";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-44";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
