@@ -370,7 +370,7 @@ function activateAdultCompactHero(html) {
   // Canonical daily entrypoint across public website, visitor WKWebView and Android PWA.
   // No Kids, Admin, TV native shell, push or other navigation is modified.
   if (!html.includes('id="darCanonicalDailyV1"')) {
-    const daily = '<script defer id="darCanonicalDailyV1" src="/assets/dar-canonical-daily-v1.js?v=20261102-cross-app-v1"></' + 'script>';
+    const daily = '<script defer id="darCanonicalDailyV1" src="/assets/dar-canonical-daily-v1.js?v=20261102-home-actual-tile-v2"></' + 'script>';
     html = html.includes("</body>") ? html.replace("</body>", daily + "</body>") : html + daily;
   }
   return html;
