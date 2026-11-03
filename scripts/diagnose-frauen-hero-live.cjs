@@ -55,10 +55,33 @@ function verify(label,m,group=false){
    page.on("pageerror",e=>errors.push(String(e.message).slice(0,300)));
    const response=await page.goto(route.url,{waitUntil:"domcontentloaded",timeout:60000});
    await page.waitForTimeout(4000);
-   // Use exactly the unmerged, locally checked-out proposal.
+   // Ensure this is genuinely the Frauen route, rather than a boot splash or
+   // Start view that just happens to have a stale '#frauen' URL fragment.
+   const boot=await page.evaluate(()=>{
+     const nav=document.querySelector('[data-nav="frauen"]');
+     if(!document.body?.classList.contains("is-frauen-route")){
+       if(typeof window.navigate==="function")window.navigate("frauen","");
+       else if(nav)nav.click();
+     }
+     return {bodyClass:document.body?.className,hash:location.hash,
+       navigate:typeof window.navigate,app:!!document.getElementById("appView"),
+       nav:!!nav,hero:!!document.querySelector("#appView .frauen-library-hero")};
+   });
+   console.log("HERO_LIVE_BOOT",route.key,JSON.stringify(boot));
+   await page.waitForTimeout(1700);
+   // Inject the current PR into browser memory only, never publish it.
    await page.addStyleTag({content:css});
    await page.addScriptTag({content:js});
-   await page.waitForFunction(()=>!!document.querySelector("#appView .dar-frauen-hero-space-v1408"),{timeout:12000});
+   try{
+     await page.waitForFunction(()=>!!document.querySelector("#appView .dar-frauen-hero-space-v1408"),null,{timeout:16000});
+   }catch(e){
+     const state=await page.evaluate(()=>({bodyClass:document.body?.className,hash:location.hash,
+       app:!!document.getElementById("appView"),hero:!!document.querySelector("#appView .frauen-library-hero"),
+       stage:!!document.querySelector("#appView .dar-immersive-hero-stage"),
+       fixedRuntime:!!window.__darFrauenFixedHeroV1408,
+       loader:document.querySelector(".app-loading")?.textContent?.slice(0,100)}));
+     throw new Error(route.key+" V1408 never mounted: "+JSON.stringify(state)+"; "+e.message);
+   }
    await page.evaluate(()=>window.scrollTo(0,0));
    await page.waitForTimeout(500);
    let hub=await page.evaluate(metrics);
