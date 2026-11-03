@@ -165,9 +165,16 @@ html[data-dar-visitor-frontstage="1"] body.has-bottom-nav #appView.view :is(
  box-sizing:border-box!important;
 }
 html[data-dar-visitor-frontstage="1"] body.has-bottom-nav #appView.view :is(
- .more-grid,.frauen-library-area-grid,.quran-verse-grid
+ .more-grid,.quran-verse-grid
 ){
  grid-template-columns:repeat(auto-fit,minmax(min(100%,155px),1fr))!important;
+}
+/* Frauen chapter shelves never inherit the generic auto-fit 155px mini-grid. */
+html[data-dar-visitor-frontstage="1"] body.is-frauen-route #appView.view .frauen-library-area-grid{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  grid-template-columns:none!important;
 }
 @container dar-cover-prayer (max-width:380px){
  html[data-dar-visitor-frontstage="1"] #darHomeHtmlParityV1 .datp-foot{
