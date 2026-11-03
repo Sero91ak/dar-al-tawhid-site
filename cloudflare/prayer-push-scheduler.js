@@ -1054,6 +1054,13 @@ export function canonicalLocalClock(day, clock, timeZone = "Europe/Berlin") {
   if (dayKey(instant, timeZone) !== day || parts.hour !== hour || parts.minute !== minute) {
     throw new Error("Nonexistent or inconsistent local time");
   }
+  for (const shift of [-3600000, 3600000]) {
+    const alternate = new Date(instant.getTime() + shift);
+    const other = getLocalParts(alternate, timeZone);
+    if (dayKey(alternate, timeZone) === day && other.hour === hour && other.minute === minute) {
+      throw new Error("Ambiguous local time at daylight-saving transition");
+    }
+  }
   const offsetMinutes = tzOffsetMin(instant, timeZone);
   const sign = offsetMinutes < 0 ? "-" : "+";
   const offset = Math.abs(offsetMinutes);
