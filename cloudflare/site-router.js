@@ -373,6 +373,17 @@ function activateAdultCompactHero(html) {
     const daily = '<script defer id="darCanonicalDailyV1" src="/assets/dar-canonical-daily-v1.js?v=20261102-home-actual-tile-v2"></' + 'script>';
     html = html.includes("</body>") ? html.replace("</body>", daily + "</body>") : html + daily;
   }
+  // FRAUEN_GLOBAL_V1406 · independent of older adapter conditional loading.
+  // Guaranteed final visual authority in native iOS, dedicated Android PWA,
+  // visitor browser and any adult shell that mounts the global brand.
+  if (!html.includes('id="darFrauenGlobalFlowV1406"')) {
+    const flowCss = '<link rel="stylesheet" id="darFrauenGlobalFlowV1406" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css?v=frauen-single-column-flow-v1406-20261103">';
+    html = html.includes("</body>") ? html.replace("</body>",flowCss+"</body>") : html+flowCss;
+  }
+  if (!html.includes('id="darFrauenHeroSeamRuntimeV1406"')) {
+    const flowJs = '<script defer id="darFrauenHeroSeamRuntimeV1406" src="/assets/frauen/frauen-hero-seam-runtime-v1406.js?v=frauen-single-column-flow-v1406-20261103"></'+'script>';
+    html = html.includes("</body>") ? html.replace("</body>",flowJs+"</body>") : html+flowJs;
+  }
   return html;
 }
 function liveFrauenNativeAddon() {
@@ -380,7 +391,7 @@ function liveFrauenNativeAddon() {
     '<link rel="stylesheet" href="/assets/frauen/frauen-fiqh.css?v=frauen-rollback-20261016-1500">',
     '<link rel="stylesheet" href="/assets/frauen/frauen-authority-v1292.css?v=frauen-rollback-20261016-1500">',
 
-    '<link rel="stylesheet" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css?v=frauen-restore-v1224-20261103">',
+    /* Frauen V1406 is loaded unconditionally by adult global brand below. */
     '<script defer src="/test/assets/frauen/frauen-fiqh.js?v=frauen-rollback-20261016-1500"><\/script>',
     '<script defer src="/assets/frauen/frauen-live-adapter.js?v=mehr-frauen-duplicate-fix-20261019"><\/script>'
   ].join("");
