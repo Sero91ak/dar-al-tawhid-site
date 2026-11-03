@@ -1,6 +1,8 @@
 /* DAR_ADULT_TOP_SCROLL_BOUNDARY_V4 · first-touch two-ended scroll stop for adult visitor and Dar Test.
  * DAR_ADULT_TOP_SCROLL_BOUNDARY_V3 two-ended scrolling contract stays intact;
  * V4 only adds the earlier outward-edge cancel, without changing Hero geometry.
+ * V5 Frauen-only top-edge recognition prevents the first native pull from
+ * detaching the category Hero under the fixed brand header.
  * Block the very FIRST outward vertical touch movement at both document edges.
  * Previous 7px axis delay let the native iOS spring gesture activate first.
  * Does not scrollTo, clone/reparent DOM, lock body overflow or alter sticky Heroes.
