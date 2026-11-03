@@ -1,6 +1,7 @@
 import SwiftUI
 import WidgetKit
 import AppIntents
+import ActivityKit
 
 private enum DarColors {
     static let navy = Color(red: 0.025, green: 0.075, blue: 0.125)
