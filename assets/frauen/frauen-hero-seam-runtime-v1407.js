@@ -60,6 +60,7 @@ function setup(){
  window.addEventListener("pageshow",schedule);
  window.addEventListener("resize",schedule,{passive:true});
  window.addEventListener("orientationchange",schedule,{passive:true});
+ if(window.visualViewport)window.visualViewport.addEventListener("resize",schedule,{passive:true});
  window.addEventListener("hashchange",schedule);
  window.addEventListener("scroll",function(){if(top()<=1)schedule();},{passive:true});
  schedule();
