@@ -46,7 +46,8 @@ assert.match(flow,/\.frauen-library-area-grid > \.frauen-library-area-card\{[\s\
 assert.match(fixed,/FRAUEN_FIXED_HERO_V1408/);
 assert.match(fixed,/\.dar-immersive-hero-stage\{[\s\S]*?position:fixed!important;/,"Fotografie + Suche müssen gemeinsam unter dem Markenheader fixiert sein");
 assert.match(fixed,/\.dar-frauen-hero-space-v1408\{[\s\S]*?height:var\(--frauen-v1408-rail-height,0px\)!important;/,"Der Flow-Spacer darf niemals fehlen");
-assert.match(runtime,/getBoundingClientRect\(\)\.bottom/,"Gemessene Header-Unterkante fehlt");
+assert.match(runtime,/header\.getBoundingClientRect\(\)/,"Der tatsächliche Header muss gemessen werden");
+assert.match(runtime,/rect\.bottom/,"Gemessene Header-Unterkante fehlt");
 assert.match(runtime,/section\.insertBefore\(space,stage\.nextSibling\)/,"Inhalts-Spacer muss direkt hinter das Hero");
 assert.match(runtime,/--frauen-v1408-rail-height/,"Fixierte Hero-Höhe muss gemessen werden");
 assert.doesNotMatch(runtime,/preventDefault\(/,"Touch-Handler dürfen nicht dupliziert werden");
