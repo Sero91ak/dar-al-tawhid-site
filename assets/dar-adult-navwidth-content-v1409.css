@@ -4,6 +4,12 @@
  * 100% resolves against the right content pane, not the whole device.
  * Heroes retain their intentional edge-to-edge image bleed.
  */
+/* Remove the duplicate 18px page-shell padding that made cards narrower
+ * than the actual rendered nav capsule. Each route retains its own internal
+ * typographic/card paddings, safe-area, and the reader modal boundaries. */
+html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-ilm-chat-route) #appView.view{
+  padding-inline:0!important;
+}
 html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view > :is(
  .frauen-library-shell,.frauen-library-list,.frauen-hub,.frauen-page,
  .topics-hub,.topic-collection-page,.more-page,.account-page,
@@ -14,8 +20,8 @@ html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-read
  .prayer-overview,.zakat-view,.settings-page,.dar-responsive-page
 ){
   box-sizing:border-box!important;
-  width:min(100%,var(--dar-nav-width,100%))!important;
-  max-width:min(100%,var(--dar-nav-width,100%))!important;
+  width:min(100%,var(--dar-actual-nav-width,var(--dar-nav-width,100%)))!important;
+  max-width:min(100%,var(--dar-actual-nav-width,var(--dar-nav-width,100%)))!important;
   min-width:0!important;
   margin-inline:auto!important;
 }
@@ -23,8 +29,8 @@ html[data-theme] body.has-bottom-nav.is-frauen-route #appView :is(
  .frauen-library-shell,.frauen-library-list
 ){
   box-sizing:border-box!important;
-  width:min(100%,var(--dar-nav-width,100%))!important;
-  max-width:min(100%,var(--dar-nav-width,100%))!important;
+  width:min(100%,var(--dar-actual-nav-width,var(--dar-nav-width,100%)))!important;
+  max-width:min(100%,var(--dar-actual-nav-width,var(--dar-nav-width,100%)))!important;
   min-width:0!important;
   margin-inline:auto!important;
   padding-inline:0!important;
