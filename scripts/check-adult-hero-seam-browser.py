@@ -42,6 +42,7 @@ def html(test=False):
  <link rel="stylesheet" href="{authority}">
  <link rel="stylesheet" href="{hero}">
  <link rel="stylesheet" href="{brand}">
+ <link rel="stylesheet" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css">
  </head>
  <body class="dar-ios-native-app has-bottom-nav is-area-route is-frauen-route" data-frauen-view="hub">
  <header id="{hid}"><div class="dtbh-row"><span>DĀR AL TAWḤĪD</span></div></header>
@@ -84,9 +85,9 @@ def run():
       raise AssertionError(f"{lane} {label} Hero should touch Header at top: {value}")
      if scroll==0 and value["bodyPadding"]!="0px":
       raise AssertionError(f"{lane} {label} duplicated native 126px: {value}")
-     if scroll>0 and value["stageTop"]<value["bottom"]-2:
-      raise AssertionError(f"{lane} {label} sticky Hero slipped under Header: {value}")
-    print(f"PASS {lane} {label}: Hero flush to fixed Header at top and after returning; no native safe-gap",flush=True)
+     if scroll>0 and abs(value["stageTop"]-value["bottom"])>2:
+      raise AssertionError(f"{lane} {label} pinned Hero did not stay attached below Header: {value}")
+    print(f"PASS {lane} {label}: Hero remains pinned to fixed Header while content scrolls underneath",flush=True)
  finally:
   if driver:driver.quit()
   server.shutdown()

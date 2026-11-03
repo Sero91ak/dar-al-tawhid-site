@@ -34,26 +34,29 @@ for(const prefix of ["assets/frauen/library-v1224/","test/assets/frauen/library-
     assert.ok(fs.existsSync(prefix+image),"Original Frauen-Hero-Motiv fehlt: "+prefix+image);
   }
 }
-/* User-authorized 2026-11-03 V1406 vertical cards + natural scroll regression.
+/* User-authorized 2026-11-03 V1407 vertical cards + pinned Hero regression.
  * Frozen 2026-10-16 renderers remain unchanged; only presentation is updated. */
 const flow=fs.readFileSync("assets/frauen/frauen-original-v1224-header-seam-v1405.css","utf8");
-const seam=fs.readFileSync("assets/frauen/frauen-hero-seam-runtime-v1406.js","utf8");
+const seam=fs.readFileSync("assets/frauen/frauen-hero-seam-runtime-v1407.js","utf8");
 const frontstage=fs.readFileSync("assets/dar-visitor-frontstage-v1.css","utf8");
 const desktop=fs.readFileSync("desktop-preview/index.html","utf8");
 assert.match(flow,/\.frauen-library-area-grid\{[\s\S]*?display:flex!important;[\s\S]*?flex-direction:column!important;/,"Frauen Kapitel müssen untereinander sein");
 assert.match(flow,/\.frauen-library-area-grid > \.frauen-library-area-card\{[\s\S]*?width:100%!important;/,"Kapitelkarten müssen volle Breite haben");
-assert.doesNotMatch(flow,/position:sticky!important/,"Frauen Hero darf beim Scrollen nicht fixiert sein");
-assert.match(flow,/\.dar-immersive-hero-stage[\s\S]*?position:relative!important;/,"Hero muss hinter den festen Header scrollen");
+assert.match(flow,/DAR_FRAUEN_PINNED_HERO_UNDER_SCROLL_V1407/,"Sticky-Frauen-Hero V1407 fehlt");
+assert.match(flow,/\.dar-immersive-hero-stage\{[\s\S]*?position:sticky!important;[\s\S]*?top:var\(--frauen-fixed-brand-bottom,80px\)!important;/,"Bild und Suche müssen direkt unter dem Header fixiert sein");
 assert.match(seam,/getBoundingClientRect\(\)\.bottom/,"Gemessene feste Headerunterkante fehlt");
+assert.match(seam,/--frauen-fixed-brand-bottom/,"Gemessener Header-Sticky-Offset fehlt");
+assert.match(seam,/setProperty\("margin-top","var\(--frauen-flow-seam-shift\)","important"\)/,"Der Hero-Spalt muss zuverlässig korrigiert werden");
+
 assert.match(seam,/--frauen-flow-seam-shift/,"Automatische Korrektur des oberen Spalts fehlt");
 assert.doesNotMatch(seam,/scrollTo\(|preventDefault\(/,"Hero-Seam darf Scrollen nicht abfangen");
 assert.doesNotMatch(frontstage,/\.more-grid,\.frauen-library-area-grid,\.quran-verse-grid/,"Generischer Mini-Raster-Konflikt wieder eingeführt");
 for(const source of [native,testWorker,desktop]){
- assert.match(source,/frauen-single-column-flow-v1406-20261103/,"V1406 Auslieferung fehlt");
- assert.match(source,/frauen-hero-seam-runtime-v1406\.js/,"V1406 dynamischer Spaltabgleich fehlt");
+ assert.match(source,/frauen-sticky-hero-v1407-20261103/,"V1407 Auslieferung fehlt");
+ assert.match(source,/frauen-hero-seam-runtime-v1407\.js/,"V1406 dynamischer Spaltabgleich fehlt");
 }
-assert.equal([...flow].reduce((n,c)=>n+(c==="{")-(c==="}"),0),0,"Frauen V1406 CSS unvollständig");
-new (require("node:vm").Script)(seam,{filename:"frauen-hero-seam-runtime-v1406.js"});
-console.log("PASS: V1406 original photos, full-width chapters, natural Hero scroll and measured seam, frozen renderers unchanged.");
+assert.equal([...flow].reduce((n,c)=>n+(c==="{")-(c==="}"),0),0,"Frauen V1407 CSS unvollständig");
+new (require("node:vm").Script)(seam,{filename:"frauen-hero-seam-runtime-v1407.js"});
+console.log("PASS: V1407 original photos, one-column chapters, pinned Hero/search, and under-scrolling card area.");
 
 console.log("OK: Frauenbereich unverändert außer genehmigtem Entfernen der doppelten Mehr-Karte.");
