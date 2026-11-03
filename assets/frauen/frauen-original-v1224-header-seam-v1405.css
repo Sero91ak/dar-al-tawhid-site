@@ -139,10 +139,25 @@ html.dar-adult-global-brand-ready body.is-frauen-route{
 html.dar-test-premium-header-v2 body.is-frauen-route{
   --frauen-header-seam-top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,80px));
 }
+/* On the Frauen route the modern fixed brand already replaces the old
+ * top-shell. Its empty legacy header used to consume another ~80–100px,
+ * leaving a pale strip between the fixed header and the photo.
+ * Collapse ONLY that redundant legacy shell; keep the measured in-flow
+ * #darAdultBrandHeaderSpacerV2 and all other routes intact. */
+html:is(.dar-adult-global-brand-ready,.dar-test-premium-header-v2)
+ body.is-frauen-route > .app > .top-shell{
+  display:none!important;
+  block-size:0!important;
+  min-block-size:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+}
 html:is(.dar-adult-global-brand-ready,.dar-test-premium-header-v2)
  body.is-frauen-route #appView.view{
   margin-top:0!important;
   padding-top:0!important;
+  overflow-x:clip!important;
   overflow-y:visible!important;
 }
 html:is(.dar-adult-global-brand-ready,.dar-test-premium-header-v2)
