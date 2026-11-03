@@ -985,3 +985,68 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
     lastError: statusReport.lastError
   };
 }
+
+
+/**
+ * Canonical absolute prayer instants for the native countdown contract.
+ * Reads the EXISTING public prayer calculation; consumers must not recalculate.
+ * This is intentionally separate from the push scheduling/notification path.
+ */
+export function computeCanonicalPrayerDay({
+  date,
+  lat = 52.52,
+  lon = 13.405,
+  timeZone = "Europe/Berlin",
+  locationName = "Berlin",
+  angle = 12,
+  asrFactor = 1,
+  generatedAt = new Date().toISOString()
+} = {}) {
+  const source = computePublicPrayerTimes({ date, lat, lon, timeZone, angle, asrFactor });
+  if (!source.ok) throw new Error(source.error || "Invalid prayer source");
+  const day = source.date;
+  const [year, month, dayNumber] = day.split("-").map(Number);
+  const localDay = { year, month, day: dayNumber };
+  const sunrise = sunTime(localDay, source.lat, source.lon, 0.833, true, source.timeZone);
+  if (!Number.isFinite(sunrise)) throw new Error("Sunrise unavailable");
+  const sunriseTime = formatHour(sunrise);
+  const canonicalOrder = ["fajr", "sunrise", "dhuhr", "asr", "maghrib", "isha"];
+  const prayers = {};
+  let prior = -Infinity;
+  for (const key of canonicalOrder) {
+    const value = key === "sunrise" ? sunriseTime : source.times[key]?.time;
+    if (!/^\\d{2}:\\d{2}$/.test(String(value || ""))) {
+      throw new Error("Missing or invalid prayer time: " + key);
+    }
+    const [hour, minute] = value.split(":").map(Number);
+    if (hour > 23 || minute > 59) throw new Error("Out-of-range prayer time: " + key);
+    const instant = utcFromLocal(localDay, hour + minute / 60, source.timeZone);
+    if (!(instant instanceof Date) || !Number.isFinite(instant.getTime())) {
+      throw new Error("Invalid absolute prayer instant: " + key);
+    }
+    const parts = getLocalParts(instant, source.timeZone);
+    if (dayKey(instant, source.timeZone) !== day ||
+        parts.hour !== hour || parts.minute !== minute || instant.getTime() <= prior) {
+      throw new Error("Inconsistent or out-of-order prayer instant: " + key);
+    }
+    prior = instant.getTime();
+    const offsetMinutes = tzOffsetMin(instant, source.timeZone);
+    const sign = offsetMinutes < 0 ? "-" : "+";
+    const offset = Math.abs(offsetMinutes);
+    const zoneSuffix = sign + String(Math.floor(offset / 60)).padStart(2, "0") +
+      ":" + String(offset % 60).padStart(2, "0");
+    prayers[key] = {
+      name: key === "sunrise" ? "Sonnenaufgang" : source.times[key].name,
+      dateTime: day + "T" + value + ":00" + zoneSuffix
+    };
+  }
+  return {
+    schemaVersion: 1,
+    date: day,
+    generatedAt,
+    timeZone: source.timeZone,
+    location: { name: String(locationName), latitude: source.lat, longitude: source.lon },
+    method: { fajrAngle: source.methodAngle, asrFactor: source.asrFactor },
+    prayers
+  };
+}
