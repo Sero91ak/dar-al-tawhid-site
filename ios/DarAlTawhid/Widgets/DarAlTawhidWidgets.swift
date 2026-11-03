@@ -1115,6 +1115,74 @@ struct DarIslamicDayPremiumWidget: Widget {
     }
 }
 
+
+// Lock Screen and Dynamic Island share the same ActivityKit ContentState Date.
+// No repeating publisher, Timer, or per-second Activity.update calls.
+@available(iOS 16.1, *)
+struct DarPrayerLiveActivityWidget: Widget {
+    var body: some WidgetConfiguration {
+        ActivityConfiguration(for: DarPrayerLiveAttributes.self) { context in
+            HStack(spacing: 14) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("DĀR AL TAWḤĪD")
+                        .font(.caption2.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    Text(context.state.prayerName)
+                        .font(.headline)
+                        .lineLimit(1)
+                    Text(context.state.city)
+                        .font(.caption)
+                        .lineLimit(1)
+                }
+                Spacer(minLength: 4)
+                Text(context.state.targetDate, style: .timer)
+                    .monospacedDigit()
+                    .font(.title2.weight(.bold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
+            }
+            .padding(16)
+            .activityBackgroundTint(Color(red: 0.04, green: 0.08, blue: 0.11))
+            .activitySystemActionForegroundColor(.white)
+        } dynamicIsland: { context in
+            DynamicIsland {
+                DynamicIslandExpandedRegion(.leading) {
+                    VStack(alignment: .leading) {
+                        Text(context.state.prayerName).font(.headline)
+                        Text(context.state.city).font(.caption2)
+                    }
+                }
+                DynamicIslandExpandedRegion(.trailing) {
+                    Text(context.state.targetDate, style: .timer)
+                        .monospacedDigit()
+                        .font(.headline)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.6)
+                }
+                DynamicIslandExpandedRegion(.bottom) {
+                    Text("Nächstes Gebet")
+                        .font(.caption2)
+                }
+            } compactLeading: {
+                Text("☪").font(.caption.weight(.bold))
+            } compactTrailing: {
+                Text(context.state.targetDate, style: .timer)
+                    .monospacedDigit()
+                    .font(.caption2.weight(.semibold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.55)
+            } minimal: {
+                Text(context.state.targetDate, style: .timer)
+                    .monospacedDigit()
+                    .font(.system(size: 8, weight: .semibold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+            }
+            .widgetURL(DarDeepLink.Destination.prayer.url)
+        }
+    }
+}
+
 @main
 struct DarAlTawhidWidgets: WidgetBundle {
     @WidgetBundleBuilder
@@ -1127,6 +1195,9 @@ struct DarAlTawhidWidgets: WidgetBundle {
         PrayerLockWidget()
         CalendarLockWidget()
         QiblaLockWidget()
+        if #available(iOS 16.1, *) {
+            DarPrayerLiveActivityWidget()
+        }
         if #available(iOS 17.0, *) {
             DarPrayerCountdownPremiumWidget()
             DarPrayerOverviewPremiumWidget()
