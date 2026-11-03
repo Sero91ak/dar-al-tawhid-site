@@ -215,6 +215,7 @@ struct PrayerWidgetView: View {
     }
 
     var body: some View {
+        let target = entry.snapshot.nextAbsolutePrayer(after: entry.date)?.target
         DarCard(destination: .prayer) {
             VStack(alignment: .leading, spacing: family == .systemSmall ? 9 : 11) {
                 DarHeader(section: entry.snapshot.hijriLabel, compact: family == .systemSmall)
@@ -232,11 +233,7 @@ struct PrayerWidgetView: View {
                             .minimumScaleFactor(0.84)
                             .allowsTightening(true)
                         Spacer(minLength: 2)
-                        Text(entry.snapshot.nextPrayerTime)
-                            .font(.system(size: 25, weight: .bold, design: .rounded).monospacedDigit())
-                            .foregroundStyle(DarColors.paleGold)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.88)
+                        DarAbsolutePrayerTimer(target: target, size: 19, foreground: DarColors.paleGold)
                     }
                     Text(entry.snapshot.cityLabel)
                         .font(.system(size: 10.5, weight: .medium))
@@ -258,9 +255,7 @@ struct PrayerWidgetView: View {
                                 .lineLimit(1)
                         }
                         Spacer(minLength: 4)
-                        Text(entry.snapshot.nextPrayerTime)
-                            .font(.system(size: 31, weight: .bold, design: .rounded).monospacedDigit())
-                            .foregroundStyle(DarColors.paleGold)
+                        DarAbsolutePrayerTimer(target: target, size: 26, foreground: DarColors.paleGold)
                     }
                     HStack(spacing: 6) {
                         ForEach(prayerSlots.prefix(5)) { slot in
