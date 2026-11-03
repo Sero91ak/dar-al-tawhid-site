@@ -283,3 +283,25 @@ html[data-theme] body.is-frauen-route{
  html[data-theme] body.is-frauen-route #appView
  :is(.frauen-library-card.has-visual,.frauen-library-area-card.has-visual){transition:none!important}
 }
+
+/* Very narrow iPhone panes: preserve readable, independent text area without
+ * reintroducing the photographic capsule or creating horizontal overflow. */
+@media(max-width:360px){
+  html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual{
+    grid-template-columns:16px 38px minmax(0,1fr) 23px!important;
+    gap:7px!important;
+    padding-inline:9px!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual{
+    grid-template-columns:16px 36px minmax(0,1fr) 22px!important;
+    gap:7px!important;
+    padding-inline:9px!important;
+  }
+  html[data-theme] body.is-frauen-route #appView
+   :is(.frauen-library-card.has-visual .frauen-library-card__icon,
+       .frauen-library-area-card.has-visual .frauen-library-area-card__icon){
+    width:36px!important;
+    height:36px!important;
+    border-radius:12px!important;
+  }
+}
