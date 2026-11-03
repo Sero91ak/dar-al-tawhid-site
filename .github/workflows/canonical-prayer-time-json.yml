@@ -1,0 +1,58 @@
+name: Canonical Prayer Time JSON
+
+on:
+  pull_request:
+    paths:
+      - 'cloudflare/prayer-push-scheduler.js'
+      - 'scripts/generate-canonical-prayer-times.mjs'
+      - 'tests/prayer-canonical.test.mjs'
+      - '.github/workflows/canonical-prayer-time-json.yml'
+  workflow_dispatch:
+  schedule:
+    # Both UTC instants cover Berlin local midnight across DST.
+    # The script resolves the Berlin calendar day instead of guessing UTC date.
+    - cron: '9 22,23 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: canonical-prayer-time-json
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate absolute time and DST contracts
+        run: node --experimental-default-type=module --test tests/prayer-canonical.test.mjs
+
+  publish:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Generate current and next two dates from canonical calculation
+        run: node --experimental-default-type=module scripts/generate-canonical-prayer-times.mjs
+      - name: Commit only the data contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add content/prayer-times/*.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data(prayer): refresh canonical Berlin absolute instants [skip ci]"
+            git push origin HEAD:main
+          fi
