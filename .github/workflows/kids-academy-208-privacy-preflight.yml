@@ -1,0 +1,24 @@
+name: KIDS Academy 208 Privacy and Pre-Audio Audit
+on:
+  pull_request:
+    paths:
+      - 'kids/akademie/**'
+      - 'kids/tools/academy-208-privacy-audio-preflight.cjs'
+      - 'kids/data/academy-voice-policy-v10.json'
+      - '.github/workflows/kids-academy-208-privacy-preflight.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  zero-credit-preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check 208 lessons, 624 ages, 1664 questions, no paid audio
+        run: |
+          node kids/tools/test-academy-v31-142-editorial.cjs
+          node kids/tools/academy-208-privacy-audio-preflight.cjs
