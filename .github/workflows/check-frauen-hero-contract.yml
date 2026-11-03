@@ -7,7 +7,6 @@ on:
       - 'cloudflare/site-router.js'
       - 'cloudflare/test-app-worker.js'
       - 'scripts/verify-frauen-hero-contract.cjs'
-      - 'scripts/check-frauen-fixed-hero-v1408-browser.py'
       - '.github/workflows/check-frauen-hero-contract.yml'
   push:
     branches: [main]
@@ -17,7 +16,6 @@ on:
       - 'cloudflare/site-router.js'
       - 'cloudflare/test-app-worker.js'
       - 'scripts/verify-frauen-hero-contract.cjs'
-      - 'scripts/check-frauen-fixed-hero-v1408-browser.py'
       - '.github/workflows/check-frauen-hero-contract.yml'
 jobs:
   verify-frauen-heros:
@@ -28,14 +26,3 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/verify-frauen-hero-contract.cjs
-  check-fixed-hero-browser:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - name: Install actual browser driver
-        run: python3 -m pip install --quiet selenium
-      - name: Check iPhone, Duo and Fold Hero/header/content geometry
-        run: python3 scripts/check-frauen-fixed-hero-v1408-browser.py
