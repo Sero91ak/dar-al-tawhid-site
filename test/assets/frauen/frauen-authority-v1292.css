@@ -553,11 +553,11 @@ html[data-theme] body.is-frauen-route[data-frauen-view="list"] .post-row__meta{
   }
 }
 
-/* All viewports: Frauen shelves stay one column, including Fold and iPad. */
+/* Tablet/desktop: only here may the shelves become two columns. */
 @media (min-width:760px){
   html[data-theme] body.is-frauen-route .frauen-library-grid,
   html[data-theme] body.is-frauen-route .frauen-library-area-grid{
-    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
   }
   html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual{
     min-height:230px!important;
