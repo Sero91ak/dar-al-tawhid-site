@@ -541,6 +541,9 @@ function isDynamicGermanUi(value){
   /^Quelle: [^<>\n]{1,160}$/.test(value)||
   /^Schritt \d+ von 15$/.test(value)||
   /^Āyah \d+ \/ \d+$/.test(value)||
+  /^Erstellt am [^<>\n]{1,40}$/.test(value)||
+  /^Bereinigt: \d+ Test-Dateien, \d+ Test-Service-Worker\. Die App wird neu geöffnet …$/.test(value)||
+  /^\d+ Ḥadīṯe in diesem Bāb\.$/.test(value)||
   /^\d+\. Fundstelle$/.test(value)||
   /^Qurʾān \d{1,3}:\d{1,3}(?: · [^<>]{1,80})?$/.test(value)||
   /^· Āyah \d+ ·$/.test(value)||
@@ -2680,6 +2683,33 @@ function translateSharedPatterns(value,language){
    const word=lookupPack("Āyah",language);
    if(word)return word+" "+ayahOf[1]+" / "+ayahOf[2];
   }
+  const createdOn=value.match(/^Erstellt am ([^<>\n]{1,40})$/);
+  if(createdOn){
+   const rest=createdOn[1];
+   const forms={ar:"أُنشئ في "+rest,en:"Created on "+rest,tr:"Oluşturulma: "+rest,ku:"Hatiye çêkirin "+rest,ckb:"دروستکراوە لە "+rest,bs:"Kreirano "+rest,fr:"Créé le "+rest,es:"Creado el "+rest};
+   return forms[language]||null;
+  }
+  const cleared=value.match(/^Bereinigt: (\d+) Test-Dateien, (\d+) Test-Service-Worker\. Die App wird neu geöffnet …$/);
+  if(cleared){
+   const n=cleared[1],m=cleared[2];
+   const forms={
+    ar:"تم التنظيف: "+n+" ملفات اختبار، "+m+" عمّال خدمة للاختبار. سيُعاد فتح التطبيق …",
+    en:"Cleared: "+n+" test files, "+m+" test service workers. The app will reopen …",
+    tr:"Temizlendi: "+n+" deneme dosyası, "+m+" deneme service worker. Uygulama yeniden açılacak …",
+    ku:"Hat paqijkirin: "+n+" pelên ceribandinê, "+m+" service workerên ceribandinê. Sepan dê ji nû ve bê vekirin …",
+    ckb:"پاککرایەوە: "+n+" پەڕگەی تاقیکاری، "+m+" وۆرکەری تاقیکاری. ئەپ دووبارە دەکرێتەوە …",
+    bs:"Očišćeno: "+n+" probnih datoteka, "+m+" probnih service workera. Aplikacija će se ponovo otvoriti …",
+    fr:"Nettoyé : "+n+" fichiers de test, "+m+" service workers de test. L’app va se rouvrir …",
+    es:"Limpiado: "+n+" archivos de prueba, "+m+" service workers de prueba. La app se volverá a abrir …"
+   };
+   return forms[language]||null;
+  }
+  const babCount=value.match(/^(\d+) Ḥadīṯe in diesem Bāb\.$/);
+  if(babCount){
+   const n=babCount[1];
+   const forms={ar:n+" أحاديث في هذا الباب.",en:n+" hadith reports in this chapter.",tr:"Bu babda "+n+" hadis.",ku:n+" hedîs di vê babê de.",ckb:n+" فەرموودە لەم بابەدا.",bs:n+" hadisa u ovom babu.",fr:n+" ḥadīṯs dans ce chapitre.",es:n+" hadices en este capítulo."};
+   return forms[language]||null;
+  }
   const numberedPlace=value.match(/^(\d+)\. Fundstelle$/);
   if(numberedPlace){
    const word=lookupPack("Fundstelle",language);
@@ -3114,7 +3144,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-53";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-54";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
