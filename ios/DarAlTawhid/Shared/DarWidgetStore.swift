@@ -119,6 +119,15 @@ enum DarPrayerSync {
             }
         }
         guard !fetched.isEmpty else { return false }
+        // A network request can finish after the WebApp selects another location.
+        // Never overwrite the newer App Group location or its canonical data.
+        let latest = DarWidgetStore.load()
+        guard latest.prayerTimeZone == snap.prayerTimeZone,
+              abs(latest.latitude - snap.latitude) < 0.0001,
+              abs(latest.longitude - snap.longitude) < 0.0001,
+              abs(latest.fajrAngle - snap.fajrAngle) < 0.001,
+              abs(latest.asrFactor - snap.asrFactor) < 0.001 else { return false }
+        snap = latest
         // A successful partial refresh preserves matching cached future days.
         let validCache = snap.canonicalPrayerDays.filter { $0.matches(snap) }
         let combined = fetched + validCache.filter { cached in
