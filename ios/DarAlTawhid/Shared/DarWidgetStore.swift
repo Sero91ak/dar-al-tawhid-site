@@ -1,12 +1,17 @@
 import Foundation
 
 enum DarWidgetStore {
+    private static var sharedDefaults: UserDefaults? {
+        UserDefaults(suiteName: DarWidgetKeys.appGroup)
+    }
+    // Deep-link preferences can fall back independently; prayer data never does.
     static var defaults: UserDefaults {
-        UserDefaults(suiteName: DarWidgetKeys.appGroup) ?? .standard
+        sharedDefaults ?? .standard
     }
 
     static func load() -> DarWidgetSnapshot {
-        guard let data = defaults.data(forKey: DarWidgetKeys.snapshot),
+        guard let sharedDefaults,
+              let data = sharedDefaults.data(forKey: DarWidgetKeys.snapshot),
               let snap = try? JSONDecoder().decode(DarWidgetSnapshot.self, from: data) else {
             return DarDailyContent.refresh(DarWidgetSnapshot.empty)
         }
@@ -14,9 +19,9 @@ enum DarWidgetStore {
     }
 
     static func save(_ snapshot: DarWidgetSnapshot) {
-        if let data = try? JSONEncoder().encode(snapshot) {
-            defaults.set(data, forKey: DarWidgetKeys.snapshot)
-        }
+        guard let sharedDefaults,
+              let data = try? JSONEncoder().encode(snapshot) else { return }
+        sharedDefaults.set(data, forKey: DarWidgetKeys.snapshot)
     }
 
     static func setPendingDestination(_ dest: DarDeepLink.Destination) {
