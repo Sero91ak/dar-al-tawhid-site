@@ -1,0 +1,95 @@
+/* DĀR IOS FRAUEN HERO V1409 — iPhone/iPad only.
+ * Android's approved sticky hero remains completely untouched.
+ * Header is OS/browser-fixed; original photo + search are ONE fixed layer
+ * below its actually measured bottom. Flow spacer reserves their height.
+ */
+html.dar-ios-frauen-hero-v1409 body.is-frauen-route:is(
+ [data-frauen-view="hub"],[data-frauen-view="group"],[data-frauen-view="list"]
+) #appView .dar-immersive-hero-stage{
+  position:fixed!important;
+  top:var(--dar-ios-frauen-brand-bottom,80px)!important;
+  inset-block-start:var(--dar-ios-frauen-brand-bottom,80px)!important;
+  left:var(--dar-ios-frauen-stage-left,0px)!important;
+  right:auto!important;
+  width:var(--dar-ios-frauen-stage-width,100vw)!important;
+  max-width:none!important;
+  z-index:620!important;
+  isolation:isolate!important;
+  box-sizing:border-box!important;
+  display:block!important;
+  margin:0!important;
+  padding:0!important;
+  background:var(--bg,#f3f3eb)!important;
+  border:0!important;
+  transform:none!important;
+  filter:none!important;
+  contain:none!important;
+  overflow:visible!important;
+}
+html.dar-ios-frauen-hero-v1409 body.is-frauen-route #appView .dar-immersive-hero-stage > .frauen-library-hero{
+  position:relative!important;
+  top:auto!important;
+  inset-block-start:auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+}
+html.dar-ios-frauen-hero-v1409 body.is-frauen-route #appView
+ .dar-immersive-hero-stage > :is(.frauen-library-search-wrap,.frauen-library-list-controls){
+  position:relative!important;
+  top:auto!important;
+  inset-block-start:auto!important;
+  z-index:2!important;
+}
+html.dar-ios-frauen-hero-v1409 body.is-frauen-route #appView .dar-ios-frauen-hero-spacer-v1409{
+  display:block!important;
+  height:var(--dar-ios-frauen-stage-height,0px)!important;
+  width:100%!important;
+  max-width:100%!important;
+  padding:0!important;
+  margin:0 0 14px!important;
+  border:0!important;
+  background:transparent!important;
+  pointer-events:none!important;
+  box-sizing:border-box!important;
+  visibility:hidden!important;
+}
+html.dar-ios-frauen-hero-v1409 body.is-frauen-route #appView
+ :is(.frauen-library-section-head,.frauen-library-grid,.frauen-library-area-grid,.frauen-post-list){
+  position:relative!important;
+  z-index:1!important;
+}
+html.dar-ios-frauen-hero-v1409 body.is-frauen-route #appView,
+html.dar-ios-frauen-hero-v1409 body.is-frauen-route #appView
+ :is(.frauen-library-shell,.frauen-library-list){
+  overflow:visible!important;
+}
+html.dar-ios-frauen-hero-v1409 body.is-frauen-route #appView .frauen-library-shell,
+html.dar-ios-frauen-hero-v1409 body.is-frauen-route #appView .frauen-library-list{
+  margin-top:0!important;
+}
+html.dar-ios-frauen-hero-v1409 body.is-frauen-route > .app,
+html.dar-ios-frauen-hero-v1409 body.is-frauen-route #appView{
+  transform:none!important;
+  filter:none!important;
+  perspective:none!important;
+  contain:none!important;
+}
+html.dar-ios-frauen-hero-v1409 body.is-frauen-route{
+  overscroll-behavior-y:none!important;
+}
+html.dar-ios-frauen-hero-v1409 body.is-frauen-route[data-dar-ios-frauen-input="1"] #appView .dar-immersive-hero-stage{
+  position:relative!important;
+  top:auto!important;
+  inset-block-start:auto!important;
+  left:auto!important;
+  width:100%!important;
+  z-index:2!important;
+}
+html.dar-ios-frauen-hero-v1409 body.is-frauen-route[data-dar-ios-frauen-input="1"] #appView .dar-ios-frauen-hero-spacer-v1409{
+  display:none!important;
+}
+/* Preserve real iPhone/historical photo imagery, do not add overlays or icons.
+ * Never change other adult heroes, Quran, Kids or the floating navigation. */
