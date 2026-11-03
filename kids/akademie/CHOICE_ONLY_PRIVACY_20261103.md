@@ -22,3 +22,7 @@ Der separate 208-Lektionen-PR #1588 enthält weiterhin 142 nicht freigegebene re
 ## Erlaubte technische Alt-Daten
 
 Historische Lernstände mit unbewerteten Antworten dürfen im bestehenden lokalen Schema weiter gelesen werden, aber es wird kein neuer Freitext und keine Kinderstimme gespeichert. Andere Bereiche wie Qurʾān-Lernstudio oder Profilverwaltung sind nicht Teil dieses Auftrags.
+
+## Ergänzender Auditbefund (03.11.2026)
+
+Die redaktionelle 208-Lektionen-Erweiterung in PR #1588 enthält zusätzlich 426 offene Frageformate. Insgesamt sind daher 624 offene Frageformate in beiden Entwicklungsständen zu prüfen. Diese dürfen nur als antippbare Antwortmöglichkeiten und nach fachlicher Freigabe veröffentlicht werden. Der Audio-Massenstart bleibt bis dahin gesperrt.
