@@ -693,35 +693,30 @@ private struct DarPremiumLogo: View {
     }
 }
 
-private func darPrayerDate(time: String, after now: Date) -> Date {
-    let parts = time.split(separator: ":").compactMap { Int($0) }
-    guard parts.count == 2 else { return now.addingTimeInterval(3600) }
-    var calendar = Calendar.current
-    calendar.timeZone = .current
-    var components = calendar.dateComponents([.year, .month, .day], from: now)
-    components.hour = parts[0]
-    components.minute = parts[1]
-    components.second = 0
-    let today = calendar.date(from: components) ?? now.addingTimeInterval(3600)
-    return today > now ? today : (calendar.date(byAdding: .day, value: 1, to: today) ?? today.addingTimeInterval(86_400))
-}
-
-@available(iOS 17.0, *)
-private struct DarLivePrayerTimer: View {
-    let now: Date
-    let target: Date
-    let palette: DarPremiumPalette
+// Every timer receives the same absolute target instant from the App Group.
+@available(iOS 16.1, *)
+private struct DarAbsolutePrayerTimer: View {
+    let target: Date?
     let size: CGFloat
+    let foreground: Color
 
     var body: some View {
-        Text(timerInterval: now...target, countsDown: true, showsHours: true)
-            .font(.system(size: size, weight: .bold, design: .rounded).monospacedDigit())
-            .foregroundStyle(palette.primary)
-            .lineLimit(1)
-            .minimumScaleFactor(0.72)
-            .allowsTightening(true)
+        Group {
+            if let target {
+                Text(target, style: .timer)
+                    .monospacedDigit()
+            } else {
+                Text("—")
+            }
+        }
+        .font(.system(size: size, weight: .bold, design: .rounded))
+        .foregroundStyle(foreground)
+        .lineLimit(1)
+        .minimumScaleFactor(0.72)
     }
 }
+
+
 
 @available(iOS 17.0, *)
 private struct DarPrayerCountdownPremiumView: View {
@@ -730,7 +725,7 @@ private struct DarPrayerCountdownPremiumView: View {
 
     var body: some View {
         let palette = DarPremiumPalette.resolve(entry.appearance, snapshot: entry.snapshot)
-        let target = darPrayerDate(time: entry.snapshot.nextPrayerTime, after: entry.date)
+        let target = entry.snapshot.nextAbsolutePrayer(after: entry.date)?.target
         VStack(alignment: .leading, spacing: 7) {
             HStack {
                 DarPremiumLogo(palette: palette, showName: family != .systemSmall)
@@ -754,7 +749,7 @@ private struct DarPrayerCountdownPremiumView: View {
             .lineLimit(1)
             .minimumScaleFactor(0.78)
             Spacer(minLength: 0)
-            DarLivePrayerTimer(now: entry.date, target: target, palette: palette, size: family == .systemSmall ? 26 : 34)
+            DarAbsolutePrayerTimer(target: target, size: family == .systemSmall ? 26 : 34, foreground: palette.primary)
                 .frame(maxWidth: .infinity, alignment: family == .systemSmall ? .center : .trailing)
             HStack {
                 Text(entry.snapshot.nextPrayerTime)
@@ -779,7 +774,7 @@ private struct DarPrayerOverviewPremiumView: View {
     var body: some View {
         let palette = DarPremiumPalette.resolve(entry.appearance, snapshot: entry.snapshot)
         let slots = entry.snapshot.prayers.filter { $0.id != "sunrise" }
-        let target = darPrayerDate(time: entry.snapshot.nextPrayerTime, after: entry.date)
+        let target = entry.snapshot.nextAbsolutePrayer(after: entry.date)?.target
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 DarPremiumLogo(palette: palette)
@@ -788,7 +783,7 @@ private struct DarPrayerOverviewPremiumView: View {
                     Text("\(entry.snapshot.nextPrayerName) in")
                         .font(.system(size: 10.5, weight: .medium, design: .serif))
                         .foregroundStyle(palette.secondary)
-                    DarLivePrayerTimer(now: entry.date, target: target, palette: palette, size: 22)
+                    DarAbsolutePrayerTimer(target: target, size: 22, foreground: palette.primary)
                 }
             }
             HStack(spacing: 5) {
