@@ -114,10 +114,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Nach einer erhaltenen Hilfe Dank ausdrücken."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Danke und Entschuldigung sagen“ im Beispiel üben kannst.",
-     "sample": "Ich könnte nach einer erhaltenen Hilfe Dank ausdrücken. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Danke und Entschuldigung sagen“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte nach einer erhaltenen Hilfe Dank ausdrücken. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte nach einer erhaltenen Hilfe Dank ausdrücken. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Danke und Entschuldigung sagen“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -146,16 +153,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 17:53 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 17:53 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Danke und Entschuldigung sagen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: nach einer erhaltenen Hilfe Dank ausdrücken. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Danke und Entschuldigung sagen“?",
+     "options": [
+      "Ich erkläre die Situation: nach einer erhaltenen Hilfe Dank ausdrücken. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: nach einer erhaltenen Hilfe Dank ausdrücken. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Danke und Entschuldigung sagen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -280,10 +301,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Einer vertrauten erwachsenen Person eine Schwierigkeit sagen."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Bei Problemen Hilfe holen“ im Beispiel üben kannst.",
-     "sample": "Ich könnte einer vertrauten erwachsenen Person eine Schwierigkeit sagen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Bei Problemen Hilfe holen“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte einer vertrauten erwachsenen Person eine Schwierigkeit sagen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte einer vertrauten erwachsenen Person eine Schwierigkeit sagen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Bei Problemen Hilfe holen“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -312,16 +340,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 20:132 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Fordere deine Familie zum Gebet auf und bleibe dabei geduldig und beständig. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, Dinge zu erleichtern statt sie unnötig schwer zu machen, und Menschen zu ermutigen statt abzuschrecken.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Fordere deine Familie zum Gebet auf und bleibe dabei geduldig und beständig. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, Dinge zu erleichtern statt sie unnötig schwer zu machen, und Menschen zu ermutigen statt abzuschrecken.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Fordere deine Familie zum Gebet auf und bleibe dabei geduldig und beständig. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, Dinge zu erleichtern statt sie unnötig schwer zu machen, und Menschen zu ermutigen statt abzuschrecken.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 20:132 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Bei Problemen Hilfe holen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: einer vertrauten erwachsenen Person eine Schwierigkeit sagen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Bei Problemen Hilfe holen“?",
+     "options": [
+      "Ich erkläre die Situation: einer vertrauten erwachsenen Person eine Schwierigkeit sagen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: einer vertrauten erwachsenen Person eine Schwierigkeit sagen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Bei Problemen Hilfe holen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -446,10 +488,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Eine Sache nennen, für die man dankbar ist."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Dankbarkeit im Herzen“ im Beispiel üben kannst.",
-     "sample": "Ich könnte eine Sache nennen, für die man dankbar ist. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Dankbarkeit im Herzen“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte eine Sache nennen, für die man dankbar ist. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte eine Sache nennen, für die man dankbar ist. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Dankbarkeit im Herzen“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -478,16 +527,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 98:5 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Ihnen wurde nur befohlen, Allah zu dienen, indem sie Ihm gegenüber aufrichtig in der Religion sind. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, dass Taten nach den Absichten beurteilt werden.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Ihnen wurde nur befohlen, Allah zu dienen, indem sie Ihm gegenüber aufrichtig in der Religion sind. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, dass Taten nach den Absichten beurteilt werden.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Ihnen wurde nur befohlen, Allah zu dienen, indem sie Ihm gegenüber aufrichtig in der Religion sind. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, dass Taten nach den Absichten beurteilt werden.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 98:5 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Dankbarkeit im Herzen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: eine Sache nennen, für die man dankbar ist. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Dankbarkeit im Herzen“?",
+     "options": [
+      "Ich erkläre die Situation: eine Sache nennen, für die man dankbar ist. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: eine Sache nennen, für die man dankbar ist. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Dankbarkeit im Herzen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -612,10 +675,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Eine Waschbewegung und das Streichen über den Kopf auseinanderhalten."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Wuḍūʾ: Waschen und Streichen unterscheiden“ im Beispiel üben kannst.",
-     "sample": "Ich könnte eine Waschbewegung und das Streichen über den Kopf auseinanderhalten. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Wuḍūʾ: Waschen und Streichen unterscheiden“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte eine Waschbewegung und das Streichen über den Kopf auseinanderhalten. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte eine Waschbewegung und das Streichen über den Kopf auseinanderhalten. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Wuḍūʾ: Waschen und Streichen unterscheiden“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -644,16 +714,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 5:6 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 5:6 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Wuḍūʾ: Waschen und Streichen unterscheiden“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: eine Waschbewegung und das Streichen über den Kopf auseinanderhalten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Wuḍūʾ: Waschen und Streichen unterscheiden“?",
+     "options": [
+      "Ich erkläre die Situation: eine Waschbewegung und das Streichen über den Kopf auseinanderhalten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: eine Waschbewegung und das Streichen über den Kopf auseinanderhalten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Wuḍūʾ: Waschen und Streichen unterscheiden“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -778,10 +862,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Einen Vers mit echter Rezitation langsam wiederholen."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Sūrat an-Nās kennenlernen“ im Beispiel üben kannst.",
-     "sample": "Ich könnte einen Vers mit echter Rezitation langsam wiederholen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Sūrat an-Nās kennenlernen“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte einen Vers mit echter Rezitation langsam wiederholen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte einen Vers mit echter Rezitation langsam wiederholen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Sūrat an-Nās kennenlernen“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -810,16 +901,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 114:1 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Sag: Ich suche Zuflucht beim Herrn der Menschen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ rezitierte unter anderem an-Nās vor dem Schlafen.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Sag: Ich suche Zuflucht beim Herrn der Menschen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ rezitierte unter anderem an-Nās vor dem Schlafen.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Sag: Ich suche Zuflucht beim Herrn der Menschen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ rezitierte unter anderem an-Nās vor dem Schlafen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 114:1 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Sūrat an-Nās kennenlernen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: einen Vers mit echter Rezitation langsam wiederholen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Sūrat an-Nās kennenlernen“?",
+     "options": [
+      "Ich erkläre die Situation: einen Vers mit echter Rezitation langsam wiederholen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: einen Vers mit echter Rezitation langsam wiederholen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Sūrat an-Nās kennenlernen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -944,10 +1049,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Von einer belegten Begebenheit über Mut lernen."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Mūsā عليه السلام und Mut“ im Beispiel üben kannst.",
-     "sample": "Ich könnte von einer belegten Begebenheit über Mut lernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Mūsā عليه السلام und Mut“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte von einer belegten Begebenheit über Mut lernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte von einer belegten Begebenheit über Mut lernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Mūsā عليه السلام und Mut“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -976,16 +1088,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 20:25 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Mūsā bat Allah darum, ihm das Herz zu weiten. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Mūsā bat Allah darum, ihm das Herz zu weiten. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Mūsā bat Allah darum, ihm das Herz zu weiten. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 20:25 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Mūsā عليه السلام und Mut“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: von einer belegten Begebenheit über Mut lernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Mūsā عليه السلام und Mut“?",
+     "options": [
+      "Ich erkläre die Situation: von einer belegten Begebenheit über Mut lernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: von einer belegten Begebenheit über Mut lernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Mūsā عليه السلام und Mut“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -1110,10 +1236,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Eine religiös zulässige Bitte in eigenen Worten formulieren."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Vor dem Lernen um Hilfe bitten“ im Beispiel üben kannst.",
-     "sample": "Ich könnte eine religiös zulässige Bitte in eigenen Worten formulieren. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Vor dem Lernen um Hilfe bitten“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte eine religiös zulässige Bitte in eigenen Worten formulieren. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte eine religiös zulässige Bitte in eigenen Worten formulieren. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Vor dem Lernen um Hilfe bitten“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -1142,16 +1275,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 1:5 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Dir allein dienen wir, und Dich allein bitten wir um Hilfe. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, beim Bittgebet nicht ungeduldig zu werden und nicht vorschnell zu sagen, man habe gebetet, aber keine Antwort erhalten.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Dir allein dienen wir, und Dich allein bitten wir um Hilfe. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, beim Bittgebet nicht ungeduldig zu werden und nicht vorschnell zu sagen, man habe gebetet, aber keine Antwort erhalten.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Dir allein dienen wir, und Dich allein bitten wir um Hilfe. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, beim Bittgebet nicht ungeduldig zu werden und nicht vorschnell zu sagen, man habe gebetet, aber keine Antwort erhalten.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 1:5 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Vor dem Lernen um Hilfe bitten“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: eine religiös zulässige Bitte in eigenen Worten formulieren. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Vor dem Lernen um Hilfe bitten“?",
+     "options": [
+      "Ich erkläre die Situation: eine religiös zulässige Bitte in eigenen Worten formulieren. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: eine religiös zulässige Bitte in eigenen Worten formulieren. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Vor dem Lernen um Hilfe bitten“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -1276,10 +1423,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Bei wiederholten Gemeinheiten einer Vertrauensperson berichten."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Mobbing erkennen und Hilfe holen“ im Beispiel üben kannst.",
-     "sample": "Ich könnte bei wiederholten Gemeinheiten einer Vertrauensperson berichten. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Mobbing erkennen und Hilfe holen“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte bei wiederholten Gemeinheiten einer Vertrauensperson berichten. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte bei wiederholten Gemeinheiten einer Vertrauensperson berichten. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Mobbing erkennen und Hilfe holen“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -1308,16 +1462,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 17:53 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 17:53 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Mobbing erkennen und Hilfe holen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: bei wiederholten Gemeinheiten einer Vertrauensperson berichten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Mobbing erkennen und Hilfe holen“?",
+     "options": [
+      "Ich erkläre die Situation: bei wiederholten Gemeinheiten einer Vertrauensperson berichten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: bei wiederholten Gemeinheiten einer Vertrauensperson berichten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Mobbing erkennen und Hilfe holen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -1442,10 +1610,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Bei einer Sorge Allah um Hilfe bitten."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Allah hört unsere Bittgebete“ im Beispiel üben kannst.",
-     "sample": "Ich könnte bei einer Sorge Allah um Hilfe bitten. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Allah hört unsere Bittgebete“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte bei einer Sorge Allah um Hilfe bitten. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte bei einer Sorge Allah um Hilfe bitten. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Allah hört unsere Bittgebete“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -1474,16 +1649,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 2:186 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Allah ist nahe und erhört das Bittgebet des Bittenden. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, beim Bittgebet nicht ungeduldig zu werden und nicht vorschnell zu sagen, man habe gebetet, aber keine Antwort erhalten.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Allah ist nahe und erhört das Bittgebet des Bittenden. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, beim Bittgebet nicht ungeduldig zu werden und nicht vorschnell zu sagen, man habe gebetet, aber keine Antwort erhalten.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Allah ist nahe und erhört das Bittgebet des Bittenden. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, beim Bittgebet nicht ungeduldig zu werden und nicht vorschnell zu sagen, man habe gebetet, aber keine Antwort erhalten.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 2:186 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Allah hört unsere Bittgebete“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: bei einer Sorge Allah um Hilfe bitten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Allah hört unsere Bittgebete“?",
+     "options": [
+      "Ich erkläre die Situation: bei einer Sorge Allah um Hilfe bitten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: bei einer Sorge Allah um Hilfe bitten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Allah hört unsere Bittgebete“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -1608,10 +1797,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Den Qurʾān respektvoll behandeln und seine Bedeutung kennenlernen."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Der Qurʾān als Offenbarung“ im Beispiel üben kannst.",
-     "sample": "Ich könnte den Qurʾān respektvoll behandeln und seine Bedeutung kennenlernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Der Qurʾān als Offenbarung“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte den Qurʾān respektvoll behandeln und seine Bedeutung kennenlernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte den Qurʾān respektvoll behandeln und seine Bedeutung kennenlernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Der Qurʾān als Offenbarung“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -1640,16 +1836,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 2:2 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Dies ist das Buch, an dem kein Zweifel besteht: eine Rechtleitung für die Gottesfürchtigen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte den besonderen Wert dessen, der den Qurʾān lernt und ihn weiterlehrt.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Dies ist das Buch, an dem kein Zweifel besteht: eine Rechtleitung für die Gottesfürchtigen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte den besonderen Wert dessen, der den Qurʾān lernt und ihn weiterlehrt.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Dies ist das Buch, an dem kein Zweifel besteht: eine Rechtleitung für die Gottesfürchtigen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte den besonderen Wert dessen, der den Qurʾān lernt und ihn weiterlehrt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 2:2 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Der Qurʾān als Offenbarung“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: den Qurʾān respektvoll behandeln und seine Bedeutung kennenlernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Der Qurʾān als Offenbarung“?",
+     "options": [
+      "Ich erkläre die Situation: den Qurʾān respektvoll behandeln und seine Bedeutung kennenlernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: den Qurʾān respektvoll behandeln und seine Bedeutung kennenlernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Der Qurʾān als Offenbarung“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -1774,10 +1984,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Beim Erzählen über gute Taten bescheiden bleiben."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Nicht mit guten Taten prahlen“ im Beispiel üben kannst.",
-     "sample": "Ich könnte beim Erzählen über gute Taten bescheiden bleiben. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Nicht mit guten Taten prahlen“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte beim Erzählen über gute Taten bescheiden bleiben. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte beim Erzählen über gute Taten bescheiden bleiben. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Nicht mit guten Taten prahlen“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -1806,16 +2023,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 39:11 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 39:11 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Nicht mit guten Taten prahlen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: beim Erzählen über gute Taten bescheiden bleiben. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Nicht mit guten Taten prahlen“?",
+     "options": [
+      "Ich erkläre die Situation: beim Erzählen über gute Taten bescheiden bleiben. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: beim Erzählen über gute Taten bescheiden bleiben. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Nicht mit guten Taten prahlen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -1940,10 +2171,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Eine Entschuldigung annehmen, ohne eigenes Unwohlsein zu verschweigen."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Verzeihen und Grenzen achten“ im Beispiel üben kannst.",
-     "sample": "Ich könnte eine Entschuldigung annehmen, ohne eigenes Unwohlsein zu verschweigen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Verzeihen und Grenzen achten“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte eine Entschuldigung annehmen, ohne eigenes Unwohlsein zu verschweigen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte eine Entschuldigung annehmen, ohne eigenes Unwohlsein zu verschweigen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Verzeihen und Grenzen achten“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -1972,16 +2210,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 3:134 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Diejenigen, die ihren Zorn zurückhalten und den Menschen vergeben. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass wahre Stärke nicht darin besteht, andere zu besiegen, sondern sich bei Wut zu beherrschen.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Diejenigen, die ihren Zorn zurückhalten und den Menschen vergeben. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass wahre Stärke nicht darin besteht, andere zu besiegen, sondern sich bei Wut zu beherrschen.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Diejenigen, die ihren Zorn zurückhalten und den Menschen vergeben. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass wahre Stärke nicht darin besteht, andere zu besiegen, sondern sich bei Wut zu beherrschen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 3:134 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Verzeihen und Grenzen achten“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: eine Entschuldigung annehmen, ohne eigenes Unwohlsein zu verschweigen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Verzeihen und Grenzen achten“?",
+     "options": [
+      "Ich erkläre die Situation: eine Entschuldigung annehmen, ohne eigenes Unwohlsein zu verschweigen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: eine Entschuldigung annehmen, ohne eigenes Unwohlsein zu verschweigen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Verzeihen und Grenzen achten“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -2106,10 +2358,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Im Gebetsraum ruhig bleiben und sorgfältig mit Dingen umgehen."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Rücksicht in der Moschee“ im Beispiel üben kannst.",
-     "sample": "Ich könnte im Gebetsraum ruhig bleiben und sorgfältig mit Dingen umgehen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Rücksicht in der Moschee“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte im Gebetsraum ruhig bleiben und sorgfältig mit Dingen umgehen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte im Gebetsraum ruhig bleiben und sorgfältig mit Dingen umgehen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Rücksicht in der Moschee“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -2138,16 +2397,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 17:23 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 17:23 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Rücksicht in der Moschee“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: im Gebetsraum ruhig bleiben und sorgfältig mit Dingen umgehen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Rücksicht in der Moschee“?",
+     "options": [
+      "Ich erkläre die Situation: im Gebetsraum ruhig bleiben und sorgfältig mit Dingen umgehen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: im Gebetsraum ruhig bleiben und sorgfältig mit Dingen umgehen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Rücksicht in der Moschee“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -2272,10 +2545,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Bei unangenehmen Situationen klar Nein sagen und Hilfe holen."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Eigene Grenzen respektieren“ im Beispiel üben kannst.",
-     "sample": "Ich könnte bei unangenehmen Situationen klar Nein sagen und Hilfe holen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Eigene Grenzen respektieren“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte bei unangenehmen Situationen klar Nein sagen und Hilfe holen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte bei unangenehmen Situationen klar Nein sagen und Hilfe holen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Eigene Grenzen respektieren“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -2304,16 +2584,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 24:27 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Betretet nicht andere Häuser als eure eigenen, bevor ihr um Erlaubnis gebeten und ihre Bewohner begrüßt habt. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass um Erlaubnis gebeten wird, damit die Privatsphäre und der Blick in fremde Räume geschützt sind.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Betretet nicht andere Häuser als eure eigenen, bevor ihr um Erlaubnis gebeten und ihre Bewohner begrüßt habt. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass um Erlaubnis gebeten wird, damit die Privatsphäre und der Blick in fremde Räume geschützt sind.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Betretet nicht andere Häuser als eure eigenen, bevor ihr um Erlaubnis gebeten und ihre Bewohner begrüßt habt. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass um Erlaubnis gebeten wird, damit die Privatsphäre und der Blick in fremde Räume geschützt sind.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 24:27 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Eigene Grenzen respektieren“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: bei unangenehmen Situationen klar Nein sagen und Hilfe holen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Eigene Grenzen respektieren“?",
+     "options": [
+      "Ich erkläre die Situation: bei unangenehmen Situationen klar Nein sagen und Hilfe holen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: bei unangenehmen Situationen klar Nein sagen und Hilfe holen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Eigene Grenzen respektieren“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -2438,10 +2732,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Einer anderen Person etwas gönnen lernen."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Neid erkennen ohne Beschämung“ im Beispiel üben kannst.",
-     "sample": "Ich könnte einer anderen Person etwas gönnen lernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Neid erkennen ohne Beschämung“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte einer anderen Person etwas gönnen lernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte einer anderen Person etwas gönnen lernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Neid erkennen ohne Beschämung“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -2470,16 +2771,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 91:9 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Erfolg hat gewiss, wer seine Seele läutert. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass nicht Aussehen und Besitz das Entscheidende sind, sondern Herzen und Taten.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Erfolg hat gewiss, wer seine Seele läutert. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass nicht Aussehen und Besitz das Entscheidende sind, sondern Herzen und Taten.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Erfolg hat gewiss, wer seine Seele läutert. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass nicht Aussehen und Besitz das Entscheidende sind, sondern Herzen und Taten.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 91:9 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Neid erkennen ohne Beschämung“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: einer anderen Person etwas gönnen lernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Neid erkennen ohne Beschämung“?",
+     "options": [
+      "Ich erkläre die Situation: einer anderen Person etwas gönnen lernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: einer anderen Person etwas gönnen lernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Neid erkennen ohne Beschämung“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -2604,10 +2919,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Vor dem Gebet auf saubere Kleidung achten."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Reinheit der Gebetskleidung“ im Beispiel üben kannst.",
-     "sample": "Ich könnte vor dem Gebet auf saubere Kleidung achten. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Reinheit der Gebetskleidung“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte vor dem Gebet auf saubere Kleidung achten. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte vor dem Gebet auf saubere Kleidung achten. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Reinheit der Gebetskleidung“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -2636,16 +2958,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 74:4 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Und reinige deine Kleidung. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass die rituelle Reinigung ein wichtiger Teil des Glaubens ist.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Und reinige deine Kleidung. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass die rituelle Reinigung ein wichtiger Teil des Glaubens ist.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Und reinige deine Kleidung. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass die rituelle Reinigung ein wichtiger Teil des Glaubens ist.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 74:4 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Reinheit der Gebetskleidung“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: vor dem Gebet auf saubere Kleidung achten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Reinheit der Gebetskleidung“?",
+     "options": [
+      "Ich erkläre die Situation: vor dem Gebet auf saubere Kleidung achten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: vor dem Gebet auf saubere Kleidung achten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Reinheit der Gebetskleidung“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -2770,10 +3106,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Kurze Verse ohne Zeitdruck wiederholen."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Qurʾān respektvoll auswendig lernen“ im Beispiel üben kannst.",
-     "sample": "Ich könnte kurze Verse ohne Zeitdruck wiederholen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Qurʾān respektvoll auswendig lernen“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte kurze Verse ohne Zeitdruck wiederholen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte kurze Verse ohne Zeitdruck wiederholen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Qurʾān respektvoll auswendig lernen“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -2802,16 +3145,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 2:2 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Dies ist das Buch, an dem kein Zweifel besteht: eine Rechtleitung für die Gottesfürchtigen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte den besonderen Wert dessen, der den Qurʾān lernt und ihn weiterlehrt.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Dies ist das Buch, an dem kein Zweifel besteht: eine Rechtleitung für die Gottesfürchtigen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte den besonderen Wert dessen, der den Qurʾān lernt und ihn weiterlehrt.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Dies ist das Buch, an dem kein Zweifel besteht: eine Rechtleitung für die Gottesfürchtigen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte den besonderen Wert dessen, der den Qurʾān lernt und ihn weiterlehrt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 2:2 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Qurʾān respektvoll auswendig lernen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: kurze Verse ohne Zeitdruck wiederholen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Qurʾān respektvoll auswendig lernen“?",
+     "options": [
+      "Ich erkläre die Situation: kurze Verse ohne Zeitdruck wiederholen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: kurze Verse ohne Zeitdruck wiederholen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Qurʾān respektvoll auswendig lernen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -2936,10 +3293,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Seinen Namen respektvoll als Propheten nennen."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „ʿĪsā عليه السلام als Gesandter“ im Beispiel üben kannst.",
-     "sample": "Ich könnte seinen Namen respektvoll als Propheten nennen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „ʿĪsā عليه السلام als Gesandter“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte seinen Namen respektvoll als Propheten nennen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte seinen Namen respektvoll als Propheten nennen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „ʿĪsā عليه السلام als Gesandter“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -2968,16 +3332,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 19:30 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: ʿĪsā bezeichnete sich als Diener Allahs, dem Allah die Schrift gab und den Er zum Propheten machte. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: ʿĪsā bezeichnete sich als Diener Allahs, dem Allah die Schrift gab und den Er zum Propheten machte. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: ʿĪsā bezeichnete sich als Diener Allahs, dem Allah die Schrift gab und den Er zum Propheten machte. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 19:30 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „ʿĪsā عليه السلام als Gesandter“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: seinen Namen respektvoll als Propheten nennen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „ʿĪsā عليه السلام als Gesandter“?",
+     "options": [
+      "Ich erkläre die Situation: seinen Namen respektvoll als Propheten nennen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: seinen Namen respektvoll als Propheten nennen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „ʿĪsā عليه السلام als Gesandter“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -3102,10 +3480,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Eine Qurʾān-Bitte für Eltern verstehen."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Für Eltern Gutes erbitten“ im Beispiel üben kannst.",
-     "sample": "Ich könnte eine Qurʾān-Bitte für Eltern verstehen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Für Eltern Gutes erbitten“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte eine Qurʾān-Bitte für Eltern verstehen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte eine Qurʾān-Bitte für Eltern verstehen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Für Eltern Gutes erbitten“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -3134,16 +3519,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 17:23 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Und zu den Eltern sollt ihr gütig sein. Die angegebene Sunnah lehrt sinngemäß: Auf die Frage nach der Person, die besonders gute Behandlung verdient, nannte der Prophet ﷺ dreimal die Mutter und dann den Vater.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Und zu den Eltern sollt ihr gütig sein. Die angegebene Sunnah lehrt sinngemäß: Auf die Frage nach der Person, die besonders gute Behandlung verdient, nannte der Prophet ﷺ dreimal die Mutter und dann den Vater.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Und zu den Eltern sollt ihr gütig sein. Die angegebene Sunnah lehrt sinngemäß: Auf die Frage nach der Person, die besonders gute Behandlung verdient, nannte der Prophet ﷺ dreimal die Mutter und dann den Vater.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 17:23 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Für Eltern Gutes erbitten“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: eine Qurʾān-Bitte für Eltern verstehen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Für Eltern Gutes erbitten“?",
+     "options": [
+      "Ich erkläre die Situation: eine Qurʾān-Bitte für Eltern verstehen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: eine Qurʾān-Bitte für Eltern verstehen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Für Eltern Gutes erbitten“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -3268,10 +3667,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Eine unangenehme Berührung ablehnen und Hilfe suchen."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Nein sagen und persönliche Sicherheit“ im Beispiel üben kannst.",
-     "sample": "Ich könnte eine unangenehme Berührung ablehnen und Hilfe suchen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Nein sagen und persönliche Sicherheit“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte eine unangenehme Berührung ablehnen und Hilfe suchen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte eine unangenehme Berührung ablehnen und Hilfe suchen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Nein sagen und persönliche Sicherheit“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -3300,16 +3706,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 24:27 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Betretet nicht andere Häuser als eure eigenen, bevor ihr um Erlaubnis gebeten und ihre Bewohner begrüßt habt. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass um Erlaubnis gebeten wird, damit die Privatsphäre und der Blick in fremde Räume geschützt sind.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Betretet nicht andere Häuser als eure eigenen, bevor ihr um Erlaubnis gebeten und ihre Bewohner begrüßt habt. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass um Erlaubnis gebeten wird, damit die Privatsphäre und der Blick in fremde Räume geschützt sind.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Betretet nicht andere Häuser als eure eigenen, bevor ihr um Erlaubnis gebeten und ihre Bewohner begrüßt habt. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass um Erlaubnis gebeten wird, damit die Privatsphäre und der Blick in fremde Räume geschützt sind.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 24:27 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Nein sagen und persönliche Sicherheit“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: eine unangenehme Berührung ablehnen und Hilfe suchen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Nein sagen und persönliche Sicherheit“?",
+     "options": [
+      "Ich erkläre die Situation: eine unangenehme Berührung ablehnen und Hilfe suchen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: eine unangenehme Berührung ablehnen und Hilfe suchen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Nein sagen und persönliche Sicherheit“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -3434,10 +3854,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Auch ohne Lob etwas Gutes tun."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Allah kennt unser Handeln“ im Beispiel üben kannst.",
-     "sample": "Ich könnte auch ohne Lob etwas Gutes tun. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Allah kennt unser Handeln“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte auch ohne Lob etwas Gutes tun. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte auch ohne Lob etwas Gutes tun. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Allah kennt unser Handeln“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -3466,16 +3893,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 99:7 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass Allah Seinem Diener hilft, solange dieser seinem Bruder hilft. (Sinngemäße Bedeutung)",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass Allah Seinem Diener hilft, solange dieser seinem Bruder hilft. (Sinngemäße Bedeutung)",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass Allah Seinem Diener hilft, solange dieser seinem Bruder hilft. (Sinngemäße Bedeutung)",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 99:7 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Allah kennt unser Handeln“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: auch ohne Lob etwas Gutes tun. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Allah kennt unser Handeln“?",
+     "options": [
+      "Ich erkläre die Situation: auch ohne Lob etwas Gutes tun. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: auch ohne Lob etwas Gutes tun. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Allah kennt unser Handeln“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -3600,10 +4041,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Verstehen, dass Allah Gesandte schickte."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Īmān an die Gesandten“ im Beispiel üben kannst.",
-     "sample": "Ich könnte verstehen, dass Allah Gesandte schickte. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Īmān an die Gesandten“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte verstehen, dass Allah Gesandte schickte. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte verstehen, dass Allah Gesandte schickte. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Īmān an die Gesandten“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -3632,16 +4080,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 2:3 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 2:3 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Īmān an die Gesandten“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: verstehen, dass Allah Gesandte schickte. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Īmān an die Gesandten“?",
+     "options": [
+      "Ich erkläre die Situation: verstehen, dass Allah Gesandte schickte. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: verstehen, dass Allah Gesandte schickte. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Īmān an die Gesandten“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -3766,10 +4228,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Nach Ablenkung wieder zum guten Ziel zurückfinden."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Eine gute Absicht erneuern“ im Beispiel üben kannst.",
-     "sample": "Ich könnte nach Ablenkung wieder zum guten Ziel zurückfinden. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Eine gute Absicht erneuern“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte nach Ablenkung wieder zum guten Ziel zurückfinden. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte nach Ablenkung wieder zum guten Ziel zurückfinden. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Eine gute Absicht erneuern“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -3798,16 +4267,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 98:5 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Ihnen wurde aufgetragen, Allah zu dienen und Ihm gegenüber aufrichtig zu sein. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass der Wert einer Handlung mit der Absicht zusammenhängt, mit der sie ausgeführt wird.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Ihnen wurde aufgetragen, Allah zu dienen und Ihm gegenüber aufrichtig zu sein. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass der Wert einer Handlung mit der Absicht zusammenhängt, mit der sie ausgeführt wird.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Ihnen wurde aufgetragen, Allah zu dienen und Ihm gegenüber aufrichtig zu sein. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass der Wert einer Handlung mit der Absicht zusammenhängt, mit der sie ausgeführt wird.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 98:5 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Eine gute Absicht erneuern“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: nach Ablenkung wieder zum guten Ziel zurückfinden. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Eine gute Absicht erneuern“?",
+     "options": [
+      "Ich erkläre die Situation: nach Ablenkung wieder zum guten Ziel zurückfinden. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: nach Ablenkung wieder zum guten Ziel zurückfinden. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Eine gute Absicht erneuern“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -3932,10 +4415,17 @@ const additions={
      "explain": "Unser Lernbeispiel ist: Sich für eine hilfreiche Geste bedanken."
     },
     {
-     "type": "text",
-     "prompt": "Beschreibe mit eigenen Worten, wie du „Dankbarkeit zeigen“ im Beispiel üben kannst.",
-     "sample": "Ich könnte sich für eine hilfreiche Geste bedanken. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung."
+     "type": "choice",
+     "prompt": "Welche Erklärung zeigt, wie du „Dankbarkeit zeigen“ im Alltag üben kannst?",
+     "options": [
+      "Ich könnte sich für eine hilfreiche Geste bedanken. Ich erkläre ruhig, weshalb diese Handlung passt.",
+      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+     ],
+     "correct": 0,
+     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
+     "explain": "Ich könnte sich für eine hilfreiche Geste bedanken. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Dankbarkeit zeigen“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -3964,16 +4454,30 @@ const additions={
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
-     "type": "text",
-     "prompt": "Was lehrt Qurʾān 17:53 genau? Welche Aussage stammt aus der Sunnah?",
-     "sample": "Der Vers bedeutet sinngemäß: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
-     "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat."
+     "type": "choice",
+     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "options": [
+      "Der Vers bedeutet sinngemäß: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
+      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+     ],
+     "correct": 0,
+     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
+     "explain": "Der Vers bedeutet sinngemäß: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 17:53 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
-     "type": "text",
-     "prompt": "Wie erklärst du „Dankbarkeit zeigen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel.",
-     "sample": "Ich erkläre die Situation: sich für eine hilfreiche Geste bedanken. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen."
+     "type": "choice",
+     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Dankbarkeit zeigen“?",
+     "options": [
+      "Ich erkläre die Situation: sich für eine hilfreiche Geste bedanken. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+      "Ich erkläre nichts und stelle keine Rückfrage."
+     ],
+     "correct": 0,
+     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
+     "explain": "Ich erkläre die Situation: sich für eine hilfreiche Geste bedanken. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Dankbarkeit zeigen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
