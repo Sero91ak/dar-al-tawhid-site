@@ -128,27 +128,75 @@ html[data-theme] body.is-frauen-route #appView .frauen-library-hero{
   background-repeat:no-repeat!important;
 }
 
-/* Fixed header / photograph seam, with measured actual header height.
- * The fixed header itself is not moved and no extra spacer is created.
- * A hero stage, when present, owns its pinned photo+search as ONE surface.
- * Without a stage the direct hero and its search are sticky siblings.
- */
-html.dar-adult-global-brand-ready body.is-frauen-route{
-  --frauen-header-seam-top:var(--dar-adult-header-obscured-top,var(--dar-adult-brand-header-height,80px));
+/* DAR_FRAUEN_VERTICAL_FLOW_V1406 · iPhone / Android / tablets / foldables.
+ * Bug cause: frontstage's generic auto-fit grid reintroduced two columns,
+ * despite the Frauen-specific one-column rule. Use a genuine vertical flex
+ * list, so later grid-template-columns cannot split these categories.
+ * This change applies to GROUP cards only; hub remains unchanged. */
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-grid{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  flex-wrap:nowrap!important;
+  grid-template-columns:none!important;
+  width:min(960px,100%)!important;
+  gap:15px!important;
 }
-html.dar-test-premium-header-v2 body.is-frauen-route{
-  --frauen-header-seam-top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,80px));
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-grid > .frauen-library-area-card{
+  display:block!important;
+  flex:0 0 auto!important;
+  grid-column:1 / -1!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
 }
-/* On the Frauen route the modern fixed brand already replaces the old
- * top-shell. Its empty legacy header used to consume another ~80–100px,
- * leaving a pale strip between the fixed header and the photo.
- * Collapse ONLY that redundant legacy shell; keep the measured in-flow
- * #darAdultBrandHeaderSpacerV2 and all other routes intact. */
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual{
+  min-height:205px!important;
+  padding:20px 54px 19px 20px!important;
+  border-radius:25px!important;
+}
+@media(max-width:760px){
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-grid{
+    display:flex!important;
+    flex-direction:column!important;
+    gap:14px!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual{
+    min-height:214px!important;
+    padding:19px 48px 18px 17px!important;
+    border-radius:23px!important;
+  }
+}
+/* Exact user-requested photo behavior:
+ * The image is IN NORMAL DOCUMENT FLOW and goes BEHIND the fixed brand header
+ * on upward scroll. It is not sticky. The existing V5 edge-stop prevents a
+ * downward pull from revealing blank area above the photo. No second scroll
+ * root, cloned photo or extra native bounce owner is introduced. */
+html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage,
+html[data-theme] body.is-frauen-route #appView .frauen-library-pinned-header,
+html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > .frauen-library-hero,
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-shell,.frauen-library-list) > .frauen-library-hero{
+  position:relative!important;
+  top:auto!important;
+  inset-block-start:auto!important;
+  transform:none!important;
+  margin-top:0!important;
+}
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-shell,.frauen-library-list) > :is(.frauen-library-search-wrap,.frauen-library-list-controls),
+html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > :is(.frauen-library-search-wrap,.frauen-library-list-controls){
+  position:relative!important;
+  top:auto!important;
+  inset-block-start:auto!important;
+}
+/* Exactly one fixed header spacer; remove only the obsolete empty header
+ * shell while preserving the top brand and independent scroll behavior. */
 html:is(.dar-adult-global-brand-ready,.dar-test-premium-header-v2)
  body.is-frauen-route > .app > .top-shell{
   display:none!important;
   block-size:0!important;
-  min-block-size:0!important;
   margin:0!important;
   padding:0!important;
   border:0!important;
@@ -157,48 +205,13 @@ html:is(.dar-adult-global-brand-ready,.dar-test-premium-header-v2)
  body.is-frauen-route #appView.view{
   margin-top:0!important;
   padding-top:0!important;
-  overflow-x:clip!important;
-  overflow-y:visible!important;
-}
-html:is(.dar-adult-global-brand-ready,.dar-test-premium-header-v2)
- body.is-frauen-route #appView :is(.frauen-library-shell,.frauen-library-list){
-  margin-top:0!important;
   overflow:visible!important;
 }
 html:is(.dar-adult-global-brand-ready,.dar-test-premium-header-v2)
- body.is-frauen-route #appView .dar-immersive-hero-stage{
-  position:sticky!important;
-  top:var(--frauen-header-seam-top,80px)!important;
-  z-index:90!important;
-  margin-top:0!important;
-  transform:none!important;
+ body.is-frauen-route #appView :is(.frauen-library-shell,.frauen-library-list){
+  margin-top:var(--frauen-flow-seam-shift,0px)!important;
+  overflow:visible!important;
 }
-html:is(.dar-adult-global-brand-ready,.dar-test-premium-header-v2)
- body.is-frauen-route #appView .dar-immersive-hero-stage > .frauen-library-hero{
-  position:relative!important;
-  top:auto!important;
-  margin-top:0!important;
-}
-/* Direct-child fallback for older visitor/test renders without a stage.
- * It is intentionally limited to the direct child, so never double-pins. */
-html:is(.dar-adult-global-brand-ready,.dar-test-premium-header-v2)
- body.is-frauen-route #appView
- :is(.frauen-library-shell,.frauen-library-list) > .frauen-library-hero{
-  position:sticky!important;
-  top:var(--frauen-header-seam-top,80px)!important;
-  z-index:89!important;
-  margin-top:0!important;
-}
-html:is(.dar-adult-global-brand-ready,.dar-test-premium-header-v2)
- body.is-frauen-route #appView
- :is(.frauen-library-shell,.frauen-library-list) > :is(.frauen-library-search-wrap,.frauen-library-list-controls){
-  position:sticky!important;
-  top:calc(var(--frauen-header-seam-top,80px) + var(--dar-immersive-hero-height,220px) - 22px)!important;
-  z-index:90!important;
-}
-/* Keep one ordinary document scroll; the existing top-edge touch clamp owns
- * pull-down bounce. No fixed clone, transforms or nested overflow scroller. */
-html:is(.dar-adult-global-brand-ready,.dar-test-premium-header-v2)
- body.is-frauen-route{
+html[data-theme] body.is-frauen-route{
   overscroll-behavior-y:none!important;
 }
