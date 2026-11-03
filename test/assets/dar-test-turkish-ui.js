@@ -540,6 +540,7 @@ function isDynamicGermanUi(value){
   /^Tag \d{1,2} von 30$/.test(value)||
   /^Quelle: [^<>\n]{1,160}$/.test(value)||
   /^Schritt \d+ von 15$/.test(value)||
+  /^Āyah \d+ \/ \d+$/.test(value)||
   /^\d+\. Fundstelle$/.test(value)||
   /^Qurʾān \d{1,3}:\d{1,3}(?: · [^<>]{1,80})?$/.test(value)||
   /^· Āyah \d+ ·$/.test(value)||
@@ -2674,6 +2675,11 @@ function translateSharedPatterns(value,language){
    const forms={ar:"الخطوة "+n+" من 15",en:"Step "+n+" of 15",tr:"Adım "+n+" / 15",ku:"Gav "+n+" ji 15",ckb:"هەنگاوی "+n+" لە 15",bs:"Korak "+n+" od 15",fr:"Étape "+n+" sur 15",es:"Paso "+n+" de 15"};
    return forms[language]||null;
   }
+  const ayahOf=value.match(/^Āyah (\d+) \/ (\d+)$/);
+  if(ayahOf){
+   const word=lookupPack("Āyah",language);
+   if(word)return word+" "+ayahOf[1]+" / "+ayahOf[2];
+  }
   const numberedPlace=value.match(/^(\d+)\. Fundstelle$/);
   if(numberedPlace){
    const word=lookupPack("Fundstelle",language);
@@ -3108,7 +3114,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-52";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-53";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
