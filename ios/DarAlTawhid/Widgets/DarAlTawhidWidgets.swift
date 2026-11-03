@@ -883,37 +883,46 @@ private struct PrayerLockWidgetView: View {
     @Environment(\.widgetFamily) private var family
 
     var body: some View {
+        let next = entry.snapshot.nextAbsolutePrayer(after: entry.date)
         Group {
             if family == .accessoryCircular {
-                VStack(spacing: 0) {
-                    Image(systemName: "moon.stars.fill")
-                        .font(.system(size: 11, weight: .semibold))
-                    Text(entry.snapshot.nextPrayerTime)
-                        .font(.system(size: 14, weight: .bold, design: .rounded).monospacedDigit())
+                VStack(spacing: 1) {
+                    Text(next?.name ?? "Gebet")
+                        .font(.system(size: 10, weight: .semibold))
                         .lineLimit(1)
-                        .minimumScaleFactor(0.82)
+                    Group {
+                        if let target = next?.target {
+                            Text(target, style: .timer).monospacedDigit()
+                        } else {
+                            Text("—")
+                        }
+                    }
+                    .font(.system(size: 11, weight: .semibold, design: .rounded))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.65)
                 }
             } else if family == .accessoryInline {
-                Text("\(entry.snapshot.nextPrayerName) \(entry.snapshot.nextPrayerTime)")
-                    .font(.system(size: 13, weight: .semibold, design: .rounded).monospacedDigit())
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.88)
+                if let target = next?.target {
+                    Text(target, style: .timer)
+                        .monospacedDigit()
+                        .font(.system(size: 12, weight: .semibold, design: .rounded))
+                } else {
+                    Text("Gebetszeiten nicht verfügbar")
+                }
             } else {
-                VStack(alignment: .leading, spacing: 2) {
-                    HStack(spacing: 8) {
-                        Text(entry.snapshot.nextPrayerName)
-                            .font(.system(size: 15, weight: .semibold, design: .serif))
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.86)
-                        Spacer(minLength: 4)
-                        Text(entry.snapshot.nextPrayerTime)
-                            .font(.system(size: 16, weight: .bold, design: .rounded).monospacedDigit())
-                            .lineLimit(1)
-                    }
-                    Text(entry.snapshot.nextPrayerRemaining)
-                        .font(.system(size: 12, weight: .medium))
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(next?.name ?? "Gebetszeiten nicht verfügbar")
+                        .font(.system(size: 13, weight: .semibold, design: .serif))
                         .lineLimit(1)
-                        .minimumScaleFactor(0.86)
+                    if let target = next?.target {
+                        Text(target, style: .timer)
+                            .monospacedDigit()
+                            .font(.system(size: 16, weight: .bold, design: .rounded))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.78)
+                    } else {
+                        Text("—")
+                    }
                 }
             }
         }
