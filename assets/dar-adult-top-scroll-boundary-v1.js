@@ -14,11 +14,25 @@ var path=String(location.pathname||"");
 if(/^\/(?:kids|test\/kids)(?:\/|$)/.test(path))return;
 window.__darAdultTopScrollBoundaryV1=true;
 
-var startTarget=null,scope=null,initialX=0,initialY=0,lastY=0,axis="";
+var startTarget=null,scope=null,initialX=0,initialY=0,lastY=0,axis="",womenTopTouch=false;
 var overlaySelector='dialog[open],[role="dialog"]:not([hidden]),.modal.open,.modal.is-open,#darInternalSourceV3:not([hidden])';
 var gestureSelector='input[type="range"],.leaflet-container,.mapboxgl-map,.maplibregl-map,[data-native-pan],[data-dar-native-gesture]';
 function adultShell(){return !!document.getElementById("appView")}
-function reset(){startTarget=null;scope=null;initialX=0;initialY=0;lastY=0;axis=""}
+function reset(){startTarget=null;scope=null;initialX=0;initialY=0;lastY=0;axis="";womenTopTouch=false}
+/* V5: distinguish a true top-edge gesture from a scrollable child. */
+function atDocumentTop(){
+ var root=document.scrollingElement||document.documentElement;
+ var top=Math.max(0,window.scrollY||0,root?root.scrollTop||0:0);
+ return top<=1;
+}
+function innerCanScrollUp(){
+ for(var node=startTarget;node&&node!==document.body;node=node.parentElement){
+  if(node.nodeType!==1||node.id==="appView")continue;
+  var cs=window.getComputedStyle(node);
+  if(/^(auto|scroll|overlay)$/.test(cs.overflowY)&&node.scrollHeight>node.clientHeight+1&&node.scrollTop>0.5)return true;
+ }
+ return false;
+}
 /* Check whether the touched surface or one of its real scroll ancestors
  * can still move in the requested direction. The document remains the only
  * main page scroller. Overlay readers stop at their own bounds. */
@@ -61,6 +75,7 @@ document.addEventListener("touchstart",function(event){
  if(target.closest(gestureSelector)){reset();return}
  startTarget=target;
  scope=target.closest(overlaySelector);
+ womenTopTouch=!!(document.body&&document.body.classList&&document.body.classList.contains("is-frauen-route")&&!scope&&atDocumentTop());
  var point=event.touches[0];
  initialX=point.clientX;initialY=point.clientY;lastY=initialY;axis="";
 },{capture:true,passive:true});
@@ -69,6 +84,16 @@ document.addEventListener("touchmove",function(event){
  var point=event.touches[0],dx=point.clientX-initialX,dy=point.clientY-initialY;
  var stepY=point.clientY-lastY;
  lastY=point.clientY;
+ /* V5 Frauen edge: when the finger STARTED at document top, never let
+    a false nested-scroll reading or fractional UIKit offset detach the Hero
+    from the fixed header. This does not affect upward/normal scroll, dialog
+    readers, horizontal gestures or other adult routes. */
+ if(womenTopTouch&&dy>0.15&&Math.abs(dy)>=Math.abs(dx)*0.78&&
+    event.cancelable&&!event.defaultPrevented&&!innerCanScrollUp()){
+  axis="vertical";
+  event.preventDefault();
+  return;
+ }
  /* V4: At document top, block the FIRST outward finger movement before
     axis detection. Fractional Safari/WebKit deltas can trigger spring
     before a full pixel is reported; fixed brand then exposes a blank gap.

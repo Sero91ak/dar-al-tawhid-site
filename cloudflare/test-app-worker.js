@@ -305,7 +305,7 @@ async function finalizeDarTestHomeV1193(asset) {
       '@import url("/test/assets/tawhid-guide-v1295.css?v=tawhid-guide-v1295");' +
       '@import url("/test/assets/ilm-hadith-v1243.css?v=hadith-final-v1303");' +
       '@import url("/test/assets/hero-background-authority.css?v=hero-bg-v7");' +
-      '@import url("/assets/frauen/frauen-capsule-restore-v1402.css?v=frauen-capsule-restore-v1402");' +
+      '@import url("/assets/frauen/frauen-fallback-classic-v1403.css?v=frauen-fallback-classic-v1403");' +
       '</style>';
     if (html.includes("</html>")) html = html.replace("</html>", areaAuthority + "</html>");
     else html += areaAuthority;
@@ -500,7 +500,7 @@ async function finalizeDarTestHomeV1193(asset) {
   // the real document scroll; clamp downward drags at the top without
   // locking vertical lists, prayers, Qurʾān or the bottom navigation.
   const scrollCss = '<link rel="stylesheet" id="darAdultTopBoundaryCssV1" href="/test/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-no-overlay-v8">';
-  const scrollJs = '<script defer id="darAdultTopBoundaryJsV1" src="/test/assets/dar-adult-top-scroll-boundary-v1.js?v=20261030-no-pull-hero-v9"></script>';
+  const scrollJs = '<script defer id="darAdultTopBoundaryJsV1" src="/test/assets/dar-adult-top-scroll-boundary-v1.js?v=20261103-frauen-top-clamp-v10"></script>';
   if(!html.includes('id="darAdultTopBoundaryCssV1"'))
     html=html.includes("</head>")?html.replace("</head>",scrollCss+"\n</head>"):scrollCss+html;
   if(!html.includes('id="darAdultTopBoundaryJsV1"'))

@@ -278,7 +278,7 @@ function adultCompactHeroAddon() {
  * Add a root-only scroll stop; preserve Hero, sticky search, and all carousels. */
 function adultTopScrollBoundaryAddon() {
   return '<link rel="stylesheet" id="darAdultTopScrollCssV1" href="/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-no-overlay-v8">' +
-    '<script defer id="darAdultTopScrollJsV1" src="/assets/dar-adult-top-scroll-boundary-v1.js?v=20261030-no-pull-hero-v9"></' + 'script>';
+    '<script defer id="darAdultTopScrollJsV1" src="/assets/dar-adult-top-scroll-boundary-v1.js?v=20261103-frauen-top-clamp-v10"></' + 'script>';
 }
 
 /* DĀR adult identity header v2 – mounted only in native iOS/Android and dedicated PWA.
@@ -380,7 +380,7 @@ function liveFrauenNativeAddon() {
     '<link rel="stylesheet" href="/assets/frauen/frauen-fiqh.css?v=frauen-rollback-20261016-1500">',
     '<link rel="stylesheet" href="/assets/frauen/frauen-authority-v1292.css?v=frauen-rollback-20261016-1500">',
     '<link rel="stylesheet" href="/assets/frauen/frauen-originalbilder-v1400.css?v=frauen-originalbilder-v1400">',
-    '<link rel="stylesheet" href="/assets/frauen/frauen-capsule-restore-v1402.css?v=frauen-capsule-restore-v1402">',
+    '<link rel="stylesheet" href="/assets/frauen/frauen-fallback-classic-v1403.css?v=frauen-fallback-classic-v1403">',
     '<script defer src="/test/assets/frauen/frauen-fiqh.js?v=frauen-rollback-20261016-1500"><\/script>',
     '<script defer src="/assets/frauen/frauen-live-adapter.js?v=mehr-frauen-duplicate-fix-20261019"><\/script>'
   ].join("");
