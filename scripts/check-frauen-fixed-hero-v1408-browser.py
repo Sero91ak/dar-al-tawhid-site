@@ -43,10 +43,8 @@ body{padding:0!important}
 <header id="darAdultBrandHeaderV2"><strong> DĀR AL TAWḤĪD </strong></header>
 <div class="app"><div id="darAdultBrandHeaderSpacerV2"></div><main id="appView" class="view">
 <section class="frauen-library-shell frauen-library-group">
-<div class="dar-immersive-hero-stage" data-has-search="1">
- <section class="frauen-library-hero"><div class="frauen-library-hero__content"><h2>Fiqh der Frauen</h2></div></section>
- <div class="frauen-library-search-wrap"><input id="search" placeholder="Suchen"></div>
-</div>
+<section class="frauen-library-hero"><div class="frauen-library-hero__content"><h2>Fiqh der Frauen</h2></div></section>
+<div class="frauen-library-search-wrap"><input id="search" placeholder="Suchen"></div>
 <div class="frauen-library-section-head" id="chapterHead"><small>KAPITEL</small><h3>Wähle deinen Bereich</h3></div>
 <section class="frauen-library-area-grid" id="chapters">
 <article class="frauen-library-area-card has-visual">Erstes Kapitel</article>
