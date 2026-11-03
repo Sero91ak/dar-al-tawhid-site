@@ -49,6 +49,7 @@ assert.match(fixed,/\.dar-frauen-hero-space-v1408\{[\s\S]*?height:var\(--frauen-
 assert.match(runtime,/header\.getBoundingClientRect\(\)/,"Der tatsächliche Header muss gemessen werden");
 assert.match(runtime,/rect\.bottom/,"Gemessene Header-Unterkante fehlt");
 assert.match(runtime,/section\.insertBefore\(space,stage\.nextSibling\)/,"Inhalts-Spacer muss direkt hinter das Hero");
+assert.match(runtime,/function ensureStage\(\)/,"Der Live-PWA-Renderer muss ohne historischen Adapter den Hero-Container erstellen können");
 assert.match(runtime,/--frauen-v1408-rail-height/,"Fixierte Hero-Höhe muss gemessen werden");
 assert.doesNotMatch(runtime,/preventDefault\(/,"Touch-Handler dürfen nicht dupliziert werden");
 assert.doesNotMatch(frontstage,/\.more-grid,\.frauen-library-area-grid,\.quran-verse-grid/,"Frauen nicht erneut in Mehr-Mini-Grid aufnehmen");
