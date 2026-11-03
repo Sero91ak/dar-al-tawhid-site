@@ -60,6 +60,7 @@ extension Notification.Name {
 struct DarAlTawhidApp: App {
     @UIApplicationDelegateAdaptor(DarAppDelegate.self) private var appDelegate
     @StateObject private var router = DarAppRouter()
+    @Environment(\\.scenePhase) private var scenePhase
 
     init() {
         let ink = DarWidgetStore.load().inkHex.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -77,13 +78,7 @@ struct DarAlTawhidApp: App {
         UIWindow.appearance().backgroundColor = bootInk
         let snap = DarDailyContent.refresh(DarWidgetStore.load())
         DarWidgetStore.save(snap)
-        Task.detached {
-            let live = DarDailyContent.refresh(DarWidgetStore.load(), fetchLiveDaily: true)
-            DarWidgetStore.save(live)
-            await MainActor.run {
-                WidgetCenter.shared.reloadAllTimelines()
-            }
-        }
+        DarPrayerRefreshCoordinator.update()
     }
 
     var body: some Scene {
@@ -96,6 +91,9 @@ struct DarAlTawhidApp: App {
                 }
                 .onAppear {
                     router.openPendingQuickAction()
+                }
+                .onChange(of: scenePhase) { phase in
+                    if phase == .active { DarPrayerRefreshCoordinator.update() }
                 }
                 .onReceive(NotificationCenter.default.publisher(for: .darOpenShortcut)) { note in
                     guard let raw = note.userInfo?["destination"] as? String,
@@ -116,6 +114,22 @@ struct DarAlTawhidApp: App {
         #endif
         .commands {
             CommandGroup(replacing: .newItem) {}
+        }
+    }
+}
+
+
+// One host-app refresh path for startup, foreground reentry and WebApp location changes.
+enum DarPrayerRefreshCoordinator {
+    static func update() {
+        Task.detached(priority: .utility) {
+            _ = await DarPrayerSync.refresh()
+            let latest = DarDailyContent.refresh(DarWidgetStore.load(), fetchLiveDaily: true)
+            DarWidgetStore.save(latest)
+            await MainActor.run {
+                WidgetCenter.shared.reloadAllTimelines()
+                DarPrayerLiveActivityController.refresh()
+            }
         }
     }
 }
