@@ -1,104 +1,116 @@
 #!/usr/bin/env node
 "use strict";
-/* Browser-based, read-only Frauen hero diagnosis: public Test + visitor SPA.
-   Preserve image/card/navigation logic; record actual computed layout on screen. */
-const { chromium } = require("playwright");
-const fs=require("node:fs");
-const path=require("node:path");
-const out=path.join(process.cwd(),"frauen-hero-live-evidence");
-fs.mkdirSync(out,{recursive:true});
-const all=[];
-const routes=[
-  {key:"visitor",url:"https://dar-al-tawhid.de/?frauen-hero-probe=1392#frauen"},
-  {key:"test",url:"https://dar-al-tawhid.de/test/?frauen-hero-probe=1392#frauen"}
-];
-function snapshot(){
-  const hero=document.querySelector(".frauen-library-pinned-header .frauen-library-hero");
-  const stage=document.querySelector(".frauen-library-pinned-header");
-  const heading=document.querySelector(".frauen-library-section-head");
-  const app=document.querySelector("#appView");
-  const shell=document.querySelector(".frauen-library-shell");
-  const doc=document.scrollingElement;
-  const pick=e=>{
-    if(!e)return null;
-    const r=e.getBoundingClientRect(),c=getComputedStyle(e);
-    return {tag:e.tagName,id:e.id,classes:String(e.className).slice(0,180),
-      top:Math.round(r.top),bottom:Math.round(r.bottom),
-      left:Math.round(r.left),right:Math.round(r.right),
-      width:Math.round(r.width),height:Math.round(r.height),
-      display:c.display,visibility:c.visibility,opacity:c.opacity,
-      position:c.position,overflowX:c.overflowX,overflowY:c.overflowY,
-      backgroundImage:c.backgroundImage.slice(0,420),zIndex:c.zIndex,
-      scrollTop:e.scrollTop,scrollHeight:e.scrollHeight,clientHeight:e.clientHeight,
-      clipPath:c.clipPath,transform:c.transform,
-      parent:e.parentElement?String(e.parentElement.className).slice(0,120):""};
-  };
-  let ancestors=[];
-  if(hero){for(let x=hero,n=0;x&&n<12;x=x.parentElement,n++)ancestors.push(pick(x));}
-  return {hash:location.hash,theme:document.documentElement.getAttribute("data-theme"),
-    bodyClass:document.body?.className,view:document.body?.getAttribute("data-frauen-view"),
-    docScroll:doc?.scrollTop,windowY:scrollY,viewport:{w:innerWidth,h:innerHeight},
-    hero:pick(hero),stage:pick(stage),heading:pick(heading),
-    body:pick(document.body),html:pick(document.documentElement),
-    inlineStyles:{body:document.body?.getAttribute("style"),html:document.documentElement?.getAttribute("style")},
-    app:pick(app),shell:pick(shell),ancestors,
-    heroHtml:hero?.outerHTML.slice(0,400),
-    shellChildren:shell?[...shell.children].slice(0,7).map(x=>({tag:x.tagName,cls:String(x.className).slice(0,150),head:x.outerHTML.slice(0,260)})):[],
-    renderer:(()=>{
-      try{
-        const p=window.DARFrauenFiqh;
-        const html=typeof p?.render==="function"?String(p.render("")):"";
-        return {exists:!!p,render:typeof p?.render,
-          generatedLength:html.length,generatedHero:html.includes("frauen-library-hero"),
-          generatedStage:html.includes("frauen-library-pinned-header"),
-          generatedHeader:html.slice(0,330)};
-      }catch(e){return {error:String(e)}}
-    })(),
-    images:[...document.querySelectorAll(".frauen-library-card.has-visual")].slice(0,2).map(pick),
-    styles:[...document.querySelectorAll('link[rel="stylesheet"]')].filter(x=>/frauen/.test(x.href)).map(x=>x.href)};
+/* Frauen V1409 browser QA: read-only live visitor Android and iOS WebView
+   injection in temporary Playwright contexts. Never changes production data.
+   Screenshots + diagnostics belong exclusively to CI artifacts. */
+const {chromium}=require("playwright");
+const fs=require("node:fs"),path=require("node:path");
+const output=path.join(process.cwd(),"frauen-hero-live-evidence");
+fs.mkdirSync(output,{recursive:true});
+const css=fs.readFileSync("assets/frauen/frauen-ios-hero-v1409.css","utf8");
+const widthCss=fs.readFileSync("assets/dar-adult-navwidth-content-v1409.css","utf8");
+const script=fs.readFileSync("assets/frauen/frauen-ios-hero-v1409.js","utf8");
+const data=[];
+function metrics(){
+ const one=q=>document.querySelector(q),rect=e=>{if(!e)return null;const r=e.getBoundingClientRect();return {top:r.top,bottom:r.bottom,left:r.left,width:r.width,height:r.height}};
+ const header=one("#darAdultBrandHeaderV2")||one("#darTestBrandHeaderV1");
+ const stage=one("#appView .dar-immersive-hero-stage");
+ const hero=one("#appView .frauen-library-hero");
+ const space=one("#appView .dar-ios-frauen-hero-spacer-v1409");
+ const cards=[...document.querySelectorAll("#appView .frauen-library-area-card")];
+ const area=one("#appView .frauen-library-area-grid");
+ const nav=one("#bottomNav");
+ return {body:document.body?.className,view:document.body?.getAttribute("data-frauen-view"),header:rect(header),stage:rect(stage),hero:rect(hero),space:rect(space),area:rect(area),firstCard:rect(cards[0]),heading:rect(one(".frauen-library-section-head")),
+   nav:rect(nav),cardCount:cards.length,display:area?getComputedStyle(area).display:null,flexDirection:area?getComputedStyle(area).flexDirection:null,
+   stagePosition:stage?getComputedStyle(stage).position:null,iosClass:document.documentElement.classList.contains("dar-ios-frauen-hero-v1409"),
+   scriptFlag:!!window.__darIosFrauenHeroV1409,y:window.scrollY,scrollHeight:document.scrollingElement?.scrollHeight,
+   shell:one(".frauen-library-shell")?.outerHTML.slice(0,450)};
+}
+function check(m,kind,group){
+ if(!m.header||!m.stage||!m.hero||!m.space)throw Error(kind+": missing original hero stage or spacer: "+JSON.stringify(m));
+ if(m.stagePosition!=="fixed")throw Error(kind+": stage not fixed on iOS: "+JSON.stringify(m));
+ if(Math.abs(m.stage.top-m.header.bottom)>3)throw Error(kind+": gap between header and hero: "+JSON.stringify(m));
+ if(m.space.height<140)throw Error(kind+": no correctly-sized flow reservation: "+JSON.stringify(m));
+ if(!m.iosClass||!m.scriptFlag)throw Error(kind+": iOS-only gate not active");
+ if(group){
+  if(!m.heading||m.heading.top<m.stage.bottom-3)throw Error(kind+": heading drawn inside or above hero: "+JSON.stringify(m));
+  if(m.cardCount<2||m.display!=="flex"||m.flexDirection!=="column")throw Error(kind+": chapters not stacked: "+JSON.stringify(m));
+  if(m.area&&m.firstCard&&m.firstCard.width<m.area.width-3)throw Error(kind+": cards not full-width: "+JSON.stringify(m));
+ }
 }
 (async()=>{
- let browser;let issues=[];
+ let browser,errors=[];
  try{
   browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
-  for(const route of routes){
-   const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,locale:"de-DE",userAgent:route.key==="visitor"?"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1 DarAlTawhid-iOS":"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1"});
-   const page=await context.newPage();const errors=[];
-   page.on("pageerror",e=>errors.push(String(e.message).slice(0,300)));
-   const response=await page.goto(route.url,{waitUntil:"domcontentloaded",timeout:60000});
-   await page.waitForTimeout(6000);
-   let before=await page.evaluate(snapshot);
-   await page.screenshot({path:path.join(out,route.key+"-initial.png")});
-   // Simulate the proposed code on the currently deployed app, before merging.
-   const localScript=fs.readFileSync(path.join(process.cwd(),route.key==="test"?"test/assets/frauen/frauen-fiqh.js":"assets/frauen/frauen-fiqh.js"),"utf8");
-   const tag="/* DAR_FRAUEN_HERO_DOM_INTEGRITY_V1392";
-   if(!localScript.includes(tag))throw Error("Repair snippet not in checkout");
-   await page.addScriptTag({content:localScript.slice(localScript.indexOf(tag))});
-   const localCss=fs.readFileSync(path.join(process.cwd(),route.key==="test"?"test/assets/frauen/frauen-authority-v1292.css":"assets/frauen/frauen-authority-v1292.css"),"utf8");
-   const cssTag="/* DAR_FRAUEN_HERO_SCROLL_ANCESTOR_V1392";
-   if(!localCss.includes(cssTag))throw Error("Scroll CSS absent in checkout");
-   await page.addStyleTag({content:localCss.slice(localCss.indexOf(cssTag))});
-   await page.waitForTimeout(1100);
-   let repaired=await page.evaluate(snapshot);
-   await page.screenshot({path:path.join(out,route.key+"-repaired.png")});
-
-   await page.mouse.wheel(0,560);
-   await page.waitForTimeout(330);
-   await page.waitForTimeout(450);
-   let after=await page.evaluate(snapshot);
-   await page.screenshot({path:path.join(out,route.key+"-after-scroll.png")});
-   all.push({key:route.key,status:response.status(),before,repaired,after,errors});
-   console.log(JSON.stringify({route:route.key,status:response.status(),
-    before:{bodyClass:before.bodyClass,theme:before.theme,view:before.view,scroll:before.docScroll,hero:before.hero,stage:before.stage,heading:before.heading,app:before.app,images:before.images.length,styles:before.styles,shellChildren:before.shellChildren,renderer:before.renderer},
-    repaired:{hero:repaired.hero,stage:repaired.stage,heading:repaired.heading,renderer:repaired.renderer,body:repaired.body,html:repaired.html,inline:repaired.inlineStyles,ancestors:repaired.ancestors.map(x=>({cls:x.classes,overflowX:x.overflowX,overflowY:x.overflowY}))},after:{scroll:after.docScroll,body:after.body,hero:after.hero,stage:after.stage,heading:after.heading,ancestors:after.ancestors.map(x=>({cls:x.classes,overflowY:x.overflowY}))},errors}));
-   if(before.app&&(!repaired.hero||repaired.hero.height<180||repaired.hero.bottom<100)){
-     issues.push(route.key+" upper hero missing from first viewport");
-   }
-   if(before.app&&after.stage&&after.stage.bottom<100)issues.push(route.key+" stage scrolls off-screen");
-   if(before.app&&before.app.scrollHeight>before.app.clientHeight+200&&after.docScroll<100)issues.push(route.key+" content cannot scroll normally");
+  const targets=[
+   {name:"visitor-iOS",url:"https://dar-al-tawhid.de/pwa/?women-preview-v1409=1#frauen"},
+   {name:"test-iOS",url:"https://dar-al-tawhid.de/test/?women-preview-v1409=1#frauen"}
+  ];
+  for(const target of targets){
+   const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,
+    userAgent:"DarAlTawhid-iOS/1.0 WKWebView (iPhone; CPU iPhone OS 27_0 like Mac OS X)"});
+   await context.addInitScript(()=>{window.DAR_IOS_NATIVE_APP=true;window.__DAR_FRAUEN_HERO_SEAM_V1407=true;
+    document.documentElement.classList.add("dar-ios-native-app")});
+   const page=await context.newPage();
+   page.on("pageerror",e=>errors.push(target.name+" "+String(e.message)));
+   const response=await page.goto(target.url,{waitUntil:"domcontentloaded",timeout:60000});
+   await page.waitForTimeout(4000);
+   await page.waitForFunction(()=>!!document.querySelector("#appView .frauen-library-hero"),null,{timeout:15000});
+   await page.addStyleTag({content:widthCss});
+   await page.addStyleTag({content:css});
+   await page.addScriptTag({content:script});
+   await page.waitForFunction(()=>!!document.querySelector("#appView .dar-ios-frauen-hero-spacer-v1409"),null,{timeout:10000});
+   await page.evaluate(()=>window.scrollTo(0,0));
+   await page.waitForTimeout(350);
+   const hub=await page.evaluate(metrics);
+   check(hub,target.name+" hub",false);
+   await page.screenshot({path:path.join(output,target.name+"-hub.png")});
+   const changed=await page.evaluate(()=>{
+    const c=document.querySelector('#appView [data-nav="frauen"][data-value^="group/"]');
+    if(!c)return {navigated:false,reason:"no group link",body:document.body.className};
+    const value=c.getAttribute("data-value");
+    if(typeof window.navigate==="function")window.navigate("frauen",value);else c.click();
+    return {navigated:true,value};
+   });
+   if(!changed.navigated)throw Error(target.name+" "+JSON.stringify(changed));
+   await page.waitForFunction(()=>!!document.querySelector("#appView .frauen-library-area-grid .frauen-library-area-card"),null,{timeout:12000});
+   await page.waitForTimeout(500);
+   await page.evaluate(()=>window.scrollTo(0,0));
+   const group=await page.evaluate(metrics);
+   check(group,target.name+" group",true);
+   if(group.nav&&group.area&&group.area.width<Math.min(group.nav.width,group.area.width+20)-16)
+    throw Error(target.name+" content cards unnecessarily narrower than nav");
+   await page.screenshot({path:path.join(output,target.name+"-group.png")});
+   await page.evaluate(()=>window.scrollTo(0,420));
+   await page.waitForTimeout(300);
+   const moved=await page.evaluate(metrics);
+   if(!moved.header||!moved.stage||Math.abs(moved.stage.top-moved.header.bottom)>3)
+    throw Error(target.name+" iOS photo detached on upward scroll: "+JSON.stringify(moved));
+   if(moved.y<75||!moved.heading||moved.heading.top>group.heading.top-75)
+    throw Error(target.name+" chapter list did not scroll under hero: "+JSON.stringify(moved));
+   await page.screenshot({path:path.join(output,target.name+"-scroll.png")});
+   await page.evaluate(()=>window.scrollTo(0,0));
+   await page.waitForTimeout(180);
+   check(await page.evaluate(metrics),target.name+" returned",true);
+   data.push({target:target.name,http:response.status(),hub,group,moved});
+   console.log("PASS IOS HERO",target.name,JSON.stringify({http:response.status(),top:group.stage.top,brand:group.header.bottom,cardWidth:group.firstCard?.width,nav:group.nav?.width,scroll:moved.y}));
    await context.close();
   }
- }catch(e){issues.push(String(e.stack||e));console.error(e);}
- finally{if(browser)await browser.close();fs.writeFileSync(path.join(out,"diagnosis.json"),JSON.stringify({all,issues},null,2));}
- if(issues.length){console.error("HERO_LIVE_FAILURES",issues);process.exitCode=1;}
+  // Android parity: the iOS-only runtime must be inert, no fixed rail or spacer.
+  const ctx=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,
+   userAgent:"Mozilla/5.0 (Linux; Android 16; Pixel 9) AppleWebKit/537.36 Chrome/141 Mobile Safari/537.36"});
+  const page=await ctx.newPage();
+  await page.setContent('<html data-theme="salbei"><body class="is-frauen-route has-bottom-nav" data-frauen-view="group"><div id="appView"><div class="frauen-library-shell"><section class="frauen-library-hero">Android existing hero</section><section class="frauen-library-area-grid"></section></div></div></body></html>');
+  await page.addScriptTag({content:script});
+  const parity=await page.evaluate(()=>({active:!!window.__darIosFrauenHeroV1409,
+   spacer:!!document.querySelector(".dar-ios-frauen-hero-spacer-v1409"),classAdded:document.documentElement.classList.contains("dar-ios-frauen-hero-v1409")}));
+  if(parity.active||parity.spacer||parity.classAdded)throw Error("Android was modified by iOS-only runtime: "+JSON.stringify(parity));
+  console.log("PASS ANDROID UNCHANGED",JSON.stringify(parity));
+  data.push({target:"Android untouched",parity});
+  await ctx.close();
+ }catch(e){errors.push(String(e.stack||e));console.error("FRAUEN_V1409_QA_FAILURE",e.stack||e);process.exitCode=1;}
+ finally{
+  if(browser)await browser.close();
+  fs.writeFileSync(path.join(output,"diagnosis.json"),JSON.stringify({data,errors},null,2));
+ }
 })();
