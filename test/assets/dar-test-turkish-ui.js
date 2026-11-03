@@ -544,6 +544,11 @@ function isDynamicGermanUi(value){
   /^Erstellt am [^<>\n]{1,40}$/.test(value)||
   /^Bereinigt: \d+ Test-Dateien, \d+ Test-Service-Worker\. Die App wird neu geöffnet …$/.test(value)||
   /^\d+ Ḥadīṯe in diesem Bāb\.$/.test(value)||
+  /^Dichte: [A-Z]{2,4} · \d+×\d+px · Ecke ziehen zum Vergrößern$/.test(value)||
+  /^Widget aktiv · Theme: [^<>\n]{1,32} · v[^<>\n]{1,24}$/.test(value)||
+  /^Ramaḍān-Serie konnte nicht geladen werden: [^<>\n]{1,160}$/.test(value)||
+  /^Quelle\/Hinweis: [^<>\n]{1,180}$/.test(value)||
+  /^\d+ von 13 Bereichen mit eigenen Angaben · vor PDF bitte prüfen\.$/.test(value)||
   /^\d+\. Fundstelle$/.test(value)||
   /^Qurʾān \d{1,3}:\d{1,3}(?: · [^<>]{1,80})?$/.test(value)||
   /^· Āyah \d+ ·$/.test(value)||
@@ -2710,6 +2715,69 @@ function translateSharedPatterns(value,language){
    const forms={ar:n+" أحاديث في هذا الباب.",en:n+" hadith reports in this chapter.",tr:"Bu babda "+n+" hadis.",ku:n+" hedîs di vê babê de.",ckb:n+" فەرموودە لەم بابەدا.",bs:n+" hadisa u ovom babu.",fr:n+" ḥadīṯs dans ce chapitre.",es:n+" hadices en este capítulo."};
    return forms[language]||null;
   }
+  const densityHint=value.match(/^Dichte: ([A-Z]{2,4}) · (\d+)×(\d+)px · Ecke ziehen zum Vergrößern$/);
+  if(densityHint){
+   const code=densityHint[1],w=densityHint[2],h=densityHint[3];
+   const forms={
+    ar:"الكثافة: "+code+" · "+w+"×"+h+"px · اسحب من الزاوية",
+    en:"Density: "+code+" · "+w+"×"+h+"px · Drag the corner",
+    tr:"Yoğunluk: "+code+" · "+w+"×"+h+"px · Köşeden çek",
+    ku:"Tîrbûn: "+code+" · "+w+"×"+h+"px · Ji quncikê bikişîne",
+    ckb:"چڕی: "+code+" · "+w+"×"+h+"px · لە گۆشەکە ڕایبکێشە",
+    bs:"Gustoća: "+code+" · "+w+"×"+h+"px · Povuci iz ugla",
+    fr:"Densité : "+code+" · "+w+"×"+h+"px · Tire le coin",
+    es:"Densidad: "+code+" · "+w+"×"+h+"px · Arrastra la esquina"
+   };
+   return forms[language]||null;
+  }
+  const widgetTheme=value.match(/^Widget aktiv · Theme: ([^<>\n]{1,32}) · v([^<>\n]{1,24})$/);
+  if(widgetTheme){
+   const mode=widgetTheme[1],ver=widgetTheme[2];
+   const forms={
+    ar:"الويدجت نشط · السمة: "+mode+" · v"+ver,
+    en:"Widget active · Theme: "+mode+" · v"+ver,
+    tr:"Widget etkin · Tema: "+mode+" · v"+ver,
+    ku:"Widget çalak e · Tema: "+mode+" · v"+ver,
+    ckb:"ویدجێت چالاکە · ڕووکار: "+mode+" · v"+ver,
+    bs:"Widget je aktivan · Tema: "+mode+" · v"+ver,
+    fr:"Widget actif · Thème : "+mode+" · v"+ver,
+    es:"Widget activo · Tema: "+mode+" · v"+ver
+   };
+   return forms[language]||null;
+  }
+  const ramadanMiss=value.match(/^Ramaḍān-Serie konnte nicht geladen werden: ([^<>\n]{1,160})$/);
+  if(ramadanMiss){
+   const raw=ramadanMiss[1];
+   let tail=raw;
+   if(/^Ungültige 30-Tage-Serie$/.test(raw)){
+    tail={ar:"سلسلة 30 يومًا غير صالحة",en:"Invalid 30-day series",tr:"Geçersiz 30 günlük dizi",ku:"Rêzeya 30 rojan nederbasdar e",ckb:"زنجیرەی 30 ڕۆژ نادروستە",bs:"Nevažeća serija od 30 dana",fr:"Série de 30 jours invalide",es:"Serie de 30 días no válida"}[language]||raw;
+   }else if(/^Mindestens ein Tag ist noch nicht vollständig verifiziert$/.test(raw)){
+    tail={ar:"يوم واحد على الأقل لم يُراجع بالكامل بعد",en:"At least one day is not fully verified yet",tr:"En az bir gün henüz tam doğrulanmadı",ku:"Bi kêmanî rojek hê bi temamî nehatiye piştrastkirin",ckb:"لانیکەم ڕۆژێک هێشتا بەتەواوی پشتڕاست نەکراوەتەوە",bs:"Najmanje jedan dan još nije potpuno provjeren",fr:"Au moins un jour n’est pas encore entièrement vérifié",es:"Al menos un día aún no está verificado por completo"}[language]||raw;
+   }
+   const heads={ar:"تعذّر تحميل سلسلة رمضان: ",en:"The Ramaḍān series could not be loaded: ",tr:"Ramazan dizisi yüklenemedi: ",ku:"Rêzeya Remezanê nehat barkirin: ",ckb:"زنجیرەی ڕەمەزان بارنەکرا: ",bs:"Ramazanska serija nije mogla da se učita: ",fr:"La série de Ramaḍān n’a pas pu être chargée : ",es:"La serie de Ramaḍān no se pudo cargar: "};
+   return heads[language]?heads[language]+tail:null;
+  }
+  const sourceNote=value.match(/^Quelle\/Hinweis: ([^<>\n]{1,180})$/);
+  if(sourceNote){
+   const rest=sourceNote[1];
+   const heads={ar:"المصدر/ملاحظة: ",en:"Source/note: ",tr:"Kaynak/not: ",ku:"Çavkanî/nîşan: ",ckb:"سەرچاوە/تێبینی: ",bs:"Izvor/napomena: ",fr:"Source/note : ",es:"Fuente/nota: "};
+   return heads[language]?heads[language]+rest:null;
+  }
+  const ownAreas=value.match(/^(\d+) von 13 Bereichen mit eigenen Angaben · vor PDF bitte prüfen\.$/);
+  if(ownAreas){
+   const n=ownAreas[1];
+   const forms={
+    ar:n+" من 13 قسمًا ببيانات خاصة · يرجى الفحص قبل PDF",
+    en:n+" of 13 sections with your own details · check before the PDF",
+    tr:n+" / 13 bölümde kendi verilerin var · PDF öncesi kontrol et",
+    ku:n+" ji 13 beşan bi daneyên xwe · berî PDF kontrol bike",
+    ckb:n+" لە 13 بەشدا زانیاری تایبەت · پێش PDF بپشکنە",
+    bs:n+" od 13 područja s vlastitim podacima · provjeri prije PDF-a",
+    fr:n+" sections sur 13 avec tes renseignements · vérifie avant le PDF",
+    es:n+" de 13 áreas con datos propios · revisa antes del PDF"
+   };
+   return forms[language]||null;
+  }
   const numberedPlace=value.match(/^(\d+)\. Fundstelle$/);
   if(numberedPlace){
    const word=lookupPack("Fundstelle",language);
@@ -3144,7 +3212,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-54";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-55";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

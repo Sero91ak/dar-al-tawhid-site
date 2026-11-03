@@ -407,6 +407,17 @@ assert.equal(w.DarTestTurkishUI.translateValue("Test-App-Cache wird bereinigt �
 assert.equal(w.DarTestTurkishUI.translateValue("Erstellt am 3.11.2026","es"),"Creado el 3.11.2026");
 assert.equal(w.DarTestTurkishUI.translateValue("Bereinigt: 2 Test-Dateien, 1 Test-Service-Worker. Die App wird neu geöffnet …","en"),"Cleared: 2 test files, 1 test service workers. The app will reopen …");
 assert.equal(w.DarTestTurkishUI.translateValue("8 Ḥadīṯe in diesem Bāb.","fr"),"8 ḥadīṯs dans ce chapitre.");
+assert.equal(w.DarTestTurkishUI.translateValue("DAR TEST wurde installiert.","en"),"DAR TEST was installed.");
+assert.equal(w.DarTestTurkishUI.translateValue("Widget aktiviert.","ar"),"تم تفعيل الويدجت.");
+assert.equal(w.DarTestTurkishUI.translateValue("Angaben anzeigen","ku"),"Dane nîşan bide");
+assert.equal(w.DarTestTurkishUI.translateValue("Ramaḍān endet – die ʿIbādah bleibt","fr"),"Ramaḍān s’achève – la ʿibādah demeure");
+assert.equal(w.DarTestTurkishUI.translateValue("Öffne diese Seite in Chrome auf deinem Android-Gerät.","es"),"Abre esta página en Chrome en tu dispositivo Android.");
+assert.equal(w.DarTestTurkishUI.translateValue("DAR Test · Widgets","en"),"DAR Test · Widgets");
+assert.equal(w.DarTestTurkishUI.translateValue("Dichte: MD · 180×180px · Ecke ziehen zum Vergrößern","en"),"Density: MD · 180×180px · Drag the corner");
+assert.equal(w.DarTestTurkishUI.translateValue("Widget aktiv · Theme: auto · v1297","ckb"),"ویدجێت چالاکە · ڕووکار: auto · v1297");
+assert.equal(w.DarTestTurkishUI.translateValue("Ramaḍān-Serie konnte nicht geladen werden: Ungültige 30-Tage-Serie","tr"),"Ramazan dizisi yüklenemedi: Geçersiz 30 günlük dizi");
+assert.equal(w.DarTestTurkishUI.translateValue("Quelle/Hinweis: Ṣaḥīḥ al-Bukhārī 2738.","es"),"Fuente/nota: Ṣaḥīḥ al-Bukhārī 2738.");
+assert.equal(w.DarTestTurkishUI.translateValue("3 von 13 Bereichen mit eigenen Angaben · vor PDF bitte prüfen.","fr"),"3 sections sur 13 avec tes renseignements · vérifie avant le PDF");
 assert.equal(w.DarTestTurkishUI.translateValue("Fundstelle","fr"),"Lieu cité");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
