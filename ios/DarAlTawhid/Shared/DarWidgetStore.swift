@@ -95,7 +95,20 @@ enum DarPrayerSync {
                     guard let http = response as? HTTPURLResponse, http.statusCode == 200,
                           data.count < 100_000 else { continue }
                     let decoder = JSONDecoder()
-                    decoder.dateDecodingStrategy = .iso8601
+                    decoder.dateDecodingStrategy = .custom { input in
+                        let raw = try input.singleValueContainer().decode(String.self)
+                        let fractional = ISO8601DateFormatter()
+                        fractional.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                        let plain = ISO8601DateFormatter()
+                        plain.formatOptions = [.withInternetDateTime]
+                        guard let date = fractional.date(from: raw) ?? plain.date(from: raw) else {
+                            throw DecodingError.dataCorruptedError(
+                                in: try input.singleValueContainer(),
+                                debugDescription: "Ungültiger absoluter Zeitstempel"
+                            )
+                        }
+                        return date
+                    }
                     let parsed = try decoder.decode(DarCanonicalPrayerDay.self, from: data)
                     guard parsed.date == date, parsed.matches(snap) else { continue }
                     fetched.append(parsed)
