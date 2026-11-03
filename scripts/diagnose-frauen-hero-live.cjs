@@ -1,104 +1,107 @@
 #!/usr/bin/env node
 "use strict";
-/* Browser-based, read-only Frauen hero diagnosis: public Test + visitor SPA.
-   Preserve image/card/navigation logic; record actual computed layout on screen. */
-const { chromium } = require("playwright");
+/* DAR FRAUEN V1408 LIVE PREVIEW ACCEPTANCE
+ * Read-only external website: inject PR CSS+JS into browser memory, never
+ * mutate published pages or user data. Verifies browser geometry for both
+ * visitor and Test, hub and group, scroll up/down and original images.
+ */
+const {chromium}=require("playwright");
 const fs=require("node:fs");
 const path=require("node:path");
 const out=path.join(process.cwd(),"frauen-hero-live-evidence");
 fs.mkdirSync(out,{recursive:true});
-const all=[];
+const css=fs.readFileSync("assets/frauen/frauen-fixed-hero-v1408.css","utf8");
+const js=fs.readFileSync("assets/frauen/frauen-fixed-hero-runtime-v1408.js","utf8");
 const routes=[
-  {key:"visitor",url:"https://dar-al-tawhid.de/?frauen-hero-probe=1392#frauen"},
-  {key:"test",url:"https://dar-al-tawhid.de/test/?frauen-hero-probe=1392#frauen"}
+  {key:"visitor",url:"https://dar-al-tawhid.de/?frauen-preview-v1408=1#frauen"},
+  {key:"test",url:"https://dar-al-tawhid.de/test/?frauen-preview-v1408=1#frauen"}
 ];
-function snapshot(){
-  const hero=document.querySelector(".frauen-library-pinned-header .frauen-library-hero");
-  const stage=document.querySelector(".frauen-library-pinned-header");
-  const heading=document.querySelector(".frauen-library-section-head");
-  const app=document.querySelector("#appView");
-  const shell=document.querySelector(".frauen-library-shell");
-  const doc=document.scrollingElement;
-  const pick=e=>{
-    if(!e)return null;
-    const r=e.getBoundingClientRect(),c=getComputedStyle(e);
-    return {tag:e.tagName,id:e.id,classes:String(e.className).slice(0,180),
-      top:Math.round(r.top),bottom:Math.round(r.bottom),
-      left:Math.round(r.left),right:Math.round(r.right),
-      width:Math.round(r.width),height:Math.round(r.height),
-      display:c.display,visibility:c.visibility,opacity:c.opacity,
-      position:c.position,overflowX:c.overflowX,overflowY:c.overflowY,
-      backgroundImage:c.backgroundImage.slice(0,420),zIndex:c.zIndex,
-      scrollTop:e.scrollTop,scrollHeight:e.scrollHeight,clientHeight:e.clientHeight,
-      clipPath:c.clipPath,transform:c.transform,
-      parent:e.parentElement?String(e.parentElement.className).slice(0,120):""};
-  };
-  let ancestors=[];
-  if(hero){for(let x=hero,n=0;x&&n<12;x=x.parentElement,n++)ancestors.push(pick(x));}
-  return {hash:location.hash,theme:document.documentElement.getAttribute("data-theme"),
-    bodyClass:document.body?.className,view:document.body?.getAttribute("data-frauen-view"),
-    docScroll:doc?.scrollTop,windowY:scrollY,viewport:{w:innerWidth,h:innerHeight},
-    hero:pick(hero),stage:pick(stage),heading:pick(heading),
-    body:pick(document.body),html:pick(document.documentElement),
-    inlineStyles:{body:document.body?.getAttribute("style"),html:document.documentElement?.getAttribute("style")},
-    app:pick(app),shell:pick(shell),ancestors,
-    heroHtml:hero?.outerHTML.slice(0,400),
-    shellChildren:shell?[...shell.children].slice(0,7).map(x=>({tag:x.tagName,cls:String(x.className).slice(0,150),head:x.outerHTML.slice(0,260)})):[],
-    renderer:(()=>{
-      try{
-        const p=window.DARFrauenFiqh;
-        const html=typeof p?.render==="function"?String(p.render("")):"";
-        return {exists:!!p,render:typeof p?.render,
-          generatedLength:html.length,generatedHero:html.includes("frauen-library-hero"),
-          generatedStage:html.includes("frauen-library-pinned-header"),
-          generatedHeader:html.slice(0,330)};
-      }catch(e){return {error:String(e)}}
-    })(),
-    images:[...document.querySelectorAll(".frauen-library-card.has-visual")].slice(0,2).map(pick),
-    styles:[...document.querySelectorAll('link[rel="stylesheet"]')].filter(x=>/frauen/.test(x.href)).map(x=>x.href)};
+const checks=[];
+const metrics=()=>{
+ const pick=q=>document.querySelector(q);
+ const box=el=>{if(!el)return null;const r=el.getBoundingClientRect();return {top:r.top,bottom:r.bottom,left:r.left,width:r.width,height:r.height};};
+ const header=pick("#darAdultBrandHeaderV2")||pick("#darTestBrandHeaderV1");
+ const stage=pick("#appView .dar-immersive-hero-stage");
+ const hero=pick("#appView .frauen-library-hero");
+ const placeholder=pick("#appView .dar-frauen-hero-space-v1408");
+ const heading=pick("#appView .frauen-library-section-head");
+ const grid=pick("#appView .frauen-library-area-grid");
+ const cards=[...document.querySelectorAll("#appView .frauen-library-area-card")];
+ return {header:box(header),stage:box(stage),hero:box(hero),placeholder:box(placeholder),heading:box(heading),
+   documentY:window.scrollY,view:document.body?.getAttribute("data-frauen-view"),
+   stagePosition:stage?getComputedStyle(stage).position:null,
+   cards:cards.length,card:box(cards[0]),
+   grid:box(grid),flex:grid?getComputedStyle(grid).flexDirection:null};
+};
+function verify(label,m,group=false){
+ if(!m.stage||!m.hero||!m.header||!m.placeholder)throw Error(label+" no fixed hero/header/placeholder: "+JSON.stringify(m));
+ if(m.stagePosition!=="fixed")throw Error(label+" Hero not fixed: "+JSON.stringify(m));
+ if(Math.abs(m.stage.top-m.header.bottom)>5)throw Error(label+" Hero detached from fixed header: "+JSON.stringify(m));
+ if(m.placeholder.height<150)throw Error(label+" Hero missing flow reservation: "+JSON.stringify(m));
+ if(group){
+  if(!m.heading||m.heading.top<m.stage.bottom-5)throw Error(label+" chapter heading above/inside Hero: "+JSON.stringify(m));
+  if(m.cards<2||m.flex!=="column")throw Error(label+" chapters not one column: "+JSON.stringify(m));
+  if(m.card&&m.grid&&m.card.width<m.grid.width-5)throw Error(label+" chapter capsule not full width: "+JSON.stringify(m));
+ }
 }
 (async()=>{
- let browser;let issues=[];
+ let browser;
  try{
   browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
   for(const route of routes){
-   const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,locale:"de-DE",userAgent:route.key==="visitor"?"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1 DarAlTawhid-iOS":"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1"});
-   const page=await context.newPage();const errors=[];
+   const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,locale:"de-DE"});
+   const page=await context.newPage();
+   const errors=[];
    page.on("pageerror",e=>errors.push(String(e.message).slice(0,300)));
    const response=await page.goto(route.url,{waitUntil:"domcontentloaded",timeout:60000});
-   await page.waitForTimeout(6000);
-   let before=await page.evaluate(snapshot);
-   await page.screenshot({path:path.join(out,route.key+"-initial.png")});
-   // Simulate the proposed code on the currently deployed app, before merging.
-   const localScript=fs.readFileSync(path.join(process.cwd(),route.key==="test"?"test/assets/frauen/frauen-fiqh.js":"assets/frauen/frauen-fiqh.js"),"utf8");
-   const tag="/* DAR_FRAUEN_HERO_DOM_INTEGRITY_V1392";
-   if(!localScript.includes(tag))throw Error("Repair snippet not in checkout");
-   await page.addScriptTag({content:localScript.slice(localScript.indexOf(tag))});
-   const localCss=fs.readFileSync(path.join(process.cwd(),route.key==="test"?"test/assets/frauen/frauen-authority-v1292.css":"assets/frauen/frauen-authority-v1292.css"),"utf8");
-   const cssTag="/* DAR_FRAUEN_HERO_SCROLL_ANCESTOR_V1392";
-   if(!localCss.includes(cssTag))throw Error("Scroll CSS absent in checkout");
-   await page.addStyleTag({content:localCss.slice(localCss.indexOf(cssTag))});
-   await page.waitForTimeout(1100);
-   let repaired=await page.evaluate(snapshot);
-   await page.screenshot({path:path.join(out,route.key+"-repaired.png")});
-
-   await page.mouse.wheel(0,560);
-   await page.waitForTimeout(330);
+   await page.waitForTimeout(4000);
+   // Use exactly the unmerged, locally checked-out proposal.
+   await page.addStyleTag({content:css});
+   await page.addScriptTag({content:js});
+   await page.waitForFunction(()=>!!document.querySelector("#appView .dar-frauen-hero-space-v1408"),{timeout:12000});
+   await page.evaluate(()=>window.scrollTo(0,0));
+   await page.waitForTimeout(500);
+   let hub=await page.evaluate(metrics);
+   verify(route.key+" hub",hub);
+   await page.screenshot({path:path.join(out,route.key+"-hub.png")});
+   // Navigate through the actual application; the renderer/order is not mocked.
+   const nav=await page.evaluate(()=>{
+     if(typeof window.navigate==="function"){window.navigate("frauen","group/fiqh");return true}
+     const card=document.querySelector('#appView .frauen-library-card[data-value^="group/"]');
+     if(card){card.click();return true}
+     return false;
+   });
+   if(!nav)throw Error(route.key+" cannot navigate to real group");
+   await page.waitForTimeout(1200);
+   await page.waitForFunction(()=>!!document.querySelector(".frauen-library-area-grid .frauen-library-area-card"),{timeout:12000});
+   await page.evaluate(()=>window.scrollTo(0,0));
+   await page.waitForTimeout(500);
+   let group=await page.evaluate(metrics);
+   verify(route.key+" group",group,true);
+   await page.screenshot({path:path.join(out,route.key+"-group.png")});
+   await page.mouse.wheel(0,350);
    await page.waitForTimeout(450);
-   let after=await page.evaluate(snapshot);
-   await page.screenshot({path:path.join(out,route.key+"-after-scroll.png")});
-   all.push({key:route.key,status:response.status(),before,repaired,after,errors});
-   console.log(JSON.stringify({route:route.key,status:response.status(),
-    before:{bodyClass:before.bodyClass,theme:before.theme,view:before.view,scroll:before.docScroll,hero:before.hero,stage:before.stage,heading:before.heading,app:before.app,images:before.images.length,styles:before.styles,shellChildren:before.shellChildren,renderer:before.renderer},
-    repaired:{hero:repaired.hero,stage:repaired.stage,heading:repaired.heading,renderer:repaired.renderer,body:repaired.body,html:repaired.html,inline:repaired.inlineStyles,ancestors:repaired.ancestors.map(x=>({cls:x.classes,overflowX:x.overflowX,overflowY:x.overflowY}))},after:{scroll:after.docScroll,body:after.body,hero:after.hero,stage:after.stage,heading:after.heading,ancestors:after.ancestors.map(x=>({cls:x.classes,overflowY:x.overflowY}))},errors}));
-   if(before.app&&(!repaired.hero||repaired.hero.height<180||repaired.hero.bottom<100)){
-     issues.push(route.key+" upper hero missing from first viewport");
-   }
-   if(before.app&&after.stage&&after.stage.bottom<100)issues.push(route.key+" stage scrolls off-screen");
-   if(before.app&&before.app.scrollHeight>before.app.clientHeight+200&&after.docScroll<100)issues.push(route.key+" content cannot scroll normally");
+   let scrolled=await page.evaluate(metrics);
+   if(!scrolled.stage||Math.abs(scrolled.stage.top-scrolled.header.bottom)>5)
+     throw Error(route.key+" photo moves away on scroll: "+JSON.stringify(scrolled));
+   if(scrolled.documentY<50)throw Error(route.key+" ordinary content cannot scroll: "+JSON.stringify(scrolled));
+   if(scrolled.heading&&scrolled.heading.top>group.heading.top-60)
+     throw Error(route.key+" chapter heading did not scroll behind image: "+JSON.stringify(scrolled));
+   await page.screenshot({path:path.join(out,route.key+"-scrolled.png")});
+   await page.evaluate(()=>window.scrollTo(0,0));
+   await page.waitForTimeout(300);
+   let back=await page.evaluate(metrics);
+   verify(route.key+" return-to-top",back,true);
+   checks.push({route:route.key,http:response.status(),hub,group,scrolled,back,errors});
+   console.log("PASS LIVE PREVIEW",route.key,JSON.stringify({http:response.status(),hub:hub.stage,groupHeading:group.heading,scroll:scrolled.documentY,returnToTop:back.stage}));
    await context.close();
   }
- }catch(e){issues.push(String(e.stack||e));console.error(e);}
- finally{if(browser)await browser.close();fs.writeFileSync(path.join(out,"diagnosis.json"),JSON.stringify({all,issues},null,2));}
- if(issues.length){console.error("HERO_LIVE_FAILURES",issues);process.exitCode=1;}
+ }catch(e){
+  fs.writeFileSync(path.join(out,"diagnosis.json"),JSON.stringify({checks,error:String(e.stack||e)},null,2));
+  console.error("HERO_LIVE_FAILURE",e.stack||e);
+  process.exitCode=1;
+ }finally{
+  if(browser)await browser.close();
+  fs.writeFileSync(path.join(out,"diagnosis.json"),JSON.stringify(checks,null,2));
+ }
 })();
