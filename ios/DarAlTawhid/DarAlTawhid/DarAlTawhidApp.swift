@@ -60,7 +60,7 @@ extension Notification.Name {
 struct DarAlTawhidApp: App {
     @UIApplicationDelegateAdaptor(DarAppDelegate.self) private var appDelegate
     @StateObject private var router = DarAppRouter()
-    @Environment(\\.scenePhase) private var scenePhase
+    @Environment(\.scenePhase) private var scenePhase
 
     init() {
         let ink = DarWidgetStore.load().inkHex.trimmingCharacters(in: .whitespacesAndNewlines)
