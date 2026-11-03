@@ -342,22 +342,17 @@ enum DarPrayerLiveActivityController {
         guard UserDefaults.standard.bool(forKey: preference) else { return }
         if #available(iOS 16.1, *) {
             guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
-            let snapshot = DarDailyContent.refresh(DarWidgetStore.load())
-            let next = DarPrayerEngine.next(from: snapshot.prayers)
-            let parts = next.time.split(separator: ":")
-            guard parts.count == 2, let hour = Int(parts[0]), let minute = Int(parts[1]),
-                  (0...23).contains(hour), (0...59).contains(minute) else { return }
-            var calendar = Calendar(identifier: .gregorian)
-            calendar.timeZone = .current
-            let now = Date()
-            guard let today = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: now) else { return }
-            let target = today > now ? today : calendar.date(byAdding: .day, value: 1, to: today) ?? today
+            let snapshot = DarWidgetStore.load()
+            guard let next = snapshot.nextAbsolutePrayer(after: Date()) else {
+                endAll()
+                return
+            }
             let state = DarPrayerLiveAttributes.ContentState(
                 prayerName: next.name,
-                targetDate: target,
+                targetDate: next.target,
                 city: snapshot.cityLabel
             )
-            let content = ActivityContent(state: state, staleDate: target)
+            let content = ActivityContent(state: state, staleDate: next.target)
             if let activity = Activity<DarPrayerLiveAttributes>.activities.first {
                 Task { await activity.update(content) }
             } else {
