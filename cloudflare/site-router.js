@@ -391,6 +391,10 @@ function activateAdultCompactHero(html) {
   }
   /* Readable full-width adult shelves match #bottomNav's --dar-nav-width.
    * Keep original image assets and every other app's own scroll architecture. */
+  if (!html.includes('id="darAdultNavWidthMeasureV1409"')) {
+    const wideJs = '<script defer id="darAdultNavWidthMeasureV1409" src="/assets/dar-adult-navwidth-measure-v1409.js?v=navwidth-measure-v1409-20261103"></'+'script>';
+    html = html.includes("</body>") ? html.replace("</body>",wideJs+"</body>") : html+wideJs;
+  }
   if (!html.includes('id="darAdultNavWidthContentV1409"')) {
     const wideCss = '<link rel="stylesheet" id="darAdultNavWidthContentV1409" href="/assets/dar-adult-navwidth-content-v1409.css?v=navwidth-content-v1409-20261103">';
     html = html.includes("</body>") ? html.replace("</body>",wideCss+"</body>") : html+wideCss;
