@@ -1020,24 +1020,12 @@ export function computeCanonicalPrayerDay({
     }
     const [hour, minute] = value.split(":").map(Number);
     if (hour > 23 || minute > 59) throw new Error("Out-of-range prayer time: " + key);
-    const instant = utcFromLocal(localDay, hour + minute / 60, source.timeZone);
-    if (!(instant instanceof Date) || !Number.isFinite(instant.getTime())) {
-      throw new Error("Invalid absolute prayer instant: " + key);
-    }
-    const parts = getLocalParts(instant, source.timeZone);
-    if (dayKey(instant, source.timeZone) !== day ||
-        parts.hour !== hour || parts.minute !== minute || instant.getTime() <= prior) {
-      throw new Error("Inconsistent or out-of-order prayer instant: " + key);
-    }
-    prior = instant.getTime();
-    const offsetMinutes = tzOffsetMin(instant, source.timeZone);
-    const sign = offsetMinutes < 0 ? "-" : "+";
-    const offset = Math.abs(offsetMinutes);
-    const zoneSuffix = sign + String(Math.floor(offset / 60)).padStart(2, "0") +
-      ":" + String(offset % 60).padStart(2, "0");
+    const absolute = canonicalLocalClock(day, value, source.timeZone);
+    if (absolute.epoch <= prior) throw new Error("Out-of-order prayer instant: " + key);
+    prior = absolute.epoch;
     prayers[key] = {
       name: key === "sunrise" ? "Sonnenaufgang" : source.times[key].name,
-      dateTime: day + "T" + value + ":00" + zoneSuffix
+      dateTime: absolute.dateTime
     };
   }
   return {
@@ -1049,4 +1037,27 @@ export function computeCanonicalPrayerDay({
     method: { fajrAngle: source.methodAngle, asrFactor: source.asrFactor },
     prayers
   };
+}
+
+
+/** Testable local clock -> ISO8601 absolute instant adapter (no prayer calculation). */
+export function canonicalLocalClock(day, clock, timeZone = "Europe/Berlin") {
+  if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(day) ||
+      !/^\\d{2}:\\d{2}$/.test(clock)) throw new Error("Invalid calendar clock");
+  const [year, month, dayNumber] = day.split("-").map(Number);
+  const [hour, minute] = clock.split(":").map(Number);
+  const checkDate = new Date(day + "T12:00:00Z");
+  if (Number.isNaN(checkDate.getTime()) || checkDate.toISOString().slice(0, 10) !== day ||
+      hour > 23 || minute > 59) throw new Error("Out-of-range calendar clock");
+  const instant = utcFromLocal({ year, month, day: dayNumber }, hour + minute / 60, timeZone);
+  const parts = getLocalParts(instant, timeZone);
+  if (dayKey(instant, timeZone) !== day || parts.hour !== hour || parts.minute !== minute) {
+    throw new Error("Nonexistent or inconsistent local time");
+  }
+  const offsetMinutes = tzOffsetMin(instant, timeZone);
+  const sign = offsetMinutes < 0 ? "-" : "+";
+  const offset = Math.abs(offsetMinutes);
+  const suffix = sign + String(Math.floor(offset / 60)).padStart(2, "0") +
+    ":" + String(offset % 60).padStart(2, "0");
+  return { epoch: instant.getTime(), dateTime: day + "T" + clock + ":00" + suffix };
 }
