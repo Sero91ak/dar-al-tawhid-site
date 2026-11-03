@@ -16,24 +16,24 @@ function metrics(){
  const header=one("#darAdultBrandHeaderV2")||one("#darTestBrandHeaderV1");
  const stage=one("#appView .dar-immersive-hero-stage");
  const hero=one("#appView .frauen-library-hero");
- const space=one("#appView .dar-ios-frauen-hero-spacer-v1409");
+ const pin=stage||hero, shell=one("#appView .frauen-library-shell,#appView .frauen-library-list");
  const cards=[...document.querySelectorAll("#appView .frauen-library-area-card")];
  const area=one("#appView .frauen-library-area-grid");
  const nav=one("#bottomNav");
- return {body:document.body?.className,view:document.body?.getAttribute("data-frauen-view"),header:rect(header),stage:rect(stage),hero:rect(hero),space:rect(space),area:rect(area),firstCard:rect(cards[0]),heading:rect(one(".frauen-library-section-head")),
+ return {body:document.body?.className,view:document.body?.getAttribute("data-frauen-view"),header:rect(header),stage:rect(stage),hero:rect(hero),pin:rect(pin),shellPadding:shell?parseFloat(getComputedStyle(shell).paddingTop):0,area:rect(area),firstCard:rect(cards[0]),heading:rect(one(".frauen-library-section-head")),
    nav:rect(nav),cardCount:cards.length,display:area?getComputedStyle(area).display:null,flexDirection:area?getComputedStyle(area).flexDirection:null,
-   stagePosition:stage?getComputedStyle(stage).position:null,iosClass:document.documentElement.classList.contains("dar-ios-frauen-hero-v1409"),
+   pinPosition:pin?getComputedStyle(pin).position:null,iosClass:document.documentElement.classList.contains("dar-ios-frauen-hero-v1409"),
    scriptFlag:!!window.__darIosFrauenHeroV1409,y:window.scrollY,scrollHeight:document.scrollingElement?.scrollHeight,
    shell:one(".frauen-library-shell")?.outerHTML.slice(0,450)};
 }
 function check(m,kind,group){
- if(!m.header||!m.stage||!m.hero||!m.space)throw Error(kind+": missing original hero stage or spacer: "+JSON.stringify(m));
- if(m.stagePosition!=="fixed")throw Error(kind+": stage not fixed on iOS: "+JSON.stringify(m));
- if(Math.abs(m.stage.top-m.header.bottom)>3)throw Error(kind+": gap between header and hero: "+JSON.stringify(m));
- if(m.space.height<140)throw Error(kind+": no correctly-sized flow reservation: "+JSON.stringify(m));
+ if(!m.header||!m.hero||!m.pin)throw Error(kind+": original hero absent: "+JSON.stringify(m));
+ if(m.pinPosition!=="fixed")throw Error(kind+": hero not fixed on iOS: "+JSON.stringify(m));
+ if(Math.abs(m.pin.top-m.header.bottom)>3)throw Error(kind+": gap between header and hero: "+JSON.stringify(m));
+ if(m.shellPadding<140)throw Error(kind+": missing flow padding: "+JSON.stringify(m));
  if(!m.iosClass||!m.scriptFlag)throw Error(kind+": iOS-only gate not active");
  if(group){
-  if(!m.heading||m.heading.top<m.stage.bottom-3)throw Error(kind+": heading drawn inside or above hero: "+JSON.stringify(m));
+  if(!m.heading||m.heading.top<m.pin.bottom-3)throw Error(kind+": heading drawn inside or above hero: "+JSON.stringify(m));
   if(m.cardCount<2||m.display!=="flex"||m.flexDirection!=="column")throw Error(kind+": chapters not stacked: "+JSON.stringify(m));
   if(m.area&&m.firstCard&&m.firstCard.width<m.area.width-3)throw Error(kind+": cards not full-width: "+JSON.stringify(m));
  }
@@ -59,7 +59,7 @@ function check(m,kind,group){
    await page.addStyleTag({content:widthCss});
    await page.addStyleTag({content:css});
    await page.addScriptTag({content:script});
-   await page.waitForFunction(()=>!!document.querySelector("#appView .dar-ios-frauen-hero-spacer-v1409"),null,{timeout:10000});
+   await page.waitForFunction(()=>{const st=document.querySelector("#appView .dar-immersive-hero-stage");const h=document.querySelector("#appView .frauen-library-hero");const el=st||h;return !!(el&&getComputedStyle(el).position==="fixed")},null,{timeout:10000});
    await page.evaluate(()=>window.scrollTo(0,0));
    await page.waitForTimeout(350);
    const hub=await page.evaluate(metrics);
@@ -84,7 +84,7 @@ function check(m,kind,group){
    await page.evaluate(()=>window.scrollTo(0,420));
    await page.waitForTimeout(300);
    const moved=await page.evaluate(metrics);
-   if(!moved.header||!moved.stage||Math.abs(moved.stage.top-moved.header.bottom)>3)
+   if(!moved.header||!moved.pin||Math.abs(moved.pin.top-moved.header.bottom)>3)
     throw Error(target.name+" iOS photo detached on upward scroll: "+JSON.stringify(moved));
    if(moved.y<75||!moved.heading||moved.heading.top>group.heading.top-75)
     throw Error(target.name+" chapter list did not scroll under hero: "+JSON.stringify(moved));
@@ -93,7 +93,7 @@ function check(m,kind,group){
    await page.waitForTimeout(180);
    check(await page.evaluate(metrics),target.name+" returned",true);
    data.push({target:target.name,http:response.status(),hub,group,moved});
-   console.log("PASS IOS HERO",target.name,JSON.stringify({http:response.status(),top:group.stage.top,brand:group.header.bottom,cardWidth:group.firstCard?.width,nav:group.nav?.width,scroll:moved.y}));
+   console.log("PASS IOS HERO",target.name,JSON.stringify({http:response.status(),top:group.pin.top,brand:group.header.bottom,cardWidth:group.firstCard?.width,nav:group.nav?.width,scroll:moved.y}));
    await context.close();
   }
   // Android parity: the iOS-only runtime must be inert, no fixed rail or spacer.
@@ -103,8 +103,8 @@ function check(m,kind,group){
   await page.setContent('<html data-theme="salbei"><body class="is-frauen-route has-bottom-nav" data-frauen-view="group"><div id="appView"><div class="frauen-library-shell"><section class="frauen-library-hero">Android existing hero</section><section class="frauen-library-area-grid"></section></div></div></body></html>');
   await page.addScriptTag({content:script});
   const parity=await page.evaluate(()=>({active:!!window.__darIosFrauenHeroV1409,
-   spacer:!!document.querySelector(".dar-ios-frauen-hero-spacer-v1409"),classAdded:document.documentElement.classList.contains("dar-ios-frauen-hero-v1409")}));
-  if(parity.active||parity.spacer||parity.classAdded)throw Error("Android was modified by iOS-only runtime: "+JSON.stringify(parity));
+   original:!!document.querySelector(".frauen-library-shell > .frauen-library-hero"),classAdded:document.documentElement.classList.contains("dar-ios-frauen-hero-v1409")}));
+  if(parity.active||!parity.original||parity.classAdded)throw Error("Android was modified by iOS-only runtime: "+JSON.stringify(parity));
   console.log("PASS ANDROID UNCHANGED",JSON.stringify(parity));
   data.push({target:"Android untouched",parity});
   await ctx.close();
