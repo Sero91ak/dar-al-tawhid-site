@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-03T13:26:31.597Z",
+  "updatedAt": "2026-11-03T13:26:39.186Z",
   "cacheVersion": 102,
   "settings": {
     "autoDownloadEnabled": true,
@@ -33,23 +33,19 @@
     ]
   },
   "syncState": {
-    "lastSyncAt": "2026-11-02T10:59:48.612Z",
+    "lastSyncAt": "2026-11-03T13:25:43.486Z",
     "lastSyncStatus": "ok",
-    "lastSyncError": "",
-    "nextSyncAt": "2026-11-03T10:59:48.882Z",
-    "dailyDownloadDate": "2026-11-02",
-    "dailyDownloadCount": 0,
-    "lastRunDownloads": 14,
-    "lastRunRejected": 38,
+    "lastSyncError": "pexels:15103188: Download 404",
+    "nextSyncAt": "2026-11-04T13:26:39.186Z",
+    "dailyDownloadDate": "2026-11-03",
+    "dailyDownloadCount": 5,
+    "lastRunDownloads": 5,
+    "lastRunRejected": 26,
     "lastRunErrors": [
-      "pexels:15103188: Download 404",
-      "unsplash:9aCkSl6YcXg: Reference cannot be updated",
-      "unsplash:p8NSgvjEk-Y: Update is not a fast forward",
-      "unsplash:T26KCgCPsCI: Update is not a fast forward",
-      "unsplash:w9mFAHtqB-k: Update is not a fast forward"
+      "pexels:15103188: Download 404"
     ],
-    "totalDownloads": 69,
-    "totalRejected": 199
+    "totalDownloads": 74,
+    "totalRejected": 220
   },
   "items": [
     {
