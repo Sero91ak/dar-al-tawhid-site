@@ -534,6 +534,10 @@ function isDynamicGermanUi(value){
   /^Sūrah \d+$/.test(value)||
   /^Sūrah \d+ · \d+ Āyāt · (?:Mekkanisch|Medinensisch)$/.test(value)||
   /^\d+ Āyāt$/.test(value)||
+  /^\d+ Ayāt$/.test(value)||
+  /^Āyah \d+ abspielen$/.test(value)||
+  /^\d+ von 30 Tagen abgeschlossen$/.test(value)||
+  /^Tag \d{1,2} von 30$/.test(value)||
   /^\d+\. Fundstelle$/.test(value)||
   /^Qurʾān \d{1,3}:\d{1,3}(?: · [^<>]{1,80})?$/.test(value)||
   /^· Āyah \d+ ·$/.test(value)||
@@ -2634,6 +2638,29 @@ function translateSharedPatterns(value,language){
    const word=uiWord(language,"Āyāt");
    if(word)return ayatCount[1]+" "+word;
   }
+  const ayatPlain=value.match(/^(\d+) Ayāt$/);
+  if(ayatPlain){
+   const word=uiWord(language,"Ayāt");
+   if(word)return ayatPlain[1]+" "+word;
+  }
+  const playAyah=value.match(/^Āyah (\d+) abspielen$/);
+  if(playAyah){
+   const n=playAyah[1];
+   const forms={ar:"تشغيل الآية "+n,en:"Play āyah "+n,tr:n+". âyeti çal",ku:"Ayeta "+n+" bilîze",ckb:"ئایەی "+n+" لێبدە",bs:"Reproduciraj ajet "+n,fr:"Lire l’āyah "+n,es:"Reproducir la aleya "+n};
+   return forms[language]||null;
+  }
+  const fastDone=value.match(/^(\d+) von 30 Tagen abgeschlossen$/);
+  if(fastDone){
+   const n=fastDone[1];
+   const forms={ar:n+" من 30 يوماً مكتملة",en:n+" of 30 days completed",tr:"30 günden "+n+" tamam",ku:n+" ji 30 rojan qediya",ckb:n+" لە 30 ڕۆژ تەواو",bs:n+" od 30 dana završeno",fr:n+" sur 30 jours terminés",es:n+" de 30 días completados"};
+   return forms[language]||null;
+  }
+  const ramadanDay=value.match(/^Tag (\d{1,2}) von 30$/);
+  if(ramadanDay){
+   const n=ramadanDay[1];
+   const forms={ar:"اليوم "+n+" من 30",en:"Day "+n+" of 30",tr:"Gün "+n+" / 30",ku:"Roj "+n+" ji 30",ckb:"ڕۆژی "+n+" لە 30",bs:"Dan "+n+" od 30",fr:"Jour "+n+" sur 30",es:"Día "+n+" de 30"};
+   return forms[language]||null;
+  }
   const numberedPlace=value.match(/^(\d+)\. Fundstelle$/);
   if(numberedPlace){
    const word=lookupPack("Fundstelle",language);
@@ -3068,7 +3095,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-50";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-51";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
