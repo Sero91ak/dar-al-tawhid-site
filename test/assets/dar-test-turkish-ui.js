@@ -538,6 +538,8 @@ function isDynamicGermanUi(value){
   /^Āyah \d+ abspielen$/.test(value)||
   /^\d+ von 30 Tagen abgeschlossen$/.test(value)||
   /^Tag \d{1,2} von 30$/.test(value)||
+  /^Quelle: [^<>\n]{1,160}$/.test(value)||
+  /^Schritt \d+ von 15$/.test(value)||
   /^\d+\. Fundstelle$/.test(value)||
   /^Qurʾān \d{1,3}:\d{1,3}(?: · [^<>]{1,80})?$/.test(value)||
   /^· Āyah \d+ ·$/.test(value)||
@@ -2661,6 +2663,17 @@ function translateSharedPatterns(value,language){
    const forms={ar:"اليوم "+n+" من 30",en:"Day "+n+" of 30",tr:"Gün "+n+" / 30",ku:"Roj "+n+" ji 30",ckb:"ڕۆژی "+n+" لە 30",bs:"Dan "+n+" od 30",fr:"Jour "+n+" sur 30",es:"Día "+n+" de 30"};
    return forms[language]||null;
   }
+  const quelleLine=value.match(/^Quelle: ([^<>\n]{1,160})$/);
+  if(quelleLine){
+   const word=lookupPack("Quelle",language);
+   if(word)return word+": "+quelleLine[1];
+  }
+  const stepOf=value.match(/^Schritt (\d+) von 15$/);
+  if(stepOf){
+   const n=stepOf[1];
+   const forms={ar:"الخطوة "+n+" من 15",en:"Step "+n+" of 15",tr:"Adım "+n+" / 15",ku:"Gav "+n+" ji 15",ckb:"هەنگاوی "+n+" لە 15",bs:"Korak "+n+" od 15",fr:"Étape "+n+" sur 15",es:"Paso "+n+" de 15"};
+   return forms[language]||null;
+  }
   const numberedPlace=value.match(/^(\d+)\. Fundstelle$/);
   if(numberedPlace){
    const word=lookupPack("Fundstelle",language);
@@ -3095,7 +3108,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-51";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-52";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
