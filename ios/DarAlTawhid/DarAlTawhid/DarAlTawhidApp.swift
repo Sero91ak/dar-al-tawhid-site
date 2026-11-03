@@ -9,6 +9,8 @@ final class DarAppDelegate: NSObject, UIApplicationDelegate {
     ) -> Bool {
         DarInAppOpenGuard.install()
         DarPushNotifications.bootstrap(launchOptions: launchOptions)
+        // iOS schedules this opportunistically; it is not an exact-time timer.
+        application.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
         if let shortcut = launchOptions?[.shortcutItem] as? UIApplicationShortcutItem,
            let destination = shortcutDestination(for: shortcut.type) {
             DarQuickActions.set(destination)
@@ -33,6 +35,22 @@ final class DarAppDelegate: NSObject, UIApplicationDelegate {
             userInfo: ["destination": destination.rawValue]
         )
         completionHandler(true)
+    }
+
+    func application(
+        _ application: UIApplication,
+        performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
+    ) {
+        Task.detached(priority: .utility) {
+            let updated = await DarPrayerSync.refresh()
+            await MainActor.run {
+                let snapshot = DarDailyContent.refresh(DarWidgetStore.load())
+                DarWidgetStore.save(snapshot)
+                WidgetCenter.shared.reloadAllTimelines()
+                DarPrayerLiveActivityController.refresh()
+                completionHandler(updated ? .newData : .noData)
+            }
+        }
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
