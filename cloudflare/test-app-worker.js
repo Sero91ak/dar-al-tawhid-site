@@ -305,7 +305,7 @@ async function finalizeDarTestHomeV1193(asset) {
       '@import url("/test/assets/tawhid-guide-v1295.css?v=tawhid-guide-v1295");' +
       '@import url("/test/assets/ilm-hadith-v1243.css?v=hadith-final-v1303");' +
       '@import url("/test/assets/hero-background-authority.css?v=hero-bg-v7");' +
-      '@import url("/assets/frauen/frauen-capsule-restore-v1402.css?v=frauen-capsule-restore-v1402");' +
+      '@import url("/assets/frauen/frauen-fallback-classic-v1403.css?v=frauen-fallback-classic-v1403");' +
       '</style>';
     if (html.includes("</html>")) html = html.replace("</html>", areaAuthority + "</html>");
     else html += areaAuthority;
