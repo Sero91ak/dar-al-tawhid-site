@@ -19,11 +19,37 @@ function rootTop(){
 function set(el,key,value){
  if(el.style.getPropertyValue(key)!==value)el.style.setProperty(key,value);
 }
+/* Some PWA shells do NOT load adult-immersive-hero-v1.js. Make the
+ * original photo/search stage explicit and idempotent on those routes.
+ * The existing adapter checks for this stage and won't create another. */
+function ensureStage(){
+ var sections=document.querySelectorAll("#appView .frauen-library-shell,#appView .frauen-library-list");
+ for(var i=0;i<sections.length;i++){
+  var section=sections[i];
+  var stage=section.querySelector(":scope > .dar-immersive-hero-stage");
+  if(stage)return stage;
+  var hero=section.querySelector(":scope > .frauen-library-hero");
+  if(!hero)continue;
+  var search=section.querySelector(":scope > .frauen-library-search-wrap,:scope > .frauen-library-list-controls");
+  stage=document.createElement("div");
+  stage.className="dar-immersive-hero-stage frauen-library-pinned-header";
+  stage.dataset.hasSearch=search?"1":"0";
+  section.insertBefore(stage,hero);
+  stage.appendChild(hero);
+  if(search)stage.appendChild(search);
+  var source=getComputedStyle(hero).getPropertyValue("--frauen-hero-img").trim();
+  if(source&&source!=="none")stage.style.setProperty("--dar-immersive-top-image",source);
+  return stage;
+ }
+ return null;
+}
 function reconcile(){
  queued=false;
  if(!isWomen())return;
+ var view=document.body.getAttribute("data-frauen-view")||"hub";
+ if(!/^(hub|group|list)$/.test(view))return;
  var header=document.getElementById("darAdultBrandHeaderV2")||document.getElementById("darTestBrandHeaderV1");
- var stage=document.querySelector("#appView .frauen-library-shell > .dar-immersive-hero-stage,#appView .frauen-library-list > .dar-immersive-hero-stage");
+ var stage=ensureStage();
  if(!header||!stage)return;
  var section=stage.parentElement;
  if(!section)return;
