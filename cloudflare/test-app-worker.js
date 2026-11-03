@@ -507,11 +507,11 @@ async function finalizeDarTestHomeV1193(asset) {
     html=html.includes("</body>")?html.replace("</body>",scrollJs+"\n</body>"):html+scrollJs;
   // FRAUEN_GLOBAL_V1406 · independent final CSS + seam runtime.
   // Works even when a cached Test shell already contains V1300 authorities.
-  const frauenFlowCss = '<link rel="stylesheet" id="darFrauenGlobalFlowV1406" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css?v=frauen-single-column-flow-v1406-20261103">';
-  const frauenFlowJs = '<script defer id="darFrauenHeroSeamRuntimeV1406" src="/assets/frauen/frauen-hero-seam-runtime-v1406.js?v=frauen-single-column-flow-v1406-20261103"></script>';
-  if(!html.includes('id="darFrauenGlobalFlowV1406"'))
+  const frauenFlowCss = '<link rel="stylesheet" id="darFrauenGlobalFlowV1407" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css?v=frauen-sticky-hero-v1407-20261103">';
+  const frauenFlowJs = '<script defer id="darFrauenHeroSeamRuntimeV1407" src="/assets/frauen/frauen-hero-seam-runtime-v1407.js?v=frauen-sticky-hero-v1407-20261103"></script>';
+  if(!html.includes('id="darFrauenGlobalFlowV1407"'))
     html=html.includes("</body>")?html.replace("</body>",frauenFlowCss+"\n</body>"):html+frauenFlowCss;
-  if(!html.includes('id="darFrauenHeroSeamRuntimeV1406"'))
+  if(!html.includes('id="darFrauenHeroSeamRuntimeV1407"'))
     html=html.includes("</body>")?html.replace("</body>",frauenFlowJs+"\n</body>"):html+frauenFlowJs;
   // DAR_TEST_BRAND_HEADER_V1: test-route only; the public visitor worker is unchanged.
   if (!html.includes('id="darTestGlobalBrandHeaderAssetsV1"')) {
