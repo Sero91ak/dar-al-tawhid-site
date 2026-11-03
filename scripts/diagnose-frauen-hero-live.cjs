@@ -13,7 +13,7 @@ fs.mkdirSync(out,{recursive:true});
 const css=fs.readFileSync("assets/frauen/frauen-fixed-hero-v1408.css","utf8");
 const js=fs.readFileSync("assets/frauen/frauen-fixed-hero-runtime-v1408.js","utf8");
 const routes=[
-  {key:"visitor",url:"https://dar-al-tawhid.de/?frauen-preview-v1408=1#frauen"},
+  {key:"visitor",url:"https://dar-al-tawhid.de/pwa/?frauen-preview-v1408=1#frauen"},
   {key:"test",url:"https://dar-al-tawhid.de/test/?frauen-preview-v1408=1#frauen"}
 ];
 const checks=[];
