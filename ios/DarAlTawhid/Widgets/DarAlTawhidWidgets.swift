@@ -25,11 +25,34 @@ struct DarTimelineProvider: TimelineProvider {
         // to the shared App Group by the host app and refreshed locally here.
         let snap = DarDailyContent.refresh(DarWidgetStore.load())
         DarWidgetStore.save(snap)
-        let entry = DarEntry(date: Date(), snapshot: snap)
-        let next = Calendar.current.date(byAdding: .minute, value: 15, to: Date())
-            ?? Date().addingTimeInterval(900)
-        completion(Timeline(entries: [entry], policy: .after(next)))
+        let now = Date()
+        let dates = darPrayerTimelineDates(snapshot: snap, now: now)
+        let entries = dates.map { date in
+            DarEntry(date: date, snapshot: DarDailyContent.refresh(snap, date: date))
+        }
+        let next = now.addingTimeInterval(900)
+        completion(Timeline(entries: entries, policy: .after(next)))
     }
+}
+
+// Timeline entries only at absolute prayer boundaries and day rollover,
+// never per-second timeline simulation. Displayed seconds are system-driven.
+private func darPrayerTimelineDates(snapshot: DarWidgetSnapshot, now: Date) -> [Date] {
+    let boundaries = snapshot.canonicalPrayerDays
+        .filter { $0.matches(snapshot) }
+        .flatMap { day in
+            DarCanonicalPrayerDay.fivePrayers.compactMap { day.prayers[$0]?.dateTime }
+        }
+        .filter { $0 > now && $0 < now.addingTimeInterval(3 * 86_400) }
+        .map { $0.addingTimeInterval(1) }
+    var calendar = Calendar(identifier: .gregorian)
+    if let zone = TimeZone(identifier: snapshot.prayerTimeZone) { calendar.timeZone = zone }
+    let tomorrow = calendar.nextDate(
+        after: now, matching: DateComponents(hour: 0, minute: 0, second: 1),
+        matchingPolicy: .nextTime
+    )
+    let dates = [now] + boundaries + [tomorrow].compactMap { $0 }
+    return Array(Set(dates)).sorted()
 }
 
 struct DarEntry: TimelineEntry {
@@ -598,10 +621,15 @@ private struct DarConfiguredProvider: AppIntentTimelineProvider {
         let snapshot = DarDailyContent.refresh(DarWidgetStore.load())
         DarWidgetStore.save(snapshot)
         let now = Date()
-        let entry = DarConfiguredEntry(date: now, snapshot: snapshot, appearance: configuration.appearance)
-        let next = Calendar.current.date(byAdding: .minute, value: 10, to: now)
-            ?? now.addingTimeInterval(600)
-        return Timeline(entries: [entry], policy: .after(next))
+        let entries = darPrayerTimelineDates(snapshot: snapshot, now: now).map { date in
+            DarConfiguredEntry(
+                date: date,
+                snapshot: DarDailyContent.refresh(snapshot, date: date),
+                appearance: configuration.appearance
+            )
+        }
+        let next = now.addingTimeInterval(600)
+        return Timeline(entries: entries, policy: .after(next))
     }
 }
 
