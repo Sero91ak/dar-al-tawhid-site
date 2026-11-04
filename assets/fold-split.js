@@ -16,7 +16,6 @@
   var RAIL_MIN = 300;
   var RAIL_MAX = 360;
   var READER_MIN = 500;
-  var syncRaf = 0;
 
   function measureViewport() {
     if (global.DarAdaptiveLayout && typeof global.DarAdaptiveLayout.measure === "function") {
@@ -52,18 +51,9 @@
         return !!global.DarAdaptiveLayout.isDualViewport(width, height);
       } catch (e) {}
     }
-    var w = Number(width) || 0;
-    var h = Number(height) || 0;
-    var sideReserve = 0;
-    try {
-      var pref = String(global.localStorage.getItem("darNavPositionV2") || "bottom");
-      if ((pref === "left" || pref === "right") && w >= 760 && h >= 360) sideReserve = 76;
-    } catch (e2) {}
-    var outer = Math.round(Math.max(24, Math.min(48, w * 0.04)));
-    var usable = Math.max(0, w - sideReserve - outer);
-    var rail = Math.round(Math.min(RAIL_MAX, Math.max(RAIL_MIN, usable * 0.31)));
-    var reader = Math.max(0, usable - rail - 18);
-    return w >= DUAL_MIN && h >= 560 && reader >= READER_MIN;
+    // Fail closed when the shell's capacity owner is absent. Do not recreate
+    // a second breakpoint/reserve calculation in this content controller.
+    return false;
   }
 
   function isDual() {
@@ -72,8 +62,7 @@
         return !!global.DarAdaptiveLayout.isDual();
       }
     } catch (e) {}
-    var m = measureViewport();
-    return isDualViewport(m.width, m.height);
+    return false;
   }
 
   function emptyPane(message) {
@@ -124,34 +113,11 @@
     );
   }
 
+  // Kept as a compatibility read for older callers of DarFold.sync(). The
+  // adaptive shell alone owns data-layout, data-fold-dual, data-fold-capacity
+  // and the measured pane-width tokens.
   function syncRootClass() {
-    try {
-      var root = document.documentElement;
-      var metrics = measureViewport();
-      var dual = isDualViewport(metrics.width, metrics.height);
-      var capacity = null;
-      if (global.DarAdaptiveLayout && typeof global.DarAdaptiveLayout.getLayoutCapacity === "function") {
-        try { capacity = global.DarAdaptiveLayout.getLayoutCapacity(metrics.width, metrics.height); } catch (e0) {}
-      }
-      var rail = capacity && capacity.rail ? capacity.rail : RAIL_MIN;
-      var reader = capacity && capacity.reader ? capacity.reader : Math.max(0, metrics.width - rail - 16);
-
-      root.classList.toggle("is-fold-dual", dual);
-      root.setAttribute("data-fold-dual", dual ? "1" : "0");
-      root.setAttribute("data-fold-capacity", dual ? "dual" : "single");
-      root.style.setProperty("--fold-rail-min", RAIL_MIN + "px");
-      root.style.setProperty("--fold-rail-max", RAIL_MAX + "px");
-      root.style.setProperty("--fold-rail-current", Math.round(rail) + "px");
-      root.style.setProperty("--fold-reader-available", Math.round(reader) + "px");
-    } catch (e) {}
-  }
-
-  function scheduleSync() {
-    if (syncRaf) return;
-    syncRaf = global.requestAnimationFrame(function () {
-      syncRaf = 0;
-      syncRootClass();
-    });
+    return isDual();
   }
 
   // v1331: Keep the left navigation position when a new right-hand
@@ -225,27 +191,7 @@
   }
 
   function start() {
-    syncRootClass();
     bindFoldScrollRetention();
-    global.addEventListener(
-      "dar:layoutchange",
-      function () {
-        scheduleSync();
-      },
-      { passive: true }
-    );
-    global.addEventListener("resize", scheduleSync, { passive: true });
-    global.addEventListener(
-      "orientationchange",
-      function () {
-        setTimeout(scheduleSync, 160);
-        setTimeout(scheduleSync, 520);
-      },
-      { passive: true }
-    );
-    if (global.visualViewport) {
-      global.visualViewport.addEventListener("resize", scheduleSync, { passive: true });
-    }
   }
 
   var api = {
