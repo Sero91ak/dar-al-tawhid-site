@@ -25,4 +25,4 @@ Historische Lernstände mit unbewerteten Antworten dürfen im bestehenden lokale
 
 ## Ergänzender Auditbefund (03.11.2026)
 
-Die redaktionelle 208-Lektionen-Erweiterung in PR #1588 enthält zusätzlich 426 offene Frageformate. Insgesamt sind daher 624 offene Frageformate in beiden Entwicklungsständen zu prüfen. Diese dürfen nur als antippbare Antwortmöglichkeiten und nach fachlicher Freigabe veröffentlicht werden. Der Audio-Massenstart bleibt bis dahin gesperrt.
+Die redaktionelle 208-Lektionen-Erweiterung in PR #1588 hatte 426 offene Frageformate, die mittlerweile als nicht freigegebene Antwortbutton-Entwürfe umgesetzt wurden. Dazu kommen 195 ältere Freitextfragen im bestehenden modularen Curriculum. Insgesamt sind 621 früher offene Lernfragen fachlich zu prüfen. Diese dürfen nur als antippbare Antwortmöglichkeiten und nach fachlicher Freigabe veröffentlicht werden. Der Audio-Massenstart bleibt bis dahin gesperrt.
