@@ -46,11 +46,25 @@ for(const [items,isDraft] of [[existing,false],[drafts,true]])for(const l of ite
  }
  put(l.lead);put(l.hadith?.text);
 }
+/* Inline Ṣidq lives in index.html, not in the 65 modular lessons.
+ * Of its eight questions, three were originally open answers. */
+const page=read("kids/akademie/index.html");
+const begin=page.indexOf("const exercises={"),end=page.indexOf("\nlet id=",begin);
+assert(begin>0&&end>begin,"Missing original Sidq curriculum");
+vm.runInContext(page.slice(begin,end)+"\nglobalThis.sidq=exercises;",box,{timeout:3500});
+let inlineSidqText=0,inlineSidqCount=0;
+for(const age of ages)for(const q of box.sidq[age]||[]){
+ inlineSidqCount++;if(q.type==="text"){inlineSidqText++;assert(String(q.sample||"").trim());put(q.sample)}
+ else assert(q.type==="choice"&&q.options.length>=2);
+ put(q.prompt);for(const option of q.options||[])put(option);
+}
+assert.equal(inlineSidqCount,8);assert.equal(inlineSidqText,3);
 assert.equal(questions,1664);
 assert.equal(legacyText,195);assert.equal(draftText,0);assert.equal(draftConverted,426);
 const report={status:"REVIEW_ONLY",lessons:208,ageVersions:624,questions,
- convertedAnswerButtonsStillNeedingHumanQA:legacyText+draftConverted+draftText,
- oldOpenQuestions:legacyText,newDraftOpenQuestions:draftText,
+ convertedAnswerButtonsStillNeedingHumanQA:legacyText+inlineSidqText+draftConverted+draftText,
+ oldOpenQuestions:legacyText+inlineSidqText,modularOldOpenQuestions:legacyText,inlineSidqOpenQuestions:inlineSidqText,
+ newDraftOpenQuestions:draftText,
  existingConvertedDraftQuestions:draftConverted,
  newLessonSourceApprovals:0,newLessonAudioApprovals:0,
  uniquePossibleSpokenTexts:phrases.size,approvedGenerations:0,creditsSpent:0,
