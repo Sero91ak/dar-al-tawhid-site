@@ -9,6 +9,8 @@ on:
       - 'kids/tools/export-academy-208-button-candidates.cjs'
       - 'kids/tools/test-academy-v31-choice-only-review.cjs'
       - 'kids/tools/test-academy-v4-first-probes.cjs'
+      - 'kids/tools/build-academy-208-v4-staging.py'
+      - 'kids/review-only/academy-208-v4-approved-batch.json'
       - 'kids/review-only/academy-v4-first-two-hearing-probes-20261104.json'
       - 'kids/tools/audit-academy-v31-source-and-buttons.cjs'
       - 'kids/data/academy-voice-policy-v10.json'
@@ -31,6 +33,8 @@ jobs:
           node kids/tools/academy-208-privacy-audio-preflight.cjs
           node kids/tools/test-academy-v31-choice-only-review.cjs
           node kids/tools/test-academy-v4-first-probes.cjs
+          python3 -m py_compile kids/tools/build-academy-208-v4-staging.py
+          python3 kids/tools/build-academy-208-v4-staging.py
           node kids/tools/audit-academy-v31-source-and-buttons.cjs artifacts/academy-142-source-review.json
           node --check kids/tools/export-academy-208-v4-dedup-plan.cjs
           node kids/tools/export-academy-208-v4-dedup-plan.cjs artifacts/academy-208-v4-dedup-queue.json
