@@ -48,5 +48,6 @@ function verify(q,lesson,age){
 }
 for(const lesson of lessons)for(const age of ages)for(const q of lesson.questions?.[age]||[])verify(q,lesson,age);
 for(const age of ages)for(const q of shared.inline[age]||[])verify(q,null,age);
-assert.ok(adapted>30,"Legacy typed questions were unexpectedly skipped");
+assert.equal(checked,528,"Existing 66 Academy lessons must retain 528 questions");
+assert.equal(adapted,198,"All 195 modular and 3 Sidq typed questions must be adapted to buttons");
 console.log("PASS KIDS privacy and answer buttons: "+checked+" questions, "+adapted+" legacy open questions adapted; no child text entry or microphone; layout and progress preserved.");
