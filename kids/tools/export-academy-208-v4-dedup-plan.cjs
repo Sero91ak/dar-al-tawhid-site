@@ -36,11 +36,34 @@ function add(text,lessonId,age,kind,draft){
  const record=phrases.get(id);
  record.contexts.push({lessonId,age,kind,isDraft:draft});
 }
+function selectable(q,lesson,age){
+ if(q.type==="choice")return q;
+ const correct=String(q.sample||q.explain||lesson?.sample||lesson?.goal||"").trim();
+ const pool=[age,"4-5","6-8","9-10"].flatMap(a=>
+  (lesson?.questions?.[a]||[]).filter(item=>item.type==="choice"&&Array.isArray(item.options))
+   .flatMap(item=>item.options.filter((_,i)=>i!==item.correct)));
+ const wrong=pool.map(String).find(t=>t.trim()&&t.trim()!==correct)||
+  "Es ist richtig, absichtlich das Gegenteil des Gelernten zu tun.";
+ const older=/^Erkläre\\b/i.test(q.prompt);
+ const prompt=older?"Wähle die passende Erklärung: "+String(q.prompt)
+  .replace(/^Erkläre(?:\\s+(?:mit|in)\\s+(?:deinen|eigenen)\\s+Worten)?\\s*[:,]?\\s*/i,""):q.prompt;
+ return {...q,type:"choice",prompt,options:[correct,wrong],correct:0,
+  explain:q.explain||correct,adaptedFromText:true};
+}
+function display(q,index,scope){
+ const options=q.options||[],n=options.length,items=options.map((text,i)=>({text,originalIndex:i}));
+ if(n<2)return items;
+ const seed=String(scope)+":"+String(q.prompt||"");
+ let h=2166136261;
+ for(let i=0;i<seed.length;i++){h^=seed.charCodeAt(i);h=Math.imul(h,16777619);}
+ const start=((h>>>0)+index)%n;
+ return items.slice(start).concat(items.slice(0,start));
+}
 const ageList=["4-5","6-8","9-10"];
 const existing=Object.values(context.window.DARKidsAcademyCurriculum);
 const editorial=Object.values(context.window.DARKidsAcademyEditorialV31);
 assert.equal(existing.length,65);assert.equal(editorial.length,142);
-let legacyOpen=0,convertedDraft=0;
+let legacyOpen=0,convertedDraft=0,questionsPrepared=0;
 for(const [lessons,isDraft] of [[existing,false],[editorial,true]])for(const lesson of lessons){
  add(lesson.lead,lesson.id,"all","lead",isDraft);
  add(lesson.goal,lesson.id,"all","goal",isDraft);
@@ -50,15 +73,32 @@ for(const [lessons,isDraft] of [[existing,false],[editorial,true]])for(const les
   if(ageText){add(ageText.intro,lesson.id,age,"intro",isDraft);
    for(const line of ageText.lines||[])add(line,lesson.id,age,"lesson",isDraft);
    add(ageText.evidence,lesson.id,age,"source-explanation",isDraft);}
-  for(const q of lesson.questions?.[age]||[]){
-   if(q.type==="text"){legacyOpen++;continue;}
+  for(const [questionIndex,q] of (lesson.questions?.[age]||[]).entries()){
+   if(q.type==="text")legacyOpen++;
    if(q.editorialReviewStatus==="pending-human-review")convertedDraft++;
-   add(q.prompt,lesson.id,age,"question",isDraft);
-   for(const option of q.options||[])add(option,lesson.id,age,"answer-option",isDraft);
-   add(q.explain,lesson.id,age,"feedback",isDraft);
+   const ready=selectable(q,lesson,age);questionsPrepared++;
+   add(ready.prompt,lesson.id,age,"question",isDraft);
+   for(const [idx,option] of display(ready,questionIndex,lesson.id+":"+age).entries())
+    add("Antwort "+(idx+1)+": "+option.text,lesson.id,age,"answer-option",isDraft);
+   add(ready.explain,lesson.id,age,"feedback",isDraft);
   }
  }
 }
+/* 8 inline Sidq questions: the first of 208 lessons, unchanged in the public app. */
+const page=read("kids/akademie/index.html"),begin=page.indexOf("const exercises={");
+const finish=page.indexOf("\nlet id=",begin);
+assert(begin>0&&finish>begin,"Cannot parse Sidq question block");
+vm.runInContext(page.slice(begin,finish)+"\nglobalThis.sidq=exercises;",context,{timeout:3500});
+for(const age of ageList){
+ for(const [i,q] of context.sidq[age].entries()){
+  questionsPrepared++;const ready=selectable(q,null,age);
+  add(ready.prompt,"sidq",age,"question",false);
+  for(const [j,option] of display(ready,i,"sidq:"+age).entries())
+   add("Antwort "+(j+1)+": "+option.text,"sidq",age,"answer-option",false);
+  add(ready.explain,"sidq",age,"feedback",false);
+ }
+}
+assert.equal(questionsPrepared,1664);
 assert.equal(legacyOpen,195);
 assert.equal(convertedDraft,426);
 function existsCertifiedV4(entry){
@@ -90,7 +130,7 @@ for(const row of result){
 }
 const report={schemaVersion:1,kind:"KIDS_ACADEMY_208_V4_DEDUP_REVIEW_QUEUE",
  status:"NEVER_GENERATE_UNAPPROVED",existingLessons:65,newDraftLessons:142,
- totalLessonsInCurriculum:207,plusInlineSidq:1,
+ totalLessonsInCurriculum:207,plusInlineSidq:1,questionsPrepared,
  draftChoicesPendingHumanReview:convertedDraft,
  existingOpenQuestionsStillAdaptedInUI:legacyOpen,
  candidateUniqueSpeechTexts:result.length,
@@ -103,7 +143,7 @@ if(process.argv[2]){
  const dest=path.resolve(process.argv[2]);fs.mkdirSync(path.dirname(dest),{recursive:true});
  fs.writeFileSync(dest,JSON.stringify(report,null,2)+"\n","utf8");
 }
-console.log("PREPARED: "+result.length+" deduplicated V4 phrases for 207 modular + 1 inline Sidq lesson.");
+console.log("PREPARED: "+result.length+" deduplicated V4 phrases for all "+questionsPrepared+" questions in 208 lessons.");
 console.log("REUSE: "+validApproved+" verified public V4, "+validStaged+" matching technical staging assets.");
 console.log("GATED: 426 editorial button choices; 195 legacy UI conversions still require human content review.");
 console.log("0 audio calls / 0 credits / no synthesized Quran.");
