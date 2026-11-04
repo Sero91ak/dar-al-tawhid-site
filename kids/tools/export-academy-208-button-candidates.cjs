@@ -36,8 +36,8 @@ for(const [lessons,isDraft] of [[legacy,false],[drafts,true]])for(const lesson o
     genericWrongAnswer:/ignoriere die Lernregel/.test(wrong)},
    quran:lesson.quran?.label||null,hadith:lesson.hadith?.source||null});
  }
-assert.equal(rows.length,624);
-assert.equal(rows.filter(x=>x.source==="EXISTING_66").length,198);
+assert.equal(rows.length,621);
+assert.equal(rows.filter(x=>x.source==="EXISTING_66").length,195);
 assert.equal(rows.filter(x=>x.source==="NEW_142_DRAFT").length,426);
 const target=process.argv[2];
 if(target){
@@ -46,5 +46,5 @@ if(target){
  fs.writeFileSync(output,JSON.stringify({mode:"EDITORIAL_REVIEW_ONLY",generatedAudio:0,
   releasedLessons:0,rows},null,2)+"\n","utf8");
 }
-console.log("REVIEW QUEUE: 624 proposed button questions; 198 old + 426 new.");
+console.log("REVIEW QUEUE: 621 proposed button questions; 195 old + 426 new.");
 console.log("NO AUTO-APPROVAL: source, distractor, age and spoken script review pending.");
