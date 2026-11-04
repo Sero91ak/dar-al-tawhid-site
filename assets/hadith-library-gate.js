@@ -38,7 +38,7 @@
     if (document.getElementById(DATA_LOADER_ID)) return;
     var script = document.createElement("script");
     script.id = DATA_LOADER_ID;
-    script.src = assetPath("hadith-library-data.js?v=3");
+    script.src = assetPath("hadith-library-data.js?v=4");
     script.setAttribute("defer", "");
     document.head.appendChild(script);
   }
