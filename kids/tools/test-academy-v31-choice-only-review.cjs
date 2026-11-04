@@ -39,7 +39,7 @@ for(const [id,lesson] of Object.entries(projected)){
     assert.equal(q.originalPrompt,old.legacyPrompt||old.prompt);
     assert.equal(q.approvedForChildApp,false);assert.equal(q.approvedForAudio,false);
     if(q.editorialReviewStatus==="pending-human-review")unreviewed++;
-    assert(!/mit eigenen Worten|Formuliere eine Rückfrage/i.test(q.prompt),
+    assert(!/^(?:Erkläre|Beschreibe|Schreibe|Formuliere|Tippe|Sprich)\b/i.test(q.prompt),
      "Not a button-ready prompt: "+id+" "+age);
    }else assert.equal(q.correct,old.correct,"Prior answer index changed");
   }
