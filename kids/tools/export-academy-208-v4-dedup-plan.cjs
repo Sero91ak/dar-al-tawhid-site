@@ -19,23 +19,27 @@ assert.equal(policy.costControls.autoPublishWithoutOwnerReview,false);
 const voice=policy.voiceIdentity.voiceId,model=policy.production.modelId,profile=policy.production.profile;
 const hash=s=>crypto.createHash("sha256").update(s,"utf8").digest("hex");
 const fingerprint=hash(JSON.stringify({voice,model,profile,
- settings:policy.production.voiceSettings,dictionary:policy.production.pronunciationDictionaryId,
- dictionaryVersion:policy.production.pronunciationDictionaryVersionId}));
+ settings:policy.production.voiceSettings,languageCode:"de",
+ pronunciationDictionaryLocators:[] /* German and Arabic remain isolated. */}));
 const normalize=s=>String(s||"").normalize("NFC").replace(/\s+/g," ").trim();
 const phrases=new Map(),mixedArabicBlocked=[];
+const arabic=/[\\u0600-\\u06ff\\u0750-\\u077f\\u08a0-\\u08ff\\ufb50-\\ufdff\\ufe70-\\ufeff]/;
+const loanTerms=/(?:Qurʾān|Fuṣḥā|Tawḥīd|Īmān|Iḥsān|Ḥadīṯ|Ṣalāh|Ṣadaqah|Ramaḍān|Duʿāʾ|Wuḍūʾ|Zakāh|Ṣaḥābah|Sūrah|Sūrat|Allāhumma|Allāh|ʿUṯmān|ʿĀʾišah|Abū|Allah)/giu;
+const germanNur=/(?:^|[^\\p{L}])nur(?=$|[^\\p{L}])/iu;
 function add(text,lessonId,age,kind,draft){
  const value=normalize(text);if(!value)return;
  // Never synthesize Arabic Quran. Only human Qari recitation may supply that asset.
- if(/[\u0600-\u06ff]/.test(value)){
+ if(arabic.test(value)){
   mixedArabicBlocked.push({lessonId,age,kind,isDraft:draft,text:value,
    reason:"mixed-Arabic-needs-Fusha-language-isolation-and-human-review"});
   return;
  }
  const id=hash(fingerprint+"|"+value);
  if(!phrases.has(id))phrases.set(id,{id,text:value,voiceId:voice,modelId:model,profile,
-  pronunciationDictionaryId:policy.production.pronunciationDictionaryId,
-  pronunciationDictionaryVersionId:policy.production.pronunciationDictionaryVersionId,
-  settingsFingerprint:fingerprint,sourceApproved:false,speechApproved:false,
+  pronunciationDictionaryLocators:[],globalArabicDictionaryApplied:false,
+  languageCode:"de",settingsFingerprint:fingerprint,sourceApproved:false,speechApproved:false,
+  pronunciationReviewFlags:[...new Set([...value.matchAll(loanTerms)].map(m=>m[0]))],
+  germanNurCollisionWatch:germanNur.test(value),
   audioGenerationAllowed:false,contexts:[]});
  const record=phrases.get(id);
  record.contexts.push({lessonId,age,kind,isDraft:draft});
@@ -153,7 +157,12 @@ const report={schemaVersion:1,kind:"KIDS_ACADEMY_208_V4_DEDUP_REVIEW_QUEUE",
  voiceId:voice,modelId:model,profile,settingsFingerprint:fingerprint,
  totalVerifiedPublicV4Entries:validApproved,totalTechnicalStagingMatches:validStaged,
  generatedAudioFiles:0,spentCredits:0,
- mixedArabicSegmentsBlocked:mixedArabicBlocked.length,mixedArabicReview: mixedArabicBlocked,
+ mixedArabicSegmentsBlocked:mixedArabicBlocked.length,mixedArabicReview:mixedArabicBlocked,
+ germanNurWatchPhrases:result.filter(p=>p.germanNurCollisionWatch).length,
+ fushaRomanizedReviewPhrases:result.filter(p=>p.pronunciationReviewFlags.length>0).length,
+ forcedGermanLanguageCode:"de",effectiveDictionaryLocators:[],
+ priorArabicDictionaryPolicyReferenceOnly:policy.production.pronunciationDictionaryId,
+ crossLanguageDictionaryApplied:false,
  quranRecitationPolicy:"HUMAN_QARI_ONLY",allowMassGeneration:false,
  phrases:result};
 if(process.argv[2]){
@@ -164,4 +173,6 @@ console.log("PREPARED: "+result.length+" deduplicated V4 phrases for all "+quest
 console.log("REUSE: "+validApproved+" verified public V4, "+validStaged+" matching technical staging assets.");
 console.log("GATED: 426 editorial button choices; 195 legacy UI conversions still require human content review.");
 console.log("Language safety: "+mixedArabicBlocked.length+" mixed-script phrases blocked from the voice queue.");
+console.log("Fuṣḥā listening review: "+report.fushaRomanizedReviewPhrases+" romanized-loan phrases; German nur QA: "+report.germanNurWatchPhrases+".");
+console.log("Synthesis policy: language_code=de, empty dictionary locators; no cross-language Arabic PLS.");
 console.log("0 audio calls / 0 credits / no synthesized Quran.");
