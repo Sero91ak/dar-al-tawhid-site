@@ -26,7 +26,13 @@ for(const sample of probes.samples){
  assert.equal(sample.languagePolicy,"de");
  assert.equal(sample.humanListeningApproved,false);
  assert.equal(sample.contentImportedToGitHub,false);
- assert.equal(sample.status,"REQUESTED_REVIEW_ONLY");
+ assert(["REQUESTED_REVIEW_ONLY","COMPLETED_CREATOR_PREVIEW_NOT_APPROVED"].includes(sample.status));
+ if(sample.status==="COMPLETED_CREATOR_PREVIEW_NOT_APPROVED"){
+  assert(sample.generationId&&sample.actualCredits>0,"Completed preview must have a real generation and charge");
+  assert.equal(probes.creatorPreviewsAreNotProductionProfileCertified,true);
+  assert.equal(probes.creatorPreviewCreditsWereSpentBeforeThisReview,true);
+  assert.equal(sample.humanListeningApproved,false);
+ }
  assert(!/[\u0600-\u06ff]/.test(sample.text),"Mixed Arabic script not allowed");
  assert(!texts.has(sample.text),"Duplicate paid request");texts.add(sample.text);
  assert(sample.generationFlowId&&sample.generationNodeId&&sample.sessionId);
@@ -34,6 +40,6 @@ for(const sample of probes.samples){
 }
 assert(Math.abs(plannedCredit-probes.creditForecast)<1e-5);
 assert.equal(probes.noSyntheticQuran,true);
-console.log("PASS: two distinct, source-listed ElevenLabs V4 listening requests recorded.");
+console.log("PASS: two distinct, source-listed ElevenLabs V4 creator previews recorded (request or actual completion).");
 console.log("NO RELEASE: creator does not expose canonical profile, dictionary or language settings.");
-console.log("No synthetic Quran, no approved audio; existing signed files preserved.");
+console.log("No synthetic Quran, no approved audio; existing paid previews preserved without regeneration.");
