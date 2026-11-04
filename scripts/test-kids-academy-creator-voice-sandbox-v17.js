@@ -13,7 +13,7 @@ assert.ok(!html.includes('p.creatorVoiceSandbox'),"Visitor must not render creat
 assert.ok(audio.includes("&amp;creatorSandbox=1&amp;"),"Standalone audio tester must return to isolated creator identity");
 assert.ok(player.includes('document.body?.dataset?.academyChildMode==="demo"'),"Pilot player must continue protecting real child lessons");
 assert.ok(player.includes("matchesExactSidqText"),"Never play Ṣidq clip over unrelated subject");
-const start=html.indexOf("function getProfile(){"),end=html.indexOf("function stopMicTracks()",start);
+const start=html.indexOf("function getProfile(){"),end=html.indexOf("function setAudioFeedback(message){",start);
 assert.ok(start>=0&&end>start&&end-start<2500);
 const getProfileFactory=new Function("localStorage","window","ageKey",html.slice(start,end)+"\nreturn getProfile();");
 const makeProfile=(search)=>{
