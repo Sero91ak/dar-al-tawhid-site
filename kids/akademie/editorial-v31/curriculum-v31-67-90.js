@@ -73,7 +73,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 6018): Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/17/53 und https://sunnah.com/bukhari:6018. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -260,7 +260,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 69; Ṣaḥīḥ Muslim, Nr. 1734 · überliefert von Anas ibn Mālik): Der Prophet ﷺ lehrte, Dinge zu erleichtern statt sie unnötig schwer zu machen, und Menschen zu ermutigen statt abzuschrecken. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/20/132 und https://dorar.net/hadith/sharh/61. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -447,7 +447,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 1469): Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/2/153 und https://sunnah.com/bukhari:1469. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -634,7 +634,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 135): Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/5/6 und https://sunnah.com/bukhari:135. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -821,7 +821,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 2856): Der Prophet ﷺ erklärte, dass allein Allah angebetet wird. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/112/1 und https://sunnah.com/bukhari:2856. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -1008,7 +1008,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 2856; Ṣaḥīḥ Muslim, Nr. 30 · überliefert von Muʿāḏ ibn Ǧabal): Der Prophet ﷺ erklärte Muʿāḏ ibn Ǧabal, dass Allahs Recht gegenüber den Menschen darin besteht, dass sie Ihn anbeten und Ihm nichts beigesellen. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/21/51 und https://dorar.net/hadith/sharh/11568. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -1195,7 +1195,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 5017): ʿĀʾišah berichtete, dass der Prophet ﷺ vor dem Schlafen al-Iḫlāṣ, al-Falaq und an-Nās rezitierte. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/33/41 und https://sunnah.com/bukhari:5017. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -1382,7 +1382,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 6094; Ṣaḥīḥ Muslim, Nr. 2607 · ʿAbdullāh ibn Masʿūd): Der Prophet ﷺ erklärte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. (Sinngemäße Bedeutung) Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/33/70 und https://dorar.net/hadith/sharh/3232. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -1569,7 +1569,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 2320; Ṣaḥīḥ Muslim, Nr. 1553 · Anas ibn Mālik): Wer sät oder pflanzt und dessen Pflanzen Menschen oder Tiere ernähren, dem wird dies als gute Wohltat angerechnet. (Sinngemäße Bedeutung) Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/6/99 und https://sunnah.com/bukhari:2320. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -1756,7 +1756,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ Muslim, Nr. 8 · ʿUmar ibn al-Khaṭṭāb (Ḥadīṯ Ǧibrīl)): Der Prophet ﷺ erklärte den Īmān: an Allah, Seine Engel, Seine Bücher, Seine Gesandten, den Jüngsten Tag und die Bestimmung zu glauben. (Sinngemäß) Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/2/285 und https://sunnah.com/muslim:8a. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -1943,7 +1943,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 1): Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/39/11 und https://sunnah.com/bukhari:1. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -2130,7 +2130,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 6026; Ṣaḥīḥ Muslim, Nr. 2585 · Abū Mūsā al-Ashʿarī): Der Prophet ﷺ verglich die gegenseitige Unterstützung der Gläubigen mit einem Gebäude, dessen Teile einander stärken. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/5/2 und https://dorar.net/hadith/sharh/151122. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -2317,7 +2317,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 6018): Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/17/53 und https://sunnah.com/bukhari:6018. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -2504,7 +2504,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 69; Ṣaḥīḥ Muslim, Nr. 1734 · überliefert von Anas ibn Mālik): Der Prophet ﷺ lehrte, Dinge zu erleichtern statt sie unnötig schwer zu machen, und Menschen zu ermutigen statt abzuschrecken. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/20/132 und https://dorar.net/hadith/sharh/61. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -2691,7 +2691,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 1469): Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/2/153 und https://sunnah.com/bukhari:1469. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -2878,7 +2878,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 135): Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/5/6 und https://sunnah.com/bukhari:135. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -3065,7 +3065,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 5017): Der Prophet ﷺ rezitierte unter anderem al-Falaq vor dem Schlafen. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/113/1 und https://sunnah.com/bukhari:5017. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -3252,7 +3252,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl)): Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/2/127 und https://sunnah.com/muslim:8. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -3439,7 +3439,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 6324): Der Prophet ﷺ pries Allah beim Aufwachen mit einer überlieferten Formel. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/33/41 und https://sunnah.com/bukhari:6324. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -3626,7 +3626,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 6114; Ṣaḥīḥ Muslim, Nr. 2609 · überliefert von Abū Hurayrah): Der Prophet ﷺ erklärte, dass wahre Stärke nicht darin besteht, andere zu besiegen, sondern sich bei Wut zu beherrschen. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/3/134 und https://dorar.net/hadith/sharh/151201. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -3813,7 +3813,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ Muslim, Nr. 2564 · überliefert von Abū Hurayrah): Der Prophet ﷺ erklärte, dass nicht Aussehen und Besitz das Entscheidende sind, sondern Herzen und Taten. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/39/53 und https://dorar.net/hadith/sharh/207905. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -4000,7 +4000,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ Muslim, Nr. 8 · Ḥadīṯ Ǧibrīl, überliefert von ʿUmar ibn al-Ḫaṭṭāb): Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/2/285 und https://sunnah.com/muslim:8a. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -4187,7 +4187,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 1; Ṣaḥīḥ Muslim, Nr. 1907 · überliefert von ʿUmar ibn al-Ḫaṭṭāb): Der Prophet ﷺ erklärte, dass der Wert einer Handlung mit der Absicht zusammenhängt, mit der sie ausgeführt wird. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/98/5 und https://dorar.net/hadith/sharh/3429. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -4374,7 +4374,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ Muslim, Nr. 2699 · Abū Hurayrah): Der Prophet ﷺ erklärte, dass Allah Seinem Diener hilft, solange dieser seinem Bruder hilft. (Sinngemäße Bedeutung) Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/76/9 und https://dorar.net/hadith/sharh/123965. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
