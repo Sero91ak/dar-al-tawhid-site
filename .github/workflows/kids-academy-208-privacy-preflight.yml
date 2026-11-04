@@ -5,6 +5,7 @@ on:
       - 'kids/akademie/**'
       - 'kids/tools/academy-208-privacy-audio-preflight.cjs'
       - 'kids/tools/export-academy-208-v4-dedup-plan.cjs'
+      - 'kids/tools/export-academy-voice-plan.js'
       - 'kids/tools/export-academy-208-button-candidates.cjs'
       - 'kids/tools/test-academy-v31-choice-only-review.cjs'
       - 'kids/tools/audit-academy-v31-source-and-buttons.cjs'
@@ -28,6 +29,7 @@ jobs:
           node kids/tools/academy-208-privacy-audio-preflight.cjs
           node kids/tools/test-academy-v31-choice-only-review.cjs
           node kids/tools/audit-academy-v31-source-and-buttons.cjs artifacts/academy-142-source-review.json
+          node --check kids/tools/export-academy-208-v4-dedup-plan.cjs
           node kids/tools/export-academy-208-v4-dedup-plan.cjs artifacts/academy-208-v4-dedup-queue.json
           node kids/tools/export-academy-208-button-candidates.cjs artifacts/academy-208-button-review.json
       - name: Attach proposed answer choices for editorial review
