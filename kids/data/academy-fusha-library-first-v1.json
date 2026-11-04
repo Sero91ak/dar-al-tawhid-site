@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "id": "kids-academy-fusha-library-first-v1",
+  "date": "2026-11-04",
+  "purpose": "Source-of-truth for approved owner voice/pronunciation references before any new KIDS Academy V4 generations; zero-credit metadata.",
+  "sourcePriority": [
+    "owner-confirmed-isolated-term-wav-when-verified-and-accessible",
+    "previously-paid-exact-phrase-matching-voice-model-profile-settings-and-hash",
+    "owner-confirmed-story-reference-for-pronunciation-review-only",
+    "existing-curated-pronunciation-rules",
+    "verified-master-library",
+    "human-review-before-new-render"
+  ],
+  "spokenQuranTerm": "Qurʾān",
+  "canonicalQuranNativeFushaText": "قُرْآنْ",
+  "canonicalQuranTextIntegrity": "Do not replace the user-visible word or Quran Arabic text merely to coerce TTS.",
+  "quranRecitation": "Never synthesize Qurʾān verses; use verified human Qāriʾ only.",
+  "ownerMasterVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "targetModelId": "eleven_v4",
+  "targetProfile": "kids_story",
+  "protectedTermExamples": [
+    "Qurʾān",
+    "Īmān",
+    "Tawḥīd",
+    "Sunnah"
+  ],
+  "nonBindingArabicMasterDictionary": "Do not attach Arabic master PLS to German languageCode=de; German 'nur' must never turn into Nūr.",
+  "localCoreWavLibrary": "~/SerhatVoice/MasterPronunciations",
+  "localCoreWavMustBeVerifiedAccessible": true,
+  "localCoreWavRemoteAvailability": "NOT_CHECKED_NOT_ASSUMED",
+  "approvedStoryReferences": [
+    {
+      "id": "adam",
+      "sourceFile": "data/pronunciation/story-reference-adam-2026-10-04.json",
+      "originalMp3": "/kids/assets/prophet-story-audio/adam/story.mp3",
+      "sourceAudioSha256": "f1e9870c8b182f1d7a564020d26ae02ba1c2750a0ec2ade27efc205499818e19",
+      "sourceAudioDurationSec": 229.642,
+      "originalAudioConfirmed": true,
+      "recordingType": "full-story-reference-not-isolated-term",
+      "recognizedOwnerApprovedPronunciationTerms": [
+        "Adam",
+        "Iblīs",
+        "Īmān",
+        "al-Firdaws al-Aʿlā",
+        "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh"
+      ],
+      "exactTermsPresentInReferenceText": [
+        "Adam",
+        "Iblīs",
+        "Īmān",
+        "al-Firdaws al-Aʿlā",
+        "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh"
+      ],
+      "sourceTextVerifiedForTerms": true,
+      "sourceStatus": "owner-approved-reference",
+      "audioCanBeReusedAsWholeStory": true,
+      "audioCanBeSplicedAsTermWithoutAlignment": false,
+      "existingIsolatedTermClipVerified": false
+    },
+    {
+      "id": "idris",
+      "sourceFile": "data/pronunciation/story-reference-idris-2026-10-04.json",
+      "originalMp3": "/kids/assets/prophet-story-audio/idris/story.mp3",
+      "sourceAudioSha256": "ffd834a2e64a98731603940ff6a0d758e0a5e1eac0f424468836c22acc4818d1",
+      "sourceAudioDurationSec": 175.073,
+      "originalAudioConfirmed": true,
+      "recordingType": "full-story-reference-not-isolated-term",
+      "recognizedOwnerApprovedPronunciationTerms": [
+        "Idrīs",
+        "Muhammad",
+        "Īmān",
+        "al-Firdaws al-Aʿlā",
+        "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh"
+      ],
+      "exactTermsPresentInReferenceText": [
+        "Idrīs",
+        "Muhammad",
+        "Īmān",
+        "al-Firdaws al-Aʿlā",
+        "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh"
+      ],
+      "sourceTextVerifiedForTerms": true,
+      "sourceStatus": "owner-approved-reference",
+      "audioCanBeReusedAsWholeStory": true,
+      "audioCanBeSplicedAsTermWithoutAlignment": false,
+      "existingIsolatedTermClipVerified": false
+    },
+    {
+      "id": "muhammad",
+      "sourceFile": "data/pronunciation/story-reference-muhammad-2026-10-04.json",
+      "originalMp3": "/kids/assets/prophet-story-audio/muhammad/story.mp3",
+      "sourceAudioSha256": "d6d7c21c76211def9e1fc6ae1acae0de92b830907218715418eeef3df6b2ad1c",
+      "sourceAudioDurationSec": 349.649,
+      "originalAudioConfirmed": true,
+      "recordingType": "full-story-reference-not-isolated-term",
+      "recognizedOwnerApprovedPronunciationTerms": [
+        "Muḥammad",
+        "Makkah",
+        "Ḥirāʾ",
+        "Ǧibrīl",
+        "Ḫadīǧah",
+        "Tawḥīd",
+        "Qurʾān",
+        "Abū Bakr",
+        "Madīnah",
+        "Badr",
+        "Uḥud",
+        "al-Ḥudaybiyah",
+        "Kaʿbah",
+        "Ibrāhīm",
+        "Ādam",
+        "Nūḥ",
+        "Mūsā",
+        "ʿĪsā",
+        "Sunnah"
+      ],
+      "exactTermsPresentInReferenceText": [
+        "Muḥammad",
+        "Makkah",
+        "Ḥirāʾ",
+        "Ǧibrīl",
+        "Ḫadīǧah",
+        "Tawḥīd",
+        "Qurʾān",
+        "Abū Bakr",
+        "Madīnah",
+        "Badr",
+        "Uḥud",
+        "al-Ḥudaybiyah",
+        "Kaʿbah",
+        "Ibrāhīm",
+        "Ādam",
+        "Nūḥ",
+        "Mūsā",
+        "ʿĪsā",
+        "Sunnah"
+      ],
+      "sourceTextVerifiedForTerms": true,
+      "sourceStatus": "owner-approved-reference",
+      "audioCanBeReusedAsWholeStory": true,
+      "audioCanBeSplicedAsTermWithoutAlignment": false,
+      "existingIsolatedTermClipVerified": false
+    }
+  ],
+  "wordClipExtraction": {
+    "automatic": false,
+    "requires": "verified word boundary timestamps or approved manually cut clip, native file sha256, owner hearing, correct phonetic pronunciation and no context cutoff",
+    "mayClaimIsolatedWordReady": false
+  },
+  "productionGuard": {
+    "useExistingReferencesBeforeNewRender": true,
+    "creatorV4PreviewsAreNotReferenceQualified": true,
+    "requiresHumanListeningForEveryNewPhrase": true,
+    "newCreditsOnThisIndex": 0,
+    "appOrAudioPublished": false
+  }
+}
