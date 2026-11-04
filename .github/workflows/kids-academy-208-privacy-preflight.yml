@@ -8,6 +8,7 @@ on:
       - 'kids/tools/export-academy-voice-plan.js'
       - 'kids/tools/export-academy-208-button-candidates.cjs'
       - 'kids/tools/test-academy-v31-choice-only-review.cjs'
+      - 'kids/tools/test-academy-v31-six-priority-rewrites.cjs'
       - 'kids/tools/test-academy-v4-first-probes.cjs'
       - 'kids/tools/build-academy-208-v4-staging.py'
       - 'kids/review-only/academy-208-v4-approved-batch.json'
@@ -30,6 +31,7 @@ jobs:
       - name: Check 208 lessons, 624 ages, 1664 questions, no paid audio
         run: |
           node kids/tools/test-academy-v31-142-editorial.cjs
+          node kids/tools/test-academy-v31-six-priority-rewrites.cjs
           node kids/tools/academy-208-privacy-audio-preflight.cjs
           node kids/tools/test-academy-v31-choice-only-review.cjs
           node kids/tools/test-academy-v4-first-probes.cjs
