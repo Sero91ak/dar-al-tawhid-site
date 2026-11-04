@@ -549,6 +549,14 @@ function isDynamicGermanUi(value){
   /^Ramaḍān-Serie konnte nicht geladen werden: [^<>\n]{1,160}$/.test(value)||
   /^Quelle\/Hinweis: [^<>\n]{1,180}$/.test(value)||
   /^\d+ von 13 Bereichen mit eigenen Angaben · vor PDF bitte prüfen\.$/.test(value)||
+  /^Stufe \d+ \/ 10$/.test(value)||
+  /^Standort gespeichert: [^<>\n]{1,80}$/.test(value)||
+  /^Einstufung: [^<>\n]{1,40}$/.test(value)||
+  /^Offline lädt \d+\/\d+$/.test(value)||
+  /^1 Werk$/.test(value)||
+  /^[^<>\n.]{1,40} in \d+ Min$/.test(value)||
+  /^Türkçe · Prüfung ausstehend · \S+$/.test(value)||
+  /^Islamische Waṣiyyah – [^<>\n]{1,80}$/.test(value)||
   /^\d+\. Fundstelle$/.test(value)||
   /^Qurʾān \d{1,3}:\d{1,3}(?: · [^<>]{1,80})?$/.test(value)||
   /^· Āyah \d+ ·$/.test(value)||
@@ -2778,6 +2786,54 @@ function translateSharedPatterns(value,language){
    };
    return forms[language]||null;
   }
+  const textLevel=value.match(/^Stufe (\d+) \/ 10$/);
+  if(textLevel){
+   const n=textLevel[1];
+   const forms={ar:"المستوى "+n+" / 10",en:"Level "+n+" / 10",tr:"Kademe "+n+" / 10",ku:"Asta "+n+" / 10",ckb:"ئاست "+n+" / 10",bs:"Stepen "+n+" / 10",fr:"Niveau "+n+" / 10",es:"Nivel "+n+" / 10"};
+   return forms[language]||null;
+  }
+  const savedPlace=value.match(/^Standort gespeichert: ([^<>\n]{1,80})$/);
+  if(savedPlace){
+   const city=savedPlace[1];
+   const forms={ar:"تم حفظ الموقع: "+city,en:"Location saved: "+city,tr:"Konum kaydedildi: "+city,ku:"Cih hat tomarkirin: "+city,ckb:"شوێن پاشەکەوتکرا: "+city,bs:"Lokacija je sačuvana: "+city,fr:"Lieu enregistré : "+city,es:"Ubicación guardada: "+city};
+   return forms[language]||null;
+  }
+  const gradeLine=value.match(/^Einstufung: ([^<>\n]{1,40})$/);
+  if(gradeLine){
+   const grade=gradeLine[1];
+   const forms={ar:"التصنيف: "+grade,en:"Classification: "+grade,tr:"Derece: "+grade,ku:"Derece: "+grade,ckb:"پلەبەندی: "+grade,bs:"Ocjena: "+grade,fr:"Classement : "+grade,es:"Clasificación: "+grade};
+   return forms[language]||null;
+  }
+  const offlineLoad=value.match(/^Offline lädt (\d+)\/(\d+)$/);
+  if(offlineLoad){
+   const n=offlineLoad[1],m=offlineLoad[2];
+   const forms={ar:"التحميل دون اتصال "+n+"/"+m,en:"Offline loading "+n+"/"+m,tr:"Çevrimdışı yükleniyor "+n+"/"+m,ku:"Barkirina offline "+n+"/"+m,ckb:"بارکردنی offline "+n+"/"+m,bs:"Učitavanje offline "+n+"/"+m,fr:"Chargement hors ligne "+n+"/"+m,es:"Carga sin conexión "+n+"/"+m};
+   return forms[language]||null;
+  }
+  if(value==="1 Werk"){
+   const word=lookupPack("Werk",language);
+   if(language==="ar")return "كتاب واحد";
+   if(word)return "1 "+word;
+  }
+  const prayerIn=value.match(/^([^<>\n.]{1,40}) in (\d+) Min$/);
+  if(prayerIn){
+   const name=lookupPack(prayerIn[1],language)||prayerIn[1];
+   const n=prayerIn[2];
+   const forms={ar:name+" بعد "+n+" د",en:name+" in "+n+" min",tr:name+" "+n+" dk içinde",ku:name+" di "+n+" deq de",ckb:name+" لە "+n+" خولەکدا",bs:name+" za "+n+" min",fr:name+" dans "+n+" min",es:name+" en "+n+" min"};
+   return forms[language]||null;
+  }
+  const trPending=value.match(/^Türkçe · Prüfung ausstehend · (\S+)$/);
+  if(trPending){
+   const status=trPending[1];
+   const forms={ar:"Türkçe · المراجعة معلّقة · "+status,en:"Türkçe · review pending · "+status,tr:"Türkçe · inceleme bekliyor · "+status,ku:"Türkçe · kontrol li bendê · "+status,ckb:"Türkçe · پێداچوونەوە چاوەڕوانە · "+status,bs:"Türkçe · provjera na čekanju · "+status,fr:"Türkçe · relecture en attente · "+status,es:"Türkçe · revisión pendiente · "+status};
+   return forms[language]||null;
+  }
+  const wasiyyahTitle=value.match(/^Islamische Waṣiyyah – ([^<>\n]{1,80})$/);
+  if(wasiyyahTitle){
+   const name=wasiyyahTitle[1];
+   const forms={ar:"وصية إسلامية – "+name,en:"Islamic waṣiyyah – "+name,tr:"İslami vasiyet – "+name,ku:"Wasiyyaya îslamî – "+name,ckb:"وەسیەتی ئیسلامی – "+name,bs:"Islamska wasiyyah – "+name,fr:"Waṣiyyah islamique – "+name,es:"Waṣiyyah islámica – "+name};
+   return forms[language]||null;
+  }
   const numberedPlace=value.match(/^(\d+)\. Fundstelle$/);
   if(numberedPlace){
    const word=lookupPack("Fundstelle",language);
@@ -3212,7 +3268,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-55";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-56";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

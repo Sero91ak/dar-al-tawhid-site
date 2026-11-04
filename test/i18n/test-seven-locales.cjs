@@ -419,6 +419,17 @@ assert.equal(w.DarTestTurkishUI.translateValue("Ramaḍān-Serie konnte nicht ge
 assert.equal(w.DarTestTurkishUI.translateValue("Quelle/Hinweis: Ṣaḥīḥ al-Bukhārī 2738.","es"),"Fuente/nota: Ṣaḥīḥ al-Bukhārī 2738.");
 assert.equal(w.DarTestTurkishUI.translateValue("3 von 13 Bereichen mit eigenen Angaben · vor PDF bitte prüfen.","fr"),"3 sections sur 13 avec tes renseignements · vérifie avant le PDF");
 assert.equal(w.DarTestTurkishUI.translateValue("Fundstelle","fr"),"Lieu cité");
+assert.equal(w.DarTestTurkishUI.translateValue("Pflichtangaben fehlen noch.","en"),"Required details are still missing.");
+assert.equal(w.DarTestTurkishUI.translateValue("Entwurf gelöscht.","ar"),"حُذفت المسودة.");
+assert.equal(w.DarTestTurkishUI.translateValue("Beispiele aus dem Ablauf","ku"),"Nimûne ji rêzê");
+assert.equal(w.DarTestTurkishUI.translateValue("Zur Test-App","tr"),"Test uygulamasına dön");
+assert.equal(w.DarTestTurkishUI.translateValue("Scan-Datei","es"),"Archivo de escaneo");
+assert.equal(w.DarTestTurkishUI.translateValue("Stufe 4 / 10","fr"),"Niveau 4 / 10");
+assert.equal(w.DarTestTurkishUI.translateValue("1 Werk","en"),"1 Work");
+assert.equal(w.DarTestTurkishUI.translateValue("Standort gespeichert: Köln","ckb"),"شوێن پاشەکەوتکرا: Köln");
+assert.equal(w.DarTestTurkishUI.translateValue("Taḥajjud in 15 Min","es"),"Taḥajjud en 15 min");
+assert.equal(w.DarTestTurkishUI.translateValue("Offline lädt 2/114","tr"),"Çevrimdışı yükleniyor 2/114");
+assert.equal(w.DarTestTurkishUI.translateValue("Islamische Waṣiyyah – DAR AL TAWḤID","en"),"Islamic waṣiyyah – DAR AL TAWḤID");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
