@@ -557,6 +557,8 @@ function isDynamicGermanUi(value){
   /^[^<>\n.]{1,40} in \d+ Min$/.test(value)||
   /^Türkçe · Prüfung ausstehend · \S+$/.test(value)||
   /^Islamische Waṣiyyah – [^<>\n]{1,80}$/.test(value)||
+  /^Ich habe noch nicht genug persönliche Angaben erkannt\. Bitte ergänze mindestens: [^<>\n]{1,240}\.$/.test(value)||
+  /^Für die spätere Farāʾiḍ-Prüfung fehlen noch: [^<>\n]{1,240}\. Bitte ergänze diese Angaben\.$/.test(value)||
   /^\d+\. Fundstelle$/.test(value)||
   /^Qurʾān \d{1,3}:\d{1,3}(?: · [^<>]{1,80})?$/.test(value)||
   /^· Āyah \d+ ·$/.test(value)||
@@ -2768,8 +2770,10 @@ function translateSharedPatterns(value,language){
   const sourceNote=value.match(/^Quelle\/Hinweis: ([^<>\n]{1,180})$/);
   if(sourceNote){
    const rest=sourceNote[1];
+   const known=lookupPack(rest,language);
+   const tail=known!==undefined?known:rest;
    const heads={ar:"المصدر/ملاحظة: ",en:"Source/note: ",tr:"Kaynak/not: ",ku:"Çavkanî/nîşan: ",ckb:"سەرچاوە/تێبینی: ",bs:"Izvor/napomena: ",fr:"Source/note : ",es:"Fuente/nota: "};
-   return heads[language]?heads[language]+rest:null;
+   return heads[language]?heads[language]+tail:null;
   }
   const ownAreas=value.match(/^(\d+) von 13 Bereichen mit eigenen Angaben · vor PDF bitte prüfen\.$/);
   if(ownAreas){
@@ -2832,6 +2836,40 @@ function translateSharedPatterns(value,language){
   if(wasiyyahTitle){
    const name=wasiyyahTitle[1];
    const forms={ar:"وصية إسلامية – "+name,en:"Islamic waṣiyyah – "+name,tr:"İslami vasiyet – "+name,ku:"Wasiyyaya îslamî – "+name,ckb:"وەسیەتی ئیسلامی – "+name,bs:"Islamska wasiyyah – "+name,fr:"Waṣiyyah islamique – "+name,es:"Waṣiyyah islámica – "+name};
+   return forms[language]||null;
+  }
+  const labelList=list=>String(list||"").split(", ").map(part=>{
+   const known=lookupPack(part,language);
+   return known!==undefined?known:part;
+  }).join(", ");
+  const personalGap=value.match(/^Ich habe noch nicht genug persönliche Angaben erkannt\. Bitte ergänze mindestens: ([^<>\n]{1,240})\.$/);
+  if(personalGap){
+   const list=labelList(personalGap[1]);
+   const forms={
+    ar:"لم أتعرّف بعد على بيانات شخصية كافية. يرجى إكمال ما يلي على الأقل: "+list+".",
+    en:"I have not yet recognized enough personal details. Please add at least: "+list+".",
+    tr:"Henüz yeterli kişisel bilgi tanımadım. Lütfen en az şunları tamamla: "+list+".",
+    ku:"Hê têra agahiyên kesane nas nekir. Ji kerema xwe bi kêmanî van temam bike: "+list+".",
+    ckb:"هێشتا بەشی پێویست زانیاری کەسی نەناسم. تکایە لانیکەم ئەمانە تەواو بکە: "+list+".",
+    bs:"Još nisam prepoznao dovoljno ličnih podataka. Dopuni barem: "+list+".",
+    fr:"Je n’ai pas encore reconnu assez de données personnelles. Complète au moins : "+list+".",
+    es:"Aún no reconocí suficientes datos personales. Completa al menos: "+list+"."
+   };
+   return forms[language]||null;
+  }
+  const faraidGap=value.match(/^Für die spätere Farāʾiḍ-Prüfung fehlen noch: ([^<>\n]{1,240})\. Bitte ergänze diese Angaben\.$/);
+  if(faraidGap){
+   const list=labelList(faraidGap[1]);
+   const forms={
+    ar:"لفحص الفرائض اللاحق ما زال ينقص: "+list+". يرجى إكمال هذه البيانات.",
+    en:"For the later farāʾiḍ review the following is still missing: "+list+". Please add these details.",
+    tr:"Sonraki Farāʾiḍ kontrolü için hâlâ eksik: "+list+". Lütfen bu bilgileri tamamla.",
+    ku:"Ji bo kontrola paşê ya Farāʾiḍ hê kêm in: "+list+". Ji kerema xwe van agahiyan temam bike.",
+    ckb:"بۆ پشکنینی دواتری Farāʾiḍ هێشتا ئەمانە کەمن: "+list+". تکایە ئەم زانیارییانە تەواو بکە.",
+    bs:"Za kasniju provjeru Farāʾiḍ još nedostaje: "+list+". Dopuni ove podatke.",
+    fr:"Pour la vérification ultérieure des farāʾiḍ, il manque encore : "+list+". Ajoute ces données.",
+    es:"Para la revisión posterior de las farāʾiḍ aún falta: "+list+". Completa estos datos."
+   };
    return forms[language]||null;
   }
   const numberedPlace=value.match(/^(\d+)\. Fundstelle$/);
@@ -3268,7 +3306,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-56";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-57";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();

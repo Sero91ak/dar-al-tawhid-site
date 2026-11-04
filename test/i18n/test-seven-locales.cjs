@@ -430,6 +430,12 @@ assert.equal(w.DarTestTurkishUI.translateValue("Standort gespeichert: Köln","ck
 assert.equal(w.DarTestTurkishUI.translateValue("Taḥajjud in 15 Min","es"),"Taḥajjud en 15 min");
 assert.equal(w.DarTestTurkishUI.translateValue("Offline lädt 2/114","tr"),"Çevrimdışı yükleniyor 2/114");
 assert.equal(w.DarTestTurkishUI.translateValue("Islamische Waṣiyyah – DAR AL TAWḤID","en"),"Islamic waṣiyyah – DAR AL TAWḤID");
+assert.equal(w.DarTestTurkishUI.translateValue("Quelle/Hinweis: Pflichtprüfung: Der Assistent geht erst weiter, wenn die nötigen Angaben klar sind.","en"),"Source/note: Required check: the assistant continues only when the needed details are clear.");
+assert.equal(w.DarTestTurkishUI.translateValue("Quelle/Hinweis: Ṣaḥīḥ al-Bukhārī 2738.","fr"),"Source/note : Ṣaḥīḥ al-Bukhārī 2738.");
+assert.equal(w.DarTestTurkishUI.translateValue("Ehestand","ar"),"الحالة الزوجية");
+assert.equal(w.DarTestTurkishUI.translateValue("Ich habe noch nicht genug persönliche Angaben erkannt. Bitte ergänze mindestens: vollständiger Name, Geburtsdatum.","es"),"Aún no reconocí suficientes datos personales. Completa al menos: nombre completo, fecha de nacimiento.");
+assert.equal(w.DarTestTurkishUI.translateValue("Für die spätere Farāʾiḍ-Prüfung fehlen noch: Ehestand, leibliche Kinder oder keine Kinder. Bitte ergänze diese Angaben.","fr"),"Pour la vérification ultérieure des farāʾiḍ, il manque encore : état civil, enfants biologiques ou pas d’enfants. Ajoute ces données.");
+assert.equal(w.DarTestTurkishUI.translateValue("Wir sind bei der Prüfung angekommen. Klicke auf Zusammenfassung, prüfe alle Angaben und bearbeite den Entwurf vor der PDF-Erstellung.","tr"),"Denetim aşamasına geldik. Özeti aç, tüm bilgileri kontrol et ve PDF öncesi taslağı düzenle.");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
