@@ -1134,9 +1134,9 @@ const additions={
   "subject": "dua",
   "pillar": "dua",
   "topic": "Vor dem Schlafen Allah gedenken",
-  "title": "Duʿāʾ und Aḏkār · Vor dem Schlafen Allah gedenken",
+  "title": "Adab · Vor dem Schlafen Allah gedenken",
   "lead": "Heute lernen wir: Vor dem Schlafen Allah gedenken.",
-  "goal": "Ich kann ein authentisches Schlaf-Duʿāʾ mit Ruhe üben und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich erkenne die authentisch überlieferte Abendpraxis mit al-Iḫlāṣ, al-Falaq und an-Nās und unterscheide sie von Qurʾān 33:41.",
   "quran": {
    "surah": 33,
    "ayah": 41,
@@ -1154,7 +1154,7 @@ const additions={
    "quranUrl": "https://quran.com/33/41",
    "hadithUrl": "https://sunnah.com/bukhari:5017",
    "sourceAnchorLessonId": "adab-morgen-dhikr",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
+   "sourceScope": "Qurʾān- und Sunnah-Anker am konkreten Unterrichtsbeispiel ausgerichtet; humanes Einzelreview, Alterstexte und Phonetikfreigabe weiterhin ausstehend.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -1162,141 +1162,139 @@ const additions={
    "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
-  "hint": "Ein authentisches Schlaf-Duʿāʾ mit Ruhe üben.",
-  "sample": "Bei „Vor dem Schlafen Allah gedenken“ übe ich: ein authentisches Schlaf-Duʿāʾ mit Ruhe üben.",
+  "hint": "Lies genau, was der Vers oder die überlieferte Sunnah tatsächlich sagt.",
+  "sample": "Wir unterscheiden Allahs Offenbarung von der Sunnah-Überlieferung und unserer eigenen Erklärung.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Vor dem Schlafen Allah gedenken.",
+    "intro": "Vor dem Schlafen dürfen wir Allah gedenken.",
     "lines": [
-     "Wir lernen heute: Vor dem Schlafen Allah gedenken.",
-     "Wir üben ein authentisches Schlaf-Duʿāʾ mit Ruhe üben.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Der Qurʾān erinnert uns daran, Allah zu gedenken.",
+     "ʿĀʾišah berichtete, dass der Prophet ﷺ vor dem Schlafen drei kurze Sūren rezitierte.",
+     "Sie heißen al-Iḫlāṣ, al-Falaq und an-Nās.",
+     "Wenn ich diese Sūren hören möchte, höre ich einen echten Qurʾān-Rezitator."
     ],
-    "evidence": "Qurʾān 33:41 lehrt: O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 33:41 ist ein allgemeiner Aufruf zum Gedenken. Al-Buḫārī 5017 überliefert die besondere Praxis vor dem Schlafen."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Ein authentisches Schlaf-Duʿāʾ mit Ruhe üben.",
+    "intro": "Was ist aus der Sunnah für die Schlafenszeit belegt?",
     "lines": [
-     "Heute untersuchen wir das Thema „Vor dem Schlafen Allah gedenken“.",
-     "Der Qurʾān spricht in 33:41 darüber: O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 5017 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Ein authentisches Schlaf-Duʿāʾ mit Ruhe üben. Wir überlegen gemeinsam, warum es passt."
+     "Qurʾān 33:41 fordert Gläubige auf, Allah häufig zu gedenken.",
+     "ʿĀʾišah berichtet in al-Buḫārī 5017 von al-Iḫlāṣ, al-Falaq und an-Nās vor dem Schlafen.",
+     "Im Bericht werden auch das Zusammenführen der Hände und das Streichen über den Körper erwähnt.",
+     "Wir lernen den Bericht, ohne daraus eine neue Pflicht zu erfinden."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Die drei Sūren und die Handlung stammen aus al-Buḫārī 5017; der Qurʾān-Aufruf 33:41 ist davon zu unterscheiden."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Vor dem Schlafen Allah gedenken“.",
+    "intro": "Ein allgemeiner Qurʾān-Aufruf und eine spezielle Sunnah-Handlung.",
     "lines": [
-     "Ausgangssituation: Ein authentisches Schlaf-Duʿāʾ mit Ruhe üben.",
-     "Qurʾān 33:41: O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 5017): ʿĀʾišah berichtete, dass der Prophet ﷺ vor dem Schlafen al-Iḫlāṣ, al-Falaq und an-Nās rezitierte. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 33:41 trägt die allgemeine Aufforderung zum häufigen Gedenken Allahs.",
+     "Al-Buḫārī 5017 überliefert von ʿĀʾišah, wie der Prophet ﷺ vor dem Schlafen drei Sūren rezitierte.",
+     "Der Bericht nennt al-Iḫlāṣ, al-Falaq und an-Nās sowie das Bestreichen des Körpers und eine dreimalige Wiederholung.",
+     "Aus dem Bericht folgt nicht, dass wir zusätzliche erfundene Abendformeln als prophetisch ausgeben dürfen."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Die Qurʾān-Rezitation erfolgt ausschließlich durch vorhandene menschliche Rezitatoren; eine KI-Sprechstimme spricht nur die deutsche Erklärung."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Vor dem Schlafen Allah gedenken“ eine gute Handlung?",
+     "prompt": "Welche Sūren rezitierte der Prophet ﷺ vor dem Schlafen?",
      "options": [
-      "Ich kann ein authentisches Schlaf-Duʿāʾ mit Ruhe üben.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Al-Iḫlāṣ, al-Falaq und an-Nās.",
+      "Al-Fātiḥah, al-Kahf und Yā Sīn."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Ein authentisches Schlaf-Duʿāʾ mit Ruhe üben.",
-     "explain": "Unser Lernbeispiel ist: Ein authentisches Schlaf-Duʿāʾ mit Ruhe üben."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Der Bericht nennt die drei Schutzsūren."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Vor dem Schlafen Allah gedenken“ tun?",
+     "prompt": "Was machen wir, wenn wir diese Sūren hören wollen?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Einen Qurʾān-Rezitator anhören.",
+      "Den Qurʾān als erfundene Geschichte vorlesen lassen."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Für den Qurʾān wird eine echte Rezitation benutzt."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Vor dem Schlafen Allah gedenken“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was steht als allgemeine Aufforderung in Qurʾān 33:41?",
      "options": [
-      "Ich kann ein authentisches Schlaf-Duʿāʾ mit Ruhe üben.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Allah häufig gedenken.",
+      "Vor jedem Schlaf ein neues Bittgebet erfinden."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Ein authentisches Schlaf-Duʿāʾ mit Ruhe üben.",
-     "explain": "Unser Lernbeispiel ist: Ein authentisches Schlaf-Duʿāʾ mit Ruhe üben."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Qurʾān 33:41 ist der allgemeine Beleg."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Vor dem Schlafen Allah gedenken“ im Alltag üben kannst?",
+     "prompt": "Welche Sūren nennt al-Buḫārī 5017?",
      "options": [
-      "Ich könnte ein authentisches Schlaf-Duʿāʾ mit Ruhe üben. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Al-Iḫlāṣ, al-Falaq und an-Nās.",
+      "Al-Fātiḥah, Maryam und al-Kahf."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte ein authentisches Schlaf-Duʿāʾ mit Ruhe üben. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "ʿĀʾišah nennt die drei rezitierten Sūren.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Vor dem Schlafen Allah gedenken“ im Beispiel üben kannst."
+     "legacyPrompt": "Fachlich zu kontrollierende frühere Freitext-Frage."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 33:41?",
+     "prompt": "Wer überliefert die beschriebene Abendpraxis?",
      "options": [
-      "O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken.",
-      "Unser Übungsbeispiel ist: Ein authentisches Schlaf-Duʿāʾ mit Ruhe üben.",
-      "Die Hadith-Bedeutung lautet: ʿĀʾišah berichtete, dass der Prophet ﷺ vor dem Schlafen al-Iḫlāṣ, al-Falaq und an-Nās rezitierte."
+      "ʿĀʾišah.",
+      "Ein späterer unbekannter Geschichtenerzähler."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Die Überlieferung steht unter dem Namen ʿĀʾišah."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Vor dem Schlafen Allah gedenken“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Aussage gehört zum Ḥadīṯ und nicht direkt zu 33:41?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Der Prophet ﷺ rezitierte vor dem Schlafen drei bestimmte Sūren.",
+      "Gläubige sollen Allah häufig gedenken."
      ],
      "correct": 0,
-     "hint": "Vergleiche 33:41 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Die besondere Schlafenszeitpraxis steht im Ḥadīṯ."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 33:41?",
+     "prompt": "Was berichtet al-Buḫārī 5017 zusätzlich?",
      "options": [
-      "O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken.",
-      "Unser Übungsbeispiel ist: Ein authentisches Schlaf-Duʿāʾ mit Ruhe üben."
+      "Der Prophet ﷺ strich nach der Rezitation über Teile seines Körpers.",
+      "Der Prophet ﷺ verbot jede weitere erlaubte Abendroutine."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken. Die angegebene Sunnah lehrt sinngemäß: ʿĀʾišah berichtete, dass der Prophet ﷺ vor dem Schlafen al-Iḫlāṣ, al-Falaq und an-Nās rezitierte.",
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Der Bericht enthält eine Handlung, aber kein solches erfundenes Verbot.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 33:41 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Fachlich zu kontrollierende frühere Freitext-Frage."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Vor dem Schlafen Allah gedenken“?",
+     "prompt": "Wie vertonen wir die Qurʾān-Stellen der Lektion?",
      "options": [
-      "Ich erkläre die Situation: ein authentisches Schlaf-Duʿāʾ mit Ruhe üben. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Mit vorhandener authentischer Rezitation, nicht synthetischer Qurʾān-Stimme.",
+      "Mit frei improvisierten arabischen KI-Versen."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: ein authentisches Schlaf-Duʿāʾ mit Ruhe üben. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Eine deutsche Erklärung darf KI-gesprochen werden; Qurʾān-Rezitation nicht.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Vor dem Schlafen Allah gedenken“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Fachlich zu kontrollierende frühere Freitext-Frage."
     }
    ]
   },
@@ -3000,9 +2998,9 @@ const additions={
   "subject": "quran",
   "pillar": "quran",
   "topic": "Sūrat al-Falaq kennenlernen",
-  "title": "Qurʾān und Sunnah · Sūrat al-Falaq kennenlernen",
+  "title": "Qurʾān · Sūrat al-Falaq kennenlernen",
   "lead": "Heute lernen wir: Sūrat al-Falaq kennenlernen.",
-  "goal": "Ich kann die Sūrah mit echter Qurʾān-Rezitation hören und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann erklären, dass Sūrat al-Falaq mit der Bitte um Schutz beim Herrn des Tagesanbruchs beginnt.",
   "quran": {
    "surah": 113,
    "ayah": 1,
@@ -3020,7 +3018,7 @@ const additions={
    "quranUrl": "https://quran.com/113/1",
    "hadithUrl": "https://sunnah.com/bukhari:5017",
    "sourceAnchorLessonId": "aqidah-quran-allahs-wort",
-   "sourceScope": "Thematische Primärstelle zu einem Teilaspekt; genaue Deutung gegenprüfen.",
+   "sourceScope": "Qurʾān- und Sunnah-Anker am konkreten Unterrichtsbeispiel ausgerichtet; humanes Einzelreview, Alterstexte und Phonetikfreigabe weiterhin ausstehend.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -3028,141 +3026,139 @@ const additions={
    "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
-  "hint": "Die Sūrah mit echter Qurʾān-Rezitation hören.",
-  "sample": "Bei „Sūrat al-Falaq kennenlernen“ übe ich: die Sūrah mit echter Qurʾān-Rezitation hören.",
+  "hint": "Lies genau, was der Vers oder die überlieferte Sunnah tatsächlich sagt.",
+  "sample": "Wir unterscheiden Allahs Offenbarung von der Sunnah-Überlieferung und unserer eigenen Erklärung.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Sūrat al-Falaq kennenlernen.",
+    "intro": "Al-Falaq ist eine Sūrah im Qurʾān.",
     "lines": [
-     "Wir lernen heute: Sūrat al-Falaq kennenlernen.",
-     "Wir üben die Sūrah mit echter Qurʾān-Rezitation hören.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Sie beginnt mit einer Bitte um Schutz.",
+     "Wir suchen Schutz bei Allah.",
+     "Al-Falaq nennt den Herrn des Tagesanbruchs.",
+     "Zum Hören nutzen wir die echte Qurʾān-Rezitation."
     ],
-    "evidence": "Qurʾān 113:1 lehrt: Sag: Ich suche Zuflucht beim Herrn des Tagesanbruchs. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Sūrat al-Falaq beginnt in Qurʾān 113:1 mit der Bitte, bei Allah Schutz zu suchen."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Die Sūrah mit echter Qurʾān-Rezitation hören.",
+    "intro": "Was lernen wir aus dem Anfang von Sūrat al-Falaq?",
     "lines": [
-     "Heute untersuchen wir das Thema „Sūrat al-Falaq kennenlernen“.",
-     "Der Qurʾān spricht in 113:1 darüber: Sag: Ich suche Zuflucht beim Herrn des Tagesanbruchs.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 5017 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Die Sūrah mit echter Qurʾān-Rezitation hören. Wir überlegen gemeinsam, warum es passt."
+     "Der erste Vers beginnt mit der Aufforderung: Sprich.",
+     "Die Aussage lautet sinngemäß: Ich suche Zuflucht beim Herrn des Tagesanbruchs.",
+     "Der Vers lehrt, Schutz bei Allah zu suchen.",
+     "ʿĀʾišah berichtete, dass der Prophet ﷺ al-Falaq auch vor dem Schlafen rezitierte."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Qurʾān 113:1 belegt den Anfang der Sūrah; al-Buḫārī 5017 berichtet über ihre Rezitation vor dem Schlafen."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Sūrat al-Falaq kennenlernen“.",
+    "intro": "Wortlaut, Bedeutung und überlieferte Praxis unterscheiden.",
     "lines": [
-     "Ausgangssituation: Die Sūrah mit echter Qurʾān-Rezitation hören.",
-     "Qurʾān 113:1: Sag: Ich suche Zuflucht beim Herrn des Tagesanbruchs.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 5017): Der Prophet ﷺ rezitierte unter anderem al-Falaq vor dem Schlafen. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "In Qurʾān 113:1 wird die Suche nach Zuflucht beim Herrn des Tagesanbruchs genannt.",
+     "Die deutsche Bedeutung ist eine Übersetzung und nicht der arabische Originalwortlaut.",
+     "Al-Buḫārī 5017 berichtet, dass der Prophet ﷺ al-Falaq zusammen mit al-Iḫlāṣ und an-Nās rezitierte.",
+     "Eine Sūrah wird nicht durch frei erfundene arabische KI-Aufnahmen ersetzt."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Der einzelne Vers 113:1 und der Ḥadīṯ über die Rezitationspraxis haben klar verschiedene Aussagebereiche."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Sūrat al-Falaq kennenlernen“ eine gute Handlung?",
+     "prompt": "Bei wem suchen wir in al-Falaq Schutz?",
      "options": [
-      "Ich kann die Sūrah mit echter Qurʾān-Rezitation hören.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Bei Allah.",
+      "Bei einer ausgedachten Zauberfigur."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Die Sūrah mit echter Qurʾān-Rezitation hören.",
-     "explain": "Unser Lernbeispiel ist: Die Sūrah mit echter Qurʾān-Rezitation hören."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Der Vers nennt den Herrn des Tagesanbruchs."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Sūrat al-Falaq kennenlernen“ tun?",
+     "prompt": "Wie beginnt die Aussage von al-Falaq sinngemäß?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Ich suche Zuflucht.",
+      "Ich vergesse absichtlich alles."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Der erste Vers beginnt mit einer Bitte um Zuflucht."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Sūrat al-Falaq kennenlernen“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was bedeutet al-Falaq in diesem Vers sinngemäß?",
      "options": [
-      "Ich kann die Sūrah mit echter Qurʾān-Rezitation hören.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Der Tagesanbruch.",
+      "Das Meer."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Die Sūrah mit echter Qurʾān-Rezitation hören.",
-     "explain": "Unser Lernbeispiel ist: Die Sūrah mit echter Qurʾān-Rezitation hören."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Der Vers spricht vom Herrn des Tagesanbruchs."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Sūrat al-Falaq kennenlernen“ im Alltag üben kannst?",
+     "prompt": "Welche Quelle nennt das Rezitieren von al-Falaq vor dem Schlafen?",
      "options": [
-      "Ich könnte die Sūrah mit echter Qurʾān-Rezitation hören. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Al-Buḫārī 5017.",
+      "Qurʾān 113:1 allein."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte die Sūrah mit echter Qurʾān-Rezitation hören. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Die zeitliche Praxis stammt aus der Überlieferung.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Sūrat al-Falaq kennenlernen“ im Beispiel üben kannst."
+     "legacyPrompt": "Fachlich zu kontrollierende frühere Freitext-Frage."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 113:1?",
+     "prompt": "Welche Sūren werden im Schlafenszeit-Ḥadīṯ zusammen erwähnt?",
      "options": [
-      "Sag: Ich suche Zuflucht beim Herrn des Tagesanbruchs.",
-      "Unser Übungsbeispiel ist: Die Sūrah mit echter Qurʾān-Rezitation hören.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ rezitierte unter anderem al-Falaq vor dem Schlafen."
+      "Al-Iḫlāṣ, al-Falaq und an-Nās.",
+      "Al-Falaq, Yūsuf und an-Naml."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "ʿĀʾišah nennt diese drei Sūren."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Sūrat al-Falaq kennenlernen“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Aussage kann man direkt Qurʾān 113:1 zuordnen?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Zuflucht beim Herrn des Tagesanbruchs suchen.",
+      "Die gesamte tägliche Schlafenszeit-Praxis mit allen Handlungen."
      ],
      "correct": 0,
-     "hint": "Vergleiche 113:1 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Der Vers beschreibt das Schutzsuchen, nicht alle Handlungen."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 113:1?",
+     "prompt": "Was erfahren wir zusätzlich in al-Buḫārī 5017?",
      "options": [
-      "Sag: Ich suche Zuflucht beim Herrn des Tagesanbruchs.",
-      "Unser Übungsbeispiel ist: Die Sūrah mit echter Qurʾān-Rezitation hören."
+      "Der Prophet ﷺ rezitierte vor dem Schlafen auch al-Falaq.",
+      "Dass al-Falaq ein Gebet mit vier Rakʿāt ist."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Sag: Ich suche Zuflucht beim Herrn des Tagesanbruchs. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ rezitierte unter anderem al-Falaq vor dem Schlafen.",
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Der Ḥadīṯ berichtet die Rezitationspraxis.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 113:1 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Fachlich zu kontrollierende frühere Freitext-Frage."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Sūrat al-Falaq kennenlernen“?",
+     "prompt": "Warum trennen wir arabischen Vers und deutsche Erklärung?",
      "options": [
-      "Ich erkläre die Situation: die Sūrah mit echter Qurʾān-Rezitation hören. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Damit Übersetzung und Offenbarungswortlaut nicht verwechselt werden.",
+      "Weil jeder deutsche Satz selbst ein Qurʾān-Vers wäre."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: die Sūrah mit echter Qurʾān-Rezitation hören. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Deutsche Bedeutungswiedergaben sind nicht der arabische Originaltext.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Sūrat al-Falaq kennenlernen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Fachlich zu kontrollierende frühere Freitext-Frage."
     }
    ]
   },
@@ -3374,9 +3370,9 @@ const additions={
   "subject": "dua",
   "pillar": "dua",
   "topic": "Nach dem Aufwachen dankbar sein",
-  "title": "Duʿāʾ und Aḏkār · Nach dem Aufwachen dankbar sein",
+  "title": "Adab · Nach dem Aufwachen dankbar sein",
   "lead": "Heute lernen wir: Nach dem Aufwachen dankbar sein.",
-  "goal": "Ich kann eine belegte Formel beim Aufwachen verstehen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann die Bedeutung des authentischen prophetischen Lobes beim Aufwachen verstehen, ohne einen erfundenen arabischen Wortlaut zu lernen.",
   "quran": {
    "surah": 33,
    "ayah": 41,
@@ -3394,7 +3390,7 @@ const additions={
    "quranUrl": "https://quran.com/33/41",
    "hadithUrl": "https://sunnah.com/bukhari:6324",
    "sourceAnchorLessonId": "adab-morgen-dhikr",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
+   "sourceScope": "Qurʾān- und Sunnah-Anker am konkreten Unterrichtsbeispiel ausgerichtet; humanes Einzelreview, Alterstexte und Phonetikfreigabe weiterhin ausstehend.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -3402,141 +3398,139 @@ const additions={
    "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
-  "hint": "Eine belegte Formel beim Aufwachen verstehen.",
-  "sample": "Bei „Nach dem Aufwachen dankbar sein“ übe ich: eine belegte Formel beim Aufwachen verstehen.",
+  "hint": "Lies genau, was der Vers oder die überlieferte Sunnah tatsächlich sagt.",
+  "sample": "Wir unterscheiden Allahs Offenbarung von der Sunnah-Überlieferung und unserer eigenen Erklärung.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Nach dem Aufwachen dankbar sein.",
+    "intro": "Nach dem Aufwachen können wir Allah danken.",
     "lines": [
-     "Wir lernen heute: Nach dem Aufwachen dankbar sein.",
-     "Wir üben eine belegte Formel beim Aufwachen verstehen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Allah hat uns wieder aufwachen lassen.",
+     "Der Prophet ﷺ lobte Allah nach dem Schlaf.",
+     "Wir lernen die Bedeutung dieses Lobes auf Deutsch.",
+     "Einen arabischen Wortlaut lernen wir nur aus einer genau geprüften Vorlage."
     ],
-    "evidence": "Qurʾān 33:41 lehrt: O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Al-Buḫārī 6324 enthält das Lob beim Aufwachen. Qurʾān 33:41 erinnert allgemein an Allahs Gedenken."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Eine belegte Formel beim Aufwachen verstehen.",
+    "intro": "ʿĀʾišah? Nein: Wer berichtete vom Lob beim Aufwachen?",
     "lines": [
-     "Heute untersuchen wir das Thema „Nach dem Aufwachen dankbar sein“.",
-     "Der Qurʾān spricht in 33:41 darüber: O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 6324 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Eine belegte Formel beim Aufwachen verstehen. Wir überlegen gemeinsam, warum es passt."
+     "In al-Buḫārī 6324 berichtet Ḥuḏayfah über die Worte des Propheten ﷺ.",
+     "Beim Schlafengehen und beim Aufwachen sind zwei unterschiedliche überlieferte Formeln genannt.",
+     "Beim Aufwachen lobte der Prophet ﷺ Allah für das erneute Leben nach dem Schlaf.",
+     "Die Aussage über die Auferstehung gehört ebenfalls zur überlieferten Formel."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Al-Buḫārī 6324 ist ein Nachweis über Worte nach dem Aufwachen; wir vertonen zunächst nur die deutsche Bedeutung."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Nach dem Aufwachen dankbar sein“.",
+    "intro": "Ein authentisches Duʿāʾ nicht durch eine erfundene Aussprache ersetzen.",
     "lines": [
-     "Ausgangssituation: Eine belegte Formel beim Aufwachen verstehen.",
-     "Qurʾān 33:41: O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 6324): Der Prophet ﷺ pries Allah beim Aufwachen mit einer überlieferten Formel. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Al-Buḫārī 6324 unterscheidet den Wortlaut vor dem Schlaf vom Lob beim Aufwachen.",
+     "Die deutsche Bedeutung des Aufwach-Lobes erwähnt das Leben nach dem Schlaf und die Rückkehr zu Allah.",
+     "Qurʾān 33:41 ist ein allgemeiner Gedenkbeleg und enthält nicht die vollständige spezielle Formel.",
+     "Bevor arabische Wörter in einer Lernaufnahme erscheinen, müssen Originalwortlaut und Fuṣḥā-Aussprache getrennt geprüft werden."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Der deutsche Unterrichtssatz ist eine Bedeutungswiedergabe, keine synthetische Rezitation oder arabische Formel."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Nach dem Aufwachen dankbar sein“ eine gute Handlung?",
+     "prompt": "Wem dankte der Prophet ﷺ beim Aufwachen?",
      "options": [
-      "Ich kann eine belegte Formel beim Aufwachen verstehen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Allah.",
+      "Einem erfundenen Stern."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Eine belegte Formel beim Aufwachen verstehen.",
-     "explain": "Unser Lernbeispiel ist: Eine belegte Formel beim Aufwachen verstehen."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Der Prophet ﷺ lobte Allah."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Nach dem Aufwachen dankbar sein“ tun?",
+     "prompt": "Wofür können wir nach dem Schlaf dankbar sein?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Dass Allah uns wieder aufwachen ließ.",
+      "Dass der Schlaf niemals endet."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Die überlieferte Formel erinnert an das Leben nach dem Schlaf."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Nach dem Aufwachen dankbar sein“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was erwähnt das Lob beim Aufwachen sinngemäß?",
      "options": [
-      "Ich kann eine belegte Formel beim Aufwachen verstehen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Allah ließ uns nach dem Schlaf wieder leben.",
+      "Niemand kann morgens dankbar sein."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Eine belegte Formel beim Aufwachen verstehen.",
-     "explain": "Unser Lernbeispiel ist: Eine belegte Formel beim Aufwachen verstehen."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Die Aufwachformel erwähnt das erneute Leben."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Nach dem Aufwachen dankbar sein“ im Alltag üben kannst?",
+     "prompt": "Wer überliefert den Bericht in al-Buḫārī 6324?",
      "options": [
-      "Ich könnte eine belegte Formel beim Aufwachen verstehen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Ḥuḏayfah.",
+      "Ein namenloser Zauberer."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte eine belegte Formel beim Aufwachen verstehen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Der Bericht wird von Ḥuḏayfah überliefert.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Nach dem Aufwachen dankbar sein“ im Beispiel üben kannst."
+     "legacyPrompt": "Fachlich zu kontrollierende frühere Freitext-Frage."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 33:41?",
+     "prompt": "Sind die Worte vor dem Einschlafen und beim Aufwachen in 6324 gleich?",
      "options": [
-      "O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken.",
-      "Unser Übungsbeispiel ist: Eine belegte Formel beim Aufwachen verstehen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ pries Allah beim Aufwachen mit einer überlieferten Formel."
+      "Nein, es sind verschiedene Formeln.",
+      "Ja, beide werden als exakt derselbe Text beschrieben."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Der Bericht nennt unterschiedliche Worte zu beiden Zeiten."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Nach dem Aufwachen dankbar sein“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welcher Beleg enthält den besonderen Wortlaut beim Aufwachen?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Al-Buḫārī 6324.",
+      "Qurʾān 33:41 als vollständige Duʿāʾ-Formel."
      ],
      "correct": 0,
-     "hint": "Vergleiche 33:41 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Qurʾān 33:41 ist ein allgemeiner Gedenkbeleg."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 33:41?",
+     "prompt": "Welche weitere Glaubensaussage gehört zur überlieferten Aufwachformel?",
      "options": [
-      "O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken.",
-      "Unser Übungsbeispiel ist: Eine belegte Formel beim Aufwachen verstehen."
+      "Die Auferstehung und Rückkehr zu Allah.",
+      "Eine Vorhersage über das morgige Wetter."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ pries Allah beim Aufwachen mit einer überlieferten Formel.",
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Der Bericht erwähnt die Auferstehung.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 33:41 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Fachlich zu kontrollierende frühere Freitext-Frage."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Nach dem Aufwachen dankbar sein“?",
+     "prompt": "Warum wird der arabische Wortlaut nicht frei von der deutschen Erklärung abgeleitet?",
      "options": [
-      "Ich erkläre die Situation: eine belegte Formel beim Aufwachen verstehen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Damit keine falsche Formel oder Aussprache entsteht.",
+      "Weil jede beliebige Rückübersetzung bereits ein authentischer Ḥadīṯ ist."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: eine belegte Formel beim Aufwachen verstehen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Arabischer Wortlaut und Aussprache müssen auf der geprüften Vorlage beruhen.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Nach dem Aufwachen dankbar sein“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Fachlich zu kontrollierende frühere Freitext-Frage."
     }
    ]
   },
@@ -3935,9 +3929,9 @@ const additions={
   "subject": "aqidah",
   "pillar": "iman",
   "topic": "Īmān an Allahs Bücher",
-  "title": "Īmān · Īmān an Allahs Bücher",
+  "title": "ʿAqīdah · Īmān an Allahs Bücher",
   "lead": "Heute lernen wir: Īmān an Allahs Bücher.",
-  "goal": "Ich kann wissen, dass Allah Offenbarungen herabsandte und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann erklären, dass der Glaube an Allahs Offenbarungsbücher zum Īmān gehört und im Qurʾān und Ḥadīṯ Ǧibrīl genannt wird.",
   "quran": {
    "surah": 2,
    "ayah": 285,
@@ -3955,7 +3949,7 @@ const additions={
    "quranUrl": "https://quran.com/2/285",
    "hadithUrl": "https://sunnah.com/muslim:8a",
    "sourceAnchorLessonId": "aqidah-iman-sechs-grundlagen",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
+   "sourceScope": "Qurʾān- und Sunnah-Anker am konkreten Unterrichtsbeispiel ausgerichtet; humanes Einzelreview, Alterstexte und Phonetikfreigabe weiterhin ausstehend.",
    "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -3963,141 +3957,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Wissen, dass Allah Offenbarungen herabsandte.",
-  "sample": "Bei „Īmān an Allahs Bücher“ übe ich: wissen, dass Allah Offenbarungen herabsandte.",
+  "hint": "Lies genau, was der Vers oder die überlieferte Sunnah tatsächlich sagt.",
+  "sample": "Wir unterscheiden Allahs Offenbarung von der Sunnah-Überlieferung und unserer eigenen Erklärung.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Īmān an Allahs Bücher.",
+    "intro": "Allah hat Offenbarung gesandt.",
     "lines": [
-     "Wir lernen heute: Īmān an Allahs Bücher.",
-     "Wir üben wissen, dass Allah Offenbarungen herabsandte.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Der Qurʾān ist Allahs Wort.",
+     "Wir glauben an die Bücher, die Allah offenbart hat.",
+     "Dazu gehört der Qurʾān.",
+     "Der Qurʾān nennt Allahs Bücher im Zusammenhang mit dem Glauben."
     ],
-    "evidence": "Qurʾān 2:285 lehrt: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 2:285 nennt Allahs Bücher. Der Ḥadīṯ Ǧibrīl nennt sie ebenfalls als Teil des Īmān."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Wissen, dass Allah Offenbarungen herabsandte.",
+    "intro": "Was bedeutet Īmān an Allahs Bücher?",
     "lines": [
-     "Heute untersuchen wir das Thema „Īmān an Allahs Bücher“.",
-     "Der Qurʾān spricht in 2:285 darüber: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ Muslim, Nr. 8 · Ḥadīṯ Ǧibrīl, überliefert von ʿUmar ibn al-Ḫaṭṭāb nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Wissen, dass Allah Offenbarungen herabsandte. Wir überlegen gemeinsam, warum es passt."
+     "Wir glauben, dass Allah Seinen Gesandten Offenbarung gab.",
+     "Qurʾān 2:285 nennt den Glauben an Allah, die Engel, die Bücher und die Gesandten.",
+     "Im Ḥadīṯ Ǧibrīl werden die sechs Grundlagen des Īmān zusammen erläutert.",
+     "Nicht jedes von Menschen geschriebene Buch ist deshalb Offenbarung von Allah."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Die genannten Glaubensinhalte gehören in Qurʾān 2:285 und Muslim 8a zur überlieferten Glaubenslehre."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Īmān an Allahs Bücher“.",
+    "intro": "Die Offenbarungsbücher gehören zu den Grundlagen des Īmān.",
     "lines": [
-     "Ausgangssituation: Wissen, dass Allah Offenbarungen herabsandte.",
-     "Qurʾān 2:285: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
-     "Sunnah (Ṣaḥīḥ Muslim, Nr. 8 · Ḥadīṯ Ǧibrīl, überliefert von ʿUmar ibn al-Ḫaṭṭāb): Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 2:285 erwähnt ausdrücklich den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
+     "Der Ḥadīṯ Ǧibrīl bei Muslim 8a nennt zusätzlich den Jüngsten Tag und die Vorherbestimmung im Rahmen der sechs Glaubensgrundlagen.",
+     "Wir unterscheiden Offenbarungsbücher von gewöhnlichen menschlichen Büchern.",
+     "Beim Lernen dürfen wir kein frei erfundenes Buch als von Allah offenbart ausgeben."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Der Qurʾān-Auszug ist keine vollständige Aufzählung aller sechs Grundlagen; der Ḥadīṯ Ǧibrīl ergänzt diese explizit."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Īmān an Allahs Bücher“ eine gute Handlung?",
+     "prompt": "Woran glauben Muslime nach Qurʾān 2:285?",
      "options": [
-      "Ich kann wissen, dass Allah Offenbarungen herabsandte.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "An Allahs Bücher.",
+      "An jede erfundene Geschichte als Offenbarung."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Wissen, dass Allah Offenbarungen herabsandte.",
-     "explain": "Unser Lernbeispiel ist: Wissen, dass Allah Offenbarungen herabsandte."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Der Vers nennt Allahs Bücher."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Īmān an Allahs Bücher“ tun?",
+     "prompt": "Welches Buch ist Allahs Wort?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Der Qurʾān.",
+      "Ein beliebiger Roman."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Der Qurʾān ist Allahs Offenbarung."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Īmān an Allahs Bücher“. Welche Handlung passt zur Stunde?",
+     "prompt": "Welche Dinge werden in Qurʾān 2:285 zusammen genannt?",
      "options": [
-      "Ich kann wissen, dass Allah Offenbarungen herabsandte.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Allah, Engel, Bücher und Gesandte.",
+      "Nur Essen, Kleidung und Reisen."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Wissen, dass Allah Offenbarungen herabsandte.",
-     "explain": "Unser Lernbeispiel ist: Wissen, dass Allah Offenbarungen herabsandte."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Der Vers nennt mehrere Glaubensgrundlagen."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Īmān an Allahs Bücher“ im Alltag üben kannst?",
+     "prompt": "Welche Überlieferung nennt die Grundlagen des Īmān?",
      "options": [
-      "Ich könnte wissen, dass Allah Offenbarungen herabsandte. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Der Ḥadīṯ Ǧibrīl.",
+      "Eine moderne Geschichte ohne Überlieferung."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte wissen, dass Allah Offenbarungen herabsandte. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Muslim 8a behandelt die Glaubensgrundlagen.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Īmān an Allahs Bücher“ im Beispiel üben kannst."
+     "legacyPrompt": "Fachlich zu kontrollierende frühere Freitext-Frage."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:285?",
+     "prompt": "Wie unterscheiden wir Allahs Bücher von anderen Büchern?",
      "options": [
-      "Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
-      "Unser Übungsbeispiel ist: Wissen, dass Allah Offenbarungen herabsandte.",
-      "Die Hadith-Bedeutung lautet: Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung."
+      "Sie sind von Allah offenbarte Schriften.",
+      "Jedes ausgedruckte Buch ist Offenbarung."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Offenbarung ist nicht mit jedem Buch gleichzusetzen."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Īmān an Allahs Bücher“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Glaubensgrundlage wird in Qurʾān 2:285 ausdrücklich genannt?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Der Glaube an Allahs Bücher.",
+      "Die Pflicht, jeden Roman auswendig zu lernen."
      ],
      "correct": 0,
-     "hint": "Vergleiche 2:285 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Der Vers nennt die Bücher Allahs."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:285?",
+     "prompt": "Was ergänzt der Ḥadīṯ Ǧibrīl zur Vers-Aufzählung?",
      "options": [
-      "Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
-      "Unser Übungsbeispiel ist: Wissen, dass Allah Offenbarungen herabsandte."
+      "Unter anderem Jüngsten Tag und Vorherbestimmung.",
+      "Dass es nur vier Glaubensgrundlagen gäbe."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Die angegebene Sunnah lehrt sinngemäß: Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung.",
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Die sechs Grundlagen stehen im Ḥadīṯ Ǧibrīl.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 2:285 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Fachlich zu kontrollierende frühere Freitext-Frage."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Īmān an Allahs Bücher“?",
+     "prompt": "Was ist eine korrekte Unterscheidung?",
      "options": [
-      "Ich erkläre die Situation: wissen, dass Allah Offenbarungen herabsandte. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Offenbarte Schriften sind nicht dasselbe wie menschlich verfasste Bücher.",
+      "Jedes Buch eines Menschen wurde ihm als Offenbarung gesandt."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: wissen, dass Allah Offenbarungen herabsandte. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Prüfe die genannte Quelle und die passende Erklärung.",
+     "explain": "Die Offenbarungsherkunft ist entscheidend.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Īmān an Allahs Bücher“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Fachlich zu kontrollierende frühere Freitext-Frage."
     }
    ]
   },
