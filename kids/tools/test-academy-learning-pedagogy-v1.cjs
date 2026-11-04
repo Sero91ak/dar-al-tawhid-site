@@ -22,10 +22,10 @@ for(const n of [2,3,4,5]){
  assert.deepEqual(Array.from(order(q,0,"lesson-fixed:6-8")).map(x=>x.originalIndex),Array.from(order(q,0,"lesson-fixed:6-8")).map(x=>x.originalIndex),"Same question must retain stable order across retries");
 }
 assert(html.includes('choice=i;'),"Correctness must map to canonical answer index");
-assert(html.includes('q.type==="choice")academyDisplayChoices(q,qIndex,activeLessonId+":"+age).forEach(({text:t,originalIndex:i},visibleIndex)=>'),"Display order does not feed quiz");
+assert(html.includes('academyDisplayChoices(q,qIndex,activeLessonId+":"+age).forEach(({text:t,originalIndex:i},visibleIndex)=>'),"Every question must display selectable choices");
 assert(html.includes('speak(3,["Antwort "+(visibleIndex+1)+": "+t]);'),"Spoken answer numbering must match the visual order");
 assert(!html.includes('"Das war noch nicht die gesuchte Antwort. "+q.explain'),"First wrong attempt cannot disclose the answer");
-assert(html.includes('score.unverified=(Number(score.unverified)||0)+1;'),"Non-graded free answers must be recorded as unverified");
+assert(html.includes('if(q.adaptedFromText)score.unverified=(Number(score.unverified)||0)+1;'),"Adapted legacy open questions must remain unverified until editorial QA");
 assert(html.includes('unverifiedAnswerCount:Number(score.unverified)||0'),"Persist unverified counts without resetting prior records");
 assert(html.includes('score.choices>score.correct||score.neededHelp>0||(Number(score.unverified)||0)>0'),"Do not promote non-assessed answers to secure repetition");
 assert(html.includes('unverified:val(d.score.unverified)'),"Reading old drafts must default to zero while preserving ungraded answers");
@@ -36,4 +36,4 @@ const doc=fs.readFileSync("kids/akademie/LEARNING_ACADEMY_PEDAGOGY_MASTER_V1.md"
 for(const marker of ["Qurʾān","Ṣaḥīḥ al-Buḫārī","4–5 Jahre","6–8 Jahre","9–10 Jahre","Weitergeben","Sprechsegment","Freigabegate"]){
  assert(doc.includes(marker),"Teaching standard missing "+marker);
 }
-console.log("PASS: academy answers seeded by lesson/age, stable on retry without changing canonical correctness, spoken numbering matches, no first-error solution leak, no unverified credit, progress namespace intact");
+console.log("PASS: academy answers seeded by lesson/age, stable on retry without changing canonical correctness, spoken numbering matches, no first-error solution leak, legacy unverified count preserved, progress namespace intact");
