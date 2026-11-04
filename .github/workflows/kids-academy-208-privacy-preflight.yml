@@ -4,6 +4,10 @@ on:
     paths:
       - 'kids/akademie/**'
       - 'kids/tools/academy-208-privacy-audio-preflight.cjs'
+      - 'kids/tools/export-academy-208-v4-dedup-plan.cjs'
+      - 'kids/tools/export-academy-208-button-candidates.cjs'
+      - 'kids/tools/test-academy-v31-choice-only-review.cjs'
+      - 'kids/tools/audit-academy-v31-source-and-buttons.cjs'
       - 'kids/data/academy-voice-policy-v10.json'
       - '.github/workflows/kids-academy-208-privacy-preflight.yml'
   workflow_dispatch:
