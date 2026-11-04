@@ -15,6 +15,7 @@ on:
       - 'kids/review-only/academy-208-v4-approved-batch.json'
       - 'kids/review-only/academy-v4-first-two-hearing-probes-20261104.json'
       - 'kids/tools/audit-academy-v31-source-and-buttons.cjs'
+      - 'kids/tools/audit-academy-v31-editorial-quality.cjs'
       - 'kids/data/academy-voice-policy-v10.json'
       - '.github/workflows/kids-academy-208-privacy-preflight.yml'
   workflow_dispatch:
@@ -40,6 +41,7 @@ jobs:
           python3 -m py_compile kids/tools/build-academy-208-v4-staging.py
           python3 kids/tools/build-academy-208-v4-staging.py
           node kids/tools/audit-academy-v31-source-and-buttons.cjs artifacts/academy-142-source-review.json
+          node kids/tools/audit-academy-v31-editorial-quality.cjs artifacts/academy-142-editorial-quality.json
           node --check kids/tools/export-academy-208-v4-dedup-plan.cjs
           node kids/tools/export-academy-208-v4-dedup-plan.cjs artifacts/academy-208-v4-dedup-queue.json
           node kids/tools/export-academy-208-button-candidates.cjs artifacts/academy-208-button-review.json
@@ -53,6 +55,12 @@ jobs:
         with:
           name: academy-142-source-and-ux-review
           path: artifacts/academy-142-source-review.json
+          retention-days: 14
+      - name: Attach all-lesson editorial quality audit (no release approval)
+        uses: actions/upload-artifact@v4
+        with:
+          name: academy-142-editorial-quality-audit
+          path: artifacts/academy-142-editorial-quality.json
           retention-days: 14
       - name: Attach full deduplicated Serhat V4 voice plan (no paid synthesis)
         uses: actions/upload-artifact@v4
