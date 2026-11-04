@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 "use strict";
-/* REVIEW-ONLY exporter: 624 open questions become proposed button choices.
+/* REVIEW-ONLY exporter: 621 previously open questions tracked as button choices.
  * Nothing is written to child-app data; 0 ElevenLabs credits. */
 const fs=require("node:fs"),path=require("node:path"),vm=require("node:vm"),assert=require("node:assert/strict");
 const root=path.resolve(__dirname,"../..");
@@ -15,20 +15,24 @@ const drafts=Object.values(ctx.window.DARKidsAcademyEditorialV31);
 const rows=[],ages=["4-5","6-8","9-10"];
 for(const [lessons,isDraft] of [[legacy,false],[drafts,true]])for(const lesson of lessons)
  for(const age of ages)for(let i=0;i<lesson.questions[age].length;i++){
-  const q=lesson.questions[age][i];if(q.type!=="text")continue;
-  const sourceCorrect=String(q.sample||"").trim();
+  const q=lesson.questions[age][i];
+  const previouslyText=q.type==="text";
+  const converted=q.type==="choice"&&q.editorialReviewStatus==="pending-human-review"&&!!q.legacyPrompt;
+  if(!previouslyText&&!converted)continue;
+  const sourceCorrect=String(converted?q.options[q.correct]:(q.sample||"")).trim();
   const wrongOptions=lesson.questions[age].filter(x=>x.type==="choice")
    .flatMap(x=>x.options.filter((_,i)=>i!==x.correct));
-  const wrong=wrongOptions.find(t=>String(t).trim()&&String(t).trim()!==sourceCorrect)||
+  const wrong=converted?q.options.find((t,j)=>j!==q.correct):
+   wrongOptions.find(t=>String(t).trim()&&String(t).trim()!==sourceCorrect)||
    "Ich ignoriere die Lernregel und überlege nicht.";
   let buttonPrompt=String(q.prompt);
-  if(/^(Erkläre|Beschreibe|Entwirf|Nenne|Formuliere)/i.test(buttonPrompt))
+  if(previouslyText&&/^(Erkläre|Beschreibe|Entwirf|Nenne|Formuliere)/i.test(buttonPrompt))
    buttonPrompt="Welche Aussage beantwortet die Lernfrage zum Thema „"+lesson.topic+"“?";
-  else if(/^Wie erklärst du/.test(buttonPrompt))
+  else if(previouslyText&&/^Wie erklärst du/.test(buttonPrompt))
    buttonPrompt="Welche Erklärung passt zum Thema „"+lesson.topic+"“?";
   rows.push({lessonId:lesson.id,age,questionIndex:i+1,topic:lesson.topic,
    source:isDraft?"NEW_142_DRAFT":"EXISTING_66",
-   originalPrompt:q.prompt,proposedButtonPrompt:buttonPrompt,
+   originalPrompt:q.legacyPrompt||q.prompt,proposedButtonPrompt:buttonPrompt,
    options:[sourceCorrect,wrong],correctOption:0,
    review:{islamicSourceChecked:false,ageAppropriateChecked:false,
     wrongOptionChecked:false,audioApproved:false,childAppApproved:false},
