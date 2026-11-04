@@ -3279,13 +3279,15 @@ const additions={
      "type": "choice",
      "prompt": "Was bedeutet ihre gemeinsame Bitte?",
      "options": [
-      "Sie erwarteten nur Applaus.",
       "Sie baten Allah um Annahme ihrer guten Tat.",
+      "Sie erwarteten nur Applaus.",
       "Sie baten jemanden um Geld."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "An wen richtete sich ihr Bittgebet?",
-     "explain": "Sie baten Allah, ihr Werk anzunehmen."
+     "explain": "Sie baten Allah, ihr Werk anzunehmen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Ismāʿīl عليه السلام und Gehorsam gegenüber Allah“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -3317,13 +3319,15 @@ const additions={
      "type": "choice",
      "prompt": "Welche Rolle hat al-Buḫārī 3365?",
      "options": [
-      "Er widerspricht dem Qurʾān ohne Erklärung.",
       "Er überliefert zusätzliche Einzelheiten der Mithilfe Ismāʿīls.",
+      "Er widerspricht dem Qurʾān ohne Erklärung.",
       "Er enthält das heutige Klassenarbeitsblatt."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "Der Bericht ergänzt die Geschichte.",
-     "explain": "Der Ḥadīṯ nennt die Mithilfe beim Bau."
+     "explain": "Der Ḥadīṯ nennt die Mithilfe beim Bau.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 2:127 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
      "type": "choice",
@@ -3335,7 +3339,9 @@ const additions={
      ],
      "correct": 0,
      "hint": "Dienen gilt Allah, nicht bedingungslosem Gehorsam gegenüber Menschen.",
-     "explain": "Die Lektion ermutigt zu aufrichtigen guten Handlungen."
+     "explain": "Die Lektion ermutigt zu aufrichtigen guten Handlungen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Ismāʿīl عليه السلام und Gehorsam gegenüber Allah“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -3649,13 +3655,15 @@ const additions={
      "type": "choice",
      "prompt": "Was ist nach al-Buḫārī 6114 echte Stärke?",
      "options": [
-      "Den anderen besiegen.",
       "Sich im Zorn beherrschen.",
+      "Den anderen besiegen.",
       "Immer den letzten Satz sagen."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "Stärke ist nicht nur Körperkraft.",
-     "explain": "Selbstbeherrschung bei Wut wird gelobt."
+     "explain": "Selbstbeherrschung bei Wut wird gelobt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Streit ohne Gewalt lösen“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -3687,13 +3695,15 @@ const additions={
      "type": "choice",
      "prompt": "Was lässt sich aus 3:134 ableiten?",
      "options": [
+      "Zorn zurückhalten und nach Möglichkeit vergeben.",
       "Andere im Streit zu bedrohen.",
-      "Eigene Gefühle zu leugnen.",
-      "Zorn zurückhalten und nach Möglichkeit vergeben."
+      "Eigene Gefühle zu leugnen."
      ],
-     "correct": 2,
+     "correct": 0,
      "hint": "Beachte den belegten Umgang mit Zorn.",
-     "explain": "Der Vers lobt Beherrschung und Verzeihen."
+     "explain": "Der Vers lobt Beherrschung und Verzeihen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 3:134 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
      "type": "choice",
@@ -3705,7 +3715,9 @@ const additions={
      ],
      "correct": 0,
      "hint": "Sicherheit geht vor Schweigen.",
-     "explain": "Bei Gewalt soll Hilfe gesucht werden."
+     "explain": "Bei Gewalt soll Hilfe gesucht werden.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Streit ohne Gewalt lösen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -3840,7 +3852,9 @@ const additions={
      ],
      "correct": 0,
      "hint": "Der Ḥadīṯ nennt menschliche Barmherzigkeit als Vergleich.",
-     "explain": "Allah ist noch barmherziger gegenüber Seinen Dienern als eine Mutter gegenüber ihrem Kind."
+     "explain": "Allah ist noch barmherziger gegenüber Seinen Dienern als eine Mutter gegenüber ihrem Kind.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Allahs Barmherzigkeit kennenlernen“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -3878,19 +3892,23 @@ const additions={
      ],
      "correct": 0,
      "hint": "Es handelt sich um einen Ḥadīṯ.",
-     "explain": "Der Vergleich wird in al-Buḫārī 5999 überliefert."
+     "explain": "Der Vergleich wird in al-Buḫārī 5999 überliefert.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 39:53 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
      "type": "choice",
      "prompt": "Welche Haltung verbindet Hoffnung und Verantwortung?",
      "options": [
+      "Ich bereue ehrlich, bitte um Vergebung und bemühe mich um Verbesserung.",
       "Ich tue absichtlich weiter Unrecht, weil Barmherzigkeit groß ist.",
-      "Ich glaube, ein Fehler kann niemals vergeben werden.",
-      "Ich bereue ehrlich, bitte um Vergebung und bemühe mich um Verbesserung."
+      "Ich glaube, ein Fehler kann niemals vergeben werden."
      ],
-     "correct": 2,
+     "correct": 0,
      "hint": "Barmherzigkeit lädt zur aufrichtigen Umkehr ein.",
-     "explain": "Hoffnung und verantwortliches Verhalten gehören zusammen."
+     "explain": "Hoffnung und verantwortliches Verhalten gehören zusammen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Allahs Barmherzigkeit kennenlernen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
