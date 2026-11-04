@@ -12,9 +12,9 @@ for(const part of ["67-90","91-114","115-138","139-162","163-186","187-208"]){
 const all=ctx.window.DARKidsAcademyEditorialV31;
 assert.equal(Object.keys(all).length,142);
 const expected={
- "120":["21:107",5376,"Barmherzigkeit"],
+ "120":["21:107",5376,"barmherziger"],
  "132":["96:1",3,"Offenbarung"],
- "143":["33:21",631,"Vorbild"],
+ "143":["33:21",631,"Sunnah"],
  "144":["9:40",3653,"Hiǧrah"],
  "155":["4:59",3461,"Ḥadīṯ"],
  "156":["9:100",3651,"Ṣaḥābah"]
