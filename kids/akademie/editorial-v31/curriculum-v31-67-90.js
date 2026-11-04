@@ -3412,7 +3412,7 @@ const additions={
     "evidence": "Al-Buḫārī 6324 enthält das Lob beim Aufwachen. Qurʾān 33:41 erinnert allgemein an Allahs Gedenken."
    },
    "6-8": {
-    "intro": "ʿĀʾišah? Nein: Wer berichtete vom Lob beim Aufwachen?",
+    "intro": "Ḥuḏayfah berichtete vom Lob beim Aufwachen.",
     "lines": [
      "In al-Buḫārī 6324 berichtet Ḥuḏayfah über die Worte des Propheten ﷺ.",
      "Beim Schlafengehen und beim Aufwachen sind zwei unterschiedliche überlieferte Formeln genannt.",
