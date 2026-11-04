@@ -23,10 +23,17 @@ jobs:
           node kids/tools/test-academy-v31-142-editorial.cjs
           node kids/tools/academy-208-privacy-audio-preflight.cjs
           node kids/tools/test-academy-v31-choice-only-review.cjs
+          node kids/tools/audit-academy-v31-source-and-buttons.cjs artifacts/academy-142-source-review.json
           node kids/tools/export-academy-208-button-candidates.cjs artifacts/academy-208-button-review.json
       - name: Attach proposed answer choices for editorial review
         uses: actions/upload-artifact@v4
         with:
           name: academy-621-button-editorial-review
           path: artifacts/academy-208-button-review.json
+      - name: Attach 142-lesson source and compact-answer audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: academy-142-source-and-ux-review
+          path: artifacts/academy-142-source-review.json
+          retention-days: 14
           retention-days: 14
