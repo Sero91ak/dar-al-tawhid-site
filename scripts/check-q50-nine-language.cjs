@@ -38,6 +38,7 @@ assert.match(quiz,/id="qlNext" disabled/);
 assert.match(quiz,/id="qlRetry"/);
 assert.ok(!/<a[^>]*href="\/q\/\d+/i.test(quiz),"Quiz is for questions only, not evidence links");
 assert.equal((q.match(/class="qsource-link web"/g)||[]).length,6,"Two Āthār have three original links each");
+assert.equal((q.match(/class="qsource-links q50-link-grid"/g)||[]).length,2,"Each Āthār must have a distinct three-link original evidence group");
 assert.equal((q.match(/class="q50-ar" lang="ar" dir="rtl"/g)||[]).length,2,"Two immutable Arabic quotations required");
 const orig=pack.arabicOriginals;
 assert.ok(q.includes(orig.ibnSirin)&&q.includes(orig.ibnMubarak),"Original Arabic must match locale pack exactly");
