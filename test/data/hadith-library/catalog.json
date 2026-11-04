@@ -23,7 +23,8 @@
     "showGrade": true,
     "showSharh": true,
     "showSharhSource": true,
-    "requireVerifiedSharh": false
+    "requireVerifiedSharh": true,
+    "showAtharIsnadGrade": true
   },
   "syncRule": "Geprüfte HAD-Datensätze werden zentral aus /apple-tv/hadith/ geladen; kein zweiter manueller Push je Oberfläche.",
   "surfaces": {
@@ -33,5 +34,9 @@
     "visitorApp": true,
     "website": true,
     "androidWebApp": true
-  }
+  },
+  "latestId": "HAD-3359",
+  "publishedCount": 3359,
+  "hadithCount": 2408,
+  "atharCount": 951
 }
