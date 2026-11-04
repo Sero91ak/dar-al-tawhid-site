@@ -115,7 +115,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Allah vertrauen und sich bemühen“?",
      "options": [
       "Ich könnte für eine Aufgabe lernen und dabei Allah um Hilfe bitten. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -167,7 +167,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Allah vertrauen und sich bemühen“?",
      "options": [
       "Ich erkläre die Situation: für eine Aufgabe lernen und dabei Allah um Hilfe bitten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -302,7 +302,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Fragen zum Īmān stellen“?",
      "options": [
       "Ich könnte eine ehrliche Kinderfrage respektvoll beantworten lassen. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -354,7 +354,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Fragen zum Īmān stellen“?",
      "options": [
       "Ich erkläre die Situation: eine ehrliche Kinderfrage respektvoll beantworten lassen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -489,7 +489,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Mut zur Wahrheit“?",
      "options": [
       "Ich könnte eine unbequeme Wahrheit höflich sagen. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -541,7 +541,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Mut zur Wahrheit“?",
      "options": [
       "Ich erkläre die Situation: eine unbequeme Wahrheit höflich sagen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -676,7 +676,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Ältere respektvoll ansprechen“?",
      "options": [
       "Ich könnte mit einer älteren Person ruhig und freundlich sprechen. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -728,7 +728,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Ältere respektvoll ansprechen“?",
      "options": [
       "Ich erkläre die Situation: mit einer älteren Person ruhig und freundlich sprechen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -863,7 +863,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Regelmäßig um Vergebung bitten“?",
      "options": [
       "Ich könnte die Bedeutung eines belegten Istighfār kindgerecht verstehen. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -915,7 +915,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Regelmäßig um Vergebung bitten“?",
      "options": [
       "Ich erkläre die Situation: die Bedeutung eines belegten Istighfār kindgerecht verstehen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -1050,7 +1050,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Aus dem Rukūʿ aufrichten“?",
      "options": [
       "Ich könnte die aufrechte Haltung nach der Verbeugung üben. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -1102,7 +1102,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Aus dem Rukūʿ aufrichten“?",
      "options": [
       "Ich erkläre die Situation: die aufrechte Haltung nach der Verbeugung üben. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -1237,7 +1237,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Tawḥīd mit eigenen Worten erklären“?",
      "options": [
       "Ich könnte ein einfaches Beispiel zur alleinigen Anbetung Allahs geben. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -1289,7 +1289,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Tawḥīd mit eigenen Worten erklären“?",
      "options": [
       "Ich erkläre die Situation: ein einfaches Beispiel zur alleinigen Anbetung Allahs geben. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -1424,7 +1424,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Die sechs Glaubenssäulen wiederholen“?",
      "options": [
       "Ich könnte glaubensbegriffe nach Altersstufe ordnen und erklären. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -1476,7 +1476,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Die sechs Glaubenssäulen wiederholen“?",
      "options": [
       "Ich erkläre die Situation: glaubensbegriffe nach Altersstufe ordnen und erklären. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -1611,7 +1611,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Verantwortung für Worte übernehmen“?",
      "options": [
       "Ich könnte sich nach einer unfreundlichen Aussage entschuldigen. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -1663,7 +1663,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Verantwortung für Worte übernehmen“?",
      "options": [
       "Ich erkläre die Situation: sich nach einer unfreundlichen Aussage entschuldigen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -1798,7 +1798,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Jüngere freundlich behandeln“?",
      "options": [
       "Ich könnte ein jüngeres Kind behutsam unterstützen. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -1850,7 +1850,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Jüngere freundlich behandeln“?",
      "options": [
       "Ich erkläre die Situation: ein jüngeres Kind behutsam unterstützen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -1985,7 +1985,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Das Herz mit guten Taten pflegen“?",
      "options": [
       "Ich könnte eine Woche lang kleine gute Handlungen sammeln. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -2037,7 +2037,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Das Herz mit guten Taten pflegen“?",
      "options": [
       "Ich erkläre die Situation: eine Woche lang kleine gute Handlungen sammeln. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -2172,7 +2172,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Suǧūd kennenlernen“?",
      "options": [
       "Ich könnte stirn und Nase sicher auf die Gebetsunterlage bringen. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -2224,7 +2224,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Suǧūd kennenlernen“?",
      "options": [
       "Ich erkläre die Situation: stirn und Nase sicher auf die Gebetsunterlage bringen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -2359,7 +2359,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Fürsorge für Kranke“?",
      "options": [
       "Ich könnte einer kranken Person mit Zustimmung kleine Hilfe anbieten. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -2411,7 +2411,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Fürsorge für Kranke“?",
      "options": [
       "Ich erkläre die Situation: einer kranken Person mit Zustimmung kleine Hilfe anbieten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -2546,7 +2546,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Anderen Platz machen“?",
      "options": [
       "Ich könnte in einer Gruppe rücksichtsvoll Platz teilen. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -2598,7 +2598,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Anderen Platz machen“?",
      "options": [
       "Ich erkläre die Situation: in einer Gruppe rücksichtsvoll Platz teilen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -2733,7 +2733,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Zwischen zwei Niederwerfungen sitzen“?",
      "options": [
       "Ich könnte die ruhige Sitzhaltung mit Anleitung üben. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -2785,7 +2785,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Zwischen zwei Niederwerfungen sitzen“?",
      "options": [
       "Ich erkläre die Situation: die ruhige Sitzhaltung mit Anleitung üben. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -2920,7 +2920,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Guter Charakter im Wochenrückblick“?",
      "options": [
       "Ich könnte eine eigene freundliche Entscheidung wiedergeben. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -2972,7 +2972,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Guter Charakter im Wochenrückblick“?",
      "options": [
       "Ich erkläre die Situation: eine eigene freundliche Entscheidung wiedergeben. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -3107,7 +3107,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Digitalen Adab üben“?",
      "options": [
       "Ich könnte vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -3159,7 +3159,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Digitalen Adab üben“?",
      "options": [
       "Ich erkläre die Situation: vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -3294,7 +3294,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Tashahhud als Gebetsbestandteil“?",
      "options": [
       "Ich könnte die Sitzphase im Gebet wiedererkennen. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -3346,7 +3346,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Tashahhud als Gebetsbestandteil“?",
      "options": [
       "Ich erkläre die Situation: die Sitzphase im Gebet wiedererkennen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -3481,7 +3481,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Den Gebetsabschluss kennenlernen“?",
      "options": [
       "Ich könnte taslīm als Abschluss erkennen. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -3533,7 +3533,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Den Gebetsabschluss kennenlernen“?",
      "options": [
       "Ich erkläre die Situation: taslīm als Abschluss erkennen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -3668,7 +3668,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Fehler beim Üben des Gebets“?",
      "options": [
       "Ich könnte bei Unsicherheit einen qualifizierten Lehrer fragen. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -3720,7 +3720,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Fehler beim Üben des Gebets“?",
      "options": [
       "Ich erkläre die Situation: bei Unsicherheit einen qualifizierten Lehrer fragen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -3855,7 +3855,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Ramaḍān und Fasten kennenlernen“?",
      "options": [
       "Ich könnte mit Rücksicht auf das Alter über den Fastenmonat sprechen. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -3907,7 +3907,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Ramaḍān und Fasten kennenlernen“?",
      "options": [
       "Ich erkläre die Situation: mit Rücksicht auf das Alter über den Fastenmonat sprechen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
@@ -4042,7 +4042,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage beschreibt eine gute Alltagsübung?",
+     "prompt": "Welche Aussage ist eine gute Übung zu „Zakāh und Ḥaǧǧ als Säulen“?",
      "options": [
       "Ich könnte die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
       "Ich übergehe die Lernaufgabe und höre nicht zu."
@@ -4094,7 +4094,7 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung und Rückfrage passt zum Lerninhalt?",
+     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Zakāh und Ḥaǧǧ als Säulen“?",
      "options": [
       "Ich erkläre die Situation: die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
       "Ich erkläre nichts und frage nicht nach."
