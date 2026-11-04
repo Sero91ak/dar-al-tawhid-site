@@ -56,7 +56,7 @@ function sourceRender(){
  text("q50Learning","📚 "+p.ui.study);
  var a=id("q50Learning");if(a)a.href=link("/lernen/wissen-ist-religion/");
  text("q50Review",p.approved?"":p.ui.review);
- text("q50Language",c);var picker=id("q50Language");if(picker)picker.value=c;
+ var picker=id("q50Language");if(picker)picker.value=c;
  document.title=p.title+" | Q50 · DĀR AL TAWḤĪD";
 }
 function makeOption(label,index,c){
@@ -119,7 +119,7 @@ function attach(){
   var a=id("q50Learning");
   if(a)a.addEventListener("click",function(ev){
    if(window.parent===window||!window.parent.postMessage)return;
-   ev.preventDefault();window.parent.postMessage({type:"DAR_Q50_READER_NAV_V1",path:link("/lernen/wissen-ist-religion/")},location.origin);
+   ev.preventDefault();var siteOrigin=new URL(document.baseURI||location.href).origin;window.parent.postMessage({type:"DAR_Q50_READER_NAV_V1",path:link("/lernen/wissen-ist-religion/")},siteOrigin);
   });
  }
  window.addEventListener("storage",function(ev){
