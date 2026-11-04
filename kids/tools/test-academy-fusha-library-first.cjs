@@ -41,6 +41,37 @@ for(const s of library.approvedStoryReferences){
 }
 assert.deepEqual(quran.map(s=>s.id),["muhammad"]);
 assert.deepEqual(iman.map(s=>s.id),["adam","idris"]);
+
+assert.equal(library.originalExistingAudioFilesMustNotBeReencodedOrRegenerated,true);
+const inventories=library.otherExistingAudioInventories;
+assert.equal(inventories.length,7);
+let knownClips=0;
+for(const inventory of inventories){
+ const full=path.join(root,inventory.path);
+ assert(fs.existsSync(full),"Existing audio library missing "+inventory.path);
+ if(inventory.discoveredClipFiles===null){
+  assert.equal(inventory.requiresStructuralScan,true);
+  continue;
+ }
+ const data=read(inventory.path);
+ let count=0,approved=0;
+ if(inventory.id==="quiz-v4-public-library"){
+  assert.equal(Object.keys(data.questions||{}).length,450);
+  for(const quiz of Object.values(data.questions||{}))
+   for(const clip of Object.values(quiz.clips||{})){
+    if(clip?.url&&clip.sha256)count++;
+    if(clip?.humanListeningApproved===true&&clip?.approvedForPlayback===true)approved++;
+   }
+  assert.equal(approved,inventory.humanApprovedClips);
+ }else{
+  count=Object.values(data.entries||{}).filter(x=>x?.url&&x?.sha256).length;
+ }
+ assert.equal(count,inventory.discoveredClipFiles,"Audio library inventory drift "+inventory.path);
+ knownClips+=count;
+}
+assert.equal(knownClips,2198);
+
 console.log("PASS: Library-first corpus: three original owner-confirmed MP3 story references.");
 console.log("PASS: Qurʾān → Muḥammad original; Īmān → Ādam/Idrīs originals.");
+console.log("PASS: 2198 existing audio clips indexed across quiz/dua/terms, plus 2 large owner-voice/quiz manifests reserved for scanning.");
 console.log("REVIEW LOCK: Full recordings are NOT isolated word clips; no AI Quran, no new credits.");
