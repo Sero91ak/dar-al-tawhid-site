@@ -6,11 +6,11 @@ const box=vm.createContext({window:{}});
 for(const f of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2.js","kids/akademie/curriculum-v22.js","kids/akademie/curriculum-v25.js","kids/akademie/curriculum-v26.js"])new vm.Script(read(f),{filename:f}).runInContext(box,{timeout:2500});
 const all=box.window.DARKidsAcademyCurriculum,pack=box.window.DARKidsAcademyCurriculumV26;
 const expected=[
- ["fiqh-reinheit-unterscheiden","fiqh","5:6","223","https://dorar.net/hadith/sharh/139891",true],
+ ["fiqh-reinheit-unterscheiden","fiqh","5:6","223","https://sunnah.com/muslim:223",true],
  ["aqidah-quran-allahs-wort","quran","2:2","5027","https://dorar.net/hadith/sharh/151215",false],
  ["aqidah-sirah-adam-erschoepfung","sirah","3:59","3326","https://dorar.net/hadith/sharh/12842",false],
  ["adab-morgen-dhikr","dua","33:41","2692","https://dorar.net/hadith/sharh/152577",false],
- ["adab-eltern-freundlich","family","17:23","5971","https://dorar.net/hadith/sharh/36698",true]
+ ["adab-eltern-freundlich","family","17:23","5971","https://sunnah.com/bukhari:5971",true]
 ];
 assert.equal(Object.keys(all).length,49,"49 normal lessons plus one Ṣidq foundation");
 assert.equal(pack.count,5);assert.deepEqual(Array.from(pack.ids),expected.map(v=>v[0]));
