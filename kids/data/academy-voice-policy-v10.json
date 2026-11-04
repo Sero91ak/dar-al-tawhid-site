@@ -30,7 +30,18 @@
     "pronunciationDictionaryId": "Q8w3SxtoVo8NSjsnlJEd",
     "pronunciationDictionaryVersionId": "wSzgkGpAwEDiTak8DApc",
     "revision": "kids-story-v4-same-speaker-20261010",
-    "languagePolicy": "German lesson narration with correctly pronounced Fuṣḥā terminology. Quran Arabic recitation is always genuine recitation, never synthetic."
+    "languagePolicy": "German lesson narration with correctly pronounced Fuṣḥā terminology. Quran Arabic recitation is always genuine recitation, never synthetic.",
+    "effectiveLanguageIsolation": {
+      "languageCodeForGerman": "de",
+      "languageCodeForNativeFusha": "ar",
+      "nativeArabicScriptSeparateSegmentOnly": true,
+      "mixedScriptAutomaticGenerationAllowed": false,
+      "germanPronunciationDictionaryLocators": [],
+      "arabicPronunciationDictionaryLocators": [],
+      "globalArabicMasterDictionaryIdIsHistoricalReferenceOnly": true,
+      "doNotApplyMasterArabicPlsToGermanNur": true,
+      "backendSource": "cloudflare/video-studio/voice.js"
+    }
   },
   "costControls": {
     "zeroCreditsForPlayback": true,
@@ -59,6 +70,9 @@
       "no breathing artifacts, abrupt endings or distorted pitch",
       "no speed-shift from native generated recording"
     ],
-    "verifiedSimilarityPercent": null
+    "verifiedSimilarityPercent": null,
+    "germanNurVersusArabicNurCollisionRequiresHearing": true,
+    "fushaLoanwordsRequireHearing": true,
+    "creatorVoicePreviewsAreNotCertifiedProductionProfile": true
   }
 }
