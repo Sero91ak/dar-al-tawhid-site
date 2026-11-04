@@ -51,6 +51,57 @@ const fingerprint=hash(JSON.stringify({voice,model,profile,
  settings:policy.production.voiceSettings,languageCode:"de",
  pronunciationDictionaryLocators:[] /* German and Arabic remain isolated. */}));
 const normalize=s=>String(s||"").normalize("NFC").replace(/\s+/g," ").trim();
+
+/* Read the previously paid audio manifests FIRST, at zero credits. An exact
+ * phrase may exist elsewhere but remains a REVIEW candidate until waveform,
+ * speaker, voice settings, text and human listening match Academy kids_story. */
+const paidAudioIndex=new Map();
+let paidAudioLibraryRecords=0,paidAudioLibraryManifests=0;
+function recordExistingPaid(phrase,meta,sourceFile){
+ const key=normalize(phrase);
+ if(!key||typeof meta!=="object"||!meta)return;
+ const url=String(meta.url||"").split("?")[0];
+ const digest=String(meta.sha256||"");
+ if(!url.startsWith("/kids/assets/")||!(/^[a-f0-9]{64}$/).test(digest))return;
+ const row={sourceFile,url,sha256:digest,
+  modelId:meta.modelId||null,voiceId:meta.voiceId||null,
+  voiceSettingsProfile:meta.voiceSettingsProfile||meta.speechProfile||null,
+  humanListeningApproved:meta.humanListeningApproved===true,
+  approvedForPlayback:meta.approvedForPlayback===true,
+  automaticallyCertifiedForAcademy:false};
+ if(!paidAudioIndex.has(key))paidAudioIndex.set(key,[]);
+ paidAudioIndex.get(key).push(row);paidAudioLibraryRecords++;
+}
+function scanOtherPaidLibrary(node,source,depth=0){
+ if(!node||typeof node!=="object"||depth>10)return;
+ if(typeof node.text==="string")recordExistingPaid(node.text,node,source);
+ if(Array.isArray(node)){for(const value of node)scanOtherPaidLibrary(value,source,depth+1);}
+ else {for(const [key,value] of Object.entries(node)){
+  if(value&&typeof value==="object")scanOtherPaidLibrary(value,source,depth+1);
+ }}
+}
+for(const lib of fua.otherExistingAudioInventories||[]){
+ const src=lib.path;
+ if(!src||!fs.existsSync(path.join(root,src)))continue;
+ const data=json(src);paidAudioLibraryManifests++;
+ if(src.endsWith("/quiz-v4-full-rebuild-public.json")){
+  for(const quiz of Object.values(data.questions||{}))
+   for(const clip of Object.values(quiz.clips||{}))
+    if(clip?.text)recordExistingPaid(clip.text,clip,src);
+ }else if(src.endsWith("/term-learning-audio.json")){
+  for(const clip of Object.values(data.entries||{}))
+   if(clip?.text)recordExistingPaid(clip.text,clip,src);
+ }else if(src.endsWith("/dua-audio.json")||src.endsWith("/dua-arabic-audio.json")||src.endsWith("/dua-arabic-slow-audio.json")){
+  for(const [phrase,clip] of Object.entries(data.entries||{}))
+   recordExistingPaid(clip?.text||phrase,clip,src);
+ }else{
+  scanOtherPaidLibrary(data,src);
+ }
+}
+function exactExistingPaidAudio(phrase){
+ return (paidAudioIndex.get(normalize(phrase))||[]).slice(0,12);
+}
+
 const phrases=new Map(),mixedArabicBlocked=[];
 const arabic=/[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff\ufb50-\ufdff\ufe70-\ufeff]/;
 const loanTerms=/(?:Qurʾān|Fuṣḥā|Tawḥīd|Īmān|Iḥsān|Ḥadīṯ|Ṣalāh|Ṣadaqah|Ramaḍān|Duʿāʾ|Wuḍūʾ|Zakāh|Ṣaḥābah|Sūrah|Sūrat|Allāhumma|Allāh|ʿUṯmān|ʿĀʾišah|Abū|Allah)/giu;
@@ -170,6 +221,8 @@ const result=[...phrases.values()];
 for(const row of result){
  row.ownerPronunciationAudioLibrarySources=ownerApprovedPronunciationReferences(row.text);
  row.referenceLibraryChecked=true;
+ row.existingPaidExactTextAudioCandidates=exactExistingPaidAudio(row.text);
+ row.existingPaidAudioCandidateRequiresProfileHashAndHearingReview=row.existingPaidExactTextAudioCandidates.length>0;
  row.canAutospliceAWordFromLongStory=false;
  row.quranLoanwordNeedsApprovedAudioReview=quranTerm.test(row.text);
  if(row.quranLoanwordNeedsApprovedAudioReview){
@@ -194,6 +247,10 @@ const report={schemaVersion:1,kind:"KIDS_ACADEMY_208_V4_DEDUP_REVIEW_QUEUE",
  existingOpenQuestionsStillAdaptedInUI:legacyOpen,
  candidateUniqueSpeechTexts:result.length,
  ownerConfirmedPronunciationStoryReferences:fua.approvedStoryReferences.length,
+ existingPaidAudioManifestsScanned:paidAudioLibraryManifests,
+ existingPaidAudioFilesIndexed:paidAudioLibraryRecords,
+ textPhrasesWithExactPaidAudioCandidate:result.filter(p=>p.existingPaidExactTextAudioCandidates.length>0).length,
+ exactPaidAudioCandidatesWereNeverAutoPromoted:true,
  phrasesWithOwnerPronunciationReference:result.filter(p=>p.ownerPronunciationAudioLibrarySources.length>0).length,
  quranLoanwordPhrases:result.filter(p=>p.quranLoanwordNeedsApprovedAudioReview).length,
  quranPhrasesWithExactOwnerStoryReference:result.filter(p=>p.quranPronunciationEvidencePresent===true).length,
@@ -221,5 +278,6 @@ console.log("GATED: 426 editorial button choices; 195 legacy UI conversions stil
 console.log("Language safety: "+mixedArabicBlocked.length+" mixed-script phrases blocked from the voice queue.");
 console.log("Fuṣḥā listening review: "+report.fushaRomanizedReviewPhrases+" romanized-loan phrases; German nur QA: "+report.germanNurWatchPhrases+".");
 console.log("AUDIO LIBRARY FIRST: "+report.ownerConfirmedPronunciationStoryReferences+" owner-approved story references, "+report.phrasesWithOwnerPronunciationReference+" matched phrases (Qurʾān: "+report.quranPhrasesWithExactOwnerStoryReference+"/"+report.quranLoanwordPhrases+"). No long-story word extraction.");
+console.log("PAID LIBRARY CHECK: "+report.existingPaidAudioFilesIndexed+" existing files indexed across "+report.existingPaidAudioManifestsScanned+" manifests, "+report.textPhrasesWithExactPaidAudioCandidate+" exact text candidates (NOT auto-approved).");
 console.log("Synthesis policy: language_code=de, empty dictionary locators; no cross-language Arabic PLS.");
 console.log("0 audio calls / 0 credits / no synthesized Quran.");
