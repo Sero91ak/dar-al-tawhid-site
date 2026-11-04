@@ -11,6 +11,15 @@ assert.ok(!page.includes('id="mic"')&&!page.includes('id="voicePlayback"'),"No c
 for(const blocked of ["getUserMedia","MediaRecorder","beginVoiceRecording","finishRecording","kids-academy-writing-keyboard-v1438","mode(\"voice\")","mode(\"text\")"])
  assert.ok(!page.includes(blocked),"Child recording or free answer code remains: "+blocked);
 assert.ok(page.includes('id="choices"')&&page.includes('id="check"')&&page.includes('id="choiceAudioHelp"'),"Button answers and listening must remain");
+
+const preview=read("desktop-preview/kids-akademie-unterricht.html");
+for(const blocked of ['id="answer"','id="openWrite"','id="openVoice"','id="mic"','id="voicePlayback"',
+ "getUserMedia","MediaRecorder","beginVoiceRecording","finishRecording"])
+ assert.ok(!preview.includes(blocked),"Preview still offers child writing or recording: "+blocked);
+assert.ok(preview.includes('id="choices"')&&preview.includes('id="check"')&&
+ preview.includes("function academySelectableQuestion(")&&preview.includes("function speak(index,custom)"),
+ "Preview must mirror the approved, audio-capable button-only Academy");
+
 assert.ok(page.includes('function playRecitation(')&&page.includes('function speak(index,custom)'),'Teacher audio and Qurʾān playback must remain');
 assert.ok(page.includes('const VERSION="academy-v4"')&&page.includes('function readDraft()')&&page.includes('function saveDraft('),"Existing child progress schema must remain");
 assert.ok(page.includes('KIDS_LESSON_CAPSULE_RESTORE_V1446')&&page.includes('id="stageSurface"'),"Original scroll layout must remain");
