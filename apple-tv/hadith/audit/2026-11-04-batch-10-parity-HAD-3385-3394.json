@@ -1,0 +1,47 @@
+{
+  "project": "DĀR AL TAWḤĪD – globale Ḥadīṯ- und Āṯār-Synchronisierung",
+  "date": "2026-11-04",
+  "batchSize": 10,
+  "from": "HAD-3385",
+  "through": "HAD-3394",
+  "type": "athar",
+  "source": "Ibn Abī Šaybah, al-Muṣannaf, Kitāb al-Adab, vol. 6",
+  "sourceReports": {
+    "HAD-3385": "121/1",
+    "HAD-3386": "121/2",
+    "HAD-3387": "121/4",
+    "HAD-3388": "121/5",
+    "HAD-3389": "121/6",
+    "HAD-3390": "121/8",
+    "HAD-3391": "174/4",
+    "HAD-3392": "174/7",
+    "HAD-3393": "174/14",
+    "HAD-3394": "176/5"
+  },
+  "sources": [
+    "https://islamweb.net/ar/library/content/10/3602/%D8%AA%D8%B0%D8%A7%D9%83%D8%B1-%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB",
+    "https://www.islamweb.net/ar/library/content/10/3650/%D9%85%D9%86-%D8%B1%D8%AE%D8%B5-%D9%81%D9%8A-%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B9%D9%84%D9%85",
+    "https://www.islamweb.net/ar/library/content/10/3652/%D9%85%D9%86-%D9%83%D8%A7%D9%86-%D9%8A%D8%AD%D8%A8-%D8%A3%D9%86-%D9%8A%D8%AC%D9%8A%D8%A1-%D8%A8%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB-%D9%83%D9%85%D8%A7-%D8%B3%D9%85%D8%B9"
+  ],
+  "editorial": [
+    "Original excerpts and transmission paths checked against Arabic work pages.",
+    "Separate scholarly attribution and meaningful paraphrase; no invented Sharh.",
+    "These are early Athar, not automatically authentic marfu Prophetic statements.",
+    "Individual chain grading is not complete: unresolved narrators/gaps explicitly disclosed.",
+    "Targeted duplicates search in the canonical GitHub corpus, not a full semantic similarity scan.",
+    "Avoid asserting separate print pagination where only digital page is available."
+  ],
+  "deployment": [
+    "Full canonical catalog is shared by all public production surfaces (Web, iOS, Android, tvOS).",
+    "All live public surfaces must use same count and ascending canonical sequence; metadata and TV shell validator added.",
+    "Test App uses a representative capped sample (default 120), not the entire canonical library.",
+    "Internal HAD record keys never appear as visible card/reader/source/share numbering.",
+    "tvOS screensaver keeps its pre-existing shuffle-rotation but uses full canonical inventory."
+  ],
+  "currentCounts": {
+    "total": 3394,
+    "hadith": 2408,
+    "athar": 986
+  },
+  "nextInternalId": "HAD-3395"
+}
