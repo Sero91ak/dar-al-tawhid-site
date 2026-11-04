@@ -2998,7 +2998,7 @@ const additions={
   "topic": "Digitalen Adab üben",
   "title": "Adab · Digitalen Adab üben",
   "lead": "Heute lernen wir: Digitalen Adab üben.",
-  "goal": "Ich kann vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich erkenne, wie freundliche Worte, Datenschutz und Vorsicht auch bei Nachrichten auf Geräten gelten.",
   "quran": {
    "surah": 17,
    "ayah": 53,
@@ -3024,141 +3024,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist.",
-  "sample": "Bei „Digitalen Adab üben“ übe ich: vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist.",
+  "hint": "Nicht alles weiterleiten: erst nachdenken und bei Unsicherheit einen Erwachsenen fragen.",
+  "sample": "Bevor ich eine Nachricht weiterleite, überlege ich, ob sie freundlich ist und niemandem schadet.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Digitalen Adab üben.",
+    "intro": "Auch auf Bildschirmen wollen wir freundlich sein.",
     "lines": [
-     "Wir lernen heute: Digitalen Adab üben.",
-     "Wir üben vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Ein Bild oder eine Nachricht kann einen Menschen freuen oder traurig machen.",
+     "Wir machen uns nicht über andere lustig.",
+     "Private Bilder oder Namen geben wir nicht einfach weiter.",
+     "Wenn etwas Unheimliches erscheint, holen wir einen vertrauten Erwachsenen."
     ],
-    "evidence": "Qurʾān 17:53 lehrt: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 17:53 lehrt gute Worte; der Umgang mit digitalen Bildern ist eine heutige Anwendung."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist.",
+    "intro": "Gute Worte gelten auch für digitale Nachrichten.",
     "lines": [
-     "Heute untersuchen wir das Thema „Digitalen Adab üben“.",
-     "Der Qurʾān spricht in 17:53 darüber: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 6018 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist. Wir überlegen gemeinsam, warum es passt."
+     "Qurʾān 17:53 fordert, auf gute Weise zu sprechen.",
+     "Al-Buḫārī 6018 mahnt dazu, Gutes zu sagen oder zu schweigen.",
+     "Bevor wir etwas weiterleiten, achten wir auf den Inhalt und den Schutz anderer.",
+     "Bei Drohungen, Geheimnisdruck oder fremden Kontakten wenden wir uns an vertraute Erwachsene."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Der Qurʾān und Ḥadīṯ behandeln Sprache und Verhalten; konkrete digitale Sicherheitsregeln sind pädagogische Anwendungen."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Digitalen Adab üben“.",
+    "intro": "Digitaler Adab verbindet Wahrhaftigkeit, Rücksicht und Schutz der Privatsphäre.",
     "lines": [
-     "Ausgangssituation: Vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist.",
-     "Qurʾān 17:53: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 6018): Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 17:53 spricht davon, in der besten Weise zu reden, und warnt vor Streit.",
+     "Al-Buḫārī 6018 beschreibt die Verantwortung für gesprochene Worte.",
+     "Diese Grundsätze können auf Nachrichten angewendet werden; im Vers steht nicht wörtlich „Smartphone“.",
+     "Wir teilen keine privaten Daten, Bilder oder Anschuldigungen ohne Recht und suchen bei gefährlichen Nachrichten vertrauenswürdige Hilfe."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Quellentreue: Der Offenbarungstext liefert das Verhaltensprinzip, die digitale Schutzregel ist seine heutige Anwendung."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Digitalen Adab üben“ eine gute Handlung?",
+     "prompt": "Jemand schickt ein peinliches Bild. Was machst du?",
      "options": [
-      "Ich kann vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Ich zeige es allen.",
+      "Ich leite es nicht weiter und hole bei Bedarf Hilfe."
      ],
-     "correct": 0,
-     "hint": "Denk an die Übung: Vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist.",
-     "explain": "Unser Lernbeispiel ist: Vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist."
+     "correct": 1,
+     "hint": "Denke an die Gefühle und die Privatsphäre anderer.",
+     "explain": "Ein peinliches Bild soll nicht weiterverbreitet werden."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Digitalen Adab üben“ tun?",
+     "prompt": "Wer hilft, wenn dich etwas auf dem Bildschirm erschreckt?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Ein vertrauter Erwachsener.",
+      "Niemand, ich muss allein zurechtkommen."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Du darfst sofort Hilfe holen.",
+     "explain": "Bei belastenden Inhalten hilft ein vertrauter Erwachsener."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Digitalen Adab üben“. Welche Handlung passt zur Stunde?",
+     "prompt": "Welche digitale Handlung passt zu gutem Adab?",
      "options": [
-      "Ich kann vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Ein Gerücht ungeprüft teilen.",
+      "Jemanden in einer Gruppe beleidigen.",
+      "Eine verletzende Nachricht nicht verbreiten."
      ],
-     "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist.",
-     "explain": "Unser Lernbeispiel ist: Vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist."
+     "correct": 2,
+     "hint": "Was schützt andere vor Schaden?",
+     "explain": "Nichtverbreiten verletzender Inhalte ist rücksichtsvoll."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist eine gute Übung zu „Digitalen Adab üben“?",
+     "prompt": "Was sagt al-Buḫārī 6018 sinngemäß?",
      "options": [
-      "Ich könnte vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich übergehe die Lernaufgabe und höre nicht zu."
+      "Gutes sagen oder schweigen.",
+      "Jede Nachricht ungeprüft versenden.",
+      "Andere online bloßstellen."
      ],
      "correct": 0,
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung.",
-     "explain": "Ich könnte vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Digitalen Adab üben“ im Beispiel üben kannst."
+     "hint": "Gute Worte stehen im Mittelpunkt.",
+     "explain": "Der Ḥadīṯ lehrt verantwortungsvollen Umgang mit Worten."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 17:53?",
+     "prompt": "Ein Fremder verlangt persönliche Angaben. Was ist sicher?",
      "options": [
-      "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen.",
-      "Unser Übungsbeispiel ist: Vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen."
+      "Adresse und Fotos schicken.",
+      "Nicht antworten und einen vertrauten Erwachsenen holen.",
+      "Ein Geheimnis daraus machen."
      ],
-     "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "correct": 1,
+     "hint": "Deine privaten Informationen brauchen Schutz.",
+     "explain": "Private Angaben gehören nicht an unbekannte Kontakte."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Digitalen Adab üben“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Was ist die korrekte Quellenunterscheidung?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "17:53 nennt ausdrücklich eine Chat-App.",
+      "17:53 lehrt gute Worte; die Online-Anwendung ist eine Folgerung.",
+      "Alle Nachrichten sind automatisch religiöse Quellen."
      ],
-     "correct": 0,
-     "hint": "Vergleiche 17:53 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "correct": 1,
+     "hint": "Vergleiche Wortlaut und neue Situation.",
+     "explain": "Der Grundsatz ist belegt, die technische Plattform ist eine moderne Anwendung."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 17:53?",
+     "prompt": "Welche Nachricht sollte nicht verbreitet werden?",
      "options": [
-      "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen.",
-      "Unser Übungsbeispiel ist: Vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist."
+      "Ein peinliches Foto ohne Zustimmung.",
+      "Eine neutrale Terminbestätigung der Eltern.",
+      "Eine höfliche Frage an eine bekannte Lehrkraft."
      ],
      "correct": 0,
-     "hint": "Wähle die passende Aussage zum Qurʾān-Vers. Die Sunnah wird in der Erklärung erläutert.",
-     "explain": "Der Vers bedeutet sinngemäß: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 17:53 genau? Welche Aussage stammt aus der Sunnah?"
+     "hint": "Achte auf Privatsphäre und Schutz.",
+     "explain": "Ein Foto ohne Zustimmung weiterzugeben kann andere schädigen."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Digitalen Adab üben“?",
+     "prompt": "Bei Online-Drohungen solltest du...",
      "options": [
-      "Ich erkläre die Situation: vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und frage nicht nach."
+      "allein zurückdrohen.",
+      "alles löschen und niemandem erzählen.",
+      "Beweise sicher mit Erwachsenen besprechen und Hilfe holen."
      ],
-     "correct": 0,
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen.",
-     "explain": "Ich erkläre die Situation: vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Digitalen Adab üben“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "correct": 2,
+     "hint": "Sicherheit geht vor Geheimhaltung gegenüber Helfenden.",
+     "explain": "Vertraute Erwachsene sollen beim Umgang mit Drohungen helfen."
     }
    ]
   },
@@ -3185,7 +3183,7 @@ const additions={
   "topic": "Tashahhud als Gebetsbestandteil",
   "title": "Fiqh · Tashahhud als Gebetsbestandteil",
   "lead": "Heute lernen wir: Tashahhud als Gebetsbestandteil.",
-  "goal": "Ich kann die Sitzphase im Gebet wiedererkennen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich erkenne den Tashahhud als überlieferten Bestandteil des Gebets und verwechsle das gesprochene Bitt- und Grußwort nicht mit dem Qurʾān.",
   "quran": {
    "surah": 20,
    "ayah": 14,
@@ -3211,141 +3209,139 @@ const additions={
    "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
-  "hint": "Die Sitzphase im Gebet wiedererkennen.",
-  "sample": "Bei „Tashahhud als Gebetsbestandteil“ übe ich: die Sitzphase im Gebet wiedererkennen.",
+  "hint": "Tashahhud wird während einer Sitzphase im Gebet gesprochen.",
+  "sample": "Im Gebet gibt es ein Sitzen, bei dem der Tashahhud gesprochen wird.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Tashahhud als Gebetsbestandteil.",
+    "intro": "Beim Gebet sitzen wir auch und sprechen den Tashahhud.",
     "lines": [
-     "Wir lernen heute: Tashahhud als Gebetsbestandteil.",
-     "Wir üben die Sitzphase im Gebet wiedererkennen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Das Gebet hat Stehen, Verbeugen, Niederwerfen und Sitzen.",
+     "In einer Sitzphase wird der Tashahhud gesprochen.",
+     "Wir lernen ihn langsam von einer geeigneten Lehrperson.",
+     "Der Tashahhud ist kein Qurʾān-Vers."
     ],
-    "evidence": "Qurʾān 20:14 lehrt: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Al-Buḫārī 831 berichtet vom Tashahhud im Gebet; Qurʾān 20:14 gebietet das Gebet."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Die Sitzphase im Gebet wiedererkennen.",
+    "intro": "Tashahhud: Was wir sagen und woher wir es lernen.",
     "lines": [
-     "Heute untersuchen wir das Thema „Tashahhud als Gebetsbestandteil“.",
-     "Der Qurʾān spricht in 20:14 darüber: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 831: Der Prophet ﷺ lehrte den Tashahhud im Sitzen.",
-     "Unser eigenes Beispiel: Die Sitzphase im Gebet wiedererkennen. Wir überlegen gemeinsam, warum es passt."
+     "Der Tashahhud wird in einer Sitzphase des Gebets gesprochen.",
+     "Al-Buḫārī 831 überliefert die Unterweisung des Propheten ﷺ zum Tashahhud.",
+     "Er enthält Lob für Allah und Friedensgrüße; die genaue arabische Fassung lernen wir zuverlässig.",
+     "Wir verwechseln den überlieferten Tashahhud nicht mit einem frei formulierten deutschen Gebet."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Der konkrete Tashahhud ist Sunnah; der Qurʾān-Vers 20:14 weist allgemein auf das Gebet hin."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Tashahhud als Gebetsbestandteil“.",
+    "intro": "Tashahhud als Teil der Propheten-Sunnah differenziert einordnen.",
     "lines": [
-     "Ausgangssituation: Die Sitzphase im Gebet wiedererkennen.",
-     "Qurʾān 20:14: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 831): Der Prophet ﷺ lehrte den Tashahhud im Sitzen. (sinngemäß)",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 20:14 ordnet die Verrichtung des Gebets an, ohne den Tashahhud-Wortlaut zu enthalten.",
+     "Al-Buḫārī 831 überliefert von Ibn Masʿūd die prophetische Unterweisung der Gebetsworte im Sitzen.",
+     "Die arabischen Formulierungen sind keine frei gestalteten Unterrichtstexte; unterschiedliche authentische Überlieferungen gehören in die Fachprüfung.",
+     "Wir behandeln das Gebet mit Sorgfalt und leiten aus einer Einführung keine pauschalen Sonderfallurteile ab."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Der Tashahhud-Nachweis ist eine Ḥadīṯ-Quelle. Aussprache und Details des Fiqh bleiben vor Veröffentlichung fachlich zu prüfen."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Tashahhud als Gebetsbestandteil“ eine gute Handlung?",
+     "prompt": "Wann spricht man den Tashahhud?",
      "options": [
-      "Ich kann die Sitzphase im Gebet wiedererkennen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "In einer Sitzphase des Gebets.",
+      "Beim Spielen im Garten."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Die Sitzphase im Gebet wiedererkennen.",
-     "explain": "Unser Lernbeispiel ist: Die Sitzphase im Gebet wiedererkennen."
+     "hint": "Denk an die Sitzhaltung im Gebet.",
+     "explain": "Der Tashahhud gehört zu einer Sitzphase."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Tashahhud als Gebetsbestandteil“ tun?",
+     "prompt": "Ist der Tashahhud selbst eine Qurʾān-Sūrah?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Ja, er ist Sūrat al-Fātiḥah.",
+      "Nein, er ist eine überlieferte Gebetsformel."
      ],
-     "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "correct": 1,
+     "hint": "Qurʾān und Sunnah sind zu unterscheiden.",
+     "explain": "Der Tashahhud stammt aus der Sunnah, nicht aus einer Qurʾān-Sūrah."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Tashahhud als Gebetsbestandteil“. Welche Handlung passt zur Stunde?",
+     "prompt": "Woher lernen wir den überlieferten Tashahhud?",
      "options": [
-      "Ich kann die Sitzphase im Gebet wiedererkennen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Aus al-Buḫārī 831 und qualifiziertem Unterricht.",
+      "Aus einer beliebigen Fantasiegeschichte.",
+      "Aus einer selbst ausgedachten Formel."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Die Sitzphase im Gebet wiedererkennen.",
-     "explain": "Unser Lernbeispiel ist: Die Sitzphase im Gebet wiedererkennen."
+     "hint": "Der Wortlaut ist überliefert.",
+     "explain": "Der Tashahhud wird aus authentischer Überlieferung gelernt."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist eine gute Übung zu „Tashahhud als Gebetsbestandteil“?",
+     "prompt": "Welche Zuordnung ist richtig?",
      "options": [
-      "Ich könnte die Sitzphase im Gebet wiedererkennen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich übergehe die Lernaufgabe und höre nicht zu."
+      "Tashahhud ist eine Sūrah.",
+      "Tashahhud ist ein im Gebet gesprochener überlieferter Text.",
+      "Tashahhud ist die Gebetsrichtung."
      ],
-     "correct": 0,
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung.",
-     "explain": "Ich könnte die Sitzphase im Gebet wiedererkennen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Tashahhud als Gebetsbestandteil“ im Beispiel üben kannst."
+     "correct": 1,
+     "hint": "Denke an die Sitzphase.",
+     "explain": "Der Tashahhud ist Teil der überlieferten Gebetspraxis."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
+     "prompt": "Wie hörst du die korrekte arabische Aussprache?",
      "options": [
-      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-      "Unser Übungsbeispiel ist: Die Sitzphase im Gebet wiedererkennen.",
-      "Die Sunnah berichtet: Der Prophet ﷺ lehrte den Tashahhud im Sitzen."
+      "Aus einem ungeprüften automatischen Audio.",
+      "Nur aus einer selbst erfundenen Lautschrift.",
+      "Aus einer geprüften Aufnahme oder bei einer qualifizierten Lehrperson."
      ],
-     "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "correct": 2,
+     "hint": "Arabische Wörter sollen korrekt geübt werden.",
+     "explain": "Authentische und geprüfte Vorbilder verhindern Aussprachefehler."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Tashahhud als Gebetsbestandteil“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Quelle beschreibt den Tashahhud im Sitzen?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Al-Buḫārī 831.",
+      "Qurʾān 20:14 mit vollständigem Tashahhud-Wortlaut.",
+      "Ein beliebiges modernes Lehrbuch ohne Beleg."
      ],
      "correct": 0,
-     "hint": "Vergleiche 20:14 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Suche den berichteten Gebetstext.",
+     "explain": "Die Unterweisung wird bei al-Buḫārī 831 überliefert."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
+     "prompt": "Was ist eine korrekte Unterscheidung?",
      "options": [
-      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-      "Unser Übungsbeispiel ist: Die Sitzphase im Gebet wiedererkennen."
+      "Tashahhud ist eine erfundene deutsche Unterrichtsformel.",
+      "Qurʾān 20:14 gebietet das Gebet, al-Buḫārī 831 erklärt den überlieferten Tashahhud.",
+      "Der Tashahhud ist ein neues Kapitel des Qurʾān."
      ],
-     "correct": 0,
-     "hint": "Wähle die passende Aussage zum Qurʾān-Vers. Die Sunnah wird in der Erklärung erläutert.",
-     "explain": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte den Tashahhud im Sitzen.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?"
+     "correct": 1,
+     "hint": "Vergleiche den Inhalt der beiden Quellen.",
+     "explain": "Der Gebetsauftrag und sein überlieferter Wortlaut sind verschiedene Quellenebenen."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Tashahhud als Gebetsbestandteil“?",
+     "prompt": "Wie behandeln wir mögliche Fiqh-Detailfragen?",
      "options": [
-      "Ich erkläre die Situation: die Sitzphase im Gebet wiedererkennen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und frage nicht nach."
+      "Eigene verbindliche Regeln ohne Prüfung erfinden.",
+      "Jede Frage pauschal verbieten.",
+      "Nach authentischen Belegen und qualifiziertem Fiqh-Unterricht klären."
      ],
-     "correct": 0,
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen.",
-     "explain": "Ich erkläre die Situation: die Sitzphase im Gebet wiedererkennen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Tashahhud als Gebetsbestandteil“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "correct": 2,
+     "hint": "Nicht jede Einzelregel ergibt sich allein aus der Kurzlektion.",
+     "explain": "Fachliche Sonderfragen brauchen genaue Prüfung."
     }
    ]
   },
@@ -3372,7 +3368,7 @@ const additions={
   "topic": "Den Gebetsabschluss kennenlernen",
   "title": "Fiqh · Den Gebetsabschluss kennenlernen",
   "lead": "Heute lernen wir: Den Gebetsabschluss kennenlernen.",
-  "goal": "Ich kann taslīm als Abschluss erkennen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich erkenne den Taslīm als Gebetsabschluss und kann den überlieferten Friedensgruß von der Qurʾān-Rezitation unterscheiden.",
   "quran": {
    "surah": 20,
    "ayah": 14,
@@ -3398,141 +3394,139 @@ const additions={
    "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
-  "hint": "Taslīm als Abschluss erkennen.",
-  "sample": "Bei „Den Gebetsabschluss kennenlernen“ übe ich: taslīm als Abschluss erkennen.",
+  "hint": "Taslīm ist der Friedensgruß zum Gebetsabschluss.",
+  "sample": "Am Ende des Gebets gehört der Taslīm mit dem Friedensgruß dazu.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Den Gebetsabschluss kennenlernen.",
+    "intro": "Am Ende des Gebets gehört der Friedensgruß dazu.",
     "lines": [
-     "Wir lernen heute: Den Gebetsabschluss kennenlernen.",
-     "Wir üben taslīm als Abschluss erkennen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Dieser Gebetsabschluss heißt Taslīm.",
+     "Dabei sprechen wir den überlieferten Friedensgruß.",
+     "Der Prophet ﷺ sprach den Taslīm nach rechts und links.",
+     "Wir lernen die Worte langsam und richtig."
     ],
-    "evidence": "Qurʾān 20:14 lehrt: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Muslim 582 berichtet den Taslīm des Propheten ﷺ nach rechts und links."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Taslīm als Abschluss erkennen.",
+    "intro": "Taslīm bedeutet den Friedensgruß am Ende des Gebets.",
     "lines": [
-     "Heute untersuchen wir das Thema „Den Gebetsabschluss kennenlernen“.",
-     "Der Qurʾān spricht in 20:14 darüber: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Die Sunnah berichtet in Ṣaḥīḥ Muslim, Nr. 582: Der Prophet ﷺ schloss das Gebet mit Taslīm ab.",
-     "Unser eigenes Beispiel: Taslīm als Abschluss erkennen. Wir überlegen gemeinsam, warum es passt."
+     "Der Taslīm folgt auf die Gebetshandlungen und schließt das Gebet ab.",
+     "Muslim 582 berichtet, dass der Prophet ﷺ nach rechts und links den Gruß sprach.",
+     "Der Gruß wird nicht durch eigene Fantasieworte ersetzt.",
+     "Beim Üben lassen wir uns den Wortlaut und den Ablauf korrekt zeigen."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Qurʾān 20:14 gebietet das Gebet allgemein; Muslim 582 beschreibt eine konkrete Handlung beim Abschluss."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Den Gebetsabschluss kennenlernen“.",
+    "intro": "Beim Taslīm prüfen wir den tatsächlichen Bericht statt nur ein Schlagwort.",
     "lines": [
-     "Ausgangssituation: Taslīm als Abschluss erkennen.",
-     "Qurʾān 20:14: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Sunnah (Ṣaḥīḥ Muslim, Nr. 582): Der Prophet ﷺ schloss das Gebet mit Taslīm ab. (sinngemäß)",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Muslim 582 berichtet von Saʿd, dass er den Propheten ﷺ den Taslīm zur rechten und linken Seite aussprechen sah.",
+     "Dieser Bericht beschreibt das Gebetsende konkreter als der allgemeine Gebetsauftrag in Qurʾān 20:14.",
+     "Der arabische Wortlaut und seine Aussprache werden aus geprüfter Sunnah vermittelt; wir erfinden keine neue Formel.",
+     "Rechtsfragen über Gebetsgültigkeit und Sonderfälle brauchen eine getrennte Fiqhprüfung."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Der Bericht aus Muslim 582 belegt die beschriebene Handlung; die Kurzlektion ersetzt keine umfassende Gebetslehre."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Den Gebetsabschluss kennenlernen“ eine gute Handlung?",
+     "prompt": "Wie heißt der Gebetsabschluss mit dem Friedensgruß?",
      "options": [
-      "Ich kann taslīm als Abschluss erkennen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Taslīm.",
+      "Suǧūd."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Taslīm als Abschluss erkennen.",
-     "explain": "Unser Lernbeispiel ist: Taslīm als Abschluss erkennen."
+     "hint": "Es ist der Gruß am Ende.",
+     "explain": "Taslīm bezeichnet den Friedensgruß am Gebetsende."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Den Gebetsabschluss kennenlernen“ tun?",
+     "prompt": "Was lernen wir dabei?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Den überlieferten Friedensgruß.",
+      "Eine selbst erfundene Abschiedsrede."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Es gibt ein überliefertes Vorbild.",
+     "explain": "Der Gebetsabschluss wird aus der Sunnah gelernt."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Den Gebetsabschluss kennenlernen“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was gehört an das Ende des Gebets?",
      "options": [
-      "Ich kann taslīm als Abschluss erkennen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Der Taslīm.",
+      "Ein Spiel.",
+      "Eine Begrüßung vor dem ersten Takbīr."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Taslīm als Abschluss erkennen.",
-     "explain": "Unser Lernbeispiel ist: Taslīm als Abschluss erkennen."
+     "hint": "Gesucht ist der Friedensgruß am Schluss.",
+     "explain": "Der Taslīm schließt das Gebet ab."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist eine gute Übung zu „Den Gebetsabschluss kennenlernen“?",
+     "prompt": "Was erzählt Muslim 582?",
      "options": [
-      "Ich könnte taslīm als Abschluss erkennen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich übergehe die Lernaufgabe und höre nicht zu."
+      "Der Prophet ﷺ sprach den Taslīm nach rechts und links.",
+      "Das Gebet endet ohne Gruß.",
+      "Man soll einen beliebigen Text wählen."
      ],
      "correct": 0,
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung.",
-     "explain": "Ich könnte taslīm als Abschluss erkennen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Den Gebetsabschluss kennenlernen“ im Beispiel üben kannst."
+     "hint": "Der Bericht beschreibt eine Handlung.",
+     "explain": "Muslim 582 berichtet den Friedensgruß nach rechts und links."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
+     "prompt": "Woher soll die arabische Aussprache stammen?",
      "options": [
-      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-      "Unser Übungsbeispiel ist: Taslīm als Abschluss erkennen.",
-      "Die Sunnah berichtet: Der Prophet ﷺ schloss das Gebet mit Taslīm ab."
+      "Aus einer geprüften authentischen Vorlage.",
+      "Aus einem zufälligen Computersatz.",
+      "Aus selbst ausgedachten Worten."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Die Worte sind überliefert.",
+     "explain": "Wir verwenden eine überprüfte Fassung und korrekte Aussprache."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Den Gebetsabschluss kennenlernen“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Handlung ist in Muslim 582 belegt?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Der Prophet ﷺ sprach Taslīm nach rechts und links.",
+      "Er beendete jedes Gebet schweigend.",
+      "Er ersetzte den Gruß durch ein Gedicht."
      ],
      "correct": 0,
-     "hint": "Vergleiche 20:14 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Achte auf den tatsächlich überlieferten Bericht.",
+     "explain": "Der Taslīm wurde nach rechts und links gesprochen."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
+     "prompt": "Was gilt für Qurʾān 20:14?",
      "options": [
-      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-      "Unser Übungsbeispiel ist: Taslīm als Abschluss erkennen."
+      "Der Vers enthält den vollständigen Taslīm-Wortlaut.",
+      "Der Vers ordnet das Gebet an, aber der Taslīm wird hier in der Sunnah konkret beschrieben.",
+      "Der Vers verbietet die Sunnah."
      ],
-     "correct": 0,
-     "hint": "Wähle die passende Aussage zum Qurʾān-Vers. Die Sunnah wird in der Erklärung erläutert.",
-     "explain": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ schloss das Gebet mit Taslīm ab.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?"
+     "correct": 1,
+     "hint": "Allgemeines Gebot und Einzelbericht sind zu unterscheiden.",
+     "explain": "Die Quelle des konkreten Abschlusses ist Muslim 582."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Den Gebetsabschluss kennenlernen“?",
+     "prompt": "Wie gehst du mit unterschiedlichen Details des Gebetsabschlusses um?",
      "options": [
-      "Ich erkläre die Situation: taslīm als Abschluss erkennen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und frage nicht nach."
+      "Ein eigenes Urteil ohne Beleg aufstellen.",
+      "Alle anderen ungeprüft beschuldigen.",
+      "Eine qualifizierte Fiqh-Prüfung der Belege heranziehen."
      ],
-     "correct": 0,
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen.",
-     "explain": "Ich erkläre die Situation: taslīm als Abschluss erkennen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Den Gebetsabschluss kennenlernen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "correct": 2,
+     "hint": "Detailfragen brauchen genaue Kenntnis.",
+     "explain": "Authentische Belege und Fachkenntnis gehen vor schnellen Urteilen."
     }
    ]
   },
@@ -3559,7 +3553,7 @@ const additions={
   "topic": "Fehler beim Üben des Gebets",
   "title": "Fiqh · Fehler beim Üben des Gebets",
   "lead": "Heute lernen wir: Fehler beim Üben des Gebets.",
-  "goal": "Ich kann bei Unsicherheit einen qualifizierten Lehrer fragen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann bei Übungsfehlern ruhig nachfragen, den überlieferten Gebetsablauf verbessern und zwischen Anleitung und persönlicher Beschämung unterscheiden.",
   "quran": {
    "surah": 20,
    "ayah": 14,
@@ -3569,15 +3563,15 @@ const additions={
    "excerpt": false
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 631",
-   "text": "Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 757 · Abū Hurayrah",
+   "text": "Als ein Mann das Gebet nicht richtig verrichtete und um Unterweisung bat, erklärte der Prophet ﷺ ihm schrittweise, wie er beten sollte, und betonte Ruhe in den Haltungen."
   },
   "sourceAudit": {
    "quranReference": "20:14",
    "quranUrl": "https://quran.com/20/14",
-   "hadithUrl": "https://sunnah.com/bukhari:631",
-   "sourceAnchorLessonId": "fiqh-salah",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
+   "hadithUrl": "https://sunnah.com/bukhari:757",
+   "sourceAnchorLessonId": null,
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg zur schrittweisen Gebetsunterweisung; kindersensible Darstellung, Fiqh-Fachprüfung weiterhin offen.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -3585,141 +3579,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Bei Unsicherheit einen qualifizierten Lehrer fragen.",
-  "sample": "Bei „Fehler beim Üben des Gebets“ übe ich: bei Unsicherheit einen qualifizierten Lehrer fragen.",
+  "hint": "Wenn du eine Bewegung nicht verstehst, bitte um eine ruhige Erklärung.",
+  "sample": "Wenn ich eine Gebetsbewegung nicht verstehe, frage ich und übe sie noch einmal.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Fehler beim Üben des Gebets.",
+    "intro": "Wir dürfen das Gebet Schritt für Schritt lernen.",
     "lines": [
-     "Wir lernen heute: Fehler beim Üben des Gebets.",
-     "Wir üben bei Unsicherheit einen qualifizierten Lehrer fragen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Manchmal vergessen wir beim Üben eine Bewegung.",
+     "Dann können wir freundlich um Hilfe bitten.",
+     "Eine Lehrperson zeigt sie uns noch einmal.",
+     "Wir lernen mit Geduld statt mit Angst."
     ],
-    "evidence": "Qurʾān 20:14 lehrt: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Al-Buḫārī 757 berichtet, dass der Prophet ﷺ einen Mann im Gebet unterwies."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Bei Unsicherheit einen qualifizierten Lehrer fragen.",
+    "intro": "Im Gebetslernen sind Wiederholung und genaue Anleitung wichtig.",
     "lines": [
-     "Heute untersuchen wir das Thema „Fehler beim Üben des Gebets“.",
-     "Der Qurʾān spricht in 20:14 darüber: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 631 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Bei Unsicherheit einen qualifizierten Lehrer fragen. Wir überlegen gemeinsam, warum es passt."
+     "In al-Buḫārī 757 bat ein Mann den Propheten ﷺ, ihm das Gebet richtig zu zeigen.",
+     "Der Prophet ﷺ erklärte dabei die Gebetsschritte einschließlich der Ruhe in den Haltungen.",
+     "Wir dürfen um eine erneute Erklärung bitten, statt Fehler zu verbergen.",
+     "Die Lektion ist eine Lernhilfe; sie entscheidet nicht über besondere rechtliche Fälle."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Der Ḥadīṯ ist ein Unterrichtsbericht über Gebetshandlungen. Unsere freundliche Lernmethode ist eine kindgerechte Anwendung."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Fehler beim Üben des Gebets“.",
+    "intro": "Aus dem Bericht über den Mann, der sein Gebet verbessern musste, lernen.",
     "lines": [
-     "Ausgangssituation: Bei Unsicherheit einen qualifizierten Lehrer fragen.",
-     "Qurʾān 20:14: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 631): Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Al-Buḫārī 757 beschreibt, dass der Prophet ﷺ einen Mann wiederholt auf einen Fehler hinwies und ihm anschließend auf seine Bitte den Ablauf erklärte.",
+     "Die Unterweisung enthält die Forderung nach Ruhe bei den einzelnen Gebetshaltungen.",
+     "Das ist keine Erlaubnis, Kinder mit Aussagen über ihre persönliche Gebetsgültigkeit einzuschüchtern.",
+     "In unserer Altersstufe geht es um sorgfältige Übung; rechtliche Bewertungen und Sonderfälle gehören zum qualifizierten Unterricht."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Der konkrete Bericht aus al-Buḫārī 757 ist maßgeblich. Unsere Schutzregel gegen Beschämung ist eine pädagogische Anwendung."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Fehler beim Üben des Gebets“ eine gute Handlung?",
+     "prompt": "Du verstehst einen Gebetsschritt nicht. Was tust du?",
      "options": [
-      "Ich kann bei Unsicherheit einen qualifizierten Lehrer fragen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Ich frage eine geeignete Lehrperson.",
+      "Ich verstecke mich aus Angst."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Bei Unsicherheit einen qualifizierten Lehrer fragen.",
-     "explain": "Unser Lernbeispiel ist: Bei Unsicherheit einen qualifizierten Lehrer fragen."
+     "hint": "Fragen hilft beim Lernen.",
+     "explain": "Du darfst dich um eine ruhige Erklärung bemühen."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Fehler beim Üben des Gebets“ tun?",
+     "prompt": "Wie übst du etwas Neues?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Mit Schreien und Angst.",
+      "Ruhig und Schritt für Schritt."
      ],
-     "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "correct": 1,
+     "hint": "Lernen braucht Zeit.",
+     "explain": "Eine geduldige Erklärung hilft, Bewegungen zu verstehen."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Fehler beim Üben des Gebets“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was tat der Mann im Bericht bei al-Buḫārī 757?",
      "options": [
-      "Ich kann bei Unsicherheit einen qualifizierten Lehrer fragen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Er bat um Unterweisung im Gebet.",
+      "Er lehrte selbst ohne Hilfe andere.",
+      "Er fragte nach einer Sportregel."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Bei Unsicherheit einen qualifizierten Lehrer fragen.",
-     "explain": "Unser Lernbeispiel ist: Bei Unsicherheit einen qualifizierten Lehrer fragen."
+     "hint": "Er wusste selbst nicht, wie er besser beten konnte.",
+     "explain": "Der Mann bat den Propheten ﷺ, ihn zu unterweisen."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist eine gute Übung zu „Fehler beim Üben des Gebets“?",
+     "prompt": "Was gehört zum gezeigten Gebetsablauf?",
      "options": [
-      "Ich könnte bei Unsicherheit einen qualifizierten Lehrer fragen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich übergehe die Lernaufgabe und höre nicht zu."
+      "Jede Haltung in großer Eile.",
+      "Ruhe beim Verbeugen und Niederwerfen.",
+      "Absichtlich andere auslachen."
      ],
-     "correct": 0,
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung.",
-     "explain": "Ich könnte bei Unsicherheit einen qualifizierten Lehrer fragen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Fehler beim Üben des Gebets“ im Beispiel üben kannst."
+     "correct": 1,
+     "hint": "Der Bericht betont Ruhe.",
+     "explain": "Die Haltungen sollen mit Ruhe ausgeführt werden."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
+     "prompt": "Was ist beim Üben eine passende Reaktion auf Unsicherheit?",
      "options": [
-      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-      "Unser Übungsbeispiel ist: Bei Unsicherheit einen qualifizierten Lehrer fragen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+      "Um eine Erklärung bitten.",
+      "Jemanden auslachen.",
+      "Auf keinen Fall nachfragen."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Lernen schließt Fragen ein.",
+     "explain": "Ein freundlicher Hinweis hilft dir beim Üben."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Fehler beim Üben des Gebets“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Hilfe bat der Mann in al-Buḫārī 757?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Um eine Anleitung zum Gebet.",
+      "Um einen neuen Qurʾān-Vers.",
+      "Um eine Klassenstrafe."
      ],
      "correct": 0,
-     "hint": "Vergleiche 20:14 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Er wollte lernen, richtig zu beten.",
+     "explain": "Der Mann bat ausdrücklich um Gebetsunterweisung."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
+     "prompt": "Was ist die nachweisbare Lehre zur Bewegung?",
      "options": [
-      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-      "Unser Übungsbeispiel ist: Bei Unsicherheit einen qualifizierten Lehrer fragen."
+      "Je schneller, desto besser.",
+      "Ruhig und in geordneter Haltung beten.",
+      "Alle Haltungen auslassen."
      ],
-     "correct": 0,
-     "hint": "Wähle die passende Aussage zum Qurʾān-Vers. Die Sunnah wird in der Erklärung erläutert.",
-     "explain": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?"
+     "correct": 1,
+     "hint": "Der Bericht nennt wiederholt Ruhe.",
+     "explain": "Ruhe in den Haltungen ist Teil der prophetischen Unterweisung."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Fehler beim Üben des Gebets“?",
+     "prompt": "Welche Schlussfolgerung ist methodisch richtig?",
      "options": [
-      "Ich erkläre die Situation: bei Unsicherheit einen qualifizierten Lehrer fragen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und frage nicht nach."
+      "Jedes Kindergebet öffentlich für ungültig erklären.",
+      "Lernfehler nie mehr besprechen.",
+      "Den Bericht zum Lernen nutzen und Detailurteile fachkundig prüfen."
      ],
-     "correct": 0,
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen.",
-     "explain": "Ich erkläre die Situation: bei Unsicherheit einen qualifizierten Lehrer fragen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Fehler beim Üben des Gebets“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "correct": 2,
+     "hint": "Pädagogik und Fiqh-Einzelfallurteile unterscheiden.",
+     "explain": "Wir lernen aus dem Bericht, ohne ungeprüfte Urteile zu fällen."
     }
    ]
   },
@@ -3746,7 +3738,7 @@ const additions={
   "topic": "Ramaḍān und Fasten kennenlernen",
   "title": "Fiqh · Ramaḍān und Fasten kennenlernen",
   "lead": "Heute lernen wir: Ramaḍān und Fasten kennenlernen.",
-  "goal": "Ich kann mit Rücksicht auf das Alter über den Fastenmonat sprechen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann den Ramaḍān als Fastenmonat erkennen und verstehen, dass Kinder altersgerecht und ohne gesundheitlichen Druck darüber lernen.",
   "quran": {
    "surah": 2,
    "ayah": 183,
@@ -3772,141 +3764,139 @@ const additions={
    "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
-  "hint": "Mit Rücksicht auf das Alter über den Fastenmonat sprechen.",
-  "sample": "Bei „Ramaḍān und Fasten kennenlernen“ übe ich: mit Rücksicht auf das Alter über den Fastenmonat sprechen.",
+  "hint": "Ramaḍān ist der Fastenmonat; jüngere Kinder lernen darüber ohne Zwang.",
+  "sample": "Im Ramaḍān fasten die dazu verpflichteten Muslime; Kinder lernen die Bedeutung altersgerecht kennen.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Ramaḍān und Fasten kennenlernen.",
+    "intro": "Ramaḍān ist ein besonderer Monat im Islam.",
     "lines": [
-     "Wir lernen heute: Ramaḍān und Fasten kennenlernen.",
-     "Wir üben mit Rücksicht auf das Alter über den Fastenmonat sprechen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Muslime sprechen in diesem Monat besonders über Fasten und gute Taten.",
+     "Wir lernen, dass das Fasten zu den Säulen des Islam gehört.",
+     "Kleine Kinder dürfen die Bedeutung kennenlernen, ohne fasten zu müssen.",
+     "Wenn wir Hunger oder Durst haben, sagen wir es einer erwachsenen Bezugsperson."
     ],
-    "evidence": "Qurʾān 2:183 bedeutet sinngemäß: Den Gläubigen wurde das Fasten vorgeschrieben, damit sie gottesfürchtig werden. Unsere Übung ist ein Beispiel."
+    "evidence": "Qurʾān 2:183 erwähnt das vorgeschriebene Fasten; al-Buḫārī 8 nennt das Fasten im Ramaḍān als Säule."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Mit Rücksicht auf das Alter über den Fastenmonat sprechen.",
+    "intro": "Ramaḍān gehört zur Religion, aber Lernen ist nicht dasselbe wie Pflichtfasten.",
     "lines": [
-     "Heute untersuchen wir das Thema „Ramaḍān und Fasten kennenlernen“.",
-     "Qurʾān 2:183: Den Gläubigen wurde das Fasten vorgeschrieben, damit sie gottesfürchtig werden.",
-     "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 8: Das Fasten im Ramaḍān gehört zu den fünf Säulen des Islam.",
-     "Unser eigenes Beispiel: Mit Rücksicht auf das Alter über den Fastenmonat sprechen. Wir überlegen gemeinsam, warum es passt."
+     "Qurʾān 2:183 spricht über das vorgeschriebene Fasten und Gottesfurcht.",
+     "Al-Buḫārī 8 nennt das Fasten des Ramaḍān als eine der fünf Säulen.",
+     "Kinder können dabei Geduld, Dankbarkeit und Rücksicht üben, ohne unter Druck gesetzt zu werden.",
+     "Wer krank ist oder sich nicht wohlfühlt, informiert eine vertraute erwachsene Bezugsperson."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Die Belege nennen Fasten und Glaubenspraxis; altersbezogene Sicherheitsregeln gehören zur verantwortlichen Unterweisung."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Ramaḍān und Fasten kennenlernen“.",
+    "intro": "Fasten als Säule des Islam mit Unterscheidung von Pflicht und freiwilliger Kinderübung.",
     "lines": [
-     "Ausgangssituation: Mit Rücksicht auf das Alter über den Fastenmonat sprechen.",
-     "Qurʾān 2:183: Den Gläubigen wurde das Fasten vorgeschrieben, damit sie gottesfürchtig werden.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 8): Das Fasten im Ramaḍān gehört zu den fünf Säulen des Islam. (sinngemäß)",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 2:183 richtet sich mit der Fastenvorschrift an die Gläubigen und nennt Gottesfurcht als Ziel.",
+     "Al-Buḫārī 8 zählt das Fasten im Ramaḍān ausdrücklich zu den fünf Säulen des Islam.",
+     "Die rechtliche Verpflichtung hängt von Voraussetzungen ab; bloßes Wissen über das Fasten macht ein Kind nicht automatisch fastenpflichtig.",
+     "Jede Kinderübung muss altersgerecht, gesundheitlich sicher und mit sachkundigen Erwachsenen abgestimmt sein."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Vers und Ḥadīṯ nennen Pflicht und Säule; individuelle Pflichten, Ausnahmen und Gesundheitsfragen brauchen getrennte Fiqh-Prüfung."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Ramaḍān und Fasten kennenlernen“ eine gute Handlung?",
+     "prompt": "Wie heißt der islamische Fastenmonat?",
      "options": [
-      "Ich kann mit Rücksicht auf das Alter über den Fastenmonat sprechen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Ramaḍān.",
+      "Šawwāl als Pflichtfastenmonat."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Mit Rücksicht auf das Alter über den Fastenmonat sprechen.",
-     "explain": "Unser Lernbeispiel ist: Mit Rücksicht auf das Alter über den Fastenmonat sprechen."
+     "hint": "Gesucht ist der bekannte Fastenmonat.",
+     "explain": "Ramaḍān ist der Fastenmonat."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Ramaḍān und Fasten kennenlernen“ tun?",
+     "prompt": "Muss ein kleines Kind hungern, um etwas über Ramaḍān zu lernen?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Ja, auch wenn es krank ist.",
+      "Nein, es kann altersgerecht darüber lernen."
      ],
-     "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "correct": 1,
+     "hint": "Gesundheit und Alter sind wichtig.",
+     "explain": "Kinder können lernen, ohne zum Fasten gezwungen zu werden."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Ramaḍān und Fasten kennenlernen“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was ist eine der fünf Säulen des Islam?",
      "options": [
-      "Ich kann mit Rücksicht auf das Alter über den Fastenmonat sprechen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Das Fasten im Ramaḍān.",
+      "Das Auswendiglernen jeder Geschichte.",
+      "Ein bestimmter Sport."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Mit Rücksicht auf das Alter über den Fastenmonat sprechen.",
-     "explain": "Unser Lernbeispiel ist: Mit Rücksicht auf das Alter über den Fastenmonat sprechen."
+     "hint": "Al-Buḫārī 8 zählt Säulen auf.",
+     "explain": "Der Ḥadīṯ nennt Ramaḍān-Fasten als Säule."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist eine gute Übung zu „Ramaḍān und Fasten kennenlernen“?",
+     "prompt": "Was ist bei jüngeren Kindern wichtig?",
      "options": [
-      "Ich könnte mit Rücksicht auf das Alter über den Fastenmonat sprechen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich übergehe die Lernaufgabe und höre nicht zu."
+      "Sie müssen ohne Ausnahme den ganzen Tag fasten.",
+      "Sie dürfen ohne gesundheitlichen Druck lernen.",
+      "Sie dürfen keine Fragen stellen."
      ],
-     "correct": 0,
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung.",
-     "explain": "Ich könnte mit Rücksicht auf das Alter über den Fastenmonat sprechen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Ramaḍān und Fasten kennenlernen“ im Beispiel üben kannst."
+     "correct": 1,
+     "hint": "Unterschied zwischen Lernen und Verpflichtung beachten.",
+     "explain": "Kindgerechtes Lernen darf die Gesundheit nicht gefährden."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage stammt aus Qurʾān 2:183?",
+     "prompt": "Was sagt Qurʾān 2:183 sinngemäß?",
      "options": [
-      "Den Gläubigen wurde das Fasten vorgeschrieben, damit sie gottesfürchtig werden.",
-      "Unser Übungsbeispiel ist: Mit Rücksicht auf das Alter über den Fastenmonat sprechen.",
-      "Die Sunnah berichtet: Das Fasten im Ramaḍān gehört zu den fünf Säulen des Islam."
+      "Fasten wurde vorgeschrieben, damit Gottesfurcht entsteht.",
+      "Ramaḍān ist ein Reisefest.",
+      "Fasten heißt nur weniger Süßigkeiten."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Der Vers nennt eine religiöse Zielsetzung.",
+     "explain": "Der Qurʾān nennt die Vorschrift des Fastens und Gottesfurcht."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Ramaḍān und Fasten kennenlernen“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Quelle nennt Ramaḍān-Fasten als Säule?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Al-Buḫārī 8.",
+      "Qurʾān 2:183 mit wörtlicher Fünf-Säulen-Liste.",
+      "Eine Schulregel ohne Quellen."
      ],
      "correct": 0,
-     "hint": "Vergleiche 2:183 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Die Säulenliste stammt aus einem Ḥadīṯ.",
+     "explain": "Al-Buḫārī 8 enthält die fünf Säulen."
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Was ist der Unterschied zwischen Lernen und Fastenpflicht?",
      "options": [
-      "Qurʾān: Den Gläubigen wurde das Fasten vorgeschrieben, damit sie gottesfürchtig werden. Sunnah: Das Fasten im Ramaḍān gehört zu den fünf Säulen des Islam.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Jedes Kind ist allein durch Unterricht fastenpflichtig.",
+      "Lernen ist möglich, auch ohne dass individuelle rechtliche Voraussetzungen vorliegen.",
+      "Die Religion kennt keinen Fastenmonat."
      ],
-     "correct": 0,
-     "hint": "Wähle die passende Aussage zum Qurʾān-Vers. Die Sunnah wird in der Erklärung erläutert.",
-     "explain": "Qurʾān: Den Gläubigen wurde das Fasten vorgeschrieben, damit sie gottesfürchtig werden. Sunnah: Das Fasten im Ramaḍān gehört zu den fünf Säulen des Islam.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 2:183? Was steht in der Sunnah?"
+     "correct": 1,
+     "hint": "Pflicht setzt Voraussetzungen voraus.",
+     "explain": "Eine Unterrichtsstunde begründet keine neue persönliche Pflicht."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Ramaḍān und Fasten kennenlernen“?",
+     "prompt": "Welche Reaktion ist bei gesundheitlichen Beschwerden richtig?",
      "options": [
-      "Ich erkläre die Situation: mit Rücksicht auf das Alter über den Fastenmonat sprechen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und frage nicht nach."
+      "Beschwerden verbergen.",
+      "Fasten trotz Gefahr erzwingen.",
+      "Gesundheit schützen und geeignete erwachsene Hilfe hinzuziehen."
      ],
-     "correct": 0,
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen.",
-     "explain": "Ich erkläre die Situation: mit Rücksicht auf das Alter über den Fastenmonat sprechen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Ramaḍān und Fasten kennenlernen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "correct": 2,
+     "hint": "Kinderschutz und Fiqh dürfen nicht verwechselt werden.",
+     "explain": "Gesundheitliche Beschwerden müssen ernst genommen werden."
     }
    ]
   },
@@ -3933,7 +3923,7 @@ const additions={
   "topic": "Zakāh und Ḥaǧǧ als Säulen",
   "title": "Fiqh · Zakāh und Ḥaǧǧ als Säulen",
   "lead": "Heute lernen wir: Zakāh und Ḥaǧǧ als Säulen.",
-  "goal": "Ich kann die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann Zakāh und Ḥaǧǧ als zwei der fünf Säulen des Islam erkennen und zwischen religiöser Pflicht und freiwilliger freundlicher Hilfe unterscheiden.",
   "quran": {
    "surah": 2,
    "ayah": 43,
@@ -3959,141 +3949,139 @@ const additions={
    "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
-  "hint": "Die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen.",
-  "sample": "Bei „Zakāh und Ḥaǧǧ als Säulen“ übe ich: die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen.",
+  "hint": "Zakāh ist eine vorgeschriebene Abgabe unter Voraussetzungen; Ḥaǧǧ eine Pilgerfahrt nach Makkah.",
+  "sample": "Zakāh ist eine religiöse Abgabe und Ḥaǧǧ die Pilgerfahrt nach Makkah; beide gehören zu den fünf Säulen.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Zakāh und Ḥaǧǧ als Säulen.",
+    "intro": "Wir lernen zwei weitere Säulen des Islam kennen.",
     "lines": [
-     "Wir lernen heute: Zakāh und Ḥaǧǧ als Säulen.",
-     "Wir üben die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Die Zakāh bedeutet eine vorgeschriebene Abgabe, für wen ihre Bedingungen gelten.",
+     "Der Ḥaǧǧ ist die Pilgerfahrt nach Makkah.",
+     "Beides gehört zu den fünf Säulen des Islam.",
+     "Ein Kind darf die Begriffe lernen und freundlich helfen, ohne deshalb sofort eine eigene Abgabe zahlen zu müssen."
     ],
-    "evidence": "Qurʾān 2:43 bedeutet sinngemäß: Verrichtet das Gebet, entrichtet die Zakāh und verbeugt euch mit den sich Verbeugenden. Unsere Übung ist ein Beispiel."
+    "evidence": "Qurʾān 2:43 nennt die Zakāh; al-Buḫārī 8 nennt Zakāh und Ḥaǧǧ als Säulen."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen.",
+    "intro": "Zakāh und Ḥaǧǧ haben unterschiedliche Bedeutungen.",
     "lines": [
-     "Heute untersuchen wir das Thema „Zakāh und Ḥaǧǧ als Säulen“.",
-     "Qurʾān 2:43: Verrichtet das Gebet, entrichtet die Zakāh und verbeugt euch mit den sich Verbeugenden.",
-     "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 8: Zakāh und Ḥaǧǧ gehören zu den fünf Säulen des Islam.",
-     "Unser eigenes Beispiel: Die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen. Wir überlegen gemeinsam, warum es passt."
+     "Zakāh ist die vorgeschriebene Vermögensabgabe, sofern ihre Voraussetzungen erfüllt sind.",
+     "Ḥaǧǧ ist die religiöse Pilgerfahrt nach Makkah für Personen, auf die die Pflicht zutrifft.",
+     "Qurʾān 2:43 nennt die Zakāh ausdrücklich; al-Buḫārī 8 zählt beide zu den fünf Säulen.",
+     "Freiwilliges Schenken ist gut, aber nicht automatisch dasselbe wie die Zakāh-Pflicht."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Der Qurʾān-Vers belegt ausdrücklich Zakāh, die gleichzeitige Säulenzuordnung beider Begriffe stammt aus al-Buḫārī 8."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Zakāh und Ḥaǧǧ als Säulen“.",
+    "intro": "Zakāh und Ḥaǧǧ sauber von freiwilligen Handlungen abgrenzen.",
     "lines": [
-     "Ausgangssituation: Die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen.",
-     "Qurʾān 2:43: Verrichtet das Gebet, entrichtet die Zakāh und verbeugt euch mit den sich Verbeugenden.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 8): Zakāh und Ḥaǧǧ gehören zu den fünf Säulen des Islam. (sinngemäß)",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 2:43 befiehlt die Zakāh zusammen mit dem Gebet; dieser Versauszug behandelt den Ḥaǧǧ nicht.",
+     "In al-Buḫārī 8 überliefert Ibn ʿUmar die fünf Säulen des Islam einschließlich Zakāh und Ḥaǧǧ.",
+     "Zakāh ist nicht mit jeder Ṣadaqah identisch; Bedingungen wie Niṣāb und Besitzfragen gehören in den vertieften Fiqh-Unterricht.",
+     "Ḥaǧǧ ist eine bestimmte Pilgerfahrt, nicht ein beliebiger Ausflug; Verpflichtung und Möglichkeiten sind gesondert zu prüfen."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Qurʾān 2:43 nennt ausdrücklich Zakāh, während der gemeinsame Säulennachweis aus al-Buḫārī 8 stammt. Sonderfragen bleiben ungeprüft."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Zakāh und Ḥaǧǧ als Säulen“ eine gute Handlung?",
+     "prompt": "Wie heißt die Pilgerfahrt nach Makkah?",
      "options": [
-      "Ich kann die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Ḥaǧǧ.",
+      "Wuḍūʾ."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen.",
-     "explain": "Unser Lernbeispiel ist: Die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen."
+     "hint": "Gesucht ist eine der fünf Säulen.",
+     "explain": "Ḥaǧǧ ist die Pilgerfahrt nach Makkah."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Zakāh und Ḥaǧǧ als Säulen“ tun?",
+     "prompt": "Was gehört ebenfalls zu den fünf Säulen?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Ein beliebiges Spiel.",
+      "Zakāh."
      ],
-     "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "correct": 1,
+     "hint": "Es geht um die vorgeschriebene Abgabe.",
+     "explain": "Zakāh zählt zu den fünf Säulen des Islam."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Zakāh und Ḥaǧǧ als Säulen“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was beschreibt Zakāh am besten?",
      "options": [
-      "Ich kann die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Eine vorgeschriebene Vermögensabgabe unter Voraussetzungen.",
+      "Jedes verschenkte Spielzeug.",
+      "Die Reise zur Kaʿbah."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen.",
-     "explain": "Unser Lernbeispiel ist: Die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen."
+     "hint": "Nicht jedes Geschenk ist Pflichtabgabe.",
+     "explain": "Zakāh ist eine religiös geregelte Abgabe."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist eine gute Übung zu „Zakāh und Ḥaǧǧ als Säulen“?",
+     "prompt": "Was ist Ḥaǧǧ?",
      "options": [
-      "Ich könnte die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich übergehe die Lernaufgabe und höre nicht zu."
+      "Eine Gebetswaschung.",
+      "Die Pilgerfahrt nach Makkah.",
+      "Eine freiwillige Nachricht."
      ],
-     "correct": 0,
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung.",
-     "explain": "Ich könnte die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Zakāh und Ḥaǧǧ als Säulen“ im Beispiel üben kannst."
+     "correct": 1,
+     "hint": "Es ist eine Reise zu einer religiösen Stätte.",
+     "explain": "Ḥaǧǧ ist die Pilgerfahrt nach Makkah."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage stammt aus Qurʾān 2:43?",
+     "prompt": "Welche Quelle nennt beide als Säulen?",
      "options": [
-      "Verrichtet das Gebet, entrichtet die Zakāh und verbeugt euch mit den sich Verbeugenden.",
-      "Unser Übungsbeispiel ist: Die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen.",
-      "Die Sunnah berichtet: Zakāh und Ḥaǧǧ gehören zu den fünf Säulen des Islam."
+      "Nur eine persönliche Unterrichtsidee.",
+      "Qurʾān 2:43 mit wörtlicher kompletter Liste.",
+      "Ṣaḥīḥ al-Buḫārī 8."
      ],
-     "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "correct": 2,
+     "hint": "Der Ḥadīṯ enthält die Liste.",
+     "explain": "Al-Buḫārī 8 zählt beide ausdrücklich zu den Säulen."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Zakāh und Ḥaǧǧ als Säulen“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Aussage gehört unmittelbar zu Qurʾān 2:43?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Die Aufforderung zur Zakāh.",
+      "Eine vollständige Beschreibung des Ḥaǧǧ.",
+      "Die genaue Berechnung des Gold-Niṣāb."
      ],
      "correct": 0,
-     "hint": "Vergleiche 2:43 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Achte darauf, was in dem Vers wirklich steht.",
+     "explain": "Der Vers nennt die Zakāh und das Gebet."
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Wo werden Zakāh und Ḥaǧǧ zusammen als Säulen genannt?",
      "options": [
-      "Qurʾān: Verrichtet das Gebet, entrichtet die Zakāh und verbeugt euch mit den sich Verbeugenden. Sunnah: Zakāh und Ḥaǧǧ gehören zu den fünf Säulen des Islam.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "In einem beliebigen Reisebericht.",
+      "In al-Buḫārī 8.",
+      "In der Erklärung eines Kindes ohne Quelle."
      ],
-     "correct": 0,
-     "hint": "Wähle die passende Aussage zum Qurʾān-Vers. Die Sunnah wird in der Erklärung erläutert.",
-     "explain": "Qurʾān: Verrichtet das Gebet, entrichtet die Zakāh und verbeugt euch mit den sich Verbeugenden. Sunnah: Zakāh und Ḥaǧǧ gehören zu den fünf Säulen des Islam.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 2:43? Was steht in der Sunnah?"
+     "correct": 1,
+     "hint": "Die Aufzählung stammt aus der Sunnah.",
+     "explain": "Al-Buḫārī 8 überliefert die fünf Säulen."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Zakāh und Ḥaǧǧ als Säulen“?",
+     "prompt": "Welche Unterscheidung ist korrekt?",
      "options": [
-      "Ich erkläre die Situation: die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und frage nicht nach."
+      "Jedes Geschenk ist bereits die religiös geschuldete Zakāh.",
+      "Jede Reise ist ein Ḥaǧǧ.",
+      "Zakāh und Ḥaǧǧ haben bestimmte Voraussetzungen; freiwillige gute Taten sind davon zu unterscheiden."
      ],
-     "correct": 0,
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen.",
-     "explain": "Ich erkläre die Situation: die Bedeutung von Geben und Pilgerfahrt altersgerecht kennenlernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Zakāh und Ḥaǧǧ als Säulen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "correct": 2,
+     "hint": "Nicht jede freundliche Handlung ist automatisch eine bestimmte religiöse Pflicht.",
+     "explain": "Fiqh-Bedingungen und freiwillige Hilfe dürfen nicht vermischt werden."
     }
    ]
   },
