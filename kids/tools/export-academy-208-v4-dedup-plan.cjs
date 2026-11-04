@@ -44,9 +44,9 @@ function selectable(q,lesson,age){
    .flatMap(item=>item.options.filter((_,i)=>i!==item.correct)));
  const wrong=pool.map(String).find(t=>t.trim()&&t.trim()!==correct)||
   "Es ist richtig, absichtlich das Gegenteil des Gelernten zu tun.";
- const older=/^Erkläre\\b/i.test(q.prompt);
+ const older=/^Erkläre\b/i.test(q.prompt);
  const prompt=older?"Wähle die passende Erklärung: "+String(q.prompt)
-  .replace(/^Erkläre(?:\\s+(?:mit|in)\\s+(?:deinen|eigenen)\\s+Worten)?\\s*[:,]?\\s*/i,""):q.prompt;
+  .replace(/^Erkläre(?:\s+(?:mit|in)\s+(?:deinen|eigenen)\s+Worten)?\s*[:,]?\s*/i,""):q.prompt;
  return {...q,type:"choice",prompt,options:[correct,wrong],correct:0,
   explain:q.explain||correct,adaptedFromText:true};
 }
