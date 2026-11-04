@@ -577,7 +577,7 @@ const additions={
   "topic": "Wuḍūʾ: Waschen und Streichen unterscheiden",
   "title": "Fiqh · Wuḍūʾ: Waschen und Streichen unterscheiden",
   "lead": "Heute lernen wir: Wuḍūʾ: Waschen und Streichen unterscheiden.",
-  "goal": "Ich kann eine Waschbewegung und das Streichen über den Kopf auseinanderhalten und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann beim Wuḍūʾ den Unterschied zwischen Waschen und feuchtem Streichen benennen und die jeweiligen Körperteile im Qurʾān und in der Sunnah finden.",
   "quran": {
    "surah": 5,
    "ayah": 6,
@@ -587,15 +587,15 @@ const additions={
    "excerpt": true
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 135",
-   "text": "Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 159 · Ḥumrān über ʿUṯmān ibn ʿAffān",
+   "text": "ʿUṯmān zeigte die Gebetswaschung, wusch Gesicht, Arme und Füße und strich mit feuchten Händen über seinen Kopf; er bezog sich auf das Vorbild des Propheten ﷺ."
   },
   "sourceAudit": {
    "quranReference": "5:6",
    "quranUrl": "https://quran.com/5/6",
-   "hadithUrl": "https://sunnah.com/bukhari:135",
-   "sourceAnchorLessonId": "fiqh-wudu-kopf-und-fu-e",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
+   "hadithUrl": "https://sunnah.com/bukhari:159",
+   "sourceAnchorLessonId": null,
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg zur unterscheidbaren Wasch- und Streichhandlung; weitere Fiqh-Details ausgenommen.",
    "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -603,141 +603,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Eine Waschbewegung und das Streichen über den Kopf auseinanderhalten.",
-  "sample": "Bei „Wuḍūʾ: Waschen und Streichen unterscheiden“ übe ich: eine Waschbewegung und das Streichen über den Kopf auseinanderhalten.",
+  "hint": "Gesicht, Arme und Füße waschen; mit feuchten Händen über den Kopf streichen.",
+  "sample": "Bei der Gebetswaschung werden Gesicht, Unterarme und Füße gewaschen; über den Kopf streicht man mit feuchten Händen.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Wuḍūʾ: Waschen und Streichen unterscheiden.",
+    "intro": "Bei Wuḍūʾ gibt es Waschen und feuchtes Streichen.",
     "lines": [
-     "Wir lernen heute: Wuḍūʾ: Waschen und Streichen unterscheiden.",
-     "Wir üben eine Waschbewegung und das Streichen über den Kopf auseinanderhalten.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Wir waschen das Gesicht mit Wasser.",
+     "Wir waschen auch die Arme und die Füße.",
+     "Über den Kopf streichen wir mit feuchten Händen.",
+     "Eine Lehrperson zeigt uns die Gebetswaschung in Ruhe."
     ],
-    "evidence": "Qurʾān 5:6 lehrt: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 5:6 und al-Buḫārī 159 unterscheiden Waschen und Streichen."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Eine Waschbewegung und das Streichen über den Kopf auseinanderhalten.",
+    "intro": "Qurʾān und Sunnah unterscheiden zwei Handlungen der Gebetswaschung.",
     "lines": [
-     "Heute untersuchen wir das Thema „Wuḍūʾ: Waschen und Streichen unterscheiden“.",
-     "Der Qurʾān spricht in 5:6 darüber: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 135 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Eine Waschbewegung und das Streichen über den Kopf auseinanderhalten. Wir überlegen gemeinsam, warum es passt."
+     "In Qurʾān 5:6 wird das Waschen von Gesicht und Armen genannt.",
+     "Beim Kopf steht die Anweisung zum feuchten Streichen.",
+     "Das Waschen der Füße gehört ebenfalls zur beschriebenen Gebetswaschung.",
+     "Al-Buḫārī 159 berichtet, wie ʿUṯmān die Waschung vorführte."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Der Qurʾān-Vers beschreibt die Körperteile; der Bericht erläutert die praktische Durchführung."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Wuḍūʾ: Waschen und Streichen unterscheiden“.",
+    "intro": "Wuḍūʾ: den Unterschied zwischen Waschen und Masḥ mit Beleg prüfen.",
     "lines": [
-     "Ausgangssituation: Eine Waschbewegung und das Streichen über den Kopf auseinanderhalten.",
-     "Qurʾān 5:6: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 135): Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 5:6 ordnet das Waschen von Gesicht und Armen bis zu den Ellenbogen sowie der Füße bis zu den Knöcheln an.",
+     "Für den Kopf nennt der Vers das Streichen mit feuchten Händen.",
+     "Al-Buḫārī 159 schildert, wie ʿUṯmān den Wuḍūʾ zeigte und zwischen Waschen und Kopfstreichen unterschied.",
+     "Besondere Ausnahmen und juristische Einzelheiten prüfen wir gesondert; aus dieser Einführung folgt keine vollständige Fiqh-Rechtsentscheidung."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Der Vers nennt beide Handlungsarten, und der Bericht verdeutlicht die Praxis. Weitere Fiqh-Auslegungen bleiben fachlich zu prüfen."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Wuḍūʾ: Waschen und Streichen unterscheiden“ eine gute Handlung?",
+     "prompt": "Was machen wir beim Wuḍūʾ mit dem Gesicht?",
      "options": [
-      "Ich kann eine Waschbewegung und das Streichen über den Kopf auseinanderhalten.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Wir waschen es.",
+      "Wir bedecken es mit einem Tuch statt mit Wasser."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Eine Waschbewegung und das Streichen über den Kopf auseinanderhalten.",
-     "explain": "Unser Lernbeispiel ist: Eine Waschbewegung und das Streichen über den Kopf auseinanderhalten."
+     "hint": "Waschen bedeutet Wasser verwenden.",
+     "explain": "Das Gesicht wird beim Wuḍūʾ gewaschen."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Wuḍūʾ: Waschen und Streichen unterscheiden“ tun?",
+     "prompt": "Was tun wir mit feuchten Händen am Kopf?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Den Kopf mit Seife ausschäumen.",
+      "Mit feuchten Händen darüberstreichen."
      ],
-     "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "correct": 1,
+     "hint": "Beim Kopf ist eine andere Handlung genannt.",
+     "explain": "Über den Kopf wird mit feuchten Händen gestrichen."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Wuḍūʾ: Waschen und Streichen unterscheiden“. Welche Handlung passt zur Stunde?",
+     "prompt": "Bei welchem Körperteil wird im Vers ausdrücklich feuchtes Streichen genannt?",
      "options": [
-      "Ich kann eine Waschbewegung und das Streichen über den Kopf auseinanderhalten.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Bei den Armen.",
+      "Beim Kopf.",
+      "Bei den Füßen."
      ],
-     "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Eine Waschbewegung und das Streichen über den Kopf auseinanderhalten.",
-     "explain": "Unser Lernbeispiel ist: Eine Waschbewegung und das Streichen über den Kopf auseinanderhalten."
+     "correct": 1,
+     "hint": "Es wird zwischen Waschen und Streichen unterschieden.",
+     "explain": "Der Kopf wird mit feuchten Händen bestrichen."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Wuḍūʾ: Waschen und Streichen unterscheiden“ im Alltag üben kannst?",
+     "prompt": "Was wird nach Qurʾān 5:6 gewaschen?",
      "options": [
-      "Ich könnte eine Waschbewegung und das Streichen über den Kopf auseinanderhalten. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Gesicht und Unterarme.",
+      "Nur die Haare.",
+      "Nur die Kleidung."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte eine Waschbewegung und das Streichen über den Kopf auseinanderhalten. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Wuḍūʾ: Waschen und Streichen unterscheiden“ im Beispiel üben kannst."
+     "hint": "Denke an die ersten genannten Körperteile.",
+     "explain": "Gesicht und Unterarme gehören zu den gewaschenen Teilen."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 5:6?",
+     "prompt": "Was beschreibt al-Buḫārī 159?",
      "options": [
-      "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln.",
-      "Unser Übungsbeispiel ist: Eine Waschbewegung und das Streichen über den Kopf auseinanderhalten.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt."
+      "Wie ʿUṯmān den Wuḍūʾ vorführte.",
+      "Wie man eine Moschee baut.",
+      "Wie man den Taslīm spricht."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Es geht um eine Vorführung.",
+     "explain": "ʿUṯmān zeigte eine überlieferte Gebetswaschung."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Wuḍūʾ: Waschen und Streichen unterscheiden“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Zuordnung stimmt nach Qurʾān 5:6?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Kopf waschen, Füße nur ansehen.",
+      "Gesicht und Arme waschen, Kopf feucht bestreichen.",
+      "Arme nicht beachten, nur Stirn abwischen."
      ],
-     "correct": 0,
-     "hint": "Vergleiche 5:6 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "correct": 1,
+     "hint": "Achte auf die unterschiedlichen arabischen Verben im Vers.",
+     "explain": "Kopfstreichen und Waschen anderer Teile werden getrennt genannt."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 5:6?",
+     "prompt": "Was liefert al-Buḫārī 159 zusätzlich?",
      "options": [
-      "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln.",
-      "Unser Übungsbeispiel ist: Eine Waschbewegung und das Streichen über den Kopf auseinanderhalten."
+      "Die praktische Vorführung des Wuḍūʾ durch ʿUṯmān.",
+      "Eine neue Sūrah.",
+      "Eine Pflicht, unendlich Wasser zu verbrauchen."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 5:6 genau? Welche Aussage stammt aus der Sunnah?"
+     "hint": "Es ist ein überlieferter Handlungsbericht.",
+     "explain": "ʿUṯmān zeigte den Wuḍūʾ praktisch."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Wuḍūʾ: Waschen und Streichen unterscheiden“?",
+     "prompt": "Warum prüfen wir Fiqh-Sonderfälle getrennt?",
      "options": [
-      "Ich erkläre die Situation: eine Waschbewegung und das Streichen über den Kopf auseinanderhalten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Weil die Grundregeln nie belegt sind.",
+      "Weil alle eigenen Vermutungen verbindlich wären.",
+      "Weil einzelne Körperteile und Ausnahmen genauere Rechtsbelege benötigen können."
      ],
-     "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: eine Waschbewegung und das Streichen über den Kopf auseinanderhalten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Wuḍūʾ: Waschen und Streichen unterscheiden“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "correct": 2,
+     "hint": "Die Einführung deckt nicht alle Sonderfälle ab.",
+     "explain": "Fiqh-Einzelfragen brauchen eigene sorgfältige Prüfung."
     }
    ]
   },
@@ -1510,7 +1508,7 @@ const additions={
   "topic": "Allah hört unsere Bittgebete",
   "title": "Tawḥīd · Allah hört unsere Bittgebete",
   "lead": "Heute lernen wir: Allah hört unsere Bittgebete.",
-  "goal": "Ich kann bei einer Sorge Allah um Hilfe bitten und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann erklären, dass Allah den Bittenden hört und auf Duʿāʾ antwortet, ohne Kindern sofortige Erfüllung jedes Wunsches zu versprechen.",
   "quran": {
    "surah": 2,
    "ayah": 186,
@@ -1536,141 +1534,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Bei einer Sorge Allah um Hilfe bitten.",
-  "sample": "Bei „Allah hört unsere Bittgebete“ übe ich: bei einer Sorge Allah um Hilfe bitten.",
+  "hint": "Allah ist nah und hört das Bittgebet; wir dürfen geduldig bleiben.",
+  "sample": "Bei Duʿāʾ bitten wir Allah; wir können geduldig bleiben, auch wenn nicht sofort das Gewünschte eintritt.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Allah hört unsere Bittgebete.",
+    "intro": "Du darfst Allah immer um Gutes bitten.",
     "lines": [
-     "Wir lernen heute: Allah hört unsere Bittgebete.",
-     "Wir üben bei einer Sorge Allah um Hilfe bitten.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Wir nennen das Bittgebet Duʿāʾ.",
+     "Allah hört unser Bittgebet.",
+     "Wir bitten Allah um Gutes und um Hilfe.",
+     "Wenn ein Wunsch nicht sofort eintritt, dürfen wir trotzdem hoffen."
     ],
-    "evidence": "Qurʾān 2:186 lehrt: Allah ist nahe und erhört das Bittgebet des Bittenden. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 2:186 spricht von Allahs Nähe und Seiner Antwort auf das Bittgebet."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Bei einer Sorge Allah um Hilfe bitten.",
+    "intro": "Allah lädt zum Bittgebet ein und wir lernen Geduld.",
     "lines": [
-     "Heute untersuchen wir das Thema „Allah hört unsere Bittgebete“.",
-     "Der Qurʾān spricht in 2:186 darüber: Allah ist nahe und erhört das Bittgebet des Bittenden.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 6340; Ṣaḥīḥ Muslim, Nr. 2735 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Bei einer Sorge Allah um Hilfe bitten. Wir überlegen gemeinsam, warum es passt."
+     "In Qurʾān 2:186 sagt Allah, dass Er nahe ist und den Bittenden antwortet.",
+     "Duʿāʾ ist eine Bitte an Allah, nicht an ein geschaffenes Wesen.",
+     "Al-Buḫārī 6340 warnt davor, aus Ungeduld zu sagen, die Bitte sei nicht erhört worden.",
+     "Ein Bittgebet ist kein Zauberspruch, der jeden Wunsch auf der Stelle sichtbar erfüllt."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Der Qurʾān belegt Allahs Antwort auf Bittgebete; der Ḥadīṯ behandelt Ungeduld beim Bitten."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Allah hört unsere Bittgebete“.",
+    "intro": "Allah hört Duʿāʾ – Hoffnung ohne falsche Versprechen.",
     "lines": [
-     "Ausgangssituation: Bei einer Sorge Allah um Hilfe bitten.",
-     "Qurʾān 2:186: Allah ist nahe und erhört das Bittgebet des Bittenden.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 6340; Ṣaḥīḥ Muslim, Nr. 2735): Der Prophet ﷺ lehrte, beim Bittgebet nicht ungeduldig zu werden und nicht vorschnell zu sagen, man habe gebetet, aber keine Antwort erhalten. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 2:186 nennt Allahs Nähe und die Antwort auf den Ruf des Bittenden.",
+     "Al-Buḫārī 6340 überliefert die Warnung, wegen scheinbarer Verzögerung ungeduldig aufzugeben.",
+     "Wir dürfen nicht behaupten, Allah erfülle jeden Wunsch sofort in genau unserer gewünschten Form.",
+     "Die Kinder lernen aufrichtige Bitte und Geduld, ohne aus schwierigen Erfahrungen falsche Schuldgefühle abzuleiten."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Die beiden Quellen belegen Hoffnung und Geduld; die genaue Art der Erhörung ist nicht durch ein ausgedachtes Belohnungsversprechen zu ersetzen."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Allah hört unsere Bittgebete“ eine gute Handlung?",
+     "prompt": "An wen richtet sich Duʿāʾ?",
      "options": [
-      "Ich kann bei einer Sorge Allah um Hilfe bitten.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "An Allah.",
+      "An eine ausgedachte Zauberfigur."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Bei einer Sorge Allah um Hilfe bitten.",
-     "explain": "Unser Lernbeispiel ist: Bei einer Sorge Allah um Hilfe bitten."
+     "hint": "Denk an unseren Herrn.",
+     "explain": "Wir richten unser Bittgebet an Allah."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Allah hört unsere Bittgebete“ tun?",
+     "prompt": "Du wartest auf eine Antwort. Was kannst du tun?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Die Hoffnung sofort aufgeben.",
+      "Geduldig bleiben und Allah weiter um Gutes bitten."
      ],
-     "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "correct": 1,
+     "hint": "Nicht jeder Wunsch zeigt sich sofort.",
+     "explain": "Wir dürfen geduldig und hoffnungsvoll bleiben."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Allah hört unsere Bittgebete“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was bedeutet Qurʾān 2:186 sinngemäß?",
      "options": [
-      "Ich kann bei einer Sorge Allah um Hilfe bitten.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Allah ist fern und hört keine Bitte.",
+      "Allah ist nahe und antwortet den Bittenden.",
+      "Man braucht immer einen anderen Menschen als Vermittler."
      ],
-     "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Bei einer Sorge Allah um Hilfe bitten.",
-     "explain": "Unser Lernbeispiel ist: Bei einer Sorge Allah um Hilfe bitten."
+     "correct": 1,
+     "hint": "Allah spricht von Seiner Nähe.",
+     "explain": "Allah antwortet auf die Bittgebete Seiner Diener."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Allah hört unsere Bittgebete“ im Alltag üben kannst?",
+     "prompt": "Wovor warnt al-Buḫārī 6340?",
      "options": [
-      "Ich könnte bei einer Sorge Allah um Hilfe bitten. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Ungeduldig die Hoffnung aufgeben.",
+      "Freundlich um Hilfe bitten.",
+      "Bittgebete an Allah richten."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte bei einer Sorge Allah um Hilfe bitten. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Allah hört unsere Bittgebete“ im Beispiel üben kannst."
+     "hint": "Es geht um Ungeduld.",
+     "explain": "Man soll nicht behaupten, die Bitte sei wegen Verzögerung nicht erhört."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:186?",
+     "prompt": "Welches Beispiel passt zu Duʿāʾ?",
      "options": [
-      "Allah ist nahe und erhört das Bittgebet des Bittenden.",
-      "Unser Übungsbeispiel ist: Bei einer Sorge Allah um Hilfe bitten.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte, beim Bittgebet nicht ungeduldig zu werden und nicht vorschnell zu sagen, man habe gebetet, aber keine Antwort erhalten."
+      "Einen Spruch als magischen Automaten benutzen.",
+      "Andere Menschen anbeten.",
+      "Allah um Rechtleitung und Gutes bitten."
      ],
-     "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "correct": 2,
+     "hint": "Ein Bittgebet richtet sich an Allah.",
+     "explain": "Duʿāʾ ist eine aufrichtige Bitte an Allah."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Allah hört unsere Bittgebete“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Aussage passt zu Qurʾān 2:186?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Allah hört den Ruf des Bittenden und antwortet.",
+      "Jede Bitte erfüllt sich auf die Sekunde.",
+      "Allah fordert die Anbetung anderer."
      ],
      "correct": 0,
-     "hint": "Vergleiche 2:186 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Achte auf den Vers ohne zusätzliche Versprechen.",
+     "explain": "Allah spricht von Seiner Nähe und Antwort."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:186?",
+     "prompt": "Welche Aussage beschreibt al-Buḫārī 6340 richtig?",
      "options": [
-      "Allah ist nahe und erhört das Bittgebet des Bittenden.",
-      "Unser Übungsbeispiel ist: Bei einer Sorge Allah um Hilfe bitten."
+      "Ungeduld beim Bittgebet wird gewarnt.",
+      "Man dürfe nie bitten.",
+      "Alle guten Dinge erscheinen sofort."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Allah ist nahe und erhört das Bittgebet des Bittenden. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, beim Bittgebet nicht ungeduldig zu werden und nicht vorschnell zu sagen, man habe gebetet, aber keine Antwort erhalten.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 2:186 genau? Welche Aussage stammt aus der Sunnah?"
+     "hint": "Der Bericht bespricht Geduld.",
+     "explain": "Nicht wegen scheinbarer Verzögerung verzweifeln."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Allah hört unsere Bittgebete“?",
+     "prompt": "Wie erklärst du einem Kind eine nicht sofort sichtbare Erhörung?",
      "options": [
-      "Ich erkläre die Situation: bei einer Sorge Allah um Hilfe bitten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Du bist bestimmt schlecht und schuld.",
+      "Wir wissen nicht alles; wir dürfen weiter zu Allah beten und auf Hilfe hoffen.",
+      "Gib jedes Bittgebet auf."
      ],
-     "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: bei einer Sorge Allah um Hilfe bitten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Allah hört unsere Bittgebete“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "correct": 1,
+     "hint": "Verspreche nichts, was die Quelle nicht festlegt.",
+     "explain": "Geduld und Hoffnung sind richtig, ohne ungerechtfertigte Schuldzuweisung."
     }
    ]
   },
@@ -3567,7 +3563,7 @@ const additions={
   "topic": "Nein sagen und persönliche Sicherheit",
   "title": "Familie · Nein sagen und persönliche Sicherheit",
   "lead": "Heute lernen wir: Nein sagen und persönliche Sicherheit.",
-  "goal": "Ich kann eine unangenehme Berührung ablehnen und Hilfe suchen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann fremde und eigene Privatsphäre achten, deutlich Nein sagen und bei übergriffigem Verhalten sofort Hilfe suchen.",
   "quran": {
    "surah": 24,
    "ayah": 27,
@@ -3577,15 +3573,15 @@ const additions={
    "excerpt": true
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6241; Ṣaḥīḥ Muslim, Nr. 2156 · Sahl ibn Saʿd",
-   "text": "Der Prophet ﷺ erklärte, dass um Erlaubnis gebeten wird, damit die Privatsphäre und der Blick in fremde Räume geschützt sind."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6245 · Abū Saʿīd al-Ḫudrī",
+   "text": "In der Überlieferung über Abū Mūsā wird die Regel genannt: Wer dreimal um Einlass bittet und keine Erlaubnis erhält, soll zurückkehren."
   },
   "sourceAudit": {
    "quranReference": "24:27",
    "quranUrl": "https://quran.com/24/27",
-   "hadithUrl": "https://dorar.net/hadith/sharh/9448",
-   "sourceAnchorLessonId": "adab-privatsphaere-andere-achten",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
+   "hadithUrl": "https://sunnah.com/bukhari:6245",
+   "sourceAnchorLessonId": null,
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg zum Respekt vor Zutritt und Privatsphäre; Nein sagen bei Übergriffen ist zusätzliche Kinderschutzregel, kein wörtlicher Hadith-Inhalt.",
    "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -3593,141 +3589,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Eine unangenehme Berührung ablehnen und Hilfe suchen.",
-  "sample": "Bei „Nein sagen und persönliche Sicherheit“ übe ich: eine unangenehme Berührung ablehnen und Hilfe suchen.",
+  "hint": "Dein Nein und deine Sicherheit zählen; hole Hilfe bei vertrauten Erwachsenen.",
+  "sample": "Ich respektiere, wenn jemand seine Ruhe möchte, und sage deutlich Nein, wenn jemand meine Grenzen verletzt.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Nein sagen und persönliche Sicherheit.",
+    "intro": "Dein Körper gehört dir und du darfst Nein sagen.",
     "lines": [
-     "Wir lernen heute: Nein sagen und persönliche Sicherheit.",
-     "Wir üben eine unangenehme Berührung ablehnen und Hilfe suchen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Wenn du nicht umarmt werden möchtest, darfst du Nein sagen.",
+     "Auch andere Menschen dürfen ihre Grenzen zeigen.",
+     "Wenn jemand dein Nein nicht achtet, geh zu einem vertrauten Erwachsenen.",
+     "Bei Angst oder Gefahr darfst du laut um Hilfe rufen."
     ],
-    "evidence": "Qurʾān 24:27 lehrt: Betretet nicht andere Häuser als eure eigenen, bevor ihr um Erlaubnis gebeten und ihre Bewohner begrüßt habt. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 24:27 lehrt, fremde Räume nicht ohne Erlaubnis zu betreten. Körpergrenzen sind unsere zusätzliche Kinderschutzregel."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Eine unangenehme Berührung ablehnen und Hilfe suchen.",
+    "intro": "Respekt vor Privatsphäre gilt für Räume und für persönliche Grenzen.",
     "lines": [
-     "Heute untersuchen wir das Thema „Nein sagen und persönliche Sicherheit“.",
-     "Der Qurʾān spricht in 24:27 darüber: Betretet nicht andere Häuser als eure eigenen, bevor ihr um Erlaubnis gebeten und ihre Bewohner begrüßt habt.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 6241; Ṣaḥīḥ Muslim, Nr. 2156 · Sahl ibn Saʿd nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Eine unangenehme Berührung ablehnen und Hilfe suchen. Wir überlegen gemeinsam, warum es passt."
+     "Qurʾān 24:27 fordert, bei fremden Häusern um Erlaubnis zu bitten.",
+     "Al-Buḫārī 6245 nennt das Zurückkehren, wenn trotz dreimaliger Bitte kein Einlass gewährt wird.",
+     "Die Erlaubnis zum Eintreten ist keine Erlaubnis, persönliche Körpergrenzen zu übergehen.",
+     "Bei ungewollten Berührungen, Geheimnisdruck oder Drohungen dürfen Kinder direkt Hilfe suchen."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Die Primärbelege betreffen Zutritt und Erlaubnis; die Regeln gegen Übergriffe sind eigenständige pädagogische Schutzregeln."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Nein sagen und persönliche Sicherheit“.",
+    "intro": "Zwischen religiös belegtem Privatsphäregebot und konkretem Kinderschutz unterscheiden.",
     "lines": [
-     "Ausgangssituation: Eine unangenehme Berührung ablehnen und Hilfe suchen.",
-     "Qurʾān 24:27: Betretet nicht andere Häuser als eure eigenen, bevor ihr um Erlaubnis gebeten und ihre Bewohner begrüßt habt.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 6241; Ṣaḥīḥ Muslim, Nr. 2156 · Sahl ibn Saʿd): Der Prophet ﷺ erklärte, dass um Erlaubnis gebeten wird, damit die Privatsphäre und der Blick in fremde Räume geschützt sind. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 24:27 behandelt den Zutritt zu fremden Häusern und verlangt vorherige Erlaubnis.",
+     "Al-Buḫārī 6245 erklärt das Zurückkehren, wenn man dreimal um Einlass gebeten hat und keine Erlaubnis bekam.",
+     "Diese Belege zeigen, dass Grenzen anderer geachtet werden; moderne Regeln zu Körpergrenzen und Hilfe bei Übergriffen sind damit nicht wörtlich identisch.",
+     "Ein Kind darf unangenehme Berührungen abwehren, Nein sagen und sich an sichere Erwachsene wenden – auch wenn jemand Geheimhaltung verlangt."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Die Quellen belegen Erlaubnis und Zurückhaltung beim Eintreten; die weitergehenden Kinder-Schutzregeln sind ausdrücklich als pädagogische Sicherheitsregeln gekennzeichnet."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Nein sagen und persönliche Sicherheit“ eine gute Handlung?",
+     "prompt": "Jemand möchte dich umarmen, aber du willst nicht. Was darfst du?",
      "options": [
-      "Ich kann eine unangenehme Berührung ablehnen und Hilfe suchen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Nein sagen.",
+      "Du musst es immer zulassen."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Eine unangenehme Berührung ablehnen und Hilfe suchen.",
-     "explain": "Unser Lernbeispiel ist: Eine unangenehme Berührung ablehnen und Hilfe suchen."
+     "hint": "Deine Grenze zählt.",
+     "explain": "Du darfst eine Umarmung ablehnen."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Nein sagen und persönliche Sicherheit“ tun?",
+     "prompt": "Jemand beachtet dein Nein nicht. Was machst du?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Alles geheim halten.",
+      "Zu einem vertrauten Erwachsenen gehen."
      ],
-     "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "correct": 1,
+     "hint": "Bei Druck brauchst du Unterstützung.",
+     "explain": "Hilfe holen ist richtig."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Nein sagen und persönliche Sicherheit“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was lehrt Qurʾān 24:27?",
      "options": [
-      "Ich kann eine unangenehme Berührung ablehnen und Hilfe suchen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Vor dem Betreten fremder Häuser Erlaubnis einholen.",
+      "Überall ungefragt hineingehen.",
+      "Ein Nein ignorieren."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Eine unangenehme Berührung ablehnen und Hilfe suchen.",
-     "explain": "Unser Lernbeispiel ist: Eine unangenehme Berührung ablehnen und Hilfe suchen."
+     "hint": "Es geht um Privatsphäre.",
+     "explain": "Vor dem Betreten fremder Räume muss man um Erlaubnis bitten."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Nein sagen und persönliche Sicherheit“ im Alltag üben kannst?",
+     "prompt": "Was bedeutet ein Nein bei einer Umarmung?",
      "options": [
-      "Ich könnte eine unangenehme Berührung ablehnen und Hilfe suchen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Es gilt und muss geachtet werden.",
+      "Es gilt nur bei Erwachsenen.",
+      "Andere dürfen es jederzeit übergehen."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte eine unangenehme Berührung ablehnen und Hilfe suchen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Nein sagen und persönliche Sicherheit“ im Beispiel üben kannst."
+     "hint": "Jeder hat persönliche Grenzen.",
+     "explain": "Ein Nein zur Berührung ist zu respektieren."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 24:27?",
+     "prompt": "Was tust du bei einer bedrohlichen Situation?",
      "options": [
-      "Betretet nicht andere Häuser als eure eigenen, bevor ihr um Erlaubnis gebeten und ihre Bewohner begrüßt habt.",
-      "Unser Übungsbeispiel ist: Eine unangenehme Berührung ablehnen und Hilfe suchen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ erklärte, dass um Erlaubnis gebeten wird, damit die Privatsphäre und der Blick in fremde Räume geschützt sind."
+      "Allein bleiben und schweigen.",
+      "Bei einem vertrauten Erwachsenen Hilfe holen.",
+      "Dem Drohenden mehr private Informationen geben."
      ],
-     "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "correct": 1,
+     "hint": "Sicherheit ist wichtiger als Geheimnisdruck.",
+     "explain": "Hilfe holen ist die richtige Schutzhandlung."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Nein sagen und persönliche Sicherheit“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Regel überliefert al-Buḫārī 6245?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Bei verweigertem Einlass nach dreimaliger Bitte zurückkehren.",
+      "Ein fremdes Haus immer betreten.",
+      "Niemals um Einlass bitten."
      ],
      "correct": 0,
-     "hint": "Vergleiche 24:27 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Wie wurde das Einlassbitten begrenzt?",
+     "explain": "Nach erfolgloser dreimaliger Bitte soll man zurückkehren."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 24:27?",
+     "prompt": "Was ist die korrekte Quellenunterscheidung?",
      "options": [
-      "Betretet nicht andere Häuser als eure eigenen, bevor ihr um Erlaubnis gebeten und ihre Bewohner begrüßt habt.",
-      "Unser Übungsbeispiel ist: Eine unangenehme Berührung ablehnen und Hilfe suchen."
+      "Qurʾān 24:27 enthält wörtlich unsere moderne Kinderhilfe-Hotline.",
+      "Die Quellen handeln von Erlaubnis; unsere zusätzliche Körpergrenzenregel dient dem Kinderschutz.",
+      "Jede Erlaubnis zum Besuch macht Berührungen verpflichtend."
      ],
-     "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Betretet nicht andere Häuser als eure eigenen, bevor ihr um Erlaubnis gebeten und ihre Bewohner begrüßt habt. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass um Erlaubnis gebeten wird, damit die Privatsphäre und der Blick in fremde Räume geschützt sind.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 24:27 genau? Welche Aussage stammt aus der Sunnah?"
+     "correct": 1,
+     "hint": "Nicht jede heutige Schutzregel ist ein wörtliches Zitat.",
+     "explain": "Wir benennen die religiösen Quellen korrekt und ergänzen angemessenen Kinderschutz."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Nein sagen und persönliche Sicherheit“?",
+     "prompt": "Ein älterer Mensch fordert eine unangenehme Geheimhaltung. Was sollst du tun?",
      "options": [
-      "Ich erkläre die Situation: eine unangenehme Berührung ablehnen und Hilfe suchen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Alles heimlich behalten.",
+      "Die Forderung ohne Prüfung erfüllen.",
+      "Nein sagen, Abstand suchen und vertrauenswürdige Hilfe holen."
      ],
-     "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: eine unangenehme Berührung ablehnen und Hilfe suchen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Nein sagen und persönliche Sicherheit“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "correct": 2,
+     "hint": "Auch Erwachsene dürfen Grenzen nicht verletzen.",
+     "explain": "Bei Geheimnisdruck und Gefahr Hilfe suchen."
     }
    ]
   },
