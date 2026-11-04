@@ -22,11 +22,15 @@ const fingerprint=hash(JSON.stringify({voice,model,profile,
  settings:policy.production.voiceSettings,dictionary:policy.production.pronunciationDictionaryId,
  dictionaryVersion:policy.production.pronunciationDictionaryVersionId}));
 const normalize=s=>String(s||"").normalize("NFC").replace(/\s+/g," ").trim();
-const phrases=new Map();
+const phrases=new Map(),mixedArabicBlocked=[];
 function add(text,lessonId,age,kind,draft){
  const value=normalize(text);if(!value)return;
  // Never synthesize Arabic Quran. Only human Qari recitation may supply that asset.
- if(/[\u0600-\u06ff]/.test(value))throw Error("Arabic script in synthetic queue: "+lessonId);
+ if(/[\u0600-\u06ff]/.test(value)){
+  mixedArabicBlocked.push({lessonId,age,kind,isDraft:draft,text:value,
+   reason:"mixed-Arabic-needs-Fusha-language-isolation-and-human-review"});
+  return;
+ }
  const id=hash(fingerprint+"|"+value);
  if(!phrases.has(id))phrases.set(id,{id,text:value,voiceId:voice,modelId:model,profile,
   pronunciationDictionaryId:policy.production.pronunciationDictionaryId,
@@ -137,6 +141,7 @@ const report={schemaVersion:1,kind:"KIDS_ACADEMY_208_V4_DEDUP_REVIEW_QUEUE",
  voiceId:voice,modelId:model,profile,settingsFingerprint:fingerprint,
  totalVerifiedPublicV4Entries:validApproved,totalTechnicalStagingMatches:validStaged,
  generatedAudioFiles:0,spentCredits:0,
+ mixedArabicSegmentsBlocked:mixedArabicBlocked.length,mixedArabicReview: mixedArabicBlocked,
  quranRecitationPolicy:"HUMAN_QARI_ONLY",allowMassGeneration:false,
  phrases:result};
 if(process.argv[2]){
@@ -146,4 +151,5 @@ if(process.argv[2]){
 console.log("PREPARED: "+result.length+" deduplicated V4 phrases for all "+questionsPrepared+" questions in 208 lessons.");
 console.log("REUSE: "+validApproved+" verified public V4, "+validStaged+" matching technical staging assets.");
 console.log("GATED: 426 editorial button choices; 195 legacy UI conversions still require human content review.");
+console.log("Language safety: "+mixedArabicBlocked.length+" mixed-script phrases blocked from the voice queue.");
 console.log("0 audio calls / 0 credits / no synthesized Quran.");
