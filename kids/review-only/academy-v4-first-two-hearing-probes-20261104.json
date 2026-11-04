@@ -38,7 +38,14 @@
       "humanListeningApproved": false,
       "contentImportedToGitHub": false,
       "generationId": "WqeNL9eyWt4AUKS4dEbg",
-      "actualCredits": 73.88716836734694
+      "actualCredits": 73.88716836734694,
+      "qaResult": "REJECTED_BY_OWNER_QURAN_FUSHA_PRONUNCIATION",
+      "rejectReason": "Owner reports Qurʾān pronunciation does not meet required Fuṣḥā/reference library.",
+      "mustNotBeUsedAsPronunciationMaster": true,
+      "mustNotBeImportedIntoKidsApp": true,
+      "correctSourceReference": "data/pronunciation/story-reference-muhammad-2026-10-04.json",
+      "correctAudioReference": "/kids/assets/prophet-story-audio/muhammad/story.mp3",
+      "newCreditsAuthorizedToFixThis": false
     },
     {
       "text": "Īmān ist mehr als nur ein schweres Wort: Es geht darum, was wir glauben.",
@@ -82,5 +89,5 @@
   "creatorPreviewActualCredits": 141.2273724489796,
   "creatorPreviewCreditsWereSpentBeforeThisReview": true,
   "creatorPreviewsAreNotProductionProfileCertified": true,
-  "notes": "Both previously requested Creator V4 previews completed. No new synthesis call in this review; do not reuse as production-profile-certified assets until voice settings, language, dictionary and owner listening are checked."
+  "notes": "Creator clip 1 was rejected by owner for incorrect Qurʾān pronunciation. Use actual owner-approved Muḥammad story reference first; do NOT relabel entire story as isolated approved Qurʾān word clip. Two existing Creator samples are not production approved. No new synthesis."
 }
