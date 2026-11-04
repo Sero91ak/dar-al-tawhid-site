@@ -16,7 +16,7 @@ assert.equal(voice.voiceIdentity.voiceId,"DkU7j9uO4ZEtLD2iRZSH");
 assert.equal(voice.production.modelId,"eleven_v4");
 assert.equal(voice.production.profile,"kids_story");
 assert.equal(voice.costControls.autoPublishWithoutOwnerReview,false);
-const ids=new Set(),phrases=new Set();let questions=8,legacyText=0,draftText=0;
+const ids=new Set(),phrases=new Set();let questions=8,legacyText=0,draftText=0,draftConverted=0;
 const put=s=>{s=String(s||"").normalize("NFC").replace(/\s+/g," ").trim();if(s)phrases.add(s)};
 for(const [items,isDraft] of [[existing,false],[drafts,true]])for(const l of items){
  assert(l.id&&!ids.has(l.id));ids.add(l.id);
@@ -31,6 +31,7 @@ for(const [items,isDraft] of [[existing,false],[drafts,true]])for(const l of ite
   for(const q of l.questions[age]){
    assert(["choice","text"].includes(q.type));
    put(q.prompt);
+   if(isDraft&&q.type==="choice"&&q.editorialReviewStatus==="pending-human-review")draftConverted++;
    if(q.type==="text"){
     if(isDraft)draftText++;else legacyText++;
     assert(String(q.sample||"").trim(),"Open question missing model answer");
@@ -46,10 +47,11 @@ for(const [items,isDraft] of [[existing,false],[drafts,true]])for(const l of ite
  put(l.lead);put(l.hadith?.text);
 }
 assert.equal(questions,1664);
-assert.equal(legacyText,195);assert.equal(draftText,426);
+assert.equal(legacyText,195);assert.equal(draftText,0);assert.equal(draftConverted,426);
 const report={status:"REVIEW_ONLY",lessons:208,ageVersions:624,questions,
- convertedAnswerButtonsStillNeedingHumanQA:legacyText+draftText,
+ convertedAnswerButtonsStillNeedingHumanQA:legacyText+draftConverted+draftText,
  oldOpenQuestions:legacyText,newDraftOpenQuestions:draftText,
+ existingConvertedDraftQuestions:draftConverted,
  newLessonSourceApprovals:0,newLessonAudioApprovals:0,
  uniquePossibleSpokenTexts:phrases.size,approvedGenerations:0,creditsSpent:0,
  voiceId:voice.voiceIdentity.voiceId,modelId:"eleven_v4",
