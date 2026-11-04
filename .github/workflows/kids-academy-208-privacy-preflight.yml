@@ -41,7 +41,6 @@ jobs:
           name: academy-142-source-and-ux-review
           path: artifacts/academy-142-source-review.json
           retention-days: 14
-          retention-days: 14
       - name: Attach full deduplicated Serhat V4 voice plan (no paid synthesis)
         uses: actions/upload-artifact@v4
         with:
