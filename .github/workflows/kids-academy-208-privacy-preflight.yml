@@ -35,7 +35,7 @@ jobs:
       - name: Attach proposed answer choices for editorial review
         uses: actions/upload-artifact@v4
         with:
-          name: academy-621-button-editorial-review
+          name: academy-624-button-editorial-review
           path: artifacts/academy-208-button-review.json
       - name: Attach 142-lesson source and compact-answer audit
         uses: actions/upload-artifact@v4
