@@ -10,6 +10,22 @@
     "hadith",
     "athar"
   ],
+  "sequencePolicy": {
+    "canonicalOrder": "internal-id-ascending",
+    "canonicalCount": 3394,
+    "sharedProductionCount": true,
+    "sharedProductionOrder": true,
+    "productionSurfaces": [
+      "web",
+      "ios",
+      "android",
+      "tvos"
+    ],
+    "testAppSubsetAllowed": true,
+    "hideInternalIdsFromPublicDisplay": true,
+    "displaySourceNumbersOnlyWhenBibliographic": true,
+    "screensaverRotationUnchanged": true
+  },
   "totalCount": 3394,
   "publishedCount": 3394,
   "hadithCount": 2408,
