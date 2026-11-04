@@ -12,9 +12,15 @@
     "showSource": true,
     "showGrade": true,
     "showSharh": true,
-    "requireVerifiedSharh": false
+    "requireVerifiedSharh": true,
+    "showSharhSource": true,
+    "showAtharIsnadGrade": true
   },
   "syncRule": "Ein Datensatz in apple-tv/hadith/ ist der gemeinsame Live-Stand für Website, Web-App, iOS, Android und Apple TV (inkl. Bildschirmschoner).",
-  "latestId": "HAD-3350",
-  "publishedCount": 3350
+  "latestId": "HAD-3359",
+  "publishedCount": 3359,
+  "sourceRecordTypes": [
+    "hadith",
+    "athar"
+  ]
 }
