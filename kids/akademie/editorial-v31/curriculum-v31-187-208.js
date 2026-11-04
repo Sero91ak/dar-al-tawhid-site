@@ -2181,7 +2181,9 @@ const additions={
      ],
      "correct": 0,
      "hint": "Der Vers gebietet das Gebet, der Bericht nennt die Körperteile.",
-     "explain": "Die genaue Aufzählung steht im überlieferten Ḥadīṯ."
+     "explain": "Die genaue Aufzählung steht im überlieferten Ḥadīṯ.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Suǧūd kennenlernen“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -2213,25 +2215,29 @@ const additions={
      "type": "choice",
      "prompt": "Welche Quelle beschreibt die sieben Körperteile genauer?",
      "options": [
-      "Qurʾān 20:14 allein.",
       "Al-Buḫārī 812.",
+      "Qurʾān 20:14 allein.",
       "Eine eigene Übung ohne Quelle."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "Der Vers befiehlt das Gebet, die Überlieferung beschreibt die Niederwerfung.",
-     "explain": "Die genaue Aufzählung steht in al-Buḫārī 812."
+     "explain": "Die genaue Aufzählung steht in al-Buḫārī 812.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
      "type": "choice",
      "prompt": "Wie gehst du mit abweichenden körperlichen Möglichkeiten um?",
      "options": [
+      "Respektvoll einen qualifizierten Lehrer nach Fiqh-Lösungen fragen.",
       "Alle zwingen, dieselbe Haltung zu schaffen.",
-      "Die Gebetspflicht für andere selbst beurteilen.",
-      "Respektvoll einen qualifizierten Lehrer nach Fiqh-Lösungen fragen."
+      "Die Gebetspflicht für andere selbst beurteilen."
      ],
-     "correct": 2,
+     "correct": 0,
      "hint": "Körperliche Möglichkeiten und Sonderfälle benötigen Fachkenntnis.",
-     "explain": "Bei Einschränkungen sind Rücksicht und qualifizierte fiqhrechtliche Klärung richtig."
+     "explain": "Bei Einschränkungen sind Rücksicht und qualifizierte fiqhrechtliche Klärung richtig.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Suǧūd kennenlernen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -2360,13 +2366,15 @@ const additions={
      "type": "choice",
      "prompt": "Wer entscheidet über Medikamente?",
      "options": [
+      "Eine zuständige erwachsene oder medizinische Person.",
       "Ich ohne Rückfrage.",
-      "Die Mitschüler.",
-      "Eine zuständige erwachsene oder medizinische Person."
+      "Die Mitschüler."
      ],
-     "correct": 2,
+     "correct": 0,
      "hint": "Kinder sollen keine Behandlung improvisieren.",
-     "explain": "Medizinische Fragen gehören zu zuständigen Erwachsenen und Fachpersonen."
+     "explain": "Medizinische Fragen gehören zu zuständigen Erwachsenen und Fachpersonen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Fürsorge für Kranke“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -2404,19 +2412,23 @@ const additions={
      ],
      "correct": 0,
      "hint": "Der Bericht benutzt ein Bauwerksbild.",
-     "explain": "Der Ḥadīṯ vergleicht gegenseitigen Halt mit einem Gebäude."
+     "explain": "Der Ḥadīṯ vergleicht gegenseitigen Halt mit einem Gebäude.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 5:2 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
      "type": "choice",
      "prompt": "Wie werden Qurʾān und Unterrichtsbeispiel sauber unterschieden?",
      "options": [
+      "Der Vers gibt einen Grundsatz; das Beispiel zeigt eine vorsichtige Anwendung.",
       "Der Vers beschreibt genau das heutige Glas Wasser.",
-      "Der Qurʾān verbietet Hilfsangebote.",
-      "Der Vers gibt einen Grundsatz; das Beispiel zeigt eine vorsichtige Anwendung."
+      "Der Qurʾān verbietet Hilfsangebote."
      ],
-     "correct": 2,
+     "correct": 0,
      "hint": "Nicht jede moderne Einzelsituation steht wörtlich im Vers.",
-     "explain": "Wir erklären die Anwendung und erfinden keinen Offenbarungswortlaut."
+     "explain": "Wir erklären die Anwendung und erfinden keinen Offenbarungswortlaut.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Fürsorge für Kranke“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -2551,7 +2563,9 @@ const additions={
      ],
      "correct": 0,
      "hint": "Die Sitzrechte der Anwesenden werden geachtet.",
-     "explain": "Der Ḥadīṯ verbietet, jemanden bloß für einen neuen Sitzplatz zu vertreiben."
+     "explain": "Der Ḥadīṯ verbietet, jemanden bloß für einen neuen Sitzplatz zu vertreiben.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Anderen Platz machen“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -2583,13 +2597,15 @@ const additions={
      "type": "choice",
      "prompt": "Ein neuer Schüler will genau deinen Stuhl. Wie lösen wir das?",
      "options": [
+      "Wir suchen ohne Zwang eine freie oder gemeinsam mögliche Sitzlösung.",
       "Er darf dich einfach wegschicken.",
-      "Ich beleidige ihn.",
-      "Wir suchen ohne Zwang eine freie oder gemeinsam mögliche Sitzlösung."
+      "Ich beleidige ihn."
      ],
-     "correct": 2,
+     "correct": 0,
      "hint": "Respekt gilt für beide Personen.",
-     "explain": "Eine rücksichtvolle Lösung verdrängt niemanden."
+     "explain": "Eine rücksichtvolle Lösung verdrängt niemanden.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 17:23 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
      "type": "choice",
@@ -2601,7 +2617,9 @@ const additions={
      ],
      "correct": 0,
      "hint": "Wähle den belegten Themenbezug.",
-     "explain": "Der konkrete Versinhalt passt zum Platzmachen."
+     "explain": "Der konkrete Versinhalt passt zum Platzmachen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Anderen Platz machen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -2730,13 +2748,15 @@ const additions={
      "type": "choice",
      "prompt": "Was betont al-Buḫārī 757 beim Sitzen?",
      "options": [
-      "Schnelligkeit.",
       "Ruhige Haltung.",
+      "Schnelligkeit.",
       "Lautes Sprechen."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "Hast ist nicht das Ziel.",
-     "explain": "In der Überlieferung wird ruhiges Sitzen erwähnt."
+     "explain": "In der Überlieferung wird ruhiges Sitzen erwähnt.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Zwischen zwei Niederwerfungen sitzen“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -2774,19 +2794,23 @@ const additions={
      ],
      "correct": 0,
      "hint": "Es geht um die Phase zwischen zwei Niederwerfungen.",
-     "explain": "Die Sitzphase liegt zwischen zwei Suǧūd."
+     "explain": "Die Sitzphase liegt zwischen zwei Suǧūd.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
      "type": "choice",
      "prompt": "Wie trennen wir Quellen und Detailfiqh?",
      "options": [
-      "Jede besondere Krankheit steht wörtlich im Ḥadīṯ.",
       "Wir lernen den beschriebenen Ablauf und fragen Fachkundige zu Sonderfällen.",
+      "Jede besondere Krankheit steht wörtlich im Ḥadīṯ.",
       "Wir erfinden zusätzliche Pflichten."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "Ein Bericht belegt nicht automatisch jede Einzelfrage.",
-     "explain": "Grundablauf und Sonderfälle sind getrennt zu prüfen."
+     "explain": "Grundablauf und Sonderfälle sind getrennt zu prüfen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Zwischen zwei Niederwerfungen sitzen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -2915,13 +2939,15 @@ const additions={
      "type": "choice",
      "prompt": "Welches Motiv beschreibt Qurʾān 76:9?",
      "options": [
-      "Hilfe nur für viele Likes.",
       "Geben um Allahs willen ohne erwarteten Dank.",
+      "Hilfe nur für viele Likes.",
       "Andere zum Dank zwingen."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "Lies die Bedeutung von 76:9.",
-     "explain": "Der Vers beschreibt aufrichtige Hilfe ohne Gegenforderung."
+     "explain": "Der Vers beschreibt aufrichtige Hilfe ohne Gegenforderung.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Guter Charakter im Wochenrückblick“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -2959,19 +2985,23 @@ const additions={
      ],
      "correct": 0,
      "hint": "Unterscheide den Ḥadīṯ von unserer Wochenmethode.",
-     "explain": "Der Bericht ist ein Beleg für Unterstützung, nicht für ein bestimmtes Quizformat."
+     "explain": "Der Bericht ist ein Beleg für Unterstützung, nicht für ein bestimmtes Quizformat.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 76:9 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
      "type": "choice",
      "prompt": "Welche Rückblicksfrage wahrt Grenzen?",
      "options": [
+      "Welche kleine gute Entscheidung könnte ich selbst wiederholen?",
       "Wer in der Gruppe war am schlechtesten?",
-      "Warum hat mein Freund zu wenig getan?",
-      "Welche kleine gute Entscheidung könnte ich selbst wiederholen?"
+      "Warum hat mein Freund zu wenig getan?"
      ],
-     "correct": 2,
+     "correct": 0,
      "hint": "Denk an die eigene Handlung, nicht an fremde Herzen.",
-     "explain": "Ein Rückblick soll die eigene Verantwortung stärken, ohne andere zu beschämen."
+     "explain": "Ein Rückblick soll die eigene Verantwortung stärken, ohne andere zu beschämen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Guter Charakter im Wochenrückblick“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -3106,7 +3136,9 @@ const additions={
      ],
      "correct": 0,
      "hint": "Gute Worte stehen im Mittelpunkt.",
-     "explain": "Der Ḥadīṯ lehrt verantwortungsvollen Umgang mit Worten."
+     "explain": "Der Ḥadīṯ lehrt verantwortungsvollen Umgang mit Worten.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Digitalen Adab üben“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -3144,19 +3176,23 @@ const additions={
      ],
      "correct": 0,
      "hint": "Achte auf Privatsphäre und Schutz.",
-     "explain": "Ein Foto ohne Zustimmung weiterzugeben kann andere schädigen."
+     "explain": "Ein Foto ohne Zustimmung weiterzugeben kann andere schädigen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 17:53 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
      "type": "choice",
      "prompt": "Bei Online-Drohungen solltest du...",
      "options": [
+      "Beweise sicher mit Erwachsenen besprechen und Hilfe holen.",
       "allein zurückdrohen.",
-      "alles löschen und niemandem erzählen.",
-      "Beweise sicher mit Erwachsenen besprechen und Hilfe holen."
+      "alles löschen und niemandem erzählen."
      ],
-     "correct": 2,
+     "correct": 0,
      "hint": "Sicherheit geht vor Geheimhaltung gegenüber Helfenden.",
-     "explain": "Vertraute Erwachsene sollen beim Umgang mit Drohungen helfen."
+     "explain": "Vertraute Erwachsene sollen beim Umgang mit Drohungen helfen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Digitalen Adab üben“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -3285,13 +3321,15 @@ const additions={
      "type": "choice",
      "prompt": "Welche Zuordnung ist richtig?",
      "options": [
-      "Tashahhud ist eine Sūrah.",
       "Tashahhud ist ein im Gebet gesprochener überlieferter Text.",
+      "Tashahhud ist eine Sūrah.",
       "Tashahhud ist die Gebetsrichtung."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "Denke an die Sitzphase.",
-     "explain": "Der Tashahhud ist Teil der überlieferten Gebetspraxis."
+     "explain": "Der Tashahhud ist Teil der überlieferten Gebetspraxis.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Tashahhud als Gebetsbestandteil“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -3323,25 +3361,29 @@ const additions={
      "type": "choice",
      "prompt": "Was ist eine korrekte Unterscheidung?",
      "options": [
-      "Tashahhud ist eine erfundene deutsche Unterrichtsformel.",
       "Qurʾān 20:14 gebietet das Gebet, al-Buḫārī 831 erklärt den überlieferten Tashahhud.",
+      "Tashahhud ist eine erfundene deutsche Unterrichtsformel.",
       "Der Tashahhud ist ein neues Kapitel des Qurʾān."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "Vergleiche den Inhalt der beiden Quellen.",
-     "explain": "Der Gebetsauftrag und sein überlieferter Wortlaut sind verschiedene Quellenebenen."
+     "explain": "Der Gebetsauftrag und sein überlieferter Wortlaut sind verschiedene Quellenebenen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
      "type": "choice",
      "prompt": "Wie behandeln wir mögliche Fiqh-Detailfragen?",
      "options": [
+      "Nach authentischen Belegen und qualifiziertem Fiqh-Unterricht klären.",
       "Eigene verbindliche Regeln ohne Prüfung erfinden.",
-      "Jede Frage pauschal verbieten.",
-      "Nach authentischen Belegen und qualifiziertem Fiqh-Unterricht klären."
+      "Jede Frage pauschal verbieten."
      ],
-     "correct": 2,
+     "correct": 0,
      "hint": "Nicht jede Einzelregel ergibt sich allein aus der Kurzlektion.",
-     "explain": "Fachliche Sonderfragen brauchen genaue Prüfung."
+     "explain": "Fachliche Sonderfragen brauchen genaue Prüfung.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Tashahhud als Gebetsbestandteil“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -3476,7 +3518,9 @@ const additions={
      ],
      "correct": 0,
      "hint": "Der Bericht beschreibt eine Handlung.",
-     "explain": "Muslim 582 berichtet den Friedensgruß nach rechts und links."
+     "explain": "Muslim 582 berichtet den Friedensgruß nach rechts und links.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Den Gebetsabschluss kennenlernen“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -3508,25 +3552,29 @@ const additions={
      "type": "choice",
      "prompt": "Was gilt für Qurʾān 20:14?",
      "options": [
-      "Der Vers enthält den vollständigen Taslīm-Wortlaut.",
       "Der Vers ordnet das Gebet an, aber der Taslīm wird hier in der Sunnah konkret beschrieben.",
+      "Der Vers enthält den vollständigen Taslīm-Wortlaut.",
       "Der Vers verbietet die Sunnah."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "Allgemeines Gebot und Einzelbericht sind zu unterscheiden.",
-     "explain": "Die Quelle des konkreten Abschlusses ist Muslim 582."
+     "explain": "Die Quelle des konkreten Abschlusses ist Muslim 582.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
      "type": "choice",
      "prompt": "Wie gehst du mit unterschiedlichen Details des Gebetsabschlusses um?",
      "options": [
+      "Eine qualifizierte Fiqh-Prüfung der Belege heranziehen.",
       "Ein eigenes Urteil ohne Beleg aufstellen.",
-      "Alle anderen ungeprüft beschuldigen.",
-      "Eine qualifizierte Fiqh-Prüfung der Belege heranziehen."
+      "Alle anderen ungeprüft beschuldigen."
      ],
-     "correct": 2,
+     "correct": 0,
      "hint": "Detailfragen brauchen genaue Kenntnis.",
-     "explain": "Authentische Belege und Fachkenntnis gehen vor schnellen Urteilen."
+     "explain": "Authentische Belege und Fachkenntnis gehen vor schnellen Urteilen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Den Gebetsabschluss kennenlernen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -3655,13 +3703,15 @@ const additions={
      "type": "choice",
      "prompt": "Was gehört zum gezeigten Gebetsablauf?",
      "options": [
-      "Jede Haltung in großer Eile.",
       "Ruhe beim Verbeugen und Niederwerfen.",
+      "Jede Haltung in großer Eile.",
       "Absichtlich andere auslachen."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "Der Bericht betont Ruhe.",
-     "explain": "Die Haltungen sollen mit Ruhe ausgeführt werden."
+     "explain": "Die Haltungen sollen mit Ruhe ausgeführt werden.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Fehler beim Üben des Gebets“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -3693,25 +3743,29 @@ const additions={
      "type": "choice",
      "prompt": "Was ist die nachweisbare Lehre zur Bewegung?",
      "options": [
-      "Je schneller, desto besser.",
       "Ruhig und in geordneter Haltung beten.",
+      "Je schneller, desto besser.",
       "Alle Haltungen auslassen."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "Der Bericht nennt wiederholt Ruhe.",
-     "explain": "Ruhe in den Haltungen ist Teil der prophetischen Unterweisung."
+     "explain": "Ruhe in den Haltungen ist Teil der prophetischen Unterweisung.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
      "type": "choice",
      "prompt": "Welche Schlussfolgerung ist methodisch richtig?",
      "options": [
+      "Den Bericht zum Lernen nutzen und Detailurteile fachkundig prüfen.",
       "Jedes Kindergebet öffentlich für ungültig erklären.",
-      "Lernfehler nie mehr besprechen.",
-      "Den Bericht zum Lernen nutzen und Detailurteile fachkundig prüfen."
+      "Lernfehler nie mehr besprechen."
      ],
-     "correct": 2,
+     "correct": 0,
      "hint": "Pädagogik und Fiqh-Einzelfallurteile unterscheiden.",
-     "explain": "Wir lernen aus dem Bericht, ohne ungeprüfte Urteile zu fällen."
+     "explain": "Wir lernen aus dem Bericht, ohne ungeprüfte Urteile zu fällen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Fehler beim Üben des Gebets“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -3840,13 +3894,15 @@ const additions={
      "type": "choice",
      "prompt": "Was ist bei jüngeren Kindern wichtig?",
      "options": [
-      "Sie müssen ohne Ausnahme den ganzen Tag fasten.",
       "Sie dürfen ohne gesundheitlichen Druck lernen.",
+      "Sie müssen ohne Ausnahme den ganzen Tag fasten.",
       "Sie dürfen keine Fragen stellen."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "Unterschied zwischen Lernen und Verpflichtung beachten.",
-     "explain": "Kindgerechtes Lernen darf die Gesundheit nicht gefährden."
+     "explain": "Kindgerechtes Lernen darf die Gesundheit nicht gefährden.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Ramaḍān und Fasten kennenlernen“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -3878,25 +3934,29 @@ const additions={
      "type": "choice",
      "prompt": "Was ist der Unterschied zwischen Lernen und Fastenpflicht?",
      "options": [
-      "Jedes Kind ist allein durch Unterricht fastenpflichtig.",
       "Lernen ist möglich, auch ohne dass individuelle rechtliche Voraussetzungen vorliegen.",
+      "Jedes Kind ist allein durch Unterricht fastenpflichtig.",
       "Die Religion kennt keinen Fastenmonat."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "Pflicht setzt Voraussetzungen voraus.",
-     "explain": "Eine Unterrichtsstunde begründet keine neue persönliche Pflicht."
+     "explain": "Eine Unterrichtsstunde begründet keine neue persönliche Pflicht.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 2:183? Was steht in der Sunnah?"
     },
     {
      "type": "choice",
      "prompt": "Welche Reaktion ist bei gesundheitlichen Beschwerden richtig?",
      "options": [
+      "Gesundheit schützen und geeignete erwachsene Hilfe hinzuziehen.",
       "Beschwerden verbergen.",
-      "Fasten trotz Gefahr erzwingen.",
-      "Gesundheit schützen und geeignete erwachsene Hilfe hinzuziehen."
+      "Fasten trotz Gefahr erzwingen."
      ],
-     "correct": 2,
+     "correct": 0,
      "hint": "Kinderschutz und Fiqh dürfen nicht verwechselt werden.",
-     "explain": "Gesundheitliche Beschwerden müssen ernst genommen werden."
+     "explain": "Gesundheitliche Beschwerden müssen ernst genommen werden.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Ramaḍān und Fasten kennenlernen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -4025,13 +4085,15 @@ const additions={
      "type": "choice",
      "prompt": "Was ist Ḥaǧǧ?",
      "options": [
-      "Eine Gebetswaschung.",
       "Die Pilgerfahrt nach Makkah.",
+      "Eine Gebetswaschung.",
       "Eine freiwillige Nachricht."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "Es ist eine Reise zu einer religiösen Stätte.",
-     "explain": "Ḥaǧǧ ist die Pilgerfahrt nach Makkah."
+     "explain": "Ḥaǧǧ ist die Pilgerfahrt nach Makkah.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Zakāh und Ḥaǧǧ als Säulen“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -4063,25 +4125,29 @@ const additions={
      "type": "choice",
      "prompt": "Wo werden Zakāh und Ḥaǧǧ zusammen als Säulen genannt?",
      "options": [
-      "In einem beliebigen Reisebericht.",
       "In al-Buḫārī 8.",
+      "In einem beliebigen Reisebericht.",
       "In der Erklärung eines Kindes ohne Quelle."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "Die Aufzählung stammt aus der Sunnah.",
-     "explain": "Al-Buḫārī 8 überliefert die fünf Säulen."
+     "explain": "Al-Buḫārī 8 überliefert die fünf Säulen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 2:43? Was steht in der Sunnah?"
     },
     {
      "type": "choice",
      "prompt": "Welche Unterscheidung ist korrekt?",
      "options": [
+      "Zakāh und Ḥaǧǧ haben bestimmte Voraussetzungen; freiwillige gute Taten sind davon zu unterscheiden.",
       "Jedes Geschenk ist bereits die religiös geschuldete Zakāh.",
-      "Jede Reise ist ein Ḥaǧǧ.",
-      "Zakāh und Ḥaǧǧ haben bestimmte Voraussetzungen; freiwillige gute Taten sind davon zu unterscheiden."
+      "Jede Reise ist ein Ḥaǧǧ."
      ],
-     "correct": 2,
+     "correct": 0,
      "hint": "Nicht jede freundliche Handlung ist automatisch eine bestimmte religiöse Pflicht.",
-     "explain": "Fiqh-Bedingungen und freiwillige Hilfe dürfen nicht vermischt werden."
+     "explain": "Fiqh-Bedingungen und freiwillige Hilfe dürfen nicht vermischt werden.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Zakāh und Ḥaǧǧ als Säulen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
