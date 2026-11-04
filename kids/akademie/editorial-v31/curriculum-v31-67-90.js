@@ -577,7 +577,7 @@ const additions={
   "topic": "Wasser beim Wuḍūʾ sparen",
   "title": "Fiqh · Wasser beim Wuḍūʾ sparen",
   "lead": "Heute lernen wir: Wasser beim Wuḍūʾ sparen.",
-  "goal": "Ich kann den Wasserhahn bei der Waschung nicht unnötig laufen lassen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann unterscheiden, was der Qurʾān über die Waschung sagt und wie die Sunnah sparsamen Wassergebrauch beim Wuḍūʾ belegt.",
   "quran": {
    "surah": 5,
    "ayah": 6,
@@ -587,15 +587,15 @@ const additions={
    "excerpt": true
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 135",
-   "text": "Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 201 · Anas ibn Mālik",
+   "text": "Anas berichtete, dass der Prophet ﷺ für Wuḍūʾ eine begrenzte Wassermenge, ein Mudd, verwendete."
   },
   "sourceAudit": {
    "quranReference": "5:6",
    "quranUrl": "https://quran.com/5/6",
-   "hadithUrl": "https://sunnah.com/bukhari:135",
-   "sourceAnchorLessonId": "fiqh-wudu",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
+   "hadithUrl": "https://sunnah.com/bukhari:201",
+   "sourceAnchorLessonId": null,
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg; Quellen- und Fiqh-/Kinderschutzprüfung ausstehend.",
    "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -603,141 +603,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Den Wasserhahn bei der Waschung nicht unnötig laufen lassen.",
-  "sample": "Bei „Wasser beim Wuḍūʾ sparen“ übe ich: den Wasserhahn bei der Waschung nicht unnötig laufen lassen.",
+  "hint": "Wir unterscheiden den belegten Text von unserer eigenen Übung.",
+  "sample": "Ich lerne, was Qurʾān und Sunnah wirklich sagen.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Wasser beim Wuḍūʾ sparen.",
+    "intro": "Wir lernen, Wasser beim Wuḍūʾ achtsam zu verwenden.",
     "lines": [
-     "Wir lernen heute: Wasser beim Wuḍūʾ sparen.",
-     "Wir üben den Wasserhahn bei der Waschung nicht unnötig laufen lassen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Wuḍūʾ ist die Waschung vor dem Gebet.",
+     "Für diese Waschung brauchen wir Wasser.",
+     "Der Prophet ﷺ verwendete beim Wuḍūʾ keine riesige Wassermenge.",
+     "Wir üben mit einem Erwachsenen, nicht unnötig Wasser laufen zu lassen."
     ],
-    "evidence": "Qurʾān 5:6 lehrt: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 5:6 nennt die Waschung; al-Buḫārī 201 berichtet über die verwendete Wassermenge."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Den Wasserhahn bei der Waschung nicht unnötig laufen lassen.",
+    "intro": "Wie lässt sich Wuḍūʾ mit achtsamem Wassergebrauch verbinden?",
     "lines": [
-     "Heute untersuchen wir das Thema „Wasser beim Wuḍūʾ sparen“.",
-     "Der Qurʾān spricht in 5:6 darüber: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 135 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Den Wasserhahn bei der Waschung nicht unnötig laufen lassen. Wir überlegen gemeinsam, warum es passt."
+     "Qurʾān 5:6 nennt Körperteile, die beim Wuḍūʾ gewaschen oder überstrichen werden.",
+     "Anas berichtete, dass der Prophet ﷺ für Wuḍūʾ ein Mudd Wasser verwendete.",
+     "Ein Mudd ist ein überliefertes Hohlmaß; wir müssen keine heutige Literzahl erfinden.",
+     "Das Schließen eines Wasserhahns zwischen den Schritten ist unsere praktische Übung, nicht der Wortlaut des Ḥadīṯ."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Der Ḥadīṯ bei al-Buḫārī 201 belegt eine Wassermenge; die Hahn-Übung ist unsere Anwendung."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Wasser beim Wuḍūʾ sparen“.",
+    "intro": "Wir trennen den Wuḍūʾ-Ablauf von der Frage der Wassermenge.",
     "lines": [
-     "Ausgangssituation: Den Wasserhahn bei der Waschung nicht unnötig laufen lassen.",
-     "Qurʾān 5:6: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 135): Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 5:6 behandelt die Waschung vor dem Gebet und unterscheidet Waschen vom Streichen über den Kopf.",
+     "Al-Buḫārī 201 überliefert von Anas den Wasserverbrauch des Propheten ﷺ mit dem Maß Mudd.",
+     "Der Bericht ist keine Aufforderung, den Waschungsvorgang aus Angst vor Wasserkosten unvollständig zu lassen.",
+     "Achtsamer Wassergebrauch ist eine pädagogische Anwendung der Überlieferung; für genaue Fiqh-Fragen brauchen wir zusätzlich eine Fachprüfung."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Qurʾān 5:6 und al-Buḫārī 201 haben unterschiedliche Belegbereiche."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Wasser beim Wuḍūʾ sparen“ eine gute Handlung?",
+     "prompt": "Wofür verwenden wir Wasser beim Wuḍūʾ?",
      "options": [
-      "Ich kann den Wasserhahn bei der Waschung nicht unnötig laufen lassen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Für die Gebetswaschung.",
+      "Zum Bemalen eines Tisches."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Den Wasserhahn bei der Waschung nicht unnötig laufen lassen.",
-     "explain": "Unser Lernbeispiel ist: Den Wasserhahn bei der Waschung nicht unnötig laufen lassen."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Wuḍūʾ ist die Waschung vor dem Gebet."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Wasser beim Wuḍūʾ sparen“ tun?",
+     "prompt": "Wie gehen wir achtsam mit Wasser um?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Wir lassen es nicht unnötig laufen.",
+      "Wir drehen den Hahn ohne Grund ganz auf."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Wasser achtsam zu verwenden ist unsere praktische Übung."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Wasser beim Wuḍūʾ sparen“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was berichtet Anas in al-Buḫārī 201?",
      "options": [
-      "Ich kann den Wasserhahn bei der Waschung nicht unnötig laufen lassen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Der Prophet ﷺ verwendete ein Mudd Wasser für Wuḍūʾ.",
+      "Der Prophet ﷺ verwendete immer eine unbekannte Menge ohne Maß."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Den Wasserhahn bei der Waschung nicht unnötig laufen lassen.",
-     "explain": "Unser Lernbeispiel ist: Den Wasserhahn bei der Waschung nicht unnötig laufen lassen."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Die Wassermenge wird im Bericht genannt."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Wasser beim Wuḍūʾ sparen“ im Alltag üben kannst?",
+     "prompt": "Was ist eine sinnvolle Übung mit Wasser?",
      "options": [
-      "Ich könnte den Wasserhahn bei der Waschung nicht unnötig laufen lassen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Den Hahn nicht unnötig laufen lassen.",
+      "Wasser absichtlich über den Boden laufen lassen."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte den Wasserhahn bei der Waschung nicht unnötig laufen lassen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Die Übung ist eine Anwendung, kein wörtliches Zitat.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Wasser beim Wuḍūʾ sparen“ im Beispiel üben kannst."
+     "legacyPrompt": "Redaktioneller Fragetyp – menschliche Antwortabnahme ausstehend."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 5:6?",
+     "prompt": "Welche Quelle nennt die Teile der Waschung?",
      "options": [
-      "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln.",
-      "Unser Übungsbeispiel ist: Den Wasserhahn bei der Waschung nicht unnötig laufen lassen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt."
+      "Qurʾān 5:6.",
+      "Al-Buḫārī 201 allein."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Der Qurʾān nennt unter anderem Gesicht, Arme, Kopf und Füße."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Wasser beim Wuḍūʾ sparen“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Was dürfen wir aus al-Buḫārī 201 ableiten?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Für Wuḍūʾ wurde ein bestimmtes Wassermaß berichtet.",
+      "Eine neue Pflicht zur Zahlung eines Wasserbetrags."
      ],
      "correct": 0,
-     "hint": "Vergleiche 5:6 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Ein Mudd ist ein überliefertes Maß, keine erfundene heutige Gebühr."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 5:6?",
+     "prompt": "Wie erklärt Qurʾān 5:6 den Kopf?",
      "options": [
-      "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln.",
-      "Unser Übungsbeispiel ist: Den Wasserhahn bei der Waschung nicht unnötig laufen lassen."
+      "Beim Wuḍūʾ wird über den Kopf gestrichen.",
+      "Der Kopf wird dreimal als Körperwäsche genannt."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt.",
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Der Vers unterscheidet Streichen über den Kopf von den Waschschritten.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 5:6 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Redaktioneller Fragetyp – menschliche Antwortabnahme ausstehend."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Wasser beim Wuḍūʾ sparen“?",
+     "prompt": "Warum darf man die Waschung nicht unvollständig lassen?",
      "options": [
-      "Ich erkläre die Situation: den Wasserhahn bei der Waschung nicht unnötig laufen lassen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Die vorgeschriebenen Waschungsschritte gelten unabhängig von der Sparübung.",
+      "Sparsames Wasser bedeutet, Waschschritte grundsätzlich wegzulassen."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: den Wasserhahn bei der Waschung nicht unnötig laufen lassen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Die Fiqh-Pflichten werden nicht durch eine Unterrichtsübung aufgehoben.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Wasser beim Wuḍūʾ sparen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Redaktioneller Fragetyp – menschliche Antwortabnahme ausstehend."
     }
    ]
   },
@@ -1699,167 +1697,165 @@ const additions={
   "topic": "Aufgaben der Engel",
   "title": "Īmān · Aufgaben der Engel",
   "lead": "Heute lernen wir: Aufgaben der Engel.",
-  "goal": "Ich kann eine in Qurʾān und Sunnah belegte Aufgabe nennen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann eine in Qurʾān und Sunnah ausdrücklich genannte Aufgabe von Engeln erkennen, ohne weitere Aufgaben zu erfinden.",
   "quran": {
-   "surah": 2,
-   "ayah": 285,
-   "label": "Sūrat al-Baqarah · 2:285",
-   "arabic": "كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ",
-   "meaning": "Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. (Versauszug)",
-   "excerpt": true
+   "surah": 82,
+   "ayah": 11,
+   "label": "Sūrat al-Infiṭār · 82:11",
+   "arabic": "كِرَامًا كَاتِبِينَ",
+   "meaning": "Ehrenwerte, die aufschreiben.",
+   "excerpt": false
   },
   "hadith": {
-   "source": "Ṣaḥīḥ Muslim, Nr. 8 · ʿUmar ibn al-Khaṭṭāb (Ḥadīṯ Ǧibrīl)",
-   "text": "Der Prophet ﷺ erklärte den Īmān: an Allah, Seine Engel, Seine Bücher, Seine Gesandten, den Jüngsten Tag und die Bestimmung zu glauben. (Sinngemäß)"
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 3208 · ʿAbdullāh ibn Masʿūd",
+   "text": "Der Prophet ﷺ berichtete von einem Engel, dem im Zusammenhang mit einem Menschen vor seiner Geburt bestimmte Dinge zum Aufschreiben aufgetragen werden."
   },
   "sourceAudit": {
-   "quranReference": "2:285",
-   "quranUrl": "https://quran.com/2/285",
-   "hadithUrl": "https://sunnah.com/muslim:8a",
-   "sourceAnchorLessonId": "aqidah-iman-an-engel",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
-   "quranTextType": "excerpt",
+   "quranReference": "82:11",
+   "quranUrl": "https://quran.com/82/11",
+   "hadithUrl": "https://sunnah.com/bukhari:3208",
+   "sourceAnchorLessonId": null,
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg; Quellen- und Fiqh-/Kinderschutzprüfung ausstehend.",
+   "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Eine in Qurʾān und Sunnah belegte Aufgabe nennen.",
-  "sample": "Bei „Aufgaben der Engel“ übe ich: eine in Qurʾān und Sunnah belegte Aufgabe nennen.",
+  "hint": "Wir unterscheiden den belegten Text von unserer eigenen Übung.",
+  "sample": "Ich lerne, was Qurʾān und Sunnah wirklich sagen.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Aufgaben der Engel.",
+    "intro": "Allah hat Engel geschaffen.",
     "lines": [
-     "Wir lernen heute: Aufgaben der Engel.",
-     "Wir üben eine in Qurʾān und Sunnah belegte Aufgabe nennen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Engel sind Geschöpfe Allahs.",
+     "Der Qurʾān erwähnt ehrwürdige Engel, die aufschreiben.",
+     "Wir können Engel nicht einfach nach unserer Fantasie beschreiben.",
+     "Wir sprechen nur über Aufgaben, die in den Quellen erwähnt sind."
     ],
-    "evidence": "Qurʾān 2:285 lehrt: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 82:11 nennt schreibende Engel. Über ihr Aussehen erfinden wir keine Geschichten."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Eine in Qurʾān und Sunnah belegte Aufgabe nennen.",
+    "intro": "Nicht alle Engel haben in den Quellen dieselbe Aufgabe.",
     "lines": [
-     "Heute untersuchen wir das Thema „Aufgaben der Engel“.",
-     "Der Qurʾān spricht in 2:285 darüber: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ Muslim, Nr. 8 · ʿUmar ibn al-Khaṭṭāb (Ḥadīṯ Ǧibrīl) nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Eine in Qurʾān und Sunnah belegte Aufgabe nennen. Wir überlegen gemeinsam, warum es passt."
+     "Qurʾān 82:10–12 spricht von Wächtern und ehrenwerten Schreibenden.",
+     "Der Vers 82:11 nennt ausdrücklich Engel, die aufschreiben.",
+     "Al-Buḫārī 3208 beschreibt einen anderen Auftrag eines Engels vor der Geburt eines Menschen.",
+     "Wir unterscheiden diese Berichte und erfinden keine weiteren Einzelheiten."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ nennen belegte Aufgaben; sie erzählen nicht jede Einzelheit über die Engel."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Aufgaben der Engel“.",
+    "intro": "Wir sammeln keine unbelegten Aussagen über das Verborgene.",
     "lines": [
-     "Ausgangssituation: Eine in Qurʾān und Sunnah belegte Aufgabe nennen.",
-     "Qurʾān 2:285: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
-     "Sunnah (Ṣaḥīḥ Muslim, Nr. 8 · ʿUmar ibn al-Khaṭṭāb (Ḥadīṯ Ǧibrīl)): Der Prophet ﷺ erklärte den Īmān: an Allah, Seine Engel, Seine Bücher, Seine Gesandten, den Jüngsten Tag und die Bestimmung zu glauben. (Sinngemäß) Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Engel gehören zum Bereich des Verborgenen, den wir aus Offenbarung und authentischer Sunnah kennenlernen.",
+     "Qurʾān 82:11 spricht von ehrenwerten Schreibenden, eingebettet in die Verse 82:10–12.",
+     "Al-Buḫārī 3208 nennt einen bestimmten Schreibauftrag eines Engels im Zusammenhang mit dem Menschen vor der Geburt.",
+     "Die beiden Texte dürfen wir nicht zu frei erfundenen Geschichten oder Bildern des Verborgenen verbinden."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Die religiösen Aussagen müssen exakt im beschriebenen Belegbereich bleiben."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Aufgaben der Engel“ eine gute Handlung?",
+     "prompt": "Welche Aufgabe nennt Qurʾān 82:11?",
      "options": [
-      "Ich kann eine in Qurʾān und Sunnah belegte Aufgabe nennen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Aufschreiben.",
+      "Brot backen."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Eine in Qurʾān und Sunnah belegte Aufgabe nennen.",
-     "explain": "Unser Lernbeispiel ist: Eine in Qurʾān und Sunnah belegte Aufgabe nennen."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Der Vers erwähnt schreibende Engel."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Aufgaben der Engel“ tun?",
+     "prompt": "Woher lernen wir über Engel?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Aus Qurʾān und authentischer Sunnah.",
+      "Aus frei erfundenen Märchen."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Wir behaupten nur, was belegt ist."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Aufgaben der Engel“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was bezeichnet Qurʾān 82:11?",
      "options": [
-      "Ich kann eine in Qurʾān und Sunnah belegte Aufgabe nennen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Ehrenwerte Schreibende.",
+      "Das Hohlmaß für die Waschung."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Eine in Qurʾān und Sunnah belegte Aufgabe nennen.",
-     "explain": "Unser Lernbeispiel ist: Eine in Qurʾān und Sunnah belegte Aufgabe nennen."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Die Verse sprechen über Engel."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Aufgaben der Engel“ im Alltag üben kannst?",
+     "prompt": "Was ist bei Engeln ein glaubwürdiger Beleg?",
      "options": [
-      "Ich könnte eine in Qurʾān und Sunnah belegte Aufgabe nennen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Ein tatsächlicher Qurʾān-Vers oder authentischer Bericht.",
+      "Eine bloße Vermutung über ihr Aussehen."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte eine in Qurʾān und Sunnah belegte Aufgabe nennen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Aussagen über das Verborgene brauchen Belege.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Aufgaben der Engel“ im Beispiel üben kannst."
+     "legacyPrompt": "Redaktioneller Fragetyp – menschliche Antwortabnahme ausstehend."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:285?",
+     "prompt": "Was lernen wir aus al-Buḫārī 3208?",
      "options": [
-      "Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
-      "Unser Übungsbeispiel ist: Eine in Qurʾān und Sunnah belegte Aufgabe nennen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ erklärte den Īmān: an Allah, Seine Engel, Seine Bücher, Seine Gesandten, den Jüngsten Tag und die Bestimmung zu glauben. (Sinngemäß)"
+      "Ein Engel hat einen beschriebenen Schreibauftrag.",
+      "Jeder Engel hat dieselbe frei erfundene Aufgabe."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Der Bericht nennt einen konkreten Auftrag."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Aufgaben der Engel“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Stelle nennt schreibende Engel?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Qurʾān 82:11.",
+      "Qurʾān 5:6 über Wuḍūʾ."
      ],
      "correct": 0,
-     "hint": "Vergleiche 2:285 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Die Aufgabenbeschreibung steht in Sūrat al-Infiṭār."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:285?",
+     "prompt": "Welche zusätzliche Aufgabe steht in al-Buḫārī 3208?",
      "options": [
-      "Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
-      "Unser Übungsbeispiel ist: Eine in Qurʾān und Sunnah belegte Aufgabe nennen."
+      "Ein Engel schreibt aufgetragenes über einen Menschen auf.",
+      "Alle Engel verrichten genau denselben Auftrag."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte den Īmān: an Allah, Seine Engel, Seine Bücher, Seine Gesandten, den Jüngsten Tag und die Bestimmung zu glauben. (Sinngemäß)",
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Der Bericht nennt einen bestimmten Engel und Auftrag.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 2:285 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Redaktioneller Fragetyp – menschliche Antwortabnahme ausstehend."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Aufgaben der Engel“?",
+     "prompt": "Warum verzichten wir auf selbst erfundene Engelbeschreibungen?",
      "options": [
-      "Ich erkläre die Situation: eine in Qurʾān und Sunnah belegte Aufgabe nennen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Weil wir über das Verborgene nur mit Belegen sprechen.",
+      "Weil jede ausgedachte Einzelheit eine Offenbarung ist."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: eine in Qurʾān und Sunnah belegte Aufgabe nennen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Quellen trennen Wissen und Fantasie.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Aufgaben der Engel“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Redaktioneller Fragetyp – menschliche Antwortabnahme ausstehend."
     }
    ]
   },
@@ -2821,7 +2817,7 @@ const additions={
   "topic": "Wann braucht man Wuḍūʾ?",
   "title": "Fiqh · Wann braucht man Wuḍūʾ?",
   "lead": "Heute lernen wir: Wann braucht man Wuḍūʾ?.",
-  "goal": "Ich kann vor dem Gebet mit den Eltern über Reinigung sprechen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann erklären, warum man vor dem Gebet Wuḍūʾ benötigt und warum es nach bestimmten Zuständen erneuert wird.",
   "quran": {
    "surah": 5,
    "ayah": 6,
@@ -2838,8 +2834,8 @@ const additions={
    "quranReference": "5:6",
    "quranUrl": "https://quran.com/5/6",
    "hadithUrl": "https://sunnah.com/bukhari:135",
-   "sourceAnchorLessonId": "fiqh-wudu",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
+   "sourceAnchorLessonId": null,
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg; Quellen- und Fiqh-/Kinderschutzprüfung ausstehend.",
    "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -2847,141 +2843,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Vor dem Gebet mit den Eltern über Reinigung sprechen.",
-  "sample": "Bei „Wann braucht man Wuḍūʾ?“ übe ich: vor dem Gebet mit den Eltern über Reinigung sprechen.",
+  "hint": "Wir unterscheiden den belegten Text von unserer eigenen Übung.",
+  "sample": "Ich lerne, was Qurʾān und Sunnah wirklich sagen.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Wann braucht man Wuḍūʾ?.",
+    "intro": "Wir bereiten uns durch Wuḍūʾ auf das Gebet vor.",
     "lines": [
-     "Wir lernen heute: Wann braucht man Wuḍūʾ?.",
-     "Wir üben vor dem Gebet mit den Eltern über Reinigung sprechen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Wuḍūʾ ist die Gebetswaschung.",
+     "Beim Wuḍūʾ waschen wir Gesicht, Arme und Füße und streichen über den Kopf.",
+     "Wenn Wuḍūʾ ungültig geworden ist, erneuern wir es vor dem Gebet.",
+     "Ein Erwachsener hilft uns, die Regeln richtig zu lernen."
     ],
-    "evidence": "Qurʾān 5:6 lehrt: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 5:6 nennt die Waschung; al-Buḫārī 135 erklärt, dass ein aufgehobener Wuḍūʾ vor dem Gebet erneuert werden muss."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Vor dem Gebet mit den Eltern über Reinigung sprechen.",
+    "intro": "Wann erneuern wir Wuḍūʾ?",
     "lines": [
-     "Heute untersuchen wir das Thema „Wann braucht man Wuḍūʾ?“.",
-     "Der Qurʾān spricht in 5:6 darüber: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 135 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Vor dem Gebet mit den Eltern über Reinigung sprechen. Wir überlegen gemeinsam, warum es passt."
+     "Qurʾān 5:6 führt grundlegende Waschungsbestandteile auf.",
+     "Al-Buḫārī 135 lehrt, dass ein Gebet nach Ḥadaṯ eine neue Waschung erfordert.",
+     "Ḥadaṯ bezeichnet einen Zustand, der die rituelle Reinheit aufhebt.",
+     "Welche einzelnen Fälle dazu gehören, lernen wir mit vertrauenswürdigen Erwachsenen und geprüften Fiqh-Quellen."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Der Ḥadīṯ behandelt das Gebet nach Ḥadaṯ; der Vers die Waschung. Nicht jede alltägliche Verschmutzung ist automatisch Ḥadaṯ."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Wann braucht man Wuḍūʾ?“.",
+    "intro": "Wuḍūʾ ist nicht bloß gewöhnliches Händewaschen.",
     "lines": [
-     "Ausgangssituation: Vor dem Gebet mit den Eltern über Reinigung sprechen.",
-     "Qurʾān 5:6: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 135): Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 5:6 nennt die Waschung vor dem Gebet sowie das Streichen über den Kopf.",
+     "Der Ḥadīṯ al-Buḫārī 135 erklärt, dass das Gebet ohne erneute Reinigung nach Ḥadaṯ nicht angenommen wird.",
+     "Nicht jedes Berühren, Spielen oder Essen hebt Wuḍūʾ auf; darüber brauchen wir differenzierte Fiqh-Regeln.",
+     "Die konkreten Nullifikatoren dürfen wir nicht aus einer allgemeinen Kinderfrage oder einem einzigen Bericht erschließen."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Für Listen der Nullifikatoren ist eine eigene Fiqh-Fachprüfung erforderlich; diese Lektion vermittelt nur den belegten Grundsatz."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Wann braucht man Wuḍūʾ?“ eine gute Handlung?",
+     "prompt": "Wofür ist Wuḍūʾ eine Vorbereitung?",
      "options": [
-      "Ich kann vor dem Gebet mit den Eltern über Reinigung sprechen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Für das Gebet.",
+      "Für das Einschlafen."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Vor dem Gebet mit den Eltern über Reinigung sprechen.",
-     "explain": "Unser Lernbeispiel ist: Vor dem Gebet mit den Eltern über Reinigung sprechen."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Wir lernen die Gebetswaschung."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Wann braucht man Wuḍūʾ?“ tun?",
+     "prompt": "Was tun wir, wenn Wuḍūʾ ungültig geworden ist?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Vor dem Gebet erneuern.",
+      "So tun, als sei nichts geschehen."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Al-Buḫārī 135 verbindet die Reinigung mit dem Gebet."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Wann braucht man Wuḍūʾ?“. Welche Handlung passt zur Stunde?",
+     "prompt": "Welche Quelle nennt grundlegende Waschungsschritte?",
      "options": [
-      "Ich kann vor dem Gebet mit den Eltern über Reinigung sprechen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Qurʾān 5:6.",
+      "Ein gewöhnlicher Stundenplan."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Vor dem Gebet mit den Eltern über Reinigung sprechen.",
-     "explain": "Unser Lernbeispiel ist: Vor dem Gebet mit den Eltern über Reinigung sprechen."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Der Vers nennt Teile der Gebetswaschung."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Wann braucht man Wuḍūʾ?“ im Alltag üben kannst?",
+     "prompt": "Was lehrt al-Buḫārī 135?",
      "options": [
-      "Ich könnte vor dem Gebet mit den Eltern über Reinigung sprechen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Nach Ḥadaṯ braucht es vor dem Gebet erneuten Wuḍūʾ.",
+      "Jede kleine Alltagshandlung macht Wuḍūʾ ungültig."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte vor dem Gebet mit den Eltern über Reinigung sprechen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Der Ḥadīṯ benennt den Grundsatz bei Ḥadaṯ.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Wann braucht man Wuḍūʾ?“ im Beispiel üben kannst."
+     "legacyPrompt": "Redaktioneller Fragetyp – menschliche Antwortabnahme ausstehend."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 5:6?",
+     "prompt": "Wer hilft, einzelne Fälle genau zu unterscheiden?",
      "options": [
-      "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln.",
-      "Unser Übungsbeispiel ist: Vor dem Gebet mit den Eltern über Reinigung sprechen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt."
+      "Vertrauenswürdige Erwachsene mit geprüften Fiqh-Quellen.",
+      "Ein beliebiges Gerücht ohne Beleg."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Die Details brauchen sachkundige Erklärung."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Wann braucht man Wuḍūʾ?“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Was bezeichnet Ḥadaṯ in dieser Lektion?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Einen Zustand, der die rituelle Reinheit aufhebt.",
+      "Das normale Waschen vor dem Essen."
      ],
      "correct": 0,
-     "hint": "Vergleiche 5:6 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Der Grundsatz wird in al-Buḫārī 135 erklärt."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 5:6?",
+     "prompt": "Welche Waschungshandlung wird im Qurʾān beim Kopf genannt?",
      "options": [
-      "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln.",
-      "Unser Übungsbeispiel ist: Vor dem Gebet mit den Eltern über Reinigung sprechen."
+      "Darüber streichen.",
+      "Den Kopf nach Belieben auslassen."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt.",
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Qurʾān 5:6 unterscheidet Waschung und Streichen.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 5:6 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Redaktioneller Fragetyp – menschliche Antwortabnahme ausstehend."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Wann braucht man Wuḍūʾ?“?",
+     "prompt": "Was muss man für vollständige Nullifikatoren-Listen beachten?",
      "options": [
-      "Ich erkläre die Situation: vor dem Gebet mit den Eltern über Reinigung sprechen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Eine gesonderte zuverlässige Fiqh-Prüfung.",
+      "Einige Beispiele reichen für alle Detailurteile."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: vor dem Gebet mit den Eltern über Reinigung sprechen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Aus einem Einzelbericht folgt keine vollständige Fiqh-Liste.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Wann braucht man Wuḍūʾ?“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Redaktioneller Fragetyp – menschliche Antwortabnahme ausstehend."
     }
    ]
   },
