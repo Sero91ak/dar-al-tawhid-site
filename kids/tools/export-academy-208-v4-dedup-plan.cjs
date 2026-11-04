@@ -12,6 +12,35 @@ for(const v of ["v1","v2","v22","v25","v26","v27","v28","v29"])
 for(const c of ["67-90","91-114","115-138","139-162","163-186","187-208"])
  vm.runInContext(read("kids/akademie/editorial-v31/curriculum-v31-"+c+".js"),context,{timeout:12000});
 const policy=json("kids/data/academy-voice-policy-v10.json");
+
+/* First reuse the actual owner-confirmed pronunciation REFERENCE corpus.
+ * A full story recording is evidence of delivery/pronunciation, NOT a
+ * pre-cut word clip that can be concatenated without alignment and QA. */
+require("./test-academy-fusha-library-first.cjs");
+const fua=json("kids/data/academy-fusha-library-first-v1.json");
+assert.equal(fua.ownerMasterVoiceId,policy.voiceIdentity.voiceId);
+const ownTermList=[...new Set(fua.approvedStoryReferences.flatMap(s=>s.exactTermsPresentInReferenceText))];
+const matchTerm=(text,term)=>{
+ const esc=Array.from(term).map(ch=>".*+?^$()|[]{}\\".includes(ch)?"\\"+ch:ch).join("");
+ return new RegExp("(?<![\\p{L}\\p{M}])"+esc+"(?![\\p{L}\\p{M}])","iu").test(text);
+};
+function ownerApprovedPronunciationReferences(phrase){
+ const refs=[];
+ for(const term of ownTermList){
+  if(!matchTerm(phrase,term))continue;
+  for(const s of fua.approvedStoryReferences){
+   if(!s.exactTermsPresentInReferenceText.includes(term))continue;
+   refs.push({term,recordingId:s.id,referenceJson:s.sourceFile,
+    fullStoryAudio:s.originalMp3,fullStoryAudioSha256:s.sourceAudioSha256,
+    sourceAudioKind:"owner-approved-full-story-reference",
+    isolatedWordAudioReady:false,
+    canReuseAsStandaloneWordClip:false});
+  }
+ }
+ return refs;
+}
+const quranTerm=/((?<![\p{L}\p{M}])(?:Qurʾān|Quran|Qur'an|Koran)(?![\p{L}\p{M}]))/iu;
+
 assert.equal(policy.voiceIdentity.voiceId,"DkU7j9uO4ZEtLD2iRZSH");
 assert.equal(policy.production.modelId,"eleven_v4");
 assert.equal(policy.production.profile,"kids_story");
@@ -139,6 +168,16 @@ const manifests=manifestPaths.filter(p=>fs.existsSync(path.join(root,p))).map(p=
 let validStaged=0,validApproved=0;
 const result=[...phrases.values()];
 for(const row of result){
+ row.ownerPronunciationAudioLibrarySources=ownerApprovedPronunciationReferences(row.text);
+ row.referenceLibraryChecked=true;
+ row.canAutospliceAWordFromLongStory=false;
+ row.quranLoanwordNeedsApprovedAudioReview=quranTerm.test(row.text);
+ if(row.quranLoanwordNeedsApprovedAudioReview){
+  row.quranPronunciationEvidencePresent=row.ownerPronunciationAudioLibrarySources.some(x=>x.term==="Qurʾān");
+  row.quranPronunciationFromUnapprovedCreatorPreviewAllowed=false;
+ }
+}
+for(const row of result){
  for(const manifest of manifests){
   const entry=manifest.data.entries?.[row.text];
   if(!existsCertifiedV4(entry))continue;
@@ -154,6 +193,13 @@ const report={schemaVersion:1,kind:"KIDS_ACADEMY_208_V4_DEDUP_REVIEW_QUEUE",
  draftChoicesPendingHumanReview:convertedDraft,
  existingOpenQuestionsStillAdaptedInUI:legacyOpen,
  candidateUniqueSpeechTexts:result.length,
+ ownerConfirmedPronunciationStoryReferences:fua.approvedStoryReferences.length,
+ phrasesWithOwnerPronunciationReference:result.filter(p=>p.ownerPronunciationAudioLibrarySources.length>0).length,
+ quranLoanwordPhrases:result.filter(p=>p.quranLoanwordNeedsApprovedAudioReview).length,
+ quranPhrasesWithExactOwnerStoryReference:result.filter(p=>p.quranPronunciationEvidencePresent===true).length,
+ isolatedPronunciationWordClipsCertifiedInIndex:0,
+ autoWordClipExtractions:0,
+ pronunciationSourcePriority:fua.sourcePriority,
  voiceId:voice,modelId:model,profile,settingsFingerprint:fingerprint,
  totalVerifiedPublicV4Entries:validApproved,totalTechnicalStagingMatches:validStaged,
  generatedAudioFiles:0,spentCredits:0,
@@ -174,5 +220,6 @@ console.log("REUSE: "+validApproved+" verified public V4, "+validStaged+" matchi
 console.log("GATED: 426 editorial button choices; 195 legacy UI conversions still require human content review.");
 console.log("Language safety: "+mixedArabicBlocked.length+" mixed-script phrases blocked from the voice queue.");
 console.log("Fuṣḥā listening review: "+report.fushaRomanizedReviewPhrases+" romanized-loan phrases; German nur QA: "+report.germanNurWatchPhrases+".");
+console.log("AUDIO LIBRARY FIRST: "+report.ownerConfirmedPronunciationStoryReferences+" owner-approved story references, "+report.phrasesWithOwnerPronunciationReference+" matched phrases (Qurʾān: "+report.quranPhrasesWithExactOwnerStoryReference+"/"+report.quranLoanwordPhrases+"). No long-story word extraction.");
 console.log("Synthesis policy: language_code=de, empty dictionary locators; no cross-language Arabic PLS.");
 console.log("0 audio calls / 0 credits / no synthesized Quran.");
