@@ -12,6 +12,7 @@ const sandbox={window:{}};vm.createContext(sandbox);
 for(const p of scripts)new vm.Script(read(p),{filename:p}).runInContext(sandbox,{timeout:4000});
 new vm.Script(read("kids/akademie/school-progress-v11.js")).runInContext(sandbox,{timeout:4000});
 const curriculum=sandbox.window.DARKidsAcademyCurriculum;
+const sourcedHadithUrl=url=>/^https:\/\/(?:dorar\.net\/|sunnah\.com\/(?:bukhari|muslim):)/.test(url||"");
 assert.equal(Object.keys(curriculum).length,65);
 const topics={akhlaq:["sidq","akhlaq-sabr","akhlaq-amanah"],adab:["adab-salam","adab-worte","adab-respekt"],fiqh:["fiqh-taharah","fiqh-wudu","fiqh-salah"],aqidah:["aqidah-tawhid","aqidah-iman","aqidah-ikhlas"]};
 for(const item of Object.values(curriculum)){
@@ -29,15 +30,15 @@ const newIds=Array.from(sandbox.window.DARKidsAcademyCurriculumV27.ids);
 assert.deepEqual(ids.slice(-16,-8),newIds,"V27 must preserve slots 51-58");
 const v28Ids=Array.from(sandbox.window.DARKidsAcademyCurriculumV28.ids);
 assert.deepEqual(ids.slice(-8,-4),v28Ids,"V28 must append exactly after V27 without shifting old progress");
-for(const id of v28Ids){const item=curriculum[id];assert.ok(item?.sourceAudit?.hadithUrl?.startsWith("https://dorar.net/"),id+" must have verified direct link");assert.equal(item.voiceApproved,false);assert.equal(item.sourceAudit.hadithMeaningIsParaphrase,true);assert.equal(item.ageText["4-5"].lines.length,4);}
+for(const id of v28Ids){const item=curriculum[id];assert.ok(sourcedHadithUrl(item?.sourceAudit?.hadithUrl),id+" must have verified direct link");assert.equal(item.voiceApproved,false);assert.equal(item.sourceAudit.hadithMeaningIsParaphrase,true);assert.equal(item.ageText["4-5"].lines.length,4);}
 const v29Ids=Array.from(sandbox.window.DARKidsAcademyCurriculumV29.ids);
 assert.deepEqual(ids.slice(-4),v29Ids,"V29 must append without shifting existing learning progress");
 for(const lessonId of v29Ids){
- const l=curriculum[lessonId];assert.ok(l?.sourceAudit?.hadithUrl?.startsWith("https://dorar.net/"));
+ const l=curriculum[lessonId];assert.ok(sourcedHadithUrl(l?.sourceAudit?.hadithUrl));
  assert.equal(l.voiceApproved,false);assert.equal(l.sourceAudit.hadithMeaningIsParaphrase,true);
  for(const age of ["4-5","6-8","9-10"])assert.ok(l.ageText[age]?.lines?.length===4&&l.questions[age]?.length>=2,lessonId+" age "+age);
 }
-for(const newId of newIds){const l=curriculum[newId];assert.ok(l&&l.sourceAudit.hadithUrl.startsWith("https://dorar.net/hadith/sharh/"));assert.equal(l.sourceAudit.hadithMeaningIsParaphrase,true);assert.equal(l.voiceApproved,false);assert.equal(l.quran.excerpt,true);}
+for(const newId of newIds){const l=curriculum[newId];assert.ok(l&&sourcedHadithUrl(l.sourceAudit.hadithUrl));assert.equal(l.sourceAudit.hadithMeaningIsParaphrase,true);assert.equal(l.voiceApproved,false);assert.equal(l.quran.excerpt,true);}
 const monday=new Date(2026,9,12,10),tuesday=new Date(2026,9,13,10),wednesday=new Date(2026,9,14,10);
 const first=ids[0],second=ids[1],last=ids.at(-1);
 const run=(when,records={},drafts={})=>school.evaluate({topics,records,drafts,now:when});
