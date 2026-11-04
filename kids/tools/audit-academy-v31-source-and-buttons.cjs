@@ -21,6 +21,14 @@ for(const lesson of lessons){
  assert.equal(lesson.sourceAudit?.sourceSpecificReview,"pending-independent-scholarly-check");
  assert.equal(lesson.releaseGate?.childAppUnlocked,false);
  assert.equal(lesson.voiceApproved,false);
+ const displayed=[];
+ for(const age of ["4-5","6-8","9-10"]){
+  const a=lesson.ageText[age];
+  displayed.push(a.intro,a.evidence,...(a.lines||[]));
+  for(const q of lesson.questions[age])displayed.push(q.prompt,q.hint,q.explain,...(q.options||[]));
+ }
+ if(displayed.some(text=>/https?:\/\//.test(String(text||""))))
+  report.sourceProblems.push({lessonId:lesson.id,problem:"visitor-visible-source-url"});
  const flags=[];
  if(lesson.releaseGate?.fiqhSchoolReviewApproved!==true&&
     /fiqh|gebet|wudu|wuḍū|fasten|zakāh|ḥaǧǧ|suǧūd|tashahhud|taslīm/i.test(
@@ -49,11 +57,12 @@ for(const lesson of lessons){
 }
 assert.equal(total,1136);assert.equal(converted,426);
 assert.equal(report.sourceProblems.length,0,JSON.stringify(report.sourceProblems.slice(0,5)));
+assert.equal(report.longAnswers.length,0,"Visible choice buttons longer than 180 characters");
 if(process.argv[2]){
  const file=path.resolve(process.argv[2]);fs.mkdirSync(path.dirname(file),{recursive:true});
  fs.writeFileSync(file,JSON.stringify(report,null,2)+"\n");
 }
 console.log("PASS: 142 lessons, 1136 answer-button questions, 426 draft conversions.");
 console.log("PASS: Quran-reference labels/hints internally consistent; no duplicate options.");
-console.log("EDITORIAL BLOCK: "+report.longAnswers.length+" answers exceed 180 chars.");
+console.log("BUTTON UX: 0 answers longer than 180 characters; full source explanations preserved.");
 console.log("REVIEW REQUIRED: 142 source-specific checks, 0 human listening approvals.");
