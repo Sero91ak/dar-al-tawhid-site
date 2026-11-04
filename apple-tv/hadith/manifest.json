@@ -22,7 +22,7 @@
     "showSharh": true,
     "showSharhMode": "compact",
     "requireVerifiedSharh": false,
-    "readyThrough": "HAD-3359"
+    "readyThrough": "HAD-3362"
   },
   "hadithLibrary": {
     "enabledForTestApp": true,
@@ -45,7 +45,7 @@
   "releasePolicy": {
     "onlineBranch": "main",
     "stagingBranch": "apple-tv-hadith-staging",
-    "publishedRange": "HAD-0001-HAD-3359",
+    "publishedRange": "HAD-0001-HAD-3362",
     "excludeStatuses": [
       "missing",
       "needs-review"
