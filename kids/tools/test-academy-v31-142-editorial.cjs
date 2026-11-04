@@ -74,6 +74,53 @@ for(let i=0;i<lessons.length;i++){
   }
  }
 }
+
+/* Editorial review is real progress only when the 35 individually redrafted
+ * lessons cease using the old generic placeholder and retain their specific
+ * source links. No human approval or public activation is inferred. */
+const editorialById=new Map(lessons.map(l=>[l.id,l]));
+const phase35=["070","071","072","073","075","076","077","082","083","084","085","086","087","088","094","098","099","110","120","132","143","144","155","156","198","199","200","201","202","203","204","205","206","207","208"];
+assert.equal(phase35.length,35);
+const rewritten35=new Set(phase35.map(n=>"academy-"+n));
+const counts={generic:0,rewritten:0};
+for(const l of lessons){
+ if(l.ageText["4-5"].lines[0].startsWith("Wir lernen heute:"))counts.generic++;
+ else counts.rewritten++;
+ if(!rewritten35.has(l.id))continue;
+ assert(!l.ageText["4-5"].lines.some(s=>s.startsWith("Wir lernen heute:")||s.startsWith("Wir üben ")),"Still generic age 4-5 in "+l.id);
+ for(const age of ["4-5","6-8","9-10"]){
+  assert(!l.questions[age].some(q=>q.prompt.startsWith("Welche Erklärung mit Rückfrage passt")||
+   q.prompt.startsWith("Eine Person behauptet, unser Beispiel zu")),
+   "Still placeholder questions "+l.id+" "+age);
+  for(const q of l.questions[age]){
+   assert.equal(q.type,"choice","All rewritten lessons must use answer buttons "+l.id);
+   assert(q.options.every(opt=>opt.trim().length>0),"Empty rewritten answer choice "+l.id);
+   if(age==="4-5")assert(q.options.every(opt=>opt.length<=120),"Age 4-5 answer too long "+l.id);
+  }
+ }
+ assert.equal(l.sourceAudit.sourceSpecificReview,"pending-independent-scholarly-check");
+ assert.equal(l.releaseGate.childAppUnlocked,false);
+}
+assert.equal(counts.rewritten,35,"Editorial count drift: do not claim more rewritten lessons than exist");
+assert.equal(counts.generic,107);
+const correctedPrimary={
+ "academy-084":["2:127","https://sunnah.com/bukhari:3365"],
+ "academy-087":["39:53","https://sunnah.com/bukhari:5999"],
+ "academy-094":["5:6","https://sunnah.com/bukhari:159"],
+ "academy-110":["24:27","https://sunnah.com/bukhari:6245"],
+ "academy-200":["58:11","https://sunnah.com/bukhari:6270"],
+ "academy-201":["20:14","https://sunnah.com/bukhari:757"],
+ "academy-206":["20:14","https://sunnah.com/bukhari:757"]
+};
+for(const [id,[q,hadith]] of Object.entries(correctedPrimary)){
+ const l=editorialById.get(id);
+ assert(l,"Corrected lesson missing "+id);
+ assert.equal(l.sourceAudit.quranReference,q);
+ assert.equal(l.sourceAudit.hadithUrl,hadith);
+ assert.equal(l.sourceAudit.sourceAnchorLessonId,null,"Independent sources cannot pretend legacy anchor "+id);
+}
+console.log("PASS: 35 individually rewritten V31 lessons, 107 still generic. All corrected primary sources and child safety locks remain review-only.");
+
 assert.equal(qCount,1136);
 assert.equal(ageVariants,426);
 assert.equal(unapproved,142);
