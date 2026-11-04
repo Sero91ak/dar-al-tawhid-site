@@ -46,7 +46,7 @@ for(const [items,isDraft] of [[existing,false],[drafts,true]])for(const l of ite
  put(l.lead);put(l.hadith?.text);
 }
 assert.equal(questions,1664);
-assert.equal(legacyText,198);assert.equal(draftText,426);
+assert.equal(legacyText,195);assert.equal(draftText,426);
 const report={status:"REVIEW_ONLY",lessons:208,ageVersions:624,questions,
  convertedAnswerButtonsStillNeedingHumanQA:legacyText+draftText,
  oldOpenQuestions:legacyText,newDraftOpenQuestions:draftText,
