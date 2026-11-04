@@ -32,10 +32,10 @@ for(const [id,lesson] of Object.entries(projected)){
    assert(Number.isInteger(q.correct)&&q.correct>=0&&q.correct<q.options.length);
    if(new Set(q.options).size!==q.options.length)duplicates++;
    if(q.options.some(t=>t.length>180))excessive++;
-   if(old.type==="text"){
+   if(old.type==="text"||old.editorialReviewStatus==="pending-human-review"){
     converted++;assert.equal(q.adaptedFromText,true);
-    assert.equal(q.options[0],old.sample);
-    assert.equal(q.originalPrompt,old.prompt);
+    assert.equal(q.options[0],old.sample||old.explain);
+    assert.equal(q.originalPrompt,old.legacyPrompt||old.prompt);
     assert.equal(q.approvedForChildApp,false);assert.equal(q.approvedForAudio,false);
     if(q.editorialReviewStatus==="pending-human-review")unreviewed++;
     assert(!/mit eigenen Worten|Formuliere eine Rückfrage/i.test(q.prompt),
