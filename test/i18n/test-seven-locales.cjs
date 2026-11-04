@@ -436,6 +436,16 @@ assert.equal(w.DarTestTurkishUI.translateValue("Ehestand","ar"),"الحالة ا
 assert.equal(w.DarTestTurkishUI.translateValue("Ich habe noch nicht genug persönliche Angaben erkannt. Bitte ergänze mindestens: vollständiger Name, Geburtsdatum.","es"),"Aún no reconocí suficientes datos personales. Completa al menos: nombre completo, fecha de nacimiento.");
 assert.equal(w.DarTestTurkishUI.translateValue("Für die spätere Farāʾiḍ-Prüfung fehlen noch: Ehestand, leibliche Kinder oder keine Kinder. Bitte ergänze diese Angaben.","fr"),"Pour la vérification ultérieure des farāʾiḍ, il manque encore : état civil, enfants biologiques ou pas d’enfants. Ajoute ces données.");
 assert.equal(w.DarTestTurkishUI.translateValue("Wir sind bei der Prüfung angekommen. Klicke auf Zusammenfassung, prüfe alle Angaben und bearbeite den Entwurf vor der PDF-Erstellung.","tr"),"Denetim aşamasına geldik. Özeti aç, tüm bilgileri kontrol et ve PDF öncesi taslağı düzenle.");
+assert.equal(w.DarTestTurkishUI.translateValue("Wasiyyah bis 1/3","en"),"Wasiyyah up to 1/3");
+assert.equal(w.DarTestTurkishUI.translateValue("Waṣiyyah bis 1/3","ar"),"وَصِيَّة حتى الثلث");
+assert.equal(w.DarTestTurkishUI.translateValue("Schulden & offene Rechte","fr"),"Dettes et droits ouverts");
+assert.equal(w.DarTestTurkishUI.translateValue("Schritte ausblenden","tr"),"Adımları gizle");
+assert.equal(w.DarTestTurkishUI.translateValue("Ansprechpartner/Wasiyy","es"),"Persona de contacto/Wasiyy");
+assert.equal(w.DarTestTurkishUI.translateValue("Layout speichern","ku"),"Rêkxistinê tomar bike");
+assert.equal(w.DarTestTurkishUI.translateValue("Entwurf geladen","en"),"Draft loaded");
+assert.equal(w.DarTestTurkishUI.translateValue("Entwurf geladen.","en"),"Draft loaded.");
+assert.equal(w.DarTestTurkishUI.translateValue("Vorschau auf 390 px gesetzt","fr"),"Aperçu réglé sur 390 px");
+assert.equal(w.DarTestTurkishUI.translateValue("Datei konnte nicht geladen werden: Keine gültige Layoutdatei","ckb"),"پەڕگە بارنەکرا: پەڕگەی ڕێکخستنی دروست نییە");
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);

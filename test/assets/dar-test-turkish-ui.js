@@ -559,6 +559,8 @@ function isDynamicGermanUi(value){
   /^Islamische Waṣiyyah – [^<>\n]{1,80}$/.test(value)||
   /^Ich habe noch nicht genug persönliche Angaben erkannt\. Bitte ergänze mindestens: [^<>\n]{1,240}\.$/.test(value)||
   /^Für die spätere Farāʾiḍ-Prüfung fehlen noch: [^<>\n]{1,240}\. Bitte ergänze diese Angaben\.$/.test(value)||
+  /^Vorschau auf \d+ px gesetzt$/.test(value)||
+  /^Datei konnte nicht geladen werden: [^<>\n]{1,160}$/.test(value)||
   /^\d+\. Fundstelle$/.test(value)||
   /^Qurʾān \d{1,3}:\d{1,3}(?: · [^<>]{1,80})?$/.test(value)||
   /^· Āyah \d+ ·$/.test(value)||
@@ -2872,6 +2874,29 @@ function translateSharedPatterns(value,language){
    };
    return forms[language]||null;
   }
+  const previewPx=value.match(/^Vorschau auf (\d+) px gesetzt$/);
+  if(previewPx){
+   const n=previewPx[1];
+   const forms={
+    ar:"تم ضبط المعاينة على "+n+" px",
+    en:"Preview set to "+n+" px",
+    tr:"Önizleme "+n+" px olarak ayarlandı",
+    ku:"Pêşdîtin li "+n+" px hat danîn",
+    ckb:"پێشبینین بۆ "+n+" px دانرا",
+    bs:"Pregled postavljen na "+n+" px",
+    fr:"Aperçu réglé sur "+n+" px",
+    es:"Vista previa fijada en "+n+" px"
+   };
+   return forms[language]||null;
+  }
+  const fileFail=value.match(/^Datei konnte nicht geladen werden: ([^<>\n]{1,160})$/);
+  if(fileFail){
+   const raw=fileFail[1];
+   const known=lookupPack(raw,language);
+   const tail=known!==undefined?known:raw;
+   const heads={ar:"تعذّر تحميل الملف: ",en:"The file could not be loaded: ",tr:"Dosya yüklenemedi: ",ku:"Pel nehat barkirin: ",ckb:"پەڕگە بارنەکرا: ",bs:"Datoteka nije mogla da se učita: ",fr:"Le fichier n’a pas pu être chargé : ",es:"El archivo no se pudo cargar: "};
+   return heads[language]?heads[language]+tail:null;
+  }
   const numberedPlace=value.match(/^(\d+)\. Fundstelle$/);
   if(numberedPlace){
    const word=lookupPack("Fundstelle",language);
@@ -3306,7 +3331,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-57";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-58";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
