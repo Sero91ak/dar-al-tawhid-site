@@ -11,7 +11,13 @@ const review={};
 let adapted=0;
 function normalize(x){return String(x==null?"":x).normalize("NFC").trim()}
 function convert(q,lesson,age){
- if(q.type==="choice")return Object.freeze({...q,options:Object.freeze([...q.options])});
+ if(q.type==="choice"){
+  const converted=q.editorialReviewStatus==="pending-human-review"&&!!q.legacyPrompt;
+  if(converted)adapted++;
+  return Object.freeze({...q,options:Object.freeze([...q.options]),
+   ...(converted?{adaptedFromText:true,originalPrompt:q.legacyPrompt,
+     approvedForChildApp:false,approvedForAudio:false}:{})});
+ }
  if(q.type!=="text")throw new Error("Unexpected input mode for "+lesson.id);
  const correct=normalize(q.sample);
  if(!correct)throw new Error("Missing example answer "+lesson.id+" "+age);
