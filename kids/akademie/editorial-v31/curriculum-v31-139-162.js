@@ -764,167 +764,165 @@ const additions={
   "topic": "Was bedeutet Sunnah?",
   "title": "Qurʾān und Sunnah · Was bedeutet Sunnah?",
   "lead": "Heute lernen wir: Was bedeutet Sunnah?.",
-  "goal": "Ich kann eine authentische prophetische Handlung kennenlernen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann erklären, warum die überlieferten Worte und Handlungen des Propheten ﷺ für das Lernen wichtig sind.",
   "quran": {
-   "surah": 20,
-   "ayah": 14,
-   "label": "Sūrat Ṭā Hā · 20:14",
-   "arabic": "إِنَّنِي أَنَا اللَّهُ لَا إِلَٰهَ إِلَّا أَنَا فَاعْبُدْنِي وَأَقِمِ الصَّلَاةَ لِذِكْرِي",
-   "meaning": "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-   "excerpt": false
+   "surah": 33,
+   "ayah": 21,
+   "label": "Sūrat al-Aḥzāb · 33:21 (Auszug)",
+   "arabic": "لَقَدْ كَانَ لَكُمْ فِي رَسُولِ اللَّهِ أُسْوَةٌ حَسَنَةٌ",
+   "meaning": "Im Gesandten Allahs habt ihr ein gutes Vorbild.",
+   "excerpt": true
   },
   "hadith": {
    "source": "Ṣaḥīḥ al-Buḫārī, Nr. 631",
-   "text": "Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+   "text": "Der Prophet ﷺ wies die Menschen an, so zu beten, wie sie ihn beten gesehen hatten."
   },
   "sourceAudit": {
-   "quranReference": "20:14",
-   "quranUrl": "https://quran.com/20/14",
+   "quranReference": "33:21",
+   "quranUrl": "https://quran.com/33/21",
    "hadithUrl": "https://sunnah.com/bukhari:631",
-   "sourceAnchorLessonId": "fiqh-salah",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
-   "quranTextType": "complete",
+   "sourceAnchorLessonId": null,
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg; Quellen-/Textfreigabe und vollständige diakritische Qurʾān-Kollation weiterhin ausstehend.",
+   "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Eine authentische prophetische Handlung kennenlernen.",
-  "sample": "Bei „Was bedeutet Sunnah?“ übe ich: eine authentische prophetische Handlung kennenlernen.",
+  "hint": "Wir lernen die echte Aussage der Quelle und unterscheiden sie von unserer Erklärung.",
+  "sample": "Im Unterricht zeigen wir, was die Quellen sagen, ohne neue Offenbarungsworte zu erfinden.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Was bedeutet Sunnah?.",
+    "intro": "Wir lernen vom Vorbild des Propheten ﷺ.",
     "lines": [
-     "Wir lernen heute: Was bedeutet Sunnah?.",
-     "Wir üben eine authentische prophetische Handlung kennenlernen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Der Qurʾān nennt den Gesandten ﷺ ein gutes Vorbild.",
+     "Wir lernen von dem, was der Prophet ﷺ sagte und tat.",
+     "Auch beim Gebet zeigte er den Menschen, wie sie lernen können.",
+     "Einen Bericht prüfen Erwachsene anhand authentischer Quellen."
     ],
-    "evidence": "Qurʾān 20:14 lehrt: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 33:21 nennt das Vorbild. Al-Buḫārī 631 ist ein Beispiel für das Lernen der Gebetsweise."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Eine authentische prophetische Handlung kennenlernen.",
+    "intro": "Sunnah hilft uns, die prophetische Lehre kennenzulernen.",
     "lines": [
-     "Heute untersuchen wir das Thema „Was bedeutet Sunnah?“.",
-     "Der Qurʾān spricht in 20:14 darüber: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 631 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Eine authentische prophetische Handlung kennenlernen. Wir überlegen gemeinsam, warum es passt."
+     "Zur Sunnah gehören die überlieferten Worte, Handlungen und Billigungen des Propheten ﷺ.",
+     "Qurʾān 33:21 nennt ihn ein gutes Vorbild.",
+     "In al-Buḫārī 631 lehrte er, das Gebet so zu verrichten, wie man ihn beten sah.",
+     "Nicht jedes Wort „Sunnah“ bedeutet automatisch: freiwillig oder beliebig."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Die Definition wird als Lernbegriff erklärt; 33:21 belegt die Vorbildfunktion, al-Buḫārī 631 ein konkretes Beispiel."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Was bedeutet Sunnah?“.",
+    "intro": "Das Wort Sunnah wird je nach Fachzusammenhang unterschiedlich gebraucht.",
     "lines": [
-     "Ausgangssituation: Eine authentische prophetische Handlung kennenlernen.",
-     "Qurʾān 20:14: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 631): Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "In der Überlieferungslehre bezeichnet Sunnah die überlieferten prophetischen Worte, Handlungen und Billigungen.",
+     "In der Fiqh-Terminologie kann „Sunnah“ auch eine andere, speziellere Bedeutung haben; beides ist nicht gleichzusetzen.",
+     "Qurʾān 33:21 begründet die Bedeutung seines Vorbilds.",
+     "Al-Buḫārī 631 zeigt eine konkrete prophetische Anweisung zum Gebet, nicht eine vollständige Definition aller Ḥadīṯ-Wissenschaften."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Die pädagogische Begriffsdefinition ist von den Vers- und Ḥadīṯ-Zitaten zu unterscheiden."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Was bedeutet Sunnah?“ eine gute Handlung?",
+     "prompt": "Wer ist nach Qurʾān 33:21 ein gutes Vorbild?",
      "options": [
-      "Ich kann eine authentische prophetische Handlung kennenlernen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Der Gesandte Allahs ﷺ.",
+      "Eine erfundene Romanfigur."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Eine authentische prophetische Handlung kennenlernen.",
-     "explain": "Unser Lernbeispiel ist: Eine authentische prophetische Handlung kennenlernen."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Der Vers nennt den Gesandten ﷺ."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Was bedeutet Sunnah?“ tun?",
+     "prompt": "Wovon lernen wir aus der Sunnah?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Von der Lehre des Propheten ﷺ.",
+      "Von willkürlichen erfundenen Sätzen."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Sunnah betrifft authentisch überlieferte prophetische Lehre."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Was bedeutet Sunnah?“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was kann zur Sunnah des Propheten ﷺ gehören?",
      "options": [
-      "Ich kann eine authentische prophetische Handlung kennenlernen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Seine überlieferten Worte, Handlungen und Billigungen.",
+      "Jede beliebige Geschichte ohne Quelle."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Eine authentische prophetische Handlung kennenlernen.",
-     "explain": "Unser Lernbeispiel ist: Eine authentische prophetische Handlung kennenlernen."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Überlieferte Aussagen und Handlungen werden anhand der Quellen geprüft."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Was bedeutet Sunnah?“ im Alltag üben kannst?",
+     "prompt": "Was beschreibt Qurʾān 33:21?",
      "options": [
-      "Ich könnte eine authentische prophetische Handlung kennenlernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Den Gesandten ﷺ als gutes Vorbild.",
+      "Eine vollständige Liste aller Rechtsurteile."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte eine authentische prophetische Handlung kennenlernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Der Vers nennt die Vorbildfunktion.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Was bedeutet Sunnah?“ im Beispiel üben kannst."
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
+     "prompt": "Welches Beispiel enthält al-Buḫārī 631?",
      "options": [
-      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-      "Unser Übungsbeispiel ist: Eine authentische prophetische Handlung kennenlernen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+      "Die Anweisung, so zu beten, wie man den Propheten ﷺ beten sah.",
+      "Die Anzahl aller Propheten wird genannt."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Der Bericht behandelt die Art des Gebets."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Was bedeutet Sunnah?“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Warum ist es ungenau, Sunnah immer nur als freiwillig zu erklären?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Der Begriff hat in unterschiedlichen Fachgebieten unterschiedliche Bedeutungen.",
+      "Weil Sunnah stets eine erfundene Geschichte bedeutet."
      ],
      "correct": 0,
-     "hint": "Vergleiche 20:14 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Ḥadīṯ- und Fiqh-Gebrauch müssen auseinandergehalten werden."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
+     "prompt": "Was belegt Qurʾān 33:21 unmittelbar?",
      "options": [
-      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-      "Unser Übungsbeispiel ist: Eine authentische prophetische Handlung kennenlernen."
+      "Die Vorbildfunktion des Gesandten ﷺ.",
+      "Eine Auflistung aller Isnād-Arten."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Die Definition der Überlieferungswissenschaft ist eine getrennte Erklärung.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Was bedeutet Sunnah?“?",
+     "prompt": "Wie verwenden wir al-Buḫārī 631 korrekt?",
      "options": [
-      "Ich erkläre die Situation: eine authentische prophetische Handlung kennenlernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Als Beispiel einer prophetischen Gebetsanweisung.",
+      "Als einzigen Beweis für alle sprachlichen Sunnah-Definitionen."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: eine authentische prophetische Handlung kennenlernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Konkretes Beispiel und allgemeine Definition sind verschieden.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Was bedeutet Sunnah?“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     }
    ]
   },
@@ -951,167 +949,165 @@ const additions={
   "topic": "Die Hiǧrah nach Madīnah",
   "title": "Sīrah · Die Hiǧrah nach Madīnah",
   "lead": "Heute lernen wir: Die Hiǧrah nach Madīnah.",
-  "goal": "Ich kann den Ortswechsel als Teil der Sīrah kennenlernen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann erklären, dass der Auszug aus Makkah Teil der Hiǧrah war und warum der Qurʾān die Höhlenszene erwähnt.",
   "quran": {
-   "surah": 2,
-   "ayah": 3,
-   "label": "Sūrat al-Baqarah · 2:3",
-   "arabic": "الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ وَيُقِيمُونَ الصَّلَاةَ وَمِمَّا رَزَقْنَاهُمْ يُنْفِقُونَ",
-   "meaning": "Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
-   "excerpt": false
+   "surah": 9,
+   "ayah": 40,
+   "label": "Sūrat at-Tawbah · 9:40 (Auszug)",
+   "arabic": "إِذْ يَقُولُ لِصَاحِبِهِ لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا",
+   "meaning": "Als er zu seinem Gefährten sagte: Sei nicht traurig. Allah ist mit uns.",
+   "excerpt": true
   },
   "hadith": {
-   "source": "Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl)",
-   "text": "Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 3653",
+   "text": "Abū Bakr schilderte, wie er sich in der Höhle um den Propheten ﷺ sorgte. Dieser erinnerte ihn daran, dass Allah mit ihnen war."
   },
   "sourceAudit": {
-   "quranReference": "2:3",
-   "quranUrl": "https://quran.com/2/3",
-   "hadithUrl": "https://sunnah.com/muslim:8",
-   "sourceAnchorLessonId": "aqidah-iman-die-gesandten",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
-   "quranTextType": "complete",
+   "quranReference": "9:40",
+   "quranUrl": "https://quran.com/9/40",
+   "hadithUrl": "https://sunnah.com/bukhari:3653",
+   "sourceAnchorLessonId": null,
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg; Quellen-/Textfreigabe und vollständige diakritische Qurʾān-Kollation weiterhin ausstehend.",
+   "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Den Ortswechsel als Teil der Sīrah kennenlernen.",
-  "sample": "Bei „Die Hiǧrah nach Madīnah“ übe ich: den Ortswechsel als Teil der Sīrah kennenlernen.",
+  "hint": "Wir lernen die echte Aussage der Quelle und unterscheiden sie von unserer Erklärung.",
+  "sample": "Im Unterricht zeigen wir, was die Quellen sagen, ohne neue Offenbarungsworte zu erfinden.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Die Hiǧrah nach Madīnah.",
+    "intro": "Hiǧrah heißt: auswandern.",
     "lines": [
-     "Wir lernen heute: Die Hiǧrah nach Madīnah.",
-     "Wir üben den Ortswechsel als Teil der Sīrah kennenlernen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Der Prophet ﷺ verließ Makkah.",
+     "Auf dem Weg war er mit einem Gefährten in einer Höhle.",
+     "Er erinnerte seinen Gefährten an Allahs Hilfe.",
+     "Später erreichte er Madīnah; der Vers beschreibt nicht alle Reisestationen."
     ],
-    "evidence": "Qurʾān 2:3 lehrt: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 9:40 belegt den Auszug und die Höhle. Das Reiseziel gehört zur weiteren Sīrah-Überlieferung."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Den Ortswechsel als Teil der Sīrah kennenlernen.",
+    "intro": "Die Hiǧrah war die Auswanderung aus Makkah nach Madīnah.",
     "lines": [
-     "Heute untersuchen wir das Thema „Die Hiǧrah nach Madīnah“.",
-     "Der Qurʾān spricht in 2:3 darüber: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl) nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Den Ortswechsel als Teil der Sīrah kennenlernen. Wir überlegen gemeinsam, warum es passt."
+     "Der Qurʾān berichtet, dass die Ungläubigen den Propheten ﷺ aus Makkah vertrieben.",
+     "Qurʾān 9:40 erwähnt zwei Personen in einer Höhle.",
+     "Der Prophet ﷺ sagte sinngemäß zu seinem Gefährten: Sei nicht traurig. Allah ist mit uns.",
+     "Abū Bakrs Bericht bei al-Buḫārī 3653 beschreibt die Sorge während dieses Aufenthalts."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Der Vers ist ein direkter Beleg zur Höhlenszene, aber keine vollständige Chronologie der Hiǧrah."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Die Hiǧrah nach Madīnah“.",
+    "intro": "Wir prüfen die Hiǧrah ohne erfundene Reise-Einzelheiten.",
     "lines": [
-     "Ausgangssituation: Den Ortswechsel als Teil der Sīrah kennenlernen.",
-     "Qurʾān 2:3: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
-     "Sunnah (Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl)): Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Aus Qurʾān 9:40 folgt sicher: Auszug aus Makkah, zwei Personen, Höhle und Zuspruch an den Gefährten.",
+     "Der begleitende Ḥadīṯ bei al-Buḫārī 3653 stammt von Abū Bakr.",
+     "Aus dem einzelnen Vers folgt nicht, wie lange alle übrigen Reiseabschnitte dauerten.",
+     "Eine vollständige Hiǧrah-Erzählung benötigt zusätzlich authentisch belegte Sīrah-Berichte."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Wir kennzeichnen den Qurʾān-Auszug als Auszug und ergänzen nur ausdrücklich nachgewiesene Berichte."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Die Hiǧrah nach Madīnah“ eine gute Handlung?",
+     "prompt": "Was bedeutet Hiǧrah in dieser Geschichte?",
      "options": [
-      "Ich kann den Ortswechsel als Teil der Sīrah kennenlernen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Auswanderung.",
+      "Ein Festessen."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Den Ortswechsel als Teil der Sīrah kennenlernen.",
-     "explain": "Unser Lernbeispiel ist: Den Ortswechsel als Teil der Sīrah kennenlernen."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Die Hiǧrah war die Auswanderung."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Die Hiǧrah nach Madīnah“ tun?",
+     "prompt": "Welchen Ort erwähnt Qurʾān 9:40?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Eine Höhle.",
+      "Eine Burg."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Der Vers beschreibt die Höhle."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Die Hiǧrah nach Madīnah“. Welche Handlung passt zur Stunde?",
+     "prompt": "Von welcher Stadt zog der Prophet ﷺ fort?",
      "options": [
-      "Ich kann den Ortswechsel als Teil der Sīrah kennenlernen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Makkah.",
+      "Rom."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Den Ortswechsel als Teil der Sīrah kennenlernen.",
-     "explain": "Unser Lernbeispiel ist: Den Ortswechsel als Teil der Sīrah kennenlernen."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Qurʾān 9:40 erwähnt seinen Auszug aus Makkah."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Die Hiǧrah nach Madīnah“ im Alltag üben kannst?",
+     "prompt": "Was sagte er seinem Gefährten in der Höhle?",
      "options": [
-      "Ich könnte den Ortswechsel als Teil der Sīrah kennenlernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Sei nicht traurig. Allah ist mit uns.",
+      "Allah hat uns verlassen."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte den Ortswechsel als Teil der Sīrah kennenlernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Der Zuspruch steht sinngemäß im Vers.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Die Hiǧrah nach Madīnah“ im Beispiel üben kannst."
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:3?",
+     "prompt": "Wie behandeln wir zusätzliche Reisedetails?",
      "options": [
-      "Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
-      "Unser Übungsbeispiel ist: Den Ortswechsel als Teil der Sīrah kennenlernen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung."
+      "Wir prüfen für jedes Detail seine Quelle.",
+      "Wir erfinden die fehlenden Stationen."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Nicht alle Etappen stehen in Qurʾān 9:40."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Die Hiǧrah nach Madīnah“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Angaben können wir direkt Qurʾān 9:40 zuordnen?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Auszug, zwei Personen, Höhle und Zuspruch.",
+      "Eine genaue Liste aller Etappen und Tage."
      ],
      "correct": 0,
-     "hint": "Vergleiche 2:3 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Diese Angaben sind im Vers genannt."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:3?",
+     "prompt": "Wer berichtet zusätzlich über die Sorge in der Höhle?",
      "options": [
-      "Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
-      "Unser Übungsbeispiel ist: Den Ortswechsel als Teil der Sīrah kennenlernen."
+      "Abū Bakr in al-Buḫārī 3653.",
+      "Ein später erfundener Reiseleiter."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Die Überlieferung schildert seine Sorge.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 2:3 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Die Hiǧrah nach Madīnah“?",
+     "prompt": "Warum reicht ein einzelner Vers nicht für die gesamte Hiǧrah-Erzählung?",
      "options": [
-      "Ich erkläre die Situation: den Ortswechsel als Teil der Sīrah kennenlernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Er beschreibt nur einen Teil des Geschehens.",
+      "Er enthält jedes Datum und alle Namen der Reise."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: den Ortswechsel als Teil der Sīrah kennenlernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Weitere Ereignisse müssen einzeln belegt werden.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Die Hiǧrah nach Madīnah“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     }
    ]
   },
@@ -3008,167 +3004,165 @@ const additions={
   "topic": "Woher stammt ein Ḥadīṯ?",
   "title": "Qurʾān und Sunnah · Woher stammt ein Ḥadīṯ?",
   "lead": "Heute lernen wir: Woher stammt ein Ḥadīṯ?.",
-  "goal": "Ich kann den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann einen Qurʾān-Vers von einem überlieferten Bericht des Propheten ﷺ unterscheiden und erklären, warum Wahrhaftigkeit bei Überlieferungen wichtig ist.",
   "quran": {
-   "surah": 2,
-   "ayah": 2,
-   "label": "Sūrat al-Baqarah · 2:2",
-   "arabic": "ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ هُدًى لِلْمُتَّقِينَ",
-   "meaning": "Dies ist das Buch, an dem kein Zweifel besteht: eine Rechtleitung für die Gottesfürchtigen.",
-   "excerpt": false
+   "surah": 4,
+   "ayah": 59,
+   "label": "Sūrat an-Nisāʾ · 4:59 (Auszug)",
+   "arabic": "أَطِيعُوا اللَّهَ وَأَطِيعُوا الرَّسُولَ",
+   "meaning": "Gehorcht Allah und gehorcht dem Gesandten.",
+   "excerpt": true
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5027 · ʿUṯmān ibn ʿAffān",
-   "text": "Der Prophet ﷺ lehrte den besonderen Wert dessen, der den Qurʾān lernt und ihn weiterlehrt."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 3461 · ʿAbdullāh ibn ʿAmr",
+   "text": "Der Prophet ﷺ forderte dazu auf, seine Lehre weiterzugeben, und warnte ausdrücklich davor, ihm absichtlich Unwahres zuzuschreiben."
   },
   "sourceAudit": {
-   "quranReference": "2:2",
-   "quranUrl": "https://quran.com/2/2",
-   "hadithUrl": "https://dorar.net/hadith/sharh/151215",
-   "sourceAnchorLessonId": "aqidah-quran-allahs-wort",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
-   "quranTextType": "complete",
+   "quranReference": "4:59",
+   "quranUrl": "https://quran.com/4/59",
+   "hadithUrl": "https://sunnah.com/bukhari:3461",
+   "sourceAnchorLessonId": null,
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg; Quellen-/Textfreigabe und vollständige diakritische Qurʾān-Kollation weiterhin ausstehend.",
+   "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären.",
-  "sample": "Bei „Woher stammt ein Ḥadīṯ?“ übe ich: den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären.",
+  "hint": "Wir lernen die echte Aussage der Quelle und unterscheiden sie von unserer Erklärung.",
+  "sample": "Im Unterricht zeigen wir, was die Quellen sagen, ohne neue Offenbarungsworte zu erfinden.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Woher stammt ein Ḥadīṯ?.",
+    "intro": "Ein Ḥadīṯ erzählt uns etwas aus der Lehre des Propheten ﷺ.",
     "lines": [
-     "Wir lernen heute: Woher stammt ein Ḥadīṯ?.",
-     "Wir üben den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Der Qurʾān ist Allahs Wort.",
+     "Ein Ḥadīṯ ist ein überlieferter Bericht über den Propheten ﷺ.",
+     "Wir dürfen dem Propheten ﷺ keine Worte erfinden.",
+     "Erwachsene prüfen, ob ein Bericht richtig überliefert wurde."
     ],
-    "evidence": "Qurʾān 2:2 lehrt: Dies ist das Buch, an dem kein Zweifel besteht: eine Rechtleitung für die Gottesfürchtigen. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 4:59 nennt den Gehorsam gegenüber Allah und dem Gesandten. Al-Buḫārī 3461 warnt vor falscher Zuschreibung."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären.",
+    "intro": "Woher wissen wir, was der Prophet ﷺ lehrte?",
     "lines": [
-     "Heute untersuchen wir das Thema „Woher stammt ein Ḥadīṯ?“.",
-     "Der Qurʾān spricht in 2:2 darüber: Dies ist das Buch, an dem kein Zweifel besteht: eine Rechtleitung für die Gottesfürchtigen.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 5027 · ʿUṯmān ibn ʿAffān nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären. Wir überlegen gemeinsam, warum es passt."
+     "Der Qurʾān und die authentische Sunnah sind zu unterscheiden.",
+     "Ein Ḥadīṯ ist ein überlieferter Bericht über Worte, Handlungen oder Billigungen des Propheten ﷺ.",
+     "Überlieferer geben Berichte weiter; Gelehrte untersuchen ihre Überlieferungswege und Inhalte.",
+     "Al-Buḫārī 3461 warnt ausdrücklich davor, dem Propheten ﷺ absichtlich eine Lüge zuzuschreiben."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Qurʾān 4:59 ist ein Grundsatzbeleg für die prophetische Autorität. Al-Buḫārī 3461 trägt die Warnung vor falschen Berichten."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Woher stammt ein Ḥadīṯ?“.",
+    "intro": "Ein Ḥadīṯ wird nicht durch Behaupten authentisch.",
     "lines": [
-     "Ausgangssituation: Den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären.",
-     "Qurʾān 2:2: Dies ist das Buch, an dem kein Zweifel besteht: eine Rechtleitung für die Gottesfürchtigen.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 5027 · ʿUṯmān ibn ʿAffān): Der Prophet ﷺ lehrte den besonderen Wert dessen, der den Qurʾān lernt und ihn weiterlehrt. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Im Fachgebrauch ist ein Ḥadīṯ ein überlieferter Bericht über den Propheten ﷺ.",
+     "Als Isnād bezeichnet man die Überliefererkette; der Matn ist der überlieferte Text. Das sind fachliche Erklärungen, keine Wortlautzitate aus 4:59.",
+     "Qurʾān 4:59 lehrt die Bedeutung des Gehorsams gegenüber dem Gesandten.",
+     "Al-Buḫārī 3461 mahnt bei der Weitergabe der Lehre zur Wahrhaftigkeit; ob ein konkreter Bericht authentisch ist, muss geprüft werden."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Keine Fachdefinition als angeblich wörtliche Offenbarung ausgeben. Der Hadith belegt die Warnung vor bewusst falscher Zuschreibung."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Woher stammt ein Ḥadīṯ?“ eine gute Handlung?",
+     "prompt": "Was ist der Qurʾān?",
      "options": [
-      "Ich kann den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Allahs Wort.",
+      "Eine erfundene Tiergeschichte."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären.",
-     "explain": "Unser Lernbeispiel ist: Den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Der Qurʾān ist Allahs Wort."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Woher stammt ein Ḥadīṯ?“ tun?",
+     "prompt": "Dürfen wir Prophetenworte erfinden?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Nein, wir müssen wahrhaftig sein.",
+      "Ja, wenn sie gut klingen."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Al-Buḫārī 3461 warnt vor falscher Zuschreibung."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Woher stammt ein Ḥadīṯ?“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was kann in einem Ḥadīṯ berichtet werden?",
      "options": [
-      "Ich kann den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Worte und Handlungen des Propheten ﷺ.",
+      "Beliebige Geschichten ohne Überlieferung."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären.",
-     "explain": "Unser Lernbeispiel ist: Den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Ḥadīṯ beschreibt überlieferte prophetische Lehre."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Woher stammt ein Ḥadīṯ?“ im Alltag üben kannst?",
+     "prompt": "Warum werden Überlieferungen geprüft?",
      "options": [
-      "Ich könnte den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Damit wir nichts Falsches dem Propheten ﷺ zuschreiben.",
+      "Damit jeder selbst neue Prophetenworte erfinden darf."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Al-Buḫārī 3461 warnt vor absichtlicher falscher Zuschreibung.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Woher stammt ein Ḥadīṯ?“ im Beispiel üben kannst."
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:2?",
+     "prompt": "Worüber spricht Qurʾān 4:59?",
      "options": [
-      "Dies ist das Buch, an dem kein Zweifel besteht: eine Rechtleitung für die Gottesfürchtigen.",
-      "Unser Übungsbeispiel ist: Den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte den besonderen Wert dessen, der den Qurʾān lernt und ihn weiterlehrt."
+      "Über den Gehorsam gegenüber Allah und dem Gesandten.",
+      "Über die Namen aller Ḥadīṯ-Überlieferer."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Der Vers ist kein Lehrbuch über sämtliche Überlieferungswege."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Woher stammt ein Ḥadīṯ?“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Was ist ein Isnād?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Die Überliefererkette eines Berichts.",
+      "Die Überschrift einer Sūrah."
      ],
      "correct": 0,
-     "hint": "Vergleiche 2:2 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Isnād bezeichnet in der Ḥadīṯ-Wissenschaft die Überliefererkette."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:2?",
+     "prompt": "Was bedeutet Matn im Bereich der Überlieferung?",
      "options": [
-      "Dies ist das Buch, an dem kein Zweifel besteht: eine Rechtleitung für die Gottesfürchtigen.",
-      "Unser Übungsbeispiel ist: Den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären."
+      "Der überlieferte Text eines Berichts.",
+      "Die vollständige Liste aller Überlieferer."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Dies ist das Buch, an dem kein Zweifel besteht: eine Rechtleitung für die Gottesfürchtigen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte den besonderen Wert dessen, der den Qurʾān lernt und ihn weiterlehrt.",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Matn ist der Text; Isnād ist die Kette.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 2:2 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Woher stammt ein Ḥadīṯ?“?",
+     "prompt": "Was belegt al-Buḫārī 3461 unmittelbar?",
      "options": [
-      "Ich erkläre die Situation: den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Eine ausdrückliche Warnung vor bewusst falscher Zuschreibung an den Propheten ﷺ.",
+      "Dass alle im Internet zitierten Berichte authentisch sind."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Authentizität folgt nicht aus einem schönen Wortlaut.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Woher stammt ein Ḥadīṯ?“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     }
    ]
   },
@@ -3193,169 +3187,167 @@ const additions={
   "subject": "sirah",
   "pillar": "sirah",
   "topic": "Ṣaḥābah und gutes Vorbild",
-  "title": "Sīrah · Ṣaḥābah und gutes Vorbild",
+  "title": "Sīrah · Ṣaḥābah und ihr Vorbild",
   "lead": "Heute lernen wir: Ṣaḥābah und gutes Vorbild.",
-  "goal": "Ich kann eine authentisch überlieferte gute Handlung eines Gefährten erzählen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann die frühen Muhāǧirūn und Anṣār benennen und erklären, warum ihre Stellung in Qurʾān und Sunnah hervorgehoben wird.",
   "quran": {
-   "surah": 2,
-   "ayah": 3,
-   "label": "Sūrat al-Baqarah · 2:3",
-   "arabic": "الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ وَيُقِيمُونَ الصَّلَاةَ وَمِمَّا رَزَقْنَاهُمْ يُنْفِقُونَ",
-   "meaning": "Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
-   "excerpt": false
+   "surah": 9,
+   "ayah": 100,
+   "label": "Sūrat at-Tawbah · 9:100 (Auszug)",
+   "arabic": "وَالسَّابِقُونَ الْأَوَّلُونَ مِنَ الْمُهَاجِرِينَ وَالْأَنْصَارِ",
+   "meaning": "Die ersten Vorangegangenen von den Muhāǧirūn und den Anṣār.",
+   "excerpt": true
   },
   "hadith": {
-   "source": "Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl)",
-   "text": "Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 3651 · ʿAbdullāh ibn Masʿūd",
+   "text": "Der Prophet ﷺ sagte sinngemäß, dass die beste Generation seine Generation sei, gefolgt von den nächsten beiden Generationen."
   },
   "sourceAudit": {
-   "quranReference": "2:3",
-   "quranUrl": "https://quran.com/2/3",
-   "hadithUrl": "https://sunnah.com/muslim:8",
-   "sourceAnchorLessonId": "aqidah-iman-die-gesandten",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
-   "quranTextType": "complete",
+   "quranReference": "9:100",
+   "quranUrl": "https://quran.com/9/100",
+   "hadithUrl": "https://sunnah.com/bukhari:3651",
+   "sourceAnchorLessonId": null,
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg; Quellen-/Textfreigabe und vollständige diakritische Qurʾān-Kollation weiterhin ausstehend.",
+   "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Eine authentisch überlieferte gute Handlung eines Gefährten erzählen.",
-  "sample": "Bei „Ṣaḥābah und gutes Vorbild“ übe ich: eine authentisch überlieferte gute Handlung eines Gefährten erzählen.",
+  "hint": "Wir lernen die echte Aussage der Quelle und unterscheiden sie von unserer Erklärung.",
+  "sample": "Im Unterricht zeigen wir, was die Quellen sagen, ohne neue Offenbarungsworte zu erfinden.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Ṣaḥābah und gutes Vorbild.",
+    "intro": "Die Ṣaḥābah waren Gefährten des Propheten ﷺ.",
     "lines": [
-     "Wir lernen heute: Ṣaḥābah und gutes Vorbild.",
-     "Wir üben eine authentisch überlieferte gute Handlung eines Gefährten erzählen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Die Gefährten lernten den Islam beim Propheten ﷺ kennen.",
+     "Einige verließen ihre Heimat; sie heißen Muhāǧirūn.",
+     "Die Helfer in Madīnah heißen Anṣār.",
+     "Im Qurʾān werden die frühen Muhāǧirūn und Anṣār besonders erwähnt."
     ],
-    "evidence": "Qurʾān 2:3 lehrt: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 9:100 erwähnt die frühen Muhāǧirūn und Anṣār. Der Vers erzählt nicht jede einzelne Lebensgeschichte."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Eine authentisch überlieferte gute Handlung eines Gefährten erzählen.",
+    "intro": "Wir lernen zwei Gruppen aus der frühen muslimischen Gemeinschaft kennen.",
     "lines": [
-     "Heute untersuchen wir das Thema „Ṣaḥābah und gutes Vorbild“.",
-     "Der Qurʾān spricht in 2:3 darüber: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl) nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Eine authentisch überlieferte gute Handlung eines Gefährten erzählen. Wir überlegen gemeinsam, warum es passt."
+     "Muhāǧirūn bedeutet: die Ausgewanderten.",
+     "Anṣār bedeutet: die Helfer; sie unterstützten die Ausgewanderten in Madīnah.",
+     "Qurʾān 9:100 hebt die frühen Vertreter dieser beiden Gruppen hervor.",
+     "Al-Buḫārī 3651 überliefert die Vorzüglichkeit der ersten Generationen."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Der Qurʾān und der Ḥadīṯ belegen ihre Stellung. Für eine konkrete gute Handlung eines einzelnen Ṣaḥābī braucht es einen eigenen Bericht."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Ṣaḥābah und gutes Vorbild“.",
+    "intro": "Die Stellung der Ṣaḥābah darf nicht durch erfundene Einzelgeschichten ausgeschmückt werden.",
     "lines": [
-     "Ausgangssituation: Eine authentisch überlieferte gute Handlung eines Gefährten erzählen.",
-     "Qurʾān 2:3: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
-     "Sunnah (Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl)): Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 9:100 erwähnt die ersten Muhāǧirūn, die Anṣār und diejenigen, die ihnen in Gutem folgen.",
+     "Al-Buḫārī 3651 spricht vom Vorzug der Generation des Propheten ﷺ und der darauffolgenden Generationen.",
+     "Das erklärt ihren Rang, liefert aber nicht automatisch eine konkrete Tat eines beliebigen namentlich genannten Gefährten.",
+     "Wir prüfen einzelne Vorbilder anhand authentischer Berichte und unterscheiden Textbeleg von eigener Anwendung."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "In dieser Lektion lernen wir die Gruppen und ihren Rang; konkrete Biografien sind gesondert zu belegen."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Ṣaḥābah und gutes Vorbild“ eine gute Handlung?",
+     "prompt": "Wie heißen die ausgewanderten Muslime?",
      "options": [
-      "Ich kann eine authentisch überlieferte gute Handlung eines Gefährten erzählen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Muhāǧirūn.",
+      "Römische Kaiser."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Eine authentisch überlieferte gute Handlung eines Gefährten erzählen.",
-     "explain": "Unser Lernbeispiel ist: Eine authentisch überlieferte gute Handlung eines Gefährten erzählen."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Muhāǧirūn sind die Ausgewanderten."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Ṣaḥābah und gutes Vorbild“ tun?",
+     "prompt": "Wie heißen die Helfer in Madīnah?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Anṣār.",
+      "Unbekannte Zauberer."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Anṣār bedeutet Helfer."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Ṣaḥābah und gutes Vorbild“. Welche Handlung passt zur Stunde?",
+     "prompt": "Wen erwähnt Qurʾān 9:100 besonders?",
      "options": [
-      "Ich kann eine authentisch überlieferte gute Handlung eines Gefährten erzählen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Die frühen Muhāǧirūn und Anṣār.",
+      "Nur Menschen, die Jahrhunderte später lebten."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Eine authentisch überlieferte gute Handlung eines Gefährten erzählen.",
-     "explain": "Unser Lernbeispiel ist: Eine authentisch überlieferte gute Handlung eines Gefährten erzählen."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Beide Gruppen werden im Vers ausdrücklich genannt."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Ṣaḥābah und gutes Vorbild“ im Alltag üben kannst?",
+     "prompt": "Was bedeutet Anṣār?",
      "options": [
-      "Ich könnte eine authentisch überlieferte gute Handlung eines Gefährten erzählen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Die Helfer.",
+      "Die Alleinreisenden."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte eine authentisch überlieferte gute Handlung eines Gefährten erzählen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Die Anṣār halfen in Madīnah.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Ṣaḥābah und gutes Vorbild“ im Beispiel üben kannst."
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:3?",
+     "prompt": "Wovon spricht al-Buḫārī 3651?",
      "options": [
-      "Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
-      "Unser Übungsbeispiel ist: Eine authentisch überlieferte gute Handlung eines Gefährten erzählen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung."
+      "Vom Vorzug der ersten Generationen.",
+      "Von einem erfundenen Schatz in der Wüste."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Der Bericht nennt die vorzüglichen frühen Generationen."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Ṣaḥābah und gutes Vorbild“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Wer gehört nach Qurʾān 9:100 zur genannten Gruppe?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Die frühen Muhāǧirūn und Anṣār.",
+      "Eine erfundene heutige Gelehrtengruppe."
      ],
      "correct": 0,
-     "hint": "Vergleiche 2:3 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Der Qurʾān benennt die beiden Gruppen."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:3?",
+     "prompt": "Was ist durch al-Buḫārī 3651 belegt?",
      "options": [
-      "Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
-      "Unser Übungsbeispiel ist: Eine authentisch überlieferte gute Handlung eines Gefährten erzählen."
+      "Der Vorzug der Generation des Propheten ﷺ und der folgenden Generationen.",
+      "Jede einzelne Tat aller Gefährten."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Ein allgemeiner Vorzugsbericht ersetzt keine Einzelbiografie.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 2:3 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Ṣaḥābah und gutes Vorbild“?",
+     "prompt": "Wie behandeln wir eine Geschichte über einen bestimmten Ṣaḥābī?",
      "options": [
-      "Ich erkläre die Situation: eine authentisch überlieferte gute Handlung eines Gefährten erzählen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Wir verlangen einen passenden authentischen Einzelbeleg.",
+      "Wir geben eine schöne Geschichte ohne Quelle als Ḥadīṯ aus."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: eine authentisch überlieferte gute Handlung eines Gefährten erzählen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Jede konkrete Behauptung braucht einen tatsächlichen Beleg.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Ṣaḥābah und gutes Vorbild“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     }
    ]
   },
