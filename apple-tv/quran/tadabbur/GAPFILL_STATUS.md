@@ -30,11 +30,11 @@ Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-255` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4702
-totalVerifiedEntries: 4702
-loadedEntries: 4702
-uniqueVerifiedReferences: 4702
-missingCount: 1534
+entriesCount: 4712
+totalVerifiedEntries: 4712
+loadedEntries: 4712
+uniqueVerifiedReferences: 4712
+missingCount: 1524
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:82
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-255.json
-nächster Gap-Fill-Batch: entries-gap-06-256.json
+letzter Gap-Fill-Batch: entries-gap-06-256.json
+nächster Gap-Fill-Batch: entries-gap-06-257.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `512` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `522` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -646,3 +646,8 @@ Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor.
 - kein geprüfter Eintrag vorhanden → festen Fallback anzeigen
 
 Das ist vollständige technische Abdeckung ohne erfundene inhaltliche Abdeckung.
+
+
+## Batch 06-256 — 04.11.2026
+
+10 neue eindeutige Referenzen: 2:112, 2:117, 2:133, 2:145, 2:147, 2:169, 2:176, 2:209, 3:11, 3:18. Stand 4712 von 6236; 1524 offen. Quellentexte, Isnād und Grenzen siehe SOURCE_REVIEW_06-256.md. Der historische Voll-Audit 24.09.2026 ist nicht der Beleg für den neuen Live-Stand. Die aktualisierte JSON-Lückenliste ist maßgeblich.
