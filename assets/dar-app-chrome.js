@@ -169,6 +169,19 @@
       .catch(function(){sourceNavPending=false;showSourceUnavailable()})
       .finally(function(){clearTimeout(timeout)});
   },true);
+  // Q50 source→lesson navigation remains in the mounted app reader.
+  // Only messages from its own, same-origin source iframe are accepted.
+  window.addEventListener("message",function(ev){
+    if(ev.origin!==location.origin||!sourceFrame||ev.source!==sourceFrame.contentWindow)return;
+    if(!ev.data||ev.data.type!=="DAR_Q50_READER_NAV_V1")return;
+    var route=String(ev.data.path||"");
+    if(!/^\/lernen\/wissen-ist-religion\/(?:\?lang=(?:de|ar|en|tr|ku|ckb|bs|fr|es))?$/.test(route))return;
+    var a=document.createElement("a");
+    a.setAttribute("href",route);
+    a.hidden=true;
+    document.body.appendChild(a);
+    try{a.click()}finally{a.remove()}
+  });
   window.addEventListener("popstate",function(ev){
     if(sourcePanel&&!sourcePanel.hidden&&(!ev.state||!ev.state.__darInternalSourceV3))
       closeInternalSource(true);
