@@ -71,7 +71,7 @@ assert.equal(report.summary.questions,1136);
 const repeated=[...promptFrequency].filter(([_,n])=>n>1).sort((a,b)=>b[1]-a[1]);
 report.highFrequencyQuestionPrompts=repeated.slice(0,25).map(([text,count])=>({text,count}));
 report.summary.questionTextsRepeatedAcrossLessons=repeated.reduce((n,[_,count])=>n+count,0);
-const ceilings={lessonTemplates:136,genericQuestionPrompts:658,genericWrongAnswerOptions:636,grammaticalTemplateLines:48};
+const ceilings={lessonTemplates:124,genericQuestionPrompts:598,genericWrongAnswerOptions:576,grammaticalTemplateLines:2};
 for(const [metric,ceiling] of Object.entries(ceilings))
  assert(report.summary[metric]<=ceiling,
   "Quality regression "+metric+": "+report.summary[metric]+" exceeds "+ceiling);
