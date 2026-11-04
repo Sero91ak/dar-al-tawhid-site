@@ -8,6 +8,7 @@ on:
       - 'kids/tools/export-academy-208-button-candidates.cjs'
       - 'kids/tools/test-academy-v31-choice-only-review.cjs'
       - 'kids/tools/audit-academy-v31-source-and-buttons.cjs'
+      - 'kids/tools/test-academy-208-audio-ui-sync.cjs'
       - 'kids/data/academy-voice-policy-v10.json'
       - '.github/workflows/kids-academy-208-privacy-preflight.yml'
   workflow_dispatch:
@@ -27,6 +28,7 @@ jobs:
           node kids/tools/test-academy-v31-142-editorial.cjs
           node kids/tools/academy-208-privacy-audio-preflight.cjs
           node kids/tools/test-academy-v31-choice-only-review.cjs
+          node kids/tools/test-academy-208-audio-ui-sync.cjs
           node kids/tools/audit-academy-v31-source-and-buttons.cjs artifacts/academy-142-source-review.json
           node kids/tools/export-academy-208-v4-dedup-plan.cjs artifacts/academy-208-v4-dedup-queue.json
           node kids/tools/export-academy-208-button-candidates.cjs artifacts/academy-208-button-review.json
