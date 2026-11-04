@@ -23,8 +23,9 @@
     "showGrade": true,
     "showSharh": true,
     "showSharhSource": true,
-    "requireVerifiedSharh": true,
-    "showAtharIsnadGrade": true
+    "requireVerifiedSharh": false,
+    "showAtharIsnadGrade": true,
+    "showSharhOnlyIfVerified": true
   },
   "syncRule": "Geprüfte HAD-Datensätze werden zentral aus /apple-tv/hadith/ geladen; kein zweiter manueller Push je Oberfläche.",
   "surfaces": {
