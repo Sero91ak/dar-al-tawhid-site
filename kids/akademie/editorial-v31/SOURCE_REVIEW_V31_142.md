@@ -98,7 +98,7 @@
 | 129 · `academy-129` | Fehler bereuen und verbessern | [33:70](https://quran.com/33/70) | [Ṣaḥīḥ al-Buḫārī, Nr. 6094; Ṣaḥīḥ Muslim, Nr. 2607 · ʿAbdullāh ibn Masʿūd](https://dorar.net/hadith/sharh/3232) | **AUSSTEHEND** – Themenbezug und Übersetzungsnuancen unabhängig prüfen |
 | 130 · `academy-130` | Die Gebetszeiten kennenlernen | [20:14](https://quran.com/20/14) | [Ṣaḥīḥ al-Buḫārī, Nr. 46](https://sunnah.com/bukhari:46) | **AUSSTEHEND** – Erweiterte ʿAqīdah-/Fiqh-/Quellen- oder Kinderschutzprüfung |
 | 131 · `academy-131` | Einfaches Tajwīd-Hören | [2:2](https://quran.com/2/2) | [Ṣaḥīḥ al-Buḫārī, Nr. 5027 · ʿUṯmān ibn ʿAffān](https://dorar.net/hadith/sharh/151215) | **AUSSTEHEND** – Themenbezug und Übersetzungsnuancen unabhängig prüfen |
-| 132 · `academy-132` | Muḥammad ﷺ in Makkah | [9:40 (Auszug)](https://quran.com/9/40) | [Ṣaḥīḥ al-Buḫārī, Nr. 3653](https://sunnah.com/bukhari:3653) | **AUSSTEHEND** – Neue Quellenpaarung und alle Altersfassungen fachlich unabhängig prüfen |
+| 132 · `academy-132` | Muḥammad ﷺ in Makkah | [96:1](https://quran.com/96/1) | [Ṣaḥīḥ al-Buḫārī, Nr. 3](https://sunnah.com/bukhari:3) | **AUSSTEHEND** – Neue Quellenpaarung und alle Altersfassungen fachlich unabhängig prüfen |
 | 133 · `academy-133` | Nach dem Essen danken | [7:31 (Auszug)](https://quran.com/7/31) | [Ṣaḥīḥ al-Buḫārī, Nr. 5458](https://sunnah.com/bukhari:5458) | **AUSSTEHEND** – Erweiterte ʿAqīdah-/Fiqh-/Quellen- oder Kinderschutzprüfung |
 | 134 · `academy-134` | Kranken und älteren Menschen helfen | [76:9](https://quran.com/76/9) | [Ṣaḥīḥ Muslim, Nr. 2699 · Abū Hurayrah](https://dorar.net/hadith/sharh/123965) | **AUSSTEHEND** – Themenbezug und Übersetzungsnuancen unabhängig prüfen |
 | 135 · `academy-135` | Die schönen Namen Allahs | [1:3](https://quran.com/1/3) | [Ṣaḥīḥ al-Buḫārī, Nr. 2856](https://sunnah.com/bukhari:2856) | **AUSSTEHEND** – Erweiterte ʿAqīdah-/Fiqh-/Quellen- oder Kinderschutzprüfung |
@@ -198,3 +198,5 @@
 ## Korrekturrunde 04.11.2026 – sechs Prioritätslektionen
 
 In den redaktionellen Quelltexten wurden **120, 132, 143, 144, 155 und 156** mit tatsächlich themenbezogenen Belegvorschlägen, neuen altersdifferenzierten Unterrichtssätzen und 48 überarbeiteten Antwortbuttons versehen. Die ursprünglichen, inhaltlich nicht passenden Quellenverweise sind in der obigen Matrix aktualisiert. Das stellt **keine** abschließende Autorisierung dar: arabische Orthographie/Ausschnitt, deutsche Bedeutungswiedergabe, Ḥadīṯ-Quellenpassung und pädagogische Alternativen bleiben einzeln prüfpflichtig. Alle übrigen 136 V31-Lektionen sind weiterhin unfreigegebene Redaktionstexte. Kein Produktiv- oder Audiorelease.
+
+**Präzisierung 04.11.2026:** Lektion 132 wurde bewusst auf die erste Offenbarung in Ḥirāʾ (Qurʾān 96:1 / al-Buḫārī 3) abgegrenzt; Lektion 144 bleibt die spätere Hiǧrah (Qurʾān 9:40 / al-Buḫārī 3653). Beide weiterhin ohne Fachfreigabe.
