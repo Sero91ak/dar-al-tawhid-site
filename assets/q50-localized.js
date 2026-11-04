@@ -31,6 +31,10 @@ function link(route){
 function sourceRender(){
  var c=locale(),p=active();if(!p)return;
  mark(c);
+ text("q50BrandTop",p.ui.headerLine);
+ text("q50LanguageLabel","🌐 "+p.ui.language);
+ text("q50Reference1","📝 Muslim · Muqaddimah 26 · 1/14");
+ text("q50Reference2","📝 Muslim · Muqaddimah 32 · 1/16");
  text("q50Kicker",p.ui.source+" · Q50");
  text("q50Title",p.title);
  text("q50Intro",p.intro);
@@ -52,7 +56,7 @@ function sourceRender(){
  var entries=["Muslim · Muqaddimah 26 · 1/14","Dorar · Ibn Sīrīn","Muslim · Muqaddimah · Isnād","Muslim · Muqaddimah 32 · 1/16","Ibn aṣ-Ṣalāḥ · ʿUlūm al-Ḥadīṯ 256","Al-ʿIrāqī · at-Taqyīd wa-l-Īḍāḥ"];
  Array.from(source.querySelectorAll(".qsource-link-title")).forEach(function(e,i){e.textContent=entries[i]||e.textContent});
  Array.from(source.querySelectorAll(".qsource-link-sub")).forEach(function(e){e.textContent=p.ui.sources});
- text("q50EvidenceNote",p.ui.sources+" · Muslim, Muqaddimah 26 und 32. Die Buchpaginierung kann je nach Ausgabe abweichen.");
+ text("q50EvidenceNote",p.ui.pageNote);
  text("q50Learning","📚 "+p.ui.study);
  var a=id("q50Learning");if(a)a.href=link("/lernen/wissen-ist-religion/");
  text("q50Review",p.approved?"":p.ui.review);
@@ -77,6 +81,7 @@ function makeOption(label,index,c){
 function renderQuiz(){
  var c=locale(),p=active();if(!p||!quizPage)return;
  mark(c);
+ text("qlLanguageLabel","🌐 "+p.ui.language);
  text("qlEyebrow",p.ui.study+" · Q50");
  text("qlTitle",p.title);text("qlReview",p.approved?"":p.ui.review);
  var picker=id("qlLanguage");if(picker)picker.value=c;
@@ -142,7 +147,7 @@ name:"Deutsch",dir:"ltr",approved:false,title:"DIESES WISSEN IST RELIGION",
 speaker1:"Muḥammad ibn Sīrīn (raḥimahullāh)",statement1:"Wahrlich, dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.",
 speaker2:"ʿAbdullāh ibn al-Mubārak (raḥimahullāh)",statement2:"Der Isnād gehört zur Religion. Gäbe es keinen Isnād, könnte jeder sagen, was er wollte.",
 intro:"Beide Āthār stehen in der Einleitung zu Ṣaḥīḥ Muslim.",explain1:"Wissen bedarf zuverlässiger Quellen.",explain2:"Die Überlieferungskette macht eine Zuschreibung überprüfbar.",limitations:"Eine Kette allein ist noch kein Authentizitätsbeweis.",conclusion:"Quelle und Überlieferer prüfen.",
-ui:{source:"Quellenprüfung",study:"Lernbereich",sources:"Originalnachweise",chain:"Isnād",classification:"Einordnung",explanation:"Erläuterung",warning:"Grenzen",result:"Fazit",question:"Frage",of:"von",next:"Weiter",correct:"Richtig",incorrect:"Nicht richtig",finish:"Ergebnis",restart:"Erneut lernen",review:"Deutsche Notfallfassung"},
+ui:{headerLine:"Wissen aus Qurʾān, Sunnah und Āthār",pageNote:"Die Paginierung kann je nach Ausgabe abweichen.",language:"Sprache",source:"Quellenprüfung",study:"Lernbereich",sources:"Originalnachweise",chain:"Isnād",classification:"Einordnung",explanation:"Erläuterung",warning:"Grenzen",result:"Fazit",question:"Frage",of:"von",next:"Weiter",correct:"Richtig",incorrect:"Nicht richtig",finish:"Ergebnis",restart:"Erneut lernen",review:"Deutsche Notfallfassung"},
 questions:[
 {q:"Wozu ruft Ibn Sīrīn auf?",a:["Alles ungeprüft weiterzugeben","Zu prüfen, von wem wir die Religion nehmen","Nur auf die Länge zu achten","Alle Ketten abzulehnen"],correct:1,why:"Auf die Herkunft religiösen Wissens achten."},
 {q:"Was ist Isnād?",a:["Meinung","Buchtitel","Kette von Überlieferern","Gebetszeit"],correct:2,why:"Die Kette der Berichterstatter."},
