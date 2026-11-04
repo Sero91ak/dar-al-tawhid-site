@@ -1,0 +1,65 @@
+{
+  "project": "DĀR AL TAWḤĪD – Ḥadīṯ, Šarḥ & Āṯār",
+  "date": "2026-11-04",
+  "batchSize": 10,
+  "firstId": "HAD-3365",
+  "lastId": "HAD-3374",
+  "recordType": "athar",
+  "authenticityPolicy": "Angegebenen Isnād wörtlich dokumentieren; kein ṣaḥīḥ/ḥasan ohne individuelle Prüfung; kein Šarḥ bei Äṯār erzwingen.",
+  "originalSources": [
+    {
+      "book": "Ibn Abī Šaybah, al-Muṣannaf",
+      "volume": "6",
+      "digitalPage": "229–230",
+      "chapter": 173,
+      "subreports": [
+        1,
+        2,
+        3,
+        5,
+        7,
+        8,
+        9,
+        12,
+        14
+      ],
+      "url": "https://www.islamweb.net/ar/library/content/10/3650/%D9%85%D9%86-%D8%B1%D8%AE%D8%B5-%D9%81%D9%8A-%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B9%D9%84%D9%85"
+    },
+    {
+      "book": "Ibn Abī Šaybah, al-Muṣannaf",
+      "volume": "6",
+      "digitalPage": "232",
+      "chapter": 176,
+      "subreports": [
+        1
+      ],
+      "url": "https://www.islamweb.net/ar/library/content/10/3652/%D9%85%D9%86-%D9%83%D8%A7%D9%86-%D9%8A%D8%AD%D8%A8-%D8%A3%D9%86-%D9%8A%D8%AC%D9%8A%D8%A1-%D8%A8%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB-%D9%83%D9%85%D8%A7-%D8%B3%D9%85%D8%B9"
+    }
+  ],
+  "idToSubreport": {
+    "HAD-3365": "173/1",
+    "HAD-3366": "173/2",
+    "HAD-3367": "173/3",
+    "HAD-3368": "173/5",
+    "HAD-3369": "173/7",
+    "HAD-3370": "173/8",
+    "HAD-3371": "173/9",
+    "HAD-3372": "173/12",
+    "HAD-3373": "173/14",
+    "HAD-3374": "176/1"
+  },
+  "checks": {
+    "originalText": "Arabische Ausgangsstelle manuell gegenüber Primärseiten geprüft; deutscher Text als kurze sinngemäße Wiedergabe gekennzeichnet, keine textfremde Festlegung.",
+    "isnad": "Einzelketten aus dem Werk in verificationNote transkribiert; keine pauschale Echtheitsfreigabe.",
+    "scope": "Keine neuen marfūʿen Propheten-Ḥadīṯe ohne klassischen verifizierten Šarḥ.",
+    "duplication": "Projekt-Code-Suche mit zentralen Personennamen, Schlüsselwörtern und Fundstellennummern; kein behaupteter vollständiger semantischer Repository-Scan.",
+    "edition": "Seitenzahlen sind digitale Islamweb-Paginierung; Druckedition nicht unabhängig geprüft.",
+    "frontend": "Bestehende Design- und Kapselarchitektur unverändert; reine kanonische Daten sowie Kataloge aktualisiert."
+  },
+  "unresolved": [
+    "ʿUmars HAD-3367: Onkel im Isnād nicht namentlich identifiziert.",
+    "Ǧābir HAD-3365 sowie al-Barāʾ und ʿAbdullāh ibn Ḥanaš HAD-3373: präzise Identifikation/Namensvariante ausgabebezogen offen.",
+    "Alle zehn Āṯār: vollständige individuelle Rijāl-/ʿIlal-Prüfung ausstehend, im Datensatz offen ausgewiesen.",
+    "Keine Behauptung, dass native iOS/tvOS-App-Binärdateien allein durch diesen Datenpush neu im App Store veröffentlicht wurden."
+  ]
+}
