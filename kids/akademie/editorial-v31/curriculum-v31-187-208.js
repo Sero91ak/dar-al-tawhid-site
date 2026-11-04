@@ -154,10 +154,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 2:153?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen.",
+      "Unser Übungsbeispiel ist: Für eine Aufgabe lernen und dabei Allah um Hilfe bitten."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -341,10 +341,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 2:285?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Die angegebene Sunnah lehrt sinngemäß: Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
+      "Unser Übungsbeispiel ist: Eine ehrliche Kinderfrage respektvoll beantworten lassen."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -528,10 +528,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 33:70?",
      "options": [
-      "Der Vers bedeutet sinngemäß: O die ihr glaubt, fürchtet Allah und sagt treffende, aufrichtige Worte. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. (Sinngemäße Bedeutung)",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "O die ihr glaubt, fürchtet Allah und sagt treffende, aufrichtige Worte.",
+      "Unser Übungsbeispiel ist: Eine unbequeme Wahrheit höflich sagen."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -715,10 +715,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 17:23?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen.",
+      "Unser Übungsbeispiel ist: Mit einer älteren Person ruhig und freundlich sprechen."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -902,10 +902,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 39:53?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Verliert nicht die Hoffnung auf Allahs Barmherzigkeit. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass nicht Aussehen und Besitz das Entscheidende sind, sondern Herzen und Taten.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Verliert nicht die Hoffnung auf Allahs Barmherzigkeit.",
+      "Unser Übungsbeispiel ist: Die Bedeutung eines belegten Istighfār kindgerecht verstehen."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -1089,10 +1089,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Beim Aufrichten aus dem Rukūʿ sagte der Prophet ﷺ: Samiʿa llāhu liman ḥamidah.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
+      "Unser Übungsbeispiel ist: Die aufrechte Haltung nach der Verbeugung üben."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -1276,10 +1276,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 112:1?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Sag: Er ist Allah, der Eine. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass Allahs Recht darin besteht, Ihn allein anzubeten und Ihm nichts beizugesellen.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Sag: Er ist Allah, der Eine.",
+      "Unser Übungsbeispiel ist: Ein einfaches Beispiel zur alleinigen Anbetung Allahs geben."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -1463,10 +1463,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 2:285?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Die angegebene Sunnah lehrt sinngemäß: Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
+      "Unser Übungsbeispiel ist: Glaubensbegriffe nach Altersstufe ordnen und erklären."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -1650,10 +1650,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 33:70?",
      "options": [
-      "Der Vers bedeutet sinngemäß: O die ihr glaubt, fürchtet Allah und sagt treffende, aufrichtige Worte. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. (Sinngemäße Bedeutung)",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "O die ihr glaubt, fürchtet Allah und sagt treffende, aufrichtige Worte.",
+      "Unser Übungsbeispiel ist: Sich nach einer unfreundlichen Aussage entschuldigen."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -1837,10 +1837,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 5:2?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Helft einander zu Güte und Gottesfurcht. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ verglich die gegenseitige Unterstützung der Gläubigen mit einem Gebäude, dessen Teile einander stärken.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Helft einander zu Güte und Gottesfurcht.",
+      "Unser Übungsbeispiel ist: Ein jüngeres Kind behutsam unterstützen."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -2024,10 +2024,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 99:7?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass Allah Seinem Diener hilft, solange dieser seinem Bruder hilft. (Sinngemäße Bedeutung)",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen.",
+      "Unser Übungsbeispiel ist: Eine Woche lang kleine gute Handlungen sammeln."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -2211,10 +2211,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ beschrieb die Niederwerfung auf sieben Körperteilen.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
+      "Unser Übungsbeispiel ist: Stirn und Nase sicher auf die Gebetsunterlage bringen."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -2398,10 +2398,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 5:2?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Helft einander zu Güte und Gottesfurcht. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ verglich die gegenseitige Unterstützung der Gläubigen mit einem Gebäude, dessen Teile einander stärken.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Helft einander zu Güte und Gottesfurcht.",
+      "Unser Übungsbeispiel ist: Einer kranken Person mit Zustimmung kleine Hilfe anbieten."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -2585,10 +2585,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 17:23?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen.",
+      "Unser Übungsbeispiel ist: In einer Gruppe rücksichtsvoll Platz teilen."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -2772,10 +2772,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
+      "Unser Übungsbeispiel ist: Die ruhige Sitzhaltung mit Anleitung üben."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -2959,10 +2959,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 76:9?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Wir geben euch zu essen um Allahs willen; wir wollen von euch weder Belohnung noch Dank. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass Allah Seinem Diener hilft, solange dieser seinem Bruder hilft. (Sinngemäße Bedeutung)",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Wir geben euch zu essen um Allahs willen; wir wollen von euch weder Belohnung noch Dank.",
+      "Unser Übungsbeispiel ist: Eine eigene freundliche Entscheidung wiedergeben."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -3146,10 +3146,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 17:53?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen.",
+      "Unser Übungsbeispiel ist: Vor dem Versenden einer Nachricht prüfen, ob sie freundlich ist."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -3333,10 +3333,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte den Tashahhud im Sitzen.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
+      "Unser Übungsbeispiel ist: Die Sitzphase im Gebet wiedererkennen."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -3520,10 +3520,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ schloss das Gebet mit Taslīm ab.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
+      "Unser Übungsbeispiel ist: Taslīm als Abschluss erkennen."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
@@ -3707,10 +3707,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort beschreibt Qurʾān und Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
-      "Unsere Unterrichtsbeispiele sind immer wörtliche Offenbarungszitate."
+      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
+      "Unser Übungsbeispiel ist: Bei Unsicherheit einen qualifizierten Lehrer fragen."
      ],
      "correct": 0,
      "hint": "Schreibe die beiden Aussagen getrennt; schreibe kein erfundenes Prophetenzitat.",
