@@ -760,9 +760,9 @@ const additions={
   "subject": "quran",
   "pillar": "quran",
   "topic": "Sūrat al-Ikhlāṣ verstehen",
-  "title": "Qurʾān und Sunnah · Sūrat al-Ikhlāṣ verstehen",
+  "title": "Qurʾān · Sūrat al-Ikhlāṣ verstehen",
   "lead": "Heute lernen wir: Sūrat al-Ikhlāṣ verstehen.",
-  "goal": "Ich kann den Sūrah-Namen und zentrale Bedeutung lernen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann die Bedeutung des ersten Verses von Sūrat al-Ikhlāṣ erklären und den Glauben an Allahs Einzigkeit lernen.",
   "quran": {
    "surah": 112,
    "ayah": 1,
@@ -780,7 +780,7 @@ const additions={
    "quranUrl": "https://quran.com/112/1",
    "hadithUrl": "https://sunnah.com/bukhari:2856",
    "sourceAnchorLessonId": "aqidah-tawhid",
-   "sourceScope": "Thematische Primärstelle zu einem Teilaspekt; genaue Deutung gegenprüfen.",
+   "sourceScope": "Konkret zum Lernziel ausgearbeitete Quellenbezüge; Quellen-/Didaktik- und Aussprache-Endabnahme weiterhin ausstehend.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -788,141 +788,139 @@ const additions={
    "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
-  "hint": "Den Sūrah-Namen und zentrale Bedeutung lernen.",
-  "sample": "Bei „Sūrat al-Ikhlāṣ verstehen“ übe ich: den Sūrah-Namen und zentrale Bedeutung lernen.",
+  "hint": "Prüfe die Aussage der konkreten Quelle und unterscheide sie von unserem Unterrichtsbeispiel.",
+  "sample": "Wir unterscheiden Qurʾān, überlieferte Sunnah und eigene Anwendung.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Sūrat al-Ikhlāṣ verstehen.",
+    "intro": "Allah ist Einer.",
     "lines": [
-     "Wir lernen heute: Sūrat al-Ikhlāṣ verstehen.",
-     "Wir üben den Sūrah-Namen und zentrale Bedeutung lernen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Der erste Vers von Sūrat al-Ikhlāṣ spricht über Allah.",
+     "Allah ist Einer und hat keinen Teilhaber.",
+     "Wir beten nur Allah an.",
+     "Wenn wir den Vers hören, nutzen wir eine echte Qurʾān-Rezitation."
     ],
-    "evidence": "Qurʾān 112:1 lehrt: Allah ist Einer. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 112:1 nennt Allahs Einzigkeit; al-Buḫārī 2856 berichtet über Allahs Recht, allein angebetet zu werden."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Den Sūrah-Namen und zentrale Bedeutung lernen.",
+    "intro": "Was lehrt der Anfang von Sūrat al-Ikhlāṣ?",
     "lines": [
-     "Heute untersuchen wir das Thema „Sūrat al-Ikhlāṣ verstehen“.",
-     "Der Qurʾān spricht in 112:1 darüber: Allah ist Einer.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 2856 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Den Sūrah-Namen und zentrale Bedeutung lernen. Wir überlegen gemeinsam, warum es passt."
+     "Qurʾān 112:1 sagt sinngemäß: Allah ist Einer.",
+     "Daraus lernen wir Tawḥīd: Allah allein ist Gott.",
+     "In al-Buḫārī 2856 erklärte der Prophet ﷺ Muʿāḏ Allahs Recht: Ihn allein anbeten.",
+     "Vers und Ḥadīṯ ergänzen unsere Unterrichtserklärung; wir erfinden keine zusätzlichen Aussagen."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Der Vers handelt von Allahs Einzigkeit, der Bericht an Muʿāḏ vom Recht Allahs gegenüber Seinen Dienern."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Sūrat al-Ikhlāṣ verstehen“.",
+    "intro": "Sūrat al-Ikhlāṣ und die Grundlagen des Tawḥīd.",
     "lines": [
-     "Ausgangssituation: Den Sūrah-Namen und zentrale Bedeutung lernen.",
-     "Qurʾān 112:1: Allah ist Einer.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 2856): Der Prophet ﷺ erklärte, dass allein Allah angebetet wird. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 112:1 beginnt mit der Aussage über Allahs Einzigkeit.",
+     "Der Ḥadīṯ bei al-Buḫārī 2856 nennt Allahs Recht: Ihm ohne Beigesellung zu dienen.",
+     "Daraus folgt nicht, dass wir eine frei erfundene weitere Erklärung als Prophetenwort ausgeben dürften.",
+     "Die deutsche Bedeutungswiedergabe des Verses und die Hadith-Paraphrase bleiben vom arabischen Originalwortlaut unterschieden."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Die Quelle zum Recht Allahs ist eine eigene Überlieferung; sie steht nicht als Wortlaut in Qurʾān 112:1."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Sūrat al-Ikhlāṣ verstehen“ eine gute Handlung?",
+     "prompt": "Was sagt der Anfang von al-Ikhlāṣ über Allah?",
      "options": [
-      "Ich kann den Sūrah-Namen und zentrale Bedeutung lernen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Allah ist Einer.",
+      "Allah hat mehrere Teilhaber."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Den Sūrah-Namen und zentrale Bedeutung lernen.",
-     "explain": "Unser Lernbeispiel ist: Den Sūrah-Namen und zentrale Bedeutung lernen."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Qurʾān 112:1 nennt Allahs Einzigkeit."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Sūrat al-Ikhlāṣ verstehen“ tun?",
+     "prompt": "Wen beten Muslime an?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Allah allein.",
+      "Allah und mehrere andere Götter."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Im Tawḥīd wird Allah allein angebetet."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Sūrat al-Ikhlāṣ verstehen“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was bedeutet Tawḥīd in dieser Lektion?",
      "options": [
-      "Ich kann den Sūrah-Namen und zentrale Bedeutung lernen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Allah ist Einer und wird allein angebetet.",
+      "Jede Schöpfung wird genauso angebetet wie Allah."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Den Sūrah-Namen und zentrale Bedeutung lernen.",
-     "explain": "Unser Lernbeispiel ist: Den Sūrah-Namen und zentrale Bedeutung lernen."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Der erste Vers und der Hadith über Allahs Recht erklären das Grundthema."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Sūrat al-Ikhlāṣ verstehen“ im Alltag üben kannst?",
+     "prompt": "Wer hörte vom Propheten ﷺ die Erklärung über Allahs Recht?",
      "options": [
-      "Ich könnte den Sūrah-Namen und zentrale Bedeutung lernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Muʿāḏ ibn Ǧabal.",
+      "Der König von Ägypten."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte den Sūrah-Namen und zentrale Bedeutung lernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Al-Buḫārī 2856 berichtet die Unterweisung von Muʿāḏ.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Sūrat al-Ikhlāṣ verstehen“ im Beispiel üben kannst."
+     "legacyPrompt": "Aus früherem Freitextunterricht zu überprüfende Antwortaufgabe."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 112:1?",
+     "prompt": "Welche Aussage steht unmittelbar in Qurʾān 112:1?",
      "options": [
       "Allah ist Einer.",
-      "Unser Übungsbeispiel ist: Den Sūrah-Namen und zentrale Bedeutung lernen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ erklärte, dass allein Allah angebetet wird."
+      "Die genaue Reise von Muʿāḏ."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Die Einzigkeit Allahs gehört zum Vers."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Sūrat al-Ikhlāṣ verstehen“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Was wird in al-Buḫārī 2856 über Allahs Recht genannt?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Allah allein anbeten und Ihm nichts beigesellen.",
+      "Alle Menschen ohne Ausnahme verehren."
      ],
      "correct": 0,
-     "hint": "Vergleiche 112:1 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Der Ḥadīṯ ist ein Beleg für Tawḥīd in der Anbetung."
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Was unterscheidet Vers und Hadith?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Allah ist Einer. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass allein Allah angebetet wird.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "112:1 nennt Allahs Einzigkeit; der Hadith erklärt Sein Recht, allein angebetet zu werden.",
+      "Beide enthalten wörtlich denselben ganzen Satz."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Allah ist Einer. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass allein Allah angebetet wird.",
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Wir prüfen jede Quelle nach ihrem tatsächlichen Aussagebereich.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 112:1 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Aus früherem Freitextunterricht zu überprüfende Antwortaufgabe."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Sūrat al-Ikhlāṣ verstehen“?",
+     "prompt": "Wie hören Kinder den arabischen Vers korrekt?",
      "options": [
-      "Ich erkläre die Situation: den Sūrah-Namen und zentrale Bedeutung lernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Von einem authentischen Qurʾān-Rezitator.",
+      "Von einer frei erfundenen KI-Arabischfassung."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: den Sūrah-Namen und zentrale Bedeutung lernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Qurʾān wird nicht synthetisch rezitiert.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Sūrat al-Ikhlāṣ verstehen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Aus früherem Freitextunterricht zu überprüfende Antwortaufgabe."
     }
    ]
   },
@@ -947,9 +945,9 @@ const additions={
   "subject": "sirah",
   "pillar": "sirah",
   "topic": "Ibrāhīm عليه السلام und Tawḥīd",
-  "title": "Sīrah · Ibrāhīm عليه السلام und Tawḥīd",
+  "title": "Tawḥīd · Ibrāhīm عليه السلام bekam Rechtleitung",
   "lead": "Heute lernen wir: Ibrāhīm عليه السلام und Tawḥīd.",
-  "goal": "Ich kann ein Beispiel für Vertrauen auf Allah kennenlernen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann erklären, dass Allah Ibrāhīm Rechtleitung und Einsicht gab, und das von der allgemeinen Tawḥīd-Lehre unterscheiden.",
   "quran": {
    "surah": 21,
    "ayah": 51,
@@ -967,7 +965,7 @@ const additions={
    "quranUrl": "https://quran.com/21/51",
    "hadithUrl": "https://dorar.net/hadith/sharh/11568",
    "sourceAnchorLessonId": "aqidah-tawhid-recht-allahs",
-   "sourceScope": "Thematische Primärstelle zu einem Teilaspekt; genaue Deutung gegenprüfen.",
+   "sourceScope": "Konkret zum Lernziel ausgearbeitete Quellenbezüge; Quellen-/Didaktik- und Aussprache-Endabnahme weiterhin ausstehend.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -975,141 +973,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Ein Beispiel für Vertrauen auf Allah kennenlernen.",
-  "sample": "Bei „Ibrāhīm عليه السلام und Tawḥīd“ übe ich: ein Beispiel für Vertrauen auf Allah kennenlernen.",
+  "hint": "Prüfe die Aussage der konkreten Quelle und unterscheide sie von unserem Unterrichtsbeispiel.",
+  "sample": "Wir unterscheiden Qurʾān, überlieferte Sunnah und eigene Anwendung.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Ibrāhīm عليه السلام und Tawḥīd.",
+    "intro": "Allah gab Ibrāhīm Rechtleitung.",
     "lines": [
-     "Wir lernen heute: Ibrāhīm عليه السلام und Tawḥīd.",
-     "Wir üben ein Beispiel für Vertrauen auf Allah kennenlernen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Ibrāhīm war ein Prophet Allahs.",
+     "Der Qurʾān berichtet, dass Allah ihm Einsicht gab.",
+     "Ibrāhīm rief zur Anbetung Allahs auf.",
+     "Wir erfinden keine Einzelheiten über sein Leben."
     ],
-    "evidence": "Qurʾān 21:51 lehrt: Allah verlieh Ibrāhīm Rechtleitung und Einsicht. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 21:51 nennt Rechtleitung und Einsicht für Ibrāhīm. Al-Buḫārī 2856 lehrt allgemein Allahs Recht auf alleinige Anbetung."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Ein Beispiel für Vertrauen auf Allah kennenlernen.",
+    "intro": "Was sagt Qurʾān 21:51 wirklich über Ibrāhīm?",
     "lines": [
-     "Heute untersuchen wir das Thema „Ibrāhīm عليه السلام und Tawḥīd“.",
-     "Der Qurʾān spricht in 21:51 darüber: Allah verlieh Ibrāhīm Rechtleitung und Einsicht.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 2856; Ṣaḥīḥ Muslim, Nr. 30 · überliefert von Muʿāḏ ibn Ǧabal nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Ein Beispiel für Vertrauen auf Allah kennenlernen. Wir überlegen gemeinsam, warum es passt."
+     "Allah gab Ibrāhīm früh Rechtleitung und Einsicht.",
+     "Die folgenden Verse berichten über seine Auseinandersetzung mit der Götzenverehrung.",
+     "Die Anbetung Allahs allein gehört zum Tawḥīd.",
+     "Der Ḥadīṯ über Muʿāḏ erklärt das Recht Allahs allgemein, nicht eine einzelne Szene aus Ibrāhīms Leben."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Qurʾān 21:51 ist ein eigenständiger Beleg über Ibrāhīm; al-Buḫārī 2856 trägt die allgemeine Tawḥīd-Aussage."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Ibrāhīm عليه السلام und Tawḥīd“.",
+    "intro": "Eine Prophetenaussage und eine allgemeine Glaubensregel unterscheiden.",
     "lines": [
-     "Ausgangssituation: Ein Beispiel für Vertrauen auf Allah kennenlernen.",
-     "Qurʾān 21:51: Allah verlieh Ibrāhīm Rechtleitung und Einsicht.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 2856; Ṣaḥīḥ Muslim, Nr. 30 · überliefert von Muʿāḏ ibn Ǧabal): Der Prophet ﷺ erklärte Muʿāḏ ibn Ǧabal, dass Allahs Recht gegenüber den Menschen darin besteht, dass sie Ihn anbeten und Ihm nichts beigesellen. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 21:51 nennt, dass Allah Ibrāhīm früh Einsicht und Rechtleitung schenkte.",
+     "Die Aussage über Ibrāhīm ist Teil des Qurʾān-Berichts; historische Zusatzdetails benötigen gesonderte Nachweise.",
+     "Al-Buḫārī 2856 schildert die Erklärung an Muʿāḏ über Allahs Recht gegenüber Seinen Dienern.",
+     "Wir dürfen die Unterweisung von Muʿāḏ nicht als ein Gespräch mit Ibrāhīm ausgeben."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Die beiden Quellen stehen thematisch im Zusammenhang, aber berichten nicht dasselbe Ereignis."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Ibrāhīm عليه السلام und Tawḥīd“ eine gute Handlung?",
+     "prompt": "Was gab Allah Ibrāhīm nach Qurʾān 21:51?",
      "options": [
-      "Ich kann ein Beispiel für Vertrauen auf Allah kennenlernen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Rechtleitung und Einsicht.",
+      "Einen erfundenen Zauberstab."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Ein Beispiel für Vertrauen auf Allah kennenlernen.",
-     "explain": "Unser Lernbeispiel ist: Ein Beispiel für Vertrauen auf Allah kennenlernen."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Der Vers nennt die Rechtleitung Ibrāhīms."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Ibrāhīm عليه السلام und Tawḥīd“ tun?",
+     "prompt": "Wer schenkte Ibrāhīm diese Rechtleitung?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Allah.",
+      "Die Götzen seines Volkes."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Allah gab ihm Rechtleitung."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Ibrāhīm عليه السلام und Tawḥīd“. Welche Handlung passt zur Stunde?",
+     "prompt": "Welche Aussage belegt Qurʾān 21:51?",
      "options": [
-      "Ich kann ein Beispiel für Vertrauen auf Allah kennenlernen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Ibrāhīm erhielt Rechtleitung und Einsicht von Allah.",
+      "Muʿāḏ reiste mit Ibrāhīm."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Ein Beispiel für Vertrauen auf Allah kennenlernen.",
-     "explain": "Unser Lernbeispiel ist: Ein Beispiel für Vertrauen auf Allah kennenlernen."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Der Vers erwähnt Rechtleitung und Einsicht."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Ibrāhīm عليه السلام und Tawḥīd“ im Alltag üben kannst?",
+     "prompt": "Was lehrt der Ḥadīṯ an Muʿāḏ?",
      "options": [
-      "Ich könnte ein Beispiel für Vertrauen auf Allah kennenlernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Allah allein anbeten und Ihm nichts beigesellen.",
+      "Die Götzen seines Volkes anbeten."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte ein Beispiel für Vertrauen auf Allah kennenlernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Der Ḥadīṯ nennt Allahs Recht.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Ibrāhīm عليه السلام und Tawḥīd“ im Beispiel üben kannst."
+     "legacyPrompt": "Aus früherem Freitextunterricht zu überprüfende Antwortaufgabe."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 21:51?",
+     "prompt": "Sind Qurʾān 21:51 und al-Buḫārī 2856 derselbe Bericht?",
      "options": [
-      "Allah verlieh Ibrāhīm Rechtleitung und Einsicht.",
-      "Unser Übungsbeispiel ist: Ein Beispiel für Vertrauen auf Allah kennenlernen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ erklärte Muʿāḏ ibn Ǧabal, dass Allahs Recht gegenüber den Menschen darin besteht, dass sie Ihn anbeten und Ihm nichts beigesellen."
+      "Nein, sie betreffen verschiedene Personen und Aussagen.",
+      "Ja, beide erzählen wörtlich dasselbe Gespräch."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Die Quellen werden getrennt betrachtet."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Ibrāhīm عليه السلام und Tawḥīd“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Aussage gehört direkt zu Qurʾān 21:51?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Allah verlieh Ibrāhīm schon früher Einsicht.",
+      "Muʿāḏ stellte eine Frage auf einem Reittier."
      ],
      "correct": 0,
-     "hint": "Vergleiche 21:51 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Der Vers spricht über Ibrāhīm."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 21:51?",
+     "prompt": "Was ist eine unzulässige Behauptung?",
      "options": [
-      "Allah verlieh Ibrāhīm Rechtleitung und Einsicht.",
-      "Unser Übungsbeispiel ist: Ein Beispiel für Vertrauen auf Allah kennenlernen."
+      "Den Bericht über Muʿāḏ als Erlebnis Ibrāhīms auszugeben.",
+      "Den Vers als Aussage über Ibrāhīm zu lesen."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Allah verlieh Ibrāhīm Rechtleitung und Einsicht. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte Muʿāḏ ibn Ǧabal, dass Allahs Recht gegenüber den Menschen darin besteht, dass sie Ihn anbeten und Ihm nichts beigesellen.",
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Ein thematischer Vergleich macht aus zwei Texten keine einzige Geschichte.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 21:51 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Aus früherem Freitextunterricht zu überprüfende Antwortaufgabe."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Ibrāhīm عليه السلام und Tawḥīd“?",
+     "prompt": "Was ist der gemeinsame Glaubensbezug?",
      "options": [
-      "Ich erkläre die Situation: ein Beispiel für Vertrauen auf Allah kennenlernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Die Rechtleitung Allahs und Seine alleinige Anbetung.",
+      "Die Pflicht, jeden historischen Bericht selbst zu erfinden."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: ein Beispiel für Vertrauen auf Allah kennenlernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Der Zusammenhang ist Tawḥīd, nicht ein gemeinsamer Erzählrahmen.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Ibrāhīm عليه السلام und Tawḥīd“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Aus früherem Freitextunterricht zu überprüfende Antwortaufgabe."
     }
    ]
   },
@@ -1506,9 +1502,9 @@ const additions={
   "subject": "aqidah",
   "pillar": "tawhid",
   "topic": "Allah versorgt uns",
-  "title": "Tawḥīd · Allah versorgt uns",
+  "title": "Tawḥīd · Allah lässt Pflanzen wachsen und versorgt",
   "lead": "Heute lernen wir: Allah versorgt uns.",
-  "goal": "Ich kann beim Frühstück an die Gaben Allahs denken und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann die Versorgung durch Allah an Regen und Pflanzen erklären und das überlieferte Verdienst des Pflanzens richtig einordnen.",
   "quran": {
    "surah": 6,
    "ayah": 99,
@@ -1526,7 +1522,7 @@ const additions={
    "quranUrl": "https://quran.com/6/99",
    "hadithUrl": "https://sunnah.com/bukhari:2320",
    "sourceAnchorLessonId": "aqidah-allah-pflanzen-wachsen",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
+   "sourceScope": "Konkret zum Lernziel ausgearbeitete Quellenbezüge; Quellen-/Didaktik- und Aussprache-Endabnahme weiterhin ausstehend.",
    "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -1534,141 +1530,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Beim Frühstück an die Gaben Allahs denken.",
-  "sample": "Bei „Allah versorgt uns“ übe ich: beim Frühstück an die Gaben Allahs denken.",
+  "hint": "Prüfe die Aussage der konkreten Quelle und unterscheide sie von unserem Unterrichtsbeispiel.",
+  "sample": "Wir unterscheiden Qurʾān, überlieferte Sunnah und eigene Anwendung.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Allah versorgt uns.",
+    "intro": "Allah lässt Pflanzen wachsen.",
     "lines": [
-     "Wir lernen heute: Allah versorgt uns.",
-     "Wir üben beim Frühstück an die Gaben Allahs denken.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Der Qurʾān erinnert uns daran, dass Allah Regen herabsendet.",
+     "Durch das Wasser wachsen Pflanzen.",
+     "Menschen und Tiere können von Pflanzen essen.",
+     "Der Prophet ﷺ lehrte, dass Pflanzen für andere eine gute Tat sein kann."
     ],
-    "evidence": "Qurʾān 6:99 lehrt: Er ist es, Der Wasser vom Himmel herabkommen lässt, wodurch Wir Pflanzen aller Art hervorbringen. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 6:99 spricht über Regen und Pflanzen. Al-Buḫārī 2320 berichtet über den Nutzen von Pflanzungen für Menschen und Tiere."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Beim Frühstück an die Gaben Allahs denken.",
+    "intro": "Wie hängen Regen, Pflanzen und gute Taten zusammen?",
     "lines": [
-     "Heute untersuchen wir das Thema „Allah versorgt uns“.",
-     "Der Qurʾān spricht in 6:99 darüber: Er ist es, Der Wasser vom Himmel herabkommen lässt, wodurch Wir Pflanzen aller Art hervorbringen.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 2320; Ṣaḥīḥ Muslim, Nr. 1553 · Anas ibn Mālik nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Beim Frühstück an die Gaben Allahs denken. Wir überlegen gemeinsam, warum es passt."
+     "Qurʾān 6:99 nennt das Wasser, durch das Allah Pflanzen hervorbringt.",
+     "Wachsen Pflanzen, können Menschen, Vögel und Tiere Nahrung finden.",
+     "Al-Buḫārī 2320 berichtet, dass eine solche Pflanzung einem Muslim als Ṣadaqah angerechnet werden kann.",
+     "Der Qurʾān-Vers selbst enthält nicht den ganzen Wortlaut dieses Ḥadīṯ."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Vers und Ḥadīṯ behandeln verschiedene Punkte: Allahs Schöpfung und die Belohnung für eine nützliche Pflanzung."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Allah versorgt uns“.",
+    "intro": "Rizq und Ṣadaqah korrekt in den Quellen zuordnen.",
     "lines": [
-     "Ausgangssituation: Beim Frühstück an die Gaben Allahs denken.",
-     "Qurʾān 6:99: Er ist es, Der Wasser vom Himmel herabkommen lässt, wodurch Wir Pflanzen aller Art hervorbringen.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 2320; Ṣaḥīḥ Muslim, Nr. 1553 · Anas ibn Mālik): Wer sät oder pflanzt und dessen Pflanzen Menschen oder Tiere ernähren, dem wird dies als gute Wohltat angerechnet. (Sinngemäße Bedeutung) Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 6:99 ist ein Versauszug über Allahs Herabsenden von Wasser und das Hervorbringen von Pflanzen.",
+     "Al-Buḫārī 2320 wird von Anas überliefert; er nennt Pflanzungen, von denen Vögel, Menschen oder Tiere essen.",
+     "Das Essen von einer solchen Pflanzung wird dem muslimischen Pflanzenden als gute Gabe angerechnet.",
+     "Wir dürfen daraus kein neues zahlenmäßig festgelegtes Versprechen erfinden."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Wir unterscheiden den Qurʾān-Auszug vom authentisch überlieferten Beispiel der nützlichen Pflanzung."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Allah versorgt uns“ eine gute Handlung?",
+     "prompt": "Was lässt Allah laut dem Vers vom Himmel herabkommen?",
      "options": [
-      "Ich kann beim Frühstück an die Gaben Allahs denken.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Wasser.",
+      "Steine als Nahrung für Pflanzen."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Beim Frühstück an die Gaben Allahs denken.",
-     "explain": "Unser Lernbeispiel ist: Beim Frühstück an die Gaben Allahs denken."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Der Qurʾān nennt Wasser."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Allah versorgt uns“ tun?",
+     "prompt": "Wer kann von Pflanzen Nahrung bekommen?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Menschen und Tiere.",
+      "Nur bemalte Spielzeuge."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Pflanzen können Lebewesen versorgen."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Allah versorgt uns“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was nennt Qurʾān 6:99?",
      "options": [
-      "Ich kann beim Frühstück an die Gaben Allahs denken.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Wasser und das Wachsen von Pflanzen.",
+      "Die Pflicht, nur einen bestimmten Baum zu pflanzen."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Beim Frühstück an die Gaben Allahs denken.",
-     "explain": "Unser Lernbeispiel ist: Beim Frühstück an die Gaben Allahs denken."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Der Vers beschreibt Allahs Versorgung durch Pflanzen."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Allah versorgt uns“ im Alltag üben kannst?",
+     "prompt": "Welcher Bericht spricht vom Verdienst des Pflanzens?",
      "options": [
-      "Ich könnte beim Frühstück an die Gaben Allahs denken. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Al-Buḫārī 2320.",
+      "Qurʾān 6:99 als wörtlicher Ḥadīṯ."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte beim Frühstück an die Gaben Allahs denken. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Die überlieferte Aussage stammt vom Propheten ﷺ.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Allah versorgt uns“ im Beispiel üben kannst."
+     "legacyPrompt": "Aus früherem Freitextunterricht zu überprüfende Antwortaufgabe."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 6:99?",
+     "prompt": "Wem kann das Pflanzen zugutekommen?",
      "options": [
-      "Er ist es, Der Wasser vom Himmel herabkommen lässt, wodurch Wir Pflanzen aller Art hervorbringen.",
-      "Unser Übungsbeispiel ist: Beim Frühstück an die Gaben Allahs denken.",
-      "Die Hadith-Bedeutung lautet: Wer sät oder pflanzt und dessen Pflanzen Menschen oder Tiere ernähren, dem wird dies als gute Wohltat angerechnet. (Sinngemäße Bedeutung)"
+      "Menschen, Vögeln und anderen Tieren.",
+      "Nur dem Holz des Baumes."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Der Ḥadīṯ nennt den Nutzen für Lebewesen."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Allah versorgt uns“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Was ist im Qurʾān-Vers selbst belegt?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Allah lässt Wasser herabkommen und Pflanzen entstehen.",
+      "Die genaue Ṣadaqah-Belohnung jeder Pflanzung als Ziffer."
      ],
      "correct": 0,
-     "hint": "Vergleiche 6:99 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Der Vers berichtet von Allahs Schöpfung."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 6:99?",
+     "prompt": "Welche Zusatzinformation kommt aus al-Buḫārī 2320?",
      "options": [
-      "Er ist es, Der Wasser vom Himmel herabkommen lässt, wodurch Wir Pflanzen aller Art hervorbringen.",
-      "Unser Übungsbeispiel ist: Beim Frühstück an die Gaben Allahs denken."
+      "Das Verdienst einer Pflanzung, von der Lebewesen essen.",
+      "Dass Pflanzen niemals von Tieren gefressen werden."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Er ist es, Der Wasser vom Himmel herabkommen lässt, wodurch Wir Pflanzen aller Art hervorbringen. Die angegebene Sunnah lehrt sinngemäß: Wer sät oder pflanzt und dessen Pflanzen Menschen oder Tiere ernähren, dem wird dies als gute Wohltat angerechnet. (Sinngemäße Bedeutung)",
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Der Ḥadīṯ beschreibt einen Nutzen für andere.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 6:99 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Aus früherem Freitextunterricht zu überprüfende Antwortaufgabe."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Allah versorgt uns“?",
+     "prompt": "Wie sprechen wir über die Belohnung für Pflanzen?",
      "options": [
-      "Ich erkläre die Situation: beim Frühstück an die Gaben Allahs denken. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Nur entsprechend dem überlieferten Bericht.",
+      "Mit frei erfundenen Zahlen und garantierten Sonderregeln."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: beim Frühstück an die Gaben Allahs denken. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Kein nicht belegtes Versprechen ergänzen.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Allah versorgt uns“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Aus früherem Freitextunterricht zu überprüfende Antwortaufgabe."
     }
    ]
   },
@@ -1880,7 +1874,7 @@ const additions={
   "topic": "Gutes tun, wenn niemand zuschaut",
   "title": "Ikhlāṣ · Gutes tun, wenn niemand zuschaut",
   "lead": "Heute lernen wir: Gutes tun, wenn niemand zuschaut.",
-  "goal": "Ich kann ohne Aufmerksamkeit den Lernplatz aufräumen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich verstehe, warum eine gute Absicht Allah gilt, auch wenn andere Menschen mich nicht loben.",
   "quran": {
    "surah": 39,
    "ayah": 11,
@@ -1898,7 +1892,7 @@ const additions={
    "quranUrl": "https://quran.com/39/11",
    "hadithUrl": "https://sunnah.com/bukhari:1",
    "sourceAnchorLessonId": "aqidah-ikhlas-gutes-ohne-lob",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
+   "sourceScope": "Konkret zum Lernziel ausgearbeitete Quellenbezüge; Quellen-/Didaktik- und Aussprache-Endabnahme weiterhin ausstehend.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -1906,141 +1900,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Ohne Aufmerksamkeit den Lernplatz aufräumen.",
-  "sample": "Bei „Gutes tun, wenn niemand zuschaut“ übe ich: ohne Aufmerksamkeit den Lernplatz aufräumen.",
+  "hint": "Prüfe die Aussage der konkreten Quelle und unterscheide sie von unserem Unterrichtsbeispiel.",
+  "sample": "Wir unterscheiden Qurʾān, überlieferte Sunnah und eigene Anwendung.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Gutes tun, wenn niemand zuschaut.",
+    "intro": "Auch ohne Applaus kann ich Gutes tun.",
     "lines": [
-     "Wir lernen heute: Gutes tun, wenn niemand zuschaut.",
-     "Wir üben ohne Aufmerksamkeit den Lernplatz aufräumen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Allah kennt unsere Absichten.",
+     "Wenn ich jemandem helfe, muss niemand klatschen.",
+     "Ich darf Gutes um Allahs willen tun.",
+     "Der Prophet ﷺ lehrte, dass Absichten wichtig sind."
     ],
-    "evidence": "Qurʾān 39:11 lehrt: Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 39:11 nennt Aufrichtigkeit in der Anbetung. Al-Buḫārī 1 erklärt die Bedeutung der Absicht für Taten."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Ohne Aufmerksamkeit den Lernplatz aufräumen.",
+    "intro": "Was bedeutet Ikhlāṣ beim Helfen?",
     "lines": [
-     "Heute untersuchen wir das Thema „Gutes tun, wenn niemand zuschaut“.",
-     "Der Qurʾān spricht in 39:11 darüber: Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 1 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Ohne Aufmerksamkeit den Lernplatz aufräumen. Wir überlegen gemeinsam, warum es passt."
+     "Ikhlāṣ bedeutet Aufrichtigkeit gegenüber Allah.",
+     "Qurʾān 39:11 nennt die aufrichtige Anbetung Allahs.",
+     "Der Prophet ﷺ lehrte bei al-Buḫārī 1, dass Taten nach Absichten beurteilt werden.",
+     "Ein gutes Beispiel aus unserem Alltag ist zu helfen, ohne dafür Lob zu verlangen."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Die Alltagshilfe ist eine Anwendung, kein zusätzlicher wörtlicher Vers oder Ḥadīṯ."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Gutes tun, wenn niemand zuschaut“.",
+    "intro": "Die innere Absicht und die sichtbare Tat unterscheiden.",
     "lines": [
-     "Ausgangssituation: Ohne Aufmerksamkeit den Lernplatz aufräumen.",
-     "Qurʾān 39:11: Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 1): Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 39:11 enthält den Auftrag, Allah mit aufrichtiger Hingabe zu dienen.",
+     "Der Überlieferer ʿUmar ibn al-Khaṭṭāb berichtet in al-Buḫārī 1 über die Bedeutung der Absichten.",
+     "Dass niemand die Hilfe sieht, macht sie nicht wertlos; entscheidend ist nicht bloß die öffentliche Anerkennung.",
+     "Wir geben die Anwendung auf eine heimliche gute Tat als Unterrichtsbeispiel aus, nicht als wörtliche Prophetenrede."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Die Aussage über die Absichten ist Sunnah; der Qurʾān-Vers betrifft aufrichtige Anbetung."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Gutes tun, wenn niemand zuschaut“ eine gute Handlung?",
+     "prompt": "Warum kann ich auch ohne Lob helfen?",
      "options": [
-      "Ich kann ohne Aufmerksamkeit den Lernplatz aufräumen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Weil eine gute Absicht wichtig ist.",
+      "Weil helfen nur mit Applaus erlaubt ist."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Ohne Aufmerksamkeit den Lernplatz aufräumen.",
-     "explain": "Unser Lernbeispiel ist: Ohne Aufmerksamkeit den Lernplatz aufräumen."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Der Prophet ﷺ lehrte die Bedeutung der Absicht."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Gutes tun, wenn niemand zuschaut“ tun?",
+     "prompt": "Wem soll meine aufrichtige Anbetung gelten?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Allah.",
+      "Meinem Wunsch nach Applaus."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Qurʾān 39:11 spricht von der Aufrichtigkeit für Allah."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Gutes tun, wenn niemand zuschaut“. Welche Handlung passt zur Stunde?",
+     "prompt": "Wovon spricht al-Buḫārī 1?",
      "options": [
-      "Ich kann ohne Aufmerksamkeit den Lernplatz aufräumen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Vom Wert der Absichten bei den Taten.",
+      "Von der Anzahl aller Vögel der Erde."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Ohne Aufmerksamkeit den Lernplatz aufräumen.",
-     "explain": "Unser Lernbeispiel ist: Ohne Aufmerksamkeit den Lernplatz aufräumen."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Der Bericht behandelt die Absicht."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Gutes tun, wenn niemand zuschaut“ im Alltag üben kannst?",
+     "prompt": "Welche Handlung zeigt ein gutes Alltagsbeispiel?",
      "options": [
-      "Ich könnte ohne Aufmerksamkeit den Lernplatz aufräumen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Einem Kind helfen, ohne dafür Lob einzufordern.",
+      "Nur helfen, wenn Zuschauer klatschen."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte ohne Aufmerksamkeit den Lernplatz aufräumen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Das ist eine Anwendung des Gelernten.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Gutes tun, wenn niemand zuschaut“ im Beispiel üben kannst."
+     "legacyPrompt": "Aus früherem Freitextunterricht zu überprüfende Antwortaufgabe."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 39:11?",
+     "prompt": "Was bedeutet Ikhlāṣ hier?",
      "options": [
-      "Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein.",
-      "Unser Übungsbeispiel ist: Ohne Aufmerksamkeit den Lernplatz aufräumen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden."
+      "Aufrichtigkeit gegenüber Allah.",
+      "Ein besonders lauter öffentlicher Auftritt."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Aufrichtigkeit ist nicht gleich öffentliche Anerkennung."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Gutes tun, wenn niemand zuschaut“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Was lehrt Qurʾān 39:11?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Allah aufrichtig dienen.",
+      "Alle Menschen sollen mich immer loben."
      ],
      "correct": 0,
-     "hint": "Vergleiche 39:11 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Der Vers nennt Aufrichtigkeit in der Anbetung."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 39:11?",
+     "prompt": "Welche Quelle nennt das Urteil über Taten nach Absichten?",
      "options": [
-      "Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein.",
-      "Unser Übungsbeispiel ist: Ohne Aufmerksamkeit den Lernplatz aufräumen."
+      "Al-Buḫārī 1.",
+      "Eine nachträglich erfundene Unterrichtsgeschichte."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden.",
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Der Ḥadīṯ wird von ʿUmar überliefert.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 39:11 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Aus früherem Freitextunterricht zu überprüfende Antwortaufgabe."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Gutes tun, wenn niemand zuschaut“?",
+     "prompt": "Wie markieren wir das Beispiel des heimlichen Helfens?",
      "options": [
-      "Ich erkläre die Situation: ohne Aufmerksamkeit den Lernplatz aufräumen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Als unsere praktische Anwendung.",
+      "Als zusätzliche wörtliche Aussage des Propheten ﷺ."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: ohne Aufmerksamkeit den Lernplatz aufräumen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Vergleiche die Aussage mit dem Unterrichtsbeleg.",
+     "explain": "Zwischen Quellenwortlaut und Pädagogik unterscheiden.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Gutes tun, wenn niemand zuschaut“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Aus früherem Freitextunterricht zu überprüfende Antwortaufgabe."
     }
    ]
   },
