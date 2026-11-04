@@ -685,7 +685,9 @@ const additions={
      ],
      "correct": 0,
      "hint": "Denke an die ersten genannten Körperteile.",
-     "explain": "Gesicht und Unterarme gehören zu den gewaschenen Teilen."
+     "explain": "Gesicht und Unterarme gehören zu den gewaschenen Teilen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Wuḍūʾ: Waschen und Streichen unterscheiden“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -723,19 +725,23 @@ const additions={
      ],
      "correct": 0,
      "hint": "Es ist ein überlieferter Handlungsbericht.",
-     "explain": "ʿUṯmān zeigte den Wuḍūʾ praktisch."
+     "explain": "ʿUṯmān zeigte den Wuḍūʾ praktisch.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 5:6 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
      "type": "choice",
      "prompt": "Warum prüfen wir Fiqh-Sonderfälle getrennt?",
      "options": [
+      "Weil einzelne Körperteile und Ausnahmen genauere Rechtsbelege benötigen können.",
       "Weil die Grundregeln nie belegt sind.",
-      "Weil alle eigenen Vermutungen verbindlich wären.",
-      "Weil einzelne Körperteile und Ausnahmen genauere Rechtsbelege benötigen können."
+      "Weil alle eigenen Vermutungen verbindlich wären."
      ],
-     "correct": 2,
+     "correct": 0,
      "hint": "Die Einführung deckt nicht alle Sonderfälle ab.",
-     "explain": "Fiqh-Einzelfragen brauchen eigene sorgfältige Prüfung."
+     "explain": "Fiqh-Einzelfragen brauchen eigene sorgfältige Prüfung.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Wuḍūʾ: Waschen und Streichen unterscheiden“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -1616,7 +1622,9 @@ const additions={
      ],
      "correct": 0,
      "hint": "Es geht um Ungeduld.",
-     "explain": "Man soll nicht behaupten, die Bitte sei wegen Verzögerung nicht erhört."
+     "explain": "Man soll nicht behaupten, die Bitte sei wegen Verzögerung nicht erhört.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Allah hört unsere Bittgebete“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -1654,19 +1662,23 @@ const additions={
      ],
      "correct": 0,
      "hint": "Der Bericht bespricht Geduld.",
-     "explain": "Nicht wegen scheinbarer Verzögerung verzweifeln."
+     "explain": "Nicht wegen scheinbarer Verzögerung verzweifeln.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 2:186 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
      "type": "choice",
      "prompt": "Wie erklärst du einem Kind eine nicht sofort sichtbare Erhörung?",
      "options": [
-      "Du bist bestimmt schlecht und schuld.",
       "Wir wissen nicht alles; wir dürfen weiter zu Allah beten und auf Hilfe hoffen.",
+      "Du bist bestimmt schlecht und schuld.",
       "Gib jedes Bittgebet auf."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "Verspreche nichts, was die Quelle nicht festlegt.",
-     "explain": "Geduld und Hoffnung sind richtig, ohne ungerechtfertigte Schuldzuweisung."
+     "explain": "Geduld und Hoffnung sind richtig, ohne ungerechtfertigte Schuldzuweisung.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Allah hört unsere Bittgebete“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
@@ -3671,7 +3683,9 @@ const additions={
      ],
      "correct": 0,
      "hint": "Jeder hat persönliche Grenzen.",
-     "explain": "Ein Nein zur Berührung ist zu respektieren."
+     "explain": "Ein Nein zur Berührung ist zu respektieren.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Nein sagen und persönliche Sicherheit“ im Beispiel üben kannst."
     },
     {
      "type": "choice",
@@ -3703,25 +3717,29 @@ const additions={
      "type": "choice",
      "prompt": "Was ist die korrekte Quellenunterscheidung?",
      "options": [
-      "Qurʾān 24:27 enthält wörtlich unsere moderne Kinderhilfe-Hotline.",
       "Die Quellen handeln von Erlaubnis; unsere zusätzliche Körpergrenzenregel dient dem Kinderschutz.",
+      "Qurʾān 24:27 enthält wörtlich unsere moderne Kinderhilfe-Hotline.",
       "Jede Erlaubnis zum Besuch macht Berührungen verpflichtend."
      ],
-     "correct": 1,
+     "correct": 0,
      "hint": "Nicht jede heutige Schutzregel ist ein wörtliches Zitat.",
-     "explain": "Wir benennen die religiösen Quellen korrekt und ergänzen angemessenen Kinderschutz."
+     "explain": "Wir benennen die religiösen Quellen korrekt und ergänzen angemessenen Kinderschutz.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Was lehrt Qurʾān 24:27 genau? Welche Aussage stammt aus der Sunnah?"
     },
     {
      "type": "choice",
      "prompt": "Ein älterer Mensch fordert eine unangenehme Geheimhaltung. Was sollst du tun?",
      "options": [
+      "Nein sagen, Abstand suchen und vertrauenswürdige Hilfe holen.",
       "Alles heimlich behalten.",
-      "Die Forderung ohne Prüfung erfüllen.",
-      "Nein sagen, Abstand suchen und vertrauenswürdige Hilfe holen."
+      "Die Forderung ohne Prüfung erfüllen."
      ],
-     "correct": 2,
+     "correct": 0,
      "hint": "Auch Erwachsene dürfen Grenzen nicht verletzen.",
-     "explain": "Bei Geheimnisdruck und Gefahr Hilfe suchen."
+     "explain": "Bei Geheimnisdruck und Gefahr Hilfe suchen.",
+     "editorialReviewStatus": "pending-human-review",
+     "legacyPrompt": "Wie erklärst du „Nein sagen und persönliche Sicherheit“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
     }
    ]
   },
