@@ -14,6 +14,9 @@ assert.equal(queue.kind,"KIDS_ACADEMY_208_V4_DEDUP_REVIEW_QUEUE");
 assert.equal(queue.status,"NEVER_GENERATE_UNAPPROVED");
 assert.equal(queue.modelId,"eleven_v4");
 assert.equal(queue.profile,"kids_story");
+assert.equal(queue.ownerConfirmedPronunciationStoryReferences,3,"Owner audio library must be indexed first");
+assert.equal(queue.autoWordClipExtractions,0,"No arbitrary MP3 word cutting permitted");
+
 assert.equal(queue.voiceId,policy.voiceIdentity.voiceId);
 assert.equal(approval.voiceId,policy.voiceIdentity.voiceId);
 assert.equal(approval.modelId,policy.production.modelId);
@@ -48,6 +51,27 @@ for(const item of approval.items||[]){
  }
  if(phrase.germanNurCollisionWatch&&item.germanNurCollisionReviewed!==true){
   fail("german-nur-arabic-nur-not-reviewed");continue;
+ }
+
+ if(phrase.referenceLibraryChecked!==true||!Array.isArray(phrase.ownerPronunciationAudioLibrarySources)){
+  fail("owner-audio-pronunciation-library-not-indexed");continue;
+ }
+ if(phrase.quranLoanwordNeedsApprovedAudioReview===true){
+  if(phrase.quranPronunciationEvidencePresent!==true){
+   fail("quran-fusha-owner-audio-reference-missing");continue;
+  }
+  if(item.quranPronunciationHeardAndMatchedToApprovedStoryReference!==true){
+   fail("quran-fusha-reference-hearing-not-approved");continue;
+  }
+ }
+ if(phrase.ownerPronunciationAudioLibrarySources.length>0){
+  if(item.ownerOriginalAudioReferenceListeningChecked!==true){
+   fail("owner-original-library-audio-hearing-required");continue;
+  }
+  const referenceFiles=[...new Set(phrase.ownerPronunciationAudioLibrarySources.map(x=>x.referenceJson))].sort();
+  if(JSON.stringify(referenceFiles)!==JSON.stringify((item.approvedOwnerAudioReferenceFiles||[]).slice().sort())){
+   fail("owner-audio-reference-file-set-mismatch");continue;
+  }
  }
  if(phrase.pronunciationReviewFlags.length>0&&item.fushaTermsCheckedAgainstLibrary!==true){
   fail("fusha-dictionary-review-required");continue;
