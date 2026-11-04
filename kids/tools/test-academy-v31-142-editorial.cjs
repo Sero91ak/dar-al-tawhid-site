@@ -43,7 +43,14 @@ for(let i=0;i<lessons.length;i++){
  assert.equal(x.releaseGate.hadithSourceSpecificMatchApproved,false);
  assert.ok(x.sourceAudit?.quranUrl?.startsWith("https://quran.com/"));
  assert.ok(x.sourceAudit?.hadithUrl?.startsWith("https://"));
- assert.ok(x.sourceAudit?.sourceAnchorLessonId);
+ // Older drafts reuse an existing lesson. Corrected lessons can instead have
+ // a new, explicitly pending primary-source pairing; do not fabricate an anchor.
+ const inheritedAnchor=typeof x.sourceAudit?.sourceAnchorLessonId==="string"&&x.sourceAudit.sourceAnchorLessonId.length>0;
+ const newPendingPrimaryPair=x.sourceAudit?.sourceAnchorLessonId===null&&
+  x.sourceAudit?.sourceScope?.startsWith("Individuell neu zugeordneter Primärbeleg")&&
+  x.sourceAudit?.sourceSpecificReview==="pending-independent-scholarly-check"&&
+  x.sourceAudit?.verifiedDate===null&&x.sourceAudit?.hasNewIndependentHadithVerification===false;
+ assert.ok(inheritedAnchor||newPendingPrimaryPair,"Source anchor or pending primary-source review required "+x.id);
  assert.ok(x.quran?.arabic?.trim()&&x.quran?.meaning?.trim()&&x.hadith?.text?.trim());
  assert.ok(x.quran.label&&x.hadith.source);
  if(x.sourceAudit.sourceSpecificReview==="pending-independent-scholarly-check")unapproved++;
