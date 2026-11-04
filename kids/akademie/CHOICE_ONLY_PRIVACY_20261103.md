@@ -26,3 +26,7 @@ Historische Lernstände mit unbewerteten Antworten dürfen im bestehenden lokale
 ## Ergänzender Auditbefund (03.11.2026)
 
 Die redaktionelle 208-Lektionen-Erweiterung in PR #1588 hatte 426 offene Frageformate, die mittlerweile als nicht freigegebene Antwortbutton-Entwürfe umgesetzt wurden. Dazu kommen 195 ältere Freitextfragen im bestehenden modularen Curriculum und drei zusätzliche offene Ṣidq-Fragen. Insgesamt sind 624 früher offene Lernfragen fachlich zu prüfen. Diese dürfen nur als antippbare Antwortmöglichkeiten und nach fachlicher Freigabe veröffentlicht werden. Der Audio-Massenstart bleibt bis dahin gesperrt.
+
+## Integrationsprüfpunkt 04.11.2026 – Quellen und Audio
+
+Die aktuelle V31-Redaktion hat 44 Lektions-Frageformulierungen der Slots 187–208 präzisiert, die überlangen Antwortbuttons auf 0 reduziert und sechs Quellenpaare für eine strenge thematische Prüfung aufgelistet: `kids/akademie/editorial-v31/SOURCE_TRIAGE_20261104.md` im Basiszweig PR #1588. Die Integrationsprüfung muss nach Basisänderungen **alle 1.664 sichtbaren Fragen und die V4-Vorlese-Reihenfolge** neu gegen den verbundenen Datenschutz-Adapter testen. Dieses Dokument erteilt **keine** religiöse, pädagogische, Geräte-, Hör- oder Live-Freigabe. Das V9-Audioarchiv bleibt unangetastet.
