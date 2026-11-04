@@ -45,6 +45,12 @@ function loadRecords() {
   return records;
 }
 
+// HAD-#### is an internal record key, never an editorial source number.
+function publicSourceNumber(value) {
+  const n = String(value || "").trim();
+  return /\bHAD-\d{4,6}\b/i.test(n) ? "" : n;
+}
+
 function stripMd(text) {
   return String(text || "").replace(/\*\*/g, "").trim();
 }
@@ -91,7 +97,7 @@ function main() {
     const hadith = {
       id: rec.id,
       recordType: rec.recordType === "athar" ? "athar" : "hadith",
-      hadithNumber: rec.sourceHadithNumber || rec.id,
+      hadithNumber: publicSourceNumber(rec.sourceHadithNumber),
       arabic: rec.arabicText || rec.arabic || "",
       german,
       germanStatus: verified ? "verified" : (german ? "review" : "missing"),
@@ -119,6 +125,9 @@ function main() {
       verificationNote: rec.verificationNote || "",
       links: []
     };
+    if (/\bHAD-\d{4,6}\b/i.test(hadith.hadithNumber)) {
+      throw new Error("Internal HAD identifier leaked into public source numbering: " + rec.id);
+    }
     book.chapters.get(chapterId).hadiths.push(hadith);
     book.hadithCount += 1;
     if (hadith.germanStatus === "verified") book.verifiedGermanCount += 1;

@@ -117,7 +117,7 @@
       kicker.textContent=txt(h.bookTitle||"Ḥadīṯ-Werk");
       body.insertBefore(kicker,body.firstChild);
 
-      if(title)title.textContent=h.hadithNumber?"Ḥadīṯ "+h.hadithNumber:(txt(h.babTitle)||"Ḥadīṯ");
+      if(title){var sourceNumber=String(h.hadithNumber||"").trim();title.textContent=sourceNumber&&!/\bHAD-\d{4,6}\b/i.test(sourceNumber)?"Ḥadīṯ "+sourceNumber:(txt(h.babTitle)||"Ḥadīṯ");}
 
       if(meta){
         var parts=[];

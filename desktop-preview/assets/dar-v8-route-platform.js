@@ -110,11 +110,12 @@ function initPrayer(){
 function initHadith(ctx){
  const input=document.getElementById("darV8HadithQuery"),results=document.getElementById("darV8HadithResults"),count=document.getElementById("darV8HadithCount");
  if(!input||!results)return;
- const text=(s)=>String(s==null?"":s);
+ const text=(s)=>String(s==null?"":s).replace(/\bHAD-\d{4,6}\b/gi,"").replace(/[ \t]{2,}/g," ").trim();
+  const publicSourceNumber=(s)=>{const n=String(s||"").trim();return /\bHAD-\d{4,6}\b/i.test(n)?"":n};
  let cache=[];
  const rank=(h,q)=>{
   const terms=ctx.searchFold(q).split(" ").filter(t=>t.length>1);if(!terms.length)return 1;
-  const title=ctx.searchFold([h.bookTitle,h.chapterTitle,h.hadithNumber,h.id].join(" "));
+  const title=ctx.searchFold([h.bookTitle,h.chapterTitle,publicSourceNumber(h.hadithNumber)].join(" "));
   const description=ctx.searchFold([h.german,h.tags?.join(" "),h.grade].join(" "));
   let score=0;for(const t of terms){if(title.includes(t))score+=7;else if(description.includes(t))score+=2;else return 0}return score;
  };
@@ -125,9 +126,9 @@ function initHadith(ctx){
   if(!found.length){const p=document.createElement("p");p.className="dar-v8-empty";p.textContent=cache.length?"Keine passende Überlieferung in unserem derzeit durchsuchbaren Katalog gefunden.":"Überlieferungen werden geladen …";results.append(p);return}
   for(const {h} of found){
     const card=document.createElement("article");card.className="dar-v8-hadith-card";
-    const ref=document.createElement("div");ref.className="dar-v8-hadith-ref";ref.textContent=[h.bookTitle,h.chapterTitle,h.hadithNumber?"Nr. "+h.hadithNumber:"",h.grade].filter(Boolean).join(" · ");
+    const ref=document.createElement("div");ref.className="dar-v8-hadith-ref";ref.textContent=[h.bookTitle,h.chapterTitle,publicSourceNumber(h.hadithNumber)?"Nr. "+publicSourceNumber(h.hadithNumber):"",h.grade].map(text).filter(Boolean).join(" · ");
     const body=document.createElement("p");body.textContent=text(h.german).slice(0,900);
-    const source=document.createElement("small");source.textContent=h.id+" · Katalogeintrag; arabisches Original nur anzeigen, falls belegt";
+    const source=document.createElement("small");source.textContent="Katalogeintrag · Arabisches Original nur anzeigen, falls belegt";
     card.append(ref,body,source);results.append(card);
   }
  }

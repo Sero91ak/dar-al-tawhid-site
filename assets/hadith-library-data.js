@@ -289,6 +289,6 @@
     hasVerifiedSharh: hasVerifiedSharh,
     sourceCatalog: RAW_CATALOG,
     sourceRoot: RAW_ROOT,
-    version: "2.1.0+HAD-3359+sharh-athar-global"
+    version: "2.2.0+internal-identifiers-hidden"
   };
 })();

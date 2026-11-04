@@ -63,6 +63,12 @@ execFileSync(process.execPath, [path.join(__dirname, 'build-test-hadith-library.
   stdio: 'inherit'
 });
 
+// Refuse public deploys that reveal internal HAD-#### keys as visible numbers.
+execFileSync(process.execPath, [path.join(__dirname, 'assert-hadith-public-presentation.js')], {
+  cwd: root,
+  stdio: 'inherit'
+});
+
 const quranSearchBuilder = path.join(__dirname, 'build-quran-search-index.js');
 execFileSync(process.execPath, [quranSearchBuilder], {
   cwd: root,
