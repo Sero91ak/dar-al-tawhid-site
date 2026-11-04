@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-257` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-258` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4722
-totalVerifiedEntries: 4722
-loadedEntries: 4722
-uniqueVerifiedReferences: 4722
-missingCount: 1514
+entriesCount: 4732
+totalVerifiedEntries: 4732
+loadedEntries: 4732
+uniqueVerifiedReferences: 4732
+missingCount: 1504
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:82
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-257.json
-nächster Gap-Fill-Batch: entries-gap-06-258.json
+letzter Gap-Fill-Batch: entries-gap-06-258.json
+nächster Gap-Fill-Batch: entries-gap-06-259.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `532` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `542` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -655,3 +655,7 @@ Das ist vollständige technische Abdeckung ohne erfundene inhaltliche Abdeckung.
 ## Batch 06-257 — 04.11.2026
 
 Zehn neue eigenständige Qurʾān-Referenzen: 3:24, 3:29, 3:31, 3:38, 3:43, 3:67, 3:94, 3:98, 3:105, 3:135. Neuer struktureller Zählstand 4722/6236, fehlend 1514. Originalstellen und kritische Überlieferungshinweise dokumentiert in SOURCE_REVIEW_06-257.md. Ein überlieferter Isnād ist nicht automatisch eine authentifizierte Kette.
+
+## Batch 06-258 — 04.11.2026
+
+Zehn neue unabhängige Referenzen: 3:80, 3:106, 3:137, 3:138, 3:139, 3:143, 3:147, 3:148, 3:162, 3:163. Katalog 4732/6236, Lücken 1504. Arabisch mit direkten Tafsīr-aṭ-Ṭabarī-Stellen und Überlieferungsvarianten in SOURCE_REVIEW_06-258.md. Ein technisch gültiger Eintrag ist keine pauschale Isnādauthentifizierung.
