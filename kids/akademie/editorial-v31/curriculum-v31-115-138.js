@@ -949,169 +949,167 @@ const additions={
   "subject": "sirah",
   "pillar": "sirah",
   "topic": "Muḥammad ﷺ als barmherziger Lehrer",
-  "title": "Sīrah · Muḥammad ﷺ als barmherziger Lehrer",
+  "title": "Sīrah · Muḥammad ﷺ lehrte ein Kind freundlich",
   "lead": "Heute lernen wir: Muḥammad ﷺ als barmherziger Lehrer.",
-  "goal": "Ich kann seine freundliche Unterweisung eines Kindes kennenlernen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann anhand der Überlieferung von ʿUmar ibn Abī Salamah erklären, wie der Prophet ﷺ einem Kind beim Essen etwas beibrachte.",
   "quran": {
-   "surah": 7,
-   "ayah": 31,
-   "label": "Sūrat al-Aʿrāf · 7:31",
-   "arabic": "وَكُلُوا وَاشْرَبُوا وَلَا تُسْرِفُوا",
-   "meaning": "Esst und trinkt, aber seid nicht maßlos.",
-   "excerpt": true
+   "surah": 21,
+   "ayah": 107,
+   "label": "Sūrat al-Anbiyāʾ · 21:107",
+   "arabic": "وَمَا أَرْسَلْنَاكَ إِلَّا رَحْمَةً لِلْعَالَمِينَ",
+   "meaning": "Wir haben dich nur als Barmherzigkeit für die Welten gesandt.",
+   "excerpt": false
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5376; Ṣaḥīḥ Muslim, Nr. 2022",
-   "text": "Der Prophet ﷺ lehrte den jungen ʿUmar ibn Abī Salamah: Nenne Allahs Namen, iss mit deiner rechten Hand und iss von dem, was vor dir liegt."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5376",
+   "text": "ʿUmar ibn Abī Salamah berichtete, dass der Prophet ﷺ ihn als Jungen beim Essen anwies, Allahs Namen zu nennen, mit der rechten Hand zu essen und von dem zu essen, was vor ihm lag."
   },
   "sourceAudit": {
-   "quranReference": "7:31",
-   "quranUrl": "https://quran.com/7/31",
+   "quranReference": "21:107",
+   "quranUrl": "https://quran.com/21/107",
    "hadithUrl": "https://sunnah.com/bukhari:5376",
-   "sourceAnchorLessonId": "adab-essen-bismillah",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
-   "quranTextType": "excerpt",
+   "sourceAnchorLessonId": null,
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg; Quellen-/Textfreigabe und vollständige diakritische Qurʾān-Kollation weiterhin ausstehend.",
+   "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Seine freundliche Unterweisung eines Kindes kennenlernen.",
-  "sample": "Bei „Muḥammad ﷺ als barmherziger Lehrer“ übe ich: seine freundliche Unterweisung eines Kindes kennenlernen.",
+  "hint": "Wir lernen die echte Aussage der Quelle und unterscheiden sie von unserer Erklärung.",
+  "sample": "Im Unterricht zeigen wir, was die Quellen sagen, ohne neue Offenbarungsworte zu erfinden.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Muḥammad ﷺ als barmherziger Lehrer.",
+    "intro": "Der Prophet ﷺ erklärte dem Jungen ʿUmar, wie man beim Essen handelt.",
     "lines": [
-     "Wir lernen heute: Muḥammad ﷺ als barmherziger Lehrer.",
-     "Wir üben seine freundliche Unterweisung eines Kindes kennenlernen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "ʿUmar war noch ein Junge.",
+     "Er lernte: Vor dem Essen Allahs Namen nennen.",
+     "Mit der rechten Hand essen und das Essen vor sich nehmen.",
+     "Wenn ich etwas noch nicht kann, darf ich freundlich lernen."
     ],
-    "evidence": "Qurʾān 7:31 lehrt: Esst und trinkt, aber seid nicht maßlos. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Im Qurʾān wird der Gesandte ﷺ als Barmherzigkeit beschrieben (21:107). Die Essensregeln stehen in der Sunnah (al-Buḫārī 5376)."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Seine freundliche Unterweisung eines Kindes kennenlernen.",
+    "intro": "Ein Junge lernt vom Gesandten Allahs ﷺ.",
     "lines": [
-     "Heute untersuchen wir das Thema „Muḥammad ﷺ als barmherziger Lehrer“.",
-     "Der Qurʾān spricht in 7:31 darüber: Esst und trinkt, aber seid nicht maßlos.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 5376; Ṣaḥīḥ Muslim, Nr. 2022 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Seine freundliche Unterweisung eines Kindes kennenlernen. Wir überlegen gemeinsam, warum es passt."
+     "ʿUmar ibn Abī Salamah war beim Essen noch jung und griff in der Schüssel umher.",
+     "Der Prophet ﷺ brachte ihm drei Dinge bei: Allahs Namen, die rechte Hand und das Essen vor ihm.",
+     "Der Bericht ist ein Beispiel für Unterweisung eines Kindes; er lehrt die konkreten Essensregeln.",
+     "Wir unterscheiden: Qurʾān 21:107 nennt die Barmherzigkeit seiner Sendung; die Einzelheiten erzählt der Ḥadīṯ."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Die drei Essenshinweise stammen sinngemäß aus al-Buḫārī 5376; Qurʾān 21:107 ist ein eigener, allgemeiner Beleg."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Muḥammad ﷺ als barmherziger Lehrer“.",
+    "intro": "Was lässt sich aus einer überlieferten Unterrichtssituation wirklich ableiten?",
     "lines": [
-     "Ausgangssituation: Seine freundliche Unterweisung eines Kindes kennenlernen.",
-     "Qurʾān 7:31: Esst und trinkt, aber seid nicht maßlos.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 5376; Ṣaḥīḥ Muslim, Nr. 2022): Der Prophet ﷺ lehrte den jungen ʿUmar ibn Abī Salamah: Nenne Allahs Namen, iss mit deiner rechten Hand und iss von dem, was vor dir liegt. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Der Überlieferer ʿUmar ibn Abī Salamah erzählt aus seiner Jugend beim Essen.",
+     "Im Bericht nennt der Prophet ﷺ konkret drei Verhaltensweisen; zusätzliche Erzählungen über Strafen oder Beweggründe stehen dort nicht.",
+     "Qurʾān 21:107 beschreibt die Sendung des Propheten ﷺ als Barmherzigkeit.",
+     "Die pädagogische Beobachtung, dass Kinder ruhig angeleitet werden können, ist unsere Anwendung – kein zusätzliches wörtliches Prophetenzitat."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Qurʾān 21:107 und al-Buḫārī 5376 haben verschiedene Aussagebereiche. Keine selbst erfundenen Prophetenworte hinzufügen."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Muḥammad ﷺ als barmherziger Lehrer“ eine gute Handlung?",
+     "prompt": "Was lehrte der Prophet ﷺ den Jungen beim Essen?",
      "options": [
-      "Ich kann seine freundliche Unterweisung eines Kindes kennenlernen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Allahs Namen nennen.",
+      "Das Essen absichtlich herumwerfen."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Seine freundliche Unterweisung eines Kindes kennenlernen.",
-     "explain": "Unser Lernbeispiel ist: Seine freundliche Unterweisung eines Kindes kennenlernen."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Im Bericht werden Allahs Name, die rechte Hand und das Essen vor sich genannt."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Muḥammad ﷺ als barmherziger Lehrer“ tun?",
+     "prompt": "Womit soll man nach diesem Bericht essen?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Mit der rechten Hand.",
+      "Mit einem Spielzeug."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Der Prophet ﷺ nannte die rechte Hand."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Muḥammad ﷺ als barmherziger Lehrer“. Welche Handlung passt zur Stunde?",
+     "prompt": "Wer erzählte von dieser Unterweisung als Junge?",
      "options": [
-      "Ich kann seine freundliche Unterweisung eines Kindes kennenlernen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "ʿUmar ibn Abī Salamah.",
+      "Ein erfundener Märchenheld."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Seine freundliche Unterweisung eines Kindes kennenlernen.",
-     "explain": "Unser Lernbeispiel ist: Seine freundliche Unterweisung eines Kindes kennenlernen."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "ʿUmar ibn Abī Salamah überlieferte diese Begebenheit."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Muḥammad ﷺ als barmherziger Lehrer“ im Alltag üben kannst?",
+     "prompt": "Welche drei Hinweise gehören zum Bericht?",
      "options": [
-      "Ich könnte seine freundliche Unterweisung eines Kindes kennenlernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Allahs Namen nennen, rechts essen und das Essen vor sich nehmen.",
+      "Erst spielen, dann einen Vers über das Wetter lesen."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte seine freundliche Unterweisung eines Kindes kennenlernen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Alle drei Hinweise kommen aus al-Buḫārī 5376.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Muḥammad ﷺ als barmherziger Lehrer“ im Beispiel üben kannst."
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 7:31?",
+     "prompt": "Welche Quelle erzählt die konkreten Essenshinweise?",
      "options": [
-      "Esst und trinkt, aber seid nicht maßlos.",
-      "Unser Übungsbeispiel ist: Seine freundliche Unterweisung eines Kindes kennenlernen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte den jungen ʿUmar ibn Abī Salamah: Nenne Allahs Namen, iss mit deiner rechten Hand und iss von dem, was vor dir liegt."
+      "Der Ḥadīṯ bei al-Buḫārī 5376.",
+      "Qurʾān 21:107 allein."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Qurʾān 21:107 spricht allgemein von Barmherzigkeit; die Essenshinweise stehen im Ḥadīṯ."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Muḥammad ﷺ als barmherziger Lehrer“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Aussage wird durch Qurʾān 21:107 getragen?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Der Gesandte ﷺ wurde als Barmherzigkeit gesandt.",
+      "Ein Junge aß exakt sieben Datteln."
      ],
      "correct": 0,
-     "hint": "Vergleiche 7:31 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Der Vers nennt Barmherzigkeit, nicht die Essensszene."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 7:31?",
+     "prompt": "Was enthält al-Buḫārī 5376 ausdrücklich?",
      "options": [
-      "Esst und trinkt, aber seid nicht maßlos.",
-      "Unser Übungsbeispiel ist: Seine freundliche Unterweisung eines Kindes kennenlernen."
+      "Der Prophet ﷺ gab einem Jungen drei Essenshinweise.",
+      "Der Prophet ﷺ befahl dem Jungen, niemals Fragen zu stellen."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Esst und trinkt, aber seid nicht maßlos. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte den jungen ʿUmar ibn Abī Salamah: Nenne Allahs Namen, iss mit deiner rechten Hand und iss von dem, was vor dir liegt.",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Die drei Hinweise sind überliefert; zusätzliche Verbote dürfen wir nicht erfinden.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 7:31 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Muḥammad ﷺ als barmherziger Lehrer“?",
+     "prompt": "Wie gehen wir mit einer heutigen pädagogischen Beobachtung um?",
      "options": [
-      "Ich erkläre die Situation: seine freundliche Unterweisung eines Kindes kennenlernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Als eigene Anwendung kenntlich machen.",
+      "Als zusätzliches wörtliches Ḥadīṯ-Zitat ausgeben."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: seine freundliche Unterweisung eines Kindes kennenlernen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Wir trennen Überlieferungswortlaut, Bedeutungswiedergabe und Unterrichtsanwendung.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Muḥammad ﷺ als barmherziger Lehrer“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     }
    ]
   },
@@ -3193,169 +3191,167 @@ const additions={
   "subject": "sirah",
   "pillar": "sirah",
   "topic": "Muḥammad ﷺ in Makkah",
-  "title": "Sīrah · Muḥammad ﷺ in Makkah",
+  "title": "Sīrah · Muḥammad ﷺ und der Auszug aus Makkah",
   "lead": "Heute lernen wir: Muḥammad ﷺ in Makkah.",
-  "goal": "Ich kann ein frühes Ereignis seines Lebens altersgerecht zuordnen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann den in Qurʾān 9:40 erwähnten Auszug aus Makkah und den Aufenthalt in der Höhle richtig einordnen.",
   "quran": {
-   "surah": 2,
-   "ayah": 3,
-   "label": "Sūrat al-Baqarah · 2:3",
-   "arabic": "الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ وَيُقِيمُونَ الصَّلَاةَ وَمِمَّا رَزَقْنَاهُمْ يُنْفِقُونَ",
-   "meaning": "Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
-   "excerpt": false
+   "surah": 9,
+   "ayah": 40,
+   "label": "Sūrat at-Tawbah · 9:40 (Auszug)",
+   "arabic": "إِذْ يَقُولُ لِصَاحِبِهِ لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا",
+   "meaning": "Als er zu seinem Gefährten sagte: Sei nicht traurig. Allah ist mit uns.",
+   "excerpt": true
   },
   "hadith": {
-   "source": "Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl)",
-   "text": "Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 3653",
+   "text": "Abū Bakr berichtete, dass er mit dem Propheten ﷺ in der Höhle war und um ihre Entdeckung fürchtete. Der Prophet ﷺ erinnerte ihn daran, dass Allah bei ihnen war."
   },
   "sourceAudit": {
-   "quranReference": "2:3",
-   "quranUrl": "https://quran.com/2/3",
-   "hadithUrl": "https://sunnah.com/muslim:8",
-   "sourceAnchorLessonId": "aqidah-iman-die-gesandten",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
-   "quranTextType": "complete",
+   "quranReference": "9:40",
+   "quranUrl": "https://quran.com/9/40",
+   "hadithUrl": "https://sunnah.com/bukhari:3653",
+   "sourceAnchorLessonId": null,
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg; Quellen-/Textfreigabe und vollständige diakritische Qurʾān-Kollation weiterhin ausstehend.",
+   "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Ein frühes Ereignis seines Lebens altersgerecht zuordnen.",
-  "sample": "Bei „Muḥammad ﷺ in Makkah“ übe ich: ein frühes Ereignis seines Lebens altersgerecht zuordnen.",
+  "hint": "Wir lernen die echte Aussage der Quelle und unterscheiden sie von unserer Erklärung.",
+  "sample": "Im Unterricht zeigen wir, was die Quellen sagen, ohne neue Offenbarungsworte zu erfinden.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Muḥammad ﷺ in Makkah.",
+    "intro": "Allah half dem Propheten ﷺ auf seinem Weg.",
     "lines": [
-     "Wir lernen heute: Muḥammad ﷺ in Makkah.",
-     "Wir üben ein frühes Ereignis seines Lebens altersgerecht zuordnen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Der Prophet ﷺ musste Makkah verlassen.",
+     "Auf dem Weg war er mit einem Gefährten in einer Höhle.",
+     "Er sagte sinngemäß: Sei nicht traurig, Allah ist mit uns.",
+     "Wir lernen: Allahs Hilfe ist wichtig."
     ],
-    "evidence": "Qurʾān 2:3 lehrt: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 9:40 nennt den Auszug und die Höhle. Er erzählt nicht die gesamte Lebensgeschichte in Makkah."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Ein frühes Ereignis seines Lebens altersgerecht zuordnen.",
+    "intro": "Der Auszug aus Makkah gehört zur Sīrah.",
     "lines": [
-     "Heute untersuchen wir das Thema „Muḥammad ﷺ in Makkah“.",
-     "Der Qurʾān spricht in 2:3 darüber: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl) nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Ein frühes Ereignis seines Lebens altersgerecht zuordnen. Wir überlegen gemeinsam, warum es passt."
+     "Qurʾān 9:40 berichtet, dass die Ungläubigen den Propheten ﷺ aus Makkah vertrieben.",
+     "Auf dem Weg waren der Prophet ﷺ und sein Gefährte in einer Höhle.",
+     "Der Prophet ﷺ sprach ihm Mut zu und erinnerte an Allahs Hilfe.",
+     "Die weiteren Einzelheiten seiner Kindheit oder der Reise stehen nicht alle in diesem Vers."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Qurʾān 9:40 belegt Auszug, Höhle und die Worte an den Gefährten. Al-Buḫārī 3653 ergänzt die Szene."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Muḥammad ﷺ in Makkah“.",
+    "intro": "Ein Sīrah-Ereignis muss mit seinem wirklichen Beleg verbunden werden.",
     "lines": [
-     "Ausgangssituation: Ein frühes Ereignis seines Lebens altersgerecht zuordnen.",
-     "Qurʾān 2:3: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
-     "Sunnah (Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl)): Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 9:40 nennt den Auszug, zwei Personen und eine Höhle.",
+     "Der Vers überliefert die Aussage an den Gefährten sinngemäß: Sei nicht traurig, Allah ist mit uns.",
+     "Al-Buḫārī 3653 berichtet die Sorge Abū Bakrs in dieser Situation.",
+     "Die ganze Makkah-Zeit oder alle Wegstationen lassen sich nicht allein aus Qurʾān 9:40 rekonstruieren."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Wir kennzeichnen den Versauszug und unterscheiden ihn vom zusätzlichen Bericht in al-Buḫārī 3653."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Muḥammad ﷺ in Makkah“ eine gute Handlung?",
+     "prompt": "Wo waren der Prophet ﷺ und sein Gefährte unterwegs?",
      "options": [
-      "Ich kann ein frühes Ereignis seines Lebens altersgerecht zuordnen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "In einer Höhle.",
+      "Auf einem Schiff aus Holz."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Ein frühes Ereignis seines Lebens altersgerecht zuordnen.",
-     "explain": "Unser Lernbeispiel ist: Ein frühes Ereignis seines Lebens altersgerecht zuordnen."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Der Qurʾān erwähnt die Höhle."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Muḥammad ﷺ in Makkah“ tun?",
+     "prompt": "Was sagte der Prophet ﷺ sinngemäß?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Sei nicht traurig. Allah ist mit uns.",
+      "Wir haben niemanden an unserer Seite."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Qurʾān 9:40 spricht von Allahs Hilfe."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Muḥammad ﷺ in Makkah“. Welche Handlung passt zur Stunde?",
+     "prompt": "Welches Ereignis erwähnt Qurʾān 9:40?",
      "options": [
-      "Ich kann ein frühes Ereignis seines Lebens altersgerecht zuordnen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Den Auszug des Propheten ﷺ aus Makkah.",
+      "Das Bauen der Kaʿbah durch Ibrāhīm."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Ein frühes Ereignis seines Lebens altersgerecht zuordnen.",
-     "explain": "Unser Lernbeispiel ist: Ein frühes Ereignis seines Lebens altersgerecht zuordnen."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Der Vers beschreibt den Auszug und die Höhle."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Muḥammad ﷺ in Makkah“ im Alltag üben kannst?",
+     "prompt": "Wer war nach der ergänzenden Überlieferung in der Höhle bei ihm?",
      "options": [
-      "Ich könnte ein frühes Ereignis seines Lebens altersgerecht zuordnen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Abū Bakr.",
+      "Ein König von Rom."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte ein frühes Ereignis seines Lebens altersgerecht zuordnen. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Al-Buḫārī 3653 erwähnt Abū Bakr.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Muḥammad ﷺ in Makkah“ im Beispiel üben kannst."
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:3?",
+     "prompt": "Was dürfen wir aus Qurʾān 9:40 nicht behaupten?",
      "options": [
-      "Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
-      "Unser Übungsbeispiel ist: Ein frühes Ereignis seines Lebens altersgerecht zuordnen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung."
+      "Dass er allein alle Erlebnisse seiner Kindheit beschreibt.",
+      "Dass der Vers die Höhle erwähnt."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Historische Einzelheiten brauchen jeweils passende Belege."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Muḥammad ﷺ in Makkah“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Aussage ist durch Qurʾān 9:40 unmittelbar gestützt?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Zwei Personen waren in einer Höhle.",
+      "Dreißig namentlich genannte Begleiter reisten gemeinsam."
      ],
      "correct": 0,
-     "hint": "Vergleiche 2:3 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Der Vers spricht von zweien und der Höhle."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:3?",
+     "prompt": "Was unterscheidet den Vers vom Ḥadīṯ?",
      "options": [
-      "Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
-      "Unser Übungsbeispiel ist: Ein frühes Ereignis seines Lebens altersgerecht zuordnen."
+      "Der Vers nennt Auszug und Zuspruch; al-Buḫārī 3653 berichtet Abū Bakrs Sorge.",
+      "Der Vers nennt alle Stationen der gesamten Reise."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Wir vergleichen die Aussagen beider Quellen getrennt.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 2:3 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Muḥammad ﷺ in Makkah“?",
+     "prompt": "Welche Aussage wäre eine unzulässige Ergänzung?",
      "options": [
-      "Ich erkläre die Situation: ein frühes Ereignis seines Lebens altersgerecht zuordnen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Eine unüberlieferte Wegstation als Qurʾān-Wortlaut auszugeben.",
+      "Die Höhle als Teil des Verses zu nennen."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: ein frühes Ereignis seines Lebens altersgerecht zuordnen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
+     "explain": "Nicht belegte Erzählungen gehören nicht in die Unterrichtsvorlage.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Muḥammad ﷺ in Makkah“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
     }
    ]
   },
