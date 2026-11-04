@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-259` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-260` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4742
-totalVerifiedEntries: 4742
-loadedEntries: 4742
-uniqueVerifiedReferences: 4742
-missingCount: 1494
+entriesCount: 4752
+totalVerifiedEntries: 4752
+loadedEntries: 4752
+uniqueVerifiedReferences: 4752
+missingCount: 1484
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:82
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-259.json
-nächster Gap-Fill-Batch: entries-gap-06-260.json
+letzter Gap-Fill-Batch: entries-gap-06-260.json
+nächster Gap-Fill-Batch: entries-gap-06-261.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `552` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `562` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -663,3 +663,7 @@ Zehn neue unabhängige Referenzen: 3:80, 3:106, 3:137, 3:138, 3:139, 3:143, 3:14
 ## Batch 06-259 — 04.11.2026
 
 10 neue eindeutige Versreferenzen: 3:155, 3:165, 3:168, 3:174, 3:175, 3:178, 4:1, 4:4, 4:7, 4:20. Katalog 4742/6236, Lücken 1494. Quellen und kritische Isnād-/Asbāb-Hinweise: SOURCE_REVIEW_06-259.md. Katalogzählung ist kein Nachweis unabhängig vollständiger Authentizitätsprüfung oder globaler Geräteauslieferung.
+
+## Batch 06-260 — 04.11.2026
+
+Zehn neue eindeutige Referenzen: 4:13, 4:18, 4:25, 4:31, 4:35, 4:40, 4:44, 4:49, 4:50, 4:53. 4752 registriert, 1484 offen. Direkte Originalquellen und offen deklarierte Überlieferungsbewertungen in SOURCE_REVIEW_06-260.md. Gesonderte technische Validierung und Live-Prüfung nach Veröffentlichung obligatorisch.
