@@ -4844,7 +4844,7 @@ function showQuestion(){
   };
   const listen=document.createElement("button");listen.type="button";listen.className="choice-listen";
   listen.textContent="Hören";
-  listen.setAttribute("aria-label","Antwort "+(i+1)+" anhören, ohne sie auszuwählen");
+  listen.setAttribute("aria-label","Antwort "+(visibleIndex+1)+" anhören, ohne sie auszuwählen");
   listen.setAttribute("aria-pressed","false");
   listen.onclick=()=>{
     speak(3,["Antwort "+(visibleIndex+1)+": "+t]);
