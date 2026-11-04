@@ -153,5 +153,74 @@
     "requiresHumanListeningForEveryNewPhrase": true,
     "newCreditsOnThisIndex": 0,
     "appOrAudioPublished": false
-  }
+  },
+  "otherExistingAudioInventories": [
+    {
+      "id": "quiz-v4-public-library",
+      "path": "kids/data/quiz-v4-full-rebuild-public.json",
+      "kind": "German quiz question/feedback, may have different settings from academy kids_story",
+      "discoveredClipFiles": 1800,
+      "humanApprovedClips": 1,
+      "allowExactAudioReuseOnlyWithMatchingVoiceModelProfileSettingsTextAndOwnerHearing": true,
+      "allowAutomaticPronunciationMasterPromotion": false
+    },
+    {
+      "id": "dua-german-v4",
+      "path": "kids/data/dua-audio.json",
+      "kind": "German Duʿāʾ/meaning phrase, may use Arabic global pronunciation dictionary",
+      "discoveredClipFiles": 122,
+      "humanApprovedClips": null,
+      "modelId": "eleven_v4",
+      "allowedForAcademyAsReferenceOnlyWithoutExactSettingsAndHearing": true,
+      "neverConfuseGermanAndArabicDictionaries": true
+    },
+    {
+      "id": "dua-arabic-v4",
+      "path": "kids/data/dua-arabic-audio.json",
+      "kind": "Native Fuṣḥā supplications; NOT Qurʾān recitation",
+      "discoveredClipFiles": 120,
+      "humanApprovedClips": null,
+      "modelId": "eleven_v4",
+      "allowedForAcademyAsReferenceOnlyWithoutExactSettingsAndHearing": true,
+      "neverConfuseGermanAndArabicDictionaries": true
+    },
+    {
+      "id": "dua-arabic-slow-v4",
+      "path": "kids/data/dua-arabic-slow-audio.json",
+      "kind": "Native Fuṣḥā slow supplications; NOT Qurʾān recitation",
+      "discoveredClipFiles": 120,
+      "humanApprovedClips": null,
+      "modelId": "eleven_v4",
+      "allowedForAcademyAsReferenceOnlyWithoutExactSettingsAndHearing": true,
+      "neverConfuseGermanAndArabicDictionaries": true
+    },
+    {
+      "id": "term-learning-flash-v2.5",
+      "path": "kids/data/term-learning-audio.json",
+      "kind": "German isolated learning explanations with different TTS model",
+      "discoveredClipFiles": 36,
+      "humanApprovedClips": null,
+      "modelId": "eleven_flash_v2_5",
+      "allowedForAcademyAsReferenceOnlyWithoutExactSettingsAndHearing": true,
+      "neverConfuseGermanAndArabicDictionaries": true
+    },
+    {
+      "id": "owner-voice-audio-full-catalog",
+      "path": "kids/data/owner-voice-audio.json",
+      "kind": "Large existing owner voice manifest. Its complete manifest and approvals must be parsed in CI; no count asserted in remote catalog.",
+      "discoveredClipFiles": null,
+      "humanApprovedClips": null,
+      "requiresStructuralScan": true
+    },
+    {
+      "id": "quiz-audio-full-catalog",
+      "path": "kids/data/quiz-audio.json",
+      "kind": "Large quiz audio manifest with possibly mixed voice-model generations. Must not auto-promote to academy profile.",
+      "discoveredClipFiles": null,
+      "humanApprovedClips": null,
+      "requiresStructuralScan": true
+    }
+  ],
+  "audioLibraryScanScope": "Owner-original stories plus existing quiz, Duʿāʾ, term and owner-voice manifests. Metadata presence never equals matching, verified isolated word audio or human playback approval.",
+  "originalExistingAudioFilesMustNotBeReencodedOrRegenerated": true
 }
