@@ -39,6 +39,12 @@ for(const lesson of lessons){
   assert.equal(q.type,"choice","Visitor answer format cannot contain free text");
   assert(q.options?.length>=2&&q.options.length<=5);
   assert(q.options.every(t=>typeof t==="string"&&t.trim()));
+  assert(!/^(Beschreibe|Schreibe|Erkläre mit deinen Worten|Formuliere|Tippe deine|Sprich deine)\\b/i.test(q.prompt),
+   "Open-ended input wording in button-only question "+lesson.id+" "+age);
+  assert(![
+    "Welche Aussage beschreibt eine gute Alltagsübung?",
+    "Welche Erklärung und Rückfrage passt zum Lerninhalt?"
+   ].includes(q.prompt),"Uncontextualized button question "+lesson.id+" "+age);
   if(new Set(q.options).size!==q.options.length)
    report.sourceProblems.push({lessonId:lesson.id,age,problem:"duplicate-options"});
   if(q.editorialReviewStatus==="pending-human-review")converted++;
@@ -56,6 +62,7 @@ for(const lesson of lessons){
   additionalChecks:flags});
 }
 assert.equal(total,1136);assert.equal(converted,426);
+assert.equal(report.longAnswers.length,0,"Answers exceed 180 characters; preserve full source explanation instead");
 assert.equal(report.sourceProblems.length,0,JSON.stringify(report.sourceProblems.slice(0,5)));
 assert.equal(report.longAnswers.length,0,"Visible choice buttons longer than 180 characters");
 if(process.argv[2]){
