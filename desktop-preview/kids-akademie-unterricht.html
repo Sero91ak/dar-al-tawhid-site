@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="robots" content="noindex,nofollow"><link rel="manifest" href="/kids/manifest.webmanifest"><link rel="stylesheet" href="/kids/item-offline-v1.css?v=2"><script src="/kids/item-offline-v1.js?v=2"></script><meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#071d30">
-<title>TAWḤĪD KIDS · Lernakademie · Datenschutz-Testvorschau</title>
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#071d30">
+<title>Kids-Lernakademie · Interaktive Unterrichtsvorschau · DĀR AL TAWḤĪD</title>
 <style>
 :root{color-scheme:dark;--gold:#e6c886;--base:#071d30;--text:#fff4dd;--muted:#c5d7d7;--border:rgba(229,203,149,.26);--accent:#75b7c1}
 *{box-sizing:border-box}html{min-height:100%;background:var(--base)}body{margin:0;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Avenir Next",sans-serif;background:radial-gradient(circle at 50% -12%,#16445c,transparent 57%),#071d30;line-height:1.55}
@@ -790,186 +790,6 @@ body[data-kids-age="4-5"] .choice-audio-help{font-size:16px}
 .master-voice-test{min-height:46px;font-size:14px}.master-voice-sample-note{margin:7px 0 0;color:var(--muted);font-size:12px}
 body[data-embedded="true"] .academy-header{display:none}
 body[data-embedded="true"] .wrap{padding-top:12px}
-.academy-back-app{display:inline-flex;align-items:center;white-space:nowrap;text-decoration:none;font-size:13px;padding:10px 12px;color:#fff1ca}
-@media(max-width:420px){.academy-header-actions{flex-wrap:wrap;justify-content:flex-end}.academy-back-app{font-size:12px;padding:8px}}
-
-/* V6.8: authoritative smartphone/tablet CSS. Older prototype rules above do
-   not define mobile geometry any more. Photo and copy have distinct zones. */
-html,body{max-width:100%;overflow-x:clip}
-.wrap,.academy-header,.academy-home,.lesson-main,.lesson-stage,.today-class,
-.category-grid,.journey,.stage-surface,.academy-brand,.academy-profile-names{min-width:0}
-.preview-refresh{display:none}
-.pill,.choice-listen,.choice-button,.category-card{touch-action:manipulation}
-@media(max-width:700px){
- .wrap{width:100%;max-width:100%;margin:0 auto;padding:
-   calc(env(safe-area-inset-top) + 8px)
-   max(14px,env(safe-area-inset-right))
-   calc(env(safe-area-inset-bottom) + 24px)
-   max(14px,env(safe-area-inset-left))}
- /* Header: brand and exit above one untruncated child-profile row. */
- .academy-header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 8px;align-items:center;padding:4px 1px 12px}
- .academy-brand{grid-column:1;grid-row:1;min-width:0}
- .academy-brand .brand{font:800 clamp(14px,4vw,18px)/1.3 Georgia,serif;letter-spacing:.04em}
- .academy-brand .stage{font-size:11px;line-height:1.3;margin-top:3px}
- .academy-header-actions{display:contents}
- .academy-back-app{grid-column:2;grid-row:1;justify-self:end;min-height:43px;padding:10px 12px;font-size:12px}
- .academy-profile{grid-column:1/-1;grid-row:2;justify-self:stretch;display:flex;
-   width:100%;max-width:none;min-width:0;min-height:59px;flex:none;
-   align-items:center;gap:10px;padding:7px 12px 7px 8px;border-radius:16px}
- .academy-profile img{width:43px;height:43px;flex:0 0 43px}
- .academy-profile .academy-profile-names{flex:1;min-width:0;max-width:100%}
- .academy-profile-names #profileLabel{font-size:15px;line-height:1.28;white-space:normal;overflow-wrap:anywhere}
- .academy-profile-names #profileRole,.academy-profile-names #academyAgeLabel{font-size:11px;line-height:1.3;white-space:normal}
- /* Hero: the illustration always stays unobstructed in the photo row. */
- .overview-hero{--photo:clamp(205px,59vw,270px);display:grid;grid-template-rows:var(--photo) auto;
-   align-items:stretch;min-height:0;height:auto;width:100%;margin:12px 0 13px;
-   padding:0!important;border-radius:22px;overflow:hidden;background:var(--surface)}
- .overview-hero img{position:absolute;inset:0 0 auto;width:100%;height:var(--photo);
-   object-fit:cover;object-position:62% center;z-index:0}
- .overview-hero:after{position:absolute;inset:0 0 auto;height:var(--photo);
-   background:linear-gradient(0deg,rgba(8,31,45,.45),transparent 48%);
-   z-index:1;pointer-events:none}
- body[data-profile="girl"] .overview-hero:after{background:linear-gradient(0deg,rgba(44,27,56,.48),transparent 50%)}
- .overview-copy,body[data-profile="boy"] .overview-copy,body[data-profile="girl"] .overview-copy{
-   grid-row:2;position:relative;isolation:isolate;display:block;box-sizing:border-box;
-   align-self:stretch;width:100%;max-width:100%;min-width:0;flex:none;margin:0;
-   padding:17px 19px 20px;background:linear-gradient(170deg,#10364b,#0c2a40);
-   border:0;border-radius:0;box-shadow:none}
- body[data-profile="girl"] .overview-copy{background:linear-gradient(170deg,#422d54,#302341)}
- .overview-copy::before,body[data-profile="girl"] .overview-copy::before{display:none}
- .overview-copy .kicker{display:block;font-size:10px;line-height:1.5;letter-spacing:.1em}
- .overview-copy h1,body[data-profile="girl"] .overview-copy h1,
- body[data-kids-age="4-5"] .overview-copy h1,body[data-kids-age="6-8"] .overview-copy h1,
- body[data-kids-age="9-10"] .overview-copy h1{
-   font-size:clamp(29px,7.7vw,37px);line-height:1.11;letter-spacing:-.02em;
-   margin:5px 0 0;max-width:100%;overflow-wrap:break-word}
- .overview-copy .hero-title-line{display:inline;white-space:normal}
- .overview-copy .hero-title-line+.hero-title-line::before{content:" "}
- .overview-copy .overview-greeting{margin:10px 0 0;max-width:100%}
- .overview-copy .greeting-salam,body[data-profile="girl"] .overview-copy .greeting-salam,
- body[data-kids-age="4-5"] .overview-copy .greeting-salam{font-size:clamp(16px,4.25vw,19px);line-height:1.42;font-weight:750}
- .overview-copy .greeting-followup,body[data-profile="girl"] .overview-copy .greeting-followup,
- body[data-kids-age="4-5"] .overview-copy .greeting-followup{font-size:clamp(14px,3.65vw,16px);line-height:1.44;margin-top:3px}
- /* Main actions: easy to find; secondary material follows instead of competing. */
- .today-class{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;
-   padding:17px;border-radius:20px;margin:0}
- .today-text{min-width:0}
- .today-class h2,body[data-kids-age="4-5"] .today-class h2{
-   font-size:clamp(23px,6.1vw,27px);margin:4px 0 6px;line-height:1.22}
- .today-class p,body[data-kids-age="4-5"] .today-text p{font-size:clamp(15px,4vw,18px);line-height:1.5}
- .today-summary,.academy-time{font-size:12px;line-height:1.42}
- .today-button,body[data-kids-age="4-5"] .today-button{
-   display:flex;align-items:center;justify-content:center;gap:9px;width:100%;max-width:none;
-   min-height:56px;padding:12px 16px;font-size:17px;border-radius:15px}
- .journey{display:grid;grid-template-columns:minmax(0,1fr);gap:9px;
-   margin:20px 0 23px;padding:0 2px;align-items:start}
- .journey h2,body[data-kids-age="4-5"] .journey h2{font-size:clamp(22px,6vw,27px);line-height:1.25}
- .journey p{font-size:13px;line-height:1.5;margin:3px 0}
- .journey-status{width:100%;flex:none;text-align:left}
- .journey-bar{height:9px;margin:7px 0 5px}
- .subjects-title h2,body[data-kids-age="4-5"] .subjects-title h2{font-size:clamp(23px,6.2vw,29px);line-height:1.23}
- .subjects-title p{font-size:13px;line-height:1.45}
- .category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:13px 0 0}
- .category-card,body[data-kids-age="4-5"] .category-card{
-   min-width:0;min-height:0;aspect-ratio:1/1.05;border-radius:18px}
- .category-card-copy{min-width:0;padding:12px 10px;gap:3px}
- .category-state{font-size:10px;letter-spacing:0}
- .category-name,body[data-kids-age="4-5"] .category-card-copy strong{font-size:clamp(20px,5.65vw,26px);line-height:1.14}
- .category-detail{font-size:11px;line-height:1.4;overflow-wrap:break-word}
- /* Five lesson stages must never force horizontal scrolling. */
- .lesson-topline{padding:12px 0 9px}
- .lesson-topline .pill{min-height:44px;padding:9px 13px;font-size:13px}
- .lesson-label{display:none}
- .lesson-heading{min-height:146px;padding:18px 17px;margin:0 0 6px;border-radius:19px}
- .lesson-theme-tag{font-size:10px;margin-bottom:6px}
- .lesson-heading h1,body[data-kids-age="4-5"] .lesson-heading h1{
-   font-size:clamp(28px,7.4vw,36px);line-height:1.15}
- .lesson-heading p{font-size:13px;line-height:1.45}
- .stage-tracker{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
-   gap:2px;overflow:visible;padding:11px 0 5px}
- .stage-tracker button,body[data-kids-age="4-5"] .tracker-item{
-   display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
-   box-sizing:border-box;width:100%;min-width:0;min-height:67px;padding:3px 1px;gap:5px}
- .stage-tracker button b{flex:none;display:grid;place-items:center;width:32px;height:32px;font-size:13px}
- .stage-tracker button span,body[data-kids-age="4-5"] .tracker-item span{
-   display:block;max-width:100%;font-size:clamp(9px,2.45vw,11px);
-   line-height:1.25;text-align:center;overflow-wrap:break-word}
- .stage-surface{min-height:0}
- .academy-audio-feedback{padding:9px 11px;margin:5px 0 11px;font-size:12px;line-height:1.45;border-radius:12px}
- .lesson-stage,body[data-kids-age="4-5"] .lesson-stage{
-   box-sizing:border-box;min-width:0;padding:18px 16px;margin:0;border-radius:19px}
- .lesson-stage h2,body[data-kids-age="4-5"] .lesson-stage h2{
-   font-size:clamp(23px,6.1vw,29px);line-height:1.24;margin:6px 0 11px}
- .lesson-stage .stage-body,.lesson-stage .stage-lead,
- body[data-kids-age="4-5"] .lesson-stage .stage-body,
- body[data-kids-age="4-5"] .lesson-stage .stage-lead,
- body[data-kids-age="4-5"] .lesson-stage .teacher-explainer{
-   font-size:clamp(16px,4.2vw,19px);line-height:1.65;overflow-wrap:break-word}
- .stage-audio{display:grid;grid-template-columns:minmax(0,1fr);gap:9px;margin:14px 0 4px}
- .stage-audio .pill{display:flex;align-items:center;justify-content:center;
-   width:100%;min-height:53px;padding:11px 13px;font-size:15px;border-radius:14px}
- .stage-audio .voice-note,.stage-audio .master-voice-sample-note{
-   display:block;margin:0;font-size:12px;line-height:1.46}
- /* Large Arabic type and separate listen control, no 84px min-width collision. */
- .lesson-stage .arabic-listen-row{display:grid;grid-template-columns:minmax(0,1fr);row-gap:8px;min-width:0;padding:12px 0}
- .lesson-stage .arabic-play-button,body[data-kids-age="4-5"] .arabic-play-button{
-   width:max-content;min-width:0;min-height:49px;flex-direction:row;
-   gap:7px;padding:8px 15px;font-size:12px;border-radius:12px}
- .lesson-stage .arabic-verse,body[data-kids-age="4-5"] .lesson-stage .arabic-verse{
-   box-sizing:border-box;min-width:0;width:100%;
-   font-size:clamp(27px,7.1vw,35px);line-height:1.95;overflow-wrap:anywhere}
- .lesson-stage .lesson-source-block .quote{font-size:clamp(17px,4.5vw,20px)}
- .lesson-stage .lesson-source-block .source{font-size:12px;overflow-wrap:anywhere}
- .question-index{flex:none;text-align:right;font-size:11px;line-height:1.4}
- .question-prompt,body[data-kids-age="4-5"] .lesson-stage .question-prompt{
-   font-size:clamp(18px,4.9vw,22px);line-height:1.46}
- .choices{gap:11px}
- .choice-row{display:grid;grid-template-columns:minmax(0,1fr) 75px;gap:8px}
- .choice-row .choice-button,body[data-kids-age="4-5"] .choice-button{
-   min-width:0;min-height:62px;padding:12px 13px;
-   font-size:clamp(16px,4.1vw,19px);line-height:1.45;border-radius:14px}
- .choice-listen,body[data-kids-age="4-5"] .choice-listen{
-   width:75px;min-width:0;min-height:62px;padding:8px 4px;border-radius:14px;font-size:13px}
- .answer-options{display:grid;grid-template-columns:1fr;gap:9px}
- .answer-options .pill{width:100%;min-height:50px;font-size:14px}
- .lesson-stage .answer-extra textarea{min-height:128px;padding:14px;font-size:17px}
- .answer-bottom{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
- .answer-bottom .pill{min-width:0;min-height:50px;padding:10px;font-size:13px}
- .answer-bottom #check{grid-column:1/-1;font-size:16px;min-height:55px}
- .next-question{width:100%;min-height:54px}
- .lesson-navigation{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:10px;margin:13px 0}
- .lesson-navigation .pill{min-width:0;min-height:53px;padding:11px 12px;font-size:14px}
- .lesson-navigation #forwardStep{grid-column:2;justify-self:stretch;margin-left:0}
- .lesson-navigation #previousStep[hidden]+#forwardStep{grid-column:1/-1}
- .recap-reflection .answers{display:grid;grid-template-columns:1fr;gap:9px}
- .recap-reflection .answers .pill{min-height:50px}
- .voice-preview audio{max-width:100%}
-}
-@media(max-width:360px){
- .wrap{padding-right:max(11px,env(safe-area-inset-right));padding-left:max(11px,env(safe-area-inset-left))}
- .academy-brand .brand{font-size:13px;letter-spacing:.02em}
- .academy-brand .stage{font-size:10px}
- .academy-back-app{font-size:11px;padding:9px 10px}
- .overview-hero{--photo:200px}
- .overview-copy,body[data-profile="boy"] .overview-copy,body[data-profile="girl"] .overview-copy{padding:14px 15px 17px}
- .category-card-copy{padding:11px 9px}
- .category-name,body[data-kids-age="4-5"] .category-card-copy strong{font-size:19px}
- .category-detail{font-size:10px}
- .lesson-stage,body[data-kids-age="4-5"] .lesson-stage{padding:16px 12px}
- .choice-row{grid-template-columns:minmax(0,1fr) 66px;gap:6px}
- .choice-listen,body[data-kids-age="4-5"] .choice-listen{width:66px;font-size:12px}
- .stage-tracker button span{font-size:9px}
-}
-@media(min-width:701px) and (max-width:1050px){
- .wrap{max-width:940px;padding-inline:clamp(20px,3vw,34px)}
- .academy-profile{min-width:0;max-width:260px}
- .overview-copy,body[data-profile="boy"] .overview-copy,body[data-profile="girl"] .overview-copy{
-   width:48%;max-width:48%}
- .overview-copy h1,body[data-profile="girl"] .overview-copy h1{font-size:clamp(40px,5.3vw,57px)}
- .category-card{min-width:0}
-}
-@media(hover:none){.pill:active,.choice-button:active,.choice-listen:active{filter:brightness(1.1)}}
-
 
 /* DĀR KIDS ACADEMY V6.8 – adaptive learning shell; preview/pilot only */
 :root{--academy-ink:#f9f1dc;--academy-elevated:rgba(255,255,255,.055);--academy-line:rgba(231,209,160,.22)}
@@ -2178,7 +1998,6 @@ body .lesson-main .stage-audio .voice-note{font-size:12px!important}
  }
 }
 
-
 /* V7.3.2 – subject screens and home are compact without hiding learning content */
 body .subject-detail{max-width:1080px!important}
 body .subject-detail .subject-cover{
@@ -2260,6 +2079,7 @@ body .subject-detail .subject-topic span{margin-top:4px!important}
  body .subject-detail .subject-cover{grid-template-columns:minmax(0,1fr) 88px!important}
  body .subject-detail .subject-cover img{width:88px!important;height:114px!important}
 }
+
 
 
 /* V7.4 · Eingebettete Hero-Bereiche – kein isolierter Bildkasten */
@@ -3337,7 +3157,6 @@ html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subje
 .subject-roadmap .subject-topic-grid{gap:8px!important}
 .subject-roadmap .subject-topic{min-height:66px!important}
 
-
 /* Academy V11 – titles visible while future lesson content is locked. */
 .subject-topic.is-locked,.subject-topic.is-locked:disabled{opacity:1!important;cursor:not-allowed!important;background:rgba(243,247,247,.9)!important;color:#435b62!important;border:1px solid rgba(72,94,99,.19)!important;box-shadow:none!important;transform:none!important}
 .subject-topic .topic-lock-meta{font-size:12px;line-height:1.4;color:#536970}
@@ -3478,6 +3297,10 @@ body .academy-header.kids-detail-appbar > .academy-nav-home{
 }
 
 /* KIDS_ACADEMY_SINGLE_ROW_FREE_AVATAR_V1103
+   RELEASE_PREVIEW_AND_KIDS_PRODUCTION_V1103_20261010
+   Production workflow is path-scoped to desktop-preview/**; this release
+   marker triggers the sole visitor-worker deploy with the already-committed
+   live academy fix. Do not generate a second profile row.
    Single stable header: Back | Academy | child identity | Home.
    Longer names consume space to the left, then wrap within the same header row.
    No second profile row or avatar box; navigation and profile data unchanged. */
@@ -3598,114 +3421,7 @@ body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy 
  }
 }
 
-
-/* KIDS ACADEMY V7.6.2 · fixed navigation, independently scrollable content.
-   Home and subject screens use the same stable shell as the focus lesson.
-   Preserve appbar sizing, child identity, colors and iOS safe-area padding. */
-html:has(body:not([data-academy-view="lesson"]):not([data-embedded="true"])){
- height:100%!important;overflow:hidden!important;overscroll-behavior:none!important;
-}
-body:not([data-academy-view="lesson"]):not([data-embedded="true"]){
- height:100dvh!important;min-height:0!important;max-height:100dvh!important;
- overflow:hidden!important;overscroll-behavior:none!important;
-}
-body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap{
- display:flex!important;flex-direction:column!important;box-sizing:border-box!important;
- height:100dvh!important;min-height:0!important;max-height:100dvh!important;
- overflow:hidden!important;padding-block:0!important;
-}
-body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap > .academy-header.kids-detail-appbar{
- position:relative!important;inset:auto!important;flex:0 0 auto!important;
- z-index:40!important;
-}
-body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap > #academyHome.academy-home:not([hidden]),
-body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap > #academySubject.subject-detail:not([hidden]){
- box-sizing:border-box!important;flex:1 1 auto!important;min-height:0!important;
- width:100%!important;max-width:100%!important;
- overflow-x:hidden!important;overflow-y:auto!important;
- overscroll-behavior-y:contain!important;-webkit-overflow-scrolling:touch;
-}
-
-/* The outer centered desktop wrap must not clip the full-viewport scrollport.
-   The root viewport stays locked and only academyHome/academySubject may scroll. */
-body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap{
- overflow:visible!important;
-}
-/* Fade directly into the existing theme background (turquoise or lilac),
-   so no hard horizontal boundary remains at the bottom of the artwork. */
-body:not([data-academy-view="lesson"]):not([data-embedded="true"]) .academy-home > .overview-hero::before,
-body[data-profile="girl"]:not([data-academy-view="lesson"]):not([data-embedded="true"]) .academy-home > .overview-hero::before{
- height:clamp(58px,8vw,96px)!important;
- background:linear-gradient(to bottom,transparent 0%,var(--base) 100%)!important;
-}
-
-/* V7.6.3 · Full-bleed academy covers inside the fixed-header scroll shell.
-   V7.6.2 made the scrollport narrower than the 100vw hero/subject covers.
-   Expand ONLY that scrollport to the viewport; retain the previous card insets,
-   edge-to-edge imagery, fade and separate girl/boy image treatments. */
-body:not([data-academy-view="lesson"]):not([data-embedded="true"]){
- --academy-scroll-inset-left:clamp(14px,3.2vw,30px);
- --academy-scroll-inset-right:clamp(14px,3.2vw,30px);
-}
-@media(max-width:700px){
- body:not([data-academy-view="lesson"]):not([data-embedded="true"]){
-  --academy-scroll-inset-left:max(12px,env(safe-area-inset-left,0px));
-  --academy-scroll-inset-right:max(12px,env(safe-area-inset-right,0px));
- }
-}
-@media(min-width:768px) and (min-height:650px){
- body:not([data-academy-view="lesson"]):not([data-embedded="true"]){
-  --academy-scroll-inset-left:var(--academy-gutter,30px);
-  --academy-scroll-inset-right:var(--academy-gutter,30px);
- }
-}
-body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap > #academyHome.academy-home:not([hidden]),
-body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap > #academySubject.subject-detail:not([hidden]){
- width:100vw!important;min-width:100vw!important;max-width:100vw!important;
- margin-left:calc(50% - 50vw)!important;margin-right:0!important;
- padding-left:max(var(--academy-scroll-inset-left),calc((100vw - 1220px)/2 + var(--academy-scroll-inset-left)))!important;
- padding-right:max(var(--academy-scroll-inset-right),calc((100vw - 1220px)/2 + var(--academy-scroll-inset-right)))!important;
-}
-body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap > #academySubject.subject-detail:not([hidden]){
- padding-left:max(var(--academy-scroll-inset-left),calc((100vw - 980px)/2))!important;
- padding-right:max(var(--academy-scroll-inset-right),calc((100vw - 980px)/2))!important;
-}
-
-/* V24: age-sensitive glossary stays inside the lesson; no overlays and no extra page scroll. */
-.academy-term-coach[hidden],.academy-term-detail[hidden]{display:none!important}
-.academy-term-coach{border:1px solid color-mix(in srgb,var(--accent,#c9ab73) 45%,transparent);background:rgba(120,118,96,.055);border-radius:14px;padding:10px 12px;margin:10px 0;min-width:0}
-.academy-term-heading{display:block;font-size:clamp(13px,3.4vw,16px);line-height:1.35}
-.academy-term-note{font-size:12px;line-height:1.4;margin:3px 0 7px;opacity:.82}
-.academy-term-list{display:flex;flex-wrap:wrap;gap:5px}
-.academy-term-button{font:inherit;font-size:clamp(12px,3.1vw,14px);border:1px solid color-mix(in srgb,var(--accent,#ba9f6b) 56%,transparent);background:transparent;color:inherit;border-radius:999px;padding:7px 11px;min-height:38px;max-width:100%;overflow-wrap:anywhere}
-.academy-term-button[aria-expanded="true"]{background:color-mix(in srgb,var(--accent,#c9ab73) 15%,transparent);font-weight:800}
-.academy-term-button:focus-visible{outline:2px solid var(--accent,#d3bb86);outline-offset:2px}
-.academy-term-detail{border-top:1px solid color-mix(in srgb,var(--accent,#c9ab73) 33%,transparent);padding-top:8px;margin-top:9px;font-size:clamp(13px,3.4vw,15px);line-height:1.52}
-.academy-term-detail p{margin:5px 0 3px}
-.academy-term-source,.academy-term-audio-status{font-size:12px;opacity:.8}
-
-/* Full Islamic Salam – Academy contract: never abbreviate, no truncation on iPhone/iPad.
-   The profile-specific address is separate from the canonical, fully spelled-out greeting. */
-.overview-copy .greeting-salam,body[data-profile="girl"] .overview-copy .greeting-salam,
-.lesson-stage .stage-greeting-salam{
-  max-width:100%;white-space:normal!important;overflow-wrap:normal!important;
-  word-break:normal;hyphens:none;text-wrap:pretty;
-}
-.overview-copy .greeting-address,body[data-profile="girl"] .overview-copy .greeting-address{
-  display:block;max-width:100%;margin-top:6px;color:#fff4e6;
-  font-size:clamp(14px,3.8vw,18px);line-height:1.45;font-weight:700;
-  overflow-wrap:break-word;
-}
-.lesson-stage .stage-greeting-address{
-  display:block;margin-top:8px;font-size:clamp(17px,2.35vw,20px);
-  line-height:1.48;font-weight:690;color:var(--text);
-}
-.lesson-stage .welcome-greeting{max-width:100%;min-width:0}
-@media(max-width:480px){
-  .lesson-stage .stage-greeting-salam{font-size:clamp(18px,4.75vw,21px);line-height:1.5}
-  .overview-copy .greeting-address{font-size:clamp(14px,3.9vw,17px)}
-}
-</style><link rel="stylesheet" href="/kids/akademie/responsive-integrity-v29.css?v=29" data-kids-academy-responsive-integrity="29"><script data-kids-touch-focus-v83>
+</style><script data-kids-touch-focus-v83>
 (function(){
   "use strict";
   if(window.__kidsTouchModalityV83)return;
@@ -3724,161 +3440,8 @@ body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap >
     }
   },true);
 })();
-</script><link rel="stylesheet" href="/kids/kids-ui-contract-v1420.css?v=1420" data-kids-ui-contract="v1420">
-<style id="kids-academy-viewport-and-header-v1424">
-/* V1426: immersive Academy under the real fixed five-tab dock.
-   The iframe itself spans the ENTIRE viewport. Only the inner scrollable
-   views reserve the live dock footprint at their scroll END, so new cards
-   scroll naturally behind the dock and the last card remains fully visible. */
-html{--kids-academy-dock-clearance:128px}
-body[data-kids-portal="true"]{
- min-height:100dvh!important;
- background-color:var(--base)!important;
- overflow:hidden!important;
-}
-body[data-kids-portal="true"] > main.wrap{
- box-sizing:border-box!important;
- display:flex!important;flex-direction:column!important;
- height:100dvh!important;
- min-height:0!important;
- max-height:100dvh!important;
- padding-block:0!important;
- overflow:hidden!important;
-}
-body[data-kids-portal="true"] :is(#academyHome,#academySubject,#stageSurface){
- overscroll-behavior-y:contain!important;
- -webkit-overflow-scrolling:touch;
- scrollbar-width:none!important;
-}
-body[data-kids-portal="true"] :is(#academyHome,#academySubject,#stageSurface)::-webkit-scrollbar{
- display:none!important;width:0!important;height:0!important;
-}
-body[data-kids-portal="true"] > main.wrap > :is(#academyHome,#academySubject):not([hidden]){
- flex:1 1 auto!important;
- min-height:0!important;height:auto!important;
- overflow-y:auto!important;overflow-x:hidden!important;
- /* This padding is INSIDE the scrollport: only its very last items
-    stop above the real dock; every earlier card scrolls underneath. */
- padding-bottom:calc(var(--kids-academy-dock-clearance) + 12px)!important;
- scroll-padding-block-end:calc(var(--kids-academy-dock-clearance) + 12px)!important;
-}
-body[data-kids-portal="true"] #academyHome > .subjects{
- padding-bottom:0!important;
-}
-body[data-kids-portal="true"][data-academy-view="lesson"] > main.wrap > #lessonMain.lesson-main:not([hidden]){
- flex:1 1 auto!important;
- min-height:0!important;
- /* Lesson navigation must also remain reachable ABOVE the dock,
-    while long lesson text keeps its own independent scrolling. */
- padding-bottom:calc(var(--kids-academy-dock-clearance) + 10px)!important;
-}
-body[data-kids-portal="true"] #stageSurface{
- overflow-y:auto!important;overflow-x:hidden!important;
- scroll-padding-block-end:16px!important;
- padding-bottom:16px!important;
-}
-/* Profile-led header. The main Academy screen has no redundant back/home
-   buttons: the persistent Kids tab bar owns switching between main areas.
-   The Back button remains for lessons and subjects, where it IS needed. */
-body[data-kids-portal="true"] .academy-header.kids-detail-appbar{
- display:flex!important;
- flex-direction:row!important;
- flex-wrap:nowrap!important;
- justify-content:space-between!important;
- align-items:center!important;
- gap:clamp(7px,1.7vw,16px)!important;
- width:100vw!important;
- max-width:100vw!important;
- flex:0 0 auto!important;
-}
-body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .academy-nav-home{
- display:none!important;
-}
-body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .academy-nav-back{
- order:0!important;flex:0 0 43px!important;
-}
-body[data-kids-portal="true"]:has(#academyHome:not([hidden])) .academy-header.kids-detail-appbar > .academy-nav-back{
- display:none!important;
-}
-body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .hero-profile-chip{
- order:1!important;position:relative!important;
- flex:0 1 auto!important;
- margin:0!important;
- padding:0!important;
- min-width:0!important;
- max-width:48vw!important;
- align-items:center!important;
- gap:clamp(6px,1.9vw,12px)!important;
-}
-body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .hero-profile-chip img{
- flex:0 0 clamp(36px,9.6vw,49px)!important;
- width:clamp(36px,9.6vw,49px)!important;
- height:clamp(36px,9.6vw,49px)!important;
- object-fit:contain!important;
-}
-body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy{
- min-width:0!important;
- overflow:hidden!important;
-}
-body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy :is(strong,small){
- white-space:nowrap!important;
- overflow:hidden!important;
- text-overflow:ellipsis!important;
- line-height:1.25!important;
-}
-body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .academy-nav-copy{
- order:2!important;
- flex:1 1 auto!important;
- display:flex!important;flex-direction:column!important;
- align-items:flex-end!important;
- justify-content:center!important;
- text-align:right!important;
- min-width:0!important;
- padding:0!important;
- margin:0!important;
-}
-body[data-kids-portal="true"] .academy-header.kids-detail-appbar .academy-nav-title{
- display:block!important;
- max-width:100%!important;
- white-space:nowrap!important;
- text-overflow:ellipsis!important;
- overflow:hidden!important;
- font-size:clamp(16px,4.2vw,22px)!important;
- line-height:1.15!important;
-}
-body[data-kids-portal="true"] .academy-header.kids-detail-appbar .academy-nav-subtitle{
- display:block!important;
- max-width:100%!important;
- white-space:nowrap!important;
- text-overflow:ellipsis!important;
- overflow:hidden!important;
- font-size:clamp(9px,2.2vw,11px)!important;
-}
-body[data-kids-portal="true"][data-profile="girl"] .academy-header.kids-detail-appbar{
- background-color:#38263f!important;
- border-bottom-color:rgba(250,196,228,.3)!important;
-}
-@media(max-width:380px){
- body[data-kids-portal="true"] .academy-header.kids-detail-appbar{
-  gap:6px!important;
- }
- body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .hero-profile-chip{
-  max-width:49vw!important;gap:5px!important;
- }
- body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .hero-profile-chip img{
-  flex-basis:34px!important;width:34px!important;height:34px!important;
- }
- body[data-kids-portal="true"] .academy-header.kids-detail-appbar .academy-nav-title{
-  font-size:clamp(14px,3.9vw,18px)!important;
- }
-}
-</style>
-
-<!-- KIDS_PARENT_COMPACT_TIMER_V1436: inherits existing art, theme and five-tab navigation -->
-<link rel="stylesheet" href="/kids/parents-compact-timer-v1436.css?v=1440">
-<script src="/kids/parents-compact-timer-v1436.js?v=1440" defer></script>
-</head>
-<body data-profile="boy" data-preview-release="KIDS-CHOICE-ONLY-REVIEW-20261104" data-preview-deploy="v11-progressive-school-lessons"><main class="wrap">
+</script></head>
+<body data-profile="boy" data-preview-release="V11.0-20261010" data-preview-deploy="v11-progressive-school-lessons"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
@@ -3889,13 +3452,13 @@ body[data-kids-portal="true"][data-profile="girl"] .academy-header.kids-detail-a
   </div>
  <button class="academy-nav-home" id="academyNavHome" type="button" aria-label="Zur Kids-App"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-7h6v7"/></svg></button>
  <div class="academy-brand" hidden><div class="brand">DĀR AL TAWḤĪD · KIDS</div></div>
- <div class="academy-header-actions" hidden><div class="academy-profile" id="academyProfile" hidden><img id="academyAvatar" alt="" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg"><span class="academy-profile-names"><strong id="profileLabel">Kinderprofil</strong><small id="profileRole"></small><small id="academyAgeLabel"></small></span></div></div>
+ <div class="academy-header-actions" hidden><button class="preview-refresh" id="previewRefresh" type="button" aria-label="Vorschau aktualisieren">Aktualisieren</button><div class="academy-profile" id="academyProfile" hidden><img id="academyAvatar" alt="" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg"><span class="academy-profile-names"><strong id="profileLabel">Kinderprofil</strong><small id="profileRole"></small><small id="academyAgeLabel"></small></span></div></div>
 </header><p id="academyAgeWarning" class="academy-age-warning" role="alert" hidden>Bitte wähle im Kinderprofil eine passende Altersstufe aus.</p>
 <section class="academy-home" id="academyHome">
  <section class="overview-hero" aria-label="Deine islamische Lernakademie">
   <img id="academyHeroImage" src="/desktop-preview/assets/kids-academy-hero-boys-v1.jpg" alt="" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.classList.add('is-ready');this.src='/desktop-preview/assets/kids-academy-hero-v1.jpg'">
   
-  <img class="academy-hero-character" id="academyHeroCharacter" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" aria-hidden="true" decoding="async"><div class="overview-copy"><div class="kicker" id="overviewKicker">Deine islamische Lernakademie</div><h1><span class="hero-title-line">Wissen</span> <span class="hero-title-line">entdecken</span></h1><p id="overviewGreeting" class="overview-greeting"><span id="overviewSalam" class="greeting-salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.</span><span id="overviewAddress" class="greeting-address">Lieber Bruder.</span><span id="overviewFollowup" class="greeting-followup">Heute lernen wir etwas Neues!</span></p><div class="hero-learning-pill">✦ Qurʾān &amp; Sunnah · Gemeinsam lernen</div></div>
+  <img class="academy-hero-character" id="academyHeroCharacter" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" aria-hidden="true" decoding="async"><div class="overview-copy"><div class="kicker" id="overviewKicker">Deine islamische Lernakademie</div><h1><span class="hero-title-line">Wissen</span> <span class="hero-title-line">entdecken</span></h1><p id="overviewGreeting" class="overview-greeting"><span id="overviewSalam" class="greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="overviewFollowup" class="greeting-followup">Heute lernen wir etwas Neues!</span></p><div class="hero-learning-pill">✦ Qurʾān &amp; Sunnah · Gemeinsam lernen</div></div>
  </section>
  <section class="today-class" aria-labelledby="todayTitle">
   <div class="today-text"><span class="kicker" id="todayKicker">Für dich vorbereitet</span><h2 id="todayTitle">Dein Unterricht heute</h2><p><strong id="todayTopicName">Ṣidq – Wahrhaftigkeit</strong><br><span id="todayTopicIntro">Warum ist es gut, die Wahrheit zu sagen?</span></p><div class="today-summary" id="todaySummary">Deine erste Lektion wartet auf dich.</div><div class="academy-time" id="academyTime">Lernzeit: 8–12 Minuten · Pausen jederzeit</div></div>
@@ -3941,8 +3504,8 @@ body[data-kids-portal="true"][data-profile="girl"] .academy-header.kids-detail-a
  <div class="lesson-heading" role="group" aria-label="Akhlāq-Unterricht Ṣidq – Wahrhaftigkeit"><span class="lesson-theme-tag">Akhlāq · Guter Charakter</span><h1>Ṣidq <span>· Wahrhaftigkeit</span></h1><p id="lessonIntroduction">Gemeinsam verstehen, nachdenken und üben.</p></div>
  <div class="stage-tracker" role="group" aria-label="Unterrichtsschritte"><button class="tracker-item is-current" data-jump-step="0"><b>1</b><span>Willkommen</span></button><button class="tracker-item" data-jump-step="1"><b>2</b><span>Verstehen</span></button><button class="tracker-item" data-jump-step="2"><b>3</b><span>Belege</span></button><button class="tracker-item" data-jump-step="3"><b>4</b><span>Mitdenken</span></button><button class="tracker-item" data-jump-step="4"><b>5</b><span>Merken</span></button></div>
  <p class="academy-audio-feedback" id="audioFeedback" role="status" aria-live="polite">Tippe auf „Anhören“, wenn du etwas hören möchtest.</p><div class="stage-surface" id="stageSurface">
-  <section class="lesson-stage" data-lesson-step="0" aria-labelledby="welcomeTitle"><span class="kicker">Schritt 1 · Willkommen</span><h2 id="welcomeTitle">Schön, dass du da bist!</h2><p class="stage-lead welcome-greeting" id="welcomeGreeting"><span id="welcomeSalam" class="stage-greeting-salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.</span><span id="welcomeAddress" class="stage-greeting-address">Lieber Bruder.</span><span id="welcomeFollowup" class="stage-greeting-followup">Schön, dass du heute mitlernst!</span></p><p class="stage-body" id="lessonWelcomeBody">Heute sprechen wir darüber, weshalb <strong>Wahrhaftigkeit</strong> wichtig ist. Du kannst jederzeit anhalten, noch einmal zuhören oder etwas in deinem eigenen Tempo lesen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="0">Begrüßung anhören</button><span class="voice-note" id="voiceStatus" aria-live="polite">Du kannst die Begrüßung noch einmal anhören.</span></div></section>
-  <section class="lesson-stage" data-lesson-step="1" aria-labelledby="explainTitle" hidden><span class="kicker">Schritt 2 · Heute lernen wir</span><h2 id="explainTitle">Was bedeutet Wahrhaftigkeit?</h2><p class="stage-lead">Die <strong>Wahrheit sagen</strong> – auch wenn es manchmal Mut kostet.</p><button type="button" class="pill soft-gold academy-serhat-lead" id="academySerhatLead" hidden aria-label="Einführung anhören">▶ Serhat hören</button><span class="academy-serhat-status" id="academySerhatStatus" aria-live="polite" hidden></span><div class="spoken-paragraph" id="explainWords"><p data-spoken>Manchmal passiert uns aus Versehen ein Fehler.</p><p data-spoken>Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.</p><p data-spoken>Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.</p><p data-spoken>Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.</p></div><div id="academyTermCoach" class="academy-term-coach" hidden aria-label="Arabische Wörter leicht erklärt"></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="1">Erklärung anhören</button><span class="voice-note">Beim Hören wird der aktuelle Satz sanft hervorgehoben.</span></div></section>
+  <section class="lesson-stage" data-lesson-step="0" aria-labelledby="welcomeTitle"><span class="kicker">Schritt 1 · Willkommen</span><h2 id="welcomeTitle">Schön, dass du da bist!</h2><p class="stage-lead welcome-greeting" id="welcomeGreeting"><span id="welcomeSalam" class="stage-greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="welcomeFollowup" class="stage-greeting-followup">Schön, dass du heute mitlernst!</span></p><p class="stage-body" id="lessonWelcomeBody">Heute sprechen wir darüber, weshalb <strong>Wahrhaftigkeit</strong> wichtig ist. Du kannst jederzeit anhalten, noch einmal zuhören oder etwas in deinem eigenen Tempo lesen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="0">Begrüßung anhören</button><span class="voice-note" id="voiceStatus" aria-live="polite">Du kannst die Begrüßung noch einmal anhören.</span><details class="academy-tech-details"><summary>Audio-Test für Erwachsene</summary><p id="audioDiagnostics">Aufnahmen werden geprüft.</p><button type="button" class="pill soft-gold master-voice-test" id="masterVoiceTest">▶ Masterstimme testen</button><p class="master-voice-sample-note" id="masterVoiceTestStatus" aria-live="polite">Masterprobe aus dem Duʿāʾ-Bereich – noch keine Aufnahme des Unterrichtssatzes.</p></details></div></section>
+  <section class="lesson-stage" data-lesson-step="1" aria-labelledby="explainTitle" hidden><span class="kicker">Schritt 2 · Heute lernen wir</span><h2 id="explainTitle">Was bedeutet Wahrhaftigkeit?</h2><p class="stage-lead">Die <strong>Wahrheit sagen</strong> – auch wenn es manchmal Mut kostet.</p><button type="button" class="pill soft-gold academy-serhat-lead" id="academySerhatLead" hidden aria-label="Tawḥīd-Einführung mit Serhats Masterstimme anhören">▶ Serhat hören</button><span class="academy-serhat-status" id="academySerhatStatus" aria-live="polite" hidden></span><div class="spoken-paragraph" id="explainWords"><p data-spoken>Manchmal passiert uns aus Versehen ein Fehler.</p><p data-spoken>Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.</p><p data-spoken>Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.</p><p data-spoken>Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.</p></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="1">Erklärung anhören</button><span class="voice-note">Beim Hören wird der aktuelle Satz sanft hervorgehoben.</span></div></section>
   <section class="lesson-stage" data-lesson-step="2" aria-labelledby="evidenceTitle" hidden><span class="kicker">Schritt 3 · Qurʾān und Sunnah</span><h2 id="evidenceTitle">Was lernen wir aus den Quellen?</h2><p class="stage-lead" id="evidenceLead">Wir hören zuerst einen Vers aus dem Qurʾān und betrachten danach eine authentische Überlieferung.</p><div class="evidence-region"><section class="lesson-source-block">
   <div class="eyebrow">Qurʾān · Sūrat at-Tawbah · Vers 119</div>
   <div class="arabic-listen-row">
@@ -3961,42 +3524,34 @@ body[data-kids-portal="true"][data-profile="girl"] .academy-header.kids-detail-a
   <p class="quote">Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies.</p>
   <p class="source"><strong>Quelle:</strong> Prophet Muḥammad ﷺ · Überliefert von ʿAbdullāh ibn Masʿūd · Ṣaḥīḥ Muslim, Kitāb al-Birr waṣ-Ṣilah wa-l-Ādāb, Nr. 2607a</p>
 </section>
-</div><div id="academyTermCoachSources" class="academy-term-coach" hidden aria-label="Begriffe aus den religiösen Quellen"></div><p class="teacher-explainer" data-spoken>Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="2">Deutsche Erklärung anhören</button><span class="voice-note">Qurʾān-Rezitation über den eigenen Button links am arabischen Text.</span></div></section>
+</div><p class="teacher-explainer" data-spoken>Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="2">Deutsche Erklärung anhören</button><span class="voice-note">Qurʾān-Rezitation über den eigenen Button links am arabischen Text.</span></div></section>
   <section class="lesson-stage" data-lesson-step="3" aria-labelledby="practiceTitle" hidden><div class="question-top"><span class="kicker">Schritt 4 · Jetzt bist du dran</span><span class="question-index" id="questionIndex">Frage 1 von 3</span></div><h2 id="practiceTitle">Was würdest du tun?</h2><div class="progress"><span id="bar"></span></div>
    <div class="question-panel" id="academyQuestionPanel"><div class="question-prompt-card"><div class="academy-buddy-guide"><img id="academyBuddyAvatar" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" aria-hidden="true" width="51" height="51"><div><strong id="academyBuddyTitle">Du schaffst das!</strong><span id="academyBuddyText">Du kannst dir die Frage anhören.</span></div></div><span class="question-kicker">DEINE FRAGE</span><p id="question" class="question-prompt"></p><button id="repeat" class="pill" type="button">▶ Frage anhören</button></div><div class="answer-interaction"><p class="answer-mode-caption" id="answerModeCaption">So kannst du antworten:</p><p class="small choice-audio-help" id="choiceAudioHelp" hidden>🔊 Hören liest nur vor – tippe auf die Antwort, um sie auszuwählen.</p><div class="choices" id="choices" role="group" aria-label="Antwortmöglichkeiten"></div>
+    <div class="answer-options" id="answerOptions"><button type="button" class="pill answer-open" id="openWrite">✎ Schreiben</button><button type="button" class="pill answer-open" id="openVoice">◉ Sprechen</button></div>
+    <div class="answer-extra" id="answerExtra" hidden><label for="answer" id="answerLabel">Deine Antwort</label><textarea id="answer" spellcheck="true" maxlength="550" placeholder="Ich würde ..."></textarea><div class="voice-actions"><button type="button" class="pill accent" id="mic" hidden>Aufnahme starten</button><button type="button" class="pill" id="cancelMic" hidden>Aufnahme beenden</button><span id="recordingIndicator" class="recording-indicator" hidden aria-live="polite"><span class="recording-dot" aria-hidden="true"></span><span id="recordingTime">00:00</span></span></div><p class="small" id="micInfo" aria-live="polite">Tippe auf „Aufnahme starten“, wenn du bereit bist.</p><div class="voice-preview" id="voicePreview" hidden><label for="voicePlayback">Deine gesprochene Antwort</label><audio id="voicePlayback" controls preload="metadata" playsinline></audio><button type="button" class="pill primary voice-play-button" id="voicePlayButton" aria-pressed="false">▶ Meine Antwort anhören</button><p class="small voice-play-state" id="voicePlayState" role="status" aria-live="polite">Nach der Aufnahme kannst du dir deine Stimme hier anhören.</p><button type="button" class="pill voice-retake" id="voiceRetake">Noch einmal sprechen</button><p class="small">Nur auf diesem Gerät zum Anhören und Nachdenken. Deine Stimme wird hier nicht in Text umgewandelt oder inhaltlich bewertet. Nach der nächsten Frage wird die Aufnahme verworfen.</p></div></div>
     <div class="answer-bottom"><button id="check" class="pill primary" type="button">Antwort prüfen</button><button id="hint" class="pill" type="button">Kleiner Hinweis</button></div><div class="response" aria-live="polite" id="feedback">Du darfst in Ruhe nachdenken.</div><button type="button" class="pill primary" id="retryChoice" hidden>Noch einmal versuchen</button>
     <button type="button" class="pill primary next-question" id="nextQuestion" hidden>Zur nächsten Frage <span aria-hidden="true">→</span></button><button type="button" class="pill primary next-question" id="finishLesson" hidden>Zum Merksatz <span aria-hidden="true">→</span></button>
     </div>
    </div>
   </section>
   <section class="lesson-stage" data-lesson-step="4" aria-labelledby="recapTitle" hidden><div class="academy-completion-kicker">★ Geschafft! Das hast du gelernt</div><span class="kicker">Schritt 5 · Das nehme ich mit</span><h2 id="recapTitle">Das habe ich heute gelernt</h2><div class="recap-lesson"><div class="recap-item"><span class="recap-label">1 · Das merke ich mir</span><p class="stage-lead"><strong>Wahrhaftigkeit</strong> bedeutet, ehrlich zu sprechen.</p></div><div class="recap-item"><span class="recap-label">2 · Qurʾān und Sunnah</span><p>Wir haben gelernt, dass Allah uns aufruft, mit den Wahrhaftigen zu sein, und dass der Prophet ﷺ die Wahrhaftigkeit als Weg zur Rechtschaffenheit erklärte.</p></div><div class="recap-item"><span class="recap-label">3 · So handle ich</span><p>Wenn mir ein Fehler passiert, sage ich die Wahrheit und versuche, ihn wiedergutzumachen.</p></div></div>
-   <p id="summaryText" class="feedback-final"></p><div class="recap-reflection academy-teach-back" aria-label="Wissen weitergeben"><h3>Dein Wissen lebt weiter</h3><p id="academyTeachBackPrompt">Wenn du möchtest, erkläre einem vertrauten Menschen mit deinen Worten, was du heute verstanden hast. Du kannst ihm danach selbst eine Frage stellen.</p></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="4">Merksatz anhören</button></div>
+   <p id="summaryText" class="feedback-final"></p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="4">Merksatz anhören</button></div>
    <div class="recap-reflection"><h3>Wie geht es dir mit diesem Thema?</h3><p>Du darfst es jederzeit noch einmal üben.</p><div class="answers"><button class="pill" type="button" data-reflect="ready">Ich habe es verstanden</button><button class="pill" type="button" data-reflect="help">Ich möchte mehr üben</button></div><p id="nextDue" class="small" aria-live="polite">Deine Wiederholung wird nach deinem Lernstand vorgeschlagen.</p></div>
    <button class="pill primary" type="button" id="backAfterLesson">Zur Lernakademie</button>
   </section>
  </div>
  <div class="lesson-navigation" id="lessonNavigation"><button type="button" class="pill" id="previousStep" hidden>← Zurück</button><button type="button" class="pill primary" id="forwardStep">Weiter zum Unterricht <span aria-hidden="true">→</span></button></div>
- <div class="lesson-meta">Du lernst in deinem Tempo. Fragen beantwortest du ausschließlich durch Antippen der Antwortbuttons. Du kannst jederzeit eine Pause machen.</div>
+ <div class="lesson-meta">Du lernst in deinem Tempo. Fragen kannst du per Auswahl, Sprache oder Text beantworten. Du kannst jederzeit eine Pause machen.</div>
 </section>
 </main>
 <script src="/kids/akademie/curriculum-v1.js?v=20261010-01"></script>
 <script src="/kids/akademie/curriculum-v2.js?v=20261010-09"></script>
-<script src="/kids/akademie/curriculum-v22.js?v=20261011-01"></script>
-<script src="/kids/akademie/curriculum-v25.js?v=20261011-01"></script>
-<script src="/kids/akademie/curriculum-v26.js?v=20261012-01"></script>
-<script src="/kids/akademie/curriculum-v27.js?v=20261012-27"></script>
-<script src="/kids/akademie/curriculum-v28.js?v=20261012-28"></script>
-<script src="/kids/akademie/curriculum-v29.js?v=20261012-29"></script>
-<script src="/kids/akademie/term-coach-v24.js?v=20261011-01"></script>
-<script src="/kids/akademie/school-progress-v11.js?v=20261012-30"></script>
-<script src="/kids/kids-birth-month-v1431.js?v=1431"></script>
+<script src="/kids/akademie/school-progress-v11.js?v=20261010-11"></script>
 <script>
 (()=>{
 "use strict";
 const $=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];
 if(new URLSearchParams(location.search).get("embedded")==="1")document.body.dataset.embedded="true";
-const KIDS_SEAMLESS_PORTAL_V1421=new URLSearchParams(location.search).get("kidsPortal")==="1"&&window.parent!==window;
-if(KIDS_SEAMLESS_PORTAL_V1421)document.body.dataset.kidsPortal="true";
 const VERSION="academy-v4"; /* Bestehende Lernstände bleiben erhalten */
 const INTERVALS_BY_AGE={"4-5":[1,3,7,14,30],"6-8":[1,3,7,14,30,60],"9-10":[1,3,7,14,30,60,90]};
 const exercises={
@@ -4015,8 +3570,10 @@ const exercises={
     {type:"text",prompt:"Worin liegt der Unterschied zwischen einem versehentlichen Fehler und einer bewussten Lüge?",sample:"Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutmachen.",hint:"Denk an den Unterschied zwischen Versehen und absichtlicher Unwahrheit."}
   ]
 };
-let id="unassigned",gender="neutral",age="6-8",profileName="",displayedMonthAge=null,step=0,unlocked=0,qIndex=0,choice=null,answered=false,finished=false;
-let score={done:0,correct:0,choices:0,neededHelp:0},attempts=0,voice=null,audio=null,audioKey="",fallbackTried=false,voiceToken=0,sessionStamp="";
+let id="unassigned",gender="neutral",age="6-8",profileName="",step=0,unlocked=0,qIndex=0,choice=null,answerMode="choices",answered=false,finished=false;
+let score={done:0,correct:0,choices:0,neededHelp:0},attempts=0,recognition=null,voice=null,audio=null,audioKey="",fallbackTried=false,voiceToken=0,sessionStamp="";
+let recorder=null,micStream=null,micClock=null,micSince=0,micRequest=0,voiceObjectUrl=null,voiceReady=false;
+let masterProbeAudio=null;
 
 const AGE_UI=Object.freeze({
  "4-5":{
@@ -4030,7 +3587,7 @@ const AGE_UI=Object.freeze({
   lessonIntro:"Zuhören, nachdenken und zusammen üben.",
   evidenceLead:"Hör dir einen Vers aus dem Qurʾān an. Danach lernen wir, was der Prophet ﷺ über die Wahrheit gesagt hat.",
   steps:["Hallo!","Zuhören","Qurʾān","Antworten","Merken"],
-  questionTitle:"Was sagst du?",hint:"Ein kleiner Tipp",feedbackWait:"Hör in Ruhe zu. Tippe auf die passende Antwort.",
+  questionTitle:"Was sagst du?",hint:"Ein kleiner Tipp",feedbackWait:"Hör in Ruhe zu. Du kannst tippen oder sprechen.",
   recapTitle:"Das merke ich mir",recapText:"Du hast mitgemacht. Hör es dir später gerne noch einmal an.",
   availableStatus:"Zusammen lernen"
  },
@@ -4045,7 +3602,7 @@ const AGE_UI=Object.freeze({
   lessonIntro:"Gemeinsam verstehen, nachdenken und üben.",
   evidenceLead:"Wir hören zuerst einen Vers aus dem Qurʾān und betrachten danach eine authentische Überlieferung.",
   steps:["Willkommen","Verstehen","Belege","Mitdenken","Merken"],
-  questionTitle:"Was würdest du tun?",hint:"Kleiner Hinweis",feedbackWait:"Nimm dir Zeit und wähle eine Antwort aus.",
+  questionTitle:"Was würdest du tun?",hint:"Kleiner Hinweis",feedbackWait:"Nimm dir Zeit. Du kannst auswählen, schreiben oder sprechen.",
   recapTitle:"Das habe ich gelernt",recapText:"Du hast mitgedacht. Wiederhole die Aussagen in ein paar Tagen.",
   availableStatus:"Jetzt lernen"
  },
@@ -4060,7 +3617,7 @@ const AGE_UI=Object.freeze({
   lessonIntro:"Belege verstehen, Zusammenhänge erkennen, anwenden.",
   evidenceLead:"Lies Qurʾān 9:119 und den Ḥadīṯ in Ṣaḥīḥ Muslim 2607a. Welcher Gedanke verbindet beide Aussagen?",
   steps:["Start","Verstehen","Quellen","Nachdenken","Festigen"],
-  questionTitle:"Wie erklärst du das?",hint:"Denkanstoß",feedbackWait:"Denke nach und tippe auf die passende Antwort.",
+  questionTitle:"Wie erklärst du das?",hint:"Denkanstoß",feedbackWait:"Erkläre deine Überlegung. Du kannst schreiben oder sprechen.",
   recapTitle:"Das nehme ich mit",recapText:"Du hast die Belege betrachtet. Wiederhole sie später mit eigenen Worten.",
   availableStatus:"Wissen vertiefen"
  }
@@ -4068,29 +3625,8 @@ const AGE_UI=Object.freeze({
 const humanAge=x=>String(x||"").replace(/-/g,"–");
 const TRACKS={"quran:9:119":{src:"/quran-audio/ar.alafasy/1354.mp3",fallback:"https://everyayah.com/data/Alafasy_128kbps/009119.mp3"}};
 const stages=all('.lesson-stage[data-lesson-step]');
-/* Privacy-first lesson adapter: legacy open-ended questions become buttons.
-   Canonical question order and all saved academy-v4 progress are preserved.
-   Adapted distractors remain pending editorial verification. */
-function academySelectableQuestion(q,lesson,selectedAge){
- if(q.type==="choice")return q;
- const correct=String(q.sample||q.explain||lesson?.sample||lesson?.goal||"").trim();
- const pool=[selectedAge,"4-5","6-8","9-10"].flatMap(a=>
-  (lesson?.questions?.[a]||[]).filter(item=>item.type==="choice"&&Array.isArray(item.options)).flatMap(item=>
-   item.options.filter((_,i)=>i!==item.correct)));
- const wrong=pool.map(String).find(text=>text.trim()&&text.trim()!==correct)
-   ||"Es ist richtig, absichtlich das Gegenteil des Gelernten zu tun.";
- const older=/^Erkläre\b/i.test(q.prompt);
- const prompt=older?"Wähle die passende Erklärung: "+String(q.prompt).replace(/^Erkläre(?:\s+(?:mit|in)\s+(?:deinen|eigenen)\s+Worten)?\s*[:,]?\s*/i,""):q.prompt;
- return {...q,type:"choice",prompt,options:[correct,wrong],correct:0,
-   explain:q.explain||correct,adaptedFromText:true};
-}
-const questions=()=>{
- const lesson=activeLesson();
- return (lesson?.questions?.[age]||exercises[age]||[]).map(q=>academySelectableQuestion(q,lesson,age));
-};
-const ACADEMY_FULL_SALAM="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.";
+const questions=()=>activeLesson()?.questions?.[age]||exercises[age]||[];
 const address=()=>{const role=gender==="girl"?"liebe Schwester":"lieber Bruder";const first=profileName.split(/\s+/)[0];return first?role+" "+first:role;};
-const greetingAddress=()=>{const a=address();return a.charAt(0).toLocaleUpperCase("de-DE")+a.slice(1)+".";};
 const storageKey=()=>["kids",VERSION,id,age,activeLessonId].join(".");
 const oldRecord=()=>{try{return JSON.parse(localStorage.getItem(storageKey())||"null")}catch(_){return null}};
 const draftKey=()=>["kids",VERSION,id,age,activeLessonId,"draft-v1"].join(".");
@@ -4105,14 +3641,14 @@ function readDraft(){
   if(!d.score||!Number.isInteger(d.score.done)||d.score.done<0||d.score.done>questions().length)return null;
   const val=v=>Number.isInteger(v)&&v>=0?Math.min(v,questions().length):0;
   return {step:d.step,unlocked:Math.min(4,Math.max(d.step,val(d.unlocked))),qIndex:d.qIndex,
-   score:{done:val(d.score.done),correct:val(d.score.correct),choices:val(d.score.choices),neededHelp:val(d.score.neededHelp),unverified:val(d.score.unverified)}};
+   score:{done:val(d.score.done),correct:val(d.score.correct),choices:val(d.score.choices),neededHelp:val(d.score.neededHelp)}};
  }catch(_){return null}
 }
 function saveDraft(nextStep=step,nextIndex=qIndex){
  if(!AGE_UI[age])return;
  try{
   const record={lessonId:activeLessonId,id,age,savedAt:Date.now(),step:nextStep,unlocked:Math.max(unlocked,nextStep),
-   qIndex:nextIndex,score:{done:score.done,correct:score.correct,choices:score.choices,neededHelp:score.neededHelp,unverified:Number(score.unverified)||0}};
+   qIndex:nextIndex,score:{done:score.done,correct:score.correct,choices:score.choices,neededHelp:score.neededHelp}};
   localStorage.setItem(draftKey(),JSON.stringify(record));
  }catch(_){}
 }
@@ -4135,31 +3671,124 @@ function getProfile(){
  const previewParam=params.get("previewProfil");
  const demoGender=previewParam==="maedchen"?"girl":previewParam==="junge"?"boy":null;
  const previewAge=ageKey(params.get("previewAlter"));
- // Only the explicit three-part owner QA URL enters a fully isolated learning
- // identity. Saved child profiles are READ ONLY and remain selected normally.
- const creatorVoiceSandbox=params.get("creatorSandbox")==="1"&&params.get("voicePilot")==="1"&&
-   demoGender==="girl"&&previewAge==="4-5";
- if(creatorVoiceSandbox)child=null;
- const birthMonth=child?window.DARKidsBirthMonth?.get(child.id):null;
- const monthAge=birthMonth?window.DARKidsBirthMonth.ageAt(birthMonth):null;
- const profileAge=child?ageKey(window.DARKidsBirthMonth?.resolve(child.id,child.age)||child.age):null;
- // Real accounts ignore ordinary preview params. QA uses a separate id.
+ const profileAge=child?ageKey(child.age):null;
+ // Echte Profile werden niemals nach den Demo-Parametern eingeordnet.
  const selectedAge=child?profileAge:(previewAge||ageKey(storedAge)||"6-8");
  const g=child?.gender==="girl"?"girl":child?.gender==="boy"?"boy":demoGender||(guest==="girl"?"girl":"boy");
- const previewId=creatorVoiceSandbox?"owner-voice-test-v17-girl-4-5":
-   demoGender?"demo-"+demoGender:guest?"guest-"+g:"demo-boy";
- return {child,g,age:selectedAge,id:child?.id?String(child.id):previewId,monthAge,
-   demo:!child,creatorVoiceSandbox,ageMissing:!!child&&!profileAge};
+ const previewId=demoGender?"demo-"+demoGender:guest?"guest-"+g:"demo-boy";
+ return {child,g,age:selectedAge,id:child?.id?String(child.id):previewId,demo:!child,ageMissing:!!child&&!profileAge};
+}
+function stopMicTracks(){
+ if(micStream){micStream.getTracks().forEach(t=>{try{t.stop()}catch(_){}});micStream=null}
+}
+function stopMicTimer(){if(micClock){clearInterval(micClock);micClock=null}}
+function pauseVoiceClip(){
+ const el=$("#voicePlayback");if(el&&!el.paused){try{el.pause()}catch(_){}}
+}
+function resetVoiceClip(){
+ voiceReady=false;
+ pauseVoiceClip();
+ if(voiceObjectUrl){URL.revokeObjectURL(voiceObjectUrl);voiceObjectUrl=null}
+ const el=$("#voicePlayback");if(el){el.removeAttribute("src");el.load()}
+ $("#voicePlayButton").textContent="▶ Meine Antwort anhören";
+ $("#voicePlayButton").setAttribute("aria-pressed","false");
+ $("#voicePlayState").textContent="Nach der Aufnahme kannst du dir deine Stimme hier anhören.";
+ $("#voicePreview").hidden=true;
+}
+function stopMic(keepClip=false){
+ micRequest++;
+ if(recognition){try{recognition.abort()}catch(_){}recognition=null}
+ const previous=recorder;recorder=null;
+ if(previous&&previous.state!=="inactive"){
+   previous.onstop=null;previous.ondataavailable=null;
+   try{previous.stop()}catch(_){}
+ }
+ stopMicTracks();stopMicTimer();
+ $("#mic").disabled=false;$("#cancelMic").hidden=true;$("#recordingIndicator").hidden=true;
+ if(!keepClip)resetVoiceClip();
+}
+function finishRecording(){
+ const current=recorder;
+ if(!current||current.state!=="recording")return;
+ $("#cancelMic").disabled=true;
+ try{current.stop()}catch(_){stopMic();$("#micInfo").textContent="Aufnahme konnte nicht beendet werden. Bitte tippe deine Antwort."}
+}
+async function beginVoiceRecording(){
+ const canRecord=!!(navigator.mediaDevices?.getUserMedia&&window.MediaRecorder);
+ if(!canRecord){
+   mode("text");
+   $("#micInfo").textContent="Diese Browseransicht kann kein Audio aufnehmen. Öffne die Seite in Safari oder schreibe deine Antwort.";
+   return;
+ }
+ stopSpeech();stopAudio();stopMic();
+ mode("voice");
+ const request=++micRequest;$("#mic").disabled=true;
+ $("#micInfo").textContent="Mikrofonfreigabe wird angefragt …";
+ let stream;
+ try{stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true},video:false})}
+ catch(e){
+   if(request!==micRequest)return;
+   $("#mic").disabled=false;
+   $("#micInfo").textContent=e?.name==="NotAllowedError"?"Das Mikrofon wurde nicht freigegeben. Prüfe die Berechtigung oder tippe deine Antwort.":"Aufnahme in dieser Browseransicht nicht möglich. Du kannst deine Antwort schreiben.";
+   return;
+ }
+ if(request!==micRequest||step!==3||answerMode!=="voice"){stream.getTracks().forEach(t=>t.stop());return}
+ micStream=stream;const chunks=[];let localRecorder;
+ try{
+  const mp4=MediaRecorder.isTypeSupported?.("audio/mp4");
+  const webm=MediaRecorder.isTypeSupported?.("audio/webm;codecs=opus");
+  localRecorder=mp4?new MediaRecorder(stream,{mimeType:"audio/mp4"}):webm?new MediaRecorder(stream,{mimeType:"audio/webm;codecs=opus"}):new MediaRecorder(stream);
+ }catch(e){stopMicTracks();$("#mic").disabled=false;$("#micInfo").textContent="Aufnahme konnte nicht gestartet werden. Du kannst stattdessen schreiben.";return}
+ recorder=localRecorder;
+ localRecorder.ondataavailable=e=>{if(e.data?.size>0)chunks.push(e.data)};
+ localRecorder.onerror=()=>{if(recorder===localRecorder){stopMic();$("#micInfo").textContent="Bei der Aufnahme ist ein Fehler aufgetreten. Bitte versuche es erneut oder schreibe."}};
+ localRecorder.onstop=()=>{
+   if(recorder!==localRecorder)return;
+   stopMicTracks();stopMicTimer();$("#recordingIndicator").hidden=true;$("#cancelMic").hidden=true;$("#cancelMic").disabled=false;$("#mic").disabled=false;recorder=null;
+   const blob=new Blob(chunks,{type:localRecorder.mimeType||chunks[0]?.type||"audio/mp4"});
+   if(blob.size<350){$("#micInfo").textContent="Es wurde keine hörbare Antwort aufgenommen. Versuche es noch einmal.";return}
+   resetVoiceClip();voiceObjectUrl=URL.createObjectURL(blob);voiceReady=true;
+   const play=$("#voicePlayback");play.src=voiceObjectUrl;play.load();$("#voicePreview").hidden=false;$("#voicePlayState").textContent="Aufnahme bereit. Tippe auf „Meine Antwort anhören“.";
+   $("#micInfo").textContent="Deine Antwort wurde aufgenommen. Du kannst sie jetzt anhören und anschließend bestätigen.";
+ };
+ try{localRecorder.start()}catch(e){recorder=null;stopMicTracks();$("#mic").disabled=false;$("#micInfo").textContent="Mikrofonstart fehlgeschlagen. Nutze die Texteingabe.";return}
+ micSince=Date.now();$("#mic").disabled=true;$("#cancelMic").hidden=false;$("#cancelMic").disabled=false;$("#recordingIndicator").hidden=false;
+ const refresh=()=>{
+   const sec=Math.floor((Date.now()-micSince)/1000);
+   $("#recordingTime").textContent=String(Math.floor(sec/60)).padStart(2,"0")+":"+String(sec%60).padStart(2,"0");
+   if(sec>=45)finishRecording();
+ };
+ refresh();micClock=setInterval(refresh,500);
+ $("#micInfo").textContent="Jetzt kannst du sprechen. Tippe danach auf „Aufnahme beenden“.";
 }
 function setAudioFeedback(message){
+ const detail=$("#audioDiagnostics");if(detail)detail.textContent=message;
  const failed=/nicht verfügbar|konnte nicht|nicht gestartet|nicht abgespielt/i.test(message);
- const missing=/noch keine Aufnahme verfügbar|noch keine geprüfte Serhat-Masteraufnahme/i.test(message);
+ const missing=/noch keine geprüfte Serhat-Masteraufnahme/i.test(message);
  const technical=/Gerätestimme|Masteraufnahme|Serhat-Masteraufnahme|Masterstimme|Für diesen Satz/i.test(message);
- const friendly=missing?"Für diesen Satz gibt es noch keine Aufnahme. Du kannst den Text lesen.":failed?"Das Vorlesen klappt gerade nicht. Bitte versuche es erneut.":technical?"Tippe auf „Anhören“ oder lies den Text in Ruhe.":message;
+ const friendly=missing?"Für diesen Satz gibt es noch keine geprüfte Aufnahme deiner Masterstimme.":failed?"Das Vorlesen klappt gerade nicht. Bitte versuche es erneut.":technical?"Die Erklärung wird vorgelesen. Du kannst in deinem Tempo zuhören.":message;
  const el=$("#audioFeedback");if(el)el.textContent=friendly;
  const welcome=$("#voiceStatus");if(welcome)welcome.textContent=friendly;
 }
+function stopMasterProbe(){
+ const p=masterProbeAudio;masterProbeAudio=null;
+ if(p){p.onended=p.onerror=p.onplaying=null;try{p.pause();p.removeAttribute("src");p.load()}catch(_){}}
+}
+function playMasterProbe(){
+ stopSpeech();stopAudio();pauseVoiceClip();
+ const info=$("#masterVoiceTestStatus");
+ // Existing Serhat Duʿāʾ master clip, not a lesson recording.
+ const clip=new Audio("/kids/assets/kids-dua-audio/e8bacbf8baf198b5.m4a?v=kids-dua-owner-voice-v2-20261007-200319");
+ masterProbeAudio=clip;clip.playsInline=true;clip.volume=1;clip.muted=false;
+ info.textContent="Deine Masterstimme wird geladen …";
+ clip.onplaying=()=>{if(masterProbeAudio===clip)info.textContent="Serhat-Masterprobe wird abgespielt. Hörst du nichts, prüfe die Medienlautstärke."};
+ clip.onended=()=>{if(masterProbeAudio===clip){masterProbeAudio=null;info.textContent="Masterprobe beendet. Unterrichtsaufnahmen werden einzeln zugeordnet."}};
+ const fail=()=>{if(masterProbeAudio===clip){stopMasterProbe();info.textContent="Masterprobe nicht abspielbar. Prüfe Verbindung und Medienlautstärke."}};
+ clip.onerror=fail;
+ try{const p=clip.play();if(p?.catch)p.catch(fail)}catch(_){fail()}
+}
 function stopSpeech(){
+ stopMasterProbe();
  voiceToken++;
  try{window.DARKidsOwnerVoice?.stop()}catch(_){}
  try{speechSynthesis.cancel()}catch(_){}voice=null;
@@ -4174,14 +3803,7 @@ function stopAudio(note){
  all(".arabic-verse").forEach(x=>x.classList.remove("is-audio-playing"));
  $("#arabicAudioStatus").textContent=note||"Rezitation des vollständigen Verses";
 }
-function stopAll(){stopSpeech();stopAudio()}
-/* Reset the visible inner scrollport on view changes; window scrolling stays locked. */
-function scrollAcademyViewTop(){
- const pane=!$("#academySubject").hidden?$("#academySubject"):
-   !$("#lessonMain").hidden?$("#stageSurface"):$("#academyHome");
- if(pane)pane.scrollTop=0;
- window.scrollTo(0,0);
-}
+function stopAll(){stopSpeech();stopAudio();stopMic()}
 function hideLesson(){delete document.body.dataset.academyStep;delete document.body.dataset.academyView;$("#academyHome").hidden=false;$("#lessonMain").hidden=true}
 
 /* Derselbe geprüfte Beleg, unterschiedlich erklärte Lernschritte pro Altersstufe. */
@@ -4278,54 +3900,33 @@ function renderHome(){
 function syncProfile(force=false){
  const p=getProfile();
  const newName=typeof p.child?.name==="string"?p.child.name.trim().replace(/\s+/g," ").slice(0,72):"";
- if(!force&&p.id===id&&p.g===gender&&p.age===age&&newName===profileName&&p.monthAge===displayedMonthAge)return;
+ if(!force&&p.id===id&&p.g===gender&&p.age===age&&newName===profileName)return;
  if(p.id!==id||p.g!==gender||p.age!==age){stopAll();hideCategory();hideLesson()}
- id=p.id;gender=p.g;age=p.age;profileName=newName;displayedMonthAge=p.monthAge;
+ id=p.id;gender=p.g;age=p.age;profileName=newName;
  document.body.dataset.profile=gender;
- // Only anonymous demo profiles may hear unapproved owner-voice pilot recordings.
- document.body.dataset.academyChildMode=p.demo?"demo":"child";
  $("#profileLabel").textContent=profileName||(gender==="girl"?"Mädchenprofil":"Jungenprofil");
- $("#profileRole").textContent=gender==="girl"?"Schwester":"Bruder";
- $("#academyAgeLabel").textContent=p.ageMissing?"Altersstufe fehlt":p.monthAge!==null?p.monthAge+" Jahre · Stufe "+humanAge(age):humanAge(age)+" Jahre";
+ $("#profileRole").textContent=gender==="girl"?"Schwester"+(profileName?"":" · Vorschau"):"Bruder"+(profileName?"":" · Vorschau");
+ $("#academyAgeLabel").textContent=p.ageMissing?"Altersstufe fehlt":(p.demo?"Demo · ":"")+humanAge(age)+" Jahre";
  $("#academyProfile").classList.add("has-profile");
  $("#academyAvatar").src=gender==="girl"?"/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg":"/kids/assets/profile-avatars/boy-kufi-v1235.svg";
  $("#academyHeroCharacter").src=$("#academyAvatar").src;
  $("#academyBuddyAvatar").src=$("#academyAvatar").src;
  $("#academyHeroProfileAvatar").src=$("#academyAvatar").src;
  $("#academyHeroProfileLabel").textContent=profileName||(gender==="girl"?"Mädchenprofil":"Jungenprofil");
- $("#academyHeroProfileAge").textContent=p.ageMissing?"Altersstufe wählen":p.monthAge!==null?p.monthAge+" Jahre · Stufe "+humanAge(age):humanAge(age)+" Jahre";
+ $("#academyHeroProfileAge").textContent=p.ageMissing?"Altersstufe wählen":humanAge(age)+" Jahre";
  const hero=$("#academyHeroImage");
  hero.classList.remove("is-ready");
  hero.onload=()=>hero.classList.add("is-ready");
  hero.src=gender==="girl"?"/desktop-preview/assets/kids-academy-hero-girls-v1.jpg":"/desktop-preview/assets/kids-academy-hero-boys-v1.jpg";
  if(hero.complete&&hero.naturalWidth)hero.classList.add("is-ready");
- $("#overviewSalam").textContent=ACADEMY_FULL_SALAM;
- $("#welcomeSalam").textContent=ACADEMY_FULL_SALAM;
- $("#overviewAddress").textContent=greetingAddress();
- $("#welcomeAddress").textContent=greetingAddress();
+ $("#overviewSalam").textContent="As-salāmu ʿalaykum, "+address()+".";
+ $("#welcomeSalam").textContent="As-salāmu ʿalaykum, "+address()+".";
  applyAgeTeaching();
  if(activeLesson())applySelectedLesson();
  renderHome();
 }
 
 
-function creatorV4Sandbox(){
- const p=new URLSearchParams(location.search);
- return p.get("creatorSandbox")==="1"&&p.get("voicePilot")==="1"&&
-  p.get("previewProfil")==="maedchen"&&p.get("previewAlter")==="4-5"&&
-  document.body.dataset.academyChildMode==="demo"&&
-  document.body.dataset.profile==="girl"&&document.body.dataset.kidsAge==="4-5"&&
-  activeLessonId==="sidq";
-}
-function isAcademyStoryMaster(text){
- const entry=window.DARKidsOwnerVoice?.masterEntry?.(text);
- // Never mistake an older Flash/quiz file for the approved V4 story voice.
- // Unreviewed staging remains audible ONLY in the exact owner-only Ṣidq QA context.
- return !!(entry&&entry.voiceId==="DkU7j9uO4ZEtLD2iRZSH"&&entry.modelId==="eleven_v4"&&
-  entry.voiceSettingsProfile==="kids_story"&&entry.sourceVoice==="authorized-owner-voice"&&
-  (entry.approvedForPlayback===true||
-   (entry.approvedForPlayback===false&&creatorV4Sandbox())));
-}
 function refreshSerhatLessonClip(){
  const button=$("#academySerhatLead"),status=$("#academySerhatStatus");
  const desired=activeLesson()?.lead||"";
@@ -4336,17 +3937,17 @@ function refreshSerhatLessonClip(){
   if(!owner)return;
   if(typeof owner.whenAcademyReady==="function")await owner.whenAcademyReady();
   if(activeLessonId!==currentLesson||$("#lessonMain").hidden)return;
-  if(!isAcademyStoryMaster(desired))return;
+  if(typeof owner.hasMaster!=="function"||!owner.hasMaster(desired))return;
   button.hidden=false;button.dataset.masterText=desired;
-  button.setAttribute("aria-label","Einführung anhören");
+  button.setAttribute("aria-label",desired+" – mit Serhats Masterstimme anhören");
  }).catch(()=>{button.hidden=true;});
 }
 function playSerhatLessonClip(){
  const button=$("#academySerhatLead"),status=$("#academySerhatStatus"),t=button.dataset.masterText||"";
  const owner=window.DARKidsOwnerVoice;
- if(!t||!owner||!isAcademyStoryMaster(t))return;
- stopSpeech();stopAudio();status.hidden=false;
- status.textContent="Du hörst die Erklärung.";
+ if(!t||!owner||typeof owner.hasMaster!=="function"||!owner.hasMaster(t))return;
+ pauseVoiceClip();stopSpeech();stopAudio();status.hidden=false;
+ status.textContent="Die Masterstimme wird abgespielt.";
  const failed=()=>{status.hidden=false;status.textContent="Diese Aufnahme lässt sich gerade nicht abspielen.";};
  try{
   const ok=owner.play(t,{source:"kids-academy-tawhid-verified-serhat",
@@ -4357,18 +3958,6 @@ function playSerhatLessonClip(){
  }catch(_){failed();}
 }
 
-let academyMasterReady=false;
-let academyMasterWarmup=null;
-function warmAcademyMaster(){
- if(academyMasterWarmup)return academyMasterWarmup;
- academyMasterWarmup=Promise.resolve(prepareOwnerVoice()).then(async owner=>{
-  if(!owner)return false;
-  if(typeof owner.whenAcademyReady==="function")await owner.whenAcademyReady();
-  academyMasterReady=true;
-  return true;
- }).catch(()=>false);
- return academyMasterWarmup;
-}
 function prepareOwnerVoice(){
  // Die Serhat-Archive werden nur auf Unterrichtsseiten geladen, nicht beim Öffnen der Startseite.
  if(window.DARKidsOwnerVoice)return Promise.resolve(window.DARKidsOwnerVoice);
@@ -4376,12 +3965,12 @@ function prepareOwnerVoice(){
  window.__academyOwnerVoiceRequested=true;
  window.__academyOwnerVoicePromise=new Promise(resolve=>{
   const script=document.createElement("script");
-  script.src="/kids/owner-voice.js?v=academy-serhat-pilot-v12-20261010";script.async=true;
+  script.src="/kids/owner-voice.js?v=academy-serhat-v1-20261010";script.async=true;
   script.onload=()=>resolve(window.DARKidsOwnerVoice||null);
   script.onerror=()=>{
    window.__academyOwnerVoiceRequested=false;
    window.__academyOwnerVoicePromise=null;
-   /* Freigegebene Audioanzeige enthält keine internen Diagnosefelder. */
+   const note=$("#audioDiagnostics");if(note)note.textContent="Das Stimmenarchiv konnte nicht geladen werden.";
    resolve(null);
   };
   document.head.appendChild(script);
@@ -4416,18 +4005,6 @@ function draftFor(lessonId){
   return v&&v.id===id&&v.age===age&&v.lessonId===lessonId&&Number(v.savedAt)>0&&Date.now()>=v.savedAt?v:null;
  }catch(_){return null}
 }
-/* KIDS ACADEMY V9.1: four new lessons, two repetition days, one flexible day.
- * The weekly timetable suggests but never locks content. Keep legacy profile
- * lesson records and drafts untouched; only the daily-choice cache changes. */
-const ACADEMY_WEEK=Object.freeze({
- 0:{mode:"free",label:"Freies Lernen oder Pause"},
- 1:{mode:"new",label:"Neues Thema"},
- 2:{mode:"new",label:"Neues Thema"},
- 3:{mode:"review",label:"Wiederholung"},
- 4:{mode:"new",label:"Neues Thema"},
- 5:{mode:"new",label:"Neues Thema"},
- 6:{mode:"review",label:"Wiederholung"}
-});
 function academyDay(){
  const now=new Date();
  const day=[now.getFullYear(),String(now.getMonth()+1).padStart(2,"0"),String(now.getDate()).padStart(2,"0")].join("-");
@@ -4486,11 +4063,10 @@ function applySelectedLesson(){
  const q=lesson.quran,k="quran:"+q.surah+":"+q.ayah;
  TRACKS[k]={src:"/quran-audio/ar.alafasy/"+(QURAN_COUNTS.slice(0,q.surah-1).reduce((a,b)=>a+b,0)+q.ayah)+".mp3",fallback:"https://everyayah.com/data/Alafasy_128kbps/"+String(q.surah).padStart(3,"0")+String(q.ayah).padStart(3,"0")+".mp3"};
  $("#lessonIntroduction").textContent=lesson.goal;$("#welcomeTitle").textContent="Heute lernen wir: "+lesson.topic;
- const ageTeaching=lesson.ageText?.[age];
- $("#lessonWelcomeBody").textContent=ageTeaching?.intro||lesson.lead+" "+lesson.goal;
+ $("#lessonWelcomeBody").textContent=lesson.lead+" "+lesson.goal;
  $("#explainTitle").textContent=lesson.topic+" verstehen";
  $('[data-lesson-step="1"] .stage-lead').textContent=lesson.lead;
- all("#explainWords [data-spoken]").forEach((el,i)=>el.textContent=(ageTeaching?.lines||lesson.lines)[i]);
+ all("#explainWords [data-spoken]").forEach((el,i)=>el.textContent=lesson.lines[i]);
  $("#evidenceLead").textContent=age==="4-5"?"Wir hören einen Qurʾān-Vers und eine Überlieferung des Propheten ﷺ.":"Wir verstehen die Belege für "+lesson.topic+".";
  qBlock.querySelector(".eyebrow").textContent="Qurʾān · "+q.label;
  verse.textContent=q.arabic;verse.dataset.audioText=k;listen.dataset.arabicAudio=k;
@@ -4500,7 +4076,7 @@ function applySelectedLesson(){
  $("#arabicAudioStatus").textContent=q.excerpt?"Textauszug · vollständiger Vers wird rezitiert":"Rezitation des vollständigen Verses";
  hadithBlock.querySelector(".quote").textContent=lesson.hadith.text;
  hadithBlock.querySelector(".source").textContent="Quelle: "+lesson.hadith.source;
- $(".teacher-explainer").textContent=ageTeaching?.evidence||"Qurʾān: "+q.meaning+" Sunnah: "+lesson.hadith.text;
+ $(".teacher-explainer").textContent="Qurʾān: "+q.meaning+" Sunnah: "+lesson.hadith.text;
  all(".recap-lesson p").forEach((el,i)=>el.textContent=[lesson.goal,q.meaning+" "+lesson.hadith.text,lesson.sample][i]);
  $("#practiceTitle").textContent=age==="4-5"?"Was machst du?":age==="9-10"?"Was weißt du darüber?":"Was würdest du tun?";
  $("#todayTopicName").textContent=lesson.title;$("#todayTopicIntro").textContent=lesson.lead;
@@ -4550,12 +4126,8 @@ function openCategory(key){
   card.append(label,meta);
   if(!locked)card.onclick=()=>begin(lessonId);
   (complete?history:grid).appendChild(card);
-  // Offline-Speicherung ist unabhängig von der täglichen Freischaltung.
-  window.DARKidsItemDownloads?.academy(card,{
-    id:lessonId,title:lessonTitle(lessonId),subject:key
-  });
  }
- updateAcademyAppbar();scrollAcademyViewTop();
+ updateAcademyAppbar();window.scrollTo(0,0);
 }
 
 function hideCategory(){$("#academySubject").hidden=true}
@@ -4566,17 +4138,11 @@ function updateAcademyAppbar(){
  $("#academyNavSubtitle").textContent=lessonOpen?SUBJECTS[activeSubject()].title+" · Dein Unterricht":categoryOpen?"Meine Unterrichtsfächer":"DĀR AL TAWḤĪD · KIDS";
  $("#academyNavBack").setAttribute("aria-label",lessonOpen||categoryOpen?"Zur Lernakademie":"Zur Kids-App");
 }
-function returnToKids(goHome=false){
- stopAll();
- if(KIDS_SEAMLESS_PORTAL_V1421){
-   window.parent.postMessage({type:"DAR_KIDS_ACADEMY_CLOSE_V1421",goHome:goHome===true},location.origin);
- }else location.assign("/kids/");
-}
 function academyNavBack(){
  if(!$("#lessonMain").hidden||!$("#academySubject").hidden){home();return}
- returnToKids();
+ location.assign("/kids/");
 }
-function home(){stopAll();hideCategory();hideLesson();renderHome();updateAcademyAppbar();scrollAcademyViewTop()}
+function home(){stopAll();hideCategory();hideLesson();renderHome();updateAcademyAppbar();window.scrollTo(0,0)}
 function begin(requested){
  syncProfile();if(!AGE_UI[age]){renderHome();return}
  const subject=$("#academySubject").hidden?null:$("#academySubject").dataset.subject;
@@ -4590,7 +4156,7 @@ function begin(requested){
   updateAcademyAppbar();return;
  }
  activeLessonId=chosen;sessionStamp=String(Date.now())+"-"+chosen;focusPages[1]=0;focusPages[2]=0;focusPages[4]=0;
- warmAcademyMaster();hideCategory();$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
+ prepareOwnerVoice();hideCategory();$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
  applySelectedLesson();refreshSerhatLessonClip();
  const draft=readDraft();
  if(draft){
@@ -4598,7 +4164,7 @@ function begin(requested){
  }else{
   step=0;unlocked=0;qIndex=0;finished=false;score={done:0,correct:0,choices:0,neededHelp:0};
  }
- showStep(step,false);updateAcademyAppbar();scrollAcademyViewTop();
+ showStep(step,false);updateAcademyAppbar();window.scrollTo(0,0);
 }
 
 /* Single-focus lesson cards: full text remains present, no page is silently discarded. */
@@ -4621,7 +4187,7 @@ function focusUpdate(stageNumber,target,{silent=false}={}){
   panel.querySelector("[data-focus-prev]").disabled=i===0;
   panel.querySelector("[data-focus-next]").disabled=i===parts.length-1 && stageNumber===4;
   panel.querySelector("[data-focus-next]").textContent=i===parts.length-1&&stageNumber===1?"Zum Qurʾān →":i===parts.length-1&&stageNumber===2?"Zur Frage →":"Weiter →";
-  const names=stageNumber===2?["Qurʾān","Sunnah","Erklärung"]:stageNumber===1?["Satz 1","Satz 2","Satz 3","Satz 4"]:["Merksatz","Qurʾān & Sunnah","Alltag","Wissen weitergeben","Abschluss"];
+  const names=stageNumber===2?["Qurʾān","Sunnah","Erklärung"]:stageNumber===1?["Satz 1","Satz 2","Satz 3","Satz 4"]:["Merksatz","Qurʾān & Sunnah","Alltag","Abschluss"];
   panel.querySelector(".focus-page-count").setAttribute("aria-label",names[i]+" – Seite "+(i+1)+" von "+parts.length);
  }
  if(stageNumber===2){
@@ -4629,9 +4195,8 @@ function focusUpdate(stageNumber,target,{silent=false}={}){
  }
  if(stageNumber===4){
   el.querySelector(".stage-audio").classList.toggle("is-focus-selected",i<3);
-  const isLastReviewCard=i===parts.length-1;
-  $("#summaryText").classList.toggle("is-focus-selected",isLastReviewCard);
-  $("#backAfterLesson").classList.toggle("is-focus-selected",isLastReviewCard);
+  $("#summaryText").classList.toggle("is-focus-selected",i===3);
+  $("#backAfterLesson").classList.toggle("is-focus-selected",i===3);
  }
  if(stageNumber===1){
   const title=$("#explainTitle");if(title)title.textContent=activeLesson()?activeLesson().topic+" verstehen":"Wahrhaftigkeit verstehen";
@@ -4692,22 +4257,9 @@ function initFocusControls(){
  }
 }
 
-function refreshAcademyVocabulary(){
- const helper=window.DARKidsAcademyTermCoach;
- if(!helper)return;
- const l=activeLesson()||{
-  title:"Ṣidq – Wahrhaftigkeit",topic:"Ṣidq",lead:AGE_EXPLANATIONS[age]?.lead,
-  lines:AGE_EXPLANATIONS[age]?.lines||[],hadith:{text:"Ṣidq"},
-  quran:{label:"Qurʾān 9:119"}
- };
- const options={stopAudio:()=>{stopSpeech();stopAudio();}};
- helper.mount($("#academyTermCoach"),l,age,options);
- helper.mount($("#academyTermCoachSources"),l,age,options);
-}
 function showStep(n,scroll=true){
  if(n<0||n>unlocked||n>=5)return;
  stopAll();step=n;document.body.dataset.academyStep=String(n);document.body.dataset.academyView="lesson";stages.forEach((el,i)=>el.hidden=i!==n);
- if(n===1||n===2)refreshAcademyVocabulary();
  if([1,2,4].includes(n))focusUpdate(n,focusPages[n],{silent:true});
  all("[data-jump-step]").forEach(b=>{const i=+b.dataset.jumpStep;b.disabled=i>unlocked;b.classList.toggle("is-current",i===n);b.classList.toggle("is-done",i<n);b.setAttribute("aria-current",i===n?"step":"false")});
  $("#previousStep").hidden=n===0;$("#forwardStep").hidden=n>=3;$("#lessonNavigation").hidden=n!==0;
@@ -4742,10 +4294,14 @@ function playRecitation(key){
  Promise.resolve(a.play()).then(()=>{if(audio===a)$("#arabicAudioStatus").textContent="Du hörst Sūrah "+key.split(":")[1]+", Vers "+key.split(":")[2]+"."}).catch(fail);
 }
 function speak(index,custom){
- stopSpeech();stopAudio();
+ if(step===3&&(recorder?.state==="recording"||($("#mic").disabled&&answerMode==="voice"&&!voiceReady))){
+   $("#feedback").textContent="Beende erst deine Sprachaufnahme, dann kannst du die Frage oder die Antworten anhören.";
+   return;
+ }
+ pauseVoiceClip();stopSpeech();stopAudio();
  const token=++voiceToken;
- const spokenSalam=ACADEMY_FULL_SALAM;
- const lines=custom||(index===0?[spokenSalam,$("#welcomeAddress").textContent,$("#welcomeFollowup").textContent,$('[data-lesson-step="0"] .stage-body').textContent]:index===1?all("#explainWords [data-spoken]").map(x=>x.textContent):index===2?[$(".teacher-explainer").textContent]:index===4?all(".recap-lesson p").map(x=>x.textContent):[]);
+ const spokenSalam=gender==="girl"?"As-salāmu ʿalaykum, liebe Schwester.":"As-salāmu ʿalaykum, lieber Bruder.";
+ const lines=custom||(index===0?[spokenSalam,$("#welcomeFollowup").textContent,$('[data-lesson-step="0"] .stage-body').textContent]:index===1?all("#explainWords [data-spoken]").map(x=>x.textContent):index===2?[$(".teacher-explainer").textContent]:index===4?all(".recap-lesson p").map(x=>x.textContent):[]);
  const highlights=index===1?(custom?[all("#explainWords [data-spoken]")[focusPages[1]]]:all("#explainWords [data-spoken]")):index===2?[$(".teacher-explainer")]:[];
  let k=0;
  const live=()=>token===voiceToken&&index===step;
@@ -4753,14 +4309,14 @@ function speak(index,custom){
  function certifiedOwnerHas(owner,t){
   if(!owner||typeof owner.entry!=="function")return false;
   const e=owner.entry(t);
-  return isAcademyStoryMaster(t)&&!!(e&&e.url&&e.voiceProfileId==="serhat-owner-voice-2026"&&
+  return !!(e&&e.url&&e.voiceProfileId==="serhat-owner-voice-2026"&&
    e.sourceVoice==="authorized-owner-voice"&&
    (e.sourceSpeaker==="Serhat Abu Malik"||e.sourceType==="local-owner-generated"));
  }
  function deviceRead(t){
   if(!live())return;
   // V8.4: no native device voice masquerading as the authorized master recording.
-  setAudioFeedback("Für diesen Satz ist noch keine Aufnahme verfügbar.");
+  setAudioFeedback("Noch keine geprüfte Serhat-Masteraufnahme für diesen Satz.");
  }
  function next(){
   if(!live())return;
@@ -4768,20 +4324,16 @@ function speak(index,custom){
   if(k>=lines.length){stopSpeech();return}
   const t=String(lines[k]||"").trim();if(!t){k++;next();return}
   const owner=window.DARKidsOwnerVoice;
-  if(!academyMasterReady||!owner){
-   if(!waitedForMaster){
-    waitedForMaster=true;
-    setAudioFeedback("Die Aufnahme wird geladen. Bitte tippe danach erneut auf „Anhören“.");
-    // Do not try to play() after an awaited fetch: the iPhone's tap activation
-    // has ended. The *next* explicit tap plays synchronously in owner.play().
-    const completion=warmAcademyMaster();
-    Promise.race([completion,new Promise(resolve=>setTimeout(resolve,9000))])
-     .then(ready=>{
-      if(!live())return;
-      setAudioFeedback(ready?"Aufnahme vorbereitet. Jetzt bitte erneut auf Anhören tippen.":
-       "Die Aufnahme lädt noch. Tippe gleich erneut auf Anhören.");
-     }).catch(()=>{if(live())deviceRead(t)});
-   }
+  if(!waitedForMaster&&(!owner||typeof owner.isLoaded==="function"&&!owner.isLoaded())){
+   waitedForMaster=true;
+   const completion=Promise.resolve(prepareOwnerVoice()).then(api=>{
+    if(!api)return null;
+    const quick=typeof api.whenAcademyReady==="function"?api.whenAcademyReady():null;
+    const allReady=typeof api.whenReady==="function"?api.whenReady():null;
+    return quick&&allReady?Promise.race([quick,allReady]):quick||allReady;
+   });
+   Promise.race([completion,new Promise(resolve=>setTimeout(resolve,1050))])
+    .then(()=>{if(live())next()}).catch(()=>{if(live())next()});
    return;
   }
   if(certifiedOwnerHas(owner,t)){
@@ -4798,121 +4350,107 @@ function speak(index,custom){
  }
  next();
 }
-function mode(){
- const panel=$("#academyQuestionPanel");
- panel.dataset.answerMode="choices";
- $("#check").textContent="Antwort prüfen";
- $("#check").setAttribute("aria-label","Gewählte Antwort prüfen");
- $("#choices").hidden=false;
-}
-/* Shuffle only the DISPLAY order, with a stable per-lesson/age/question seed.
-   Unlike an index-only rotation, correct answers cannot be learned from a
-   recurring first-question position across lessons. Deterministic: retries,
-   saved drafts, and spoken numbering never shuffle under the child's finger.
-   Original q.correct and every source/recording remain unchanged. */
-function academyDisplayChoices(q,index,lessonScope=""){
- const options=Array.isArray(q&&q.options)?q.options:[];
- const n=options.length;
- const original=options.map((text,originalIndex)=>({text,originalIndex}));
- if(n<2)return original;
- const seed=String(lessonScope)+":"+String(q?.prompt||"");
- let hash=2166136261;
- for(let i=0;i<seed.length;i++){
-  hash^=seed.charCodeAt(i);
-  hash=Math.imul(hash,16777619);
+function mode(m){
+ if(m!=="voice"&&answerMode==="voice")stopMic();
+
+ if(m!=="choices"&&!answered&&!$("#retryChoice").hidden){
+   $("#retryChoice").hidden=true;$("#check").hidden=false;$("#hint").hidden=false;$("#repeat").hidden=false;
  }
- const start=((hash>>>0)+(Number(index)||0))%n;
- return original.slice(start).concat(original.slice(0,start));
+ answerMode=m;$("#academyQuestionPanel").dataset.answerMode=m;const q=questions()[qIndex];
+ $("#check").textContent=m==="choices"?"Antwort prüfen":"Antwort vergleichen";
+ $("#check").setAttribute("aria-label",m==="choices"?"Gewählte Antwort prüfen":"Eigene Antwort mit Beispiel vergleichen – keine automatische Bewertung");
+ $("#choices").hidden=m!=="choices"||q.type!=="choice";
+ $("#answerExtra").hidden=m==="choices";$("#mic").hidden=m!=="voice";
+ $("#openWrite").setAttribute("aria-pressed",String(m==="text"));$("#openVoice").setAttribute("aria-pressed",String(m==="voice"));
+ /* iOS: Keyboard nur auf expliziten Textfeld-Tap. */
+ if(m==="voice")$("#micInfo").textContent="Tippe auf „Aufnahme starten“ und sprich. Danach kannst du dir deine Stimme anhören.";
 }
 function showQuestion(){
  const q=questions()[qIndex];if(!q){finish();return}
- choice=null;answered=false;attempts=0;$("#retryChoice").hidden=true;
+ choice=null;answered=false;attempts=0;stopMic();$("#voiceRetake").hidden=false;$("#retryChoice").hidden=true;
  $("#questionIndex").textContent="Frage "+(qIndex+1)+" von "+questions().length;
  $("#question").textContent=q.prompt;$("#bar").style.width=(qIndex/questions().length*100)+"%";
  $("#choices").replaceChildren();
- $("#choiceAudioHelp").hidden=false;$("#academyQuestionPanel").dataset.questionType="choice";
- $("#answerModeCaption").textContent="Wähle eine Antwort durch Antippen:";
+ $("#choiceAudioHelp").hidden=q.type!=="choice";$("#academyQuestionPanel").dataset.questionType=q.type;
+ $("#answerModeCaption").textContent=q.type==="choice"?"Tippe auf eine Antwort oder sprich selbst:":"Du kannst sprechen oder schreiben:";
  $("#academyBuddyTitle").textContent=age==="4-5"?"Wir schaffen das!":age==="9-10"?"Jetzt bist du dran!":"Du schaffst das!";
  $("#academyBuddyText").textContent=age==="4-5"?"Tippe auf Hören. Dann wähle eine Antwort.":"Hör dir die Frage an oder lies selbst.";
- academyDisplayChoices(q,qIndex,activeLessonId+":"+age).forEach(({text:t,originalIndex:i},visibleIndex)=>{
+ if(q.type==="choice")q.options.forEach((t,i)=>{
   const row=document.createElement("div");row.className="choice-row";
   const select=document.createElement("button");select.type="button";select.className="choice-button";
   select.textContent=t;select.setAttribute("aria-pressed","false");
   select.onclick=()=>{
     choice=i;
     all(".choice-button").forEach(x=>x.setAttribute("aria-pressed",String(x===select)));
+    $("#answer").value="";
   };
   const listen=document.createElement("button");listen.type="button";listen.className="choice-listen";
   listen.textContent="Hören";
-  listen.setAttribute("aria-label","Antwort "+(visibleIndex+1)+" anhören, ohne sie auszuwählen");
+  listen.setAttribute("aria-label","Antwort "+(i+1)+" anhören, ohne sie auszuwählen");
   listen.setAttribute("aria-pressed","false");
   listen.onclick=()=>{
-    speak(3,["Antwort "+(visibleIndex+1)+": "+t]);
+    if(recorder?.state==="recording"||($("#mic").disabled&&answerMode==="voice"&&!voiceReady)){
+      $("#feedback").textContent="Beende bitte zuerst deine Sprachaufnahme.";
+      return;
+    }
+    speak(3,["Antwort "+(i+1)+": "+t]);
     all(".choice-listen").forEach(x=>x.setAttribute("aria-pressed",String(x===listen)));
   };
   row.append(select,listen);$("#choices").appendChild(row);
  });
+ $("#answer").value="";$("#answer").placeholder=q.type==="text"?"Erkläre es mit eigenen Worten …":"Ich würde …";
  $("#feedback").textContent=AGE_UI[age]?.feedbackWait||"Nimm dir Zeit.";
  $("#check").hidden=false;$("#hint").hidden=false;$("#repeat").hidden=false;
- $("#nextQuestion").hidden=true;$("#finishLesson").hidden=true;
- mode();
+ $("#nextQuestion").hidden=true;$("#finishLesson").hidden=true;$("#openWrite").hidden=age==="4-5";$("#openVoice").hidden=false;
+ mode(q.type==="text"?"text":"choices");
 }
 function check(){
  if(answered)return;
- const q=questions()[qIndex];
- if(choice===null){$("#feedback").textContent="Bitte tippe auf eine Antwort.";return}
- if(choice!==q.correct&&attempts===0){
-  attempts=1;score.neededHelp++;
-  $("#feedback").textContent="Das war noch nicht die gesuchte Antwort. Überlege noch einmal oder nutze einen kleinen Hinweis.";
-  $("#retryChoice").hidden=false;$("#check").hidden=true;$("#hint").hidden=true;$("#repeat").hidden=true;
-  all(".choice-button").forEach(b=>b.disabled=true);return;
+ const q=questions()[qIndex],typed=$("#answer").value.trim();
+ if(answerMode==="choices"&&choice===null){$("#feedback").textContent="Wähle bitte eine Antwort – oder nutze Sprechen oder Schreiben.";return}
+ if(answerMode!=="choices"&&!typed&&!(answerMode==="voice"&&voiceReady)){$("#feedback").textContent="Bitte sprich oder schreibe zuerst deine Antwort.";return}
+
+ if(answerMode==="choices"&&choice!==null&&choice!==q.correct&&attempts===0){
+   attempts=1;score.neededHelp++;
+   $("#feedback").textContent="Das war noch nicht die gesuchte Antwort. "+q.explain+" Du darfst es noch einmal versuchen.";
+   $("#retryChoice").hidden=false;$("#check").hidden=true;$("#hint").hidden=true;$("#repeat").hidden=true;
+   all(".choice-button").forEach(b=>b.disabled=true);return;
  }
- answered=true;score.done++;score.choices++;
- if(choice===q.correct&&!q.adaptedFromText)score.correct++;
- if(q.adaptedFromText)score.unverified=(Number(score.unverified)||0)+1;
- $("#feedback").textContent=choice===q.correct?
-   "Sehr schön, "+address()+"! "+q.explain:
-   "Das war noch nicht richtig. Gemeinsam verstehen wir es: "+q.explain+" Du darfst diese Frage später erneut üben.";
- $("#bar").style.width=((qIndex+1)/questions().length*100)+"%";
- $("#check").hidden=true;$("#hint").hidden=true;$("#repeat").hidden=true;$("#retryChoice").hidden=true;
+ answered=true;score.done++;let text;
+ if(answerMode==="choices"&&choice!==null){
+  score.choices++;
+  if(choice===q.correct){score.correct++;text="Sehr schön, "+address()+"! "+q.explain}
+  else text="Lass es uns noch einmal erklären: "+q.explain;
+ }else text=(answerMode==="voice"&&voiceReady&&!typed?"Deine Antwort wurde auf diesem Gerät aufgenommen. Du kannst sie unten noch einmal anhören. Was du gesagt hast, kann diese Vorschau noch nicht inhaltlich prüfen. ":"Danke fürs Mitdenken, "+address()+". ")+"Eine mögliche Erklärung lautet: "+(q.sample||q.explain)+" Vergleiche sie mit deiner Antwort. Es gibt hier noch keine automatische Bewertung freier Antworten.";
+ $("#feedback").textContent=text;$("#bar").style.width=((qIndex+1)/questions().length*100)+"%";
+ $("#check").hidden=true;$("#hint").hidden=true;$("#repeat").hidden=true;$("#retryChoice").hidden=true;$("#openWrite").hidden=true;$("#openVoice").hidden=true;
  all(".choice-button").forEach(b=>b.disabled=true);
- $("#nextQuestion").hidden=qIndex===questions().length-1;
- $("#finishLesson").hidden=qIndex!==questions().length-1;
- // Existing progress counters remain; no free text or recorded voice is collected.
+ $("#nextQuestion").hidden=qIndex===questions().length-1;$("#finishLesson").hidden=qIndex!==questions().length-1;
+ $("#voiceRetake").hidden=true;stopMic(answerMode==="voice"&&voiceReady);
+ // Only progress numbers are saved; never voice recordings or children's answer text.
  saveDraft(qIndex===questions().length-1?4:3,
    qIndex===questions().length-1?qIndex:qIndex+1);
 }
 function finish(){
- // A lesson may only be certified after the final comprehension question
- // was actually answered. Never unlock another lesson via a skipped recap.
- if(step!==3||!answered||questions().length===0||
-    qIndex!==questions().length-1||score.done<questions().length)return;
  finished=true;unlocked=4;showStep(4);
- // A completed lesson enters spaced repetition; the reflection is optional.
+ // A completed lesson always enters spaced repetition, even if the child
+ // leaves without answering the optional self-assessment.
  persist("help",true);
 }
 function showRecap(){
  $("#summaryText").textContent="Du hast "+score.done+" von "+questions().length+" Fragen bearbeitet. Du kannst jederzeit wiederholen.";
- const topic=activeLesson()?.topic||"Wahrhaftigkeit";
- const invite=age==="4-5"?("Wenn du möchtest, erzähle einem vertrauten Menschen: Heute habe ich über "+topic+" gelernt. Was kannst du ihm darüber sagen?"):
-  age==="6-8"?("Wie würdest du einem Freund oder einem Geschwisterkind erklären, was du über "+topic+" gelernt hast? Überlege dir auch eine kleine Frage, die du ihm stellen könntest."):
-  ("Fasse das wichtigste Wissen über "+topic+" ohne Ablesen in deinen Worten zusammen. Stelle einer vertrauten Person eine Frage dazu und prüfe gemeinsam, ob deine Erklärung verständlich war.");
- const teach=$("#academyTeachBackPrompt");if(teach)teach.textContent=invite;
  all("[data-reflect]").forEach(b=>{b.classList.remove("active");b.setAttribute("aria-pressed","false")});
 }
 function persist(level,automatic=false){
- // Preserve all legacy records, but do not create a new completed record
- // unless every age-specific question has been worked through.
- if(!finished||score.done<questions().length||questions().length===0)return;
  const prev=oldRecord(),intervals=INTERVALS_BY_AGE[age];
  if(!intervals||!sessionStamp)return;
  const sameAttempt=prev?.sessionStamp===sessionStamp;
  const baseIndex=sameAttempt&&Number.isInteger(prev?.baseIntervalIndex)?prev.baseIntervalIndex:(Number.isInteger(prev?.intervalIndex)?prev.intervalIndex:-1);
- const wrongChoices=score.choices>score.correct||score.neededHelp>0||(Number(score.unverified)||0)>0;
+ const wrongChoices=score.choices>score.correct||score.neededHelp>0;
  const n=(automatic||level==="help"||wrongChoices)?0:Math.min(Math.max(-1,baseIndex)+1,intervals.length-1);
  const due=new Date();due.setHours(12,0,0,0);due.setDate(due.getDate()+intervals[n]);
  const item={id,age,lessonId:activeLessonId,completedAt:Date.now(),firstCompletedAt:Number(prev?.firstCompletedAt||prev?.completedAt||Date.now()),nextDue:due.getTime(),intervalIndex:n,baseIntervalIndex:baseIndex,sessionStamp,
-  reviewCount:(Number(prev?.reviewCount)||0)+(sameAttempt?0:1),answerCount:score.done,choiceCorrect:score.correct,choiceAnswered:score.choices,neededHelp:score.neededHelp,unverifiedAnswerCount:Number(score.unverified)||0,selfReport:automatic?"pending":level};
+  reviewCount:(Number(prev?.reviewCount)||0)+(sameAttempt?0:1),answerCount:score.done,choiceCorrect:score.correct,choiceAnswered:score.choices,neededHelp:score.neededHelp,selfReport:automatic?"pending":level};
  try{
   localStorage.setItem(storageKey(),JSON.stringify(item));clearDraft();
   $("#nextDue").textContent=automatic?"Lektion gespeichert. Wähle unten, wie gut du es verstanden hast. Morgen kannst du bei Bedarf wiederholen.":"Nächste Erinnerung: "+due.toLocaleDateString("de-DE")+". Du kannst jederzeit vorher üben.";
@@ -4920,17 +4458,44 @@ function persist(level,automatic=false){
  if(!automatic)all("[data-reflect]").forEach(b=>{b.classList.toggle("active",b.dataset.reflect===level);b.setAttribute("aria-pressed",String(b.dataset.reflect===level))});
  renderHome();
 }
+const childPlayback=$("#voicePlayback"),voicePlayButton=$("#voicePlayButton"),voicePlayState=$("#voicePlayState");
+voicePlayButton.onclick=()=>{
+ if(!voiceReady||!voiceObjectUrl){voicePlayState.textContent="Nimm zuerst deine Antwort auf.";return}
+ if(!childPlayback.paused){childPlayback.pause();return}
+ stopSpeech();stopAudio();
+ try{
+  const result=childPlayback.play();
+  if(result?.catch)result.catch(()=>{voicePlayState.textContent="Die Aufnahme konnte nicht abgespielt werden. Versuche „Noch einmal sprechen“.";});
+ }catch(_){voicePlayState.textContent="Wiedergabe nicht möglich. Versuche die Aufnahme erneut."}
+};
+childPlayback.onplay=()=>{
+ voicePlayButton.textContent="Ⅱ Wiedergabe pausieren";
+ voicePlayButton.setAttribute("aria-pressed","true");
+ voicePlayState.textContent="Du hörst jetzt deine eigene Stimme.";
+};
+childPlayback.onpause=()=>{
+ voicePlayButton.textContent="▶ Meine Antwort anhören";
+ voicePlayButton.setAttribute("aria-pressed","false");
+ if(voiceReady&&!childPlayback.ended)voicePlayState.textContent="Pausiert. Du kannst noch einmal hören.";
+};
+childPlayback.onended=()=>{
+ voicePlayButton.textContent="▶ Noch einmal anhören";
+ voicePlayButton.setAttribute("aria-pressed","false");
+ voicePlayState.textContent="Deine Aufnahme ist zu Ende. Du kannst sie erneut hören.";
+};
+childPlayback.onerror=()=>{
+ if(voiceReady)voicePlayState.textContent="Die Aufnahme ist auf diesem Gerät nicht abspielbar. Bitte erneut aufnehmen.";
+ voicePlayButton.textContent="▶ Meine Antwort anhören";
+ voicePlayButton.setAttribute("aria-pressed","false");
+};
+$("#masterVoiceTest").onclick=playMasterProbe;
 $("#academySerhatLead").onclick=playSerhatLessonClip;
+$("#previewRefresh").onclick=()=>{const url=new URL(location.href);url.searchParams.set("cb","v7.1-"+Date.now());location.replace(url.toString())};
 all("[data-open-lesson]").forEach(b=>b.onclick=()=>begin(b.dataset.openLesson||"sidq"));
 all("[data-open-category]").forEach(b=>b.onclick=()=>openCategory(b.dataset.openCategory));
 $("#subjectBack").onclick=home;$("#subjectStart").onclick=()=>begin($("#subjectStart").dataset.lessonId);
  $("#academyNavBack").onclick=academyNavBack;
- $("#academyNavHome").onclick=()=>returnToKids(true);
-window.addEventListener("message",event=>{
- if(!KIDS_SEAMLESS_PORTAL_V1421||event.origin!==location.origin||event.source!==window.parent)return;
- if(event.data?.type==="DAR_KIDS_ACADEMY_PAUSE_V1421")stopAll();
- if(event.data?.type==="DAR_KIDS_ACADEMY_RESUME_V1421")syncProfile(true);
-});
+ $("#academyNavHome").onclick=()=>location.assign("/kids/");
 $("#backToAcademy").onclick=home;$("#backAfterLesson").onclick=home;
 $("#previousStep").onclick=()=>{
  if((step===1||step===2)&&focusPages[step]>0){focusMove(step,-1);return;}
@@ -4944,24 +4509,28 @@ all("[data-speak-stage]").forEach(b=>b.onclick=()=>{
  speak(num);
  });
 all("[data-arabic-audio]").forEach(b=>b.onclick=()=>playRecitation(b.dataset.arabicAudio));
+$("#openWrite").onclick=()=>mode("text");$("#openVoice").onclick=()=>mode("voice");
 $("#check").onclick=check;
  $("#retryChoice").onclick=()=>{
    if(answered||step!==3)return;
    choice=null;all(".choice-button").forEach(b=>{b.disabled=false;b.setAttribute("aria-pressed","false")});
    $("#retryChoice").hidden=true;$("#check").hidden=false;$("#hint").hidden=false;$("#repeat").hidden=false;
-   $("#feedback").textContent="Versuche es in deinem Tempo noch einmal. Wenn du einen Denkanstoß möchtest, tippe auf „Kleiner Hinweis“.";
+   $("#feedback").textContent="Versuch es in deinem Tempo noch einmal.";
  };
  $("#hint").onclick=()=>{$("#feedback").textContent=questions()[qIndex].hint};
 $("#repeat").onclick=()=>speak(3,[questions()[qIndex].prompt]);
 $("#nextQuestion").onclick=()=>{qIndex++;showQuestion();saveDraft()};$("#finishLesson").onclick=finish;
+$("#mic").onclick=beginVoiceRecording;$("#cancelMic").onclick=finishRecording;$("#voiceRetake").onclick=beginVoiceRecording;
+$("#answer").oninput=()=>{if($("#answer").value.trim())choice=null};
 all("[data-reflect]").forEach(b=>b.onclick=()=>persist(b.dataset.reflect));
 window.addEventListener("storage",e=>{
- if(["kids.activeProfile","kids.profiles.v1","kids.guest.gender.v1","kids.age"].includes(e.key)||e.key?.startsWith("dar.kids.birthMonth.v1."))syncProfile(true);
+ if(["kids.activeProfile","kids.profiles.v1","kids.guest.gender.v1","kids.age"].includes(e.key))syncProfile(true);
  else if(e.key&&e.key.startsWith("kids."+VERSION+".")){
   renderHome();
   if(!$("#academySubject").hidden)openCategory($("#academySubject").dataset.subject);
  }
 });
+
 window.addEventListener("pageshow",()=>syncProfile(true));
 document.addEventListener("visibilitychange",()=>{
  if(document.hidden)stopAll();
@@ -4975,7 +4544,6 @@ setInterval(()=>{
  const current=academyDay().day;
  if(__schoolLastDate!==current){
   __schoolLastDate=current;
-  syncProfile(); /* Month-year ages update while the iOS view stays open. */
   renderHome();
   if(!$("#academySubject").hidden)openCategory($("#academySubject").dataset.subject);
  }
@@ -4988,128 +4556,4 @@ setInterval(()=>{
  if(directLesson&&(directLesson==="sidq"||CURRICULUM[directLesson]))begin(directLesson);
  else if(directSubject&&SUBJECTS[directSubject])openCategory(directSubject);
 })();
-</script><!-- KIDS_TOUCH_SELECTION_POLICY_V1354: UI controls never show native text-selection handles; educational text stays selectable. -->
-<style id="kids-touch-selection-policy-v1354">
-/* Scoped to actionable chrome. Do NOT apply to body, .app, reading text, Qur'an verses, Du'a or lessons. */
-html body :is(
-  .bottom-nav, .bottom-nav *,
-  nav, nav *,
-  button, button *,
-  summary, summary *,
-  label, label *,
-  [role="button"], [role="button"] *,
-  [role="tab"], [role="tab"] *,
-  [role="menuitem"], [role="menuitem"] *,
-  [role="option"], [role="option"] *,
-  [role="radio"], [role="radio"] *,
-  [role="checkbox"], [role="checkbox"] *,
-  .choice, .choice *,
-  .quiz-answer, .quiz-answer *,
-  .kids-tap-card, .kids-tap-card *,
-  .kids-touch-control, .kids-touch-control *,
-  .age-tabs, .age-tabs *,
-  [data-go], [data-go] *
-){
-  -webkit-user-select:none!important;
-  user-select:none!important;
-  -webkit-touch-callout:none!important;
-}
-html body :is(
-  .bottom-nav img, .bottom-nav svg,
-  button img, button svg,
-  [role="button"] img, [role="button"] svg,
-  .choice img, .kids-tap-card img
-){
-  -webkit-user-drag:none!important;
-}
-/* Do not change touch-action, pointer-events, scrolling, tap targets, focus or keyboard editing. */
-</style>
-<style id="kids-academy-top-edge-guard-v1427">
-/* KIDS_ACADEMY_TOP_EDGE_GUARD_V1427: prevent elastic displacement of full-bleed hero below fixed appbar.
-   Keep the existing inner-scroll layout, live dock clearance, and vertical panning. */
-html body > main.wrap > :is(#academyHome,#academySubject):not([hidden]),
-html body #stageSurface{
-  overscroll-behavior-y:none!important;
-}
-</style>
-<script id="kids-academy-top-edge-guard-v1427">
-(function(){
-  "use strict";
-  if(window.__kidsAcademyTopEdgeGuardV1427)return;
-  window.__kidsAcademyTopEdgeGuardV1427=true;
-  var scrollSelector="#academyHome:not([hidden]),#academySubject:not([hidden]),#stageSurface";
-  var touchRoot=null,lastX=null,lastY=null;
-  function clear(){touchRoot=null;lastX=null;lastY=null;}
-  function scrolledAboveTop(target,root){
-    for(var node=target;node instanceof HTMLElement;node=node.parentElement){
-      if(node.scrollTop>0.5){
-        var overflowY=getComputedStyle(node).overflowY;
-        if(/^(auto|scroll|overlay)$/.test(overflowY))return true;
-      }
-      if(node===root)break;
-    }
-    return false;
-  }
-  document.addEventListener("touchstart",function(event){
-    if(!event.touches||event.touches.length!==1){clear();return;}
-    var target=event.target;
-    // Preserve native caret dragging and selection inside editing fields.
-    if(target instanceof Element&&target.closest("textarea,input,[contenteditable=true]")){
-      clear();return;
-    }
-    touchRoot=target instanceof Element?target.closest(scrollSelector):null;
-    if(!touchRoot){clear();return;}
-    lastX=event.touches[0].clientX;
-    lastY=event.touches[0].clientY;
-  },{capture:true,passive:true});
-  document.addEventListener("touchmove",function(event){
-    if(!touchRoot||lastY===null||!event.touches||event.touches.length!==1)return;
-    var t=event.touches[0],dx=t.clientX-lastX,dy=t.clientY-lastY;
-    lastX=t.clientX;lastY=t.clientY;
-    if(event.defaultPrevented||!event.cancelable||dy<=0||dy<=Math.abs(dx))return;
-    if(!scrolledAboveTop(event.target,touchRoot))event.preventDefault();
-  },{capture:true,passive:false});
-  document.addEventListener("touchend",clear,{capture:true,passive:true});
-  document.addEventListener("touchcancel",clear,{capture:true,passive:true});
-})();
-</script>
-<link rel="stylesheet" href="/kids/akademie/girl-profile-authority-v1430.css?v=1430" data-kids-academy-girl-authority="1430">
-
-<style id="kids-academy-edge-scroll-v1445">
-/* KIDS_LESSON_CAPSULE_RESTORE_V1446
-   Restore the ORIGINAL framed lesson cards, responsive side gutters,
-   corner radii, subtle borders, and theme-specific shadows.
-   The V1445 bottom-dock scrolling fix remains unchanged in behavior.
-   Do not touch the other KIDS views, original text/voice input or progress. */
-html body[data-kids-portal="true"][data-academy-view="lesson"] > main.wrap > #lessonMain.lesson-main:not([hidden]){
- /* The original centered page/capsule widths win again (no full-bleed). */
- padding-bottom:0!important;
-}
-html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain #stageSurface{
- box-sizing:border-box!important;
- min-width:0!important;min-height:0!important;
- flex:1 1 auto!important;
- overflow-y:auto!important;overflow-x:hidden!important;
- -webkit-overflow-scrolling:touch;
- /* Reserve the measured dock at SCROLL END, not outside the lesson. */
- padding:2px 2px calc(var(--kids-academy-dock-clearance) + 20px)!important;
- scroll-padding-block-end:calc(var(--kids-academy-dock-clearance) + 20px)!important;
-}
-html body[data-kids-portal="true"][data-academy-view="lesson"][data-academy-step="0"] #lessonMain #stageSurface{
- padding-bottom:calc(var(--kids-academy-dock-clearance) + 98px)!important;
- scroll-padding-block-end:calc(var(--kids-academy-dock-clearance) + 98px)!important;
-}
-html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain #lessonNavigation:not([hidden]){
- position:absolute!important;
- left:clamp(8px,1.7vw,20px)!important;right:clamp(8px,1.7vw,20px)!important;
- bottom:calc(var(--kids-academy-dock-clearance) + 8px)!important;
- width:auto!important;z-index:5!important;margin:0!important;
-}
-/* Preserve capsule scroll geometry without an answer keyboard. */
-html body[data-kids-portal="true"][data-academy-view="lesson"][data-academy-typing="true"] #lessonMain #stageSurface{
- padding-bottom:24px!important;scroll-padding-block-end:24px!important;
-}
-</style>
-
-
-</body></html>
+</script></body></html>
