@@ -1325,25 +1325,25 @@ const additions={
   "topic": "Mobbing erkennen und Hilfe holen",
   "title": "Familie · Mobbing erkennen und Hilfe holen",
   "lead": "Heute lernen wir: Mobbing erkennen und Hilfe holen.",
-  "goal": "Ich kann bei wiederholten Gemeinheiten einer Vertrauensperson berichten und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich erkenne wiederholte Gemeinheiten und weiß, dass ich Hilfe bei einer sicheren erwachsenen Vertrauensperson suchen darf.",
   "quran": {
-   "surah": 17,
-   "ayah": 53,
-   "label": "Sūrat al-Isrāʾ · 17:53",
-   "arabic": "وَقُل لِّعِبَادِي يَقُولُوا الَّتِي هِيَ أَحْسَنُ ۚ إِنَّ الشَّيْطَانَ يَنزَغُ بَيْنَهُمْ ۚ إِنَّ الشَّيْطَانَ كَانَ لِلْإِنسَانِ عَدُوًّا مُّبِينًا",
-   "meaning": "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen.",
+   "surah": 42,
+   "ayah": 41,
+   "label": "Sūrat aš-Šūrā · 42:41",
+   "arabic": "وَلَمَنِ انْتَصَرَ بَعْدَ ظُلْمِهِ فَأُولَٰئِكَ مَا عَلَيْهِمْ مِنْ سَبِيلٍ",
+   "meaning": "Wer nach erlittenem Unrecht für sein Recht eintritt, den trifft kein Vorwurf.",
    "excerpt": false
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6018",
-   "text": "Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 2442 · ʿAbdullāh ibn ʿUmar",
+   "text": "Der Prophet ﷺ verbot es, einen anderen zu unterdrücken oder ihn einem Unterdrücker hilflos zu überlassen."
   },
   "sourceAudit": {
-   "quranReference": "17:53",
-   "quranUrl": "https://quran.com/17/53",
-   "hadithUrl": "https://sunnah.com/bukhari:6018",
-   "sourceAnchorLessonId": "adab-worte",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
+   "quranReference": "42:41",
+   "quranUrl": "https://quran.com/42/41",
+   "hadithUrl": "https://sunnah.com/bukhari:2442",
+   "sourceAnchorLessonId": null,
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg; Quellen- und Fiqh-/Kinderschutzprüfung ausstehend.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -1351,141 +1351,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Bei wiederholten Gemeinheiten einer Vertrauensperson berichten.",
-  "sample": "Bei „Mobbing erkennen und Hilfe holen“ übe ich: bei wiederholten Gemeinheiten einer Vertrauensperson berichten.",
+  "hint": "Wir unterscheiden den belegten Text von unserer eigenen Übung.",
+  "sample": "Ich lerne, was Qurʾān und Sunnah wirklich sagen.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Mobbing erkennen und Hilfe holen.",
+    "intro": "Niemand darf dir wiederholt Angst machen oder dich verletzen.",
     "lines": [
-     "Wir lernen heute: Mobbing erkennen und Hilfe holen.",
-     "Wir üben bei wiederholten Gemeinheiten einer Vertrauensperson berichten.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Wenn jemand mich immer wieder ärgert oder verletzt, ist Hilfe wichtig.",
+     "Ich darf klar Nein sagen und weggehen, wenn es sicher ist.",
+     "Ich erzähle einem sicheren Erwachsenen davon.",
+     "Wenn eine Person nicht hilft, darf ich eine andere Vertrauensperson suchen."
     ],
-    "evidence": "Qurʾān 17:53 lehrt: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Der Qurʾān verurteilt Unrecht; konkrete Schutzschritte sind kindgerechte Sicherheitsregeln und kein wörtliches Verszitat."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Bei wiederholten Gemeinheiten einer Vertrauensperson berichten.",
+    "intro": "Mobbing bedeutet wiederholtes Ausgrenzen, Beschimpfen oder Verletzen.",
     "lines": [
-     "Heute untersuchen wir das Thema „Mobbing erkennen und Hilfe holen“.",
-     "Der Qurʾān spricht in 17:53 darüber: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 6018 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Bei wiederholten Gemeinheiten einer Vertrauensperson berichten. Wir überlegen gemeinsam, warum es passt."
+     "Qurʾān 42:41 nimmt den in Schutz, der sich gegen erlittenes Unrecht wehrt.",
+     "Al-Buḫārī 2442 fordert dazu auf, Unrecht nicht zu begehen und Betroffene nicht schutzlos zu lassen.",
+     "Ein sicherer Schritt ist, einer erwachsenen Vertrauensperson die Vorkommnisse zu schildern.",
+     "Wenn ich selbst andere ausgrenze, höre ich auf und helfe, die Situation zu ändern."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Das Aufsuchen einer Vertrauensperson ist unsere pädagogische Schutzregel; keine angeblich wörtliche Ḥadīṯ-Anweisung."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Mobbing erkennen und Hilfe holen“.",
+    "intro": "Selbstschutz bedeutet nicht, selbst gewalttätig zu werden.",
     "lines": [
-     "Ausgangssituation: Bei wiederholten Gemeinheiten einer Vertrauensperson berichten.",
-     "Qurʾān 17:53: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 6018): Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Wiederholte Erniedrigung, Drohungen oder Ausgrenzung verdienen ernst genommen zu werden.",
+     "Qurʾān 42:41 sagt sinngemäß, dass man für ein Recht nach erlittenem Unrecht einstehen darf.",
+     "Al-Buḫārī 2442 weist an, Unterdrückung zu unterlassen und Opfer nicht auszuliefern.",
+     "Unsere sichere Handlungskette: Abstand gewinnen, Vorfälle melden und nötigenfalls weitere Erwachsene oder zuständige Stellen einschalten."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Schutz für alle Kinder gilt unabhängig von Herkunft oder Religion; die Handlungsempfehlung ist ausdrücklich eine Sicherheitsanwendung."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Mobbing erkennen und Hilfe holen“ eine gute Handlung?",
+     "prompt": "Was machst du, wenn jemand dich immer wieder verletzt?",
      "options": [
-      "Ich kann bei wiederholten Gemeinheiten einer Vertrauensperson berichten.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Ich erzähle es einer sicheren erwachsenen Person.",
+      "Ich muss das ganz allein geheim halten."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Bei wiederholten Gemeinheiten einer Vertrauensperson berichten.",
-     "explain": "Unser Lernbeispiel ist: Bei wiederholten Gemeinheiten einer Vertrauensperson berichten."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Ein vertrauenswürdiger Erwachsener kann helfen."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Mobbing erkennen und Hilfe holen“ tun?",
+     "prompt": "Was ist richtig, wenn dir ein Erwachsener nicht hilft?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Ich suche eine andere sichere Vertrauensperson.",
+      "Ich gebe die Suche nach Hilfe auf."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Du darfst weiter um Schutz bitten."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Mobbing erkennen und Hilfe holen“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was kann ein Zeichen von Mobbing sein?",
      "options": [
-      "Ich kann bei wiederholten Gemeinheiten einer Vertrauensperson berichten.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Wiederholtes absichtliches Ausgrenzen und Verletzen.",
+      "Ein einmaliger harmloser Irrtum."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Bei wiederholten Gemeinheiten einer Vertrauensperson berichten.",
-     "explain": "Unser Lernbeispiel ist: Bei wiederholten Gemeinheiten einer Vertrauensperson berichten."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Wiederholung und ernsthafter Schaden sind wichtige Merkmale."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Mobbing erkennen und Hilfe holen“ im Alltag üben kannst?",
+     "prompt": "Welche Reaktion schützt ein betroffenes Kind?",
      "options": [
-      "Ich könnte bei wiederholten Gemeinheiten einer Vertrauensperson berichten. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Einer sicheren Vertrauensperson berichten.",
+      "Alles verheimlichen, auch bei Gefahr."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte bei wiederholten Gemeinheiten einer Vertrauensperson berichten. Ich erkläre ruhig, weshalb diese Handlung passt.",
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Hilfe holen ist richtig.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Mobbing erkennen und Hilfe holen“ im Beispiel üben kannst."
+     "legacyPrompt": "Redaktioneller Fragetyp – menschliche Antwortabnahme ausstehend."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 17:53?",
+     "prompt": "Was bedeutet al-Buḫārī 2442 für den Umgang mit Unrecht?",
      "options": [
-      "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen.",
-      "Unser Übungsbeispiel ist: Bei wiederholten Gemeinheiten einer Vertrauensperson berichten.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen."
+      "Nicht unterdrücken und Betroffene nicht schutzlos lassen.",
+      "Unrecht immer ignorieren."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Der Bericht verbietet Unterdrückung und das Ausliefern an Unterdrücker."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Mobbing erkennen und Hilfe holen“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Was darf man bei wiederholtem Mobbing tun?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Sich schützen und sichere Hilfe organisieren.",
+      "Selbst Gewalt als erste Lösung einsetzen."
      ],
      "correct": 0,
-     "hint": "Vergleiche 17:53 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Der Schutz hat Vorrang vor Gegenangriff."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 17:53?",
+     "prompt": "Wie unterscheiden wir Qurʾān 42:41 von der pädagogischen Regel?",
      "options": [
-      "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen.",
-      "Unser Übungsbeispiel ist: Bei wiederholten Gemeinheiten einer Vertrauensperson berichten."
+      "Der Vers behandelt Unrecht; die Vertrauenspersonen-Regel ist unsere sichere Anwendung.",
+      "Der Vers nennt ausdrücklich eine deutsche Schultelefonnummer."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Wir dürfen eigene Sicherheitsregeln nicht als wörtliche Offenbarung ausgeben.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 17:53 genau? Welche Aussage stammt aus der Sunnah?"
+     "legacyPrompt": "Redaktioneller Fragetyp – menschliche Antwortabnahme ausstehend."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Mobbing erkennen und Hilfe holen“?",
+     "prompt": "Was gilt, wenn die erste Vertrauensperson nicht hilft?",
      "options": [
-      "Ich erkläre die Situation: bei wiederholten Gemeinheiten einer Vertrauensperson berichten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Weitere geeignete Erwachsene oder zuständige Stellen ansprechen.",
+      "Den Vorfall als eigene Schuld ansehen und schweigen."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: bei wiederholten Gemeinheiten einer Vertrauensperson berichten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
+     "hint": "Erinnere dich an die Aussage aus der Unterrichtsstunde.",
+     "explain": "Niemand muss mit wiederholtem Unrecht allein bleiben.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Mobbing erkennen und Hilfe holen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "legacyPrompt": "Redaktioneller Fragetyp – menschliche Antwortabnahme ausstehend."
     }
    ]
   },
