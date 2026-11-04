@@ -49,9 +49,21 @@ function selectable(q,lesson,age){
  const wrong=pool.map(String).find(t=>t.trim()&&t.trim()!==correct)||
   "Es ist richtig, absichtlich das Gegenteil des Gelernten zu tun.";
  const older=/^Erkläre\b/i.test(q.prompt);
- const prompt=older?"Wähle die passende Erklärung: "+String(q.prompt)
+ let prompt=older?"Wähle die passende Erklärung: "+String(q.prompt)
   .replace(/^Erkläre(?:\s+(?:mit|in)\s+(?:deinen|eigenen)\s+Worten)?\s*[:,]?\s*/i,""):q.prompt;
- return {...q,type:"choice",prompt,options:[correct,wrong],correct:0,
+ let optionCorrect=correct,optionWrong=wrong;
+ if(correct.length>180&&lesson?.quran?.meaning){
+  const verse=String(lesson.quran.meaning).trim();
+  if(verse&&verse.length<=180){
+   const hadith=String(lesson.hadith?.text||"").trim();
+   optionCorrect=verse;
+   optionWrong=(hadith&&hadith!==verse&&hadith.length<=180)?hadith:
+     "Das Alltagsbeispiel ist selbst der genaue Wortlaut des Qurʾān-Verses.";
+   prompt="Welche Aussage gibt die Bedeutung von Qurʾān "+lesson.quran.surah+
+     ":"+lesson.quran.ayah+" wieder?";
+  }
+ }
+ return {...q,type:"choice",prompt,options:[optionCorrect,optionWrong],correct:0,
   explain:q.explain||correct,adaptedFromText:true};
 }
 function display(q,index,scope){
