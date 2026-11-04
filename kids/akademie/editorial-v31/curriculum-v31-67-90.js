@@ -3177,7 +3177,7 @@ const additions={
   "topic": "Ismāʿīl عليه السلام und Gehorsam gegenüber Allah",
   "title": "Sīrah · Ismāʿīl عليه السلام und Gehorsam gegenüber Allah",
   "lead": "Heute lernen wir: Ismāʿīl عليه السلام und Gehorsam gegenüber Allah.",
-  "goal": "Ich kann eine gesicherte Geschichte ohne angstmachende Details hören und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kenne die im Qurʾān berichtete Zusammenarbeit von Ibrāhīm und Ismāʿīl عليهما السلام beim Aufbau des Hauses Allahs und unterscheide den Bericht von modernen Alltagsbeispielen.",
   "quran": {
    "surah": 2,
    "ayah": 127,
@@ -3187,15 +3187,15 @@ const additions={
    "label": "Qurʾān 2:127 (Auszug)"
   },
   "hadith": {
-   "source": "Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl)",
-   "text": "Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 3365 · Ibn ʿAbbās",
+   "text": "Im Bericht über Ibrāhīm und Ismāʿīl wird geschildert, wie Ismāʿīl seinem Vater beim Aufbau der Kaʿbah half und beide Allah um Annahme baten."
   },
   "sourceAudit": {
    "quranReference": "2:127",
    "quranUrl": "https://quran.com/2/127",
-   "hadithUrl": "https://sunnah.com/muslim:8",
-   "sourceAnchorLessonId": "aqidah-iman-die-gesandten",
-   "sourceScope": "Thematische Primärstelle zu einem Teilaspekt; genaue Deutung gegenprüfen.",
+   "hadithUrl": "https://sunnah.com/bukhari:3365",
+   "sourceAnchorLessonId": null,
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg zu Ismāʿīl, der Mithilfe am Haus und ihrer an Allah gerichteten Bitte; Facheinzelfreigabe offen.",
    "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -3203,141 +3203,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Eine gesicherte Geschichte ohne angstmachende Details hören.",
-  "sample": "Bei „Ismāʿīl عليه السلام und Gehorsam gegenüber Allah“ übe ich: eine gesicherte Geschichte ohne angstmachende Details hören.",
+  "hint": "Ismāʿīl half Ibrāhīm beim Aufbau des Hauses Allahs.",
+  "sample": "Ibrāhīm und Ismāʿīl bauten gemeinsam und baten Allah, ihr Werk anzunehmen.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Ismāʿīl عليه السلام und Gehorsam gegenüber Allah.",
+    "intro": "Ismāʿīl und sein Vater Ibrāhīm dienten Allah.",
     "lines": [
-     "Wir lernen heute: Ismāʿīl عليه السلام und Gehorsam gegenüber Allah.",
-     "Wir üben eine gesicherte Geschichte ohne angstmachende Details hören.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Allah berichtet im Qurʾān von Ibrāhīm und Ismāʿīl.",
+     "Sie bauten gemeinsam am Haus Allahs.",
+     "Sie baten Allah, ihre gute Arbeit anzunehmen.",
+     "Wir lernen: Gutes für Allah tun und um Seine Annahme bitten."
     ],
-    "evidence": "Qurʾān 2:127 lehrt: Ibrāhīm und Ismāʿīl errichteten die Grundmauern des Hauses. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 2:127 nennt Ibrāhīm und Ismāʿīl beim Aufbau des Hauses und ihr Bittgebet."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Eine gesicherte Geschichte ohne angstmachende Details hören.",
+    "intro": "Ibrāhīm und Ismāʿīl dienen Allah mit guter Zusammenarbeit.",
     "lines": [
-     "Heute untersuchen wir das Thema „Ismāʿīl عليه السلام und Gehorsam gegenüber Allah“.",
-     "Der Qurʾān spricht in 2:127 darüber: Ibrāhīm und Ismāʿīl errichteten die Grundmauern des Hauses.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl) nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Eine gesicherte Geschichte ohne angstmachende Details hören. Wir überlegen gemeinsam, warum es passt."
+     "Qurʾān 2:127 beschreibt die beiden beim Aufbau der Grundlagen des Hauses.",
+     "Die beiden baten Allah gemeinsam, ihre Handlung anzunehmen.",
+     "Al-Buḫārī 3365 erzählt, wie Ismāʿīl beim Bauen half und Steine reichte.",
+     "Daraus lernen wir, Gutes gemeinsam zu tun; die konkrete Baugeschichte bleibt eine Überlieferung."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Der Qurʾān belegt das gemeinsame Bauen und die Bitte an Allah; der Ḥadīṯ liefert einen ergänzenden Erzählbericht."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Ismāʿīl عليه السلام und Gehorsam gegenüber Allah“.",
+    "intro": "Gehorsam gegenüber Allah bei Ismāʿīl: belegter Bericht und Lernanwendung.",
     "lines": [
-     "Ausgangssituation: Eine gesicherte Geschichte ohne angstmachende Details hören.",
-     "Qurʾān 2:127: Ibrāhīm und Ismāʿīl errichteten die Grundmauern des Hauses.",
-     "Sunnah (Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl)): Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 2:127 berichtet ausdrücklich, dass Ibrāhīm mit Ismāʿīl die Fundamente des Hauses erhob.",
+     "Sie baten Allah, das gemeinsame Werk anzunehmen; dies zeigt ihre Ausrichtung auf Allah.",
+     "Al-Buḫārī 3365 schildert zusätzlich die Mithilfe Ismāʿīls beim Bauen.",
+     "Unsere heutige Übung zu guter Zusammenarbeit ist eine Anwendung, nicht der wörtliche Inhalt der gesamten Sīrah."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Koranischer Vers und überlieferte Einzelheiten stützen die konkrete Baugeschichte; daraus folgt keine pauschale Aufforderung, Menschen blind zu gehorchen."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Ismāʿīl عليه السلام und Gehorsam gegenüber Allah“ eine gute Handlung?",
+     "prompt": "Wem half Ismāʿīl beim Aufbau des Hauses?",
      "options": [
-      "Ich kann eine gesicherte Geschichte ohne angstmachende Details hören.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Seinem Vater Ibrāhīm.",
+      "Firʿawn."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Eine gesicherte Geschichte ohne angstmachende Details hören.",
-     "explain": "Unser Lernbeispiel ist: Eine gesicherte Geschichte ohne angstmachende Details hören."
+     "hint": "Denk an die beiden Propheten.",
+     "explain": "Der Vers nennt Ibrāhīm und Ismāʿīl."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Ismāʿīl عليه السلام und Gehorsam gegenüber Allah“ tun?",
+     "prompt": "Wen baten beide, ihre Arbeit anzunehmen?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Die Zuschauer.",
+      "Allah."
      ],
-     "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "correct": 1,
+     "hint": "Ihr Bittgebet richtete sich an Allah.",
+     "explain": "Sie baten Allah um die Annahme ihrer Handlung."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Ismāʿīl عليه السلام und Gehorsam gegenüber Allah“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was taten Ibrāhīm und Ismāʿīl gemeinsam?",
      "options": [
-      "Ich kann eine gesicherte Geschichte ohne angstmachende Details hören.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Sie bauten am Haus Allahs.",
+      "Sie reisten in ein erfundenes Land.",
+      "Sie bauten ein Spielschiff."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Eine gesicherte Geschichte ohne angstmachende Details hören.",
-     "explain": "Unser Lernbeispiel ist: Eine gesicherte Geschichte ohne angstmachende Details hören."
+     "hint": "Qurʾān 2:127 nennt das Haus.",
+     "explain": "Sie errichteten gemeinsam die Grundlagen des Hauses."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Ismāʿīl عليه السلام und Gehorsam gegenüber Allah“ im Alltag üben kannst?",
+     "prompt": "Was bedeutet ihre gemeinsame Bitte?",
      "options": [
-      "Ich könnte eine gesicherte Geschichte ohne angstmachende Details hören. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Sie erwarteten nur Applaus.",
+      "Sie baten Allah um Annahme ihrer guten Tat.",
+      "Sie baten jemanden um Geld."
      ],
-     "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte eine gesicherte Geschichte ohne angstmachende Details hören. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Ismāʿīl عليه السلام und Gehorsam gegenüber Allah“ im Beispiel üben kannst."
+     "correct": 1,
+     "hint": "An wen richtete sich ihr Bittgebet?",
+     "explain": "Sie baten Allah, ihr Werk anzunehmen."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:127?",
+     "prompt": "Was ergänzt al-Buḫārī 3365 zum Bericht?",
      "options": [
-      "Ibrāhīm und Ismāʿīl errichteten die Grundmauern des Hauses.",
-      "Unser Übungsbeispiel ist: Eine gesicherte Geschichte ohne angstmachende Details hören.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung."
+      "Ismāʿīl half Ibrāhīm und reichte Steine.",
+      "Dass jedes Kind Häuser bauen muss.",
+      "Dass die Kaʿbah aus Schnee besteht."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Der Bericht enthält einen Bauschritt.",
+     "explain": "Im Ḥadīṯ ist die Mithilfe beim Bauen geschildert."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Ismāʿīl عليه السلام und Gehorsam gegenüber Allah“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Was steht direkt in Qurʾān 2:127?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Ibrāhīm und Ismāʿīl bauten und baten Allah um Annahme.",
+      "Jede moderne Bauanleitung ist Offenbarung.",
+      "Alle Menschen müssen jedes Elterngebot befolgen."
      ],
      "correct": 0,
-     "hint": "Vergleiche 2:127 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Achte auf den wirklichen Versinhalt.",
+     "explain": "Der Vers verbindet gemeinsames Bauen und Bitte an Allah."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 2:127?",
+     "prompt": "Welche Rolle hat al-Buḫārī 3365?",
      "options": [
-      "Ibrāhīm und Ismāʿīl errichteten die Grundmauern des Hauses.",
-      "Unser Übungsbeispiel ist: Eine gesicherte Geschichte ohne angstmachende Details hören."
+      "Er widerspricht dem Qurʾān ohne Erklärung.",
+      "Er überliefert zusätzliche Einzelheiten der Mithilfe Ismāʿīls.",
+      "Er enthält das heutige Klassenarbeitsblatt."
      ],
-     "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Ibrāhīm und Ismāʿīl errichteten die Grundmauern des Hauses. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 2:127 genau? Welche Aussage stammt aus der Sunnah?"
+     "correct": 1,
+     "hint": "Der Bericht ergänzt die Geschichte.",
+     "explain": "Der Ḥadīṯ nennt die Mithilfe beim Bau."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Ismāʿīl عليه السلام und Gehorsam gegenüber Allah“?",
+     "prompt": "Was ist eine sichere pädagogische Ableitung?",
      "options": [
-      "Ich erkläre die Situation: eine gesicherte Geschichte ohne angstmachende Details hören. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Gutes gemeinsam tun und Allah um Annahme bitten.",
+      "Jeder Aufforderung anderer Menschen ohne Prüfung folgen.",
+      "Bei gefährlichen Situationen niemals Hilfe holen."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: eine gesicherte Geschichte ohne angstmachende Details hören. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Ismāʿīl عليه السلام und Gehorsam gegenüber Allah“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "hint": "Dienen gilt Allah, nicht bedingungslosem Gehorsam gegenüber Menschen.",
+     "explain": "Die Lektion ermutigt zu aufrichtigen guten Handlungen."
     }
    ]
   },
@@ -3549,7 +3547,7 @@ const additions={
   "topic": "Streit ohne Gewalt lösen",
   "title": "Familie · Streit ohne Gewalt lösen",
   "lead": "Heute lernen wir: Streit ohne Gewalt lösen.",
-  "goal": "Ich kann bei einem Konflikt Hilfe einer erwachsenen Person holen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann Wut als Gefühl erkennen, Gewalt vermeiden und Hilfe holen, statt einen Streit mit Schlägen zu lösen.",
   "quran": {
    "surah": 3,
    "ayah": 134,
@@ -3575,141 +3573,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Bei einem Konflikt Hilfe einer erwachsenen Person holen.",
-  "sample": "Bei „Streit ohne Gewalt lösen“ übe ich: bei einem Konflikt Hilfe einer erwachsenen Person holen.",
+  "hint": "Stark sein heißt bei Wut Selbstbeherrschung zeigen und Hilfe holen.",
+  "sample": "Ich streite mich nicht mit Schlägen, sondern suche eine ruhige Lösung oder Unterstützung.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Streit ohne Gewalt lösen.",
+    "intro": "Manchmal werden wir wütend. Wir dürfen trotzdem niemanden schlagen.",
     "lines": [
-     "Wir lernen heute: Streit ohne Gewalt lösen.",
-     "Wir üben bei einem Konflikt Hilfe einer erwachsenen Person holen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Wütend sein ist ein Gefühl.",
+     "Mit Händen und Worten wollen wir andere nicht verletzen.",
+     "Wir dürfen Abstand nehmen und ruhig werden.",
+     "Wenn ein Streit gefährlich wird, holen wir sofort Hilfe."
     ],
-    "evidence": "Qurʾān 3:134 lehrt: Diejenigen, die ihren Zorn zurückhalten und den Menschen vergeben. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 3:134 lobt das Beherrschen von Zorn; al-Buḫārī 6114 beschreibt Stärke als Selbstbeherrschung."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Bei einem Konflikt Hilfe einer erwachsenen Person holen.",
+    "intro": "Sich beherrschen bedeutet nicht, dass man Gefühle verstecken muss.",
     "lines": [
-     "Heute untersuchen wir das Thema „Streit ohne Gewalt lösen“.",
-     "Der Qurʾān spricht in 3:134 darüber: Diejenigen, die ihren Zorn zurückhalten und den Menschen vergeben.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 6114; Ṣaḥīḥ Muslim, Nr. 2609 · überliefert von Abū Hurayrah nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Bei einem Konflikt Hilfe einer erwachsenen Person holen. Wir überlegen gemeinsam, warum es passt."
+     "Qurʾān 3:134 lobt Menschen, die ihren Zorn zurückhalten.",
+     "Al-Buḫārī 6114 erklärt, dass wirkliche Stärke Selbstbeherrschung bei Wut ist.",
+     "Wir können sagen: „Ich bin wütend und brauche Abstand“.",
+     "Bei Drohungen oder Gewalt holen wir Erwachsene; wir müssen uns nicht wehrlos in Gefahr halten."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Vers und Bericht behandeln Zorn; die konkreten Sicherheitsformulierungen sind unsere kindgerechte Anwendung."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Streit ohne Gewalt lösen“.",
+    "intro": "Zorn und Gewalt: das Verhalten prüfen, nicht Gefühle verbieten.",
     "lines": [
-     "Ausgangssituation: Bei einem Konflikt Hilfe einer erwachsenen Person holen.",
-     "Qurʾān 3:134: Diejenigen, die ihren Zorn zurückhalten und den Menschen vergeben.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 6114; Ṣaḥīḥ Muslim, Nr. 2609 · überliefert von Abū Hurayrah): Der Prophet ﷺ erklärte, dass wahre Stärke nicht darin besteht, andere zu besiegen, sondern sich bei Wut zu beherrschen. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 3:134 beschreibt diejenigen, die Zorn zurückhalten und Menschen verzeihen.",
+     "Al-Buḫārī 6114 lehrt, dass Stärke sich bei Zorn in Selbstbeherrschung zeigt.",
+     "Das erlaubt, Gefühle offen zu benennen und trotzdem nicht zu verletzen.",
+     "Verzeihen ist keine Verpflichtung, Gewalt zu dulden oder ohne Hilfe in Gefahr zu bleiben."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Die Belege enthalten ein Ideal der Selbstbeherrschung; die Schutzgrenzen bei Drohungen sind eine verantwortliche pädagogische Ergänzung."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Streit ohne Gewalt lösen“ eine gute Handlung?",
+     "prompt": "Du bist wütend. Was ist sicher?",
      "options": [
-      "Ich kann bei einem Konflikt Hilfe einer erwachsenen Person holen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Ich schlage zu.",
+      "Ich gehe ein Stück weg und hole Hilfe."
      ],
-     "correct": 0,
-     "hint": "Denk an die Übung: Bei einem Konflikt Hilfe einer erwachsenen Person holen.",
-     "explain": "Unser Lernbeispiel ist: Bei einem Konflikt Hilfe einer erwachsenen Person holen."
+     "correct": 1,
+     "hint": "Schlagen verletzt andere.",
+     "explain": "Abstand und Unterstützung sind gute Wege."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Streit ohne Gewalt lösen“ tun?",
+     "prompt": "Woran erkennt man Stärke bei Wut?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Daran, dass man sich beherrscht.",
+      "Daran, dass man lauter brüllt."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Der Prophet ﷺ erklärte Stärke anders als Kämpfen.",
+     "explain": "Sich bei Wut zu beherrschen ist Stärke."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Streit ohne Gewalt lösen“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was hilft vor einem Streit mit Schlägen?",
      "options": [
-      "Ich kann bei einem Konflikt Hilfe einer erwachsenen Person holen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Abstand nehmen und Unterstützung suchen.",
+      "Jemanden absichtlich provozieren.",
+      "Andere bedrohen."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Bei einem Konflikt Hilfe einer erwachsenen Person holen.",
-     "explain": "Unser Lernbeispiel ist: Bei einem Konflikt Hilfe einer erwachsenen Person holen."
+     "hint": "Eine ruhige Lösung schützt alle.",
+     "explain": "Ruhige Distanz und Hilfe sind sicherer als Gewalt."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Streit ohne Gewalt lösen“ im Alltag üben kannst?",
+     "prompt": "Was ist nach al-Buḫārī 6114 echte Stärke?",
      "options": [
-      "Ich könnte bei einem Konflikt Hilfe einer erwachsenen Person holen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Den anderen besiegen.",
+      "Sich im Zorn beherrschen.",
+      "Immer den letzten Satz sagen."
      ],
-     "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte bei einem Konflikt Hilfe einer erwachsenen Person holen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Streit ohne Gewalt lösen“ im Beispiel üben kannst."
+     "correct": 1,
+     "hint": "Stärke ist nicht nur Körperkraft.",
+     "explain": "Selbstbeherrschung bei Wut wird gelobt."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 3:134?",
+     "prompt": "Was tust du bei körperlicher Bedrohung?",
      "options": [
-      "Diejenigen, die ihren Zorn zurückhalten und den Menschen vergeben.",
-      "Unser Übungsbeispiel ist: Bei einem Konflikt Hilfe einer erwachsenen Person holen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ erklärte, dass wahre Stärke nicht darin besteht, andere zu besiegen, sondern sich bei Wut zu beherrschen."
+      "Schweigen und allein bleiben.",
+      "Gefahr ignorieren.",
+      "Sicherheit suchen und einem vertrauenswürdigen Erwachsenen berichten."
      ],
-     "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "correct": 2,
+     "hint": "Niemand soll Gewaltdrohungen allein bewältigen.",
+     "explain": "Hilfe holen ist richtig und kein Zeichen von Schwäche."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Streit ohne Gewalt lösen“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Aussage gibt al-Buḫārī 6114 richtig wieder?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Wer andere bezwingt, ist immer der Stärkste.",
+      "Stärke zeigt sich in Selbstbeherrschung bei Wut.",
+      "Jede Wut ist ein Verbrechen."
      ],
-     "correct": 0,
-     "hint": "Vergleiche 3:134 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "correct": 1,
+     "hint": "Der Ḥadīṯ nennt die eigene Beherrschung.",
+     "explain": "Die Stärke liegt in Kontrolle des eigenen Zorns."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 3:134?",
+     "prompt": "Was lässt sich aus 3:134 ableiten?",
      "options": [
-      "Diejenigen, die ihren Zorn zurückhalten und den Menschen vergeben.",
-      "Unser Übungsbeispiel ist: Bei einem Konflikt Hilfe einer erwachsenen Person holen."
+      "Andere im Streit zu bedrohen.",
+      "Eigene Gefühle zu leugnen.",
+      "Zorn zurückhalten und nach Möglichkeit vergeben."
      ],
-     "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Diejenigen, die ihren Zorn zurückhalten und den Menschen vergeben. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass wahre Stärke nicht darin besteht, andere zu besiegen, sondern sich bei Wut zu beherrschen.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 3:134 genau? Welche Aussage stammt aus der Sunnah?"
+     "correct": 2,
+     "hint": "Beachte den belegten Umgang mit Zorn.",
+     "explain": "Der Vers lobt Beherrschung und Verzeihen."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Streit ohne Gewalt lösen“?",
+     "prompt": "Welche Grenze ist für Kinder wichtig?",
      "options": [
-      "Ich erkläre die Situation: bei einem Konflikt Hilfe einer erwachsenen Person holen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Verzeihen bedeutet nicht, Gewalt schweigend auszuhalten.",
+      "Man muss Bedrohungen allein lösen.",
+      "Es ist verboten, Erwachsenen davon zu berichten."
      ],
      "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: bei einem Konflikt Hilfe einer erwachsenen Person holen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Streit ohne Gewalt lösen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "hint": "Sicherheit geht vor Schweigen.",
+     "explain": "Bei Gewalt soll Hilfe gesucht werden."
     }
    ]
   },
@@ -3736,7 +3732,7 @@ const additions={
   "topic": "Allahs Barmherzigkeit kennenlernen",
   "title": "Tawḥīd · Allahs Barmherzigkeit kennenlernen",
   "lead": "Heute lernen wir: Allahs Barmherzigkeit kennenlernen.",
-  "goal": "Ich kann nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann Allahs Barmherzigkeit anhand von Qurʾān 39:53 und einem konkreten Ṣaḥīḥ-Bericht verstehen, ohne Angstbilder für Kinder zu verwenden.",
   "quran": {
    "surah": 39,
    "ayah": 53,
@@ -3746,15 +3742,15 @@ const additions={
    "label": "Qurʾān 39:53 (Auszug)"
   },
   "hadith": {
-   "source": "Ṣaḥīḥ Muslim, Nr. 2564 · überliefert von Abū Hurayrah",
-   "text": "Der Prophet ﷺ erklärte, dass nicht Aussehen und Besitz das Entscheidende sind, sondern Herzen und Taten."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5999 · ʿUmar ibn al-Khaṭṭāb",
+   "text": "Der Prophet ﷺ erklärte, dass Allah gegenüber Seinen Dienern noch barmherziger ist als eine Mutter gegenüber ihrem Kind."
   },
   "sourceAudit": {
    "quranReference": "39:53",
    "quranUrl": "https://quran.com/39/53",
-   "hadithUrl": "https://dorar.net/hadith/sharh/207905",
-   "sourceAnchorLessonId": "akhlaq-nafs-gutes-herz",
-   "sourceScope": "Thematische Primärstelle zu einem Teilaspekt; genaue Deutung gegenprüfen.",
+   "hadithUrl": "https://sunnah.com/bukhari:5999",
+   "sourceAnchorLessonId": null,
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg zu Allahs Barmherzigkeit; kindgerechte Paraphrase ohne belastende Einzelheiten des Berichts, Fachreview offen.",
    "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -3762,141 +3758,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen.",
-  "sample": "Bei „Allahs Barmherzigkeit kennenlernen“ übe ich: nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen.",
+  "hint": "Allah ist barmherzig; bei Fehlern dürfen wir bereuen und um Vergebung bitten.",
+  "sample": "Allahs Barmherzigkeit gibt Hoffnung; wer einen Fehler macht, soll aufrichtig zu Allah zurückkehren.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Allahs Barmherzigkeit kennenlernen.",
+    "intro": "Allah ist barmherzig.",
     "lines": [
-     "Wir lernen heute: Allahs Barmherzigkeit kennenlernen.",
-     "Wir üben nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Wenn wir einen Fehler machen, dürfen wir es zugeben.",
+     "Wir dürfen Allah um Vergebung bitten.",
+     "Allahs Barmherzigkeit ist groß.",
+     "Wir versuchen, Gutes zu tun und Fehler zu verbessern."
     ],
-    "evidence": "Qurʾān 39:53 lehrt: Verliert nicht die Hoffnung auf Allahs Barmherzigkeit. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 39:53 ruft dazu auf, nicht an Allahs Barmherzigkeit zu verzweifeln."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen.",
+    "intro": "Allahs Barmherzigkeit soll Hoffnung und Verantwortung verbinden.",
     "lines": [
-     "Heute untersuchen wir das Thema „Allahs Barmherzigkeit kennenlernen“.",
-     "Der Qurʾān spricht in 39:53 darüber: Verliert nicht die Hoffnung auf Allahs Barmherzigkeit.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ Muslim, Nr. 2564 · überliefert von Abū Hurayrah nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen. Wir überlegen gemeinsam, warum es passt."
+     "Qurʾān 39:53 sagt sinngemäß, dass wir nicht an Allahs Barmherzigkeit verzweifeln sollen.",
+     "Al-Buḫārī 5999 beschreibt Allahs Barmherzigkeit im Vergleich zur mütterlichen Fürsorge.",
+     "Aufrichtig bereuen heißt, einen Fehler zu erkennen und zu versuchen, ihn nicht zu wiederholen.",
+     "Wer jemand anderem geschadet hat, soll auch versuchen, den Schaden wiedergutzumachen."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Qurʾān 39:53 bietet Hoffnung. Der Ḥadīṯ nennt ein bildliches Beispiel für die Größe von Allahs Barmherzigkeit."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Allahs Barmherzigkeit kennenlernen“.",
+    "intro": "Allahs Barmherzigkeit verstehen, ohne Sünden zu verharmlosen.",
     "lines": [
-     "Ausgangssituation: Nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen.",
-     "Qurʾān 39:53: Verliert nicht die Hoffnung auf Allahs Barmherzigkeit.",
-     "Sunnah (Ṣaḥīḥ Muslim, Nr. 2564 · überliefert von Abū Hurayrah): Der Prophet ﷺ erklärte, dass nicht Aussehen und Besitz das Entscheidende sind, sondern Herzen und Taten. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 39:53 richtet an Allahs Diener den Aufruf, die Hoffnung auf Seine Barmherzigkeit nicht aufzugeben.",
+     "Al-Buḫārī 5999 überliefert einen Vergleich: Allah ist barmherziger zu Seinen Dienern als eine Mutter zu ihrem Kind.",
+     "Hoffnung bedeutet nicht, absichtlich weiter zu schaden; Reue erfordert Ernsthaftigkeit.",
+     "Wir unterscheiden den Qurʾān-Vers, die sinngemäße Ḥadīṯ-Wiedergabe und unser Beispiel des Entschuldigens."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Vers und Ṣaḥīḥ-Bericht beschreiben Barmherzigkeit; das konkrete Klassenzimmerbeispiel ist eine Unterrichtsanwendung."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Allahs Barmherzigkeit kennenlernen“ eine gute Handlung?",
+     "prompt": "Was darfst du nach einem Fehler tun?",
      "options": [
-      "Ich kann nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Allah um Vergebung bitten.",
+      "Nie mehr um Hilfe bitten."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen.",
-     "explain": "Unser Lernbeispiel ist: Nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen."
+     "hint": "Wir dürfen zu Allah zurückkehren.",
+     "explain": "Aufrichtige Reue und Bitte um Vergebung sind richtig."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Allahs Barmherzigkeit kennenlernen“ tun?",
+     "prompt": "Wie wird Allahs Barmherzigkeit beschrieben?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Als sehr groß.",
+      "Als überhaupt nicht vorhanden."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Qurʾān 39:53 gibt Hoffnung.",
+     "explain": "Allahs Barmherzigkeit ist groß."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Allahs Barmherzigkeit kennenlernen“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was lehrt Qurʾān 39:53?",
      "options": [
-      "Ich kann nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Die Hoffnung auf Allahs Barmherzigkeit nicht aufgeben.",
+      "Nach Fehlern niemals um Vergebung bitten.",
+      "Jeden Fehler vor allen verstecken."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen.",
-     "explain": "Unser Lernbeispiel ist: Nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen."
+     "hint": "Der Vers spricht Hoffnung aus.",
+     "explain": "Wir sollen an Allahs Barmherzigkeit nicht verzweifeln."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung zeigt, wie du „Allahs Barmherzigkeit kennenlernen“ im Alltag üben kannst?",
+     "prompt": "Welches Beispiel benutzt al-Buḫārī 5999?",
      "options": [
-      "Ich könnte nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Die Fürsorge einer Mutter für ihr Kind.",
+      "Ein großes Gebäude.",
+      "Die Größe eines Berges."
      ],
      "correct": 0,
-     "hint": "Wähle ein passendes Beispiel mit verständlicher Begründung.",
-     "explain": "Ich könnte nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Allahs Barmherzigkeit kennenlernen“ im Beispiel üben kannst."
+     "hint": "Der Ḥadīṯ nennt menschliche Barmherzigkeit als Vergleich.",
+     "explain": "Allah ist noch barmherziger gegenüber Seinen Dienern als eine Mutter gegenüber ihrem Kind."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 39:53?",
+     "prompt": "Was passt zu aufrichtiger Reue?",
      "options": [
-      "Verliert nicht die Hoffnung auf Allahs Barmherzigkeit.",
-      "Unser Übungsbeispiel ist: Nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ erklärte, dass nicht Aussehen und Besitz das Entscheidende sind, sondern Herzen und Taten."
+      "Den Fehler wiederholen und andere beschuldigen.",
+      "Fehler eingestehen und wiedergutmachen, soweit möglich.",
+      "Nie mit jemandem sprechen."
      ],
-     "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "correct": 1,
+     "hint": "Reue soll zu besserem Verhalten führen.",
+     "explain": "Aufrichtige Reue schließt den Versuch ein, Schaden zu verbessern."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Allahs Barmherzigkeit kennenlernen“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Aussage entspricht Qurʾān 39:53?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Bei Fehlern ist jede Hoffnung ausgeschlossen.",
+      "Die Hoffnung auf Allahs Barmherzigkeit nicht aufgeben.",
+      "Man muss jede schlechte Tat öffentlich erzählen."
      ],
-     "correct": 0,
-     "hint": "Vergleiche 39:53 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "correct": 1,
+     "hint": "Der Vers spricht über Vergebung und Hoffnung.",
+     "explain": "Qurʾān 39:53 ruft zur Hoffnung auf Allahs Barmherzigkeit auf."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 39:53?",
+     "prompt": "Welcher Beleg enthält den Mutter-Kind-Vergleich?",
      "options": [
-      "Verliert nicht die Hoffnung auf Allahs Barmherzigkeit.",
-      "Unser Übungsbeispiel ist: Nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen."
+      "Al-Buḫārī 5999.",
+      "Die von Kindern erdachte Geschichte.",
+      "Der genaue Wortlaut von 39:53."
      ],
      "correct": 0,
-     "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
-     "explain": "Der Vers bedeutet sinngemäß: Verliert nicht die Hoffnung auf Allahs Barmherzigkeit. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass nicht Aussehen und Besitz das Entscheidende sind, sondern Herzen und Taten.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 39:53 genau? Welche Aussage stammt aus der Sunnah?"
+     "hint": "Es handelt sich um einen Ḥadīṯ.",
+     "explain": "Der Vergleich wird in al-Buḫārī 5999 überliefert."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt für ein jüngeres Kind zum Thema „Allahs Barmherzigkeit kennenlernen“?",
+     "prompt": "Welche Haltung verbindet Hoffnung und Verantwortung?",
      "options": [
-      "Ich erkläre die Situation: nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und stelle keine Rückfrage."
+      "Ich tue absichtlich weiter Unrecht, weil Barmherzigkeit groß ist.",
+      "Ich glaube, ein Fehler kann niemals vergeben werden.",
+      "Ich bereue ehrlich, bitte um Vergebung und bemühe mich um Verbesserung."
      ],
-     "correct": 0,
-     "hint": "Achte auf eine verständliche Erklärung und eine passende Rückfrage.",
-     "explain": "Ich erkläre die Situation: nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Allahs Barmherzigkeit kennenlernen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "correct": 2,
+     "hint": "Barmherzigkeit lädt zur aufrichtigen Umkehr ein.",
+     "explain": "Hoffnung und verantwortliches Verhalten gehören zusammen."
     }
    ]
   },
