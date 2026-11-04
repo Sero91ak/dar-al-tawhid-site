@@ -27,7 +27,7 @@ for(const sample of probes.samples){
  assert.equal(sample.humanListeningApproved,false);
  assert.equal(sample.contentImportedToGitHub,false);
  assert.equal(sample.status,"REQUESTED_REVIEW_ONLY");
- assert(!/[\\u0600-\\u06ff]/.test(sample.text),"Mixed Arabic script not allowed");
+ assert(!/[\u0600-\u06ff]/.test(sample.text),"Mixed Arabic script not allowed");
  assert(!texts.has(sample.text),"Duplicate paid request");texts.add(sample.text);
  assert(sample.generationFlowId&&sample.generationNodeId&&sample.sessionId);
  assert(sample.estimatedCredits>0);plannedCredit+=sample.estimatedCredits;
