@@ -42,7 +42,29 @@ function loadRecords() {
       records.push(readJson(file));
     }
   }
-  return records;
+  return records.sort(function(a,b) {
+    return Number(String(a.id||"").replace(/^HAD-/, "")) - Number(String(b.id||"").replace(/^HAD-/, ""));
+  });
+}
+
+// Test-App samples representative entries only; production catalog/TV remains complete.
+function pickPreviewRecords(allRecords) {
+  const raw = Number(process.env.DAR_TEST_HADITH_PREVIEW_LIMIT || 120);
+  const limit = Number.isSafeInteger(raw) && raw >= 24 && raw <= 500 ? raw : 120;
+  if (allRecords.length <= limit) return allRecords;
+  const selected = new Map();
+  // Keep early core Hadith/Āṯār examples and current content under test.
+  const early = Math.floor(limit / 6);
+  const hadith = allRecords.filter(r => r.recordType !== "athar");
+  const athar = allRecords.filter(r => r.recordType === "athar");
+  for (const rec of hadith.slice(0, early)) selected.set(rec.id, rec);
+  for (const rec of athar.slice(0, early)) selected.set(rec.id, rec);
+  for (const rec of allRecords.slice().reverse()) {
+    if (selected.size >= limit) break;
+    selected.set(rec.id, rec);
+  }
+  return [...selected.values()].sort((a,b) =>
+    Number(a.id.slice(4)) - Number(b.id.slice(4)));
 }
 
 // HAD-#### is an internal record key, never an editorial source number.
@@ -57,7 +79,8 @@ function stripMd(text) {
 
 function main() {
   fs.mkdirSync(collectionsDir, { recursive: true });
-  const records = loadRecords();
+  const allRecords = loadRecords();
+  const records = pickPreviewRecords(allRecords);
   const byBook = new Map();
   for (const rec of records) {
     const title = rec.sourceBook || rec.source || "Ḥadīṯ-Sammlung";
@@ -179,7 +202,16 @@ function main() {
   books.sort((a, b) => String(a.title).localeCompare(String(b.title), "de"));
   fs.writeFileSync(path.join(outDir, "books.json"), JSON.stringify(books, null, 2));
   fs.writeFileSync(path.join(outDir, "search-index.json"), JSON.stringify(search, null, 2));
-  console.log(`test hadith library: ${books.length} books, ${search.length} hadiths`);
+  fs.writeFileSync(path.join(outDir, "preview-scope.json"), JSON.stringify({
+    mode: "test-subset",
+    sourceOfTruth: "/apple-tv/hadith/catalog.json",
+    canonicalCount: allRecords.length,
+    previewCount: records.length,
+    completeGlobalCatalog: false,
+    ordering: "canonical-id-ascending",
+    note: "Test-App samples content only. All public production apps consume the complete canonical catalog."
+  }, null, 2) + "\n");
+  console.log(`test hadith library: ${books.length} books, ${search.length} sampled of ${allRecords.length} canonical entries`);
 }
 
 main();

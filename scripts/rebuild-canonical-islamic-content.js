@@ -100,6 +100,15 @@ function rebuildHadith() {
   allRecords.sort(function (a, b) {
     return idNum(a.id) - idNum(b.id);
   });
+  // No surface may silently skip or reorder a canonical record.
+  const ids = new Set();
+  for (let i=0; i<allRecords.length; i++) {
+    const entry = allRecords[i], n=idNum(entry.id);
+    if (!n || ids.has(entry.id) || (i>0 && n<=idNum(allRecords[i-1].id))) {
+      throw new Error("Non-unique/non-monotonic canonical Hadith sequence at " + String(entry.id));
+    }
+    ids.add(entry.id);
+  }
   const latest = allRecords.length ? allRecords[allRecords.length - 1].id : "";
   const latestN = idNum(latest);
   const currentSeries = dirs.length ? dirs[dirs.length - 1] : "";
@@ -113,6 +122,17 @@ function rebuildHadith() {
     liveURL: "https://dar-al-tawhid.de/apple-tv/hadith/catalog.json",
     authenticOnly: false,
     supportedRecordTypes: ["hadith", "athar"],
+    sequencePolicy: {
+      canonicalOrder: "internal-id-ascending",
+      canonicalCount: allRecords.length,
+      sharedProductionCount: true,
+      sharedProductionOrder: true,
+      productionSurfaces: ["web", "ios", "android", "tvos"],
+      testAppSubsetAllowed: true,
+      hideInternalIdsFromPublicDisplay: true,
+      displaySourceNumbersOnlyWhenBibliographic: true,
+      screensaverRotationUnchanged: true
+    },
     totalCount: allRecords.length,
     publishedCount: allRecords.length,
     hadithCount: typeCounts.hadith,
@@ -245,6 +265,7 @@ function rebuildHadith() {
     const ss = JSON.parse(fs.readFileSync(path.join(ssDir, "catalog.json"), "utf8"));
     ss.contentVersion = allRecords.length;
     ss.entriesCount = allRecords.length;
+    ss.sequencePolicy = "same-canonical-catalog; screensaver-shuffle-rotation-only";
     ss.lastUpdated = stamp.rebuiltAt;
     ss.contentRevision = contentRevision;
     writeJson(path.join(ssDir, "catalog.json"), ss, true);

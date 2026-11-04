@@ -98,6 +98,47 @@ function validateHadith() {
   const ranges = (catalog.series || []).map(s => (String(s.id || "").match(/^(\d+)-(\d+)$/) || []).slice(1).map(Number)).filter(p => p.length === 2).sort((a,b) => a[0]-b[0]);
   for (let i=1; i<ranges.length; i++) if (ranges[i][0] <= ranges[i-1][1]) fail("Overlapping HAD series ranges: " + ranges[i-1].join("-") + " and " + ranges[i].join("-"));
   if (seriesSum !== count) fail("series index files " + seriesSum + " !== disk " + count);
+  // The canonical feed is identical for every production surface. Test is only a sample.
+  const canonicalOrder = ids.slice().sort((a,b)=>Number(a.slice(4))-Number(b.slice(4)));
+  const shell = readJson("apple-tv/hadith/library-shell.json");
+  const publicCat = readJson("data/hadith-library/catalog.json");
+  const testCat = readJson("test/data/hadith-library/catalog.json");
+  const ssCat = readJson("apple-tv/screensaver/catalog.json");
+  const ssIdx = readJson("apple-tv/screensaver/entries-index.json");
+  const testScopePath = path.join(ROOT, "test/data/hadith/preview-scope.json");
+  if (shell) {
+    const records = Array.isArray(shell.records) ? shell.records : [];
+    if (records.length !== count) fail("TV/library-shell contains " + records.length + " instead of " + count);
+    let hadith=0, athar=0;
+    records.forEach((r,i)=>{
+      if (r.id!==canonicalOrder[i]) fail("TV/library-shell order differs at position " + i);
+      if (r.recordType==="athar") athar++; else if (r.recordType==="hadith") hadith++; else fail("Unknown record type " + r.id);
+    });
+    if (hadith!==catalog.hadithCount || athar!==catalog.atharCount) fail("TV library-shell record-type counts differ");
+  }
+  for (const [name,obj] of [["public web/ios/android",publicCat],["test metadata",testCat]]) {
+    if (!obj) continue;
+    if (obj.latestId!==latest || obj.publishedCount!==count ||
+      obj.hadithCount!==catalog.hadithCount || obj.atharCount!==catalog.atharCount) {
+      fail(name+" canonical total/type/latest metadata drift");
+    }
+  }
+  if (ssCat && (ssCat.entriesCount!==count || ssCat.contentVersion!==count)) fail("tvOS screensaver count drift");
+  if (ssIdx && (ssIdx.totalVerifiedEntries!==count ||
+    (ssIdx.files || []).reduce((n,f)=>n+Number(f.count||0),0)!==count)) fail("tvOS screensaver index count drift");
+  if (catalog.sequencePolicy &&
+    (catalog.sequencePolicy.canonicalCount!==count ||
+      catalog.sequencePolicy.canonicalOrder!=="internal-id-ascending" ||
+      catalog.sequencePolicy.testAppSubsetAllowed!==true ||
+      catalog.sequencePolicy.hideInternalIdsFromPublicDisplay!==true)) {
+    fail("global production ordering/count policy mismatch");
+  }
+  if (fs.existsSync(testScopePath)) {
+    const scope=readJson("test/data/hadith/preview-scope.json");
+    if (scope && (scope.mode!=="test-subset" ||
+      !(scope.previewCount>0 && scope.previewCount<=count))) fail("Test subset scope or global count drift");
+  }
+  ok("global hadith parity: same canonical order and counts for production, test subset permitted");
   ok("hadith files=" + count + " latest=" + latest);
 }
 
