@@ -125,6 +125,19 @@
     }
     sourceNavPending=false;
   }
+  /* DAR_Q50_READER_NAV_V1 · srcdoc Q50 links open inside the same app reader.
+     Only an active same-origin frame may request these two exact internal routes. */
+  window.addEventListener("message",function(ev){
+    if(!sourcePanel||sourcePanel.hidden||!sourceFrame||ev.source!==sourceFrame.contentWindow)return;
+    if(ev.origin!==location.origin||!ev.data||ev.data.type!=="DAR_Q50_READER_NAV_V1")return;
+    var u;try{u=new URL(String(ev.data.path||""),location.origin)}catch(_){return}
+    if(u.origin!==location.origin)return;
+    if(u.pathname!=="/q/50/"&&u.pathname!=="/lernen/wissen-ist-religion/")return;
+    if(!["de","ar","en","tr","ku","ckb","bs","fr","es"].includes(u.searchParams.get("lang")))return;
+    if(Array.from(u.searchParams.keys()).some(function(k){return k!=="lang"}))return;
+    var a=document.createElement("a");a.href=u.pathname+u.search;a.hidden=true;
+    document.body.appendChild(a);try{a.click()}finally{a.remove()}
+  },false);
   document.addEventListener("click",function(ev){
     if(ev.defaultPrevented||ev.button!==0||ev.metaKey||ev.ctrlKey||ev.altKey||ev.shiftKey)return;
     var a=ev.target&&ev.target.closest?ev.target.closest("a[href]"):null;
