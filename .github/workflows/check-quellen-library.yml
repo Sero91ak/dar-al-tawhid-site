@@ -38,6 +38,12 @@ jobs:
           node scripts/check-quellen-client.cjs
           node q/_registry/check-qsource-standard.mjs
           node scripts/check-q50-nine-language.cjs
+
+      - name: Test all nine Q50 languages and the linked learning quiz in real Chrome
+        shell: bash
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 scripts/check-q50-nine-language-browser.py
           node - <<'NODE'
           const fs=require('fs'),assert=require('node:assert/strict');
           const html=fs.readFileSync('quellen/index.html','utf8');
