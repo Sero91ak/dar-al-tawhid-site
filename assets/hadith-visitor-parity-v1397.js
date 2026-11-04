@@ -208,11 +208,12 @@
     return `<article class="dua-theme-card hadith-hierarchy-card hadith-hierarchy-card--${esc(cls)}" data-nav="hadith" data-value="${esc(value)}"><span class="dua-theme-card__idx" aria-hidden="true">${String(idx).padStart(2,"0")}</span><div class="dua-theme-card__body"><span class="hadith-hierarchy-card__kind">${esc(String(kind).toUpperCase())}</span><h3>${esc(cleanTitle(kind,title))}</h3><p class="dua-theme-card__count">${esc(meta)}</p></div><span class="dua-theme-card__chev" aria-hidden="true">›</span></article>`;
   }
   function leafRow(h){
+    const kind=h.recordType==="athar"?"ĀṮAR":"ḤADĪṮ";
     const preview=String(h.german||"").replace(/\s+/g," ").trim();
     const num=h.hadithNumber?String(h.hadithNumber):"";
     const narrator=String(h.narrator||h.narratorLine||"").trim();
     const title=preview?preview.slice(0,170):cleanTitle("Bāb",h.babTitle||h.chapterTitle||"Ḥadīṯ");
-    return `<article class="dua-row hadith-leaf-row" data-nav="hadith" data-value="${esc(hadithPath(h))}"><div class="hadith-leaf-row__kicker">ḤADĪṮ${num?` · NR. ${esc(num)}`:""}</div><div class="dua-row__body"><h3>${esc(title)}</h3>${narrator?`<p class="dua-row__sub">${esc(narrator)}</p>`:""}<div class="dua-row__meta">${h.grade?`<span>${esc(h.grade)}</span>`:""}${h.source?`<span>${esc(h.source)}</span>`:""}</div></div><span class="hadith-leaf-row__chev" aria-hidden="true">›</span></article>`;
+    return `<article class="dua-row hadith-leaf-row" data-nav="hadith" data-value="${esc(hadithPath(h))}"><div class="hadith-leaf-row__kicker">${kind}${num?` · NR. ${esc(num)}`:""}</div><div class="dua-row__body"><h3>${esc(title)}</h3>${narrator?`<p class="dua-row__sub">${esc(narrator)}</p>`:""}<div class="dua-row__meta">${h.grade?`<span>${esc(h.grade)}</span>`:""}${h.source?`<span>${esc(h.source)}</span>`:""}</div></div><span class="hadith-leaf-row__chev" aria-hidden="true">›</span></article>`;
   }
   function allExpanded(){try{return sessionStorage.getItem("darHadithShowAllWorksV1")==="1"}catch(e){return false}}
   function workToggle(expanded,total){
@@ -225,6 +226,7 @@
     return hierarchyCard("Ḥadīṯ-Werk",book&&book.title||"Ḥadīṯ-Werk",meta,book.id,idx||1);
   }
   function newDetail(h){
+    const kind=h&&h.recordType==="athar"?"Āṯar":"Ḥadīṯ";
     if(!h)return`<div class="empty">Dieser Ḥadīṯ konnte nicht geladen werden.</div>`;
     const crumbBook={id:h.bookId||hadithSlug(h.bookTitle),title:h.bookTitle||"Ḥadīṯ-Werk"};
     const crumbChapter={id:h.chapterId||hadithSlug(h.chapterTitle),title:h.chapterTitle||"Kitāb"};
@@ -233,11 +235,11 @@
     const f=readHadithFilters();
     const showArabic=f.language==="both"||f.language==="arabic";
     const showGerman=f.language!=="arabic";
-    const narrator=h.narrator?`<div class="post-reader-speaker"><span class="post-reader-speaker__label">Überliefert von</span><span class="post-reader-speaker__rule" aria-hidden="true"></span><span class="post-reader-speaker__name">${esc(h.narrator)}</span></div>`:"";
+    const narrator=(h.narrator||h.narratorLine)?`<div class="post-reader-speaker"><span class="post-reader-speaker__label">Überliefert von</span><span class="post-reader-speaker__rule" aria-hidden="true"></span><span class="post-reader-speaker__name">${esc(h.narrator||h.narratorLine)}</span></div>`:"";
     const speaker=h.speakerLabel?`<div class="post-reader-speaker"><span class="post-reader-speaker__label">Sprecher</span><span class="post-reader-speaker__rule" aria-hidden="true"></span><span class="post-reader-speaker__name">${esc(h.speakerLabel)}</span></div>`:"";
     const german=showGerman&&(h.germanHtml||h.german)?`<section class="statement post-aussage"><div class="post-aussage-kicker">Aussage</div><div class="post-aussage-text">${h.germanHtml||esc(h.german)}</div></section>`:"";
     const arabic=showArabic&&h.arabic?`<div class="hadith-arabic" dir="rtl" lang="ar">${esc(h.arabic)}</div>`:"";
-    const sharh=h.sharhText?`<section class="hadith-sharh" aria-label="Šarḥ – Erklärung zum Ḥadīṯ">
+    const sharh=h.sharhStatus==="verified" && h.sharhText && h.sharhScholar && h.sharhBook && h.sharhReference ?`<section class="hadith-sharh" aria-label="Šarḥ – Erklärung zum Ḥadīṯ">
       <header class="hadith-sharh-head">
         <p class="hadith-sharh-eyebrow">Zum Verständnis des Ḥadīṯ</p>
         <h3 class="hadith-sharh-heading">Šarḥ <span>– Erklärung</span></h3>
@@ -247,11 +249,11 @@
       ${h.sharhReference?`<p class="hadith-sharh-reference">${esc(h.sharhReference)}</p>`:""}
     </section>`:"";
     const cite=h.source?`<p class="hadith-source-line">${esc(h.source)}</p>`:"";
-    const share=sharePanel("Ḥadīṯ weitergeben",h.chapterTitle||h.bookTitle||"Ḥadīṯ",hadithShareText(h),location.href,"Ḥadīṯ kopieren","","");
+    const share=sharePanel(kind+" weitergeben",h.chapterTitle||h.bookTitle||kind,hadithShareText(h),location.href,kind+" kopieren","","");
     const actions=`${share}<div class="hadith-actions"><button type="button" class="share-btn link ${fav?"is-active":""}" data-hadith-favorite="${esc(h.id)}"><span>${fav?"Gemerkt":"Merken"}</span></button></div>`;
     const detailTitle=cleanTitle("Bāb",(h.babTitle&&h.babTitle!==h.chapterTitle)?h.babTitle:(h.chapterTitle||h.bookTitle||"Ḥadīṯ"));
-    const detailKicker=`${esc(h.bookTitle||"Ḥadīṯ-Werk")}${h.hadithNumber?` · ḤADĪṮ NR. ${esc(h.hadithNumber)}`:""}`;
-    const detailPath=renderHadithBreadcrumb(crumbBook,crumbChapter,crumbSection,h.hadithNumber?("Ḥadīṯ "+h.hadithNumber):"Ḥadīṯ");
+    const detailKicker=`${esc(h.bookTitle||"Ḥadīṯ-Werk")}${h.hadithNumber?` · ${kind.toUpperCase()} NR. ${esc(h.hadithNumber)}`:""}`;
+    const detailPath=renderHadithBreadcrumb(crumbBook,crumbChapter,crumbSection,h.hadithNumber?(kind+" "+h.hadithNumber):kind);
     return`<article class="article post-reader hadith-detail hadith-detail--v1303"><header class="post-reader-title"><div class="kicker">${detailKicker}</div><h2>${esc(detailTitle)}</h2></header>${detailPath}<section class="post-reader-main">${narrator}${speaker}${german}${arabic}${h.grade?`<p class="hadith-card-grade">${esc(h.grade)}</p>`:""}${h.babTitle?`<p class="hadith-meta-line">${esc(h.babTitle)}</p>`:""}${cite}${sharh}${actions}${renderHadithSiblingNav(h)}</section></article>`;
   }
   function newBookPanel(book,route){
