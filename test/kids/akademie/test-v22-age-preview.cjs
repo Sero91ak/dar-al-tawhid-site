@@ -22,7 +22,7 @@ for(const src of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2.
 const topics=sandbox.window.DARKidsAcademyCurriculum;
 assert.equal(Object.keys(topics).length+1,38);
 for(const id of sandbox.window.DARKidsAcademyCurriculumV22.ids){
- const l=topics[id];assert.ok(/^https:\/\/(?:dorar\.net\/hadith\/sharh\/|sunnah\.com\/(?:bukhari|muslim):)/.test(l?.sourceAudit?.hadithUrl||""),"Hadith must link to direct authentic source");
+ const l=topics[id];assert.ok(l?.sourceAudit?.hadithUrl?.startsWith("https://dorar.net/hadith/sharh/"));
  for(const age of ["4-5","6-8","9-10"]){
   assert.equal(l.ageText[age].lines.length,4);
   assert.ok(l.questions[age].length>=2);
