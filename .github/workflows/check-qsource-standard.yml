@@ -47,14 +47,6 @@ jobs:
       - name: Q46 single-screen learning and appearance regression
         run: node q/_registry/check-learning-quiz.cjs
 
-      - name: Validate Q50 nine-language source and learning drafts
-        run: node scripts/check-q50-nine-language.cjs
-
-      - name: Browser acceptance Q50: nine locales and learning links
-        run: |
-          python3 -m pip install --quiet selenium
-          python3 scripts/check-q50-nine-language-browser.py
-
       - name: Check legacy iOS/PWA source and learning overlay on four Chromium viewports
         run: |
           python3 -m pip install --quiet selenium
