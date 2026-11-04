@@ -2073,7 +2073,7 @@ const additions={
   "topic": "Suǧūd kennenlernen",
   "title": "Fiqh · Suǧūd kennenlernen",
   "lead": "Heute lernen wir: Suǧūd kennenlernen.",
-  "goal": "Ich kann stirn und Nase sicher auf die Gebetsunterlage bringen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich erkenne die Niederwerfung im Gebet und kann die sieben genannten Körperteile mit ruhiger Anleitung benennen.",
   "quran": {
    "surah": 20,
    "ayah": 14,
@@ -2099,141 +2099,139 @@ const additions={
    "hasNewIndependentHadithVerification": true,
    "verifiedDate": null
   },
-  "hint": "Stirn und Nase sicher auf die Gebetsunterlage bringen.",
-  "sample": "Bei „Suǧūd kennenlernen“ übe ich: stirn und Nase sicher auf die Gebetsunterlage bringen.",
+  "hint": "Suǧūd ist die Niederwerfung im Gebet.",
+  "sample": "Beim Suǧūd kommen Stirn mit Nase, beide Hände, Knie und Fußspitzen auf den Boden.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Suǧūd kennenlernen.",
+    "intro": "Suǧūd heißt: Wir werfen uns im Gebet nieder.",
     "lines": [
-     "Wir lernen heute: Suǧūd kennenlernen.",
-     "Wir üben stirn und Nase sicher auf die Gebetsunterlage bringen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Im Gebet gehört die Niederwerfung dazu.",
+     "Die Stirn mit der Nase berührt die Unterlage.",
+     "Auch Hände, Knie und Fußspitzen gehören dazu.",
+     "Wir üben langsam und vorsichtig mit einer erwachsenen Lehrperson."
     ],
-    "evidence": "Qurʾān 20:14 lehrt: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Al-Buḫārī 812 nennt sieben Körperteile für die Niederwerfung; Qurʾān 20:14 gebietet das Gebet."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Stirn und Nase sicher auf die Gebetsunterlage bringen.",
+    "intro": "Beim Suǧūd lernen wir nicht nur eine Bewegung, sondern folgen einem überlieferten Gebetsablauf.",
     "lines": [
-     "Heute untersuchen wir das Thema „Suǧūd kennenlernen“.",
-     "Der Qurʾān spricht in 20:14 darüber: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Die Sunnah berichtet in Ṣaḥīḥ al-Buḫārī, Nr. 812: Der Prophet ﷺ beschrieb die Niederwerfung auf sieben Körperteilen.",
-     "Unser eigenes Beispiel: Stirn und Nase sicher auf die Gebetsunterlage bringen. Wir überlegen gemeinsam, warum es passt."
+     "Suǧūd ist die Niederwerfung innerhalb des Gebets.",
+     "Al-Buḫārī 812 nennt Stirn mit Nase, beide Hände, beide Knie und Fußspitzen.",
+     "Qurʾān 20:14 fordert zum Gebet auf; die genaue Körperhaltung erklärt hier die Sunnah.",
+     "Wer sich körperlich nicht wie andere bewegen kann, fragt eine geeignete Lehrperson nach einer passenden Lösung."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Die sieben genannten Körperteile sind Inhalt des Ḥadīṯ, nicht der Wortlaut von Qurʾān 20:14."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Suǧūd kennenlernen“.",
+    "intro": "Suǧūd: Bewegungsanleitung und Quellenebene genau unterscheiden.",
     "lines": [
-     "Ausgangssituation: Stirn und Nase sicher auf die Gebetsunterlage bringen.",
-     "Qurʾān 20:14: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 812): Der Prophet ﷺ beschrieb die Niederwerfung auf sieben Körperteilen. (sinngemäß)",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Al-Buḫārī 812 überliefert von Ibn ʿAbbās eine Beschreibung der Niederwerfung auf sieben Körperteilen.",
+     "Stirn einschließlich Nase zählt dabei zusammen; beide Hände, Knie und Fußspitzen ergänzen die sieben Körperteile.",
+     "Qurʾān 20:14 nennt die Pflicht zum Gebet, aber nicht diese Liste der Körperteile.",
+     "Die Beschreibung ist kein Freibrief, körperliche Einschränkungen zu ignorieren; Einzelregeln gehören in qualifizierten Fiqh-Unterricht."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Qurʾān 20:14 und al-Buḫārī 812 haben unterschiedliche Aussageumfänge; die deutsche Liste ist eine sinngemäße Erklärung."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Suǧūd kennenlernen“ eine gute Handlung?",
+     "prompt": "Wie heißt die Niederwerfung? ",
      "options": [
-      "Ich kann stirn und Nase sicher auf die Gebetsunterlage bringen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Suǧūd.",
+      "Taslīm."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Stirn und Nase sicher auf die Gebetsunterlage bringen.",
-     "explain": "Unser Lernbeispiel ist: Stirn und Nase sicher auf die Gebetsunterlage bringen."
+     "hint": "Denk an die Bewegung, bei der man sich niederwirft.",
+     "explain": "Suǧūd bezeichnet die Niederwerfung."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Suǧūd kennenlernen“ tun?",
+     "prompt": "Was gehört zum Suǧūd?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Nur die Fingerspitzen.",
+      "Stirn mit Nase und weitere genannte Körperteile."
      ],
-     "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "correct": 1,
+     "hint": "Der Prophet ﷺ nannte sieben Körperteile.",
+     "explain": "Stirn mit Nase, Hände, Knie und Fußspitzen werden im Ḥadīṯ genannt."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Suǧūd kennenlernen“. Welche Handlung passt zur Stunde?",
+     "prompt": "Welche beiden gehören im Suǧūd zum Boden-Kontakt?",
      "options": [
-      "Ich kann stirn und Nase sicher auf die Gebetsunterlage bringen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Beide Hände und beide Knie.",
+      "Nur die Schultern.",
+      "Nur die Ellenbogen."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Stirn und Nase sicher auf die Gebetsunterlage bringen.",
-     "explain": "Unser Lernbeispiel ist: Stirn und Nase sicher auf die Gebetsunterlage bringen."
+     "hint": "Achte auf die Körperteile des Ḥadīṯes.",
+     "explain": "Beide Hände und beide Knie sind unter den sieben genannten Körperteilen."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist eine gute Übung zu „Suǧūd kennenlernen“?",
+     "prompt": "Woher stammt die genaue Beschreibung der sieben Körperteile?",
      "options": [
-      "Ich könnte stirn und Nase sicher auf die Gebetsunterlage bringen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich übergehe die Lernaufgabe und höre nicht zu."
+      "Aus der Sunnah bei al-Buḫārī 812.",
+      "Aus einer selbst erfundenen Regel.",
+      "Wörtlich aus Qurʾān 20:14."
      ],
      "correct": 0,
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung.",
-     "explain": "Ich könnte stirn und Nase sicher auf die Gebetsunterlage bringen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Suǧūd kennenlernen“ im Beispiel üben kannst."
+     "hint": "Der Vers gebietet das Gebet, der Bericht nennt die Körperteile.",
+     "explain": "Die genaue Aufzählung steht im überlieferten Ḥadīṯ."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
+     "prompt": "Was machst du, wenn dir die Haltung schwerfällt?",
      "options": [
-      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-      "Unser Übungsbeispiel ist: Stirn und Nase sicher auf die Gebetsunterlage bringen.",
-      "Die Sunnah berichtet: Der Prophet ﷺ beschrieb die Niederwerfung auf sieben Körperteilen."
+      "Sofort aufgeben.",
+      "Um ruhige Anleitung bitten.",
+      "Die anderen Kinder auslachen."
      ],
-     "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "correct": 1,
+     "hint": "Sicheres Lernen darf Rückfragen enthalten.",
+     "explain": "Ein qualifizierter Erwachsener kann sicher beim Erlernen helfen."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Suǧūd kennenlernen“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Zählung entspricht al-Buḫārī 812?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Stirn samt Nase, zwei Hände, zwei Knie, zwei Fußspitzen.",
+      "Stirn und Nase je einzeln plus nur die Hände.",
+      "Nur vier Berührungspunkte."
      ],
      "correct": 0,
-     "hint": "Vergleiche 20:14 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Stirn und Nase werden als ein zusammengehöriger Bereich genannt.",
+     "explain": "Eine Stirn mit Nase plus je zwei Hände, Knie und Fußspitzen ergibt sieben."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
+     "prompt": "Welche Quelle beschreibt die sieben Körperteile genauer?",
      "options": [
-      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-      "Unser Übungsbeispiel ist: Stirn und Nase sicher auf die Gebetsunterlage bringen."
+      "Qurʾān 20:14 allein.",
+      "Al-Buḫārī 812.",
+      "Eine eigene Übung ohne Quelle."
      ],
-     "correct": 0,
-     "hint": "Wähle die passende Aussage zum Qurʾān-Vers. Die Sunnah wird in der Erklärung erläutert.",
-     "explain": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ beschrieb die Niederwerfung auf sieben Körperteilen.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?"
+     "correct": 1,
+     "hint": "Der Vers befiehlt das Gebet, die Überlieferung beschreibt die Niederwerfung.",
+     "explain": "Die genaue Aufzählung steht in al-Buḫārī 812."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Suǧūd kennenlernen“?",
+     "prompt": "Wie gehst du mit abweichenden körperlichen Möglichkeiten um?",
      "options": [
-      "Ich erkläre die Situation: stirn und Nase sicher auf die Gebetsunterlage bringen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und frage nicht nach."
+      "Alle zwingen, dieselbe Haltung zu schaffen.",
+      "Die Gebetspflicht für andere selbst beurteilen.",
+      "Respektvoll einen qualifizierten Lehrer nach Fiqh-Lösungen fragen."
      ],
-     "correct": 0,
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen.",
-     "explain": "Ich erkläre die Situation: stirn und Nase sicher auf die Gebetsunterlage bringen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Suǧūd kennenlernen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "correct": 2,
+     "hint": "Körperliche Möglichkeiten und Sonderfälle benötigen Fachkenntnis.",
+     "explain": "Bei Einschränkungen sind Rücksicht und qualifizierte fiqhrechtliche Klärung richtig."
     }
    ]
   },
@@ -2260,7 +2258,7 @@ const additions={
   "topic": "Fürsorge für Kranke",
   "title": "Aḫlāq · Fürsorge für Kranke",
   "lead": "Heute lernen wir: Fürsorge für Kranke.",
-  "goal": "Ich kann einer kranken Person mit Zustimmung kleine Hilfe anbieten und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann für eine kranke Person rücksichtsvoll sorgen, ohne sie zu bedrängen oder medizinische Aufgaben zu übernehmen.",
   "quran": {
    "surah": 5,
    "ayah": 2,
@@ -2286,141 +2284,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Einer kranken Person mit Zustimmung kleine Hilfe anbieten.",
-  "sample": "Bei „Fürsorge für Kranke“ übe ich: einer kranken Person mit Zustimmung kleine Hilfe anbieten.",
+  "hint": "Erst freundlich fragen, dann nur passende Hilfe anbieten.",
+  "sample": "Ich frage, ob ich Wasser bringen darf, und hole bei Krankheit bei Bedarf einen Erwachsenen.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Fürsorge für Kranke.",
+    "intro": "Wenn jemand krank ist, können wir freundlich helfen.",
     "lines": [
-     "Wir lernen heute: Fürsorge für Kranke.",
-     "Wir üben einer kranken Person mit Zustimmung kleine Hilfe anbieten.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Wir fragen: Kann ich dir etwas bringen?",
+     "Manche Menschen möchten Ruhe und keinen Besuch.",
+     "Ein Glas Wasser bringen wir nur, wenn es passend und erwünscht ist.",
+     "Wenn jemand Hilfe braucht, holen wir einen Erwachsenen."
     ],
-    "evidence": "Qurʾān 5:2 lehrt: Helft einander zu Güte und Gottesfurcht. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 5:2 ermutigt zur Hilfe im Guten; al-Buḫārī 6026 vergleicht Gläubige mit einem stützenden Gebäude."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Einer kranken Person mit Zustimmung kleine Hilfe anbieten.",
+    "intro": "Fürsorge bedeutet helfen und zugleich die Grenzen anderer achten.",
     "lines": [
-     "Heute untersuchen wir das Thema „Fürsorge für Kranke“.",
-     "Der Qurʾān spricht in 5:2 darüber: Helft einander zu Güte und Gottesfurcht.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 6026; Ṣaḥīḥ Muslim, Nr. 2585 · Abū Mūsā al-Ashʿarī nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Einer kranken Person mit Zustimmung kleine Hilfe anbieten. Wir überlegen gemeinsam, warum es passt."
+     "Eine kranke Person braucht vielleicht Ruhe, Wasser oder Unterstützung durch Erwachsene.",
+     "Wir fragen erst, ob unsere Hilfe erwünscht ist.",
+     "Niemand muss sich zu einer Umarmung oder einem Besuch gedrängt fühlen.",
+     "Qurʾān 5:2 nennt gegenseitige Hilfe im Guten; die genaue Situation ist unser Alltagsbeispiel."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Al-Buḫārī 6026 beschreibt gegenseitigen Halt; er schreibt keine konkrete medizinische Behandlung durch Kinder vor."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Fürsorge für Kranke“.",
+    "intro": "Barmherzigkeit mit Verantwortungsgrenzen verbinden.",
     "lines": [
-     "Ausgangssituation: Einer kranken Person mit Zustimmung kleine Hilfe anbieten.",
-     "Qurʾān 5:2: Helft einander zu Güte und Gottesfurcht.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 6026; Ṣaḥīḥ Muslim, Nr. 2585 · Abū Mūsā al-Ashʿarī): Der Prophet ﷺ verglich die gegenseitige Unterstützung der Gläubigen mit einem Gebäude, dessen Teile einander stärken. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 5:2 ermuntert zur Zusammenarbeit in Güte und Gottesfurcht.",
+     "Al-Buḫārī 6026 beschreibt, wie Gläubige einander stärken, ähnlich den Teilen eines Bauwerks.",
+     "Unsere konkrete Anwendung: Wünsche erfragen, Rückzug respektieren und praktische Hilfe vermitteln.",
+     "Medikamente, Diagnosen und dringende Notfälle dürfen Kinder nicht selbstständig übernehmen."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Der Ḥadīṯ liefert einen Vergleich für Unterstützung; Einwilligung und Notfallhilfe sind pädagogische Schutzregeln, kein behaupteter Ḥadīṯ-Wortlaut."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Fürsorge für Kranke“ eine gute Handlung?",
+     "prompt": "Was tust du bei einem kranken Familienmitglied?",
      "options": [
-      "Ich kann einer kranken Person mit Zustimmung kleine Hilfe anbieten.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Laut Musik machen.",
+      "Freundlich nachfragen, ob Hilfe erwünscht ist."
      ],
-     "correct": 0,
-     "hint": "Denk an die Übung: Einer kranken Person mit Zustimmung kleine Hilfe anbieten.",
-     "explain": "Unser Lernbeispiel ist: Einer kranken Person mit Zustimmung kleine Hilfe anbieten."
+     "correct": 1,
+     "hint": "Krank sein kann anstrengend sein.",
+     "explain": "Freundliches Fragen achtet die Bedürfnisse der kranken Person."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Fürsorge für Kranke“ tun?",
+     "prompt": "Was machst du, wenn es jemandem sehr schlecht geht?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Ich hole einen Erwachsenen.",
+      "Ich gebe eigenständig unbekannte Medikamente."
      ],
      "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "hint": "Medikamente sind keine Aufgabe für Kinder.",
+     "explain": "Bei ernsthaften Beschwerden einen Erwachsenen holen."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Fürsorge für Kranke“. Welche Handlung passt zur Stunde?",
+     "prompt": "Eine Person möchte schlafen. Was passt?",
      "options": [
-      "Ich kann einer kranken Person mit Zustimmung kleine Hilfe anbieten.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Laut weitererzählen.",
+      "Ruhe respektieren und später nachfragen.",
+      "Sie dauernd wecken."
      ],
-     "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Einer kranken Person mit Zustimmung kleine Hilfe anbieten.",
-     "explain": "Unser Lernbeispiel ist: Einer kranken Person mit Zustimmung kleine Hilfe anbieten."
+     "correct": 1,
+     "hint": "Hilfe kann auch Rücksicht sein.",
+     "explain": "Ruhe zu ermöglichen ist rücksichtsvoll."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist eine gute Übung zu „Fürsorge für Kranke“?",
+     "prompt": "Wer entscheidet über Medikamente?",
      "options": [
-      "Ich könnte einer kranken Person mit Zustimmung kleine Hilfe anbieten. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich übergehe die Lernaufgabe und höre nicht zu."
+      "Ich ohne Rückfrage.",
+      "Die Mitschüler.",
+      "Eine zuständige erwachsene oder medizinische Person."
      ],
-     "correct": 0,
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung.",
-     "explain": "Ich könnte einer kranken Person mit Zustimmung kleine Hilfe anbieten. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Fürsorge für Kranke“ im Beispiel üben kannst."
+     "correct": 2,
+     "hint": "Kinder sollen keine Behandlung improvisieren.",
+     "explain": "Medizinische Fragen gehören zu zuständigen Erwachsenen und Fachpersonen."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 5:2?",
+     "prompt": "Was lehrt Qurʾān 5:2 im genannten Teil?",
      "options": [
-      "Helft einander zu Güte und Gottesfurcht.",
-      "Unser Übungsbeispiel ist: Einer kranken Person mit Zustimmung kleine Hilfe anbieten.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ verglich die gegenseitige Unterstützung der Gläubigen mit einem Gebäude, dessen Teile einander stärken."
+      "Im Guten zusammenhelfen.",
+      "Alle Kranken anfassen.",
+      "Jede Hilfe auch gegen den Willen geben."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Suche den allgemeinen Grundsatz der guten Hilfe.",
+     "explain": "Der Vers spricht über Unterstützung im Guten."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Fürsorge für Kranke“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Handlung zeigt passende Fürsorge?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Auch bei Ablehnung unbedingt besuchen.",
+      "Erst fragen und gewünschte Hilfe organisieren.",
+      "Unbekannte Arznei empfehlen."
      ],
-     "correct": 0,
-     "hint": "Vergleiche 5:2 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "correct": 1,
+     "hint": "Wünsche und Grenzen gehören zur Fürsorge.",
+     "explain": "Wirkliche Hilfe ist rücksichtsvoll und sicher."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 5:2?",
+     "prompt": "Was berichtet al-Buḫārī 6026?",
      "options": [
-      "Helft einander zu Güte und Gottesfurcht.",
-      "Unser Übungsbeispiel ist: Einer kranken Person mit Zustimmung kleine Hilfe anbieten."
+      "Gläubige stärken einander wie Teile eines Gebäudes.",
+      "Kranke müssen immer von Kindern behandelt werden.",
+      "Nur Hilfe im Krankenhaus zählt."
      ],
      "correct": 0,
-     "hint": "Wähle die passende Aussage zum Qurʾān-Vers. Die Sunnah wird in der Erklärung erläutert.",
-     "explain": "Der Vers bedeutet sinngemäß: Helft einander zu Güte und Gottesfurcht. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ verglich die gegenseitige Unterstützung der Gläubigen mit einem Gebäude, dessen Teile einander stärken.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 5:2 genau? Welche Aussage stammt aus der Sunnah?"
+     "hint": "Der Bericht benutzt ein Bauwerksbild.",
+     "explain": "Der Ḥadīṯ vergleicht gegenseitigen Halt mit einem Gebäude."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Fürsorge für Kranke“?",
+     "prompt": "Wie werden Qurʾān und Unterrichtsbeispiel sauber unterschieden?",
      "options": [
-      "Ich erkläre die Situation: einer kranken Person mit Zustimmung kleine Hilfe anbieten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und frage nicht nach."
+      "Der Vers beschreibt genau das heutige Glas Wasser.",
+      "Der Qurʾān verbietet Hilfsangebote.",
+      "Der Vers gibt einen Grundsatz; das Beispiel zeigt eine vorsichtige Anwendung."
      ],
-     "correct": 0,
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen.",
-     "explain": "Ich erkläre die Situation: einer kranken Person mit Zustimmung kleine Hilfe anbieten. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Fürsorge für Kranke“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "correct": 2,
+     "hint": "Nicht jede moderne Einzelsituation steht wörtlich im Vers.",
+     "explain": "Wir erklären die Anwendung und erfinden keinen Offenbarungswortlaut."
     }
    ]
   },
@@ -2447,167 +2443,165 @@ const additions={
   "topic": "Anderen Platz machen",
   "title": "Adab · Anderen Platz machen",
   "lead": "Heute lernen wir: Anderen Platz machen.",
-  "goal": "Ich kann in einer Gruppe rücksichtsvoll Platz teilen und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich erkenne das Gebot, bei Zusammenkünften Platz zu schaffen, und respektiere, dass niemand wegen meines Wunsches vertrieben wird.",
   "quran": {
-   "surah": 17,
-   "ayah": 23,
-   "label": "Sūrat al-Isrāʾ · 17:23",
-   "arabic": "وَقَضَىٰ رَبُّكَ أَلَّا تَعْبُدُوا إِلَّا إِيَّاهُ وَبِالْوَالِدَيْنِ إِحْسَانًا ۚ إِمَّا يَبْلُغَنَّ عِندَكَ الْكِبَرَ أَحَدُهُمَا أَوْ كِلَاهُمَا فَلَا تَقُل لَّهُمَا أُفٍّ وَلَا تَنْهَرْهُمَا وَقُل لَّهُمَا قَوْلًا كَرِيمًا",
-   "meaning": "Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen.",
-   "excerpt": false
+   "surah": 58,
+   "ayah": 11,
+   "label": "Sūrat al-Muǧādilah · 58:11",
+   "arabic": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا قِيلَ لَكُمْ تَفَسَّحُوا فِي الْمَجَالِسِ فَافْسَحُوا",
+   "meaning": "Wenn euch gesagt wird, dass ihr in den Versammlungen Platz machen sollt, dann macht Platz. (Versauszug)",
+   "excerpt": true
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5971",
-   "text": "Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6270 · ʿAbdullāh ibn ʿUmar",
+   "text": "Der Prophet ﷺ untersagte, jemanden von seinem Platz zu verdrängen, damit ein anderer dort sitzt; vielmehr soll man zusammenrücken und Platz schaffen."
   },
   "sourceAudit": {
-   "quranReference": "17:23",
-   "quranUrl": "https://quran.com/17/23",
-   "hadithUrl": "https://sunnah.com/bukhari:5971",
-   "sourceAnchorLessonId": "adab-respekt",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
-   "quranTextType": "complete",
+   "quranReference": "58:11",
+   "quranUrl": "https://quran.com/58/11",
+   "hadithUrl": "https://sunnah.com/bukhari:6270",
+   "sourceAnchorLessonId": null,
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg für Platzmachen bei Zusammenkünften; Originalstellen geprüft, Fachfreigabe ausstehend.",
+   "quranTextType": "excerpt",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "In einer Gruppe rücksichtsvoll Platz teilen.",
-  "sample": "Bei „Anderen Platz machen“ übe ich: in einer Gruppe rücksichtsvoll Platz teilen.",
+  "hint": "Zusammenrücken statt jemanden vertreiben.",
+  "sample": "In einer Gruppe rücken wir freundlich zusammen, damit jemand Platz findet.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Anderen Platz machen.",
+    "intro": "Wir machen anderen freundlich Platz.",
     "lines": [
-     "Wir lernen heute: Anderen Platz machen.",
-     "Wir üben in einer Gruppe rücksichtsvoll Platz teilen.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Wenn jemand dazukommt, können wir ein Stück zusammenrücken.",
+     "Wir schubsen niemanden vom Stuhl.",
+     "Wir fragen freundlich, wo noch Platz ist.",
+     "Alle dürfen sich in einer Gruppe willkommen fühlen."
     ],
-    "evidence": "Qurʾān 17:23 lehrt: Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "In Qurʾān 58:11 steht der Aufruf, in Zusammenkünften Platz zu machen."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: In einer Gruppe rücksichtsvoll Platz teilen.",
+    "intro": "In einer Gruppe helfen kleine Bewegungen, damit niemand ausgeschlossen wird.",
     "lines": [
-     "Heute untersuchen wir das Thema „Anderen Platz machen“.",
-     "Der Qurʾān spricht in 17:23 darüber: Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 5971 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: In einer Gruppe rücksichtsvoll Platz teilen. Wir überlegen gemeinsam, warum es passt."
+     "Qurʾān 58:11 spricht ausdrücklich vom Platzmachen in Versammlungen.",
+     "Wir rücken zusammen, ohne andere zu bedrängen.",
+     "Al-Buḫārī 6270 verbietet, jemanden vom Platz zu verdrängen, damit ein anderer dort sitzen kann.",
+     "Wenn kein Platz frei ist, fragen wir freundlich nach einer Lösung."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Vers und Ḥadīṯ passen unmittelbar zum Thema; unser Beispiel ist die Sitzgruppe im Unterricht."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Anderen Platz machen“.",
+    "intro": "Platz schaffen ist etwas anderes, als jemanden zu verdrängen.",
     "lines": [
-     "Ausgangssituation: In einer Gruppe rücksichtsvoll Platz teilen.",
-     "Qurʾān 17:23: Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 5971): Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Der Versauszug aus Qurʾān 58:11 fordert dazu auf, in Zusammenkünften Platz zu schaffen.",
+     "Al-Buḫārī 6270 berichtet von Ibn ʿUmar, dass der Prophet ﷺ das Verdrängen vom Sitzplatz untersagte.",
+     "Darum ist „zusammenrücken“ eine passende praktische Anwendung beider Belege.",
+     "Aufeinander Rücksicht nehmen bedeutet auch, körperliche Grenzen und Sicherheitsregeln einzuhalten."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Qurʾān 58:11 enthält das Platzmachen; al-Buḫārī 6270 ergänzt die Grenze des Verdrängens. Der Klassenraum ist unser pädagogisches Beispiel."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Anderen Platz machen“ eine gute Handlung?",
+     "prompt": "Ein Kind kommt dazu. Was ist freundlich?",
      "options": [
-      "Ich kann in einer Gruppe rücksichtsvoll Platz teilen.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Wir rücken etwas zusammen.",
+      "Wir drängen jemanden weg."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: In einer Gruppe rücksichtsvoll Platz teilen.",
-     "explain": "Unser Lernbeispiel ist: In einer Gruppe rücksichtsvoll Platz teilen."
+     "hint": "Platz machen geht ohne Schubsen.",
+     "explain": "Zusammenrücken schafft einen Platz für andere."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Anderen Platz machen“ tun?",
+     "prompt": "Darfst du jemandem den Sitz wegnehmen?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Ja, wenn ich dort sitzen will.",
+      "Nein, ich frage freundlich nach einem freien Platz."
      ],
-     "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "correct": 1,
+     "hint": "Niemand soll vertrieben werden.",
+     "explain": "Al-Buḫārī 6270 lehrt, niemanden von seinem Platz zu vertreiben."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Anderen Platz machen“. Welche Handlung passt zur Stunde?",
+     "prompt": "Was bedeutet „Platz machen“ in der Gruppe?",
      "options": [
-      "Ich kann in einer Gruppe rücksichtsvoll Platz teilen.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Jemanden wegschicken.",
+      "Ein wenig zusammenrücken.",
+      "Den anderen auslachen."
      ],
-     "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: In einer Gruppe rücksichtsvoll Platz teilen.",
-     "explain": "Unser Lernbeispiel ist: In einer Gruppe rücksichtsvoll Platz teilen."
+     "correct": 1,
+     "hint": "Suche eine Lösung ohne jemanden zu vertreiben.",
+     "explain": "Freundliches Zusammenrücken ist rücksichtsvoll."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist eine gute Übung zu „Anderen Platz machen“?",
+     "prompt": "Was untersagt der Ḥadīṯ bei al-Buḫārī 6270?",
      "options": [
-      "Ich könnte in einer Gruppe rücksichtsvoll Platz teilen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich übergehe die Lernaufgabe und höre nicht zu."
+      "Jemanden für einen anderen vom Platz verdrängen.",
+      "Freundlich nachfragen.",
+      "Bei Bedarf zusammenrücken."
      ],
      "correct": 0,
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung.",
-     "explain": "Ich könnte in einer Gruppe rücksichtsvoll Platz teilen. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Anderen Platz machen“ im Beispiel üben kannst."
+     "hint": "Die Sitzrechte der Anwesenden werden geachtet.",
+     "explain": "Der Ḥadīṯ verbietet, jemanden bloß für einen neuen Sitzplatz zu vertreiben."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 17:23?",
+     "prompt": "Welcher Vers nennt das Platzmachen in Versammlungen?",
      "options": [
-      "Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen.",
-      "Unser Übungsbeispiel ist: In einer Gruppe rücksichtsvoll Platz teilen.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters."
+      "Qurʾān 58:11.",
+      "Qurʾān 17:23 über Eltern.",
+      "Kein Qurʾān-Vers."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Der Vers hat die Zahl 58:11.",
+     "explain": "Sūrat al-Muǧādilah 58:11 nennt dieses Thema ausdrücklich."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Anderen Platz machen“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Unterscheidung ist richtig?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Zusammenrücken und Verdrängen sind gleich.",
+      "Der Vers ermutigt zum Platzmachen, der Ḥadīṯ untersagt das Verdrängen.",
+      "Man muss bei jeder Ankunft sofort aufstehen."
      ],
-     "correct": 0,
-     "hint": "Vergleiche 17:23 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "correct": 1,
+     "hint": "Vergleiche die zwei Quellen statt sie zu vermischen.",
+     "explain": "Beide Berichte ergänzen sich: Raum schaffen, niemanden ohne Recht vertreiben."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 17:23?",
+     "prompt": "Ein neuer Schüler will genau deinen Stuhl. Wie lösen wir das?",
      "options": [
-      "Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen.",
-      "Unser Übungsbeispiel ist: In einer Gruppe rücksichtsvoll Platz teilen."
+      "Er darf dich einfach wegschicken.",
+      "Ich beleidige ihn.",
+      "Wir suchen ohne Zwang eine freie oder gemeinsam mögliche Sitzlösung."
      ],
-     "correct": 0,
-     "hint": "Wähle die passende Aussage zum Qurʾān-Vers. Die Sunnah wird in der Erklärung erläutert.",
-     "explain": "Der Vers bedeutet sinngemäß: Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 17:23 genau? Welche Aussage stammt aus der Sunnah?"
+     "correct": 2,
+     "hint": "Respekt gilt für beide Personen.",
+     "explain": "Eine rücksichtvolle Lösung verdrängt niemanden."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Anderen Platz machen“?",
+     "prompt": "Warum ist 58:11 hier geeigneter als 17:23?",
      "options": [
-      "Ich erkläre die Situation: in einer Gruppe rücksichtsvoll Platz teilen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und frage nicht nach."
+      "58:11 spricht ausdrücklich von Platzmachen in Versammlungen.",
+      "58:11 spricht nur über Reisen.",
+      "17:23 nennt die Sitzordnung im Unterricht."
      ],
      "correct": 0,
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen.",
-     "explain": "Ich erkläre die Situation: in einer Gruppe rücksichtsvoll Platz teilen. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Anderen Platz machen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "hint": "Wähle den belegten Themenbezug.",
+     "explain": "Der konkrete Versinhalt passt zum Platzmachen."
     }
    ]
   },
@@ -2634,7 +2628,7 @@ const additions={
   "topic": "Zwischen zwei Niederwerfungen sitzen",
   "title": "Fiqh · Zwischen zwei Niederwerfungen sitzen",
   "lead": "Heute lernen wir: Zwischen zwei Niederwerfungen sitzen.",
-  "goal": "Ich kann die ruhige Sitzhaltung mit Anleitung üben und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann die ruhige Sitzphase zwischen zwei Niederwerfungen erkennen und in einem angeleiteten Gebetsablauf einordnen.",
   "quran": {
    "surah": 20,
    "ayah": 14,
@@ -2644,15 +2638,15 @@ const additions={
    "excerpt": false
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 631",
-   "text": "Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 757 · Abū Hurayrah",
+   "text": "Der Prophet ﷺ beschrieb beim Unterrichten des Gebets, dass man nach der Niederwerfung aufrecht und ruhig sitzt, bevor man im Gebet fortfährt."
   },
   "sourceAudit": {
    "quranReference": "20:14",
    "quranUrl": "https://quran.com/20/14",
-   "hadithUrl": "https://sunnah.com/bukhari:631",
-   "sourceAnchorLessonId": "fiqh-salah",
-   "sourceScope": "Bewährter Ausgangsbeleg aus existierendem Unterricht; thematische Übertragung, kein direktes Spezialgebot.",
+   "hadithUrl": "https://sunnah.com/bukhari:757",
+   "sourceAnchorLessonId": null,
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg zur ruhigen Sitzphase im Gebet; spezifisches Fiqh-Review offen.",
    "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
@@ -2660,141 +2654,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Die ruhige Sitzhaltung mit Anleitung üben.",
-  "sample": "Bei „Zwischen zwei Niederwerfungen sitzen“ übe ich: die ruhige Sitzhaltung mit Anleitung üben.",
+  "hint": "Nach dem ersten Suǧūd sitzt man ruhig, danach folgt wieder Suǧūd.",
+  "sample": "Zwischen zwei Niederwerfungen gibt es eine ruhige Sitzphase.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Zwischen zwei Niederwerfungen sitzen.",
+    "intro": "Im Gebet gibt es zwischen zwei Niederwerfungen eine Sitzpause.",
     "lines": [
-     "Wir lernen heute: Zwischen zwei Niederwerfungen sitzen.",
-     "Wir üben die ruhige Sitzhaltung mit Anleitung üben.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Nach einer Niederwerfung richten wir uns wieder zum Sitzen auf.",
+     "Wir sitzen ruhig, statt sofort zu hasten.",
+     "Danach folgt eine weitere Niederwerfung.",
+     "Eine Lehrperson zeigt uns den Ablauf langsam."
     ],
-    "evidence": "Qurʾān 20:14 lehrt: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Al-Buḫārī 757 nennt ruhiges Sitzen im Gebet; Qurʾān 20:14 gebietet das Gebet."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Die ruhige Sitzhaltung mit Anleitung üben.",
+    "intro": "Der Prophet ﷺ lehrte, Gebetsbewegungen in Ruhe auszuführen.",
     "lines": [
-     "Heute untersuchen wir das Thema „Zwischen zwei Niederwerfungen sitzen“.",
-     "Der Qurʾān spricht in 20:14 darüber: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ al-Buḫārī, Nr. 631 nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Die ruhige Sitzhaltung mit Anleitung üben. Wir überlegen gemeinsam, warum es passt."
+     "Nach dem ersten Suǧūd sitzen wir aufrecht und ruhig.",
+     "Anschließend folgt im Ablauf eine weitere Niederwerfung.",
+     "Bei al-Buḫārī 757 wird Ruhe bei mehreren Gebetshaltungen ausdrücklich erwähnt.",
+     "Wie die Sitzhaltung bei körperlichen Einschränkungen angepasst wird, klärt eine qualifizierte Lehrperson."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Der ruhige Sitz zwischen den Niederwerfungen wird aus der Sunnah gelernt, nicht als Detail von Qurʾān 20:14 ausgegeben."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Zwischen zwei Niederwerfungen sitzen“.",
+    "intro": "Die Sitzphase gehört zur geordneten Abfolge des Gebets.",
     "lines": [
-     "Ausgangssituation: Die ruhige Sitzhaltung mit Anleitung üben.",
-     "Qurʾān 20:14: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-     "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 631): Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat. Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 20:14 gebietet die Verrichtung des Gebets, ohne jeden Bewegungsschritt aufzuführen.",
+     "Al-Buḫārī 757 enthält die Unterweisung zur Ruhe beim Verbeugen, Niederwerfen und Sitzen.",
+     "Die Sitzphase liegt im üblichen Gebetsablauf zwischen zwei Suǧūd.",
+     "Wir erklären nur den belegten Ablauf und leiten aus diesem Einzelbericht keine ungeprüften Detailurteile über Sonderfälle ab."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Die präzise Bewegungsbeschreibung stammt hier aus al-Buḫārī 757; die Pflicht zum Gebet wird im Qurʾān genannt."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Zwischen zwei Niederwerfungen sitzen“ eine gute Handlung?",
+     "prompt": "Was kommt zwischen zwei Niederwerfungen?",
      "options": [
-      "Ich kann die ruhige Sitzhaltung mit Anleitung üben.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Eine ruhige Sitzphase.",
+      "Lautes Herumlaufen."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Die ruhige Sitzhaltung mit Anleitung üben.",
-     "explain": "Unser Lernbeispiel ist: Die ruhige Sitzhaltung mit Anleitung üben."
+     "hint": "Denke an die kleine Pause im Gebet.",
+     "explain": "Zwischen den Niederwerfungen wird ruhig gesessen."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Zwischen zwei Niederwerfungen sitzen“ tun?",
+     "prompt": "Wie lernen wir diese Bewegung?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Hastig ohne Zuhören.",
+      "Ruhig mit einer Lehrperson."
      ],
-     "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "correct": 1,
+     "hint": "Gebetsbewegungen dürfen sorgfältig geübt werden.",
+     "explain": "Eine ruhige Anleitung hilft beim Lernen."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Zwischen zwei Niederwerfungen sitzen“. Welche Handlung passt zur Stunde?",
+     "prompt": "Welche Reihenfolge passt?",
      "options": [
-      "Ich kann die ruhige Sitzhaltung mit Anleitung üben.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Suǧūd – Sitzen – Suǧūd.",
+      "Sitzen – Spielen – Essen.",
+      "Suǧūd – Ausruhen im Flur – Ende."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Die ruhige Sitzhaltung mit Anleitung üben.",
-     "explain": "Unser Lernbeispiel ist: Die ruhige Sitzhaltung mit Anleitung üben."
+     "hint": "Zwischen den beiden Niederwerfungen wird gesessen.",
+     "explain": "Suǧūd, ruhiges Sitzen und wieder Suǧūd gehören zum Ablauf."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist eine gute Übung zu „Zwischen zwei Niederwerfungen sitzen“?",
+     "prompt": "Was betont al-Buḫārī 757 beim Sitzen?",
      "options": [
-      "Ich könnte die ruhige Sitzhaltung mit Anleitung üben. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich übergehe die Lernaufgabe und höre nicht zu."
+      "Schnelligkeit.",
+      "Ruhige Haltung.",
+      "Lautes Sprechen."
      ],
-     "correct": 0,
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung.",
-     "explain": "Ich könnte die ruhige Sitzhaltung mit Anleitung üben. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Zwischen zwei Niederwerfungen sitzen“ im Beispiel üben kannst."
+     "correct": 1,
+     "hint": "Hast ist nicht das Ziel.",
+     "explain": "In der Überlieferung wird ruhiges Sitzen erwähnt."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
+     "prompt": "Wenn eine Haltung Schmerzen verursacht, was ist richtig?",
      "options": [
-      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-      "Unser Übungsbeispiel ist: Die ruhige Sitzhaltung mit Anleitung üben.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+      "Nach einer qualifizierten Lösung fragen.",
+      "Den Schmerz verheimlichen.",
+      "Jemanden deswegen verspotten."
      ],
      "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "hint": "Sicherheit und Lernhilfe sind wichtig.",
+     "explain": "Ein geeigneter Erwachsener kann Sonderfälle fachkundig einordnen."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Zwischen zwei Niederwerfungen sitzen“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Welche Quelle enthält den Hinweis auf ruhiges Sitzen?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Al-Buḫārī 757.",
+      "Nur unser Klassenplakat.",
+      "Qurʾān 20:14 im exakten Wortlaut der Sitztechnik."
      ],
      "correct": 0,
-     "hint": "Vergleiche 20:14 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Die Sunnah ergänzt die allgemeine Gebetsanweisung.",
+     "explain": "Al-Buḫārī 757 führt das ruhige Sitzen an."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
+     "prompt": "Welche Abfolge ist korrekt?",
      "options": [
-      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
-      "Unser Übungsbeispiel ist: Die ruhige Sitzhaltung mit Anleitung üben."
+      "Suǧūd – ruhiges Sitzen – Suǧūd.",
+      "Taslīm – Essen – Suǧūd.",
+      "Rukūʿ – Taslīm – Sitzen."
      ],
      "correct": 0,
-     "hint": "Wähle die passende Aussage zum Qurʾān-Vers. Die Sunnah wird in der Erklärung erläutert.",
-     "explain": "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 20:14 genau? Welche Aussage stammt aus der Sunnah?"
+     "hint": "Es geht um die Phase zwischen zwei Niederwerfungen.",
+     "explain": "Die Sitzphase liegt zwischen zwei Suǧūd."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Zwischen zwei Niederwerfungen sitzen“?",
+     "prompt": "Wie trennen wir Quellen und Detailfiqh?",
      "options": [
-      "Ich erkläre die Situation: die ruhige Sitzhaltung mit Anleitung üben. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und frage nicht nach."
+      "Jede besondere Krankheit steht wörtlich im Ḥadīṯ.",
+      "Wir lernen den beschriebenen Ablauf und fragen Fachkundige zu Sonderfällen.",
+      "Wir erfinden zusätzliche Pflichten."
      ],
-     "correct": 0,
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen.",
-     "explain": "Ich erkläre die Situation: die ruhige Sitzhaltung mit Anleitung üben. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Zwischen zwei Niederwerfungen sitzen“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "correct": 1,
+     "hint": "Ein Bericht belegt nicht automatisch jede Einzelfrage.",
+     "explain": "Grundablauf und Sonderfälle sind getrennt zu prüfen."
     }
    ]
   },
@@ -2821,7 +2813,7 @@ const additions={
   "topic": "Guter Charakter im Wochenrückblick",
   "title": "Aḫlāq · Guter Charakter im Wochenrückblick",
   "lead": "Heute lernen wir: Guter Charakter im Wochenrückblick.",
-  "goal": "Ich kann eine eigene freundliche Entscheidung wiedergeben und verstehen, was der geprüfte Unterrichtsbeleg tatsächlich lehrt.",
+  "goal": "Ich kann mich an konkrete freundliche Handlungen erinnern und eine passende neue Hilfe planen, ohne mich selbst oder andere bloßzustellen.",
   "quran": {
    "surah": 76,
    "ayah": 9,
@@ -2847,141 +2839,139 @@ const additions={
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Eine eigene freundliche Entscheidung wiedergeben.",
-  "sample": "Bei „Guter Charakter im Wochenrückblick“ übe ich: eine eigene freundliche Entscheidung wiedergeben.",
+  "hint": "Erinnern, danken, eine kleine gute Tat planen.",
+  "sample": "Ich erinnere mich an eine Hilfe, danke Allah und überlege, wem ich demnächst helfen kann.",
   "ageText": {
    "4-5": {
-    "intro": "Heute lernen wir: Guter Charakter im Wochenrückblick.",
+    "intro": "Wir erinnern uns an eine gute Tat aus der Woche.",
     "lines": [
-     "Wir lernen heute: Guter Charakter im Wochenrückblick.",
-     "Wir üben eine eigene freundliche Entscheidung wiedergeben.",
-     "Ich darf Fragen stellen und um Hilfe bitten.",
-     "Wir gehen freundlich und sicher miteinander um."
+     "Vielleicht hast du jemandem beim Aufräumen geholfen.",
+     "Vielleicht hast du jemanden freundlich getröstet.",
+     "Wir dürfen uns über das Gute freuen und Allah danken.",
+     "Nächste Woche können wir wieder freundlich sein."
     ],
-    "evidence": "Qurʾān 76:9 lehrt: Wir geben euch zu essen um Allahs willen; wir wollen von euch weder Belohnung noch Dank. Unser Beispiel dazu kommt aus dem Alltag."
+    "evidence": "Qurʾān 76:9 beschreibt Hilfe ohne Erwartung von Dank; Muslim 2699 nennt den Wert gegenseitiger Hilfe."
    },
    "6-8": {
-    "intro": "Eine Situation aus unserem Alltag: Eine eigene freundliche Entscheidung wiedergeben.",
+    "intro": "Der Wochenrückblick hilft uns, gute Gewohnheiten zu erkennen.",
     "lines": [
-     "Heute untersuchen wir das Thema „Guter Charakter im Wochenrückblick“.",
-     "Der Qurʾān spricht in 76:9 darüber: Wir geben euch zu essen um Allahs willen; wir wollen von euch weder Belohnung noch Dank.",
-     "Die authentische Sunnah wird mit Ṣaḥīḥ Muslim, Nr. 2699 · Abū Hurayrah nachgewiesen; ihr genauer Aussagekern ist getrennt zu betrachten.",
-     "Unser eigenes Beispiel: Eine eigene freundliche Entscheidung wiedergeben. Wir überlegen gemeinsam, warum es passt."
+     "Wir denken an eine konkrete freundliche Entscheidung zurück.",
+     "Hilfe kann Teilen, Trösten oder geduldiges Zuhören bedeuten.",
+     "Qurʾān 76:9 beschreibt Geben um Allahs willen ohne Erwartung von Dank.",
+     "Wir suchen eine neue kleine Handlung, ohne anderen ihre Fehler vorzuhalten."
     ],
-    "evidence": "Der Qurʾān-Vers und der Ḥadīṯ sind echte Belege; das Praxisbeispiel ist keine wörtliche Offenbarung."
+    "evidence": "Muslim 2699 beschreibt Unterstützung für andere; die Wochenaufgabe ist unsere pädagogische Anwendung."
    },
    "9-10": {
-    "intro": "Wir unterscheiden den belegten Grundsatz vom konkreten Unterrichtsbeispiel „Guter Charakter im Wochenrückblick“.",
+    "intro": "Den eigenen Charakter prüfen, ohne scheinbare Frömmigkeit zu messen.",
     "lines": [
-     "Ausgangssituation: Eine eigene freundliche Entscheidung wiedergeben.",
-     "Qurʾān 76:9: Wir geben euch zu essen um Allahs willen; wir wollen von euch weder Belohnung noch Dank.",
-     "Sunnah (Ṣaḥīḥ Muslim, Nr. 2699 · Abū Hurayrah): Der Prophet ﷺ erklärte, dass Allah Seinem Diener hilft, solange dieser seinem Bruder hilft. (Sinngemäße Bedeutung) Dies ist eine deutsche Bedeutungswiedergabe.",
-     "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
+     "Qurʾān 76:9 nennt die Absicht, anderen um Allahs willen zu helfen und keinen Dank zu verlangen.",
+     "Muslim 2699 erwähnt Hilfe für Mitmenschen als wertvolle Tat.",
+     "Im Wochenrückblick betrachten wir konkrete Entscheidungen, nicht das verborgene Innere anderer Menschen.",
+     "Eine neue gute Tat soll freiwillig und angemessen sein; Bloßstellung oder Wettbewerb um Anerkennung sind keine Lernziele."
     ],
-    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
+    "evidence": "Die Quellen sprechen über Hilfe und Absicht. Der strukturierte Wochenrückblick ist eine Unterrichtsmethode, keine überlieferte Pflicht."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Was ist bei „Guter Charakter im Wochenrückblick“ eine gute Handlung?",
+     "prompt": "Was ist eine gute Erinnerung?",
      "options": [
-      "Ich kann eine eigene freundliche Entscheidung wiedergeben.",
-      "Ich mache etwas anderes, ohne darüber nachzudenken."
+      "Ich habe jemandem freundlich geholfen.",
+      "Ich habe jemanden mit Absicht geärgert."
      ],
      "correct": 0,
-     "hint": "Denk an die Übung: Eine eigene freundliche Entscheidung wiedergeben.",
-     "explain": "Unser Lernbeispiel ist: Eine eigene freundliche Entscheidung wiedergeben."
+     "hint": "Denk an eine freundliche Handlung.",
+     "explain": "Helfen ist ein schönes Beispiel für gutes Verhalten."
     },
     {
      "type": "choice",
-     "prompt": "Was darfst du beim Lernen über „Guter Charakter im Wochenrückblick“ tun?",
+     "prompt": "Muss ich für jede gute Tat ein Geschenk bekommen?",
      "options": [
-      "Nachfragen, wenn ich unsicher bin.",
-      "So tun, als hätte ich alles verstanden."
+      "Ja, immer.",
+      "Nein, ich kann auch ohne Belohnung helfen."
      ],
-     "correct": 0,
-     "hint": "Nachfragen ist erlaubt.",
-     "explain": "Ich darf freundlich nachfragen und mir etwas zeigen lassen."
+     "correct": 1,
+     "hint": "Gutes darf ohne Gegenleistung geschehen.",
+     "explain": "Qurʾān 76:9 zeigt Geben ohne Erwartung menschlichen Dankes."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Wir üben „Guter Charakter im Wochenrückblick“. Welche Handlung passt zur Stunde?",
+     "prompt": "Welche Wochenfrage hilft beim guten Charakter?",
      "options": [
-      "Ich kann eine eigene freundliche Entscheidung wiedergeben.",
-      "Ich überspringe den vereinbarten Schritt und höre nicht zu."
+      "Wen konnte ich unterstützen?",
+      "Wen konnte ich auslachen?",
+      "Wie bekomme ich immer Lob?"
      ],
      "correct": 0,
-     "hint": "Erinnere dich an unsere Situation: Eine eigene freundliche Entscheidung wiedergeben.",
-     "explain": "Unser Lernbeispiel ist: Eine eigene freundliche Entscheidung wiedergeben."
+     "hint": "Denk an Hilfe statt an Prahlerei.",
+     "explain": "Ein Rückblick auf echte Hilfsbereitschaft fördert gutes Verhalten."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist eine gute Übung zu „Guter Charakter im Wochenrückblick“?",
+     "prompt": "Welches Motiv beschreibt Qurʾān 76:9?",
      "options": [
-      "Ich könnte eine eigene freundliche Entscheidung wiedergeben. Ich erkläre ruhig, weshalb diese Handlung passt.",
-      "Ich übergehe die Lernaufgabe und höre nicht zu."
+      "Hilfe nur für viele Likes.",
+      "Geben um Allahs willen ohne erwarteten Dank.",
+      "Andere zum Dank zwingen."
      ],
-     "correct": 0,
-     "hint": "Nenne einen konkreten Schritt und eine verständliche Begründung.",
-     "explain": "Ich könnte eine eigene freundliche Entscheidung wiedergeben. Ich erkläre ruhig, weshalb diese Handlung passt.",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Beschreibe mit eigenen Worten, wie du „Guter Charakter im Wochenrückblick“ im Beispiel üben kannst."
+     "correct": 1,
+     "hint": "Lies die Bedeutung von 76:9.",
+     "explain": "Der Vers beschreibt aufrichtige Hilfe ohne Gegenforderung."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 76:9?",
+     "prompt": "Jemand hatte eine schwierige Woche. Wie reagierst du?",
      "options": [
-      "Wir geben euch zu essen um Allahs willen; wir wollen von euch weder Belohnung noch Dank.",
-      "Unser Übungsbeispiel ist: Eine eigene freundliche Entscheidung wiedergeben.",
-      "Die Hadith-Bedeutung lautet: Der Prophet ﷺ erklärte, dass Allah Seinem Diener hilft, solange dieser seinem Bruder hilft. (Sinngemäße Bedeutung)"
+      "Ich mache ihn vor allen schlecht.",
+      "Ich frage freundlich, ob er Unterstützung möchte.",
+      "Ich zwinge ihn zum Erzählen."
      ],
-     "correct": 0,
-     "hint": "Suche die Bedeutung des angegebenen Qurʾān-Verses.",
-     "explain": "Die erste Antwort ist die überlieferte Versbedeutung; andere Antworten sind Unterrichtsbeispiel oder Sunnah-Zusammenfassung."
+     "correct": 1,
+     "hint": "Rücksicht gilt auch beim Rückblick.",
+     "explain": "Ein freundliches Angebot respektiert persönliche Grenzen."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Eine Person behauptet, unser Beispiel zu „Guter Charakter im Wochenrückblick“ stehe wörtlich im Qurʾān. Was prüfst du?",
+     "prompt": "Was passt am besten zu Qurʾān 76:9?",
      "options": [
-      "Ich unterscheide den genauen Verswortlaut von unserer Übung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers.",
-      "Die Quellen sind unwichtig, wenn die Übung gut klingt."
+      "Eine Hilfe ohne Erwartung von Dank.",
+      "Hilfe gegen feste Belohnung von Menschen.",
+      "Hilfe nur bei Publikum."
      ],
      "correct": 0,
-     "hint": "Vergleiche 76:9 mit der Situation aus dem Unterricht.",
-     "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
+     "hint": "Die Absicht steht im Mittelpunkt.",
+     "explain": "Der Vers nennt Handeln für Allah ohne geforderten Dank."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage gehört zu Qurʾān 76:9?",
+     "prompt": "Welche Aussage ist über Muslim 2699 richtig?",
      "options": [
-      "Wir geben euch zu essen um Allahs willen; wir wollen von euch weder Belohnung noch Dank.",
-      "Unser Übungsbeispiel ist: Eine eigene freundliche Entscheidung wiedergeben."
+      "Der Bericht nennt Unterstützung und Erleichterung für andere.",
+      "Der Bericht fordert einen wöchentlichen Schulfragebogen.",
+      "Der Bericht verbietet jede Erinnerung an gute Taten."
      ],
      "correct": 0,
-     "hint": "Wähle die passende Aussage zum Qurʾān-Vers. Die Sunnah wird in der Erklärung erläutert.",
-     "explain": "Der Vers bedeutet sinngemäß: Wir geben euch zu essen um Allahs willen; wir wollen von euch weder Belohnung noch Dank. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass Allah Seinem Diener hilft, solange dieser seinem Bruder hilft. (Sinngemäße Bedeutung)",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Was lehrt Qurʾān 76:9 genau? Welche Aussage stammt aus der Sunnah?"
+     "hint": "Unterscheide den Ḥadīṯ von unserer Wochenmethode.",
+     "explain": "Der Bericht ist ein Beleg für Unterstützung, nicht für ein bestimmtes Quizformat."
     },
     {
      "type": "choice",
-     "prompt": "Welche Erklärung mit Rückfrage passt zum Thema „Guter Charakter im Wochenrückblick“?",
+     "prompt": "Welche Rückblicksfrage wahrt Grenzen?",
      "options": [
-      "Ich erkläre die Situation: eine eigene freundliche Entscheidung wiedergeben. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-      "Ich erkläre nichts und frage nicht nach."
+      "Wer in der Gruppe war am schlechtesten?",
+      "Warum hat mein Freund zu wenig getan?",
+      "Welche kleine gute Entscheidung könnte ich selbst wiederholen?"
      ],
-     "correct": 0,
-     "hint": "Eine verständliche Erklärung und eine echte Rückfrage reichen.",
-     "explain": "Ich erkläre die Situation: eine eigene freundliche Entscheidung wiedergeben. Dann frage ich: Was würdest du dabei selbst ausprobieren?",
-     "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Wie erklärst du „Guter Charakter im Wochenrückblick“ einem jüngeren Kind? Formuliere eine Rückfrage zu eurem Beispiel."
+     "correct": 2,
+     "hint": "Denk an die eigene Handlung, nicht an fremde Herzen.",
+     "explain": "Ein Rückblick soll die eigene Verantwortung stärken, ohne andere zu beschämen."
     }
    ]
   },
