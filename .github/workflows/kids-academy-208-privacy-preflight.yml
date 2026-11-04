@@ -5,10 +5,11 @@ on:
       - 'kids/akademie/**'
       - 'kids/tools/academy-208-privacy-audio-preflight.cjs'
       - 'kids/tools/export-academy-208-v4-dedup-plan.cjs'
+      - 'kids/tools/export-academy-voice-plan.js'
       - 'kids/tools/export-academy-208-button-candidates.cjs'
       - 'kids/tools/test-academy-v31-choice-only-review.cjs'
-      - 'kids/tools/audit-academy-v31-source-and-buttons.cjs'
       - 'kids/tools/test-academy-208-audio-ui-sync.cjs'
+      - 'kids/tools/audit-academy-v31-source-and-buttons.cjs'
       - 'kids/data/academy-voice-policy-v10.json'
       - '.github/workflows/kids-academy-208-privacy-preflight.yml'
   workflow_dispatch:
@@ -30,19 +31,19 @@ jobs:
           node kids/tools/test-academy-v31-choice-only-review.cjs
           node kids/tools/test-academy-208-audio-ui-sync.cjs
           node kids/tools/audit-academy-v31-source-and-buttons.cjs artifacts/academy-142-source-review.json
+          node --check kids/tools/export-academy-208-v4-dedup-plan.cjs
           node kids/tools/export-academy-208-v4-dedup-plan.cjs artifacts/academy-208-v4-dedup-queue.json
           node kids/tools/export-academy-208-button-candidates.cjs artifacts/academy-208-button-review.json
       - name: Attach proposed answer choices for editorial review
         uses: actions/upload-artifact@v4
         with:
-          name: academy-621-button-editorial-review
+          name: academy-624-button-editorial-review
           path: artifacts/academy-208-button-review.json
       - name: Attach 142-lesson source and compact-answer audit
         uses: actions/upload-artifact@v4
         with:
           name: academy-142-source-and-ux-review
           path: artifacts/academy-142-source-review.json
-          retention-days: 14
           retention-days: 14
       - name: Attach full deduplicated Serhat V4 voice plan (no paid synthesis)
         uses: actions/upload-artifact@v4

@@ -34,7 +34,8 @@ for(const [id,lesson] of Object.entries(projected)){
    if(q.options.some(t=>t.length>180))excessive++;
    if(old.type==="text"||old.editorialReviewStatus==="pending-human-review"){
     converted++;assert.equal(q.adaptedFromText,true);
-    assert.equal(q.options[0],old.sample||old.explain);
+    assert.equal(q.options[0],old.type==="text"?old.sample:old.options[old.correct]);
+    if(old.type==="choice")assert.equal(q.explain,old.explain,"Full scholarly explanation must be preserved");
     assert.equal(q.originalPrompt,old.legacyPrompt||old.prompt);
     assert.equal(q.approvedForChildApp,false);assert.equal(q.approvedForAudio,false);
     if(q.editorialReviewStatus==="pending-human-review")unreviewed++;
@@ -46,6 +47,7 @@ for(const [id,lesson] of Object.entries(projected)){
 }
 assert.equal(questions,1136);assert.equal(converted,426);assert.equal(unreviewed,426);
 assert.equal(duplicates,0,"Duplicate choices in button review projection");
+assert.equal(excessive,0,"Oversized answer buttons must be shortened without changing source explanations");
 console.log("PASS: 142 V31 drafts, 1136 button questions, 426 open converted, 0 source mutations.");
 console.log("FLAG: "+excessive+" candidate questions contain buttons over 180 characters.");
 console.log("NO AUDIO, NO RELEASE: all 142 remain source/pedagogy/voice gated.");

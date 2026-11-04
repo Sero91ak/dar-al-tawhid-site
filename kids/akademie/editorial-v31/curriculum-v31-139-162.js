@@ -73,7 +73,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 6245; Ṣaḥīḥ Muslim, Nr. 2153 · überliefert von Abū Saʿīd al-Ḫudrī): Der Prophet ﷺ lehrte, beim Eintritt um Erlaubnis zu bitten und nach höchstens drei erfolglosen Bitten wieder zu gehen. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/24/27 und https://sunnah.com/bukhari:6245. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -154,10 +154,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 24:27?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Betretet keine fremden Häuser, bevor ihr um Erlaubnis gebeten und ihre Bewohner begrüßt habt. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, beim Eintritt um Erlaubnis zu bitten und nach höchstens drei erfolglosen Bitten wieder zu gehen.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Betretet keine fremden Häuser, bevor ihr um Erlaubnis gebeten und ihre Bewohner begrüßt habt.",
+      "Unser Übungsbeispiel ist: Bei einem Besuch vorher um Erlaubnis fragen."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -260,7 +260,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 33): Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/23/8 und https://sunnah.com/bukhari:33. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -341,10 +341,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 23:8?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten.",
+      "Unser Übungsbeispiel ist: Eine vereinbarte Bildschirmzeit einhalten."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -447,7 +447,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ Muslim, Nr. 2564 · überliefert von Abū Hurayrah): Der Prophet ﷺ erklärte, dass nicht Aussehen und Besitz das Entscheidende sind, sondern Herzen und Taten. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/39/53 und https://dorar.net/hadith/sharh/207905. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -528,10 +528,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 39:53?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Verliert nicht die Hoffnung auf Allahs Barmherzigkeit. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass nicht Aussehen und Besitz das Entscheidende sind, sondern Herzen und Taten.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Verliert nicht die Hoffnung auf Allahs Barmherzigkeit.",
+      "Unser Übungsbeispiel ist: Nach einem Fehler die Möglichkeit zur Besserung sehen."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -634,7 +634,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 46): Der Prophet ﷺ lehrte, dass fünf tägliche Gebete vorgeschrieben sind.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellen: https://quran.com/20/14 und https://sunnah.com/bukhari:46. Die Alltagsübung ist kein wörtlicher Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -715,10 +715,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage stammt aus Qurʾān 20:14?",
      "options": [
-      "Der Vers bedeutet: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die Sunnah berichtet sinngemäß: Der Prophet ﷺ lehrte, dass fünf tägliche Gebete vorgeschrieben sind.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
+      "Unsere eigene Unterrichtsübung: Bei „Die Namen der fünf Gebete“ übe ich: fajr, Ẓuhr, ʿAṣr, Maghrib und ʿIshāʾ zuordnen."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -821,7 +821,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 631): Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/20/14 und https://sunnah.com/bukhari:631. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -902,10 +902,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 20:14?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken.",
+      "Unser Übungsbeispiel ist: Eine authentische prophetische Handlung kennenlernen."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -1008,7 +1008,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl)): Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/2/3 und https://sunnah.com/muslim:8. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -1089,10 +1089,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 2:3?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
+      "Unser Übungsbeispiel ist: Den Ortswechsel als Teil der Sīrah kennenlernen."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -1195,7 +1195,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ Muslim, Nr. 2692): Allah zu gedenken ist eine überlieferte gute Handlung. Die spezifische Formel zum Verlassen des Hauses bedarf eines eigenen geprüften Nachweises. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/33/41 und https://sunnah.com/muslim:2692. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -1276,10 +1276,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 33:41?",
      "options": [
-      "Der Vers bedeutet sinngemäß: O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Allah zu gedenken ist eine überlieferte gute Handlung. Die spezifische Formel zum Verlassen des Hauses bedarf eines eigenen geprüften Nachweises.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken.",
+      "Unser Übungsbeispiel ist: Eine authentische Formel vor dem Hinausgehen mit Eltern lernen."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -1382,7 +1382,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 5971): Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/49/13 und https://sunnah.com/bukhari:5971. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -1463,10 +1463,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 49:13?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Allah machte die Menschen zu Völkern und Stämmen, damit sie einander kennenlernen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Allah machte die Menschen zu Völkern und Stämmen, damit sie einander kennenlernen.",
+      "Unser Übungsbeispiel ist: Mit einem neuen Kind freundlich Kontakt aufnehmen."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -1569,7 +1569,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 2856): Der Prophet ﷺ erklärte, dass Allahs Recht darin besteht, Ihn allein anzubeten und Ihm nichts beizugesellen. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/1/3 und https://sunnah.com/bukhari:2856. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -1650,10 +1650,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 1:3?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Der Allerbarmer, der Barmherzige. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass Allahs Recht darin besteht, Ihn allein anzubeten und Ihm nichts beizugesellen.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Der Allerbarmer, der Barmherzige.",
+      "Unser Übungsbeispiel ist: Im Qurʾān nach der Bedeutung beider Namen fragen."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -1756,7 +1756,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ Muslim, Nr. 8 · Ḥadīṯ Ǧibrīl, überliefert von ʿUmar ibn al-Ḫaṭṭāb): Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/2/285 und https://sunnah.com/muslim:8a. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -1837,10 +1837,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 2:285?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Die angegebene Sunnah lehrt sinngemäß: Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
+      "Unser Übungsbeispiel ist: Hoffnung auf Allahs Gerechtigkeit ohne Angstbilder verstehen."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -1943,7 +1943,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 1; Ṣaḥīḥ Muslim, Nr. 1907 · überliefert von ʿUmar ibn al-Ḫaṭṭāb): Der Prophet ﷺ erklärte, dass der Wert einer Handlung mit der Absicht zusammenhängt, mit der sie ausgeführt wird. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/98/5 und https://dorar.net/hadith/sharh/3429. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -2024,10 +2024,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 98:5?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Ihnen wurde aufgetragen, Allah zu dienen und Ihm gegenüber aufrichtig zu sein. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass der Wert einer Handlung mit der Absicht zusammenhängt, mit der sie ausgeführt wird.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Ihnen wurde aufgetragen, Allah zu dienen und Ihm gegenüber aufrichtig zu sein.",
+      "Unser Übungsbeispiel ist: Bei Gruppenarbeit das Team statt nur sich selbst sehen."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -2130,7 +2130,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 6114; Ṣaḥīḥ Muslim, Nr. 2609 · überliefert von Abū Hurayrah): Der Prophet ﷺ erklärte, dass wahre Stärke nicht darin besteht, andere zu besiegen, sondern sich bei Wut zu beherrschen. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/3/134 und https://dorar.net/hadith/sharh/151201. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -2211,10 +2211,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 3:134?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Diejenigen, die ihren Zorn zurückhalten und den Menschen vergeben. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass wahre Stärke nicht darin besteht, andere zu besiegen, sondern sich bei Wut zu beherrschen.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Diejenigen, die ihren Zorn zurückhalten und den Menschen vergeben.",
+      "Unser Übungsbeispiel ist: Nach einem Missverständnis freundlich ins Gespräch kommen."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -2317,7 +2317,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 5376; Ṣaḥīḥ Muslim, Nr. 2022): Der Prophet ﷺ lehrte den jungen ʿUmar ibn Abī Salamah: Nenne Allahs Namen, iss mit deiner rechten Hand und iss von dem, was vor dir liegt. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/7/31 und https://sunnah.com/bukhari:5376. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -2398,10 +2398,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 7:31?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Esst und trinkt, aber seid nicht maßlos. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte den jungen ʿUmar ibn Abī Salamah: Nenne Allahs Namen, iss mit deiner rechten Hand und iss von dem, was vor dir liegt.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Esst und trinkt, aber seid nicht maßlos.",
+      "Unser Übungsbeispiel ist: Nur so viel Essen nehmen, wie man essen kann."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -2504,7 +2504,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 893; Ṣaḥīḥ Muslim, Nr. 1829 · ʿAbdullāh ibn ʿUmar): Der Prophet ﷺ lehrte, dass Menschen für die Dinge und Aufgaben verantwortlich sind, die ihnen anvertraut werden. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/17/34 und https://dorar.net/hadith/sharh/6192. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -2585,10 +2585,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 17:34?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Haltet das Versprechen ein. Nach dem Versprechen wird gefragt werden. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, dass Menschen für die Dinge und Aufgaben verantwortlich sind, die ihnen anvertraut werden.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Haltet das Versprechen ein. Nach dem Versprechen wird gefragt werden.",
+      "Unser Übungsbeispiel ist: Einem Familienmitglied mit einer sicheren kleinen Aufgabe helfen."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -2691,7 +2691,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 6018): Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/17/53 und https://sunnah.com/bukhari:6018. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -2772,10 +2772,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 17:53?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen.",
+      "Unser Übungsbeispiel ist: Vor einer vorschnellen Behauptung die Fakten ansehen."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -2878,7 +2878,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 1): Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/39/11 und https://sunnah.com/bukhari:1. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -2959,10 +2959,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 39:11?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein.",
+      "Unser Übungsbeispiel ist: Vor dem Gebet wissen, welches Gebet man verrichtet."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -3065,7 +3065,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 5027 · ʿUṯmān ibn ʿAffān): Der Prophet ﷺ lehrte den besonderen Wert dessen, der den Qurʾān lernt und ihn weiterlehrt. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/2/2 und https://dorar.net/hadith/sharh/151215. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -3146,10 +3146,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 2:2?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Dies ist das Buch, an dem kein Zweifel besteht: eine Rechtleitung für die Gottesfürchtigen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte den besonderen Wert dessen, der den Qurʾān lernt und ihn weiterlehrt.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Dies ist das Buch, an dem kein Zweifel besteht: eine Rechtleitung für die Gottesfürchtigen.",
+      "Unser Übungsbeispiel ist: Den Unterschied zwischen Qurʾān-Vers und Überlieferung erklären."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -3252,7 +3252,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl)): Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/2/3 und https://sunnah.com/muslim:8. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -3333,10 +3333,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 2:3?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben.",
+      "Unser Übungsbeispiel ist: Eine authentisch überlieferte gute Handlung eines Gefährten erzählen."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -3439,7 +3439,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ Muslim, Nr. 2692 · Abū Hurayrah): Der Prophet ﷺ nannte die Lobpreisung Subḥāna llāhi wa-bi-ḥamdihī für den Morgen und Abend und erwähnte den besonderen Lohn für hundert Wiederholungen. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/33/41 und https://dorar.net/hadith/sharh/152577. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -3520,10 +3520,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 33:41?",
      "options": [
-      "Der Vers bedeutet sinngemäß: O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ nannte die Lobpreisung Subḥāna llāhi wa-bi-ḥamdihī für den Morgen und Abend und erwähnte den besonderen Lohn für hundert Wiederholungen.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken.",
+      "Unser Übungsbeispiel ist: Kurze authentische Formeln freudvoll und regelmäßig wiederholen."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -3626,7 +3626,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 6026; Ṣaḥīḥ Muslim, Nr. 2585 · Abū Mūsā al-Ashʿarī): Der Prophet ﷺ verglich die gegenseitige Unterstützung der Gläubigen mit einem Gebäude, dessen Teile einander stärken. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/5/2 und https://dorar.net/hadith/sharh/151122. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -3707,10 +3707,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 5:2?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Helft einander zu Güte und Gottesfurcht. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ verglich die gegenseitige Unterstützung der Gläubigen mit einem Gebäude, dessen Teile einander stärken.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Helft einander zu Güte und Gottesfurcht.",
+      "Unser Übungsbeispiel ist: Ein sicheres gemeinsames Hilfsprojekt in der Nachbarschaft planen."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -3813,7 +3813,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 4474 · Abū Saʿīd ibn al-Muʿallā): Der Prophet ﷺ erklärte, dass Sūrat al-Fātiḥah eine besonders bedeutende Sūrah des Qurʾān ist. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/1/2 und https://sunnah.com/bukhari:4474. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -3894,10 +3894,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 1:2?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Alles Lob gebührt Allah, dem Herrn der Welten. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass Sūrat al-Fātiḥah eine besonders bedeutende Sūrah des Qurʾān ist.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Alles Lob gebührt Allah, dem Herrn der Welten.",
+      "Unser Übungsbeispiel ist: Dankbarkeit nach einem schönen Ereignis ausdrücken."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -4000,7 +4000,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ Muslim, Nr. 2699 · Abū Hurayrah): Der Prophet ﷺ erklärte, dass Allah Seinem Diener hilft, solange dieser seinem Bruder hilft. (Sinngemäße Bedeutung) Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/99/7 und https://dorar.net/hadith/sharh/123965. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -4081,10 +4081,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 99:7?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ erklärte, dass Allah Seinem Diener hilft, solange dieser seinem Bruder hilft. (Sinngemäße Bedeutung)",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen.",
+      "Unser Übungsbeispiel ist: Eine gute Entscheidung mit verantwortlichem Handeln verbinden."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -4187,7 +4187,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 1): Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/39/11 und https://sunnah.com/bukhari:1. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -4268,10 +4268,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 39:11?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein.",
+      "Unser Übungsbeispiel ist: Zwischen echter Hilfsbereitschaft und bloßem Vorzeigen unterscheiden."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",
@@ -4374,7 +4374,7 @@ const additions={
      "Sunnah (Ṣaḥīḥ al-Buḫārī, Nr. 1469): Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht. Dies ist eine deutsche Bedeutungswiedergabe.",
      "Prüfe: Welche Aussage steht wirklich in der Quelle und welche ist unsere heutige Anwendung?"
     ],
-    "evidence": "Quellenprüfung: https://quran.com/2/153 und https://sunnah.com/bukhari:1469. Nicht jedes Alltagsbeispiel steht wörtlich im Offenbarungstext."
+    "evidence": "Vergleiche die Bedeutung des Qurʾān-Verses mit dem genannten Ḥadīṯ. Ein Alltagsbeispiel ist kein wörtliches Offenbarungszitat."
    }
   },
   "questions": {
@@ -4455,10 +4455,10 @@ const additions={
     },
     {
      "type": "choice",
-     "prompt": "Welche Antwort nennt die Aussage des Qurʾān-Verses und der Sunnah richtig?",
+     "prompt": "Welche Aussage gehört zu Qurʾān 2:153?",
      "options": [
-      "Der Vers bedeutet sinngemäß: Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen. Die angegebene Sunnah lehrt sinngemäß: Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht.",
-      "Jede Aufgabe aus dem Unterricht ist automatisch ein wörtlicher Vers."
+      "Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen.",
+      "Unser Übungsbeispiel ist: Ein Spiel verlieren, ohne andere zu beschimpfen."
      ],
      "correct": 0,
      "hint": "Achte darauf, Qurʾān, Sunnah und eigene Unterrichtsbeispiele auseinanderzuhalten.",

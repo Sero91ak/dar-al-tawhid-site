@@ -26,7 +26,3 @@ Historische Lernstände mit unbewerteten Antworten dürfen im bestehenden lokale
 ## Ergänzender Auditbefund (03.11.2026)
 
 Die redaktionelle 208-Lektionen-Erweiterung in PR #1588 hatte 426 offene Frageformate, die mittlerweile als nicht freigegebene Antwortbutton-Entwürfe umgesetzt wurden. Dazu kommen 195 ältere Freitextfragen im bestehenden modularen Curriculum und drei zusätzliche offene Ṣidq-Fragen. Insgesamt sind 624 früher offene Lernfragen fachlich zu prüfen. Diese dürfen nur als antippbare Antwortmöglichkeiten und nach fachlicher Freigabe veröffentlicht werden. Der Audio-Massenstart bleibt bis dahin gesperrt.
-
-## Integrationstest vom 04.11.2026
-
-Der ausschließlich für die Prüfung vorgesehene Integrationszweig kombiniert den PR #1638 (nur Antwortbuttons; keine Kinder-Tastatur und kein Mikrofon) mit dem gesperrten redaktionellen 208-Lektionen-Stand aus PR #1588. Der zusätzliche Regressionstest `kids/tools/test-academy-208-audio-ui-sync.cjs` vergleicht alle 1.664 Antwortanzeigen mit den zugehörigen vorbereiteten Sprechertexten, einschließlich deterministischer Anordnung. Das Historienarchiv der V9-Audios bleibt bytegenau unverändert. **Kein Live-Release und keine automatische kostenpflichtige Audioerzeugung.**

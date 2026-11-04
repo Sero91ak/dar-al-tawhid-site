@@ -13,7 +13,15 @@ for(const part of ["67-90","91-114","115-138","139-162","163-186","187-208"])
 const legacy=Object.values(ctx.window.DARKidsAcademyCurriculum);
 const drafts=Object.values(ctx.window.DARKidsAcademyEditorialV31);
 const rows=[],ages=["4-5","6-8","9-10"];
-for(const [lessons,isDraft] of [[legacy,false],[drafts,true]])for(const lesson of lessons)
+/* Sidq is the separately embedded first lesson; it contains 3 open questions.
+ * Include it in the editorial queue without changing the live child page. */
+const page=read("kids/akademie/index.html");
+const begin=page.indexOf("const exercises={"),end=page.indexOf("\nlet id=",begin);
+assert(begin>0&&end>begin,"Sidq lesson source missing");
+vm.runInContext(page.slice(begin,end)+"\nglobalThis.sidq=exercises;",ctx,{timeout:2500});
+const sidq={id:"sidq",topic:"Ṣidq – Wahrhaftigkeit",questions:ctx.sidq,
+ quran:{label:"Sūrat at-Tawbah 9:119"},hadith:{source:"Ṣaḥīḥ Muslim 2607a"}};
+for(const [lessons,isDraft] of [[legacy,false],[drafts,true],[[sidq],false]])for(const lesson of lessons)
  for(const age of ages)for(let i=0;i<lesson.questions[age].length;i++){
   const q=lesson.questions[age][i];
   const previouslyText=q.type==="text";
@@ -40,8 +48,8 @@ for(const [lessons,isDraft] of [[legacy,false],[drafts,true]])for(const lesson o
     genericWrongAnswer:/ignoriere die Lernregel/.test(wrong)},
    quran:lesson.quran?.label||null,hadith:lesson.hadith?.source||null});
  }
-assert.equal(rows.length,621);
-assert.equal(rows.filter(x=>x.source==="EXISTING_66").length,195);
+assert.equal(rows.length,624);
+assert.equal(rows.filter(x=>x.source==="EXISTING_66").length,198);
 assert.equal(rows.filter(x=>x.source==="NEW_142_DRAFT").length,426);
 const target=process.argv[2];
 if(target){
@@ -50,5 +58,5 @@ if(target){
  fs.writeFileSync(output,JSON.stringify({mode:"EDITORIAL_REVIEW_ONLY",generatedAudio:0,
   releasedLessons:0,rows},null,2)+"\n","utf8");
 }
-console.log("REVIEW QUEUE: 621 proposed button questions; 195 old + 426 new.");
+console.log("REVIEW QUEUE: 624 proposed button questions; 198 old (195 modular plus 3 Sidq) + 426 new.");
 console.log("NO AUTO-APPROVAL: source, distractor, age and spoken script review pending.");

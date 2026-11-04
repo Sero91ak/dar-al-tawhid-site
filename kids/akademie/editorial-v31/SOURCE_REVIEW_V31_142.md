@@ -188,7 +188,7 @@
 ## Technische Zwischenabnahme vom 04.11.2026
 
 - Die 142 neuen Unterrichtseinheiten enthalten jetzt nur noch Auswahlfragen: 1.136 Choice-Fragen einschließlich 426 aus offenen Aufgaben konvertierten Kandidaten. **Keine neue Veröffentlichung.**
-- Der Gesamtlehrplan bleibt 208 Lektionen, 624 Altersfassungen, 1.664 Fragen. Bei den vorhandenen 65 modularen Lektionen gibt es zusätzlich 195 ursprüngliche Textfragen, die im gesonderten Datenschutz-PR #1638 ausschließlich per Antwortbuttons dargestellt werden.
+- Der Gesamtlehrplan bleibt 208 Lektionen, 624 Altersfassungen, 1.664 Fragen. Bei den vorhandenen 65 modularen Lektionen gibt es zusätzlich 195 ursprüngliche Textfragen und drei Ṣidq-Freitextfragen, die im gesonderten Datenschutz-PR #1638 ausschließlich per Antwortbuttons dargestellt werden. Insgesamt sind 198 bisher offene Altfragen und 426 V31-Fragen (624) im redaktionellen Review.
 - Die automatisch geprüften Referenznummern stimmen mit den Qurʾān-Quellankern überein; zwei falsche Hilfetextstellen in Lektionen 207 und 208 wurden korrigiert.
 - 136 überlange Antwortfelder (mehr als 180 Zeichen) sind zur sprachlichen und barrierearmen redaktionellen Kürzung vorgemerkt, **nicht als freigegeben zu verstehen**.
 - 142 individuelle Qurʾān-/Sunnah-Quellenabnahmen sowie die didaktische Beurteilung aller neu gebildeten Distraktoren bleiben ausstehend. Die Prüfung eines Links/Formats allein ist keine religiöse Authentizitätsfreigabe.
