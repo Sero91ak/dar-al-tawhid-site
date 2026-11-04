@@ -56,6 +56,13 @@ execFileSync(process.execPath, [path.join(__dirname, "rebuild-canonical-islamic-
   stdio: "inherit"
 });
 
+// Rebuild both the visitor/test Ḥadīṯ/Āṯār index and verified-Šarḥ leaf records
+// from the same canonical apple-tv/hadith/ source after any staging overlay.
+execFileSync(process.execPath, [path.join(__dirname, 'build-test-hadith-library.js')], {
+  cwd: root,
+  stdio: 'inherit'
+});
+
 const quranSearchBuilder = path.join(__dirname, 'build-quran-search-index.js');
 execFileSync(process.execPath, [quranSearchBuilder], {
   cwd: root,
