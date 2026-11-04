@@ -23,9 +23,9 @@ const fingerprint=hash(JSON.stringify({voice,model,profile,
  pronunciationDictionaryLocators:[] /* German and Arabic remain isolated. */}));
 const normalize=s=>String(s||"").normalize("NFC").replace(/\s+/g," ").trim();
 const phrases=new Map(),mixedArabicBlocked=[];
-const arabic=/[\\u0600-\\u06ff\\u0750-\\u077f\\u08a0-\\u08ff\\ufb50-\\ufdff\\ufe70-\\ufeff]/;
+const arabic=/[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff\ufb50-\ufdff\ufe70-\ufeff]/;
 const loanTerms=/(?:Qurʾān|Fuṣḥā|Tawḥīd|Īmān|Iḥsān|Ḥadīṯ|Ṣalāh|Ṣadaqah|Ramaḍān|Duʿāʾ|Wuḍūʾ|Zakāh|Ṣaḥābah|Sūrah|Sūrat|Allāhumma|Allāh|ʿUṯmān|ʿĀʾišah|Abū|Allah)/giu;
-const germanNur=/(?:^|[^\\p{L}])nur(?=$|[^\\p{L}])/iu;
+const germanNur=/(?:^|[^\p{L}])nur(?=$|[^\p{L}])/iu;
 function add(text,lessonId,age,kind,draft){
  const value=normalize(text);if(!value)return;
  // Never synthesize Arabic Quran. Only human Qari recitation may supply that asset.
