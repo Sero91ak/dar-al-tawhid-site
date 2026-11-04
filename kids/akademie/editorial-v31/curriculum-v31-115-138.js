@@ -3191,167 +3191,167 @@ const additions={
   "subject": "sirah",
   "pillar": "sirah",
   "topic": "Muḥammad ﷺ in Makkah",
-  "title": "Sīrah · Muḥammad ﷺ und der Auszug aus Makkah",
-  "lead": "Heute lernen wir: Muḥammad ﷺ in Makkah.",
-  "goal": "Ich kann den in Qurʾān 9:40 erwähnten Auszug aus Makkah und den Aufenthalt in der Höhle richtig einordnen.",
+  "title": "Sīrah · Muḥammad ﷺ in Makkah: die erste Offenbarung",
+  "lead": "Heute lernen wir: Muḥammad ﷺ in Makkah und die erste Offenbarung.",
+  "goal": "Ich kann anhand von Qurʾān 96:1 und al-Buḫārī 3 erklären, was die erste Offenbarung in der Höhle Ḥirāʾ mit Makkah verbindet.",
   "quran": {
-   "surah": 9,
-   "ayah": 40,
-   "label": "Sūrat at-Tawbah · 9:40 (Auszug)",
-   "arabic": "إِذْ يَقُولُ لِصَاحِبِهِ لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا",
-   "meaning": "Als er zu seinem Gefährten sagte: Sei nicht traurig. Allah ist mit uns.",
-   "excerpt": true
+   "surah": 96,
+   "ayah": 1,
+   "label": "Sūrat al-ʿAlaq · 96:1",
+   "arabic": "اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ",
+   "meaning": "Lies im Namen deines Herrn, Der erschaffen hat.",
+   "excerpt": false
   },
   "hadith": {
-   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 3653",
-   "text": "Abū Bakr berichtete, dass er mit dem Propheten ﷺ in der Höhle war und um ihre Entdeckung fürchtete. Der Prophet ﷺ erinnerte ihn daran, dass Allah bei ihnen war."
+   "source": "Ṣaḥīḥ al-Buḫārī, Nr. 3 · ʿĀʾišah",
+   "text": "ʿĀʾišah überlieferte, dass der Prophet ﷺ in der Höhle Ḥirāʾ die erste Offenbarung empfing. Der Engel brachte ihm die Worte aus Sūrat al-ʿAlaq; danach kehrte er erschüttert zu Ḫadīǧah zurück."
   },
   "sourceAudit": {
-   "quranReference": "9:40",
-   "quranUrl": "https://quran.com/9/40",
-   "hadithUrl": "https://sunnah.com/bukhari:3653",
+   "quranReference": "96:1",
+   "quranUrl": "https://quran.com/96/1",
+   "hadithUrl": "https://sunnah.com/bukhari:3",
    "sourceAnchorLessonId": null,
-   "sourceScope": "Individuell neu zugeordneter Primärbeleg; Quellen-/Textfreigabe und vollständige diakritische Qurʾān-Kollation weiterhin ausstehend.",
-   "quranTextType": "excerpt",
+   "sourceScope": "Individuell neu zugeordneter Primärbeleg; Qurʾān 96:1 und al-Buḫārī 3. Quellen-/Textfreigabe weiterhin ausstehend.",
+   "quranTextType": "complete",
    "hadithMeaningIsParaphrase": true,
    "sourceSpecificReview": "pending-independent-scholarly-check",
    "quranArabicRecitation": "existing-human-qari-only",
    "hasNewIndependentHadithVerification": false,
    "verifiedDate": null
   },
-  "hint": "Wir lernen die echte Aussage der Quelle und unterscheiden sie von unserer Erklärung.",
-  "sample": "Im Unterricht zeigen wir, was die Quellen sagen, ohne neue Offenbarungsworte zu erfinden.",
+  "hint": "Wir lernen die erste Offenbarung und unterscheiden Qurʾān-Vers, Ḥadīṯ und eigenes Unterrichtsbeispiel.",
+  "sample": "Der Qurʾān-Vers gibt Allahs Wort wieder; der Ḥadīṯ berichtet, wie die Offenbarung begann.",
   "ageText": {
    "4-5": {
-    "intro": "Allah half dem Propheten ﷺ auf seinem Weg.",
+    "intro": "In Makkah begann die Offenbarung des Qurʾān.",
     "lines": [
-     "Der Prophet ﷺ musste Makkah verlassen.",
-     "Auf dem Weg war er mit einem Gefährten in einer Höhle.",
-     "Er sagte sinngemäß: Sei nicht traurig, Allah ist mit uns.",
-     "Wir lernen: Allahs Hilfe ist wichtig."
+     "Der Prophet Muḥammad ﷺ war in der Höhle Ḥirāʾ.",
+     "Dort kam ein Engel mit der ersten Offenbarung.",
+     "Das erste Wort der Sūrah beginnt mit dem Befehl zu lesen.",
+     "Nach diesem Ereignis ging er zu Ḫadīǧah zurück."
     ],
-    "evidence": "Qurʾān 9:40 nennt den Auszug und die Höhle. Er erzählt nicht die gesamte Lebensgeschichte in Makkah."
+    "evidence": "Qurʾān 96:1 beginnt mit dem Befehl zu lesen. Die Geschichte der ersten Offenbarung überlieferte ʿĀʾišah in al-Buḫārī 3."
    },
    "6-8": {
-    "intro": "Der Auszug aus Makkah gehört zur Sīrah.",
+    "intro": "Die erste Offenbarung gehört zur Makkah-Zeit.",
     "lines": [
-     "Qurʾān 9:40 berichtet, dass die Ungläubigen den Propheten ﷺ aus Makkah vertrieben.",
-     "Auf dem Weg waren der Prophet ﷺ und sein Gefährte in einer Höhle.",
-     "Der Prophet ﷺ sprach ihm Mut zu und erinnerte an Allahs Hilfe.",
-     "Die weiteren Einzelheiten seiner Kindheit oder der Reise stehen nicht alle in diesem Vers."
+     "Der Prophet ﷺ suchte die Zurückgezogenheit in der Höhle Ḥirāʾ.",
+     "Dort erschien ihm ein Engel und brachte die ersten offenbarten Worte.",
+     "Qurʾān 96:1 beginnt mit der Aufforderung zu lesen im Namen des Herrn, Der erschafft.",
+     "ʿĀʾišahs Bericht bei al-Buḫārī 3 erzählt die Situation und die anschließende Rückkehr zu Ḫadīǧah."
     ],
-    "evidence": "Qurʾān 9:40 belegt Auszug, Höhle und die Worte an den Gefährten. Al-Buḫārī 3653 ergänzt die Szene."
+    "evidence": "Der Vers ist Offenbarungstext; der Ḥadīṯ bei al-Buḫārī 3 liefert die Erzählung zu diesem Ereignis."
    },
    "9-10": {
-    "intro": "Ein Sīrah-Ereignis muss mit seinem wirklichen Beleg verbunden werden.",
+    "intro": "Wir lesen den Beginn der Offenbarung quellenbezogen.",
     "lines": [
-     "Qurʾān 9:40 nennt den Auszug, zwei Personen und eine Höhle.",
-     "Der Vers überliefert die Aussage an den Gefährten sinngemäß: Sei nicht traurig, Allah ist mit uns.",
-     "Al-Buḫārī 3653 berichtet die Sorge Abū Bakrs in dieser Situation.",
-     "Die ganze Makkah-Zeit oder alle Wegstationen lassen sich nicht allein aus Qurʾān 9:40 rekonstruieren."
+     "Al-Buḫārī 3 berichtet von der Höhle Ḥirāʾ, in der dem Propheten ﷺ die erste Offenbarung gebracht wurde.",
+     "Qurʾān 96:1 enthält die ersten Worte dieses Abschnitts; al-Buḫārī 3 nennt darüber hinaus 96:2–3.",
+     "Die ausführliche Überlieferung schildert auch seine erschütterte Rückkehr zu Ḫadīǧah und ihre Unterstützung.",
+     "Wir legen dem Propheten ﷺ keine zusätzlichen Worte in den Mund und verwechseln die Makkah-Zeit nicht mit der späteren Hiǧrah."
     ],
-    "evidence": "Wir kennzeichnen den Versauszug und unterscheiden ihn vom zusätzlichen Bericht in al-Buḫārī 3653."
+    "evidence": "Qurʾān 96:1 und al-Buḫārī 3 haben unterschiedliche Textarten und werden getrennt ausgewiesen."
    }
   },
   "questions": {
    "4-5": [
     {
      "type": "choice",
-     "prompt": "Wo waren der Prophet ﷺ und sein Gefährte unterwegs?",
+     "prompt": "Wo war der Prophet ﷺ, als die Offenbarung begann?",
      "options": [
-      "In einer Höhle.",
-      "Auf einem Schiff aus Holz."
+      "In der Höhle Ḥirāʾ.",
+      "In einem großen Markt in Madīnah."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
-     "explain": "Der Qurʾān erwähnt die Höhle."
+     "hint": "Achte auf die Aussage der Originalquelle.",
+     "explain": "Al-Buḫārī 3 berichtet von der Höhle Ḥirāʾ."
     },
     {
      "type": "choice",
-     "prompt": "Was sagte der Prophet ﷺ sinngemäß?",
+     "prompt": "Zu wem kehrte er danach zurück?",
      "options": [
-      "Sei nicht traurig. Allah ist mit uns.",
-      "Wir haben niemanden an unserer Seite."
+      "Zu Ḫadīǧah.",
+      "Zu einem römischen Kaiser."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
-     "explain": "Qurʾān 9:40 spricht von Allahs Hilfe."
+     "hint": "Achte auf die Aussage der Originalquelle.",
+     "explain": "ʿĀʾišahs Bericht nennt Ḫadīǧah."
     }
    ],
    "6-8": [
     {
      "type": "choice",
-     "prompt": "Welches Ereignis erwähnt Qurʾān 9:40?",
+     "prompt": "Welche Sūrah beginnt mit dem Befehl zu lesen?",
      "options": [
-      "Den Auszug des Propheten ﷺ aus Makkah.",
-      "Das Bauen der Kaʿbah durch Ibrāhīm."
+      "Sūrat al-ʿAlaq.",
+      "Sūrat an-Nās."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
-     "explain": "Der Vers beschreibt den Auszug und die Höhle."
+     "hint": "Achte auf die Aussage der Originalquelle.",
+     "explain": "Qurʾān 96:1 steht in Sūrat al-ʿAlaq."
     },
     {
      "type": "choice",
-     "prompt": "Wer war nach der ergänzenden Überlieferung in der Höhle bei ihm?",
+     "prompt": "Wer überlieferte die ausführliche Geschichte der ersten Offenbarung?",
      "options": [
-      "Abū Bakr.",
-      "Ein König von Rom."
+      "ʿĀʾišah.",
+      "Ein anonymer Erzähler aus einem Märchen."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
-     "explain": "Al-Buḫārī 3653 erwähnt Abū Bakr.",
+     "hint": "Achte auf die Aussage der Originalquelle.",
+     "explain": "Der Bericht ist al-Buḫārī 3 von ʿĀʾišah.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
+     "legacyPrompt": "Fachliche Abnahme der Antwortbuttons steht aus."
     },
     {
      "type": "choice",
-     "prompt": "Was dürfen wir aus Qurʾān 9:40 nicht behaupten?",
+     "prompt": "Was unterscheidet Vers und Ḥadīṯ in dieser Lektion?",
      "options": [
-      "Dass er allein alle Erlebnisse seiner Kindheit beschreibt.",
-      "Dass der Vers die Höhle erwähnt."
+      "96:1 gibt Offenbarungsworte wieder; al-Buḫārī 3 erzählt die Umstände.",
+      "96:1 nennt den vollständigen Namen aller Überlieferer."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
-     "explain": "Historische Einzelheiten brauchen jeweils passende Belege."
+     "hint": "Achte auf die Aussage der Originalquelle.",
+     "explain": "Offenbarungstext und die überlieferten Umstände sind getrennt zu betrachten."
     }
    ],
    "9-10": [
     {
      "type": "choice",
-     "prompt": "Welche Aussage ist durch Qurʾān 9:40 unmittelbar gestützt?",
+     "prompt": "Wofür ist Qurʾān 96:1 in dieser Lektion der unmittelbare Beleg?",
      "options": [
-      "Zwei Personen waren in einer Höhle.",
-      "Dreißig namentlich genannte Begleiter reisten gemeinsam."
+      "Für den offenbarten Befehl zu lesen im Namen des Herrn.",
+      "Für den Ablauf der gesamten Hiǧrah nach Madīnah."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
-     "explain": "Der Vers spricht von zweien und der Höhle."
+     "hint": "Achte auf die Aussage der Originalquelle.",
+     "explain": "Der Vers bezeugt die Offenbarungsworte."
     },
     {
      "type": "choice",
-     "prompt": "Was unterscheidet den Vers vom Ḥadīṯ?",
+     "prompt": "Was ergänzt al-Buḫārī 3 zum Vers?",
      "options": [
-      "Der Vers nennt Auszug und Zuspruch; al-Buḫārī 3653 berichtet Abū Bakrs Sorge.",
-      "Der Vers nennt alle Stationen der gesamten Reise."
+      "Den Aufenthalt in Ḥirāʾ und die Rückkehr zu Ḫadīǧah.",
+      "Die genaue Dauer aller späteren Auswanderungsstationen."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
-     "explain": "Wir vergleichen die Aussagen beider Quellen getrennt.",
+     "hint": "Achte auf die Aussage der Originalquelle.",
+     "explain": "ʿĀʾišahs Ḥadīṯ gibt die Umstände der ersten Offenbarung wieder.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
+     "legacyPrompt": "Fachliche Abnahme der Antwortbuttons steht aus."
     },
     {
      "type": "choice",
-     "prompt": "Welche Aussage wäre eine unzulässige Ergänzung?",
+     "prompt": "Warum sind Makkah und Hiǧrah hier getrennte Lektionen?",
      "options": [
-      "Eine unüberlieferte Wegstation als Qurʾān-Wortlaut auszugeben.",
-      "Die Höhle als Teil des Verses zu nennen."
+      "Die erste Offenbarung und der spätere Auszug sind verschiedene Ereignisse.",
+      "Beide Berichte erzählen dieselbe Höhlenszene."
      ],
      "correct": 0,
-     "hint": "Erinnere dich an die geprüften Vers- und Ḥadīṯ-Aussagen.",
-     "explain": "Nicht belegte Erzählungen gehören nicht in die Unterrichtsvorlage.",
+     "hint": "Achte auf die Aussage der Originalquelle.",
+     "explain": "Die erste Offenbarung geschah in Ḥirāʾ; die Hiǧrah-Lektion behandelt den Auszug.",
      "editorialReviewStatus": "pending-human-review",
-     "legacyPrompt": "Redaktionell umformulierte Auswahlfrage; fachliche Abnahme steht aus."
+     "legacyPrompt": "Fachliche Abnahme der Antwortbuttons steht aus."
     }
    ]
   },
