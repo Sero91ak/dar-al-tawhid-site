@@ -99,29 +99,66 @@ jobs:
           node scripts/rebuild-canonical-islamic-content.js
           node scripts/validate-canonical-content.js
 
-      - name: Apple-TV-Inhalte als eigene Spur auf main festschreiben
+      - name: Apple-TV-Inhalte konfliktfrei auf main festschreiben
         if: github.event_name == 'push'
         shell: bash
         env:
           AUTOPUBLISH_REPORT_PATH: ${{ runner.temp }}/adult-publication.json
         run: |
+          set -euo pipefail
           created="$(node -e "const f=require('fs');const p=process.env.AUTOPUBLISH_REPORT_PATH;console.log(f.existsSync(p)?(JSON.parse(f.readFileSync(p)).created||[]).length:0)")"
           git config user.name "dar-al-tawhid-content-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # New records and updated remote catalogs are one atomic GitHub content push.
-          # The screensaver catalog/index must not lag behind the Hadith source catalog.
-          # Rebuild timestamps are now stable when the content fingerprint is unchanged,
-          # so the self-triggered follow-up workflow becomes a no-op (no deploy loop).
-          git add apple-tv/hadith/series apple-tv/hadith/catalog.json apple-tv/hadith/manifest.json apple-tv/hadith/sync-status.json apple-tv/screensaver/catalog.json apple-tv/screensaver/entries-index.json apple-tv/hadith/library-shell.json
-          if git diff --cached --quiet; then
-            echo "Kein neuer Apple-TV-Datensatz und kein Katalog-Drift – kein zusätzlicher Commit. Created: $created"
-            exit 0
-          fi
-          git commit -m "Apple TV: neue geprüfte Erwachsenen-Aussagen automatisch synchronisiert"
-          git fetch origin main
-          git -c rebase.autoStash=true rebase origin/main
-          git push origin HEAD:main
-          echo "Apple-TV-Spur im Repository veröffentlicht; ohne Besucher-Push."
+          # Preserve only unpublished new canonical records, never stale catalogs.
+          # In particular, do not rebase bot-generated catalog.json against a
+          # concurrently updated main: rebuild the catalogs from the latest tree.
+          saved="$(mktemp -d)"
+          trap 'rm -rf "$saved"' EXIT
+          while IFS= read -r file; do
+            case "$file" in
+              apple-tv/hadith/series/*/HAD-*.json)
+                mkdir -p "$saved/$(dirname "$file")"
+                cp "$file" "$saved/$file"
+                ;;
+            esac
+          done < <(git ls-files --others --exclude-standard -- apple-tv/hadith/series)
+
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            upstream="$(git rev-parse origin/main)"
+            current="$(git rev-parse HEAD)"
+            if [ "$current" != "$upstream" ]; then
+              echo "Latest main moved; rebuilding canonical catalogs, attempt $attempt."
+              git reset --hard "$upstream"
+              while IFS= read -r file; do
+                relative="${file#"$saved"/}"
+                if [ -f "$relative" ]; then
+                  cmp -s "$file" "$relative" || {
+                    echo "::error::Two independently published Hadith records share $relative"
+                    exit 1
+                  }
+                else
+                  mkdir -p "$(dirname "$relative")"
+                  cp "$file" "$relative"
+                fi
+              done < <(find "$saved" -type f -name 'HAD-*.json')
+              node scripts/rebuild-canonical-islamic-content.js
+              node scripts/validate-canonical-content.js
+            fi
+            git add apple-tv/hadith/series apple-tv/hadith/catalog.json apple-tv/hadith/manifest.json apple-tv/hadith/sync-status.json apple-tv/screensaver/catalog.json apple-tv/screensaver/entries-index.json apple-tv/hadith/library-shell.json
+            if git diff --cached --quiet; then
+              echo "Canonical content already current on main. New source records: $created"
+              exit 0
+            fi
+            git commit -m "Apple TV: neue geprüfte Erwachsenen-Aussagen automatisch synchronisiert"
+            if git push origin HEAD:main; then
+              echo "Canonical content committed without catalog-rebase conflicts."
+              exit 0
+            fi
+            echo "A newer concurrent main commit appeared; retrying from canonical sources."
+          done
+          echo "::error::Four canonical publish retries exhausted; refusing stale push."
+          exit 1
 
       - name: Test-App Staging aus test-library-canonical übernehmen
         run: |

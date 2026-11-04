@@ -79,6 +79,11 @@ function stripMd(text) {
 
 function main() {
   fs.mkdirSync(collectionsDir, { recursive: true });
+  // Remove orphaned generated collections from the earlier full-mirror build.
+  // This folder is owned by this generator; never delete user-owned library data.
+  for (const name of fs.readdirSync(collectionsDir).filter(n => n.endsWith(".json"))) {
+    fs.unlinkSync(path.join(collectionsDir, name));
+  }
   const allRecords = loadRecords();
   const records = pickPreviewRecords(allRecords);
   const byBook = new Map();
