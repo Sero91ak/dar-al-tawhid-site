@@ -3889,7 +3889,7 @@ const additions={
       "Die Quellen sind unwichtig, wenn die Übung gut klingt."
      ],
      "correct": 0,
-     "hint": "Vergleiche 2:285 mit der Situation aus dem Unterricht.",
+     "hint": "Vergleiche 2:183 mit der Situation aus dem Unterricht.",
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
@@ -4076,7 +4076,7 @@ const additions={
       "Die Quellen sind unwichtig, wenn die Übung gut klingt."
      ],
      "correct": 0,
-     "hint": "Vergleiche 2:285 mit der Situation aus dem Unterricht.",
+     "hint": "Vergleiche 2:43 mit der Situation aus dem Unterricht.",
      "explain": "Eine pädagogische Anwendung kann sinnvoll sein, ist aber kein erfundenes Offenbarungszitat."
     },
     {
