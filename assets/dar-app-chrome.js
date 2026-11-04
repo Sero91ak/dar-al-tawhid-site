@@ -125,6 +125,19 @@
     }
     sourceNavPending=false;
   }
+  /* DAR_Q50_READER_NAV_V1 · srcdoc Q50 links open inside the same app reader.
+     Only an active same-origin frame may request these two exact internal routes. */
+  window.addEventListener("message",function(ev){
+    if(!sourcePanel||sourcePanel.hidden||!sourceFrame||ev.source!==sourceFrame.contentWindow)return;
+    if(ev.origin!==location.origin||!ev.data||ev.data.type!=="DAR_Q50_READER_NAV_V1")return;
+    var u;try{u=new URL(String(ev.data.path||""),location.origin)}catch(_){return}
+    if(u.origin!==location.origin)return;
+    if(u.pathname!=="/q/50/"&&u.pathname!=="/lernen/wissen-ist-religion/")return;
+    if(!["de","ar","en","tr","ku","ckb","bs","fr","es"].includes(u.searchParams.get("lang")))return;
+    if(Array.from(u.searchParams.keys()).some(function(k){return k!=="lang"}))return;
+    var a=document.createElement("a");a.href=u.pathname+u.search;a.hidden=true;
+    document.body.appendChild(a);try{a.click()}finally{a.remove()}
+  },false);
   document.addEventListener("click",function(ev){
     if(ev.defaultPrevented||ev.button!==0||ev.metaKey||ev.ctrlKey||ev.altKey||ev.shiftKey)return;
     var a=ev.target&&ev.target.closest?ev.target.closest("a[href]"):null;
@@ -156,6 +169,19 @@
       .catch(function(){sourceNavPending=false;showSourceUnavailable()})
       .finally(function(){clearTimeout(timeout)});
   },true);
+  // Q50 source→lesson navigation remains in the mounted app reader.
+  // Only messages from its own, same-origin source iframe are accepted.
+  window.addEventListener("message",function(ev){
+    if(ev.origin!==location.origin||!sourceFrame||ev.source!==sourceFrame.contentWindow)return;
+    if(!ev.data||ev.data.type!=="DAR_Q50_READER_NAV_V1")return;
+    var route=String(ev.data.path||"");
+    if(!/^\/lernen\/wissen-ist-religion\/(?:\?lang=(?:de|ar|en|tr|ku|ckb|bs|fr|es))?$/.test(route))return;
+    var a=document.createElement("a");
+    a.setAttribute("href",route);
+    a.hidden=true;
+    document.body.appendChild(a);
+    try{a.click()}finally{a.remove()}
+  });
   window.addEventListener("popstate",function(ev){
     if(sourcePanel&&!sourcePanel.hidden&&(!ev.state||!ev.state.__darInternalSourceV3))
       closeInternalSource(true);

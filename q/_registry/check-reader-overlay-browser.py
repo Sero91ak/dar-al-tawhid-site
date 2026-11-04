@@ -76,7 +76,8 @@ def test():
             WebDriverWait(d,8).until(lambda b:b.execute_script("return document.getElementById('darInternalSourceV3').hidden"))
             assert d.execute_script("return getComputedStyle(document.getElementById('bottomNav')).display!=='none'")
             assert d.execute_script("return getComputedStyle(document.getElementById('app')).visibility==='visible'")
-            assert d.execute_script("return window.__lastNav==='home'")
+            WebDriverWait(d,8).until(lambda b: b.execute_script("return window.__lastNav==='home'"),
+                message=f"{name}: async app Home navigation did not complete")
             print(f"PASS {name} {w}x{h}: full viewport, no dock or home bleed, source/lesson scroll, back/home",flush=True)
     finally:
         d.quit()
