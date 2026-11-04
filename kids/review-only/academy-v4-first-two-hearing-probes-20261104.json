@@ -34,9 +34,11 @@
       "generationNodeId": "csnJxePLYpBIj7SLkuQ3",
       "sessionId": "FPv3AO9CfyTBWHrKIOfP",
       "estimatedCredits": 73.88716836734694,
-      "status": "REQUESTED_REVIEW_ONLY",
+      "status": "COMPLETED_CREATOR_PREVIEW_NOT_APPROVED",
       "humanListeningApproved": false,
-      "contentImportedToGitHub": false
+      "contentImportedToGitHub": false,
+      "generationId": "WqeNL9eyWt4AUKS4dEbg",
+      "actualCredits": 73.88716836734694
     },
     {
       "text": "Īmān ist mehr als nur ein schweres Wort: Es geht darum, was wir glauben.",
@@ -50,17 +52,21 @@
       "generationNodeId": "gm8CnScvFoFcjYCxImD5",
       "sessionId": "L1LMFuHxMr0034Arfuba",
       "estimatedCredits": 67.34020408163265,
-      "status": "REQUESTED_REVIEW_ONLY",
+      "status": "COMPLETED_CREATOR_PREVIEW_NOT_APPROVED",
       "humanListeningApproved": false,
       "contentImportedToGitHub": false,
       "technicalTranscription": {
         "flowId": "h7l7ITIl5RbO7Z0CswLy",
         "nodeId": "gfmnZgvos2aiyXDCieH1",
         "sessionId": "PI1Q7XgbMVZVjgzdZoxQ",
-        "status": "REQUESTED",
+        "status": "COMPLETED_SCRIBE_NOT_HUMAN_QA",
         "estimateCredits": 0,
-        "doesNotConstitutePhoneticOrHumanApproval": true
-      }
+        "doesNotConstitutePhoneticOrHumanApproval": true,
+        "generationId": "997q1ZNAb7EH4NppjjZ2",
+        "text": "Īmān ist mehr als nur ein schweres Wort: Es geht darum, was wir glauben."
+      },
+      "generationId": "IRrUNVzahC6L7V4wnKMT",
+      "actualCredits": 67.34020408163265
     }
   ],
   "qaChecklist": [
@@ -71,5 +77,10 @@
     "Manual listening required before any approvals",
     "Only exact production-profile matches can be reused; this creator preview lacks profile/dictionary/language controls"
   ],
-  "directElevenLabsCreatorToolCannotClaimProductionSettings": true
+  "directElevenLabsCreatorToolCannotClaimProductionSettings": true,
+  "generatedSampleCount": 2,
+  "creatorPreviewActualCredits": 141.2273724489796,
+  "creatorPreviewCreditsWereSpentBeforeThisReview": true,
+  "creatorPreviewsAreNotProductionProfileCertified": true,
+  "notes": "Both previously requested Creator V4 previews completed. No new synthesis call in this review; do not reuse as production-profile-certified assets until voice settings, language, dictionary and owner listening are checked."
 }
