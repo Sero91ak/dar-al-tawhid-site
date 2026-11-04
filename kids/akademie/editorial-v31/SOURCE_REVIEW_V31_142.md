@@ -185,3 +185,12 @@
 **Für Audio gesperrt:** 0 ElevenLabs-Aufträge, 0 neue Audiodateien, 0 Vortragsfreigaben, keine Kosten.
 
 **Eine fachkundige externe Endprüfung und vollständige arabische Wortlaut-Kollation der neuen Quellen ist noch nicht abgeschlossen.**
+## Technische Zwischenabnahme vom 04.11.2026
+
+- Die 142 neuen Unterrichtseinheiten enthalten jetzt nur noch Auswahlfragen: 1.136 Choice-Fragen einschließlich 426 aus offenen Aufgaben konvertierten Kandidaten. **Keine neue Veröffentlichung.**
+- Der Gesamtlehrplan bleibt 208 Lektionen, 624 Altersfassungen, 1.664 Fragen. Bei den vorhandenen 65 modularen Lektionen gibt es zusätzlich 195 ursprüngliche Textfragen, die im gesonderten Datenschutz-PR #1638 ausschließlich per Antwortbuttons dargestellt werden.
+- Die automatisch geprüften Referenznummern stimmen mit den Qurʾān-Quellankern überein; zwei falsche Hilfetextstellen in Lektionen 207 und 208 wurden korrigiert.
+- 136 überlange Antwortfelder (mehr als 180 Zeichen) sind zur sprachlichen und barrierearmen redaktionellen Kürzung vorgemerkt, **nicht als freigegeben zu verstehen**.
+- 142 individuelle Qurʾān-/Sunnah-Quellenabnahmen sowie die didaktische Beurteilung aller neu gebildeten Distraktoren bleiben ausstehend. Die Prüfung eines Links/Formats allein ist keine religiöse Authentizitätsfreigabe.
+- Zero-Credit-Workflow: `kids/tools/academy-208-privacy-audio-preflight.cjs`, `kids/tools/audit-academy-v31-source-and-buttons.cjs`, `kids/tools/export-academy-208-v4-dedup-plan.cjs`. Sprechtexte werden nur vorbereitet; **kein Audio wird erzeugt, bezahlt oder veröffentlicht**.
+- Der getrennte Vorschautest-PR #1650 wurde nach vier erfolgreichen CI-Prüfungen isoliert in `main` übernommen. Der große Inhalts-PR bleibt bis zur Quellen-/Sprach-/Gerätefreigabe ein Entwurf.
