@@ -81,11 +81,16 @@ function main() {
         hadiths: []
       });
     }
-    const german = stripMd(rec.textMarkdown || rec.sharhText || "");
+    const german = stripMd(rec.textMarkdown || "");
+    const hasVerifiedSharh = rec.sharhStatus === "verified" &&
+      ["sharhText", "sharhScholar", "sharhBook", "sharhReference"].every(function (key) {
+        return typeof rec[key] === "string" && rec[key].trim().length > 0;
+      });
     const verified = rec.sharhStatus === "verified" || rec.grade === "Ṣaḥīḥ" || rec.grade === "Sahih";
     book.hadiths = book.hadiths || [];
     const hadith = {
       id: rec.id,
+      recordType: rec.recordType === "athar" ? "athar" : "hadith",
       hadithNumber: rec.sourceHadithNumber || rec.id,
       arabic: rec.arabicText || rec.arabic || "",
       german,
@@ -96,10 +101,22 @@ function main() {
       chapterId,
       bookTitle: title,
       narratorLine: rec.narratorLine || "",
+      narrator: rec.narratorLine || "",
       speakerLabel: rec.speakerLabel || "",
       source: rec.source || title,
-      sharhText: rec.sharhText || "",
-      sharhScholar: rec.sharhScholar || "",
+      sharhStatus: hasVerifiedSharh ? "verified" : (rec.sharhStatus || "missing"),
+      sharhText: hasVerifiedSharh ? rec.sharhText : "",
+      sharhScholar: hasVerifiedSharh ? rec.sharhScholar : "",
+      sharhBook: hasVerifiedSharh ? rec.sharhBook : "",
+      sharhReference: hasVerifiedSharh ? rec.sharhReference : "",
+      sharhVolume: hasVerifiedSharh ? (rec.sharhVolume || "") : "",
+      sharhPage: hasVerifiedSharh ? (rec.sharhPage || "") : "",
+      sourceBook: rec.sourceBook || "",
+      sourceVolume: rec.sourceVolume || "",
+      sourcePage: rec.sourcePage || "",
+      sourceChapter: rec.sourceChapter || "",
+      sourceEdition: rec.sourceEdition || "",
+      verificationNote: rec.verificationNote || "",
       links: []
     };
     book.chapters.get(chapterId).hadiths.push(hadith);
@@ -123,6 +140,9 @@ function main() {
       for (const h of chapter.hadiths) {
         search.push({
           id: h.id,
+          recordType: h.recordType,
+          source: h.source,
+          sharhStatus: h.sharhStatus,
           bookId: book.id,
           bookTitle: book.title,
           chapterTitle: chapter.title,
