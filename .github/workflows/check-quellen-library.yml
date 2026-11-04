@@ -36,6 +36,8 @@ jobs:
           node --check cloudflare/site-router.js
           node --check assets/q-royal-manuscript-v42.js
           node scripts/check-quellen-client.cjs
+          node q/_registry/check-qsource-standard.mjs
+          node scripts/check-q50-nine-language.cjs
           node - <<'NODE'
           const fs=require('fs'),assert=require('node:assert/strict');
           const html=fs.readFileSync('quellen/index.html','utf8');
