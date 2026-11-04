@@ -380,8 +380,12 @@ function activateAdultCompactHero(html) {
     const flowCss = '<link rel="stylesheet" id="darFrauenGlobalFlowV1407" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css?v=frauen-sticky-hero-v1407-20261103">';
     html = html.includes("</body>") ? html.replace("</body>",flowCss+"</body>") : html+flowCss;
   }
-  if (!html.includes('id="darFrauenHeroSeamRuntimeV1407"')) {
-    const flowJs = '<script defer id="darFrauenHeroSeamRuntimeV1407" src="/assets/frauen/frauen-hero-seam-runtime-v1407.js?v=frauen-sticky-hero-v1407-20261103"></'+'script>';
+  if (!html.includes('id="darFrauenFixedHeroV1408"')) {
+    const css = '<link rel="stylesheet" id="darFrauenFixedHeroV1408" href="/assets/frauen/frauen-fixed-hero-v1408.css?v=frauen-fixed-hero-v1408-20261103">';
+    html = html.includes("</body>") ? html.replace("</body>",css+"</body>") : html+css;
+  }
+  if (!html.includes('id="darFrauenHeroSeamRuntimeV1408"')) {
+    const flowJs = '<script defer id="darFrauenHeroSeamRuntimeV1408" src="/assets/frauen/frauen-fixed-hero-runtime-v1408.js?v=frauen-fixed-hero-v1408-20261103"></'+'script>';
     html = html.includes("</body>") ? html.replace("</body>",flowJs+"</body>") : html+flowJs;
   }
   return html;

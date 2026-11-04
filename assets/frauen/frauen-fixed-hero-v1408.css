@@ -1,0 +1,110 @@
+/* FRAUEN_FIXED_HERO_V1408 · iPhone footage 03.11.2026 14:56.
+ * Header fixed at top. EXACTLY ONE original photographic Hero+search stays
+ * attached beneath it. A non-visual placeholder retains its space; chapter
+ * headings and full-width cards scroll naturally UNDER the fixed photograph.
+ * Prevents sticky rail moving down during iOS overscroll or showing headings
+ * above the hero. Only women hub/group/list; never detail-reader or Kids.
+ */
+html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-view="group"],[data-frauen-view="list"])
+ #appView .dar-immersive-hero-stage{
+  position:fixed!important;
+  top:var(--frauen-v1408-header-bottom,80px)!important;
+  inset-block-start:var(--frauen-v1408-header-bottom,80px)!important;
+  left:var(--frauen-v1408-stage-left,0px)!important;
+  width:var(--frauen-v1408-stage-width,100vw)!important;
+  max-width:none!important;
+  z-index:620!important;
+  display:block!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  isolation:isolate!important;
+  background:var(--bg,#f4efec)!important;
+  overflow:visible!important;
+  transform:none!important;
+  contain:none!important;
+}
+html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage[data-has-search="0"]{
+  background:var(--bg,#f4efec)!important;
+}
+html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > .frauen-library-hero{
+  position:relative!important;
+  top:auto!important;
+  inset-block-start:auto!important;
+  margin-top:0!important;
+}
+html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > :is(.frauen-library-search-wrap,.frauen-library-list-controls){
+  position:relative!important;
+  top:auto!important;
+  inset-block-start:auto!important;
+}
+/* The placeholder is EMPTY: it never duplicates a photo, search or focusable
+ * control. It is the only content-flow reservation for the fixed Hero rail. */
+html[data-theme] body.is-frauen-route #appView .dar-frauen-hero-space-v1408{
+  display:block!important;
+  position:relative!important;
+  width:100%!important;
+  min-height:0!important;
+  height:var(--frauen-v1408-rail-height,0px)!important;
+  margin:0 0 16px!important;
+  padding:0!important;
+  pointer-events:none!important;
+  background:transparent!important;
+  border:0!important;
+  overflow:hidden!important;
+}
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-section-head,.frauen-library-grid,.frauen-library-area-grid,.frauen-library-list-body){
+  position:relative!important;
+  z-index:1!important;
+}
+html[data-theme] body.is-frauen-route #appView :is(.frauen-library-shell,.frauen-library-list){
+  margin-top:0!important;
+  overflow:visible!important;
+}
+html[data-theme] body.is-frauen-route #appView.view{
+  overflow:visible!important;
+  padding-top:0!important;
+  margin-top:0!important;
+}
+/* Before the existing DOM adapter wraps a newly rendered Hero, retain a
+ * normal first paint; do not sticky a second independent image or search. */
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-shell,.frauen-library-list):not(:has(> .dar-immersive-hero-stage)) > :is(.frauen-library-hero,.frauen-library-search-wrap,.frauen-library-list-controls){
+  position:relative!important;
+  top:auto!important;
+  inset-block-start:auto!important;
+}
+/* The user must be able to use the search with the iOS software keyboard.
+ * It temporarily goes back in-flow; the placeholder disappears. */
+html[data-theme] body.is-frauen-route[data-frauen-v1408-input-active="1"] #appView .dar-immersive-hero-stage{
+  position:relative!important;
+  top:auto!important;
+  inset-block-start:auto!important;
+  left:auto!important;
+  width:100%!important;
+  z-index:2!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-v1408-input-active="1"] #appView .dar-frauen-hero-space-v1408{
+  display:none!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-grid{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  flex-wrap:nowrap!important;
+  grid-template-columns:none!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-grid > .frauen-library-area-card{
+  width:100%!important;
+  max-width:100%!important;
+  flex:0 0 auto!important;
+}
+/* Folded/narrow split panes should use their own actual content width,
+ * not force 100vw artwork over the adjacent dashboard. */
+@media(min-width:700px){
+  html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > .frauen-library-hero{
+    width:100%!important;
+    margin-left:0!important;
+  }
+}
