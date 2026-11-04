@@ -54,13 +54,20 @@ function verify(q,lesson,age){
   adapted++;
   assert.equal(normalized.adaptedFromText,true,"Previous free text question must be editorially flagged");
   assert.equal(normalized.correct,0,"Existing answer model must be the canonical right option");
-  assert.equal(normalized.options[0],q.sample||q.explain||lesson?.sample||lesson?.goal,"Answer model must be preserved");
+  const sourceModel=q.sample||q.explain||lesson?.sample||lesson?.goal;
+  if(normalized.options[0]!==sourceModel){
+   assert.ok(sourceModel.length>180&&lesson?.quran?.meaning,"Only long source comparisons may be shortened");
+   assert.equal(normalized.options[0],String(lesson.quran.meaning).trim(),"Canonical Quran meaning must remain exact");
+   assert.equal(normalized.explain,q.explain||sourceModel,"Full source context must remain in feedback");
+   assert.ok(normalized.prompt.includes("Qurʾān"),"Short answer must ask which statement is from Quran");
+  }else assert.equal(normalized.options[0],sourceModel,"Answer model must be preserved");
  }else assert.equal(normalized.correct,q.correct,"Previously graded choice must not change");
 }
 for(const lesson of lessons)for(const age of ages)for(const q of lesson.questions?.[age]||[])verify(q,lesson,age);
 for(const age of ages)for(const q of shared.inline[age]||[])verify(q,null,age);
 assert.equal(checked,528,"Existing 66 Academy lessons must retain 528 questions");
 assert.equal(adapted,198,"All 195 modular and 3 Sidq typed questions must be adapted to buttons");
+assert.equal(oversized.length,0,"No child answer button may exceed 180 characters");
 console.log("PASS KIDS privacy and answer buttons: "+checked+" questions, "+adapted+" legacy open questions adapted; no child text entry or microphone; layout and progress preserved.");
 console.log("EDITORIAL UX AUDIT: "+oversized.length+" oversized buttons, "+writePrompts.length+
  " obsolete writing prompts, "+writeHints.length+" obsolete writing hints.");
