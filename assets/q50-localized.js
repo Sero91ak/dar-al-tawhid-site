@@ -42,6 +42,8 @@ function sourceRender(){
  text("q50H2",p.ui.chain+" · Ibn al-Mubārak");
  text("q50H3",p.ui.classification);
  text("q50H4",p.ui.sources);
+ text("q50EvidenceGroup1","🖋️ "+p.speaker1+" · "+p.ui.sources);
+ text("q50EvidenceGroup2","🖋️ "+p.speaker2+" · "+p.ui.sources);
  text("q50Speaker1","🖋️ "+p.speaker1);
  text("q50Statement1","„"+p.statement1+"“");
  text("q50Speaker2","🖋️ "+p.speaker2);
