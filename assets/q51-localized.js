@@ -122,13 +122,7 @@ function attach(){
   });
   id("qlRetry").addEventListener("click",function(){score=0;step=0;answer=null;id("quiz").hidden=false;id("qlFinished").hidden=true;renderQuiz()});
  }
- if(source){
-  var a=id("q51Learning");
-  if(a)a.addEventListener("click",function(ev){
-   if(window.parent===window||!window.parent.postMessage)return;
-   ev.preventDefault();var siteOrigin=new URL(document.baseURI||location.href).origin;window.parent.postMessage({type:"DAR_Q51_READER_NAV_V1",path:link("/lernen/tawhid-schoepfer-anbetung/")},siteOrigin);
-  });
- }
+ // Let the existing in-app link router and native fallback handle learning navigation.
  window.addEventListener("storage",function(ev){
   if(ev.key==="darAdultPreferredLocaleV1"&&!manual){if(source)sourceRender();if(quizPage)renderQuiz()}
  });
