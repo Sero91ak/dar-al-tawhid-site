@@ -1,6 +1,7 @@
-/* DAR_DIRECT_READER_NAV_V1 · standalone website fallback only.
-   Embedded readers use the mounted adult app toolbar (dar-app-chrome.js).
-   No splash screen, no cloning app navigation and no source-content mutation. */
+/* DAR_DIRECT_READER_NAV_V2 · standalone website fallback only.
+   Canonical /q/N/ pages never show an invented Back/Home navigation bar.
+   Embedded Q and learning readers use the mounted adult app toolbar instead.
+   Standalone learning pages keep a voluntary Home link, not a synthetic Back. */
 (function(){
  "use strict";
  if(window.__darDirectReaderNavV1||window.self!==window.top)return;
@@ -13,9 +14,8 @@
   function button(label,action){
    var b=document.createElement("button");b.type="button";b.textContent=label;b.addEventListener("click",action);return b;
   }
-  var back=button("← Zurück",function(){if(history.length>1)history.back();else location.assign("/")});
   var home=button("⌂ Startseite",function(){location.assign("/")});
-  var left=document.createElement("div");left.className="dar-direct-reader-actions";left.append(back,home);
+  var left=document.createElement("div");left.className="dar-direct-reader-actions";left.append(home);
   var cap=document.createElement("span");cap.className="dar-direct-reader-caption";
   cap.textContent=q?"DĀR AL TAWḤĪD · Quellen":"DĀR AL TAWḤĪD · Lernen";
   header.append(left,cap);
@@ -49,7 +49,8 @@
   @media(prefers-color-scheme:dark){html[data-q-theme="dark"] #darDirectReaderBarV1{background:#14221c;color:#f2ecdf;border-color:#544a35}}
   `;
   document.head.appendChild(st);
-  document.body.insertBefore(header,document.body.firstChild);
+  // Public Q URLs are standalone documents; browser/messenger owns Back/Close.
+  if(!q)document.body.insertBefore(header,document.body.firstChild);
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
