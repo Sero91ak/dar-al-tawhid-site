@@ -196,4 +196,5 @@ jobs:
           CURRENT_MAIN="$(git rev-parse origin/main)"
           echo "Canonical sync validated; dispatch production owner for main ${CURRENT_MAIN}"
           gh workflow run cloudflare-pages-deploy.yml --ref main
+          echo "Production-owner workflow: https://github.com/${GITHUB_REPOSITORY}/actions/workflows/cloudflare-pages-deploy.yml"
           echo "Production owner dispatched; the target workflow independently validates and publishes main."
