@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "q50-source-library-browser-test-only-20261105",
+      "at": "2026-11-05T09:41:24.737Z",
+      "approvedBy": "user-explicit-20261105-push-live-dar-admin",
+      "reason": "Allow only the read-only source-route test's inert access helper mocks required for Q50 public library verification; no production security, access or router change.",
+      "paths": [
+        "scripts/check-quellen-client.cjs"
+      ],
+      "expiresAt": "2026-11-12T23:59:00.000Z"
+    },
+    {
       "id": "approved-q50-source-learning-release-20261105",
       "at": "2026-11-05T09:38:15.421Z",
       "approvedBy": "user-explicit-20261105-push-live-q50-and-post-dar-admin",
