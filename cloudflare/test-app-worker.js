@@ -507,7 +507,7 @@ async function finalizeDarTestHomeV1193(asset) {
     html=html.includes("</body>")?html.replace("</body>",scrollJs+"\n</body>"):html+scrollJs;
   // FRAUEN_GLOBAL_V1406 · independent final CSS + seam runtime.
   // Works even when a cached Test shell already contains V1300 authorities.
-  const frauenFlowCss = '<link rel="stylesheet" id="darFrauenGlobalFlowV1407" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css?v=frauen-sticky-hero-v1407-20261103">';
+  const frauenFlowCss = '<link rel="stylesheet" id="darFrauenGlobalFlowV1407" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css?v=frauen-sticky-hero-v1407-20261103-native-single-spacer-v1408">';
   const frauenFlowJs = '<script defer id="darFrauenHeroSeamRuntimeV1407" src="/assets/frauen/frauen-hero-seam-runtime-v1407.js?v=frauen-gap-guard-v1408-20261105"></script>';
   if(!html.includes('id="darFrauenGlobalFlowV1407"'))
     html=html.includes("</body>")?html.replace("</body>",frauenFlowCss+"\n</body>"):html+frauenFlowCss;
