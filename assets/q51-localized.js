@@ -30,7 +30,7 @@ function link(route){
 }
 function sourceRender(){
  var c=locale(),p=active();if(!p)return;
- mark(c);
+ mark(p.approved===true?c:"de");
  text("q51BrandTop",p.ui.headerLine);
  text("q51LanguageLabel","🌐 "+p.ui.language);
  text("q51Reference1","📝 aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · Nr. 487 · 1/370–371");
@@ -79,7 +79,7 @@ function makeOption(label,index,c){
 }
 function renderQuiz(){
  var c=locale(),p=active();if(!p||!quizPage)return;
- mark(c);
+ mark(p.approved===true?c:"de");
  text("qlLanguageLabel","🌐 "+p.ui.language);
  text("qlEyebrow",p.ui.study+" · Q51");
  text("qlTitle",p.title);text("qlReview",p.approved?"":p.ui.review);
@@ -104,6 +104,8 @@ function renderQuiz(){
 function onLocaleChanged(next){
  next=norm(next);if(!next||!cached||!cached.locales[next])return;
  manual=next;
+ step=0;score=0;answer=null;
+ if(quizPage){id("quiz").hidden=false;id("qlFinished").hidden=true;}
  try{localStorage.setItem("darAdultPreferredLocaleV1",next)}catch(_){}
  if(source)sourceRender();if(quizPage)renderQuiz();
  window.dispatchEvent(new CustomEvent("dar:q51:locale-ready",{detail:{locale:next,sourceId:"qsource:51"}}));
@@ -131,7 +133,7 @@ function attach(){
   var next=norm(ev.detail&&ev.detail.locale);if(next)onLocaleChanged(next)
  });
 }
-var fallback=null;
+var fallback={qSourceId:"qsource:51",sourceChains:{"qatadah487":"Bišr → Yazīd → Saʿīd → Qatādah.","qatadah480":"Bišr ibn Muʿāḏ → Yazīd → Saʿīd → Qatādah."},locales:{de:{"name":"Deutsch","title":"DEN SCHÖPFER ANERKENNEN GENÜGT NICHT","speaker1":"Qatādah ibn Diʿāmah (raḥimahullāh)","statement1":"Ihr wisst, dass Allah euch erschaffen hat und die Himmel und die Erde erschaffen hat. Dennoch stellt ihr Ihm andere als Ebenbürtige zur Seite.","speaker2":"Qatādah ibn Diʿāmah (raḥimahullāh)","statement2":"Mit ‚Ebenbürtigen‘ sind Gleichgestellte gemeint. [Sinngemäße Worterklärung]","intro":"Qatādahs zwei Āthār im Tafsīr zu al-Baqarah 2:22 und aṭ-Ṭabarīs eigene Auslegung zum Tawḥīd.","explain1":"Qatādah macht den Widerspruch deutlich, wenn jemand Allah als Schöpfer anerkennt, Ihm aber andere gleichstellt.","explain2":"Das arabische Wort andād steht für Wesenheiten oder Dinge, die Allah gleichgestellt werden. Qatādah erläutert es als ʿudalāʾ (Gleichgestellte).","limitations":"Beide Aussagen sind maqṭūʿe Worte eines Tābiʿī und keine Prophetenḥadīṯe. Die Dokumentation des Isnād ist keine abschließende Einstufung. Aus allgemeinen Aussagen folgt kein ungeprüftes Einzelurteil über Personen.","conclusion":"Der Tawḥīd umfasst nicht nur die Anerkennung Allahs als Schöpfer, sondern auch seine alleinige Anbetung. Ihm darf kein Teilhaber zur Seite gestellt werden.","questions":[{"q":"Was betont Qatādah in al-Baqarah 2:22?","a":["Die Schöpfung sei ohne Schöpfer entstanden.","Man kann Allah als Schöpfer kennen und Ihm dennoch Teilhaber beigesellen.","Jede Überlieferung sei prophetisch.","Die Anbetung anderer sei erlaubt."],"correct":1,"why":"Er kritisiert, dem Schöpfer trotz dieser Erkenntnis andere gleichzustellen."},{"q":"Was bedeutet das Wort andād an dieser Stelle?","a":["Gebetszeiten","Bücher","Allah gleichgestellte Wesenheiten","Die Engel allein"],"correct":2,"why":"Qatādah erklärt andād hier durch ʿudalāʾ: Gleichgestellte."},{"q":"Wer hat diese beiden Aussagen im Tafsīr überliefert?","a":["Qatādah ibn Diʿāmah","Abū Hurayrah","Ibn al-Mubārak","Imām Mālik"],"correct":0,"why":"Beide Āthār werden Qatādah zugeschrieben und von aṭ-Ṭabarī angeführt."},{"q":"Ist das Wissen um Allah als Schöpfer allein schon die vollständige Verwirklichung des Tawḥīd?","a":["Ja, die Art der Anbetung ist bedeutungslos.","Jeder Mensch wird dadurch automatisch sündlos.","Die Frage ist im Qurʾān nicht behandelt.","Nein, die Anbetung muss Allah allein gelten."],"correct":3,"why":"Der Vers verbietet Gleichstellungen und verlangt die alleinige Ausrichtung der Anbetung auf Allah."}],"dir":"ltr","ui":{"source":"Quellenprüfung","study":"Lernbereich öffnen","sources":"Originalnachweise","chain":"Überlieferungsweg","classification":"Einordnung","explanation":"Erläuterung","warning":"Grenzen der Aussage","result":"Fazit","arabic":"Arabischer Originalwortlaut","language":"Sprache","start":"Lernen beginnen","question":"Frage","of":"von","next":"Weiter","evaluate":"Antwort prüfen","correct":"Richtig","incorrect":"Nicht richtig","finish":"Ergebnis","restart":"Erneut lernen","home":"Startseite","review":"Sprachfassung in redaktioneller Prüfung","headerLine":"Wissen aus Qurʾān, Sunnah und Āthār","pageNote":"Die Seitenangaben folgen der genannten Ausgabe; andere Druckausgaben können anders paginiert sein."},"approved":true,"translationStatus":"canonical-german-original-owner-authorized"}}};
 attach();
 fetch(API,{cache:"no-store",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("Q51 locale asset HTTP "+r.status);return r.json()})
 .then(function(j){
@@ -141,6 +143,7 @@ fetch(API,{cache:"no-store",credentials:"same-origin"}).then(function(r){if(!r.o
 }).catch(function(e){
  console.warn("DĀR Q51 multilingual file unavailable; German original retained",e);
  cached=fallback;
- var w=id(source?"q51Review":"qlReview");if(w)w.textContent="Der Sprachkatalog ist momentan nicht abrufbar. Bitte die deutsche Originalquelle nutzen.";
+ if(source)sourceRender();if(quizPage)renderQuiz();
+ var w=id(source?"q51Review":"qlReview");if(w)w.textContent="Der Sprachkatalog ist momentan nicht abrufbar. Die deutsche Originalfassung wird angezeigt.";
 });
 })();
