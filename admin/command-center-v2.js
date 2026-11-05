@@ -113,8 +113,9 @@ function buildOverview(){
 }
 function sync(){
  queued=false;const on=active();document.body.classList.toggle("dar-v2-active",on);
- if(!on){closeDrawer();closeSearch();return}
+ if(!on){closeDrawer();closeSearch();if(rail){rail.hidden=true;bottom.hidden=true;}return}
  if(!rail)init();
+ rail.hidden=false;bottom.hidden=false;
  rail.inert=window.innerWidth<=719&&!drawer;
  renderMenu();syncSelection();buildOverview();
 }
