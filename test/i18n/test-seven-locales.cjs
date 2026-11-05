@@ -446,6 +446,15 @@ assert.equal(w.DarTestTurkishUI.translateValue("Entwurf geladen","en"),"Draft lo
 assert.equal(w.DarTestTurkishUI.translateValue("Entwurf geladen.","en"),"Draft loaded.");
 assert.equal(w.DarTestTurkishUI.translateValue("Vorschau auf 390 px gesetzt","fr"),"Aperçu réglé sur 390 px");
 assert.equal(w.DarTestTurkishUI.translateValue("Datei konnte nicht geladen werden: Keine gültige Layoutdatei","ckb"),"پەڕگە بارنەکرا: پەڕگەی ڕێکخستنی دروست نییە");
+assert.equal(w.DarTestTurkishUI.translateValue("Halbfett","fr"),"Demi-gras");
+assert.equal(w.DarTestTurkishUI.translateValue("Mittig","es"),"Alineado al centro");
+assert.equal(w.DarTestTurkishUI.translateValue("Desktop","tr"),"Masaüstü");
+for(const page of ["wasiyyah/index.html","wasiyyah/pdf-render/index.html","widgets/index.html","editor/startseite-v47.html","ramadan/index.html","repair.html","android/index.html","i18n/index.html"]){
+ const html=fs.readFileSync(path.join(__dirname,"../"+page),"utf8");
+ assert(html.includes("/test/assets/dar-test-turkish-ui.js?v=20261024-ui-more-59"),page+" loads the locale runtime");
+}
+assert(fs.readFileSync(path.join(__dirname,"../wasiyyah/index.html"),"utf8").includes('data-dar-no-translate="testament"'));
+assert(fs.readFileSync(path.join(__dirname,"../wasiyyah/pdf-render/index.html"),"utf8").includes('data-dar-no-translate="testament"'));
 const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"locale-coverage-report.json"),"utf8"));
 assert.equal(coverage.ui.keys,expectedUiTextCount);
 assert.equal(coverage.acceptance.contentComplete,false);
