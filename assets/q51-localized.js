@@ -30,10 +30,10 @@ function link(route){
 }
 function sourceRender(){
  var c=locale(),p=active();if(!p)return;
- mark(c);
+ mark(p.approved===true?c:"de");
  text("q51BrandTop",p.ui.headerLine);
  text("q51LanguageLabel","🌐 "+p.ui.language);
- text("q51Reference1","📝 aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · Nr. 487 · 1/370–371");
+ text("q51Reference1","📝 aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · Nr. 487 · 1/370");
  text("q51Reference2","📝 aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · Nr. 480");
  text("q51Kicker",p.ui.source+" · Q51");
  text("q51Title",p.title);
@@ -79,7 +79,7 @@ function makeOption(label,index,c){
 }
 function renderQuiz(){
  var c=locale(),p=active();if(!p||!quizPage)return;
- mark(c);
+ mark(p.approved===true?c:"de");
  text("qlLanguageLabel","🌐 "+p.ui.language);
  text("qlEyebrow",p.ui.study+" · Q51");
  text("qlTitle",p.title);text("qlReview",p.approved?"":p.ui.review);
@@ -105,6 +105,7 @@ function onLocaleChanged(next){
  next=norm(next);if(!next||!cached||!cached.locales[next])return;
  manual=next;
  try{localStorage.setItem("darAdultPreferredLocaleV1",next)}catch(_){}
+ if(quizPage){step=0;score=0;answer=null;id("quiz").hidden=false;id("qlFinished").hidden=true;}
  if(source)sourceRender();if(quizPage)renderQuiz();
  window.dispatchEvent(new CustomEvent("dar:q51:locale-ready",{detail:{locale:next,sourceId:"qsource:51"}}));
 }
