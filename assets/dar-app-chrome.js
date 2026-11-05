@@ -30,7 +30,7 @@
   }
   // Same canonical URL for app and external visitors; only the owning shell changes.
   function internalReaderTarget(anchor,base){
-    if(!anchor||anchor.hasAttribute("download")||anchor.getAttribute("target")==="_blank")return null;
+    if(!anchor||anchor.hasAttribute("download"))return null;
     var url;
     try{url=new URL(anchor.getAttribute("href"),base)}catch(_){return null}
     if(url.origin!==location.origin||
