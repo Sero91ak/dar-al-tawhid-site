@@ -208,4 +208,5 @@ if (fail.length) {
   console.error('Q-Quellenkarten-Freigabe gesperrt: ' + fail.length + ' Fehler.');
   process.exit(1);
 }
+await import('./check-q01-05-locales.mjs');
 console.log('Q-Quellenkarten-Gate OK: ' + files.length + ' aktive Bestandskarten, alle Nachweiskarten funktional adressiert; zukünftige Q ab 43 strikt geprüft.');
