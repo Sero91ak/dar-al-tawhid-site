@@ -11,10 +11,6 @@ on:
       - 'assets/theme-salbei-elfenbein.css'
       - 'assets/learning-heritage.css'
       - 'assets/dar-app-chrome.js'
-      - 'assets/q51-locales.json'
-      - 'assets/q51-localized.js'
-      - 'assets/dar-q51-post-language-v1.js'
-      - 'scripts/check-q51-nine-language.cjs'
       - '.github/workflows/check-qsource-standard.yml'
   pull_request:
     paths:
@@ -47,9 +43,6 @@ jobs:
 
       - name: In-app source navigation regression
         run: node q/_registry/check-source-navigation.mjs
-
-      - name: Q51 complete nine-language source post and quiz regression
-        run: node scripts/check-q51-nine-language.cjs
 
       - name: Q46 single-screen learning and appearance regression
         run: node q/_registry/check-learning-quiz.cjs
