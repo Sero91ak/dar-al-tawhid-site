@@ -144,7 +144,7 @@ var fallback=null;
 attach();
 fetch(API,{cache:"no-store",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("Q51 locale asset HTTP "+r.status);return r.json()})
 .then(function(j){
- if(j.qSourceId!=="qsource:50"||!j.locales||CODES.some(function(c){return !j.locales[c]||j.locales[c].questions.length!==4}))throw Error("Incomplete Q51 locales");
+ if(j.qSourceId!=="qsource:51"||!j.locales||CODES.some(function(c){return !j.locales[c]||j.locales[c].questions.length!==4}))throw Error("Incomplete Q51 locales");
  cached=j;
  if(source)sourceRender();if(quizPage)renderQuiz();
 }).catch(function(e){
