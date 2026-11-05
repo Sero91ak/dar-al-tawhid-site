@@ -2,6 +2,15 @@
 
 **Verbindliche neue Regel vom 30.10.2026.** Ergänzt die globalen Beitrags- und Quellenregeln, ersetzt sie nicht. Die Erwachsenen-Besucher-App hat drei Profiloptionen (Frau, Mann, Neutral), aber keine getrennte Bibliothekskopie.
 
+## Dauerregel: identische Q-Quellenlinks, kontextabhängiges Zurück (05.11.2026)
+
+Diese Regel gilt für **alle** neuen und bestehenden Wissensbereich-Themenkarten, zugeordneten Erwachsenen-Beiträge, freigegebenen Sprachen und verknüpften Lernbereiche und zugleich für die tägliche Beitragserstellung der **DĀR AL TAWḤĪD Zentrale** (Abschnitt L der bestehenden Automatik). Ein Quellenbeleg besitzt genau eine kanonische URL `https://dar-al-tawhid.de/q/N/`; diese bleibt beim Teilen über WhatsApp, Telegram und Browser **identisch**. Keine zweite Q-Karte/URL bei Zuordnung desselben Beitrags zum Frauen- und Männerwissen, keine App-spezifischen oder künstlichen Rücksprung-URLs. Manuell ausgewählte vorhandene `?lang=`-Sprachen ändern die Q-ID nicht.
+
+**Interner Aufruf in der laufenden Erwachsenen-App:** vorhandener Reader ohne Full Reload/Start-Loader; Zurück führt vom Lernbereich zur Quelle und von dort genau zur vorherigen Beitrags-/Wissensbereichsseite, mit Tab, Suche/Filtern und Scrollstand. Browser/System-Zurück respektiert diese Hierarchie. **Extern geteilter/direkt geöffneter Quellenlink:** dieselbe selbständige `/q/N/`-Seite ohne eigenen künstlichen Zurück-Button; die Ursprungsanwendung bzw. der Browser stellt Zurück/Schließen bereit. Kein automatischer Sprung auf die Startseite; freiwillige Websitelinks sind davon unabhängig. Islamweb, Shamela, Dorar und PDF/Scan öffnen weiter ihre tatsächlichen Originalziele.
+
+Implementierung: `assets/dar-app-chrome.js`, `assets/dar-reading-surface-v1.js`, `assets/q-source-app-view.js` (PR #1682), Regression: `node q/_registry/check-source-navigation.mjs`. **Pflicht vor jedem neuen Post oder Wissensbereich-Livegang:** gleiche URL, Q-ID, internes Zurück (inkl. Quelle→Lernen→Quelle→Post), externe Messenger-/Browseransicht ohne eigenen Back, Scrollstand, originale Fachquellen, iOS/PWA/Desktop und neun Sprachen prüfen. Vor jeder Veröffentlichung gelten weiterhin die bestehenden Locks, Freigaben, Authentizitätskontrollen, Cloudflare-Live-Nachweise und die getrennte Push-Regel.
+
+
 ## Die drei Kommandos
 
 **„Wissensbereich Themen“:** Aktuellen GitHub-main-Stand, Beiträge, Q-Karten, Lernseiten, Bibliothek, bestehende Entwürfe und Veröffentlichungsmetadaten prüfen. `node scripts/wissensbereich-themen.cjs scan "THEMA"` nutzen. Geordneten Bestands-/Dubletten-/Lückenbericht für Frauen und Männer liefern, vorhandene Inhalte zur Mehrfachzuordnung vorschlagen, externe Originalquellen nur bei tatsächlichen Lücken recherchieren. Keine Veröffentlichung und keine Push-Mitteilung.
