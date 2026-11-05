@@ -58,7 +58,7 @@ function syncSelection(){
  document.body.dataset.darV2View=id||"start";
 }
 function toggleDrawer(open){
- drawer=!!open&&active();document.body.classList.toggle("dar-v2-drawer-open",drawer);
+ drawer=!!open&&active();document.body.classList.toggle("dar-v2-drawer-open",drawer);if(rail)rail.inert=window.innerWidth<=719&&!drawer;
  $("#darV2More")?.setAttribute("aria-expanded",String(drawer));
 }
 function closeDrawer(){toggleDrawer(false)}
@@ -115,6 +115,7 @@ function sync(){
  queued=false;const on=active();document.body.classList.toggle("dar-v2-active",on);
  if(!on){closeDrawer();closeSearch();return}
  if(!rail)init();
+ rail.inert=window.innerWidth<=719&&!drawer;
  renderMenu();syncSelection();buildOverview();
 }
 function queue(){if(queued)return;queued=true;requestAnimationFrame(sync)}
