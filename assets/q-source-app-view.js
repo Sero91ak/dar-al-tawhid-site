@@ -3,11 +3,11 @@
    External primary sources retain their explicit destinations. */
 (function(){
   "use strict";
-  /* Numbered Q pages in a real browser get the compact Back/Home bar.
-     In the native internal reader the parent app already owns that bar. */
+  /* Numbered Q pages are standalone externally: do NOT create Back/Home.
+     In the internal app reader the parent shell already owns navigation. */
   if(window.self===window.top){
     var readerScript=document.createElement("script");
-    readerScript.src="/assets/dar-reading-surface-v1.js?v=20261101-1";
+    readerScript.src="/assets/dar-reading-surface-v1.js?v=20261105-context-v2";
     document.head.appendChild(readerScript);
   }
   var coarse = false;
