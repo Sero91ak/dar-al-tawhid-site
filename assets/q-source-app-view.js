@@ -23,7 +23,7 @@
     if(!anchor || anchor.hasAttribute("download")) return;
     var target;
     try { target=new URL(anchor.getAttribute("href"),location.href); } catch(_){return;}
-    if(target.origin !== location.origin || !/^\/q\/[1-9][0-9]*\/?$/.test(target.pathname))return;
+    if(window.self!==window.top || target.origin !== location.origin || !/^\/q\/[1-9][0-9]*\/?$/.test(target.pathname))return;
     // Keep every numbered DAR source in the existing PWA/WKWebView frame.
     event.preventDefault();
     event.stopImmediatePropagation();
