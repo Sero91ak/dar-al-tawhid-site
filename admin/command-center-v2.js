@@ -19,7 +19,7 @@ function go(id){if(!active()||!options().some(x=>x.id===id))return;closeDrawer()
 function navButton(id,title,compact=false){const b=el("button","dar-v2-nav"+(compact?" dar-v2-tab":""),undefined);b.type="button";b.dataset.v2Nav=id;b.title=title;b.setAttribute("aria-label",title);b.append(el("span","dar-v2-nav-icon",glyphs[id]||"•"),el("span","dar-v2-nav-label",title));b.addEventListener("click",()=>go(id));return b}
 function init(){
  rail=el("aside","dar-v2-rail");rail.id="darV2Rail";rail.setAttribute("aria-label","DĀR Admin Hauptnavigation");
- const brand=el("div","dar-v2-brand");brand.append(el("span","dar-v2-brand-logo","د"));
+ const brand=el("div","dar-v2-brand");const logo=el("img","dar-v2-brand-logo");logo.src="/admin/admin-icon-192.png";logo.alt="";logo.width=40;logo.height=40;brand.append(logo);
  const words=el("span","dar-v2-brand-words");words.append(el("strong","", "DĀR ADMIN"),el("small","", "COMMAND CENTER V2"));brand.append(words);
  rail.append(brand,el("nav","dar-v2-menu"),el("div","dar-v2-rail-foot","PRIVATE VERWALTUNG"));document.body.append(rail);
  const scrim=el("button","dar-v2-scrim");scrim.type="button";scrim.setAttribute("aria-label","Menü schließen");scrim.addEventListener("click",closeDrawer);document.body.append(scrim);
@@ -39,8 +39,10 @@ function init(){
  searchField.addEventListener("keydown",e=>{if(e.key==="ArrowDown"){e.preventDefault();searchResults.querySelector("button")?.focus()}});
  const toolbar=$("#topbar .toolbar");if(toolbar){const b=el("button","btn dar-v2-search-launch","⌕ Bereiche");b.type="button";b.setAttribute("aria-label","Bereiche suchen");b.addEventListener("click",openSearch);toolbar.prepend(b)}
 }
+let lastMenuSignature="";
 function renderMenu(){
- const root=rail.querySelector(".dar-v2-menu");root.replaceChildren();const available=options();const seen=new Set();
+ const available=options();const signature=JSON.stringify(available);if(signature===lastMenuSignature)return;lastMenuSignature=signature;
+ const root=rail.querySelector(".dar-v2-menu");root.replaceChildren();const seen=new Set();
  groups.forEach(([heading,ids])=>{
   const present=ids.filter(id=>available.some(x=>x.id===id));if(!present.length)return;
   const wrap=el("section","dar-v2-menu-group");wrap.append(el("h2","dar-v2-group-label",heading));
