@@ -60,7 +60,7 @@ function node(tag="div",text=""){
   appendChild(child){this.children.push(child);return child},
   addEventListener(k,fn){(this.handlers[k]??=[]).push(fn)}};
 }
-async function simulate(n,search,stored){
+async function simulate(n,search,stored,payload=batch){
  const values={
   ".qsource-brand-top":node("p","German original header"),
   ".qsource-title":node("h2","German original title"),
@@ -104,7 +104,7 @@ async function simulate(n,search,stored){
  const store={darAdultPreferredLocaleV1:stored};
  const localStorage={getItem(k){return store[k]||null},setItem(k,v){store[k]=v}};
  const window={addEventListener(){}};
- const ctx={document:doc,window,location,localStorage,fetch:async()=>({ok:true,json:async()=>batch}),URL};
+ const ctx={document:doc,window,location,localStorage,fetch:async()=>({ok:true,json:async()=>payload}),URL};
  vm.runInNewContext(runtime,ctx,{timeout:3000});
  for(let i=0;i<8;i++)await Promise.resolve();
  return {doc,root,values,arabicOriginal,ids,store,refUrls,select:ids.qSourceFirstFiveLocaleSelect,notice:values[".qsource-header"].parentNode.inserted?.children?.[2]};
@@ -125,8 +125,11 @@ assert.equal(src.values[".qsource-title"].textContent,"German original title");
 assert.equal(src.doc.documentElement.attrs.dir,"ltr");
 const review=JSON.parse(JSON.stringify(batch));
 review.cards["5"].ckb.approved=true;
-let preview=await simulate(5,"?lang=ckb","");
-assert.equal(preview.values[".qsource-title"].textContent,"German original title","Unapproved text not published");
-assert.equal(preview.doc.documentElement.attrs.lang,"de");
-assert.equal(preview.arabicOriginal.textContent,src.arabicOriginal.textContent);
+let preview=await simulate(5,"?lang=ckb","",review);
+assert.equal(preview.values[".qsource-title"].textContent,review.cards["5"].ckb.title,"Approved draft would be readable in the chosen language");
+assert.equal(preview.doc.documentElement.attrs.lang,"ckb");
+assert.equal(preview.doc.documentElement.attrs.dir,"rtl","Approved Sorani uses RTL");
+assert.equal(preview.values[".qsource-section p:not(.qsource-arabic)"].textContent,review.cards["5"].ckb.note);
+assert.equal(preview.arabicOriginal.textContent,src.arabicOriginal.textContent,"Approved localization must not change Arabic evidence");
+assert.equal(preview.notice.hidden,true);
 console.log("QSOURCE_I18N_BATCH01_GUARD OK: 5 Q pages × 9 complete locale drafts, immutable 20 source links, standalone navigation, review-gated Arabic and saved-language precedence.");
