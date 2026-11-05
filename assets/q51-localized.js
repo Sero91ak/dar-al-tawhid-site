@@ -7,7 +7,7 @@
 var source=document.getElementById("q51Source"),quizPage=document.getElementById("q51QuizPage");
 if(!source&&!quizPage)return;
 if(window.__darQ51LocalizedV1)return;window.__darQ51LocalizedV1=true;
-var API="/assets/q51-locales.json?v=20261105-v2";
+var API="/assets/q51-locales.json?v=20261105-nine-complete-v1";
 var CODES=["de","ar","en","tr","ku","ckb","bs","fr","es"];
 var cached=null,manual="",step=0,score=0,answer=null;
 function id(k){return document.getElementById(k)}
@@ -22,7 +22,16 @@ function explicit(){
 function lang(){return manual||explicit()||getStored()||"de"}
 function mark(code){document.documentElement.lang=code;document.documentElement.dir=code==="ar"||code==="ckb"?"rtl":"ltr";document.body.classList.toggle("q51-rtl",code==="ar"||code==="ckb");}
 function locale(){var code=lang();return cached&&cached.locales[code]?code:"de"}
-function active(){if(!cached)return null;var chosen=cached.locales[locale()];if(!chosen)return cached.locales.de;return chosen.approved===true?chosen:Object.assign({},cached.locales.de,{ui:chosen.ui,approved:false})}
+function active(){
+ if(!cached)return null;
+ var chosen=cached.locales[locale()];
+ if(!chosen)return cached.locales.de;
+ // Owner-authorized display and independent linguistic/theological approval are
+ // distinct flags. Preserve the visible review notice for unreviewed drafts.
+ if(chosen.approved===true||(chosen.post&&chosen.post.publicationApprovedByOwner===true))return chosen;
+ return Object.assign({},cached.locales.de,{ui:chosen.ui,approved:false});
+}
+function renderedCode(code,p){return p===cached.locales[code]?code:"de"}
 function link(route){
  var u=new URL(route,document.baseURI||location.href);
  u.searchParams.set("lang",locale());
@@ -30,11 +39,11 @@ function link(route){
 }
 function sourceRender(){
  var c=locale(),p=active();if(!p)return;
- mark(p.approved===true?c:"de");
+ mark(renderedCode(c,p));
  text("q51BrandTop",p.ui.headerLine);
  text("q51LanguageLabel","🌐 "+p.ui.language);
- text("q51Reference1","📝 aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · Nr. 487 · 1/370");
- text("q51Reference2","📝 aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · Nr. 480");
+ text("q51Reference1","📝 aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · № 487 · 1/370");
+ text("q51Reference2","📝 aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · № 480");
  text("q51Kicker",p.ui.source+" · Q51");
  text("q51Title",p.title);
  text("q51Intro",p.intro);
@@ -50,7 +59,21 @@ function sourceRender(){
  text("q51Statement2","„"+p.statement2+"“");
  text("q51Explain1",p.explain1);
  text("q51Explain2",p.explain2);
- text("q51Context",p.ui.explanation+": "+p.intro);
+ text("q51TabariAttribution",p.ui.tabariAttribution);
+ text("q51Context",p.ui.tabariContext);
+ var bibliography=[
+  "① aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · 1/370 · № 487",
+  "② aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · 1/393 · № 487",
+  "③ aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · № 480",
+  "④ aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · al-Baqarah 2:22 · № 490+"
+ ];
+ if(source){
+  Array.from(source.querySelectorAll("#q51Evidence .qsource-link")).forEach(function(a,i){
+   var title=a.querySelector(".qsource-link-title"),subtitle=a.querySelector(".qsource-link-sub");
+   if(title&&bibliography[i])title.textContent=bibliography[i];
+   if(subtitle&&p.ui.sourceLinkDescriptions&&p.ui.sourceLinkDescriptions[i])subtitle.textContent=p.ui.sourceLinkDescriptions[i];
+  });
+ }
  text("q51Limit",p.ui.warning+": "+p.limitations);
  text("q51Takeaway",p.ui.result+": "+p.conclusion);
  text("q51Chain1",p.ui.chain+": "+cached.sourceChains.qatadah487);
@@ -59,7 +82,7 @@ function sourceRender(){
  text("q51Learning","📚 "+p.ui.study);
  var a=id("q51Learning");if(a)a.href=link("/lernen/tawhid-schoepfer-anbetung/");
  text("q51Review",p.approved?"":p.ui.review);
- var picker=id("q51Language");if(picker)picker.value=c;
+ var picker=id("q51Language");if(picker){picker.value=c;picker.setAttribute("aria-label",p.ui.language);}
  document.title=p.title+" | Q51 · DĀR AL TAWḤĪD";
 }
 function makeOption(label,index,c){
@@ -79,11 +102,12 @@ function makeOption(label,index,c){
 }
 function renderQuiz(){
  var c=locale(),p=active();if(!p||!quizPage)return;
- mark(p.approved===true?c:"de");
+ mark(renderedCode(c,p));
  text("qlLanguageLabel","🌐 "+p.ui.language);
  text("qlEyebrow",p.ui.study+" · Q51");
  text("qlTitle",p.title);text("qlReview",p.approved?"":p.ui.review);
- var picker=id("qlLanguage");if(picker)picker.value=c;
+ var picker=id("qlLanguage");if(picker){picker.value=c;picker.setAttribute("aria-label",p.ui.language);}
+ var quiz=id("quiz");if(quiz)quiz.setAttribute("aria-label",p.ui.quizAccessibility||p.ui.study);
  var q=p.questions[step];if(!q)return;
  text("qlStep",p.ui.question+" "+(step+1)+" "+p.ui.of+" "+p.questions.length);
  text("qlScore",score+" "+p.ui.correct);
