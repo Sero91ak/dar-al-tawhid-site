@@ -122,7 +122,9 @@
         "home": "Startseite",
         "review": "Sprachfassung in redaktioneller Prüfung",
         "headerLine": "Wissen aus Qurʾān, Sunnah und Āthār",
-        "pageNote": "Die Seitenangaben folgen der genannten Ausgabe; andere Druckausgaben können anders paginiert sein."
+        "pageNote": "Die Seitenangaben folgen der genannten Ausgabe; andere Druckausgaben können anders paginiert sein.",
+        "tabariAttribution": "eigene Auslegung, kein wörtlicher Ausspruch Qatādahs",
+        "sourceReferenceHint": "Die Seitenangaben folgen der genannten Ausgabe; andere Druckausgaben können anders paginiert sein."
       },
       "approved": true,
       "translationStatus": "canonical-german-original-owner-authorized",
@@ -135,7 +137,7 @@
         "title": "DEN SCHÖPFER ANERKENNEN GENÜGT NICHT",
         "speaker": "Qatādah ibn Diʿāmah (raḥimahullāh)",
         "statement": "Ihr wisst, dass Allah euch erschaffen hat und die Himmel und die Erde erschaffen hat. Dennoch stellt ihr Ihm andere als Ebenbürtige zur Seite.",
-        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr al-Baqarah 2:22, Nr. 487 (Bd. 1, S. 370) und Nr. 480.",
+        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, al-Baqarah 2:22 · 487 (1/370), 480.",
         "sourceUrl": "/q/51/?lang=de",
         "quizUrl": "/lernen/tawhid-schoepfer-anbetung/?lang=de",
         "summary": "Der Tawḥīd umfasst nicht nur die Anerkennung Allahs als Schöpfer, sondern auch seine alleinige Anbetung. Ihm darf kein Teilhaber zur Seite gestellt werden.",
@@ -153,7 +155,8 @@
       },
       "localeId": "post:qatadah-tawhid-schoepfer-anbetung-20261105-q51:de",
       "qSourceLocaleId": "qsource:51:de",
-      "quizLocaleId": "quiz:qsource:51:de"
+      "quizLocaleId": "quiz:qsource:51:de",
+      "tabariContext": "Aṭ-Ṭabarī erklärt im weiteren Kontext des Verses, dass die Anerkennung Allahs als Schöpfer und Versorger nicht genügt, wenn andere in der Anbetung beigesellt werden. Das ist eine sinngemäße Zusammenfassung seiner eigenen Auslegung, kein zusätzliches wörtliches Qatādah-Zitat."
     },
     "ar": {
       "name": "العربية",
@@ -237,7 +240,9 @@
         "home": "الرئيسية",
         "review": "الترجمة قيد المراجعة التحريرية",
         "headerLine": "علم من القرآن والسنة والآثار",
-        "pageNote": "أرقام الصفحات بحسب الطبعة المذكورة، وقد تختلف في طبعات أخرى."
+        "pageNote": "أرقام الصفحات بحسب الطبعة المذكورة، وقد تختلف في طبعات أخرى.",
+        "tabariAttribution": "تفسيره الخاص، وليس قولاً حرفياً لقتادة",
+        "sourceReferenceHint": "أرقام الصفحات بحسب الطبعة المذكورة، وقد تختلف في طبعات أخرى."
       },
       "approved": false,
       "translationStatus": "draft-review-required",
@@ -246,11 +251,11 @@
         "contentId": "post:qatadah-tawhid-schoepfer-anbetung-20261105-q51",
         "qSourceId": "qsource:51",
         "category": "Āthār",
-        "topic": "Tawḥīd – Schöpferanerkennung und alleinige Anbetung",
+        "topic": "الإقرار بالخالق وحده لا يكفي",
         "title": "الإقرار بالخالق وحده لا يكفي",
         "speaker": "Qatādah ibn Diʿāmah (raḥimahullāh)",
         "statement": "أنتم تعلمون أن الله خلقكم وخلق السماوات والأرض، ثم تجعلون له أندادًا.",
-        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr al-Baqarah 2:22, Nr. 487 (Bd. 1, S. 370) und Nr. 480.",
+        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, al-Baqarah 2:22 · 487 (1/370), 480.",
         "sourceUrl": "/q/51/?lang=ar",
         "quizUrl": "/lernen/tawhid-schoepfer-anbetung/?lang=ar",
         "summary": "التوحيد لا يقتصر على الإقرار بأن الله هو الخالق؛ بل يقتضي إفراد الله بالعبادة وترك الإشراك به.",
@@ -268,7 +273,8 @@
       },
       "localeId": "post:qatadah-tawhid-schoepfer-anbetung-20261105-q51:ar",
       "qSourceLocaleId": "qsource:51:ar",
-      "quizLocaleId": "quiz:qsource:51:ar"
+      "quizLocaleId": "quiz:qsource:51:ar",
+      "tabariContext": "يوضح الطبري في سياق تفسير الآية أن الإقرار بأن الله هو الخالق والرازق لا يكفي إذا أُشرك غيره معه في العبادة. وهذا تلخيص بالمعنى لتفسيره، وليس قولًا آخر منقولًا بحروفه عن قتادة."
     },
     "en": {
       "name": "English",
@@ -352,7 +358,9 @@
         "home": "Home",
         "review": "Translation awaits editorial review",
         "headerLine": "Knowledge from Qurʾān, Sunnah and Āthār",
-        "pageNote": "Page numbers refer to the cited edition and may differ in other printed editions."
+        "pageNote": "Page numbers refer to the cited edition and may differ in other printed editions.",
+        "tabariAttribution": "his own commentary, not a verbatim statement by Qatādah",
+        "sourceReferenceHint": "Page numbers refer to the cited edition and may differ in other printed editions."
       },
       "approved": false,
       "translationStatus": "draft-review-required",
@@ -361,11 +369,11 @@
         "contentId": "post:qatadah-tawhid-schoepfer-anbetung-20261105-q51",
         "qSourceId": "qsource:51",
         "category": "Āthār",
-        "topic": "Tawḥīd – Schöpferanerkennung und alleinige Anbetung",
+        "topic": "ACKNOWLEDGING THE CREATOR ALONE IS NOT ENOUGH",
         "title": "ACKNOWLEDGING THE CREATOR ALONE IS NOT ENOUGH",
         "speaker": "Qatādah ibn Diʿāmah (raḥimahullāh)",
         "statement": "You know that Allah created you and created the heavens and the earth, yet you set up equals beside Him.",
-        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr al-Baqarah 2:22, Nr. 487 (Bd. 1, S. 370) und Nr. 480.",
+        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, al-Baqarah 2:22 · 487 (1/370), 480.",
         "sourceUrl": "/q/51/?lang=en",
         "quizUrl": "/lernen/tawhid-schoepfer-anbetung/?lang=en",
         "summary": "Tawḥīd requires more than acknowledging Allah as Creator: worship must be directed to Him alone without partners.",
@@ -383,7 +391,8 @@
       },
       "localeId": "post:qatadah-tawhid-schoepfer-anbetung-20261105-q51:en",
       "qSourceLocaleId": "qsource:51:en",
-      "quizLocaleId": "quiz:qsource:51:en"
+      "quizLocaleId": "quiz:qsource:51:en",
+      "tabariContext": "In his wider explanation of the verse, aṭ-Ṭabarī explains that recognizing Allah as Creator and Provider is not sufficient if others are associated with Him in worship. This paraphrases aṭ-Ṭabarī’s own commentary; it is not an additional verbatim statement from Qatādah."
     },
     "tr": {
       "name": "Türkçe",
@@ -467,7 +476,9 @@
         "home": "Ana sayfa",
         "review": "Çeviri editoryal incelemede",
         "headerLine": "Kurʾân, Sünnet ve eserlerden ilim",
-        "pageNote": "Sayfa numaraları belirtilen baskıya aittir; diğer baskılarda farklı olabilir."
+        "pageNote": "Sayfa numaraları belirtilen baskıya aittir; diğer baskılarda farklı olabilir.",
+        "tabariAttribution": "kendi tefsiri; Katâde'nin birebir sözü değildir",
+        "sourceReferenceHint": "Sayfa numaraları belirtilen baskıya aittir; diğer baskılarda farklı olabilir."
       },
       "approved": false,
       "translationStatus": "draft-review-required",
@@ -476,11 +487,11 @@
         "contentId": "post:qatadah-tawhid-schoepfer-anbetung-20261105-q51",
         "qSourceId": "qsource:51",
         "category": "Āthār",
-        "topic": "Tawḥīd – Schöpferanerkennung und alleinige Anbetung",
+        "topic": "YARATICIYI TANIMAK TEK BAŞINA YETERLİ DEĞİLDİR",
         "title": "YARATICIYI TANIMAK TEK BAŞINA YETERLİ DEĞİLDİR",
         "speaker": "Qatādah ibn Diʿāmah (raḥimahullāh)",
         "statement": "Allah'ın sizi, gökleri ve yeri yarattığını bildiğiniz hâlde O'na denkler koşuyorsunuz.",
-        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr al-Baqarah 2:22, Nr. 487 (Bd. 1, S. 370) und Nr. 480.",
+        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, al-Baqarah 2:22 · 487 (1/370), 480.",
         "sourceUrl": "/q/51/?lang=tr",
         "quizUrl": "/lernen/tawhid-schoepfer-anbetung/?lang=tr",
         "summary": "Tevhid yalnızca Allah'ı yaratıcı kabul etmek değil, ibadeti yalnız O'na tahsis edip ortak koşmamaktır.",
@@ -498,7 +509,8 @@
       },
       "localeId": "post:qatadah-tawhid-schoepfer-anbetung-20261105-q51:tr",
       "qSourceLocaleId": "qsource:51:tr",
-      "quizLocaleId": "quiz:qsource:51:tr"
+      "quizLocaleId": "quiz:qsource:51:tr",
+      "tabariContext": "Taberî, âyetin geniş açıklamasında Allah'ın yaratıcı ve rızık verici olduğunu kabul etmenin, ibadette O'na başkaları ortak koşuluyorsa yeterli olmadığını açıklar. Bu, Taberî'nin kendi tefsirinin anlam bakımından özetidir; Katâde'den nakledilen yeni bir lafzî alıntı değildir."
     },
     "ku": {
       "name": "Kurmancî",
@@ -582,7 +594,9 @@
         "home": "Rûpela sereke",
         "review": "Werger hê di nirxandina edîtorî de ye",
         "headerLine": "Zanîn ji Qurʾan, Sunnah û Āthār",
-        "pageNote": "Hejmarên rûpelan li gorî çapê hatine dayîn; di çapên din de dikarin cuda bin."
+        "pageNote": "Hejmarên rûpelan li gorî çapê hatine dayîn; di çapên din de dikarin cuda bin.",
+        "tabariAttribution": "şîroveya wî ye, ne gotineke peyv bi peyv a Qatādah ye",
+        "sourceReferenceHint": "Hejmarên rûpelan li gorî çapê hatine dayîn; di çapên din de dikarin cuda bin."
       },
       "approved": false,
       "translationStatus": "draft-review-required",
@@ -591,11 +605,11 @@
         "contentId": "post:qatadah-tawhid-schoepfer-anbetung-20261105-q51",
         "qSourceId": "qsource:51",
         "category": "Āthār",
-        "topic": "Tawḥīd – Schöpferanerkennung und alleinige Anbetung",
+        "topic": "TENÊ NASÎNA AFIRÎNER TÊR NAKÊ",
         "title": "TENÊ NASÎNA AFIRÎNER TÊR NAKÊ",
         "speaker": "Qatādah ibn Diʿāmah (raḥimahullāh)",
         "statement": "Hûn dizanin ku Allah we û ezman û erd afirandiye, lê dîsa hûn kesên din wek hevberên Wî datînin.",
-        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr al-Baqarah 2:22, Nr. 487 (Bd. 1, S. 370) und Nr. 480.",
+        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, al-Baqarah 2:22 · 487 (1/370), 480.",
         "sourceUrl": "/q/51/?lang=ku",
         "quizUrl": "/lernen/tawhid-schoepfer-anbetung/?lang=ku",
         "summary": "Tawḥīd ne tenê nasîna Allah wek Afirîner e; îbadet divê tenê ji Wî re be û kesekî din nebe hevparê Wî.",
@@ -613,7 +627,8 @@
       },
       "localeId": "post:qatadah-tawhid-schoepfer-anbetung-20261105-q51:ku",
       "qSourceLocaleId": "qsource:51:ku",
-      "quizLocaleId": "quiz:qsource:51:ku"
+      "quizLocaleId": "quiz:qsource:51:ku",
+      "tabariContext": "Aṭ-Ṭabarī di şiroveya berfireh a vê ayetê de diyar dike ku tenê pejirandina Allah wek Afirîner û Rizqder têr nake, heke di îbadetê de kesên din bi Wî re bên şirîk kirin. Ev kurtasiyek bi wate ya şîroveya xwe ye, ne gotineke din a peyv bi peyv a Qatādah."
     },
     "ckb": {
       "name": "سۆرانی",
@@ -697,7 +712,9 @@
         "home": "سەرەتا",
         "review": "وەرگێڕانەکە چاوەڕوانی پشکنینی دەستکاریکەرە",
         "headerLine": "زانست لە قورئان و سوننەت و ئاسار",
-        "pageNote": "ژمارەی لاپەڕەکان بەپێی ئەو چاپەیە کە ئاماژەی پێکراوە؛ لە چاپی تردا دەگۆڕێن."
+        "pageNote": "ژمارەی لاپەڕەکان بەپێی ئەو چاپەیە کە ئاماژەی پێکراوە؛ لە چاپی تردا دەگۆڕێن.",
+        "tabariAttribution": "تەفسیری خۆیەتی، نەک وتەیەکی وشەبەوشەی قەتادە",
+        "sourceReferenceHint": "ژمارەی لاپەڕەکان بەپێی ئەو چاپەیە کە ئاماژەی پێکراوە؛ لە چاپی تردا دەگۆڕێن."
       },
       "approved": false,
       "translationStatus": "draft-review-required",
@@ -706,11 +723,11 @@
         "contentId": "post:qatadah-tawhid-schoepfer-anbetung-20261105-q51",
         "qSourceId": "qsource:51",
         "category": "Āthār",
-        "topic": "Tawḥīd – Schöpferanerkennung und alleinige Anbetung",
+        "topic": "تەنها داننان بە دروستکەر بەس نییە",
         "title": "تەنها داننان بە دروستکەر بەس نییە",
         "speaker": "Qatādah ibn Diʿāmah (raḥimahullāh)",
         "statement": "ئێوە دەزانن کە الله ئێوەی دروست کردووە و ئاسمانەکان و زەویشی دروست کردووە، بەڵام هێشتا هاوتاکانی بۆ دادەنێن.",
-        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr al-Baqarah 2:22, Nr. 487 (Bd. 1, S. 370) und Nr. 480.",
+        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, al-Baqarah 2:22 · 487 (1/370), 480.",
         "sourceUrl": "/q/51/?lang=ckb",
         "quizUrl": "/lernen/tawhid-schoepfer-anbetung/?lang=ckb",
         "summary": "تەوحید تەنها داننان بەوە نییە کە الله دروستکەرە؛ بەڵکو پێویستە پەرستش تەنها بۆ ئەو بێت و هیچ هاوبەشێکی بۆ دانەنرێت.",
@@ -728,7 +745,8 @@
       },
       "localeId": "post:qatadah-tawhid-schoepfer-anbetung-20261105-q51:ckb",
       "qSourceLocaleId": "qsource:51:ckb",
-      "quizLocaleId": "quiz:qsource:51:ckb"
+      "quizLocaleId": "quiz:qsource:51:ckb",
+      "tabariContext": "تەبەری لە ڕوونکردنەوەی فراوانتری ئایەتەکەدا دەڵێت کە داننان بە الله وەک دروستکەر و ڕۆزیدەر بەس نییە، ئەگەر لە پەرستندا هاوبەشی بۆ دابنرێت. ئەمە پوختەیەکی بەمانای تەفسیری خودی تەبەرییە، نەک وتەیەکی تری وشەبەوشەی قەتادە."
     },
     "bs": {
       "name": "Bosanski",
@@ -812,7 +830,9 @@
         "home": "Početna",
         "review": "Prijevod čeka stručnu provjeru",
         "headerLine": "Znanje iz Kurʾāna, Sunneta i āthāra",
-        "pageNote": "Brojevi stranica odnose se na navedeno izdanje i mogu se razlikovati u drugim izdanjima."
+        "pageNote": "Brojevi stranica odnose se na navedeno izdanje i mogu se razlikovati u drugim izdanjima.",
+        "tabariAttribution": "njegovo vlastito tumačenje, a ne doslovna izjava Katāde",
+        "sourceReferenceHint": "Brojevi stranica odnose se na navedeno izdanje i mogu se razlikovati u drugim izdanjima."
       },
       "approved": false,
       "translationStatus": "draft-review-required",
@@ -821,11 +841,11 @@
         "contentId": "post:qatadah-tawhid-schoepfer-anbetung-20261105-q51",
         "qSourceId": "qsource:51",
         "category": "Āthār",
-        "topic": "Tawḥīd – Schöpferanerkennung und alleinige Anbetung",
+        "topic": "PRIZNATI STVORITELJA NIJE DOVOLJNO",
         "title": "PRIZNATI STVORITELJA NIJE DOVOLJNO",
         "speaker": "Qatādah ibn Diʿāmah (raḥimahullāh)",
         "statement": "Znate da je Allah stvorio vas, nebesa i Zemlju, a ipak Mu druge smatrate ravnim.",
-        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr al-Baqarah 2:22, Nr. 487 (Bd. 1, S. 370) und Nr. 480.",
+        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, al-Baqarah 2:22 · 487 (1/370), 480.",
         "sourceUrl": "/q/51/?lang=bs",
         "quizUrl": "/lernen/tawhid-schoepfer-anbetung/?lang=bs",
         "summary": "Tevhid nije samo priznati Allaha kao Stvoritelja, nego ibadet posvetiti isključivo Njemu, bez pridruživanja druga.",
@@ -843,7 +863,8 @@
       },
       "localeId": "post:qatadah-tawhid-schoepfer-anbetung-20261105-q51:bs",
       "qSourceLocaleId": "qsource:51:bs",
-      "quizLocaleId": "quiz:qsource:51:bs"
+      "quizLocaleId": "quiz:qsource:51:bs",
+      "tabariContext": "Aṭ-Ṭabarī u širem tumačenju ajeta objašnjava da samo priznavanje Allaha kao Stvoritelja i Opskrbitelja nije dovoljno ako Mu se drugi pridružuju u ibadetu. Ovo je sažetak njegovog vlastitog tumačenja po značenju, a ne dodatni doslovni citat Katāde."
     },
     "fr": {
       "name": "Français",
@@ -927,7 +948,9 @@
         "home": "Accueil",
         "review": "Traduction en attente de relecture",
         "headerLine": "Savoir issu du Coran, de la Sunnah et des Āthār",
-        "pageNote": "La pagination correspond à l’édition citée et peut différer selon les éditions."
+        "pageNote": "La pagination correspond à l’édition citée et peut différer selon les éditions.",
+        "tabariAttribution": "son propre commentaire, et non une parole littérale de Qatādah",
+        "sourceReferenceHint": "La pagination correspond à l’édition citée et peut différer selon les éditions."
       },
       "approved": false,
       "translationStatus": "draft-review-required",
@@ -936,11 +959,11 @@
         "contentId": "post:qatadah-tawhid-schoepfer-anbetung-20261105-q51",
         "qSourceId": "qsource:51",
         "category": "Āthār",
-        "topic": "Tawḥīd – Schöpferanerkennung und alleinige Anbetung",
+        "topic": "RECONNAÎTRE LE CRÉATEUR NE SUFFIT PAS",
         "title": "RECONNAÎTRE LE CRÉATEUR NE SUFFIT PAS",
         "speaker": "Qatādah ibn Diʿāmah (raḥimahullāh)",
         "statement": "Vous savez qu’Allah vous a créés et qu’Il a créé les cieux et la terre, et pourtant vous Lui attribuez des égaux.",
-        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr al-Baqarah 2:22, Nr. 487 (Bd. 1, S. 370) und Nr. 480.",
+        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, al-Baqarah 2:22 · 487 (1/370), 480.",
         "sourceUrl": "/q/51/?lang=fr",
         "quizUrl": "/lernen/tawhid-schoepfer-anbetung/?lang=fr",
         "summary": "Le Tawḥīd ne consiste pas seulement à reconnaître Allah comme Créateur : l’adoration doit Lui être exclusivement vouée.",
@@ -958,7 +981,8 @@
       },
       "localeId": "post:qatadah-tawhid-schoepfer-anbetung-20261105-q51:fr",
       "qSourceLocaleId": "qsource:51:fr",
-      "quizLocaleId": "quiz:qsource:51:fr"
+      "quizLocaleId": "quiz:qsource:51:fr",
+      "tabariContext": "Dans son commentaire plus large du verset, aṭ-Ṭabarī explique que reconnaître Allah comme Créateur et Pourvoyeur ne suffit pas si on Lui associe d’autres dans l’adoration. Il s’agit d’un résumé du sens de sa propre exégèse, et non d’une autre citation littérale de Qatādah."
     },
     "es": {
       "name": "Español",
@@ -1042,7 +1066,9 @@
         "home": "Inicio",
         "review": "Traducción pendiente de revisión editorial",
         "headerLine": "Conocimiento del Corán, la Sunnah y los Āthār",
-        "pageNote": "Las páginas corresponden a la edición citada y pueden variar en otras ediciones."
+        "pageNote": "Las páginas corresponden a la edición citada y pueden variar en otras ediciones.",
+        "tabariAttribution": "su propia explicación, no una declaración literal de Qatādah",
+        "sourceReferenceHint": "Las páginas corresponden a la edición citada y pueden variar en otras ediciones."
       },
       "approved": false,
       "translationStatus": "draft-review-required",
@@ -1051,11 +1077,11 @@
         "contentId": "post:qatadah-tawhid-schoepfer-anbetung-20261105-q51",
         "qSourceId": "qsource:51",
         "category": "Āthār",
-        "topic": "Tawḥīd – Schöpferanerkennung und alleinige Anbetung",
+        "topic": "RECONOCER AL CREADOR NO ES SUFICIENTE",
         "title": "RECONOCER AL CREADOR NO ES SUFICIENTE",
         "speaker": "Qatādah ibn Diʿāmah (raḥimahullāh)",
         "statement": "Sabéis que Allah os creó y que creó los cielos y la tierra, y aun así Le atribuís iguales.",
-        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr al-Baqarah 2:22, Nr. 487 (Bd. 1, S. 370) und Nr. 480.",
+        "source": "aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, al-Baqarah 2:22 · 487 (1/370), 480.",
         "sourceUrl": "/q/51/?lang=es",
         "quizUrl": "/lernen/tawhid-schoepfer-anbetung/?lang=es",
         "summary": "El Tawḥīd exige no solo reconocer a Allah como Creador, sino adorarle exclusivamente sin asociarle copartícipes.",
@@ -1073,7 +1099,8 @@
       },
       "localeId": "post:qatadah-tawhid-schoepfer-anbetung-20261105-q51:es",
       "qSourceLocaleId": "qsource:51:es",
-      "quizLocaleId": "quiz:qsource:51:es"
+      "quizLocaleId": "quiz:qsource:51:es",
+      "tabariContext": "En su explicación más amplia del versículo, aṭ-Ṭabarī señala que reconocer a Allah como Creador y Sustentador no basta si se Le asocian otros en la adoración. Este es un resumen del sentido de su propia exégesis, no otra cita literal de Qatādah."
     }
   },
   "canonicalPostId": "qatadah-tawhid-schoepfer-anbetung-20261105-q51",
