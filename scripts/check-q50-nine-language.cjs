@@ -22,6 +22,7 @@ assert.match(pack.publicationStatus,/post-published-2026-11-05/);
 assert.equal(registry.nextNumber,51);
 const entry=registry.links.find(x=>x.number===50);
 assert.equal(entry.shortPath,"/q/50/");assert.equal(entry.targetPath,"/q/50/");
+assert.equal(entry.postReference,"dieses-wissen-ist-religion-isnad-20261104-q50-483");
 const scripts=[js,chrome,postRuntime];scripts.forEach((s,i)=>new vm.Script(s,{filename:["Q50 localization","app chrome","Q50 post runtime"][i]}));
 assert.match(js,/DAR_Q50_READER_NAV_V1/);
 assert.match(chrome,/DAR_Q50_READER_NAV_V1/);
@@ -87,4 +88,72 @@ assert.match(published,/id: "dieses-wissen-ist-religion-isnad-20261104-q50-483"/
 assert.match(published,/status: "published"/);
 assert.match(published,/localizationManifest: "\/assets\/q50-locales.json"/);
 assert.match(published,/url: "\/q\/50\/"/);
+
+/* Browser-like runtime test: the existing mounted app's post data must actually
+   change for each selected app language, and return to the original German. */
+async function checkLivePostRuntime(){
+ const postId=pack.canonicalPostId,originalStatement="ORIGINAL DEUTSCH – geschützt";
+ const originalTitle="📖 DIESES WISSEN IST RELIGION";
+ const originalSource="MUSLIM Originalbeleg 26/32";
+ const original={
+  id:postId,title:originalTitle,statement:originalStatement,
+  source:originalSource,scholar:"Originalgelehrte",links:[{url:"/q/50/"}],
+  status:"published",category:"Āthār"
+ };
+ let current="de",renderCount=0;
+ const localStorage={getItem(k){return k==="darAdultPreferredLocaleV1"?current:null}};
+ const doc={
+   readyState:"complete",head:{appendChild(){}},
+   body:{},documentElement:{appendChild(){}},
+   getElementById(k){return k==="appView"?{}:null},
+   querySelector(){return null},
+   createElement(){return {setAttribute(){},textContent:"",id:""}},
+   addEventListener(){}
+ };
+ const win={
+   __darQ50PostLanguageV1:false,location:{hash:"#post/"+postId,href:"https://dar-al-tawhid.de/?post="+postId},
+   localStorage,addEventListener(){},
+   requestAnimationFrame(fn){fn()},
+   setTimeout(fn){fn()},
+   scrollY:0,scrollTo(){},
+   currentRoute:{view:"post",value:postId}
+ };
+ const ctx={
+   window:win,document:doc,posts:[original],
+   currentRoute:win.currentRoute,URL,console,
+   MutationObserver:class{observe(){}},
+   requestAnimationFrame(fn){fn()},
+   render(){renderCount++},
+   fetch:async()=>({ok:true,json:async()=>pack})
+ };
+ vm.runInNewContext(postRuntime,ctx,{filename:"dar-q50-post-language-v1.js"});
+ await new Promise(resolve=>setImmediate(resolve));
+ assert.equal(win.DARQ50PostLocale.getReady(),true,"Q50 locale runtime must fetch a matching canonical manifest");
+ for(const code of expected){
+   current=code;win.DARQ50PostLocale.resync();
+   const p=ctx.posts[0];
+   if(code==="de"){
+     assert.equal(p.title,originalTitle,"German original must be retained");
+     assert.equal(p.statement,originalStatement,"German statement must be retained");
+     assert.equal(p.source,originalSource,"German source must be retained");
+     assert.equal(p.fazit,undefined,"German extra fields must be removed");
+   }else{
+     const localized=pack.locales[code].post;
+     assert.equal(p.title,localized.title,code+" title not live");
+     assert.equal(p.source,localized.source,code+" source not live");
+     assert.equal(p.fazit,localized.conclusion,code+" Fazit not live");
+     assert.equal(p.statement,localized.statement,code+" article statement not live");
+     assert.ok(p.statement.includes(pack.locales[code].statement1)&&p.statement.includes(pack.locales[code].statement2),
+       code+" two speakers not localized");
+   }
+   assert.equal(p.id,postId,"canonical ID must never change");
+   assert.equal(p.links[0].url,"/q/50/","Q shortlink must never change");
+ }
+ current="de";win.DARQ50PostLocale.resync();
+ assert.equal(ctx.posts[0].statement,originalStatement,"returning to DE must restore original source");
+ assert.ok(renderCount>=expected.length,"app must actually rerender when app language changes");
+ console.log("Q50 RUNTIME PASS: actual in-app post rendering for 9 languages, no URL/ID drift and German restoration");
+}
+checkLivePostRuntime().catch(e=>{console.error(e);process.exitCode=1});
+
 console.log("Q50 PASS: live single canonical post ID, 9 full statement/source/conclusion translations, 36 questions, original Arabic, source links, RTL; no repeat push");
