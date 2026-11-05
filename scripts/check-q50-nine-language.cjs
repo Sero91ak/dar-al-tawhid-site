@@ -19,7 +19,7 @@ assert.equal(pack.quizPath,"/lernen/wissen-ist-religion/");
 assert.equal(pack.contentId,"post:dieses-wissen-ist-religion-isnad-20261104-q50-483");
 assert.equal(pack.appLocaleStorageKey,"darAdultPreferredLocaleV1");
 assert.match(pack.publicationStatus,/post-published-2026-11-05/);
-assert.equal(registry.nextNumber,51);
+assert.equal(registry.nextNumber,Math.max(...registry.links.map(item=>Number(item.number)))+1,"Next Q number must follow the highest assigned Q source");
 const entry=registry.links.find(x=>x.number===50);
 assert.equal(entry.shortPath,"/q/50/");assert.equal(entry.targetPath,"/q/50/");
 assert.equal(entry.postReference,"dieses-wissen-ist-religion-isnad-20261104-q50-483");
