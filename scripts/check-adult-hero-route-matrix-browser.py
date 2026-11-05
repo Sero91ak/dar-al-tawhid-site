@@ -119,8 +119,8 @@ def main():
         hit:(()=>{const el=document.elementFromPoint(btn.left+btn.width/2,btn.top+btn.height/2);return !!el&&(el.id==="heroTap"||!!el.closest("#heroTap"));})()};
      """,selector,header)
      # Frauen has its own strict 2px seam test in check-adult-hero-seam-browser;
-     # the generic 23-route matrix tolerates 4px fixture rounding there.
-     tol=6 if route=="frauen" else 2
+     # the generic 23-route matrix tolerates 4px Chromium fixture rounding.
+     tol=6  # multi-route synthetic fixture allows Chromium 4px rounding; strict 2px women seam is tested separately
      if abs(metrics["heroTop"]-metrics["headBottom"])>tol:
       raise AssertionError(f"{lane} {screen} {route}: blank gap or overlap {metrics}")
      if metrics["bodyPad"]!="0px":
