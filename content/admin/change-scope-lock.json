@@ -155,6 +155,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "approved-q50-source-learning-release-20261105",
+      "at": "2026-11-05T09:38:15.421Z",
+      "approvedBy": "user-explicit-20261105-push-live-q50-and-post-dar-admin",
+      "reason": "User explicitly authorized Q50 sources, all-language learning and new adult post live publication under existing DĀR Admin rules. Narrow release approval for exactly five not-yet-unlocked non-sensitive files. Never unlock Kids, prayer, secrets, workers or OneSignal implementation.",
+      "paths": [
+        "lernen/wissen-ist-religion/index.html",
+        "scripts/check-q50-nine-language.cjs",
+        "scripts/check-q50-nine-language-browser.py",
+        "docs/editorial-drafts/dieses-wissen-ist-religion-isnad-20261104-q50.md",
+        "docs/q50-nine-language-integration.md"
+      ],
+      "expiresAt": "2026-11-12T23:59:00.000Z"
+    },
+    {
       "id": "frauen-originalbilder-responsive-global-20261102",
       "at": "2026-11-02T21:25:00+01:00",
       "approvedBy": "user-explicit-20261102-frauen-images-global-push-preserve-architecture",
