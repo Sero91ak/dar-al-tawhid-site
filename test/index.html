@@ -13243,6 +13243,12 @@ body.is-calendar-route .calendar-premium-page .cal-tl-filters-wrap,
 body.is-quran-overview .top-shell,body.is-quran-overview .isnad,body.is-quran-overview .app-bar{display:none!important}
 body.is-quran-overview .float-actions{display:none!important}
 body.is-quran-overview #appView.view{padding-top:max(6px,env(safe-area-inset-top))}
+/* QURAN_GLOBAL_HEADER_COMPACT_V1: Die Übersicht braucht keine zweite Textebenen-Leiste. */
+body.is-quran-overview .dar-ios-quran-settings,
+body.is-quran-overview .quran-mode-tabs{display:none!important;}
+body.is-quran-overview #appView.view,
+body.is-quran-overview .qov-page,
+body.is-quran-overview .qov-header{padding-top:0!important;margin-top:0!important;}
 body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:none;filter:blur(1px);transition:opacity .2s ease,filter .2s ease}
 @media(prefers-reduced-motion:reduce){body.is-quran-overview.qov-search-active .qov-main{filter:none;transition:none}.qov-header,.qov-sheet,.qov-row,.qov-segment-btn{transition:none!important;animation:none!important}}
 
