@@ -24,6 +24,7 @@ on:
       - .github/workflows/canonical-islamic-content-live.yml
 
 permissions:
+  actions: write # Only to dispatch the existing sole Cloudflare production-owner workflow after canonical sync
   contents: write
   issues: write
 
@@ -179,3 +180,21 @@ jobs:
       - name: Production publish ownership
         run: |
           echo "Canonical content is committed to main. Production publishing belongs exclusively to Deploy Besucher-App (Cloudflare Workers)."
+
+      # GITHUB_TOKEN push commits do not trigger a follow-up push workflow.
+      # Explicit workflow_dispatch is GitHub's supported exception and does not
+      # create a second deployment owner. The target retains its stale-SHA,
+      # health, Cloudflare and OneSignal/push separation protections.
+      - name: Aktuellsten kanonischen main-Stand an einzigen Cloudflare-Owner übergeben
+        if: success() && github.ref == 'refs/heads/main'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          CURRENT_MAIN="$(git rev-parse origin/main)"
+          echo "Canonical sync validated; dispatch production owner for main ${CURRENT_MAIN}"
+          gh workflow run cloudflare-pages-deploy.yml --ref main
+          echo "Production-owner workflow: https://github.com/${GITHUB_REPOSITORY}/actions/workflows/cloudflare-pages-deploy.yml"
+          echo "Production owner dispatched; the target workflow independently validates and publishes main."
