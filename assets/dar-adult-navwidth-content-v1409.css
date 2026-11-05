@@ -1,0 +1,95 @@
+/* DAR_ADULT_NAV_WIDTH_CONTENT_V1409 — full use of the same available
+ * content width as the floating bottom navigation on ALL adult routes.
+ * Never touches the nav itself or the Kids app. In Fold dual-pane mode,
+ * 100% resolves against the right content pane, not the whole device.
+ * Heroes retain their intentional edge-to-edge image bleed.
+ */
+/* Remove the duplicate 18px page-shell padding that made cards narrower
+ * than the actual rendered nav capsule. Each route retains its own internal
+ * typographic/card paddings, safe-area, and the reader modal boundaries. */
+html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-ilm-chat-route) #appView.view{
+  padding-inline:0!important;
+}
+html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route) #appView.view > :is(
+ .frauen-library-shell,.frauen-library-list,.frauen-hub,.frauen-page,
+ .topics-hub,.topic-collection-page,.more-page,.account-page,
+ .dua-hub,.dua-collection-page,.hadith-hub,.hadith-detail,
+ .books-library-shell,.library-shell,.scholars-index,
+ .qov-page,.quran-overview,.quran-topic-page,
+ .quiz-home,.quiz-shell,.quiz-shell-pro,.quiz-session,
+ .prayer-overview,.zakat-view,.settings-page,.dar-responsive-page
+){
+  box-sizing:border-box!important;
+  width:min(100%,var(--dar-actual-nav-width,var(--dar-nav-width,100%)))!important;
+  max-width:min(100%,var(--dar-actual-nav-width,var(--dar-nav-width,100%)))!important;
+  min-width:0!important;
+  margin-inline:auto!important;
+}
+html[data-theme] body.has-bottom-nav.is-frauen-route #appView :is(
+ .frauen-library-shell,.frauen-library-list
+){
+  box-sizing:border-box!important;
+  width:min(100%,var(--dar-actual-nav-width,var(--dar-nav-width,100%)))!important;
+  max-width:min(100%,var(--dar-actual-nav-width,var(--dar-nav-width,100%)))!important;
+  min-width:0!important;
+  margin-inline:auto!important;
+  padding-inline:0!important;
+}
+html[data-theme] body.is-frauen-route #appView :is(
+ .frauen-library-grid,.frauen-library-area-grid,.frauen-post-list
+){
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:auto!important;
+  padding-inline:0!important;
+}
+html[data-theme] body.is-frauen-route #appView :is(.frauen-library-grid,.frauen-library-area-grid){
+  display:flex!important;
+  flex-direction:column!important;
+  flex-wrap:nowrap!important;
+  align-items:stretch!important;
+  grid-template-columns:none!important;
+  gap:14px!important;
+}
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-grid,.frauen-library-area-grid) > :is(.frauen-library-card,.frauen-library-area-card){
+  display:block!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  flex:0 0 auto!important;
+  grid-column:1/-1!important;
+  margin-inline:0!important;
+}
+/* The navigation establishes outer alignment, not an extra 14px inset.
+ * Preserve existing text padding inside each card and its photo fade. */
+html[data-theme] body.is-frauen-route #appView .frauen-library-section-head{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin-inline:0!important;
+  padding-inline:4px!important;
+}
+@media(min-width:760px){
+ html[data-theme] body.is-frauen-route #appView .frauen-library-grid,
+ html[data-theme] body.is-frauen-route #appView .frauen-library-area-grid{
+   display:flex!important;
+   flex-direction:column!important;
+   grid-template-columns:none!important;
+ }
+}
+/* On very narrow phone widths never exceed the viewport or introduce
+ * horizontal scrolling to simulate a wider navigation. */
+@media(max-width:380px){
+ html[data-theme] body.has-bottom-nav #appView.view > :is(
+  .frauen-library-shell,.frauen-library-list,.topics-hub,.topic-collection-page,
+  .more-page,.dua-hub,.hadith-hub,.qov-page,.quiz-shell,.account-page
+ ){
+  max-width:100%!important;
+ }
+}
+/* Feed fullscreen, interactive Quran reader, modal dialogs and native
+ * tablet sidebar widths retain their own architecture. */

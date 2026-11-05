@@ -59,4 +59,33 @@ assert.equal([...flow].reduce((n,c)=>n+(c==="{")-(c==="}"),0),0,"Frauen V1407 CS
 new (require("node:vm").Script)(seam,{filename:"frauen-hero-seam-runtime-v1407.js"});
 console.log("PASS: V1407 original photos, one-column chapters, pinned Hero/search, and under-scrolling card area.");
 
+/* V1409: native iOS must not interfere with the working Android Hero.
+ * Match wide cards to the existing floating navigation across adult routes. */
+const iosRuntime=fs.readFileSync("assets/frauen/frauen-ios-hero-v1409.js","utf8");
+const iosCss=fs.readFileSync("assets/frauen/frauen-ios-hero-v1409.css","utf8");
+const navWidth=fs.readFileSync("assets/dar-adult-navwidth-content-v1409.css","utf8");
+assert.match(iosRuntime,/if\(!isIOS\)return/,"Android darf keine neue Hero-Logik erhalten");
+assert.match(iosRuntime,/__DAR_FRAUEN_HERO_SEAM_V1407=true/,"Der doppelte iOS-Margin-Shim muss deaktiviert werden");
+assert.doesNotMatch(iosRuntime,/appendChild\(|insertBefore\(|createElement\(|replaceChildren\(/,"Der laufende Renderer muss alleiniger DOM-Besitzer bleiben");
+assert.match(iosRuntime,/--dar-ios-frauen-rail-height/,"Der originalen Seite muss Höhe unter dem fixierten Hero zugewiesen werden");
+assert.match(iosRuntime,/brand\.getBoundingClientRect\(\)\.bottom/,"Headerunterkante muss tatsächlich gemessen werden");
+assert.doesNotMatch(iosRuntime,/preventDefault\(/,"Kein zweiter Touch-Handler erlaubt");
+assert.match(iosCss,/html\.dar-ios-frauen-hero-v1409 body\.is-frauen-route/,"iOS-Hero-Styling muss plattformspezifisch bleiben");
+assert.match(iosCss,/position:fixed!important/,"iOS-Hero muss an der Headerunterkante fixiert sein");
+assert.match(navWidth,/var\(--dar-nav-width,100%\)/,"Seitenbreite muss die echte Navigationsbreite verwenden");
+assert.match(navWidth,/flex-direction:column!important/,"Kapitelkapseln müssen immer untereinander stehen");
+assert.match(navWidth,/\.frauen-library-grid,\.frauen-library-area-grid/,"Haupt- und Unterseiten einspaltig");
+for(const source of [native,testWorker,desktop]){
+ assert.match(source,/dar-adult-navwidth-content-v1409\.css/,"Navigationsbreite nicht global eingebunden");
+ assert.match(source,/frauen-ios-hero-v1409\.css/,"iOS-Hero-Styling fehlt");
+ assert.match(source,/frauen-ios-hero-v1409\.js/,"iOS-Hero-Runtime fehlt");
+ assert.ok(source.indexOf("frauen-ios-hero-v1409.js")<source.indexOf("frauen-hero-seam-runtime-v1407.js"),
+   "iOS muss vor dem alten V1407-Margin-Shim initialisieren");
+}
+for(const [name,textCss] of [["iOS",iosCss],["Adult Nav Width",navWidth]]){
+ assert.equal([...textCss].reduce((n,c)=>n+(c==="{")-(c==="}"),0),0,name+" CSS nicht vollständig");
+}
+new (require("node:vm").Script)(iosRuntime,{filename:"frauen-ios-hero-v1409.js"});
+console.log("PASS: iOS-only Hero, Android parity and navigation-aligned wide capsules.");
+
 console.log("OK: Frauenbereich unverändert außer genehmigtem Entfernen der doppelten Mehr-Karte.");

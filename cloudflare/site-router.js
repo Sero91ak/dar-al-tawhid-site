@@ -380,9 +380,28 @@ function activateAdultCompactHero(html) {
     const flowCss = '<link rel="stylesheet" id="darFrauenGlobalFlowV1407" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css?v=frauen-sticky-hero-v1407-20261103">';
     html = html.includes("</body>") ? html.replace("</body>",flowCss+"</body>") : html+flowCss;
   }
+  /* iOS only: run before the legacy V1407 shim; Android is unchanged. */
+  if (!html.includes('id="darIosFrauenHeroRuntimeV1409"')) {
+    const iosJs = '<script defer id="darIosFrauenHeroRuntimeV1409" src="/assets/frauen/frauen-ios-hero-v1409.js?v=ios-header-seam-v1409-20261103"></'+'script>';
+    html = html.includes("</body>") ? html.replace("</body>",iosJs+"</body>") : html+iosJs;
+  }
   if (!html.includes('id="darFrauenHeroSeamRuntimeV1407"')) {
     const flowJs = '<script defer id="darFrauenHeroSeamRuntimeV1407" src="/assets/frauen/frauen-hero-seam-runtime-v1407.js?v=frauen-sticky-hero-v1407-20261103"></'+'script>';
     html = html.includes("</body>") ? html.replace("</body>",flowJs+"</body>") : html+flowJs;
+  }
+  /* Readable full-width adult shelves match #bottomNav's --dar-nav-width.
+   * Keep original image assets and every other app's own scroll architecture. */
+  if (!html.includes('id="darAdultNavWidthMeasureV1409"')) {
+    const wideJs = '<script defer id="darAdultNavWidthMeasureV1409" src="/assets/dar-adult-navwidth-measure-v1409.js?v=navwidth-measure-v1409-20261103"></'+'script>';
+    html = html.includes("</body>") ? html.replace("</body>",wideJs+"</body>") : html+wideJs;
+  }
+  if (!html.includes('id="darAdultNavWidthContentV1409"')) {
+    const wideCss = '<link rel="stylesheet" id="darAdultNavWidthContentV1409" href="/assets/dar-adult-navwidth-content-v1409.css?v=navwidth-content-v1409-20261103">';
+    html = html.includes("</body>") ? html.replace("</body>",wideCss+"</body>") : html+wideCss;
+  }
+  if (!html.includes('id="darIosFrauenHeroCssV1409"')) {
+    const iosCss = '<link rel="stylesheet" id="darIosFrauenHeroCssV1409" href="/assets/frauen/frauen-ios-hero-v1409.css?v=ios-header-seam-v1409-20261103">';
+    html = html.includes("</body>") ? html.replace("</body>",iosCss+"</body>") : html+iosCss;
   }
   return html;
 }
