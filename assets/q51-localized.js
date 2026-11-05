@@ -160,6 +160,9 @@ attach();
 // The standalone learning navigation is inserted on DOMContentLoaded by a
 // separate script; translate that toolbar even when locale JSON resolves first.
 if(quizPage)document.addEventListener("DOMContentLoaded",function(){if(cached)renderQuiz()},{once:true});
+// The navigation bar script may add its toolbar in a later DOMContentLoaded
+// callback; the window load event runs after all such handlers.
+if(quizPage)window.addEventListener("load",function(){if(cached)localizeReaderControls(active())},{once:true});
 fetch(API,{cache:"no-store",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("Q51 locale asset HTTP "+r.status);return r.json()})
 .then(function(j){
  if(j.qSourceId!=="qsource:51"||!j.locales||CODES.some(function(c){var p=j.locales[c];return !p||!p.post||!p.ui||!p.ui.tabariAttribution||!p.tabariContext||!p.statement1||!p.statement2||!p.conclusion||!Array.isArray(p.questions)||p.questions.length!==4}))throw Error("Incomplete Q51 locales");
