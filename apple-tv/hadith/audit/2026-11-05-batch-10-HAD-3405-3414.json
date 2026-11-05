@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-05",
+  "project": "DĀR AL TAWḤĪD – Ḥadīṯ, Šarḥ & Āṯār",
+  "batchSize": 10,
+  "firstInternalId": "HAD-3405",
+  "lastInternalId": "HAD-3414",
+  "recordType": "athar",
+  "records": [
+    {
+      "id": "HAD-3405",
+      "work": "Ibn Abī Šaybah, al-Muṣannaf",
+      "volume": "6",
+      "page": "188",
+      "chapter": "118",
+      "subreport": "1",
+      "speaker": "Ṣafwān ibn ʿAssāl"
+    },
+    {
+      "id": "HAD-3406",
+      "work": "Ibn Abī Šaybah, al-Muṣannaf",
+      "volume": "6",
+      "page": "188",
+      "chapter": "118",
+      "subreport": "2",
+      "speaker": "Ibn ʿAbbās"
+    },
+    {
+      "id": "HAD-3407",
+      "work": "Ibn Abī Šaybah, al-Muṣannaf",
+      "volume": "6",
+      "page": "188",
+      "chapter": "118",
+      "subreport": "7",
+      "speaker": "Ibn ʿAbbās"
+    },
+    {
+      "id": "HAD-3408",
+      "work": "Ibn Abī Šaybah, al-Muṣannaf",
+      "volume": "6",
+      "page": "188",
+      "chapter": "118",
+      "subreport": "8",
+      "speaker": "ʿAbdullāh ibn Masʿūd"
+    },
+    {
+      "id": "HAD-3409",
+      "work": "Ibn Abī Šaybah, al-Muṣannaf",
+      "volume": "6",
+      "page": "188",
+      "chapter": "118",
+      "subreport": "10",
+      "speaker": "Abū ad-Dardāʾ"
+    },
+    {
+      "id": "HAD-3410",
+      "work": "Ibn Abī Šaybah, al-Muṣannaf",
+      "volume": "6",
+      "page": "188",
+      "chapter": "118",
+      "subreport": "12/13",
+      "speaker": "ʿAbdullāh ibn Masʿūd"
+    },
+    {
+      "id": "HAD-3411",
+      "work": "Ibn Abī Šaybah, al-Muṣannaf",
+      "volume": "6",
+      "page": "188",
+      "chapter": "119",
+      "subreport": "2",
+      "speaker": "Makḥūl"
+    },
+    {
+      "id": "HAD-3412",
+      "work": "Ibn ʿAbd al-Barr, Ǧāmiʿ Bayān al-ʿIlm",
+      "volume": "1",
+      "page": "427",
+      "report": "633/634",
+      "speaker": "Saʿīd ibn Ǧubayr"
+    },
+    {
+      "id": "HAD-3413",
+      "work": "Ibn ʿAbd al-Barr, Ǧāmiʿ Bayān al-ʿIlm",
+      "volume": "1",
+      "page": "427",
+      "report": "635",
+      "speaker": "ʿAbdullāh ibn Idrīs"
+    },
+    {
+      "id": "HAD-3414",
+      "work": "Ibn ʿAbd al-Barr, Ǧāmiʿ Bayān al-ʿIlm",
+      "volume": "1",
+      "page": "429",
+      "report": "640",
+      "speaker": "Umm ad-Dardāʾ"
+    }
+  ],
+  "checks": {
+    "originalArabic": "Original Arabic wording and distinct direct text locations read in Islamweb.",
+    "chain": "Every record contains its transmitted chain and an individual unresolved/authenticity caveat.",
+    "semanticDedup": "Targeted GitHub search for Arabic clauses, names, and German core messages; historical unrelated records preserved. No claim of exhaustive full semantic review.",
+    "similarVariants": "Alternative isnads 118/12+13 and Ǧāmiʿ Bayān 633/634 combined per unique statement, not counted twice.",
+    "hadithSharh": "Only new Athar; none wrongly labeled as independently authentic Prophetic hadith or invented classical Sharh.",
+    "edition": "Pages are Islamweb's displayed pagination, not a separately confirmed exact print edition.",
+    "publicIdentifiers": "HAD-#### strictly internal. Never show in public cards, headers, breadcrumbs, sharh, sources, share text or URLs.",
+    "globalCanonical": "Shared full ordered catalog across Web/PWA, iOS, Android, Apple TV/tvOS; test-app preview subset only; existing screensaver shuffle unchanged.",
+    "counts": {
+      "total": 3414,
+      "hadith": 2408,
+      "athar": 1006
+    }
+  },
+  "primarySources": [
+    "https://www.islamweb.net/ar/library/content/10/3599/%D9%85%D8%A7-%D8%AC%D8%A7%D8%A1-%D9%81%D9%8A-%D8%B7%D9%84%D8%A8-%D8%A7%D9%84%D8%B9%D9%84%D9%85-%D9%88%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D9%87",
+    "https://www.islamweb.net/ar/library/content/10/3600/%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D8%AC%D9%84-%D9%8A%D8%B7%D9%84%D8%A8-%D8%A7%D9%84%D8%B9%D9%84%D9%85-%D9%8A%D8%B1%D9%8A%D8%AF-%D8%A8%D9%87-%D8%A7%D9%84%D9%86%D8%A7%D8%B3-%D9%88%D9%8A%D8%AD%D8%AF%D8%AB-%D8%A8%D9%87",
+    "https://www.islamweb.net/ar/library/content/1040/559/%D8%A8%D8%A7%D8%A8-%D8%AC%D8%A7%D9%85%D8%B9-%D9%81%D9%8A-%D8%A7%D9%84%D8%AD%D8%A7%D9%84-%D8%A7%D9%84%D8%AA%D9%8A-%D9%8A%D8%B3%D8%A3%D9%84-%D8%A8%D9%87%D8%A7-%D8%A7%D9%84%D8%B9%D9%84%D9%85",
+    "https://www.islamweb.net/ar/library/content/1040/560/%D8%A8%D8%A7%D8%A8-%D8%AC%D8%A7%D9%85%D8%B9-%D9%81%D9%8A-%D8%A7%D9%84%D8%AD%D8%A7%D9%84-%D8%A7%D9%84%D8%AA%D9%8A-%D9%8A%D8%B3%D8%A3%D9%84-%D8%A8%D9%87%D8%A7-%D8%A7%D9%84%D8%B9%D9%84%D9%85",
+    "https://www.islamweb.net/ar/library/content/1040/565/%D8%A8%D8%A7%D8%A8-%D8%AC%D8%A7%D9%85%D8%B9-%D9%81%D9%8A-%D8%A7%D9%84%D8%AD%D8%A7%D9%84-%D8%A7%D9%84%D8%AA%D9%8A-%D9%8A%D8%B3%D8%A3%D9%84-%D8%A8%D9%87%D8%A7-%D8%A7%D9%84%D8%B9%D9%84%D9%85"
+  ],
+  "nextInternalId": "HAD-3415"
+}
