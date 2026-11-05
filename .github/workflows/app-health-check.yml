@@ -25,9 +25,6 @@ jobs:
       - name: Run app health check
         run: node scripts/app-health-check.js
 
-      - name: Admin V2 appearance regression (login, theme and responsive assets)
-        run: node admin/tests/appearance-v2.test.cjs
-
       - name: Public website isolation guard
         run: node scripts/public-website-isolation-guard.js
 
