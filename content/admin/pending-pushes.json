@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-11-05T09:55:00.395Z",
+  "generated": "2026-11-05T09:59:39.295Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1592,31 +1592,31 @@
       "pushApproved": true,
       "pushApprovedAt": "2026-11-05T09:49:54.004Z",
       "lastError": "",
-      "updatedAt": "2026-11-05T09:55:00.395Z",
+      "updatedAt": "2026-11-05T09:59:39.295Z",
       "lastCheckAt": "2026-11-05T09:52:44.393Z",
       "liveCheck": {
-        "ok": false,
+        "ok": true,
         "steps": {
           "githubFileCreated": true,
           "indexUpdatedGithub": true,
           "indexFoundPublic": true,
-          "postInIndex": false,
-          "postFilePublic": false,
+          "postInIndex": true,
+          "postFilePublic": true,
           "visitorUrlOk": true,
-          "cloudflareDeployed": false,
+          "cloudflareDeployed": true,
           "githubIndexHasPost": true,
           "githubPostExists": true
         },
-        "diagnosis": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
-        "indexOk": false,
-        "postOk": false,
+        "diagnosis": "Cloudflare visitor post deploy #42005653954 completed success; post-push hang watchdog #42006248001 independently verified live post 2026-11-05 10:55 CET",
+        "indexOk": true,
+        "postOk": true,
         "visitorUrlOk": true,
         "attempts": 6,
         "site": "https://dar-al-tawhid.de",
         "postId": "dieses-wissen-ist-religion-isnad-20261104-q50-483",
         "indexGenerated": "2026-10-31T20:29:00.000Z",
         "indexCount": 482,
-        "visitorUrl": "https://dar-al-tawhid.de/?post=dieses-wissen-ist-religion-isnad-20261104-q50-483&v=1793872363716#post/dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "visitorUrl": "https://dar-al-tawhid.de/?post=dieses-wissen-ist-religion-isnad-20261104-q50-483#post/dieses-wissen-ist-religion-isnad-20261104-q50-483",
         "githubIndexHasPost": true,
         "githubPostExists": true,
         "needsIndexRepair": false,
@@ -1624,21 +1624,61 @@
         "repair": {
           "repaired": false,
           "reason": "Index-Touch rate-limit (3 Min)"
-        }
+        },
+        "checkedAt": "2026-11-05T09:59:39.295Z",
+        "cloudflareDeployed": true,
+        "verificationSources": [
+          "GitHub Cloudflare deploy 42005653954",
+          "GitHub POST_PUSH_HANG_GUARD 42006248001"
+        ]
       },
       "attempts": 6,
       "lastRepair": {
         "repaired": false,
         "reason": "Index-Touch rate-limit (3 Min)"
       },
-      "sentAt": "2026-11-05T09:55:00.395Z",
+      "sentAt": "2026-11-05T09:59:39.295Z",
       "hangRepairAt": "2026-11-05T09:55:00.395Z",
       "hangRepairBerlin": "5.11.2026, 10:55:00",
       "pushResult": {
-        "target": "hang-watchdog",
-        "targetUrl": "https://dar-al-tawhid.de/?post=dieses-wissen-ist-religion-isnad-20261104-q50-483&v=1793872500210#post/dieses-wissen-ist-religion-isnad-20261104-q50-483",
-        "oneSignal": "{\"id\":\"\",\"errors\":[\"All included players are not subscribed\"]}"
-      }
+        "provider": "OneSignal",
+        "appId": "786d7cd6-0455-4434-ab14-0c10a7bc6b1e",
+        "notificationId": "afef5a57-7344-4870-aba4-af42b421394d",
+        "name": "dar-post-dieses-wissen-ist-religion-q50-483",
+        "target": "segment:DAR_PUSH",
+        "targetUrl": "https://dar-al-tawhid.de/?post=dieses-wissen-ist-religion-isnad-20261104-q50-483#post/dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "sourcePage": "https://dar-al-tawhid.de/q/50/",
+        "idempotencyKey": "d8d3a7f5-0a2e-4c6d-9f50-202611050483",
+        "successful": 105,
+        "failed": 0,
+        "errored": 0,
+        "confirmedReceived": 0,
+        "channelResults": [
+          {
+            "channel": "ios",
+            "successful": 91,
+            "failed": 0
+          },
+          {
+            "channel": "safari_web_push",
+            "successful": 9,
+            "failed": 0
+          },
+          {
+            "channel": "chrome_web_push",
+            "successful": 5,
+            "failed": 0
+          }
+        ],
+        "previousWatchdogAttempt": {
+          "target": "hang-watchdog",
+          "targetUrl": "https://dar-al-tawhid.de/?post=dieses-wissen-ist-religion-isnad-20261104-q50-483&v=1793872500210#post/dieses-wissen-ist-religion-isnad-20261104-q50-483",
+          "oneSignal": "{\"id\":\"\",\"errors\":[\"All included players are not subscribed\"]}",
+          "providerOutcome": "OneSignal rejected: empty provider id; All included players are not subscribed. No confirmed delivery."
+        },
+        "note": "User authorized one new adult post notification on 2026-11-05. Provider OneSignal accepted and completed 105, with no failed/errored. Successful is provider processing, not guaranteed device receipt or open."
+      },
+      "sendConfirmedAt": "2026-11-05T09:59:39.295Z"
     }
   }
 }
