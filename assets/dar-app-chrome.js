@@ -12,6 +12,7 @@
      selected post and five-tab navigation remain mounted throughout. */
   var sourceNavPending=false,sourcePanel=null,sourceFrame=null;
   var sourcePreviousOverflow=null,sourcePanelHistory=false;
+  var sourceCurrentPage=null,sourceRouteStack=[],pendingSourceScrollY=null;
   function showSourceUnavailable(){
     try{
       var toast=document.getElementById("darSourceNavigationError");
@@ -27,6 +28,23 @@
       toast.hidden=false;
     }catch(_){}
   }
+  // Same canonical URL for app and external visitors; only the owning shell changes.
+  function internalReaderTarget(anchor,base){
+    if(!anchor||anchor.hasAttribute("download")||anchor.getAttribute("target")==="_blank")return null;
+    var url;
+    try{url=new URL(anchor.getAttribute("href"),base)}catch(_){return null}
+    if(url.origin!==location.origin||
+      !(/^\/q\/[1-9][0-9]*\/?$/.test(url.pathname)||/^\/lernen\/[a-z0-9-]+\/?$/.test(url.pathname)))return null;
+    return url.pathname.replace(/\/?$/,"/")+url.search+url.hash;
+  }
+  function backInternalSource(){
+    if(sourceRouteStack.length){
+      var previous=sourceRouteStack.pop();
+      openInternalSource(previous.target,previous.html,true,previous.scrollY);
+      return;
+    }
+    closeInternalSource(false);
+  }
   function closeInternalSource(fromHistory){
     if(!sourcePanel||sourcePanel.hidden)return;
     sourcePanel.hidden=true;
@@ -38,6 +56,9 @@
     sourcePreviousOverflow=null;
     if(document.body&&document.body.classList)document.body.classList.remove("dar-internal-reader-open");
     if(document.documentElement&&document.documentElement.classList)document.documentElement.classList.remove("dar-internal-reader-open");
+    sourceCurrentPage=null;
+    sourceRouteStack.length=0;
+    pendingSourceScrollY=null;
     var pushed=sourcePanelHistory;
     sourcePanelHistory=false;
     sourceNavPending=false;
@@ -63,7 +84,7 @@
     back.className="dar-source-back";
     back.type="button";
     back.textContent="← Zurück";
-    back.addEventListener("click",function(){closeInternalSource(false)});
+    back.addEventListener("click",backInternalSource);
     var caption=document.createElement("span");
     caption.className="dar-source-label";
     caption.textContent="DĀR AL TAWḤĪD · Quellen";
@@ -92,14 +113,41 @@
     frame.id="darInternalSourceFrameV3";
     frame.setAttribute("title","Quellenkarte und Lernbereich");
     frame.setAttribute("referrerpolicy","strict-origin-when-cross-origin");
+    // The already mounted reader owns internal navigation, including Q -> learning.
+    // Primary-source links and PDF links keep their external destinations.
+    frame.addEventListener("load",function(){
+      var scrollY=pendingSourceScrollY;
+      pendingSourceScrollY=null;
+      if(scrollY>0)setTimeout(function(){
+        try{frame.contentWindow.scrollTo(0,scrollY)}catch(_){}
+      },0);
+      var doc;
+      try{doc=frame.contentDocument}catch(_){return}
+      if(!doc||doc.__darInternalSourceLinksBoundV1)return;
+      doc.__darInternalSourceLinksBoundV1=true;
+      doc.addEventListener("click",function(ev){
+        if(ev.defaultPrevented||ev.button!==0||ev.metaKey||ev.ctrlKey||ev.altKey||ev.shiftKey)return;
+        var a=ev.target&&ev.target.closest?ev.target.closest("a[href]"):null;
+        var route=internalReaderTarget(a,doc.baseURI||location.href);
+        if(!route)return;
+        ev.preventDefault();ev.stopImmediatePropagation();
+        navigateInternalSource(route);
+      },true);
+    });
     toolbar.setAttribute("data-dar-source-toolbar","1");
     panel.appendChild(toolbar);panel.appendChild(frame);
     (document.body||document.documentElement).appendChild(panel);
     sourcePanel=panel;sourceFrame=frame;
     return panel;
   }
-  function openInternalSource(target,html){
+  function openInternalSource(target,html,restoring,scrollY){
     var panel=ensureInternalSourcePanel();
+    if(!restoring&&!panel.hidden&&sourceCurrentPage&&sourceCurrentPage.target!==target){
+      try{sourceCurrentPage.scrollY=sourceFrame.contentWindow.scrollY||sourceFrame.contentWindow.pageYOffset||0}catch(_){}
+      sourceRouteStack.push(sourceCurrentPage);
+    }
+    sourceCurrentPage={target:target,html:html,scrollY:scrollY||0};
+    pendingSourceScrollY=restoring?(scrollY||0):null;
     if(document.body&&panel.hidden)sourcePreviousOverflow=document.body.style.overflow||"";
     if(document.body){document.body.style.overflow="hidden";if(document.body.classList)document.body.classList.add("dar-internal-reader-open")}
     if(document.documentElement&&document.documentElement.classList)document.documentElement.classList.add("dar-internal-reader-open");
@@ -125,15 +173,8 @@
     }
     sourceNavPending=false;
   }
-  document.addEventListener("click",function(ev){
-    if(ev.defaultPrevented||ev.button!==0||ev.metaKey||ev.ctrlKey||ev.altKey||ev.shiftKey)return;
-    var a=ev.target&&ev.target.closest?ev.target.closest("a[href]"):null;
-    if(!a||a.hasAttribute("download")||a.getAttribute("target")==="_blank")return;
-    var url;try{url=new URL(a.getAttribute("href"),location.href)}catch(_){return}
-    if(url.origin!==location.origin||!(/^\/q\/[1-9][0-9]*\/?$/.test(url.pathname)||/^\/lernen\/[a-z0-9-]+\/?$/.test(url.pathname)))return;
-    ev.preventDefault();ev.stopImmediatePropagation();
+  function navigateInternalSource(target){
     if(sourceNavPending)return;
-    var target=url.pathname.replace(/\/?$/,"/")+url.search+url.hash;
     sourceNavPending=true;
     var controller=typeof AbortController==="function"?new AbortController():null;
     var timeout=setTimeout(function(){if(controller)controller.abort()},8000);
@@ -155,6 +196,14 @@
       })
       .catch(function(){sourceNavPending=false;showSourceUnavailable()})
       .finally(function(){clearTimeout(timeout)});
+  }
+  document.addEventListener("click",function(ev){
+    if(ev.defaultPrevented||ev.button!==0||ev.metaKey||ev.ctrlKey||ev.altKey||ev.shiftKey)return;
+    var a=ev.target&&ev.target.closest?ev.target.closest("a[href]"):null;
+    var target=internalReaderTarget(a,location.href);
+    if(!target)return;
+    ev.preventDefault();ev.stopImmediatePropagation();
+    navigateInternalSource(target);
   },true);
   // Q50 source→lesson navigation remains in the mounted app reader.
   // Only messages from its own, same-origin source iframe are accepted.
@@ -163,18 +212,23 @@
     if(!ev.data||ev.data.type!=="DAR_Q50_READER_NAV_V1")return;
     var route=String(ev.data.path||"");
     if(!/^\/lernen\/wissen-ist-religion\/(?:\?lang=(?:de|ar|en|tr|ku|ckb|bs|fr|es))?$/.test(route))return;
-    var a=document.createElement("a");
-    a.setAttribute("href",route);
-    a.hidden=true;
-    document.body.appendChild(a);
-    try{a.click()}finally{a.remove()}
+    navigateInternalSource(route);
   });
   window.addEventListener("popstate",function(ev){
-    if(sourcePanel&&!sourcePanel.hidden&&(!ev.state||!ev.state.__darInternalSourceV3))
-      closeInternalSource(true);
+    if(!sourcePanel||sourcePanel.hidden||(ev.state&&ev.state.__darInternalSourceV3))return;
+    if(sourceRouteStack.length){
+      // A system/browser Back from learning returns to the preceding source.
+      var previous=sourceRouteStack.pop();
+      openInternalSource(previous.target,previous.html,true,previous.scrollY);
+      try{
+        var state=Object.assign({},ev.state||{},{__darInternalSourceV3:true});
+        window.history.pushState(state,"",location.href);
+        sourcePanelHistory=true;
+      }catch(_){}
+    }else closeInternalSource(true);
   });
   document.addEventListener("keydown",function(ev){
-    if(ev.key==="Escape"&&sourcePanel&&!sourcePanel.hidden){ev.preventDefault();closeInternalSource(false);}
+    if(ev.key==="Escape"&&sourcePanel&&!sourcePanel.hidden){ev.preventDefault();backInternalSource();}
   });
   // Switching an existing bottom tab dismisses the internal reader first.
   document.addEventListener("click",function(ev){
