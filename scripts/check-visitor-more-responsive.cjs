@@ -41,5 +41,5 @@ for(const asset of [
  assert(router.includes("/assets/"+asset+"?v="+expected.edge),"Cloudflare visitor/Android stale asset "+asset);
  assert(loader.includes("/assets/"+asset+"?v="+expected.visitor),"Native/visitor lazy-loader stale asset "+asset);
 }
-assert(ios.includes("ios-visitor-profile-capsule-20261030"),"Native iOS bridge stale");
+assert(ios.includes("__darIosVisitorAdaptiveDashboardBridgeV1")&&ios.includes("dar-visitor-daily-hub-v1.js"),"Native iOS adaptive profile/daily bridge missing");
 console.log("PASS: Mehr starts with title; quiz remains on Home/Wissen; tutorial only in App; 3 actions responsive; caches updated.");
