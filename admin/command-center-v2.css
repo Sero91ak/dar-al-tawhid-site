@@ -65,7 +65,7 @@ body.dar-v2-active #panel{padding:14px 12px!important}body.dar-v2-active #panel 
 .dar-v2-kpis{gap:8px}.dar-v2-kpi{min-height:115px;border-radius:13px;padding:12px}.dar-v2-kpi-value{font-size:25px;margin-top:8px}.dar-v2-overview-grid{gap:9px}.dar-v2-widget{padding:15px}
 body.dar-v2-active #panel .folder-grid{grid-template-columns:1fr!important;gap:8px!important}body.dar-v2-active #panel .command-grid{grid-template-columns:1fr!important}
 }
-@media(max-width:360px){body.dar-v2-active #topbar .toolbar .btn:not(.dar-v2-search-launch):not(#logoutBtn){display:none!important}.dar-v2-overview-heading{display:grid;gap:4px}}
+@media(max-width:360px){body.dar-v2-active #topbar .toolbar #refreshBtn{display:none!important}.dar-v2-overview-heading{display:grid;gap:4px}}
 @media(prefers-reduced-motion:reduce){.dar-v2-rail,.dar-v2-nav,.dar-v2-kpi,.dar-v2-chart-bar,.dar-v2-overview,.dar-v2-overlay,body.dar-v2-active #panel .folder-card{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 /* Preserve editorial full-screen editing and compact toolbars. */
