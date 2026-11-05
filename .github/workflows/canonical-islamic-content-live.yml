@@ -186,7 +186,7 @@ jobs:
       # create a second deployment owner. The target retains its stale-SHA,
       # health, Cloudflare and OneSignal/push separation protections.
       - name: Aktuellsten kanonischen main-Stand an einzigen Cloudflare-Owner übergeben
-        if: success()
+        if: success() && github.ref == 'refs/heads/main'
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
