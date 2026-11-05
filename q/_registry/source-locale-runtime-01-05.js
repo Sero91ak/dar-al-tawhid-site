@@ -38,6 +38,7 @@
     quote:find(".qsource-quote")?.textContent||"",
     speaker:find(".qsource-meta-row:nth-child(1) .qsource-meta-value")?.textContent||"",
     topic:find(".qsource-meta-row:nth-child(2) .qsource-meta-value")?.textContent||"",
+    sourceRef:find(".qsource-meta-row:nth-child(3) .qsource-meta-value")?.textContent||"",
     section:find(".qsource-section-title")?.textContent||"",
     note:find(".qsource-section p:not(.qsource-arabic)")?.textContent||"",
     linkTitles:Array.from(root.querySelectorAll(".qsource-link-title"),function(e){return e.textContent}),
@@ -51,7 +52,7 @@
     var code=selected(),locales=localeData.cards&&localeData.cards[number];
     if(!locales)return;
     var item=locales[code],authorized=code==="de"||Boolean(item&&item.approved===true);
-    var data=authorized&&item?item:null;
+    var data=authorized&&code!=="de"&&item?item:null;
     if(picker)picker.value=code;
     var rtl=authorized&&(code==="ar"||code==="ckb");
     document.documentElement.lang=authorized?code:"de";
@@ -67,6 +68,7 @@
     set(".qsource-quote",data?"„"+data.quote+"“":original.quote);
     set(".qsource-meta-row:nth-child(1) .qsource-meta-value",data?data.speaker:original.speaker);
     set(".qsource-meta-row:nth-child(2) .qsource-meta-value",data?data.topic:original.topic);
+    set(".qsource-meta-row:nth-child(3) .qsource-meta-value",data&&data.sourceRef?data.sourceRef:original.sourceRef);
     set(".qsource-section-title",data?data.section:original.section);
     set(".qsource-section p:not(.qsource-arabic)",data?data.note:original.note);
     var labels=root.querySelectorAll(".qsource-meta-label"),labelKeys=["speaker","topic","sources"];
@@ -77,7 +79,9 @@
       el.textContent=data&&data.actions&&data.actions[i]?data.actions[i]:original.linkTitles[i];
     });
     Array.from(root.querySelectorAll(".qsource-link-sub")).forEach(function(el,i){
-      el.textContent=data&&data.linkSubs&&data.linkSubs[i]?data.linkSubs[i]:original.linkSubs[i];
+      var refs=localeData.refs&&localeData.refs[number];
+      var alt=data&&refs&&refs[i]?refs[i]:null;
+      el.textContent=alt?alt.replace("$internal",phrase(code,"internal")):original.linkSubs[i];
     });
     if(notice){
       notice.lang=code;notice.dir=(code==="ar"||code==="ckb")?"rtl":"ltr";
