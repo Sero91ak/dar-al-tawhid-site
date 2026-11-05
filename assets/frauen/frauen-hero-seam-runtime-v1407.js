@@ -37,9 +37,15 @@ function reconcile(){
  var stage=shell.querySelector(":scope > .dar-immersive-hero-stage");
  var surface=stage||hero;
  var gap=surface.getBoundingClientRect().top-headerBottom;
- if(!Number.isFinite(gap)||Math.abs(gap)<=1||Math.abs(gap)>240)return;
+ if(!Number.isFinite(gap)||gap<=1)return;
+  /* Legacy app shells sometimes reserve more than 240px twice. Correct only
+     measured positive empty space at scroll origin, with a viewport-aware
+     safety limit instead of silently abandoning the visible Hero. */
+  var viewportHeight=window.visualViewport?window.visualViewport.height:window.innerHeight;
+  var maxGap=Math.max(480,Math.min(900,Math.ceil(viewportHeight*1.25)));
+  if(gap>maxGap)return;
  var current=parseFloat(shell.style.getPropertyValue("--frauen-flow-seam-shift"))||0;
- var next=Math.max(-220,Math.min(0,Math.round(current-gap)));
+ var next=Math.max(-maxGap,Math.min(0,Math.round(current-gap)));
  if(Math.abs(next-current)<1)return;
  shell.style.setProperty("--frauen-flow-seam-shift",next+"px");
  /* Inline important wins over old app-level block margins on iOS shells. */
