@@ -34,7 +34,7 @@ function applyPost(){
   var list=collection();if(!list)return false;
   var p=list.find(function(x){return x&&String(x.id)===ID});if(!p)return false;
   var code=selected(),loc=manifest.locales[code];
-  if(!loc||!loc.post||loc.post.id!==ID||loc.post.contentId!=="post:"+ID||loc.post.qSourceId!=="qsource:50")return false;
+  if(!loc||!loc.post||loc.post.id!==ID||loc.post.contentId!=="post:"+ID||loc.post.qSourceId!=="qsource:51")return false;
   if(applied.get(p)===code)return false;
   var raw=originals.get(p);
   if(!raw){raw={};FIELDS.forEach(function(k){raw[k]={present:Object.prototype.hasOwnProperty.call(p,k),value:p[k]}});originals.set(p,raw)}
@@ -116,7 +116,7 @@ function readManifest(){
     if(!res.ok)throw Error("Q51 post locales HTTP "+res.status);
     return res.json();
   }).then(function(doc){
-    if(doc.contentId!=="post:"+ID||doc.qSourceId!=="qsource:50"||!doc.locales)throw Error("Q51 ID mismatch");
+    if(doc.contentId!=="post:"+ID||doc.qSourceId!=="qsource:51"||!doc.locales)throw Error("Q51 ID mismatch");
     for(var i=0;i<CODES.length;i++){
       var lc=doc.locales[CODES[i]];
       if(!lc||!lc.post||lc.post.id!==ID||lc.post.contentId!=="post:"+ID||lc.post.qSourceId!=="qsource:51"||!lc.post.statement||!lc.post.source||!lc.post.conclusion)throw Error("Incomplete Q51 post translation "+CODES[i]);
