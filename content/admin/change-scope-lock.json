@@ -155,6 +155,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "dar-admin-v2-layl-salbei-20261105",
+      "at": "2026-11-05T20:13:00+01:00",
+      "approvedBy": "user-explicit-20261105-build-github-dar-admin-layl-salbei",
+      "reason": "Explicitly requested DĀR Admin Command Center V2 redesign and two selectable Layl/Salbei appearances for phone/iPad/fold. Temporary unlock solely for six exact Admin presentation files already merged in PR #1669; existing admin/index.html alwaysAllowed. No visitors, Kids, OneSignal, worker secrets, security controls, prayer data, or publishing routes unlocked.",
+      "paths": [
+        "admin/appearance-v2.css",
+        "admin/appearance-v2.js",
+        "admin/command-center-v2.css",
+        "admin/command-center-v2.js",
+        "admin/redaktion/appearance.css",
+        "admin/redaktion/index.html"
+      ],
+      "expiresAt": "2026-11-13T23:59:00+01:00"
+    },
+    {
       "id": "q51-nine-languages-regression-test-20261105",
       "at": "2026-11-05T19:24:00.000Z",
       "approvedBy": "user-explicit-20261105-q51-full-language-source-and-lesson-fix",
