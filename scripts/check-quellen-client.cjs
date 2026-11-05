@@ -99,7 +99,13 @@ assert.match(offline.getNode("sourceList").innerHTML, /href="\/q\/37\/"/);
   assert.doesNotMatch(redirects, /^\/quellen\/\s+\/quellen\/index\.html\s+200/m, "Recursive source rewrite forbidden");
   assert.doesNotMatch(redirects, /^\/q\/\s+\/quellen\/index\.html\s+200/m, "Recursive archive rewrite forbidden");
   // Exercise the real Cloudflare Worker routing function using a local asset mock.
-  const sandbox = { URL, Request, Response, Headers };
+  // Isolated read-only route test: no privileged access, no production changes.
+  const sandbox = { URL, Request, Response, Headers,
+    editorialOwnerAccess:async()=>null,
+    academyOwnerAccess:async()=>null,
+    gateHiddenSurfaces:async()=>null,
+    academyOwnerAssetPath:()=>false
+  };
   vm.createContext(sandbox);
   vm.runInContext(
     router.replace(/^import .*$/gm, "").replace(/export default\s*\{/, "const darRouter = {") +

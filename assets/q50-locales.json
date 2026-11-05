@@ -1,0 +1,827 @@
+{
+  "schemaVersion": 1,
+  "contentId": "post:dieses-wissen-ist-religion-isnad-20261104-q50",
+  "qSourceId": "qsource:50",
+  "quizId": "quiz:qsource:50",
+  "sourcePath": "/q/50/",
+  "quizPath": "/lernen/wissen-ist-religion/",
+  "canonicalLocale": "de",
+  "appLocaleStorageKey": "darAdultPreferredLocaleV1",
+  "localeSelectionPolicy": "URL ?lang= overrides saved adult app language; no OS-language inference",
+  "publicationStatus": "staging-only; not published; no OneSignal",
+  "arabicOriginals": {
+    "ibnSirin": "إِنَّ هَذَا الْعِلْمَ دِينٌ فَانْظُرُوا عَمَّنْ تَأْخُذُونَ دِينَكُمْ",
+    "ibnMubarak": "الْإِسْنَادُ مِنَ الدِّينِ وَلَوْلَا الْإِسْنَادُ لَقَالَ مَنْ شَاءَ مَا شَاءَ"
+  },
+  "sourceChains": {
+    "ibnSirin": "Ḥasan ibn ar-Rabīʿ → Ḥammād ibn Zayd → Ayyūb as-Saḫtiyānī und Hišām ibn Ḥassān → Muḥammad ibn Sīrīn; weitere parallele Wege über Hišām im selben Muslim-Abschnitt.",
+    "ibnMubarak": "Muḥammad ibn ʿAbdillāh ibn Quhzāḏ → ʿAbdān ibn ʿUṯmān → ʿAbdullāh ibn al-Mubārak."
+  },
+  "references": [
+    {
+      "id": "muslim:intro:26",
+      "label": "Muslim, Ṣaḥīḥ, Muqaddimah, Bericht 26 · Ibn Sīrīn · Druck S. 14",
+      "url": "https://www.islamweb.net/ar/library/content/1/28/#:~:text=إن%20هذا%20العلم%20دين"
+    },
+    {
+      "id": "muslim:intro:32",
+      "label": "Muslim, Ṣaḥīḥ, Muqaddimah, Bericht 32 · Ibn al-Mubārak · Druck S. 16",
+      "url": "https://islamweb.net/ar/library/content/1/33/#:~:text=الإسناد%20من%20الدين"
+    },
+    {
+      "id": "ibnsalah:isnad",
+      "label": "Ibn aṣ-Ṣalāḥ, ʿUlūm al-Ḥadīṯ, über Isnād und die Aussage von Ibn al-Mubārak · S. 256",
+      "url": "https://islamweb.net/ar/library/content/90/134/#:~:text=لولا%20الإسناد"
+    },
+    {
+      "id": "muslim:source-bab",
+      "label": "Muslim, Muqaddimah – Kapitel über Isnād und zuverlässige Überlieferer",
+      "url": "https://islamweb.net/ar/library/content/1/29/#:~:text=لم%20يكونوا%20يسألون%20عن%20الإسناد"
+    }
+  ],
+  "locales": {
+    "de": {
+      "name": "Deutsch",
+      "title": "DIESES WISSEN IST RELIGION",
+      "speaker1": "Muḥammad ibn Sīrīn (raḥimahullāh)",
+      "statement1": "Wahrlich, dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.",
+      "speaker2": "ʿAbdullāh ibn al-Mubārak (raḥimahullāh)",
+      "statement2": "Der Isnād gehört zur Religion. Gäbe es keinen Isnād, könnte jeder sagen, was er wollte.",
+      "intro": "Beide Āthār stehen in der Einleitung zu Ṣaḥīḥ Muslim. Sie behandeln die Herkunft religiöser Überlieferungen und die Verantwortung, Aussagen vor ihrer Weitergabe zu prüfen.",
+      "explain1": "Ibn Sīrīn erinnert daran, dass Wissen über Glauben und Gottesdienst nicht wie eine beliebige Meinung übernommen wird. Entscheidend sind die Kenntnis des Überlieferers, seine Zuverlässigkeit und die Überprüfung der Aussage.",
+      "explain2": "Ibn al-Mubārak erklärt die Funktion des Isnād: Die nachvollziehbare Kette der Überlieferer macht eine Aussage überprüfbar. Ohne solche Zuordnung könnten unbewiesene Behauptungen leicht als Religion ausgegeben werden.",
+      "limitations": "Ein Isnād allein garantiert noch keine Authentizität. Verbindung, Vertrauenswürdigkeit, Genauigkeit und mögliche verborgene Mängel müssen geprüft werden. Die beiden Aussagen sind Worte der Gelehrten, keine Worte des Propheten ﷺ.",
+      "conclusion": "Religiöses Wissen wird nicht allein nach Bekanntheit oder überzeugender Darstellung angenommen: Die Quelle, die Überlieferungskette und die tatsächliche Aussage müssen geprüft werden.",
+      "questions": [
+        {
+          "q": "Wozu fordert Ibn Sīrīn auf?",
+          "a": [
+            "Jede religiöse Aussage ungeprüft weiterzugeben",
+            "Zu prüfen, von wem man die Religion übernimmt",
+            "Nur die Länge einer Rede zu beachten",
+            "Alle Überlieferungsketten zu verwerfen"
+          ],
+          "correct": 1,
+          "why": "Er fordert ausdrücklich auf, die Herkunft des religiösen Wissens zu beachten."
+        },
+        {
+          "q": "Was bezeichnet der Begriff Isnād?",
+          "a": [
+            "Eine persönliche Meinung",
+            "Den Titel eines Buches",
+            "Die Kette der Überlieferer",
+            "Eine Gebetszeit"
+          ],
+          "correct": 2,
+          "why": "Der Isnād nennt die Personen, über die eine Aussage überliefert wurde."
+        },
+        {
+          "q": "Wer sagte: „Der Isnād gehört zur Religion“?",
+          "a": [
+            "ʿAbdullāh ibn al-Mubārak",
+            "Abū Hurayrah",
+            "ʿUmar ibn al-Ḫaṭṭāb",
+            "Ibn ʿAbbās"
+          ],
+          "correct": 0,
+          "why": "Diese Aussage überliefert Muslim von ʿAbdullāh ibn al-Mubārak."
+        },
+        {
+          "q": "Was folgt aus dem Vorhandensein einer Überlieferungskette?",
+          "a": [
+            "Jeder Bericht ist damit automatisch richtig",
+            "Die Aussagen werden zu Prophetenworten",
+            "Eine weitere Prüfung ist verboten",
+            "Die Kette lässt sich prüfen, ihre bloße Existenz beweist aber nicht die Echtheit"
+          ],
+          "correct": 3,
+          "why": "Auch Verbindung und Zuverlässigkeit der Überlieferer sind zu untersuchen."
+        }
+      ],
+      "dir": "ltr",
+      "ui": {
+        "source": "Quellenprüfung",
+        "study": "Lernbereich öffnen",
+        "sources": "Originalnachweise",
+        "chain": "Überlieferungsweg",
+        "classification": "Einordnung",
+        "explanation": "Erläuterung",
+        "warning": "Grenzen der Aussage",
+        "result": "Fazit",
+        "arabic": "Arabischer Originalwortlaut",
+        "language": "Sprache",
+        "start": "Lernen beginnen",
+        "question": "Frage",
+        "of": "von",
+        "next": "Weiter",
+        "evaluate": "Antwort prüfen",
+        "correct": "Richtig",
+        "incorrect": "Nicht richtig",
+        "finish": "Ergebnis",
+        "restart": "Erneut lernen",
+        "home": "Startseite",
+        "review": "Sprachfassung in redaktioneller Prüfung",
+        "headerLine": "Wissen aus Qurʾān, Sunnah und Āthār",
+        "pageNote": "Die Seitenangaben folgen der genannten Ausgabe; andere Druckausgaben können anders paginiert sein."
+      },
+      "approved": false,
+      "translationStatus": "review-required"
+    },
+    "ar": {
+      "name": "العربية",
+      "title": "إِنَّ هَذَا الْعِلْمَ دِينٌ",
+      "speaker1": "محمد بن سيرين رحمه الله",
+      "statement1": "إن هذا العلم دين، فانظروا عمن تأخذون دينكم.",
+      "speaker2": "عبد الله بن المبارك رحمه الله",
+      "statement2": "الإسناد من الدين، ولولا الإسناد لقال من شاء ما شاء.",
+      "intro": "ورد هذان الأثران في مقدمة صحيح مسلم، ويتعلقان بمصدر العلم الشرعي وضرورة التثبت من الأخبار قبل نقلها.",
+      "explain1": "نبّه ابن سيرين إلى أن العلم الشرعي لا يُؤخذ من كل أحد بلا تمحيص؛ بل يُنظر في حال الناقل وضبطه وصحة ما يرويه.",
+      "explain2": "بيّن ابن المبارك منزلة الإسناد، فبه تُعرف طرق نقل الأقوال، ويصبح التحقق من نسبتها ممكناً، فلا يَنسُب كل أحد إلى الدين ما يشاء.",
+      "limitations": "مجرد وجود الإسناد لا يستلزم صحة الخبر؛ فلا بد من النظر في اتصاله وعدالة رواته وضبطهم وانتفاء العلل. وهذان أثران عن عالمين من السلف، وليسا حديثين مرفوعين إلى النبي ﷺ.",
+      "conclusion": "لا يُقبل العلم الشرعي لمجرد شهرة قائله، بل ينبغي التثبت من المصدر والإسناد واللفظ المنقول.",
+      "questions": [
+        {
+          "q": "إلى ماذا دعا ابن سيرين؟",
+          "a": [
+            "نقل كل قول بلا تحقق",
+            "التثبت ممن نأخذ عنه الدين",
+            "النظر إلى طول الكلام فقط",
+            "ترك جميع الأسانيد"
+          ],
+          "correct": 1,
+          "why": "أمر بالنظر فيمن يؤخذ عنه العلم الشرعي."
+        },
+        {
+          "q": "ما معنى الإسناد؟",
+          "a": [
+            "الرأي الشخصي",
+            "عنوان الكتاب",
+            "سلسلة الرواة",
+            "وقت الصلاة"
+          ],
+          "correct": 2,
+          "why": "هو سلسلة من نُقل عنهم الخبر."
+        },
+        {
+          "q": "من قال: الإسناد من الدين؟",
+          "a": [
+            "عبد الله بن المبارك",
+            "أبو هريرة",
+            "عمر بن الخطاب",
+            "ابن عباس"
+          ],
+          "correct": 0,
+          "why": "أورد مسلم هذا الأثر عن عبد الله بن المبارك."
+        },
+        {
+          "q": "هل يكفي وجود إسناد للحكم بصحة الخبر؟",
+          "a": [
+            "نعم دائماً",
+            "يصير به كل قول حديثاً نبوياً",
+            "تحرم بعده المراجعة",
+            "لا، بل لا بد من فحص الإسناد"
+          ],
+          "correct": 3,
+          "why": "يُنظر في الاتصال وعدالة الرواة وضبطهم والعلل."
+        }
+      ],
+      "dir": "rtl",
+      "ui": {
+        "source": "تحقيق المصادر",
+        "study": "افتح قسم التعلّم",
+        "sources": "المصادر الأصلية",
+        "chain": "سلسلة الإسناد",
+        "classification": "التصنيف",
+        "explanation": "الشرح",
+        "warning": "ضوابط الفهم",
+        "result": "الخلاصة",
+        "arabic": "النص العربي الأصلي",
+        "language": "اللغة",
+        "start": "ابدأ التعلّم",
+        "question": "السؤال",
+        "of": "من",
+        "next": "التالي",
+        "evaluate": "تحقّق من الجواب",
+        "correct": "صحيح",
+        "incorrect": "غير صحيح",
+        "finish": "النتيجة",
+        "restart": "أعد التعلّم",
+        "home": "الرئيسية",
+        "review": "الترجمة قيد المراجعة التحريرية",
+        "headerLine": "علم من القرآن والسنة والآثار",
+        "pageNote": "أرقام الصفحات بحسب الطبعة المذكورة، وقد تختلف في طبعات أخرى."
+      },
+      "approved": false,
+      "translationStatus": "review-required"
+    },
+    "en": {
+      "name": "English",
+      "title": "THIS KNOWLEDGE IS RELIGION",
+      "speaker1": "Muḥammad ibn Sīrīn (may Allah have mercy on him)",
+      "statement1": "Indeed, this knowledge is religion, so consider carefully from whom you take your religion.",
+      "speaker2": "ʿAbdullāh ibn al-Mubārak (may Allah have mercy on him)",
+      "statement2": "The chain of transmission is part of religion. Without it, anyone could say whatever they wished.",
+      "intro": "Both reports appear in the introduction to Ṣaḥīḥ Muslim. They concern the origin of religious reports and the duty to verify what is transmitted.",
+      "explain1": "Ibn Sīrīn teaches that religious knowledge is not accepted as a casual opinion. The narrator’s identity, reliability and the accuracy of the report matter.",
+      "explain2": "Ibn al-Mubārak describes the function of the isnād: an identifiable chain makes a statement open to scrutiny. Without it, unsupported claims can be presented as religious knowledge.",
+      "limitations": "Having a chain does not by itself prove authenticity. Continuity, reliability, precision and hidden defects must also be examined. These are statements of early scholars, not sayings of the Prophet ﷺ.",
+      "conclusion": "Religious knowledge is not accepted merely because a speaker is well known: the source, its chain and the actual wording require verification.",
+      "questions": [
+        {
+          "q": "What does Ibn Sīrīn ask us to do?",
+          "a": [
+            "Pass on every claim without checking",
+            "Consider from whom we take our religion",
+            "Judge only how long a talk is",
+            "Reject all chains of transmission"
+          ],
+          "correct": 1,
+          "why": "He explicitly urges care about the source of religious knowledge."
+        },
+        {
+          "q": "What is an isnād?",
+          "a": [
+            "A personal opinion",
+            "The title of a book",
+            "A chain of narrators",
+            "A prayer time"
+          ],
+          "correct": 2,
+          "why": "It identifies the people through whom a statement was transmitted."
+        },
+        {
+          "q": "Who said that the isnād is part of religion?",
+          "a": [
+            "ʿAbdullāh ibn al-Mubārak",
+            "Abū Hurayrah",
+            "ʿUmar ibn al-Khaṭṭāb",
+            "Ibn ʿAbbās"
+          ],
+          "correct": 0,
+          "why": "Muslim transmits this statement from ʿAbdullāh ibn al-Mubārak."
+        },
+        {
+          "q": "Does the mere existence of a chain prove a report authentic?",
+          "a": [
+            "Yes, always",
+            "It turns every report into a prophetic saying",
+            "Further checking is forbidden",
+            "No, the chain still requires verification"
+          ],
+          "correct": 3,
+          "why": "The connections and reliability of its narrators must be examined."
+        }
+      ],
+      "dir": "ltr",
+      "ui": {
+        "source": "Source verification",
+        "study": "Open learning",
+        "sources": "Original evidence",
+        "chain": "Transmission chain",
+        "classification": "Classification",
+        "explanation": "Explanation",
+        "warning": "Limits and caution",
+        "result": "Conclusion",
+        "arabic": "Original Arabic",
+        "language": "Language",
+        "start": "Start learning",
+        "question": "Question",
+        "of": "of",
+        "next": "Next",
+        "evaluate": "Check answer",
+        "correct": "Correct",
+        "incorrect": "Not correct",
+        "finish": "Result",
+        "restart": "Try again",
+        "home": "Home",
+        "review": "Translation awaits editorial review",
+        "headerLine": "Knowledge from Qurʾān, Sunnah and Āthār",
+        "pageNote": "Page numbers refer to the cited edition and may differ in other printed editions."
+      },
+      "approved": false,
+      "translationStatus": "review-required"
+    },
+    "tr": {
+      "name": "Türkçe",
+      "title": "BU İLİM DİNDİR",
+      "speaker1": "Muhammed b. Sîrîn (Allah ona rahmet etsin)",
+      "statement1": "Şüphesiz bu ilim dindir. Öyleyse dininizi kimden aldığınıza dikkat edin.",
+      "speaker2": "Abdullah b. Mübârek (Allah ona rahmet etsin)",
+      "statement2": "İsnad dindendir. İsnad olmasaydı isteyen istediğini söylerdi.",
+      "intro": "Her iki eser de Sahîh-i Müslim’in Mukaddime bölümünde yer alır. Dinî rivayetlerin kaynağına ve aktarılan sözleri doğrulama sorumluluğuna işaret eder.",
+      "explain1": "İbn Sîrîn, dinî bilginin herhangi bir görüş gibi alınamayacağını hatırlatır. Rivayet eden kişinin kimliği, güvenilirliği ve naklin doğruluğu önemlidir.",
+      "explain2": "İbnü’l-Mübârek isnadın işlevini açıklar: Rivayet zincirinin bilinmesi, sözlerin araştırılmasını sağlar. Bu olmadan temelsiz iddialar din adına ileri sürülebilir.",
+      "limitations": "Bir isnadın varlığı tek başına sahihlik kanıtı değildir. Zincirin kesintisizliği, râvilerin güvenilirliği, zabtı ve gizli kusurlar araştırılmalıdır. Bunlar Peygamber’in ﷺ hadisleri değil, erken dönem âlimlerinin sözleridir.",
+      "conclusion": "Dinî bilgi yalnızca konuşanın tanınmışlığına dayanılarak kabul edilmez; kaynak, isnad ve sözün aslı incelenmelidir.",
+      "questions": [
+        {
+          "q": "İbn Sîrîn neye dikkat çekmiştir?",
+          "a": [
+            "Her sözü kontrol etmeden aktarmaya",
+            "Dini kimden aldığımızı araştırmaya",
+            "Sadece konuşmanın uzunluğuna",
+            "Bütün isnadları reddetmeye"
+          ],
+          "correct": 1,
+          "why": "Dinî bilginin kimden alındığının araştırılmasını istemiştir."
+        },
+        {
+          "q": "İsnad ne demektir?",
+          "a": [
+            "Kişisel görüş",
+            "Kitap adı",
+            "Râviler zinciri",
+            "Namaz vakti"
+          ],
+          "correct": 2,
+          "why": "Bir sözün kimlerden nakledildiğini gösteren zincirdir."
+        },
+        {
+          "q": "«İsnad dindendir» diyen kimdir?",
+          "a": [
+            "Abdullah b. Mübârek",
+            "Ebû Hüreyre",
+            "Ömer b. Hattâb",
+            "İbn Abbâs"
+          ],
+          "correct": 0,
+          "why": "Müslim bu sözü Abdullah b. Mübârek’ten nakleder."
+        },
+        {
+          "q": "Bir isnadın bulunması rivayetin sahih olduğunu tek başına kanıtlar mı?",
+          "a": [
+            "Evet, her zaman",
+            "Her sözü peygamber hadisi yapar",
+            "Artık inceleme yasaktır",
+            "Hayır, zincir ayrıca incelenmelidir"
+          ],
+          "correct": 3,
+          "why": "Bağlantılar ve râvilerin güvenilirliği araştırılmalıdır."
+        }
+      ],
+      "dir": "ltr",
+      "ui": {
+        "source": "Kaynak incelemesi",
+        "study": "Öğrenme bölümünü aç",
+        "sources": "Asıl kaynaklar",
+        "chain": "Rivayet zinciri",
+        "classification": "Değerlendirme",
+        "explanation": "Açıklama",
+        "warning": "İhtiyat ve sınırlar",
+        "result": "Sonuç",
+        "arabic": "Arapça asıl metin",
+        "language": "Dil",
+        "start": "Öğrenmeye başla",
+        "question": "Soru",
+        "of": "/",
+        "next": "İleri",
+        "evaluate": "Cevabı kontrol et",
+        "correct": "Doğru",
+        "incorrect": "Yanlış",
+        "finish": "Sonuç",
+        "restart": "Yeniden başla",
+        "home": "Ana sayfa",
+        "review": "Çeviri editoryal incelemede",
+        "headerLine": "Kurʾân, Sünnet ve eserlerden ilim",
+        "pageNote": "Sayfa numaraları belirtilen baskıya aittir; diğer baskılarda farklı olabilir."
+      },
+      "approved": false,
+      "translationStatus": "review-required"
+    },
+    "ku": {
+      "name": "Kurmancî",
+      "title": "EV ZANÎN DÎN E",
+      "speaker1": "Muḥammed ibn Sîrîn (Xwedê rehma xwe lê bike)",
+      "statement1": "Bi rastî ev zanîn dîn e; ji ber vê yekê bala xwe bidin ka hûn dînê xwe ji kê digirin.",
+      "speaker2": "ʿAbdullah ibn al-Mubârek (Xwedê rehma xwe lê bike)",
+      "statement2": "Îsnad beşek ji dîn e. Heger îsnad tunebûya, her kes dikarîbû tiştê ku dixwest bigota.",
+      "intro": "Her du gotin di pêşgotina Ṣaḥîḥ Muslim de hatine vegotin. Ew li ser çavkaniya zanîna dînî û girîngiya piştrastkirina vegotinê ne.",
+      "explain1": "Ibn Sîrîn dibêje ku zanîna dînî divê bê lêkolîn ji her kesî neyê girtin. Kesê ku vedigêre, bawerbarî û rastiya vegotinê girîng in.",
+      "explain2": "Ibn al-Mubârek girîngiya îsnadê diyar dike: zincîra vegêran rê dide ku gotin bê kontrolkirin. Bê wê, kes dikarin gotinên bê delîl bi navê dîn bibêjin.",
+      "limitations": "Tenê hebûna îsnadê têra rastdariya vegotinê nake. Girêdana zincîrê, bawerbarî, rastbêjî û kêmasiyên veşartî divê bên lêkolînkirin. Ev gotinên alimên pêşîn in, ne gotinên Pêxember ﷺ.",
+      "conclusion": "Zanîna dînî tenê ji ber navdariya kesekî nayê pejirandin; divê çavkanî, îsnad û gotina rastîn bên kontrolkirin.",
+      "questions": [
+        {
+          "q": "Ibn Sîrîn li ser çi tiştî hişyar dike?",
+          "a": [
+            "Her gotinê bê kontrol belav bike",
+            "Binêre dînê xwe ji kê digirî",
+            "Tenê dirêjahiya axaftinê bibîne",
+            "Hemû îsnadan red bike"
+          ],
+          "correct": 1,
+          "why": "Ew ji me dixwaze ku çavkaniya zanîna dînî kontrol bikin."
+        },
+        {
+          "q": "Îsnad çi ye?",
+          "a": [
+            "Ramaneke kesane",
+            "Navê pirtûkekê",
+            "Zincîra vegêran",
+            "Dema nimêjê"
+          ],
+          "correct": 2,
+          "why": "Ew kesên ku gotin ji wan hatiye vegotin nîşan dide."
+        },
+        {
+          "q": "Kê got «Îsnad beşek ji dîn e»?",
+          "a": [
+            "ʿAbdullah ibn al-Mubârek",
+            "Ebû Hureyre",
+            "ʿUmer ibn el-Xeṭṭâb",
+            "Ibn ʿAbbâs"
+          ],
+          "correct": 0,
+          "why": "Muslim ev gotin ji ʿAbdullah ibn al-Mubârek vedigêre."
+        },
+        {
+          "q": "Tenê hebûna zincîrekê rastiya vegotinê ispat dike?",
+          "a": [
+            "Erê, her dem",
+            "Her gotin dike hedîsa pêxemberî",
+            "Piştre kontrol qedexe ye",
+            "Na, zincîr divê were kontrolkirin"
+          ],
+          "correct": 3,
+          "why": "Girêdan û bawerbarîya vegêran jî divê bên vekolîn."
+        }
+      ],
+      "dir": "ltr",
+      "ui": {
+        "source": "Kontrola çavkaniyan",
+        "study": "Beşa fêrbûnê veke",
+        "sources": "Delîlên bingehîn",
+        "chain": "Zincîra vegêran",
+        "classification": "Dabeşkirin",
+        "explanation": "Şirove",
+        "warning": "Sînor û hişyari",
+        "result": "Encam",
+        "arabic": "Metna erebî ya resen",
+        "language": "Ziman",
+        "start": "Fêrbûnê dest pê bike",
+        "question": "Pirs",
+        "of": "ji",
+        "next": "Pêş",
+        "evaluate": "Bersivê kontrol bike",
+        "correct": "Rast",
+        "incorrect": "Ne rast",
+        "finish": "Encam",
+        "restart": "Dîsa biceribîne",
+        "home": "Rûpela sereke",
+        "review": "Werger hê di nirxandina edîtorî de ye",
+        "headerLine": "Zanîn ji Qurʾan, Sunnah û Āthār",
+        "pageNote": "Hejmarên rûpelan li gorî çapê hatine dayîn; di çapên din de dikarin cuda bin."
+      },
+      "approved": false,
+      "translationStatus": "review-required"
+    },
+    "ckb": {
+      "name": "سۆرانی",
+      "title": "ئەم زانستە ئایینە",
+      "speaker1": "موحەممەد کوڕی سیرین (خوا ڕەحمەتی پێ بکات)",
+      "statement1": "بەڕاستی ئەم زانستە ئایینە؛ بۆیە سەیری ئەوە بکەن کە ئایینەکەتان لە کێ وەردەگرن.",
+      "speaker2": "عەبدولڵا کوڕی موبارەک (خوا ڕەحمەتی پێ بکات)",
+      "statement2": "ئیسناد بەشێکە لە ئایین. ئەگەر ئیسناد نەبوایە، هەر کەسێک دەیتوانی هەرچی بیەوێت بڵێت.",
+      "intro": "هەردوو ئەسەرەکە لە پێشەکیی سەحیح موسلیمدا هاتوون. باس لە سەرچاوەی زانیاریی ئایینی و پێویستی پشتڕاستکردنەوەی گێڕانەوەکان دەکەن.",
+      "explain1": "ئیبن سیرین ئاگادارمان دەکاتەوە کە زانیاریی ئایینی نابێت بێ لێکۆڵینەوە لە هەر کەسێک وەربگیرێت. ناسنامە و متمانەپێکراوی گێڕەرەوە گرنگە.",
+      "explain2": "ئیبن موبارەک ڕۆڵی ئیسناد ڕوون دەکاتەوە: زنجیرەی گێڕەرەوەکان دەرفەتی پشکنینی وتەکە دەدات. بێ ئەوە، داواکاریی بێ بەڵگە دەتوانرێت بە ناوی ئایین بخرێتەڕوو.",
+      "limitations": "تەنها هەبوونی ئیسناد بەڵگەی ڕاستیی گێڕانەوە نییە. پەیوەندیی زنجیرە، متمانەپێکراوی، وردبینی و کەموکوڕیی نهێنی دەبێت بپشکنرێن. ئەمانە وتەی زانایانی پێشینن، نە فەرموودەی پێغەمبەر ﷺ.",
+      "conclusion": "زانیاریی ئایینی تەنها بە ناوبانگی قسەکەر وەرناگیرێت؛ سەرچاوە، ئیسناد و دەقی ڕاستەقینە پێویستیان بە پشکنینە.",
+      "questions": [
+        {
+          "q": "ئیبن سیرین بانگهێشتی چی دەکات؟",
+          "a": [
+            "هەموو وتەیەک بێ پشکنین بڵاو بکەوە",
+            "بزانە ئایینەکەت لە کێ وەردەگریت",
+            "تەنها درێژیی وتار ببینە",
+            "هەموو ئیسنادەکان ڕەت بکەوە"
+          ],
+          "correct": 1,
+          "why": "داوا دەکات سەرچاوەی زانیاریی ئایینی بپشکنین."
+        },
+        {
+          "q": "ئیسناد چییە؟",
+          "a": [
+            "بۆچوونی کەسی",
+            "ناوی کتێب",
+            "زنجیرەی گێڕەرەوەکان",
+            "کاتی نوێژ"
+          ],
+          "correct": 2,
+          "why": "ئەو کەسانە دیاری دەکات کە وتەکەیان گێڕاوەتەوە."
+        },
+        {
+          "q": "کێ گوتی ئیسناد بەشێکە لە ئایین؟",
+          "a": [
+            "عەبدولڵا کوڕی موبارەک",
+            "ئەبو هورەیرە",
+            "عومەر کوڕی خەتاب",
+            "ئیبن عەباس"
+          ],
+          "correct": 0,
+          "why": "موسلیم ئەم وتەیە لە عەبدولڵا کوڕی موبارەک دەگێڕێتەوە."
+        },
+        {
+          "q": "ئایا تەنها هەبوونی زنجیرە ڕاستیی گێڕانەوە دەسەلمێنێت؟",
+          "a": [
+            "بەڵێ، هەمیشە",
+            "هەموو وتەیەک دەکات بە فەرموودە",
+            "پشکنین قەدەغەیە",
+            "نەخێر، زنجیرەکە دەبێت بپشکنرێت"
+          ],
+          "correct": 3,
+          "why": "پەیوەندی و متمانەپێکراوی گێڕەرەوەکانیش دەبێت بپشکنرێت."
+        }
+      ],
+      "dir": "rtl",
+      "ui": {
+        "source": "پشکنینی سەرچاوە",
+        "study": "کردنەوەی فێربوون",
+        "sources": "بەڵگە ڕەسەنەکان",
+        "chain": "زنجیرەی گێڕانەوە",
+        "classification": "پۆلێنکردن",
+        "explanation": "ڕوونکردنەوە",
+        "warning": "سنوور و ئاگاداری",
+        "result": "کورتە",
+        "arabic": "دەقی عەرەبیی ڕەسەن",
+        "language": "زمان",
+        "start": "دەستپێکردنی فێربوون",
+        "question": "پرسیار",
+        "of": "لە",
+        "next": "دواتر",
+        "evaluate": "پشکنینی وەڵام",
+        "correct": "ڕاستە",
+        "incorrect": "هەڵەیە",
+        "finish": "ئەنجام",
+        "restart": "دووبارەکردنەوە",
+        "home": "سەرەتا",
+        "review": "وەرگێڕانەکە چاوەڕوانی پشکنینی دەستکاریکەرە",
+        "headerLine": "زانست لە قورئان و سوننەت و ئاسار",
+        "pageNote": "ژمارەی لاپەڕەکان بەپێی ئەو چاپەیە کە ئاماژەی پێکراوە؛ لە چاپی تردا دەگۆڕێن."
+      },
+      "approved": false,
+      "translationStatus": "review-required"
+    },
+    "bs": {
+      "name": "Bosanski",
+      "title": "OVO ZNANJE JE VJERA",
+      "speaker1": "Muḥammed ibn Sīrīn (Allah mu se smilovao)",
+      "statement1": "Zaista je ovo znanje vjera. Zato pazite od koga uzimate svoju vjeru.",
+      "speaker2": "ʿAbdullāh ibn al-Mubārak (Allah mu se smilovao)",
+      "statement2": "Lanac prenosilaca dio je vjere. Da nema lanca, svako bi govorio šta god želi.",
+      "intro": "Oba predanja nalaze se u uvodu Ṣaḥīḥa Muslima. Govore o izvoru vjerskog znanja i obavezi provjeravanja onoga što se prenosi.",
+      "explain1": "Ibn Sīrīn upozorava da se vjersko znanje ne uzima nekritički od bilo koga. Važni su identitet i pouzdanost prenosioca te tačnost predanja.",
+      "explain2": "Ibn al-Mubārak objašnjava ulogu isnāda: poznat lanac prenosilaca omogućava provjeru pripisanih izjava. Bez toga bi se neutemeljene tvrdnje lako predstavljale kao vjera.",
+      "limitations": "Samo postojanje lanca ne dokazuje vjerodostojnost. Treba ispitati povezanost lanca, pouzdanost i preciznost prenosilaca te skrivene nedostatke. Ovo su riječi ranih učenjaka, a ne riječi Poslanika ﷺ.",
+      "conclusion": "Vjersko znanje ne prihvata se samo zbog poznatog govornika: potrebno je provjeriti izvor, lanac prenosilaca i tačan tekst.",
+      "questions": [
+        {
+          "q": "Na šta Ibn Sīrīn poziva?",
+          "a": [
+            "Prenositi svaku tvrdnju bez provjere",
+            "Paziti od koga uzimamo vjeru",
+            "Gledati samo dužinu govora",
+            "Odbaciti sve lance"
+          ],
+          "correct": 1,
+          "why": "On izričito poziva na provjeru izvora vjerskog znanja."
+        },
+        {
+          "q": "Šta znači isnād?",
+          "a": [
+            "Lično mišljenje",
+            "Naslov knjige",
+            "Lanac prenosilaca",
+            "Vrijeme namaza"
+          ],
+          "correct": 2,
+          "why": "To je niz osoba preko kojih je izjava prenesena."
+        },
+        {
+          "q": "Ko je rekao da je isnād dio vjere?",
+          "a": [
+            "ʿAbdullāh ibn al-Mubārak",
+            "Ebū Hurejre",
+            "ʿUmer ibn el-Hattāb",
+            "Ibn ʿAbbās"
+          ],
+          "correct": 0,
+          "why": "Muslim prenosi ovu izjavu od ʿAbdullāha ibn al-Mubāraka."
+        },
+        {
+          "q": "Dokazuje li samo postojanje lanca vjerodostojnost predanja?",
+          "a": [
+            "Da, uvijek",
+            "Svaku izjavu čini hadisom",
+            "Daljnja provjera je zabranjena",
+            "Ne, lanac se mora ispitati"
+          ],
+          "correct": 3,
+          "why": "Povezanost i pouzdanost prenosilaca moraju se provjeriti."
+        }
+      ],
+      "dir": "ltr",
+      "ui": {
+        "source": "Provjera izvora",
+        "study": "Otvori učenje",
+        "sources": "Izvorni dokazi",
+        "chain": "Lanac prenosilaca",
+        "classification": "Klasifikacija",
+        "explanation": "Objašnjenje",
+        "warning": "Ograničenja",
+        "result": "Zaključak",
+        "arabic": "Izvorni arapski",
+        "language": "Jezik",
+        "start": "Započni učenje",
+        "question": "Pitanje",
+        "of": "od",
+        "next": "Dalje",
+        "evaluate": "Provjeri odgovor",
+        "correct": "Tačno",
+        "incorrect": "Netačno",
+        "finish": "Rezultat",
+        "restart": "Ponovi",
+        "home": "Početna",
+        "review": "Prijevod čeka stručnu provjeru",
+        "headerLine": "Znanje iz Kurʾāna, Sunneta i āthāra",
+        "pageNote": "Brojevi stranica odnose se na navedeno izdanje i mogu se razlikovati u drugim izdanjima."
+      },
+      "approved": false,
+      "translationStatus": "review-required"
+    },
+    "fr": {
+      "name": "Français",
+      "title": "CETTE SCIENCE EST UNE RELIGION",
+      "speaker1": "Muḥammad ibn Sīrīn (qu’Allah lui fasse miséricorde)",
+      "statement1": "Certes, ce savoir fait partie de la religion. Examinez donc auprès de qui vous prenez votre religion.",
+      "speaker2": "ʿAbdullāh ibn al-Mubārak (qu’Allah lui fasse miséricorde)",
+      "statement2": "La chaîne de transmission fait partie de la religion. Sans elle, chacun pourrait dire ce qu’il veut.",
+      "intro": "Ces deux paroles figurent dans l’introduction du Ṣaḥīḥ de Muslim. Elles traitent de l’origine des transmissions religieuses et de la nécessité de les vérifier.",
+      "explain1": "Ibn Sīrīn rappelle que le savoir religieux ne se reçoit pas comme une simple opinion. L’identité du transmetteur, sa fiabilité et l’exactitude du récit importent.",
+      "explain2": "Ibn al-Mubārak expose le rôle de l’isnād : une chaîne identifiable permet d’examiner l’attribution d’une parole. Sans elle, des affirmations sans preuve pourraient être présentées comme religion.",
+      "limitations": "La seule présence d’une chaîne ne garantit pas l’authenticité. Il faut en examiner la continuité, la fiabilité et la précision des transmetteurs ainsi que les défauts cachés. Ce sont des paroles de savants anciens, non des paroles du Prophète ﷺ.",
+      "conclusion": "Le savoir religieux ne se reçoit pas seulement en raison de la notoriété d’un orateur : il faut vérifier la source, la chaîne et le texte exact.",
+      "questions": [
+        {
+          "q": "Que demande Ibn Sīrīn ?",
+          "a": [
+            "Transmettre toute affirmation sans vérification",
+            "Vérifier auprès de qui l’on prend sa religion",
+            "Regarder seulement la longueur d’un discours",
+            "Rejeter toutes les chaînes"
+          ],
+          "correct": 1,
+          "why": "Il recommande explicitement de vérifier l’origine du savoir religieux."
+        },
+        {
+          "q": "Que signifie isnād ?",
+          "a": [
+            "Un avis personnel",
+            "Le titre d’un ouvrage",
+            "La chaîne des transmetteurs",
+            "Une heure de prière"
+          ],
+          "correct": 2,
+          "why": "Il désigne les personnes par lesquelles une parole est transmise."
+        },
+        {
+          "q": "Qui a dit que l’isnād fait partie de la religion ?",
+          "a": [
+            "ʿAbdullāh ibn al-Mubārak",
+            "Abū Hurayrah",
+            "ʿUmar ibn al-Khaṭṭāb",
+            "Ibn ʿAbbās"
+          ],
+          "correct": 0,
+          "why": "Muslim rapporte cette parole de ʿAbdullāh ibn al-Mubārak."
+        },
+        {
+          "q": "La présence d’une chaîne suffit-elle à établir l’authenticité ?",
+          "a": [
+            "Oui, toujours",
+            "Elle transforme toute parole en hadith prophétique",
+            "L’examen devient interdit",
+            "Non, la chaîne doit encore être vérifiée"
+          ],
+          "correct": 3,
+          "why": "Les liens entre transmetteurs et leur fiabilité doivent être examinés."
+        }
+      ],
+      "dir": "ltr",
+      "ui": {
+        "source": "Vérification des sources",
+        "study": "Ouvrir l’apprentissage",
+        "sources": "Preuves originales",
+        "chain": "Chaîne de transmission",
+        "classification": "Qualification",
+        "explanation": "Explication",
+        "warning": "Limites et précautions",
+        "result": "Conclusion",
+        "arabic": "Texte arabe original",
+        "language": "Langue",
+        "start": "Commencer",
+        "question": "Question",
+        "of": "sur",
+        "next": "Suivant",
+        "evaluate": "Vérifier la réponse",
+        "correct": "Correct",
+        "incorrect": "Incorrect",
+        "finish": "Résultat",
+        "restart": "Recommencer",
+        "home": "Accueil",
+        "review": "Traduction en attente de relecture",
+        "headerLine": "Savoir issu du Coran, de la Sunnah et des Āthār",
+        "pageNote": "La pagination correspond à l’édition citée et peut différer selon les éditions."
+      },
+      "approved": false,
+      "translationStatus": "review-required"
+    },
+    "es": {
+      "name": "Español",
+      "title": "ESTE CONOCIMIENTO ES RELIGIÓN",
+      "speaker1": "Muḥammad ibn Sīrīn (que Allah tenga misericordia de él)",
+      "statement1": "Ciertamente, este conocimiento es religión. Por eso, prestad atención a quién os enseña vuestra religión.",
+      "speaker2": "ʿAbdullāh ibn al-Mubārak (que Allah tenga misericordia de él)",
+      "statement2": "La cadena de transmisión forma parte de la religión. Sin ella, cualquiera podría decir lo que quisiera.",
+      "intro": "Ambas palabras se encuentran en la introducción de Ṣaḥīḥ Muslim. Tratan sobre el origen de los relatos religiosos y la responsabilidad de comprobar su transmisión.",
+      "explain1": "Ibn Sīrīn recuerda que el conocimiento religioso no debe aceptarse como una opinión cualquiera. Importan la identidad y fiabilidad del transmisor y la exactitud del relato.",
+      "explain2": "Ibn al-Mubārak explica la función del isnād: una cadena identificable permite examinar la atribución de una afirmación. Sin ella podrían presentarse como religión alegaciones sin fundamento.",
+      "limitations": "La mera existencia de una cadena no demuestra autenticidad. Deben examinarse su continuidad, la fiabilidad y precisión de los transmisores y los posibles defectos ocultos. Son palabras de sabios antiguos, no dichos del Profeta ﷺ.",
+      "conclusion": "El conocimiento religioso no se acepta solo por la fama del orador: hay que comprobar su fuente, la cadena de transmisión y la redacción original.",
+      "questions": [
+        {
+          "q": "¿A qué llama Ibn Sīrīn?",
+          "a": [
+            "Difundir toda afirmación sin comprobarla",
+            "Examinar de quién tomamos la religión",
+            "Mirar solo la duración de un discurso",
+            "Rechazar todas las cadenas"
+          ],
+          "correct": 1,
+          "why": "Pide expresamente prestar atención a la fuente del conocimiento religioso."
+        },
+        {
+          "q": "¿Qué es el isnād?",
+          "a": [
+            "Una opinión personal",
+            "El título de un libro",
+            "La cadena de transmisores",
+            "Un horario de oración"
+          ],
+          "correct": 2,
+          "why": "Identifica a las personas mediante las cuales se transmitió una afirmación."
+        },
+        {
+          "q": "¿Quién dijo que el isnād forma parte de la religión?",
+          "a": [
+            "ʿAbdullāh ibn al-Mubārak",
+            "Abū Hurayrah",
+            "ʿUmar ibn al-Khaṭṭāb",
+            "Ibn ʿAbbās"
+          ],
+          "correct": 0,
+          "why": "Muslim transmite esta afirmación de ʿAbdullāh ibn al-Mubārak."
+        },
+        {
+          "q": "¿Basta con que exista una cadena para demostrar autenticidad?",
+          "a": [
+            "Sí, siempre",
+            "Convierte cualquier frase en un dicho profético",
+            "Ya no se permite revisarla",
+            "No; la cadena aún debe examinarse"
+          ],
+          "correct": 3,
+          "why": "Es necesario estudiar los enlaces y la fiabilidad de los transmisores."
+        }
+      ],
+      "dir": "ltr",
+      "ui": {
+        "source": "Verificación de fuentes",
+        "study": "Abrir aprendizaje",
+        "sources": "Pruebas originales",
+        "chain": "Cadena de transmisión",
+        "classification": "Clasificación",
+        "explanation": "Explicación",
+        "warning": "Límites y cautela",
+        "result": "Conclusión",
+        "arabic": "Texto árabe original",
+        "language": "Idioma",
+        "start": "Empezar",
+        "question": "Pregunta",
+        "of": "de",
+        "next": "Siguiente",
+        "evaluate": "Comprobar respuesta",
+        "correct": "Correcto",
+        "incorrect": "Incorrecto",
+        "finish": "Resultado",
+        "restart": "Repetir",
+        "home": "Inicio",
+        "review": "Traducción pendiente de revisión editorial",
+        "headerLine": "Conocimiento del Corán, la Sunnah y los Āthār",
+        "pageNote": "Las páginas corresponden a la edición citada y pueden variar en otras ediciones."
+      },
+      "approved": false,
+      "translationStatus": "review-required"
+    }
+  }
+}
