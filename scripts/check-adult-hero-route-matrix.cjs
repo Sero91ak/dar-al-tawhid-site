@@ -17,15 +17,8 @@ const inventory=["frauen","topics","topic","post","hadith","dua","settings","cal
 for(const [name,cssPath,loaderPath,asset] of lanes){
  const css=read(cssPath),loader=read(loaderPath);
  assert.equal([...css].reduce((n,c)=>n+(c==="{")-(c==="}"),0),0,name+" unbalanced CSS");
- if(name==="Visitor")assert.doesNotMatch(css,/GLOBAL_ADULT_STICKY_CLEARANCE_V1|GLOBAL_HERO_ROUTE_TOP_SEAM_V3|FRAUEN_DIRECT_STICKY_FALLBACK_V6/,
-   "Visitor must not inherit historical Test-only layout patches");
- else {
-   /* Existing Test CSS V3/V6 remains legacy baseline; the new Frauen-scoped
-      flow layer, loaded after Test brand CSS, supersedes its women selectors. */
-   const women=read("assets/frauen/frauen-original-v1224-header-seam-v1405.css");
-   assert.match(women,/DAR_FRAUEN_SINGLE_DOCUMENT_SCROLL_V1408/);
-   assert.match(women,/DAR_FRAUEN_IOS_SINGLE_BRAND_SPACER_V1408/);
- }
+ assert.doesNotMatch(css,/GLOBAL_ADULT_STICKY_CLEARANCE_V1|GLOBAL_HERO_ROUTE_TOP_SEAM_V3|FRAUEN_DIRECT_STICKY_FALLBACK_V6/,
+   name+" must not globally translate original Hero or detached search");
  assert.doesNotMatch(css,/NATIVE_HERO_TOP_SEAM_V2|TEST_NATIVE_HERO_TOP_SEAM_V2/,
    name+" must not duplicate native safe-area resetting");
  assert(loader.includes(asset+"?v=20261030-restore-original-hero-rail-v5"),
