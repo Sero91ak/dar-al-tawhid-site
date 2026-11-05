@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-05",
+  "batchSize": 10,
+  "firstInternalId": "HAD-3395",
+  "lastInternalId": "HAD-3404",
+  "recordType": "athar",
+  "authoritativeBook": "Ibn Abī Šaybah – al-Muṣannaf, Kitāb al-Adab, Bd. 6 (Islamweb-Digitalpaginierung)",
+  "entries": [
+    {
+      "id": "HAD-3395",
+      "chapter": 120,
+      "report": 1,
+      "page": "189",
+      "topic": "Šaʿbī on Masrūq's knowledge-seeking"
+    },
+    {
+      "id": "HAD-3396",
+      "chapter": 120,
+      "report": 3,
+      "page": "189",
+      "topic": "Šaʿbī on value of narration and travel"
+    },
+    {
+      "id": "HAD-3397",
+      "chapter": 120,
+      "report": 5,
+      "page": "189",
+      "topic": "Qays ibn ʿAbbād travelling to Medina"
+    },
+    {
+      "id": "HAD-3398",
+      "chapter": 150,
+      "report": 1,
+      "page": "212",
+      "topic": "Ibn Sīrīn's question on found writing"
+    },
+    {
+      "id": "HAD-3399",
+      "chapter": 151,
+      "report": 2,
+      "page": "212",
+      "topic": "Ḍaḥḥāk's distinction between Hadith notebooks and Muṣḥaf"
+    },
+    {
+      "id": "HAD-3400",
+      "chapter": 151,
+      "report": 3,
+      "page": "212",
+      "topic": "Mujāhid's reported dislike of notebooks"
+    },
+    {
+      "id": "HAD-3401",
+      "chapter": 151,
+      "report": 4,
+      "page": "212",
+      "topic": "Ibrāhīm an-Naḫaʿī's reported dislike of notebooks"
+    },
+    {
+      "id": "HAD-3402",
+      "chapter": 142,
+      "report": 1,
+      "page": "208",
+      "topic": "Ibrāhīm on selecting one's best reports when gathered"
+    },
+    {
+      "id": "HAD-3403",
+      "chapter": 176,
+      "report": 6,
+      "page": "232",
+      "topic": "Šaʿbī on correcting a linguistic narration error"
+    },
+    {
+      "id": "HAD-3404",
+      "chapter": 174,
+      "report": 9,
+      "page": "231",
+      "topic": "al-Aswad ibn Hilāl on an ʿAbdullāh and a written report"
+    }
+  ],
+  "originalTexts": "The original Arabic excerpt and full documented transmission are in the verificationNote of each record.",
+  "sources": [
+    "https://www.islamweb.net/ar/library/content/10/3601/",
+    "https://islamweb.net/ar/library/content/10/3622/",
+    "https://www.islamweb.net/ar/library/content/10/3629/",
+    "https://www.islamweb.net/ar/library/content/10/3630/",
+    "https://www.islamweb.net/ar/library/content/10/3650/",
+    "https://www.islamweb.net/ar/library/content/10/3652/"
+  ],
+  "review": {
+    "sourcing": "Direct work chapter/report/volume/digital page reference + original Arabic wording + narrators.",
+    "deduplication": "Targeted GitHub query search against primary Arabic excerpts, themes and names; no claim of exhaustive full-catalog semantic scan.",
+    "authenticity": "Individual ʿIlal and rijāl grading is open; no report presented as individually ṣaḥīḥ without proof.",
+    "speaker": "Maqṭūʿ/mوقوف attribution is explicitly qualified; doubtful identities not silently resolved.",
+    "sharh": "No unverified or fabricated commentary; this batch contains Athar, not newly claimed authenticated marfūʿ hadith.",
+    "edition": "Digital Islamweb pagination only, no unsupported print edition/page claim.",
+    "ui": "Only canonically ordered production records; same total across Web, iOS, Android, tvOS; tests may use reduced samples; no internal IDs displayed."
+  },
+  "targetTotals": {
+    "canonical": 3404,
+    "hadith": 2408,
+    "athar": 996
+  },
+  "nextInternalId": "HAD-3405"
+}
