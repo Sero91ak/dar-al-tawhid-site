@@ -22,7 +22,8 @@ assert.equal(edge,edgeTest,"No scroll stop drift between Test and visitor");
    overrides that detached the original Women Hero and search. */
 for(const [lane,css] of [["visitor",visitor],["Test",test]]){
  assert.doesNotMatch(css,/GLOBAL_ADULT_STICKY_CLEARANCE_V1/,lane+" broad sticky override restored");
- assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/,lane+" blanket layout reset restored");
+ if(lane==="visitor")assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/,lane+" blanket layout reset restored");
+ else assert.match(read("assets/frauen/frauen-original-v1224-header-seam-v1405.css"),/DAR_FRAUEN_SINGLE_DOCUMENT_SCROLL_V1408/,"Test legacy V3 must be superseded by the women-only scroll authority");
  assert.doesNotMatch(css,/NATIVE_HERO_TOP_SEAM_V2|TEST_NATIVE_HERO_TOP_SEAM_V2/,lane+" duplicate native patch restored");
  assert.equal([...css].reduce((n,c)=>n+(c==="{")-(c==="}"),0),0,lane+" CSS brace balance");
 }

@@ -256,3 +256,26 @@ html[data-theme] body.is-frauen-route{overscroll-behavior-y:none!important}
     position:relative!important;
   }
 }
+
+/* DAR_FRAUEN_IOS_SINGLE_BRAND_SPACER_V1408
+ * The native WKWebView can inject padding-top onto the women route even
+ * though the brand already owns its measured in-flow spacer. Reset ONLY
+ * once that real spacer is mounted; keep native OS safe area in the header.
+ * Visitor, Test, Android, Fold, Kids and readers retain their other rules. */
+html.dar-ios-native-app.dar-adult-global-brand-ready
+ body.has-bottom-nav.is-area-route.is-frauen-route:has(> .app > #darAdultBrandHeaderSpacerV2),
+html.dar-ios-native-app.dar-test-premium-header-v2
+ body.has-bottom-nav.is-area-route.is-frauen-route:has(> .app > #darTestBrandHeaderSpacerV1){
+  padding-top:0!important;
+  padding-block-start:0!important;
+}
+
+/* DAR_FRAUEN_SINGLE_DOCUMENT_SCROLL_V1408
+ * An overflow-x:hidden on #appView computes overflow-y:visible as AUTO,
+ * unintentionally creating a non-scrolling sticky containing block.
+ * clip/visible preserves horizontal clipping without a nested scroll root. */
+html[data-theme] body.is-frauen-route.has-bottom-nav #appView.view,
+html[data-theme] body.is-frauen-route.has-bottom-nav #appView.view > :is(.frauen-library-shell,.frauen-library-list){
+  overflow-x:clip!important;
+  overflow-y:visible!important;
+}

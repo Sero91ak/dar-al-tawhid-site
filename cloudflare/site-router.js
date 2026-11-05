@@ -377,11 +377,11 @@ function activateAdultCompactHero(html) {
   // Guaranteed final visual authority in native iOS, dedicated Android PWA,
   // visitor browser and any adult shell that mounts the global brand.
   if (!html.includes('id="darFrauenGlobalFlowV1407"')) {
-    const flowCss = '<link rel="stylesheet" id="darFrauenGlobalFlowV1407" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css?v=frauen-sticky-hero-v1407-20261103">';
+    const flowCss = '<link rel="stylesheet" id="darFrauenGlobalFlowV1407" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css?v=frauen-sticky-hero-v1407-20261103-native-single-spacer-v1408">';
     html = html.includes("</body>") ? html.replace("</body>",flowCss+"</body>") : html+flowCss;
   }
   if (!html.includes('id="darFrauenHeroSeamRuntimeV1407"')) {
-    const flowJs = '<script defer id="darFrauenHeroSeamRuntimeV1407" src="/assets/frauen/frauen-hero-seam-runtime-v1407.js?v=frauen-sticky-hero-v1407-20261103"></'+'script>';
+    const flowJs = '<script defer id="darFrauenHeroSeamRuntimeV1407" src="/assets/frauen/frauen-hero-seam-runtime-v1407.js?v=frauen-gap-guard-v1408-20261105"></'+'script>';
     html = html.includes("</body>") ? html.replace("</body>",flowJs+"</body>") : html+flowJs;
   }
   return html;
