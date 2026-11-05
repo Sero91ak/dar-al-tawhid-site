@@ -38,8 +38,8 @@ function sourceRender(){
  text("q51Kicker",p.ui.source+" · Q51");
  text("q51Title",p.title);
  text("q51Intro",p.intro);
- text("q51H1",p.ui.explanation+" · Ibn Sīrīn");
- text("q51H2",p.ui.chain+" · Ibn al-Mubārak");
+ text("q51H1",p.ui.explanation+" · Qatādah · Nr. 487");
+ text("q51H2",p.ui.explanation+" · Qatādah · Nr. 480");
  text("q51H3",p.ui.classification);
  text("q51H4",p.ui.sources);
  text("q51EvidenceGroup1","🖋️ "+p.speaker1+" · "+p.ui.sources);
@@ -55,9 +55,6 @@ function sourceRender(){
  text("q51Takeaway",p.ui.result+": "+p.conclusion);
  text("q51Chain1",p.ui.chain+": "+cached.sourceChains.qatadah487);
  text("q51Chain2",p.ui.chain+": "+cached.sourceChains.qatadah480);
- var entries=["aṭ-Ṭabarī · Ǧāmiʿ al-Bayān 487 · 1/370–371","aṭ-Ṭabarī · Ǧāmiʿ al-Bayān 487 · 1/393","aṭ-Ṭabarī · Ǧāmiʿ al-Bayān 480"];
- Array.from(source.querySelectorAll(".qsource-link-title")).forEach(function(e,i){e.textContent=entries[i]||e.textContent});
- Array.from(source.querySelectorAll(".qsource-link-sub")).forEach(function(e){e.textContent=p.ui.sources});
  text("q51EvidenceNote",p.ui.pageNote);
  text("q51Learning","📚 "+p.ui.study);
  var a=id("q51Learning");if(a)a.href=link("/lernen/tawhid-schoepfer-anbetung/");
@@ -109,7 +106,7 @@ function onLocaleChanged(next){
  manual=next;
  try{localStorage.setItem("darAdultPreferredLocaleV1",next)}catch(_){}
  if(source)sourceRender();if(quizPage)renderQuiz();
- window.dispatchEvent(new CustomEvent("dar:q51:locale-ready",{detail:{locale:next,sourceId:"qsource:50"}}));
+ window.dispatchEvent(new CustomEvent("dar:q51:locale-ready",{detail:{locale:next,sourceId:"qsource:51"}}));
 }
 function attach(){
  var pick=id(source?"q51Language":"qlLanguage");
