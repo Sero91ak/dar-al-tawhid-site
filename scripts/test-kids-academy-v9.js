@@ -98,6 +98,71 @@ for(const [index,html] of htmls.entries()){
 // The V9 daily-choice checks were advisory and are superseded by
 // the strict school-mode checks in test-kids-academy-school-v11.js.
 const main=htmls[0];
+
+/* Global Academy answer-mode regression: current 66 public lessons (65 JS +
+ * inline Ṣidq), including the 6–8 Salām screen, remain selectable only.
+ * This does not unlock any editorial V31 lessons or alter learning records. */
+const choiceContext=vm.createContext({window:{}});
+for(const version of ["v1","v2","v22","v25","v26","v27","v28","v29"]){
+ const filename="kids/akademie/curriculum-"+version+".js";
+ new vm.Script(read(filename),{filename}).runInContext(choiceContext);
+}
+const answerAdapter="kids/akademie/answer-choice-only-v1.js";
+new vm.Script(read(answerAdapter),{filename:answerAdapter}).runInContext(choiceContext);
+const lessons65=choiceContext.window.DARKidsAcademyCurriculum;
+const choiceOnly=choiceContext.window.DARKidsAcademyChoiceOnlyV1;
+assert.equal(Object.keys(lessons65).length,65);
+assert.equal(choiceOnly.noChildTextOrVoiceCollection,true);
+let totalChoiceQuestions=0,adaptedTextQuestions=0;
+for(const lesson of Object.values(lessons65))for(const age of ["4-5","6-8","9-10"]){
+ const raw=lesson.questions[age],projected=choiceOnly.project(lesson,age,raw);
+ assert.equal(projected.length,raw.length);
+ assert.equal(choiceOnly.project(lesson,age,raw),projected,"Stable projection cache");
+ for(let index=0;index<raw.length;index++){
+  const question=projected[index];
+  totalChoiceQuestions++;
+  assert.equal(question.type,"choice");
+  assert(Array.isArray(question.options)&&question.options.length>=2);
+  assert(Number.isInteger(question.correct)&&question.correct>=0&&question.correct<question.options.length);
+  assert(question.options.every(s=>typeof s==="string"&&s.length>0&&s.length<=180));
+  assert.equal(new Set(question.options).size,question.options.length);
+  if(raw[index].type==="text"){
+   adaptedTextQuestions++;
+   assert.equal(question.adaptedFromText,true);
+   assert.equal(question.approvedForAudio,false);
+   assert.equal(question.needsHumanEditorialReview,true);
+   assert.equal(raw[index].type,"text","Canonical source remains untouched");
+  }else assert.equal(question,raw[index],"Existing approved choice preserved");
+ }
+}
+assert.equal(totalChoiceQuestions,520);
+assert.equal(adaptedTextQuestions,195);
+const sidqStart=main.indexOf("const exercises={"),sidqEnd=main.indexOf("\nlet id=",sidqStart);
+assert(sidqStart>0&&sidqEnd>sidqStart);
+new vm.Script(main.slice(sidqStart,sidqEnd)+"\nglobalThis.sidq=exercises;").runInContext(choiceContext);
+const sidq=choiceContext.sidq;
+let sidqAdapted=0;
+for(const age of ["4-5","6-8","9-10"]){
+ const projected=choiceOnly.project(null,age,sidq[age]);
+ assert(projected.every(q=>q.type==="choice"));
+ sidqAdapted+=projected.filter(q=>q.adaptedFromText).length;
+}
+assert.equal(sidqAdapted,3);
+const salam=choiceOnly.project(lessons65["adab-salam"],"6-8",lessons65["adab-salam"].questions["6-8"]);
+assert.equal(salam.length,3);
+assert(salam.every(q=>q.type==="choice"));
+assert.match(salam[0].prompt,/As-Salāmu/);
+assert.equal(salam[0].options[salam[0].correct],"Ich grüße freundlich zurück.");
+assert(main.includes('id="answerOptions" hidden inert aria-hidden="true"'));
+assert(main.includes('id="answerExtra" hidden inert aria-hidden="true"'));
+assert(main.includes('m="choices"; /* Never expose writing/recording in Kids Academy. */'));
+assert(main.includes('mode("choices");'));
+assert(main.includes('DARKidsAcademyChoiceOnlyV1.project'));
+assert(main.includes('answer-choice-only-v1.js?v=20261105-01'));
+assert(main.includes('id="kids-academy-choice-only-v1"'));
+assert(!main.includes('$("#answerModeCaption").textContent=q.type==="choice"?'));
+console.log("PASS: 65 released curriculum lessons + Ṣidq: 523 choice questions; all 198 text prompts projected without editing source, including 6–8 Salām.");
+
 assert.ok(main.includes('school-progress-v11.js?v=20261012-30'));
 assert.ok(main.includes('function academySchoolState(){'));
 assert.ok(main.includes('academySchoolState().access(chosen)'));

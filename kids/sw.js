@@ -22,6 +22,7 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1272",
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
   "/kids/akademie/index.html",
+  "/kids/akademie/answer-choice-only-v1.js?v=20261105-01",
   "/kids/akademie/girl-profile-authority-v1430.css?v=1430",
   "/kids/assets/kids-salah-v1272/hero-day.png?v=1277",
   "/kids/assets/kids-salah-v1272/fajr.png?v=1277",
@@ -318,6 +319,7 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg",
   "/kids/quiz-v4-bridge.js?v=20261013-academy1",
   "/kids/akademie/index.html",
+  "/kids/akademie/answer-choice-only-v1.js?v=20261105-01",
   "/kids/prayer-stage-v1261.css?v=1320",
   "/kids/prayer-stage-v1261.js?v=1342",
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
@@ -472,6 +474,10 @@ self.addEventListener("fetch",function(event){
   if(!isKidsRequest(url))return;
   // KIDS_QUIZ_HOME_ENTRY_V1450: fetch the current interaction script online,
   // and use the previous cached version only when the child is offline.
+  // Academy answer-choice projection must refresh online and remain available offline.
+  if(url.pathname==="/kids/akademie/answer-choice-only-v1.js"){
+    event.respondWith(networkFirst(request));return;
+  }
   if(url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"){
     // Stable offline fallback for a stale cache-busted HTML entry (iOS PWA).
     var quizFallback=url.pathname==="/kids/quiz-library.js"
@@ -663,6 +669,7 @@ self.addEventListener("fetch",function(event){
  */
 const KIDS_OFFLINE_SEEDS=[
   "/kids/akademie/index.html",
+  "/kids/akademie/answer-choice-only-v1.js?v=20261105-01",
   "/kids/akademie/curriculum-v1.js?v=20261010-01",
   "/kids/akademie/curriculum-v2.js?v=20261010-09",
   "/kids/akademie/curriculum-v22.js?v=20261011-01",
