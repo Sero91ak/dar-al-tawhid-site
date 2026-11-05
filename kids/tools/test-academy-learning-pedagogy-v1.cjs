@@ -25,7 +25,8 @@ assert(html.includes('choice=i;'),"Correctness must map to canonical answer inde
 assert(html.includes('q.type==="choice")academyDisplayChoices(q,qIndex,activeLessonId+":"+age).forEach(({text:t,originalIndex:i},visibleIndex)=>'),"Display order does not feed quiz");
 assert(html.includes('speak(3,["Antwort "+(visibleIndex+1)+": "+t]);'),"Spoken answer numbering must match the visual order");
 assert(!html.includes('"Das war noch nicht die gesuchte Antwort. "+q.explain'),"First wrong attempt cannot disclose the answer");
-assert(html.includes('score.unverified=(Number(score.unverified)||0)+1;'),"Non-graded free answers must be recorded as unverified");
+assert(!html.includes('score.unverified=(Number(score.unverified)||0)+1;'),"Choice-only academy must not award free-text or voice answers");
+assert(html.includes('score.done++;score.choices++;'),"Every new graded academy answer must be a selected choice");
 assert(html.includes('unverifiedAnswerCount:Number(score.unverified)||0'),"Persist unverified counts without resetting prior records");
 assert(html.includes('score.choices>score.correct||score.neededHelp>0||(Number(score.unverified)||0)>0'),"Do not promote non-assessed answers to secure repetition");
 assert(html.includes('unverified:val(d.score.unverified)'),"Reading old drafts must default to zero while preserving ungraded answers");
