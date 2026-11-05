@@ -49,11 +49,14 @@ assert.match(seam,/--frauen-fixed-brand-bottom/,"Gemessener Header-Sticky-Offset
 assert.match(seam,/setProperty\("margin-top","var\(--frauen-flow-seam-shift\)","important"\)/,"Der Hero-Spalt muss zuverlässig korrigiert werden");
 
 assert.match(seam,/--frauen-flow-seam-shift/,"Automatische Korrektur des oberen Spalts fehlt");
+assert.match(seam,/maxGap=Math.max\(480,Math.min\(900/,"Große native Header-Doppelabstände dürfen nicht bei 240px abgewiesen werden");
+assert.doesNotMatch(seam,/Math.abs\(gap\)>240|Math.max\(-220/,"Alte 240px/220px-Grenze unterdrückt die Reparatur");
 assert.doesNotMatch(seam,/scrollTo\(|preventDefault\(/,"Hero-Seam darf Scrollen nicht abfangen");
 assert.doesNotMatch(frontstage,/\.more-grid,\.frauen-library-area-grid,\.quran-verse-grid/,"Generischer Mini-Raster-Konflikt wieder eingeführt");
 for(const source of [native,testWorker,desktop]){
  assert.match(source,/frauen-sticky-hero-v1407-20261103/,"V1407 Auslieferung fehlt");
  assert.match(source,/frauen-hero-seam-runtime-v1407\.js/,"V1406 dynamischer Spaltabgleich fehlt");
+ assert.match(source,/frauen-gap-guard-v1408-20261105/,"Frauen-Header-Fix muss cache-frisch ausgeliefert werden");
 }
 assert.equal([...flow].reduce((n,c)=>n+(c==="{")-(c==="}"),0),0,"Frauen V1407 CSS unvollständig");
 new (require("node:vm").Script)(seam,{filename:"frauen-hero-seam-runtime-v1407.js"});
