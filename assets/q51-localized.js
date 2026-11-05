@@ -129,6 +129,14 @@ function onLocaleChanged(next){
  next=norm(next);if(!next||!cached||!cached.locales[next])return;
  manual=next;
  try{localStorage.setItem("darAdultPreferredLocaleV1",next)}catch(_){}
+ // An explicit ?lang= must follow a user's new selection; otherwise reload
+ // would restore the old URL locale even after saving the current preference.
+ try{
+  var u=new URL(location.href);
+  u.searchParams.set("lang",next);
+  if(window.history&&typeof window.history.replaceState==="function")
+   window.history.replaceState(window.history.state,"",u.pathname+u.search+u.hash);
+ }catch(_){}
  if(quizPage){step=0;score=0;answer=null;id("quiz").hidden=false;id("qlFinished").hidden=true;}
  if(source)sourceRender();if(quizPage)renderQuiz();
  window.dispatchEvent(new CustomEvent("dar:q51:locale-ready",{detail:{locale:next,sourceId:"qsource:51"}}));
