@@ -36,6 +36,7 @@ assert.match(adapter,/history\.replaceState/);
 assert.match(adapter,/function localizeReaderControls\(pack\)/,"Standalone learning toolbar must follow selected language");
 assert.match(adapter,/next=norm\(next\);if\(!next\)return;/,"Early locale selection must work before manifest fetch");
 assert.match(adapter,/document\.addEventListener\("DOMContentLoaded"/,"Toolbar translation must survive load order");
+assert.match(adapter,/window\.addEventListener\("load"/,"Late-mounted learning navigation must also be translated");
 assert.match(source,/q51-localized\.js\?v=20261105-nine-preview-v5/,"Q51 source cache-bust missing");
 assert.match(quiz,/q51-localized\.js\?v=20261105-nine-preview-v5/,"Q51 lesson cache-bust missing");
 assert.match(adapter,/tabariAttribution/);
