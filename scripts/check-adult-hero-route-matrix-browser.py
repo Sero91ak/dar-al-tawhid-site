@@ -43,6 +43,9 @@ def fixture(test):
   "/assets/dar-settings-navigation-v1.css",
   "/assets/dar-adult-brand-header-v2.css"
  ])
+ # Women has a later scoped sticky/header authority; the matrix must load it
+ # just as the deployed visitor/Test shells do, not only the old global CSS.
+ sheets.append("/assets/frauen/frauen-original-v1224-header-seam-v1405.css")
  links="".join('<link rel="stylesheet" href="'+p+'">' for p in sheets)
  return (
   '<!doctype html><html lang="de" data-theme="salbei" class="'+rootClass+' dar-ios-native-app"><head>'
