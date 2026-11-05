@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-11-05T18:10:59Z",
-  "trigger": "workflow_run",
-  "finishedDeployConclusion": "success",
-  "finishedDeployRun": "42081295943",
+  "timestamp": "2026-11-05T18:40:44Z",
+  "trigger": "push",
+  "finishedDeployConclusion": null,
+  "finishedDeployRun": null,
   "live": {
-    "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
-    "label": "KIDS · V1.09.22",
+    "buildId": null,
+    "label": null,
     "homeBytes": 560107,
     "homeContainsPrayerAssets1275": false,
     "homeContainsBuild1275": false,
@@ -21,8 +21,8 @@
       "isha": 2207575
     },
     "allSevenArtworkFilesReachable": true,
-    "versionJsonReadable": true,
-    "trilingualWordLearningReady": true,
+    "versionJsonReadable": false,
+    "trilingualWordLearningReady": false,
     "parentsDashboard": {
       "expectedSWRef": "/kids/sw.js?v=1468",
       "manifestSWCacheVersion": null,
@@ -89,6 +89,15 @@
   },
   "lastDeployRuns": [
     {
+      "conclusion": null,
+      "created_at": "2026-11-05T18:40:03Z",
+      "head_sha": "c58dbeed57377de58da8171b37798252f5bb820d",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/42086430905",
+      "id": 42086430905,
+      "status": "queued",
+      "updated_at": "2026-11-05T18:40:41Z"
+    },
+    {
       "conclusion": "success",
       "created_at": "2026-11-05T18:08:01Z",
       "head_sha": "c7a6504dfca25a4d969f2373da9f46de6c6e3837",
@@ -132,15 +141,6 @@
       "id": 42079190569,
       "status": "completed",
       "updated_at": "2026-11-05T17:57:05Z"
-    },
-    {
-      "conclusion": "failure",
-      "created_at": "2026-11-05T17:49:34Z",
-      "head_sha": "155fc2a15dc20fbaff81d74fa861ff5777865cfa",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/42078378853",
-      "id": 42078378853,
-      "status": "completed",
-      "updated_at": "2026-11-05T17:51:17Z"
     }
   ]
 }
