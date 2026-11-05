@@ -158,7 +158,7 @@
       "id": "dar-admin-v2-theme-responsive-readonly-tests-20261105",
       "at": "2026-11-05T19:33:47.000Z",
       "approvedBy": "user-explicit-20261105-dar-admin-video-responsive-layl-and-salbei-github-continue",
-      "reason": "Exact-path, time-limited release authorization for the user's requested DĀR Admin V2 responsive dark Layl / light Salbei-Elfenbein interface, editorial appearance parity, and automated read-only UI regression. No visitor/Kids app changes, publishing logic, secrets, Workers, OneSignal, prayer functions or security bypasses.",
+      "reason": "Exact-path, time-limited release authorization for the user's requested DĀR Admin V2 responsive dark Layl / light Salbei-Elfenbein interface, editorial appearance parity, and the read-only standalone regression test. The protected global App Health workflow remains unchanged; no visitor/Kids app, publishing logic, secrets, Workers, OneSignal, prayer functions or security bypasses.",
       "paths": [
         "admin/appearance-v2.css",
         "admin/appearance-v2.js",
@@ -166,8 +166,7 @@
         "admin/command-center-v2.js",
         "admin/redaktion/appearance.css",
         "admin/redaktion/index.html",
-        "admin/tests/appearance-v2.test.cjs",
-        ".github/workflows/app-health-check.yml"
+        "admin/tests/appearance-v2.test.cjs"
       ],
       "expiresAt": "2026-11-12T23:59:00.000Z"
     },
