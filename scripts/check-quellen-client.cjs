@@ -10,8 +10,11 @@ const html = fs.readFileSync("quellen/index.html", "utf8");
 const source = html.match(/<script id="qlSourceSnapshot" type="application\/json">([\s\S]*?)<\/script>/);
 assert.ok(source, "Embedded Q registry is missing");
 const registry = JSON.parse(source[1]);
-const canonical = JSON.parse(fs.readFileSync("q/_registry/shortlinks.json", "utf8")).links.filter(item=>item.status!=="inactive");
-assert.equal(registry.links.length, canonical.length, "The full dynamically sized canonical registry must be rendered");
+// The public legacy list is deliberately distinct from the owner-only canonical registry.
+const canonical = JSON.parse(fs.readFileSync("q/_registry/shortlinks.json", "utf8")).links.filter(item=>item.status!=="inactive" && (item.publicListed===true || (Number(item.number)<=50 && item.publicListed!==false)));
+assert.ok(fs.existsSync("q/51/index.html"),"Direct-link Q51 source page missing");
+assert.ok(!canonical.some(item=>item.number===51),"Q51 must not be leaked into the public source index");
+assert.equal(registry.links.length, canonical.length, "The legacy public snapshot must include exactly public-listed entries");
 const start = html.lastIndexOf("\n<script>"), end = html.lastIndexOf("\n</script>");
 assert.ok(start >= 0 && end > start, "Standalone page JS is missing");
 const script = html.slice(start + "\n<script>".length, end);
