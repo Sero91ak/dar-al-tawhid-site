@@ -3878,7 +3878,7 @@ body[data-kids-portal="true"][data-profile="girl"] .academy-header.kids-detail-a
 <link rel="stylesheet" href="/kids/parents-compact-timer-v1436.css?v=1440">
 <script src="/kids/parents-compact-timer-v1436.js?v=1440" defer></script>
 
-<style id="kids-academy-choice-only-v1">#lessonMain #answerOptions,#lessonMain #answerExtra{display:none!important}#lessonMain #choices:not([hidden]){display:grid}#lessonMain #answerModeCaption{font-size:clamp(14px,2.5vw,17px);font-weight:700}</style>
+<style id="kids-academy-choice-only-v2">#lessonMain #choices:not([hidden]){display:grid}#lessonMain #answerModeCaption{font-size:clamp(14px,2.5vw,17px);font-weight:700}</style>
 </head>
 <body data-profile="boy" data-preview-release="V17.0-voice-sandbox-20261011" data-preview-deploy="v11-progressive-school-lessons"><main class="wrap">
 
@@ -3966,8 +3966,6 @@ body[data-kids-portal="true"][data-profile="girl"] .academy-header.kids-detail-a
 </div><div id="academyTermCoachSources" class="academy-term-coach" hidden aria-label="Begriffe aus den religiösen Quellen"></div><p class="teacher-explainer" data-spoken>Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="2">Deutsche Erklärung anhören</button><span class="voice-note">Qurʾān-Rezitation über den eigenen Button links am arabischen Text.</span></div></section>
   <section class="lesson-stage" data-lesson-step="3" aria-labelledby="practiceTitle" hidden><div class="question-top"><span class="kicker">Schritt 4 · Jetzt bist du dran</span><span class="question-index" id="questionIndex">Frage 1 von 3</span></div><h2 id="practiceTitle">Was würdest du tun?</h2><div class="progress"><span id="bar"></span></div>
    <div class="question-panel" id="academyQuestionPanel"><div class="question-prompt-card"><div class="academy-buddy-guide"><img id="academyBuddyAvatar" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" aria-hidden="true" width="51" height="51"><div><strong id="academyBuddyTitle">Du schaffst das!</strong><span id="academyBuddyText">Du kannst dir die Frage anhören.</span></div></div><span class="question-kicker">DEINE FRAGE</span><p id="question" class="question-prompt"></p><button id="repeat" class="pill" type="button">▶ Frage anhören</button></div><div class="answer-interaction"><p class="answer-mode-caption" id="answerModeCaption">Tippe auf die richtige Antwort:</p><p class="small choice-audio-help" id="choiceAudioHelp" hidden>🔊 Hören liest nur vor – tippe auf die Antwort, um sie auszuwählen.</p><div class="choices" id="choices" role="group" aria-label="Antwortmöglichkeiten"></div>
-    <div class="answer-options" id="answerOptions" hidden inert aria-hidden="true"><button type="button" class="pill answer-open" id="openWrite">✎ Schreiben</button><button type="button" class="pill answer-open" id="openVoice">◉ Sprechen</button></div>
-    <div class="answer-extra" id="answerExtra" hidden inert aria-hidden="true"><label for="answer" id="answerLabel">Deine Antwort</label><textarea id="answer" spellcheck="true" maxlength="550" placeholder="Ich würde ..."></textarea><div class="voice-actions"><button type="button" class="pill accent" id="mic" hidden>Aufnahme starten</button><button type="button" class="pill" id="cancelMic" hidden>Aufnahme beenden</button><span id="recordingIndicator" class="recording-indicator" hidden aria-live="polite"><span class="recording-dot" aria-hidden="true"></span><span id="recordingTime">00:00</span></span></div><p class="small" id="micInfo" aria-live="polite">Tippe auf „Aufnahme starten“, wenn du bereit bist.</p><div class="voice-preview" id="voicePreview" hidden><label for="voicePlayback">Deine gesprochene Antwort</label><audio id="voicePlayback" controls preload="metadata" playsinline></audio><button type="button" class="pill primary voice-play-button" id="voicePlayButton" aria-pressed="false">▶ Meine Antwort anhören</button><p class="small voice-play-state" id="voicePlayState" role="status" aria-live="polite">Nach der Aufnahme kannst du dir deine Stimme hier anhören.</p><button type="button" class="pill voice-retake" id="voiceRetake">Noch einmal sprechen</button><p class="small">Nur auf diesem Gerät zum Anhören und Nachdenken. Deine Stimme wird hier nicht in Text umgewandelt oder inhaltlich bewertet. Nach der nächsten Frage wird die Aufnahme verworfen.</p></div></div>
     <div class="answer-bottom"><button id="check" class="pill primary" type="button">Antwort prüfen</button><button id="hint" class="pill" type="button">Kleiner Hinweis</button></div><div class="response" aria-live="polite" id="feedback">Du darfst in Ruhe nachdenken.</div><button type="button" class="pill primary" id="retryChoice" hidden>Noch einmal versuchen</button>
     <button type="button" class="pill primary next-question" id="nextQuestion" hidden>Zur nächsten Frage <span aria-hidden="true">→</span></button><button type="button" class="pill primary next-question" id="finishLesson" hidden>Zum Merksatz <span aria-hidden="true">→</span></button>
     </div>
@@ -3993,7 +3991,7 @@ body[data-kids-portal="true"][data-profile="girl"] .academy-header.kids-detail-a
 <script src="/kids/akademie/curriculum-v29.js?v=20261012-29"></script>
 <script src="/kids/akademie/term-coach-v24.js?v=20261011-01"></script>
 <script src="/kids/akademie/school-progress-v11.js?v=20261012-30"></script>
-<script src="/kids/akademie/answer-choice-only-v1.js?v=20261105-01"></script>
+<script src="/kids/akademie/answer-choice-only-v1.js?v=20261105-02"></script>
 <script src="/kids/kids-birth-month-v1431.js?v=1431"></script>
 <script>
 (()=>{
@@ -4020,9 +4018,8 @@ const exercises={
     {type:"text",prompt:"Worin liegt der Unterschied zwischen einem versehentlichen Fehler und einer bewussten Lüge?",sample:"Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutmachen.",hint:"Denk an den Unterschied zwischen Versehen und absichtlicher Unwahrheit."}
   ]
 };
-let id="unassigned",gender="neutral",age="6-8",profileName="",displayedMonthAge=null,step=0,unlocked=0,qIndex=0,choice=null,answerMode="choices",answered=false,finished=false;
-let score={done:0,correct:0,choices:0,neededHelp:0},attempts=0,recognition=null,voice=null,audio=null,audioKey="",fallbackTried=false,voiceToken=0,sessionStamp="";
-let recorder=null,micStream=null,micClock=null,micSince=0,micRequest=0,voiceObjectUrl=null,voiceReady=false;
+let id="unassigned",gender="neutral",age="6-8",profileName="",displayedMonthAge=null,step=0,unlocked=0,qIndex=0,choice=null,answered=false,finished=false;
+let score={done:0,correct:0,choices:0,neededHelp:0},attempts=0,voice=null,audio=null,audioKey="",fallbackTried=false,voiceToken=0,sessionStamp="";
 
 const AGE_UI=Object.freeze({
  "4-5":{
@@ -4066,7 +4063,7 @@ const AGE_UI=Object.freeze({
   lessonIntro:"Belege verstehen, Zusammenhänge erkennen, anwenden.",
   evidenceLead:"Lies Qurʾān 9:119 und den Ḥadīṯ in Ṣaḥīḥ Muslim 2607a. Welcher Gedanke verbindet beide Aussagen?",
   steps:["Start","Verstehen","Quellen","Nachdenken","Festigen"],
-  questionTitle:"Wie erklärst du das?",hint:"Denkanstoß",feedbackWait:"Erkläre deine Überlegung. Du kannst schreiben oder sprechen.",
+  questionTitle:"Welche Antwort ist richtig?",hint:"Denkanstoß",feedbackWait:"Lies die Frage oder höre sie dir an und wähle die passende Antwort.",
   recapTitle:"Das nehme ich mit",recapText:"Du hast die Belege betrachtet. Wiederhole sie später mit eigenen Worten.",
   availableStatus:"Wissen vertiefen"
  }
@@ -4138,89 +4135,6 @@ function getProfile(){
  return {child,g,age:selectedAge,id:child?.id?String(child.id):previewId,monthAge,
    demo:!child,creatorVoiceSandbox,ageMissing:!!child&&!profileAge};
 }
-function stopMicTracks(){
- if(micStream){micStream.getTracks().forEach(t=>{try{t.stop()}catch(_){}});micStream=null}
-}
-function stopMicTimer(){if(micClock){clearInterval(micClock);micClock=null}}
-function pauseVoiceClip(){
- const el=$("#voicePlayback");if(el&&!el.paused){try{el.pause()}catch(_){}}
-}
-function resetVoiceClip(){
- voiceReady=false;
- pauseVoiceClip();
- if(voiceObjectUrl){URL.revokeObjectURL(voiceObjectUrl);voiceObjectUrl=null}
- const el=$("#voicePlayback");if(el){el.removeAttribute("src");el.load()}
- $("#voicePlayButton").textContent="▶ Meine Antwort anhören";
- $("#voicePlayButton").setAttribute("aria-pressed","false");
- $("#voicePlayState").textContent="Nach der Aufnahme kannst du dir deine Stimme hier anhören.";
- $("#voicePreview").hidden=true;
-}
-function stopMic(keepClip=false){
- micRequest++;
- if(recognition){try{recognition.abort()}catch(_){}recognition=null}
- const previous=recorder;recorder=null;
- if(previous&&previous.state!=="inactive"){
-   previous.onstop=null;previous.ondataavailable=null;
-   try{previous.stop()}catch(_){}
- }
- stopMicTracks();stopMicTimer();
- $("#mic").disabled=false;$("#cancelMic").hidden=true;$("#recordingIndicator").hidden=true;
- if(!keepClip)resetVoiceClip();
-}
-function finishRecording(){
- const current=recorder;
- if(!current||current.state!=="recording")return;
- $("#cancelMic").disabled=true;
- try{current.stop()}catch(_){stopMic();$("#micInfo").textContent="Aufnahme konnte nicht beendet werden. Bitte tippe deine Antwort."}
-}
-async function beginVoiceRecording(){
- const canRecord=!!(navigator.mediaDevices?.getUserMedia&&window.MediaRecorder);
- if(!canRecord){
-   mode("text");
-   $("#micInfo").textContent="Diese Browseransicht kann kein Audio aufnehmen. Öffne die Seite in Safari oder schreibe deine Antwort.";
-   return;
- }
- stopSpeech();stopAudio();stopMic();
- mode("voice");
- const request=++micRequest;$("#mic").disabled=true;
- $("#micInfo").textContent="Mikrofonfreigabe wird angefragt …";
- let stream;
- try{stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true},video:false})}
- catch(e){
-   if(request!==micRequest)return;
-   $("#mic").disabled=false;
-   $("#micInfo").textContent=e?.name==="NotAllowedError"?"Das Mikrofon wurde nicht freigegeben. Prüfe die Berechtigung oder tippe deine Antwort.":"Aufnahme in dieser Browseransicht nicht möglich. Du kannst deine Antwort schreiben.";
-   return;
- }
- if(request!==micRequest||step!==3||answerMode!=="voice"){stream.getTracks().forEach(t=>t.stop());return}
- micStream=stream;const chunks=[];let localRecorder;
- try{
-  const mp4=MediaRecorder.isTypeSupported?.("audio/mp4");
-  const webm=MediaRecorder.isTypeSupported?.("audio/webm;codecs=opus");
-  localRecorder=mp4?new MediaRecorder(stream,{mimeType:"audio/mp4"}):webm?new MediaRecorder(stream,{mimeType:"audio/webm;codecs=opus"}):new MediaRecorder(stream);
- }catch(e){stopMicTracks();$("#mic").disabled=false;$("#micInfo").textContent="Aufnahme konnte nicht gestartet werden. Du kannst stattdessen schreiben.";return}
- recorder=localRecorder;
- localRecorder.ondataavailable=e=>{if(e.data?.size>0)chunks.push(e.data)};
- localRecorder.onerror=()=>{if(recorder===localRecorder){stopMic();$("#micInfo").textContent="Bei der Aufnahme ist ein Fehler aufgetreten. Bitte versuche es erneut oder schreibe."}};
- localRecorder.onstop=()=>{
-   if(recorder!==localRecorder)return;
-   stopMicTracks();stopMicTimer();$("#recordingIndicator").hidden=true;$("#cancelMic").hidden=true;$("#cancelMic").disabled=false;$("#mic").disabled=false;recorder=null;
-   const blob=new Blob(chunks,{type:localRecorder.mimeType||chunks[0]?.type||"audio/mp4"});
-   if(blob.size<350){$("#micInfo").textContent="Es wurde keine hörbare Antwort aufgenommen. Versuche es noch einmal.";return}
-   resetVoiceClip();voiceObjectUrl=URL.createObjectURL(blob);voiceReady=true;
-   const play=$("#voicePlayback");play.src=voiceObjectUrl;play.load();$("#voicePreview").hidden=false;$("#voicePlayState").textContent="Aufnahme bereit. Tippe auf „Meine Antwort anhören“.";
-   $("#micInfo").textContent="Deine Antwort wurde aufgenommen. Du kannst sie jetzt anhören und anschließend bestätigen.";
- };
- try{localRecorder.start()}catch(e){recorder=null;stopMicTracks();$("#mic").disabled=false;$("#micInfo").textContent="Mikrofonstart fehlgeschlagen. Nutze die Texteingabe.";return}
- micSince=Date.now();$("#mic").disabled=true;$("#cancelMic").hidden=false;$("#cancelMic").disabled=false;$("#recordingIndicator").hidden=false;
- const refresh=()=>{
-   const sec=Math.floor((Date.now()-micSince)/1000);
-   $("#recordingTime").textContent=String(Math.floor(sec/60)).padStart(2,"0")+":"+String(sec%60).padStart(2,"0");
-   if(sec>=45)finishRecording();
- };
- refresh();micClock=setInterval(refresh,500);
- $("#micInfo").textContent="Jetzt kannst du sprechen. Tippe danach auf „Aufnahme beenden“.";
-}
 function setAudioFeedback(message){
  const failed=/nicht verfügbar|konnte nicht|nicht gestartet|nicht abgespielt/i.test(message);
  const missing=/noch keine Aufnahme verfügbar|noch keine geprüfte Serhat-Masteraufnahme/i.test(message);
@@ -4244,7 +4158,7 @@ function stopAudio(note){
  all(".arabic-verse").forEach(x=>x.classList.remove("is-audio-playing"));
  $("#arabicAudioStatus").textContent=note||"Rezitation des vollständigen Verses";
 }
-function stopAll(){stopSpeech();stopAudio();stopMic()}
+function stopAll(){stopSpeech();stopAudio()}
 /* Reset the visible inner scrollport on view changes; window scrolling stays locked. */
 function scrollAcademyViewTop(){
  const pane=!$("#academySubject").hidden?$("#academySubject"):
@@ -4812,11 +4726,7 @@ function playRecitation(key){
  Promise.resolve(a.play()).then(()=>{if(audio===a)$("#arabicAudioStatus").textContent="Du hörst Sūrah "+key.split(":")[1]+", Vers "+key.split(":")[2]+"."}).catch(fail);
 }
 function speak(index,custom){
- if(step===3&&(recorder?.state==="recording"||($("#mic").disabled&&answerMode==="voice"&&!voiceReady))){
-   $("#feedback").textContent="Beende erst deine Sprachaufnahme, dann kannst du die Frage oder die Antworten anhören.";
-   return;
- }
- pauseVoiceClip();stopSpeech();stopAudio();
+ stopSpeech();stopAudio();
  const token=++voiceToken;
  const spokenSalam=ACADEMY_FULL_SALAM;
  const lines=custom||(index===0?[spokenSalam,$("#welcomeAddress").textContent,$("#welcomeFollowup").textContent,$('[data-lesson-step="0"] .stage-body').textContent]:index===1?all("#explainWords [data-spoken]").map(x=>x.textContent):index===2?[$(".teacher-explainer").textContent]:index===4?all(".recap-lesson p").map(x=>x.textContent):[]);
@@ -4872,21 +4782,11 @@ function speak(index,custom){
  }
  next();
 }
-function mode(m){
- m="choices"; /* Never expose writing/recording in Kids Academy. */
- if(m!=="voice"&&answerMode==="voice")stopMic();
-
- if(m!=="choices"&&!answered&&!$("#retryChoice").hidden){
-   $("#retryChoice").hidden=true;$("#check").hidden=false;$("#hint").hidden=false;$("#repeat").hidden=false;
- }
- answerMode=m;$("#academyQuestionPanel").dataset.answerMode=m;const q=questions()[qIndex];
- $("#check").textContent=m==="choices"?"Antwort prüfen":"Antwort vergleichen";
- $("#check").setAttribute("aria-label",m==="choices"?"Gewählte Antwort prüfen":"Eigene Antwort mit Beispiel vergleichen – keine automatische Bewertung");
+function mode(){
+ $("#academyQuestionPanel").dataset.answerMode="choices";
+ $("#check").textContent="Antwort prüfen";
+ $("#check").setAttribute("aria-label","Gewählte Antwort prüfen");
  $("#choices").hidden=false;
- $("#answerOptions").hidden=true;$("#answerExtra").hidden=true;$("#mic").hidden=true;
- $("#openWrite").setAttribute("aria-pressed",String(m==="text"));$("#openVoice").setAttribute("aria-pressed",String(m==="voice"));
- /* iOS: Keyboard nur auf expliziten Textfeld-Tap. */
- if(m==="voice")$("#micInfo").textContent="Tippe auf „Aufnahme starten“ und sprich. Danach kannst du dir deine Stimme anhören.";
 }
 /* Shuffle only the DISPLAY order, with a stable per-lesson/age/question seed.
    Unlike an index-only rotation, correct answers cannot be learned from a
@@ -4909,7 +4809,7 @@ function academyDisplayChoices(q,index,lessonScope=""){
 }
 function showQuestion(){
  const q=questions()[qIndex];if(!q){finish();return}
- choice=null;answered=false;attempts=0;stopMic();$("#voiceRetake").hidden=false;$("#retryChoice").hidden=true;
+ choice=null;answered=false;attempts=0;$("#retryChoice").hidden=true;
  $("#questionIndex").textContent="Frage "+(qIndex+1)+" von "+questions().length;
  $("#question").textContent=q.prompt;$("#bar").style.width=(qIndex/questions().length*100)+"%";
  $("#choices").replaceChildren();
@@ -4924,55 +4824,42 @@ function showQuestion(){
   select.onclick=()=>{
     choice=i;
     all(".choice-button").forEach(x=>x.setAttribute("aria-pressed",String(x===select)));
-    $("#answer").value="";
   };
   const listen=document.createElement("button");listen.type="button";listen.className="choice-listen";
   listen.textContent="Hören";
   listen.setAttribute("aria-label","Antwort "+(i+1)+" anhören, ohne sie auszuwählen");
   listen.setAttribute("aria-pressed","false");
   listen.onclick=()=>{
-    if(recorder?.state==="recording"||($("#mic").disabled&&answerMode==="voice"&&!voiceReady)){
-      $("#feedback").textContent="Beende bitte zuerst deine Sprachaufnahme.";
-      return;
-    }
     speak(3,["Antwort "+(visibleIndex+1)+": "+t]);
     all(".choice-listen").forEach(x=>x.setAttribute("aria-pressed",String(x===listen)));
   };
   row.append(select,listen);$("#choices").appendChild(row);
  });
- $("#answer").value="";$("#answer").placeholder=q.type==="text"?"Erkläre es mit eigenen Worten …":"Ich würde …";
  $("#feedback").textContent=AGE_UI[age]?.feedbackWait||"Nimm dir Zeit.";
  $("#check").hidden=false;$("#hint").hidden=false;$("#repeat").hidden=false;
- $("#nextQuestion").hidden=true;$("#finishLesson").hidden=true;$("#answerOptions").hidden=true;$("#answerExtra").hidden=true;$("#openWrite").hidden=true;$("#openVoice").hidden=true;
+ $("#nextQuestion").hidden=true;$("#finishLesson").hidden=true;
  mode("choices");
 }
 function check(){
  if(answered)return;
- const q=questions()[qIndex],typed=$("#answer").value.trim();
- if(answerMode==="choices"&&choice===null){$("#feedback").textContent="Wähle bitte eine der Antworten aus.";return}
- if(answerMode!=="choices"){mode("choices");return}
-
- if(answerMode==="choices"&&choice!==null&&choice!==q.correct&&attempts===0){
-   attempts=1;score.neededHelp++;
-   $("#feedback").textContent="Das war noch nicht die gesuchte Antwort. Überlege, was die Frage wirklich meint. Du darfst erneut versuchen oder einen kleinen Hinweis auswählen.";
-   $("#retryChoice").hidden=false;$("#check").hidden=true;$("#hint").hidden=true;$("#repeat").hidden=true;
-   all(".choice-button").forEach(b=>b.disabled=true);return;
+ const q=questions()[qIndex];
+ if(choice===null){$("#feedback").textContent="Wähle bitte eine der Antworten aus.";return}
+ if(choice!==q.correct&&attempts===0){
+  attempts=1;score.neededHelp++;
+  $("#feedback").textContent="Das war noch nicht die gesuchte Antwort. Überlege noch einmal oder tippe auf „Kleiner Hinweis“.";
+  $("#retryChoice").hidden=false;$("#check").hidden=true;$("#hint").hidden=true;$("#repeat").hidden=true;
+  all(".choice-button").forEach(b=>b.disabled=true);
+  return;
  }
- answered=true;score.done++;let text;
- if(answerMode==="choices"&&choice!==null){
-  score.choices++;
-  if(choice===q.correct){score.correct++;text="Sehr schön, "+address()+"! "+q.explain}
-  else text="Das war noch nicht richtig. Gemeinsam verstehen wir es: "+q.explain+" Du darfst diese Frage später erneut üben.";
- }else{
-  score.unverified=(Number(score.unverified)||0)+1;
-  text=(answerMode==="voice"&&voiceReady&&!typed?"Deine Antwort wurde aufgenommen, aber nicht automatisch inhaltlich geprüft. Du kannst sie noch einmal anhören. ":"Danke für deine Überlegung, "+address()+". Deine Antwort wurde nicht automatisch fachlich bewertet. ")+"Eine mögliche Erklärung lautet: "+(q.sample||q.explain)+" Vergleiche sie in Ruhe mit deiner eigenen Antwort."; 
- }
- $("#feedback").textContent=text;$("#bar").style.width=((qIndex+1)/questions().length*100)+"%";
- $("#check").hidden=true;$("#hint").hidden=true;$("#repeat").hidden=true;$("#retryChoice").hidden=true;$("#openWrite").hidden=true;$("#openVoice").hidden=true;
+ answered=true;score.done++;score.choices++;
+ const correct=choice===q.correct;
+ if(correct)score.correct++;
+ $("#feedback").textContent=correct?"Sehr schön, "+address()+"! "+(q.explain||""):
+  "Das war noch nicht richtig. Gemeinsam verstehen wir es: "+(q.explain||"")+" Du darfst diese Frage später erneut üben.";
+ $("#bar").style.width=((qIndex+1)/questions().length*100)+"%";
+ $("#check").hidden=true;$("#hint").hidden=true;$("#repeat").hidden=true;$("#retryChoice").hidden=true;
  all(".choice-button").forEach(b=>b.disabled=true);
  $("#nextQuestion").hidden=qIndex===questions().length-1;$("#finishLesson").hidden=qIndex!==questions().length-1;
- $("#voiceRetake").hidden=true;stopMic(answerMode==="voice"&&voiceReady);
- // Only progress numbers are saved; never voice recordings or children's answer text.
  saveDraft(qIndex===questions().length-1?4:3,
    qIndex===questions().length-1?qIndex:qIndex+1);
 }
@@ -5014,36 +4901,6 @@ function persist(level,automatic=false){
  if(!automatic)all("[data-reflect]").forEach(b=>{b.classList.toggle("active",b.dataset.reflect===level);b.setAttribute("aria-pressed",String(b.dataset.reflect===level))});
  renderHome();
 }
-const childPlayback=$("#voicePlayback"),voicePlayButton=$("#voicePlayButton"),voicePlayState=$("#voicePlayState");
-voicePlayButton.onclick=()=>{
- if(!voiceReady||!voiceObjectUrl){voicePlayState.textContent="Nimm zuerst deine Antwort auf.";return}
- if(!childPlayback.paused){childPlayback.pause();return}
- stopSpeech();stopAudio();
- try{
-  const result=childPlayback.play();
-  if(result?.catch)result.catch(()=>{voicePlayState.textContent="Die Aufnahme konnte nicht abgespielt werden. Versuche „Noch einmal sprechen“.";});
- }catch(_){voicePlayState.textContent="Wiedergabe nicht möglich. Versuche die Aufnahme erneut."}
-};
-childPlayback.onplay=()=>{
- voicePlayButton.textContent="Ⅱ Wiedergabe pausieren";
- voicePlayButton.setAttribute("aria-pressed","true");
- voicePlayState.textContent="Du hörst jetzt deine eigene Stimme.";
-};
-childPlayback.onpause=()=>{
- voicePlayButton.textContent="▶ Meine Antwort anhören";
- voicePlayButton.setAttribute("aria-pressed","false");
- if(voiceReady&&!childPlayback.ended)voicePlayState.textContent="Pausiert. Du kannst noch einmal hören.";
-};
-childPlayback.onended=()=>{
- voicePlayButton.textContent="▶ Noch einmal anhören";
- voicePlayButton.setAttribute("aria-pressed","false");
- voicePlayState.textContent="Deine Aufnahme ist zu Ende. Du kannst sie erneut hören.";
-};
-childPlayback.onerror=()=>{
- if(voiceReady)voicePlayState.textContent="Die Aufnahme ist auf diesem Gerät nicht abspielbar. Bitte erneut aufnehmen.";
- voicePlayButton.textContent="▶ Meine Antwort anhören";
- voicePlayButton.setAttribute("aria-pressed","false");
-};
 $("#academySerhatLead").onclick=playSerhatLessonClip;
 all("[data-open-lesson]").forEach(b=>b.onclick=()=>begin(b.dataset.openLesson||"sidq"));
 all("[data-open-category]").forEach(b=>b.onclick=()=>openCategory(b.dataset.openCategory));
@@ -5068,16 +4925,6 @@ all("[data-speak-stage]").forEach(b=>b.onclick=()=>{
  speak(num);
  });
 all("[data-arabic-audio]").forEach(b=>b.onclick=()=>playRecitation(b.dataset.arabicAudio));
-$("#openWrite").onclick=()=>{
- mode("text");
- // Reveal the field without opening the keyboard before the child taps it.
- requestAnimationFrame(function(){
-  var pane=$("#stageSurface"),field=$("#answer");
-  if(!pane||!field)return;
-  var p=pane.getBoundingClientRect(),f=field.getBoundingClientRect();
-  if(f.bottom>p.bottom-20)pane.scrollTop+=f.bottom-(p.bottom-20);
- });
-};$("#openVoice").onclick=()=>mode("voice");
 $("#check").onclick=check;
  $("#retryChoice").onclick=()=>{
    if(answered||step!==3)return;
@@ -5088,8 +4935,6 @@ $("#check").onclick=check;
  $("#hint").onclick=()=>{$("#feedback").textContent=questions()[qIndex].hint};
 $("#repeat").onclick=()=>speak(3,[questions()[qIndex].prompt]);
 $("#nextQuestion").onclick=()=>{qIndex++;showQuestion();saveDraft()};$("#finishLesson").onclick=finish;
-$("#mic").onclick=beginVoiceRecording;$("#cancelMic").onclick=finishRecording;$("#voiceRetake").onclick=beginVoiceRecording;
-$("#answer").oninput=()=>{if($("#answer").value.trim())choice=null};
 all("[data-reflect]").forEach(b=>b.onclick=()=>persist(b.dataset.reflect));
 window.addEventListener("storage",e=>{
  if(["kids.activeProfile","kids.profiles.v1","kids.guest.gender.v1","kids.age"].includes(e.key)||e.key?.startsWith("dar.kids.birthMonth.v1."))syncProfile(true);
@@ -5209,78 +5054,12 @@ html body #stageSurface{
   document.addEventListener("touchcancel",clear,{capture:true,passive:true});
 })();
 </script>
-<style id="kids-academy-writing-keyboard-v1438">
-/* KIDS_ACADEMY_WRITING_KEYBOARD_V1438
-   Preserve the OLD five-tab / focus-lesson scroll layout. Only while a child
-   actively types, reclaim the dock's now keyboard-covered bottom reserve. */
-body[data-kids-portal="true"][data-academy-view="lesson"][data-academy-typing="true"]
- > main.wrap > #lessonMain.lesson-main:not([hidden]){
- padding-bottom:max(9px,env(safe-area-inset-bottom,0px))!important;
-}
-body[data-kids-portal="true"][data-academy-view="lesson"][data-academy-typing="true"]
- #lessonMain #stageSurface{
- scroll-padding-block-end:24px!important;
- padding-bottom:24px!important;
-}
-html body #lessonMain #answer{
- -webkit-user-select:text!important;
- user-select:text!important;
- touch-action:auto!important;
- font-size:max(17px,1rem)!important;
-}
-</style>
-<script id="kids-academy-writing-keyboard-v1438">
-(function(){
- "use strict";
- if(document.body.dataset.kidsPortal!=="true")return;
- var answer=document.getElementById("answer");
- var pane=document.getElementById("stageSurface");
- if(!answer||!pane)return;
- var revealTimer=null;
- function revealInput(){
-  if(document.activeElement!==answer||document.getElementById("lessonMain").hidden)return;
-  var r=pane.getBoundingClientRect(),f=answer.getBoundingClientRect();
-  var below=f.bottom-(r.bottom-18),above=(r.top+12)-f.top;
-  if(below>0)pane.scrollTop+=below;
-  else if(above>0)pane.scrollTop-=above;
- }
- function ping(active){
-  try{window.parent.postMessage({type:"DAR_KIDS_ACADEMY_INPUT_V1438",focused:active},location.origin)}catch(_){}
- }
- function typingState(active){
-  if(active)document.body.dataset.academyTyping="true";
-  else delete document.body.dataset.academyTyping;
-  ping(active);
- }
- answer.addEventListener("focus",function(){
-  typingState(true);
-  requestAnimationFrame(revealInput);
-  clearTimeout(revealTimer);
-  revealTimer=setTimeout(revealInput,260);
- });
- answer.addEventListener("blur",function(){
-  clearTimeout(revealTimer);
-  setTimeout(function(){
-   if(document.activeElement!==answer)typingState(false);
-  },30);
- });
- window.addEventListener("resize",function(){
-  if(document.activeElement===answer)requestAnimationFrame(revealInput);
- },{passive:true});
- window.visualViewport?.addEventListener("resize",function(){
-  if(document.activeElement===answer)requestAnimationFrame(revealInput);
- },{passive:true});
- window.addEventListener("pagehide",function(){clearTimeout(revealTimer);ping(false)});
-})();
-</script>
 <link rel="stylesheet" href="/kids/akademie/girl-profile-authority-v1430.css?v=1430" data-kids-academy-girl-authority="1430">
 
 <style id="kids-academy-edge-scroll-v1445">
 /* KIDS_LESSON_CAPSULE_RESTORE_V1446
-   Restore the ORIGINAL framed lesson cards, responsive side gutters,
-   corner radii, subtle borders, and theme-specific shadows.
-   The V1445 bottom-dock scrolling fix remains unchanged in behavior.
-   Do not touch the other KIDS views, original text/voice input or progress. */
+   Preserve framed lesson cards, responsive gutters, theme-specific shadows
+   and behind-dock scrolling. Academy answers are choices only. */
 html body[data-kids-portal="true"][data-academy-view="lesson"] > main.wrap > #lessonMain.lesson-main:not([hidden]){
  /* The original centered page/capsule widths win again (no full-bleed). */
  padding-bottom:0!important;
@@ -5304,10 +5083,6 @@ html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain #less
  left:clamp(8px,1.7vw,20px)!important;right:clamp(8px,1.7vw,20px)!important;
  bottom:calc(var(--kids-academy-dock-clearance) + 8px)!important;
  width:auto!important;z-index:5!important;margin:0!important;
-}
-/* V1438: keep caret and on-screen keyboard interaction exactly as before. */
-html body[data-kids-portal="true"][data-academy-view="lesson"][data-academy-typing="true"] #lessonMain #stageSurface{
- padding-bottom:24px!important;scroll-padding-block-end:24px!important;
 }
 </style>
 
