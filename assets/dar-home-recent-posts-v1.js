@@ -36,7 +36,8 @@ function untranslated(p){return locale()!=="de"&&!(state.titleLocales[p.id]||{})
 function fetchTitleManifests(posts){
  posts.filter(function(p){return p.localeManifest&&/^\/assets\/[A-Za-z0-9-]+-locales\.json$/.test(p.localeManifest)}).slice(0,24).forEach(function(p){
  var key=p.localeManifest;if(state.manifestLoaded[key])return;state.manifestLoaded[key]=true;
- fetch(key,{cache:"force-cache",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("locale manifest");return r.json()}).then(function(data){
+ var q50Post=p.id==="dieses-wissen-ist-religion-isnad-20261104-q50-483";
+ fetch(q50Post?key+"?v=20261105-post-nine-v1":key,{cache:q50Post?"no-store":"force-cache",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("locale manifest");return r.json()}).then(function(data){
  if(data.contentId!=="post:"+p.id||!data.locales)return;
  var titles={};["de","ar","en","tr","ku","ckb","bs","fr","es"].forEach(function(code){
  if(data.locales[code]&&typeof data.locales[code].title==="string")titles[code]=data.locales[code].title});

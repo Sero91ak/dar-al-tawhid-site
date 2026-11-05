@@ -364,7 +364,7 @@ function activateAdultCompactHero(html) {
     html = html.includes("</head>") ? html.replace("</head>", css + "</head>") : css + html;
   }
   if (!html.includes('id="darHomeRecentPostsV1Js"')) {
-    const js = '<script defer id="darHomeRecentPostsV1Js" src="/assets/dar-home-recent-posts-v1.js?v=20261101-premium-home-v11"></' + 'script>';
+    const js = '<script defer id="darHomeRecentPostsV1Js" src="/assets/dar-home-recent-posts-v1.js?v=20261105-post-nine-v1"></' + 'script>';
     html = html.includes("</body>") ? html.replace("</body>", js + "</body>") : html + js;
   }
   // Canonical daily entrypoint across public website, visitor WKWebView and Android PWA.
@@ -1254,9 +1254,18 @@ function injectAdultReaderRuntimeV5(html) {
   if(typeof html!=="string"||!html)return html;
   html=html.replace(/(\/assets\/dar-app-chrome\.js)(?:\?v=[^"'\s<>]*)?/g,
     "$1?v=20261101-reader-runtime-v5");
-  if(html.includes('id="darReaderOverlayRuntimeV5"'))return html;
-  const tag='<script defer id="darReaderOverlayRuntimeV5" src="/assets/dar-reader-overlay-runtime-v5.js?v=20261101-v5"></'+'script>';
-  return html.includes("</body>")?html.replace("</body>",tag+"</body>"):html+tag;
+  if(!html.includes('id="darReaderOverlayRuntimeV5"')){
+    const tag='<script defer id="darReaderOverlayRuntimeV5" src="/assets/dar-reader-overlay-runtime-v5.js?v=20261101-v5"></'+'script>';
+    html=html.includes("</body>")?html.replace("</body>",tag+"</body>"):html+tag;
+  }
+  // Q50 is a single published adult post, localized at the existing render
+  // boundary. Include the same runtime for native WKWebView, Android PWA and
+  // website, without creating a second app shell or a loading screen.
+  if(!html.includes('id="darQ50PostLanguageV1"')){
+    const localeTag='<script defer id="darQ50PostLanguageV1" src="/assets/dar-q50-post-language-v1.js?v=20261105-post-nine-v1"></'+'script>';
+    html=html.includes("</body>")?html.replace("</body>",localeTag+"</body>"):html+localeTag;
+  }
+  return html;
 }
 
 export default {

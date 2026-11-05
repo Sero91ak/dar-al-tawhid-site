@@ -13,7 +13,7 @@ const moduleJs=read("assets/dar-home-recent-posts-v1.js");
 const moduleCss=read("assets/dar-home-recent-posts-v1.css");
 const builder=read("scripts/build-desktop-posts-index.js");
 const router=read("cloudflare/site-router.js");
-assert(router.includes("/assets/dar-home-recent-posts-v1.js?v=20261101-premium-home-v11"),"Current adult Worker must bust cached pre-scroll-fix JS in iOS/PWA");
+assert(router.includes("/assets/dar-home-recent-posts-v1.js?v=20261105-post-nine-v1"),"Current adult Worker must bust cached pre-scroll-fix JS in iOS/PWA");
 const dailyHub=read("assets/dar-visitor-daily-hub-v1.js");
 const archiveJs=read("assets/dar-recent-archive-v1.js");
 const archiveHtml=read("neueste-beitraege/index.html");
@@ -128,4 +128,5 @@ assert.equal(lockRoot.style.getPropertyValue("overflow"),"auto","Original root o
 assert.equal(body.style.getPropertyValue("position"),"relative","Original body position not restored");
 assert.equal(lockRoot.style.getPropertyPriority("overflow"),"important","Original overflow priority not restored");
 
+require("./check-q50-nine-language.cjs");
 console.log("ADULT_UI_NINE_LOCALES_AND_POPUP OK: 9 languages, native dialog, direct touch actions, WKWebView lock, theme, localized titles and executed interaction tests.");

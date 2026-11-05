@@ -6,23 +6,29 @@ const fs=require("node:fs"),path=require("node:path"),assert=require("node:asser
 const root=path.resolve(__dirname,".."),read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const pack=JSON.parse(read("assets/q50-locales.json"));
 const q=read("q/50/index.html"),quiz=read("lernen/wissen-ist-religion/index.html");
-const js=read("assets/q50-localized.js"),chrome=read("assets/dar-app-chrome.js");
+const js=read("assets/q50-localized.js"),chrome=read("assets/dar-app-chrome.js"),postRuntime=read("assets/dar-q50-post-language-v1.js"),router=read("cloudflare/site-router.js");
 const registry=JSON.parse(read("q/_registry/shortlinks.json"));
 const expected=["de","ar","en","tr","ku","ckb","bs","fr","es"];
 assert.deepEqual(Object.keys(pack.locales),expected);
+assert.equal(pack.canonicalPostId,"dieses-wissen-ist-religion-isnad-20261104-q50-483");
+assert.equal(pack.postLocalizationVersion,1);
 assert.equal(pack.qSourceId,"qsource:50");
 assert.equal(pack.quizId,"quiz:qsource:50");
 assert.equal(pack.sourcePath,"/q/50/");
 assert.equal(pack.quizPath,"/lernen/wissen-ist-religion/");
-assert.equal(pack.contentId,"post:dieses-wissen-ist-religion-isnad-20261104-q50");
+assert.equal(pack.contentId,"post:dieses-wissen-ist-religion-isnad-20261104-q50-483");
 assert.equal(pack.appLocaleStorageKey,"darAdultPreferredLocaleV1");
-assert.match(pack.publicationStatus,/staging-only/);
+assert.match(pack.publicationStatus,/post-published-2026-11-05/);
 assert.equal(registry.nextNumber,51);
 const entry=registry.links.find(x=>x.number===50);
 assert.equal(entry.shortPath,"/q/50/");assert.equal(entry.targetPath,"/q/50/");
-const scripts=[js,chrome];scripts.forEach((s,i)=>new vm.Script(s,{filename:i?"app chrome":"Q50 localization"}));
+assert.equal(entry.postReference,"dieses-wissen-ist-religion-isnad-20261104-q50-483");
+const scripts=[js,chrome,postRuntime];scripts.forEach((s,i)=>new vm.Script(s,{filename:["Q50 localization","app chrome","Q50 post runtime"][i]}));
 assert.match(js,/DAR_Q50_READER_NAV_V1/);
 assert.match(chrome,/DAR_Q50_READER_NAV_V1/);
+assert.match(router,/darQ50PostLanguageV1/);
+assert.match(router,/dar-q50-post-language-v1\.js\?v=20261105-post-nine-v1/);
+assert.match(postRuntime,/darAdultPreferredLocaleV1/);
 assert.match(js,/darAdultPreferredLocaleV1/);
 assert.match(js,/window\.addEventListener\("storage"/);
 assert.match(js,/window\.addEventListener\("message"/);
@@ -50,6 +56,16 @@ for(const code of expected){
  assert.equal(p.dir,code==="ar"||code==="ckb"?"rtl":"ltr");
  assert.equal(p.approved,false);
  assert.equal(p.translationStatus,"review-required");
+ const post=p.post;
+ assert.ok(post&&post.id===pack.canonicalPostId&&post.contentId===pack.contentId,code+" published post ID mismatch");
+ assert.equal(post.qSourceId,"qsource:50");
+ assert.ok(post.title&&post.speaker&&post.statement&&post.source&&post.summary,code+" incomplete full post translation");
+ assert.ok(post.statement.includes(p.statement1)&&post.statement.includes(p.statement2),code+" both Athar statements missing");
+ assert.equal(post.summary,p.conclusion,code+" conclusion translation drift");
+ assert.equal(post.sourceUrl,"/q/50/?lang="+code);
+ assert.equal(post.quizUrl,"/lernen/wissen-ist-religion/?lang="+code);
+ assert.ok(post.ui?.post&&post.ui?.statement&&post.ui?.source&&post.ui?.conclusion&&post.ui?.reportedFrom,code+" incomplete post chrome labels");
+ assert.equal(post.independentLinguisticAndReligiousReview,false,"do not claim independent review for "+code);
  for(const field of ["source","study","sources","chain","classification","explanation","warning","result","language","question","of","next","correct","incorrect","finish","restart","review"])
    assert.ok(p.ui[field],code+" missing UI "+field);
  assert.equal(p.questions.length,4);
@@ -67,5 +83,77 @@ assert.match(manuscript,/draftStatus: "prepared-not-published"/);
 assert.match(manuscript,/📖 \*\*/);
 assert.match(manuscript,/#DarAlTawhid #Athar #Salaf #Sunnah/);
 assert.match(manuscript,/🌙 \*\*𝐅𝐀𝐙𝐈𝐓:\*\*/);
-assert.ok(!fs.existsSync(path.join(root,"content/posts/dieses-wissen-ist-religion-isnad-20261104-q50.md")),"No live post may be silently created");
-console.log("Q50 PASS: 9 locales, 36 question translations, two original Arabic Āthār, 6 evidence links, URLs, RTL, draft-only, no repeat push");
+const published=read("content/posts/dieses-wissen-ist-religion-isnad-20261104-q50.md");
+assert.match(published,/id: "dieses-wissen-ist-religion-isnad-20261104-q50-483"/);
+assert.match(published,/status: "published"/);
+assert.match(published,/localizationManifest: "\/assets\/q50-locales.json"/);
+assert.match(published,/url: "\/q\/50\/"/);
+
+/* Browser-like runtime test: the existing mounted app's post data must actually
+   change for each selected app language, and return to the original German. */
+async function checkLivePostRuntime(){
+ const postId=pack.canonicalPostId,originalStatement="ORIGINAL DEUTSCH – geschützt";
+ const originalTitle="📖 DIESES WISSEN IST RELIGION";
+ const originalSource="MUSLIM Originalbeleg 26/32";
+ const original={
+  id:postId,title:originalTitle,statement:originalStatement,
+  source:originalSource,scholar:"Originalgelehrte",links:[{url:"/q/50/"}],
+  status:"published",category:"Āthār"
+ };
+ let current="de",renderCount=0;
+ const localStorage={getItem(k){return k==="darAdultPreferredLocaleV1"?current:null}};
+ const doc={
+   readyState:"complete",head:{appendChild(){}},
+   body:{},documentElement:{appendChild(){}},
+   getElementById(k){return k==="appView"?{}:null},
+   querySelector(){return null},
+   createElement(){return {setAttribute(){},textContent:"",id:""}},
+   addEventListener(){}
+ };
+ const win={
+   __darQ50PostLanguageV1:false,location:{hash:"#post/"+postId,href:"https://dar-al-tawhid.de/?post="+postId},
+   localStorage,addEventListener(){},
+   requestAnimationFrame(fn){fn()},
+   setTimeout(fn){fn()},
+   scrollY:0,scrollTo(){},
+   currentRoute:{view:"post",value:postId}
+ };
+ const ctx={
+   window:win,document:doc,posts:[original],
+   currentRoute:win.currentRoute,URL,console,
+   MutationObserver:class{observe(){}},
+   requestAnimationFrame(fn){fn()},
+   render(){renderCount++},
+   fetch:async()=>({ok:true,json:async()=>pack})
+ };
+ vm.runInNewContext(postRuntime,ctx,{filename:"dar-q50-post-language-v1.js"});
+ await new Promise(resolve=>setImmediate(resolve));
+ assert.equal(win.DARQ50PostLocale.getReady(),true,"Q50 locale runtime must fetch a matching canonical manifest");
+ for(const code of expected){
+   current=code;win.DARQ50PostLocale.resync();
+   const p=ctx.posts[0];
+   if(code==="de"){
+     assert.equal(p.title,originalTitle,"German original must be retained");
+     assert.equal(p.statement,originalStatement,"German statement must be retained");
+     assert.equal(p.source,originalSource,"German source must be retained");
+     assert.equal(p.fazit,undefined,"German extra fields must be removed");
+   }else{
+     const localized=pack.locales[code].post;
+     assert.equal(p.title,localized.title,code+" title not live");
+     assert.equal(p.source,localized.source,code+" source not live");
+     assert.equal(p.fazit,localized.conclusion,code+" Fazit not live");
+     assert.equal(p.statement,localized.statement,code+" article statement not live");
+     assert.ok(p.statement.includes(pack.locales[code].statement1)&&p.statement.includes(pack.locales[code].statement2),
+       code+" two speakers not localized");
+   }
+   assert.equal(p.id,postId,"canonical ID must never change");
+   assert.equal(p.links[0].url,"/q/50/","Q shortlink must never change");
+ }
+ current="de";win.DARQ50PostLocale.resync();
+ assert.equal(ctx.posts[0].statement,originalStatement,"returning to DE must restore original source");
+ assert.ok(renderCount>=expected.length,"app must actually rerender when app language changes");
+ console.log("Q50 RUNTIME PASS: actual in-app post rendering for 9 languages, no URL/ID drift and German restoration");
+}
+checkLivePostRuntime().catch(e=>{console.error(e);process.exitCode=1});
+
+console.log("Q50 PASS: live single canonical post ID, 9 full statement/source/conclusion translations, 36 questions, original Arabic, source links, RTL; no repeat push");

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentId": "post:dieses-wissen-ist-religion-isnad-20261104-q50",
+  "contentId": "post:dieses-wissen-ist-religion-isnad-20261104-q50-483",
   "qSourceId": "qsource:50",
   "quizId": "quiz:qsource:50",
   "sourcePath": "/q/50/",
@@ -8,7 +8,7 @@
   "canonicalLocale": "de",
   "appLocaleStorageKey": "darAdultPreferredLocaleV1",
   "localeSelectionPolicy": "URL ?lang= overrides saved adult app language; no OS-language inference",
-  "publicationStatus": "staging-only; not published; no OneSignal",
+  "publicationStatus": "post-published-2026-11-05; nine-locale-display-owner-approved; independent-linguistic-and-religious-review-pending",
   "arabicOriginals": {
     "ibnSirin": "إِنَّ هَذَا الْعِلْمَ دِينٌ فَانْظُرُوا عَمَّنْ تَأْخُذُونَ دِينَكُمْ",
     "ibnMubarak": "الْإِسْنَادُ مِنَ الدِّينِ وَلَوْلَا الْإِسْنَادُ لَقَالَ مَنْ شَاءَ مَا شَاءَ"
@@ -125,7 +125,32 @@
         "pageNote": "Die Seitenangaben folgen der genannten Ausgabe; andere Druckausgaben können anders paginiert sein."
       },
       "approved": false,
-      "translationStatus": "review-required"
+      "translationStatus": "review-required",
+      "post": {
+        "id": "dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "contentId": "post:dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "qSourceId": "qsource:50",
+        "category": "Āthār",
+        "topic": "Wissen und Isnād",
+        "title": "DIESES WISSEN IST RELIGION",
+        "speaker": "Muḥammad ibn Sīrīn (raḥimahullāh); ʿAbdullāh ibn al-Mubārak (raḥimahullāh)",
+        "statement": "**ACHTE DARAUF, VON WEM DU DEINE RELIGION NIMMST**\n🖋️ **Muḥammad ibn Sīrīn (raḥimahullāh)** sagte:\n„Wahrlich, dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“\n\n**DER ISNĀD GEHÖRT ZUR RELIGION**\n🖋️ **ʿAbdullāh ibn al-Mubārak (raḥimahullāh)** sagte:\n„Der Isnād gehört zur Religion. Gäbe es keinen Isnād, könnte jeder sagen, was er wollte.“",
+        "source": "Muslim, Ṣaḥīḥ, Muqaddimah: Ibn Sīrīn, Überlieferung 26 (Bd. 1, S. 14); Ibn al-Mubārak, Überlieferung 32 (Bd. 1, S. 16).",
+        "sourceUrl": "/q/50/?lang=de",
+        "quizUrl": "/lernen/wissen-ist-religion/?lang=de",
+        "summary": "Religiöses Wissen wird nicht allein nach Bekanntheit oder überzeugender Darstellung angenommen: Die Quelle, die Überlieferungskette und die tatsächliche Aussage müssen geprüft werden.",
+        "conclusion": "Religiöses Wissen wird nicht allein nach Bekanntheit oder überzeugender Darstellung angenommen: Die Quelle, die Überlieferungskette und die tatsächliche Aussage müssen geprüft werden.",
+        "ui": {
+          "post": "Beitrag",
+          "statement": "Aussage",
+          "source": "Quelle",
+          "reportedFrom": "Überliefert von",
+          "conclusion": "Fazit"
+        },
+        "publicationApprovedByOwner": true,
+        "independentLinguisticAndReligiousReview": false,
+        "translationStatus": "review-required"
+      }
     },
     "ar": {
       "name": "العربية",
@@ -212,7 +237,32 @@
         "pageNote": "أرقام الصفحات بحسب الطبعة المذكورة، وقد تختلف في طبعات أخرى."
       },
       "approved": false,
-      "translationStatus": "review-required"
+      "translationStatus": "review-required",
+      "post": {
+        "id": "dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "contentId": "post:dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "qSourceId": "qsource:50",
+        "category": "الآثار",
+        "topic": "العلم والإسناد",
+        "title": "إِنَّ هَذَا الْعِلْمَ دِينٌ",
+        "speaker": "محمد بن سيرين رحمه الله; عبد الله بن المبارك رحمه الله",
+        "statement": "**تَثَبَّتْ مِمَّنْ تَأْخُذُ دِينَكَ**\n🖋️ **محمد بن سيرين رحمه الله** قال:\n„إن هذا العلم دين، فانظروا عمن تأخذون دينكم.“\n\n**الْإِسْنَادُ مِنَ الدِّينِ**\n🖋️ **عبد الله بن المبارك رحمه الله** قال:\n„الإسناد من الدين، ولولا الإسناد لقال من شاء ما شاء.“",
+        "source": "مسلم، الصحيح، المقدمة: أثر ابن سيرين رقم ٢٦ (١/١٤)، وأثر ابن المبارك رقم ٣٢ (١/١٦).",
+        "sourceUrl": "/q/50/?lang=ar",
+        "quizUrl": "/lernen/wissen-ist-religion/?lang=ar",
+        "summary": "لا يُقبل العلم الشرعي لمجرد شهرة قائله، بل ينبغي التثبت من المصدر والإسناد واللفظ المنقول.",
+        "conclusion": "لا يُقبل العلم الشرعي لمجرد شهرة قائله، بل ينبغي التثبت من المصدر والإسناد واللفظ المنقول.",
+        "ui": {
+          "post": "المقال",
+          "statement": "القول",
+          "source": "المصدر",
+          "reportedFrom": "عن",
+          "conclusion": "الخلاصة"
+        },
+        "publicationApprovedByOwner": true,
+        "independentLinguisticAndReligiousReview": false,
+        "translationStatus": "review-required"
+      }
     },
     "en": {
       "name": "English",
@@ -299,7 +349,32 @@
         "pageNote": "Page numbers refer to the cited edition and may differ in other printed editions."
       },
       "approved": false,
-      "translationStatus": "review-required"
+      "translationStatus": "review-required",
+      "post": {
+        "id": "dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "contentId": "post:dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "qSourceId": "qsource:50",
+        "category": "Āthār",
+        "topic": "Knowledge and isnād",
+        "title": "THIS KNOWLEDGE IS RELIGION",
+        "speaker": "Muḥammad ibn Sīrīn (may Allah have mercy on him); ʿAbdullāh ibn al-Mubārak (may Allah have mercy on him)",
+        "statement": "**CONSIDER FROM WHOM YOU TAKE YOUR RELIGION**\n🖋️ **Muḥammad ibn Sīrīn (may Allah have mercy on him)** said:\n„Indeed, this knowledge is religion, so consider carefully from whom you take your religion.“\n\n**THE CHAIN OF TRANSMISSION IS PART OF RELIGION**\n🖋️ **ʿAbdullāh ibn al-Mubārak (may Allah have mercy on him)** said:\n„The chain of transmission is part of religion. Without it, anyone could say whatever they wished.“",
+        "source": "Muslim, Ṣaḥīḥ, Introduction: Ibn Sīrīn, report 26 (vol. 1, p. 14); Ibn al-Mubārak, report 32 (vol. 1, p. 16).",
+        "sourceUrl": "/q/50/?lang=en",
+        "quizUrl": "/lernen/wissen-ist-religion/?lang=en",
+        "summary": "Religious knowledge is not accepted merely because a speaker is well known: the source, its chain and the actual wording require verification.",
+        "conclusion": "Religious knowledge is not accepted merely because a speaker is well known: the source, its chain and the actual wording require verification.",
+        "ui": {
+          "post": "Post",
+          "statement": "Statement",
+          "source": "Source",
+          "reportedFrom": "Reported from",
+          "conclusion": "Conclusion"
+        },
+        "publicationApprovedByOwner": true,
+        "independentLinguisticAndReligiousReview": false,
+        "translationStatus": "review-required"
+      }
     },
     "tr": {
       "name": "Türkçe",
@@ -386,7 +461,32 @@
         "pageNote": "Sayfa numaraları belirtilen baskıya aittir; diğer baskılarda farklı olabilir."
       },
       "approved": false,
-      "translationStatus": "review-required"
+      "translationStatus": "review-required",
+      "post": {
+        "id": "dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "contentId": "post:dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "qSourceId": "qsource:50",
+        "category": "Âsâr",
+        "topic": "İlim ve isnad",
+        "title": "BU İLİM DİNDİR",
+        "speaker": "Muhammed b. Sîrîn (Allah ona rahmet etsin); Abdullah b. Mübârek (Allah ona rahmet etsin)",
+        "statement": "**DİNİNİ KİMDEN ALDIĞINA DİKKAT ET**\n🖋️ **Muhammed b. Sîrîn (Allah ona rahmet etsin)** şöyle dedi:\n„Şüphesiz bu ilim dindir. Öyleyse dininizi kimden aldığınıza dikkat edin.“\n\n**İSNAD DİNİN BİR PARÇASIDIR**\n🖋️ **Abdullah b. Mübârek (Allah ona rahmet etsin)** şöyle dedi:\n„İsnad dindendir. İsnad olmasaydı isteyen istediğini söylerdi.“",
+        "source": "Müslim, Ṣaḥīḥ, Mukaddime: İbn Sîrîn, rivayet 26 (c. 1, s. 14); İbnü'l-Mübârek, rivayet 32 (c. 1, s. 16).",
+        "sourceUrl": "/q/50/?lang=tr",
+        "quizUrl": "/lernen/wissen-ist-religion/?lang=tr",
+        "summary": "Dinî bilgi yalnızca konuşanın tanınmışlığına dayanılarak kabul edilmez; kaynak, isnad ve sözün aslı incelenmelidir.",
+        "conclusion": "Dinî bilgi yalnızca konuşanın tanınmışlığına dayanılarak kabul edilmez; kaynak, isnad ve sözün aslı incelenmelidir.",
+        "ui": {
+          "post": "Yazı",
+          "statement": "Söz",
+          "source": "Kaynak",
+          "reportedFrom": "Nakleden",
+          "conclusion": "Sonuç"
+        },
+        "publicationApprovedByOwner": true,
+        "independentLinguisticAndReligiousReview": false,
+        "translationStatus": "review-required"
+      }
     },
     "ku": {
       "name": "Kurmancî",
@@ -473,7 +573,32 @@
         "pageNote": "Hejmarên rûpelan li gorî çapê hatine dayîn; di çapên din de dikarin cuda bin."
       },
       "approved": false,
-      "translationStatus": "review-required"
+      "translationStatus": "review-required",
+      "post": {
+        "id": "dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "contentId": "post:dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "qSourceId": "qsource:50",
+        "category": "Āthār",
+        "topic": "Zanîn û îsnad",
+        "title": "EV ZANÎN DÎN E",
+        "speaker": "Muḥammed ibn Sîrîn (Xwedê rehma xwe lê bike); ʿAbdullah ibn al-Mubârek (Xwedê rehma xwe lê bike)",
+        "statement": "**BALA XWE BIDÊ JI KÊ DÎNÊ XWE DIGIRÎ**\n🖋️ **Muḥammed ibn Sîrîn (Xwedê rehma xwe lê bike)** got:\n„Bi rastî ev zanîn dîn e; ji ber vê yekê bala xwe bidin ka hûn dînê xwe ji kê digirin.“\n\n**ÎSNAD BEŞEK JI DÎN E**\n🖋️ **ʿAbdullah ibn al-Mubârek (Xwedê rehma xwe lê bike)** got:\n„Îsnad beşek ji dîn e. Heger îsnad tunebûya, her kes dikarîbû tiştê ku dixwest bigota.“",
+        "source": "Muslim, Ṣaḥīḥ, Pêşgotin: Ibn Sîrîn, vegotin 26 (c. 1, r. 14); Ibn al-Mubârek, vegotin 32 (c. 1, r. 16).",
+        "sourceUrl": "/q/50/?lang=ku",
+        "quizUrl": "/lernen/wissen-ist-religion/?lang=ku",
+        "summary": "Zanîna dînî tenê ji ber navdariya kesekî nayê pejirandin; divê çavkanî, îsnad û gotina rastîn bên kontrolkirin.",
+        "conclusion": "Zanîna dînî tenê ji ber navdariya kesekî nayê pejirandin; divê çavkanî, îsnad û gotina rastîn bên kontrolkirin.",
+        "ui": {
+          "post": "Nivîs",
+          "statement": "Gotin",
+          "source": "Çavkanî",
+          "reportedFrom": "Vegotî ji",
+          "conclusion": "Encam"
+        },
+        "publicationApprovedByOwner": true,
+        "independentLinguisticAndReligiousReview": false,
+        "translationStatus": "review-required"
+      }
     },
     "ckb": {
       "name": "سۆرانی",
@@ -560,7 +685,32 @@
         "pageNote": "ژمارەی لاپەڕەکان بەپێی ئەو چاپەیە کە ئاماژەی پێکراوە؛ لە چاپی تردا دەگۆڕێن."
       },
       "approved": false,
-      "translationStatus": "review-required"
+      "translationStatus": "review-required",
+      "post": {
+        "id": "dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "contentId": "post:dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "qSourceId": "qsource:50",
+        "category": "ئاسار",
+        "topic": "زانست و ئیسناد",
+        "title": "ئەم زانستە ئایینە",
+        "speaker": "موحەممەد کوڕی سیرین (خوا ڕەحمەتی پێ بکات); عەبدولڵا کوڕی موبارەک (خوا ڕەحمەتی پێ بکات)",
+        "statement": "**بزانە ئایینەکەت لە کێ وەردەگریت**\n🖋️ **موحەممەد کوڕی سیرین (خوا ڕەحمەتی پێ بکات)** گوتی:\n„بەڕاستی ئەم زانستە ئایینە؛ بۆیە سەیری ئەوە بکەن کە ئایینەکەتان لە کێ وەردەگرن.“\n\n**ئیسناد بەشێکە لە ئایین**\n🖋️ **عەبدولڵا کوڕی موبارەک (خوا ڕەحمەتی پێ بکات)** گوتی:\n„ئیسناد بەشێکە لە ئایین. ئەگەر ئیسناد نەبوایە، هەر کەسێک دەیتوانی هەرچی بیەوێت بڵێت.“",
+        "source": "موسلیم، سەحیح، پێشەکی: ئیبن سیرین، گێڕانەوەی ٢٦ (بەرگی ١، لاپەڕە ١٤)؛ ئیبن موبارەک، گێڕانەوەی ٣٢ (بەرگی ١، لاپەڕە ١٦).",
+        "sourceUrl": "/q/50/?lang=ckb",
+        "quizUrl": "/lernen/wissen-ist-religion/?lang=ckb",
+        "summary": "زانیاریی ئایینی تەنها بە ناوبانگی قسەکەر وەرناگیرێت؛ سەرچاوە، ئیسناد و دەقی ڕاستەقینە پێویستیان بە پشکنینە.",
+        "conclusion": "زانیاریی ئایینی تەنها بە ناوبانگی قسەکەر وەرناگیرێت؛ سەرچاوە، ئیسناد و دەقی ڕاستەقینە پێویستیان بە پشکنینە.",
+        "ui": {
+          "post": "بابەت",
+          "statement": "وتە",
+          "source": "سەرچاوە",
+          "reportedFrom": "گێڕاوەتەوە لە",
+          "conclusion": "کورتە"
+        },
+        "publicationApprovedByOwner": true,
+        "independentLinguisticAndReligiousReview": false,
+        "translationStatus": "review-required"
+      }
     },
     "bs": {
       "name": "Bosanski",
@@ -647,7 +797,32 @@
         "pageNote": "Brojevi stranica odnose se na navedeno izdanje i mogu se razlikovati u drugim izdanjima."
       },
       "approved": false,
-      "translationStatus": "review-required"
+      "translationStatus": "review-required",
+      "post": {
+        "id": "dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "contentId": "post:dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "qSourceId": "qsource:50",
+        "category": "Āthār",
+        "topic": "Znanje i isnād",
+        "title": "OVO ZNANJE JE VJERA",
+        "speaker": "Muḥammed ibn Sīrīn (Allah mu se smilovao); ʿAbdullāh ibn al-Mubārak (Allah mu se smilovao)",
+        "statement": "**PAZI OD KOGA UZIMAŠ SVOJU VJERU**\n🖋️ **Muḥammed ibn Sīrīn (Allah mu se smilovao)** rekao je:\n„Zaista je ovo znanje vjera. Zato pazite od koga uzimate svoju vjeru.“\n\n**ISNĀD JE DIO VJERE**\n🖋️ **ʿAbdullāh ibn al-Mubārak (Allah mu se smilovao)** rekao je:\n„Lanac prenosilaca dio je vjere. Da nema lanca, svako bi govorio šta god želi.“",
+        "source": "Muslim, Ṣaḥīḥ, Uvod: Ibn Sīrīn, predaja 26 (sv. 1, str. 14); Ibn al-Mubārak, predaja 32 (sv. 1, str. 16).",
+        "sourceUrl": "/q/50/?lang=bs",
+        "quizUrl": "/lernen/wissen-ist-religion/?lang=bs",
+        "summary": "Vjersko znanje ne prihvata se samo zbog poznatog govornika: potrebno je provjeriti izvor, lanac prenosilaca i tačan tekst.",
+        "conclusion": "Vjersko znanje ne prihvata se samo zbog poznatog govornika: potrebno je provjeriti izvor, lanac prenosilaca i tačan tekst.",
+        "ui": {
+          "post": "Objava",
+          "statement": "Izjava",
+          "source": "Izvor",
+          "reportedFrom": "Preneseno od",
+          "conclusion": "Zaključak"
+        },
+        "publicationApprovedByOwner": true,
+        "independentLinguisticAndReligiousReview": false,
+        "translationStatus": "review-required"
+      }
     },
     "fr": {
       "name": "Français",
@@ -734,7 +909,32 @@
         "pageNote": "La pagination correspond à l’édition citée et peut différer selon les éditions."
       },
       "approved": false,
-      "translationStatus": "review-required"
+      "translationStatus": "review-required",
+      "post": {
+        "id": "dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "contentId": "post:dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "qSourceId": "qsource:50",
+        "category": "Āthār",
+        "topic": "Savoir et isnād",
+        "title": "CETTE SCIENCE EST UNE RELIGION",
+        "speaker": "Muḥammad ibn Sīrīn (qu’Allah lui fasse miséricorde); ʿAbdullāh ibn al-Mubārak (qu’Allah lui fasse miséricorde)",
+        "statement": "**VÉRIFIE AUPRÈS DE QUI TU PRENDS TA RELIGION**\n🖋️ **Muḥammad ibn Sīrīn (qu’Allah lui fasse miséricorde)** a dit:\n„Certes, ce savoir fait partie de la religion. Examinez donc auprès de qui vous prenez votre religion.“\n\n**LA CHAÎNE DE TRANSMISSION FAIT PARTIE DE LA RELIGION**\n🖋️ **ʿAbdullāh ibn al-Mubārak (qu’Allah lui fasse miséricorde)** a dit:\n„La chaîne de transmission fait partie de la religion. Sans elle, chacun pourrait dire ce qu’il veut.“",
+        "source": "Muslim, Ṣaḥīḥ, Introduction : Ibn Sīrīn, récit 26 (vol. 1, p. 14) ; Ibn al-Mubārak, récit 32 (vol. 1, p. 16).",
+        "sourceUrl": "/q/50/?lang=fr",
+        "quizUrl": "/lernen/wissen-ist-religion/?lang=fr",
+        "summary": "Le savoir religieux ne se reçoit pas seulement en raison de la notoriété d’un orateur : il faut vérifier la source, la chaîne et le texte exact.",
+        "conclusion": "Le savoir religieux ne se reçoit pas seulement en raison de la notoriété d’un orateur : il faut vérifier la source, la chaîne et le texte exact.",
+        "ui": {
+          "post": "Article",
+          "statement": "Parole",
+          "source": "Source",
+          "reportedFrom": "Rapporté de",
+          "conclusion": "Conclusion"
+        },
+        "publicationApprovedByOwner": true,
+        "independentLinguisticAndReligiousReview": false,
+        "translationStatus": "review-required"
+      }
     },
     "es": {
       "name": "Español",
@@ -821,7 +1021,35 @@
         "pageNote": "Las páginas corresponden a la edición citada y pueden variar en otras ediciones."
       },
       "approved": false,
-      "translationStatus": "review-required"
+      "translationStatus": "review-required",
+      "post": {
+        "id": "dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "contentId": "post:dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "qSourceId": "qsource:50",
+        "category": "Āthār",
+        "topic": "Conocimiento e isnād",
+        "title": "ESTE CONOCIMIENTO ES RELIGIÓN",
+        "speaker": "Muḥammad ibn Sīrīn (que Allah tenga misericordia de él); ʿAbdullāh ibn al-Mubārak (que Allah tenga misericordia de él)",
+        "statement": "**EXAMINA DE QUIÉN RECIBES TU RELIGIÓN**\n🖋️ **Muḥammad ibn Sīrīn (que Allah tenga misericordia de él)** dijo:\n„Ciertamente, este conocimiento es religión. Por eso, prestad atención a quién os enseña vuestra religión.“\n\n**LA CADENA DE TRANSMISIÓN FORMA PARTE DE LA RELIGIÓN**\n🖋️ **ʿAbdullāh ibn al-Mubārak (que Allah tenga misericordia de él)** dijo:\n„La cadena de transmisión forma parte de la religión. Sin ella, cualquiera podría decir lo que quisiera.“",
+        "source": "Muslim, Ṣaḥīḥ, Introducción: Ibn Sīrīn, relato 26 (vol. 1, p. 14); Ibn al-Mubārak, relato 32 (vol. 1, p. 16).",
+        "sourceUrl": "/q/50/?lang=es",
+        "quizUrl": "/lernen/wissen-ist-religion/?lang=es",
+        "summary": "El conocimiento religioso no se acepta solo por la fama del orador: hay que comprobar su fuente, la cadena de transmisión y la redacción original.",
+        "conclusion": "El conocimiento religioso no se acepta solo por la fama del orador: hay que comprobar su fuente, la cadena de transmisión y la redacción original.",
+        "ui": {
+          "post": "Artículo",
+          "statement": "Declaración",
+          "source": "Fuente",
+          "reportedFrom": "Transmitido de",
+          "conclusion": "Conclusión"
+        },
+        "publicationApprovedByOwner": true,
+        "independentLinguisticAndReligiousReview": false,
+        "translationStatus": "review-required"
+      }
     }
-  }
+  },
+  "canonicalPostId": "dieses-wissen-ist-religion-isnad-20261104-q50-483",
+  "postLocalizationVersion": 1,
+  "postLocalizationNote": "Owner explicitly requested all nine app-reading locales; full statements and conclusion are localized. Religious and linguistic independent review status remains unchanged."
 }
