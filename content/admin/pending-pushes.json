@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-11-05T09:50:15.518Z",
+  "generated": "2026-11-05T09:52:44.549Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1592,8 +1592,8 @@
       "pushApproved": true,
       "pushApprovedAt": "2026-11-05T09:49:54.004Z",
       "lastError": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
-      "updatedAt": "2026-11-05T09:50:15.518Z",
-      "lastCheckAt": "2026-11-05T09:50:15.330Z",
+      "updatedAt": "2026-11-05T09:52:44.549Z",
+      "lastCheckAt": "2026-11-05T09:52:44.393Z",
       "liveCheck": {
         "ok": false,
         "steps": {
@@ -1611,29 +1611,25 @@
         "indexOk": false,
         "postOk": false,
         "visitorUrlOk": true,
-        "attempts": 3,
+        "attempts": 6,
         "site": "https://dar-al-tawhid.de",
         "postId": "dieses-wissen-ist-religion-isnad-20261104-q50-483",
         "indexGenerated": "2026-10-31T20:29:00.000Z",
         "indexCount": 482,
-        "visitorUrl": "https://dar-al-tawhid.de/?post=dieses-wissen-ist-religion-isnad-20261104-q50-483&v=1793872204557#post/dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "visitorUrl": "https://dar-al-tawhid.de/?post=dieses-wissen-ist-religion-isnad-20261104-q50-483&v=1793872363716#post/dieses-wissen-ist-religion-isnad-20261104-q50-483",
         "githubIndexHasPost": true,
         "githubPostExists": true,
         "needsIndexRepair": false,
         "needsDeployWait": true,
         "repair": {
-          "repaired": true,
-          "action": "index-touch",
-          "at": "2026-11-05T09:50:06.266Z",
-          "reason": "Index aktualisiert (Deploy/Cache)"
+          "repaired": false,
+          "reason": "Index-Touch rate-limit (3 Min)"
         }
       },
-      "attempts": 3,
+      "attempts": 6,
       "lastRepair": {
-        "repaired": true,
-        "action": "index-touch",
-        "at": "2026-11-05T09:50:06.266Z",
-        "reason": "Index aktualisiert (Deploy/Cache)"
+        "repaired": false,
+        "reason": "Index-Touch rate-limit (3 Min)"
       }
     }
   }
