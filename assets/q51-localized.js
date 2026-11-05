@@ -7,7 +7,7 @@
 var source=document.getElementById("q51Source"),quizPage=document.getElementById("q51QuizPage");
 if(!source&&!quizPage)return;
 if(window.__darQ51LocalizedV1)return;window.__darQ51LocalizedV1=true;
-var API="/assets/q51-locales.json?v=20261105-v1";
+var API="/assets/q51-locales.json?v=20261105-v2";
 var CODES=["de","ar","en","tr","ku","ckb","bs","fr","es"];
 var cached=null,manual="",step=0,score=0,answer=null;
 function id(k){return document.getElementById(k)}
