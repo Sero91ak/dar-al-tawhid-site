@@ -67,3 +67,18 @@ body.dar-v2-active #panel .folder-grid{grid-template-columns:1fr!important;gap:8
 }
 @media(max-width:360px){body.dar-v2-active #topbar .toolbar .btn:not(.dar-v2-search-launch):not(#logoutBtn){display:none!important}.dar-v2-overview-heading{display:grid;gap:4px}}
 @media(prefers-reduced-motion:reduce){.dar-v2-rail,.dar-v2-nav,.dar-v2-kpi,.dar-v2-chart-bar,.dar-v2-overview,.dar-v2-overlay,body.dar-v2-active #panel .folder-card{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Preserve editorial full-screen editing and compact toolbars. */
+body.dar-v2-active #panel:has(.admin-editorial-host){padding:0!important}
+body.dar-v2-active.dar-editorial-fullscreen .app{margin:0!important;width:100%!important;padding:0!important}
+body.dar-v2-active.dar-editorial-fullscreen .dar-v2-rail,
+body.dar-v2-active.dar-editorial-fullscreen .dar-v2-bottom{display:none!important}
+body.dar-v2-active.dar-editorial-fullscreen #panel{padding:0!important}
+@media(max-width:719px){
+ body.dar-v2-active #topbar .toolbar .btn{width:35px!important;min-width:35px!important;padding:4px!important;font-size:0!important;justify-content:center!important}
+ body.dar-v2-active #topbar #adminBackBtn:before{content:"←";font-size:21px}
+ body.dar-v2-active #topbar #refreshBtn:before{content:"↻";font-size:21px}
+ body.dar-v2-active #topbar #logoutBtn:before{content:"⏻";font-size:20px}
+ body.dar-v2-active #topbar .dar-v2-search-launch:before{content:"⌕";font-size:24px}
+ body.dar-v2-active #topbar{padding-top:max(7px,env(safe-area-inset-top,0px))!important}
+}
