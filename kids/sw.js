@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1467";
+const CACHE_NAME="dar-al-tawhid-kids-v1468";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -22,7 +22,7 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1272",
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
   "/kids/akademie/index.html",
-  "/kids/akademie/answer-choice-only-v1.js?v=20261105-01",
+  "/kids/akademie/answer-choice-only-v1.js?v=20261105-02",
   "/kids/akademie/girl-profile-authority-v1430.css?v=1430",
   "/kids/assets/kids-salah-v1272/hero-day.png?v=1277",
   "/kids/assets/kids-salah-v1272/fajr.png?v=1277",
@@ -319,7 +319,7 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg",
   "/kids/quiz-v4-bridge.js?v=20261013-academy1",
   "/kids/akademie/index.html",
-  "/kids/akademie/answer-choice-only-v1.js?v=20261105-01",
+  "/kids/akademie/answer-choice-only-v1.js?v=20261105-02",
   "/kids/prayer-stage-v1261.css?v=1320",
   "/kids/prayer-stage-v1261.js?v=1342",
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
@@ -669,7 +669,7 @@ self.addEventListener("fetch",function(event){
  */
 const KIDS_OFFLINE_SEEDS=[
   "/kids/akademie/index.html",
-  "/kids/akademie/answer-choice-only-v1.js?v=20261105-01",
+  "/kids/akademie/answer-choice-only-v1.js?v=20261105-02",
   "/kids/akademie/curriculum-v1.js?v=20261010-01",
   "/kids/akademie/curriculum-v2.js?v=20261010-09",
   "/kids/akademie/curriculum-v22.js?v=20261011-01",
