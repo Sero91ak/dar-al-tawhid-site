@@ -42,7 +42,7 @@ function sourceRender(){
  text("q51H2",p.ui.explanation+" · Qatādah · Nr. 480");
  text("q51H3",p.ui.classification);
  text("q51H4",p.ui.sources);
- text("q51TabariAttribution","Abū Ǧaʿfar aṭ-Ṭabarī · "+p.ui.tabariAttribution+" · al-Baqarah 2:22 · 488–490");
+ text("q51TabariAttribution","Abū Ǧaʿfar aṭ-Ṭabarī · "+(p.ui.tabariAttribution||p.ui.explanation)+" · al-Baqarah 2:22 · 488–490");
  text("q51EvidenceGroup1","🖋️ "+p.speaker1+" · "+p.ui.sources);
  text("q51EvidenceGroup2","🖋️ "+p.speaker2+" · "+p.ui.sources);
  text("q51Speaker1","🖋️ "+p.speaker1);
