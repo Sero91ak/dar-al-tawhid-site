@@ -104,7 +104,6 @@ function renderQuiz(){
  text("qlResultTitle",p.ui.finish);
  text("qlResultScore",score+" "+p.ui.of+" "+p.questions.length+" · "+p.ui.correct);
  text("qlRetry",p.ui.restart);
- var back=id("qlSourceBack");if(back){back.textContent=p.ui.source+" · Q51";back.href=link("/q/51/");back.setAttribute("aria-label",p.ui.source+" · Q51")}
  document.title=p.title+" | Q51 · "+p.ui.study+" · DĀR AL TAWḤĪD";
 }
 function onLocaleChanged(next){
