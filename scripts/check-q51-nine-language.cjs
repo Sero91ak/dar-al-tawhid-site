@@ -29,7 +29,7 @@ assert.equal((source.match(/class="qsource-link web"/g)||[]).length,4);
 assert.match(quiz,/id="qlLanguage"/);
 assert.doesNotMatch(quiz,/<a\b[^>]*href="\/q\/51\//,"Q47+ quiz must contain no direct Q-source anchor");
 assert.match(router,/darQ51PostLanguageV1/);
-assert.match(router,/dar-q51-post-language-v1\.js\?v=20261105-nine-preview-v3/);
+assert.match(router,/dar-q51-post-language-v1\.js\?v=20261105-nine-preview-v4/);
 assert.match(adapter,/return chosen\}/);
 assert.match(adapter,/mark\(c\)/);
 assert.match(adapter,/history\.replaceState/);
@@ -46,7 +46,7 @@ for(const code of codes){
  }
  assert.equal(p.dir,code==="ar"||code==="ckb"?"rtl":"ltr");
  assert.equal(p.approved,code==="de",code+" review must not be falsely approved");
- assert.ok(p.ui?.tabariAttribution&&p.ui?.review&&p.ui?.sources&&p.ui?.arabic);
+ assert.ok(p.tabariContext&&p.ui?.tabariAttribution&&p.ui?.review&&p.ui?.sources&&p.ui?.arabic);
  assert.equal(p.questions.length,4);
  p.questions.forEach((q,i)=>{
    assert.equal(q.correct,[1,2,0,3][i],code+" answer key changed");
