@@ -71,7 +71,7 @@
     var back=bar.querySelector(".dar-source-back");
     if(back){
       if(back.textContent&&/Zurück zum Beitrag/i.test(back.textContent))back.textContent="← Zurück";
-      back.setAttribute("aria-label","Zum vorherigen Beitrag zurückkehren");
+      back.setAttribute("aria-label","Zur vorherigen Ansicht zurückkehren");
     }
     if(!bar.querySelector(".dar-source-home")){
       var home=document.createElement("button");

@@ -1,3 +1,6 @@
+/* Public Q documents have no app-style Back/Home chrome. Old cached reader
+   scripts are visually suppressed; native app navigation lives outside Q. */
+body.qsource-body #darDirectReaderBarV1{display:none!important}
 /* DAR AL TAWḤĪD – globale Quellen-Seiten
    Dār al-Layl, kompakt, ovales Wasserzeichen, ohne Lichtfleck
    Live-Deploy-Trigger: /q Open-Graph-Logo-Fix 2026-08-24

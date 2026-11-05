@@ -19,6 +19,7 @@ class Element{
   getAttribute(k){return this.attrs[k]??null}
   removeAttribute(k){delete this.attrs[k]}
   appendChild(c){this.children.push(c);c.parentNode=this;return c}
+  append(...children){for(const child of children)this.appendChild(child)}
   removeChild(c){this.children=this.children.filter(x=>x!==c)}
   remove(){if(this.parentNode)this.parentNode.removeChild(this)}
   addEventListener(n,fn){(this.handlers[n]??=[]).push(fn)}
@@ -39,14 +40,14 @@ async function simulate(href,html=good,status=200){
   querySelectorAll(){return []},
   addEventListener(n,fn){(listeners[n]??=[]).push(fn)},
  };
- let currentState=null,backCount=0;
+ let currentState=null,backCount=0,historyStack=[null],historyIndex=0;
  const winEvents={};
  const win={
   __darAppChromeInstalled:false,
   history:{
    get state(){return currentState},
-   pushState(v){currentState=v;historyStates.push(v)},
-   back(){backCount++;currentState=null;for(const fn of winEvents.popstate||[])fn({state:null});}
+   pushState(v){currentState=v;historyStack=historyStack.slice(0,historyIndex+1);historyStack.push(v);historyIndex++;historyStates.push(v)},
+   back(){backCount++;historyIndex=Math.max(0,historyIndex-1);currentState=historyStack[historyIndex];for(const fn of winEvents.popstate||[])fn({state:currentState});}
   },
   addEventListener(n,fn){(winEvents[n]??=[]).push(fn);}
  };
@@ -54,9 +55,9 @@ async function simulate(href,html=good,status=200){
   document:doc,window:win,
   location:{origin:'https://dar-al-tawhid.de',href:'https://dar-al-tawhid.de/?page=posts',
    assign(u){assigned.push(u)},reload(){assigned.push('RELOAD')}},
-  fetch:async u=>{fetches.push(u);return {ok:status===200,status,headers:{get(n){return n==='content-type'?'text/html; charset=utf-8':''}},text:async()=>html}},
+  fetch:async u=>{fetches.push(u);const page=typeof html==='object'?html[u]:html;return {ok:status===200&&!!page,status,headers:{get(n){return n==='content-type'?'text/html; charset=utf-8':''}},text:async()=>page}},
   MutationObserver:class{observe(){}},
-  setTimeout(){return 11},clearTimeout(){},AbortController,requestAnimationFrame(){},
+  setTimeout(fn,ms){if(ms===0)fn();return 11},clearTimeout(){},AbortController,requestAnimationFrame(){},
   performance:{now(){return 0}},URL
  };
  vm.runInNewContext(source,ctx,{timeout:4500});
@@ -115,4 +116,68 @@ assert.equal(external.event.defaultPrevented,false);
 assert.equal(external.fetches.length,0);
 assert.equal(external.panel,undefined);
 assert.equal(external.assigned.length,0);
+
+/* The same Q URL must not invent a browser Back button for shared links. */
+function standalone(pathname){
+ const inserted=[],win={};win.self=win;win.top=win;
+ const body={firstChild:null,insertBefore(el){inserted.push(el)}};
+ const doc={readyState:"complete",body,head:{appendChild(){}},
+  getElementById(){return null},createElement(tag){return new Element(tag)}};
+ vm.runInNewContext(direct,{window:win,document:doc,location:{pathname,assign(){}},history:{length:7}},{timeout:4500});
+ return inserted;
+}
+assert.equal(standalone("/q/51/").length,0,"External Q51 has no synthetic Back/Home bar");
+assert.equal(standalone("/q/1/").length,0,"All numbered Q links share the standalone rule");
+let lessonStandalone=standalone("/lernen/ikhlas/");
+assert.equal(lessonStandalone.length,1,"Standalone lessons keep a voluntary Home link");
+assert.equal(lessonStandalone[0].children[0].children.length,1,"No standalone synthetic Back");
+assert.equal(lessonStandalone[0].children[0].children[0].textContent,"⌂ Startseite");
+assert.match(fs.readFileSync(path.join(root,"q/51/index.html"),"utf8"),
+ /rel="canonical" href="https:\/\/dar-al-tawhid\.de\/q\/51\/"/,"Canonical Q51 URL unchanged");
+
+/* In-app Q -> learning -> Back returns to Q, then to the original post. */
+async function frameClick(sim,href,{blank=false,base="/q/45/"}={}){
+ const doc={baseURI:"https://dar-al-tawhid.de"+base,listeners:{},
+  addEventListener(name,fn){(this.listeners[name]??=[]).push(fn)}};
+ sim.frame.contentDocument=doc;
+ sim.frame.contentWindow={scrollY:186,restored:null,scrollTo(x,y){this.restored=y}};
+ sim.frame.handlers.load[0]();
+ const anchor={hasAttribute(){return false},getAttribute(k){
+  return k==="href"?href:k==="target"&&blank?"_blank":null}};
+ const event={defaultPrevented:false,button:0,target:{closest(){return anchor}},
+  preventDefault(){this.defaultPrevented=true},stopImmediatePropagation(){}};
+ doc.listeners.click[0](event);
+ for(let i=0;i<8;i++)await Promise.resolve();
+ return event;
+}
+const twoPages={"/q/45/":good,"/lernen/ikhlas/":learning};
+let nested=await simulate("/q/45/",twoPages);
+let inFrame=await frameClick(nested,"/lernen/ikhlas/");
+assert.equal(inFrame.defaultPrevented,true,"Learning stays inside app reader");
+assert.equal(nested.fetches.length,2,"Only source and learning fetched");
+assert.ok(nested.frame.srcdoc.includes("Lernfragen"));
+assert.equal(nested.historyStates.length,1,"One app reader history marker");
+nested.panel.children[0].children[0].children[0].handlers.click[0]();
+assert.ok(nested.frame.srcdoc.includes("qsource-body"),"Reader Back restores Q");
+assert.equal(nested.panel.hidden,false,"Reader remains mounted");
+nested.frame.handlers.load[0]();
+assert.equal(nested.frame.contentWindow.restored,186,"Source scroll restored");
+nested.panel.children[0].children[0].children[0].handlers.click[0]();
+assert.equal(nested.panel.hidden,true,"Second Back restores unchanged app/post");
+assert.equal(nested.getBackCount(),1,"History marker cleaned");
+let hardware=await simulate("/q/45/",twoPages);
+await frameClick(hardware,"/lernen/ikhlas/");
+hardware.win.history.back();
+assert.ok(hardware.frame.srcdoc.includes("qsource-body"),"System Back from lesson restores Q");
+assert.equal(hardware.panel.hidden,false);
+hardware.win.history.back();
+assert.equal(hardware.panel.hidden,true,"Next system Back restores app");
+let blankInternal=await simulate("/q/45/",good);
+assert.equal((await frameClick(blankInternal,"/q/46/",{blank:true})).defaultPrevented,true,
+ "App-owned Q link stays internal even when marked _blank");
+let untouchedExternal=await simulate("/q/45/",good);
+assert.equal((await frameClick(untouchedExternal,"https://islamweb.net/ar/library/content/50/123/",{blank:true})).defaultPrevented,false,
+ "External original-source URLs keep their native behavior");
+assert.equal(untouchedExternal.fetches.length,1,"External original not fetched into reader");
+
 console.log('DAR in-app source navigation OK: source, learning, back, SPA/404 protection, external URLs, no reload.');
