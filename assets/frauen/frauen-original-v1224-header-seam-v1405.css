@@ -263,9 +263,9 @@ html[data-theme] body.is-frauen-route{overscroll-behavior-y:none!important}
  * once that real spacer is mounted; keep native OS safe area in the header.
  * Visitor, Test, Android, Fold, Kids and readers retain their other rules. */
 html.dar-ios-native-app.dar-adult-global-brand-ready
- body.dar-ios-native-app.has-bottom-nav.is-area-route.is-frauen-route:has(> .app > #darAdultBrandHeaderSpacerV2),
+ body.has-bottom-nav.is-area-route.is-frauen-route:has(> .app > #darAdultBrandHeaderSpacerV2),
 html.dar-ios-native-app.dar-test-premium-header-v2
- body.dar-ios-native-app.has-bottom-nav.is-area-route.is-frauen-route:has(> .app > #darTestBrandHeaderSpacerV1){
+ body.has-bottom-nav.is-area-route.is-frauen-route:has(> .app > #darTestBrandHeaderSpacerV1){
   padding-top:0!important;
   padding-block-start:0!important;
 }
