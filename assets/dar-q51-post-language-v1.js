@@ -6,7 +6,7 @@
 "use strict";
 if(w.__darQ51PostLanguageV1)return;w.__darQ51PostLanguageV1=true;
 var ID="qatadah-tawhid-schoepfer-anbetung-20261105-q51";
-var URI="/assets/q51-locales.json?v=20261105-nine-preview-v3";
+var URI="/assets/q51-locales.json?v=20261105-nine-preview-v4";
 var CODES=["de","ar","en","tr","ku","ckb","bs","fr","es"];
 var manifest=null,loaded=false,scheduled=false,forceRender=false;
 var originals=new WeakMap(),applied=new WeakMap();
