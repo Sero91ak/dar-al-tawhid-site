@@ -9,7 +9,10 @@ const publicJson = path.join(root, "quellen/shortlinks.json");
 const data = JSON.parse(fs.readFileSync(source, "utf8"));
 if (!Array.isArray(data.links)) throw Error("Quellenregister fehlt");
 const numbers = new Set();
-const links = data.links.filter(x => x.status !== "inactive").map(item => {
+// Public listing is a frozen legacy snapshot. New Q source cards are direct-link only;
+// the canonical internal register still includes every Q number for the owner.
+const PUBLIC_LEGACY_LIMIT = 50;
+const links = data.links.filter(x => x.status !== "inactive" && (x.publicListed === true || (Number(x.number) <= PUBLIC_LEGACY_LIMIT && x.publicListed !== false))).map(item => {
   const n = Number(item.number);
   if (!Number.isSafeInteger(n) || n < 1 || numbers.has(n)) throw Error("Doppelte/ungültige Q-Nummer: " + item.number);
   numbers.add(n);
@@ -29,7 +32,7 @@ if (!links.length) throw Error("Quellenliste leer; Veröffentlichung abgebrochen
 const output = JSON.stringify({
   version:1,
   generatedFrom:"q/_registry/shortlinks.json",
-  nextNumber:data.nextNumber,
+  nextNumber:Math.max(...links.map(item=>item.number))+1,
   links
 }, null, 2)+"\n";
 const snapshot = JSON.stringify({links}).replace(/</g,"\\u003c");
