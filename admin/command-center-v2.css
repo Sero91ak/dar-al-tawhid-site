@@ -1,0 +1,69 @@
+/* DĀR ADMIN / Command Center V2 / admin surface only */
+:root{--v2bg:#061410;--v2ink:#f5f1e5;--v2gold:#e6ca8b;--v2mint:#91d7bd;--v2muted:#a9b8b2;--v2line:rgba(205,202,156,.2);--v2rail:245px;--v2ease:cubic-bezier(.22,1,.36,1)}
+body.dar-v2-active{background:radial-gradient(ellipse at 70% -15%,rgba(52,130,112,.26),transparent 50%),#061410!important;color:var(--v2ink)!important;padding:0!important;margin:0!important;overflow-x:hidden!important}
+body.dar-v2-active .app{width:calc(100% - var(--v2rail))!important;max-width:none!important;min-width:0!important;margin:0 0 0 var(--v2rail)!important;padding:0!important;min-height:100dvh!important}
+body.dar-v2-active #topbar{position:sticky!important;top:0!important;z-index:70!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;padding:9px clamp(14px,2vw,32px)!important;margin:0!important;min-height:70px!important;border:0!important;border-bottom:1px solid var(--v2line)!important;background:rgba(6,22,17,.9)!important;backdrop-filter:blur(21px);border-radius:0!important;box-shadow:none!important}
+body.dar-v2-active #topbar .brand h1{color:var(--v2gold)!important}
+body.dar-v2-active #topbar .brand img{border-radius:10px!important;box-shadow:none!important}
+body.dar-v2-active #topbar .toolbar{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:6px!important;flex-wrap:wrap!important}
+body.dar-v2-active #topbar .toolbar .btn{min-height:37px!important;padding:7px 11px!important;border:1px solid var(--v2line)!important;border-radius:10px!important;color:var(--v2ink)!important;background:rgba(255,255,255,.035)!important;box-shadow:none!important}
+body.dar-v2-active #topbar .toolbar .dar-v2-search-launch{color:var(--v2gold)!important}
+body.dar-v2-active #panel{width:100%!important;max-width:none!important;min-width:0!important;margin:0!important;padding:clamp(16px,2.2vw,34px)!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+body.dar-v2-active #panel>.tab-picker{display:none!important}
+body.dar-v2-active #panel>.meta-line{font-size:11px!important;color:var(--v2muted)!important}
+body.dar-v2-active #panel .admin-cover{min-height:170px!important;margin:0 0 18px!important;padding:clamp(23px,3vw,43px)!important;border-radius:19px!important;border:1px solid var(--v2line)!important;background:radial-gradient(circle at 80% 15%,rgba(110,190,155,.13),transparent 32%),linear-gradient(130deg,#1b4134,#081e18)!important;box-shadow:0 16px 55px rgba(0,0,0,.18)!important}
+body.dar-v2-active #panel .admin-cover h2{font:normal clamp(31px,3.9vw,49px)/1.1 Georgia,serif!important;color:var(--v2gold)!important}
+body.dar-v2-active #panel .admin-cover p{color:var(--v2muted)!important}
+body.dar-v2-active :is(button,input,select,textarea):focus-visible{outline:2px solid var(--v2gold)!important;outline-offset:2px!important}
+.dar-v2-rail{position:fixed;top:0;bottom:0;left:0;z-index:105;width:var(--v2rail);display:flex;flex-direction:column;overflow:hidden;padding:17px 10px 13px;background:linear-gradient(180deg,#0d2921,#071912);border-right:1px solid var(--v2line);transition:transform .35s var(--v2ease)}
+.dar-v2-brand{display:flex;align-items:center;gap:11px;padding:0 7px 17px;border-bottom:1px solid var(--v2line)}
+.dar-v2-brand-logo{display:grid;place-items:center;width:40px;height:40px;flex:none;border-radius:12px;border:1px solid rgba(230,202,139,.5);color:var(--v2gold);font:600 23px Georgia,serif;background:#184135}
+.dar-v2-brand-words{display:grid;gap:5px}.dar-v2-brand-words strong{font:600 15px Georgia,serif;color:var(--v2gold);letter-spacing:.07em}.dar-v2-brand-words small{font-size:9px;letter-spacing:.13em;color:var(--v2muted)}
+.dar-v2-menu{flex:1;overflow:auto;min-height:0;padding:7px 1px;scrollbar-width:thin}.dar-v2-menu-group{display:grid;gap:2px;padding:4px 0 8px}
+.dar-v2-group-label{margin:10px 10px 5px;font-size:9px;letter-spacing:.17em;color:#8eaf9d}
+.dar-v2-nav{display:flex;width:100%;min-height:42px;align-items:center;gap:10px;padding:8px 11px;cursor:pointer;border:1px solid transparent;border-radius:11px;background:transparent;color:#c7d1c8;text-align:left;transition:background .25s,transform .25s var(--v2ease),border-color .25s}
+.dar-v2-nav-icon{display:grid;place-items:center;flex:none;width:23px;height:23px;font-size:19px;color:var(--v2mint)}
+.dar-v2-nav-label{min-width:0;font-size:12px;overflow-wrap:anywhere}
+.dar-v2-nav:hover{transform:translateX(2px);background:rgba(145,215,189,.085)}.dar-v2-nav.is-active{color:#f4ffee;border-color:rgba(140,219,175,.23);background:linear-gradient(110deg,rgba(105,189,158,.2),rgba(217,198,135,.05))}.dar-v2-nav.is-active .dar-v2-nav-icon{color:var(--v2gold)}
+.dar-v2-rail-foot{padding:13px 10px 3px;border-top:1px solid var(--v2line);font-size:9px;letter-spacing:.11em;color:var(--v2muted)}
+.dar-v2-scrim,.dar-v2-bottom{display:none}
+.dar-v2-overlay[hidden]{display:none!important}
+.dar-v2-overlay{position:fixed;inset:0;z-index:130;display:flex;align-items:flex-start;justify-content:center;padding:clamp(18px,10vh,105px) 15px;background:rgba(1,14,9,.76);backdrop-filter:blur(8px);animation:v2fade .2s}
+.dar-v2-search-box{width:min(560px,100%);max-height:78dvh;display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(230,202,139,.55);border-radius:18px;background:#112920;box-shadow:0 30px 90px rgba(0,0,0,.55);color:var(--v2ink)}
+.dar-v2-search-head{display:flex;align-items:center;gap:9px;padding:14px;border-bottom:1px solid var(--v2line)}
+.dar-v2-search-input{flex:1;min-width:0;padding:10px 7px!important;color:var(--v2ink)!important;background:transparent!important;border:0!important;outline:0!important;font-size:15px!important}
+.dar-v2-search-close{background:transparent;border:1px solid var(--v2line);border-radius:9px;padding:8px;color:var(--v2muted)}
+.dar-v2-search-results{display:grid;gap:2px;padding:12px;overflow:auto}.dar-v2-search-hint{margin:0;padding:12px 15px;color:var(--v2muted);font-size:11px;border-top:1px solid var(--v2line)}
+.dar-v2-overview{margin:0 0 20px;animation:v2rise .33s var(--v2ease) both}
+.dar-v2-overview-heading{display:flex;align-items:baseline;gap:11px;margin:4px 0 12px}.dar-v2-overview-heading h2{font:normal clamp(20px,2.2vw,28px) Georgia,serif;color:var(--v2ink);margin:0}.dar-v2-eyebrow{font-size:9px;letter-spacing:.12em;color:var(--v2mint)}
+.dar-v2-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.dar-v2-kpi,.dar-v2-widget{min-width:0;border:1px solid var(--v2line);border-radius:17px;background:linear-gradient(145deg,rgba(32,68,53,.79),rgba(10,33,26,.89));box-shadow:inset 0 1px rgba(255,255,255,.04),0 13px 35px rgba(0,0,0,.09)}
+.dar-v2-kpi{display:flex;flex-direction:column;min-height:139px;padding:17px;transition:transform .25s var(--v2ease),border-color .25s}.dar-v2-kpi:hover{transform:translateY(-3px);border-color:rgba(230,202,139,.49)}
+.dar-v2-kpi-icon{align-self:flex-end;color:var(--v2mint);height:16px;font-size:20px}.dar-v2-kpi-title{font-size:11px;color:var(--v2muted)}.dar-v2-kpi-value{font-size:clamp(22px,2.6vw,33px);font-weight:650;letter-spacing:-.035em;line-height:1.2;margin:12px 0 4px;color:var(--v2ink)}.dar-v2-kpi-detail{font-size:10px;color:var(--v2muted)}
+.dar-v2-overview-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(255px,1fr);gap:12px;margin-top:12px}
+.dar-v2-widget{padding:18px}.dar-v2-widget h3{margin:0 0 4px;font-size:15px;color:var(--v2ink)}.dar-v2-caption{margin:0 0 16px;font-size:11px;color:var(--v2muted)}
+.dar-v2-chart-list{display:grid;gap:14px}.dar-v2-chart-item{min-width:0;display:grid;gap:6px}.dar-v2-chart-label{display:flex;justify-content:space-between;gap:10px;font-size:11px}.dar-v2-chart-label span{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.dar-v2-chart-label strong{color:var(--v2gold)}.dar-v2-chart-track{height:8px;overflow:hidden;border-radius:9px;background:rgba(255,255,255,.08)}.dar-v2-chart-bar{height:100%;border-radius:9px;background:linear-gradient(90deg,#357e6d,#a2e6c8);transform-origin:left;animation:v2grow .65s var(--v2ease) both}
+.dar-v2-steps{display:grid}.dar-v2-step{display:flex;align-items:center;gap:11px;width:100%;min-height:44px;text-align:left;border:0;border-bottom:1px solid var(--v2line);background:transparent;color:var(--v2ink);padding:8px 2px;cursor:pointer;font-size:12px}.dar-v2-step:last-child{border:0}.dar-v2-step:hover{color:var(--v2gold)}.dar-v2-step-num{display:grid;place-items:center;width:29px;height:29px;flex:none;border:1px solid var(--v2line);border-radius:8px;color:var(--v2gold);font-size:10px}.dar-v2-step-arrow{margin-left:auto;color:var(--v2muted)}.dar-v2-empty{font-size:12px;color:var(--v2muted)}
+body.dar-v2-active #panel .folder-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:11px!important;border:0!important;margin:10px 0 19px!important}
+body.dar-v2-active #panel .folder-card{display:flex!important;align-items:flex-start!important;flex-direction:column!important;min-width:0!important;min-height:120px!important;border:1px solid var(--v2line)!important;border-radius:15px!important;padding:17px!important;margin:0!important;background:linear-gradient(140deg,rgba(30,66,50,.76),rgba(9,30,24,.88))!important;box-shadow:none!important;text-align:left!important;transition:transform .25s var(--v2ease)!important}
+body.dar-v2-active #panel .folder-card:hover{transform:translateY(-3px)}body.dar-v2-active #panel .folder-card h3{color:var(--v2gold)!important}body.dar-v2-active #panel .folder-card p,body.dar-v2-active #panel .folder-card small{color:var(--v2muted)!important}
+body.dar-v2-active #panel .command-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:11px!important}body.dar-v2-active #panel .command-card{border:1px solid var(--v2line)!important;border-radius:14px!important;padding:16px!important;background:rgba(18,48,38,.76)!important;box-shadow:none!important}
+@keyframes v2fade{from{opacity:0}to{opacity:1}}@keyframes v2rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@keyframes v2grow{from{transform:scaleX(.04)}to{transform:scaleX(1)}}
+@media(min-width:720px) and (max-width:1199px){
+:root{--v2rail:75px}.dar-v2-rail{padding:16px 6px}.dar-v2-brand{justify-content:center;padding:0 0 15px}.dar-v2-brand-words,.dar-v2-group-label,.dar-v2-rail-foot,.dar-v2-rail .dar-v2-nav-label{display:none!important}.dar-v2-nav{justify-content:center;padding:8px}.dar-v2-menu-group{padding:8px 0;border-bottom:1px solid var(--v2line)}
+}
+@media(max-width:1000px){.dar-v2-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.dar-v2-overview-grid{grid-template-columns:1fr}body.dar-v2-active #panel .folder-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:719px){
+:root{--v2rail:0px}
+body.dar-v2-active .app{width:100%!important;margin:0!important;padding-bottom:calc(70px + env(safe-area-inset-bottom,0px))!important}
+body.dar-v2-active #topbar{min-height:58px!important;padding:7px 11px!important;gap:5px!important}body.dar-v2-active #topbar .brand img{width:32px!important;height:32px!important;flex:0 0 32px!important}body.dar-v2-active #topbar .brand h1{font-size:15px!important}body.dar-v2-active #topbar .brand p{display:none!important}body.dar-v2-active #topbar .toolbar{gap:4px!important;flex-wrap:nowrap!important}body.dar-v2-active #topbar .toolbar .btn{min-height:34px!important;padding:6px 8px!important;font-size:11px!important}
+body.dar-v2-active #panel{padding:14px 12px!important}body.dar-v2-active #panel .admin-cover{padding:18px!important;min-height:140px!important;border-radius:15px!important}body.dar-v2-active #panel .admin-cover h2{font-size:31px!important}
+.dar-v2-rail{width:min(320px,88vw);transform:translateX(-110%);z-index:125;box-shadow:15px 0 40px rgba(0,0,0,.3)}body.dar-v2-drawer-open .dar-v2-rail{transform:translateX(0)}
+.dar-v2-scrim{position:fixed;inset:0;z-index:120;background:rgba(0,12,9,.7);border:0}body.dar-v2-drawer-open .dar-v2-scrim{display:block}
+.dar-v2-bottom{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;bottom:0;left:0;right:0;z-index:100;height:calc(64px + env(safe-area-inset-bottom,0px));padding:5px 5px max(5px,env(safe-area-inset-bottom,0px));background:rgba(8,30,24,.97);border-top:1px solid var(--v2line);backdrop-filter:blur(19px)}
+.dar-v2-bottom .dar-v2-tab{display:grid;align-content:center;justify-items:center;gap:2px;min-height:48px;padding:4px 1px;text-align:center}.dar-v2-bottom .dar-v2-nav-label{font-size:9px;line-height:1.1}.dar-v2-bottom .dar-v2-nav-icon{font-size:20px}.dar-v2-bottom .dar-v2-tab:hover{transform:none}
+.dar-v2-kpis{gap:8px}.dar-v2-kpi{min-height:115px;border-radius:13px;padding:12px}.dar-v2-kpi-value{font-size:25px;margin-top:8px}.dar-v2-overview-grid{gap:9px}.dar-v2-widget{padding:15px}
+body.dar-v2-active #panel .folder-grid{grid-template-columns:1fr!important;gap:8px!important}body.dar-v2-active #panel .command-grid{grid-template-columns:1fr!important}
+}
+@media(max-width:360px){body.dar-v2-active #topbar .toolbar .btn:not(.dar-v2-search-launch):not(#logoutBtn){display:none!important}.dar-v2-overview-heading{display:grid;gap:4px}}
+@media(prefers-reduced-motion:reduce){.dar-v2-rail,.dar-v2-nav,.dar-v2-kpi,.dar-v2-chart-bar,.dar-v2-overview,.dar-v2-overlay,body.dar-v2-active #panel .folder-card{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
