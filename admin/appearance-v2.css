@@ -1,0 +1,182 @@
+/* DĀR Admin V2 · canonical two-appearance tokens.
+ * Source palettes: assets/theme-salbei-elfenbein.css and assets/q-source-dar-al-layl.css.
+ * Presentation-only: this file neither changes editing nor public surfaces. */
+html[data-dar-admin-theme="layl"]{
+ color-scheme:dark;
+ --bg:#0c0e0d;--panel:#111815;--panel2:#19231e;--card:#17231d;
+ --ink:#f6f0e4;--soft:#e0d3bd;--muted:#aeb8ad;
+ --gold:#e0c994;--gold2:#eedcb6;--bronze:#b89654;--green:#98cbb0;--blue:#a9c8b9;
+ --line:rgba(184,150,84,.34);--line2:rgba(184,150,84,.19);
+ --shadow:0 18px 46px rgba(0,0,0,.29);
+ --v2bg:#0c0e0d;--v2ink:#f6f0e4;--v2gold:#e0c994;--v2mint:#a0d3b7;
+ --v2muted:#afbcb0;--v2line:rgba(184,150,84,.25);
+ --admin-page-background:radial-gradient(ellipse at 76% -12%,rgba(82,118,86,.15),transparent 44%),linear-gradient(180deg,#121713,#0c0e0d 60%);
+ --admin-topbar-background:rgba(16,23,18,.93);
+ --admin-rail-background:linear-gradient(180deg,#18241c,#0d1310);
+ --admin-cover-background:radial-gradient(circle at 80% 12%,rgba(213,187,121,.10),transparent 31%),linear-gradient(130deg,#24372c,#111b16);
+ --admin-panel-background:linear-gradient(145deg,#202e25,#141f19);
+ --admin-elevated-background:#1b291f;
+ --admin-input-background:#131d18;
+ --admin-control-background:rgba(224,201,148,.08);
+ --admin-hover-background:rgba(224,201,148,.10);
+ --admin-active-background:linear-gradient(110deg,rgba(224,201,148,.19),rgba(116,167,130,.08));
+ --admin-bar-track:rgba(255,255,255,.09);
+ --admin-chart-gradient:linear-gradient(90deg,#668f75,#d8c38a);
+ --admin-dimmer:rgba(5,10,6,.74);
+ --admin-shadow:0 16px 40px rgba(0,0,0,.24);
+ --admin-strong:#f6f0e4;
+}
+html[data-dar-admin-theme="salbei"]{
+ color-scheme:light;
+ --bg:#f4f6f0;--panel:#f9faf6;--panel2:#eef2eb;--card:#ffffff;
+ --ink:#17211b;--soft:#475a4c;--muted:#536057;
+ --gold:#8a6a2f;--gold2:#3f5d4b;--bronze:#8b7648;--green:#3f5d4b;--blue:#476658;
+ --line:rgba(94,116,101,.24);--line2:rgba(94,116,101,.17);
+ --shadow:0 13px 35px rgba(31,49,39,.09);
+ --v2bg:#f4f6f0;--v2ink:#17211b;--v2gold:#7d5d2b;--v2mint:#3f5d4b;
+ --v2muted:#536057;--v2line:rgba(94,116,101,.23);
+ --admin-page-background:radial-gradient(ellipse at 75% -10%,rgba(94,116,101,.10),transparent 45%),linear-gradient(180deg,#f8f9f5,#f4f6f0 60%,#eef2eb);
+ --admin-topbar-background:rgba(249,250,246,.96);
+ --admin-rail-background:linear-gradient(180deg,#f9faf6,#edf2e9);
+ --admin-cover-background:radial-gradient(circle at 79% 10%,rgba(176,141,79,.10),transparent 38%),linear-gradient(130deg,#ffffff,#e8ede4);
+ --admin-panel-background:linear-gradient(145deg,#ffffff,#f4f7f1);
+ --admin-elevated-background:#ffffff;
+ --admin-input-background:#ffffff;
+ --admin-control-background:rgba(94,116,101,.06);
+ --admin-hover-background:rgba(63,93,75,.08);
+ --admin-active-background:linear-gradient(110deg,rgba(94,116,101,.16),rgba(176,141,79,.07));
+ --admin-bar-track:rgba(63,93,75,.13);
+ --admin-chart-gradient:linear-gradient(90deg,#3f5d4b,#9eaa70);
+ --admin-dimmer:rgba(23,33,27,.39);
+ --admin-shadow:0 12px 34px rgba(31,49,39,.10);
+ --admin-strong:#17211b;
+}
+html[data-dar-admin-theme]{
+ background:var(--v2bg)!important;
+ accent-color:var(--v2mint);
+}
+html[data-dar-admin-theme] body.dar-v2-active{background:var(--admin-page-background)!important;color:var(--v2ink)!important}
+html[data-dar-admin-theme] body.dar-v2-active #topbar,
+html[data-dar-admin-theme] body.dar-v2-active .dar-v2-bottom{
+ background:var(--admin-topbar-background)!important;border-color:var(--v2line)!important
+}
+html[data-dar-admin-theme] body.dar-v2-active .dar-v2-rail{
+ background:var(--admin-rail-background)!important;border-color:var(--v2line)!important;color:var(--v2ink)
+}
+html[data-dar-admin-theme] .dar-v2-brand-logo{display:block;object-fit:contain;background:transparent!important;border:0!important;box-shadow:none!important}
+html[data-dar-admin-theme] .dar-v2-brand-words strong{color:var(--v2gold)!important}
+html[data-dar-admin-theme] .dar-v2-group-label,
+html[data-dar-admin-theme] .dar-v2-rail-foot{color:var(--v2muted)!important}
+html[data-dar-admin-theme] .dar-v2-nav{color:var(--v2ink)!important}
+html[data-dar-admin-theme] .dar-v2-nav:hover{background:var(--admin-hover-background)!important}
+html[data-dar-admin-theme] .dar-v2-nav.is-active{color:var(--v2ink)!important;background:var(--admin-active-background)!important;border-color:var(--v2line)!important}
+html[data-dar-admin-theme] .dar-v2-nav-icon{color:var(--v2mint)!important}
+html[data-dar-admin-theme] .dar-v2-nav.is-active .dar-v2-nav-icon{color:var(--v2gold)!important}
+html[data-dar-admin-theme] .dar-v2-scrim,
+html[data-dar-admin-theme] .dar-v2-overlay{background:var(--admin-dimmer)!important}
+html[data-dar-admin-theme] .dar-v2-search-box,
+html[data-dar-admin-theme] .dar-v2-search-head,
+html[data-dar-admin-theme] .dar-v2-search-results{background:var(--admin-elevated-background)!important;color:var(--v2ink)!important}
+html[data-dar-admin-theme] .dar-v2-search-input,
+html[data-dar-admin-theme] .dar-v2-search-close{color:var(--v2ink)!important}
+html[data-dar-admin-theme] body.dar-v2-active #panel .admin-cover{background:var(--admin-cover-background)!important;color:var(--v2ink)!important;border-color:var(--v2line)!important;box-shadow:var(--admin-shadow)!important}
+html[data-dar-admin-theme] body.dar-v2-active #panel .admin-cover h2{color:var(--v2gold)!important;-webkit-text-fill-color:var(--v2gold)!important}
+html[data-dar-admin-theme] body.dar-v2-active #panel .admin-cover p{color:var(--v2muted)!important}
+html[data-dar-admin-theme] .dar-v2-kpi,
+html[data-dar-admin-theme] .dar-v2-widget{background:var(--admin-panel-background)!important;border-color:var(--v2line)!important;color:var(--v2ink)!important;box-shadow:var(--admin-shadow)!important}
+html[data-dar-admin-theme] .dar-v2-chart-track{background:var(--admin-bar-track)!important}
+html[data-dar-admin-theme] .dar-v2-chart-bar{background:var(--admin-chart-gradient)!important}
+html[data-dar-admin-theme] .dar-v2-chart-label span,
+html[data-dar-admin-theme] .dar-v2-step{color:var(--v2ink)!important}
+html[data-dar-admin-theme] body.dar-v2-active #panel :is(.folder-card,.command-card){
+ background:var(--admin-panel-background)!important;border-color:var(--v2line)!important;color:var(--v2ink)!important
+}
+/* Shared editor/control surfaces. Existing modules keep their own geometry. */
+html[data-dar-admin-theme] body.dar-v2-active #panel :is(.panel,.card,.stat,.stats-card,.summary-card,.preview-box,.quick,.status-row,.upload-status,.admin-action-card,.admin-action-body,.tab-order-item,.folder-card,.command-card,.visitor-hero,.news-panel,.lib-admin-head,.lib-admin-drop){
+ color:var(--v2ink);border-color:var(--v2line)!important
+}
+html[data-dar-admin-theme] body.dar-v2-active #panel :is(.panel,.card,.stat,.stats-card,.summary-card,.preview-box,.quick,.status-row,.upload-status,.admin-action-card,.admin-action-body,.tab-order-item,.visitor-hero,.news-panel){
+ background:var(--admin-panel-background)!important;box-shadow:none!important
+}
+html[data-dar-admin-theme] body.dar-v2-active #panel :is(.field,input:not([type=checkbox]):not([type=radio]):not([type=file]),textarea,select,.paste-area){
+ background:var(--admin-input-background)!important;color:var(--v2ink)!important;border-color:var(--v2line)!important
+}
+html[data-dar-admin-theme] body.dar-v2-active #panel :is(.btn,.chip,.quick,.tab,.status-pill){
+ color:var(--v2ink)!important;border-color:var(--v2line)!important
+}
+html[data-dar-admin-theme] body.dar-v2-active :is(.btn,.chip,.quick,.tab):not(:disabled){background:var(--admin-control-background)!important}
+html[data-dar-admin-theme] body.dar-v2-active #panel :is(h1,h2,h3,h4,b,strong,.section-head h3,.admin-cover h2){color:var(--admin-strong)}
+html[data-dar-admin-theme] body.dar-v2-active #panel :is(.section-head span,.empty,.visitor-lead,.notice-note,.meta-line,.hint,.change-item span,.status-row small,.lib-admin-head p){color:var(--v2muted)!important}
+html[data-dar-admin-theme] body.dar-v2-active #panel a{color:var(--v2gold)}
+html[data-dar-admin-theme] body.dar-v2-active #panel :is(input,textarea,select)::placeholder{color:var(--v2muted);opacity:.85}
+/* Library and editorial workspaces use the same appearance but keep their layout. */
+html[data-dar-admin-theme] body.dar-v2-active #panel :is(.lib-admin-drop,.lib-admin-item,.lib-admin-row,.live-edit-head,.live-edit-stage){
+ background:var(--admin-panel-background)!important;color:var(--v2ink)!important;border-color:var(--v2line)!important
+}
+html[data-dar-admin-theme] body.dar-v2-active .social-review,
+html[data-dar-admin-theme] body.dar-v2-active :is(.social-editor,.social-preview){
+ background:var(--admin-panel-background)!important;color:var(--v2ink)!important;border-color:var(--v2line)!important
+}
+html[data-dar-admin-theme] body.dar-v2-active .social-review :is(.social-header h2,.social-kicker,.social-editor h3,.social-preview-top,.social-preview label,.social-meta label,.social-q,.social-review-state,.social-check,.social-count){
+ color:var(--v2ink)!important
+}
+html[data-dar-admin-theme] body.dar-v2-active .social-review :is(.social-small,.social-header p,.social-editor>p){color:var(--v2muted)!important}
+html[data-dar-admin-theme] body.dar-v2-active .social-review :is(.field,.social-lang,.social-editor textarea){
+ color:var(--v2ink)!important;background:var(--admin-input-background)!important;border-color:var(--v2line)!important
+}
+html[data-dar-admin-theme] body.dar-v2-active .social-review .social-lang.active{
+ background:var(--admin-active-background)!important;color:var(--v2gold)!important;border-color:var(--v2gold)!important
+}
+html[data-dar-admin-theme] body.dar-v2-active .social-review .social-paper{
+ color:#243327!important;background:#f9f5e7!important
+}
+/* The editorial immersive shell's dark-only CSS must not override light theme. */
+html[data-dar-admin-theme] body.dar-v2-active:has(.admin-editorial-host) :is(.topbar,#panel,.admin-editorial-host,.admin-editorial-hostbar,.tab-picker){
+ background:var(--admin-panel-background)!important;color:var(--v2ink)!important;border-color:var(--v2line)!important
+}
+html[data-dar-admin-theme] body.dar-v2-active:has(.admin-editorial-host) .tab-select{color:var(--v2ink)!important}
+html[data-dar-admin-theme] body.dar-v2-active #topbar .brand h1{color:var(--v2gold)!important;-webkit-text-fill-color:var(--v2gold)!important}
+/* Login theme, gated outside the dashboard. */
+html[data-dar-admin-theme] body:not(.dar-v2-active){
+ background:var(--admin-page-background)!important;color:var(--v2ink)!important
+}
+html[data-dar-admin-theme] body:not(.dar-v2-active) .login{
+ background:var(--admin-panel-background)!important;color:var(--v2ink)!important;
+ border:1px solid var(--v2line)!important;border-radius:19px!important;padding:23px!important
+}
+html[data-dar-admin-theme] body:not(.dar-v2-active) .login :is(p,.hint){color:var(--v2muted)!important}
+html[data-dar-admin-theme] body:not(.dar-v2-active) .login h2{color:var(--v2gold)!important;-webkit-text-fill-color:var(--v2gold)!important}
+html[data-dar-admin-theme] body:not(.dar-v2-active) .login input{
+ color:var(--v2ink)!important;background:var(--admin-input-background)!important;border-color:var(--v2line)!important
+}
+/* Accessible appearance controls: one header switch, explicit two-choice settings panel. */
+.dar-admin-appearance-toggle{
+ display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:7px 12px;
+ border:1px solid var(--v2line);border-radius:11px;background:var(--admin-control-background);
+ color:var(--v2ink);font-size:12px;font-weight:700;white-space:nowrap;cursor:pointer
+}
+.dar-admin-appearance-toggle:hover,.dar-admin-theme-choice:hover{background:var(--admin-hover-background)}
+.dar-admin-appearance-toggle .theme-icon{font-size:18px;color:var(--v2gold)}
+.dar-admin-appearance-settings{display:grid;gap:12px;padding:16px;margin:14px 0;border-radius:16px;border:1px solid var(--v2line);background:var(--admin-panel-background);color:var(--v2ink)}
+.dar-admin-appearance-settings h3{margin:0;font:600 18px Georgia,serif;color:var(--v2ink)}
+.dar-admin-appearance-settings p{margin:0;font-size:12px;color:var(--v2muted)}
+.dar-admin-theme-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.dar-admin-theme-choice{display:flex;align-items:center;gap:11px;min-height:67px;padding:10px;border:1px solid var(--v2line);border-radius:12px;background:var(--admin-control-background);color:var(--v2ink);text-align:left;cursor:pointer}
+.dar-admin-theme-choice[aria-pressed="true"]{border-color:var(--v2gold);box-shadow:inset 0 0 0 1px var(--v2gold)}
+.dar-admin-theme-swatch{flex:none;width:31px;height:31px;border-radius:9px;border:1px solid rgba(110,100,65,.18)}
+.dar-admin-theme-swatch.layl{background:linear-gradient(145deg,#0c0e0d,#24372c 65%,#e0c994)}
+.dar-admin-theme-swatch.salbei{background:linear-gradient(145deg,#f8f9f5,#e8ede4 65%,#8a6a2f)}
+.dar-admin-theme-choice strong{display:block;font-size:12px;color:var(--v2ink)!important}
+.dar-admin-theme-choice small{display:block;font-size:10px;color:var(--v2muted)}
+.dar-admin-appearance-login{margin:13px auto 0;display:flex}
+@media(max-width:719px){
+ body.dar-v2-active #topbar .toolbar .dar-admin-appearance-toggle{
+  width:35px!important;min-width:35px!important;padding:4px!important;font-size:0!important
+ }
+ body.dar-v2-active #topbar .toolbar .dar-admin-appearance-toggle .theme-icon{font-size:22px!important}
+ .dar-admin-theme-choices{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-dar-admin-theme] .dar-admin-appearance-toggle,
+ html[data-dar-admin-theme] .dar-admin-theme-choice{transition:none!important;animation:none!important}
+}

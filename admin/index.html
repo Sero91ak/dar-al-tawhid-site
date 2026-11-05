@@ -12,7 +12,8 @@
 <link rel="manifest" href="/admin/manifest.json">
 <meta name="application-name" content="DAR Admin">
 <meta name="apple-mobile-web-app-title" content="DAR Admin">
-<meta name="theme-color" content="#07111d">
+<meta name="theme-color" content="#0c0e0d">
+<script>(function(){try{var p=localStorage.getItem("darAdminAppearanceV2");document.documentElement.dataset.darAdminTheme=p==="salbei"?"salbei":"layl"}catch(_){document.documentElement.dataset.darAdminTheme="layl"}})();</script>
 <meta name="description" content="DAR Admin Command Center fuer Inhalte, News und Statistik.">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -701,8 +702,10 @@ main#panel.panel{
 <link rel="stylesheet" href="/admin/live-edit.css?v=1">
 <link rel="stylesheet" href="/admin/social-review.css?v=5">
 <link rel="stylesheet" href="/admin/dar-admin-top-chrome-fix.css?v=4">
-<link rel="stylesheet" href="/admin/command-layout-v1.css?v=5">
-<script src="/admin/command-layout-v1.js?v=5" defer></script><!-- DAR_ADMIN_TOP_CHROME_FIX -->
+<link rel="stylesheet" href="/admin/command-center-v2.css?v=1">
+<link rel="stylesheet" href="/admin/appearance-v2.css?v=1">
+<script src="/admin/command-center-v2.js?v=1" defer></script>
+<script src="/admin/appearance-v2.js?v=1" defer></script><!-- DAR_ADMIN_TOP_CHROME_FIX -->
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
