@@ -217,7 +217,8 @@
   window.addEventListener("popstate",function(ev){
     if(!sourcePanel||sourcePanel.hidden||(ev.state&&ev.state.__darInternalSourceV3))return;
     if(sourceRouteStack.length){
-      // A system/browser Back from learning returns to the preceding source.
+      // Nested browser Back belongs to this reader, not the background app router.
+      if(typeof ev.stopImmediatePropagation==="function")ev.stopImmediatePropagation();
       var previous=sourceRouteStack.pop();
       openInternalSource(previous.target,previous.html,true,previous.scrollY);
       try{
@@ -226,7 +227,7 @@
         sourcePanelHistory=true;
       }catch(_){}
     }else closeInternalSource(true);
-  });
+  },true);
   document.addEventListener("keydown",function(ev){
     if(ev.key==="Escape"&&sourcePanel&&!sourcePanel.hidden){ev.preventDefault();backInternalSource();}
   });
