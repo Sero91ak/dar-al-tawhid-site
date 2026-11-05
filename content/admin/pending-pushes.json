@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-11-05T09:49:54.283Z",
+  "generated": "2026-11-05T09:50:15.518Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1591,8 +1591,50 @@
       "createdAt": "2026-11-05T09:49:54.004Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-11-05T09:49:54.004Z",
-      "lastError": "Push wartet auf Live-Verfügbarkeit",
-      "updatedAt": "2026-11-05T09:49:54.283Z"
+      "lastError": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
+      "updatedAt": "2026-11-05T09:50:15.518Z",
+      "lastCheckAt": "2026-11-05T09:50:15.330Z",
+      "liveCheck": {
+        "ok": false,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": false,
+          "postFilePublic": false,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": false,
+          "githubIndexHasPost": true,
+          "githubPostExists": true
+        },
+        "diagnosis": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
+        "indexOk": false,
+        "postOk": false,
+        "visitorUrlOk": true,
+        "attempts": 3,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "indexGenerated": "2026-10-31T20:29:00.000Z",
+        "indexCount": 482,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=dieses-wissen-ist-religion-isnad-20261104-q50-483&v=1793872204557#post/dieses-wissen-ist-religion-isnad-20261104-q50-483",
+        "githubIndexHasPost": true,
+        "githubPostExists": true,
+        "needsIndexRepair": false,
+        "needsDeployWait": true,
+        "repair": {
+          "repaired": true,
+          "action": "index-touch",
+          "at": "2026-11-05T09:50:06.266Z",
+          "reason": "Index aktualisiert (Deploy/Cache)"
+        }
+      },
+      "attempts": 3,
+      "lastRepair": {
+        "repaired": true,
+        "action": "index-touch",
+        "at": "2026-11-05T09:50:06.266Z",
+        "reason": "Index aktualisiert (Deploy/Cache)"
+      }
     }
   }
 }
