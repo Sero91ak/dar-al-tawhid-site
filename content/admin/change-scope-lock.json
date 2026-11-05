@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "q51-nine-languages-regression-test-20261105",
+      "at": "2026-11-05T19:24:00.000Z",
+      "approvedBy": "user-explicit-20261105-q51-full-language-source-and-lesson-fix",
+      "reason": "Narrow release authorization for the exact read-only Q51 nine-language regression test added while fixing the user's reported Q51 source/lesson language-switching failure. No worker secrets, Kids, prayer, Qibla, security scripts, OneSignal or unrelated script scope.",
+      "paths": [
+        "scripts/check-q51-nine-language.cjs"
+      ],
+      "expiresAt": "2026-11-12T23:59:00.000Z"
+    },
+    {
       "id": "q50-source-library-browser-test-only-20261105",
       "at": "2026-11-05T09:41:24.737Z",
       "approvedBy": "user-explicit-20261105-push-live-dar-admin",
