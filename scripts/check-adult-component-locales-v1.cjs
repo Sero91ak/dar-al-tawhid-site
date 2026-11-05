@@ -128,4 +128,5 @@ assert.equal(lockRoot.style.getPropertyValue("overflow"),"auto","Original root o
 assert.equal(body.style.getPropertyValue("position"),"relative","Original body position not restored");
 assert.equal(lockRoot.style.getPropertyPriority("overflow"),"important","Original overflow priority not restored");
 
+require("./check-q50-nine-language.cjs");
 console.log("ADULT_UI_NINE_LOCALES_AND_POPUP OK: 9 languages, native dialog, direct touch actions, WKWebView lock, theme, localized titles and executed interaction tests.");
