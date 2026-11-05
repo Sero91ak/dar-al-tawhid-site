@@ -27,7 +27,7 @@ assert.match(source,/id="q51TabariAttribution"/);
 assert.match(source,/class="qsource-learning"/);
 assert.equal((source.match(/class="qsource-link web"/g)||[]).length,4);
 assert.match(quiz,/id="qlLanguage"/);
-assert.match(quiz,/id="qlSourceBack"/);
+assert.doesNotMatch(quiz,/<a\b[^>]*href="\/q\/51\//,"Q47+ quiz must contain no direct Q-source anchor");
 assert.match(router,/darQ51PostLanguageV1/);
 assert.match(router,/dar-q51-post-language-v1\.js\?v=20261105-nine-preview-v3/);
 assert.match(adapter,/return chosen\}/);
