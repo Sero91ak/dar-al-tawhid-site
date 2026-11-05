@@ -20,7 +20,7 @@ function explicit(){
  return norm(p.get("lang")||p.get("locale"));
 }
 function lang(){return manual||explicit()||getStored()||"de"}
-function mark(code){document.documentElement.lang=code;document.documentElement.dir=code==="ar"||code==="ckb"?"rtl":"ltr";document.body.classList.toggle("q51-rtl",code==="ar"||code==="ckb");}
+function mark(code){var rtl=code==="ar"||code==="ckb",dir=rtl?"rtl":"ltr";document.documentElement.lang=code;document.documentElement.dir=dir;var pane=source||quizPage;if(pane){pane.lang=code;pane.dir=dir}document.body.classList.toggle("q51-rtl",rtl);}
 function locale(){var code=lang();return cached&&cached.locales[code]?code:"de"}
 function active(){if(!cached)return null;var chosen=cached.locales[locale()];if(!chosen)return cached.locales.de;return chosen}
 function link(route){
