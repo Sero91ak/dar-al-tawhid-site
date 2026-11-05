@@ -28,8 +28,12 @@ permissions:
   contents: write
   issues: write
 
+# Canonical catalog rebuilding has its own serialization lane. It does NOT deploy
+# the Cloudflare Worker. Only the production-owner workflow holds the worker lock.
+# Sharing the production lock used to replace a pending source-sync run with a
+# newer deploy and leave the tvOS screensaver index behind the main catalog.
 concurrency:
-  group: dar-al-tawhid-production-worker-deploy
+  group: dar-al-tawhid-canonical-content-sync
   cancel-in-progress: false
 
 jobs:
