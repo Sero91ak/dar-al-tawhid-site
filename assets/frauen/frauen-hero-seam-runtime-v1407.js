@@ -32,8 +32,8 @@ function reconcile(){
   if(observedHeader!==header){if(observedHeader)resizeObserver.unobserve(observedHeader);resizeObserver.observe(header);observedHeader=header;}
   if(observedHero!==hero){if(observedHero)resizeObserver.unobserve(observedHero);resizeObserver.observe(hero);observedHero=hero;}
  }
- /* Never change geometry while the user is midway through content. */
- if(top()>1)return;
+ /* Always restore the structural stage, even when a previous route retained
+    scroll position; only margin reconciliation is restricted to scroll top. */
  var stage=shell.querySelector(":scope > .dar-immersive-hero-stage");
  /* The historical adult adapter was no longer loaded by the visitor/Test
     HTML shells. Build the SAME one-stage wrapper here, once, preserving the
@@ -50,6 +50,8 @@ function reconcile(){
    if(search)stage.appendChild(search);
   }
  }
+ /* Do not adjust the flow offset during an active reading scroll. */
+ if(top()>1)return;
  var surface=stage||hero;
  var gap=surface.getBoundingClientRect().top-headerBottom;
  if(!Number.isFinite(gap)||gap<=1)return;
