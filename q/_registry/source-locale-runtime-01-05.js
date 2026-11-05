@@ -39,7 +39,7 @@
     speaker:find(".qsource-meta-row:nth-child(1) .qsource-meta-value")?.textContent||"",
     topic:find(".qsource-meta-row:nth-child(2) .qsource-meta-value")?.textContent||"",
     section:find(".qsource-section-title")?.textContent||"",
-    note:find(".qsource-section p")?.textContent||"",
+    note:find(".qsource-section p:not(.qsource-arabic)")?.textContent||"",
     linkTitles:Array.from(root.querySelectorAll(".qsource-link-title"),function(e){return e.textContent}),
     linkSubs:Array.from(root.querySelectorAll(".qsource-link-sub"),function(e){return e.textContent})
   };
@@ -68,7 +68,7 @@
     set(".qsource-meta-row:nth-child(1) .qsource-meta-value",data?data.speaker:original.speaker);
     set(".qsource-meta-row:nth-child(2) .qsource-meta-value",data?data.topic:original.topic);
     set(".qsource-section-title",data?data.section:original.section);
-    set(".qsource-section p",data?data.note:original.note);
+    set(".qsource-section p:not(.qsource-arabic)",data?data.note:original.note);
     var labels=root.querySelectorAll(".qsource-meta-label"),labelKeys=["speaker","topic","sources"];
     Array.from(labels).forEach(function(el,i){
       if(labelKeys[i])el.textContent=phrase(authorized?code:"de",labelKeys[i]);
