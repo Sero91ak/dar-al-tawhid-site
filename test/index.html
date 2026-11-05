@@ -38996,3 +38996,12 @@ html[data-theme] body:not(.is-home-route) > .app > footer.footer {
 <link rel="stylesheet" id="darTestDuoResponsiveCSSV1" href="/test/assets/dar-duo-responsive-v1.css?v=20261025-1">
 <script defer id="darTestDuoResponsiveJSV1" src="/test/assets/dar-duo-responsive-v1.js?v=20261025-1"></script>
 </html>
+
+<style id="DAR_MOBILE_HOME_EDGE_TO_EDGE_V1">
+/* Mobile Home owns one physical surface: no desktop rail, no horizontal overflow. */
+@media (max-width:700px){
+  html body.is-home-route,html body.is-home-route > .app,html body.is-home-route .app,html body.is-home-route #appShell,html body.is-home-route #appView,html body.is-home-route #appView.view{width:100vw!important;max-width:100vw!important;min-width:0!important;margin-left:0!important;margin-right:0!important;box-sizing:border-box!important;overflow-x:hidden!important;}
+  html body.is-home-route #appView.view{padding-left:0!important;padding-right:0!important;transform:none!important;}
+  html body.is-home-route .home-v380-shell,html body.is-home-route .v8-welcome,html body.is-home-route .v8-real-prayer,html body.is-home-route .isnad-ribbon,html body.is-home-route .v8-real-player,html body.is-home-route .dar-v8-quick,html body.is-home-route .dar-v8-finder,html body.is-home-route .dar-v8-daily,html body.is-home-route .dar-v8-library{width:calc(100vw - 28px)!important;max-width:calc(100vw - 28px)!important;min-width:0!important;margin-left:14px!important;margin-right:14px!important;box-sizing:border-box!important;transform:none!important;}
+}
+</style>
