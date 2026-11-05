@@ -364,7 +364,7 @@ function activateAdultCompactHero(html) {
     html = html.includes("</head>") ? html.replace("</head>", css + "</head>") : css + html;
   }
   if (!html.includes('id="darHomeRecentPostsV1Js"')) {
-    const js = '<script defer id="darHomeRecentPostsV1Js" src="/assets/dar-home-recent-posts-v1.js?v=20261101-premium-home-v11"></' + 'script>';
+    const js = '<script defer id="darHomeRecentPostsV1Js" src="/assets/dar-home-recent-posts-v1.js?v=20261105-post-nine-v1"></' + 'script>';
     html = html.includes("</body>") ? html.replace("</body>", js + "</body>") : html + js;
   }
   // Canonical daily entrypoint across public website, visitor WKWebView and Android PWA.
