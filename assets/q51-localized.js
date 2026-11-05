@@ -7,7 +7,7 @@
 var source=document.getElementById("q51Source"),quizPage=document.getElementById("q51QuizPage");
 if(!source&&!quizPage)return;
 if(window.__darQ51LocalizedV1)return;window.__darQ51LocalizedV1=true;
-var API="/assets/q51-locales.json?v=20261105-nine-preview-v3";
+var API="/assets/q51-locales.json?v=20261105-nine-preview-v4";
 var CODES=["de","ar","en","tr","ku","ckb","bs","fr","es"];
 var cached=null,manual="",step=0,score=0,answer=null;
 function id(k){return document.getElementById(k)}
@@ -33,8 +33,9 @@ function sourceRender(){
  mark(c);
  text("q51BrandTop",p.ui.headerLine);
  text("q51LanguageLabel","🌐 "+p.ui.language);
- text("q51Reference1","📝 aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · Nr. 487 · 1/370");
- text("q51Reference2","📝 aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · Nr. 480");
+ var sourcePicker=id("q51Language");if(sourcePicker)sourcePicker.setAttribute("aria-label",p.ui.language+" · "+p.ui.source+" / "+p.ui.study);
+ text("q51Reference1","📝 aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · 487 · 1/370");
+ text("q51Reference2","📝 aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · 480");
  text("q51Kicker",p.ui.source+" · Q51");
  text("q51Title",p.title);
  text("q51Intro",p.intro);
@@ -51,7 +52,7 @@ function sourceRender(){
  text("q51Statement2","„"+p.statement2+"“");
  text("q51Explain1",p.explain1);
  text("q51Explain2",p.explain2);
- text("q51Context",p.ui.explanation+": "+p.intro);
+ text("q51Context",p.tabariContext);
  text("q51Limit",p.ui.warning+": "+p.limitations);
  text("q51Takeaway",p.ui.result+": "+p.conclusion);
  text("q51Chain1",p.ui.chain+": "+cached.sourceChains.qatadah487);
@@ -86,6 +87,7 @@ function renderQuiz(){
  var c=locale(),p=active();if(!p||!quizPage)return;
  mark(c);
  text("qlLanguageLabel","🌐 "+p.ui.language);
+ var quizPicker=id("qlLanguage");if(quizPicker)quizPicker.setAttribute("aria-label",p.ui.language+" · "+p.ui.study);
  text("qlEyebrow",p.ui.study+" · Q51");
  text("qlTitle",p.title);text("qlReview",p.approved?"":p.ui.review);
  var picker=id("qlLanguage");if(picker)picker.value=c;
@@ -143,7 +145,7 @@ var fallback={qSourceId:"qsource:51",sourceChains:{"qatadah487":"Bišr → Yazī
 attach();
 fetch(API,{cache:"no-store",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("Q51 locale asset HTTP "+r.status);return r.json()})
 .then(function(j){
- if(j.qSourceId!=="qsource:51"||!j.locales||CODES.some(function(c){var p=j.locales[c];return !p||!p.post||!p.ui||!p.ui.tabariAttribution||!p.statement1||!p.statement2||!p.conclusion||!Array.isArray(p.questions)||p.questions.length!==4}))throw Error("Incomplete Q51 locales");
+ if(j.qSourceId!=="qsource:51"||!j.locales||CODES.some(function(c){var p=j.locales[c];return !p||!p.post||!p.ui||!p.ui.tabariAttribution||!p.tabariContext||!p.statement1||!p.statement2||!p.conclusion||!Array.isArray(p.questions)||p.questions.length!==4}))throw Error("Incomplete Q51 locales");
  cached=j;
  if(source)sourceRender();if(quizPage)renderQuiz();
 }).catch(function(e){
