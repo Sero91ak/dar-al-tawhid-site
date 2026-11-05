@@ -1268,7 +1268,7 @@ function injectAdultReaderRuntimeV5(html) {
   // Q51 uses the same canonical visitor post model across Web, PWA and iOS.
   // No new shell, no notifications, and no mutation to source evidence.
   if(!html.includes('id="darQ51PostLanguageV1"')){
-    const localeTag='<script defer id="darQ51PostLanguageV1" src="/assets/dar-q51-post-language-v1.js?v=20261105-nine-preview-v3"></'+'script>';
+    const localeTag='<script defer id="darQ51PostLanguageV1" src="/assets/dar-q51-post-language-v1.js?v=20261105-nine-preview-v4"></'+'script>';
     html=html.includes("</body>")?html.replace("</body>",localeTag+"</body>"):html+localeTag;
   }
   return html;
