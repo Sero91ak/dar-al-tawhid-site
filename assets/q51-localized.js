@@ -7,7 +7,7 @@
 var source=document.getElementById("q51Source"),quizPage=document.getElementById("q51QuizPage");
 if(!source&&!quizPage)return;
 if(window.__darQ51LocalizedV1)return;window.__darQ51LocalizedV1=true;
-var API="/assets/q51-locales.json?v=20261105-v2";
+var API="/assets/q51-locales.json?v=20261105-nine-preview-v4";
 var CODES=["de","ar","en","tr","ku","ckb","bs","fr","es"];
 var cached=null,manual="",step=0,score=0,answer=null;
 function id(k){return document.getElementById(k)}
@@ -22,7 +22,7 @@ function explicit(){
 function lang(){return manual||explicit()||getStored()||"de"}
 function mark(code){document.documentElement.lang=code;document.documentElement.dir=code==="ar"||code==="ckb"?"rtl":"ltr";document.body.classList.toggle("q51-rtl",code==="ar"||code==="ckb");}
 function locale(){var code=lang();return cached&&cached.locales[code]?code:"de"}
-function active(){if(!cached)return null;var chosen=cached.locales[locale()];if(!chosen)return cached.locales.de;return chosen.approved===true?chosen:Object.assign({},cached.locales.de,{ui:chosen.ui,approved:false})}
+function active(){if(!cached)return null;var chosen=cached.locales[locale()];if(!chosen)return cached.locales.de;return chosen}
 function link(route){
  var u=new URL(route,document.baseURI||location.href);
  u.searchParams.set("lang",locale());
@@ -30,11 +30,12 @@ function link(route){
 }
 function sourceRender(){
  var c=locale(),p=active();if(!p)return;
- mark(p.approved===true?c:"de");
+ mark(c);
  text("q51BrandTop",p.ui.headerLine);
  text("q51LanguageLabel","🌐 "+p.ui.language);
- text("q51Reference1","📝 aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · Nr. 487 · 1/370");
- text("q51Reference2","📝 aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · Nr. 480");
+ var sourcePicker=id("q51Language");if(sourcePicker)sourcePicker.setAttribute("aria-label",p.ui.language+" · "+p.ui.source+" / "+p.ui.study);
+ text("q51Reference1","📝 aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · 487 · 1/370");
+ text("q51Reference2","📝 aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · 480");
  text("q51Kicker",p.ui.source+" · Q51");
  text("q51Title",p.title);
  text("q51Intro",p.intro);
@@ -42,6 +43,7 @@ function sourceRender(){
  text("q51H2",p.ui.explanation+" · Qatādah · Nr. 480");
  text("q51H3",p.ui.classification);
  text("q51H4",p.ui.sources);
+ text("q51TabariAttribution","Abū Ǧaʿfar aṭ-Ṭabarī · "+(p.ui.tabariAttribution||p.ui.explanation)+" · al-Baqarah 2:22 · 488–490");
  text("q51EvidenceGroup1","🖋️ "+p.speaker1+" · "+p.ui.sources);
  text("q51EvidenceGroup2","🖋️ "+p.speaker2+" · "+p.ui.sources);
  text("q51Speaker1","🖋️ "+p.speaker1);
@@ -50,14 +52,18 @@ function sourceRender(){
  text("q51Statement2","„"+p.statement2+"“");
  text("q51Explain1",p.explain1);
  text("q51Explain2",p.explain2);
- text("q51Context",p.ui.explanation+": "+p.intro);
+ text("q51Context",p.tabariContext);
  text("q51Limit",p.ui.warning+": "+p.limitations);
  text("q51Takeaway",p.ui.result+": "+p.conclusion);
  text("q51Chain1",p.ui.chain+": "+cached.sourceChains.qatadah487);
  text("q51Chain2",p.ui.chain+": "+cached.sourceChains.qatadah480);
  text("q51EvidenceNote",p.ui.pageNote);
+ var referenceTitles=["① aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · 1/370 · 487","② aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · 1/393 · 487","③ aṭ-Ṭabarī · Ǧāmiʿ al-Bayān · 480","④ aṭ-Ṭabarī · al-Baqarah 2:22 · 490"];
+ var subtitles=["Islamweb · "+p.ui.arabic,"Shamela · "+p.ui.sources,"Islamweb · "+p.ui.explanation+" · andād","Islamweb · "+p.ui.explanation+" · aṭ-Ṭabarī"];
+ Array.from(source.querySelectorAll(".qsource-link-title")).forEach(function(e,i){if(referenceTitles[i])e.textContent=referenceTitles[i]});
+ Array.from(source.querySelectorAll(".qsource-link-sub")).forEach(function(e,i){if(subtitles[i])e.textContent=subtitles[i]});
  text("q51Learning","📚 "+p.ui.study);
- var a=id("q51Learning");if(a)a.href=link("/lernen/tawhid-schoepfer-anbetung/");
+ var a=id("q51Learning");if(a){a.href=link("/lernen/tawhid-schoepfer-anbetung/");a.setAttribute("aria-label",p.ui.study)}
  text("q51Review",p.approved?"":p.ui.review);
  var picker=id("q51Language");if(picker)picker.value=c;
  document.title=p.title+" | Q51 · DĀR AL TAWḤĪD";
@@ -79,8 +85,9 @@ function makeOption(label,index,c){
 }
 function renderQuiz(){
  var c=locale(),p=active();if(!p||!quizPage)return;
- mark(p.approved===true?c:"de");
+ mark(c);
  text("qlLanguageLabel","🌐 "+p.ui.language);
+ var quizPicker=id("qlLanguage");if(quizPicker)quizPicker.setAttribute("aria-label",p.ui.language+" · "+p.ui.study);
  text("qlEyebrow",p.ui.study+" · Q51");
  text("qlTitle",p.title);text("qlReview",p.approved?"":p.ui.review);
  var picker=id("qlLanguage");if(picker)picker.value=c;
@@ -105,6 +112,8 @@ function onLocaleChanged(next){
  next=norm(next);if(!next||!cached||!cached.locales[next])return;
  manual=next;
  try{localStorage.setItem("darAdultPreferredLocaleV1",next)}catch(_){}
+ // Keep manual selection shareable and persistent on page reload, not just this in-memory session.
+ try{var u=new URL(location.href);u.searchParams.set("lang",next);history.replaceState(history.state,"",u.pathname+u.search+u.hash)}catch(_){}
  if(quizPage){step=0;score=0;answer=null;id("quiz").hidden=false;id("qlFinished").hidden=true;}
  if(source)sourceRender();if(quizPage)renderQuiz();
  window.dispatchEvent(new CustomEvent("dar:q51:locale-ready",{detail:{locale:next,sourceId:"qsource:51"}}));
@@ -136,7 +145,7 @@ var fallback={qSourceId:"qsource:51",sourceChains:{"qatadah487":"Bišr → Yazī
 attach();
 fetch(API,{cache:"no-store",credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("Q51 locale asset HTTP "+r.status);return r.json()})
 .then(function(j){
- if(j.qSourceId!=="qsource:51"||!j.locales||CODES.some(function(c){return !j.locales[c]||j.locales[c].questions.length!==4}))throw Error("Incomplete Q51 locales");
+ if(j.qSourceId!=="qsource:51"||!j.locales||CODES.some(function(c){var p=j.locales[c];return !p||!p.post||!p.ui||!p.ui.tabariAttribution||!p.tabariContext||!p.statement1||!p.statement2||!p.conclusion||!Array.isArray(p.questions)||p.questions.length!==4}))throw Error("Incomplete Q51 locales");
  cached=j;
  if(source)sourceRender();if(quizPage)renderQuiz();
 }).catch(function(e){
