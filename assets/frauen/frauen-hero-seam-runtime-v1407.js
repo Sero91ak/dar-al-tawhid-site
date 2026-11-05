@@ -1,7 +1,7 @@
 /* DAR_FRAUEN_HERO_SEAM_RUNTIME_V1407
  * The photographed Hero/search stay ONE pinned surface. Measure only the
  * redundant initial gap below the real fixed brand and collapse that gap.
- * Do not scroll, touch-cancel, clone, or reparent any content.
+ * No scroll/touch interception or cloning; the missing wrapper is restored once.
  */
 (function(){
 "use strict";
@@ -35,6 +35,21 @@ function reconcile(){
  /* Never change geometry while the user is midway through content. */
  if(top()>1)return;
  var stage=shell.querySelector(":scope > .dar-immersive-hero-stage");
+ /* The historical adult adapter was no longer loaded by the visitor/Test
+    HTML shells. Build the SAME one-stage wrapper here, once, preserving the
+    original nodes, events, value of the input and approved photograph. */
+ if(!stage){
+  var directHero=shell.querySelector(":scope > .frauen-library-hero");
+  if(directHero){
+   var search=shell.querySelector(":scope > .frauen-library-search-wrap,:scope > .frauen-library-list-controls");
+   stage=document.createElement("div");
+   stage.className="dar-immersive-hero-stage frauen-library-pinned-header";
+   stage.dataset.hasSearch=search?"1":"0";
+   shell.insertBefore(stage,directHero);
+   stage.appendChild(directHero);
+   if(search)stage.appendChild(search);
+  }
+ }
  var surface=stage||hero;
  var gap=surface.getBoundingClientRect().top-headerBottom;
  if(!Number.isFinite(gap)||gap<=1)return;
