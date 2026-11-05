@@ -79,13 +79,16 @@ function setup(){
  if(app&&typeof MutationObserver==="function")
   new MutationObserver(schedule).observe(app,{childList:true,subtree:true});
  document.addEventListener("dar:view-rendered",schedule);
- document.addEventListener("dar:frauen-render",schedule);
+ /* The frozen production adapter may repaint immediately after render;
+    restore the shared stage synchronously before the next browser paint. */
+ document.addEventListener("dar:frauen-render",reconcile);
  window.addEventListener("pageshow",schedule);
  window.addEventListener("resize",schedule,{passive:true});
  window.addEventListener("orientationchange",schedule,{passive:true});
  if(window.visualViewport)window.visualViewport.addEventListener("resize",schedule,{passive:true});
  window.addEventListener("hashchange",schedule);
  window.addEventListener("scroll",function(){if(top()<=1)schedule();},{passive:true});
+ reconcile();
  schedule();
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setup,{once:true});
