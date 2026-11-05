@@ -1,0 +1,86 @@
+/* DĀR ADMIN · redaktion appearance adapter.
+ * Aligns the real embedded editorial workspace with the parent admin preference;
+ * source preview paper deliberately remains light in both appearances. */
+html[data-dar-admin-theme="layl"]{
+ color-scheme:dark;
+ --bg:#0c0e0d;--paper:#f7f1e4;--green:#18241c;--gold:#e0c994;--gold2:#b89654;
+ --ink:#f6f0e4;--line:rgba(184,150,84,.28);--soft:#b7c8bb;
+ --editor-bg:#0c0e0d;--editor-surface:#151f19;--editor-input:#111a14;
+ --editor-sidebar:#131d17;--editor-contrast:#f6f0e4;--editor-muted:#b7c8bb;
+ --editor-hover:rgba(224,201,148,.09);--editor-active:rgba(224,201,148,.15);
+ --editor-cta:#e0c994;--editor-cta-ink:#162419
+}
+html[data-dar-admin-theme="salbei"]{
+ color-scheme:light;
+ --bg:#f4f6f0;--paper:#f7f1e4;--green:#e8ede4;--gold:#80612d;--gold2:#8b7648;
+ --ink:#17211b;--line:rgba(94,116,101,.23);--soft:#536057;
+ --editor-bg:#f4f6f0;--editor-surface:#ffffff;--editor-input:#ffffff;
+ --editor-sidebar:#eef2eb;--editor-contrast:#17211b;--editor-muted:#536057;
+ --editor-hover:rgba(63,93,75,.08);--editor-active:rgba(94,116,101,.16);
+ --editor-cta:#3f5d4b;--editor-cta-ink:#ffffff
+}
+html[data-dar-admin-theme],html[data-dar-admin-theme] body,
+html[data-dar-admin-theme] body.dar-editor-embedded{
+ background:var(--editor-bg)!important;color:var(--editor-contrast)!important
+}
+html[data-dar-admin-theme] :is(.top,.intro,.panel,.sidebar,.editor-grid>div+div,.mobile-work-tabs,.editor-smartbar,.source-summary){
+ background:var(--editor-surface)!important;color:var(--editor-contrast)!important;
+ border-color:var(--line)!important
+}
+html[data-dar-admin-theme] :is(.sidebar,.mobile-work-tabs){background:var(--editor-sidebar)!important}
+html[data-dar-admin-theme] .intro{background:var(--editor-sidebar)!important}
+html[data-dar-admin-theme] :is(.brand h1,.brand small,.intro h2,.intro h2 .intro-decor,.kicker,.panel h3,.editor-head h3,.source-summary strong,.source-summary small){
+ color:var(--gold)!important
+}
+html[data-dar-admin-theme] :is(.dim,.help,.intro p,.footer,.meta-box small,.library-item small,.source-summary p,.source-content small){
+ color:var(--editor-muted)!important
+}
+html[data-dar-admin-theme] :is(.tag,.meta-box,.source-card,.source-summary,.editor-grid,.library-item,.editor-smartbar,.work>.panel){
+ border-color:var(--line)!important
+}
+html[data-dar-admin-theme] :is(.meta-box,.source-card){
+ background:transparent!important;color:var(--editor-contrast)!important
+}
+html[data-dar-admin-theme] :is(.library-item,.library-item strong,.meta-box strong,.source-content strong,.source-number,.locale-tab,.mobile-tab,.status){
+ color:var(--editor-contrast)!important
+}
+html[data-dar-admin-theme] :is(.library-item:hover,.library-item.selected,.source-card:hover,.locale-tab:hover,.mobile-tab:hover){
+ background:var(--editor-hover)!important;color:var(--gold)!important
+}
+html[data-dar-admin-theme] .library-item.selected{box-shadow:inset 3px 0 var(--gold)!important}
+html[data-dar-admin-theme] :is(.locale-tab[aria-selected="true"],.mobile-tab.active){
+ background:var(--editor-active)!important;color:var(--gold)!important;
+ border-bottom-color:var(--gold)!important
+}
+html[data-dar-admin-theme] :is(.btn,.locale-tab,.mobile-tab,.field,textarea){
+ color:var(--editor-contrast)!important;border-color:var(--line)!important
+}
+html[data-dar-admin-theme] :is(.btn,.field,textarea){
+ background:var(--editor-input)!important
+}
+html[data-dar-admin-theme] :is(.btn:hover,.btn:focus-visible){background:var(--editor-hover)!important}
+html[data-dar-admin-theme] .btn.primary{
+ background:var(--editor-cta)!important;color:var(--editor-cta-ink)!important;
+ border-color:var(--editor-cta)!important
+}
+html[data-dar-admin-theme] :is(.field,textarea)::placeholder{color:var(--editor-muted);opacity:.85}
+html[data-dar-admin-theme] label,
+html[data-dar-admin-theme] :is(#qStatus,#importStatus,.notice,.editor-smartbar .studio-state){
+ color:var(--gold)!important
+}
+html[data-dar-admin-theme] .notice{background:var(--editor-active)!important;border-color:var(--gold)!important}
+html[data-dar-admin-theme] .source-number{border-color:var(--gold)!important}
+html[data-dar-admin-theme] .footer{background:var(--editor-bg)!important;border-color:var(--line)!important}
+html[data-dar-admin-theme] .preview-outer{
+ background:#f4eee1!important;color:#202b22!important;
+ border-color:#cbb688!important;box-shadow:none!important
+}
+html[data-dar-admin-theme] .preview-outer :is(.preview,.preview-top,.preview-empty){
+ color:#202b22!important
+}
+html[data-dar-admin-theme] .preview-top{color:#8c7547!important}
+html[data-dar-admin-theme] .editor-grid>div+div{border-color:var(--line)!important}
+html[data-dar-admin-theme] a{color:var(--gold)}
+@media(prefers-reduced-motion:reduce){
+ html[data-dar-admin-theme] *{transition:none!important;animation:none!important}
+}
