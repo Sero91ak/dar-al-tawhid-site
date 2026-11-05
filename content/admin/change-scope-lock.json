@@ -155,6 +155,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "dar-admin-v2-theme-responsive-readonly-tests-20261105",
+      "at": "2026-11-05T19:38:00.000Z",
+      "approvedBy": "user-explicit-20261105-dar-admin-responsive-video-layl-salbei-continue",
+      "reason": "Time-limited exact-path permission for the requested Admin V2 appearance and standalone regression test only; global lock stays on. No public visitor, Kids, Workers, secrets, prayer, Qibla, deployment pipeline, OneSignal or core security changes.",
+      "paths": [
+        "admin/appearance-v2.css",
+        "admin/appearance-v2.js",
+        "admin/command-center-v2.css",
+        "admin/command-center-v2.js",
+        "admin/redaktion/appearance.css",
+        "admin/redaktion/index.html",
+        "admin/tests/appearance-v2.test.cjs"
+      ],
+      "expiresAt": "2026-11-12T23:59:00.000Z"
+    },
+    {
       "id": "dar-admin-v2-layl-salbei-20261105",
       "at": "2026-11-05T20:13:00+01:00",
       "approvedBy": "user-explicit-20261105-build-github-dar-admin-layl-salbei",
