@@ -14,7 +14,7 @@ run("python3",["kids/tools/audit_quiz_450_language_and_integrity.py"],{cwd:root,
 const entry=read("kids/index.html");
 assert.equal(entry,read("kids/start.html"),"Kids start shell mismatch");
 assert.equal(entry,read("kids/shell.html"),"Kids shell mismatch");
-for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=20261026-premium1','/kids/quiz-library.css?v=20261026-premium1','/kids/sw.js?v=1467']){
+for(const token of ['id="openQuizButton"','id="quizModal"','/kids/quiz-library.js?v=20261026-premium1','/kids/quiz-library.css?v=20261026-premium1','/kids/sw.js?v=1468']){
   assert.ok(entry.includes(token),"Missing Kids shell token: "+token);
 }
 // Kids must display the age-appropriate new praise/encouragement even if
@@ -62,8 +62,8 @@ assert.ok(entry.includes("Quiz-Lernwelt")&&entry.includes("450 Fragen · neue Le
 assert.ok(entry.includes("/kids/quiz-v4-test-preview.js?v=20261026-audition1&recovery=20261027-v1"),"Kids visitor code must include host-isolated Test MP3 preview");
 const sw=read("kids/sw.js");
 const version=JSON.parse(read("kids/version.json"));
-assert.ok(sw.includes('dar-al-tawhid-kids-v1467'));
-assert.equal(version.visualSystem.serviceWorkerCache,"v1467");
+assert.ok(sw.includes('dar-al-tawhid-kids-v1468'));
+assert.equal(version.visualSystem.serviceWorkerCache,"v1468");
 assert.ok(sw.includes('/kids/quiz-library.js?v=20261026-premium1'));
 assert.ok(sw.includes('url.pathname==="/kids/quiz-library.js"'));
 const originalQuestions=JSON.parse(read("kids/data/quiz-kids.json")).items;

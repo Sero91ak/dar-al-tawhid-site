@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 "use strict";
 /* KIDS_LESSON_CAPSULE_RESTORE_V1446 — preserve framed lesson cards and
-   the approved V1445 behind-dock scroll plus original input controls. */
+   the approved V1445 behind-dock scroll with choice-only answer controls. */
 const fs=require("node:fs"),assert=require("node:assert/strict"),path=require("node:path");
 const root=path.resolve(__dirname,"../..");
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
@@ -19,14 +19,12 @@ for(const rule of [
   'scroll-padding-block-end:calc(var(--kids-academy-dock-clearance) + 20px)!important',
   'data-academy-step="0"',
   'bottom:calc(var(--kids-academy-dock-clearance) + 8px)!important',
-  'data-academy-typing="true"',
-  'padding-bottom:24px!important;scroll-padding-block-end:24px!important'
 ])assert.ok(css.includes(rule),"regressed scroll contract: "+rule);
 assert.ok(!css.includes('border-radius:0!important')&&!css.includes('border-inline-width:0!important')&&!css.includes('padding-inline:0!important')&&!css.includes('max-width:none!important'),"original lesson framing must not be flattened");
 assert.ok(!css.includes('pointer-events:none')&&!css.includes('touch-action:none'),"reading gestures blocked");
-assert.ok(page.includes('id="kids-academy-writing-keyboard-v1438"'),"old keyboard input fix removed");
-assert.ok(page.includes('DAR_KIDS_ACADEMY_INPUT_V1438'),"old keyboard focus ping removed");
-assert.ok(page.includes('var pane=$("#stageSurface"),field=$("#answer")'),"original handwriting scroll target removed");
+assert.ok(!page.includes('id="kids-academy-writing-keyboard-v1438"'),"old keyboard input fix still present");
+assert.ok(!page.includes('id="openWrite"')&&!page.includes('id="openVoice"'),"old answer controls still present");
+assert.ok(!css.includes('data-academy-typing="true"'),"old keyboard scroll still present");
 assert.ok(!page.includes('lessonScrollport.appendChild(lessonActions)'),"lesson buttons were reparented");
 const shells=["kids/index.html","kids/start.html","kids/shell.html"].map(read);
 assert.equal(shells[0],shells[1],"KIDS entrypoints differ");
@@ -38,4 +36,4 @@ assert.ok(sw.includes('const CACHE_NAME="dar-al-tawhid-kids-'+cache+'"'),"SW cac
 assert.ok(shells[0].includes('navigator.serviceWorker.register("/kids/sw.js?v='+cache.slice(1)+'"'),"shell must register matching SW version");
 assert.ok(page.includes('id="lessonNavigation"')&&page.includes('id="stageSurface"'),
  "original lesson nodes removed");
-console.log("PASS Kids V1446: original framed lesson cards restored, scrolling behind dock and typing preserved.");
+console.log("PASS Kids V1446: original framed lesson cards restored, scrolling behind dock and choice-only preserved.");
