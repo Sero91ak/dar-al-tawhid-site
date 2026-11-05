@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-260` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-261` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4752
-totalVerifiedEntries: 4752
-loadedEntries: 4752
-uniqueVerifiedReferences: 4752
-missingCount: 1484
+entriesCount: 4762
+totalVerifiedEntries: 4762
+loadedEntries: 4762
+uniqueVerifiedReferences: 4762
+missingCount: 1474
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:82
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-260.json
-nächster Gap-Fill-Batch: entries-gap-06-261.json
+letzter Gap-Fill-Batch: entries-gap-06-261.json
+nächster Gap-Fill-Batch: entries-gap-06-262.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `562` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `572` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -667,3 +667,7 @@ Zehn neue unabhängige Referenzen: 3:80, 3:106, 3:137, 3:138, 3:139, 3:143, 3:14
 ## Batch 06-260 — 04.11.2026
 
 Zehn neue eindeutige Referenzen: 4:13, 4:18, 4:25, 4:31, 4:35, 4:40, 4:44, 4:49, 4:50, 4:53. 4752 registriert, 1484 offen. Direkte Originalquellen und offen deklarierte Überlieferungsbewertungen in SOURCE_REVIEW_06-260.md. Gesonderte technische Validierung und Live-Prüfung nach Veröffentlichung obligatorisch.
+
+## Batch 06-261 — 05.11.2026
+
+Zehn neue vor dem Batch tatsächlich offene Referenzen: 4:56, 4:61, 4:71, 4:72, 4:73, 4:78, 4:79, 4:103, 4:104, 4:108. Katalog 4762/6236, Lücken 1474. Originalstellen, Wortlaut und differenzierte Isnādhinweise stehen in SOURCE_REVIEW_06-261.md. Strukturelle Veröffentlichung ≠ universelle ṣaḥīḥ-Einstufung; globale Endpunkt- und Geräteprüfung separat.
