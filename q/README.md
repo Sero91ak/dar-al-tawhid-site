@@ -69,6 +69,8 @@ Dieser Ordner ist die zentrale Ablage für alle nummerierten Quellenlinks.
 
 | `q/46` | Wissen und vorbildliche Lebensführung | `Muḥammad ibn Sīrīn` | Sie lernten vorbildliche Lebensführung ebenso wie das Wissen. |
 
+| `q/51` | Tawḥīd – Anerkennung des Schöpfers und alleinige Anbetung | `Qatādah ibn Diʿāmah` | Qatādahs Āṯār Nr. 487 und 480 bei aṭ-Ṭabarī zu al-Baqarah 2:22; Erklärung zu andād. |
+
 ## Sonderbereiche
 
 - `q/_registry/` ist nur Verwaltung: Nummerierung, Vorlage und Registry.
