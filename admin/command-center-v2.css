@@ -82,3 +82,5 @@ body.dar-v2-active.dar-editorial-fullscreen #panel{padding:0!important}
  body.dar-v2-active #topbar .dar-v2-search-launch:before{content:"⌕";font-size:24px}
  body.dar-v2-active #topbar{padding-top:max(7px,env(safe-area-inset-top,0px))!important}
 }
+/* Auth boundary: never render private navigation on logout. */
+.dar-v2-rail[hidden],.dar-v2-bottom[hidden]{display:none!important}
