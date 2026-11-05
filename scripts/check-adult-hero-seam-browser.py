@@ -9,7 +9,6 @@ from http.server import ThreadingHTTPServer,SimpleHTTPRequestHandler
 from functools import partial
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
 
 ROOT=Path(__file__).resolve().parent.parent
 FILE1=ROOT / "__dar_hero_seam_visitor__.html"
@@ -43,13 +42,10 @@ def html(test=False):
  <link rel="stylesheet" href="{authority}">
  <link rel="stylesheet" href="{hero}">
  <link rel="stylesheet" href="{brand}">
- <link rel="stylesheet" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css">
- <script defer src="/assets/frauen/frauen-hero-seam-runtime-v1407.js"></script>
  </head>
  <body class="dar-ios-native-app has-bottom-nav is-area-route is-frauen-route" data-frauen-view="hub">
  <header id="{hid}"><div class="dtbh-row"><span>DĀR AL TAWḤĪD</span></div></header>
  <div class="app"><div id="{spacer}"></div><main id="appView" class="view">
- <div id="legacyHeaderGap" style="height:330px" aria-hidden="true"></div>
  <section class="frauen-library-shell">
   <div class="dar-immersive-hero-stage" data-has-search="1">
   <section class="frauen-library-hero"><div class="frauen-library-hero__content"><h2>Frauen im Islam</h2></div></section>
@@ -74,13 +70,6 @@ def run():
    for label,w,h in SIZES:
     driver.set_window_size(w,h)
     driver.get(base+path)
-    # Reproduce the real >240px duplicate legacy reservation. The current
-    # seam runtime must close it without touching the original photo/search.
-    WebDriverWait(driver,10).until(lambda d: abs(d.execute_script("""
-      const header=document.getElementById(arguments[0]).getBoundingClientRect().bottom;
-      const stage=document.querySelector('.dar-immersive-hero-stage').getBoundingClientRect().top;
-      return stage-header;
-    """,hid))<=2)
     for scroll in [0,320,0]:
      driver.execute_script("window.scrollTo(0,arguments[0])",scroll)
      value=driver.execute_script("""

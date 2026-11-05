@@ -38,17 +38,8 @@ assert.match(testCss,/TEST_HEADER_OCCLUSION_LAYOUT_V1/);
    stays in the brand CSS; specialist Hero modules own their layout. */
 for(const [name,css] of [["visitor",visitorCss],["test",testCss]]){
  assert.doesNotMatch(css,/GLOBAL_ADULT_STICKY_CLEARANCE_V1/,name+" reintroduced broad sticky override");
- if(name==="visitor"){
-  assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/,"Visitor may not inherit legacy Test app shifts");
-  assert.doesNotMatch(css,/FRAUEN_DIRECT_STICKY_FALLBACK_V6/,"Visitor may not inherit legacy Test fallback");
- }else{
-  /* The Test lane already carries V3/V6 from the 2026-10-30 baseline.
-     Do not delete its other routes just to satisfy an obsolete assertion.
-     The scoped women V1408 authority MUST supersede that legacy CSS. */
-  const scoped=load("assets/frauen/frauen-original-v1224-header-seam-v1405.css");
-  assert.match(scoped,/DAR_FRAUEN_IOS_SINGLE_BRAND_SPACER_V1408/);
-  assert.match(scoped,/DAR_FRAUEN_SINGLE_DOCUMENT_SCROLL_V1408/);
- }
+ assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/,name+" reintroduced broad app/hero shift");
+ assert.doesNotMatch(css,/FRAUEN_DIRECT_STICKY_FALLBACK_V6/,name+" reintroduced pre-wrapper shift");
 }
 const originalHero=load("assets/adult-immersive-hero-v1.css");
 assert.match(originalHero,/\.dar-immersive-hero-stage\{/,"Existing Frauen Hero owns sticky");
