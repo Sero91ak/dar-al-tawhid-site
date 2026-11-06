@@ -1366,6 +1366,13 @@ export default {
               documentHtml = documentHtml.replace(new RegExp("</head>", "i"),
                 '<script src="/assets/q-source-app-view.js?v=20261101-reader-v2" defer></script></head>');
             }
+            // Q1–Q48 share the same safe locale picker. Q49 and newer keep
+            // their specialized author/quiz adapters. No source IDs or links change.
+            if (canonicalSourcePath && numericSource && Number(numericSource[1]) <= 48 &&
+                !documentHtml.includes('id="darQLegacyNineLanguageV1"')) {
+              const tag = '<script defer id="darQLegacyNineLanguageV1" src="/assets/q-legacy-nine-language-v1.js?v=20261106-foundation1"></'+'script>';
+              documentHtml = documentHtml.replace(/<\/head>/i, tag+'</head>');
+            }
             headers.set("Content-Type", "text/html; charset=utf-8");
             headers.set("X-DAR-Q-Layout", "royal-manuscript-v42");
             return new Response(documentHtml, { status: asset.status,
