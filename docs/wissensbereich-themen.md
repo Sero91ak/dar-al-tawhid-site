@@ -52,3 +52,8 @@ Die Admin-App bietet einen **Wissensbereich Themen**-Bereich mit einer determini
 Bei Frau→Mann muss die Frau-Zuordnung entfernt werden, ehe Mann aktiviert wird; bei Mann→Frau umgekehrt. Bei Wechsel zu Neutral sind beide Zielgruppentags zu entfernen und **alle** Wissensbereich-Pushs auszuschließen. Keine Profilwahl/kein überprüftes Gerätesegment = **kein** zielgruppenbezogener Versand, aber normale globale Meldungen bleiben separat verfügbar. Identischer Beitrag in beiden Bereichen bekommt eine kanonische ID; falls ein separater Geräteversand später freigegeben wird, muss die Zustellung je Installation/Version idempotent sein.
 
 **Implementierungsstand:** DĀR Admin zeigt die Regel und einen datenschutzfreundlichen, nicht-sendenden Routingsimulator. Es existiert noch **keine** verifizierte serverseitige Zuordnung von Besucherprofil zu OneSignal-Subscription. Die bisherige OneSignal-Schutzsperre wird nicht geändert; deshalb **keine tatsächliche Wissensbereich-Benachrichtigung** und kein Empfängercount. Die normale Inhaltsveröffentlichung bleibt unangetastet.
+
+
+## Zehnerblöcke Frauen – verpflichtende Dublettenprüfung (06.11.2026)
+
+Jeder neue Zehnerblock ist vor dem Schreiben nach Quelle, Matn, Berichtssinn, normalisiertem Titel, Sprecherin, Post-/Q-/Lern-ID und bereits vorhandenem Datensatz zu prüfen. Überlappungen werden über dieselbe kanonische ID thematisch referenziert. Gleicher Bericht mit anderem Titel oder anderer Überlieferungssammlung ist **kein** neuer Eintrag. Nicht überprüfte oder noch nicht verknüpfte Entwürfe bleiben `nicht-anzeigen`, unabhängig von vorhandenem Ṣaḥīḥ-Nachweis. Technisches Vorsieb: `scripts/check-frauen-source-duplicates.cjs` (PR-Differenz gegen ursprünglichen Zielzweig); fachliche Freigabe bleibt separat.
