@@ -78,6 +78,27 @@ jobs:
         shell: bash
         run: |
           node desktop-preview/i18n-core-v1/build-language-packs.cjs --inventory "$RUNNER_TEMP/dar-translation-worklist.json" --output "$RUNNER_TEMP/dar-adult-locale-packs"
+      - name: Compile one canonical approved Turkish endpoint, reusable by Web/PWA/iOS
+        shell: bash
+        run: |
+          node desktop-preview/i18n-core-v1/export-reviewed-content.cjs \
+            --inventory "$RUNNER_TEMP/dar-translation-worklist.json" \
+            --out "$RUNNER_TEMP/dar-reviewed-publish" --locale tr --write
+          node - <<'NODE'
+          const fs=require('fs'),path=require('path');
+          const base=path.join(process.env.RUNNER_TEMP,'dar-reviewed-publish/tr');
+          const m=JSON.parse(fs.readFileSync(path.join(base,'manifest.json'),'utf8'));
+          if(m.locale!=='tr'||m.originalLocale!=='de'||m.onlyApproved!==true||
+             m.scope!=='adult-only'||m.publishedCount!==Object.keys(m.records).length)
+             throw Error('Unreviewed material must not enter published bundles');
+          for(const record of Object.values(m.records)){
+            const file=path.join(process.env.RUNNER_TEMP,'dar-reviewed-publish',record.path);
+            const v=JSON.parse(fs.readFileSync(file,'utf8'));
+            if(v.status!=='approved'||v.sourceHash!==record.sourceHash)
+              throw Error('An unapproved or stale translation entered pack');
+          }
+          console.log('PASS reviewed Turkish content export:',m.publishedCount,'canonical records');
+          NODE
       - name: Upload approved-language preview packs
         uses: actions/upload-artifact@v4
         with:

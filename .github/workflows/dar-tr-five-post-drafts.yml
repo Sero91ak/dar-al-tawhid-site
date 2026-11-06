@@ -1,0 +1,101 @@
+name: DAR Adult Turkish 20-Post Draft Pilot
+
+on:
+  push:
+    branches:
+      - feature/adult-tr-i18n-manuscript-contract-20261021
+    paths:
+      - '.github/workflows/dar-tr-five-post-drafts.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dar-tr-translation-draft-pilot-20261021
+  cancel-in-progress: false
+
+jobs:
+  generate-twenty-drafts:
+    if: ${{ github.run_attempt == 1 }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Confirm source revision and review protection
+        run: |
+          node desktop-preview/i18n-core-v1/test-translation-worklist.cjs
+          node scripts/verify-adult-post-language-manifests.cjs
+          node desktop-preview/i18n-core-v1/translation-worklist.cjs --out "$RUNNER_TEMP/translation-worklist.json"
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const w=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+'/translation-worklist.json','utf8'));
+          const rows=w.queue.filter(x=>x.locale==='tr'&&x.kind==='post'&&['pending','stale'].includes(x.state));
+          console.log('Eligible Turkish adult post drafts',rows.length);
+          if(!rows.length)throw Error('No Turkish draft candidates');
+          NODE
+      - name: Generate at most five Turkish review-only manuscripts via existing OpenAI API
+        env:
+          DAR_I18N_AI_API_KEY: ${{ secrets.DAR_I18N_AI_API_KEY }}
+          DAR_I18N_AI_API_URL: https://api.openai.com/v1/chat/completions
+          DAR_I18N_AI_MODEL: gpt-4.1
+          DAR_I18N_PROVIDER_APPROVED: 'yes'
+        run: |
+          set -euo pipefail
+          if [[ -z "$DAR_I18N_AI_API_KEY" ]]; then
+            echo '::error::OpenAI API key not configured'
+            exit 1
+          fi
+          node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs \
+            --generate --inventory "$RUNNER_TEMP/translation-worklist.json" \
+            --output "$RUNNER_TEMP/tr-review-only" --locale tr --kind post \
+            --max-requests 20 --max-source-chars 7000 --max-output-tokens 3500
+      - name: Require drafts and matching source fingerprints
+        run: |
+          node - <<'NODE'
+          const fs=require('fs'),path=require('path');
+          const dir=path.join(process.env.RUNNER_TEMP,'tr-review-only/desktop-preview/i18n-core-v1/translations/tr/post');
+          const files=fs.existsSync(dir)?fs.readdirSync(dir).filter(x=>x.endsWith('.json')):[];
+          if(!files.length||files.length>20)throw Error('Expected 1 to 20 Turkish drafts: '+files.length);
+          let tokens=0;
+          for(const file of files){
+            const v=JSON.parse(fs.readFileSync(path.join(dir,file),'utf8'));
+            if(v.locale!=='tr'||v.status!=='draft'||v.reviewer!==null||
+              !v.sourceHash||!v.fields?.title||!v.fields?.body||!v.modelUsage)
+              throw Error('Invalid review-only translation: '+file);
+            tokens+=Number(v.modelUsage.total_tokens||0);
+          }
+          console.log('PASS: '+files.length+' unreviewed Turkish manuscripts, '+tokens+' billed tokens.');
+          NODE
+      - name: Preserve new drafts on isolated review branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_dir="$RUNNER_TEMP/tr-review-only/desktop-preview/i18n-core-v1/translations/tr/post"
+          if [[ ! -d "$source_dir" ]]; then exit 1; fi
+          mkdir -p desktop-preview/i18n-core-v1/translations/tr/post
+          for file in "$source_dir"/*.json; do
+            dest="desktop-preview/i18n-core-v1/translations/tr/post/$(basename "$file")"
+            if [[ -e "$dest" ]]; then
+              echo "::error::Existing draft or approval cannot be overwritten: $dest"
+              exit 1
+            fi
+            cp "$file" "$dest"
+          done
+          git add desktop-preview/i18n-core-v1/translations/tr/post/
+          git -c user.name="github-actions[bot]" \
+            -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -m "chore(i18n): store up to twenty unreviewed Turkish drafts"
+          git push origin "HEAD:refs/heads/feature/adult-tr-i18n-manuscript-contract-20261021"
+      - name: Upload archive for editorial review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-tr-five-review-only
+          path: ${{ runner.temp }}/tr-review-only/
+          retention-days: 14
+          if-no-files-found: warn

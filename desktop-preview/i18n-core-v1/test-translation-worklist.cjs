@@ -26,6 +26,10 @@ try{
  write("lernen/c/index.html",'<script>const questions=[{q:"Frage C?",choices:["Ja","Nein"],correct:1,why:"Weil C."}];</script>');
 
  const first=generate();
+ const canonicalId="post:one";
+ const canonicalSuffix=require("node:crypto").createHash("sha256").update(canonicalId).digest("hex").slice(0,10);
+ assert.equal(first.items.find(x=>x.id===canonicalId).languages.tr.translationPath,
+  "desktop-preview/i18n-core-v1/translations/tr/post/one-"+canonicalSuffix+".json");
  assert.equal(first.summary.contentItems,9);
  assert.equal(first.summary.translationTasks,54);
  assert.equal(first.summary.unfinished,54);

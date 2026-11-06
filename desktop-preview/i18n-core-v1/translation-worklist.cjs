@@ -176,7 +176,8 @@ function scanLearning(){
 function translationPath(item,locale){
  const dir=item.kind;
  const safe=item.id.slice(item.kind.length+1).replace(/[^a-zA-Z0-9._-]+/g,"-").slice(0,110);
- const suffix=digest(item.id).slice(0,10);
+ // Stable filename fingerprint must match canonical post-language manifests (raw ID bytes).
+ const suffix=crypto.createHash("sha256").update(item.id).digest("hex").slice(0,10);
  return "desktop-preview/i18n-core-v1/translations/"+locale+"/"+dir+"/"+safe+"-"+suffix+".json";
 }
 function review(file,item,locale){
