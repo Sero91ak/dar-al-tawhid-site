@@ -40,7 +40,7 @@
   min-height: 108px;
   padding: 14px 12px;
   border-radius: 16px;
-  border: 1.5px dashed rgba(239, 215, 142, 0.28);
+  border: 1.5px dashed color-mix(in srgb,var(--v2gold) 28%,transparent);
   background: rgba(255, 255, 255, 0.02);
   text-align: center;
   cursor: pointer;
@@ -48,8 +48,8 @@
 }
 
 .lib-admin-drop.is-dragover {
-  border-color: rgba(239, 215, 142, 0.55);
-  background: rgba(239, 215, 142, 0.06);
+  border-color: color-mix(in srgb,var(--v2gold) 55%,transparent);
+  background: color-mix(in srgb,var(--v2gold) 6%,transparent);
 }
 
 .lib-admin-drop b {
@@ -98,7 +98,7 @@
   box-sizing: border-box;
   min-height: 44px;
   border-radius: 12px;
-  border: 1px solid rgba(239, 215, 142, 0.14);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 14%,transparent);
   background: rgba(255, 255, 255, 0.03);
   color: var(--ink);
   padding: 10px 12px;
@@ -110,7 +110,7 @@
   padding: 8px 10px;
   border-radius: 10px;
   border: 1px solid var(--line2, rgba(140, 190, 255, 0.24));
-  background: color-mix(in srgb, var(--panel2, #101a29) 70%, transparent);
+  background: color-mix(in srgb, var(--panel2, #27241d) 70%, transparent);
   color: var(--soft, #d2c9b7);
   font-size: 0.78rem;
   line-height: 1.35;
@@ -122,7 +122,7 @@
   gap: 12px;
   padding: 12px;
   border-radius: 14px;
-  border: 1px solid rgba(239, 215, 142, 0.14);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 14%,transparent);
   background: rgba(255, 255, 255, 0.02);
 }
 
@@ -132,7 +132,7 @@
   aspect-ratio: 2 / 3;
   border-radius: 10px;
   overflow: hidden;
-  border: 1px solid rgba(239, 215, 142, 0.14);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 14%,transparent);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.2));
   display: grid;
   place-items: center;
@@ -178,7 +178,7 @@
   min-height: 44px;
   padding: 10px 12px;
   border-radius: 12px;
-  border: 1px solid rgba(239, 215, 142, 0.12);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 12%,transparent);
   background: rgba(255, 255, 255, 0.02);
   cursor: pointer;
   font-size: 0.84rem;
@@ -192,8 +192,8 @@
 }
 
 .lib-admin-cover-opt.is-active {
-  border-color: rgba(239, 215, 142, 0.38);
-  background: rgba(239, 215, 142, 0.07);
+  border-color: color-mix(in srgb,var(--v2gold) 38%,transparent);
+  background: color-mix(in srgb,var(--v2gold) 7%,transparent);
 }
 
 .lib-admin-cover-upload {
@@ -212,7 +212,7 @@
 }
 
 .lib-admin-category a {
-  color: var(--gold2, #d8c08e);
+  color: var(--gold2, var(--v2gold));
   margin-left: 8px;
   cursor: pointer;
   text-decoration: underline;
@@ -230,7 +230,7 @@
 }
 
 .lib-admin-details {
-  border: 1px solid rgba(239, 215, 142, 0.1);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 10%,transparent);
   border-radius: 12px;
   overflow: hidden;
 }
@@ -281,8 +281,8 @@
   min-height: 44px;
   padding: 10px 16px;
   border-radius: 12px;
-  border: 1px solid rgba(239, 215, 142, 0.2);
-  background: rgba(239, 215, 142, 0.08);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 20%,transparent);
+  background: color-mix(in srgb,var(--v2gold) 8%,transparent);
   color: var(--ink);
   font-size: 0.86rem;
   font-weight: 800;
@@ -295,14 +295,14 @@
 }
 
 .lib-admin-btn-primary {
-  background: linear-gradient(180deg, rgba(239, 215, 142, 0.22), rgba(155, 122, 60, 0.12));
-  border-color: rgba(239, 215, 142, 0.38);
+  background: linear-gradient(180deg, color-mix(in srgb,var(--v2gold) 22%,transparent), color-mix(in srgb,var(--v2gold) 12%,transparent));
+  border-color: color-mix(in srgb,var(--v2gold) 38%,transparent);
 }
 
 .lib-admin-btn-live {
-  background: linear-gradient(180deg, rgba(120, 180, 220, 0.18), rgba(40, 90, 140, 0.14));
+  background: linear-gradient(180deg, color-mix(in srgb,var(--admin-accent) 18%,transparent), color-mix(in srgb,var(--admin-accent) 14%,transparent));
   border-color: rgba(140, 190, 230, 0.34);
-  color: #d8ecff;
+  color: var(--v2ink);
 }
 
 .lib-admin-btn-hero {
@@ -313,7 +313,7 @@
 
 .lib-admin-btn-ghost {
   background: transparent;
-  border-color: rgba(239, 215, 142, 0.12);
+  border-color: color-mix(in srgb,var(--v2gold) 12%,transparent);
   color: var(--muted);
   font-weight: 700;
 }
@@ -326,7 +326,7 @@
 .lib-admin-push-status {
   margin: 8px 0 0;
   font-size: 0.8rem;
-  color: #b8e8c4;
+  color: var(--admin-success-ink);
   line-height: 1.45;
 }
 
@@ -372,7 +372,7 @@
 
 .lib-admin-action-danger {
   padding-top: 4px;
-  border-top: 1px solid rgba(239, 215, 142, 0.08);
+  border-top: 1px solid color-mix(in srgb,var(--v2gold) 8%,transparent);
 }
 
 .lib-admin-manage-links-row {
@@ -394,7 +394,7 @@
   gap: 6px;
   padding: 12px;
   border-radius: 12px;
-  border: 1px solid rgba(239, 215, 142, 0.12);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 12%,transparent);
   background: rgba(255, 255, 255, 0.02);
   font-size: 0.8rem;
   color: var(--muted);
@@ -410,7 +410,7 @@
 }
 
 .lib-admin-progress li.is-active {
-  color: var(--gold2, #d8c08e);
+  color: var(--gold2, var(--v2gold));
   font-weight: 800;
 }
 
@@ -418,7 +418,7 @@
   padding: 14px;
   border-radius: 14px;
   border: 1px solid rgba(120, 200, 140, 0.25);
-  background: rgba(40, 90, 60, 0.12);
+  background: color-mix(in srgb,var(--admin-success-ink) 12%,transparent);
   color: var(--ink);
 }
 
@@ -429,7 +429,7 @@
   gap: 10px;
   padding: 12px;
   border-radius: 14px;
-  border: 1px solid rgba(239, 215, 142, 0.12);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 12%,transparent);
   background: rgba(255, 255, 255, 0.02);
 }
 
@@ -454,7 +454,7 @@
   border-radius: 10px;
   overflow: hidden;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.18));
-  border: 1px solid rgba(239, 215, 142, 0.1);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 10%,transparent);
   display: grid;
   place-items: center;
 }
@@ -498,8 +498,8 @@
 .lib-admin-manage {
   padding: 12px;
   border-radius: 14px;
-  border: 1px solid rgba(239, 215, 142, 0.22);
-  background: linear-gradient(180deg, rgba(239, 215, 142, 0.07), rgba(255, 255, 255, 0.02));
+  border: 1px solid color-mix(in srgb,var(--v2gold) 22%,transparent);
+  background: linear-gradient(180deg, color-mix(in srgb,var(--v2gold) 7%,transparent), rgba(255, 255, 255, 0.02));
 }
 
 .lib-admin-manage-fold {
@@ -532,7 +532,7 @@
   content: "▸";
   display: inline-block;
   margin-right: 8px;
-  color: var(--gold2, #d8c08e);
+  color: var(--gold2, var(--v2gold));
   transition: transform 0.2s ease;
 }
 
@@ -625,7 +625,7 @@
   padding: 7px 9px;
   gap: 0;
   border-radius: 13px;
-  border: 1px solid rgba(239, 215, 142, 0.14);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 14%,transparent);
   background: linear-gradient(168deg, rgba(255, 255, 255, 0.028), rgba(255, 255, 255, 0.012));
 }
 
@@ -682,7 +682,7 @@
   min-height: 40px;
   padding: 3px 5px;
   border-radius: 10px;
-  border: 1px solid rgba(239, 215, 142, 0.16);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 16%,transparent);
   background: rgba(255, 255, 255, 0.03);
   color: var(--muted);
   cursor: pointer;
@@ -722,7 +722,7 @@
   gap: 7px;
   margin-top: 7px;
   padding-top: 7px;
-  border-top: 1px solid rgba(239, 215, 142, 0.1);
+  border-top: 1px solid color-mix(in srgb,var(--v2gold) 10%,transparent);
 }
 
 .lib-admin-manage-card-panel[hidden] {
@@ -732,7 +732,7 @@
 .lib-admin-btn-push {
   background: linear-gradient(180deg, rgba(180, 130, 255, 0.16), rgba(90, 50, 150, 0.12)) !important;
   border-color: rgba(190, 150, 255, 0.34) !important;
-  color: #eadcff !important;
+  color: var(--v2ink) !important;
 }
 
 .lib-admin-live-stats--compact {
@@ -815,8 +815,8 @@
 }
 
 .lib-admin-list-item.is-selected {
-  border-color: rgba(239, 215, 142, 0.34);
-  background: rgba(239, 215, 142, 0.06);
+  border-color: color-mix(in srgb,var(--v2gold) 34%,transparent);
+  background: color-mix(in srgb,var(--v2gold) 6%,transparent);
 }
 
 .lib-admin-list-cover {
@@ -825,7 +825,7 @@
   aspect-ratio: 2 / 3;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid rgba(239, 215, 142, 0.12);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 12%,transparent);
   background: rgba(255, 255, 255, 0.03);
   display: grid;
   place-items: center;
@@ -854,18 +854,18 @@
   font-size: 0.66rem;
   font-weight: 800;
   color: var(--muted);
-  border: 1px solid rgba(239, 215, 142, 0.14);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 14%,transparent);
   background: rgba(255, 255, 255, 0.03);
 }
 
 .lib-admin-target-pill.is-online {
-  color: #b8e8c4;
+  color: var(--admin-success-ink);
   border-color: rgba(120, 200, 140, 0.28);
-  background: rgba(40, 90, 60, 0.18);
+  background: color-mix(in srgb,var(--admin-success-ink) 18%,transparent);
 }
 
 .lib-admin-target-pill.is-draft {
-  color: #ffd9a0;
+  color: var(--admin-warning-ink);
   border-color: rgba(255, 196, 120, 0.28);
 }
 
@@ -882,7 +882,7 @@
   padding: 8px 10px;
   border-radius: 10px;
   border: 1px solid rgba(111, 211, 139, 0.22);
-  background: rgba(40, 90, 60, 0.12);
+  background: color-mix(in srgb,var(--admin-success-ink) 12%,transparent);
   font-size: 0.72rem;
   color: var(--muted);
 }
@@ -897,9 +897,9 @@
   font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #b8e8c4;
+  color: var(--admin-success-ink);
   border: 1px solid rgba(111, 211, 139, 0.28);
-  background: rgba(40, 90, 60, 0.2);
+  background: color-mix(in srgb,var(--admin-success-ink) 20%,transparent);
 }
 
 .lib-admin-live-stats b {
@@ -912,7 +912,7 @@
   margin: 0;
   padding: 12px;
   border-radius: 12px;
-  border: 1px dashed rgba(239, 215, 142, 0.18);
+  border: 1px dashed color-mix(in srgb,var(--v2gold) 18%,transparent);
   font-size: 0.8rem;
   color: var(--muted);
   line-height: 1.45;
@@ -927,7 +927,7 @@
   padding: 12px 14px;
   border-radius: 12px;
   border: 1px solid rgba(140, 190, 230, 0.28);
-  background: rgba(40, 90, 140, 0.12);
+  background: color-mix(in srgb,var(--admin-accent) 12%,transparent);
 }
 
 .lib-admin-edit-banner b {
@@ -946,7 +946,7 @@
 
 .lib-admin-list-fold {
   margin-top: 14px;
-  border: 1px solid rgba(239, 215, 142, 0.14);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 14%,transparent);
   border-radius: 12px;
   overflow: hidden;
 }
@@ -985,7 +985,7 @@
   margin-bottom: 12px;
   border-radius: 12px;
   border: 1px solid rgba(140, 190, 230, 0.28);
-  background: rgba(40, 90, 140, 0.12);
+  background: color-mix(in srgb,var(--admin-accent) 12%,transparent);
 }
 
 .lib-admin-edit-banner b {
@@ -1010,7 +1010,7 @@
   gap: 10px;
   padding: 12px;
   border-radius: 12px;
-  border: 1px solid rgba(239, 215, 142, 0.1);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 10%,transparent);
   background: rgba(255, 255, 255, 0.02);
   font-size: 0.8rem;
 }
@@ -1055,18 +1055,18 @@
   font-size: 0.68rem;
   font-weight: 800;
   color: var(--muted);
-  border: 1px solid rgba(239, 215, 142, 0.16);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 16%,transparent);
   background: rgba(255, 255, 255, 0.03);
 }
 
 .lib-admin-list-item.is-online .lib-admin-status-pill {
-  color: #b8e8c4;
+  color: var(--admin-success-ink);
   border-color: rgba(120, 200, 140, 0.28);
-  background: rgba(40, 90, 60, 0.18);
+  background: color-mix(in srgb,var(--admin-success-ink) 18%,transparent);
 }
 
 .lib-admin-list-item.is-draft .lib-admin-status-pill {
-  color: #ffd9a0;
+  color: var(--admin-warning-ink);
   border-color: rgba(255, 196, 120, 0.28);
 }
 
@@ -1084,12 +1084,12 @@
 
 .lib-admin-btn-warn {
   border-color: rgba(255, 196, 120, 0.45) !important;
-  color: #ffd9a0 !important;
+  color: var(--admin-warning-ink) !important;
 }
 
 .lib-admin-btn-danger {
   border-color: rgba(255, 120, 120, 0.45) !important;
-  color: #ffb0b0 !important;
+  color: var(--admin-error-ink) !important;
 }
 
 .lib-admin-modal {
@@ -1118,7 +1118,7 @@
   display: grid;
   grid-template-rows: auto auto minmax(0, 1fr);
   border-radius: 18px;
-  border: 1px solid rgba(239, 215, 142, 0.22);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 22%,transparent);
   background: linear-gradient(180deg, rgba(24, 28, 36, 0.98), rgba(12, 14, 18, 0.98));
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
   overflow: hidden;
@@ -1131,7 +1131,7 @@
   justify-content: space-between;
   gap: 10px;
   padding: 14px 16px;
-  border-bottom: 1px solid rgba(239, 215, 142, 0.1);
+  border-bottom: 1px solid color-mix(in srgb,var(--v2gold) 10%,transparent);
 }
 
 .lib-admin-modal-head h3 {
@@ -1151,7 +1151,7 @@
   display: grid;
   gap: 10px;
   padding: 12px 16px;
-  border-bottom: 1px solid rgba(239, 215, 142, 0.08);
+  border-bottom: 1px solid color-mix(in srgb,var(--v2gold) 8%,transparent);
 }
 
 .lib-admin-modal-search {
@@ -1170,7 +1170,7 @@
   box-sizing: border-box;
   min-height: 42px;
   border-radius: 12px;
-  border: 1px solid rgba(239, 215, 142, 0.14);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 14%,transparent);
   background: rgba(255, 255, 255, 0.03);
   color: var(--ink);
   padding: 10px 12px;
@@ -1187,7 +1187,7 @@
   min-height: 36px;
   padding: 6px 12px;
   border-radius: 999px;
-  border: 1px solid rgba(239, 215, 142, 0.14);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 14%,transparent);
   background: rgba(255, 255, 255, 0.02);
   color: var(--muted);
   font-size: 0.76rem;
@@ -1201,8 +1201,8 @@
 
 .lib-admin-filter-tab.is-active {
   color: var(--ink);
-  border-color: rgba(239, 215, 142, 0.34);
-  background: rgba(239, 215, 142, 0.1);
+  border-color: color-mix(in srgb,var(--v2gold) 34%,transparent);
+  background: color-mix(in srgb,var(--v2gold) 10%,transparent);
 }
 
 .lib-admin-modal-body {
@@ -1215,7 +1215,7 @@
   min-height: 0;
   overflow: auto;
   padding: 10px;
-  border-right: 1px solid rgba(239, 215, 142, 0.08);
+  border-right: 1px solid color-mix(in srgb,var(--v2gold) 8%,transparent);
   display: grid;
   gap: 8px;
   align-content: start;
@@ -1230,15 +1230,15 @@
   text-align: left;
   padding: 10px 12px;
   border-radius: 12px;
-  border: 1px solid rgba(239, 215, 142, 0.1);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 10%,transparent);
   background: rgba(255, 255, 255, 0.02);
   color: inherit;
   cursor: pointer;
 }
 
 .lib-admin-modal-row.is-selected {
-  border-color: rgba(239, 215, 142, 0.34);
-  background: rgba(239, 215, 142, 0.08);
+  border-color: color-mix(in srgb,var(--v2gold) 34%,transparent);
+  background: color-mix(in srgb,var(--v2gold) 8%,transparent);
 }
 
 .lib-admin-modal-row-main {
@@ -1296,7 +1296,7 @@
   aspect-ratio: 2 / 3;
   border-radius: 10px;
   overflow: hidden;
-  border: 1px solid rgba(239, 215, 142, 0.12);
+  border: 1px solid color-mix(in srgb,var(--v2gold) 12%,transparent);
   background: rgba(255, 255, 255, 0.03);
 }
 
@@ -1434,7 +1434,7 @@
 
   .lib-admin-modal-list {
     border-right: 0;
-    border-bottom: 1px solid rgba(239, 215, 142, 0.08);
+    border-bottom: 1px solid color-mix(in srgb,var(--v2gold) 8%,transparent);
     max-height: 42vh;
   }
 
