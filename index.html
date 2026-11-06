@@ -30017,7 +30017,7 @@ window.addEventListener("DOMContentLoaded",()=>{
         ensureBottomNavDock();
         restoreStatsAuth();
         initFontSettings();
-        ensureCanonicalSourceLibrary().then(()=>{try{const v=currentRoute&&currentRoute.view;if(["more","home","books","quellen-book","quellen-scholar"].includes(v)&&typeof render==="function")render()}catch(e){}}).catch(()=>{});
+        ensureCanonicalSourceLibrary().then(()=>{try{const v=currentRoute&&currentRoute.view;if(["more","books","quellen-book","quellen-scholar"].includes(v)&&typeof render==="function")render()}catch(e){}}).catch(()=>{});
         applyStandalonePwaClass();
         trackStandaloneInstallIfNeeded();
         initAndroidTapCleanup();
@@ -30058,7 +30058,10 @@ window.addEventListener("load",()=>{
     }
     initFontSettings();
     initOfflineEngine().catch(()=>{});
-    render();
+    /* HOME_STARTUP_SINGLE_RENDER_20261101: DOMContentLoaded already painted
+       the home shell. Do not remove and rebuild it a second time on load;
+       that can visibly jump under a user\u0027s first scroll gesture. */
+    if(!(readRoute().view==="home"&&document.querySelector("#appView .home-v380-shell")))render();
     if("serviceWorker" in navigator&&!window.__darSwMessageBound){
       window.__darSwMessageBound=true;
       navigator.serviceWorker.addEventListener("message",(ev)=>{
