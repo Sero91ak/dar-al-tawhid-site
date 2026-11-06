@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-264` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-265` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4765
-totalVerifiedEntries: 4765
-loadedEntries: 4765
-uniqueVerifiedReferences: 4765
-missingCount: 1471
+entriesCount: 4766
+totalVerifiedEntries: 4766
+loadedEntries: 4766
+uniqueVerifiedReferences: 4766
+missingCount: 1470
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:82
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-264.json
-nächster Gap-Fill-Batch: entries-gap-06-265.json
+letzter Gap-Fill-Batch: entries-gap-06-265.json
+nächster Gap-Fill-Batch: entries-gap-06-266.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `575` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `576` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -683,3 +683,7 @@ Ein authentisch eingestufter mawqūf-Āṯar von Abū Hurayrah zu Qurʾān 4:145
 ## Batch 06-264 – 06.11.2026
 
 Ein marfūʿer und in Ṣaḥīḥ al-Buḫārī 3435 authentisch überlieferter Prophetenbericht zu 4:171 über ʿUbādah ibn aṣ-Ṣāmit registriert; die Kapitelüberschrift zitiert den Qurʾān-Vers direkt. Kein eigenes mawqūf-Wort ʿUbādahs. 4:102 aus Buḫārī 942 separat vorgemerkt, noch nicht registriert. Neuer Stand 4765/6236, 1471 offene Referenzen. Quellen-/Textprüfung in SOURCE_REVIEW_06-264.md.
+
+## Batch 06-265 — 06.11.2026 (Prüfzweig)
+
+Qurʾān 4:102: Ibn ʿUmar berichtet als Ṣaḥābī die authentische Prophetenhandlung des Furchtgebets bei Ṣaḥīḥ al-Buḫārī 942, dessen Kapitelüberschrift den Vers 4:102 ausdrücklich nennt. Marfūʿ, kein eigenständiges Ibn-ʿUmar-Zitat. Geplanter Stand 4766 von 6236, Lücken 1470; nur nach CI und Global-Push-Freigabe wirksam. Quelle und Isnād in SOURCE_REVIEW_06-265.md.
