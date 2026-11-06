@@ -60,6 +60,9 @@ extension Notification.Name {
 struct DarAlTawhidApp: App {
     @UIApplicationDelegateAdaptor(DarAppDelegate.self) private var appDelegate
     @StateObject private var router = DarAppRouter()
+    #if DEBUG
+    @State private var adhanCinematicOpen = false
+    #endif
 
     init() {
         let ink = DarWidgetStore.load().inkHex.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -110,6 +113,31 @@ struct DarAlTawhidApp: App {
                         url: String(describing: info["url"] ?? "")
                     )
                 }
+
+                #if DEBUG
+                .overlay(alignment: .topTrailing) {
+                    #if targetEnvironment(simulator)
+                    Button {
+                        adhanCinematicOpen = true
+                    } label: {
+                        Label("CINEMA TEST", systemImage: "film")
+                            .font(.system(size: 10, weight: .bold))
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 10)
+                            .foregroundStyle(Color(red: 0.95, green: 0.87, blue: 0.64))
+                            .background(Color.black.opacity(0.82), in: Capsule())
+                    }
+                    .accessibilityLabel("Adhān Cinematic Simulator öffnen")
+                    .padding(.top, 55)
+                    .padding(.trailing, 12)
+                    #endif
+                }
+                .fullScreenCover(isPresented: $adhanCinematicOpen) {
+                    DarAdhanCinematicDemo {
+                        adhanCinematicOpen = false
+                    }
+                }
+                #endif
         }
         #if os(macOS) || targetEnvironment(macCatalyst)
         .defaultSize(width: 1100, height: 780)

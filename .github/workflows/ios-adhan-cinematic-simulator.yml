@@ -1,0 +1,145 @@
+name: Adhan Cinematic Simulator QA
+
+on:
+  pull_request:
+    paths:
+      - "ios/DarAlTawhid/DarAlTawhid/DarAdhanCinematicDemo.swift"
+      - "ios/DarAlTawhid/DarAlTawhid/DarAlTawhidApp.swift"
+      - "ios/DarAlTawhid/DarAlTawhid.xcodeproj/project.pbxproj"
+      - ".github/workflows/ios-adhan-cinematic-simulator.yml"
+  push:
+    branches:
+      - feature/ios-adhan-cinematic-simulator-20261101
+    paths:
+      - "ios/DarAlTawhid/**"
+      - ".github/workflows/ios-adhan-cinematic-simulator.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  swift-syntax:
+    name: Swift parser and test-contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse native iOS files without linking Apple frameworks
+        run: |
+          swiftc -frontend -parse -D DEBUG \
+            ios/DarAlTawhid/DarAlTawhid/DarAdhanCinematicDemo.swift \
+            ios/DarAlTawhid/DarAlTawhid/DarAlTawhidApp.swift
+          swiftc -frontend -parse \
+            ios/DarAlTawhid/DarAlTawhid/DarAdhanCinematicDemo.swift \
+            ios/DarAlTawhid/DarAlTawhid/DarAlTawhidApp.swift
+      - name: Test five-prayer and isolation contract
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          project=Path('ios/DarAlTawhid')
+          code=(project/'DarAlTawhid/DarAdhanCinematicDemo.swift').read_text()
+          app=(project/'DarAlTawhid/DarAlTawhidApp.swift').read_text()
+          pbx=(project/'DarAlTawhid.xcodeproj/project.pbxproj').read_text()
+          assert 'case fajr, dhuhr, asr, maghrib, isha' in code
+          assert 'AVPlayerLooper' in code and 'player.isMuted = true' in code
+          assert 'Die Gebetszeit ist eingetreten.' in code
+          assert 'fileImporter' in code and 'startAccessingSecurityScopedResource' in code
+          assert 'accessibilityReduceMotion' in code and 'scenePhase' in code
+          assert app.count('DarAdhanCinematicDemo {') == 1
+          assert '#if DEBUG' in app and '#if targetEnvironment(simulator)' in app
+          assert pbx.count('DarAdhanCinematicDemo.swift in Sources') == 2
+          assert 'OneSignal' not in code and 'AlarmKit' not in code
+          print('PASS: Debug isolation, five prayer labels, video loop, muted video, file import, responsive overlay')
+          PY
+
+  xcode-project:
+    name: Xcode project / simulator build
+    runs-on: macos-15
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Xcode project file
+        run: |
+          plutil -lint ios/DarAlTawhid/DarAlTawhid.xcodeproj/project.pbxproj
+          plutil -lint ios/DarAlTawhid/DarAlTawhid/Info.plist
+      - name: Resolve target and build for iOS Simulator
+        run: |
+          if [ ! -f ios/DarAlTawhid/Vendor/OneSignal/OneSignalFramework.xcframework/Info.plist ]; then
+            echo "::warning::The main app's existing OneSignal XCFrameworks are absent from GitHub; skipping full app build. The standalone simulator app is built in its own job."
+            exit 0
+          fi
+          xcodebuild \
+            -project ios/DarAlTawhid/DarAlTawhid.xcodeproj \
+            -scheme DarAlTawhid \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath "$RUNNER_TEMP/DarAdhanCinematicDerived" \
+            CODE_SIGNING_ALLOWED=NO \
+            build 2>&1 | tee "$RUNNER_TEMP/adhan-cinematic-xcodebuild.log"
+          test "${PIPESTATUS[0]}" -eq 0
+
+  standalone-preview:
+    name: Standalone iOS Simulator App
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate dependency-free QA preview app
+        run: |
+          cd ios/AdhanCinematicPreview
+          xcodegen generate
+      - name: Build standalone app for iOS Simulator
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project ios/AdhanCinematicPreview/DarAdhanCinematicPreview.xcodeproj \
+            -scheme DarAdhanCinematicPreview \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath "$RUNNER_TEMP/DarAdhanPreviewDerived" \
+            CODE_SIGNING_ALLOWED=NO \
+            build 2>&1 | tee "$RUNNER_TEMP/DarAdhanPreviewBuild.log"
+      - name: Package installable Simulator app
+        run: |
+          APP="$RUNNER_TEMP/DarAdhanPreviewDerived/Build/Products/Debug-iphonesimulator/DarAdhanCinematicPreview.app"
+          test -d "$APP"
+          test -d "$APP/CinematicMedia"
+          test -f "$APP/CinematicMedia/manifest.json"
+          echo 'PASS: shared CinematicMedia folder embedded in compiled iOS app bundle'
+          ditto -c -k --sequesterRsrc --keepParent "$APP" "$RUNNER_TEMP/DarAdhanCinematicPreview-simulator.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DarAdhanCinematicPreview-simulator
+          path: ${{ runner.temp }}/DarAdhanCinematicPreview-simulator.zip
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Launch the QA app in a real iOS Simulator and capture the initial screen
+        run: |
+          DEVICE="$(python3 - <<'PY'
+          import json,subprocess
+          data=json.loads(subprocess.check_output(['xcrun','simctl','list','devices','available','-j']))
+          items=[dev for group in data['devices'].values() for dev in group if 'iPhone' in dev.get('name','') and dev.get('isAvailable', True)]
+          if not items:
+              raise SystemExit('No available iPhone simulator in GitHub Actions environment')
+          print(items[0]['udid'])
+          PY
+          )"
+          xcrun simctl boot "$DEVICE" || true
+          xcrun simctl bootstatus "$DEVICE" -b
+          APP="$RUNNER_TEMP/DarAdhanPreviewDerived/Build/Products/Debug-iphonesimulator/DarAdhanCinematicPreview.app"
+          xcrun simctl install "$DEVICE" "$APP"
+          xcrun simctl launch "$DEVICE" de.daraltawhid.cinematicpreview
+          sleep 5
+          xcrun simctl io "$DEVICE" screenshot "$RUNNER_TEMP/DarAdhanCinematicPreview-iPhone.png"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DarAdhanCinematicPreview-simulator-screenshot
+          path: ${{ runner.temp }}/DarAdhanCinematicPreview-iPhone.png
+          if-no-files-found: error
+          retention-days: 7
