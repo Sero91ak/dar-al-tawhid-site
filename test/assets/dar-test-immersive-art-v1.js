@@ -79,17 +79,59 @@ function scrollPixels(el){
  }
  return px;
 }
+/* One scroll owner. Frame-bound, reversible, without observer/timeout loops.
+   Apple App Store behavior: full-cover photo lives behind the real top bar;
+   upward native scroll reveals the compact opaque bar, downward/pull restores
+   the same original image. Changing height or scrollTop would cause jitter. */
+var morphHeader=null;
+function setVar(el,key,value){
+ if(el&&el.style.getPropertyValue(key)!==value)el.style.setProperty(key,value);
+}
+function resetHeader(){
+ if(!morphHeader)return;
+ ["--dar-store-header-alpha","--dar-store-expanded-alpha","--dar-store-logo-scale"].forEach(function(key){
+   morphHeader.style.removeProperty(key);
+ });
+ morphHeader=null;
+}
+function morphHome(el,pixels){
+ var h=Math.max(260,el.getBoundingClientRect().height);
+ var p=Math.min(1,Math.max(0,pixels/(h*.77)));
+ // Smoothstep avoids a visible jump when reversing scroll direction.
+ var smooth=p*p*(3-2*p);
+ var pull=Math.min(1,Math.max(0,-Number(win.scrollY||0)/200));
+ var opaque=smooth.toFixed(4);
+ var titleOpacity=(1-Math.min(1,p*1.45)).toFixed(4);
+ var imageScale=(reduced?1:(1.045-.045*smooth+.055*pull)).toFixed(4);
+ setVar(el,"--dar-store-title-opacity",reduced?"1":titleOpacity);
+ setVar(el,"--dar-store-title-shift",reduced?"0px":(-18*smooth).toFixed(2)+"px");
+ setVar(el,"--dar-store-image-scale",imageScale);
+ var header=doc.getElementById("darTestBrandHeaderV1");
+ if(header){
+   if(morphHeader&&morphHeader!==header)resetHeader();
+   morphHeader=header;
+   setVar(header,"--dar-store-header-alpha",opaque);
+   setVar(header,"--dar-store-expanded-alpha",(1-smooth).toFixed(4));
+   setVar(header,"--dar-store-logo-scale",reduced?"1":(1-.10*smooth).toFixed(4));
+ }
+}
 function depth(){
- if(reduced||!allowed())return;
+ if(!allowed())return;
+ var homeFound=false;
  active.forEach(function(el){
    if(!el.isConnected)return;
    var position=scrollPixels(el);
    var value=String(Math.round(Math.min(1,Math.max(0,position/180))*100)/100);
    if(el.style.getPropertyValue("--dar-art-progress")!==value){
      el.style.setProperty("--dar-art-progress",value);
-     el.style.setProperty("--dar-art-scale",String((1.045-Number(value)*.045).toFixed(4)));
+     el.style.setProperty("--dar-art-scale",String((reduced?1:1.045-Number(value)*.045).toFixed(4)));
+   }
+   if(el.dataset.darArtKind==="home"){
+     homeFound=true;
+     morphHome(el,position);
    }
  });
+ if(!homeFound)resetHeader();
 }
 function reconcile(){
  if(!allowed()){active=[];return;}
