@@ -4,6 +4,7 @@ No user data, login circumvention, production mutation or screenshots shipped.
 """
 import sys
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -151,7 +152,29 @@ def main():
               const x=document.querySelector('#darHomeHtmlParityV1 .dhp-welcome');
               return x&&x.style.getPropertyValue('--dar-art-progress')==='0';
             """))
-        print("PASS: deployed real Home parity image visibly integrated + reversible sticky depth",flush=True)
+            # A successful scroll test is not sufficient. The original report
+            # concerns nav geometry morphing during SPA route transitions.
+            d.find_element(By.CSS_SELECTOR,"#bottomNav [data-bottom-nav='more']").click()
+            WebDriverWait(d,14).until(lambda b:b.execute_script("""
+              return document.body.classList.contains('is-more-route');
+            """))
+            more_nav=nav_snapshot(d)
+            print(f"NAV MORE ROUTE {width}x{height} {more_nav}",flush=True)
+            assert_nav_stable(more_nav,width)
+            for key in ('x','width','height','radius'):
+                if abs(nav0[key]-more_nav[key])>2:
+                    raise AssertionError('Bottom dock morphs on MORE route: '+str((key,nav0,more_nav)))
+            d.find_element(By.CSS_SELECTOR,"#bottomNav [data-bottom-nav='home']").click()
+            WebDriverWait(d,14).until(lambda b:b.execute_script("""
+              return document.body.classList.contains('is-home-route');
+            """))
+            home_nav_back=nav_snapshot(d)
+            print(f"NAV RETURN HOME {width}x{height} {home_nav_back}",flush=True)
+            assert_nav_stable(home_nav_back,width)
+            for key in ('x','width','height','radius'):
+                if abs(nav0[key]-home_nav_back[key])>2:
+                    raise AssertionError('Bottom dock morphs after return Home: '+str((key,nav0,home_nav_back)))
+        print("PASS: deployed real Home parity image visibly integrated + reversible sticky depth and stable navigation across MORE/Home route swaps",flush=True)
     finally:
         d.quit()
 if __name__=="__main__":
