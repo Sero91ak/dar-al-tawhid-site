@@ -238,3 +238,16 @@ html.dar-test-immersive-art-v1[data-theme="salbei"] body.is-home-route #darHomeH
   --dar-home-art-gutter:max(14px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
  }
 }
+
+
+/* DAR_TEST_HOME_STICKY_SCROLL_CHAIN_V3 · verified Chromium defect 2026-11-06:
+ * BODY had overflow-x:hidden -> computed overflow-y:auto. But the real
+ * scroll owner is HTML/window.scrollY. That phantom BODY scrolling ancestor
+ * prevents position:sticky from ever pinning to the fixed brand header.
+ * clip does not coerce visible Y to auto; retain horizontal clipping without
+ * introducing a second vertical scroll container. TEST HOME only.
+ * Do not override deliberate modal/dialog scroll locks. */
+html.dar-test-immersive-art-v1 body.has-bottom-nav.is-home-route:not(.is-feed-fullscreen):not(.is-ilm-chat-route):not(.dar-modal-open):not(.modal-open):not(.dialog-open):not([data-scroll-locked="true"]){
+ overflow-x:clip!important;
+ overflow-y:visible!important;
+}
