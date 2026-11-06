@@ -9,6 +9,31 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 URL="https://dar-al-tawhid-test.sero91ak.workers.dev/test/?env=staging&immersive=20261106-v2#home"
 
+
+def nav_snapshot(d):
+    return d.execute_script("""
+      const n=document.getElementById('bottomNav');
+      if(!n)return null;
+      const c=getComputedStyle(n),r=n.getBoundingClientRect();
+      return {x:r.left,y:r.top,width:r.width,height:r.height,
+        viewport:innerWidth,position:c.position,display:c.display,
+        transform:c.transform,flexDirection:c.flexDirection,
+        radius:parseFloat(c.borderTopLeftRadius),
+        iconCount:n.querySelectorAll('.bottom-nav-btn .nav-icon img.dar3d-icon').length,
+        buttonCount:n.querySelectorAll(':scope > .bottom-nav-btn').length,
+        page:document.body.className};
+    """)
+
+def assert_nav_stable(n, width):
+    if not n or n['display']=='none':
+        raise AssertionError('Native bottom navigation absent at '+str(width)+': '+str(n))
+    if n['position']!='fixed' or n['buttonCount']!=5 or n['iconCount']!=5:
+        raise AssertionError('Native 5-icon navigation lost: '+str(n))
+    if abs(n['x']+n['width']/2-n['viewport']/2)>3:
+        raise AssertionError('Navigation shifted horizontally: '+str(n))
+    if n['width']<min(260,width-45) or n['height']<62 or n['height']>75 or n['radius']<21:
+        raise AssertionError('Navigation changed capsule geometry: '+str(n))
+
 def main():
     opt=Options()
     for arg in ["--headless=new","--no-sandbox","--disable-dev-shm-usage","--disable-gpu"]:
@@ -36,6 +61,19 @@ def main():
                 };
             """)
             print(f"HOME {width}x{height} {before}",flush=True)
+            nav0=nav_snapshot(d)
+            print(f"NAV INITIAL {width}x{height} {nav0}",flush=True)
+            assert_nav_stable(nav0,width)
+            if before["height"] < (270 if width<700 else 310):
+                raise AssertionError("Cinematic image too small: "+str(before))
+            hero_order=d.execute_script("""
+              const root=document.getElementById('darHomeHtmlParityV1'),hero=root.querySelector('.dhp-welcome');
+              const prayer=root.querySelector('.dat-smart-prayer,.dhp-prayer');
+              return {heroOrder:getComputedStyle(hero).order,prayerOrder:prayer?getComputedStyle(prayer).order:null};
+            """)
+            if int(hero_order["heroOrder"])>=int(hero_order["prayerOrder"] or 99):
+                raise AssertionError("Photo does not lead the Home layout: "+str(hero_order))
+
             if before["display"]=="none" or before["rootVisible"]=="none" or before["height"]<185:
                 raise AssertionError("No visibly sized home hero: "+str(before))
             if "hero-mobile-adobe.jpg" not in before["image"] and "hero-wide-adobe.jpg" not in before["image"]:
@@ -80,6 +118,13 @@ def main():
                     docTop:doc.scrollTop,appTop:app?.scrollTop||0};
                 """)
             print(f"SCROLL {width}x{height} {after}",flush=True)
+            nav1=nav_snapshot(d)
+            print(f"NAV SCROLLED {width}x{height} {nav1}",flush=True)
+            assert_nav_stable(nav1,width)
+            for key in ('x','width','height','radius'):
+                if abs(nav0[key]-nav1[key])>2:
+                    raise AssertionError('Bottom dock changes geometry during scroll: '+str((key,nav0,nav1)))
+
             sticky=d.execute_script("""
               const el=document.querySelector('#darHomeHtmlParityV1 .dhp-welcome');
               const topRule=getComputedStyle(el).top;
