@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-263` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-264` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4764
-totalVerifiedEntries: 4764
-loadedEntries: 4764
-uniqueVerifiedReferences: 4764
-missingCount: 1472
+entriesCount: 4765
+totalVerifiedEntries: 4765
+loadedEntries: 4765
+uniqueVerifiedReferences: 4765
+missingCount: 1471
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:82
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-263.json
-nächster Gap-Fill-Batch: entries-gap-06-264.json
+letzter Gap-Fill-Batch: entries-gap-06-264.json
+nächster Gap-Fill-Batch: entries-gap-06-265.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `574` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `575` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -679,3 +679,7 @@ Zehn neue vor dem Batch tatsächlich offene Referenzen: 4:56, 4:61, 4:71, 4:72, 
 ## Batch 06-263 — 06.11.2026
 
 Ein authentisch eingestufter mawqūf-Āṯar von Abū Hurayrah zu Qurʾān 4:145, Ibn Abī Ḥātim 6154. Aḥmad Šākir: isnād ṣaḥīḥ; al-Wādiʿī: isnād ḥasan. Vier weitere geprüfte Kandidaten (4:118, 4:120, 4:124, 4:171) bleiben mangels vollständiger Beweislage offen. Katalog 4764, Lücken 1472; Detailbericht SOURCE_REVIEW_06-263.md.
+
+## Batch 06-264 – 06.11.2026
+
+Ein marfūʿer und in Ṣaḥīḥ al-Buḫārī 3435 authentisch überlieferter Prophetenbericht zu 4:171 über ʿUbādah ibn aṣ-Ṣāmit registriert; die Kapitelüberschrift zitiert den Qurʾān-Vers direkt. Kein eigenes mawqūf-Wort ʿUbādahs. 4:102 aus Buḫārī 942 separat vorgemerkt, noch nicht registriert. Neuer Stand 4765/6236, 1471 offene Referenzen. Quellen-/Textprüfung in SOURCE_REVIEW_06-264.md.
