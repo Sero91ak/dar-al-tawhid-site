@@ -59,9 +59,9 @@ body.dar-v2-active #panel .dar-v3-legacy-tools[open]>summary:after{content:"−"
 body.dar-v2-active #panel .dar-v3-legacy-tools .folder-grid{margin:7px 0 14px!important}
 body.dar-v2-active #panel .dar-v3-legacy-tools .command-grid{margin:0 0 17px!important}
 /* Container sizing follows the real Admin pane, including iPad Split View and foldables. */
-@container (max-width:850px){.dar-v3-columns{grid-template-columns:minmax(0,1fr)}}
+@container (max-width:720px){.dar-v3-columns{grid-template-columns:minmax(0,1fr)}}
 @container (max-width:540px){.dar-v3-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.dar-v3-head{flex-direction:column;gap:10px}.dar-v3-flags{justify-content:flex-start;max-width:100%}}
-@media(max-width:1080px){.dar-v3-columns{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:760px){.dar-v3-columns{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:719px){
  .dar-v3-head{flex-direction:column;gap:10px}
  .dar-v3-flags{justify-content:flex-start;max-width:100%}
