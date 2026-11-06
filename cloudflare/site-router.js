@@ -1350,7 +1350,7 @@ export default {
                 /<\/head>/i.test(documentHtml)) {
               documentHtml = documentHtml.replace(/<\/head>/i,
                 '<link rel="stylesheet" href="/assets/q-royal-manuscript-v42.css?v=qapp-20261013-2" data-q-royal="v42">' +
-                '<script src="/assets/q-royal-manuscript-v42.js?v=20261105-nine-language-v1" defer><\\/script>'.replace('<\\/script>', '</script>') +
+                '<script src="/assets/q-royal-manuscript-v42.js?v=20261106-legacy-switch-v2" defer><\\/script>'.replace('<\\/script>', '</script>') +
                 '<script src="/assets/q-source-app-view.js?v=20261101-reader-v2" defer></script>' +
                 '</head>');
             }
