@@ -1,0 +1,67 @@
+name: DĀR Test Visible Home V2 · Isolated Release
+# Deployment of the isolated /test Worker only; NEVER the visitor production Worker.
+on:
+  push:
+    branches:
+      - feat/dar-test-immersive-art-20261106
+    paths:
+      - .github/workflows/dar-test-visible-home-v2-release.yml
+      - test/assets/dar-test-immersive-art-v1.css
+      - test/assets/dar-test-immersive-art-v1.js
+      - test/tools/dar-test-immersive-actual-browser.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dar-test-worker-release
+  cancel-in-progress: false
+
+jobs:
+  deploy-visible-test:
+    if: ${{ github.ref == 'refs/heads/feat/dar-test-immersive-art-20261106' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Confirm strictly isolated target
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REF}" = "refs/heads/feat/dar-test-immersive-art-20261106"
+          grep -q '^name = "dar-al-tawhid-test"$' wrangler.test.toml
+          grep -q '^routes = \[\]$' wrangler.test.toml
+          grep -q 'DAR_TEST_FOLD_V2_RETIRED_20261106' cloudflare/test-app-worker.js
+          ! grep -q 'const foldJsV2 =' cloudflare/test-app-worker.js
+          node --check cloudflare/test-app-worker.js
+          node test/tools/dar-duo-responsive-guard.cjs
+          node test/tools/dar-test-immersive-art-v1-guard.cjs
+      - name: Install and build unchanged DĀR Test assets
+        run: |
+          npm install
+          npm run build
+      - name: Publish DĀR Test Worker exclusively
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          test -n "${CLOUDFLARE_API_TOKEN:-}"
+          test -n "${CLOUDFLARE_ACCOUNT_ID:-}"
+          npx wrangler deploy -c wrangler.test.toml
+      - name: Verify published immersive pilot assets
+        run: |
+          set -euo pipefail
+          ROOT='https://dar-al-tawhid-test.sero91ak.workers.dev'
+          curl -fL --retry 4 --retry-delay 4 --retry-all-errors -sS "${ROOT}/test/assets/dar-test-immersive-art-v1.js?v=20261106" | grep -q 'DAR_TEST_IMMERSIVE_ART_V1'
+          curl -fL --retry 4 --retry-delay 4 --retry-all-errors -sS "${ROOT}/test/assets/dar-test-immersive-art-v1.css?v=20261106" | grep -q 'IMMERSIVE UI ART V1'
+          echo 'DĀR Test immersive artwork uploaded; visitor production worker untouched.'
+
+      - name: Verify REAL visible Home hero in headless Chromium
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 test/tools/dar-test-immersive-actual-browser.py
