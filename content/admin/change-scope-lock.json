@@ -9330,6 +9330,21 @@
         "content/admin/frauen-dubletten-protokoll-2026-11-06.json"
       ],
       "expiresAt": "2026-11-09T23:59:00+01:00"
+    },
+    {
+      "id": "q52-all-nine-languages-readable-source-lesson-20261106",
+      "at": "2026-11-06T12:35:00+01:00",
+      "approvedBy": "user-explicit-20261106-all-nine-languages-readable-when-selected",
+      "reason": "Narrow authorization to implement the user's existing nine-language rule for canonical Q52 source card and its learning quiz: all text and questions actually switch, Arabic and Sorani RTL, canonical Q link unchanged. Read-only regression and workflow trigger only. Existing globalLock remains on; no permission for notifications, admin secrets, unrelated worker layout, Kids or TV.",
+      "paths": [
+        "assets/q52-locales.json",
+        "assets/q52-localized.js",
+        "q/52/index.html",
+        "lernen/khadijah-salam-paradies/index.html",
+        "scripts/check-q52-nine-language.cjs",
+        ".github/workflows/check-qsource-standard.yml"
+      ],
+      "expiresAt": "2026-11-13T23:59:00+01:00"
     }
   ],
   "enabled": true
