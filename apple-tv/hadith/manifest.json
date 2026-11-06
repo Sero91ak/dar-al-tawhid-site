@@ -5,7 +5,7 @@
   "formatVersion": "1.3",
   "authenticOnly": false,
   "currentSeries": "3351-3450",
-  "nextId": "HAD-3415",
+  "nextId": "HAD-3425",
   "display": {
     "narratorGap": 14,
     "sourceGap": 14,
@@ -22,7 +22,7 @@
     "showSharh": true,
     "showSharhMode": "compact",
     "requireVerifiedSharh": false,
-    "readyThrough": "HAD-3414"
+    "readyThrough": "HAD-3424"
   },
   "hadithLibrary": {
     "enabledForTestApp": true,
@@ -51,7 +51,7 @@
       "needs-review"
     ]
   },
-  "readyThrough": "HAD-3414",
+  "readyThrough": "HAD-3424",
   "contentPolicy": {
     "hadithRequiresAuthenticatedSource": true,
     "hadithRequiresVerifiedSharh": true,

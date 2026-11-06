@@ -1,0 +1,96 @@
+{
+  "date": "2026-11-06",
+  "project": "DĀR AL TAWḤĪD – Ḥadīṯ, Šarḥ & Āṯār",
+  "batchSize": 10,
+  "range": "HAD-3415–HAD-3424",
+  "recordType": "athar",
+  "sourceBook": "Ibn Abī Šaybah, al-Muṣannaf, Kitāb al-Adab, vol. 6",
+  "reportMap": [
+    {
+      "id": "HAD-3415",
+      "chapter": 164,
+      "report": 1,
+      "page": "221",
+      "speaker": "Ibn ʿAbbās"
+    },
+    {
+      "id": "HAD-3416",
+      "chapter": 167,
+      "report": 3,
+      "page": "223",
+      "speaker": "Bilāl"
+    },
+    {
+      "id": "HAD-3417",
+      "chapter": 169,
+      "report": 10,
+      "page": "225–226",
+      "speaker": "Saʿd ibn Abī Waqqāṣ"
+    },
+    {
+      "id": "HAD-3418",
+      "chapter": 187,
+      "report": 1,
+      "page": "240",
+      "speaker": "ʿAbdullāh ibn Masʿūd"
+    },
+    {
+      "id": "HAD-3419",
+      "chapter": 180,
+      "report": 8,
+      "page": "234",
+      "speaker": "ʿAṭāʾ ibn Abī Rabāḥ"
+    },
+    {
+      "id": "HAD-3420",
+      "chapter": 185,
+      "report": 3,
+      "page": "238",
+      "speaker": "Ibn ʿAbbās"
+    },
+    {
+      "id": "HAD-3421",
+      "chapter": 188,
+      "report": 2,
+      "page": "240",
+      "speaker": "ʿUmar ibn al-Ḫaṭṭāb"
+    },
+    {
+      "id": "HAD-3422",
+      "chapter": 185,
+      "report": 5,
+      "page": "238",
+      "speaker": "ʿUmar ibn ʿAbd al-ʿAzīz"
+    },
+    {
+      "id": "HAD-3423",
+      "chapter": 186,
+      "report": 2,
+      "page": "239",
+      "speaker": "Iyās ibn Muʿāwiyah"
+    },
+    {
+      "id": "HAD-3424",
+      "chapter": 187,
+      "report": 7,
+      "page": "240",
+      "speaker": "ʿUmar ibn al-Ḫaṭṭāb"
+    }
+  ],
+  "verification": {
+    "originalSources": "All ten report numbers and quoted Arabic excerpts checked against the corresponding Islamweb chapter pages; each record stores the full exact source URL and reported isnad.",
+    "hadithVersusAthar": "All ten marked Athar, no unsubstantiated marfu or verified Sharh.",
+    "authenticity": "No individual isnad graded sahih/hasan without full chain/illal analysis; each has precise caveat.",
+    "duplicateScreen": "Targeted GitHub search for Arabic source fragments, German concepts and names; not a complete full-corpus semantic duplicate evaluation.",
+    "interpretation": "Historical attitudes and practices are not turned into general legal mandates; questionable attribution notes kept.",
+    "sourceEdition": "The visible Islamweb volume/page is quoted as digital pagination; print edition not independently verified.",
+    "publicUi": "Internal HAD IDs stay backend-only; no card labels, breadcrumbs, source/number/share text.",
+    "distribution": "Identical production count and canonical ordering across web, iOS, Android, tvOS. Test app uses reduced sample; TV screensaver keeps its shuffle algorithm."
+  },
+  "targetTotals": {
+    "total": 3424,
+    "hadith": 2408,
+    "athar": 1016
+  },
+  "nextInternalId": "HAD-3425"
+}
