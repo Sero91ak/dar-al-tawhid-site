@@ -20,7 +20,7 @@ function navButton(id,title,compact=false){const b=el("button","dar-v2-nav"+(com
 function init(){
  rail=el("aside","dar-v2-rail");rail.id="darV2Rail";rail.setAttribute("aria-label","DĀR Admin Hauptnavigation");
  const brand=el("div","dar-v2-brand");const logo=el("img","dar-v2-brand-logo");logo.src="/admin/admin-icon-192.png";logo.alt="";logo.width=40;logo.height=40;brand.append(logo);
- const words=el("span","dar-v2-brand-words");words.append(el("strong","", "DĀR ADMIN"),el("small","", "COMMAND CENTER V2"));brand.append(words);
+ const words=el("span","dar-v2-brand-words");words.append(el("strong","", "DĀR ADMIN"),el("small","", "INTELLIGENCE CENTER V3"));brand.append(words);
  rail.append(brand,el("nav","dar-v2-menu"),el("div","dar-v2-rail-foot","PRIVATE VERWALTUNG"));document.body.append(rail);
  const scrim=el("button","dar-v2-scrim");scrim.type="button";scrim.setAttribute("aria-label","Menü schließen");scrim.addEventListener("click",closeDrawer);document.body.append(scrim);
  bottom=el("nav","dar-v2-bottom");bottom.setAttribute("aria-label","Admin Schnellnavigation");
@@ -64,9 +64,21 @@ function toggleDrawer(open){
  $("#darV2More")?.setAttribute("aria-expanded",String(drawer));
 }
 function closeDrawer(){toggleDrawer(false)}
+const searchAliases={
+ quellen:["quelle","originalbeleg","q-id","nachweis","posts","beitrag"],
+ social:["redaktion","sprachen","übersetzung","neun sprachen","sprache","atelier"],
+ wissensbereich:["wissen","lehrbereich","frauen","männer","lernlinks"],
+ actions:["entwurf","veröffentlichen","neuer post","schreiben","publizieren"],
+ tech:["deploy","freigabe","release","cloudflare","system","health"],
+ besucher:["statistik","besucherzahlen","analytik","aufrufe"],
+ kennwoerter:["zugang","passwort","login"],
+ bibliothek:["pdf","buch","bibliothek"],
+ settings:["thema","design","hell","dunkel","salbei","layl"]
+};
+const searchNormalize=s=>String(s||"").normalize("NFKD").replace(/\p{M}/gu,"").toLocaleLowerCase("de-DE");
 function renderSearch(){
- searchResults.replaceChildren();const term=searchField.value.trim().toLocaleLowerCase("de-DE");
- const matches=options().filter(x=>x.title.toLocaleLowerCase("de-DE").includes(term));
+ searchResults.replaceChildren();const term=searchNormalize(searchField.value.trim());
+ const matches=options().filter(x=>[x.title,...(searchAliases[x.id]||[])].some(word=>searchNormalize(word).includes(term)));
  matches.forEach(x=>searchResults.append(navButton(x.id,x.title)));
  if(!matches.length)searchResults.append(el("p","dar-v2-empty","Kein passender Bereich"));
 }
@@ -75,7 +87,7 @@ function closeSearch(){if(overlay)overlay.hidden=true}
 function getStats(){
  try{const value=typeof lastData==="undefined"?null:lastData;if(!value||!Array.isArray(value.totals))return null;
  const rows=value.totals;const sum=key=>rows.reduce((v,row)=>v+(Number(row[key])||0),0);
- return {online:Number(value.live?.live_now)||0,views:sum("views"),shares:sum("shares"),saves:sum("saves"),rows};}catch{return null}
+ return {online:Number(value.live?.live_now)||0,views:sum("views"),shares:sum("shares"),saves:sum("saves"),rows,updated:value.updated||null};}catch{return null}
 }
 const nf=value=>Math.round(Number(value)||0).toLocaleString("de-DE");
 function buildOverview(){
@@ -119,7 +131,10 @@ function sync(){
  if(!rail)init();
  rail.hidden=false;bottom.hidden=false;
  rail.inert=window.innerWidth<=719&&!drawer;
- renderMenu();syncSelection();buildOverview();
+ renderMenu();syncSelection();
+ if(window.DARAdminIntelligenceV3){
+  try{window.DARAdminIntelligenceV3.sync(getStats())}catch(error){console.error("DĀR Admin V3 display fallback",error);buildOverview()}
+ }else buildOverview();
 }
 function queue(){if(queued)return;queued=true;requestAnimationFrame(sync)}
 function boot(){
