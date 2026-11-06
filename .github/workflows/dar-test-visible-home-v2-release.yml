@@ -17,7 +17,7 @@ permissions:
 
 concurrency:
   group: dar-test-worker-release
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy-visible-test:
@@ -58,8 +58,11 @@ jobs:
         run: |
           set -euo pipefail
           ROOT='https://dar-al-tawhid-test.sero91ak.workers.dev'
-          curl -fL --retry 4 --retry-delay 4 --retry-all-errors -sS "${ROOT}/test/assets/dar-test-immersive-art-v1.js?v=20261106" | grep -q 'DAR_TEST_IMMERSIVE_ART_V1'
-          curl -fL --retry 4 --retry-delay 4 --retry-all-errors -sS "${ROOT}/test/assets/dar-test-immersive-art-v1.css?v=20261106" | grep -q 'IMMERSIVE UI ART V1'
+          curl -fL --retry 4 --retry-delay 4 --retry-all-errors -sS "${ROOT}/test/assets/dar-test-immersive-art-v1.js?v=20261106" -o /tmp/dar-test-art.js
+          curl -fL --retry 4 --retry-delay 4 --retry-all-errors -sS "${ROOT}/test/assets/dar-test-immersive-art-v1.css?v=20261106" -o /tmp/dar-test-art.css
+          grep -q "DAR_TEST_IMMERSIVE_ART_V1" /tmp/dar-test-art.js
+          grep -q "IMMERSIVE UI ART V1" /tmp/dar-test-art.css
+          grep -q "#darHomeHtmlParityV1 .dhp-welcome" /tmp/dar-test-art.js
           echo 'DĀR Test immersive artwork uploaded; visitor production worker untouched.'
 
       - name: Verify REAL visible Home hero in headless Chromium
