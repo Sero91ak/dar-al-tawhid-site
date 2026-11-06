@@ -9356,6 +9356,22 @@
         ".github/workflows/check-qsource-standard.yml"
       ],
       "expiresAt": "2026-11-13T23:59:00+01:00"
+    },
+    {
+      "id": "frauen-internal-id-full-nine-no-new-q-20261106",
+      "at": "2026-11-06T12:35:00+01:00",
+      "approvedBy": "user-explicit-20261106-no-new-q-number-translate-same-frauen-id",
+      "reason": "User explicitly corrected Frauenwissen publication: no new numbered source links, keep same existing contribution ID and original direct source URLs in all nine adult app languages. Scope only ID-based locale catalog+reader, obsolete Q share shim deletion, read-only test and rule contracts. Global lock remains ON. No secrets, Push/OneSignal, Kids, prayer or layout changes.",
+      "paths": [
+        "assets/frauen/frauen-entry-locales-v1.json",
+        "assets/frauen/frauen-entry-locale-v1.js",
+        "assets/frauen/frauen-canonical-q-share-v1.js",
+        "scripts/check-frauen-entry-locales.cjs",
+        ".github/workflows/frauen-entry-locale-gate.yml",
+        "AGENTS.md",
+        "docs/wissensbereich-themen.md"
+      ],
+      "expiresAt": "2026-11-13T23:59:00+01:00"
     }
   ],
   "enabled": true
