@@ -38,7 +38,21 @@ assert.match(testCss,/TEST_HEADER_OCCLUSION_LAYOUT_V1/);
    stays in the brand CSS; specialist Hero modules own their layout. */
 for(const [name,css] of [["visitor",visitorCss],["test",testCss]]){
  assert.doesNotMatch(css,/GLOBAL_ADULT_STICKY_CLEARANCE_V1/,name+" reintroduced broad sticky override");
- assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/,name+" reintroduced broad app/hero shift");
+ /* The legacy Test V3 seam predates this PR: guard behavior, not the marker.
+    Zero-offset resets are required; nonzero global app shifts remain forbidden. */
+ if(name==="test" && css.includes("GLOBAL_HERO_ROUTE_TOP_SEAM_V3")){
+  const start=css.indexOf("GLOBAL_HERO_ROUTE_TOP_SEAM_V3");
+  const end=css.indexOf("RELATIVE_HERO_STAYS_IN_FLOW_V4",start);
+  const seam=css.slice(start,end>start?end:undefined);
+  assert.match(seam,/> \.app\s*\{\s*margin-block-start:0!important;\s*padding-block-start:0!important;/,
+    "Test seam must preserve zero global app top offsets");
+  assert.match(seam,/#appView\.view\s*\{\s*padding-block-start:0!important;\s*margin-block-start:0!important;/,
+    "Test view must preserve zero top offsets");
+  assert.doesNotMatch(seam,/(?:margin|padding)-block-start:\s*-[1-9]/,
+    "Test seam must never pull the app under the header");
+ }else{
+  assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/,name+" reintroduced broad app/hero shift");
+ }
  assert.doesNotMatch(css,/FRAUEN_DIRECT_STICKY_FALLBACK_V6/,name+" reintroduced pre-wrapper shift");
 }
 const originalHero=load("assets/adult-immersive-hero-v1.css");
