@@ -81,3 +81,8 @@ body.dar-v2-active #panel .dar-v3-legacy-tools .command-grid{margin:0 0 17px!imp
  .dar-v3-dashboard :is(button,.dar-v3-task,.dar-v3-filter){transition:none!important;animation:none!important}
 }
 @media print{.dar-v3-dashboard .dar-v3-filters,.dar-v3-dashboard button{display:none!important}}
+
+
+/* The old welcome cover remains in the DOM solely as the legacy anchor/fallback;
+ * when V3 is mounted it is hidden so the intelligence center owns the entry view. */
+body.dar-v2-active #panel:has(> #darV3Dashboard) > .admin-cover{display:none!important}
