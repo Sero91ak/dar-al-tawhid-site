@@ -1,0 +1,59 @@
+name: TawhidKidsNext
+options:
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+targets:
+  TawhidKidsNext:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+      # Existing proven KIDS-only native bridge; shared read-only, not a copy.
+      - path: ../DarAlTawhidKids/KidsAppShell.swift
+      - path: ../DarAlTawhidKids/KidsWebAppView.swift
+      - path: ../DarAlTawhidKids/KidsNativeIntro.swift
+    info:
+      path: Generated/Info.plist
+      properties:
+        CFBundleDisplayName: KIDS NEXT
+        CFBundleName: TawhidKidsNext
+        UILaunchScreen: {}
+        UIRequiresFullScreen: false
+        UIBackgroundModes:
+          - audio
+        NSMicrophoneUsageDescription: "Das Mikrofon wird nur für eine ausdrücklich gestartete Mitsprech-Übung verwendet."
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: de.daraltawhid.kids.next.dev
+        PRODUCT_NAME: TawhidKidsNext
+        TARGETED_DEVICE_FAMILY: "1,2"
+        CODE_SIGNING_ALLOWED: "NO"
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: "$(inherited) KIDS_CREATOR_TEST"
+        SUPPORTS_MACCATALYST: "NO"
+  TawhidKidsNextTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests
+    dependencies:
+      - target: TawhidKidsNext
+    settings:
+      base:
+        CODE_SIGNING_ALLOWED: "NO"
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/TawhidKidsNext.app/TawhidKidsNext"
+        BUNDLE_LOADER: "$(TEST_HOST)"
+schemes:
+  TawhidKidsNext:
+    build:
+      targets:
+        TawhidKidsNext: all
+    test:
+      targets:
+        - TawhidKidsNextTests
