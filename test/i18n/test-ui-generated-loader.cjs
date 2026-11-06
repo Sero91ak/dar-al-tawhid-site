@@ -19,10 +19,10 @@ vm.runInNewContext(code,{window});
  const ui=window.DarTestTurkishUI;
  assert.equal(ui.hasTranslation("Sprache der Benutzeroberfläche"),false);
  await ui.loadCatalog(async (url,opts)=>{
-  assert.equal(url,"/test/i18n/ui-tr.generated.json");
+  assert.equal(url,"/assets/i18n/adult-ui-de-tr.json");
   assert.equal(opts.credentials,"same-origin");
   return {ok:true,json:async()=>({schemaVersion:1,locale:"tr",sourceLocale:"de",
-   scope:"adult-test-ui-only",entries:{
+   scope:"adult-interface-only",entries:{
     "Sprache der Benutzeroberfläche":"Arayüz dili",
     "Neueste Beiträge":"Kötü öncelik", // manually curated string must win
     "الْقُرْآنُ":"Bu geçersiz"
