@@ -7,7 +7,7 @@ if(!/^\/test(?:\/|$)/.test(String(win.location&&win.location.pathname||"")))retu
 if(win.__DAR_TEST_IMMERSIVE_ART_V1)return;
 win.__DAR_TEST_IMMERSIVE_ART_V1=true;
 var rules=[
- ["is-home-route",".top-shell.theme-hero-shell > .header.theme-hero-surface","home",false],
+ ["is-home-route","#darHomeHtmlParityV1 .dhp-welcome","home",true],
  ["is-frauen-route","#appView .frauen-library-hero","women",false],
  ["is-topics-route","#appView .topics-hub > .view-head","topics",true],
  ["is-topic-route","#appView .topic-collection-page > .view-head","topic",true],
@@ -40,6 +40,7 @@ function paint(el,kind,sticky){
    el.classList.add("dar-art-hero");
    if(sticky)el.dataset.darArtSticky="1";
  }
+ // The visible Home renderer is the parity shell; legacy .top-shell is hidden.
  if(!el.querySelector(":scope > .dar-art-layer")){
    var layer=doc.createElement("span");
    layer.className="dar-art-layer";
