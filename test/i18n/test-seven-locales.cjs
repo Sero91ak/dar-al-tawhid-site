@@ -449,9 +449,28 @@ assert.equal(w.DarTestTurkishUI.translateValue("Datei konnte nicht geladen werde
 assert.equal(w.DarTestTurkishUI.translateValue("Halbfett","fr"),"Demi-gras");
 assert.equal(w.DarTestTurkishUI.translateValue("Mittig","es"),"Alineado al centro");
 assert.equal(w.DarTestTurkishUI.translateValue("Desktop","tr"),"Masaüstü");
-for(const page of ["wasiyyah/index.html","wasiyyah/pdf-render/index.html","widgets/index.html","editor/startseite-v47.html","ramadan/index.html","repair.html","android/index.html","i18n/index.html"]){
+assert.equal(w.DarTestTurkishUI.translateValue("Āyah-Nummer:","ar"),"رقم الآية:");
+assert.equal(w.DarTestTurkishUI.translateValue("Dieses Element auf die Vorlage zurücksetzen?","en"),"Reset this element to the template?");
+assert.equal(w.DarTestTurkishUI.translateValue("Alle Änderungen im Editor zurücksetzen?","tr"),"Düzenleyicideki tüm değişiklikler sıfırlansın mı?");
+assert.equal(w.DarTestTurkishUI.translateValue("Nur Widget-Daten zurücksetzen? App-Einstellungen, Push und Favoriten bleiben erhalten.","es"),"¿Restablecer solo los datos del widget? Los ajustes, las notificaciones y los favoritos se conservan.");
+assert.equal(w.DarTestTurkishUI.translateValue("Lesestand bei Sūrah 2, Āyah 255 gespeichert.","fr"),"Position de lecture enregistrée : Sūrah 2, āyah 255.");
+assert.equal(w.DarTestTurkishUI.translateValue("Push konnte nicht vollständig repariert werden:\n\nWichtig: App vom Home-Bildschirm-Icon öffnen, nicht aus Safari.","en"),"The push connection could not be fully repaired:\n\nImportant: Open the app from the Home screen icon, not from Safari.");
+assert.equal(w.DarTestTurkishUI.translateValue("Mehr Aktionen:\n1 = Fehler melden\n2 = Quelle öffnen\n3 = Beitragslink kopieren","ku"),"Kiryarên din:\n1 = Çewtiyê ragihîne\n2 = Çavkaniyê veke\n3 = Girêdana nivîsê kopî bike");
+let dialogSeen=null;
+w.alert=function(message){dialogSeen=message};
+w.confirm=function(message){dialogSeen=message;return false};
+w.prompt=function(message,fallback){dialogSeen=[message,fallback];return ""};
+w.DarTestTurkishUI.installDialogBridge();
+storage.locale="en";
+w.alert("Āyah-Nummer:");
+assert.equal(dialogSeen,"Āyah number:");
+w.prompt("Āyah-Nummer:","2:255");
+assert.deepEqual(dialogSeen,["Āyah number:","2:255"]);
+w.confirm("Dieses Element auf die Vorlage zurücksetzen?");
+assert.equal(dialogSeen,"Reset this element to the template?");
+for(const page of ["wasiyyah/index.html","wasiyyah/pdf-render/index.html","widgets/index.html","editor/startseite-v47.html","editor/startseite-v47-canvas.html","ramadan/index.html","repair.html","android/index.html","i18n/index.html"]){
  const html=fs.readFileSync(path.join(__dirname,"../"+page),"utf8");
- assert(html.includes("/test/assets/dar-test-turkish-ui.js?v=20261024-ui-more-59"),page+" loads the locale runtime");
+ assert(html.includes("/test/assets/dar-test-turkish-ui.js?v=20261024-ui-more-60"),page+" loads the locale runtime");
 }
 assert(fs.readFileSync(path.join(__dirname,"../wasiyyah/index.html"),"utf8").includes('data-dar-no-translate="testament"'));
 assert(fs.readFileSync(path.join(__dirname,"../wasiyyah/pdf-render/index.html"),"utf8").includes('data-dar-no-translate="testament"'));

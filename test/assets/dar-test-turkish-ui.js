@@ -561,6 +561,10 @@ function isDynamicGermanUi(value){
   /^Für die spätere Farāʾiḍ-Prüfung fehlen noch: [^<>\n]{1,240}\. Bitte ergänze diese Angaben\.$/.test(value)||
   /^Vorschau auf \d+ px gesetzt$/.test(value)||
   /^Datei konnte nicht geladen werden: [^<>\n]{1,160}$/.test(value)||
+  /^Lesestand bei Sūrah \d+, Āyah \d+ gespeichert\.$/.test(value)||
+  /^Push konnte nicht vollständig repariert werden:\n\n[\s\S]{0,900}$/.test(value)||
+  /^⚠ Server-Push nicht angekommen:\n[\s\S]{0,900}$/.test(value)||
+  /^Test-Push konnte nicht zugestellt werden\.\n\n[\s\S]{0,900}$/.test(value)||
   /^\d+\. Fundstelle$/.test(value)||
   /^Qurʾān \d{1,3}:\d{1,3}(?: · [^<>]{1,80})?$/.test(value)||
   /^· Āyah \d+ ·$/.test(value)||
@@ -2897,6 +2901,41 @@ function translateSharedPatterns(value,language){
    const heads={ar:"تعذّر تحميل الملف: ",en:"The file could not be loaded: ",tr:"Dosya yüklenemedi: ",ku:"Pel nehat barkirin: ",ckb:"پەڕگە بارنەکرا: ",bs:"Datoteka nije mogla da se učita: ",fr:"Le fichier n’a pas pu être chargé : ",es:"El archivo no se pudo cargar: "};
    return heads[language]?heads[language]+tail:null;
   }
+  const savedReading=value.match(/^Lesestand bei Sūrah (\d+), Āyah (\d+) gespeichert\.$/);
+  if(savedReading){
+   const surah=savedReading[1],ayah=savedReading[2];
+   const forms={
+    ar:"تم حفظ موضع القراءة عند السورة "+surah+"، الآية "+ayah+".",
+    en:"Reading position saved at Sūrah "+surah+", Āyah "+ayah+".",
+    tr:"Okuma yeri kaydedildi: Sūre "+surah+", Āyet "+ayah+".",
+    ku:"Cihê xwendinê hat tomarkirin: Sūrah "+surah+", Āyah "+ayah+".",
+    ckb:"شوێنی خوێندنەوە پاشەکەوتکرا: سوورە "+surah+"، ئایە "+ayah+".",
+    bs:"Mjesto čitanja je sačuvano: Sūrah "+surah+", Āyah "+ayah+".",
+    fr:"Position de lecture enregistrée : Sūrah "+surah+", āyah "+ayah+".",
+    es:"Posición de lectura guardada: Sūrah "+surah+", āyah "+ayah+"."
+   };
+   return forms[language]||null;
+  }
+  const knownLines=text=>String(text).split("\n").map(line=>{
+   if(!line)return line;
+   const known=lookupPack(line,language);
+   return known!==undefined?known:line;
+  }).join("\n");
+  const repairFail=value.match(/^Push konnte nicht vollständig repariert werden:\n\n([\s\S]{0,900})$/);
+  if(repairFail){
+   const heads={ar:"تعذّر إصلاح اتصال التنبيه بالكامل:\n\n",en:"The push connection could not be fully repaired:\n\n",tr:"Push bağlantısı tam olarak onarılamadı:\n\n",ku:"Girêdana pushê bi temamî nehat sererastkirin:\n\n",ckb:"پەیوەندی push بەتەواوی چاک نەکرایەوە:\n\n",bs:"Push veza nije mogla biti potpuno popravljena:\n\n",fr:"La connexion push n’a pas pu être entièrement réparée :\n\n",es:"La conexión push no se pudo reparar por completo:\n\n"};
+   return heads[language]?heads[language]+knownLines(repairFail[1]):null;
+  }
+  const serverMiss=value.match(/^⚠ Server-Push nicht angekommen:\n([\s\S]{0,900})$/);
+  if(serverMiss){
+   const heads={ar:"⚠ تنبيه الخادم لم يصل:\n",en:"⚠ The server push did not arrive:\n",tr:"⚠ Sunucu push’u gelmedi:\n",ku:"⚠ Pusha pêşkêşkarê nehat:\n",ckb:"⚠ pushی سێرڤەر نەگەیشت:\n",bs:"⚠ Serverski push nije stigao:\n",fr:"⚠ La notification du serveur n’est pas arrivée :\n",es:"⚠ El push del servidor no llegó:\n"};
+   return heads[language]?heads[language]+knownLines(serverMiss[1]):null;
+  }
+  const testMiss=value.match(/^Test-Push konnte nicht zugestellt werden\.\n\n([\s\S]{0,900})$/);
+  if(testMiss){
+   const heads={ar:"تعذّر تسليم تنبيه الاختبار:\n\n",en:"The test push could not be delivered:\n\n",tr:"Deneme push’u iletilemedi:\n\n",ku:"Pusha ceribandinê nehat gihandin:\n\n",ckb:"pushی تاقیکردنەوە نەگەیشت:\n\n",bs:"Probni push nije mogao biti isporučen:\n\n",fr:"La notification de test n’a pas pu être remise :\n\n",es:"El push de prueba no se pudo entregar:\n\n"};
+   return heads[language]?heads[language]+knownLines(testMiss[1]):null;
+  }
   const numberedPlace=value.match(/^(\d+)\. Fundstelle$/);
   if(numberedPlace){
    const word=lookupPack("Fundstelle",language);
@@ -3326,12 +3365,30 @@ function schedule(){
  if(typeof global.requestAnimationFrame==="function")global.requestAnimationFrame(run);
  else Promise.resolve().then(run);
 }
+function localizeDialog(value){
+ const text=String(value??"");
+ if(!text)return text;
+ const locale=currentLocale();
+ if(locale==="de")return text;
+ return translateExact(text,locale)||text;
+}
+function installDialogBridge(){
+ if(global.__darTestDialogBridge)return;
+ const nativeAlert=typeof global.alert==="function"?global.alert.bind(global):null;
+ const nativeConfirm=typeof global.confirm==="function"?global.confirm.bind(global):null;
+ const nativePrompt=typeof global.prompt==="function"?global.prompt.bind(global):null;
+ if(nativeAlert)global.alert=function(message){return nativeAlert(localizeDialog(message))};
+ if(nativeConfirm)global.confirm=function(message){return nativeConfirm(localizeDialog(message))};
+ if(nativePrompt)global.prompt=function(message,fallback){return nativePrompt(localizeDialog(message),fallback)};
+ global.__darTestDialogBridge=true;
+}
 function boot(){
+ installDialogBridge();
  if(global.document?.createElement&&global.document.head&&
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-59";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-60";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
@@ -3363,7 +3420,7 @@ if(typeof global.document?.createElement==="function"&&global.document.head&&
  draftTag.defer=true;
  global.document.head.appendChild(draftTag);
 }
-global.DarTestTurkishUI={apply,schedule,locale:currentLocale,loadCatalog,
+global.DarTestTurkishUI={apply,schedule,locale:currentLocale,loadCatalog,installDialogBridge,
   get translatedKeys(){return dictionary.size},
   get catalogStatus(){return remoteCatalogState},
   hasTranslation:(de)=>dictionary.has(de),
