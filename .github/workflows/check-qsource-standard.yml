@@ -11,6 +11,9 @@ on:
       - 'assets/theme-salbei-elfenbein.css'
       - 'assets/learning-heritage.css'
       - 'assets/dar-app-chrome.js'
+      - 'assets/q52-localized.js'
+      - 'assets/q52-locales.json'
+      - 'scripts/check-q52-nine-language.cjs'
       - '.github/workflows/check-qsource-standard.yml'
   pull_request:
     paths:
@@ -20,6 +23,9 @@ on:
       - 'assets/theme-salbei-elfenbein.css'
       - 'assets/learning-heritage.css'
       - 'assets/dar-app-chrome.js'
+      - 'assets/q52-localized.js'
+      - 'assets/q52-locales.json'
+      - 'scripts/check-q52-nine-language.cjs'
       - '.github/workflows/check-qsource-standard.yml'
   workflow_dispatch:
 
@@ -40,6 +46,9 @@ jobs:
 
       - name: Check numbered qsource pages
         run: node q/_registry/check-qsource-standard.mjs
+
+      - name: Q52 nine-language content and lesson regression
+        run: node scripts/check-q52-nine-language.cjs
 
       - name: In-app source navigation regression
         run: node q/_registry/check-source-navigation.mjs
