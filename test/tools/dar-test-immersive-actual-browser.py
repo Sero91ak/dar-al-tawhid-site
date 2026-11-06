@@ -40,21 +40,49 @@ def main():
                 raise AssertionError("No visibly sized home hero: "+str(before))
             if "hero-mobile-adobe.jpg" not in before["image"] and "hero-wide-adobe.jpg" not in before["image"]:
                 raise AssertionError("Photo not rendered in visible Home layer: "+str(before))
+            # Trigger the real page scroller. Some WebView shells scroll a
+            # nested .app instead; report and exercise that owner explicitly.
+            state=d.execute_script("""
+                const doc=document.scrollingElement||document.documentElement;
+                const app=document.querySelector('.app');
+                const root=document.getElementById('darHomeHtmlParityV1');
+                return {pageY:window.scrollY,documentHeight:doc.scrollHeight,documentClient:doc.clientHeight,
+                  appHeight:app?.scrollHeight,appClient:app?.clientHeight,
+                  appOverflow:app?getComputedStyle(app).overflowY:null,
+                  rootHeight:root?.scrollHeight,rootClient:root?.clientHeight};
+            """)
+            print(f"SCROLL OWNER BEFORE {width}x{height} {state}",flush=True)
             d.execute_script("window.scrollTo(0,420)")
             d.execute_script("window.dispatchEvent(new Event('scroll'))")
-            WebDriverWait(d,8).until(lambda b:b.execute_script("""
-              const x=document.querySelector('#darHomeHtmlParityV1 .dhp-welcome');
-              return x&&x.style.getPropertyValue('--dar-art-progress')!=='0';
-            """))
+            import time
+            time.sleep(0.8)
             after=d.execute_script("""
               const x=document.querySelector('#darHomeHtmlParityV1 .dhp-welcome');
+              const doc=document.scrollingElement||document.documentElement;
+              const app=document.querySelector('.app');
               return {top:x.getBoundingClientRect().top,progress:x.style.getPropertyValue('--dar-art-progress'),
-                scale:x.style.getPropertyValue('--dar-art-scale'),scrollY:window.scrollY};
+                scale:x.style.getPropertyValue('--dar-art-scale'),scrollY:window.scrollY,
+                docTop:doc.scrollTop,appTop:app?.scrollTop||0};
             """)
+            if after["scrollY"]<=0 and after["docTop"]<=0 and after["appTop"]<=0:
+                d.execute_script("""
+                  const app=document.querySelector('.app');
+                  if(app&&app.scrollHeight>app.clientHeight+200){app.scrollTop=420;
+                    app.dispatchEvent(new Event('scroll',{bubbles:true}));}
+                """)
+                time.sleep(0.8)
+                after=d.execute_script("""
+                  const x=document.querySelector('#darHomeHtmlParityV1 .dhp-welcome');
+                  const doc=document.scrollingElement||document.documentElement;
+                  const app=document.querySelector('.app');
+                  return {top:x.getBoundingClientRect().top,progress:x.style.getPropertyValue('--dar-art-progress'),
+                    scale:x.style.getPropertyValue('--dar-art-scale'),scrollY:window.scrollY,
+                    docTop:doc.scrollTop,appTop:app?.scrollTop||0};
+                """)
             print(f"SCROLL {width}x{height} {after}",flush=True)
-            if after["scrollY"]<=0:
-                raise AssertionError("Document scroll did not move: "+str(after))
-            d.execute_script("window.scrollTo(0,0)")
+            if after["progress"] in (None,"","0") or max(after["scrollY"],after["docTop"],after["appTop"])<=0:
+                raise AssertionError("No actual scroll-driven depth change: "+str(after))
+            d.execute_script("window.scrollTo(0,0);const a=document.querySelector('.app');if(a)a.scrollTop=0;window.dispatchEvent(new Event('scroll'))")
             d.execute_script("window.dispatchEvent(new Event('scroll'))")
             WebDriverWait(d,8).until(lambda b:b.execute_script("""
               const x=document.querySelector('#darHomeHtmlParityV1 .dhp-welcome');
