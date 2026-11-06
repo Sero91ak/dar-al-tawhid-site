@@ -1,3 +1,9 @@
+## Frauen-/Wissensbeiträge: ID statt automatischer Q-Nummer (Nutzerregel 06.11.2026)
+- **Nie** selbst eine neue Q-Quellenkartennummer erzeugen. Erst wenn der Nutzer die **freie konkrete Q-Nummer** ausdrücklich nennt/freigibt. Bestehende ausdrücklich zugewiesene Q-URLs niemals ändern.
+- Für neue Frauenbeiträge ausschließlich die bestehende feste `kennung` als `contentId` verwenden; die normale Original-Quellen-URL und normale Beitragsroute bleiben in **allen Sprachen identisch**.
+- Vollständige, dieselbe Aussage (Titel, Aussage, Šarḥ/Erklärung, Lehre, Quellenbeschriftung, Lernfragen, Bedienfelder) für alle neun App-Sprachen `de/ar/en/tr/ku/ckb/bs/fr/es`; RTL für `ar/ckb`. Kein Schein-Sprachumschalter, der bloß Überschriften übersetzt. Keine Übersetzung als fertig deklarieren, solange sie nicht geprüft ist.
+- Vor jedem neuen Beitrag den Gesamtkatalog auf identische Quellen, Berichtstexte und IDs kontrollieren. Keine doppelte Aussage, kein doppelter Q-Link, kein eigenständiger OneSignal-Versand. Bestehende Frauenrenderer-, Hero-, Routing- und Sicherheitssperren bleiben unberührt.
+
 # DAR AL TAWHID Projektregeln
 
 ## DĀR AL TAWḤĪD Zentrale · Quellenlink-Navigation verbindlich (05.11.2026)

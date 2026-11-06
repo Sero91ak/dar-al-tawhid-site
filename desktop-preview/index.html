@@ -2290,6 +2290,7 @@ button,input,select{font:inherit}
 <link rel="stylesheet" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css?v=frauen-sticky-hero-v1407-20261103-native-single-spacer-v1408">
 <script defer src="/assets/frauen/frauen-hero-seam-runtime-v1407.js?v=frauen-gap-guard-v1408-20261105"></script>
 <script src="/test/assets/frauen/frauen-fiqh.js?v=1294-share-brand" defer></script>
+<script defer src="/assets/frauen/frauen-entry-locale-v1.js?v=20261106-no-q-nine"></script>
 
 <script id="darPwaIconCookieBoot">
 (function(){
@@ -4096,6 +4097,7 @@ renders.beitraege=function(){
   window.readRoute=function(){var page=currentPage();return {view:page==="frauen"?"frauen":page==="zakat"?"zakat":"desktop",value:desktopFrauenValue}};
   box.innerHTML=api.render(desktopFrauenValue);
   if(typeof api.bind==="function")api.bind();
+  document.dispatchEvent(new CustomEvent("dar:frauen-render",{detail:{value:desktopFrauenValue}}));
  }
  document.addEventListener("click",function(ev){
   var btn=ev.target&&ev.target.closest?ev.target.closest("#womenApp [data-nav='frauen']"):null;

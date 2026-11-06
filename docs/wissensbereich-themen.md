@@ -1,5 +1,18 @@
 # DĀR AL TAWḤĪD Zentrum – Wissensbereich Themen
 
+## Vorrangregel vom 06.11.2026: interne Beitrags-ID und vollständige App-Sprache – **kein** automatisches Q
+
+**Der Nutzer hat diese Regel ausdrücklich präzisiert; sie hat bei neu erstellten Frauen-/Wissensbeiträgen Vorrang vor älteren Standardabläufen.**
+Jeder Beitrag nutzt ausschließlich seine feste, bereits vorhandene kanonische **Beitrags-ID** (`kennung`/`id`). Eine zweite deutsche, türkische, arabische usw. Fassung ist **kein weiterer Beitrag** und erhält keine zweite Beitrags-ID. Derselbe Beitrags-Detailweg wird aus jeder App-Sprache geöffnet.
+
+Bei Auswahl einer der neun vorhandenen App-Sprachen (`de`, `ar`, `en`, `tr`, `ku`, `ckb`, `bs`, `fr`, `es`) muss derselbe Artikel vollständig in der ausgewählten Sprache lesbar sein: Titel, Kurzvorschau, vollständige Aussage, belegnahe Erläuterung/Šarḥ, Lehre, Quellenbezeichnung, relevante Schaltflächen sowie Lernfragen, sofern vorhanden. Originalarabisch und echte Primärbeleg-URLs werden dabei nie umgeschrieben. Arabisch und Sorani mit richtiger RTL-Leserichtung. App-Sprache ist maßgeblich; keine heimliche Betriebssystem-Sprache und kein stiller deutscher Fallback als angebliche Übersetzung. Eine Sprachfassung ist erst fertig, wenn **sämtliche** Pflichtfelder für diese Sprache vorhanden und geprüft sind. Übersetzungsentwürfe sind nicht als sprachlich unabhängig verifiziert zu bezeichnen.
+
+**Keine neuen Q-Quellenlinks oder Q-Nummern automatisch anlegen.** Bereits vom Nutzer ausdrücklich zugewiesene `/q/N/`-Kurzlinks bleiben unverändert und sind bei den vorhandenen Beiträgen weiter zu verwenden. Eine zusätzliche Q-Nummer gibt es **nur nach ausdrücklicher Nennung/Freigabe der freien Q-Nummer durch den Nutzer**. Sonst genügen die bestehenden Originalquellen-/Direktbelege und die stabile Beitrags-ID. Vor jeder Publikation alle Frauendaten, Posts, vorhandenen Q-Verknüpfungen und denselben Überlieferungsinhalt auf Dubletten prüfen. Keine OneSignal-Mitteilung ohne gesonderten Auftrag.
+
+**Korrektur:** Die zuvor ohne Nummernfreigabe angelegte Q52-Referenz für Khadīǧah wird aus der aktiven Zuordnung genommen; der Artikel behält `muetter-khadijah-salam-paradies-20261106` und seinen zuvor vorhandenen Primärquellenlink. Die historische Q52-Webadresse wird nur gegen tote Altlinks als nicht indexierter Altbeleg archiviert und darf nicht als neue Frauen-Veröffentlichung beworben oder wiederverwendet werden. Künftige Q-Veröffentlichungen nutzen niemals willkürlich Q52.
+
+
+
 **Verbindliche neue Regel vom 30.10.2026.** Ergänzt die globalen Beitrags- und Quellenregeln, ersetzt sie nicht. Die Erwachsenen-Besucher-App hat drei Profiloptionen (Frau, Mann, Neutral), aber keine getrennte Bibliothekskopie.
 
 ## Dauerregel: identische Q-Quellenlinks, kontextabhängiges Zurück (05.11.2026)
