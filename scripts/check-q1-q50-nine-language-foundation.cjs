@@ -24,6 +24,16 @@ assert.match(adapter,/dar-q-language-notice/);
 assert.match(adapter,/data\.locales\[code\]/);
 assert.match(adapter,/function applyNote\(data,code\)/,"Transmission note language-switch handling required");
 new vm.Script(adapter,{filename:"assets/q-legacy-nine-language-v1.js"});
+const lessonAdapter=read("assets/q-legacy-learning-language-v1.js");
+new vm.Script(lessonAdapter,{filename:"assets/q-legacy-learning-language-v1.js"});
+assert.match(lessonAdapter,/darAdultPreferredLocaleV1/);
+assert.match(lessonAdapter,/dar-q-learning-locale-status/);
+assert.match(lessonAdapter,/history\.replaceState/);
+for(const route of ["ikhlas","wissen-adab","tawhid-iman-akhlaq","selbstpruefung"]){
+  const html=read("lernen/"+route+"/index.html");
+  assert.match(html,/q-legacy-learning-language-v1\.js\?v=20261106-foundation1/,"Legacy lesson language picker missing from "+route);
+}
+
 const report={sources:48,languages:9,partialDrafts:0,germanFallbacks:0,missingPrimaryLinks:[],duplicatedId:[]};
 for(let n=1;n<=48;n++){
   const p=catalog.pages[n],html=read("q/"+n+"/index.html");
@@ -119,4 +129,4 @@ Promise.all([simulate(1,"ar"),simulate(4,"tr"),simulate(30,"fr")])
  .catch(error=>{console.error(error);process.exitCode=1});
 
 console.log("Q1–Q50 I18N FOUNDATION PASS",JSON.stringify(report));
-console.log("Editorial note: 43 older Q sources retain German original text; 40 partial non-German drafts for Q1-Q5 are NOT approved.");
+console.log("Editorial note: 43 older Q sources retain German original text; 40 partial non-German drafts for Q1-Q5 are NOT approved. Four legacy adult learning pages use visible untranslated-content notices.");
