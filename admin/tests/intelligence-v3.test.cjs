@@ -28,7 +28,7 @@ class Element {
  click(){this.listeners.click?.({target:this})}
  get classList(){return {contains:c=>this.className.split(/\s+/).includes(c),toggle:(c,on)=>{const a=new Set(this.className.split(/\s+/).filter(Boolean));if(on===false)a.delete(c);else if(on===true)a.add(c);else if(a.has(c))a.delete(c);else a.add(c);this.className=[...a].join(" ")}}}
  querySelectorAll(q){
-  const matches=e=>q==="button"?e.tagName==="button":q.startsWith("#")?e.id===q.slice(1):q.startsWith(".")?e.className.split(/\s+/).includes(q.slice(1)):false;
+  const matches=e=>q.startsWith("#")?e.id===q.slice(1):q.startsWith(".")?e.className.split(/\s+/).includes(q.slice(1)):e.tagName===q;
   let out=[];const walk=e=>{for(const child of e.children){if(matches(child))out.push(child);walk(child)}};walk(this);return out;
  }
  querySelector(q){return this.querySelectorAll(q)[0]||null}
