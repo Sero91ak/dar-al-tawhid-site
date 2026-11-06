@@ -157,7 +157,13 @@ def main():
             d.execute_script("""
               const button=document.querySelector('#bottomNav [data-bottom-nav="more"]');
               if(!button)throw new Error('More tab missing');
-              button.click();
+              // The real app intentionally ignores bare click for long-press
+              // tabs. A short tap navigates only on pointerup.
+              const r=button.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;
+              const opts={bubbles:true,cancelable:true,pointerId:8,
+                pointerType:'touch',button:0,buttons:1,clientX:x,clientY:y};
+              button.dispatchEvent(new PointerEvent('pointerdown',opts));
+              button.dispatchEvent(new PointerEvent('pointerup',{...opts,buttons:0}));
             """)
             WebDriverWait(d,14).until(lambda b:b.execute_script("""
               return document.body.classList.contains('is-more-route');
