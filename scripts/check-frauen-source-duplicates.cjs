@@ -53,7 +53,8 @@ function item(e,file) {
   const src=e.quellenanzeige||e.source||e.sourceLabel||"";
   return {id:String(e.kennung||e.id||e.postReference||e.number||"?"),file,title,text,source:src,
     explicit:String(e.quellePrimaerId||"").trim().toLowerCase(),
-    refs:refs(src),url:url(e.direktnachweisUrl),titleKey:norm(title)};
+    refs:[...new Set([...refs(src),...(Array.isArray(e.quelleVarianten)?e.quelleVarianten:[]).map(x=>norm(x).replace(/ /g,":")),...(e.quellePrimaerId?[String(e.quellePrimaerId).toLowerCase()]:[])])],
+    url:url(e.direktnachweisUrl),titleKey:norm(title)};
 }
 function candidates() {
   const dir=path.join(root,"data");
@@ -87,7 +88,8 @@ function compare(a,b) {
   const reasons=[];
   if(a.id===b.id)reasons.push("kennung");
   if(a.explicit&&a.explicit===b.explicit)reasons.push("quellePrimaerId");
-  if(a.refs.some(x=>b.refs.includes(x)))reasons.push("gleiche-Hadith-Fundstelle");
+  // Also checks alternate numbers recorded for one and the same event.
+  if(a.refs.some(x=>b.refs.includes(x)))reasons.push("gleiche-Hadith-Fundstelle-oder-Variante");
   if(a.url&&a.url===b.url)reasons.push("identischer-Quellenlink");
   if(a.titleKey&&a.titleKey===b.titleKey)reasons.push("identischer-Titel");
   // Semantic smoke test; never claim proof from approximate similarity.
