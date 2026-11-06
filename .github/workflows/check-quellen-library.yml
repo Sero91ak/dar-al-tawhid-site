@@ -9,6 +9,9 @@ on:
       - 'assets/quellen-library.css'
       - 'assets/q-royal-manuscript-v42.css'
       - 'assets/q-royal-manuscript-v42.js'
+      - 'assets/q-legacy-nine-language-v1.js'
+      - 'assets/q-legacy-locales-v1.json'
+      - 'scripts/check-q1-q50-nine-language.cjs'
       - 'scripts/sync-quellen-registry.cjs'
       - 'scripts/check-quellen-client.cjs'
       - 'service-worker.js'
@@ -36,6 +39,8 @@ jobs:
           node --check cloudflare/site-router.js
           node --check assets/q-royal-manuscript-v42.js
           node scripts/check-quellen-client.cjs
+          node --check assets/q-legacy-nine-language-v1.js
+          node scripts/check-q1-q50-nine-language.cjs
           node - <<'NODE'
           const fs=require('fs'),assert=require('node:assert/strict');
           const html=fs.readFileSync('quellen/index.html','utf8');
