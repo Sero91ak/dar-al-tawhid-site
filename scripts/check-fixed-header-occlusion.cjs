@@ -50,7 +50,7 @@ assert.doesNotMatch(majlisJs,/\.ilm-chat-header\{position:sticky!important;top:0
 assert.match(majlisJs,/top:var\(--dar-test-occlusion-top/);
 assert.doesNotMatch(majlisJs,/last\.getBoundingClientRect\(\)\.top - 110/,"Hardcoded scroll offset caused clipped questions");
 assert.match(majlisJs,/var globalBottom=globalHeader\?/);
-assert.match(router,/dar-adult-brand-header-v2\.css\?v=20261030-restore-original-hero-rail-v5/);
-assert.match(router,/dar-adult-brand-header-v2\.js\?v=20261030-fixed-occlusion-v1/);
+assert.match(router,/dar-adult-brand-header-v2\.css\?v=20261106-global-salam-v1/);
+assert.match(router,/dar-adult-brand-header-v2\.js\?v=20261106-global-salam-v1/);
 assert.doesNotMatch(testCss,/body\s*\{\s*padding-top:/,"No blanket body padding");
 console.log("PASS: brand header preserves original Hero/search authority; Majlis independently retains scroll clearance.");
