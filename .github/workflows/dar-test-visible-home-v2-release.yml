@@ -9,6 +9,7 @@ on:
       - test/assets/dar-test-immersive-art-v1.css
       - test/assets/dar-test-immersive-art-v1.js
       - test/tools/dar-test-immersive-actual-browser.py
+      - test/tools/dar-test-immersive-art-v1-guard.cjs
   workflow_dispatch:
 
 permissions:
@@ -16,7 +17,7 @@ permissions:
 
 concurrency:
   group: dar-test-worker-release
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   deploy-visible-test:
@@ -25,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
