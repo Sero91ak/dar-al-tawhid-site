@@ -21,7 +21,7 @@ function normalize(code){code=String(code||"").trim().toLowerCase().replace(/_/g
 function param(){
  try{
   var base=document.baseURI||location.href;
-  var u=new URL(base,location.origin);
+  var u=new URL(base);
   var direct=u.searchParams.get("lang")||u.searchParams.get("locale");
   return normalize(direct);
  }catch(_){return ""}
