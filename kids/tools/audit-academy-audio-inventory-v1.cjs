@@ -20,7 +20,7 @@ const archive=JSON.parse(fs.readFileSync(path.join(root,"kids/data/academy-voice
 const publicAudio=JSON.parse(fs.readFileSync(path.join(root,"kids/data/academy-audio.json"),"utf8"));
 const staging=JSON.parse(fs.readFileSync(path.join(root,"kids/data/academy-audio-staging-v9.json"),"utf8"));
 const ages=["4-5","6-8","9-10"];
-const phrases=new Map(),issues=[];
+const phrases=new Map(),issues=[],editorialQuestions=[];
 const sourceStats={quranRecitationExcluded:true,syntheticQuranAudioCount:0,ageProfiles:["4-5","6-8","9-10"],genderProfiles:["boy","girl"]};
 function add(raw,id,age,kind){
  const value=String(raw||"").normalize("NFC").replace(/\s+/g," ").trim();
@@ -40,7 +40,7 @@ for(const [id,l] of Object.entries(lessons)){
   for(const q of qs){
    questionCount++;add(q.prompt,id,age,"question");
    if(q.type==="choice"){
-    if(q.needsHumanEditorialReview)issues.push({id,age,code:"adapted_choice_requires_editorial_review",prompt:q.prompt});
+    if(q.needsHumanEditorialReview){issues.push({id,age,code:"adapted_choice_requires_editorial_review",prompt:q.prompt});editorialQuestions.push({lessonId:id,age,questionIndex:qs.indexOf(q),originalPrompt:q.originalPrompt,displayPrompt:q.prompt,correctText:q.options[q.correct],wrongTexts:q.options.filter((_,i)=>i!==q.correct),explanation:q.explain,hint:q.hint,reviewStatus:"requires-human-editorial-review",approvedForAudio:false});}
     if(!Array.isArray(q.options)||q.options.length<2||!Number.isInteger(q.correct)||q.correct<0||q.correct>=q.options.length)invalidChoices++;
     for(const opt of q.options||[])add(opt,id,age,"answer-option");
     if(q.adaptedFromText&&q.approvedForAudio!==false)issues.push({id,age,code:"adapted_audio_gate_mismatch"});
@@ -57,7 +57,7 @@ for(const age of ages){
   for(const opt of q.options||[])add(opt,"sidq",age,"answer-option");
   add(q.explain,"sidq",age,"explanation");
   add(q.hint,"sidq",age,"hint");
-  if(q.needsHumanEditorialReview)issues.push({id:"sidq",age,code:"adapted_choice_requires_editorial_review",prompt:q.prompt});
+  if(q.needsHumanEditorialReview){issues.push({id:"sidq",age,code:"adapted_choice_requires_editorial_review",prompt:q.prompt});editorialQuestions.push({lessonId:"sidq",age,questionIndex:qs.indexOf(q),originalPrompt:q.originalPrompt,displayPrompt:q.prompt,correctText:q.options[q.correct],wrongTexts:q.options.filter((_,i)=>i!==q.correct),explanation:q.explain,hint:q.hint,reviewStatus:"requires-human-editorial-review",approvedForAudio:false});}
   if(!Array.isArray(q.options)||q.options.length<2||!Number.isInteger(q.correct)||q.correct<0||q.correct>=q.options.length)invalidChoices++;
  }
 }
@@ -75,8 +75,8 @@ const output={
  newOrChangedVsArchive:[...phrases.keys()].filter(x=>!old.has(x)).length,
  publicManifestExactMatches:[...phrases.keys()].filter(x=>Object.hasOwn(publicEntries,x)).length,
  publicApprovedV4ExactMatches:[...phrases.keys()].filter(x=>publicEntries[x]?.modelId==="eleven_v4"&&publicEntries[x]?.approvedForPlayback===true).length,
- issues,phrases:[...phrases.values()]
+ issues,editorialQuestions,phrases:[...phrases.values()]
 };
-if(process.argv.includes("--summary")){const {phrases:_,...summary}=output;console.log(JSON.stringify(summary,null,2));}
+if(process.argv.includes("--summary")){const {phrases:_,editorialQuestions:__,...summary}=output;console.log(JSON.stringify(summary,null,2));}
 else console.log(JSON.stringify(output,null,2));
 if(invalidChoices||output.lessonCount!==66||output.ageVersions!==198||!questionCount)process.exitCode=1;
