@@ -496,7 +496,8 @@ async function finalizeDarTestHomeV1193(asset) {
   html = html.replace(/<script\b(?=[^>]*\bid=["']darTestHomeHtmlParityV1["'])[^>]*>\s*<\/script>\s*/gi, "");
   const parityScript = '<script defer id="darTestHomeHtmlParityV1" src="/test/assets/dar-home-html-parity-v1.js?v=20261106-global-salam-v1"></script>';
   if (!html.includes('id="darAdultHomeWelcomeCopyV1"')) {
-    const welcomeCopy = '<script defer id="darAdultHomeWelcomeCopyV1" src="/assets/i18n/adult-home-welcome-v1.js?v=20261106-global-salam-v1"></script>';
+    const welcomeCopy = '<script defer id="darAdultComponentI18nV1" src="/assets/i18n/adult-component-i18n-v1.js?v=20261101-1"></script>' +
+      '<script defer id="darAdultHomeWelcomeCopyV1" src="/assets/i18n/adult-home-welcome-v1.js?v=20261106-global-salam-v1"></script>';
     html = html.includes("</body>") ? html.replace("</body>",welcomeCopy+"</body>") : html+welcomeCopy;
   }
   html = html.includes("</body>") ? html.replace("</body>", parityScript + "\n</body>") : html + parityScript;
