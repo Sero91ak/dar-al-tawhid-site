@@ -214,7 +214,7 @@
     if(themeButton){const name=root.getAttribute("data-q-theme")==="dark"?l.light:l.dark;themeButton.setAttribute("aria-label",name);themeButton.setAttribute("title",name)}
     for(const a of page.querySelectorAll('a.qsource-link[href="#"]'))a.title=l.missing;
   }
-  ["dar:q49:locale-ready","dar:q50:locale-ready","dar:q51:locale-ready","dar-adult-locale-changed","dar:locale-changed","popstate"].forEach(name=>window.addEventListener(name,refreshLocale));
+  ["dar:q-legacy:locale-ready","dar:q49:locale-ready","dar:q50:locale-ready","dar:q51:locale-ready","dar-adult-locale-changed","dar:locale-changed","popstate"].forEach(name=>window.addEventListener(name,refreshLocale));
   window.addEventListener("storage",event=>{if(event.key==="darAdultPreferredLocaleV1")refreshLocale()});
   refreshLocale();
   body.dataset.qRoyalVersion = version;
