@@ -3,12 +3,12 @@
  * source preview paper deliberately remains light in both appearances. */
 html[data-dar-admin-theme="layl"]{
  color-scheme:dark;
- --bg:#0c0e0d;--paper:#f7f1e4;--green:#18241c;--gold:#e0c994;--gold2:#b89654;
- --ink:#f6f0e4;--line:rgba(184,150,84,.28);--soft:#b7c8bb;
- --editor-bg:#0c0e0d;--editor-surface:#151f19;--editor-input:#111a14;
- --editor-sidebar:#131d17;--editor-contrast:#f6f0e4;--editor-muted:#b7c8bb;
+ --bg:#10100f;--paper:#f7f1e4;--green:#22211e;--gold:#dec48f;--gold2:#b6975a;
+ --ink:#f5f0e5;--line:rgba(184,150,84,.28);--soft:#bab4a6;
+ --editor-bg:#10100f;--editor-surface:#24221e;--editor-input:#161613;
+ --editor-sidebar:#211f1b;--editor-contrast:#f5f0e5;--editor-muted:#bab4a6;
  --editor-hover:rgba(224,201,148,.09);--editor-active:rgba(224,201,148,.15);
- --editor-cta:#e0c994;--editor-cta-ink:#162419
+ --editor-cta:#dec48f;--editor-cta-ink:#171613
 }
 html[data-dar-admin-theme="salbei"]{
  color-scheme:light;
