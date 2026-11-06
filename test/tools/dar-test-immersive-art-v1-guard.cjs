@@ -60,6 +60,7 @@ const doc={
  readyState:"loading",body,documentElement:html,scrollingElement:html,
  addEventListener(name,fn){callbacks["doc:"+name]=fn;},
  getElementById(id){return id==="appView"?{}:null;},
+ querySelector(){return null;},
  querySelectorAll(sel){return sel==="#appView .topics-hub > .view-head"?[hero]:[];},
  createElement(tag){return {tagName:tag,setAttribute(k,v){this[k]=v;}};}
 };
