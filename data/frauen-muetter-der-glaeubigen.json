@@ -1,5 +1,5 @@
 {
-  "fassung": 3,
+  "fassung": 4,
   "aktualisiertAm": "2026-11-06",
   "bereich": "muetter-der-glaeubigen",
   "eintraege": [
@@ -367,11 +367,11 @@
       ],
       "hinweise": "Nicht als wörtliche deutsche Übersetzung ausgeben; sinngemäße Wiedergabe. Keine Aussage über andere Personen ergänzen.",
       "quellenart": "sahih",
-      "quellenstatus": "nicht-anzeigen",
-      "direktnachweisText": "→ Originalbeleg öffnen",
+      "quellenstatus": "geprueft",
+      "direktnachweisText": "→ Quelle öffnen",
       "direktnachweisArt": "Webseite",
-      "freigabeDurchSerhat": false,
-      "redaktionsstand": "Primärbeleg in Ṣaḥīḥ-Sammlung geprüft; kanonische Q-Karte, Lernseite, autorisierte Sprachfassungen und redaktionelle Freigabe offen",
+      "freigabeDurchSerhat": true,
+      "redaktionsstand": "Inhaltlich durch expliziten Nutzerauftrag zum Publizieren freigegeben; Bukhārī 3820 und Dorar-Original wortsinngemäß geprüft; Q52/Lernseite und Live-Gates erforderlich",
       "atharPruefung": "Keine zusätzliche Āṯār-Behauptung; bei Bedarf gesonderte Isnād-/Šarḥ-Prüfung.",
       "quellePrimaerId": "bukhari:3820",
       "dublettenAbgleich": "2026-11-06: 50 Frauendateien gegen Titel, Quelle und Bericht abgeglichen; weitere CI-/Post-/Q-Prüfung durch Guard",
@@ -397,7 +397,11 @@
       },
       "originalarabischPruefung": "nicht-abgeschlossen",
       "aussageTyp": "hadith",
-      "uebersetzungStatus": "sinngemaesse deutsche Wiedergabe; Originalarabisch/Wortlaut-Fachabgleich vor Freigabe offen"
+      "uebersetzungStatus": "sinngemaesse deutsche Wiedergabe; Originalarabisch/Wortlaut-Fachabgleich vor Freigabe offen",
+      "qNumber": 52,
+      "kanonischerQuellenlink": "https://dar-al-tawhid.de/q/52/",
+      "sourceChecked": true,
+      "editoriallyApproved": true
     },
     {
       "kennung": "muetter-aishah-hausdienst-20261106",
