@@ -1,0 +1,29 @@
+name: Kids Academy Audio Inventory (zero credits)
+on:
+  pull_request:
+    paths:
+      - 'kids/tools/audit-academy-audio-inventory-v1.cjs'
+      - 'kids/akademie/**'
+      - 'kids/data/academy-audio.json'
+      - 'kids/data/academy-voice-plan-v9.json'
+      - '.github/workflows/kids-academy-audio-inventory.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check exact curriculum and projected choice-only questions
+        run: node kids/tools/audit-academy-audio-inventory-v1.cjs --summary > "$RUNNER_TEMP/academy-audio-summary.json"
+      - name: Publish no-credit inventory summary
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/academy-audio-summary.json" ]; then
+            node -e 'const s=require(process.argv[1]); console.log(JSON.stringify({lessons:s.lessonCount,ageVersions:s.ageVersions,questions:s.questionCount,uniquePhrases:s.uniqueCandidatePhrases,archiveMatches:s.archivedExactPhraseMatches,newOrChanged:s.newOrChangedVsArchive,issues:s.issues.length,invalidChoices:s.invalidChoices},null,2))' "$RUNNER_TEMP/academy-audio-summary.json"
+          fi
