@@ -16,5 +16,35 @@
     "title": "Vergib uns und unseren Brüdern, die uns im Glauben vorausgingen",
     "snippet": "Unser Herr, vergib uns und unseren Brüdern, die uns im Glauben vorausgingen.",
     "category": "Brüderlichkeit"
+  },
+  "verse": {
+    "reference": "59:10",
+    "surah": 59,
+    "ayah": 10,
+    "ar": "وَٱلَّذِينَ جَآءُو مِنۢ بَعۡدِهِمۡ يَقُولُونَ رَبَّنَا ٱغۡفِرۡ لَنَا وَلِإِخۡوَٰنِنَا ٱلَّذِينَ سَبَقُونَا بِٱلۡإِيمَٰنِ وَلَا تَجۡعَلۡ فِي قُلُوبِنَا غِلّٗا لِّلَّذِينَ ءَامَنُواْ رَبَّنَآ إِنَّكَ رَءُوفٞ رَّحِيمٌ",
+    "de": "Und diejenigen, die nach ihnen gekommen sind, sagen: \"Unser Herr, vergib uns und unseren Brüdern, die uns im Glauben vorausgegangen sind, und lasse in unseren Herzen keinen Groll sein gegen diejenigen, die glauben. Unser Herr, Du bist ja Gnädig und Barmherzig.\"",
+    "transliteration": "wa-alladhīna jāū min baʿdihim yaqūlūna rabbanā igh'fir lanā wali-ikh'wāninā alladhīna sabaqūnā bil-īmāni walā tajʿal fī qulūbinā ghillan lilladhīna āmanū rabbanā innaka raūfun raḥīmun",
+    "arabicEdition": "content/quran/059.json",
+    "germanEdition": "content/quran/059.json",
+    "tadabburReference": "59:10",
+    "tadabburCatalog": "/apple-tv/quran/tadabbur/catalog.json"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 484,
+      "remaining": 448
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 62,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
