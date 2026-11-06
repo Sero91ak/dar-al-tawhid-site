@@ -1258,6 +1258,12 @@ function injectAdultReaderRuntimeV5(html) {
     const tag='<script defer id="darReaderOverlayRuntimeV5" src="/assets/dar-reader-overlay-runtime-v5.js?v=20261101-v5"></'+'script>';
     html=html.includes("</body>")?html.replace("</body>",tag+"</body>"):html+tag;
   }
+  // Canonical Q-source sharing on Frauen detail cards (frozen renderer untouched).
+  // The scope is a Q-linked women card; no general share/navigation override.
+  if(!html.includes('id="darFrauenCanonicalQShareV1"')){
+    const shareTag='<script defer id="darFrauenCanonicalQShareV1" src="/assets/frauen/frauen-canonical-q-share-v1.js?v=20261106-q52"></'+'script>';
+    html=html.includes("</body>")?html.replace("</body>",shareTag+"</body>"):html+shareTag;
+  }
   // Q50 is a single published adult post, localized at the existing render
   // boundary. Include the same runtime for native WKWebView, Android PWA and
   // website, without creating a second app shell or a loading screen.
