@@ -359,3 +359,102 @@ html.dar-test-immersive-art-v1[data-theme] body.has-bottom-nav:not(.is-feed-full
  html.dar-test-immersive-art-v1[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-player-route):not(.is-ilm-chat-route)
  #bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon){font-size:9px!important;}
 }
+
+
+/* DAR_TEST_CINEMATIC_COMPOSITION_V2 · Reference-inspired, original art only.
+   The active Home scene must be encountered immediately after the fixed
+   brand/source line: preserve live prayer and search, but bring the photo
+   above prayer controls rather than leaving it as a small banner below them.
+   This is a real flex ordering, not a cloned view or an additional pane.
+*/
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content{
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:stretch!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > *{order:10;}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > .dhp-home-source-v55{order:0;}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero{order:1;}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > :is(.dhp-prayer,.dat-smart-prayer){order:2;}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > .dhp-isnad{order:3;}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > .dhp-quickbar{order:4;}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > .dhp-search-box{order:5;}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero{
+ --dar-art-a:rgba(6,20,18,.84);
+ --dar-art-b:rgba(6,20,18,.31);
+ --dar-art-c:rgba(6,20,18,.015);
+ --dar-art-focus:69% 48%;
+ min-height:clamp(340px,42svh,520px)!important;
+ margin-top:3px!important;
+ margin-bottom:0!important;
+ padding:clamp(35px,6svh,55px) clamp(25px,5vw,55px) clamp(58px,8svh,85px)!important;
+ display:flex!important;
+ flex-direction:column!important;
+ justify-content:center!important;
+ align-items:flex-start!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero > :not(.dar-art-layer){
+ max-width:min(530px,63%)!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero > .dar-art-layer::after{
+ background:
+   linear-gradient(0deg,var(--dar-art-edge) 0%,color-mix(in srgb,var(--dar-art-edge) 70%,transparent) 8%,transparent 38%),
+   linear-gradient(180deg,rgba(0,0,0,.10),transparent 24%),
+   radial-gradient(ellipse at 76% 12%,rgba(221,189,133,.10),transparent 58%);
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero .dhp-greeting{
+ margin:0 0 18px!important;
+ font-size:clamp(29px,4.7vw,52px)!important;
+ line-height:1.08!important;
+ font-weight:650!important;
+ letter-spacing:-.028em!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero .dhp-intro{
+ margin:0!important;
+ font-size:clamp(14px,1.4vw,18px)!important;
+ line-height:1.62!important;
+ text-wrap:pretty;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > .dat-smart-prayer{
+ align-self:stretch!important;
+ margin-top:-4px!important;
+ position:relative!important;
+ z-index:2!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > .dhp-isnad{
+ margin-top:clamp(10px,2.4vw,25px)!important;
+}
+html.dar-test-immersive-art-v1[data-theme]:is([data-theme="light"],[data-theme="soft"],[data-theme="salbei"]) body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero{
+ --dar-art-a:rgba(248,246,239,.92);
+ --dar-art-b:rgba(248,246,239,.30);
+ --dar-art-c:rgba(248,246,239,.02);
+}
+@media(max-width:699px){
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero{
+  --dar-art-focus:68% 43%;
+  --dar-art-b:rgba(6,20,18,.43);
+  min-height:clamp(305px,43svh,440px)!important;
+  padding:clamp(33px,6svh,48px) 25px clamp(52px,8svh,70px)!important;
+ }
+ html.dar-test-immersive-art-v1[data-theme]:is([data-theme="light"],[data-theme="soft"],[data-theme="salbei"]) body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero{
+  --dar-art-b:rgba(248,246,239,.39);
+ }
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero > :not(.dar-art-layer){max-width:88%!important;}
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero .dhp-greeting{font-size:clamp(29px,7vw,38px)!important;}
+}
+@media(max-height:530px) and (orientation:landscape){
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero{
+  min-height:clamp(185px,52svh,260px)!important;
+  padding-block:20px 30px!important;
+ }
+}
+/* Route artworks are delivered by the ONE art layer, not duplicated by a
+   second legacy background-image behind it. Preserve owner-provided text. */
+html.dar-test-immersive-art-v1[data-theme] body #appView :is(
+ .topics-hub,.topic-collection-page,.hadith-hub,.dua-hub,
+ .post-reader,.qov-page,.library-page,.scholars-index
+) > .dar-art-hero[data-dar-art-kind]{
+ background-image:none!important;
+ background-color:var(--bg)!important;
+ background-clip:padding-box!important;
+}
