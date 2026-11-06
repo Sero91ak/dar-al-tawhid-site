@@ -69,7 +69,7 @@
  }
  function mount(stats){
   const cover=$("#panel .admin-cover");if(!cover||$("#darV3Dashboard"))return;
-  const section=node("section","dar-v3-dashboard");section.id="darV3Dashboard";section.setAttribute("aria-label","DĀR Intelligence Center V3");
+  const section=node("section","dar-v3-dashboard");section.id="darV3Dashboard";section.setAttribute("aria-label","DĀR Intelligence Center V3");section.setAttribute("dir",["ar","ckb"].includes(currentLocale())?"rtl":"ltr");
   const hero=node("header","dar-v3-head");const heading=node("div","dar-v3-head-copy");
   heading.append(node("span","dar-v3-kicker",t("overline")),node("h2","",t("heading")),node("p","",t("subtitle")));
   const flags=node("div","dar-v3-flags");flags.append(node("span","dar-v3-flag",t("readOnly")),node("span","dar-v3-flag",t("notAI")));hero.append(heading,flags);section.append(hero);
