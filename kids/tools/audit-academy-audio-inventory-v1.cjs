@@ -8,6 +8,13 @@ const files=["curriculum-v1.js","curriculum-v2.js","curriculum-v22.js","curricul
 const win={};const ctx=vm.createContext({window:win,console});
 for(const name of files)vm.runInContext(fs.readFileSync(path.join(root,"kids/akademie",name),"utf8"),ctx,{filename:name,timeout:5000});
 vm.runInContext(fs.readFileSync(path.join(root,"kids/akademie/answer-choice-only-v1.js"),"utf8"),ctx,{filename:"answer-choice-only-v1.js",timeout:5000});
+const html=fs.readFileSync(path.join(root,"kids/akademie/index.html"),"utf8");
+const start=html.indexOf("const exercises=");
+const end=html.indexOf("\nlet id=",start);
+if(start<0||end<0)throw Error("Inline Sidq question source not found");
+vm.runInContext(html.slice(start,end).replace(/^const exercises=/,"window.__sidqExercises="),ctx,{filename:"inline-sidq-exercises",timeout:5000});
+const sidqQuestions=win.__sidqExercises;
+if(!sidqQuestions||!["4-5","6-8","9-10"].every(a=>Array.isArray(sidqQuestions[a])))throw Error("Inline Sidq age coverage incomplete");
 const lessons=win.DARKidsAcademyCurriculum||{};
 const archive=JSON.parse(fs.readFileSync(path.join(root,"kids/data/academy-voice-plan-v9.json"),"utf8"));
 const publicAudio=JSON.parse(fs.readFileSync(path.join(root,"kids/data/academy-audio.json"),"utf8"));
@@ -40,12 +47,24 @@ for(const [id,l] of Object.entries(lessons)){
   }
  }
 }
+for(const age of ages){
+ const qs=win.DARKidsAcademyChoiceOnlyV1.project(null,age,sidqQuestions[age]);
+ for(const q of qs){
+  questionCount++;
+  add(q.prompt,"sidq",age,"question");
+  for(const opt of q.options||[])add(opt,"sidq",age,"answer-option");
+  add(q.explain,"sidq",age,"explanation");
+  add(q.hint,"sidq",age,"hint");
+  if(q.needsHumanEditorialReview)issues.push({id:"sidq",age,code:"adapted_choice_requires_editorial_review",prompt:q.prompt});
+  if(!Array.isArray(q.options)||q.options.length<2||!Number.isInteger(q.correct)||q.correct<0||q.correct>=q.options.length)invalidChoices++;
+ }
+}
 const old=new Set((archive.phrases||[]).map(x=>x.text));
 const publicEntries=publicAudio.entries||{};
 const output={
  schemaVersion:1,mode:"read-only-zero-credit",notHumanApproved:true,
- lessonCount:Object.keys(lessons).length,inlineSidqNotIncluded:true,
- ageVersions:Object.keys(lessons).length*ages.length,questionCount,invalidChoices,
+ lessonCount:Object.keys(lessons).length+1,inlineSidqIncluded:true,
+ ageVersions:(Object.keys(lessons).length+1)*ages.length,questionCount,invalidChoices,
  uniqueCandidatePhrases:phrases.size,archivedExactPhraseMatches:[...phrases.keys()].filter(x=>old.has(x)).length,
  newOrChangedVsArchive:[...phrases.keys()].filter(x=>!old.has(x)).length,
  publicManifestExactMatches:[...phrases.keys()].filter(x=>Object.hasOwn(publicEntries,x)).length,
