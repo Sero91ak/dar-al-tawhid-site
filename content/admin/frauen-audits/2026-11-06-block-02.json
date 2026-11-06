@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-11-06",
+  "batch": "frauenaussagen-02",
+  "target": "women",
+  "count": 10,
+  "status": "editorial-draft-no-publication",
+  "basis": "Gegen bestehende 50 Frauen-Dateien, globalen GitHub-Codeindex/Beiträge und Q-Registry thematisch vorgeprüft. Identische Quellen- und Varianten-IDs werden nicht als neue Aussage zugelassen.",
+  "excludedAsAlreadyExisting": [
+    {
+      "candidate": "Umm Hāniʾ – Schutzgewährung",
+      "existingId": "sahabiyyat-umm-hani-schutz-20261106"
+    },
+    {
+      "candidate": "Umm Ḥarām – Seefahrt",
+      "existingId": "sahabiyyat-umm-haram-seeueberfahrt-20261106"
+    },
+    {
+      "candidate": "Barīrah – ihre Entscheidung nach Freilassung",
+      "existingId": "sahabiyyat-barirah-entscheidung-20261106"
+    },
+    {
+      "candidate": "Umm Qays – Säugling und Reinigung",
+      "existingId": "sahabiyyat-umm-qays-saeugling-20261106"
+    },
+    {
+      "candidate": "Fāṭimah – Weinen und Lachen nach vertraulichen Worten",
+      "existingId": "sahabiyyat-fatimah-geheimnis-20261106"
+    }
+  ],
+  "entries": [
+    {
+      "section": "hajj-umrah",
+      "canonicalId": "frauen-hajj-umm-al-fadl-arafah-20261106",
+      "sourceId": "bukhari:1988",
+      "parallelEditions": [
+        "bukhari:1661",
+        "muslim:1123"
+      ],
+      "title": "Umm al-Faḍl klärte den Fastenstatus des Propheten ﷺ bei ʿArafah",
+      "reference": "Quelle: Ṣaḥīḥ al-Bukhārī, Nr. 1988, über Umm al-Faḍl; weitere Fassung Nr. 1661, Muslim Nr. 1123.",
+      "directSource": "https://sunnah.com/bukhari:1988",
+      "sharhKind": "belegnahe redaktionelle Erläuterung, kein wörtliches klassisches Gelehrtenzitat",
+      "reviewStatus": "nicht-anzeigen"
+    },
+    {
+      "section": "fiqh",
+      "canonicalId": "frauen-fiqh-aishah-tayammum-halskette-20261106",
+      "sourceId": "bukhari:334",
+      "parallelEditions": [
+        "bukhari:336",
+        "bukhari:3773",
+        "bukhari:5882"
+      ],
+      "title": "ʿĀʾišahs Halskette und die Offenbarung des Tayammum",
+      "reference": "Quelle: Ṣaḥīḥ al-Bukhārī, Nr. 334, über ʿĀʾišah; weitere Fassungen Nr. 336 und 3773.",
+      "directSource": "https://sunnah.com/bukhari:334",
+      "sharhKind": "belegnahe redaktionelle Erläuterung, kein wörtliches klassisches Gelehrtenzitat",
+      "reviewStatus": "nicht-anzeigen"
+    },
+    {
+      "section": "tawhid-iman-ibadah",
+      "canonicalId": "frauen-tawhid-aishah-abrechnung-ar-20261106",
+      "sourceId": "bukhari:6536",
+      "parallelEditions": [],
+      "title": "ʿĀʾišah fragte nach der leichten Abrechnung am Jüngsten Tag",
+      "reference": "Quelle: Ṣaḥīḥ al-Bukhārī, Nr. 6536, über ʿĀʾišah.",
+      "directSource": "https://sunnah.com/bukhari:6536",
+      "sharhKind": "belegnahe redaktionelle Erläuterung, kein wörtliches klassisches Gelehrtenzitat",
+      "reviewStatus": "nicht-anzeigen"
+    },
+    {
+      "section": "sadaqah-wohltatigkeit",
+      "canonicalId": "frauen-sadaqah-asma-nicht-zurueckhalten-20261106",
+      "sourceId": "bukhari:1433",
+      "parallelEditions": [],
+      "title": "Asmāʾ überlieferte die Warnung vor geizigem Zurückhalten",
+      "reference": "Quelle: Ṣaḥīḥ al-Bukhārī, Nr. 1433, über Asmāʾ bint Abī Bakr.",
+      "directSource": "https://sunnah.com/bukhari:1433",
+      "sharhKind": "belegnahe redaktionelle Erläuterung, kein wörtliches klassisches Gelehrtenzitat",
+      "reviewStatus": "nicht-anzeigen"
+    },
+    {
+      "section": "verwandtschaft-nachbarschaft-gastrecht",
+      "canonicalId": "frauen-nachbarn-aishah-naehere-tuer-20261106",
+      "sourceId": "bukhari:6020",
+      "parallelEditions": [
+        "bukhari:2259",
+        "bukhari:2595"
+      ],
+      "title": "ʿĀʾišah fragte, welchem Nachbarn sie zuerst schenken soll",
+      "reference": "Quelle: Ṣaḥīḥ al-Bukhārī, Nr. 6020; Parallelfassungen Nr. 2259 und 2595.",
+      "directSource": "https://sunnah.com/bukhari:6020",
+      "sharhKind": "belegnahe redaktionelle Erläuterung, kein wörtliches klassisches Gelehrtenzitat",
+      "reviewStatus": "nicht-anzeigen"
+    },
+    {
+      "section": "kinder-erziehung",
+      "canonicalId": "frauen-kinder-asma-hidschra-geburt-20261106",
+      "sourceId": "bukhari:3909",
+      "parallelEditions": [],
+      "title": "Asmāʾ berichtete von der Geburt ihres Sohnes nach der Hiǧrah",
+      "reference": "Quelle: Ṣaḥīḥ al-Bukhārī, Nr. 3909, über Asmāʾ bint Abī Bakr.",
+      "directSource": "https://sunnah.com/bukhari:3909",
+      "sharhKind": "belegnahe redaktionelle Erläuterung, kein wörtliches klassisches Gelehrtenzitat",
+      "reviewStatus": "nicht-anzeigen"
+    },
+    {
+      "section": "wissen-lernen",
+      "canonicalId": "frauen-wissen-umm-hisham-qaf-khutbah-20261106",
+      "sourceId": "muslim:873",
+      "parallelEditions": [
+        "muslim:872"
+      ],
+      "title": "Umm Hišām lernte Sūrah Qāf aus der Freitagsansprache",
+      "reference": "Quelle: Ṣaḥīḥ Muslim, Nr. 873a und 873b, über Umm Hišām bint Ḥāriṯah.",
+      "directSource": "https://sunnah.com/muslim:873b",
+      "sharhKind": "belegnahe redaktionelle Erläuterung, kein wörtliches klassisches Gelehrtenzitat",
+      "reviewStatus": "nicht-anzeigen"
+    },
+    {
+      "section": "tod-janazah-trauer-adab",
+      "canonicalId": "frauen-janazah-umm-al-ala-urteil-aakhirah-20261106",
+      "sourceId": "bukhari:1243",
+      "parallelEditions": [
+        "bukhari:3929",
+        "bukhari:7003",
+        "bukhari:7018"
+      ],
+      "title": "Umm al-ʿAlāʾ lernte, niemandem ohne Wissen die Jenseitsstellung zuzusprechen",
+      "reference": "Quelle: Ṣaḥīḥ al-Bukhārī, Nr. 1243; Parallelfassung Nr. 3929, über Umm al-ʿAlāʾ.",
+      "directSource": "https://sunnah.com/bukhari:1243",
+      "sharhKind": "belegnahe redaktionelle Erläuterung, kein wörtliches klassisches Gelehrtenzitat",
+      "reviewStatus": "nicht-anzeigen"
+    },
+    {
+      "section": "muetter-der-glaeubigen",
+      "canonicalId": "muetter-umm-salamah-nachtwarnung-20261106",
+      "sourceId": "bukhari:115",
+      "parallelEditions": [],
+      "title": "Umm Salamah berichtete von der nächtlichen Ermahnung des Propheten ﷺ",
+      "reference": "Quelle: Ṣaḥīḥ al-Bukhārī, Nr. 115, über Umm Salamah.",
+      "directSource": "https://sunnah.com/bukhari:115",
+      "sharhKind": "belegnahe redaktionelle Erläuterung, kein wörtliches klassisches Gelehrtenzitat",
+      "reviewStatus": "nicht-anzeigen"
+    },
+    {
+      "section": "moschee-gemeinschaft",
+      "canonicalId": "frauen-moschee-fajr-bedeckt-aishah-20261106",
+      "sourceId": "bukhari:372",
+      "parallelEditions": [],
+      "title": "ʿĀʾišah berichtete über Frauen beim Fajr-Gebet",
+      "reference": "Quelle: Ṣaḥīḥ al-Bukhārī, Nr. 372, über ʿĀʾišah.",
+      "directSource": "https://sunnah.com/bukhari:372",
+      "sharhKind": "belegnahe redaktionelle Erläuterung, kein wörtliches klassisches Gelehrtenzitat",
+      "reviewStatus": "nicht-anzeigen"
+    }
+  ],
+  "publication": {
+    "sourcePagesQ": false,
+    "learningPages": false,
+    "authorizedNineLocales": false,
+    "editorialApproval": false,
+    "productionDeploymentVerified": false,
+    "deviceNotifications": false
+  },
+  "notes": [
+    "Šarḥ ist ein transparenter redaktioneller Kurzkommentar, kein fingiertes Zitat einer klassischen Autorität.",
+    "Quellenalternativen zum selben Ereignis in quelleVarianten, nie als eigene Aussage.",
+    "Keine Änderung an den ursprünglichen Zehnerblockdaten; kein Merge/OneSignal-Trigger.",
+    "Deterministische Dublettensuche ist keine Garantie, dass jegliche semantische Überschneidung im gesamten Archiv ausgeschlossen ist; vor Freigabe erneut vollständig prüfen."
+  ]
+}
