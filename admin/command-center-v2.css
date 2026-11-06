@@ -76,11 +76,11 @@ body.dar-v2-active #panel .folder-grid{grid-template-columns:1fr!important;gap:8
 }
 body.dar-v2-active #panel{container-name:dar-admin-content;container-type:inline-size}
 @container dar-admin-content (max-width:760px){
- .folder-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
- .command-grid{grid-template-columns:1fr!important}
+ body.dar-v2-active #panel .folder-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body.dar-v2-active #panel .command-grid{grid-template-columns:1fr!important}
 }
 @container dar-admin-content (max-width:540px){
- .folder-grid{grid-template-columns:1fr!important}
+ body.dar-v2-active #panel .folder-grid{grid-template-columns:1fr!important}
 }
 @media(prefers-reduced-motion:reduce){.dar-v2-rail,.dar-v2-nav,.dar-v2-kpi,.dar-v2-chart-bar,.dar-v2-overview,.dar-v2-overlay,body.dar-v2-active #panel .folder-card{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
