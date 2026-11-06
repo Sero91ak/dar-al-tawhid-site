@@ -4,7 +4,8 @@
   "scripts": {
     "build": "node scripts/cf-pages-build.js",
     "sync-build-ids": "node scripts/sync-app-build-ids.js",
-    "verify-share": "node scripts/verify-global-share-design.js"
+    "verify-share": "node scripts/verify-global-share-design.js",
+    "verify-frauen-dedupe": "node scripts/check-frauen-source-duplicates.cjs"
   },
   "devDependencies": {
     "wrangler": "^4.86.0"
