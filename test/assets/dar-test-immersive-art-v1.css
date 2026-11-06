@@ -38,7 +38,7 @@ html.dar-test-immersive-art-v1[data-theme] body .dar-art-layer::before{
  background-position:center,center,var(--dar-art-focus);
  background-size:cover;background-repeat:no-repeat;
  transform-origin:var(--dar-art-focus);
- transform:scale(calc(1.045 - var(--dar-art-progress,0) * .045));
+ transform:scale(var(--dar-art-scale,1.045));
 }
 html.dar-test-immersive-art-v1[data-theme] body .dar-art-layer::after{
  content:"";position:absolute;inset:0;pointer-events:none;
