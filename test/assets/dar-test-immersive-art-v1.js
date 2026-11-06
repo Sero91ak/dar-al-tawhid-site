@@ -68,8 +68,10 @@ function depth(){
    var root=scroller(el),position=positions.has(root)?positions.get(root):Number(root.scrollTop||0);
    positions.set(root,position);
    var value=String(Math.round(Math.min(1,Math.max(0,position/180))*100)/100);
-   if(el.style.getPropertyValue("--dar-art-progress")!==value)
+   if(el.style.getPropertyValue("--dar-art-progress")!==value){
      el.style.setProperty("--dar-art-progress",value);
+     el.style.setProperty("--dar-art-scale",String((1.045-Number(value)*.045).toFixed(4)));
+   }
  });
 }
 function reconcile(){
