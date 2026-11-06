@@ -74,7 +74,9 @@
   const right=node("aside","dar-v3-inspector");right.id="darV3Detail";right.setAttribute("aria-label",t("inspect"));
   panel.append(left,right);section.append(panel);
   const note=node("p","dar-v3-footer",t("countDisclaimer"));section.append(note);
-  cover.insertAdjacentElement("afterend",section);session={element:section,locale:currentLocale()};tasks();
+  cover.insertAdjacentElement("afterend",section);
+  const classic=$("#darV3ClassicSummary");if(classic)classic.textContent=t("moreTools");
+  session={element:section,locale:currentLocale()};tasks();
   update(stats);
  }
  function update(stats){
