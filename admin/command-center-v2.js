@@ -86,8 +86,12 @@ function openSearch(){if(!active())return;closeDrawer();overlay.hidden=false;sea
 function closeSearch(){if(overlay)overlay.hidden=true}
 function getStats(){
  try{const value=typeof lastData==="undefined"?null:lastData;if(!value||!Array.isArray(value.totals))return null;
- const rows=value.totals;const sum=key=>rows.reduce((v,row)=>v+(Number(row[key])||0),0);
- return {online:Number(value.live?.live_now)||0,views:sum("views"),shares:sum("shares"),saves:sum("saves"),rows,updated:value.updated||null};}catch{return null}
+ const rows=value.totals;
+ const sum=key=>rows.some(row=>row[key]!=null&&Number.isFinite(Number(row[key])))
+  ?rows.reduce((v,row)=>v+(Number(row[key])||0),0):null;
+ const onlineRaw=value.live?.live_now;
+ const online=onlineRaw==null||!Number.isFinite(Number(onlineRaw))?null:Number(onlineRaw);
+ return {online,views:sum("views"),shares:sum("shares"),saves:sum("saves"),rows,updated:value.updated||null};}catch{return null}
 }
 const nf=value=>Math.round(Number(value)||0).toLocaleString("de-DE");
 function buildOverview(){
@@ -106,10 +110,10 @@ function buildOverview(){
   flow.append(steps);grid.append(chart,flow);section.append(grid);cover.insertAdjacentElement("afterend",section);
  }
  const stats=getStats();const data=[
- ["Besucher jetzt",stats?nf(stats.online):"—","Live-Zählung","◉"],
- ["Aufrufe",stats?nf(stats.views):"—","Erfasste Inhaltsaufrufe","▥"],
- ["Geteilt",stats?nf(stats.shares):"—","Erfasste Aktionen","↗"],
- ["Gespeichert",stats?nf(stats.saves):"—","Erfasste Aktionen","▣"]];
+ ["Besucher jetzt",stats&&Number.isFinite(stats.online)?nf(stats.online):"—","Live-Zählung","◉"],
+ ["Aufrufe",stats&&Number.isFinite(stats.views)?nf(stats.views):"—","Erfasste Inhaltsaufrufe","▥"],
+ ["Geteilt",stats&&Number.isFinite(stats.shares)?nf(stats.shares):"—","Erfasste Aktionen","↗"],
+ ["Gespeichert",stats&&Number.isFinite(stats.saves)?nf(stats.saves):"—","Erfasste Aktionen","▣"]];
  const wrap=section.querySelector(".dar-v2-kpis"),serialized=JSON.stringify(data);
  if(wrap.dataset.payload!==serialized){wrap.dataset.payload=serialized;wrap.replaceChildren();
  data.forEach(([title,value,detail,icon])=>{const card=el("div","dar-v2-kpi");card.append(el("span","dar-v2-kpi-icon",icon),el("span","dar-v2-kpi-title",title),el("strong","dar-v2-kpi-value",value),el("span","dar-v2-kpi-detail",detail));wrap.append(card)})}
