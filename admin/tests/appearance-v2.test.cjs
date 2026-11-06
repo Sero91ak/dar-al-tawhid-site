@@ -135,7 +135,7 @@ function testFiles(){
  assert.match(css,/prefers-reduced-motion:reduce/);
  assert.match(shell,/max-width:719px/);
  assert.match(shell,/max-width:1023px/,"Wide iPad must share desktop navigation");
- assert.match(shell,/@container \(max-width:760px\)/,"Split View must follow content width");
+ assert.match(shell,/@container \(max-width:720px\)/,"Split View must follow content width");
  assert.ok(!shell.includes("max-width:1199px"),"Old iPad icon-only breakpoint must be removed");
  assert.ok(studio.includes("/admin/redaktion/appearance.css"));
  assert.ok(studio.includes("darAdminAppearanceV2"));
