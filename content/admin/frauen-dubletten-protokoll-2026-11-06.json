@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-06",
+  "status": "editorial-preflight-incomplete",
+  "policy": "Vor jedem Zehnerblock arabischen Bericht/mehrere Fassungen, genaue Fundstellen, Q-/Post-/Lernregister und semantische Gleichheit pruefen. Vorhandene Aussagen nicht verdoppeln.",
+  "checks": {
+    "womenCatalogFilesScanned": 50,
+    "existingWomenRecordsBeforeBranch": 1449,
+    "adultPostIndexCount": 484,
+    "postAndQExactSourceSearch": "targeted GitHub search only; final complete repository-wide script check still pending",
+    "semanticAudit": "editorial review required; automatic similarity is not proof",
+    "sourceIdentity": "independent bukhari/muslim collection plus reference number",
+    "commits": "each block written as exact set of ten",
+    "release": "all new entries not visible, no OneSignal"
+  },
+  "excludedExisting": [
+    {
+      "subject": "Asmāʾ bint Abī Bakr trug Dattelkerne",
+      "existingFile": "data/frauen-arbeit-studium-oeffentlichkeit.json",
+      "source": "al-Bukhārī 5224"
+    },
+    {
+      "subject": "ar-Rubayyiʿ bint Muʿawwiḏ lehrte Kinder das ʿĀšūrāʾ-Fasten",
+      "existingFile": "data/frauen-ramadan-fasten-eid.json",
+      "source": "al-Bukhārī 1960"
+    }
+  ],
+  "blocks": [
+    {
+      "batch": "01",
+      "target": "Mütter der Gläubigen",
+      "count": 10
+    },
+    {
+      "batch": "02",
+      "target": "Ṣaḥābiyyāt",
+      "count": 10
+    }
+  ],
+  "records": [
+    {
+      "kennung": "muetter-khadijah-salam-paradies-20261106",
+      "quellePrimaerId": "bukhari:3820",
+      "primaryLink": "https://sunnah.com/bukhari/63/45",
+      "topicPath": "data/frauen-muetter-der-glaeubigen.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "muetter-aishah-hausdienst-20261106",
+      "quellePrimaerId": "bukhari:676",
+      "primaryLink": "https://sunnah.com/bukhari/10/70",
+      "topicPath": "data/frauen-muetter-der-glaeubigen.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "muetter-safiyyah-itikaf-besuch-20261106",
+      "quellePrimaerId": "bukhari:2035",
+      "primaryLink": "https://sunnah.com/bukhari/33/10",
+      "topicPath": "data/frauen-muetter-der-glaeubigen.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "muetter-maymunah-freilassung-verwandte-20261106",
+      "quellePrimaerId": "bukhari:2592",
+      "primaryLink": "https://sunnah.com/bukhari/51/26",
+      "topicPath": "data/frauen-muetter-der-glaeubigen.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "muetter-umm-habibah-zwoelf-rakat-20261106",
+      "quellePrimaerId": "muslim:728",
+      "primaryLink": "https://sunnah.com/muslim/6/124",
+      "topicPath": "data/frauen-muetter-der-glaeubigen.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "muetter-sawdah-tag-aishah-20261106",
+      "quellePrimaerId": "bukhari:5212",
+      "primaryLink": "https://sunnah.com/bukhari/67/145",
+      "topicPath": "data/frauen-muetter-der-glaeubigen.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "muetter-eifersucht-schale-ausgleich-20261106",
+      "quellePrimaerId": "bukhari:5225",
+      "primaryLink": "https://sunnah.com/bukhari/67/158",
+      "topicPath": "data/frauen-muetter-der-glaeubigen.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "muetter-hafsah-nach-verwitwung-20261106",
+      "quellePrimaerId": "bukhari:5122",
+      "primaryLink": "https://sunnah.com/bukhari:5122",
+      "topicPath": "data/frauen-muetter-der-glaeubigen.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "muetter-zaynab-zunahme-des-uebels-20261106",
+      "quellePrimaerId": "bukhari:3346",
+      "primaryLink": "https://sunnah.com/bukhari/60/21",
+      "topicPath": "data/frauen-muetter-der-glaeubigen.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "muetter-aishah-letzte-stunden-20261106",
+      "quellePrimaerId": "bukhari:4451",
+      "primaryLink": "https://sunnah.com/bukhari/64/471",
+      "topicPath": "data/frauen-muetter-der-glaeubigen.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "sahabiyyat-umm-haram-seeueberfahrt-20261106",
+      "quellePrimaerId": "bukhari:2788",
+      "primaryLink": "https://sunnah.com/bukhari:2788",
+      "topicPath": "data/frauen-sahabiyyat.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "sahabiyyat-umm-hani-schutz-20261106",
+      "quellePrimaerId": "bukhari:357",
+      "primaryLink": "https://sunnah.com/bukhari:357",
+      "topicPath": "data/frauen-sahabiyyat.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "sahabiyyat-fatimah-geheimnis-20261106",
+      "quellePrimaerId": "bukhari:3623",
+      "primaryLink": "https://sunnah.com/bukhari:3623",
+      "topicPath": "data/frauen-sahabiyyat.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "sahabiyyat-umm-qays-saeugling-20261106",
+      "quellePrimaerId": "bukhari:223",
+      "primaryLink": "https://sunnah.com/bukhari:223",
+      "topicPath": "data/frauen-sahabiyyat.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "sahabiyyat-umm-sulaym-duft-20261106",
+      "quellePrimaerId": "muslim:2331",
+      "primaryLink": "https://sunnah.com/muslim:2331a",
+      "topicPath": "data/frauen-sahabiyyat.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "sahabiyyat-barirah-entscheidung-20261106",
+      "quellePrimaerId": "bukhari:5097",
+      "primaryLink": "https://sunnah.com/bukhari:5097",
+      "topicPath": "data/frauen-sahabiyyat.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "sahabiyyat-umm-habibah-milchverwandtschaft-20261106",
+      "quellePrimaerId": "bukhari:5101",
+      "primaryLink": "https://sunnah.com/bukhari:5101",
+      "topicPath": "data/frauen-sahabiyyat.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "sahabiyyat-aishah-jibril-salam-20261106",
+      "quellePrimaerId": "bukhari:3768",
+      "primaryLink": "https://sunnah.com/bukhari:3768",
+      "topicPath": "data/frauen-sahabiyyat.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "sahabiyyat-asma-umays-zwei-hidschras-20261106",
+      "quellePrimaerId": "bukhari:4231",
+      "primaryLink": "https://sunnah.com/bukhari:4231",
+      "topicPath": "data/frauen-sahabiyyat.json",
+      "status": "nicht-anzeigen"
+    },
+    {
+      "kennung": "sahabiyyat-aishah-ifk-offenbarung-20261106",
+      "quellePrimaerId": "bukhari:4141",
+      "primaryLink": "https://sunnah.com/bukhari:4141",
+      "topicPath": "data/frauen-sahabiyyat.json",
+      "status": "nicht-anzeigen"
+    }
+  ],
+  "publicationAllowed": false,
+  "devicePushAllowed": false,
+  "finalCheck": "DAR_DEDUPE_BASE=origin/main npm run verify-frauen-dedupe"
+}
