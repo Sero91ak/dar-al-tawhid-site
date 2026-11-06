@@ -30,11 +30,11 @@ Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-262` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4772
-totalVerifiedEntries: 4772
-loadedEntries: 4772
-uniqueVerifiedReferences: 4772
-missingCount: 1464
+entriesCount: 4763
+totalVerifiedEntries: 4763
+loadedEntries: 4763
+uniqueVerifiedReferences: 4763
+missingCount: 1473
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -46,7 +46,7 @@ letzter Gap-Fill-Batch: entries-gap-06-262.json
 nächster Gap-Fill-Batch: entries-gap-06-263.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `582` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `573` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -672,6 +672,6 @@ Zehn neue eindeutige Referenzen: 4:13, 4:18, 4:25, 4:31, 4:35, 4:40, 4:44, 4:49,
 
 Zehn neue vor dem Batch tatsächlich offene Referenzen: 4:56, 4:61, 4:71, 4:72, 4:73, 4:78, 4:79, 4:103, 4:104, 4:108. Katalog 4762/6236, Lücken 1474. Originalstellen, Wortlaut und differenzierte Isnādhinweise stehen in SOURCE_REVIEW_06-261.md. Strukturelle Veröffentlichung ≠ universelle ṣaḥīḥ-Einstufung; globale Endpunkt- und Geräteprüfung separat.
 
-## Batch 06-262 — 05.11.2026 (Prüfzweig)
+## Batch 06-262 – 06.11.2026 (authentizitätsgeprüft)
 
-Zehn in der aktuellen Lückenliste fehlende Referenzen als vorbereiteter Quellenbatch: 4:124, 4:140, 4:141, 4:142, 4:143, 4:153, 4:156, 4:163, 4:165, 4:166. Geplanter Stand bei Merge 4772/6236, fehlend 1464. Originalauszüge und kritische Isnādhinweise in SOURCE_REVIEW_06-262.md. **Der Batch ist bis zur erfolgreichen globalen Release-Reparatur nicht nach main freigegeben.**
+10 Originalstellen untersucht, 1 authentisch bewertete mawqūf-Überlieferung zu 4:141 übernommen; 9 noch offen. 4763 von 6236, 1473 Lücken. Quellen, Einwände und Einzelstatus: SOURCE_REVIEW_06-262.md. Gewünschte Batchgröße rechtfertigt keine schwach belegte Zuschreibung.
