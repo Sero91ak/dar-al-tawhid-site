@@ -9,8 +9,8 @@ for(const name of ["v1","v2","v22","v25","v26","v27"]){
 }
 const all=sandbox.window.DARKidsAcademyCurriculum,v27=sandbox.window.DARKidsAcademyCurriculumV27;
 const expected=[
- ["aqidah-allah-erschuf-tiere","tawhid","16:5","2363","https://dorar.net/hadith/sharh/67134"],
- ["aqidah-iman-an-allah-vertiefen","iman","2:285","8","https://dorar.net/hadith/sharh/1189"],
+ ["aqidah-allah-erschuf-tiere","tawhid","16:5","2363","https://sunnah.com/bukhari:2363"],
+ ["aqidah-iman-an-allah-vertiefen","iman","2:285","8","https://sunnah.com/muslim:8a"],
  ["aqidah-ikhlas-gute-lernabsicht","ikhlas","98:5","1","https://dorar.net/hadith/sharh/3429"],
  ["akhlaq-geschwister-fair-teilen","akhlaq","16:90","2587","https://dorar.net/hadith/sharh/14634"],
  ["adab-privatsphaere-andere-achten","adab","24:27","6241","https://dorar.net/hadith/sharh/9448"],

@@ -1,0 +1,208 @@
+{
+  "schema": "academy-editorial-pilot-v2",
+  "status": "editorial-draft-not-live",
+  "lessonId": "sidq",
+  "subject": "akhlaq",
+  "title": "Ṣidq – Wahrhaftigkeit",
+  "language": "de-DE",
+  "immutable": {
+    "progressKey": "kids.academy-v4.{profileId}.{age}.sidq",
+    "legacyQuestionCount": {
+      "4-5": 2,
+      "6-8": 3,
+      "9-10": 3
+    },
+    "audioGenerationsAllowed": false,
+    "existingRecordsPreserved": true
+  },
+  "source": {
+    "quran": {
+      "surah": 9,
+      "ayah": 119,
+      "reference": "Sūrat at-Tawbah · 9:119",
+      "arabic": "يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَكُونُوا مَعَ الصَّادِقِينَ",
+      "germanMeaning": "O die ihr glaubt, fürchtet Allah und seid mit den Wahrhaftigen.",
+      "translationType": "deutsche Bedeutungsübersetzung",
+      "url": "https://quran.com/9/119",
+      "recitationPolicy": "Only existing verified real Qurʾān reciter, no synthesized TTS"
+    },
+    "hadith": {
+      "work": "Ṣaḥīḥ Muslim",
+      "number": "2607a",
+      "narrator": "ʿAbdullāh ibn Masʿūd",
+      "arabicExcerpt": "إِنَّ الصِّدْقَ يَهْدِي إِلَى الْبِرِّ وَإِنَّ الْبِرَّ يَهْدِي إِلَى الْجَنَّةِ",
+      "germanParaphrase": "Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies.",
+      "url": "https://sunnah.com/muslim:2607a",
+      "quoteKind": "gekürzte sinngemäße Wiedergabe; kein vollständiges wörtliches Zitat"
+    }
+  },
+  "ages": {
+    "4-5": {
+      "title": "Die Wahrheit sagen",
+      "durationTarget": "5–8 Minuten – freiwillig, jederzeit pausierbar",
+      "goal": "Das Kind kann mit einem einfachen Satz ehrlich benennen, was es getan hat.",
+      "stages": [
+        {
+          "step": 1,
+          "label": "Ankommen",
+          "teacher": "Heute lernen wir, warum wir die Wahrheit sagen. Auch wenn uns ein Fehler passiert, dürfen wir um Hilfe bitten.",
+          "prompt": "Du hast ein Spielzeug versehentlich umgestoßen. Was kannst du sagen?"
+        },
+        {
+          "step": 2,
+          "label": "Verstehen",
+          "teacher": "Wahrhaftigkeit bedeutet: Ich sage, was wirklich passiert ist. Ein Fehler kann aus Versehen geschehen. Die Wahrheit sagen hilft uns, ihn wiedergutzumachen.",
+          "prompt": "Was sagst du, wenn du etwas aus Versehen kaputt machst?"
+        },
+        {
+          "step": 3,
+          "label": "Belege",
+          "teacher": "Im Qurʾān ruft Allah die Gläubigen auf, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrheit zu Gutem führt.",
+          "quranSource": "9:119",
+          "hadithSource": "Muslim 2607a",
+          "prompt": "Was lernen wir aus den beiden Quellen?"
+        },
+        {
+          "step": 4,
+          "label": "Mitdenken",
+          "teacher": "Wähle die Antwort, die zu dem passt, was du wirklich getan hast.",
+          "prompt": "Du hast den Becher aus Versehen umgestoßen. Was sagst du?",
+          "options": [
+            "Ich war das. Ich hole Hilfe.",
+            "Das war jemand anders."
+          ],
+          "correctOption": 0,
+          "feedback": "Du erzählst die Wahrheit und bittest bei Bedarf um Hilfe.",
+          "hint": "Welche Antwort beschreibt, was wirklich passiert ist?"
+        },
+        {
+          "step": 5,
+          "label": "Weitergeben",
+          "teacher": "Ich darf die Wahrheit sagen und um Hilfe bitten.",
+          "prompt": "Erkläre einer vertrauten Person: Was bedeutet ehrlich sein?",
+          "teachBack": "Warum ist es gut, die Wahrheit zu sagen?"
+        }
+      ],
+      "safety": "Keine öffentliche Kindermitteilung; Hilfe bei einer vertrauten erwachsenen Person."
+    },
+    "6-8": {
+      "title": "Ehrlichkeit und Verantwortung",
+      "durationTarget": "8–12 Minuten – freiwillig",
+      "goal": "Das Kind unterscheidet einen versehentlichen Fehler von einer absichtlichen Unwahrheit und kann angemessen handeln.",
+      "stages": [
+        {
+          "step": 1,
+          "label": "Ankommen",
+          "teacher": "Ein Fehler passiert schnell. Heute untersuchen wir, warum es wichtig ist, die Wahrheit zu sagen und niemand anderem die Schuld zu geben.",
+          "prompt": "Was kann ein Kind tun, wenn es aus Versehen etwas beschädigt?"
+        },
+        {
+          "step": 2,
+          "label": "Verstehen",
+          "teacher": "Ein Versehen bedeutet: Ich wollte den Fehler nicht machen. Eine bewusste Lüge bedeutet: Ich sage absichtlich etwas Unwahres. Wahrhaftigkeit hilft uns, Verantwortung zu übernehmen.",
+          "prompt": "Warum macht ein versehentlicher Fehler uns nicht automatisch zu einem Lügner?"
+        },
+        {
+          "step": 3,
+          "label": "Belege",
+          "teacher": "Qurʾān 9:119 ruft zu Wahrhaftigkeit auf. Der authentische Ḥadīṯ erklärt, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Der Vergleich bezieht sich auf den Inhalt, nicht auf identische Wörter.",
+          "prompt": "Welche Aussage steht im Qurʾān und welche ergänzt der Ḥadīṯ?"
+        },
+        {
+          "step": 4,
+          "label": "Mitdenken",
+          "teacher": "Du hast einen Becher umgestoßen. Deine Schwester wird beschuldigt, obwohl sie nicht dort war.",
+          "prompt": "Was ist deine wahrhaftige und faire Reaktion?",
+          "options": [
+            "Ich sage, was ich getan habe, und helfe.",
+            "Ich schweige, bis alle wieder weg sind.",
+            "Ich sage nur, dass meine Schwester es nicht war, und verschweige meinen Anteil."
+          ],
+          "correctOption": 0,
+          "feedback": "Die vollständige Wahrheit zu sagen verhindert, dass jemand zu Unrecht beschuldigt wird.",
+          "hint": "Wer hat den Becher wirklich umgestoßen?"
+        },
+        {
+          "step": 5,
+          "label": "Weitergeben",
+          "teacher": "Wahrhaftigkeit bedeutet, die Wirklichkeit zu sagen und Verantwortung zu übernehmen.",
+          "prompt": "Erkläre, warum ein Versehen etwas anderes ist als eine Lüge.",
+          "teachBack": "Was würdest du tun, wenn jemand anderes für deinen Fehler beschuldigt wird?"
+        }
+      ],
+      "safety": "Falschbehauptungen nicht aus Angst fördern; bei unsicherem Umfeld vertrauenswürdige Hilfe suchen."
+    },
+    "9-10": {
+      "title": "Wahrhaftigkeit begründen und Quellen unterscheiden",
+      "durationTarget": "12–18 Minuten – freiwillig",
+      "goal": "Das Kind kann die Lehre aus Qurʾān und Sunnah unterscheiden, Wahrheit von Vermutung abgrenzen und ein begründetes Beispiel geben.",
+      "stages": [
+        {
+          "step": 1,
+          "label": "Ankommen",
+          "teacher": "Manchmal müssen wir die Wahrheit sagen, obwohl uns das schwerfällt. Heute üben wir, Beobachtungen, Vermutungen und bewusste Aussagen auseinanderzuhalten.",
+          "prompt": "Kannst du eine Situation nennen, in der die Wahrheit wichtig ist, obwohl es unbequem wird?"
+        },
+        {
+          "step": 2,
+          "label": "Verstehen",
+          "teacher": "Wer wahrhaftig sein will, spricht nicht absichtlich Unwahres. Gleichzeitig behaupten wir nur das, was wir tatsächlich wissen. Ein versehentlicher Fehler und eine bewusste Lüge sind zu unterscheiden.",
+          "prompt": "Wie würdest du erklären, warum eine unbelegte Vermutung nicht als Tatsache weitergesagt werden sollte?"
+        },
+        {
+          "step": 3,
+          "label": "Belege",
+          "teacher": "Die Aussage „Seid mit den Wahrhaftigen“ ist der behandelte Qurʾān-Vers 9:119. Die Verbindung von Wahrhaftigkeit und Rechtschaffenheit entstammt der authentischen Überlieferung bei Muslim 2607a. Unsere Alltagsszenen sind pädagogische Beispiele, keine Überlieferungen.",
+          "prompt": "Was gehört zum Vers, was zum Hadith und was ist bloß ein Beispiel?"
+        },
+        {
+          "step": 4,
+          "label": "Mitdenken",
+          "teacher": "Ein Kind sagt: „Ich habe es selbst gesehen“, obwohl es die Geschichte nur von jemandem gehört hat.",
+          "prompt": "Was wäre die zutreffende Aussage?",
+          "options": [
+            "Ich habe nur davon gehört und weiß nicht, ob es stimmt.",
+            "Ich habe es selbst gesehen, wenn ich der anderen Person vertraue.",
+            "Ich gebe die Geschichte ohne Prüfung als Tatsache weiter."
+          ],
+          "correctOption": 0,
+          "feedback": "Eine gehörte Nachricht ist nicht automatisch eine eigene Beobachtung.",
+          "hint": "Unterscheide, was du gesehen hast, von dem, was andere erzählt haben."
+        },
+        {
+          "step": 5,
+          "label": "Weitergeben",
+          "teacher": "Qurʾān, Sunnah und unsere eigenen Beispiele müssen klar voneinander getrennt bleiben.",
+          "prompt": "Erkläre einer vertrauten Person beide Belege in eigenen Worten.",
+          "teachBack": "Wie erkennst du den Unterschied zwischen einer Beobachtung, einer Vermutung und einer bewussten Lüge?"
+        }
+      ],
+      "safety": "Keine automatische Bewertung persönlicher Erfahrungen und keine Zuschreibung innerer Absichten."
+    }
+  },
+  "releases": {
+    "educatorSignoff": false,
+    "islamicSourceSignoff": false,
+    "childPsychologySignoff": false,
+    "pronunciationSignoff": false,
+    "realDevicePass": false,
+    "v4VoicePublished": false,
+    "childrenProductionReady": false
+  },
+  "pronunciation": {
+    "fuṣḥāTerms": [
+      "Ṣidq",
+      "Qurʾān",
+      "Sunnah",
+      "Ḥadīṯ",
+      "Muḥammad",
+      "ʿAbdullāh ibn Masʿūd"
+    ],
+    "isolateGermanWords": true,
+    "noGermanNurToArabicNur": true,
+    "arabicAudioSource": "authentic-existing-quran-reciter",
+    "masterSpeaker": "authorized-owner-voice",
+    "model": "ElevenLabs V4",
+    "generationStatus": "PENDING_APPROVAL_NO_CREDITS_SPENT"
+  }
+}

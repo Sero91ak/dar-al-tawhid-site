@@ -669,7 +669,7 @@ window.DARKidsAcademyCurriculum=Object.freeze({
    "ayah": 6,
    "label": "Sūrat al-Māʾidah · 5:6 (Textauszug)",
    "arabic": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا قُمْتُمْ إِلَى الصَّلَاةِ فَاغْسِلُوا وُجُوهَكُمْ وَأَيْدِيَكُمْ إِلَى الْمَرَافِقِ وَامْسَحُوا بِرُءُوسِكُمْ وَأَرْجُلَكُمْ إِلَى الْكَعْبَيْنِ",
-   "meaning": "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln.",
+   "meaning": "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln.",
    "excerpt": true
   },
   "hadith": {
@@ -760,7 +760,7 @@ window.DARKidsAcademyCurriculum=Object.freeze({
     {
      "type": "text",
      "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 5:6 und der genannten Überlieferung?",
-     "sample": "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln. Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt.",
+     "sample": "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln. Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt.",
      "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah."
     }
    ]

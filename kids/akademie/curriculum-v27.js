@@ -29,7 +29,7 @@ const additions={
       "text": "Der Prophet ﷺ erzählte von einem Mann, der einem durstigen Hund Wasser gab; für Barmherzigkeit gegenüber Tieren gibt es Lohn."
     },
     "sourceAudit": {
-      "hadithUrl": "https://dorar.net/hadith/sharh/67134",
+      "hadithUrl": "https://sunnah.com/bukhari:2363",
       "hadithNumber": "2363",
       "narrator": "Abū Hurayrah",
       "authenticity": "Ṣaḥīḥ",
@@ -179,7 +179,7 @@ const additions={
       "text": "Im Ḥadīṯ von Ǧibrīl erklärt der Prophet ﷺ die Grundlagen des Īmān: Glaube an Allah, Engel, Bücher, Gesandte, Jüngsten Tag und die Bestimmung."
     },
     "sourceAudit": {
-      "hadithUrl": "https://dorar.net/hadith/sharh/1189",
+      "hadithUrl": "https://sunnah.com/muslim:8a",
       "hadithNumber": "8",
       "narrator": "ʿUmar ibn al-Khaṭṭāb",
       "authenticity": "Ṣaḥīḥ",

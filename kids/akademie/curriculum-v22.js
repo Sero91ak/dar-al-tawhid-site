@@ -29,7 +29,7 @@ const additions={
       "text": "Der Prophet ﷺ lehrte den jungen ʿUmar ibn Abī Salamah: Nenne Allahs Namen, iss mit deiner rechten Hand und iss von dem, was vor dir liegt."
     },
     "sourceAudit": {
-      "hadithUrl": "https://dorar.net/hadith/sharh/14362",
+      "hadithUrl": "https://sunnah.com/bukhari:5376",
       "quranReference": "7:31",
       "hadithNumber": "5376",
       "authenticity": "Ṣaḥīḥ (al-Buḫārī)",
@@ -178,7 +178,7 @@ const additions={
       "text": "Der Prophet ﷺ berichtete von einem Mann, der einem durstigen Hund Wasser gab, und erklärte, dass es für Güte gegenüber Lebewesen Lohn gibt."
     },
     "sourceAudit": {
-      "hadithUrl": "https://dorar.net/hadith/sharh/72367",
+      "hadithUrl": "https://sunnah.com/bukhari:2363",
       "quranReference": "6:38",
       "hadithNumber": "2363",
       "authenticity": "Ṣaḥīḥ (al-Buḫārī)",
@@ -476,7 +476,7 @@ const additions={
       "text": "Der Prophet ﷺ lehrte, beim Bittgebet nicht ungeduldig zu werden und nicht vorschnell zu sagen, man habe gebetet, aber keine Antwort erhalten."
     },
     "sourceAudit": {
-      "hadithUrl": "https://dorar.net/hadith/sharh/10635",
+      "hadithUrl": "https://sunnah.com/bukhari:6340",
       "quranReference": "1:5",
       "hadithNumber": "6340",
       "authenticity": "Ṣaḥīḥ (al-Buḫārī)",

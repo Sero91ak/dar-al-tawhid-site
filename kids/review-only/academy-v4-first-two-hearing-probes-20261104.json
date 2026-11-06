@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_ACADEMY_V4_SAMPLE_20261104_REVIEW_ONLY",
+  "generatedDate": "2026-11-04",
+  "purpose": "Hear two canonical existing German Academy phrases on owner's existing ElevenLabs Master V4 clone, test Fuṣḥā loanwords and Nur collision",
+  "productionAuthorized": false,
+  "publicPlaybackApproved": false,
+  "eligibleForAppImport": false,
+  "humanListeningApproved": false,
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "productionProfileWanted": "kids_story",
+  "profileSettingsVerifiedInCreator": false,
+  "languageCodeVerifiedInCreator": false,
+  "pronunciationDictionaryVerifiedInCreator": false,
+  "creditForecast": 141.2273724489796,
+  "forecastOnlyNotFinalCharge": true,
+  "maxClipsPerInvocation": 4,
+  "clipsRequested": 2,
+  "unverifiedPendingPreview": 2,
+  "priorPaidV4FilesPreserved": true,
+  "stagingManifestsUntouched": true,
+  "noSyntheticQuran": true,
+  "samples": [
+    {
+      "text": "Der Qurʾān nennt den Glauben an Allah, die Engel, die Bücher und die Gesandten.",
+      "source": "kids/data/academy-voice-plan-v27.json",
+      "termFocus": [
+        "Qurʾān",
+        "Allah"
+      ],
+      "languagePolicy": "de",
+      "generationFlowId": "0n6GeIJyazHTuEYtJV3L",
+      "generationNodeId": "csnJxePLYpBIj7SLkuQ3",
+      "sessionId": "FPv3AO9CfyTBWHrKIOfP",
+      "estimatedCredits": 73.88716836734694,
+      "status": "COMPLETED_CREATOR_PREVIEW_NOT_APPROVED",
+      "humanListeningApproved": false,
+      "contentImportedToGitHub": false,
+      "generationId": "WqeNL9eyWt4AUKS4dEbg",
+      "actualCredits": 73.88716836734694,
+      "qaResult": "REJECTED_BY_OWNER_QURAN_FUSHA_PRONUNCIATION",
+      "rejectReason": "Owner reports Qurʾān pronunciation does not meet required Fuṣḥā/reference library.",
+      "mustNotBeUsedAsPronunciationMaster": true,
+      "mustNotBeImportedIntoKidsApp": true,
+      "correctSourceReference": "data/pronunciation/story-reference-muhammad-2026-10-04.json",
+      "correctAudioReference": "/kids/assets/prophet-story-audio/muhammad/story.mp3",
+      "newCreditsAuthorizedToFixThis": false
+    },
+    {
+      "text": "Īmān ist mehr als nur ein schweres Wort: Es geht darum, was wir glauben.",
+      "source": "kids/data/academy-voice-plan-v27.json",
+      "termFocus": [
+        "Īmān",
+        "nur"
+      ],
+      "languagePolicy": "de",
+      "generationFlowId": "h7l7ITIl5RbO7Z0CswLy",
+      "generationNodeId": "gm8CnScvFoFcjYCxImD5",
+      "sessionId": "L1LMFuHxMr0034Arfuba",
+      "estimatedCredits": 67.34020408163265,
+      "status": "COMPLETED_CREATOR_PREVIEW_NOT_APPROVED",
+      "humanListeningApproved": false,
+      "contentImportedToGitHub": false,
+      "technicalTranscription": {
+        "flowId": "h7l7ITIl5RbO7Z0CswLy",
+        "nodeId": "gfmnZgvos2aiyXDCieH1",
+        "sessionId": "PI1Q7XgbMVZVjgzdZoxQ",
+        "status": "COMPLETED_SCRIBE_NOT_HUMAN_QA",
+        "estimateCredits": 0,
+        "doesNotConstitutePhoneticOrHumanApproval": true,
+        "generationId": "997q1ZNAb7EH4NppjjZ2",
+        "text": "Īmān ist mehr als nur ein schweres Wort: Es geht darum, was wir glauben."
+      },
+      "generationId": "IRrUNVzahC6L7V4wnKMT",
+      "actualCredits": 67.34020408163265
+    }
+  ],
+  "qaChecklist": [
+    "Compare sound with approved Adam/Idris/Muhammad story references",
+    "German Nur must remain German and never become Arabic Nūr",
+    "Fuṣḥā terminology Qurʾān and Īmān must be pronounced naturally, correct vowels and ʿayn",
+    "No microphone or user speech collection in child app",
+    "Manual listening required before any approvals",
+    "Only exact production-profile matches can be reused; this creator preview lacks profile/dictionary/language controls"
+  ],
+  "directElevenLabsCreatorToolCannotClaimProductionSettings": true,
+  "generatedSampleCount": 2,
+  "creatorPreviewActualCredits": 141.2273724489796,
+  "creatorPreviewCreditsWereSpentBeforeThisReview": true,
+  "creatorPreviewsAreNotProductionProfileCertified": true,
+  "notes": "Creator clip 1 was rejected by owner for incorrect Qurʾān pronunciation. Use actual owner-approved Muḥammad story reference first; do NOT relabel entire story as isolated approved Qurʾān word clip. Two existing Creator samples are not production approved. No new synthesis."
+}
