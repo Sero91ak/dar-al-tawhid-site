@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A10000000000000000000001 /* DarAlTawhidKidsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000011 /* DarAlTawhidKidsApp.swift */; };
+		D3D100000000000000000001 /* KidsNativeAppleTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D100000000000000000011 /* KidsNativeAppleTabBar.swift */; };
 		A10000000000000000000002 /* KidsWebAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000012 /* KidsWebAppView.swift */; };
 		A10000000000000000000003 /* KidsAppShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000013 /* KidsAppShell.swift */; };
 		A10000000000000000000007 /* KidsNativeIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000019 /* KidsNativeIntro.swift */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		A10000000000000000000010 /* TAWHID Kids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TAWHID Kids.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A10000000000000000000011 /* DarAlTawhidKidsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAlTawhidKidsApp.swift; sourceTree = "<group>"; };
+		D3D100000000000000000011 /* KidsNativeAppleTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsNativeAppleTabBar.swift; sourceTree = "<group>"; };
 		A10000000000000000000012 /* KidsWebAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsWebAppView.swift; sourceTree = "<group>"; };
 		A10000000000000000000013 /* KidsAppShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsAppShell.swift; sourceTree = "<group>"; };
 		A10000000000000000000019 /* KidsNativeIntro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsNativeIntro.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				A10000000000000000000011 /* DarAlTawhidKidsApp.swift */,
+				D3D100000000000000000011 /* KidsNativeAppleTabBar.swift */,
 				A10000000000000000000012 /* KidsWebAppView.swift */,
 				A10000000000000000000013 /* KidsAppShell.swift */,
 				A10000000000000000000019 /* KidsNativeIntro.swift */,
@@ -157,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A10000000000000000000001 /* DarAlTawhidKidsApp.swift in Sources */,
+				D3D100000000000000000001 /* KidsNativeAppleTabBar.swift in Sources */,
 				A10000000000000000000002 /* KidsWebAppView.swift in Sources */,
 				A10000000000000000000003 /* KidsAppShell.swift in Sources */,
 				A10000000000000000000007 /* KidsNativeIntro.swift in Sources */,
