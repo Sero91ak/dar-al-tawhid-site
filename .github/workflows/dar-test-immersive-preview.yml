@@ -6,6 +6,9 @@ on:
       - feat/dar-test-immersive-art-20261106
     paths:
       - .github/workflows/dar-test-immersive-preview.yml
+      - test/assets/dar-test-immersive-art-v1.css
+      - test/assets/dar-test-immersive-art-v1.js
+      - test/tools/dar-test-immersive-actual-browser.py
   workflow_dispatch:
 
 permissions:
@@ -57,3 +60,8 @@ jobs:
           curl -fL --retry 4 --retry-delay 4 --retry-all-errors -sS "${ROOT}/test/assets/dar-test-immersive-art-v1.js?v=20261106" | grep -q 'DAR_TEST_IMMERSIVE_ART_V1'
           curl -fL --retry 4 --retry-delay 4 --retry-all-errors -sS "${ROOT}/test/assets/dar-test-immersive-art-v1.css?v=20261106" | grep -q 'IMMERSIVE UI ART V1'
           echo 'DĀR Test immersive artwork uploaded; visitor production worker untouched.'
+
+      - name: Verify REAL visible Home hero in headless Chromium
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 test/tools/dar-test-immersive-actual-browser.py
