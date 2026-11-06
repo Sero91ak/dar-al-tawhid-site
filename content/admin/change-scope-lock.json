@@ -155,6 +155,27 @@
   ],
   "unlockedScopes": [
     {
+      "id": "admin-v3-two-theme-layout-20261106",
+      "at": "2026-11-06T12:21:00+01:00",
+      "approvedBy": "user-explicit-20261106-implement-v3-two-themes-iPad-desktop-phone-on-GitHub",
+      "reason": "Exact-file, time-limited Admin-only V3 integration, legacy blue palette migration to DĀR AL LAYL and Salbei–Elfenbein, viewport/pane-based responsive UX and regression tests. Keep globalLock/core-sensitive guard, secrets, auth, publishing, prayer, visitor, Kids and deployment workflows unchanged.",
+      "paths": [
+        "admin/index.html",
+        "admin/appearance-v2.css",
+        "admin/command-center-v2.css",
+        "admin/command-center-v2.js",
+        "admin/intelligence-v3.js",
+        "admin/intelligence-v3.css",
+        "admin/tests/intelligence-v3.test.cjs",
+        "admin/tests/theme-layout-v3.test.cjs",
+        "admin/library-admin.css",
+        "admin/live-edit.css",
+        "admin/social-review.css",
+        "admin/wissensbereich-push.css"
+      ],
+      "expiresAt": "2026-11-13T23:59:00+01:00"
+    },
+    {
       "id": "dar-admin-v2-theme-responsive-readonly-tests-20261105",
       "at": "2026-11-05T19:38:00.000Z",
       "approvedBy": "user-explicit-20261105-dar-admin-responsive-video-layl-salbei-continue",
