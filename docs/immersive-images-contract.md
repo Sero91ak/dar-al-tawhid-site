@@ -23,3 +23,10 @@ Die ausschließlich unter `/test/` geladenen Dateien `test/assets/dar-test-immer
 Für gezielt freigegebene dekorative Seitenbilder ist `data-dar-art-inline="decorative"` als Opt-in vorgesehen; Belegscans und Bildtext niemals so kennzeichnen.
 
 **Prüfen:** 320, 360, 390, 430, 600, 768, 1024, 1280, 1440px; iPhone, iPad Querformat, Fold geschlossen/geöffnet; dunkles und helles Theme; RTL; Suche mit Tastatur, Touch-Scroll, zurück und vor, Bildfokus und Textkontrast. Technischer Guard: `node test/tools/dar-test-immersive-art-v1-guard.cjs`.
+
+## Navigations- und bereichsübergreifender Bildvertrag – 06.11.2026
+
+- **Ein vorhandenes `#bottomNav`:** Die fünf echten 3D-Tabs dürfen bei Scrollen, SPA-Routenwechsel, Fold-/iPad-Breitenwechsel oder Themewechsel nicht seitlich verspringen, in Grid/Siderail wechseln oder ihre Kapselgeometrie verändern. Ein einziger Test-Geometrievertrag bestimmt Breite, Zentrierung, Höhe und Rundung nach verfügbarer Breite; alte konkurrierende `left:50%/transform`- und `left:0/right:0`-Regeln sind für die reguläre Test-Navigation inaktiv. Reader-/Vollbild-Ausnahmen behalten ihren eigenen, begründeten Owner.
+- **Erwachsenen-Startseite:** Das echte `#darHomeHtmlParityV1` wird genutzt; `.top-shell` ist dort unsichtbar. Immersives Bild kommt direkt nach der Kopfzeile; die vorhandenen Gebetszeiten, Suche, Āthār und Schnellzugriffe bleiben erhalten. Ein einziges Foto bildet die dekorative Grundlage, und die Inhalte scrollen darunter.
+- **Weitere Bereichsbilder:** Bereiche mit `--area1294-art` (z. B. Einstellungen, Ramadan, Themen) erhalten die bereits existierenden Bildmotive als geschützte dekorative Ebene ihres echten Hero-Elements. Keine neue Illustration, keine Kopie, kein neues Kartenlayout.
+- **Nachweis:** Chromium-Prüfung der tatsächlich ausgelieferten Test-Startseite in 390/768 CSS-Pixel und echte Routenwechsel Mehr/Start/Themen. Nav-Position und Form müssen konstant bleiben; Header/Hero muss sticky funktionieren; Versionierung/Deployment bleiben nur beim separaten Cloudflare-Test-Worker.

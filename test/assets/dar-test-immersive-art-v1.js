@@ -16,7 +16,19 @@ var rules=[
  ["is-post-route","#appView .post-reader > .post-reader-title","post",true],
  ["is-quran-overview","#appView .qov-page > .view-head","quran",true],
  ["is-library-route","#appView .library-page > .view-head","library",true],
- ["is-scholars-route","#appView .scholars-index > .scholars-index__header","scholars",true]
+ ["is-scholars-route","#appView .scholars-index > .scholars-index__header","scholars",true],
+ // Shared area authority: reuse route-specific art via --area1294-art, never
+ // duplicate images or interfere with the route's existing scroll owner.
+ ["is-settings-route","#appView > .view-head","area",false],
+ ["is-ramadan-route","#appView > .view-head","area",false],
+ ["is-notifications-route","#appView > .view-head","area",false],
+ ["is-account-route","#appView > .view-head","area",false],
+ ["is-about-route","#appView > .view-head","area",false],
+ ["is-news-route","#appView > .view-head","area",false],
+ ["is-news-detail-route","#appView > .view-head","area",false],
+ ["is-zakat-route","#appView > .view-head","area",false],
+ ["is-source-library-route","#appView > .view-head","area",false],
+ ["is-quran-topic-route","#appView > .view-head","area",false]
 ];
 var active=[],pending=0,bodyObserver,viewObserver,shellObserver,resizeObserver;
 var observed=new WeakSet();

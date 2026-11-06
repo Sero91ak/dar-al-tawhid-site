@@ -458,3 +458,38 @@ html.dar-test-immersive-art-v1[data-theme] body #appView :is(
  background-color:var(--bg)!important;
  background-clip:padding-box!important;
 }
+
+
+/* DAR_TEST_SHARED_AREA_ART_V2 · existing per-route photos are a single
+   decorative UI stratum. Never apply to Qurʾān reading, Ḥadīṯ evidence,
+   scans, modal content or the interactive ʿIlm chat.
+   Unlike Home/Topics, service headers keep their original relative scroll
+   behavior and owner. No new scroll container, no DOM relocation. */
+html.dar-test-immersive-art-v1[data-theme] body #appView > .view-head.dar-art-hero[data-dar-art-kind="area"]{
+ --dar-art-image:var(--area1294-art,none);
+ position:relative!important;
+ isolation:isolate!important;
+ min-height:clamp(178px,23svh,300px)!important;
+ background:var(--bg)!important;
+ background-image:none!important;
+ box-shadow:none!important;
+ overflow:hidden!important;
+ border-radius:0!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body #appView > .view-head.dar-art-hero[data-dar-art-kind="area"]::before{
+ content:none!important;
+ display:none!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body #appView > .view-head.dar-art-hero[data-dar-art-kind="area"] > .dar-art-layer{
+ position:absolute!important;inset:0!important;z-index:1!important;
+ display:block!important;opacity:1!important;pointer-events:none!important;
+ border-radius:0!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body #appView > .view-head.dar-art-hero[data-dar-art-kind="area"] > :not(.dar-art-layer){
+ position:relative!important;z-index:2!important;
+}
+@media(max-width:600px){
+ html.dar-test-immersive-art-v1[data-theme] body #appView > .view-head.dar-art-hero[data-dar-art-kind="area"]{
+  min-height:clamp(150px,20svh,245px)!important;
+ }
+}

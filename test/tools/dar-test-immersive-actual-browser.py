@@ -154,7 +154,11 @@ def main():
             """))
             # A successful scroll test is not sufficient. The original report
             # concerns nav geometry morphing during SPA route transitions.
-            d.find_element(By.CSS_SELECTOR,"#bottomNav [data-bottom-nav='more']").click()
+            d.execute_script("""
+              const button=document.querySelector('#bottomNav [data-bottom-nav="more"]');
+              if(!button)throw new Error('More tab missing');
+              button.click();
+            """)
             WebDriverWait(d,14).until(lambda b:b.execute_script("""
               return document.body.classList.contains('is-more-route');
             """))
@@ -164,7 +168,11 @@ def main():
             for key in ('x','width','height','radius'):
                 if abs(nav0[key]-more_nav[key])>2:
                     raise AssertionError('Bottom dock morphs on MORE route: '+str((key,nav0,more_nav)))
-            d.find_element(By.CSS_SELECTOR,"#bottomNav [data-bottom-nav='home']").click()
+            d.execute_script("""
+              const button=document.querySelector('#bottomNav [data-bottom-nav="home"]');
+              if(!button)throw new Error('Home tab missing');
+              button.click();
+            """)
             WebDriverWait(d,14).until(lambda b:b.execute_script("""
               return document.body.classList.contains('is-home-route');
             """))
@@ -174,6 +182,27 @@ def main():
             for key in ('x','width','height','radius'):
                 if abs(nav0[key]-home_nav_back[key])>2:
                     raise AssertionError('Bottom dock morphs after return Home: '+str((key,nav0,home_nav_back)))
+            # Cross-route image integration: the topics page uses the genuine
+            # SPA renderer and must contain the decorative photo on its header.
+            if width==390:
+                d.execute_script("""
+                  if(typeof navigate==='function')navigate('topics');
+                  else location.hash='#topics';
+                """)
+                WebDriverWait(d,18).until(lambda b:b.execute_script("""
+                  return document.body.classList.contains('is-topics-route') &&
+                    !!document.querySelector('#appView .topics-hub > .view-head.dar-art-hero .dar-art-layer');
+                """))
+                topicsNav=nav_snapshot(d)
+                print(f"NAV TOPICS ROUTE {width}x{height} {topicsNav}",flush=True)
+                assert_nav_stable(topicsNav,width)
+                for key in ('x','width','height','radius'):
+                    if abs(nav0[key]-topicsNav[key])>2:
+                        raise AssertionError('Bottom dock morphs on TOPICS route: '+str((key,nav0,topicsNav)))
+                d.execute_script("""
+                  const el=document.querySelector('#appView .topics-hub > .view-head.dar-art-hero');
+                  if(!el||!el.querySelector('.dar-art-layer'))throw new Error('Topics artwork not integrated');
+                """)
         print("PASS: deployed real Home parity image visibly integrated + reversible sticky depth and stable navigation across MORE/Home route swaps",flush=True)
     finally:
         d.quit()
