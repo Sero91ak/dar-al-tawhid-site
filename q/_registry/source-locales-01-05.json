@@ -1,0 +1,893 @@
+{
+  "schemaVersion": 1,
+  "batch": {
+    "start": 1,
+    "end": 5,
+    "totalPlanned": 50,
+    "number": 1
+  },
+  "canonical": "https://dar-al-tawhid.de/q/N/",
+  "localeStorageKey": "darAdultPreferredLocaleV1",
+  "requiredLocales": [
+    "de",
+    "ar",
+    "en",
+    "tr",
+    "ku",
+    "ckb",
+    "bs",
+    "fr",
+    "es"
+  ],
+  "editorial": {
+    "status": "translations-in-review",
+    "defaultApproved": "de",
+    "requiresIndividualReview": true,
+    "notes": "Arabic originals, isnad chains and exact reference URLs are never translated or rewritten. Non-German translation drafts are intentionally not rendered in production before review."
+  },
+  "ui": {
+    "de": {
+      "language": "Sprache",
+      "header": "Beiträge nach Qurʾān, Sunnah & Āthār",
+      "speaker": "Sprecher",
+      "topic": "Thema",
+      "sources": "Quellen",
+      "pending": "Diese Sprachfassung ist fachlich noch nicht freigegeben. Bis zur Prüfung bleibt die deutsche Originalfassung sichtbar.",
+      "internal": "Zusätzliche interne Quellenseite"
+    },
+    "ar": {
+      "language": "اللغة",
+      "header": "مقالات وفق القرآن والسنة والآثار",
+      "speaker": "القائل",
+      "topic": "الموضوع",
+      "sources": "المصادر",
+      "pending": "لم تُعتمد الترجمة إلى هذه اللغة بعدُ بعد المراجعة العلمية. يُعرض النص الألماني الأصلي حتى اكتمال التحقق.",
+      "internal": "صفحة مصادر إضافية داخل الموقع"
+    },
+    "en": {
+      "language": "Language",
+      "header": "Posts based on the Qurʾān, Sunnah & Āthār",
+      "speaker": "Speaker",
+      "topic": "Topic",
+      "sources": "Sources",
+      "pending": "This language version is awaiting scholarly and language review. The original German text remains visible until approval.",
+      "internal": "Additional internal source page"
+    },
+    "tr": {
+      "language": "Dil",
+      "header": "Kurʾân, Sünnet ve Âsâr’a dayalı yazılar",
+      "speaker": "Söyleyen",
+      "topic": "Konu",
+      "sources": "Kaynaklar",
+      "pending": "Bu dildeki tercüme henüz ilmî ve dil açısından onaylanmadı. Onaylanana kadar Almanca asıl metin gösterilir.",
+      "internal": "Ek site içi kaynak sayfası"
+    },
+    "ku": {
+      "language": "Ziman",
+      "header": "Nivîsarên li ser Qurʾan, Sunnah û Āthār",
+      "speaker": "Gotinvan",
+      "topic": "Mijar",
+      "sources": "Çavkanî",
+      "pending": "Wergera vê zimanî hêj nehatiye pejirandin. Heta piştrastkirinê nivîsa eslî ya almanî tê nîşandan.",
+      "internal": "Rûpela çavkaniyê ya navxweyî"
+    },
+    "ckb": {
+      "language": "زمان",
+      "header": "بابەتەکان لەسەر بنەمای قورئان و سوننەت و ئاسار",
+      "speaker": "قسەکەر",
+      "topic": "بابەت",
+      "sources": "سەرچاوەکان",
+      "pending": "وەرگێڕانی ئەم زمانە هێشتا پەسەند نەکراوە. تا پشکنینەوە تەواو دەبێت، دەقی ئەڵمانیی ڕەسەن پیشان دەدرێت.",
+      "internal": "لاپەڕەی ناوخۆیی سەرچاوەی زیاتر"
+    },
+    "bs": {
+      "language": "Jezik",
+      "header": "Objave zasnovane na Kurʾānu, Sunnetu i predajama",
+      "speaker": "Govornik",
+      "topic": "Tema",
+      "sources": "Izvori",
+      "pending": "Prijevod na ovaj jezik još čeka stručnu i jezičku provjeru. Do odobrenja prikazuje se izvorni njemački tekst.",
+      "internal": "Dodatna interna stranica izvora"
+    },
+    "fr": {
+      "language": "Langue",
+      "header": "Publications fondées sur le Coran, la Sunna et les Āthār",
+      "speaker": "Auteur de la parole",
+      "topic": "Sujet",
+      "sources": "Sources",
+      "pending": "La traduction dans cette langue attend une révision scientifique et linguistique. Le texte original allemand reste affiché jusqu’à validation.",
+      "internal": "Page de sources interne supplémentaire"
+    },
+    "es": {
+      "language": "Idioma",
+      "header": "Publicaciones basadas en el Corán, la Sunna y los Āthār",
+      "speaker": "Autor de la declaración",
+      "topic": "Tema",
+      "sources": "Fuentes",
+      "pending": "La traducción a este idioma está pendiente de revisión académica y lingüística. Hasta su aprobación se muestra el texto original en alemán.",
+      "internal": "Página interna de fuentes adicionales"
+    }
+  },
+  "refs": {
+    "1": [
+      "Dorar · markierte Stelle",
+      "Dorar · Originalquelle",
+      "Iqtiḍāʾ al-ʿIlm al-ʿAmal",
+      "Islamweb · Ibn ʿAbd al-Barr · Nr. 1266"
+    ],
+    "2": [
+      "Dorar · 6465 · Takhrīǧ",
+      "Dorar · 783",
+      "Islamweb · Ṣaḥīḥ Muslim · 783",
+      "$internal"
+    ],
+    "3": [
+      "Islamweb · al-Ājurrī · 127",
+      "Islamweb · al-Bayhaqī · 233",
+      "al-Ājurrī · al-Sharīʿah",
+      "$internal"
+    ],
+    "4": [
+      "Wikisource · Ṣaḥīḥ Muslim · 55",
+      "HadeethEnc · 1/74 · 55",
+      "Ṣaḥīḥ Muslim · ʿAbd al-Bāqī",
+      "$internal"
+    ],
+    "5": [
+      "Islamweb · Bd. 2 · S. 448",
+      "Islamweb · Imām Mālik",
+      "Wikisource · ash-Shifāʾ",
+      "$internal"
+    ]
+  },
+  "cards": {
+    "1": {
+      "de": {
+        "approved": true,
+        "reviewStatus": "original",
+        "title": "Wissen verlangt Handeln",
+        "quote": "Lernt, lernt! Wenn ihr dann Wissen erlangt habt, handelt danach.",
+        "speaker": "ʿAbdullāh ibn Masʿūd (رضي الله عنه).",
+        "topic": "Wissen und Handeln, Verantwortung nach dem Lernen.",
+        "section": "Isnād-Bereich",
+        "note": "Hinweis: Diese Riwāyah ist mawqūf überliefert und im Nachweis als ḥasan eingestuft.",
+        "actions": [
+          "Originalnachweis öffnen",
+          "Originalquelle ohne Markierung",
+          "PDF/Scan öffnen",
+          "Zweiter Textnachweis"
+        ],
+        "sourceRef": "al-Khaṭīb al-Baghdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal, Nr. 10; Parallel bei ad-Dārimī und aṭ-Ṭabarānī."
+      },
+      "ar": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "العلم يقتضي العمل",
+        "quote": "تعلّموا، تعلّموا! فإذا حصلتم على العلم فاعملوا به.",
+        "speaker": "عبد الله بن مسعود (رضي الله عنه).",
+        "topic": "العلم والعمل، والمسؤولية بعد التعلّم.",
+        "section": "قسم الإسناد",
+        "note": "تنبيه: ورد هذا الأثر موقوفًا، ووُصِف إسناده بالحسن في المرجع المذكور.",
+        "actions": [
+          "فتح الدليل الأصلي",
+          "فتح المصدر دون تمييز النص",
+          "فتح ملف PDF أو صورة المخطوط",
+          "فتح الدليل النصي الآخر"
+        ],
+        "sourceRef": "الخطيب البغدادي، اقتضاء العلم العمل، رقم 10؛ وله شواهد موازية عند الدارمي والطبراني."
+      },
+      "en": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Knowledge requires action",
+        "quote": "Learn, learn! Once you have acquired knowledge, put it into practice.",
+        "speaker": "ʿAbdullāh ibn Masʿūd (may Allah be pleased with him).",
+        "topic": "Knowledge and action; responsibility after learning.",
+        "section": "Chain of transmission",
+        "note": "Note: This report is transmitted as mawqūf and its chain is graded ḥasan in the cited evidence.",
+        "actions": [
+          "Open original evidence",
+          "Open original without highlighting",
+          "Open PDF/scan",
+          "Open additional textual evidence"
+        ],
+        "sourceRef": "al-Khaṭīb al-Baghdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal, no. 10; parallel reports in ad-Dārimī and aṭ-Ṭabarānī."
+      },
+      "tr": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "İlim amel gerektirir",
+        "quote": "Öğrenin, öğrenin! İlim elde ettiğinizde onunla amel edin.",
+        "speaker": "ʿAbdullāh ibn Mesʿûd (Allah ondan razı olsun).",
+        "topic": "İlim ve amel; öğrendikten sonraki sorumluluk.",
+        "section": "İsnad bölümü",
+        "note": "Not: Bu rivayet mevkûf olarak nakledilmiş ve belirtilen kaynakta isnadı hasen olarak değerlendirilmiştir.",
+        "actions": [
+          "Asıl delili aç",
+          "Vurgulamasız asıl kaynağı aç",
+          "PDF/taramayı aç",
+          "İkinci metin delilini aç"
+        ],
+        "sourceRef": "el-Hatîb el-Bağdâdî, İktidâʾü'l-İlm el-Amel, nr. 10; Dârimî ve Taberânî’de paralel rivayetler."
+      },
+      "ku": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Zanîn pêdivî bi kirinê heye",
+        "quote": "Fêr bibin, fêr bibin! Dema hûn zanînê bi dest bixin, li gorî wê bikin.",
+        "speaker": "ʿAbdullāh ibn Masʿūd (Allah jê razî be).",
+        "topic": "Zanîn û kirin; berpirsiyariya piştî fêrbûnê.",
+        "section": "Beşa isnadê",
+        "note": "Têbînî: Ev vegotin wek mawqūf hatiye vegotin û di çavkaniya navborî de isnada wê wek ḥasan hatiye nirxandin.",
+        "actions": [
+          "Delîla orîjînal veke",
+          "Çavkaniya orîjînal bê nîşankirinê veke",
+          "PDF/anîmena skanê veke",
+          "Delîla duyemîn a nivîskî veke"
+        ],
+        "sourceRef": "al-Khaṭīb al-Baghdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal, nr. 10; vegotinên hevpar li cem ad-Dārimī û aṭ-Ṭabarānī."
+      },
+      "ckb": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "زانست پێویستی بە کردار هەیە",
+        "quote": "فێربن، فێربن! کاتێک زانستتان بەدەست هێنا، پێی کار بکەن.",
+        "speaker": "عەبدولڵا بن مەسعود (ڕەزای خوای لێ بێت).",
+        "topic": "زانست و کردار؛ بەرپرسیاریەتی دوای فێربوون.",
+        "section": "بەشی ئیسناد",
+        "note": "تێبینی: ئەم ڕیوایەتە وەک مەوقوف گێڕدراوەتەوە و لە سەرچاوەی باسکراودا ئیسنادەکەی بە حەسەن هەڵسەنگێنراوە.",
+        "actions": [
+          "کردنەوەی بەڵگەی ڕەسەن",
+          "کردنەوەی سەرچاوەی ڕەسەن بێ دیاریکردن",
+          "کردنەوەی PDF/سکان",
+          "کردنەوەی بەڵگەی نووسراوی دووەم"
+        ],
+        "sourceRef": "الخطيب البغدادي، اقتضاء العلم العمل، ژمارە 10؛ ڕیوایەتە هاوشێوەکان لە دارمی و تەبەرانی."
+      },
+      "bs": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Znanje zahtijeva djelovanje",
+        "quote": "Učite, učite! Kada steknete znanje, postupajte po njemu.",
+        "speaker": "ʿAbdullāh ibn Masʿūd (Allah bio zadovoljan njime).",
+        "topic": "Znanje i djela; odgovornost nakon stjecanja znanja.",
+        "section": "Lanac prenosilaca",
+        "note": "Napomena: Ova predaja prenosi se kao mevkuf, a njen lanac je u navedenom dokazu ocijenjen kao hasen.",
+        "actions": [
+          "Otvori izvorni dokaz",
+          "Otvori izvor bez označavanja",
+          "Otvori PDF/sken",
+          "Otvori drugi tekstualni dokaz"
+        ],
+        "sourceRef": "al-Khaṭīb al-Baghdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal, br. 10; paralelne predaje kod ad-Dārimīja i aṭ-Ṭabarānīja."
+      },
+      "fr": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Le savoir exige la mise en pratique",
+        "quote": "Apprenez, apprenez ! Lorsque vous avez acquis le savoir, mettez-le en pratique.",
+        "speaker": "ʿAbdullāh ibn Masʿūd (qu’Allah l’agrée).",
+        "topic": "Le savoir et les actes ; la responsabilité après l’apprentissage.",
+        "section": "Chaîne de transmission",
+        "note": "Note : Ce récit est transmis comme mawqūf et sa chaîne est qualifiée de ḥasan dans la référence citée.",
+        "actions": [
+          "Ouvrir la preuve originale",
+          "Ouvrir la source sans surlignage",
+          "Ouvrir le PDF ou scan",
+          "Ouvrir la seconde preuve textuelle"
+        ],
+        "sourceRef": "al-Khaṭīb al-Baghdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal, nº 10 ; récits parallèles chez ad-Dārimī et aṭ-Ṭabarānī."
+      },
+      "es": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "El conocimiento exige ponerlo en práctica",
+        "quote": "¡Aprended, aprended! Cuando hayáis adquirido conocimiento, actuad conforme a él.",
+        "speaker": "ʿAbdullāh ibn Masʿūd (que Allah esté complacido con él).",
+        "topic": "El conocimiento y los actos; la responsabilidad después del aprendizaje.",
+        "section": "Cadena de transmisión",
+        "note": "Nota: Esta narración se transmite como mawqūf, y su cadena se califica como ḥasan en la fuente citada.",
+        "actions": [
+          "Abrir la prueba original",
+          "Abrir la fuente sin resaltar",
+          "Abrir PDF o escaneo",
+          "Abrir la segunda prueba textual"
+        ],
+        "sourceRef": "al-Khaṭīb al-Baghdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal, n.º 10; narraciones paralelas en ad-Dārimī y aṭ-Ṭabarānī."
+      }
+    },
+    "2": {
+      "de": {
+        "approved": true,
+        "reviewStatus": "original",
+        "title": "Beständigkeit der Taten",
+        "quote": "Die Allah liebsten Taten sind diejenigen, die am beständigsten sind, auch wenn sie gering sind.",
+        "speaker": "Der Gesandte Allahs ﷺ, überliefert von ʿĀʾišah (رضي الله عنها).",
+        "topic": "Beständigkeit, Maßhalten und geliebte Taten.",
+        "section": "Hauptquellen",
+        "note": "Status: Ṣaḥīḥ · bei al-Bukhārī und Muslim überliefert.",
+        "actions": [
+          "Ṣaḥīḥ al-Bukhārī öffnen",
+          "Ṣaḥīḥ Muslim öffnen",
+          "Textnachweis mit Markierung",
+          "Interne Quellenseite"
+        ]
+      },
+      "ar": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "المداومة على الأعمال",
+        "quote": "أحب الأعمال إلى الله ما وُواظِب عليه، وإن كان قليلاً.",
+        "speaker": "رسول الله ﷺ، من رواية عائشة (رضي الله عنها).",
+        "topic": "المداومة والاعتدال والأعمال المحبوبة.",
+        "section": "المصادر الأساسية",
+        "note": "الحكم: صحيح؛ رواه البخاري ومسلم.",
+        "actions": [
+          "فتح صحيح البخاري",
+          "فتح صحيح مسلم",
+          "فتح موضع النص المحدد",
+          "صفحة المصدر الداخلية"
+        ]
+      },
+      "en": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Consistency in good deeds",
+        "quote": "The deeds most beloved to Allah are those performed most consistently, even if they are few.",
+        "speaker": "The Messenger of Allah ﷺ, narrated by ʿĀʾishah (may Allah be pleased with her).",
+        "topic": "Consistency, moderation, and beloved deeds.",
+        "section": "Primary sources",
+        "note": "Status: Ṣaḥīḥ; recorded by al-Bukhārī and Muslim.",
+        "actions": [
+          "Open Ṣaḥīḥ al-Bukhārī",
+          "Open Ṣaḥīḥ Muslim",
+          "Open highlighted text evidence",
+          "Related internal source page"
+        ]
+      },
+      "tr": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Amellerde devamlılık",
+        "quote": "Allah’ın en sevdiği ameller, az da olsa devamlı yapılanlardır.",
+        "speaker": "Allah Resûlü ﷺ; Âişe (Allah ondan razı olsun) rivayet etmiştir.",
+        "topic": "Devamlılık, ölçülülük ve sevilen ameller.",
+        "section": "Temel kaynaklar",
+        "note": "Hüküm: Sahih; Buhârî ve Müslim rivayet etmiştir.",
+        "actions": [
+          "Sahîh-i Buhârî’yi aç",
+          "Sahîh-i Müslim’i aç",
+          "İşaretlenmiş metin delilini aç",
+          "İlgili iç kaynak sayfası"
+        ]
+      },
+      "ku": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Domdariya karên baş",
+        "quote": "Karên ku Allah herî zêde jê hez dike, ew in ku her tim tên kirin, her çend hindik bin jî.",
+        "speaker": "Peyamberê Allah ﷺ; ji aliyê ʿĀʾišah (Allah jê razî be) ve hatiye vegotin.",
+        "topic": "Domdarî, hevsengî û karên hezkirî.",
+        "section": "Çavkaniyên sereke",
+        "note": "Rewş: Ṣaḥīḥ; al-Bukhārī û Muslim ew vegotine.",
+        "actions": [
+          "Ṣaḥīḥ al-Bukhārī veke",
+          "Ṣaḥīḥ Muslim veke",
+          "Belgeya nivîskî ya nîşankirî veke",
+          "Rûpela çavkaniya navxweyî"
+        ]
+      },
+      "ckb": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "بەردەوامی لە کردارە چاکەکان",
+        "quote": "خۆشەویستترین کردارەکان لای خوای گەورە ئەوانەن کە بەردەوام دەکرێن، هەرچەند کەمیش بن.",
+        "speaker": "پێغەمبەری الله ﷺ؛ عائیشە (ڕەزای خوای لێ بێت) گێڕاویەتیەوە.",
+        "topic": "بەردەوامی، مامناوەندی و کردارە خۆشەویستەکان.",
+        "section": "سەرچاوە سەرەکییەکان",
+        "note": "پلە: سەحیح؛ بوخاری و موسلیم گێڕاویانەتەوە.",
+        "actions": [
+          "کردنەوەی سەحیحی بوخاری",
+          "کردنەوەی سەحیحی موسلیم",
+          "کردنەوەی دەقی دیاریکراو",
+          "لاپەڕەی ناوخۆیی سەرچاوە"
+        ]
+      },
+      "bs": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Ustrajnost u dobrim djelima",
+        "quote": "Allahu su najdraža ona djela koja se rade ustrajno, makar bila malobrojna.",
+        "speaker": "Allahov Poslanik ﷺ, prenosi ʿĀʾiša (Allah bio zadovoljan njome).",
+        "topic": "Ustrajnost, umjerenost i Allahu draga djela.",
+        "section": "Glavni izvori",
+        "note": "Stepen: Sahih; bilježe el-Buhari i Muslim.",
+        "actions": [
+          "Otvori Sahih el-Buharija",
+          "Otvori Sahih Muslima",
+          "Otvori označeni tekstualni dokaz",
+          "Povezana interna stranica izvora"
+        ]
+      },
+      "fr": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "La constance dans les bonnes œuvres",
+        "quote": "Les œuvres les plus aimées d’Allah sont celles accomplies avec le plus de constance, même si elles sont peu nombreuses.",
+        "speaker": "Le Messager d’Allah ﷺ, rapporté par ʿĀʾishah (qu’Allah l’agrée).",
+        "topic": "La constance, la modération et les œuvres aimées d’Allah.",
+        "section": "Sources principales",
+        "note": "Statut : Ṣaḥīḥ ; rapporté par al-Bukhārī et Muslim.",
+        "actions": [
+          "Ouvrir Ṣaḥīḥ al-Bukhārī",
+          "Ouvrir Ṣaḥīḥ Muslim",
+          "Ouvrir le texte surligné",
+          "Page de sources interne associée"
+        ]
+      },
+      "es": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "La constancia en las buenas obras",
+        "quote": "Las obras que Allah más ama son las que se realizan con mayor constancia, aunque sean pocas.",
+        "speaker": "El Mensajero de Allah ﷺ, narrado por ʿĀʾishah (que Allah esté complacido con ella).",
+        "topic": "La constancia, la moderación y las obras amadas por Allah.",
+        "section": "Fuentes principales",
+        "note": "Estado: Ṣaḥīḥ; transmitido por al-Bukhārī y Muslim.",
+        "actions": [
+          "Abrir Ṣaḥīḥ al-Bukhārī",
+          "Abrir Ṣaḥīḥ Muslim",
+          "Abrir el texto resaltado",
+          "Página interna de fuentes relacionada"
+        ]
+      }
+    },
+    "3": {
+      "de": {
+        "approved": true,
+        "reviewStatus": "original",
+        "title": "Halte dich an die Spuren der Salaf",
+        "quote": "Halte dich an die Überlieferungen derer, die vor dir waren, selbst wenn die Menschen dich ablehnen; und hüte dich vor den Meinungen der Menschen, selbst wenn sie sie dir mit schönen Worten ausschmücken.",
+        "speaker": "al-Awzāʿī (رحمه الله).",
+        "topic": "Festhalten an den Āthār der Salaf und Warnung vor geschmückten Meinungen.",
+        "section": "Isnād-Bereich",
+        "note": "Hinweis: Athar von al-Awzāʿī, mit Isnād bei al-Ājurrī überliefert.",
+        "actions": [
+          "al-Sharīʿah öffnen",
+          "al-Madkhal öffnen",
+          "PDF/Scan öffnen",
+          "Interne Quellenseite"
+        ]
+      },
+      "ar": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "التمسّك بآثار السلف",
+        "quote": "الزم آثار من سلف قبلك، وإن رفضك الناس؛ وإياك وآراء الناس وإن زيّنوها لك بالكلام الجميل.",
+        "speaker": "الأوزاعي (رحمه الله).",
+        "topic": "التمسّك بآثار السلف والتحذير من الآراء المزيّنة.",
+        "section": "قسم الإسناد",
+        "note": "تنبيه: أثر عن الأوزاعي، رواه الآجري بإسناده.",
+        "actions": [
+          "فتح كتاب الشريعة",
+          "فتح كتاب المدخل",
+          "فتح ملف PDF أو صورة المخطوط",
+          "صفحة المصدر الداخلية"
+        ]
+      },
+      "en": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Hold fast to the reports of the Salaf",
+        "quote": "Hold fast to the reports of those who came before you, even if people reject you; and beware of people's opinions, even if they adorn them with beautiful words.",
+        "speaker": "al-Awzāʿī (may Allah have mercy on him).",
+        "topic": "Holding to the reports of the Salaf and caution against embellished opinions.",
+        "section": "Chain of transmission",
+        "note": "Note: A report attributed to al-Awzāʿī, transmitted with a chain by al-Ājurrī.",
+        "actions": [
+          "Open al-Sharīʿah",
+          "Open al-Madkhal",
+          "Open PDF/scan",
+          "Related internal source page"
+        ]
+      },
+      "tr": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Selefin izlerine bağlı kal",
+        "quote": "Senden öncekilerin rivayetlerine sarıl; insanlar seni reddetse bile. İnsanların görüşlerinden sakın; onları sana güzel sözlerle süsleseler bile.",
+        "speaker": "el-Evzâî (Allah ona rahmet etsin).",
+        "topic": "Selefin eserlerine bağlılık ve süslenmiş görüşlere karşı uyarı.",
+        "section": "İsnad bölümü",
+        "note": "Not: el-Evzâî’ye ait bir eser olup el-Âcurrî tarafından isnadıyla rivayet edilmiştir.",
+        "actions": [
+          "eş-Şerîa’yı aç",
+          "el-Medhal’i aç",
+          "PDF/taramayı aç",
+          "İlgili iç kaynak sayfası"
+        ]
+      },
+      "ku": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Li ser şopên Salaf bimîne",
+        "quote": "Bi vegotinên kesên beriya xwe ve bigire, her çend mirov te red bikin; û ji ramanên mirovan xwe biparêze, her çend bi gotinên xweş wan ji te re xemilînin.",
+        "speaker": "al-Awzāʿī (Allah rehma xwe lê bike).",
+        "topic": "Girêdana bi āthārên Salaf û hişyarkirina li hember ramanên xemilandî.",
+        "section": "Beşa isnadê",
+        "note": "Têbînî: Ev āthar ji al-Awzāʿī ye û al-Ājurrī bi isnadê vegotiye.",
+        "actions": [
+          "al-Sharīʿah veke",
+          "al-Madkhal veke",
+          "PDF/anîmena skanê veke",
+          "Rûpela çavkaniya navxweyî"
+        ]
+      },
+      "ckb": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "پەیوەست بە شوێنەوارەکانی سەلەف بە",
+        "quote": "پەیوەست بە ڕیوایەتەکانی پێش خۆت بە، هەرچەند خەڵک ڕەتت بکەنەوە؛ لە بۆچوونی خەڵک بپارێزە، هەرچەند بە وشەی جوان ڕازی‌کەرەوەیان کردبێت.",
+        "speaker": "ئەوزاعی (ڕەحمەتی خوای لێ بێت).",
+        "topic": "پەیوەستبوون بە ئاسارەکانی سەلەف و ئاگادارکردنەوە لە بۆچوونە ڕازاوەکان.",
+        "section": "بەشی ئیسناد",
+        "note": "تێبینی: ئەم ئەسەرە بە ئەوزاعی دەگەرێتەوە و ئاژوڕی بە ئیسناد گێڕاویەتیەوە.",
+        "actions": [
+          "کردنەوەی الشريعة",
+          "کردنەوەی المدخل",
+          "کردنەوەی PDF/سکان",
+          "لاپەڕەی ناوخۆیی سەرچاوە"
+        ]
+      },
+      "bs": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Drži se predaja selefa",
+        "quote": "Drži se predaja onih koji su bili prije tebe, čak i ako te ljudi odbace; a čuvaj se mišljenja ljudi, čak i kada ti ih ukrase lijepim riječima.",
+        "speaker": "al-Awzāʿī (Allah mu se smilovao).",
+        "topic": "Slijeđenje predaja selefa i upozorenje na uljepšana mišljenja.",
+        "section": "Lanac prenosilaca",
+        "note": "Napomena: Ovo je predaja od el-Evza'ija koju je el-Adžurri zabilježio s lancem prenosilaca.",
+        "actions": [
+          "Otvori eš-Šeri'u",
+          "Otvori el-Medhal",
+          "Otvori PDF/sken",
+          "Povezana interna stranica izvora"
+        ]
+      },
+      "fr": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Attache-toi aux traces des Salaf",
+        "quote": "Attache-toi aux récits de ceux qui t’ont précédé, même si les gens te rejettent ; et méfie-toi des opinions des gens, même s’ils les parent de belles paroles.",
+        "speaker": "al-Awzāʿī (qu’Allah lui fasse miséricorde).",
+        "topic": "L’attachement aux récits des Salaf et la mise en garde contre les opinions embellies.",
+        "section": "Chaîne de transmission",
+        "note": "Note : Récit attribué à al-Awzāʿī, transmis avec une chaîne par al-Ājurrī.",
+        "actions": [
+          "Ouvrir al-Sharīʿah",
+          "Ouvrir al-Madkhal",
+          "Ouvrir le PDF ou scan",
+          "Page de sources interne associée"
+        ]
+      },
+      "es": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Aférrate a las huellas de los Salaf",
+        "quote": "Aférrate a los relatos de quienes te precedieron, aunque la gente te rechace; y ten cuidado con las opiniones de la gente, aunque te las adornen con bellas palabras.",
+        "speaker": "al-Awzāʿī (que Allah tenga misericordia de él).",
+        "topic": "La adhesión a los relatos de los Salaf y la advertencia contra opiniones adornadas.",
+        "section": "Cadena de transmisión",
+        "note": "Nota: Relato atribuido a al-Awzāʿī y transmitido con una cadena por al-Ājurrī.",
+        "actions": [
+          "Abrir al-Sharīʿah",
+          "Abrir al-Madkhal",
+          "Abrir PDF o escaneo",
+          "Página interna de fuentes relacionada"
+        ]
+      }
+    },
+    "4": {
+      "de": {
+        "approved": true,
+        "reviewStatus": "original",
+        "title": "Der Dīn ist Naṣīḥah",
+        "quote": "Der Dīn ist Naṣīḥah.",
+        "speaker": "Der Gesandte Allahs ﷺ, überliefert von Tamīm ad-Dārī (رضي الله عنه).",
+        "topic": "Aufrichtige Beratung und der Kern des Dīn.",
+        "section": "Hauptquellen und Fundstellen",
+        "note": "Status: Ṣaḥīḥ · bei Muslim überliefert.",
+        "actions": [
+          "Originaltext öffnen",
+          "Textnachweis mit Markierung",
+          "PDF/Scan öffnen",
+          "Interne Quellenseite"
+        ]
+      },
+      "ar": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "الدين النصيحة",
+        "quote": "الدين النصيحة.",
+        "speaker": "رسول الله ﷺ، من رواية تميم الداري (رضي الله عنه).",
+        "topic": "النصيحة الصادقة ومكانتها في الدين.",
+        "section": "المصادر والمراجع الأساسية",
+        "note": "الحكم: صحيح؛ رواه مسلم.",
+        "actions": [
+          "فتح النص الأصلي",
+          "فتح موضع النص المحدد",
+          "فتح ملف PDF أو صورة المخطوط",
+          "صفحة المصدر الداخلية"
+        ]
+      },
+      "en": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Religion is Naṣīḥah",
+        "quote": "Religion is Naṣīḥah (sincere counsel).",
+        "speaker": "The Messenger of Allah ﷺ, narrated by Tamīm ad-Dārī (may Allah be pleased with him).",
+        "topic": "Sincere counsel and its central place in religion.",
+        "section": "Primary sources and references",
+        "note": "Status: Ṣaḥīḥ; recorded by Muslim.",
+        "actions": [
+          "Open original text",
+          "Open highlighted text evidence",
+          "Open PDF/scan",
+          "Related internal source page"
+        ]
+      },
+      "tr": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Din nasihattir",
+        "quote": "Din nasihattir.",
+        "speaker": "Allah Resûlü ﷺ; Temîm ed-Dârî (Allah ondan razı olsun) rivayet etmiştir.",
+        "topic": "Samimi öğüt ve bunun dinin özündeki yeri.",
+        "section": "Temel kaynaklar ve atıflar",
+        "note": "Hüküm: Sahih; Müslim rivayet etmiştir.",
+        "actions": [
+          "Asıl metni aç",
+          "İşaretlenmiş metin delilini aç",
+          "PDF/taramayı aç",
+          "İlgili iç kaynak sayfası"
+        ]
+      },
+      "ku": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Dîn naṣīḥah e",
+        "quote": "Dîn naṣīḥah e (şîreta dilsozane).",
+        "speaker": "Peyamberê Allah ﷺ; ji aliyê Tamīm ad-Dārī (Allah jê razî be) ve hatiye vegotin.",
+        "topic": "Şîreta dilsozane û cihê wê di dîn de.",
+        "section": "Çavkanî û referansên sereke",
+        "note": "Rewş: Ṣaḥīḥ; Muslim ew vegotiye.",
+        "actions": [
+          "Nivîsa orîjînal veke",
+          "Belgeya nivîskî ya nîşankirî veke",
+          "PDF/anîmena skanê veke",
+          "Rûpela çavkaniya navxweyî"
+        ]
+      },
+      "ckb": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "دین ئامۆژگاریی دڵسۆزانەیە",
+        "quote": "دین نەسیحەتە.",
+        "speaker": "پێغەمبەری الله ﷺ؛ تەمیمی داری (ڕەزای خوای لێ بێت) گێڕاویەتیەوە.",
+        "topic": "ئامۆژگاریی دڵسۆزانە و شوێنی لە دین.",
+        "section": "سەرچاوە و شوێنە سەرەکییەکان",
+        "note": "پلە: سەحیح؛ موسلیم گێڕاویەتیەوە.",
+        "actions": [
+          "کردنەوەی دەقی ڕەسەن",
+          "کردنەوەی دەقی دیاریکراو",
+          "کردنەوەی PDF/سکان",
+          "لاپەڕەی ناوخۆیی سەرچاوە"
+        ]
+      },
+      "bs": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Vjera je iskreno savjetovanje",
+        "quote": "Vjera je nasihat (iskreno savjetovanje).",
+        "speaker": "Allahov Poslanik ﷺ, prenosi Temīm ed-Dārī (Allah bio zadovoljan njime).",
+        "topic": "Iskreno savjetovanje i njegovo mjesto u vjeri.",
+        "section": "Glavni izvori i reference",
+        "note": "Stepen: Sahih; bilježi Muslim.",
+        "actions": [
+          "Otvori izvorni tekst",
+          "Otvori označeni tekstualni dokaz",
+          "Otvori PDF/sken",
+          "Povezana interna stranica izvora"
+        ]
+      },
+      "fr": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "La religion est Naṣīḥah",
+        "quote": "La religion est Naṣīḥah (conseil sincère).",
+        "speaker": "Le Messager d’Allah ﷺ, rapporté par Tamīm ad-Dārī (qu’Allah l’agrée).",
+        "topic": "Le conseil sincère et sa place essentielle dans la religion.",
+        "section": "Sources principales et références",
+        "note": "Statut : Ṣaḥīḥ ; rapporté par Muslim.",
+        "actions": [
+          "Ouvrir le texte original",
+          "Ouvrir le texte surligné",
+          "Ouvrir le PDF ou scan",
+          "Page de sources interne associée"
+        ]
+      },
+      "es": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "La religión es Naṣīḥah",
+        "quote": "La religión es Naṣīḥah (consejo sincero).",
+        "speaker": "El Mensajero de Allah ﷺ, narrado por Tamīm ad-Dārī (que Allah esté complacido con él).",
+        "topic": "El consejo sincero y su lugar central en la religión.",
+        "section": "Fuentes principales y referencias",
+        "note": "Estado: Ṣaḥīḥ; transmitido por Muslim.",
+        "actions": [
+          "Abrir el texto original",
+          "Abrir el texto resaltado",
+          "Abrir PDF o escaneo",
+          "Página interna de fuentes relacionada"
+        ]
+      }
+    },
+    "5": {
+      "de": {
+        "approved": true,
+        "reviewStatus": "original",
+        "title": "Wodurch die Ummah wieder gerade wird",
+        "quote": "Der letzte Teil dieser Ummah wird nicht gerade gebracht, außer durch das, wodurch ihr erster Teil gerade gebracht wurde.",
+        "speaker": "Imām Mālik ibn Anas (رحمه الله).",
+        "topic": "Aufrichtung der Ummah durch denselben Weg wie ihre erste Generation.",
+        "section": "Originalwortlaut",
+        "note": "Hinweis: Aussage eines Imāms · nicht als Ḥadīṯ ausgeben.",
+        "actions": [
+          "ash-Shifāʾ öffnen",
+          "Zuschreibung prüfen",
+          "Scan-Datei öffnen",
+          "Interne Quellenseite"
+        ],
+        "sourceRef": "al-Qāḍī ʿIyāḍ, ash-Shifāʾ, Bd. 2, S. 448 nach Islamweb-Ausgabe."
+      },
+      "ar": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "بِمَ يَصْلُحُ آخِرُ هذه الأمة؟",
+        "quote": "لا يصلح آخر هذه الأمة إلا ما أصلح أولها.",
+        "speaker": "الإمام مالك بن أنس (رحمه الله).",
+        "topic": "صلاح الأمة باتباع السبيل الذي صلح به جيلها الأول.",
+        "section": "النص العربي الأصلي",
+        "note": "تنبيه: هذا قول إمام، وليس حديثًا نبويًا.",
+        "actions": [
+          "فتح كتاب الشفا",
+          "التحقق من نسبة القول",
+          "فتح النسخة المصورة",
+          "صفحة المصدر الداخلية"
+        ],
+        "sourceRef": "القاضي عياض، الشفا، المجلد 2، الصفحة 448 بحسب طبعة إسلام ويب."
+      },
+      "en": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "How the later Ummah may be set right",
+        "quote": "The later part of this Ummah will only be set right by what set its earliest part right.",
+        "speaker": "Imām Mālik ibn Anas (may Allah have mercy on him).",
+        "topic": "Restoring the Ummah through the same path followed by its first generation.",
+        "section": "Original Arabic wording",
+        "note": "Note: This is a statement of an imām, not a Prophetic ḥadīth.",
+        "actions": [
+          "Open ash-Shifāʾ",
+          "Check attribution",
+          "Open scanned copy",
+          "Related internal source page"
+        ],
+        "sourceRef": "al-Qāḍī ʿIyāḍ, ash-Shifāʾ, vol. 2, p. 448 according to the Islamweb edition."
+      },
+      "tr": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Ümmet nasıl yeniden ıslah olur?",
+        "quote": "Bu ümmetin sonrakileri ancak öncekilerini ıslah eden şeyle ıslah olur.",
+        "speaker": "İmam Mâlik b. Enes (Allah ona rahmet etsin).",
+        "topic": "Ümmetin, ilk neslinin takip ettiği yol ile ıslah olması.",
+        "section": "Arapça asıl ifade",
+        "note": "Not: Bu, bir imamın sözüdür; Peygamber hadisi olarak sunulamaz.",
+        "actions": [
+          "eş-Şifâ’yı aç",
+          "Nispeti kontrol et",
+          "Tarama dosyasını aç",
+          "İlgili iç kaynak sayfası"
+        ],
+        "sourceRef": "Kādî İyâz, eş-Şifâ, c. 2, s. 448 (Islamweb baskısına göre)."
+      },
+      "ku": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Ummah çawa dîsa rast dibe?",
+        "quote": "Dawiya vê Ummahê tenê bi tiştê ku destpêka wê rast kiribû rast dibe.",
+        "speaker": "Imām Mālik ibn Anas (Allah rehma xwe lê bike).",
+        "topic": "Rastbûna Ummahê li ser heman rêya nifşê wê yê yekem.",
+        "section": "Gotina orîjînal a erebî",
+        "note": "Têbînî: Ev gotina imamekî ye; ne ḥadîtha Peyamber e.",
+        "actions": [
+          "ash-Shifāʾ veke",
+          "Girêdana gotinê piştrast bike",
+          "Pelê skanê veke",
+          "Rûpela çavkaniya navxweyî"
+        ],
+        "sourceRef": "al-Qāḍī ʿIyāḍ, ash-Shifāʾ, c. 2, r. 448 li gorî çapê Islamweb."
+      },
+      "ckb": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "ئەم ئوممەتە چۆن چاک دەبێتەوە؟",
+        "quote": "کۆتایی ئەم ئوممەتە تەنها بەو شتە چاک دەبێتەوە کە سەرەتاکەی پێ چاک بوو.",
+        "speaker": "ئیمام مالیک بن ئەنس (ڕەحمەتی خوای لێ بێت).",
+        "topic": "چاکبوونەوەی ئوممەت بە هەمان ڕێگای نەوەی یەکەمی.",
+        "section": "دەقی عەرەبیی ڕەسەن",
+        "note": "تێبینی: ئەمە وتەی ئیمامێکە؛ نابێت وەک حەدیثی پێغەمبەر بنێردرێت.",
+        "actions": [
+          "کردنەوەی الشفاء",
+          "پشکنینی سەلماندنی وتەکە",
+          "کردنەوەی فایلە سکانکراوەکە",
+          "لاپەڕەی ناوخۆیی سەرچاوە"
+        ],
+        "sourceRef": "قاضی عیاض، الشفاء، بەرگی 2، لاپەڕە 448 بە پێی چاپی ئیسلاموێب."
+      },
+      "bs": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Čime se popravlja kasniji dio ummeta?",
+        "quote": "Kasniji dio ovog ummeta može se popraviti samo onim čime je popravljen njegov prvi dio.",
+        "speaker": "Imam Mālik ibn Enes (Allah mu se smilovao).",
+        "topic": "Popravljanje ummeta istim putem kojim je išla prva generacija.",
+        "section": "Izvorni arapski tekst",
+        "note": "Napomena: Ovo je izjava imama, a ne Poslanikov hadis.",
+        "actions": [
+          "Otvori eš-Šifāʾ",
+          "Provjeri pripisivanje izjave",
+          "Otvori skenirani dokument",
+          "Povezana interna stranica izvora"
+        ],
+        "sourceRef": "al-Qāḍī ʿIyāḍ, eš-Šifāʾ, tom 2, str. 448 prema izdanju Islamweba."
+      },
+      "fr": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Comment la dernière génération de la Ummah se réforme",
+        "quote": "La dernière partie de cette Ummah ne sera réformée que par ce qui a réformé sa première partie.",
+        "speaker": "L’imām Mālik ibn Anas (qu’Allah lui fasse miséricorde).",
+        "topic": "La réforme de la Ummah par la voie suivie par sa première génération.",
+        "section": "Formulation arabe originale",
+        "note": "Note : Il s’agit d’une parole d’imām, et non d’un ḥadīth prophétique.",
+        "actions": [
+          "Ouvrir ash-Shifāʾ",
+          "Vérifier l’attribution",
+          "Ouvrir le document numérisé",
+          "Page de sources interne associée"
+        ],
+        "sourceRef": "al-Qāḍī ʿIyāḍ, ash-Shifāʾ, vol. 2, p. 448 selon l’édition Islamweb."
+      },
+      "es": {
+        "approved": false,
+        "reviewStatus": "draft-needs-scholarly-and-native-language-review",
+        "title": "Cómo se reforma la parte posterior de la Ummah",
+        "quote": "La parte posterior de esta Ummah solo podrá reformarse mediante aquello que reformó a su primera parte.",
+        "speaker": "El imām Mālik ibn Anas (que Allah tenga misericordia de él).",
+        "topic": "La reforma de la Ummah siguiendo el mismo camino de su primera generación.",
+        "section": "Texto árabe original",
+        "note": "Nota: Es una declaración de un imām, no un ḥadīth profético.",
+        "actions": [
+          "Abrir ash-Shifāʾ",
+          "Verificar la atribución",
+          "Abrir el documento escaneado",
+          "Página interna de fuentes relacionada"
+        ],
+        "sourceRef": "al-Qāḍī ʿIyāḍ, ash-Shifāʾ, vol. 2, p. 448 según la edición de Islamweb."
+      }
+    }
+  }
+}
