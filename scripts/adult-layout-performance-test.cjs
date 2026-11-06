@@ -11,16 +11,24 @@ assert.match(source,/lastAppliedViewportKey/);
 assert.match(source,/pendingForcedLayout/);
 assert.match(fold,/Only inspect additions that contain a/);
 assert.doesNotMatch(fold,/new MutationObserver\(function \(\) \{ restoreFoldScrollAfterRender\(\); \}\)/);
+assert.doesNotMatch(fold,/setAttribute\(["']data-fold-(?:dual|capacity)["']/,
+  "Fold content controller must not write shell-owned capacity attributes");
+assert.doesNotMatch(fold,/classList\.toggle\(["']is-fold-dual["']/,
+  "Fold content controller must not toggle the shell-owned dual state");
+assert.doesNotMatch(fold,/style\.setProperty\(["']--fold-(?:rail-current|reader-available)/,
+  "Fold content controller must not write shell-owned pane measurements");
+assert.doesNotMatch(fold,/addEventListener\(["'](?:resize|orientationchange)["'],\s*scheduleSync/,
+  "Fold content controller must not register a second layout-update loop");
 const handles={};
 const raf=[];
-let rootWrites=0,navGeometryReads=0,navWrites=0;
+let rootWrites=0,rootAttributeWrites=0,rootClassWrites=0,navGeometryReads=0,navWrites=0;
 const attributes={};
 const root={
   clientWidth:390,clientHeight:844,
-  classList:{contains(){return false},add(){},remove(){},toggle(){}},
+  classList:{contains(){return false},add(){rootClassWrites++},remove(){rootClassWrites++},toggle(){rootClassWrites++}},
   style:{setProperty(){rootWrites++}},
   getAttribute(name){return attributes[name]||null},
-  setAttribute(name,value){attributes[name]=String(value)}
+  setAttribute(name,value){rootAttributeWrites++;attributes[name]=String(value)}
 };
 const nav={
   classList:{contains(){return false},add(){},remove(){},toggle(){}},
@@ -75,6 +83,26 @@ roController.cb();
 flushFrames();
 assert.ok(rootWrites>afterForce,"Viewport orientation change must recompute layout");
 assert.ok(navGeometryReads<=1,"Orientation reads nav geometry at most once per update");
+
+// Fold content must consume the capacity owner without running a second
+// attribute/ResizeObserver loop or rewriting shell geometry.
+const adaptiveResizeHandler=handles["window:resize"];
+const adaptiveOrientationHandler=handles["window:orientationchange"];
+const beforeFoldWrites={style:rootWrites,attrs:rootAttributeWrites,classes:rootClassWrites};
+vm.runInNewContext(fold,{
+  window:win,document:doc,
+  setTimeout(){return 1},clearTimeout(){},
+  requestAnimationFrame(fn){raf.push(fn);return raf.length},
+  cancelAnimationFrame(){}
+},{filename:"fold-split.js"});
+handles["doc:DOMContentLoaded"]();
+assert.equal(handles["window:resize"],adaptiveResizeHandler,"Only adaptive layout owns viewport resize");
+assert.equal(handles["window:orientationchange"],adaptiveOrientationHandler,"Only adaptive layout owns orientation changes");
+assert.equal(rootWrites,beforeFoldWrites.style,"Fold sync must not rewrite capacity tokens");
+assert.equal(rootAttributeWrites,beforeFoldWrites.attrs,"Fold sync must not rewrite capacity attributes");
+assert.equal(rootClassWrites,beforeFoldWrites.classes,"Fold sync must not rewrite the dual state class");
+assert.equal(win.DarFold.sync(),true,"Fold reads the central capacity decision");
+assert.equal(rootWrites,beforeFoldWrites.style,"Calling DarFold.sync remains a read only compatibility operation");
 
 // Five-tab navigation V1: prevent route-triggered outer bar geometry writes.
 const visitorNavCSS=fs.readFileSync(path.join(__dirname,"../assets/bottom-nav-global-v1075.css"),"utf8");
