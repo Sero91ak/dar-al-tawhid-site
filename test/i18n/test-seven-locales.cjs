@@ -415,7 +415,7 @@ assert.equal(w.DarTestTurkishUI.translateValue("Öffne diese Seite in Chrome auf
 assert.equal(w.DarTestTurkishUI.translateValue("DAR Test · Widgets","en"),"DAR Test · Widgets");
 assert.equal(w.DarTestTurkishUI.translateValue("Dichte: MD · 180×180px · Ecke ziehen zum Vergrößern","en"),"Density: MD · 180×180px · Drag the corner");
 assert.equal(w.DarTestTurkishUI.translateValue("Widget aktiv · Theme: auto · v1297","ckb"),"ویدجێت چالاکە · ڕووکار: auto · v1297");
-assert.equal(w.DarTestTurkishUI.translateValue("Ramaḍān-Serie konnte nicht geladen werden: Ungültige 30-Tage-Serie","tr"),"Ramazan dizisi yüklenemedi: Geçersiz 30 günlük dizi");
+assert.equal(w.DarTestTurkishUI.translateValue("Ramaḍān-Serie konnte nicht geladen werden: Ungültige 30-Tage-Serie","tr"),"Ramazan dizisi yüklenemedi: Geçersiz 30 günlük seri");
 assert.equal(w.DarTestTurkishUI.translateValue("Quelle/Hinweis: Ṣaḥīḥ al-Bukhārī 2738.","es"),"Fuente/nota: Ṣaḥīḥ al-Bukhārī 2738.");
 assert.equal(w.DarTestTurkishUI.translateValue("3 von 13 Bereichen mit eigenen Angaben · vor PDF bitte prüfen.","fr"),"3 sections sur 13 avec tes renseignements · vérifie avant le PDF");
 assert.equal(w.DarTestTurkishUI.translateValue("Fundstelle","fr"),"Lieu cité");
@@ -468,9 +468,21 @@ w.prompt("Āyah-Nummer:","2:255");
 assert.deepEqual(dialogSeen,["Āyah number:","2:255"]);
 w.confirm("Dieses Element auf die Vorlage zurücksetzen?");
 assert.equal(dialogSeen,"Reset this element to the template?");
+assert.equal(w.DarTestTurkishUI.translateValue("Wolkig","fr"),"Nuageux");
+assert.equal(w.DarTestTurkishUI.translateValue("18 °C · Wolkig","en"),"18 °C · Cloudy");
+assert.equal(w.DarTestTurkishUI.translateValue("09:41 Uhr","ar"),"09:41");
+assert.equal(w.DarTestTurkishUI.translateValue("Wetter —","es"),"Clima —");
+assert.equal(w.DarTestTurkishUI.translateValue("Online-Abfrage für Meckenheim läuft …","tr"),"Çevrimiçi sorgu: Meckenheim sürüyor …");
+assert.equal(w.DarTestTurkishUI.translateValue("Vorschau · Meckenheim · externe Berechnung","ku"),"Pêşdîtin · Meckenheim · hesabê derve");
+assert.equal(w.DarTestTurkishUI.translateValue("Vorschau · Meckenheim · externe Berechnung · Gebetsdaten nicht verfügbar","fr"),"Aperçu · Meckenheim · calcul externe · horaires de prière indisponibles");
+assert.equal(w.DarTestTurkishUI.translateValue("Keine Live-Daten für Bonn · Ort erneut wählen","es"),"No hay datos en vivo para Bonn · elige el lugar de nuevo");
+assert.equal(w.DarTestTurkishUI.translateValue("Ramaḍān-Serie konnte nicht geladen werden: Ungültige 30-Tage-Serie","en"),"The Ramaḍān series could not be loaded: Invalid 30-day series");
+assert.equal(w.DarTestTurkishUI.translateValue("Bereinigt: 3 Test-Dateien, 1 Test-Service-Worker. Die App wird neu geöffnet …","bs"),"Očišćeno: 3 probnih datoteka, 1 probnih service workera. Aplikacija će se ponovo otvoriti …");
+assert.equal(w.DarTestTurkishUI.translateValue("Ungültige 30-Tage-Serie","tr"),"Geçersiz 30 günlük seri");
+assert.equal(w.DarTestTurkishUI.translateValue("Ort für die Vorschau","ckb"),"شوێن بۆ پێشبینین");
 for(const page of ["wasiyyah/index.html","wasiyyah/pdf-render/index.html","widgets/index.html","editor/startseite-v47.html","editor/startseite-v47-canvas.html","ramadan/index.html","repair.html","android/index.html","i18n/index.html"]){
  const html=fs.readFileSync(path.join(__dirname,"../"+page),"utf8");
- assert(html.includes("/test/assets/dar-test-turkish-ui.js?v=20261024-ui-more-60"),page+" loads the locale runtime");
+ assert(html.includes("/test/assets/dar-test-turkish-ui.js?v=20261024-ui-more-61"),page+" loads the locale runtime");
 }
 assert(fs.readFileSync(path.join(__dirname,"../wasiyyah/index.html"),"utf8").includes('data-dar-no-translate="testament"'));
 assert(fs.readFileSync(path.join(__dirname,"../wasiyyah/pdf-render/index.html"),"utf8").includes('data-dar-no-translate="testament"'));

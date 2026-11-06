@@ -565,6 +565,12 @@ function isDynamicGermanUi(value){
   /^Push konnte nicht vollständig repariert werden:\n\n[\s\S]{0,900}$/.test(value)||
   /^⚠ Server-Push nicht angekommen:\n[\s\S]{0,900}$/.test(value)||
   /^Test-Push konnte nicht zugestellt werden\.\n\n[\s\S]{0,900}$/.test(value)||
+  /^Online-Abfrage für [^<>\n]{1,80} läuft …$/.test(value)||
+  /^Vorschau · [^<>\n]{1,80} · externe Berechnung(?: · Gebetsdaten nicht verfügbar)?$/.test(value)||
+  /^Keine Live-Daten für [^<>\n]{1,80} · Ort erneut wählen$/.test(value)||
+  /^-?\d+ °C · (?:Klar|Wolkig|Nebel|Regen|Schnee|Schauer|Unbeständig)$/.test(value)||
+  /^\d{2}:\d{2} Uhr$/.test(value)||
+  value==="Wetter —"||
   /^\d+\. Fundstelle$/.test(value)||
   /^Qurʾān \d{1,3}:\d{1,3}(?: · [^<>]{1,80})?$/.test(value)||
   /^· Āyah \d+ ·$/.test(value)||
@@ -2764,10 +2770,11 @@ function translateSharedPatterns(value,language){
   const ramadanMiss=value.match(/^Ramaḍān-Serie konnte nicht geladen werden: ([^<>\n]{1,160})$/);
   if(ramadanMiss){
    const raw=ramadanMiss[1];
-   let tail=raw;
-   if(/^Ungültige 30-Tage-Serie$/.test(raw)){
+   const knownTail=lookupPack(raw,language);
+   let tail=knownTail!==undefined?knownTail:raw;
+   if(knownTail===undefined&&/^Ungültige 30-Tage-Serie$/.test(raw)){
     tail={ar:"سلسلة 30 يومًا غير صالحة",en:"Invalid 30-day series",tr:"Geçersiz 30 günlük dizi",ku:"Rêzeya 30 rojan nederbasdar e",ckb:"زنجیرەی 30 ڕۆژ نادروستە",bs:"Nevažeća serija od 30 dana",fr:"Série de 30 jours invalide",es:"Serie de 30 días no válida"}[language]||raw;
-   }else if(/^Mindestens ein Tag ist noch nicht vollständig verifiziert$/.test(raw)){
+   }else if(knownTail===undefined&&/^Mindestens ein Tag ist noch nicht vollständig verifiziert$/.test(raw)){
     tail={ar:"يوم واحد على الأقل لم يُراجع بالكامل بعد",en:"At least one day is not fully verified yet",tr:"En az bir gün henüz tam doğrulanmadı",ku:"Bi kêmanî rojek hê bi temamî nehatiye piştrastkirin",ckb:"لانیکەم ڕۆژێک هێشتا بەتەواوی پشتڕاست نەکراوەتەوە",bs:"Najmanje jedan dan još nije potpuno provjeren",fr:"Au moins un jour n’est pas encore entièrement vérifié",es:"Al menos un día aún no está verificado por completo"}[language]||raw;
    }
    const heads={ar:"تعذّر تحميل سلسلة رمضان: ",en:"The Ramaḍān series could not be loaded: ",tr:"Ramazan dizisi yüklenemedi: ",ku:"Rêzeya Remezanê nehat barkirin: ",ckb:"زنجیرەی ڕەمەزان بارنەکرا: ",bs:"Ramazanska serija nije mogla da se učita: ",fr:"La série de Ramaḍān n’a pas pu être chargée : ",es:"La serie de Ramaḍān no se pudo cargar: "};
@@ -2935,6 +2942,53 @@ function translateSharedPatterns(value,language){
   if(testMiss){
    const heads={ar:"تعذّر تسليم تنبيه الاختبار:\n\n",en:"The test push could not be delivered:\n\n",tr:"Deneme push’u iletilemedi:\n\n",ku:"Pusha ceribandinê nehat gihandin:\n\n",ckb:"pushی تاقیکردنەوە نەگەیشت:\n\n",bs:"Probni push nije mogao biti isporučen:\n\n",fr:"La notification de test n’a pas pu être remise :\n\n",es:"El push de prueba no se pudo entregar:\n\n"};
    return heads[language]?heads[language]+knownLines(testMiss[1]):null;
+  }
+  const onlineQuery=value.match(/^Online-Abfrage für ([^<>\n]{1,80}) läuft …$/);
+  if(onlineQuery){
+   const head=lookupPack("Online-Abfrage für",language);
+   const tails={ar:" جارٍ …",en:" is running …",tr:" sürüyor …",ku:" didome …",ckb:" بەردەوامە …",bs:" traje …",fr:" est en cours …",es:" está en curso …"};
+   return head&&tails[language]?head+" "+onlineQuery[1]+tails[language]:null;
+  }
+  const previewBase=name=>{
+   const head=lookupPack("Vorschau",language);
+   const external={ar:"حساب خارجي",en:"external calculation",tr:"dış hesap",ku:"hesabê derve",ckb:"ژمێریاری دەرەکی",bs:"vanjski izračun",fr:"calcul externe",es:"cálculo externo"};
+   return head&&external[language]?head+" · "+name+" · "+external[language]:null;
+  };
+  const previewMissing=value.match(/^Vorschau · ([^<>\n]{1,80}) · externe Berechnung · Gebetsdaten nicht verfügbar$/);
+  if(previewMissing){
+   const base=previewBase(previewMissing[1]);
+   const missing={ar:"أوقات الصلاة غير متاحة",en:"prayer times unavailable",tr:"namaz vakitleri yok",ku:"demên nimêjê ne amade ne",ckb:"کاتەکانی نوێژ بەردەست نین",bs:"vremena namaza nisu dostupna",fr:"horaires de prière indisponibles",es:"horarios de oración no disponibles"};
+   return base&&missing[language]?base+" · "+missing[language]:null;
+  }
+  const previewReady=value.match(/^Vorschau · ([^<>\n]{1,80}) · externe Berechnung$/);
+  if(previewReady)return previewBase(previewReady[1]);
+  const liveMiss=value.match(/^Keine Live-Daten für ([^<>\n]{1,80}) · Ort erneut wählen$/);
+  if(liveMiss){
+   const forms={
+    ar:"لا بيانات مباشرة لـ "+liveMiss[1]+" · اختر المكان مرة أخرى",
+    en:"No live data for "+liveMiss[1]+" · choose the place again",
+    tr:liveMiss[1]+" için canlı veri yok · yeri yeniden seç",
+    ku:"Daneyên zindî ji bo "+liveMiss[1]+" tune ne · cihê ji nû ve hilbijêre",
+    ckb:"زانیاری ڕاستەوخۆ بۆ "+liveMiss[1]+" نییە · شوێنەکە دووبارە هەڵبژێرە",
+    bs:"Nema živih podataka za "+liveMiss[1]+" · ponovo odaberi mjesto",
+    fr:"Pas de données en direct pour "+liveMiss[1]+" · choisis de nouveau le lieu",
+    es:"No hay datos en vivo para "+liveMiss[1]+" · elige el lugar de nuevo"
+   };
+   return forms[language]||null;
+  }
+  const weatherNow=value.match(/^(-?\d+) °C · (Klar|Wolkig|Nebel|Regen|Schnee|Schauer|Unbeständig)$/);
+  if(weatherNow){
+   const word=lookupPack(weatherNow[2],language);
+   return word!==undefined?weatherNow[1]+" °C · "+word:null;
+  }
+  const clock=value.match(/^(\d{2}:\d{2}) Uhr$/);
+  if(clock){
+   const forms={ar:clock[1],en:clock[1],tr:clock[1],ku:clock[1],ckb:clock[1],bs:clock[1],fr:clock[1],es:clock[1]};
+   return forms[language]||null;
+  }
+  if(value==="Wetter —"){
+   const word=lookupPack("Wetter",language);
+   return word!==undefined?word+" —":null;
   }
   const numberedPlace=value.match(/^(\d+)\. Fundstelle$/);
   if(numberedPlace){
@@ -3388,7 +3442,7 @@ function boot(){
     !global.document.getElementById("dar-test-nine-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-nine-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-60";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261024-ui-more-61";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
