@@ -2611,7 +2611,9 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 #prCityInfo{min-height:1em;color:#f3e7c9}
 </style>
 <link rel="stylesheet" id="darSmartPublicV8" href="/desktop-preview/assets/dar-smart-home-v8-live.css?v=20261021-2-reveal-fixed">
-<link rel="stylesheet" id="darTrueV8Shell" href="/desktop-preview/assets/dar-v8-faithful-shell.css?v=20261021-faithful-v1">
+<link rel="stylesheet" id="darTrueV8Shell" href="/desktop-preview/assets/dar-v8-faithful-shell.css?v=20261106-salam-compact-v1">
+<script defer src="/assets/i18n/adult-component-i18n-v1.js?v=20261106-salam"></script>
+<script defer src="/assets/i18n/adult-home-welcome-v1.js?v=20261106-global-salam-v1"></script>
 <link rel="stylesheet" id="darV8AllRoutesCSS" href="/desktop-preview/assets/dar-v8-all-routes.css?v=20261021-2">
 <link rel="stylesheet" id="darV8ConversationCSS" href="/desktop-preview/assets/dar-v8-portal-live.css?v=20261021-quran-modal-v12">
 
@@ -2751,7 +2753,14 @@ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .dar-v8-qa-to
 <!-- Former website header removed: V8 sidebar + V8 topbar are the sole browser shell. -->
 <header class="dar-v8-topbar"><div class="dar-v8-breadcrumb"><img class="dar-v8-brand-seal" src="/assets/brand/seals/seal-creme-1024.png" alt="" aria-hidden="true"><span class="dar-v8-brand-name">DĀR AL TAWḤĪD</span><span class="dar-v8-crumb-arrow">›</span><strong id="darV8BreadLabel">Start</strong></div><div class="dar-v8-top-actions"><a class="dar-v8-top-search desktop-link" data-page="suche" href="/?page=suche" aria-label="Wissenschat und Quellenfinder öffnen">⌕ <span class="dar-v8-search-text">Frage stellen oder suchen …</span><kbd>⌘ K</kbd></a><button class="dar-v8-top-icon" id="darV8ThemeToggle" type="button" aria-label="Erscheinungsbild">☾</button><button class="dar-v8-top-icon" id="darV8TopAudio" type="button" aria-label="Qurʾān-Player anzeigen">♫</button></div></header>
 
-<section id="darV8TopWelcome" class="v8-welcome" aria-label="Begrüßung"><div class="v8-headline"><span>BEITRÄGE NACH <strong>QURʾĀN · SUNNAH · ĀṮĀR</strong></span><span class="v8-arabic-top" lang="ar" dir="rtl">السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ</span></div><div class="v8-welcome-body"><div class="v8-copy"><h1>As-salāmu ʿalaikum <span>wa raḥmatullāhi wa barakātuh</span></h1><h2>Willkommen bei <strong>DĀR AL TAWḤĪD</strong></h2><p>Eine geordnete Wissensplattform mit Beiträgen aus <b>Qurʾān</b>, authentischer <b>Sunnah</b> und den <b>Āṯār der frühen Imāme</b> – sowie einer umfangreichen <b>Duʿāʾ-Sammlung</b> aus Qurʾān und authentischer Sunnah.</p></div><div class="v8-identity" aria-hidden="true"><span class="v8-seal">۞</span><span>WISSEN · QUELLEN · ÜBERLIEFERUNG</span></div></div></section>
+<section id="darV8TopWelcome" class="v8-welcome" aria-label="Begrüßung">
+ 
+ <div class="v8-welcome-body"><div class="v8-copy">
+  <h1 lang="ar-Latn" dir="ltr">As-Salāmu ʿAlaikum <span>Wa Raḥmatullāhi Wa Barakātuh</span></h1>
+  <h2 id="darV8WelcomeTitle">Willkommen bei <strong>DĀR AL TAWḤĪD</strong></h2>
+  <p id="darV8WelcomeSummary">Eine geordnete Wissensplattform mit Beiträgen aus <strong>Qurʾān</strong>, authentischer <strong>Sunnah</strong> und den <strong>Āṯār der frühen Imāme</strong> – sowie einer umfangreichen <strong>Duʿāʾ-Sammlung</strong> aus Qurʾān und authentischer Sunnah.</p>
+ </div></div>
+</section>
 <section class="top-tools-cluster top-tools-v26 v8-real-prayer" aria-label="Gebetszeiten"><div class="v8-prayer-caption"><strong>☾ &nbsp; GEBETSZEITEN</strong><button id="darV8PrayerSettings" type="button" aria-expanded="false" aria-controls="prayerRiver">Standort ↗</button></div><div class="dar-v8-prayer-display"><div class="dar-v8-prayer-next"><span>Nächstes Gebet</span><strong id="darV8NextName">—</strong><small id="darV8NextTime">Standort wählen</small></div><strong class="dar-v8-countdown" id="darV8Countdown">--:--:--</strong></div>
  <div class="top-tool-card top-tool-prayer">
   <section id="prayerRiver" class="prayer-river prayer-dock-river prayer26" aria-label="Gebetszeiten">
@@ -4956,14 +4965,14 @@ renders.beitraege=function(){
    '</section>'+footer()
  };
 
- // User-selectable seven-language browser UI, with explicit source-text fallback.
+ // User-selectable nine-language browser UI, with explicit source-text fallback.
  renders.einstellungen=function(){
   return '<section class="dar-v8-language-settings" id="darV8LocalePanel" aria-label="Sprache und Originalquellen">'+
-   '<div class="dar-v8-section-kicker">PERSONALISIERUNG · 7 SPRACHEN</div>'+
-   '<h2>Sprache auswählen</h2><p>Die Oberfläche unterstützt sieben Sprachen. Fachübersetzungen und Originalquellen werden nur nach Prüfung veröffentlicht.</p>'+
+   '<div class="dar-v8-section-kicker">PERSONALISIERUNG · 9 SPRACHEN</div>'+
+   '<h2>Sprache auswählen</h2><p>Die Oberfläche unterstützt neun Sprachen. Fachübersetzungen und Originalquellen werden nur nach Prüfung veröffentlicht.</p>'+
    '<label for="darV8LanguageSelect">Sprache der Bedienoberfläche</label>'+
    '<select id="darV8LanguageSelect">'+
-   [["de","Deutsch"],["ar","العربية الفصحى"],["en","English"],["tr","Türkçe"],["ku","Kurmancî"],["ckb","سۆرانی"],["bs","Bosanski"]].map(function(x){return '<option value="'+x[0]+'">'+x[1]+'</option>'}).join("")+
+   [["de","Deutsch"],["ar","العربية الفصحى"],["en","English"],["tr","Türkçe"],["ku","Kurmancî"],["ckb","سۆرانی"],["bs","Bosanski"],["fr","Français"],["es","Español"]].map(function(x){return '<option value="'+x[0]+'">'+x[1]+'</option>'}).join("")+
    '</select><p id="darV8TranslationNotice" role="status"></p>'+
    '<p><strong>Originaltexte:</strong> Qurʾān, Ḥadīṯe, Quellenangaben, Beiträge und PDFs werden nicht durch automatische Übersetzungen ersetzt.</p>'+
    '</section>'+einstellungen()

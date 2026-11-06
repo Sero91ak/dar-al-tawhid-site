@@ -1,8 +1,8 @@
 /* DĀR AL TAWḤĪD · V8 Browser Portal · responsive conversation, locale, Quran search and native audio player bridge.
  * Adult public browser only. No fabricated answers, translations, locations or Quran verses. */
 (function(w,d){"use strict";
-const supported=["de","ar","en","tr","ku","ckb","bs"],KEY="darAdultPreferredLocaleV1";
-const langNames={de:"Deutsch",ar:"العربية الفصحى",en:"English",tr:"Türkçe",ku:"Kurmancî",ckb:"سۆرانی",bs:"Bosanski"};
+const supported=["de","ar","en","tr","ku","ckb","bs","fr","es"],KEY="darAdultPreferredLocaleV1";
+const langNames={de:"Deutsch",ar:"العربية الفصحى",en:"English",tr:"Türkçe",ku:"Kurmancî",ckb:"سۆرانی",bs:"Bosanski",fr:"Français",es:"Español"};
 let languageData=null,languagePromise=null,aliasPromise=null,aliasMap=new Map(),quranIndexPromise=null,currentPage="";
 const norm=v=>String(v||"").toLocaleLowerCase("und").normalize("NFKD")
  .replace(/[\u0300-\u036f\u064b-\u065f\u0670\u0640]/g,"").replace(/[أإآٱ]/g,"ا").replace(/ى/g,"ي")

@@ -50,12 +50,14 @@ function sync(){
  if(!welcome){
   welcome=make("section","dar-v47-welcome");welcome.id="darHomeV47Welcome";
   welcome.setAttribute("aria-label","Begrüßung");
-  welcome.appendChild(make("h2","dar-v47-salam","As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh"));
+  welcome.appendChild(make("h2","dar-v47-salam","As-Salāmu ʿAlaikum Wa Raḥmatullāhi Wa Barakātuh"));
+  var title=make("h3","dar-v47-title");title.innerHTML="Willkommen bei <strong>DĀR AL TAWḤĪD</strong>";welcome.appendChild(title);
   var intro=make("p","dar-v47-intro");
-  intro.innerHTML='Willkommen bei <strong>DĀR AL TAWḤĪD</strong> – einer geordneten Wissens-App mit Beiträgen aus <strong>Qurʾān</strong>, <strong>Sunnah</strong>, den <strong>Āthār der frühen Imāme</strong> und einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah.';
+  intro.innerHTML='Eine geordnete Wissensplattform mit Beiträgen aus <strong>Qurʾān</strong>, authentischer <strong>Sunnah</strong> und den <strong>Āṯār der frühen Imāme</strong> – sowie einer umfangreichen <strong>Duʿāʾ-Sammlung</strong> aus Qurʾān und authentischer Sunnah.';
   welcome.appendChild(intro);
  }
  if(welcome.parentNode!==header)header.appendChild(welcome);
+ if(window.DARAdultHomeWelcomeV1)window.DARAdultHomeWelcomeV1.apply();
  /* Original native prayer node stays in place with its own events/update calls. */
  prayer.classList.add("dar-v47-prayer");
  var search=hero&&hero.querySelector(".dt-hero-search-slot");

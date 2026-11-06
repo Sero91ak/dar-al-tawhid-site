@@ -456,7 +456,7 @@ async function fetchVersionBuild(base) {
           &&source.includes("dhp-welcome-rule::before{content:none!important;display:none!important;}")
           &&source.includes("text-wrap:balance!important")
           &&source.includes("Beiträge nach Qurʾān, Sunnah und Āthār")
-          &&source.includes("As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh")
+          &&source.includes("As-Salāmu ʿAlaikum Wa Raḥmatullāhi Wa Barakātuh")
           &&source.includes("Willkommen bei <strong>DĀR AL TAWḤĪD</strong>")
           &&!source.includes('<div class="dhp-brand">')
           &&!source.includes("Wissen · Überlieferung · Erkenntnis")

@@ -123,9 +123,10 @@ function order(){
    "Beiträge nach Qurʾān, Sunnah und Āthār");
  var welcome=h.querySelector("#darAdultHomeWelcomeV5");
  if(!welcome)welcome=make("section","darAdultHomeWelcomeV5","dar-adult-home-welcome-v5",
-  '<h2 class="dar-adult-home-salam-v5">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</h2>'+
+  '<h2 class="dar-adult-home-salam-v5">As-Salāmu ʿAlaikum Wa Raḥmatullāhi Wa Barakātuh</h2>'+
+  '<h3 class="dar-adult-home-title-v7">Willkommen bei <strong>DĀR AL TAWḤĪD</strong></h3>'+
   '<span class="dar-adult-home-rule-v5" aria-hidden="true"></span>'+
-  '<p>Willkommen bei <strong>DĀR AL TAWḤĪD</strong> – einer geordneten Wissens-App mit Beiträgen aus <strong>Qurʾān</strong>, <strong>Sunnah</strong>, den <strong>Āthār der frühen Imāme</strong> und einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah.</p>');
+  '<p class="dar-adult-home-desc-v7">Eine geordnete Wissensplattform mit Beiträgen aus <strong>Qurʾān</strong>, authentischer <strong>Sunnah</strong> und den <strong>Āṯār der frühen Imāme</strong> – sowie einer umfangreichen <strong>Duʿāʾ-Sammlung</strong> aus Qurʾān und authentischer Sunnah.</p>');
  welcome.setAttribute("aria-label","Willkommen bei DĀR AL TAWḤĪD");
  // Idempotent three-part sequence: never clone prayer, disturb its data,
  // force scrollTop or create independent scroll containers.
@@ -133,6 +134,7 @@ function order(){
  if(p.previousElementSibling!==kicker)h.insertBefore(p,kicker.nextElementSibling);
  if(welcome.parentElement!==h||welcome.previousElementSibling!==p)
   h.insertBefore(welcome,p.nextElementSibling);
+ if(window.DARAdultHomeWelcomeV1)window.DARAdultHomeWelcomeV1.apply();
 }
 function queue(){
  if(queued)return;queued=true;

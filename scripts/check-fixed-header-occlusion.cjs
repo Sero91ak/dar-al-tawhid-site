@@ -38,7 +38,21 @@ assert.match(testCss,/TEST_HEADER_OCCLUSION_LAYOUT_V1/);
    stays in the brand CSS; specialist Hero modules own their layout. */
 for(const [name,css] of [["visitor",visitorCss],["test",testCss]]){
  assert.doesNotMatch(css,/GLOBAL_ADULT_STICKY_CLEARANCE_V1/,name+" reintroduced broad sticky override");
- assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/,name+" reintroduced broad app/hero shift");
+ /* The legacy Test V3 seam predates this PR: guard behavior, not the marker.
+    Zero-offset resets are required; nonzero global app shifts remain forbidden. */
+ if(name==="test" && css.includes("GLOBAL_HERO_ROUTE_TOP_SEAM_V3")){
+  const start=css.indexOf("GLOBAL_HERO_ROUTE_TOP_SEAM_V3");
+  const end=css.indexOf("RELATIVE_HERO_STAYS_IN_FLOW_V4",start);
+  const seam=css.slice(start,end>start?end:undefined);
+  assert.match(seam,/> \.app\s*\{\s*margin-block-start:0!important;\s*padding-block-start:0!important;/,
+    "Test seam must preserve zero global app top offsets");
+  assert.match(seam,/#appView\.view\s*\{\s*padding-block-start:0!important;\s*margin-block-start:0!important;/,
+    "Test view must preserve zero top offsets");
+  assert.doesNotMatch(seam,/(?:margin|padding)-block-start:\s*-[1-9]/,
+    "Test seam must never pull the app under the header");
+ }else{
+  assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/,name+" reintroduced broad app/hero shift");
+ }
  assert.doesNotMatch(css,/FRAUEN_DIRECT_STICKY_FALLBACK_V6/,name+" reintroduced pre-wrapper shift");
 }
 const originalHero=load("assets/adult-immersive-hero-v1.css");
@@ -50,7 +64,7 @@ assert.doesNotMatch(majlisJs,/\.ilm-chat-header\{position:sticky!important;top:0
 assert.match(majlisJs,/top:var\(--dar-test-occlusion-top/);
 assert.doesNotMatch(majlisJs,/last\.getBoundingClientRect\(\)\.top - 110/,"Hardcoded scroll offset caused clipped questions");
 assert.match(majlisJs,/var globalBottom=globalHeader\?/);
-assert.match(router,/dar-adult-brand-header-v2\.css\?v=20261030-restore-original-hero-rail-v5/);
-assert.match(router,/dar-adult-brand-header-v2\.js\?v=20261030-fixed-occlusion-v1/);
+assert.match(router,/dar-adult-brand-header-v2\.css\?v=20261106-global-salam-v1/);
+assert.match(router,/dar-adult-brand-header-v2\.js\?v=20261106-global-salam-v1/);
 assert.doesNotMatch(testCss,/body\s*\{\s*padding-top:/,"No blanket body padding");
 console.log("PASS: brand header preserves original Hero/search authority; Majlis independently retains scroll clearance.");

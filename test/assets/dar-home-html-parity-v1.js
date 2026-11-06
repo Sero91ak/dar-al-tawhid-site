@@ -57,7 +57,7 @@ function html(){
   /* Only one logo/name in fixed app header; home has its own source line. */
   '<div class="dhp-home-source-v55">Beiträge nach Qurʾān, Sunnah und Āthār</div>'+ 
   '<button type="button" class="dhp-prayer" data-dhp-route="prayer" aria-label="Gebetszeiten öffnen"><div class="dhp-prayer-top"><div><div class="dhp-kicker">NÄCHSTES GEBET</div><b id="dhpPrayerName">Gebetszeiten</b><div class="dhp-tiny dhp-muted">Standortabhängige Gebetszeiten</div></div><div class="dhp-prayer-right"><div class="dhp-clock" id="dhpPrayerClock">–</div><div class="dhp-tiny dhp-muted" id="dhpPrayerRemain"></div></div></div><div class="dhp-prayer-footer"><span id="dhpPrayerDate">Gebetskalender</span><span id="dhpPrayerHijri"></span><span id="dhpPrayerPlace">Standort</span></div></button>'+
-  '<section class="dhp-welcome" aria-label="Begrüßung bei DĀR AL TAWḤĪD"><h2 class="dhp-greeting">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</h2><div class="dhp-welcome-rule" aria-hidden="true"></div><p class="dhp-intro">Willkommen bei <strong>DĀR AL TAWḤĪD</strong> – einer geordneten Wissens-App mit Beiträgen aus <strong>Qurʾān</strong>, <strong>Sunnah</strong>, den <strong>Āthār der frühen Imāme</strong> und einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah.</p></section>'+
+  '<section class="dhp-welcome" aria-label="Begrüßung bei DĀR AL TAWḤĪD"><h2 class="dhp-greeting">As-Salāmu ʿAlaikum Wa Raḥmatullāhi Wa Barakātuh</h2><h3 class="dhp-welcome-title">Willkommen bei <strong>DĀR AL TAWḤĪD</strong></h3><div class="dhp-welcome-rule" aria-hidden="true"></div><p class="dhp-intro">Eine geordnete Wissensplattform mit Beiträgen aus <strong>Qurʾān</strong>, authentischer <strong>Sunnah</strong> und den <strong>Āṯār der frühen Imāme</strong> – sowie einer umfangreichen <strong>Duʿāʾ-Sammlung</strong> aus Qurʾān und authentischer Sunnah.</p></section>'+
   '<section class="dhp-isnad" aria-labelledby="dhpQuoteTitle"><div class="dhp-isnad-label" id="dhpQuoteTitle">ÜBERLIEFERUNGSMAẞSTAB</div><blockquote class="dhp-quote"><span class="dhp-quote-text">„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“</span><div class="dhp-tiny dhp-quote-source">Muḥammad ibn Sīrīn</div></blockquote></section>'+
   '<div class="dhp-quickbar" aria-label="Schnellzugriffe">'+q+'</div>'+
   '<section class="dhp-search-box" aria-label="Intelligente Wissenssuche"><div class="dhp-search-pill"><span aria-hidden="true" class="dhp-search-icon">⌕</span><input id="dhpSearch" type="search" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" placeholder="Wissen, Qurʾān, Ḥadīṯ, Themen suchen …" aria-label="Intelligente Suche in allen Bereichen" aria-controls="dhpResults" aria-expanded="false"><button type="button" id="dhpSearchClear" aria-label="Suchtext löschen" hidden>×</button></div><div id="dhpResults" class="dhp-results" hidden role="listbox" aria-label="Suchergebnisse"></div></section>'+
@@ -340,6 +340,10 @@ function stylesheet(){
  "#darHomeHtmlParityV1 .dhp-quick-qibla{justify-content:flex-start!important;border-color:var(--dhp-capsule-accent,var(--dhp-line))!important;}",
  "#darHomeHtmlParityV1 .dhp-quick-qibla .dhp-icon3d{width:43px!important;height:43px!important;flex-basis:43px!important;}",
  "@media(max-width:359px){#darHomeHtmlParityV1 .dhp-quick{padding:8px!important;gap:6px!important;}#darHomeHtmlParityV1 .dhp-quick .dhp-icon3d{width:32px!important;height:32px!important;flex-basis:32px!important;}}",
+ "#darHomeHtmlParityV1 .dhp-welcome-title{font:600 clamp(18px,3.7vw,23px)/1.26 Georgia,serif!important;color:var(--dhp-ink)!important;margin:7px 0!important;text-wrap:balance!important;overflow-wrap:break-word!important;}",
+ "#darHomeHtmlParityV1 .dhp-welcome-title strong{font-weight:760!important;color:var(--dhp-ink)!important;}",
+ "#darHomeHtmlParityV1 .dhp-greeting{overflow-wrap:break-word!important;max-width:100%!important;white-space:normal!important;}",
+ "#darHomeHtmlParityV1 .dhp-intro{max-width:70ch!important;line-height:1.48!important;overflow-wrap:break-word!important;white-space:normal!important;height:auto!important;max-height:none!important;}",
  "html,html body{overscroll-behavior-y:none!important;}",
  ].join("\n");
 }
@@ -352,6 +356,7 @@ function create(){
  if(!root){
   root=document.createElement("main");root.id=ID;root.setAttribute("aria-label","DĀR AL TAWḤĪD · Startseite");
   root.innerHTML=html();top.insertAdjacentElement("afterend",root);
+  if(window.DARAdultHomeWelcomeV1)window.DARAdultHomeWelcomeV1.apply();
   root.addEventListener("click",click);
   var inp=root.querySelector("#dhpSearch");
   if(inp){
