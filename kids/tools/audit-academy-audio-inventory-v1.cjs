@@ -67,8 +67,9 @@ const stagingEntries=staging.entries||{};
 const eligibleStaged=Object.entries(stagingEntries).filter(([text,e])=>phrases.has(text)&&e.modelId==="eleven_v4"&&e.qaStatus==="technical-passed-awaiting-human-review"&&e.deprecatedForPlayback!==true);
 const approvedV4=Object.entries(publicEntries).filter(([text,e])=>phrases.has(text)&&e.modelId==="eleven_v4"&&e.approvedForPlayback===true);
 const audioCoverage={approvedPublicV4:approvedV4.length,technicalV4StagingAwaitingListening:eligibleStaged.length,stagingDeprecated:Object.values(stagingEntries).filter(e=>e.deprecatedForPlayback===true).length,archivedPhraseMatchesNotAudioProof:[...phrases.keys()].filter(x=>old.has(x)).length,productionBlocked:true,requiresOwnerApproval:true};
+const editorialIntegrity={count:editorialQuestions.length,missingOriginal:editorialQuestions.filter(x=>!x.originalPrompt).length,missingDisplayed:editorialQuestions.filter(x=>!x.displayPrompt).length,missingCorrect:editorialQuestions.filter(x=>!x.correctText).length,duplicateOptions:editorialQuestions.filter(x=>x.wrongTexts.includes(x.correctText)).length,unblockedForAudio:editorialQuestions.filter(x=>x.approvedForAudio!==false).length};
 const output={
- schemaVersion:1,mode:"read-only-zero-credit",notHumanApproved:true,sourceStats,audioCoverage,
+ schemaVersion:1,mode:"read-only-zero-credit",notHumanApproved:true,sourceStats,audioCoverage,editorialIntegrity,
  lessonCount:Object.keys(lessons).length+1,inlineSidqIncluded:true,
  ageVersions:(Object.keys(lessons).length+1)*ages.length,questionCount,invalidChoices,
  uniqueCandidatePhrases:phrases.size,archivedExactPhraseMatches:[...phrases.keys()].filter(x=>old.has(x)).length,
@@ -79,4 +80,4 @@ const output={
 };
 if(process.argv.includes("--summary")){const {phrases:_,editorialQuestions:__,...summary}=output;console.log(JSON.stringify(summary,null,2));}
 else console.log(JSON.stringify(output,null,2));
-if(invalidChoices||output.lessonCount!==66||output.ageVersions!==198||!questionCount)process.exitCode=1;
+if(invalidChoices||output.lessonCount!==66||output.ageVersions!==198||!questionCount||editorialIntegrity.count!==issues.filter(x=>x.code==="adapted_choice_requires_editorial_review").length||editorialIntegrity.missingOriginal||editorialIntegrity.missingDisplayed||editorialIntegrity.missingCorrect||editorialIntegrity.duplicateOptions||editorialIntegrity.unblockedForAudio)process.exitCode=1;
