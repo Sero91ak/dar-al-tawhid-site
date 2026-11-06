@@ -14,7 +14,7 @@ html[data-dar-admin-theme="layl"]{
  --admin-legacy-panel2-rgb:37,37,30;--admin-legacy-tint-rgb:184,150,84;
  --admin-legacy-gold-rgb:224,201,148;--admin-legacy-text-rgb:246,240,228;
  --admin-legacy-subtle-rgb:185,183,168;--admin-surface-solid:#171815;
- --red:#f4a6a0;
+ --red:#f4a6a0;--admin-danger-text:#f4a6a0;--admin-warning-text:#e0c994;--admin-success-text:#c6d7ba;
  --admin-page-background:radial-gradient(ellipse at 76% -12%,rgba(184,150,84,.10),transparent 44%),linear-gradient(180deg,#141612,#0c0e0d 60%);
  --admin-topbar-background:rgba(16,23,18,.93);
  --admin-rail-background:linear-gradient(180deg,#201f19,#111310);
@@ -44,7 +44,7 @@ html[data-dar-admin-theme="salbei"]{
  --admin-legacy-panel2-rgb:238,242,235;--admin-legacy-tint-rgb:94,116,101;
  --admin-legacy-gold-rgb:138,106,47;--admin-legacy-text-rgb:23,33,27;
  --admin-legacy-subtle-rgb:83,96,87;--admin-surface-solid:#f9faf6;
- --red:#9a453d;
+ --red:#9a453d;--admin-danger-text:#9a453d;--admin-warning-text:#7d5d2b;--admin-success-text:#2e6241;
  --admin-page-background:radial-gradient(ellipse at 75% -10%,rgba(94,116,101,.10),transparent 45%),linear-gradient(180deg,#f8f9f5,#f4f6f0 60%,#eef2eb);
  --admin-topbar-background:rgba(249,250,246,.96);
  --admin-rail-background:linear-gradient(180deg,#f9faf6,#edf2e9);
