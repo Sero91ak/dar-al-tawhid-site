@@ -11,14 +11,29 @@ assert.ok(Object.keys(loc.entries).length>0,"No localized women entries availabl
 const all=[];
 for(const name of fs.readdirSync(path.join(root,"data")).filter(n=>/^frauen-.*\.json$/.test(n))){
  const d=load("data/"+name);
- for(const e of d.eintraege||[])if(e.localeCatalogId)all.push({entry:e,file:name});
+ for(const e of d.eintraege||[]){
+  // New records published on/after the user rule cannot bypass localization
+  // simply by leaving out the localeCatalogId field.
+  const key=String(e.kennung||"");
+  const dates=key.match(/(?:^|-)20\d{6}(?:-|$)/g)||[];
+  const recent=dates.some(s=>String(s).replace(/\D/g,"")>="20261106");
+  if(recent && e.quellenstatus==="geprueft")
+   assert.equal(e.localeCatalogId,e.kennung,"New visible Frauen entry must have all nine languages: "+key);
+  if(e.localeCatalogId)all.push({entry:e,file:name});
+ }
 }
 const used=new Set(),ids=new Set(loc.entryIds);
 for(const {entry:e,file} of all){
  assert.ok(e.quellenstatus==="geprueft" || e.quellenstatus==="nicht-anzeigen","Invalid publication status: "+e.kennung);
  assert.equal(e.contentId,e.kennung,"Canonical internal ID must remain the original Frauen kennung");
  assert.equal(e.localeCatalogId,e.kennung,"Locale catalog must use same post ID, not Q number");
- assert.ok(!Object.hasOwn(e,"qNumber")&&!Object.hasOwn(e,"kanonischerQuellenlink"),"Q numbers forbidden unless owner assigns one: "+e.kennung);
+ if(Object.hasOwn(e,"qNumber")||Object.hasOwn(e,"kanonischerQuellenlink")) {
+  // Future *explicitly approved* Q assignments are allowed and must match a pre-existing register entry.
+  assert.equal(e.qAssignmentApprovedByUser,true,"Unapproved auto-Q number: "+e.kennung);
+  assert.ok(Number.isInteger(e.qNumber)&&e.qNumber>0,"Invalid approved Q number");
+  const regAssigned=load("q/_registry/shortlinks.json").links.find(x=>x.number===e.qNumber&&x.status!=="inactive");
+  assert.ok(regAssigned&&regAssigned.postReference===e.kennung,"Approved Q number must match the existing source register");
+ }
  assert.ok(!used.has(e.kennung),"Duplicate localized Frauen ID "+e.kennung);used.add(e.kennung);
  const entry=loc.entries[e.kennung];
  assert.ok(entry,"Missing nine-language catalog for "+e.kennung+" in "+file);
@@ -49,7 +64,10 @@ if(misnumber) {
  assert.equal(misnumber.publicListed,false);
  assert.equal(misnumber.postReference,null);
 }
-for(const x of reg.links.filter(x=>x.status!=="inactive"))assert.ok(!used.has(x.postReference),"Auto-assigned Q for localized women post");
+for(const x of reg.links.filter(x=>x.status!=="inactive"&&used.has(x.postReference))) {
+ const record=all.find(e=>e.entry.kennung===x.postReference)?.entry;
+ assert.ok(record&&record.qAssignmentApprovedByUser===true&&record.qNumber===x.number,"Women Q-link needs an explicit owner-approved number");
+}
 const js=fs.readFileSync(path.join(root,"assets/frauen/frauen-entry-locale-v1.js"),"utf8");
 new vm.Script(js,{filename:"frauen-entry-locale-v1.js"});
 assert.ok(js.includes("darAdultPreferredLocaleV1"),"App setting must choose language");
