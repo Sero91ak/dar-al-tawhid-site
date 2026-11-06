@@ -63,6 +63,13 @@ function makePicker(){
   window.dispatchEvent(new CustomEvent("dar:q-legacy:locale-ready",{detail:{number:NUMBER,locale:lang}}));
  });
 }
+function applyNote(data,code){
+ var p=find(".qsource-section p");if(!p)return;
+ var parts=Array.from(p.childNodes||[]),tail=parts.find(function(x){return x.nodeType===3&&x.textContent.trim().length>0});
+ if(!tail)return;
+ var baseline=original(tail),draft=data&&data.locales&&data.locales[code];
+ tail.textContent=code!=="de"&&draft&&draft.note?" "+draft.note:baseline;
+}
 function textBlocks(data,code){
  var x=data&&data.locales&&data.locales[code];
  var baseline=data&&data.locales&&data.locales.de;
@@ -70,6 +77,7 @@ function textBlocks(data,code){
  if(title)keep(title,code!=="de"&&x&&x.title?x.title:original(title));
  if(quote)keep(quote,code!=="de"&&x&&x.quote?("„"+x.quote.replace(/^„|“$/g,"")+"“"):original(quote));
  if(topic)keep(topic,code!=="de"&&x&&x.topic?x.topic:original(topic));
+ applyNote(data,code);
  if(x&&x.title)document.title=x.title+" · Q"+NUMBER+" | DĀR AL TAWḤĪD";
  else document.title=original(find(".qsource-title"))+" · Q"+NUMBER+" | DĀR AL TAWḤĪD";
 }
@@ -82,6 +90,12 @@ function uiLabels(code){
   if(!key&&sel===".qsource-link-title"&&/ öffnen$/.test(base))val=base.replace(/ öffnen$/,code==="de"?" öffnen":code==="ar"?" · فتح":code==="tr"?" · aç":code==="en"?" · open":code==="fr"?" · ouvrir":code==="es"?" · abrir":code==="bs"?" · otvori":code==="ku"?" · veke":" · کردنەوە");
   keep(el,val);
  })});
+ var speaker=find(".qsource-meta-row:first-child .qsource-meta-value");
+ if(speaker){
+  var baseSpeaker=original(speaker),prefix="Der Gesandte Allahs ﷺ, überliefert von ";
+  var translations={de:prefix,ar:"رسول الله ﷺ، برواية ",en:"The Messenger of Allah ﷺ, narrated by ",tr:"Allah Resûlü ﷺ; rivayet eden: ",ku:"Pêxemberê Allah ﷺ, ji aliyê ",ckb:"پێغەمبەری الله ﷺ، لە ڕیوایەتی ",bs:"Allahov Poslanik ﷺ, prenosi ",fr:"Le Messager d’Allah ﷺ, rapporté par ",es:"El Mensajero de Allah ﷺ, transmitido por "};
+  if(baseSpeaker.indexOf(prefix)===0)keep(speaker,translations[code]+baseSpeaker.slice(prefix.length));
+ }
  var brand=find(".qsource-brand-top");if(brand){
   var brandOriginal=original(brand);
   var brandLabels={de:"Beiträge nach Qurʾān, Sunnah & Āthār",ar:"مقالات على هدي القرآن والسنة والآثار",en:"Posts based on Qurʾān, Sunnah & Athār",tr:"Kur’an, Sünnet ve Âsâr'a dayalı yazılar",ku:"Nivîs li ser Qurʾān, Sunnet û Āthār",ckb:"نووسراوەکان بەپێی قورئان و سوننەت و ئاسار",bs:"Objave prema Kur'anu, sunnetu i predajama",fr:"Articles fondés sur le Coran, la Sunna et les traditions",es:"Publicaciones basadas en el Corán, la Sunna y los relatos"};
