@@ -14,13 +14,16 @@ Der Nutzer hat ausdrücklich angeordnet, dass die **Begrüßung von der hochgela
 
 ## Kanonischer deutscher Wortlaut
 
-**Salām:** As-salāmu ʿalaikum wa raḥmatullāhi wa barakātuh
+**Salām:** As-Salāmu ʿAlaikum Wa Raḥmatullāhi Wa Barakātuh
 
 **Titel:** Willkommen bei DĀR AL TAWḤĪD
 
 **Beschreibung:** Eine geordnete Wissensplattform mit Beiträgen aus Qurʾān, authentischer Sunnah und den Āṯār der frühen Imāme – sowie einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah.
 
-Die drei Textteile werden als getrennte, semantische Elemente gerendert. Der Text bleibt vollständig, ohne Ellipsen/Line-Clamp oder feste Zeilenhöhen; Breite, Umbruch und Schriftgröße passen sich der nutzbaren Pane an. Die Website-Shell und Besucher-/Test-App-Shells behalten ihre jeweiligen Layout-Owner und Navigation.
+Die drei Textteile werden als getrennte, semantische Elemente gerendert. Der Text bleibt vollständig, ohne Ellipsen/Line-Clamp oder feste Zeilenhöhen; Breite, Umbruch und Schriftgröße passen sich der nutzbaren Pane an.
+Verbindliche Hierarchie: **erst Salām**, **darunter „Willkommen bei …“**, **darunter die vollständige Wissensbeschreibung**. Jeder Text hat einen eigenen semantischen Block mit natürlichem Zeilenumbruch und ohne künstlich festgelegte Zeilenzahl. Auf schmalem Smartphone darf der Text mehrere Zeilen nutzen, auf Tablet/Desktop eine begrenzte Lesebreite. Die Begrüßung darf keinen Header, Hero, Gebetszeiten- oder Navigations-Controller verschieben oder duplizieren.
+
+Der vollständige Salām erhält in lateinischer Umschrift **immer** diese Großschreibung: `As-Salāmu ʿAlaikum Wa Raḥmatullāhi Wa Barakātuh`. Die arabische Originalschrift in `ar/ckb` wird nicht latinisiert. Die Website-Shell und Besucher-/Test-App-Shells behalten ihre jeweiligen Layout-Owner und Navigation.
 
 ## Technischer Vertrag
 
