@@ -8,6 +8,8 @@ on:
       - 'test/i18n/test-seven-*'
       - 'test/i18n/test-expanded-headings-seven.cjs'
       - 'test/i18n/test-canonical-visible-titles.cjs'
+      - 'test/i18n/audit-prophets-verse-queue.cjs'
+      - 'test/i18n/audit-title-translation-coverage.cjs'
       - 'test/i18n/adult-visible-title-drafts-seven.json'
       - 'test/assets/dar-test-turkish-ui.js'
       - 'test/assets/dar-test-seven-languages-loader.js'
@@ -42,6 +44,8 @@ jobs:
           node test/i18n/test-seven-locales.cjs
           node test/i18n/test-expanded-headings-seven.cjs
           node test/i18n/test-canonical-visible-titles.cjs
+          node test/i18n/audit-prophets-verse-queue.cjs
+          node test/i18n/audit-title-translation-coverage.cjs
           node - <<'NODE'
           const fs=require('node:fs');
           const raw=fs.readFileSync('test/i18n/adult-ui-locales-seven.json','utf8');
@@ -66,3 +70,14 @@ jobs:
           sleep 3
       - name: Verify all language pickers and RTL in Chromium
         run: python3 test/i18n/test-seven-browser-smoke.py
+
+      - name: Preserve canonical verse review queue, not published translation
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-test-prophets-quran-verse-review-queue
+          path: |
+            test/i18n/qa/prophets-verse-translation-queue.json
+            test/i18n/qa/title-translation-coverage.json
+          if-no-files-found: warn
+          retention-days: 14
