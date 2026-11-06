@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="stylesheet" href="/assets/dar-app-chrome.css?v=1">
 <script src="/assets/dar-app-chrome.js?v=1"></script>
 
@@ -12,7 +12,7 @@
 <link rel="manifest" href="/admin/manifest.json">
 <meta name="application-name" content="DAR Admin">
 <meta name="apple-mobile-web-app-title" content="DAR Admin">
-<meta name="theme-color" content="#0c0e0d">
+<meta name="theme-color" content="#10100f">
 <script>(function(){try{var p=localStorage.getItem("darAdminAppearanceV2");document.documentElement.dataset.darAdminTheme=p==="salbei"?"salbei":"layl"}catch(_){document.documentElement.dataset.darAdminTheme="layl"}})();</script>
 <meta name="description" content="DAR Admin Command Center fuer Inhalte, News und Statistik.">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -665,7 +665,7 @@ main#panel.panel{
 /* same readability fix as web/test: top titles never drown in page fill */
 .topbar,.brand,.admin-cover,.hero-title,.login{position:relative!important;z-index:5!important}
 .brand h1,.login h2,.admin-cover h2,.hero-title h2{color:var(--gold,#efd78e)!important;opacity:1!important;visibility:visible!important;-webkit-text-fill-color:var(--gold,#efd78e)!important;text-shadow:0 1px 2px rgba(0,0,0,.55)!important}
-.brand p,.login p,.admin-cover p,.hero-title p,.hint{color:#d7c9a8!important;opacity:1!important;visibility:visible!important}
+.brand p,.login p,.admin-cover p,.hero-title p,.hint{color:var(--v2muted)!important;opacity:1!important;visibility:visible!important}
 .tab,.chip{opacity:1!important}
 </style>
 
@@ -707,10 +707,12 @@ main#panel.panel{
 <link rel="stylesheet" href="/admin/live-edit.css?v=1">
 <link rel="stylesheet" href="/admin/social-review.css?v=5">
 <link rel="stylesheet" href="/admin/dar-admin-top-chrome-fix.css?v=4">
-<link rel="stylesheet" href="/admin/command-center-v2.css?v=1">
-<link rel="stylesheet" href="/admin/appearance-v2.css?v=2">
-<script src="/admin/command-center-v2.js?v=1" defer></script>
-<script src="/admin/appearance-v2.js?v=2" defer></script><!-- DAR_ADMIN_TOP_CHROME_FIX -->
+<link rel="stylesheet" href="/admin/command-center-v2.css?v=3">
+<link rel="stylesheet" href="/admin/appearance-v2.css?v=3">
+<link rel="stylesheet" href="/admin/intelligence-v3.css?v=2">
+<script src="/admin/command-center-v2.js?v=3" defer></script>
+<script src="/admin/appearance-v2.js?v=3" defer></script>
+<script src="/admin/intelligence-v3.js?v=2" defer></script><!-- DAR_ADMIN_TOP_CHROME_FIX -->
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
@@ -1050,13 +1052,13 @@ function checkNewPostMarkdown(){
   }
   updateNewPostModeStatus();
   if(!prepared.ok){
-    setUploadStatus(`<span style="color:#f87171"><strong>Prüfung fehlgeschlagen:</strong> ${esc(prepared.errors.join(" · "))}</span>`);
+    setUploadStatus(`<span style="color:var(--admin-error-ink)"><strong>Prüfung fehlgeschlagen:</strong> ${esc(prepared.errors.join(" · "))}</span>`);
     toast("Prüfung fehlgeschlagen");
     return false;
   }
   const editorial=prepareDarAdminEditorialPost(draftMarkdown,draftPostMode);
   if(!editorial.ok){
-    setUploadStatus(`<span style="color:#f87171"><strong>DĀR-Beitragsregel:</strong> ${esc(editorial.errors.join(" · "))}</span>`);
+    setUploadStatus(`<span style="color:var(--admin-error-ink)"><strong>DĀR-Beitragsregel:</strong> ${esc(editorial.errors.join(" · "))}</span>`);
     toast("DĀR-Beitragsregel nicht erfüllt");
     return false;
   }
@@ -1066,7 +1068,7 @@ function checkNewPostMarkdown(){
     if(editor)editor.value=draftMarkdown;
   }
   const status=DARSlidePostParser.formatSlideStatusLine(draftMarkdown,draftPostMode);
-  const warn=prepared.warnings?.length?`<br><span style="color:#fbbf24">${esc(prepared.warnings.join(" · "))}</span>`:"";
+  const warn=prepared.warnings?.length?`<br><span style="color:var(--admin-warning-ink)">${esc(prepared.warnings.join(" · "))}</span>`:"";
   setUploadStatus(`<strong>${esc(status)}</strong>${warn}`);
   toast(draftPostMode==="slide"?"Slide geprüft":"Einzelbeitrag geprüft");
   return true;
@@ -1135,10 +1137,10 @@ function renderPublishPushNotice(){
   const currentFile=current.filename||"";
   const lastFile=ctx?.filename||"";
   if(ctx?.push&&!ctx.push.sent&&(ctx.push.waitingForApproval||ctx.push.pending)&&lastFile){
-    return `<span style="color:#f0d98f">Push wartet für <strong>${esc(lastFile)}</strong> — „Push erneut“ nutzen.</span>`;
+    return `<span style="color:var(--admin-warning-ink)">Push wartet für <strong>${esc(lastFile)}</strong> — „Push erneut“ nutzen.</span>`;
   }
   if(currentFile&&lastFile&&currentFile!==lastFile){
-    return `<span style="color:#fbbf24">Neuer Entwurf · zuerst veröffentlichen, dann Push für den letzten Beitrag.</span>`;
+    return `<span style="color:var(--admin-warning-ink)">Neuer Entwurf · zuerst veröffentlichen, dann Push für den letzten Beitrag.</span>`;
   }
   return "";
 }
@@ -2255,8 +2257,8 @@ function renderPublishTracker(filterType,options={}){
   const tools=`<div class="publish-tracker-tools">${url?`<a href="${esc(url)}" target="_blank" rel="noopener">Live öffnen</a>`:""}<a href="${SITE_ORIGIN}/content/posts/posts-index.json?t=${Date.now()}" target="_blank" rel="noopener">Index</a>${options.hideActions?"":`<button id="${track.type==="bulk"?"bulkRetryPushBtn":"trackerRetryPushBtn"}" type="button">Push erneut</button>`}<button id="${track.type==="bulk"?"bulkClearPublishTrackBtn":"clearPublishTrackBtn"}" type="button">Zurücksetzen</button></div>`;
   const body=`<div class="publish-step-grid">${(track.steps||[]).map(s=>`<div class="publish-step" data-state="${esc(s.state||"wait")}"><span class="publish-step-dot"></span><div><b>${esc(s.label)}</b><small>${esc(publishStateLabel(s.state))}${s.note?` · ${esc(s.note)}`:""}</small></div></div>`).join("")}</div>
     ${(track.items||[]).length?`<div class="upload-status" style="margin-top:8px">${track.items.slice(0,6).map(item=>`${esc(item.title||item.filename)}: <strong>${esc(item.status||"ok")}</strong>`).join("<br>")}${track.items.length>6?`<br>… +${track.items.length-6}`:""}</div>`:""}
-    ${track.error?`<div class="upload-status" style="margin-top:8px;color:#ffb8b8">Fehler: ${esc(track.error)}</div>`:""}
-    ${track.warning?`<div class="upload-status" style="margin-top:8px;color:#fbbf24">Hinweis: ${esc(track.warning)}</div>`:""}
+    ${track.error?`<div class="upload-status" style="margin-top:8px;color:var(--admin-error-ink)">Fehler: ${esc(track.error)}</div>`:""}
+    ${track.warning?`<div class="upload-status" style="margin-top:8px;color:var(--admin-warning-ink)">Hinweis: ${esc(track.warning)}</div>`:""}
     ${tools}`;
   if(options.foldable){
     const open=track.status==="run"||track.status==="error"?" open":"";
@@ -2832,7 +2834,7 @@ function renderZakatAdmin(){
     apiBadge="⚠️ Preise mit Hinweis";
   }
   const statusHead=fresh.label||(hasLivePrices?apiBadge.replace(/^[^\s]+\s/,""):apiBadge);
-  const secretHint=!workerReady?`<div class="upload-status" style="margin-bottom:10px;border-color:rgba(255,160,80,.35);color:#ffc89a">ℹ️ <strong>Admin Worker Secret fehlt</strong> — nur für Testabruf &amp; manuelles Speichern nötig. Der Rechner in Dar Test nutzt die öffentliche API automatisch. Secret unter <b>Einstellungen → Worker-Verbindung</b> eintragen.</div>`:"";
+  const secretHint=!workerReady?`<div class="upload-status" style="margin-bottom:10px;border-color:rgba(255,160,80,.35);color:var(--admin-warning-ink)">ℹ️ <strong>Admin Worker Secret fehlt</strong> — nur für Testabruf &amp; manuelles Speichern nötig. Der Rechner in Dar Test nutzt die öffentliche API automatisch. Secret unter <b>Einstellungen → Worker-Verbindung</b> eintragen.</div>`:"";
   return `<section class="quellen-studio">
     <div class="panel">
       <div class="section-head"><h3>Zakāt Preisquellen</h3><span>${sources.length} Quellen · ${rules.length} Regeln</span></div>
@@ -2961,7 +2963,7 @@ function renderJummahPushStatusBox(payload){
   <div class="status-row"><span><b>Nächster Vorabpush</b><br>${esc(formatJummahPushTime(st.nextAdvancePush?.sendAfter))} · ${esc(st.nextAdvancePush?.time||"—")}</span><strong class="status-pill">${esc(src)}</strong></div>
   <div class="status-row"><span><b>Nächster Hauptpush</b><br>${esc(formatJummahPushTime(st.nextMainPush?.sendAfter))} · ${esc(st.nextMainPush?.time||"—")}</span><strong class="status-pill">${esc(src)}</strong></div>
   <div class="status-row"><span><b>Letzter Jumuʿah-Push</b><br>${esc(st.lastPush?`${st.lastPush.mode} · ${st.lastPush.time} · ${st.lastRecipients||0} Empfänger`:"Noch keiner")}</span><strong class="status-pill">${st.lastPush?"OK":"—"}</strong></div>
-  <div class="status-row"><span><b>OneSignal / Fehler</b><br>${err?`<strong style="color:#ff9f9f">${esc(err)}</strong>`:esc(String(st.lastOneSignalResponse?.response||"Kein Fehler"))}</span><strong class="status-pill">${err?"Fehler":"OK"}</strong></div>`;
+  <div class="status-row"><span><b>OneSignal / Fehler</b><br>${err?`<strong style="color:var(--admin-error-ink)">${esc(err)}</strong>`:esc(String(st.lastOneSignalResponse?.response||"Kein Fehler"))}</span><strong class="status-pill">${err?"Fehler":"OK"}</strong></div>`;
 }
 async function loadAdminJummahPushStatus(){
   const boxes=[document.getElementById("adminJummahPushStatus"),document.getElementById("adminJummahPushStatusActions")].filter(Boolean);
@@ -3023,7 +3025,7 @@ function renderLogin(){
 }
 function renderFeedBgAdminPanel(){
   if(window.DARFeedBgAdmin&&typeof window.DARFeedBgAdmin.renderFeedBgTab==="function")return window.DARFeedBgAdmin.renderFeedBgTab();
-  return `<section class="news-workspace"><div class="panel news-panel"><div class="section-head"><h3>Feed · Auto-Hintergründe</h3></div><div class="notice-note wide" style="color:#ffc9c3">Modul konnte nicht geladen werden. Bitte Seite mit <b>Strg+F5</b> neu laden. Skript: <code>/admin/feed-backgrounds-manager.js?v=3</code></div></div></section>`;
+  return `<section class="news-workspace"><div class="panel news-panel"><div class="section-head"><h3>Feed · Auto-Hintergründe</h3></div><div class="notice-note wide" style="color:var(--admin-error-ink)">Modul konnte nicht geladen werden. Bitte Seite mit <b>Strg+F5</b> neu laden. Skript: <code>/admin/feed-backgrounds-manager.js?v=3</code></div></div></section>`;
 }
 window.getAdminCurrentTab=()=>currentTab;
 window.renderAdminSocialShell=()=>{if(currentTab==="social")renderShell()};
@@ -3153,6 +3155,8 @@ function renderStart(ctx){
       </div>
     </div>
   </section>
+  <details class="dar-v3-legacy-tools">
+    <summary id="darV3ClassicSummary">Alle vorhandenen Module und klassischen Werkzeuge</summary>
   <section class="folder-grid">
     ${folderCard("①","Beiträge","Suchen, öffnen, speichern.","quellen","Editor")}
     ${folderCard("🌐","Redaktionsatelier","Neun Sprachen · Beiträge · Originalnachweise.","social","Widescreen-Studio")}
@@ -3173,7 +3177,8 @@ function renderStart(ctx){
     <div class="command-card"><b>Nächster Entwurf</b><span>${draftMarkdown.trim()?"Bereit":"Leer"}</span><small>${draftFilename?esc(draftFilename):"Noch kein Beitrag vorbereitet"}</small></div>
     <div class="command-card"><b>Push-Status</b><span>${"Notification" in window?"Prüfbar":"Nicht unterstützt"}</span><small>Test nur auf diesem Admin-Gerät</small></div>
     <div class="command-card"><b>Letzter Fehler</b><span>${esc(lastAdminError())}</span><small>Aus lokalem Admin-Protokoll</small></div>
-  </section>`;
+  </section>
+  </details>`;
 }
 
 /* DAR weekly read-only analytics; only aggregated figures (no individual event records). */
@@ -3199,7 +3204,7 @@ function renderWeeklyReport(){
   '<button class="btn" id="weeklyReloadBtn" type="button">Aktualisieren</button>'+
   '<button class="btn primary" id="weeklyPrintBtn" type="button" '+(!d?"disabled":"")+'>PDF erstellen / Drucken</button></div>'+
   '<p style="margin:8px 0 0;color:var(--soft);font-size:10px">PDF: Im Druckdialog „Als PDF sichern“ auswählen. Für automatische Freitag-PDFs ist der gesonderte Wochenauftrag aktiv.</p></div>';
-  if(s.error)out+='<div class="panel"><strong style="color:#ffb1a1">Daten aktuell nicht abrufbar:</strong> '+esc(s.error)+'</div>';
+  if(s.error)out+='<div class="panel"><strong style="color:var(--admin-error-ink)">Daten aktuell nicht abrufbar:</strong> '+esc(s.error)+'</div>';
   if(!d)return out+'<div class="panel"><div class="empty">'+(s.loading?"Wochenanalyse wird geladen …":"Warte auf Wochenanalyse …")+'</div></div></section>';
   out+='<div class="panel"><div class="section-head"><h3>'+esc(weeklyDate(d.start))+' – '+esc(weeklyDate(d.end))+'</h3><span>Abgeschlossene Berichtswoche</span></div>'+
   '<div class="metric-grid visitor-kpi">'+
@@ -3700,7 +3705,7 @@ function renderSlideDraftPreview(markdown){
   if(!audit||(!audit.isSlide&&!audit.hasBodyMarkers))return "";
   const ok=audit.slideCount>0;
   const titles=audit.slides.slice(0,3).map(s=>s.title).filter(Boolean).join(" · ");
-  return `<div class="upload-status" id="slideDraftPreview" style="margin-top:8px;border-color:${ok?"rgba(34,197,94,.35)":"rgba(248,113,113,.35)"}"><strong>Slide-Beitrag erkannt:</strong> ${ok?"ja":"nein"} · <strong>Anzahl Slides:</strong> ${audit.slideCount||0}${titles?`<br><small>${esc(titles)}${audit.slideCount>3?" …":""}</small>`:""}${audit.errors.length?`<br><span style="color:#f87171">${esc(audit.errors.join(" · "))}</span>`:""}${audit.warnings.length?`<br><span style="color:#fbbf24">${esc(audit.warnings.join(" · "))}</span>`:""}</div>`;
+  return `<div class="upload-status" id="slideDraftPreview" style="margin-top:8px;border-color:${ok?"rgba(34,197,94,.35)":"rgba(248,113,113,.35)"}"><strong>Slide-Beitrag erkannt:</strong> ${ok?"ja":"nein"} · <strong>Anzahl Slides:</strong> ${audit.slideCount||0}${titles?`<br><small>${esc(titles)}${audit.slideCount>3?" …":""}</small>`:""}${audit.errors.length?`<br><span style="color:var(--admin-error-ink)">${esc(audit.errors.join(" · "))}</span>`:""}${audit.warnings.length?`<br><span style="color:var(--admin-warning-ink)">${esc(audit.warnings.join(" · "))}</span>`:""}</div>`;
 }
 function markdownPreviewData(markdown){
   const text=String(markdown||"");
@@ -4552,11 +4557,11 @@ function saveLastPublishPushContext(ctx){
 function formatPushStatusLine(push){
   if(!push)return "";
   if(push.sent||(push.skipped&&/bereits gesendet/i.test(String(push.reason||"")))){
-    return `<br>Push: <strong style="color:#8fd7a8">gesendet</strong>${push.skipped?" · bereits erledigt":""}${push.id?` · ID ${esc(String(push.id))}`:""}${(push.targetUrl||push.url)?`<br>Push-Ziel: ${esc(push.targetUrl||push.url)}`:""}`;
+    return `<br>Push: <strong style="color:var(--admin-success-ink)">gesendet</strong>${push.skipped?" · bereits erledigt":""}${push.id?` · ID ${esc(String(push.id))}`:""}${(push.targetUrl||push.url)?`<br>Push-Ziel: ${esc(push.targetUrl||push.url)}`:""}`;
   }
-  if(push.skipped)return `<br>Push: <strong style="color:#f0d98f">übersprungen</strong> · ${esc(String(push.reason||"übersprungen"))}`;
-  if(push.pending||push.waitingForLive)return `<br>Push: <strong style="color:#f0d98f">wartet auf stabile Live-Verfügbarkeit</strong>${push.targetUrl?`<br>Push-Ziel: ${esc(push.targetUrl)}`:""}`;
-  return `<br>Push: <strong style="color:#ff9f9f">fehlgeschlagen</strong> · ${esc(String(push.reason||push.message||"unbekannt"))}`;
+  if(push.skipped)return `<br>Push: <strong style="color:var(--admin-warning-ink)">übersprungen</strong> · ${esc(String(push.reason||"übersprungen"))}`;
+  if(push.pending||push.waitingForLive)return `<br>Push: <strong style="color:var(--admin-warning-ink)">wartet auf stabile Live-Verfügbarkeit</strong>${push.targetUrl?`<br>Push-Ziel: ${esc(push.targetUrl)}`:""}`;
+  return `<br>Push: <strong style="color:var(--admin-error-ink)">fehlgeschlagen</strong> · ${esc(String(push.reason||push.message||"unbekannt"))}`;
 }
 function resolvePushRetryTarget(){
   const markdown=document.getElementById("postMarkdownInput")?.value||draftMarkdown||"";
@@ -4578,7 +4583,7 @@ async function retryLivePush(){
   const ctx=readLastPublishPushContext();
   if(!ctx?.filename||!ctx?.commitSha){
     toast("Kein veröffentlichter Beitrag – zuerst veröffentlichen");
-    setUploadStatus(`<span style="color:#ffb8b8">Noch kein Beitrag veröffentlicht. Zuerst <strong>Veröffentlichen &amp; Live-Push</strong> nutzen.</span>`);
+    setUploadStatus(`<span style="color:var(--admin-error-ink)">Noch kein Beitrag veröffentlicht. Zuerst <strong>Veröffentlichen &amp; Live-Push</strong> nutzen.</span>`);
     return;
   }
   const target=resolvePushRetryTarget();
@@ -4604,12 +4609,12 @@ async function retryLivePush(){
     const push=result.push||{};
     const live=result.liveCheck||result.live||{};
     const already=!!(result.skipped||push.skipped||(push.sent&&/bereits gesendet/i.test(String(result.reason||push.reason||""))));
-    let html=`Push für <strong>${esc(filename)}</strong> · Live: <strong style="color:${live.ok||push.sent||already?"#8fd7a8":"#f0d98f"}">${live.ok||push.sent||already?"bereit":"prüft"}</strong>`;
+    let html=`Push für <strong>${esc(filename)}</strong> · Live: <strong style="color:${live.ok||push.sent||already?"var(--admin-success-ink)":"var(--admin-warning-ink)"}">${live.ok||push.sent||already?"bereit":"prüft"}</strong>`;
     if(live.diagnosis&&!live.ok&&!already&&!push.pending)html+=` · ${esc(live.diagnosis)}`;
     html+=formatPushStatusLine(push);
-    if(already)html+=` · <span style="color:#8fd7a8">bereits gesendet</span>`;
-    else if(push.pending)html+=` · <span style="color:#f0d98f">Worker sendet automatisch nach, sobald live</span>`;
-    else if(push.sent)html+=` · <span style="color:#8fd7a8">gesendet</span>`;
+    if(already)html+=` · <span style="color:var(--admin-success-ink)">bereits gesendet</span>`;
+    else if(push.pending)html+=` · <span style="color:var(--admin-warning-ink)">Worker sendet automatisch nach, sobald live</span>`;
+    else if(push.sent)html+=` · <span style="color:var(--admin-success-ink)">gesendet</span>`;
     setUploadStatus(html);
     saveLastPublishPushContext({...ctx,filename,postId,markdown,pushSent:!!(push.sent||already)});
     if(already||push.sent){
@@ -4644,7 +4649,7 @@ async function prepareNextPostNumber(){
     draftNextNumber=info.nextNumber;
     draftFilename=suggestFilename(draftMarkdown,draftNextNumber);
     const input=document.getElementById("postFilenameInput");if(input)input.value=draftFilename;
-    setUploadStatus(`Beiträge im Index: <strong>${info.postCount}</strong><br>Nächste Nummer: <strong>${info.nextNumber}</strong><br>Letzter Beitrag: <strong>${esc(info.lastFilename||"—")}</strong>${info.lastSerial?` · Nr. <strong>${info.lastSerial}</strong>`:""}<br>Dateiname vorgeschlagen: <strong>${esc(draftFilename)}</strong>${info.serialWarning?`<br><span style="color:#f87171">${esc(info.serialWarning)}</span>`:""}${info.workerPostCount!=null?`<br>Worker/GitHub: <strong>${info.workerPostCount}</strong> · Quelle: ${esc(info.source)}`:""}`);
+    setUploadStatus(`Beiträge im Index: <strong>${info.postCount}</strong><br>Nächste Nummer: <strong>${info.nextNumber}</strong><br>Letzter Beitrag: <strong>${esc(info.lastFilename||"—")}</strong>${info.lastSerial?` · Nr. <strong>${info.lastSerial}</strong>`:""}<br>Dateiname vorgeschlagen: <strong>${esc(draftFilename)}</strong>${info.serialWarning?`<br><span style="color:var(--admin-error-ink)">${esc(info.serialWarning)}</span>`:""}${info.workerPostCount!=null?`<br>Worker/GitHub: <strong>${info.workerPostCount}</strong> · Quelle: ${esc(info.source)}`:""}`);
     addAdminLog("Prüfung","Nächste Beitragsnummer ermittelt",`${info.nextNumber} · ${draftFilename}`);
   }catch(e){setUploadStatus(`Fehler: ${esc(e.message||e)}`)}
 }
@@ -4661,11 +4666,11 @@ async function uploadPostViaWorker(){
         status:"published"
       })
     : {ok:true,markdown:draftMarkdown,errors:[],warnings:[]};
-  if(!prepared.ok){setUploadStatus(`<span style="color:#f87171"><strong>${draftPostMode==="slide"?"Slide-Fehler":"Einzelbeitrag-Fehler"}:</strong> ${esc(prepared.errors.join(" · "))}</span>`);finishPublishTrack("error",prepared.errors.join(" · "));return}
+  if(!prepared.ok){setUploadStatus(`<span style="color:var(--admin-error-ink)"><strong>${draftPostMode==="slide"?"Slide-Fehler":"Einzelbeitrag-Fehler"}:</strong> ${esc(prepared.errors.join(" · "))}</span>`);finishPublishTrack("error",prepared.errors.join(" · "));return}
   if(prepared.warnings?.length)addAdminLog("Slide","Hinweise",prepared.warnings.join(" · "));
   const editorial=prepareDarAdminEditorialPost(prepared.markdown||draftMarkdown,draftPostMode);
   if(!editorial.ok){
-    setUploadStatus(`<span style="color:#f87171"><strong>DĀR-Beitragsregel:</strong> ${esc(editorial.errors.join(" · "))}</span>`);
+    setUploadStatus(`<span style="color:var(--admin-error-ink)"><strong>DĀR-Beitragsregel:</strong> ${esc(editorial.errors.join(" · "))}</span>`);
     finishPublishTrack("error",editorial.errors.join(" · "));
     return;
   }
@@ -4679,9 +4684,9 @@ async function uploadPostViaWorker(){
     uploadBusy=true;setUploadStatus("Prüfe aktuelle Nummer und bereite Worker-Veröffentlichung vor...");
     updatePublishStep("markdown","ok",draftPostMode==="slide"?`Slide · ${prepared.info?.slideCount||0}`:"Markdown vorhanden");
     const info=await resolveNextPostNumberInfo();
-    if(info.duplicateGlobal){updatePublishStep("number","error",`Nr. ${info.postCount} doppelt`);finishPublishTrack("error","Doppelte Beitragsnummer im Index");setUploadStatus(`<span style="color:#f87171"><strong>Veröffentlichung blockiert:</strong> Beitrags-Nr. ${info.postCount} ist mehrfach im Index. Bitte zuerst das Duplikat löschen.</span>`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen"}return}
+    if(info.duplicateGlobal){updatePublishStep("number","error",`Nr. ${info.postCount} doppelt`);finishPublishTrack("error","Doppelte Beitragsnummer im Index");setUploadStatus(`<span style="color:var(--admin-error-ink)"><strong>Veröffentlichung blockiert:</strong> Beitrags-Nr. ${info.postCount} ist mehrfach im Index. Bitte zuerst das Duplikat löschen.</span>`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen"}return}
     const blockedTitle=await assertNotDeletedDraft(draftMarkdown);
-    if(blockedTitle){updatePublishStep("number","error","Gelöschter Beitrag");finishPublishTrack("error","Gelöschter Beitrag");setUploadStatus(`<span style="color:#f87171"><strong>Veröffentlichung blockiert:</strong> „${esc(blockedTitle)}“ wurde gelöscht und darf nicht erneut online gestellt werden.</span>`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen"}return}
+    if(blockedTitle){updatePublishStep("number","error","Gelöschter Beitrag");finishPublishTrack("error","Gelöschter Beitrag");setUploadStatus(`<span style="color:var(--admin-error-ink)"><strong>Veröffentlichung blockiert:</strong> „${esc(blockedTitle)}“ wurde gelöscht und darf nicht erneut online gestellt werden.</span>`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen"}return}
     const next=info.nextNumber;
     updatePublishStep("number","ok",`Nr. ${next}`);
     if(!draftFilename)draftFilename=suggestFilename(draftMarkdown,next);
@@ -4696,7 +4701,7 @@ async function uploadPostViaWorker(){
         id:frontmatterValue(markdown,"id"),
         status:"published"
       });
-      if(!again.ok){finishPublishTrack("error",again.errors.join(" · "));setUploadStatus(`<span style="color:#f87171">${esc(again.errors.join(" · "))}</span>`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen"}return}
+      if(!again.ok){finishPublishTrack("error",again.errors.join(" · "));setUploadStatus(`<span style="color:var(--admin-error-ink)">${esc(again.errors.join(" · "))}</span>`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen"}return}
       markdown=again.markdown;
     }
     const editorialFinal=prepareDarAdminEditorialPost(markdown,draftPostMode);
@@ -4772,7 +4777,7 @@ async function uploadPostViaWorker(){
     updatePublishMeta({pushStatus:push&&push.sent?"gesendet":push?.pending?"wartet auf Live (Hintergrund)":push?`nicht gesendet: ${push.reason||push.message||"unbekannt"}`:"kein Push-Status"});
     // Beitrag erstellt + Push im Hintergrund = kein „Fehler“-Status (hängte die UI sonst als Fehler fest)
     finishPublishTrack(live.file||push?.pending||result.commitSha?"ok":"error",live.file||push?.pending||result.commitSha?"":live.reason||"Live-Datei noch nicht erreichbar");
-    setUploadStatus(`${result.updated?"Beitrag aktualisiert":"Veröffentlicht"}: <strong>${esc(uploadedFilename)}</strong> · Nr. <strong>${esc(uploadedNumber)}</strong>${draftPostMode==="slide"?` · <strong>Slide</strong>`:""}${formatPushStatusLine(push||result.push)}${push?.pending?" · <span style=\"color:#f0d98f\">Push wartet — „Push erneut“ nutzen.</span>":""}`);
+    setUploadStatus(`${result.updated?"Beitrag aktualisiert":"Veröffentlicht"}: <strong>${esc(uploadedFilename)}</strong> · Nr. <strong>${esc(uploadedNumber)}</strong>${draftPostMode==="slide"?` · <strong>Slide</strong>`:""}${formatPushStatusLine(push||result.push)}${push?.pending?" · <span style=\"color:var(--admin-warning-ink)\">Push wartet — „Push erneut“ nutzen.</span>":""}`);
     addAdminLog("Veröffentlicht","Beitrag über Cloudflare Worker veröffentlicht",uploadedFilename);
     draftMarkdown="";
     draftFilename="";
