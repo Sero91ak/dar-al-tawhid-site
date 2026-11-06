@@ -54,11 +54,11 @@ html[data-dar-visitor-frontstage="1"] body.has-bottom-nav #appView.view :is(
 }
 /* Any narrow actual fold stage must show a single reading pane. This is not
    a destructive DOM split or a new desktop breakpoint. */
-html[data-dar-visitor-frontstage="1"] body.has-bottom-nav .dar-fold[data-fold-mode="dual"]{
+html[data-dar-visitor-frontstage="1"][data-fold-capacity="single"] body.has-bottom-nav .dar-fold[data-fold-mode="dual"]{
  grid-template-columns:minmax(0,1fr)!important;
  width:100%!important;min-width:0!important;max-width:100%!important;
 }
-html[data-dar-visitor-frontstage="1"] body.has-bottom-nav .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane){
+html[data-dar-visitor-frontstage="1"][data-fold-capacity="single"] body.has-bottom-nav .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane){
  grid-column:1!important;min-width:0!important;max-width:100%!important;
 }
 /* Home typography and metadata scale to the actual cover width instead of

@@ -161,6 +161,7 @@
   var lastRenderedShell = null;
   var lastRenderedRoute = "";
   var restoreFrame = 0;
+  var lastDualState = null;
   function rememberFoldScroll(event) {
     if (!isDual() || !event || !event.target || !event.target.closest) return;
     var el = event.target;
@@ -171,10 +172,10 @@
     var type = el.classList.contains("dar-fold__rail") ? "rail" : "pane";
     scrollMemory[family + ":" + type] = Math.max(0, el.scrollTop || 0);
   }
-  function restoreFoldScrollAfterRender() {
+  function restoreFoldScrollAfterRender(force) {
     if (!isDual() || !document.querySelector) return;
     var shell = document.querySelector(".dar-fold[data-fold-mode='dual']");
-    if (!shell || shell === lastRenderedShell) return;
+    if (!shell || (shell === lastRenderedShell && !force)) return;
     var route = String(global.location && global.location.hash || "");
     var family = shell.getAttribute("data-fold-family") || "other";
     var routeChanged = lastRenderedRoute !== route;
@@ -224,17 +225,37 @@
     restoreFoldScrollAfterRender();
   }
 
+  /* An overflow:auto pane becomes overflow:visible in compact mode.
+     Browsers can reset scrollTop when its scroll container disappears.
+     Restore the last captured pane/rail positions after returning to dual,
+     even if the DOM shell has not been replaced by the SPA router. */
+  function restoreAfterDualTransition() {
+    var nowDual = isDual();
+    var wasDual = lastDualState;
+    lastDualState = nowDual;
+    if (nowDual && wasDual === false) {
+      global.requestAnimationFrame(function () {
+        restoreFoldScrollAfterRender(true);
+      });
+    }
+  }
+
   function start() {
     syncRootClass();
     bindFoldScrollRetention();
+    lastDualState = isDual();
     global.addEventListener(
       "dar:layoutchange",
       function () {
         scheduleSync();
+        restoreAfterDualTransition();
       },
       { passive: true }
     );
-    global.addEventListener("resize", scheduleSync, { passive: true });
+    global.addEventListener("resize", function () {
+      scheduleSync();
+      restoreAfterDualTransition();
+    }, { passive: true });
     global.addEventListener(
       "orientationchange",
       function () {

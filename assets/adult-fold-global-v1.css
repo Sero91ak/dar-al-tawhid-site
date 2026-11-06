@@ -83,23 +83,23 @@ html[data-layout-surface="phone-landscape"] body .prophets-layout--dual > :is(.p
 /* DUAL: the same geometry is authoritative everywhere, including Test's
  * user-selectable side-tab placement. Selection is ALWAYS left, reading right.
  * Fold hinge stays between columns; no child may grow beyond its track. */
-html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"]{
+html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]){
   display:grid!important;
   grid-template-columns:minmax(300px,var(--fold-rail-current,320px)) minmax(0,1fr)!important;
-  column-gap:clamp(12px,1.6vw,18px)!important;
+  column-gap:var(--fold-gap-current,clamp(12px,1.6vw,18px))!important;
   align-items:stretch!important;
   width:100%!important;
   max-width:100%!important;
   min-width:0!important;
 }
-html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"] > .dar-fold__rail{
+html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > .dar-fold__rail{
   display:block!important;
   grid-column:1!important;
   grid-row:1!important;
   min-width:0!important;
   max-width:100%!important;
 }
-html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"] > .dar-fold__pane{
+html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > .dar-fold__pane{
   display:block!important;
   grid-column:2!important;
   grid-row:1!important;
@@ -132,4 +132,36 @@ html[data-layout-surface="phone-landscape"]:not(.dar-test-side-nav) body.has-bot
  html[data-layout] body .dar-fold,
  html[data-layout] body .dar-fold__rail,
  html[data-layout] body .dar-fold__pane{transition:none!important}
+}
+
+/* A route can deliberately request a single selection/reading pane even
+ * when the viewport could display two. Never let generic workspace CSS
+ * override this semantic forceSingle decision. Both nodes stay mounted. */
+html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"][data-fold-force="single"]{
+ display:block!important;grid-template-columns:minmax(0,1fr)!important;gap:0!important;
+ height:auto!important;max-height:none!important;overflow:visible!important;
+}
+html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"][data-fold-force="single"] > :is(.dar-fold__rail,.dar-fold__pane){
+ position:static!important;width:100%!important;height:auto!important;
+ min-width:0!important;max-width:100%!important;max-height:none!important;
+ overflow:visible!important;grid-column:auto!important;grid-row:auto!important;
+}
+html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"][data-fold-force="single"][data-fold-single-show="rail"] > .dar-fold__pane,
+html[data-fold-capacity="dual"][data-layout-surface="workspace"] body .dar-fold[data-fold-mode="dual"][data-fold-force="single"][data-fold-single-show="pane"] > .dar-fold__rail{display:none!important}
+
+/* DAR_POSTS_ROUTE_NO_BLACK_SWIPE_V1_20261101
+ * The five-tab "Beiträge" button opens #topics (NOT the legacy feed).
+ * The old page-enter transforms the entire #appView by 9%, exposing the
+ * underlying near-black app shell for a moment. Keep the entire topics page
+ * painted in-place; do not alter other routes or the bottom-nav animation. */
+html[data-layout] body.is-topics-route #appView.view:is(
+ .page-enter-forward,.page-enter-back,.tab-swipe-left,.tab-swipe-right
+){
+ animation:none!important;
+ -webkit-animation:none!important;
+ transform:none!important;
+ -webkit-transform:none!important;
+ transition:none!important;
+ will-change:auto!important;
+ opacity:1!important;
 }

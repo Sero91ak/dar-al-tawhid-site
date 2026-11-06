@@ -95,4 +95,8 @@ assert.match(boot,/function stopBootObserver\(\)/,"Boot observer must have a cle
 assert.match(boot,/function releaseChrome\(\) \{[\s\S]*?clearRamp\(\);\s*stopBootObserver\(\);/,"Emergency release must cancel interval and observer");
 assert.match(boot,/function finish\(\) \{[\s\S]*?clearRamp\(\);\s*stopBootObserver\(\);/,"Normal finish must disconnect observer");
 assert.match(boot,/if \(finished \|\| !bootObserver\) return;/,"Late DOMContentLoaded must not reattach a boot observer");
+/* Fold/Duo checks run inside the pre-existing approved CI job. */
+require("./adult-fold-global-regression.cjs");
+require("./adult-fold-browser-smoke.cjs");
+require("./adult-fold-route-integration.cjs");
 console.log("OK: responsive layout, fold mutation filtering, boot timer/observer lifecycle");
