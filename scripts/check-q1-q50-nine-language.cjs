@@ -28,7 +28,7 @@ new vm.Script(script,{filename:"assets/q-legacy-nine-language-v1.js"});
 for(let number=1;number<=50;number++){
  const raw=read("q/"+number+"/index.html");
  assert.ok(raw.length>1000,"Missing Q"+number+" original source");
- assert.match(raw,/<html lang="de"/i,"German canonical source missing at Q"+number);
+ assert.match(raw,/<html\b[^>]*\blang\s*=\s*["\x27]de["\x27]/i,"German canonical source missing at Q"+number);
  if(number>=49){assert.match(raw,/q\d+-localized\.js/,"Q"+number+" must retain dedicated 9-language adapter");continue}
  if(number>=6)continue;
  const p=data.pages[number];
@@ -40,8 +40,6 @@ for(let number=1;number<=50;number++){
  assert.equal(p.sourceGitBlobSha,blob,"Q"+number+" changed; stale foreign drafts require re-review");
  assert.deepEqual(Object.keys(p.locales),codes);
  const nLinks=(raw.match(/<a class="qsource-link\b/g)||[]).length;
- const expected=[1,2,0,0,0][number-1]; // number of teaching quiz questions belongs to independent lessons
- assert.ok(expected>=0);
  for(const code of codes){
    const l=p.locales[code],required=["title","quote","speaker","topic","section","noteLabel","noteBody","linkTitles","linkSubs"];
    for(const key of required)assert.ok(l[key],code+" Q"+number+" missing "+key);
