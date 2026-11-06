@@ -1,5 +1,5 @@
 /* DĀR ADMIN / Command Center V2 / admin surface only */
-:root{--v2bg:#061410;--v2ink:#f5f1e5;--v2gold:#e6ca8b;--v2mint:#91d7bd;--v2muted:#a9b8b2;--v2line:rgba(205,202,156,.2);--v2rail:245px;--v2ease:cubic-bezier(.22,1,.36,1)}
+:root{--v2bg:#0c0e0d;--v2ink:#f6f0e4;--v2gold:#e0c994;--v2mint:#d3bc87;--v2muted:#b9b7a8;--v2line:rgba(184,150,84,.25);--v2rail:245px;--v2ease:cubic-bezier(.22,1,.36,1)}
 body.dar-v2-active{background:var(--admin-page-background)!important;color:var(--v2ink)!important;padding:0!important;margin:0!important;overflow-x:hidden!important}
 body.dar-v2-active .app{width:calc(100% - var(--v2rail))!important;max-width:none!important;min-width:0!important;margin:0 0 0 var(--v2rail)!important;padding:0!important;min-height:100dvh!important}
 body.dar-v2-active #topbar{position:sticky!important;top:0!important;z-index:70!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;padding:9px clamp(14px,2vw,32px)!important;margin:0!important;min-height:70px!important;border:0!important;border-bottom:1px solid var(--v2line)!important;background:var(--admin-topbar-background)!important;backdrop-filter:blur(21px);border-radius:0!important;box-shadow:none!important}
