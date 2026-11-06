@@ -97,7 +97,7 @@ body.dar-v2-active #panel :is(
 ){min-width:0;max-width:100%}
 /* Legacy admin workspace must follow the width after subtracting the rail.
    Visitors and local change history become stacked, never invisible. */
-@container (max-width:760px){
+@container (max-width:720px){
  body.dar-v2-active #panel .admin-actions-layout.split,
  body.dar-v2-active #panel :is(.hero,.split,.quellen-grid,.ordner-grid,.visitor-grid,.upload-grid,.live-preview-shell){
   grid-template-columns:minmax(0,1fr)!important
