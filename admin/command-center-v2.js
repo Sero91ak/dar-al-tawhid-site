@@ -64,9 +64,21 @@ function toggleDrawer(open){
  $("#darV2More")?.setAttribute("aria-expanded",String(drawer));
 }
 function closeDrawer(){toggleDrawer(false)}
+const searchAliases={
+ quellen:["quelle","originalbeleg","q-id","nachweis","posts","beitrag"],
+ social:["redaktion","sprachen","übersetzung","neun sprachen","sprache","atelier"],
+ wissensbereich:["wissen","lehrbereich","frauen","männer","lernlinks"],
+ actions:["entwurf","veröffentlichen","neuer post","schreiben","publizieren"],
+ tech:["deploy","freigabe","release","cloudflare","system","health"],
+ besucher:["statistik","besucherzahlen","analytik","aufrufe"],
+ kennwoerter:["zugang","passwort","login"],
+ bibliothek:["pdf","buch","bibliothek"],
+ settings:["thema","design","hell","dunkel","salbei","layl"]
+};
+const searchNormalize=s=>String(s||"").normalize("NFKD").replace(/[\\u0300-\\u036f]/g,"").toLocaleLowerCase("de-DE");
 function renderSearch(){
- searchResults.replaceChildren();const term=searchField.value.trim().toLocaleLowerCase("de-DE");
- const matches=options().filter(x=>x.title.toLocaleLowerCase("de-DE").includes(term));
+ searchResults.replaceChildren();const term=searchNormalize(searchField.value.trim());
+ const matches=options().filter(x=>[x.title,...(searchAliases[x.id]||[])].some(word=>searchNormalize(word).includes(term)));
  matches.forEach(x=>searchResults.append(navButton(x.id,x.title)));
  if(!matches.length)searchResults.append(el("p","dar-v2-empty","Kein passender Bereich"));
 }
