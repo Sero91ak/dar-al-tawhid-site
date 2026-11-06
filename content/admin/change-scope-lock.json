@@ -155,6 +155,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "admin-intelligence-v3-readonly-20261106",
+      "at": "2026-11-06T06:28:00+01:00",
+      "approvedBy": "user-explicit-20261106-begin-v3-admin-dashboard-umbau",
+      "reason": "Time-limited, exact-file development authorization for DĀR Admin Intelligence V3 read-only dashboard integration, V2 presentation adapter, 9-locale UI and regression. No visitor or Kids surface, publishing logic, server/AI API, Auth, Cloudflare, OneSignal, prayer, protected workflows or secrets. Preview PR only until browser approval and existing deploy blocker cleared.",
+      "paths": [
+        "admin/index.html",
+        "admin/command-center-v2.js",
+        "admin/intelligence-v3.js",
+        "admin/intelligence-v3.css",
+        "admin/tests/intelligence-v3.test.cjs"
+      ],
+      "expiresAt": "2026-11-13T23:59:00+01:00"
+    },
+    {
       "id": "dar-admin-v2-theme-responsive-readonly-tests-20261105",
       "at": "2026-11-05T19:38:00.000Z",
       "approvedBy": "user-explicit-20261105-dar-admin-responsive-video-layl-salbei-continue",
