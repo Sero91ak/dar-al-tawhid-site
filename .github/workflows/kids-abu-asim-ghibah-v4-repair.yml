@@ -1,0 +1,122 @@
+name: Kids Salaf Ghībah one-clip repair (staging only)
+on:
+  push:
+    branches: [audio/abu-asim-ghibah-v4-repair-20261029]
+    paths: [.github/workflows/kids-abu-asim-ghibah-v4-repair.yml]
+  pull_request:
+    branches: [main]
+    paths: [.github/workflows/kids-abu-asim-ghibah-v4-repair.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: kids-ghibah-repair-once
+  cancel-in-progress: true
+jobs:
+  fix-one-audio:
+    if: github.ref == 'refs/heads/audio/abu-asim-ghibah-v4-repair-20261029' || github.head_ref == 'audio/abu-asim-ghibah-v4-repair-20261029'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audio/abu-asim-ghibah-v4-repair-20261029
+          persist-credentials: true
+          sparse-checkout: |
+            .github/workflows
+            kids/data/salaf-library-v1.json
+            kids/review-only/salaf-v4-ghibah-repair-20261029/
+          sparse-checkout-cone-mode: false
+      - name: Install FFmpeg and FFprobe for deterministic three-part AAC splice
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg
+          ffmpeg -version | head -n 1
+          ffprobe -version | head -n 1
+      - name: Use existing ElevenLabs history item; create no paid speech
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import base64,hashlib,json,os,pathlib,subprocess,urllib.request,urllib.parse
+          ROOT=pathlib.Path('.')
+          SID='abu-asim-die-zunge-bewahren'
+          H='ejDIGOWmdxQkF6WaV0jO'
+          VOICE='DkU7j9uO4ZEtLD2iRZSH'
+          ORIGINAL='eaebc06624b95886afacdced30c1ab4cdbd04e629a20b2f0292169bb3d6deb14'
+          SOURCE='kids/review-only/salaf-v4-complete-20261028/salaf-v4-pending-06/'+SID+'.m4a'
+          EXPECT='Das arabische Wort dafür heißt غِيبَة. Es bedeutet, etwas über einen anderen Menschen zu sagen, das er nicht gern über sich hören würde, obwohl es wahr ist. Wenn eine schlechte Behauptung auch noch erfunden ist, wird daraus zusätzlich eine Lüge.'
+          START,END=48.643,63.124
+          def sha(b): return hashlib.sha256(b).hexdigest()
+          def get(url,headers):
+              with urllib.request.urlopen(urllib.request.Request(url,headers=headers),timeout=45) as r: return r.read()
+          def duration(p):
+              return float(subprocess.check_output(['ffprobe','-v','error','-show_entries','format=duration','-of','default=nw=1:nk=1',str(p)]).decode().strip())
+          if not os.getenv('ELEVENLABS_API_KEY'): raise RuntimeError('No ElevenLabs key: no changes')
+          cat=json.loads(pathlib.Path('kids/data/salaf-library-v1.json').read_text())
+          story=next(x for x in cat['items'] if x['id']==SID)
+          assert story['audioPreview']['sha256']==ORIGINAL and story['audioMaster'] is None
+          assert story['masterStoryText'].split('\n\n')[4].startswith('Das arabische Wort dafür heißt Ġībah.')
+          eh={'xi-api-key':os.environ['ELEVENLABS_API_KEY'].strip(),'User-Agent':'DAR-Kids-one-clip-repair'}
+          h=json.loads(get('https://api.elevenlabs.io/v1/history/'+H,eh))
+          print('HISTORY_METADATA_SAFE', {k:h.get(k) for k in ('history_item_id','voice_id','model_id','voice_name','status')},flush=True)
+          # ElevenLabs creative-flow history may omit voice_id; the finished flow generation AvTZbBjHEL6bPVM787Rl independently identifies voice DkU7j9uO4ZEtLD2iRZSH.
+          assert h.get('voice_id') in (None,VOICE), 'History item explicitly mismatches expected master voice'
+          assert h.get('model_id')=='eleven_v4', 'History item model_id mismatches eleven_v4'
+          raw_history_text=h.get('text')
+          print('HISTORY_TEXT_SAFE',{'present':bool(raw_history_text),'length':len(raw_history_text or '')},flush=True)
+          # Creative V4 history may omit text. The completed generation AvTZbBjHEL6bPVM787Rl independently attests the exact prompt in ElevenLabs.
+          assert not raw_history_text or raw_history_text.strip()==EXPECT, 'History item explicitly mismatches correction prompt'
+          patch=get('https://api.elevenlabs.io/v1/history/'+H+'/audio',eh)
+          assert len(patch)>8000
+          gh={'Authorization':'Bearer '+os.environ['GH_TOKEN'].strip(),'Accept':'application/vnd.github+json','User-Agent':'DAR-Kids-Repair','X-GitHub-Api-Version':'2022-11-28'}
+          oldobj=json.loads(get('https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/'+urllib.parse.quote(SOURCE,safe='/')+'?ref=4e4eef2a051a87797960d5102373b200131bb1e8',gh))
+          if oldobj.get('encoding')=='base64':
+              old=base64.b64decode(oldobj['content'])
+          else:
+              assert oldobj.get('sha'), 'GitHub large-file metadata missing blob SHA'
+              blob=json.loads(get('https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/git/blobs/'+oldobj['sha'],gh))
+              assert blob.get('encoding')=='base64', 'Git blob must be base64'
+              old=base64.b64decode(blob['content'])
+          assert sha(old)==ORIGINAL, 'Original SHA mismatch'
+          out=pathlib.Path('kids/review-only/salaf-v4-ghibah-repair-20261029')
+          out.mkdir(parents=True,exist_ok=True)
+          source=pathlib.Path('/tmp/abu-asim-original.m4a')
+          replacement=pathlib.Path('/tmp/abu-asim-ghibah-v4.mp3')
+          target=out/(SID+'.m4a')
+          source.write_bytes(old);replacement.write_bytes(patch)
+          original_duration=duration(source);replacement_duration=duration(replacement)
+          assert 151<original_duration<154 and 10<replacement_duration<25
+          rate='aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo'
+          filt=f'[0:a]atrim=0:{START},asetpts=PTS-STARTPTS,{rate}[a];[1:a]asetpts=PTS-STARTPTS,{rate}[b];[0:a]atrim=start={END},asetpts=PTS-STARTPTS,{rate}[c];[a][b][c]concat=n=3:v=0:a=1[d]'
+          subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(source),'-i',str(replacement),'-filter_complex',filt,'-map','[d]','-c:a','aac','-b:a','192k','-movflags','+faststart',str(target)],check=True)
+          fixed=target.read_bytes();fixed_duration=duration(target)
+          assert len(fixed)>8000 and sha(fixed)!=ORIGINAL
+          assert abs(fixed_duration-(original_duration-(END-START)+replacement_duration))<0.3
+          delta=fixed_duration-original_duration
+          cues=[]
+          for i,c in enumerate(story['audioPreview']['timings']):
+              s=float(c['start']);e=float(c['end'])
+              if i==4: e=START+replacement_duration
+              elif i>4: s+=delta;e+=delta
+              cues.append({'paragraphIndex':i,'start':round(s,3),'end':round(e,3)})
+          report={'storyId':SID,'originalAudioSha256':ORIGINAL,'repairedAudioSha256':sha(fixed),'textSha256':story['audioPreview']['textSha256'],'elevenLabsHistoryItemId':H,'voiceId':VOICE,'modelId':'eleven_v4','replacementParagraphIndex':4,'correctedWord':'غِيبَة','repairedDurationSec':round(fixed_duration,3),'estimatedTimings':cues,'timingStatus':'estimated-awaiting-actual-alignment','humanListeningApproved':False,'iphonePlaybackPassed':None,'ipadPlaybackPassed':None,'approvedForPlayback':False,'releaseEnabled':False,'publicReleaseBlocked':True,'status':'STAGED-ONLY-REQUIRES-HUMAN-AUDIO-QA'}
+          (out/'repair-evidence.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+          print('STAGED',SID,sha(fixed),fixed_duration,'NO PUBLIC RELEASE')
+          PY
+      - name: Keep this in the isolated review branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add kids/review-only/salaf-v4-ghibah-repair-20261029
+          if ! git diff --cached --quiet; then
+            git commit -m 'audio(kids): stage repaired Ghībah clip for independent QA'
+            git push origin HEAD:audio/abu-asim-ghibah-v4-repair-20261029
+          fi
