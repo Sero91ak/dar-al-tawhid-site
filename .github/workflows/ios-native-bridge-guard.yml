@@ -16,6 +16,7 @@ on:
       - assets/dar-setup-hub.js
       - test/assets/dar-setup-hub.js
       - scripts/test-ios-native-gps-recovery.cjs
+      - scripts/test-ios-adaptive-layout-parity.cjs
       - .github/workflows/ios-native-bridge-guard.yml
   pull_request:
     paths:
@@ -31,6 +32,7 @@ on:
       - assets/dar-setup-hub.js
       - test/assets/dar-setup-hub.js
       - scripts/test-ios-native-gps-recovery.cjs
+      - scripts/test-ios-adaptive-layout-parity.cjs
       - .github/workflows/ios-native-bridge-guard.yml
   workflow_dispatch:
 
@@ -59,6 +61,8 @@ jobs:
           node --check test/assets/dar-setup-hub.js
       - name: Native GPS and prayer location regression cases
         run: node scripts/test-ios-native-gps-recovery.cjs
+      - name: Native iOS / Android PWA adaptive layout parity
+        run: node scripts/test-ios-adaptive-layout-parity.cjs
       - name: Native capabilities and compiled bridge presence
         run: |
           python3 - <<'PY'
