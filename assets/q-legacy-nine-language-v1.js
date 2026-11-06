@@ -73,7 +73,7 @@ function render(){
  var pack=manifest&&manifest.pages&&manifest.pages[String(number)];
  var chosen=pack&&pack.locales&&pack.locales[code];
  var hasTranslation=code!=="de"&&validatePack(chosen);
- var canTranslate=hasTranslation&&pack.canonicalTitle===find(".qsource-title")?.textContent;
+ var canTranslate=hasTranslation&&pack.canonicalTitle===find(".qsource-title")?.textContent&&pack.canonicalQuote===find(".qsource-quote")?.textContent&&chosen.linkTitles.length===document.querySelectorAll("a.qsource-link").length;
  var page=find(".qsource-page");
  if(page)page.classList.toggle("q-legacy-rtl",!!(canTranslate&&(code==="ar"||code==="ckb")));
  if(!canTranslate){
@@ -93,6 +93,7 @@ function render(){
     var label=note.querySelector("b"),tail=label.nextSibling;
     set(label,chosen.noteLabel+":");if(tail&&tail.nodeType===3)set(tail," "+chosen.noteBody);
   }
+  if(chosen.listItems){Array.prototype.slice.call(document.querySelectorAll(".qsource-section ol li")).forEach(function(el,i){if(chosen.listItems[i])set(el,chosen.listItems[i])})}
   var links=Array.prototype.slice.call(document.querySelectorAll("a.qsource-link"));
   links.forEach(function(a,i){set(a.querySelector(".qsource-link-title"),chosen.linkTitles[i]);set(a.querySelector(".qsource-link-sub"),chosen.linkSubs[i])});
   // Name, grade, source numbers, Arabic originals and every href remain as authored.
