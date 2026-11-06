@@ -112,6 +112,11 @@ function render(){
  uiLabels(code);
  textBlocks(pageData,code);
  notice(code,pageData);
+ // Preserve the chosen language when opening an existing related lesson.
+ // No new learning route or source ID is created.
+ document.querySelectorAll('a[href^="/lernen/"]').forEach(function(a){
+  try{var u=new URL(a.getAttribute("href"),location.origin);u.searchParams.set("lang",code);a.href=u.pathname+u.search+u.hash}catch(_){}
+ });
  // The Arabic original is never treated as a translation or overwritten.
  document.querySelectorAll(".qsource-arabic").forEach(function(el){el.lang="ar";el.dir="rtl"});
 }
