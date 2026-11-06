@@ -75,7 +75,7 @@ function closeSearch(){if(overlay)overlay.hidden=true}
 function getStats(){
  try{const value=typeof lastData==="undefined"?null:lastData;if(!value||!Array.isArray(value.totals))return null;
  const rows=value.totals;const sum=key=>rows.reduce((v,row)=>v+(Number(row[key])||0),0);
- return {online:Number(value.live?.live_now)||0,views:sum("views"),shares:sum("shares"),saves:sum("saves"),rows};}catch{return null}
+ return {online:Number(value.live?.live_now)||0,views:sum("views"),shares:sum("shares"),saves:sum("saves"),rows,updated:value.updated||null};}catch{return null}
 }
 const nf=value=>Math.round(Number(value)||0).toLocaleString("de-DE");
 function buildOverview(){
@@ -119,7 +119,10 @@ function sync(){
  if(!rail)init();
  rail.hidden=false;bottom.hidden=false;
  rail.inert=window.innerWidth<=719&&!drawer;
- renderMenu();syncSelection();buildOverview();
+ renderMenu();syncSelection();
+ if(window.DARAdminIntelligenceV3){
+  try{window.DARAdminIntelligenceV3.sync(getStats())}catch(error){console.error("DĀR Admin V3 display fallback",error);buildOverview()}
+ }else buildOverview();
 }
 function queue(){if(queued)return;queued=true;requestAnimationFrame(sync)}
 function boot(){
