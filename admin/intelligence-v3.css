@@ -1,0 +1,80 @@
+/* DĀR Intelligence Center V3 — controlled content slot inside existing admin V2.
+ * Semantic tokens inherited from appearance-v2.css. No global layout ownership. */
+body.dar-v2-active #panel .dar-v3-dashboard{
+ --v3fg:var(--v2ink);--v3muted:var(--v2muted);--v3line:var(--v2line);
+ --v3gold:var(--v2gold);--v3sage:var(--v2mint);--v3surface:var(--admin-panel-background);
+ --v3soft:var(--admin-control-background);--v3hover:var(--admin-hover-background);
+ color:var(--v3fg);min-width:0;width:100%;max-width:100%;margin:0 0 16px;
+ box-sizing:border-box;isolation:isolate;
+}
+.dar-v3-dashboard *{box-sizing:border-box;min-width:0}
+.dar-v3-head{display:flex;align-items:flex-start;justify-content:space-between;gap:22px;padding:clamp(5px,1.4vw,14px) 0 17px;border-bottom:1px solid var(--v3line)}
+.dar-v3-head-copy{flex:1;max-width:840px}
+.dar-v3-kicker{display:block;color:var(--v3sage);font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+body.dar-v2-active #panel .dar-v3-head h2{margin:7px 0 8px;font:500 clamp(22px,2.8vw,34px)/1.16 Georgia,serif!important;letter-spacing:-.02em;color:var(--v3fg)!important}
+body.dar-v2-active #panel .dar-v3-head p{margin:0;color:var(--v3muted)!important;font-size:13px;line-height:1.6}
+.dar-v3-flags{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap;max-width:300px}
+.dar-v3-flag{display:inline-flex;align-items:center;min-height:28px;border:1px solid var(--v3line);background:var(--v3soft);border-radius:999px;padding:5px 11px;font-size:10px;font-weight:750;color:var(--v3muted);white-space:nowrap}
+.dar-v3-sourcebar{display:flex;justify-content:space-between;gap:9px;align-items:center;flex-wrap:wrap;padding:13px 0;color:var(--v3muted);font-size:11px}
+.dar-v3-date{color:var(--v3gold);font-weight:650}
+.dar-v3-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;border:1px solid var(--v3line);border-radius:17px;overflow:hidden;background:var(--v3line)}
+.dar-v3-metric{display:flex;flex-direction:column;gap:11px;background:var(--v3surface);padding:clamp(12px,2vw,22px);min-height:112px}
+.dar-v3-metric-label{color:var(--v3muted);font-size:11px;line-height:1.35}
+body.dar-v2-active #panel .dar-v3-metric-value{color:var(--v3fg)!important;font-size:clamp(21px,2.5vw,32px);font-weight:700;letter-spacing:-.04em;line-height:1.2;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.dar-v3-columns{display:grid;grid-template-columns:minmax(0,1.22fr) minmax(300px,.78fr);gap:15px;margin-top:15px;align-items:stretch}
+.dar-v3-workflows,.dar-v3-inspector{min-width:0;border:1px solid var(--v3line);border-radius:17px;background:var(--v3surface);padding:clamp(16px,2vw,23px)}
+.dar-v3-section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+body.dar-v2-active #panel .dar-v3-section-head h3{font:600 19px/1.3 Georgia,serif!important;margin:0 0 6px;color:var(--v3fg)!important}
+body.dar-v2-active #panel .dar-v3-subtle{font-size:12px;line-height:1.65;color:var(--v3muted)!important;margin:5px 0 10px}
+.dar-v3-count{font-size:10px;line-height:1.35;color:var(--v3muted);border:1px solid var(--v3line);border-radius:999px;padding:5px 9px;white-space:nowrap}
+.dar-v3-filters{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin:14px 0 10px}
+body.dar-v2-active #panel .dar-v3-filter{min-height:34px;padding:7px 13px;border-radius:999px;border:1px solid transparent;background:transparent;color:var(--v3muted);font-size:12px;cursor:pointer;transition:background .18s ease,color .18s ease}
+body.dar-v2-active #panel .dar-v3-filter:hover{background:var(--v3hover)}
+body.dar-v2-active #panel .dar-v3-filter.is-selected{color:var(--v3fg);border-color:var(--v3line);background:var(--v3soft)}
+.dar-v3-task-list{display:grid;border-top:1px solid var(--v3line)}
+body.dar-v2-active #panel .dar-v3-task{display:flex;align-items:center;gap:13px;width:100%;min-height:65px;padding:12px 7px;border:0;border-bottom:1px solid var(--v3line);border-radius:0;text-align:start;background:transparent;color:var(--v3fg);cursor:pointer;transition:background .15s ease}
+body.dar-v2-active #panel .dar-v3-task:last-child{border-bottom:0}
+body.dar-v2-active #panel .dar-v3-task:hover{background:var(--v3hover)}
+body.dar-v2-active #panel .dar-v3-task.is-selected{background:var(--admin-active-background)}
+.dar-v3-task-symbol{flex:0 0 31px;display:grid;place-items:center;width:31px;height:31px;border:1px solid var(--v3line);border-radius:10px;color:var(--v3gold);font-size:19px}
+.dar-v3-task-copy{display:grid;gap:5px;flex:1}
+body.dar-v2-active #panel .dar-v3-task-copy strong{font-size:13px;font-weight:750;color:var(--v3fg)!important;line-height:1.4}
+.dar-v3-task-copy small{font-size:10px;color:var(--v3muted);line-height:1.4}
+.dar-v3-task-chevron{font-size:24px;flex:none;line-height:1;color:var(--v3gold)}
+.dar-v3-inspector{position:relative;display:flex;flex-direction:column;align-items:stretch;gap:8px}
+body.dar-v2-active #panel .dar-v3-inspector h3{font:600 clamp(18px,2vw,23px)/1.25 Georgia,serif!important;margin:0 0 4px;color:var(--v3fg)!important}
+body.dar-v2-active #panel .dar-v3-inspector h4{font-size:12px;font-weight:800;margin:12px 0 2px;color:var(--v3gold)!important}
+.dar-v3-checklist{display:grid;gap:12px;margin:6px 0 8px;padding-inline-start:20px;font-size:12px;color:var(--v3fg);line-height:1.65}
+.dar-v3-checklist li::marker{color:var(--v3gold)}
+body.dar-v2-active #panel .dar-v3-source{font-size:11px;color:var(--v3muted)!important;padding:11px 0;border-top:1px solid var(--v3line);margin:auto 0 2px}
+body.dar-v2-active #panel .dar-v3-action{align-self:stretch;min-height:44px;padding:11px 16px;background:var(--v3gold);color:var(--v2bg);border:1px solid var(--v3gold);border-radius:11px;cursor:pointer;font-weight:800;font-size:12px}
+html[data-dar-admin-theme="salbei"] body.dar-v2-active #panel .dar-v3-action{color:#ffffff;background:#3f5d4b;border-color:#3f5d4b}
+body.dar-v2-active #panel .dar-v3-action:disabled{opacity:.4;cursor:not-allowed}
+body.dar-v2-active #panel .dar-v3-footer{color:var(--v3muted)!important;font-size:11px;line-height:1.6;margin:12px 2px}
+body.dar-v2-active #panel .dar-v3-legacy-tools{min-width:0;border:1px solid var(--v3line);border-radius:15px;margin:16px 0 22px;padding:0 16px;background:var(--v3surface)}
+body.dar-v2-active #panel .dar-v3-legacy-tools>summary{cursor:pointer;color:var(--v3gold);font-size:13px;font-weight:800;min-height:48px;display:flex;align-items:center;list-style:none}
+body.dar-v2-active #panel .dar-v3-legacy-tools>summary::-webkit-details-marker{display:none}
+body.dar-v2-active #panel .dar-v3-legacy-tools>summary:after{content:"+";font-size:22px;font-weight:400;margin-inline-start:auto}
+body.dar-v2-active #panel .dar-v3-legacy-tools[open]>summary:after{content:"−"}
+body.dar-v2-active #panel .dar-v3-legacy-tools .folder-grid{margin:7px 0 14px!important}
+body.dar-v2-active #panel .dar-v3-legacy-tools .command-grid{margin:0 0 17px!important}
+@media(max-width:1080px){.dar-v3-columns{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:719px){
+ .dar-v3-head{flex-direction:column;gap:10px}
+ .dar-v3-flags{justify-content:flex-start;max-width:100%}
+ .dar-v3-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .dar-v3-metric{min-height:100px;padding:14px}
+ .dar-v3-columns{gap:10px;margin-top:10px}
+ .dar-v3-workflows,.dar-v3-inspector{padding:14px;border-radius:14px}
+ .dar-v3-flag{font-size:9px}
+}
+@media(max-width:370px){
+ .dar-v3-head-copy h2{overflow-wrap:anywhere}
+ .dar-v3-section-head{flex-wrap:wrap}
+ .dar-v3-metric-value{font-size:22px!important}
+ .dar-v3-filter{padding:7px 9px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .dar-v3-dashboard :is(button,.dar-v3-task,.dar-v3-filter){transition:none!important;animation:none!important}
+}
+@media print{.dar-v3-dashboard .dar-v3-filters,.dar-v3-dashboard button{display:none!important}}
