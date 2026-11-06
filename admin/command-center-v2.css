@@ -121,8 +121,3 @@ body.dar-v2-active #panel :is(
     Keep it accessible below the editor instead. */
  body.dar-v2-active #panel .admin-actions-layout .side-stack{display:grid!important;min-width:0}
 }
-@media(min-width:1024px){
- body.dar-v2-active .dar-v2-rail{width:var(--v2rail)}
- body.dar-v2-active .dar-v2-rail .dar-v2-brand-words,
- body.dar-v2-active .dar-v2-rail .dar-v2-nav-label{display:initial}
-}
