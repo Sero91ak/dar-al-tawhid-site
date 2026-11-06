@@ -54,6 +54,7 @@
     article.setAttribute("data-dar-frauen-content-id",item.entry.id);
     article.setAttribute("data-dar-frauen-locale",code);
     text(article,".post-reader-title h2",p.title);
+    text(article,".post-reader-title .kicker",lab.area);
     text(article,".statement.post-aussage .post-aussage-kicker",lab.statement);
     text(article,".post-aussage-text",p.statement);
     text(article,".post-key-message[data-post-fazit] h3",lab.lesson);
@@ -63,7 +64,19 @@
     text(article,".post-source-module .frauen-oval__kicker",lab.proof);
     text(article,".frauen-direktnachweis",lab.open);
     text(article,".frauen-open-btn",lab.back);
+    text(article,".frauen-share-head > div > span",lab.shareTop);
     text(article,".frauen-share-head h3",lab.share);
+    text(article,".frauen-share-head > p",lab.shareHint);
+    text(article,"[data-frauen-share='copy-text'] b",lab.copyText);
+    text(article,"[data-frauen-share='copy-link'] b",lab.copyLink);
+    text(article,"[data-frauen-share='image'] b",lab.image);
+    text(article,"[data-frauen-share='native'] b",lab.shareButton);
+    text(article,".frauen-share-note",lab.shareNote);
+    var aria={wa:lab.waAria,tg:lab.tgAria,ig:lab.igAria,native:lab.nativeAria};
+    Object.keys(aria).forEach(function(k){
+      var btn=article.querySelector('[data-frauen-share="'+k+'"]');
+      if(btn&&aria[k]&&btn.getAttribute("aria-label")!==aria[k])btn.setAttribute("aria-label",aria[k]);
+    });
     // The only citation link is the original direct source, identical in every locale.
     var citation=article.querySelector("a.frauen-direktnachweis[href]");
     if(citation && citation.getAttribute("href")!==item.entry.sourceUrl){
@@ -93,6 +106,8 @@
     text(card,".post-row__body h3",p.title);
     text(card,".frauen-row__aussage",p.preview||p.statement);
     text(card,".frauen-row__quelle",p.source);
+    text(card,".post-row__meta span:first-child",lab.area);
+    text(card,".post-row__meta span:last-child",lab.status);
     // Keep source route, card data-value and speaker identity as originally authored.
   }
   function apply() {
