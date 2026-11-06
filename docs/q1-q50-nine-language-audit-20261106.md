@@ -13,7 +13,7 @@ Stand: 06.11.2026 · Stand der Technik im Branch `feature/q1-q50-nine-language-f
 
 | Quellen | Quellenkarte vorhanden | Neunsprachige Bedienoberfläche | Mehrsprachige Inhaltsdaten | Status |
 |---|---|---|---|---|
-| Q1–Q5 | 5/5 | gemeinsamer Adapter technisch vorbereitet | je Titel, Hauptaussage, Thema in neun Sprachen | **teilweise übersetzte, fachlich ungeprüfte Entwürfe** |
+| Q1–Q5 | 5/5 | gemeinsamer Adapter technisch vorbereitet | je Titel, Hauptaussage, Thema und Überlieferungs-/Statushinweis in neun Sprachen | **teilweise übersetzte, fachlich ungeprüfte Entwürfe** |
 | Q6–Q48 | 43/43 | gemeinsamer Adapter technisch vorbereitet | keine vollständigen geprüften Übersetzungsmanuskripte | **deutsches Original mit sichtbarem, übersetztem Hinweis** |
 | Q49 | vorhanden | vorhandene eigene Sprachintegration | neun Sprachentwürfe in `assets/q49-locales.json` | fachliche Freigabe separat erforderlich |
 | Q50 | vorhanden | vorhandene eigene Sprachintegration | neun Sprachentwürfe in `assets/q50-locales.json` | unabhängige Sprach-/Fachprüfung ausstehend |
@@ -25,6 +25,12 @@ Stand: 06.11.2026 · Stand der Technik im Branch `feature/q1-q50-nine-language-f
 - `assets/q-royal-manuscript-v42.js`: vorhandene Q-Quellenkopfzeile folgt auch der Q1–Q48-Sprachwahl.
 - `cloudflare/site-router.js`: injiziert die Sprachkomponente auf den alten nummerierten Seiten; Q49+ wird nicht übernommen.
 - `scripts/check-q1-q50-nine-language-foundation.cjs`: Sicherheitsprüfung für alle 50 IDs, vorhandene Inhaltspakete, RTL, Fallback und Rückkehr zum deutschen Original.
+
+## Existierende Lernbereich-Verknüpfung
+
+- Q6 → `/lernen/ikhlas/`, Q46 → `/lernen/wissen-adab/`, Q47 → `/lernen/tawhid-iman-akhlaq/`, Q48 → `/lernen/selbstpruefung/`: die alte Lernansicht hat nun dieselbe Sprachauswahl, behält die Quizantworten und zeigt bei fehlender vollständiger Übersetzung einen klaren Hinweis. 
+- Q49 und Q50 behalten ihre bestehenden spezialisierten neunsprachigen Lernsysteme.
+- Ein Sprachauswahlwechsel erhält die vorhandenen Q- und Lern-Routen mit einem `?lang=`-Parameter, **ohne neue Quellen-ID**.
 
 ## Reihenfolge für die vollständige redaktionelle Fertigstellung
 
