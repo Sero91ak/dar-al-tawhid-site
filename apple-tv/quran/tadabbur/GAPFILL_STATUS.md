@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-268` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-269` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4771
-totalVerifiedEntries: 4771
-loadedEntries: 4771
-uniqueVerifiedReferences: 4771
-missingCount: 1465
+entriesCount: 4773
+totalVerifiedEntries: 4773
+loadedEntries: 4773
+uniqueVerifiedReferences: 4773
+missingCount: 1463
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:82
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-268.json
-nächster Gap-Fill-Batch: entries-gap-06-269.json
+letzter Gap-Fill-Batch: entries-gap-06-269.json
+nächster Gap-Fill-Batch: entries-gap-06-270.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `581` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `583` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -699,3 +699,7 @@ Zwei konkrete Qurʾān-Verse durch ṣaḥīḥe Überlieferungen belegt: 5:24 m
 ## Batch 06-268 — 06.11.2026
 
 Zwei neue, direkt im Ṣaḥīḥ al-Buḫārī verszugeordnete authentische Berichte: 6:59 über die fünf Schlüssel des Verborgenen, Ibn ʿUmar (Nr. 4627), sowie 8:33 mit Anas' Kontextbericht (Nr. 4649). Der im Kontext ebenfalls zitierte Vers 8:32 war bereits erfasst und ist keine neue Referenz. Nach Freigabe: 4771 von 6236, Lücken 1465. Isnād, Quellen und Aussage-Gattungen siehe SOURCE_REVIEW_06-268.md. Produktion und globale App-Auslieferung separat nachweisen.
+
+## Batch 06-269 – 06.11.2026
+
+Zwei direkt versbezogene authentische Auslegungen aus Ṣaḥīḥ al-Buḫārī: Qurʾān 6:86 (Prophetenḥadīṯ über Ibn ʿAbbās zu Yūnus, 4630, marfūʿ) und Qurʾān 6:90 (eigenständiger Ṣaḥābī-Tafsīr Ibn ʿAbbās über Dāwūd und Rechtleitung, 4632, mawqūf). Die Zusatzkette zu 6:90 ist getrennt und nicht in den Hauptweg hineinkopiert. Geplanter Stand 4773/6236, verbleibend 1463; Quellen und Isnādhinweise in SOURCE_REVIEW_06-269.md. Nur nach PR-/Release-Gates gültig.
