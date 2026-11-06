@@ -480,9 +480,12 @@ assert.equal(w.DarTestTurkishUI.translateValue("Ramaḍān-Serie konnte nicht ge
 assert.equal(w.DarTestTurkishUI.translateValue("Bereinigt: 3 Test-Dateien, 1 Test-Service-Worker. Die App wird neu geöffnet …","bs"),"Očišćeno: 3 probnih datoteka, 1 probnih service workera. Aplikacija će se ponovo otvoriti …");
 assert.equal(w.DarTestTurkishUI.translateValue("Ungültige 30-Tage-Serie","tr"),"Geçersiz 30 günlük seri");
 assert.equal(w.DarTestTurkishUI.translateValue("Ort für die Vorschau","ckb"),"شوێن بۆ پێشبینین");
+assert.equal(w.DarTestTurkishUI.translateValue("Möchtest du private Hinweise an Angehörige aufnehmen?\n\nStreit vermeiden, Taqwā, Nachlass gerecht regeln, Duʿāʾ, fachkundige Menschen fragen.","en"),"Do you want to include private notes for your relatives?\n\nAvoid disputes, taqwā, settle the estate fairly, duʿāʾ, and ask people of knowledge.");
+assert.equal(w.DarTestTurkishUI.translateValue("Gibt es offene religiöse Verpflichtungen mit finanzieller Bedeutung?\n\nNicht gezahlte Zakāh, Nadhr/Gelübde, Kaffārah oder andere verpflichtende Zahlungen. Bei Unsicherheit schreibe „unklar“.","fr").includes("„unklar“"),true);
+assert.equal(w.DarTestTurkishUI.translateValue("Hast du Schulden oder offene Rechte?\n\nDenke an Bankschulden, private Schulden, Rechnungen, Raten, geliehene Dinge, Verträge, Geld oder Rechte anderer Menschen.\n\nWenn nein: Keine bekannten Schulden oder offenen Rechte.","es").endsWith("Keine bekannten Schulden oder offenen Rechte."),true);
 for(const page of ["wasiyyah/index.html","wasiyyah/pdf-render/index.html","widgets/index.html","editor/startseite-v47.html","editor/startseite-v47-canvas.html","ramadan/index.html","repair.html","android/index.html","i18n/index.html"]){
  const html=fs.readFileSync(path.join(__dirname,"../"+page),"utf8");
- assert(html.includes("/test/assets/dar-test-turkish-ui.js?v=20261024-ui-more-61"),page+" loads the locale runtime");
+ assert(html.includes("/test/assets/dar-test-turkish-ui.js?v=20261024-ui-more-62"),page+" loads the locale runtime");
 }
 assert(fs.readFileSync(path.join(__dirname,"../wasiyyah/index.html"),"utf8").includes('data-dar-no-translate="testament"'));
 assert(fs.readFileSync(path.join(__dirname,"../wasiyyah/pdf-render/index.html"),"utf8").includes('data-dar-no-translate="testament"'));
