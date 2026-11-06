@@ -35,7 +35,7 @@ Die folgenden fachlichen CSS-Eigentümer wurden für die zwei Farbwelten geprüf
 | 720–1023 CSS px | kompakte Sidebar | Tablet / iPad Stage Manager / Fold offen |
 | bis 719 CSS px | Bottomnavigation plus Menü-Drawer | Smartphone / iPad schmal / Fold außen |
 
-Zusätzlich gilt für das **nutzbare Admin-Pane nach Abzug der Sidebar** CSS `container-type:inline-size` auf `#panel`: Bei höchstens 760 px werden klassische zweispaltige Arbeitsbereiche einspaltig. Bei höchstens 520 px werden Formular-/Kartenraster weiter reduziert. V3 besitzt einen eigenen Inhaltscontainer und reagiert bei höchstens 850 px mit einer Inspektor-Spalte unter der Aufgabenliste und bei höchstens 540 px mit schmaler Kopf- und Kennzahlengeometrie.
+Zusätzlich gilt für das **nutzbare Admin-Pane nach Abzug der Sidebar** CSS `container-type:inline-size` auf `#panel`: Bei höchstens 720 px werden klassische zweispaltige Arbeitsbereiche einspaltig. Bei höchstens 520 px werden Formular-/Kartenraster weiter reduziert. V3 besitzt einen eigenen Inhaltscontainer und reagiert bei höchstens 720 px mit einer Inspektor-Spalte unter der Aufgabenliste und bei höchstens 540 px mit schmaler Kopf- und Kennzahlengeometrie.
 
 Ein großes iPad darf deshalb Desktopnavigation verwenden. Verkleinert man sein Fenster, muss die UI ohne Reload und ohne gerätebasierten Sonderfall in die geeignete Tablet- und anschließend Smartphone-Struktur wechseln. Besucher- und Änderungsprotokoll-Spalten werden auf schmalen Fenstern **unterhalb** des Editors gezeigt, nicht unsichtbar gemacht. Auf echten Geräten sind Fold-Falz, Safe Areas, iPad Split View, Stage Manager, Hoch-/Querformat sowie Browser-Zoom zu prüfen. Die Viewport-Metadaten blockieren Zoom nicht mehr.
 
