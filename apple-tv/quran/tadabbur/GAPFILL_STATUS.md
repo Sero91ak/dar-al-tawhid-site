@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-266` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-267` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4767
-totalVerifiedEntries: 4767
-loadedEntries: 4767
-uniqueVerifiedReferences: 4767
-missingCount: 1469
+entriesCount: 4769
+totalVerifiedEntries: 4769
+loadedEntries: 4769
+uniqueVerifiedReferences: 4769
+missingCount: 1467
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:82
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-266.json
-nächster Gap-Fill-Batch: entries-gap-06-267.json
+letzter Gap-Fill-Batch: entries-gap-06-267.json
+nächster Gap-Fill-Batch: entries-gap-06-268.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `577` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `579` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -691,3 +691,7 @@ Qurʾān 4:102: Ibn ʿUmar berichtet als Ṣaḥābī die authentische Propheten
 ## Batch 06-266 — 06.11.2026
 
 Qurʾān 3:42: authentischer marfūʿer Prophetenḥadīṯ über ʿAlī zum besonderen Rang Maryams, direkt unter Qurʾān 3:42 bei Ṣaḥīḥ al-Buḫārī 3432. Nicht fälschlich als eigene Ṣaḥābī-Auslegung ausgegeben. Katalog nach Freigabe 4767/6236, Lücken 1469. Kritischer Quellen- und Wortlautabgleich in SOURCE_REVIEW_06-266.md.
+
+## Batch 06-267 — 06.11.2026
+
+Zwei konkrete Qurʾān-Verse durch ṣaḥīḥe Überlieferungen belegt: 5:24 mit Ibn Masʿūds authentischer Zeugenaussage über al-Miqdād bei Badr, Ṣaḥīḥ al-Buḫārī 4609; 5:118 mit der prophetischen Bezugnahme auf ʿĪsās Worte am Tag der Auferstehung, Ṣaḥīḥ al-Buḫārī 4626. Verschiedene Überlieferungsarten ausdrücklich nicht vermischt. Geplanter Stand: 4769/6236, Lücken 1467. Originalwege und zurückgestellte Kandidaten: SOURCE_REVIEW_06-267.md.
