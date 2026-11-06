@@ -54,20 +54,24 @@ function paint(el,kind,sticky){
    }
  }
 }
-function scroller(el){
+function scrollPixels(el){
+ // A structural wrapper can have computed overflow-y:auto only because
+ // overflow-x:hidden coerces visible Y to auto. That wrapper need not be
+ // the actual scrolling element. Read LIVE positions, not CSS guesses.
+ var page=Number(win.scrollY||0);
+ var root=doc.scrollingElement||doc.documentElement;
+ var px=Math.max(0,page,Number(root&&root.scrollTop||0));
  for(var p=el.parentElement;p&&p!==doc.body;p=p.parentElement){
-   var y=win.getComputedStyle(p).overflowY;
-   if(/^(auto|scroll|overlay)$/.test(y)&&p.scrollHeight>p.clientHeight+2)return p;
+   var offset=Number(p.scrollTop||0);
+   if(offset>px)px=offset;
  }
- return doc.scrollingElement||doc.documentElement;
+ return px;
 }
 function depth(){
  if(reduced||!allowed())return;
- var positions=new Map();
  active.forEach(function(el){
    if(!el.isConnected)return;
-   var root=scroller(el),position=positions.has(root)?positions.get(root):Number(root.scrollTop||0);
-   positions.set(root,position);
+   var position=scrollPixels(el);
    var value=String(Math.round(Math.min(1,Math.max(0,position/180))*100)/100);
    if(el.style.getPropertyValue("--dar-art-progress")!==value){
      el.style.setProperty("--dar-art-progress",value);
