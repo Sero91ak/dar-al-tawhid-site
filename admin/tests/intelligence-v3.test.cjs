@@ -88,6 +88,14 @@ const data={online:9,views:12345,shares:21,saves:34,rows:[{views:12345}],updated
  a.setLocale("tr");a.window.DARAdminIntelligenceV3.sync(data);
  assert.match(a.document.querySelector("#darV3Dashboard").querySelector("h2").textContent,/Çalışma/);
  assert.match(a.summary.textContent,/modül/);
+ for(const locale of requiredLocales){
+  a.setLocale(locale);a.window.DARAdminIntelligenceV3.sync(data);
+  const current=a.document.querySelector("#darV3Dashboard");
+  assert.ok(current,"Dashboard must remain mounted for "+locale);
+  assert.equal(current.attributes.dir,locale==="ar"||locale==="ckb"?"rtl":"ltr");
+  assert.equal(current.querySelectorAll(".dar-v3-task").length,5);
+  assert.equal(current.querySelector("#darV3Detail").querySelectorAll("li").length,3,"Localized checklist in "+locale);
+ }
  a.picker.value="quellen";a.window.DARAdminIntelligenceV3.sync(data);
  assert.equal(a.body.querySelectorAll("#darV3Dashboard").length,1,"Existing content stays under the original panel; navigation belongs to V2");
  const guest=environment();guest.setLogin(true);guest.window.DARAdminIntelligenceV3.sync(data);
