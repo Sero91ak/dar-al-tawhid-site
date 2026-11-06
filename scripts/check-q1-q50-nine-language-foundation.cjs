@@ -22,6 +22,7 @@ assert.match(adapter,/document\.documentElement\.dir=/);
 assert.match(adapter,/qsource-arabic/);
 assert.match(adapter,/dar-q-language-notice/);
 assert.match(adapter,/data\.locales\[code\]/);
+assert.match(adapter,/function applyNote\(data,code\)/,"Transmission note language-switch handling required");
 new vm.Script(adapter,{filename:"assets/q-legacy-nine-language-v1.js"});
 const report={sources:48,languages:9,partialDrafts:0,germanFallbacks:0,missingPrimaryLinks:[],duplicatedId:[]};
 for(let n=1;n<=48;n++){
@@ -37,7 +38,7 @@ for(let n=1;n<=48;n++){
     assert.deepEqual(Object.keys(p.locales),expected);
     for(const code of expected){
       const l=p.locales[code];
-      assert.ok(l&&l.title&&l.quote&&l.topic,"Partial source manuscript missing Q"+n+" "+code);
+      assert.ok(l&&l.title&&l.quote&&l.topic&&l.note,"Partial source manuscript missing Q"+n+" "+code);
       assert.equal(l.approved,code==="de","Approval misrepresented Q"+n+" "+code);
       assert.equal(l.reviewStatus,code==="de"?"canonical-original":"partial-editorial-review-required");
       report.partialDrafts+=(code!=="de"?1:0);
