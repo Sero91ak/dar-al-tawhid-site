@@ -39,7 +39,7 @@
   .live-edit-layout.is-split{grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr)}
 }
 .live-edit-stage{
-  border:1px solid var(--le-line);border-radius:16px;background:color-mix(in srgb,#000 18%,var(--le-surface));
+  border:1px solid var(--le-line);border-radius:16px;background:var(--admin-panel-background);
   padding:10px;min-height:62vh;display:grid;place-items:center;position:relative;overflow:auto
 }
 .live-edit-frame-wrap{
@@ -49,7 +49,7 @@
 .live-edit-frame-wrap[data-device="tablet"]{width:min(820px,100%)}
 .live-edit-frame-wrap[data-device="desktop"]{width:100%}
 .live-edit-frame{
-  width:100%;height:min(78vh,860px);border:0;border-radius:18px;background:#0b0d12;
+  width:100%;height:min(78vh,860px);border:0;border-radius:18px;background:var(--admin-input-background);
   box-shadow:0 18px 40px color-mix(in srgb,#000 35%,transparent);
 }
 .live-edit-overlay-bar{
@@ -97,7 +97,7 @@
 .live-edit-field{display:grid;gap:4px}
 .live-edit-field label{font-size:11px;font-weight:800;color:var(--le-muted)}
 .live-edit-field input,.live-edit-field textarea,.live-edit-field select{
-  width:100%;min-height:40px;border-radius:10px;border:1px solid var(--le-line);background:color-mix(in srgb,#000 18%,transparent);
+  width:100%;min-height:40px;border-radius:10px;border:1px solid var(--le-line);background:var(--admin-control-background);
   color:inherit;padding:8px 10px;font:inherit;box-sizing:border-box
 }
 .live-edit-field textarea{min-height:120px;resize:vertical;line-height:1.45}
