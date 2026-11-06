@@ -37,7 +37,7 @@
   fr:["Ouvrir la rubrique administrative existante","Vérifier les sources, l’état et les preuves","Confirmer chaque validation manuellement"],
   es:["Abrir la sección de administración existente","Comprobar fuente, estado y evidencias","Confirmar cada aprobación manualmente"]
  };
- let selected="sources",filter="all",session=null;
+ let selected="sources",filter="all",session=null,classicExpanded=false;
  function availableTabs(){return new Set(Array.from($("#adminTabSelect")?.options||[]).map(x=>x.value))}
  function go(tab){const select=$("#adminTabSelect");if(!select||!availableTabs().has(tab))return; if(select.value!==tab){select.value=tab;select.dispatchEvent(new Event("change",{bubbles:true}))}}
  function hasData(stats){return !!stats&&Array.isArray(stats.rows)}
@@ -84,7 +84,7 @@
   panel.append(left,right);section.append(panel);
   const note=node("p","dar-v3-footer",t("countDisclaimer"));section.append(note);
   cover.insertAdjacentElement("afterend",section);
-  const classic=$("#darV3ClassicSummary");if(classic)classic.textContent=t("moreTools");
+  const classic=$("#darV3ClassicSummary");if(classic){classic.textContent=t("moreTools");const details=classic.parentNode;if(details){details.open=classicExpanded;details.addEventListener("toggle",()=>{classicExpanded=!!details.open})}}
   session={element:section,locale:currentLocale()};tasks();
   update(stats);
  }
