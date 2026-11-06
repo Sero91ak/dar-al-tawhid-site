@@ -4,15 +4,15 @@
 if(w.DARAdultHomeWelcomeV1)return;
 var KEY="darAdultPreferredLocaleV1";
 var texts={
-de:["As-salāmu ʿalaikum wa raḥmatullāhi wa barakātuh","Willkommen bei DĀR AL TAWḤĪD","Eine geordnete Wissensplattform mit Beiträgen aus Qurʾān, authentischer Sunnah und den Āṯār der frühen Imāme – sowie einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah."],
+de:["As-Salāmu ʿAlaikum Wa Raḥmatullāhi Wa Barakātuh","Willkommen bei DĀR AL TAWḤĪD","Eine geordnete Wissensplattform mit Beiträgen aus Qurʾān, authentischer Sunnah und den Āṯār der frühen Imāme – sowie einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah."],
 ar:["السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ","مرحبًا بكم في دار التوحيد","منصة معرفية منظّمة تضم مقالات من القرآن والسنة الصحيحة وآثار الأئمة المتقدمين، إلى جانب مجموعة واسعة من الأدعية من القرآن والسنة الصحيحة."],
-en:["As-salāmu ʿalaikum wa raḥmatullāhi wa barakātuh","Welcome to DĀR AL TAWḤĪD","An organized knowledge platform with articles from the Qurʾān, authentic Sunnah and reports of the early Imams, as well as an extensive collection of Duʿāʾ from the Qurʾān and authentic Sunnah."],
+en:["As-Salāmu ʿAlaikum Wa Raḥmatullāhi Wa Barakātuh","Welcome to DĀR AL TAWḤĪD","An organized knowledge platform with articles from the Qurʾān, authentic Sunnah and reports of the early Imams, as well as an extensive collection of Duʿāʾ from the Qurʾān and authentic Sunnah."],
 tr:["Es-selâmü aleyküm ve rahmetullahi ve berekâtüh","DĀR AL TAWḤĪD'e hoş geldiniz","Kur’an, sahih Sünnet ve ilk dönem imamlarının rivayetlerinden yazıların bulunduğu düzenli bir ilim platformu; ayrıca Kur’an ve sahih Sünnet’ten geniş bir dua derlemesi."],
 ku:["Esselamu aleykum we rehmetullahi we berekatuh","Bi xêr hatin DĀR AL TAWḤĪD","Platformeke zanînê ya rêkûpêk bi nivîsên ji Qurʾān, Sunnah ya rast û vegotinên îmamên destpêkê, her wiha berhevokeke fireh a duʿāyan ji Qurʾān û Sunnah ya rast."],
 ckb:["السلام علیکم ورحمة الله وبرکاته","بەخێربێن بۆ دار التوحید","پلاتفۆرمێکی ڕێکخراوی زانست بە بابەت لە قورئان و سوننەتی ڕاست و گێڕانەوەکانی ئیمامانی پێشوو، هەروەها کۆمەڵەیەکی فراوانی دوعا لە قورئان و سوننەتی ڕاست."],
 bs:["Es-selamu alejkum ve rahmetullahi ve berekatuhu","Dobro došli u DĀR AL TAWḤĪD","Uređena platforma znanja s tekstovima iz Kur’ana, vjerodostojnog sunneta i predaja ranih imama, kao i opsežnom zbirkom dova iz Kur’ana i vjerodostojnog sunneta."],
-fr:["As-salāmu ʿalaikum wa raḥmatullāhi wa barakātuh","Bienvenue à DĀR AL TAWḤĪD","Une plateforme de savoir structurée proposant des articles tirés du Qurʾān, de la Sunnah authentique et des récits des premiers imams, ainsi qu’une vaste collection de duʿāʾ issus du Qurʾān et de la Sunnah authentique."],
-es:["As-salāmu ʿalaikum wa raḥmatullāhi wa barakātuh","Bienvenido a DĀR AL TAWḤĪD","Una plataforma de conocimiento organizada con artículos del Qurʾān, la Sunnah auténtica y los relatos de los primeros imames, además de una amplia colección de duʿāʾ del Qurʾān y la Sunnah auténtica."]
+fr:["As-Salāmu ʿAlaikum Wa Raḥmatullāhi Wa Barakātuh","Bienvenue à DĀR AL TAWḤĪD","Une plateforme de savoir structurée proposant des articles tirés du Qurʾān, de la Sunnah authentique et des récits des premiers imams, ainsi qu’une vaste collection de duʿāʾ issus du Qurʾān et de la Sunnah authentique."],
+es:["As-Salāmu ʿAlaikum Wa Raḥmatullāhi Wa Barakātuh","Bienvenido a DĀR AL TAWḤĪD","Una plataforma de conocimiento organizada con artículos del Qurʾān, la Sunnah auténtica y los relatos de los primeros imames, además de una amplia colección de duʿāʾ del Qurʾān y la Sunnah auténtica."]
 };
 var registry=w.DARAdultComponentI18nV1;
 if(registry&&registry.register){
