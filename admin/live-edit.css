@@ -1,10 +1,10 @@
 /* DAR Admin · Live-Bearbeitung */
 .live-edit{
-  --le-surface:color-mix(in srgb,var(--card,#141820) 92%,transparent);
-  --le-line:color-mix(in srgb,var(--line,#3a4250) 80%,transparent);
+  --le-surface:color-mix(in srgb,var(--card,#20201c) 92%,transparent);
+  --le-line:color-mix(in srgb,var(--line,#b6975a) 80%,transparent);
   --le-accent:color-mix(in srgb,var(--gold2,#d6b76a) 70%,#fff 10%);
-  --le-muted:color-mix(in srgb,var(--muted,#9aa3b2) 90%,transparent);
-  --le-danger:#c45b5b;
+  --le-muted:color-mix(in srgb,var(--muted,#bab4a6) 90%,transparent);
+  --le-danger:var(--admin-error-ink);
   display:grid;
   gap:10px;
   margin-top:4px;
@@ -49,7 +49,7 @@
 .live-edit-frame-wrap[data-device="tablet"]{width:min(820px,100%)}
 .live-edit-frame-wrap[data-device="desktop"]{width:100%}
 .live-edit-frame{
-  width:100%;height:min(78vh,860px);border:0;border-radius:18px;background:#0b0d12;
+  width:100%;height:min(78vh,860px);border:0;border-radius:18px;background:var(--admin-solid-base);
   box-shadow:0 18px 40px color-mix(in srgb,#000 35%,transparent);
 }
 .live-edit-overlay-bar{
@@ -81,7 +81,7 @@
 }
 .live-edit-editor-sheet.is-open{display:flex}
 .live-edit-editor{
-  width:min(980px,100%);background:var(--le-surface,#12161e);border:1px solid var(--le-line);border-radius:16px;
+  width:min(980px,100%);background:var(--le-surface,var(--admin-solid-panel));border:1px solid var(--le-line);border-radius:16px;
   display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;overflow:hidden;max-height:100%
 }
 .live-edit-editor-head,.live-edit-editor-tabs,.live-edit-editor-foot{
@@ -103,8 +103,8 @@
 .live-edit-field textarea{min-height:120px;resize:vertical;line-height:1.45}
 .live-edit-field textarea.tall{min-height:220px}
 .live-edit-status{font-size:11px;font-weight:750;color:var(--le-muted)}
-.live-edit-status.is-ok{color:#6fbf86}
-.live-edit-status.is-warn{color:#d2a85a}
+.live-edit-status.is-ok{color:var(--admin-success-ink)}
+.live-edit-status.is-warn{color:var(--admin-warning-ink)}
 .live-edit-status.is-err{color:var(--le-danger)}
 .live-edit-menu{
   position:absolute;z-index:5;min-width:180px;padding:6px;border-radius:12px;border:1px solid var(--le-line);
