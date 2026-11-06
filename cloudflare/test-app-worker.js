@@ -560,8 +560,8 @@ async function finalizeDarTestHomeV1193(asset) {
   html=html.replace(/<script\b[^>]*\bid=(["'])darTestFoldWorkspaceV2Js\1[^>]*>\s*<\/script>\s*/gi,"");
   // The checked-in 2.6 MB Test HTML has legacy styles even after </html>.
   // Insert the final authority after them, and only in the Test Worker.
-  const artCssV1='<link rel="stylesheet" id="darTestImmersiveArtV1Css" href="/test/assets/dar-test-immersive-art-v1.css?v=20261106">';
-  const artJsV1='<script defer id="darTestImmersiveArtV1Js" src="/test/assets/dar-test-immersive-art-v1.js?v=20261106"><\/script>';
+  const artCssV1='<link rel="stylesheet" id="darTestImmersiveArtV1Css" href="/test/assets/dar-test-immersive-art-v1.css?v=20261106-appstore-v1">';
+  const artJsV1='<script defer id="darTestImmersiveArtV1Js" src="/test/assets/dar-test-immersive-art-v1.js?v=20261106-appstore-v1"><\/script>';
   html=html.replace(/<link\b[^>]*\bid=(["'])darTestImmersiveArtV1Css\1[^>]*>\s*/gi,"");
   html=html.replace(/<script\b[^>]*\bid=(["'])darTestImmersiveArtV1Js\1[^>]*>\s*<\/script>\s*/gi,"");
   html+="\n"+artCssV1+"\n"+artJsV1;

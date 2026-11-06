@@ -10,6 +10,7 @@ on:
       - test/assets/dar-test-immersive-art-v1.js
       - test/tools/dar-test-immersive-actual-browser.py
       - test/tools/dar-test-immersive-art-v1-guard.cjs
+      - cloudflare/test-app-worker.js
   workflow_dispatch:
 
 permissions:
@@ -58,8 +59,8 @@ jobs:
         run: |
           set -euo pipefail
           ROOT='https://dar-al-tawhid-test.sero91ak.workers.dev'
-          curl -fL --retry 4 --retry-delay 4 --retry-all-errors -sS "${ROOT}/test/assets/dar-test-immersive-art-v1.js?v=20261106" -o /tmp/dar-test-art.js
-          curl -fL --retry 4 --retry-delay 4 --retry-all-errors -sS "${ROOT}/test/assets/dar-test-immersive-art-v1.css?v=20261106" -o /tmp/dar-test-art.css
+          curl -fL --retry 4 --retry-delay 4 --retry-all-errors -sS "${ROOT}/test/assets/dar-test-immersive-art-v1.js?v=20261106-appstore-v1" -o /tmp/dar-test-art.js
+          curl -fL --retry 4 --retry-delay 4 --retry-all-errors -sS "${ROOT}/test/assets/dar-test-immersive-art-v1.css?v=20261106-appstore-v1" -o /tmp/dar-test-art.css
           grep -q "DAR_TEST_IMMERSIVE_ART_V1" /tmp/dar-test-art.js
           grep -q "IMMERSIVE UI ART V1" /tmp/dar-test-art.css
           grep -q "#darHomeHtmlParityV1 .dhp-welcome" /tmp/dar-test-art.js

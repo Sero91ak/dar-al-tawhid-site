@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 
-URL="https://dar-al-tawhid-test.sero91ak.workers.dev/test/?env=staging&immersive=20261106-v2#home"
+URL="https://dar-al-tawhid-test.sero91ak.workers.dev/test/?env=staging&immersive=20261106-appstore-v1#home"
 
 
 def nav_snapshot(d):
