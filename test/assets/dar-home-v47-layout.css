@@ -195,3 +195,14 @@ html.dar-home-v47-layout.dar-home-v1194 body.is-home-route #dv3Home .dv3-quick{
   grid-template-columns:repeat(3,minmax(0,1fr))!important;
  }
 }
+
+/* Legacy Test Home: the full Welcome title wraps by available pane width. */
+html.dar-home-v47-layout.dar-home-v1194 body.is-home-route .dar-v47-title{
+ margin:7px 0 8px!important;font:600 clamp(17px,3.7vw,23px)/1.26 Georgia,serif!important;
+ max-width:100%!important;overflow-wrap:break-word!important;text-wrap:balance!important;
+ color:var(--v47-ink)!important;
+}
+html.dar-home-v47-layout.dar-home-v1194 body.is-home-route .dar-v47-intro{
+ max-width:70ch!important;height:auto!important;max-height:none!important;
+ white-space:normal!important;overflow-wrap:break-word!important;text-wrap:pretty!important;
+}
