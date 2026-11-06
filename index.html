@@ -10549,7 +10549,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/dar-quran-player.js?v=1111" defer></script>
 <script src="/assets/dar-quran-learn-studio.js?v=2" defer></script>
 <link rel="stylesheet" href="/assets/dar-quran-learn-studio.css?v=2">
-<script src="/assets/adaptive-layout.js?v=20261030-nav-static-v1" defer></script>
+<script src="/assets/adaptive-layout.js?v=20261030-posture-v1" defer></script>
 <script src="/assets/qibla-quick-view.js?v=2" defer></script>
 <script src="/assets/global-update-banner.js?v=3"></script>
 <script src="/assets/fold-split.js?v=4" defer></script>
@@ -12188,7 +12188,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/dar-top-chrome-fix.css?v=2"><!-- DAR_TOP_CHROME_FIX -->
 <link rel="stylesheet" href="/assets/dar-ios-oversize-copy.css?v=7"><!-- DAR_IOS_OVERSIZE_COPY -->
 <link rel="stylesheet" href="/assets/full-edge-appearance-polish.css?v=666">
-<link rel="stylesheet" href="/assets/fold-split.css?v=2">
+<link rel="stylesheet" href="/assets/fold-split.css?v=1333-posture">
 <style id="typography-compact-fix-v310">
 /* Finale Typografie-Korrektur — gewinnt gegen Home-Compact-Overrides */
 .section-head h3,
@@ -29002,7 +29002,21 @@ function renderTopicsFoldRoute(view,value){
     if(view==="series")return renderSeries(value);
     return renderTopics();
   }
-  if(view==="topics")return DarFold.shell(renderTopics(),DarFold.emptyPane("Links ein Thema öffnen"),{family:"posts",compactMode:"rail"});
+  if(view==="topics"){
+    let pane=DarFold.emptyPane("Links ein Thema öffnen");
+    try{
+      const map=typeof countBy==="function"?countBy("category"):null;
+      let name="";
+      if(map&&typeof map.entries==="function"){
+        const entries=[...map.entries()].filter(([k,n])=>k&&k!=="Unbekannt"&&Number(n)>0);
+        const keys=new Set(entries.map(([k])=>String(k)));
+        const preferred=["Aqīdah","Tawḥīd","Īmān","Qurʾān & Tafsīr","Sunnah","Hadith","Āthār","Ṣaḥābah","Tābiʿīn","Wissen","Fiqh","Adab"];
+        name=preferred.find(p=>keys.has(p))||(entries[0]?String(entries[0][0]):"");
+      }
+      if(name)pane=renderFiltered("category",name);
+    }catch(e){}
+    return DarFold.shell(renderTopics(),pane,{family:"posts",compactMode:"pane"});
+  }
   if(view==="topic")return DarFold.shell(renderTopics(),renderFiltered("category",value),{family:"posts",compactMode:"pane"});
   if(view==="recent")return DarFold.shell(renderTopics(),renderRecent(),{family:"posts",compactMode:"pane"});
   if(view==="saved")return DarFold.shell(renderTopics(),renderSaved(),{family:"posts",compactMode:"pane"});
@@ -29034,7 +29048,14 @@ function renderQuranFoldRoute(view,value){
     return renderQuranSurah(value);
   }
   const rail=renderQuran();
-  if(view==="quran")return DarFold.shell(rail,DarFold.emptyPane("Links eine Sūrah öffnen"),{family:"quran",compactMode:"rail"});
+  if(view==="quran"){
+    let open="1/1";
+    try{
+      const p=typeof getPreferredQuranProgress==="function"?getPreferredQuranProgress():null;
+      if(p&&Number(p.surahNumber)>=1)open=String(p.surahNumber)+"/"+(Number(p.ayahNumber)||1);
+    }catch(e){}
+    return DarFold.shell(rail,renderQuranSurah(open),{family:"quran",compactMode:"pane"});
+  }
   return DarFold.shell(rail,renderQuranSurah(value),{family:"quran",compactMode:"pane"});
 }
 function renderPostFold(id){
@@ -29435,8 +29456,11 @@ window.addEventListener("dar:layoutchange",function(ev){
     var d=ev&&ev.detail||{};
     var prev=window.__darLastFoldDual;
     var now=!!(d.dual!=null?d.dual:(window.DarFold&&DarFold.isDual()));
-    if(prev===now)return;
+    var posture=String(d.posture||document.documentElement.getAttribute("data-device-posture")||"");
+    var prevPosture=window.__darLastFoldPosture||"";
+    if(prev===now&&prevPosture===posture)return;
     window.__darLastFoldDual=now;
+    window.__darLastFoldPosture=posture;
     /* Zustand beim Drehen/Fold behalten: Scroll, Rail, Suche, Route bleibt in Hash */
     try{
       window.__darPreserveLayoutScrollY=window.scrollY||0;

@@ -85,19 +85,93 @@
     return true;
   }
 
+  /* Hardware postures. Viewport Segments (Chrome on Fold/Duo) win.
+     Without the API, sizes follow the real CSS viewports:
+     Fold cover ~370×900 single, Fold inner ~707×823 nearly square,
+     Duo one screen ~540×720 single, Duo spanned landscape ~1114×720,
+     Duo spanned portrait stacked, iPad landscape master/detail. */
+  function readViewportSegments() {
+    var horizontal = 1;
+    var vertical = 1;
+    var hinge = 0;
+    var segW = 0;
+    try {
+      if (global.matchMedia && global.matchMedia("(horizontal-viewport-segments: 2)").matches) horizontal = 2;
+      if (global.matchMedia && global.matchMedia("(vertical-viewport-segments: 2)").matches) vertical = 2;
+    } catch (e) {}
+    try {
+      var list = global.visualViewport && global.visualViewport.segments;
+      if (list && list.length >= 2) {
+        var a = list[0];
+        var b = list[1];
+        if (b.x >= a.x + a.width - 4) {
+          horizontal = 2;
+          hinge = Math.max(0, Math.round(b.x - (a.x + a.width)));
+          segW = Math.round(a.width);
+        } else if (b.y >= a.y + a.height - 4) {
+          vertical = 2;
+          hinge = Math.max(0, Math.round(b.y - (a.y + a.height)));
+        }
+      }
+    } catch (e2) {}
+    return { horizontal: horizontal, vertical: vertical, hinge: hinge, segW: segW };
+  }
+
+  function readDevicePosture(width, height) {
+    var w = Math.max(0, Number(width) || 0);
+    var h = Math.max(0, Number(height) || 0);
+    var seg = readViewportSegments();
+    var shortEdge = Math.min(w, h);
+    var longEdge = Math.max(w, h);
+    var ratio = shortEdge > 0 ? longEdge / shortEdge : 1;
+    var kind = "single";
+    var hinge = 18;
+    if (seg.vertical >= 2 && seg.horizontal < 2) {
+      kind = "span-stack";
+      hinge = Math.max(16, seg.hinge || 24);
+    } else if (seg.horizontal >= 2) {
+      kind = "hinge-book";
+      hinge = Math.max(12, seg.hinge || 16);
+    } else if (w > h && h < EXPANDED_MIN_HEIGHT) {
+      kind = "phone-landscape";
+      hinge = 0;
+    } else if (shortEdge >= 640 && ratio < 1.38 && longEdge <= 1000) {
+      kind = "fold-book";
+      hinge = 18;
+    } else if (w >= 1000 && h >= 600 && h <= 760 && ratio >= 1.45) {
+      kind = "duo-book";
+      hinge = 34;
+    } else if (w <= 760 && w >= 500 && h >= 1000 && h / w >= 1.45) {
+      kind = "span-stack";
+      hinge = 24;
+    } else if (w >= EXPANDED_MIN && h >= EXPANDED_MIN_HEIGHT) {
+      kind = "tablet-book";
+      hinge = MASTER_GAP;
+    }
+    return { kind: kind, hinge: hinge, segW: seg.segW, segments: seg };
+  }
+
   function computeLayoutCapacity(width, height) {
     var w = Math.max(0, Number(width) || 0);
     var h = Math.max(0, Number(height) || 0);
+    var posture = readDevicePosture(w, h);
     var sideReserve = sideNavEffective(w, h) ? SIDE_NAV_RESERVE : 0;
     var outer = Math.round(Math.max(24, Math.min(48, w * 0.04)));
     var usable = Math.max(0, w - sideReserve - outer);
-    var rail = Math.round(Math.min(RAIL_MAX, Math.max(RAIL_MIN, usable * 0.31)));
-    var reader = Math.max(0, usable - rail - MASTER_GAP);
+    var gap = posture.hinge;
+    var rail = Math.round(Math.min(RAIL_MAX, Math.max(RAIL_MIN, usable * 0.34)));
+    if (posture.segW > 0 && (posture.kind === "hinge-book" || posture.kind === "fold-book" || posture.kind === "duo-book")) {
+      rail = posture.segW;
+    } else if (posture.kind === "fold-book" || posture.kind === "duo-book" || posture.kind === "hinge-book") {
+      rail = Math.max(280, Math.round((usable - gap) / 2));
+    } else if (posture.kind === "span-stack") {
+      rail = usable;
+    }
+    var reader = Math.max(0, usable - rail - gap);
     var readerMin = READER_MIN;
-    /* Phone landscape stays a single app surface. A real master/detail split
-       needs tablet/Fold-like short-edge height, not only a wide aspect ratio. */
-    var phoneLandscape = w > h && h < EXPANDED_MIN_HEIGHT;
-    var dual = !phoneLandscape && w >= EXPANDED_MIN && h >= EXPANDED_MIN_HEIGHT && reader >= readerMin;
+    if (posture.kind === "tablet-book" && reader < readerMin) posture = { kind: "single", hinge: 0, segW: 0, segments: posture.segments };
+    var phoneLandscape = posture.kind === "phone-landscape";
+    var dual = posture.kind !== "single" && posture.kind !== "phone-landscape";
     return {
       width: w,
       height: h,
@@ -105,10 +179,12 @@
       outerGutter: outer,
       usable: usable,
       rail: rail,
-      gap: MASTER_GAP,
+      gap: gap,
       reader: reader,
       readerMin: readerMin,
-      dual: dual
+      dual: dual,
+      posture: posture.kind,
+      phoneLandscape: phoneLandscape
     };
   }
 
@@ -188,10 +264,13 @@
   function applyOrientationAttrs(metrics) {
     var root = document.documentElement;
     var landscape = metrics.width >= metrics.height;
-    var dual = isDualViewport(metrics.width, metrics.height);
-    var phoneLandscape = isPhoneLandscapeViewport(metrics.width, metrics.height);
+    var capacityNow = computeLayoutCapacity(metrics.width, metrics.height);
+    var dual = !!capacityNow.dual;
+    var phoneLandscape = !!capacityNow.phoneLandscape;
     root.setAttribute("data-orientation", landscape ? "landscape" : "portrait");
-    root.setAttribute("data-layout-surface", phoneLandscape ? "phone-landscape" : (dual ? "workspace" : "single"));
+    root.setAttribute("data-device-posture", capacityNow.posture || "single");
+    root.setAttribute("data-layout-surface", phoneLandscape ? "phone-landscape" : (dual ? capacityNow.posture : "single"));
+    root.style.setProperty("--fold-hinge", (capacityNow.gap || 0) + "px");
     root.classList.toggle("is-layout-landscape", landscape);
     root.classList.toggle("is-phone-landscape", phoneLandscape);
     root.classList.toggle("is-layout-wide", metrics.width >= 600);
@@ -251,6 +330,7 @@
               width: metrics.width,
               height: metrics.height,
               dual: dual,
+              posture: capacity.posture || "single",
               orientation: metrics.width >= metrics.height ? "landscape" : "portrait",
             },
           })
