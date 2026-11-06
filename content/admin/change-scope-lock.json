@@ -9319,6 +9319,17 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-16T23:59:00.000Z"
+    },
+    {
+      "id": "frauen-quellen-dubletten-10erblocks-live-20261106",
+      "at": "2026-11-06T10:40:00+01:00",
+      "approvedBy": "user-explicit-20261106-push-frauen-aussagen-in-die-app",
+      "reason": "Owner explicitly requested live publication of the prepared Frauenwissen reports. Temporary exact-file-only unlock for the already merged read-only scholarly duplicate guard and its audit log, required by the existing production deployment guard. No permission for OneSignal, worker secrets, prayer, Kids, TV, app chrome redesign, or global lock bypass.",
+      "paths": [
+        "scripts/check-frauen-source-duplicates.cjs",
+        "content/admin/frauen-dubletten-protokoll-2026-11-06.json"
+      ],
+      "expiresAt": "2026-11-09T23:59:00+01:00"
     }
   ],
   "enabled": true
