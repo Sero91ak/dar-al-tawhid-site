@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-262` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-263` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4763
-totalVerifiedEntries: 4763
-loadedEntries: 4763
-uniqueVerifiedReferences: 4763
-missingCount: 1473
+entriesCount: 4764
+totalVerifiedEntries: 4764
+loadedEntries: 4764
+uniqueVerifiedReferences: 4764
+missingCount: 1472
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:82
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-262.json
-nächster Gap-Fill-Batch: entries-gap-06-263.json
+letzter Gap-Fill-Batch: entries-gap-06-263.json
+nächster Gap-Fill-Batch: entries-gap-06-264.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `573` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `574` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -675,3 +675,7 @@ Zehn neue vor dem Batch tatsächlich offene Referenzen: 4:56, 4:61, 4:71, 4:72, 
 ## Batch 06-262 – 06.11.2026 (authentizitätsgeprüft)
 
 10 Originalstellen untersucht, 1 authentisch bewertete mawqūf-Überlieferung zu 4:141 übernommen; 9 noch offen. 4763 von 6236, 1473 Lücken. Quellen, Einwände und Einzelstatus: SOURCE_REVIEW_06-262.md. Gewünschte Batchgröße rechtfertigt keine schwach belegte Zuschreibung.
+
+## Batch 06-263 — 06.11.2026
+
+Ein authentisch eingestufter mawqūf-Āṯar von Abū Hurayrah zu Qurʾān 4:145, Ibn Abī Ḥātim 6154. Aḥmad Šākir: isnād ṣaḥīḥ; al-Wādiʿī: isnād ḥasan. Vier weitere geprüfte Kandidaten (4:118, 4:120, 4:124, 4:171) bleiben mangels vollständiger Beweislage offen. Katalog 4764, Lücken 1472; Detailbericht SOURCE_REVIEW_06-263.md.
