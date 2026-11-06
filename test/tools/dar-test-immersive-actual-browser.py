@@ -141,8 +141,25 @@ def main():
                 ancestors:ancestors};
             """)
             print(f"STICKY TRACE {width}x{height} {sticky}",flush=True)
-            if after["scrollY"]>=350 and after["top"] < -6:
-                raise AssertionError("Hero scene is not pinned under the fixed header: "+str(sticky))
+            # App Store: big image moves AWAY under the real fixed header.
+            # Only the compact original DĀR header remains when scrolling up.
+            header_state=d.execute_script("""
+              const h=document.getElementById('darTestBrandHeaderV1');
+              const e=document.querySelector('#darHomeHtmlParityV1 .dhp-welcome');
+              return {headerAlpha:parseFloat(getComputedStyle(h,'::before').opacity),
+                compactAlpha:h.style.getPropertyValue('--dar-store-header-alpha'),
+                expandedAlpha:h.style.getPropertyValue('--dar-store-expanded-alpha'),
+                titleOpacity:e.style.getPropertyValue('--dar-store-title-opacity'),
+                headerTop:h.getBoundingClientRect().top,
+                headerHeight:h.getBoundingClientRect().height,
+                heroPosition:getComputedStyle(e).position};
+            """)
+            print(f"APPSTORE COLLAPSED {width}x{height} {header_state}",flush=True)
+            if after["scrollY"] >= 350:
+                if after["top"] > before["top"]-150:
+                    raise AssertionError("Full cover still permanently pinned: "+str((before,after)))
+                if header_state["headerAlpha"] < .83 or header_state["heroPosition"] == 'sticky':
+                    raise AssertionError("Original compact header did not morph: "+str(header_state))
 
             if after["progress"] in (None,"","0") or max(after["scrollY"],after["docTop"],after["appTop"])<=0:
                 raise AssertionError("No actual scroll-driven depth change: "+str(after))
@@ -152,6 +169,16 @@ def main():
               const x=document.querySelector('#darHomeHtmlParityV1 .dhp-welcome');
               return x&&x.style.getPropertyValue('--dar-art-progress')==='0';
             """))
+            restored=d.execute_script("""
+              const e=document.querySelector('#darHomeHtmlParityV1 .dhp-welcome');
+              const h=document.getElementById('darTestBrandHeaderV1');
+              return {top:e.getBoundingClientRect().top,
+                alpha:parseFloat(getComputedStyle(h,'::before').opacity)};
+            """)
+            print(f"APPSTORE RESTORED {width}x{height} {restored}",flush=True)
+            if restored["alpha"]>.15 or abs(restored["top"]-before["top"])>10:
+                raise AssertionError("Downscroll did not restore expanded cover: "+str((before,restored)))
+
             # A successful scroll test is not sufficient. The original report
             # concerns nav geometry morphing during SPA route transitions.
             d.execute_script("""
@@ -209,7 +236,7 @@ def main():
                   const el=document.querySelector('#appView .topics-hub > .view-head.dar-art-hero');
                   if(!el||!el.querySelector('.dar-art-layer'))throw new Error('Topics artwork not integrated');
                 """)
-        print("PASS: deployed real Home parity image visibly integrated + reversible sticky depth and stable navigation across MORE/Home route swaps",flush=True)
+        print("PASS: deployed real Home parity image visibly integrated + reversible App Store cover and stable navigation across MORE/Home and Topics route swaps",flush=True)
     finally:
         d.quit()
 if __name__=="__main__":
