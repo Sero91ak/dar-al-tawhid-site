@@ -704,8 +704,10 @@ main#panel.panel{
 <link rel="stylesheet" href="/admin/dar-admin-top-chrome-fix.css?v=4">
 <link rel="stylesheet" href="/admin/command-center-v2.css?v=1">
 <link rel="stylesheet" href="/admin/appearance-v2.css?v=2">
+<link rel="stylesheet" href="/admin/intelligence-v3.css?v=1">
 <script src="/admin/command-center-v2.js?v=1" defer></script>
-<script src="/admin/appearance-v2.js?v=2" defer></script><!-- DAR_ADMIN_TOP_CHROME_FIX -->
+<script src="/admin/appearance-v2.js?v=2" defer></script>
+<script src="/admin/intelligence-v3.js?v=1" defer></script><!-- DAR_ADMIN_TOP_CHROME_FIX -->
 <script>
 window.DAR_ANALYTICS_CONFIG={
   supabaseUrl:"https://djyfkttjbdraynuxrzno.supabase.co",
@@ -3148,6 +3150,8 @@ function renderStart(ctx){
       </div>
     </div>
   </section>
+  <details class="dar-v3-legacy-tools">
+    <summary id="darV3ClassicSummary">Alle vorhandenen Module und klassischen Werkzeuge</summary>
   <section class="folder-grid">
     ${folderCard("①","Beiträge","Suchen, öffnen, speichern.","quellen","Editor")}
     ${folderCard("🌐","Redaktionsatelier","Neun Sprachen · Beiträge · Originalnachweise.","social","Widescreen-Studio")}
@@ -3168,7 +3172,8 @@ function renderStart(ctx){
     <div class="command-card"><b>Nächster Entwurf</b><span>${draftMarkdown.trim()?"Bereit":"Leer"}</span><small>${draftFilename?esc(draftFilename):"Noch kein Beitrag vorbereitet"}</small></div>
     <div class="command-card"><b>Push-Status</b><span>${"Notification" in window?"Prüfbar":"Nicht unterstützt"}</span><small>Test nur auf diesem Admin-Gerät</small></div>
     <div class="command-card"><b>Letzter Fehler</b><span>${esc(lastAdminError())}</span><small>Aus lokalem Admin-Protokoll</small></div>
-  </section>`;
+  </section>
+  </details>`;
 }
 
 /* DAR weekly read-only analytics; only aggregated figures (no individual event records). */
