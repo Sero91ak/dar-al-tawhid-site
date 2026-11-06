@@ -109,7 +109,7 @@
   margin: 0;
   padding: 8px 10px;
   border-radius: 10px;
-  border: 1px solid var(--line2, rgba(140, 190, 255, 0.24));
+  border: 1px solid var(--line2, color-mix(in srgb,var(--admin-accent) 24%,transparent));
   background: color-mix(in srgb, var(--panel2, #27241d) 70%, transparent);
   color: var(--soft, #d2c9b7);
   font-size: 0.78rem;
