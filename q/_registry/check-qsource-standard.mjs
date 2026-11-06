@@ -8,6 +8,7 @@
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -208,4 +209,7 @@ if (fail.length) {
   console.error('Q-Quellenkarten-Freigabe gesperrt: ' + fail.length + ' Fehler.');
   process.exit(1);
 }
+// The Q1–Q50 language layer must pass its own real coverage and identity
+// assertions. A picker alone may never count as complete religious translation.
+execFileSync(process.execPath,[path.join(root,'scripts/check-q1-q50-nine-language-foundation.cjs')],{cwd:root,stdio:'inherit'});
 console.log('Q-Quellenkarten-Gate OK: ' + files.length + ' aktive Bestandskarten, alle Nachweiskarten funktional adressiert; zukünftige Q ab 43 strikt geprüft.');
