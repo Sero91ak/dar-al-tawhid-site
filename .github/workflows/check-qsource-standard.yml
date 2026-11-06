@@ -14,6 +14,8 @@ on:
       - 'assets/q52-localized.js'
       - 'assets/q52-locales.json'
       - 'scripts/check-q52-nine-language.cjs'
+      - 'scripts/check-frauen-nine-language-publication.cjs'
+      - 'data/frauen-*.json'
       - '.github/workflows/check-qsource-standard.yml'
   pull_request:
     paths:
@@ -26,6 +28,8 @@ on:
       - 'assets/q52-localized.js'
       - 'assets/q52-locales.json'
       - 'scripts/check-q52-nine-language.cjs'
+      - 'scripts/check-frauen-nine-language-publication.cjs'
+      - 'data/frauen-*.json'
       - '.github/workflows/check-qsource-standard.yml'
   workflow_dispatch:
 
@@ -49,6 +53,9 @@ jobs:
 
       - name: Q52 nine-language content and lesson regression
         run: node scripts/check-q52-nine-language.cjs
+
+      - name: New Frauen Q cards require nine readable locales and four translated questions
+        run: node scripts/check-frauen-nine-language-publication.cjs
 
       - name: In-app source navigation regression
         run: node q/_registry/check-source-navigation.mjs
