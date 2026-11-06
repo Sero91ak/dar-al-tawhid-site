@@ -493,3 +493,136 @@ html.dar-test-immersive-art-v1[data-theme] body #appView > .view-head.dar-art-he
   min-height:clamp(150px,20svh,245px)!important;
  }
 }
+
+
+/* DAR_TEST_APPSTORE_SCROLL_MORPH_V1 · actual App Store reference 2026-11-06
+   One ORIGINAL image bleeds underneath the fixed DĀR brand header while
+   expanded. Scroll up: scene and editorial copy naturally move under the
+   header; the header's opaque compact state grows with the same scroll
+   distance. Scroll down / iOS rubber-band: the exact inverse transition.
+   NEVER change scrollTop, DOM parent, hero height or fixed nav geometry.
+   The old permanently pinned full-height Home scene is retired. */
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero {
+  position:relative!important;
+  top:auto!important;
+  z-index:24!important;
+  overflow:visible!important;
+  isolation:isolate!important;
+  margin-top:0!important;
+  margin-bottom:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  /* Full image from top, not a separate rounded banner */
+  background:transparent!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero > .dar-art-layer {
+  top:calc(-1 * var(--dar-art-top,58px))!important;
+  bottom:0!important;
+  left:0!important;right:0!important;
+  border-radius:0!important;
+  overflow:hidden!important;
+  background:var(--dar-art-edge,var(--bg))!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero > .dar-art-layer::before {
+  inset:-1.5%!important;
+  background-position:center,center,var(--dar-art-focus,69% 48%)!important;
+  background-size:cover!important;
+  transform:scale(var(--dar-store-image-scale,1.045))!important;
+  transform-origin:68% 20%!important;
+  will-change:transform;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero > :not(.dar-art-layer){
+  opacity:var(--dar-store-title-opacity,1)!important;
+  transform:translate3d(0,var(--dar-store-title-shift,0px),0)!important;
+  will-change:opacity,transform;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero > .dhp-welcome-rule {
+  transform:none!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero + .dhp-home-source-v55{
+  margin-top:12px!important;
+}
+/* Scene becomes the FIRST thing after the measured header. The source
+   kicker remains available immediately below the cover rather than
+   creating a blank belt between header and artwork. */
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero { order:0!important; }
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darHomeHtmlParityV1 > .dhp-content > .dhp-home-source-v55 { order:1!important; }
+/* EXISTING fixed original brand header morphs over SAME image; its
+   controls/logo remain real and clickable. Content below has no duplicate
+   image or forced scrollpane. */
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darTestBrandHeaderV1[data-premium-header-v2="ready"] {
+  position:fixed!important;
+  z-index:100!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border-bottom-color:transparent!important;
+  box-shadow:none!important;
+  isolation:isolate!important;
+  overflow:visible!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darTestBrandHeaderV1[data-premium-header-v2="ready"]::before {
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  background:var(--dtbh-bg,var(--bg))!important;
+  border-bottom:1px solid var(--dtbh-line,var(--line))!important;
+  opacity:var(--dar-store-header-alpha,0)!important;
+  pointer-events:none!important;
+  box-shadow:0 6px 20px rgba(0,0,0,.06);
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darTestBrandHeaderV1[data-premium-header-v2="ready"]::after {
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  background:linear-gradient(180deg,rgba(0,0,0,.19),rgba(0,0,0,.055))!important;
+  opacity:var(--dar-store-expanded-alpha,1)!important;
+  pointer-events:none!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darTestBrandHeaderV1[data-premium-header-v2="ready"] > .dtbh-row{
+  position:relative!important;
+  z-index:2!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darTestBrandHeaderV1[data-premium-header-v2="ready"] > .dtbh-profile-popover {
+  position:absolute!important;
+  z-index:4!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darTestBrandHeaderV1[data-premium-header-v2="ready"] .dtbh-logo{
+  transform:scale(var(--dar-store-logo-scale,1))!important;
+  transform-origin:center!important;
+}
+/* Compact header remains the ORIGINAL header: no cloned text, buttons,
+   icons, or separate navigation controller. */
+@media(max-width:699px){
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+ #darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero{
+   min-height:clamp(340px,48svh,480px)!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+ #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero > .dar-art-layer::before,
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+ #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero > :not(.dar-art-layer){
+   will-change:auto!important;
+   transform:none!important;
+ }
+}
