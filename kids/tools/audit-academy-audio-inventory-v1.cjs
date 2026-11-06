@@ -20,10 +20,11 @@ const archive=JSON.parse(fs.readFileSync(path.join(root,"kids/data/academy-voice
 const publicAudio=JSON.parse(fs.readFileSync(path.join(root,"kids/data/academy-audio.json"),"utf8"));
 const ages=["4-5","6-8","9-10"];
 const phrases=new Map(),issues=[];
+const sourceStats={quranRecitationExcluded:true,syntheticQuranAudioCount:0,ageProfiles:["4-5","6-8","9-10"],genderProfiles:["boy","girl"]};
 function add(raw,id,age,kind){
  const value=String(raw||"").normalize("NFC").replace(/\s+/g," ").trim();
  if(!value)return;
- if(/[\u0600-\u06ff]/.test(value)){issues.push({id,age,kind,code:"arabic_in_narration_requires_separate_fusha_review"});return;}
+ if(/[\u0600-\u06ff]/.test(value)){issues.push({id,age,kind,code:"arabic_in_narration_requires_separate_fusha_review",text:value});return;}
  if(!phrases.has(value))phrases.set(value,{text:value,sha256:crypto.createHash("sha256").update(value).digest("hex"),contexts:[]});
  phrases.get(value).contexts.push({id,age,kind});
 }
@@ -62,7 +63,7 @@ for(const age of ages){
 const old=new Set((archive.phrases||[]).map(x=>x.text));
 const publicEntries=publicAudio.entries||{};
 const output={
- schemaVersion:1,mode:"read-only-zero-credit",notHumanApproved:true,
+ schemaVersion:1,mode:"read-only-zero-credit",notHumanApproved:true,sourceStats,
  lessonCount:Object.keys(lessons).length+1,inlineSidqIncluded:true,
  ageVersions:(Object.keys(lessons).length+1)*ages.length,questionCount,invalidChoices,
  uniqueCandidatePhrases:phrases.size,archivedExactPhraseMatches:[...phrases.keys()].filter(x=>old.has(x)).length,
@@ -73,4 +74,4 @@ const output={
 };
 if(process.argv.includes("--summary")){const {phrases:_,...summary}=output;console.log(JSON.stringify(summary,null,2));}
 else console.log(JSON.stringify(output,null,2));
-if(invalidChoices)process.exitCode=1;
+if(invalidChoices||output.lessonCount!==66||output.ageVersions!==198||!questionCount)process.exitCode=1;
