@@ -62,6 +62,15 @@ function validatePack(p){
  if(target.some(function(k){return p[k]===undefined||p[k]===null}))return false;
  return Array.isArray(p.linkTitles)&&Array.isArray(p.linkSubs)&&p.linkTitles.length>0&&p.linkTitles.length===p.linkSubs.length;
 }
+function syncLearningLinks(code){
+ var page=find(".qsource-page");if(!page)return;
+ Array.prototype.slice.call(page.querySelectorAll('a[href^="/lernen/"]')).forEach(function(a){
+  var original=a.getAttribute("data-q-legacy-learning-href")||a.getAttribute("href");
+  if(!original||!/^\/lernen\/[a-z0-9-]+\/?(?:\?[^#]*)?$/.test(original))return;
+  if(!a.getAttribute("data-q-legacy-learning-href"))a.setAttribute("data-q-legacy-learning-href",original);
+  try{var u=new URL(original,location.href);u.searchParams.set("lang",code);a.setAttribute("href",u.pathname+u.search+u.hash)}catch(_){}
+ });
+}
 function render(){
  if(!controls)return;
  var code=current(),ui=UI[code]||UI.de;
@@ -69,6 +78,7 @@ function render(){
  controls.label.textContent="🌐 "+ui.language;
  controls.select.setAttribute("aria-label",ui.language+" · Q"+number);
  controls.select.value=code;
+ syncLearningLinks(code);
  restore();
  var pack=manifest&&manifest.pages&&manifest.pages[String(number)];
  var chosen=pack&&pack.locales&&pack.locales[code];
