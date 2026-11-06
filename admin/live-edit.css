@@ -4,7 +4,7 @@
   --le-line:color-mix(in srgb,var(--line,#b89654) 80%,transparent);
   --le-accent:color-mix(in srgb,var(--gold2,#e0c994) 70%,#fff 10%);
   --le-muted:color-mix(in srgb,var(--muted,#b9b7a8) 90%,transparent);
-  --le-danger:#c45b5b;
+  --le-danger:var(--admin-danger-text);
   display:grid;
   gap:10px;
   margin-top:4px;
@@ -103,8 +103,8 @@
 .live-edit-field textarea{min-height:120px;resize:vertical;line-height:1.45}
 .live-edit-field textarea.tall{min-height:220px}
 .live-edit-status{font-size:11px;font-weight:750;color:var(--le-muted)}
-.live-edit-status.is-ok{color:#6fbf86}
-.live-edit-status.is-warn{color:#d2a85a}
+.live-edit-status.is-ok{color:var(--admin-success-text)}
+.live-edit-status.is-warn{color:var(--admin-warning-text)}
 .live-edit-status.is-err{color:var(--le-danger)}
 .live-edit-menu{
   position:absolute;z-index:5;min-width:180px;padding:6px;border-radius:12px;border:1px solid var(--le-line);
