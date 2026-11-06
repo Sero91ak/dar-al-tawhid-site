@@ -12,4 +12,4 @@
 }
 .topbar,.brand,.admin-cover,.hero-title,.login{position:relative!important}
 .brand h1,.login h2,.admin-cover h2,.hero-title h2{color:var(--gold,#efd78e)!important;opacity:1!important;visibility:visible!important;-webkit-text-fill-color:var(--gold,#efd78e)!important}
-.brand p,.login p,.admin-cover p,.hero-title p,.hint{color:#d7c9a8!important;opacity:1!important}
+.brand p,.login p,.admin-cover p,.hero-title p,.hint{color:var(--v2muted,var(--soft,#d7c9a8))!important;opacity:1!important}

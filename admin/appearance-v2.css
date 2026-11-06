@@ -5,23 +5,28 @@ html[data-dar-admin-theme="layl"]{
  color-scheme:dark;
  --bg:#0c0e0d;--panel:#111815;--panel2:#19231e;--card:#17231d;
  --ink:#f6f0e4;--soft:#e0d3bd;--muted:#aeb8ad;
- --gold:#e0c994;--gold2:#eedcb6;--bronze:#b89654;--green:#98cbb0;--blue:#a9c8b9;
+ --gold:#e0c994;--gold2:#eedcb6;--bronze:#b89654;--green:#cbb382;--blue:#e0c994;
  --line:rgba(184,150,84,.34);--line2:rgba(184,150,84,.19);
  --shadow:0 18px 46px rgba(0,0,0,.29);
- --v2bg:#0c0e0d;--v2ink:#f6f0e4;--v2gold:#e0c994;--v2mint:#a0d3b7;
- --v2muted:#afbcb0;--v2line:rgba(184,150,84,.25);
- --admin-page-background:radial-gradient(ellipse at 76% -12%,rgba(82,118,86,.15),transparent 44%),linear-gradient(180deg,#121713,#0c0e0d 60%);
+ --v2bg:#0c0e0d;--v2ink:#f6f0e4;--v2gold:#e0c994;--v2mint:#d3bc87;
+ --v2muted:#b9b7a8;--v2line:rgba(184,150,84,.25);
+ --admin-legacy-base-rgb:12,14,13;--admin-legacy-panel-rgb:23,24,21;
+ --admin-legacy-panel2-rgb:37,37,30;--admin-legacy-tint-rgb:184,150,84;
+ --admin-legacy-gold-rgb:224,201,148;--admin-legacy-text-rgb:246,240,228;
+ --admin-legacy-subtle-rgb:185,183,168;--admin-surface-solid:#171815;
+ --red:#f4a6a0;--admin-danger-text:#f4a6a0;--admin-warning-text:#e0c994;--admin-success-text:#c6d7ba;
+ --admin-page-background:radial-gradient(ellipse at 76% -12%,rgba(184,150,84,.10),transparent 44%),linear-gradient(180deg,#141612,#0c0e0d 60%);
  --admin-topbar-background:rgba(16,23,18,.93);
- --admin-rail-background:linear-gradient(180deg,#18241c,#0d1310);
- --admin-cover-background:radial-gradient(circle at 80% 12%,rgba(213,187,121,.10),transparent 31%),linear-gradient(130deg,#24372c,#111b16);
- --admin-panel-background:linear-gradient(145deg,#202e25,#141f19);
- --admin-elevated-background:#1b291f;
- --admin-input-background:#131d18;
+ --admin-rail-background:linear-gradient(180deg,#201f19,#111310);
+ --admin-cover-background:radial-gradient(circle at 80% 12%,rgba(213,187,121,.10),transparent 31%),linear-gradient(130deg,#25251e,#141612);
+ --admin-panel-background:linear-gradient(145deg,#25241e,#171916);
+ --admin-elevated-background:#22221d;
+ --admin-input-background:#141713;
  --admin-control-background:rgba(224,201,148,.08);
  --admin-hover-background:rgba(224,201,148,.10);
- --admin-active-background:linear-gradient(110deg,rgba(224,201,148,.19),rgba(116,167,130,.08));
+ --admin-active-background:linear-gradient(110deg,rgba(224,201,148,.19),rgba(184,150,84,.08));
  --admin-bar-track:rgba(255,255,255,.09);
- --admin-chart-gradient:linear-gradient(90deg,#668f75,#d8c38a);
+ --admin-chart-gradient:linear-gradient(90deg,#af8d50,#e0c994);
  --admin-dimmer:rgba(5,10,6,.74);
  --admin-shadow:0 16px 40px rgba(0,0,0,.24);
  --admin-strong:#f6f0e4;
@@ -35,6 +40,11 @@ html[data-dar-admin-theme="salbei"]{
  --shadow:0 13px 35px rgba(31,49,39,.09);
  --v2bg:#f4f6f0;--v2ink:#17211b;--v2gold:#7d5d2b;--v2mint:#3f5d4b;
  --v2muted:#536057;--v2line:rgba(94,116,101,.23);
+ --admin-legacy-base-rgb:244,246,240;--admin-legacy-panel-rgb:249,250,246;
+ --admin-legacy-panel2-rgb:238,242,235;--admin-legacy-tint-rgb:94,116,101;
+ --admin-legacy-gold-rgb:138,106,47;--admin-legacy-text-rgb:23,33,27;
+ --admin-legacy-subtle-rgb:83,96,87;--admin-surface-solid:#f9faf6;
+ --red:#9a453d;--admin-danger-text:#9a453d;--admin-warning-text:#7d5d2b;--admin-success-text:#2e6241;
  --admin-page-background:radial-gradient(ellipse at 75% -10%,rgba(94,116,101,.10),transparent 45%),linear-gradient(180deg,#f8f9f5,#f4f6f0 60%,#eef2eb);
  --admin-topbar-background:rgba(249,250,246,.96);
  --admin-rail-background:linear-gradient(180deg,#f9faf6,#edf2e9);
@@ -179,4 +189,68 @@ html[data-dar-admin-theme] body:not(.dar-v2-active) .login input{
 @media(prefers-reduced-motion:reduce){
  html[data-dar-admin-theme] .dar-admin-appearance-toggle,
  html[data-dar-admin-theme] .dar-admin-theme-choice{transition:none!important;animation:none!important}
+}
+
+/* V3 universal appearance bridge.
+ * Legacy Admin <style> and module styles are still loaded, but their presentation
+ * must inherit exactly one of the two canonical palettes.
+ * This file is only linked by /admin/, never visitor or Kids surfaces. */
+html[data-dar-admin-theme] {
+ --admin-focus-ring:var(--v2gold);
+ --admin-form-border:var(--v2line);
+ --admin-module-text:var(--v2ink);
+ --admin-module-muted:var(--v2muted);
+}
+html[data-dar-admin-theme] #panel :is(
+ .panel,.card,.stat,.stats-card,.summary-card,.preview-box,.folder-card,.command-card,
+ .visitor-hero,.news-panel,.status-row,.upload-status,.admin-action-card,.admin-action-body,
+ .tab-order-item,.lib-admin-head,.lib-admin-drop,.lib-admin-row,.lib-admin-item,
+ .live-edit-head,.live-edit-stage
+){
+ background:var(--admin-panel-background)!important;
+ color:var(--v2ink)!important;
+ border-color:var(--v2line)!important;
+}
+html[data-dar-admin-theme] #panel :is(
+ .section-head h3,.panel h2,.panel h3,.admin-action-card h3,.visitor-hero h3,
+ .command-card b,.folder-card h3
+){color:var(--v2gold)!important;-webkit-text-fill-color:currentColor!important}
+html[data-dar-admin-theme] #panel :is(
+ .field,.tab-select,.paste-area,input:not([type=checkbox]):not([type=radio]):not([type=file]),
+ textarea,select
+){
+ background:var(--admin-input-background)!important;
+ color:var(--v2ink)!important;
+ border-color:var(--v2line)!important;
+ caret-color:var(--v2ink);
+}
+html[data-dar-admin-theme] #panel :is(
+ .btn,.chip,.tab,.quick,.status-pill
+){
+ border-color:var(--v2line)!important;
+ color:var(--v2ink)!important;
+}
+html[data-dar-admin-theme] #panel :is(.btn,.chip,.tab,.quick):not(:disabled){
+ background:var(--admin-control-background)!important
+}
+html[data-dar-admin-theme] #panel :is(
+ .empty,.hint,.meta-line,.status-row small,.notice-note,.visitor-lead,.change-item span,
+ .admin-action-card small,.folder-card p,.folder-card small
+){color:var(--v2muted)!important}
+html[data-dar-admin-theme] #panel :is(input,textarea,select)::placeholder{
+ color:var(--v2muted)!important;opacity:.85
+}
+html[data-dar-admin-theme] #panel :is(.btn,.chip,.tab,.field,button,input,select,textarea):focus-visible{
+ outline:2px solid var(--admin-focus-ring)!important;outline-offset:2px
+}
+html[data-dar-admin-theme] #panel :is(.tab.active,.chip.active,.status-pill.active){
+ background:var(--admin-active-background)!important;color:var(--v2gold)!important;
+ border-color:var(--v2gold)!important
+}
+/* Exempt the editorial paper; its own light, source-facing print canvas is intentional. */
+html[data-dar-admin-theme] body.dar-v2-active .social-review .social-paper{
+ background:#f9f5e7!important;color:#243327!important
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-dar-admin-theme] #panel :is(.panel,.card,.btn,.field){transition:none!important}
 }

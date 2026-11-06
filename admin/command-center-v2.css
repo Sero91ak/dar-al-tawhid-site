@@ -1,5 +1,5 @@
 /* DĀR ADMIN / Command Center V2 / admin surface only */
-:root{--v2bg:#061410;--v2ink:#f5f1e5;--v2gold:#e6ca8b;--v2mint:#91d7bd;--v2muted:#a9b8b2;--v2line:rgba(205,202,156,.2);--v2rail:245px;--v2ease:cubic-bezier(.22,1,.36,1)}
+:root{--v2bg:#0c0e0d;--v2ink:#f6f0e4;--v2gold:#e0c994;--v2mint:#d3bc87;--v2muted:#b9b7a8;--v2line:rgba(184,150,84,.25);--v2rail:245px;--v2ease:cubic-bezier(.22,1,.36,1)}
 body.dar-v2-active{background:var(--admin-page-background)!important;color:var(--v2ink)!important;padding:0!important;margin:0!important;overflow-x:hidden!important}
 body.dar-v2-active .app{width:calc(100% - var(--v2rail))!important;max-width:none!important;min-width:0!important;margin:0 0 0 var(--v2rail)!important;padding:0!important;min-height:100dvh!important}
 body.dar-v2-active #topbar{position:sticky!important;top:0!important;z-index:70!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;padding:9px clamp(14px,2vw,32px)!important;margin:0!important;min-height:70px!important;border:0!important;border-bottom:1px solid var(--v2line)!important;background:var(--admin-topbar-background)!important;backdrop-filter:blur(21px);border-radius:0!important;box-shadow:none!important}
@@ -8,7 +8,7 @@ body.dar-v2-active #topbar .brand img{border-radius:10px!important;box-shadow:no
 body.dar-v2-active #topbar .toolbar{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:6px!important;flex-wrap:wrap!important}
 body.dar-v2-active #topbar .toolbar .btn{min-height:37px!important;padding:7px 11px!important;border:1px solid var(--v2line)!important;border-radius:10px!important;color:var(--v2ink)!important;background:var(--admin-control-background)!important;box-shadow:none!important}
 body.dar-v2-active #topbar .toolbar .dar-v2-search-launch{color:var(--v2gold)!important}
-body.dar-v2-active #panel{width:100%!important;max-width:none!important;min-width:0!important;margin:0!important;padding:clamp(16px,2.2vw,34px)!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+body.dar-v2-active #panel{container-type:inline-size;width:100%!important;max-width:none!important;min-width:0!important;margin:0!important;padding:clamp(16px,2.2vw,34px)!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
 body.dar-v2-active #panel>.tab-picker{display:none!important}
 body.dar-v2-active #panel>.meta-line{font-size:11px!important;color:var(--v2muted)!important}
 body.dar-v2-active #panel .admin-cover{min-height:170px!important;margin:0 0 18px!important;padding:clamp(23px,3vw,43px)!important;border-radius:19px!important;border:1px solid var(--v2line)!important;background:var(--admin-cover-background)!important;box-shadow:0 16px 55px rgba(0,0,0,.18)!important}
@@ -49,7 +49,7 @@ body.dar-v2-active #panel .folder-card{display:flex!important;align-items:flex-s
 body.dar-v2-active #panel .folder-card:hover{transform:translateY(-3px)}body.dar-v2-active #panel .folder-card h3{color:var(--v2gold)!important}body.dar-v2-active #panel .folder-card p,body.dar-v2-active #panel .folder-card small{color:var(--v2muted)!important}
 body.dar-v2-active #panel .command-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:11px!important}body.dar-v2-active #panel .command-card{border:1px solid var(--v2line)!important;border-radius:14px!important;padding:16px!important;background:var(--admin-panel-background)!important;box-shadow:none!important}
 @keyframes v2fade{from{opacity:0}to{opacity:1}}@keyframes v2rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@keyframes v2grow{from{transform:scaleX(.04)}to{transform:scaleX(1)}}
-@media(min-width:720px) and (max-width:1199px){
+@media(min-width:720px) and (max-width:1023px){
 :root{--v2rail:75px}.dar-v2-rail{padding:16px 6px}.dar-v2-brand{justify-content:center;padding:0 0 15px}.dar-v2-brand-words,.dar-v2-group-label,.dar-v2-rail-foot,.dar-v2-rail .dar-v2-nav-label{display:none!important}.dar-v2-nav{justify-content:center;padding:8px}.dar-v2-menu-group{padding:8px 0;border-bottom:1px solid var(--v2line)}
 }
 @media(max-width:1000px){.dar-v2-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.dar-v2-overview-grid{grid-template-columns:1fr}body.dar-v2-active #panel .folder-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
@@ -84,3 +84,40 @@ body.dar-v2-active.dar-editorial-fullscreen #panel{padding:0!important}
 }
 /* Auth boundary: never render private navigation on logout. */
 .dar-v2-rail[hidden],.dar-v2-bottom[hidden]{display:none!important}
+
+
+/* Real content width, not a device model. iPad landscape and desktop share
+   the full navigation at >=1024px; Stage Manager/Split View can shrink to
+   the tablet rail and then to the genuine phone bottom navigation. */
+body.dar-v2-active .app,
+body.dar-v2-active #panel{min-width:0!important;max-width:100%}
+body.dar-v2-active #panel :is(
+ .admin-actions-layout,.split,.quellen-grid,.ordner-grid,.visitor-grid,
+ .folder-grid,.command-grid,.admin-post-quick-actions,.admin-form-grid
+){min-width:0;max-width:100%}
+/* Legacy admin workspace must follow the width after subtracting the rail.
+   Visitors and local change history become stacked, never invisible. */
+@container (max-width:720px){
+ body.dar-v2-active #panel .admin-actions-layout.split,
+ body.dar-v2-active #panel :is(.hero,.split,.quellen-grid,.ordner-grid,.visitor-grid,.upload-grid,.live-preview-shell){
+  grid-template-columns:minmax(0,1fr)!important
+ }
+ body.dar-v2-active #panel .admin-actions-layout .side-stack{
+  display:grid!important;grid-template-columns:minmax(0,1fr)!important;min-width:0!important
+ }
+ body.dar-v2-active #panel :is(.metric-grid,.command-grid,.planner-grid){
+  grid-template-columns:repeat(2,minmax(0,1fr))!important
+ }
+}
+@container (max-width:520px){
+ body.dar-v2-active #panel :is(.folder-grid,.command-grid,.admin-form-grid,.planner-grid){
+  grid-template-columns:minmax(0,1fr)!important
+ }
+ body.dar-v2-active #panel .admin-actions-layout .side-stack{display:grid!important}
+ body.dar-v2-active #panel :is(.btn,.field,.tab,.chip){max-width:100%}
+}
+@media(max-width:950px){
+ /* Original inline 2026 workspace CSS hid this data column altogether.
+    Keep it accessible below the editor instead. */
+ body.dar-v2-active #panel .admin-actions-layout .side-stack{display:grid!important;min-width:0}
+}
