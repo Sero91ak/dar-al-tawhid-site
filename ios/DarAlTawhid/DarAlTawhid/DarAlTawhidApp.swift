@@ -9,6 +9,8 @@ final class DarAppDelegate: NSObject, UIApplicationDelegate {
     ) -> Bool {
         DarInAppOpenGuard.install()
         DarPushNotifications.bootstrap(launchOptions: launchOptions)
+        // iOS schedules this opportunistically; it is not an exact-time timer.
+        application.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
         if let shortcut = launchOptions?[.shortcutItem] as? UIApplicationShortcutItem,
            let destination = shortcutDestination(for: shortcut.type) {
             DarQuickActions.set(destination)
@@ -33,6 +35,22 @@ final class DarAppDelegate: NSObject, UIApplicationDelegate {
             userInfo: ["destination": destination.rawValue]
         )
         completionHandler(true)
+    }
+
+    func application(
+        _ application: UIApplication,
+        performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
+    ) {
+        Task.detached(priority: .utility) {
+            let updated = await DarPrayerSync.refresh()
+            await MainActor.run {
+                let snapshot = DarDailyContent.refresh(DarWidgetStore.load())
+                DarWidgetStore.save(snapshot)
+                WidgetCenter.shared.reloadAllTimelines()
+                DarPrayerLiveActivityController.refresh()
+                completionHandler(updated ? .newData : .noData)
+            }
+        }
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -60,6 +78,7 @@ extension Notification.Name {
 struct DarAlTawhidApp: App {
     @UIApplicationDelegateAdaptor(DarAppDelegate.self) private var appDelegate
     @StateObject private var router = DarAppRouter()
+    @Environment(\.scenePhase) private var scenePhase
 
     init() {
         let ink = DarWidgetStore.load().inkHex.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -77,13 +96,7 @@ struct DarAlTawhidApp: App {
         UIWindow.appearance().backgroundColor = bootInk
         let snap = DarDailyContent.refresh(DarWidgetStore.load())
         DarWidgetStore.save(snap)
-        Task.detached {
-            let live = DarDailyContent.refresh(DarWidgetStore.load(), fetchLiveDaily: true)
-            DarWidgetStore.save(live)
-            await MainActor.run {
-                WidgetCenter.shared.reloadAllTimelines()
-            }
-        }
+        DarPrayerRefreshCoordinator.update()
     }
 
     var body: some Scene {
@@ -96,6 +109,9 @@ struct DarAlTawhidApp: App {
                 }
                 .onAppear {
                     router.openPendingQuickAction()
+                }
+                .onChange(of: scenePhase) { phase in
+                    if phase == .active { DarPrayerRefreshCoordinator.update() }
                 }
                 .onReceive(NotificationCenter.default.publisher(for: .darOpenShortcut)) { note in
                     guard let raw = note.userInfo?["destination"] as? String,
@@ -116,6 +132,22 @@ struct DarAlTawhidApp: App {
         #endif
         .commands {
             CommandGroup(replacing: .newItem) {}
+        }
+    }
+}
+
+
+// One host-app refresh path for startup, foreground reentry and WebApp location changes.
+enum DarPrayerRefreshCoordinator {
+    static func update() {
+        Task.detached(priority: .utility) {
+            _ = await DarPrayerSync.refresh()
+            let latest = DarDailyContent.refresh(DarWidgetStore.load(), fetchLiveDaily: true)
+            DarWidgetStore.save(latest)
+            await MainActor.run {
+                WidgetCenter.shared.reloadAllTimelines()
+                DarPrayerLiveActivityController.refresh()
+            }
         }
     }
 }

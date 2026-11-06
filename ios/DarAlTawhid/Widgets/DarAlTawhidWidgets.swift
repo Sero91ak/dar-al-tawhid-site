@@ -1,6 +1,7 @@
 import SwiftUI
 import WidgetKit
 import AppIntents
+import ActivityKit
 
 private enum DarColors {
     static let navy = Color(red: 0.025, green: 0.075, blue: 0.125)
@@ -25,11 +26,34 @@ struct DarTimelineProvider: TimelineProvider {
         // to the shared App Group by the host app and refreshed locally here.
         let snap = DarDailyContent.refresh(DarWidgetStore.load())
         DarWidgetStore.save(snap)
-        let entry = DarEntry(date: Date(), snapshot: snap)
-        let next = Calendar.current.date(byAdding: .minute, value: 15, to: Date())
-            ?? Date().addingTimeInterval(900)
-        completion(Timeline(entries: [entry], policy: .after(next)))
+        let now = Date()
+        let dates = darPrayerTimelineDates(snapshot: snap, now: now)
+        let entries = dates.map { date in
+            DarEntry(date: date, snapshot: DarDailyContent.refresh(snap, date: date))
+        }
+        let next = now.addingTimeInterval(900)
+        completion(Timeline(entries: entries, policy: .after(next)))
     }
+}
+
+// Timeline entries only at absolute prayer boundaries and day rollover,
+// never per-second timeline simulation. Displayed seconds are system-driven.
+private func darPrayerTimelineDates(snapshot: DarWidgetSnapshot, now: Date) -> [Date] {
+    let boundaries = snapshot.canonicalPrayerDays
+        .filter { $0.matches(snapshot) }
+        .flatMap { day in
+            DarCanonicalPrayerDay.fivePrayers.compactMap { day.prayers[$0]?.dateTime }
+        }
+        .filter { $0 > now && $0 < now.addingTimeInterval(3 * 86_400) }
+        .map { $0.addingTimeInterval(1) }
+    var calendar = Calendar(identifier: .gregorian)
+    if let zone = TimeZone(identifier: snapshot.prayerTimeZone) { calendar.timeZone = zone }
+    let tomorrow = calendar.nextDate(
+        after: now, matching: DateComponents(hour: 0, minute: 0, second: 1),
+        matchingPolicy: .nextTime
+    )
+    let dates = [now] + boundaries + [tomorrow].compactMap { $0 }
+    return Array(Set(dates)).sorted()
 }
 
 struct DarEntry: TimelineEntry {
@@ -191,6 +215,7 @@ struct PrayerWidgetView: View {
     }
 
     var body: some View {
+        let target = entry.snapshot.nextAbsolutePrayer(after: entry.date)?.target
         DarCard(destination: .prayer) {
             VStack(alignment: .leading, spacing: family == .systemSmall ? 9 : 11) {
                 DarHeader(section: entry.snapshot.hijriLabel, compact: family == .systemSmall)
@@ -208,11 +233,7 @@ struct PrayerWidgetView: View {
                             .minimumScaleFactor(0.84)
                             .allowsTightening(true)
                         Spacer(minLength: 2)
-                        Text(entry.snapshot.nextPrayerTime)
-                            .font(.system(size: 25, weight: .bold, design: .rounded).monospacedDigit())
-                            .foregroundStyle(DarColors.paleGold)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.88)
+                        DarAbsolutePrayerTimer(target: target, size: 19, foreground: DarColors.paleGold)
                     }
                     Text(entry.snapshot.cityLabel)
                         .font(.system(size: 10.5, weight: .medium))
@@ -234,9 +255,7 @@ struct PrayerWidgetView: View {
                                 .lineLimit(1)
                         }
                         Spacer(minLength: 4)
-                        Text(entry.snapshot.nextPrayerTime)
-                            .font(.system(size: 31, weight: .bold, design: .rounded).monospacedDigit())
-                            .foregroundStyle(DarColors.paleGold)
+                        DarAbsolutePrayerTimer(target: target, size: 26, foreground: DarColors.paleGold)
                     }
                     HStack(spacing: 6) {
                         ForEach(prayerSlots.prefix(5)) { slot in
@@ -598,10 +617,15 @@ private struct DarConfiguredProvider: AppIntentTimelineProvider {
         let snapshot = DarDailyContent.refresh(DarWidgetStore.load())
         DarWidgetStore.save(snapshot)
         let now = Date()
-        let entry = DarConfiguredEntry(date: now, snapshot: snapshot, appearance: configuration.appearance)
-        let next = Calendar.current.date(byAdding: .minute, value: 10, to: now)
-            ?? now.addingTimeInterval(600)
-        return Timeline(entries: [entry], policy: .after(next))
+        let entries = darPrayerTimelineDates(snapshot: snapshot, now: now).map { date in
+            DarConfiguredEntry(
+                date: date,
+                snapshot: DarDailyContent.refresh(snapshot, date: date),
+                appearance: configuration.appearance
+            )
+        }
+        let next = now.addingTimeInterval(600)
+        return Timeline(entries: entries, policy: .after(next))
     }
 }
 
@@ -693,35 +717,30 @@ private struct DarPremiumLogo: View {
     }
 }
 
-private func darPrayerDate(time: String, after now: Date) -> Date {
-    let parts = time.split(separator: ":").compactMap { Int($0) }
-    guard parts.count == 2 else { return now.addingTimeInterval(3600) }
-    var calendar = Calendar.current
-    calendar.timeZone = .current
-    var components = calendar.dateComponents([.year, .month, .day], from: now)
-    components.hour = parts[0]
-    components.minute = parts[1]
-    components.second = 0
-    let today = calendar.date(from: components) ?? now.addingTimeInterval(3600)
-    return today > now ? today : (calendar.date(byAdding: .day, value: 1, to: today) ?? today.addingTimeInterval(86_400))
-}
-
-@available(iOS 17.0, *)
-private struct DarLivePrayerTimer: View {
-    let now: Date
-    let target: Date
-    let palette: DarPremiumPalette
+// Every timer receives the same absolute target instant from the App Group.
+@available(iOS 16.1, *)
+private struct DarAbsolutePrayerTimer: View {
+    let target: Date?
     let size: CGFloat
+    let foreground: Color
 
     var body: some View {
-        Text(timerInterval: now...target, countsDown: true, showsHours: true)
-            .font(.system(size: size, weight: .bold, design: .rounded).monospacedDigit())
-            .foregroundStyle(palette.primary)
-            .lineLimit(1)
-            .minimumScaleFactor(0.72)
-            .allowsTightening(true)
+        Group {
+            if let target {
+                Text(target, style: .timer)
+                    .monospacedDigit()
+            } else {
+                Text("—")
+            }
+        }
+        .font(.system(size: size, weight: .bold, design: .rounded))
+        .foregroundStyle(foreground)
+        .lineLimit(1)
+        .minimumScaleFactor(0.72)
     }
 }
+
+
 
 @available(iOS 17.0, *)
 private struct DarPrayerCountdownPremiumView: View {
@@ -730,7 +749,7 @@ private struct DarPrayerCountdownPremiumView: View {
 
     var body: some View {
         let palette = DarPremiumPalette.resolve(entry.appearance, snapshot: entry.snapshot)
-        let target = darPrayerDate(time: entry.snapshot.nextPrayerTime, after: entry.date)
+        let target = entry.snapshot.nextAbsolutePrayer(after: entry.date)?.target
         VStack(alignment: .leading, spacing: 7) {
             HStack {
                 DarPremiumLogo(palette: palette, showName: family != .systemSmall)
@@ -754,7 +773,7 @@ private struct DarPrayerCountdownPremiumView: View {
             .lineLimit(1)
             .minimumScaleFactor(0.78)
             Spacer(minLength: 0)
-            DarLivePrayerTimer(now: entry.date, target: target, palette: palette, size: family == .systemSmall ? 26 : 34)
+            DarAbsolutePrayerTimer(target: target, size: family == .systemSmall ? 26 : 34, foreground: palette.primary)
                 .frame(maxWidth: .infinity, alignment: family == .systemSmall ? .center : .trailing)
             HStack {
                 Text(entry.snapshot.nextPrayerTime)
@@ -779,7 +798,7 @@ private struct DarPrayerOverviewPremiumView: View {
     var body: some View {
         let palette = DarPremiumPalette.resolve(entry.appearance, snapshot: entry.snapshot)
         let slots = entry.snapshot.prayers.filter { $0.id != "sunrise" }
-        let target = darPrayerDate(time: entry.snapshot.nextPrayerTime, after: entry.date)
+        let target = entry.snapshot.nextAbsolutePrayer(after: entry.date)?.target
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 DarPremiumLogo(palette: palette)
@@ -788,7 +807,7 @@ private struct DarPrayerOverviewPremiumView: View {
                     Text("\(entry.snapshot.nextPrayerName) in")
                         .font(.system(size: 10.5, weight: .medium, design: .serif))
                         .foregroundStyle(palette.secondary)
-                    DarLivePrayerTimer(now: entry.date, target: target, palette: palette, size: 22)
+                    DarAbsolutePrayerTimer(target: target, size: 22, foreground: palette.primary)
                 }
             }
             HStack(spacing: 5) {
@@ -888,37 +907,46 @@ private struct PrayerLockWidgetView: View {
     @Environment(\.widgetFamily) private var family
 
     var body: some View {
+        let next = entry.snapshot.nextAbsolutePrayer(after: entry.date)
         Group {
             if family == .accessoryCircular {
-                VStack(spacing: 0) {
-                    Image(systemName: "moon.stars.fill")
-                        .font(.system(size: 11, weight: .semibold))
-                    Text(entry.snapshot.nextPrayerTime)
-                        .font(.system(size: 14, weight: .bold, design: .rounded).monospacedDigit())
+                VStack(spacing: 1) {
+                    Text(next?.name ?? "Gebet")
+                        .font(.system(size: 10, weight: .semibold))
                         .lineLimit(1)
-                        .minimumScaleFactor(0.82)
+                    Group {
+                        if let target = next?.target {
+                            Text(target, style: .timer).monospacedDigit()
+                        } else {
+                            Text("—")
+                        }
+                    }
+                    .font(.system(size: 11, weight: .semibold, design: .rounded))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.65)
                 }
             } else if family == .accessoryInline {
-                Text("\(entry.snapshot.nextPrayerName) \(entry.snapshot.nextPrayerTime)")
-                    .font(.system(size: 13, weight: .semibold, design: .rounded).monospacedDigit())
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.88)
+                if let target = next?.target {
+                    Text(target, style: .timer)
+                        .monospacedDigit()
+                        .font(.system(size: 12, weight: .semibold, design: .rounded))
+                } else {
+                    Text("Gebetszeiten nicht verfügbar")
+                }
             } else {
-                VStack(alignment: .leading, spacing: 2) {
-                    HStack(spacing: 8) {
-                        Text(entry.snapshot.nextPrayerName)
-                            .font(.system(size: 15, weight: .semibold, design: .serif))
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.86)
-                        Spacer(minLength: 4)
-                        Text(entry.snapshot.nextPrayerTime)
-                            .font(.system(size: 16, weight: .bold, design: .rounded).monospacedDigit())
-                            .lineLimit(1)
-                    }
-                    Text(entry.snapshot.nextPrayerRemaining)
-                        .font(.system(size: 12, weight: .medium))
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(next?.name ?? "Gebetszeiten nicht verfügbar")
+                        .font(.system(size: 13, weight: .semibold, design: .serif))
                         .lineLimit(1)
-                        .minimumScaleFactor(0.86)
+                    if let target = next?.target {
+                        Text(target, style: .timer)
+                            .monospacedDigit()
+                            .font(.system(size: 16, weight: .bold, design: .rounded))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.78)
+                    } else {
+                        Text("—")
+                    }
                 }
             }
         }
@@ -1111,6 +1139,74 @@ struct DarIslamicDayPremiumWidget: Widget {
     }
 }
 
+
+// Lock Screen and Dynamic Island share the same ActivityKit ContentState Date.
+// No repeating publisher, Timer, or per-second Activity.update calls.
+@available(iOS 16.1, *)
+struct DarPrayerLiveActivityWidget: Widget {
+    var body: some WidgetConfiguration {
+        ActivityConfiguration(for: DarPrayerLiveAttributes.self) { context in
+            HStack(spacing: 14) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("DĀR AL TAWḤĪD")
+                        .font(.caption2.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    Text(context.state.prayerName)
+                        .font(.headline)
+                        .lineLimit(1)
+                    Text(context.state.city)
+                        .font(.caption)
+                        .lineLimit(1)
+                }
+                Spacer(minLength: 4)
+                Text(context.state.targetDate, style: .timer)
+                    .monospacedDigit()
+                    .font(.title2.weight(.bold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
+            }
+            .padding(16)
+            .activityBackgroundTint(Color(red: 0.04, green: 0.08, blue: 0.11))
+            .activitySystemActionForegroundColor(.white)
+        } dynamicIsland: { context in
+            DynamicIsland {
+                DynamicIslandExpandedRegion(.leading) {
+                    VStack(alignment: .leading) {
+                        Text(context.state.prayerName).font(.headline)
+                        Text(context.state.city).font(.caption2)
+                    }
+                }
+                DynamicIslandExpandedRegion(.trailing) {
+                    Text(context.state.targetDate, style: .timer)
+                        .monospacedDigit()
+                        .font(.headline)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.6)
+                }
+                DynamicIslandExpandedRegion(.bottom) {
+                    Text("Nächstes Gebet")
+                        .font(.caption2)
+                }
+            } compactLeading: {
+                Text("☪").font(.caption.weight(.bold))
+            } compactTrailing: {
+                Text(context.state.targetDate, style: .timer)
+                    .monospacedDigit()
+                    .font(.caption2.weight(.semibold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.55)
+            } minimal: {
+                Text(context.state.targetDate, style: .timer)
+                    .monospacedDigit()
+                    .font(.system(size: 8, weight: .semibold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+            }
+            .widgetURL(DarDeepLink.Destination.prayer.url)
+        }
+    }
+}
+
 @main
 struct DarAlTawhidWidgets: WidgetBundle {
     @WidgetBundleBuilder
@@ -1123,6 +1219,9 @@ struct DarAlTawhidWidgets: WidgetBundle {
         PrayerLockWidget()
         CalendarLockWidget()
         QiblaLockWidget()
+        if #available(iOS 16.1, *) {
+            DarPrayerLiveActivityWidget()
+        }
         if #available(iOS 17.0, *) {
             DarPrayerCountdownPremiumWidget()
             DarPrayerOverviewPremiumWidget()

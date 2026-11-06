@@ -985,3 +985,86 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
     lastError: statusReport.lastError
   };
 }
+
+
+/**
+ * Canonical absolute prayer instants for the native countdown contract.
+ * Reads the EXISTING public prayer calculation; consumers must not recalculate.
+ * This is intentionally separate from the push scheduling/notification path.
+ */
+export function computeCanonicalPrayerDay({
+  date,
+  lat = 52.52,
+  lon = 13.405,
+  timeZone = "Europe/Berlin",
+  locationName = "Berlin",
+  angle = 12,
+  asrFactor = 1,
+  generatedAt = new Date().toISOString()
+} = {}) {
+  const source = computePublicPrayerTimes({ date, lat, lon, timeZone, angle, asrFactor });
+  if (!source.ok) throw new Error(source.error || "Invalid prayer source");
+  const day = source.date;
+  const [year, month, dayNumber] = day.split("-").map(Number);
+  const localDay = { year, month, day: dayNumber };
+  const sunrise = sunTime(localDay, source.lat, source.lon, 0.833, true, source.timeZone);
+  if (!Number.isFinite(sunrise)) throw new Error("Sunrise unavailable");
+  const sunriseTime = formatHour(sunrise);
+  const canonicalOrder = ["fajr", "sunrise", "dhuhr", "asr", "maghrib", "isha"];
+  const prayers = {};
+  let prior = -Infinity;
+  for (const key of canonicalOrder) {
+    const value = key === "sunrise" ? sunriseTime : source.times[key]?.time;
+    if (!/^\\d{2}:\\d{2}$/.test(String(value || ""))) {
+      throw new Error("Missing or invalid prayer time: " + key);
+    }
+    const [hour, minute] = value.split(":").map(Number);
+    if (hour > 23 || minute > 59) throw new Error("Out-of-range prayer time: " + key);
+    const absolute = canonicalLocalClock(day, value, source.timeZone);
+    if (absolute.epoch <= prior) throw new Error("Out-of-order prayer instant: " + key);
+    prior = absolute.epoch;
+    prayers[key] = {
+      name: key === "sunrise" ? "Sonnenaufgang" : source.times[key].name,
+      dateTime: absolute.dateTime
+    };
+  }
+  return {
+    schemaVersion: 1,
+    date: day,
+    generatedAt,
+    timeZone: source.timeZone,
+    location: { name: String(locationName), latitude: source.lat, longitude: source.lon },
+    method: { fajrAngle: source.methodAngle, asrFactor: source.asrFactor },
+    prayers
+  };
+}
+
+
+/** Testable local clock -> ISO8601 absolute instant adapter (no prayer calculation). */
+export function canonicalLocalClock(day, clock, timeZone = "Europe/Berlin") {
+  if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(day) ||
+      !/^\\d{2}:\\d{2}$/.test(clock)) throw new Error("Invalid calendar clock");
+  const [year, month, dayNumber] = day.split("-").map(Number);
+  const [hour, minute] = clock.split(":").map(Number);
+  const checkDate = new Date(day + "T12:00:00Z");
+  if (Number.isNaN(checkDate.getTime()) || checkDate.toISOString().slice(0, 10) !== day ||
+      hour > 23 || minute > 59) throw new Error("Out-of-range calendar clock");
+  const instant = utcFromLocal({ year, month, day: dayNumber }, hour + minute / 60, timeZone);
+  const parts = getLocalParts(instant, timeZone);
+  if (dayKey(instant, timeZone) !== day || parts.hour !== hour || parts.minute !== minute) {
+    throw new Error("Nonexistent or inconsistent local time");
+  }
+  for (const shift of [-3600000, 3600000]) {
+    const alternate = new Date(instant.getTime() + shift);
+    const other = getLocalParts(alternate, timeZone);
+    if (dayKey(alternate, timeZone) === day && other.hour === hour && other.minute === minute) {
+      throw new Error("Ambiguous local time at daylight-saving transition");
+    }
+  }
+  const offsetMinutes = tzOffsetMin(instant, timeZone);
+  const sign = offsetMinutes < 0 ? "-" : "+";
+  const offset = Math.abs(offsetMinutes);
+  const suffix = sign + String(Math.floor(offset / 60)).padStart(2, "0") +
+    ":" + String(offset % 60).padStart(2, "0");
+  return { epoch: instant.getTime(), dateTime: day + "T" + clock + ":00" + suffix };
+}

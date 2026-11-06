@@ -21,7 +21,7 @@ import {
   ensurePrayerSchedulerFresh,
   triggerPrayerWorkflowForSubscription
 } from "./prayer-push-admin.js";
-import { computePublicPrayerTimes } from "./prayer-push-scheduler.js";
+import { computePublicPrayerTimes, computeCanonicalPrayerDay } from "./prayer-push-scheduler.js";
 import { registerNativeIosPush } from "./ios-native-push-register.js";
 import {
   readDailyPushStatus,
@@ -242,6 +242,22 @@ export default {
       }
 
       if (url.pathname === "/api/prayer/times" && request.method === "GET") {
+        if (url.searchParams.get("format") === "canonical") {
+          try {
+            const result = computeCanonicalPrayerDay({
+              lat: url.searchParams.get("lat"),
+              lon: url.searchParams.get("lon"),
+              timeZone: url.searchParams.get("tz") || url.searchParams.get("timeZone"),
+              locationName: url.searchParams.get("city") || "Standort",
+              angle: url.searchParams.get("angle"),
+              asrFactor: url.searchParams.get("asr") || url.searchParams.get("asrFactor"),
+              date: url.searchParams.get("date")
+            });
+            return json(result, cors, 200);
+          } catch (error) {
+            return json({ ok: false, error: String(error?.message || "Ungültige Gebetszeiten") }, cors, 400);
+          }
+        }
         const result = computePublicPrayerTimes({
           lat: url.searchParams.get("lat"),
           lon: url.searchParams.get("lon"),
