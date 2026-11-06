@@ -3533,15 +3533,18 @@
   }
 
   function nachweiseDirekt(e) {
-    var url = String(e.direktnachweisUrl || "").trim();
-    var label = e.direktnachweisText || "→ Quelle öffnen";
+    var q = Number(e && e.qNumber);
+    var canonical = Number.isInteger(q) && q >= 1 &&
+      e.kanonischerQuellenlink === "https://dar-al-tawhid.de/q/" + q + "/";
+    // Source cards are opened by the existing in-app source reader.
+    // The external original remains linked from that one canonical Q page.
+    var url = canonical ? "/q/" + q + "/" : String(e.direktnachweisUrl || "").trim();
+    var label = canonical ? "→ Quelle öffnen" : (e.direktnachweisText || "→ Quelle öffnen");
     return (
       '<p class="frauen-oval__kicker">Direktnachweis</p>' +
-      '<a class="frauen-direktnachweis" href="' +
-      esc(url) +
-      '" target="_blank" rel="noopener noreferrer">' +
-      esc(label) +
-      "</a>"
+      '<a class="frauen-direktnachweis" href="' + esc(url) + '"' +
+      (canonical ? '' : ' target="_blank" rel="noopener noreferrer"') +
+      '>' + esc(label) + "</a>"
     );
   }
 
@@ -3606,7 +3609,13 @@
     }) || null;
   }
 
-  function frauenShareUrl(abschnitt, kennung) {
+  function frauenShareUrl(abschnitt, kennung, entry) {
+    // A published Q card is the only external share address for that report.
+    var q = Number(entry && entry.qNumber);
+    if (Number.isInteger(q) && q > 0 &&
+        entry.kanonischerQuellenlink === "https://dar-al-tawhid.de/q/" + q + "/") {
+      return entry.kanonischerQuellenlink;
+    }
     try {
       if (String(location.hash || "").indexOf("/frauen/") !== -1) return location.href;
       var base = location.origin + location.pathname;
@@ -3628,7 +3637,7 @@
     return {
       title: title + " · DĀR AL TAWḤĪD",
       text: text,
-      url: frauenShareUrl(abschnitt, e.kennung)
+      url: frauenShareUrl(abschnitt, e.kennung, e)
     };
   }
 
@@ -4066,6 +4075,10 @@
     }
     var lehre = lehreVon(e);
     var sep = '<div class="post-reader-sep" aria-hidden="true"><i>◆</i></div>';
+    var sharhHtml = e.sharh
+      ? sep + '<section class="post-key-message" data-post-sharh><h3>Šarḥ</h3><div class="post-fazit-body">' +
+        esc(e.sharh) + "</div></section>"
+      : "";
     var lehreHtml = lehre
       ? sep +
         '<section class="post-key-message" data-post-fazit><h3>Lehre / Nutzen</h3><div class="post-fazit-body">' +
@@ -4096,6 +4109,7 @@
       '<div class="post-aussage-text">' +
       esc(aussageVon(e)) +
       "</div></section>" +
+      sharhHtml +
       nachBericht +
       "</section>" +
       frauenSharePanel(abschnitt, e) +
