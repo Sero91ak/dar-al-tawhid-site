@@ -36,5 +36,5 @@ jobs:
         if: always()
         run: |
           if [ -f "$RUNNER_TEMP/academy-audio-summary.json" ]; then
-            node -e 'const s=require(process.argv[1]); console.log(JSON.stringify({lessons:s.lessonCount,ageVersions:s.ageVersions,questions:s.questionCount,uniquePhrases:s.uniqueCandidatePhrases,archiveMatches:s.archivedExactPhraseMatches,newOrChanged:s.newOrChangedVsArchive,issues:s.issues.length,issuesByCode:s.issues.reduce((a,x)=>(a[x.code]=(a[x.code]||0)+1,a),{}),invalidChoices:s.invalidChoices},null,2))' "$RUNNER_TEMP/academy-audio-summary.json"
+            node -e 'const s=require(process.argv[1]); console.log(JSON.stringify({lessons:s.lessonCount,ageVersions:s.ageVersions,questions:s.questionCount,uniquePhrases:s.uniqueCandidatePhrases,audioCoverage:s.audioCoverage,archiveMatches:s.archivedExactPhraseMatches,newOrChanged:s.newOrChangedVsArchive,issues:s.issues.length,issuesByCode:s.issues.reduce((a,x)=>(a[x.code]=(a[x.code]||0)+1,a),{}),invalidChoices:s.invalidChoices},null,2))' "$RUNNER_TEMP/academy-audio-summary.json"
           fi
