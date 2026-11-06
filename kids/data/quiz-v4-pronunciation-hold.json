@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "scope": "TAWHID_KIDS_ALL_PAID_QUIZ_V4_TTS",
+  "productionPaused": true,
+  "stopReason": "2026-10-21: Owner explicitly reports severely incorrect Qur'an/Arabic pronunciation; STOP all further paid Kids Quiz V4 recordings until independently verified Fuṣḥā/Tajwīd distinction and owner-approved listening pilot. Technical codec/SHA QA and 10,099 dictionary entries do NOT demonstrate phonetic accuracy.",
+  "requiredBeforeResume": [
+    "Separate actual Qurʾān ayat recitation from spoken German explanatory text; use authentic reciter recordings only for ayat with verified surah/ayah mapping and Tajwīd.",
+    "Audit exact Arabic words/embedded transliterations and phonetic errors with native Fuṣḥā reading; the German lexicon aliases and eleven_v4 model label are NOT acoustic validation.",
+    "Inspect existing original MP3s for intelligibility, makhārij, long vowels, harakāt, and mispronunciation; do not label all 1777 as language approved.",
+    "Use cost-free old MP3 and history retrieval first, do not regenerate previously paid text hashes.",
+    "Require explicit fresh owner decision AND actual accepted auditory pilot before lifting this pause or authorizing ANY new paid TTS.",
+    "Retain release disabled until individually approved source + audio and offline player QA."
+  ],
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "humanPronunciationApproved": false,
+  "paidSpeechAuthorized": false,
+  "publicQuizAudioReleaseAuthorized": false,
+  "protectedRecentGenerationIds": [
+    "UoyfOZJg4ysPhTee41ru",
+    "15jWoEmEjxXcSEz9r79Z",
+    "fXiqKqmUPFZBMOCKBUQ5"
+  ],
+  "ownerRestartAuthorized": false,
+  "dictionaryProviderVerified": true,
+  "dictionaryVerificationGitHubRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39254840104",
+  "dictionaryId": "Q8w3SxtoVo8NSjsnlJEd",
+  "dictionaryVersionId": "wSzgkGpAwEDiTak8DApc",
+  "dictionaryRuleCount": 10099,
+  "authorizedNewOriginalsBeforeHearing": 0,
+  "humanListeningQualityGateReleased": false,
+  "ownerExplicitlyRequestedContinuedPaidQuizProduction": true,
+  "ownerRequestedAll450Originals": true,
+  "allowOneStrictTenOriginalDictionaryBatchBeforeListeningApproval": false,
+  "maximumPreHearingAdditionalNewOriginals": 0,
+  "maximumPreHearingAdditionalEstimatedCredits": 0,
+  "consentReason": "20.10.2026: user again explicitly authorized paid generation for all 450 TAWḤĪD KIDS quiz items with his Serhat Abu Malik eleven_v4 voice, verified 10099-rule Fuṣḥā lexicon, strict hash deduplication and use of existing credits. Owner authorized private bulk staging before human listening; humanPronunciationApproved and humanListeningQualityGateReleased remain false; public quiz release remains forbidden until real listening approval. Hard stop on an ambiguous charged request, provider insufficient balance, duplicate, dictionary drift or cumulative 80000 estimated credits.",
+  "ownerBulkConsent20261020": true,
+  "ownerBulkHearingApprovalClaimed": false,
+  "ownerBulkTotalForecastCreditsMaximum": 80000,
+  "latestOwnerQualityComplaint": {
+    "date": "2026-10-21",
+    "scope": "Kids Quiz; Qurʾān pronunciation and Arabic sounds",
+    "feedback": "pronunciation very wrong; not acceptable as V4 / Fuṣḥā",
+    "allPreviouslyStoredV4MP3sRequireAuditoryReassessment": true,
+    "productionResumeAllowedWithoutNewOwnerApproval": false,
+    "existingPaidOriginalsMustBePreserved": true,
+    "newCreditsAuthorized": 0
+  }
+}

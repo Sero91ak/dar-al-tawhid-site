@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "app": "TAWḤĪD KIDS",
+  "sourceCatalog": "/kids/data/quiz-kids.json",
+  "curatedCatalog": "/kids/data/quiz-kids-curated-450-review.json",
+  "fullCatalogQuestions": 900,
+  "curatedQuestions": 450,
+  "curatedPerAgeBand": 150,
+  "reserveQuestions": 450,
+  "selectionVersion": "curated-150x3-20261014",
+  "enabled": false,
+  "publishingRequirements": {
+    "originalMP3Files": true,
+    "voice": "Serhat Abu Malik – Master",
+    "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+    "modelId": "eleven_v4",
+    "humanListeningApproved": true,
+    "offlineIOSAndroidTest": true,
+    "audioReleaseGate": "python3 kids/tools/quiz_v4_selected450_release_gate.py --strict"
+  },
+  "notice": "Release remains OFF until all 450 recordings are imported and approved. Canonical 900 quiz questions unchanged."
+}
