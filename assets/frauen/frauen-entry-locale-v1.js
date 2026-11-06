@@ -24,14 +24,27 @@
     if(query)return query;
     try{return norm(w.localStorage.getItem(KEY))||"de"}catch(_){return"de"}
   }
-  function visibleRoot(){return d.querySelector(rootSelector)}
+  function visibleRoot(){
+    var live=d.querySelector(rootSelector);
+    if(live)return live;
+    try{
+      var desktop=d.getElementById("womenApp"),route=w.readRoute&&w.readRoute();
+      if(desktop&&route&&route.view==="frauen")return desktop;
+    }catch(_){}
+    return null;
+  }
   function readId() {
     try {
       var route=(w.location.hash||"").replace(/^#\/?/,"");
       var parts=route.split("/").map(function(x){try{return decodeURIComponent(x)}catch(_){return x}});
-      if(parts[0]!=="frauen"||parts.length!==3)return "";
-      return parts[2];
-    } catch(_){return ""}
+      if(parts[0]==="frauen"&&parts.length===3)return parts[2];
+      var desktop=w.readRoute&&w.readRoute();
+      if(desktop&&desktop.view==="frauen"){
+        var sub=String(desktop.value||"").split("/");
+        if(sub.length===2)return sub[1];
+      }
+    }catch(_){}
+    return "";
   }
   function set(el,value) {
     if(!el||value==null)return;
@@ -129,7 +142,7 @@
     if(scheduled)return;
     scheduled=true;
     var raf=w.requestAnimationFrame||function(fn){Promise.resolve().then(fn)};
-    raf(function(){scheduled=false;apply()});
+    raf(function(){scheduled=false;attach();apply()});
   }
   function load(){
     if(loading||manifest)return;
@@ -182,13 +195,14 @@
   d.addEventListener("change",function(ev){var el=ev.target;if(el&&(/lang/i.test(el.id||"")||/lang/i.test(el.name||"")))schedule()},true);
   // Observe text set by the original frozen renderer; avoid replacing it or editing geometry.
   function attach(){
-    var root=d.getElementById("appView");if(!root)return;
-    if(root.__darFrauenLocaleObserved)return;
-    root.__darFrauenLocaleObserved=true;
-    new MutationObserver(function(changes){
-      if(changes.some(function(c){return c.type==="childList"}))schedule();
-    }).observe(root,{childList:true,subtree:true});
-    schedule();
+    var roots=[d.getElementById("appView"),d.getElementById("womenApp")];
+    roots.forEach(function(root){
+      if(!root||root.__darFrauenLocaleObserved)return;
+      root.__darFrauenLocaleObserved=true;
+      new MutationObserver(function(changes){
+        if(changes.some(function(c){return c.type==="childList"}))schedule();
+      }).observe(root,{childList:true,subtree:true});
+    });
   }
   if(d.readyState==="loading")d.addEventListener("DOMContentLoaded",function(){attach();load()});
   else{attach();load()}
