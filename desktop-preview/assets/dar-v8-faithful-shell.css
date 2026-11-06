@@ -72,7 +72,7 @@ body.desktop-overhaul-v18 #darV8TopWelcome .v8-copy p{
  font-size:clamp(13px,1.05vw,15px);line-height:1.48;
  margin:0;max-width:66ch;color:var(--v8-muted);text-wrap:pretty
 }
-body.desktop-overhaul-v18 #darV8TopWelcome .v8-copy p b{color:var(--v8-ink);font-weight:750}
+body.desktop-overhaul-v18 #darV8TopWelcome .v8-copy p :is(b,strong){color:var(--v8-ink);font-weight:750}
 body.desktop-overhaul-v18 #darV8TopWelcome .v8-identity{
  flex:none;min-width:120px;display:grid;justify-items:center;gap:5px;
  color:var(--v8-gold);opacity:.6
@@ -80,10 +80,10 @@ body.desktop-overhaul-v18 #darV8TopWelcome .v8-identity{
 body.desktop-overhaul-v18 #darV8TopWelcome .v8-seal{font:58px/1 Georgia,serif}
 body.desktop-overhaul-v18 #darV8TopWelcome .v8-identity>span:last-child{font-size:8px;letter-spacing:.1em}
 @container (max-width:780px){
- body.desktop-overhaul-v18 #darV8TopWelcome body.desktop-overhaul-v18 #darV8TopWelcome .v8-copy p{max-width:72ch}
+ body.desktop-overhaul-v18 #darV8TopWelcome .v8-copy p{max-width:72ch}
 }
 @container (max-width:560px){
- body.desktop-overhaul-v18 #darV8TopWelcome body.desktop-overhaul-v18 #darV8TopWelcome .v8-headline{font-size:9px;padding-bottom:8px;letter-spacing:.07em}
+ body.desktop-overhaul-v18 #darV8TopWelcome .v8-headline{font-size:9px;padding-bottom:8px;letter-spacing:.07em}
  body.desktop-overhaul-v18 #darV8TopWelcome .v8-welcome-body{margin-top:10px}
  body.desktop-overhaul-v18 #darV8TopWelcome .v8-copy h1{font-size:clamp(21px,5vw,26px);line-height:1.23}
  body.desktop-overhaul-v18 #darV8TopWelcome .v8-copy h2{font-size:clamp(18px,4.5vw,22px)}
