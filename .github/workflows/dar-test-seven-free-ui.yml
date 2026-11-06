@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'test/i18n/adult-ui-locales-seven.json'
+      - 'test/i18n/adult-ui-fr-es-navigation-drafts.json'
+      - 'test/i18n/test-fr-es-navigation-drafts.cjs'
       - 'test/i18n/test-seven-*'
       - 'test/i18n/test-expanded-headings-seven.cjs'
       - 'test/i18n/test-canonical-visible-titles.cjs'
@@ -31,6 +33,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Verify pending French and Spanish navigation drafts
+        run: node test/i18n/test-fr-es-navigation-drafts.cjs
       - name: Static multilingual UI validation (no model calls)
         run: |
           node --check test/assets/dar-test-turkish-ui.js
