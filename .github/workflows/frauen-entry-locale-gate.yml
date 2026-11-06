@@ -1,0 +1,27 @@
+name: Frauen – Neun Sprachen, dieselbe Beitrags-ID, kein Auto-Q
+on:
+  pull_request:
+    paths:
+      - 'assets/frauen/frauen-entry-*'
+      - 'data/frauen-*.json'
+      - 'q/_registry/shortlinks.json'
+      - 'cloudflare/site-router.js'
+      - 'scripts/check-frauen-entry-locales.cjs'
+      - '.github/workflows/frauen-entry-locale-gate.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'assets/frauen/frauen-entry-*'
+      - 'data/frauen-*.json'
+      - 'q/_registry/shortlinks.json'
+      - 'cloudflare/site-router.js'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  canonical-nine-languages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Vollständige Sprachen und identische Quellen/Beitrags-ID prüfen
+        run: node scripts/check-frauen-entry-locales.cjs
