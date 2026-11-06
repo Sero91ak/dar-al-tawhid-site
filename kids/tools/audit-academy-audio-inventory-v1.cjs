@@ -7,6 +7,7 @@ const root=path.resolve(__dirname,"../..");
 const files=["curriculum-v1.js","curriculum-v2.js","curriculum-v22.js","curriculum-v25.js","curriculum-v26.js","curriculum-v27.js","curriculum-v28.js","curriculum-v29.js"];
 const win={};const ctx=vm.createContext({window:win,console});
 for(const name of files)vm.runInContext(fs.readFileSync(path.join(root,"kids/akademie",name),"utf8"),ctx,{filename:name,timeout:5000});
+vm.runInContext(fs.readFileSync(path.join(root,"kids/akademie/answer-choice-only-v1.js"),"utf8"),ctx,{filename:"answer-choice-only-v1.js",timeout:5000});
 const lessons=win.DARKidsAcademyCurriculum||{};
 const archive=JSON.parse(fs.readFileSync(path.join(root,"kids/data/academy-voice-plan-v9.json"),"utf8"));
 const publicAudio=JSON.parse(fs.readFileSync(path.join(root,"kids/data/academy-audio.json"),"utf8"));
@@ -24,13 +25,16 @@ for(const [id,l] of Object.entries(lessons)){
  for(const [kind,val] of [["lead",l.lead],["goal",l.goal],["sample",l.sample],["hadith-explanation",l.hadith?.text],["quran-meaning",l.quran?.meaning]])add(val,id,"all",kind);
  for(const line of l.lines||[])add(line,id,"all","lesson-line");
  for(const age of ages){
-  const qs=l.questions?.[age]||[];
+  const original=l.questions?.[age]||[];
+  const qs=win.DARKidsAcademyChoiceOnlyV1.project(l,age,original);
   if(!qs.length)issues.push({id,age,code:"missing_questions"});
   for(const q of qs){
    questionCount++;add(q.prompt,id,age,"question");
    if(q.type==="choice"){
+    if(q.needsHumanEditorialReview)issues.push({id,age,code:"adapted_choice_requires_editorial_review",prompt:q.prompt});
     if(!Array.isArray(q.options)||q.options.length<2||!Number.isInteger(q.correct)||q.correct<0||q.correct>=q.options.length)invalidChoices++;
     for(const opt of q.options||[])add(opt,id,age,"answer-option");
+    if(q.adaptedFromText&&q.approvedForAudio!==false)issues.push({id,age,code:"adapted_audio_gate_mismatch"});
    }else issues.push({id,age,code:"legacy_nonchoice_source",type:q.type});
    add(q.explain,id,age,"explanation");add(q.hint,id,age,"hint");
   }
