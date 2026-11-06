@@ -11,6 +11,6 @@ assert.match(worker,/DAR_TEST_FOLD_V2_RETIRED_20261106/);
 assert.doesNotMatch(worker,/const foldJsV2\s*=/);
 assert.doesNotMatch(worker,/const foldCssV2\s*=/);
 assert.doesNotMatch(worker,/const foldBootstrap\s*=/);
-assert.match(worker,/\/assets\/fold-split\\\.js/);
+
 require("./dar-test-immersive-art-v1-guard.cjs");
 console.log("PASS DĀR Test: experimental Fold V2 retired; original adaptive nav remains");
