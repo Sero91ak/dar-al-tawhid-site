@@ -306,6 +306,7 @@ function activateAdultGlobalBrandV2(html) {
     ['darVisitorDailyHubCssV1','<link rel="stylesheet" id="darVisitorDailyHubCssV1" href="/assets/dar-visitor-daily-hub-v1.css?v=20261030-mehr-responsive-v2">'],
     ['darVisitorOnboardingCssV1','<link rel="stylesheet" id="darVisitorOnboardingCssV1" href="/assets/dar-visitor-onboarding-v1.css?v=20261030-mehr-responsive-v2">'],
     ['darAdultGlobalBrandScriptV2','<script defer id="darAdultGlobalBrandScriptV2" src="/assets/dar-adult-brand-header-v2.js?v=20261106-global-salam-v1"></' + 'script>'],
+    ['darAdultComponentI18nV1','<script defer id="darAdultComponentI18nV1" src="/assets/i18n/adult-component-i18n-v1.js?v=20261101-1"></' + 'script>'],
     ['darAdultHomeWelcomeCopyV1','<script defer id="darAdultHomeWelcomeCopyV1" src="/assets/i18n/adult-home-welcome-v1.js?v=20261106-global-salam-v1"></' + 'script>'],
     ['darVisitorSmartProfileJsV1','<script defer id="darVisitorSmartProfileJsV1" src="/assets/dar-visitor-smart-profile-v1.js?v=20261031-neutral-hooded-v14"></' + 'script>'],
     ['darVisitorProfilePickerJsV1','<script defer id="darVisitorProfilePickerJsV1" src="/assets/dar-visitor-profile-picker-v1.js?v=20261030-left-select-v12"></' + 'script>'],
