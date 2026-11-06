@@ -1,16 +1,6 @@
 name: DĀR Test Immersive UI Preview · Isolated
 # Deployment of the isolated /test Worker only; NEVER the visitor production Worker.
 on:
-  push:
-    branches:
-      - feat/dar-test-immersive-art-20261106
-    paths:
-      - .github/workflows/dar-test-immersive-preview.yml
-      - test/assets/dar-test-immersive-art-v1.css
-      - test/assets/dar-test-immersive-art-v1.js
-      - test/tools/dar-test-immersive-actual-browser.py
-      - test/tools/dar-test-immersive-art-v1-guard.cjs
-      - cloudflare/test-app-worker.js
   workflow_dispatch:
 
 permissions:
