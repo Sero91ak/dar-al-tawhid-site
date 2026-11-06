@@ -28,7 +28,7 @@ assert.match(js,/requestAnimationFrame/);
 assert.match(js,/passive:true/);
 assert.doesNotMatch(js,/touchmove|preventDefault|scrollTo\(|scrollIntoView\(|innerHTML\s*=|appendChild\(view\)/);
 assert.match(css,/position:sticky!important/);
-assert.match(css,/--dar-art-progress/);
+assert.match(css,/--dar-art-scale/);
 assert.match(css,/data-dar-art-inline="decorative"/);
 assert.match(css,/prefers-reduced-motion:reduce/);
 assert.match(contract,/Erst DĀR Test/);
