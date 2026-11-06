@@ -62,9 +62,10 @@ jobs:
             driver.execute_script("localStorage.setItem('darAdultPreferredLocaleV1','de')")
             driver.refresh()
             WebDriverWait(driver,35).until(lambda d: d.execute_script("return !!document.querySelector('#dv3Home [data-dv3-locale=tr]')"))
+            WebDriverWait(driver,35).until(lambda d: d.execute_script("return window.__DarTestNineLocalesReady===true"))
             home=driver.execute_script("return [...document.querySelectorAll('#dv3Home [data-dv3-locale]')].map(x=>x.textContent)")
             print('Home control:',home,flush=True)
-            assert home==['Deutsch','Türkçe','English','العربية','Kurmancî','سۆرانی','Bosanski']
+            assert home==['Deutsch','Türkçe','English','العربية','Kurmancî','سۆرانی','Bosanski','Français','Español']
             driver.execute_script("document.querySelector('#dv3Home [data-dv3-locale=tr]').click()")
             assert driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")=='tr'
             driver.execute_script("if(typeof navigate==='function')navigate('more');else location.hash='#more'")
@@ -72,7 +73,7 @@ jobs:
             driver.execute_script("document.querySelector('.dar-more-v15 [data-dal-open=quick]').click()")
             WebDriverWait(driver,25).until(lambda d:d.execute_script("return document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale]').length===9"))
             assert driver.execute_script("return document.querySelector('#darAdultLanguagePicker [data-dal-locale=tr]').getAttribute('aria-pressed')")=='true'
-            assert driver.execute_script("return document.querySelector('#darAdultLanguagePicker [data-dal-locale=es]').disabled")
+            assert driver.execute_script("return !document.querySelector('#darAdultLanguagePicker [data-dal-locale=es]').disabled")
             driver.execute_script("document.querySelector('#darAdultLanguagePicker [data-dal-locale=de]').click()")
             assert driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")=='de'
             driver.execute_script("if(typeof navigate==='function')navigate('settings');else location.hash='#settings'")

@@ -1,0 +1,203 @@
+/* DĀR AL TAWḤĪD · DAR TEST V8 overhaul · staging only.
+ * Intentionally preserves all original data engines, authentication, push and source records.
+ * Native themes remain authoritative. The snapshot branch is the rollback source.
+ */
+html.dat-v8-overhaul{
+ --dv8-gold:var(--gold2,var(--gold,#c3a56b));
+ --dv8-bg:var(--bg,var(--page-cover,#0b1715));
+ --dv8-surface:var(--card,var(--panel,#172722));
+ --dv8-line:var(--line,rgba(177,151,101,.27));
+ --dv8-text:var(--text,#eae6d8);
+ --dv8-muted:var(--muted,#b7b1a3);
+ --dv8-radius:20px;
+ --dv8-rail-width:0px;
+}
+html.dat-v8-overhaul,html.dat-v8-overhaul body{max-width:100%;overflow-x:clip}
+html.dat-v8-overhaul body .app{max-width:1440px;min-width:0}
+html.dat-v8-overhaul body #appView,
+html.dat-v8-overhaul body .top-shell,
+html.dat-v8-overhaul body .app-bar{min-width:0}
+html.dat-v8-overhaul :is(button,a,input,select,textarea):focus-visible{
+ outline:2px solid var(--dv8-gold)!important;outline-offset:3px
+}
+html.dat-v8-overhaul :is(button,input,select,textarea){touch-action:manipulation}
+html.dat-v8-overhaul body .top-shell .header-row--brand-only{align-items:center}
+html.dat-v8-overhaul body .top-shell .brand-title-refined{font-size:clamp(17px,2.2vw,26px)!important;line-height:1.12}
+html.dat-v8-overhaul body .top-shell .hero-text .salam{font-size:clamp(14px,2.3vw,22px)!important;line-height:1.3}
+html.dat-v8-overhaul body .top-shell .hero-text .intro{font-size:clamp(11px,1.6vw,14px)!important;line-height:1.42}
+html.dat-v8-overhaul body .top-shell .isnad{border-radius:16px}
+html.dat-v8-overhaul body .top-shell .isnad .isnad-quote{line-height:1.45}
+html.dat-v8-overhaul #appView :is(.dsh-shell,.notification-center-page,.quran-page,.dua-page,.library-page,.scholars-index,.frauen-page,.topics-hub,.hadith-page,.dar-more-v15){
+ max-width:100%;min-width:0
+}
+html.dat-v8-overhaul #appView :is(.dsh-shell,.dsh-group,.dsh-detail,.dm-card,.dm-group,.dv3-section,.prayer-panel){
+ border-radius:var(--dv8-radius)
+}
+/* V8: one coherent hierarchy, compact without sacrificing controls. */
+html.dat-v8-overhaul #appView :is(.view-head,.section-head,.page-head,.dsh-detail-intro,.dm-heading){
+ padding-block:clamp(8px,1.5vw,16px);margin-block-end:10px
+}
+html.dat-v8-overhaul #appView :is(.view-head h1,.section-head h1,.page-head h1,.dsh-welcome h2){
+ font-size:clamp(20px,2.8vw,30px);line-height:1.22
+}
+html.dat-v8-overhaul #appView :is(.dsh-shell,.dsh-list,.dm-group,.dv3-quick-grid,.dv3-more-grid){min-width:0}
+html.dat-v8-overhaul #appView :is(.dsh-row,.dm-card,.dv3-quick,.dv3-post){
+ min-width:0;min-height:52px;border-radius:16px
+}
+html.dat-v8-overhaul #appView .dsh-shell{padding:clamp(12px,2vw,24px);margin:0 auto 24px}
+html.dat-v8-overhaul #appView .dsh-group{
+ padding:clamp(10px,1.4vw,16px);margin:12px 0;
+ border:1px solid var(--dv8-line);background:var(--dv8-surface)
+}
+html.dat-v8-overhaul #appView .dsh-group-head{
+ color:var(--dv8-gold);letter-spacing:.045em;font-size:12px
+}
+html.dat-v8-overhaul #appView .dsh-welcome{
+ border:1px solid var(--dv8-line);border-radius:var(--dv8-radius);
+ background:linear-gradient(135deg,color-mix(in srgb,var(--dv8-gold) 9%,var(--dv8-surface)),var(--dv8-surface))
+}
+html.dat-v8-overhaul #appView .dsh-detail-content{min-width:0}
+html.dat-v8-overhaul #appView :is(.dsh-note,.dsh-group small){color:var(--dv8-muted)}
+html.dat-v8-overhaul #appView .dat-v8-preferences{margin-top:12px}
+html.dat-v8-overhaul #appView .dat-v8-preferences .dat-v8-preference-group{
+ display:flex;gap:7px;flex-wrap:wrap;margin-top:10px
+}
+html.dat-v8-overhaul #appView .dat-v8-preferences button{
+ appearance:none;min-height:42px;border:1px solid var(--dv8-line);
+ background:var(--dv8-surface);color:var(--dv8-text);
+ padding:9px 12px;border-radius:999px;font-size:13px;cursor:pointer
+}
+html.dat-v8-overhaul #appView .dat-v8-preferences button[aria-pressed="true"]{
+ border-color:var(--dv8-gold);
+ background:color-mix(in srgb,var(--dv8-gold) 16%,var(--dv8-surface))
+}
+html.dat-v8-overhaul #appView .dat-v8-language-host{padding:10px 4px}
+html.dat-v8-overhaul #appView .dat-v8-language-host .dal-row{
+ width:100%;border-radius:15px;min-height:56px;
+ border:1px solid var(--dv8-line);background:var(--dv8-surface);
+ color:var(--dv8-text)
+}
+/* Original full-screen locale picker; no cropped option list on foldables. */
+html.dat-v8-overhaul .dal-modal{z-index:999999}
+html.dat-v8-overhaul .dal-pane{max-height:100dvh;overflow-y:auto;overscroll-behavior:contain}
+html.dat-v8-overhaul .dal-option{min-height:50px}
+html.dat-v8-overhaul #appView .dv3-home{
+ max-width:1180px;margin-inline:auto;padding-inline:clamp(10px,1.7vw,24px)
+}
+html.dat-v8-overhaul #appView .dv3-hometitle{margin-block:8px}
+html.dat-v8-overhaul #appView .dv3-hometitle h2{font-size:clamp(18px,2.8vw,25px);margin:0}
+html.dat-v8-overhaul #appView .dv3-section{margin-block:14px;padding:clamp(12px,1.7vw,20px)}
+html.dat-v8-overhaul #appView .dv3-posts{gap:8px}
+html.dat-v8-overhaul #appView .dv3-theme-panel{max-width:min(95vw,680px)}
+html.dat-v8-overhaul body .footer{min-width:0}
+html.dat-v8-overhaul body #bottomNav{max-width:100%;padding-bottom:max(6px,env(safe-area-inset-bottom,0px))}
+html.dat-v8-overhaul body .bottom-nav-btn{min-width:0}
+html.dat-v8-overhaul body .bottom-nav-btn .nav-icon{max-height:36px}
+/* Desktop/Fold expanded: real application navigation with original 3D assets. */
+#datV8Rail{display:none}
+@media(min-width:740px){
+ html.dat-v8-overhaul{--dv8-rail-width:76px}
+ html.dat-v8-overhaul body .app{
+  width:calc(100% - var(--dv8-rail-width));max-width:none!important;
+  margin-left:var(--dv8-rail-width)!important;margin-right:0!important;
+ }
+ html.dat-v8-overhaul #datV8Rail{
+  display:flex;position:fixed;inset:0 auto 0 0;z-index:850;
+  width:var(--dv8-rail-width);padding:20px 8px;
+  flex-direction:column;gap:12px;
+  background:var(--dv8-surface);color:var(--dv8-text);
+  border-right:1px solid var(--dv8-line);overflow-y:auto;scrollbar-width:thin
+ }
+ html.dat-v8-overhaul #datV8Rail .dv8-wordmark{
+  display:grid;place-items:center;gap:7px;text-decoration:none;color:inherit;
+  padding:5px 0 12px;border-bottom:1px solid var(--dv8-line)
+ }
+ html.dat-v8-overhaul #datV8Rail .dv8-wordmark img{width:48px;height:48px;object-fit:contain}
+ html.dat-v8-overhaul #datV8Rail .dv8-wordmark span{display:none}
+ html.dat-v8-overhaul #datV8Rail nav{display:flex;flex-direction:column;gap:5px}
+ html.dat-v8-overhaul #datV8Rail button{
+  appearance:none;display:flex;align-items:center;justify-content:center;gap:12px;
+  width:100%;min-height:56px;padding:8px;
+  border:1px solid transparent;border-radius:15px;background:transparent;
+  color:inherit;text-align:left;font-size:13px;cursor:pointer
+ }
+ html.dat-v8-overhaul #datV8Rail button:hover,
+ html.dat-v8-overhaul #datV8Rail button[aria-current="page"]{
+  background:color-mix(in srgb,var(--dv8-gold) 13%,transparent);
+  border-color:var(--dv8-line)
+ }
+ html.dat-v8-overhaul #datV8Rail button img{width:34px;height:34px;object-fit:contain;flex:none}
+ html.dat-v8-overhaul #datV8Rail button span{display:none}
+ html.dat-v8-overhaul #datV8Rail .dv8-rail-bottom{margin-top:auto;border-top:1px solid var(--dv8-line);padding-top:8px}
+ html.dat-v8-overhaul body #appChromeDock{display:none!important}
+ html.dat-v8-overhaul #appView .dv3-quick-grid,
+ html.dat-v8-overhaul #appView .dv3-more-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(min-width:1120px){
+ html.dat-v8-overhaul{--dv8-rail-width:232px}
+ html.dat-v8-overhaul #datV8Rail{padding:22px 12px}
+ html.dat-v8-overhaul #datV8Rail .dv8-wordmark{grid-template-columns:48px minmax(0,1fr);text-align:left}
+ html.dat-v8-overhaul #datV8Rail .dv8-wordmark span{display:block;font:600 14px/1.35 Georgia,serif}
+ html.dat-v8-overhaul #datV8Rail button{justify-content:flex-start;padding:7px 13px}
+ html.dat-v8-overhaul #datV8Rail button span{display:inline}
+ html.dat-v8-overhaul #appView .dv3-quick-grid,
+ html.dat-v8-overhaul #appView .dv3-more-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ html.dat-v8-overhaul #appView .dsh-home .dsh-group{max-width:100%}
+}
+@media(max-width:739px){
+ html.dat-v8-overhaul #appView{padding-inline:clamp(9px,2.4vw,18px);padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+ html.dat-v8-overhaul #appView .dv3-home{padding-inline:0}
+ html.dat-v8-overhaul #appView .dsh-shell{padding:12px}
+ html.dat-v8-overhaul #appView .dsh-group{padding:10px}
+ html.dat-v8-overhaul #appView :is(.dsh-detail-intro,.dv3-hometitle){gap:8px}
+}
+@media(max-width:370px){
+ html.dat-v8-overhaul #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{width:30px!important;height:30px!important;min-width:30px!important;min-height:30px!important}
+ html.dat-v8-overhaul #appView .dsh-shell{padding:9px}
+}
+html.dat-v8-overhaul[data-dv8-density="compact"] #appView :is(.dsh-group,.dv3-section){padding-block:9px}
+html.dat-v8-overhaul[data-dv8-density="compact"] #appView :is(.dsh-row,.dv3-post,.dv3-quick){min-height:44px}
+html.dat-v8-overhaul[data-dv8-motion="reduce"] *,
+html.dat-v8-overhaul[data-dv8-motion="reduce"] *::before,
+html.dat-v8-overhaul[data-dv8-motion="reduce"] *::after{
+ transition-duration:.01ms!important;animation-duration:.01ms!important;scroll-behavior:auto!important
+}
+@media(prefers-reduced-motion:reduce){
+ html.dat-v8-overhaul *{scroll-behavior:auto!important}
+}
+
+/* Consolidate 9 old homepage chips into the shared one-click picker. */
+html.dat-v8-overhaul #dv3Home .dv3-language{display:none!important}
+html.dat-v8-overhaul #dv3Home .dat-v8-home-tools{
+ display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-left:auto
+}
+html.dat-v8-overhaul #dv3Home .dat-v8-home-tools .dal-entry{width:auto;max-width:270px;min-width:0}
+html.dat-v8-overhaul #dv3Home .dat-v8-home-tools .dal-row{
+ min-height:42px;padding:7px 10px;border:1px solid var(--dv8-line);border-radius:999px;
+ background:var(--dv8-surface);color:var(--dv8-text)
+}
+html.dat-v8-overhaul #dv3Home .dat-v8-home-tools [data-dv8-nav]{
+ display:grid;place-items:center;min-width:42px;min-height:42px;padding:5px;
+ border:1px solid var(--dv8-line);border-radius:999px;background:var(--dv8-surface);color:var(--dv8-text)
+}
+html.dat-v8-overhaul #dv3Home .dat-v8-home-tools [data-dv8-nav] img{width:28px;height:28px;object-fit:contain}
+@media(max-width:520px){
+ html.dat-v8-overhaul #dv3Home .dv3-hometitle{flex-wrap:wrap}
+ html.dat-v8-overhaul #dv3Home .dat-v8-home-tools{width:100%;justify-content:flex-start;margin-left:0}
+ html.dat-v8-overhaul #dv3Home .dat-v8-home-tools .dal-entry{flex:1;max-width:none}
+}
+
+html.dat-v8-overhaul #appView .dat-v8-palette{margin:8px 0 14px;border-bottom:1px solid var(--dv8-line);padding-bottom:12px}
+html.dat-v8-overhaul #appView .dat-v8-palette summary{cursor:pointer;color:var(--dv8-gold);font-weight:700;font-size:13px;min-height:42px;display:flex;align-items:center;list-style-position:inside}
+html.dat-v8-overhaul #appView .dat-v8-palette-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:7px 0 10px}
+html.dat-v8-overhaul #appView .dat-v8-palette-grid button{
+ display:flex;align-items:center;gap:9px;text-align:start;min-width:0;min-height:48px;
+ border-radius:13px;border:1px solid var(--dv8-line);background:var(--dv8-surface);
+ color:var(--dv8-text);padding:9px;cursor:pointer
+}
+html.dat-v8-overhaul #appView .dat-v8-palette-grid i{
+ display:inline-block;flex:0 0 29px;width:29px;height:29px;border-radius:50%;
+ border:1px solid color-mix(in srgb,currentColor 27%,transparent);box-shadow:inset 0 0 0 2px rgba(255,255,255,.18)
+}
+html.dat-v8-overhaul #appView .dat-v8-palette-grid button span{min-width:0;font-size:12px;overflow-wrap:anywhere}
+@media(min-width:740px){html.dat-v8-overhaul #appView .dat-v8-palette-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}

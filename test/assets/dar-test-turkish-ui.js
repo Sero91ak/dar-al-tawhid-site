@@ -168,7 +168,7 @@ const EXTRA_ENTRIES=[
 ["App, Qurʾān, Duʿāʾ und Beiträge","Uygulama, Kur'ân, dua ve yazılar"]
 ];
 const dictionary=new Map([...ENTRIES,...EXTRA_ENTRIES]),backward=new Map(),ambiguous=new Set();
-const SUPPORTED=new Set(["de","tr","en","ar","ku","ckb","bs"]);
+const SUPPORTED=new Set(["de","tr","en","ar","ku","ckb","bs","fr","es"]);
 const rtl=new Set(["ar","ckb"]),languagePacks=new Map();
 
 const specialBlocks=new Map(),welcomeOriginals=new WeakMap();
@@ -206,7 +206,7 @@ function registerTitleData(data){
   if(key!==(record.kind+":"+record.id)||!["post","dua"].includes(record.kind)||
      typeof record.sourceTitle!=="string"||record.sourceTitle.length>220||
      Object.keys(record.translations||{}).sort().join("|")!=="ar|bs|ckb|en|ku|tr")return false;
-  if([...SUPPORTED].filter(x=>x!=="de").some(k=>typeof record.translations[k]!=="string"||!record.translations[k].trim()))
+  if(["ar","bs","ckb","en","ku","tr"].some(k=>typeof record.translations[k]!=="string"||!record.translations[k].trim()))
     return false;
   if(prepared.has(record.sourceTitle))return false;
   prepared.set(record.sourceTitle,record);
@@ -300,7 +300,7 @@ async function loadCatalog(fetcher=global.fetch?.bind(global)){
  }catch(_){remoteCatalogState="unavailable";return dictionary.size}
 }
 
-const INTL_LOCALE={de:"de-DE",tr:"tr-TR",en:"en-GB",ar:"ar-EG-u-ca-gregory",ku:"ku-TR",ckb:"ckb-IQ-u-ca-gregory",bs:"bs-BA"};
+const INTL_LOCALE={de:"de-DE",tr:"tr-TR",en:"en-GB",ar:"ar-EG-u-ca-gregory",ku:"ku-TR",ckb:"ckb-IQ-u-ca-gregory",bs:"bs-BA",fr:"fr-FR",es:"es-ES"};
 const DE_MONTHS=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
 const DE_WEEKDAYS=["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag"];
 function formatCalendarDate(date,language=currentLocale(),options={weekday:"long",day:"numeric",month:"long",year:"numeric"}){
@@ -452,8 +452,8 @@ function boot(){
  if(global.document?.createElement&&global.document.head&&
     !global.document.getElementById("dar-test-seven-languages-loader")){
   const script=global.document.createElement("script");
-  script.id="dar-test-seven-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=1";
+  script.id="dar-test-nine-languages-loader";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261022-v8nine";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
