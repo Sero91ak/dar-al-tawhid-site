@@ -18,7 +18,7 @@
    root.dataset.darAdminTheme=current;
    root.style.colorScheme=current===LIGHT?"light":"dark";
    const meta=$('meta[name="theme-color"]');
-   if(meta)meta.setAttribute("content",current===LIGHT?"#f4f6f0":"#0c0e0d");
+   if(meta)meta.setAttribute("content",current===LIGHT?"#f4f6f0":"#10100f");
    if(save){try{localStorage.setItem(KEY,current)}catch(_){}}
    document.querySelectorAll("[data-dar-admin-switch]").forEach(btn=>{
      const target=current===DARK?LIGHT:DARK;
@@ -40,7 +40,7 @@
        doc.documentElement.dataset.darAdminTheme=current;
        doc.documentElement.style.colorScheme=current===LIGHT?"light":"dark";
        const childMeta=doc.querySelector('meta[name="theme-color"]');
-       if(childMeta)childMeta.setAttribute("content",current===LIGHT?"#f4f6f0":"#0c0e0d");
+       if(childMeta)childMeta.setAttribute("content",current===LIGHT?"#f4f6f0":"#10100f");
      }
    }catch(_){}
    document.dispatchEvent(new CustomEvent("dar-admin-appearance-change",{detail:{theme:current}}));
