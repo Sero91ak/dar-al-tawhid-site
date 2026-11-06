@@ -27,6 +27,9 @@ CATALOG_PATH = ROOT / "catalog.json"
 INDEX_PATH = ROOT / "entries-index.json"
 COVERAGE_PATH = ROOT / "coverage.json"
 REFERENCE_RE = re.compile(r"^[0-9]{1,3}:[0-9]{1,3}$")
+# Future gap batches must use exact catalog-declared authentication grades.
+GAP_BATCH_RE = re.compile(r"^entries-gap-([0-9]+)-([0-9]+)\.json$")
+MIN_STRICT_GAP_BATCH = (6, 262)
 REQUIRED_ENTRY_FIELDS = (
     "reference",
     "text",
@@ -134,6 +137,20 @@ def main() -> int:
     if missing_from_catalog:
         fail(f"index paths missing from catalog: {missing_from_catalog[:10]}")
 
+    policy = catalog.get("verificationPolicy", {})
+    if not isinstance(policy, dict):
+        fail("catalog.verificationPolicy must be an object")
+    allowed_gradings = policy.get("allowedGradings", [])
+    allowed_generations = policy.get("allowedGenerations", [])
+    if not isinstance(allowed_gradings, list) or not allowed_gradings or any(
+        not isinstance(grade, str) or not grade.strip() for grade in allowed_gradings
+    ):
+        fail("catalog.verificationPolicy.allowedGradings must contain nonempty strings")
+    if not isinstance(allowed_generations, list) or not allowed_generations:
+        fail("catalog.verificationPolicy.allowedGenerations must be a nonempty list")
+
+    strict_grade_count = 0
+    legacy_grade_review_pending = 0
     references: set[str] = set()
     total = 0
     last_reference = ""
@@ -161,6 +178,27 @@ def main() -> int:
             reference = entry["reference"]
             validate_reference_bounds(reference, verse_counts, relative_path)
 
+            batch_match = GAP_BATCH_RE.fullmatch(relative_path)
+            strict_batch = batch_match is not None and (
+                int(batch_match.group(1)), int(batch_match.group(2))
+            ) >= MIN_STRICT_GAP_BATCH
+            if strict_batch:
+                if entry["grading"] not in allowed_gradings:
+                    fail(
+                        f"{relative_path}: {reference} has non-approved grading "
+                        f"{entry['grading']!r}; allowed grades: {allowed_gradings}"
+                    )
+                if entry["generation"] not in allowed_generations:
+                    fail(f"{relative_path}: {reference} has disallowed generation")
+                if not isinstance(entry.get("sourceUrl"), str) or not entry["sourceUrl"].startswith("https://"):
+                    fail(f"{relative_path}: {reference} requires a direct HTTPS sourceUrl")
+                if not isinstance(entry.get("note"), str) or not entry["note"].strip():
+                    fail(f"{relative_path}: {reference} requires an isnad/source note")
+                strict_grade_count += 1
+            elif entry["grading"] not in allowed_gradings:
+                # Retro-audit rather than silently alter historical records.
+                legacy_grade_review_pending += 1
+
             if reference in references:
                 fail(f"duplicate reference {reference}")
 
@@ -180,6 +218,8 @@ def main() -> int:
     print(f"files: {len(catalog_paths)}")
     print(f"last_reference: {last_reference}")
     print(f"coverage_verses: {sum(verse_counts)}")
+    print(f"strict_isnad_grades_checked: {strict_grade_count}")
+    print(f"legacy_grade_review_pending: {legacy_grade_review_pending}")
     print(f"catalog: {CATALOG_PATH}")
     return 0
 
