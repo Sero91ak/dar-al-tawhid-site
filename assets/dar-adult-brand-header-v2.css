@@ -315,6 +315,20 @@ html.dar-adult-global-brand-ready body.is-home-route .top-shell > .isnad.dt-isna
  html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 p{font-size:13px!important}
 }
 
+/* Home welcome typography: natural wrapping by actual available pane width.
+   No line-clamp, height limit, horizontal overflow or header ownership change. */
+html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 .dar-adult-home-title-v7{
+ margin:clamp(6px,1.4vw,10px) 0 clamp(5px,1.2vw,9px)!important;
+ font:600 clamp(17px,3.7vw,24px)/1.26 Georgia,"Iowan Old Style",serif!important;
+ color:var(--dtbh-ink)!important;max-width:100%!important;
+ overflow-wrap:break-word!important;text-wrap:balance!important;
+}
+html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 .dar-adult-home-desc-v7{
+ max-width:min(100%,70ch)!important;
+ font-size:clamp(13px,2.5vw,15.5px)!important;line-height:1.48!important;
+ overflow-wrap:break-word!important;white-space:normal!important;
+ height:auto!important;max-height:none!important;
+}
 /* DAR ADULT COMPACT MARK HEADER V20261030 FIRST-RUN */
 
 /* Native iOS, Android/PWA and tablet: one authoritative horizontal brand rail.
