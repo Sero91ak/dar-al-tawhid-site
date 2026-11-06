@@ -161,10 +161,27 @@
     } catch (e) {}
   }
 
+  var BOOT_STATUS = {
+    de: "Inhalt wird vorbereitet…",
+    ar: "جارٍ تجهيز المحتوى…",
+    en: "Preparing the content…",
+    tr: "İçerik hazırlanıyor…",
+    ku: "Naverok tê amadekirin…",
+    ckb: "ناوەڕۆک ئامادە دەکرێت…",
+    bs: "Sadržaj se priprema…",
+    fr: "Préparation du contenu…",
+    es: "Preparando el contenido…"
+  };
+  function bootStatusText() {
+    var code = "de";
+    try { code = localStorage.getItem("darAdultPreferredLocaleV1") || window.__DAR_BOOT_LOCALE || "de"; } catch (e) {}
+    return BOOT_STATUS[code] || BOOT_STATUS.de;
+  }
   function standardOverlayMarkup() {
     return '<img class="dar-soft-boot__mark" src="' + STANDARD_BOOT_LOGO + '" alt="" width="148" height="148" decoding="async">' +
       '<p class="dar-soft-boot__title brand-title">' + (window.DAR_BRAND_NAME || "DĀR AL TAWḤĪD") + '</p>' +
       '<p class="dar-soft-boot__sub">QUR’ĀN • SUNNAH • ĀTHĀR</p>' +
+      '<p class="dar-soft-boot__status">' + bootStatusText() + '</p>' +
       '<div class="dar-soft-boot__track" aria-hidden="true"><div class="dar-soft-boot__bar"></div></div>' +
       '<p class="dar-soft-boot__pct">0%</p>';
   }
