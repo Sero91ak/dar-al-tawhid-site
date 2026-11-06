@@ -32,6 +32,13 @@ Ausführen vom Repository-Root:
 python3 apple-tv/quran/tadabbur/tools/verify_tadabbur_catalog.py
 ```
 
+## Neue Authentizitätsgrenze ab Gap-Batch 06-262 (06.11.2026)
+
+- Bisher wurde das Feld grading lediglich auf Nichtleere geprüft, obwohl die zugelassenen Grades in catalog.verificationPolicy.allowedGradings festgelegt sind.
+- Ab entries-gap-06-262.json werden nur diese exakten Grade akzeptiert; ebenso sind eine zulässige Generation, eine direkte HTTPS-Quelle (sourceUrl) und eine dokumentierte Notiz (note) Pflicht. Maqtūʿ/mawqūf allein ist keine Authentizitätsbewertung.
+- Frühere Einträge werden nicht automatisch umetikettiert oder gelöscht. Ihr nachzuholender Einzel-Audit wird als legacy_grade_review_pending gezählt.
+- Auch ein formal zulässiger Grad muss weiterhin unabhängig am Original und an Riǧāl-/ʿIlal-Belegen überprüft werden. Der Prüfer garantiert keine Hadithwissenschaft durch Software.
+
 ## Was geprüft wird
 
 Der Prüfer kontrolliert:
