@@ -153,3 +153,80 @@ html.dar-test-immersive-art-v1[data-theme] body #appView [data-dar-art-inline="d
   transform:none!important;transition:none!important;
  }
 }
+
+
+/* DAR_TEST_VISIBLE_HOME_ART_V2 · The actual adult Test HOME is
+   #darHomeHtmlParityV1. Its renderer hides .top-shell and #appView outright.
+   Integrate into the VISIBLE welcome surface instead of the dead header.
+   Original live prayer, searchable input, 3D tabs and source ordering remain. */
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero{
+  --dar-art-edge:var(--dhp-bg,var(--bg));
+  --dar-art-focus:63% 48%;
+  position:sticky!important;
+  top:var(--dar-art-top)!important;
+  z-index:64!important;
+  isolation:isolate!important;
+  display:block!important;
+  width:calc(100% + 40px)!important;
+  max-width:calc(100% + 40px)!important;
+  min-height:clamp(228px,30svh,345px)!important;
+  margin:12px -20px 16px!important;
+  padding:clamp(28px,5svh,48px) clamp(21px,5vw,38px) clamp(34px,6svh,54px)!important;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background:var(--dar-art-edge)!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero > .dar-art-layer{
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  border-radius:0!important;
+  pointer-events:none!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero > :not(.dar-art-layer){
+  position:relative!important;
+  z-index:2!important;
+  max-width:min(590px,87%)!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero .dhp-greeting{
+  font-size:clamp(25px,4.4vw,39px)!important;
+  line-height:1.16!important;
+  letter-spacing:-.017em!important;
+  text-wrap:balance;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero .dhp-intro{
+  font-size:clamp(13px,1.2vw + 10px,16px)!important;
+  line-height:1.58!important;
+}
+/* An atmospheric extension beneath the scene connects the image to the
+   following Isnad without changing order or adding a graphic capsule. */
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-isnad{
+  position:relative;
+  z-index:1;
+  border-radius:0!important;
+}
+@media(max-width:480px){
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero{
+   width:calc(100% + 32px)!important;
+   max-width:calc(100% + 32px)!important;
+   margin-inline:-16px!important;
+   min-height:clamp(210px,27svh,290px)!important;
+   padding:24px 22px 35px!important;
+ }
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero > :not(.dar-art-layer){
+   max-width:93%!important;
+ }
+}
+/* Ancillary art variants stay dark/salbei under their existing theme tokens. */
+html.dar-test-immersive-art-v1[data-theme="light"] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero,
+html.dar-test-immersive-art-v1[data-theme="salbei"] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero{
+ --dar-art-a:rgba(249,246,238,.96);
+ --dar-art-b:rgba(249,246,238,.71);
+ --dar-art-c:rgba(249,246,238,.08);
+}
