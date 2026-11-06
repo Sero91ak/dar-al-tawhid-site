@@ -80,6 +80,24 @@ def main():
                     docTop:doc.scrollTop,appTop:app?.scrollTop||0};
                 """)
             print(f"SCROLL {width}x{height} {after}",flush=True)
+            sticky=d.execute_script("""
+              const el=document.querySelector('#darHomeHtmlParityV1 .dhp-welcome');
+              const topRule=getComputedStyle(el).top;
+              const ancestors=[];
+              for(let p=el.parentElement;p;p=p.parentElement){
+                const c=getComputedStyle(p);
+                ancestors.push({tag:p.tagName,id:p.id,cls:String(p.className||'').slice(0,70),
+                  overflowX:c.overflowX,overflowY:c.overflowY,position:c.position,
+                  contain:c.contain,transform:c.transform,scrollTop:p.scrollTop,
+                  scrollHeight:p.scrollHeight,clientHeight:p.clientHeight});
+              }
+              return {topRule:topRule,header:document.getElementById('darTestBrandHeaderV1')?.getBoundingClientRect().bottom,
+                ancestors:ancestors};
+            """)
+            print(f"STICKY TRACE {width}x{height} {sticky}",flush=True)
+            if after["scrollY"]>=350 and after["top"] < -6:
+                raise AssertionError("Hero scene is not pinned under the fixed header: "+str(sticky))
+
             if after["progress"] in (None,"","0") or max(after["scrollY"],after["docTop"],after["appTop"])<=0:
                 raise AssertionError("No actual scroll-driven depth change: "+str(after))
             d.execute_script("window.scrollTo(0,0);const a=document.querySelector('.app');if(a)a.scrollTop=0;window.dispatchEvent(new Event('scroll'))")
