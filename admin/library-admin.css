@@ -109,8 +109,8 @@
   margin: 0;
   padding: 8px 10px;
   border-radius: 10px;
-  border: 1px solid var(--line2, rgba(140, 190, 255, 0.24));
-  background: color-mix(in srgb, var(--panel2, #101a29) 70%, transparent);
+  border: 1px solid var(--line2, rgba(var(--admin-legacy-tint-rgb), 0.24));
+  background: color-mix(in srgb, var(--panel2, var(--panel2)) 70%, transparent);
   color: var(--soft, #d2c9b7);
   font-size: 0.78rem;
   line-height: 1.35;
@@ -300,9 +300,9 @@
 }
 
 .lib-admin-btn-live {
-  background: linear-gradient(180deg, rgba(120, 180, 220, 0.18), rgba(40, 90, 140, 0.14));
-  border-color: rgba(140, 190, 230, 0.34);
-  color: #d8ecff;
+  background: linear-gradient(180deg, rgba(var(--admin-legacy-tint-rgb), 0.18), rgba(var(--admin-legacy-tint-rgb), 0.14));
+  border-color: rgba(var(--admin-legacy-tint-rgb), 0.34);
+  color: var(--v2ink);
 }
 
 .lib-admin-btn-hero {
@@ -326,7 +326,7 @@
 .lib-admin-push-status {
   margin: 8px 0 0;
   font-size: 0.8rem;
-  color: #b8e8c4;
+  color: var(--v2mint);
   line-height: 1.45;
 }
 
@@ -730,9 +730,9 @@
 }
 
 .lib-admin-btn-push {
-  background: linear-gradient(180deg, rgba(180, 130, 255, 0.16), rgba(90, 50, 150, 0.12)) !important;
-  border-color: rgba(190, 150, 255, 0.34) !important;
-  color: #eadcff !important;
+  background: linear-gradient(180deg, rgba(var(--admin-legacy-tint-rgb), 0.16), rgba(var(--admin-legacy-tint-rgb), 0.12)) !important;
+  border-color: rgba(var(--admin-legacy-tint-rgb), 0.34) !important;
+  color: var(--v2ink) !important;
 }
 
 .lib-admin-live-stats--compact {
@@ -859,13 +859,13 @@
 }
 
 .lib-admin-target-pill.is-online {
-  color: #b8e8c4;
+  color: var(--v2mint);
   border-color: rgba(120, 200, 140, 0.28);
   background: rgba(40, 90, 60, 0.18);
 }
 
 .lib-admin-target-pill.is-draft {
-  color: #ffd9a0;
+  color: var(--v2gold);
   border-color: rgba(255, 196, 120, 0.28);
 }
 
@@ -897,7 +897,7 @@
   font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #b8e8c4;
+  color: var(--v2mint);
   border: 1px solid rgba(111, 211, 139, 0.28);
   background: rgba(40, 90, 60, 0.2);
 }
@@ -926,8 +926,8 @@
   gap: 10px;
   padding: 12px 14px;
   border-radius: 12px;
-  border: 1px solid rgba(140, 190, 230, 0.28);
-  background: rgba(40, 90, 140, 0.12);
+  border: 1px solid rgba(var(--admin-legacy-tint-rgb), 0.28);
+  background: rgba(var(--admin-legacy-tint-rgb), 0.12);
 }
 
 .lib-admin-edit-banner b {
@@ -984,8 +984,8 @@
   padding: 12px 14px;
   margin-bottom: 12px;
   border-radius: 12px;
-  border: 1px solid rgba(140, 190, 230, 0.28);
-  background: rgba(40, 90, 140, 0.12);
+  border: 1px solid rgba(var(--admin-legacy-tint-rgb), 0.28);
+  background: rgba(var(--admin-legacy-tint-rgb), 0.12);
 }
 
 .lib-admin-edit-banner b {
@@ -1060,13 +1060,13 @@
 }
 
 .lib-admin-list-item.is-online .lib-admin-status-pill {
-  color: #b8e8c4;
+  color: var(--v2mint);
   border-color: rgba(120, 200, 140, 0.28);
   background: rgba(40, 90, 60, 0.18);
 }
 
 .lib-admin-list-item.is-draft .lib-admin-status-pill {
-  color: #ffd9a0;
+  color: var(--v2gold);
   border-color: rgba(255, 196, 120, 0.28);
 }
 
@@ -1084,7 +1084,7 @@
 
 .lib-admin-btn-warn {
   border-color: rgba(255, 196, 120, 0.45) !important;
-  color: #ffd9a0 !important;
+  color: var(--v2gold) !important;
 }
 
 .lib-admin-btn-danger {
