@@ -158,7 +158,7 @@
       "id": "admin-v3-two-themes-container-responsiveness-20261106",
       "at": "2026-11-06T12:21:00+01:00",
       "approvedBy": "user-explicit-github-v3-colors-ipad-desktop-phone-20261106",
-      "reason": "Time-limited exact Admin UI-only implementation authorization: make DĀR AL LAYL and Salbei–Elfenbein the only color palettes, migrate old Admin panels to tokens, wire V3 to existing V2 owner, responsive iPad Desktop/compact Fold and smartphone behavior with test coverage. No visitor/Kids UI, backend, auth, secret, push or publishing changes; keep all guards and required live verification.",
+      "reason": "Time-limited exact Admin UI-only implementation authorization: make DĀR AL LAYL and Salbei–Elfenbein the only color palettes, migrate old Admin panels to tokens, wire V3 to existing V2 owner, responsive iPad Desktop/compact Fold and smartphone behavior with test coverage. No visitor/Kids UI, backend, auth, secret, push or publishing changes; keep all guards and required live verification. Expanded only to reviewed five admin-local legacy module style owners that contain hardcoded blue/navy controls.",
       "paths": [
         "admin/index.html",
         "admin/appearance-v2.css",
@@ -167,7 +167,12 @@
         "admin/intelligence-v3.js",
         "admin/intelligence-v3.css",
         "admin/tests/intelligence-v3.test.cjs",
-        "admin/tests/appearance-v2.test.cjs"
+        "admin/tests/appearance-v2.test.cjs",
+        "admin/library-admin.css",
+        "admin/social-review.css",
+        "admin/live-edit.css",
+        "admin/wissensbereich-push.css",
+        "admin/dar-admin-top-chrome-fix.css"
       ],
       "expiresAt": "2026-11-14T23:59:00+01:00"
     },
