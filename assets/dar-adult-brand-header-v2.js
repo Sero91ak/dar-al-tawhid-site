@@ -128,13 +128,13 @@ function order(){
   '<span class="dar-adult-home-rule-v5" aria-hidden="true"></span>'+
   '<p class="dar-adult-home-desc-v7">Eine geordnete Wissensplattform mit Beiträgen aus <strong>Qurʾān</strong>, authentischer <strong>Sunnah</strong> und den <strong>Āṯār der frühen Imāme</strong> – sowie einer umfangreichen <strong>Duʿāʾ-Sammlung</strong> aus Qurʾān und authentischer Sunnah.</p>');
  welcome.setAttribute("aria-label","Willkommen bei DĀR AL TAWḤĪD");
- if(window.DARAdultHomeWelcomeV1)window.DARAdultHomeWelcomeV1.apply();
  // Idempotent three-part sequence: never clone prayer, disturb its data,
  // force scrollTop or create independent scroll containers.
  if(kicker.parentElement!==h||h.firstElementChild!==kicker)h.insertBefore(kicker,h.firstElementChild);
  if(p.previousElementSibling!==kicker)h.insertBefore(p,kicker.nextElementSibling);
  if(welcome.parentElement!==h||welcome.previousElementSibling!==p)
   h.insertBefore(welcome,p.nextElementSibling);
+ if(window.DARAdultHomeWelcomeV1)window.DARAdultHomeWelcomeV1.apply();
 }
 function queue(){
  if(queued)return;queued=true;
