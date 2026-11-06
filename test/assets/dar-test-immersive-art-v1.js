@@ -18,7 +18,7 @@ var rules=[
  ["is-library-route","#appView .library-page > .view-head","library",true],
  ["is-scholars-route","#appView .scholars-index > .scholars-index__header","scholars",true]
 ];
-var active=[],pending=0,bodyObserver,viewObserver,resizeObserver;
+var active=[],pending=0,bodyObserver,viewObserver,shellObserver,resizeObserver;
 var observed=new WeakSet();
 var reduced=!!(win.matchMedia&&win.matchMedia("(prefers-reduced-motion: reduce)").matches);
 function allowed(){
@@ -101,6 +101,14 @@ function start(){
    bodyObserver=new MutationObserver(schedule);
    bodyObserver.observe(doc.body,{attributes:true,attributeFilter:["class","data-frauen-view"]});
  }
+ // Home parity is inserted AS A SIBLING of .top-shell, not inside #appView.
+ // Observe only the direct shell children, never the entire body subtree.
+ var shell=doc.querySelector(".app");
+ if(shell&&typeof MutationObserver==="function"){
+   shellObserver=new MutationObserver(schedule);
+   shellObserver.observe(shell,{childList:true,subtree:false});
+ }
+ doc.addEventListener("dar:view-rendered",schedule);
  win.addEventListener("scroll",schedule,{passive:true});
  doc.addEventListener("scroll",schedule,true);
  win.addEventListener("resize",schedule,{passive:true});
