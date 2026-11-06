@@ -472,8 +472,8 @@ async function finalizeDarTestHomeV1193(asset) {
   html = html.replace(/<script\b[^>]*\bid=["']darSearchV48Core["'][^>]*><\/script>\s*/gi, "");
   html = html.replace(/<script\b[^>]*\bid=["']darSearchV48Ui["'][^>]*><\/script>\s*/gi, "");
   const v47FinalAssets =
-    '<link rel="stylesheet" id="darHomeV47CssFinal" href="/test/assets/dar-home-v47-layout.css?v=20261019-v47r2">' +
-    '<script id="darHomeV47JsFinal" data-dar-home-v47 src="/test/assets/dar-home-v47-layout.js?v=20261021-brand-prayer-first-v4"></script>' +
+    '<link rel="stylesheet" id="darHomeV47CssFinal" href="/test/assets/dar-home-v47-layout.css?v=20261106-global-salam-v1">' +
+    '<script id="darHomeV47JsFinal" data-dar-home-v47 src="/test/assets/dar-home-v47-layout.js?v=20261106-global-salam-v1"></script>' +
     '<script id="darLocalHomeEditorV1" src="/test/assets/dar-test-home-editor-apply-v1.js?v=editor-20261019-1"></script>' +
     '<script id="darLocalHomeStudioV2" src="/test/assets/dar-test-studio-local-v2.js?v=studio-20261019-3"></script>' +
     '<link rel="stylesheet" id="darHomeV48Polish" href="/test/assets/dar-home-v48-polish.css?v=20261019-48-1">' +
@@ -494,7 +494,11 @@ async function finalizeDarTestHomeV1193(asset) {
   // <script id="darTestHomeHtmlParityV1"> from cached HTML before reinjecting.
   // A bare includes(id) skipped version upgrades, leaving the old visible UI.
   html = html.replace(/<script\b(?=[^>]*\bid=["']darTestHomeHtmlParityV1["'])[^>]*>\s*<\/script>\s*/gi, "");
-  const parityScript = '<script defer id="darTestHomeHtmlParityV1" src="/test/assets/dar-home-html-parity-v1.js?v=20261031-neutral-hooded-test-v14"></script>';
+  const parityScript = '<script defer id="darTestHomeHtmlParityV1" src="/test/assets/dar-home-html-parity-v1.js?v=20261106-global-salam-v1"></script>';
+  if (!html.includes('id="darAdultHomeWelcomeCopyV1"')) {
+    const welcomeCopy = '<script defer id="darAdultHomeWelcomeCopyV1" src="/assets/i18n/adult-home-welcome-v1.js?v=20261106-global-salam-v1"></script>';
+    html = html.includes("</body>") ? html.replace("</body>",welcomeCopy+"</body>") : html+welcomeCopy;
+  }
   html = html.includes("</body>") ? html.replace("</body>", parityScript + "\n</body>") : html + parityScript;
   // DAR_ADULT_TOP_SCROLL_BOUNDARY_V1: every adult Dar Test route uses
   // the real document scroll; clamp downward drags at the top without
