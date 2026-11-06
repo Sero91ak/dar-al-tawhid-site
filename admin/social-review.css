@@ -26,7 +26,7 @@
 .social-review-state{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;color:var(--v2gold);margin-top:12px}
 .social-review .btn{border-radius:11px}
 .social-review .btn:disabled{opacity:.45;cursor:not-allowed}
-.social-validation{font-size:12px;line-height:1.65;color:#dbad92;background:rgba(162,83,41,.08);border-radius:10px;padding:10px;margin-top:10px}
+.social-validation{font-size:12px;line-height:1.65;color:var(--admin-warning-text);background:rgba(162,83,41,.08);border-radius:10px;padding:10px;margin-top:10px}
 .social-preview-top{display:flex;justify-content:space-between;gap:10px;color:var(--v2gold);font-size:12px;margin:0 0 12px;font-weight:800}
 .social-paper{min-height:385px;max-height:670px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;unicode-bidi:plaintext;border-radius:13px;padding:clamp(14px,3vw,25px);color:#243327;background:#f9f5e7;font-size:15px;line-height:1.86;letter-spacing:0;font-family:Georgia,Arial,sans-serif;box-shadow:inset 0 0 0 1px rgba(160,127,54,.15)}
 .social-preview label{display:block;margin:15px 0 7px;font-size:12px;color:var(--v2gold)}
@@ -138,7 +138,7 @@ body.dar-editorial-fullscreen .admin-editorial-hostbar span{display:none}
 }
 
 /* Workspace boot diagnostics: visible only while loading or on stale deployments */
-.admin-editorial-loading{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:12px 20px;background:var(--admin-panel-background);border-bottom:1px solid #9eaa8544;color:#eed8a4;font-size:13px;min-height:48px}
+.admin-editorial-loading{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:12px 20px;background:var(--admin-panel-background);border-bottom:1px solid #9eaa8544;color:var(--v2gold);font-size:13px;min-height:48px}
 .admin-editorial-loading[hidden]{display:none!important}
 .admin-editorial-loading button{width:auto;border-radius:4px;min-height:36px}
 .admin-editorial-popout{font-family:inherit;font-size:12px;font-weight:700;line-height:1.4}
