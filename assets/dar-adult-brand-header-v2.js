@@ -123,7 +123,7 @@ function order(){
    "Beiträge nach Qurʾān, Sunnah und Āthār");
  var welcome=h.querySelector("#darAdultHomeWelcomeV5");
  if(!welcome)welcome=make("section","darAdultHomeWelcomeV5","dar-adult-home-welcome-v5",
-  '<h2 class="dar-adult-home-salam-v5">As-salāmu ʿalaikum wa raḥmatullāhi wa barakātuh</h2>'+
+  '<h2 class="dar-adult-home-salam-v5">As-Salāmu ʿAlaikum Wa Raḥmatullāhi Wa Barakātuh</h2>'+
   '<h3 class="dar-adult-home-title-v7">Willkommen bei <strong>DĀR AL TAWḤĪD</strong></h3>'+
   '<span class="dar-adult-home-rule-v5" aria-hidden="true"></span>'+
   '<p class="dar-adult-home-desc-v7">Eine geordnete Wissensplattform mit Beiträgen aus <strong>Qurʾān</strong>, authentischer <strong>Sunnah</strong> und den <strong>Āṯār der frühen Imāme</strong> – sowie einer umfangreichen <strong>Duʿāʾ-Sammlung</strong> aus Qurʾān und authentischer Sunnah.</p>');
