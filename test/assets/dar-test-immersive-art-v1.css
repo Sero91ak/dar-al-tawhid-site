@@ -251,3 +251,111 @@ html.dar-test-immersive-art-v1 body.has-bottom-nav.is-home-route:not(.is-feed-fu
  overflow-x:clip!important;
  overflow-y:visible!important;
 }
+
+
+/* DAR_TEST_ONE_NAV_GEOMETRY_V1 · 06 NOV 2026
+   Test-only resolution of the legacy conflict:
+   adaptive-layout.css left:0/transform:none,
+   bottom-nav-global-v1075.css left:50%/translate(-50%),
+   dynamic Test inline nav rules alternating GRID and FLEX.
+   The REAL five-button #bottomNav is ONE fixed viewport capsule.
+   It keeps its existing theme, 3D icons, events and destinations.
+   The Quran unified reader, player, Ilm and fullscreen feed are excluded.
+*/
+html.dar-test-immersive-art-v1[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-player-route):not(.is-ilm-chat-route)
+:is(#appChromeDock #bottomNav.bottom-nav,#bottomNav.bottom-nav):not(.post-nav-hidden):not(.is-adaptive-rail) {
+  --dar-nav-one-width:min(560px,calc(100vw - 2 * max(12px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))));
+  position:fixed!important;
+  inset-block-start:auto!important;
+  inset-inline-start:auto!important;
+  inset-inline-end:auto!important;
+  top:auto!important;
+  left:50%!important;
+  right:auto!important;
+  bottom:calc(max(7px,calc(env(safe-area-inset-bottom,0px) - 18px)) + 3mm)!important;
+  margin:0!important;
+  padding:5px 6px!important;
+  width:var(--dar-nav-one-width)!important;
+  min-width:0!important;
+  max-width:var(--dar-nav-one-width)!important;
+  height:68px!important;
+  min-height:68px!important;
+  max-height:68px!important;
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:stretch!important;
+  justify-content:space-around!important;
+  gap:0!important;
+  grid-template-columns:none!important;
+  border-radius:28px!important;
+  overflow:hidden!important;
+  transform:translate3d(-50%,0,0)!important;
+  -webkit-transform:translate3d(-50%,0,0)!important;
+  transform-origin:50% 50%!important;
+  transition:none!important;
+  animation:none!important;
+  will-change:auto!important;
+  z-index:90!important;
+  pointer-events:auto!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-player-route):not(.is-ilm-chat-route)
+#bottomNav.bottom-nav:not(.post-nav-hidden) > .bottom-nav-btn {
+  display:flex!important;
+  flex:1 1 0!important;
+  min-width:0!important;
+  max-width:none!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:5px 2px!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:2px!important;
+  border-radius:20px!important;
+  transition:color .16s ease,background-color .16s ease!important;
+  transform:none!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-player-route):not(.is-ilm-chat-route)
+#bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+html.dar-test-immersive-art-v1[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-player-route):not(.is-ilm-chat-route)
+#bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon {
+  display:grid!important;place-items:center!important;
+  width:32px!important;min-width:32px!important;max-width:32px!important;
+  height:32px!important;min-height:32px!important;max-height:32px!important;
+  flex:0 0 32px!important;
+  margin:0 auto!important;
+  padding:1px!important;
+  transform:none!important;transition:none!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-player-route):not(.is-ilm-chat-route)
+#bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{
+  display:block!important;
+  width:100%!important;height:100%!important;
+  min-width:0!important;min-height:0!important;
+  max-width:100%!important;max-height:100%!important;
+  object-fit:contain!important;
+  transform:none!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-player-route):not(.is-ilm-chat-route)
+#bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon){
+  display:block!important;
+  position:static!important;
+  clip:auto!important;clip-path:none!important;
+  width:auto!important;height:auto!important;
+  max-width:100%!important;
+  margin:0!important;padding:0!important;
+  font-size:10px!important;line-height:1.15!important;
+  font-weight:700!important;letter-spacing:0!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  opacity:1!important;
+  transform:none!important;
+}
+@media (max-width:360px){
+ html.dar-test-immersive-art-v1[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-player-route):not(.is-ilm-chat-route)
+ #bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon){font-size:9px!important;}
+}
