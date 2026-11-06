@@ -63,7 +63,7 @@
    visible.forEach(task=>{const b=node("button","dar-v3-task"+(task.id===selected?" is-selected":""));b.type="button";b.dataset.v3Task=task.id;b.setAttribute("aria-pressed",String(task.id===selected));
     b.append(node("span","dar-v3-task-symbol",task.group==="system"?"◈":task.group==="checks"?"◇":"✎"));
     const col=node("span","dar-v3-task-copy");col.append(node("strong","",task.name[currentLocale()]||task.name.de),node("small","",t(task.group)+" · "+t("manual")));b.append(col,node("span","dar-v3-task-chevron","›"));
-    b.addEventListener("click",()=>{selected=task.id;tasks()});list.append(b)
+    b.addEventListener("click",()=>{selected=task.id;list.querySelectorAll(".dar-v3-task").forEach(button=>{const yes=button.dataset.v3Task===selected;button.classList.toggle("is-selected",yes);button.setAttribute("aria-pressed",String(yes))});details(task)});list.append(b)
    });
    details(visible.find(x=>x.id===selected));
  }
