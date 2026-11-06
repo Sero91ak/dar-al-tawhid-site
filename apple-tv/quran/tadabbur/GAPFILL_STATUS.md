@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-270` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-271` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4774
-totalVerifiedEntries: 4774
-loadedEntries: 4774
-uniqueVerifiedReferences: 4774
-missingCount: 1462
+entriesCount: 4776
+totalVerifiedEntries: 4776
+loadedEntries: 4776
+uniqueVerifiedReferences: 4776
+missingCount: 1460
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,8 +42,8 @@ firstMissingReference: 2:82
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-270.json
-nächster Gap-Fill-Batch: entries-gap-06-271.json
+letzter Gap-Fill-Batch: entries-gap-06-271.json
+nächster Gap-Fill-Batch: entries-gap-06-272.json
 ```
 
 Seit der Dedupe-Basis `4190` wurden damit `583` neue eindeutige, geprüfte Referenzen registriert.
@@ -707,3 +707,7 @@ Zwei direkt versbezogene authentische Auslegungen aus Ṣaḥīḥ al-Buḫārī
 ## Batch 06-270 — 06.11.2026 (Prüfzweig)
 
 Qurʾān 8:39: die authentische mawqūf-Auslegung von ʿAbdullāh ibn ʿUmar im Ṣaḥīḥ al-Buḫārī 4650 und 4651. Er ordnet die religiöse Verfolgung der Muslime dem frühen historischen Verskontext zu und grenzt sie von Machtkämpfen unter Muslimen ab. Kein eigenständiger Prophetenwortlaut, keine heutige Gewaltaufforderung. Katalog nach Freigabe 4774/6236, Lücken 1462. Details in SOURCE_REVIEW_06-270.md.
+
+## Batch 06-271 — 06.11.2026 (authentische Quellen, Prüfzweig)
+
+Zwei frühislamische Kontextberichte aus Ṣaḥīḥ al-Buḫārī: 9:3 Abū Hurayrah über die Bekanntmachung im Ḥaǧǧ (Nr. 4656), 9:12 Ḥuḏayfah über damals noch lebende Adressaten des Verses (Nr. 4658). Mawqūf/Ṣaḥābī-Zeugnisse ausdrücklich abgegrenzt von eigenständigen Prophetenaussprüchen. Sollstand nach Live-Freigabe 4776/6236 und 1460 Lücken. Weitere Einzelheiten: SOURCE_REVIEW_06-271.md.
