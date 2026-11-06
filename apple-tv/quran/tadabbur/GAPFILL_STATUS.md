@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-269` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-270` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4773
-totalVerifiedEntries: 4773
-loadedEntries: 4773
-uniqueVerifiedReferences: 4773
-missingCount: 1463
+entriesCount: 4774
+totalVerifiedEntries: 4774
+loadedEntries: 4774
+uniqueVerifiedReferences: 4774
+missingCount: 1462
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,8 +42,8 @@ firstMissingReference: 2:82
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-269.json
-nächster Gap-Fill-Batch: entries-gap-06-270.json
+letzter Gap-Fill-Batch: entries-gap-06-270.json
+nächster Gap-Fill-Batch: entries-gap-06-271.json
 ```
 
 Seit der Dedupe-Basis `4190` wurden damit `583` neue eindeutige, geprüfte Referenzen registriert.
@@ -703,3 +703,7 @@ Zwei neue, direkt im Ṣaḥīḥ al-Buḫārī verszugeordnete authentische Ber
 ## Batch 06-269 – 06.11.2026
 
 Zwei direkt versbezogene authentische Auslegungen aus Ṣaḥīḥ al-Buḫārī: Qurʾān 6:86 (Prophetenḥadīṯ über Ibn ʿAbbās zu Yūnus, 4630, marfūʿ) und Qurʾān 6:90 (eigenständiger Ṣaḥābī-Tafsīr Ibn ʿAbbās über Dāwūd und Rechtleitung, 4632, mawqūf). Die Zusatzkette zu 6:90 ist getrennt und nicht in den Hauptweg hineinkopiert. Geplanter Stand 4773/6236, verbleibend 1463; Quellen und Isnādhinweise in SOURCE_REVIEW_06-269.md. Nur nach PR-/Release-Gates gültig.
+
+## Batch 06-270 — 06.11.2026 (Prüfzweig)
+
+Qurʾān 8:39: die authentische mawqūf-Auslegung von ʿAbdullāh ibn ʿUmar im Ṣaḥīḥ al-Buḫārī 4650 und 4651. Er ordnet die religiöse Verfolgung der Muslime dem frühen historischen Verskontext zu und grenzt sie von Machtkämpfen unter Muslimen ab. Kein eigenständiger Prophetenwortlaut, keine heutige Gewaltaufforderung. Katalog nach Freigabe 4774/6236, Lücken 1462. Details in SOURCE_REVIEW_06-270.md.
