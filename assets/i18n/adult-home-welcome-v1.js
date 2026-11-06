@@ -14,6 +14,12 @@ bs:["Es-selamu alejkum ve rahmetullahi ve berekatuhu","Dobro došli u DĀR AL TA
 fr:["As-salāmu ʿalaikum wa raḥmatullāhi wa barakātuh","Bienvenue à DĀR AL TAWḤĪD","Une plateforme de savoir structurée proposant des articles tirés du Qurʾān, de la Sunnah authentique et des récits des premiers imams, ainsi qu’une vaste collection de duʿāʾ issus du Qurʾān et de la Sunnah authentique."],
 es:["As-salāmu ʿalaikum wa raḥmatullāhi wa barakātuh","Bienvenido a DĀR AL TAWḤĪD","Una plataforma de conocimiento organizada con artículos del Qurʾān, la Sunnah auténtica y los relatos de los primeros imames, además de una amplia colección de duʿāʾ del Qurʾān y la Sunnah auténtica."]
 };
+var registry=w.DARAdultComponentI18nV1;
+if(registry&&registry.register){
+ var catalogs={};
+ Object.keys(texts).forEach(function(l){catalogs[l]={greeting:texts[l][0],title:texts[l][1],summary:texts[l][2]}});
+ registry.register("adult-home-welcome",catalogs);
+}
 function lang(){try{var k=w.localStorage.getItem(KEY)||"de";return texts[k]?k:"de"}catch(_){return"de"}}
 function mark(el,s,kind,l){if(!el||el.textContent.trim()===s)return;
  var words=kind==="title"?["DĀR AL TAWḤĪD","دار التوحيد","دار التوحید"]:(l==="de"?["Āṯār der frühen Imāme","Duʿāʾ-Sammlung","Qurʾān","Sunnah"]:[]);
