@@ -75,7 +75,7 @@ const searchAliases={
  bibliothek:["pdf","buch","bibliothek"],
  settings:["thema","design","hell","dunkel","salbei","layl"]
 };
-const searchNormalize=s=>String(s||"").normalize("NFKD").replace(/[\\u0300-\\u036f]/g,"").toLocaleLowerCase("de-DE");
+const searchNormalize=s=>String(s||"").normalize("NFKD").replace(/\p{M}/gu,"").toLocaleLowerCase("de-DE");
 function renderSearch(){
  searchResults.replaceChildren();const term=searchNormalize(searchField.value.trim());
  const matches=options().filter(x=>[x.title,...(searchAliases[x.id]||[])].some(word=>searchNormalize(word).includes(term)));
