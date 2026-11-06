@@ -28,6 +28,15 @@
   {id:"knowledge",group:"checks",tab:"wissensbereich",name:{de:"Wissensbereich kontrollieren",en:"Review knowledge areas",tr:"Bilgi alanlarını kontrol et",ar:"مراجعة أقسام المعرفة",ku:"Beşên zanînê kontrol bike",ckb:"پشکنینی بەشەکانی زانیاری",bs:"Provjeriti područja znanja",fr:"Contrôler les espaces de savoir",es:"Revisar áreas de conocimiento"},steps:{de:["Zielgruppe und kanonischen Inhalt prüfen","Quellen- und Lernlinks kontrollieren","Vorschau vor jeder Freigabe lesen"],en:["Check audience and canonical content","Check source and lesson links","Read preview before approval"]}},
   {id:"technical",group:"system",tab:"tech",name:{de:"System und Release prüfen",en:"Review system and releases",tr:"Sistem ve sürümleri kontrol et",ar:"مراجعة النظام والإصدار",ku:"Pergal û belavkirinan kontrol bike",ckb:"پشکنینی سیستەم و بڵاوکردنەوە",bs:"Provjeriti sistem i izdanja",fr:"Contrôler le système et les versions",es:"Revisar sistema y versiones"},steps:{de:["Systemstatus im Admin öffnen","GitHub-Prüfungen und Deploy getrennt beurteilen","Erst nach bestätigter Live-Prüfung freigeben"],en:["Open internal system status","Review CI and deployment separately","Approve only after verified live checks"]}}
  ];
+ const COMMON_STEPS={
+  tr:["Mevcut yönetim bölümünü açın","Veri kaynağını, durumunu ve kanıtları kontrol edin","Her onayı yalnızca elle verin"],
+  ar:["افتح قسم الإدارة الحالي","تحقق من المصدر والحالة والأدلة","اعتمد أي إجراء يدويًا فقط"],
+  ku:["Beşa heyî ya rêvebiriyê veke","Çavkanî, rewş û belgeyan kontrol bike","Her pejirandinê tenê bi destê xwe bike"],
+  ckb:["بەشی بەڕێوەبردنی ئێستا بکەرەوە","سەرچاوە و دۆخ و بەڵگەکان بپشکنە","هەر پەسەندێک تەنها بە دەست ئەنجام بدە"],
+  bs:["Otvorite postojeći odjel administracije","Provjerite izvor, status i dokaze","Svaku potvrdu izvršite samo ručno"],
+  fr:["Ouvrir la rubrique administrative existante","Vérifier les sources, l’état et les preuves","Confirmer chaque validation manuellement"],
+  es:["Abrir la sección de administración existente","Comprobar fuente, estado y evidencias","Confirmar cada aprobación manualmente"]
+ };
  let selected="sources",filter="all",session=null;
  function availableTabs(){return new Set(Array.from($("#adminTabSelect")?.options||[]).map(x=>x.value))}
  function go(tab){const select=$("#adminTabSelect");if(!select||!availableTabs().has(tab))return; if(select.value!==tab){select.value=tab;select.dispatchEvent(new Event("change",{bubbles:true}))}}
@@ -43,7 +52,7 @@
   box.append(node("span","dar-v3-kicker",t("detail")),node("h3","dar-v3-detail-title",task.name[currentLocale()]||task.name.de));
   box.append(node("p","dar-v3-subtle",t("guide")));
   box.append(node("h4","dar-v3-detail-subhead",t("checklist")));
-  const list=node("ol","dar-v3-checklist");(task.steps[currentLocale()]||task.steps.en||task.steps.de).forEach(item=>list.append(node("li","",item)));box.append(list);
+  const list=node("ol","dar-v3-checklist");(task.steps[currentLocale()]||COMMON_STEPS[currentLocale()]||task.steps.en).forEach(item=>list.append(node("li","",item)));box.append(list);
   const marker=node("p","dar-v3-source",t("manual"));box.append(marker);
   const btn=node("button","dar-v3-action",t("open")+" ↗");btn.type="button";btn.disabled=!availableTabs().has(task.tab);btn.addEventListener("click",()=>go(task.tab));box.append(btn);
  }
