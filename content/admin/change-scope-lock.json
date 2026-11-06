@@ -9345,6 +9345,17 @@
         ".github/workflows/check-qsource-standard.yml"
       ],
       "expiresAt": "2026-11-13T23:59:00+01:00"
+    },
+    {
+      "id": "frauen-future-q-nine-languages-publish-guard-20261106",
+      "at": "2026-11-06T12:50:00+01:00",
+      "approvedBy": "user-explicit-20261106-all-nine-languages-readable-when-selected",
+      "reason": "Narrow read-only future women-Q publication checker: any released Q52+ women card must have every one of the nine complete language packs and its learning page. Permanent CI gate under existing Q-Source Standard, no runtime change, no OneSignal or security bypass.",
+      "paths": [
+        "scripts/check-frauen-nine-language-publication.cjs",
+        ".github/workflows/check-qsource-standard.yml"
+      ],
+      "expiresAt": "2026-11-13T23:59:00+01:00"
     }
   ],
   "enabled": true
