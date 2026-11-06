@@ -110,7 +110,7 @@ const data={online:9,views:12345,shares:21,saves:34,rows:[{views:12345}],updated
  assert.match(app,/class="dar-v3-legacy-tools"/);
  assert.match(app,/id="darV3ClassicSummary"/);
  assert.match(css,/max-width:719px/);
- assert.match(css,/max-width:1080px/);
+ assert.match(css,/max-width:760px/);
  assert.match(css,/prefers-reduced-motion/);
  assert.ok(!/\b(?:fetch|XMLHttpRequest|sendBeacon|WebSocket)\s*\(/.test(script),"Read-only V3 must not perform requests");
  assert.ok(!script.includes("innerHTML"),"Use safe textContent DOM construction");
@@ -127,9 +127,9 @@ const data={online:9,views:12345,shares:21,saves:34,rows:[{views:12345}],updated
  assert.ok(!/rgba\(\s*(?:90,\s*140,\s*220|140,\s*190,\s*255)/.test(inlineStyle),"No legacy blue Admin CSS values");
  assert.match(inlineStyle,/var\(--admin-legacy-tint-rgb\)/,"Legacy colors use the shared palette");
  assert.match(shell,/@media\(min-width:720px\) and \(max-width:1023px\)/,"Desktop rail on wide iPad");
- assert.match(shell,/@container \(max-width:760px\)/,"Use actual panel width for forms");
+ assert.match(shell,/@container \(max-width:720px\)/,"Use actual panel width for forms");
  assert.match(shell,/container-type:inline-size/);
- assert.match(css,/@container \(max-width:850px\)/,"V3 uses own available content width");
+ assert.match(css,/@container \(max-width:720px\)/,"V3 uses own available content width");
  assert.ok(!social.includes("#081522")&&!social.includes("#102031"),"No hard-coded navy editorial panels");
  assert.ok(!/rgba\(\s*(?:40,\s*90,\s*140|180,\s*130,\s*255)/.test(library),"No legacy blue/purple library controls");
  assert.ok(knowledge.includes("var(--admin-panel-background)"),"Knowledge-area panels share palette");
