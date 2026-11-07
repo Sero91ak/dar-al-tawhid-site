@@ -52,6 +52,14 @@ assert.match(seam,/--frauen-flow-seam-shift/,"Automatische Korrektur des oberen 
 
 /* V1409: a cold Frauen route must recover the ORIGINAL photographed hero and
    ORIGINAL search before a native/test brand gets attached to the DOM. */
+assert.match(seam,/function restoreMissingSurface\(\)/,
+ "Wenn der Live-Shell beide Originalelemente verliert, fehlt der gezielte Wiederhersteller");
+assert.match(seam,/if\(!hero\)hero=restoreMissingSurface\(\)/,
+ "Fehlendes Hero-Bild muss aus dem eingefrorenen Frauenrenderer wiederhergestellt werden");
+assert.match(seam,/tpl\.content\.querySelector\("\.frauen-library-hero"\)/,
+ "Hero darf nur aus der kanonischen Originalvorlage rekonstruiert werden");
+assert.doesNotMatch(seam,/#appView\.innerHTML|app\.innerHTML/,
+ "Hero-Reparatur darf die vorhandenen Beiträge nicht überschreiben");
 assert.ok(
  seam.indexOf("var stage=shell.querySelector")<seam.indexOf("if(!header)return"),
  "Frauen Hero/Suche darf nicht auf den verzögerten Markenheader warten"
