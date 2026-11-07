@@ -342,8 +342,8 @@ function stylesheet(){
  "@media(max-width:359px){#darHomeHtmlParityV1 .dhp-quick{padding:8px!important;gap:6px!important;}#darHomeHtmlParityV1 .dhp-quick .dhp-icon3d{width:32px!important;height:32px!important;flex-basis:32px!important;}}",
  "#darHomeHtmlParityV1 .dhp-welcome-title{font:600 clamp(18px,3.7vw,23px)/1.26 Georgia,serif!important;color:var(--dhp-ink)!important;margin:7px 0!important;text-wrap:balance!important;overflow-wrap:break-word!important;}",
  "#darHomeHtmlParityV1 .dhp-welcome-title strong{font-weight:760!important;color:var(--dhp-ink)!important;}",
- "#darHomeHtmlParityV1 .dhp-greeting{overflow-wrap:break-word!important;max-width:100%!important;white-space:normal!important;}",
- "#darHomeHtmlParityV1 .dhp-intro{max-width:70ch!important;line-height:1.48!important;overflow-wrap:break-word!important;white-space:normal!important;height:auto!important;max-height:none!important;}",
+ "#darHomeHtmlParityV1 .dhp-greeting{white-space:normal!important;}",
+ "#darHomeHtmlParityV1 .dhp-intro{max-width:70ch!important;line-height:1.48!important;white-space:normal!important;height:auto!important;max-height:none!important;}",
  "html,html body{overscroll-behavior-y:none!important;}",
  ].join("\n");
 }
