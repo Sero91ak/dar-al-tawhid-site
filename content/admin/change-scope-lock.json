@@ -155,6 +155,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "frauen-original-hero-search-late-brand-fix-v1409-20261107",
+      "at": "2026-11-07T20:05:00+01:00",
+      "approvedBy": "user-request-20261107-frauen-hero-bild-suchfeld-angeheftet",
+      "reason": "Narrow repair for the reported missing ORIGINAL adult Frauen hero photograph and its attached search under the fixed visitor header. Keep all frozen women renderers, approved images, source records, languages, navigation and push system untouched. Only harden the pre-existing runtime for delayed header mounting, and cache-bust its exact script include for visitor, Test and desktop; PR must pass checks before production release.",
+      "paths": [
+        "assets/frauen/frauen-hero-seam-runtime-v1407.js",
+        "cloudflare/site-router.js",
+        "cloudflare/test-app-worker.js",
+        "desktop-preview/index.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-10T23:59:00.000Z"
+    },
+    {
       "id": "frauen-5-nine-languages-global-live-20261107",
       "at": "2026-11-07T19:10:00+01:00",
       "approvedBy": "user-explicit-20261107-five-at-a-time-publish-global-live-not-test-app",
