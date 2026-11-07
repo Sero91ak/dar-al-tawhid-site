@@ -8,6 +8,34 @@
 if(window.__DAR_FRAUEN_HERO_SEAM_V1407)return;
 window.__DAR_FRAUEN_HERO_SEAM_V1407=true;
 var queued=false,resizeObserver=null,observedHeader=null,observedHero=null;
+var frauenBodyOverflowSaved=null;
+/* Legacy layout adapters force overflow-x:hidden on body with !important.
+ * This coerces overflow-y:visible to auto and traps sticky under-scroll.
+ * Enforce a single document scroll owner only while the Frauen route lives. */
+function restoreBodyOverflow(){
+ var saved=frauenBodyOverflowSaved;
+ if(!saved)return;
+ frauenBodyOverflowSaved=null;
+ var el=saved.el;
+ if(!el)return;
+ ["overflow-x","overflow-y"].forEach(function(prop,i){
+  var val=saved.values[i],priority=saved.priorities[i];
+  if(val)el.style.setProperty(prop,val,priority||"");
+  else el.style.removeProperty(prop);
+ });
+}
+function frauenDocumentScroll(body){
+ if(!frauenBodyOverflowSaved||frauenBodyOverflowSaved.el!==body){
+  restoreBodyOverflow();
+  frauenBodyOverflowSaved={el:body,
+   values:["overflow-x","overflow-y"].map(function(p){return body.style.getPropertyValue(p)}),
+   priorities:["overflow-x","overflow-y"].map(function(p){return body.style.getPropertyPriority(p)})};
+ }
+ if(body.style.getPropertyValue("overflow-x")!=="clip"||body.style.getPropertyPriority("overflow-x")!=="important")
+  body.style.setProperty("overflow-x","clip","important");
+ if(body.style.getPropertyValue("overflow-y")!=="visible"||body.style.getPropertyPriority("overflow-y")!=="important")
+  body.style.setProperty("overflow-y","visible","important");
+}
 function top(){
  var r=document.scrollingElement||document.documentElement;
  return Math.max(0,window.scrollY||0,r?r.scrollTop||0:0);
@@ -59,7 +87,8 @@ function restoreMissingSurface(){
 function reconcile(){
  queued=false;
  var body=document.body;
- if(!body||!body.classList.contains("is-frauen-route"))return;
+ if(!body||!body.classList.contains("is-frauen-route")){restoreBodyOverflow();return;}
+ frauenDocumentScroll(body);
  /* V1409: mount the approved photo/search stage on EVERY Frauen render,
     even while the native/test brand is still being attached. The previous
     early header guard left both nodes unpinned after a cold route entry. */
