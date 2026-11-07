@@ -52,6 +52,12 @@ function annotate(root){
   if(reader)reader.setAttribute("data-dar-ed-reader","1");
   var toolbar=doc.querySelector("#appView .post-reader .post-slide-footer");
   if(toolbar)toolbar.setAttribute("data-dar-ed-toolbar","1");
+  // Existing disclosure and action owners remain intact: only opt in to
+  // non-geometric micro-motion; no clicks, handlers or aria state changes.
+  var details=doc.querySelectorAll("#appView .post-reader-main details");
+  for(var k=0;k<Math.min(details.length,12);k++)details[k].setAttribute("data-dar-ed-expand","1");
+  var actions=doc.querySelectorAll("#appView .post-reader :is(.post-reader-top-btn,.post-slide-nav)");
+  for(var a=0;a<Math.min(actions.length,12);a++)actions[a].setAttribute("data-dar-ed-spring","1");
   var targets=doc.querySelectorAll("#appView .post-reader-main .post-reader-speaker, #appView .post-reader-main .post-reader-sep");
   var io=getObserver();
   for(var i=0;i<Math.min(targets.length,16);i++){
@@ -60,6 +66,12 @@ function annotate(root){
    if(seen)seen.add(element);
    if(io)io.observe(element);
   }
+ }
+ // Reuse the same typographic scope on existing Hadith/Dua detail readers;
+ // their own wrappers, sidebars, sticky covers and source links do not move.
+ if(body.classList.contains("is-hadith-route")||body.classList.contains("is-dua-route")){
+  var detail=doc.querySelector("#appView :is(.hadith-detail,.dua-detail) > .post-reader-main");
+  if(detail)detail.setAttribute("data-dar-ed-reader","1");
  }
  // Only original NONsticky opt-in Hero components may receive motion.
  var normals=scope.querySelectorAll('[data-hero-kind][data-hero-scroll="normal"]');
@@ -101,6 +113,7 @@ function start(){
  doc.addEventListener("dar:view-rendered",schedule,{passive:true});
  global.addEventListener("pageshow",schedule,{passive:true});
  global.addEventListener("popstate",schedule,{passive:true});
+ global.addEventListener("hashchange",schedule,{passive:true});
  if(reduced&&reduced.addEventListener)reduced.addEventListener("change",function(){
   if(reduced.matches)stopObserver();schedule();
  });
