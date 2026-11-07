@@ -271,7 +271,7 @@ function browserManifestResponse(request, androidBrowser = false) {
 /* Visitor-only hero activation: versioned CSS and read-only measured offset.
  * Do not append the historical DOM-reparenting Frauen immersive adapter. */
 function adultCompactHeroAddon() {
-  return '<link rel="stylesheet" id="darAdultHeroCompactEdgeV1404" href="/assets/adult-responsive-viewport-v1381.css?v=visitor-hero-safearea-v1404-20261019-kids-parity-v1-20261027">' +
+  return '<link rel="stylesheet" id="darAdultHeroCompactEdgeV1404" href="/assets/adult-responsive-viewport-v1381.css?v=visitor-hero-safearea-v1404-20261019-kids-parity-v1-20261027-header-clearance-v2">' +
     '<script defer id="darAdultHeroHeightRuntimeV1404" src="/assets/adult-hero-height-runtime-v1403.js?v=visitor-hero-safearea-v1404-20261019"></' + 'script>';
 }
 /* DAR_ADULT_TOP_SCROLL_BOUNDARY_V1 – adult visitor HTML only.
@@ -300,7 +300,7 @@ function activateAdultGlobalBrandV2(html) {
    * Keep the public website, Kids and Test in their existing isolated lanes.
    * Reuse the lazy-loader's IDs so each module is loaded at most once. */
   const addons = [
-    ['darAdultGlobalBrandStyleV2','<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261107-index-single-spacer-v1">'],
+    ['darAdultGlobalBrandStyleV2','<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261107-compact-safearea-header-v2">'],
     ['darVisitorSmartProfileCssV1','<link rel="stylesheet" id="darVisitorSmartProfileCssV1" href="/assets/dar-visitor-smart-profile-v1.css?v=20261030-my-dar-dashboard-v11">'],
     ['darVisitorProfilePickerCssV1','<link rel="stylesheet" id="darVisitorProfilePickerCssV1" href="/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-single-hub-v10">'],
     ['darVisitorDailyHubCssV1','<link rel="stylesheet" id="darVisitorDailyHubCssV1" href="/assets/dar-visitor-daily-hub-v1.css?v=20261030-mehr-responsive-v2">'],
