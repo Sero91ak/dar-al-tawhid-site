@@ -54,7 +54,7 @@ assert.match(seam,/--frauen-flow-seam-shift/,"Automatische Korrektur des oberen 
    ORIGINAL search before a native/test brand gets attached to the DOM. */
 assert.match(seam,/function restoreMissingSurface\(\)/,
  "Wenn der Live-Shell beide Originalelemente verliert, fehlt der gezielte Wiederhersteller");
-assert.match(seam,/if\(!hero\)hero=restoreMissingSurface\(\)/,
+assert.match(seam,/if\(!hero\|\|missingSearch\)hero=restoreMissingSurface\(\)\|\|hero/,
  "Fehlendes Hero-Bild muss aus dem eingefrorenen Frauenrenderer wiederhergestellt werden");
 assert.match(seam,/tpl\.content\.querySelector\("\.frauen-library-hero"\)/,
  "Hero darf nur aus der kanonischen Originalvorlage rekonstruiert werden");
