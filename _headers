@@ -17,6 +17,13 @@
 /index.html
   Cache-Control: no-cache, must-revalidate, max-age=0
 
+# Wasiyyah assistant and local PDF template are mutable; do not serve a stale HTML version.
+/wasiyyah
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+
+/wasiyyah/*
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+
 /quellen
   Cache-Control: no-store, no-cache, must-revalidate, max-age=0
   Pragma: no-cache
