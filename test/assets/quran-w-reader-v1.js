@@ -118,7 +118,7 @@
     if (!document.body.classList.contains("is-quran-reader-route")) return;
     if (!panel) buildPanel();
     render(); panel.hidden=false;
-    var b=$("darQrcWReaderToggleV1"); if(b)b.setAttribute("aria-expanded","true");
+    var b=$("darQrcWReaderToggleV1"); if(b){b.setAttribute("aria-expanded","true");b.setAttribute("aria-label",txt().reader);}
     position();
     var range=$("dqwRange"); if(range)range.focus({preventScroll:true});
   }
@@ -152,7 +152,7 @@
   function mount() {
     var actions=$("qrcActions");
     if (!actions || !document.body.classList.contains("is-quran-reader-route")) {close(false);return;}
-    if ($("darQrcWReaderToggleV1")) return;
+    if ($("darQrcWReaderToggleV1")) { $("darQrcWReaderToggleV1").setAttribute("aria-label",txt().reader); return; }
     var b=document.createElement("button");
     b.type="button";
     b.id="darQrcWReaderToggleV1";
@@ -168,7 +168,7 @@
   function scheduleMount() {
     if(scheduled)return;
     scheduled=true;
-    requestAnimationFrame(function(){scheduled=false;mount();});
+    requestAnimationFrame(function(){scheduled=false;mount();position();});
   }
   function boot() {
     if (!document.body) return;
