@@ -168,4 +168,9 @@ def main():
   if driver:driver.quit()
   server.shutdown()
   for p in FILES:p.unlink(missing_ok=True)
-if __name__=="__main__":main()
+if __name__=="__main__":
+ main()
+ # The same read-only Chromium job must also verify the compact native/PWA
+ # status-bar and sticky-Header regression captured on 2026-11-07.
+ import subprocess
+ subprocess.run(["python3","scripts/check-visitor-header-compact-browser.py"],check=True)
