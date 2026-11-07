@@ -494,12 +494,12 @@ async function finalizeDarTestHomeV1193(asset) {
   // <script id="darTestHomeHtmlParityV1"> from cached HTML before reinjecting.
   // A bare includes(id) skipped version upgrades, leaving the old visible UI.
   html = html.replace(/<script\b(?=[^>]*\bid=["']darTestHomeHtmlParityV1["'])[^>]*>\s*<\/script>\s*/gi, "");
-  const parityScript = '<script defer id="darTestHomeHtmlParityV1" src="/test/assets/dar-home-html-parity-v1.js?v=20261106-global-salam-v1"></script>';
+  const parityScript = '<script defer id="darTestHomeHtmlParityV1" src="/test/assets/dar-home-html-parity-v1.js?v=20261107-welcome-editorial-v3"></script>';
   if (!html.includes('id="darAdultHomeWelcomeCopyV1"')) {
     const registry = html.includes('id="darAdultComponentI18nV1"') ? '' :
       '<script defer id="darAdultComponentI18nV1" src="/assets/i18n/adult-component-i18n-v1.js?v=20261101-1"></script>';
     const welcomeCopy = registry +
-      '<script defer id="darAdultHomeWelcomeCopyV1" src="/assets/i18n/adult-home-welcome-v1.js?v=20261106-global-salam-v1"></script>';
+      '<script defer id="darAdultHomeWelcomeCopyV1" src="/assets/i18n/adult-home-welcome-v1.js?v=20261107-welcome-editorial-v3"></script>';
     html = html.includes("</body>") ? html.replace("</body>",welcomeCopy+"</body>") : html+welcomeCopy;
   }
   html = html.includes("</body>") ? html.replace("</body>", parityScript + "\n</body>") : html + parityScript;
