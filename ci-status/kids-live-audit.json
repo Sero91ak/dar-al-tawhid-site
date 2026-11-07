@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-11-07T11:15:11Z",
-  "trigger": "workflow_run",
-  "finishedDeployConclusion": "success",
-  "finishedDeployRun": "42367344554",
+  "timestamp": "2026-11-07T13:08:44Z",
+  "trigger": "push",
+  "finishedDeployConclusion": null,
+  "finishedDeployRun": null,
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
@@ -89,6 +89,15 @@
   },
   "lastDeployRuns": [
     {
+      "conclusion": null,
+      "created_at": "2026-11-07T13:08:38Z",
+      "head_sha": "a9ab130abfbb6078bb1a413ca2421fccbc1cd748",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/42375596828",
+      "id": 42375596828,
+      "status": "in_progress",
+      "updated_at": "2026-11-07T13:08:41Z"
+    },
+    {
       "conclusion": "success",
       "created_at": "2026-11-07T11:14:35Z",
       "head_sha": "556ba58cf5759ec90767e72ae3262bb7fa0f29da",
@@ -132,15 +141,6 @@
       "id": 42361423465,
       "status": "completed",
       "updated_at": "2026-11-07T09:52:55Z"
-    },
-    {
-      "conclusion": "success",
-      "created_at": "2026-11-07T09:48:21Z",
-      "head_sha": "6b83d122d7c6143764416eec14c6ced4c45c1ac0",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/42361265763",
-      "id": 42361265763,
-      "status": "completed",
-      "updated_at": "2026-11-07T09:50:36Z"
     }
   ]
 }
