@@ -119,8 +119,14 @@ function pyramidLines(el,text,l){
  // Measure bold emphasis at its actual weight instead of treating it
  // as normal text: visual lines must not overflow after highlighting.
  var strongWords=l==="de"?["Āṯār der frühen Imāme","Duʿāʾ-Sammlung","Qurʾān","Sunnah"]:[];
- var emphasis=strongWords.map(function(v){var pos=text.indexOf(v);return{start:pos,end:pos+v.length}})
-  .filter(function(x){return x.start>=0});
+ var emphasis=[];
+ strongWords.forEach(function(v){
+  var cursor=0,pos;
+  while((pos=text.indexOf(v,cursor))>=0){
+   emphasis.push({start:pos,end:pos+v.length});
+   cursor=pos+v.length;
+  }
+ });
  var at=0,tokenPositions=tokens.map(function(token){
   var pos=text.indexOf(token,at);at=pos+token.length;return pos
  });
