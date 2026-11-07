@@ -1049,11 +1049,11 @@ html[data-theme] body.is-home-route #appView .home-v380-shell :is(
  * Only the visitor Index brand has the measured top obstruction; don't
  * reparent/stick another controller or alter illustrations and dimensions.
  * A runtime update to --dar-adult-header-obscured-top propagates live. */
-html[data-theme].dar-adult-global-brand-ready
- body:is(.is-topics-route,.is-topic-route,.is-hadith-route,.is-dua-route)
- #appView :is(.topics-hub,.topic-collection-page,.hadith-hub,.dua-hub) > .view-head,
-html[data-theme].dar-adult-global-brand-ready
- body.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title{
+html[data-theme].dar-adult-global-brand-ready body.is-topics-route #appView.view > .topics-hub.topics-hub > .view-head,
+html[data-theme].dar-adult-global-brand-ready body.is-topic-route #appView.view > .topic-collection-page.topic-collection-page > .view-head,
+html[data-theme].dar-adult-global-brand-ready body.is-hadith-route #appView .hadith-hub > .view-head,
+html[data-theme].dar-adult-global-brand-ready body.is-dua-route #appView .dua-hub > .view-head,
+html[data-theme].dar-adult-global-brand-ready body.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title{
  top:var(--dar-visitor-sticky-clearance,0px)!important;
 }
 html[data-theme].dar-adult-global-brand-ready
