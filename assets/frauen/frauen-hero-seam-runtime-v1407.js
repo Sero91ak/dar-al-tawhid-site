@@ -38,13 +38,20 @@ function restoreMissingSurface(){
  if(typeof html!=="string"||html.indexOf("frauen-library-hero")<0)return null;
  var tpl=document.createElement("template");
  tpl.innerHTML=html;
- var hero=tpl.content.querySelector(".frauen-library-hero");
- if(!hero)return null;
+ var originalHero=tpl.content.querySelector(".frauen-library-hero");
+ if(!originalHero)return null;
+ var hero=shell.querySelector(".frauen-library-hero");
+ var stage=shell.querySelector(":scope > .dar-immersive-hero-stage");
  var search=tpl.content.querySelector(".frauen-library-search-wrap,.frauen-library-list-controls");
  var presentSearch=shell.querySelector(".frauen-library-search-wrap,.frauen-library-list-controls");
- shell.insertBefore(hero,shell.firstChild);
+ if(!hero){
+  hero=originalHero;
+  if(stage)stage.insertBefore(hero,stage.firstChild);
+  else shell.insertBefore(hero,shell.firstChild);
+ }
  if(search&&!presentSearch){
-  shell.insertBefore(search,hero.nextSibling);
+  if(stage)stage.appendChild(search);
+  else shell.insertBefore(search,hero.nextSibling);
   try{if(typeof source.bind==="function")source.bind()}catch(_){}
  }
  return hero;
@@ -57,7 +64,9 @@ function reconcile(){
     even while the native/test brand is still being attached. The previous
     early header guard left both nodes unpinned after a cold route entry. */
  var hero=document.querySelector("#appView .frauen-library-hero");
- if(!hero)hero=restoreMissingSurface();
+ var missingSearch=/^(hub|list)$/.test(body.getAttribute("data-frauen-view")||"")&&
+  !document.querySelector("#appView .frauen-library-search-wrap,#appView .frauen-library-list-controls");
+ if(!hero||missingSearch)hero=restoreMissingSurface()||hero;
  if(!hero)return;
  var shell=hero.closest(".frauen-library-shell,.frauen-library-list");
  if(!shell)return;
