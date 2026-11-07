@@ -301,6 +301,9 @@ function activateAdultGlobalBrandV2(html) {
    * Reuse the lazy-loader's IDs so each module is loaded at most once. */
   const addons = [
     ['darAdultGlobalBrandStyleV2','<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261107-index-single-spacer-v1">'],
+    /* Canonical opt-in editorial design/motion component; visitor Index/PWA only. */
+    ['darAdultEditorialCssV1','<link rel="stylesheet" id="darAdultEditorialCssV1" href="/assets/dar-adult-editorial-system-v1.css?v=20261107-editorial-preview-v1">'],
+    ['darAdultEditorialJsV1','<script defer id="darAdultEditorialJsV1" src="/assets/dar-adult-editorial-system-v1.js?v=20261107-editorial-preview-v1"></' + 'script>'],
     ['darVisitorSmartProfileCssV1','<link rel="stylesheet" id="darVisitorSmartProfileCssV1" href="/assets/dar-visitor-smart-profile-v1.css?v=20261030-my-dar-dashboard-v11">'],
     ['darVisitorProfilePickerCssV1','<link rel="stylesheet" id="darVisitorProfilePickerCssV1" href="/assets/dar-visitor-profile-picker-v1.css?v=20261030-profile-single-hub-v10">'],
     ['darVisitorDailyHubCssV1','<link rel="stylesheet" id="darVisitorDailyHubCssV1" href="/assets/dar-visitor-daily-hub-v1.css?v=20261030-mehr-responsive-v2">'],
