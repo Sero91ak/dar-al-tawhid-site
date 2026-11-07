@@ -433,7 +433,7 @@ html[data-theme] body.is-topic-route #appView.view > .topic-collection-page.topi
 html[data-theme] body.is-hadith-route #appView .hadith-hub > .view-head,
 html[data-theme] body.is-dua-route #appView .dua-hub > .view-head{
  position:sticky!important;
- top:0!important;
+ top:var(--dar-visitor-sticky-clearance,0px)!important;
  z-index:64!important;
  align-self:start!important;
  width:100%!important;
@@ -457,7 +457,7 @@ html[data-theme] body.is-dua-route #appView .dua-hub > .view-head{
  * sooner; retain enough space for 3+ line German titles. */
 html[data-theme] body.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title{
  position:sticky!important;
- top:0!important;
+ top:var(--dar-visitor-sticky-clearance,0px)!important;
  z-index:64!important;
  align-self:start!important;
  width:100%!important;
@@ -490,7 +490,7 @@ html[data-theme] body.is-dua-route #appView .dua-hub > :is(
  .main-search,.search-panel,.search-pro-panel
 ){
  position:sticky!important;
- top:var(--dar-immersive-hero-height,190px)!important;
+ top:calc(var(--dar-visitor-sticky-clearance,0px) + var(--dar-immersive-hero-height,190px))!important;
  z-index:65!important;
  width:calc(100% - 2 * var(--dar-hero-v1402-gutter,12px))!important;
  min-width:0!important;
@@ -705,7 +705,7 @@ html[data-theme] body:is(
 ) > :is(.search-panel,.search-pro-panel,.main-search,#homeSearchBlock){
   --dar-hero-join:12px;
   position:sticky!important;
-  top:calc(var(--dar-immersive-hero-height,185px) - var(--dar-hero-join))!important;
+  top:calc(var(--dar-visitor-sticky-clearance,0px) + var(--dar-immersive-hero-height,185px) - var(--dar-hero-join))!important;
   z-index:65!important;
   align-self:stretch!important;
   width:100%!important;
