@@ -177,3 +177,10 @@ body:is(.is-quran-overview,.is-quran-reader-route) .dqw-panel {
     max-height:calc(100vh - 32px);
   }
 }
+
+
+/* RTL: W controls keep logical reading order, without covering fold gutters. */
+.dqw-panel[dir="rtl"] { right:auto; left:max(12px,env(safe-area-inset-left,0px)); }
+@media(max-width:390px) {
+  .dqw-panel[dir="rtl"] { left:max(8px,env(safe-area-inset-left,0px)); right:auto; }
+}
