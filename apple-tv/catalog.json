@@ -6,6 +6,26 @@
   "defaultModuleScope": "library-tab-only",
   "defaultModuleDoesNotControlScreensaver": true,
   "defaultModuleDoesNotControlHomeTadabbur": true,
+  "bundlePolicy": {
+    "maxAppStoreIpaMb": 40,
+    "embedInIpa": [
+      "app binary",
+      "minimal fallback strings"
+    ],
+    "neverEmbedInIpa": [
+      "hadith/series",
+      "hadith/library-shell.json",
+      "quran/tadabbur batches",
+      "quran reciter MP3 packs",
+      "adhan MP3s",
+      "4K/unoptimized images"
+    ],
+    "loadFromLive": "https://dar-al-tawhid.de/apple-tv/",
+    "audio": "stream original MP3 via dar-al-tawhid.de/quran-audio and /adhan — do not re-encode, do not downsample",
+    "text": "do not shorten hadith, athar, tadabbur or sharh",
+    "offlineCache": "after first play/view in Application Support, not in the IPA",
+    "rule": "140 MB kommt von eingebettetem Audio/JSON im Xcode-Target. Qualität bleibt, weil Streams unkomprimiert vom Live-Proxy kommen."
+  },
   "home": {
     "enabled": true,
     "status": "active",
