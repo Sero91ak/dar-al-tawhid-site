@@ -323,7 +323,9 @@ html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdul
  color:var(--dtbh-ink)!important;max-width:100%!important;
  overflow-wrap:break-word!important;text-wrap:balance!important;
 }
-/* Editorial subheading belongs to the existing canonical home title, not a new widget. */
+/* Editorial subheading belongs to the existing canonical home title, not a new widget.
+ * Production release parity: 9 localized greetings share this existing Home owner.
+ * No header, prayer, navigation, source or scroll geometry is changed here. */
 html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 .dar-adult-home-title-v7 .dar-welcome-kicker{
  display:block!important;margin:0 0 3px!important;padding:0!important;
  font:750 clamp(10px,2.4vw,12px)/1.4 system-ui,-apple-system,sans-serif!important;
