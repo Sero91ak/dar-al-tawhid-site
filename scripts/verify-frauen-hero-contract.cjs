@@ -43,12 +43,45 @@ const desktop=fs.readFileSync("desktop-preview/index.html","utf8");
 assert.match(flow,/\.frauen-library-area-grid\{[\s\S]*?display:flex!important;[\s\S]*?flex-direction:column!important;/,"Frauen Kapitel müssen untereinander sein");
 assert.match(flow,/\.frauen-library-area-grid > \.frauen-library-area-card\{[\s\S]*?width:100%!important;/,"Kapitelkarten müssen volle Breite haben");
 assert.match(flow,/DAR_FRAUEN_PINNED_HERO_UNDER_SCROLL_V1407/,"Sticky-Frauen-Hero V1407 fehlt");
+assert.match(flow,/DAR_FRAUEN_ONE_DOCUMENT_SCROLL_V1409/,"Frauen Scroll-Root Reparatur fehlt");
+assert.match(flow,/html\[data-theme\]\.dar-test-premium-header-v2 body\.has-bottom-nav\.is-area-route\.is-frauen-route,[\s\S]*?overflow-x:clip!important;\s*overflow-y:visible!important;/,
+ "Frauen braucht einen HTML-Dokument-Scroller, sonst scrollt Sticky-Hero in Test weg");
+assert.match(seam,/function frauenDocumentScroll\(body\)/,
+ "Body overflow muss im laufenden Frauenbereich browserfest vereinheitlicht werden");
+assert.match(seam,/function restoreBodyOverflow\(\)/,
+ "Urspruengliche Body-Styles muessen beim Verlassen des Frauenbereichs zurueckkehren");
+assert.match(seam,/body\.style\.setProperty\("overflow-x","clip","important"\)/,
+ "Frauen darf keinen stummen body Overflow-Y-Auto Scrollcontainer behalten");
 assert.match(flow,/\.dar-immersive-hero-stage\{[\s\S]*?position:sticky!important;[\s\S]*?top:var\(--frauen-fixed-brand-bottom,80px\)!important;/,"Bild und Suche müssen direkt unter dem Header fixiert sein");
 assert.match(seam,/getBoundingClientRect\(\)\.bottom/,"Gemessene feste Headerunterkante fehlt");
 assert.match(seam,/--frauen-fixed-brand-bottom/,"Gemessener Header-Sticky-Offset fehlt");
 assert.match(seam,/setProperty\("margin-top","var\(--frauen-flow-seam-shift\)","important"\)/,"Der Hero-Spalt muss zuverlässig korrigiert werden");
 
 assert.match(seam,/--frauen-flow-seam-shift/,"Automatische Korrektur des oberen Spalts fehlt");
+
+/* V1409: a cold Frauen route must recover the ORIGINAL photographed hero and
+   ORIGINAL search before a native/test brand gets attached to the DOM. */
+assert.match(seam,/function restoreMissingSurface\(\)/,
+ "Wenn der Live-Shell beide Originalelemente verliert, fehlt der gezielte Wiederhersteller");
+assert.match(seam,/if\(!hero\|\|missingSearch\)hero=restoreMissingSurface\(\)\|\|hero/,
+ "Fehlendes Hero-Bild muss aus dem eingefrorenen Frauenrenderer wiederhergestellt werden");
+assert.match(seam,/tpl\.content\.querySelector\("\.frauen-library-hero"\)/,
+ "Hero darf nur aus der kanonischen Originalvorlage rekonstruiert werden");
+assert.doesNotMatch(seam,/#appView\.innerHTML|app\.innerHTML/,
+ "Hero-Reparatur darf die vorhandenen Beiträge nicht überschreiben");
+assert.ok(
+ seam.indexOf("var stage=shell.querySelector")<seam.indexOf("if(!header)return"),
+ "Frauen Hero/Suche darf nicht auf den verzögerten Markenheader warten"
+);
+assert.match(seam,/if\(stage&&looseSearch\)stage\.appendChild\(looseSearch\)/,
+ "Original-Suche muss auch nach einem Route-Rerender in derselben Stage bleiben");
+assert.match(seam,/new MutationObserver\(schedule\)\.observe\(appShell,\{childList:true\}\)/,
+ "Frauen muss nachträgliches Einfügen des Markenheaders in die App-Shell erkennen");
+assert.match(seam,/new MutationObserver\(schedule\)\.observe\(document\.body,\{/,
+ "Frauen muss nachträglichen Markenheader und Routenstatus erkennen");
+assert.match(seam,/stage\.style\.setProperty\("top",fixedTop,"important"\)/,
+ "Gemessener Headerabstand muss auch nach spätem Markenheader gesetzt werden");
+
 assert.match(seam,/maxGap=Math.max\(480,Math.min\(900/,"Große native Header-Doppelabstände dürfen nicht bei 240px abgewiesen werden");
 assert.doesNotMatch(seam,/Math.abs\(gap\)>240|Math.max\(-220/,"Alte 240px/220px-Grenze unterdrückt die Reparatur");
 assert.doesNotMatch(seam,/scrollTo\(|preventDefault\(/,"Hero-Seam darf Scrollen nicht abfangen");

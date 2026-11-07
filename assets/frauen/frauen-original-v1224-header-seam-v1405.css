@@ -279,3 +279,15 @@ html[data-theme] body.is-frauen-route.has-bottom-nav #appView.view > :is(.frauen
   overflow-x:clip!important;
   overflow-y:visible!important;
 }
+
+/* DAR_FRAUEN_ONE_DOCUMENT_SCROLL_V1409
+ * The actual document/HTML is the scroll root. overflow-x:hidden on BODY
+ * computes overflow-y:auto and traps the sticky Hero within a non-scrolling
+ * body container (seen on /test/ after 560px page scroll).
+ * clip/visible avoids the phantom root without removing side clipping. */
+html[data-theme] body.has-bottom-nav.is-frauen-route,
+html[data-theme].dar-test-premium-header-v2 body.has-bottom-nav.is-area-route.is-frauen-route,
+html[data-theme].dar-adult-global-brand-ready body.has-bottom-nav.is-area-route.is-frauen-route{
+  overflow-x:clip!important;
+  overflow-y:visible!important;
+}

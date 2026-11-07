@@ -1,4 +1,4 @@
-/* DAR_FRAUEN_HERO_SEAM_RUNTIME_V1407
+/* DAR_FRAUEN_HERO_SEAM_RUNTIME_V1407 · V1409 late-brand mount hardening
  * The photographed Hero/search stay ONE pinned surface. Measure only the
  * redundant initial gap below the real fixed brand and collapse that gap.
  * No scroll/touch interception or cloning; the missing wrapper is restored once.
@@ -8,30 +8,97 @@
 if(window.__DAR_FRAUEN_HERO_SEAM_V1407)return;
 window.__DAR_FRAUEN_HERO_SEAM_V1407=true;
 var queued=false,resizeObserver=null,observedHeader=null,observedHero=null;
+var frauenBodyOverflowSaved=null;
+/* Legacy layout adapters force overflow-x:hidden on body with !important.
+ * This coerces overflow-y:visible to auto and traps sticky under-scroll.
+ * Enforce a single document scroll owner only while the Frauen route lives. */
+function restoreBodyOverflow(){
+ var saved=frauenBodyOverflowSaved;
+ if(!saved)return;
+ frauenBodyOverflowSaved=null;
+ var el=saved.el;
+ if(!el)return;
+ ["overflow-x","overflow-y"].forEach(function(prop,i){
+  var val=saved.values[i],priority=saved.priorities[i];
+  if(val)el.style.setProperty(prop,val,priority||"");
+  else el.style.removeProperty(prop);
+ });
+}
+function frauenDocumentScroll(body){
+ if(!frauenBodyOverflowSaved||frauenBodyOverflowSaved.el!==body){
+  restoreBodyOverflow();
+  frauenBodyOverflowSaved={el:body,
+   values:["overflow-x","overflow-y"].map(function(p){return body.style.getPropertyValue(p)}),
+   priorities:["overflow-x","overflow-y"].map(function(p){return body.style.getPropertyPriority(p)})};
+ }
+ if(body.style.getPropertyValue("overflow-x")!=="clip"||body.style.getPropertyPriority("overflow-x")!=="important")
+  body.style.setProperty("overflow-x","clip","important");
+ if(body.style.getPropertyValue("overflow-y")!=="visible"||body.style.getPropertyPriority("overflow-y")!=="important")
+  body.style.setProperty("overflow-y","visible","important");
+}
 function top(){
  var r=document.scrollingElement||document.documentElement;
  return Math.max(0,window.scrollY||0,r?r.scrollTop||0:0);
 }
+/* The frozen Frauen renderer already supplies the ORIGINAL photo and search.
+ * Some adult shell hydration passes discard both first children after render.
+ * Restore ONLY the missing surface from that SAME canonical renderer output;
+ * never replace the chapter grid, source cards, live input or whole page. */
+function restoreMissingSurface(){
+ var shell=document.querySelector("#appView .frauen-library-shell,#appView .frauen-library-list");
+ var source=window.DARFrauenFiqh;
+ if(!shell||!source||typeof source.render!=="function")return null;
+ /* Do not add a Hero to details, loading placeholders or unrelated routes. */
+ if(!shell.querySelector(".frauen-library-section-head,.frauen-library-area-grid,.frauen-post-list"))return null;
+ var value="";
+ try{
+  if(typeof window.readRoute==="function"){
+   var route=window.readRoute();
+   if(route&&route.view==="frauen")value=String(route.value||"");
+  }
+  if(!value&&/^#\/?frauen(?:\/|$)/.test(String(window.location.hash||""))){
+   value=String(window.location.hash).replace(/^#\/?frauen\/?/,"")
+    .split("/").map(function(x){try{return decodeURIComponent(x)}catch(_){return x}}).join("/");
+  }
+ }catch(_){}
+ var html="";
+ try{html=source.render(value)}catch(_){return null}
+ if(typeof html!=="string"||html.indexOf("frauen-library-hero")<0)return null;
+ var tpl=document.createElement("template");
+ tpl.innerHTML=html;
+ var originalHero=tpl.content.querySelector(".frauen-library-hero");
+ if(!originalHero)return null;
+ var hero=shell.querySelector(".frauen-library-hero");
+ var stage=shell.querySelector(":scope > .dar-immersive-hero-stage");
+ var search=tpl.content.querySelector(".frauen-library-search-wrap,.frauen-library-list-controls");
+ var presentSearch=shell.querySelector(".frauen-library-search-wrap,.frauen-library-list-controls");
+ if(!hero){
+  hero=originalHero;
+  if(stage)stage.insertBefore(hero,stage.firstChild);
+  else shell.insertBefore(hero,shell.firstChild);
+ }
+ if(search&&!presentSearch){
+  if(stage)stage.appendChild(search);
+  else shell.insertBefore(search,hero.nextSibling);
+  try{if(typeof source.bind==="function")source.bind()}catch(_){}
+ }
+ return hero;
+}
 function reconcile(){
  queued=false;
  var body=document.body;
- if(!body||!body.classList.contains("is-frauen-route"))return;
- var header=document.getElementById("darAdultBrandHeaderV2")||
-            document.getElementById("darTestBrandHeaderV1");
+ if(!body||!body.classList.contains("is-frauen-route")){restoreBodyOverflow();return;}
+ frauenDocumentScroll(body);
+ /* V1409: mount the approved photo/search stage on EVERY Frauen render,
+    even while the native/test brand is still being attached. The previous
+    early header guard left both nodes unpinned after a cold route entry. */
  var hero=document.querySelector("#appView .frauen-library-hero");
- if(!header||!hero)return;
+ var missingSearch=/^(hub|list)$/.test(body.getAttribute("data-frauen-view")||"")&&
+  !document.querySelector("#appView .frauen-library-search-wrap,#appView .frauen-library-list-controls");
+ if(!hero||missingSearch)hero=restoreMissingSurface()||hero;
+ if(!hero)return;
  var shell=hero.closest(".frauen-library-shell,.frauen-library-list");
  if(!shell)return;
- var headerBottom=Math.ceil(header.getBoundingClientRect().bottom);
- if(!Number.isFinite(headerBottom)||headerBottom<40||headerBottom>300)return;
- /* Header's physical bottom, not guessed safe-area height, is the sticky top. */
- var fixedTop=headerBottom+"px";
- if(body.style.getPropertyValue("--frauen-fixed-brand-bottom")!==fixedTop)
-  body.style.setProperty("--frauen-fixed-brand-bottom",fixedTop);
- if(resizeObserver){
-  if(observedHeader!==header){if(observedHeader)resizeObserver.unobserve(observedHeader);resizeObserver.observe(header);observedHeader=header;}
-  if(observedHero!==hero){if(observedHero)resizeObserver.unobserve(observedHero);resizeObserver.observe(hero);observedHero=hero;}
- }
  /* Always restore the structural stage, even when a previous route retained
     scroll position; only margin reconciliation is restricted to scroll top. */
  var stage=shell.querySelector(":scope > .dar-immersive-hero-stage");
@@ -49,6 +116,28 @@ function reconcile(){
    stage.appendChild(directHero);
    if(search)stage.appendChild(search);
   }
+ }
+ /* A route repaint may put the original search beside an existing stage.
+    Reattach that SAME input, never duplicate it or reset typed text. */
+ var looseSearch=shell.querySelector(":scope > .frauen-library-search-wrap,:scope > .frauen-library-list-controls");
+ if(stage&&looseSearch)stage.appendChild(looseSearch);
+ if(stage)stage.dataset.hasSearch=stage.querySelector(":scope > .frauen-library-search-wrap,:scope > .frauen-library-list-controls")?"1":"0";
+ var header=document.getElementById("darAdultBrandHeaderV2")||
+            document.getElementById("darTestBrandHeaderV1");
+ if(resizeObserver){
+  if(observedHeader!==header){if(observedHeader)resizeObserver.unobserve(observedHeader);if(header)resizeObserver.observe(header);observedHeader=header;}
+  if(observedHero!==hero){if(observedHero)resizeObserver.unobserve(observedHero);resizeObserver.observe(hero);observedHero=hero;}
+ }
+ if(!header)return;
+ var headerBottom=Math.ceil(header.getBoundingClientRect().bottom);
+ if(!Number.isFinite(headerBottom)||headerBottom<40||headerBottom>300)return;
+ /* The actual fixed header, not a guessed status-bar inset, owns this axis. */
+ var fixedTop=headerBottom+"px";
+ if(body.style.getPropertyValue("--frauen-fixed-brand-bottom")!==fixedTop)
+  body.style.setProperty("--frauen-fixed-brand-bottom",fixedTop);
+ if(stage){
+  if(stage.style.getPropertyValue("top")!==fixedTop)stage.style.setProperty("top",fixedTop,"important");
+  if(stage.style.getPropertyValue("inset-block-start")!==fixedTop)stage.style.setProperty("inset-block-start",fixedTop,"important");
  }
  /* Do not adjust the flow offset during an active reading scroll. */
  if(top()>1)return;
@@ -76,8 +165,16 @@ function schedule(){
 function setup(){
  if(typeof ResizeObserver==="function")resizeObserver=new ResizeObserver(schedule);
  var app=document.getElementById("appView");
- if(app&&typeof MutationObserver==="function")
-  new MutationObserver(schedule).observe(app,{childList:true,subtree:true});
+ if(typeof MutationObserver==="function"){
+  if(app)new MutationObserver(schedule).observe(app,{childList:true,subtree:true});
+  /* Brands are mounted OUTSIDE #appView. Watch only the direct insertion
+     points and Frauen route state; never observe all app subtree twice. */
+  var appShell=document.querySelector("body > .app");
+  if(appShell)new MutationObserver(schedule).observe(appShell,{childList:true});
+  if(document.body)new MutationObserver(schedule).observe(document.body,{
+   childList:true,attributes:true,attributeFilter:["class","data-frauen-view"]
+  });
+ }
  document.addEventListener("dar:view-rendered",schedule);
  /* The frozen production adapter may repaint immediately after render;
     restore the shared stage synchronously before the next browser paint. */
