@@ -18,7 +18,7 @@ Datei: `ios/DarAlTawhid/DarAlTawhid/WebAppView.swift`, Methode `applyViewportIns
 
 ## Bereits implementiert (nur DAR TEST)
 - `test/assets/dar-test-premium-header-v2.js` stellt `window.DARTestEdgeAuditV1.snapshot()` und `.report()` bereit.
-- Es misst ohne DOM-Änderung an der App: Dokument-/VisualViewport-Größe, echte CSS-`env(safe-area-inset-*)`, von Native gemeldete Werte, Header, bestehenden Spacer, Navigation und Body-Padding.
+- Es misst **erst bei explizitem Aufruf** mithilfe eines sofort wieder entfernten, unsichtbaren Probe-Elements: Dokument-/VisualViewport-Größe, echte CSS-`env(safe-area-inset-*)`, von Native gemeldete Werte, Header, bestehenden Spacer, Navigation und Body-Padding. Keine dauerhafte UI-Änderung oder automatische Event-Schleife.
 - Diagnosehinweise betreffen nur geometrische Verdachtsfälle; die Messung **korrigiert nichts automatisch**.
 - `test/tools/dar-duo-edge-insets-guard.cjs` ist an den vorhandenen DAR-TEST-Fold-Guard angekoppelt und liest die native Datei **nur**. Nach gesondert genehmigter nativer Reparatur kann `DAR_EDGE_REQUIRE_NATIVE_FIX=1` als striktere Prüfung aktiviert werden.
 
