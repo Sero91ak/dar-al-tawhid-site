@@ -105,6 +105,7 @@ function liveLocaleAsset(u){
  * previously installed Android PWA cache-first behavior. Keep the v3 cache
  * and user offline files; go network-first with cached fallback for UI only. */
 const ADULT_VISITOR_LIVE_UI=new Set([
+ '/assets/i18n/adult-home-welcome-v1.js',
  '/assets/dar-home-test-parity-visitor.js',
  '/assets/dar-visitor-smart-profile-v1.js',
  '/assets/dar-visitor-smart-profile-v1.css',
