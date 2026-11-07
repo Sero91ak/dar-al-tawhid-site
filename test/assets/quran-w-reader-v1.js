@@ -9,6 +9,7 @@
   window.__DAR_TEST_QURAN_W_READER_V1 = true;
 
   var PREFIX = "dqw", panel, watch, scheduled = false, active = "quranArabicScale";
+  var dockResizeWatch = null, dockAttrWatch = null, dockTargets = [], dockFrame = false;
   var TYPES = [
     { key: "quranArabicScale", code: "arabic" },
     { key: "quranTransliterationScale", code: "latin" },
@@ -65,6 +66,7 @@
     if (!panel) return;
     var L=txt(), lang=locale();
     panel.setAttribute("lang",lang);
+    panel.setAttribute("aria-label",L.title);
     panel.setAttribute("dir",lang==="ar"||lang==="ckb"?"rtl":"ltr");
     panel.innerHTML =
       '<div class="dqw-head"><div><strong id="dqwTitle">'+L.title+'</strong><span>'+L.sub+'</span></div><button type="button" class="dqw-close" data-dqw-action="close" aria-label="'+L.close+'">×</button></div>'+
@@ -89,29 +91,83 @@
     var views=viewSettings();
     panel.querySelectorAll("[data-dqw-visible]").forEach(function(c){c.checked=views[c.dataset.dqwVisible]!==false;});
   }
+  /* DAR_QURAN_W_DOCK_V3: Observe the existing chrome/player/nav only.
+   * Never write to player layout or playback; the W overlay follows them. */
+  function unwatchDock() {
+    if (dockResizeWatch) dockTargets.forEach(function(node) {
+      try { dockResizeWatch.unobserve(node); } catch (_) {}
+    });
+    if (dockAttrWatch) dockAttrWatch.disconnect();
+    dockTargets = [];
+  }
+  function watchDock() {
+    if (!panel || panel.hidden) return;
+    var nodes = [$("qrcChrome"), $("qovHeader"), $("darQuranMiniPlayer"), $("bottomNav")].filter(Boolean);
+    var stable = nodes.length === dockTargets.length &&
+      nodes.every(function(node, index) { return node === dockTargets[index]; });
+    if (stable) return;
+    unwatchDock();
+    if (typeof window.ResizeObserver === "function") {
+      if (!dockResizeWatch) dockResizeWatch = new window.ResizeObserver(schedulePosition);
+      nodes.forEach(function(node) { dockResizeWatch.observe(node); });
+    }
+    if (typeof window.MutationObserver === "function") {
+      if (!dockAttrWatch) dockAttrWatch = new window.MutationObserver(schedulePosition);
+      nodes.forEach(function(node) {
+        dockAttrWatch.observe(node, { attributes:true, attributeFilter:["class","style","data-size","hidden"] });
+      });
+      dockAttrWatch.observe(document.documentElement, { attributes:true, attributeFilter:["class"] });
+    }
+    dockTargets = nodes;
+  }
+  function schedulePosition() {
+    if (dockFrame || !panel || panel.hidden) return;
+    dockFrame = true;
+    window.requestAnimationFrame(function() {
+      dockFrame = false;
+      if (!panel || panel.hidden) return;
+      watchDock();
+      position();
+    });
+  }
   function position() {
     if (!panel || panel.hidden) return;
-    var h=window.visualViewport ? window.visualViewport.height+window.visualViewport.offsetTop : window.innerHeight;
-    var chrome=$("qrcChrome"), mini=$("darQuranMiniPlayer"), nav=$("bottomNav");
-    var top=12, bottom=12;
-    if (chrome && document.body.classList.contains("is-quran-reader-route")) top=Math.max(top,chrome.getBoundingClientRect().bottom+8);
-    var overview=$("qovHeader");
-    if (overview && document.body.classList.contains("is-quran-overview")) top=Math.max(top,overview.getBoundingClientRect().bottom+8);
-    if (mini && mini.classList.contains("is-on") && document.body.classList.contains("is-quran-reader-route")) {
-      var mr=mini.getBoundingClientRect();
-      if(mr.bottom>0 && mr.top < h && mr.bottom < h) top=Math.max(top,mr.bottom+8);
+    var vv = window.visualViewport;
+    var screenHeight = window.innerHeight;
+    var viewportTop = vv ? vv.offsetTop : 0;
+    var viewportBottom = vv ? vv.offsetTop + vv.height : screenHeight;
+    var top = Math.max(12, Math.ceil(viewportTop + 8));
+    var bottom = Math.max(12, Math.ceil(screenHeight - viewportBottom + 8));
+    var reader = document.body.classList.contains("is-quran-reader-route");
+    var chrome = reader ? $("qrcChrome") : $("qovHeader");
+    var mini = $("darQuranMiniPlayer"), nav = $("bottomNav");
+    if (chrome) {
+      var cr = chrome.getBoundingClientRect();
+      if (cr.bottom > viewportTop && cr.top < viewportBottom) top = Math.max(top, Math.ceil(cr.bottom + 8));
+    }
+    if (reader && mini && mini.classList.contains("is-on")) {
+      var mr = mini.getBoundingClientRect();
+      if (mr.bottom > viewportTop && mr.top < viewportBottom) top = Math.max(top, Math.ceil(mr.bottom + 8));
     }
     if (nav) {
-      var r=nav.getBoundingClientRect();
-      if (r.height>20 && r.top<h && r.bottom>0) bottom=Math.max(bottom,h-r.top+8);
+      var nr = nav.getBoundingClientRect();
+      if (nr.height > 20 && nr.top < viewportBottom && nr.bottom > viewportTop) {
+        bottom = Math.max(bottom, Math.ceil(screenHeight - nr.top + 8));
+      }
     }
-    top=Math.min(top,Math.max(10,h-168));
-    panel.style.top=Math.round(top)+"px";
-    panel.style.bottom=Math.round(bottom)+"px";
+    var available = Math.floor(screenHeight - top - bottom);
+    // A keyboard or expanded player may leave no safe interaction space.
+    // Closing the non-modal W sheet does not pause or restart recitation.
+    if (available < 190) { close(false); return; }
+    var t = top + "px", b = bottom + "px", mh = available + "px";
+    if (panel.style.top !== t) panel.style.top = t;
+    if (panel.style.bottom !== b) panel.style.bottom = b;
+    if (panel.style.maxHeight !== mh) panel.style.maxHeight = mh;
   }
   function close(focus) {
     if (!panel || panel.hidden) return;
     panel.hidden=true;
+    unwatchDock();
     var b=$("darQrcWReaderToggleV1");
     if (b) b.setAttribute("aria-expanded","false");
     if (focus && b) b.focus({preventScroll:true});
@@ -120,6 +176,7 @@
     if (!document.body.classList.contains("is-quran-reader-route") && !document.body.classList.contains("is-quran-overview")) return;
     if (!panel) buildPanel();
     render(); panel.hidden=false;
+    watchDock();
     var b=$("darQrcWReaderToggleV1"); if(b){b.setAttribute("aria-expanded","true");b.setAttribute("aria-label",txt().reader);}
     position();
     var range=$("dqwRange"); if(range)range.focus({preventScroll:true});
@@ -231,7 +288,7 @@
   function scheduleMount() {
     if(scheduled)return;
     scheduled=true;
-    requestAnimationFrame(function(){scheduled=false;mount();position();});
+    requestAnimationFrame(function(){scheduled=false;mount();schedulePosition();});
   }
   function boot() {
     if (!document.body) return;
@@ -257,8 +314,18 @@
     document.addEventListener("keydown",function(e){if(e.key==="Escape"&&panel&&!panel.hidden){close(true);e.stopPropagation();}});
     window.addEventListener("hashchange",scheduleMount);
     window.addEventListener("popstate",scheduleMount);
-    window.addEventListener("resize",position,{passive:true});
-    if(window.visualViewport)window.visualViewport.addEventListener("resize",position,{passive:true});
+    window.addEventListener("resize",schedulePosition,{passive:true});
+    if(window.visualViewport){
+      window.visualViewport.addEventListener("resize",schedulePosition,{passive:true});
+      window.visualViewport.addEventListener("scroll",schedulePosition,{passive:true});
+    }
+    document.addEventListener("scroll",function(e){
+      if (!panel || panel.hidden || (e.target && panel.contains(e.target))) return;
+      schedulePosition();
+    },{capture:true,passive:true});
+    document.addEventListener("transitionend",function(e){
+      if(e.target && (e.target.id==="darQuranMiniPlayer" || e.target.id==="qrcChrome")) schedulePosition();
+    },true);
     window.addEventListener("pageshow",scheduleMount);
     document.addEventListener("change",function(e){if(e.target && e.target.matches("[data-qov-draft-scale],[data-font-scale],[data-qov-draft-view],[data-quran-view-toggle]"))refreshControls();},true);
   }

@@ -161,3 +161,26 @@ body.is-quran-overview .dqw-quick-copy small{
 @media(prefers-reduced-motion:reduce){
   body.is-quran-overview .dqw-quick-item{transition:none}
 }
+
+
+/* DAR_QURAN_W_DOCK_V3: Intrinsic sheet, finite viewport budget, no nav/player overlap. */
+body:is(.is-quran-overview,.is-quran-reader-route) .dqw-panel {
+  height:max-content;
+  min-height:0;
+  max-height:calc(100dvh - 32px);
+  contain:layout style;
+  scrollbar-width:thin;
+  scroll-padding-block:12px;
+}
+@supports not (height:100dvh) {
+  body:is(.is-quran-overview,.is-quran-reader-route) .dqw-panel {
+    max-height:calc(100vh - 32px);
+  }
+}
+
+
+/* RTL: W controls keep logical reading order, without covering fold gutters. */
+.dqw-panel[dir="rtl"] { right:auto; left:max(12px,env(safe-area-inset-left,0px)); }
+@media(max-width:390px) {
+  .dqw-panel[dir="rtl"] { left:max(8px,env(safe-area-inset-left,0px)); right:auto; }
+}
