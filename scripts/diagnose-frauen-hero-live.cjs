@@ -8,6 +8,11 @@ const path=require("node:path");
 const out=path.join(process.cwd(),"frauen-hero-live-evidence");
 fs.mkdirSync(out,{recursive:true});
 const all=[];
+/* Serve the candidate assets at network-load time. Running the seam twice
+ * creates duplicate MutationObserver/ResizeObserver subscriptions and produces
+ * misleading freezes; the production browser gets exactly one runtime. */
+const localCss=fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-original-v1224-header-seam-v1405.css"),"utf8");
+const localScript=fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-hero-seam-runtime-v1407.js"),"utf8");
 const routes=[
   {key:"visitor",url:"https://dar-al-tawhid.de/?frauen-hero-probe=1392#frauen"},
   {key:"test",url:"https://dar-al-tawhid.de/test/?frauen-hero-probe=1392#frauen"}
@@ -99,7 +104,13 @@ async function nativeTouchProbe(page,route){
     const rect=input.getBoundingClientRect();
     return {exists:true,x:Math.round(rect.left+rect.width/2),y:Math.round(rect.top+rect.height/2)};
   });
-  if(focused.exists&&focused.y>0&&focused.y<852){
+  const lockVisible=await page.evaluate(()=>{
+    const el=document.getElementById("darTestLock");
+    if(!el)return false;
+    const c=getComputedStyle(el),r=el.getBoundingClientRect();
+    return c.display!=="none"&&c.visibility!=="hidden"&&r.width>100&&r.height>100;
+  });
+  if(focused.exists&&focused.y>0&&focused.y<852&&!lockVisible){
     focused.hitStack=await page.evaluate(({x,y})=>document.elementsFromPoint(x,y).slice(0,8).map(e=>({tag:e.tagName,id:e.id,cls:String(e.className).slice(0,80),touchAction:getComputedStyle(e).touchAction})),focused);
     await page.touchscreen.tap(focused.x,focused.y);
     await page.waitForTimeout(180);
@@ -131,8 +142,8 @@ async function nativeTouchProbe(page,route){
   });
   const beforeHash=await page.evaluate(()=>location.hash);
   if(!card)errors.push("cannot_find_visible_navigable_card");
-  else if(!card.hit)errors.push("sticky_or_overlay_steals_card_touch");
-  else{
+  else if(!card.hit&&!lockVisible)errors.push("sticky_or_overlay_steals_card_touch");
+  else if(card.hit&&!lockVisible){
     await page.touchscreen.tap(card.x,card.y);
     await page.waitForTimeout(600);
     card.afterHash=await page.evaluate(()=>location.hash);
@@ -193,23 +204,16 @@ function snapshot(){
   for(const route of routes){
    const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,locale:"de-DE",userAgent:route.key==="visitor"?"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1 DarAlTawhid-iOS":"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1"});
    const page=await context.newPage();const errors=[];
+   await page.route("**/assets/frauen/frauen-original-v1224-header-seam-v1405.css?*",intercept=>intercept.fulfill({status:200,contentType:"text/css; charset=utf-8",body:localCss}));
+   await page.route("**/assets/frauen/frauen-hero-seam-runtime-v1407.js?*",intercept=>intercept.fulfill({status:200,contentType:"application/javascript; charset=utf-8",body:localScript}));
    page.on("pageerror",e=>errors.push(String(e.message).slice(0,300)));
    const response=await page.goto(route.url,{waitUntil:"domcontentloaded",timeout:60000});
    await page.waitForTimeout(6000);
    let before=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-initial.png")});
-   // Test the actual checked-in V1407/V1408 sticky rail, not deleted
-   // 2026-10-16 renderer annotations. Source renderers are SHA-frozen.
-   const localCss=fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-original-v1224-header-seam-v1405.css"),"utf8");
-   const localScript=fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-hero-seam-runtime-v1407.js"),"utf8");
+   // One mounted production runtime: no duplicate injected listeners.
    if(!localCss.includes("DAR_FRAUEN_PINNED_HERO_UNDER_SCROLL_V1407")||
       !localScript.includes("maxGap=Math.max(480"))throw Error("Current Frauen sticky rail missing");
-   await page.addStyleTag({content:localCss});
-   // The public page may already run an older V1407. Re-arm only in this
-   // isolated browser QA context so the candidate runtime can be measured.
-   await page.evaluate(()=>{window.__DAR_FRAUEN_HERO_SEAM_V1407=false;});
-   await page.addScriptTag({content:localScript});
-   await page.waitForTimeout(1100);
    let repaired=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-repaired.png")});
    const touch=await nativeTouchProbe(page,route);
