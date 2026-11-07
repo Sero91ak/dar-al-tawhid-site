@@ -123,6 +123,44 @@ function setup(){
  window.addEventListener("pageshow",updateFixedTop);
  document.addEventListener("dar:view-rendered",updateFixedTop);
  if(window.visualViewport)window.visualViewport.addEventListener("resize",updateFixedTop,{passive:true});
+ /* DAR TEST ONLY: inspect the real browser/native geometry. No CSS writes,
+    synthetic safe-area subtraction, navigation reparenting or timers. */
+ function edgeAuditSnapshot(){
+  var root=document.documentElement;
+  var probe=document.createElement("div");
+  probe.setAttribute("aria-hidden","true");
+  probe.style.cssText="position:fixed;pointer-events:none;visibility:hidden;width:0;height:0;padding-top:env(safe-area-inset-top,0px);padding-right:env(safe-area-inset-right,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px)";
+  document.body.appendChild(probe);
+  var cs=window.getComputedStyle(probe);
+  function px(value){var n=parseFloat(value);return Number.isFinite(n)?n:0}
+  var cssSafe={top:px(cs.paddingTop),right:px(cs.paddingRight),bottom:px(cs.paddingBottom),left:px(cs.paddingLeft)};
+  probe.remove();
+  var nativeTop=px(window.getComputedStyle(root).getPropertyValue("--dar-native-safe-top"));
+  var nativeLeft=px(window.getComputedStyle(root).getPropertyValue("--dar-ios-safe-left"));
+  var nativeRight=px(window.getComputedStyle(root).getPropertyValue("--dar-ios-safe-right"));
+  var rect=h.getBoundingClientRect();
+  var spacer=document.getElementById("darTestBrandHeaderSpacerV1");
+  var nav=document.getElementById("bottomNav");
+  var vv=window.visualViewport;
+  var landscape=root.clientWidth>root.clientHeight;
+  var warnings=[];
+  if(landscape&&nativeTop-cssSafe.top>=24)warnings.push("Native top inset notably larger than CSS safe top; inspect native 59pt minimum and system-reserved regions.");
+  if(spacer&&Math.abs(spacer.getBoundingClientRect().height-rect.height)>8)warnings.push("Fixed header height and in-flow spacer differ; inspect duplicate top padding.");
+  if(rect.width>root.clientWidth+2)warnings.push("Header wider than available document viewport.");
+  return {
+   viewport:{width:root.clientWidth,height:root.clientHeight,orientation:landscape?"landscape":"portrait",visibleWidth:vv?vv.width:null,visibleHeight:vv?vv.height:null,visibleOffsetTop:vv?vv.offsetTop:null},
+   safeArea:{css:cssSafe,native:{top:nativeTop,left:nativeLeft,right:nativeRight}},
+   header:{top:rect.top,bottom:rect.bottom,height:rect.height,width:rect.width},
+   spacerHeight:spacer?spacer.getBoundingClientRect().height:null,
+   navigation:nav?{top:nav.getBoundingClientRect().top,bottom:nav.getBoundingClientRect().bottom}:null,
+   bodyPaddingTop:px(window.getComputedStyle(document.body).paddingTop),
+   warnings:warnings
+  };
+ }
+ window.DARTestEdgeAuditV1={
+  snapshot:edgeAuditSnapshot,
+  report:function(){var snapshot=edgeAuditSnapshot();console.info("[DAR TEST Edge Insets]",snapshot);return snapshot}
+ };
  return true;
 }
 if(!setup()){
