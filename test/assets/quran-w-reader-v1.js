@@ -181,6 +181,14 @@
       });
       watch.observe(root,{childList:true,subtree:true});
     }
+    // Follow route class changes without polling or touching the audio/reader controller.
+    if (window.MutationObserver) {
+      var routeWatch = new MutationObserver(function(){
+        if (document.body.classList.contains("is-quran-reader-route")) scheduleMount();
+        else close(false);
+      });
+      routeWatch.observe(document.body,{attributes:true,attributeFilter:["class"]});
+    }
     document.addEventListener("pointerdown",function(e){if(panel&&!panel.hidden&&!panel.contains(e.target)&&!e.target.closest("#darQrcWReaderToggleV1"))close(false);},true);
     document.addEventListener("keydown",function(e){if(e.key==="Escape"&&panel&&!panel.hidden){close(true);e.stopPropagation();}});
     window.addEventListener("hashchange",scheduleMount);
