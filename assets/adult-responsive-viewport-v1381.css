@@ -658,14 +658,8 @@ html.dar-ios-native-app body.has-bottom-nav.is-area-route:is(
 html.dar-ios-native-app body.has-bottom-nav:is(
   .is-topics-route,.is-topic-route,.is-post-route,.is-hadith-route,
   .is-dua-route,.is-frauen-route
-) #appView.view,
-html.dar-ios-native-app.dar-adult-global-brand-ready
- body.dar-ios-native-app.has-bottom-nav.is-area-route:is(
-  .is-topics-route,.is-topic-route,.is-post-route,.is-hadith-route,
-  .is-dua-route,.is-frauen-route
- ):has(> .app > #darAdultBrandHeaderSpacerV2) #appView.view{
+) #appView.view{
   margin-top:0!important;
-  padding-block-start:0!important;
   padding-top:0!important;
 }
 /* Device-safe text position: full-bleed photograph, readable headings;
