@@ -32,6 +32,22 @@ async function nativeTouchProbe(page,route){
     if(window.__darTouchAuditPreventInstalled)return;
     window.__darTouchAuditPreventInstalled=true;
     window.__darTouchAuditCalls=[];
+    window.__darTouchAuditRepaints=[];
+    const origScrollTo=window.scrollTo;
+    window.scrollTo=function(){
+      if(window.__darTouchAuditRepaints.length<30)
+        window.__darTouchAuditRepaints.push({kind:"scrollTo",args:[...arguments],stack:String(new Error().stack).slice(0,620),at:performance.now()});
+      return origScrollTo.apply(this,arguments);
+    };
+    const app=document.getElementById("appView");
+    if(app)new MutationObserver(list=>{
+      if(window.__darTouchAuditRepaints.length<30)
+        window.__darTouchAuditRepaints.push({kind:"mutation",count:list.length,scroll:window.scrollY,at:performance.now()});
+    }).observe(app,{childList:true,subtree:false});
+    document.addEventListener("dar:frauen-render",()=>{
+      if(window.__darTouchAuditRepaints.length<30)
+        window.__darTouchAuditRepaints.push({kind:"frauen-render",scroll:window.scrollY,at:performance.now()});
+    });
     const original=Event.prototype.preventDefault;
     Event.prototype.preventDefault=function(){
       if(this.type==="touchmove"&&window.__darTouchAuditCalls.length<18){
@@ -59,6 +75,7 @@ async function nativeTouchProbe(page,route){
   if((scrolled.docScroll||0)<50)errors.push("native_finger_swipe_does_not_scroll");
   const preventLog=await page.evaluate(()=>({
     stoppedBy:window.__darTouchAuditCalls||[],
+    repaints:window.__darTouchAuditRepaints||[],
     hasOfficialApp:!!window.DAR_IOS_NATIVE_APP||!!window.DAR_OFFICIAL_IOS_APP,
     oldPwaBlocked:!!window.DAR_IOS_VISITOR_BLOCKED,
     htmlClass:document.documentElement.className,
