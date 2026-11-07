@@ -95,6 +95,8 @@
     var chrome=$("qrcChrome"), mini=$("darQuranMiniPlayer"), nav=$("bottomNav");
     var top=12, bottom=12;
     if (chrome && document.body.classList.contains("is-quran-reader-route")) top=Math.max(top,chrome.getBoundingClientRect().bottom+8);
+    var overview=$("qovHeader");
+    if (overview && document.body.classList.contains("is-quran-overview")) top=Math.max(top,overview.getBoundingClientRect().bottom+8);
     if (mini && mini.classList.contains("is-on") && document.body.classList.contains("is-quran-reader-route")) {
       var mr=mini.getBoundingClientRect();
       if(mr.bottom>0 && mr.top < h && mr.bottom < h) top=Math.max(top,mr.bottom+8);
@@ -115,7 +117,7 @@
     if (focus && b) b.focus({preventScroll:true});
   }
   function open() {
-    if (!document.body.classList.contains("is-quran-reader-route")) return;
+    if (!document.body.classList.contains("is-quran-reader-route") && !document.body.classList.contains("is-quran-overview")) return;
     if (!panel) buildPanel();
     render(); panel.hidden=false;
     var b=$("darQrcWReaderToggleV1"); if(b){b.setAttribute("aria-expanded","true");b.setAttribute("aria-label",txt().reader);}
@@ -140,8 +142,13 @@
       if (action==="reset") {setScale(5);return;}
       if (action==="picker" || action==="advanced") {
         close(false);
-        var id=action==="picker"?"qrcTitleBtn":"qrcSettingsBtn";
-        var old=$(id);if(old)old.click();
+        if(document.body.classList.contains("is-quran-overview")){
+          if(action==="picker" && typeof window.openQuranDirectSheet==="function") window.openQuranDirectSheet();
+          else {var ov=$("qovSettingsBtn");if(ov)ov.click();}
+        }else{
+          var id=action==="picker"?"qrcTitleBtn":"qrcSettingsBtn";
+          var old=$(id);if(old)old.click();
+        }
       }
     });
     panel.addEventListener("input",function(ev){
@@ -150,13 +157,17 @@
     });
   }
   function mount() {
-    var actions=$("qrcActions");
-    if (!actions || !document.body.classList.contains("is-quran-reader-route")) {close(false);return;}
-    if ($("darQrcWReaderToggleV1")) { $("darQrcWReaderToggleV1").setAttribute("aria-label",txt().reader); return; }
+    var reading=document.body.classList.contains("is-quran-reader-route");
+    var overview=document.body.classList.contains("is-quran-overview");
+    var actions=reading ? $("qrcActions") : overview ? document.querySelector("#qovHeader .qov-icon-actions") : null;
+    if (!actions) {close(false);return;}
+    var existing=$("darQrcWReaderToggleV1");
+    if (existing && actions.contains(existing)) { existing.setAttribute("aria-label",txt().reader);return; }
+    if (existing) existing.remove();
     var b=document.createElement("button");
     b.type="button";
     b.id="darQrcWReaderToggleV1";
-    b.className="qrc-icon-btn dqw-trigger";
+    b.className=(reading?"qrc-icon-btn":"qov-icon-btn")+" dqw-trigger";
     b.textContent="W";
     b.setAttribute("aria-haspopup","dialog");
     b.setAttribute("aria-controls","darQrcWReaderPanelV1");
@@ -176,15 +187,16 @@
     var root=$("appView");
     if(root && window.MutationObserver) {
       watch=new MutationObserver(function(records){
-        if(document.body.classList.contains("is-quran-reader-route") && !$("darQrcWReaderToggleV1")) scheduleMount();
-        if(panel && !panel.hidden && (!document.body.classList.contains("is-quran-reader-route") || records.some(function(r){return r.target.id==="appView" && !r.target.querySelector("#qrcChrome");}))) close(false);
+        var activeRoute=document.body.classList.contains("is-quran-reader-route") || document.body.classList.contains("is-quran-overview");
+        if(activeRoute && !$("darQrcWReaderToggleV1")) scheduleMount();
+        if(panel && !panel.hidden && !activeRoute) close(false);
       });
       watch.observe(root,{childList:true,subtree:true});
     }
     // Follow route class changes without polling or touching the audio/reader controller.
     if (window.MutationObserver) {
       var routeWatch = new MutationObserver(function(){
-        if (document.body.classList.contains("is-quran-reader-route")) scheduleMount();
+        if (document.body.classList.contains("is-quran-reader-route") || document.body.classList.contains("is-quran-overview")) scheduleMount();
         else close(false);
       });
       routeWatch.observe(document.body,{attributes:true,attributeFilter:["class"]});
