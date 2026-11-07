@@ -123,7 +123,8 @@ def main():
       return {headBottom:head.bottom,heroTop:rect.top,heroHeight:rect.height,
         bodyPad,position:computed.position,top:computed.top,
         buttonCenter:btn.top+btn.height/2,
-        hit:(()=>{const el=document.elementFromPoint(btn.left+btn.width/2,btn.top+btn.height/2);return !!el&&(el.id==="heroTap"||!!el.closest("#heroTap"));})()};
+        hit:(()=>{const el=document.elementFromPoint(btn.left+btn.width/2,btn.top+btn.height/2);return !!el&&(el.id==="heroTap"||!!el.closest("#heroTap"));})(),
+        hitStack:document.elementsFromPoint(btn.left+btn.width/2,btn.top+btn.height/2).slice(0,7).map(el=>({tag:el.tagName,id:el.id,cls:String(el.className).slice(0,76),z:getComputedStyle(el).zIndex,pointer:getComputedStyle(el).pointerEvents}))};
      """,selector,header)
      if abs(metrics["heroTop"]-metrics["headBottom"])>2:
       raise AssertionError(f"{lane} {screen} {route}: blank gap or overlap {metrics}")
