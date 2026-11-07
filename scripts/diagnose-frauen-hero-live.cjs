@@ -13,6 +13,7 @@ const all=[];
  * misleading freezes; the production browser gets exactly one runtime. */
 const localCss=fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-original-v1224-header-seam-v1405.css"),"utf8");
 const localScript=fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-hero-seam-runtime-v1407.js"),"utf8");
+const localAdapter=fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-live-adapter.js"),"utf8");
 const routes=[
   {key:"visitor",url:"https://dar-al-tawhid.de/?frauen-hero-probe=1392#frauen"},
   {key:"test",url:"https://dar-al-tawhid.de/test/?frauen-hero-probe=1392#frauen"}
@@ -206,6 +207,7 @@ function snapshot(){
    const page=await context.newPage();const errors=[];
    await page.route("**/assets/frauen/frauen-original-v1224-header-seam-v1405.css?*",intercept=>intercept.fulfill({status:200,contentType:"text/css; charset=utf-8",body:localCss}));
    await page.route("**/assets/frauen/frauen-hero-seam-runtime-v1407.js?*",intercept=>intercept.fulfill({status:200,contentType:"application/javascript; charset=utf-8",body:localScript}));
+   await page.route("**/assets/frauen/frauen-live-adapter.js?*",intercept=>intercept.fulfill({status:200,contentType:"application/javascript; charset=utf-8",body:localAdapter}));
    page.on("pageerror",e=>errors.push(String(e.message).slice(0,300)));
    const response=await page.goto(route.url,{waitUntil:"domcontentloaded",timeout:60000});
    await page.waitForTimeout(6000);
