@@ -395,7 +395,7 @@ function liveFrauenNativeAddon() {
 
     /* Frauen V1406 is loaded unconditionally by adult global brand below. */
     '<script defer src="/test/assets/frauen/frauen-fiqh.js?v=frauen-rollback-20261016-1500"><\/script>',
-    '<script defer src="/assets/frauen/frauen-live-adapter.js?v=mehr-frauen-duplicate-fix-20261019"><\/script>'
+    '<script defer src="/assets/frauen/frauen-live-adapter.js?v=frauen-render-idempotent-native-scroll-v1410-20261107"><\/script>'
   ].join("");
 }
 function androidNativeToolsAddon() {
