@@ -105,6 +105,17 @@ def main():
       // updates the exact in-flow spacer and sticky clearance. The fixture
       // must emulate that measurement instead of its stale 126px seed.
       const head=document.getElementById(arguments[2]);
+      // The fixture hardcodes a 126px header while the Test .dtbh-row
+      // protrudes below that box. The real runtime allows the fixed brand
+      // to grow to its actual content; emulate that, not an overlapping box.
+      head.style.setProperty("height","126px","important");
+      head.style.setProperty("min-height","126px","important");
+      const headBox=head.getBoundingClientRect();
+      const brandRow=head.querySelector(".dtbh-row");
+      const actualBottom=Math.max(headBox.bottom,brandRow?brandRow.getBoundingClientRect().bottom:headBox.bottom);
+      const physicalHeight=Math.ceil(actualBottom-headBox.top)+"px";
+      head.style.setProperty("height",physicalHeight,"important");
+      head.style.setProperty("min-height",physicalHeight,"important");
       const px=Math.ceil(head.getBoundingClientRect().bottom)+"px";
       const test=arguments[2]==="darTestBrandHeaderV1";
       document.documentElement.style.setProperty(test?"--dar-test-occlusion-top":"--dar-adult-header-obscured-top",px);
