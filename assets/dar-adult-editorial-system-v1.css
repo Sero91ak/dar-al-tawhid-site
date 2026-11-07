@@ -1,0 +1,163 @@
+/*
+ * DĀR AL TAWḤĪD | Adult Editorial & Motion Core v1
+ * Canonical design tokens and OPT-IN component behavior; not a CSS hotfix.
+ * Owner: visitor Index shell. Scope: mounted adult reading content only.
+ * No changes to header/hero position, scroll root, navigation, original art,
+ * theme selection, prayer/GPS, internal sources or the separate Kids/Admin/Test.
+ */
+html.dar-adult-editorial-v1{
+  --dar-ed-reading-line:76ch;
+  --dar-ed-inset:clamp(12px,2.35vw,28px);
+  --dar-ed-flow-sm:clamp(9px,1.8vw,15px);
+  --dar-ed-flow-md:clamp(15px,2.6vw,24px);
+  --dar-ed-flow-lg:clamp(24px,4vw,42px);
+  --dar-ed-hairline:color-mix(in srgb,var(--line,var(--gold2,currentColor)) 26%,transparent);
+  --dar-ed-accent:var(--theme-accent,var(--gold2,currentColor));
+  --dar-ed-ink:var(--text,currentColor);
+  --dar-ed-muted:var(--muted,currentColor);
+  --dar-ed-ease:cubic-bezier(.22,.68,.15,1);
+  --dar-ed-spring:cubic-bezier(.18,.83,.24,1.22);
+  --dar-ed-speed:280ms;
+}
+html.dar-adult-editorial-v1 body.has-bottom-nav #appView [data-dar-ed-reader]{
+  box-sizing:border-box;
+  min-inline-size:0;
+  overflow-wrap:break-word;
+  font-optical-sizing:auto;
+  font-kerning:normal;
+  text-rendering:optimizeLegibility;
+}
+/* One reading flow, no extra box around each block. Image/slides keep owner styles. */
+html.dar-adult-editorial-v1 body.is-post-route #appView [data-dar-ed-reader] :is(
+  .statement,.post-aussage,.post-slide-explanation
+){
+  max-inline-size:var(--dar-ed-reading-line);
+  text-wrap:pretty;
+  overflow-wrap:anywhere;
+  line-height:clamp(1.55,1.3 + .5vw,1.75);
+}
+html.dar-adult-editorial-v1 body.is-post-route #appView [data-dar-ed-reader] :is(
+  .post-reader-speaker,.post-reader-sep
+){
+  border-color:var(--dar-ed-hairline);
+}
+html.dar-adult-editorial-v1 body.is-post-route #appView [data-dar-ed-reader] a{
+  text-underline-offset:.17em;
+  text-decoration-thickness:from-font;
+}
+/* Important: never flatten a deliberately interactive article/source capsule. */
+html.dar-adult-editorial-v1 body.is-post-route #appView [data-dar-ed-reader] [data-dar-ed-divider]{
+  border-block-end:1px solid var(--dar-ed-hairline);
+  padding-block-end:var(--dar-ed-flow-md);
+  margin-block-end:var(--dar-ed-flow-md);
+}
+/* Shared semantic layout tokens for newer reader components. No DOM reparenting. */
+html.dar-adult-editorial-v1 [data-dar-ed-container]{
+  container-type:inline-size;
+  container-name:dar-editorial;
+  min-inline-size:0;
+  max-inline-size:100%;
+}
+html.dar-adult-editorial-v1 [data-dar-ed-grid]{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:var(--dar-ed-flow-sm);
+}
+@container dar-editorial (min-width:44rem){
+  html.dar-adult-editorial-v1 [data-dar-ed-grid]{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:var(--dar-ed-flow-lg);
+  }
+}
+html.dar-adult-editorial-v1 [data-dar-ed-flat-section]{
+  border:0;
+  border-block-end:1px solid var(--dar-ed-hairline);
+  border-radius:0;
+  box-shadow:none;
+  padding-block:var(--dar-ed-flow-md);
+}
+html.dar-adult-editorial-v1 [data-dar-ed-flat-section]:last-child{
+  border-block-end:0;
+}
+html.dar-adult-editorial-v1 [data-dar-ed-overflow]{
+  overflow-x:auto;
+  overscroll-behavior-inline:contain;
+  -webkit-overflow-scrolling:touch;
+  scroll-snap-type:x proximity;
+}
+@supports (mask-image:linear-gradient(to right,transparent,black)){
+  html.dar-adult-editorial-v1 [data-dar-ed-overflow][data-dar-ed-fade="true"]{
+    mask-image:linear-gradient(to right,transparent 0,black 14px,black calc(100% - 14px),transparent 100%);
+  }
+}
+html[dir="rtl"].dar-adult-editorial-v1 [data-dar-ed-overflow]{
+  direction:rtl;
+}
+/* Optional contextual bar; the original app's controls and click handlers stay. */
+html.dar-adult-editorial-v1 [data-dar-ed-toolbar]{
+  display:flex;
+  gap:var(--dar-ed-flow-sm);
+  align-items:center;
+  flex-wrap:wrap;
+  border-block-start:1px solid var(--dar-ed-hairline);
+}
+html.dar-adult-editorial-v1 [data-dar-ed-toolbar] :is(button,a):focus-visible{
+  outline:2px solid var(--dar-ed-accent);
+  outline-offset:3px;
+}
+/* Non-blocking enter animation: content is fully readable BEFORE observation.
+   No opacity:0, offscreen transform, scroll snapping or overflow interception. */
+@keyframes dar-ed-enter{
+  from{opacity:.92;transform:translate3d(0,7px,0)}
+  to{opacity:1;transform:none}
+}
+html.dar-adult-editorial-v1 [data-dar-ed-reveal="seen"]{
+  animation:dar-ed-enter var(--dar-ed-speed) var(--dar-ed-ease) both;
+  animation-delay:var(--dar-ed-delay,0ms);
+}
+html.dar-adult-editorial-v1 [data-dar-ed-expand] > :not(summary){
+  animation:dar-ed-enter 220ms var(--dar-ed-ease) both;
+}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+  html.dar-adult-editorial-v1 [data-dar-ed-spring]{
+    transition:transform 240ms var(--dar-ed-spring),opacity 160ms ease;
+  }
+  html.dar-adult-editorial-v1 [data-dar-ed-spring]:hover{
+    transform:translate3d(0,-2px,0);
+  }
+  html.dar-adult-editorial-v1 [data-dar-ed-spring]:active{
+    transform:scale(.985);
+  }
+}
+/* The existing sticky Hero/search/header remains the sole geometry owner.
+   Immersive motion applies ONLY to explicitly NONsticky, opted-in hero copy. */
+@supports(animation-timeline:view()){
+  @keyframes dar-ed-hero-copy{
+    from{opacity:.94;transform:translate3d(0,9px,0)}
+    to{opacity:1;transform:none}
+  }
+  html.dar-adult-editorial-v1 [data-hero-scroll="normal"][data-dar-ed-hero="normal"] .dar-hero-content{
+    animation:dar-ed-hero-copy linear both;
+    animation-timeline:view(block);
+    animation-range:entry 0% entry 65%;
+  }
+}
+@media(prefers-reduced-motion:reduce),(prefers-reduced-transparency:reduce){
+  html.dar-adult-editorial-v1 [data-dar-ed-reveal="seen"],
+  html.dar-adult-editorial-v1 [data-dar-ed-expand] > :not(summary){
+    animation:none;
+  }
+  html.dar-adult-editorial-v1 [data-dar-ed-spring]{
+    transition:none;
+    transform:none;
+  }
+  html.dar-adult-editorial-v1 [data-hero-scroll="normal"][data-dar-ed-hero="normal"] .dar-hero-content{
+    animation:none;
+  }
+}
+@media(forced-colors:active){
+  html.dar-adult-editorial-v1 [data-dar-ed-flat-section],
+  html.dar-adult-editorial-v1 [data-dar-ed-toolbar]{
+    border-color:CanvasText;
+  }
+}
