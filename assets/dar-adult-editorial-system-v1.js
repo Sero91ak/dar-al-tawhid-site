@@ -73,6 +73,12 @@ function annotate(root){
   var detail=doc.querySelector("#appView :is(.hadith-detail,.dua-detail) > .post-reader-main");
   if(detail)detail.setAttribute("data-dar-ed-reader","1");
  }
+ // Existing topics filter strip owns its own horizontal touch scroll.
+ // A 14px visual edge fade may opt in, but no scroll handler is installed.
+ if(body.classList.contains("is-topics-route")){
+  var filters=doc.querySelector("#appView .topics-hub .dar-tl-filterbar");
+  if(filters)markOverflow(filters);
+ }
  // Only original NONsticky opt-in Hero components may receive motion.
  var normals=scope.querySelectorAll('[data-hero-kind][data-hero-scroll="normal"]');
  for(var n=0;n<Math.min(normals.length,16);n++){
@@ -114,6 +120,7 @@ function start(){
  global.addEventListener("pageshow",schedule,{passive:true});
  global.addEventListener("popstate",schedule,{passive:true});
  global.addEventListener("hashchange",schedule,{passive:true});
+ global.addEventListener("resize",schedule,{passive:true});
  if(reduced&&reduced.addEventListener)reduced.addEventListener("change",function(){
   if(reduced.matches)stopObserver();schedule();
  });
