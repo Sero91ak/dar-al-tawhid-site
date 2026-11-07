@@ -556,20 +556,23 @@ async function finalizeDarTestHomeV1193(asset) {
     const script = '<script defer id="darAdultMoreReadingJsV1" src="/assets/dar-adult-more-reading-v1.js?v=20261031-mehr-compact-v1"></'+'script>';
     html = html.includes("</body>") ? html.replace("</body>",script+"</body>") : html+script;
   }
-  // DAR_TEST_FOLD_WORKSPACE_V2_20261101 — replace, do not stack, Fold owners.
-  // Strip only Test HTML refs; do not mutate imported production assets.
-  html = html.replace(/<script\b[^>]*\bsrc=(["'])[^"']*(?:\/assets\/(?:adaptive-layout|fold-split)\.js|\/test\/assets\/(?:fold-thumb-nav|dar-duo-responsive-v1)\.js)[^"']*\1[^>]*>\s*<\/script>\s*/gi, "");
-  html = html.replace(/<link\b[^>]*\bhref=(["'])[^"']*(?:\/assets\/(?:adaptive-layout|fold-split|adult-fold-global-v1)\.css|\/test\/assets\/(?:fold-thumb-nav|dar-duo-responsive-v1)\.css)[^"']*\1[^>]*>\s*/gi, "");
-  html = html.replace(/<style\b[^>]*\bid=(["'])darAdaptive(?:FoldAuthorityV1326|NavStyleV1325)\1[^>]*>[\s\S]*?<\/style>\s*/gi, "");
-  // An iframe receives its own true layout viewport and uses the original
-  // /test app, with the new split controller disabled to prevent recursion.
-  const foldBootstrap = '<script id="darTestFoldV2Early">if(new URLSearchParams(location.search).get("darFoldPane")==="reader")document.documentElement.classList.add("dar-fold-v2-reader");<\/script>';
-  const foldCssV2 = '<link rel="stylesheet" id="darTestFoldWorkspaceV2Css" href="/test/assets/dar-fold-workspace-v2.css?v=20261101-real-content-v4">';
-  const foldJsV2 = '<script defer id="darTestFoldWorkspaceV2Js" src="/test/assets/dar-fold-workspace-v2.js?v=20261101-real-content-v4"><\/script>';
-  if (html.includes("</head>")) html=html.replace("</head>",foldBootstrap+"\n"+foldCssV2+"\n</head>");
-  else html=foldBootstrap+foldCssV2+html;
-  if (html.includes("</body>")) html=html.replace("</body>",foldJsV2+"\n</body>");
-  else html+=foldJsV2;
+  // DAR_TEST_FOLD_V2_RETIRED_20261106.
+  // Remove experimental split-pane/left-rail owner and keep the original
+  // adaptive app/navigation controller, including the five 3D bottom tabs.
+  // Obsolete split helpers must not compete with the new visual scene.
+  html=html.replace(/<script\b[^>]*\bsrc=(["'])[^"']*\/assets\/fold-split\.js[^"']*\1[^>]*>\s*<\/script>\s*/gi,"");
+  html=html.replace(/<link\b[^>]*\bhref=(["'])[^"']*\/assets\/fold-split\.css[^"']*\1[^>]*>\s*/gi,"");
+  html=html.replace(/<script\b[^>]*\bid=(["'])darTestFoldV2Early\1[^>]*>[\s\S]*?<\/script>\s*/gi,"");
+  html=html.replace(/<link\b[^>]*\bid=(["'])darTestFoldWorkspaceV2Css\1[^>]*>\s*/gi,"");
+  html=html.replace(/<script\b[^>]*\bid=(["'])darTestFoldWorkspaceV2Js\1[^>]*>\s*<\/script>\s*/gi,"");
+  // The checked-in 2.6 MB Test HTML has legacy styles even after </html>.
+  // Insert the final authority after them, and only in the Test Worker.
+  const artCssV1='<link rel="stylesheet" id="darTestImmersiveArtV1Css" href="/test/assets/dar-test-immersive-art-v1.css?v=20261106-appstore-v1">';
+  const artJsV1='<script defer id="darTestImmersiveArtV1Js" src="/test/assets/dar-test-immersive-art-v1.js?v=20261106-appstore-v1"><\/script>';
+  html=html.replace(/<link\b[^>]*\bid=(["'])darTestImmersiveArtV1Css\1[^>]*>\s*/gi,"");
+  html=html.replace(/<script\b[^>]*\bid=(["'])darTestImmersiveArtV1Js\1[^>]*>\s*<\/script>\s*/gi,"");
+  html+="\n"+artCssV1+"\n"+artJsV1;
+
 
   const headers = new Headers(asset.headers);
   headers.set("X-DAR-Test-Scroll-Boundary", "v3");
