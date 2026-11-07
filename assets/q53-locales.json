@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "contentId": "fudayl-ghibah-ukhuwah-20261107-q53",
+  "qSourceId": 53,
+  "canonicalUrl": "https://dar-al-tawhid.de/q/53/",
+  "sourceReference": "Abū Nuʿaym, Ḥilyat al-Awliyāʾ 8/96",
+  "localeStorageKey": "darAdultPreferredLocaleV1",
+  "supported": [
+    "de",
+    "ar",
+    "en",
+    "tr",
+    "ku",
+    "ckb",
+    "bs",
+    "fr",
+    "es"
+  ],
+  "approvedLocales": [
+    "de"
+  ],
+  "pendingReviewLocales": [
+    "ar",
+    "en",
+    "tr",
+    "ku",
+    "ckb",
+    "bs",
+    "fr",
+    "es"
+  ],
+  "sourceArabicImmutable": true,
+  "languageDisplayPolicy": "Use independent approved religious translation only. Until approved, display the checked German text with an explicit UI-language fallback notice. Arabic original and isnad immutable.",
+  "locales": {
+    "de": {
+      "status": "source-checked-german",
+      "dir": "ltr",
+      "title": "Ghībah – Das verborgene Gift",
+      "statement": "Wenn üble Nachrede aufkommt, verschwindet die Brüderlichkeit um الله willen. Ihr gleicht dann etwas, das mit Gold und Silber überzogen ist: Innen ist es Holz, außen aber schön.",
+      "source": "Abū Nuʿaym, Ḥilyat al-Awliyāʾ, 8/96",
+      "fazit": "Wahre Brüderlichkeit verlangt, die eigene Zunge vor Ghībah zu bewahren."
+    },
+    "ar": {
+      "status": "not-approved-fallback-to-de",
+      "dir": "rtl",
+      "fallbackLocale": "de",
+      "notice": "الترجمة الدينية قيد المراجعة؛ النص الألماني الأصلي معروض."
+    },
+    "en": {
+      "status": "not-approved-fallback-to-de",
+      "dir": "ltr",
+      "fallbackLocale": "de",
+      "notice": "Religious text pending review; verified German shown."
+    },
+    "tr": {
+      "status": "not-approved-fallback-to-de",
+      "dir": "ltr",
+      "fallbackLocale": "de",
+      "notice": "Dinî çeviri incelemede; Almanca asıl gösterilir."
+    },
+    "ku": {
+      "status": "not-approved-fallback-to-de",
+      "dir": "ltr",
+      "fallbackLocale": "de",
+      "notice": "Wergera dînî di vekolînê de ye; nivîsa almanî tê nîşandan."
+    },
+    "ckb": {
+      "status": "not-approved-fallback-to-de",
+      "dir": "rtl",
+      "fallbackLocale": "de",
+      "notice": "وەرگێڕانی ئایینی لە پشکنینە؛ دەقی ئەڵمانی پیشان دەدرێت."
+    },
+    "bs": {
+      "status": "not-approved-fallback-to-de",
+      "dir": "ltr",
+      "fallbackLocale": "de",
+      "notice": "Vjerski prijevod na provjeri; prikazan je njemački izvornik."
+    },
+    "fr": {
+      "status": "not-approved-fallback-to-de",
+      "dir": "ltr",
+      "fallbackLocale": "de",
+      "notice": "Traduction religieuse en révision ; affichage de la version allemande."
+    },
+    "es": {
+      "status": "not-approved-fallback-to-de",
+      "dir": "ltr",
+      "fallbackLocale": "de",
+      "notice": "Traducción religiosa pendiente de revisión; se muestra la versión alemana."
+    }
+  }
+}
