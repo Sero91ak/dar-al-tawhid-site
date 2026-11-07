@@ -12,6 +12,84 @@ const routes=[
   {key:"visitor",url:"https://dar-al-tawhid.de/?frauen-hero-probe=1392#frauen"},
   {key:"test",url:"https://dar-al-tawhid.de/test/?frauen-hero-probe=1392#frauen"}
 ];
+/* V1410: test the native finger path. Earlier wheel-only QA could pass
+ * even when touchmove was cancelled or an invisible sticky layer ate taps. */
+async function fingerSwipe(page,x,y1,y2){
+  const cdp=await page.context().newCDPSession(page);
+  try{
+    await cdp.send("Input.dispatchTouchEvent",{type:"touchStart",touchPoints:[{x,y:y1,id:1}]});
+    for(let k=1;k<=12;k++){
+      await cdp.send("Input.dispatchTouchEvent",{type:"touchMove",touchPoints:[{x,y:y1+(y2-y1)*k/12,id:1}]});
+      await page.waitForTimeout(18);
+    }
+    await cdp.send("Input.dispatchTouchEvent",{type:"touchEnd",touchPoints:[]});
+  }finally{await cdp.detach();}
+  await page.waitForTimeout(350);
+}
+async function nativeTouchProbe(page,route){
+  const errors=[];
+  await page.evaluate(()=>{
+    if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
+    window.scrollTo(0,0);
+  });
+  await page.waitForTimeout(180);
+  const start=await page.evaluate(snapshot);
+  await fingerSwipe(page,190,202,396); // Pull away from the top on the photo
+  const pulled=await page.evaluate(snapshot);
+  await fingerSwipe(page,205,669,342); // Normal down-page reading swipe
+  const scrolled=await page.evaluate(snapshot);
+  if((pulled.docScroll||0)>2)errors.push("top_pull_exposes_blank_space");
+  if((scrolled.docScroll||0)<50)errors.push("native_finger_swipe_does_not_scroll");
+  if(scrolled.stage&&Math.abs(scrolled.stage.top-(start.stage?start.stage.top:scrolled.stage.top))>4)errors.push("sticky_stage_moved_on_native_swipe");
+  await page.evaluate(()=>window.scrollTo(0,0));
+  await page.waitForTimeout(170);
+  const focused=await page.evaluate(()=>{
+    const input=document.querySelector("#appView [data-frauen-q]");
+    if(!input)return {exists:false};
+    const rect=input.getBoundingClientRect();
+    return {exists:true,x:Math.round(rect.left+rect.width/2),y:Math.round(rect.top+rect.height/2)};
+  });
+  if(focused.exists&&focused.y>0&&focused.y<852){
+    await page.touchscreen.tap(focused.x,focused.y);
+    await page.waitForTimeout(180);
+    focused.active=await page.evaluate(()=>document.activeElement?.matches('[data-frauen-q]')||false);
+    if(!focused.active)errors.push("search_does_not_receive_real_touch_focus");
+    await page.evaluate(()=>{if(document.activeElement?.blur)document.activeElement.blur();});
+  }
+  await page.evaluate(()=>window.scrollTo(0,530));
+  await page.waitForTimeout(230);
+  const card=await page.evaluate(()=>{
+    const stage=document.querySelector(".frauen-library-pinned-header");
+    const dock=document.querySelector("#bottomNav,.bottom-nav,[data-bottom-nav-root]");
+    const min=stage?stage.getBoundingClientRect().bottom+15:110;
+    const max=dock?Math.min(innerHeight-40,dock.getBoundingClientRect().top-14):innerHeight-90;
+    const nodes=[...document.querySelectorAll("#appView .frauen-library-card[data-nav=frauen],#appView .frauen-library-area-card[data-nav=frauen]")];
+    let best=null;
+    for(const n of nodes){
+      const q=n.getBoundingClientRect(),y=Math.round(Math.max(min+20,Math.min(max-20,(q.top+q.bottom)/2)));
+      if(y<=min||y>=max||q.top>y||q.bottom<y)continue;
+      const x=Math.round(q.left+q.width/2);
+      const hit=document.elementFromPoint(x,y);
+      const sample={x,y,value:n.getAttribute("data-value"),top:q.top,bottom:q.bottom,
+        stageBottom:min,dockTop:max,hit:!!hit&&(hit===n||n.contains(hit)),
+        hitStack:document.elementsFromPoint(x,y).slice(0,7).map(e=>({id:e.id,cls:String(e.className).slice(0,75),pointer:getComputedStyle(e).pointerEvents}))};
+      if(!best||sample.hit)best=sample;
+      if(sample.hit)break;
+    }
+    return best;
+  });
+  const beforeHash=await page.evaluate(()=>location.hash);
+  if(!card)errors.push("cannot_find_visible_navigable_card");
+  else if(!card.hit)errors.push("sticky_or_overlay_steals_card_touch");
+  else{
+    await page.touchscreen.tap(card.x,card.y);
+    await page.waitForTimeout(600);
+    card.afterHash=await page.evaluate(()=>location.hash);
+    if(card.afterHash===beforeHash)errors.push("card_touch_did_not_navigate");
+  }
+  console.log("FRAUEN_NATIVE_TOUCH_PROBE",JSON.stringify({route:route.key,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors}));
+  return {start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors};
+}
 function snapshot(){
   const hero=document.querySelector(".frauen-library-pinned-header .frauen-library-hero");
   const stage=document.querySelector(".frauen-library-pinned-header");
@@ -83,13 +161,20 @@ function snapshot(){
    await page.waitForTimeout(1100);
    let repaired=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-repaired.png")});
+   const touch=await nativeTouchProbe(page,route);
+   for(const error of touch.errors)issues.push(route.key+" "+error);
+   // Real card taps navigate away. Return to the original route before wheel QA.
+   if(await page.evaluate(()=>location.hash!=="#frauen")){
+     await page.goto(route.url,{waitUntil:"domcontentloaded",timeout:60000});
+     await page.waitForTimeout(3500);
+   }
 
    await page.mouse.wheel(0,560);
    await page.waitForTimeout(330);
    await page.waitForTimeout(450);
    let after=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-after-scroll.png")});
-   all.push({key:route.key,status:response.status(),before,repaired,after,errors});
+   all.push({key:route.key,status:response.status(),before,repaired,after,touch,errors});
    console.log(JSON.stringify({route:route.key,status:response.status(),
     before:{bodyClass:before.bodyClass,theme:before.theme,view:before.view,scroll:before.docScroll,hero:before.hero,stage:before.stage,heading:before.heading,app:before.app,images:before.images.length,styles:before.styles,shellChildren:before.shellChildren,renderer:before.renderer},
     repaired:{hero:repaired.hero,stage:repaired.stage,heading:repaired.heading,renderer:repaired.renderer,body:repaired.body,html:repaired.html,inline:repaired.inlineStyles,ancestors:repaired.ancestors.map(x=>({cls:x.classes,overflowX:x.overflowX,overflowY:x.overflowY}))},after:{scroll:after.docScroll,body:after.body,hero:after.hero,stage:after.stage,heading:after.heading,ancestors:after.ancestors.map(x=>({cls:x.classes,overflowY:x.overflowY}))},errors}));
