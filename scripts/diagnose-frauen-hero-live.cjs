@@ -29,6 +29,23 @@ async function fingerSwipe(page,x,y1,y2){
 async function nativeTouchProbe(page,route){
   const errors=[];
   await page.evaluate(()=>{
+    if(window.__darTouchAuditPreventInstalled)return;
+    window.__darTouchAuditPreventInstalled=true;
+    window.__darTouchAuditCalls=[];
+    const original=Event.prototype.preventDefault;
+    Event.prototype.preventDefault=function(){
+      if(this.type==="touchmove"&&window.__darTouchAuditCalls.length<18){
+        const t=this.target;
+        window.__darTouchAuditCalls.push({
+          scroll:window.scrollY,cancelable:this.cancelable,
+          target:t&&String(t.className).slice(0,80),
+          stack:String(new Error().stack||"").slice(0,900)
+        });
+      }
+      return original.apply(this,arguments);
+    };
+  });
+  await page.evaluate(()=>{
     if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
     window.scrollTo(0,0);
   });
@@ -40,6 +57,22 @@ async function nativeTouchProbe(page,route){
   const scrolled=await page.evaluate(snapshot);
   if((pulled.docScroll||0)>2)errors.push("top_pull_exposes_blank_space");
   if((scrolled.docScroll||0)<50)errors.push("native_finger_swipe_does_not_scroll");
+  const preventLog=await page.evaluate(()=>({
+    stoppedBy:window.__darTouchAuditCalls||[],
+    hasOfficialApp:!!window.DAR_IOS_NATIVE_APP||!!window.DAR_OFFICIAL_IOS_APP,
+    oldPwaBlocked:!!window.DAR_IOS_VISITOR_BLOCKED,
+    htmlClass:document.documentElement.className,
+    bodyClass:document.body.className,
+    gestureTarget:(()=>{
+      const hit=document.elementFromPoint(205,669);
+      return hit?[hit,...(function*(e){while(e?.parentElement){e=e.parentElement;yield e;}})(hit)].slice(0,12).map(e=>({
+        tag:e.tagName,cls:String(e.className).slice(0,85),
+        touchAction:getComputedStyle(e).touchAction,
+        overflowY:getComputedStyle(e).overflowY,
+        overflowX:getComputedStyle(e).overflowX
+      })):null;
+    })()
+  }));
   if(scrolled.stage&&Math.abs(scrolled.stage.top-(start.stage?start.stage.top:scrolled.stage.top))>4)errors.push("sticky_stage_moved_on_native_swipe");
   await page.evaluate(()=>window.scrollTo(0,0));
   await page.waitForTimeout(170);
@@ -50,6 +83,7 @@ async function nativeTouchProbe(page,route){
     return {exists:true,x:Math.round(rect.left+rect.width/2),y:Math.round(rect.top+rect.height/2)};
   });
   if(focused.exists&&focused.y>0&&focused.y<852){
+    focused.hitStack=await page.evaluate(({x,y})=>document.elementsFromPoint(x,y).slice(0,8).map(e=>({tag:e.tagName,id:e.id,cls:String(e.className).slice(0,80),touchAction:getComputedStyle(e).touchAction})),focused);
     await page.touchscreen.tap(focused.x,focused.y);
     await page.waitForTimeout(180);
     focused.active=await page.evaluate(()=>document.activeElement?.matches('[data-frauen-q]')||false);
@@ -87,8 +121,8 @@ async function nativeTouchProbe(page,route){
     card.afterHash=await page.evaluate(()=>location.hash);
     if(card.afterHash===beforeHash)errors.push("card_touch_did_not_navigate");
   }
-  console.log("FRAUEN_NATIVE_TOUCH_PROBE",JSON.stringify({route:route.key,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors}));
-  return {start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors};
+  console.log("FRAUEN_NATIVE_TOUCH_PROBE",JSON.stringify({route:route.key,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors}));
+  return {preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors};
 }
 function snapshot(){
   const hero=document.querySelector(".frauen-library-pinned-header .frauen-library-hero");
