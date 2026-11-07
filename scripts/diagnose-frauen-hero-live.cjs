@@ -16,6 +16,7 @@ const localScript=fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-
 const localAdapter=fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-live-adapter.js"),"utf8");
 const routes=[
   {key:"visitor",url:"https://dar-al-tawhid.de/?frauen-hero-probe=1392#frauen"},
+  {key:"visitor-android",url:"https://dar-al-tawhid.de/?frauen-hero-probe=1392#frauen"},
   {key:"test",url:"https://dar-al-tawhid.de/test/?frauen-hero-probe=1392#frauen"}
 ];
 /* V1410: test the native finger path. Earlier wheel-only QA could pass
@@ -234,7 +235,7 @@ function snapshot(){
  try{
   browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
   for(const route of routes){
-   const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,locale:"de-DE",userAgent:route.key==="visitor"?"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1 DarAlTawhid-iOS":"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1"});
+   const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,locale:"de-DE",userAgent:route.key==="visitor"?"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1 DarAlTawhid-iOS":route.key==="visitor-android"?"Mozilla/5.0 (Linux; Android 16; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Mobile Safari/537.36 DarAlTawhidAndroid":"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1"});
    const page=await context.newPage();const errors=[];
    await page.route("**/assets/frauen/frauen-original-v1224-header-seam-v1405.css?*",intercept=>intercept.fulfill({status:200,contentType:"text/css; charset=utf-8",body:localCss}));
    await page.route("**/assets/frauen/frauen-hero-seam-runtime-v1407.js?*",intercept=>intercept.fulfill({status:200,contentType:"application/javascript; charset=utf-8",body:localScript}));
