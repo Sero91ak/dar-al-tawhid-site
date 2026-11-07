@@ -155,6 +155,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "frauen-native-scroll-render-idempotency-v1410-20261107",
+      "at": "2026-11-07T22:30:00+01:00",
+      "approvedBy": "user-explicit-20261107-intensiv-ursache-css-layout-scroll-klick-fix",
+      "reason": "Only fix proven production Frauen visitor loop: repetitive full DOM renders and unconditional scrollTo(0,0) repeatedly consume native finger swipe, detach search focus. Keep original photographed Hero, renderer/content/links, Kids, TV, other routes and Test lock untouched. Verify with single-loaded native-touch Playwright and protected checks before main deployment.",
+      "paths": [
+        "assets/frauen/frauen-live-adapter.js",
+        "scripts/diagnose-frauen-hero-live.cjs",
+        "scripts/verify-frauen-hero-contract.cjs",
+        "cloudflare/site-router.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-10T23:59:00.000Z"
+    },
+    {
       "id": "frauen-original-hero-search-late-brand-fix-v1409-20261107",
       "at": "2026-11-07T20:05:00+01:00",
       "approvedBy": "user-request-20261107-frauen-hero-bild-suchfeld-angeheftet",
