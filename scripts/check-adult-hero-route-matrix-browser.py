@@ -168,4 +168,8 @@ def main():
   if driver:driver.quit()
   server.shutdown()
   for p in FILES:p.unlink(missing_ok=True)
-if __name__=="__main__":main()
+if __name__=="__main__":
+ main()
+ # Read-only desktop follow-up in this QA-only combined branch.
+ import subprocess
+ subprocess.run(["python3","scripts/check-desktop-editorial-browser.py"],check=True)
