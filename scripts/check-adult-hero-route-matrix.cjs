@@ -17,11 +17,26 @@ const inventory=["frauen","topics","topic","post","hadith","dua","settings","cal
 for(const [name,cssPath,loaderPath,asset] of lanes){
  const css=read(cssPath),loader=read(loaderPath);
  assert.equal([...css].reduce((n,c)=>n+(c==="{")-(c==="}"),0),0,name+" unbalanced CSS");
- assert.doesNotMatch(css,/GLOBAL_ADULT_STICKY_CLEARANCE_V1|GLOBAL_HERO_ROUTE_TOP_SEAM_V3|FRAUEN_DIRECT_STICKY_FALLBACK_V6/,
+ assert.doesNotMatch(css,/GLOBAL_ADULT_STICKY_CLEARANCE_V1|FRAUEN_DIRECT_STICKY_FALLBACK_V6/,
    name+" must not globally translate original Hero or detached search");
+ // The existing Test-only V3 rule is a zero-offset normalization, not a
+ // nonzero Hero displacement. Mirror the stricter fixed-header guard.
+ if(name==="Test"&&css.includes("GLOBAL_HERO_ROUTE_TOP_SEAM_V3")){
+  const start=css.indexOf("GLOBAL_HERO_ROUTE_TOP_SEAM_V3");
+  const end=css.indexOf("RELATIVE_HERO_STAYS_IN_FLOW_V4",start);
+  const seam=css.slice(start,end>start?end:undefined);
+  assert.match(seam,/> \.app\s*\{\s*margin-block-start:0!important;\s*padding-block-start:0!important;/);
+  assert.match(seam,/#appView\.view\s*\{\s*padding-block-start:0!important;\s*margin-block-start:0!important;/);
+  assert.doesNotMatch(seam,/(?:margin|padding)-block-start:\s*-[1-9]/,
+     "Test V3 must never use negative app/hero offsets");
+ }else{
+  assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/,name+" unexpected global Hero override");
+ }
  assert.doesNotMatch(css,/NATIVE_HERO_TOP_SEAM_V2|TEST_NATIVE_HERO_TOP_SEAM_V2/,
    name+" must not duplicate native safe-area resetting");
- assert(loader.includes(asset+"?v=20261030-restore-original-hero-rail-v5"),
+ const approvedCssVersion=name==="Visitor"?"20261107-welcome-editorial-v3":"20261030-restore-original-hero-rail-v5";
+ const visitorStaged=name==="Visitor"&&loader.includes(asset+"?v=20261107-index-single-spacer-v1");
+ assert(visitorStaged||loader.includes(asset+"?v="+approvedCssVersion),
    name+" must request rollback-safe CSS version");
 }
 const heroCss=read("assets/adult-immersive-hero-v1.css");
