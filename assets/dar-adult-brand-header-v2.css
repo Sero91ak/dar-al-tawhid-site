@@ -520,3 +520,15 @@ html.dar-ios-native-app.dar-adult-global-brand-ready
   padding-block-start:0!important;
   padding-top:0!important;
 }
+
+/* ADULT_INDEX_FRAUEN_FIRST_HERO_FLUSH_V1
+ * Only the native visitor Index after the real fixed-brand spacer mounted:
+ * The Frauen image and its attached search own the first visible content.
+ * Older generic #appView styles can reinsert 8px of padding above the hero.
+ * Remove that extra INNER gap, not the OS Safe Area nor the Hero positioning. */
+html.dar-ios-native-app.dar-adult-global-brand-ready
+ body.dar-ios-native-app.has-bottom-nav.is-area-route.is-frauen-route:has(> .app > #darAdultBrandHeaderSpacerV2) #appView.view{
+  margin-block-start:0!important;
+  padding-block-start:0!important;
+  padding-top:0!important;
+}
