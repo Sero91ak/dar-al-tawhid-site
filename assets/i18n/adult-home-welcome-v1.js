@@ -99,13 +99,9 @@ function splitSalam(el,full,l){
   el.style.setProperty("font-size",Math.max(12,Math.floor(size*(available*.95/required)*10)/10)+"px","important");
 }
 function pyramidTokens(text,l){
- var raw=text.trim().split(/\s+/),out=[];
- for(var i=0;i<raw.length;i++){
-  if(l==="de"&&raw.slice(i,i+4).join(" ")==="Āṯār der frühen Imāme"){
-   out.push("Āṯār der frühen Imāme");i+=3;
-  }else out.push(raw[i]);
- }
- return out;
+ // Individual words give narrow panes enough natural break opportunities.
+ // Long highlighted phrases are still highlighted word by word below.
+ return text.trim().split(/\s+/);
 }
 function pyramidLines(el,text,l){
  if(!el)return;
@@ -122,18 +118,25 @@ function pyramidLines(el,text,l){
  if(n<4){mark(el,text,"summary",l);return}
  // Measure bold emphasis at its actual weight instead of treating it
  // as normal text: visual lines must not overflow after highlighting.
- var strongWords=["Āṯār der frühen Imāme","Duʿāʾ-Sammlung","Qurʾān","Sunnah"];
+ var strongWords=l==="de"?["Āṯār der frühen Imāme","Duʿāʾ-Sammlung","Qurʾān","Sunnah"]:[];
+ var emphasis=strongWords.map(function(v){var pos=text.indexOf(v);return{start:pos,end:pos+v.length}})
+  .filter(function(x){return x.start>=0});
+ var at=0,tokenPositions=tokens.map(function(token){
+  var pos=text.indexOf(token,at);at=pos+token.length;return pos
+ });
+ function highlighted(index){
+  return emphasis.some(function(r){return tokenPositions[index]>=r.start&&tokenPositions[index]<r.end})
+ }
  var metrics=[],space=0;
  ctx.font=font;space=ctx.measureText(" ").width*1.04;
  for(var i=0;i<n;i++){
-  var bold=l==="de"&&strongWords.some(function(v){return tokens[i].indexOf(v)===0});
-  ctx.font=measureFont(el,bold?"750":null);
+  ctx.font=measureFont(el,highlighted(i)?"750":null);
   metrics.push(ctx.measureText(tokens[i]).width*1.055);
  }
  var prefix=[0];for(i=0;i<n;i++)prefix.push(prefix[i]+metrics[i]);
  function spanWidth(start,end){return prefix[end]-prefix[start]+space*Math.max(0,end-start-1)}
  var limit=width*.94,total=spanWidth(0,n);
- var fromCount=Math.max(2,Math.ceil(total/(limit*.84))),toCount=Math.min(9,n);
+ var fromCount=Math.max(2,Math.ceil(total/limit)),toCount=Math.min(9,n);
  var cuts=null;
  // Minimise raggedness against a gently rising width target. A short
  // first line such as "Eine geordnete" is never a desirable pyramid.
@@ -150,12 +153,16 @@ function pyramidLines(el,text,l){
    for(var end=start+1;end<=last;end++){
     var current=spanWidth(start,end);
     if(current>limit)break;
-    if(row>0&&current<previous+Math.min(9,limit*.018))continue;
+    // Gentle taper is preferred but a small last-line decrease is better
+    // than starting with a two-word orphan or clipping an important term.
     if(row===0&&count>2&&current<limit*.40)continue;
     if(row===count-1&&end!==n)continue;
     if(row<count-1&&spanWidth(end,n)>(count-row-1)*limit+space)continue;
     var target=total*weights[row]/weightSum;
     var score=Math.pow((current-target)/limit,2);
+    if(row>0&&current<previous)
+     score+=1.5+16*Math.pow((previous-current)/limit,2);
+    else if(row>0&&current<previous+7)score+=.12;
     var tail=solve(row+1,end,current);
     if(!tail)continue;
     var candidate={score:score+tail.score,cuts:[end].concat(tail.cuts)};
@@ -167,6 +174,7 @@ function pyramidLines(el,text,l){
   if(result)cuts=result.cuts;
  }
  if(!cuts){
+  el.replaceChildren();
   mark(el,text,"summary",l);
   el.removeAttribute("data-dar-welcome-pyramid");
   return;
@@ -177,14 +185,20 @@ function pyramidLines(el,text,l){
   line.className="dar-welcome-pyramid-line";
   line.style.display="block";
   line.style.whiteSpace="nowrap";
-  var fragment=tokens.slice(begin,end).join(" ")+(i<cuts.length-1?" ":"");
-  mark(line,fragment,"summary",l);
+  for(var j=begin;j<end;j++){
+   if(j>begin)line.appendChild(d.createTextNode(" "));
+   if(highlighted(j)){
+    var strong=d.createElement("strong");strong.textContent=tokens[j];line.appendChild(strong);
+   }else line.appendChild(d.createTextNode(tokens[j]));
+  }
+  if(i<cuts.length-1)line.appendChild(d.createTextNode(" "));
   frag.appendChild(line);begin=end;
  }
  el.replaceChildren(frag);
  // Rendering, language switches and large-text zoom all retain the entire
  // string. If a font replaces late and makes a line too wide, unwrap safely.
  if(Array.from(el.children).some(function(line){return line.scrollWidth>width+2})){
+  el.replaceChildren();
   mark(el,text,"summary",l);
   el.removeAttribute("data-dar-welcome-pyramid");
   return;
