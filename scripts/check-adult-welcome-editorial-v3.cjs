@@ -93,7 +93,7 @@ for(const locale of Object.keys(texts)){
    assert(lines[0].textContent.trim().length>8,locale+" orphan opening line");
   }
   if(locale==="de"){
-   const highlights=description.children.flatMap(n=>n.children||[]).filter(n=>n.tag==="strong");
+   const highlights=description.children.flatMap(n=>[n].concat(n.children||[])).filter(n=>n.tag==="strong");
    assert(highlights.length>0,"German source highlighting lost at "+available);
   }
   checked++;
