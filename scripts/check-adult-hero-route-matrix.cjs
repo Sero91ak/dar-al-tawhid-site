@@ -59,3 +59,7 @@ assert.equal(edge,read("test/assets/dar-adult-top-scroll-boundary-v1.js"));
 assert(edge.includes("DAR_ADULT_TOP_SCROLL_BOUNDARY_V4"));
 assert.equal(inventory.length,19);
 console.log("PASS: 19 route families inventoried; original Hero and search co-owned, no global displacement, image sources unchanged. Individual physical-device acceptance still required.");
+/* Combined QA only: run the opt-in editorial and desktop contracts as part of the
+ * existing read-only header check without changing a protected workflow. */
+require("./check-adult-editorial-motion-v1.cjs");
+require("./check-desktop-editorial-v1.cjs");
