@@ -288,7 +288,7 @@ html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdul
  min-height:0!important;height:auto!important;
 }
 html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 .dar-adult-home-salam-v5{
- font:650 clamp(19px,4.8vw,27px)/1.18 Georgia,"Iowan Old Style",serif!important;
+ font:650 clamp(19px,4.05vw,24px)/1.23 Georgia,"Iowan Old Style",serif!important;
  letter-spacing:-.014em!important;
  margin:0!important;
  text-wrap:pretty!important;
@@ -322,6 +322,20 @@ html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdul
  font:600 clamp(17px,3.7vw,24px)/1.26 Georgia,"Iowan Old Style",serif!important;
  color:var(--dtbh-ink)!important;max-width:100%!important;
  overflow-wrap:break-word!important;text-wrap:balance!important;
+}
+/* Editorial subheading belongs to the existing canonical home title, not a new widget. */
+html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 .dar-adult-home-title-v7 .dar-welcome-kicker{
+ display:block!important;margin:0 0 3px!important;padding:0!important;
+ font:750 clamp(10px,2.4vw,12px)/1.4 system-ui,-apple-system,sans-serif!important;
+ letter-spacing:.105em!important;text-transform:uppercase!important;
+ color:var(--dtbh-muted)!important;-webkit-text-fill-color:var(--dtbh-muted)!important;
+ text-wrap:wrap!important;
+}
+html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 .dar-adult-home-title-v7 .dar-welcome-brand{
+ display:block!important;margin:0!important;padding:0!important;
+ font:700 clamp(21px,4.6vw,27px)/1.22 Georgia,"Iowan Old Style",serif!important;
+ color:var(--dtbh-ink)!important;-webkit-text-fill-color:var(--dtbh-ink)!important;
+ letter-spacing:-.01em!important;overflow-wrap:normal!important;white-space:normal!important;
 }
 html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 .dar-adult-home-desc-v7{
  max-width:min(100%,70ch)!important;
