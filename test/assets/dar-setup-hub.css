@@ -1,3 +1,13 @@
+/* HOME_SETUP_HUB_VISIBILITY_LOCK_20261107
+ * The optional setup controls belong only to the Settings route, never Home.
+ * This includes the legacy iOS assistant and survives route rerenders.
+ * No permission, location, notification, widget, prayer or navigation logic changes. */
+html body.is-home-route :is(#dar-setup-hub, .dar-setup-hub[data-dar-setup="true"], #dar-ios-setup-assistant),
+html body:not(.is-settings-route) :is(#dar-setup-hub, .dar-setup-hub[data-dar-setup="true"], #dar-ios-setup-assistant) {
+  display:none!important;
+  visibility:hidden!important;
+}
+
 /* Setup + Einstellungen: edel, ohne Kasten, dünne Goldlinien (wie Gebetszeiten-Bild) */
 #dar-setup-hub,
 .dar-setup-hub{
