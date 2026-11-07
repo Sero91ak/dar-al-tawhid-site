@@ -26,7 +26,7 @@ feed:
 
 🖋️ **Al-Fuḍayl ibn ʿIyāḍ** sagte:
 
-„Wenn **üble Nachrede** aufkommt, verschwindet die **Brüderlichkeit** um الله willen.
+„Wenn **üble Nachrede** aufkommt, verschwindet die **Brüderlichkeit** um Allahs willen.
 
 Ihr gleicht dann etwas, das mit Gold und Silber überzogen ist: **Innen ist es Holz**, außen aber schön.“
 
