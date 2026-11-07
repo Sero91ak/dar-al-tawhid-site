@@ -1,4 +1,4 @@
-/* DAR_FRAUEN_HERO_SEAM_RUNTIME_V1407
+/* DAR_FRAUEN_HERO_SEAM_RUNTIME_V1407 · V1409 late-brand mount hardening
  * The photographed Hero/search stay ONE pinned surface. Measure only the
  * redundant initial gap below the real fixed brand and collapse that gap.
  * No scroll/touch interception or cloning; the missing wrapper is restored once.
@@ -16,22 +16,13 @@ function reconcile(){
  queued=false;
  var body=document.body;
  if(!body||!body.classList.contains("is-frauen-route"))return;
- var header=document.getElementById("darAdultBrandHeaderV2")||
-            document.getElementById("darTestBrandHeaderV1");
+ /* V1409: mount the approved photo/search stage on EVERY Frauen render,
+    even while the native/test brand is still being attached. The previous
+    early header guard left both nodes unpinned after a cold route entry. */
  var hero=document.querySelector("#appView .frauen-library-hero");
- if(!header||!hero)return;
+ if(!hero)return;
  var shell=hero.closest(".frauen-library-shell,.frauen-library-list");
  if(!shell)return;
- var headerBottom=Math.ceil(header.getBoundingClientRect().bottom);
- if(!Number.isFinite(headerBottom)||headerBottom<40||headerBottom>300)return;
- /* Header's physical bottom, not guessed safe-area height, is the sticky top. */
- var fixedTop=headerBottom+"px";
- if(body.style.getPropertyValue("--frauen-fixed-brand-bottom")!==fixedTop)
-  body.style.setProperty("--frauen-fixed-brand-bottom",fixedTop);
- if(resizeObserver){
-  if(observedHeader!==header){if(observedHeader)resizeObserver.unobserve(observedHeader);resizeObserver.observe(header);observedHeader=header;}
-  if(observedHero!==hero){if(observedHero)resizeObserver.unobserve(observedHero);resizeObserver.observe(hero);observedHero=hero;}
- }
  /* Always restore the structural stage, even when a previous route retained
     scroll position; only margin reconciliation is restricted to scroll top. */
  var stage=shell.querySelector(":scope > .dar-immersive-hero-stage");
@@ -49,6 +40,28 @@ function reconcile(){
    stage.appendChild(directHero);
    if(search)stage.appendChild(search);
   }
+ }
+ /* A route repaint may put the original search beside an existing stage.
+    Reattach that SAME input, never duplicate it or reset typed text. */
+ var looseSearch=shell.querySelector(":scope > .frauen-library-search-wrap,:scope > .frauen-library-list-controls");
+ if(stage&&looseSearch)stage.appendChild(looseSearch);
+ if(stage)stage.dataset.hasSearch=stage.querySelector(":scope > .frauen-library-search-wrap,:scope > .frauen-library-list-controls")?"1":"0";
+ var header=document.getElementById("darAdultBrandHeaderV2")||
+            document.getElementById("darTestBrandHeaderV1");
+ if(resizeObserver){
+  if(observedHeader!==header){if(observedHeader)resizeObserver.unobserve(observedHeader);if(header)resizeObserver.observe(header);observedHeader=header;}
+  if(observedHero!==hero){if(observedHero)resizeObserver.unobserve(observedHero);resizeObserver.observe(hero);observedHero=hero;}
+ }
+ if(!header)return;
+ var headerBottom=Math.ceil(header.getBoundingClientRect().bottom);
+ if(!Number.isFinite(headerBottom)||headerBottom<40||headerBottom>300)return;
+ /* The actual fixed header, not a guessed status-bar inset, owns this axis. */
+ var fixedTop=headerBottom+"px";
+ if(body.style.getPropertyValue("--frauen-fixed-brand-bottom")!==fixedTop)
+  body.style.setProperty("--frauen-fixed-brand-bottom",fixedTop);
+ if(stage){
+  if(stage.style.getPropertyValue("top")!==fixedTop)stage.style.setProperty("top",fixedTop,"important");
+  if(stage.style.getPropertyValue("inset-block-start")!==fixedTop)stage.style.setProperty("inset-block-start",fixedTop,"important");
  }
  /* Do not adjust the flow offset during an active reading scroll. */
  if(top()>1)return;
@@ -76,8 +89,16 @@ function schedule(){
 function setup(){
  if(typeof ResizeObserver==="function")resizeObserver=new ResizeObserver(schedule);
  var app=document.getElementById("appView");
- if(app&&typeof MutationObserver==="function")
-  new MutationObserver(schedule).observe(app,{childList:true,subtree:true});
+ if(typeof MutationObserver==="function"){
+  if(app)new MutationObserver(schedule).observe(app,{childList:true,subtree:true});
+  /* Brands are mounted OUTSIDE #appView. Watch only the direct insertion
+     points and Frauen route state; never observe all app subtree twice. */
+  var appShell=document.querySelector("body > .app");
+  if(appShell)new MutationObserver(schedule).observe(appShell,{childList:true});
+  if(document.body)new MutationObserver(schedule).observe(document.body,{
+   childList:true,attributes:true,attributeFilter:["class","data-frauen-view"]
+  });
+ }
  document.addEventListener("dar:view-rendered",schedule);
  /* The frozen production adapter may repaint immediately after render;
     restore the shared stage synchronously before the next browser paint. */
