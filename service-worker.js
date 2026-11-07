@@ -724,6 +724,32 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Wasiyyah is a standalone document, not an SPA shell. Its own HTML,
+  // PDF preview and local draft must never be aliased to /index.html.
+  // Keep the exact requested URL online and on an offline revisit.
+  if (url.origin === self.location.origin &&
+      (url.pathname === '/wasiyyah' || url.pathname.startsWith('/wasiyyah/') ||
+       url.pathname === '/test/wasiyyah' || url.pathname.startsWith('/test/wasiyyah/')) &&
+      request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request, { cache: 'no-store' }).then((response) => {
+        if (response && response.ok) {
+          const copy = response.clone();
+          event.waitUntil(caches.open(CACHE_VERSION)
+            .then((cache) => cache.put(request, copy)).catch(() => {}));
+        }
+        return response;
+      }).catch(async () =>
+        (await caches.match(request, { ignoreSearch: true })) ||
+        new Response('Testament-Assistent derzeit nicht erreichbar. Bitte Internetverbindung prüfen.', {
+          status: 503,
+          headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' }
+        })
+      )
+    );
+    return;
+  }
+
   // Fest gepinnte CDN-Bootdatei auf die aktuelle Origin-Datei umbiegen.
   if (isPinnedLiveBootRequest(url)) {
     event.respondWith(
