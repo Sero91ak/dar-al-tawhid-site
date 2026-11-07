@@ -90,7 +90,7 @@ async function nativeTouchProbe(page,route){
     await fingerSwipe(page,190,423,198);
     touchExperiments.push({mode:"section-heading-touch",scroll:await page.evaluate(()=>window.scrollY)});
     await page.evaluate(()=>window.scrollTo(0,0));
-    for(const mode of ["pan-y","keyboard-off","native-class-off"]){
+    for(const mode of ["pan-y","keyboard-off","native-class-off","root-viewport","native-overflow-body"]){
       await page.evaluate(mode=>{
         if(mode==="pan-y"){
           for(const el of [document.documentElement,document.body,document.querySelector(".app"),document.getElementById("appView")]){
@@ -100,10 +100,24 @@ async function nativeTouchProbe(page,route){
           document.documentElement.classList.remove("adaptive-keyboard-open");
         }else if(mode==="native-class-off"){
           document.documentElement.classList.remove("dar-ios-native-app");
+        }else if(mode==="root-viewport"){
+          const html=document.documentElement;
+          html.style.setProperty("height","100dvh","important");
+          html.style.setProperty("min-height","100dvh","important");
+          html.style.setProperty("overflow-y","auto","important");
+          html.style.setProperty("overflow-x","clip","important");
+        }else if(mode==="native-overflow-body"){
+          document.body.style.setProperty("overflow-y","auto","important");
+          document.body.style.setProperty("height","100dvh","important");
         }
       },mode);
       await fingerSwipe(page,205,669,342);
       touchExperiments.push({mode,scroll:await page.evaluate(()=>window.scrollY),
+        scrollport:await page.evaluate(()=>({
+          htmlClient:document.documentElement.clientHeight,htmlScroll:document.documentElement.scrollHeight,
+          bodyClient:document.body.clientHeight,bodyScroll:document.body.scrollHeight,
+          viewport:innerHeight
+        })),
         focus:await page.evaluate(()=>document.activeElement?.tagName),
         htmlClass:await page.evaluate(()=>document.documentElement.className)});
       await page.evaluate(mode=>{
@@ -114,6 +128,12 @@ async function nativeTouchProbe(page,route){
           }
         }else if(mode==="keyboard-off")document.documentElement.classList.add("adaptive-keyboard-open");
         else if(mode==="native-class-off")document.documentElement.classList.add("dar-ios-native-app");
+        else if(mode==="root-viewport"){
+          for(const p of ["height","min-height","overflow-y","overflow-x"])document.documentElement.style.removeProperty(p);
+        }else if(mode==="native-overflow-body"){
+          document.body.style.removeProperty("height");
+          document.body.style.setProperty("overflow-y","visible","important");
+        }
       },mode);
     }
   }
