@@ -72,3 +72,21 @@ body.is-quran-reader-route #qrcActions .dqw-trigger:focus-visible{
 @media(prefers-reduced-motion:reduce){
  .dqw-panel,.dqw-panel *{scroll-behavior:auto!important;transition:none!important;animation:none!important}
 }
+
+
+/* Dashboard shortcut: reuse the same W Studio, never a second settings engine. */
+body.is-quran-overview #qovHeader .qov-icon-actions .dqw-trigger{
+  width:42px!important;min-width:42px!important;height:42px!important;
+  border:1px solid color-mix(in srgb,var(--gold2,#c0a16d) 55%,var(--line2,transparent))!important;
+  border-radius:13px!important;
+  background:color-mix(in srgb,var(--gold2,#c0a16d) 15%,var(--card,var(--bg)))!important;
+  color:var(--gold2,#c0a16d)!important;
+  font:800 19px/1 system-ui,-apple-system,sans-serif!important;
+  box-shadow:none!important;touch-action:manipulation;flex:none;
+}
+body.is-quran-overview #qovHeader .qov-icon-actions .dqw-trigger[aria-expanded="true"]{
+  background:color-mix(in srgb,var(--gold2,#c0a16d) 25%,var(--card,var(--bg)))!important;
+}
+@media(max-width:390px){
+  body.is-quran-overview #qovHeader .qov-icon-actions .dqw-trigger{width:38px!important;min-width:38px!important;height:38px!important}
+}
