@@ -10,7 +10,7 @@
 
 ## Chat-Kontrollfassung (nur zur redaktionellen Freigabe)
 
-📖 𝐖𝐞𝐧𝐧 𝐮̈𝐛𝐥𝐞 𝐍𝐚𝐜𝐡𝐫𝐞𝐝𝐞 𝐁𝐫𝐮̈𝐝𝐞𝐫𝐥𝐢𝐜𝐡𝐤𝐞𝐢𝐭 𝐳𝐞𝐫𝐬𝐭𝐨̈𝐫𝐭
+📖 𝐆𝐡𝐢𝐛𝐚𝐡 – 𝐃𝐚𝐬 𝐯𝐞𝐫𝐛𝐨𝐫𝐠𝐞𝐧𝐞 𝐆𝐢𝐟𝐭
 #DarAlTawhid #AlFudaylIbnIyad #Tazkiyah #Adab
 
 🖋️ **Al-Fuḍayl ibn ʿIyāḍ** sagte:
