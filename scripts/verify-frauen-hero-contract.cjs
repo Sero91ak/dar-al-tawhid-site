@@ -8,7 +8,7 @@ const crypto=require("node:crypto");
 const frozen={
   "assets/frauen/frauen-authority-v1292.css": "6bb786de1ecb1b0d3ed5d01ec511cc10c9b3da86",
   "assets/frauen/frauen-fiqh.js": "2eeb486a100ad3e433860a9bb1c09e225edd5a4c",
-  "assets/frauen/frauen-live-adapter.js": "da20c378536d4ce0b6cdc891b0e32a8d026708e4",
+  "assets/frauen/frauen-live-adapter.js": "2c5704b164da160e463b5accabb50d9a21e0abce",
   "test/assets/frauen/frauen-authority-v1292.css": "07b9fa32585de8fcb57aad13b13ab2c67167ee4b",
   "test/assets/frauen/frauen-fiqh.js": "d2abb88d444de8879046e4edc58ca659b1eb94e8"
 };
@@ -22,11 +22,21 @@ for(const [path,sha] of Object.entries(frozen)){
 }
 const adapter=fs.readFileSync("assets/frauen/frauen-live-adapter.js","utf8");
 assert.ok(adapter.includes("function paint()"),"Original live Frauen adapter fehlt");
+assert.match(adapter,/FRAUEN_RENDER_IDEMPOTENT_V1410/,
+ "Nur geaenderte Frauen-Inhalte duerfen den DOM neu aufbauen");
+assert.match(adapter,/sameRoute&&present&&lastFrauenMarkup===markup\)return false/,
+ "Unveraenderter Frauen-Router darf weder Bild noch Suche neu montieren");
+assert.match(adapter,/if\(!sameRoute\)\{[\s\S]*?global\.scrollTo\(0,0\)/,
+ "Scroll zurueck zu Null ist nur beim Routewechsel erlaubt");
+assert.match(adapter,/current\.focus\(\{preventScroll:true\}\)/,
+ "Search-Fokus muss auf echten Inhaltswechseln erhalten bleiben");
+assert.ok(!/global\.scrollTo\(0,0\)\s*\}catch\(e\)\{\}\s*try\{document\.dispatchEvent/.test(adapter),
+ "Alte bedingungslose Frauen-Scrollsperre darf nicht wiederkehren");
 assert.ok(adapter.includes("MEHR_DUPLICATE_FRAUEN_ROW_REMOVED_V1"),"Doppelte Frauen-Mehr-Karte darf nicht automatisch eingefügt werden");
 assert.ok(!adapter.includes("target.appendChild(btn)"),"Veraltete zusätzliche Frauen-Karte bleibt aktiv");
 const native=fs.readFileSync("cloudflare/site-router.js","utf8");
 assert.ok(native.includes("/test/assets/frauen/frauen-fiqh.js?v=frauen-rollback-20261016-1500"),"Alten iOS Frauen renderer wiederherstellen");
-assert.ok(native.includes("/assets/frauen/frauen-live-adapter.js?v=mehr-frauen-duplicate-fix-20261019"),"Alten Frauen adapter ausliefern");
+assert.ok(native.includes("/assets/frauen/frauen-live-adapter.js?v=frauen-render-idempotent-native-scroll-v1410-20261107"),"Idempotenten Frauen-Adapter mit neuem Cache-Key ausliefern");
 const testWorker=fs.readFileSync("cloudflare/test-app-worker.js","utf8");
 assert.ok(testWorker.includes("frauen-authority-v1292.css?v=frauen-rollback-20261016-1500"),"Test CSS cache key fehlt");
 for(const prefix of ["assets/frauen/library-v1224/","test/assets/frauen/library-v1224/"]){
