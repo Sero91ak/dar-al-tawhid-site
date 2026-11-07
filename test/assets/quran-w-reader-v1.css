@@ -1,0 +1,92 @@
+/* DĀR AL TAWḤĪD · Test-only Qurʾān W Reader · no global or player overrides */
+body.is-quran-reader-route #qrcActions .dqw-trigger{
+  min-width:40px!important;width:40px!important;height:40px!important;
+  border:1px solid color-mix(in srgb,var(--gold2,#c0a16d) 58%,var(--line2,transparent))!important;
+  background:color-mix(in srgb,var(--gold2,#c0a16d) 16%,var(--card,var(--bg)))!important;
+  color:var(--gold2,#c0a16d)!important;
+  font:800 18px/1 system-ui,-apple-system,sans-serif!important;
+  border-radius:13px!important;
+  box-shadow:none!important;flex:0 0 auto!important;
+  touch-action:manipulation;
+}
+body.is-quran-reader-route #qrcActions .dqw-trigger[aria-expanded="true"]{
+  background:color-mix(in srgb,var(--gold2,#c0a16d) 25%,var(--card,var(--bg)))!important;
+}
+body.is-quran-reader-route #qrcActions .dqw-trigger:focus-visible{
+  outline:2px solid var(--gold2,#c0a16d);outline-offset:2px;
+}
+.dqw-panel[hidden]{display:none!important}
+.dqw-panel{
+  position:fixed;right:12px;left:auto;width:min(382px,calc(100vw - 24px));
+  z-index:599;box-sizing:border-box;
+  overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+  background:var(--card,var(--bg,#131713));color:var(--text,var(--cream,#f5efdf));
+  border:1px solid color-mix(in srgb,var(--gold2,#c0a16d) 36%,var(--line2,transparent));
+  border-radius:19px;padding:15px 16px 12px;
+  box-shadow:0 14px 44px rgba(0,0,0,.29);
+  font:500 14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;
+  text-align:start;
+  color-scheme:inherit;
+}
+.dqw-panel *{box-sizing:border-box}
+.dqw-panel button,.dqw-panel input{font:inherit}
+.dqw-panel button{cursor:pointer}
+.dqw-panel button:focus-visible,.dqw-panel input:focus-visible{outline:2px solid var(--gold2,#c0a16d);outline-offset:2px}
+.dqw-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-bottom:11px;border-bottom:1px solid var(--line2,rgba(180,150,90,.2))}
+.dqw-head strong{display:block;font-size:17px;font-weight:800;letter-spacing:-.02em}
+.dqw-head span{display:block;color:var(--muted,var(--text));font-size:11px;margin-top:1px;opacity:.85}
+.dqw-panel .dqw-close{width:40px;height:40px;border:1px solid var(--line2,rgba(180,150,90,.2));border-radius:12px;background:transparent;color:inherit;font-size:25px;flex:none}
+.dqw-target{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;padding:11px 0}
+.dqw-target button{min-width:0;min-height:44px;padding:8px 3px;border:1px solid var(--line2,rgba(180,150,90,.2));background:transparent;color:inherit;border-radius:11px;font-size:clamp(10px,2.6vw,12px);font-weight:700;overflow-wrap:anywhere}
+.dqw-target button[aria-pressed="true"]{border-color:var(--gold2,#c0a16d);background:color-mix(in srgb,var(--gold2,#c0a16d) 17%,transparent);color:var(--text,var(--cream,#fff))}
+.dqw-scale-head{display:flex;align-items:baseline;justify-content:space-between;gap:9px;font-size:12px;margin-top:5px}
+.dqw-scale-head label{font-weight:720}
+.dqw-scale-head output{color:var(--gold2,#c0a16d);font-size:12px;font-weight:850;font-variant-numeric:tabular-nums;white-space:nowrap}
+.dqw-range-row{display:flex;align-items:center;gap:11px;min-height:56px}
+.dqw-range-row span{font-weight:800;font-size:13px;white-space:nowrap}
+.dqw-range-row input[type="range"]{
+  appearance:none;-webkit-appearance:none;flex:1;min-width:0;height:6px;border-radius:999px;
+  background:linear-gradient(to right,var(--gold2,#c0a16d) 0%,var(--gold2,#c0a16d) var(--dqw-fill,50%),var(--line2,#63665d) var(--dqw-fill,50%),var(--line2,#63665d) 100%);
+  border:0;padding:0;cursor:pointer;accent-color:var(--gold2,#c0a16d)
+}
+.dqw-range-row input::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--gold2,#c0a16d);border:3px solid var(--card,var(--bg,#131713));box-shadow:0 0 0 1px var(--gold2,#c0a16d)}
+.dqw-range-row input::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--gold2,#c0a16d);border:2px solid var(--card,var(--bg,#131713))}
+.dqw-checks{display:grid;gap:4px;padding:6px 0 12px;border-bottom:1px solid var(--line2,rgba(180,150,90,.2))}
+.dqw-checks label{display:flex;align-items:center;gap:10px;font-size:12px;min-height:36px}
+.dqw-checks input{width:18px;height:18px;accent-color:var(--gold2,#c0a16d);margin:0;flex:none}
+.dqw-links{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:13px 0}
+.dqw-links button{min-height:46px;border-radius:12px;border:1px solid var(--line2,rgba(180,150,90,.2));padding:8px 7px;background:transparent;color:inherit;font-size:11px;font-weight:760;line-height:1.3}
+.dqw-links button:first-child{background:color-mix(in srgb,var(--gold2,#c0a16d) 12%,transparent)}
+.dqw-footer{display:flex;gap:8px;justify-content:flex-end}
+.dqw-footer button{min-height:38px;min-width:80px;padding:5px 13px;border:1px solid var(--line2,rgba(180,150,90,.2));border-radius:10px;background:transparent;color:inherit;font-size:12px}
+.dqw-footer button:last-child{background:color-mix(in srgb,var(--gold2,#c0a16d) 22%,transparent)}
+@media(max-width:390px){
+ body.is-quran-reader-route #qrcActions{gap:3px!important}
+ body.is-quran-reader-route #qrcActions .dqw-trigger{width:36px!important;min-width:36px!important;height:38px!important}
+ .dqw-panel{right:8px;width:calc(100vw - 16px);padding:11px 12px;border-radius:16px}
+ .dqw-links{gap:5px}
+}
+@media(min-width:850px){
+ .dqw-panel{right:max(20px,calc((100vw - 1160px)/2));width:min(390px,34vw)}
+}
+@media(prefers-reduced-motion:reduce){
+ .dqw-panel,.dqw-panel *{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+
+
+/* Dashboard shortcut: reuse the same W Studio, never a second settings engine. */
+body.is-quran-overview #qovHeader .qov-icon-actions .dqw-trigger{
+  width:42px!important;min-width:42px!important;height:42px!important;
+  border:1px solid color-mix(in srgb,var(--gold2,#c0a16d) 55%,var(--line2,transparent))!important;
+  border-radius:13px!important;
+  background:color-mix(in srgb,var(--gold2,#c0a16d) 15%,var(--card,var(--bg)))!important;
+  color:var(--gold2,#c0a16d)!important;
+  font:800 19px/1 system-ui,-apple-system,sans-serif!important;
+  box-shadow:none!important;touch-action:manipulation;flex:none;
+}
+body.is-quran-overview #qovHeader .qov-icon-actions .dqw-trigger[aria-expanded="true"]{
+  background:color-mix(in srgb,var(--gold2,#c0a16d) 25%,var(--card,var(--bg)))!important;
+}
+@media(max-width:390px){
+  body.is-quran-overview #qovHeader .qov-icon-actions .dqw-trigger{width:38px!important;min-width:38px!important;height:38px!important}
+}
