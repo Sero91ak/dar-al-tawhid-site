@@ -29,7 +29,7 @@ var links=[
  ["prayer","prayer.png","Gebetszeiten","Kalender"]
 ];
 function esc(x){return String(x==null?"":x).replace(/[&<>"']/g,function(z){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[z]})}
-function route(dest,val){if(dest==="quellen"){location.assign("/quellen/");return}if(dest==="library")dest="bibliothek"; // Open the real app library, not only the home-page tile grid.
+function route(dest,val){if(dest==="wasiyyah"){location.assign("/test/wasiyyah/");return}if(dest==="quellen"){location.assign("/quellen/");return}if(dest==="library")dest="bibliothek"; // Open the real app library, not only the home-page tile grid.
  try{if(typeof window.navigate==="function"){window.navigate(dest,val||"");return}}catch(e){}
  try{if(typeof navigate==="function"){navigate(dest,val||"");return}}catch(e){}
  location.hash="#"+dest+(val?"/"+encodeURIComponent(val):"");
