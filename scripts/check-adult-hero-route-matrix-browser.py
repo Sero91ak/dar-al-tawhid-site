@@ -101,29 +101,8 @@ def main():
       document.documentElement.classList.add("dar-ios-native-app");
       document.body.className="dar-ios-native-app is-area-route has-bottom-nav is-"+arguments[0]+"-route";
       document.getElementById("appView").innerHTML=arguments[1];
-      // The real adult header controller measures its physical bottom and
-      // updates the exact in-flow spacer and sticky clearance. The fixture
-      // must emulate that measurement instead of its stale 126px seed.
-      const head=document.getElementById(arguments[2]);
-      // The fixture hardcodes a 126px header while the Test .dtbh-row
-      // protrudes below that box. The real runtime allows the fixed brand
-      // to grow to its actual content; emulate that, not an overlapping box.
-      head.style.setProperty("height","126px","important");
-      head.style.setProperty("min-height","126px","important");
-      const headBox=head.getBoundingClientRect();
-      const brandRow=head.querySelector(".dtbh-row");
-      const actualBottom=Math.max(headBox.bottom,brandRow?brandRow.getBoundingClientRect().bottom:headBox.bottom);
-      const physicalHeight=Math.ceil(actualBottom-headBox.top)+"px";
-      head.style.setProperty("height",physicalHeight,"important");
-      head.style.setProperty("min-height",physicalHeight,"important");
-      const px=Math.ceil(head.getBoundingClientRect().bottom)+"px";
-      const test=arguments[2]==="darTestBrandHeaderV1";
-      document.documentElement.style.setProperty(test?"--dar-test-occlusion-top":"--dar-adult-header-obscured-top",px);
-      document.documentElement.style.setProperty(test?"--dar-test-brand-header-height":"--dar-adult-brand-header-height",px);
-      const spacer=document.getElementById(arguments[3]);
-      if(spacer){spacer.style.setProperty("height",px,"important");spacer.style.setProperty("flex-basis",px,"important");}
       window.scrollTo(0,0);
-     """,route.replace("-detail","") if route in ("hadith-detail","dua-detail") else route,html,header,"darTestBrandHeaderSpacerV1" if lane=="test" else "darAdultBrandHeaderSpacerV2")
+     """,route.replace("-detail","") if route in ("hadith-detail","dua-detail") else route,html)
      metrics=driver.execute_script("""
       const hero=document.querySelector(arguments[0]);
       const head=document.getElementById(arguments[1]).getBoundingClientRect();
@@ -134,8 +113,7 @@ def main():
       return {headBottom:head.bottom,heroTop:rect.top,heroHeight:rect.height,
         bodyPad,position:computed.position,top:computed.top,
         buttonCenter:btn.top+btn.height/2,
-        hit:(()=>{const el=document.elementFromPoint(btn.left+btn.width/2,btn.top+btn.height/2);return !!el&&(el.id==="heroTap"||!!el.closest("#heroTap"));})(),
-        hitStack:document.elementsFromPoint(btn.left+btn.width/2,btn.top+btn.height/2).slice(0,7).map(el=>({tag:el.tagName,id:el.id,cls:String(el.className).slice(0,76),z:getComputedStyle(el).zIndex,pointer:getComputedStyle(el).pointerEvents}))};
+        hit:(()=>{const el=document.elementFromPoint(btn.left+btn.width/2,btn.top+btn.height/2);return !!el&&(el.id==="heroTap"||!!el.closest("#heroTap"));})()};
      """,selector,header)
      if abs(metrics["heroTop"]-metrics["headBottom"])>2:
       raise AssertionError(f"{lane} {screen} {route}: blank gap or overlap {metrics}")
