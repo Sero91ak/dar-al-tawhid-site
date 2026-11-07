@@ -390,7 +390,8 @@ html.dar-test-premium-header-v2 body.is-settings-route #appView.view > .view-hea
 html.dar-test-premium-header-v2 body.is-topics-route #appView .topics-hub > .view-head,
 html.dar-test-premium-header-v2 body.is-topic-route #appView .topic-collection-page > .view-head,
 html.dar-test-premium-header-v2 body.is-quiz-route #appView > .view-head,
-html.dar-test-premium-header-v2 body.is-more-route #appView > .view-head{
+html.dar-test-premium-header-v2 body.is-more-route #appView > .view-head,
+html.dar-test-premium-header-v2 body.has-bottom-nav #appView.view > :is(.view-head,.cal-tl-head){
   margin-block-start:0!important;
 }
 
