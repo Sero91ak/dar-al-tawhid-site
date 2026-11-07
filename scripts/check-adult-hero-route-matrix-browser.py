@@ -101,8 +101,18 @@ def main():
       document.documentElement.classList.add("dar-ios-native-app");
       document.body.className="dar-ios-native-app is-area-route has-bottom-nav is-"+arguments[0]+"-route";
       document.getElementById("appView").innerHTML=arguments[1];
+      // The real adult header controller measures its physical bottom and
+      // updates the exact in-flow spacer and sticky clearance. The fixture
+      // must emulate that measurement instead of its stale 126px seed.
+      const head=document.getElementById(arguments[2]);
+      const px=Math.ceil(head.getBoundingClientRect().bottom)+"px";
+      const test=arguments[2]==="darTestBrandHeaderV1";
+      document.documentElement.style.setProperty(test?"--dar-test-occlusion-top":"--dar-adult-header-obscured-top",px);
+      document.documentElement.style.setProperty(test?"--dar-test-brand-header-height":"--dar-adult-brand-header-height",px);
+      const spacer=document.getElementById(arguments[3]);
+      if(spacer){spacer.style.setProperty("height",px,"important");spacer.style.setProperty("flex-basis",px,"important");}
       window.scrollTo(0,0);
-     """,route.replace("-detail","") if route in ("hadith-detail","dua-detail") else route,html)
+     """,route.replace("-detail","") if route in ("hadith-detail","dua-detail") else route,html,header,"darTestBrandHeaderSpacerV1" if lane=="test" else "darAdultBrandHeaderSpacerV2")
      metrics=driver.execute_script("""
       const hero=document.querySelector(arguments[0]);
       const head=document.getElementById(arguments[1]).getBoundingClientRect();
