@@ -115,6 +115,17 @@ def main():
       return {headBottom:head.bottom,heroTop:rect.top,heroHeight:rect.height,
         bodyPad,position:computed.position,top:computed.top,
         buttonCenter:btn.top+btn.height/2,
+        diagnostic:{
+          headerTop:head.top,headerHeight:head.height,
+          appTop:document.querySelector(".app").getBoundingClientRect().top,
+          appPadding:getComputedStyle(document.querySelector(".app")).paddingTop,
+          viewTop:document.getElementById("appView").getBoundingClientRect().top,
+          viewPadding:getComputedStyle(document.getElementById("appView")).paddingTop,
+          shellTop:(hero.parentElement&&hero.parentElement.getBoundingClientRect().top),
+          shellMargin:(hero.parentElement&&getComputedStyle(hero.parentElement).marginTop),
+          heroMargin:computed.marginTop,
+          hitTag:(()=>{const hit=document.elementFromPoint(btn.left+btn.width/2,btn.top+btn.height/2);return hit?hit.tagName+"#"+hit.id+"."+hit.className:"none"})()
+        },
         hit:(()=>{const el=document.elementFromPoint(btn.left+btn.width/2,btn.top+btn.height/2);return !!el&&(el.id==="heroTap"||!!el.closest("#heroTap"));})()};
      """,selector,header)
      if abs(metrics["heroTop"]-metrics["headBottom"])>2:
