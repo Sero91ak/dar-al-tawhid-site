@@ -425,6 +425,12 @@ html body #darAdultBrandHeaderV2 .dtbh-toggle{
 }
 
 
+/* One measured clearance for all opt-in and legacy visitor sticky owners.
+ * In Test and public web this token is absent and their own layouts apply. */
+html.dar-adult-global-brand-ready{
+  --dar-visitor-sticky-clearance:var(--dar-adult-header-obscured-top,var(--dar-adult-brand-header-height,0px));
+}
+
 /* DAR_FIXED_HEADER_OCCLUSION_V1
    The fixed adult rail has one measured spacer. Do not add a second body
    padding or alter touch targets. Scroll anchors/sticky page controls must
