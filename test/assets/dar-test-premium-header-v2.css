@@ -395,15 +395,7 @@ html.dar-test-premium-header-v2 body.is-more-route #appView > .view-head{
 }
 
 
-/* FRAUEN_DIRECT_STICKY_FALLBACK_V6
-   During first paint the Frauen DOM adapter may not yet have wrapped the
-   existing sticky photograph/search in .dar-immersive-hero-stage.
-   Keep only that pre-wrapper hero below the measured fixed header.
-   Once wrapped, the existing stage remains its sole sticky authority.
-   Preserve every original image size, source and crop. */
-html.dar-test-premium-header-v2 body.is-frauen-route #appView :is(.frauen-library-shell,.frauen-library-list):not(:has(> .dar-immersive-hero-stage)) > .frauen-library-hero{
- top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px))!important;
-}
+/* Removed obsolete pre-wrapper Frauen offset: the original sticky stage owns the header seam. */
 
 /* DAR_NATIVE_BRAND_SPACER_SINGLE_OWNER_V2_20261031
  * Native extra top padding duplicates the already mounted TEST brand spacer.
