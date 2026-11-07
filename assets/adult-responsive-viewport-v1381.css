@@ -1054,10 +1054,9 @@ html[data-theme] body.is-home-route #appView .home-v380-shell :is(
  * The shared V1402 Test/visitor contract above stays byte-identical.
  * All route content, hero artwork, nav/search actions and source links stay.
  */
-html[data-theme].dar-adult-global-brand-ready
- body:is(.is-topics-route,.is-topic-route,.is-post-route)
- #appView.view > :is(.topics-hub,.topic-collection-page,.post-reader)
- > :is(.view-head,.post-reader-title){
+html[data-theme].dar-adult-global-brand-ready body.has-bottom-nav.is-topics-route #appView.view > .topics-hub.topics-hub > .view-head,
+html[data-theme].dar-adult-global-brand-ready body.has-bottom-nav.is-topic-route #appView.view > .topic-collection-page.topic-collection-page > .view-head,
+html[data-theme].dar-adult-global-brand-ready body.has-bottom-nav.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title{
   position:relative!important;
   top:auto!important;
   inset-block-start:auto!important;
@@ -1067,14 +1066,14 @@ html[data-theme].dar-adult-global-brand-ready
   max-height:none!important;
   overflow:visible!important;
 }
-html[data-theme].dar-adult-global-brand-ready body.is-post-route
+html[data-theme].dar-adult-global-brand-ready body.has-bottom-nav.is-post-route
  #appView.view > .post-reader.post-reader > .post-reader-title{
   /* Global brand already owns the status bar and measured in-flow spacer. */
-  padding-block-start:clamp(17px,2.5svh,28px)!important;
-  padding-block-end:clamp(19px,3svh,33px)!important;
+  padding-top:clamp(17px,2.5svh,28px)!important;
+  padding-bottom:clamp(19px,3svh,33px)!important;
   min-height:clamp(160px,22svh,270px)!important;
 }
-html[data-theme].dar-adult-global-brand-ready body.is-post-route
+html[data-theme].dar-adult-global-brand-ready body.has-bottom-nav.is-post-route
  #appView.view > .post-reader.post-reader > .post-reader-title :is(h1,h2,h3){
   max-height:none!important;
   overflow:visible!important;
