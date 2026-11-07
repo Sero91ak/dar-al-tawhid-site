@@ -34,14 +34,16 @@ def fixture(test):
   "/test/assets/more-v1253.css",
   "/test/assets/adult-immersive-hero-v1.css",
   "/test/assets/dar-settings-navigation-v1.css",
-  "/test/assets/dar-test-premium-header-v2.css"
+  "/test/assets/dar-test-premium-header-v2.css",
+  "/assets/frauen/frauen-original-v1224-header-seam-v1405.css"
  ] if test else [
   "/assets/full-edge-appearance-polish.css",
   "/assets/adult-responsive-viewport-v1381.css",
   "/assets/adult-immersive-hero-v1.css",
   "/assets/dar-hero-scroll-standard-v1.css",
   "/assets/dar-settings-navigation-v1.css",
-  "/assets/dar-adult-brand-header-v2.css"
+  "/assets/dar-adult-brand-header-v2.css",
+  "/assets/frauen/frauen-original-v1224-header-seam-v1405.css"
  ])
  links="".join('<link rel="stylesheet" href="'+p+'">' for p in sheets)
  return (
@@ -113,6 +115,17 @@ def main():
       return {headBottom:head.bottom,heroTop:rect.top,heroHeight:rect.height,
         bodyPad,position:computed.position,top:computed.top,
         buttonCenter:btn.top+btn.height/2,
+        diagnostic:{
+          headerTop:head.top,headerHeight:head.height,
+          appTop:document.querySelector(".app").getBoundingClientRect().top,
+          appPadding:getComputedStyle(document.querySelector(".app")).paddingTop,
+          viewTop:document.getElementById("appView").getBoundingClientRect().top,
+          viewPadding:getComputedStyle(document.getElementById("appView")).paddingTop,
+          shellTop:(hero.parentElement&&hero.parentElement.getBoundingClientRect().top),
+          shellMargin:(hero.parentElement&&getComputedStyle(hero.parentElement).marginTop),
+          heroMargin:computed.marginTop,
+          hitTag:(()=>{const hit=document.elementFromPoint(btn.left+btn.width/2,btn.top+btn.height/2);return hit?hit.tagName+"#"+hit.id+"."+hit.className:"none"})()
+        },
         hit:(()=>{const el=document.elementFromPoint(btn.left+btn.width/2,btn.top+btn.height/2);return !!el&&(el.id==="heroTap"||!!el.closest("#heroTap"));})()};
      """,selector,header)
      if abs(metrics["heroTop"]-metrics["headBottom"])>2:
