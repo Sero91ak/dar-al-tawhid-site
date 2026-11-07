@@ -79,6 +79,37 @@ async function nativeTouchProbe(page,route){
   const scrolled=await page.evaluate(snapshot);
   if((pulled.docScroll||0)>2)errors.push("top_pull_exposes_blank_space");
   if((scrolled.docScroll||0)<50)errors.push("native_finger_swipe_does_not_scroll");
+  // In a single-use diagnostic context, isolate whether the iOS native root,
+  // a false "keyboard open" flag or touch-action CSS prevents vertical pan.
+  const touchExperiments=[];
+  if(route.key==="visitor"&&(scrolled.docScroll||0)<50){
+    for(const mode of ["pan-y","keyboard-off","native-class-off"]){
+      await page.evaluate(mode=>{
+        if(mode==="pan-y"){
+          for(const el of [document.documentElement,document.body,document.querySelector(".app"),document.getElementById("appView")]){
+            if(el)el.style.setProperty("touch-action","pan-y","important");
+          }
+        }else if(mode==="keyboard-off"){
+          document.documentElement.classList.remove("adaptive-keyboard-open");
+        }else if(mode==="native-class-off"){
+          document.documentElement.classList.remove("dar-ios-native-app");
+        }
+      },mode);
+      await fingerSwipe(page,205,669,342);
+      touchExperiments.push({mode,scroll:await page.evaluate(()=>window.scrollY),
+        focus:await page.evaluate(()=>document.activeElement?.tagName),
+        htmlClass:await page.evaluate(()=>document.documentElement.className)});
+      await page.evaluate(mode=>{
+        window.scrollTo(0,0);
+        if(mode==="pan-y"){
+          for(const el of [document.documentElement,document.body,document.querySelector(".app"),document.getElementById("appView")]){
+            if(el)el.style.removeProperty("touch-action");
+          }
+        }else if(mode==="keyboard-off")document.documentElement.classList.add("adaptive-keyboard-open");
+        else if(mode==="native-class-off")document.documentElement.classList.add("dar-ios-native-app");
+      },mode);
+    }
+  }
   const preventLog=await page.evaluate(()=>({
     stoppedBy:window.__darTouchAuditCalls||[],
     repaints:window.__darTouchAuditRepaints||[],
@@ -150,8 +181,8 @@ async function nativeTouchProbe(page,route){
     card.afterHash=await page.evaluate(()=>location.hash);
     if(card.afterHash===beforeHash)errors.push("card_touch_did_not_navigate");
   }
-  console.log("FRAUEN_NATIVE_TOUCH_PROBE",JSON.stringify({route:route.key,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors}));
-  return {preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors};
+  console.log("FRAUEN_NATIVE_TOUCH_PROBE",JSON.stringify({route:route.key,touchExperiments,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors}));
+  return {touchExperiments,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors};
 }
 function snapshot(){
   const hero=document.querySelector(".frauen-library-pinned-header .frauen-library-hero");
