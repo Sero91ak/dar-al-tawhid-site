@@ -169,8 +169,8 @@ def main():
   server.shutdown()
   for p in FILES:p.unlink(missing_ok=True)
 if __name__=="__main__":
- main()
- # The same read-only Chromium job must also verify the compact native/PWA
- # status-bar and sticky-Header regression captured on 2026-11-07.
+ # Verify the compact native/PWA header first, even when an older Test-lane
+ # Hero fixture fails later; neither result is suppressed or marked green.
  import subprocess
  subprocess.run(["python3","scripts/check-visitor-header-compact-browser.py"],check=True)
+ main()
