@@ -42,6 +42,7 @@ def html(test=False):
  <link rel="stylesheet" href="{authority}">
  <link rel="stylesheet" href="{hero}">
  <link rel="stylesheet" href="{brand}">
+ <link rel="stylesheet" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css">
  </head>
  <body class="dar-ios-native-app has-bottom-nav is-area-route is-frauen-route" data-frauen-view="hub">
  <header id="{hid}"><div class="dtbh-row"><span>DĀR AL TAWḤĪD</span></div></header>

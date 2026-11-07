@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" class="dar-adult-editorial-v1">
 <head><script id="darInstalledPwaRouteGuardV1">
 (function(){
  try{
@@ -100,12 +100,12 @@ button,input,select{font:inherit}
 .page-intro{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:38px;align-items:end;padding:15px 0 23px;border-bottom:1px solid var(--line)}
 .eyebrow{font-size:8px;letter-spacing:.19em;text-transform:uppercase;color:var(--gold);font-weight:850}
 .page-intro h1{margin:8px 0 8px;font:500 clamp(34px,4vw,58px)/1.01 var(--serif);letter-spacing:-.025em}
-.page-intro p{margin:0;color:var(--ink2);max-width:830px;font-size:12.5px;line-height:1.72}
+.page-intro p{margin:0;color:var(--ink2);max-width:830px;font-size:clamp(13.5px,.85rem + .18vw,15.5px);line-height:1.68}
 .intro-aside{text-align:right;color:#837a6e;font-size:9px;line-height:1.65;letter-spacing:.08em;text-transform:uppercase}
 .ornament-line{height:18px;position:relative;margin:0 0 8px}
 .ornament-line:before{content:"";position:absolute;left:0;right:0;top:8px;height:1px;background:linear-gradient(90deg,transparent 0,var(--line) 11%,var(--gold) 48%,var(--line) 89%,transparent 100%)}
 .ornament-line:after{content:"◇";position:absolute;left:50%;top:0;transform:translateX(-50%);padding:0 10px;background:var(--page);font-size:10px;color:var(--gold)}
-.section{padding:28px 0;border-bottom:1px solid var(--line2)}
+.section{padding:var(--dar-ed-flow-md,24px) 0;border-bottom:1px solid var(--dar-ed-hairline,var(--line2))}
 .section.parchment{margin-left:-26px;margin-right:-26px;padding:30px 26px;background:
  radial-gradient(800px 260px at 12% 0%,rgba(255,255,255,.46),transparent 62%),
  linear-gradient(180deg,rgba(245,237,223,.75),rgba(239,228,207,.57));border-top:1px solid var(--line2);border-bottom:1px solid var(--line)}
@@ -145,7 +145,9 @@ button,input,select{font:inherit}
 .search-input{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;padding:15px 0;font:500 21px var(--serif);outline:none;color:var(--ink)}.search-input::placeholder{color:#aaa194}
 .quiz-option{display:block;width:100%;text-align:left;padding:14px 0;border:0;border-top:1px solid var(--line2);background:transparent;cursor:pointer;color:var(--ink)}.quiz-option:last-child{border-bottom:1px solid var(--line)}.quiz-option:hover{padding-left:7px}.quiz-feedback{margin-top:15px;font:500 17px/1.4 var(--serif)}
 .site-footer{margin-top:38px;border-top:1px solid var(--line);padding:25px 0 5px;display:flex;justify-content:space-between;gap:24px;color:#847b6f;font-size:8px;letter-spacing:.09em;text-transform:uppercase}
-.reveal{opacity:0;transform:translateY(14px);transition:opacity .65s ease,transform .65s ease}.reveal.is-visible{opacity:1;transform:none}
+.reveal{opacity:1;transform:none;transition:none}
+.reveal.is-visible{animation:dar-ed-desktop-enter 280ms var(--dar-ed-ease,ease) both}
+@keyframes dar-ed-desktop-enter{from{opacity:.92;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 @media(max-width:1120px){
  .header-inner,.isnad-inner,.player-wrap,.page{width:min(var(--max),calc(100% - 30px))}
@@ -185,8 +187,8 @@ button,input,select{font:inherit}
 .player-step{width:44px;height:68px}
 .page{width:min(1380px,calc(100% - 46px));padding-top:26px}
 .page-intro{padding:12px 0 19px}
-.page-intro p{font-size:13px;color:#514a41;line-height:1.66}
-.section{padding:23px 0}
+.page-intro p{font-size:clamp(13.5px,.85rem + .18vw,15.5px);color:#514a41;line-height:1.68}
+.section{padding:var(--dar-ed-flow-md,23px) 0}
 .section.parchment{padding-top:25px;padding-bottom:25px}
 .rule-card{padding:14px 0}.rule-card h3{font-size:20px}.rule-card p{font-size:11.5px;color:#615a51}
 .list-row{padding-top:12px;padding-bottom:12px}
@@ -650,7 +652,7 @@ button,input,select{font:inherit}
 .women-item p{margin:0;color:#70685d;font-size:10px;line-height:1.55}
 .women-entry{padding:19px 0;border-top:1px solid var(--line2)}
 .women-entry h3{margin:5px 0 8px;font:500 21px/1.2 var(--serif)}
-.women-entry p{font-size:11.5px;line-height:1.68;color:#5f584e}
+.women-entry p{font-size:clamp(13px,.82rem + .17vw,15px);line-height:1.65;color:#5f584e}
 .quiz-shell{max-width:900px}
 .quiz-top{display:flex;justify-content:space-between;gap:20px;align-items:end;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:18px}
 .quiz-question{font:500 27px/1.28 var(--serif);margin:0 0 18px}
@@ -2283,6 +2285,7 @@ button,input,select{font:inherit}
 <!-- PUBLIC WEBSITE ONLY: no App-/PWA-Ladeschirm. Die installierbare App nutzt /pwa/ mit eigener Shell. -->
 <link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=282">
 <link rel="stylesheet" href="/assets/app-card-layout.css?v=1297">
+<link rel="stylesheet" id="darDesktopEditorialTokensV1" href="/assets/dar-adult-editorial-system-v1.css?v=20261107-editorial-preview-v1">
 <link rel="stylesheet" href="/desktop-preview/zakat-desktop.css?v=desktop-20261009-4">
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=1292-live">
 <link rel="stylesheet" href="/test/assets/frauen/frauen-authority-v1292.css?v=frauen-authority-v1292">
