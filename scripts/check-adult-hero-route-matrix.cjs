@@ -25,9 +25,9 @@ for(const [name,cssPath,loaderPath,asset] of lanes){
   const start=css.indexOf("GLOBAL_HERO_ROUTE_TOP_SEAM_V3");
   const end=css.indexOf("RELATIVE_HERO_STAYS_IN_FLOW_V4",start);
   const seam=css.slice(start,end>start?end:undefined);
-  assert.match(seam,/> \\.app\\s*\\{\\s*margin-block-start:0!important;\\s*padding-block-start:0!important;/);
-  assert.match(seam,/#appView\\.view\\s*\\{\\s*padding-block-start:0!important;\\s*margin-block-start:0!important;/);
-  assert.doesNotMatch(seam,/(?:margin|padding)-block-start:\\s*-[1-9]/,
+  assert.match(seam,/> \.app\s*\{\s*margin-block-start:0!important;\s*padding-block-start:0!important;/);
+  assert.match(seam,/#appView\.view\s*\{\s*padding-block-start:0!important;\s*margin-block-start:0!important;/);
+  assert.doesNotMatch(seam,/(?:margin|padding)-block-start:\s*-[1-9]/,
      "Test V3 must never use negative app/hero offsets");
  }else{
   assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/,name+" unexpected global Hero override");
