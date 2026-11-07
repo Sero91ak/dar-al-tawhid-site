@@ -155,6 +155,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "frauen-5-nine-languages-global-live-20261107",
+      "at": "2026-11-07T19:10:00+01:00",
+      "approvedBy": "user-explicit-20261107-five-at-a-time-publish-global-live-not-test-app",
+      "reason": "Exact first five existing women's knowledge contributions: add nine full app-language reader packs and expose only these five source-checked canonical IDs in the production women catalog. No new Q numbers, no new ID, no test app, no Kids, no routing/renderer/hero/CSS edits, no OneSignal send or push-system modifications.",
+      "paths": [
+        "assets/frauen/frauen-entry-locales-v1.json",
+        "data/frauen-muetter-der-glaeubigen.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-09T23:59:00.000Z"
+    },
+    {
       "id": "visitor-compact-header-three-readonly-browser-tests-20261107",
       "at": "2026-11-07T16:04:00Z",
       "approvedBy": "user-explicit-20261107-compact-visitor-header-portrait-landscape-global-release",
