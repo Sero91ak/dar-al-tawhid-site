@@ -161,6 +161,7 @@
       "reason": "Narrow repair for the reported missing ORIGINAL adult Frauen hero photograph and its attached search under the fixed visitor header. Keep all frozen women renderers, approved images, source records, languages, navigation and push system untouched. Only harden the pre-existing runtime for delayed header mounting, and cache-bust its exact script include for visitor, Test and desktop; PR must pass checks before production release.",
       "paths": [
         "assets/frauen/frauen-hero-seam-runtime-v1407.js",
+        "scripts/verify-frauen-hero-contract.cjs",
         "cloudflare/site-router.js",
         "cloudflare/test-app-worker.js",
         "desktop-preview/index.html",
