@@ -32,10 +32,13 @@ assert.match(original,/\.dar-immersive-hero-stage > :is\(\.frauen-library-search
 const nativeResponsive=read("assets/adult-responsive-viewport-v1381.css");
 assert.match(nativeResponsive,/DAR_VISITOR_IOS_HERO_EDGE_SEARCH_V1404/,"Preserve original native photo-safe-area contract");
 assert.match(visitorJs,/darAdultBrandHeaderSpacerV2/);
+assert.match(visitor,/ADULT_INDEX_SINGLE_INFLOW_SAFE_SPACER_V1/,"Visitor index must use exactly one measured brand spacer");
+assert.match(visitor,/:has\(> \.app > #darAdultBrandHeaderSpacerV2\)/,"Index correction must require mounted spacer");
+assert.match(visitor,/\.dar-ios-native-app\.dar-adult-global-brand-ready/,"Only the index iOS visitor shell is adjusted");
 assert.match(visitor,/#darAdultBrandHeaderSpacerV2\{[^}]*height:var\(--dar-adult-brand-header-height/);
 assert.match(ios,/root\.classList\.add\("dar-ios-native-app"\)/);
 assert.match(ios,/body\.classList\.add\("dar-ios-native-app"\)/);
-assert.match(router,/dar-adult-brand-header-v2\.css\?v=20261030-restore-original-hero-rail-v5/);
+assert.match(router,/dar-adult-brand-header-v2\.css\?v=20261107-index-single-spacer-v1/);
 assert.match(worker,/dar-test-premium-header-v2\.css\?v=20261030-restore-original-hero-rail-v5/);
 assert.match(edge,/DAR_ADULT_TOP_SCROLL_BOUNDARY_V4/);
 assert.match(edge,/event\.preventDefault\(\)/);
