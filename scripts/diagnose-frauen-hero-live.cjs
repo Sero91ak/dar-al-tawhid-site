@@ -57,10 +57,10 @@ async function nativeTouchProbe(page,route){
     });
     const original=Event.prototype.preventDefault;
     Event.prototype.preventDefault=function(){
-      if(this.type==="touchmove"&&window.__darTouchAuditCalls.length<18){
+      if(/^(touchstart|touchmove|touchend|pointerdown|pointermove|pointerup|click|mousedown)$/.test(this.type)&&window.__darTouchAuditCalls.length<40){
         const t=this.target;
         window.__darTouchAuditCalls.push({
-          scroll:window.scrollY,cancelable:this.cancelable,
+          scroll:window.scrollY,type:this.type,cancelable:this.cancelable,
           target:t&&String(t.className).slice(0,80),
           stack:String(new Error().stack||"").slice(0,900)
         });
@@ -84,6 +84,12 @@ async function nativeTouchProbe(page,route){
   // a false "keyboard open" flag or touch-action CSS prevents vertical pan.
   const touchExperiments=[];
   if(route.key==="visitor"&&(scrolled.docScroll||0)<50){
+    await fingerSwipe(page,18,620,310);
+    touchExperiments.push({mode:"left-gutter-touch",scroll:await page.evaluate(()=>window.scrollY)});
+    await page.evaluate(()=>window.scrollTo(0,0));
+    await fingerSwipe(page,190,423,198);
+    touchExperiments.push({mode:"section-heading-touch",scroll:await page.evaluate(()=>window.scrollY)});
+    await page.evaluate(()=>window.scrollTo(0,0));
     for(const mode of ["pan-y","keyboard-off","native-class-off"]){
       await page.evaluate(mode=>{
         if(mode==="pan-y"){
