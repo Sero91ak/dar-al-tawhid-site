@@ -22,7 +22,18 @@ assert.equal(edge,edgeTest,"No scroll stop drift between Test and visitor");
    overrides that detached the original Women Hero and search. */
 for(const [lane,css] of [["visitor",visitor],["Test",test]]){
  assert.doesNotMatch(css,/GLOBAL_ADULT_STICKY_CLEARANCE_V1/,lane+" broad sticky override restored");
- assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/,lane+" blanket layout reset restored");
+ if(lane==="Test"&&css.includes("GLOBAL_HERO_ROUTE_TOP_SEAM_V3")){
+  // Match the already-existing strict fixed-header guard: the Test seam
+  // may reset duplicate padding to ZERO, but must never shift the Hero.
+  const from=css.indexOf("GLOBAL_HERO_ROUTE_TOP_SEAM_V3");
+  const to=css.indexOf("RELATIVE_HERO_STAYS_IN_FLOW_V4",from);
+  const seam=css.slice(from,to>from?to:undefined);
+  assert.match(seam,/> \.app\s*\{\s*margin-block-start:0!important;\s*padding-block-start:0!important;/);
+  assert.match(seam,/#appView\.view\s*\{\s*padding-block-start:0!important;\s*margin-block-start:0!important;/);
+  assert.doesNotMatch(seam,/(?:margin|padding)-block-start:\s*-[1-9]/,"Test seam must not pull Hero under header");
+ }else{
+  assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/,lane+" blanket layout reset restored");
+ }
  assert.doesNotMatch(css,/NATIVE_HERO_TOP_SEAM_V2|TEST_NATIVE_HERO_TOP_SEAM_V2/,lane+" duplicate native patch restored");
  assert.equal([...css].reduce((n,c)=>n+(c==="{")-(c==="}"),0),0,lane+" CSS brace balance");
 }
