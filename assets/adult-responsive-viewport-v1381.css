@@ -1044,21 +1044,60 @@ html[data-theme] body.is-home-route #appView .home-v380-shell :is(
   }
 }
 
-/* DAR_VISITOR_FIXED_BRAND_STICKY_CLEARANCE_V1 · 2026-11-07
- * Keeps the shared V1402 Hero/Search geometry BYTE-IDENTICAL to DAR TEST.
- * Only the visitor Index brand has the measured top obstruction; don't
- * reparent/stick another controller or alter illustrations and dimensions.
- * A runtime update to --dar-adult-header-obscured-top propagates live. */
-html[data-theme].dar-adult-global-brand-ready body.is-topics-route #appView.view > .topics-hub.topics-hub > .view-head,
-html[data-theme].dar-adult-global-brand-ready body.is-topic-route #appView.view > .topic-collection-page.topic-collection-page > .view-head,
+/* DAR_VISITOR_FIXED_BRAND_STICKY_CLEARANCE_V2 · 2026-11-07
+ * The visitor Index has exactly one fixed global brand above its content.
+ * Articles, contribution topics and individual post reading covers are NOT
+ * second pinned headers. Their photographs remain full-width in document flow
+ * so the quotation, source and further reading cannot slide under a ~200px
+ * high fixed image. The search can remain sticky at the brand's bottom edge.
+ * Only Hadith/Dua retaining a true sticky section still need hero clearance.
+ * The shared V1402 Test/visitor contract above stays byte-identical.
+ * All route content, hero artwork, nav/search actions and source links stay.
+ */
+html[data-theme].dar-adult-global-brand-ready
+ body:is(.is-topics-route,.is-topic-route,.is-post-route)
+ #appView.view > :is(.topics-hub,.topic-collection-page,.post-reader)
+ > :is(.view-head,.post-reader-title){
+  position:relative!important;
+  top:auto!important;
+  inset-block-start:auto!important;
+  z-index:1!important;
+  align-self:stretch!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
+html[data-theme].dar-adult-global-brand-ready body.is-post-route
+ #appView.view > .post-reader.post-reader > .post-reader-title{
+  /* Global brand already owns the status bar and measured in-flow spacer. */
+  padding-block-start:clamp(17px,2.5svh,28px)!important;
+  padding-block-end:clamp(19px,3svh,33px)!important;
+  min-height:clamp(160px,22svh,270px)!important;
+}
+html[data-theme].dar-adult-global-brand-ready body.is-post-route
+ #appView.view > .post-reader.post-reader > .post-reader-title :is(h1,h2,h3){
+  max-height:none!important;
+  overflow:visible!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+  word-break:normal!important;
+  text-overflow:clip!important;
+  -webkit-line-clamp:unset!important;
+}
+html[data-theme].dar-adult-global-brand-ready body:is(.is-topics-route,.is-topic-route)
+ #appView :is(.topics-hub,.topic-collection-page)
+ > :is(.search-panel,.search-pro-panel,.main-search,#homeSearchBlock){
+  /* Preserve the attached search's natural place under the cover.
+     Once scrolled to the fixed brand, pin only the search—not the photo. */
+  top:var(--dar-visitor-sticky-clearance,0px)!important;
+}
 html[data-theme].dar-adult-global-brand-ready body.is-hadith-route #appView .hadith-hub > .view-head,
-html[data-theme].dar-adult-global-brand-ready body.is-dua-route #appView .dua-hub > .view-head,
-html[data-theme].dar-adult-global-brand-ready body.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title{
- top:var(--dar-visitor-sticky-clearance,0px)!important;
+html[data-theme].dar-adult-global-brand-ready body.is-dua-route #appView .dua-hub > .view-head{
+  top:var(--dar-visitor-sticky-clearance,0px)!important;
 }
 html[data-theme].dar-adult-global-brand-ready
- body:is(.is-topics-route,.is-topic-route,.is-hadith-route,.is-dua-route)
- #appView :is(.topics-hub,.topic-collection-page,.hadith-hub,.dua-hub)
+ body:is(.is-hadith-route,.is-dua-route)
+ #appView :is(.hadith-hub,.dua-hub)
  > :is(.search-panel,.search-pro-panel,.main-search,#homeSearchBlock){
- top:calc(var(--dar-visitor-sticky-clearance,0px) + var(--dar-immersive-hero-height,185px) - var(--dar-hero-join,12px))!important;
+  top:calc(var(--dar-visitor-sticky-clearance,0px) + var(--dar-immersive-hero-height,185px) - var(--dar-hero-join,12px))!important;
 }
