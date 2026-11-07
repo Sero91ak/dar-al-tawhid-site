@@ -58,3 +58,4 @@ console.log("DĀR TEST: Fold experiment disabled, normal tablet navigation retai
 
 // Run the new isolated V2 contract from the existing, protected CI entrypoint.
 require("./dar-fold-workspace-v2-guard.cjs");
+require("./dar-duo-edge-insets-guard.cjs");
