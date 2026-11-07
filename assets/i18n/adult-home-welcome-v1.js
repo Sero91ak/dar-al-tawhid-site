@@ -30,6 +30,27 @@ function mark(el,s,kind,l){if(!el||el.textContent.trim()===s)return;
   var b=d.createElement("strong");b.textContent=found;out.push(b);at=index+found.length;
  }
  el.replaceChildren.apply(el,out)}
+
+/* One semantic title, two visual levels. The original localised sentence
+ * stays intact as the accessible label (especially Turkish word order). */
+function splitTitle(el,title,l){
+ if(!el)return;
+ var brands=["DĀR AL TAWḤĪD","دار التوحيد","دار التوحید"];
+ var brand=brands.find(function(v){return title.indexOf(v)!==-1});
+ if(!brand){mark(el,title,"title",l);return}
+ var stamp=l+"|"+title;
+ if(el.getAttribute("data-dar-welcome-title")===stamp&&el.querySelector(".dar-welcome-brand"))return;
+ var intro=l==="tr"?"Hoş geldiniz":title.replace(brand,"").trim();
+ if(!intro){mark(el,title,"title",l);return}
+ var kicker=d.createElement("span"),name=d.createElement("strong");
+ kicker.className="dar-welcome-kicker";
+ name.className="dar-welcome-brand";
+ kicker.textContent=intro+" ";name.textContent=brand;
+ el.replaceChildren(kicker,name);
+ el.setAttribute("data-dar-welcome-title",stamp);
+ el.setAttribute("aria-label",title);
+}
+
 /* ONE_OWNER_HOME_WELCOME_LAYOUT_V2
  * Existing nine-language Home component: two-line Latin greeting and a
  * progressive short-to-long editorial paragraph. Never touch page routing.
@@ -88,54 +109,65 @@ function pyramidTokens(text,l){
 }
 function pyramidLines(el,text,l){
  if(!el)return;
- el.style.setProperty("max-width","100%","important");
+ // Fill actual content width (Fold/Stage Manager) but keep long desktop
+ // paragraphs comfortably readable: never a narrow phone column on iPad.
  el.style.setProperty("width","100%","important");
+ el.style.setProperty("max-width","min(100%, 980px)","important");
  var width=el.getBoundingClientRect().width,ctx=measureContext();
- if(!ctx||width<170)return;
+ if(!ctx||width<165){mark(el,text,"summary",l);return}
  var style=w.getComputedStyle(el),font=measureFont(el);
- var key=l+"|"+Math.round(width)+"|"+font+"|"+text.length;
+ var key=l+"|"+Math.round(width)+"|"+font+"|"+text;
  if(el.getAttribute("data-dar-welcome-pyramid")===key&&el.querySelector(".dar-welcome-pyramid-line"))return;
  var tokens=pyramidTokens(text,l),n=tokens.length;
- if(n<4)return;
- ctx.font=font;
- var limit=width*.965,metrics=[],space=ctx.measureText(" ").width;
- for(var i=0;i<n;i++)metrics.push(ctx.measureText(tokens[i]).width*1.045);
+ if(n<4){mark(el,text,"summary",l);return}
+ // Measure bold emphasis at its actual weight instead of treating it
+ // as normal text: visual lines must not overflow after highlighting.
+ var strongWords=["Āṯār der frühen Imāme","Duʿāʾ-Sammlung","Qurʾān","Sunnah"];
+ var metrics=[],space=0;
+ ctx.font=font;space=ctx.measureText(" ").width*1.04;
+ for(var i=0;i<n;i++){
+  var bold=l==="de"&&strongWords.some(function(v){return tokens[i].indexOf(v)===0});
+  ctx.font=measureFont(el,bold?"750":null);
+  metrics.push(ctx.measureText(tokens[i]).width*1.055);
+ }
  var prefix=[0];for(i=0;i<n;i++)prefix.push(prefix[i]+metrics[i]);
- function spanWidth(start,end){return prefix[end]-prefix[start]+space*1.045*Math.max(0,end-start-1)}
- var total=spanWidth(0,n);
- var first=Math.max(2,Math.ceil(total/limit)+1),last=Math.min(9,n);
+ function spanWidth(start,end){return prefix[end]-prefix[start]+space*Math.max(0,end-start-1)}
+ var limit=width*.94,total=spanWidth(0,n);
+ var fromCount=Math.max(2,Math.ceil(total/(limit*.84))),toCount=Math.min(9,n);
  var cuts=null;
- for(var count=first;count<=last&&!cuts;count++){
-  var misses=new Set(),iterations=0;
-  function walk(start,prev,remaining){
-   if(++iterations>16000)return null;
-   if(remaining===1){
-    var tail=spanWidth(start,n);
-    return tail<=limit&&tail>prev+1?[n]:null;
-   }
-   var id=start+"|"+Math.round(prev)+"|"+remaining;
-   if(misses.has(id))return null;
-   var candidates=[],availableTotal=spanWidth(start,n);
-   var ideal=availableTotal/remaining*.82;
-   for(var end=start+1;end<=n-remaining+1;end++){
+ // Minimise raggedness against a gently rising width target. A short
+ // first line such as "Eine geordnete" is never a desirable pyramid.
+ for(var count=fromCount;count<=toCount&&!cuts;count++){
+  var weights=Array.from({length:count},function(_,idx){return .56+.44*idx/Math.max(1,count-1)});
+  var weightSum=weights.reduce(function(a,b){return a+b},0);
+  var attempts=0,memo=new Map();
+  function solve(row,start,previous){
+   if(row===count)return start===n?{score:0,cuts:[]}:null;
+   if(++attempts>24000)return null;
+   var id=row+"|"+start+"|"+Math.round(previous*10);
+   if(memo.has(id))return memo.get(id);
+   var best=null,last=n-(count-row-1);
+   for(var end=start+1;end<=last;end++){
     var current=spanWidth(start,end);
     if(current>limit)break;
-    if(current<=prev+1)continue;
-    if(spanWidth(end,n)>limit*(remaining-1)+10*remaining)continue;
-    candidates.push({end:end,cost:Math.abs(current-ideal)});
+    if(row>0&&current<previous+Math.min(9,limit*.018))continue;
+    if(row===0&&count>2&&current<limit*.40)continue;
+    if(row===count-1&&end!==n)continue;
+    if(row<count-1&&spanWidth(end,n)>(count-row-1)*limit+space)continue;
+    var target=total*weights[row]/weightSum;
+    var score=Math.pow((current-target)/limit,2);
+    var tail=solve(row+1,end,current);
+    if(!tail)continue;
+    var candidate={score:score+tail.score,cuts:[end].concat(tail.cuts)};
+    if(!best||candidate.score<best.score)best=candidate;
    }
-   candidates.sort(function(a,b){return a.cost-b.cost});
-   for(var k=0;k<candidates.length;k++){
-    var at=candidates[k].end,found=walk(at,spanWidth(start,at),remaining-1);
-    if(found)return [at].concat(found);
-   }
-   misses.add(id);return null;
+   memo.set(id,best);return best;
   }
-  cuts=walk(0,0,count);
+  var result=solve(0,0,0);
+  if(result)cuts=result.cuts;
  }
  if(!cuts){
-  // On extreme text scaling, preserve readable, naturally wrapped full text.
-  el.replaceChildren();mark(el,text,"summary",l);
+  mark(el,text,"summary",l);
   el.removeAttribute("data-dar-welcome-pyramid");
   return;
  }
@@ -145,13 +177,25 @@ function pyramidLines(el,text,l){
   line.className="dar-welcome-pyramid-line";
   line.style.display="block";
   line.style.whiteSpace="nowrap";
-  // Keep the canonical textContent including the inter-line whitespace.
   var fragment=tokens.slice(begin,end).join(" ")+(i<cuts.length-1?" ":"");
   mark(line,fragment,"summary",l);
   frag.appendChild(line);begin=end;
  }
  el.replaceChildren(frag);
+ // Rendering, language switches and large-text zoom all retain the entire
+ // string. If a font replaces late and makes a line too wide, unwrap safely.
+ if(Array.from(el.children).some(function(line){return line.scrollWidth>width+2})){
+  mark(el,text,"summary",l);
+  el.removeAttribute("data-dar-welcome-pyramid");
+  return;
+ }
+ el.setAttribute("aria-label",text);
  el.setAttribute("data-dar-welcome-pyramid",key);
+}
+var resizeObserver=null,layoutQueued=false;
+function queueLayout(){
+ if(layoutQueued)return;layoutQueued=true;
+ w.requestAnimationFrame(function(){layoutQueued=false;layoutExistingWelcome()})
 }
 function layoutExistingWelcome(){
  var l=lang(),t=texts[l];
@@ -163,7 +207,15 @@ function layoutExistingWelcome(){
  ].forEach(function(a){
   var root=d.querySelector(a[0]);if(!root)return;
   splitSalam(root.querySelector(a[1]),t[0],l);
-  pyramidLines(root.querySelector(a[2]),t[2],l);
+  var summary=root.querySelector(a[2]);
+  pyramidLines(summary,t[2],l);
+  if(summary&&typeof w.ResizeObserver==="function"){
+   if(!resizeObserver)resizeObserver=new w.ResizeObserver(queueLayout);
+   if(!summary.hasAttribute("data-dar-welcome-observed")){
+    resizeObserver.observe(summary);
+    summary.setAttribute("data-dar-welcome-observed","1");
+   }
+  }
  });
 }
 
@@ -177,7 +229,7 @@ function apply(){var l=lang(),t=texts[l],rtl=l==="ar"||l==="ckb";
  mounts.forEach(function(a){var root=d.querySelector(a[0]);if(!root)return;
   var greet=root.querySelector(a[1]),ttl=root.querySelector(a[2]),sum=root.querySelector(a[3]);
   if(greet&&greet.textContent.trim()!==t[0])greet.textContent=t[0];
-  mark(ttl,t[1],"title",l);mark(sum,t[2],"summary",l);
+  splitTitle(ttl,t[1],l);mark(sum,t[2],"summary",l);
   root.setAttribute("lang",l);root.setAttribute("dir",rtl?"rtl":"ltr");
   root.setAttribute("aria-label",t[1]);
   if(greet){greet.setAttribute("lang",rtl?l:"ar-Latn");greet.setAttribute("dir",rtl?"rtl":"ltr")}
@@ -188,13 +240,10 @@ w.DARAdultHomeWelcomeV1=Object.freeze({apply:apply,lang:lang});
 function start(){apply();d.addEventListener("dar:view-rendered",apply);
  ["dar-v8-locale-changed","dar-adult-locale-changed","dar-adult-ui-languages-ready","pageshow"].forEach(function(e){w.addEventListener(e,apply)});
  w.addEventListener("storage",function(e){if(e.key===KEY)apply()});
- // Reflow exactly the same Home mounts on rotation, responsive pane resize,
- // or late font arrival. No extra scroll/DOM observers.
- var queued=false;
- function queue(){if(queued)return;queued=true;w.requestAnimationFrame(function(){queued=false;layoutExistingWelcome()})}
- w.addEventListener("resize",queue,{passive:true});
- w.addEventListener("orientationchange",queue,{passive:true});
- try{if(d.fonts&&d.fonts.ready)d.fonts.ready.then(queue)}catch(_){}
+ // One existing component owner; resize only the measured welcome pane.
+ w.addEventListener("resize",queueLayout,{passive:true});
+ w.addEventListener("orientationchange",queueLayout,{passive:true});
+ try{if(d.fonts&&d.fonts.ready)d.fonts.ready.then(queueLayout)}catch(_){}
 }
 if(d.readyState==="loading")d.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })(window,document);
