@@ -12,6 +12,43 @@ function top(){
  var r=document.scrollingElement||document.documentElement;
  return Math.max(0,window.scrollY||0,r?r.scrollTop||0:0);
 }
+/* The frozen Frauen renderer already supplies the ORIGINAL photo and search.
+ * Some adult shell hydration passes discard both first children after render.
+ * Restore ONLY the missing surface from that SAME canonical renderer output;
+ * never replace the chapter grid, source cards, live input or whole page. */
+function restoreMissingSurface(){
+ var shell=document.querySelector("#appView .frauen-library-shell,#appView .frauen-library-list");
+ var source=window.DARFrauenFiqh;
+ if(!shell||!source||typeof source.render!=="function")return null;
+ /* Do not add a Hero to details, loading placeholders or unrelated routes. */
+ if(!shell.querySelector(".frauen-library-section-head,.frauen-library-area-grid,.frauen-post-list"))return null;
+ var value="";
+ try{
+  if(typeof window.readRoute==="function"){
+   var route=window.readRoute();
+   if(route&&route.view==="frauen")value=String(route.value||"");
+  }
+  if(!value&&/^#\/?frauen(?:\/|$)/.test(String(window.location.hash||""))){
+   value=String(window.location.hash).replace(/^#\/?frauen\/?/,"")
+    .split("/").map(function(x){try{return decodeURIComponent(x)}catch(_){return x}}).join("/");
+  }
+ }catch(_){}
+ var html="";
+ try{html=source.render(value)}catch(_){return null}
+ if(typeof html!=="string"||html.indexOf("frauen-library-hero")<0)return null;
+ var tpl=document.createElement("template");
+ tpl.innerHTML=html;
+ var hero=tpl.content.querySelector(".frauen-library-hero");
+ if(!hero)return null;
+ var search=tpl.content.querySelector(".frauen-library-search-wrap,.frauen-library-list-controls");
+ var presentSearch=shell.querySelector(".frauen-library-search-wrap,.frauen-library-list-controls");
+ shell.insertBefore(hero,shell.firstChild);
+ if(search&&!presentSearch){
+  shell.insertBefore(search,hero.nextSibling);
+  try{if(typeof source.bind==="function")source.bind()}catch(_){}
+ }
+ return hero;
+}
 function reconcile(){
  queued=false;
  var body=document.body;
@@ -20,6 +57,7 @@ function reconcile(){
     even while the native/test brand is still being attached. The previous
     early header guard left both nodes unpinned after a cold route entry. */
  var hero=document.querySelector("#appView .frauen-library-hero");
+ if(!hero)hero=restoreMissingSurface();
  if(!hero)return;
  var shell=hero.closest(".frauen-library-shell,.frauen-library-list");
  if(!shell)return;
