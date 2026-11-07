@@ -128,7 +128,7 @@ html.dar-adult-global-brand-ready body.is-home-route .top-shell > .isnad{
  * No extra scroll container, no gesture interception, no changes to status-bar pixels. */
 @media(max-width:699px){
   #darAdultBrandHeaderV2{
-    padding-top:max(env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;
+    padding-top:env(safe-area-inset-top,0px)!important;
     padding-bottom:4px!important;
     padding-inline:clamp(10px,3vw,14px)!important;
     min-height:0!important;
@@ -345,12 +345,16 @@ html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdul
  overflow-wrap:break-word!important;white-space:normal!important;
  height:auto!important;max-height:none!important;
 }
-/* DAR ADULT COMPACT MARK HEADER V20261030 FIRST-RUN */
+/* DAR ADULT COMPACT MARK HEADER V20261030 FIRST-RUN
+ * The WebView may already sit below the OS status bar. Only the actual CSS
+ * safe-area inset is additional Web content padding: never apply the native
+ * host's --dar-native-safe-top a second time to this fixed brand rail.
+ * Measured header height synchronizes the one spacer on every viewport. */
 
 /* Native iOS, Android/PWA and tablet: one authoritative horizontal brand rail.
    Keep status-bar safe area. No layout changes to scroll content or prayer. */
 html body #darAdultBrandHeaderV2{
- padding-block-start:max(env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;
+ padding-block-start:env(safe-area-inset-top,0px)!important;
  padding-block-end:3px!important;
  padding-inline:clamp(10px,2.5vw,22px)!important;
  min-height:0!important;
@@ -420,6 +424,12 @@ html body #darAdultBrandHeaderV2 .dtbh-toggle{
  html body #darAdultBrandHeaderV2{padding-block-start:env(safe-area-inset-top,0px)!important}
 }
 
+
+/* One measured clearance for all opt-in and legacy visitor sticky owners.
+ * In Test and public web this token is absent and their own layouts apply. */
+html.dar-adult-global-brand-ready{
+  --dar-visitor-sticky-clearance:var(--dar-adult-header-obscured-top,var(--dar-adult-brand-header-height,0px));
+}
 
 /* DAR_FIXED_HEADER_OCCLUSION_V1
    The fixed adult rail has one measured spacer. Do not add a second body

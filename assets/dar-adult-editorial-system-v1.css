@@ -34,7 +34,7 @@ html.dar-adult-editorial-v1 body.is-post-route #appView [data-dar-ed-reader] :is
   max-inline-size:var(--dar-ed-reading-line);
   text-wrap:pretty;
   overflow-wrap:anywhere;
-  line-height:clamp(1.55,1.3 + .5vw,1.75);
+  line-height:clamp(1.52em,calc(1.32em + .55vw),1.73em);
 }
 html.dar-adult-editorial-v1 body.is-post-route #appView [data-dar-ed-reader] :is(
   .post-reader-speaker,.post-reader-sep
@@ -64,7 +64,7 @@ html.dar-adult-editorial-v1 [data-dar-ed-grid]{
   gap:var(--dar-ed-flow-sm);
 }
 @container dar-editorial (min-width:44rem){
-  html.dar-adult-editorial-v1 [data-dar-ed-grid]{
+  [data-dar-ed-grid]{
     grid-template-columns:repeat(2,minmax(0,1fr));
     column-gap:var(--dar-ed-flow-lg);
   }
@@ -115,6 +115,9 @@ html.dar-adult-editorial-v1 [data-dar-ed-reveal="seen"]{
   animation:dar-ed-enter var(--dar-ed-speed) var(--dar-ed-ease) both;
   animation-delay:var(--dar-ed-delay,0ms);
 }
+/* Explicit stagger tokens, only after elements entered the viewport. */
+html.dar-adult-editorial-v1 [data-dar-ed-stagger="1"]{--dar-ed-delay:45ms}
+html.dar-adult-editorial-v1 [data-dar-ed-stagger="2"]{--dar-ed-delay:85ms}
 html.dar-adult-editorial-v1 [data-dar-ed-expand] > :not(summary){
   animation:dar-ed-enter 220ms var(--dar-ed-ease) both;
 }

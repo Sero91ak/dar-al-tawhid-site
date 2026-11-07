@@ -169,7 +169,10 @@ def main():
   server.shutdown()
   for p in FILES:p.unlink(missing_ok=True)
 if __name__=="__main__":
- main()
- # Read-only desktop follow-up in this QA-only combined branch.
+ # Verify the compact native/PWA header first, even when an older Test-lane
+ # Hero fixture fails later; neither result is suppressed or marked green.
  import subprocess
+ subprocess.run(["python3","scripts/check-visitor-header-compact-browser.py"],check=True)
+ main()
+ # Verify public desktop after visitor and Test routes on this QA-only branch.
  subprocess.run(["python3","scripts/check-desktop-editorial-browser.py"],check=True)

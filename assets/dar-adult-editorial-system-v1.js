@@ -11,7 +11,7 @@ var path=String(global.location.pathname||"");
 if(/^\/(?:kids|test|admin|quellen|lernen|q\/)/.test(path))return;
 var reduced=global.matchMedia&&global.matchMedia("(prefers-reduced-motion: reduce)");
 var saved=global.navigator&&global.navigator.connection&&global.navigator.connection.saveData;
-var observer=null,raf=0,mounted=false;
+var observer=null,raf=0,mounted=false,destroyed=false,motionChange=null;
 var seen=typeof WeakSet==="function"?new WeakSet():null;
 var revealed=typeof WeakSet==="function"?new WeakSet():null;
 function canAnimate(){
@@ -43,6 +43,7 @@ function ownsVisitor(){
     !body.classList.contains("dar-internal-reader-open"));
 }
 function annotate(root){
+ if(destroyed)return false;
  var body=doc.body;if(!body||!ownsVisitor())return false;
  doc.documentElement.classList.add("dar-adult-editorial-v1");
  var scope=root&&root.querySelectorAll?root:doc;
@@ -64,7 +65,7 @@ function annotate(root){
    var element=targets[i];
    if(seen&&seen.has(element))continue;
    if(seen)seen.add(element);
-   if(io)io.observe(element);
+   if(io){element.setAttribute("data-dar-ed-stagger",String(i%3));io.observe(element)}
   }
  }
  // Reuse the same typographic scope on existing Hadith/Dua detail readers;
@@ -87,7 +88,7 @@ function annotate(root){
  return true;
 }
 function schedule(){
- if(raf)return;
+ if(destroyed||raf)return;
  var request=global.requestAnimationFrame||function(fn){return global.setTimeout(fn,0)};
  raf=request(function(){raf=0;annotate(doc)});
 }
@@ -111,19 +112,32 @@ function markOverflow(el){
  return true;
 }
 var api={mount:annotate,refresh:schedule,transitionSwap:swap,markOverflow:markOverflow,
-  destroy:function(){stopObserver();if(doc.documentElement)doc.documentElement.classList.remove("dar-adult-editorial-v1")}};
+  destroy:function(){
+   if(destroyed)return;
+   destroyed=true;
+   stopObserver();
+   if(raf&&typeof global.cancelAnimationFrame==="function")global.cancelAnimationFrame(raf);
+   raf=0;
+   if(typeof doc.removeEventListener==="function")doc.removeEventListener("dar:view-rendered",schedule);
+   if(typeof global.removeEventListener==="function"){
+    ["pageshow","popstate","hashchange","resize"].forEach(function(type){global.removeEventListener(type,schedule)});
+   }
+   if(motionChange&&reduced&&typeof reduced.removeEventListener==="function")reduced.removeEventListener("change",motionChange);
+   if(doc.documentElement)doc.documentElement.classList.remove("dar-adult-editorial-v1");
+  }};
 global.DarAdultEditorialMotionV1=api;
 function start(){
- if(mounted)return;mounted=true;
+ if(mounted||destroyed)return;mounted=true;
  schedule();
  doc.addEventListener("dar:view-rendered",schedule,{passive:true});
  global.addEventListener("pageshow",schedule,{passive:true});
  global.addEventListener("popstate",schedule,{passive:true});
  global.addEventListener("hashchange",schedule,{passive:true});
  global.addEventListener("resize",schedule,{passive:true});
- if(reduced&&reduced.addEventListener)reduced.addEventListener("change",function(){
-  if(reduced.matches)stopObserver();schedule();
- });
+ if(reduced&&reduced.addEventListener){
+  motionChange=function(){if(reduced.matches)stopObserver();schedule()};
+  reduced.addEventListener("change",motionChange);
+ }
 }
 if(doc.readyState==="loading")doc.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })(typeof window!=="undefined"?window:this);
