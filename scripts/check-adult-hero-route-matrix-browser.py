@@ -54,7 +54,7 @@ def fixture(test):
   '--dar-test-brand-header-height:126px;--dar-test-occlusion-top:126px;--dar-native-safe-top:126px;--safe-top:126px}'
   'html.dar-ios-native-app body.is-area-route{padding-top:126px!important}'
   '#'+header+'{height:126px!important;min-height:126px!important;position:fixed!important;top:0!important;inset-inline:0!important;z-index:730!important;background:#eaf0e7!important;box-sizing:border-box!important}'
-  '#'+spacer+'{height:126px!important;flex:0 0 126px!important;display:block!important}'
+  '#'+spacer+'{height:var(--dar-route-fixture-header-height,126px)!important;flex:0 0 var(--dar-route-fixture-header-height,126px)!important;display:block!important}'
   '.app{width:100%;min-height:1900px}#appView{min-height:1700px}'
   '#appView .hero-fixture{min-height:205px;box-sizing:border-box;background-color:#294439}'
   '#heroTap{position:relative;z-index:8;min-height:44px;min-width:120px;background:#fff;color:#18281f;border:1px solid #777;border-radius:8px;cursor:pointer}'
@@ -97,6 +97,20 @@ def main():
    driver.get(base+filename)
    for screen,w,h in SIZES:
     driver.set_window_size(w,h)
+    # The production visitor/test header controller publishes its actual
+    # getBoundingClientRect height after each viewport change. Do not freeze
+    # the fixture at 126px when the loaded brand CSS computes a 130px rail.
+    # Matching header + ONE in-flow spacer is the true single-owner contract.
+    driver.execute_script("""
+      const name=arguments[0];
+      const header=document.getElementById(name);
+      const height=header.getBoundingClientRect().height;
+      document.documentElement.style.setProperty("--dar-route-fixture-header-height",height+"px");
+      document.documentElement.style.setProperty("--dar-adult-brand-header-height",height+"px");
+      document.documentElement.style.setProperty("--dar-adult-header-obscured-top",height+"px");
+      document.documentElement.style.setProperty("--dar-test-brand-header-height",height+"px");
+      document.documentElement.style.setProperty("--dar-test-occlusion-top",height+"px");
+    """,header)
     for route in ROUTES:
      html,selector=markup(route)
      driver.execute_script("""
