@@ -293,7 +293,7 @@ function activateAdultGlobalBrandV2(html) {
   /* Native iOS and PWA must use the same fresh prayer presentation as Test.
      Keep desktop public browser, Kids and the original prayer engine isolated. */
   html = html.replace(/\/assets\/dar-home-test-parity-visitor\.js\?v=[a-zA-Z0-9-]+/g,
-    "/assets/dar-home-test-parity-visitor.js?v=20261107-welcome-editorial-v3");
+    "/assets/dar-home-test-parity-visitor.js?v=20261107-wasiyyah-route-v1");
   /* VISITOR_PROFILE_HEADER_BOOT_V4: adult visitor native/PWA only.
    * Guarantee the approved palette icon, profile picker, smart personalization
    * and adaptive Frauen/Entdecken tab load with the original branded header.
@@ -1566,7 +1566,7 @@ export default {
         html = html.replace('/assets/fold-split.js?v=4', '/assets/fold-split.js?v=5');
         // Android installed PWA: bump URLs for the shared visitor home and 3D icon renderer.
         // An old v3 PWA worker may otherwise return a permanently stale cache-first asset.
-        html = html.replace('/assets/dar-home-test-parity-visitor.js?v=20261030-home-order-clock-v2', '/assets/dar-home-test-parity-visitor.js?v=20261107-welcome-editorial-v3');
+        html = html.replace('/assets/dar-home-test-parity-visitor.js?v=20261030-home-order-clock-v2', '/assets/dar-home-test-parity-visitor.js?v=20261107-wasiyyah-route-v1');
         html = html.replaceAll('/assets/dar-noble-3d-icons.js?v=1095', '/assets/dar-noble-3d-icons.js?v=20261030-android-global-parity-v8');
         html = html.replace('/assets/dar-noble-3d-icons.css?v=1095', '/assets/dar-noble-3d-icons.css?v=20261030-android-global-parity-v8');
         // iPadOS desktop-class Safari identifies as Macintosh, even on a tablet.
@@ -1899,7 +1899,7 @@ export default {
         html = html.replace(/(\/test\/assets\/dar-test-premium-header-v2\.js\?v=)[^"'\s<>]+/g,
           "$1" + "20261031-neutral-hooded-test-v14");
         html = html.replace(/(\/test\/assets\/dar-home-html-parity-v1\.js\?v=)[^"'\s<>]+/g,
-          "$1" + "20261031-neutral-hooded-test-v14");
+          "$1" + "20261107-wasiyyah-route-v1");
         html = html.replace(/(\/test\/assets\/dar-smart-profile-v1\.js\?v=)[^"'\s<>]+/g,
           "$1" + "20261031-neutral-hooded-test-v14");
         if (!html.includes("dar-onesignal-language-sync.js")) {
