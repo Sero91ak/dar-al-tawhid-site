@@ -49,6 +49,22 @@ assert.match(seam,/--frauen-fixed-brand-bottom/,"Gemessener Header-Sticky-Offset
 assert.match(seam,/setProperty\("margin-top","var\(--frauen-flow-seam-shift\)","important"\)/,"Der Hero-Spalt muss zuverlässig korrigiert werden");
 
 assert.match(seam,/--frauen-flow-seam-shift/,"Automatische Korrektur des oberen Spalts fehlt");
+
+/* V1409: a cold Frauen route must recover the ORIGINAL photographed hero and
+   ORIGINAL search before a native/test brand gets attached to the DOM. */
+assert.ok(
+ seam.indexOf("var stage=shell.querySelector")<seam.indexOf("if(!header)return"),
+ "Frauen Hero/Suche darf nicht auf den verzögerten Markenheader warten"
+);
+assert.match(seam,/if\(stage&&looseSearch\)stage\.appendChild\(looseSearch\)/,
+ "Original-Suche muss auch nach einem Route-Rerender in derselben Stage bleiben");
+assert.match(seam,/new MutationObserver\(schedule\)\.observe\(appShell,\{childList:true\}\)/,
+ "Frauen muss nachträgliches Einfügen des Markenheaders in die App-Shell erkennen");
+assert.match(seam,/new MutationObserver\(schedule\)\.observe\(document\.body,\{/,
+ "Frauen muss nachträglichen Markenheader und Routenstatus erkennen");
+assert.match(seam,/stage\.style\.setProperty\("top",fixedTop,"important"\)/,
+ "Gemessener Headerabstand muss auch nach spätem Markenheader gesetzt werden");
+
 assert.match(seam,/maxGap=Math.max\(480,Math.min\(900/,"Große native Header-Doppelabstände dürfen nicht bei 240px abgewiesen werden");
 assert.doesNotMatch(seam,/Math.abs\(gap\)>240|Math.max\(-220/,"Alte 240px/220px-Grenze unterdrückt die Reparatur");
 assert.doesNotMatch(seam,/scrollTo\(|preventDefault\(/,"Hero-Seam darf Scrollen nicht abfangen");
