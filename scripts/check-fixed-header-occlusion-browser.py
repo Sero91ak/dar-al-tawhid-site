@@ -125,3 +125,6 @@ def run():
 
 if __name__ == "__main__":
     run()
+    # Additional same-lane regression: real brand should not waste a native top inset.
+    import subprocess
+    subprocess.run(["python3","scripts/check-visitor-header-compact-browser.py"],check=True)

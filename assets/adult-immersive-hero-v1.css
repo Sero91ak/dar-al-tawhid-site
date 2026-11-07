@@ -66,7 +66,7 @@ html[data-theme] body.is-topics-route #appView.view > .topics-hub > .view-head,
 html[data-theme] body.is-topic-route #appView.view > .topic-collection-page > .view-head,
 html[data-theme] body.is-hadith-route #appView .hadith-hub > .view-head{
   position:sticky!important;
-  top:0!important;
+  top:var(--dar-visitor-sticky-clearance,0px)!important;
   z-index:64!important;
   background-repeat:no-repeat!important;
 }
@@ -76,7 +76,7 @@ html[data-theme] body.is-hadith-route #appView .hadith-hub > :is(.main-search,#h
 html[data-theme] body.is-topics-route #appView .topics-hub > .main-search,
 html[data-theme] body.is-topic-route #appView .topic-collection-page > .main-search{
   position:sticky!important;
-  top:var(--dar-immersive-hero-height,0px)!important;
+  top:calc(var(--dar-visitor-sticky-clearance,0px) + var(--dar-immersive-hero-height,0px))!important;
   z-index:65!important;
 }
 @media(max-height:540px) and (orientation:landscape){
@@ -101,7 +101,7 @@ html[data-theme] body.is-topic-route #appView .topic-collection-page > .main-sea
    treatment without reparenting content or touching specialist readers. */
 html[data-theme] body.has-bottom-nav #appView [data-hero-kind][data-hero-scroll="sticky"] > .dar-hero-stage{
   position:sticky!important;
-  top:0!important;
+  top:var(--dar-visitor-sticky-clearance,0px)!important;
   z-index:65!important;
 }
 html[data-theme] body.has-bottom-nav #appView [data-hero-kind] .dar-hero{
