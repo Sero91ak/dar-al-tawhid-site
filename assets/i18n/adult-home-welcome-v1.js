@@ -46,8 +46,10 @@ function measureFont(el,weight){
 }
 function splitSalam(el,full,l){
  if(!el)return;
- var latin=l!=="ar"&&l!=="ckb"&&full===SALAM_FIRST+" "+SALAM_SECOND;
- if(!latin){
+ var first=SALAM_FIRST,second=SALAM_SECOND;
+ if(l==="ar"){first="السَّلَامُ عَلَيْكُمْ";second="وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ"}
+ if(l==="ckb"){first="السلام علیکم";second="ورحمة الله وبرکاته"}
+ if(full!==first+" "+second){
   if(el.getAttribute("data-dar-welcome-two-lines")==="1")el.textContent=full;
   el.removeAttribute("data-dar-welcome-two-lines");el.style.removeProperty("font-size");
   return;
@@ -55,8 +57,8 @@ function splitSalam(el,full,l){
  if(el.getAttribute("data-dar-welcome-two-lines")!=="1"||
     el.textContent.trim()!==full){
   var top=d.createElement("span"),bottom=d.createElement("span");
-  top.className="dar-welcome-salam-line";top.textContent=SALAM_FIRST+" ";
-  bottom.className="dar-welcome-salam-line";bottom.textContent=SALAM_SECOND;
+  top.className="dar-welcome-salam-line";top.textContent=first+" ";
+  bottom.className="dar-welcome-salam-line";bottom.textContent=second;
   top.style.display=bottom.style.display="block";
   top.style.whiteSpace=bottom.style.whiteSpace="nowrap";
   el.replaceChildren(top,bottom);
@@ -69,8 +71,8 @@ function splitSalam(el,full,l){
  if(!ctx||available<140)return;
  var cs=w.getComputedStyle(el),size=parseFloat(cs.fontSize)||20;
  ctx.font=measureFont(el);
- var required=Math.max(ctx.measureText(SALAM_FIRST).width,ctx.measureText(SALAM_SECOND).width);
- var tracking=Math.max(0,parseFloat(cs.letterSpacing)||0)*SALAM_SECOND.length;
+ var required=Math.max(ctx.measureText(first).width,ctx.measureText(second).width);
+ var tracking=Math.max(0,parseFloat(cs.letterSpacing)||0)*Math.max(first.length,second.length);
  required+=tracking;
  if(required>available*.97)
   el.style.setProperty("font-size",Math.max(12,Math.floor(size*(available*.95/required)*10)/10)+"px","important");
@@ -133,7 +135,7 @@ function pyramidLines(el,text,l){
  }
  if(!cuts){
   // On extreme text scaling, preserve readable, naturally wrapped full text.
-  mark(el,text,"summary",l);
+  el.replaceChildren();mark(el,text,"summary",l);
   el.removeAttribute("data-dar-welcome-pyramid");
   return;
  }
