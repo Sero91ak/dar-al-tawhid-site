@@ -60,9 +60,20 @@ assert.equal(used.size,ids.size);
 const reg=load("q/_registry/shortlinks.json");
 const misnumber=reg.links.find(x=>Number(x.number)===52);
 if(misnumber) {
- assert.equal(misnumber.status,"inactive","Auto-created Q52 must not be active");
- assert.equal(misnumber.publicListed,false);
- assert.equal(misnumber.postReference,null);
+ assert.equal(misnumber.publicListed,false,"Q52 must stay direct-link-only (source library owner-only)");
+ assert.equal(misnumber.reservedNotReusable,true,"Q52 must never be reassigned");
+ if(misnumber.status==="active") {
+  // Owner's explicit 07.11.2026 Q52 approval: only the existing single Khadijah hadith record.
+  const ownerApproved=all.find(x=>x.entry.kennung==="muetter-khadijah-salam-paradies-20261106")?.entry;
+  assert.ok(ownerApproved&&ownerApproved.quellePrimaerId==="bukhari:3820","Q52 original hadith identity missing");
+  assert.equal(ownerApproved.qAssignmentApprovedByUser,true,"Q52 requires explicit owner approval");
+  assert.equal(ownerApproved.qNumber,52,"Only this woman record may own Q52");
+  assert.equal(misnumber.postReference,ownerApproved.kennung,"Q52 must reuse the original woman ID");
+  assert.equal(misnumber.targetPath,"/q/52/","Q52 URL must remain unchanged");
+ } else {
+  assert.equal(misnumber.status,"inactive","Unapproved Q52 must remain withdrawn");
+  assert.equal(misnumber.postReference,null,"Withdrawn Q52 cannot reference a post");
+ }
 }
 for(const x of reg.links.filter(x=>x.status!=="inactive"&&used.has(x.postReference))) {
  const record=all.find(e=>e.entry.kennung===x.postReference)?.entry;
@@ -78,4 +89,4 @@ assert.ok(router.includes("/assets/frauen/frauen-entry-locale-v1.js"),"Native vi
 assert.ok(!router.includes('id="darFrauenCanonicalQShareV1"'),"Old Q-specific share hook still active");
 const origin=fs.readFileSync(path.join(root,"assets/frauen/frauen-fiqh.js"),"utf8");
 assert.ok(origin.includes("function frauenShareUrl(abschnitt, kennung)"),"Original renderer changed");
-console.log("PASS Frauen: "+used.size+" canonical ID(s), 9 complete reader locales, source URLs unmodified, Q52 retired, frozen renderer untouched.");
+console.log("PASS Frauen: "+used.size+" canonical ID(s), 9 complete reader locales, source URLs unmodified, owner-approved Q52 bound to original report, frozen renderer untouched.");
