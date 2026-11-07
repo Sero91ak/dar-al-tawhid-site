@@ -17,12 +17,6 @@ html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage{
   transform:none!important;
   contain:none!important;
 }
-/* One sticky offset owner: a mounted visitor brand header supplies its
- * measured occlusion. The public website has its own shell and stays at 0.
- * Never translate the Hero with margins or reparent its attached search. */
-html.dar-adult-global-brand-ready body.has-bottom-nav.is-frauen-route #appView .dar-immersive-hero-stage{
-  top:var(--dar-adult-header-obscured-top,var(--dar-adult-brand-header-height,0px))!important;
-}
 /* In a viewport-fit=cover WebView, extend the same hero photo into the exposed
    upper safe area. A native system bar outside the WebView remains OS-owned. */
 html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage::before{
