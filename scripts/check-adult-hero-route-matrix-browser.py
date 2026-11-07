@@ -34,14 +34,16 @@ def fixture(test):
   "/test/assets/more-v1253.css",
   "/test/assets/adult-immersive-hero-v1.css",
   "/test/assets/dar-settings-navigation-v1.css",
-  "/test/assets/dar-test-premium-header-v2.css"
+  "/test/assets/dar-test-premium-header-v2.css",
+  "/assets/frauen/frauen-original-v1224-header-seam-v1405.css"
  ] if test else [
   "/assets/full-edge-appearance-polish.css",
   "/assets/adult-responsive-viewport-v1381.css",
   "/assets/adult-immersive-hero-v1.css",
   "/assets/dar-hero-scroll-standard-v1.css",
   "/assets/dar-settings-navigation-v1.css",
-  "/assets/dar-adult-brand-header-v2.css"
+  "/assets/dar-adult-brand-header-v2.css",
+  "/assets/frauen/frauen-original-v1224-header-seam-v1405.css"
  ])
  links="".join('<link rel="stylesheet" href="'+p+'">' for p in sheets)
  return (
@@ -51,8 +53,8 @@ def fixture(test):
   'html{--dar-adult-brand-header-height:126px;--dar-adult-header-obscured-top:126px;'
   '--dar-test-brand-header-height:126px;--dar-test-occlusion-top:126px;--dar-native-safe-top:126px;--safe-top:126px}'
   'html.dar-ios-native-app body.is-area-route{padding-top:126px!important}'
-  '#'+header+'{height:126px!important;min-height:126px!important;position:fixed!important;top:0!important;inset-inline:0!important;z-index:730!important;background:#eaf0e7!important;box-sizing:border-box!important}'
-  '#'+spacer+'{height:126px!important;flex:0 0 126px!important;display:block!important}'
+  '#'+header+'{position:fixed!important;top:0!important;inset-inline:0!important;z-index:730!important;background:#eaf0e7!important;box-sizing:border-box!important}'
+  '#'+spacer+'{height:var(--dar-route-fixture-header-height,126px)!important;flex:0 0 var(--dar-route-fixture-header-height,126px)!important;display:block!important}'
   '.app{width:100%;min-height:1900px}#appView{min-height:1700px}'
   '#appView .hero-fixture{min-height:205px;box-sizing:border-box;background-color:#294439}'
   '#heroTap{position:relative;z-index:8;min-height:44px;min-width:120px;background:#fff;color:#18281f;border:1px solid #777;border-radius:8px;cursor:pointer}'
@@ -95,6 +97,20 @@ def main():
    driver.get(base+filename)
    for screen,w,h in SIZES:
     driver.set_window_size(w,h)
+    # The production visitor/test header controller publishes its actual
+    # getBoundingClientRect height after each viewport change. Do not freeze
+    # the fixture at 126px when the loaded brand CSS computes a 130px rail.
+    # Matching header + ONE in-flow spacer is the true single-owner contract.
+    driver.execute_script("""
+      const name=arguments[0];
+      const header=document.getElementById(name);
+      const height=header.getBoundingClientRect().height;
+      document.documentElement.style.setProperty("--dar-route-fixture-header-height",height+"px");
+      document.documentElement.style.setProperty("--dar-adult-brand-header-height",height+"px");
+      document.documentElement.style.setProperty("--dar-adult-header-obscured-top",height+"px");
+      document.documentElement.style.setProperty("--dar-test-brand-header-height",height+"px");
+      document.documentElement.style.setProperty("--dar-test-occlusion-top",height+"px");
+    """,header)
     for route in ROUTES:
      html,selector=markup(route)
      driver.execute_script("""
@@ -113,6 +129,17 @@ def main():
       return {headBottom:head.bottom,heroTop:rect.top,heroHeight:rect.height,
         bodyPad,position:computed.position,top:computed.top,
         buttonCenter:btn.top+btn.height/2,
+        diagnostic:{
+          headerTop:head.top,headerHeight:head.height,
+          appTop:document.querySelector(".app").getBoundingClientRect().top,
+          appPadding:getComputedStyle(document.querySelector(".app")).paddingTop,
+          viewTop:document.getElementById("appView").getBoundingClientRect().top,
+          viewPadding:getComputedStyle(document.getElementById("appView")).paddingTop,
+          shellTop:(hero.parentElement&&hero.parentElement.getBoundingClientRect().top),
+          shellMargin:(hero.parentElement&&getComputedStyle(hero.parentElement).marginTop),
+          heroMargin:computed.marginTop,
+          hitTag:(()=>{const hit=document.elementFromPoint(btn.left+btn.width/2,btn.top+btn.height/2);return hit?hit.tagName+"#"+hit.id+"."+hit.className:"none"})()
+        },
         hit:(()=>{const el=document.elementFromPoint(btn.left+btn.width/2,btn.top+btn.height/2);return !!el&&(el.id==="heroTap"||!!el.closest("#heroTap"));})()};
      """,selector,header)
      if abs(metrics["heroTop"]-metrics["headBottom"])>2:
@@ -141,4 +168,11 @@ def main():
   if driver:driver.quit()
   server.shutdown()
   for p in FILES:p.unlink(missing_ok=True)
-if __name__=="__main__":main()
+if __name__=="__main__":
+ # Verify the compact native/PWA header first, even when an older Test-lane
+ # Hero fixture fails later; neither result is suppressed or marked green.
+ import subprocess
+ subprocess.run(["python3","scripts/check-visitor-header-compact-browser.py"],check=True)
+ main()
+ # Verify public desktop after visitor and Test routes on this QA-only branch.
+ subprocess.run(["python3","scripts/check-desktop-editorial-browser.py"],check=True)
