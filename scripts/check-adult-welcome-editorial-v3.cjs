@@ -71,7 +71,7 @@ const api=win.DARAdultHomeWelcomeV1;
 assert(api&&typeof api.apply==="function","Single canonical locale owner not available");
 let checked=0,visiblePyramids=0;
 for(const locale of Object.keys(texts)){
- for(const available of [280,320,360,390,430,600,768,1024]){
+ for(const available of [280,320,360,390,430,600,768,1024,1280,1440,1920]){
   selected=locale;
   const salam=node("h2",available),title=node("h3",available),description=node("p",available);
   mounted={attributes:{},setAttribute(k,v){this.attributes[k]=v},querySelector(sel){
