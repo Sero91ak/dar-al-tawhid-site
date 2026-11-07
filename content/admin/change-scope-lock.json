@@ -9413,6 +9413,25 @@
         "desktop-preview/index.html"
       ],
       "expiresAt": "2026-11-13T23:59:00+01:00"
+    },
+    {
+      "id": "q52-q53-user-explicit-ordered-release-20261107",
+      "at": "2026-11-07T23:02:00+01:00",
+      "approvedBy": "user-explicit-20261107-post-live-q52-then-q53",
+      "reason": "Explicit sequential publication authorization: restore existing Q52 Khadijah hadith card without duplicating canonical women content, then create a new Q53 source card and single canonical al-Fudayl adult post with related learning unit. Only listed exact content/source paths; preserve existing IDs/links, release guards, native shells, private source library and protected push implementation. Separate real live and notification verification required. Q52's canonical Frauen ID/explicit-approval fields and exact hardcoded retired-Q52 assertion are updated to a stricter named-owner-approved check, not removed; no broad guard bypass.",
+      "paths": [
+        "q/_registry/shortlinks.json",
+        "q/_registry/next-number.txt",
+        "q/README.md",
+        "q/53/index.html",
+        "lernen/ghibah-ukhuwah/index.html",
+        "assets/q53-localized.js",
+        "assets/q53-locales.json",
+        "content/admin/change-scope-lock.json",
+        "scripts/check-frauen-entry-locales.cjs",
+        "data/frauen-muetter-der-glaeubigen.json"
+      ],
+      "expiresAt": "2026-11-10T23:59:00+01:00"
     }
   ],
   "enabled": true
