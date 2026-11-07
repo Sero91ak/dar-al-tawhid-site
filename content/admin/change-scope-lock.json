@@ -155,6 +155,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "visitor-compact-header-three-readonly-browser-tests-20261107",
+      "at": "2026-11-07T16:04:00Z",
+      "approvedBy": "user-explicit-20261107-compact-visitor-header-portrait-landscape-global-release",
+      "reason": "Exact read-only browser regression files for the user's concrete compact visitor Index header, portrait/landscape, and live rollout request. Does NOT change or unlock production security guards, Qibla, prayer, geolocation, Swift, worker secrets, Kids, DAR NEXT or GitHub workflow.",
+      "paths": [
+        "scripts/check-adult-hero-seam-browser.py",
+        "scripts/check-fixed-header-occlusion-browser.py",
+        "scripts/check-visitor-header-compact-browser.py"
+      ],
+      "expiresAt": "2026-11-09T00:00:00Z"
+    },
+    {
       "id": "dar-admin-v2-theme-responsive-readonly-tests-20261105",
       "at": "2026-11-05T19:38:00.000Z",
       "approvedBy": "user-explicit-20261105-dar-admin-responsive-video-layl-salbei-continue",
