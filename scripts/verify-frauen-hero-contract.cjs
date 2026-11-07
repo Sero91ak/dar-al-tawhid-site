@@ -103,6 +103,66 @@ for(const source of [native,testWorker,desktop]){
 }
 assert.equal([...flow].reduce((n,c)=>n+(c==="{")-(c==="}"),0),0,"Frauen V1407 CSS unvollständig");
 new (require("node:vm").Script)(seam,{filename:"frauen-hero-seam-runtime-v1407.js"});
+/* FRAUEN_NATIVE_TOUCH_RENDER_SMOKE_V1410: repeated global render ticks
+ * MUST NOT replace the native scroll surface, detach search or jump to top. */
+{
+ const vm=require("node:vm"),domEvents={};
+ let htmlPaints=0,scrollCalls=0,focusRetained=0,inputSource="stable";
+ const classes={add(){},remove(){}};
+ const app={
+  _html:"",
+  get innerHTML(){return this._html},
+  set innerHTML(next){this._html=next;htmlPaints++},
+  querySelector(selector){
+   if(selector.indexOf(":scope")===0)return this._html.includes("dar-frauen-production-root")?{}:null;
+   if(selector==="[data-frauen-q]")return {focus(opts){if(opts?.preventScroll)focusRetained++},setSelectionRange(){}};
+   return null;
+  },scrollTop:0
+ };
+ const styles={};
+ const doc={
+  readyState:"loading",
+  body:{classList:classes,removeAttribute(){}},
+  documentElement:{classList:classes},
+  head:{appendChild(el){styles[el.id]=el}},
+  activeElement:{matches:()=>false},
+  getElementById(id){return id==="appView"?app:styles[id]||null},
+  createElement(){return {}},
+  addEventListener(k,fn){(domEvents[k]||(domEvents[k]=[])).push(fn)},
+  dispatchEvent(){}
+ };
+ const loc={hash:"#frauen"};
+ const win={
+  scrollY:0,addEventListener(){},
+  render(){},
+  scrollTo(x,y){scrollCalls++;this.scrollY=y},
+  DARFrauenFiqh:{render(v){return '<article data-id="'+String(v)+'">'+inputSource+'</article>'},bind(){}}
+ };
+ vm.runInNewContext(adapter,{
+  window:win,document:doc,location:loc,
+  setInterval:()=>1,clearInterval(){},setTimeout(){},
+  CustomEvent:class{},MutationObserver:class{observe(){}},
+  console
+ },{timeout:1000,filename:"frauen-live-adapter-v1410.js"});
+ assert.equal(domEvents.DOMContentLoaded.length,1);
+ domEvents.DOMContentLoaded[0]();
+ assert.equal(htmlPaints,1,"Initial Frauen route must paint once");
+ assert.equal(scrollCalls,1,"Initial route must start at top exactly once");
+ win.scrollY=240;
+ for(let i=0;i<50;i++)win.render();
+ assert.equal(htmlPaints,1,"Fifty identical render ticks must preserve DOM and scroll");
+ assert.equal(scrollCalls,1,"Identical render ticks must never reset native scroll");
+ doc.activeElement={matches:selector=>selector==="[data-frauen-q]",selectionStart:4};
+ inputSource="updated";
+ win.render();
+ assert.equal(htmlPaints,2,"Real source update must repaint");
+ assert.equal(win.scrollY,240,"Source update must preserve reader scroll");
+ assert.equal(focusRetained,1,"Search caret must stay focused after content update");
+ loc.hash="#frauen/group/din";
+ win.render();
+ assert.equal(htmlPaints,3,"Navigation to a new group must repaint");
+ assert.equal(win.scrollY,0,"Navigation must start new Frauen route at top");
+}
 console.log("PASS: V1407 original photos, one-column chapters, pinned Hero/search, and under-scrolling card area.");
 
 console.log("OK: Frauenbereich unverändert außer genehmigtem Entfernen der doppelten Mehr-Karte.");
