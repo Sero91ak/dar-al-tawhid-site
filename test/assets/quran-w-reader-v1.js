@@ -156,11 +156,63 @@
       if (ev.target.matches("[data-dqw-visible]")) setVisibility(ev.target.dataset.dqwVisible,ev.target.checked);
     });
   }
+  /* DAR_QURAN_DASHBOARD_QUICK_V2 · Test-only, no second navigation/record store */
+  var QUICK_TEXT = {
+    de: ["Schnellzugriff", "Ǧuzʾ · Sūrah · Āyah", "Stelle direkt wählen", "Meine Merkliste", "Gespeicherte Verse & Notizen"],
+    ar: ["الوصول السريع", "الجزء · السورة · الآية", "الانتقال إلى موضع محدد", "المحفوظات", "الآيات والملاحظات المحفوظة"],
+    en: ["Quick access", "Juzʾ · Sūrah · Āyah", "Jump to a verse", "My saved verses", "Saved verses and notes"],
+    tr: ["Hızlı erişim", "Cüz · Sûre · Âyet", "Doğrudan âyete git", "Kaydettiklerim", "Kaydedilen âyetler ve notlar"],
+    ku: ["Destpêka bilez", "Cuzʾ · Sûre · Ayet", "Rast biçe ser ayetê", "Yên min ên tomar kirî", "Ayet û têbîniyên tomar kirî"],
+    ckb: ["دەستگەیشتنی خێرا", "جوزء · سوورەت · ئایەت", "ڕاستەوخۆ بڕۆ بۆ ئایەت", "پاشەکەوتکراوەکانم", "ئایەت و تێبینییە پاشەکەوتکراوەکان"],
+    bs: ["Brzi pristup", "Džuz · Sura · Ajet", "Idi direktno na ajet", "Moje zabilješke", "Sačuvani ajeti i bilješke"],
+    fr: ["Accès rapide", "Juzʾ · Sourate · Verset", "Aller directement au verset", "Mes enregistrements", "Versets et notes enregistrés"],
+    es: ["Acceso rápido", "Yuz · Sura · Aleya", "Ir directamente a una aleya", "Mis guardados", "Aleyas y notas guardadas"]
+  };
+  function mountQuickActions() {
+    var old = $("darQovQuickActionsV2");
+    if (!document.body.classList.contains("is-quran-overview")) {
+      if (old) old.remove();
+      return;
+    }
+    var host = $("qovStickyTools");
+    if (!host || !host.parentNode) return;
+    var lang = locale();
+    if (old && old.previousElementSibling === host && old.getAttribute("lang") === lang) return;
+    if (old) old.remove();
+    var words = QUICK_TEXT[lang] || QUICK_TEXT.de;
+    var section = document.createElement("section");
+    section.id = "darQovQuickActionsV2";
+    section.className = "dqw-quick-actions";
+    section.setAttribute("lang", lang);
+    section.setAttribute("dir", lang === "ar" || lang === "ckb" ? "rtl" : "ltr");
+    section.setAttribute("aria-label", words[0]);
+    section.innerHTML =
+      '<div class="dqw-quick-heading"><span>' + words[0] + '</span></div>' +
+      '<div class="dqw-quick-list">' +
+        '<button type="button" class="dqw-quick-item" data-dqw-quick="jump" aria-controls="qovSmartJumpFields">' +
+          '<span class="dqw-quick-mark" aria-hidden="true">↗</span><span class="dqw-quick-copy"><strong>' + words[1] + '</strong><small>' + words[2] + '</small></span>' +
+        '</button>' +
+        '<button type="button" class="dqw-quick-item" data-nav="quran-topic" data-value="saved">' +
+          '<span class="dqw-quick-mark" aria-hidden="true">☆</span><span class="dqw-quick-copy"><strong>' + words[3] + '</strong><small>' + words[4] + '</small></span>' +
+        '</button>' +
+      '</div>';
+    section.addEventListener("click", function(event) {
+      var trigger = event.target.closest('[data-dqw-quick="jump"]');
+      if (!trigger || !section.contains(trigger)) return;
+      var toggle = $("qovSmartJumpToggle"), fields = $("qovSmartJumpFields");
+      if (!toggle || !fields) return;
+      if (fields.hidden) toggle.click(); // canonical existing Ǧuzʾ/Sūrah/Āyah controller
+      var surah = $("qovJumpSurah");
+      if (surah) surah.focus({preventScroll:true});
+    });
+    host.insertAdjacentElement("afterend", section);
+  }
   function mount() {
     var reading=document.body.classList.contains("is-quran-reader-route");
     var overview=document.body.classList.contains("is-quran-overview");
     var actions=reading ? $("qrcActions") : overview ? document.querySelector("#qovHeader .qov-icon-actions") : null;
-    if (!actions) {close(false);return;}
+    if (!actions) {close(false);mountQuickActions();return;}
+    mountQuickActions();
     var existing=$("darQrcWReaderToggleV1");
     if (existing && actions.contains(existing)) { existing.setAttribute("aria-label",txt().reader);return; }
     if (existing) existing.remove();
@@ -188,7 +240,7 @@
     if(root && window.MutationObserver) {
       watch=new MutationObserver(function(records){
         var activeRoute=document.body.classList.contains("is-quran-reader-route") || document.body.classList.contains("is-quran-overview");
-        if(activeRoute && !$("darQrcWReaderToggleV1")) scheduleMount();
+        if(activeRoute && (!$("darQrcWReaderToggleV1") || (document.body.classList.contains("is-quran-overview") && !$("darQovQuickActionsV2")))) scheduleMount();
         if(panel && !panel.hidden && !activeRoute) close(false);
       });
       watch.observe(root,{childList:true,subtree:true});

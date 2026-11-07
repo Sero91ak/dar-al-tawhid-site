@@ -90,3 +90,74 @@ body.is-quran-overview #qovHeader .qov-icon-actions .dqw-trigger[aria-expanded="
 @media(max-width:390px){
   body.is-quran-overview #qovHeader .qov-icon-actions .dqw-trigger{width:38px!important;min-width:38px!important;height:38px!important}
 }
+
+
+/* DAR_QURAN_DASHBOARD_QUICK_V2 · editorial shortcuts, no added card stack */
+body.is-quran-overview .dqw-quick-actions{
+  margin:clamp(7px,1.4vw,12px) 0 9px;
+  padding:0 1px;
+  color:var(--quran-text-primary,var(--cream,var(--text)));
+  min-width:0;
+}
+body.is-quran-overview .dqw-quick-heading{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:5px;
+  color:var(--gold2,#b99a62);
+  font:800 10px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;
+  letter-spacing:.08em;
+}
+body.is-quran-overview .dqw-quick-heading::after{
+  content:"";height:1px;flex:1;min-width:0;
+  background:color-mix(in srgb,var(--gold2,#b99a62) 22%,var(--line2,transparent));
+}
+body.is-quran-overview .dqw-quick-list{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0;
+  border-block:1px solid color-mix(in srgb,var(--gold2,#b99a62) 20%,var(--line2,transparent));
+}
+body.is-quran-overview .dqw-quick-item{
+  appearance:none;display:flex;align-items:center;gap:10px;
+  min-width:0;min-height:62px;padding:10px clamp(6px,1.9vw,14px);
+  border:0;outline-offset:-3px;border-radius:0;
+  background:transparent;color:inherit;text-align:start;
+  font:inherit;touch-action:manipulation;cursor:pointer;
+}
+body.is-quran-overview .dqw-quick-item + .dqw-quick-item{
+  border-inline-start:1px solid color-mix(in srgb,var(--gold2,#b99a62) 18%,var(--line2,transparent));
+}
+body.is-quran-overview .dqw-quick-item:active{
+  background:color-mix(in srgb,var(--gold2,#b99a62) 8%,transparent);
+}
+body.is-quran-overview .dqw-quick-item:focus-visible{
+  outline:2px solid var(--gold2,#b99a62);
+}
+body.is-quran-overview .dqw-quick-mark{
+  width:30px;height:30px;flex:none;
+  display:grid;place-items:center;
+  font:600 21px/1 Georgia,serif;color:var(--gold2,#b99a62);
+}
+body.is-quran-overview .dqw-quick-copy{
+  min-width:0;display:grid;gap:3px;
+}
+body.is-quran-overview .dqw-quick-copy strong{
+  display:block;min-width:0;
+  font:750 clamp(11px,1.55vw,13px)/1.28 system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:var(--quran-text-primary,var(--cream,var(--text)));
+  overflow-wrap:anywhere;
+}
+body.is-quran-overview .dqw-quick-copy small{
+  display:block;min-width:0;
+  font:500 clamp(10px,1.3vw,11px)/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:var(--quran-text-muted,var(--muted,var(--text)));
+  overflow-wrap:anywhere;
+}
+@media(max-width:380px){
+  body.is-quran-overview .dqw-quick-item{gap:5px;padding:8px 5px;min-height:64px}
+  body.is-quran-overview .dqw-quick-mark{width:22px;font-size:18px}
+  body.is-quran-overview .dqw-quick-copy strong{font-size:11px}
+  body.is-quran-overview .dqw-quick-copy small{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  body.is-quran-overview .dqw-quick-item{transition:none}
+}
