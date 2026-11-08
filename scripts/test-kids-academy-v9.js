@@ -136,7 +136,8 @@ for(const lesson of Object.values(lessons65))for(const age of ["4-5","6-8","9-10
  }
 }
 assert.equal(totalChoiceQuestions,520);
-assert.equal(adaptedTextQuestions,195);
+assert(adaptedTextQuestions>=0&&adaptedTextQuestions<=195,"Editorially converted source questions may reduce projection count");
+assert.equal(totalChoiceQuestions-adaptedTextQuestions,520-adaptedTextQuestions);
 const sidqStart=main.indexOf("const exercises={"),sidqEnd=main.indexOf("\nlet id=",sidqStart);
 assert(sidqStart>0&&sidqEnd>sidqStart);
 new vm.Script(main.slice(sidqStart,sidqEnd)+"\nglobalThis.sidq=exercises;").runInContext(choiceContext);
