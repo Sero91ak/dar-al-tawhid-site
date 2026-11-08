@@ -54,6 +54,14 @@ assert.match(flow,/\.frauen-library-area-grid\{[\s\S]*?display:flex!important;[\
 assert.match(flow,/\.frauen-library-area-grid > \.frauen-library-area-card\{[\s\S]*?width:100%!important;/,"Kapitelkarten müssen volle Breite haben");
 assert.match(flow,/DAR_FRAUEN_PINNED_HERO_UNDER_SCROLL_V1407/,"Sticky-Frauen-Hero V1407 fehlt");
 assert.match(flow,/DAR_FRAUEN_ONE_DOCUMENT_SCROLL_V1409/,"Frauen Scroll-Root Reparatur fehlt");
+assert.match(flow,/DAR_FRAUEN_NATIVE_SCROLL_ANCHOR_V1414/,"Frauen native Scrollverankerung V1414 fehlt");
+assert.match(flow,/DAR_FRAUEN_SEARCH_FOCUS_STICKY_V1414/,"Suche darf das angeheftete Hero bei Fokus nicht loesen");
+assert.match(flow,/:focus-within\{\s*position:sticky!important;\s*top:var\(--frauen-fixed-brand-bottom,80px\)!important;/,
+ "Fokussiertes Suchfeld muss im festen Hero/Search-Verbund bleiben");
+assert.match(flow,/body\.is-frauen-route #appView :is\(\.frauen-library-shell,\.frauen-library-list\)\{\s*overflow-anchor:none!important;/,
+ "Nur Frauen-Leseshell darf den mobilen Anker-Reset ausschalten");
+assert.doesNotMatch(flow,/html\[data-theme\]:has\(body\.is-frauen-route\)[\s\S]*?scroll-snap-type:none/,
+ "Keine globalen Scroll-Snap/Scroll-Verhaltensaenderungen ausserhalb Frauen");
 assert.match(flow,/html\[data-theme\]\.dar-test-premium-header-v2 body\.has-bottom-nav\.is-area-route\.is-frauen-route,[\s\S]*?overflow-x:clip!important;\s*overflow-y:visible!important;/,
  "Frauen braucht einen HTML-Dokument-Scroller, sonst scrollt Sticky-Hero in Test weg");
 assert.match(seam,/function frauenDocumentScroll\(body\)/,
@@ -98,6 +106,7 @@ assert.doesNotMatch(seam,/scrollTo\(|preventDefault\(/,"Hero-Seam darf Scrollen 
 assert.doesNotMatch(frontstage,/\.more-grid,\.frauen-library-area-grid,\.quran-verse-grid/,"Generischer Mini-Raster-Konflikt wieder eingeführt");
 for(const source of [native,testWorker,desktop]){
  assert.match(source,/frauen-sticky-hero-v1407-20261103/,"V1407 Auslieferung fehlt");
+  assert.match(source,/native-scroll-anchor-v1414-20261108/,"Frauen Scrollankerkorrektur wird nicht cachefrisch ausgeliefert");
  assert.match(source,/frauen-hero-seam-runtime-v1407\.js/,"V1406 dynamischer Spaltabgleich fehlt");
  assert.match(source,/frauen-gap-guard-v1408-20261105/,"Frauen-Header-Fix muss cache-frisch ausgeliefert werden");
 }

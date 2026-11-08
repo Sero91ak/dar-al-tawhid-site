@@ -155,6 +155,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "frauen-native-touch-anchoring-v1414-20261108",
+      "at": "2026-11-08T13:10:00+01:00",
+      "approvedBy": "user-20261108-global-frauen-scroll-und-suche-sofort-fixen",
+      "reason": "Isolated native touch test establishes original Frauen shell scroll anchoring as the exact cause of scrollY oscillating 0-28px during an iOS/Android finger swipe. Explicitly restrict fix to Frauen content anchor settings, updated CSS delivery and real native touch+focus regression. Do not alter images, translations, sources, Kids, TV, frozen renderer, or unrelated routes.",
+      "paths": [
+        "assets/frauen/frauen-original-v1224-header-seam-v1405.css",
+        "cloudflare/site-router.js",
+        "cloudflare/test-app-worker.js",
+        "desktop-preview/index.html",
+        "scripts/verify-frauen-hero-contract.cjs",
+        "scripts/diagnose-frauen-hero-live.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-12T23:59:00+01:00"
+    },
+    {
       "id": "frauen-cloudflare-html5-doctype-native-touch-v1413-20261108",
       "at": "2026-11-08T11:20:00+01:00",
       "approvedBy": "user-explicit-20261108-video-live-frauen-global-repair",

@@ -251,9 +251,13 @@ html[data-theme] body.is-frauen-route #appView :is(.frauen-library-shell,.frauen
 }
 html[data-theme] body.is-frauen-route{overscroll-behavior-y:none!important}
 @media(max-width:699px) and (pointer:coarse){
-  /* Typing into search retains native caret scrolling and keyboard visibility. */
+  /* DAR_FRAUEN_SEARCH_FOCUS_STICKY_V1414:
+   * A focused input previously changed its entire Hero rail from sticky to
+   * relative, shifting the search/caret and breaking the pinned contract.
+   * Keep Hero/search together while the software keyboard is visible. */
   html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage:focus-within{
-    position:relative!important;
+    position:sticky!important;
+    top:var(--frauen-fixed-brand-bottom,80px)!important;
   }
 }
 
@@ -290,4 +294,15 @@ html[data-theme].dar-test-premium-header-v2 body.has-bottom-nav.is-area-route.is
 html[data-theme].dar-adult-global-brand-ready body.has-bottom-nav.is-area-route.is-frauen-route{
   overflow-x:clip!important;
   overflow-y:visible!important;
+}
+
+/* DAR_FRAUEN_NATIVE_SCROLL_ANCHOR_V1414
+ * Real mobile finger A/B, 2026-11-08: the header/search sticky geometry
+ * continually caused scroll anchoring to restore scrollY from 28px to 0px.
+ * Setting overflow-anchor:none ONLY on this route's original scroll content
+ * restores 312px native finger scrolling without changing the fixed header,
+ * single document scroller, photos, search, or other app areas.
+ * No scroll-snap, scrolling animations, or global root changes needed. */
+html[data-theme] body.is-frauen-route #appView :is(.frauen-library-shell,.frauen-library-list){
+  overflow-anchor:none!important;
 }
