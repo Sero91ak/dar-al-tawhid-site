@@ -37,6 +37,29 @@ async function nativeTouchProbe(page,route){
   const errors=[];
   const mobileEventAudit=await page.evaluate(()=>{
     window.__frauenMobileEvents=[];
+    window.__frauenFocusDebug=[];
+    const note=(kind,data)=>{if(window.__frauenFocusDebug.length<45)
+      window.__frauenFocusDebug.push({kind,at:Math.round(performance.now()),scroll:scrollY,...data})};
+    document.addEventListener("focusin",ev=>{
+      if(ev.target?.matches?.("[data-frauen-q]"))note("focusin",{connected:ev.target.isConnected});
+    },true);
+    document.addEventListener("focusout",ev=>{
+      if(!ev.target?.matches?.("[data-frauen-q]"))return;
+      const old=ev.target;note("focusout",{connected:old.isConnected,related:ev.relatedTarget?.tagName||null});
+      queueMicrotask(()=>note("focusout-microtask",{oldConnected:old.isConnected,
+       sameInput:old===document.querySelector("#appView [data-frauen-q]"),
+       active:document.activeElement?.tagName}));
+    },true);
+    new MutationObserver(list=>{
+      for(const m of list){
+        if(m.type!=="childList")continue;
+        const removed=[...m.removedNodes].some(n=>n.nodeType===1&&(n.matches?.("[data-frauen-q]")||n.querySelector?.("[data-frauen-q]")));
+        const added=[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches?.("[data-frauen-q]")||n.querySelector?.("[data-frauen-q]")));
+        if(removed||added)note("input-dom-replacement",{removed,added,parent:m.target.tagName,
+          cls:String(m.target.className||"").slice(0,90),
+          nowConnected:document.querySelector("#appView [data-frauen-q]")?.isConnected});
+      }
+    }).observe(document.getElementById("appView"),{childList:true,subtree:true});
     const p=["touchstart","touchmove","touchend","pointerdown","pointerup","click","focusin","focusout","scroll"];
     for(const name of p)document.addEventListener(name,e=>{
       if(window.__frauenMobileEvents.length>=95)return;
@@ -293,8 +316,8 @@ async function nativeTouchProbe(page,route){
   }
   const debugTraces=await page.evaluate(()=>window.__frauenDebugTraces||[]);
   const eventAudit=await page.evaluate(()=>window.__frauenMobileEvents||[]);
-  console.log("FRAUEN_NATIVE_TOUCH_PROBE",JSON.stringify({route:route.key,isolation,eventAudit,debugTraces,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors}));
-  return {isolation,eventAudit,debugTraces,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors};
+  console.log("FRAUEN_NATIVE_TOUCH_PROBE",JSON.stringify({route:route.key,isolation,eventAudit,debugTraces,focusDebug,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors}));
+  return {isolation,eventAudit,debugTraces,focusDebug,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors};
 }
 function snapshot(){
   const hero=document.querySelector(".frauen-library-pinned-header .frauen-library-hero");
