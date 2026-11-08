@@ -56,6 +56,36 @@ async function nativeTouchProbe(page,route){
     window.__darTouchAuditPreventInstalled=true;
     window.__darTouchAuditCalls=[];
     window.__darTouchAuditRepaints=[];
+    window.__frauenDebugTraces=[];
+    function trace(kind,detail){
+      if(window.__frauenDebugTraces.length<65)
+        window.__frauenDebugTraces.push({kind,detail,scroll:window.scrollY,at:performance.now(),stack:String(new Error().stack||"").slice(0,550)});
+    }
+    for(const name of ["focus","blur"]){
+      const orig=HTMLElement.prototype[name];
+      HTMLElement.prototype[name]=function(){
+        if(this.matches?.("[data-frauen-q]")||this.matches?.("input")||this===document.activeElement)
+          trace(name,{tag:this.tagName,cls:String(this.className),isConnected:this.isConnected});
+        return orig.apply(this,arguments);
+      };
+    }
+    const origIntoView=Element.prototype.scrollIntoView;
+    Element.prototype.scrollIntoView=function(){
+      trace("scrollIntoView",{tag:this.tagName,cls:String(this.className).slice(0,50)});
+      return origIntoView.apply(this,arguments);
+    };
+    const desc=Object.getOwnPropertyDescriptor(Element.prototype,"scrollTop");
+    if(desc?.set&&desc?.get){
+      for(const el of [document.documentElement,document.body]){
+        Object.defineProperty(el,"scrollTop",{
+          configurable:true,
+          get(){return desc.get.call(this)},
+          set(y){trace("scrollTop direct set",{tag:this.tagName,y});return desc.set.call(this,y)}
+        });
+      }
+    }
+    const origScroll=window.scroll;
+    if(origScroll)window.scroll=function(){trace("window.scroll",[...arguments]);return origScroll.apply(this,arguments)};
     const origScrollTo=window.scrollTo;
     window.scrollTo=function(){
       if(window.__darTouchAuditRepaints.length<30)
@@ -193,6 +223,18 @@ async function nativeTouchProbe(page,route){
       return document.activeElement===input;
     });
     focused.programmaticActive=await page.evaluate(()=>document.activeElement?.matches('[data-frauen-q]')||false);
+    focused.focusState=await page.evaluate(()=>{
+      const x=document.querySelector("#appView [data-frauen-q]");
+      let n=x,parents=[];
+      while(n&&parents.length<14){
+        const st=getComputedStyle(n);
+        parents.push({tag:n.tagName,id:n.id,cls:String(n.className).slice(0,90),
+          inert:n.inert,attrInert:n.hasAttribute?.("inert"),ariaHidden:n.getAttribute?.("aria-hidden"),
+          display:st.display,visibility:st.visibility,pointer:st.pointerEvents,contentVisibility:st.contentVisibility,focusable:!!n.matches?.(':focus')});
+        n=n.parentElement;
+      }
+      return {active:document.activeElement?.outerHTML?.slice(0,230),parents};
+    });
     focused.disabled=await page.evaluate(()=>document.querySelector("#appView [data-frauen-q]")?.disabled||false);
     await page.evaluate(()=>{if(document.activeElement?.blur)document.activeElement.blur();});
   }
@@ -227,9 +269,10 @@ async function nativeTouchProbe(page,route){
     card.afterHash=await page.evaluate(()=>location.hash);
     if(card.afterHash===beforeHash)errors.push("card_touch_did_not_navigate");
   }
+  const debugTraces=await page.evaluate(()=>window.__frauenDebugTraces||[]);
   const eventAudit=await page.evaluate(()=>window.__frauenMobileEvents||[]);
-  console.log("FRAUEN_NATIVE_TOUCH_PROBE",JSON.stringify({route:route.key,isolation,eventAudit,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors}));
-  return {isolation,eventAudit,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors};
+  console.log("FRAUEN_NATIVE_TOUCH_PROBE",JSON.stringify({route:route.key,isolation,eventAudit,debugTraces,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors}));
+  return {isolation,eventAudit,debugTraces,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors};
 }
 function snapshot(){
   const hero=document.querySelector(".frauen-library-pinned-header .frauen-library-hero");
