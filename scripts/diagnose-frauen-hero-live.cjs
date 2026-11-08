@@ -190,14 +190,14 @@ async function nativeTouchProbe(page,route){
       const lo=group,hi=group+1;
       await page.evaluate(({lo,hi})=>{
         const ls=[...document.querySelectorAll('link[rel="stylesheet"]')];
-        ls.forEach((el,i)=>{el.disabled=(i>=lo&&i<hi);});
+        ls.forEach((el,i)=>{el.disabled=(i>=36&&i<45&&i!==lo);});
         window.scrollTo(0,0);
       },{lo,hi});
       await page.waitForTimeout(120);
       await fingerSwipe(page,205,669,342);
       const y=await page.evaluate(()=>({y:window.scrollY,scroller:document.scrollingElement?.tagName,
         htmlClient:document.documentElement.clientHeight,bodyClient:document.body.clientHeight}));
-      touchExperiments.push({mode:"disable-css-group-"+group,range:links.slice(lo,hi),...y});
+      touchExperiments.push({mode:"enable-css-one-"+group,range:links.slice(lo,hi),...y});
     }
     await page.evaluate(()=>{document.querySelectorAll('link[rel="stylesheet"]').forEach(el=>el.disabled=false);window.scrollTo(0,0);});
   }
