@@ -477,3 +477,44 @@ body:not(.is-quran-reader-route) #dqnReadProgressV4{display:none}
   body.is-quran-overview .dqn-stage-action,
   body.is-quran-reader-route #dqnReadProgressV4 > span{transition:none!important}
 }
+
+
+/* V4 final precedence: legacy inline Qur'an rules are loaded after this asset.
+   Limit specificity to the existing Qur'an route; do not override the shell. */
+html[data-theme] body.is-quran-overview #appView #quranSurahGrid .qov-row .quran-num{
+  width:clamp(36px,5vw,52px)!important;
+  height:clamp(36px,5vw,52px)!important;
+  min-width:36px!important;
+  font-size:clamp(15px,2.5vw,21px)!important;
+  border:1px solid var(--dqn-rule)!important;
+  background:color-mix(in srgb,var(--gold2,#b99a62) 5%,transparent)!important;
+}
+html[data-theme] body.is-quran-overview #appView .qov-smart-page .qov-resume-stack{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:0!important;
+  grid-template-columns:none!important;
+  border-top:1px solid var(--dqn-rule)!important;
+  border-bottom:1px solid var(--dqn-rule)!important;
+  margin:clamp(13px,2vw,20px) 0!important;
+  padding:0!important;
+}
+html[data-theme] body.is-quran-overview #appView .qov-smart-page .qov-resume-stack > *{
+  min-width:0!important;
+  min-height:65px!important;
+  margin:0!important;
+  padding:9px 4px!important;
+  border:0!important;
+  border-radius:0!important;
+  border-bottom:1px solid var(--dqn-rule)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-quran-overview #appView .qov-smart-page .qov-resume-stack > :last-child{
+  border-bottom:0!important;
+}
+html[data-theme] body.is-quran-reader-route #appView .quran-ayah{
+  border-bottom:1px solid color-mix(in srgb,var(--gold2,#b99a62) 27%,var(--line2,transparent))!important;
+  background:transparent!important;
+}
+html[data-theme] body.is-quran-reader-route #dqnReadProgressV4{z-index:700}
