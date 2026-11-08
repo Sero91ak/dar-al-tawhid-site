@@ -55,6 +55,9 @@ assert.match(flow,/\.frauen-library-area-grid > \.frauen-library-area-card\{[\s\
 assert.match(flow,/DAR_FRAUEN_PINNED_HERO_UNDER_SCROLL_V1407/,"Sticky-Frauen-Hero V1407 fehlt");
 assert.match(flow,/DAR_FRAUEN_ONE_DOCUMENT_SCROLL_V1409/,"Frauen Scroll-Root Reparatur fehlt");
 assert.match(flow,/DAR_FRAUEN_NATIVE_SCROLL_ANCHOR_V1414/,"Frauen native Scrollverankerung V1414 fehlt");
+assert.match(flow,/DAR_FRAUEN_SEARCH_FOCUS_STICKY_V1414/,"Suche darf das angeheftete Hero bei Fokus nicht loesen");
+assert.match(flow,/:focus-within\{\s*position:sticky!important;\s*top:var\(--frauen-fixed-brand-bottom,80px\)!important;/,
+ "Fokussiertes Suchfeld muss im festen Hero/Search-Verbund bleiben");
 assert.match(flow,/body\.is-frauen-route #appView :is\(\.frauen-library-shell,\.frauen-library-list\)\{\s*overflow-anchor:none!important;/,
  "Nur Frauen-Leseshell darf den mobilen Anker-Reset ausschalten");
 assert.doesNotMatch(flow,/html\[data-theme\]:has\(body\.is-frauen-route\)[\s\S]*?scroll-snap-type:none/,
