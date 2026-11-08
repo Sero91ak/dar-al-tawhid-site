@@ -272,11 +272,15 @@ function snapshot(){
    await page.route("**/assets/frauen/frauen-hero-seam-runtime-v1407.js?*",intercept=>intercept.fulfill({status:200,contentType:"application/javascript; charset=utf-8",body:localScript}));
    await page.route("**/assets/frauen/frauen-live-adapter.js?*",intercept=>intercept.fulfill({status:200,contentType:"application/javascript; charset=utf-8",body:localAdapter}));
    page.on("pageerror",e=>errors.push(String(e.message).slice(0,300)));
+   const navigations=[];
+   page.on("framenavigated",f=>{if(f===page.mainFrame())navigations.push(f.url())});
    const response=await page.goto(route.url,{waitUntil:"domcontentloaded",timeout:60000});
-   const rawHtml=await response.text();
-   console.log("FRAUEN_DOCUMENT_MODE",JSON.stringify({route:route.key,phase:"domcontentloaded",responseUrl:response.url(),responsePrefix:rawHtml.slice(0,180),document:await page.evaluate(()=>({compatMode:document.compatMode,doctype:document.doctype?.name||null,url:location.href,readyState:document.readyState}))}));
    await page.waitForTimeout(6000);
-   console.log("FRAUEN_DOCUMENT_MODE",JSON.stringify({route:route.key,phase:"hydrated",document:await page.evaluate(()=>({compatMode:document.compatMode,doctype:document.doctype?.name||null,url:location.href,readyState:document.readyState}))}));
+   console.log("FRAUEN_DOCUMENT_MODE",JSON.stringify({route:route.key,responseUrl:response.url(),navigations,document:await page.evaluate(()=>({
+    compatMode:document.compatMode,doctype:document.doctype?.name||null,doctypeHtml:document.doctype?.outerHTML||null,
+    url:location.href,readyState:document.readyState,htmlStart:document.documentElement.outerHTML.slice(0,180),
+    documentFirstNodes:[...document.childNodes].slice(0,5).map(x=>({nodeType:x.nodeType,name:x.nodeName,value:String(x.nodeValue||"").slice(0,80)}))
+   }))}));
    let before=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-initial.png")});
    // One mounted production runtime: no duplicate injected listeners.
