@@ -148,7 +148,7 @@ async function nativeTouchProbe(page,route){
         if(mode==="html-flow-auto")add("html,body{height:auto!important;min-height:0!important;overflow-y:visible!important;overflow-x:clip!important;scroll-behavior:auto!important}html{overflow-y:auto!important}");
         if(mode==="fixed-hero")add("body.is-frauen-route #appView .frauen-library-pinned-header{position:fixed!important;top:48px!important;left:22px!important;right:22px!important;width:auto!important;margin:0!important}body.is-frauen-route #appView .frauen-library-section-head{margin-top:266px!important}");
         if(mode==="disable-both-minimal-fixed-header"){
-          links.filter(l=>/\\/assets\\/(dar-adult-brand-header-v2|dar-visitor-profile-picker-v1)\\.css/.test(l.href)).forEach(l=>l.disabled=true);
+          links.filter(l=>l.href.includes("/assets/dar-adult-brand-header-v2.css")||l.href.includes("/assets/dar-visitor-profile-picker-v1.css")).forEach(l=>l.disabled=true);
           add("#darAdultBrandHeaderV2{position:fixed!important;z-index:730!important;top:0!important;left:0!important;width:100%!important;height:48px!important;background:#f4f6f0!important;display:flex!important;align-items:center!important}#darAdultBrandHeaderSpacerV2{display:block!important;height:48px!important;max-height:48px!important}body.is-frauen-route #appView .frauen-library-pinned-header{top:48px!important;position:sticky!important}");
         }
         if(mode==="no-app-effects")add("body.is-frauen-route .app,body.is-frauen-route #appView,body.is-frauen-route .frauen-library-shell{will-change:auto!important;contain:none!important;transform:none!important;filter:none!important;perspective:none!important;backdrop-filter:none!important}");
