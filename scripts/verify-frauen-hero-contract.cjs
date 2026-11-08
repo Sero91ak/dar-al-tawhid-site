@@ -8,7 +8,7 @@ const crypto=require("node:crypto");
 const frozen={
   "assets/frauen/frauen-authority-v1292.css": "6bb786de1ecb1b0d3ed5d01ec511cc10c9b3da86",
   "assets/frauen/frauen-fiqh.js": "2eeb486a100ad3e433860a9bb1c09e225edd5a4c",
-  "assets/frauen/frauen-live-adapter.js": "da20c378536d4ce0b6cdc891b0e32a8d026708e4",
+  "assets/frauen/frauen-live-adapter.js": "2c5704b164da160e463b5accabb50d9a21e0abce",
   "test/assets/frauen/frauen-authority-v1292.css": "07b9fa32585de8fcb57aad13b13ab2c67167ee4b",
   "test/assets/frauen/frauen-fiqh.js": "d2abb88d444de8879046e4edc58ca659b1eb94e8"
 };
@@ -22,11 +22,21 @@ for(const [path,sha] of Object.entries(frozen)){
 }
 const adapter=fs.readFileSync("assets/frauen/frauen-live-adapter.js","utf8");
 assert.ok(adapter.includes("function paint()"),"Original live Frauen adapter fehlt");
+assert.match(adapter,/FRAUEN_RENDER_IDEMPOTENT_V1410/,
+ "Nur geaenderte Frauen-Inhalte duerfen den DOM neu aufbauen");
+assert.match(adapter,/sameRoute&&present&&lastFrauenMarkup===markup\)return false/,
+ "Unveraenderter Frauen-Router darf weder Bild noch Suche neu montieren");
+assert.match(adapter,/if\(!sameRoute\)\{[\s\S]*?global\.scrollTo\(0,0\)/,
+ "Scroll zurueck zu Null ist nur beim Routewechsel erlaubt");
+assert.match(adapter,/current\.focus\(\{preventScroll:true\}\)/,
+ "Search-Fokus muss auf echten Inhaltswechseln erhalten bleiben");
+assert.ok(!/global\.scrollTo\(0,0\)\s*\}catch\(e\)\{\}\s*try\{document\.dispatchEvent/.test(adapter),
+ "Alte bedingungslose Frauen-Scrollsperre darf nicht wiederkehren");
 assert.ok(adapter.includes("MEHR_DUPLICATE_FRAUEN_ROW_REMOVED_V1"),"Doppelte Frauen-Mehr-Karte darf nicht automatisch eingefügt werden");
 assert.ok(!adapter.includes("target.appendChild(btn)"),"Veraltete zusätzliche Frauen-Karte bleibt aktiv");
 const native=fs.readFileSync("cloudflare/site-router.js","utf8");
 assert.ok(native.includes("/test/assets/frauen/frauen-fiqh.js?v=frauen-rollback-20261016-1500"),"Alten iOS Frauen renderer wiederherstellen");
-assert.ok(native.includes("/assets/frauen/frauen-live-adapter.js?v=mehr-frauen-duplicate-fix-20261019"),"Alten Frauen adapter ausliefern");
+assert.ok(native.includes("/assets/frauen/frauen-live-adapter.js?v=frauen-render-idempotent-native-scroll-v1410-20261107"),"Idempotenten Frauen-Adapter mit neuem Cache-Key ausliefern");
 const testWorker=fs.readFileSync("cloudflare/test-app-worker.js","utf8");
 assert.ok(testWorker.includes("frauen-authority-v1292.css?v=frauen-rollback-20261016-1500"),"Test CSS cache key fehlt");
 for(const prefix of ["assets/frauen/library-v1224/","test/assets/frauen/library-v1224/"]){
@@ -93,6 +103,66 @@ for(const source of [native,testWorker,desktop]){
 }
 assert.equal([...flow].reduce((n,c)=>n+(c==="{")-(c==="}"),0),0,"Frauen V1407 CSS unvollständig");
 new (require("node:vm").Script)(seam,{filename:"frauen-hero-seam-runtime-v1407.js"});
+/* FRAUEN_NATIVE_TOUCH_RENDER_SMOKE_V1410: repeated global render ticks
+ * MUST NOT replace the native scroll surface, detach search or jump to top. */
+{
+ const vm=require("node:vm"),domEvents={};
+ let htmlPaints=0,scrollCalls=0,focusRetained=0,inputSource="stable";
+ const classes={add(){},remove(){}};
+ const app={
+  _html:"",
+  get innerHTML(){return this._html},
+  set innerHTML(next){this._html=next;htmlPaints++},
+  querySelector(selector){
+   if(selector.indexOf(":scope")===0)return this._html.includes("dar-frauen-production-root")?{}:null;
+   if(selector==="[data-frauen-q]")return {focus(opts){if(opts?.preventScroll)focusRetained++},setSelectionRange(){}};
+   return null;
+  },scrollTop:0
+ };
+ const styles={};
+ const doc={
+  readyState:"loading",
+  body:{classList:classes,removeAttribute(){}},
+  documentElement:{classList:classes},
+  head:{appendChild(el){styles[el.id]=el}},
+  activeElement:{matches:()=>false},
+  getElementById(id){return id==="appView"?app:styles[id]||null},
+  createElement(){return {}},
+  addEventListener(k,fn){(domEvents[k]||(domEvents[k]=[])).push(fn)},
+  dispatchEvent(){}
+ };
+ const loc={hash:"#frauen"};
+ const win={
+  scrollY:0,addEventListener(){},
+  render(){},
+  scrollTo(x,y){scrollCalls++;this.scrollY=y},
+  DARFrauenFiqh:{render(v){return '<article data-id="'+String(v)+'">'+inputSource+'</article>'},bind(){}}
+ };
+ vm.runInNewContext(adapter,{
+  window:win,document:doc,location:loc,
+  setInterval:()=>1,clearInterval(){},setTimeout(){},
+  CustomEvent:class{},MutationObserver:class{observe(){}},
+  console
+ },{timeout:1000,filename:"frauen-live-adapter-v1410.js"});
+ assert.equal(domEvents.DOMContentLoaded.length,1);
+ domEvents.DOMContentLoaded[0]();
+ assert.equal(htmlPaints,1,"Initial Frauen route must paint once");
+ assert.equal(scrollCalls,1,"Initial route must start at top exactly once");
+ win.scrollY=240;
+ for(let i=0;i<50;i++)win.render();
+ assert.equal(htmlPaints,1,"Fifty identical render ticks must preserve DOM and scroll");
+ assert.equal(scrollCalls,1,"Identical render ticks must never reset native scroll");
+ doc.activeElement={matches:selector=>selector==="[data-frauen-q]",selectionStart:4};
+ inputSource="updated";
+ win.render();
+ assert.equal(htmlPaints,2,"Real source update must repaint");
+ assert.equal(win.scrollY,240,"Source update must preserve reader scroll");
+ assert.equal(focusRetained,1,"Search caret must stay focused after content update");
+ loc.hash="#frauen/group/din";
+ win.render();
+ assert.equal(htmlPaints,3,"Navigation to a new group must repaint");
+ assert.equal(win.scrollY,0,"Navigation must start new Frauen route at top");
+}
 console.log("PASS: V1407 original photos, one-column chapters, pinned Hero/search, and under-scrolling card area.");
 
 console.log("OK: Frauenbereich unverändert außer genehmigtem Entfernen der doppelten Mehr-Karte.");
