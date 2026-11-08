@@ -157,10 +157,15 @@ const additions={
           "explain": "Das Einpflanzen und Beobachten eines Samens sind unsere Lernaufgaben."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum widerspricht das Beobachten natürlicher Abläufe nicht dem Glauben an Allah als Schöpfer?",
-          "sample": "Wir lernen, wie Pflanzen wachsen, und glauben, dass Allah die Schöpfung hervorgebracht hat.",
-          "hint": "Zwei unterschiedliche Fragen: Schöpfer und beobachtbare Vorgänge."
+          "options": [
+            "Wir lernen, wie Pflanzen wachsen, und glauben, dass Allah die Schöpfung hervorgebracht hat.",
+            "Wer beobachtet, wie Pflanzen wachsen, darf nicht an Allah als Schöpfer glauben."
+          ],
+          "correct": 0,
+          "hint": "Zwei unterschiedliche Fragen: Schöpfer und beobachtbare Vorgänge.",
+          "explain": "Wir lernen, wie Pflanzen wachsen, und glauben, dass Allah die Schöpfung hervorgebracht hat."
         }
       ]
     },
@@ -478,10 +483,15 @@ const additions={
           "explain": "Der Vers spricht von aufrichtigem Geben, der Ḥadīṯ vom Wert der gegenseitigen Hilfe."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum beurteilen wir fremde Absichten nicht?",
-          "sample": "Wir kennen nicht sicher das Herz anderer; wir verbessern unsere eigenen Absichten.",
-          "hint": "Ikhlāṣ betrifft die innere Haltung."
+          "options": [
+            "Wir kennen nicht sicher das Herz anderer; wir verbessern unsere eigenen Absichten.",
+            "Wir wissen immer ganz genau, was andere Menschen im Herzen beabsichtigen."
+          ],
+          "correct": 0,
+          "hint": "Ikhlāṣ betrifft die innere Haltung.",
+          "explain": "Wir kennen nicht sicher das Herz anderer; wir verbessern unsere eigenen Absichten."
         }
       ]
     },
@@ -625,16 +635,26 @@ const additions={
           "explain": "Ehrlichkeit und Wiedergutmachung."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wir haben einen Qurʾān-Vers über richtiges Sprechen und eine Überlieferung über Wahrhaftigkeit kennengelernt. Welche gemeinsame Lehre erkennst du darin?",
-          "sample": "Beide bekräftigen wahrhaftiges Reden und seine gute Wirkung.",
-          "hint": "Überlege, was beide Quellen über aufrichtiges Sprechen lehren."
+          "options": [
+            "Beide bekräftigen wahrhaftiges Reden und seine gute Wirkung.",
+            "Beide lehren, dass es gut ist, absichtlich die Unwahrheit zu sagen."
+          ],
+          "correct": 0,
+          "hint": "Überlege, was beide Quellen über aufrichtiges Sprechen lehren.",
+          "explain": "Beide bekräftigen wahrhaftiges Reden und seine gute Wirkung."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Welche Grenzen gelten bei einer ehrlichen Aussage?",
-          "sample": "Ich kann mir in unsicheren Situationen Unterstützung einer Vertrauensperson holen.",
-          "hint": "Ehrlichkeit bedeutet nicht, dass Kinder gefährlichen Druck aushalten müssen."
+          "options": [
+            "Ich kann mir in unsicheren Situationen Unterstützung einer Vertrauensperson holen.",
+            "Ein Kind muss gefährlichen Druck allein aushalten und darf niemanden um Hilfe bitten."
+          ],
+          "correct": 0,
+          "hint": "Ehrlichkeit bedeutet nicht, dass Kinder gefährlichen Druck aushalten müssen.",
+          "explain": "Ich kann mir in unsicheren Situationen Unterstützung einer Vertrauensperson holen."
         }
       ]
     },
