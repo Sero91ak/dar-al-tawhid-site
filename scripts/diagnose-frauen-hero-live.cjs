@@ -57,10 +57,10 @@ async function nativeTouchProbe(page,route){
     });
     const original=Event.prototype.preventDefault;
     Event.prototype.preventDefault=function(){
-      if(this.type==="touchmove"&&window.__darTouchAuditCalls.length<18){
+      if(/^(touchstart|touchmove|touchend|pointerdown|pointerup|click|mousedown)$/.test(this.type)&&window.__darTouchAuditCalls.length<40){
         const t=this.target;
         window.__darTouchAuditCalls.push({
-          scroll:window.scrollY,cancelable:this.cancelable,
+          scroll:window.scrollY,type:this.type,cancelable:this.cancelable,
           target:t&&String(t.className).slice(0,80),
           stack:String(new Error().stack||"").slice(0,900)
         });
@@ -80,6 +80,58 @@ async function nativeTouchProbe(page,route){
   const scrolled=await page.evaluate(snapshot);
   if((pulled.docScroll||0)>2)errors.push("top_pull_exposes_blank_space");
   if((scrolled.docScroll||0)<50)errors.push("native_finger_swipe_does_not_scroll");
+  const isolation=[];
+  if(route.key==="visitor"&&(scrolled.docScroll||0)<50){
+    const modes=["disable-brand-css","disable-profile-css","disable-both","disable-group-4","release-root-overscroll","hero-nonsticky","header-nonfixed"];
+    for(const mode of modes){
+      await page.evaluate(mode=>{
+        const links=[...document.querySelectorAll('link[rel="stylesheet"]')];
+        for(const l of links){
+          const name=new URL(l.href,location.href).pathname;
+          if(mode==="disable-brand-css"&&name==="/assets/dar-adult-brand-header-v2.css")l.disabled=true;
+          if(mode==="disable-profile-css"&&name==="/assets/dar-visitor-profile-picker-v1.css")l.disabled=true;
+          if(mode==="disable-both"&&/\/assets\/(dar-adult-brand-header-v2|dar-visitor-profile-picker-v1)\.css$/.test(name))l.disabled=true;
+          if(mode==="disable-group-4"&&/\/assets\/(dar-adult-top-scroll-boundary-v1|dar-visitor-frontstage-v1|dar-adult-brand-header-v2|dar-visitor-smart-profile-v1|dar-visitor-profile-picker-v1|dar-visitor-daily-hub-v1|dar-visitor-onboarding-v1|adult-fold-global-v1)\.css$/.test(name))l.disabled=true;
+        }
+        if(mode==="release-root-overscroll"){
+          document.documentElement.style.setProperty("overscroll-behavior","auto","important");
+          document.documentElement.style.setProperty("touch-action","auto","important");
+          document.body.style.setProperty("overscroll-behavior","auto","important");
+          document.body.style.setProperty("touch-action","auto","important");
+        }
+        if(mode==="hero-nonsticky"){
+          const el=document.querySelector(".frauen-library-pinned-header");
+          if(el)el.style.setProperty("position","relative","important");
+        }
+        if(mode==="header-nonfixed"){
+          const el=document.getElementById("darAdultBrandHeaderV2");
+          if(el)el.style.setProperty("position","relative","important");
+        }
+        window.scrollTo(0,0);
+      },mode);
+      await page.waitForTimeout(120);
+      await fingerSwipe(page,205,669,342);
+      isolation.push({mode,...await page.evaluate(()=>({
+        y:scrollY,scrollOwner:document.scrollingElement?.tagName,
+        htmlHeight:document.documentElement.clientHeight,
+        headerBottom:document.getElementById("darAdultBrandHeaderV2")?.getBoundingClientRect().bottom,
+        stageTop:document.querySelector(".frauen-library-pinned-header")?.getBoundingClientRect().top
+      }))});
+      await page.evaluate(()=>{
+        document.querySelectorAll('link[rel="stylesheet"]').forEach(e=>e.disabled=false);
+        for(const el of [document.documentElement,document.body]){
+          el.style.removeProperty("overscroll-behavior");
+          el.style.removeProperty("touch-action");
+        }
+        const h=document.getElementById("darAdultBrandHeaderV2");
+        if(h)h.style.removeProperty("position");
+        const stage=document.querySelector(".frauen-library-pinned-header");
+        if(stage)stage.style.removeProperty("position");
+        window.scrollTo(0,0);
+      });
+      await page.waitForTimeout(130);
+    }
+  }
   const preventLog=await page.evaluate(()=>({
     stoppedBy:window.__darTouchAuditCalls||[],
     repaints:window.__darTouchAuditRepaints||[],
@@ -151,8 +203,8 @@ async function nativeTouchProbe(page,route){
     card.afterHash=await page.evaluate(()=>location.hash);
     if(card.afterHash===beforeHash)errors.push("card_touch_did_not_navigate");
   }
-  console.log("FRAUEN_NATIVE_TOUCH_PROBE",JSON.stringify({route:route.key,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors}));
-  return {preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors};
+  console.log("FRAUEN_NATIVE_TOUCH_PROBE",JSON.stringify({route:route.key,isolation,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors}));
+  return {isolation,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors};
 }
 function snapshot(){
   const hero=document.querySelector(".frauen-library-pinned-header .frauen-library-hero");
