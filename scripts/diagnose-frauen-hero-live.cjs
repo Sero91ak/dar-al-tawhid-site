@@ -79,127 +79,68 @@ async function nativeTouchProbe(page,route){
   const scrolled=await page.evaluate(snapshot);
   if((pulled.docScroll||0)>2)errors.push("top_pull_exposes_blank_space");
   if((scrolled.docScroll||0)<50)errors.push("native_finger_swipe_does_not_scroll");
-  // In a single-use diagnostic context, isolate whether the iOS native root,
-  // a false "keyboard open" flag or touch-action CSS prevents vertical pan.
   const touchExperiments=[];
   if(route.key==="visitor"&&(scrolled.docScroll||0)<50){
-    await fingerSwipe(page,18,620,310);
-    touchExperiments.push({mode:"left-gutter-touch",scroll:await page.evaluate(()=>window.scrollY)});
-    await page.evaluate(()=>window.scrollTo(0,0));
-    await fingerSwipe(page,190,423,198);
-    touchExperiments.push({mode:"section-heading-touch",scroll:await page.evaluate(()=>window.scrollY)});
-    await page.evaluate(()=>window.scrollTo(0,0));
-    for(const mode of ["pan-y","keyboard-off","native-class-off","root-viewport","native-overflow-body"]){
+    for(const mode of ["disable-brand-and-profile","header-sticky-no-spacer","header-relative-no-spacer","header-fixed-body-scroll","app-viewport-scroll"]){
       await page.evaluate(mode=>{
-        if(mode==="pan-y"){
-          for(const el of [document.documentElement,document.body,document.querySelector(".app"),document.getElementById("appView")]){
-            if(el)el.style.setProperty("touch-action","pan-y","important");
+        const ls=[...document.querySelectorAll('link[rel="stylesheet"]')];
+        const header=document.getElementById("darAdultBrandHeaderV2");
+        const spacer=document.getElementById("darAdultBrandHeaderSpacerV2");
+        if(mode==="disable-brand-and-profile"){
+          ls.forEach((e,i)=>{e.disabled=(i===39||i===41);});
+        }
+        if(mode==="header-sticky-no-spacer"||mode==="header-relative-no-spacer"){
+          if(header){
+            header.style.setProperty("position",mode==="header-sticky-no-spacer"?"sticky":"relative","important");
+            header.style.setProperty("top","0","important");
           }
-        }else if(mode==="keyboard-off"){
-          document.documentElement.classList.remove("adaptive-keyboard-open");
-        }else if(mode==="native-class-off"){
-          document.documentElement.classList.remove("dar-ios-native-app");
-        }else if(mode==="root-viewport"){
-          const html=document.documentElement;
-          html.style.setProperty("height","100dvh","important");
-          html.style.setProperty("min-height","100dvh","important");
-          html.style.setProperty("overflow-y","auto","important");
-          html.style.setProperty("overflow-x","clip","important");
-        }else if(mode==="native-overflow-body"){
+          if(spacer)spacer.style.setProperty("display","none","important");
+        }
+        if(mode==="header-fixed-body-scroll"){
+          document.documentElement.style.setProperty("overflow-y","visible","important");
           document.body.style.setProperty("overflow-y","auto","important");
-          document.body.style.setProperty("height","100dvh","important");
+          document.body.style.setProperty("height","100vh","important");
         }
-      },mode);
-      await fingerSwipe(page,205,669,342);
-      touchExperiments.push({mode,scroll:await page.evaluate(()=>window.scrollY),
-        scrollport:await page.evaluate(()=>({
-          htmlClient:document.documentElement.clientHeight,htmlScroll:document.documentElement.scrollHeight,
-          bodyClient:document.body.clientHeight,bodyScroll:document.body.scrollHeight,
-          viewport:innerHeight
-        })),
-        focus:await page.evaluate(()=>document.activeElement?.tagName),
-        htmlClass:await page.evaluate(()=>document.documentElement.className)});
-      await page.evaluate(mode=>{
+        if(mode==="app-viewport-scroll"){
+          const app=document.querySelector(".app");
+          if(app){app.style.setProperty("height","100vh","important");app.style.setProperty("overflow-y","auto","important");}
+        }
         window.scrollTo(0,0);
-        if(mode==="pan-y"){
-          for(const el of [document.documentElement,document.body,document.querySelector(".app"),document.getElementById("appView")]){
-            if(el)el.style.removeProperty("touch-action");
-          }
-        }else if(mode==="keyboard-off")document.documentElement.classList.add("adaptive-keyboard-open");
-        else if(mode==="native-class-off")document.documentElement.classList.add("dar-ios-native-app");
-        else if(mode==="root-viewport"){
-          for(const p of ["height","min-height","overflow-y","overflow-x"])document.documentElement.style.removeProperty(p);
-        }else if(mode==="native-overflow-body"){
-          document.body.style.removeProperty("height");
-          document.body.style.setProperty("overflow-y","visible","important");
-        }
       },mode);
-    }
-  }
-  // Experimental only: identify whether native-touch scroll is blocked by
-  // CSS/link layers or by the browser's document scroll owner.
-  if(route.key==="visitor"&&(scrolled.docScroll||0)<50){
-    for(const mode of ["disable-all-links","disable-all-styles","remove-global-brand","remove-app-chrome","native-overflow-scroller"]){
-      const state=await page.evaluate(mode=>{
-        const links=[...document.querySelectorAll('link[rel="stylesheet"]')],st=[...document.querySelectorAll('style')];
-        if(mode==="disable-all-links")links.forEach(e=>e.disabled=true);
-        if(mode==="disable-all-styles"){links.forEach(e=>e.disabled=true);st.forEach(e=>e.disabled=true);}
-        if(mode==="remove-global-brand"){const el=document.getElementById("darAdultBrandHeaderV2");if(el)el.style.display="none";}
-        if(mode==="remove-app-chrome"){
-          links.filter(e=>/app-chrome|adaptive-layout|full-edge|bottom-nav/i.test(e.href)).forEach(e=>e.disabled=true);
-        }
-        if(mode==="native-overflow-scroller"){
-          for(const el of [document.documentElement,document.body]){
-            el.style.setProperty("touch-action","auto","important");
-            el.style.setProperty("overscroll-behavior","auto","important");
-            el.style.setProperty("overflow-y","auto","important");
-          }
-          document.documentElement.style.setProperty("height","100vh","important");
-          document.body.style.setProperty("height","auto","important");
-        }
-        return {links:links.length,styles:st.length,scrollingElement:document.scrollingElement?.tagName,
-          htmlH:document.documentElement.clientHeight,bodyH:document.body.clientHeight};
-      },mode);
-      await page.waitForTimeout(120);
+      await page.waitForTimeout(250);
+      const before=await page.evaluate(()=>({
+        docMode:document.compatMode,scroller:document.scrollingElement?.tagName,
+        htmlHeight:document.documentElement.clientHeight,bodyHeight:document.body.clientHeight,
+        header:document.getElementById("darAdultBrandHeaderV2")?.getBoundingClientRect().top,
+        stage:document.querySelector(".frauen-library-pinned-header")?.getBoundingClientRect().top
+      }));
       await fingerSwipe(page,205,669,342);
       const result=await page.evaluate(()=>({
-        y:window.scrollY,htmlTop:document.documentElement.scrollTop,
-        bodyTop:document.body.scrollTop,scrollingElement:document.scrollingElement?.tagName,
-        docH:document.documentElement.clientHeight,height:innerHeight
+        y:window.scrollY,
+        htmlTop:document.documentElement.scrollTop,
+        bodyTop:document.body.scrollTop,
+        appTop:document.querySelector(".app")?.scrollTop,
+        header:document.getElementById("darAdultBrandHeaderV2")?.getBoundingClientRect().top,
+        stage:document.querySelector(".frauen-library-pinned-header")?.getBoundingClientRect().top
       }));
-      touchExperiments.push({mode,state,...result});
+      touchExperiments.push({mode,before,...result});
       await page.evaluate(mode=>{
-        if(mode==="disable-all-links"||mode==="disable-all-styles"||mode==="remove-app-chrome")
-          document.querySelectorAll('link[rel="stylesheet"]').forEach(e=>e.disabled=false);
-        if(mode==="disable-all-styles")document.querySelectorAll('style').forEach(e=>e.disabled=false);
-        if(mode==="remove-global-brand"){const e=document.getElementById("darAdultBrandHeaderV2");if(e)e.style.removeProperty("display");}
-        if(mode==="native-overflow-scroller"){
-          for(const el of [document.documentElement,document.body])
-            ["touch-action","overscroll-behavior","overflow-y","height"].forEach(p=>el.style.removeProperty(p));
+        const ls=[...document.querySelectorAll('link[rel="stylesheet"]')];
+        if(mode==="disable-brand-and-profile")ls.forEach(e=>e.disabled=false);
+        const header=document.getElementById("darAdultBrandHeaderV2");
+        const spacer=document.getElementById("darAdultBrandHeaderSpacerV2");
+        if(header)for(const p of ["position","top"])header.style.removeProperty(p);
+        if(spacer)spacer.style.removeProperty("display");
+        for(const p of ["overflow-y","height"]){
+          document.documentElement.style.removeProperty(p);
+          document.body.style.removeProperty(p);
         }
+        const app=document.querySelector(".app");
+        if(app)for(const p of ["height","overflow-y"])app.style.removeProperty(p);
         window.scrollTo(0,0);
       },mode);
       await page.waitForTimeout(130);
     }
-  }
-  /* V1411 native scroll CSS culprit bisection. Keep existing inline
-   * native styles; disable only 54 external stylesheet LINKs by group. */
-  if(route.key==="visitor"&&(scrolled.docScroll||0)<50){
-    const links=await page.evaluate(()=>[...document.querySelectorAll('link[rel="stylesheet"]')].map((el,i)=>({i,url:new URL(el.href).pathname})));
-    for(let group=36;group<45;group++){
-      const lo=group,hi=group+1;
-      await page.evaluate(({lo,hi})=>{
-        const ls=[...document.querySelectorAll('link[rel="stylesheet"]')];
-        ls.forEach((el,i)=>{el.disabled=(i>=36&&i<45&&i!==lo);});
-        window.scrollTo(0,0);
-      },{lo,hi});
-      await page.waitForTimeout(120);
-      await fingerSwipe(page,205,669,342);
-      const y=await page.evaluate(()=>({y:window.scrollY,scroller:document.scrollingElement?.tagName,
-        htmlClient:document.documentElement.clientHeight,bodyClient:document.body.clientHeight}));
-      touchExperiments.push({mode:"enable-css-one-"+group,range:links.slice(lo,hi),...y});
-    }
-    await page.evaluate(()=>{document.querySelectorAll('link[rel="stylesheet"]').forEach(el=>el.disabled=false);window.scrollTo(0,0);});
   }
   const preventLog=await page.evaluate(()=>({
     stoppedBy:window.__darTouchAuditCalls||[],
