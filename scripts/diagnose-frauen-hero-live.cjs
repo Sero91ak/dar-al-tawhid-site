@@ -314,7 +314,8 @@ async function nativeTouchProbe(page,route){
     card.afterHash=await page.evaluate(()=>location.hash);
     if(card.afterHash===beforeHash)errors.push("card_touch_did_not_navigate");
   }
-  const debugTraces=await page.evaluate(()=>window.__frauenDebugTraces||[]);
+  const focusDebug=await page.evaluate(()=>window.__frauenFocusDebug||[]);
+   const debugTraces=await page.evaluate(()=>window.__frauenDebugTraces||[]);
   const eventAudit=await page.evaluate(()=>window.__frauenMobileEvents||[]);
   console.log("FRAUEN_NATIVE_TOUCH_PROBE",JSON.stringify({route:route.key,isolation,eventAudit,debugTraces,focusDebug,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors}));
   return {isolation,eventAudit,debugTraces,focusDebug,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors};
