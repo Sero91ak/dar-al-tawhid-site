@@ -281,6 +281,20 @@ function snapshot(){
     url:location.href,readyState:document.readyState,htmlStart:document.documentElement.outerHTML.slice(0,180),
     documentFirstNodes:[...document.childNodes].slice(0,5).map(x=>({nodeType:x.nodeType,name:x.nodeName,value:String(x.nodeValue||"").slice(0,80)}))
    }))}));
+   // Compare actual server-supplied HTML and a second canonical load after
+   // the visual-new cache update (same context, no stale service-worker guess).
+   const canonical=await page.request.get(route.url,{timeout:30000});
+   const visual=await page.request.get(page.url(),{timeout:30000});
+   const [canBody,visualBody]=await Promise.all([canonical.text(),visual.text()]);
+   console.log("FRAUEN_HTML_DOCTYPE_COMPARE",JSON.stringify({
+    canonical:{status:canonical.status(),prefix:canBody.slice(0,160),length:canBody.length},
+    visual:{status:visual.status(),prefix:visualBody.slice(0,160),length:visualBody.length}
+   }));
+   await page.goto(route.url,{waitUntil:"domcontentloaded",timeout:60000});
+   await page.waitForTimeout(2300);
+   console.log("FRAUEN_CANONICAL_RELOAD_MODE",JSON.stringify({url:page.url(),
+    document:await page.evaluate(()=>({compatMode:document.compatMode,doctype:document.doctype?.name||null,route:location.hash,scroll:scrollY}))
+   }));
    let before=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-initial.png")});
    // One mounted production runtime: no duplicate injected listeners.
