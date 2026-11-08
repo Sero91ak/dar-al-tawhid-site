@@ -392,8 +392,16 @@
   const choice=(q,opts,correct=0)=>({type:"choice",prompt:q,options:opts,correct,hint,explain:explanation});
   const ask=choice(s.prompt,[s.right,s.wrong]);
   const age4=[ask,choice("Was möchtest du dir merken?",[s.goal,s.wrong])];
-  const age6=[ask,{type:"text",prompt:"Wie kannst du das heute selbst üben?",sample:s.goal,hint},choice("Wo finden wir eine Grundlage für dieses Thema?",["Im Qurʾān und in der authentischen Sunnah.","Nur in ausgedachten Regeln."],0)];
-  const age9=[ask,{type:"text",prompt:"Erkläre deine Entscheidung anhand einer Alltagssituation.",sample:s.goal+" "+s.right,hint},{type:"text",prompt:"Welchen Bezug hat dieses Thema zu Qurʾān "+base.quran.surah+":"+base.quran.ayah+" und der genannten Sunnah?",sample:"Der Qurʾān lehrt: "+base.quran.meaning+" Die Sunnah erklärt: "+base.hadith.text,hint}];
+  // Explicit, lesson-specific choices: no typing, recording or generic filler distractors.
+  // Source details remain in the explanation, not as overlong tappable buttons.
+  const age6=[ask,choice("Wie übst du „"+s.topic+"“ heute?",[s.right,s.wrong]),choice("Wo finden wir eine Grundlage für dieses Thema?",["Im Qurʾān und in der authentischen Sunnah.","Nur in ausgedachten Regeln."],0)];
+  const age9=[ask,choice("Welche Alltagshandlung passt zu „"+s.topic+"“?",[s.right,s.wrong]),{
+   ...choice("Wie unterscheiden wir die Quellen zu „"+s.topic+"“ von unserer Übung?",[
+    "Qurʾān und Sunnah sind die Quellen; die heutige Alltagssituation ist unsere Lernübung.",
+    "Unsere heutige Alltagssituation steht wortwörtlich in beiden Quellen."
+   ]),
+   explain:"Qurʾān "+base.quran.surah+":"+base.quran.ayah+": "+base.quran.meaning+" Sunnah: "+base.hadith.text
+  }];
   return Object.freeze({
    id:s.id,subject:base.subject,topic:s.topic,title:s.title,
    lead:s.lead,goal:s.goal,quran:base.quran,hadith:base.hadith,
