@@ -287,7 +287,10 @@
   }
   function nextSetFocus(value){
     if(!document.body.classList.contains("is-quran-reader-route"))return;
-    document.body.classList.toggle("dqn-quran-focus",!!value);
+    var wantFocus=!!value;
+    if(document.body.classList.contains("dqn-quran-focus")!==wantFocus) {
+      document.body.classList.toggle("dqn-quran-focus",wantFocus);
+    }
     try {localStorage.setItem(nextFocusKey,value?"1":"0");} catch (_) {}
     var button=$("dqnFocusToggleV4");
     if(button){
@@ -353,7 +356,9 @@
     var old=$("dqnFocusToggleV4");
     if(!reading){
       if(old)old.remove();
-      document.body.classList.remove("dqn-quran-focus");
+      if(document.body.classList.contains("dqn-quran-focus")) {
+        document.body.classList.remove("dqn-quran-focus");
+      }
       return;
     }
     var actions=$("qrcActions");
