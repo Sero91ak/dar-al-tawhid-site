@@ -291,3 +291,20 @@ html[data-theme].dar-adult-global-brand-ready body.has-bottom-nav.is-area-route.
   overflow-x:clip!important;
   overflow-y:visible!important;
 }
+
+/* DAR_FRAUEN_NATIVE_SCROLL_ANCHOR_V1414
+ * Reproduced on iPhone + Android native-UA in actual mobile touch test.
+ * Browser scroll moved ~28px then returned to 0 during each finger step.
+ * With overflow anchoring/smooth snap disabled on this route only, a complete
+ * upward finger swipe moves >300px and Hero/search remain sticky below brand.
+ * Keep ONE document scroll owner, no nested view scroll and no redesign.
+ * Other adult routes, Test lock, Kids, TV and source pages unaffected. */
+html[data-theme]:has(body.is-frauen-route),
+html[data-theme] body.is-frauen-route,
+html[data-theme] body.is-frauen-route > .app,
+html[data-theme] body.is-frauen-route #appView.view,
+html[data-theme] body.is-frauen-route #appView :is(.frauen-library-shell,.frauen-library-list,.frauen-library-pinned-header){
+  overflow-anchor:none!important;
+  scroll-behavior:auto!important;
+  scroll-snap-type:none!important;
+}
