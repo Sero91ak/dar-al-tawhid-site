@@ -122,10 +122,15 @@ const additions={
           "explain": "Ihr Nutzen kann eine gute Tat sein."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie kannst du einen Samen sicher beobachten?",
-          "sample": "Ich pflanze mit Erlaubnis, gieße angemessen und notiere das Wachstum.",
-          "hint": "Das ist unsere Unterrichtsübung."
+          "options": [
+            "Ich pflanze mit Erlaubnis, gieße angemessen und notiere das Wachstum.",
+            "Ich gieße den Samen nie und beobachte ihn nicht."
+          ],
+          "correct": 0,
+          "hint": "Das ist unsere Unterrichtsübung.",
+          "explain": "Ich pflanze mit Erlaubnis, gieße angemessen und notiere das Wachstum."
         }
       ],
       "9-10": [
@@ -141,10 +146,15 @@ const additions={
           "explain": "Die Quellen haben verschiedene Schwerpunkte."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Welche Teile der Unterrichtseinheit sind Anwendung statt Originalzitat?",
-          "sample": "Das Einpflanzen und Beobachten eines Samens sind unsere Lernaufgaben.",
-          "hint": "Keine erfundenen Prophetenworte."
+          "options": [
+            "Das Einpflanzen und Beobachten eines Samens sind unsere Lernaufgaben.",
+            "Die Anweisung, einen Samen zu beobachten, ist ein wörtliches Qurʾān-Zitat."
+          ],
+          "correct": 0,
+          "hint": "Keine erfundenen Prophetenworte.",
+          "explain": "Das Einpflanzen und Beobachten eines Samens sind unsere Lernaufgaben."
         },
         {
           "type": "text",
@@ -270,10 +280,15 @@ const additions={
           "explain": "Der Ḥadīṯ von Ǧibrīl."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie lernen wir über Engel?",
-          "sample": "Aus Qurʾān und authentischer Sunnah, ohne neue Details zu erfinden.",
-          "hint": "Unterscheide Wissen von Vermutungen."
+          "options": [
+            "Aus Qurʾān und authentischer Sunnah, ohne neue Details zu erfinden.",
+            "Aus ausgedachten Geschichten, auch wenn sie keinen Beleg haben."
+          ],
+          "correct": 0,
+          "hint": "Unterscheide Wissen von Vermutungen.",
+          "explain": "Aus Qurʾān und authentischer Sunnah, ohne neue Details zu erfinden."
         }
       ],
       "9-10": [
@@ -289,10 +304,15 @@ const additions={
           "explain": "Der Glaube an die Engel ist belegt."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie stimmen Qurʾān 2:285 und Muslim 8 überein?",
-          "sample": "Beide nennen die Engel als Gegenstand des Glaubens.",
-          "hint": "Vergleiche die ausdrücklich genannten Grundlagen."
+          "options": [
+            "Beide nennen die Engel als Gegenstand des Glaubens.",
+            "Beide lehren, dass Engel nicht zum Glauben gehören."
+          ],
+          "correct": 0,
+          "hint": "Vergleiche die ausdrücklich genannten Grundlagen.",
+          "explain": "Beide nennen die Engel als Gegenstand des Glaubens."
         },
         {
           "type": "text",
@@ -418,10 +438,15 @@ const additions={
           "explain": "Helfen ist gut."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wann darfst du Nein sagen?",
-          "sample": "Wenn ich erschöpft bin, mich unsicher fühle oder die Aufgabe zu groß ist.",
-          "hint": "Gute Hilfe ist freiwillig und sicher."
+          "options": [
+            "Wenn ich erschöpft bin, mich unsicher fühle oder die Aufgabe zu groß ist.",
+            "Ich muss jede Aufgabe übernehmen, auch wenn ich mich unsicher fühle."
+          ],
+          "correct": 0,
+          "hint": "Gute Hilfe ist freiwillig und sicher.",
+          "explain": "Wenn ich erschöpft bin, mich unsicher fühle oder die Aufgabe zu groß ist."
         }
       ],
       "9-10": [
@@ -437,10 +462,15 @@ const additions={
           "explain": "Keinen Dank einzufordern heißt nicht, Dank zu verbieten."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie ergänzt Muslim 2699 den Qurʾānvers?",
-          "sample": "Der Vers spricht von aufrichtigem Geben, der Ḥadīṯ vom Wert der gegenseitigen Hilfe.",
-          "hint": "Gib beide Quellen getrennt an."
+          "options": [
+            "Der Vers spricht von aufrichtigem Geben, der Ḥadīṯ vom Wert der gegenseitigen Hilfe.",
+            "Der Vers und der Ḥadīṯ behandeln ausschließlich das Gießen von Pflanzen."
+          ],
+          "correct": 0,
+          "hint": "Gib beide Quellen getrennt an.",
+          "explain": "Der Vers spricht von aufrichtigem Geben, der Ḥadīṯ vom Wert der gegenseitigen Hilfe."
         },
         {
           "type": "text",
