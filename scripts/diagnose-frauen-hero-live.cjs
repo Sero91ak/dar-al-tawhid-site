@@ -273,7 +273,10 @@ function snapshot(){
    await page.route("**/assets/frauen/frauen-live-adapter.js?*",intercept=>intercept.fulfill({status:200,contentType:"application/javascript; charset=utf-8",body:localAdapter}));
    page.on("pageerror",e=>errors.push(String(e.message).slice(0,300)));
    const response=await page.goto(route.url,{waitUntil:"domcontentloaded",timeout:60000});
+   const rawHtml=await response.text();
+   console.log("FRAUEN_DOCUMENT_MODE",JSON.stringify({route:route.key,phase:"domcontentloaded",responseUrl:response.url(),responsePrefix:rawHtml.slice(0,180),document:await page.evaluate(()=>({compatMode:document.compatMode,doctype:document.doctype?.name||null,url:location.href,readyState:document.readyState}))}));
    await page.waitForTimeout(6000);
+   console.log("FRAUEN_DOCUMENT_MODE",JSON.stringify({route:route.key,phase:"hydrated",document:await page.evaluate(()=>({compatMode:document.compatMode,doctype:document.doctype?.name||null,url:location.href,readyState:document.readyState}))}));
    let before=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-initial.png")});
    // One mounted production runtime: no duplicate injected listeners.
