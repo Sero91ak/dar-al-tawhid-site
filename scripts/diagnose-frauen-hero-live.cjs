@@ -186,8 +186,8 @@ async function nativeTouchProbe(page,route){
    * native styles; disable only 54 external stylesheet LINKs by group. */
   if(route.key==="visitor"&&(scrolled.docScroll||0)<50){
     const links=await page.evaluate(()=>[...document.querySelectorAll('link[rel="stylesheet"]')].map((el,i)=>({i,url:new URL(el.href).pathname})));
-    for(let group=0;group<6;group++){
-      const lo=group*9,hi=(group+1)*9;
+    for(let group=36;group<45;group++){
+      const lo=group,hi=group+1;
       await page.evaluate(({lo,hi})=>{
         const ls=[...document.querySelectorAll('link[rel="stylesheet"]')];
         ls.forEach((el,i)=>{el.disabled=(i>=lo&&i<hi);});
