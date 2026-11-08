@@ -41,7 +41,7 @@ async function nativeTouchProbe(page,route){
     const note=(kind,data)=>{
       const a=window.__frauenFocusDebug;
       a.push({kind,at:Math.round(performance.now()),scroll:scrollY,...data});
-      if(a.length>130)a.shift();
+      if(a.length>220)a.shift();
     };
     // Record the originating JS stack for every direct move/removal of the
     // input or its containing Hero/search stage. MutationObserver only gives
@@ -49,6 +49,28 @@ async function nativeTouchProbe(page,route){
     const containsSearch=(n)=>n&&n.nodeType===1&&
       (n.matches?.("[data-frauen-q],.frauen-library-search-wrap,.dar-immersive-hero-stage")
        ||!!n.querySelector?.("[data-frauen-q]"));
+    // DOM removals done by .innerHTML bypass Node.removeChild wrappers.
+    // Observe owner and stack of the actual destructive assignment.
+    const htmlDescriptor=Object.getOwnPropertyDescriptor(Element.prototype,"innerHTML");
+    if(htmlDescriptor?.set&&htmlDescriptor?.get){
+      Object.defineProperty(Element.prototype,"innerHTML",{
+        configurable:true,
+        get(){return htmlDescriptor.get.call(this)},
+        set(value){
+          const selected=this.matches?.("#appView,.dar-frauen-production-root,.frauen-library-shell,.frauen-library-hub,.frauen-library-list,.dar-immersive-hero-stage");
+          const hasInput=!!this.querySelector?.("[data-frauen-q]");
+          if((selected||hasInput)&&document.body?.classList.contains("is-frauen-route")){
+            note("innerHTML-write",{
+              target:this.tagName,cls:String(this.className||this.id).slice(0,95),
+              hasInput,beforeCount:this.querySelectorAll?.("[data-frauen-q]").length,
+              nextLength:String(value).length,
+              stack:String(new Error().stack||"").slice(0,1650)
+            });
+          }
+          return htmlDescriptor.set.call(this,value);
+        }
+      });
+    }
     for(const method of ["appendChild","insertBefore","removeChild","replaceChild"]){
       const orig=Node.prototype[method];
       Node.prototype[method]=function(node){
