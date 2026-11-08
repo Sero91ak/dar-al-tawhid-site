@@ -128,7 +128,7 @@ async function nativeTouchProbe(page,route){
   if((scrolled.docScroll||0)<50)errors.push("native_finger_swipe_does_not_scroll");
   const isolation=[];
   if(route.key==="visitor"&&(scrolled.docScroll||0)<50){
-    const modes=["no-anchor","no-shift","scroll-root-strict","html-flow-auto","fixed-hero","disable-both-minimal-fixed-header","no-app-effects"];
+    const modes=["anchor-all-only","scroll-behavior-only","scroll-snap-only","anchor-html-only","anchor-body-only","anchor-shell-only","anchor-header-only","anchor-no-smooth","no-anchor"];
     for(const mode of modes){
       await page.evaluate(mode=>{
         const links=[...document.querySelectorAll('link[rel="stylesheet"]')];
@@ -142,6 +142,14 @@ async function nativeTouchProbe(page,route){
         const own=document.getElementById("frauenCandidateExperiment");
         if(own)own.remove();
         const add=(css)=>{const el=document.createElement("style");el.id="frauenCandidateExperiment";el.textContent=css;document.head.appendChild(el)};
+        if(mode==="anchor-all-only")add("html,body,.app,#appView,.frauen-library-shell,.frauen-library-pinned-header{overflow-anchor:none!important}");
+        if(mode==="scroll-behavior-only")add("html,body,.app,#appView,.frauen-library-shell,.frauen-library-pinned-header{scroll-behavior:auto!important}");
+        if(mode==="scroll-snap-only")add("html,body,.app,#appView,.frauen-library-shell,.frauen-library-pinned-header{scroll-snap-type:none!important}");
+        if(mode==="anchor-html-only")add("html{overflow-anchor:none!important}");
+        if(mode==="anchor-body-only")add("body{overflow-anchor:none!important}");
+        if(mode==="anchor-shell-only")add(".frauen-library-shell{overflow-anchor:none!important}");
+        if(mode==="anchor-header-only")add(".frauen-library-pinned-header{overflow-anchor:none!important}");
+        if(mode==="anchor-no-smooth")add("html,body,.app,#appView,.frauen-library-shell,.frauen-library-pinned-header{overflow-anchor:none!important;scroll-behavior:auto!important}");
         if(mode==="no-anchor")add("html,body,.app,#appView,.frauen-library-shell,.frauen-library-pinned-header{overflow-anchor:none!important;scroll-behavior:auto!important;scroll-snap-type:none!important}");
         if(mode==="no-shift")add("body.is-frauen-route #appView .frauen-library-shell{margin-top:0!important;transform:none!important;translate:none!important}");
         if(mode==="scroll-root-strict")add("html{height:auto!important;min-height:100vh!important;overflow-x:clip!important;overflow-y:auto!important;}body.is-frauen-route{height:auto!important;min-height:100vh!important;overflow-x:clip!important;overflow-y:visible!important}body.is-frauen-route .app{height:auto!important;overflow:visible!important}body.is-frauen-route #appView{height:auto!important;overflow:visible!important}");
