@@ -2,6 +2,11 @@
   "use strict";
   var ENTRY_ATTR="data-dar-frauen-live-entry";
   var hookTimer=0,entryScheduled=false,painting=false;
+  /* FRAUEN_RENDER_IDEMPOTENT_V1410:
+   * The shared app shell may invoke window.render hundreds of times even if
+   * Frauen data and route did not change. Never destroy input/sticky DOM or
+   * reset scroll in that case. Preserve original frozen content renderer. */
+  var lastFrauenRoute=null,lastFrauenMarkup=null;
 
   function decodePart(v){try{return decodeURIComponent(v)}catch(e){return v}}
   function hashRoute(){
@@ -24,6 +29,8 @@
   }
   function isFrauen(){return !!route()}
   function cleanup(){
+    lastFrauenRoute=null;
+    lastFrauenMarkup=null;
     if(document.body){
       document.body.classList.remove("is-frauen-route");
       document.body.removeAttribute("data-frauen-view");
@@ -61,11 +68,37 @@
       ensureBridgeStyle();
       document.documentElement.classList.add("dar-frauen-live");
       if(document.body)document.body.classList.add("is-frauen-route");
-      app.innerHTML='<div class="dar-frauen-production-root" data-frauen-production="1">'+womenHtml(r.value)+'</div>';
+      var key=String(r.value||"");
+      var sameRoute=lastFrauenRoute===key;
+      var markup=womenHtml(key);
+      var present=app.querySelector(':scope > .dar-frauen-production-root[data-frauen-production="1"]');
+      if(sameRoute&&present&&lastFrauenMarkup===markup)return false;
+      /* A content refresh may change the list, but it must never jump the
+       * document to the top or eat the active search caret. Only navigation
+       * to a different Frauen route starts at scroll position zero. */
+      var active=document.activeElement;
+      var searchFocus=!!(sameRoute&&active&&active.matches&&active.matches("[data-frauen-q]"));
+      var caret=searchFocus&&typeof active.selectionStart==="number"?active.selectionStart:null;
+      var previousScroll=sameRoute?Math.max(0,global.scrollY||document.documentElement.scrollTop||0):0;
+      app.innerHTML='<div class="dar-frauen-production-root" data-frauen-production="1">'+markup+'</div>';
+      lastFrauenRoute=key;
+      lastFrauenMarkup=markup;
       if(global.DARFrauenFiqh&&typeof global.DARFrauenFiqh.bind==="function")global.DARFrauenFiqh.bind();
-      try{app.scrollTop=0}catch(e){}
-      try{global.scrollTo(0,0)}catch(e){}
-      try{document.dispatchEvent(new CustomEvent("dar:frauen-render",{detail:{value:r.value||""}}))}catch(e){}
+      if(!sameRoute){
+        try{app.scrollTop=0}catch(e){}
+        try{global.scrollTo(0,0)}catch(e){}
+      }else if(previousScroll>0){
+        try{global.scrollTo(0,previousScroll)}catch(e){}
+      }
+      if(searchFocus){
+        var current=app.querySelector("[data-frauen-q]");
+        if(current&&typeof current.focus==="function"){
+          current.focus({preventScroll:true});
+          if(caret!==null&&typeof current.setSelectionRange==="function")
+           try{current.setSelectionRange(caret,caret)}catch(e){}
+        }
+      }
+      try{document.dispatchEvent(new CustomEvent("dar:frauen-render",{detail:{value:key}}))}catch(e){}
       return true;
     }finally{painting=false}
   }
