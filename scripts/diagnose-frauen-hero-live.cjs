@@ -38,8 +38,27 @@ async function nativeTouchProbe(page,route){
   const mobileEventAudit=await page.evaluate(()=>{
     window.__frauenMobileEvents=[];
     window.__frauenFocusDebug=[];
-    const note=(kind,data)=>{if(window.__frauenFocusDebug.length<45)
-      window.__frauenFocusDebug.push({kind,at:Math.round(performance.now()),scroll:scrollY,...data})};
+    const note=(kind,data)=>{
+      const a=window.__frauenFocusDebug;
+      a.push({kind,at:Math.round(performance.now()),scroll:scrollY,...data});
+      if(a.length>130)a.shift();
+    };
+    // Record the originating JS stack for every direct move/removal of the
+    // input or its containing Hero/search stage. MutationObserver only gives
+    // the effect, these call stacks give the responsible code module.
+    const containsSearch=(n)=>n&&n.nodeType===1&&
+      (n.matches?.("[data-frauen-q],.frauen-library-search-wrap,.dar-immersive-hero-stage")
+       ||!!n.querySelector?.("[data-frauen-q]"));
+    for(const method of ["appendChild","insertBefore","removeChild","replaceChild"]){
+      const orig=Node.prototype[method];
+      Node.prototype[method]=function(node){
+        if(containsSearch(node))note("dom-"+method,{node:node.tagName,
+          cls:String(node.className||"").slice(0,85),
+          into:String(this.className||this.nodeName).slice(0,85),
+          stack:String(new Error().stack||"").slice(0,1200)});
+        return orig.apply(this,arguments);
+      };
+    }
     document.addEventListener("focusin",ev=>{
       if(ev.target?.matches?.("[data-frauen-q]"))note("focusin",{connected:ev.target.isConnected});
     },true);
