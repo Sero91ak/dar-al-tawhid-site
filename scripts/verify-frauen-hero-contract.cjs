@@ -163,6 +163,38 @@ new (require("node:vm").Script)(seam,{filename:"frauen-hero-seam-runtime-v1407.j
  assert.equal(htmlPaints,3,"Navigation to a new group must repaint");
  assert.equal(win.scrollY,0,"Navigation must start new Frauen route at top");
 }
+/* DAR_FRAUEN_HTML5_DOCUMENT_SCROLL_V1413
+ * The Cloudflare Worker must NEVER insert styles before <!doctype html>.
+ * The native iOS/Android root index has no literal </head> (legacy shell),
+ * so old "css + html" fallback made mobile Chromium run in BackCompat with
+ * BODY as the scroll root. This broke sticky Hero, search and finger pan. */
+{
+ const vm=require("node:vm");
+ const start=native.indexOf("function addStyleWithoutMovingDoctype(");
+ const end=native.indexOf("function activateAdultCompactHero(",start);
+ assert.ok(start>0&&end>start,"HTML5-Dokumentbarriere muss im Cloudflare-Router vorhanden sein");
+ const isolate=native.slice(start,end);
+ const addStyle=vm.runInNewContext(isolate+";addStyleWithoutMovingDoctype",{});
+ assert.equal(typeof addStyle,"function");
+ for(const path of ["index.html","test/index.html"]){
+  const source=fs.readFileSync(path,"utf8");
+  const stylesheet='<link rel="stylesheet" id="doctypeRegressionCssV1413" href="/assets/doctypetest.css">';
+  const corrected=addStyle(source,stylesheet);
+  assert.match(source,/^<!doctype html>/i,path+" muss mit HTML5 doctype beginnen");
+  assert.match(corrected,/^<!doctype html>/i,path+": die Doctype-Deklaration darf nicht verrueckt werden");
+  assert.ok(corrected.indexOf(stylesheet)>corrected.indexOf("<head>"),path+": CSS innerhalb HEAD");
+  assert.equal(corrected.slice(0,source.indexOf("<head>")),source.slice(0,source.indexOf("<head>")),
+   path+": Source vor HEAD bytegenau erhalten");
+  assert.equal((corrected.match(/doctype html/gi)||[]).length,(source.match(/doctype html/gi)||[]).length,
+   path+": keine zusaetzliche Doctype erzeugen");
+ }
+ assert.match(native,/addStyleWithoutMovingDoctype\(html, css\)/,
+  "Besucher/CSS-Inject muss durch HTML5-sichere Einfuegung gehen");
+ assert.match(native,/addStyleWithoutMovingDoctype\(html, v3Styles\)/,
+  "Test-App/CSS-Inject muss ebenfalls HTML5-sicher sein");
+ assert.ok(!native.includes(": css + html")&&!native.includes(": v3Styles + html"),
+  "Keine Stylesheets mehr vor <!doctype html> setzen");
+}
 console.log("PASS: V1407 original photos, one-column chapters, pinned Hero/search, and under-scrolling card area.");
 
 console.log("OK: Frauenbereich unverändert außer genehmigtem Entfernen der doppelten Mehr-Karte.");

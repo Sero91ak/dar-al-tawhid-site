@@ -155,6 +155,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "frauen-cloudflare-html5-doctype-native-touch-v1413-20261108",
+      "at": "2026-11-08T11:20:00+01:00",
+      "approvedBy": "user-explicit-20261108-video-live-frauen-global-repair",
+      "reason": "Root-cause proven in production: Cloudflare site-router prepends visitor stylesheet before <!doctype html> because index.html has no </head>; served page is BackCompat, document.scrollingElement=BODY, touch pan frozen. Preserve doctype by injecting within head for shared adult iOS/Android and Test, plus regression guard. No Kids, content, photos, sources or native Swift changes.",
+      "paths": [
+        "cloudflare/site-router.js",
+        "scripts/verify-frauen-hero-contract.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-11T23:59:00+01:00"
+    },
+    {
       "id": "frauen-global-scroll-tap-fix-v1411-20261108",
       "at": "2026-11-08T09:35:00+01:00",
       "approvedBy": "user-explicit-global-frauen-repair-now-20261108",

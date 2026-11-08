@@ -322,6 +322,20 @@ function activateAdultGlobalBrandV2(html) {
   return html.includes("</body>") ? html.replace("</body>", addon + "</body>") : html.includes("</html>") ? html.replace("</html>", addon + "</html>") : html + addon;
 }
 
+/* DAR_HTML5_DOCTYPE_BARRIER_V1413
+ * The native Frauen WKWebView/Android visitor fell into BackCompat because
+ * styles were prepended BEFORE <!doctype html> when index.html omitted </head>.
+ * Keep the document declaration first, and inject only inside the head. */
+function addStyleWithoutMovingDoctype(html, tag) {
+  if (typeof html !== "string" || !tag) return html;
+  if (/<\/head\s*>/i.test(html))
+    return html.replace(/<\/head\s*>/i, match => tag + "\n" + match);
+  if (/<head\b[^>]*>/i.test(html))
+    return html.replace(/<head\b[^>]*>/i, match => match + "\n" + tag + "\n");
+  if (/<!doctype\s+html\s*>/i.test(html))
+    return html.replace(/<!doctype\s+html\s*>/i, match => match + "\n" + tag);
+  return html;
+}
 function activateAdultCompactHero(html) {
   if (typeof html !== "string") return html;
   // Clean only known injected Hero tags. Never remove the underlying native
@@ -363,7 +377,7 @@ function activateAdultCompactHero(html) {
   // public visitor, iOS WKWebView and Android PWA. No Test/Kids/push routes.
   if (!html.includes('id="darHomeRecentPostsV1Css"')) {
     const css = '<link rel="stylesheet" id="darHomeRecentPostsV1Css" href="/assets/dar-home-recent-posts-v1.css?v=20261101-premium-home-v11">';
-    html = html.includes("</head>") ? html.replace("</head>", css + "</head>") : css + html;
+    html = addStyleWithoutMovingDoctype(html, css);
   }
   if (!html.includes('id="darHomeRecentPostsV1Js"')) {
     const js = '<script defer id="darHomeRecentPostsV1Js" src="/assets/dar-home-recent-posts-v1.js?v=20261105-post-nine-v1"></' + 'script>';
@@ -1917,7 +1931,7 @@ export default {
         const v3Styles = '<link rel="stylesheet" id="darTestHomeV3ActualRoute" href="/test/assets/dar-home-v3-compact.css?v=20261019-home-plain-v2">';
         const noPhotos = '<link rel="stylesheet" id="darTestHomeNoPhotosActualRouteV2" href="/test/assets/home-background-remove-v2.css?v=20261019-photo-free-v2">';
         if (!html.includes('id="darTestHomeV3ActualRoute"')) {
-          html = html.includes("</head>") ? html.replace("</head>", v3Styles + "\n</head>") : v3Styles + html;
+          html = addStyleWithoutMovingDoctype(html, v3Styles);
         }
         // Put the no-photo rule after all older Startseite CSS. It is limited
         // to body.is-home-route and never replaces theme colours or icons.
