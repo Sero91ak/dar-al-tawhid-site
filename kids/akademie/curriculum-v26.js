@@ -832,10 +832,15 @@ const additions={
           "explain": "Respekt ist wichtig, aber er bedeutet nicht, Gewalt oder gefährliche Situationen zu verschweigen."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was steht in der Quelle und was ist unsere heutige Unterrichtsanwendung?",
-          "sample": "Respekt ist wichtig, aber er bedeutet nicht, Gewalt oder gefährliche Situationen zu verschweigen.",
-          "hint": "Unterscheide Originalbeleg, Bedeutung und Alltagsbeispiel."
+          "options": [
+            "Respekt ist wichtig, aber er bedeutet nicht, Gewalt oder gefährliche Situationen zu verschweigen.",
+            "Wer freundlich mit Eltern umgeht, darf niemals Hilfe holen, auch wenn Gefahr besteht."
+          ],
+          "correct": 0,
+          "hint": "Unterscheide Originalbeleg, Bedeutung und Alltagsbeispiel.",
+          "explain": "Respekt ist wichtig, aber er bedeutet nicht, Gewalt oder gefährliche Situationen zu verschweigen."
         }
       ]
     }
