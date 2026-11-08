@@ -201,6 +201,12 @@
   if(document.documentElement){
     new MutationObserver(function(){if(isFrauen())return;scheduleEntry()}).observe(document.documentElement,{childList:true,subtree:true});
   }
+  /* DAR_FRAUEN_SINGLE_RENDER_OWNER_V1415
+   * The inline index.html function render() is a lexical declaration: wrapping
+   * window.render does NOT intercept its own internal render() calls. Publish
+   * the one canonical, idempotent women paint entry for that shell; never
+   * allow the competing inline renderer to clear #appView underneath search. */
+  global.DARFrauenProductionPaintV1415=function(){return paint()};
   global.DAROpenFrauen=function(value){go(value||"")};
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);else boot();
 })(window);
