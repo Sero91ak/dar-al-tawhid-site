@@ -264,9 +264,149 @@
     });
     host.insertAdjacentElement("afterend", section);
   }
+
+  /* DAR_QURAN_NEXT_LEVEL_V4: editorial presentation only.
+   * Preserves the canonical Quran picker, saved progress and audio controller.
+   * No independent route, verse store, player, or background timer. */
+  var NEXT_TEXT = {
+    de:["Qurʾān-Bibliothek","Den Qurʾān entdecken","114 Sūren · Lesen, hören und lernen","Weiterlesen","Sūren erkunden","Fokus","Fokusmodus beenden"],
+    ar:["مكتبة القرآن","استكشف القرآن","١١٤ سورة · قراءة واستماع وتعلّم","متابعة القراءة","تصفّح السور","تركيز","إنهاء وضع التركيز"],
+    en:["Qurʾān library","Explore the Qurʾān","114 surahs · Read, listen and learn","Continue reading","Explore surahs","Focus","Leave focus mode"],
+    tr:["Kurʾân kütüphanesi","Kurʾân’ı keşfet","114 sûre · Oku, dinle ve öğren","Okumaya devam et","Sûrelere göz at","Odak","Odak modundan çık"],
+    ku:["Pirtûkxaneya Qurʾanê","Qurʾanê keşf bike","114 sûre · Bixwîne, guhdarî bike û fêr bibe","Xwendinê bidomîne","Sûreyan bibîne","Baldarî","Ji moda baldarî derkeve"],
+    ckb:["کتێبخانەی قورئان","قورئان بناسە","١١٤ سوورەت · بخوێنەوە، گوێ بگرە و فێربە","بەردەوام بە لە خوێندنەوە","سوورەتەکان ببینە","سەرنج","دەرچوون لە دۆخی سەرنج"],
+    bs:["Biblioteka Kurʾāna","Istraži Kurʾān","114 sura · Čitaj, slušaj i uči","Nastavi čitati","Istraži sure","Fokus","Izađi iz fokusa"],
+    fr:["Bibliothèque du Coran","Explorer le Coran","114 sourates · Lire, écouter et apprendre","Reprendre la lecture","Explorer les sourates","Concentration","Quitter la concentration"],
+    es:["Biblioteca del Corán","Explorar el Corán","114 suras · Leer, escuchar y aprender","Seguir leyendo","Explorar las suras","Enfoque","Salir del modo enfoque"]
+  };
+  var nextProgressFrame = false, nextFocusKey="darQuranReaderFocusV4";
+  function nextWords(){return NEXT_TEXT[locale()] || NEXT_TEXT.de;}
+  function nextIsRtl(){var l=locale();return l==="ar"||l==="ckb";}
+  function nextStoredFocus(){
+    try {return localStorage.getItem(nextFocusKey)==="1";} catch (_) {return false;}
+  }
+  function nextSetFocus(value){
+    if(!document.body.classList.contains("is-quran-reader-route"))return;
+    document.body.classList.toggle("dqn-quran-focus",!!value);
+    try {localStorage.setItem(nextFocusKey,value?"1":"0");} catch (_) {}
+    var button=$("dqnFocusToggleV4");
+    if(button){
+      button.setAttribute("aria-pressed",String(!!value));
+      button.setAttribute("aria-label",nextWords()[value?6:5]);
+      button.title=nextWords()[value?6:5];
+    }
+  }
+  function nextMountStage(overview) {
+    var old=$("dqnStageV4");
+    if(!overview) {if(old)old.remove();return;}
+    var header=$("qovHeader");
+    if(!header||!header.parentNode)return;
+    if(!old){
+      old=document.createElement("section");
+      old.id="dqnStageV4";
+      old.setAttribute("aria-label","Qurʾān");
+      old.addEventListener("click",function(event){
+        var action=event.target.closest("[data-dqn-stage]");
+        if(!action||!old.contains(action))return;
+        var key=action.getAttribute("data-dqn-stage");
+        if(key==="continue"){
+          var resume=document.querySelector("[data-quran-continue]");
+          if(resume){resume.click();return;}
+        }
+        if(key==="browse"||key==="continue"){
+          var grid=$("quranSurahGrid");
+          if(grid)grid.scrollIntoView({behavior:"auto",block:"start"});
+        }
+      });
+    }
+    if(old.previousElementSibling!==header)header.insertAdjacentElement("afterend",old);
+    var lang=locale(),rtl=nextIsRtl();
+    if(old.dataset.locale!==lang){
+      var t=nextWords();
+      old.dataset.locale=lang;
+      old.setAttribute("lang",lang);
+      old.setAttribute("dir",rtl?"rtl":"ltr");
+      old.innerHTML=
+        '<div class="dqn-stage-copy">'+
+          '<div class="dqn-stage-kicker">'+t[0]+'</div>'+
+          '<h2 class="dqn-stage-title">'+t[1]+'</h2>'+
+          '<p class="dqn-stage-subtitle">'+t[2]+'</p>'+
+          '<div class="dqn-stage-actions">'+
+            '<button type="button" class="dqn-stage-action" data-dqn-stage="continue">'+t[3]+' <span aria-hidden="true">›</span></button>'+
+            '<button type="button" class="dqn-stage-action" data-dqn-stage="browse">'+t[4]+'</button>'+
+          '</div>'+
+        '</div>';
+    }
+  }
+  function nextProgressElement(){
+    var el=$("dqnReadProgressV4");
+    if(!el){
+      el=document.createElement("div");
+      el.id="dqnReadProgressV4";
+      el.setAttribute("aria-hidden","true");
+      el.innerHTML="<span></span>";
+      document.body.appendChild(el);
+    }
+    return el;
+  }
+  function nextMountFocus(reading){
+    var old=$("dqnFocusToggleV4");
+    if(!reading){
+      if(old)old.remove();
+      document.body.classList.remove("dqn-quran-focus");
+      return;
+    }
+    var actions=$("qrcActions");
+    if(!actions)return;
+    if(!old){
+      old=document.createElement("button");
+      old.type="button";
+      old.id="dqnFocusToggleV4";
+      old.textContent="◉";
+      old.addEventListener("click",function(ev){
+        ev.preventDefault();
+        nextSetFocus(!document.body.classList.contains("dqn-quran-focus"));
+      });
+    }
+    if(old.parentElement!==actions)actions.appendChild(old);
+    nextSetFocus(nextStoredFocus());
+    nextProgressElement();
+    nextScheduleProgress();
+  }
+  function nextReaderScroller(){
+    var verse=document.querySelector(".quran-ayah");
+    if(!verse)return null;
+    for(var node=verse.parentElement;node&&node!==document.body;node=node.parentElement){
+      var overflow=window.getComputedStyle(node).overflowY;
+      if(/auto|scroll/.test(overflow)&&node.scrollHeight>node.clientHeight+20)return node;
+    }
+    return document.scrollingElement||document.documentElement;
+  }
+  function nextScheduleProgress(){
+    if(nextProgressFrame||!document.body.classList.contains("is-quran-reader-route"))return;
+    nextProgressFrame=true;
+    requestAnimationFrame(function(){
+      nextProgressFrame=false;
+      if(!document.body.classList.contains("is-quran-reader-route"))return;
+      var progress=$("dqnReadProgressV4"),root=nextReaderScroller();
+      if(!progress||!root)return;
+      var max=root.scrollHeight-root.clientHeight;
+      if(max<=20){progress.style.opacity="0";return;}
+      var value=Math.max(0,Math.min(100,(root.scrollTop/max)*100));
+      progress.style.opacity="1";
+      var bar=progress.firstElementChild;
+      if(bar)bar.style.width=value.toFixed(1)+"%";
+    });
+  }
+  function nextMount(overview,reading){
+    nextMountStage(overview);
+    nextMountFocus(reading);
+  }
+
   function mount() {
     var reading=document.body.classList.contains("is-quran-reader-route");
     var overview=document.body.classList.contains("is-quran-overview");
+    nextMount(overview,reading);
     var actions=reading ? $("qrcActions") : overview ? document.querySelector("#qovHeader .qov-icon-actions") : null;
     if (!actions) {close(false);mountQuickActions();return;}
     mountQuickActions();
@@ -319,6 +459,7 @@
       window.visualViewport.addEventListener("resize",schedulePosition,{passive:true});
       window.visualViewport.addEventListener("scroll",schedulePosition,{passive:true});
     }
+    document.addEventListener("scroll",nextScheduleProgress,{capture:true,passive:true});
     document.addEventListener("scroll",function(e){
       if (!panel || panel.hidden || (e.target && panel.contains(e.target))) return;
       schedulePosition();
