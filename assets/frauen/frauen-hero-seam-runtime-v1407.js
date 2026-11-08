@@ -89,6 +89,13 @@ function reconcile(){
  var body=document.body;
  if(!body||!body.classList.contains("is-frauen-route")){restoreBodyOverflow();return;}
  frauenDocumentScroll(body);
+ /* DAR_FRAUEN_FOCUSED_SEARCH_NO_REPARENT_V1415
+  * Mobile touch QA traced focusout 3ms after focusin to repeated DOM moves
+  * of the active original search node by overlapping hero observers.
+  * Never reparent the live search/hero while its input owns focus;
+  * resume restoration only after leaving the text field. */
+ var focused=document.activeElement;
+ if(focused&&focused.matches&&focused.matches("#appView [data-frauen-q]"))return;
  /* V1409: mount the approved photo/search stage on EVERY Frauen render,
     even while the native/test brand is still being attached. The previous
     early header guard left both nodes unpinned after a cold route entry. */

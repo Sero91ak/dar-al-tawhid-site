@@ -8,7 +8,7 @@ const crypto=require("node:crypto");
 const frozen={
   "assets/frauen/frauen-authority-v1292.css": "6bb786de1ecb1b0d3ed5d01ec511cc10c9b3da86",
   "assets/frauen/frauen-fiqh.js": "2eeb486a100ad3e433860a9bb1c09e225edd5a4c",
-  "assets/frauen/frauen-live-adapter.js": "2c5704b164da160e463b5accabb50d9a21e0abce",
+  "assets/frauen/frauen-live-adapter.js": "fbee8f44337f0d3e5a1c8cea4e64e493edaef14f",
   "test/assets/frauen/frauen-authority-v1292.css": "07b9fa32585de8fcb57aad13b13ab2c67167ee4b",
   "test/assets/frauen/frauen-fiqh.js": "d2abb88d444de8879046e4edc58ca659b1eb94e8"
 };
@@ -22,6 +22,12 @@ for(const [path,sha] of Object.entries(frozen)){
 }
 const adapter=fs.readFileSync("assets/frauen/frauen-live-adapter.js","utf8");
 assert.ok(adapter.includes("function paint()"),"Original live Frauen adapter fehlt");
+assert.match(adapter,/DAR_FRAUEN_SINGLE_RENDER_OWNER_V1415/,"Frauen braucht genau einen Render-Eigentuemer");
+assert.match(adapter,/global\.DARFrauenProductionPaintV1415=function\(\)/,"Adapter muss den kanonischen Paint delegierbar halten");
+const nativeIndex=fs.readFileSync("index.html","utf8");
+assert.match(nativeIndex,/DAR_FRAUEN_SINGLE_RENDER_OWNER_V1415/,"Native Index hat weiterhin einen zweiten destruktiven Frauenrenderer");
+assert.match(nativeIndex,/window\.DARFrauenProductionPaintV1415\(\);[\s\S]*?markAppBootComplete\(\);[\s\S]*?return;/,
+  "Globaler inline Render muss Frauen bei vorhandener Bridge ohne DOM-Ersatz durchreichen");
 assert.match(adapter,/FRAUEN_RENDER_IDEMPOTENT_V1410/,
  "Nur geaenderte Frauen-Inhalte duerfen den DOM neu aufbauen");
 assert.match(adapter,/sameRoute&&present&&lastFrauenMarkup===markup\)return false/,
@@ -36,7 +42,7 @@ assert.ok(adapter.includes("MEHR_DUPLICATE_FRAUEN_ROW_REMOVED_V1"),"Doppelte Fra
 assert.ok(!adapter.includes("target.appendChild(btn)"),"Veraltete zusätzliche Frauen-Karte bleibt aktiv");
 const native=fs.readFileSync("cloudflare/site-router.js","utf8");
 assert.ok(native.includes("/test/assets/frauen/frauen-fiqh.js?v=frauen-rollback-20261016-1500"),"Alten iOS Frauen renderer wiederherstellen");
-assert.ok(native.includes("/assets/frauen/frauen-live-adapter.js?v=frauen-native-scroll-no-reset-v1411-20261108"),"Idempotenten Frauen-Adapter mit neuem Cache-Key ausliefern");
+assert.ok(native.includes("/assets/frauen/frauen-live-adapter.js?v=frauen-native-scroll-no-reset-single-owner-v1415-20261108"),"Idempotenten Frauen-Adapter mit neuem Cache-Key ausliefern");
 const testWorker=fs.readFileSync("cloudflare/test-app-worker.js","utf8");
 assert.ok(testWorker.includes("frauen-authority-v1292.css?v=frauen-rollback-20261016-1500"),"Test CSS cache key fehlt");
 for(const prefix of ["assets/frauen/library-v1224/","test/assets/frauen/library-v1224/"]){
@@ -54,6 +60,8 @@ assert.match(flow,/\.frauen-library-area-grid\{[\s\S]*?display:flex!important;[\
 assert.match(flow,/\.frauen-library-area-grid > \.frauen-library-area-card\{[\s\S]*?width:100%!important;/,"Kapitelkarten müssen volle Breite haben");
 assert.match(flow,/DAR_FRAUEN_PINNED_HERO_UNDER_SCROLL_V1407/,"Sticky-Frauen-Hero V1407 fehlt");
 assert.match(flow,/DAR_FRAUEN_ONE_DOCUMENT_SCROLL_V1409/,"Frauen Scroll-Root Reparatur fehlt");
+assert.match(flow,/DAR_FRAUEN_NATIVE_SCROLL_ANCHOR_V1414/,"Native Finger-Wischen muss mit der originalen Sticky-Shell funktionieren");
+assert.match(flow,/DAR_FRAUEN_SEARCH_FOCUS_STICKY_V1414/,"Suche darf beim Fokussieren nicht aus dem Hero fallen");
 assert.match(flow,/html\[data-theme\]\.dar-test-premium-header-v2 body\.has-bottom-nav\.is-area-route\.is-frauen-route,[\s\S]*?overflow-x:clip!important;\s*overflow-y:visible!important;/,
  "Frauen braucht einen HTML-Dokument-Scroller, sonst scrollt Sticky-Hero in Test weg");
 assert.match(seam,/function frauenDocumentScroll\(body\)/,

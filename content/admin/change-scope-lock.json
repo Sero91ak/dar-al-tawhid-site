@@ -155,6 +155,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "frauen-single-native-render-owner-touch-focus-v1415-20261108",
+      "at": "2026-11-08T15:25:00+01:00",
+      "approvedBy": "user-20261108-frauen-hero-scroll-global-sofort-fixen",
+      "reason": "Real mobile QA proved two independent causes after HTML5 correction: document scroll oscillations from Frauen sticky scroll anchoring (V1414 A/B) and focused input loss through competing index.html lexical render() DOM writes bypassing window.render wrapper. Fix women-only single content owner; preserve all approved original images, headings, content, sources, languages; no Kids/TV changes.",
+      "paths": [
+        "index.html",
+        "assets/frauen/frauen-live-adapter.js",
+        "assets/frauen/frauen-original-v1224-header-seam-v1405.css",
+        "assets/frauen/frauen-hero-seam-runtime-v1407.js",
+        "cloudflare/site-router.js",
+        "scripts/verify-frauen-hero-contract.cjs",
+        "scripts/diagnose-frauen-hero-live.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-12T23:59:00+01:00"
+    },
+    {
       "id": "frauen-cloudflare-html5-doctype-native-touch-v1413-20261108",
       "at": "2026-11-08T11:20:00+01:00",
       "approvedBy": "user-explicit-20261108-video-live-frauen-global-repair",
