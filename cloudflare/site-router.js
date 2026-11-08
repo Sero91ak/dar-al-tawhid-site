@@ -393,7 +393,7 @@ function activateAdultCompactHero(html) {
   // Guaranteed final visual authority in native iOS, dedicated Android PWA,
   // visitor browser and any adult shell that mounts the global brand.
   if (!html.includes('id="darFrauenGlobalFlowV1407"')) {
-    const flowCss = '<link rel="stylesheet" id="darFrauenGlobalFlowV1407" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css?v=frauen-sticky-hero-v1407-20261103-native-single-spacer-v1408-one-scroll-root-v1409-20261107">';
+    const flowCss = '<link rel="stylesheet" id="darFrauenGlobalFlowV1407" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css?v=frauen-sticky-hero-v1407-20261103-native-single-spacer-v1408-one-scroll-root-v1409-anchor-v1414-single-owner-v1415-20261108">';
     html = html.includes("</body>") ? html.replace("</body>",flowCss+"</body>") : html+flowCss;
   }
   if (!html.includes('id="darFrauenHeroSeamRuntimeV1407"')) {
@@ -409,7 +409,7 @@ function liveFrauenNativeAddon() {
 
     /* Frauen V1406 is loaded unconditionally by adult global brand below. */
     '<script defer src="/test/assets/frauen/frauen-fiqh.js?v=frauen-rollback-20261016-1500"><\/script>',
-    '<script defer src="/assets/frauen/frauen-live-adapter.js?v=frauen-native-scroll-no-reset-v1411-20261108"><\/script>'
+    '<script defer src="/assets/frauen/frauen-live-adapter.js?v=frauen-native-scroll-no-reset-single-owner-v1415-20261108"><\/script>'
   ].join("");
 }
 function androidNativeToolsAddon() {
