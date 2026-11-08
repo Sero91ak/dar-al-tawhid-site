@@ -96,7 +96,11 @@ assert.match(seam,/maxGap=Math.max\(480,Math.min\(900/,"Große native Header-Dop
 assert.doesNotMatch(seam,/Math.abs\(gap\)>240|Math.max\(-220/,"Alte 240px/220px-Grenze unterdrückt die Reparatur");
 assert.doesNotMatch(seam,/scrollTo\(|preventDefault\(/,"Hero-Seam darf Scrollen nicht abfangen");
 assert.doesNotMatch(frontstage,/\.more-grid,\.frauen-library-area-grid,\.quran-verse-grid/,"Generischer Mini-Raster-Konflikt wieder eingeführt");
-for(const source of [native,testWorker,desktop]){
+assert.match(native,/frauen-native-scroll-anchor-v1414-20261108/,"V1414 Frauen CSS muss cache-frisch in der Besucher-App geladen werden");
+assert.match(flow,/DAR_FRAUEN_NATIVE_SCROLL_ANCHOR_FIX_V1414/,"Native Touch-Scroll-Anti-Anchoring fehlt");
+assert.match(flow,/html\.dar-frauen-live[\s\S]*?overflow-anchor:none!important;/,
+ "Frauen muss scroll anchoring gezielt abschalten");
+for(const source of [testWorker,desktop]){
  assert.match(source,/frauen-sticky-hero-v1407-20261103/,"V1407 Auslieferung fehlt");
  assert.match(source,/frauen-hero-seam-runtime-v1407\.js/,"V1406 dynamischer Spaltabgleich fehlt");
  assert.match(source,/frauen-gap-guard-v1408-20261105/,"Frauen-Header-Fix muss cache-frisch ausgeliefert werden");
