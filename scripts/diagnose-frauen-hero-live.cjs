@@ -205,6 +205,18 @@ function snapshot(){
   browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
   for(const route of routes){
    const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,locale:"de-DE",userAgent:route.key==="visitor"?"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1 DarAlTawhid-iOS":route.key==="visitor-android"?"Mozilla/5.0 (Linux; Android 16; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Mobile Safari/537.36 DarAlTawhidAndroid":"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1"});
+   // Establish a vanilla HTML5 control on exactly the SAME CDP mobile
+   // context. Without this, failing synthetic touch events on CSS1Compat
+   // would be misdiagnosed as a Frauen app regression.
+   const control=await context.newPage();
+   await control.setContent('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><input id="controlInput" style="height:46px;width:90%" placeholder="touch"><div style="height:2800px">Scroll body</div></body></html>');
+   await fingerSwipe(control,205,669,342);
+   const controlScroll=await control.evaluate(()=>({compat:document.compatMode,y:scrollY,scroller:document.scrollingElement?.tagName}));
+   await control.evaluate(()=>scrollTo(0,0));
+   await control.touchscreen.tap(190,22);
+   const controlFocus=await control.evaluate(()=>document.activeElement?.id==="controlInput");
+   console.log("FRAUEN_TOUCH_CONTROL",JSON.stringify({route:route.key,controlScroll,controlFocus}));
+   await control.close();
    const page=await context.newPage();const errors=[];
    await page.route("**/assets/frauen/frauen-original-v1224-header-seam-v1405.css?*",intercept=>intercept.fulfill({status:200,contentType:"text/css; charset=utf-8",body:localCss}));
    await page.route("**/assets/frauen/frauen-hero-seam-runtime-v1407.js?*",intercept=>intercept.fulfill({status:200,contentType:"application/javascript; charset=utf-8",body:localScript}));
