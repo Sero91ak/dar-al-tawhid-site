@@ -16,8 +16,7 @@ const localScript=fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-
 const localAdapter=fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-live-adapter.js"),"utf8");
 const routes=[
   {key:"visitor",url:"https://dar-al-tawhid.de/?frauen-hero-probe=1392#frauen"},
-  {key:"visitor-android",url:"https://dar-al-tawhid.de/?frauen-hero-probe=1392#frauen"},
-  {key:"test",url:"https://dar-al-tawhid.de/test/?frauen-hero-probe=1392#frauen"}
+  // 2026-11-08 focused visitor CSS bisection; normal lane tests stay in main.
 ];
 /* V1410: test the native finger path. Earlier wheel-only QA could pass
  * even when touchmove was cancelled or an invisible sticky layer ate taps. */
@@ -182,6 +181,25 @@ async function nativeTouchProbe(page,route){
       },mode);
       await page.waitForTimeout(130);
     }
+  }
+  /* V1411 native scroll CSS culprit bisection. Keep existing inline
+   * native styles; disable only 54 external stylesheet LINKs by group. */
+  if(route.key==="visitor"&&(scrolled.docScroll||0)<50){
+    const links=await page.evaluate(()=>[...document.querySelectorAll('link[rel="stylesheet"]')].map((el,i)=>({i,url:new URL(el.href).pathname})));
+    for(let group=0;group<6;group++){
+      const lo=group*9,hi=(group+1)*9;
+      await page.evaluate(({lo,hi})=>{
+        const ls=[...document.querySelectorAll('link[rel="stylesheet"]')];
+        ls.forEach((el,i)=>{el.disabled=(i>=lo&&i<hi);});
+        window.scrollTo(0,0);
+      },{lo,hi});
+      await page.waitForTimeout(120);
+      await fingerSwipe(page,205,669,342);
+      const y=await page.evaluate(()=>({y:window.scrollY,scroller:document.scrollingElement?.tagName,
+        htmlClient:document.documentElement.clientHeight,bodyClient:document.body.clientHeight}));
+      touchExperiments.push({mode:"disable-css-group-"+group,range:links.slice(lo,hi),...y});
+    }
+    await page.evaluate(()=>{document.querySelectorAll('link[rel="stylesheet"]').forEach(el=>el.disabled=false);window.scrollTo(0,0);});
   }
   const preventLog=await page.evaluate(()=>({
     stoppedBy:window.__darTouchAuditCalls||[],
