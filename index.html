@@ -29089,6 +29089,19 @@ function render(){
     try{updateHijriHeaderDate()}catch(e){}
     try{updateHeaderPrayerStatus()}catch(e){}
     ensurePostRouteData(currentRoute);
+    /* DAR_FRAUEN_SINGLE_RENDER_OWNER_V1415:
+     * Direct render() calls inside index.html bypass window.render wrappers.
+     * Never allow the old renderer to replace the focused Frauen search or
+     * hero while the official, idempotent Frauen adapter is available. */
+    if(currentRoute.view==="frauen" &&
+       window.DARFrauenFiqh && typeof window.DARFrauenFiqh.render==="function" &&
+       typeof window.DARFrauenProductionPaintV1415==="function"){
+      window.DARFrauenProductionPaintV1415();
+      window.__lastRenderSig=routeSig(currentRoute);
+      markAppBootComplete();
+      ensureBottomNavDock();
+      return;
+    }
     if(currentRoute.view==="quran"||currentRoute.view==="quran-surah"||currentRoute.view==="quran-topic"||currentRoute.view==="quran-player"){
       const surahId=currentRoute.view==="quran-surah"||currentRoute.view==="quran-player"?Number(String(currentRoute.value||"").split("/")[0]):NaN;
       const needsIndex=!quranMeta;
