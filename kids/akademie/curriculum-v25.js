@@ -116,10 +116,15 @@ const additions={
           "explain": "Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre an einem eigenen Beispiel: Allah allein anbeten.",
-          "sample": "Ich lerne, dass wir Allah allein anbeten.",
-          "hint": "Tawḥīd heißt: Allah allein anbeten."
+          "options": [
+            "Ich lerne, dass wir Allah allein anbeten.",
+            "Wir beten viele verschiedene Dinge statt Allah allein an."
+          ],
+          "correct": 0,
+          "hint": "Tawḥīd heißt: Allah allein anbeten.",
+          "explain": "Ich lerne, dass wir Allah allein anbeten."
         },
         {
           "type": "choice",
@@ -146,16 +151,26 @@ const additions={
           "explain": "Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie ergänzen sich Qurʾān 51:56 und die Überlieferung von Muʿāḏ?",
-          "sample": "Beide lehren Allahs Recht auf die Anbetung. Der Ḥadīṯ erläutert das ausschließliche Anbeten Allahs.",
-          "hint": "Vergleiche Qurʾān 51:56 mit der authentischen Überlieferung."
+          "options": [
+            "Beide lehren Allahs Recht auf die Anbetung. Der Ḥadīṯ erläutert das ausschließliche Anbeten Allahs.",
+            "Beide lehren, dass man Allahs Anbetung anderen zuwenden soll."
+          ],
+          "correct": 0,
+          "hint": "Vergleiche Qurʾān 51:56 mit der authentischen Überlieferung.",
+          "explain": "Beide lehren Allahs Recht auf die Anbetung. Der Ḥadīṯ erläutert das ausschließliche Anbeten Allahs."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Beschreibe eine sichere Alltagshandlung zu Allah allein anbeten und erkläre, wie sie zu den Quellen passt.",
-          "sample": "Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten.",
-          "hint": "Tawḥīd heißt: Allah allein anbeten."
+          "options": [
+            "Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten.",
+            "Ein Bittgebet als Anbetung muss immer an einen Menschen gerichtet werden."
+          ],
+          "correct": 0,
+          "hint": "Tawḥīd heißt: Allah allein anbeten.",
+          "explain": "Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten."
         }
       ]
     }
@@ -267,10 +282,15 @@ const additions={
           "explain": "Ich kann die Glaubensgrundlagen nach und nach nennen."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre an einem eigenen Beispiel: Die sechs Glaubenssäulen.",
-          "sample": "Ich lerne die sechs Glaubensgrundlagen in meinem Tempo.",
-          "hint": "Īmān bedeutet Glaube. Schwierige Wörter kann dir der Begriffshelfer erklären."
+          "options": [
+            "Ich lerne die sechs Glaubensgrundlagen in meinem Tempo.",
+            "Die sechs Glaubensgrundlagen sind eine Erfindung ohne religiöse Quellen."
+          ],
+          "correct": 0,
+          "hint": "Īmān bedeutet Glaube. Schwierige Wörter kann dir der Begriffshelfer erklären.",
+          "explain": "Ich lerne die sechs Glaubensgrundlagen in meinem Tempo."
         },
         {
           "type": "choice",
@@ -297,16 +317,26 @@ const additions={
           "explain": "Ich kann die Glaubensgrundlagen nach und nach nennen."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Welche zwei Grundlagen ergänzt der Ḥadīṯ Ǧibrīl zu den vier im Versauszug genannten?",
-          "sample": "Der Glaube an den Jüngsten Tag und an Allahs Bestimmung, al-Qadar.",
-          "hint": "Vergleiche Qurʾān 2:285 mit der authentischen Überlieferung."
+          "options": [
+            "Der Glaube an den Jüngsten Tag und an Allahs Bestimmung, al-Qadar.",
+            "Der Ḥadīṯ ergänzt, dass man nicht an den Jüngsten Tag glauben soll."
+          ],
+          "correct": 0,
+          "hint": "Vergleiche Qurʾān 2:285 mit der authentischen Überlieferung.",
+          "explain": "Der Glaube an den Jüngsten Tag und an Allahs Bestimmung, al-Qadar."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Beschreibe eine sichere Alltagshandlung zu Die sechs Glaubenssäulen und erkläre, wie sie zu den Quellen passt.",
-          "sample": "Ich kann die Glaubensgrundlagen nach und nach nennen.",
-          "hint": "Īmān bedeutet Glaube. Schwierige Wörter kann dir der Begriffshelfer erklären."
+          "options": [
+            "Ich kann die Glaubensgrundlagen nach und nach nennen.",
+            "Ich muss alle Glaubensgrundlagen sofort fehlerfrei auswendig können."
+          ],
+          "correct": 0,
+          "hint": "Īmān bedeutet Glaube. Schwierige Wörter kann dir der Begriffshelfer erklären.",
+          "explain": "Ich kann die Glaubensgrundlagen nach und nach nennen."
         }
       ]
     }
@@ -418,10 +448,15 @@ const additions={
           "explain": "Ich helfe, weil ich Gutes für Allah tun möchte, nicht nur für Applaus."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre an einem eigenen Beispiel: Gutes mit richtiger Absicht.",
-          "sample": "Ich übe eine gute Absicht, ohne auf Lob zu warten.",
-          "hint": "Niyyah heißt Absicht. Ikhlāṣ heißt Aufrichtigkeit."
+          "options": [
+            "Ich übe eine gute Absicht, ohne auf Lob zu warten.",
+            "Ich tue Gutes ausschließlich, damit andere mich loben."
+          ],
+          "correct": 0,
+          "hint": "Niyyah heißt Absicht. Ikhlāṣ heißt Aufrichtigkeit.",
+          "explain": "Ich übe eine gute Absicht, ohne auf Lob zu warten."
         },
         {
           "type": "choice",
@@ -448,16 +483,26 @@ const additions={
           "explain": "Ich helfe, weil ich Gutes für Allah tun möchte, nicht nur für Applaus."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie unterscheiden sich Niyyah und Ikhlāṣ?",
-          "sample": "Niyyah heißt Absicht, während Ikhlāṣ die Aufrichtigkeit dieser Absicht gegenüber Allah beschreibt.",
-          "hint": "Vergleiche Qurʾān 98:5 mit der authentischen Überlieferung."
+          "options": [
+            "Niyyah heißt Absicht, während Ikhlāṣ die Aufrichtigkeit dieser Absicht gegenüber Allah beschreibt.",
+            "Niyyah und Ikhlāṣ bedeuten, dass die eigene Absicht unwichtig ist."
+          ],
+          "correct": 0,
+          "hint": "Vergleiche Qurʾān 98:5 mit der authentischen Überlieferung.",
+          "explain": "Niyyah heißt Absicht, während Ikhlāṣ die Aufrichtigkeit dieser Absicht gegenüber Allah beschreibt."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Beschreibe eine sichere Alltagshandlung zu Gutes mit richtiger Absicht und erkläre, wie sie zu den Quellen passt.",
-          "sample": "Ich helfe, weil ich Gutes für Allah tun möchte, nicht nur für Applaus.",
-          "hint": "Niyyah heißt Absicht. Ikhlāṣ heißt Aufrichtigkeit."
+          "options": [
+            "Ich helfe, weil ich Gutes für Allah tun möchte, nicht nur für Applaus.",
+            "Ich helfe nur, wenn andere mir dafür applaudieren."
+          ],
+          "correct": 0,
+          "hint": "Niyyah heißt Absicht. Ikhlāṣ heißt Aufrichtigkeit.",
+          "explain": "Ich helfe, weil ich Gutes für Allah tun möchte, nicht nur für Applaus."
         }
       ]
     }
@@ -569,10 +614,15 @@ const additions={
           "explain": "Ich sage, dass ich wütend bin, und bitte bei Bedarf um Hilfe."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre an einem eigenen Beispiel: Stark sein bei Wut.",
-          "sample": "Ich lerne, wütend sein zu dürfen und trotzdem niemanden zu verletzen.",
-          "hint": "Gefühle darfst du sagen. Niemand muss sich verletzen lassen."
+          "options": [
+            "Ich lerne, wütend sein zu dürfen und trotzdem niemanden zu verletzen.",
+            "Wer stark ist, darf andere bei Wut verletzen."
+          ],
+          "correct": 0,
+          "hint": "Gefühle darfst du sagen. Niemand muss sich verletzen lassen.",
+          "explain": "Ich lerne, wütend sein zu dürfen und trotzdem niemanden zu verletzen."
         },
         {
           "type": "choice",
@@ -599,16 +649,26 @@ const additions={
           "explain": "Ich sage, dass ich wütend bin, und bitte bei Bedarf um Hilfe."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum ist Selbstbeherrschung nach dem Ḥadīṯ eine Stärke?",
-          "sample": "Sie bedeutet, eigene Handlungen zu steuern, auch wenn man sehr verärgert ist.",
-          "hint": "Vergleiche Qurʾān 3:134 mit der authentischen Überlieferung."
+          "options": [
+            "Sie bedeutet, eigene Handlungen zu steuern, auch wenn man sehr verärgert ist.",
+            "Selbstbeherrschung bedeutet, bei Wut andere anzugreifen."
+          ],
+          "correct": 0,
+          "hint": "Vergleiche Qurʾān 3:134 mit der authentischen Überlieferung.",
+          "explain": "Sie bedeutet, eigene Handlungen zu steuern, auch wenn man sehr verärgert ist."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Beschreibe eine sichere Alltagshandlung zu Stark sein bei Wut und erkläre, wie sie zu den Quellen passt.",
-          "sample": "Ich sage, dass ich wütend bin, und bitte bei Bedarf um Hilfe.",
-          "hint": "Gefühle darfst du sagen. Niemand muss sich verletzen lassen."
+          "options": [
+            "Ich sage, dass ich wütend bin, und bitte bei Bedarf um Hilfe.",
+            "Wenn ich wütend bin, muss ich jemanden verletzen."
+          ],
+          "correct": 0,
+          "hint": "Gefühle darfst du sagen. Niemand muss sich verletzen lassen.",
+          "explain": "Ich sage, dass ich wütend bin, und bitte bei Bedarf um Hilfe."
         }
       ]
     }
@@ -720,10 +780,15 @@ const additions={
           "explain": "Ich klopfe an und frage, ob ich eintreten darf."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre an einem eigenen Beispiel: Erst um Erlaubnis bitten.",
-          "sample": "Ich frage vor dem Eintreten und respektiere ein Nein.",
-          "hint": "Nur bei Personen, zu denen du gehen darfst, anklopfen. Fremde Türen öffnest du nicht selbst."
+          "options": [
+            "Ich frage vor dem Eintreten und respektiere ein Nein.",
+            "Ich darf fremde Zimmer immer ohne Fragen betreten."
+          ],
+          "correct": 0,
+          "hint": "Nur bei Personen, zu denen du gehen darfst, anklopfen. Fremde Türen öffnest du nicht selbst.",
+          "explain": "Ich frage vor dem Eintreten und respektiere ein Nein."
         },
         {
           "type": "choice",
@@ -750,16 +815,26 @@ const additions={
           "explain": "Ich klopfe an und frage, ob ich eintreten darf."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum schützt das Erlaubnisbitten die Privatsphäre?",
-          "sample": "Weil der andere Mensch zuerst zustimmen kann, bevor man seinen Raum betritt.",
-          "hint": "Vergleiche Qurʾān 24:27 mit der authentischen Überlieferung."
+          "options": [
+            "Weil der andere Mensch zuerst zustimmen kann, bevor man seinen Raum betritt.",
+            "Vor dem Eintreten muss niemand um Erlaubnis gefragt werden."
+          ],
+          "correct": 0,
+          "hint": "Vergleiche Qurʾān 24:27 mit der authentischen Überlieferung.",
+          "explain": "Weil der andere Mensch zuerst zustimmen kann, bevor man seinen Raum betritt."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Beschreibe eine sichere Alltagshandlung zu Erst um Erlaubnis bitten und erkläre, wie sie zu den Quellen passt.",
-          "sample": "Ich klopfe an und frage, ob ich eintreten darf.",
-          "hint": "Nur bei Personen, zu denen du gehen darfst, anklopfen. Fremde Türen öffnest du nicht selbst."
+          "options": [
+            "Ich klopfe an und frage, ob ich eintreten darf.",
+            "Ich gehe ohne anzuklopfen in fremde Räume."
+          ],
+          "correct": 0,
+          "hint": "Nur bei Personen, zu denen du gehen darfst, anklopfen. Fremde Türen öffnest du nicht selbst.",
+          "explain": "Ich klopfe an und frage, ob ich eintreten darf."
         }
       ]
     }
@@ -871,10 +946,15 @@ const additions={
           "explain": "Ich lerne Schritt für Schritt und frage, wenn ich ein Wort nicht verstehe."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre an einem eigenen Beispiel: Tarbiyah – freundlich lernen.",
-          "sample": "Ich kann in kleinen Schritten üben und bei Bedarf Hilfe erbitten.",
-          "hint": "Du darfst fragen und Pausen machen. Lernen soll verständlich sein."
+          "options": [
+            "Ich kann in kleinen Schritten üben und bei Bedarf Hilfe erbitten.",
+            "Wer etwas nicht versteht, darf niemals nachfragen."
+          ],
+          "correct": 0,
+          "hint": "Du darfst fragen und Pausen machen. Lernen soll verständlich sein.",
+          "explain": "Ich kann in kleinen Schritten üben und bei Bedarf Hilfe erbitten."
         },
         {
           "type": "choice",
@@ -901,16 +981,26 @@ const additions={
           "explain": "Ich lerne Schritt für Schritt und frage, wenn ich ein Wort nicht verstehe."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum ist die methodische Übung kein wörtlicher Ḥadīṯ?",
-          "sample": "Weil der Ḥadīṯ zur Erleichterung ermutigt; die konkrete Übung ist eine moderne pädagogische Anwendung.",
-          "hint": "Vergleiche Qurʾān 20:132 mit der authentischen Überlieferung."
+          "options": [
+            "Weil der Ḥadīṯ zur Erleichterung ermutigt; die konkrete Übung ist eine moderne pädagogische Anwendung.",
+            "Die konkrete heutige Lernübung steht wortwörtlich in jedem Ḥadīṯ."
+          ],
+          "correct": 0,
+          "hint": "Vergleiche Qurʾān 20:132 mit der authentischen Überlieferung.",
+          "explain": "Weil der Ḥadīṯ zur Erleichterung ermutigt; die konkrete Übung ist eine moderne pädagogische Anwendung."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Beschreibe eine sichere Alltagshandlung zu Tarbiyah – freundlich lernen und erkläre, wie sie zu den Quellen passt.",
-          "sample": "Ich lerne Schritt für Schritt und frage, wenn ich ein Wort nicht verstehe.",
-          "hint": "Du darfst fragen und Pausen machen. Lernen soll verständlich sein."
+          "options": [
+            "Ich lerne Schritt für Schritt und frage, wenn ich ein Wort nicht verstehe.",
+            "Wenn ich etwas nicht verstehe, darf ich nicht um Hilfe bitten."
+          ],
+          "correct": 0,
+          "hint": "Du darfst fragen und Pausen machen. Lernen soll verständlich sein.",
+          "explain": "Ich lerne Schritt für Schritt und frage, wenn ich ein Wort nicht verstehe."
         }
       ]
     }
@@ -1022,10 +1112,15 @@ const additions={
           "explain": "Ich denke über mein Verhalten nach und versuche eine kleine gute Tat."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre an einem eigenen Beispiel: Tazkiyah – gute innere Haltung.",
-          "sample": "Ich kann mein Verhalten betrachten und einen guten Schritt zur Besserung wählen.",
-          "hint": "Du bist mehr als dein Aussehen. Gute Gedanken und Taten sind wichtig."
+          "options": [
+            "Ich kann mein Verhalten betrachten und einen guten Schritt zur Besserung wählen.",
+            "Ich brauche nie über mein eigenes Verhalten nachzudenken."
+          ],
+          "correct": 0,
+          "hint": "Du bist mehr als dein Aussehen. Gute Gedanken und Taten sind wichtig.",
+          "explain": "Ich kann mein Verhalten betrachten und einen guten Schritt zur Besserung wählen."
         },
         {
           "type": "choice",
@@ -1052,16 +1147,26 @@ const additions={
           "explain": "Ich denke über mein Verhalten nach und versuche eine kleine gute Tat."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie ergänzen sich Qurʾān 91:9 und Ṣaḥīḥ Muslim 2564?",
-          "sample": "Der Vers spricht vom Läutern der Seele, und der Ḥadīṯ betont Herz und Taten gegenüber äußeren Merkmalen.",
-          "hint": "Vergleiche Qurʾān 91:9 mit der authentischen Überlieferung."
+          "options": [
+            "Der Vers spricht vom Läutern der Seele, und der Ḥadīṯ betont Herz und Taten gegenüber äußeren Merkmalen.",
+            "Der Vers und der Ḥadīṯ erklären, dass nur das Äußere zählt."
+          ],
+          "correct": 0,
+          "hint": "Vergleiche Qurʾān 91:9 mit der authentischen Überlieferung.",
+          "explain": "Der Vers spricht vom Läutern der Seele, und der Ḥadīṯ betont Herz und Taten gegenüber äußeren Merkmalen."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Beschreibe eine sichere Alltagshandlung zu Tazkiyah – gute innere Haltung und erkläre, wie sie zu den Quellen passt.",
-          "sample": "Ich denke über mein Verhalten nach und versuche eine kleine gute Tat.",
-          "hint": "Du bist mehr als dein Aussehen. Gute Gedanken und Taten sind wichtig."
+          "options": [
+            "Ich denke über mein Verhalten nach und versuche eine kleine gute Tat.",
+            "Ich versuche absichtlich, anderen zu schaden."
+          ],
+          "correct": 0,
+          "hint": "Du bist mehr als dein Aussehen. Gute Gedanken und Taten sind wichtig.",
+          "explain": "Ich denke über mein Verhalten nach und versuche eine kleine gute Tat."
         }
       ]
     }
