@@ -155,6 +155,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "frauen-global-scroll-tap-fix-v1411-20261108",
+      "at": "2026-11-08T09:35:00+01:00",
+      "approvedBy": "user-explicit-global-frauen-repair-now-20261108",
+      "reason": "Repair proven native Frauen full DOM rerender/scrollTo(0,0) freeze while preserving original sticky photo/search/content, plus strict mobile touch QA. No changes to frozen women content, languages, sources, Kids, TV or non-Frauen routes.",
+      "paths": [
+        "assets/frauen/frauen-live-adapter.js",
+        "cloudflare/site-router.js",
+        "scripts/verify-frauen-hero-contract.cjs",
+        "scripts/diagnose-frauen-hero-live.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-10T23:59:00.000Z"
+    },
+    {
       "id": "frauen-original-hero-search-late-brand-fix-v1409-20261107",
       "at": "2026-11-07T20:05:00+01:00",
       "approvedBy": "user-request-20261107-frauen-hero-bild-suchfeld-angeheftet",
