@@ -397,7 +397,7 @@ function activateAdultCompactHero(html) {
     html = html.includes("</body>") ? html.replace("</body>",flowCss+"</body>") : html+flowCss;
   }
   if (!html.includes('id="darFrauenHeroSeamRuntimeV1407"')) {
-    const flowJs = '<script defer id="darFrauenHeroSeamRuntimeV1407" src="/assets/frauen/frauen-hero-seam-runtime-v1407.js?v=frauen-gap-guard-v1408-20261105-late-header-v1409-20261107"></'+'script>';
+    const flowJs = '<script defer id="darFrauenHeroSeamRuntimeV1407" src="/assets/frauen/frauen-hero-seam-runtime-v1407.js?v=frauen-gap-guard-v1408-20261105-late-header-v1409-focused-search-v1415-20261108"></'+'script>';
     html = html.includes("</body>") ? html.replace("</body>",flowJs+"</body>") : html+flowJs;
   }
   return html;
