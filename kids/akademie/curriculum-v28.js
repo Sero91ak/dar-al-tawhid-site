@@ -121,10 +121,15 @@ const additions={
           "explain": "Alles Lob gebührt Allah."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie übst du die richtige Qurʾān-Aussprache?",
-          "sample": "Ich höre eine echte Rezitation und übe mit einer Lehrperson.",
-          "hint": "Keine künstlich nachgesprochene arabische Rezitation."
+          "options": [
+            "Ich höre eine echte Rezitation und übe mit einer Lehrperson.",
+            "Ich lasse eine künstliche Stimme den Qurʾān vorsprechen und verzichte auf echte Rezitation."
+          ],
+          "correct": 0,
+          "hint": "Keine künstlich nachgesprochene arabische Rezitation.",
+          "explain": "Ich höre eine echte Rezitation und übe mit einer Lehrperson."
         }
       ],
       "9-10": [
@@ -140,16 +145,26 @@ const additions={
           "explain": "Der Prophet ﷺ lehrte die Bedeutung von al-Fātiḥah."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre den Unterschied zwischen arabischem Text und deutscher Bedeutung.",
-          "sample": "Der arabische Qurʾāntext ist Original; die deutsche Formulierung erklärt die Bedeutung.",
-          "hint": "Trenne Original und Übersetzung."
+          "options": [
+            "Der arabische Qurʾāntext ist Original; die deutsche Formulierung erklärt die Bedeutung.",
+            "Der deutsche Text ist der ursprüngliche arabische Qurʾānwortlaut."
+          ],
+          "correct": 0,
+          "hint": "Trenne Original und Übersetzung.",
+          "explain": "Der arabische Qurʾāntext ist Original; die deutsche Formulierung erklärt die Bedeutung."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was bedeutet 'rabbi l-ʿālamīn' im Unterricht?",
-          "sample": "Allah ist der Herr der Welten.",
-          "hint": "Überlege, wer in diesem Vers als Herr der Welten bezeichnet wird."
+          "options": [
+            "Allah ist der Herr der Welten.",
+            "Es bedeutet, dass Menschen die Herren aller Welten sind."
+          ],
+          "correct": 0,
+          "hint": "Überlege, wer in diesem Vers als Herr der Welten bezeichnet wird.",
+          "explain": "Allah ist der Herr der Welten."
         }
       ]
     },
@@ -269,10 +284,15 @@ const additions={
           "explain": "Er war ein Gesandter."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was kannst du bei einer schwierigen Lernaufgabe tun?",
-          "sample": "Ruhig weiterüben, eine Pause machen und nach Hilfe fragen.",
-          "hint": "Das ist unsere heutige Übung."
+          "options": [
+            "Ruhig weiterüben, eine Pause machen und nach Hilfe fragen.",
+            "Ich darf nie eine Pause machen oder jemanden um Hilfe bitten."
+          ],
+          "correct": 0,
+          "hint": "Das ist unsere heutige Übung.",
+          "explain": "Ruhig weiterüben, eine Pause machen und nach Hilfe fragen."
         }
       ],
       "9-10": [
@@ -288,16 +308,26 @@ const additions={
           "explain": "Qurʾān 71:5."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was sagt al-Buḫārī 7410 über Nūḥ?",
-          "sample": "Er wird als ein Gesandter zu den Menschen der Erde beschrieben.",
-          "hint": "Gib nicht den gesamten längeren Ḥadīṯ als Kindergeschichte wieder."
+          "options": [
+            "Er wird als ein Gesandter zu den Menschen der Erde beschrieben.",
+            "Er wird dort als ein König beschrieben, der keine Botschaft überbrachte."
+          ],
+          "correct": 0,
+          "hint": "Gib nicht den gesamten längeren Ḥadīṯ als Kindergeschichte wieder.",
+          "explain": "Er wird als ein Gesandter zu den Menschen der Erde beschrieben."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum dürfen wir Lernpausen als Beispiel nennen?",
-          "sample": "Weil es eine sichere Anwendung ist; es ist keine überlieferte Szene aus Nūḥs Leben.",
-          "hint": "Originalbeleg und Didaktik unterscheiden."
+          "options": [
+            "Weil es eine sichere Anwendung ist; es ist keine überlieferte Szene aus Nūḥs Leben.",
+            "Unsere heutige Lernpause ist ein wörtlich überlieferter Bericht aus Nūḥs Leben."
+          ],
+          "correct": 0,
+          "hint": "Originalbeleg und Didaktik unterscheiden.",
+          "explain": "Weil es eine sichere Anwendung ist; es ist keine überlieferte Szene aus Nūḥs Leben."
         }
       ]
     },
@@ -417,10 +447,15 @@ const additions={
           "explain": "Der Anfang ist nicht das ganze Duʿāʾ."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Im Unterricht haben wir gelernt, dass Allah uns zum Gedenken aufruft. Was bedeutet diese Aussage in deinen Worten?",
-          "sample": "Die Gläubigen sollen Allah häufig gedenken.",
-          "hint": "Trenne Qurʾān von Ḥadīṯ."
+          "options": [
+            "Die Gläubigen sollen Allah häufig gedenken.",
+            "Allah zu gedenken ist im Unterricht grundsätzlich verboten."
+          ],
+          "correct": 0,
+          "hint": "Trenne Qurʾān von Ḥadīṯ.",
+          "explain": "Die Gläubigen sollen Allah häufig gedenken."
         }
       ],
       "9-10": [
@@ -436,16 +471,26 @@ const additions={
           "explain": "Aus einem authentischen Ḥadīṯ."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum darf eine Übersetzung nicht als Originalrezitation ausgegeben werden?",
-          "sample": "Der Offenbarungs- und Überlieferungswortlaut bleibt arabisch; Deutsch erklärt nur die Bedeutung.",
-          "hint": "Original und Erklärung unterscheiden."
+          "options": [
+            "Der Offenbarungs- und Überlieferungswortlaut bleibt arabisch; Deutsch erklärt nur die Bedeutung.",
+            "Eine deutsche Übersetzung ist eine arabische Originalrezitation."
+          ],
+          "correct": 0,
+          "hint": "Original und Erklärung unterscheiden.",
+          "explain": "Der Offenbarungs- und Überlieferungswortlaut bleibt arabisch; Deutsch erklärt nur die Bedeutung."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie prüfst du einen authentischen Abend-Ḏikr?",
-          "sample": "Den vollständigen Wortlaut und seine Quelle nachschlagen und nur korrekt lernen.",
-          "hint": "Ein Anfang allein ist nicht die ganze Formel."
+          "options": [
+            "Den vollständigen Wortlaut und seine Quelle nachschlagen und nur korrekt lernen.",
+            "Ich ändere den Wortlaut selbst und nenne ihn anschließend authentisch."
+          ],
+          "correct": 0,
+          "hint": "Ein Anfang allein ist nicht die ganze Formel.",
+          "explain": "Den vollständigen Wortlaut und seine Quelle nachschlagen und nur korrekt lernen."
         }
       ]
     },
@@ -565,10 +610,15 @@ const additions={
           "explain": "Teile eines Gebäudes stützen sich."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie hilfst du einem Geschwisterkind sinnvoll?",
-          "sample": "Ich frage, was es braucht, helfe altersgerecht und hole bei Schwierigkeiten Erwachsene.",
-          "hint": "Hilfe darf sicher sein."
+          "options": [
+            "Ich frage, was es braucht, helfe altersgerecht und hole bei Schwierigkeiten Erwachsene.",
+            "Ich zwinge mein Geschwisterkind und hole bei Schwierigkeiten keine Hilfe."
+          ],
+          "correct": 0,
+          "hint": "Hilfe darf sicher sein.",
+          "explain": "Ich frage, was es braucht, helfe altersgerecht und hole bei Schwierigkeiten Erwachsene."
         }
       ],
       "9-10": [
@@ -584,16 +634,26 @@ const additions={
           "explain": "Die Überlieferung behandelt gegenseitige Unterstützung."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was unterscheidet Unterricht 62 von Unterricht 54?",
-          "sample": "Hier geht es um passende Hilfe, dort um gerechtes Teilen.",
-          "hint": "Zwei eigenständige Lernziele."
+          "options": [
+            "Hier geht es um passende Hilfe, dort um gerechtes Teilen.",
+            "Beide Unterrichte behandeln ausschließlich genau dasselbe Thema."
+          ],
+          "correct": 0,
+          "hint": "Zwei eigenständige Lernziele.",
+          "explain": "Hier geht es um passende Hilfe, dort um gerechtes Teilen."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum braucht Helfen klare Grenzen?",
-          "sample": "Kinder dürfen Nein sagen und in belastenden Situationen Erwachsenenhilfe suchen.",
-          "hint": "Verantwortung muss zum Alter passen."
+          "options": [
+            "Kinder dürfen Nein sagen und in belastenden Situationen Erwachsenenhilfe suchen.",
+            "Ein Kind muss auch in gefährlichen Situationen jede Aufgabe allein übernehmen."
+          ],
+          "correct": 0,
+          "hint": "Verantwortung muss zum Alter passen.",
+          "explain": "Kinder dürfen Nein sagen und in belastenden Situationen Erwachsenenhilfe suchen."
         }
       ]
     },
