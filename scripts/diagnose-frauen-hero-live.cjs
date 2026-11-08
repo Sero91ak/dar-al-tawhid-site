@@ -137,6 +137,52 @@ async function nativeTouchProbe(page,route){
       },mode);
     }
   }
+  // Experimental only: identify whether native-touch scroll is blocked by
+  // CSS/link layers or by the browser's document scroll owner.
+  if(route.key==="visitor"&&(scrolled.docScroll||0)<50){
+    for(const mode of ["disable-all-links","disable-all-styles","remove-global-brand","remove-app-chrome","native-overflow-scroller"]){
+      const state=await page.evaluate(mode=>{
+        const links=[...document.querySelectorAll('link[rel="stylesheet"]')],st=[...document.querySelectorAll('style')];
+        if(mode==="disable-all-links")links.forEach(e=>e.disabled=true);
+        if(mode==="disable-all-styles"){links.forEach(e=>e.disabled=true);st.forEach(e=>e.disabled=true);}
+        if(mode==="remove-global-brand"){const el=document.getElementById("darAdultBrandHeaderV2");if(el)el.style.display="none";}
+        if(mode==="remove-app-chrome"){
+          links.filter(e=>/app-chrome|adaptive-layout|full-edge|bottom-nav/i.test(e.href)).forEach(e=>e.disabled=true);
+        }
+        if(mode==="native-overflow-scroller"){
+          for(const el of [document.documentElement,document.body]){
+            el.style.setProperty("touch-action","auto","important");
+            el.style.setProperty("overscroll-behavior","auto","important");
+            el.style.setProperty("overflow-y","auto","important");
+          }
+          document.documentElement.style.setProperty("height","100vh","important");
+          document.body.style.setProperty("height","auto","important");
+        }
+        return {links:links.length,styles:st.length,scrollingElement:document.scrollingElement?.tagName,
+          htmlH:document.documentElement.clientHeight,bodyH:document.body.clientHeight};
+      },mode);
+      await page.waitForTimeout(120);
+      await fingerSwipe(page,205,669,342);
+      const result=await page.evaluate(()=>({
+        y:window.scrollY,htmlTop:document.documentElement.scrollTop,
+        bodyTop:document.body.scrollTop,scrollingElement:document.scrollingElement?.tagName,
+        docH:document.documentElement.clientHeight,height:innerHeight
+      }));
+      touchExperiments.push({mode,state,...result});
+      await page.evaluate(mode=>{
+        if(mode==="disable-all-links"||mode==="disable-all-styles"||mode==="remove-app-chrome")
+          document.querySelectorAll('link[rel="stylesheet"]').forEach(e=>e.disabled=false);
+        if(mode==="disable-all-styles")document.querySelectorAll('style').forEach(e=>e.disabled=false);
+        if(mode==="remove-global-brand"){const e=document.getElementById("darAdultBrandHeaderV2");if(e)e.style.removeProperty("display");}
+        if(mode==="native-overflow-scroller"){
+          for(const el of [document.documentElement,document.body])
+            ["touch-action","overscroll-behavior","overflow-y","height"].forEach(p=>el.style.removeProperty(p));
+        }
+        window.scrollTo(0,0);
+      },mode);
+      await page.waitForTimeout(130);
+    }
+  }
   const preventLog=await page.evaluate(()=>({
     stoppedBy:window.__darTouchAuditCalls||[],
     repaints:window.__darTouchAuditRepaints||[],
