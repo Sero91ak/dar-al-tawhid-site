@@ -291,3 +291,23 @@ html[data-theme].dar-adult-global-brand-ready body.has-bottom-nav.is-area-route.
   overflow-x:clip!important;
   overflow-y:visible!important;
 }
+
+/* DAR_FRAUEN_NATIVE_SCROLL_ANCHOR_FIX_V1414
+ * Reproduced in mobile Chromium for iOS/Android UA: touch moved the visitor
+ * scroll root 12–28px then CSS scroll anchoring returned it to zero.
+ * With anchoring/smooth/snap disabled ONLY for this Frauen route, real
+ * finger swipes reached 312px while both fixed brand and sticky hero stayed
+ * at the measured 48px clearance.
+ * ONE document scroll root; do not lock touch gestures, clone the Hero,
+ * change the search node, app-wide scroll defaults or content. */
+html.dar-frauen-live,
+html.dar-frauen-live body.is-frauen-route,
+html.dar-frauen-live body.is-frauen-route > .app,
+html.dar-frauen-live body.is-frauen-route #appView,
+html.dar-frauen-live body.is-frauen-route #appView .frauen-library-shell,
+html.dar-frauen-live body.is-frauen-route #appView .frauen-library-list,
+html.dar-frauen-live body.is-frauen-route #appView .frauen-library-pinned-header{
+  overflow-anchor:none!important;
+  scroll-behavior:auto!important;
+  scroll-snap-type:none!important;
+}
