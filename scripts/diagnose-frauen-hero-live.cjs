@@ -35,6 +35,22 @@ async function fingerSwipe(page,x,y1,y2){
 }
 async function nativeTouchProbe(page,route){
   const errors=[];
+  const mobileEventAudit=await page.evaluate(()=>{
+    window.__frauenMobileEvents=[];
+    const p=["touchstart","touchmove","touchend","pointerdown","pointerup","click","focusin","focusout","scroll"];
+    for(const name of p)document.addEventListener(name,e=>{
+      if(window.__frauenMobileEvents.length>=95)return;
+      const target=e.target;
+      window.__frauenMobileEvents.push({
+        name,scrollY:window.scrollY,canceled:e.defaultPrevented,
+        cancelable:e.cancelable,
+        isTrusted:e.isTrusted,
+        target:target?.tagName+"/"+String(target?.className||"").slice(0,45),
+        active:document.activeElement?.tagName+"/"+String(document.activeElement?.className||"").slice(0,45)
+      });
+    },{capture:true,passive:true});
+    return true;
+  });
   await page.evaluate(()=>{
     if(window.__darTouchAuditPreventInstalled)return;
     window.__darTouchAuditPreventInstalled=true;
@@ -170,6 +186,14 @@ async function nativeTouchProbe(page,route){
     await page.waitForTimeout(180);
     focused.active=await page.evaluate(()=>document.activeElement?.matches('[data-frauen-q]')||false);
     if(!focused.active)errors.push("search_does_not_receive_real_touch_focus");
+    focused.programmaticFocus=await page.evaluate(()=>{
+      const input=document.querySelector("#appView [data-frauen-q]");
+      if(!input)return false;
+      input.focus({preventScroll:true});
+      return document.activeElement===input;
+    });
+    focused.programmaticActive=await page.evaluate(()=>document.activeElement?.matches('[data-frauen-q]')||false);
+    focused.disabled=await page.evaluate(()=>document.querySelector("#appView [data-frauen-q]")?.disabled||false);
     await page.evaluate(()=>{if(document.activeElement?.blur)document.activeElement.blur();});
   }
   await page.evaluate(()=>window.scrollTo(0,530));
@@ -203,8 +227,9 @@ async function nativeTouchProbe(page,route){
     card.afterHash=await page.evaluate(()=>location.hash);
     if(card.afterHash===beforeHash)errors.push("card_touch_did_not_navigate");
   }
-  console.log("FRAUEN_NATIVE_TOUCH_PROBE",JSON.stringify({route:route.key,isolation,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors}));
-  return {isolation,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors};
+  const eventAudit=await page.evaluate(()=>window.__frauenMobileEvents||[]);
+  console.log("FRAUEN_NATIVE_TOUCH_PROBE",JSON.stringify({route:route.key,isolation,eventAudit,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors}));
+  return {isolation,eventAudit,preventLog,start:{scroll:start.docScroll,stage:start.stage?.top},pulled:{scroll:pulled.docScroll,stage:pulled.stage?.top},scrolled:{scroll:scrolled.docScroll,stage:scrolled.stage?.top},focused,card,beforeHash,errors};
 }
 function snapshot(){
   const hero=document.querySelector(".frauen-library-pinned-header .frauen-library-hero");
