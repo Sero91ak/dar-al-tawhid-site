@@ -315,10 +315,15 @@ const additions={
           "explain": "Beide nennen die Engel als Gegenstand des Glaubens."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was machst du bei einer unbelegten Geschichte über Engel?",
-          "sample": "Ich erkläre freundlich, dass ich erst den authentischen Nachweis prüfen möchte.",
-          "hint": "Nicht weiterverbreiten, solange unbelegt."
+          "options": [
+            "Ich erkläre freundlich, dass ich erst den authentischen Nachweis prüfen möchte.",
+            "Ich erzähle die unbelegte Geschichte als sichere Tatsache weiter."
+          ],
+          "correct": 0,
+          "hint": "Nicht weiterverbreiten, solange unbelegt.",
+          "explain": "Ich erkläre freundlich, dass ich erst den authentischen Nachweis prüfen möchte."
         }
       ]
     },
@@ -596,10 +601,15 @@ const additions={
           "explain": "Ich übernehme Verantwortung."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie sprichst du über einen Fehler ohne jemand anderen zu beschuldigen?",
-          "sample": "Das ist mir passiert. Ich möchte es wieder gutmachen.",
-          "hint": "Du musst keine Angst haben, um Hilfe zu bitten."
+          "options": [
+            "Das ist mir passiert. Ich möchte es wieder gutmachen.",
+            "Ich gebe jemand anderem die Schuld, obwohl ich den Fehler gemacht habe."
+          ],
+          "correct": 0,
+          "hint": "Du musst keine Angst haben, um Hilfe zu bitten.",
+          "explain": "Das ist mir passiert. Ich möchte es wieder gutmachen."
         }
       ],
       "9-10": [
