@@ -128,7 +128,7 @@ async function nativeTouchProbe(page,route){
   if((scrolled.docScroll||0)<50)errors.push("native_finger_swipe_does_not_scroll");
   const isolation=[];
   if(route.key==="visitor"&&(scrolled.docScroll||0)<50){
-    const modes=["disable-brand-css","disable-profile-css","disable-both","disable-group-4","release-root-overscroll","hero-nonsticky","header-nonfixed"];
+    const modes=["no-anchor","no-shift","scroll-root-strict","html-flow-auto","fixed-hero","disable-both-minimal-fixed-header","no-app-effects"];
     for(const mode of modes){
       await page.evaluate(mode=>{
         const links=[...document.querySelectorAll('link[rel="stylesheet"]')];
@@ -139,6 +139,19 @@ async function nativeTouchProbe(page,route){
           if(mode==="disable-both"&&/\/assets\/(dar-adult-brand-header-v2|dar-visitor-profile-picker-v1)\.css$/.test(name))l.disabled=true;
           if(mode==="disable-group-4"&&/\/assets\/(dar-adult-top-scroll-boundary-v1|dar-visitor-frontstage-v1|dar-adult-brand-header-v2|dar-visitor-smart-profile-v1|dar-visitor-profile-picker-v1|dar-visitor-daily-hub-v1|dar-visitor-onboarding-v1|adult-fold-global-v1)\.css$/.test(name))l.disabled=true;
         }
+        const own=document.getElementById("frauenCandidateExperiment");
+        if(own)own.remove();
+        const add=(css)=>{const el=document.createElement("style");el.id="frauenCandidateExperiment";el.textContent=css;document.head.appendChild(el)};
+        if(mode==="no-anchor")add("html,body,.app,#appView,.frauen-library-shell,.frauen-library-pinned-header{overflow-anchor:none!important;scroll-behavior:auto!important;scroll-snap-type:none!important}");
+        if(mode==="no-shift")add("body.is-frauen-route #appView .frauen-library-shell{margin-top:0!important;transform:none!important;translate:none!important}");
+        if(mode==="scroll-root-strict")add("html{height:auto!important;min-height:100vh!important;overflow-x:clip!important;overflow-y:auto!important;}body.is-frauen-route{height:auto!important;min-height:100vh!important;overflow-x:clip!important;overflow-y:visible!important}body.is-frauen-route .app{height:auto!important;overflow:visible!important}body.is-frauen-route #appView{height:auto!important;overflow:visible!important}");
+        if(mode==="html-flow-auto")add("html,body{height:auto!important;min-height:0!important;overflow-y:visible!important;overflow-x:clip!important;scroll-behavior:auto!important}html{overflow-y:auto!important}");
+        if(mode==="fixed-hero")add("body.is-frauen-route #appView .frauen-library-pinned-header{position:fixed!important;top:48px!important;left:22px!important;right:22px!important;width:auto!important;margin:0!important}body.is-frauen-route #appView .frauen-library-section-head{margin-top:266px!important}");
+        if(mode==="disable-both-minimal-fixed-header"){
+          links.filter(l=>/\\/assets\\/(dar-adult-brand-header-v2|dar-visitor-profile-picker-v1)\\.css/.test(l.href)).forEach(l=>l.disabled=true);
+          add("#darAdultBrandHeaderV2{position:fixed!important;z-index:730!important;top:0!important;left:0!important;width:100%!important;height:48px!important;background:#f4f6f0!important;display:flex!important;align-items:center!important}#darAdultBrandHeaderSpacerV2{display:block!important;height:48px!important;max-height:48px!important}body.is-frauen-route #appView .frauen-library-pinned-header{top:48px!important;position:sticky!important}");
+        }
+        if(mode==="no-app-effects")add("body.is-frauen-route .app,body.is-frauen-route #appView,body.is-frauen-route .frauen-library-shell{will-change:auto!important;contain:none!important;transform:none!important;filter:none!important;perspective:none!important;backdrop-filter:none!important}");
         if(mode==="release-root-overscroll"){
           document.documentElement.style.setProperty("overscroll-behavior","auto","important");
           document.documentElement.style.setProperty("touch-action","auto","important");
@@ -164,6 +177,7 @@ async function nativeTouchProbe(page,route){
         stageTop:document.querySelector(".frauen-library-pinned-header")?.getBoundingClientRect().top
       }))});
       await page.evaluate(()=>{
+        document.getElementById("frauenCandidateExperiment")?.remove();
         document.querySelectorAll('link[rel="stylesheet"]').forEach(e=>e.disabled=false);
         for(const el of [document.documentElement,document.body]){
           el.style.removeProperty("overscroll-behavior");
