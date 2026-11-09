@@ -147,7 +147,7 @@
   function mountDock(prepared,preserve){
     if(!prepared.stage){unmountDock();return;}
     var old=dock();
-    if(preserve&&old){scheduleDock();return;}
+    if(preserve&&old)return;
     if(old){
       /* Route navigation atomically swaps original hero and search children.
        * At no point can two photo surfaces exist on the screen. */
@@ -156,6 +156,8 @@
     }else{
       document.body.appendChild(prepared.stage);
     }
+    /* Publish exact geometry synchronously BEFORE the first browser paint. */
+    syncDock();
     observeDock();
   }
   /* Replace only content siblings on same-route input updates. The fixed
