@@ -168,12 +168,10 @@ html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-vis
     border-radius:23px!important;
   }
 }
-/* DAR_FRAUEN_PINNED_HERO_UNDER_SCROLL_V1407 · user video 13:41.
- * Fixed global brand remains on top; the ORIGINAL Hero and its search form
- * ONE sticky stage directly under the measured brand-header bottom.
- * Chapters and category rows scroll UNDER that stage (never above the image).
- * Do not sticky the inner hero independently or duplicate fixed placeholders.
- */
+/* DAR_FRAUEN_SINGLE_FIXED_HERO_V1414 · only the Frauen runtime owns position.
+ * One ORIGINAL photo and its ORIGINAL search are a single viewport-fixed stage
+ * directly beneath the real global brand. All chapters move underneath it in
+ * the one HTML-document scroll; no sticky fallback or negative seam margins. */
 html.dar-adult-global-brand-ready body.is-frauen-route{
   --frauen-fixed-brand-bottom:var(--dar-adult-header-obscured-top,var(--dar-adult-brand-header-height,80px));
 }
@@ -181,15 +179,21 @@ html.dar-test-premium-header-v2 body.is-frauen-route{
   --frauen-fixed-brand-bottom:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,80px));
 }
 html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage{
-  position:sticky!important;
+  position:fixed!important;
   top:var(--frauen-fixed-brand-bottom,80px)!important;
   inset-block-start:var(--frauen-fixed-brand-bottom,80px)!important;
+  left:0!important;
+  right:0!important;
+  width:min(1080px,100%)!important;
+  max-width:100%!important;
+  margin:0 auto!important;
   z-index:180!important;
   isolation:isolate!important;
+  box-sizing:border-box!important;
   transform:none!important;
-  margin-top:0!important;
-  background:var(--bg,#f4efec)!important;
+  contain:none!important;
   overflow:visible!important;
+  background:var(--bg,#f4efec)!important;
 }
 html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > .frauen-library-hero{
   position:relative!important;
@@ -204,34 +208,23 @@ html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > :is(.
   inset-block-start:auto!important;
   z-index:2!important;
 }
-/* Before the original adapter wraps the photo and search, preserve the same
- * sticky clearance and make the transient direct-child layout consistent. */
-html[data-theme] body.is-frauen-route #appView
- :is(.frauen-library-shell,.frauen-library-list):not(:has(> .dar-immersive-hero-stage)) > .frauen-library-hero{
-  position:sticky!important;
-  top:var(--frauen-fixed-brand-bottom,80px)!important;
-  z-index:179!important;
-  margin-top:0!important;
+html[data-theme] body.is-frauen-route #appView .dar-frauen-hero-spacer{
+  display:block!important;
+  block-size:var(--frauen-pinned-stage-height,360px);
+  height:var(--frauen-pinned-stage-height,360px);
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  pointer-events:none!important;
 }
-html[data-theme] body.is-frauen-route #appView
- :is(.frauen-library-shell,.frauen-library-list):not(:has(> .dar-immersive-hero-stage)) > :is(.frauen-library-search-wrap,.frauen-library-list-controls){
-  position:sticky!important;
-  top:calc(var(--frauen-fixed-brand-bottom,80px) + var(--dar-immersive-hero-height,220px) - 22px)!important;
-  z-index:180!important;
-}
-/* Search remains with image; cards are below in the same document scroll.
- * Ancestor overflow MUST NOT create a competing scroll root or clip sticky. */
 html[data-theme] body.is-frauen-route #appView,
 html[data-theme] body.is-frauen-route #appView :is(.frauen-library-shell,.frauen-library-list){
   overflow:visible!important;
 }
-html[data-theme] body.is-frauen-route #appView .frauen-library-grid,
-html[data-theme] body.is-frauen-route #appView .frauen-library-area-grid{
+html[data-theme] body.is-frauen-route #appView :is(.frauen-library-grid,.frauen-library-area-grid,.frauen-post-list){
   position:relative!important;
   z-index:1!important;
 }
-/* One (and only one) measured header spacer. Remove the old legacy shell only
- * on this adult route; do not touch Kids, native inset, global navigation. */
 html:is(.dar-adult-global-brand-ready,.dar-test-premium-header-v2)
  body.is-frauen-route > .app > .top-shell{
   display:none!important;
@@ -247,13 +240,17 @@ html:is(.dar-adult-global-brand-ready,.dar-test-premium-header-v2)
   padding-top:0!important;
 }
 html[data-theme] body.is-frauen-route #appView :is(.frauen-library-shell,.frauen-library-list){
-  margin-top:var(--frauen-flow-seam-shift,0px)!important;
+  margin-top:0!important;
 }
 html[data-theme] body.is-frauen-route{overscroll-behavior-y:none!important}
-@media(max-width:699px) and (pointer:coarse){
-  /* Typing into search retains native caret scrolling and keyboard visibility. */
-  html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage:focus-within{
-    position:relative!important;
+@media(max-height:600px) and (orientation:landscape){
+  html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > .frauen-library-hero{
+    min-height:clamp(140px,35dvh,205px)!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage .frauen-library-hero__content{
+    min-height:inherit!important;
+    padding-top:14px!important;
+    padding-bottom:16px!important;
   }
 }
 
