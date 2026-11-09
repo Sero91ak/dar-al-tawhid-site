@@ -46,6 +46,8 @@ def fixture(test):
   "/assets/dar-adult-brand-header-v2.css"
  ])
  links="".join('<link rel="stylesheet" href="'+p+'">' for p in sheets)
+ # Exercise actual Frauen controller at route mount, not a static sticky stand-in.
+ runtime='<script defer src="/assets/frauen/frauen-hero-seam-runtime-v1407.js"></script>'
  return (
   '<!doctype html><html lang="de" data-theme="salbei" class="'+rootClass+' dar-ios-native-app"><head>'
   '<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
@@ -58,7 +60,7 @@ def fixture(test):
   '.app{width:100%;min-height:1900px}#appView{min-height:1700px}'
   '#appView .hero-fixture{min-height:205px;box-sizing:border-box;background-color:#294439}'
   '#heroTap{position:relative;z-index:8;min-height:44px;min-width:120px;background:#fff;color:#18281f;border:1px solid #777;border-radius:8px;cursor:pointer}'
-  '#appView .fixture-content{height:1750px;padding:24px}</style>'+links+'</head>'
+  '#appView .fixture-content{height:1750px;padding:24px}</style>'+links+runtime+'</head>'
   '<body class="dar-ios-native-app is-area-route has-bottom-nav is-frauen-route">'
   '<header id="'+header+'" data-premium-header-v2="ready"><div class="dtbh-row">DĀR AL TAWḤĪD</div></header>'
   '<div class="app"><div id="'+spacer+'"></div><main id="appView" class="view"></main></div></body></html>'
@@ -105,6 +107,8 @@ def main():
       document.getElementById("appView").innerHTML=arguments[1];
       window.scrollTo(0,0);
      """,route.replace("-detail","") if route in ("hadith-detail","dua-detail") else route,html)
+     if route=="frauen":
+      driver.execute_async_script("const done=arguments[0];requestAnimationFrame(()=>requestAnimationFrame(done));")
      metrics=driver.execute_script("""
       const hero=document.querySelector(arguments[0]);
       const head=document.getElementById(arguments[1]).getBoundingClientRect();
