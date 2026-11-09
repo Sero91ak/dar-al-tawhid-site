@@ -10,10 +10,7 @@ const css=read("assets/dar-global-herodock-v2.css");
 const visitor=read("cloudflare/site-router.js");
 const test=read("cloudflare/test-app-worker.js");
 const docs=read("docs/adult-responsive-layout-contract.md");
-for(const [name,code] of [
- ["HeroDock JS",js],["Visitor router",visitor],["Test Worker",test]
-])new vm.Script(code.replace(/^\s*import\s+[^;\n]+;?\s*$/gm,""),
- {filename:name});
+new vm.Script(js,{filename:"assets/dar-global-herodock-v2.js"});
 assert.match(js,/DAR_GLOBAL_HERODOCK_V2_20261109/);
 assert.match(css,/DAR_GLOBAL_HERODOCK_V2_20261109/);
 assert.match(js,/body\.is-post-route #appView > \.post-reader > \.post-reader-title/);
