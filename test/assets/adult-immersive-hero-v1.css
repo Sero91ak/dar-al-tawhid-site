@@ -2,36 +2,7 @@
  * Keep existing imagery, content and theme palettes. No scroll interception.
  * A single sticky rail owns women Hero + optional search; reader content moves beneath it.
  */
-html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage{
-  position:sticky!important;
-  top:0!important;
-  z-index:65!important;
-  isolation:isolate;
-  box-sizing:border-box!important;
-  width:100%!important;
-  max-width:100%!important;
-  min-width:0!important;
-  margin:0 0 clamp(16px,2.5vw,27px)!important;
-  background:var(--bg,#f4efec)!important;
-  overflow:visible!important;
-  transform:none!important;
-  contain:none!important;
-}
-/* In a viewport-fit=cover WebView, extend the same hero photo into the exposed
-   upper safe area. A native system bar outside the WebView remains OS-owned. */
-html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage::before{
-  content:"";
-  position:absolute;
-  inset-inline-start:calc(50% - 50vw);
-  top:calc(-1 * env(safe-area-inset-top,0px));
-  width:100vw;
-  height:env(safe-area-inset-top,0px);
-  background-image:linear-gradient(90deg,rgba(2,13,13,.82),rgba(2,13,13,.32)),var(--dar-immersive-top-image,none);
-  background-size:cover;
-  background-position:center top;
-  pointer-events:none;
-  z-index:0;
-}
+/* Frauen V1414: fixed viewport stage is owned only by frauen-original-v1224-header-seam-v1405.css. */
 html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > .frauen-library-hero{
   position:relative!important;
   z-index:1!important;
@@ -84,13 +55,7 @@ html[data-theme] body.is-topic-route #appView .topic-collection-page > .main-sea
     margin-top:-18px!important;
   }
 }
-/* When the software keyboard occupies most of a phone viewport, stop pinning
-   this tall rail while its search input is focused so native caret scrolling works. */
-@media(max-width:699px) and (pointer:coarse){
-  html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage:focus-within{
-    position:relative!important;
-  }
-}
+/* Search keeps its fixed rail and native caret while typing; no focus-within positional swap. */
 @media(prefers-reduced-motion:reduce){
   html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage{
     scroll-behavior:auto!important;
