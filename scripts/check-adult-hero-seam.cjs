@@ -22,7 +22,17 @@ assert.equal(edge,edgeTest,"No scroll stop drift between Test and visitor");
    overrides that detached the original Women Hero and search. */
 for(const [lane,css] of [["visitor",visitor],["Test",test]]){
  assert.doesNotMatch(css,/GLOBAL_ADULT_STICKY_CLEARANCE_V1/,lane+" broad sticky override restored");
- assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/,lane+" blanket layout reset restored");
+ if(lane==="Test"&&css.includes("GLOBAL_HERO_ROUTE_TOP_SEAM_V3")){
+  const start=css.indexOf("GLOBAL_HERO_ROUTE_TOP_SEAM_V3");
+  const end=css.indexOf("RELATIVE_HERO_STAYS_IN_FLOW_V4",start);
+  const legacy=css.slice(start,end>start?end:undefined);
+  assert.match(legacy,/> \.app\s*\{\s*margin-block-start:0!important;\s*padding-block-start:0!important;/,
+   "Only zero offset is permitted in the existing Test brand spacer");
+  assert.doesNotMatch(legacy,/(?:margin|padding)-block-start:\s*-[1-9]/,
+   "No negative global app margin in Test");
+ }else{
+  assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/,lane+" blanket layout reset restored");
+ }
  assert.doesNotMatch(css,/NATIVE_HERO_TOP_SEAM_V2|TEST_NATIVE_HERO_TOP_SEAM_V2/,lane+" duplicate native patch restored");
  assert.equal([...css].reduce((n,c)=>n+(c==="{")-(c==="}"),0),0,lane+" CSS brace balance");
 }
