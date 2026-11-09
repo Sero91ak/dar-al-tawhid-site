@@ -289,6 +289,13 @@ html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 .frauen-search-pro
 html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 .search-input-shell{
   background:var(--card,var(--bg,#f5f2e9))!important;
 }
+/* iOS WKWebView: 14.5/15px original inputs trigger focus zoom and repaints. */
+html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 input[data-frauen-q]{
+  font-size:max(16px,1rem)!important;
+  -webkit-text-size-adjust:100%!important;
+  transform:none!important;
+  transition:none!important;
+}
 html[data-theme] body.is-frauen-route #appView .dar-frauen-dock-spacer{
   display:block!important;
   position:relative!important;
