@@ -507,15 +507,15 @@ async function finalizeDarTestHomeV1193(asset) {
   // the real document scroll; clamp downward drags at the top without
   // locking vertical lists, prayers, Qurʾān or the bottom navigation.
   const scrollCss = '<link rel="stylesheet" id="darAdultTopBoundaryCssV1" href="/test/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-no-overlay-v8">';
-  const scrollJs = '<script defer id="darAdultTopBoundaryJsV1" src="/test/assets/dar-adult-top-scroll-boundary-v1.js?v=20261103-frauen-top-clamp-v10"></script>';
+  const scrollJs = '<script defer id="darAdultTopBoundaryJsV1" src="/test/assets/dar-adult-top-scroll-boundary-v1.js?v=20261109-frauen-native-scroll-v1414"></script>';
   if(!html.includes('id="darAdultTopBoundaryCssV1"'))
     html=html.includes("</head>")?html.replace("</head>",scrollCss+"\n</head>"):scrollCss+html;
   if(!html.includes('id="darAdultTopBoundaryJsV1"'))
     html=html.includes("</body>")?html.replace("</body>",scrollJs+"\n</body>"):html+scrollJs;
   // FRAUEN_GLOBAL_V1406 · independent final CSS + seam runtime.
   // Works even when a cached Test shell already contains V1300 authorities.
-  const frauenFlowCss = '<link rel="stylesheet" id="darFrauenGlobalFlowV1407" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css?v=frauen-sticky-hero-v1407-20261103-native-single-spacer-v1408-one-scroll-root-v1409-20261107">';
-  const frauenFlowJs = '<script defer id="darFrauenHeroSeamRuntimeV1407" src="/assets/frauen/frauen-hero-seam-runtime-v1407.js?v=frauen-gap-guard-v1408-20261105-late-header-v1409-20261107"></script>';
+  const frauenFlowCss = '<link rel="stylesheet" id="darFrauenGlobalFlowV1407" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css?v=frauen-fixed-single-owner-v1414-20261109">';
+  const frauenFlowJs = '<script defer id="darFrauenHeroSeamRuntimeV1407" src="/assets/frauen/frauen-hero-seam-runtime-v1407.js?v=frauen-fixed-geometry-v1414-20261109"></script>';
   if(!html.includes('id="darFrauenGlobalFlowV1407"'))
     html=html.includes("</body>")?html.replace("</body>",frauenFlowCss+"\n</body>"):html+frauenFlowCss;
   if(!html.includes('id="darFrauenHeroSeamRuntimeV1407"'))
