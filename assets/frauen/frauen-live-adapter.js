@@ -7,7 +7,7 @@
    * Frauen data and route did not change. Never destroy input/sticky DOM or
    * reset scroll in that case. Preserve original frozen content renderer. */
   var lastFrauenRoute=null,lastFrauenMarkup=null;
-  var dockObserver=null,dockFrame=0,dockResizeWidth=0,dockHeight=0;
+  var dockObserver=null,dockLayoutObserver=null,dockFrame=0,dockResizeWidth=0,dockHeight=0;
   var DOCK_ID="darFrauenHeroDockV1416";
 
   function decodePart(v){try{return decodeURIComponent(v)}catch(e){return v}}
@@ -122,10 +122,21 @@
       dockObserver=new ResizeObserver(scheduleDock);
       dockObserver.observe(stage);
     }
+    /* The Test Fold V2 owner may relocate #appView into its reading pane
+     * after the Frauen page renders. Track only layout/host transitions,
+     * never document scroll, touchmove or result-list mutations. */
+    if(!dockLayoutObserver&&typeof MutationObserver==="function"){
+      dockLayoutObserver=new MutationObserver(scheduleDock);
+      dockLayoutObserver.observe(document.documentElement,{
+        attributes:true,attributeFilter:["class"]
+      });
+      dockLayoutObserver.observe(document.body,{childList:true});
+    }
     scheduleDock();
   }
   function unmountDock(){
     if(dockObserver){dockObserver.disconnect();dockObserver=null;}
+    if(dockLayoutObserver){dockLayoutObserver.disconnect();dockLayoutObserver=null;}
     if(dockFrame){cancelAnimationFrame(dockFrame);dockFrame=0;}
     var existing=dock();
     if(existing)existing.remove();
