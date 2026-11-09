@@ -405,7 +405,7 @@ function liveFrauenNativeAddon() {
     '<link rel="stylesheet" href="/assets/frauen/frauen-authority-v1292.css?v=frauen-rollback-20261016-1500">',
 
     /* Frauen V1406 is loaded unconditionally by adult global brand below. */
-    '<script defer src="/test/assets/frauen/frauen-fiqh.js?v=frauen-rollback-20261016-1500"><\/script>',
+    '<script defer src="/test/assets/frauen/frauen-fiqh.js?v=frauen-input-focus-stable-v1416-20261109"><\/script>',
     '<script defer src="/assets/frauen/frauen-live-adapter.js?v=frauen-herodock-mount-v1416-20261109"><\/script>'
   ].join("");
 }
