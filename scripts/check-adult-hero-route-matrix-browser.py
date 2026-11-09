@@ -118,6 +118,10 @@ def main():
       const computed=getComputedStyle(hero);
       return {headBottom:head.bottom,heroTop:rect.top,heroHeight:rect.height,
         bodyPad,position:computed.position,top:computed.top,
+        ownerLoaded:!!window.__DAR_FRAUEN_HERO_SEAM_V1407,
+        bodyOffset:document.body.style.getPropertyValue('--frauen-fixed-brand-bottom'),
+        stageOffset:hero.style.getPropertyValue('top'),
+        spacerCount:document.querySelectorAll('.dar-frauen-hero-spacer').length,
         buttonCenter:btn.top+btn.height/2,
         hit:(()=>{const el=document.elementFromPoint(btn.left+btn.width/2,btn.top+btn.height/2);return !!el&&(el.id==="heroTap"||!!el.closest("#heroTap"));})()};
      """,selector,header)
