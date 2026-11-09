@@ -23,9 +23,9 @@ for(const [name,cssPath,loaderPath,asset] of lanes){
   const start=css.indexOf("GLOBAL_HERO_ROUTE_TOP_SEAM_V3");
   const end=css.indexOf("RELATIVE_HERO_STAYS_IN_FLOW_V4",start);
   const legacy=css.slice(start,end>start?end:undefined);
-  assert.match(legacy,/> \\.app\\s*\\{\\s*margin-block-start:0!important;\\s*padding-block-start:0!important;/,
+  assert.match(legacy,/> \.app\s*\{\s*margin-block-start:0!important;\s*padding-block-start:0!important;/,
    "Test may keep only its existing zero-offset brand spacer");
-  assert.doesNotMatch(legacy,/(?:margin|padding)-block-start:\\s*-[1-9]/);
+  assert.doesNotMatch(legacy,/(?:margin|padding)-block-start:\s*-[1-9]/);
  }else assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/);
  assert.doesNotMatch(css,/NATIVE_HERO_TOP_SEAM_V2|TEST_NATIVE_HERO_TOP_SEAM_V2/,
    name+" must not duplicate native safe-area resetting");
