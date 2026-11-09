@@ -78,7 +78,8 @@ for(const jsPath of [
 }
 const singleOwner=fs.readFileSync(path.join(root,"assets/frauen/frauen-live-adapter.js"),"utf8");
 if(!singleOwner.includes("stage.appendChild(hero)")||
-   !singleOwner.includes("if(search)stage.appendChild(search)"))
+   !singleOwner.includes("if(search)stage.appendChild(search)")||
+   !singleOwner.includes("document.body.appendChild(prepared.stage)"))
  fail("Nur der Frauen-Renderer darf das Originalfoto und die Suche montieren");
 ok("Kompakter Hero und native Frauen-Scrollroute, gleiche Regeln Besucher/Test");
 
