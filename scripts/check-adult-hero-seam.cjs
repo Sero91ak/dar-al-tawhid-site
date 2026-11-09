@@ -37,8 +37,12 @@ for(const [lane,css] of [["visitor",visitor],["Test",test]]){
  assert.equal([...css].reduce((n,c)=>n+(c==="{")-(c==="}"),0),0,lane+" CSS brace balance");
 }
 const original=read("assets/adult-immersive-hero-v1.css");
-assert.match(original,/\.dar-immersive-hero-stage > \.frauen-library-hero/,"Original photo must stay within one stage");
-assert.match(original,/\.dar-immersive-hero-stage > :is\(\.frauen-library-search-wrap/,"Original search must stay inside same stage");
+const frauenFlow=read("assets/frauen/frauen-original-v1224-header-seam-v1405.css");
+assert.doesNotMatch(original,/\.dar-immersive-hero-stage > \.frauen-library-hero/);
+assert.match(frauenFlow,/#darFrauenHeroDockV1416 > \.frauen-library-hero/,
+ "Original photo must span the viewport inside one body-level Dock");
+assert.match(frauenFlow,/#darFrauenHeroDockV1416 > :is\(\.frauen-library-search-wrap/,
+ "Original search stays in the same independent Dock");
 const nativeResponsive=read("assets/adult-responsive-viewport-v1381.css");
 assert.match(nativeResponsive,/DAR_VISITOR_IOS_HERO_EDGE_SEARCH_V1404/,"Preserve original native photo-safe-area contract");
 assert.match(visitorJs,/darAdultBrandHeaderSpacerV2/);
