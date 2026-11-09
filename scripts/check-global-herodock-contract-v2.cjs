@@ -29,7 +29,8 @@ assert.match(js,/dar-fold-v2-active/,"Split reader geometry");
 assert.match(js,/--dar-adult-header-obscured-top/,"Reuse global measured header");
 assert.match(css,/\[data-dar-global-herodock="v2"\]/);
 assert.match(css,/\.dar-global-herodock-spacer/);
-assert.doesNotMatch(css,/100vw|scroll-behavior:smooth|overflow-y:hidden!important/);
+const cssExecutable=css.replace(/\/\*[\s\S]*?\*\//g,"");
+assert.doesNotMatch(cssExecutable,/100vw|scroll-behavior:smooth|overflow-y:hidden!important/);
 assert.equal((visitor.match(/injectAdultGlobalHeroDockV2\(html\);/g)||[]).length,3,
  "PWA, iOS native and Test fallback must load the same Dock; not desktop");
 assert.match(visitor,/function injectAdultGlobalHeroDockV2\(html\)/);
