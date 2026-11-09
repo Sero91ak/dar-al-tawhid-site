@@ -123,7 +123,9 @@ def main():
         stageOffset:hero.style.getPropertyValue('top'),
         spacerCount:document.querySelectorAll('.dar-frauen-hero-spacer').length,
         buttonCenter:btn.top+btn.height/2,
-        hit:(()=>{const el=document.elementFromPoint(btn.left+btn.width/2,btn.top+btn.height/2);return !!el&&(el.id==="heroTap"||!!el.closest("#heroTap"));})()};
+        hit:(()=>{const el=document.elementFromPoint(btn.left+btn.width/2,btn.top+btn.height/2);return !!el&&(el.id==="heroTap"||!!el.closest("#heroTap"));})(),
+        hitTarget:(()=>{const el=document.elementFromPoint(btn.left+btn.width/2,btn.top+btn.height/2);return el?el.tagName+"#"+el.id+"."+String(el.className).slice(0,90):null;})(),
+        stageZ:computed.zIndex,buttonRect:{left:btn.left,top:btn.top,width:btn.width,height:btn.height}};
      """,selector,header)
      if abs(metrics["heroTop"]-metrics["headBottom"])>2:
       raise AssertionError(f"{lane} {screen} {route}: blank gap or overlap {metrics}")
