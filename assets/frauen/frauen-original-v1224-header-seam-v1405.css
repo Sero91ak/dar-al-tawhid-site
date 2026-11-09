@@ -168,65 +168,142 @@ html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-vis
     border-radius:23px!important;
   }
 }
-/* DAR_FRAUEN_ONE_STAGE_NATIVE_SCROLL_V1415
- * Photo + original search are mounted ONCE by the Frauen renderer.
- * One normal-flow sticky stage, no fixed duplicate, negative margin,
- * scroll-time measurement, phantom padding or focus-based unpinning.
+/* DAR_FRAUEN_FULL_BLEED_HERODOCK_V1416
+ * The original Hero/search are one fixed DOM surface on BODY (not #appView).
+ * Global brand measures its OWN height; this route never measures it again.
+ * Reserve exactly the dock's height in #appView; no sticky ancestor,
+ * negative 50vw breakout, mirrored photo, translucent overlay or scroll JS.
  */
-html.dar-adult-global-brand-ready body.is-frauen-route{
-  --frauen-fixed-brand-bottom:var(--dar-adult-header-obscured-top,var(--dar-adult-brand-header-height,80px));
-}
-html.dar-test-premium-header-v2 body.is-frauen-route{
-  --frauen-fixed-brand-bottom:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,80px));
-}
-html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage,
-html[data-theme].dar-test-premium-header-v2 body.is-frauen-route #appView .dar-immersive-hero-stage,
-html[data-theme].dar-adult-global-brand-ready body.is-frauen-route #appView .dar-immersive-hero-stage{
+html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416{
   display:block!important;
-  position:sticky!important;
-  top:var(--frauen-fixed-brand-bottom,80px)!important;
-  inset-block-start:var(--frauen-fixed-brand-bottom,80px)!important;
+  position:fixed!important;
+  top:var(--dar-adult-header-obscured-top,var(--dar-test-occlusion-top,80px))!important;
+  inset-block-start:var(--dar-adult-header-obscured-top,var(--dar-test-occlusion-top,80px))!important;
+  left:0;
+  width:100%;
+  max-width:none!important;
   z-index:180!important;
-  width:100%!important;
-  max-width:100%!important;
   box-sizing:border-box!important;
-  margin:0 0 clamp(15px,2vw,25px)!important;
+  margin:0!important;
+  padding:0 0 9px!important;
+  border:0!important;
   transform:none!important;
-  contain:none!important;
+  -webkit-transform:none!important;
   isolation:isolate!important;
   overflow:visible!important;
   background:var(--bg,#f4efec)!important;
-  -webkit-transform:none!important;
+  contain:layout style!important;
+  container-type:inline-size;
+  transition:none!important;
+  animation:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
 }
-html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage:focus-within{
-  position:sticky!important;
-  top:var(--frauen-fixed-brand-bottom,80px)!important;
-  inset-block-start:var(--frauen-fixed-brand-bottom,80px)!important;
+html.dar-test-premium-header-v2[data-theme] body.is-frauen-route #darFrauenHeroDockV1416{
+  top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,80px))!important;
+  inset-block-start:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,80px))!important;
 }
-html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage::before{
-  content:none!important;
+html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416::before,
+html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416::after{
   display:none!important;
+  content:none!important;
 }
-html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > .frauen-library-hero{
+/* Photo spans the actual app content viewport (or the Fold reading pane),
+ * not the 1080px library wrapper or a guessed 100vw/negative margin. */
+html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 > .frauen-library-hero{
+  display:block!important;
   position:relative!important;
-  top:auto!important;
-  inset-block-start:auto!important;
-  z-index:1!important;
+  inset:auto!important;
   width:100%!important;
-  max-width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:clamp(240px,53vw,360px)!important;
+  height:clamp(240px,53cqw,360px)!important;
+  min-height:0!important;
+  max-height:none!important;
+  box-sizing:border-box!important;
   margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
   transform:none!important;
+  -webkit-transform:none!important;
+  opacity:1!important;
+  background-image:var(--frauen-hero-img)!important;
   background-size:cover!important;
   background-repeat:no-repeat!important;
+  box-shadow:none!important;
+  filter:none!important;
+  animation:none!important;
+  transition:none!important;
 }
-html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > :is(.frauen-library-search-wrap,.frauen-library-list-controls){
-  position:relative!important;
-  inset-block-start:auto!important;
-  top:auto!important;
-  z-index:2!important;
-  width:min(920px,calc(100% - 8px))!important;
-  margin:-26px auto 0!important;
+html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 > .frauen-library-hero .frauen-library-hero__content{
+  min-height:100%!important;
+  height:100%!important;
+  width:min(790px,100%)!important;
+  max-width:100%!important;
   box-sizing:border-box!important;
+  padding:clamp(12px,2.9cqw,32px)!important;
+  justify-content:flex-end!important;
+  overflow:visible!important;
+}
+html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 > .frauen-library-hero h2{
+  font-size:clamp(27px,5cqw,48px)!important;
+  line-height:1.03!important;
+}
+html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 .frauen-library-hero__subtitle{
+  font-size:clamp(11px,1.55cqw,15px)!important;
+  line-height:1.35!important;
+  margin-top:7px!important;
+}
+html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 .frauen-library-hero__stats{
+  margin-top:8px!important;
+  gap:6px!important;
+}
+html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 .frauen-library-hero__stats span,
+html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 .frauen-library-back{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 > :is(.frauen-library-search-wrap,.frauen-library-list-controls){
+  display:block!important;
+  position:relative!important;
+  inset:auto!important;
+  width:min(920px,calc(100% - 24px))!important;
+  max-width:calc(100% - 24px)!important;
+  margin:-17px auto 0!important;
+  padding:0!important;
+  box-sizing:border-box!important;
+  transform:none!important;
+  z-index:2!important;
+}
+html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 :is(.frauen-search-pro,.search-input-shell,.frauen-library-search-wrap,.frauen-library-list-controls){
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  animation:none!important;
+  transition:none!important;
+}
+html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 .frauen-search-pro{
+  background:var(--bg,#f5f2e9)!important;
+}
+html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 .search-input-shell{
+  background:var(--card,var(--bg,#f5f2e9))!important;
+}
+html[data-theme] body.is-frauen-route #appView .dar-frauen-dock-spacer{
+  display:block!important;
+  position:relative!important;
+  width:100%!important;
+  height:var(--frauen-dock-reserved,0px)!important;
+  min-height:0!important;
+  max-height:none!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
+  background:transparent!important;
+  transition:none!important;
+  animation:none!important;
 }
 html[data-theme] body.is-frauen-route #appView,
 html[data-theme] body.is-frauen-route #appView > .dar-frauen-production-root,
@@ -247,10 +324,6 @@ html[data-theme] body.is-frauen-route{
   overflow-y:visible!important;
   overscroll-behavior-y:none!important;
 }
-html[data-theme] body.is-frauen-route #appView .frauen-library-hero:not(.dar-immersive-hero-stage > .frauen-library-hero){
-  position:relative!important;
-  top:auto!important;
-}
 html:is(.dar-adult-global-brand-ready,.dar-test-premium-header-v2)
  body.is-frauen-route > .app > .top-shell{
   display:none!important;
@@ -266,11 +339,21 @@ html:is(.dar-adult-global-brand-ready,.dar-test-premium-header-v2)
   padding-top:0!important;
 }
 @media(max-height:540px) and (orientation:landscape){
- html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > .frauen-library-hero{
-   min-height:clamp(130px,28dvh,190px)!important;
+ html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 > .frauen-library-hero{
+  height:clamp(125px,24dvh,175px)!important;
  }
- html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > :is(.frauen-library-search-wrap,.frauen-library-list-controls){
-   margin-top:-15px!important;
+ html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 > .frauen-library-hero .frauen-library-hero__content{
+  padding:10px 18px!important;
+ }
+ html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 > .frauen-library-hero h2{
+  font-size:clamp(20px,3.4cqw,30px)!important;
+ }
+ html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 .frauen-library-hero__subtitle,
+ html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 .frauen-library-hero__stats{
+  display:none!important;
+ }
+ html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416 > :is(.frauen-library-search-wrap,.frauen-library-list-controls){
+  margin-top:-8px!important;
  }
 }
 
