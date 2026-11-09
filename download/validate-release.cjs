@@ -44,7 +44,10 @@ if (fs.existsSync(publicRouterPath)) {
   assert.ok(!router.includes('navigator.serviceWorker.register("/service-worker.js",{scope:"/"})'), "Public website must never register the root visitor service worker");
   assert.ok(router.includes("return !isNativeAppRequest(ua);"), "Android browsers must receive the public website");
   assert.ok(!router.includes("isRoot && (nativeApp || androidBrowser)"), "Android browsers must not be intercepted by the native root shell");
-  assert.ok(router.includes("isRoot && nativeApp"), "Only native app user agents may receive the native root shell");
+  // The official iOS root selector is an explicit, *exact* alternative to UA.
+  // Android browsers and all unmarked public website visits remain excluded.
+  assert.ok(router.includes('const nativeIosEntry = isRoot && url.searchParams.get("native_ios") === "1"'), "Native iOS override must be exact and restricted to the root");
+  assert.ok(router.includes("isRoot && (nativeApp || nativeIosEntry)"), "Only native app user agents or the exact iOS root selector may receive the native root shell");
   assert.ok(!router.includes('id="darAndroidDownloadPromo"'), "Obsolete APK promo must not cover the public website");
   assert.ok(router.includes("DAR_PWA_ICON_CATALOG"), "Android PWA icon catalog missing");
   assert.ok(router.includes("normalizePwaIconId"), "Android PWA selected-icon manifest support missing");
