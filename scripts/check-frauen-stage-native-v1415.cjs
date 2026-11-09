@@ -60,7 +60,7 @@ const devices=[
      location.hash="#frauen";
      window.__query="";
      window.render=function(){};
-     window.readRoute=function(){return {view:"frauen",value:location.hash.replace(/^#frauen\/?/,"")}};
+     window.readRoute=function(){return location.hash.startsWith("#frauen")?{view:"frauen",value:location.hash.replace(/^#frauen\/?/,"")}:{view:"home",value:""};};
      window.DARFrauenFiqh={
       render:function(value){
        const group=value.indexOf("group/")===0;
