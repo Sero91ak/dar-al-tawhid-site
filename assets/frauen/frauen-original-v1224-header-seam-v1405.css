@@ -195,6 +195,10 @@ html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage{
   overflow:visible!important;
   background:var(--bg,#f4efec)!important;
 }
+/* Older cached global CSS must never unpin the search on :focus-within. */
+html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage:focus-within{
+  position:fixed!important;
+}
 html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > .frauen-library-hero{
   position:relative!important;
   top:auto!important;
