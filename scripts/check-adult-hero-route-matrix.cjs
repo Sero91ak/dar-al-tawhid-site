@@ -21,7 +21,7 @@ for(const [name,cssPath,loaderPath,asset] of lanes){
    name+" must not globally translate original Hero or detached search");
  assert.doesNotMatch(css,/NATIVE_HERO_TOP_SEAM_V2|TEST_NATIVE_HERO_TOP_SEAM_V2/,
    name+" must not duplicate native safe-area resetting");
- assert(loader.includes(asset+"?v=20261030-restore-original-hero-rail-v5"),
+ assert(loader.includes(asset+"?v="+(name==="Visitor"?"20261107-compact-safearea-header-v3":"20261030-restore-original-hero-rail-v5")),
    name+" must request rollback-safe CSS version");
 }
 const heroCss=read("assets/adult-immersive-hero-v1.css");
