@@ -14,6 +14,7 @@ const css=[
   read("assets/adult-immersive-hero-v1.css"),
   read("assets/frauen/frauen-original-v1224-header-seam-v1405.css")
 ];
+const foldCss=read("test/assets/dar-fold-workspace-v2.css");
 const devices=[
   {label:"iphone",w:390,h:844},
   {label:"android",w:412,h:915},
@@ -53,7 +54,8 @@ const devices=[
      '<header id="darAdultBrandHeaderV2">DĀR AL TAWḤĪD</header>'+
      '<div class="app"><div id="darAdultBrandHeaderSpacerV2"></div>'+
      '<main id="appView" class="view"></main></div></body></html>');
-    for(const content of css)await page.addStyleTag({content});
+    for(const content of (device.label==="fold"?css.slice(0,-1).concat([foldCss,css[css.length-1]]):css))
+      await page.addStyleTag({content});
     await page.evaluate(()=>{
      location.hash="#frauen";
      window.__query="";
@@ -174,6 +176,44 @@ const devices=[
     }));
     assert.equal(exit.docks,0,label+": dock leaked into other routes");
     assert.equal(exit.reserved,"",label+": spacer leaked into other routes");
+    if(device.label==="fold"&&theme==="salbei"){
+      await page.evaluate(()=>{
+        location.hash="#frauen";
+        window.render();
+        const pane=document.createElement("main");
+        pane.id="darFoldV2Pane";
+        const bar=document.createElement("header");bar.id="darFoldV2Topbar";
+        document.body.append(bar,pane);
+        pane.appendChild(document.getElementById("appView"));
+        document.documentElement.style.setProperty("--dar-fold-v2-rail","220px");
+        document.documentElement.style.setProperty("--dar-fold-v2-top","48px");
+        document.documentElement.classList.add("dar-fold-v2-active");
+      });
+      await page.waitForFunction(()=>{
+        const d=document.getElementById("darFrauenHeroDockV1416");
+        const p=document.getElementById("darFoldV2Pane");
+        if(!d||!p)return false;
+        const a=d.getBoundingClientRect(),b=p.getBoundingClientRect();
+        return Math.abs(a.top-48)<=2&&Math.abs(a.left-b.left)<=2&&
+          Math.abs(a.width-b.width)<=2;
+      });
+      const split=await page.evaluate(()=>{
+        const d=document.getElementById("darFrauenHeroDockV1416");
+        const p=document.getElementById("darFoldV2Pane");
+        p.scrollTop=300;
+        return {top:d.getBoundingClientRect().top,
+          left:d.getBoundingClientRect().left,
+          right:d.getBoundingClientRect().right,
+          paneLeft:p.getBoundingClientRect().left,
+          overflow:getComputedStyle(document.body).overflowY,
+          scroll:p.scrollTop};
+      });
+      assert.equal(split.overflow,"hidden",label+": Fold independent scroll root was overridden");
+      assert.ok(split.scroll>200,label+": Fold reading pane cannot scroll");
+      assert.ok(Math.abs(split.top-48)<=2,label+": Fold dock detached from local topbar");
+      assert.ok(Math.abs(split.left-split.paneLeft)<=2,label+": Fold rail is covered");
+      console.log("PASS HeroDock V1416 Fold V2 true split-pane / independent reader scroll");
+    }
     console.log("PASS HeroDock V1416 "+label+
       " — original widescreen, one header, stable scroll/search, route return");
     await ctx.close();
