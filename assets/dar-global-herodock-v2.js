@@ -196,7 +196,8 @@
     var left = Math.max(0, Math.min(maxWidth - 1, Math.round(box.left)));
     var width = Math.max(1, Math.min(maxWidth - left, Math.round(box.width)));
     var hero = active.hero;
-    set(hero, "min-height", "clamp(210px, 42cqw, 380px)");
+    var compact = !!(win.matchMedia && win.matchMedia("(max-height:540px) and (orientation:landscape)").matches);
+    set(hero, "min-height", compact ? "clamp(130px,24dvh,180px)" : "clamp(210px,42cqw,380px)");
     set(hero, "max-height", "none");
     set(hero, "height", "auto");
     set(hero, "aspect-ratio", "auto");
