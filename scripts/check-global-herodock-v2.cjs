@@ -24,7 +24,7 @@ const devices=[
  ["duo",600,880],["fold",768,1024],["ipad",1024,1366],
  ["desktop",1440,900],["wide",1920,1080],["landscape",844,430]
 ];
-const dataArt="url(\"data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%2090'%3E%3Crect%20width='160'%20height='90'%20fill='%232b5145'/%3E%3C/svg%3E\")";
+const dataArt="url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20160%2090%22%3E%3Crect%20width%3D%22160%22%20height%3D%2290%22%20fill%3D%22%232b5145%22%2F%3E%3C%2Fsvg%3E)";
 function bodyMarkup(route){
  const hero='<button id="heroAction" type="button">Inhalt öffnen</button>'+
    '<h2>Wissen, authentische Quellen und geprüfte Überlieferungen</h2>';
