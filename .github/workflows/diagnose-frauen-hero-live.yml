@@ -21,7 +21,10 @@ jobs:
       - run: |
           npm install --no-save --ignore-scripts playwright
           npx playwright install --with-deps chromium
+      - name: Accept new V1415 candidate DOM on phone, Duo, Fold and iPad
+        run: node scripts/check-frauen-stage-native-v1415.cjs
       - name: Inspect visible hero and scroll on deployed Test and visitor apps
+        continue-on-error: true # pre-release live baseline remains on old code
         run: node scripts/diagnose-frauen-hero-live.cjs
       - uses: actions/upload-artifact@v4
         if: always()

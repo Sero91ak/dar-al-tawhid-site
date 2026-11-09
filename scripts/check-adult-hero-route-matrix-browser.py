@@ -34,14 +34,16 @@ def fixture(test):
   "/test/assets/more-v1253.css",
   "/test/assets/adult-immersive-hero-v1.css",
   "/test/assets/dar-settings-navigation-v1.css",
-  "/test/assets/dar-test-premium-header-v2.css"
+  "/test/assets/dar-test-premium-header-v2.css",
+  "/assets/frauen/frauen-original-v1224-header-seam-v1405.css"
  ] if test else [
   "/assets/full-edge-appearance-polish.css",
   "/assets/adult-responsive-viewport-v1381.css",
   "/assets/adult-immersive-hero-v1.css",
   "/assets/dar-hero-scroll-standard-v1.css",
   "/assets/dar-settings-navigation-v1.css",
-  "/assets/dar-adult-brand-header-v2.css"
+  "/assets/dar-adult-brand-header-v2.css",
+  "/assets/frauen/frauen-original-v1224-header-seam-v1405.css"
  ])
  links="".join('<link rel="stylesheet" href="'+p+'">' for p in sheets)
  return (
@@ -49,7 +51,7 @@ def fixture(test):
   '<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
   '<style>html,body{margin:0;min-height:100%;background:#eaf0e7}'
   'html{--dar-adult-brand-header-height:126px;--dar-adult-header-obscured-top:126px;'
-  '--dar-test-brand-header-height:126px;--dar-test-occlusion-top:126px;--dar-native-safe-top:126px;--safe-top:126px}'
+  '--dar-test-brand-header-height:126px;--dar-test-occlusion-top:126px;--dar-native-safe-top:59px;--safe-top:59px}'
   'html.dar-ios-native-app body.is-area-route{padding-top:126px!important}'
   '#'+header+'{height:126px!important;min-height:126px!important;position:fixed!important;top:0!important;inset-inline:0!important;z-index:730!important;background:#eaf0e7!important;box-sizing:border-box!important}'
   '#'+spacer+'{height:126px!important;flex:0 0 126px!important;display:block!important}'
@@ -65,7 +67,9 @@ def markup(route):
  button='<button type="button" id="heroTap" onclick="window.__heroTap=(window.__heroTap||0)+1">Hero öffnen</button>'
  h='<div class="hero-fixture" data-qa-hero="1">'+button+'</div>'
  if route=="frauen":
-  return '<section class="frauen-library-shell"><div class="dar-immersive-hero-stage frauen-library-pinned-header" data-qa-hero="1"><div class="frauen-library-hero hero-fixture">'+button+'</div><div class="frauen-library-search-wrap"><input aria-label="Suche" placeholder="Suchen"></div></div><section class="fixture-content">Inhalt</section></section>',".dar-immersive-hero-stage"
+  # The production Frauen photo/search is now a BODY-owned fixed HeroDock.
+  # The content route itself has only one measured flow spacer.
+  return '<section class="frauen-library-shell"><div class="dar-frauen-dock-spacer" aria-hidden="true"></div><section class="fixture-content">Inhalt</section></section>',"#darFrauenHeroDockV1416"
  if route in ("topics","topic","post","hadith","dua"):
   cls={"topics":"topics-hub","topic":"topic-collection-page","post":"post-reader","hadith":"hadith-hub","dua":"dua-hub"}[route]
   heading="post-reader-title" if route=="post" else "view-head"
@@ -100,7 +104,24 @@ def main():
      driver.execute_script("""
       document.documentElement.classList.add("dar-ios-native-app");
       document.body.className="dar-ios-native-app is-area-route has-bottom-nav is-"+arguments[0]+"-route";
-      document.getElementById("appView").innerHTML=arguments[1];
+      const oldDock=document.getElementById("darFrauenHeroDockV1416");
+      if(oldDock)oldDock.remove();
+      document.body.style.removeProperty("--frauen-dock-reserved");
+      const app=document.getElementById("appView");
+      app.innerHTML=arguments[1];
+      if(arguments[0]==="frauen"){
+       const dock=document.createElement("div");
+       dock.id="darFrauenHeroDockV1416";
+       dock.className="dar-frauen-herodock";
+       dock.innerHTML='<div class="frauen-library-hero hero-fixture" data-qa-hero="1">'+
+        '<button type="button" id="heroTap" onclick="window.__heroTap=(window.__heroTap||0)+1">Hero öffnen</button>'+
+        '</div><div class="frauen-library-search-wrap"><input aria-label="Suche" placeholder="Suchen"></div>';
+       const pane=app.getBoundingClientRect();
+       dock.style.left=pane.left+"px";
+       dock.style.width=pane.width+"px";
+       document.body.appendChild(dock);
+       document.body.style.setProperty("--frauen-dock-reserved",Math.ceil(dock.getBoundingClientRect().height)+"px");
+      }
       window.scrollTo(0,0);
      """,route.replace("-detail","") if route in ("hadith-detail","dua-detail") else route,html)
      metrics=driver.execute_script("""

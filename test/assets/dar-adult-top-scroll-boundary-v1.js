@@ -75,6 +75,10 @@ document.addEventListener("touchstart",function(event){
  if(target&&target.nodeType!==1)target=target.parentElement;
  if(!target||!target.closest){reset();return}
  if(target.closest(gestureSelector)){reset();return}
+ /* Women V1415: native document scrolling, never intercept ordinary drags.
+  * Overlay readers remain protected by the existing guarded handler. */
+ if(document.body&&document.body.classList.contains("is-frauen-route")&&
+    !target.closest(overlaySelector)){reset();return}
  startTarget=target;
  scope=target.closest(overlaySelector);
  womenTopTouch=!!(document.body&&document.body.classList&&document.body.classList.contains("is-frauen-route")&&!scope&&atDocumentTop());

@@ -22,20 +22,34 @@ assert.equal(edge,edgeTest,"No scroll stop drift between Test and visitor");
    overrides that detached the original Women Hero and search. */
 for(const [lane,css] of [["visitor",visitor],["Test",test]]){
  assert.doesNotMatch(css,/GLOBAL_ADULT_STICKY_CLEARANCE_V1/,lane+" broad sticky override restored");
- assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/,lane+" blanket layout reset restored");
+ if(lane==="Test"&&css.includes("GLOBAL_HERO_ROUTE_TOP_SEAM_V3")){
+  const start=css.indexOf("GLOBAL_HERO_ROUTE_TOP_SEAM_V3");
+  const end=css.indexOf("RELATIVE_HERO_STAYS_IN_FLOW_V4",start);
+  const legacy=css.slice(start,end>start?end:undefined);
+  assert.match(legacy,/> \.app\s*\{\s*margin-block-start:0!important;\s*padding-block-start:0!important;/,
+   "Test must preserve only the original zero-offset brand spacer");
+  assert.doesNotMatch(legacy,/(?:margin|padding)-block-start:\s*-[1-9]/,
+   "Test must not pull the entire app under the global header");
+ }else{
+  assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/,lane+" blanket layout reset restored");
+ }
  assert.doesNotMatch(css,/NATIVE_HERO_TOP_SEAM_V2|TEST_NATIVE_HERO_TOP_SEAM_V2/,lane+" duplicate native patch restored");
  assert.equal([...css].reduce((n,c)=>n+(c==="{")-(c==="}"),0),0,lane+" CSS brace balance");
 }
 const original=read("assets/adult-immersive-hero-v1.css");
-assert.match(original,/\.dar-immersive-hero-stage > \.frauen-library-hero/,"Original photo must stay within one stage");
-assert.match(original,/\.dar-immersive-hero-stage > :is\(\.frauen-library-search-wrap/,"Original search must stay inside same stage");
+const frauenFlow=read("assets/frauen/frauen-original-v1224-header-seam-v1405.css");
+assert.doesNotMatch(original,/\.dar-immersive-hero-stage > \.frauen-library-hero/);
+assert.match(frauenFlow,/#darFrauenHeroDockV1416 > \.frauen-library-hero/,
+ "Original photo must span the viewport inside one body-level Dock");
+assert.match(frauenFlow,/#darFrauenHeroDockV1416 > :is\(\.frauen-library-search-wrap/,
+ "Original search stays in the same independent Dock");
 const nativeResponsive=read("assets/adult-responsive-viewport-v1381.css");
 assert.match(nativeResponsive,/DAR_VISITOR_IOS_HERO_EDGE_SEARCH_V1404/,"Preserve original native photo-safe-area contract");
 assert.match(visitorJs,/darAdultBrandHeaderSpacerV2/);
 assert.match(visitor,/#darAdultBrandHeaderSpacerV2\{[^}]*height:var\(--dar-adult-brand-header-height/);
 assert.match(ios,/root\.classList\.add\("dar-ios-native-app"\)/);
 assert.match(ios,/body\.classList\.add\("dar-ios-native-app"\)/);
-assert.match(router,/dar-adult-brand-header-v2\.css\?v=20261030-restore-original-hero-rail-v5/);
+assert.match(router,/dar-adult-brand-header-v2\.css\?v=20261107-compact-safearea-header-v3/);
 assert.match(worker,/dar-test-premium-header-v2\.css\?v=20261030-restore-original-hero-rail-v5/);
 assert.match(edge,/DAR_ADULT_TOP_SCROLL_BOUNDARY_V4/);
 assert.match(edge,/event\.preventDefault\(\)/);

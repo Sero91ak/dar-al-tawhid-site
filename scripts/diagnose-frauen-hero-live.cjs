@@ -69,18 +69,11 @@ function snapshot(){
    await page.waitForTimeout(6000);
    let before=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-initial.png")});
-   // Test the actual checked-in V1407/V1408 sticky rail, not deleted
-   // 2026-10-16 renderer annotations. Source renderers are SHA-frozen.
+   // Published visitor/Test may still serve legacy V1407: this is ONLY an
+   // observational baseline, never a claim about the unreleased V1416 build.
    const localCss=fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-original-v1224-header-seam-v1405.css"),"utf8");
-   const localScript=fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-hero-seam-runtime-v1407.js"),"utf8");
-   if(!localCss.includes("DAR_FRAUEN_PINNED_HERO_UNDER_SCROLL_V1407")||
-      !localScript.includes("maxGap=Math.max(480"))throw Error("Current Frauen sticky rail missing");
-   await page.addStyleTag({content:localCss});
-   // The public page may already run an older V1407. Re-arm only in this
-   // isolated browser QA context so the candidate runtime can be measured.
-   await page.evaluate(()=>{window.__DAR_FRAUEN_HERO_SEAM_V1407=false;});
-   await page.addScriptTag({content:localScript});
-   await page.waitForTimeout(1100);
+   if(!localCss.includes("DAR_FRAUEN_FULL_BLEED_HERODOCK_V1416"))
+     throw Error("V1416 source missing");
    let repaired=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-repaired.png")});
 

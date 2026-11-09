@@ -278,7 +278,7 @@ function adultCompactHeroAddon() {
  * Add a root-only scroll stop; preserve Hero, sticky search, and all carousels. */
 function adultTopScrollBoundaryAddon() {
   return '<link rel="stylesheet" id="darAdultTopScrollCssV1" href="/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-no-overlay-v8">' +
-    '<script defer id="darAdultTopScrollJsV1" src="/assets/dar-adult-top-scroll-boundary-v1.js?v=20261103-frauen-top-clamp-v10"></' + 'script>';
+    '<script defer id="darAdultTopScrollJsV1" src="/assets/dar-adult-top-scroll-boundary-v1.js?v=20261109-frauen-no-intercept-v1415"></' + 'script>';
 }
 
 /* DĀR adult identity header v2 – mounted only in native iOS/Android and dedicated PWA.
@@ -393,13 +393,10 @@ function activateAdultCompactHero(html) {
   // Guaranteed final visual authority in native iOS, dedicated Android PWA,
   // visitor browser and any adult shell that mounts the global brand.
   if (!html.includes('id="darFrauenGlobalFlowV1407"')) {
-    const flowCss = '<link rel="stylesheet" id="darFrauenGlobalFlowV1407" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css?v=frauen-sticky-hero-v1407-20261103-native-single-spacer-v1408-one-scroll-root-v1409-20261107">';
+    const flowCss = '<link rel="stylesheet" id="darFrauenGlobalFlowV1407" href="/assets/frauen/frauen-original-v1224-header-seam-v1405.css?v=frauen-full-bleed-herodock-v1416-20261109">';
     html = html.includes("</body>") ? html.replace("</body>",flowCss+"</body>") : html+flowCss;
   }
-  if (!html.includes('id="darFrauenHeroSeamRuntimeV1407"')) {
-    const flowJs = '<script defer id="darFrauenHeroSeamRuntimeV1407" src="/assets/frauen/frauen-hero-seam-runtime-v1407.js?v=frauen-gap-guard-v1408-20261105-late-header-v1409-20261107"></'+'script>';
-    html = html.includes("</body>") ? html.replace("</body>",flowJs+"</body>") : html+flowJs;
-  }
+  /* V1416: no second Frauen header measurement runtime. */
   return html;
 }
 function liveFrauenNativeAddon() {
@@ -408,8 +405,8 @@ function liveFrauenNativeAddon() {
     '<link rel="stylesheet" href="/assets/frauen/frauen-authority-v1292.css?v=frauen-rollback-20261016-1500">',
 
     /* Frauen V1406 is loaded unconditionally by adult global brand below. */
-    '<script defer src="/test/assets/frauen/frauen-fiqh.js?v=frauen-rollback-20261016-1500"><\/script>',
-    '<script defer src="/assets/frauen/frauen-live-adapter.js?v=frauen-native-scroll-no-reset-v1411-20261108"><\/script>'
+    '<script defer src="/test/assets/frauen/frauen-fiqh.js?v=frauen-input-focus-stable-v1416-20261109"><\/script>',
+    '<script defer src="/assets/frauen/frauen-live-adapter.js?v=frauen-herodock-mount-v1416-20261109"><\/script>'
   ].join("");
 }
 function androidNativeToolsAddon() {

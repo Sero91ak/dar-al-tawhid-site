@@ -56,15 +56,18 @@ for(const [name,css] of [["visitor",visitorCss],["test",testCss]]){
  assert.doesNotMatch(css,/FRAUEN_DIRECT_STICKY_FALLBACK_V6/,name+" reintroduced pre-wrapper shift");
 }
 const originalHero=load("assets/adult-immersive-hero-v1.css");
-assert.match(originalHero,/\.dar-immersive-hero-stage\{/,"Existing Frauen Hero owns sticky");
-assert.match(originalHero,/\.dar-immersive-hero-stage > :is\(\.frauen-library-search-wrap/,"Search must remain owned by single stage");
+const frauenFlow=load("assets/frauen/frauen-original-v1224-header-seam-v1405.css");
+assert.match(frauenFlow,/#darFrauenHeroDockV1416\{/,"Only Frauen route owns body-level HeroDock");
+assert.doesNotMatch(originalHero,/\.dar-immersive-hero-stage > :is\(\.frauen-library-search-wrap/,
+  "Global CSS must not own Frauen search");
+assert.match(frauenFlow,/#darFrauenHeroDockV1416 > :is\(\.frauen-library-search-wrap/);
 assert.match(testCss,/#appView \.ilm-chat-header\{[\s\S]*?top:var\(--dar-test-occlusion-top/);
 assert.match(testCss,/\.ilm-message-list\{[\s\S]*?scroll-padding-top/);
 assert.doesNotMatch(majlisJs,/\.ilm-chat-header\{position:sticky!important;top:0!important/,"Late override may not reset to top zero");
 assert.match(majlisJs,/top:var\(--dar-test-occlusion-top/);
 assert.doesNotMatch(majlisJs,/last\.getBoundingClientRect\(\)\.top - 110/,"Hardcoded scroll offset caused clipped questions");
 assert.match(majlisJs,/var globalBottom=globalHeader\?/);
-assert.match(router,/dar-adult-brand-header-v2\.css\?v=20261106-global-salam-v1/);
+assert.match(router,/dar-adult-brand-header-v2\.css\?v=20261107-compact-safearea-header-v3/);
 assert.match(router,/dar-adult-brand-header-v2\.js\?v=20261106-global-salam-v1/);
 assert.doesNotMatch(testCss,/body\s*\{\s*padding-top:/,"No blanket body padding");
 console.log("PASS: brand header preserves original Hero/search authority; Majlis independently retains scroll clearance.");
