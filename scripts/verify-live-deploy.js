@@ -166,7 +166,7 @@ async function main() {
     // A successful Worker deploy alone cannot prove that the native shell
     // receives the CSS/JS. Only the TestFlight binary can disable UIKit bounce.
     const scrollCssHref = "/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-no-overlay-v8";
-    const scrollJsHref = "/assets/dar-adult-top-scroll-boundary-v1.js?v=20261103-frauen-top-clamp-v10";
+    const scrollJsHref = "/assets/dar-adult-top-scroll-boundary-v1.js?v=20261109-frauen-no-intercept-v1415";
     const iosScrollHtmlOk = await waitForHtmlIncludes(
       `${SITE_URL}/?ios-scroll-v2=${Date.now()}`,
       [
