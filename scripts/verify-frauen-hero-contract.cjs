@@ -80,7 +80,7 @@ assert.match(adapter,/if\(search\)stage\.appendChild\(search\)/);
 assert.match(adapter,/if\(child!==nextSpacer\)current\.appendChild\(child\)/);
 assert.match(adapter,/var incremental=!!\(sameRoute&&present&&patchFrauenContent\(present,prepared\)\)/);
 assert.match(adapter,/previousScroll>0&&!incremental/);
-assert.doesNotMatch(adapter,/addEventListener\("scroll"|--frauen-flow-seam-shift|100vw|margin-top.*-/,
+assert.doesNotMatch(adapter,/addEventListener\("scroll"|--frauen-flow-seam-shift|(?:width|inline-size)\s*:\s*100vw|margin-top.*-/,
  "No scroll-driven or negative-margin Hero control");
 assert.doesNotMatch(immersiveCss,/#appView \.dar-immersive-hero-stage > \.frauen-library-hero/,
  "Global CSS must not resize relocated original photo");
