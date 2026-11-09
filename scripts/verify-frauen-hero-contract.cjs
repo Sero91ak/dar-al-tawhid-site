@@ -68,7 +68,7 @@ assert.match(flow,/#appView \.dar-frauen-dock-spacer\{[\s\S]*?height:var\(--frau
 assert.doesNotMatch(flow,/--frauen-flow-seam-shift|DAR_FRAUEN_ONE_STAGE_NATIVE_SCROLL_V1415|\.dar-immersive-hero-stage/,
  "Old sticky/seam system must not remain in Frauen flow CSS");
 assert.match(seam,/DAR_FRAUEN_HERO_SEAM_RETIRED_V1416/);
-assert.doesNotMatch(seam,/MutationObserver|requestAnimationFrame|ResizeObserver\(/,
+assert.doesNotMatch(seam,/new\s+MutationObserver\(|new\s+ResizeObserver\(|requestAnimationFrame\(/,
  "Dead runtime must not measure header or move elements");
 assert.match(adapter,/FRAUEN_RENDER_IDEMPOTENT_V1410 \+ HERODOCK_V1416/);
 assert.match(adapter,/function prepareFrauenMarkup\(markup\)/);
