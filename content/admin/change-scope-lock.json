@@ -155,6 +155,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "global-adult-photo-herodock-v2-20261109",
+      "at": "2026-11-09T22:08:00+01:00",
+      "approvedBy": "user-explicit-20261109-every-photographic-hero-full-bleed-docked-globally",
+      "reason": "Exact-path temporary authorization for the requested universal photographic HeroDock standard across adult post/topics/hadith and future real image headers on iOS, Android PWA and DAR Test. Preserve Frauen V1416, public website shell, Kids, Qurʾān reading, Qibla, native gestures, prayer logic, authentication and release guards. No global CSS/JS patch proliferation or security bypass.",
+      "paths": [
+        "assets/dar-global-herodock-v2.js",
+        "assets/dar-global-herodock-v2.css",
+        "scripts/check-global-herodock-v2.cjs",
+        "scripts/check-global-herodock-contract-v2.cjs",
+        ".github/workflows/global-herodock-v2.yml"
+      ],
+      "expiresAt": "2026-11-13T23:59:00+01:00"
+    },
+    {
       "id": "frauen-v1416-live-verifier-cache-key-20261109",
       "at": "2026-11-09T21:11:00+01:00",
       "approvedBy": "user-explicit-20261109-global-frauen-fix-push",
