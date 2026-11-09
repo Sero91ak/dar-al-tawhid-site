@@ -411,3 +411,14 @@ html[data-theme].dar-adult-global-brand-ready body.has-bottom-nav.is-area-route.
   overflow-x:clip!important;
   overflow-y:visible!important;
 }
+
+/* V1416 Fold ownership: override LAST, after historical V1409 body clip.
+ * In Fold V2, #darFoldV2Pane is the only scroll root; BODY must not scroll.
+ * Keep this narrowly scoped to the activated Fold reader, not all tablets. */
+html[data-theme].dar-fold-v2-active body.has-bottom-nav.is-area-route.is-frauen-route,
+html[data-theme].dar-test-premium-header-v2.dar-fold-v2-active body.has-bottom-nav.is-area-route.is-frauen-route,
+html[data-theme].dar-adult-global-brand-ready.dar-fold-v2-active body.has-bottom-nav.is-area-route.is-frauen-route{
+  overflow:hidden!important;
+  overflow-x:hidden!important;
+  overflow-y:hidden!important;
+}
