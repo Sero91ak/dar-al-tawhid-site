@@ -203,6 +203,16 @@ html.dar-test-premium-header-v2[data-theme] body.is-frauen-route #darFrauenHeroD
   top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,80px))!important;
   inset-block-start:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,80px))!important;
 }
+/* Fold V2 replaces the global brand with its own 48px topbar and moves
+ * #appView into the right-hand scroll pane. Never cover the left navigation. */
+html.dar-fold-v2-active[data-theme] body.is-frauen-route #darFrauenHeroDockV1416{
+  top:var(--dar-fold-v2-top,48px)!important;
+  inset-block-start:var(--dar-fold-v2-top,48px)!important;
+}
+html.dar-fold-v2-active[data-theme] body.is-frauen-route{
+  overflow:hidden!important;
+  overscroll-behavior:none!important;
+}
 html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416::before,
 html[data-theme] body.is-frauen-route #darFrauenHeroDockV1416::after{
   display:none!important;
