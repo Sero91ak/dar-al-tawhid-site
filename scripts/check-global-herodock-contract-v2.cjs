@@ -22,7 +22,8 @@ assert.match(js,/el\.style\.setProperty\(key, value, "important"\)/);
 assert.match(js,/new ResizeObserver\(schedule\)/);
 assert.match(js,/spacer\.className = spacers/);
 assert.match(js,/item\.parent\.insertBefore\(spacer, hero\)/);
-assert.doesNotMatch(js,/appendChild\(hero\)|cloneNode\(|new\s+Image\(|addEventListener\(["'](?:scroll|touchmove)["']|preventDefault\(|\.scrollTo\(|100vw/,
+const executable = js.replace(/\/\*[\s\S]*?\*\//g,"").replace(/^\s*\/\/[^\n]*$/gm,"");
+assert.doesNotMatch(executable,/appendChild\(hero\)|cloneNode\(|new\s+Image\(|addEventListener\(["'](?:scroll|touchmove)["']|preventDefault\(|\.scrollTo\(|100vw/,
  "No duplicate hero, event rebinding, native touch interception or viewport breakout");
 assert.match(js,/dar-fold-v2-active/,"Split reader geometry");
 assert.match(js,/--dar-adult-header-obscured-top/,"Reuse global measured header");
