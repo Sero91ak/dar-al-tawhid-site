@@ -39,12 +39,14 @@ const visitorResponsive=read("assets/adult-responsive-viewport-v1381.css");
 const testResponsive=read("test/assets/test-global-edge-width-v1372.css");
 new vm.Script(heroJs);
 const flowCss=read("assets/frauen/frauen-original-v1224-header-seam-v1405.css");
-assert.match(flowCss,/\.dar-immersive-hero-stage\{[\s\S]*?position:sticky!important/);
-assert.match(heroCss,/\.dar-immersive-hero-stage > :is\(\.frauen-library-search-wrap/);
-assert.match(heroCss,/position:relative!important/,"Own original search instead of second global sticky rail");
+assert.match(flowCss,/#darFrauenHeroDockV1416\{[\s\S]*?position:fixed!important/);
+assert.doesNotMatch(heroCss,/\.dar-immersive-hero-stage > :is\(\.frauen-library-search-wrap/);
+assert.match(flowCss,/#darFrauenHeroDockV1416 > :is\(\.frauen-library-search-wrap/,
+  "Body-level Dock owns original search without an extra scroll-root");
 const frauenAdapter=read("assets/frauen/frauen-live-adapter.js");
 assert(!heroJs.includes("function women()")&&
-  frauenAdapter.includes("stage.appendChild(hero)")&&frauenAdapter.includes("if(search)stage.appendChild(search)"),
+  frauenAdapter.includes("stage.appendChild(hero)")&&frauenAdapter.includes("if(search)stage.appendChild(search)")&&
+  frauenAdapter.includes("document.body.appendChild(prepared.stage)"),
   "Hero + Search are rendered exactly once by the Frauen adapter");
 assert(original.includes("--frauen-hero-img")&&original.includes("background-position:center 46%"),
   "Historical Frauen artwork and positioning unchanged");
