@@ -33,12 +33,14 @@ def fixture(test):
   "/test/assets/quiz-overview-v1257.css",
   "/test/assets/more-v1253.css",
   "/test/assets/adult-immersive-hero-v1.css",
+  "/assets/frauen/frauen-original-v1224-header-seam-v1405.css",
   "/test/assets/dar-settings-navigation-v1.css",
   "/test/assets/dar-test-premium-header-v2.css"
  ] if test else [
   "/assets/full-edge-appearance-polish.css",
   "/assets/adult-responsive-viewport-v1381.css",
   "/assets/adult-immersive-hero-v1.css",
+  "/assets/frauen/frauen-original-v1224-header-seam-v1405.css",
   "/assets/dar-hero-scroll-standard-v1.css",
   "/assets/dar-settings-navigation-v1.css",
   "/assets/dar-adult-brand-header-v2.css"
