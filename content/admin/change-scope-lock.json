@@ -155,6 +155,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "frauen-herodock-v1416-prod-qa-scripts-20261109",
+      "at": "2026-11-09T20:58:00+01:00",
+      "approvedBy": "user-explicit-20261109-global-push-frauen-herodock-live",
+      "reason": "Scoped authorization for the eight regression/acceptance scripts already modified by merged Frauen HeroDock V1416 PR #1761. Required to release the user-requested global iOS/Android Frauen Hero correction through the canonical production worker. The existing globalLock and protectedPrefixes remain unchanged; no changes to Qibla, prayers, secret handling, Kids, voice, native Swift or other routes.",
+      "paths": [
+        "scripts/check-adult-duo-prayer-layout.cjs",
+        "scripts/check-adult-hero-route-matrix-browser.py",
+        "scripts/check-adult-hero-route-matrix.cjs",
+        "scripts/check-adult-hero-seam-browser.py",
+        "scripts/check-adult-hero-seam.cjs",
+        "scripts/check-fixed-header-occlusion.cjs",
+        "scripts/check-frauen-stage-native-v1415.cjs",
+        "scripts/hero-scroll-standard-guard.js"
+      ],
+      "expiresAt": "2026-11-11T23:59:00+01:00"
+    },
+    {
       "id": "frauen-cloudflare-html5-doctype-native-touch-v1413-20261108",
       "at": "2026-11-08T11:20:00+01:00",
       "approvedBy": "user-explicit-20261108-video-live-frauen-global-repair",
