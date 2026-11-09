@@ -2,23 +2,7 @@
  * Keep existing imagery, content and theme palettes. No scroll interception.
  * A single sticky rail owns women Hero + optional search; reader content moves beneath it.
  */
-html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage{
-  position:sticky!important;
-  top:0!important;
-  z-index:65!important;
-  isolation:isolate;
-  box-sizing:border-box!important;
-  width:100%!important;
-  max-width:100%!important;
-  min-width:0!important;
-  margin:0 0 clamp(16px,2.5vw,27px)!important;
-  background:var(--bg,#f4efec)!important;
-  overflow:visible!important;
-  transform:none!important;
-  contain:none!important;
-}
-/* In a viewport-fit=cover WebView, extend the same hero photo into the exposed
-   upper safe area. A native system bar outside the WebView remains OS-owned. */
+/* Frauen V1415 sticky stage is owned exclusively by the Frauen flow stylesheet. */
 html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage::before{
   content:"";
   position:absolute;
@@ -84,13 +68,7 @@ html[data-theme] body.is-topic-route #appView .topic-collection-page > .main-sea
     margin-top:-18px!important;
   }
 }
-/* When the software keyboard occupies most of a phone viewport, stop pinning
-   this tall rail while its search input is focused so native caret scrolling works. */
-@media(max-width:699px) and (pointer:coarse){
-  html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage:focus-within{
-    position:relative!important;
-  }
-}
+/* Frauen V1415: no position swap while search field has focus. */
 @media(prefers-reduced-motion:reduce){
   html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage{
     scroll-behavior:auto!important;
