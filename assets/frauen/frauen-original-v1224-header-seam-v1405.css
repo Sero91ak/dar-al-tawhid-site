@@ -208,6 +208,9 @@ html.dar-test-premium-header-v2[data-theme] body.is-frauen-route #darFrauenHeroD
 html.dar-fold-v2-active[data-theme] body.is-frauen-route #darFrauenHeroDockV1416{
   top:var(--dar-fold-v2-top,48px)!important;
   inset-block-start:var(--dar-fold-v2-top,48px)!important;
+  /* The Fold reading pane itself is z-index 2147482999. The dock must
+   * paint ABOVE that pane but never extend into the left rail or topbar. */
+  z-index:2147483001!important;
 }
 html.dar-fold-v2-active[data-theme] body.is-frauen-route{
   overflow:hidden!important;
