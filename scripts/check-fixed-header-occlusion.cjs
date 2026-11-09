@@ -56,7 +56,8 @@ for(const [name,css] of [["visitor",visitorCss],["test",testCss]]){
  assert.doesNotMatch(css,/FRAUEN_DIRECT_STICKY_FALLBACK_V6/,name+" reintroduced pre-wrapper shift");
 }
 const originalHero=load("assets/adult-immersive-hero-v1.css");
-assert.match(originalHero,/\.dar-immersive-hero-stage\{/,"Existing Frauen Hero owns sticky");
+const frauenFlow=load("assets/frauen/frauen-original-v1224-header-seam-v1405.css");
+assert.match(frauenFlow,/\.dar-immersive-hero-stage\{/,"Only Frauen route owns original Hero sticky");
 assert.match(originalHero,/\.dar-immersive-hero-stage > :is\(\.frauen-library-search-wrap/,"Search must remain owned by single stage");
 assert.match(testCss,/#appView \.ilm-chat-header\{[\s\S]*?top:var\(--dar-test-occlusion-top/);
 assert.match(testCss,/\.ilm-message-list\{[\s\S]*?scroll-padding-top/);
