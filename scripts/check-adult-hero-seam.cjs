@@ -45,7 +45,7 @@ assert.match(visitorJs,/darAdultBrandHeaderSpacerV2/);
 assert.match(visitor,/#darAdultBrandHeaderSpacerV2\{[^}]*height:var\(--dar-adult-brand-header-height/);
 assert.match(ios,/root\.classList\.add\("dar-ios-native-app"\)/);
 assert.match(ios,/body\.classList\.add\("dar-ios-native-app"\)/);
-assert.match(router,/dar-adult-brand-header-v2\.css\?v=20261030-restore-original-hero-rail-v5/);
+assert.match(router,/dar-adult-brand-header-v2\.css\?v=20261107-compact-safearea-header-v3/);
 assert.match(worker,/dar-test-premium-header-v2\.css\?v=20261030-restore-original-hero-rail-v5/);
 assert.match(edge,/DAR_ADULT_TOP_SCROLL_BOUNDARY_V4/);
 assert.match(edge,/event\.preventDefault\(\)/);
