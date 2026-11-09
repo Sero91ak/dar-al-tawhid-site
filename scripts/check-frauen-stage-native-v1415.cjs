@@ -206,10 +206,16 @@ const devices=[
           right:d.getBoundingClientRect().right,
           paneLeft:p.getBoundingClientRect().left,
           overflow:getComputedStyle(document.body).overflowY,
+          hit:(()=>{
+            const input=d.querySelector("[data-frauen-q]");
+            const r=input.getBoundingClientRect();
+            return document.elementFromPoint(r.left+r.width/2,r.top+r.height/2)===input;
+          })(),
           scroll:p.scrollTop};
       });
       assert.equal(split.overflow,"hidden",label+": Fold independent scroll root was overridden");
       assert.ok(split.scroll>200,label+": Fold reading pane cannot scroll");
+      assert.ok(split.hit,label+": high-z Fold pane covers the search input");
       assert.ok(Math.abs(split.top-48)<=2,label+": Fold dock detached from local topbar");
       assert.ok(Math.abs(split.left-split.paneLeft)<=2,label+": Fold rail is covered");
       console.log("PASS HeroDock V1416 Fold V2 true split-pane / independent reader scroll");
