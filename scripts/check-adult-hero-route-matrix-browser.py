@@ -67,7 +67,9 @@ def markup(route):
  button='<button type="button" id="heroTap" onclick="window.__heroTap=(window.__heroTap||0)+1">Hero öffnen</button>'
  h='<div class="hero-fixture" data-qa-hero="1">'+button+'</div>'
  if route=="frauen":
-  return '<section class="frauen-library-shell"><div class="dar-immersive-hero-stage frauen-library-pinned-header" data-qa-hero="1"><div class="frauen-library-hero hero-fixture">'+button+'</div><div class="frauen-library-search-wrap"><input aria-label="Suche" placeholder="Suchen"></div></div><section class="fixture-content">Inhalt</section></section>',".dar-immersive-hero-stage"
+  # The production Frauen photo/search is now a BODY-owned fixed HeroDock.
+  # The content route itself has only one measured flow spacer.
+  return '<section class="frauen-library-shell"><div class="dar-frauen-dock-spacer" aria-hidden="true"></div><section class="fixture-content">Inhalt</section></section>',"#darFrauenHeroDockV1416"
  if route in ("topics","topic","post","hadith","dua"):
   cls={"topics":"topics-hub","topic":"topic-collection-page","post":"post-reader","hadith":"hadith-hub","dua":"dua-hub"}[route]
   heading="post-reader-title" if route=="post" else "view-head"
@@ -102,7 +104,24 @@ def main():
      driver.execute_script("""
       document.documentElement.classList.add("dar-ios-native-app");
       document.body.className="dar-ios-native-app is-area-route has-bottom-nav is-"+arguments[0]+"-route";
-      document.getElementById("appView").innerHTML=arguments[1];
+      const oldDock=document.getElementById("darFrauenHeroDockV1416");
+      if(oldDock)oldDock.remove();
+      document.body.style.removeProperty("--frauen-dock-reserved");
+      const app=document.getElementById("appView");
+      app.innerHTML=arguments[1];
+      if(arguments[0]==="frauen"){
+       const dock=document.createElement("div");
+       dock.id="darFrauenHeroDockV1416";
+       dock.className="dar-frauen-herodock";
+       dock.innerHTML='<div class="frauen-library-hero hero-fixture" data-qa-hero="1">'+
+        '<button type="button" id="heroTap" onclick="window.__heroTap=(window.__heroTap||0)+1">Hero öffnen</button>'+
+        '</div><div class="frauen-library-search-wrap"><input aria-label="Suche" placeholder="Suchen"></div>';
+       const pane=app.getBoundingClientRect();
+       dock.style.left=pane.left+"px";
+       dock.style.width=pane.width+"px";
+       document.body.appendChild(dock);
+       document.body.style.setProperty("--frauen-dock-reserved",Math.ceil(dock.getBoundingClientRect().height)+"px");
+      }
       window.scrollTo(0,0);
      """,route.replace("-detail","") if route in ("hadith-detail","dua-detail") else route,html)
      metrics=driver.execute_script("""
