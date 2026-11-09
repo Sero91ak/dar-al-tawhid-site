@@ -10,7 +10,11 @@ enum DarAppShell {
         "www.dar-al-tawhid.de"
     ]
 
-    static let liveURL = URL(string: "https://dar-al-tawhid.de/#home")!
+    // DAR_IOS_NATIVE_ENTRY_FALLBACK_GUARD_V1
+    // Explicit root-surface selector: Cloudflare still serves the visitor app
+    // when a WKWebView request loses its native User-Agent classification.
+    // This is NOT a staging, PWA or publicly shared Q-source URL.
+    static let liveURL = URL(string: "https://dar-al-tawhid.de/?native_ios=1#home")!
     static let stagingURL = URL(string: "https://dar-al-tawhid.de/test/?env=staging&source=ios-native#home")!
 
     static var launchURL: URL {
@@ -72,6 +76,15 @@ enum DarAppShell {
             path = "/"
         }
         components.path = path.isEmpty ? "/" : path
+        // Preserve the iOS visitor surface on *root* links opened from
+        // shortcuts/notifications, without altering canonical /q/N/ URLs.
+        // Keep existing query items (including post IDs) and hash intact.
+        if !usesStagingWeb && (components.path == "/" || components.path == "/index.html") {
+            var items = components.queryItems ?? []
+            items.removeAll { $0.name == "native_ios" }
+            items.append(URLQueryItem(name: "native_ios", value: "1"))
+            components.queryItems = items
+        }
         if let url = components.url { return url }
         return launchURL
     }
