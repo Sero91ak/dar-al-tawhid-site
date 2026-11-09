@@ -569,6 +569,17 @@ async function finalizeDarTestHomeV1193(asset) {
   if (html.includes("</body>")) html=html.replace("</body>",foldJsV2+"\n</body>");
   else html+=foldJsV2;
 
+  // DAR_GLOBAL_HERODOCK_V2_20261109: same shared adult photographic Dock
+  // as visitor native/PWA; no DOM cloning, no Kids route injection.
+  if (!html.includes('id="darGlobalHeroDockStyleV2"')) {
+    const dockCss = '<link rel="stylesheet" id="darGlobalHeroDockStyleV2" href="/assets/dar-global-herodock-v2.css?v=20261109-photo-dock-v2">';
+    html = html.includes("</body>") ? html.replace("</body>", dockCss+"</body>") : html+dockCss;
+  }
+  if (!html.includes('id="darGlobalHeroDockRuntimeV2"')) {
+    const dockJs = '<script defer id="darGlobalHeroDockRuntimeV2" src="/assets/dar-global-herodock-v2.js?v=20261109-photo-dock-v2"><\/script>';
+    html = html.includes("</body>") ? html.replace("</body>", dockJs+"</body>") : html+dockJs;
+  }
+
   const headers = new Headers(asset.headers);
   headers.set("X-DAR-Test-Scroll-Boundary", "v3");
   headers.set("X-DAR-Test-Home", "html-parity-v50-20261020");
