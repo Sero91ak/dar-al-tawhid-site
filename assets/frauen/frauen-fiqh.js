@@ -4606,10 +4606,12 @@
         requestAnimationFrame(function () {
           var again = document.querySelector("[data-frauen-q]");
           if (!again) return;
-          again.focus();
-          try {
-            again.setSelectionRange(again.value.length, again.value.length);
-          } catch (err) {}
+          /* V1416: native input already owns focus/caret; do not trigger
+           * WKWebView keyboard viewport scroll after each keystroke. */
+          if (document.activeElement !== again) {
+            try { again.focus({ preventScroll: true }); }
+            catch (err) { again.focus(); }
+          }
         });
       });
     }
