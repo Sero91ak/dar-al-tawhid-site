@@ -1,0 +1,98 @@
+/* DAR_GLOBAL_HERODOCK_V2_20261109
+ * App-only original photographic headers. Only the JS-selected DOM node is
+ * affected; Frauen V1416, public website, Qur'an readers, overlays and Kids
+ * remain owned by their existing route/surface.
+ * One fixed Hero, optionally original search, and one exact in-flow spacer.
+ */
+html[data-theme] body.has-bottom-nav #appView [data-dar-global-herodock="v2"]{
+  position:fixed!important;
+  width:var(--dar-global-dock-width,100%)!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:auto!important;
+  max-height:none!important;
+  min-height:clamp(210px,42cqw,380px)!important;
+  aspect-ratio:auto!important;
+  margin:0!important;
+  border-radius:0!important;
+  box-sizing:border-box!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+  animation:none!important;
+  transition:none!important;
+  z-index:180!important;
+  isolation:isolate!important;
+}
+html[data-theme] body.has-bottom-nav #appView [data-dar-global-herodock-search="v2"]{
+  position:fixed!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+  animation:none!important;
+  transition:none!important;
+  z-index:181!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+/* The placeholder alone reserves the photo/search area. No negative margins
+ * or 100vw breakouts, and no new scroll/overscroll/touch container. */
+html[data-theme] body.has-bottom-nav #appView .dar-global-herodock-spacer{
+  display:block!important;
+  position:relative!important;
+  grid-column:1 / -1;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  pointer-events:none!important;
+  background:transparent!important;
+  overflow:hidden!important;
+  box-shadow:none!important;
+  animation:none!important;
+  transition:none!important;
+}
+/* A selected actual photo must occupy all the allocated pane width. A
+ * non-photographic heading is never tagged and retains its original layout. */
+html[data-theme] body.is-post-route #appView .post-reader > [data-dar-global-herodock="v2"],
+html[data-theme] body.is-topics-route #appView .topics-hub > [data-dar-global-herodock="v2"],
+html[data-theme] body.is-topic-route #appView .topic-collection-page > [data-dar-global-herodock="v2"],
+html[data-theme] body.is-hadith-route #appView .hadith-hub > [data-dar-global-herodock="v2"],
+html[data-theme] body.is-dua-route #appView .dua-hub > [data-dar-global-herodock="v2"]{
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  background-attachment:scroll!important;
+  -webkit-mask-image:none!important;
+  mask-image:none!important;
+  filter:none!important;
+}
+html[data-theme] body.has-bottom-nav #appView [data-dar-global-herodock="v2"] :is(h1,h2,h3,p){
+  max-width:100%!important;
+  overflow-wrap:break-word;
+}
+/* On short landscapes an oversized visual cannot consume the entire
+ * readable viewport. Titles may still grow naturally for accessibility. */
+@media(max-height:540px) and (orientation:landscape){
+  html[data-theme] body.has-bottom-nav #appView [data-dar-global-herodock="v2"]{
+    min-height:clamp(130px,24dvh,180px)!important;
+    padding-block:clamp(8px,2dvh,14px)!important;
+  }
+}
+/* Frozen Frauen original stays independently owned, even if a future
+ * broad selector is added to the app's global photograph styles. */
+html[data-theme] body.is-frauen-route #appView [data-dar-global-herodock="v2"]{
+  position:relative!important;
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-theme] body.has-bottom-nav #appView [data-dar-global-herodock="v2"],
+ html[data-theme] body.has-bottom-nav #appView [data-dar-global-herodock-search="v2"]{
+   animation:none!important;
+   transition:none!important;
+ }
+}
