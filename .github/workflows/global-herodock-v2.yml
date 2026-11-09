@@ -1,0 +1,53 @@
+name: Adult Global HeroDock V2 Acceptance
+
+on:
+  pull_request:
+    paths:
+      - 'assets/dar-global-herodock-v2.*'
+      - 'cloudflare/site-router.js'
+      - 'cloudflare/test-app-worker.js'
+      - 'scripts/check-global-herodock-*.cjs'
+      - 'docs/global-herodock-v2.md'
+      - 'docs/adult-responsive-layout-contract.md'
+      - '.github/workflows/global-herodock-v2.yml'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/dar-global-herodock-v2.*'
+      - 'cloudflare/site-router.js'
+      - 'cloudflare/test-app-worker.js'
+
+permissions:
+  contents: read
+
+jobs:
+  hero-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Shared single-owner and isolation contract
+        run: |
+          node --check assets/dar-global-herodock-v2.js
+          node --check scripts/check-global-herodock-v2.cjs
+          node scripts/check-global-herodock-contract-v2.cjs
+
+  hero-browser:
+    needs: hero-contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Chromium Playwright
+        run: |
+          npm install --no-save --ignore-scripts playwright
+          npx playwright install --with-deps chromium
+      - name: Real adult CSS and original DOM across phone, Fold, iPad, desktop and RTL
+        run: node scripts/check-global-herodock-v2.cjs
