@@ -57,8 +57,10 @@ for(const [name,css] of [["visitor",visitorCss],["test",testCss]]){
 }
 const originalHero=load("assets/adult-immersive-hero-v1.css");
 const frauenFlow=load("assets/frauen/frauen-original-v1224-header-seam-v1405.css");
-assert.match(frauenFlow,/\.dar-immersive-hero-stage\{/,"Only Frauen route owns original Hero sticky");
-assert.match(originalHero,/\.dar-immersive-hero-stage > :is\(\.frauen-library-search-wrap/,"Search must remain owned by single stage");
+assert.match(frauenFlow,/#darFrauenHeroDockV1416\{/,"Only Frauen route owns body-level HeroDock");
+assert.doesNotMatch(originalHero,/\.dar-immersive-hero-stage > :is\(\.frauen-library-search-wrap/,
+  "Global CSS must not own Frauen search");
+assert.match(frauenFlow,/#darFrauenHeroDockV1416 > :is\(\.frauen-library-search-wrap/);
 assert.match(testCss,/#appView \.ilm-chat-header\{[\s\S]*?top:var\(--dar-test-occlusion-top/);
 assert.match(testCss,/\.ilm-message-list\{[\s\S]*?scroll-padding-top/);
 assert.doesNotMatch(majlisJs,/\.ilm-chat-header\{position:sticky!important;top:0!important/,"Late override may not reset to top zero");
