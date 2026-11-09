@@ -80,17 +80,42 @@
       var searchFocus=!!(sameRoute&&active&&active.matches&&active.matches("[data-frauen-q]"));
       var caret=searchFocus&&typeof active.selectionStart==="number"?active.selectionStart:null;
       var previousScroll=sameRoute?Math.max(0,global.scrollY||document.documentElement.scrollTop||0):0;
-      app.innerHTML='<div class="dar-frauen-production-root" data-frauen-production="1">'+markup+'</div>';
+      /* FRAUEN_SEARCH_INCREMENTAL_V1414:
+       * Search updates only content nodes, never the original photo,
+       * controls, focused input or pinned stage. Preserve scrolling. */
+      var incremental=false;
+      if(sameRoute&&searchFocus&&present){
+        var oldShell=present.querySelector(".frauen-library-shell,.frauen-library-list");
+        var draft=document.createElement("template");
+        draft.innerHTML=markup;
+        var nextShell=draft.content.querySelector(".frauen-library-shell,.frauen-library-list");
+        var pinned=oldShell&&oldShell.querySelector(":scope > .dar-immersive-hero-stage");
+        if(oldShell&&nextShell&&pinned){
+          oldShell.className=nextShell.className;
+          Array.from(oldShell.children).forEach(function(child){
+            if(child===pinned||child.classList.contains("dar-frauen-hero-spacer"))return;
+            child.remove();
+          });
+          Array.from(nextShell.children).forEach(function(child){
+            if(child.classList.contains("frauen-library-hero")||
+               child.classList.contains("frauen-library-search-wrap")||
+               child.classList.contains("frauen-library-list-controls"))return;
+            oldShell.appendChild(child);
+          });
+          incremental=true;
+        }
+      }
+      if(!incremental)app.innerHTML='<div class="dar-frauen-production-root" data-frauen-production="1">'+markup+'</div>';
       lastFrauenRoute=key;
       lastFrauenMarkup=markup;
       if(global.DARFrauenFiqh&&typeof global.DARFrauenFiqh.bind==="function")global.DARFrauenFiqh.bind();
       if(!sameRoute){
         try{app.scrollTop=0}catch(e){}
         try{global.scrollTo(0,0)}catch(e){}
-      }else if(previousScroll>0){
+      }else if(previousScroll>0&&!incremental){
         try{global.scrollTo(0,previousScroll)}catch(e){}
       }
-      if(searchFocus){
+      if(searchFocus&&!incremental){
         var current=app.querySelector("[data-frauen-q]");
         if(current&&typeof current.focus==="function"){
           current.focus({preventScroll:true});
