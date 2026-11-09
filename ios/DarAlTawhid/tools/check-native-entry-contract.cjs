@@ -33,6 +33,8 @@ assert.match(project, /WebAppView\.swift in Sources/);
 assert.doesNotMatch(project, /FreshWebAppView\.swift in Sources/);
 assert.match(router, /DAR_IOS_NATIVE_ENTRY_FALLBACK_GUARD_V1/);
 assert.match(router, /const nativeIosEntry = isRoot && url\.searchParams\.get\("native_ios"\) === "1"/);
+assert.match(router, /const nativeApp = isNativeAppRequest\(ua\) \|\| nativeIosEntry/);
+assert.match(router, /isRoot && nativeApp\) \{/);
 
 const compiled = router
   .replace(/^import\s+[^\n]+;\s*$/gm, "")
