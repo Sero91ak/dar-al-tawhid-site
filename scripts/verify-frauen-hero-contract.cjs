@@ -78,7 +78,7 @@ assert.match(adapter,/function prepareFrauenMarkup\(markup\)/);
 assert.match(adapter,/function patchFrauenContent\(present,prepared\)/);
 assert.match(adapter,/stage\.appendChild\(hero\)/);
 assert.match(adapter,/if\(search\)stage\.appendChild\(search\)/);
-assert.match(adapter,/if\(child!==oldStage\)current\.appendChild\(child\)/);
+assert.match(adapter,/if\(child!==nextStage\)current\.appendChild\(child\)/);
 assert.match(adapter,/var incremental=!!\(sameRoute&&present&&patchFrauenContent\(present,prepared\)\)/);
 assert.match(adapter,/previousScroll>0&&!incremental/);
 assert.doesNotMatch(immersive,/function women\(\)|women\(\);/,
