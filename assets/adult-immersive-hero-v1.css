@@ -1,6 +1,6 @@
 /* GLOBAL_HERO_IMMERSIVE_SCROLL_V1 · adult visitor web, Android PWA and native web.
  * Keep existing imagery, content and theme palettes. No scroll interception.
- * A single sticky rail owns women Hero + optional search; reader content moves beneath it.
+ * Women's photo/search are independently owned by the route-level full-bleed HeroDock.
  */
 /* Frauen original Hero/search are owned exclusively by body-level HeroDock V1416. */
 /* Existing adult hero headings: preserve their direct-child CSS selectors.
@@ -23,18 +23,7 @@ html[data-theme] body.is-topic-route #appView .topic-collection-page > .main-sea
   top:calc(var(--dar-visitor-sticky-clearance,0px) + var(--dar-immersive-hero-height,0px))!important;
   z-index:65!important;
 }
-@media(max-height:540px) and (orientation:landscape){
-  html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > :is(.frauen-library-search-wrap,.frauen-library-list-controls){
-    margin-top:-18px!important;
-  }
-}
-/* Frauen V1415: no position swap while search field has focus. */
-@media(prefers-reduced-motion:reduce){
-  html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage{
-    scroll-behavior:auto!important;
-  }
-}
-
+/* Frauen Hero/search effects are exclusively body-level HeroDock V1416. */
 /* Existing opt-in hero surfaces retain the shared global fixed background
    treatment without reparenting content or touching specialist readers. */
 html[data-theme] body.has-bottom-nav #appView [data-hero-kind][data-hero-scroll="sticky"] > .dar-hero-stage{
