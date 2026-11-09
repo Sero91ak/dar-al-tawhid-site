@@ -8,7 +8,7 @@ const crypto=require("node:crypto");
 const frozen={
   "assets/frauen/frauen-authority-v1292.css": "6bb786de1ecb1b0d3ed5d01ec511cc10c9b3da86",
   "assets/frauen/frauen-fiqh.js": "d3dc946bcdad475450cddc9b338a6f3ed3f94f2b",
-  "assets/frauen/frauen-live-adapter.js": "203052ec5da9ff2dc7f50d4bac50d79c684cee52",
+  "assets/frauen/frauen-live-adapter.js": "6fa99a123e92afd98b9b7a63d864cf1f9d7175a0",
   "test/assets/frauen/frauen-authority-v1292.css": "07b9fa32585de8fcb57aad13b13ab2c67167ee4b",
   "test/assets/frauen/frauen-fiqh.js": "e050fcd3d7ebef6771cea55631ea628359df10b6"
 };
