@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "frauen-v1416-live-verifier-cache-key-20261109",
+      "at": "2026-11-09T21:11:00+01:00",
+      "approvedBy": "user-explicit-20261109-global-frauen-fix-push",
+      "reason": "Narrow one-file authorization to fix stale hard-coded iOS Frauen scroll JS query version in the canonical live-deploy verifier, which falsely rejected the successfully delivered V1415 asset and triggered rollback. Keep all existing visitor/Android/Kids/voice/Qibla/prayer security and live verification checks intact. No deployment bypass.",
+      "paths": [
+        "scripts/verify-live-deploy.js"
+      ],
+      "expiresAt": "2026-11-11T23:59:00+01:00"
+    },
+    {
       "id": "frauen-herodock-v1416-prod-qa-scripts-20261109",
       "at": "2026-11-09T20:58:00+01:00",
       "approvedBy": "user-explicit-20261109-global-push-frauen-herodock-live",
