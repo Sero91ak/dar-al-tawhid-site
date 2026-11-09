@@ -34,14 +34,16 @@ def fixture(test):
   "/test/assets/more-v1253.css",
   "/test/assets/adult-immersive-hero-v1.css",
   "/test/assets/dar-settings-navigation-v1.css",
-  "/test/assets/dar-test-premium-header-v2.css"
+  "/test/assets/dar-test-premium-header-v2.css",
+  "/assets/frauen/frauen-original-v1224-header-seam-v1405.css"
  ] if test else [
   "/assets/full-edge-appearance-polish.css",
   "/assets/adult-responsive-viewport-v1381.css",
   "/assets/adult-immersive-hero-v1.css",
   "/assets/dar-hero-scroll-standard-v1.css",
   "/assets/dar-settings-navigation-v1.css",
-  "/assets/dar-adult-brand-header-v2.css"
+  "/assets/dar-adult-brand-header-v2.css",
+  "/assets/frauen/frauen-original-v1224-header-seam-v1405.css"
  ])
  links="".join('<link rel="stylesheet" href="'+p+'">' for p in sheets)
  return (
@@ -49,7 +51,7 @@ def fixture(test):
   '<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
   '<style>html,body{margin:0;min-height:100%;background:#eaf0e7}'
   'html{--dar-adult-brand-header-height:126px;--dar-adult-header-obscured-top:126px;'
-  '--dar-test-brand-header-height:126px;--dar-test-occlusion-top:126px;--dar-native-safe-top:126px;--safe-top:126px}'
+  '--dar-test-brand-header-height:126px;--dar-test-occlusion-top:126px;--dar-native-safe-top:59px;--safe-top:59px}'
   'html.dar-ios-native-app body.is-area-route{padding-top:126px!important}'
   '#'+header+'{height:126px!important;min-height:126px!important;position:fixed!important;top:0!important;inset-inline:0!important;z-index:730!important;background:#eaf0e7!important;box-sizing:border-box!important}'
   '#'+spacer+'{height:126px!important;flex:0 0 126px!important;display:block!important}'
