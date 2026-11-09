@@ -36,7 +36,7 @@ assert.ok(adapter.includes("MEHR_DUPLICATE_FRAUEN_ROW_REMOVED_V1"),"Doppelte Fra
 assert.ok(!adapter.includes("target.appendChild(btn)"),"Veraltete zusätzliche Frauen-Karte bleibt aktiv");
 const native=fs.readFileSync("cloudflare/site-router.js","utf8");
 assert.ok(native.includes("/test/assets/frauen/frauen-fiqh.js?v=frauen-rollback-20261016-1500"),"Alten iOS Frauen renderer wiederherstellen");
-assert.ok(native.includes("/assets/frauen/frauen-live-adapter.js?v=frauen-native-scroll-no-reset-v1411-20261108"),"Idempotenten Frauen-Adapter mit neuem Cache-Key ausliefern");
+assert.ok(native.includes("/assets/frauen/frauen-live-adapter.js?v=frauen-incremental-search-v1414-20261109"),"Idempotenten Frauen-Adapter mit neuem Cache-Key ausliefern");
 const testWorker=fs.readFileSync("cloudflare/test-app-worker.js","utf8");
 assert.ok(testWorker.includes("frauen-authority-v1292.css?v=frauen-rollback-20261016-1500"),"Test CSS cache key fehlt");
 for(const prefix of ["assets/frauen/library-v1224/","test/assets/frauen/library-v1224/"]){
