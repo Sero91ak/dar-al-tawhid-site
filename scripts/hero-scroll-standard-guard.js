@@ -71,12 +71,15 @@ for(const jsPath of [
  "test/assets/adult-immersive-hero-v1.js"
 ]){
  const js=fs.readFileSync(path.join(root,jsPath),"utf8");
- if(!js.includes("#appView .dua-hub") || !js.includes("stage.appendChild(hero)") ||
+ if(!js.includes("#appView .dua-hub") || js.includes("function women()") ||
     !js.includes("--dar-immersive-hero-height")){
    fail(jsPath+" darf Frauen-Hero nicht verlieren und muss Suche dynamisch messen");
  }
 }
-ok("Kompakter Hero mit angehefteter Suche, responsive, gleiche Regeln Besucher/Test, Frauen-Hintergrund geschützt");
+const womenOwner=fs.readFileSync(path.join(root,"assets/frauen/frauen-hero-seam-runtime-v1407.js"),"utf8");
+if(!womenOwner.includes("stage.appendChild(directHero)")||!womenOwner.includes("stage.appendChild(search)"))
+ fail("Frauen Original-Hero und Suche müssen beim einzigen Controller montiert werden");
+ok("Kompakter Hero und feste Frauenroute, responsive, gleiche Regeln Besucher/Test, Frauen-Hintergrund geschützt");
 
 
 /* DAR_VISITOR_HERO_ACTIVATION_V1403 - server-side route and safe DOM guard. */
