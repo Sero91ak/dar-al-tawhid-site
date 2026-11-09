@@ -69,12 +69,12 @@ function snapshot(){
    await page.waitForTimeout(6000);
    let before=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-initial.png")});
-   // Test the actual checked-in V1407/V1408 sticky rail, not deleted
-   // 2026-10-16 renderer annotations. Source renderers are SHA-frozen.
+   // Overlay only candidate V1415 CSS/header geometry on pre-release live HTML;
+   // the isolated DOM test separately tests V1415 rendering behavior.
    const localCss=fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-original-v1224-header-seam-v1405.css"),"utf8");
    const localScript=fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-hero-seam-runtime-v1407.js"),"utf8");
-   if(!localCss.includes("DAR_FRAUEN_PINNED_HERO_UNDER_SCROLL_V1407")||
-      !localScript.includes("maxGap=Math.max(480"))throw Error("Current Frauen sticky rail missing");
+   if(!localCss.includes("DAR_FRAUEN_ONE_STAGE_NATIVE_SCROLL_V1415")||
+      !localScript.includes("DAR_FRAUEN_ONE_STAGE_HEADER_SYNC_V1415"))throw Error("V1415 candidate missing");
    await page.addStyleTag({content:localCss});
    // The public page may already run an older V1407. Re-arm only in this
    // isolated browser QA context so the candidate runtime can be measured.
