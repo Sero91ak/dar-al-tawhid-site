@@ -73,8 +73,8 @@ function snapshot(){
    // 2026-10-16 renderer annotations. Source renderers are SHA-frozen.
    const localCss=fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-original-v1224-header-seam-v1405.css"),"utf8");
    const localScript=fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-hero-seam-runtime-v1407.js"),"utf8");
-   if(!localCss.includes("DAR_FRAUEN_PINNED_HERO_UNDER_SCROLL_V1407")||
-      !localScript.includes("maxGap=Math.max(480"))throw Error("Current Frauen sticky rail missing");
+   if(!localCss.includes("DAR_FRAUEN_SINGLE_FIXED_HERO_V1414")||
+      !localScript.includes("spacer.style.height=height"))throw Error("Current Frauen sticky rail missing");
    await page.addStyleTag({content:localCss});
    // The public page may already run an older V1407. Re-arm only in this
    // isolated browser QA context so the candidate runtime can be measured.
