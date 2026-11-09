@@ -55,7 +55,7 @@ for(const [lane,src] of [["visitor",visitorHome],["test",testHome]]){
  assert.match(src,/window\.setInterval\(update,1000\)/,"Live countdown must still tick");
  assert.match(src,/card\.dataset\.dhpRoute="prayer"/,"Prayer click navigation must remain");
 }
-assert.match(siteRouter,/dar-adult-brand-header-v2\.css\?v=20261030-restore-original-hero-rail-v5/);
+assert.match(siteRouter,/dar-adult-brand-header-v2\.css\?v=20261107-compact-safearea-header-v3/);
 assert.match(siteRouter,/dar-home-test-parity-visitor\.js\?v=20261030-prayer-compact-colors-v3/);
 assert.match(testWorker,/dar-test-premium-header-v2\.css\?v=20261030-restore-original-hero-rail-v5/);
 assert.match(testWorker,/dar-home-html-parity-v1\.js\?v=20261030-prayer-compact-colors-v3/);
