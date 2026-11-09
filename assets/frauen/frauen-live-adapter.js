@@ -2,7 +2,7 @@
   "use strict";
   var ENTRY_ATTR="data-dar-frauen-live-entry";
   var hookTimer=0,entryScheduled=false,painting=false;
-  /* FRAUEN_RENDER_IDEMPOTENT_V1410:
+  /* FRAUEN_RENDER_IDEMPOTENT_V1410 + ONE_STAGE_V1415:
    * The shared app shell may invoke window.render hundreds of times even if
    * Frauen data and route did not change. Never destroy input/sticky DOM or
    * reset scroll in that case. Preserve original frozen content renderer. */
@@ -47,7 +47,7 @@
       ".dar-frauen-live-entry__body h4{margin:0 0 3px;font:700 14px/1.25 inherit}",
       ".dar-frauen-live-entry__body p{margin:0;font:500 11px/1.35 inherit;opacity:.72}",
       ".dar-frauen-live-entry .feature-icon img{width:100%;height:100%;object-fit:contain}",
-      "body.is-frauen-route #appView{overflow-x:hidden}",
+      "body.is-frauen-route #appView{overflow-x:clip!important;overflow-y:visible!important}",
       "body.is-frauen-route #appView>.view-head{display:none!important}"
     ].join("");
     document.head.appendChild(s);
@@ -57,6 +57,47 @@
       return '<p class="frauen-empty">Frauenbereich wird geladen…</p>';
     }
     return global.DARFrauenFiqh.render(value||"");
+  }
+  /* One DOM owner: prepare the original photographed Hero and its search
+   * before inserting new markup. No other script may reparent these nodes. */
+  function prepareFrauenMarkup(markup){
+    var tpl=document.createElement("template");
+    if(!tpl||!tpl.content||typeof tpl.content.querySelector!=="function")return null;
+    tpl.innerHTML=markup;
+    var shell=tpl.content.querySelector(".frauen-library-shell,.frauen-library-list");
+    if(shell){
+      var hero=shell.querySelector(":scope > .frauen-library-hero");
+      if(hero){
+        var search=shell.querySelector(":scope > .frauen-library-search-wrap,:scope > .frauen-library-list-controls");
+        var stage=document.createElement("div");
+        stage.className="dar-immersive-hero-stage frauen-library-pinned-header";
+        stage.setAttribute("data-dar-frauen-stage","v1415");
+        stage.dataset.hasSearch=search?"1":"0";
+        shell.insertBefore(stage,hero);
+        stage.appendChild(hero);
+        if(search)stage.appendChild(search);
+      }
+    }
+    return tpl;
+  }
+  /* Only replace the result/content siblings on same-route updates. The photo,
+   * search input, selection, existing event listeners and scroll root survive. */
+  function patchFrauenContent(present,prepared){
+    if(!present||!prepared||!prepared.content||typeof present.querySelector!=="function")return false;
+    var current=present.querySelector(".frauen-library-shell,.frauen-library-list");
+    var incoming=prepared.content.querySelector(".frauen-library-shell,.frauen-library-list");
+    if(!current||!incoming)return false;
+    var oldStage=current.querySelector(":scope > .dar-immersive-hero-stage[data-dar-frauen-stage]");
+    var nextStage=incoming.querySelector(":scope > .dar-immersive-hero-stage[data-dar-frauen-stage]");
+    if(!oldStage||!nextStage)return false;
+    current.className=incoming.className;
+    Array.from(current.children).forEach(function(child){
+      if(child!==oldStage)child.remove();
+    });
+    Array.from(incoming.children).forEach(function(child){
+      if(child!==nextStage)current.appendChild(child);
+    });
+    return true;
   }
   function paint(){
     var r=route();
@@ -80,17 +121,29 @@
       var searchFocus=!!(sameRoute&&active&&active.matches&&active.matches("[data-frauen-q]"));
       var caret=searchFocus&&typeof active.selectionStart==="number"?active.selectionStart:null;
       var previousScroll=sameRoute?Math.max(0,global.scrollY||document.documentElement.scrollTop||0):0;
-      app.innerHTML='<div class="dar-frauen-production-root" data-frauen-production="1">'+markup+'</div>';
+      var prepared=prepareFrauenMarkup(markup);
+      var incremental=!!(sameRoute&&present&&patchFrauenContent(present,prepared));
+      if(!incremental){
+        if(prepared&&typeof app.replaceChildren==="function"){
+          var root=document.createElement("div");
+          root.className="dar-frauen-production-root";
+          root.setAttribute("data-frauen-production","1");
+          root.appendChild(prepared.content);
+          app.replaceChildren(root);
+        }else{
+          app.innerHTML='<div class="dar-frauen-production-root" data-frauen-production="1">'+markup+'</div>';
+        }
+      }
       lastFrauenRoute=key;
       lastFrauenMarkup=markup;
       if(global.DARFrauenFiqh&&typeof global.DARFrauenFiqh.bind==="function")global.DARFrauenFiqh.bind();
       if(!sameRoute){
         try{app.scrollTop=0}catch(e){}
         try{global.scrollTo(0,0)}catch(e){}
-      }else if(previousScroll>0){
+      }else if(previousScroll>0&&!incremental){
         try{global.scrollTo(0,previousScroll)}catch(e){}
       }
-      if(searchFocus){
+      if(searchFocus&&!incremental){
         var current=app.querySelector("[data-frauen-q]");
         if(current&&typeof current.focus==="function"){
           current.focus({preventScroll:true});
