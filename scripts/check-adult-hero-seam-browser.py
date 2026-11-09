@@ -48,11 +48,13 @@ def html(test=False):
  <header id="{hid}"><div class="dtbh-row"><span>DĀR AL TAWḤĪD</span></div></header>
  <div class="app"><div id="{spacer}"></div><main id="appView" class="view">
  <section class="frauen-library-shell">
-  <div class="dar-immersive-hero-stage" data-has-search="1">
-  <section class="frauen-library-hero"><div class="frauen-library-hero__content"><h2>Frauen im Islam</h2></div></section>
-  <div class="frauen-library-search-wrap"><input placeholder="Suchen" aria-label="Suchen"></div></div>
+  <div class="dar-frauen-dock-spacer" aria-hidden="true"></div>
   <section style="min-height:1600px">Inhalte bleiben scrollbar</section>
- </section></main></div></body></html>'''
+ </section></main></div>
+ <div id="darFrauenHeroDockV1416" class="dar-frauen-herodock" data-has-search="1">
+  <section class="frauen-library-hero"><div class="frauen-library-hero__content"><h2>Frauen im Islam</h2></div></section>
+  <div class="frauen-library-search-wrap"><input data-frauen-q placeholder="Suchen" aria-label="Suchen"></div>
+ </div></body></html>'''
 def run():
  FILE1.write_text(html(False),encoding="utf8")
  FILE2.write_text(html(True),encoding="utf8")
@@ -76,7 +78,7 @@ def run():
      value=driver.execute_script("""
        const hdr=document.getElementById(arguments[0]).getBoundingClientRect();
        const hero=document.querySelector(".frauen-library-hero").getBoundingClientRect();
-       const stage=document.querySelector(".dar-immersive-hero-stage").getBoundingClientRect();
+       const stage=document.querySelector("#darFrauenHeroDockV1416").getBoundingClientRect();
        const body=document.body,top=getComputedStyle(body).paddingTop;
        return {bottom:hdr.bottom,heroTop:hero.top,stageTop:stage.top,bodyPadding:top,
           heroHeight:hero.height,scrollY:scrollY};
@@ -86,7 +88,7 @@ def run():
      if scroll==0 and value["bodyPadding"]!="0px":
       raise AssertionError(f"{lane} {label} duplicated native 126px: {value}")
      if scroll>0 and value["stageTop"]<value["bottom"]-2:
-      raise AssertionError(f"{lane} {label} sticky Hero slipped under Header: {value}")
+      raise AssertionError(f"{lane} {label} fixed HeroDock detached from Header: {value}")
     print(f"PASS {lane} {label}: Hero flush to fixed Header at top and after returning; no native safe-gap",flush=True)
  finally:
   if driver:driver.quit()
