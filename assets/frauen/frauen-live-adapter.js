@@ -84,11 +84,12 @@
        * Search updates only content nodes, never the original photo,
        * controls, focused input or pinned stage. Preserve scrolling. */
       var incremental=false;
-      if(sameRoute&&searchFocus&&present){
+      if(sameRoute&&searchFocus&&present&&typeof present.querySelector==="function"){
         var oldShell=present.querySelector(".frauen-library-shell,.frauen-library-list");
         var draft=document.createElement("template");
         draft.innerHTML=markup;
-        var nextShell=draft.content.querySelector(".frauen-library-shell,.frauen-library-list");
+        var nextShell=draft.content&&typeof draft.content.querySelector==="function"
+          ?draft.content.querySelector(".frauen-library-shell,.frauen-library-list"):null;
         var pinned=oldShell&&oldShell.querySelector(":scope > .dar-immersive-hero-stage");
         if(oldShell&&nextShell&&pinned){
           oldShell.className=nextShell.className;
