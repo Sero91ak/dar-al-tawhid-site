@@ -2,11 +2,13 @@
   "use strict";
   var ENTRY_ATTR="data-dar-frauen-live-entry";
   var hookTimer=0,entryScheduled=false,painting=false;
-  /* FRAUEN_RENDER_IDEMPOTENT_V1410 + ONE_STAGE_V1415:
+  /* FRAUEN_RENDER_IDEMPOTENT_V1410 + HERODOCK_V1416:
    * The shared app shell may invoke window.render hundreds of times even if
    * Frauen data and route did not change. Never destroy input/sticky DOM or
    * reset scroll in that case. Preserve original frozen content renderer. */
   var lastFrauenRoute=null,lastFrauenMarkup=null;
+  var dockObserver=null,dockFrame=0,dockResizeWidth=0,dockHeight=0;
+  var DOCK_ID="darFrauenHeroDockV1416";
 
   function decodePart(v){try{return decodeURIComponent(v)}catch(e){return v}}
   function hashRoute(){
@@ -31,6 +33,7 @@
   function cleanup(){
     lastFrauenRoute=null;
     lastFrauenMarkup=null;
+    unmountDock();
     if(document.body){
       document.body.classList.remove("is-frauen-route");
       document.body.removeAttribute("data-frauen-view");
@@ -58,44 +61,108 @@
     }
     return global.DARFrauenFiqh.render(value||"");
   }
-  /* One DOM owner: prepare the original photographed Hero and its search
-   * before inserting new markup. No other script may reparent these nodes. */
+  /* HERODOCK_V1416: photo/search live under BODY, never inside #appView.
+   * The original frozen renderer supplies all text, links, photos and inputs.
+   * A single blank in-flow spacer under the brand header owns the flow height.
+   * No scroll listeners, negative margins, CSS 100vw breakout or DOM clone. */
   function prepareFrauenMarkup(markup){
     var tpl=document.createElement("template");
-    if(!tpl||!tpl.content||typeof tpl.content.querySelector!=="function")return null;
     tpl.innerHTML=markup;
     var shell=tpl.content.querySelector(".frauen-library-shell,.frauen-library-list");
+    var stage=null;
     if(shell){
       var hero=shell.querySelector(":scope > .frauen-library-hero");
       if(hero){
         var search=shell.querySelector(":scope > .frauen-library-search-wrap,:scope > .frauen-library-list-controls");
-        var stage=document.createElement("div");
-        stage.className="dar-immersive-hero-stage frauen-library-pinned-header";
-        stage.setAttribute("data-dar-frauen-stage","v1415");
+        stage=document.createElement("div");
+        stage.id=DOCK_ID;
+        stage.className="dar-frauen-herodock";
+        stage.setAttribute("data-dar-frauen-stage","v1416");
         stage.dataset.hasSearch=search?"1":"0";
-        shell.insertBefore(stage,hero);
         stage.appendChild(hero);
         if(search)stage.appendChild(search);
+        var reserve=document.createElement("div");
+        reserve.className="dar-frauen-dock-spacer";
+        reserve.setAttribute("aria-hidden","true");
+        shell.insertBefore(reserve,shell.firstChild);
       }
     }
-    return tpl;
+    return {template:tpl,stage:stage};
   }
-  /* Only replace the result/content siblings on same-route updates. The photo,
-   * search input, selection, existing event listeners and scroll root survive. */
+  function dock(){
+    return document.getElementById(DOCK_ID);
+  }
+  function syncDock(){
+    dockFrame=0;
+    var stage=dock(),app=document.getElementById("appView");
+    if(!stage||!app||!document.body.classList.contains("is-frauen-route"))return;
+    var box=app.getBoundingClientRect();
+    var viewport=document.documentElement.clientWidth||window.innerWidth;
+    var left=Math.max(0,Math.min(viewport-1,Math.round(box.left)));
+    var width=Math.max(1,Math.min(Math.round(box.width),viewport-left));
+    /* iOS keyboard opening only changes viewport HEIGHT; freeze geometry. */
+    if(stage.style.left!==left+"px")stage.style.left=left+"px";
+    if(stage.style.width!==width+"px")stage.style.width=width+"px";
+    dockResizeWidth=width;
+    var height=Math.ceil(stage.getBoundingClientRect().height);
+    if(Number.isFinite(height)&&height>0&&height<900&&height!==dockHeight){
+      dockHeight=height;
+      document.body.style.setProperty("--frauen-dock-reserved",height+"px");
+    }
+  }
+  function scheduleDock(){
+    if(dockFrame)return;
+    dockFrame=requestAnimationFrame(syncDock);
+  }
+  function observeDock(){
+    var stage=dock();
+    if(!stage)return;
+    if(dockObserver)dockObserver.disconnect();
+    if(typeof ResizeObserver==="function"){
+      dockObserver=new ResizeObserver(scheduleDock);
+      dockObserver.observe(stage);
+    }
+    scheduleDock();
+  }
+  function unmountDock(){
+    if(dockObserver){dockObserver.disconnect();dockObserver=null;}
+    if(dockFrame){cancelAnimationFrame(dockFrame);dockFrame=0;}
+    var existing=dock();
+    if(existing)existing.remove();
+    dockHeight=0;
+    dockResizeWidth=0;
+    if(document.body)document.body.style.removeProperty("--frauen-dock-reserved");
+  }
+  function mountDock(prepared,preserve){
+    if(!prepared.stage){unmountDock();return;}
+    var old=dock();
+    if(preserve&&old){scheduleDock();return;}
+    if(old){
+      /* Route navigation atomically swaps original hero and search children.
+       * At no point can two photo surfaces exist on the screen. */
+      old.dataset.hasSearch=prepared.stage.dataset.hasSearch;
+      old.replaceChildren.apply(old,Array.from(prepared.stage.children));
+    }else{
+      document.body.appendChild(prepared.stage);
+    }
+    observeDock();
+  }
+  /* Replace only content siblings on same-route input updates. The fixed
+   * photo and input remain untouched, avoiding WebKit focus and repaint. */
   function patchFrauenContent(present,prepared){
-    if(!present||!prepared||!prepared.content||typeof present.querySelector!=="function")return false;
+    if(!present||!prepared||!prepared.template||!dock())return false;
     var current=present.querySelector(".frauen-library-shell,.frauen-library-list");
-    var incoming=prepared.content.querySelector(".frauen-library-shell,.frauen-library-list");
-    if(!current||!incoming)return false;
-    var oldStage=current.querySelector(":scope > .dar-immersive-hero-stage[data-dar-frauen-stage]");
-    var nextStage=incoming.querySelector(":scope > .dar-immersive-hero-stage[data-dar-frauen-stage]");
-    if(!oldStage||!nextStage)return false;
+    var incoming=prepared.template.content.querySelector(".frauen-library-shell,.frauen-library-list");
+    if(!current||!incoming||!prepared.stage)return false;
+    var spacer=current.querySelector(":scope > .dar-frauen-dock-spacer");
+    var nextSpacer=incoming.querySelector(":scope > .dar-frauen-dock-spacer");
+    if(!spacer||!nextSpacer)return false;
     current.className=incoming.className;
     Array.from(current.children).forEach(function(child){
-      if(child!==oldStage)child.remove();
+      if(child!==spacer)child.remove();
     });
     Array.from(incoming.children).forEach(function(child){
-      if(child!==nextStage)current.appendChild(child);
+      if(child!==nextSpacer)current.appendChild(child);
     });
     return true;
   }
@@ -124,16 +191,13 @@
       var prepared=prepareFrauenMarkup(markup);
       var incremental=!!(sameRoute&&present&&patchFrauenContent(present,prepared));
       if(!incremental){
-        if(prepared&&typeof app.replaceChildren==="function"){
-          var root=document.createElement("div");
-          root.className="dar-frauen-production-root";
-          root.setAttribute("data-frauen-production","1");
-          root.appendChild(prepared.content);
-          app.replaceChildren(root);
-        }else{
-          app.innerHTML='<div class="dar-frauen-production-root" data-frauen-production="1">'+markup+'</div>';
-        }
+        var root=document.createElement("div");
+        root.className="dar-frauen-production-root";
+        root.setAttribute("data-frauen-production","1");
+        root.appendChild(prepared.template.content);
+        app.replaceChildren(root);
       }
+      mountDock(prepared,incremental);
       lastFrauenRoute=key;
       lastFrauenMarkup=markup;
       if(global.DARFrauenFiqh&&typeof global.DARFrauenFiqh.bind==="function")global.DARFrauenFiqh.bind();
@@ -240,6 +304,8 @@
   },true);
   global.addEventListener("hashchange",function(){hookRender();if(isFrauen())setTimeout(paint,0);else{cleanup();scheduleEntry()}});
   global.addEventListener("pageshow",boot);
+  global.addEventListener("resize",scheduleDock,{passive:true});
+  global.addEventListener("orientationchange",scheduleDock,{passive:true});
   global.addEventListener("dar:live-sync-done",function(){
     if(!isFrauen())return;
     try{
