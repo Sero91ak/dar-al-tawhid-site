@@ -17,11 +17,19 @@ const inventory=["frauen","topics","topic","post","hadith","dua","settings","cal
 for(const [name,cssPath,loaderPath,asset] of lanes){
  const css=read(cssPath),loader=read(loaderPath);
  assert.equal([...css].reduce((n,c)=>n+(c==="{")-(c==="}"),0),0,name+" unbalanced CSS");
- assert.doesNotMatch(css,/GLOBAL_ADULT_STICKY_CLEARANCE_V1|GLOBAL_HERO_ROUTE_TOP_SEAM_V3|FRAUEN_DIRECT_STICKY_FALLBACK_V6/,
+ assert.doesNotMatch(css,/GLOBAL_ADULT_STICKY_CLEARANCE_V1|FRAUEN_DIRECT_STICKY_FALLBACK_V6/,
    name+" must not globally translate original Hero or detached search");
+ if(name==="Test"&&css.includes("GLOBAL_HERO_ROUTE_TOP_SEAM_V3")){
+  const st=css.indexOf("GLOBAL_HERO_ROUTE_TOP_SEAM_V3");
+  const en=css.indexOf("RELATIVE_HERO_STAYS_IN_FLOW_V4",st);
+  const legacy=css.slice(st,en>st?en:undefined);
+  assert.match(legacy,/> \.app\s*\{\s*margin-block-start:0!important;\s*padding-block-start:0!important;/,
+   "Test's existing one-brand spacer must remain zero offset");
+  assert.doesNotMatch(legacy,/(?:margin|padding)-block-start:\s*-[1-9]/);
+ }else assert.doesNotMatch(css,/GLOBAL_HERO_ROUTE_TOP_SEAM_V3/);
  assert.doesNotMatch(css,/NATIVE_HERO_TOP_SEAM_V2|TEST_NATIVE_HERO_TOP_SEAM_V2/,
    name+" must not duplicate native safe-area resetting");
- assert(loader.includes(asset+"?v=20261030-restore-original-hero-rail-v5"),
+ assert(loader.includes(asset+"?v="+(name==="Visitor"?"20261107-compact-safearea-header-v3":"20261030-restore-original-hero-rail-v5")),
    name+" must request rollback-safe CSS version");
 }
 const heroCss=read("assets/adult-immersive-hero-v1.css");
