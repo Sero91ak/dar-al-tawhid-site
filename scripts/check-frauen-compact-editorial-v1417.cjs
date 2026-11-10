@@ -164,7 +164,13 @@ const check=(condition,message)=>assert.ok(condition,message);
       descHeight:rect(desc).height,descScroll:desc.scrollHeight,
       copyScroll:copy.scrollHeight,copyHeight:rect(copy).height,
       title:card.querySelector("h3").textContent,
-      cols:getComputedStyle(document.querySelector(".frauen-library-grid")).gridTemplateColumns.split(" ").length,
+      /* Measure actual CARD positions: group is Flex, grid-template-columns
+       * is not a physical column count on display:flex. */
+      oneColumn:(()=>{
+        const cards=document.querySelectorAll(".frauen-library-grid > .frauen-library-card");
+        const a=cards[0].getBoundingClientRect(),b=cards[1].getBoundingClientRect();
+        return Math.abs(a.left-b.left)<=2 && b.top>=a.bottom-2;
+      })(),
       spacerHeight:rect(spacer).height,bodyReserve:parseInt(document.body.style.getPropertyValue("--frauen-dock-reserved"),10),
       matches:document.querySelectorAll("#darFrauenHeroDockV1416").length,
       inputs:document.querySelectorAll("[data-frauen-q]").length,
@@ -194,8 +200,7 @@ const check=(condition,message)=>assert.ok(condition,message);
   check(near(after.spacerHeight,after.dock.height)&&near(after.spacerHeight,after.bodyReserve),
     label+": stale V1416 spacer after compact stylesheet");
   check(after.scrollWidth<=after.viewWidth+2,label+": horizontal overflow");
-  if(device.inset&&device.w-device.inset<690)
-    check(after.cols===1,label+": Fold reading pane got two cramped cards");
+  check(after.oneColumn,label+": approved single-column hub layout changed");
   await page.evaluate(()=>{for(let i=0;i<25;i++)window.render();window.scrollTo(0,800)});
   await page.waitForTimeout(110);
   const scroll=await page.evaluate(()=>({
@@ -230,11 +235,12 @@ const check=(condition,message)=>assert.ok(condition,message);
       text:title.textContent,eyebrow:caption.textContent,
       heroHeight:hero.getBoundingClientRect().height,
       cardBg:getComputedStyle(card).backgroundImage,
-      groupCol:getComputedStyle(document.querySelector(".frauen-library-area-grid")).gridTemplateColumns.split(" ").length,
-      gridComputed:getComputedStyle(document.querySelector(".frauen-library-area-grid")).gridTemplateColumns,
-      gridWidth:document.querySelector(".frauen-library-area-grid").getBoundingClientRect().width,
-      appWidth:document.getElementById("appView").getBoundingClientRect().width,
-      shellWidth:document.querySelector(".frauen-library-shell").getBoundingClientRect().width,
+      oneColumn:(()=>{
+        const cards=document.querySelectorAll(".frauen-library-area-grid > .frauen-library-area-card");
+        const a=cards[0].getBoundingClientRect(),b=cards[1].getBoundingClientRect();
+        return getComputedStyle(document.querySelector(".frauen-library-area-grid")).display==="flex" &&
+          Math.abs(a.left-b.left)<=2 && b.top>=a.bottom-2;
+      })(),
       realRoute:document.body.dataset.frauenView,
       sameDock:document.getElementById("darFrauenHeroDockV1416")===window.__stage,
       inputs:document.querySelectorAll("[data-frauen-q]").length};
@@ -244,8 +250,7 @@ const check=(condition,message)=>assert.ok(condition,message);
   check(group.eyebrow.includes("WISSENSBIBLIOTHEK"),label+": hero title text lost");
   check(group.sameDock&&group.inputs===0,label+": group route duplicated search/dock");
   check(group.cardBg.includes("library-v1224"),label+": group image replaced");
-  if(device.inset&&device.w-device.inset<690)
-    check(group.groupCol===1,label+": Fold group squeezing into 2 columns "+JSON.stringify(group));
+  check(group.oneColumn,label+": original vertical group Flex flow was changed "+JSON.stringify(group));
   await page.evaluate(()=>{location.hash="#home";window.render()});
   await page.waitForTimeout(90);
   const exit=await page.evaluate(()=>({
