@@ -155,6 +155,14 @@
   ],
   "unlockedScopes": [
     {
+      "id": "ios-native-copy-and-release-guard-20261110",
+      "at": "2026-11-10T12:00:00+01:00",
+      "reason": "Nutzerauftrag Leg los: native iOS-Bedientexte neunsprachig plus Release-Konsistenz-Guard. Nur der bestehende iOS-Bridge-Workflow erhaelt zwei Pruefschritte und Pfad-Trigger. Keine Push-Funktion, keine Push-Spur, kein Worker, kein Inhalt, keine Kids-Aenderung.",
+      "paths": [
+        ".github/workflows/ios-native-bridge-guard.yml"
+      ]
+    },
+    {
       "id": "frauen-v1416-live-verifier-cache-key-20261109",
       "at": "2026-11-09T21:11:00+01:00",
       "approvedBy": "user-explicit-20261109-global-frauen-fix-push",

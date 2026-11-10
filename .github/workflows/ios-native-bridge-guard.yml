@@ -12,6 +12,10 @@ on:
       - ios/DarAlTawhid/DarAlTawhid/Info.plist
       - ios/DarAlTawhid/DarAlTawhid/Widgets/DarAlTawhidWidgets.swift
       - ios/DarAlTawhid/Shared/DarWidgetTheme.swift
+      - ios/DarAlTawhid/Shared/DarNativeCopy.swift
+      - ios/DarAlTawhid/release-state.json
+      - ios/DarAlTawhid/Tests/ios-native-copy-locales-v1.cjs
+      - ios/DarAlTawhid/Tests/ios-release-consistency-guard.cjs
       - ios/DarAlTawhid/DarAlTawhid.xcodeproj/project.pbxproj
       - assets/dar-setup-hub.js
       - test/assets/dar-setup-hub.js
@@ -27,6 +31,10 @@ on:
       - ios/DarAlTawhid/DarAlTawhid/Info.plist
       - ios/DarAlTawhid/DarAlTawhid/Widgets/DarAlTawhidWidgets.swift
       - ios/DarAlTawhid/Shared/DarWidgetTheme.swift
+      - ios/DarAlTawhid/Shared/DarNativeCopy.swift
+      - ios/DarAlTawhid/release-state.json
+      - ios/DarAlTawhid/Tests/ios-native-copy-locales-v1.cjs
+      - ios/DarAlTawhid/Tests/ios-release-consistency-guard.cjs
       - ios/DarAlTawhid/DarAlTawhid.xcodeproj/project.pbxproj
       - assets/dar-setup-hub.js
       - test/assets/dar-setup-hub.js
@@ -50,6 +58,7 @@ jobs:
             ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift \
             ios/DarAlTawhid/Shared/DarPrayerEngine.swift \
             ios/DarAlTawhid/Shared/DarDailyContent.swift \
+            ios/DarAlTawhid/Shared/DarNativeCopy.swift \
             ios/DarAlTawhid/DarAlTawhid/WebAppView.swift \
             ios/DarAlTawhid/DarAlTawhid/Widgets/DarAlTawhidWidgets.swift \
             ios/DarAlTawhid/Shared/DarWidgetTheme.swift
@@ -59,6 +68,10 @@ jobs:
           node --check test/assets/dar-setup-hub.js
       - name: Native GPS and prayer location regression cases
         run: node scripts/test-ios-native-gps-recovery.cjs
+      - name: Native copy locales (nine languages) and release consistency
+        run: |
+          node ios/DarAlTawhid/Tests/ios-native-copy-locales-v1.cjs
+          node ios/DarAlTawhid/Tests/ios-release-consistency-guard.cjs
       - name: Native capabilities and compiled bridge presence
         run: |
           python3 - <<'PY'

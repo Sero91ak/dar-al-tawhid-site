@@ -15,6 +15,8 @@
 		A10000000000000000000006 /* DarDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000011 /* DarDeepLink.swift */; };
 		A10000000000000000000007 /* DarWidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000012 /* DarWidgetSnapshot.swift */; };
 		A10000000000000000000008 /* DarWidgetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000013 /* DarWidgetStore.swift */; };
+		NTC000000000000000000001 /* DarNativeCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = NTC100000000000000000001 /* DarNativeCopy.swift */; };
+		NTC000000000000000000002 /* DarNativeCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = NTC100000000000000000001 /* DarNativeCopy.swift */; };
 		A10000000000000000000009 /* DarPrayerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000014 /* DarPrayerEngine.swift */; };
 		B50000000000000000000001 /* DarPrayerPushCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50000000000000000000002 /* DarPrayerPushCopy.swift */; };
 		A1000000000000000000000A /* DarDailyContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000015 /* DarDailyContent.swift */; };
@@ -192,6 +194,7 @@
 		A30000000000000000000011 /* DarDeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarDeepLink.swift; sourceTree = "<group>"; };
 		A30000000000000000000012 /* DarWidgetSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetSnapshot.swift; sourceTree = "<group>"; };
 		A30000000000000000000013 /* DarWidgetStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetStore.swift; sourceTree = "<group>"; };
+		NTC100000000000000000001 /* DarNativeCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarNativeCopy.swift; sourceTree = "<group>"; };
 		A30000000000000000000014 /* DarPrayerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarPrayerEngine.swift; sourceTree = "<group>"; };
 		B50000000000000000000002 /* DarPrayerPushCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarPrayerPushCopy.swift; sourceTree = "<group>"; };
 		A30000000000000000000015 /* DarDailyContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarDailyContent.swift; sourceTree = "<group>"; };
@@ -411,6 +414,7 @@
 				A30000000000000000000011 /* DarDeepLink.swift */,
 				A30000000000000000000012 /* DarWidgetSnapshot.swift */,
 				A30000000000000000000013 /* DarWidgetStore.swift */,
+				NTC100000000000000000001 /* DarNativeCopy.swift */,
 				A30000000000000000000014 /* DarPrayerEngine.swift */,
 				B50000000000000000000002 /* DarPrayerPushCopy.swift */,
 				A30000000000000000000015 /* DarDailyContent.swift */,
@@ -707,6 +711,7 @@
 				A10000000000000000000006 /* DarDeepLink.swift in Sources */,
 				A10000000000000000000007 /* DarWidgetSnapshot.swift in Sources */,
 				A10000000000000000000008 /* DarWidgetStore.swift in Sources */,
+				NTC000000000000000000001 /* DarNativeCopy.swift in Sources */,
 				A10000000000000000000009 /* DarPrayerEngine.swift in Sources */,
 				B50000000000000000000001 /* DarPrayerPushCopy.swift in Sources */,
 				A1000000000000000000000A /* DarDailyContent.swift in Sources */,
@@ -727,6 +732,7 @@
 				A20000000000000000000002 /* DarDeepLink.swift in Sources */,
 				A20000000000000000000003 /* DarWidgetSnapshot.swift in Sources */,
 				A20000000000000000000004 /* DarWidgetStore.swift in Sources */,
+				NTC000000000000000000002 /* DarNativeCopy.swift in Sources */,
 				A20000000000000000000005 /* DarPrayerEngine.swift in Sources */,
 				A20000000000000000000006 /* DarDailyContent.swift in Sources */,
 				A2000000000000000000000A /* DarWidgetTheme.swift in Sources */,
