@@ -16,6 +16,8 @@ const base=[
  read("assets/frauen/frauen-original-v1224-header-seam-v1405.css")
 ];
 const compact=read("assets/frauen/frauen-compact-editorial-v1417.css");
+assert.ok(fs.existsSync("assets/frauen/library-v1224/01-grundlagen-din.jpg"),
+ "The original photographic fixture must be a real committed image");
 const adapter=read("assets/frauen/frauen-live-adapter.js");
 const devices=[
  {name:"small",w:320,h:700},
@@ -68,7 +70,7 @@ const check=(condition,message)=>assert.ok(condition,message);
      const group=value.startsWith("group/");
      /* Mirror the exact original frauen-fiqh.js render() route flag. */
      document.body.setAttribute("data-frauen-view",group?"group":"hub");
-     const photo="/assets/frauen/library-v1224/01-grundlagen.jpg";
+     const photo="/assets/frauen/library-v1224/01-grundlagen-din.jpg";
      const desc="Tawḥīd, Īmān, Dhikr, Reue und die Grundlagen eines rechtschaffenen Lebens.";
      const longDesc="Geprüfte Grundlagen zu Dīn, Charakter, Verantwortung und Grenzen des Gehorsams. Eine vollständige Beschreibung mit gut lesbaren Inhalten.";
      const card=(id,i)=>group?
