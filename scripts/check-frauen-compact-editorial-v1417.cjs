@@ -66,6 +66,8 @@ const check=(condition,message)=>assert.ok(condition,message);
    window.DARFrauenFiqh={
     render:function(value){
      const group=value.startsWith("group/");
+     /* Mirror the exact original frauen-fiqh.js render() route flag. */
+     document.body.setAttribute("data-frauen-view",group?"group":"hub");
      const photo="/assets/frauen/library-v1224/01-grundlagen.jpg";
      const desc="Tawḥīd, Īmān, Dhikr, Reue und die Grundlagen eines rechtschaffenen Lebens.";
      const longDesc="Geprüfte Grundlagen zu Dīn, Charakter, Verantwortung und Grenzen des Gehorsams. Eine vollständige Beschreibung mit gut lesbaren Inhalten.";
