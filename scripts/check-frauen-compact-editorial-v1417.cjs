@@ -231,6 +231,11 @@ const check=(condition,message)=>assert.ok(condition,message);
       heroHeight:hero.getBoundingClientRect().height,
       cardBg:getComputedStyle(card).backgroundImage,
       groupCol:getComputedStyle(document.querySelector(".frauen-library-area-grid")).gridTemplateColumns.split(" ").length,
+      gridComputed:getComputedStyle(document.querySelector(".frauen-library-area-grid")).gridTemplateColumns,
+      gridWidth:document.querySelector(".frauen-library-area-grid").getBoundingClientRect().width,
+      appWidth:document.getElementById("appView").getBoundingClientRect().width,
+      shellWidth:document.querySelector(".frauen-library-shell").getBoundingClientRect().width,
+      realRoute:document.body.dataset.frauenView,
       sameDock:document.getElementById("darFrauenHeroDockV1416")===window.__stage,
       inputs:document.querySelectorAll("[data-frauen-q]").length};
   });
@@ -240,7 +245,7 @@ const check=(condition,message)=>assert.ok(condition,message);
   check(group.sameDock&&group.inputs===0,label+": group route duplicated search/dock");
   check(group.cardBg.includes("library-v1224"),label+": group image replaced");
   if(device.inset&&device.w-device.inset<690)
-    check(group.groupCol===1,label+": Fold group squeezing into 2 columns");
+    check(group.groupCol===1,label+": Fold group squeezing into 2 columns "+JSON.stringify(group));
   await page.evaluate(()=>{location.hash="#home";window.render()});
   await page.waitForTimeout(90);
   const exit=await page.evaluate(()=>({
