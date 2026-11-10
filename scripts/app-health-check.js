@@ -225,6 +225,16 @@ try {
   fail("Qibla fullscreen viewport / iOS half-screen regression");
 }
 
+// Regression: changing prayer clock text or asynchronous content must not
+// repeatedly trigger global DOM work on the adult Home screen.
+try {
+  require("child_process").execFileSync(process.execPath,
+    [path.join(__dirname, "check-adult-home-mutation-jank.cjs")],
+    { stdio: "inherit" });
+} catch (e) {
+  fail("Adult Home mutation/scroll performance regression");
+}
+
 if (failed) {
   console.error(`\n${failed} check(s) failed – Deploy stoppen.`);
   process.exit(1);
