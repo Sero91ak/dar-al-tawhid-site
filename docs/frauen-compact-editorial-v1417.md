@@ -9,7 +9,7 @@ Auf Wunsch des Nutzers werden nur Hub- und Kapitelübersicht im Frauenbereich ko
 - **Unverändert:** `assets/frauen/frauen-live-adapter.js`, V1416 HeroDock `assets/frauen/frauen-original-v1224-header-seam-v1405.css`, alle Originalbilddateien und URLs, `frauen-fiqh.js`, Post-/Q-IDs und Quellen.
 - **Einzelne Präsentationsdatei:** `assets/frauen/frauen-compact-editorial-v1417.css`, auf `body.is-frauen-route[data-frauen-view=hub|group]` plus die originalen Frauen-DOM-Klassen begrenzt. Wird ausschließlich in der Erwachsenen-Besucher-App und DAR Test ausgeliefert. Keine globalen CSS- oder Touch-/Scroll-Regeln.
 - **Vertikale Verdichtung:** Foto ca. 12 % niedriger, Kapitelkarten mit kleineren Mindesthöhen und Abständen, Suchfeld weiterhin mindestens 48 px und 16 px Text. Lange Beschreibungen und große Schrift dürfen die Karte vergrößern; **kein Ausblenden/Line-Clamp**.
-- **Fold/iPad:** Spaltenanzahl richtet sich an realer nutzbarer Inhaltsbreite statt allein am Gerät; schmale Fold-Lesespalten bleiben einspaltig.
+- **Fold/iPad:** Die verbindliche ursprüngliche Einspalten-Architektur bleibt unverändert: Hub als einspaltiges Bildraster, Gruppe als vertikale Flex-Liste – auch auf iPad, Fold und breiten Bildschirmen. Lediglich die Kartenabstände werden reduziert. Keine neuen Spalten und kein verändertes Scrollverhalten.
 - **Scroll:** Die dynamische Platzreserve gehört weiterhin einzig zum vorhandenen V1416 ResizeObserver. Keine weiteren Controller, no extra overlays, kein Klonen oder neues `scroll`-/`touchmove`-Listening.
 - **Navigation:** Back-Schaltfläche, Suche, Hero-Text, Quellen, 3D-Icons und untere Navigation werden nicht geändert.
 
