@@ -1461,7 +1461,12 @@ export default {
     }
     const isRoot = url.pathname === "/" || url.pathname === "/index.html";
     const ua = String(request.headers.get("User-Agent") || "");
-    const nativeApp = isNativeAppRequest(ua);
+    // DAR_IOS_NATIVE_ENTRY_FALLBACK_GUARD_V1:
+    // Exact root query selects the released iOS visitor surface even if UA
+    // recognition fails. No effect on normal browsers, /test/, Android PWA,
+    // Kids, public canonical sources or any non-root route.
+    const nativeIosEntry = isRoot && url.searchParams.get("native_ios") === "1";
+    const nativeApp = isNativeAppRequest(ua) || nativeIosEntry;
     const androidNativeApp = /DarAlTawhidAndroid/i.test(ua);
     const androidBrowser = isAndroidBrowserRequest(ua);
     const appleMobileBrowser = isAppleMobileBrowserRequest(ua);
