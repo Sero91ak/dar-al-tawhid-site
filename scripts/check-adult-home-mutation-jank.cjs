@@ -88,5 +88,5 @@ assert.ok(scans > beforeFeed, "feed duplicate-header check should still work");
 assert.match(home, /resume&&resume\.textContent!==name/, "Home must not rewrite unchanged Qurʾān text");
 assert.match(home, /target\.childNodes\.length\)target\.replaceChildren\(\)/, "Friday mirror should not write empty state repeatedly");
 assert.match(home, /observe\(top,\{subtree:false,childList:true\}\)/, "prayer clock text must not cause continuous Home sync");
-assert.match(motion, /var stepped=Math.round\\(progress\\*100\\)\\/100/, "scroll paint progress must be coalesced");
+assert.ok(motion.includes("var stepped=Math.round(progress*100)/100"), "scroll paint progress must be coalesced");
 console.log("ADULT HOME MUTATION JANK: OK");
