@@ -5,7 +5,7 @@ const assert=require("node:assert/strict");
 const fs=require("node:fs");
 const read=p=>fs.readFileSync(p,"utf8");
 const css=read("assets/frauen/frauen-compact-editorial-v1417.css");
-const rules=css.replace(/\/\*[\s\S]*?\*\//g,"");
+const rules=css.replace(/\/\*[\s\S]*?\*\//g,"").replace(/@media\s*\([^)]*\)/g,"");
 const prod=read("cloudflare/site-router.js");
 const test=read("cloudflare/test-app-worker.js");
 assert.match(css,/FRAUEN COMPACT EDITORIAL V1417/);
