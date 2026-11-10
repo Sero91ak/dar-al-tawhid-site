@@ -42,9 +42,12 @@
     var height=Math.max(1,window.innerHeight||document.documentElement.clientHeight||760);
     var bounds=shell.getBoundingClientRect();
     var progress=Math.max(0,Math.min(1,(height*.12-bounds.top)/Math.max(560,height*1.55)));
+    /* Coalesce sub-pixel scroll updates. The former 0.001 fade precision
+       wrote a composited CSS variable almost every scroll pixel. */
+    var stepped=Math.round(progress*100)/100;
     var reduced=!!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-    var fade=(1-progress).toFixed(3);
-    var move=(reduced?0:-Math.round(progress*28))+"px";
+    var fade=(1-stepped).toFixed(2);
+    var move=(reduced?0:-Math.round(stepped*28))+"px";
     if(shell.style.getPropertyValue("--dar-home-scene-fade")!==fade)
       shell.style.setProperty("--dar-home-scene-fade",fade);
     if(shell.style.getPropertyValue("--dar-home-scene-parallax")!==move)
