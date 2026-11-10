@@ -61,8 +61,8 @@ struct PrayerTimerWidget: Widget {
         AppIntentConfiguration(kind: "de.daraltawhid.widget.prayer.timer", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
             PrayerTimerView(entry: entry)
         }
-        .configurationDisplayName("Nächstes Gebet")
-        .description("Countdown mit Sekunden, DĀR AL TAWḤĪD Look. Farbe unter Bearbeiten wählen.")
+        .configurationDisplayName(DarNativeCopy.text(.widgetNextPrayerTitle))
+        .description(Text(DarNativeCopy.text(.widgetNextPrayerDesc)))
         .supportedFamilies(Self.timerFamilies)
     }
 
@@ -80,8 +80,8 @@ struct PrayerListWidget: Widget {
         AppIntentConfiguration(kind: "de.daraltawhid.widget.prayer.list", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
             PrayerListView(entry: entry)
         }
-        .configurationDisplayName("Gebetszeiten")
-        .description("Fajr bis ʿIshāʾ — gleiche Zeiten wie in der App.")
+        .configurationDisplayName(DarNativeCopy.text(.widgetTimesTitle))
+        .description(Text(DarNativeCopy.text(.widgetTimesDesc)))
         .supportedFamilies(Self.listFamilies)
     }
 
@@ -99,8 +99,8 @@ struct PrayerDayWidget: Widget {
         AppIntentConfiguration(kind: "de.daraltawhid.widget.prayer.day", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
             PrayerDayView(entry: entry)
         }
-        .configurationDisplayName("Tagesgebetszeiten")
-        .description("Alle Gebetszeiten des Tages.")
+        .configurationDisplayName(DarNativeCopy.text(.widgetDayTitle))
+        .description(Text(DarNativeCopy.text(.widgetDayDesc)))
         .supportedFamilies(Self.dayFamilies)
     }
 
@@ -118,8 +118,8 @@ struct QiblaWidget: Widget {
         AppIntentConfiguration(kind: "de.daraltawhid.widget.qibla", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
             QiblaCompassView(entry: entry)
         }
-        .configurationDisplayName("Qibla")
-        .description("Öffnet den Kompass in der App.")
+        .configurationDisplayName(DarNativeCopy.text(.widgetQiblaTitle))
+        .description(Text(DarNativeCopy.text(.widgetQiblaDesc)))
         .supportedFamilies([.systemSmall, .accessoryCircular])
     }
 }
@@ -129,8 +129,8 @@ struct TodayWidget: Widget {
         AppIntentConfiguration(kind: "de.daraltawhid.widget.today", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
             TodayContentView(entry: entry)
         }
-        .configurationDisplayName("Heute empfohlen")
-        .description("Aktueller Beitrag.")
+        .configurationDisplayName(DarNativeCopy.text(.widgetTodayTitle))
+        .description(Text(DarNativeCopy.text(.widgetTodayDesc)))
         .supportedFamilies([.systemMedium, .systemLarge])
     }
 }
@@ -140,8 +140,8 @@ struct AyahWidget: Widget {
         AppIntentConfiguration(kind: "de.daraltawhid.widget.ayah", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
             AyahContentView(entry: entry)
         }
-        .configurationDisplayName("Āyah des Tages")
-        .description("Deutscher Wortlaut.")
+        .configurationDisplayName(DarNativeCopy.text(.widgetAyahTitle))
+        .description(Text(DarNativeCopy.text(.widgetAyahDesc)))
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
@@ -151,8 +151,8 @@ struct DuaWidget: Widget {
         AppIntentConfiguration(kind: "de.daraltawhid.widget.dua", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
             DuaContentView(entry: entry)
         }
-        .configurationDisplayName("Duʿāʾ des Tages")
-        .description("Aktuelles Bittgebet.")
+        .configurationDisplayName(DarNativeCopy.text(.widgetDuaTitle))
+        .description(Text(DarNativeCopy.text(.widgetDuaDesc)))
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
@@ -162,8 +162,8 @@ struct LockDatePrayerWidget: Widget {
         StaticConfiguration(kind: "de.daraltawhid.widget.lock.date", provider: DarTimelineProvider()) { entry in
             LockDatePrayerView(entry: entry)
         }
-        .configurationDisplayName("Datum und Gebet")
-        .description("Über der Uhr: Datum und nächstes Gebet.")
+        .configurationDisplayName(DarNativeCopy.text(.widgetLockDateTitle))
+        .description(Text(DarNativeCopy.text(.widgetLockDateDesc)))
         .supportedFamilies([.accessoryRectangular, .accessoryInline])
     }
 }
@@ -173,8 +173,8 @@ struct LockHijriPrayerWidget: Widget {
         StaticConfiguration(kind: "de.daraltawhid.widget.lock.hijri", provider: DarTimelineProvider()) { entry in
             LockHijriPrayerView(entry: entry)
         }
-        .configurationDisplayName("Hidschra und Gebet")
-        .description("Hidschra nach Umm al-Qura und nächstes Gebet.")
+        .configurationDisplayName(DarNativeCopy.text(.widgetLockHijriTitle))
+        .description(Text(DarNativeCopy.text(.widgetLockHijriDesc)))
         .supportedFamilies([.accessoryRectangular, .accessoryInline])
     }
 }
@@ -196,7 +196,7 @@ struct DarPrayerLiveWidget: Widget {
                     Text(timerInterval: Date()...context.state.targetDate, countsDown: true)
                         .monospacedDigit().font(.title3.bold())
                 } else {
-                    Text("Gebetszeit").font(.caption.bold())
+                    Text(DarNativeCopy.text(.livePrayerTime)).font(.caption.bold())
                 }
             }
             .padding(16)
@@ -216,7 +216,7 @@ struct DarPrayerLiveWidget: Widget {
                         Text(timerInterval: Date()...context.state.targetDate, countsDown: true)
                             .monospacedDigit().font(.headline)
                     } else {
-                        Text("Gebetszeit").font(.caption2)
+                        Text(DarNativeCopy.text(.livePrayerTime)).font(.caption2)
                     }
                 }
                 DynamicIslandExpandedRegion(.bottom) {
@@ -230,7 +230,7 @@ struct DarPrayerLiveWidget: Widget {
                         .monospacedDigit().font(.caption2)
                         .frame(maxWidth: 55)
                 } else {
-                    Text("Jetzt").font(.caption2)
+                    Text(DarNativeCopy.text(.liveNow)).font(.caption2)
                 }
             } minimal: {
                 Image(systemName: "moon.stars.fill")
@@ -246,8 +246,8 @@ struct LegacyPrayerWidget: Widget {
         AppIntentConfiguration(kind: "de.daraltawhid.widget.prayer", intent: DarWidgetColorIntent.self, provider: DarIntentProvider()) { entry in
             PrayerTimerView(entry: entry)
         }
-        .configurationDisplayName("Nächstes Gebet")
-        .description("Homescreen und Sperrbildschirm.")
+        .configurationDisplayName(DarNativeCopy.text(.widgetNextPrayerTitle))
+        .description(Text(DarNativeCopy.text(.widgetLegacyDesc)))
         .supportedFamilies(PrayerTimerWidget.timerFamilies)
     }
 }

@@ -856,8 +856,8 @@ struct TodayContentView: View {
         let snap = entry.snapshot
         WidgetChrome(palette: p, dest: .home) {
             VStack(alignment: .leading, spacing: 7) {
-                BrandLine(palette: p, title: "Heute")
-                Text(snap.postTitle.isEmpty ? "Tagesbeitrag" : snap.postTitle)
+                BrandLine(palette: p, title: DarNativeCopy.text(.widgetTodayBrand))
+                Text(snap.postTitle.isEmpty ? DarNativeCopy.text(.widgetDayPostFallback) : snap.postTitle)
                     .font(Face.title(family == .systemSmall ? 14 : 17))
                     .foregroundStyle(p.cream)
                     .lineLimit(family == .systemSmall ? 3 : 2)
