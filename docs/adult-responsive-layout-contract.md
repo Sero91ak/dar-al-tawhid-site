@@ -1,6 +1,9 @@
 # DĀR AL TAWḤĪD · globaler Layout- und Plattformvertrag
 Stand: 01.11.2026 · Status: Architektur- und Abnahmeregel, keine Live-Implementierung
 
+## Verbindlicher Fotografischer Hero-Standard (09.11.2026)
+Für **jede bestehende und künftig eingeführte Erwachsenen-Bild-Hero-Ansicht** gilt [Global HeroDock V2](global-herodock-v2.md) als einziger Layout-Vertrag: Originalfoto breit über die verfügbare Lesespalte, unter dem echten Header angeheftet, ein stabiler Platzhalter für scrollende Inhalte, kein Flackern oder zweiter Scroll-Eigentümer. Der bestehende Frauen-HeroDock V1416 bleibt eigenständig. Keine Umwandlung reiner Textüberschriften in Fotokarten; Originalquellen, Navigation und App-Surfaces bleiben erhalten.
+
 ## Ziel und Geltungsbereich
 **Übergeordnete Dauerregel für jede NEUE oder GEÄNDERTE UI-Funktion in diesem Repository:** Jede Seite und jedes Produkt muss sich an die für ihre Plattform und Route geltende Architektur anpassen. Das gilt ausdrücklich für die öffentliche Desktop-/Mobil-Website, iOS-Besucher-App (native + WebView), iPad, Android-PWA, DAR Test, DAR Kids, Apple Watch, Widgets/Live Activities, Apple TV/tvOS und DĀR Admin, soweit die jeweilige Oberfläche hier gepflegt wird. Neue Produkte sind ab ihrem ersten Commit eingeschlossen. Die globale Regel verlangt **keine identische UI** auf ungleichen Plattformen: Jede Surface behält ihre eigenen Gestaltungs-, Navigations-, Eingabe- und Accessibility-Regeln.
 
