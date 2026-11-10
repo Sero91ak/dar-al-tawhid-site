@@ -75,13 +75,13 @@ html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-v
   margin-top:5px!important;
   line-height:1.43!important;
 }
-/* Content width, not full device width, decides how many columns fit.
- * This prevents an unfolded Fold reading pane from squeezing 2 tiny cards. */
+/* Keep V1405/V1406 original one-column photographic shelves at EVERY
+ * width, including iPad and Fold. This pilot changes only their gap.
+ * Group is intentionally a vertical FLEX list, not a responsive grid. */
 html[data-theme] body.is-frauen-route[data-frauen-view="hub"]
   #appView .frauen-library-grid,
 html[data-theme] body.is-frauen-route[data-frauen-view="group"]
   #appView .frauen-library-area-grid {
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,345px),1fr))!important;
   gap:clamp(11px,1.5vw,14px)!important;
 }
 /* Hub and chapter cards: naturally-sized full readable text, 15%-ish
