@@ -297,7 +297,7 @@ async function fetchVersionBuild(base) {
         ".dhp-isnad-label::after",
         ".dhp-welcome-rule::before{content:none!important;display:none!important;}",
         ".dhp-quote-text{display:block!important",
-        "font:650 clamp(20px,3.6vw,24px)",
+        "font:550 clamp(14px,2.25vw,16px)",
         "font:400 clamp(13px,2.2vw,15px)",
         "font:550 clamp(14px,2.25vw,16px)",
         "max-width:72ch!important",
