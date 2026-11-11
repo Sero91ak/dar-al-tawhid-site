@@ -65,3 +65,26 @@ Die ältere 68/80-Zwischenmeldung ist überholt. `kids/data/academy-sidq-v4-cove
 **Interne Hörpakete:** Ṣidq 80/80 aus GitHub-Actions-Lauf [43006994534](https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/43006994534). Neue 64/64 mit vollständigen SHA-Prüfungen aus GitHub-Actions-Lauf [43008051296](https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/43008051296), Artefakt `TAWHID-KIDS-V32-64-V4-HOERPRUEFUNG`. Im Chat zusätzlich mobile Einzelspieler als verifizierte, eigenständige HTML-Dateien erstellt; diese sind keine Produktiv-Bestandteile.
 
 **Offene Qualitäts- und Freigabegates:** Menschliche Prüfung aller 144 Aufnahmen auf Aussprache, Serhat-Masterstimme, Voll-Salām/Fuṣḥā, Störungen und Inhalts-/Quellentreue; 33 von 65 weiteren bestehenden Lektionen mit fehlendem Quellen-Audit sowie 142 von 208 geplanten Lektionen mit ausstehender redaktioneller Freigabe; App-Integration und native Geräte-Tests stehen noch aus. Keine automatischen weiteren bezahlten Batches ohne kostensicheren Dedup-/Quellen-Check und dokumentierte Freigabe; keine Änderungen an öffentlich verwendeten KIDS-/Adult-Manifesten.
+
+---
+
+## 11.11.2026 – Verbindliche Eigentümerkorrektur Fuṣḥā (V33)
+
+**STOPP ALLER NEUEN KIDS-LERNAKADEMIE-V4-AUDIOAUFNAHMEN.** Der Eigentümer hat bei der Hörprüfung fehlerhafte Aussprache von **Sūrat at-Tawbah, Sūrat an-Naḥl, Ṣaḥīḥ Muslim** und weiteren arabischen Quellenbezeichnungen gemeldet. Der bisherige Sprechweg wandelte sogar Quellen- und Versnummern zu vorgetragenen deutschen Zahlwörtern um. Das war falsch.
+
+**Klare Trennung von sichtbarem Text und Audio:**
+
+| Sichtbare Angabe in der Lektion (bleibt unverändert) | Vorgesehener Sprechtext (ohne Quellen-IDs) |
+|---|---|
+| Sūrat at-Tawbah 9:119 | Sūrat at-Tawbah |
+| Sūrat an-Naḥl 16:90 | Sūrat an-Naḥl |
+| Ṣaḥīḥ Muslim 2607a | Ṣaḥīḥ Muslim |
+| Qurʾān 9:119 | Qurʾān |
+
+**Arabische Referenzschreibweise zur Fuṣḥā-Hörprüfung:** سُورَةُ التَّوْبَةِ · سُورَةُ النَّحْلِ · صَحِيحُ مُسْلِمٍ. Diese Schreibweise bzw. eine Latin-Normalisierung allein beweist **keine** korrekte TTS-Ausgabe. Echte Master-Audiobibliothek und eigene kontrollierte arabische Segmente zuerst prüfen und an realen Hörproben bestätigen.
+
+Die Richtlinie `kids/data/academy-voice-policy-v10.json` enthält `production.ownerPronunciationHold.enabled: true`. Der zentrale KIDS-Generator `kids/tools/build-academy-v9-staging.py::generate_audio` sperrt sämtliche kostenpflichtige Erzeugung **vor** dem Cloudflare-/ElevenLabs-Aufruf. `kids/tools/academy_source_voice.py` erstellt unabhängig von sichtbaren Quellenangaben einen nummernfreien Sprechtext; unbekannte oder fehlerhaft artikulierte Surennamen bleiben auf Halt bis zur Hörfreigabe.
+
+Die **zwölf Fuṣḥā-sensiblen Ṣidq-Originalaufnahmen** sind im bestehenden Staging ausdrücklich mit `ownerPronunciationHold` markiert; drei davon enthalten Quellen-IDs im Originaltext und sind für die bisherige Sprechfassung klar zurückgewiesen. Ursprüngliche Audiodateien werden zur Diagnose aufbewahrt, jedoch nicht veröffentlicht und nicht in den Freigabebestand übernommen. Auch die übrigen 132 Originale sind weiterhin **nicht** menschlich hörfreigegeben. **Kein öffentliches KIDS-/TestFlight-Deployment, kein Einfluss auf Adult-Apps, keine ungeprüfte Neuaufnahme und keine neuen Credits.**
+
+Vor Aufhebung des Stopps: Fuṣḥā-Sprechausgaben mit Master-Audiobibliothek vergleichen, nummernfreie Sprechtexte kontrollieren, nur konkret bemängelte Aufnahmen mit ausdrücklicher erneuter Freigabe kostenbewusst neu produzieren, alle Hörproben auf dem echten Endgerät freigeben.
