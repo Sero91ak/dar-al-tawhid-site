@@ -4,7 +4,7 @@
   "statementId": "statement:ibn-taymiyyah-muwaddah-kinship-need-20261111",
   "group": "DĀR AL TAWḤĪD Zentrale",
   "kind": "classical-aqidah",
-  "status": "editorial-preflight",
+  "status": "reviewed-for-publication-pre-live-check",
   "sourceNumber": 56,
   "qSourceId": 56,
   "canonicalUrl": "https://dar-al-tawhid.de/q/56/",
@@ -46,9 +46,17 @@
     "es"
   ],
   "approvedLocales": [
-    "de"
+    "de",
+    "ar",
+    "en",
+    "tr",
+    "ku",
+    "ckb",
+    "bs",
+    "fr",
+    "es"
   ],
-  "localeReviewStatus": "DE original verified; 8 draft-language quotations aligned to full Arabic excerpt, NOT independently approved. Reader continues DE fallback.",
+  "localeReviewStatus": "2026-11-11: GPT-6 model-led Arabic source and nine-language semantic editorial review; no independent human/native-speaker review.",
   "sourceArabicImmutable": true,
   "contentScope": "Specific motive-based distinction, not a universal judgment on naturalisation or all forms of religious loyalty.",
   "locales": {
@@ -711,15 +719,13 @@
     }
   },
   "learningPath": "/lernen/ibn-taymiyyah-muwaddah/",
-  "pendingReviewLocales": [
-    "ar",
-    "en",
-    "tr",
-    "ku",
-    "ckb",
-    "bs",
-    "fr",
-    "es"
-  ],
-  "sourceLinkReview": "Three grounded links: primary classical Arabic, second source (hadith or independent Arabic digital text), volume PDF or scanned source; printed page may vary by edition."
+  "pendingReviewLocales": [],
+  "sourceLinkReview": "Three grounded links: primary classical Arabic, second source (hadith or independent Arabic digital text), volume PDF or scanned source; printed page may vary by edition.",
+  "qualityAssurance": {
+    "originalArabicVerified": true,
+    "allNineLocaleManuscriptsModelReviewed": true,
+    "humanIndependentReviewed": false,
+    "quizQuestionsPerLocale": 4,
+    "scopeLimit": "Not an automatic citizenship ruling; no blanket license for betrayal, hostility or creed denial"
+  }
 }
