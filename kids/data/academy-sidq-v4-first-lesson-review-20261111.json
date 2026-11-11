@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "id": "TAWHID_KIDS_ACADEMY_SIDQ_V4_FIRST_LESSON_REVIEW_20261111",
+  "lessonId": "sidq",
+  "title": "Ṣidq – Wahrhaftigkeit",
+  "status": "generated-for-human-listening-not-approved",
+  "appPublicPlaybackAllowed": false,
+  "stagingOnly": true,
+  "source": "ElevenLabs Creative V4 flow",
+  "flowId": "DvdmSBr96KENAB0A4450",
+  "flowUrl": "https://elevenlabs.io/app/flows/DvdmSBr96KENAB0A4450",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "voiceName": "Serhat Abu Malik – Master",
+  "modelId": "eleven_v4",
+  "productionEnvironment": "ElevenLabs Creative (not canonical DAR Voice Studio)",
+  "dictionary": {
+    "canonicalId": "Q8w3SxtoVo8NSjsnlJEd",
+    "applied": false,
+    "reason": "Creative generation connector does not expose pronunciation_dictionary_locators; requires owner listening and canonical production route before public approval"
+  },
+  "voiceSettings": {
+    "canonicalKidsStoryProfileApplied": "not-verified",
+    "reason": "Creative V4 settings do not expose complete kids_story speed/style/speaker boost configuration"
+  },
+  "quranRecitationIncluded": false,
+  "ageTarget": "4-5",
+  "profiles": [
+    "boy",
+    "girl"
+  ],
+  "totalCredits": 158.06242346938774,
+  "clips": [
+    {
+      "id": "salamu-v4-ar-first",
+      "generationId": "F19MelsiFiFBA2Wcr68J",
+      "sessionId": "HXLrPokttd1Om6CXRwwC",
+      "spokenScript": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ.",
+      "displayText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+      "languageCode": "ar",
+      "durationSeconds": 3.44,
+      "credits": 51.440433673469386,
+      "qaStatus": "technical-generated-awaiting-human-fusha-and-voice-profile-review",
+      "approvedForPlayback": false,
+      "binaryImportedToRepository": false
+    },
+    {
+      "id": "sidq-v4-age4-5-lead",
+      "generationId": "SHVzvBzMf4HnPHYLoUrP",
+      "sessionId": "QXUgzwzE4tfrs7UhHRp8",
+      "spokenScript": "Die Wahrheit sagen – das ist ehrlich.",
+      "displayText": "Die Wahrheit sagen – das ist ehrlich.",
+      "languageCode": "de",
+      "durationSeconds": 2.88,
+      "credits": 34.60538265306122,
+      "qaStatus": "technical-generated-awaiting-human-fusha-and-voice-profile-review",
+      "approvedForPlayback": false,
+      "binaryImportedToRepository": false
+    },
+    {
+      "id": "sidq-v4-age4-5-line1",
+      "generationId": "jwIuFuCKkS1EZxo02g2X",
+      "sessionId": "dAiryLebygi8g6N4mZtX",
+      "spokenScript": "Manchmal geht etwas aus Versehen kaputt.",
+      "displayText": "Manchmal geht etwas aus Versehen kaputt.",
+      "languageCode": "de",
+      "durationSeconds": 2.64,
+      "credits": 37.41122448979591,
+      "qaStatus": "technical-generated-awaiting-human-fusha-and-voice-profile-review",
+      "approvedForPlayback": false,
+      "binaryImportedToRepository": false
+    },
+    {
+      "id": "sidq-v4-age4-5-line2",
+      "generationId": "LaFi2YXKWdqTzrLTwq6B",
+      "sessionId": "uUKhVBI15u496yCDMGwo",
+      "spokenScript": "Du darfst ehrlich sagen: Das war ich.",
+      "displayText": "Du darfst ehrlich sagen: Das war ich.",
+      "languageCode": "de",
+      "durationSeconds": 2.64,
+      "credits": 34.60538265306122,
+      "qaStatus": "technical-generated-awaiting-human-fusha-and-voice-profile-review",
+      "approvedForPlayback": false,
+      "binaryImportedToRepository": false
+    }
+  ],
+  "releaseBlockers": [
+    "No pronunciation dictionary applied on Creative path",
+    "Canonical kids_story voice settings not fully verified",
+    "No owner human playback/phonetic approval",
+    "Four binaries remain in ElevenLabs flow; not imported to kids/assets",
+    "Entire first lesson has additional unrecorded phrases for ages 4–5, 6–8 and 9–10"
+  ],
+  "notice": "Do not infer SHA-256, settings equivalence, or approval from generated previews. Never regenerate an already generated clip to retrieve it; fetch existing generation by ID."
+}
