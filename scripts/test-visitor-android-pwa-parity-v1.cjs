@@ -33,9 +33,9 @@ for(const key of [
 assert.match(shell,/20261030-profile-single-hub-v10/);
 assert.match(get("assets/dar-visitor-profile-picker-v1.js"),/data-dvp-quick="hub"/,"One Mein DĀR entry missing");
 assert.equal((get("assets/dar-visitor-profile-picker-v1.js").match(/data-dvp-quick="/g)||[]).length,1,"Profile popup should not display four separate shortcuts");
-assert.match(shell,/dar-home-test-parity-visitor\\.js\\?v=20261111-home-performance-v1/,
+assert.match(shell,/dar-home-test-parity-visitor\.js\?v=20261111-home-performance-v1/,
   "Android/iOS must receive the updated Home JS instead of the stale 20261031 URL");
-assert.match(shell,/adult-hero-height-runtime-v1403\\.js\\?v=visitor-hero-safearea-v1404-20261111-scroll-performance-v1/,
+assert.match(shell,/adult-hero-height-runtime-v1403\.js\?v=visitor-hero-safearea-v1404-20261111-scroll-performance-v1/,
   "Android/iOS scroll runtime must use the refreshed immutable asset URL");
 assert.match(shell,/dar-noble-3d-icons\.js\?v=20261030-android-global-parity-v8/);
 assert.match(shell,/dar-adult-brand-header-v2\.css\?v=20261107-compact-safearea-header-v3/);
