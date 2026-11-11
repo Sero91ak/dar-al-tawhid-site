@@ -855,7 +855,7 @@
       "sha256": "b1f02cb1561030fadddbf73e605c88a8c9cc398761f9408782419c10b368e557",
       "preparedSha256": "cfe02d364e949c20d987b3132f39648c24f5fd5e440442ad95a2f2be0b48a29e",
       "sourceSha256": "8fdadb6b423dcd7f0256239347c1346d806a8287ded3503ca8067caf432917d1",
-      "durationSeconds": 6.0,
+      "durationSeconds": 6,
       "contexts": [
         {
           "lessonId": "aqidah-tawhid-recht-allahs",
@@ -1555,7 +1555,7 @@
       "sha256": "d24a5bfedf397a2806452a1b1568694f763063f78126788140ab138edcd57a6b",
       "preparedSha256": "08d182806e4f921d01c19802130b85a655bdb7252c89ee6ae2860a6d6ab07c9a",
       "sourceSha256": "9b4a6804c7234ca0d088c45edca2d465c2ea7c9e403a2b00c6de558e85f8b91c",
-      "durationSeconds": 4.0,
+      "durationSeconds": 4,
       "contexts": [
         {
           "lessonId": "aqidah-ikhlas-warum-gutes-tun",
@@ -1886,5 +1886,28 @@
       "sourceAuditProven": true,
       "approvedForPlayback": false
     }
+  },
+  "ownerGlobalArabicPronunciationReview": {
+    "date": "2026-11-11",
+    "holdsAllStagedClips": true,
+    "unverifiedClipCount": 64,
+    "ownerRejectsCurrentArabicPronunciation": true,
+    "arabicWordsNotOnlySourceLabels": true,
+    "examples": [
+      "Ṣidq",
+      "aṣ-Ṣiddīq",
+      "Sūrat at-Tawbah",
+      "Sūrat an-Naḥl",
+      "Ṣaḥīḥ Muslim",
+      "Qurʾān",
+      "Ḥadīṯ",
+      "Sunnah",
+      "Allah"
+    ],
+    "exactArabicMasterAliasIsNotAudioApproval": true,
+    "requiresHumanFullClipReview": true,
+    "publicReleaseAllowed": false,
+    "noRegenerationUntilOwnerReview": true,
+    "scope": "TAWḤĪD KIDS Academy only"
   }
 }
