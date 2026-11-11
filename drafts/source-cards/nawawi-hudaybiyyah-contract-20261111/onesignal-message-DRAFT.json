@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "created": "2026-11-11",
+  "status": "draft-not-sent",
+  "appName": "DĀR AL TAWḤĪD APP",
+  "channel": "push",
+  "target": "DAR_PUSH",
+  "postId": "nawawi-hudaybiyyah-contract-20261111",
+  "qSourceId": null,
+  "sourceUrl": null,
+  "visitorPostUrl": null,
+  "idempotencyKey": null,
+  "title": {
+    "de": "Der Vertrag von al-Ḥudaybiyyah – Weglassen ist nicht Verleugnen"
+  },
+  "body": {
+    "de": "Das Weglassen einer wahren Bezeichnung im Vertrag ist nicht zwangsläufig ihre Verleugnung; ausdrücklich verbotene Aussagen sind getrennt zu beurteilen."
+  },
+  "otherLanguages": "Payload for other 8 languages withheld until religious content and targeting have been reviewed.",
+  "mandatoryPreflight": [
+    "Explicit owner approval of a concrete Q-number",
+    "Q source and learner page publicly available",
+    "Correct post ID in public app index",
+    "Independent religious and linguistic review",
+    "Proven live deployment for web/iOS/PWA routes",
+    "Confirmed DAR_PUSH opt-in recipient filter",
+    "No previous sends for this ID",
+    "Push approval and notification copy verified"
+  ],
+  "providerSendId": null,
+  "delivered": false
+}
