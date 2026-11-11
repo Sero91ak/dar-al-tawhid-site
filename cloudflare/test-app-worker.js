@@ -580,6 +580,13 @@ async function finalizeDarTestHomeV1193(asset) {
     html = html.includes("</body>") ? html.replace("</body>",compactCss+"</body>") : html+compactCss;
   }
 
+  /* DAR_ADULT_KEYBOARD_NAV_STABILITY_V1_20261111:
+   * force browser/PWA SW to refetch the original shared adaptive-layout
+   * JS/CSS for Test, without altering Test nav markup or other routes.
+   */
+  html = html.replace(/(\/assets\/adaptive-layout\.(?:js|css))(?:\?[^"'\s<>]*)?/g,
+    "$1?v=20261111-adult-keyboard-nav-stable-v1");
+
   const headers = new Headers(asset.headers);
   headers.set("X-DAR-Test-Scroll-Boundary", "v3");
   headers.set("X-DAR-Test-Home", "html-parity-v50-20261020");

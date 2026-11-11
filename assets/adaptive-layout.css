@@ -324,8 +324,24 @@ body.has-bottom-nav .float-actions {
   bottom: calc(var(--dar-nav-height) + 0.5cm + max(0px, calc(env(safe-area-inset-bottom) - 22px)) + 3mm);
 }
 
-html.adaptive-keyboard-open #bottomNav.bottom-nav {
-  bottom: max(8px, calc(var(--layout-vv-offset-top, 0px) + 8px)) !important;
+/* DAR_ADULT_KEYBOARD_NAV_STABILITY_V1_20261111
+ * The keyboard MUST NOT reposition or resize the original glass navigation.
+ * During editing, hide only its paint & hit testing, with a stable DOM box.
+ * Never set display:none, bottom, transform, scrollTop or visualViewport height.
+ * The CSS geometry owner remains the normal bottom-nav global styles.
+ */
+html[data-theme].dar-adult-text-entry-active body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav,
+html[data-theme].dar-adult-text-entry-active body.has-bottom-nav #bottomNav.bottom-nav,
+html.dar-adult-text-entry-active body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav,
+html.dar-adult-text-entry-active body.has-bottom-nav #bottomNav.bottom-nav,
+html[data-theme].adaptive-keyboard-open body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav,
+html[data-theme].adaptive-keyboard-open body.has-bottom-nav #bottomNav.bottom-nav,
+html.adaptive-keyboard-open body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav,
+html.adaptive-keyboard-open body.has-bottom-nav #bottomNav.bottom-nav {
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  transition:none!important;
 }
 
 html[data-layout] body {

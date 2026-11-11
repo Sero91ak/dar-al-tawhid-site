@@ -1267,6 +1267,16 @@ async function serveKidsIntroVideo(request, url, env) {
  * Presentation only: original V1416 fixed HeroDock and Frauen renderer survive.
  * Loaded once, after legacy Frauen visual CSS, only for adult app HTML.
  * Do not send this stylesheet to public browser desktop, Kids or Admin. */
+/* DAR_ADULT_KEYBOARD_NAV_STABILITY_V1_20261111: force a fresh version of
+ * the already shared adaptive layout owner in app HTML only, not on the public
+ * desktop site or Kids. Critical for old iOS TestFlight WebKit and PWA SW caches.
+ * Keep the same DOM/nav node; only the existing asset URL key changes.
+ */
+function injectAdultKeyboardNavAssetVersionV1(html) {
+  if (typeof html !== "string" || !html) return html;
+  return html.replace(/(\/assets\/adaptive-layout\.(?:js|css))(?:\?[^"'\s<>]*)?/g,
+    "$1?v=20261111-adult-keyboard-nav-stable-v1");
+}
 function injectFrauenCompactEditorialV1417(html) {
   if (typeof html !== "string" || !html) return html;
   if (html.includes('id="darFrauenCompactEditorialV1417"')) return html;
@@ -1633,6 +1643,7 @@ export default {
       if (assetResponse.ok) html = activateAdultGlobalBrandV2(html);
       if (assetResponse.ok) html = injectAdultReaderRuntimeV5(html);
       if (assetResponse.ok) html = injectFrauenCompactEditorialV1417(html);
+      if (assetResponse.ok) html = injectAdultKeyboardNavAssetVersionV1(html);
       if (assetResponse.ok && !html.includes("dar-onesignal-language-sync.js")) {
         const localeTag = '<script defer id="darAdultOneSignalLocaleV1" src="/assets/dar-onesignal-language-sync.js?v=1"></script>';
         html = html.includes("</body>") ? html.replace("</body>", localeTag + "</body>") : html + localeTag;
@@ -1853,6 +1864,7 @@ export default {
       if (assetResponse.ok) html = activateAdultGlobalBrandV2(html);
       if (assetResponse.ok) html = injectAdultReaderRuntimeV5(html);
       if (assetResponse.ok) html = injectFrauenCompactEditorialV1417(html);
+      if (assetResponse.ok) html = injectAdultKeyboardNavAssetVersionV1(html);
       if (assetResponse.ok && !html.includes("frauen-live-adapter.js")) {
         const frauenAddon = liveFrauenNativeAddon();
         html = html.includes("</body>") ? html.replace("</body>", frauenAddon + "</body>") : html + frauenAddon;
@@ -1955,6 +1967,7 @@ export default {
         }
         html = injectAdultReaderRuntimeV5(html);
         html = injectFrauenCompactEditorialV1417(html);
+        html = injectAdultKeyboardNavAssetVersionV1(html);
         headers.set("X-DAR-Test-Home", "smart-v3-20261020");
         headers.set("Content-Type", "text/html; charset=utf-8");
         headers.delete("Content-Length");

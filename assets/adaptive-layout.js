@@ -49,7 +49,12 @@
        keeps the whole app in the old breakpoint after rotating back. */
     var w = clientW || innerW || vvW || 0;
     var h = clientH || innerH || vvH || 0;
-    if (vvW > 0 && vvH > 0 && clientW > 0 && clientH > 0) {
+    /* Virtual-keyboard height is NOT a device orientation/size change.
+       Freeze adaptive breakpoints to the layout viewport while typing,
+       otherwise portrait screens reflow to a landscape/compact layout. */
+    var keyboardIme = vvH > 0 && clientH > 0 &&
+      clientH - vvH > 120 && editableField(document.activeElement);
+    if (vvW > 0 && vvH > 0 && clientW > 0 && clientH > 0 && !keyboardIme) {
       var vvLandscape = vvW >= vvH;
       var clientLandscape = clientW >= clientH;
       if (vvLandscape === clientLandscape) {
@@ -58,7 +63,8 @@
       }
     }
     var offsetTop = vv && typeof vv.offsetTop === "number" ? vv.offsetTop : 0;
-    return { width: w, height: h, offsetTop: offsetTop };
+    return { width: w, height: h, offsetTop: offsetTop,
+      visualHeight: vvH, layoutHeight: clientH || innerH || h };
   }
 
   function navPreference() {
@@ -176,13 +182,71 @@
 
   function applyKeyboardState(metrics) {
     var root = document.documentElement;
-    var layoutH =
+    var layoutH = metrics.layoutHeight ||
       document.documentElement.clientHeight || global.innerHeight || metrics.height;
+    var visualH = metrics.visualHeight || metrics.height;
     var keyboardLikely =
-      metrics.height > 0 && layoutH > 0 && metrics.height < layoutH - 120;
+      visualH > 0 && layoutH > 0 && visualH < layoutH - 120 &&
+      (editableField(document.activeElement) || editSession);
     root.classList.toggle("adaptive-keyboard-open", !!keyboardLikely);
     root.style.setProperty("--layout-vv-height", metrics.height + "px");
     root.style.setProperty("--layout-vv-offset-top", (metrics.offsetTop || 0) + "px");
+  }
+
+  /* DAR_ADULT_KEYBOARD_NAV_STABILITY_V1_20261111
+   * One EXISTING adaptive layout owner handles input/IME state. CSS owns
+   * the original five-tab Dock geometry: do not reparent it, mutate style,
+   * scroll the document or move it to the keyboard's visual viewport edge.
+   * An active editable field hides only the dock's VISIBILITY; after the
+   * keyboard closes it returns to precisely the same fixed bottom position.
+   */
+  var editSession = false;
+  var editRestoreTimer = 0;
+  function editableField(target) {
+    if (!target || target.disabled || target.readOnly) return false;
+    if (target.isContentEditable) return true;
+    var tag = String(target.tagName || "").toUpperCase();
+    if (tag === "TEXTAREA") return true;
+    if (tag !== "INPUT") return false;
+    return /^(?:text|search|email|url|tel|number|password)$/.test(
+      String(target.type || "text").toLowerCase());
+  }
+  function adultTouchSurface() {
+    if (!document.body || !document.body.classList.contains("has-bottom-nav")) return false;
+    var root = document.documentElement;
+    if (root.classList.contains("dar-ios-native-app") ||
+        root.classList.contains("dar-android-native-app")) return true;
+    if (global.navigator && global.navigator.maxTouchPoints > 0) return true;
+    return !!(global.matchMedia && global.matchMedia("(pointer:coarse)").matches);
+  }
+  function visualKeyboardOpen() {
+    var vv = global.visualViewport;
+    if (!vv || !(vv.height > 0) || (vv.scale && vv.scale > 1.1)) return false;
+    var doc = document.documentElement;
+    var layoutHeight = doc.clientHeight || global.innerHeight || 0;
+    return layoutHeight > 0 && layoutHeight - vv.height > 120;
+  }
+  function syncAdultTypingDock() {
+    var focused = adultTouchSurface() && editableField(document.activeElement);
+    if (focused || (editSession && visualKeyboardOpen())) editSession = true;
+    else editSession = false;
+    document.documentElement.classList.toggle("dar-adult-text-entry-active", editSession);
+  }
+  function onAdultTextFocus(event) {
+    if (!adultTouchSurface() || !editableField(event && event.target)) return;
+    if (editRestoreTimer) { global.clearTimeout(editRestoreTimer); editRestoreTimer = 0; }
+    editSession = true;
+    document.documentElement.classList.add("dar-adult-text-entry-active");
+  }
+  function onAdultTextBlur(event) {
+    if (!editableField(event && event.target) || !editSession) return;
+    if (editRestoreTimer) global.clearTimeout(editRestoreTimer);
+    /* Keep the dock invisible throughout WebKit/Android IME dismissal.
+       A second input focused in the meantime keeps the same session. */
+    editRestoreTimer = global.setTimeout(function () {
+      editRestoreTimer = 0;
+      syncAdultTypingDock();
+    }, 220);
   }
 
   function applyOrientationAttrs(metrics) {
@@ -210,7 +274,17 @@
        changing the viewport. Reassert the measured mode in that case. */
     if (!force && viewportKey === lastAppliedViewportKey &&
         document.documentElement.getAttribute("data-layout") ===
-          resolveLayoutMode(metrics.width, metrics.height)) return;
+          resolveLayoutMode(metrics.width, metrics.height)) {
+      /* A keyboard may shrink VISUAL but not LAYOUT viewport. Update the
+         small keyboard state only, never redo split-pane or bottom-nav size. */
+      var keyboardNow = metrics.visualHeight > 0 &&
+        metrics.layoutHeight > 0 &&
+        metrics.visualHeight < metrics.layoutHeight - 120 &&
+        (editableField(document.activeElement) || editSession);
+      if (keyboardNow !== document.documentElement.classList.contains("adaptive-keyboard-open"))
+        applyKeyboardState(metrics);
+      return;
+    }
     lastAppliedViewportKey = viewportKey;
     var mode = resolveLayoutMode(metrics.width, metrics.height);
     var dual = isDualViewport(metrics.width, metrics.height);
@@ -318,6 +392,9 @@
       return;
     }
     started = true;
+    /* Capture once, including search fields created later by SPA renderers. */
+    document.addEventListener("focusin", onAdultTextFocus, true);
+    document.addEventListener("focusout", onAdultTextBlur, true);
     applyLayout(true);
 
     if (typeof ResizeObserver === "function") {
@@ -347,8 +424,14 @@
     }
 
     global.addEventListener("resize", onResize, { passive: true });
-    global.addEventListener("hashchange", function () { scheduleApply(true); }, { passive: true });
-    global.addEventListener("pageshow", function () { scheduleApply(true); }, { passive: true });
+    global.addEventListener("hashchange", function () {
+      syncAdultTypingDock();
+      scheduleApply(true);
+    }, { passive: true });
+    global.addEventListener("pageshow", function () {
+      syncAdultTypingDock();
+      scheduleApply(true);
+    }, { passive: true });
     global.addEventListener("orientationchange", scheduleOrientBurst, { passive: true });
 
     if (global.screen && global.screen.orientation && typeof global.screen.orientation.addEventListener === "function") {
@@ -359,6 +442,7 @@
 
     if (global.visualViewport) {
       global.visualViewport.addEventListener("resize", onResize, { passive: true });
+      global.visualViewport.addEventListener("resize", syncAdultTypingDock, { passive: true });
     }
 
     document.addEventListener("visibilitychange", function () {
