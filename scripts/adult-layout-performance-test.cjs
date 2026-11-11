@@ -149,6 +149,36 @@ doc.activeElement=checkbox;handles["doc:focusin"]({target:checkbox});
 assert.ok(!classStates.has("dar-adult-text-entry-active"),
  "Checkbox/picker focus must never hide nav");
 assert.equal(navWrites,0,"Five original nav tabs must retain their geometry");
+/* iPad/Fold/Android: real physical layout vs IME visual viewport contract. */
+for(const [label,width,height] of [
+  ["android",430,932],["fold",768,1024],["ipad",1024,1366],
+  ["landscape",844,430]
+]){
+  root.clientWidth=width;root.clientHeight=height;
+  win.innerWidth=width;win.innerHeight=height;
+  win.visualViewport.width=width;win.visualViewport.height=height;
+  doc.activeElement=null;
+  win.DarAdaptiveLayout.start();flushFrames();
+  const originalMode=root.getAttribute("data-layout");
+  const field={tagName:label==="ipad"?"TEXTAREA":"INPUT",type:"search"};
+  doc.activeElement=field;handles["doc:focusin"]({target:field});
+  assert.ok(classStates.has("dar-adult-text-entry-active"),label+": focus must hide nav");
+  win.visualViewport.height=Math.max(200,height-280);
+  handles["vv:resize"]();flushFrames();
+  assert.equal(root.getAttribute("data-layout"),originalMode,
+    label+": keyboard must not change single/Fold/tablet/landscape mode");
+  assert.ok(classStates.has("adaptive-keyboard-open"),label+": IME detected");
+  doc.activeElement=null;handles["doc:focusout"]({target:field});
+  win.visualViewport.height=height;handles["vv:resize"]();flushFrames();
+  assert.ok(!classStates.has("dar-adult-text-entry-active"),label+": nav not restored");
+  assert.equal(navWrites,0,label+": original nav geometry altered");
+}
+win.navigator.maxTouchPoints=0;
+win.matchMedia=()=>({matches:false});
+doc.activeElement=input;handles["doc:focusin"]({target:input});
+assert.ok(!classStates.has("dar-adult-text-entry-active"),
+ "Desktop physical-keyboard focus must keep tabs present");
+doc.activeElement=null;
 console.log("PASS: keyboard focus/blur, viewport resize, nav invisibility and restoration.");
 
 console.log("OK: responsive layout, fold mutation filtering, boot timer/observer lifecycle");
