@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_SIDQ_V30_FUSHA_12_ONESHOT_20261111",
+  "confirmed": "USER_AUTHORIZED_BULK_20261111",
+  "batchSource": "kids/data/academy-sidq-v30-fusha-qa-batches-20261111.json",
+  "preflightRunId": 43001840673,
+  "preflight": "success",
+  "model": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "profile": "kids_story",
+  "maxClips": 12,
+  "perInvocationLimit": 4,
+  "forHumanPronunciationReviewOnly": true,
+  "approvedForPlayback": false,
+  "syntheticQuranRecitationAllowed": false,
+  "sourceLexicon": "data/pronunciation/islamic-expanded-lexicon.json",
+  "billing": "One recording per missing exact phrase; do not regenerate completed assets",
+  "noPublicDeployment": true
+}
