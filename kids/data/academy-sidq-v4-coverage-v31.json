@@ -23,14 +23,17 @@
     "genderGreetingClips": 2,
     "fushaSensitiveHumanReviewPending": 12,
     "allClipsRequireHumanListening": true,
-    "approxDurationSeconds": 406.01
+    "approxDurationSeconds": 406.01,
+    "globalArabicPronunciationHumanReviewPending": 80
   },
   "policy": {
     "stagingOnly": true,
     "noAudioMadePublic": true,
     "noSyntheticQuranRecitation": true,
     "FuṣḥāExactPronunciationNotHumanVerified": true,
-    "releaseBlockedUntilOwnerListening": true
+    "releaseBlockedUntilOwnerListening": true,
+    "languageSensitiveFieldDoesNotProveHumanPronunciation": false,
+    "globalOwnerFushaHold": true
   },
   "entries": [
     {
@@ -1553,5 +1556,28 @@
         }
       ]
     }
-  ]
+  ],
+  "ownerGlobalArabicPronunciationReview": {
+    "date": "2026-11-11",
+    "holdsAllStagedClips": true,
+    "unverifiedClipCount": 80,
+    "ownerRejectsCurrentArabicPronunciation": true,
+    "arabicWordsNotOnlySourceLabels": true,
+    "examples": [
+      "Ṣidq",
+      "aṣ-Ṣiddīq",
+      "Sūrat at-Tawbah",
+      "Sūrat an-Naḥl",
+      "Ṣaḥīḥ Muslim",
+      "Qurʾān",
+      "Ḥadīṯ",
+      "Sunnah",
+      "Allah"
+    ],
+    "exactArabicMasterAliasIsNotAudioApproval": true,
+    "requiresHumanFullClipReview": true,
+    "publicReleaseAllowed": false,
+    "noRegenerationUntilOwnerReview": true,
+    "scope": "TAWḤĪD KIDS Academy only"
+  }
 }
