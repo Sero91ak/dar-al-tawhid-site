@@ -29,7 +29,9 @@ const hasClass = (html, token) => {
 };
 const permittedHosts = new Set([
   'islamweb.net','shamela.ws','dorar.net','al-maktaba.org',
-  'ketabonline.com','archive.org','waqfeya.net','app.turath.io'
+  'ketabonline.com','archive.org','waqfeya.net','app.turath.io',
+  // Verified classical original / scanned-book / authentic Hadith references for Q54–Q56.
+  'sunnah.com','al-bayan.online','ablibrary.net','wikisource.org','ibntaymia.net'
 ]);
 function permitted(host) {
   return [...permittedHosts].some(x => host === x || host.endsWith('.' + x));
