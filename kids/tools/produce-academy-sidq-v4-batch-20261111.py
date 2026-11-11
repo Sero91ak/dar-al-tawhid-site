@@ -74,13 +74,23 @@ def main():
     exact=request.get("exactPhrases") or []
     if len(exact)!=4 or len(set(exact))!=4 or not set(exact)<=allowed:
         raise RuntimeError("Non-canonical, duplicate or incorrect phrases; zero credits used")
+    # Full Salām has one explicitly reviewed canonical Arabic spelling and must
+    # synthesize as a native ar-only segment. Never let the global PLS replace
+    # German words with unrelated Arabic script (the historical 'Nur' collision).
+    native_fusha={
+        "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ."
+    }
     prepared={}
     for phrase in exact:
-        val=prepare_kids_voice_text(phrase)
+        val=native_fusha.get(phrase) or prepare_kids_voice_text(phrase,apply_pronunciation=False)
         if not val.strip() or len(val)>700:
             raise RuntimeError("Invalid prepared phrase; zero credits used")
-        if any("\u0600" <= ch <= "\u06ff" for ch in val) and any(("a" <= ch.lower() <= "z") for ch in val):
+        arabic=any("\u0600" <= ch <= "\u06ff" for ch in val)
+        latin=any(("a" <= ch.lower() <= "z") for ch in val)
+        if arabic and (latin or phrase not in native_fusha):
             raise RuntimeError("Unsafe mixed-script synthesis; split language segments first")
+        if phrase in native_fusha and not arabic:
+            raise RuntimeError("Canonical native Arabic greeting lost; zero credits used")
         prepared[phrase]=val
     total=sum(len(t) for t in prepared.values())
     if total>650:
@@ -126,7 +136,7 @@ def main():
             duration=voice.technical_duration(dest)
         else:
             print(f"Generating 1 canonical V4 staging clip: {len(prepared[phrase])} chars",flush=True)
-            duration=voice.generate_audio(phrase,dest,secret)
+            duration=voice.generate_audio(phrase,dest,secret,prepared_override=prepared[phrase])
         entries[phrase]={
             "url":"/"+dest.relative_to(ROOT).as_posix(),
             "sha256":hashlib.sha256(dest.read_bytes()).hexdigest(),
@@ -139,7 +149,7 @@ def main():
             "sourceVoice":"authorized-owner-voice",
             "sourceSpeaker":"Serhat Abu Malik",
             "sourceType":"owner-voice-generated",
-            "pronunciationPreparation":"kids/tools/voice_text.py verified master substitution",
+            "pronunciationPreparation":"native Fuṣḥā Arabic-only for canonical Salām; otherwise exact German without unsafe cross-language PLS",
             "pronunciationDictionaryAppliedByBackend":False,
             "qaStatus":"technical-passed-awaiting-human-fusha-review",
             "approvedForPlayback":False,
