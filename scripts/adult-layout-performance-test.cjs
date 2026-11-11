@@ -179,6 +179,19 @@ doc.activeElement=input;handles["doc:focusin"]({target:input});
 assert.ok(!classStates.has("dar-adult-text-entry-active"),
  "Desktop physical-keyboard focus must keep tabs present");
 doc.activeElement=null;
+/* Both published adult lanes MUST fetch the revised JS/CSS after cached
+ * WebView/Test SW clients open. Public desktop HTML remains untouched. */
+const nativeWorker=fs.readFileSync(path.join(__dirname,"../cloudflare/site-router.js"),"utf8");
+const testWorker=fs.readFileSync(path.join(__dirname,"../cloudflare/test-app-worker.js"),"utf8");
+const cacheKey="20261111-adult-keyboard-nav-stable-v1";
+assert.match(nativeWorker,/function injectAdultKeyboardNavAssetVersionV1\(html\)/);
+assert.equal((nativeWorker.match(/injectAdultKeyboardNavAssetVersionV1\(html\);/g)||[]).length,3,
+ "Use new assets for actual iOS, Android PWA and Test fallback, not public desktop");
+assert.ok(nativeWorker.includes(cacheKey),"Visitor and native WebView must cache-bust keyboard layout");
+assert.ok(testWorker.includes(cacheKey),"DAR Test must cache-bust shared keyboard layout");
+assert.ok(nativeWorker.includes("injectAdultReaderRuntimeV5(html)"),
+ "Existing readers/heroes remain routed by their independent owner");
+
 console.log("PASS: keyboard focus/blur, viewport resize, nav invisibility and restoration.");
 
 console.log("OK: responsive layout, fold mutation filtering, boot timer/observer lifecycle");
