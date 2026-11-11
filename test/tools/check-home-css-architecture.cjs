@@ -85,4 +85,24 @@ assert(uniformRim && uniformRim.includes("border:1px solid var(--dhp-capsule-rim
   "Resting capsule border is not complete");
 assert(uniformRim.includes("border-image:none!important"), "Gradient border image can hide capsule edges");
 
+// Regression: the TestFlight WebView uses the visitor shell, while DAR TEST
+// uses a separate Home script. Keep both search slots visible and compact.
+const visitorSource=fs.readFileSync(path.join(root,"assets/dar-home-test-parity-visitor.js"),"utf8");
+new vm.Script(visitorSource,{filename:"dar-home-test-parity-visitor.js"});
+function homeStyles(script){
+  const a=script.indexOf("function stylesheet(){"),b=script.indexOf("\nfunction create()",a);
+  assert(a>=0&&b>a,"Home stylesheet function missing");
+  return vm.runInNewContext(script.slice(a,b)+"\nstylesheet()");
+}
+for(const [surface,style] of [["DAR TEST",actualCss],["iOS visitor",homeStyles(visitorSource)]]){
+  for(const rule of [
+    ".dhp-quickbar + .dhp-search-box{display:block!important;position:relative!important;visibility:visible!important;opacity:1!important",
+    ".dhp-quickbar + .dhp-search-box[hidden]{display:none!important;margin:0!important;}",
+    ".dhp-quickbar + .dhp-search-box .dhp-search-pill{display:flex!important;visibility:visible!important;opacity:1!important",
+    ".dhp-search-box + .dhp-quran-section,#darHomeHtmlParityV1 .dhp-quickbar + .dhp-quran-section{margin-top:12px!important;}"
+  ])assert(style.includes(rule),surface+": canonical Search/Qurʾān flow rule absent");
+  assert(style.lastIndexOf(".dhp-search-box + .dhp-quran-section")>
+    style.indexOf(".dhp-quran-section{margin-top:"),surface+": gap rule lost to legacy CSS");
+}
+
 console.log("PASS — DĀR TEST active Home CSS: dead selectors absent, capsules intact, routes isolated.");
