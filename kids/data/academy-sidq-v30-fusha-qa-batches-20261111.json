@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_ACADEMY_SIDQ_FUSHA_V30_20261111_QA",
+  "model": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "voiceProfile": "kids_story",
+  "pronunciationSource": "data/pronunciation/islamic-expanded-lexicon.json + Ṣidq 9:119 Arabic orthography",
+  "globalUnsafePLSApplied": false,
+  "policy": {
+    "humanApprovalRequired": true,
+    "publicRelease": false,
+    "noSyntheticQuranRecitation": true,
+    "sourceTextImmutable": true,
+    "unicodeArabicSegmentReview": true
+  },
+  "maxClipsPerInvocation": 4,
+  "batches": [
+    {
+      "batchIndex": 0,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "items": [
+        {
+          "text": "Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.",
+          "age": "6-8",
+          "kind": "narration",
+          "prepared": "Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.",
+          "source": "KIDS first-lesson V30 exact phrase",
+          "ruleTag": "master-fusha-v4-20261111",
+          "qaRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Allah fordert die Gläubigen in Sūrat at-Tawbah 9:119 auf, mit den Wahrhaftigen zu sein. In Ṣaḥīḥ Muslim 2607a beschreibt der Prophet ﷺ Wahrhaftigkeit als einen Weg zur Rechtschaffenheit. Daraus lernen wir, beim Sprechen und Handeln aufrichtig zu bleiben.",
+          "age": "9-10",
+          "kind": "narration",
+          "prepared": "Allah fordert die Gläubigen in سُورَةُ التَّوْبَة, Vers einhundertneunzehn auf, mit den Wahrhaftigen zu sein. In صحيح مُسْلِم, Nummer zweitausendsechshundertsieben a beschreibt der Prophet صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ Wahrhaftigkeit als einen Weg zur Rechtschaffenheit. Daraus lernen wir, beim Sprechen und Handeln aufrichtig zu bleiben.",
+          "source": "KIDS first-lesson V30 exact phrase",
+          "ruleTag": "master-fusha-v4-20261111",
+          "qaRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Allah ruft uns dazu auf, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt.",
+          "age": "6-8",
+          "kind": "summary",
+          "prepared": "Allah ruft uns dazu auf, mit den Wahrhaftigen zu sein. Der Prophet صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt.",
+          "source": "KIDS first-lesson V30 exact phrase",
+          "ruleTag": "master-fusha-v4-20261111",
+          "qaRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Allah sagt uns im Qurʾān, dass wir mit den Wahrhaftigen sein sollen. Der Prophet ﷺ erklärte, wie gut Wahrhaftigkeit ist. Deshalb sagen wir die Wahrheit, auch wenn wir einen Fehler machen.",
+          "age": "4-5",
+          "kind": "narration",
+          "prepared": "Allah sagt uns im القرآن, dass wir mit den Wahrhaftigen sein sollen. Der Prophet صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ erklärte, wie gut Wahrhaftigkeit ist. Deshalb sagen wir die Wahrheit, auch wenn wir einen Fehler machen.",
+          "source": "KIDS first-lesson V30 exact phrase",
+          "ruleTag": "master-fusha-v4-20261111",
+          "qaRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 1,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "items": [
+        {
+          "text": "Heute beschäftigen wir uns mit Ṣidq: Warum ist die Wahrheit wichtig, und wie handeln wir nach einem Fehler? Wir lernen anhand von Qurʾān und Sunnah und erklären das Thema mit eigenen Worten.",
+          "age": "9-10",
+          "kind": "narration",
+          "prepared": "Heute beschäftigen wir uns mit صِدْق: Warum ist die Wahrheit wichtig, und wie handeln wir nach einem Fehler? Wir lernen anhand von القرآن und السنة und erklären das Thema mit eigenen Worten.",
+          "source": "KIDS first-lesson V30 exact phrase",
+          "ruleTag": "master-fusha-v4-20261111",
+          "qaRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Qurʾān 9:119 und der Ḥadīṯ in Ṣaḥīḥ Muslim 2607a verdeutlichen die Bedeutung der Wahrhaftigkeit.",
+          "age": "9-10",
+          "kind": "summary",
+          "prepared": "القرآن, Sūrah neun, Vers einhundertneunzehn und der الحديث in صحيح مُسْلِم, Nummer zweitausendsechshundertsieben a verdeutlichen die Bedeutung der Wahrhaftigkeit.",
+          "source": "KIDS first-lesson V30 exact phrase",
+          "ruleTag": "master-fusha-v4-20261111",
+          "qaRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Ṣidq bedeutet Wahrhaftigkeit. Sie zeigt sich auch dann, wenn Ehrlichkeit Mut kostet.",
+          "age": "9-10",
+          "kind": "summary",
+          "prepared": "صِدْق bedeutet Wahrhaftigkeit. Sie zeigt sich auch dann, wenn Ehrlichkeit Mut kostet.",
+          "source": "KIDS first-lesson V30 exact phrase",
+          "ruleTag": "master-fusha-v4-20261111",
+          "qaRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Was lehrt uns der Vers aus Sūrat at-Tawbah 9:119?",
+          "age": "6-8",
+          "kind": "question",
+          "prepared": "Was lehrt uns der Vers aus سُورَةُ التَّوْبَة, Vers einhundertneunzehn?",
+          "source": "KIDS first-lesson V30 exact phrase",
+          "ruleTag": "master-fusha-v4-20261111",
+          "qaRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 2,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "items": [
+        {
+          "text": "Welche Aussage entspricht dem Ḥadīṯ über Wahrhaftigkeit?",
+          "age": "9-10",
+          "kind": "question",
+          "prepared": "Welche Aussage entspricht dem الحديث über Wahrhaftigkeit?",
+          "source": "KIDS first-lesson V30 exact phrase",
+          "ruleTag": "master-fusha-v4-20261111",
+          "qaRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Denke an Vertrauen und das Wort des Propheten ﷺ.",
+          "age": "9-10",
+          "kind": "hint",
+          "prepared": "Denke an Vertrauen und das Wort des Propheten صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ.",
+          "source": "KIDS first-lesson V30 exact phrase",
+          "ruleTag": "master-fusha-v4-20261111",
+          "qaRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt und diese zum Paradies.",
+          "age": "9-10",
+          "kind": "explanation",
+          "prepared": "Der Prophet صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt und diese zum Paradies.",
+          "source": "KIDS first-lesson V30 exact phrase",
+          "ruleTag": "master-fusha-v4-20261111",
+          "qaRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Lies dir die kurze deutsche Bedeutung des Qurʾān-Verses noch einmal durch.",
+          "age": "6-8",
+          "kind": "hint",
+          "prepared": "Lies dir die kurze deutsche Bedeutung des القرآن-Verses noch einmal durch.",
+          "source": "KIDS first-lesson V30 exact phrase",
+          "ruleTag": "master-fusha-v4-20261111",
+          "qaRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    }
+  ],
+  "count": 12,
+  "characters": 1786
+}
