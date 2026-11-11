@@ -15,15 +15,15 @@
 | Erste Lektion Ṣidq | 80 eindeutige exakte V30-Sprechtexte (drei Altersstufen, beide Profile), 8 Fragen |
 | Ṣidq Pilot-V4 | 4 echte V4-Aufnahmen unter `kids/data/academy-audio-staging-sidq-v4-20261111.json` |
 | Ṣidq V30 V4 | 64 zusätzliche echte V4-Aufnahmen unter `kids/data/academy-audio-staging-sidq-v30-20261111.json` |
-| Ṣidq Aufnahmeabdeckung | 68/80 erstellt, 0/80 menschlich für die Kinder-App freigegeben |
-| Ṣidq offene Aussprache | 12 Texte mit Fuṣḥā-Fachwörtern, Qurʾān-/Ḥadīṯ-Namen oder ﷺ auf explizitem Hold |
+| Ṣidq Aufnahmeabdeckung | 80/80 echte V4-Audiodateien im Prüfzweig erfasst, 0/80 menschlich für die Kinder-App freigegeben |
+| Ṣidq Aussprachefreigabe | 12 Fuṣḥā-sensitive Dateien separat in Staging aufgenommen; ihre menschliche Aussprachefreigabe steht aus |
 
 ## Maschinengeprüfte Quellen
 
 - `kids/data/academy-sidq-v4-voice-plan-v30.json`: exakte Ṣidq-Unterrichtsskripte, Alterskontexte und Antwort-Reihenfolge.
 - `kids/data/academy-sidq-v30-safe-batches-20261111.json`: feste 16 Chargen × vier originalgetreue Texte, 4.249 Rohzeichen, zwölf gesperrte Fuṣḥā-Texte.
 - `kids/tools/produce-academy-sidq-v30-safe-batch.py`: Produktionsweg über das bestehende DAR Voice Studio `kids_story`, ElevenLabs `eleven_v4`, Voice ID `DkU7j9uO4ZEtLD2iRZSH`.
-- `kids/tools/test-academy-sidq-v30-staging-qa.cjs`: prüft 68 Audio-Hashes, Dateiverfügbarkeit, Stimme, Zeit, exakte Texte, Quelle und Null öffentliche Freigaben; exportiert Hörpaket.
+- `kids/tools/test-academy-sidq-v30-staging-qa.cjs`: prüft die 68 ersten Audio-Hashes; die vollständigen 80 Dateien werden zusätzlich über `kids/tools/test-academy-sidq-v4-full-stage-v31.cjs` kontrolliert.
 - `kids/tools/audit-academy-audio-inventory-v1.cjs`: globaler Curriculum- und Textbestand ohne Credits.
 - GitHub CI: `Kids Academy Audio Inventory`, `Kids Academy V9 Curriculum Guard`, `Kids Academy Holistic Audit`, `Full Salam QA`, `App Lane Guard`.
 - Erfolgreiche Produktionsaktion: `https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/42999589160`.
@@ -42,12 +42,16 @@
 
 ## Nächste zusammenhängende Work-Ausführung
 
-Erstens die **68 echten Aufnahmen hörprüfen** (Fuṣḥā-Voll-Salām, Betonung, Stimmgleichheit, Ausklingen und Verständlichkeit), QA-Entscheidung pro Clip speichern und nur ausgewiesene problematische Sätze neu aufnehmen. Diese Prüfung lässt sich nicht allein durch Hashwerte ersetzen.
+Erstens die **80 echten Aufnahmen hörprüfen** (Fuṣḥā-Voll-Salām, Betonung, Stimmgleichheit, Ausklingen und Verständlichkeit), QA-Entscheidung pro Clip speichern und nur ausgewiesene problematische Sätze neu aufnehmen. Diese Prüfung lässt sich nicht allein durch Hashwerte ersetzen.
 
-Zweitens die **12 Fuṣḥā-sensiblen Ṣidq-Zeilen** mit vorhandener Masterbibliothek in sprachlich sichere Abschnitte vorbereiten, Quellen und religiöse Terminologie verifizieren, einige maßgebliche Vergleichsaudios erzeugen und anhören, anschließend maximal in Viererchargen die endgültigen V4-Dateien erstellen. Keine globale PLS mit bekannten Kollisionen blind aktivieren.
+Zweitens die **12 jetzt separat aufgenommenen Fuṣḥā-sensiblen Ṣidq-Zeilen** anhand vorhandener Masterreferenzen und ihrer Quellen abhören; ausschließlich fehlerhafte Aufnahmen nach genauer Diagnose korrigieren. Die globale PLS mit bekannten Kollisionen keinesfalls blind aktivieren.
 
-Drittens die bestehenden **65 weiteren Lektionen** nach bestätigten Quellen und pädagogischen Qualitätskriterien prüfen, exakte, deduplizierte V4-Phrasen je Altersstufe vorbereiten, nach Risiko priorisieren und kostenkontrolliert produzieren. Die **142 gesperrten Lektionen** nicht als fertig oder audiofreigegeben ausgeben.
+Drittens die bestehenden **65 weiteren Lektionen** nach Quellen und pädagogischer Qualität prüfen. Die nächste 64er-Serie aus source-auditierten Texten liegt unter `kids/data/academy-v32-first64-source-audited-safe.json`; der deduplizierende kostenbegrenzte V4-Runner und sein CI-Gate sind neu unter `kids/tools/produce-academy-v32-first64-safe-batch.py` und `.github/workflows/kids-academy-v32-first64-production.yml` vorbereitet. Keine automatische Publikation. Die **142 gesperrten Lektionen** nicht als fertig oder audiofreigegeben ausgeben.
 
 Viertens erst nach Freigabe sämtliche Audios im KIDS-Playback verfügbar machen und auf iPhone, iPad sowie Android/Fold testen; native TestFlight-App und App-Store-Checkliste separat abschließen.
 
 **Erfolgsdefinition:** Nicht „CI grün“ oder „Datei existiert“, sondern geprüfter vollständiger Unterricht, korrekte Fuṣḥā, exakte Quellendeckung, korrektes Audio und belastbare App-Funktion für alle drei Altersstufen.
+
+## Stand-Nachtrag (11.11.2026, 11:50 Europe/Berlin)
+
+Die ältere 68/80-Zwischenmeldung ist überholt. `kids/data/academy-sidq-v4-coverage-v31.json` zählt nun 80/80 gespeicherte Originalaufnahmen bei 0/80 menschlichen Freigaben, davon zwölf Fuṣḥā-sensitive Komposita. Die nächste 64er-Quelle wurde nach Änderungen der Quizfragen erneut ohne ungeeignete freie Antworten exportiert. Der neue V4-Runner erhält eine kostenfreie CI-Vorprüfung und eine explizite einmalige Produktionsfreigabe; Erfolg und Kosten dürfen nur anhand realer GitHub-Workflow- und Manifestdaten gemeldet werden.
