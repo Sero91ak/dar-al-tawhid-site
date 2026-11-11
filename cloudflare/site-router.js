@@ -1379,7 +1379,7 @@ export default {
                 /<\/head>/i.test(documentHtml)) {
               documentHtml = documentHtml.replace(/<\/head>/i,
                 '<link rel="stylesheet" href="/assets/q-royal-manuscript-v42.css?v=qapp-20261013-2" data-q-royal="v42">' +
-                '<script src="/assets/q-royal-manuscript-v42.js?v=20261105-nine-language-v1" defer><\\/script>'.replace('<\\/script>', '</script>') +
+                '<script src="/assets/q-royal-manuscript-v42.js?v=20261106-legacy-switch-v2" defer><\\/script>'.replace('<\\/script>', '</script>') +
                 '<script src="/assets/q-source-app-view.js?v=20261101-reader-v2" defer></script>' +
                 '</head>');
             }
@@ -1388,6 +1388,15 @@ export default {
             if (!documentHtml.includes("q-source-app-view.js") && documentHtml.toLowerCase().includes("</head>")) {
               documentHtml = documentHtml.replace(new RegExp("</head>", "i"),
                 '<script src="/assets/q-source-app-view.js?v=20261101-reader-v2" defer></script></head>');
+            }
+            // Shared historical Q1–Q48 language selector and canonical source draft packs.
+            // Q49+ already use their own full source/learning language adapters.
+            // This does not expose the owner-only sources index or change any Q URL.
+            if (numericSource && Number(numericSource[1]) <= 48 &&
+                !documentHtml.includes('q-legacy-nine-language-v1.js') &&
+                /<\/head>/i.test(documentHtml)) {
+              documentHtml = documentHtml.replace(/<\/head>/i,
+                '<script defer src="/assets/q-legacy-nine-language-v1.js?v=20261106-ui-v1"></script></head>');
             }
             headers.set("Content-Type", "text/html; charset=utf-8");
             headers.set("X-DAR-Q-Layout", "royal-manuscript-v42");
