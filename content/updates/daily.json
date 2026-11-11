@@ -16,5 +16,35 @@
     "title": "Duʿāʾ al-Qunūt im Witr",
     "snippet": "O Allah, leite mich unter denen, die Du geleitet hast; schenke mir Wohlergehen unter denen, denen Du Wohlergehen geschenkt hast; und nimm Dich meiner an unter denen, deren Du Dich angenommen hast.",
     "category": "Gebet"
+  },
+  "verse": {
+    "reference": "26:84",
+    "surah": 26,
+    "ayah": 84,
+    "ar": "وَٱجۡعَل لِّي لِسَانَ صِدۡقٖ فِي ٱلۡأٓخِرِينَ",
+    "de": "Und verleihe mir einen Ruf an Wahrhaftigkeit unter den späteren (Geschlechtern).",
+    "transliteration": "wa-ij'ʿal lī lisāna ṣid'qin fī l-ākhirīna",
+    "arabicEdition": "content/quran/026.json",
+    "germanEdition": "content/quran/026.json",
+    "tadabburReference": "26:84",
+    "tadabburCatalog": "/apple-tv/quran/tadabbur/catalog.json"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 484,
+      "remaining": 448
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 62,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
