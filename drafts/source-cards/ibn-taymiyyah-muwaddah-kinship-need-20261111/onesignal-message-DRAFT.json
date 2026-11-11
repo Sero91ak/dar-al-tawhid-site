@@ -28,5 +28,15 @@
     "Push approval and notification copy verified"
   ],
   "providerSendId": null,
-  "delivered": false
+  "delivered": false,
+  "onesignalTemplateId": "a93ce631-9216-4fb7-96ce-8b7a4bd20794",
+  "targetVerification": "DAR_PUSH exists but filter list is empty; server push code tries generic 'Subscribed Users' or 'Total Subscriptions' ahead of opt-in. Do not broadcast. Require verified subscription IDs or audited opt-in audience before any send.",
+  "sendBlockedReasons": [
+    "Q number not approved",
+    "No live source/learning/post",
+    "Nine language texts pending review",
+    "Active opt-in OneSignal audience not verified",
+    "Push-lanes lock and high-impact send confirmation",
+    "No live/device route check"
+  ]
 }
