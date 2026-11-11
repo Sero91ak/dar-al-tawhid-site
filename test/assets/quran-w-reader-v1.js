@@ -403,8 +403,97 @@
       if(bar)bar.style.width=value.toFixed(1)+"%";
     });
   }
+
+  /* DAR_QURAN_EDITORIAL_READER_V5 · existing Surah/verse DOM is the authority.
+     The plate never inserts Quran text or duplicates audio/reading data. */
+  var V5_WORDS = {
+    de:["DEIN LESESTAND","Sūrah","Āyah","LESEN IM QURʾĀN","Sūrenauftakt","Qurʾān · Leseseite"],
+    ar:["موضع القراءة","سورة","آية","قراءة القرآن","مطلع السورة","القرآن · القراءة"],
+    en:["YOUR READING POSITION","Surah","Ayah","READ THE QURʾĀN","Surah opening","Qurʾān · Reading"],
+    tr:["OKUMA KONUMUN","Sûre","Âyet","KURʾÂN OKU","Sûre başlangıcı","Kurʾân · Okuma"],
+    ku:["CÎHÊ XWENDINÊ","Sûre","Ayet","QURʾANÊ BIXWÎNE","Destpêka sûre","Qurʾan · Xwendin"],
+    ckb:["شوێنی خوێندنەوە","سوورەت","ئایەت","خوێندنەوەی قورئان","دەستپێکی سوورەت","قورئان · خوێندنەوە"],
+    bs:["MJESTO ČITANJA","Sura","Ajet","ČITAJ KURʾĀN","Početak sure","Kurʾān · Čitanje"],
+    fr:["VOTRE POSITION DE LECTURE","Sourate","Verset","LIRE LE CORAN","Ouverture de la sourate","Coran · Lecture"],
+    es:["TU PUNTO DE LECTURA","Sura","Aleya","LEER EL CORÁN","Inicio de la sura","Corán · Lectura"]
+  };
+  function v5Words(){ return V5_WORDS[locale()] || V5_WORDS.de; }
+  function v5SyncReadingPosition(overview) {
+    if(!overview)return;
+    var stage=$("dqnStageV4"), source=document.querySelector(".qov-resume-card[data-quran-continue]");
+    if(!stage || !source)return;
+    var ref=String(source.getAttribute("data-quran-continue")||"");
+    var found=/^(\d{1,3}):(\d{1,3})$/.exec(ref);
+    // Only a canonical resume button with an aria-label confirms saved progress.
+    var saved=!!source.getAttribute("aria-label") && !!found &&
+      Number(found[1])>=1 && Number(found[1])<=114 && Number(found[2])>=1;
+    var panel=stage.querySelector(".dqn-stage-reading");
+    if(!saved){
+      if(panel)panel.remove();
+      return;
+    }
+    if(!panel){
+      panel=document.createElement("div");
+      panel.className="dqn-stage-reading";
+      panel.innerHTML='<span class="dqn-stage-reading-label"></span><strong class="dqn-stage-reading-value"></strong>';
+      stage.querySelector(".dqn-stage-copy")?.appendChild(panel);
+    }
+    var words=v5Words(), signature=locale()+"|"+found[1]+"|"+found[2];
+    if(panel.dataset.signature===signature)return;
+    panel.dataset.signature=signature;
+    panel.setAttribute("aria-label",words[0]);
+    var label=panel.querySelector(".dqn-stage-reading-label");
+    var value=panel.querySelector(".dqn-stage-reading-value");
+    if(label)label.textContent=words[0];
+    if(value)value.textContent=words[1]+" "+Number(found[1])+"  ·  "+words[2]+" "+Number(found[2]);
+  }
+  function v5MountChapterPlate(reading) {
+    var plate=$("dqnReaderOpeningV5");
+    if(!reading){
+      if(plate)plate.remove();
+      return;
+    }
+    var page=document.querySelector(".qrc-shell .qrc-page");
+    var verseList=page && page.querySelector(".qrc-ayah-list");
+    if(!page || !verseList || !verseList.querySelector(".quran-ayah"))return;
+    var heading=document.querySelector("#qrcTitleBtn .qrc-title");
+    var subtitle=document.querySelector("#qrcChrome .qrc-chrome-sub-left");
+    if(!heading || !heading.textContent.trim())return;
+    if(!plate){
+      plate=document.createElement("section");
+      plate.id="dqnReaderOpeningV5";
+      plate.className="dqn-reader-opening";
+      plate.innerHTML=
+        '<div class="dqn-opening-eyebrow"></div>'+
+        '<div class="dqn-opening-rule" aria-hidden="true"><span>✦</span></div>'+
+        '<h2 class="dqn-opening-title"></h2>'+
+        '<p class="dqn-opening-meta"></p>'+
+        '<div class="dqn-opening-tail" aria-hidden="true"></div>';
+    }
+    if(plate.parentElement!==page || plate.nextElementSibling!==verseList) {
+      page.insertBefore(plate,verseList);
+    }
+    var title=heading.textContent.trim();
+    var metadata=subtitle ? subtitle.textContent.trim() : "";
+    var lang=locale(), words=v5Words();
+    var token=lang+"|"+title+"|"+metadata;
+    if(plate.dataset.signature===token)return;
+    plate.dataset.signature=token;
+    plate.setAttribute("lang",lang);
+    plate.setAttribute("dir",nextIsRtl()?"rtl":"ltr");
+    plate.setAttribute("aria-label",words[4]);
+    var eyebrow=plate.querySelector(".dqn-opening-eyebrow");
+    var h=plate.querySelector(".dqn-opening-title");
+    var meta=plate.querySelector(".dqn-opening-meta");
+    if(eyebrow)eyebrow.textContent=words[3];
+    if(h)h.textContent=title;
+    if(meta)meta.textContent=metadata || words[5];
+  }
+
   function nextMount(overview,reading){
     nextMountStage(overview);
+    v5SyncReadingPosition(overview);
+    v5MountChapterPlate(reading);
     nextMountFocus(reading);
   }
 
