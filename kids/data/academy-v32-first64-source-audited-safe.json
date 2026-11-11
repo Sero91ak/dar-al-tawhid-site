@@ -11,16 +11,35 @@
   "nativeArabicTermHold": true,
   "syntheticQuranRecitation": false,
   "publication": "NEVER_APPROVE_WITHOUT_OWNER_LISTENING",
-  "sourceLessons": [
-    "aqidah-tawhid-recht-allahs",
-    "aqidah-iman-sechs-grundlagen",
-    "aqidah-ikhlas-warum-gutes-tun"
-  ],
   "totalClips": 64,
   "totalBatches": 16,
   "perBatchMaxClips": 4,
   "perBatchMaxCharacters": 1200,
-  "totalSourceCharacters": 3620,
+  "totalSourceCharacters": 3479,
+  "prioritySourceLessons": [
+    "aqidah-tawhid-recht-allahs",
+    "aqidah-iman-sechs-grundlagen",
+    "aqidah-ikhlas-warum-gutes-tun"
+  ],
+  "sourceLessons": [
+    "aqidah-tawhid-recht-allahs",
+    "aqidah-iman-sechs-grundlagen",
+    "aqidah-ikhlas-warum-gutes-tun",
+    "akhlaq-wut-ruhig-bleiben",
+    "adab-erlaubnis-anklopfen",
+    "akhlaq-tarbiyah-sanft-lernen",
+    "akhlaq-nafs-gutes-herz",
+    "fiqh-reinheit-unterscheiden",
+    "aqidah-quran-allahs-wort",
+    "aqidah-sirah-adam-erschoepfung",
+    "adab-morgen-dhikr",
+    "adab-eltern-freundlich",
+    "adab-essen-bismillah",
+    "akhlaq-tiere-barmherzigkeit",
+    "adab-nachbarn-gutes",
+    "aqidah-dua-allah-bitten",
+    "aqidah-iman-an-allah-vertiefen"
+  ],
   "batches": [
     {
       "batchIndex": 0,
@@ -194,7 +213,7 @@
       "batchIndex": 2,
       "maxClips": 4,
       "maxPreparedCharacters": 1200,
-      "totalSourceCharacters": 271,
+      "totalSourceCharacters": 179,
       "items": [
         {
           "text": "Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten.",
@@ -230,40 +249,6 @@
             }
           ],
           "sha256": "8ffe2d505b13a4408e07fa04d5ecc86e8a34ec9d8ac68b72daba3aa3dd4512cc",
-          "sourceAuditProven": true,
-          "modelId": "eleven_v4",
-          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
-          "humanListeningRequired": true,
-          "approvedForPlayback": false
-        },
-        {
-          "text": "Beschreibe eine sichere Alltagshandlung zu Allah allein anbeten und erkläre, wie sie zu den Quellen passt.",
-          "contexts": [
-            {
-              "lessonId": "aqidah-tawhid-recht-allahs",
-              "kind": "question",
-              "age": "9-10",
-              "questionIndex": 2
-            }
-          ],
-          "sha256": "76e3127ab5d8decffdaf8fc1267a7624465e2cfac0713fd5b7a2d4274e28a9ed",
-          "sourceAuditProven": true,
-          "modelId": "eleven_v4",
-          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
-          "humanListeningRequired": true,
-          "approvedForPlayback": false
-        },
-        {
-          "text": "Erkläre an einem eigenen Beispiel: Allah allein anbeten.",
-          "contexts": [
-            {
-              "lessonId": "aqidah-tawhid-recht-allahs",
-              "kind": "question",
-              "age": "6-8",
-              "questionIndex": 1
-            }
-          ],
-          "sha256": "d8d256f2c6f5be0a5447b6f46fd87faeac210e990275d9a48e05e62b1707d6f3",
           "sourceAuditProven": true,
           "modelId": "eleven_v4",
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
@@ -352,15 +337,7 @@
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
           "humanListeningRequired": true,
           "approvedForPlayback": false
-        }
-      ]
-    },
-    {
-      "batchIndex": 3,
-      "maxClips": 4,
-      "maxPreparedCharacters": 1200,
-      "totalSourceCharacters": 144,
-      "items": [
+        },
         {
           "text": "Was merken wir uns?",
           "contexts": [
@@ -466,7 +443,15 @@
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
           "humanListeningRequired": true,
           "approvedForPlayback": false
-        },
+        }
+      ]
+    },
+    {
+      "batchIndex": 3,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 186,
+      "items": [
         {
           "text": "Welche Handlung passt zu dieser Lehre?",
           "contexts": [
@@ -596,15 +581,7 @@
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
           "humanListeningRequired": true,
           "approvedForPlayback": false
-        }
-      ]
-    },
-    {
-      "batchIndex": 4,
-      "maxClips": 4,
-      "maxPreparedCharacters": 1200,
-      "totalSourceCharacters": 213,
-      "items": [
+        },
         {
           "text": "Antwort 1: Beide lehren, dass man Allahs Anbetung anderen zuwenden soll.",
           "contexts": [
@@ -650,7 +627,15 @@
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
           "humanListeningRequired": true,
           "approvedForPlayback": false
-        },
+        }
+      ]
+    },
+    {
+      "batchIndex": 4,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 249,
+      "items": [
         {
           "text": "Antwort 1: Ich lerne, dass wir Allah allein anbeten.",
           "contexts": [
@@ -714,15 +699,7 @@
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
           "humanListeningRequired": true,
           "approvedForPlayback": false
-        }
-      ]
-    },
-    {
-      "batchIndex": 5,
-      "maxClips": 4,
-      "maxPreparedCharacters": 1200,
-      "totalSourceCharacters": 283,
-      "items": [
+        },
         {
           "text": "Antwort 1: Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten.",
           "contexts": [
@@ -786,7 +763,15 @@
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
           "humanListeningRequired": true,
           "approvedForPlayback": false
-        },
+        }
+      ]
+    },
+    {
+      "batchIndex": 5,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 294,
+      "items": [
         {
           "text": "Antwort 2: Ein Bittgebet als Anbetung muss immer an einen Menschen gerichtet werden.",
           "contexts": [
@@ -832,15 +817,7 @@
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
           "humanListeningRequired": true,
           "approvedForPlayback": false
-        }
-      ]
-    },
-    {
-      "batchIndex": 6,
-      "maxClips": 4,
-      "maxPreparedCharacters": 1200,
-      "totalSourceCharacters": 234,
-      "items": [
+        },
         {
           "text": "Antwort 2: Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten.",
           "contexts": [
@@ -874,7 +851,15 @@
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
           "humanListeningRequired": true,
           "approvedForPlayback": false
-        },
+        }
+      ]
+    },
+    {
+      "batchIndex": 6,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 209,
+      "items": [
         {
           "text": "Allah hat Engel erschaffen.",
           "contexts": [
@@ -906,15 +891,7 @@
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
           "humanListeningRequired": true,
           "approvedForPlayback": false
-        }
-      ]
-    },
-    {
-      "batchIndex": 7,
-      "maxClips": 4,
-      "maxPreparedCharacters": 1200,
-      "totalSourceCharacters": 192,
-      "items": [
+        },
         {
           "text": "Die übrigen Glaubensgrundlagen lernen wir Schritt für Schritt.",
           "contexts": [
@@ -946,7 +923,15 @@
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
           "humanListeningRequired": true,
           "approvedForPlayback": false
-        },
+        }
+      ]
+    },
+    {
+      "batchIndex": 7,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 179,
+      "items": [
         {
           "text": "Wir glauben an Allah und Seine Engel.",
           "contexts": [
@@ -984,15 +969,7 @@
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
           "humanListeningRequired": true,
           "approvedForPlayback": false
-        }
-      ]
-    },
-    {
-      "batchIndex": 8,
-      "maxClips": 4,
-      "maxPreparedCharacters": 1200,
-      "totalSourceCharacters": 221,
-      "items": [
+        },
         {
           "text": "Wir glauben an Allahs Bestimmung und fragen bei schwierigen Fragen nach.",
           "contexts": [
@@ -1024,7 +1001,15 @@
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
           "humanListeningRequired": true,
           "approvedForPlayback": false
-        },
+        }
+      ]
+    },
+    {
+      "batchIndex": 8,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 208,
+      "items": [
         {
           "text": "Wir glauben an den Jüngsten Tag.",
           "contexts": [
@@ -1056,15 +1041,7 @@
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
           "humanListeningRequired": true,
           "approvedForPlayback": false
-        }
-      ]
-    },
-    {
-      "batchIndex": 9,
-      "maxClips": 4,
-      "maxPreparedCharacters": 1200,
-      "totalSourceCharacters": 278,
-      "items": [
+        },
         {
           "text": "Ich kann die Glaubensgrundlagen nach und nach nennen.",
           "contexts": [
@@ -1138,45 +1115,11 @@
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
           "humanListeningRequired": true,
           "approvedForPlayback": false
-        },
-        {
-          "text": "Beschreibe eine sichere Alltagshandlung zu Die sechs Glaubenssäulen und erkläre, wie sie zu den Quellen passt.",
-          "contexts": [
-            {
-              "lessonId": "aqidah-iman-sechs-grundlagen",
-              "kind": "question",
-              "age": "9-10",
-              "questionIndex": 2
-            }
-          ],
-          "sha256": "d83e4aa18a29ebc81db7b5a03549d062dda4c2d9c2b16a6d1dc80f045cd72dcf",
-          "sourceAuditProven": true,
-          "modelId": "eleven_v4",
-          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
-          "humanListeningRequired": true,
-          "approvedForPlayback": false
-        },
-        {
-          "text": "Erkläre an einem eigenen Beispiel: Die sechs Glaubenssäulen.",
-          "contexts": [
-            {
-              "lessonId": "aqidah-iman-sechs-grundlagen",
-              "kind": "question",
-              "age": "6-8",
-              "questionIndex": 1
-            }
-          ],
-          "sha256": "6393b861f70fe480943a8e95019cc3e13b45de9c846af597cd97789091aaf54b",
-          "sourceAuditProven": true,
-          "modelId": "eleven_v4",
-          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
-          "humanListeningRequired": true,
-          "approvedForPlayback": false
         }
       ]
     },
     {
-      "batchIndex": 10,
+      "batchIndex": 9,
       "maxClips": 4,
       "maxPreparedCharacters": 1200,
       "totalSourceCharacters": 242,
@@ -1264,7 +1207,7 @@
       ]
     },
     {
-      "batchIndex": 11,
+      "batchIndex": 10,
       "maxClips": 4,
       "maxPreparedCharacters": 1200,
       "totalSourceCharacters": 292,
@@ -1340,7 +1283,7 @@
       ]
     },
     {
-      "batchIndex": 12,
+      "batchIndex": 11,
       "maxClips": 4,
       "maxPreparedCharacters": 1200,
       "totalSourceCharacters": 183,
@@ -1412,7 +1355,7 @@
       ]
     },
     {
-      "batchIndex": 13,
+      "batchIndex": 12,
       "maxClips": 4,
       "maxPreparedCharacters": 1200,
       "totalSourceCharacters": 178,
@@ -1484,7 +1427,7 @@
       ]
     },
     {
-      "batchIndex": 14,
+      "batchIndex": 13,
       "maxClips": 4,
       "maxPreparedCharacters": 1200,
       "totalSourceCharacters": 263,
@@ -1586,10 +1529,10 @@
       ]
     },
     {
-      "batchIndex": 15,
+      "batchIndex": 14,
       "maxClips": 4,
       "maxPreparedCharacters": 1200,
-      "totalSourceCharacters": 287,
+      "totalSourceCharacters": 227,
       "items": [
         {
           "text": "Ich übe eine gute Absicht, ohne auf Lob zu warten.",
@@ -1626,40 +1569,6 @@
           "approvedForPlayback": false
         },
         {
-          "text": "Beschreibe eine sichere Alltagshandlung zu Gutes mit richtiger Absicht und erkläre, wie sie zu den Quellen passt.",
-          "contexts": [
-            {
-              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
-              "kind": "question",
-              "age": "9-10",
-              "questionIndex": 2
-            }
-          ],
-          "sha256": "071f726d98a648de0c591d11ffa95889eaab9137691ed2cb684d9a1ee282551d",
-          "sourceAuditProven": true,
-          "modelId": "eleven_v4",
-          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
-          "humanListeningRequired": true,
-          "approvedForPlayback": false
-        },
-        {
-          "text": "Erkläre an einem eigenen Beispiel: Gutes mit richtiger Absicht.",
-          "contexts": [
-            {
-              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
-              "kind": "question",
-              "age": "6-8",
-              "questionIndex": 1
-            }
-          ],
-          "sha256": "cb3e34adb384171d71a67e2ae486d868c71c77dbbe1ad351cc7030582b05678d",
-          "sourceAuditProven": true,
-          "modelId": "eleven_v4",
-          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
-          "humanListeningRequired": true,
-          "approvedForPlayback": false
-        },
-        {
           "text": "Antwort 1: Ich helfe nur, wenn andere mir dafür applaudieren.",
           "contexts": [
             {
@@ -1670,6 +1579,145 @@
             }
           ],
           "sha256": "e8d5ae360fad51c3be537bbd093c9ebea2822378fb09a5688f98a806e9baedeb",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 1: Ich tue Gutes ausschließlich, damit andere mich loben.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "843c4e0a36f7a8df520a5b87bfcff3fb60a7b187c128a8230e0810cd273d53f7",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 1: Ich werde gemein, weil niemand klatscht.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "9-10",
+              "questionIndex": 0
+            }
+          ],
+          "sha256": "fb1b75bb772151950433239654d3fb87f9fd119dec15935dbf9126b5a34ea805",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 15,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 251,
+      "items": [
+        {
+          "text": "Antwort 2: Ich helfe, weil ich Gutes für Allah tun möchte, nicht nur für Applaus.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "4-5",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "9-10",
+              "questionIndex": 2
+            }
+          ],
+          "sha256": "716151917e7bdb6e22a44b6128fa4ba990ec3fa61544d203cce8df0170ecc05b",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 2: Ich kann mich trotzdem über die gute Tat freuen.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "9-10",
+              "questionIndex": 0
+            }
+          ],
+          "sha256": "a0b3eed57a5a00c43e0b96f9b5d036d381f1807821759a2dcf3bd2073f179bcd",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 2: Ich übe eine gute Absicht, ohne auf Lob zu warten.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "2572d06182e2e38610325a4c7f2a766a67b0d416aa609c9952f0149b2d720991",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Allah hört unser Bittgebet. Wir dürfen Ihn bitten.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-dua-allah-bitten",
+              "kind": "welcome",
+              "age": "4-5"
+            }
+          ],
+          "sha256": "c4885897f846c90f7f35c6ca5043a0fe691c9a08eafbf0b68ab77f87ee50d6e8",
           "sourceAuditProven": true,
           "modelId": "eleven_v4",
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
