@@ -365,6 +365,25 @@ struct WebAppView: UIViewRepresentable {
               "  backdrop-filter:none!important;",
               "  background:var(--dar-edge-fill,var(--page-cover,var(--bg)))!important;",
               "  background-color:var(--dar-edge-fill,var(--page-cover,var(--bg)))!important;",
+              "}",
+              "/* ADAPTIVE_IOS_HEADER: the measured fixed-header spacer owns the home clearance. */",
+              "html.dar-ios-native-app.dar-adult-global-brand-ready body.is-home-route{padding-top:0!important;}",
+              "html.dar-ios-native-app.dar-adult-global-brand-ready #darAdultBrandHeaderV2{padding-block-start:max(env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;padding-block-end:3px!important;}",
+              "@media (orientation:portrait) and (max-width:599px){",
+              "html.dar-ios-native-app.dar-adult-global-brand-ready #darAdultBrandHeaderV2 .dtbh-row{display:grid!important;grid-template-columns:40px minmax(0,1fr) 44px 44px!important;grid-template-rows:44px 42px!important;column-gap:6px!important;row-gap:2px!important;min-height:0!important;align-items:center!important;}",
+              "html.dar-ios-native-app.dar-adult-global-brand-ready #darAdultBrandHeaderV2 .dtbh-logo{grid-column:1!important;grid-row:2!important;width:40px!important;height:40px!important;}",
+              "html.dar-ios-native-app.dar-adult-global-brand-ready #darAdultBrandHeaderV2 .dtbh-copy{grid-column:2 / -1!important;grid-row:2!important;min-width:0!important;align-self:center!important;}",
+              "html.dar-ios-native-app.dar-adult-global-brand-ready #darAdultBrandHeaderV2 .dtbh-name{font-size:clamp(14px,4.5vw,23px)!important;white-space:nowrap!important;max-width:100%!important;}",
+              "html.dar-ios-native-app.dar-adult-global-brand-ready body #darAdultBrandHeaderV2 #darVisitorProfileButtonV1{grid-column:3!important;grid-row:1!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;}",
+              "html.dar-ios-native-app.dar-adult-global-brand-ready #darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle{grid-column:4!important;grid-row:1!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;}",
+              "}",
+              "@media (orientation:landscape), (min-width:600px){",
+              "html.dar-ios-native-app.dar-adult-global-brand-ready #darAdultBrandHeaderV2 .dtbh-row{display:grid!important;grid-template-columns:44px minmax(0,1fr) 44px 44px!important;grid-template-rows:44px!important;column-gap:clamp(7px,1.3vw,14px)!important;row-gap:0!important;min-height:44px!important;align-items:center!important;}",
+              "html.dar-ios-native-app.dar-adult-global-brand-ready #darAdultBrandHeaderV2 .dtbh-logo{grid-column:1!important;grid-row:1!important;width:44px!important;height:44px!important;}",
+              "html.dar-ios-native-app.dar-adult-global-brand-ready #darAdultBrandHeaderV2 .dtbh-copy{grid-column:2!important;grid-row:1!important;min-width:0!important;}",
+              "html.dar-ios-native-app.dar-adult-global-brand-ready #darAdultBrandHeaderV2 .dtbh-name{font-size:clamp(17px,2.35vw,25px)!important;max-width:100%!important;}",
+              "html.dar-ios-native-app.dar-adult-global-brand-ready body #darAdultBrandHeaderV2 #darVisitorProfileButtonV1{grid-column:3!important;grid-row:1!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;}",
+              "html.dar-ios-native-app.dar-adult-global-brand-ready #darAdultBrandHeaderV2 .dtbh-row > .dtbh-toggle{grid-column:4!important;grid-row:1!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;}",
               "}"
             ].join("\\n");
           }
@@ -1633,7 +1652,9 @@ struct WebAppView: UIViewRepresentable {
             }
             webView.scrollView.backgroundColor = pageSurfaceColor
 
-            let topInset = max(resolvedInsets.top, 59)
+            // Respect the actual status-bar clearance. Landscape can have zero top inset.
+            let statusBarTop = webView.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+            let topInset = max(resolvedInsets.top, statusBarTop)
             if abs(topInset - lastAppliedTopInset) < 0.5, lastAppliedTopInset >= 0 {
                 return
             }
