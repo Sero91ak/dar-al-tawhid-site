@@ -94,3 +94,7 @@ Neue nummerierte Quellenlinks gehören immer in `q/<nummer>/`.
 | `q/53` | Ghībah – Das verborgene Gift | `al-Fuḍayl ibn ʿIyāḍ` | Abū Nuʿaym, Ḥilyat al-Awliyāʾ 8/96: üble Nachrede zerstört Brüderlichkeit; mit Isnād, Grad offen. |
 | `q/52` | Khadīǧah – Salām und frohe Botschaft | `Abū Hurayrah, Prophet ﷺ` | Ṣaḥīḥ al-Buḫārī Nr. 3820: Salām von ihrem Herrn und frohe Botschaft vom Paradies. Reaktivierte ursprüngliche Q52, kanonische Frauen-ID beibehalten. |
 | `q/49` | Die besondere Stellung der Mutter | `Ibn ʿAbbās; Prophet ﷺ über Abū Hurayrah` | Al-Adab al-Mufrad Nr. 4 und al-Buḫārī Nr. 5971; vollständiger Kontext und klassischer Šarḥ auf Q49. |
+
+| `q/54` | Vertrag von al-Ḥudaybiyyah – das Weglassen einer Bezeichnung | `Imām an-Nawawī` | Šarḥ Ṣaḥīḥ Muslim 12/474; Quellenkarte und eigener Lernbereich. |
+| `q/55` | Nicht jede Unterstützung ist eindeutiger Kufr | `Imām aš-Šāfiʿī` | al-Umm 4/264; Fall von Ḥāṭib und Grenze des Takfīr. |
+| `q/56` | Weltlich begründete Muwāddah und Kufr | `Ibn Taymiyyah` | Maǧmūʿ al-Fatāwā 7/522–523; eigenständige Lernfragen. |
