@@ -49,7 +49,12 @@
        keeps the whole app in the old breakpoint after rotating back. */
     var w = clientW || innerW || vvW || 0;
     var h = clientH || innerH || vvH || 0;
-    if (vvW > 0 && vvH > 0 && clientW > 0 && clientH > 0) {
+    /* Virtual-keyboard height is NOT a device orientation/size change.
+       Freeze adaptive breakpoints to the layout viewport while typing,
+       otherwise portrait screens reflow to a landscape/compact layout. */
+    var keyboardIme = vvH > 0 && clientH > 0 &&
+      clientH - vvH > 120 && editableField(document.activeElement);
+    if (vvW > 0 && vvH > 0 && clientW > 0 && clientH > 0 && !keyboardIme) {
       var vvLandscape = vvW >= vvH;
       var clientLandscape = clientW >= clientH;
       if (vvLandscape === clientLandscape) {
@@ -58,7 +63,8 @@
       }
     }
     var offsetTop = vv && typeof vv.offsetTop === "number" ? vv.offsetTop : 0;
-    return { width: w, height: h, offsetTop: offsetTop };
+    return { width: w, height: h, offsetTop: offsetTop,
+      visualHeight: vvH, layoutHeight: clientH || innerH || h };
   }
 
   function navPreference() {
@@ -176,10 +182,12 @@
 
   function applyKeyboardState(metrics) {
     var root = document.documentElement;
-    var layoutH =
+    var layoutH = metrics.layoutHeight ||
       document.documentElement.clientHeight || global.innerHeight || metrics.height;
+    var visualH = metrics.visualHeight || metrics.height;
     var keyboardLikely =
-      metrics.height > 0 && layoutH > 0 && metrics.height < layoutH - 120;
+      visualH > 0 && layoutH > 0 && visualH < layoutH - 120 &&
+      (editableField(document.activeElement) || editSession);
     root.classList.toggle("adaptive-keyboard-open", !!keyboardLikely);
     root.style.setProperty("--layout-vv-height", metrics.height + "px");
     root.style.setProperty("--layout-vv-offset-top", (metrics.offsetTop || 0) + "px");
@@ -266,7 +274,17 @@
        changing the viewport. Reassert the measured mode in that case. */
     if (!force && viewportKey === lastAppliedViewportKey &&
         document.documentElement.getAttribute("data-layout") ===
-          resolveLayoutMode(metrics.width, metrics.height)) return;
+          resolveLayoutMode(metrics.width, metrics.height)) {
+      /* A keyboard may shrink VISUAL but not LAYOUT viewport. Update the
+         small keyboard state only, never redo split-pane or bottom-nav size. */
+      var keyboardNow = metrics.visualHeight > 0 &&
+        metrics.layoutHeight > 0 &&
+        metrics.visualHeight < metrics.layoutHeight - 120 &&
+        (editableField(document.activeElement) || editSession);
+      if (keyboardNow !== document.documentElement.classList.contains("adaptive-keyboard-open"))
+        applyKeyboardState(metrics);
+      return;
+    }
     lastAppliedViewportKey = viewportKey;
     var mode = resolveLayoutMode(metrics.width, metrics.height);
     var dual = isDualViewport(metrics.width, metrics.height);
