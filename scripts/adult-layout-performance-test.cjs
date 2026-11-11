@@ -15,9 +15,16 @@ const handles={};
 const raf=[];
 let rootWrites=0,navGeometryReads=0,navWrites=0;
 const attributes={};
+const classStates=new Set();
+const pendingTimers=[];
 const root={
   clientWidth:390,clientHeight:844,
-  classList:{contains(){return false},add(){},remove(){},toggle(){}},
+  classList:{
+    contains(name){return classStates.has(name)},
+    add(name){classStates.add(name)},
+    remove(name){classStates.delete(name)},
+    toggle(name,on){if(on===undefined)on=!classStates.has(name);if(on)classStates.add(name);else classStates.delete(name);return !!on}
+  },
   style:{setProperty(){rootWrites++}},
   getAttribute(name){return attributes[name]||null},
   setAttribute(name,value){attributes[name]=String(value)}
@@ -30,7 +37,8 @@ const nav={
 const doc={
   readyState:"loading",
   documentElement:root,
-  body:{classList:{contains(){return false}}},
+  body:{classList:{contains(name){return name==="has-bottom-nav"}}},
+  activeElement:null,
   getElementById(name){return name==="bottomNav"?nav:null},
   addEventListener(type,fn){handles["doc:"+type]=fn},
   querySelectorAll(){return []}
@@ -42,6 +50,11 @@ class ResizeObserver {
 }
 const win={
   innerWidth:390,innerHeight:844,
+  navigator:{maxTouchPoints:5},
+  visualViewport:{width:390,height:844,scale:1,offsetTop:0,addEventListener(type,fn){handles["vv:"+type]=fn}},
+  matchMedia(){return {matches:true}},
+  setTimeout(fn){pendingTimers.push(fn);return pendingTimers.length},
+  clearTimeout(){},
   localStorage:{getItem(){return "bottom"}},
   requestAnimationFrame(fn){raf.push(fn);return raf.length},
   addEventListener(type,fn){handles["window:"+type]=fn},
@@ -95,4 +108,44 @@ assert.match(boot,/function stopBootObserver\(\)/,"Boot observer must have a cle
 assert.match(boot,/function releaseChrome\(\) \{[\s\S]*?clearRamp\(\);\s*stopBootObserver\(\);/,"Emergency release must cancel interval and observer");
 assert.match(boot,/function finish\(\) \{[\s\S]*?clearRamp\(\);\s*stopBootObserver\(\);/,"Normal finish must disconnect observer");
 assert.match(boot,/if \(finished \|\| !bootObserver\) return;/,"Late DOMContentLoaded must not reattach a boot observer");
+/* Global keyboard/nav contract: real focus delegation with mobile viewport. */
+const adaptiveCss=fs.readFileSync(path.join(__dirname,"../assets/adaptive-layout.css"),"utf8");
+assert.match(source,/DAR_ADULT_KEYBOARD_NAV_STABILITY_V1_20261111/);
+assert.match(adaptiveCss,/DAR_ADULT_KEYBOARD_NAV_STABILITY_V1_20261111/);
+assert.match(adaptiveCss,/visibility:hidden!important;/);
+assert.match(adaptiveCss,/pointer-events:none!important;/);
+assert.doesNotMatch(adaptiveCss,/html\.adaptive-keyboard-open #bottomNav\.bottom-nav\s*\{\s*bottom:/,
+ "Former keyboard-driven nav bottom positioning must be removed");
+assert.ok(handles["doc:focusin"]&&handles["doc:focusout"],
+ "Delegated focus must work for later-rendered search fields");
+root.clientWidth=390;root.clientHeight=844;win.innerWidth=390;win.innerHeight=844;
+win.visualViewport.width=390;win.visualViewport.height=844;
+win.DarAdaptiveLayout.start();flushFrames();
+const beforeTypingMode=root.getAttribute("data-layout");
+const input={tagName:"INPUT",type:"search",disabled:false,readOnly:false};
+doc.activeElement=input;
+handles["doc:focusin"]({target:input});
+assert.ok(classStates.has("dar-adult-text-entry-active"),"Dock must hide immediately on focus");
+win.visualViewport.height=522;handles["vv:resize"]();flushFrames();
+assert.ok(classStates.has("adaptive-keyboard-open"),"Visual keyboard must be recognized");
+assert.equal(root.getAttribute("data-layout"),beforeTypingMode,
+ "Software keyboard must not change responsive/Fold mode");
+assert.equal(navWrites,0,"Typing must not write Dock position");
+doc.activeElement=null;
+handles["doc:focusout"]({target:input});
+assert.ok(classStates.has("dar-adult-text-entry-active"),
+ "Nav remains invisible while software keyboard dismisses");
+for(const timer of pendingTimers.splice(0))timer();
+assert.ok(classStates.has("dar-adult-text-entry-active"),
+ "Nav stays hidden while viewport still indicates open IME");
+win.visualViewport.height=844;handles["vv:resize"]();flushFrames();
+assert.ok(!classStates.has("dar-adult-text-entry-active"),"Nav returns once IME is dismissed");
+assert.ok(!classStates.has("adaptive-keyboard-open"),"IME state clears on close");
+const checkbox={tagName:"INPUT",type:"checkbox"};
+doc.activeElement=checkbox;handles["doc:focusin"]({target:checkbox});
+assert.ok(!classStates.has("dar-adult-text-entry-active"),
+ "Checkbox/picker focus must never hide nav");
+assert.equal(navWrites,0,"Five original nav tabs must retain their geometry");
+console.log("PASS: keyboard focus/blur, viewport resize, nav invisibility and restoration.");
+
 console.log("OK: responsive layout, fold mutation filtering, boot timer/observer lifecycle");
