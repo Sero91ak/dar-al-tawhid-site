@@ -1592,6 +1592,7 @@ export default {
         html = html.replace('/assets/fold-split.js?v=4', '/assets/fold-split.js?v=5');
         // Android installed PWA: bump URLs for the shared visitor home and 3D icon renderer.
         // An old v3 PWA worker may otherwise return a permanently stale cache-first asset.
+        html = html.replaceAll('/assets/dar-home-test-parity-visitor.js?v=20261107-wasiyyah-route-v1', '/assets/dar-home-test-parity-visitor.js?v=20261111-home-performance-v1');
         html = html.replace('/assets/dar-home-test-parity-visitor.js?v=20261030-home-order-clock-v2', '/assets/dar-home-test-parity-visitor.js?v=20261111-home-performance-v1');
         html = html.replaceAll('/assets/dar-noble-3d-icons.js?v=1095', '/assets/dar-noble-3d-icons.js?v=20261030-android-global-parity-v8');
         html = html.replace('/assets/dar-noble-3d-icons.css?v=1095', '/assets/dar-noble-3d-icons.css?v=20261030-android-global-parity-v8');
