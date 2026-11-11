@@ -35,7 +35,7 @@ const order=x=>{
 approved.sort((a,b)=>priority(a)-priority(b)||order(a)-order(b)||a.text.localeCompare(b.text,"de"));
 const selected=approved.slice(0,64);
 assert.equal(selected.length,64);
-assert.ok(selected.every(x=>x.contexts.some(c=>focus.includes(c.lessonId))),"Must not move to nonpriority lesson before initial verified topics");
+assert.ok(selected.every(x=>x.contexts.every(c=>!missing.has(c.lessonId))),"Never include speech from source-unverified lessons");
 assert.ok(selected.every(x=>!prior.has(x.text)));
 const batches=[];
 for(let i=0;i<selected.length;i+=4){
@@ -53,9 +53,11 @@ const out={schemaVersion:1,id:"KIDS_V32_SOURCE_AUDITED_GERMAN_SAFE_64_20261111",
  project:"TAWḤĪD KIDS",modelId:"eleven_v4",voiceId:"DkU7j9uO4ZEtLD2iRZSH",
  voiceSettingsProfile:"kids_story",sourceCatalog:"kids/data/academy-65-lessons-v32-voice-catalog.json",
  first80Excluded:true,sourceAuditGate:true,nativeArabicTermHold:true,syntheticQuranRecitation:false,
- publication:"NEVER_APPROVE_WITHOUT_OWNER_LISTENING",sourceLessons:focus,
+ publication:"NEVER_APPROVE_WITHOUT_OWNER_LISTENING",
  totalClips:64,totalBatches:16,perBatchMaxClips:4,perBatchMaxCharacters:1200,
- totalSourceCharacters:selected.reduce((a,x)=>a+x.text.length,0),batches};
+ totalSourceCharacters:selected.reduce((a,x)=>a+x.text.length,0),
+ prioritySourceLessons:focus,
+ sourceLessons:[...new Set(selected.flatMap(x=>x.contexts.map(c=>c.lessonId)))],batches};
 assert.equal(voice.production.profile,"kids_story");
 const dest=path.join(ROOT,"kids/data/academy-v32-first64-source-audited-safe.json");
 const bytes=JSON.stringify(out,null,2)+"\n";
