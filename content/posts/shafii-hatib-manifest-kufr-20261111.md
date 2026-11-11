@@ -11,7 +11,7 @@ book: "al-Umm"
 source: "📝 al-Umm, 4/264; Ṣaḥīḥ al-Buḫārī 4890"
 qSourceId: "qsource:55"
 localizationManifest: "/assets/q55-locales.json"
-availableLocales: "de"
+availableLocales: "de,ar,en,tr,ku,ckb,bs,fr,es"
 verificationNote: "Arabischer Originalauszug und primäre klassische Fundstelle geprüft; moderne Staatsangehörigkeit ist nicht unmittelbar behandelt. Acht Sprachversionen in fachlicher Übersetzungsprüfung. Q55 und Lernbereich werden erst nach bestandenem Deployment verwendet."
 tags: []
 status: "published"
