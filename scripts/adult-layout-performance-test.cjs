@@ -51,7 +51,10 @@ class ResizeObserver {
 const win={
   innerWidth:390,innerHeight:844,
   navigator:{maxTouchPoints:5},
-  visualViewport:{width:390,height:844,scale:1,offsetTop:0,addEventListener(type,fn){handles["vv:"+type]=fn}},
+  visualViewport:{width:390,height:844,scale:1,offsetTop:0,addEventListener(type,fn){
+    const key="vv:"+type,previous=handles[key];
+    handles[key]=previous?function(){previous();fn()}:fn;
+  }},
   matchMedia(){return {matches:true}},
   setTimeout(fn){pendingTimers.push(fn);return pendingTimers.length},
   clearTimeout(){},
