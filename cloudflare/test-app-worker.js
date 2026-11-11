@@ -569,6 +569,13 @@ async function finalizeDarTestHomeV1193(asset) {
   if (html.includes("</body>")) html=html.replace("</body>",foldJsV2+"\n</body>");
   else html+=foldJsV2;
 
+  /* FRAUEN_COMPACT_EDITORIAL_V1417 — one presentational stylesheet loaded
+   * last in the adult Test HTML. It never touches the existing V1416 JS. */
+  if (!html.includes('id="darFrauenCompactEditorialV1417"')) {
+    const compactCss = '<link rel="stylesheet" id="darFrauenCompactEditorialV1417" href="/assets/frauen/frauen-compact-editorial-v1417.css?v=frauen-compact-v1417-20261110">';
+    html = html.includes("</body>") ? html.replace("</body>",compactCss+"</body>") : html+compactCss;
+  }
+
   const headers = new Headers(asset.headers);
   headers.set("X-DAR-Test-Scroll-Boundary", "v3");
   headers.set("X-DAR-Test-Home", "html-parity-v50-20261020");

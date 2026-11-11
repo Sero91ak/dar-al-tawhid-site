@@ -1263,6 +1263,16 @@ async function serveKidsIntroVideo(request, url, env) {
 /* DAR_READER_OVERLAY_RUNTIME_V5: patch already-cached V3 readers at delivery time.
  * Shared adult HTML only; never Kids/tvOS/admin. Distinct script URL defeats
  * stale script cache without hard-reloading the mounted visitor app. */
+/* FRAUEN_COMPACT_EDITORIAL_V1417_20261110
+ * Presentation only: original V1416 fixed HeroDock and Frauen renderer survive.
+ * Loaded once, after legacy Frauen visual CSS, only for adult app HTML.
+ * Do not send this stylesheet to public browser desktop, Kids or Admin. */
+function injectFrauenCompactEditorialV1417(html) {
+  if (typeof html !== "string" || !html) return html;
+  if (html.includes('id="darFrauenCompactEditorialV1417"')) return html;
+  const link = '<link rel="stylesheet" id="darFrauenCompactEditorialV1417" href="/assets/frauen/frauen-compact-editorial-v1417.css?v=frauen-compact-v1417-20261110">';
+  return html.includes("</body>") ? html.replace("</body>",link+"</body>") : html+link;
+}
 function injectAdultReaderRuntimeV5(html) {
   if(typeof html!=="string"||!html)return html;
   html=html.replace(/(\/assets\/dar-app-chrome\.js)(?:\?v=[^"'\s<>]*)?/g,
@@ -1621,6 +1631,7 @@ export default {
       html = assetResponse.ok ? activateAdultCompactHero(html) : html;
       if (assetResponse.ok) html = activateAdultGlobalBrandV2(html);
       if (assetResponse.ok) html = injectAdultReaderRuntimeV5(html);
+      if (assetResponse.ok) html = injectFrauenCompactEditorialV1417(html);
       if (assetResponse.ok && !html.includes("dar-onesignal-language-sync.js")) {
         const localeTag = '<script defer id="darAdultOneSignalLocaleV1" src="/assets/dar-onesignal-language-sync.js?v=1"></script>';
         html = html.includes("</body>") ? html.replace("</body>", localeTag + "</body>") : html + localeTag;
@@ -1840,6 +1851,7 @@ export default {
       if (assetResponse.ok) html = activateAdultCompactHero(html);
       if (assetResponse.ok) html = activateAdultGlobalBrandV2(html);
       if (assetResponse.ok) html = injectAdultReaderRuntimeV5(html);
+      if (assetResponse.ok) html = injectFrauenCompactEditorialV1417(html);
       if (assetResponse.ok && !html.includes("frauen-live-adapter.js")) {
         const frauenAddon = liveFrauenNativeAddon();
         html = html.includes("</body>") ? html.replace("</body>", frauenAddon + "</body>") : html + frauenAddon;
@@ -1941,6 +1953,7 @@ export default {
           html = html.includes("</body>") ? html.replace("</body>", noPhotos + "\n</body>") : html + noPhotos;
         }
         html = injectAdultReaderRuntimeV5(html);
+        html = injectFrauenCompactEditorialV1417(html);
         headers.set("X-DAR-Test-Home", "smart-v3-20261020");
         headers.set("Content-Type", "text/html; charset=utf-8");
         headers.delete("Content-Length");

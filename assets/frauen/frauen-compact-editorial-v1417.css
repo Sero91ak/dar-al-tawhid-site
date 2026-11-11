@@ -1,0 +1,190 @@
+/* DĀR AL TAWḤĪD · FRAUEN COMPACT EDITORIAL V1417 · 10.11.2026
+ * A SINGLE opt-in presentation layer on the EXISTING Frauen V1416 HeroDock.
+ *
+ * Scope: adult Frauen hub/group only, photo cards + docked original search.
+ * Does NOT move or clone elements, modify original image URLs, background
+ * placement, background-size, navigation, source content, observers, focus,
+ * scroll roots, app shell, native header, themes or Frauen article details.
+ * Content is NEVER line-clamped or hidden to simulate compactness.
+ * The existing ResizeObserver alone updates the exact flow reservation.
+ */
+html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-view="group"])
+  #darFrauenHeroDockV1416 > .frauen-library-hero {
+  /* Approx. 12% less vertical space without image zoom or distortion. */
+  height:clamp(212px,46cqw,316px)!important;
+  min-height:max-content!important;
+}
+/* Group pages contain a live Back button and often longer titles.
+ * Give them the room they need; never overlap Back/title/content. */
+html[data-theme] body.is-frauen-route[data-frauen-view="group"]
+  #darFrauenHeroDockV1416 > .frauen-library-hero {
+  height:clamp(224px,46cqw,316px)!important;
+}
+html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-view="group"])
+  #darFrauenHeroDockV1416 > .frauen-library-hero .frauen-library-hero__content {
+  padding:clamp(12px,2.5cqw,27px)!important;
+}
+html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-view="group"])
+  #darFrauenHeroDockV1416 .frauen-library-hero__eyebrow {
+  margin-bottom:5px!important;
+}
+html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-view="group"])
+  #darFrauenHeroDockV1416 .frauen-library-hero__subtitle {
+  margin-top:5px!important;
+}
+/* Narrower frame, but the input itself remains comfortably >= 48px and
+ * 16px font to prevent iOS Safari WKWebView focusing/zooming. */
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"]
+  #darFrauenHeroDockV1416 > .frauen-library-search-wrap {
+  margin-top:-13px!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"]
+  #darFrauenHeroDockV1416 .frauen-search-pro {
+  padding:5px!important;
+  border-radius:18px!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"]
+  #darFrauenHeroDockV1416 .search-input-shell {
+  min-height:48px!important;
+  border-radius:14px!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"]
+  #darFrauenHeroDockV1416 .search-input-field {
+  min-height:48px!important;
+  font-size:16px!important;
+  line-height:1.3!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"]
+  #darFrauenHeroDockV1416 input[data-frauen-q] {
+  min-height:48px!important;
+  font-size:max(16px,1rem)!important;
+}
+/* Editorial group introduction: save vertical whitespace, do not shorten text. */
+html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-view="group"])
+  #appView .frauen-library-section-head {
+  margin:17px auto 11px!important;
+  gap:9px!important;
+}
+html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-view="group"])
+  #appView .frauen-library-section-head h3 {
+  font-size:clamp(21px,4.7cqw,28px)!important;
+  line-height:1.12!important;
+}
+html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-view="group"])
+  #appView .frauen-library-section-head > p {
+  margin-top:5px!important;
+  line-height:1.43!important;
+}
+/* Keep V1405/V1406 original one-column photographic shelves at EVERY
+ * width, including iPad and Fold. This pilot changes only their gap.
+ * Group is intentionally a vertical FLEX list, not a responsive grid. */
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"]
+  #appView .frauen-library-grid,
+html[data-theme] body.is-frauen-route[data-frauen-view="group"]
+  #appView .frauen-library-area-grid {
+  gap:clamp(11px,1.5vw,14px)!important;
+}
+/* Hub and chapter cards: naturally-sized full readable text, 15%-ish
+ * lower minimum heights. The card GROWS for translations, larger fonts,
+ * accessibility text and unusual longer source/description copy. */
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"]
+  #appView .frauen-library-card.has-visual {
+  min-height:180px!important;
+  height:auto!important;
+  padding:14px 45px 13px 15px!important;
+  border-radius:21px!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="group"]
+  #appView .frauen-library-area-card.has-visual {
+  min-height:160px!important;
+  height:auto!important;
+  padding:13px 43px 13px 14px!important;
+  border-radius:20px!important;
+}
+/* Keep original art and its natural cover/position. Wider copy reduces
+ * forced wrapping without hiding the visually dominant right-hand photo. */
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"]
+  #appView .frauen-library-card.has-visual .frauen-library-card__copy {
+  width:65%!important;
+  max-width:65%!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="group"]
+  #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy {
+  width:67%!important;
+  max-width:67%!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"]
+  #appView .frauen-library-card.has-visual .frauen-library-card__kicker {
+  margin-bottom:5px!important;
+  line-height:1.25!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"]
+  #appView .frauen-library-card.has-visual .frauen-library-card__copy h3 {
+  font-size:clamp(18.5px,4.7vw,21px)!important;
+  line-height:1.12!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="group"]
+  #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3 {
+  font-size:clamp(17px,4.2vw,19px)!important;
+  line-height:1.13!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"]
+  #appView .frauen-library-card.has-visual .frauen-library-card__desc,
+html[data-theme] body.is-frauen-route[data-frauen-view="group"]
+  #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy > p {
+  margin-top:6px!important;
+  font-size:clamp(12.4px,3.1vw,13px)!important;
+  line-height:1.34!important;
+  display:block!important;
+  overflow:visible!important;
+  white-space:normal!important;
+  -webkit-line-clamp:unset!important;
+  max-height:none!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"]
+  #appView .frauen-library-card.has-visual .frauen-library-card__meta,
+html[data-theme] body.is-frauen-route[data-frauen-view="group"]
+  #appView .frauen-library-area-card.has-visual .frauen-library-area-card__meta {
+  margin-top:7px!important;
+  font-size:11px!important;
+  line-height:1.27!important;
+}
+html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-view="group"])
+  #appView :is(.frauen-library-card.has-visual,.frauen-library-area-card.has-visual)
+  :is(.frauen-library-card__arrow,.frauen-library-area-card__arrow) {
+  width:40px!important;
+  height:40px!important;
+  right:10px!important;
+  bottom:10px!important;
+}
+/* Extra small phones: preserve entire original text and a genuine 44px
+ * clickable arrow. Do not clip the card or reduce fonts below legibility. */
+@media(max-width:360px){
+  html[data-theme] body.is-frauen-route[data-frauen-view="hub"]
+    #appView .frauen-library-card.has-visual {
+    padding:14px 39px 13px 12px!important;
+  }
+  html[data-theme] body.is-frauen-route[data-frauen-view="group"]
+    #appView .frauen-library-area-card.has-visual {
+    padding:13px 39px 13px 12px!important;
+  }
+  html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-view="group"])
+    #appView :is(.frauen-library-card.has-visual,.frauen-library-area-card.has-visual)
+    :is(.frauen-library-card__arrow,.frauen-library-area-card__arrow){
+    width:44px!important;
+    height:44px!important;
+    right:6px!important;
+    bottom:6px!important;
+  }
+}
+/* Short landscape has a separate proven V1416 compact HeroDock height:
+ * leave it unchanged to avoid obscuring the reading viewport. */
+@media(max-height:540px) and (orientation:landscape){
+  html[data-theme] body.is-frauen-route:is([data-frauen-view="hub"],[data-frauen-view="group"])
+    #darFrauenHeroDockV1416 > .frauen-library-hero{
+    height:clamp(125px,24dvh,175px)!important;
+    min-height:0!important;
+  }
+}
+/* On small standalone panels, respect available pane not physical viewport.
+ * No extra blur, fixed overlays, scroll listeners or additional layout owner. */
