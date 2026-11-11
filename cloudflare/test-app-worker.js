@@ -527,8 +527,12 @@ async function finalizeDarTestHomeV1193(asset) {
   // DAR_TEST_PREMIUM_HEADER_V2_20261023: /test/ only.
   // Enhance the original brand bar without changing its palette handler,
   // account routes, language availability, prayer updater or spacer.
+  /* Installed Test PWAs may still contain the 20261030 URL. Retain the
+     legacy key only for an upgrade rewrite; fresh HTML always uses 20261111. */
+  const legacyPremiumHeaderStyle = "/test/assets/dar-test-premium-header-v2.css?v=20261030-restore-original-hero-rail-v5";
+  html = html.replaceAll(legacyPremiumHeaderStyle,"/test/assets/dar-test-premium-header-v2.css?v=20261111-tested-header-seam-v1");
   const premiumHeaderAssets =
-    '<link rel="stylesheet" id="darTestPremiumHeaderCssV2" href="/test/assets/dar-test-premium-header-v2.css?v=20261030-restore-original-hero-rail-v5">' +
+    '<link rel="stylesheet" id="darTestPremiumHeaderCssV2" href="/test/assets/dar-test-premium-header-v2.css?v=20261111-tested-header-seam-v1">' +
     '<script defer id="darTestPremiumHeaderJsV2" src="/test/assets/dar-test-premium-header-v2.js?v=20261031-neutral-hooded-test-v14"><\/script>';
   if (!html.includes('id="darTestPremiumHeaderJsV2"')) {
     const at = html.lastIndexOf("</html>");
