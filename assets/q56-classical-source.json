@@ -4,7 +4,7 @@
   "statementId": "statement:ibn-taymiyyah-muwaddah-kinship-need-20261111",
   "group": "DĀR AL TAWḤĪD Zentrale",
   "kind": "classical-aqidah",
-  "status": "staged-q-card-review",
+  "status": "editorial-preflight",
   "sourceNumber": 56,
   "qSourceId": 56,
   "canonicalUrl": "https://dar-al-tawhid.de/q/56/",
@@ -19,6 +19,18 @@
       "label": "① Islamweb · Ibn Taymiyyah · Maǧmūʿ al-Fatāwā 7/523",
       "sub": "Originalarabischer Wortlaut im Zusammenhang des Glaubenskapitels",
       "url": "https://islamweb.net/ar/library/content/22/760/#:~:text=%D9%88%D9%82%D8%AF%20%D8%AA%D8%AD%D8%B5%D9%84%20%D9%84%D9%84%D8%B1%D8%AC%D9%84%20%D9%85%D9%88%D8%A7%D8%AF%D8%AA%D9%87%D9%85"
+    },
+    {
+      "label": "② Ṣaḥīḥ al-Buḫārī 4890 · Ḥāṭib",
+      "sub": "Authentischer Hintergrund zum von Ibn Taymiyyah angeführten Fall",
+      "url": "https://sunnah.com/bukhari:4890",
+      "kind": "hadith"
+    },
+    {
+      "label": "③ PDF/Scan · Maǧmūʿ al-Fatāwā, Band 7",
+      "sub": "Ausgabe von Ibn Qāsim, Buchkapitel Īmān, Druckseite 523",
+      "url": "https://backend.ibntaymia.net/uploads/2020/04/1227535065176959290.pdf",
+      "kind": "pdf-scan"
     }
   ],
   "pdfStatus": "No PDF/scan source linked until an exact volume/printed-page anchor is independently verified.",
@@ -708,5 +720,6 @@
     "bs",
     "fr",
     "es"
-  ]
+  ],
+  "sourceLinkReview": "Three grounded links: primary classical Arabic, second source (hadith or independent Arabic digital text), volume PDF or scanned source; printed page may vary by edition."
 }
