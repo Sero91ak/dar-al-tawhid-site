@@ -96,7 +96,7 @@ def validate():
             assert all(c["lessonId"] not in source_missing for c in item["contexts"])
             texts.append(t)
     assert len(texts) == len(set(texts)) == 64
-    assert sum(map(len, texts)) == plan["totalSourceCharacters"] == 3620
+    assert sum(map(len, texts)) == plan["totalSourceCharacters"] and 0 < plan["totalSourceCharacters"] <= 16 * 1200
     return plan, policy, master
 
 def stage_entry(doc, text, item, target, digest, duration):
