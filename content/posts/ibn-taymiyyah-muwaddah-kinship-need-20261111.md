@@ -11,7 +11,7 @@ book: "Maǧmūʿ al-Fatāwā"
 source: "📝 Maǧmūʿ al-Fatāwā 7/522–523; Ṣaḥīḥ al-Buḫārī 4890"
 qSourceId: "qsource:56"
 localizationManifest: "/assets/q56-locales.json"
-availableLocales: "de"
+availableLocales: "de,ar,en,tr,ku,ckb,bs,fr,es"
 verificationNote: "Arabischer Originalauszug und primäre klassische Fundstelle geprüft; moderne Staatsangehörigkeit ist nicht unmittelbar behandelt. Acht Sprachversionen in fachlicher Übersetzungsprüfung. Q56 und Lernbereich werden erst nach bestandenem Deployment verwendet."
 tags: []
 status: "published"
