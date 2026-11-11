@@ -162,7 +162,9 @@
       "paths": [
         "assets/adaptive-layout.js",
         "assets/adaptive-layout.css",
-        "scripts/adult-layout-performance-test.cjs"
+        "scripts/adult-layout-performance-test.cjs",
+        "cloudflare/site-router.js",
+        "cloudflare/test-app-worker.js"
       ],
       "expiresAt": "2026-11-14T23:59:00+01:00"
     },
