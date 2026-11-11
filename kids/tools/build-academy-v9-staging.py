@@ -40,9 +40,13 @@ def technical_duration(filepath:pathlib.Path)->float:
     ],text=True).strip())
 
 
-def generate_audio(text:str, target:pathlib.Path, secret:str)->float:
-    """Use exactly the approved story-generation backend; do NOT call Flash directly."""
-    prepared=prepare_kids_voice_text(text)
+def generate_audio(text:str, target:pathlib.Path, secret:str, *, prepared_override:str|None=None)->float:
+    """Use exactly the approved story-generation backend; do NOT call Flash directly.
+
+    A caller may provide an explicitly reviewed full-script Fuṣḥā segment.
+    Legacy callers retain the original pronunciation preparation unchanged.
+    """
+    prepared=prepared_override if prepared_override is not None else prepare_kids_voice_text(text)
     payload=json.dumps({"text":text,"prepared":prepared,"profile":MASTER_PROFILE},ensure_ascii=False).encode("utf-8")
     req=urllib.request.Request(
         BACKEND+"/generate-with-timings",data=payload,method="POST",
