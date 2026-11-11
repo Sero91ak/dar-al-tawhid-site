@@ -13,7 +13,9 @@ import importlib.util
 import json
 import os
 import re
+import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -80,6 +82,11 @@ def preflight():
         declared!=original or len(set(declared))!=12 or
         set(declared)&(set(early["entries"])|set(safe["entries"]))):
         raise RuntimeError("12 Fuṣḥā source strings are not canonical or contain duplicated files")
+    # Voice Studio deliberately rejects mixed-script requests; force language
+    # segmentation before any paid request and verify no chunk mixes scripts.
+    for b in req["batches"]:
+        for x in b["items"]:
+            reviewed_segments(x["prepared"])
     if sum(len(x["prepared"]) for b in req["batches"] for x in b["items"])!=req["characters"]:
         raise RuntimeError("Fuṣḥā prepared text count changed")
     for i,b in enumerate(req["batches"]):
@@ -96,6 +103,84 @@ def preflight():
             if x["qaRequired"] is not True or x["approvedForPlayback"] is not False:
                 raise RuntimeError("Human approval cannot be bypassed")
     return req,policy,master
+
+
+ARABIC_BLOCK=re.compile(r"([\u0600-\u06ff]+(?:\s+[\u0600-\u06ff]+)*)")
+ARABIC_CHAR=re.compile(r"[\u0600-\u06ff]")
+LATIN_CHAR=re.compile(r"[A-Za-zÄÖÜäöüß]")
+
+def reviewed_segments(text):
+    """Return monolingual chunks so Voice Studio's hard DE/AR separation is kept."""
+    raw=[x.strip() for x in ARABIC_BLOCK.split(str(text)) if x.strip()]
+    parts=[]
+    for chunk in raw:
+        arabic=bool(ARABIC_CHAR.search(chunk))
+        latin=bool(LATIN_CHAR.search(chunk))
+        if arabic and latin:
+            raise RuntimeError("Multilingual source chunk must not reach Voice Studio")
+        if not arabic and not latin:
+            if parts: parts[-1]+=chunk
+            else: raise RuntimeError("Initial punctuation segment is not a speech request")
+            continue
+        parts.append(chunk)
+    if not parts or len(parts)>20 or any(len(x)>700 for x in parts):
+        raise RuntimeError("Unsafe size or segmentation of Fuṣḥā speech")
+    if not any(ARABIC_CHAR.search(x) for x in parts):
+        raise RuntimeError("Original Fuṣḥā term lost during segmentation")
+    return parts
+
+def segment_file(chunk,policy,master):
+    key={"text":chunk,"voice":policy["voiceIdentity"]["voiceId"],
+        "model":"eleven_v4","profile":"kids_story",
+        "settings":policy["production"]["voiceSettings"],
+        "dictionaryVersion":master["pronunciationDictionary"]["versionId"],
+        "piece":"reviewed-monolingual-voice-v1"}
+    digest=hashlib.sha256(json.dumps(key,ensure_ascii=False,sort_keys=True).encode("utf8")).hexdigest()
+    return digest,ASSETS/("seg-"+digest[:20]+".m4a")
+
+def synthesize_monolingual_segments(prepared,output,secret,stage,policy,master):
+    segments=reviewed_segments(prepared)
+    existing=stage.setdefault("segments",{})
+    files=[];refs=[]
+    for part in segments:
+        digest,file=segment_file(part,policy,master)
+        cached=existing.get(digest,{})
+        valid=(file.is_file() and file.stat().st_size>=800 and
+            cached.get("sha256")==hashlib.sha256(file.read_bytes()).hexdigest() and
+            cached.get("script")==part and cached.get("voiceId")==policy["voiceIdentity"]["voiceId"])
+        if not valid:
+            if file.is_file() and file.stat().st_size>=800:
+                # Never rebill a segment if a previous attempt made the file.
+                duration=voice.technical_duration(file)
+            else:
+                language="ar" if ARABIC_CHAR.search(part) else "de"
+                print("New V4 monolingual segment:",language,len(part),"characters",flush=True)
+                duration=voice.generate_audio(part,file,secret,prepared_override=part,min_duration_seconds=0.25,min_bytes=800)
+            existing[digest]={
+                "url":"/"+file.relative_to(ROOT).as_posix(),
+                "sha256":hashlib.sha256(file.read_bytes()).hexdigest(),
+                "script":part,"languageCode":"ar" if ARABIC_CHAR.search(part) else "de",
+                "voiceId":policy["voiceIdentity"]["voiceId"],
+                "modelId":"eleven_v4","stagingOnly":True,
+                "approvedForPlayback":False,"durationSeconds":round(duration,3)
+            }
+            save(stage)
+        refs.append(digest)
+        files.append(file)
+    with tempfile.TemporaryDirectory() as tmp:
+        playlist=Path(tmp)/"clips.txt"
+        playlist.write_text("".join("file '"+str(file.resolve()).replace("'","'\\''")+"'\n" for file in files),encoding="utf8")
+        subprocess.run([
+            "ffmpeg","-hide_banner","-loglevel","error","-y",
+            "-f","concat","-safe","0","-i",str(playlist),
+            "-ac","1","-ar","48000","-c:a","aac","-b:a","48k",
+            "-movflags","+faststart",str(output)
+        ],check=True,timeout=120)
+    seconds=voice.technical_duration(output)
+    if not (0.8<=seconds<=65) or output.stat().st_size<1800:
+        output.unlink(missing_ok=True)
+        raise RuntimeError("Composed Fuṣḥā review audio failed technical duration/size checks")
+    return seconds,refs
 
 def main():
     cli=argparse.ArgumentParser()
@@ -151,10 +236,13 @@ def main():
     for it,digest,dest in pending:
         if dest.is_file() and dest.stat().st_size>=1800:
             duration=voice.technical_duration(dest)
+            segment_refs=m["entries"].get(it["text"],{}).get("componentSegmentIds",[])
         else:
-            print("Generating owner-V4 mixed German/Fuṣḥā listening candidate",len(it["prepared"]),"chars",flush=True)
-            duration=voice.generate_audio(it["text"],dest,secret,prepared_override=it["prepared"])
+            print("Stitching reviewed separate German/Fuṣḥā V4 segments",len(it["prepared"]),"characters",flush=True)
+            duration,segment_refs=synthesize_monolingual_segments(it["prepared"],dest,secret,m,policy,master)
         m["entries"][it["text"]]={
+          "componentSegmentIds":segment_refs,
+          "voiceSegmentsMonolingual":True,
           "url":"/"+dest.relative_to(ROOT).as_posix(),
           "sha256":hashlib.sha256(dest.read_bytes()).hexdigest(),
           "preparedSha256":digest,"durationSeconds":round(duration,3),
