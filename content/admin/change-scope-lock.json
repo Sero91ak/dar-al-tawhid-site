@@ -155,6 +155,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "frauen-compact-editorial-v1417-only-20261110",
+      "at": "2026-11-10T18:10:00+01:00",
+      "approvedBy": "user-explicit-careful-women-compact-visual-pilot-20261110",
+      "reason": "Only the original women's photographic hub/group visual compact editorial presentation and associated contract/browser regression tests approved for isolated preview. No change to V1416 HeroDock JS, actual photos, sources, navigation, reader, other adult routes, Kids, admin, OneSignal or production safety gates. Do not merge or publish without green browser/visual review.",
+      "paths": [
+        "assets/frauen/frauen-compact-editorial-v1417.css",
+        "scripts/check-frauen-compact-editorial-v1417.cjs",
+        "scripts/check-frauen-compact-contract-v1417.cjs",
+        ".github/workflows/frauen-compact-v1417.yml"
+      ],
+      "expiresAt": "2026-11-14T23:59:00+01:00"
+    },
+    {
       "id": "frauen-v1416-live-verifier-cache-key-20261109",
       "at": "2026-11-09T21:11:00+01:00",
       "approvedBy": "user-explicit-20261109-global-frauen-fix-push",
