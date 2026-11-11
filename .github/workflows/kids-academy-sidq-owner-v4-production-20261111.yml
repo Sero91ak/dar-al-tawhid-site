@@ -29,6 +29,11 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
+      - name: Install required audio inspection and encoding tools
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
       - name: Verify exact canonical Fuṣḥā V4 script without spending credits
         run: |
           set -euo pipefail
@@ -66,6 +71,11 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           persist-credentials: true
+      - name: Install verified audio encoding tools
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
       - name: Owner credential and exact-phrase billing gate
         run: |
           set -euo pipefail
