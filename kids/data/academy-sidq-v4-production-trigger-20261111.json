@@ -2,7 +2,7 @@
   "id": "TAWHID_KIDS_SIDQ_V4_PRODUCTION_TRIGGER_20261111",
   "confirmed": "GENERATE-FOUR-SIDQ-20261111",
   "batch": "kids/data/academy-sidq-v4-batch-20261111.json",
-  "mode": "canonical-owner-kids-story-V4",
+  "mode": "pr-checked-one-shot-production",
   "stagingOnly": true,
   "ownerAuthorized": true,
   "createdAt": "2026-11-11",
@@ -13,7 +13,8 @@
     "onlyKidsBranch": true,
     "autoPublish": false
   },
-  "attempt": 2,
-  "reason": "Safe repair: native Arabic full salām separately from German phrases after zero-credit mixed-script preflight blocked first invocation.",
-  "safeguard": "Never repeat a completed audio binary; cache verified file before another billed request."
+  "attempt": 3,
+  "reason": "One-shot owner-authorized cost-controlled production after clean canonical script validation and ffmpeg availability",
+  "safeguard": "Never repeat a completed audio binary; cache verified file before another billed request.",
+  "preflightVerified": "GitHub Actions 42991612169 (preflight success; 4 canonical phrases, 116 characters, no billable calls)"
 }
