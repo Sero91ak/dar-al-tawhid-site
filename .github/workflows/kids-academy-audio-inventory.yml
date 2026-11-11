@@ -4,6 +4,10 @@ on:
     paths:
       - 'kids/tools/audit-academy-audio-inventory-v1.cjs'
       - 'kids/tools/test-academy-sidq-v4-staging-qa.cjs'
+      - 'kids/tools/test-academy-sidq-v30-staging-qa.cjs'
+      - 'kids/data/academy-audio-staging-sidq-v30-20261111.json'
+      - 'kids/data/academy-sidq-v4-voice-plan-v30.json'
+      - 'kids/data/academy-sidq-v30-safe-batches-20261111.json'
       - 'kids/data/academy-audio-staging-sidq-v4-20261111.json'
       - 'kids/assets/kids-academy-audio/**'
       - 'kids/akademie/**'
@@ -26,6 +30,14 @@ jobs:
         run: node kids/tools/audit-academy-audio-inventory-v1.cjs --summary > "$RUNNER_TEMP/academy-audio-summary.json"
       - name: Verify 4 new real owner-V4 recording binaries and strict private playback gate
         run: node kids/tools/test-academy-sidq-v4-staging-qa.cjs
+      - name: Audit and pack all 68 real Serhat V4 Ṣidq recordings for private owner hearing
+        run: |
+          node kids/tools/test-academy-sidq-v30-staging-qa.cjs --output "$RUNNER_TEMP/kids-sidq-v30-68"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kids-sidq-v30-all-68-owner-v4-hearing-kit
+          path: ${{ runner.temp }}/kids-sidq-v30-68
+          retention-days: 14
       - name: Export editorial review queue and phrase inventory
         run: |
           node kids/tools/audit-academy-audio-inventory-v1.cjs > "$RUNNER_TEMP/academy-audio-inventory.json"
