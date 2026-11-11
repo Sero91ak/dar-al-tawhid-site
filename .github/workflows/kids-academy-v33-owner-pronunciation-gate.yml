@@ -5,6 +5,7 @@ on:
       - audit/kids-academy-audio-inventory-20261106
     paths:
       - 'kids/tools/academy_source_voice.py'
+      - 'kids/tools/audit-academy-arabic-pronunciation.py'
       - 'kids/tools/build-academy-v9-staging.py'
       - 'kids/data/academy-voice-policy-v10.json'
       - 'kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json'
@@ -12,6 +13,7 @@ on:
   pull_request:
     paths:
       - 'kids/tools/academy_source_voice.py'
+      - 'kids/tools/audit-academy-arabic-pronunciation.py'
       - 'kids/tools/build-academy-v9-staging.py'
       - 'kids/data/academy-voice-policy-v10.json'
       - 'kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json'
@@ -30,8 +32,9 @@ jobs:
       - name: Compile, test silent source numbers and canonical source names
         run: |
           set -euo pipefail
-          python3 -m py_compile kids/tools/academy_source_voice.py kids/tools/voice_text.py kids/tools/build-academy-v9-staging.py
+          python3 -m py_compile kids/tools/academy_source_voice.py kids/tools/audit-academy-arabic-pronunciation.py kids/tools/voice_text.py kids/tools/build-academy-v9-staging.py
           python3 kids/tools/academy_source_voice.py
+          python3 kids/tools/audit-academy-arabic-pronunciation.py
           python3 - <<'PY'
           import json,pathlib,sys
           root=pathlib.Path(".")
