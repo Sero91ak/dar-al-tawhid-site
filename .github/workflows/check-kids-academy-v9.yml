@@ -134,6 +134,10 @@ jobs:
         run: |
           python3 -m py_compile kids/tools/build-academy-v9-staging.py kids/tools/build-academy-audio.py
           python3 kids/tools/build-academy-v9-staging.py --dry-run
+      - name: Verify exact first-lesson V4 voice queue for all 3 ages including shuffled answer audio
+        run: |
+          node kids/tools/export-academy-sidq-v4-voice-plan-v30.cjs --check
+          node kids/tools/test-academy-sidq-v4-staging-qa.cjs
       - name: Verify 2026-11-11 first Ṣidq V4 generation preflight without voice credits
         run: |
           python3 -m py_compile kids/tools/produce-academy-sidq-v4-batch-20261111.py
