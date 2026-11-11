@@ -60,6 +60,10 @@
   setText("darLocaleNotice",approved?"":notices[selected]||"Die Übersetzung ist noch nicht fachlich freigegeben. Die geprüfte deutsche Fassung wird angezeigt.");
   const notice=t("darLocaleNotice");if(notice)notice.hidden=approved;
   if(screen==="source"){
+   setText("darSourceQuoteTitle",labels.statement||"Aussage");
+   setText("darSourceArabicTitle",labels.original||"Arabischer Originalwortlaut");
+   setText("darEvidenceTitle",labels.evidence||"Direkte Quellen");
+   setText("darSourceQuoteMeta",({de:"Sinngemäße Übersetzung eines abgegrenzten arabischen Auszugs; das Original bleibt unverändert.",ar:"ترجمة تفسيرية لمقطع عربي محدد؛ ويبقى النص الأصلي كما هو.",en:"Contextual translation of a specific Arabic excerpt; the original text remains unchanged.",tr:"Belirli bir Arapça alıntının anlamına uygun çevirisidir; asıl metin değiştirilmemiştir.",ku:"Wergera maneyî ya beşekî erebî ye; metna eslî bê guhertin dimîne.",ckb:"وەرگێڕانێکی ماناییی بڕگەیەکی عەرەبییە؛ دەقی ڕەسەن ناگۆڕدرێت.",bs:"Prijevod značenja ograničenog arapskog odlomka; izvorni tekst ostaje neizmijenjen.",fr:"Traduction du sens d'un extrait arabe délimité ; le texte original reste inchangé.",es:"Traducción del sentido de un fragmento árabe delimitado; el original permanece intacto."})[selected]||"");
    setText("darSourceTitle",text.title);
    setText("darSourceCitation",doc.citation);
    setText("darSourceQuote",text.quote);
