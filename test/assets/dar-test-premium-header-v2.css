@@ -392,7 +392,9 @@ html.dar-test-premium-header-v2 body.is-settings-route #appView.view > .view-hea
 html.dar-test-premium-header-v2 body.is-topics-route #appView .topics-hub > .view-head,
 html.dar-test-premium-header-v2 body.is-topic-route #appView .topic-collection-page > .view-head,
 html.dar-test-premium-header-v2 body.is-quiz-route #appView > .view-head,
-html.dar-test-premium-header-v2 body.is-more-route #appView > .view-head{
+html.dar-test-premium-header-v2 body.is-more-route #appView > .view-head,
+html.dar-test-premium-header-v2 body.is-calendar-route #appView .cal-tl-head,
+html.dar-test-premium-header-v2 body:is(.is-ramadan-route,.is-notifications-route,.is-settings-route,.is-account-route,.is-about-route,.is-news-route,.is-news-detail-route,.is-zakat-route,.is-source-library-route,.is-quran-topic-route) #appView > .view-head{
   margin-block-start:0!important;
 }
 
