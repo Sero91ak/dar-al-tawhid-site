@@ -196,15 +196,10 @@ struct WebAppView: UIViewRepresentable {
             }
             function init(){
               css.forEach(addStyle);
-              // Only legacy duplicate visual clock components are hidden.
-              // The canonical headerPrayerStatus data feed and the compact
-              // .dat-smart-prayer remain available to every theme and widget.
-              if(!document.getElementById("darIosSinglePrayerDisplayV1")){
-                var style=document.createElement("style");
-                style.id="darIosSinglePrayerDisplayV1";
-                style.textContent="html.dar-ios-native-app body.is-home-route #darHomeHtmlParityV1 #dhpPrayerNativeMount,html.dar-ios-native-app body.is-home-route #darHomeHtmlParityV1 .dhp-prayer{display:none!important}";
-                (document.head||document.documentElement).appendChild(style);
-              }
+              // Prayer-card visibility belongs to the live iOS home parity module.
+              // Do not force-hide its original prayer-time fallback from Swift:
+              // if the compact replacement fails to load, the native app must
+              // still show the existing prayer schedule.
               next(0);
             }
             if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
