@@ -1,78 +1,114 @@
-name: TAWḤĪD KIDS · Ṣidq canonical owner V4 audio (first staging batch)
+name: Kids Ṣidq owner V4 - visible QA and one-time production
 
 on:
-  push:
-    branches:
-      - audit/kids-academy-audio-inventory-20261106
+  pull_request:
+    types: [synchronize, reopened]
     paths:
+      - '.github/workflows/kids-academy-sidq-owner-v4-production-20261111.yml'
+      - 'kids/tools/produce-academy-sidq-v4-batch-20261111.py'
+      - 'kids/tools/build-academy-v9-staging.py'
+      - 'kids/data/academy-sidq-v4-batch-20261111.json'
       - 'kids/data/academy-sidq-v4-production-trigger-20261111.json'
 
-permissions:
-  contents: write
-
 concurrency:
-  group: kids-academy-approved-story-voice
+  group: kids-sidq-owner-v4-pr-${{ github.event.pull_request.number }}
   cancel-in-progress: false
 
 jobs:
-  produce-exact-four:
+  preflight:
+    if: >-
+      github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' &&
+      github.event.pull_request.head.ref == 'audit/kids-academy-audio-inventory-20261106'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      should_generate: ${{ steps.gate.outputs.should_generate }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Verify exact canonical Fuṣḥā V4 script without spending credits
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/produce-academy-sidq-v4-batch-20261111.py
+          python3 kids/tools/produce-academy-sidq-v4-batch-20261111.py --dry-run
+          command -v ffmpeg
+          command -v ffprobe
+      - name: Detect explicit one-shot production marker
+        id: gate
+        run: |
+          set -euo pipefail
+          marker="$(git log -1 --format=%s)"
+          if [ "$marker" = 'KIDS_APPROVED_V4_BATCH_20261111_PRODUCE_ONCE' ]; then
+            echo 'should_generate=true' >> "$GITHUB_OUTPUT"
+            echo 'Exact authorized owner-voice batch selected.'
+          else
+            echo 'should_generate=false' >> "$GITHUB_OUTPUT"
+            echo 'Preflight only: no credits will be spent.'
+          fi
+
+  generate:
+    needs: preflight
+    if: >-
+      needs.preflight.outputs.should_generate == 'true' &&
+      github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' &&
+      github.event.pull_request.head.ref == 'audit/kids-academy-audio-inventory-20261106'
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    permissions:
+      contents: write
     env:
       ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.ref }}
           persist-credentials: true
-      - name: Verify exact reviewed batch trigger and isolation (no credits)
-        id: preflight
+      - name: Owner credential and exact-phrase billing gate
         run: |
           set -euo pipefail
-          node - <<'JS'
-          const fs=require('fs');
-          const r=JSON.parse(fs.readFileSync('kids/data/academy-sidq-v4-production-trigger-20261111.json','utf8'));
-          const b=JSON.parse(fs.readFileSync('kids/data/academy-sidq-v4-batch-20261111.json','utf8'));
-          if(r.id!=='TAWHID_KIDS_SIDQ_V4_PRODUCTION_TRIGGER_20261111' ||
-             r.confirmed!=='GENERATE-FOUR-SIDQ-20261111' ||
-             b.confirmed!==r.confirmed || b.maxClips!==4 ||
-             b.stagingOnly!==true || b.approvedForPlayback!==false ||
-             b.exactPhrases.length!==4 || new Set(b.exactPhrases).size!==4){
-            throw Error('Invalid owner-approved KIDS-only batch');
-          }
-          console.log('PASS: only four exact first-lesson staged phrases; public manifest untouched');
-          JS
-          python3 -m py_compile kids/tools/produce-academy-sidq-v4-batch-20261111.py
+          test "$(git log -1 --format=%s)" = 'KIDS_APPROVED_V4_BATCH_20261111_PRODUCE_ONCE'
+          test -n "$ADMIN_PUBLISH_SECRET" || { echo '::error::Voice Studio credential missing, zero credits used.'; exit 1; }
           python3 kids/tools/produce-academy-sidq-v4-batch-20261111.py --dry-run
-          command -v ffmpeg
-          command -v ffprobe
-          test -n "$ADMIN_PUBLISH_SECRET" || { echo "::error::Owner DAR Voice Studio credential missing; no credits used."; exit 1; }
-      - name: Generate through canonical owner V4 story profile
+      - name: Record missing owner V4 clips in isolated staging
         id: generate
         continue-on-error: true
         run: |
           set -euo pipefail
           python3 kids/tools/produce-academy-sidq-v4-batch-20261111.py
-      - name: Preserve successful clips even when a later clip errors
-        if: always() && steps.preflight.outcome == 'success'
+      - name: Validate and preserve even partial completed clips
+        if: always()
         run: |
           set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if test -f kids/data/academy-audio-staging-sidq-v4-20261111.json; then
-            git add -f kids/data/academy-audio-staging-sidq-v4-20261111.json
-          fi
-          if test -d kids/assets/kids-academy-audio; then
-            git add -f kids/assets/kids-academy-audio/*.m4a
-          fi
-          if git diff --cached --quiet; then
-            echo 'No new audio binaries; existing staged clips reused or generation blocked.'
+          if [ ! -f kids/data/academy-audio-staging-sidq-v4-20261111.json ]; then
+            echo 'No successfully staged clips to commit.'
             exit 0
           fi
-          git commit -m "kids(audio): stage first owner V4 Ṣidq recordings for human Fuṣḥā QA only"
-          git pull --rebase origin audit/kids-academy-audio-inventory-20261106
-          git push origin HEAD:refs/heads/audit/kids-academy-audio-inventory-20261106
-      - name: Report failed production accurately
+          python3 - <<'PY'
+          import hashlib,json,pathlib
+          p=pathlib.Path('kids/data/academy-audio-staging-sidq-v4-20261111.json')
+          x=json.loads(p.read_text('utf-8'))
+          assert x['stagingOnly'] is True and x['reviewRequiredBeforePublicPlayback'] is True
+          assert len(x['entries'])<=4
+          for e in x['entries'].values():
+              f=pathlib.Path(e['url'].lstrip('/'))
+              assert f.is_file() and f.stat().st_size>=1800
+              assert hashlib.sha256(f.read_bytes()).hexdigest()==e['sha256']
+              assert e['approvedForPlayback'] is False
+          print('Verified review-only clips:',len(x['entries']))
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f kids/data/academy-audio-staging-sidq-v4-20261111.json kids/assets/kids-academy-audio/*.m4a
+          if ! git diff --cached --quiet; then
+            git commit -m 'kids(audio): store verified owner-V4 stage without public playback'
+            git pull --rebase origin audit/kids-academy-audio-inventory-20261106
+            git push origin HEAD:refs/heads/audit/kids-academy-audio-inventory-20261106
+          fi
+      - name: Report incomplete synthesis honestly
         if: steps.generate.outcome == 'failure'
         run: |
-          echo "::error::Some requested audio was not generated. Only committed staged clips count. No public release."
+          echo '::error::One or more clips failed; consult logs and staged assets before retry.'
           exit 1
