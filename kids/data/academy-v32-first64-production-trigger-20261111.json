@@ -10,6 +10,10 @@
   "maxPreparedCharactersPerInvocation": 1200,
   "publicPlayback": false,
   "ownerHearingRequired": true,
-  "oneShotProductionStatus": "PREFLIGHT_ONLY_NO_CREDITS",
-  "generatedClipsFromThisTrigger": 0
+  "oneShotProductionStatus": "AUTHORIZED_GENERATE_ONCE",
+  "generatedClipsFromThisTrigger": 0,
+  "authorizationSource": "Existing user-approved TAWḤĪD KIDS bulk V4 master voice production; this turn: Mach weiter",
+  "authorizedSourcePlan": "KIDS_V32_SOURCE_AUDITED_GERMAN_SAFE_64_20261111",
+  "authorizedClipLimit": 64,
+  "autoPublicRelease": false
 }
