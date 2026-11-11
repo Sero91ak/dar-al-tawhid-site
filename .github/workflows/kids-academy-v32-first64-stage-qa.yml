@@ -1,0 +1,66 @@
+name: KIDS V32 next 64 - verified V4 owner listening package
+on:
+  pull_request:
+    types: [synchronize, reopened]
+    paths:
+      - '.github/workflows/kids-academy-v32-first64-stage-qa.yml'
+      - 'kids/data/academy-v32-first64-audio-staging-20261111.json'
+      - 'kids/data/academy-v32-first64-source-audited-safe.json'
+jobs:
+  hearing-kit:
+    if: >-
+      github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' &&
+      github.event.pull_request.head.ref == 'audit/kids-academy-audio-inventory-20261106'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Verify every V4 audio hash and build private mobile hearing package
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import json,hashlib,html,shutil
+          root=Path('.')
+          doc=json.loads((root/'kids/data/academy-v32-first64-audio-staging-20261111.json').read_text('utf8'))
+          plan=json.loads((root/'kids/data/academy-v32-first64-source-audited-safe.json').read_text('utf8'))
+          assert doc['stagingOnly'] is True and doc['requiresOwnerListeningApproval'] is True
+          assert doc['approvedForPlayback'] is False
+          assert doc['modelId']=='eleven_v4' and doc['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+          phrases=[x for b in plan['batches'] for x in b['items']]
+          assert len(phrases)==len(doc['entries'])==64
+          out=root/'out-v32-64'
+          out.mkdir(exist_ok=True)
+          (out/'audio').mkdir(exist_ok=True)
+          items=[];cards=[]
+          for i,item in enumerate(phrases,1):
+            t=item['text'];e=doc['entries'][t]
+            source=root/e['url'].lstrip('/')
+            assert source.is_file() and source.stat().st_size>=1800
+            sha=hashlib.sha256(source.read_bytes()).hexdigest()
+            assert sha==e['sha256']
+            assert e['sourceAuditProven'] is True and e['approvedForPlayback'] is False
+            assert e['modelId']==doc['modelId'] and e['voiceId']==doc['voiceId']
+            assert e['sourceSha256']==item['sha256']
+            name=f'audio/{i:03d}.m4a'
+            shutil.copyfile(source,out/name)
+            ages=', '.join(sorted({x['age'] for x in e['contexts']}))
+            names=', '.join(sorted({x['lessonId'] for x in e['contexts']}))
+            focus='Deutscher Originaltext und Stimmqualität'
+            items.append({'index':i,'filename':name,'text':t,'sha256':sha,'durationSeconds':e['durationSeconds'],'ageContexts':e['contexts'],'reviewRequired':True,'approvedForPlayback':False})
+            cards.append(f'<article><div class="meta"><b>{i:03d}</b> · Altersstufen: {html.escape(ages)} · {html.escape(names)}</div><p>{html.escape(t)}</p><audio controls preload="none" src="{name}"></audio></article>')
+          (out/'manifest.json').write_text(json.dumps({'title':'TAWḤĪD KIDS V32 – 64 echte V4-Aufnahmen','publicRelease':False,'ownerListeningRequired':True,'items':items},ensure_ascii=False,indent=2)+'\n','utf8')
+          document='''<!doctype html><html lang="de" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TAWḤĪD KIDS · nächste 64 V4-Aufnahmen</title><style>*{box-sizing:border-box}body{background:#0c2425;color:#f5f0e5;font:16px/1.5 system-ui;margin:0}main{max-width:880px;margin:auto;padding:25px 18px 70px}h1{font:normal 38px Georgia,serif;color:#e6cc96}header{padding-bottom:24px;border-bottom:1px solid #6f7e70}.meta{color:#c3caab;font-size:13px}article{padding:15px 0 25px;border-bottom:1px solid #435a51}audio{width:100%}p.notice{color:#f0c997}p{overflow-wrap:anywhere}</style></head><body><main><header><small>TAWḤĪD KIDS · INTERNE AUDIOPRÜFUNG</small><h1>Die nächsten 64 V4-Aufnahmen</h1><p>Serhat Abu Malik – Master · Alter 4–5, 6–8 und 9–10</p><p class="notice">Nur technische Sicherung. Noch keine menschliche Aussprachefreigabe und keine Veröffentlichung in der Kinder-App.</p></header>'''+''.join(cards)+'</main></body></html>'
+          (out/'HÖRPRÜFUNG.html').write_text(document,'utf8')
+          print('PASS:',len(items),'original V4 recordings independently SHA-256 verified; owner review still required; public 0')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TAWHID-KIDS-V32-64-V4-HOERPRUEFUNG
+          path: out-v32-64/
+          retention-days: 14
