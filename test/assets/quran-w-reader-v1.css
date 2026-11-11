@@ -518,3 +518,165 @@ html[data-theme] body.is-quran-reader-route #appView .quran-ayah{
   background:transparent!important;
 }
 html[data-theme] body.is-quran-reader-route #dqnReadProgressV4{z-index:700}
+
+
+/* DAR_QURAN_EDITORIAL_READER_V5 · DAR TEST only
+   The Quran reader receives an editorial chapter opening, never an image
+   behind verses. Inherits existing theme, view settings and player spacing. */
+html[data-theme] body.is-quran-overview #dqnStageV4{
+  --dqn-stage-ink:#f7eddc;
+  --dqn-stage-muted:#d8cdb8;
+  --dqn-stage-ground:#162522;
+}
+html[data-theme="light"] body.is-quran-overview #dqnStageV4,
+html[data-theme="soft"] body.is-quran-overview #dqnStageV4,
+html[data-theme="salbei"] body.is-quran-overview #dqnStageV4,
+html[data-theme="eisgold"] body.is-quran-overview #dqnStageV4{
+  --dqn-stage-ink:#24352d;
+  --dqn-stage-muted:#425448;
+  --dqn-stage-ground:#e8e8dd;
+}
+html[data-theme="royal"] body.is-quran-overview #dqnStageV4,
+html[data-theme="dark"] body.is-quran-overview #dqnStageV4,
+html[data-theme="dar-al-layl"] body.is-quran-overview #dqnStageV4,
+html[data-theme="bordeaux"] body.is-quran-overview #dqnStageV4,
+html[data-theme="aurora"] body.is-quran-overview #dqnStageV4{
+  --dqn-stage-ink:#f7eddc;
+  --dqn-stage-muted:#d8cdb8;
+  --dqn-stage-ground:#162522;
+}
+body.is-quran-overview #dqnStageV4 .dqn-stage-reading{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  margin-top:clamp(14px,2.6vw,25px);
+  padding-top:clamp(10px,1.8vw,15px);
+  border-top:1px solid color-mix(in srgb,var(--gold2,#b99a62) 45%,transparent);
+  max-width:340px;
+  text-align:start;
+}
+body.is-quran-overview #dqnStageV4 .dqn-stage-reading-label{
+  color:var(--dqn-stage-muted,#d8cdb8);
+  font:700 clamp(9px,1.4vw,10px)/1.4 system-ui,-apple-system,sans-serif;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+body.is-quran-overview #dqnStageV4 .dqn-stage-reading-value{
+  color:var(--dqn-stage-ink,#f7eddc);
+  font:650 clamp(12px,1.8vw,15px)/1.5 system-ui,-apple-system,sans-serif;
+  overflow-wrap:anywhere;
+}
+html[data-theme] body.is-quran-reader-route .qrc-page #dqnReaderOpeningV5{
+  position:relative;
+  width:100%;
+  max-width:940px;
+  min-width:0;
+  margin:0 auto clamp(14px,3vw,27px);
+  padding:clamp(24px,4.2vw,48px) clamp(12px,4vw,32px) clamp(22px,3vw,36px);
+  box-sizing:border-box;
+  background:transparent;
+  border:0;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2,#b99a62) 29%,var(--line2,transparent));
+  box-shadow:none;
+  color:var(--text,var(--cream));
+  text-align:center;
+  overflow-wrap:anywhere;
+}
+body.is-quran-reader-route .dqn-opening-eyebrow{
+  display:block;
+  margin:0 auto 6px;
+  color:var(--muted,var(--text));
+  font:750 clamp(10px,1.5vw,12px)/1.5 system-ui,-apple-system,sans-serif;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+body.is-quran-reader-route .dqn-opening-rule{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:min(220px,55%);
+  gap:13px;
+  margin:clamp(10px,2vw,17px) auto;
+  color:var(--gold2,#b99a62);
+  font-size:15px;
+  line-height:1;
+}
+body.is-quran-reader-route .dqn-opening-rule::before,
+body.is-quran-reader-route .dqn-opening-rule::after{
+  content:"";
+  height:1px;
+  flex:1;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--gold2,#b99a62) 65%,transparent));
+}
+body.is-quran-reader-route .dqn-opening-rule::after{transform:rotate(180deg)}
+body.is-quran-reader-route .dqn-opening-title{
+  margin:0;
+  font:600 clamp(27px,5.7vw,52px)/1.16 Georgia,"Times New Roman",serif;
+  color:var(--text,var(--cream));
+  letter-spacing:-.02em;
+  text-wrap:balance;
+}
+body.is-quran-reader-route .dqn-opening-meta{
+  margin:clamp(7px,1.5vw,13px) auto 0;
+  color:var(--muted,var(--text));
+  font:600 clamp(11px,1.65vw,14px)/1.6 system-ui,-apple-system,sans-serif;
+  max-width:48ch;
+}
+body.is-quran-reader-route .dqn-opening-tail{
+  width:42px;
+  height:1px;
+  margin:clamp(18px,3vw,30px) auto 0;
+  background:var(--gold2,#b99a62);
+  opacity:.8;
+}
+/* Comfortable reading measure, while verse text, Tajwid classes, translations,
+   saved verse actions, play controls and the user-selected scale stay unchanged. */
+html[data-theme] body.is-quran-reader-route .qrc-page{
+  max-width:min(1060px,100%);
+  margin-inline:auto;
+  min-width:0;
+}
+html[data-theme] body.is-quran-reader-route.dqn-quran-focus .qrc-page{
+  max-width:min(800px,100%);
+}
+html[data-theme] body.is-quran-reader-route.dqn-quran-focus .qrc-ayah-list{
+  width:100%;
+  min-width:0;
+}
+html[data-theme] body.is-quran-reader-route.dqn-quran-focus .qrc-ayah-list > .quran-ayah{
+  padding-inline:clamp(12px,3.6vw,30px)!important;
+  background:transparent!important;
+}
+html[data-theme] body.is-quran-reader-route.dqn-quran-focus #dqnReaderOpeningV5{
+  padding-block:clamp(32px,5vw,62px);
+}
+@media(max-width:410px){
+  html[data-theme] body.is-quran-overview #dqnStageV4{
+    min-height:200px;
+    padding:18px 14px;
+    background-position:center,76% center;
+  }
+  body.is-quran-overview #dqnStageV4 .dqn-stage-reading{
+    margin-top:12px;
+    padding-top:9px;
+    max-width:77%;
+  }
+  html[data-theme] body.is-quran-reader-route .qrc-page #dqnReaderOpeningV5{
+    padding:24px 7px 20px;
+  }
+  body.is-quran-reader-route .dqn-opening-title{font-size:clamp(26px,8vw,36px)}
+  body.is-quran-reader-route .dqn-opening-meta{font-size:11px}
+  html[data-theme] body.is-quran-reader-route #dqnFocusToggleV4{
+    width:36px;
+    min-width:36px;
+    min-height:38px;
+    padding:5px;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  html[data-theme] body.is-quran-reader-route #dqnReaderOpeningV5,
+  html[data-theme] body.is-quran-overview #dqnStageV4{
+    animation:none!important;
+    scroll-behavior:auto!important;
+  }
+}
