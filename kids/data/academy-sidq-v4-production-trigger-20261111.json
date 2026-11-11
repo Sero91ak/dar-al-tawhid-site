@@ -1,0 +1,16 @@
+{
+  "id": "TAWHID_KIDS_SIDQ_V4_PRODUCTION_TRIGGER_20261111",
+  "confirmed": "GENERATE-FOUR-SIDQ-20261111",
+  "batch": "kids/data/academy-sidq-v4-batch-20261111.json",
+  "mode": "canonical-owner-kids-story-V4",
+  "stagingOnly": true,
+  "ownerAuthorized": true,
+  "createdAt": "2026-11-11",
+  "safety": {
+    "maxClips": 4,
+    "maxPreparedCharacters": 650,
+    "publicAudioManifestUnchanged": true,
+    "onlyKidsBranch": true,
+    "autoPublish": false
+  }
+}
