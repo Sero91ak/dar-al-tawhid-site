@@ -272,7 +272,7 @@ function browserManifestResponse(request, androidBrowser = false) {
  * Do not append the historical DOM-reparenting Frauen immersive adapter. */
 function adultCompactHeroAddon() {
   return '<link rel="stylesheet" id="darAdultHeroCompactEdgeV1404" href="/assets/adult-responsive-viewport-v1381.css?v=visitor-hero-safearea-v1404-20261019-kids-parity-v1-20261027-post-flow-v3">' +
-    '<script defer id="darAdultHeroHeightRuntimeV1404" src="/assets/adult-hero-height-runtime-v1403.js?v=visitor-hero-safearea-v1404-20261019"></' + 'script>';
+    '<script defer id="darAdultHeroHeightRuntimeV1404" src="/assets/adult-hero-height-runtime-v1403.js?v=visitor-hero-safearea-v1404-20261111-scroll-performance-v1"></' + 'script>';
 }
 /* DAR_ADULT_TOP_SCROLL_BOUNDARY_V1 – adult visitor HTML only.
  * Add a root-only scroll stop; preserve Hero, sticky search, and all carousels. */
@@ -293,7 +293,7 @@ function activateAdultGlobalBrandV2(html) {
   /* Native iOS and PWA must use the same fresh prayer presentation as Test.
      Keep desktop public browser, Kids and the original prayer engine isolated. */
   html = html.replace(/\/assets\/dar-home-test-parity-visitor\.js\?v=[a-zA-Z0-9-]+/g,
-    "/assets/dar-home-test-parity-visitor.js?v=20261107-wasiyyah-route-v1");
+    "/assets/dar-home-test-parity-visitor.js?v=20261111-home-performance-v1");
   /* VISITOR_PROFILE_HEADER_BOOT_V4: adult visitor native/PWA only.
    * Guarantee the approved palette icon, profile picker, smart personalization
    * and adaptive Frauen/Entdecken tab load with the original branded header.
@@ -1592,7 +1592,7 @@ export default {
         html = html.replace('/assets/fold-split.js?v=4', '/assets/fold-split.js?v=5');
         // Android installed PWA: bump URLs for the shared visitor home and 3D icon renderer.
         // An old v3 PWA worker may otherwise return a permanently stale cache-first asset.
-        html = html.replace('/assets/dar-home-test-parity-visitor.js?v=20261030-home-order-clock-v2', '/assets/dar-home-test-parity-visitor.js?v=20261107-wasiyyah-route-v1');
+        html = html.replace('/assets/dar-home-test-parity-visitor.js?v=20261030-home-order-clock-v2', '/assets/dar-home-test-parity-visitor.js?v=20261111-home-performance-v1');
         html = html.replaceAll('/assets/dar-noble-3d-icons.js?v=1095', '/assets/dar-noble-3d-icons.js?v=20261030-android-global-parity-v8');
         html = html.replace('/assets/dar-noble-3d-icons.css?v=1095', '/assets/dar-noble-3d-icons.css?v=20261030-android-global-parity-v8');
         // iPadOS desktop-class Safari identifies as Macintosh, even on a tablet.
