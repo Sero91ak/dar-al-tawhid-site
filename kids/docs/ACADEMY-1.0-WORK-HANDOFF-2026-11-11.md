@@ -88,3 +88,20 @@ Die Richtlinie `kids/data/academy-voice-policy-v10.json` enthält `production.ow
 Die **zwölf Fuṣḥā-sensiblen Ṣidq-Originalaufnahmen** sind im bestehenden Staging ausdrücklich mit `ownerPronunciationHold` markiert; drei davon enthalten Quellen-IDs im Originaltext und sind für die bisherige Sprechfassung klar zurückgewiesen. Ursprüngliche Audiodateien werden zur Diagnose aufbewahrt, jedoch nicht veröffentlicht und nicht in den Freigabebestand übernommen. Auch die übrigen 132 Originale sind weiterhin **nicht** menschlich hörfreigegeben. **Kein öffentliches KIDS-/TestFlight-Deployment, kein Einfluss auf Adult-Apps, keine ungeprüfte Neuaufnahme und keine neuen Credits.**
 
 Vor Aufhebung des Stopps: Fuṣḥā-Sprechausgaben mit Master-Audiobibliothek vergleichen, nummernfreie Sprechtexte kontrollieren, nur konkret bemängelte Aufnahmen mit ausdrücklicher erneuter Freigabe kostenbewusst neu produzieren, alle Hörproben auf dem echten Endgerät freigeben.
+
+---
+
+
+## 11.11.2026 – Erweiterung: GLOBALE Fuṣḥā-Ausspracheprüfung einschließlich Ṣidq/Ṣiddīq
+
+Der Nutzer hat klargestellt: Nicht nur Sūrat at-Tawbah, Sūrat an-Naḥl und Ṣaḥīḥ Muslim werden falsch gesprochen, sondern weitere arabische Begriffe, **ausdrücklich auch der Begriff „Siddiq“**. Damit sind alle arabischstämmigen Ausdrücke und alle 144 noch nicht freigegebenen Aufnahmen in der KIDS-Lernakademie erneut unter einer **globalen Fuṣḥā-Hörsperre**; ein bestimmtes Wort darf nicht allein aufgrund einer Master-PLS-Umschrift als korrekt gelten.
+
+**Bedeutungs-/Lautkontrast:** Ṣidq (صِدْق, Wahrhaftigkeit, kurze Vokalfolge) ist von Ṣiddīq (صِدِّيق, besonders Wahrhaftiger, verdoppeltes d und langes ī) zu unterscheiden. Die aktuelle erste Akademie-Lektion heißt Ṣidq; bei „Ṣiddīq“ handelt es sich nicht um dieselbe Lesung. Nicht stillschweigend das eine Wort für das andere verwenden.
+
+**Befund in der echten Masterbibliothek:** `data/pronunciation/DAR_AL_TAWHID_ElevenLabs_ARABIC_MASTER_29122.pls` enthält 10.099 Einträge. Die dortigen Aliase für `Ṣidq` → `Sidq` und `aṣ-Ṣiddīq` → `as-Siddiiq` sind **nicht** unabhängige hörgeprüfte Fuṣḥā-Aufnahmen; sie können in ElevenLabs falsch umgesetzt werden. Der Cloudflare-Story-Voice-Kanal wendet das globale Wörterbuch wegen Sprachkollisionen nicht automatisch an. Keine Aktivierung der gesamten PLS als vermeintliche Lösung.
+
+**Globale technische Sicherung:** `kids/data/academy-voice-policy-v10.json::production.ownerPronunciationHold` gilt für alle arabischen Wörter unabhängig von Schreibweise, Altersstufe, Quellenrolle oder Lernmodul und sperrt neue kostenpflichtige Produktionen. `kids/tools/audit-academy-arabic-pronunciation.py` wertet die 144 vorhandenen Staging-Texte gegen das arabische Masterlexikon aus und meldet 18 Kernbegriffe mit ihren Fundstellen; es setzt kein einziges Release-Flag und verbraucht keine Credits. Alle übrigen Aufnahmen müssen dennoch vollständig hörgeprüft werden, auch wenn ein Ausdruck nicht vom regulären Terminologie-Scan erkannt wird.
+
+**Korrekturweg vor künftiger Produktion:** Arabische Begriffe mit korrektem Original und Vokalisation aus der vorhandenen Nutzer-Audiobibliothek abgleichen; bei gemischtem Deutsch-Arabisch nur geprüfte Sprachsegmente `de` / `ar` gemäß `data/pronunciation/voice-language-isolation-v1.json` verwenden; Referenznummern ausschließlich in der UI belassen; Probestücke auf dem echten iPhone abhören und Eigentümerfreigabe dokumentieren. Erst danach gezielte und kostenkontrollierte Re-Aufnahme statt pauschaler massenhafter Wiederholung. Die sichtbaren Lektionstexte und ihre Quellen sind nicht nachträglich für die TTS-Aussprache zu verfälschen.
+
+**Kein Live-/TestFlight-/Adult-App-Change.**
