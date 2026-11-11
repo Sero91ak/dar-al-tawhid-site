@@ -40,7 +40,7 @@ def technical_duration(filepath:pathlib.Path)->float:
     ],text=True).strip())
 
 
-def generate_audio(text:str, target:pathlib.Path, secret:str, *, prepared_override:str|None=None, min_duration_seconds:float=0.8)->float:
+def generate_audio(text:str, target:pathlib.Path, secret:str, *, prepared_override:str|None=None, min_duration_seconds:float=0.8, min_bytes:int=1800)->float:
     """Use exactly the approved story-generation backend; do NOT call Flash directly.
 
     A caller may provide an explicitly reviewed full-script Fuṣḥā segment.
@@ -69,7 +69,7 @@ def generate_audio(text:str, target:pathlib.Path, secret:str, *, prepared_overri
             "-movflags","+faststart",str(target)
         ],check=True,timeout=90)
     seconds=technical_duration(target)
-    if not (min_duration_seconds<=seconds<=65) or target.stat().st_size<1800:
+    if not (min_duration_seconds<=seconds<=65) or target.stat().st_size<min_bytes:
         target.unlink(missing_ok=True)
         raise RuntimeError("Invalid media; clip rejected without publication")
     return seconds
