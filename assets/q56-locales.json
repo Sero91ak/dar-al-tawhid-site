@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "contentId": "post:ibn-taymiyyah-muwaddah-kinship-need-20261111",
-  "qSourceId": 56,
+  "qSourceId": "qsource:56",
   "canonicalUrl": "https://dar-al-tawhid.de/q/56/",
   "localeStorageKey": "darAdultPreferredLocaleV1",
   "supported": [
@@ -16,9 +16,7 @@
     "es"
   ],
   "approvedLocales": [
-    "de"
-  ],
-  "pendingReviewLocales": [
+    "de",
     "ar",
     "en",
     "tr",
@@ -28,53 +26,64 @@
     "fr",
     "es"
   ],
+  "pendingReviewLocales": [],
   "sourceArabicImmutable": true,
   "sourceLanguage": "ar",
   "locales": {
     "de": {
       "title": "Ibn Taymiyyah – Weltlich begründete Zuneigung und die Grenze des Kufr",
       "quote": "Es kann vorkommen, dass ein Mensch ihnen wegen einer Verwandtschaftsbeziehung oder eines Bedürfnisses Zuneigung entgegenbringt. Dies ist dann eine Sünde, die seinen Glauben vermindert, ohne dass er dadurch zum Kāfir wird – wie es bei Ḥāṭib ibn Abī Baltaʿah geschah, als er den Götzendienern einige Nachrichten über den Propheten ﷺ übermittelte.",
-      "status": "verified-de"
+      "dir": "ltr",
+      "status": "model-reviewed"
     },
     "ar": {
-      "status": "not-approved-fallback-to-de",
+      "title": "ابن تيمية – المودة لأسباب دنيوية وحدود التكفير",
+      "quote": "وقد تحصل للرجل موادتهم لرحم أو حاجة فتكون ذنبا ينقص به إيمانه ولا يكون به كافرا كما حصل من حاطب بن أبي بلتعة لما كاتب المشركين ببعض أخبار النبي صلى الله عليه وسلم",
       "dir": "rtl",
-      "notice": "Quelle und Lerninhalt bis zur fachlichen Freigabe auf Deutsch"
+      "status": "model-reviewed"
     },
     "en": {
-      "status": "not-approved-fallback-to-de",
+      "title": "Ibn Taymiyyah – Worldly motives for affection and the boundary of disbelief",
+      "quote": "A person may show them affection because of kinship or a need. This may be a sin diminishing his faith, without making him a disbeliever, as happened with Ḥāṭib ibn Abī Baltaʿah when he wrote to the polytheists conveying some news about the Prophet ﷺ.",
       "dir": "ltr",
-      "notice": "Quelle und Lerninhalt bis zur fachlichen Freigabe auf Deutsch"
+      "status": "model-reviewed"
     },
     "tr": {
-      "status": "not-approved-fallback-to-de",
+      "title": "İbn Teymiyye – Dünyevî sebeplerle sevgi ve küfrün sınırı",
+      "quote": "Bir kimse onlara akrabalık veya bir ihtiyaç sebebiyle sevgi duyabilir. Bu, imanını eksilten bir günah olabilir; fakat bu sebeple kâfir olmaz. Hâtıb b. Ebî Beltea'nın, müşriklere Peygamber ﷺ hakkında bazı bilgiler yazdığında olduğu gibi.",
       "dir": "ltr",
-      "notice": "Quelle und Lerninhalt bis zur fachlichen Freigabe auf Deutsch"
+      "status": "model-reviewed"
     },
     "ku": {
-      "status": "not-approved-fallback-to-de",
+      "title": "Îbn Teymiyye – Hezkirina ji ber sedemên dinyayî û sînorê kufrê",
+      "quote": "Dibe ku mirov ji ber xizmatiyê an hewcedariyekê ji wan hez bike. Ev dibe ku gunehek be û îmana wî kêm bike, bêyî ku ew bi vê yekê kafir bibe; wek di bûyera Ḥāṭib ibn Ebî Belteʿa de ku wî hin nûçeyên derbarê Pêxember ﷺ de ji muşrikan re nivîsand.",
       "dir": "ltr",
-      "notice": "Quelle und Lerninhalt bis zur fachlichen Freigabe auf Deutsch"
+      "status": "model-reviewed"
     },
     "ckb": {
-      "status": "not-approved-fallback-to-de",
+      "title": "ئیبن تەیمیە – خۆشەویستی بە هۆکاری دنیایی و سنووری کفر",
+      "quote": "لەوانەیە کەسێک بەهۆی خزمایەتی یان پێویستییەکەوە خۆشەویستییان بۆ هەبێت. ئەمە دەتوانێت گوناهێک بێت کە ئیمانی کەم دەکاتەوە، بەڵام بەهۆی ئەوەوە کافر نابێت؛ وەک لە ڕووداوی حاتیب کوڕی ئەبی بَلتَعەدا، کاتێک هەندێک زانیاریی دەربارەی پێغەمبەر ﷺ بۆ موشریکەکان نووسی.",
       "dir": "rtl",
-      "notice": "Quelle und Lerninhalt bis zur fachlichen Freigabe auf Deutsch"
+      "status": "model-reviewed"
     },
     "bs": {
-      "status": "not-approved-fallback-to-de",
+      "title": "Ibn Tejmijja – Svjetovni razlozi naklonosti i granica kufra",
+      "quote": "Čovjek im može iskazivati naklonost zbog srodstva ili neke potrebe. To može biti grijeh koji umanjuje njegov iman, ali ga time ne čini nevjernikom, kao u slučaju Hatiba ibn Ebi Belte'a kada je mušricima poslao neke vijesti o Vjerovjesniku ﷺ.",
       "dir": "ltr",
-      "notice": "Quelle und Lerninhalt bis zur fachlichen Freigabe auf Deutsch"
+      "status": "model-reviewed"
     },
     "fr": {
-      "status": "not-approved-fallback-to-de",
+      "title": "Ibn Taymiyyah – Affection pour des motifs mondains et limite de la mécréance",
+      "quote": "Un homme peut leur manifester de l’affection en raison d’un lien de parenté ou d’un besoin. Cela peut constituer un péché diminuant sa foi, sans faire de lui un mécréant, comme dans le cas de Ḥāṭib ibn Abī Baltaʿah lorsqu’il écrivit aux polythéistes certaines informations concernant le Prophète ﷺ.",
       "dir": "ltr",
-      "notice": "Quelle und Lerninhalt bis zur fachlichen Freigabe auf Deutsch"
+      "status": "model-reviewed"
     },
     "es": {
-      "status": "not-approved-fallback-to-de",
+      "title": "Ibn Taymiyyah – Afecto por motivos mundanos y el límite de la incredulidad",
+      "quote": "Una persona puede mostrarles afecto por parentesco o necesidad. Esto puede ser un pecado que disminuya su fe, sin que por ello se convierta en incrédulo, como sucedió con Ḥāṭib ibn Abī Baltaʿah cuando escribió a los politeístas transmitiéndoles algunas noticias sobre el Profeta ﷺ.",
       "dir": "ltr",
-      "notice": "Quelle und Lerninhalt bis zur fachlichen Freigabe auf Deutsch"
+      "status": "model-reviewed"
     }
-  }
+  },
+  "reviewMethod": "GPT-6 model-led Arabic/source/semantic check; human review not claimed"
 }
