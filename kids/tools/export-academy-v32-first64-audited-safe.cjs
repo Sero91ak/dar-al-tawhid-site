@@ -17,11 +17,13 @@ assert.equal(v31.totals.staged,80);
 const prior=new Set(v31.entries.map(x=>x.text));
 const missing=new Set(catalog.audit.lessonsMissingSourceAudit);
 const conservativeRisk=/[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff\uFB50-\uFDFF\uFE70-\uFEFFṢṣḤḥḌḍṬṭḎḏṮṯẒẓĀāŪūĪīʿʾǦǧŠšḪḫ]/u;
+const unresolvedOpenPrompt=/^(?:Erkläre|Beschreibe|Schreibe|Sprich|Formuliere|Sage|Nenne|Erzähl|Berichte|Begründe)\b|in eigenen Worten/iu;
 const focus=["aqidah-tawhid-recht-allahs","aqidah-iman-sechs-grundlagen","aqidah-ikhlas-warum-gutes-tun"];
 const kindOrder=["welcome","narration","recap","evidence","hadith-de","question","answer","hint","explanation"];
 const approved=catalog.phrases.filter(x=>!prior.has(x.text)&&
  x.contexts.length>0&&x.contexts.every(c=>!missing.has(c.lessonId))&&
- x.pronunciationReviewRequired===false&&!conservativeRisk.test(x.text));
+ x.pronunciationReviewRequired===false&&!conservativeRisk.test(x.text)&&
+ !(x.contexts.some(c=>c.kind==="question")&&unresolvedOpenPrompt.test(x.text)));
 const priority=x=>{
  const locations=x.contexts.map(c=>focus.indexOf(c.lessonId)).filter(i=>i>=0);
  return locations.length?Math.min(...locations):999;
