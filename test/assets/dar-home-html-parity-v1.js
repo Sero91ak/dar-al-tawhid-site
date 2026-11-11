@@ -347,6 +347,11 @@ function stylesheet(){
  "#darHomeHtmlParityV1 .dhp-greeting{white-space:normal!important;}",
  "#darHomeHtmlParityV1 .dhp-intro{max-width:70ch!important;line-height:1.48!important;white-space:normal!important;height:auto!important;max-height:none!important;}",
  "html,html body{overscroll-behavior-y:none!important;}",
+ /* HOME GAP V1: existing search stays accessible, and no empty slot separates shortcuts and Quran. Scoped to canonical Home siblings. */
+ "#darHomeHtmlParityV1 .dhp-quickbar + .dhp-search-box{display:block!important;position:relative!important;visibility:visible!important;opacity:1!important;height:auto!important;min-height:0!important;max-height:none!important;margin:9px 0 0!important;padding:0!important;}",
+ "#darHomeHtmlParityV1 .dhp-quickbar + .dhp-search-box[hidden]{display:none!important;margin:0!important;}",
+ "#darHomeHtmlParityV1 .dhp-quickbar + .dhp-search-box .dhp-search-pill{display:flex!important;visibility:visible!important;opacity:1!important;height:auto!important;min-height:52px!important;}",
+ "#darHomeHtmlParityV1 .dhp-search-box + .dhp-quran-section,#darHomeHtmlParityV1 .dhp-quickbar + .dhp-quran-section{margin-top:12px!important;}",
  ].join("\n");
 }
 function create(){
