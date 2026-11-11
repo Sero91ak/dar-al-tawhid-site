@@ -10,7 +10,7 @@ scholar: "Imām an-Nawawī"
 book: "Šarḥ Ṣaḥīḥ Muslim"
 source: "📝 Šarḥ Ṣaḥīḥ Muslim, 12/474; Ṣaḥīḥ Muslim 1783a"
 qSourceId: "qsource:54"
-localizationManifest: "/assets/q54-classical-source.json"
+localizationManifest: "/assets/q54-locales.json"
 availableLocales: "de"
 verificationNote: "Arabischer Originalauszug und primäre klassische Fundstelle geprüft; moderne Staatsangehörigkeit ist nicht unmittelbar behandelt. Acht Sprachversionen in fachlicher Übersetzungsprüfung. Q54 und Lernbereich werden erst nach bestandenem Deployment verwendet."
 tags: []
