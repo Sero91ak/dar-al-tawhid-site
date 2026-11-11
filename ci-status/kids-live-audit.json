@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-11-11T19:48:16Z",
+  "timestamp": "2026-11-11T19:51:47Z",
   "trigger": "workflow_run",
-  "finishedDeployConclusion": "failure",
-  "finishedDeployRun": "43090217638",
+  "finishedDeployConclusion": "success",
+  "finishedDeployRun": "43090280717",
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
@@ -90,21 +90,30 @@
   "lastDeployRuns": [
     {
       "conclusion": null,
+      "created_at": "2026-11-11T19:49:27Z",
+      "head_sha": "9a9ac9e60e91f641c3543ceb2a28bc55b63cec58",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/43090762142",
+      "id": 43090762142,
+      "status": "queued",
+      "updated_at": "2026-11-11T19:51:10Z"
+    },
+    {
+      "conclusion": "cancelled",
       "created_at": "2026-11-11T19:47:54Z",
       "head_sha": "ea01b13513c5fc64efc4938721a8365580eba4e2",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/43090525798",
       "id": 43090525798,
-      "status": "pending",
-      "updated_at": "2026-11-11T19:47:56Z"
+      "status": "completed",
+      "updated_at": "2026-11-11T19:49:29Z"
     },
     {
-      "conclusion": null,
+      "conclusion": "success",
       "created_at": "2026-11-11T19:46:16Z",
       "head_sha": "afb2ca8c47e4ba2fa77b7c8a17ca5ee2c2d97d52",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/43090280717",
       "id": 43090280717,
-      "status": "queued",
-      "updated_at": "2026-11-11T19:47:50Z"
+      "status": "completed",
+      "updated_at": "2026-11-11T19:51:10Z"
     },
     {
       "conclusion": "cancelled",
@@ -132,15 +141,6 @@
       "id": 43090225748,
       "status": "completed",
       "updated_at": "2026-11-11T19:45:59Z"
-    },
-    {
-      "conclusion": "failure",
-      "created_at": "2026-11-11T19:45:51Z",
-      "head_sha": "b39eb2f62e7eb36c3c7ae7c2597c6aa3b6def371",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/43090217638",
-      "id": 43090217638,
-      "status": "completed",
-      "updated_at": "2026-11-11T19:47:50Z"
     }
   ]
 }
