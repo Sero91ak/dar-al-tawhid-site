@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "contentId": "post:shafii-hatib-manifest-kufr-20261111",
+  "qSourceId": "qsource:55",
+  "canonicalUrl": "https://dar-al-tawhid.de/q/55/",
+  "localeStorageKey": "darAdultPreferredLocaleV1",
+  "supported": [
+    "de",
+    "ar",
+    "en",
+    "tr",
+    "ku",
+    "ckb",
+    "bs",
+    "fr",
+    "es"
+  ],
+  "approvedLocales": [
+    "de",
+    "ar",
+    "en",
+    "tr",
+    "ku",
+    "ckb",
+    "bs",
+    "fr",
+    "es"
+  ],
+  "pendingReviewLocales": [],
+  "sourceArabicImmutable": true,
+  "sourceLanguage": "ar",
+  "locales": {
+    "de": {
+      "title": "Imām aš-Šāfiʿī – Nicht jede Unterstützung ist eindeutiger Kufr",
+      "quote": "Weder das Offenlegen einer Schwachstelle eines Muslims noch die Unterstützung eines Nichtmuslims dadurch, dass man ihn vor einem geplanten Überraschungsangriff der Muslime warnt, damit er sich davor schützt oder den Muslimen mit einer Schädigung zuvorkommt, ist eindeutiger Kufr.",
+      "dir": "ltr",
+      "status": "model-reviewed"
+    },
+    "ar": {
+      "title": "الإمام الشافعي – ليست كل إعانة كفرًا بيّنًا",
+      "quote": "وليس الدلالة على عورة مسلم ولا تأييد كافر بأن يحذر أن المسلمين يريدون منه غرة ليحذرها أو يتقدم في نكاية المسلمين بكفر بين",
+      "dir": "rtl",
+      "status": "model-reviewed"
+    },
+    "en": {
+      "title": "Imām al-Shāfiʿī – Not every assistance is manifest disbelief",
+      "quote": "Disclosing a Muslim's vulnerability, or assisting a non-Muslim by warning him of a surprise Muslim attack so that he can protect himself or pre-empt it, is not in itself manifest disbelief.",
+      "dir": "ltr",
+      "status": "model-reviewed"
+    },
+    "tr": {
+      "title": "İmam Şâfiî – Her yardım açık küfür değildir",
+      "quote": "Bir Müslümanın zayıf noktasını bildirmek veya Müslümanların baskınını haber vererek bir gayrimüslimin kendini korumasına ya da karşılık vermesine yardımcı olmak, kendi başına açık küfür değildir.",
+      "dir": "ltr",
+      "status": "model-reviewed"
+    },
+    "ku": {
+      "title": "Îmam Şafiʿî – Ne her arîkarî kufreke eşkere ye",
+      "quote": "Nîşandana xala lawaz a Misilmanekî, an hişyarkirina kesekî ne-Misilman ji êrişeke surprîz a Misilmanan, bi tena serê xwe kufreke eşkere nîne.",
+      "dir": "ltr",
+      "status": "model-reviewed"
+    },
+    "ckb": {
+      "title": "ئیمام شافعی – هەموو یارمەتییەک کفرێکی ئاشکرا نییە",
+      "quote": "ئاشکراکردنی خاڵی لاوازی موسڵمانێک، یان ئاگادارکردنەوەی نەموسڵمانێک لە هێرشی لەناکاوی موسڵمانان، بە خۆی کفرێکی ئاشکرا نییە.",
+      "dir": "rtl",
+      "status": "model-reviewed"
+    },
+    "bs": {
+      "title": "Imam eš-Šafi'i – Nije svaka pomoć jasan kufr",
+      "quote": "Otkrivanje slabosti nekog muslimana ili pomaganje nemuslimanu upozorenjem na iznenadni napad muslimana, kako bi se mogao zaštititi ili uzvratiti, samo po sebi nije jasan kufr.",
+      "dir": "ltr",
+      "status": "model-reviewed"
+    },
+    "fr": {
+      "title": "L’imam al-Shāfiʿī – Toute aide n’est pas une mécréance manifeste",
+      "quote": "Révéler une vulnérabilité d’un musulman ou aider un non-musulman en l’avertissant d’une attaque surprise des musulmans afin qu’il s’en protège ou la devance ne constitue pas, en soi, une mécréance manifeste.",
+      "dir": "ltr",
+      "status": "model-reviewed"
+    },
+    "es": {
+      "title": "El imán al-Shāfiʿī – No toda ayuda es incredulidad manifiesta",
+      "quote": "Revelar una vulnerabilidad de un musulmán o ayudar a un no musulmán advirtiéndole de un ataque sorpresa de los musulmanes para que se proteja o actúe antes no constituye, por sí mismo, incredulidad manifiesta.",
+      "dir": "ltr",
+      "status": "model-reviewed"
+    }
+  },
+  "reviewMethod": "GPT-6 model-led Arabic/source/semantic check; human review not claimed"
+}
