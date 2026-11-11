@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'kids/akademie/**'
+      - 'kids/tools/test-academy-profile-greeting-audio-v1.cjs'
       - 'test/kids/akademie/**'
       - 'scripts/test-kids-academy-creator-v17.js'
       - 'desktop-preview/kids-akademie-unterricht.html'
@@ -31,6 +32,7 @@ on:
     branches: [main]
     paths:
       - 'kids/akademie/**'
+      - 'kids/tools/test-academy-profile-greeting-audio-v1.cjs'
       - 'test/kids/akademie/**'
       - 'scripts/test-kids-academy-creator-v17.js'
       - 'desktop-preview/kids-akademie-unterricht.html'
@@ -70,6 +72,8 @@ jobs:
         run: node scripts/test-kids-academy-school-v11.js
       - name: Verify iOS direct Serhat greeting, QA buttons and V4 source clips
         run: node scripts/test-kids-academy-direct-voice-v13.js
+      - name: Verify personalized sister/brother display and reusable exact V4 voice phrases (zero credits)
+        run: node kids/tools/test-academy-profile-greeting-audio-v1.cjs
       - name: "Verify protected creator preview: full 34 topics and no real child state"
         run: node scripts/test-kids-academy-creator-v17.js
       - name: Verify exact Serhat V4 Academy audio needs without credits
