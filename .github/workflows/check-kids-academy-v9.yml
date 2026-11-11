@@ -134,6 +134,10 @@ jobs:
         run: |
           python3 -m py_compile kids/tools/build-academy-v9-staging.py kids/tools/build-academy-audio.py
           python3 kids/tools/build-academy-v9-staging.py --dry-run
+      - name: Verify 2026-11-11 first Ṣidq V4 generation preflight without voice credits
+        run: |
+          python3 -m py_compile kids/tools/produce-academy-sidq-v4-batch-20261111.py
+          python3 kids/tools/produce-academy-sidq-v4-batch-20261111.py --dry-run
       - name: Verify frozen V9 archive stays intact as live choice questions evolve (zero credits)
         run: |
           set -euo pipefail
