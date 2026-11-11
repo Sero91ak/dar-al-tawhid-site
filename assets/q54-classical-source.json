@@ -4,7 +4,7 @@
   "statementId": "statement:nawawi-hudaybiyyah-contract-20261111",
   "group": "DĀR AL TAWḤĪD Zentrale",
   "kind": "classical-commentary",
-  "status": "editorial-preflight",
+  "status": "reviewed-for-publication-pre-live-check",
   "sourceNumber": 54,
   "qSourceId": 54,
   "canonicalUrl": "https://dar-al-tawhid.de/q/54/",
@@ -46,9 +46,17 @@
     "es"
   ],
   "approvedLocales": [
-    "de"
+    "de",
+    "ar",
+    "en",
+    "tr",
+    "ku",
+    "ckb",
+    "bs",
+    "fr",
+    "es"
   ],
-  "localeReviewStatus": "DE original verified; 8 draft-language quotations aligned to full Arabic excerpt, NOT independently approved. Reader continues DE fallback.",
+  "localeReviewStatus": "2026-11-11 GPT-6 model-led semantic editorial review of all nine locale manuscripts against the Arabic source and the boundary of the classical claim; NOT an independent human/native-speaker certification.",
   "sourceArabicImmutable": true,
   "contentScope": "Classical distinction between omission in treaty wording and denial of prophethood; not a direct ruling on modern citizenship or oaths.",
   "locales": {
@@ -711,15 +719,14 @@
     }
   },
   "learningPath": "/lernen/vertragsformulierung-hudaybiyyah/",
-  "pendingReviewLocales": [
-    "ar",
-    "en",
-    "tr",
-    "ku",
-    "ckb",
-    "bs",
-    "fr",
-    "es"
-  ],
-  "sourceLinkReview": "Three grounded links: primary classical Arabic, second source (hadith or independent Arabic digital text), volume PDF or scanned source; printed page may vary by edition."
+  "pendingReviewLocales": [],
+  "sourceLinkReview": "Three grounded links: primary classical Arabic, second source (hadith or independent Arabic digital text), volume PDF or scanned source; printed page may vary by edition.",
+  "qualityAssurance": {
+    "originalArabicVerified": true,
+    "germanTranslationReviewed": true,
+    "allNineLocaleManuscriptsModelReviewed": true,
+    "humanIndependentReviewed": false,
+    "scopeLimit": "No blanket modern-nationality verdict; no permission to betray, aid hostilities, or approve shirk.",
+    "quizQuestionsPerLocale": 4
+  }
 }
