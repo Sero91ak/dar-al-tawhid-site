@@ -7,7 +7,7 @@
 ## Bestand / Originalbeleg
 
 Imām an-Nawawī, *al-Minhāǧ – Šarḥ Ṣaḥīḥ Muslim*, 12/474, Kapitel über den Vertrag von al-Ḥudaybiyyah. Textquelle:  
-https://www.islamweb.net/ar/library/content/53/5433/  
+https://www.islamweb.net/amp/ar/library/content/53/5440/  
 Ausgangsḥadīṯ: Ṣaḥīḥ Muslim 1783a, https://sunnah.com/muslim:1783a
 
 Die arabische Originalaussage in `manifest.json` ist ein **wörtlicher kurzer Auszug**, nicht der gesamte Absatz. Die in den Sprachfassungen erklärten Grenzen (kein Verherrlichen der Götzen) sind als **inhaltliche Erklärung**, nicht als Teil des zitierten Originals, kenntlich gemacht.
