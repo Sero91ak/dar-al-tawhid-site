@@ -56,7 +56,7 @@ for(const [lane,src] of [["visitor",visitorHome],["test",testHome]]){
  assert.match(src,/card\.dataset\.dhpRoute="prayer"/,"Prayer click navigation must remain");
 }
 assert.match(siteRouter,/dar-adult-brand-header-v2\.css\?v=20261107-compact-safearea-header-v3/);
-assert.match(siteRouter,/dar-home-test-parity-visitor\.js\?v=20261107-wasiyyah-route-v1/);
+assert.match(siteRouter,/dar-home-test-parity-visitor\.js\?v=20261111-home-performance-v1/);
 assert.match(testWorker,/dar-test-premium-header-v2\.css\?v=20261030-restore-original-hero-rail-v5/);
 assert.match(testWorker,/dar-home-html-parity-v1\.js\?v=20261107-welcome-editorial-v3/);
 assert.doesNotMatch(visitorHeader,/body\s*\{\s*padding-top:0!important/,"Do not reset body safe area indiscriminately");

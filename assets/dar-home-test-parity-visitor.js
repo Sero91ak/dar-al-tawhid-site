@@ -574,7 +574,10 @@ function quran(){
  var hero=document.querySelector("#dv3QuranSlot .home-v380-quran-hero");
  if(!hero)return;
  var name=nativeText(hero,"h2,h3,strong")||"";
- if(name&&name.length<70)root.querySelector("#dhpQResume").textContent=name;
+ if(name&&name.length<70){
+  var resume=root.querySelector("#dhpQResume");
+  if(resume&&resume.textContent!==name)resume.textContent=name;
+ }
 }
 function modal(){
  var root=document.getElementById(ID),p=document.getElementById("dv3ThemePanel");
@@ -628,7 +631,12 @@ function mirrorFriday(){
   target.setAttribute("aria-label","Jumuʿah am Freitag");
  }
  if(target.previousElementSibling!==prayer)prayer.insertAdjacentElement("afterend",target);
- if(!original){target.hidden=true;target.replaceChildren();target.removeAttribute("data-jf-sig");return}
+ if(!original){
+  if(!target.hidden)target.hidden=true;
+  if(target.childNodes.length)target.replaceChildren();
+  if(target.hasAttribute("data-jf-sig"))target.removeAttribute("data-jf-sig");
+  return;
+ }
  var sig=original.getAttribute("data-jf-sig")||"";
  if(!target.hidden&&target.getAttribute("data-jf-sig")===sig)return;
  target.setAttribute("data-jf-sig",sig);
@@ -653,7 +661,11 @@ function sync(){
  var root=create();if(!root)return;
  updateBrand();recent();quran();modal();mirrorFriday();restoreDarHomeScroll();
 }
-function queue(){if(pending)return;pending=true;requestAnimationFrame(function(){pending=false;try{sync()}catch(e){console.warn("Visitor Home parity",e)}})}
+function queue(){
+ if(pending||!document.body||!document.body.classList.contains("is-home-route"))return;
+ pending=true;
+ requestAnimationFrame(function(){pending=false;try{sync()}catch(e){console.warn("Visitor Home parity",e)}});
+}
 function loadVisitorSmartDashboard(){
  /* The active adult visitor home owns this bundle. No visitor index duplication. */
  var root=document.head||document.documentElement;
@@ -682,9 +694,27 @@ function init(){
  loadVisitorSmartDashboard();
  queue();
  var view=document.getElementById("appView");
- if(view)new MutationObserver(queue).observe(view,{subtree:true,childList:true});
+ if(view){
+  /* Only real source changes need to reconcile Home. The app and prayer
+     clock both update text frequently; observing every descendant made
+     unrelated content updates trigger a full Home reconciliation. */
+  var sourceSelector="#dv3Latest,#dv3QuranSlot,#darJummahFridayHome,.home-v380-shell";
+  new MutationObserver(function(records){
+   if(!document.body.classList.contains("is-home-route"))return;
+   for(var i=0;i<records.length;i++){
+    var record=records[i],node=record.target;
+    if(node===view){queue();return}
+    if(node&&node.nodeType===1&&node.closest&&node.closest(sourceSelector)){queue();return}
+    for(var j=0;j<record.addedNodes.length;j++){
+     var added=record.addedNodes[j];
+     if(added.nodeType===1&&((added.matches&&added.matches(sourceSelector))||
+        (added.querySelector&&added.querySelector(sourceSelector)))){queue();return}
+    }
+   }
+  }).observe(view,{subtree:true,childList:true});
+ }
  var top=document.querySelector(".top-shell");
- if(top)new MutationObserver(queue).observe(top,{subtree:true,childList:true,characterData:true});
+ if(top)new MutationObserver(queue).observe(top,{subtree:false,childList:true});
  new MutationObserver(queue).observe(document.body,{attributes:true,attributeFilter:["class"]});
  document.addEventListener("dar:view-rendered",queue);
  window.addEventListener("hashchange",queue);

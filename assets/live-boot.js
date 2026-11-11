@@ -177,18 +177,34 @@
     else setTimeout(done, 16);
   }
 
+  /* Observe actual inserted elements instead of running whole-document
+   * DOM scans for every clock tick, caption update or internal text change. */
+  function containsAddedMatch(records, selector) {
+    for (var i = 0; i < records.length; i += 1) {
+      var record = records[i];
+      if (record.type !== "childList") continue;
+      for (var j = 0; j < record.addedNodes.length; j += 1) {
+        var node = record.addedNodes[j];
+        if (!node || node.nodeType !== 1) continue;
+        if ((node.matches && node.matches(selector)) ||
+            (node.querySelector && node.querySelector(selector))) return true;
+      }
+    }
+    return false;
+  }
+
   function bindFeedHeaderGuard() {
     scheduleDomWork(stripFeedDuplicateHeader);
     window.addEventListener("hashchange", function () {
       scheduleDomWork(stripFeedDuplicateHeader);
     });
-    if (document.documentElement) {
-      new MutationObserver(function () {
-        scheduleDomWork(stripFeedDuplicateHeader);
-      }).observe(document.documentElement, {
-        childList: true,
-        subtree: true
-      });
+    var app = document.getElementById("appView");
+    if (app && typeof MutationObserver === "function") {
+      new MutationObserver(function (records) {
+        if (isFeedRoute() && containsAddedMatch(records, ".view-head")) {
+          scheduleDomWork(stripFeedDuplicateHeader);
+        }
+      }).observe(app, { childList: true });
     }
   }
 
@@ -197,13 +213,11 @@
     window.addEventListener("hashchange", scheduleChipPrune);
     window.addEventListener("load", scheduleChipPrune);
     document.addEventListener("DOMContentLoaded", scheduleChipPrune);
-    if (document.documentElement) {
-      new MutationObserver(function () {
-        scheduleChipPrune();
-      }).observe(document.documentElement, {
-        childList: true,
-        subtree: true
-      });
+    var app = document.getElementById("appView");
+    if (app && typeof MutationObserver === "function") {
+      new MutationObserver(function (records) {
+        if (containsAddedMatch(records, PRUNE_SELECTOR)) scheduleChipPrune();
+      }).observe(app, { childList: true, subtree: true });
     }
   }
 
@@ -290,14 +304,8 @@
     window.addEventListener("load", scheduleHadithGateGuard);
     window.addEventListener("pageshow", scheduleHadithGateGuard);
     document.addEventListener("dar:render", scheduleHadithGateGuard);
-    if (document.documentElement) {
-      new MutationObserver(function () {
-        scheduleHadithGateGuard();
-      }).observe(document.documentElement, {
-        childList: true,
-        subtree: true
-      });
-    }
+    /* The additional Hadith gate is deliberately disabled. No global
+       MutationObserver is necessary for its no-op placement callback. */
   }
 
   function readVersionState() {
@@ -464,13 +472,12 @@
     window.addEventListener("load", scheduleHomeMoreFix);
     window.addEventListener("pageshow", scheduleHomeMoreFix);
     window.addEventListener("popstate", scheduleHomeMoreFix);
-    if (document.documentElement) {
-      new MutationObserver(function () {
-        scheduleHomeMoreFix();
-      }).observe(document.documentElement, {
-        childList: true,
-        subtree: true
-      });
+    if (document.body && typeof MutationObserver === "function") {
+      new MutationObserver(function (records) {
+        if (containsAddedMatch(records, "section.home-more-section,section.feature-discovery-section")) {
+          scheduleHomeMoreFix();
+        }
+      }).observe(document.body, { childList: true, subtree: true });
     }
     setTimeout(runVersionCheck, 2500);
     setTimeout(function () { requestLiveSync("boot"); }, 800);
