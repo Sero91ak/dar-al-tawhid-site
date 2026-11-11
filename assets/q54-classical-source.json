@@ -4,7 +4,7 @@
   "statementId": "statement:nawawi-hudaybiyyah-contract-20261111",
   "group": "DĀR AL TAWḤĪD Zentrale",
   "kind": "classical-commentary",
-  "status": "staged-q-card-review",
+  "status": "editorial-preflight",
   "sourceNumber": 54,
   "qSourceId": 54,
   "canonicalUrl": "https://dar-al-tawhid.de/q/54/",
@@ -19,6 +19,18 @@
       "label": "① Islamweb · an-Nawawī · Šarḥ Muslim 12/474",
       "sub": "Originalarabischer Wortlaut mit erklärendem Kontext",
       "url": "https://www.islamweb.net/amp/ar/library/content/53/5440/#:~:text=%D9%88%D9%84%D8%A7%20%D9%81%D9%8A%20%D8%AA%D8%B1%D9%83%20%D9%88%D8%B5%D9%81%D9%87%20%D8%A3%D9%8A%D8%B6%D8%A7%20%D8%B5%D9%84%D9%89%20%D8%A7%D9%84%D9%84%D9%87%20%D8%B9%D9%84%D9%8A%D9%87%20%D9%88%D8%B3%D9%84%D9%85%20%D9%87%D9%86%D8%A7%20%D8%A8%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%20%D9%85%D8%A7%20%D9%8A%D9%86%D9%81%D9%8A%D9%87%D8%A7"
+    },
+    {
+      "label": "② Ṣaḥīḥ Muslim · Vertrag von al-Ḥudaybiyyah",
+      "sub": "Authentische Sunnah als Grundlage der Erläuterung",
+      "url": "https://sunnah.com/muslim:1783a",
+      "kind": "hadith"
+    },
+    {
+      "label": "③ PDF/Scan · an-Nawawī, Šarḥ Muslim, Band 12",
+      "sub": "Digitalisat der historischen Buchausgabe (Paginierung editionsabhängig)",
+      "url": "https://al-bayan.online/api/uploads/books/pdf-1783436901309-30354463.pdf",
+      "kind": "pdf-scan"
     }
   ],
   "pdfStatus": "No PDF/scan card until an exact edition/page anchor has been independently checked.",
@@ -708,5 +720,6 @@
     "bs",
     "fr",
     "es"
-  ]
+  ],
+  "sourceLinkReview": "Three grounded links: primary classical Arabic, second source (hadith or independent Arabic digital text), volume PDF or scanned source; printed page may vary by edition."
 }
