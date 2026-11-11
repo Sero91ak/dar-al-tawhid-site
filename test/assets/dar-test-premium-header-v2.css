@@ -362,16 +362,13 @@ html.dar-test-premium-header-v2 body.has-bottom-nav #appView :is(
 ){
   scroll-margin-top:calc(var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px)) + 10px)!important;
 }
-/* Only actually sticky nested headings and opt-in stages need a fixed-header
-   offset. The overview Ḥadīṯ photo is position:relative in its route owner;
-   applying this offset to it creates an empty gap as tall as the header. */
+/* Existing sticky-photo variants always clear the fixed brand and preserve
+   inner search stacking. Reading-detail and utility covers stay in their
+   originally authored relative flow, avoiding obstruction of long articles. */
 html.dar-test-premium-header-v2 body.is-hadith-route #appView .hadith-hub--nested > .view-head,
+html.dar-test-premium-header-v2 body.is-hadith-route #appView .hadith-hub > .view-head,
 html.dar-test-premium-header-v2 body.has-bottom-nav #appView [data-hero-kind][data-hero-scroll="sticky"] > .dar-hero-stage{
   top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,75px))!important;
-}
-html.dar-test-premium-header-v2 body.is-hadith-route #appView.view > .hadith-hub:not(.hadith-hub--nested) > .view-head{
-  top:auto!important;
-  inset-block-start:auto!important;
 }
 
 
