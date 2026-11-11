@@ -185,6 +185,62 @@
     root.style.setProperty("--layout-vv-offset-top", (metrics.offsetTop || 0) + "px");
   }
 
+  /* DAR_ADULT_KEYBOARD_NAV_STABILITY_V1_20261111
+   * One EXISTING adaptive layout owner handles input/IME state. CSS owns
+   * the original five-tab Dock geometry: do not reparent it, mutate style,
+   * scroll the document or move it to the keyboard's visual viewport edge.
+   * An active editable field hides only the dock's VISIBILITY; after the
+   * keyboard closes it returns to precisely the same fixed bottom position.
+   */
+  var editSession = false;
+  var editRestoreTimer = 0;
+  function editableField(target) {
+    if (!target || target.disabled || target.readOnly) return false;
+    if (target.isContentEditable) return true;
+    var tag = String(target.tagName || "").toUpperCase();
+    if (tag === "TEXTAREA") return true;
+    if (tag !== "INPUT") return false;
+    return /^(?:text|search|email|url|tel|number|password)$/.test(
+      String(target.type || "text").toLowerCase());
+  }
+  function adultTouchSurface() {
+    if (!document.body || !document.body.classList.contains("has-bottom-nav")) return false;
+    var root = document.documentElement;
+    if (root.classList.contains("dar-ios-native-app") ||
+        root.classList.contains("dar-android-native-app")) return true;
+    if (global.navigator && global.navigator.maxTouchPoints > 0) return true;
+    return !!(global.matchMedia && global.matchMedia("(pointer:coarse)").matches);
+  }
+  function visualKeyboardOpen() {
+    var vv = global.visualViewport;
+    if (!vv || !(vv.height > 0) || (vv.scale && vv.scale > 1.1)) return false;
+    var doc = document.documentElement;
+    var layoutHeight = doc.clientHeight || global.innerHeight || 0;
+    return layoutHeight > 0 && layoutHeight - vv.height > 120;
+  }
+  function syncAdultTypingDock() {
+    var focused = adultTouchSurface() && editableField(document.activeElement);
+    if (focused || (editSession && visualKeyboardOpen())) editSession = true;
+    else editSession = false;
+    document.documentElement.classList.toggle("dar-adult-text-entry-active", editSession);
+  }
+  function onAdultTextFocus(event) {
+    if (!adultTouchSurface() || !editableField(event && event.target)) return;
+    if (editRestoreTimer) { global.clearTimeout(editRestoreTimer); editRestoreTimer = 0; }
+    editSession = true;
+    document.documentElement.classList.add("dar-adult-text-entry-active");
+  }
+  function onAdultTextBlur(event) {
+    if (!editableField(event && event.target) || !editSession) return;
+    if (editRestoreTimer) global.clearTimeout(editRestoreTimer);
+    /* Keep the dock invisible throughout WebKit/Android IME dismissal.
+       A second input focused in the meantime keeps the same session. */
+    editRestoreTimer = global.setTimeout(function () {
+      editRestoreTimer = 0;
+      syncAdultTypingDock();
+    }, 220);
+  }
+
   function applyOrientationAttrs(metrics) {
     var root = document.documentElement;
     var landscape = metrics.width >= metrics.height;
@@ -318,6 +374,9 @@
       return;
     }
     started = true;
+    /* Capture once, including search fields created later by SPA renderers. */
+    document.addEventListener("focusin", onAdultTextFocus, true);
+    document.addEventListener("focusout", onAdultTextBlur, true);
     applyLayout(true);
 
     if (typeof ResizeObserver === "function") {
@@ -347,8 +406,14 @@
     }
 
     global.addEventListener("resize", onResize, { passive: true });
-    global.addEventListener("hashchange", function () { scheduleApply(true); }, { passive: true });
-    global.addEventListener("pageshow", function () { scheduleApply(true); }, { passive: true });
+    global.addEventListener("hashchange", function () {
+      syncAdultTypingDock();
+      scheduleApply(true);
+    }, { passive: true });
+    global.addEventListener("pageshow", function () {
+      syncAdultTypingDock();
+      scheduleApply(true);
+    }, { passive: true });
     global.addEventListener("orientationchange", scheduleOrientBurst, { passive: true });
 
     if (global.screen && global.screen.orientation && typeof global.screen.orientation.addEventListener === "function") {
@@ -359,6 +424,7 @@
 
     if (global.visualViewport) {
       global.visualViewport.addEventListener("resize", onResize, { passive: true });
+      global.visualViewport.addEventListener("resize", syncAdultTypingDock, { passive: true });
     }
 
     document.addEventListener("visibilitychange", function () {
