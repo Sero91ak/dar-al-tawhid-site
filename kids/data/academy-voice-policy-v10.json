@@ -30,7 +30,15 @@
     "pronunciationDictionaryId": "Q8w3SxtoVo8NSjsnlJEd",
     "pronunciationDictionaryVersionId": "wSzgkGpAwEDiTak8DApc",
     "revision": "kids-story-v4-same-speaker-20261010",
-    "languagePolicy": "German lesson narration with correctly pronounced Fuṣḥā terminology. Quran Arabic recitation is always genuine recitation, never synthetic."
+    "languagePolicy": "German lesson narration with correctly pronounced Fuṣḥā terminology. Quran Arabic recitation is always genuine recitation, never synthetic.",
+    "ownerPronunciationHold": {
+      "enabled": true,
+      "reason": "Owner rejected 2026-11-11: Sūrat at-Tawbah / Sūrat an-Naḥl / Ṣaḥīḥ Muslim pronunciation and spoken reference numbers. No billable generation or release until corrected scripts, Arabic-master pronunciation QA, and explicit listening approval.",
+      "appliesTo": "all KIDS Academy V4 staging pipelines",
+      "approvalRequired": "explicit owner hearing review",
+      "newGenerationAllowed": false,
+      "allPreviouslyStagedAudioUnapproved": true
+    }
   },
   "costControls": {
     "zeroCreditsForPlayback": true,
