@@ -376,7 +376,13 @@ function activateAdultCompactHero(html) {
   // DĀR_HOME_RECENT_POSTS_V1: lightweight 2–5-day publications timeline in
   // public visitor, iOS WKWebView and Android PWA. No Test/Kids/push routes.
   if (!html.includes('id="darHomeRecentPostsV1Css"')) {
-    const css = '<link rel="stylesheet" id="darHomeRecentPostsV1Css" href="/assets/dar-home-recent-posts-v1.css?v=20261112-ios-compact-v1">';
+    const css = '<link rel="stylesheet" id="darHomeRecentPostsV1Css" href="/assets/dar-home-recent-posts-v1.css?v=20261101-premium-home-v11">';
+    html = addStyleWithoutMovingDoctype(html, css);
+  }
+  // Official iOS WKWebView only: selector-scoped presentation adapter.
+  // Browser and Android render unchanged even though the link is shared.
+  if (!html.includes('id="darIosRecentCompactV1Css"')) {
+    const css = '<link rel="stylesheet" id="darIosRecentCompactV1Css" href="/assets/dar-ios-recent-compact-v1.css?v=20261112-ios-compact-v1">';
     html = addStyleWithoutMovingDoctype(html, css);
   }
   if (!html.includes('id="darHomeRecentPostsV1Js"')) {
