@@ -379,6 +379,12 @@ function activateAdultCompactHero(html) {
     const css = '<link rel="stylesheet" id="darHomeRecentPostsV1Css" href="/assets/dar-home-recent-posts-v1.css?v=20261101-premium-home-v11">';
     html = addStyleWithoutMovingDoctype(html, css);
   }
+  // Official iOS WKWebView only: selector-scoped presentation adapter.
+  // Browser and Android render unchanged even though the link is shared.
+  if (!html.includes('id="darIosRecentCompactV1Css"')) {
+    const css = '<link rel="stylesheet" id="darIosRecentCompactV1Css" href="/assets/dar-ios-recent-compact-v1.css?v=20261112-ios-compact-v1">';
+    html = addStyleWithoutMovingDoctype(html, css);
+  }
   if (!html.includes('id="darHomeRecentPostsV1Js"')) {
     const js = '<script defer id="darHomeRecentPostsV1Js" src="/assets/dar-home-recent-posts-v1.js?v=20261105-post-nine-v1"></' + 'script>';
     html = html.includes("</body>") ? html.replace("</body>", js + "</body>") : html + js;
