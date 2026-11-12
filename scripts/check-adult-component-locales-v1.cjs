@@ -63,7 +63,13 @@ assert(dailyHub.includes('root.querySelector("#darRecentPublicationsV1")')&&dail
 
 assert(moduleJs.includes('dar-recent-premium-track')&&moduleJs.includes('dar-recent-premium-toggle')&&moduleJs.includes('anchor:q||native.querySelector("#dhpLibrary")'),"Home publication capsule must be readable and anchored directly after Quran");
 assert(moduleCss.includes("HOME_RECENT_PREMIUM_V1")&&moduleCss.includes("scroll-snap-type:x mandatory"),"Responsive premium post slider missing");
-assert(router.includes("/assets/dar-home-recent-posts-v1.css?v=20261101-premium-home-v11"),"Premium CSS cache bust missing");
+assert(moduleCss.includes("DAR_IOS_RECENT_COMPACT_V1"),"Native-only compact iOS adapter missing");
+const nativeCompact=moduleCss.split("/* DAR_IOS_RECENT_COMPACT_V1")[1];
+assert(nativeCompact&&nativeCompact.includes("html.dar-ios-native-app #darRecentPublicationsV1"),"Compact styles must be scoped to the official native iOS shell");
+assert(nativeCompact.includes("grid-template-columns:minmax(0,1fr) auto")&&nativeCompact.includes("-webkit-line-clamp:3"),"Compact grid or readable three-line preview missing");
+assert(nativeCompact.includes("min-height:44px")&&nativeCompact.includes(".dar-recent-premium-source-link"),"iOS compact tap targets or source navigation missing");
+assert(!nativeCompact.includes("#bottomNav")&&!nativeCompact.includes("#dhpPrayerNativeMount"),"Feature CSS must not modify global tab bar or prayer clock");
+assert(router.includes("/assets/dar-home-recent-posts-v1.css?v=20261112-ios-compact-v1"),"iOS compact CSS cache bust missing");
 assert(builder.includes('localeManifest:/^\\/assets\\/'),"Canonical per-post locale manifest missing from generated index");
 assert(moduleCss.includes("var(--notice-paper")&&moduleCss.includes("dialog#darRecentNoticeV1::backdrop")&&moduleJs.includes("applyNoticeTheme(layer)"),"Modern native modal appearance palette missing");
 assert(router.indexOf('id="darAdultComponentI18nV1"')<router.indexOf('id="darHomeRecentPostsV1Js"'),"Shared locale registry must load before latest-posts component");
