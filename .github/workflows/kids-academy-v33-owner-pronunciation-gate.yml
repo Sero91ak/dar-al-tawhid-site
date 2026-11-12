@@ -43,6 +43,8 @@ jobs:
           x=json.load(open('/tmp/kids-academy-v34-fusha-review.json'))
           assert x['originalAudioCount']==144
           assert not x['ownerApproved'] and not x['producedNewAudio'] and not x['publicReleaseAllowed']
+          assert x['drafted']==144 and x['heldForManualPhoneticAuthoring']==0
+          assert x['spokenParaphrasesHeldForMeaningApproval']==6
           assert x['drafted']+x['heldForManualPhoneticAuthoring']==144
           for line in x['reviewOnly']:
               assert line['ownerHearingRequired'] and not line['released']
@@ -58,6 +60,8 @@ jobs:
           stop=p["production"]["ownerPronunciationHold"]
           assert stop["enabled"] is True and stop["newGenerationAllowed"] is False
           source=(root/"kids/tools/build-academy-v9-staging.py").read_text("utf8")
+          legacy=(root/"kids/tools/produce-academy-sidq-v30-fusha-qa-batch.py").read_text("utf8")
+          assert "V30 PHONETIC REGENERATION DISABLED" in legacy
           assert "OWNER AUDIO STOP" in source
           assert source.index("OWNER AUDIO STOP") < source.index('payload=json.dumps(')
           stage=json.loads((root/"kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json").read_text("utf8"))
