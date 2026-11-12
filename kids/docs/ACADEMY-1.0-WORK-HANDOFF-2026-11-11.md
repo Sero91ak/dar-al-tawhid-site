@@ -105,3 +105,19 @@ Der Nutzer hat klargestellt: Nicht nur Sūrat at-Tawbah, Sūrat an-Naḥl und �
 **Korrekturweg vor künftiger Produktion:** Arabische Begriffe mit korrektem Original und Vokalisation aus der vorhandenen Nutzer-Audiobibliothek abgleichen; bei gemischtem Deutsch-Arabisch nur geprüfte Sprachsegmente `de` / `ar` gemäß `data/pronunciation/voice-language-isolation-v1.json` verwenden; Referenznummern ausschließlich in der UI belassen; Probestücke auf dem echten iPhone abhören und Eigentümerfreigabe dokumentieren. Erst danach gezielte und kostenkontrollierte Re-Aufnahme statt pauschaler massenhafter Wiederholung. Die sichtbaren Lektionstexte und ihre Quellen sind nicht nachträglich für die TTS-Aussprache zu verfälschen.
 
 **Kein Live-/TestFlight-/Adult-App-Change.**
+
+---
+
+## 12.11.2026 – V34: 144/144 kontrollierte Sprechentwürfe statt 144 fehlerhaft nachgesprochener Audios
+
+**Präziser Stand:** Der KIDS-only-Exporter `kids/tools/prepare-academy-fusha-v34-review.py` hat **144/144** existierende, eindeutige Sprechtexte aufbereitet; **0 unklassifizierte Textzeilen** nach manueller Einarbeitung der Fälle `ﷺ` und `Allahs`. Der erfolgreiche Null-Credit-Lauf `43186376311` (11/12 Nov, Zeitstempel gemäß Actions) exportiert die vollständige Review-Matrix als Artifact `KIDS-ACADEMY-V34-FUSHA-REVIEW-144-NO-AUDIO`. Dies sind **neue Sprechskripte, keine neuen Audiodateien**.
+
+**Sachliche Korrekturen:** Der hörbare deutsche Erklärungstext wird von arabischen Wörtern getrennt und in einem festen Schema als `de` und `ar` dokumentiert. Beispielsweise wird `Ṣidq` nur als eigenständiges `صِدْق`-Segment und `aṣ-Ṣiddīq` als eigenes `الصِّدِّيق`-Segment vorbereitet; beide dürfen nicht vermischt werden. `Sūrat at-Tawbah 9:119` wird im Sprechskript zu dem arabischen Titel `سُورَةُ التَّوْبَةِ` **ohne** gesprochene Quellen-/Versnummer. `Ṣaḥīḥ Muslim 2607a` analog zu `صَحِيحُ مُسْلِمٍ`. Die sichtbaren KIDS-Lektionsquellen bleiben unverändert, einschließlich Nummern. Die arabische Ṣalawāt-Ligatur `ﷺ` wird als arabisches Segensspruchsegment behandelt, **nicht** irrtümlich als synthetisch zu rezitierende Qurʾān-Passage.
+
+**Sechs gesonderte Inhaltsprüfungen:** Die deutschen Genitivformulierungen mit `Allahs` werden nicht mehr als unnatürlich kombinierte deutsch-arabische Wörter an V4 übergeben. Stattdessen gibt es **sechs explizite, ausschließlich für den Hörtext vorgeschlagene Umformulierungen**, die `spokenOnlyGrammaticalParaphrase:true` und `paraphraseRequiresMeaningAndHearingApproval:true` tragen. Die sichtbaren Quizantworten/Fragen bleiben buchstabengetreu. Diese sechs Vorschläge müssen vor jeder Verwendung auf semantische Gleichwertigkeit und Aussprache geprüft werden.
+
+**Definitiv deaktiviert:** Die alten Fuṣḥā-V30-Sprechvorlagen `kids/data/academy-sidq-v30-fusha-qa-batches-20261111.json` enthalten gesprochene Zahlwörter und deutsche Surennamen-Ersatzformen. `kids/tools/produce-academy-sidq-v30-fusha-qa-batch.py` erlaubt keine weitere kostenpflichtige Aufnahme daraus (nur schreibfreie Diagnose), und `kids/tools/build-academy-v9-staging.py` hält alle neuen Audioaufrufe aufgrund des Eigentümerstopps weiterhin vor dem API-Call an.
+
+**Ganz wichtig:** 144/144 **technisch vorbereitete Sprechskripte** bedeuten **nicht** 144 korrigierte Aufnahmen. Erst nach realer Einzel-Hörprüfung mit der Eigentümer-Fuṣḥā-Audiobibliothek und V4-Masterstimme dürfen einzelne begrenzte Re-Recording-Piloten nach dokumentierter Eigentümerfreigabe produziert werden. 144 archivierte Originalaufnahmen weiterhin 0 öffentlich freigegeben. Kein TestFlight, kein Live, kein Erwachsenen-App-Change.
+
+**Belege:** [Actions V34](https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/43186376311) · [PR #1705](https://github.com/Sero91ak/dar-al-tawhid-site/pull/1705)
