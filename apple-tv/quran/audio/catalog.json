@@ -65,10 +65,10 @@
     "cacheLastSuccessfulEditionList": true,
     "cacheLoadedSurahText": true,
     "cacheLoadedGermanTranslation": true,
-    "downloadSeedSurahs": [1, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114],
-    "downloadSelectedReciter": true,
+    "downloadSeedSurahs": [1],
+    "downloadSelectedReciter": false,
     "downloadSelectedReciterInBackground": false,
-    "diskPack": true,
+    "diskPack": false,
     "fallbackRequired": true,
     "startSeedOnLaunch": false
   },
