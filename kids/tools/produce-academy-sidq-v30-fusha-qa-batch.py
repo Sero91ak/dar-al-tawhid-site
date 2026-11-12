@@ -192,6 +192,17 @@ def main():
     if args.check_all:
         print("PASS: 12 canonical Fuṣḥā-sensitive texts, three 4-clip batches, 68 existing stage clips, zero synthetic Qurʾān recitation; no credits")
         return
+    # V30's original prepared strings spoke "Vers 119", "Nummer 2607a",
+    # and a German "Sure" where the owner requires Fuṣḥā and silent IDs.
+    # These historic originals are never used for another billed recording.
+    # Keep --check-all/--dry-run diagnostics only; use the new V34 reviewed
+    # source-preserving scripts after explicit owner listening approval.
+    if not args.dry_run:
+        raise RuntimeError(
+            "V30 PHONETIC REGENERATION DISABLED: stale numbered citations "
+            "and Germanized Fuṣḥā in prepared scripts. "
+            "Use the V34 review-only script inventory; no credits spent."
+        )
     if args.index is None or args.index not in (0,1,2):
         raise RuntimeError("Specify batch index 0, 1 or 2")
     batch=req["batches"][args.index]
