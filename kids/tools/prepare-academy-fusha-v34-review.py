@@ -98,7 +98,11 @@ def draft_one(visible_text: str) -> dict:
     """Produce separate monolingual speech segments; never mutate visible text."""
     if not isinstance(visible_text, str) or not visible_text.strip():
         raise ValueError("Empty canonical Academy utterance")
-    if ARABIC.search(visible_text) or QURAN_RECITATION.search(visible_text):
+    # ﷺ is a single salawat ligature in the Arabic Presentation Forms block.
+    # It is NOT Qurʾānic recitation and has a fixed Fuṣḥā expansion below.
+    # Reject any other Arabic script in the original to protect real Qurʾān text.
+    source_without_salawat_ligature = visible_text.replace("ﷺ", "")
+    if ARABIC.search(source_without_salawat_ligature) or QURAN_RECITATION.search(source_without_salawat_ligature):
         raise ValueError("Existing Arabic-script source needs manual Qurʾān/dua review")
     stripped = source_labels_for_speech(visible_text)
     assert_no_spoken_source_numbers(stripped)
@@ -178,6 +182,7 @@ def self_test():
         ("Qurʾān 9:119 und Ṣaḥīḥ Muslim 2607a.", ("quran", "sahih-muslim")),
         ("As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.", ("full-salam",)),
         ("Allah befiehlt uns, mit den Wahrhaftigen zu sein.", ("allah",)),
+        ("Der Prophet ﷺ lehrte uns Wahrhaftigkeit.", ("salawat",)),
         ("Heute lernen wir nur die Wahrheit.", ()),
     ]
     for src, expected in cases:
