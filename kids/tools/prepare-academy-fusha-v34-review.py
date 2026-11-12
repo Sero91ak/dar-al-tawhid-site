@@ -46,12 +46,33 @@ REVIEW_TERMS = (
     ("ikhlas", "إِخْلَاص", ("Ikhlāṣ", "Ikhlas")),
     ("ibadah", "عِبَادَة", ("ʿIbādah", "Ibadah")),
     ("dua", "دُعَاء", ("Duʿāʾ", "Dua")),
+    ("qadar", "الْقَدَر", ("al-Qadar", "al Qadar")),
     ("halal", "حَلَال", ("Ḥalāl", "Halal")),
     ("haram", "حَرَام", ("Ḥarām", "Haram")),
     ("bismillah", "بِسْمِ اللَّهِ", ("Bismillāh", "Bismillah")),
     ("salawat", "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ", ("ﷺ",)),
     ("allah", "اللَّه", ("Allah",)),
 )
+
+# A small explicit set of *spoken-only* grammatical paraphrases.
+# The visible source/question/answer must remain byte-for-byte unchanged.
+# They do not change answer correctness, and remain UNAPPROVED until hearing QA.
+# This avoids making German genitive "Allahs" into an unnatural Arabic+German
+# joined recording, or silently pronouncing it through a German model.
+REVIEW_PARAPHRASES = {
+    "Antwort 1: Beide lehren, dass man Allahs Anbetung anderen zuwenden soll.":
+        "Antwort 1: Beide lehren, dass man die Anbetung, die Allah zusteht, anderen zuwenden soll.",
+    "Wir glauben an Allahs Bestimmung und fragen bei schwierigen Fragen nach.":
+        "Wir glauben an die Bestimmung von Allah und fragen bei schwierigen Fragen nach.",
+    "Wir glauben an Allahs Bücher und Seine Gesandten.":
+        "Wir glauben an die Bücher von Allah und an Seine Gesandten.",
+    "Zu ihnen zählen außerdem Engel, die Bücher und die Gesandten Allahs.":
+        "Zu ihnen zählen außerdem Engel, die Bücher und die Gesandten von Allah.",
+    "Antwort 1: Der Glaube an den Jüngsten Tag und an Allahs Bestimmung, al-Qadar.":
+        "Antwort 1: Der Glaube an den Jüngsten Tag und an die Bestimmung von Allah, al-Qadar.",
+    "Der Glaube an den Jüngsten Tag und an Allahs Bestimmung, al-Qadar.":
+        "Der Glaube an den Jüngsten Tag und an die Bestimmung von Allah, al-Qadar.",
+}
 
 ARABIC = re.compile(r"[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff\ufb50-\ufdff\ufe70-\ufeff]")
 LATIN = re.compile(r"[A-Za-zÄÖÜäöüß]")
@@ -104,7 +125,8 @@ def draft_one(visible_text: str) -> dict:
     source_without_salawat_ligature = visible_text.replace("ﷺ", "")
     if ARABIC.search(source_without_salawat_ligature) or QURAN_RECITATION.search(source_without_salawat_ligature):
         raise ValueError("Existing Arabic-script source needs manual Qurʾān/dua review")
-    stripped = source_labels_for_speech(visible_text)
+    spoken_source = REVIEW_PARAPHRASES.get(visible_text, visible_text)
+    stripped = source_labels_for_speech(spoken_source)
     assert_no_spoken_source_numbers(stripped)
     if re.search(r"(?<!\w)\d{1,3}\s*:\s*\d{1,3}(?!\w)", stripped):
         raise ValueError("Unresolved source-number sequence in voice draft")
@@ -164,6 +186,8 @@ def draft_one(visible_text: str) -> dict:
     return {
         "displayText": visible_text,
         "displaySha256": hashlib.sha256(visible_text.encode("utf-8")).hexdigest(),
+        "spokenOnlyGrammaticalParaphrase": spoken_source != visible_text,
+        "paraphraseRequiresMeaningAndHearingApproval": spoken_source != visible_text,
         "proposedSpokenTextWithoutSourceIds": stripped,
         "segments": parts,
         "termIds": list(dict.fromkeys(p["termId"] for p in parts if p.get("termId"))),
@@ -183,6 +207,7 @@ def self_test():
         ("As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.", ("full-salam",)),
         ("Allah befiehlt uns, mit den Wahrhaftigen zu sein.", ("allah",)),
         ("Der Prophet ﷺ lehrte uns Wahrhaftigkeit.", ("salawat",)),
+        ("Wir glauben an die Bestimmung von Allah, al-Qadar.", ("allah", "qadar")),
         ("Heute lernen wir nur die Wahrheit.", ()),
     ]
     for src, expected in cases:
@@ -195,6 +220,13 @@ def self_test():
     a = draft_one("Ṣidq.")["segments"][0]["text"]
     b = draft_one("Ṣiddīq.")["segments"][0]["text"]
     assert a.startswith("صِدْق") and b.startswith("الصِّدِّيق") and a != b
+    for original, spoken in REVIEW_PARAPHRASES.items():
+        row = draft_one(original)
+        assert row["spokenOnlyGrammaticalParaphrase"] is True
+        assert row["paraphraseRequiresMeaningAndHearingApproval"] is True
+        assert row["displayText"] == original
+        assert row["proposedSpokenTextWithoutSourceIds"] == source_labels_for_speech(spoken)
+        assert not ALLAH_GENITIVE.search(row["proposedSpokenTextWithoutSourceIds"])
     for unsafe in ("Sūrat al-Kawthar 108:1", "Allahs Worte", "﴿قُلْ هُوَ اللَّهُ أَحَدٌ﴾"):
         try:
             draft_one(unsafe)
@@ -236,6 +268,7 @@ def inventory():
         "heldForManualPhoneticAuthoring": len(held),
         "arabicWordsAreSeparateArLanguageSegments": True,
         "citationNumbersAreVisibleOnly": True,
+        "spokenParaphrasesHeldForMeaningApproval": sum(bool(row["spokenOnlyGrammaticalParaphrase"]) for row in accepted),
         "reviewOnly": accepted,
         "unresolved": held,
     }
