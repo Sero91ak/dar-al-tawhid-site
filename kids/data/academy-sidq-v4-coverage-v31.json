@@ -1,0 +1,1583 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_ACADEMY_SIDQ_FIRST_LESSON_V31_BINARY_COVERAGE_20261111",
+  "lessonId": "sidq",
+  "source": "kids/data/academy-sidq-v4-voice-plan-v30.json",
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "scope": "TAWḤĪD KIDS only",
+  "ageVersions": [
+    "4-5",
+    "6-8",
+    "9-10"
+  ],
+  "genderProfiles": [
+    "boy",
+    "girl"
+  ],
+  "totals": {
+    "exactRequired": 80,
+    "staged": 80,
+    "missing": 0,
+    "publicApproved": 0,
+    "genderGreetingClips": 2,
+    "fushaSensitiveHumanReviewPending": 12,
+    "allClipsRequireHumanListening": true,
+    "approxDurationSeconds": 406.01,
+    "globalArabicPronunciationHumanReviewPending": 80
+  },
+  "policy": {
+    "stagingOnly": true,
+    "noAudioMadePublic": true,
+    "noSyntheticQuranRecitation": true,
+    "FuṣḥāExactPronunciationNotHumanVerified": true,
+    "releaseBlockedUntilOwnerListening": true,
+    "languageSensitiveFieldDoesNotProveHumanPronunciation": true,
+    "globalOwnerFushaHold": true
+  },
+  "entries": [
+    {
+      "text": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+      "source": "kids/data/academy-audio-staging-sidq-v4-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/38fcc85d9dcbc1b47a3a.m4a",
+      "sha256": "8bf58304d9a1c290761996e0c1fc7c4cc658e4861bba662fafb569a2b7565d6e",
+      "durationSeconds": 3.36,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "all",
+          "kind": "greeting",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Liebe Schwester.",
+      "source": "kids/data/academy-audio-staging-sidq-v4-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/1f680fe0ff5be359533f.m4a",
+      "sha256": "a445853566381eaeb7e975b69ae6d52b9ad70f5a9bc5cae186d3b958a323504e",
+      "durationSeconds": 1.28,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "all",
+          "kind": "address",
+          "profile": "girl"
+        }
+      ]
+    },
+    {
+      "text": "Lieber Bruder.",
+      "source": "kids/data/academy-audio-staging-sidq-v4-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/5e2d17120bf6c30f410f.m4a",
+      "sha256": "5090d8b20ee42a4b6076716ecea1cbd492ac50609815864ffe11a9911a682921",
+      "durationSeconds": 1.04,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "all",
+          "kind": "address",
+          "profile": "boy"
+        }
+      ]
+    },
+    {
+      "text": "Schön, dass du da bist!",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/f142bc78e8bcea3d8518.m4a",
+      "sha256": "7056fdbee521d06e5fdcf984229899e29fd9cefb0c1293c25ef356b89b8fff9b",
+      "durationSeconds": 1.44,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "greeting",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Schön, dass du dein Wissen heute erweiterst!",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/8d18f399737977b56fe5.m4a",
+      "sha256": "b1bb4acb49d4a9697b5fd6f6b8b96a270d1f4781f4d503a3f014d2e8220d7e04",
+      "durationSeconds": 2.48,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "greeting",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Schön, dass du heute mitlernst!",
+      "source": "kids/data/academy-audio-staging-sidq-v4-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/d35130e236aa2bf34d05.m4a",
+      "sha256": "348e00d69a7656c596dfef2d6b450ddf0fa624d31bfd6366e9b2ed5519ef0508",
+      "durationSeconds": 1.76,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "greeting",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.",
+      "source": "kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/9a0503f8aa757251a385.m4a",
+      "sha256": "458c78f9a6eda454051b9c2df45ca2f9aede23ff05588e4f7cbcf52b5f1a2e00",
+      "durationSeconds": 14.037,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": true,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Allah fordert die Gläubigen in Sūrat at-Tawbah 9:119 auf, mit den Wahrhaftigen zu sein. In Ṣaḥīḥ Muslim 2607a beschreibt der Prophet ﷺ Wahrhaftigkeit als einen Weg zur Rechtschaffenheit. Daraus lernen wir, beim Sprechen und Handeln aufrichtig zu bleiben.",
+      "source": "kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/281a7446db25ced534b8.m4a",
+      "sha256": "662a82134b2b78a991fe9f087ff3193c8285d3f9d8f087ac5872edb0d52d9dda",
+      "durationSeconds": 23.067,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": true,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Allah lehrt uns, mit den Wahrhaftigen zu sein.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/69723f81809ee4f15bdd.m4a",
+      "sha256": "d2303807e793c239e2e508f5f63a94e45ee0647a30901936d88cbd05d1aa2d47",
+      "durationSeconds": 2.96,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "summary",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Allah ruft uns dazu auf, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt.",
+      "source": "kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/09cbe9de8f79ce993776.m4a",
+      "sha256": "d8eedb01ab2d0605c16c4de33de5275d589314d7a2993ebd76ff6dd9bb700038",
+      "durationSeconds": 10.512,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": true,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "summary",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Allah sagt uns im Qurʾān, dass wir mit den Wahrhaftigen sein sollen. Der Prophet ﷺ erklärte, wie gut Wahrhaftigkeit ist. Deshalb sagen wir die Wahrheit, auch wenn wir einen Fehler machen.",
+      "source": "kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/fc3aae2d5c9e156266d1.m4a",
+      "sha256": "1d97993953d059215bc1472e94ddea799b4161578c8def8811366e1e0bbc5636",
+      "durationSeconds": 14.997,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": true,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Danach kannst du um Entschuldigung bitten und beim Aufräumen helfen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/b97f380bc63d8cfa3087.m4a",
+      "sha256": "e14c057ee212818061273a3b447d7aa612781b406e2a48b948f0cdfe4ea9d601",
+      "durationSeconds": 4,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Die Wahrheit sagen – auch wenn es manchmal Mut kostet.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/fcd4834bf0050c7fe889.m4a",
+      "sha256": "ff0506790853a01c7d0d9d948f143baa94b3f56da21a7bbd6c2580901d988924",
+      "durationSeconds": 3.6,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Die Wahrheit sagen – das ist ehrlich.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/24c8e94854f495b07d3c.m4a",
+      "sha256": "b0a05fe01ea329fbab999ed2c2f8bb0085bdeb4d8157b1c0df6290b6b42f8c2b",
+      "durationSeconds": 2.8,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Du darfst ehrlich sagen: Das war ich.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/e299c59cdfc7fc83286f.m4a",
+      "sha256": "5ad9db4b0da84bf926e32186ddc34d654b717f5535fca5287fe08727ffbba842",
+      "durationSeconds": 2.72,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Ehrlich sein ist gut. Das üben wir gemeinsam.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/a3ddc9cd1e095d4c6f7f.m4a",
+      "sha256": "74c6e067c942c676e60c2aa99b87d56aec74aa94dbd476d26adbecc60654834f",
+      "durationSeconds": 3.12,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Eine bewusste Lüge kann das Vertrauen anderer Menschen beschädigen und weitere falsche Aussagen nach sich ziehen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/ac3ff20e77068d23218f.m4a",
+      "sha256": "b33223165f8db2fec235bc96eb7736bcbb2db87e2aae60ba4cca7c5a5e6571ad",
+      "durationSeconds": 6.32,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Heute beschäftigen wir uns mit Ṣidq: Warum ist die Wahrheit wichtig, und wie handeln wir nach einem Fehler? Wir lernen anhand von Qurʾān und Sunnah und erklären das Thema mit eigenen Worten.",
+      "source": "kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/ce90f2061c7283bc6c50.m4a",
+      "sha256": "e30f77e3abb587cd808f9c9c8fa4253e07f5f1b5770eda5aeb0290b712d2af1c",
+      "durationSeconds": 13.941,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": true,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/08d1f46461d954d5e471.m4a",
+      "sha256": "1185456d0e050ea90bb6da6c8640c623ef94c16be1d30c2ca6cfefa2c9d99f1d",
+      "durationSeconds": 6.88,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Heute sprechen wir darüber, warum Wahrhaftigkeit wichtig ist. Wir hören zu, lesen mit und denken nach. Du darfst jederzeit eine Pause machen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/72f0b364aecc4650f83a.m4a",
+      "sha256": "a8d6d7a99590c6ddd614bcce98913bf204c25f77cc6531680581fde403ded9c1",
+      "durationSeconds": 9.12,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Ich möchte ehrlich bleiben, Verantwortung übernehmen und einen Fehler nach Möglichkeit wiedergutmachen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/7171d6a710ed6327a486.m4a",
+      "sha256": "b535535a394e38114ee5864f01250e49a0fe461e8b515fc0d7b836eb7bda26fc",
+      "durationSeconds": 5.76,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "summary",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Jeder Mensch kann aus Versehen einen Fehler machen. Entscheidend ist, wie wir danach handeln.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/25d25cadccda27be5075.m4a",
+      "sha256": "6cb08e6a52f8e0ff595c33aaddf80a07c4aedd3ffa0963020c4650aef761bacf",
+      "durationSeconds": 5.12,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Manchmal geht etwas aus Versehen kaputt.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/1a6097339111c8ac475c.m4a",
+      "sha256": "d9ec87b49724c6e1a8939d3cf84e75eee1a04fbf5f91330429155e296fa487b2",
+      "durationSeconds": 2.64,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Manchmal passiert uns aus Versehen ein Fehler.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/a1580547b265af2351d8.m4a",
+      "sha256": "8ae90cbb6367d594d960221886378a26ba4c7b15727324a387218f41e1b5b4f0",
+      "durationSeconds": 2.96,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 9:119 und der Ḥadīṯ in Ṣaḥīḥ Muslim 2607a verdeutlichen die Bedeutung der Wahrhaftigkeit.",
+      "source": "kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/a072e9c7dae6b7e350bf.m4a",
+      "sha256": "b789c924c9db0c9ff11e2602a49f860a2e78b3e27e83b373158de201d8292c99",
+      "durationSeconds": 12.741,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": true,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "summary",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Ṣidq bedeutet Wahrhaftigkeit. Sie zeigt sich auch dann, wenn Ehrlichkeit Mut kostet.",
+      "source": "kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/1cd2ebd59d9958c9abb4.m4a",
+      "sha256": "40889c83742f574bacebb88e090abeaf0392a40f51ca6a39713bc092bdd2b226",
+      "durationSeconds": 6.267,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": true,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "summary",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Wahrhaftigkeit bedeutet, ehrlich zu sprechen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/da3e62521d80a794b273.m4a",
+      "sha256": "78ccd617765de93eefe46dd7d19a63cfa9eb0d7868dd736fe2b92ffc8a308d72",
+      "durationSeconds": 3.04,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "summary",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Wahrhaftigkeit bedeutet: Ich sage die Wahrheit.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/23d0569ffea835ce570e.m4a",
+      "sha256": "1562dc824bf92840479b4e3bb7b7520f0a5ce76d9ed8c544146a63125a46d11d",
+      "durationSeconds": 3.36,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "summary",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/427e5ddbaf665a98db6f.m4a",
+      "sha256": "46ddf6b8f412cb83352ee77e8481a451a900ad79774e5f8ae835dd22a40d00b2",
+      "durationSeconds": 5.12,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "all",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Wahrhaftigkeit heißt, bewusst bei der Wahrheit zu bleiben – selbst wenn das schwierig ist.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/202cfbbb4e8b1fdaecc0.m4a",
+      "sha256": "a616a74b77c75b742ee09858f3a48b652b116ff2711996d7d35592d7bd9f304c",
+      "durationSeconds": 5.36,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/a9e11a15b166889b17a8.m4a",
+      "sha256": "8e4e58a2c80bfdbfa3e0d733fdaac0319c60bca82c6e3edb7acba2fcb5a93490",
+      "durationSeconds": 4.32,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Wahrhaftigkeit ist mehr als ein einzelnes richtiges Wort: Sie ist eine Haltung, die wir im Alltag immer wieder üben.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/e2724efa18f35b29de6f.m4a",
+      "sha256": "4112eb35c829f602b818364713bba3afb469bbcfd0a9be9f85a090b8f7aa46c5",
+      "durationSeconds": 7.12,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Wenn mir ein Fehler passiert, sage ich die Wahrheit und versuche, ihn wiedergutzumachen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/5548e8dd6350765342a1.m4a",
+      "sha256": "f26bb215c0171cd414dd02293db9805602fbb5d7f055efaf0a024be8e52ba321",
+      "durationSeconds": 4.8,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "summary",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Wenn mir ein Fehler passiert, sage ich ehrlich, was geschehen ist.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/761725006430312f9815.m4a",
+      "sha256": "85ad099f1e8769120c732b1d738f348e8ceee4272d4b765814e19d75bb3480a4",
+      "durationSeconds": 3.76,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "summary",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/e1a919ca3fb385fdec6b.m4a",
+      "sha256": "041f9bbff3debed4be042b4c6d0f53196f6d2754221a14ccadaba0789d80165d",
+      "durationSeconds": 5.6,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/8602c1bafbd5d9a5c09f.m4a",
+      "sha256": "d4d6900dc560d16c9b31dbd5ef8c5caca938dda65bcc65ab9d5a962f0f5b071d",
+      "durationSeconds": 4,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Wer die Wahrheit sagt, übernimmt Verantwortung und schafft die Grundlage, den Fehler wiedergutzumachen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/978fd8dd8eb23ec4dcc9.m4a",
+      "sha256": "ec1710331404eeca15d08390947dced37dfad5a492201f8a2251a52a77452385",
+      "durationSeconds": 5.6,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "narration",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Du hast etwas kaputt gemacht. Was sagst du?",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/154317c8e6c9d5c8a593.m4a",
+      "sha256": "0a20772d7227fa6e5951aa2cedd364e3f4d068277e4f5f6b2d97d205acd0083e",
+      "durationSeconds": 2.8,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "question",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Du hast versehentlich ein Glas zerbrochen. Was ist eine ehrliche Antwort?",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/3787edc4541e42066ed7.m4a",
+      "sha256": "2f46ea81dc149c97e1c97102584b03469d86bd1d61aeebaed51c65d2608e47c8",
+      "durationSeconds": 4.56,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "question",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Warum gehört Wahrhaftigkeit zu einem guten Charakter?",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/5abc82580b7533be34d9.m4a",
+      "sha256": "79bed90da770dc4dd912e66ddea6f35d97da414d07ee78ac9f8c4be35431c0b4",
+      "durationSeconds": 3.2,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "question",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Was kannst du danach Gutes tun?",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/ce943dd289b6939349c8.m4a",
+      "sha256": "645bd44517063c3b57f51619725dc937e5b2eef10bcb31fbf64c0b5e947930c7",
+      "durationSeconds": 2.08,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "question",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Was kannst du tun, nachdem du einen Fehler ehrlich zugegeben hast?",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/c2b604283ae5639eedff.m4a",
+      "sha256": "5b66fbb191a1f71186df6cae86ccdeec77f150a5afda3e4582de42957e7eaa0d",
+      "durationSeconds": 4.08,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "question",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Was lehrt uns der Vers aus Sūrat at-Tawbah 9:119?",
+      "source": "kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/e6fc3ed6cb106ce0c1fa.m4a",
+      "sha256": "2e533417f8ed78e18c9188c8864b08996575fc63b5371886a1b9a858cbd557ad",
+      "durationSeconds": 5.221,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": true,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "question",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Welche Aussage entspricht dem Ḥadīṯ über Wahrhaftigkeit?",
+      "source": "kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/bc12790eedd849eb676a.m4a",
+      "sha256": "7cc298c863130f235adf9e8db21b337fe64ea73c858e55a25cb617df82d47618",
+      "durationSeconds": 4.667,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": true,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "question",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Worin liegt der Unterschied zwischen einem versehentlichen Fehler und einer bewussten Lüge?",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/634a5c1cf187058da062.m4a",
+      "sha256": "85379ac8e48f5bb9e1acdedd0dbbf76e12244ae9f171c3de04beaa1aa7890567",
+      "durationSeconds": 5.12,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "question",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Allah befiehlt den Gläubigen, mit den Wahrhaftigen zu sein.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/857faa3b1d9c46e62a8a.m4a",
+      "sha256": "e26ffc8e6771c1add7b9e5cbf7fa608dd293c7fe61e616e400440c994357dd8b",
+      "durationSeconds": 3.44,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "explanation",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ein Versehen und eine absichtliche Lüge sind immer genau dasselbe.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/18c47e2afa46a8d02e51.m4a",
+      "sha256": "110e820bb6223b34cd872711f3d050a44764f5ad6981d2e9b182815b6c35824f",
+      "durationSeconds": 5.84,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich kann mich entschuldigen und helfen, den Fehler wiedergutzumachen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/b1bfb7923dfdfbb2cba5.m4a",
+      "sha256": "bf3aa5050336f76de32a407518da930223c66618f14ce6a52f653c2d6a7aad99",
+      "durationSeconds": 4.96,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich sage ehrlich: Ich war das.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/bc80b1649ee5f82145e9.m4a",
+      "sha256": "6a406f091c15c022573216cd976a687e3c48e3d34383afda282aceeb22f2a93b",
+      "durationSeconds": 3.52,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich tue so, als hätte ich nichts gesehen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/a097db0e575dad0b26ec.m4a",
+      "sha256": "38236d2a46423cae0418137833b8ae45223596255fc01b64f92c86334bcbf3f6",
+      "durationSeconds": 3.92,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich verstecke den Fehler.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/d6f8aee9606b454583b4.m4a",
+      "sha256": "5bfb1f3b01fc9efb90fc297ad3e0a11d4fc9e993943fbfcb8d42e85c7772e5eb",
+      "durationSeconds": 2.88,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Sie führt zu rechtschaffenem Verhalten und stärkt Vertrauen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/35c07b651a2828ef13ce.m4a",
+      "sha256": "4ede71397e9c0d4e08142125895d3b5ae6ae8c905f3e9ce39790bc976c30680e",
+      "durationSeconds": 4.72,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Wahrheit spielt beim guten Charakter keine Rolle.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/fdbe3b8fe8cb5b452e3a.m4a",
+      "sha256": "b47e9daae0e427cd2659c55778d7b33c26d0e722270557b7475e96cd3f2e2be3",
+      "durationSeconds": 4.16,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Wir sollen mit den Wahrhaftigen sein.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/7389c02b48793f86f49b.m4a",
+      "sha256": "20d0e0907524d8e9c657ab95419bf394237a11d415fbd81a26e60a52282fd4c3",
+      "durationSeconds": 3.52,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ein Fehler kann unabsichtlich geschehen; eine Lüge ist bewusst unwahr.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/89fd5a4ce10371c43072.m4a",
+      "sha256": "a24deba81b817e22f527e44c4131a64fda44d9b9405c821d117ad6310fe3d998",
+      "durationSeconds": 6.16,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Eine Lüge ist immer die leichtere und richtige Lösung.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/41a2024388e12ecc3a71.m4a",
+      "sha256": "50e02a9fd4a80755f6d69b5374b6583bce0b2136d349275d633159533fd42421",
+      "durationSeconds": 4.96,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich entschuldige mich und helfe.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/adb0e3cb049cfc3328e0.m4a",
+      "sha256": "e651d2f43142ed28c874e9b7fbef9fccd53b559be828338548ca9e5602b074cf",
+      "durationSeconds": 3.36,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich sage: Jemand anders war es.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/b076a336f3af8fc83cc6.m4a",
+      "sha256": "98f21c10c10ca6a06394b5e271d17f50c401350e721af48cf22b828638b4d74e",
+      "durationSeconds": 3.84,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich schiebe die Schuld absichtlich auf jemand anderen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/e93134d3ad70341d08a3.m4a",
+      "sha256": "1400566002a9443b7192d300e1a054bae68992aab16b9c0fa6ffca9459b2ef82",
+      "durationSeconds": 4.32,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich war das. Es tut mir leid.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/e1eb779c99aafa8e4379.m4a",
+      "sha256": "863a13b1907b7a8d028a15629d3b2b150a70d797ddc6987f5ca1d1b06e57ef50",
+      "durationSeconds": 3.6,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Sie macht absichtliche Täuschung zu einer guten Tat.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/b47114a8e10671809767.m4a",
+      "sha256": "123d73e2a46cf71f56bc3f4bfb9b0f2650f0151b96bb1d2523e48532280441f3",
+      "durationSeconds": 4.56,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Wir dürfen lügen, wenn wir Angst haben.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/59bbc8eb0729609b1adf.m4a",
+      "sha256": "1676880b2580e7a00a0bbedbe74c1f68af5fbae640a002a847e0f65e4e620a37",
+      "durationSeconds": 3.68,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 3: Das war bestimmt jemand anders.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/146dda5cc2f4fab72053.m4a",
+      "sha256": "7ead73855aaa1f944630c329700770cd6c3e4e29a9f046399d216fee70a245c0",
+      "durationSeconds": 3.36,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 3: Man soll eigene Fehler immer verstecken.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/14278c3ea5866d68323e.m4a",
+      "sha256": "3bd3ab4ebaf73204fb027a23e030294db8768f43da55bbcf999cfaa6fc503aaf",
+      "durationSeconds": 3.76,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 3: Wahrhaftigkeit führt zur Rechtschaffenheit.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/babc79bdb9bcd324b684.m4a",
+      "sha256": "4b97afed8eb4a6e858e485c68deb6a1498bfa173c8a86c76da89066542189b6c",
+      "durationSeconds": 4.16,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "answer",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Denk an den Unterschied zwischen Versehen und absichtlicher Unwahrheit.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/72d6edf51f4bad816b21.m4a",
+      "sha256": "302c198d5b4fffecc37090a2d2efd7e47eb983a4a2ff83c4ce9b2aa73b3b8ba0",
+      "durationSeconds": 4.32,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "hint",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Denke an Entschuldigung und Hilfe.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/51ef2bdaff0d27395d3c.m4a",
+      "sha256": "f7be85d9b81ec5d9107c2f32eef071257c54b9adadbd47888d2991da7372d5f6",
+      "durationSeconds": 2.64,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "hint",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Denke an Vertrauen und das Wort des Propheten ﷺ.",
+      "source": "kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/77fd52c1d1bafcd8a5c3.m4a",
+      "sha256": "63198de6034b3d991ce22949b909ddfb7b61f66116dbfa40e4a3fcf7e353b5ce",
+      "durationSeconds": 5.547,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": true,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "hint",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt und diese zum Paradies.",
+      "source": "kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/6e6eab1c91986a7b3a28.m4a",
+      "sha256": "5c0b3d14559d453a3e6ed78711b17787d81f237737eb5a4f654e64c3215dfcfc",
+      "durationSeconds": 8.587,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": true,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "explanation",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Die Wahrheit zu sagen ist besser, als jemand anderem die Schuld zuzuschieben.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/037daf5b339b52d440cc.m4a",
+      "sha256": "3baf0cdba8d37c0cb3c7ef7a411b7fab69d51fccaee7a00d1d7ac598b829a093",
+      "durationSeconds": 4.32,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "explanation",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutmachen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/41cdeab0f7b63376bfe2.m4a",
+      "sha256": "253b967a9413e592e16fc137e69cb994e86714168fb64664222f3ee7a1f4ec01",
+      "durationSeconds": 10.96,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "explanation",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Ich kann mich entschuldigen und helfen, den Fehler wiedergutzumachen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/05e77ddf8a6dba770145.m4a",
+      "sha256": "610a8e6028a71a2ca818794b1a2d020361439d6904947f1a320f0b6efde6f6b5",
+      "durationSeconds": 3.68,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "explanation",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Lies dir die kurze deutsche Bedeutung des Qurʾān-Verses noch einmal durch.",
+      "source": "kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/b02b96ab2bc83260139b.m4a",
+      "sha256": "ab26ea54161bab6e2a7118f998ac1a6035663bc7bf55be80e9bb29b84fd2d399",
+      "durationSeconds": 5.701,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": true,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "hint",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Nach einem Fehler können wir um Entschuldigung bitten und ihn wiedergutmachen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/273a0d468c72a27d62df.m4a",
+      "sha256": "82cbabc232575666b00278ae5a84ed73205915349c6e60e3bf337a0072d76670",
+      "durationSeconds": 4.48,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "explanation",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Überlege: Was bedeutet ehrlich sein?",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/88d21643b6013063d75d.m4a",
+      "sha256": "150b55d2174b7814b8bf8a6376499e7dea5e658e5f3ad70d961b1f569ccd61ee",
+      "durationSeconds": 3.2,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "hint",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Wahrhaftigkeit bedeutet: Ich sage, was wirklich passiert ist.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/f6e60f000c17dd4bad28.m4a",
+      "sha256": "d0ea2b0aa7d15408947d8a9a7d4129fcf51a2bcef5afa773373053090b9fd307",
+      "durationSeconds": 4.32,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "explanation",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Wahrhaftigkeit führt zu rechtschaffenem Verhalten. Sie bewahrt das Vertrauen und hilft uns, Verantwortung zu übernehmen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/820b0fbaa87dbf38e311.m4a",
+      "sha256": "26739a4453fac030c35e488d6724f0974cf59491e283693ce5a2f120c607dcd5",
+      "durationSeconds": 6.96,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "explanation",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Was führt laut der authentischen Sunnah zur Rechtschaffenheit?",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/2231f89f992deb0b40f3.m4a",
+      "sha256": "b0e5acb09519bf94be189b58408d86f3cb64feab4bac96f58eb64442a0817be9",
+      "durationSeconds": 3.6,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "9-10",
+          "kind": "hint",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Was ist wirklich passiert? Sprich es freundlich aus.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/4469868b7f337de5ba13.m4a",
+      "sha256": "b898be8ef9740cd3f2a944ab12423a2db830b2be8058d7ac5414eb64e3d1f196",
+      "durationSeconds": 3.52,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "6-8",
+          "kind": "hint",
+          "profile": "both"
+        }
+      ]
+    },
+    {
+      "text": "Wenn jemand Hilfe braucht, kannst du mithelfen.",
+      "source": "kids/data/academy-audio-staging-sidq-v30-20261111.json",
+      "asset": "/kids/assets/kids-academy-audio/94bbed54aaa75e6468c8.m4a",
+      "sha256": "1e55e5337693bedccb46d4b00a99ddd0e4b6ebe860e024b18ca2dc58de38ca76",
+      "durationSeconds": 2.72,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "approvedForPlayback": false,
+      "reviewRequired": true,
+      "languageSensitive": false,
+      "ageContexts": [
+        {
+          "age": "4-5",
+          "kind": "hint",
+          "profile": "both"
+        }
+      ]
+    }
+  ],
+  "ownerGlobalArabicPronunciationReview": {
+    "date": "2026-11-11",
+    "holdsAllStagedClips": true,
+    "unverifiedClipCount": 80,
+    "ownerRejectsCurrentArabicPronunciation": true,
+    "arabicWordsNotOnlySourceLabels": true,
+    "examples": [
+      "Ṣidq",
+      "aṣ-Ṣiddīq",
+      "Sūrat at-Tawbah",
+      "Sūrat an-Naḥl",
+      "Ṣaḥīḥ Muslim",
+      "Qurʾān",
+      "Ḥadīṯ",
+      "Sunnah",
+      "Allah"
+    ],
+    "exactArabicMasterAliasIsNotAudioApproval": true,
+    "requiresHumanFullClipReview": true,
+    "publicReleaseAllowed": false,
+    "noRegenerationUntilOwnerReview": true,
+    "scope": "TAWḤĪD KIDS Academy only"
+  }
+}

@@ -1,0 +1,88 @@
+name: KIDS Academy owner pronunciation stop and silent citation numbers
+on:
+  push:
+    branches:
+      - audit/kids-academy-audio-inventory-20261106
+    paths:
+      - 'kids/tools/academy_source_voice.py'
+      - 'kids/tools/audit-academy-arabic-pronunciation.py'
+      - 'kids/tools/prepare-academy-fusha-v34-review.py'
+      - 'kids/tools/build-academy-v9-staging.py'
+      - 'kids/data/academy-voice-policy-v10.json'
+      - 'kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json'
+      - '.github/workflows/kids-academy-v33-owner-pronunciation-gate.yml'
+  pull_request:
+    paths:
+      - 'kids/tools/academy_source_voice.py'
+      - 'kids/tools/audit-academy-arabic-pronunciation.py'
+      - 'kids/tools/prepare-academy-fusha-v34-review.py'
+      - 'kids/tools/build-academy-v9-staging.py'
+      - 'kids/data/academy-voice-policy-v10.json'
+      - 'kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json'
+      - '.github/workflows/kids-academy-v33-owner-pronunciation-gate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  zero-credit-pronunciation-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile, test silent source numbers and canonical source names
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/academy_source_voice.py kids/tools/audit-academy-arabic-pronunciation.py kids/tools/voice_text.py kids/tools/build-academy-v9-staging.py
+          python3 kids/tools/academy_source_voice.py
+          python3 kids/tools/audit-academy-arabic-pronunciation.py
+          python3 kids/tools/prepare-academy-fusha-v34-review.py --check --export /tmp/kids-academy-v34-fusha-review.json
+          python3 - <<'PYV34'
+          import json
+          x=json.load(open('/tmp/kids-academy-v34-fusha-review.json'))
+          assert x['originalAudioCount']==144
+          assert not x['ownerApproved'] and not x['producedNewAudio'] and not x['publicReleaseAllowed']
+          assert x['drafted']==144 and x['heldForManualPhoneticAuthoring']==0
+          assert x['spokenParaphrasesHeldForMeaningApproval']==6
+          assert x['drafted']+x['heldForManualPhoneticAuthoring']==144
+          for line in x['reviewOnly']:
+              assert line['ownerHearingRequired'] and not line['released']
+              assert all('9:119' not in p['text'] and '2607a' not in p['text'] for p in line['segments'])
+          print('PASS: 144 original sources inventoried; 0 released; 0 credits')
+          PYV34
+          python3 - <<'PY'
+          import json,pathlib,sys
+          root=pathlib.Path(".")
+          sys.path.insert(0,str(root/"kids/tools"))
+          from academy_source_voice import source_labels_for_speech,assert_no_spoken_source_numbers
+          p=json.loads((root/"kids/data/academy-voice-policy-v10.json").read_text("utf8"))
+          stop=p["production"]["ownerPronunciationHold"]
+          assert stop["enabled"] is True and stop["newGenerationAllowed"] is False
+          source=(root/"kids/tools/build-academy-v9-staging.py").read_text("utf8")
+          legacy=(root/"kids/tools/produce-academy-sidq-v30-fusha-qa-batch.py").read_text("utf8")
+          assert "V30 PHONETIC REGENERATION DISABLED" in legacy
+          assert "OWNER AUDIO STOP" in source
+          assert source.index("OWNER AUDIO STOP") < source.index('payload=json.dumps(')
+          stage=json.loads((root/"kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json").read_text("utf8"))
+          assert len(stage["entries"]) == 12 and stage["ownerPronunciationHold"] is True
+          for original,record in stage["entries"].items():
+              assert record["ownerPronunciationHold"] and record["approvedForPlayback"] is False
+              assert record["requiresOwnerRehearing"]
+              speech=source_labels_for_speech(original)
+              assert_no_spoken_source_numbers(speech)
+              assert "2607a" not in speech and "9:119" not in speech
+              if "Sūrat at-Tawbah" in original:
+                  assert "Sūrat at-Tawbah" in speech
+              if "Ṣaḥīḥ Muslim" in original:
+                  assert "Ṣaḥīḥ Muslim" in speech
+          print("PASS: owner-paid-generation stop, 12 held clips, no spoken source numbers, 0 credits")
+          PY
+      - name: Export owner-listening script preparation report (not playable audio)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: KIDS-ACADEMY-V34-FUSHA-REVIEW-144-NO-AUDIO
+          path: /tmp/kids-academy-v34-fusha-review.json
+          if-no-files-found: warn
+          retention-days: 14

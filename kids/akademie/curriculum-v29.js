@@ -122,10 +122,15 @@ const additions={
           "explain": "Ihr Nutzen kann eine gute Tat sein."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie kannst du einen Samen sicher beobachten?",
-          "sample": "Ich pflanze mit Erlaubnis, gieße angemessen und notiere das Wachstum.",
-          "hint": "Das ist unsere Unterrichtsübung."
+          "options": [
+            "Ich pflanze mit Erlaubnis, gieße angemessen und notiere das Wachstum.",
+            "Ich gieße den Samen nie und beobachte ihn nicht."
+          ],
+          "correct": 0,
+          "hint": "Das ist unsere Unterrichtsübung.",
+          "explain": "Ich pflanze mit Erlaubnis, gieße angemessen und notiere das Wachstum."
         }
       ],
       "9-10": [
@@ -141,16 +146,26 @@ const additions={
           "explain": "Die Quellen haben verschiedene Schwerpunkte."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Welche Teile der Unterrichtseinheit sind Anwendung statt Originalzitat?",
-          "sample": "Das Einpflanzen und Beobachten eines Samens sind unsere Lernaufgaben.",
-          "hint": "Keine erfundenen Prophetenworte."
+          "options": [
+            "Das Einpflanzen und Beobachten eines Samens sind unsere Lernaufgaben.",
+            "Die Anweisung, einen Samen zu beobachten, ist ein wörtliches Qurʾān-Zitat."
+          ],
+          "correct": 0,
+          "hint": "Keine erfundenen Prophetenworte.",
+          "explain": "Das Einpflanzen und Beobachten eines Samens sind unsere Lernaufgaben."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum widerspricht das Beobachten natürlicher Abläufe nicht dem Glauben an Allah als Schöpfer?",
-          "sample": "Wir lernen, wie Pflanzen wachsen, und glauben, dass Allah die Schöpfung hervorgebracht hat.",
-          "hint": "Zwei unterschiedliche Fragen: Schöpfer und beobachtbare Vorgänge."
+          "options": [
+            "Wir lernen, wie Pflanzen wachsen, und glauben, dass Allah die Schöpfung hervorgebracht hat.",
+            "Wer beobachtet, wie Pflanzen wachsen, darf nicht an Allah als Schöpfer glauben."
+          ],
+          "correct": 0,
+          "hint": "Zwei unterschiedliche Fragen: Schöpfer und beobachtbare Vorgänge.",
+          "explain": "Wir lernen, wie Pflanzen wachsen, und glauben, dass Allah die Schöpfung hervorgebracht hat."
         }
       ]
     },
@@ -270,10 +285,15 @@ const additions={
           "explain": "Der Ḥadīṯ von Ǧibrīl."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie lernen wir über Engel?",
-          "sample": "Aus Qurʾān und authentischer Sunnah, ohne neue Details zu erfinden.",
-          "hint": "Unterscheide Wissen von Vermutungen."
+          "options": [
+            "Aus Qurʾān und authentischer Sunnah, ohne neue Details zu erfinden.",
+            "Aus ausgedachten Geschichten, auch wenn sie keinen Beleg haben."
+          ],
+          "correct": 0,
+          "hint": "Unterscheide Wissen von Vermutungen.",
+          "explain": "Aus Qurʾān und authentischer Sunnah, ohne neue Details zu erfinden."
         }
       ],
       "9-10": [
@@ -289,16 +309,26 @@ const additions={
           "explain": "Der Glaube an die Engel ist belegt."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie stimmen Qurʾān 2:285 und Muslim 8 überein?",
-          "sample": "Beide nennen die Engel als Gegenstand des Glaubens.",
-          "hint": "Vergleiche die ausdrücklich genannten Grundlagen."
+          "options": [
+            "Beide nennen die Engel als Gegenstand des Glaubens.",
+            "Beide lehren, dass Engel nicht zum Glauben gehören."
+          ],
+          "correct": 0,
+          "hint": "Vergleiche die ausdrücklich genannten Grundlagen.",
+          "explain": "Beide nennen die Engel als Gegenstand des Glaubens."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was machst du bei einer unbelegten Geschichte über Engel?",
-          "sample": "Ich erkläre freundlich, dass ich erst den authentischen Nachweis prüfen möchte.",
-          "hint": "Nicht weiterverbreiten, solange unbelegt."
+          "options": [
+            "Ich erkläre freundlich, dass ich erst den authentischen Nachweis prüfen möchte.",
+            "Ich erzähle die unbelegte Geschichte als sichere Tatsache weiter."
+          ],
+          "correct": 0,
+          "hint": "Nicht weiterverbreiten, solange unbelegt.",
+          "explain": "Ich erkläre freundlich, dass ich erst den authentischen Nachweis prüfen möchte."
         }
       ]
     },
@@ -418,10 +448,15 @@ const additions={
           "explain": "Helfen ist gut."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wann darfst du Nein sagen?",
-          "sample": "Wenn ich erschöpft bin, mich unsicher fühle oder die Aufgabe zu groß ist.",
-          "hint": "Gute Hilfe ist freiwillig und sicher."
+          "options": [
+            "Wenn ich erschöpft bin, mich unsicher fühle oder die Aufgabe zu groß ist.",
+            "Ich muss jede Aufgabe übernehmen, auch wenn ich mich unsicher fühle."
+          ],
+          "correct": 0,
+          "hint": "Gute Hilfe ist freiwillig und sicher.",
+          "explain": "Wenn ich erschöpft bin, mich unsicher fühle oder die Aufgabe zu groß ist."
         }
       ],
       "9-10": [
@@ -437,16 +472,26 @@ const additions={
           "explain": "Keinen Dank einzufordern heißt nicht, Dank zu verbieten."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie ergänzt Muslim 2699 den Qurʾānvers?",
-          "sample": "Der Vers spricht von aufrichtigem Geben, der Ḥadīṯ vom Wert der gegenseitigen Hilfe.",
-          "hint": "Gib beide Quellen getrennt an."
+          "options": [
+            "Der Vers spricht von aufrichtigem Geben, der Ḥadīṯ vom Wert der gegenseitigen Hilfe.",
+            "Der Vers und der Ḥadīṯ behandeln ausschließlich das Gießen von Pflanzen."
+          ],
+          "correct": 0,
+          "hint": "Gib beide Quellen getrennt an.",
+          "explain": "Der Vers spricht von aufrichtigem Geben, der Ḥadīṯ vom Wert der gegenseitigen Hilfe."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum beurteilen wir fremde Absichten nicht?",
-          "sample": "Wir kennen nicht sicher das Herz anderer; wir verbessern unsere eigenen Absichten.",
-          "hint": "Ikhlāṣ betrifft die innere Haltung."
+          "options": [
+            "Wir kennen nicht sicher das Herz anderer; wir verbessern unsere eigenen Absichten.",
+            "Wir wissen immer ganz genau, was andere Menschen im Herzen beabsichtigen."
+          ],
+          "correct": 0,
+          "hint": "Ikhlāṣ betrifft die innere Haltung.",
+          "explain": "Wir kennen nicht sicher das Herz anderer; wir verbessern unsere eigenen Absichten."
         }
       ]
     },
@@ -566,10 +611,15 @@ const additions={
           "explain": "Ich übernehme Verantwortung."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie sprichst du über einen Fehler ohne jemand anderen zu beschuldigen?",
-          "sample": "Das ist mir passiert. Ich möchte es wieder gutmachen.",
-          "hint": "Du musst keine Angst haben, um Hilfe zu bitten."
+          "options": [
+            "Das ist mir passiert. Ich möchte es wieder gutmachen.",
+            "Ich gebe jemand anderem die Schuld, obwohl ich den Fehler gemacht habe."
+          ],
+          "correct": 0,
+          "hint": "Du musst keine Angst haben, um Hilfe zu bitten.",
+          "explain": "Das ist mir passiert. Ich möchte es wieder gutmachen."
         }
       ],
       "9-10": [
@@ -585,16 +635,26 @@ const additions={
           "explain": "Ehrlichkeit und Wiedergutmachung."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wir haben einen Qurʾān-Vers über richtiges Sprechen und eine Überlieferung über Wahrhaftigkeit kennengelernt. Welche gemeinsame Lehre erkennst du darin?",
-          "sample": "Beide bekräftigen wahrhaftiges Reden und seine gute Wirkung.",
-          "hint": "Überlege, was beide Quellen über aufrichtiges Sprechen lehren."
+          "options": [
+            "Beide bekräftigen wahrhaftiges Reden und seine gute Wirkung.",
+            "Beide lehren, dass es gut ist, absichtlich die Unwahrheit zu sagen."
+          ],
+          "correct": 0,
+          "hint": "Überlege, was beide Quellen über aufrichtiges Sprechen lehren.",
+          "explain": "Beide bekräftigen wahrhaftiges Reden und seine gute Wirkung."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Welche Grenzen gelten bei einer ehrlichen Aussage?",
-          "sample": "Ich kann mir in unsicheren Situationen Unterstützung einer Vertrauensperson holen.",
-          "hint": "Ehrlichkeit bedeutet nicht, dass Kinder gefährlichen Druck aushalten müssen."
+          "options": [
+            "Ich kann mir in unsicheren Situationen Unterstützung einer Vertrauensperson holen.",
+            "Ein Kind muss gefährlichen Druck allein aushalten und darf niemanden um Hilfe bitten."
+          ],
+          "correct": 0,
+          "hint": "Ehrlichkeit bedeutet nicht, dass Kinder gefährlichen Druck aushalten müssen.",
+          "explain": "Ich kann mir in unsicheren Situationen Unterstützung einer Vertrauensperson holen."
         }
       ]
     },

@@ -114,10 +114,15 @@ const additions={
           "explain": "Ich sage Bismillāh und esse achtsam."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre an einem eigenen Beispiel: Essen mit Bismillāh.",
-          "sample": "Ich sage Bismillāh, esse mit der rechten Hand und nehme von meiner Seite.",
-          "hint": "Der Prophet ﷺ erklärte die Tischsitten freundlich einem Kind."
+          "options": [
+            "Ich sage Bismillāh, esse mit der rechten Hand und nehme von meiner Seite.",
+            "Ich esse grundsätzlich ohne Allahs Namen und nur von den Tellern anderer."
+          ],
+          "correct": 0,
+          "hint": "Der Prophet ﷺ erklärte die Tischsitten freundlich einem Kind.",
+          "explain": "Ich sage Bismillāh, esse mit der rechten Hand und nehme von meiner Seite."
         },
         {
           "type": "choice",
@@ -144,16 +149,26 @@ const additions={
           "explain": "Ich sage Bismillāh und esse achtsam."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Welche drei Handlungen lehrte der Prophet ﷺ dem Jungen ʿUmar ibn Abī Salamah?",
-          "sample": "Allahs Namen nennen, mit der rechten Hand essen und von dem essen, was vor einem liegt.",
-          "hint": "Vergleiche Qurʾān 7:31 mit al-Buḫārī 5376."
+          "options": [
+            "Allahs Namen nennen, mit der rechten Hand essen und von dem essen, was vor einem liegt.",
+            "Der Prophet ﷺ lehrte, absichtlich das Essen anderer wegzunehmen."
+          ],
+          "correct": 0,
+          "hint": "Vergleiche Qurʾān 7:31 mit al-Buḫārī 5376.",
+          "explain": "Allahs Namen nennen, mit der rechten Hand essen und von dem essen, was vor einem liegt."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Beschreibe eine sichere Alltagssituation zu „Essen mit Bismillāh“ und begründe sie mit beiden Belegen.",
-          "sample": "Allahs Namen nennen, mit der rechten Hand essen und von dem essen, was vor einem liegt.",
-          "hint": "Der Prophet ﷺ erklärte die Tischsitten freundlich einem Kind."
+          "options": [
+            "Allahs Namen nennen, mit der rechten Hand essen und von dem essen, was vor einem liegt.",
+            "Ich nehme anderen das Essen weg, ohne zu fragen."
+          ],
+          "correct": 0,
+          "hint": "Der Prophet ﷺ erklärte die Tischsitten freundlich einem Kind.",
+          "explain": "Allahs Namen nennen, mit der rechten Hand essen und von dem essen, was vor einem liegt."
         }
       ]
     }
@@ -263,10 +278,15 @@ const additions={
           "explain": "Ich tue Tieren nicht weh und bitte bei einem hilfsbedürftigen Tier um Hilfe."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre an einem eigenen Beispiel: Barmherzig zu Tieren.",
-          "sample": "Ich gehe achtsam mit Tieren um und hole bei Bedarf Erwachsene dazu.",
-          "hint": "Bei fremden oder verletzten Tieren holen Kinder zuerst Erwachsene zu Hilfe."
+          "options": [
+            "Ich gehe achtsam mit Tieren um und hole bei Bedarf Erwachsene dazu.",
+            "Ich darf Tiere absichtlich quälen."
+          ],
+          "correct": 0,
+          "hint": "Bei fremden oder verletzten Tieren holen Kinder zuerst Erwachsene zu Hilfe.",
+          "explain": "Ich gehe achtsam mit Tieren um und hole bei Bedarf Erwachsene dazu."
         },
         {
           "type": "choice",
@@ -293,16 +313,26 @@ const additions={
           "explain": "Ich tue Tieren nicht weh und bitte bei einem hilfsbedürftigen Tier um Hilfe."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum passen Qurʾān 6:38 und der Ḥadīṯ über den durstigen Hund zusammen?",
-          "sample": "Der Qurʾān erinnert an Tiergemeinschaften, und die Sunnah lehrt Barmherzigkeit und gute Behandlung.",
-          "hint": "Vergleiche Qurʾān 6:38 mit al-Buḫārī 2363."
+          "options": [
+            "Der Qurʾān erinnert an Tiergemeinschaften, und die Sunnah lehrt Barmherzigkeit und gute Behandlung.",
+            "Die Sunnah fordert, durstige Tiere schlecht zu behandeln."
+          ],
+          "correct": 0,
+          "hint": "Vergleiche Qurʾān 6:38 mit al-Buḫārī 2363.",
+          "explain": "Der Qurʾān erinnert an Tiergemeinschaften, und die Sunnah lehrt Barmherzigkeit und gute Behandlung."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Beschreibe eine sichere Alltagssituation zu „Barmherzig zu Tieren“ und begründe sie mit beiden Belegen.",
-          "sample": "Der Qurʾān erinnert an Tiergemeinschaften, und die Sunnah lehrt Barmherzigkeit und gute Behandlung.",
-          "hint": "Bei fremden oder verletzten Tieren holen Kinder zuerst Erwachsene zu Hilfe."
+          "options": [
+            "Der Qurʾān erinnert an Tiergemeinschaften, und die Sunnah lehrt Barmherzigkeit und gute Behandlung.",
+            "Wenn ein Tier Hilfe braucht, verletze ich es."
+          ],
+          "correct": 0,
+          "hint": "Bei fremden oder verletzten Tieren holen Kinder zuerst Erwachsene zu Hilfe.",
+          "explain": "Der Qurʾān erinnert an Tiergemeinschaften, und die Sunnah lehrt Barmherzigkeit und gute Behandlung."
         }
       ]
     }
@@ -412,10 +442,15 @@ const additions={
           "explain": "Ich grüße höflich und nehme Rücksicht auf andere im Haus."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre an einem eigenen Beispiel: Gute Nachbarschaft.",
-          "sample": "Ich nehme Rücksicht und helfe, wenn es sicher und möglich ist.",
-          "hint": "Freundlichkeit heißt nicht, dass Kinder die Tür öffnen oder Fremde allein besuchen sollen."
+          "options": [
+            "Ich nehme Rücksicht und helfe, wenn es sicher und möglich ist.",
+            "Ich muss meine Nachbarn absichtlich stören."
+          ],
+          "correct": 0,
+          "hint": "Freundlichkeit heißt nicht, dass Kinder die Tür öffnen oder Fremde allein besuchen sollen.",
+          "explain": "Ich nehme Rücksicht und helfe, wenn es sicher und möglich ist."
         },
         {
           "type": "choice",
@@ -442,16 +477,26 @@ const additions={
           "explain": "Ich grüße höflich und nehme Rücksicht auf andere im Haus."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie verdeutlicht Ṣaḥīḥ al-Buḫārī 6014 die Rechte des Nachbarn?",
-          "sample": "Ǧibrīl mahnte den Propheten ﷺ so oft zu den Nachbarrechten, dass er an ein mögliches Erbrecht dachte; er sagt nicht, dass der Nachbar tatsächlich erbt.",
-          "hint": "Vergleiche Qurʾān 4:36 mit al-Buḫārī 6014."
+          "options": [
+            "Ǧibrīl mahnte den Propheten ﷺ so oft zu den Nachbarrechten, dass er an ein mögliches Erbrecht dachte; er sagt nicht, dass der Nachbar tatsächlich erbt.",
+            "Der Ḥadīṯ sagt ausdrücklich, dass jeder Nachbar tatsächlich erbt."
+          ],
+          "correct": 0,
+          "hint": "Vergleiche Qurʾān 4:36 mit al-Buḫārī 6014.",
+          "explain": "Ǧibrīl mahnte den Propheten ﷺ so oft zu den Nachbarrechten, dass er an ein mögliches Erbrecht dachte; er sagt nicht, dass der Nachbar tatsächlich erbt."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Beschreibe eine sichere Alltagssituation zu „Gute Nachbarschaft“ und begründe sie mit beiden Belegen.",
-          "sample": "Ǧibrīl mahnte den Propheten ﷺ so oft zu den Nachbarrechten, dass er an ein mögliches Erbrecht dachte; er sagt nicht, dass der Nachbar tatsächlich erbt.",
-          "hint": "Freundlichkeit heißt nicht, dass Kinder die Tür öffnen oder Fremde allein besuchen sollen."
+          "options": [
+            "Ǧibrīl mahnte den Propheten ﷺ so oft zu den Nachbarrechten, dass er an ein mögliches Erbrecht dachte; er sagt nicht, dass der Nachbar tatsächlich erbt.",
+            "Ich störe Nachbarn und verweigere jede sichere Hilfe."
+          ],
+          "correct": 0,
+          "hint": "Freundlichkeit heißt nicht, dass Kinder die Tür öffnen oder Fremde allein besuchen sollen.",
+          "explain": "Ǧibrīl mahnte den Propheten ﷺ so oft zu den Nachbarrechten, dass er an ein mögliches Erbrecht dachte; er sagt nicht, dass der Nachbar tatsächlich erbt."
         }
       ]
     }
@@ -561,10 +606,15 @@ const additions={
           "explain": "Ich bitte Allah im Duʿāʾ und darf Menschen um praktische Hilfe bitten."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre an einem eigenen Beispiel: Allah um Hilfe bitten.",
-          "sample": "Ich weiß: Duʿāʾ richten wir an Allah und bleiben geduldig.",
-          "hint": "Menschen um alltägliche Hilfe zu bitten ist etwas anderes als das Bittgebet als Anbetung an Allah."
+          "options": [
+            "Ich weiß: Duʿāʾ richten wir an Allah und bleiben geduldig.",
+            "Duʿāʾ als Anbetung richte ich an andere Geschöpfe statt an Allah."
+          ],
+          "correct": 0,
+          "hint": "Menschen um alltägliche Hilfe zu bitten ist etwas anderes als das Bittgebet als Anbetung an Allah.",
+          "explain": "Ich weiß: Duʿāʾ richten wir an Allah und bleiben geduldig."
         },
         {
           "type": "choice",
@@ -591,16 +641,26 @@ const additions={
           "explain": "Ich bitte Allah im Duʿāʾ und darf Menschen um praktische Hilfe bitten."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was ist der Unterschied zwischen Duʿāʾ und der Bitte an einen Menschen, etwas zu erklären?",
-          "sample": "Duʿāʾ ist eine an Allah gerichtete Anbetung. Eine alltägliche Bitte um praktische Hilfe an Menschen ist etwas anderes.",
-          "hint": "Vergleiche Qurʾān 1:5 mit al-Buḫārī 6340."
+          "options": [
+            "Duʿāʾ ist eine an Allah gerichtete Anbetung. Eine alltägliche Bitte um praktische Hilfe an Menschen ist etwas anderes.",
+            "Eine Bitte um praktische Hilfe ist immer dasselbe wie die Anbetung durch Duʿāʾ."
+          ],
+          "correct": 0,
+          "hint": "Vergleiche Qurʾān 1:5 mit al-Buḫārī 6340.",
+          "explain": "Duʿāʾ ist eine an Allah gerichtete Anbetung. Eine alltägliche Bitte um praktische Hilfe an Menschen ist etwas anderes."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Beschreibe eine sichere Alltagssituation zu „Allah um Hilfe bitten“ und begründe sie mit beiden Belegen.",
-          "sample": "Duʿāʾ ist eine an Allah gerichtete Anbetung. Eine alltägliche Bitte um praktische Hilfe an Menschen ist etwas anderes.",
-          "hint": "Menschen um alltägliche Hilfe zu bitten ist etwas anderes als das Bittgebet als Anbetung an Allah."
+          "options": [
+            "Duʿāʾ ist eine an Allah gerichtete Anbetung. Eine alltägliche Bitte um praktische Hilfe an Menschen ist etwas anderes.",
+            "Ich darf Allah nicht um Hilfe bitten."
+          ],
+          "correct": 0,
+          "hint": "Menschen um alltägliche Hilfe zu bitten ist etwas anderes als das Bittgebet als Anbetung an Allah.",
+          "explain": "Duʿāʾ ist eine an Allah gerichtete Anbetung. Eine alltägliche Bitte um praktische Hilfe an Menschen ist etwas anderes."
         }
       ]
     }
