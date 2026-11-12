@@ -6,6 +6,7 @@ on:
     paths:
       - 'kids/tools/academy_source_voice.py'
       - 'kids/tools/audit-academy-arabic-pronunciation.py'
+      - 'kids/tools/prepare-academy-fusha-v34-review.py'
       - 'kids/tools/build-academy-v9-staging.py'
       - 'kids/data/academy-voice-policy-v10.json'
       - 'kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json'
@@ -14,6 +15,7 @@ on:
     paths:
       - 'kids/tools/academy_source_voice.py'
       - 'kids/tools/audit-academy-arabic-pronunciation.py'
+      - 'kids/tools/prepare-academy-fusha-v34-review.py'
       - 'kids/tools/build-academy-v9-staging.py'
       - 'kids/data/academy-voice-policy-v10.json'
       - 'kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json'
@@ -35,6 +37,18 @@ jobs:
           python3 -m py_compile kids/tools/academy_source_voice.py kids/tools/audit-academy-arabic-pronunciation.py kids/tools/voice_text.py kids/tools/build-academy-v9-staging.py
           python3 kids/tools/academy_source_voice.py
           python3 kids/tools/audit-academy-arabic-pronunciation.py
+          python3 kids/tools/prepare-academy-fusha-v34-review.py --check --export /tmp/kids-academy-v34-fusha-review.json
+          python3 - <<'PYV34'
+          import json
+          x=json.load(open('/tmp/kids-academy-v34-fusha-review.json'))
+          assert x['originalAudioCount']==144
+          assert not x['ownerApproved'] and not x['producedNewAudio'] and not x['publicReleaseAllowed']
+          assert x['drafted']+x['heldForManualPhoneticAuthoring']==144
+          for line in x['reviewOnly']:
+              assert line['ownerHearingRequired'] and not line['released']
+              assert all('9:119' not in p['text'] and '2607a' not in p['text'] for p in line['segments'])
+          print('PASS: 144 original sources inventoried; 0 released; 0 credits')
+          PYV34
           python3 - <<'PY'
           import json,pathlib,sys
           root=pathlib.Path(".")
@@ -60,3 +74,11 @@ jobs:
                   assert "Ṣaḥīḥ Muslim" in speech
           print("PASS: owner-paid-generation stop, 12 held clips, no spoken source numbers, 0 credits")
           PY
+      - name: Export owner-listening script preparation report (not playable audio)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: KIDS-ACADEMY-V34-FUSHA-REVIEW-144-NO-AUDIO
+          path: /tmp/kids-academy-v34-fusha-review.json
+          if-no-files-found: warn
+          retention-days: 14
