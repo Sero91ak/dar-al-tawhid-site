@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-11-14T16:42:00+01:00",
+  "generated": "2026-11-14T16:01:59.000Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1759,19 +1759,49 @@
         "es"
       ],
       "onesignalTarget": "DAR_PUSH",
-      "status": "pending",
-      "pushApproved": false,
+      "status": "sent",
+      "pushApproved": true,
       "ownerRequestedVisitorNotification": true,
       "ownerAuthorization": "2026-11-14 explicit Q57 publish and DAR Admin user-notification request",
       "approvedScope": "one notification, after verified live Q57/content/feed/source/reader and opt-in segment; no Kids/prayer/other pushes",
-      "publishedAt": null,
+      "publishedAt": "2026-11-14T16:01:59.000Z",
       "createdAt": "2026-11-14T16:42:00+01:00",
-      "updatedAt": "2026-11-14T16:42:00+01:00",
-      "liveCheck": null,
-      "providerNotificationId": null,
-      "idempotencyKey": "q57-mujahid-20261114-dar-admin-v1",
-      "attempts": 0,
-      "lastError": "Awaiting green protected CI and independent Cloudflare public GET before any OneSignal send"
+      "updatedAt": "2026-11-14T16:01:59.000Z",
+      "liveCheck": {
+        "verified": true,
+        "verifiedBy": "GitHub CI Deploy Besucher-App (Cloudflare Workers), Q57 source and public Q links live",
+        "gitHubRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/43613036149",
+        "commitSha": "5669074a68dd6aab41ca004d66c8bc69fa012c17",
+        "productionLastGoodMatchesCommit": true,
+        "postId": "mujahid-ungehorsam-trotz-wissens-20261114-q57",
+        "qUrl": "https://dar-al-tawhid.de/q/57/",
+        "note": "Cloudflare pipeline source/site and Q link live checks succeeded. Native iOS/Android device smoke tests were not separately performed."
+      },
+      "providerNotificationId": "f4d6eba6-aea4-49af-8795-ec50f1154306",
+      "idempotencyKey": "e8fb396c-13d5-5620-aa85-43c9d2629784",
+      "attempts": 1,
+      "lastError": "",
+      "pushApprovedAt": "2026-11-14T16:01:56.000Z",
+      "sentAt": "2026-11-14T16:01:59.000Z",
+      "pushResult": {
+        "provider": "OneSignal",
+        "appId": "786d7cd6-0455-4434-ab14-0c10a7bc6b1e",
+        "notificationId": "f4d6eba6-aea4-49af-8795-ec50f1154306",
+        "target": "segment:DAR_PUSH",
+        "targetUrl": "https://dar-al-tawhid.de/?post=mujahid-ungehorsam-trotz-wissens-20261114-q57#post/mujahid-ungehorsam-trotz-wissens-20261114-q57",
+        "idempotencyKey": "e8fb396c-13d5-5620-aa85-43c9d2629784",
+        "successful": 112,
+        "failed": 0,
+        "errored": 0,
+        "confirmedReceived": 0,
+        "completedAt": "2026-11-14T16:01:59.000Z",
+        "platformDeliveryStats": {
+          "ios": 99,
+          "chrome_web_push": 4,
+          "safari_web_push": 9
+        },
+        "note": "Provider message completed with 112 successful; received=0 means no individual device display confirmation. Language-specific notification heading/body sent in de/en/ar/tr/bs/fr/es; the complete app page supports nine languages including ku and ckb. No Kids or prayer push."
+      }
     }
   }
 }
