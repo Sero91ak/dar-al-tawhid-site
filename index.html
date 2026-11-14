@@ -22482,7 +22482,80 @@ function parsePushPostIdFromUrl(urlOrSearch){try{const u=typeof urlOrSearch==="s
 function applyPushLaunchRoute(){const postId=parsePushPostIdFromUrl(location.href);if(postId){const hash=decodeURIComponent((location.hash||"").replace(/^#/,"")).replace(/^\/+/,"");if(/^(?:post|beitrag|beitraege)\//i.test(hash)&&decodeURIComponent(hash.split("/").slice(1).join("/"))===postId)return true;location.hash=`post/${encodeURIComponent(postId)}`;return true}try{const focus=String(new URL(location.href).searchParams.get("focus")||"").trim().toLowerCase();if(focus==="quiz"){if(!/^#?\/?quiz/i.test(location.hash||""))location.hash="#quiz";return true}if(focus==="zakat"){if(!/^#?\/?zakat/i.test(location.hash||""))location.hash="#zakat";return true}}catch(e){}return false}
 function clearPostRouteState(){postRouteLoadingId="";postRouteFailedId="";postRouteError=""}
 async function fetchPostsIndexFresh(){return fetchPostsIndexMeta()}
-async function loadSinglePostFresh(postId){const id=String(postId||"").trim();if(!id)return null;const files=await fetchPostsIndexFresh();if(!files||!files.length)return null;let file=files.find(f=>f.name.replace(/\.md$/,"")===id)||files.find(f=>String(f.name).includes(id));if(!file){for(const f of files){try{const r=await fetchPostFile(f);if(String(r.post?.id)===id){file=f;const fileMap=getJson(POST_FILE_MAP_KEY,{});fileMap[r.name]={sha:r.sha||f.sha||"",post:r.post,parseVersion:POST_PARSE_VERSION};persistPostFileMap(fileMap);const merged=mergePostsLists(posts,[r.post]);applyPostsList(merged);persistPostsCache();return r.post}}catch(e){}}}if(!file)return null;const result=await fetchPostFile(file);const fileMap=getJson(POST_FILE_MAP_KEY,{});fileMap[result.name]={sha:result.sha||file.sha||"",post:result.post,parseVersion:POST_PARSE_VERSION};persistPostFileMap(fileMap);const merged=mergePostsLists(posts,[result.post]);applyPostsList(merged);persistPostsCache();return result.post}
+// DAR_POST_DEEPLINK_DIRECT_FALLBACK_V1 — narrow adult post-only navigation repair.
+// The canonical index may lag a published post; never serially download 490 unrelated files
+// while a notification leaves the iOS/WebView on "Beitrag wird aktualisiert".
+async function loadSinglePostFresh(postId){
+  const id=String(postId||"").trim();
+  if(!id||id.length>180||! /^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(id))return null;
+  function accept(result){
+    if(!result||!result.post||String(result.post.id)!==id)return null;
+    const fileMap=getJson(POST_FILE_MAP_KEY,{});
+    fileMap[result.name]={sha:result.sha||"",post:result.post,parseVersion:POST_PARSE_VERSION};
+    persistPostFileMap(fileMap);
+    const merged=mergePostsLists(posts,[result.post]);
+    applyPostsList(merged);
+    persistPostsCache();
+    return result.post;
+  }
+  // Direct canonical file before fetching a potentially stale manifest.
+  // Enforce a time bound so WKWebView always leaves the loading state.
+  async function fetchPostFileBounded(file,timeoutMs=5000){
+    let timer;
+    try{
+      return await Promise.race([
+        fetchPostFile(file),
+        new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error("Post-Datei: Ladezeit überschritten")),timeoutMs)})
+      ]);
+    }finally{if(timer)clearTimeout(timer)}
+  }
+  try{
+    const directlyLoaded=accept(await fetchPostFileBounded({name:id+".md",sha:""},4500));
+    if(directlyLoaded)return directlyLoaded;
+  }catch(error){}
+  let files=[];
+  try{files=await fetchPostsIndexFresh()||[]}catch(error){console.warn("DĀR Postindex vorübergehend nicht erreichbar",error)}
+  const candidates=[];
+  const fromIndex=files.find(f=>f&&f.name===id+".md")||files.find(f=>f&&String(f.name||"").replace(/\.md$/,"")===id);
+  if(fromIndex)candidates.push(fromIndex);
+  // Direct canonical filename is the fastest fallback when an older manifest is cached.
+  if(!fromIndex)candidates.push({name:id+".md",sha:""});
+  // A complete desktop index maps canonical post IDs to filenames even if they differ.
+  if(!fromIndex){
+    try{
+      const response=await fetchWithTimeout("/data/desktop-posts-index.json?v="+Date.now(),4500);
+      if(response.ok){
+        const index=await response.json();
+        const row=Array.isArray(index.posts)?index.posts.find(p=>String(p.id)===id):null;
+        if(row&&/^[a-zA-Z0-9][a-zA-Z0-9_.-]*\.md$/.test(String(row.file||""))){
+          candidates.push({name:row.file,sha:""});
+        }
+      }
+    }catch(error){console.warn("DĀR Desktop-Postindex nicht erreichbar; direkte Datei bleibt möglich",error)}
+  }
+  const tried=new Set();
+  for(const candidate of candidates){
+    if(!candidate||!candidate.name||tried.has(candidate.name))continue;
+    tried.add(candidate.name);
+    try{const post=accept(await fetchPostFileBounded(candidate,5000));if(post)return post}catch(error){}
+  }
+  // Legacy posts occasionally have a title-based filename unlike their frontmatter ID.
+  // Search only the best matching names with bounded concurrency, not the whole catalog.
+  if(!fromIndex&&files.length){
+    const tokens=id.toLowerCase().split(/[-_]/).filter(t=>t.length>=4);
+    const ranked=files.filter(f=>f&&f.name&&!tried.has(f.name)).map(f=>{
+      const name=String(f.name).toLowerCase();
+      return {file:f,score:tokens.reduce((n,t)=>n+(name.includes(t)?1:0),0)};
+    }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,8);
+    const resolved=await Promise.allSettled(ranked.map(x=>fetchPostFileBounded(x.file,5000)));
+    for(const result of resolved){
+      if(result.status!=="fulfilled")continue;
+      const post=accept(result.value);
+      if(post)return post;
+    }
+  }
+  return null;
+}
 async function openPostFromPush(postId,url){
   const id=String(postId||parsePushPostIdFromUrl(url||location.href)||"").trim();
   if(!id)return;

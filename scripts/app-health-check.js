@@ -100,6 +100,34 @@ if (postsIndex && (!Array.isArray(postsIndex.files) || postsIndex.files.length <
   fail(`posts-index.json: zu wenige Einträge (${postsIndex.files?.length || 0})`);
 }
 
+// DAR_POST_DEEPLINK_INDEX_GUARD_V1 — every active adult Q-post must be addressable
+// through the same visitor manifest used by push notification deep links.
+if (!indexHtml.includes("DAR_POST_DEEPLINK_DIRECT_FALLBACK_V1") ||
+    !indexHtml.includes('async function loadSinglePostFresh(postId)')) {
+  fail("iOS/Android visitor push click: bounded direct post loader missing");
+}
+if(postsIndex && Array.isArray(postsIndex.files)){
+  const names=postsIndex.files.map(row=>String(row.name||""));
+  if(postsIndex.count!==names.length)fail("Postindex count != number of files");
+  if(new Set(names).size!==names.length)fail("Postindex contains duplicate filename");
+  const indexed=new Map(postsIndex.files.map(row=>[String(row.name||""),String(row.sha||"")]));
+  const source=checkJson("Q source registry", "q/_registry/shortlinks.json");
+  if(source&&Array.isArray(source.links)){
+    const crypto=require("node:crypto");
+    for(const record of source.links){
+      if(Number(record.number)<53||record.status!=="active"||!record.postReference)continue;
+      const file=String(record.postReference)+".md";
+      if(!file.endsWith(".md")||!/^[a-zA-Z0-9_.-]+$/.test(file))continue;
+      const local=path.join(ROOT,"content/posts",file);
+      if(!fs.existsSync(local))continue; // E.g. women sources use canonical ID-based records.
+      if(!indexed.has(file)){fail("Q"+record.number+": published post missing in push post index: "+file);continue}
+      const raw=fs.readFileSync(local);
+      const sha=crypto.createHash("sha1").update("blob "+raw.length+String.fromCharCode(0)).update(raw).digest("hex");
+      if(indexed.get(file)!==sha)fail("Q"+record.number+": stale blob SHA in push post index: "+file);
+    }
+  }
+}
+
 // Daily content
 const daily = checkJson("daily.json", "content/updates/daily.json");
 if (daily && !daily.recommendation?.id && !daily.dua?.id) {
