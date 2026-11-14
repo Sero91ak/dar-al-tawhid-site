@@ -9553,6 +9553,19 @@
         "content/admin/pending-pushes.json"
       ],
       "expiresAt": "2026-11-19T23:59:00+01:00"
+    },
+    {
+      "id": "visitor-post-deeplink-click-repair-20261114",
+      "at": "2026-11-14T19:04:00+01:00",
+      "approvedBy": "owner-20261114-screenshot-push-click-does-not-open",
+      "reason": "Explicit emergency fix authorization: native-iOS webview post notification click stalls on the 'Beitrag wird geladen / aktualisiert' screen. Root cause found: newly published active post IDs Q53/Q57 missing from canonical content/posts/posts-index.json; loadSinglePostFresh in visitor index.html serially fetches hundreds of unrelated files when ID absent. Only correct published-content index, safe direct ID/desktop manifest fallback, and a read-only predeploy route-index regression guard. Retain source IDs, no new push or OneSignal implementation, Kids, prayer, native Xcode files, global navigation/header/layout or unrelated URLs. Controlled CI and production live verification only.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "content/posts/posts-index.json",
+        "index.html",
+        "scripts/app-health-check.js"
+      ],
+      "expiresAt": "2026-11-21T23:59:00+01:00"
     }
   ],
   "enabled": true
