@@ -98,3 +98,4 @@ Neue nummerierte Quellenlinks gehören immer in `q/<nummer>/`.
 | `q/54` | Vertrag von al-Ḥudaybiyyah – das Weglassen einer Bezeichnung | `Imām an-Nawawī` | Šarḥ Ṣaḥīḥ Muslim 12/474; Quellenkarte und eigener Lernbereich. |
 | `q/55` | Nicht jede Unterstützung ist eindeutiger Kufr | `Imām aš-Šāfiʿī` | al-Umm 4/264; Fall von Ḥāṭib und Grenze des Takfīr. |
 | `q/56` | Weltlich begründete Muwāddah und Kufr | `Ibn Taymiyyah` | Maǧmūʿ al-Fatāwā 7/522–523; eigenständige Lernfragen. |
+| `q/57` | Ungehorsam trotz Wissens | `Muǧāhid ibn Ǧabr` | Ungehorsam gegenüber Allah wird im Tafsīr zu an-Nisāʾ 4:17 als Ǧahālah bezeichnet, bis man davon ablässt (aṭ-Ṭabarī 8/89, Nr. 8834). |
