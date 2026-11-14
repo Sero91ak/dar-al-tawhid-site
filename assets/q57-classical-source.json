@@ -137,7 +137,8 @@
         "wrong": "Nicht richtig",
         "result": "Ergebnis",
         "backToSource": "Zur Quellenkarte"
-      }
+      },
+      "sourceHash": "sha256:b6a97f661e13924749d14e61b0924590903e0ed346aa58e910addaf3abe6a1e6"
     },
     "ar": {
       "langName": "العربية",
@@ -209,7 +210,8 @@
         "wrong": "غير صحيح",
         "result": "النتيجة",
         "backToSource": "إلى صفحة المصدر"
-      }
+      },
+      "sourceHash": "sha256:b6a97f661e13924749d14e61b0924590903e0ed346aa58e910addaf3abe6a1e6"
     },
     "en": {
       "langName": "English",
@@ -281,7 +283,8 @@
         "wrong": "Incorrect",
         "result": "Result",
         "backToSource": "Back to source"
-      }
+      },
+      "sourceHash": "sha256:b6a97f661e13924749d14e61b0924590903e0ed346aa58e910addaf3abe6a1e6"
     },
     "tr": {
       "langName": "Türkçe",
@@ -353,7 +356,8 @@
         "wrong": "Yanlış",
         "result": "Sonuç",
         "backToSource": "Kaynağa dön"
-      }
+      },
+      "sourceHash": "sha256:b6a97f661e13924749d14e61b0924590903e0ed346aa58e910addaf3abe6a1e6"
     },
     "ku": {
       "langName": "Kurmancî",
@@ -425,7 +429,8 @@
         "wrong": "Ne rast",
         "result": "Encam",
         "backToSource": "Vegere çavkaniyê"
-      }
+      },
+      "sourceHash": "sha256:b6a97f661e13924749d14e61b0924590903e0ed346aa58e910addaf3abe6a1e6"
     },
     "ckb": {
       "langName": "سۆرانی",
@@ -497,7 +502,8 @@
         "wrong": "هەڵەیە",
         "result": "ئەنجام",
         "backToSource": "گەڕانەوە بۆ سەرچاوە"
-      }
+      },
+      "sourceHash": "sha256:b6a97f661e13924749d14e61b0924590903e0ed346aa58e910addaf3abe6a1e6"
     },
     "bs": {
       "langName": "Bosanski",
@@ -569,7 +575,8 @@
         "wrong": "Netačno",
         "result": "Rezultat",
         "backToSource": "Nazad na izvor"
-      }
+      },
+      "sourceHash": "sha256:b6a97f661e13924749d14e61b0924590903e0ed346aa58e910addaf3abe6a1e6"
     },
     "fr": {
       "langName": "Français",
@@ -641,7 +648,8 @@
         "wrong": "Incorrect",
         "result": "Résultat",
         "backToSource": "Retour à la source"
-      }
+      },
+      "sourceHash": "sha256:b6a97f661e13924749d14e61b0924590903e0ed346aa58e910addaf3abe6a1e6"
     },
     "es": {
       "langName": "Español",
@@ -713,8 +721,11 @@
         "wrong": "Incorrecto",
         "result": "Resultado",
         "backToSource": "Volver a la fuente"
-      }
+      },
+      "sourceHash": "sha256:b6a97f661e13924749d14e61b0924590903e0ed346aa58e910addaf3abe6a1e6"
     }
   },
-  "additionalCorroboration": "Parallelbeleg im Tafsīr Muǧāhid und Quellennachweis zu Ibn Abī Ḥātim 4999; aṭ-Ṭabarī 8834 remains original primary source."
+  "additionalCorroboration": "Parallelbeleg im Tafsīr Muǧāhid und Quellennachweis zu Ibn Abī Ḥātim 4999; aṭ-Ṭabarī 8834 remains original primary source.",
+  "sourceHash": "sha256:b6a97f661e13924749d14e61b0924590903e0ed346aa58e910addaf3abe6a1e6",
+  "sourceHashPolicy": "Same fixed SHA-256 of canonical Arabic matn, source citation and ID; applies to every localized manuscript and post until source revision. Any canonical source update invalidates translations."
 }
