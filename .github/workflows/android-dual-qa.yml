@@ -1,0 +1,227 @@
+name: DAR Android dual-app candidate QA (Phone and TV)
+
+on:
+  push:
+    branches:
+      - build/android-dual-qa-20261114
+    paths:
+      - .github/workflows/android-dual-qa.yml
+      - android/tv/**
+      - android/app/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dar-dual-android-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  separate-android-candidates:
+    name: Build separate phone + TV test packages
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    env:
+      DAR_TV_VERSION_CODE: "156"
+      PHONE_KEYSTORE_B64: ${{ secrets.DAR_ANDROID_UPLOAD_KEYSTORE_BASE64 }}
+      PHONE_STORE_PASSWORD: ${{ secrets.DAR_ANDROID_UPLOAD_STORE_PASSWORD }}
+      PHONE_KEY_ALIAS: ${{ secrets.DAR_ANDROID_UPLOAD_KEY_ALIAS }}
+      PHONE_KEY_PASSWORD: ${{ secrets.DAR_ANDROID_UPLOAD_KEY_PASSWORD }}
+      TV_KEYSTORE_B64: ${{ secrets.DAR_ANDROID_TV_KEYSTORE_BASE64 }}
+      TV_STORE_PASSWORD: ${{ secrets.DAR_ANDROID_TV_STORE_PASSWORD }}
+      TV_KEY_ALIAS: ${{ secrets.DAR_ANDROID_TV_KEY_ALIAS }}
+      TV_KEY_PASSWORD: ${{ secrets.DAR_ANDROID_TV_KEY_PASSWORD }}
+
+    steps:
+      - name: Checkout latest adult Android from main (isolated)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: phone-source
+          sparse-checkout: android
+          sparse-checkout-cone-mode: true
+          persist-credentials: false
+
+      - name: Checkout Android TV parity development branch (isolated)
+        uses: actions/checkout@v4
+        with:
+          ref: build/android-dual-qa-20261114
+          path: tv-source
+          sparse-checkout: android
+          sparse-checkout-cone-mode: true
+          persist-credentials: false
+
+      - name: Configure Java 17 and Gradle
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Install Android 35/36 SDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          sdkmanager --install "platforms;android-35" "platforms;android-36" "build-tools;36.0.0"
+
+      - name: Record exact source versions and candidate-only status
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f phone-source/android/app/build.gradle.kts
+          test -f tv-source/android/tv/build.gradle.kts
+          echo "## Internal Android QA candidates — not approved for Play Store" >> "$GITHUB_STEP_SUMMARY"
+          echo "Phone main SHA: $(git -C phone-source rev-parse HEAD)" >> "$GITHUB_STEP_SUMMARY"
+          echo "TV parity SHA: $(git -C tv-source rev-parse HEAD)" >> "$GITHUB_STEP_SUMMARY"
+          echo "Native Apple TV/iOS projects are not modified." >> "$GITHUB_STEP_SUMMARY"
+          echo "IMPORTANT: Phone currently uses Android WebView; TV feature parity is incomplete." >> "$GITHUB_STEP_SUMMARY"
+          echo "DAR_ANDROID_VERSION_CODE=$(date -u +%s)" >> "$GITHUB_ENV"
+
+      - name: Compile latest phone debug APK
+        working-directory: phone-source/android
+        run: |
+          chmod +x ./gradlew
+          ./gradlew --no-daemon :app:assembleDebug
+
+      - name: Compile native Android TV debug APK plus unit tests
+        working-directory: tv-source/android
+        run: |
+          chmod +x ./gradlew
+          ./gradlew --no-daemon :tv:assembleDebug :tv:testDebugUnitTest
+
+      - name: Validate debug signatures and platform package IDs
+        shell: bash
+        run: |
+          set -euo pipefail
+          sdk="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          phone=phone-source/android/app/build/outputs/apk/debug/app-debug.apk
+          tv=tv-source/android/tv/build/outputs/apk/debug/tv-debug.apk
+          test -s "$phone" && test -s "$tv"
+          "$sdk/apksigner" verify --verbose "$phone" > /dev/null
+          "$sdk/apksigner" verify --verbose "$tv" > /dev/null
+          "$sdk/aapt" dump badging "$phone" | grep -F "package: name='de.daraltawhid.app.debug'"
+          "$sdk/aapt" dump badging "$tv" | grep -F "package: name='de.daraltawhid.tv.debug'"
+          "$sdk/aapt" dump badging "$tv" | grep -Eq 'leanback-launchable-activity|android.software.leanback'
+          sha256sum "$phone" "$tv" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload PHONE test APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-phone-android-debug-apk-internal
+          path: phone-source/android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Upload TV test APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-tv-android-debug-apk-internal
+          path: tv-source/android/tv/build/outputs/apk/debug/tv-debug.apk
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Configure independently signed release candidates (if keys exist)
+        id: signing
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -n "$PHONE_KEYSTORE_B64" && -n "$PHONE_STORE_PASSWORD" && -n "$PHONE_KEY_ALIAS" && -n "$PHONE_KEY_PASSWORD" ]]; then
+            printf '%s' "$PHONE_KEYSTORE_B64" | base64 --decode > phone-source/android/upload-keystore.jks
+            chmod 600 phone-source/android/upload-keystore.jks
+            {
+              echo 'storeFile=upload-keystore.jks'
+              printf 'storePassword=%s\n' "$PHONE_STORE_PASSWORD"
+              printf 'keyAlias=%s\n' "$PHONE_KEY_ALIAS"
+              printf 'keyPassword=%s\n' "$PHONE_KEY_PASSWORD"
+            } > phone-source/android/keystore.properties
+            chmod 600 phone-source/android/keystore.properties
+            echo 'phone=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'phone=false' >> "$GITHUB_OUTPUT"
+            echo '::notice::Adult Android signing secrets unavailable; only debug APK will be built.'
+          fi
+          if [[ -n "$TV_KEYSTORE_B64" && -n "$TV_STORE_PASSWORD" && -n "$TV_KEY_ALIAS" && -n "$TV_KEY_PASSWORD" ]]; then
+            printf '%s' "$TV_KEYSTORE_B64" | base64 --decode > tv-source/android/tv-upload-keystore.jks
+            chmod 600 tv-source/android/tv-upload-keystore.jks
+            {
+              echo 'storeFile=tv-upload-keystore.jks'
+              printf 'storePassword=%s\n' "$TV_STORE_PASSWORD"
+              printf 'keyAlias=%s\n' "$TV_KEY_ALIAS"
+              printf 'keyPassword=%s\n' "$TV_KEY_PASSWORD"
+            } > tv-source/android/tv-keystore.properties
+            chmod 600 tv-source/android/tv-keystore.properties
+            echo 'tv=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'tv=false' >> "$GITHUB_OUTPUT"
+            echo '::notice::TV signing secrets unavailable; only debug APK will be built.'
+          fi
+
+      - name: Build signed PHONE APK and Play Store AAB candidate
+        if: steps.signing.outputs.phone == 'true'
+        working-directory: phone-source/android
+        run: ./gradlew --no-daemon :app:assembleRelease :app:bundleRelease
+
+      - name: Verify and upload signed PHONE APK/AAB candidate
+        if: steps.signing.outputs.phone == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          sdk="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          apk=phone-source/android/app/build/outputs/apk/release/app-release.apk
+          aab=phone-source/android/app/build/outputs/bundle/release/app-release.aab
+          test -s "$apk" && test -s "$aab"
+          "$sdk/apksigner" verify --verbose "$apk" > /dev/null
+          "$sdk/aapt" dump badging "$apk" | grep -F "package: name='de.daraltawhid.app'"
+          unzip -t "$aab" > /dev/null
+          sha256sum "$apk" "$aab" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload signed PHONE APK plus AAB (not published)
+        if: steps.signing.outputs.phone == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-phone-android-signed-apk-aab-candidate
+          path: |
+            phone-source/android/app/build/outputs/apk/release/app-release.apk
+            phone-source/android/app/build/outputs/bundle/release/app-release.aab
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Build signed TV APK and Play Store AAB candidate
+        if: steps.signing.outputs.tv == 'true'
+        working-directory: tv-source/android
+        run: ./gradlew --no-daemon :tv:assembleRelease :tv:bundleRelease
+
+      - name: Verify signed TV APK/AAB candidate
+        if: steps.signing.outputs.tv == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          sdk="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          apk=tv-source/android/tv/build/outputs/apk/release/tv-release.apk
+          aab=tv-source/android/tv/build/outputs/bundle/release/tv-release.aab
+          test -s "$apk" && test -s "$aab"
+          "$sdk/apksigner" verify --verbose "$apk" > /dev/null
+          "$sdk/aapt" dump badging "$apk" | grep -F "package: name='de.daraltawhid.tv'"
+          "$sdk/aapt" dump badging "$apk" | grep -Eq 'leanback-launchable-activity|android.software.leanback'
+          unzip -t "$aab" > /dev/null
+          sha256sum "$apk" "$aab" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload signed TV APK plus AAB (not published)
+        if: steps.signing.outputs.tv == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-tv-android-signed-apk-aab-candidate
+          path: |
+            tv-source/android/tv/build/outputs/apk/release/tv-release.apk
+            tv-source/android/tv/build/outputs/bundle/release/tv-release.aab
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Remove temporary keys
+        if: always()
+        shell: bash
+        run: |
+          rm -f phone-source/android/keystore.properties phone-source/android/upload-keystore.jks
+          rm -f tv-source/android/tv-keystore.properties tv-source/android/tv-upload-keystore.jks
