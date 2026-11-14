@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-11-11T16:33:59.210Z",
+  "generated": "2026-11-14T16:42:00+01:00",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1736,6 +1736,42 @@
       "providerNotificationId": null,
       "attempts": 0,
       "lastError": "Nicht versenden, bis Q/Quelle/Lernbereich/App öffentlich nachgewiesen, opt-in-Zielgruppe geprüft und Sendefreigabe bestätigt"
+    },
+    "mujahid-ungehorsam-trotz-wissens-20261114-q57": {
+      "kind": "post",
+      "postId": "mujahid-ungehorsam-trotz-wissens-20261114-q57",
+      "filename": "mujahid-ungehorsam-trotz-wissens-20261114-q57.md",
+      "postPath": "content/posts/mujahid-ungehorsam-trotz-wissens-20261114-q57.md",
+      "postTitle": "UNGEHORSAM TROTZ WISSENS",
+      "qSourceId": "qsource:57",
+      "sourceUrl": "/q/57/",
+      "canonicalContentId": "post:mujahid-ungehorsam-trotz-wissens-20261114-q57",
+      "localeManifest": "/assets/q57-locales.json",
+      "supportedLanguages": [
+        "de",
+        "ar",
+        "en",
+        "tr",
+        "ku",
+        "ckb",
+        "bs",
+        "fr",
+        "es"
+      ],
+      "onesignalTarget": "DAR_PUSH",
+      "status": "pending",
+      "pushApproved": false,
+      "ownerRequestedVisitorNotification": true,
+      "ownerAuthorization": "2026-11-14 explicit Q57 publish and DAR Admin user-notification request",
+      "approvedScope": "one notification, after verified live Q57/content/feed/source/reader and opt-in segment; no Kids/prayer/other pushes",
+      "publishedAt": null,
+      "createdAt": "2026-11-14T16:42:00+01:00",
+      "updatedAt": "2026-11-14T16:42:00+01:00",
+      "liveCheck": null,
+      "providerNotificationId": null,
+      "idempotencyKey": "q57-mujahid-20261114-dar-admin-v1",
+      "attempts": 0,
+      "lastError": "Awaiting green protected CI and independent Cloudflare public GET before any OneSignal send"
     }
   }
 }
