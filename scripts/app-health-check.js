@@ -117,12 +117,12 @@ if(postsIndex && Array.isArray(postsIndex.files)){
     for(const record of source.links){
       if(Number(record.number)<53||record.status!=="active"||!record.postReference)continue;
       const file=String(record.postReference)+".md";
-      if(!/^[a-zA-Z0-9][a-zA-Z0-9_.-]*\\.md$/.test(file))continue;
+      if(!file.endsWith(".md")||!/^[a-zA-Z0-9_.-]+$/.test(file))continue;
       const local=path.join(ROOT,"content/posts",file);
       if(!fs.existsSync(local))continue; // E.g. women sources use canonical ID-based records.
       if(!indexed.has(file)){fail("Q"+record.number+": published post missing in push post index: "+file);continue}
       const raw=fs.readFileSync(local);
-      const sha=crypto.createHash("sha1").update("blob "+raw.length+"\\0").update(raw).digest("hex");
+      const sha=crypto.createHash("sha1").update("blob "+raw.length+String.fromCharCode(0)).update(raw).digest("hex");
       if(indexed.get(file)!==sha)fail("Q"+record.number+": stale blob SHA in push post index: "+file);
     }
   }
