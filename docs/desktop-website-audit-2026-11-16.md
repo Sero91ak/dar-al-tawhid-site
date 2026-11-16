@@ -100,7 +100,7 @@ Erfolgreich ausgeführt:
 
 Nicht ausgeführt: vollständiger Projekt-Build, vorhandene CI-Workflows, Browser-Matrix und produktionsnaher E2E-/Screenshotvergleich. Der Checkout enthält nur ausgewählte Sparse-Pfade; Workflowdateien und die übrigen Buildskripte waren in dieser Arbeitskopie nicht vorhanden. Kein Produktionsdeployment wurde gestartet.
 
-Branch-Commit und Pull Request werden nach Abschluss der Branch-Änderungen ergänzt. Eine Zusammenführung oder Veröffentlichung ist nicht Teil dieses Audits.
+GitHub-Prüfbranch: `codex/desktop-audit-sanitization-2026-11`. Commit: `e71cdf69bb3326deb1777e0d88dd5816d78e8e27`. Draft PR: [#1787](https://github.com/Sero91ak/dar-al-tawhid-site/pull/1787). Der PR stand bei Erstellung auf `mergeable: false`; keine Zusammenführung oder Veröffentlichung.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
