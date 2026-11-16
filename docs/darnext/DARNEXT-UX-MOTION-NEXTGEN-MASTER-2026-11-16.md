@@ -1,0 +1,135 @@
+# DĀR NEXT → DĀR AL TAWḤĪD
+## MASTER-AUFTRAG · CLASSICAL HERITAGE × NEXT GENERATION UX/MOTION
+**Ausgabe:** 2026-11-16 · **Projekt-Ticket:** https://github.com/Sero91ak/dar-al-tawhid-site/issues/1789
+**Status:** Verbindlicher Implementierungsauftrag für ChatGPT Work/Xcode, **kein fertiger Code und kein Release-Nachweis**.
+**Leitsatz:** BESTAND ERWEITERN, NICHT NOCH EINMAL UMBAUEN.
+
+### 0. SOFORTIGE ARBEITSANWEISUNG
+Du arbeitest am bestehenden Produkt **DAR NEXT**, das nach erfolgreicher Abnahme die DĀR AL TAWḤĪD App ablösen soll. Das Projekt wurde bereits erheblich umgebaut, auch am 16.11.2026. Verwirf diese Fortschritte nicht. Ermittle zunächst den **jüngsten tatsächlich vorhandenen Quellstand** inklusive nicht gemergter GitHub-Branches/PRs und etwaiger lokaler Xcode-Änderungen, sofern der Workspace darauf Zugriff hat. Eine unveröffentlichte lokale Änderung darf niemals als auf GitHub vorhanden angenommen werden. Nichts neu erfinden, was schon implementiert wurde.
+
+**Ziel:** Die vorhandene App durch präzise, wiederverwendbare interaktive Übergänge, raffinierte Mikroanimationen, herausragende UI/UX, moderne Accessibility, echte nativ-adaptive Bedienung und zukunftsfähige Architektur verbessern. Erst das Fundament und ein vollständig getesteter Referenzfluss; anschließend Stück für Stück auf alle passenden Bereiche übertragen. Kein Figma erforderlich. Keine unnötigen monatlich kostenpflichtigen Werkzeuge.
+
+### 1. REPOSITORY-/PLATTFORM-VERTRAG
+Repository: https://github.com/Sero91ak/dar-al-tawhid-site
+Default-Branch: main. **DARNext liegt nach erster Prüfung auf separaten Entwicklungsbranches**, beispielsweise:
+- codex/darnext-native-masterauftrag-20261024
+- codex/darnext-apple-heritage-master-v1-20261024
+- codex/darnext-p5-p9-20261024
+- codex/darnext-phase4-wip-2026-10-23
+
+**Nicht behaupten, dieser Stand sei der neueste.** Zuerst Branch- und Commit-Vergleich machen, heutigen Arbeitsstand ausfindig machen, bei Konflikten datengetrieben rekonstruieren und den tatsächlichen Source-of-Truth explizit benennen. Keine stillschweigende Rücknahme späterer Arbeit.
+
+Vor Bearbeitung lesen: AGENTS.md, STABILITY.md, docs/adult-responsive-layout-contract.md und relevante Produkt-/Design-/Quellen-/I18n-Regeln sowie bestehende Feature-Implementierungen.
+Zu prüfen:
+- DARNext/DARNextApp.swift
+- DARNext/Shell/RootShell.swift
+- DARNext/Features/Dashboard/DashboardView.swift
+- DARNext/DesignSystem/Tokens/DARTheme.swift
+- DARNext/DesignSystem/Components/
+- DARNext/Features/{Quran,Posts,Quiz,Dua,Library,Search,Prayer,Qibla,Assistant,Audio}/
+- DARNext/Data/, DARNext/Domain/, DARNextTests/, DARNextUITests/
+- vorhandene Xcode Targets, XCAssets, Build-Schemes, deployment targets, CI und konkrete Referenz-PRs, insbesondere PR #1487
+
+**Architekturgrenze:** Die Web-/Besucher-App besitzt index.html, CSS, JS und Cloudflare-Routing. DAR NEXT besitzt eigene native SwiftUI-Screens. Ein gemeinsamer Inhaltsbestand ist sinnvoll; **kein globales Rewrite** von index.html oder CSS und keine WebView als versteckter Ersatz für funktionierende native Screens. Bei unvermeidlichen Web-Views ein gekapselter Adapter mit definierter Rücknavigation, History und Error-/Offlinezustand.
+
+### 2. VISUELLE IDENTITÄT – SCHÖN, ISLAMISCH, ZEITLOS
+Design-DNA: **Classical Islamic Heritage × Apple-native Precision**. Bewahren: Markenidentität, Quellenernsthaftigkeit, klare arabische Typografie, vorhandene Logos und Assets, geeignete Themes, originale verifizierte Inhalte. Gestalten mit: Elfenbein/Pergament, dunklem Smaragd, tiefem Nachtblau, mattem Antikgold, fein abgestuften Linien und großzügiger Lesbarkeit.
+
+Keine Disco-/Neon-Glows, kein Dauer-Glimmern, kein überfülltes 3D, keine künstlich leuchtenden Figuren, keine dicht gestapelten Card-in-Card-Container, keine erzwungene Liquid-Glass-Überdeckung religiöser Inhalte. Transparenzen und Glas nur kontextuell zur Navigation und leichtem Tiefeneindruck. **Eine Hauptkapsel je Funktionsbereich; innen strukturieren Typografie, Weißraum und feine Linien.**
+
+Nutze das **vorhandene** DARTheme-/Token-System und bestehenden Designstand statt komplett neue Farben/Styles zu erfinden. Bekannte SwiftUI-Branch-Themes: nightLibrary, parchmentReader, deepBlueBrass; globale Marken-/Theme-Regeln prüfen. Vorhandene personalisierte Theme-Wahl beim Update niemals zurücksetzen.
+
+### 3. VIDEO-REFERENZ – IN EIGENER MARKENSPRACHE UMSETZEN
+Der Nutzer zeigte am 16.11.2026 eine Bildschirmaufnahme eines animierten App-Konzepts. Die wesentlichen Interaktionen:
+- Große Karte oder Hero wird beim Tap **räumlich zusammenhängend zur Detailseite** und wächst/zoomt weich in die neue Ansicht.
+- Titel, Bild und Content folgen mit abgestufter, ruhiger Motion und ohne ruckartige Layoutwechsel.
+- Eine abgerundete Informationsfläche/Bottom Sheet schiebt sich angemessen vom unteren Bildschirmrand hoch; bei Bedarf mehrere Detents.
+- Suche/Overlay öffnet als leicht schwebende Oberfläche; der Hintergrund bleibt räumlich erkennbar und wird dezent unscharf.
+- Beim Zurück kehrt die Detailansicht sichtbar zur Ursprungs-Kapsel zurück; Position, ausgewähltes Item und Scrollstand bleiben erhalten.
+- Untere Hauptnavigation bleibt stabil und interaktionsfähig; keine doppelten Tab-Leisten.
+Die konkreten aus dem Video gezeigten Reise-Inhalte, Schriftzüge, Marken und Bilder NICHT kopieren. Wenn die Videodatei nicht im Work-Kontext verfügbar ist, diese Beschreibung als Funktionsreferenz nutzen; keine Wiedergabe vortäuschen.
+
+### 4. NATIVE MOTION-SYSTEMARCHITEKTUR
+Baue **gezielte Ergänzungen** auf bestehende Codeowner, keine Parallel-Shell. Die folgenden Namen sind **Vorschläge**, vor Erstellung vorhandene Äquivalente suchen:
+- DARInteractionTokens: einheitliche Werte für Standard-/Press-/Screen-/Hero-/Sheet-Transition, Easing/Spring, Radius, Layer und Haptik.
+- DARAnimatedCard / DARCardDetailLink: interaktive Kapsel mit stabiler Item-ID, Touch-Feedback und kartengebundenem Detailübergang.
+- DARTransitionCoordinator: zentraler per-Feature Navigations-/Selection-/Restoration-State; keine globale mutable Singleton-Animation.
+- DARAdaptiveSheet: native, barrierearme Such-, Aktions-, Filter- und Detail-Sheets.
+- DARAccessibilityMotion: respect Reduce Motion, Reduce Transparency, VoiceOver, Dynamic Type, Kontrast und Low Power Mode, wo relevant.
+
+**SwiftUI-Techniken je nach Deployment Target und echter SDK-Unterstützung:** matchedGeometryEffect oder matchedTransitionSource/navigationTransition(.zoom) auf geeigneten OS-Versionen, animation/spring, explicit view identity, presentationDetents, material, NavigationStack/NavigationSplitView, stabiler @State-/Observable-State, sensoryFeedback selektiv. API availability und Fallbacks müssen mit dem tatsächlichen Build geprüft werden. Nicht eine neue API nur wegen Marketing versprechen; keine inkompatiblen Apple-Versionen erzwingen.
+
+Startwerte als UX-Richtlinien, nicht unüberprüfbare Erfolgsgarantien: Press 100–180 ms, Mikrointeraktion 160–250 ms, Card→Detail 260–420 ms, Sheet 250–400 ms. Inhaltlich bedeutende Bewegung sanft, keine großen Parallax-Schübe. Bei Reduce Motion vor allem kurze Crossfades oder unmittelbare Wechsel. Vermeide jedes Render-/Hit-Test-/Scroll-Ghosting.
+
+### 5. FEATURE-VERTRÄGE – ERWEITERN, WAS SCHON DA IST
+**P0 Referenzfluss:** Eine bestehende Startseiten-Kapsel → echte native Detailansicht → Zurück zur exakt gleichen Kapsel/Scrollposition. Kein duplizierter Renderer. Vollständig testen, bevor Motion auf weitere Ansichten verteilt wird.
+
+**Dashboard:** stimmige Hierarchie, klassischer Hero, begrenzte Schnellzugriffe, leise Neubeitrag-Vorschau, Quellennähe; alle bisherigen Widgets/Inhaltsblöcke erhalten. Eine Kapsel bei Touch fühlbar anheben, aber kein Bounce-Fest.
+
+**Beiträge/Quellen:** Feedkarte→Quellen-Detail morphend; Text und Quelle bleiben im selben Navigation-Stack, original Q-ID und URL erhalten, interner Zurückpfad korrekt, extern kein künstlicher Backbutton. Kein Kopieren/Verfälschen des arabischen Originaltextes. Vertikal lesbares Manuskript-Layout, Quellenzeilen und klare Leseoptionen.
+
+**Qurʾān:** Sūren-Auswahl→Leser als ruhiger geführter Übergang, arabischer Text in optimaler Lesefläche, gut lesbare Transliteration/Übersetzung nach geltenden Regeln, Fortschritt und Audio-Kontinuität. Bestehende Audiomotor-/Rezitator-/Cache-Logik erhalten, keine Audio-Restarts bei Animation.
+
+**Bibliothek/Gelehrte:** hochwertiges Buch-/Karten-Cover→Details, interne Suche, Quellenstatus, Bookmark/Lesestand; keine Gesichter oder religiöse Personenillustrationen erfinden.
+
+**Duʿāʾ/Lernbereich:** sanft aufklappbare Wort-für-Wort-Lernansichten, Originalarabisch → Lautschrift → Deutsch klar priorisiert, Audio-Synchronisation und Sprecherposition nicht verlieren.
+
+**Quiz:** klares unmittelbares Antwortfeedback, animierte Progression ohne spielzeughafte Partikel, barrierefreie Zustände, bestehende Lernstatistik und Antworten unverändert.
+
+**Gebetszeiten/Qibla:** zurückhaltende Übergänge, live Countdown und Standort weiterhin korrekt; keine Änderung der Rechen- oder Berechtigungslogik nur für die Optik.
+
+**Suche:** native Suche als Overlay/Sheet oder passende eigene Route, Fokus und Tastatur stabil, schnelle Ergebnisse, leere/offline/Fehlerzustände, Rückkehr zur vorherigen Stelle.
+
+**Navigation:** bestehende Hauptnavigation erhalten und mit Nutzervorgabe **Start · Quiz · Beiträge · Koran · Mehr** abgleichen. In geprüftem DARNext-Branch war noch Start · Qurʾān · Beiträge · AI · Mehr sichtbar; diese Diskrepanz vor Implementierung auflösen. PR #1487 vorbereitet, aber nach letzter Prüfung noch offen und nicht als gerätegeprüft belegt. Kein doppelter Tabbar-/Web-Navigationslayer.
+
+### 6. RESPONSIVE / INKLUSIVE QUALITÄTSREGEL
+iPhone kompakt/groß, iPad Portrait/Querformat, Split View und echte Fold-/Duo-Pane-Breiten nach vorhandenem Vertrag: layout nach **verfügbarer Breite**, nicht Modellnamen. Safe Areas, Keyboard, dynamische Schriftgröße, VoiceOver, Voice Control, Kontrast, Touch-Flächen, Landscape, arabisches/soranisches RTL, Scroll-Konflikte und Rückgesten testen.
+
+**Neun Erwachsenen-App-Sprachen:** de/ar/en/tr/ku/ckb/bs/fr/es. Kein Feature mit nur deutschem UI als „fertig“ bezeichnen. Fachlich ungeprüfte Quellenübersetzungen nicht erfinden; wenn inhaltliche Übersetzung nicht freigegeben, geprüfter Fallback-Hinweis nach Bestandsregel. Die neue Motion muss in RTL spiegelungskorrekt und bei sehr langen Strings funktionieren.
+
+**Zustände:** normal, pressed, focused, loading, empty, offline, error, reconnecting, playing, paused, background/foreground. Keine Loader-Schleifen oder Ruckler bei Rückkehr aus dem Hintergrund.
+
+### 7. QUALITÄT, PERFORMANCE, CODE
+- Erst Messwerte erheben: Kaltstart, Zeit bis Interaktivität, Scroll- und Transition-Flüssigkeit, Speicher, CPU/Energie, Audio-Stabilität; Xcode Instruments und echte Simulator-/Geräte-Prüfung. 60 Hz/120 Hz dynamisch wo Hardware ermöglicht; keine harte FPS-Behauptung ohne Messung.
+- Keine SwiftUI-Monolith-Views ohne Aufteilung; keine kopierten Designwerte. Komponenten und Tokens zentral; Routing-Owner bleibt verantwortlich.
+- Kein gleichzeitiges Animieren hunderter Elemente; ressourcenschonende Lazy-Container; identitätsstabile Bilder, Caching und strukturiertes Task-Cancellation.
+- Keine neuen Paid-Abhängigkeiten ohne Nutzen-/Lizenz-/Sicherheitsprüfung. Apple-native Lösungen bevorzugen; Rive nur selektiv, optional und nach Abwägung.
+- Accessibility als Teil der Komponenten, nicht Nacharbeit.
+- Bestehende UI-Test-Dateien enthalten teilweise Xcode-Vorlage: echte assertion-basierte UI-Tests ergänzen (Tap→Detail→Zurück, Suchsheet, Reduzierte Bewegung, XXL-Schrift, RTL, Tabs, Audio bleibt aktiv).
+- Screenshots/kurze Simulator-Aufnahmen und vorher/nachher-Vergleiche pro Feature. CI/SwiftLint/XCTest/xcodebuild nur dann als „bestanden“ melden, wenn ausgeführt, mit Kommando, Gerät und Ergebnis. Kann Xcode hier nicht ausgeführt werden: genau als „nicht geprüft“ kennzeichnen und ausführbare lokale Schritte liefern.
+
+### 8. ZUKUNFTSFÄHIGKEIT OHNE DAUERREWRITE
+Erstelle oder ergänze **DARNext Technology Radar** (z. B. docs/darnext/TECH_RADAR.md): aktuelle geprüfte Xcode-/Swift-/iOS-SDK-Version, Mindest-OS, verwendete APIs, Future-Feature-Kandidaten, Migrationsrisiken, Deprecations, offene Tests, Aktualisierungsdatum. **Wiederkehrende Reviews bei künftigen stabilen Apple-Releases** als empfohlenen Prozess dokumentieren; keinen unkontrollierten automatischen Framework-Upgrade/Produktionsdeploy einrichten.
+
+Neue Technologien durch kurzes „Pilot → Messung → Rollout“-Verfahren prüfen. Feature Flags und Availability/Fallbacks so konzipieren, dass bestehende iPhones weiterhin funktionsfähig bleiben. Relevante Features: native Hero-Zooms, intelligente Accessibility, systemnahe Suche, adaptives iPad-Layout, Siri/App Intents nur wenn geeignet, Widgets und sanfte Haptik – nicht alles jetzt einbauen, sondern kompatibel vorbereiten.
+
+### 9. STUFENWEISE UMSETZUNG DURCH WORK
+**Phase A – Discovery/GAP-Audit:** tatsächliche neueste DAR-NEXT-Basis lokalisieren, Branch-/PR-Matrix, Dateieigentümer, bereits fertige vs. offene Motion/UI-Komponenten und Risiken aufzeigen. Keine isolierte Oktober-Version als heutige Wahrheit ausgeben.
+
+**Phase B – Minimaler vertikaler Proof:** auf isoliertem Feature-Branch eine bereits bestehende Startseitenkarte mit echtem Übergang und Rücktransition verbessern; zentrale Tokens nur ergänzen, vorhandene Gestaltung nicht ersetzen. Tests und Video/Screen-Belege.
+
+**Phase C – Reusable Motion:** bei erfolgreichem Proof auf Posts, Quellen, Qurʾān, Library und Duʿāʾ übertragen, jeweils kleine PRs; keine globale Änderung auf Verdacht.
+
+**Phase D – Advanced UX:** Suche/Sheets, Haptik, Fokus, iPad/Fold, RTL, Accessibility, Animationen mit Qualitätsbudget.
+
+**Phase E – Dokumentation/Releasegate:** vollständige QA-Matrix, Technology Radar, changelog, Screenshot-Diffs, TestFlight-Probelauf nach eigener Freigabekette. DAR NEXT erst ersetzen lassen, wenn explizit freigegeben.
+
+### 10. VERBOTE UND BESTANDSSCHUTZ
+- **Kein Rewrite**, keine neue zweite App, kein Austauschen der bestehenden DAR-NEXT-Architektur gegen irgendeine Demo.
+- **Kein direkter Commit auf main**, keine automatisch gemergten PRs, keine Cloudflare-Live-Auslieferung, kein OneSignal-Push. Nur Feature-Branch/Draft-PR bis Abnahme.
+- Keine ungefragten Änderungen an Kids, tvOS, Watch, Admin, Push, Gebetszeitenengine, Rechte-/Privacy-Logik.
+- Keine Änderung bestehender Q-IDs, kanonischer Links, isnād-/Quellentexte, festgelegter Antworten, geprüfter Übersetzungen oder Autorenattributionen.
+- Bestehende gesicherte Navigation, Themes, Assets und Nutzerpräferenzen beibehalten. Keine Doppel-Renderings und keine verlorenen Scrollpositionen.
+- Kein „alles getestet“ ohne Testnachweise. Keine Behauptung, die neue 2026/27-App sei bereits im App Store.
+
+### 11. DEFINITION OF DONE / LIEFERGEGENSTÄNDE
+1. Dokumentierte aktuelle DAR-NEXT-Quellbasis inklusive tatsächlicher Branch/Commit-IDs, offene PRs, Backlog und Status pro Feature.
+2. Isolierter, reviewbarer SwiftUI-PR mit funktionierendem Karte→Detail→Zurück-Beispielfluss.
+3. Wiederverwendbare Motion-/Design-Tokens, gezielt erweiterte bestehende UI-Owner und keine regressiven CSS/Index-Eingriffe.
+4. Für jeden modifizierten Bereich real getestete Navigation, Screenreader/Reduce Motion, Multi-Language/RTL und Audio-/Scrollzustand.
+5. Xcode-Build-/Simulator-/Test-Log mit ausführbaren Befehlen und Messresultaten oder expliziten offenen Nachweisen.
+6. Vergleichsaufnahmen der relevanten Zustände, dokumentierte Accessibility- und Performanceprüfung.
+7. Pflegeplan/Technology Radar für künftige stabile Apple-SDKs, ohne automatische Produktivänderung.
+8. Kurzbericht „vorhanden / erweitert / offen / blockiert / getestet / nicht getestet“ mit PR-Links und nächstem priorisierten Schritt.
+
+**JETZT BEGINNEN:** Lies dieses Dokument vollständig, verifiziere den aktuellen Entwicklungsstand (insbesondere die Arbeiten vom 16.11.2026), wähle den korrekten DAR-NEXT-Codebranch und implementiere den ersten sicheren Referenzfluss. Bei fehlendem Zugriff, nicht vorhandenen Videoassets oder Simulatoren transparent begrenzen – nicht als erledigt ausgeben.
