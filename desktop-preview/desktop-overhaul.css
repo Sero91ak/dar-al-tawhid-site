@@ -2713,3 +2713,16 @@
 @media(prefers-reduced-motion:reduce){
   .inline-reader-body{animation:none!important}
 }
+
+/* DESKTOP_AUDIT_20261116: minimum readable size for secondary information. */
+body.desktop-overhaul-v18 :is(
+  .main-nav a,.isnad-label,.inline-source,.player-kicker,.player-field label,
+  .desktop-home-jump a,.eyebrow,.intro-aside,.hero-ref,.prayer-label,
+  .prayer-current small,.prayer-next small,.prayer-locate,.rule-card .kicker,
+  .list-row .meta,.list-row small,.text-link,.source-link,.side-title,.side-nav a,
+  .book-ref,.page-no,.book-btn,.book-position,.speaker,.statement-source,
+  .knowledge-item span,.knowledge-item p,.book-card small,.prayer span,
+  .form-line label,.site-footer,.real-post .speaker-line,.content-count,
+  .real-cover small,.fact-row span,.women-back,.inline-reader-body .real-source,
+  .women-source,.qa26-field > span
+){font-size:max(11px,.72vw)!important}

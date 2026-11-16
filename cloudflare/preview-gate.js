@@ -1,6 +1,3 @@
-const DEFAULT_USER = "Dawud";
-const DEFAULT_PASS = "Malik20";
-
 export function isKidsNativeApp(ua) {
   return /DarAlTawhidKids-iOS/i.test(String(ua || ""));
 }
@@ -10,11 +7,11 @@ export function isOfficialNativeApp(ua) {
 }
 
 function gateUser(env) {
-  return String((env && (env.PREVIEW_GATE_USER || env.KIDS_GATE_USER)) || DEFAULT_USER);
+  return String((env && (env.PREVIEW_GATE_USER || env.KIDS_GATE_USER)) || "");
 }
 
 function gatePass(env) {
-  return String((env && (env.PREVIEW_GATE_PASS || env.KIDS_GATE_PASS)) || DEFAULT_PASS);
+  return String((env && (env.PREVIEW_GATE_PASS || env.KIDS_GATE_PASS)) || "");
 }
 
 function unauthorizedGate() {
@@ -47,7 +44,11 @@ function hasValidGateAuth(request, env) {
   const idx = decoded.indexOf(":");
   const user = idx < 0 ? decoded : decoded.slice(0, idx);
   const pass = idx < 0 ? "" : decoded.slice(idx + 1);
-  return user === gateUser(env) && pass === gatePass(env);
+  const expectedUser = gateUser(env);
+  const expectedPass = gatePass(env);
+  // Fail closed until both credentials are configured as private Worker secrets.
+  if (!expectedUser || !expectedPass) return false;
+  return user === expectedUser && pass === expectedPass;
 }
 
 function isDarTestPath(pathname) {
