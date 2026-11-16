@@ -17,6 +17,9 @@ const installSw=read("public-pwa-install-sw.js");
 const router=read("cloudflare/site-router.js");
 const desktop=read("desktop-preview/index.html");
 const desktopJs=read("desktop-preview/desktop-overhaul.js");
+const previewGate=read("cloudflare/preview-gate.js");
+const liveWrangler=read("wrangler.toml");
+const testWrangler=read("wrangler.test.toml");
 const manifest=JSON.parse(read("manifest.json"));
 
 check(rootSw.includes("PUBLIC_WEBSITE_NETWORK_ONLY_V1"),"legacy root SW serves website navigation network-only");
@@ -52,6 +55,9 @@ check(router.includes("isRoot && wantsPublicWebsite(request)"),"public root rout
 check(desktop.length>200000,"public website main HTML is complete");
 check(desktop.includes("DĀR AL TAWḤĪD"),"website branding present");
 check(desktop.includes("desktop-overhaul.js"),"website interaction bundle present");
+check(!desktop.includes("/test/assets/"),"public desktop HTML never loads internal Test assets");
+check(!/PREVIEW_GATE_(?:USER|PASS)\s*=\s*[\"']/.test(liveWrangler+"\n"+testWrangler),"preview credentials are not stored as plaintext Wrangler vars");
+check(!previewGate.includes("DEFAULT_USER")&&!previewGate.includes("DEFAULT_PASS"),"preview gate has no built-in credential fallback");
 
 const openScripts=(desktop.match(/<script\b/gi)||[]).length;
 const closeScripts=(desktop.match(/<\/script>/gi)||[]).length;

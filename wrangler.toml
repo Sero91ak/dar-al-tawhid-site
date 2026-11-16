@@ -18,8 +18,3 @@ run_worker_first = true
 # PRODUCTION_SINGLE_OWNER_V1: Cloudflare repository builds must never auto-publish.
 # GitHub Actions "Deploy Besucher-App" is the sole production publisher.
 watch_paths = [".cloudflare-manual-only/**"]
-
-[vars]
-PREVIEW_GATE_USER = "Dawud"
-PREVIEW_GATE_PASS = "Malik20"
-
