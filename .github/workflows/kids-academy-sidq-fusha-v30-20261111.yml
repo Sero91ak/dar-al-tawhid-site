@@ -1,0 +1,118 @@
+name: Kids Ṣidq Fuṣḥā V4 · 12 held lines human QA only
+
+on:
+  pull_request:
+    types: [synchronize, reopened]
+    paths:
+      - '.github/workflows/kids-academy-sidq-fusha-v30-20261111.yml'
+      - 'kids/tools/produce-academy-sidq-v30-fusha-qa-batch.py'
+      - 'kids/data/academy-sidq-v30-fusha-qa-batches-20261111.json'
+      - 'kids/data/academy-sidq-v30-fusha-qa-trigger-20261111.json'
+
+concurrency:
+  group: kids-sidq-v30-fusha-owner-qa-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    if: >-
+      github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' &&
+      github.event.pull_request.head.ref == 'audit/kids-academy-audio-inventory-20261106'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      approved: ${{ steps.gate.outputs.approved }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Free review of twelve exact Fuṣḥā audio-only scripts
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/produce-academy-sidq-v30-fusha-qa-batch.py
+          python3 kids/tools/produce-academy-sidq-v30-fusha-qa-batch.py --check-all
+          for i in 0 1 2; do
+            python3 kids/tools/produce-academy-sidq-v30-fusha-qa-batch.py --index "$i" --dry-run
+          done
+      - name: Authorize a single review-only voice generation run
+        id: gate
+        run: |
+          echo 'approved=false' >> "$GITHUB_OUTPUT"
+          if [ "$(git log -1 --format=%s)" = 'KIDS_APPROVED_V4_SIDQ_FUSHA_12_GENERATE_ONCE' ]; then
+            echo 'approved=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'No credit-consuming run requested; preflight only.'
+          fi
+
+  record-fusha-review:
+    needs: preflight
+    if: >-
+      needs.preflight.outputs.approved == 'true' &&
+      github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: write
+    env:
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          persist-credentials: true
+      - name: Install ffmpeg and verify owner-V4 authorization
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          test "$(git log -1 --format=%s)" = 'KIDS_APPROVED_V4_SIDQ_FUSHA_12_GENERATE_ONCE'
+          test -n "$ADMIN_PUBLISH_SECRET" || {
+            echo '::error::Owner voice credential missing, no paid request.'
+            exit 1
+          }
+          python3 kids/tools/produce-academy-sidq-v30-fusha-qa-batch.py --check-all
+      - name: Generate exact twelve Fuṣḥā-sensitive lines in three capped groups
+        id: record
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          for i in 0 1 2; do
+            python3 kids/tools/produce-academy-sidq-v30-fusha-qa-batch.py --index "$i"
+          done
+      - name: Keep all successful candidate clips, even after an interrupted batch
+        if: always()
+        run: |
+          set -euo pipefail
+          if [ ! -f kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json ]; then
+            echo 'No completed candidates available to preserve.'
+            exit 0
+          fi
+          python3 - <<'PY'
+          import json,hashlib,pathlib
+          doc=json.loads(pathlib.Path('kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json').read_text('utf8'))
+          req=json.loads(pathlib.Path('kids/data/academy-sidq-v30-fusha-qa-batches-20261111.json').read_text('utf8'))
+          exact={t['text'] for b in req['batches'] for t in b['items']}
+          assert doc['stagingOnly'] is True and doc['requiresOwnerListeningApproval'] is True
+          assert len(doc['entries'])<=12 and set(doc['entries'])<=exact
+          for e in doc['entries'].values():
+              f=pathlib.Path(e['url'].lstrip('/'))
+              assert f.is_file() and f.stat().st_size>=1800
+              assert hashlib.sha256(f.read_bytes()).hexdigest()==e['sha256']
+              assert e['modelId']=='eleven_v4' and e['approvedForPlayback'] is False
+          print('Verified',len(doc['entries']),'Fuṣḥā-mixed staged candidates; public=0')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json kids/assets/kids-academy-audio/*.m4a
+          if ! git diff --cached --quiet; then
+            git commit -m 'kids(audio): preserve original Fuṣḥā-sensitive V4 QA samples, no public release'
+            git pull --rebase origin audit/kids-academy-audio-inventory-20261106
+            git push origin HEAD:refs/heads/audit/kids-academy-audio-inventory-20261106
+          fi
+      - name: Fail on any incomplete paid batch
+        if: steps.record.outcome == 'failure'
+        run: |
+          echo '::error::A Fuṣḥā-sensitive recording failed; check saved candidates before retrying. Human listening is mandatory.'
+          exit 1

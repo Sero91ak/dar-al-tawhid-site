@@ -68,11 +68,16 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich kann ruhig warten und freundlich bleiben."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre mit deinen Worten: Geduld – wie kannst du es im Alltag üben?",
-     "sample": "Ich übe Geduld, wenn etwas nicht sofort klappt.",
-     "hint": "Allah hilft den Geduldigen."
-    },
+          "type": "choice",
+          "prompt": "Welche Aussage passt zu Geduld im Alltag?",
+          "options": [
+            "Ich übe Geduld, wenn etwas nicht sofort klappt.",
+            "Ich muss sofort alles bekommen und darf nie warten."
+          ],
+          "correct": 0,
+          "hint": "Allah hilft den Geduldigen.",
+          "explain": "Ich übe Geduld, wenn etwas nicht sofort klappt."
+        },
     {
      "type": "choice",
      "prompt": "Wo lernen wir mehr über dieses Thema?",
@@ -98,17 +103,27 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich kann ruhig warten und freundlich bleiben."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre, wie sich Geduld in einer Alltagssituation zeigen kann.",
-     "sample": "Ich übe Geduld, wenn etwas nicht sofort klappt.",
-     "hint": "Allah hilft den Geduldigen."
-    },
+          "type": "choice",
+          "prompt": "Welche Handlung zeigt Geduld im Alltag?",
+          "options": [
+            "Ich übe Geduld, wenn etwas nicht sofort klappt.",
+            "Wenn etwas nicht klappt, gebe ich sofort auf und werde gemein."
+          ],
+          "correct": 0,
+          "hint": "Allah hilft den Geduldigen.",
+          "explain": "Ich übe Geduld, wenn etwas nicht sofort klappt."
+        },
     {
-     "type": "text",
-     "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 2:153 und der genannten Überlieferung?",
-     "sample": "Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen. Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht.",
-     "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah."
-    }
+          "type": "choice",
+          "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 2:153 und der genannten Überlieferung?",
+          "options": [
+            "Geduld und Gebet helfen uns; Allah ist mit den Geduldigen.",
+            "Geduld und Gebet helfen nach diesen Quellen überhaupt nicht."
+          ],
+          "correct": 0,
+          "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah.",
+          "explain": "Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen. Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht."
+        }
    ]
   }
  },
@@ -177,11 +192,16 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich gehe gut mit geliehenen Sachen um."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre mit deinen Worten: Vertrauen – wie kannst du es im Alltag üben?",
-     "sample": "Ich bin zuverlässig, wenn mir jemand etwas anvertraut.",
-     "hint": "Eine anvertraute Sache soll ich sorgfältig behandeln."
-    },
+          "type": "choice",
+          "prompt": "Welche Aussage passt zu Vertrauen im Alltag?",
+          "options": [
+            "Ich bin zuverlässig, wenn mir jemand etwas anvertraut.",
+            "Ich verrate mir anvertraute Dinge ohne Erlaubnis."
+          ],
+          "correct": 0,
+          "hint": "Eine anvertraute Sache soll ich sorgfältig behandeln.",
+          "explain": "Ich bin zuverlässig, wenn mir jemand etwas anvertraut."
+        },
     {
      "type": "choice",
      "prompt": "Wo lernen wir mehr über dieses Thema?",
@@ -207,17 +227,27 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich gehe gut mit geliehenen Sachen um."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre, wie sich Vertrauen in einer Alltagssituation zeigen kann.",
-     "sample": "Ich bin zuverlässig, wenn mir jemand etwas anvertraut.",
-     "hint": "Eine anvertraute Sache soll ich sorgfältig behandeln."
-    },
+          "type": "choice",
+          "prompt": "Welche Handlung zeigt Vertrauen im Alltag?",
+          "options": [
+            "Ich bin zuverlässig, wenn mir jemand etwas anvertraut.",
+            "Ich erzähle jedes Geheimnis weiter, das mir anvertraut wurde."
+          ],
+          "correct": 0,
+          "hint": "Eine anvertraute Sache soll ich sorgfältig behandeln.",
+          "explain": "Ich bin zuverlässig, wenn mir jemand etwas anvertraut."
+        },
     {
-     "type": "text",
-     "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 23:8 und der genannten Überlieferung?",
-     "sample": "Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten. Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten.",
-     "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah."
-    }
+          "type": "choice",
+          "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 23:8 und der genannten Überlieferung?",
+          "options": [
+            "Anvertraute Dinge und Vereinbarungen sollen wir achten.",
+            "Anvertraute Dinge zu verraten ist nach beiden Quellen erwünscht."
+          ],
+          "correct": 0,
+          "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah.",
+          "explain": "Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten. Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten."
+        }
    ]
   }
  },
@@ -286,11 +316,16 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich kann mit einem guten Gruß beginnen und antworten."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre mit deinen Worten: Grüßen – wie kannst du es im Alltag üben?",
-     "sample": "Wir üben den islamischen Friedensgruß und eine gute Antwort.",
-     "hint": "Ein schöner Gruß bringt Freundlichkeit in unsere Begegnung."
-    },
+          "type": "choice",
+          "prompt": "Welche Aussage passt zu Grüßen im Alltag?",
+          "options": [
+            "Wir üben den islamischen Friedensgruß und eine gute Antwort.",
+            "Ich grüße absichtlich niemanden zurück."
+          ],
+          "correct": 0,
+          "hint": "Ein schöner Gruß bringt Freundlichkeit in unsere Begegnung.",
+          "explain": "Wir üben den islamischen Friedensgruß und eine gute Antwort."
+        },
     {
      "type": "choice",
      "prompt": "Wo lernen wir mehr über dieses Thema?",
@@ -316,17 +351,27 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich kann mit einem guten Gruß beginnen und antworten."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre, wie sich Grüßen in einer Alltagssituation zeigen kann.",
-     "sample": "Wir üben den islamischen Friedensgruß und eine gute Antwort.",
-     "hint": "Ein schöner Gruß bringt Freundlichkeit in unsere Begegnung."
-    },
+          "type": "choice",
+          "prompt": "Welche Handlung zeigt Grüßen im Alltag?",
+          "options": [
+            "Wir üben den islamischen Friedensgruß und eine gute Antwort.",
+            "Ich ignoriere jeden freundlichen Friedensgruß."
+          ],
+          "correct": 0,
+          "hint": "Ein schöner Gruß bringt Freundlichkeit in unsere Begegnung.",
+          "explain": "Wir üben den islamischen Friedensgruß und eine gute Antwort."
+        },
     {
-     "type": "text",
-     "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 4:86 und der genannten Überlieferung?",
-     "sample": "Wenn ihr freundlich gegrüßt werdet, antwortet mit einem besseren oder gleichwertigen Gruß. Der Prophet ﷺ ermutigte dazu, den Salām untereinander zu verbreiten.",
-     "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah."
-    }
+          "type": "choice",
+          "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 4:86 und der genannten Überlieferung?",
+          "options": [
+            "Auf einen Gruß antworten wir gleichwertig oder besser und verbreiten den Salām.",
+            "Auf einen freundlichen Gruß soll man grundsätzlich gar nicht antworten."
+          ],
+          "correct": 0,
+          "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah.",
+          "explain": "Wenn ihr freundlich gegrüßt werdet, antwortet mit einem besseren oder gleichwertigen Gruß. Der Prophet ﷺ ermutigte dazu, den Salām untereinander zu verbreiten."
+        }
    ]
   }
  },
@@ -395,11 +440,16 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich will ruhig und freundlich sprechen."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre mit deinen Worten: Freundlich sprechen – wie kannst du es im Alltag üben?",
-     "sample": "Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind.",
-     "hint": "Freundliche Worte sind Teil guten Benehmens."
-    },
+          "type": "choice",
+          "prompt": "Welche Aussage passt zu Freundlich sprechen im Alltag?",
+          "options": [
+            "Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind.",
+            "Ich beleidige andere, sobald ich anderer Meinung bin."
+          ],
+          "correct": 0,
+          "hint": "Freundliche Worte sind Teil guten Benehmens.",
+          "explain": "Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind."
+        },
     {
      "type": "choice",
      "prompt": "Wo lernen wir mehr über dieses Thema?",
@@ -425,17 +475,27 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich will ruhig und freundlich sprechen."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre, wie sich Freundlich sprechen in einer Alltagssituation zeigen kann.",
-     "sample": "Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind.",
-     "hint": "Freundliche Worte sind Teil guten Benehmens."
-    },
+          "type": "choice",
+          "prompt": "Welche Handlung zeigt Freundlich sprechen im Alltag?",
+          "options": [
+            "Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind.",
+            "Bei Meinungsverschiedenheiten muss ich unfreundlich sprechen."
+          ],
+          "correct": 0,
+          "hint": "Freundliche Worte sind Teil guten Benehmens.",
+          "explain": "Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind."
+        },
     {
-     "type": "text",
-     "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 17:53 und der genannten Überlieferung?",
-     "sample": "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
-     "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah."
-    }
+          "type": "choice",
+          "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 17:53 und der genannten Überlieferung?",
+          "options": [
+            "Wir sollen gut sprechen und andernfalls schweigen.",
+            "Beide Quellen empfehlen absichtliche Beleidigungen."
+          ],
+          "correct": 0,
+          "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah.",
+          "explain": "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen."
+        }
    ]
   }
  },
@@ -504,11 +564,16 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich höre zu und gehe freundlich mit anderen um."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre mit deinen Worten: Respekt – wie kannst du es im Alltag üben?",
-     "sample": "Wir üben Respekt für Eltern, Familie und Mitmenschen.",
-     "hint": "Menschen verdienen einen freundlichen Umgang."
-    },
+          "type": "choice",
+          "prompt": "Welche Aussage passt zu Respekt im Alltag?",
+          "options": [
+            "Wir üben Respekt für Eltern, Familie und Mitmenschen.",
+            "Ich darf meine Mitmenschen absichtlich schlecht behandeln."
+          ],
+          "correct": 0,
+          "hint": "Menschen verdienen einen freundlichen Umgang.",
+          "explain": "Wir üben Respekt für Eltern, Familie und Mitmenschen."
+        },
     {
      "type": "choice",
      "prompt": "Wo lernen wir mehr über dieses Thema?",
@@ -534,17 +599,27 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich höre zu und gehe freundlich mit anderen um."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre, wie sich Respekt in einer Alltagssituation zeigen kann.",
-     "sample": "Wir üben Respekt für Eltern, Familie und Mitmenschen.",
-     "hint": "Menschen verdienen einen freundlichen Umgang."
-    },
+          "type": "choice",
+          "prompt": "Welche Handlung zeigt Respekt im Alltag?",
+          "options": [
+            "Wir üben Respekt für Eltern, Familie und Mitmenschen.",
+            "Ich versuche, andere Menschen ohne Grund zu verletzen."
+          ],
+          "correct": 0,
+          "hint": "Menschen verdienen einen freundlichen Umgang.",
+          "explain": "Wir üben Respekt für Eltern, Familie und Mitmenschen."
+        },
     {
-     "type": "text",
-     "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 17:23 und der genannten Überlieferung?",
-     "sample": "Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen. Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters.",
-     "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah."
-    }
+          "type": "choice",
+          "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 17:23 und der genannten Überlieferung?",
+          "options": [
+            "Allah allein dienen und Eltern gut behandeln.",
+            "Beide Quellen verbieten gute Behandlung der Eltern."
+          ],
+          "correct": 0,
+          "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah.",
+          "explain": "Allah befiehlt, Ihm allein zu dienen und die Eltern gut zu behandeln. Sprich ehrerbietig mit ihnen. Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter und auch des Vaters."
+        }
    ]
   }
  },
@@ -613,11 +688,16 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich achte auf Reinheit und frage, wenn ich Hilfe brauche."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre mit deinen Worten: Reinheit – wie kannst du es im Alltag üben?",
-     "sample": "Wir lernen, uns selbst, unsere Kleidung und unsere Umgebung sauber zu halten.",
-     "hint": "Reinheit hat im Islam einen hohen Stellenwert."
-    },
+          "type": "choice",
+          "prompt": "Welche Aussage passt zu Reinheit im Alltag?",
+          "options": [
+            "Wir lernen, uns selbst, unsere Kleidung und unsere Umgebung sauber zu halten.",
+            "Ich lasse meine Kleidung und Umgebung absichtlich schmutzig."
+          ],
+          "correct": 0,
+          "hint": "Reinheit hat im Islam einen hohen Stellenwert.",
+          "explain": "Wir lernen, uns selbst, unsere Kleidung und unsere Umgebung sauber zu halten."
+        },
     {
      "type": "choice",
      "prompt": "Wo lernen wir mehr über dieses Thema?",
@@ -643,17 +723,27 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich achte auf Reinheit und frage, wenn ich Hilfe brauche."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre, wie sich Reinheit in einer Alltagssituation zeigen kann.",
-     "sample": "Wir lernen, uns selbst, unsere Kleidung und unsere Umgebung sauber zu halten.",
-     "hint": "Reinheit hat im Islam einen hohen Stellenwert."
-    },
+          "type": "choice",
+          "prompt": "Welche Handlung zeigt Reinheit im Alltag?",
+          "options": [
+            "Wir lernen, uns selbst, unsere Kleidung und unsere Umgebung sauber zu halten.",
+            "Ich achte niemals auf Sauberkeit."
+          ],
+          "correct": 0,
+          "hint": "Reinheit hat im Islam einen hohen Stellenwert.",
+          "explain": "Wir lernen, uns selbst, unsere Kleidung und unsere Umgebung sauber zu halten."
+        },
     {
-     "type": "text",
-     "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 74:4 und der genannten Überlieferung?",
-     "sample": "Und reinige deine Kleidung. Der Prophet ﷺ erklärte, dass die rituelle Reinigung ein wichtiger Teil des Glaubens ist.",
-     "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah."
-    }
+          "type": "choice",
+          "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 74:4 und der genannten Überlieferung?",
+          "options": [
+            "Reinheit und rituelle Reinigung sind wichtig.",
+            "Reinheit spielt in diesen Quellen keinerlei Rolle."
+          ],
+          "correct": 0,
+          "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah.",
+          "explain": "Und reinige deine Kleidung. Der Prophet ﷺ erklärte, dass die rituelle Reinigung ein wichtiger Teil des Glaubens ist."
+        }
    ]
   }
  },
@@ -722,11 +812,16 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich möchte die Gebetswaschung richtig lernen."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre mit deinen Worten: Wuḍūʾ – wie kannst du es im Alltag üben?",
-     "sample": "Wir erkennen die grundlegenden Glieder der Gebetswaschung, ohne einzelne Sonderfälle vorwegzunehmen.",
-     "hint": "Für das Gebet lernen wir die rituelle Waschung."
-    },
+          "type": "choice",
+          "prompt": "Welche Aussage passt zu Wuḍūʾ im Alltag?",
+          "options": [
+            "Wir erkennen die grundlegenden Glieder der Gebetswaschung, ohne einzelne Sonderfälle vorwegzunehmen.",
+            "Für die Gebetswaschung muss ich keine Schritte kennenlernen."
+          ],
+          "correct": 0,
+          "hint": "Für das Gebet lernen wir die rituelle Waschung.",
+          "explain": "Wir erkennen die grundlegenden Glieder der Gebetswaschung, ohne einzelne Sonderfälle vorwegzunehmen."
+        },
     {
      "type": "choice",
      "prompt": "Wo lernen wir mehr über dieses Thema?",
@@ -752,17 +847,27 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich möchte die Gebetswaschung richtig lernen."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre, wie sich Wuḍūʾ in einer Alltagssituation zeigen kann.",
-     "sample": "Wir erkennen die grundlegenden Glieder der Gebetswaschung, ohne einzelne Sonderfälle vorwegzunehmen.",
-     "hint": "Für das Gebet lernen wir die rituelle Waschung."
-    },
+          "type": "choice",
+          "prompt": "Welche Handlung zeigt Wuḍūʾ im Alltag?",
+          "options": [
+            "Wir erkennen die grundlegenden Glieder der Gebetswaschung, ohne einzelne Sonderfälle vorwegzunehmen.",
+            "Wuḍūʾ besteht ausschließlich daraus, die Schuhe anzuziehen."
+          ],
+          "correct": 0,
+          "hint": "Für das Gebet lernen wir die rituelle Waschung.",
+          "explain": "Wir erkennen die grundlegenden Glieder der Gebetswaschung, ohne einzelne Sonderfälle vorwegzunehmen."
+        },
     {
-     "type": "text",
-     "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 5:6 und der genannten Überlieferung?",
-     "sample": "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln. Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt.",
-     "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah."
-    }
+          "type": "choice",
+          "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 5:6 und der genannten Überlieferung?",
+          "options": [
+            "Qurʾān 5:6 nennt Reinigungsschritte; nach aufgehobenem Wuḍūʾ ist erneute Gebetswaschung nötig.",
+            "Der Vers verbietet die Reinigung vor dem Gebet."
+          ],
+          "correct": 0,
+          "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah.",
+          "explain": "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln. Der Prophet ﷺ erklärte, dass man bei einem Zustand, der die Gebetswaschung aufhebt, vor dem Gebet erneut Wuḍūʾ benötigt."
+        }
    ]
   }
  },
@@ -831,11 +936,16 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich lerne das Gebet nach dem Vorbild des Propheten ﷺ."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre mit deinen Worten: Gebet – wie kannst du es im Alltag üben?",
-     "sample": "Wir beginnen mit dem Sinn des Gebets und lernen die Praxis anschließend Schritt für Schritt.",
-     "hint": "Das Gebet erinnert uns an Allah."
-    },
+          "type": "choice",
+          "prompt": "Welche Aussage passt zu Gebet im Alltag?",
+          "options": [
+            "Wir beginnen mit dem Sinn des Gebets und lernen die Praxis anschließend Schritt für Schritt.",
+            "Ich muss die gesamte Gebetspraxis sofort ohne Hilfe beherrschen."
+          ],
+          "correct": 0,
+          "hint": "Das Gebet erinnert uns an Allah.",
+          "explain": "Wir beginnen mit dem Sinn des Gebets und lernen die Praxis anschließend Schritt für Schritt."
+        },
     {
      "type": "choice",
      "prompt": "Wo lernen wir mehr über dieses Thema?",
@@ -861,17 +971,27 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich lerne das Gebet nach dem Vorbild des Propheten ﷺ."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre, wie sich Gebet in einer Alltagssituation zeigen kann.",
-     "sample": "Wir beginnen mit dem Sinn des Gebets und lernen die Praxis anschließend Schritt für Schritt.",
-     "hint": "Das Gebet erinnert uns an Allah."
-    },
+          "type": "choice",
+          "prompt": "Welche Handlung zeigt Gebet im Alltag?",
+          "options": [
+            "Wir beginnen mit dem Sinn des Gebets und lernen die Praxis anschließend Schritt für Schritt.",
+            "Ich darf das Gebet niemals schrittweise erlernen."
+          ],
+          "correct": 0,
+          "hint": "Das Gebet erinnert uns an Allah.",
+          "explain": "Wir beginnen mit dem Sinn des Gebets und lernen die Praxis anschließend Schritt für Schritt."
+        },
     {
-     "type": "text",
-     "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 20:14 und der genannten Überlieferung?",
-     "sample": "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat.",
-     "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah."
-    }
+          "type": "choice",
+          "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 20:14 und der genannten Überlieferung?",
+          "options": [
+            "Allah allein anbeten und das Gebet nach der Lehre des Propheten ﷺ verrichten.",
+            "Der Vers und die Überlieferung lehren, das Gebet sei unnötig."
+          ],
+          "correct": 0,
+          "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah.",
+          "explain": "Ich bin Allah, es gibt keinen Gott außer Mir. Diene Mir und verrichte das Gebet zu Meinem Gedenken. Der Prophet ﷺ lehrte, das Gebet so zu verrichten, wie er es vorgezeigt hat."
+        }
    ]
   }
  },
@@ -940,11 +1060,16 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich bete Allah allein an."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre mit deinen Worten: Tawḥīd – wie kannst du es im Alltag üben?",
-     "sample": "Wir lernen, dass nur Allah angebetet wird.",
-     "hint": "Allah ist Einer und hat keinen Teilhaber."
-    },
+          "type": "choice",
+          "prompt": "Welche Aussage passt zu Tawḥīd im Alltag?",
+          "options": [
+            "Wir lernen, dass nur Allah angebetet wird.",
+            "Ich lerne, dass andere neben Allah angebetet werden sollen."
+          ],
+          "correct": 0,
+          "hint": "Allah ist Einer und hat keinen Teilhaber.",
+          "explain": "Wir lernen, dass nur Allah angebetet wird."
+        },
     {
      "type": "choice",
      "prompt": "Wo lernen wir mehr über dieses Thema?",
@@ -970,17 +1095,27 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich bete Allah allein an."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre, wie sich Tawḥīd in einer Alltagssituation zeigen kann.",
-     "sample": "Wir lernen, dass nur Allah angebetet wird.",
-     "hint": "Allah ist Einer und hat keinen Teilhaber."
-    },
+          "type": "choice",
+          "prompt": "Welche Handlung zeigt Tawḥīd im Alltag?",
+          "options": [
+            "Wir lernen, dass nur Allah angebetet wird.",
+            "Tawḥīd bedeutet, dass ich andere Geschöpfe anbete."
+          ],
+          "correct": 0,
+          "hint": "Allah ist Einer und hat keinen Teilhaber.",
+          "explain": "Wir lernen, dass nur Allah angebetet wird."
+        },
     {
-     "type": "text",
-     "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 112:1 und der genannten Überlieferung?",
-     "sample": "Sag: Er ist Allah, der Eine. Der Prophet ﷺ erklärte, dass Allahs Recht darin besteht, Ihn allein anzubeten und Ihm nichts beizugesellen.",
-     "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah."
-    }
+          "type": "choice",
+          "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 112:1 und der genannten Überlieferung?",
+          "options": [
+            "Allah ist Einer; nur Ihn beten wir an.",
+            "Allah soll nach diesen Quellen nicht allein angebetet werden."
+          ],
+          "correct": 0,
+          "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah.",
+          "explain": "Sag: Er ist Allah, der Eine. Der Prophet ﷺ erklärte, dass Allahs Recht darin besteht, Ihn allein anzubeten und Ihm nichts beizugesellen."
+        }
    ]
   }
  },
@@ -1049,11 +1184,16 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich lerne die Grundlagen des Glaubens aus Qurʾān und Sunnah."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre mit deinen Worten: Īmān – wie kannst du es im Alltag üben?",
-     "sample": "Der Glaube umfasst die im Qurʾān und in der Sunnah genannten Grundlagen.",
-     "hint": "Wir lernen, woran Muslime glauben."
-    },
+          "type": "choice",
+          "prompt": "Welche Aussage passt zu Īmān im Alltag?",
+          "options": [
+            "Der Glaube umfasst die im Qurʾān und in der Sunnah genannten Grundlagen.",
+            "Īmān hat mit den Glaubensgrundlagen nichts zu tun."
+          ],
+          "correct": 0,
+          "hint": "Wir lernen, woran Muslime glauben.",
+          "explain": "Der Glaube umfasst die im Qurʾān und in der Sunnah genannten Grundlagen."
+        },
     {
      "type": "choice",
      "prompt": "Wo lernen wir mehr über dieses Thema?",
@@ -1079,17 +1219,27 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich lerne die Grundlagen des Glaubens aus Qurʾān und Sunnah."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre, wie sich Īmān in einer Alltagssituation zeigen kann.",
-     "sample": "Der Glaube umfasst die im Qurʾān und in der Sunnah genannten Grundlagen.",
-     "hint": "Wir lernen, woran Muslime glauben."
-    },
+          "type": "choice",
+          "prompt": "Welche Handlung zeigt Īmān im Alltag?",
+          "options": [
+            "Der Glaube umfasst die im Qurʾān und in der Sunnah genannten Grundlagen.",
+            "Die Glaubensgrundlagen dürfen nicht gelernt werden."
+          ],
+          "correct": 0,
+          "hint": "Wir lernen, woran Muslime glauben.",
+          "explain": "Der Glaube umfasst die im Qurʾān und in der Sunnah genannten Grundlagen."
+        },
     {
-     "type": "text",
-     "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 2:3 und der genannten Überlieferung?",
-     "sample": "Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung.",
-     "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah."
-    }
+          "type": "choice",
+          "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 2:3 und der genannten Überlieferung?",
+          "options": [
+            "Īmān umfasst den Glauben an das Verborgene und die genannten Glaubensgrundlagen.",
+            "Beide Quellen lehren, dass es keine Glaubensgrundlagen gibt."
+          ],
+          "correct": 0,
+          "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah.",
+          "explain": "Diejenigen, die an das Verborgene glauben, das Gebet verrichten und von dem geben, womit Wir sie versorgt haben. Der Prophet ﷺ erklärte die Grundlagen des Īmān: Allah, Seine Engel, Bücher, Gesandten, den Jüngsten Tag und die Vorherbestimmung."
+        }
    ]
   }
  },
@@ -1158,11 +1308,16 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich bemühe mich, Allah aufrichtig zu dienen."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre mit deinen Worten: Ikhlāṣ – wie kannst du es im Alltag üben?",
-     "sample": "Gute Taten sollen nicht nur zum Angeben getan werden.",
-     "hint": "Wir bemühen uns, Allah aufrichtig zu dienen."
-    },
+          "type": "choice",
+          "prompt": "Welche Aussage passt zu Ikhlāṣ im Alltag?",
+          "options": [
+            "Gute Taten sollen nicht nur zum Angeben getan werden.",
+            "Ich tue Gutes nur, damit mich alle bewundern."
+          ],
+          "correct": 0,
+          "hint": "Wir bemühen uns, Allah aufrichtig zu dienen.",
+          "explain": "Gute Taten sollen nicht nur zum Angeben getan werden."
+        },
     {
      "type": "choice",
      "prompt": "Wo lernen wir mehr über dieses Thema?",
@@ -1188,17 +1343,27 @@ window.DARKidsAcademyCurriculum=Object.freeze({
      "explain": "Ich bemühe mich, Allah aufrichtig zu dienen."
     },
     {
-     "type": "text",
-     "prompt": "Erkläre, wie sich Ikhlāṣ in einer Alltagssituation zeigen kann.",
-     "sample": "Gute Taten sollen nicht nur zum Angeben getan werden.",
-     "hint": "Wir bemühen uns, Allah aufrichtig zu dienen."
-    },
+          "type": "choice",
+          "prompt": "Welche Handlung zeigt Ikhlāṣ im Alltag?",
+          "options": [
+            "Gute Taten sollen nicht nur zum Angeben getan werden.",
+            "Ich helfe nur, wenn ich dafür gelobt werde."
+          ],
+          "correct": 0,
+          "hint": "Wir bemühen uns, Allah aufrichtig zu dienen.",
+          "explain": "Gute Taten sollen nicht nur zum Angeben getan werden."
+        },
     {
-     "type": "text",
-     "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 39:11 und der genannten Überlieferung?",
-     "sample": "Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein. Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden.",
-     "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah."
-    }
+          "type": "choice",
+          "prompt": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 39:11 und der genannten Überlieferung?",
+          "options": [
+            "Allah aufrichtig dienen; Taten werden nach ihren Absichten beurteilt.",
+            "Aufrichtigkeit und Absicht sind nach beiden Quellen unwichtig."
+          ],
+          "correct": 0,
+          "hint": "Verknüpfe die Bedeutung des Verses mit der Lehre aus der Sunnah.",
+          "explain": "Sag: Mir wurde befohlen, Allah zu dienen und Ihm gegenüber aufrichtig im Glauben zu sein. Der Prophet ﷺ lehrte, dass Taten nach ihren Absichten beurteilt werden."
+        }
    ]
   }
  }

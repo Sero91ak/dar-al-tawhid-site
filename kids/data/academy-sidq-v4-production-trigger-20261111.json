@@ -1,0 +1,34 @@
+{
+  "id": "TAWHID_KIDS_SIDQ_V4_PRODUCTION_TRIGGER_20261111",
+  "confirmed": "GENERATE-FOUR-SIDQ-20261111",
+  "batch": "kids/data/academy-sidq-v4-batch-20261111.json",
+  "mode": "pr-checked-one-shot-production",
+  "stagingOnly": true,
+  "ownerAuthorized": true,
+  "createdAt": "2026-11-11",
+  "safety": {
+    "maxClips": 4,
+    "maxPreparedCharacters": 650,
+    "publicAudioManifestUnchanged": true,
+    "onlyKidsBranch": true,
+    "autoPublish": false
+  },
+  "attempt": 3,
+  "reason": "One-shot owner-authorized cost-controlled production after clean canonical script validation and ffmpeg availability",
+  "safeguard": "Never repeat a completed audio binary; cache verified file before another billed request.",
+  "preflightVerified": "GitHub Actions 42991612169 (preflight success; 4 canonical phrases, 116 characters, no billable calls)",
+  "series": "KIDS_SIDQ_V30_20261111_SAFE_BATCHES",
+  "seriesPreflight": "GitHub Action 42999368993: successful, 16 of 16 distinct 4-clip invocations, zero credits",
+  "seriesAuthorization": "User explicitly authorized bulk master-voice audio production for all Academy age tiers",
+  "seriesConstraints": {
+    "exactPhrases": 64,
+    "batches": 16,
+    "maxClipsPerInvocation": 4,
+    "maxPreparedCharsPerInvocation": 1200,
+    "heldForFushaReview": 12,
+    "publicPlayback": false,
+    "reuseCache": true,
+    "source": "kids/data/academy-sidq-v30-safe-batches-20261111.json"
+  },
+  "batchAttempt": 1
+}

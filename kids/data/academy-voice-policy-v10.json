@@ -30,7 +30,19 @@
     "pronunciationDictionaryId": "Q8w3SxtoVo8NSjsnlJEd",
     "pronunciationDictionaryVersionId": "wSzgkGpAwEDiTak8DApc",
     "revision": "kids-story-v4-same-speaker-20261010",
-    "languagePolicy": "German lesson narration with correctly pronounced Fuṣḥā terminology. Quran Arabic recitation is always genuine recitation, never synthetic."
+    "languagePolicy": "German lesson narration; every Arabic-origin word, including names, Islamic terms, Ṣidq, Ṣiddīq, Sūrat titles, Ṣaḥīḥ, Muslim and greetings, requires verified native Fuṣḥā phonetics and owner-audited whole-clip hearing. Human Qurʾān recitation only. No global unverified PLS injection.",
+    "ownerPronunciationHold": {
+      "enabled": true,
+      "reason": "Owner rejected 2026-11-11: GLOBAL Arabic-word pronunciation across all Kids Academy speech (including Ṣidq / aṣ-Ṣiddīq, Surah names, Ṣaḥīḥ Muslim, Qurʾān, Islamic terms, greetings and names). Previously identified source citation numbers must remain visible-only. Do not spend credits or publish until lexicon and individual phonetic audio are explicitly owner-reviewed.",
+      "appliesTo": "EVERY KIDS Academy utterance and EVERY Arabic-origin term, regardless of script, romanization, diacritics, role, age, source or lesson; all V4 staging pipelines.",
+      "approvalRequired": "review each distinct Arabic term against Arabic-Fuṣḥā owner master library; listen to entire mixed-language utterance, validate correct phonemes/gemination/long vowels, then explicit owner approval.",
+      "newGenerationAllowed": false,
+      "allPreviouslyStagedAudioUnapproved": true,
+      "knownContrast": "Ṣidq (صِدْق) means truthfulness; aṣ-Ṣiddīq (الصِّدِّيق) is a different word/title. Never substitute or pronounce one as the other.",
+      "dictionaryAliasesAreNotAudioQA": true,
+      "survivesTechnicalPass": true,
+      "audioCorrectionWithoutNewCredit": "audit and stage text-only first; paid re-recording only after term-by-term master comparison and owner approval"
+    }
   },
   "costControls": {
     "zeroCreditsForPlayback": true,
@@ -57,7 +69,10 @@
       "German articulation",
       "Fuṣḥā Arabic words and honorifics",
       "no breathing artifacts, abrupt endings or distorted pitch",
-      "no speed-shift from native generated recording"
+      "no speed-shift from native generated recording",
+      "All Arabic-origin terms: independently match each word against owner master lexicon AND phonetic reference. No Latin TTS alias or machine QA alone may approve.",
+      "Differentiate Ṣidq (صِدْق) from aṣ-Ṣiddīq (الصِّدِّيق): emphatic ṣ, gemination, and long ī are contrastive.",
+      "Speech script omits source/ḥadīth/verse numbers; visual source retains original exact source IDs."
     ],
     "verifiedSimilarityPercent": null
   }

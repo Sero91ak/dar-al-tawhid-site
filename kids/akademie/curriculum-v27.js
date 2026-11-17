@@ -123,10 +123,15 @@ const additions={
           "explain": "Ich hole geeignete Hilfe."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was ist Quelle und was unsere heutige Übung?",
-          "sample": "Qurʾān 16:5 nennt erschaffene Tiere; die Übung ist achtsames Beobachten.",
-          "hint": "Unterscheide Beleg und Anwendung."
+          "options": [
+            "Qurʾān 16:5 nennt erschaffene Tiere; die Übung ist achtsames Beobachten.",
+            "Qurʾān 16:5 beschreibt unsere heutige Beobachtungsübung Wort für Wort."
+          ],
+          "correct": 0,
+          "hint": "Unterscheide Beleg und Anwendung.",
+          "explain": "Qurʾān 16:5 nennt erschaffene Tiere; die Übung ist achtsames Beobachten."
         }
       ],
       "9-10": [
@@ -142,16 +147,26 @@ const additions={
           "explain": "Guter Umgang, nicht riskantes Anfassen."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre die Beziehung von Qurʾān 16:5 und al-Buḫārī 2363.",
-          "sample": "Der Vers nennt Allahs Schöpfung; die Überlieferung lehrt Barmherzigkeit.",
-          "hint": "Gib beide Quellen getrennt an."
+          "options": [
+            "Der Vers nennt Allahs Schöpfung; die Überlieferung lehrt Barmherzigkeit.",
+            "Der Vers verlangt, dass wir Tiere schlecht behandeln."
+          ],
+          "correct": 0,
+          "hint": "Gib beide Quellen getrennt an.",
+          "explain": "Der Vers nennt Allahs Schöpfung; die Überlieferung lehrt Barmherzigkeit."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Entwirf eine sichere gute Handlung für Tiere.",
-          "sample": "Ich beobachte in Ruhe und informiere bei Gefahr einen Erwachsenen.",
-          "hint": "Unsere Anwendung ist kein wörtlicher Offenbarungstext."
+          "options": [
+            "Ich beobachte in Ruhe und informiere bei Gefahr einen Erwachsenen.",
+            "Īmān bedeutet, dass man überhaupt nichts über den Glauben lernen darf."
+          ],
+          "correct": 0,
+          "hint": "Unsere Anwendung ist kein wörtlicher Offenbarungstext.",
+          "explain": "Ich beobachte in Ruhe und informiere bei Gefahr einen Erwachsenen."
         }
       ]
     },
@@ -273,10 +288,15 @@ const additions={
           "explain": "Der Ḥadīṯ von Ǧibrīl."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Nenne zwei Glaubensgrundlagen, die im Qurʾān-Auszug stehen.",
-          "sample": "Der Glaube an Allah und an Seine Engel.",
-          "hint": "Auch Bücher und Gesandte werden genannt."
+          "options": [
+            "Der Glaube an Allah und an Seine Engel.",
+            "Im Qurʾān-Auszug wird ausdrücklich gelehrt, nicht an Allah zu glauben."
+          ],
+          "correct": 0,
+          "hint": "Auch Bücher und Gesandte werden genannt.",
+          "explain": "Der Glaube an Allah und an Seine Engel."
         }
       ],
       "9-10": [
@@ -292,16 +312,26 @@ const additions={
           "explain": "Die sechs Grundlagen stehen im Ḥadīṯ."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was nennen Qurʾān 2:285 und Muslim 8 gemeinsam?",
-          "sample": "Beide sprechen von den Grundlagen des Glaubens an Allah und weitere Glaubensinhalte.",
-          "hint": "Vergleiche die beiden Quellen."
+          "options": [
+            "Beide sprechen von den Grundlagen des Glaubens an Allah und weitere Glaubensinhalte.",
+            "Beide Quellen erklären, dass Engel keine Glaubensgrundlage sind."
+          ],
+          "correct": 0,
+          "hint": "Vergleiche die beiden Quellen.",
+          "explain": "Beide sprechen von den Grundlagen des Glaubens an Allah und weitere Glaubensinhalte."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie erklärst du Īmān einem jüngeren Kind?",
-          "sample": "Īmān heißt Glaube; wir glauben an Allah und lernen in kleinen Schritten.",
-          "hint": "Keine schwierigen Urteile über andere Personen."
+          "options": [
+            "Īmān heißt Glaube; wir glauben an Allah und lernen in kleinen Schritten.",
+            "Īmān bedeutet, niemals Fragen stellen zu dürfen."
+          ],
+          "correct": 0,
+          "hint": "Keine schwierigen Urteile über andere Personen.",
+          "explain": "Īmān heißt Glaube; wir glauben an Allah und lernen in kleinen Schritten."
         }
       ]
     },
@@ -423,10 +453,15 @@ const additions={
           "explain": "Wissen kann zu guten Taten führen."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum kann dieselbe Handlung unterschiedliche Absichten haben?",
-          "sample": "Zwei Kinder können lernen, aber verschiedene Ziele dabei haben.",
-          "hint": "Ṣaḥīḥ al-Buḫārī Nr. 1."
+          "options": [
+            "Zwei Kinder können lernen, aber verschiedene Ziele dabei haben.",
+            "Alle Kinder haben bei jeder Handlung immer genau dieselbe Absicht."
+          ],
+          "correct": 0,
+          "hint": "Ṣaḥīḥ al-Buḫārī Nr. 1.",
+          "explain": "Zwei Kinder können lernen, aber verschiedene Ziele dabei haben."
         }
       ],
       "9-10": [
@@ -442,16 +477,26 @@ const additions={
           "explain": "Wir urteilen nicht über unbekannte Absichten."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Unterscheide Qurʾān-Beleg und unsere Unterrichtsübung.",
-          "sample": "98:5 lehrt Aufrichtigkeit; die Übung ist, sich vor dem Lernen eine gute Absicht bewusst zu machen.",
-          "hint": "Das Beispiel ist kein wörtliches Zitat."
+          "options": [
+            "98:5 lehrt Aufrichtigkeit; die Übung ist, sich vor dem Lernen eine gute Absicht bewusst zu machen.",
+            "Unsere heutige Lernübung ist ein wörtlicher Bestandteil von Qurʾān 98:5."
+          ],
+          "correct": 0,
+          "hint": "Das Beispiel ist kein wörtliches Zitat.",
+          "explain": "98:5 lehrt Aufrichtigkeit; die Übung ist, sich vor dem Lernen eine gute Absicht bewusst zu machen."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was bedeutet al-Buḫārī Nr. 1 für deinen Lernalltag?",
-          "sample": "Ich prüfe meine eigene Absicht und bemühe mich um gutes Handeln.",
-          "hint": "Beziehe dich auf die Überlieferung von ʿUmar."
+          "options": [
+            "Ich prüfe meine eigene Absicht und bemühe mich um gutes Handeln.",
+            "Der Ḥadīṯ lehrt, dass die eigene Absicht beim Handeln keine Rolle spielt."
+          ],
+          "correct": 0,
+          "hint": "Beziehe dich auf die Überlieferung von ʿUmar.",
+          "explain": "Ich prüfe meine eigene Absicht und bemühe mich um gutes Handeln."
         }
       ]
     },
@@ -573,10 +618,15 @@ const additions={
           "explain": "Der Ḥadīṯ behandelt Eltern und Geschenke."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Welche faire Spielregel schlägst du vor?",
-          "sample": "Wir spielen nacheinander gleich lange, soweit das sinnvoll ist.",
-          "hint": "Berücksichtige die Situation."
+          "options": [
+            "Wir spielen nacheinander gleich lange, soweit das sinnvoll ist.",
+            "Ein Kind darf beim Spielen niemals an die Reihe kommen."
+          ],
+          "correct": 0,
+          "hint": "Berücksichtige die Situation.",
+          "explain": "Wir spielen nacheinander gleich lange, soweit das sinnvoll ist."
         }
       ],
       "9-10": [
@@ -592,16 +642,26 @@ const additions={
           "explain": "Beleg und Anwendung dürfen nicht verwechselt werden."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum ist gerecht nicht immer genau dasselbe wie gleich?",
-          "sample": "Menschen können unterschiedliche Bedürfnisse haben; gerechte Regeln berücksichtigen sie.",
-          "hint": "Denke an Alter und Situation."
+          "options": [
+            "Menschen können unterschiedliche Bedürfnisse haben; gerechte Regeln berücksichtigen sie.",
+            "Gerecht ist immer, unterschiedliche Bedürfnisse vollständig zu ignorieren."
+          ],
+          "correct": 0,
+          "hint": "Denke an Alter und Situation.",
+          "explain": "Menschen können unterschiedliche Bedürfnisse haben; gerechte Regeln berücksichtigen sie."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Vergleiche Qurʾān 16:90 mit Muslim 1623.",
-          "sample": "Der Vers gebietet Gerechtigkeit allgemein; der Ḥadīṯ zeigt einen Fall innerhalb der Familie.",
-          "hint": "Nenne den ursprünglichen Gegenstand des Ḥadīṯ."
+          "options": [
+            "Der Vers gebietet Gerechtigkeit allgemein; der Ḥadīṯ zeigt einen Fall innerhalb der Familie.",
+            "Der Vers und der Ḥadīṯ verbieten jede Form von Gerechtigkeit."
+          ],
+          "correct": 0,
+          "hint": "Nenne den ursprünglichen Gegenstand des Ḥadīṯ.",
+          "explain": "Der Vers gebietet Gerechtigkeit allgemein; der Ḥadīṯ zeigt einen Fall innerhalb der Familie."
         }
       ]
     },
@@ -723,10 +783,15 @@ const additions={
           "explain": "Ich frage."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Nenne eine sichere Regel für eigene Grenzen.",
-          "sample": "Ich sage Nein, wenn etwas unangenehm ist, und suche Hilfe.",
-          "hint": "Persönliche Grenzen sind wichtig."
+          "options": [
+            "Ich sage Nein, wenn etwas unangenehm ist, und suche Hilfe.",
+            "Ich muss unangenehme oder gefährliche Situationen still ertragen."
+          ],
+          "correct": 0,
+          "hint": "Persönliche Grenzen sind wichtig.",
+          "explain": "Ich sage Nein, wenn etwas unangenehm ist, und suche Hilfe."
         }
       ],
       "9-10": [
@@ -742,16 +807,26 @@ const additions={
           "explain": "Erlaubnis vor dem Betreten."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Nenne ein modernes Beispiel des Grundsatzes.",
-          "sample": "Ich lese keine fremden Chatnachrichten ohne Erlaubnis.",
-          "hint": "Das ist eine Anwendung, kein wörtlicher Vers."
+          "options": [
+            "Ich lese keine fremden Chatnachrichten ohne Erlaubnis.",
+            "Ich darf fremde Nachrichten ohne Zustimmung lesen."
+          ],
+          "correct": 0,
+          "hint": "Das ist eine Anwendung, kein wörtlicher Vers.",
+          "explain": "Ich lese keine fremden Chatnachrichten ohne Erlaubnis."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wann hat Hilfesuche Vorrang vor Geheimhaltung?",
-          "sample": "Wenn jemand bedroht wird, Angst hat oder Schutz braucht.",
-          "hint": "Niemand muss gefährliche Geheimnisse bewahren."
+          "options": [
+            "Wenn jemand bedroht wird, Angst hat oder Schutz braucht.",
+            "Auch bei einer Bedrohung darf ich niemals Hilfe suchen."
+          ],
+          "correct": 0,
+          "hint": "Niemand muss gefährliche Geheimnisse bewahren.",
+          "explain": "Wenn jemand bedroht wird, Angst hat oder Schutz braucht."
         }
       ]
     },
@@ -873,10 +948,15 @@ const additions={
           "explain": "Verantwortung ist wichtig."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Welche kleine Aufgabe möchtest du selbst übernehmen?",
-          "sample": "Ich packe abends mein Heft in die Tasche.",
-          "hint": "Wähle eine erreichbare Aufgabe."
+          "options": [
+            "Ich packe abends mein Heft in die Tasche.",
+            "Ich darf grundsätzlich keine kleine Aufgabe selbst übernehmen."
+          ],
+          "correct": 0,
+          "hint": "Wähle eine erreichbare Aufgabe.",
+          "explain": "Ich packe abends mein Heft in die Tasche."
         }
       ],
       "9-10": [
@@ -892,16 +972,26 @@ const additions={
           "explain": "Die Ordnung ist eine Anwendung."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was haben Qurʾān 17:34 und al-Buḫārī 893 gemeinsam?",
-          "sample": "Beide erinnern an Verbindlichkeit und Verantwortung.",
-          "hint": "Ordne Beleg und Bedeutung zu."
+          "options": [
+            "Beide erinnern an Verbindlichkeit und Verantwortung.",
+            "Beide Quellen lehren, dass Versprechen und Verantwortung bedeutungslos sind."
+          ],
+          "correct": 0,
+          "hint": "Ordne Beleg und Bedeutung zu.",
+          "explain": "Beide erinnern an Verbindlichkeit und Verantwortung."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Wie kann man Verantwortung lernen, ohne andere zu beschämen?",
-          "sample": "Mit kleinen altersgerechten Aufgaben, Geduld und Hilfsbereitschaft.",
-          "hint": "Tarbiyah soll kindgerecht sein."
+          "options": [
+            "Mit kleinen altersgerechten Aufgaben, Geduld und Hilfsbereitschaft.",
+            "Wer etwas noch nicht kann, soll vor anderen beschämt werden."
+          ],
+          "correct": 0,
+          "hint": "Tarbiyah soll kindgerecht sein.",
+          "explain": "Mit kleinen altersgerechten Aufgaben, Geduld und Hilfsbereitschaft."
         }
       ]
     },
@@ -1023,10 +1113,15 @@ const additions={
           "explain": "Den eigenen Charakter entwickeln."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Nenne zwei sichere Schritte, wenn du wütend wirst.",
-          "sample": "Ich nehme Abstand und bitte um Hilfe.",
-          "hint": "Wut darf ausgesprochen werden."
+          "options": [
+            "Ich nehme Abstand und bitte um Hilfe.",
+            "Ich verletze andere, wenn ich wütend bin."
+          ],
+          "correct": 0,
+          "hint": "Wut darf ausgesprochen werden.",
+          "explain": "Ich nehme Abstand und bitte um Hilfe."
         }
       ],
       "9-10": [
@@ -1042,16 +1137,26 @@ const additions={
           "explain": "Die Handlung ist entscheidend."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Trenne den Ḥadīṯ von der Unterrichtsübung.",
-          "sample": "Al-Buḫārī 6116 rät zur Beherrschung von Zorn; Abstand nehmen ist unsere Sicherheitsübung.",
-          "hint": "Keine erfundene prophetische Anweisung."
+          "options": [
+            "Al-Buḫārī 6116 rät zur Beherrschung von Zorn; Abstand nehmen ist unsere Sicherheitsübung.",
+            "Abstand nehmen ist ein wörtlicher Satz aus al-Buḫārī 6116."
+          ],
+          "correct": 0,
+          "hint": "Keine erfundene prophetische Anweisung.",
+          "explain": "Al-Buḫārī 6116 rät zur Beherrschung von Zorn; Abstand nehmen ist unsere Sicherheitsübung."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum darf man Grenzen setzen, auch wenn man Verzeihen lernt?",
-          "sample": "Verzeihen heißt nicht, Gefahr oder Übergriffe schweigend auszuhalten.",
-          "hint": "Sicherheit ist wichtig."
+          "options": [
+            "Verzeihen heißt nicht, Gefahr oder Übergriffe schweigend auszuhalten.",
+            "Verzeihen bedeutet, dass ich Übergriffe verschweigen muss."
+          ],
+          "correct": 0,
+          "hint": "Sicherheit ist wichtig.",
+          "explain": "Verzeihen heißt nicht, Gefahr oder Übergriffe schweigend auszuhalten."
         }
       ]
     },
@@ -1173,10 +1278,15 @@ const additions={
           "explain": "Wir machen Masḥ."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Nenne die grundlegende Reihenfolge.",
-          "sample": "Hände, Mund und Nase, Gesicht, Arme, Kopf und Ohren, Füße.",
-          "hint": "Lerne die Schritte mit Anleitung."
+          "options": [
+            "Hände, Mund und Nase, Gesicht, Arme, Kopf und Ohren, Füße.",
+            "Ich wasche nur meine Hände und lasse alle anderen Schritte grundsätzlich weg."
+          ],
+          "correct": 0,
+          "hint": "Lerne die Schritte mit Anleitung.",
+          "explain": "Hände, Mund und Nase, Gesicht, Arme, Kopf und Ohren, Füße."
         }
       ],
       "9-10": [
@@ -1192,16 +1302,26 @@ const additions={
           "explain": "Der Bericht beschreibt Wuḍūʾ."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was ist der Unterschied zwischen Waschen und Streichen?",
-          "sample": "Das Gesicht wird gewaschen; über den Kopf wird mit nassen Händen gestrichen.",
-          "hint": "Qurʾān 5:6 hilft dabei."
+          "options": [
+            "Das Gesicht wird gewaschen; über den Kopf wird mit nassen Händen gestrichen.",
+            "Beim Wuḍūʾ wird über das Gesicht nur gestrichen, der Kopf aber gewaschen."
+          ],
+          "correct": 0,
+          "hint": "Qurʾān 5:6 hilft dabei.",
+          "explain": "Das Gesicht wird gewaschen; über den Kopf wird mit nassen Händen gestrichen."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum unterscheiden wir Textbeleg und Fiqh-Erläuterung?",
-          "sample": "Die Quellen nennen den Ablauf; Rechtsdetails brauchen genaue Auslegung und Prüfung.",
-          "hint": "Die hanbalitische Fiqh-Prüfung erfolgt gesondert."
+          "options": [
+            "Die Quellen nennen den Ablauf; Rechtsdetails brauchen genaue Auslegung und Prüfung.",
+            "Jede eigene Unterrichtserklärung ist automatisch ein wörtlicher Qurʾān-Vers."
+          ],
+          "correct": 0,
+          "hint": "Die hanbalitische Fiqh-Prüfung erfolgt gesondert.",
+          "explain": "Die Quellen nennen den Ablauf; Rechtsdetails brauchen genaue Auslegung und Prüfung."
         }
       ]
     },

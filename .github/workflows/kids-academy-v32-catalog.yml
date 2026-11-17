@@ -1,0 +1,46 @@
+name: TAWḤĪD KIDS V32 65-lesson full audio catalog, zero credits
+on:
+  pull_request:
+    paths:
+      - 'kids/tools/export-academy-65-lessons-v32-voice-catalog.cjs'
+      - '.github/workflows/kids-academy-v32-catalog.yml'
+permissions:
+  contents: write
+jobs:
+  catalog:
+    if: >-
+      github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' &&
+      github.event.pull_request.head.ref == 'audit/kids-academy-audio-inventory-20261106'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build strictly zero-credit source-accurate catalog of all 65 lessons
+        run: |
+          set -euo pipefail
+          node --check kids/tools/export-academy-65-lessons-v32-voice-catalog.cjs
+          node kids/tools/export-academy-65-lessons-v32-voice-catalog.cjs
+          node kids/tools/export-academy-65-lessons-v32-voice-catalog.cjs --write
+          node kids/tools/export-academy-65-lessons-v32-voice-catalog.cjs --check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kids-academy-v32-all-sixty-five-lessons-audio-catalog
+          path: kids/data/academy-65-lessons-v32-voice-catalog.json
+          retention-days: 14
+      - name: Store canonical V32 voice queue in KIDS-only review branch
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add kids/data/academy-65-lessons-v32-voice-catalog.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'kids(audio): inventory canonical 65-lesson display-exact V4 recording queue without credits'
+            git pull --rebase origin audit/kids-academy-audio-inventory-20261106
+            git push origin HEAD:refs/heads/audit/kids-academy-audio-inventory-20261106
+          fi

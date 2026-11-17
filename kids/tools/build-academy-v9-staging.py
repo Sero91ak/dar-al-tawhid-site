@@ -31,6 +31,7 @@ MODEL=POLICY["production"]["modelId"]
 PROFILE=POLICY["voiceIdentity"]["voiceProfileId"]
 BACKEND="https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api"
 from voice_text import prepare_kids_voice_text
+from academy_source_voice import source_labels_for_speech, assert_no_spoken_source_numbers
 
 
 def technical_duration(filepath:pathlib.Path)->float:
@@ -40,9 +41,32 @@ def technical_duration(filepath:pathlib.Path)->float:
     ],text=True).strip())
 
 
-def generate_audio(text:str, target:pathlib.Path, secret:str)->float:
-    """Use exactly the approved story-generation backend; do NOT call Flash directly."""
-    prepared=prepare_kids_voice_text(text)
+def generate_audio(text:str, target:pathlib.Path, secret:str, *, prepared_override:str|None=None, min_duration_seconds:float=0.8, min_bytes:int=1800)->float:
+    """Use exactly the approved story-generation backend; do NOT call Flash directly.
+
+    A caller may provide an explicitly reviewed full-script Fuṣḥā segment.
+    Legacy callers retain the original pronunciation preparation unchanged.
+    """
+    # Explicit owner STOP: no HTTP request, no credits, no re-recordings.
+    if POLICY.get("production", {}).get("ownerPronunciationHold", {}).get("enabled", False):
+        raise RuntimeError(
+            "OWNER AUDIO STOP: Fuṣḥā / Sūrat titles / Ṣaḥīḥ Muslim are not owner-approved. "
+            "No new Academy V4 recordings until explicit audio review."
+        )
+    # Speech-only source processing; on-screen citations retain their exact numbers.
+    without_spoken_ids = source_labels_for_speech(text)
+    prepared = (
+        prepared_override
+        if prepared_override is not None
+        else prepare_kids_voice_text(without_spoken_ids)
+    )
+    # Fail closed rather than reading source numbers as German number words.
+    assert_no_spoken_source_numbers(prepared)
+    if without_spoken_ids != text and prepared_override is not None:
+        raise RuntimeError(
+            "Manual Fuṣḥā override with numbered visible source requires fresh "
+            "source-number QA; refusal prevents accidental citation narration."
+        )
     payload=json.dumps({"text":text,"prepared":prepared,"profile":MASTER_PROFILE},ensure_ascii=False).encode("utf-8")
     req=urllib.request.Request(
         BACKEND+"/generate-with-timings",data=payload,method="POST",
@@ -65,7 +89,7 @@ def generate_audio(text:str, target:pathlib.Path, secret:str)->float:
             "-movflags","+faststart",str(target)
         ],check=True,timeout=90)
     seconds=technical_duration(target)
-    if not (0.8<=seconds<=65) or target.stat().st_size<1800:
+    if not (min_duration_seconds<=seconds<=65) or target.stat().st_size<min_bytes:
         target.unlink(missing_ok=True)
         raise RuntimeError("Invalid media; clip rejected without publication")
     return seconds

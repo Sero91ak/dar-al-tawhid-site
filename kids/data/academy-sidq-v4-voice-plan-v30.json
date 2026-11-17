@@ -1,0 +1,1443 @@
+{
+  "schemaVersion": 1,
+  "version": "academy-sidq-v4-final-source-voice-plan-v30-20261111",
+  "lessonId": "sidq",
+  "ageKeys": [
+    "4-5",
+    "6-8",
+    "9-10"
+  ],
+  "genderProfiles": [
+    "boy",
+    "girl"
+  ],
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "source": "kids/akademie/index.html",
+  "policy": {
+    "publicApproved": false,
+    "stagingOnly": true,
+    "noTextInput": true,
+    "quranAudio": "human-recitation-only",
+    "humanFushaHearingRequired": true,
+    "displayOrderedAnswerAudio": true,
+    "globalUnsafeArabicDictionaryNotAttached": true
+  },
+  "counts": {
+    "ageVersions": 3,
+    "questions": 8,
+    "uniquePhrases": 80,
+    "stagedV4": 4,
+    "unrecorded": 76,
+    "publicApproved": 0
+  },
+  "phrases": [
+    {
+      "text": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 0,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "greeting",
+          "age": "all",
+          "profile": "both"
+        }
+      ],
+      "status": "staged-technical-passed-awaiting-human-review",
+      "recordedSha256": "8bf58304d9a1c290761996e0c1fc7c4cc658e4861bba662fafb569a2b7565d6e"
+    },
+    {
+      "text": "Liebe Schwester.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 0,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "address",
+          "age": "all",
+          "profile": "girl"
+        }
+      ],
+      "status": "staged-technical-passed-awaiting-human-review",
+      "recordedSha256": "a445853566381eaeb7e975b69ae6d52b9ad70f5a9bc5cae186d3b958a323504e"
+    },
+    {
+      "text": "Lieber Bruder.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 0,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "address",
+          "age": "all",
+          "profile": "boy"
+        }
+      ],
+      "status": "staged-technical-passed-awaiting-human-review",
+      "recordedSha256": "5090d8b20ee42a4b6076716ecea1cbd492ac50609815864ffe11a9911a682921"
+    },
+    {
+      "text": "Schön, dass du da bist!",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 0,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "greeting",
+          "age": "4-5",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Schön, dass du dein Wissen heute erweiterst!",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 0,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "greeting",
+          "age": "9-10",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Schön, dass du heute mitlernst!",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 0,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "greeting",
+          "age": "6-8",
+          "profile": "both"
+        }
+      ],
+      "status": "staged-technical-passed-awaiting-human-review",
+      "recordedSha256": "348e00d69a7656c596dfef2d6b450ddf0fa624d31bfd6366e9b2ed5519ef0508"
+    },
+    {
+      "text": "Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "6-8",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Allah fordert die Gläubigen in Sūrat at-Tawbah 9:119 auf, mit den Wahrhaftigen zu sein. In Ṣaḥīḥ Muslim 2607a beschreibt der Prophet ﷺ Wahrhaftigkeit als einen Weg zur Rechtschaffenheit. Daraus lernen wir, beim Sprechen und Handeln aufrichtig zu bleiben.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "9-10",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Allah lehrt uns, mit den Wahrhaftigen zu sein.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "summary",
+          "age": "4-5",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Allah ruft uns dazu auf, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "summary",
+          "age": "6-8",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Allah sagt uns im Qurʾān, dass wir mit den Wahrhaftigen sein sollen. Der Prophet ﷺ erklärte, wie gut Wahrhaftigkeit ist. Deshalb sagen wir die Wahrheit, auch wenn wir einen Fehler machen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "4-5",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Danach kannst du um Entschuldigung bitten und beim Aufräumen helfen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "4-5",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Die Wahrheit sagen – auch wenn es manchmal Mut kostet.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "6-8",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Die Wahrheit sagen – das ist ehrlich.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "4-5",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Du darfst ehrlich sagen: Das war ich.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "4-5",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Ehrlich sein ist gut. Das üben wir gemeinsam.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "4-5",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Eine bewusste Lüge kann das Vertrauen anderer Menschen beschädigen und weitere falsche Aussagen nach sich ziehen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "9-10",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Heute beschäftigen wir uns mit Ṣidq: Warum ist die Wahrheit wichtig, und wie handeln wir nach einem Fehler? Wir lernen anhand von Qurʾān und Sunnah und erklären das Thema mit eigenen Worten.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "9-10",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "4-5",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Heute sprechen wir darüber, warum Wahrhaftigkeit wichtig ist. Wir hören zu, lesen mit und denken nach. Du darfst jederzeit eine Pause machen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "6-8",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Ich möchte ehrlich bleiben, Verantwortung übernehmen und einen Fehler nach Möglichkeit wiedergutmachen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "summary",
+          "age": "9-10",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Jeder Mensch kann aus Versehen einen Fehler machen. Entscheidend ist, wie wir danach handeln.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "9-10",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Manchmal geht etwas aus Versehen kaputt.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "4-5",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Manchmal passiert uns aus Versehen ein Fehler.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "6-8",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Qurʾān 9:119 und der Ḥadīṯ in Ṣaḥīḥ Muslim 2607a verdeutlichen die Bedeutung der Wahrhaftigkeit.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "summary",
+          "age": "9-10",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Ṣidq bedeutet Wahrhaftigkeit. Sie zeigt sich auch dann, wenn Ehrlichkeit Mut kostet.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "summary",
+          "age": "9-10",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Wahrhaftigkeit bedeutet, ehrlich zu sprechen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "summary",
+          "age": "6-8",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Wahrhaftigkeit bedeutet: Ich sage die Wahrheit.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "summary",
+          "age": "4-5",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "all",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Wahrhaftigkeit heißt, bewusst bei der Wahrheit zu bleiben – selbst wenn das schwierig ist.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "9-10",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "6-8",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Wahrhaftigkeit ist mehr als ein einzelnes richtiges Wort: Sie ist eine Haltung, die wir im Alltag immer wieder üben.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "9-10",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Wenn mir ein Fehler passiert, sage ich die Wahrheit und versuche, ihn wiedergutzumachen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "summary",
+          "age": "6-8",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Wenn mir ein Fehler passiert, sage ich ehrlich, was geschehen ist.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "summary",
+          "age": "4-5",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "6-8",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "6-8",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Wer die Wahrheit sagt, übernimmt Verantwortung und schafft die Grundlage, den Fehler wiedergutzumachen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 1,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "narration",
+          "age": "9-10",
+          "profile": "both"
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Du hast etwas kaputt gemacht. Was sagst du?",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 2,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "question",
+          "age": "4-5",
+          "profile": "both",
+          "questionIndex": 0
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Du hast versehentlich ein Glas zerbrochen. Was ist eine ehrliche Antwort?",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 2,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "question",
+          "age": "6-8",
+          "profile": "both",
+          "questionIndex": 0
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Warum gehört Wahrhaftigkeit zu einem guten Charakter?",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 2,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "question",
+          "age": "9-10",
+          "profile": "both",
+          "questionIndex": 1
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Was kannst du danach Gutes tun?",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 2,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "question",
+          "age": "4-5",
+          "profile": "both",
+          "questionIndex": 1
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Was kannst du tun, nachdem du einen Fehler ehrlich zugegeben hast?",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 2,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "question",
+          "age": "6-8",
+          "profile": "both",
+          "questionIndex": 1
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Was lehrt uns der Vers aus Sūrat at-Tawbah 9:119?",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 2,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "question",
+          "age": "6-8",
+          "profile": "both",
+          "questionIndex": 2
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Welche Aussage entspricht dem Ḥadīṯ über Wahrhaftigkeit?",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 2,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "question",
+          "age": "9-10",
+          "profile": "both",
+          "questionIndex": 0
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Worin liegt der Unterschied zwischen einem versehentlichen Fehler und einer bewussten Lüge?",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 2,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "question",
+          "age": "9-10",
+          "profile": "both",
+          "questionIndex": 2
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Allah befiehlt den Gläubigen, mit den Wahrhaftigen zu sein.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "explanation",
+          "age": "6-8",
+          "profile": "both",
+          "questionIndex": 2
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 1: Ein Versehen und eine absichtliche Lüge sind immer genau dasselbe.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "9-10",
+          "profile": "both",
+          "questionIndex": 2
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 1: Ich kann mich entschuldigen und helfen, den Fehler wiedergutzumachen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "6-8",
+          "profile": "both",
+          "questionIndex": 1
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 1: Ich sage ehrlich: Ich war das.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "4-5",
+          "profile": "both",
+          "questionIndex": 0
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 1: Ich tue so, als hätte ich nichts gesehen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "6-8",
+          "profile": "both",
+          "questionIndex": 0
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 1: Ich verstecke den Fehler.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "4-5",
+          "profile": "both",
+          "questionIndex": 1
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 1: Sie führt zu rechtschaffenem Verhalten und stärkt Vertrauen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "9-10",
+          "profile": "both",
+          "questionIndex": 1
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 1: Wahrheit spielt beim guten Charakter keine Rolle.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "9-10",
+          "profile": "both",
+          "questionIndex": 0
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 1: Wir sollen mit den Wahrhaftigen sein.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "6-8",
+          "profile": "both",
+          "questionIndex": 2
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 2: Ein Fehler kann unabsichtlich geschehen; eine Lüge ist bewusst unwahr.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "9-10",
+          "profile": "both",
+          "questionIndex": 2
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 2: Eine Lüge ist immer die leichtere und richtige Lösung.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "9-10",
+          "profile": "both",
+          "questionIndex": 0
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 2: Ich entschuldige mich und helfe.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "4-5",
+          "profile": "both",
+          "questionIndex": 1
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 2: Ich sage: Jemand anders war es.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "4-5",
+          "profile": "both",
+          "questionIndex": 0
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 2: Ich schiebe die Schuld absichtlich auf jemand anderen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "6-8",
+          "profile": "both",
+          "questionIndex": 1
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 2: Ich war das. Es tut mir leid.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "6-8",
+          "profile": "both",
+          "questionIndex": 0
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 2: Sie macht absichtliche Täuschung zu einer guten Tat.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "9-10",
+          "profile": "both",
+          "questionIndex": 1
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 2: Wir dürfen lügen, wenn wir Angst haben.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "6-8",
+          "profile": "both",
+          "questionIndex": 2
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 3: Das war bestimmt jemand anders.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "6-8",
+          "profile": "both",
+          "questionIndex": 0
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 3: Man soll eigene Fehler immer verstecken.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "6-8",
+          "profile": "both",
+          "questionIndex": 2
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Antwort 3: Wahrhaftigkeit führt zur Rechtschaffenheit.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "answer",
+          "age": "9-10",
+          "profile": "both",
+          "questionIndex": 0
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Denk an den Unterschied zwischen Versehen und absichtlicher Unwahrheit.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "hint",
+          "age": "9-10",
+          "profile": "both",
+          "questionIndex": 2
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Denke an Entschuldigung und Hilfe.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "hint",
+          "age": "6-8",
+          "profile": "both",
+          "questionIndex": 1
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Denke an Vertrauen und das Wort des Propheten ﷺ.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "hint",
+          "age": "9-10",
+          "profile": "both",
+          "questionIndex": 1
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt und diese zum Paradies.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "explanation",
+          "age": "9-10",
+          "profile": "both",
+          "questionIndex": 0
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Die Wahrheit zu sagen ist besser, als jemand anderem die Schuld zuzuschieben.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "explanation",
+          "age": "6-8",
+          "profile": "both",
+          "questionIndex": 0
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutmachen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "explanation",
+          "age": "9-10",
+          "profile": "both",
+          "questionIndex": 2
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Ich kann mich entschuldigen und helfen, den Fehler wiedergutzumachen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "explanation",
+          "age": "6-8",
+          "profile": "both",
+          "questionIndex": 1
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Lies dir die kurze deutsche Bedeutung des Qurʾān-Verses noch einmal durch.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "hint",
+          "age": "6-8",
+          "profile": "both",
+          "questionIndex": 2
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Nach einem Fehler können wir um Entschuldigung bitten und ihn wiedergutmachen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "explanation",
+          "age": "4-5",
+          "profile": "both",
+          "questionIndex": 1
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Überlege: Was bedeutet ehrlich sein?",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "hint",
+          "age": "4-5",
+          "profile": "both",
+          "questionIndex": 0
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Wahrhaftigkeit bedeutet: Ich sage, was wirklich passiert ist.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "explanation",
+          "age": "4-5",
+          "profile": "both",
+          "questionIndex": 0
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Wahrhaftigkeit führt zu rechtschaffenem Verhalten. Sie bewahrt das Vertrauen und hilft uns, Verantwortung zu übernehmen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "explanation",
+          "age": "9-10",
+          "profile": "both",
+          "questionIndex": 1
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Was führt laut der authentischen Sunnah zur Rechtschaffenheit?",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "hint",
+          "age": "9-10",
+          "profile": "both",
+          "questionIndex": 0
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Was ist wirklich passiert? Sprich es freundlich aus.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "hint",
+          "age": "6-8",
+          "profile": "both",
+          "questionIndex": 0
+        }
+      ],
+      "status": "not-generated"
+    },
+    {
+      "text": "Wenn jemand Hilfe braucht, kannst du mithelfen.",
+      "languageCode": "de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "voiceSettingsProfile": "kids_story",
+      "priority": 3,
+      "contexts": [
+        {
+          "lessonId": "sidq",
+          "kind": "hint",
+          "age": "4-5",
+          "profile": "both",
+          "questionIndex": 1
+        }
+      ],
+      "status": "not-generated"
+    }
+  ]
+}

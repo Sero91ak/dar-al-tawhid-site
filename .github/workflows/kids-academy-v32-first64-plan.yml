@@ -1,0 +1,45 @@
+name: KIDS V32 - source-audited next 64 owner V4 source queue, zero credits
+on:
+  pull_request:
+    paths:
+      - 'kids/tools/export-academy-v32-first64-audited-safe.cjs'
+      - '.github/workflows/kids-academy-v32-first64-plan.yml'
+permissions:
+  contents: write
+jobs:
+  plan:
+    if: >-
+      github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' &&
+      github.event.pull_request.head.ref == 'audit/kids-academy-audio-inventory-20261106'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Create exact age-tier V4 source-audited 64-script production plan
+        run: |
+          set -euo pipefail
+          node kids/tools/export-academy-v32-first64-audited-safe.cjs
+          node kids/tools/export-academy-v32-first64-audited-safe.cjs --write
+          node kids/tools/export-academy-v32-first64-audited-safe.cjs --check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kids-v32-next-64-source-verified-v4-plan
+          path: kids/data/academy-v32-first64-source-audited-safe.json
+          retention-days: 14
+      - name: Save zero-credit source-locked first 64 voice scripts to Kids PR
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add kids/data/academy-v32-first64-source-audited-safe.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'kids(audio): freeze next source-audited 64 V4 age-tier phrases without credits'
+            git pull --rebase origin audit/kids-academy-audio-inventory-20261106
+            git push origin HEAD:refs/heads/audit/kids-academy-audio-inventory-20261106
+          fi

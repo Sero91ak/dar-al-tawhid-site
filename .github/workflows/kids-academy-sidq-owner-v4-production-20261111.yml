@@ -1,0 +1,218 @@
+name: Kids Ṣidq owner V4 - visible QA and one-time production
+
+on:
+  pull_request:
+    types: [synchronize, reopened]
+    paths:
+      - '.github/workflows/kids-academy-sidq-owner-v4-production-20261111.yml'
+      - 'kids/tools/produce-academy-sidq-v4-batch-20261111.py'
+      - 'kids/tools/build-academy-v9-staging.py'
+      - 'kids/data/academy-sidq-v4-batch-20261111.json'
+      - 'kids/data/academy-sidq-v4-production-trigger-20261111.json'
+      - 'kids/tools/produce-academy-sidq-v30-safe-batch.py'
+      - 'kids/data/academy-sidq-v30-safe-batches-20261111.json'
+
+concurrency:
+  group: kids-sidq-owner-v4-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    if: >-
+      github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' &&
+      github.event.pull_request.head.ref == 'audit/kids-academy-audio-inventory-20261106'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      should_generate: ${{ steps.gate.outputs.should_generate }}
+      should_generate_safe: ${{ steps.gate.outputs.should_generate_safe }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Install required audio inspection and encoding tools
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+      - name: Verify exact canonical Fuṣḥā V4 script without spending credits
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/produce-academy-sidq-v4-batch-20261111.py
+          python3 kids/tools/produce-academy-sidq-v4-batch-20261111.py --dry-run
+          command -v ffmpeg
+          command -v ffprobe
+      - name: Verify all 16 safe first-lesson V4 batches without spending credits
+        run: |
+          python3 -m py_compile kids/tools/produce-academy-sidq-v30-safe-batch.py
+          python3 kids/tools/produce-academy-sidq-v30-safe-batch.py --check-all
+          python3 kids/tools/produce-academy-sidq-v30-safe-batch.py --index 0 --dry-run
+          python3 kids/tools/produce-academy-sidq-v30-safe-batch.py --index 15 --dry-run
+      - name: Detect explicit one-shot production marker
+        id: gate
+        run: |
+          set -euo pipefail
+          marker="$(git log -1 --format=%s)"
+          echo 'should_generate=false' >> "$GITHUB_OUTPUT"
+          echo 'should_generate_safe=false' >> "$GITHUB_OUTPUT"
+          if [ "$marker" = 'KIDS_APPROVED_V4_BATCH_20261111_PRODUCE_ONCE' ]; then
+            echo 'should_generate=true' >> "$GITHUB_OUTPUT"
+            echo 'Exact authorized first-lesson four-clip batch selected.'
+          elif [ "$marker" = 'KIDS_APPROVED_V4_SIDQ_SAFE_64_PRODUCE_ONCE' ]; then
+            echo 'should_generate_safe=true' >> "$GITHUB_OUTPUT"
+            echo 'Exact owner-approved 16-invocation safe-only Ṣidq series selected.'
+          else
+            echo 'Preflight only: no credits will be spent.'
+          fi
+
+  generate:
+    needs: preflight
+    if: >-
+      needs.preflight.outputs.should_generate == 'true' &&
+      github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' &&
+      github.event.pull_request.head.ref == 'audit/kids-academy-audio-inventory-20261106'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: write
+    env:
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          persist-credentials: true
+      - name: Install verified audio encoding tools
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+      - name: Owner credential and exact-phrase billing gate
+        run: |
+          set -euo pipefail
+          test "$(git log -1 --format=%s)" = 'KIDS_APPROVED_V4_BATCH_20261111_PRODUCE_ONCE'
+          test -n "$ADMIN_PUBLISH_SECRET" || { echo '::error::Voice Studio credential missing, zero credits used.'; exit 1; }
+          python3 kids/tools/produce-academy-sidq-v4-batch-20261111.py --dry-run
+      - name: Record missing owner V4 clips in isolated staging
+        id: generate
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python3 kids/tools/produce-academy-sidq-v4-batch-20261111.py
+      - name: Validate and preserve even partial completed clips
+        if: always()
+        run: |
+          set -euo pipefail
+          if [ ! -f kids/data/academy-audio-staging-sidq-v4-20261111.json ]; then
+            echo 'No successfully staged clips to commit.'
+            exit 0
+          fi
+          python3 - <<'PY'
+          import hashlib,json,pathlib
+          p=pathlib.Path('kids/data/academy-audio-staging-sidq-v4-20261111.json')
+          x=json.loads(p.read_text('utf-8'))
+          assert x['stagingOnly'] is True and x['reviewRequiredBeforePublicPlayback'] is True
+          assert len(x['entries'])<=4
+          for e in x['entries'].values():
+              f=pathlib.Path(e['url'].lstrip('/'))
+              assert f.is_file() and f.stat().st_size>=1800
+              assert hashlib.sha256(f.read_bytes()).hexdigest()==e['sha256']
+              assert e['approvedForPlayback'] is False
+          print('Verified review-only clips:',len(x['entries']))
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f kids/data/academy-audio-staging-sidq-v4-20261111.json kids/assets/kids-academy-audio/*.m4a
+          if ! git diff --cached --quiet; then
+            git commit -m 'kids(audio): store verified owner-V4 stage without public playback'
+            git pull --rebase origin audit/kids-academy-audio-inventory-20261106
+            git push origin HEAD:refs/heads/audit/kids-academy-audio-inventory-20261106
+          fi
+      - name: Report incomplete synthesis honestly
+        if: steps.generate.outcome == 'failure'
+        run: |
+          echo '::error::One or more clips failed; consult logs and staged assets before retry.'
+          exit 1
+
+  generate-safe-v30:
+    needs: preflight
+    if: >-
+      needs.preflight.outputs.should_generate_safe == 'true' &&
+      github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' &&
+      github.event.pull_request.head.ref == 'audit/kids-academy-audio-inventory-20261106'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+    env:
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          persist-credentials: true
+      - name: Install audio encoder
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+      - name: Verify one-time owner authorization and bounded sixteen-batch plan
+        run: |
+          set -euo pipefail
+          test "$(git log -1 --format=%s)" = 'KIDS_APPROVED_V4_SIDQ_SAFE_64_PRODUCE_ONCE'
+          test -n "$ADMIN_PUBLISH_SECRET" || {
+            echo '::error::DAR owner voice credential absent. No credits used.'
+            exit 1
+          }
+          python3 kids/tools/produce-academy-sidq-v30-safe-batch.py --check-all
+          for i in $(seq 0 15); do
+            python3 kids/tools/produce-academy-sidq-v30-safe-batch.py --index "$i" --dry-run
+          done
+      - name: Generate 16 separate strictly capped V4 invocations
+        id: record
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          for i in $(seq 0 15); do
+            echo "=== OWNER V4 stage $((i+1)) of 16 (max 4 clips, max 1200 characters) ==="
+            python3 kids/tools/produce-academy-sidq-v30-safe-batch.py --index "$i"
+          done
+      - name: Verify every produced file and save partial progress without making it public
+        if: always()
+        run: |
+          set -euo pipefail
+          if [ ! -f kids/data/academy-audio-staging-sidq-v30-20261111.json ]; then
+            echo 'No new staging manifest. Zero staged clips were confirmed.'
+            exit 0
+          fi
+          python3 - <<'PY'
+          import hashlib,json,pathlib
+          root=pathlib.Path('.')
+          doc=json.loads((root/'kids/data/academy-audio-staging-sidq-v30-20261111.json').read_text('utf-8'))
+          batches=json.loads((root/'kids/data/academy-sidq-v30-safe-batches-20261111.json').read_text('utf-8'))
+          valid={t for b in batches['batches'] for t in b['exactPhrases']}
+          assert doc['stagingOnly'] is True and doc['reviewRequiredBeforePublicPlayback'] is True
+          assert len(doc['entries'])<=64 and set(doc['entries'])<=valid
+          for phrase,item in doc['entries'].items():
+              f=root/item['url'].lstrip('/')
+              assert f.is_file() and f.stat().st_size>=1800
+              assert hashlib.sha256(f.read_bytes()).hexdigest()==item['sha256']
+              assert item['modelId']=='eleven_v4'
+              assert item['approvedForPlayback'] is False
+          print('Verified',len(doc['entries']),'first-lesson safe V4 clips; no public release.')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f kids/data/academy-audio-staging-sidq-v30-20261111.json kids/assets/kids-academy-audio/*.m4a
+          if ! git diff --cached --quiet; then
+            git commit -m 'kids(audio): stage finished Ṣidq V4 safe-series files for human approval'
+            git pull --rebase origin audit/kids-academy-audio-inventory-20261106
+            git push origin HEAD:refs/heads/audit/kids-academy-audio-inventory-20261106
+          fi
+      - name: Report production failure and remaining Fuṣḥā-sensitive items
+        if: steps.record.outcome == 'failure'
+        run: |
+          echo '::error::V4 safe-series incomplete; never automatically rerun billable requests.'
+          exit 1

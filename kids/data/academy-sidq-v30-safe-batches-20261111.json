@@ -1,0 +1,291 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_SIDQ_V30_20261111_SAFE_BATCHES",
+  "productionScope": "TAWHID_KIDS_SIDQ_ONLY",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "voiceProfile": "kids_story",
+  "confirmed": "USER_AUTHORIZED_BULK_20261111",
+  "source": "kids/data/academy-sidq-v4-voice-plan-v30.json",
+  "limitClipsPerInvocation": 4,
+  "limitPreparedCharactersPerInvocation": 1200,
+  "firstFourCanonicalClipsAlreadyStaged": 4,
+  "totalSafeClips": 64,
+  "totalRawCharacters": 4249,
+  "batches": [
+    {
+      "batchIndex": 0,
+      "exactPhrases": [
+        "Schön, dass du da bist!",
+        "Schön, dass du dein Wissen heute erweiterst!",
+        "Allah lehrt uns, mit den Wahrhaftigen zu sein.",
+        "Danach kannst du um Entschuldigung bitten und beim Aufräumen helfen."
+      ],
+      "rawCharacters": 181,
+      "limitClips": 4,
+      "maxPreparedCharacters": 1200,
+      "stagingOnly": true
+    },
+    {
+      "batchIndex": 1,
+      "exactPhrases": [
+        "Die Wahrheit sagen – auch wenn es manchmal Mut kostet.",
+        "Die Wahrheit sagen – das ist ehrlich.",
+        "Du darfst ehrlich sagen: Das war ich.",
+        "Ehrlich sein ist gut. Das üben wir gemeinsam."
+      ],
+      "rawCharacters": 173,
+      "limitClips": 4,
+      "maxPreparedCharacters": 1200,
+      "stagingOnly": true
+    },
+    {
+      "batchIndex": 2,
+      "exactPhrases": [
+        "Eine bewusste Lüge kann das Vertrauen anderer Menschen beschädigen und weitere falsche Aussagen nach sich ziehen.",
+        "Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.",
+        "Heute sprechen wir darüber, warum Wahrhaftigkeit wichtig ist. Wir hören zu, lesen mit und denken nach. Du darfst jederzeit eine Pause machen.",
+        "Ich möchte ehrlich bleiben, Verantwortung übernehmen und einen Fehler nach Möglichkeit wiedergutmachen."
+      ],
+      "rawCharacters": 466,
+      "limitClips": 4,
+      "maxPreparedCharacters": 1200,
+      "stagingOnly": true
+    },
+    {
+      "batchIndex": 3,
+      "exactPhrases": [
+        "Jeder Mensch kann aus Versehen einen Fehler machen. Entscheidend ist, wie wir danach handeln.",
+        "Manchmal geht etwas aus Versehen kaputt.",
+        "Manchmal passiert uns aus Versehen ein Fehler.",
+        "Wahrhaftigkeit bedeutet, ehrlich zu sprechen."
+      ],
+      "rawCharacters": 224,
+      "limitClips": 4,
+      "maxPreparedCharacters": 1200,
+      "stagingOnly": true
+    },
+    {
+      "batchIndex": 4,
+      "exactPhrases": [
+        "Wahrhaftigkeit bedeutet: Ich sage die Wahrheit.",
+        "Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies.",
+        "Wahrhaftigkeit heißt, bewusst bei der Wahrheit zu bleiben – selbst wenn das schwierig ist.",
+        "Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters."
+      ],
+      "rawCharacters": 293,
+      "limitClips": 4,
+      "maxPreparedCharacters": 1200,
+      "stagingOnly": true
+    },
+    {
+      "batchIndex": 5,
+      "exactPhrases": [
+        "Wahrhaftigkeit ist mehr als ein einzelnes richtiges Wort: Sie ist eine Haltung, die wir im Alltag immer wieder üben.",
+        "Wenn mir ein Fehler passiert, sage ich die Wahrheit und versuche, ihn wiedergutzumachen.",
+        "Wenn mir ein Fehler passiert, sage ich ehrlich, was geschehen ist.",
+        "Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen."
+      ],
+      "rawCharacters": 374,
+      "limitClips": 4,
+      "maxPreparedCharacters": 1200,
+      "stagingOnly": true
+    },
+    {
+      "batchIndex": 6,
+      "exactPhrases": [
+        "Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.",
+        "Wer die Wahrheit sagt, übernimmt Verantwortung und schafft die Grundlage, den Fehler wiedergutzumachen.",
+        "Du hast etwas kaputt gemacht. Was sagst du?",
+        "Du hast versehentlich ein Glas zerbrochen. Was ist eine ehrliche Antwort?"
+      ],
+      "rawCharacters": 290,
+      "limitClips": 4,
+      "maxPreparedCharacters": 1200,
+      "stagingOnly": true
+    },
+    {
+      "batchIndex": 7,
+      "exactPhrases": [
+        "Warum gehört Wahrhaftigkeit zu einem guten Charakter?",
+        "Was kannst du danach Gutes tun?",
+        "Was kannst du tun, nachdem du einen Fehler ehrlich zugegeben hast?",
+        "Worin liegt der Unterschied zwischen einem versehentlichen Fehler und einer bewussten Lüge?"
+      ],
+      "rawCharacters": 241,
+      "limitClips": 4,
+      "maxPreparedCharacters": 1200,
+      "stagingOnly": true
+    },
+    {
+      "batchIndex": 8,
+      "exactPhrases": [
+        "Allah befiehlt den Gläubigen, mit den Wahrhaftigen zu sein.",
+        "Antwort 1: Ein Versehen und eine absichtliche Lüge sind immer genau dasselbe.",
+        "Antwort 1: Ich kann mich entschuldigen und helfen, den Fehler wiedergutzumachen.",
+        "Antwort 1: Ich sage ehrlich: Ich war das."
+      ],
+      "rawCharacters": 257,
+      "limitClips": 4,
+      "maxPreparedCharacters": 1200,
+      "stagingOnly": true
+    },
+    {
+      "batchIndex": 9,
+      "exactPhrases": [
+        "Antwort 1: Ich tue so, als hätte ich nichts gesehen.",
+        "Antwort 1: Ich verstecke den Fehler.",
+        "Antwort 1: Sie führt zu rechtschaffenem Verhalten und stärkt Vertrauen.",
+        "Antwort 1: Wahrheit spielt beim guten Charakter keine Rolle."
+      ],
+      "rawCharacters": 219,
+      "limitClips": 4,
+      "maxPreparedCharacters": 1200,
+      "stagingOnly": true
+    },
+    {
+      "batchIndex": 10,
+      "exactPhrases": [
+        "Antwort 1: Wir sollen mit den Wahrhaftigen sein.",
+        "Antwort 2: Ein Fehler kann unabsichtlich geschehen; eine Lüge ist bewusst unwahr.",
+        "Antwort 2: Eine Lüge ist immer die leichtere und richtige Lösung.",
+        "Antwort 2: Ich entschuldige mich und helfe."
+      ],
+      "rawCharacters": 237,
+      "limitClips": 4,
+      "maxPreparedCharacters": 1200,
+      "stagingOnly": true
+    },
+    {
+      "batchIndex": 11,
+      "exactPhrases": [
+        "Antwort 2: Ich sage: Jemand anders war es.",
+        "Antwort 2: Ich schiebe die Schuld absichtlich auf jemand anderen.",
+        "Antwort 2: Ich war das. Es tut mir leid.",
+        "Antwort 2: Sie macht absichtliche Täuschung zu einer guten Tat."
+      ],
+      "rawCharacters": 210,
+      "limitClips": 4,
+      "maxPreparedCharacters": 1200,
+      "stagingOnly": true
+    },
+    {
+      "batchIndex": 12,
+      "exactPhrases": [
+        "Antwort 2: Wir dürfen lügen, wenn wir Angst haben.",
+        "Antwort 3: Das war bestimmt jemand anders.",
+        "Antwort 3: Man soll eigene Fehler immer verstecken.",
+        "Antwort 3: Wahrhaftigkeit führt zur Rechtschaffenheit."
+      ],
+      "rawCharacters": 197,
+      "limitClips": 4,
+      "maxPreparedCharacters": 1200,
+      "stagingOnly": true
+    },
+    {
+      "batchIndex": 13,
+      "exactPhrases": [
+        "Denk an den Unterschied zwischen Versehen und absichtlicher Unwahrheit.",
+        "Denke an Entschuldigung und Hilfe.",
+        "Die Wahrheit zu sagen ist besser, als jemand anderem die Schuld zuzuschieben.",
+        "Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutmachen."
+      ],
+      "rawCharacters": 362,
+      "limitClips": 4,
+      "maxPreparedCharacters": 1200,
+      "stagingOnly": true
+    },
+    {
+      "batchIndex": 14,
+      "exactPhrases": [
+        "Ich kann mich entschuldigen und helfen, den Fehler wiedergutzumachen.",
+        "Nach einem Fehler können wir um Entschuldigung bitten und ihn wiedergutmachen.",
+        "Überlege: Was bedeutet ehrlich sein?",
+        "Wahrhaftigkeit bedeutet: Ich sage, was wirklich passiert ist."
+      ],
+      "rawCharacters": 244,
+      "limitClips": 4,
+      "maxPreparedCharacters": 1200,
+      "stagingOnly": true
+    },
+    {
+      "batchIndex": 15,
+      "exactPhrases": [
+        "Wahrhaftigkeit führt zu rechtschaffenem Verhalten. Sie bewahrt das Vertrauen und hilft uns, Verantwortung zu übernehmen.",
+        "Was führt laut der authentischen Sunnah zur Rechtschaffenheit?",
+        "Was ist wirklich passiert? Sprich es freundlich aus.",
+        "Wenn jemand Hilfe braucht, kannst du mithelfen."
+      ],
+      "rawCharacters": 281,
+      "limitClips": 4,
+      "maxPreparedCharacters": 1200,
+      "stagingOnly": true
+    }
+  ],
+  "heldForFushaReview": [
+    {
+      "text": "Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.",
+      "age": "6-8",
+      "kind": "narration"
+    },
+    {
+      "text": "Allah fordert die Gläubigen in Sūrat at-Tawbah 9:119 auf, mit den Wahrhaftigen zu sein. In Ṣaḥīḥ Muslim 2607a beschreibt der Prophet ﷺ Wahrhaftigkeit als einen Weg zur Rechtschaffenheit. Daraus lernen wir, beim Sprechen und Handeln aufrichtig zu bleiben.",
+      "age": "9-10",
+      "kind": "narration"
+    },
+    {
+      "text": "Allah ruft uns dazu auf, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt.",
+      "age": "6-8",
+      "kind": "summary"
+    },
+    {
+      "text": "Allah sagt uns im Qurʾān, dass wir mit den Wahrhaftigen sein sollen. Der Prophet ﷺ erklärte, wie gut Wahrhaftigkeit ist. Deshalb sagen wir die Wahrheit, auch wenn wir einen Fehler machen.",
+      "age": "4-5",
+      "kind": "narration"
+    },
+    {
+      "text": "Heute beschäftigen wir uns mit Ṣidq: Warum ist die Wahrheit wichtig, und wie handeln wir nach einem Fehler? Wir lernen anhand von Qurʾān und Sunnah und erklären das Thema mit eigenen Worten.",
+      "age": "9-10",
+      "kind": "narration"
+    },
+    {
+      "text": "Qurʾān 9:119 und der Ḥadīṯ in Ṣaḥīḥ Muslim 2607a verdeutlichen die Bedeutung der Wahrhaftigkeit.",
+      "age": "9-10",
+      "kind": "summary"
+    },
+    {
+      "text": "Ṣidq bedeutet Wahrhaftigkeit. Sie zeigt sich auch dann, wenn Ehrlichkeit Mut kostet.",
+      "age": "9-10",
+      "kind": "summary"
+    },
+    {
+      "text": "Was lehrt uns der Vers aus Sūrat at-Tawbah 9:119?",
+      "age": "6-8",
+      "kind": "question"
+    },
+    {
+      "text": "Welche Aussage entspricht dem Ḥadīṯ über Wahrhaftigkeit?",
+      "age": "9-10",
+      "kind": "question"
+    },
+    {
+      "text": "Denke an Vertrauen und das Wort des Propheten ﷺ.",
+      "age": "9-10",
+      "kind": "hint"
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt und diese zum Paradies.",
+      "age": "9-10",
+      "kind": "explanation"
+    },
+    {
+      "text": "Lies dir die kurze deutsche Bedeutung des Qurʾān-Verses noch einmal durch.",
+      "age": "6-8",
+      "kind": "hint"
+    }
+  ],
+  "heldCount": 12,
+  "neverSynthesizeQuranRecitation": true,
+  "publishOnlyAfterHumanReview": true,
+  "noAutoPublicPlayback": true
+}

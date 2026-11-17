@@ -4009,13 +4009,13 @@ const exercises={
   ],
   "6-8":[
     {type:"choice",prompt:"Du hast versehentlich ein Glas zerbrochen. Was ist eine ehrliche Antwort?",options:["Ich war das. Es tut mir leid.","Das war bestimmt jemand anders.","Ich tue so, als hätte ich nichts gesehen."],correct:0,hint:"Was ist wirklich passiert? Sprich es freundlich aus.",explain:"Die Wahrheit zu sagen ist besser, als jemand anderem die Schuld zuzuschieben."},
-    {type:"text",prompt:"Was kannst du tun, nachdem du einen Fehler ehrlich zugegeben hast?",sample:"Ich kann mich entschuldigen und helfen, den Fehler wiedergutzumachen.",hint:"Denke an Entschuldigung und Hilfe."},
+    {type:"choice",prompt:"Was kannst du tun, nachdem du einen Fehler ehrlich zugegeben hast?",options:["Ich kann mich entschuldigen und helfen, den Fehler wiedergutzumachen.","Ich schiebe die Schuld absichtlich auf jemand anderen."],correct:0,hint:"Denke an Entschuldigung und Hilfe.",explain:"Ich kann mich entschuldigen und helfen, den Fehler wiedergutzumachen."},
     {type:"choice",prompt:"Was lehrt uns der Vers aus Sūrat at-Tawbah 9:119?",options:["Wir sollen mit den Wahrhaftigen sein.","Wir dürfen lügen, wenn wir Angst haben.","Man soll eigene Fehler immer verstecken."],correct:0,hint:"Lies dir die kurze deutsche Bedeutung des Qurʾān-Verses noch einmal durch.",explain:"Allah befiehlt den Gläubigen, mit den Wahrhaftigen zu sein."}
   ],
   "9-10":[
     {type:"choice",prompt:"Welche Aussage entspricht dem Ḥadīṯ über Wahrhaftigkeit?",options:["Wahrhaftigkeit führt zur Rechtschaffenheit.","Wahrheit spielt beim guten Charakter keine Rolle.","Eine Lüge ist immer die leichtere und richtige Lösung."],correct:0,hint:"Was führt laut der authentischen Sunnah zur Rechtschaffenheit?",explain:"Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt und diese zum Paradies."},
-    {type:"text",prompt:"Erkläre in eigenen Worten: Warum gehört Wahrhaftigkeit zu einem guten Charakter?",sample:"Wahrhaftigkeit führt zu rechtschaffenem Verhalten. Sie bewahrt das Vertrauen und hilft uns, Verantwortung zu übernehmen.",hint:"Denke an Vertrauen und das Wort des Propheten ﷺ."},
-    {type:"text",prompt:"Worin liegt der Unterschied zwischen einem versehentlichen Fehler und einer bewussten Lüge?",sample:"Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutmachen.",hint:"Denk an den Unterschied zwischen Versehen und absichtlicher Unwahrheit."}
+    {type:"choice",prompt:"Warum gehört Wahrhaftigkeit zu einem guten Charakter?",options:["Sie führt zu rechtschaffenem Verhalten und stärkt Vertrauen.","Sie macht absichtliche Täuschung zu einer guten Tat."],correct:0,hint:"Denke an Vertrauen und das Wort des Propheten ﷺ.",explain:"Wahrhaftigkeit führt zu rechtschaffenem Verhalten. Sie bewahrt das Vertrauen und hilft uns, Verantwortung zu übernehmen."},
+    {type:"choice",prompt:"Worin liegt der Unterschied zwischen einem versehentlichen Fehler und einer bewussten Lüge?",options:["Ein Fehler kann unabsichtlich geschehen; eine Lüge ist bewusst unwahr.","Ein Versehen und eine absichtliche Lüge sind immer genau dasselbe."],correct:0,hint:"Denk an den Unterschied zwischen Versehen und absichtlicher Unwahrheit.",explain:"Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutmachen."}
   ]
 };
 let id="unassigned",gender="neutral",age="6-8",profileName="",displayedMonthAge=null,step=0,unlocked=0,qIndex=0,choice=null,answered=false,finished=false;
@@ -4075,6 +4075,9 @@ const questions=()=>window.DARKidsAcademyChoiceOnlyV1.project(activeLesson(),age
 const ACADEMY_FULL_SALAM="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.";
 const address=()=>{const role=gender==="girl"?"liebe Schwester":"lieber Bruder";const first=profileName.split(/\s+/)[0];return first?role+" "+first:role;};
 const greetingAddress=()=>{const a=address();return a.charAt(0).toLocaleUpperCase("de-DE")+a.slice(1)+".";};
+// Recorded greetings are reusable per profile. The child\u0027s first name remains visible,
+// but we never synthesize private names on demand or request impossible exact-match clips.
+const recordedGreetingAddress=()=>gender==="girl"?"Liebe Schwester.":"Lieber Bruder.";
 const storageKey=()=>["kids",VERSION,id,age,activeLessonId].join(".");
 const oldRecord=()=>{try{return JSON.parse(localStorage.getItem(storageKey())||"null")}catch(_){return null}};
 const draftKey=()=>["kids",VERSION,id,age,activeLessonId,"draft-v1"].join(".");
@@ -4729,7 +4732,7 @@ function speak(index,custom){
  stopSpeech();stopAudio();
  const token=++voiceToken;
  const spokenSalam=ACADEMY_FULL_SALAM;
- const lines=custom||(index===0?[spokenSalam,$("#welcomeAddress").textContent,$("#welcomeFollowup").textContent,$('[data-lesson-step="0"] .stage-body').textContent]:index===1?all("#explainWords [data-spoken]").map(x=>x.textContent):index===2?[$(".teacher-explainer").textContent]:index===4?all(".recap-lesson p").map(x=>x.textContent):[]);
+ const lines=custom||(index===0?[spokenSalam,recordedGreetingAddress(),$("#welcomeFollowup").textContent,$('[data-lesson-step="0"] .stage-body').textContent]:index===1?all("#explainWords [data-spoken]").map(x=>x.textContent):index===2?[$(".teacher-explainer").textContent]:index===4?all(".recap-lesson p").map(x=>x.textContent):[]);
  const highlights=index===1?(custom?[all("#explainWords [data-spoken]")[focusPages[1]]]:all("#explainWords [data-spoken]")):index===2?[$(".teacher-explainer")]:[];
  let k=0;
  const live=()=>token===voiceToken&&index===step;
@@ -4827,7 +4830,7 @@ function showQuestion(){
   };
   const listen=document.createElement("button");listen.type="button";listen.className="choice-listen";
   listen.textContent="Hören";
-  listen.setAttribute("aria-label","Antwort "+(i+1)+" anhören, ohne sie auszuwählen");
+  listen.setAttribute("aria-label","Antwort "+(visibleIndex+1)+" anhören, ohne sie auszuwählen");
   listen.setAttribute("aria-pressed","false");
   listen.onclick=()=>{
     speak(3,["Antwort "+(visibleIndex+1)+": "+t]);

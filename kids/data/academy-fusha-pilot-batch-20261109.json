@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "project": "TAWḤĪD KIDS",
+  "status": "draft-pilot-no-credits",
+  "maxClips": 4,
+  "maxPreparedCharacters": 1200,
+  "requiresVerifiedDictionaryVersion": true,
+  "quranRecitation": "human-only-not-TTS",
+  "totalCharacters": 175,
+  "clips": [
+    {
+      "text": "Wir üben ein kleines Wort vor dem Essen: Bismillāh.",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ],
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "dictionaryId": "Q8w3SxtoVo8NSjsnlJEd",
+      "status": "pending-owner-approval-no-generation",
+      "reviewRequired": true
+    },
+    {
+      "text": "Duʿāʾ ist eine Anbetung und richtet sich an Allah.",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ],
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "dictionaryId": "Q8w3SxtoVo8NSjsnlJEd",
+      "status": "pending-owner-approval-no-generation",
+      "reviewRequired": true
+    },
+    {
+      "text": "Wenn ich Duʿāʾ mache, bitte ich Allah.",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ],
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "dictionaryId": "Q8w3SxtoVo8NSjsnlJEd",
+      "status": "pending-owner-approval-no-generation",
+      "reviewRequired": true
+    },
+    {
+      "text": "Bevor ich esse, sage ich: Bismillāh.",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ],
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "dictionaryId": "Q8w3SxtoVo8NSjsnlJEd",
+      "status": "pending-owner-approval-no-generation",
+      "reviewRequired": true
+    }
+  ]
+}

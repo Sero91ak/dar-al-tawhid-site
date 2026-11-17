@@ -117,10 +117,15 @@ const additions={
           "explain": "Ich halte mich sauber und lerne die Gebetswaschung."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre das Thema mit einem eigenen sicheren Beispiel: Reinheit und Sauberkeit.",
-          "sample": "Ich unterscheide gewöhnliche Sauberkeit von der Gebetswaschung.",
-          "hint": "Händewaschen nach dem Spielen ist gut. Wuḍūʾ ist die besondere Waschung vor dem Gebet."
+          "options": [
+            "Ich unterscheide gewöhnliche Sauberkeit von der Gebetswaschung.",
+            "Gewöhnliches Händewaschen und Wuḍūʾ sind in jeder Hinsicht dieselbe Handlung."
+          ],
+          "correct": 0,
+          "hint": "Händewaschen nach dem Spielen ist gut. Wuḍūʾ ist die besondere Waschung vor dem Gebet.",
+          "explain": "Ich unterscheide gewöhnliche Sauberkeit von der Gebetswaschung."
         },
         {
           "type": "choice",
@@ -147,16 +152,26 @@ const additions={
           "explain": "Ich halte mich sauber und lerne die Gebetswaschung."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum ersetzt gewöhnliches Händewaschen nicht automatisch die vollständige Gebetswaschung?",
-          "sample": "Wuḍūʾ hat bestimmte religiöse Handlungen und Voraussetzungen; normale Hygiene ist etwas anderes.",
-          "hint": "Prüfe Qurʾān 5:6 und Ṣaḥīḥ Muslim, Nr. 223 · Abū Mālik al-Ashʿarī."
+          "options": [
+            "Wuḍūʾ hat bestimmte religiöse Handlungen und Voraussetzungen; normale Hygiene ist etwas anderes.",
+            "Gewöhnliches Händewaschen erfüllt immer automatisch alle Voraussetzungen des Wuḍūʾ."
+          ],
+          "correct": 0,
+          "hint": "Prüfe Qurʾān 5:6 und Ṣaḥīḥ Muslim, Nr. 223 · Abū Mālik al-Ashʿarī.",
+          "explain": "Wuḍūʾ hat bestimmte religiöse Handlungen und Voraussetzungen; normale Hygiene ist etwas anderes."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was steht in der Quelle und was ist unsere heutige Unterrichtsanwendung?",
-          "sample": "Wuḍūʾ hat bestimmte religiöse Handlungen und Voraussetzungen; normale Hygiene ist etwas anderes.",
-          "hint": "Unterscheide Originalbeleg, Bedeutung und Alltagsbeispiel."
+          "options": [
+            "Wuḍūʾ hat bestimmte religiöse Handlungen und Voraussetzungen; normale Hygiene ist etwas anderes.",
+            "Jede heutige Unterrichtsübung ist ein wörtlicher religiöser Quellenbeleg."
+          ],
+          "correct": 0,
+          "hint": "Unterscheide Originalbeleg, Bedeutung und Alltagsbeispiel.",
+          "explain": "Wuḍūʾ hat bestimmte religiöse Handlungen und Voraussetzungen; normale Hygiene ist etwas anderes."
         }
       ]
     }
@@ -269,10 +284,15 @@ const additions={
           "explain": "Ich höre Qurʾān mit Respekt und lerne Schritt für Schritt."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre das Thema mit einem eigenen sicheren Beispiel: Der Qurʾān – Allahs Wort.",
-          "sample": "Ich lerne den Qurʾān mit Respekt und übe in Ruhe.",
-          "hint": "Zum Anhören wählen wir eine wirkliche Qurʾān-Rezitation, nie eine künstliche nachgesprochene Qurʾān-Stimme."
+          "options": [
+            "Ich lerne den Qurʾān mit Respekt und übe in Ruhe.",
+            "Eine deutsche Bedeutungsübersetzung darf als arabischer Originalvers ausgegeben werden."
+          ],
+          "correct": 0,
+          "hint": "Zum Anhören wählen wir eine wirkliche Qurʾān-Rezitation, nie eine künstliche nachgesprochene Qurʾān-Stimme.",
+          "explain": "Ich lerne den Qurʾān mit Respekt und übe in Ruhe."
         },
         {
           "type": "choice",
@@ -299,16 +319,26 @@ const additions={
           "explain": "Ich höre Qurʾān mit Respekt und lerne Schritt für Schritt."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was ist der Unterschied zwischen arabischem Qurʾān-Vers und deutscher Bedeutungsübersetzung?",
-          "sample": "Der arabische Vers ist Offenbarung; die deutsche Übersetzung erklärt die Bedeutung und darf nicht als arabischer Originaltext ausgegeben werden.",
-          "hint": "Prüfe Qurʾān 2:2 und Ṣaḥīḥ al-Buḫārī, Nr. 5027 · ʿUṯmān ibn ʿAffān."
+          "options": [
+            "Der arabische Vers ist Offenbarung; die deutsche Übersetzung erklärt die Bedeutung und darf nicht als arabischer Originaltext ausgegeben werden.",
+            "Der arabische Qurʾāntext ist nur eine freie deutsche Erklärung."
+          ],
+          "correct": 0,
+          "hint": "Prüfe Qurʾān 2:2 und Ṣaḥīḥ al-Buḫārī, Nr. 5027 · ʿUṯmān ibn ʿAffān.",
+          "explain": "Der arabische Vers ist Offenbarung; die deutsche Übersetzung erklärt die Bedeutung und darf nicht als arabischer Originaltext ausgegeben werden."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was steht in der Quelle und was ist unsere heutige Unterrichtsanwendung?",
-          "sample": "Der arabische Vers ist Offenbarung; die deutsche Übersetzung erklärt die Bedeutung und darf nicht als arabischer Originaltext ausgegeben werden.",
-          "hint": "Unterscheide Originalbeleg, Bedeutung und Alltagsbeispiel."
+          "options": [
+            "Der arabische Vers ist Offenbarung; die deutsche Übersetzung erklärt die Bedeutung und darf nicht als arabischer Originaltext ausgegeben werden.",
+            "Eine deutsche Erklärung ist immer wortgleich mit dem arabischen Offenbarungstext."
+          ],
+          "correct": 0,
+          "hint": "Unterscheide Originalbeleg, Bedeutung und Alltagsbeispiel.",
+          "explain": "Der arabische Vers ist Offenbarung; die deutsche Übersetzung erklärt die Bedeutung und darf nicht als arabischer Originaltext ausgegeben werden."
         }
       ]
     }
@@ -421,10 +451,15 @@ const additions={
           "explain": "Allah erschuf Ādam. Wir lernen nur, was Qurʾān und authentische Sunnah darüber berichten."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre das Thema mit einem eigenen sicheren Beispiel: Ādam عليه السلام kennenlernen.",
-          "sample": "Ich weiß, dass Allah Ādam erschuf; wir erfinden keine Einzelheiten über ihn.",
-          "hint": "Wir stellen Propheten nicht als Personen dar und beschreiben nicht unbelegte Einzelheiten."
+          "options": [
+            "Ich weiß, dass Allah Ādam erschuf; wir erfinden keine Einzelheiten über ihn.",
+            "Über Ādam dürfen wir jede frei erfundene Einzelheit als Tatsache erzählen."
+          ],
+          "correct": 0,
+          "hint": "Wir stellen Propheten nicht als Personen dar und beschreiben nicht unbelegte Einzelheiten.",
+          "explain": "Ich weiß, dass Allah Ādam erschuf; wir erfinden keine Einzelheiten über ihn."
         },
         {
           "type": "choice",
@@ -451,16 +486,26 @@ const additions={
           "explain": "Allah erschuf Ādam. Wir lernen nur, was Qurʾān und authentische Sunnah darüber berichten."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum dürfen wir aus einer nicht belegten Erzählung keine neue Aussage über einen Propheten machen?",
-          "sample": "Religiöse Berichte über Propheten brauchen einen sicheren Beleg aus Qurʾān und authentischer Sunnah.",
-          "hint": "Prüfe Qurʾān 3:59 und Ṣaḥīḥ al-Buḫārī, Nr. 3326 · Abū Hurayrah."
+          "options": [
+            "Religiöse Berichte über Propheten brauchen einen sicheren Beleg aus Qurʾān und authentischer Sunnah.",
+            "Eine unbelegte Erzählung über Propheten ist genauso sicher wie ein authentischer Beleg."
+          ],
+          "correct": 0,
+          "hint": "Prüfe Qurʾān 3:59 und Ṣaḥīḥ al-Buḫārī, Nr. 3326 · Abū Hurayrah.",
+          "explain": "Religiöse Berichte über Propheten brauchen einen sicheren Beleg aus Qurʾān und authentischer Sunnah."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was steht in der Quelle und was ist unsere heutige Unterrichtsanwendung?",
-          "sample": "Religiöse Berichte über Propheten brauchen einen sicheren Beleg aus Qurʾān und authentischer Sunnah.",
-          "hint": "Unterscheide Originalbeleg, Bedeutung und Alltagsbeispiel."
+          "options": [
+            "Religiöse Berichte über Propheten brauchen einen sicheren Beleg aus Qurʾān und authentischer Sunnah.",
+            "Eine ausgedachte Geschichte ist automatisch eine authentische Überlieferung."
+          ],
+          "correct": 0,
+          "hint": "Unterscheide Originalbeleg, Bedeutung und Alltagsbeispiel.",
+          "explain": "Religiöse Berichte über Propheten brauchen einen sicheren Beleg aus Qurʾān und authentischer Sunnah."
         }
       ]
     }
@@ -574,10 +619,15 @@ const additions={
           "explain": "Ich gedenke Allahs ohne Eile und lerne die Bedeutung von Subḥāna llāhi wa-bi-ḥamdihī."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre das Thema mit einem eigenen sicheren Beispiel: Morgens Allah gedenken.",
-          "sample": "Ich lerne eine authentische Lobpreisung und verstehe ihren Sinn.",
-          "hint": "Die Überlieferung nennt hundert Wiederholungen für einen bestimmten Lohn; für kleine Kinder ist das keine Pflicht oder Leistungsprüfung."
+          "options": [
+            "Ich lerne eine authentische Lobpreisung und verstehe ihren Sinn.",
+            "Wir dürfen jede selbst erfundene Lobpreisung als überlieferten Wortlaut ausgeben."
+          ],
+          "correct": 0,
+          "hint": "Die Überlieferung nennt hundert Wiederholungen für einen bestimmten Lohn; für kleine Kinder ist das keine Pflicht oder Leistungsprüfung.",
+          "explain": "Ich lerne eine authentische Lobpreisung und verstehe ihren Sinn."
         },
         {
           "type": "choice",
@@ -604,16 +654,26 @@ const additions={
           "explain": "Ich gedenke Allahs ohne Eile und lerne die Bedeutung von Subḥāna llāhi wa-bi-ḥamdihī."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum darf die Zahl hundert im Ḥadīṯ nicht verändert oder als Pflicht für kleine Kinder dargestellt werden?",
-          "sample": "Die Überlieferung nennt eine bestimmte Zahl für einen besonderen Lohn, aber keine allgemeine Verpflichtung für kleine Kinder.",
-          "hint": "Prüfe Qurʾān 33:41 und Ṣaḥīḥ Muslim, Nr. 2692 · Abū Hurayrah."
+          "options": [
+            "Die Überlieferung nennt eine bestimmte Zahl für einen besonderen Lohn, aber keine allgemeine Verpflichtung für kleine Kinder.",
+            "Die im Ḥadīṯ genannte Zahl darf beliebig verändert und kleinen Kindern als Pflicht auferlegt werden."
+          ],
+          "correct": 0,
+          "hint": "Prüfe Qurʾān 33:41 und Ṣaḥīḥ Muslim, Nr. 2692 · Abū Hurayrah.",
+          "explain": "Die Überlieferung nennt eine bestimmte Zahl für einen besonderen Lohn, aber keine allgemeine Verpflichtung für kleine Kinder."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was steht in der Quelle und was ist unsere heutige Unterrichtsanwendung?",
-          "sample": "Die Überlieferung nennt eine bestimmte Zahl für einen besonderen Lohn, aber keine allgemeine Verpflichtung für kleine Kinder.",
-          "hint": "Unterscheide Originalbeleg, Bedeutung und Alltagsbeispiel."
+          "options": [
+            "Die Überlieferung nennt eine bestimmte Zahl für einen besonderen Lohn, aber keine allgemeine Verpflichtung für kleine Kinder.",
+            "Eine heutige Lernübung ist automatisch ein wörtlicher Bestandteil des Ḥadīṯ."
+          ],
+          "correct": 0,
+          "hint": "Unterscheide Originalbeleg, Bedeutung und Alltagsbeispiel.",
+          "explain": "Die Überlieferung nennt eine bestimmte Zahl für einen besonderen Lohn, aber keine allgemeine Verpflichtung für kleine Kinder."
         }
       ]
     }
@@ -726,10 +786,15 @@ const additions={
           "explain": "Ich spreche freundlich mit meinen Eltern und hole Hilfe, wenn ich sie brauche."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Erkläre das Thema mit einem eigenen sicheren Beispiel: Mit Eltern liebevoll umgehen.",
-          "sample": "Ich spreche freundlich, höre zu und kann bei Schwierigkeiten um Hilfe bitten.",
-          "hint": "Freundlich sein bedeutet nicht, bei Angst, Gefahr oder unerlaubten Forderungen schweigen zu müssen. Kinder dürfen immer vertrauenswürdige Erwachsene um Hilfe bitten."
+          "options": [
+            "Ich spreche freundlich, höre zu und kann bei Schwierigkeiten um Hilfe bitten.",
+            "Wer seine Eltern respektiert, darf in gefährlichen Situationen niemals Hilfe suchen."
+          ],
+          "correct": 0,
+          "hint": "Freundlich sein bedeutet nicht, bei Angst, Gefahr oder unerlaubten Forderungen schweigen zu müssen. Kinder dürfen immer vertrauenswürdige Erwachsene um Hilfe bitten.",
+          "explain": "Ich spreche freundlich, höre zu und kann bei Schwierigkeiten um Hilfe bitten."
         },
         {
           "type": "choice",
@@ -756,16 +821,26 @@ const additions={
           "explain": "Ich spreche freundlich mit meinen Eltern und hole Hilfe, wenn ich sie brauche."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Warum passen gutes Verhalten zu den Eltern und das Bitten um Hilfe in gefährlichen Situationen zusammen?",
-          "sample": "Respekt ist wichtig, aber er bedeutet nicht, Gewalt oder gefährliche Situationen zu verschweigen.",
-          "hint": "Prüfe Qurʾān 17:23 und Ṣaḥīḥ al-Buḫārī, Nr. 5971; Ṣaḥīḥ Muslim, Nr. 2548 · Abū Hurayrah."
+          "options": [
+            "Respekt ist wichtig, aber er bedeutet nicht, Gewalt oder gefährliche Situationen zu verschweigen.",
+            "Respekt gegenüber Eltern bedeutet, Gewalt immer zu verschweigen."
+          ],
+          "correct": 0,
+          "hint": "Prüfe Qurʾān 17:23 und Ṣaḥīḥ al-Buḫārī, Nr. 5971; Ṣaḥīḥ Muslim, Nr. 2548 · Abū Hurayrah.",
+          "explain": "Respekt ist wichtig, aber er bedeutet nicht, Gewalt oder gefährliche Situationen zu verschweigen."
         },
         {
-          "type": "text",
+          "type": "choice",
           "prompt": "Was steht in der Quelle und was ist unsere heutige Unterrichtsanwendung?",
-          "sample": "Respekt ist wichtig, aber er bedeutet nicht, Gewalt oder gefährliche Situationen zu verschweigen.",
-          "hint": "Unterscheide Originalbeleg, Bedeutung und Alltagsbeispiel."
+          "options": [
+            "Respekt ist wichtig, aber er bedeutet nicht, Gewalt oder gefährliche Situationen zu verschweigen.",
+            "Wer freundlich mit Eltern umgeht, darf niemals Hilfe holen, auch wenn Gefahr besteht."
+          ],
+          "correct": 0,
+          "hint": "Unterscheide Originalbeleg, Bedeutung und Alltagsbeispiel.",
+          "explain": "Respekt ist wichtig, aber er bedeutet nicht, Gewalt oder gefährliche Situationen zu verschweigen."
         }
       ]
     }

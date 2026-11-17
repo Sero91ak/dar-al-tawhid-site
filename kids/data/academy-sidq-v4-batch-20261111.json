@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "TAWHID_KIDS_SIDQ_V4_FIRST_CANONICAL_BATCH_20261111",
+  "lessonId": "sidq",
+  "scope": "kids-app-only",
+  "confirmed": "GENERATE-FOUR-SIDQ-20261111",
+  "ownerAuthorization": "User explicitly authorized producing full Fusha V4 Academy audio on 2026-11-11.",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "profile": "kids_story",
+  "useExistingMasterPronunciationPreparation": true,
+  "globalCrossLanguagePLSInBackend": false,
+  "maxClips": 4,
+  "maxPreparedCharacters": 650,
+  "stagingOnly": true,
+  "approvedForPlayback": false,
+  "noAutomaticProductionDeployment": true,
+  "quranRecitation": "human-recitation-only",
+  "sourcePlans": [
+    "kids/data/academy-sidq-voice-plan-v18.json",
+    "kids/data/academy-full-salam-voice-plan-v19.json"
+  ],
+  "exactPhrases": [
+    "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+    "Liebe Schwester.",
+    "Lieber Bruder.",
+    "Schön, dass du heute mitlernst!"
+  ],
+  "credits": "variable usage; one paid attempt per pending exact phrase; never synthesize in CI",
+  "review": "Technical checks are not a human Fuṣḥā listening approval.",
+  "fushaSegmentPolicy": "Canonical full Salām uses vocalized Arabic-only synth under Arabic language lock; German addresses use exact text, no unsafe cross-language dictionary replacement",
+  "notes": "The Arabic master PLS is available as a reference but is not attached globally because its German Nur collision can corrupt speech. No Qurʾān recitation is synthesized."
+}

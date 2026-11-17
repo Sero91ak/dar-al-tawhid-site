@@ -1,0 +1,122 @@
+name: KIDS V32 - next 64 owner V4 staging, human QA mandatory
+on:
+  pull_request:
+    types: [synchronize, reopened]
+    paths:
+      - '.github/workflows/kids-academy-v32-first64-production.yml'
+      - 'kids/tools/produce-academy-v32-first64-safe-batch.py'
+      - 'kids/data/academy-v32-first64-production-trigger-20261111.json'
+
+concurrency:
+  group: kids-v32-next64-owner-v4-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    if: >-
+      github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' &&
+      github.event.pull_request.head.ref == 'audit/kids-academy-audio-inventory-20261106'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    outputs:
+      billable: ${{ steps.gate.outputs.billable }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Validate immutable voice profile, 64 source-audited scripts, and deduplication
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/produce-academy-v32-first64-safe-batch.py
+          python3 kids/tools/produce-academy-v32-first64-safe-batch.py --check-all
+          python3 kids/tools/produce-academy-v32-first64-safe-batch.py --index 0 --dry-run
+          python3 kids/tools/produce-academy-v32-first64-safe-batch.py --index 15 --dry-run
+      - name: Exact one-shot billable generation gate
+        id: gate
+        run: |
+          echo 'billable=false' >> "$GITHUB_OUTPUT"
+          if [ "$(git log -1 --format=%s)" = 'KIDS_APPROVED_V4_V32_NEXT64_GENERATE_ONCE' ]; then
+            echo 'billable=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'Preflight only, no credits used.'
+          fi
+
+  stage:
+    needs: preflight
+    if: >-
+      needs.preflight.outputs.billable == 'true' &&
+      github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' &&
+      github.event.pull_request.head.ref == 'audit/kids-academy-audio-inventory-20261106'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    env:
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          persist-credentials: true
+      - name: Install ffmpeg and validate owner approval
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          test "$(git log -1 --format=%s)" = 'KIDS_APPROVED_V4_V32_NEXT64_GENERATE_ONCE'
+          test -n "$ADMIN_PUBLISH_SECRET" || { echo '::error::Owner voice credential absent, zero credits.'; exit 1; }
+          python3 kids/tools/produce-academy-v32-first64-safe-batch.py --check-all
+          for i in $(seq 0 15); do
+            python3 kids/tools/produce-academy-v32-first64-safe-batch.py --index "$i" --dry-run
+          done
+      - name: Record original owner V4 voice, four exact clips maximum per invocation
+        id: generate
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          for i in $(seq 0 15); do
+            echo "Owner V4 stage $((i+1)) of 16"
+            python3 kids/tools/produce-academy-v32-first64-safe-batch.py --index "$i"
+          done
+      - name: Verify files and save even partial success on isolated KIDS branch
+        if: always()
+        run: |
+          set -euo pipefail
+          if [ ! -f kids/data/academy-v32-first64-audio-staging-20261111.json ]; then
+            echo 'No successful V4 clips yet.'
+            exit 0
+          fi
+          python3 - <<'PY'
+          import hashlib,json,pathlib
+          root=pathlib.Path('.')
+          stage=json.loads((root/'kids/data/academy-v32-first64-audio-staging-20261111.json').read_text('utf8'))
+          plan=json.loads((root/'kids/data/academy-v32-first64-source-audited-safe.json').read_text('utf8'))
+          allowed={x['text'] for b in plan['batches'] for x in b['items']}
+          assert stage['stagingOnly'] is True and stage['approvedForPlayback'] is False
+          assert stage['requiresOwnerListeningApproval'] is True
+          assert 0<len(stage['entries'])<=64 and set(stage['entries'])<=allowed
+          for text,e in stage['entries'].items():
+              f=root/e['url'].lstrip('/')
+              assert f.is_file() and f.stat().st_size>=1800
+              assert hashlib.sha256(f.read_bytes()).hexdigest()==e['sha256']
+              assert e['modelId']=='eleven_v4' and e['voiceId']==plan['voiceId']
+              assert e['approvedForPlayback'] is False
+          print('Verified',len(stage['entries']),'review-only clips; public=0')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f kids/data/academy-v32-first64-audio-staging-20261111.json
+          git add -f kids/assets/kids-academy-audio/v32-*.m4a
+          if ! git diff --cached --quiet; then
+            git commit -m 'kids(audio): stage next 64 V4 owner recordings for human approval'
+            git pull --rebase origin audit/kids-academy-audio-inventory-20261106
+            git push origin HEAD:refs/heads/audit/kids-academy-audio-inventory-20261106
+          fi
+      - name: Stop if a paid batch was interrupted; never auto-retry
+        if: steps.generate.outcome == 'failure'
+        run: |
+          echo '::error::Inspect saved originals and staging manifest before any retry.'
+          exit 1

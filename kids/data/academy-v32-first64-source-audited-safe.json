@@ -1,0 +1,1730 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_V32_SOURCE_AUDITED_GERMAN_SAFE_64_20261111",
+  "project": "TAWḤĪD KIDS",
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "voiceSettingsProfile": "kids_story",
+  "sourceCatalog": "kids/data/academy-65-lessons-v32-voice-catalog.json",
+  "first80Excluded": true,
+  "sourceAuditGate": true,
+  "nativeArabicTermHold": true,
+  "syntheticQuranRecitation": false,
+  "publication": "NEVER_APPROVE_WITHOUT_OWNER_LISTENING",
+  "totalClips": 64,
+  "totalBatches": 16,
+  "perBatchMaxClips": 4,
+  "perBatchMaxCharacters": 1200,
+  "totalSourceCharacters": 3479,
+  "prioritySourceLessons": [
+    "aqidah-tawhid-recht-allahs",
+    "aqidah-iman-sechs-grundlagen",
+    "aqidah-ikhlas-warum-gutes-tun"
+  ],
+  "sourceLessons": [
+    "aqidah-tawhid-recht-allahs",
+    "aqidah-iman-sechs-grundlagen",
+    "aqidah-ikhlas-warum-gutes-tun",
+    "akhlaq-wut-ruhig-bleiben",
+    "adab-erlaubnis-anklopfen",
+    "akhlaq-tarbiyah-sanft-lernen",
+    "akhlaq-nafs-gutes-herz",
+    "fiqh-reinheit-unterscheiden",
+    "aqidah-quran-allahs-wort",
+    "aqidah-sirah-adam-erschoepfung",
+    "adab-morgen-dhikr",
+    "adab-eltern-freundlich",
+    "adab-essen-bismillah",
+    "akhlaq-tiere-barmherzigkeit",
+    "adab-nachbarn-gutes",
+    "aqidah-dua-allah-bitten",
+    "aqidah-iman-an-allah-vertiefen"
+  ],
+  "batches": [
+    {
+      "batchIndex": 0,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 166,
+      "items": [
+        {
+          "text": "Allah hat uns erschaffen. Wir beten Allah allein an.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "welcome",
+              "age": "4-5"
+            }
+          ],
+          "sha256": "ba0f59b51648fcfb00ad5298be706ecbd53b32c736a11a807dc4c4ca51ff73a6",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Wir lernen, warum die Anbetung allein Allah gehört.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "welcome",
+              "age": "6-8"
+            }
+          ],
+          "sha256": "26bbf72ebd042cfba0b2b7691ee005f92d7deb51cf6cd4a24526ea8039fd5c2a",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Allah allein verdient unsere Anbetung.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "narration",
+              "age": "all"
+            },
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "hint",
+              "age": "4-5",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "b4a0f5390babedbc132626ad96a6cd88a94877c485198d0259571048f7a509f0",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Allah ist unser Schöpfer.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "narration",
+              "age": "4-5"
+            }
+          ],
+          "sha256": "73abfba132b990e050d5e3cde5673f9be0b20727ae698cb1d275c6a65413fb1f",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 1,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 173,
+      "items": [
+        {
+          "text": "Anbetung richtet sich allein an Allah.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "narration",
+              "age": "6-8"
+            }
+          ],
+          "sha256": "3a881105ec0b9cbd890270590f105ad4d3a0152a3e1055ac7189b15220906e5f",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Wir dürfen Allah danken.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "narration",
+              "age": "4-5"
+            }
+          ],
+          "sha256": "77f8e078edaadd928bd1c4b420f565d608395f36ba6ba90eef1dc22be6e60108",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Wir unterscheiden religiöse Anbetung von normaler gegenseitiger Hilfe.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "narration",
+              "age": "9-10"
+            }
+          ],
+          "sha256": "bb5cc5af795cf45fa5d23f7f80ca207e6d78fef2f4084c768bf0904eb33b2a60",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Ich lerne, dass wir Allah allein anbeten.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "recap",
+              "age": "all"
+            },
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "explanation",
+              "age": "4-5",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "explanation",
+              "age": "6-8",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "explanation",
+              "age": "6-8",
+              "questionIndex": 2
+            }
+          ],
+          "sha256": "fcdf35989975da450f6616920b5bab65b4d75f869d7c93551a3eda22f8d25c5a",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 2,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 179,
+      "items": [
+        {
+          "text": "Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "recap",
+              "age": "all"
+            },
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "explanation",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "explanation",
+              "age": "6-8",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "explanation",
+              "age": "9-10",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "explanation",
+              "age": "9-10",
+              "questionIndex": 2
+            }
+          ],
+          "sha256": "8ffe2d505b13a4408e07fa04d5ecc86e8a34ec9d8ac68b72daba3aa3dd4512cc",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Was kannst du hier Gutes tun?",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "akhlaq-wut-ruhig-bleiben",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "adab-erlaubnis-anklopfen",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "akhlaq-nafs-gutes-herz",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "fiqh-reinheit-unterscheiden",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-quran-allahs-wort",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-sirah-adam-erschoepfung",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "adab-morgen-dhikr",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "adab-eltern-freundlich",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 0
+            }
+          ],
+          "sha256": "a20cb14ccae8462c23613d05716ac5f81a5b11e95877925d1a0db6830db79e63",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Was merken wir uns?",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "akhlaq-wut-ruhig-bleiben",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "adab-erlaubnis-anklopfen",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "akhlaq-nafs-gutes-herz",
+              "kind": "question",
+              "age": "4-5",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "1695e53e0cc205aa6d222fcbf10c0119db019a621368b84038f8a941a09677bd",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Welche Handlung ist durch den Unterricht begründet?",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "question",
+              "age": "9-10",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "question",
+              "age": "9-10",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "question",
+              "age": "9-10",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "akhlaq-wut-ruhig-bleiben",
+              "kind": "question",
+              "age": "9-10",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "adab-erlaubnis-anklopfen",
+              "kind": "question",
+              "age": "9-10",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+              "kind": "question",
+              "age": "9-10",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "akhlaq-nafs-gutes-herz",
+              "kind": "question",
+              "age": "9-10",
+              "questionIndex": 0
+            }
+          ],
+          "sha256": "b1e92904e1d4e7bb6a12429ce56471216e0e5243c7ca0b4f902f6b4be4a11ef0",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 3,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 186,
+      "items": [
+        {
+          "text": "Welche Handlung passt zu dieser Lehre?",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "akhlaq-wut-ruhig-bleiben",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "adab-erlaubnis-anklopfen",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "akhlaq-nafs-gutes-herz",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 0
+            }
+          ],
+          "sha256": "0d6f9b60abc352a56dde551359b10f7d0f012da34b20308864cc265293af2e38",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Woher stammen die religiösen Belege?",
+          "contexts": [
+            {
+              "lessonId": "adab-essen-bismillah",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 2
+            },
+            {
+              "lessonId": "akhlaq-tiere-barmherzigkeit",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 2
+            },
+            {
+              "lessonId": "adab-nachbarn-gutes",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 2
+            },
+            {
+              "lessonId": "aqidah-dua-allah-bitten",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 2
+            },
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 2
+            },
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 2
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 2
+            },
+            {
+              "lessonId": "akhlaq-wut-ruhig-bleiben",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 2
+            },
+            {
+              "lessonId": "adab-erlaubnis-anklopfen",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 2
+            },
+            {
+              "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 2
+            },
+            {
+              "lessonId": "akhlaq-nafs-gutes-herz",
+              "kind": "question",
+              "age": "6-8",
+              "questionIndex": 2
+            }
+          ],
+          "sha256": "bfa8b0c2366b968d5efbf141e194006a95a4d959f4c24259beea4e45a8d1b4c3",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 1: Beide lehren, dass man Allahs Anbetung anderen zuwenden soll.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "answer",
+              "age": "9-10",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "f87c038db1b5621bf027389b6f1647cd95af7d3e863deb8172623cc3c2952d55",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 1: Ich bete einen Gegenstand an.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "answer",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "answer",
+              "age": "9-10",
+              "questionIndex": 0
+            }
+          ],
+          "sha256": "8aa846786b0dd254ff1ef24054f808e5f7baee73d7b8d1e922c9b067bc6fc026",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 4,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 249,
+      "items": [
+        {
+          "text": "Antwort 1: Ich lerne, dass wir Allah allein anbeten.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "17e228475752609a1ac6551fd5a02545e8c2ba27d2db95ae9ca05d814e26eb2b",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 1: Ich muss andere absichtlich verletzen.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "answer",
+              "age": "4-5",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "answer",
+              "age": "4-5",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "4-5",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "akhlaq-wut-ruhig-bleiben",
+              "kind": "answer",
+              "age": "4-5",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "adab-erlaubnis-anklopfen",
+              "kind": "answer",
+              "age": "4-5",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+              "kind": "answer",
+              "age": "4-5",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "73928d6fb7e26ce5d00aea9ae4466d2681ef1878726baa7afe00c587933aeefa",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 1: Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "answer",
+              "age": "9-10",
+              "questionIndex": 2
+            }
+          ],
+          "sha256": "162566b79a6436346977f19c56c4a97fb6ad54a502ee78957da1245a4b276e42",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 2: Aus einer ausgedachten Geschichte ohne Quelle.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 2
+            },
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 2
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 2
+            },
+            {
+              "lessonId": "akhlaq-wut-ruhig-bleiben",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 2
+            },
+            {
+              "lessonId": "adab-erlaubnis-anklopfen",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 2
+            },
+            {
+              "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 2
+            }
+          ],
+          "sha256": "f161d6ba3f8aaf8d34def9709235fd39fb07c7ffd4353c54ce7609d51ed60b58",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 5,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 294,
+      "items": [
+        {
+          "text": "Antwort 2: Ein Bittgebet als Anbetung muss immer an einen Menschen gerichtet werden.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "answer",
+              "age": "9-10",
+              "questionIndex": 2
+            }
+          ],
+          "sha256": "a9e4cbcde8e54c5cefa38109706669020c12e44f7e4cef02af5b76267336bae5",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 2: Ich danke Allah und mache ein Bittgebet.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "answer",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "answer",
+              "age": "9-10",
+              "questionIndex": 0
+            }
+          ],
+          "sha256": "9fdb61407869f32af330e0aca4e6a01361ed53ce54826ec1203612383ebe5b2d",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 2: Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "answer",
+              "age": "4-5",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "8fdadb6b423dcd7f0256239347c1346d806a8287ded3503ca8067caf432917d1",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 2: Wir beten viele verschiedene Dinge statt Allah allein an.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-tawhid-recht-allahs",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "e3633ff532667c9f39e2560ddb80ab0fe3eefb9fe8f56417488589d071041476",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 6,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 209,
+      "items": [
+        {
+          "text": "Allah hat Engel erschaffen.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "narration",
+              "age": "4-5"
+            }
+          ],
+          "sha256": "af9970edc7c2b40892eeee02640dd5bf08a953a6a68685ffd4ff8efe38e98f8f",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Allah schickte Seine Botschaften durch Gesandte.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "narration",
+              "age": "4-5"
+            }
+          ],
+          "sha256": "ee546067d9a899e5920e36202053b1a0b7f351fdf165e715ae7daa7705b1807d",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Die übrigen Glaubensgrundlagen lernen wir Schritt für Schritt.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "narration",
+              "age": "4-5"
+            }
+          ],
+          "sha256": "e4e11fa43527839d557433a706f55ba10adf35aaad61226a80cd67f7d198ba71",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Die weiteren Grundlagen sind der Jüngste Tag und der Glaube an al-Qadar.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "narration",
+              "age": "9-10"
+            }
+          ],
+          "sha256": "005dac89e6209c99cdb6f6c553fdf796f58bb720fcb20b7e87b1f1dc280ecbc1",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 7,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 179,
+      "items": [
+        {
+          "text": "Wir glauben an Allah und Seine Engel.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "narration",
+              "age": "6-8"
+            }
+          ],
+          "sha256": "4cc7b5c2d1e2a6c0239f9322090e8fc2710bc758cabfd0cd66f8b8c786fe4404",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Wir glauben an Allah.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "narration",
+              "age": "4-5"
+            },
+            {
+              "lessonId": "aqidah-iman-an-allah-vertiefen",
+              "kind": "explanation",
+              "age": "4-5",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "ee942b3f76dda471195f85484bda74436b1802048c6128c44daa9bd4e382cd4e",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Wir glauben an Allahs Bestimmung und fragen bei schwierigen Fragen nach.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "narration",
+              "age": "6-8"
+            }
+          ],
+          "sha256": "228aaf7f7fe039cef8dcd48ade4130b30d126bee3b22a96ff3fcb6f36d843b19",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Wir glauben an Allahs Bücher und Seine Gesandten.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "narration",
+              "age": "6-8"
+            }
+          ],
+          "sha256": "41f29291026ad7e551a6859dcfefbcc5210843e0eccc2df4632ab861922f1ff7",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 8,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 208,
+      "items": [
+        {
+          "text": "Wir glauben an den Jüngsten Tag.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "narration",
+              "age": "6-8"
+            }
+          ],
+          "sha256": "c646cc688b7b9614dd21b8ba9f2ecf411ac676533457eb2230ff212fa9aeef82",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Zu ihnen zählen außerdem Engel, die Bücher und die Gesandten Allahs.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "narration",
+              "age": "9-10"
+            }
+          ],
+          "sha256": "b9c7fd34de99d32be33b0be1a990dada0bead5227b630fe086b3a4a44de84dea",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Ich kann die Glaubensgrundlagen nach und nach nennen.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "recap",
+              "age": "all"
+            },
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "explanation",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "explanation",
+              "age": "6-8",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "explanation",
+              "age": "9-10",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "explanation",
+              "age": "9-10",
+              "questionIndex": 2
+            }
+          ],
+          "sha256": "ca2edfb58d6845dfaa6a02ca4a787765e42002f04c2e857fcaf06efda2ab63f1",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Ich lerne die sechs Glaubensgrundlagen in meinem Tempo.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "recap",
+              "age": "all"
+            },
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "explanation",
+              "age": "4-5",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "explanation",
+              "age": "6-8",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "explanation",
+              "age": "6-8",
+              "questionIndex": 2
+            }
+          ],
+          "sha256": "dd0dd688ace98623d3b9789ac163ba3e80f7f6aff11fff93fb033ee9860664f3",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 9,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 242,
+      "items": [
+        {
+          "text": "Antwort 1: Der Glaube an den Jüngsten Tag und an Allahs Bestimmung, al-Qadar.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "answer",
+              "age": "9-10",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "ac86aa62496ea5c333e49321373eef06dd8bf85ef7422fb188974c91257a979d",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 1: Ich kann die Glaubensgrundlagen nach und nach nennen.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "answer",
+              "age": "9-10",
+              "questionIndex": 2
+            }
+          ],
+          "sha256": "f89c4d24015359226921d2d77143e4e2c8685464f3dd5038ac454381fcc99aeb",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 1: Ich lache die Frage aus.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "answer",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "answer",
+              "age": "9-10",
+              "questionIndex": 0
+            }
+          ],
+          "sha256": "cbd73a8baa97b5c268d6a2fe89005f2a48cfed73ad6164d0c742623abe9f1d9c",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 1: Ich lerne die sechs Glaubensgrundlagen in meinem Tempo.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "34e40b533be101b6ebec614d8dfe111e16c49c5f449087a9f56cc450a3d47426",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 10,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 292,
+      "items": [
+        {
+          "text": "Antwort 2: Die sechs Glaubensgrundlagen sind eine Erfindung ohne religiöse Quellen.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "111f046ebeb03f3369a0767cd5f66e71701a85cb634a77196c12255bf195fb14",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 2: Ich kann die Glaubensgrundlagen nach und nach nennen.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "answer",
+              "age": "4-5",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "5be17215c572d58303eaaf7cb5aa1b50f2fbfafe939a17be6b4805dab17d7ea1",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 2: Ich muss alle Glaubensgrundlagen sofort fehlerfrei auswendig können.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "answer",
+              "age": "9-10",
+              "questionIndex": 2
+            }
+          ],
+          "sha256": "1105a9ccf172542344c6ec218a44165e7fb075674352369a571c20c59734df8b",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Der Glaube an den Jüngsten Tag und an Allahs Bestimmung, al-Qadar.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-iman-sechs-grundlagen",
+              "kind": "explanation",
+              "age": "9-10",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "dad63bff3a068e0b4ff6b3b9bdc715dd607b1ab25f5a9649a0544f58c434f9d8",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 11,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 183,
+      "items": [
+        {
+          "text": "Ich kann etwas Gutes tun, auch wenn niemand klatscht.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "welcome",
+              "age": "4-5"
+            }
+          ],
+          "sha256": "be203f9f2678f8db42e887b1e57d4d04bf3f9e234e51e6bd57219b1dd5c57cd1",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Wir unterscheiden die äußere Handlung von der Absicht dahinter.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "welcome",
+              "age": "9-10"
+            }
+          ],
+          "sha256": "18cd53d0f86dd5b1cd4033061c235cbfb7a337f6c21e0bdfa2fba53d4d868955",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Ein Freund braucht Hilfe.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "narration",
+              "age": "4-5"
+            }
+          ],
+          "sha256": "ef9f65cd043188c5a551732a1466ddb02d0cb781c8086bea7a4a8b8dd4b42b5c",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Ich frage mich, warum ich etwas Gutes tue.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "narration",
+              "age": "6-8"
+            }
+          ],
+          "sha256": "6c2c52fe6953e686bbbb16cd6189514a65abf9f51970a38b6f1fee9247a2a5c4",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 12,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 178,
+      "items": [
+        {
+          "text": "Ich helfe, weil ich Gutes tun möchte.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "narration",
+              "age": "4-5"
+            }
+          ],
+          "sha256": "72f7eb31d2c10e6abb97b53fdba7638dcec4b888258a83635adf510db2f1e045",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Ich kann helfen, ohne eine Belohnung von Menschen zu erwarten.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "narration",
+              "age": "6-8"
+            }
+          ],
+          "sha256": "2929494d9f9aa286a087e1b6958b96d6b005e9ab5fc6b5f69d781d7a5d0868d9",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Ich muss dafür kein Geschenk bekommen.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "narration",
+              "age": "4-5"
+            }
+          ],
+          "sha256": "c82f4a295c6a36a97a2859cd4bfe5ce82f739a82784c1e735e8cba5c4a29178a",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Nicht jede gute Tat muss jemand bemerken.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "narration",
+              "age": "6-8"
+            }
+          ],
+          "sha256": "0e3cbad88db17dad32b7fc92d130313b4854abc0b450da955014f2561f27f760",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 13,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 263,
+      "items": [
+        {
+          "text": "Wenn ich gelobt werde, darf ich mich bedanken und bescheiden bleiben.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "narration",
+              "age": "6-8"
+            }
+          ],
+          "sha256": "9b4a6804c7234ca0d088c45edca2d465c2ea7c9e403a2b00c6de558e85f8b91c",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Wir bemühen uns, Gutes für Allah zu tun.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "narration",
+              "age": "all"
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "hint",
+              "age": "4-5",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "4b85e68b0586205c941cff74b8d2a30a390190fd803ff1bccfc271c6707851ef",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Zwei Menschen können äußerlich dasselbe tun, obwohl ihre Absichten verschieden sind.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "narration",
+              "age": "9-10"
+            }
+          ],
+          "sha256": "b59dfeb65fe6faabf9b4068b7cb6b47b9fa3524165fd8b43c758fbc7e6d16ac1",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Ich helfe, weil ich Gutes für Allah tun möchte, nicht nur für Applaus.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "recap",
+              "age": "all"
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "explanation",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "explanation",
+              "age": "6-8",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "explanation",
+              "age": "9-10",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "explanation",
+              "age": "9-10",
+              "questionIndex": 2
+            }
+          ],
+          "sha256": "1f35e6d9f821e8baa9b74c88c3e73ff62827ca9cdd12792ff46b9fb1e1797dc2",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 14,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 227,
+      "items": [
+        {
+          "text": "Ich übe eine gute Absicht, ohne auf Lob zu warten.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "recap",
+              "age": "all"
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "explanation",
+              "age": "4-5",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "explanation",
+              "age": "6-8",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "explanation",
+              "age": "6-8",
+              "questionIndex": 2
+            }
+          ],
+          "sha256": "f4398484996f39b447d672d93bc130a6b55e0ae0e4801b81b4ff06627c7083a3",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 1: Ich helfe nur, wenn andere mir dafür applaudieren.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "9-10",
+              "questionIndex": 2
+            }
+          ],
+          "sha256": "e8d5ae360fad51c3be537bbd093c9ebea2822378fb09a5688f98a806e9baedeb",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 1: Ich tue Gutes ausschließlich, damit andere mich loben.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "843c4e0a36f7a8df520a5b87bfcff3fb60a7b187c128a8230e0810cd273d53f7",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 1: Ich werde gemein, weil niemand klatscht.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "9-10",
+              "questionIndex": 0
+            }
+          ],
+          "sha256": "fb1b75bb772151950433239654d3fb87f9fd119dec15935dbf9126b5a34ea805",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    },
+    {
+      "batchIndex": 15,
+      "maxClips": 4,
+      "maxPreparedCharacters": 1200,
+      "totalSourceCharacters": 251,
+      "items": [
+        {
+          "text": "Antwort 2: Ich helfe, weil ich Gutes für Allah tun möchte, nicht nur für Applaus.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "4-5",
+              "questionIndex": 1
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "9-10",
+              "questionIndex": 2
+            }
+          ],
+          "sha256": "716151917e7bdb6e22a44b6128fa4ba990ec3fa61544d203cce8df0170ecc05b",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 2: Ich kann mich trotzdem über die gute Tat freuen.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "4-5",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 0
+            },
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "9-10",
+              "questionIndex": 0
+            }
+          ],
+          "sha256": "a0b3eed57a5a00c43e0b96f9b5d036d381f1807821759a2dcf3bd2073f179bcd",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Antwort 2: Ich übe eine gute Absicht, ohne auf Lob zu warten.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+              "kind": "answer",
+              "age": "6-8",
+              "questionIndex": 1
+            }
+          ],
+          "sha256": "2572d06182e2e38610325a4c7f2a766a67b0d416aa609c9952f0149b2d720991",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        },
+        {
+          "text": "Allah hört unser Bittgebet. Wir dürfen Ihn bitten.",
+          "contexts": [
+            {
+              "lessonId": "aqidah-dua-allah-bitten",
+              "kind": "welcome",
+              "age": "4-5"
+            }
+          ],
+          "sha256": "c4885897f846c90f7f35c6ca5043a0fe691c9a08eafbf0b68ab77f87ee50d6e8",
+          "sourceAuditProven": true,
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "humanListeningRequired": true,
+          "approvedForPlayback": false
+        }
+      ]
+    }
+  ]
+}

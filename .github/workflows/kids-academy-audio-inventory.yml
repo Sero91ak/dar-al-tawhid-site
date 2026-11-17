@@ -1,0 +1,67 @@
+name: Kids Academy Audio Inventory (zero credits)
+on:
+  pull_request:
+    paths:
+      - 'kids/tools/audit-academy-audio-inventory-v1.cjs'
+      - 'kids/tools/test-academy-sidq-v4-staging-qa.cjs'
+      - 'kids/tools/test-academy-sidq-v30-staging-qa.cjs'
+      - 'kids/data/academy-audio-staging-sidq-v30-20261111.json'
+      - 'kids/data/academy-sidq-v4-voice-plan-v30.json'
+      - 'kids/data/academy-sidq-v30-safe-batches-20261111.json'
+      - 'kids/data/academy-audio-staging-sidq-v4-20261111.json'
+      - 'kids/assets/kids-academy-audio/**'
+      - 'kids/akademie/**'
+      - 'kids/data/academy-audio.json'
+      - 'kids/data/academy-voice-plan-v9.json'
+      - '.github/workflows/kids-academy-audio-inventory.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check exact curriculum and projected choice-only questions
+        run: node kids/tools/audit-academy-audio-inventory-v1.cjs --summary > "$RUNNER_TEMP/academy-audio-summary.json"
+      - name: Verify 4 new real owner-V4 recording binaries and strict private playback gate
+        run: node kids/tools/test-academy-sidq-v4-staging-qa.cjs
+      - name: Audit and pack all 68 real Serhat V4 Ṣidq recordings for private owner hearing
+        run: |
+          node kids/tools/test-academy-sidq-v30-staging-qa.cjs --output "$RUNNER_TEMP/kids-sidq-v30-68"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kids-sidq-v30-all-68-owner-v4-hearing-kit
+          path: ${{ runner.temp }}/kids-sidq-v30-68
+          retention-days: 14
+      - name: Export editorial review queue and phrase inventory
+        run: |
+          node kids/tools/audit-academy-audio-inventory-v1.cjs > "$RUNNER_TEMP/academy-audio-inventory.json"
+          node -e 'const fs=require("fs");const x=JSON.parse(fs.readFileSync(process.argv[1],"utf8"));fs.writeFileSync(process.argv[2],JSON.stringify({schemaVersion:1,generatedFrom:"academy-audio-inventory-v1",requiresHumanApproval:true,items:x.issues,editorialQuestions:x.editorialQuestions,totals:{lessons:x.lessonCount,ageVersions:x.ageVersions,questions:x.questionCount,uniquePhrases:x.uniqueCandidatePhrases}},null,2));' "$RUNNER_TEMP/academy-audio-inventory.json" "$RUNNER_TEMP/academy-editorial-review.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kids-academy-audio-review
+          path: |
+            ${{ runner.temp }}/academy-audio-inventory.json
+            ${{ runner.temp }}/academy-editorial-review.json
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kids-sidq-v4-first-four-listening-review
+          path: |
+            kids/data/academy-audio-staging-sidq-v4-20261111.json
+            kids/assets/kids-academy-audio/38fcc85d9dcbc1b47a3a.m4a
+            kids/assets/kids-academy-audio/1f680fe0ff5be359533f.m4a
+            kids/assets/kids-academy-audio/5e2d17120bf6c30f410f.m4a
+            kids/assets/kids-academy-audio/d35130e236aa2bf34d05.m4a
+          retention-days: 14
+      - name: Publish no-credit inventory summary
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/academy-audio-summary.json" ]; then
+            node -e 'const s=require(process.argv[1]); console.log(JSON.stringify({lessons:s.lessonCount,ageVersions:s.ageVersions,questions:s.questionCount,uniquePhrases:s.uniqueCandidatePhrases,audioCoverage:s.audioCoverage,archiveMatches:s.archivedExactPhraseMatches,newOrChanged:s.newOrChangedVsArchive,issues:s.issues.length,issuesByCode:s.issues.reduce((a,x)=>(a[x.code]=(a[x.code]||0)+1,a),{}),invalidChoices:s.invalidChoices},null,2))' "$RUNNER_TEMP/academy-audio-summary.json"
+          fi

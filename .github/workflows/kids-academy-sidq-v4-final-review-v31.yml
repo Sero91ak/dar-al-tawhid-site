@@ -1,0 +1,34 @@
+name: KIDS Ṣidq V4 - 80-clip owner listening QA, no credits
+
+on:
+  pull_request:
+    paths:
+      - 'kids/tools/test-academy-sidq-v4-full-stage-v31.cjs'
+      - 'kids/tools/build-academy-sidq-v4-owner-review-v31.cjs'
+      - 'kids/data/academy-sidq-v4-coverage-v31.json'
+      - 'kids/data/academy-audio-staging-sidq-fusha-v30-20261111.json'
+      - 'kids/data/academy-audio-staging-sidq-v30-20261111.json'
+      - 'kids/data/academy-audio-staging-sidq-v4-20261111.json'
+      - 'kids/assets/kids-academy-audio/**'
+      - '.github/workflows/kids-academy-sidq-v4-final-review-v31.yml'
+permissions:
+  contents: read
+jobs:
+  verify-and-package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify exact SHA-256 for all eighty owner V4 clips and strict no-publish gate
+        run: node kids/tools/test-academy-sidq-v4-full-stage-v31.cjs --check
+      - name: Assemble indexed offline owner-listening page and all eighty real M4A files
+        run: node kids/tools/build-academy-sidq-v4-owner-review-v31.cjs "${{ runner.temp }}/kids-sidq-v4-listening"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TAWḤĪD-KIDS-SIDQ-V4-80-HOERPRUEFUNG
+          path: ${{ runner.temp }}/kids-sidq-v4-listening/
+          if-no-files-found: error
+          retention-days: 14
