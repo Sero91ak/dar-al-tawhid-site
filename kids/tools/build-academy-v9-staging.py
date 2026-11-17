@@ -11,6 +11,7 @@ import hashlib
 import json
 import os
 import pathlib
+import re
 import subprocess
 import tempfile
 import time
@@ -33,6 +34,27 @@ BACKEND="https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api"
 from voice_text import prepare_kids_voice_text
 
 
+_QURAN_CITATION = re.compile(
+    r"(?<![\w])\d{1,3}\s*:\s*\d{1,3}(?:\s*[–—-]\s*\d{1,3})?(?![\w])"
+)
+_HADITH_COLLECTION_CITATION = re.compile(
+    r"(\b(?:Ṣaḥīḥ\s+(?:Muslim|al-Buḫārī|al-Bukhārī)|Sahih\s+(?:Muslim|al-Bukhari))\s+)\d{1,8}[a-z]?\b",
+    re.IGNORECASE,
+)
+_LABELED_SOURCE_NUMBER = re.compile(r"\b(?:Nr\.?|Nummer)\s*\d{1,8}[a-z]?\b", re.IGNORECASE)
+
+
+def prepare_academy_spoken_text(visible_text: str) -> str:
+    """Keep citations in lesson data, but omit citation numbers from narration."""
+    value = _QURAN_CITATION.sub("", str(visible_text or ""))
+    value = _HADITH_COLLECTION_CITATION.sub(r"\1", value)
+    value = _LABELED_SOURCE_NUMBER.sub("", value)
+    value = re.sub(r"\s+([,;:!?])", r"\1", value)
+    value = re.sub(r"([,;:!?])(?=\S)", r"\1 ", value)
+    value = re.sub(r"\s{2,}", " ", value)
+    return value.strip()
+
+
 def technical_duration(filepath:pathlib.Path)->float:
     return float(subprocess.check_output([
         "ffprobe","-v","error","-show_entries","format=duration",
@@ -42,7 +64,8 @@ def technical_duration(filepath:pathlib.Path)->float:
 
 def generate_audio(text:str, target:pathlib.Path, secret:str)->float:
     """Use exactly the approved story-generation backend; do NOT call Flash directly."""
-    prepared=prepare_kids_voice_text(text)
+    spoken_text=prepare_academy_spoken_text(text)
+    prepared=prepare_kids_voice_text(spoken_text)
     payload=json.dumps({"text":text,"prepared":prepared,"profile":MASTER_PROFILE},ensure_ascii=False).encode("utf-8")
     req=urllib.request.Request(
         BACKEND+"/generate-with-timings",data=payload,method="POST",
@@ -168,7 +191,8 @@ def main():
     used_chars=0
     for row in pending:
         phrase=row["text"]
-        prepared=prepare_kids_voice_text(phrase)
+        spoken_text=prepare_academy_spoken_text(phrase)
+        prepared=prepare_kids_voice_text(spoken_text)
         if created>=args.limit or used_chars+len(prepared)>args.max_chars:
             break
         digest=hashlib.sha256(json.dumps({"text":prepared,"voice":VOICE_ID,"model":MODEL,"profile":MASTER_PROFILE,"settings":POLICY["production"]["voiceSettings"],"dictionaryVersion":POLICY["production"]["pronunciationDictionaryVersionId"]},sort_keys=True,ensure_ascii=False).encode()).hexdigest()
@@ -186,7 +210,8 @@ def main():
             "voiceProfileId":PROFILE,"voiceId":VOICE_ID,"voiceSettingsProfile":MASTER_PROFILE,
             "sourceVoice":"authorized-owner-voice",
             "sourceType":"owner-voice-generated","sourceSpeaker":"Serhat Abu Malik",
-            "modelId":MODEL,"qaStatus":"technical-passed-awaiting-human-review",
+            "modelId":MODEL,"spokenText":spoken_text,
+            "qaStatus":"technical-passed-awaiting-human-review",
             "approvedForPlayback":False,"sameAsApprovedKidsStoryProfile":True
         }
         created+=1
