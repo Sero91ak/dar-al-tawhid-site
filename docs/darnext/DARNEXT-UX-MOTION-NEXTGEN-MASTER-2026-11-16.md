@@ -38,6 +38,8 @@ Vollständiger Assistenz-Blueprint: **[DAR-INTELLIGENCE-ASSISTANT-BLUEPRINT-2026
 
 **Warum getrennt vom Motion-Auftrag?** Native Motion und Kartenübergänge müssen weiterentwickelt werden, auch wenn ein lokal ausgeführtes Sprachmodell die redaktionelle Qualitäts- oder Geräteprüfung nicht besteht. Der Forschungsstrang darf vorhandene Architektur nicht zurückbauen und keine Zusatzkosten erzeugen. Bei unzureichender Modellqualität bleibt eine deutlich als quellengebundene Suche/Lernassistenz gekennzeichnete sichere Variante verfügbar.
 
+**Zusätzlicher Nutzerwunsch vom 17.11.2026:** DĀR INTELLIGENCE soll sowohl **Texteingabe** als auch **Spracheingabe** ermöglichen und auf Wunsch mit **männlicher oder weiblicher frei auswählbarer Stimme** antworten. Die native Offline-Prüfung, Locale-Verfügbarkeit, Aussprachebibliothek, Audio-Sessions und der komplette Modal-/Mikrofon-/TTS-Testvertrag stehen in [DAR-INTELLIGENCE-BLUEPRINT Abschnitt C1](DAR-INTELLIGENCE-ASSISTANT-BLUEPRINT-2026-11-17.md). Diese Sprachfunktion gehört nur zum isolierten Assistenz-Forschungsstrang #1791, nicht automatisch zum bereits genehmigten Motion-Rollout. Keine bezahlten Sprach-APIs oder Cloud-Aufnahmen.
+
 ### 1. REPOSITORY-/PLATTFORM-VERTRAG
 Repository: https://github.com/Sero91ak/dar-al-tawhid-site
 Default-Branch: main. **DARNext liegt nach erster Prüfung auf separaten Entwicklungsbranches**, beispielsweise:
