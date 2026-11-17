@@ -9,6 +9,25 @@ Du arbeitest am bestehenden Produkt **DAR NEXT**, das nach erfolgreicher Abnahme
 
 **Ziel:** Die vorhandene App durch präzise, wiederverwendbare interaktive Übergänge, raffinierte Mikroanimationen, herausragende UI/UX, moderne Accessibility, echte nativ-adaptive Bedienung und zukunftsfähige Architektur verbessern. Erst das Fundament und ein vollständig getesteter Referenzfluss; anschließend Stück für Stück auf alle passenden Bereiche übertragen. Kein Figma erforderlich. Keine unnötigen monatlich kostenpflichtigen Werkzeuge.
 
+### 0a. KLARSTELLUNG DES NUTZERS (17.11.2026) – KEIN KOSTENPFLICHTIGER IN-APP-KI-AGENT
+**Diese Klarstellung hat Vorrang vor allen älteren Erwähnungen von „AI“, „Assistant“ oder „intelligenter Suche“.**
+
+**Trenne zwei ganz verschiedene Dinge:**
+- **KI zur Entwicklung:** ChatGPT Work / Xcode-Coding-Assistenten dürfen außerhalb der fertigen App im Entwicklungsprozess helfen, soweit durch den vorhandenen Zugang abgedeckt. Das ist **keine** Funktion für App-Besucher.
+- **KI innerhalb der DĀR-NEXT-App:** **Nicht beauftragt. Aktuell NICHT einbauen, NICHT aktivieren, NICHT als versteckte Abhängigkeit mitliefern.** Keine OpenAI-/Anthropic-/Google-/sonstigen LLM-APIs, keine bezahlten Agent-Abos, Credits, Tokenabrechnung, Chat-/Voice-AI-SDKs, externen KI-Endpunkte, zusätzlichen kostenpflichtigen Konten oder automatischen AI-Kosten. Keine „kostenlosen“ Testkontingente, deren Ablauf danach nutzungsabhängige Gebühren auslöst. Kein API-Schlüssel im Client.
+
+**Bestehender Bestand:** Manche DAR-NEXT-Branches enthalten bereits einen \`DashboardAssistantView\`, eine „AI“-Registerkarte oder andere Assistant-Prototypen. Zuerst Datenfluss, Backend, Netzwerkanfragen, Kosten, Produktposition und tatsächliche Nutzung prüfen. Vorhandenen Code weder blind löschen noch ungefragt als funktionsfähigen Assistenten präsentieren. Sofern unqualifiziert oder kostenpflichtig, von der öffentlichen Navigation **entkoppeln/verdecken** (regressionssicher, ohne wichtige Nicht-KI-Funktionen zu verlieren) und die vereinbarte Erwachsenen-Tabfolge \`Start · Quiz · Beiträge · Koran · Mehr\` verwenden. Keine leere AI-Registerkarte.
+
+**Eine optionale spätere islamische Wissens-/Lernassistenz ist NUR nach separater ausdrücklicher Freigabe denkbar und muss VOR jeglicher Aktivierung folgende Bedingungen erfüllen:**
+1. **Keine zwingenden laufenden Kosten:** idealerweise vollständig On-Device/offline, aber erst nach konkreter Prüfung von Modell-Lizenz, Speicherbedarf, Hardware-Abdeckung, App-Größe, Betriebskosten und Qualität. Eine Gratis-API mit Kontingent ist nicht automatisch dauerhaft kostenfrei.
+2. **Beleggebundene Inhalte:** nur kontrollierter, redaktionell freigegebener Qurʾān-/Sunnah-/Salaf-Quellenbestand mit exakter Fundstelle, ID/Version, Text-/Übersetzungsstatus und klarer Trennung von Originalzitat und Erläuterung. Nicht von sich aus Rechtsurteile, Hadith-Authentizität, Isnāde, Gelehrtenzitate oder arabische Belege erfinden.
+3. **Unsicherheitsgrenzen:** bei fehlendem nachprüfbarem Beleg offen sagen, dass eine zuverlässige Antwort nicht möglich ist; keine absolute Behauptung „100 % islamkonform“, „fehlerfrei“ oder „superintelligent“. Schwierige ʿAqīdah-/Fiqh-/Fatwa-Fragen nur soweit belegbar, sonst keine verbindliche Fatwa.
+4. **Nutzerorientierte Lerninteraktion:** Fragen beantworten, Lernquiz, Dialog-/Übungsmodus und eventuell Audio nur wenn sicher, verständlich, ausreichend intelligent und qualitätsgeprüft; vorerst sind traditionelle statische Inhalte, Suche und regelbasierte Quizfunktionen die Standardlösung.
+5. **Datenschutz und QA:** kein ungefragter Audio-/Textabfluss, keine Nutzungsüberwachung, Sicherheits- und Quellen-Audits, Sprach-/RTL-Prüfung, evaluiertes Antwortverhalten und freiwillige Aktivierung statt verpflichtender Einrichtung.
+6. **Projektgrenze:** Ein solcher Pilot ist **nicht** Teil dieses Motion-/UX-Auftrags. Darf nicht als Nebenprodukt von Work „einfach mit eingebaut“ werden. Vorher gesonderter Vorschlag mit tatsächlichen Kosten und Qualitätsnachweisen, anschließend explizite Genehmigung.
+
+**Für diesen Auftrag konkret:** Alle gewünschten UI-/UX-, Navigations-, Motion-, Audio-, Quellen-, Such- und Performanceverbesserungen **ohne generativen KI-Agenten in der App** realisieren. „Intelligent“ meint hier gute UX, zuverlässige lokale Suche und nachvollziehbare reguläre App-Logik. Die Motion-Entwicklung braucht keinerlei KI-API.
+
 ### 1. REPOSITORY-/PLATTFORM-VERTRAG
 Repository: https://github.com/Sero91ak/dar-al-tawhid-site
 Default-Branch: main. **DARNext liegt nach erster Prüfung auf separaten Entwicklungsbranches**, beispielsweise:
@@ -26,7 +45,7 @@ Zu prüfen:
 - DARNext/Features/Dashboard/DashboardView.swift
 - DARNext/DesignSystem/Tokens/DARTheme.swift
 - DARNext/DesignSystem/Components/
-- DARNext/Features/{Quran,Posts,Quiz,Dua,Library,Search,Prayer,Qibla,Assistant,Audio}/
+- DARNext/Features/{Quran,Posts,Quiz,Dua,Library,Search,Prayer,Qibla,Assistant,Audio}/ (Assistant ausschließlich zur Bestands- und Kostenprüfung, **nicht** zur neuen In-App-KI-Entwicklung)
 - DARNext/Data/, DARNext/Domain/, DARNextTests/, DARNextUITests/
 - vorhandene Xcode Targets, XCAssets, Build-Schemes, deployment targets, CI und konkrete Referenz-PRs, insbesondere PR #1487
 
@@ -80,7 +99,7 @@ Startwerte als UX-Richtlinien, nicht unüberprüfbare Erfolgsgarantien: Press 10
 
 **Suche:** native Suche als Overlay/Sheet oder passende eigene Route, Fokus und Tastatur stabil, schnelle Ergebnisse, leere/offline/Fehlerzustände, Rückkehr zur vorherigen Stelle.
 
-**Navigation:** bestehende Hauptnavigation erhalten und mit Nutzervorgabe **Start · Quiz · Beiträge · Koran · Mehr** abgleichen. In geprüftem DARNext-Branch war noch Start · Qurʾān · Beiträge · AI · Mehr sichtbar; diese Diskrepanz vor Implementierung auflösen. PR #1487 vorbereitet, aber nach letzter Prüfung noch offen und nicht als gerätegeprüft belegt. Kein doppelter Tabbar-/Web-Navigationslayer.
+**Navigation:** bestehende Hauptnavigation erhalten und mit Nutzervorgabe **Start · Quiz · Beiträge · Koran · Mehr** abgleichen. In geprüftem DARNext-Branch war noch Start · Qurʾān · Beiträge · AI · Mehr sichtbar; die AI-Registerkarte nicht als kostenpflichtigen oder ungeprüften Assistenten ausliefern. Diese Diskrepanz vor Implementierung auflösen. PR #1487 vorbereitet, aber nach letzter Prüfung noch offen und nicht als gerätegeprüft belegt. Kein doppelter Tabbar-/Web-Navigationslayer.
 
 ### 6. RESPONSIVE / INKLUSIVE QUALITÄTSREGEL
 iPhone kompakt/groß, iPad Portrait/Querformat, Split View und echte Fold-/Duo-Pane-Breiten nach vorhandenem Vertrag: layout nach **verfügbarer Breite**, nicht Modellnamen. Safe Areas, Keyboard, dynamische Schriftgröße, VoiceOver, Voice Control, Kontrast, Touch-Flächen, Landscape, arabisches/soranisches RTL, Scroll-Konflikte und Rückgesten testen.
@@ -93,7 +112,7 @@ iPhone kompakt/groß, iPad Portrait/Querformat, Split View und echte Fold-/Duo-P
 - Erst Messwerte erheben: Kaltstart, Zeit bis Interaktivität, Scroll- und Transition-Flüssigkeit, Speicher, CPU/Energie, Audio-Stabilität; Xcode Instruments und echte Simulator-/Geräte-Prüfung. 60 Hz/120 Hz dynamisch wo Hardware ermöglicht; keine harte FPS-Behauptung ohne Messung.
 - Keine SwiftUI-Monolith-Views ohne Aufteilung; keine kopierten Designwerte. Komponenten und Tokens zentral; Routing-Owner bleibt verantwortlich.
 - Kein gleichzeitiges Animieren hunderter Elemente; ressourcenschonende Lazy-Container; identitätsstabile Bilder, Caching und strukturiertes Task-Cancellation.
-- Keine neuen Paid-Abhängigkeiten ohne Nutzen-/Lizenz-/Sicherheitsprüfung. Apple-native Lösungen bevorzugen; Rive nur selektiv, optional und nach Abwägung.
+- **Keine neuen verpflichtenden Paid-Abhängigkeiten oder Cloud-AI-/Token-/Credit-Kosten.** Apple-native Lösungen bevorzugen; Rive nur als optionale, gesondert freizugebende Alternative und nicht als Voraussetzung. Kostenlos verfügbare Lösungen sind bevorzugt.
 - Accessibility als Teil der Komponenten, nicht Nacharbeit.
 - Bestehende UI-Test-Dateien enthalten teilweise Xcode-Vorlage: echte assertion-basierte UI-Tests ergänzen (Tap→Detail→Zurück, Suchsheet, Reduzierte Bewegung, XXL-Schrift, RTL, Tabs, Audio bleibt aktiv).
 - Screenshots/kurze Simulator-Aufnahmen und vorher/nachher-Vergleiche pro Feature. CI/SwiftLint/XCTest/xcodebuild nur dann als „bestanden“ melden, wenn ausgeführt, mit Kommando, Gerät und Ergebnis. Kann Xcode hier nicht ausgeführt werden: genau als „nicht geprüft“ kennzeichnen und ausführbare lokale Schritte liefern.
