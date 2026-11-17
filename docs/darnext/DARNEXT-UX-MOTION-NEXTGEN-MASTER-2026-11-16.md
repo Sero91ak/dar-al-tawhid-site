@@ -28,6 +28,16 @@ Du arbeitest am bestehenden Produkt **DAR NEXT**, das nach erfolgreicher Abnahme
 
 **Für diesen Auftrag konkret:** Alle gewünschten UI-/UX-, Navigations-, Motion-, Audio-, Quellen-, Such- und Performanceverbesserungen **ohne generativen KI-Agenten in der App** realisieren. „Intelligent“ meint hier gute UX, zuverlässige lokale Suche und nachvollziehbare reguläre App-Logik. Die Motion-Entwicklung braucht keinerlei KI-API.
 
+### 0b. BEDINGTE ENTWICKLUNGSFREIGABE (17.11.2026) – DĀR INTELLIGENCE ALS EIGENER QUALITÄTS-TRACK
+**Neuere Präzisierung der Nutzerabsicht, ersetzt den pauschalen „in der App nicht beauftragt“-Teil von 0a nur hinsichtlich Forschung/Prototyp. Die Paid-API- und Live-Sperre bleibt bestehen.**
+
+Der Nutzer wünscht nun ausdrücklich eine **hochintelligente, adaptive, quellengebundene islamische Gesprächsassistenz** in der künftigen DAR-NEXT-App, **wenn** überprüfbare Gesprächs-, Lern-, Quellen- und Qualitätsanforderungen erfüllt werden und **keine verpflichtenden zusätzlichen KI-Kosten** entstehen. **Konzept, technischer Bestandsaudit und isolierte kostenlose On-Device-Prototypen sind beauftragt.** Nicht freigegeben: kostenpflichtige Anbieter, versteckte Cloud-LLM-Endpunkte, öffentlich aktivierter AI-Tab, automatische App-Store-Auslieferung oder die Behauptung, alle islamischen Fragen sicher beantworten zu können.
+
+Verbindliches separates Issue: **[#1791](https://github.com/Sero91ak/dar-al-tawhid-site/issues/1791)**.
+Vollständiger Assistenz-Blueprint: **[DAR-INTELLIGENCE-ASSISTANT-BLUEPRINT-2026-11-17.md](DAR-INTELLIGENCE-ASSISTANT-BLUEPRINT-2026-11-17.md)**.
+
+**Warum getrennt vom Motion-Auftrag?** Native Motion und Kartenübergänge müssen weiterentwickelt werden, auch wenn ein lokal ausgeführtes Sprachmodell die redaktionelle Qualitäts- oder Geräteprüfung nicht besteht. Der Forschungsstrang darf vorhandene Architektur nicht zurückbauen und keine Zusatzkosten erzeugen. Bei unzureichender Modellqualität bleibt eine deutlich als quellengebundene Suche/Lernassistenz gekennzeichnete sichere Variante verfügbar.
+
 ### 1. REPOSITORY-/PLATTFORM-VERTRAG
 Repository: https://github.com/Sero91ak/dar-al-tawhid-site
 Default-Branch: main. **DARNext liegt nach erster Prüfung auf separaten Entwicklungsbranches**, beispielsweise:
