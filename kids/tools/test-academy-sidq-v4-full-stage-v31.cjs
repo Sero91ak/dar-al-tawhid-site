@@ -31,7 +31,10 @@ for(let lane=0;lane<stages.length;lane++){
   assert.equal(item.voiceId,"DkU7j9uO4ZEtLD2iRZSH",text);
   assert.equal(item.voiceSettingsProfile,"kids_story",text);
   assert.equal(item.approvedForPlayback,false,text);
-  assert.match(item.qaStatus,/technical-passed/,text);
+  if(lane===2){
+   assert.ok(["owner-fusha-pronunciation-hold-unreviewed","owner-rejected-reference-numbers-and-fusha"].includes(item.qaStatus),"Fuṣḥā-sensitive clip must remain explicitly held or rejected: "+text);
+   assert.equal(item.ownerPronunciationHold,true,text);
+  }else assert.match(item.qaStatus,/technical-passed/,text);
   assert.equal(item.pronunciationDictionaryAppliedByBackend,false,text);
   assert.match(item.url,/^\/kids\/assets\/kids-academy-audio\/[a-f0-9]{20}\.m4a$/,"Exact canonical audio URL");
   const audio=path.join(ROOT,item.url.slice(1));
