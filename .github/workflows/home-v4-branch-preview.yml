@@ -1,10 +1,10 @@
-name: Deploy HOME V4 editorial feature preview (isolated Worker)
+name: Deploy HOME V5 editorial feature preview (isolated Worker)
 
 on:
   workflow_dispatch:
   push:
     branches:
-      - feature/home-editorial-v4-apple-tv-20261118
+      - feature/home-editorial-v5-20261118
     paths:
       - home-device/**
       - .github/workflows/home-v4-branch-preview.yml
@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: dar-home-editorial-v4-preview
+  group: dar-home-editorial-v5-preview
   cancel-in-progress: true
 
 jobs:
@@ -22,13 +22,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
-      - name: Checkout isolated HOME V4 feature branch
+      - name: Checkout isolated HOME V5 feature branch
         uses: actions/checkout@v4
         with:
-          ref: feature/home-editorial-v4-apple-tv-20261118
+          ref: feature/home-editorial-v5-20261118
           persist-credentials: false
           sparse-checkout: |
             home-device
+            home-v5.css
             content/home
 
       - name: Prepare isolated static HOME preview
@@ -43,6 +44,7 @@ jobs:
           cp home-device/home-v3.css .home-preview-dist/home-v3.css
           cp home-device/home-v4.js .home-preview-dist/home-v4.js
           cp home-device/home-v4.css .home-preview-dist/home-v4.css
+          cp home-v5.css .home-preview-dist/home-v5.css
           cp content/home/device-config.json .home-preview-dist/content/home/device-config.json
           cat > .home-preview-worker.mjs <<'WORKER'
           const base = 'https://dar-al-tawhid.de';
@@ -90,7 +92,8 @@ jobs:
           node --check .home-preview-worker.mjs
           node --check .home-preview-dist/home-v3.js
           node --check .home-preview-dist/home-v4.js
-          node -e 'const s=require("fs").readFileSync(".home-preview-dist/index.html","utf8");const js=s.split("<script>")[1]?.split("</script>")[0];if(!js)throw Error("missing HOME inline script");new Function(js);if(!s.includes("/home-v4.js?v=4.0")||!s.includes("/home-v4.css?v=4.0"))throw Error("V3 assets not referenced");console.log("HOME V4 scripts and asset links valid");'
+          test -s .home-preview-dist/home-v5.css
+          node -e 'const s=require("fs").readFileSync(".home-preview-dist/index.html","utf8");const js=s.split("<script>")[1]?.split("</script>")[0];if(!js)throw Error("missing HOME inline script");new Function(js);if(!s.includes("/home-v4.js?v=4.0")||!s.includes("/home-v4.css?v=4.0")||!s.includes("/home-v5.css?v=5.0"))throw Error("V3 assets not referenced");console.log("HOME V5 scripts and asset links valid");'
           node -e 'const h=require("fs").readFileSync(".home-preview-dist/index.html","utf8");if(!h.includes("DĀR AL TAWḤĪD HOME"))process.exit(1);console.log("HOME kiosk HTML preview present");'
 
       - name: Deploy ONLY dar-home-kiosk-preview Worker
@@ -107,7 +110,7 @@ jobs:
         env:
           PREVIEW_URL: ${{ steps.deploy.outputs.deployment-url }}
         run: |
-          echo "## DĀR HOME Kiosk V2 – isolated preview" >> "$GITHUB_STEP_SUMMARY"
+          echo "## DĀR HOME V5 – isolated preview" >> "$GITHUB_STEP_SUMMARY"
           echo "Existing website, main site worker, Kids, iOS and tvOS were not deployed." >> "$GITHUB_STEP_SUMMARY"
-          echo "HOME source branch: feature/home-editorial-v4-apple-tv-20261118" >> "$GITHUB_STEP_SUMMARY"
+          echo "HOME source branch: feature/home-editorial-v5-20261118" >> "$GITHUB_STEP_SUMMARY"
           echo "URL: ${PREVIEW_URL:-Consult Cloudflare Workers deployment log}" >> "$GITHUB_STEP_SUMMARY"
