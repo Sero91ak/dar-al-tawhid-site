@@ -1,0 +1,203 @@
+/* DĀR HOME V4 · EDITORIAL AMBIENT DESIGN
+  Apple-TV-content-contract-inspired composition: one continuous photographic canvas,
+  architectural separators, large type, interaction surfaces only when actionable.
+  Overrides V2/V3 styles without modifying shared product UI. */
+:root{--home4-hair:rgba(235,207,147,.45);--home4-paper:#f6f0e3}
+html,body{overscroll-behavior:none}
+#app {isolation:isolate;--fine:var(--home4-hair);--cream:var(--home4-paper)}
+#app::before {
+  z-index:-1!important;
+  background:linear-gradient(90deg,rgba(0,15,19,.84),rgba(0,20,24,.47) 49%,rgba(0,18,22,.78)),
+    linear-gradient(180deg,rgba(0,8,13,.4),transparent 18%,transparent 56%,rgba(0,12,15,.77) 94%)!important;
+}
+#app .artwork{opacity:.05;mix-blend-mode:soft-light}
+#app .lightgrading{opacity:.16}
+#app .edge,#app .corner{display:none!important}
+#app .screen {
+  grid-template-rows:auto minmax(0,1.25fr) auto minmax(0,.82fr) auto!important;
+  gap:clamp(6px,1.15vh,15px)!important;
+  padding:clamp(16px,2.6vh,34px) clamp(23px,4vw,80px) clamp(13px,2vh,24px)!important;
+}
+#app header{background:transparent}
+#app .top {align-items:center;min-height:clamp(51px,6.6vh,76px)}
+#app .brand-title {font-size:clamp(19px,2vw,33px);letter-spacing:.19em;line-height:1.15}
+#app .brand-mini{letter-spacing:.34em;font-size:clamp(8px,.75vw,11px)}
+#app .logo-mark{width:clamp(46px,4vw,61px);height:clamp(46px,4vw,61px);background:transparent;box-shadow:none;border:0;border-radius:0}
+#app .logo-mark img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 2px 12px rgba(0,0,0,.25))}
+#app .site .site-name {color:#f5f0e4;font-size:clamp(12px,1vw,16px)}
+#app .site .date {color:#d2d9cd}
+#app .now {font-size:clamp(28px,2.7vw,44px);letter-spacing:.04em}
+#app .top-rule {border:0;height:1px;background:linear-gradient(90deg,rgba(220,180,112,.82),rgba(218,196,149,.42) 65%,transparent);margin-top:clamp(8px,1.15vh,16px)}
+#app .time-box {gap:clamp(12px,1.3vw,24px)}
+#app .topbtn {width:clamp(44px,4vw,57px);height:clamp(44px,4vw,57px);border:1px solid rgba(231,205,152,.62);border-radius:15px;background:rgba(10,29,29,.68);box-shadow:inset 0 1px rgba(255,250,229,.15)}
+#app .topbtn:focus-visible,#app .topbtn:hover{outline:2px solid #f9eac1;outline-offset:3px}
+#app .hero{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:clamp(18px,3vw,63px);align-items:center;min-height:0}
+#app .hero-left,#app .hero-right {
+  background:transparent!important;border:0!important;border-radius:0!important;
+  box-shadow:none!important;backdrop-filter:none!important;
+  padding:clamp(4px,1.1vw,17px) clamp(4px,1.2vw,20px)!important;
+  position:relative;isolation:isolate
+}
+#app .hero-left {justify-content:center;padding-left:0!important;padding-right:clamp(15px,2.1vw,36px)!important}
+#app .hero-left::before {
+  content:"";position:absolute;inset:-7% 5% -5% -15%;z-index:-1;
+  background:radial-gradient(ellipse at 25% 48%,rgba(0,16,19,.76),rgba(0,16,18,.16) 67%,transparent 85%);pointer-events:none
+}
+#app .hero-right {
+  border-left:1px solid var(--home4-hair)!important;
+  padding-left:clamp(26px,3vw,64px)!important;
+  text-align:center
+}
+#app .hero-right::before{content:"";position:absolute;inset:-15% -14% -15% 4%;z-index:-1;background:radial-gradient(ellipse,rgba(0,16,22,.7),rgba(0,19,21,.1) 70%,transparent);pointer-events:none}
+#app .overline{font-size:clamp(10px,1.05vw,16px);font-weight:650;letter-spacing:.27em;color:#e9cf97;text-transform:uppercase;display:flex;align-items:center;gap:14px}
+#app .overline::before{content:"";display:block;width:clamp(20px,2vw,35px);height:1px;background:var(--gold)}
+#app .next-name{font-size:clamp(65px,8.8vw,146px);font-weight:500;line-height:.95;margin:clamp(13px,2vh,25px) 0 clamp(10px,2vh,22px);text-shadow:0 6px 25px rgba(0,0,0,.65);letter-spacing:-.035em}
+#app .next-row{align-items:baseline;gap:clamp(16px,2.5vw,40px)}
+#app .main-time{font-size:clamp(48px,5.4vw,88px);line-height:1.05;text-shadow:0 4px 24px #001a1acc;font-variant-numeric:tabular-nums}
+#app .counter{font-size:clamp(10px,1.15vw,17px);color:#e4e5d9;white-space:nowrap}
+#app .countnum{font-variant-numeric:tabular-nums;letter-spacing:.08em}
+#app .next-arabic{font-size:clamp(23px,2.65vw,39px);color:#f5d995;margin-top:clamp(8px,1.3vh,18px);line-height:1.35;text-shadow:0 4px 15px #00181b}
+#app .bismillah{font-size:clamp(28px,3vw,47px);line-height:1.6;text-shadow:0 5px 22px #001b1d}
+#app .botanical-line {margin:clamp(8px,1vh,14px) 0}
+#app .hero-verse{font-size:clamp(24px,2.75vw,43px);line-height:1.6;max-height:none;color:#f4e4bd;text-shadow:0 4px 15px #00191c}
+#app .hero-caption{font-size:clamp(14px,1.35vw,22px);line-height:1.5;color:#f5edda;text-shadow:0 3px 10px #001519}
+#app .times-band {
+  border:0!important;border-top:1px solid rgba(236,204,139,.7)!important;border-bottom:1px solid rgba(236,204,139,.65)!important;
+  border-radius:0!important;box-shadow:none!important;background:rgba(0,19,24,.45)!important;
+  padding:clamp(8px,1.1vh,16px) 0 clamp(10px,1.35vh,19px)!important
+}
+#app .band-head{font-size:clamp(11px,1vw,15px);letter-spacing:.18em;margin-bottom:clamp(8px,1.4vh,14px);color:#e2c58b}
+#app .prayer-cell {border:0!important;border-right:1px solid rgba(230,200,139,.42)!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;min-height:clamp(52px,7vh,88px)}
+#app .prayer-cell:last-child{border-right:0!important}
+#app .prayer-cell.active{background:linear-gradient(180deg,transparent,rgba(229,197,128,.16))!important}
+#app .prayer-cell:hover,#app .prayer-cell:focus-visible{background:rgba(228,198,130,.14)!important;outline-offset:-2px}
+#app .prayer-cell.active::after{width:clamp(10px,1.2vw,20px);height:2px;border-radius:0}
+#app .prayer-cell .pname{font-size:clamp(13px,1.18vw,20px);color:#eae5d5;letter-spacing:.06em;text-shadow:0 3px 11px #011d22}
+#app .prayer-cell .ptime{font-size:clamp(28px,3.1vw,51px);color:#f7f3e7;text-shadow:0 5px 14px #011c21}
+#app .prayer-cell.active .pname,#app .prayer-cell.active .ptime{color:#f5d694}
+#app .prayer-glyph{width:clamp(20px,2.4vw,33px);height:clamp(20px,2.4vw,33px)}
+#app .daily-area{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:0;min-height:0;align-items:stretch}
+#app .daily-story,#app .audio-area{
+  border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;
+  padding:clamp(12px,1.75vw,31px) clamp(16px,2.5vw,41px)!important;overflow:visible;
+  min-height:0;display:flex;flex-direction:column;justify-content:center
+}
+#app .daily-story{padding-left:0!important;padding-right:clamp(18px,3.5vw,58px)!important}
+#app .audio-area{border-left:1px solid rgba(232,198,130,.58)!important;padding-left:clamp(22px,3vw,50px)!important;padding-right:0!important}
+#app .daily-story::before,#app .audio-area::before{content:"";position:absolute;z-index:-1;pointer-events:none}
+#app .daily-label,#app .audio-kicker{font-size:clamp(10px,1vw,15px);font-weight:650;letter-spacing:.23em;color:#f2d596}
+#app .daily-title{font-size:clamp(21px,2.4vw,39px);line-height:1.63;text-align:start;direction:rtl;max-height:3.2em;color:#f5f0df;text-shadow:0 3px 16px rgba(0,0,0,.8)}
+#app .daily-title[dir="ltr"]{direction:ltr;font-family:var(--display);font-size:clamp(16px,1.9vw,29px);line-height:1.38}
+#app .daily-de{font-size:clamp(13px,1.35vw,23px);line-height:1.35;text-shadow:0 3px 8px #001a1c;font-family:var(--display)}
+#app .source{font-size:clamp(10px,.9vw,14px);color:#d9d7c7;letter-spacing:.05em}
+#app .audio-title{font-size:clamp(27px,3vw,51px);margin:clamp(5px,.8vh,14px) 0}
+#app .audio-sub{font-size:clamp(11px,1.1vw,16px);color:#dbd8c8}
+#app .audio-controls{margin-top:clamp(8px,1.35vh,20px)}
+#app .round{border:1px solid rgba(238,207,143,.64)!important;background:rgba(0,23,26,.56)!important;border-radius:50%!important}
+#app .round.primary{background:linear-gradient(135deg,#e8d6a2,#bb9860)!important;color:#061d23!important}
+#app .foot{justify-content:flex-start;border-top:1px solid rgba(220,195,137,.25)!important;padding-top:clamp(5px,1vh,13px);min-height:clamp(17px,2.6vh,30px)}
+#app .foot .status{display:flex!important;max-width:none;font-size:clamp(9px,.8vw,13px);opacity:.83}
+#app .footnav{display:none!important}
+#app #saver::before{background:linear-gradient(180deg,rgba(0,13,20,.52),rgba(0,15,19,.35) 45%,rgba(0,15,19,.82))!important}
+#app #saver .saver-content{background:none!important;border-radius:0!important;padding:0!important;max-width:min(1120px,88vw);gap:clamp(10px,2vh,31px);text-shadow:0 5px 19px #001417;position:relative}
+#app #saver .saver-content::before{content:"";position:absolute;inset:-9% -15%;z-index:-1;background:radial-gradient(ellipse at center,rgba(0,15,19,.78),transparent 75%);pointer-events:none}
+#app #saver .saver-ar{font-size:clamp(34px,5vw,85px);line-height:1.62;max-height:42vh}
+#app #saver .saver-de{font-size:clamp(21px,2.6vw,45px);line-height:1.43;max-height:30vh}
+#app #saver .saver-source{color:#e5d9be;font-size:clamp(12px,1.2vw,19px)}
+#app #saver .saver-bottom{border-top:1px solid rgba(227,200,141,.65);background:none;padding-top:clamp(12px,2vh,28px)}
+#app #adhanVisual{background-color:#061b21;background-position:center;background-size:cover}
+#app #adhanVisual::before{background:linear-gradient(90deg,rgba(0,13,18,.83),rgba(0,14,18,.36) 65%,rgba(0,14,18,.8))!important}
+#app #adhanVisual .adhan-symbol{color:#efd49b;text-shadow:0 4px 22px #061419}
+#app #adhanVisual .adhan-title{font-size:clamp(54px,7vw,117px)!important;letter-spacing:.02em;line-height:1.05}
+#app #adhanVisual .adhan-sub{font-size:clamp(16px,1.5vw,24px);color:#f5eedc}
+#app #adhanVisual .h4-prayer-image{position:absolute;right:4.5vw;bottom:8%;width:min(29vw,410px);height:min(48vh,380px);object-fit:contain;z-index:0!important;opacity:.28;filter:drop-shadow(0 8px 40px rgba(0,0,0,.6));pointer-events:none}
+#app #adhanVisual .touchbutton{background:rgba(9,30,30,.7);border:1px solid #d7c494;border-radius:13px}
+#app #settingsOverlay{background:rgba(5,18,22,.96)!important;backdrop-filter:blur(21px)}
+#app .settings-frame{background:linear-gradient(145deg,rgba(4,27,29,.99),rgba(2,17,22,.98))!important;gap:clamp(12px,1.5vw,25px);grid-template-columns:minmax(180px,21%) minmax(0,1fr)}
+#app .settings-top{border-bottom:1px solid rgba(234,197,127,.52);padding-bottom:clamp(10px,1.1vh,18px)}
+#app .settings-top h2{font-size:clamp(31px,3.4vw,58px);font-weight:500}
+#app .settings-tabs{border-right:1px solid rgba(230,196,131,.33);padding:clamp(8px,1vw,19px) clamp(9px,1.5vw,20px) 0 0;gap:0}
+#app .settings-tabs button{
+  background:transparent!important;border:0!important;border-bottom:1px solid rgba(237,204,140,.24)!important;
+  border-radius:0!important;box-shadow:none!important;min-height:clamp(54px,6.6vh,83px);font-size:clamp(12px,1.1vw,17px);padding:10px 9px!important;
+  display:flex;align-items:center;gap:9px;text-align:left;color:#d3d7cd
+}
+#app .settings-tabs button.on{background:linear-gradient(90deg,rgba(221,189,130,.13),transparent)!important;border-bottom-color:#dbbc7b!important;color:#f9e8be}
+#app .settings-tabs .settings-icons{width:25px;height:25px;flex:none;margin:0}
+#app .tabpage{padding:clamp(10px,1.3vw,24px)!important;overflow:auto;scrollbar-width:thin}
+#app .tabpage.on{gap:clamp(14px,1.8vw,27px)}
+#app .setting-grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(20px,3vw,58px);row-gap:0}
+#app .field{
+  border:0!important;border-bottom:1px solid rgba(219,189,125,.35)!important;
+  border-radius:0!important;background:transparent!important;padding:clamp(14px,1.45vw,24px) 0!important;
+  min-height:70px
+}
+#app .field label{font-size:clamp(12px,1vw,16px);color:#e6cf9d}
+#app .field input,#app .field select{
+  background:rgba(3,23,27,.65)!important;border:1px solid rgba(212,186,131,.34)!important;
+  border-radius:11px!important;min-height:48px;color:#f7f0e4!important;
+  font-size:clamp(13px,1.1vw,17px);padding:11px 13px
+}
+#app .field input:focus-visible,#app .field select:focus-visible,#app .secondary-action:focus-visible{outline:2px solid #f0d497;outline-offset:2px}
+#app .h3-section-title{font-size:clamp(25px,2.3vw,39px);border-bottom:1px solid rgba(224,192,129,.3);padding-bottom:12px}
+#app .setting-desc{font-family:var(--ui);font-size:clamp(13px,1.05vw,18px);line-height:1.6;color:#d9ddcf;max-width:900px}
+#app .savebar{background:transparent!important;border:0!important;border-top:1px solid rgba(234,200,137,.41)!important;border-radius:0!important;padding:12px 0!important}
+#app .savebar .savehint{font-size:clamp(10px,.9vw,14px);max-width:50%}
+#app .save-action{border-radius:11px;background:#d9c08b;color:#061e22}
+#app .wallpaper-option{background:rgba(9,29,30,.35)!important;border:1px solid rgba(229,200,136,.35)!important;border-radius:12px}
+#app .wallpaper-option[aria-pressed="true"]{border-color:#ecd19a!important;outline:1px solid #ecd19a}
+#app .wallpaper-option strong{font-size:clamp(12px,.95vw,15px)}
+#app .secondary-action{border-radius:11px;background:rgba(7,27,30,.68)!important;border:1px solid rgba(231,196,132,.51)!important;min-height:46px}
+#app[data-home-theme="light"]::before{background:linear-gradient(90deg,rgba(247,246,230,.94),rgba(242,239,220,.66),rgba(247,242,225,.95))!important}
+#app[data-home-theme="light"] .hero-left,#app[data-home-theme="light"] .hero-right,#app[data-home-theme="light"] .times-band,#app[data-home-theme="light"] .daily-story,#app[data-home-theme="light"] .audio-area{background:none!important;border-color:rgba(124,95,48,.5)!important}
+#app[data-home-theme="light"] .hero-left::before,#app[data-home-theme="light"] .hero-right::before{background:radial-gradient(ellipse,rgba(246,242,221,.8),transparent 80%)}
+#app[data-home-theme="light"] .hero-left *,#app[data-home-theme="light"] .hero-right *,#app[data-home-theme="light"] .daily-story *,#app[data-home-theme="light"] .audio-area *,#app[data-home-theme="light"] .prayer-cell *{color:#21372e;text-shadow:none}
+#app[data-home-theme="light"] .hero .overline,#app[data-home-theme="light"] .daily-label,#app[data-home-theme="light"] .audio-kicker{color:#86683a}
+#app[data-home-theme="light"] .top-rule{background:linear-gradient(90deg,#856640,rgba(124,95,48,.5),transparent)}
+#app[data-home-theme="light"] .band-head,#app[data-home-theme="light"] .site-name,#app[data-home-theme="light"] .brand-title,#app[data-home-theme="light"] .brand-mini,#app[data-home-theme="light"] .now{color:#30463d}
+#app[data-home-theme="light"] .settings-frame{background:#f7f3e7!important}
+#app[data-home-theme="light"] .settings-tabs button{color:#3e5348}
+#app[data-home-theme="light"] .settings-tabs button.on{color:#7a5b2f}
+#app[data-home-theme="light"] .setting-desc,#app[data-home-theme="light"] .field label,#app[data-home-theme="light"] .settings-top h2,#app[data-home-theme="light"] .h3-section-title{color:#2c443a}
+#app[data-home-theme="light"] .field input,#app[data-home-theme="light"] .field select{background:rgba(255,255,251,.95)!important;color:#21382f!important}
+#app[data-home-theme="light"] .secondary-action{background:#f5f0e2!important;color:#263d34}
+@media(max-height:700px){
+ #app .screen{grid-template-rows:auto minmax(0,1.05fr) auto minmax(0,.95fr) auto!important;gap:5px!important}
+ #app .hero{min-height:0}
+ #app .hero-left,#app .hero-right{padding-top:2px!important;padding-bottom:2px!important}
+ #app .next-name{font-size:clamp(55px,7.4vw,100px);margin:6px 0}
+ #app .main-time{font-size:clamp(40px,4.8vw,68px)}
+ #app .bismillah{font-size:clamp(21px,2.6vw,35px)}
+ #app .hero-caption{font-size:clamp(11px,1.1vw,17px)}
+ #app .prayer-cell{min-height:40px}
+ #app .prayer-glyph{display:none}
+ #app .prayer-cell .ptime{font-size:clamp(23px,2.7vw,38px)}
+ #app .times-band{padding:4px 0 5px!important}
+ #app .daily-story,#app .audio-area{padding-top:6px!important;padding-bottom:6px!important}
+ #app .daily-title{font-size:clamp(17px,2vw,27px);-webkit-line-clamp:1}
+ #app .daily-de{font-size:clamp(11px,1.1vw,17px)}
+ #app .audio-title{font-size:clamp(22px,2.45vw,32px)}
+ #app .foot{min-height:14px}
+}
+@media(max-width:950px) and (orientation:landscape){
+ #app .hero-right .hero-verse{display:none}
+ #app .hero-right{padding-left:clamp(12px,2vw,28px)!important}
+ #app .site .date{display:none}
+ #app .setting-grid{grid-template-columns:1fr}
+ #app .settings-frame{grid-template-columns:minmax(140px,24%) minmax(0,1fr)}
+}
+@media(orientation:portrait){
+ #app .screen{grid-template-rows:auto minmax(0,1fr) auto auto auto!important}
+ #app .hero{grid-template-columns:1fr}
+ #app .hero-left{text-align:center;padding:0!important}
+ #app .hero-right{display:none}
+ #app .times-band{padding:12px 0!important}
+ #app .daily-area{grid-template-columns:1fr}
+ #app .daily-story{padding:15px 0!important;border-bottom:1px solid var(--home4-hair)!important}
+ #app .audio-area{border-left:0!important;padding:15px 0!important}
+ #app .settings-frame{grid-template-columns:1fr;grid-template-rows:auto auto minmax(0,1fr) auto;grid-template-areas:"head" "nav" "page" "foot"}
+ #app .settings-tabs{border-right:0;display:flex;flex-direction:row;overflow-x:auto}
+ #app .settings-tabs button{white-space:nowrap;flex:none}
+ #app .setting-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){#app *{animation:none!important;transition:none!important}}
