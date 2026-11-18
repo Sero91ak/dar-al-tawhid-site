@@ -9,6 +9,17 @@ body.fw-learning-page{margin:0;background:var(--fw-bg);color:var(--fw-ink);font-
 .fw-overline{margin:0;color:var(--fw-gold);font-size:11px;font-weight:800;letter-spacing:.04em;text-align:center}
 .fw-title{margin:0;color:var(--fw-ink);font:700 clamp(18px,4.5vw,27px)/1.2 Georgia,serif;text-align:center;text-wrap:balance;overflow-wrap:break-word}
 .fw-subtitle{margin:0;color:var(--fw-sub);font-size:12px;text-align:center}
+.fw-reading-reference{margin:4px 0 0;border:1px solid var(--fw-line);border-radius:14px;background:var(--fw-card);color:var(--fw-ink);overflow:hidden}
+.fw-reading-toggle{display:block;cursor:pointer;padding:12px 14px;font-size:13px;font-weight:750;color:var(--fw-main);background:var(--fw-opt);list-style:none}
+.fw-reading-toggle::-webkit-details-marker{display:none}
+.fw-reading-toggle::after{content:"⌄";float:inline-end;margin-inline-start:10px;font-weight:750;color:var(--fw-gold)}
+.fw-reading-reference[open] .fw-reading-toggle{border-bottom:1px solid var(--fw-line)}
+.fw-reading-reference[open] .fw-reading-toggle::after{content:"⌃"}
+.fw-reading-reference section{padding:8px 14px 0}
+.fw-reading-reference section:last-child{padding-bottom:13px}
+.fw-reading-label{margin:4px 0;color:var(--fw-gold);font-size:11px;line-height:1.4;font-weight:800}
+.fw-reading-body{margin:0 0 7px;color:var(--fw-ink);font-size:clamp(13px,3.2vw,15px);line-height:1.55;overflow-wrap:break-word;white-space:pre-line}
+.fw-reading-toggle:focus-visible{outline:3px solid var(--fw-gold);outline-offset:-3px}
 .fw-count{margin-top:8px;color:var(--fw-gold);font-size:12px;font-weight:800;letter-spacing:.03em}
 .fw-progress{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
 .fw-progress i{height:5px;border-radius:12px;background:var(--fw-line);opacity:.36}
