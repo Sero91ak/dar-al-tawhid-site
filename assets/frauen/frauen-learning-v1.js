@@ -63,8 +63,30 @@ function message(msg){clear();q.append(elem("p","fw-message",msg))}
 function safeJson(response){if(!response.ok)throw Error("HTTP "+response.status);return response.json()}
 var entryIds,entries,entry,sourceUrl,sourceStatus,stage=0,correct=0,answered=false,items=[];
 function bottomLink(){var a=elem("a","fw-link",lab.back);a.href="/#frauen/"+encodeURIComponent(entry.area)+"/"+encodeURIComponent(id);a.target="_top";return a}
+var READ_LABELS={
+ de:"Die vollständige Aussage erneut lesen",ar:"إعادة قراءة النص الكامل",en:"Read the complete statement again",
+ tr:"Tam açıklamayı yeniden oku",ku:"Gotina tevahî dîsa bixwîne",ckb:"دووبارە خوێندنەوەی دەقی تەواو",
+ bs:"Ponovo pročitaj cijeli tekst",fr:"Relire le texte complet",es:"Volver a leer el texto completo"
+};
 function core(){
  clear();q.append(elem("div","fw-brand","DĀR AL TAWḤĪD"),elem("p","fw-overline",lab.brand),elem("h1","fw-title",entry.locales[code].title),elem("p","fw-subtitle",lab.status));
+ // Optional full reading reference for learning, not a second contribution.
+ // The statement, lesson and editorial explanation come from the exact same
+ // language pack and original canonical ID as the main women reader.
+ var pack=entry.locales[code],labels=pack.labels||{};
+ var details=elem("details","fw-reading-reference");
+ var summary=elem("summary","fw-reading-toggle",READ_LABELS[code]);
+ details.append(summary);
+ [["fw-reading-statement",labels.statement,pack.statement],
+  ["fw-reading-lesson",labels.lesson,pack.lesson],
+  ["fw-reading-sharh",labels.sharh,pack.sharh],
+  ["fw-reading-source",labels.source,pack.source]].forEach(function(parts){
+   var row=elem("section",parts[0]);
+   row.append(elem("h3","fw-reading-label",parts[1]||lab.source),
+              elem("p","fw-reading-body",parts[2]));
+   details.append(row);
+  });
+ q.append(details);
 }
 function render(){
  core();
