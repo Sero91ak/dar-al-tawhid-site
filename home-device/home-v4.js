@@ -4,7 +4,7 @@
   const $=id=>document.getElementById(id);
   const NAMES={fajr:'Faǧr',dhuhr:'Ḍuhr',asr:'ʿAṣr',maghrib:'Maġrib',isha:'ʿIšāʾ'};
   const ROOT='https://dar-al-tawhid.de';
-  const MOTIF_BASE=ROOT+'/test/assets/prayer-motifs/';
+  const MOTIF_BASE='/media/apple-tv/adhan-';
   let current='';
 
   function findPrayerKey(){
@@ -24,9 +24,9 @@
     if(title)title.textContent=NAMES[name]+' · Aḏān';
     let image=$('h4PrayerArtwork');
     if(!image){image=document.createElement('img');image.id='h4PrayerArtwork';image.className='h4-prayer-image';image.alt='';image.setAttribute('aria-hidden','true');
-      image.addEventListener('error',()=>{if(image.dataset.fallback!=='yes'){image.dataset.fallback='yes';image.src=ROOT+'/kids/assets/kids-salah-v1262/cinematic-still.jpg'}else image.style.display='none'});adhan.prepend(image)}
+      image.addEventListener('error',()=>{if(image.dataset.fallback==='native'){image.dataset.fallback='web';image.src=ROOT+'/test/assets/prayer-motifs/'+(image.dataset.prayer||'fajr')+'.webp'}else if(image.dataset.fallback==='web'){image.dataset.fallback='kids';image.src=ROOT+'/kids/assets/kids-salah-v1262/cinematic-still.jpg'}else image.style.display='none'});adhan.prepend(image)}
     if(name!==current){
-      current=name;image.dataset.fallback='no';image.style.display='block';image.src=MOTIF_BASE+name+'.webp';
+      current=name;image.dataset.fallback='native';image.dataset.prayer=name;image.style.display='block';image.src=MOTIF_BASE+name+'.jpg';
       const t=document.querySelector('.prayer-cell[data-prayer="'+name+'"] .ptime')?.textContent?.trim();
       const sub=$('adhanInfo');if(sub && !sub.dataset.h4Augmented && t && /^[0-2][0-9]:[0-5][0-9]$/.test(t)){
         sub.textContent=NAMES[name]+' · '+t+' Uhr';sub.dataset.h4Augmented='true';
