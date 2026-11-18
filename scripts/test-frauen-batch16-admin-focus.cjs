@@ -19,6 +19,7 @@ const helpers={
   db[path]=JSON.parse(content);writes++;return {commit:{sha:"test-commit-"+writes}};
  }
 };
+(async()=>{
 const worker=fs.readFileSync(path.join(root,"cloudflare/focus-feed-admin.js"),"utf8");
 const mod=await import("data:text/javascript;base64,"+Buffer.from(worker).toString("base64"));
 const id="neufokus-frauenwissen-16-20261118",env={GITHUB_BRANCH:"main"};
@@ -54,3 +55,4 @@ const badInput={...input,targetId:"recent"};
 await assert.rejects(mod.saveFeedEntry(env,badInput,helpers),/Ziel muss der originale Frauenbereich sein/);
 assert.equal(writes,2);
 console.log("PASS DĀR Admin 48h launch: locked before all 16 live/reviewed, exact server timestamp, no extension after re-save, original women target only. No real publish.");
+})().catch(e=>{console.error(e.stack||e);process.exitCode=1});
