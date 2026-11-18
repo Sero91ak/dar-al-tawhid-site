@@ -51,6 +51,10 @@ jobs:
             '/test/assets/dar-3d-icons/dar-home-cinematic-hero.png',
             '/kids/assets/kids-home-v1191/hero-static-reference.jpg',
             '/test/assets/prayer-motifs/fajr.webp',
+            '/test/assets/prayer-motifs/dhuhr.webp',
+            '/test/assets/prayer-motifs/asr.webp',
+            '/test/assets/prayer-motifs/maghrib.webp',
+            '/test/assets/prayer-motifs/isha.webp',
           ]
           errors=[]
           for path in paths:
