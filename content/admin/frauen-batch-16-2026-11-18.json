@@ -232,7 +232,7 @@
     "type": "knowledge_woman",
     "title": "16 neue Frauenbeiträge · DĀR AL TAWḤĪD",
     "body": "16 neue quellenbelegte Beiträge über die Ṣaḥābiyyāt, die Mütter der Gläubigen und Frauenfiqh – in neun Sprachen.",
-    "destination": "https://dar-al-tawhid.de/#/frauen",
+    "destination": "https://dar-al-tawhid.de/#frauen",
     "sendStatus": "blocked-until-deployed-and-authorized",
     "audience": "verified woman AND adult-app AND knowledge-opt-in",
     "optInRequired": true,
@@ -286,7 +286,7 @@
     },
     "messageReview": "editorial drafts; native-language validation required before any send",
     "guardStatus": "not-authorized-not-sent",
-    "redirectMustOpen": "existing in-app women knowledge route #/frauen; preserve app navigation"
+    "redirectMustOpen": "existing canonical in-app women knowledge route #frauen; preserve app navigation and selected language"
   },
   "excluded": [
     "Kids",
