@@ -72,6 +72,7 @@ async function json(path){
 async function verifyPublished(){
  var manifest=await json("/assets/frauen/frauen-neufokus-v1.json");
  if(manifest.expectedCount!==16||manifest.items?.length!==16||manifest.focusId!==ID)return false;
+ if(new Set(manifest.items.map(function(x){return x&&x.id})).size!==16)return false;
  var groups={};for(var i=0;i<manifest.items.length;i++){
    var row=manifest.items[i];if(!row||!row.id||!row.sourceFile)return false;
    (groups[row.sourceFile]||(groups[row.sourceFile]=[])).push(row);
@@ -87,6 +88,30 @@ async function verifyPublished(){
        list[0].quellePrimaerId!==r.sourceId||list[0].direktnachweisUrl!==r.sourceUrl)return false;
    }
  }
+ // Public readiness requires all nine real language texts to be deployed, not
+ // just the German originals. If the app still serves an old catalog, the
+ // 48h card stays hidden even if the Admin feed was prematurely activated.
+ var localeCatalog=await json("/assets/frauen/frauen-entry-locales-v1.json");
+ var codes=["de","ar","en","tr","ku","ckb","bs","fr","es"];
+ if(!Array.isArray(localeCatalog.entryIds)||!localeCatalog.entries)return false;
+ for(var n=0;n<manifest.items.length;n++){
+   var item=manifest.items[n],p=localeCatalog.entries[item.id];
+   if(!localeCatalog.entryIds.includes(item.id)||!p||p.id!==item.id||
+      p.area!==item.area||p.sourceUrl!==item.sourceUrl)return false;
+   for(var z=0;z<codes.length;z++){
+     var code=codes[z],pack=p.locales&&p.locales[code];
+     if(!pack||!["title","statement","preview","lesson","sharh","source"].every(function(k){
+       return typeof pack[k]==="string"&&pack[k].trim().length>=5;
+     })||pack.dir!==((code==="ar"||code==="ckb")?"rtl":"ltr"))return false;
+   }
+ }
+ // The actual interactive learning destination must exist in the deployed
+ // environment. Do not promote a 16-card focus that opens a missing lesson.
+ var learning=await w.fetch("/lernen/frauen-wissen/?neufokus=1",{cache:"no-store",credentials:"same-origin"});
+ if(!learning.ok)return false;
+ var lessonHtml=await learning.text();
+ if(lessonHtml.indexOf('id="quiz"')<0||
+    lessonHtml.indexOf("frauen-learning-v1.js")<0)return false;
  return true;
 }
 async function refresh(force){
