@@ -26,9 +26,9 @@ No per-image licensing metadata was present in the source asset catalog. The sou
 
 ## Verification
 
-GitHub Actions browser QA passed in run 44374543846.
+GitHub Actions browser QA passed in run 44375045505.
 
-The run checks the 1024×600, 1280×800, 1600×900, 1920×1200, and 800×1280 layouts. It exercises appearance synchronization, long-content scrolling in both themes, automatic wallpaper selection, local asset loading, screensaver, Faǧr cinematic art, and persistence after reload.
+The run checks the 1024×600, 1280×800, 1600×900, 1920×1200, and 800×1280 layouts. It exercises appearance synchronization, long-content scrolling in both themes, automatic wallpaper selection, independent HOME and screensaver scenes, local asset loading, screensaver, Faǧr cinematic art, and preference persistence after reload.
 
 The isolated HOME preview was deployed to:
 
