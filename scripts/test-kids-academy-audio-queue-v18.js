@@ -87,4 +87,23 @@ assert.equal(originalStatus.publiclyReleased,false);
 require("node:child_process").execFileSync("node",[
   "kids/tools/test-academy-full-208-release-v1.cjs"
 ],{cwd:require("node:path").resolve(__dirname,".."),stdio:"inherit"});
+// Source-exact continuous production queue across ALL 66 existing lessons.
+// 142 remaining editorial-only slots never enter the child app's audio catalog.
+const academyNext=JSON.parse(require("node:child_process").execFileSync("python3",[
+  "kids/tools/academy-next-topic-production-v1.py","--status"
+],{cwd:require("node:path").resolve(__dirname,".."),encoding:"utf8"}));
+assert.equal(academyNext.lessonId,"sidq");
+assert.equal(academyNext.exactUniquePhrases,58);
+assert.equal(academyNext.remainingExistingTopicsIncludingCurrent,66);
+assert.equal(academyNext.futureEditorialOutlinesLocked,142);
+assert.equal(academyNext.newCreditsChargedByThisScript,0);
+const academyAll=JSON.parse(require("node:child_process").execFileSync("python3",[
+  "kids/tools/academy-next-topic-production-v1.py","--audit-all"
+],{cwd:require("node:path").resolve(__dirname,".."),encoding:"utf8"}));
+assert.equal(academyAll.curriculumLessonCount,66);
+assert.equal(academyAll.sourceBackedLessonCount,66);
+assert.equal(academyAll.firstLessonId,"sidq");
+assert.equal(academyAll.firstLessonExactPhrases,58);
+assert.equal(academyAll.additionalEditorialOutlinesLocked,142);
+assert.equal(academyAll.newTtsCreditsCharged,0);
 console.log("ACADEMY VOICE V18 PASS: exact Serhat-only matching, three valid staged clips and one quarantined old greeting, zero synthetic fallback, no credits.");
