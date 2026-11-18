@@ -21,4 +21,8 @@ assert.equal(validV4({voiceId:"different",url:"/fake",voiceProfileId:"serhat-own
  voiceSettingsProfile:"kids_story",sourceVoice:"authorized-owner-voice",sourceSpeaker:"Serhat Abu Malik",
  sameAsApprovedKidsStoryProfile:true}),false);
 assert.equal(normalize("A  B\nC"),"A B C");
+// The independent Python regression exercises the exact V4 Academy text preparation.
+require("node:child_process").execFileSync("python3",[
+  "kids/tools/test-academy-language-isolation-v1.py"
+],{cwd:require("node:path").resolve(__dirname,".."),stdio:"inherit"});
 console.log("ACADEMY VOICE V18 PASS: exact Serhat-only matching, three valid staged clips and one quarantined old greeting, zero synthetic fallback, no credits.");
