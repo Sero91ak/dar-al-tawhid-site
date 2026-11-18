@@ -110,6 +110,60 @@ export function filterPublicFeed(index) {
   return sortFeedItems((index?.items || []).filter((item) => isFeedPublic(item, now)));
 }
 
+const FRAUEN_NEUFOKUS_16_ID = "neufokus-frauenwissen-16-20261118";
+const FRAUEN_NEUFOKUS_DURATION = 48 * 60 * 60 * 1000;
+// This batch-specific rule uses the EXISTING Admin write gate and preserves all
+// other Feed entries. It never grants source, push or translation approval.
+async function verifyFrauenNeufokusPublication(env, helpers) {
+  const owner = env.GITHUB_OWNER || "Sero91ak", repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+  const branch = env.GITHUB_BRANCH || "main";
+  const get = async (filePath) => {
+    const file = await helpers.githubGet(env, owner, repo, filePath, branch);
+    if (!file?.content) throw feedError("Frauen-Neufokus: Quelldatei nicht verfügbar: " + filePath, 409);
+    try{return JSON.parse(helpers.base64ToUtf8(file.content))}
+    catch(_){throw feedError("Frauen-Neufokus: Quelldatei nicht lesbar: " + filePath, 409)}
+  };
+  const [batch, focus, locales] = await Promise.all([
+    get("content/admin/frauen-batch-16-2026-11-18.json"),
+    get("assets/frauen/frauen-neufokus-v1.json"),
+    get("assets/frauen/frauen-entry-locales-v1.json")
+  ]);
+  if(batch.state !== "published-live-verified" ||
+    batch.records?.length !== 16 || focus.items?.length !== 16 ||
+    focus.focusId !== FRAUEN_NEUFOKUS_16_ID) {
+    throw feedError("Frauen-Neufokus: 16er-Sammelveröffentlichung nicht vollständig live bestätigt", 409);
+  }
+  const ids = new Set(batch.records.map(x=>x.id));
+  if(ids.size !== 16 || focus.items.some(row => !ids.has(row.id)) ||
+     batch.records.some(row=>row.sourceReview!=="approved" ||
+       row.translationReview!=="approved" || row.uiQa!=="passed" || row.publishQa!=="passed")) {
+    throw feedError("Frauen-Neufokus: Quellen-, Sprach-, Geräte- oder Live-Freigabe fehlt", 409);
+  }
+  if(!Array.isArray(locales.entryIds))throw feedError("Frauen-Neufokus: Sprachkatalog fehlt",409);
+  const codes=["de","ar","en","tr","ku","ckb","bs","fr","es"];
+  for(const row of batch.records){
+    if(!locales.entryIds.includes(row.id)||locales.entries?.[row.id]?.sourceUrl!==row.sourceUrl ||
+      codes.some(code=>{
+        const e=locales.entries?.[row.id]?.locales?.[code];
+        return !e || !e.title || !e.statement || !e.lesson || !e.sharh || !e.source;
+      })){throw feedError("Frauen-Neufokus: Sprachfassung oder Quellennachweis fehlt",409)}
+  }
+  const paths=[...new Set(batch.records.map(x=>x.sourceFile))];
+  if(paths.length!==3 || paths.some(p=>!/^data\/frauen-[a-z0-9-]+\.json$/.test(p)))
+    throw feedError("Frauen-Neufokus: unerwartete Beitragsdateien",409);
+  const data=await Promise.all(paths.map(get));
+  for(const row of batch.records){
+    const parent=data[paths.indexOf(row.sourceFile)];
+    const matches=(parent?.eintraege||[]).filter(e=>e.kennung===row.id);
+    if(matches.length!==1 || matches[0].quellenstatus!=="geprueft" ||
+       matches[0].freigabeDurchSerhat!==true ||
+       matches[0].quellePrimaerId!==row.sourceId ||
+       matches[0].direktnachweisUrl!==row.sourceUrl) {
+       throw feedError("Frauen-Neufokus: Originalbericht noch nicht freigegeben: "+row.id,409);
+    }
+  }
+}
+
 export async function saveFeedEntry(env, input, helpers) {
   const staging = Boolean(input?.staging);
   const nowIso = new Date().toISOString();
@@ -118,6 +172,21 @@ export async function saveFeedEntry(env, input, helpers) {
   if (!incoming?.title) throw feedError("Titel fehlt", 400);
   if (input?.status && FEED_STATUSES.has(String(input.status))) incoming.status = String(input.status);
   if (!incoming.createdAt) incoming.createdAt = nowIso;
+  if (incoming.id === FRAUEN_NEUFOKUS_16_ID && incoming.status === "live") {
+    if(incoming.targetType!=="category" || incoming.targetId!=="frauen" ||
+       incoming.targetUrl!=="frauen") {
+       throw feedError("Frauen-Neufokus: Ziel muss der originale Frauenbereich sein", 400);
+    }
+    await verifyFrauenNeufokusPublication(env, helpers);
+    // The clock starts on FIRST successful Admin publication. Re-saving must
+    // never prolong the 48-hour visibility window.
+    const previous=(index.items||[]).find(item=>item?.id===FRAUEN_NEUFOKUS_16_ID);
+    const first=previous?.status==="live" ? Date.parse(previous.startsAt||"") : NaN;
+    const start=Number.isFinite(first)?first:Date.parse(nowIso);
+    incoming.startsAt=new Date(start).toISOString();
+    incoming.expiresAt=new Date(start+FRAUEN_NEUFOKUS_DURATION).toISOString();
+    incoming.visibility="48h";
+  }
   if (incoming.status === "live") {
     if (!incoming.title) throw feedError("Titel fehlt für Live-Karte", 400);
     const tt = incoming.targetType || "none";
