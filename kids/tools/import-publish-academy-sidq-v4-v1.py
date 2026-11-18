@@ -212,6 +212,48 @@ def public_entry(file, spoken, source_type, generation_ids, arabic=False, origin
     return info
 
 
+def verify_official_import_receipts(src_dir, originals):
+    """Do not use arbitrary files renamed to generationId.mp3 as genuine media.
+
+    An independent signed-URL downloader has validated workspace/session/ID,
+    written an unsigned SHA-256 ledger and kept private URLs outside Git.
+    This function checks those hashes before any public manifest mutation.
+    """
+    ledger_path = src_dir / "_official-originals-sha256.json"
+    if not ledger_path.is_file() or ledger_path.is_symlink():
+        raise RuntimeError("Official signed-originals SHA ledger missing; no release")
+    ledger = load(ledger_path)
+    if (ledger.get("schemaVersion") != 1
+            or ledger.get("topic") != "akhlaq/sidq"
+            or ledger.get("flowId") != FLOW
+            or ledger.get("origin") != "original-elevenlabs-creative-signed-audio-get"
+            or ledger.get("newTtsGenerations") != 0):
+        raise RuntimeError("Invalid source-original import provenance")
+    entries = ledger.get("entries")
+    if not isinstance(entries, dict) or set(entries) != set(originals):
+        raise RuntimeError("Source MP3 original SHA ledger must cover all 76 generations")
+    for gid, generation in originals.items():
+        entry = entries[gid]
+        file = src_dir / (gid + ".mp3")
+        if file.is_symlink() or not file.is_file():
+            raise RuntimeError("No symlink or missing MP3 permitted in secure import")
+        if entry.get("sessionId") != generation["sessionId"]:
+            raise RuntimeError("Audio original session mismatch: " + gid)
+        digest = entry.get("sha256")
+        if (not isinstance(digest, str) or len(digest) != 64
+                or sha(file) != digest):
+            raise RuntimeError("Audio bytes differ from official signed original: " + gid)
+        if entry.get("bytes") != file.stat().st_size:
+            raise RuntimeError("Original MP3 byte count mismatch: " + gid)
+        try:
+            delta = abs(duration(file) - float(entry.get("durationSeconds")))
+        except (ValueError, TypeError):
+            raise RuntimeError("Missing original media duration in SHA ledger") from None
+        if delta > 0.10:
+            raise RuntimeError("Original MP3 changed duration since signed download")
+    return True
+
+
 def import_publish(src_dir):
     sources, originals, direct, reused, mixed, ar = source_inventory()
     # Require all actual 76 originals BEFORE any asset or public manifest writes.
@@ -224,6 +266,7 @@ def import_publish(src_dir):
         path = src_dir / (gid + ".mp3")
         if path.stat().st_size < 1200 or not .35 <= duration(path) <= 100:
             raise RuntimeError("Invalid original paid ElevenLabs clip: " + path.name)
+    verify_official_import_receipts(src_dir, originals)
     for text, clip in reused.items():
         path = ROOT / clip["url"].lstrip("/")
         if not path.is_file() or sha(path) != clip["sha256"]:
