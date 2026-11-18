@@ -36,7 +36,7 @@ jobs:
           const js=html.split('<script>')[1]?.split('</script>')[0];
           if(!js)throw Error('No inline HOME V2 engine found');
           new Function(js);
-          const required=['fajrAdhanTrack','homeAppearance','homeWallpaperUpload','homeConnectionStatus','home-v4.css','home-v4.js','home-v5.css','h4ShowVerse','h4ShowHadith'];
+          const required=['fajrAdhanTrack','homeAppearance','homeWallpaperMode','homeWallpaperUpload','homeConnectionStatus','home-v4.css','home-v4.js','home-v5.css','h4ShowVerse','h4ShowHadith'];
           for(const key of required)if(!html.includes(key))throw Error('Missing HOME V3 feature: '+key);
           if(html.includes('<nav class="footnav"'))throw Error('Bottom tabs must not exist');
           console.log('HOME V5 source, no-bottom-tabs, settings: PASS');
@@ -130,6 +130,12 @@ jobs:
             assert driver.find_element(By.CSS_SELECTOR,'.tabpage[data-page="hintergrund"]').get_attribute('class').find('on')>=0
             gallery=driver.find_elements(By.CSS_SELECTOR,'#wallpaperOptions button[data-wallpaper]')
             print('GALLERY',len(gallery),flush=True)
+            Select(driver.find_element(By.ID,'homeWallpaperMode')).select_by_value('auto')
+            auto_bg=driver.execute_script("return getComputedStyle(document.getElementById('app')).backgroundImage")
+            print('AUTO_WALLPAPER',auto_bg,flush=True)
+            if '/media/apple-tv/tv-kaaba-' not in auto_bg:errors.append('Automatic day/night wallpaper did not select a native scene')
+            Select(driver.find_element(By.ID,'homeSaverBackground')).select_by_value('auto')
+            Select(driver.find_element(By.ID,'homeSaverBackground')).select_by_value('same')
             if len(gallery)<4:errors.append('Wallpaper gallery did not render')
             if not any(x.get_attribute('data-wallpaper')=='tv-kaaba-day' for x in gallery):errors.append('Native Kaaba wallpaper missing from gallery')
             driver.execute_async_script("""
