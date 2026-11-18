@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "collection": "DĀR AL TAWḤĪD native Apple TV artwork",
+  "source": "DarAlTawhidTV/Assets.xcassets",
+  "imageEncoding": "JPEG quality 78, longest edge 1920 px",
+  "rightsNote": "No per-image license metadata was present in the local asset catalog. Source provenance is recorded; commercial redistribution clearance remains unverified.",
+  "defaultWallpaper": "tv-kaaba-day",
+  "wallpapers": [
+    {"id":"tv-kaaba-day","label":"Kaʿba · Tag","url":"/media/apple-tv/tv-kaaba-day.jpg","period":"day"},
+    {"id":"tv-kaaba-sunrise","label":"Kaʿba · Sonnenaufgang","url":"/media/apple-tv/tv-kaaba-sunrise.jpg","period":"day"},
+    {"id":"tv-kaaba-sunset","label":"Kaʿba · Sonnenuntergang","url":"/media/apple-tv/tv-kaaba-sunset.jpg","period":"night"}
+  ],
+  "adhanMotifs": {
+    "fajr": "/media/apple-tv/adhan-fajr.jpg",
+    "dhuhr": "/media/apple-tv/adhan-dhuhr.jpg",
+    "asr": "/media/apple-tv/adhan-asr.jpg",
+    "maghrib": "/media/apple-tv/adhan-maghrib.jpg",
+    "isha": "/media/apple-tv/adhan-isha.jpg"
+  }
+}
