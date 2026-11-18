@@ -30,13 +30,13 @@ GitHub Actions browser QA passed in run 44392596242. The run covered 1024×600, 
 
 The same run simulated offline and online browser states. Prayer times remained locally calculated while offline, and the online DĀR feed returned after reconnection. This is browser network emulation, not a physical device or prolonged offline test.
 
-A follow-up change adds a persistent landscape settings category rail with a separate detail pane. A browser assertion for that layout is now included in the updated QA workflow; its result is pending.
+The landscape settings category rail and separate detail pane passed the updated browser assertion in run 44395473730. At 1280×800 the rail measured 243 px and the detail pane 922 px, with no overlap.
 
 The isolated HOME preview is:
 
 - https://dar-home-kiosk-preview.sero91ak.workers.dev/
 
-The last completed isolated Worker deployment is run 44382666985. It published the current HOME source and bundled manifest, images, scripts, and V5 stylesheet. Later changes only adjusted QA workflow/documentation. The current CSS settings rail is newer than that deployment and must be verified in the next deploy before it is called live.
+The isolated Worker deployment completed in run 44395473800. A direct request to the deployed V5 stylesheet returned HTTP 200 and included the landscape settings layout. The preview URL above now serves the settings rail.
 
 ## Remaining work and limits
 
