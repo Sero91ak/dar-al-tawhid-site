@@ -134,7 +134,7 @@ def coverage():
     release_state = read_json(RELEASE)
     if (release_state.get("currentSubject") != SUBJECT
             or release_state.get("currentTopic") != TOPIC
-            or release_state.get("status") not in ("recording", "qa", "ready-for-release")):
+            or release_state.get("status") not in ("recording", "qa", "ready-for-release", "audio-generated-awaiting-original-binary-import")):
         raise RuntimeError("Next-topic lock or unexpected state; publication refused")
     ledger = read_json(LEDGER)
     if ledger.get("subject") != SUBJECT or ledger.get("lessonId") != TOPIC:
