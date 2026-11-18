@@ -22,7 +22,7 @@ feed:
   shareEnabled: true
 ---
 
-🖋️ **Muǧāhid ibn Ǧabr** (رحمه الله), einer der Tābiʿīn, sagte sinngemäß:
+🖋️ **Muǧāhid ibn Ǧabr**, einer der Tābiʿīn, sagte sinngemäß:
 
 „***Wer sich aus Scham zurückhält oder hochmütig ist, erlangt kein Wissen.***“
 
