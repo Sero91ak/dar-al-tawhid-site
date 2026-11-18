@@ -24,9 +24,9 @@
     if(title)title.textContent=NAMES[name]+' · Aḏān';
     let image=$('h4PrayerArtwork');
     if(!image){image=document.createElement('img');image.id='h4PrayerArtwork';image.className='h4-prayer-image';image.alt='';image.setAttribute('aria-hidden','true');
-      image.addEventListener('error',()=>{image.style.display='none'});adhan.prepend(image)}
+      image.addEventListener('error',()=>{if(image.dataset.fallback!=='yes'){image.dataset.fallback='yes';image.src=ROOT+'/kids/assets/kids-salah-v1262/cinematic-still.jpg'}else image.style.display='none'});adhan.prepend(image)}
     if(name!==current){
-      current=name;image.style.display='block';image.src=MOTIF_BASE+name+'.webp';
+      current=name;image.dataset.fallback='no';image.style.display='block';image.src=MOTIF_BASE+name+'.webp';
       const t=document.querySelector('.prayer-cell[data-prayer="'+name+'"] .ptime')?.textContent?.trim();
       const sub=$('adhanInfo');if(sub && !sub.dataset.h4Augmented && t && /^[0-2][0-9]:[0-5][0-9]$/.test(t)){
         sub.textContent=NAMES[name]+' · '+t+' Uhr';sub.dataset.h4Augmented='true';
