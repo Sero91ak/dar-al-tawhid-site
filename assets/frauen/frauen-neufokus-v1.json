@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "id": "frauen-batch16-20261118",
+  "focusId": "neufokus-frauenwissen-16-20261118",
+  "expectedCount": 16,
+  "sourceFiles": [
+    "data/frauen-sahabiyyat.json",
+    "data/frauen-muetter-der-glaeubigen.json",
+    "data/frauen-fiqh.json"
+  ],
+  "items": [
+    {
+      "id": "sahabiyyat-umm-haram-seeueberfahrt-20261106",
+      "area": "sahabiyyat",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "sourceId": "bukhari:2788",
+      "sourceUrl": "https://sunnah.com/bukhari:2788"
+    },
+    {
+      "id": "sahabiyyat-umm-hani-schutz-20261106",
+      "area": "sahabiyyat",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "sourceId": "bukhari:357",
+      "sourceUrl": "https://sunnah.com/bukhari:357"
+    },
+    {
+      "id": "sahabiyyat-fatimah-geheimnis-20261106",
+      "area": "sahabiyyat",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "sourceId": "bukhari:3623",
+      "sourceUrl": "https://sunnah.com/bukhari:3623"
+    },
+    {
+      "id": "sahabiyyat-umm-qays-saeugling-20261106",
+      "area": "sahabiyyat",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "sourceId": "bukhari:223",
+      "sourceUrl": "https://sunnah.com/bukhari:223"
+    },
+    {
+      "id": "sahabiyyat-umm-sulaym-duft-20261106",
+      "area": "sahabiyyat",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "sourceId": "muslim:2331a",
+      "sourceUrl": "https://sunnah.com/muslim:2331a"
+    },
+    {
+      "id": "sahabiyyat-barirah-entscheidung-20261106",
+      "area": "sahabiyyat",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "sourceId": "bukhari:5097",
+      "sourceUrl": "https://sunnah.com/bukhari:5097"
+    },
+    {
+      "id": "sahabiyyat-umm-habibah-milchverwandtschaft-20261106",
+      "area": "sahabiyyat",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "sourceId": "bukhari:5101",
+      "sourceUrl": "https://sunnah.com/bukhari:5101"
+    },
+    {
+      "id": "sahabiyyat-aishah-jibril-salam-20261106",
+      "area": "sahabiyyat",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "sourceId": "bukhari:3768",
+      "sourceUrl": "https://sunnah.com/bukhari:3768"
+    },
+    {
+      "id": "sahabiyyat-asma-umays-zwei-hidschras-20261106",
+      "area": "sahabiyyat",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "sourceId": "bukhari:4231",
+      "sourceUrl": "https://sunnah.com/bukhari:4231"
+    },
+    {
+      "id": "sahabiyyat-aishah-ifk-offenbarung-20261106",
+      "area": "sahabiyyat",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "sourceId": "bukhari:4141",
+      "sourceUrl": "https://sunnah.com/bukhari:4141"
+    },
+    {
+      "id": "muetter-eifersucht-schale-ausgleich-20261106",
+      "area": "muetter-der-glaeubigen",
+      "sourceFile": "data/frauen-muetter-der-glaeubigen.json",
+      "sourceId": "bukhari:5225",
+      "sourceUrl": "https://sunnah.com/bukhari/67/158"
+    },
+    {
+      "id": "muetter-hafsah-nach-verwitwung-20261106",
+      "area": "muetter-der-glaeubigen",
+      "sourceFile": "data/frauen-muetter-der-glaeubigen.json",
+      "sourceId": "bukhari:5122",
+      "sourceUrl": "https://sunnah.com/bukhari:5122"
+    },
+    {
+      "id": "muetter-zaynab-zunahme-des-uebels-20261106",
+      "area": "muetter-der-glaeubigen",
+      "sourceFile": "data/frauen-muetter-der-glaeubigen.json",
+      "sourceId": "bukhari:3346",
+      "sourceUrl": "https://sunnah.com/bukhari/60/21"
+    },
+    {
+      "id": "muetter-aishah-letzte-stunden-20261106",
+      "area": "muetter-der-glaeubigen",
+      "sourceFile": "data/frauen-muetter-der-glaeubigen.json",
+      "sourceId": "bukhari:4451",
+      "sourceUrl": "https://sunnah.com/bukhari/64/471"
+    },
+    {
+      "id": "muetter-umm-salamah-nachtwarnung-20261106",
+      "area": "muetter-der-glaeubigen",
+      "sourceFile": "data/frauen-muetter-der-glaeubigen.json",
+      "sourceId": "bukhari:115",
+      "sourceUrl": "https://sunnah.com/bukhari:115"
+    },
+    {
+      "id": "frauen-fiqh-aishah-tayammum-halskette-20261106",
+      "area": "fiqh",
+      "sourceFile": "data/frauen-fiqh.json",
+      "sourceId": "bukhari:334",
+      "sourceUrl": "https://sunnah.com/bukhari:334"
+    }
+  ],
+  "onlyAfterLiveVerification": true,
+  "holdUntil": "all-16-source-records-geprueft-and-sources-match",
+  "visibility": "48h",
+  "status": "release-manifest-not-live"
+}
