@@ -58,7 +58,23 @@ function snapshot(isPublic,locale) {
    return route.fulfill({status:404,body:"Not found"});
  });
  await page.goto("https://dar-app.local/",{waitUntil:"domcontentloaded"});
- await page.evaluate(()=>{window.__focusedRoute="";window.navigate=view=>{window.__focusedRoute=view};window.localStorage.setItem("darAdultPreferredLocaleV1","de")});
+ await page.evaluate(()=>{
+  window.__focusedRoute="";window.navigate=view=>{window.__focusedRoute=view};
+  window.localStorage.setItem("darAdultPreferredLocaleV1","de");
+  // Capture genuine 48h timers while keeping this local Chromium fixture fast.
+  const schedule=window.setTimeout.bind(window),cancel=window.clearTimeout.bind(window);
+  window.__expiryCallbacks=new Map();let nextId=-100;
+  window.setTimeout=(fn,delay,...args)=>{
+   if(typeof fn==="function"&&delay>3600000){
+    const id=nextId--;window.__expiryCallbacks.set(id,{fn,delay});return id;
+   }
+   return schedule(fn,delay,...args);
+  };
+  window.clearTimeout=id=>{
+   if(window.__expiryCallbacks.delete(id))return;
+   cancel(id);
+  };
+ });
  await page.addScriptTag({content:code});
  await page.evaluate(()=>window.DARFrauenNeufokusV1.refresh());
  assert.equal(await page.locator("#darFrauenNeufokus48h").count(),0,"Draft banner visible on "+viewport.name);
@@ -92,6 +108,17 @@ function snapshot(isPublic,locale) {
   assert.ok((await banner.locator(".focus-title").innerText()).trim().length>=10,lang+" missing translated title");
   verified++;
  }
+ // The public card must also disappear from the registered one-shot timeout;
+ // there must be no extra wait until the 60-second background refresh.
+ const timing=await page.evaluate(()=>[...window.__expiryCallbacks.values()].map(x=>x.delay));
+ assert.equal(timing.length,1,viewport.name+" precise expiry callback not scheduled");
+ assert.ok(timing[0]>3600000&&timing[0]<=48*3600000,viewport.name+" invalid 48h timer");
+ await page.evaluate(expiryDate=>{
+  const scheduled=[...window.__expiryCallbacks.values()][0];
+  const normal=Date.now;
+  Date.now=()=>expiryDate+1;scheduled.fn();Date.now=normal;
+ },Date.parse(expires));
+ assert.equal(await banner.count(),0,viewport.name+" focus not removed by its precise deadline timer");
  // 48h starts only from server publication and must expire without leaving stale card.
  state.feed.items.find(x=>x.id===id).expiresAt=new Date(date-60*1000).toISOString();
  await page.evaluate(()=>window.DARFrauenNeufokusV1.refresh());
