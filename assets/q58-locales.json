@@ -13,10 +13,21 @@
   ],
   "sourceStatus": "Bukhari quotes Mujahid as muallaq; Ibn Hajar documents connected transmission paths; no independent final chain grade is claimed",
   "publication": {
-    "status": "staged-for-editorial-and-linguistic-review",
-    "approvedLocales": [],
-    "publicDisplayAllowed": false,
-    "oneSignalSent": false
+    "status": "user-approved-for-live-with-model-reviewed-locales",
+    "approvedLocales": [
+      "de",
+      "ar",
+      "en",
+      "tr",
+      "ku",
+      "ckb",
+      "bs",
+      "fr",
+      "es"
+    ],
+    "publicDisplayAllowed": true,
+    "oneSignalSent": false,
+    "reviewMethod": "model-led nine-language comparison against Arabic and cited classical text; no independent native-speaker certification"
   },
   "supported": [
     "de",
@@ -96,7 +107,8 @@
           "why": "Es ist ein Āṯar von Muǧāhid, kein Prophetenḥadīṯ."
         }
       ],
-      "sourceStatus": "Bei al-Buḫārī steht die Aussage Muǧāhids als muʿallaq im Kapiteltext. Ibn Ḥaǧar dokumentiert weitere Überlieferungswege in Taġlīq at-Taʿlīq 2/93–94. Es ist ein Āṯar eines Tābiʿī, kein Prophetenḥadīṯ. Eine unabhängige abschließende Isnādeinstufung wird nicht behauptet."
+      "sourceStatus": "Bei al-Buḫārī steht die Aussage Muǧāhids als muʿallaq im Kapiteltext. Ibn Ḥaǧar dokumentiert weitere Überlieferungswege in Taġlīq at-Taʿlīq 2/93–94. Es ist ein Āṯar eines Tābiʿī, kein Prophetenḥadīṯ. Eine unabhängige abschließende Isnādeinstufung wird nicht behauptet.",
+      "reviewStatus": "model-reviewed-user-approved-live"
     },
     "ar": {
       "title": "الحياء المانع والكبر يحولان دون طلب العلم",
@@ -163,7 +175,8 @@
           "why": "القول منسوب إلى مجاهد التابعي."
         }
       ],
-      "sourceStatus": "ورد قول مجاهد معلّقًا في ترجمة الباب عند البخاري، وذكر ابن حجر له طرقًا في «تغليق التعليق» (٢/٩٣–٩٤). وهو أثر عن تابعي، وليس حديثًا مرفوعًا إلى النبي ﷺ؛ ولا يُدَّعى هنا حكم نهائي مستقل على جميع طرقه."
+      "sourceStatus": "ورد قول مجاهد معلّقًا في ترجمة الباب عند البخاري، وذكر ابن حجر له طرقًا في «تغليق التعليق» (٢/٩٣–٩٤). وهو أثر عن تابعي، وليس حديثًا مرفوعًا إلى النبي ﷺ؛ ولا يُدَّعى هنا حكم نهائي مستقل على جميع طرقه.",
+      "reviewStatus": "model-reviewed-user-approved-live"
     },
     "en": {
       "title": "SHYNESS AND ARROGANCE CAN PREVENT LEARNING",
@@ -230,7 +243,8 @@
           "why": "This is a statement of Mujāhid, not a Prophetic report."
         }
       ],
-      "sourceStatus": "Al-Bukhārī cites Mujāhid’s statement without a complete chain in the chapter heading (muʿallaq). Ibn Ḥajar records further transmission paths in Taġlīq at-Taʿlīq 2/93–94. This is a Tābiʿī report, not a Prophetic ḥadīth. No independent final chain grading is claimed."
+      "sourceStatus": "Al-Bukhārī cites Mujāhid’s statement without a complete chain in the chapter heading (muʿallaq). Ibn Ḥajar records further transmission paths in Taġlīq at-Taʿlīq 2/93–94. This is a Tābiʿī report, not a Prophetic ḥadīth. No independent final chain grading is claimed.",
+      "reviewStatus": "model-reviewed-user-approved-live"
     },
     "tr": {
       "title": "HAYA VE KİBİR İLİM ÖĞRENMEYE ENGEL OLABİLİR",
@@ -297,7 +311,8 @@
           "why": "Bu söz tâbiî Mücâhid'e aittir."
         }
       ],
-      "sourceStatus": "Buhârî, Mücâhid'in sözünü bab başlığında tam senet vermeden (muallak) aktarır. İbn Hacer, Tağlîku't-Ta'lîk 2/93–94'te başka rivayet yollarını kaydeder. Bu, bir tâbiî sözüdür; merfû hadis değildir. Bütün yollar için bağımsız kesin sıhhat hükmü verilmemektedir."
+      "sourceStatus": "Buhârî, Mücâhid'in sözünü bab başlığında tam senet vermeden (muallak) aktarır. İbn Hacer, Tağlîku't-Ta'lîk 2/93–94'te başka rivayet yollarını kaydeder. Bu, bir tâbiî sözüdür; merfû hadis değildir. Bütün yollar için bağımsız kesin sıhhat hükmü verilmemektedir.",
+      "reviewStatus": "model-reviewed-user-approved-live"
     },
     "ku": {
       "title": "ŞERM Û MEZINBÛN DI FÊRBÛNÊ DE ASTENG IN",
@@ -364,7 +379,8 @@
           "why": "Ev gotin ya Mucāhid e."
         }
       ],
-      "sourceStatus": "El-Buḫārī ev gotina Mucāhid di sernavê babê de bê zincîra tevahî (muʿallaq) aniye. Ibn Ḥecer di Taġlīq at-Taʿlīq 2/93–94 de rêyên din ên vegotinê qeyd dike. Ev gotina Tābiʿî ye, ne ḥadîsa rasterast a Pêxember ﷺ. Li vir nirxandineke dawî ya hemû zincîran nayê îdiakirin."
+      "sourceStatus": "El-Buḫārī ev gotina Mucāhid di sernavê babê de bê zincîra tevahî (muʿallaq) aniye. Ibn Ḥecer di Taġlīq at-Taʿlīq 2/93–94 de rêyên din ên vegotinê qeyd dike. Ev gotina Tābiʿî ye, ne ḥadîsa rasterast a Pêxember ﷺ. Li vir nirxandineke dawî ya hemû zincîran nayê îdiakirin.",
+      "reviewStatus": "model-reviewed-user-approved-live"
     },
     "ckb": {
       "title": "شەرم و لووتبەرزی ڕێگرن لە فێربوون",
@@ -431,7 +447,8 @@
           "why": "ئەمە وتەی موجاهیدی تابعینە."
         }
       ],
-      "sourceStatus": "بوخاری ئەم وتەیەی موجاهید لە سەردێڕی بابەکەدا بەبێ زنجیرەی تەواوی ڕاویان (معلّق) هێناوە. ئیبن حەجەر لە «تغليق التعليق» (٢/٩٣–٩٤) ڕێگاکانی دیکەی گێڕانەوەکەی تۆمار کردووە. ئەمە ئاساری تابعینە، نەک حەدیسی ڕاستەوخۆی پێغەمبەر ﷺ. لێرە حوکمی کۆتایی لەسەر هەموو زنجیرەکان نادرێت."
+      "sourceStatus": "بوخاری ئەم وتەیەی موجاهید لە سەردێڕی بابەکەدا بەبێ زنجیرەی تەواوی ڕاویان (معلّق) هێناوە. ئیبن حەجەر لە «تغليق التعليق» (٢/٩٣–٩٤) ڕێگاکانی دیکەی گێڕانەوەکەی تۆمار کردووە. ئەمە ئاساری تابعینە، نەک حەدیسی ڕاستەوخۆی پێغەمبەر ﷺ. لێرە حوکمی کۆتایی لەسەر هەموو زنجیرەکان نادرێت.",
+      "reviewStatus": "model-reviewed-user-approved-live"
     },
     "bs": {
       "title": "STID I OHOLOST MOGU SPRIJEČITI UČENJE",
@@ -498,7 +515,8 @@
           "why": "Riječ je o izreci Mudžahida."
         }
       ],
-      "sourceStatus": "El-Buhari navodi Mudžahidovu izreku u naslovu poglavlja bez potpunog seneda (muʿallaq). Ibn Hadžer bilježi dodatne puteve prenošenja u djelu Taġlīq at-Taʿlīq, 2/93–94. Ovo je izreka tābiʿīna, a ne hadis Vjerovjesnika ﷺ. Ne tvrdi se da je izvršena konačna nezavisna ocjena svih lanaca."
+      "sourceStatus": "El-Buhari navodi Mudžahidovu izreku u naslovu poglavlja bez potpunog seneda (muʿallaq). Ibn Hadžer bilježi dodatne puteve prenošenja u djelu Taġlīq at-Taʿlīq, 2/93–94. Ovo je izreka tābiʿīna, a ne hadis Vjerovjesnika ﷺ. Ne tvrdi se da je izvršena konačna nezavisna ocjena svih lanaca.",
+      "reviewStatus": "model-reviewed-user-approved-live"
     },
     "fr": {
       "title": "LA TIMIDITÉ ET L’ORGUEIL PEUVENT EMPÊCHER D’APPRENDRE",
@@ -565,7 +583,8 @@
           "why": "Cette parole est attribuée à Mujāhid."
         }
       ],
-      "sourceStatus": "Al-Bukhārī cite cette parole de Mujāhid dans l’intitulé du chapitre sans chaîne complète (muʿallaq). Ibn Ḥajar rapporte d’autres voies de transmission dans Taġlīq at-Taʿlīq, 2/93–94. Il s’agit d’une parole d’un Tābiʿī, non d’un ḥadīth prophétique. Aucune évaluation définitive et indépendante de toutes les chaînes n’est affirmée."
+      "sourceStatus": "Al-Bukhārī cite cette parole de Mujāhid dans l’intitulé du chapitre sans chaîne complète (muʿallaq). Ibn Ḥajar rapporte d’autres voies de transmission dans Taġlīq at-Taʿlīq, 2/93–94. Il s’agit d’une parole d’un Tābiʿī, non d’un ḥadīth prophétique. Aucune évaluation définitive et indépendante de toutes les chaînes n’est affirmée.",
+      "reviewStatus": "model-reviewed-user-approved-live"
     },
     "es": {
       "title": "LA VERGÜENZA Y LA SOBERBIA PUEDEN IMPEDIR APRENDER",
@@ -632,7 +651,8 @@
           "why": "Es una declaración de Muyāhid."
         }
       ],
-      "sourceStatus": "Al-Bujārī cita esta declaración de Muyāhid en el encabezado del capítulo sin cadena completa (muʿallaq). Ibn Ḥayar recoge otras vías de transmisión en Taġlīq at-Taʿlīq, 2/93–94. Es un relato de un Tābiʿī, no un hadiz profético. No se afirma haber realizado una evaluación definitiva e independiente de todas las cadenas."
+      "sourceStatus": "Al-Bujārī cita esta declaración de Muyāhid en el encabezado del capítulo sin cadena completa (muʿallaq). Ibn Ḥayar recoge otras vías de transmisión en Taġlīq at-Taʿlīq, 2/93–94. Es un relato de un Tābiʿī, no un hadiz profético. No se afirma haber realizado una evaluación definitiva e independiente de todas las cadenas.",
+      "reviewStatus": "model-reviewed-user-approved-live"
     }
   }
 }
