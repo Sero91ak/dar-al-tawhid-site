@@ -232,7 +232,7 @@ def main():
         if target.parent != designated or target.suffix != ".json":
             raise RuntimeError("Queue output restricted to dedicated production-queues/*.json")
         target.parent.mkdir(parents=True, exist_ok=True)
-        payload = json.dumps(summary, ensure_ascii=False, indent=2) + "\\n"
+        payload = json.dumps(summary, ensure_ascii=False, indent=2) + "\n"
         if target.exists() and target.read_text("utf-8") != payload:
             raise RuntimeError("Existing topic queue differs; refuse destructive overwrite")
         target.write_text(payload, "utf-8")
