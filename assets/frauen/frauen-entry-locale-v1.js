@@ -297,7 +297,9 @@
       try{await nav.share({files:files});return true}catch(e){if(e&&e.name==="AbortError")return true;}
     }
     var ios=w.webkit&&w.webkit.messageHandlers&&w.webkit.messageHandlers.darShareImage;
-    if(ios&&typeof ios.postMessage==="function"&&files.length){
+    // Native bridge transports one image only. Never silently share the last
+    // page of a multi-page hadith as if it were the complete statement.
+    if(ios&&typeof ios.postMessage==="function"&&files.length===1){
       var dataUrl=canvas.toDataURL("image/png");
       ios.postMessage({dataUrl:dataUrl,filename:"dar-al-tawhid-frauen.png",title:p.title});
       return true;
@@ -305,7 +307,7 @@
     if(typeof nav.share==="function"){
       await nav.share({title:p.title,text:p.statement,url:w.location.href});return true;
     }
-    throw Error("Bild-Teilen wird auf diesem Gerät nicht unterstützt");
+    throw Error(files.length>1?"Mehrseitige Bildbeiträge können auf diesem Gerät nicht vollständig geteilt werden":"Bild-Teilen wird auf diesem Gerät nicht unterstützt");
   }
   function userShare(ev){
     var btn=ev.target&&ev.target.closest?ev.target.closest("button[data-frauen-share]"):null;
