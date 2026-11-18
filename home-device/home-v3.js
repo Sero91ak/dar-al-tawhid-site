@@ -15,25 +15,30 @@
   {id:'kids-hero',label:'Moschee · Nachtmotiv',url:ROOT+'/kids/assets/kids-home-v1191/hero-static-reference.jpg'},
   {id:'abstract',label:'Klassisch · ohne Bild',url:''}
  ];
- let prefs={theme:'dark',wallpaper:'tv-kaaba-day',saverWallpaper:'same',adhanCinema:true,allowBackgroundUpdates:true};
+ let prefs={theme:'dark',wallpaper:'tv-kaaba-day',wallpaperMode:'manual',saverWallpaper:'same',adhanCinema:true,allowBackgroundUpdates:true};
  try{const from=JSON.parse(localStorage.getItem(KEY)||'{}');if(from&&typeof from==='object'&&!Array.isArray(from)){prefs={...prefs,...from}}}catch{}
  const safeHTML=(str)=>String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
  function imageFor(name){let w=wallpapers.find(x=>x.id===name);if(name==='custom'){const raw=localStorage.getItem(KEY+'-wallpaper')||'';return /^data:image\/(?:png|jpeg|webp);base64,/i.test(raw)?raw:''}return w?.url||''}
+ function automaticWallpaperId(){const hour=new Date().getHours(),period=hour>=6&&hour<17?'day':'night';let choices=wallpapers.filter(x=>x.native&&x.period===period);if(!choices.length)choices=wallpapers.filter(x=>x.native);return choices[Math.floor(Date.now()/21600000)%Math.max(1,choices.length)]?.id||'tv-kaaba-day'}
+ function resolveWallpaper(name){return name==='auto'?automaticWallpaperId():name}
  function store(){try{localStorage.setItem(KEY,JSON.stringify(prefs))}catch(e){warn('Einstellungen konnten nicht gespeichert werden')}}
  function warn(msg){const t=$('toast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3900)}
  function apply(){
   const app=$('app');if(!app)return;
   app.dataset.homeTheme=prefs.theme==='light'?'light':'dark';
-  const bg=imageFor(prefs.wallpaper);
+  const homeChoice=prefs.wallpaperMode==='auto'?'auto':prefs.wallpaper;
+  const bg=imageFor(resolveWallpaper(homeChoice));
   app.style.backgroundImage=bg?'url("'+bg.replaceAll('"','%22')+'")':'none';
   const saver=$('saver');if(saver){
-   const sbg=imageFor(prefs.saverWallpaper==='same'?prefs.wallpaper:prefs.saverWallpaper);
+   const saverChoice=prefs.saverWallpaper==='same'?homeChoice:prefs.saverWallpaper;
+   const sbg=imageFor(resolveWallpaper(saverChoice));
    saver.style.backgroundImage=sbg?'url("'+sbg.replaceAll('"','%22')+'")':'none';
   }
   const adhan=$('adhanVisual');if(adhan){
    adhan.style.backgroundImage=prefs.adhanCinema&&bg?'url("'+bg.replaceAll('"','%22')+'")':'none';
   }
   const mode=$('homeAppearance');if(mode)mode.value=prefs.theme;
+  const wallMode=$('homeWallpaperMode');if(wallMode)wallMode.value=prefs.wallpaperMode;
   const saverMode=$('homeSaverBackground');if(saverMode)saverMode.value=prefs.saverWallpaper;
   const cinema=$('homeCinemaBackground');if(cinema)cinema.checked=!!prefs.adhanCinema;
   const preview=$('wallpaperOptions');if(preview)preview.querySelectorAll('button[data-wallpaper]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.wallpaper===prefs.wallpaper)));
@@ -77,7 +82,7 @@
    if(item.url){const img=new Image();img.src=item.url;img.alt='Hintergrund: '+item.label;img.loading='lazy';b.append(img)}
    else{const blank=document.createElement('div');blank.style.cssText='aspect-ratio:16/9;background:linear-gradient(130deg,#09272a,#224c3e);border-radius:7px';b.append(blank)}
    const title=document.createElement('strong');title.textContent=item.label;b.append(title);
-   b.addEventListener('click',()=>{prefs.wallpaper=item.id;store();apply()});parent.append(b);
+   b.addEventListener('click',()=>{prefs.wallpaper=item.id;prefs.wallpaperMode='manual';store();apply()});parent.append(b);
   }
   apply();
  }
@@ -101,7 +106,8 @@
  }
  function bind(){
   const sel=$('homeAppearance');if(sel)sel.addEventListener('change',()=>{prefs.theme=sel.value;store();apply()});
-  const saver=$('homeSaverBackground');if(saver){const options=[{id:'same',label:'Wie HOME-Hintergrund'},...wallpapers.map(x=>({id:x.id,label:x.label}))];saver.replaceChildren(...options.map(x=>new Option(x.label,x.id)));saver.addEventListener('change',()=>{prefs.saverWallpaper=saver.value;store();apply()})}
+  const saver=$('homeSaverBackground');if(saver){const options=[{id:'same',label:'Wie HOME-Hintergrund'},{id:'auto',label:'Automatisch nach Tageszeit'},...wallpapers.map(x=>({id:x.id,label:x.label}))];saver.replaceChildren(...options.map(x=>new Option(x.label,x.id)));saver.addEventListener('change',()=>{prefs.saverWallpaper=saver.value;store();apply()})}
+  const wallMode=$('homeWallpaperMode');if(wallMode){wallMode.value=prefs.wallpaperMode;wallMode.addEventListener('change',()=>{prefs.wallpaperMode=wallMode.value;store();apply()})}
   const cin=$('homeCinemaBackground');if(cin)cin.addEventListener('change',()=>{prefs.adhanCinema=cin.checked;store();apply()});
   const upload=$('homeWallpaperUpload');if(upload)upload.addEventListener('change',()=>{
    const f=upload.files?.[0];if(!f)return;
@@ -109,7 +115,7 @@
    const r=new FileReader();r.onload=()=>{try{localStorage.setItem(KEY+'-wallpaper',String(r.result));prefs.wallpaper='custom';store();makeWallpaperGallery()}catch{warn('Bild zu groß für diesen Browser. Bitte kleiner exportieren.')}}
    r.readAsDataURL(f);
   });
-  $('homeGalleryReset')?.addEventListener('click',()=>{prefs.wallpaper='tv-kaaba-day';prefs.saverWallpaper='same';localStorage.removeItem(KEY+'-wallpaper');store();makeWallpaperGallery()});
+  $('homeGalleryReset')?.addEventListener('click',()=>{prefs.wallpaper='tv-kaaba-day';prefs.wallpaperMode='manual';prefs.saverWallpaper='same';localStorage.removeItem(KEY+'-wallpaper');store();makeWallpaperGallery();const m=$('homeWallpaperMode');if(m)m.value=prefs.wallpaperMode});
   $('homeAudioUnlock')?.addEventListener('click',()=>{warn('Audio-Freigabe: bitte im Aḏān-Reiter „Aḏān einmalig testen“ drücken. Browser-Autoplay bleibt geräteabhängig.')});
   $('homeRefreshNow')?.addEventListener('click',()=>{$('syncNow')?.click()});
   $('homeAppPairing')?.addEventListener('click',()=>warn('Sichere WLAN-Kopplung erfordert eine native Geräte-Bridge. Noch nicht freigeschaltet.'));
@@ -129,7 +135,7 @@
  }
  function init(){
   if(!$('app'))return;
-  augmentBrand();bind();apply();loadMediaCatalog();handleConnection();
+  augmentBrand();bind();apply();loadMediaCatalog();setInterval(()=>{if(prefs.wallpaperMode==='auto'||prefs.saverWallpaper==='auto')apply()},300000);handleConnection();
   const el=$('adhanVisual');if(el)new MutationObserver(updateAdhanTitle).observe(el,{attributes:true,attributeFilter:['class']});
   window.addEventListener('online',handleConnection);window.addEventListener('offline',handleConnection);
   const i=document.querySelector('[data-tab="hintergrund"]');if(i){const img=document.createElement('img');img.src=icon('image');img.alt='';img.className='settings-icons';i.prepend(img)}
