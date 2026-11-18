@@ -16,5 +16,35 @@
     "title": "Duʿāʾ um mehr Wissen",
     "snippet": "Mein Herr, mehre mein Wissen.",
     "category": "Wissen & Lernen"
+  },
+  "verse": {
+    "reference": "20:114",
+    "surah": 20,
+    "ayah": 114,
+    "ar": "فَتَعَٰلَى ٱللَّهُ ٱلۡمَلِكُ ٱلۡحَقُّۗ وَلَا تَعۡجَلۡ بِٱلۡقُرۡءَانِ مِن قَبۡلِ أَن يُقۡضَىٰٓ إِلَيۡكَ وَحۡيُهُۥۖ وَقُل رَّبِّ زِدۡنِي عِلۡمٗا",
+    "de": "Erhaben ist Allah, der König, der Wahre! Und übereile dich nicht mit dem Qur'an, bevor dir seine Offenbarung vollständig eingegeben worden ist. Und sag: Mein Herr, lasse mich an Wissen zunehmen.",
+    "transliteration": "fataʿālā l-lahu l-maliku l-ḥaqu walā taʿjal bil-qur'āni min qabli an yuq'ḍā ilayka waḥyuhu waqul rabbi zid'nī ʿil'man",
+    "arabicEdition": "content/quran/020.json",
+    "germanEdition": "content/quran/020.json",
+    "tadabburReference": "20:114",
+    "tadabburCatalog": "/apple-tv/quran/tadabbur/catalog.json"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 491,
+      "remaining": 455
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 62,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
