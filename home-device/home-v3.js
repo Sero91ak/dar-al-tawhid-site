@@ -46,7 +46,7 @@
  }
  function augmentBrand(){
   const mark=document.querySelector('.logo-mark');
-  if(mark){mark.textContent='';const i=new Image();i.src=ROOT+'/app-logo-original.png';i.alt='DĀR AL TAWḤĪD Markenzeichen';i.onerror=()=>{mark.textContent='دار'};mark.append(i)}
+  if(mark){mark.textContent='';const i=new Image();i.src='/media/apple-tv/tv-brand-mark.png';i.alt='DĀR AL TAWḤĪD Markenzeichen';i.onerror=()=>{if(i.dataset.fallback!=='remote'){i.dataset.fallback='remote';i.src=ROOT+'/app-logo-original.png'}else mark.textContent='دار'};mark.append(i)}
   const small=document.querySelector('.brand-mini');if(small)small.textContent='H O M E  ·  SMART PRAYER DISPLAY';
   const top=$('openSettings');
   if(top&&!$('h3ThemeToggle')){
