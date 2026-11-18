@@ -97,7 +97,7 @@ assert.ok(!read(helperFile).includes("speechSynthesis")&&!read(helperFile).inclu
  "Vocabulary cannot invent an AI voice or spend credits");
 const {audit}=require("./audit-academy-voice-coverage-v18.js");
 const counts=audit();
-assert.equal(counts.catalogLessonCount,58,"Voice audit currently covers through V27, not the newer unrecorded V28/V29 lessons");
+assert.equal(counts.catalogLessonCount,66,"Voice audit must cover all 66 actual school lessons, including V28 and V29");
 assert.equal(counts.vocabularyTerms,33);
 assert.equal(counts.vocabularyVoicePhrases,99);
 assert.deepEqual(counts.uncoveredLessons,[]);
