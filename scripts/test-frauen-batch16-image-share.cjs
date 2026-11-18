@@ -57,7 +57,7 @@ assert.equal(typeof win.__TEST_LOCAL_IMAGE_EXPORT,"function");
    const result=await win.__TEST_LOCAL_IMAGE_EXPORT(item,false);
    assert.equal(result,true,"Image share failed "+record.id+" "+lang);
    assert.ok(lastShare&&Array.isArray(lastShare.files)&&lastShare.files.length>=1,"No exported file");
-   const title=drawn.filter(x=>x.font.startsWith("600 ")&&x.font.includes("Georgia")).map(x=>x.text).join(" ");
+   const title=drawn.filter(x=>x.font.startsWith("600 ")&&x.font.includes("Georgia")&&x.y<650).map(x=>x.text).join(" ");
    const body=drawn.filter(x=>x.font.startsWith("400 ")&&x.font.includes("Georgia")).map(x=>x.text).join(" ");
    const source=drawn.filter(x=>x.font==="400 19px Arial, sans-serif").map(x=>x.text).join(" ");
    assert.equal(norm(title),norm(pack.title),"Missing localized title "+record.id+" "+lang);
