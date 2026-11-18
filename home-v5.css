@@ -186,3 +186,28 @@
 #app.reduced-motion #cinematicVideo { display:none!important; }
 .motion-setting { display:flex; align-items:center; gap:10px; color:var(--text); font-size:clamp(13px,1vw,16px); }
 .motion-setting input { width:22px; height:22px; min-height:22px!important; accent-color:var(--gold); }
+
+/* Give screensaver text a local reading layer that follows the selected theme. */
+#saver::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(2,12,16,.12) 0%,rgba(2,12,16,.42) 76%,rgba(2,12,16,.72) 100%);
+}
+#saver .saver-content,
+#saver .saver-bottom,
+#saver .saver-clock { position:relative; z-index:1; }
+#app[data-home-theme="light"] #saver::before {
+  background:radial-gradient(ellipse at center,rgba(243,241,231,.94) 0%,rgba(243,241,231,.84) 67%,rgba(243,241,231,.42) 100%);
+}
+#app[data-home-theme="light"] #saver .saver-ar,
+#app[data-home-theme="light"] #saver .saver-de { color:#24362d; text-shadow:none; }
+#app[data-home-theme="light"] #saver .saver-symbol,
+#app[data-home-theme="light"] #saver .saver-kicker,
+#app[data-home-theme="light"] #saver .saver-bottom span:last-child,
+#app[data-home-theme="light"] #saver .saver-clock { color:#365b43; text-shadow:none; }
+#app[data-home-theme="light"] #saver .saver-source,
+#app[data-home-theme="light"] #saver .saver-bottom { color:#405247; }
+#app[data-home-theme="light"] #saver .saver-bottom { border-color:rgba(48,76,59,.36); }
