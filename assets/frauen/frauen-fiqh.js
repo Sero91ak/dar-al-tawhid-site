@@ -3855,6 +3855,8 @@
     var files = [];
     for (var p = 0; p < pages.length; p++) {
       ctx.clearRect(0, 0, W, H);
+      ctx.direction = "ltr";
+      ctx.textAlign = "left"; // brand/header always begin consistently on every exported page
       if (bg) {
         frauenDrawCover(ctx, bg, W, H, (p % 2 ? -18 : 10));
       } else {
@@ -3930,7 +3932,7 @@
         ctx.font = "650 13px Arial, sans-serif";
         ctx.textAlign = "right";
         ctx.fillText((p + 1) + " / " + pages.length, W - margin - 18, statementCardY + statementCardH - 22);
-        ctx.textAlign = "left";
+        ctx.textAlign = exportRtl ? "right" : "left";
       }
 
       var panelY = 1130, panelH = 148;
