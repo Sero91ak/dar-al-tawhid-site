@@ -155,6 +155,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "desktop-website-audit-sanitization-20261116",
+      "at": "2026-11-16T12:00:00+01:00",
+      "approvedBy": "user-explicit-2026-11-16-comprehensive-desktop-website-audit-and-security-sanitization",
+      "reason": "Exact user-requested audit and isolated remediation for the public desktop website, plus removal of the exposed preview-gate fallback. No production deploy, no app/content/OneSignal changes; live publication remains gated on private Worker secret setup and CI.",
+      "paths": [
+        "desktop-preview/",
+        "cloudflare/preview-gate.js",
+        "wrangler.toml",
+        "content/admin/change-scope-lock.json",
+        "scripts/check-desktop-audit.cjs",
+        "docs/desktop-website-audit-2026-11-16.md"
+      ],
+      "expiresAt": "2026-11-30T23:59:00Z"
+    },
+    {
       "id": "adult-mobile-keyboard-bottom-nav-no-jump-20261111",
       "at": "2026-11-11T18:25:00+01:00",
       "approvedBy": "user-explicit-20261111-fix-global-keyboard-navbar-visitor-and-test",
