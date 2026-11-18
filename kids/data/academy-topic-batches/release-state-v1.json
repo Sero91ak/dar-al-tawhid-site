@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_ACADEMY_PER_TOPIC_LIVE_RELEASE_V1",
+  "policy": "finish-one-topic-certify-all-ages-publish-live-verify-app-then-next",
+  "currentSubject": "akhlaq",
+  "currentTopic": "sidq",
+  "status": "recording",
+  "expectedCount": 58,
+  "fullyCertifiedCount": 0,
+  "liveConfirmed": false,
+  "liveVerifiedAt": null,
+  "liveCommit": null,
+  "nextTopic": "akhlaq-sabr",
+  "nextTopicLocked": true,
+  "publishedUtc": null,
+  "liveChecks": [
+    "cloudflare-main-deployment-successful",
+    "prod-public-manifest-exact-hashes",
+    "all-required-audio-urls-200",
+    "real-iphone-ipad-playback",
+    "profile-boy-girl-and-3-age-versions",
+    "quran-recitation-source-correct",
+    "zero-javascript-errors"
+  ],
+  "notes": "A staging commit, open PR, CI pass or draft manifest is not a live deployment. Never unlock next topic on those signals."
+}
