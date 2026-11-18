@@ -111,6 +111,7 @@ jobs:
                 return {w:innerWidth,h:innerHeight,scrollW:document.documentElement.scrollWidth,
                   v4:!!document.querySelector('link[href^="/home-v4.css"]'),footerTabs:!!document.querySelector('.footnav'),
                   icons:document.querySelectorAll('.settings-icons').length,theme:document.getElementById('app').dataset.homeTheme,
+                  fontSizes:{dailyDe:parseFloat(getComputedStyle(document.getElementById('dailyDe')).fontSize),source:parseFloat(getComputedStyle(document.getElementById('dailySource')).fontSize),counter:parseFloat(getComputedStyle(document.querySelector('.counter')).fontSize),ptime:parseFloat(getComputedStyle(document.querySelector('.prayer-cell .ptime')).fontSize)},
                   boxes,wallpaper:getComputedStyle(document.getElementById('app')).backgroundImage}
               """)
               print('VIEWPORT',w,h,data,flush=True)
@@ -118,6 +119,11 @@ jobs:
               if data['footerTabs']:errors.append(f'{w}x{h}: footer tabs must be absent')
               if data['scrollW']>w+3:errors.append(f'{w}x{h}: document horizontal overflow')
               if data['boxes']['audioName']['height']<17:errors.append(f'{w}x{h}: Quran player title clipped')
+              if data['fontSizes']['dailyDe']<18:errors.append(f'{w}x{h}: German daily text below 18px')
+              if data['fontSizes']['source']<12:errors.append(f'{w}x{h}: source citation below 12px')
+              if data['fontSizes']['counter']<14:errors.append(f'{w}x{h}: countdown below 14px')
+              if data['fontSizes']['ptime']<28:errors.append(f'{w}x{h}: prayer time below 28px')
+              if data['boxes']['openSettings']['width']<44:errors.append(f'{w}x{h}: settings touch target below 44px')
               for n in ['mainScreen','nextName','times','audioName','openSettings']:
                 box=data['boxes'][n]
                 if box is None or box['width']<=0 or box['height']<=0:errors.append(f'{w}x{h}: missing or hidden {n}')
