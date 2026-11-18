@@ -16,7 +16,7 @@ const MIME={".html":"text/html; charset=utf-8",".js":"application/javascript; ch
 function fileFor(raw){
  let u;try{u=new URL(raw,"http://localhost")}catch(e){return null}
  let pathname=decodeURIComponent(u.pathname);
- if(pathname==="/lernen/frauen-wissen/")pathname+="/index.html";
+ if(pathname==="/lernen/frauen-wissen/")pathname+="index.html";
  const full=path.resolve(root,"."+pathname);
  return full.startsWith(root+path.sep)?full:null;
 }
