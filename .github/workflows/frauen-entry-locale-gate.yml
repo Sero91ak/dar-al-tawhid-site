@@ -11,6 +11,7 @@ on:
       - 'scripts/test-frauen-batch16-reader.cjs'
       - 'scripts/test-frauen-batch16-localization.cjs'
       - 'scripts/test-frauen-batch16-image-share.cjs'
+      - 'scripts/verify-frauen-batch16-live.cjs'
       - 'assets/frauen/frauen-fiqh.js'
       - 'assets/frauen/frauen-entry-locale-v1.js'
       - 'content/admin/frauen-batch-16-2026-11-18.json'
@@ -41,3 +42,5 @@ jobs:
         run: node scripts/test-frauen-batch16-localization.cjs
       - name: Frauen 16 · alle 144 Bildexporte einschließlich RTL und vollständiger Texte prüfen
         run: node scripts/test-frauen-batch16-image-share.cjs
+      - name: Frauen 16 · öffentliche Live-Nachweisroutine syntaktisch prüfen (kein Deploy)
+        run: node --check scripts/verify-frauen-batch16-live.cjs
