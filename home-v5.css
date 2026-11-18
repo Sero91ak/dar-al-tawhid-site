@@ -174,3 +174,15 @@
   #app .screen { gap:clamp(5px,1.2vh,10px); }
   #app .daily-area { min-height:0; }
 }
+
+#app.reduced-motion *,
+#app.reduced-motion *::before,
+#app.reduced-motion *::after {
+  animation-duration:.01ms!important;
+  animation-iteration-count:1!important;
+  scroll-behavior:auto!important;
+  transition-duration:.01ms!important;
+}
+#app.reduced-motion #cinematicVideo { display:none!important; }
+.motion-setting { display:flex; align-items:center; gap:10px; color:var(--text); font-size:clamp(13px,1vw,16px); }
+.motion-setting input { width:22px; height:22px; min-height:22px!important; accent-color:var(--gold); }
