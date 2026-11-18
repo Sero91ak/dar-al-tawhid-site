@@ -122,6 +122,8 @@ def select_topic(roster):
     history = approved_live_history()
     ids = [x["lessonId"] for x in lessons]
     seen = set()
+    if len(history) > len(ids):
+        raise RuntimeError("Release history exceeds 66 actual curriculum topics")
     for n, row in enumerate(history):
         if not isinstance(row, dict) or row.get("lessonId") != ids[n]:
             raise RuntimeError("No skipped, reordered or duplicated topic releases permitted")
@@ -226,12 +228,14 @@ def main():
         if args.output is None:
             raise RuntimeError("--queue requires --output to avoid stdout leaking unreviewed corpus")
         target = args.output.resolve()
-        if target == (DATA / "academy-audio.json").resolve():
-            raise RuntimeError("Never write production media manifest from a planning script")
-        if ROOT not in target.parents:
-            raise RuntimeError("Write only to a local checked-out repository path")
+        designated = (BATCH / "production-queues").resolve()
+        if target.parent != designated or target.suffix != ".json":
+            raise RuntimeError("Queue output restricted to dedicated production-queues/*.json")
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", "utf-8")
+        payload = json.dumps(summary, ensure_ascii=False, indent=2) + "\\n"
+        if target.exists() and target.read_text("utf-8") != payload:
+            raise RuntimeError("Existing topic queue differs; refuse destructive overwrite")
+        target.write_text(payload, "utf-8")
         compact["output"] = target.relative_to(ROOT).as_posix()
     print(json.dumps(compact, ensure_ascii=False))
 
