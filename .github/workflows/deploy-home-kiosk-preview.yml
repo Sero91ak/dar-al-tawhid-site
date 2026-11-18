@@ -1,0 +1,102 @@
+name: Deploy DAR HOME Kiosk Preview (isolated Cloudflare Worker)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/deploy-home-kiosk-preview.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dar-home-kiosk-preview
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Dedicated HOME preview, never the production site
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout immutable HOME V2 prototype snapshot
+        uses: actions/checkout@v4
+        with:
+          ref: 76c326640c8d471a538f26b1d0da8ba3b61683d7
+          persist-credentials: false
+
+      - name: Prepare isolated static HOME preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s home-device/index.html
+          test -s content/home/device-config.json
+          mkdir -p .home-preview-dist/content/home
+          cp home-device/index.html .home-preview-dist/index.html
+          cp content/home/device-config.json .home-preview-dist/content/home/device-config.json
+          cat > .home-preview-worker.mjs <<'WORKER'
+          const base = 'https://dar-al-tawhid.de';
+          const upstreamPrefixes = [
+            '/api/prayer/', '/content/updates/', '/content/quran/',
+            '/apple-tv/', '/data/', '/quran-audio/'
+          ];
+          export default {
+            async fetch(request, env) {
+              const url = new URL(request.url);
+              if (request.method !== 'GET' && request.method !== 'HEAD') {
+                return new Response('Method Not Allowed', { status: 405 });
+              }
+              if (url.pathname === '/healthz') {
+                return Response.json({ service: 'dar-home-kiosk-preview', status: 'ok', version: '2026-11-18-v2' });
+              }
+              const path = url.pathname === '/' || url.pathname === '/home-device' ? '/index.html' : url.pathname;
+              if (upstreamPrefixes.some(prefix => path.startsWith(prefix))) {
+                const target = new URL(path + url.search, base);
+                const forwarded = new Request(target, request);
+                return fetch(forwarded);
+              }
+              const assetUrl = new URL(path + url.search, request.url);
+              const response = await env.ASSETS.fetch(new Request(assetUrl, request));
+              const headers = new Headers(response.headers);
+              headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive');
+              headers.set('Cache-Control', 'no-store');
+              return new Response(response.body, {
+                status: response.status, statusText: response.statusText, headers
+              });
+            }
+          };
+          WORKER
+          cat > wrangler.home-preview.toml <<'TOML'
+          name = "dar-home-kiosk-preview"
+          main = ".home-preview-worker.mjs"
+          compatibility_date = "2026-11-18"
+          workers_dev = true
+
+          [assets]
+          directory = ".home-preview-dist"
+          binding = "ASSETS"
+          run_worker_first = true
+          TOML
+          node --check .home-preview-worker.mjs
+          node -e 'const f=require("fs");const html=f.readFileSync(".home-preview-dist/index.html","utf8");for (const [i,m] of [...html.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/gi)].entries()){if(m[1].trim())new Function(m[1]);}console.log("HOME preview HTML scripts syntactically valid");'
+
+      - name: Deploy ONLY dar-home-kiosk-preview Worker
+        id: deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --config wrangler.home-preview.toml
+
+      - name: Report unique preview URL
+        if: success()
+        shell: bash
+        env:
+          PREVIEW_URL: ${{ steps.deploy.outputs.deployment-url }}
+        run: |
+          echo "## DĀR HOME Kiosk V2 – isolated preview" >> "$GITHUB_STEP_SUMMARY"
+          echo "Existing website, main site worker, Kids, iOS and tvOS were not deployed." >> "$GITHUB_STEP_SUMMARY"
+          echo "HOME source commit: 76c326640c8d471a538f26b1d0da8ba3b61683d7" >> "$GITHUB_STEP_SUMMARY"
+          echo "URL: ${PREVIEW_URL:-Consult Cloudflare Workers deployment log}" >> "$GITHUB_STEP_SUMMARY"
