@@ -97,7 +97,7 @@ const notification={
   audience:manifest.notificationDraft?.audience
 };
 const allReady=missing.length===0;
-const prepublishExceptions=new Set(["Cloudflare publication verification pending"]);
+const prepublishExceptions=new Set(["quellenstatus not yet published","Cloudflare publication verification pending"]);
 const prepublishReady=structureErrors.length===0&&detail.every(d=>d.blockers.every(reason=>prepublishExceptions.has(reason)));
 const notifyReady=allReady&&manifest.state==="published-live-verified"&&
   lock.locked===false&&
