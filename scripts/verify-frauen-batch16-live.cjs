@@ -14,7 +14,7 @@ async function get(url){
  const target=BASE+url+(url.includes("?")?"&":"?")+"audit="+encodeURIComponent(manifest.id);
  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),12000);
  try{
-   const r=await fetch(target,{signal:controller.signal,redirect:"error",headers:{"Cache-Control":"no-cache","Accept":"application/json,text/javascript"}});
+   const r=await fetch(target,{signal:controller.signal,redirect:"error",headers:{"Cache-Control":"no-cache","Accept":"*/*"}});
    if(!r.ok)throw Error("HTTP "+r.status+" for "+url);
    return r;
  }finally{clearTimeout(timer)}
@@ -52,9 +52,44 @@ async function getJson(path){const r=await get("/"+path);return r.json()}
    checked.push({id:row.id,liveStatus:e.quellenstatus||"absent",locales:actual?Object.keys(actual.locales||{}).length:0});
  }
  const adapter=await (await get("/assets/frauen/frauen-entry-locale-v1.js")).text();
+ const lessonUrl="/lernen/frauen-wissen/?id="+encodeURIComponent(manifest.records[0].id)+"&lang=de";
+ const lessonPage=await (await get(lessonUrl)).text();
+ if(!/<main\b[^>]*id="quiz"/.test(lessonPage) ||
+    !/\/assets\/frauen\/frauen-learning-v1\.js/.test(lessonPage))errors.push({type:"full-learning-page-not-live"});
+ const lessons=await (await get("/assets/frauen/frauen-learning-v1.js")).text();
+ const localLessons=fs.readFileSync(path.join(root,"assets/frauen/frauen-learning-v1.js"),"utf8");
+ if(lessons!==localLessons)errors.push({type:"learning-engine-not-deployed-or-stale"});
+ if(!lessons.includes("sourceFiles:FILES")||!lessons.includes('quellenstatus!=="geprueft"')){
+   errors.push({type:"learning-source-approval-gate-missing"});
+ }
+ const studyCss=await (await get("/assets/frauen/frauen-learning-v1.css")).text();
+ if(!studyCss.includes(".fw-answer")||!studyCss.includes('[dir="rtl"]'))
+   errors.push({type:"learning-RTL-responsive-styles-not-live"});
+ const focusManifest=await getJson("assets/frauen/frauen-neufokus-v1.json");
+ if(focusManifest.items?.length!==16||focusManifest.focusId!=="neufokus-frauenwissen-16-20261118"||
+    manifest.records.some(r=>!focusManifest.items.some(x=>x.id===r.id&&x.sourceUrl===r.sourceUrl)))
+   errors.push({type:"48h-focus-source-manifest-not-deployed"});
+ const focusJs=await (await get("/assets/frauen/frauen-neufokus-v1.js")).text();
+ if(!focusJs.includes("verifyPublished()")||!focusJs.includes("48*60*60*1000"))
+    errors.push({type:"48h-focus-runtime-not-deployed"});
+ const focusCss=await (await get("/assets/frauen/frauen-neufokus-v1.css")).text();
+ if(!focusCss.includes("#dv3Home .dar-frauen-neufokus"))
+    errors.push({type:"48h-focus-home-styles-not-deployed"});
+ if(!adapter.includes('attachLearningButton(article,item)')||
+    !adapter.includes('/lernen/frauen-wissen/?id='))
+    errors.push({type:"learning-action-missing-from-live-reader"});
+ if(process.argv.includes("--expect-focus")){
+    const feed=await getJson("content/focus-feed/feed-index.json");
+    const focus=(feed.items||[]).filter(x=>x.id==="neufokus-frauenwissen-16-20261118");
+    const start=Date.parse(focus[0]?.startsAt||""),end=Date.parse(focus[0]?.expiresAt||"");
+    if(focus.length!==1||focus[0].status!=="live"||focus[0].visibility!=="48h"||
+       !Number.isFinite(start)||end-start!==48*3600000||Date.now()<start||Date.now()>=end)
+      errors.push({type:"48h-start-page-focus-not-live-exactly-once"});
+ }
+
  if(!adapter.includes("function localImageExport("))errors.push({type:"locale-image-export-script-missing"});
  if(!adapter.includes("darAdultPreferredLocaleV1"))errors.push({type:"adult-language-preference-not-loaded"});
- const result={batch:manifest.id,base:BASE,publiclyLive:errors.length===0,checked:checked.length,checks:checked,errors,
+ const result={batch:manifest.id,base:BASE,publiclyLive:errors.length===0,checked:checked.length,learningReady:!errors.some(x=>/learning/.test(x.type||"")),focusExpected:process.argv.includes("--expect-focus"),checks:checked,errors,
   notificationEligible:false,
   note:"Actual source, nine locales and reader adapter must be live; this read-only audit is not a push authorization."};
  console.log(JSON.stringify(result,null,2));
