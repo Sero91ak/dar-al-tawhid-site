@@ -39,7 +39,9 @@ jobs:
           set -euo pipefail
           test -s home-device/index.html
           test -s content/home/device-config.json
-          mkdir -p .home-preview-dist/content/home
+          test -s home-device/media/apple-tv/catalog.json
+          mkdir -p .home-preview-dist/content/home .home-preview-dist/media
+          cp -R home-device/media/apple-tv .home-preview-dist/media/
           cp home-device/index.html .home-preview-dist/index.html
           cp home-device/home-v3.js .home-preview-dist/home-v3.js
           cp home-device/home-v3.css .home-preview-dist/home-v3.css
