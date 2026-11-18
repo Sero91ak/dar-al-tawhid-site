@@ -12,6 +12,7 @@ on:
       - 'scripts/test-frauen-batch16-localization.cjs'
       - 'scripts/test-frauen-batch16-image-share.cjs'
       - 'scripts/test-frauen-batch16-learning.cjs'
+      - 'scripts/test-frauen-batch16-browser.cjs'
       - 'assets/frauen/frauen-learning-v1.js'
       - 'assets/frauen/frauen-learning-v1.css'
       - 'lernen/frauen-wissen/index.html'
@@ -52,3 +53,20 @@ jobs:
         run: node scripts/test-frauen-batch16-learning.cjs
       - name: Frauen 16 · öffentliche Live-Nachweisroutine syntaktisch prüfen (kein Deploy)
         run: node --check scripts/verify-frauen-batch16-live.cjs
+
+  interactive-browser:
+    name: Frauen 16 · echte Lerninteraktion (Chromium)
+    needs: canonical-nine-languages
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Playwright Chromium installieren
+        run: |
+          npm install --no-save --ignore-scripts playwright
+          npx playwright install --with-deps chromium
+      - name: 16 × 9 Lernseiten · vier Viewportklassen · keine Veröffentlichung
+        run: node scripts/test-frauen-batch16-browser.cjs
