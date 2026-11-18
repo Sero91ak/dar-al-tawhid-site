@@ -95,3 +95,24 @@
 @media (prefers-reduced-motion:reduce) {
   #app *,#app *::before,#app *::after { animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important; }
 }
+
+/* Long daily content stays readable in both color modes, with touch scrolling when needed. */
+.daily-story {
+  max-height:min(22vh,220px);
+  overflow:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+}
+.daily-title {
+  max-height:none;
+  overflow:visible;
+  display:block;
+  -webkit-line-clamp:unset;
+}
+.daily-de {
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+  line-height:1.35;
+}
+.source { white-space:normal; line-height:1.35; }
