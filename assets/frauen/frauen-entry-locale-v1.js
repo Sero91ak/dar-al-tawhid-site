@@ -7,7 +7,7 @@
   "use strict";
   if(w.__DAR_FRAUEN_ENTRY_LOCALE_V1)return;
   w.__DAR_FRAUEN_ENTRY_LOCALE_V1=true;
-  var URI="/assets/frauen/frauen-entry-locales-v1.json?v=20261106-entry-v1";
+  var URI="/assets/frauen/frauen-entry-locales-v1.json?v=20261118-batch16-learning";
   var KEY="darAdultPreferredLocaleV1";
   var CODES=["de","ar","en","tr","ku","ckb","bs","fr","es"];
   var manifest=null,loading=false,scheduled=false;
@@ -84,6 +84,42 @@
       });
     }
   });
+  var LEARN_LABELS={
+    de:"Lernbereich öffnen · 4 Verständnisfragen",
+    ar:"فتح قسم التعلّم · أربعة أسئلة للفهم",
+    en:"Open learning area · 4 comprehension questions",
+    tr:"Öğrenme bölümünü aç · 4 anlama sorusu",
+    ku:"Beşa fêrbûnê veke · 4 pirsên têgihiştinê",
+    ckb:"کردنەوەی بەشی فێربوون · ٤ پرسیاری تێگەیشتن",
+    bs:"Otvori lekciju · 4 pitanja za razumijevanje",
+    fr:"Ouvrir le module · 4 questions de compréhension",
+    es:"Abrir la lección · 4 preguntas de comprensión"
+  };
+  function attachLearningButton(article,item){
+    // No new canonical Q route and no duplicated post. Existing adult app
+    // intercepts /lernen/ and opens it in the mounted internal reader.
+    var area=article.querySelector(".post-reader-main");
+    if(!area||!d.createElement)return;
+    var link=area.querySelector("[data-dar-frauen-learning-cta]");
+    if(!link&&(!area.appendChild||!d.head))return;
+    if(!link){
+      link=d.createElement("a");link.className="dar-frauen-learning-cta";
+      link.setAttribute("data-dar-frauen-learning-cta","");
+      link.setAttribute("aria-label","Lernbereich zum aktuellen Frauenbeitrag");
+      var source=area.querySelector(".post-source-module");
+      if(source&&source.insertAdjacentElement)source.insertAdjacentElement("afterend",link);
+      else area.appendChild(link);
+      if(!d.getElementById("darFrauenLearningCtaStylesV1")){
+        var style=d.createElement("style");style.id="darFrauenLearningCtaStylesV1";
+        style.textContent="article.post-reader .dar-frauen-learning-cta{display:flex;align-items:center;justify-content:center;text-align:center;gap:7px;width:100%;min-height:52px;margin:14px 0;padding:13px 17px;border:1px solid var(--gold2,#b69c70);border-radius:16px;background:color-mix(in srgb,var(--card,#182b24) 86%,#bd9c56 14%);color:var(--text,#f5ebd7);font:750 clamp(13px,3.7vw,17px)/1.3 system-ui,sans-serif;text-decoration:none;overflow-wrap:anywhere}article.post-reader .dar-frauen-learning-cta:focus-visible{outline:3px solid #b89457;outline-offset:3px}@media(prefers-reduced-motion:no-preference){article.post-reader .dar-frauen-learning-cta{transition:border-color .15s ease,transform .15s ease}article.post-reader .dar-frauen-learning-cta:active{transform:scale(.99)}}";
+        d.head.appendChild(style);
+      }
+    }
+    link.href="/lernen/frauen-wissen/?id="+encodeURIComponent(item.entry.id)+"&lang="+encodeURIComponent(item.code);
+    link.lang=item.code;link.dir=(item.code==="ar"||item.code==="ckb")?"rtl":"ltr";
+    link.textContent=LEARN_LABELS[item.code];
+    link.setAttribute("aria-label",LEARN_LABELS[item.code]);
+  }
   function applyOneArticle(article,item){
     var p=item.pack,lab=p.labels||{},code=item.code;
     var dir=code==="ar"||code==="ckb"?"rtl":"ltr";
@@ -134,6 +170,7 @@
       text(explanation,"h3",lab.sharh);
       text(explanation,".post-fazit-body",p.sharh);
     }
+    attachLearningButton(article,item);
   }
   function applyOneCard(card,item) {
     var p=item.pack,lab=p.labels||{},code=item.code;
