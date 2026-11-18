@@ -13,6 +13,7 @@ on:
       - 'scripts/test-frauen-batch16-image-share.cjs'
       - 'scripts/test-frauen-batch16-learning.cjs'
       - 'scripts/test-frauen-batch16-neufokus.cjs'
+      - 'scripts/test-frauen-batch16-admin-focus.cjs'
       - 'assets/frauen/frauen-neufokus-v1.js'
       - 'assets/frauen/frauen-neufokus-v1.css'
       - 'assets/frauen/frauen-neufokus-v1.json'
@@ -60,6 +61,8 @@ jobs:
         run: node scripts/test-frauen-batch16-neufokus.cjs
       - name: DĀR Admin · 48h-Neufokus-Serverregeln syntaktisch prüfen
         run: node --check cloudflare/focus-feed-admin.js
+      - name: DĀR Admin · tatsächliche 16er-Freigabesperre und 48h-Speicherzeit testen
+        run: node scripts/test-frauen-batch16-admin-focus.cjs
       - name: Frauen 16 · öffentliche Live-Nachweisroutine syntaktisch prüfen (kein Deploy)
         run: node --check scripts/verify-frauen-batch16-live.cjs
 
