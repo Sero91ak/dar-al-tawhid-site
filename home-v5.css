@@ -196,9 +196,9 @@
   pointer-events:none;
   background:radial-gradient(ellipse at center,rgba(2,12,16,.12) 0%,rgba(2,12,16,.42) 76%,rgba(2,12,16,.72) 100%);
 }
-#saver .saver-content,
+#saver .saver-content { position:relative; z-index:1; }
 #saver .saver-bottom,
-#saver .saver-clock { position:relative; z-index:1; }
+#saver .saver-clock { z-index:1; }
 #app[data-home-theme="light"] #saver::before {
   background:radial-gradient(ellipse at center,rgba(243,241,231,.94) 0%,rgba(243,241,231,.84) 67%,rgba(243,241,231,.42) 100%);
 }
