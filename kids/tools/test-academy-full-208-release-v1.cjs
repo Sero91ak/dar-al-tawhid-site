@@ -80,7 +80,7 @@ for(const version of ["v28","v29"]){
  assert.equal(planned.sourceGitBlobSha,expectedBlob,"Original source file changed: "+src);
  assert.equal(planned.lessonCount,4);
  assert.equal(planned.phrases.length,planned.phraseCount);
- const validIds=Array.from(world.window["DARKidsAcademyCurriculumV"+version.toUpperCase()].ids);
+ const validIds=Array.from(world.window["DARKidsAcademyCurriculum"+version.toUpperCase()].ids);
  assert.deepEqual(planned.curriculumIds,validIds);
  const expectedContexts=new Set();
  for(const id of validIds){
