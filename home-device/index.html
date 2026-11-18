@@ -30,6 +30,7 @@
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
 </style>
 <link rel="stylesheet" href="/home-v3.css?v=3.1"><link rel="stylesheet" href="/home-v4.css?v=4.0">
+<link rel="stylesheet" href="/home-v5.css?v=5.0">
 </head>
 <body>
 <div id="app">
@@ -194,7 +195,7 @@ async function syncAll(silent=false){const opts=await Promise.allSettled([loadDa
 function scheduledRefresh(){const now=Date.now();if(!scheduledRefresh.last||now-scheduledRefresh.last>=Math.max(60,Number(cfg.remoteRefresh)||300)*1000){scheduledRefresh.last=now;syncAll(true);loadPrayers()}}
 function returnPrayersStaleCheck(){if(!prayerDate||prayerDate!==nowKey(getCity().tz))loadPrayers()}
 function scheduleRotations(){const key=cfg.hadithRotation==='daily'?nowKey(getCity().tz):String(Math.floor(Date.now()/(Number(cfg.hadithRotation)||300)/1000));if(scheduleRotations.lastKey!==key){scheduleRotations.lastKey=key;if(cfg.dailyPanelMode==='alternate'){rotateDaily()}if(cfg.hadithRotation!=='daily')chooseHadith(true);else chooseHadith(false)}}
-function applyTheme(){if(cfg.theme==='ivory'){$('app').style.setProperty('--gold','#e1c99a');$('app').style.setProperty('--cream','#fffaf0');$('app').style.setProperty('--muted','#dbd1bb')}else{$('app').style.setProperty('--gold','#d8bd82');$('app').style.setProperty('--cream','#f2eee2');$('app').style.setProperty('--muted','#b8bdb5')} $('app').style.filter=`brightness(${cfg.brightness}%)`}
+function applyTheme(){const app=$('app');app.classList.toggle('theme-ivory',cfg.theme==='ivory');if(cfg.theme==='ivory'){app.style.setProperty('--gold','#496b55');app.style.setProperty('--cream','#25372f');app.style.setProperty('--muted','#52645a')}else{app.style.setProperty('--gold','#d8bd82');app.style.setProperty('--cream','#f2eee2');app.style.setProperty('--muted','#b8bdb5')}app.style.filter=`brightness(${cfg.brightness}%)`}
 function resetIdle(){lastInteraction=Date.now()}
 document.querySelectorAll('.prayer-cell').forEach(btn=>btn.addEventListener('click',()=>{const key=btn.dataset.prayer;toast(NAMES[key][0]+' · '+effective(key)+' Uhr · '+getCity().name);enterSettings('standort')}));
 $('openSettings').addEventListener('click',()=>enterSettings());$('closeSettings').addEventListener('click',leaveSettings);$('discardSettings').addEventListener('click',leaveSettings);$('saveSettings').addEventListener('click',()=>{verifySettings();applyTheme()});$('openCities')?.addEventListener('click',()=>enterSettings('standort'));
