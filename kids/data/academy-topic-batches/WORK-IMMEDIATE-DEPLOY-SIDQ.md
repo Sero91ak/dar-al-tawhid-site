@@ -46,3 +46,47 @@ Die 76 Tondateien umfassen 45 komplette deutsche Ṣidq-Sprechtexte, 9 arabische
 Aktueller geprüfter Zustand: 76 ElevenLabs-Generierungen vorhanden; originale Audio-Dateien **noch nicht als Bytes in GitHub importiert**, neun Mischsprach-Sätze noch nicht zusammengesetzt, neuer produktiver Ṣidq-V4-Player-Stand noch nicht live. Eine fertige Generation im ElevenLabs-Canvas ist **keine** live verfügbare Audio-Datei in der Kids-App.
 
 Die ältere geschützte Akademie-Staging-Logik und gespeicherte Lernfortschritte der Kinder bleiben unberührt. Alle Sprechtext-Schlüssel sind exakt; Qurʾān-Rezitationen verbleiben bei authentischen Rezitatoren, nicht bei synthetischem ElevenLabs-TTS.
+
+## 18.11.2026 · Neuer gesicherter Null-Credit-Download (bevorzugt statt manuellem Umbenennen)
+
+Ein zusätzlicher Downloader ist verbindlich vorbereitet:
+`kids/tools/download-academy-elevenlabs-originals-v1.py`.
+
+Alle Dateien stammen aus dem **bestehenden** Flow und werden anhand der 76 kanonischen Paare aus `sessionId` und `generationId` zugeordnet. In Work die **aktuellen** vollständigen signierten URLs der vorhandenen Generationen lesen (keine neuen TTS-Generierungen) und lokal in einer **nicht committen** JSON-Datei speichern:
+
+```json
+{
+  "items": [
+    {
+      "generationId": "EINE_BEREITS_BESTEHENDE_GENERATION_ID",
+      "contentUrl": "https://elevenlabsusercontent.com/database/workspace/.../content_generation/SESSION_ID/GENERATION_ID/content.mp3?Expires=...&KeyName=...&Signature=..."
+    }
+  ]
+}
+```
+
+Alle 76 realen Einträge sind erforderlich; hier wird nur das Datenformat dargestellt. **Echte private signierte URLs oder Zugangstokens niemals öffentlich in GitHub oder das Chat-Protokoll schreiben.** Auch die private URL-Datei darf nicht in Git landen.
+
+Zuerst kostenlos und ohne Netzwerkanfrage prüfen:
+
+```sh
+python3 kids/tools/test-academy-download-gate-v1.py
+python3 kids/tools/download-academy-elevenlabs-originals-v1.py --status --source-dir /tmp/dar-kids-sidq-originals
+```
+
+Dann vorhandene, schon bezahlte Originale sicher laden, ohne ElevenLabs erneut aufzurufen:
+
+```sh
+python3 kids/tools/download-academy-elevenlabs-originals-v1.py \
+ --download \
+ --signed-urls /tmp/elevenlabs-sidq-signed-urls-private.json \
+ --source-dir /tmp/dar-kids-sidq-originals
+
+python3 kids/tools/import-publish-academy-sidq-v4-v1.py --dry-run
+python3 kids/tools/import-publish-academy-sidq-v4-v1.py \
+ --import --source-dir /tmp/dar-kids-sidq-originals
+```
+
+Der neue Downloader verifiziert den Host gegen `elevenlabsusercontent.com`, konkrete Session-/Generation-ID, Signaturfelder, URL-Ablaufzeit, MP3-Codec, Laufzeit und Dateigröße, lädt in eine temporäre Datei und verschiebt sie atomar nach `<generationId>.mp3`. Wiederholungen verwenden die vorhandenen Originale ohne doppelte Downloads; es wird ein SHA-256-Provenienzregister neben den Dateien ausgegeben. **Keine TTS-Credits** durch diesen Ablauf.
+
+Status dieses Chats: Der Downloadpfad und Sicherheitstests sind im PR hinterlegt. Der hier vorhandene Chat-Container kann keine Originale aus den kurzlebigen ElevenLabs-Links beziehen und hat keinen GitHub-Binary-Upload-Token. Daher wurden weiterhin keine echten Bytes importiert und kein Live-Deployment behauptet. Diesen Schritt mit der verbundenen Work-Cloud-Computer-Umgebung ausführen.
