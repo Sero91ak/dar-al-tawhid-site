@@ -123,11 +123,11 @@ function finish(){
  message(lab.loading);
  try{
   if(!/^[a-z0-9-]+$/.test(id))throw Error("Invalid canonical ID");
-  var catalog=await w.fetch("/assets/frauen/frauen-entry-locales-v1.json",{cache:"no-store"}).then(safeJson);
+  var catalog=await w.fetch("/assets/frauen/frauen-entry-locales-v1.json?v=20261118-batch16-learning",{cache:"no-store"}).then(safeJson);
   entry=catalog.entries&&catalog.entries[id];entryIds=catalog.entryIds;entries=catalog.entries;
   if(!entry||!Array.isArray(entryIds)||!entryIds.includes(id)||!entry.locales||!entry.locales[code])throw Error("Article not in locale catalog");
   if(!api.sourceFiles[entry.area])throw Error("Unknown female knowledge area");
-  var source=await w.fetch(api.sourceFiles[entry.area],{cache:"no-store"}).then(safeJson);
+  var source=await w.fetch(api.sourceFiles[entry.area]+"?v=20261118-batch16-learning",{cache:"no-store"}).then(safeJson);
   var original=(source.eintraege||[]).filter(e=>e.kennung===id);
   if(original.length!==1||original[0].quellenstatus!=="geprueft"||original[0].freigabeDurchSerhat!==true){
     message(lab.ready);return;
