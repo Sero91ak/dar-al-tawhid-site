@@ -18,6 +18,8 @@ assert.equal(api.CODES.length,9);
 assert.deepEqual(Array.from(api.CODES),batch.requiredLocales);
 assert.match(page,/<main id="quiz"/);
 assert.match(page,/frauen-learning-v1\.js/);
+assert.match(script,/fw-reading-reference/,"Learning page must expose full same-language source reading");
+assert.match(script,/fw-reading-sharh/,"Learning explanation disclosure missing");
 assert.match(page,/dar-reading-surface-v1\.js/);
 assert.match(css,/focus-visible/);
 assert.match(css,/\[dir="rtl"\]/);
