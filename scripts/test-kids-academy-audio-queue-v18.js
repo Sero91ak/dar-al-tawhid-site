@@ -81,4 +81,10 @@ assert.equal(originalStatus.requiredOriginals,76);
 assert.equal(originalStatus.missingOriginals,76);
 assert.equal(originalStatus.newGenerationRequested,false);
 assert.equal(originalStatus.publiclyReleased,false);
+// Complete curriculum audit: 66 code-backed lessons + 142 outlines = 208.
+// V28/V29 must remain fully source-exact (327 distinct speech texts).
+// This is offline: no ElevenLabs billing or public release.
+require("node:child_process").execFileSync("node",[
+  "kids/tools/test-academy-full-208-release-v1.cjs"
+],{cwd:require("node:path").resolve(__dirname,".."),stdio:"inherit"});
 console.log("ACADEMY VOICE V18 PASS: exact Serhat-only matching, three valid staged clips and one quarantined old greeting, zero synthetic fallback, no credits.");
