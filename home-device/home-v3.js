@@ -15,7 +15,7 @@
   {id:'kids-hero',label:'Moschee · Nachtmotiv',url:ROOT+'/kids/assets/kids-home-v1191/hero-static-reference.jpg'},
   {id:'abstract',label:'Klassisch · ohne Bild',url:''}
  ];
- let prefs={theme:'dark',wallpaper:'tv-kaaba-day',wallpaperMode:'manual',saverWallpaper:'same',adhanCinema:true,allowBackgroundUpdates:true};
+ let prefs={theme:'dark',wallpaper:'tv-kaaba-day',wallpaperMode:'manual',reduceMotion:false,saverWallpaper:'same',adhanCinema:true,allowBackgroundUpdates:true};
  try{const from=JSON.parse(localStorage.getItem(KEY)||'{}');if(from&&typeof from==='object'&&!Array.isArray(from)){prefs={...prefs,...from}}}catch{}
  const safeHTML=(str)=>String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
  function imageFor(name){let w=wallpapers.find(x=>x.id===name);if(name==='custom'){const raw=localStorage.getItem(KEY+'-wallpaper')||'';return /^data:image\/(?:png|jpeg|webp);base64,/i.test(raw)?raw:''}return w?.url||''}
@@ -25,6 +25,8 @@
  function warn(msg){const t=$('toast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3900)}
  function apply(){
   const app=$('app');if(!app)return;
+  app.classList.toggle('reduced-motion',!!prefs.reduceMotion);
+  const motionControl=$('homeReduceMotion');if(motionControl)motionControl.checked=!!prefs.reduceMotion;
   app.dataset.homeTheme=prefs.theme==='light'?'light':'dark';
   const homeChoice=prefs.wallpaperMode==='auto'?'auto':prefs.wallpaper;
   const bg=imageFor(resolveWallpaper(homeChoice));
@@ -112,6 +114,7 @@
   const legacyTheme=$('theme');if(legacyTheme)legacyTheme.addEventListener('change',()=>{prefs.theme=legacyTheme.value==='ivory'?'light':'dark';const appearance=$('homeAppearance');if(appearance)appearance.value=prefs.theme;store();apply()});
   const saver=$('homeSaverBackground');if(saver){const options=[{id:'same',label:'Wie HOME-Hintergrund'},{id:'auto',label:'Automatisch nach Tageszeit'},...wallpapers.map(x=>({id:x.id,label:x.label}))];saver.replaceChildren(...options.map(x=>new Option(x.label,x.id)));saver.addEventListener('change',()=>{prefs.saverWallpaper=saver.value;store();apply()})}
   const wallMode=$('homeWallpaperMode');if(wallMode){wallMode.value=prefs.wallpaperMode;wallMode.addEventListener('change',()=>{prefs.wallpaperMode=wallMode.value;store();apply()})}
+  const motionControl=$('homeReduceMotion');if(motionControl){motionControl.checked=!!prefs.reduceMotion;motionControl.addEventListener('change',()=>{prefs.reduceMotion=motionControl.checked;store();apply()})}
   const cin=$('homeCinemaBackground');if(cin)cin.addEventListener('change',()=>{prefs.adhanCinema=cin.checked;store();apply()});
   const upload=$('homeWallpaperUpload');if(upload)upload.addEventListener('change',()=>{
    const f=upload.files?.[0];if(!f)return;
