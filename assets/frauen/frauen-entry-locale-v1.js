@@ -60,6 +60,26 @@
     if(e.id!==id)return null;
     return {entry:e,pack:l[code],code:code};
   }
+  // Read-only bridge for image-share exports: the visual canvas must receive
+  // exactly the same selected-language pack as the card and detail reader.
+  // Never expose draft IDs that do not exist in the canonical catalog.
+  w.DARFrauenEntryLocaleV1=Object.freeze({
+    current:function(id){
+      var item=active(String(id||""));
+      if(!item)return null;
+      return Object.freeze({
+        id:item.entry.id,
+        area:item.entry.area,
+        lang:item.code,
+        dir:item.code==="ar"||item.code==="ckb"?"rtl":"ltr",
+        title:item.pack.title,
+        statement:item.pack.statement,
+        source:item.pack.source,
+        statementLabel:(item.pack.labels||{}).statement||"",
+        sourceLabel:(item.pack.labels||{}).source||""
+      });
+    }
+  });
   function applyOneArticle(article,item){
     var p=item.pack,lab=p.labels||{},code=item.code;
     var dir=code==="ar"||code==="ckb"?"rtl":"ltr";
