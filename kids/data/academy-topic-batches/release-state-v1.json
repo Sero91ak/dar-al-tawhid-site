@@ -22,7 +22,7 @@
     "quran-recitation-source-correct",
     "zero-javascript-errors"
   ],
-  "notes": "A staging commit, open PR, CI pass or draft manifest is not a live deployment. Never unlock next topic on those signals.",
+  "notes": "Owner authorized generation and direct live publication without preview. 26 distinct Ṣidq V4 generation records exist in ElevenLabs; no audio binary has yet been imported into the app's repository. Staged files must be actual media before release; no placeholder publishing.",
   "sourceAudioGenerationFlowId": "zrB4zGdz9OTndLryQtIB",
   "sourceAudioGenerationFlowUrl": "https://elevenlabs.io/app/flows/zrB4zGdz9OTndLryQtIB",
   "sourceAudioGenerationModel": "eleven_v4",
@@ -37,5 +37,16 @@
   "originalAudioFilesImportedToGitHub": 0,
   "publicV4ClipCountNew": 0,
   "ownerAuthorizedNoListeningPrecheck": true,
-  "productionIssue": "ElevenLabs Creative returns signed media URLs but connected GitHub file tool cannot ingest binary via URL; switch to Work cloud computer for downloading 76 genuine original MP3s, run importer, merge and verify Cloudflare release. Temporary signed URLs must not be committed to repo."
+  "productionIssue": "ElevenLabs Creative returns signed media URLs but connected GitHub file tool cannot ingest binary via URL; switch to Work cloud computer for downloading 76 genuine original MP3s, run importer, merge and verify Cloudflare release. Temporary signed URLs must not be committed to repo.",
+  "elevenLabsGeneratedTextCount": 26,
+  "elevenLabsGenerationEvents": 27,
+  "sourceGenerationReceipts": "kids/data/academy-topic-batches/akhlaq-sidq-elevenlabs-generations-v1.json",
+  "binaryAssetsImportedCount": 0,
+  "liveAssetsPublishedCount": 0,
+  "ownerAuthorization": {
+    "generateV4": true,
+    "continueTopicByTopic": true,
+    "allowDirectPublicationAfterMediaImport": true,
+    "previewRequired": false
+  }
 }
