@@ -131,6 +131,17 @@ jobs:
             gallery=driver.find_elements(By.CSS_SELECTOR,'#wallpaperOptions button[data-wallpaper]')
             print('GALLERY',len(gallery),flush=True)
             if len(gallery)<4:errors.append('Wallpaper gallery did not render')
+            if not any(x.get_attribute('data-wallpaper')=='tv-kaaba-day' for x in gallery):errors.append('Native Kaaba wallpaper missing from gallery')
+            driver.execute_async_script("""
+              const done=arguments[arguments.length-1];
+              Promise.all(['/media/apple-tv/tv-kaaba-day.jpg','/media/apple-tv/adhan-fajr.jpg'].map(src=>new Promise(resolve=>{
+                const i=new Image();i.onload=()=>resolve({src,ok:true,w:i.naturalWidth});i.onerror=()=>resolve({src,ok:false});i.src=src;
+              }))).then(done);
+            """)
+            media=driver.execute_script("return window.performance.getEntriesByType('resource').filter(x=>x.name.includes('/media/apple-tv/')).map(x=>x.name)")
+            print('NATIVE_MEDIA_REQUESTS',media,flush=True)
+            if not any('/tv-kaaba-day.jpg' in x for x in media):errors.append('Native wallpaper asset did not load')
+            if not any('/adhan-fajr.jpg' in x for x in media):errors.append('Native prayer artwork did not load')
             if gallery:
               gallery[0].click()
               chosen=gallery[0].get_attribute('aria-pressed')
@@ -145,6 +156,13 @@ jobs:
             opts_f=driver.find_elements(By.CSS_SELECTOR,'#fajrAdhanTrack option')
             opts_r=driver.find_elements(By.CSS_SELECTOR,'#adhanTrack option')
             print('ADHAN_OPTIONS',len(opts_f),len(opts_r),flush=True)
+            driver.find_element(By.ID,'previewFajrAdhan').click()
+            WebDriverWait(driver,10).until(lambda d:d.find_elements(By.ID,'h4PrayerArtwork'))
+            WebDriverWait(driver,10).until(lambda d:d.execute_script("return document.getElementById('h4PrayerArtwork')?.naturalWidth||0")>0)
+            art=driver.find_element(By.ID,'h4PrayerArtwork')
+            print('FAJR_ART',art.get_attribute('src'),flush=True)
+            if not art.get_attribute('src').endswith('/media/apple-tv/adhan-fajr.jpg'):errors.append('Faǧr cinematic did not use native Apple TV artwork')
+            driver.find_element(By.ID,'stopAdhan').click()
             driver.find_element(By.CSS_SELECTOR,'button[data-tab="saver"]').click()
             driver.find_element(By.ID,'saverPreview').click()
             if 'saver-open' not in driver.find_element(By.ID,'app').get_attribute('class'):errors.append('Screensaver not started')
