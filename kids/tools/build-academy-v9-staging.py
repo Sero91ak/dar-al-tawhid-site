@@ -55,6 +55,27 @@ def prepare_academy_spoken_text(visible_text: str) -> str:
     return value.strip()
 
 
+_ARABIC_SCRIPT_RE = re.compile(
+    r"[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]"
+)
+
+
+def prepare_academy_tts_text(visible_text: str) -> str:
+    """German-only narration: no global Arabic PLS rewrites inside German sentences.
+
+    Unknown Arabic pronunciation is a review blocker, not permission to alter the
+    displayed canonical text or silently substitute an Arabic script fragment.
+    """
+    spoken_text = prepare_academy_spoken_text(visible_text)
+    prepared = prepare_kids_voice_text(spoken_text, apply_pronunciation=False)
+    if _ARABIC_SCRIPT_RE.search(prepared):
+        raise RuntimeError(
+            "Academy DE language isolation: native Arabic script or honorific "
+            "ligature requires separate verified AR segment; no credits used"
+        )
+    return prepared
+
+
 def technical_duration(filepath:pathlib.Path)->float:
     return float(subprocess.check_output([
         "ffprobe","-v","error","-show_entries","format=duration",
@@ -65,7 +86,7 @@ def technical_duration(filepath:pathlib.Path)->float:
 def generate_audio(text:str, target:pathlib.Path, secret:str)->float:
     """Use exactly the approved story-generation backend; do NOT call Flash directly."""
     spoken_text=prepare_academy_spoken_text(text)
-    prepared=prepare_kids_voice_text(spoken_text)
+    prepared=prepare_academy_tts_text(text)
     payload=json.dumps({"text":text,"prepared":prepared,"profile":MASTER_PROFILE},ensure_ascii=False).encode("utf-8")
     req=urllib.request.Request(
         BACKEND+"/generate-with-timings",data=payload,method="POST",
@@ -192,7 +213,7 @@ def main():
     for row in pending:
         phrase=row["text"]
         spoken_text=prepare_academy_spoken_text(phrase)
-        prepared=prepare_kids_voice_text(spoken_text)
+        prepared=prepare_academy_tts_text(phrase)
         if created>=args.limit or used_chars+len(prepared)>args.max_chars:
             break
         digest=hashlib.sha256(json.dumps({"text":prepared,"voice":VOICE_ID,"model":MODEL,"profile":MASTER_PROFILE,"settings":POLICY["production"]["voiceSettings"],"dictionaryVersion":POLICY["production"]["pronunciationDictionaryVersionId"]},sort_keys=True,ensure_ascii=False).encode()).hexdigest()
