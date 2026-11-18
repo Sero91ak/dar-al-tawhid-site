@@ -38,6 +38,7 @@
    adhan.style.backgroundImage=prefs.adhanCinema&&bg?'url("'+bg.replaceAll('"','%22')+'")':'none';
   }
   const mode=$('homeAppearance');if(mode)mode.value=prefs.theme;
+  const legacyTheme=$('theme');if(legacyTheme)legacyTheme.value=prefs.theme==='light'?'ivory':'night';
   const wallMode=$('homeWallpaperMode');if(wallMode)wallMode.value=prefs.wallpaperMode;
   const saverMode=$('homeSaverBackground');if(saverMode)saverMode.value=prefs.saverWallpaper;
   const cinema=$('homeCinemaBackground');if(cinema)cinema.checked=!!prefs.adhanCinema;
@@ -108,6 +109,7 @@
  }
  function bind(){
   const sel=$('homeAppearance');if(sel)sel.addEventListener('change',()=>{prefs.theme=sel.value;store();apply()});
+  const legacyTheme=$('theme');if(legacyTheme)legacyTheme.addEventListener('change',()=>{prefs.theme=legacyTheme.value==='ivory'?'light':'dark';const appearance=$('homeAppearance');if(appearance)appearance.value=prefs.theme;store();apply()});
   const saver=$('homeSaverBackground');if(saver){const options=[{id:'same',label:'Wie HOME-Hintergrund'},{id:'auto',label:'Automatisch nach Tageszeit'},...wallpapers.map(x=>({id:x.id,label:x.label}))];saver.replaceChildren(...options.map(x=>new Option(x.label,x.id)));saver.addEventListener('change',()=>{prefs.saverWallpaper=saver.value;store();apply()})}
   const wallMode=$('homeWallpaperMode');if(wallMode){wallMode.value=prefs.wallpaperMode;wallMode.addEventListener('change',()=>{prefs.wallpaperMode=wallMode.value;store();apply()})}
   const cin=$('homeCinemaBackground');if(cin)cin.addEventListener('change',()=>{prefs.adhanCinema=cin.checked;store();apply()});
