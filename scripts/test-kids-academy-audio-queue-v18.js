@@ -29,4 +29,15 @@ require("node:child_process").execFileSync("python3",[
 require("node:child_process").execFileSync("python3",[
   "kids/tools/build-academy-topic-batch-v1.py","--dry-run"
 ],{cwd:require("node:path").resolve(__dirname,".."),stdio:"inherit"});
+// The 100%-complete thematic release gate is a separate, non-billable check.
+// It must NOT publish a partial Ṣidq lesson, even if a four-clip batch passes.
+const academyRelease=JSON.parse(require("node:child_process").execFileSync("python3",[
+  "kids/tools/publish-academy-topic-v1.py","--status"
+],{cwd:require("node:path").resolve(__dirname,".."),encoding:"utf8"}));
+assert.equal(academyRelease.subject,"akhlaq");
+assert.equal(academyRelease.topic,"sidq");
+assert.equal(academyRelease.required,58);
+assert.equal(academyRelease.nextTopicLocked,true);
+assert.equal(academyRelease.publicManifestModified,false);
+assert.equal(academyRelease.canPublish,academyRelease.confirmed===academyRelease.required);
 console.log("ACADEMY VOICE V18 PASS: exact Serhat-only matching, three valid staged clips and one quarantined old greeting, zero synthetic fallback, no credits.");
