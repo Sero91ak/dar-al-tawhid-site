@@ -64,6 +64,7 @@ for(const [change,why] of [
  [{providerIdempotencyUuid:"frauen-batch16-20261118"},"non UUID provider key"],
  [{requireSeparatePushLockPassword:false},"password bypass"],
  [{verifyTargetSegment:false},"missing audience verification"],
+ [{guardStatus:"admin-unlocked"},"missing native/Kurdish language proof"],
  [{localizedMessages:{...n.localizedMessages,ar:undefined}},"missing language"]
 ]){
   assert.throws(()=>validate({...n,...change}),undefined,why+" unexpectedly accepted");
