@@ -217,6 +217,11 @@ jobs:
             art=driver.find_element(By.ID,'h4PrayerArtwork')
             print('FAJR_ART',art.get_attribute('src'),flush=True)
             if not art.get_attribute('src').endswith('/media/apple-tv/adhan-fajr.jpg'):errors.append('Faǧr cinematic did not use native Apple TV artwork')
+            for prayer,asset in [('Fajr','fajr'),('Ḍuhr','dhuhr'),('ʿAṣr','asr'),('Maġrib','maghrib'),('ʿIšāʾ','isha')]:
+              driver.execute_script("document.getElementById('adhanInfo').textContent=arguments[0];document.getElementById('adhanVisual').classList.add('active')",prayer)
+              expected='/media/apple-tv/adhan-'+asset+'.jpg'
+              WebDriverWait(driver,10).until(lambda d:d.find_element(By.ID,'h4PrayerArtwork').get_attribute('src').endswith(expected))
+              WebDriverWait(driver,10).until(lambda d:d.execute_script("return document.getElementById('h4PrayerArtwork')?.naturalWidth||0")>0)
             driver.execute_script("document.getElementById('stopAdhan').click()")
             WebDriverWait(driver,10).until(lambda d:'active' not in d.find_element(By.ID,'adhanVisual').get_attribute('class'))
             driver.find_element(By.ID,'openSettings').click()
