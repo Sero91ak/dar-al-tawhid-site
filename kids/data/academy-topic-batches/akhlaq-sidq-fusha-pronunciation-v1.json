@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_ACADEMY_SIDQ_FUSHA_NATIVE_TERMS_V1",
+  "subject": "akhlaq",
+  "lessonId": "sidq",
+  "language": "ar",
+  "languageCode": "ar",
+  "masterVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "dictionaryId": "Q8w3SxtoVo8NSjsnlJEd",
+  "dictionaryVersionId": "wSzgkGpAwEDiTak8DApc",
+  "status": "source-vocalization-specified-no-audio-generated",
+  "toolConstraint": "ElevenLabs creative_v4 connector rejects pronunciation_dictionary_locators; only direct authorized DĀR Voice Studio backend can honor the original dictionary. No unverifiable 'library applied' claim.",
+  "mixedLanguagePolicy": "Use separate native Arabic segments for words with Fuṣḥā phonemes; never apply global Arabic PLS to a German utterance. Quran Arabic verses always use authentic human reciter.",
+  "verifiedSources": [
+    "https://quran.ksu.edu.sa/tafseer/katheer/sura9-aya119.html",
+    "https://dorar.net/hadith/sharh/10210",
+    "https://dorar.net/hadith/sharh/132498"
+  ],
+  "entries": [
+    {
+      "canonical": "Ṣidq",
+      "arabic": "صِدْق",
+      "meaning": "Wahrhaftigkeit",
+      "source": "https://dorar.net/hadith/sharh/10210",
+      "note": "Do not confuse صِدْق with صِدِّيق"
+    },
+    {
+      "canonical": "aṣ-Ṣiddīq",
+      "arabic": "الصِّدِّيق",
+      "meaning": "der Wahrhaftige",
+      "source": "https://dorar.net/hadith/sharh/132498",
+      "note": "Distinct gemination and long ī; do not pronounce as Ṣidq"
+    },
+    {
+      "canonical": "Sūrat at-Tawbah",
+      "arabic": "سُورَةُ التَّوْبَةِ",
+      "meaning": "Sūrah 9",
+      "source": "https://quran.ksu.edu.sa/tafseer/katheer/sura9-aya119.html",
+      "note": "This is the sūrah name, not a synthetic recitation of Quran verses"
+    },
+    {
+      "canonical": "Ṣaḥīḥ Muslim",
+      "arabic": "صَحِيح مُسْلِم",
+      "meaning": "Ḥadīṯ collection attribution",
+      "source": "https://dorar.net/hadith/sharh/10210",
+      "note": "Do not speak source numbers as part of the sacred text"
+    },
+    {
+      "canonical": "Qurʾān",
+      "arabic": "الْقُرْآن",
+      "meaning": "Qurʾān",
+      "source": "https://quran.ksu.edu.sa/tafseer/katheer/sura9-aya119.html",
+      "note": "Not to be mixed with actual verse recitation"
+    },
+    {
+      "canonical": "ﷺ",
+      "arabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+      "meaning": "Prophetic blessing (fully spoken)",
+      "source": "https://dorar.net/hadith/sharh/10210",
+      "note": "Never voice the ligature as an acronym"
+    },
+    {
+      "canonical": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+      "arabic": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ",
+      "meaning": "Full greeting",
+      "source": "https://dorar.net/h/5GsBk9LA/osoul",
+      "note": "Full greeting only, never substitute shortened legacy audio"
+    }
+  ]
+}
