@@ -51,8 +51,8 @@ for(const {entry:e,file} of all){
   assert.ok(!Object.hasOwn(p,"direktnachweisUrl")&&!Object.hasOwn(p,"qNumber"),"Locale may not override source URL or ID");
  }
  assert.equal(entry.locales.de.title,e.titel,"German content title drift");
- assert.equal(entry.locales.de.statement,e.vollstaendigeAussage,"German main statement drift");
- assert.equal(entry.locales.de.lesson,e.lehre,"German lesson drift");
+ assert.equal(entry.locales.de.statement,e.vollstaendigeAussage||e.inhalt,"German main statement drift");
+ assert.equal(entry.locales.de.lesson,e.lehre||e.nutzen,"German lesson drift");
  assert.equal(entry.locales.de.source,e.quellenanzeige.replace(/^Quelle:\s*/i,""),"German source drift");
 }
 for(const id of ids)assert.ok(used.has(id),"Orphan locale ID with no linked women post: "+id);
