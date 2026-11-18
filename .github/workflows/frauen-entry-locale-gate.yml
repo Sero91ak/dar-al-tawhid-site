@@ -19,6 +19,7 @@ on:
       - 'assets/frauen/frauen-neufokus-v1.json'
       - 'cloudflare/focus-feed-admin.js'
       - 'scripts/test-frauen-batch16-browser.cjs'
+      - 'scripts/test-frauen-batch16-neufokus-browser.cjs'
       - 'assets/frauen/frauen-learning-v1.js'
       - 'assets/frauen/frauen-learning-v1.css'
       - 'lernen/frauen-wissen/index.html'
@@ -82,3 +83,5 @@ jobs:
           npx playwright install --with-deps chromium
       - name: 16 × 9 Lernseiten · vier Viewportklassen · keine Veröffentlichung
         run: node scripts/test-frauen-batch16-browser.cjs
+      - name: Neufokus Startseite · vier Viewports, neun Sprachen, 48h Ablauf, Quellen-Sperre
+        run: node scripts/test-frauen-batch16-neufokus-browser.cjs
