@@ -3819,9 +3819,24 @@
     try { appStoreBadge = await frauenLoadImage("/assets/app-store-badge-de-official.svg?share-brand=v1275"); } catch (eBadge) {}
     try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (e0) {}
 
-    var title = String(titelVon(e) || bereichKicker(abschnitt) || "Frauen im Islam").trim();
-    var body = String(aussageVon(e) || "").replace(/^(?:AUSSAGE|STATEMENT)\s*[:·–—-]?\s*/i, "").trim();
-    var source = String(quelleText(e) || "").replace(/^(?:QUELLE|SOURCE)\s*[:·–—-]?\s*/i, "").trim();
+    // Localized image export: use the same canonical entry and adult language
+    // as the already localized reader; fall back only for older non-catalogued
+    // reports, never to a different canonical ID or source.
+    var localized = null;
+    try {
+      var packApi = window.DARFrauenEntryLocaleV1;
+      if (packApi && typeof packApi.current === "function") localized = packApi.current(e.kennung);
+      if (localized && localized.area !== abschnitt) localized = null;
+    } catch (localeErr) { localized = null; }
+    var title = String((localized && localized.title) || titelVon(e) || bereichKicker(abschnitt) || "Frauen im Islam").trim();
+    var body = String((localized && localized.statement) || aussageVon(e) || "").replace(/^(?:AUSSAGE|STATEMENT)\s*[:·–—-]?\s*/i, "").trim();
+    var source = String((localized && localized.source) || quelleText(e) || "").replace(/^(?:QUELLE|SOURCE)\s*[:·–—-]?\s*/i, "").trim();
+    var statementLabel = String((localized && localized.statementLabel) || "AUSSAGE");
+    var sourceLabel = String((localized && localized.sourceLabel) || "QUELLE");
+    var exportRtl = Boolean(localized && localized.dir === "rtl");
+    var imageTextX = exportRtl ? W - margin : margin;
+    var imageBodyX = exportRtl ? W - margin - 18 : margin + 18;
+    var imageSourceX = exportRtl ? W - margin - 22 : margin + 22;
     var titleSize = title.length > 86 ? 41 : title.length > 52 ? 46 : 52;
 
     ctx.font = "600 " + titleSize + "px Georgia, serif";
@@ -3871,13 +3886,15 @@
       ctx.lineTo(W - margin, 104);
       ctx.stroke();
 
-      ctx.textAlign = "left";
+      // Canvas bidi applies to the exported image as well as to the HTML reader.
+      ctx.direction = exportRtl ? "rtl" : "ltr";
+      ctx.textAlign = exportRtl ? "right" : "left";
 
       var y = 162;
       ctx.fillStyle = "#fff7e7";
       ctx.font = "600 " + titleSize + "px Georgia, serif";
       titleLines.forEach(function (line) {
-        ctx.fillText(line, margin, y);
+        ctx.fillText(line, imageTextX, y);
         y += titleSize + 11;
       });
 
@@ -3894,7 +3911,7 @@
 
       ctx.fillStyle = "#efd89f";
       ctx.font = "800 15px Arial, sans-serif";
-      ctx.fillText("AUSSAGE", margin + 18, statementCardY + 39);
+      ctx.fillText(statementLabel, imageBodyX, statementCardY + 39);
 
       var quoteY = statementCardY + 92;
       if (statementTextH + 128 < statementCardH) {
@@ -3904,7 +3921,7 @@
       ctx.font = "400 " + bodySize + "px Georgia, serif";
       pages[p].forEach(function (line) {
         if (!line) { quoteY += Math.round(bodyLine * .58); return; }
-        ctx.fillText(line, margin + 18, quoteY);
+        ctx.fillText(line, imageBodyX, quoteY);
         quoteY += bodyLine;
       });
 
@@ -3926,14 +3943,14 @@
 
       ctx.fillStyle = "#e9cf91";
       ctx.font = "800 16px Arial, sans-serif";
-      ctx.fillText("QUELLE", margin + 22, panelY + 29);
+      ctx.fillText(sourceLabel, imageSourceX, panelY + 29);
 
       ctx.fillStyle = "rgba(255,248,232,.82)";
       ctx.font = "500 17px Arial, sans-serif";
       var sourceLines = frauenWrapCanvas(ctx, source, contentW - 44).slice(0, 3);
       var sy = panelY + 59;
       sourceLines.forEach(function (line) {
-        ctx.fillText(line, margin + 22, sy);
+        ctx.fillText(line, imageSourceX, sy);
         sy += 27;
       });
 
