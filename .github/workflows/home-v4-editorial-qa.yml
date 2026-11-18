@@ -6,6 +6,7 @@ on:
       - feature/home-editorial-v5-20261118
     paths:
       - home-device/**
+      - home-v5.css
       - .github/workflows/home-v4-editorial-qa.yml
   workflow_dispatch:
 
@@ -136,6 +137,8 @@ jobs:
               if chosen!='true':errors.append('Wallpaper selection not functional')
             Select(driver.find_element(By.ID,'homeAppearance')).select_by_value('light')
             if driver.find_element(By.ID,'app').get_attribute('data-home-theme')!='light':errors.append('Light mode not applied')
+            if driver.execute_script("return getComputedStyle(document.getElementById('app')).colorScheme")!='light':errors.append('V5 light color system not applied')
+            if driver.execute_script("return getComputedStyle(document.getElementById('dailyDe')).whiteSpace")=='nowrap':errors.append('Daily translation still truncated to one line')
             driver.find_element(By.ID,'saveSettings').click()
             driver.find_element(By.ID,'openSettings').click()
             driver.find_element(By.CSS_SELECTOR,'button[data-tab="adhan"]').click()
