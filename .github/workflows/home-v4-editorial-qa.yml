@@ -70,8 +70,10 @@ jobs:
         run: python -m pip install -q selenium
       - name: Run browser layout and interaction checks
         env:
-          HOME_TEST_URL: https://dar-home-kiosk-preview.sero91ak.workers.dev
+          HOME_TEST_URL: http://127.0.0.1:8765
         run: |
+          python3 -m http.server 8765 --directory home-device >/tmp/home-v4-http.log 2>&1 &
+          sleep 2
           python - <<'PY'
           import os,time
           from selenium import webdriver
