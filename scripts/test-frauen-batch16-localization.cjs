@@ -53,12 +53,15 @@ const document={
 const storage={value:"de",getItem(){return this.value},setItem(k,v){this.value=v}};
 const location={href:"https://dar-al-tawhid.de/#frauen",hash:"#frauen",origin:"https://dar-al-tawhid.de",pathname:"/"};
 let lastCopiedMessage="";
+let lastOpenedUrl="";
+let lastNativeShare=null;
 const window={
  document,location,localStorage:storage,
  fetch:async()=>({ok:true,json:async()=>index}),
  requestAnimationFrame:fn=>fn(),
  addEventListener(name,cb){(events["win:"+name]??=[]).push(cb)},
- navigator:{clipboard:{writeText(text){lastCopiedMessage=String(text);return Promise.resolve()}}},console
+ navigator:{clipboard:{writeText(text){lastCopiedMessage=String(text);return Promise.resolve()}},share(payload){lastNativeShare=payload;return Promise.resolve()}},
+ open(url){lastOpenedUrl=String(url)},console
 };
 const context={window,document,URL,Promise,console,MutationObserver:class {observe(){}},CustomEvent:class {constructor(type){this.type=type}}};
 vm.runInNewContext(code,context,{filename:"frauen-entry-locale-v1.js",timeout:10000});
@@ -107,6 +110,22 @@ const emit=(name)=>{for(const f of events["win:"+name]||[])f({key:"darAdultPrefe
    assert.ok(evt.defaultPrevented,"Localized click action escaped to German fallback");
    for(const [label,value] of [["title",desired.title],["statement",desired.statement],["lesson",desired.lesson],["source",desired.source]])
      assert.ok(lastCopiedMessage.includes(value),"Localized copy-text "+label+" not present: "+record.id+" "+code);
+   for(const kind of ["wa","tg","native"]){
+     shareButton.getAttribute=name=>name==="data-frauen-share"?kind:null;
+     lastOpenedUrl="";lastNativeShare=null;
+     const secondary={...evt,defaultPrevented:false,preventDefault(){this.defaultPrevented=true}};
+     events["doc:click"][0](secondary);
+     assert.ok(secondary.defaultPrevented,"Localized "+kind+" click escaped to German fallback");
+     if(kind==="native"){
+       assert.ok(lastNativeShare,"Native app share was not called");
+       assert.ok(lastNativeShare.text.includes(desired.statement),"Native share used German statement");
+       assert.equal(lastNativeShare.url,"https://dar-al-tawhid.de/#/frauen/"+record.area+"/"+encodeURIComponent(record.id),"Native share target changed");
+     }else{
+       assert.ok(lastOpenedUrl.startsWith(kind==="wa"?"https://wa.me/?text=":"https://t.me/share/url?"),"Wrong "+kind+" share target");
+       assert.ok(decodeURIComponent(lastOpenedUrl).includes(desired.statement),"Untranslated "+kind+" share text");
+       assert.ok(decodeURIComponent(lastOpenedUrl).includes(record.id),"Missing canonical URL in "+kind);
+     }
+   }
    checked++;
   }
  }
