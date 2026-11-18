@@ -46,6 +46,15 @@ function validate(o){
     }
   }
   assert.match(o.messageReview||"",/native-language validation required/,"editorial drafts must not be presented as language certified");
+  const delivery=o.deliveryLanguageVerification||{};
+  assert.deepEqual(delivery.appLanguages,required,"nine requested app languages not acknowledged");
+  assert.deepEqual(delivery.existingWebSdkDirectLanguages,["de","en","tr","ar","bs","fr","es"],"web SDK capability assumption changed without verification");
+  assert.deepEqual(delivery.perSubscriptionRoutingRequired,["ku","ckb"],"Kurdish deliveries must use verified per-installation routing");
+  if(o.guardStatus!=="not-authorized-not-sent"){
+    for(const key of ["iosNativeSdkLocaleBridgeVerified","androidNativeSdkLocaleBridgeVerified","kurdishPerSubscriptionRoutingVerified","targetSegmentOptInVerified","allNineInstallationLanguagesVerified"]){
+      assert.equal(delivery[key],true,key+" must be verified before notification authorization");
+    }
+  }
 }
 validate(n);
 // Negative controls prove a generic segment or missing authorization cannot
