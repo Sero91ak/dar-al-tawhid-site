@@ -8,6 +8,7 @@ on:
       - 'cloudflare/site-router.js'
       - 'scripts/check-frauen-entry-locales.cjs'
       - 'scripts/check-frauen-batch16.cjs'
+      - 'scripts/test-frauen-batch16-notification-draft.cjs'
       - 'scripts/test-frauen-batch16-reader.cjs'
       - 'scripts/test-frauen-batch16-localization.cjs'
       - 'scripts/test-frauen-batch16-image-share.cjs'
@@ -50,6 +51,8 @@ jobs:
         run: node scripts/check-frauen-entry-locales.cjs
       - name: Frauen 16 · vollständige Struktur und Sprachen (nur Vorbereitung)
         run: node scripts/check-frauen-batch16.cjs prepare
+      - name: Frauen 16 · neunsprachige Benachrichtigung nur als geschützten Entwurf prüfen
+        run: node scripts/test-frauen-batch16-notification-draft.cjs
       - name: Frauen 16 · echte Leserouten im Speicher simulieren, ohne Freischaltung
         run: node scripts/test-frauen-batch16-reader.cjs
       - name: Frauen 16 · alle 144 Sprachwechsel für Karte und Leser simulieren
