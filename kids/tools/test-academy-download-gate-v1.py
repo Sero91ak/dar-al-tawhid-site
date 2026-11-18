@@ -14,7 +14,7 @@ spec.loader.exec_module(module)
 
 session, generation = "sElA123cde", "gEN456original"
 path = (
-    "https://elevenlabsusercontent.com/database/workspace/workspace123/"
+    "https://elevenlabsusercontent.com/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/"
     "content_generation/" + session + "/" + generation + "/content.mp3"
 )
 query = urllib.parse.urlencode({
