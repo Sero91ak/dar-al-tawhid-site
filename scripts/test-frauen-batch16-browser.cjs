@@ -46,7 +46,7 @@ const server=http.createServer((req,res)=>{
  await page.locator(".fw-message").filter({hasText:api.labels.de.ready}).waitFor({timeout:10000});
  assert.equal(await page.locator(".fw-answer").count(),0,"Private report leaked before approval");
  // Browser-only replacement of the *response*; never changes repository files.
- await page.route("**/data/frauen-*.json",route=>{
+ await page.route("**/data/frauen-*.json*",route=>{
    const p=new URL(route.request().url()).pathname;
    const relative=p.replace(/^\//,""),file=path.resolve(root,relative);
    assert.ok(file.startsWith(root+path.sep));
