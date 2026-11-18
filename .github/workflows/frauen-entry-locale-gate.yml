@@ -11,6 +11,12 @@ on:
       - 'scripts/test-frauen-batch16-reader.cjs'
       - 'scripts/test-frauen-batch16-localization.cjs'
       - 'scripts/test-frauen-batch16-image-share.cjs'
+      - 'scripts/test-frauen-batch16-learning.cjs'
+      - 'assets/frauen/frauen-learning-v1.js'
+      - 'assets/frauen/frauen-learning-v1.css'
+      - 'lernen/frauen-wissen/index.html'
+      - 'content/focus-feed/feed-index.json'
+      - 'content/staging/focus-feed/feed-index.json'
       - 'scripts/verify-frauen-batch16-live.cjs'
       - 'assets/frauen/frauen-fiqh.js'
       - 'assets/frauen/frauen-entry-locale-v1.js'
@@ -42,5 +48,7 @@ jobs:
         run: node scripts/test-frauen-batch16-localization.cjs
       - name: Frauen 16 · alle 144 Bildexporte einschließlich RTL und vollständiger Texte prüfen
         run: node scripts/test-frauen-batch16-image-share.cjs
+      - name: Frauen 16 · 576 Lernfragen plus 48h-Neufokus ohne vorzeitige Freigabe prüfen
+        run: node scripts/test-frauen-batch16-learning.cjs
       - name: Frauen 16 · öffentliche Live-Nachweisroutine syntaktisch prüfen (kein Deploy)
         run: node --check scripts/verify-frauen-batch16-live.cjs
