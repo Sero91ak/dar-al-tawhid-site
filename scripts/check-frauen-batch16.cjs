@@ -46,6 +46,7 @@ for(const r of manifest.records){
     check(l.locales?.de?.lesson===lesson,"German lesson changed");
     const sharh=found.redaktionelleErlaeuterung||found.sharh;
     check(l.locales?.de?.sharh===sharh,"German source-linked editorial sharh changed");
+    const originalRefNumbers=String(found.quellenanzeige||"").match(/\b\d{2,5}[a-z]?\b/g)||[];
     for(const code of codes){
       const p=l.locales?.[code];
       check(Boolean(p),"missing locale "+code);
@@ -57,6 +58,9 @@ for(const r of manifest.records){
         if(code!=="de"&&["title","statement","lesson","sharh"].includes(k))
           check(p[k]!==l.locales.de?.[k],"untranslated German field "+code+"."+k);
       }
+      const translatedRefNumbers=String(p.source||"").match(/\b\d{2,5}[a-z]?\b/g)||[];
+      for(const number of originalRefNumbers)check(translatedRefNumbers.includes(number),"original source number "+number+" missing in "+code);
+      check(String(p.source||"").length>=22,"incomplete source citation in "+code);
       const labels=["statement","lesson","source","proof","open","back","share","sharh","status","area","shareTop","shareHint","copyText","copyLink","image","shareButton","shareNote","waAria","tgAria","igAria","nativeAria"];
       for(const k of labels)check(typeof p.labels?.[k]==="string"&&p.labels[k].trim().length>=2,"UI label missing "+code+"."+k);
     }
