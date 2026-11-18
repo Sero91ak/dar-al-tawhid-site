@@ -182,13 +182,30 @@ def summarize(topic):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--status", action="store_true")
-    parser.add_argument("--queue", action="store_true")
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--status", action="store_true")
+    group.add_argument("--queue", action="store_true")
+    group.add_argument("--audit-all", action="store_true")
     parser.add_argument("--output", type=pathlib.Path)
     args = parser.parse_args()
-    if args.status == args.queue:
-        parser.error("Choose exactly --status or --queue")
     roster = load(ROSTER)
+    if args.audit_all:
+        if len(roster.get("existingLessons", [])) != 66 or len(roster.get("futureEditorial", [])) != 142:
+            raise RuntimeError("Expected 66 real source lessons plus 142 future outlines")
+        all_rows = [summarize(x) for x in roster["existingLessons"]]
+        if len({x["lessonId"] for x in all_rows}) != 66:
+            raise RuntimeError("Duplicate lesson in release roster")
+        print(json.dumps({
+            "curriculumLessonCount": len(all_rows),
+            "sourceBackedLessonCount": sum(x["exactUniquePhrases"] > 0 for x in all_rows),
+            "sourceExactPhraseAssociations": sum(x["exactUniquePhrases"] for x in all_rows),
+            "firstLessonId": all_rows[0]["lessonId"],
+            "firstLessonExactPhrases": all_rows[0]["exactUniquePhrases"],
+            "lastLessonId": all_rows[-1]["lessonId"],
+            "additionalEditorialOutlinesLocked": len(roster["futureEditorial"]),
+            "autoPublishes": False, "newTtsCreditsCharged": 0,
+        }, ensure_ascii=False))
+        return
     next_topic, history = select_topic(roster)
     if next_topic is None:
         print(json.dumps({
