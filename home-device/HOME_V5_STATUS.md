@@ -26,20 +26,23 @@ No per-image licensing metadata was present in the source asset catalog. The sou
 
 ## Verification
 
-GitHub Actions browser QA passed in run 44376880705.
+GitHub Actions browser QA passed in run 44392596242. The run covered 1024×600, 1280×800, 1600×900, 1920×1200, and 800×1280. It verified minimum text sizes, the settings touch target, no bottom navigation, theme synchronization, long Arabic/German/source content scrolling in both themes, automatic and separate wallpapers, reduced motion, local asset loading, Faǧr artwork, and preference persistence.
 
-The run checks the 1024×600, 1280×800, 1600×900, 1920×1200, and 800×1280 layouts. It measures minimum font sizes and the settings touch target; exercises appearance synchronization, long-content scrolling in both themes, automatic wallpaper selection, independent HOME and screensaver scenes, light-theme screensaver colors, reduced motion, local asset loading, Faǧr cinematic art, and preference persistence after reload.
+The same run simulated offline and online browser states. Prayer times remained locally calculated while offline, and the online DĀR feed returned after reconnection. This is browser network emulation, not a physical device or prolonged offline test.
 
-The isolated HOME preview was deployed to:
+A follow-up change adds a persistent landscape settings category rail with a separate detail pane. A browser assertion for that layout is now included in the updated QA workflow; its result is pending.
+
+The isolated HOME preview is:
 
 - https://dar-home-kiosk-preview.sero91ak.workers.dev/
 
-The isolated Worker deployment completed in run 44376839953. Direct HTTP checks returned 200 for the preview document, scripts, stylesheet, catalog, logo, all three wallpaper scenes, and all five prayer images.
+The last completed isolated Worker deployment is run 44382666985. It published the current HOME source and bundled manifest, images, scripts, and V5 stylesheet. Later changes only adjusted QA workflow/documentation. The current CSS settings rail is newer than that deployment and must be verified in the next deploy before it is called live.
 
 ## Remaining work and limits
 
-- This branch improves the current V4 design; it does not yet deliver the full requested information architecture and settings redesign.
-- No physical 7-, 8-, or 11-inch device is available in this test. The five browser viewports are layout checks, not hardware validation.
-- Offline recovery, reconnection behavior, full Adhan playback, energy use, contrast over every possible photograph, and touch behavior still need deeper review.
-- Browser autoplay is not a guarantee of background Adhan playback. A future native device service is needed for that.
-- No Swift, iOS, tvOS, Android, live website, or production Worker source was changed or deployed.
+- The current branch improves the HOME V4 design and settings presentation. It does not yet complete the requested start-page information architecture or a full V5 redesign.
+- The settings page has seven categories and working existing controls, but some capabilities are demos or placeholders. In particular, brightness is a browser visual filter, there is no secure phone-to-device pairing, and a native device service is still needed for reliable background Aḏān.
+- Physical 7-, 8-, and 11-inch device validation, long-duration audio and energy tests, actual touch behavior, and visual review across the full photo library remain open.
+- Browser autoplay is not a guarantee of background Aḏān playback. No native Aḏān service was built.
+- No per-image license metadata was present in the local Apple-TV asset catalog. The source project was accessible and its artwork was reused, but commercial redistribution rights have not been independently established.
+- No Swift, iOS, tvOS, Android, live website, or production Worker source was changed or deployed. Only the isolated HOME test Worker is in scope.
