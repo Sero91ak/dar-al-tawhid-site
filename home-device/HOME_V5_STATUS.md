@@ -26,15 +26,15 @@ No per-image licensing metadata was present in the source asset catalog. The sou
 
 ## Verification
 
-GitHub Actions browser QA passed in run 44375045505.
+GitHub Actions browser QA passed in run 44376288178.
 
-The run checks the 1024×600, 1280×800, 1600×900, 1920×1200, and 800×1280 layouts. It exercises appearance synchronization, long-content scrolling in both themes, automatic wallpaper selection, independent HOME and screensaver scenes, local asset loading, screensaver, Faǧr cinematic art, and preference persistence after reload.
+The run checks the 1024×600, 1280×800, 1600×900, 1920×1200, and 800×1280 layouts. It measures minimum font sizes and the settings touch target; exercises appearance synchronization, long-content scrolling in both themes, automatic wallpaper selection, independent HOME and screensaver scenes, reduced motion, local asset loading, screensaver, Faǧr cinematic art, and preference persistence after reload.
 
 The isolated HOME preview was deployed to:
 
 - https://dar-home-kiosk-preview.sero91ak.workers.dev/
 
-Direct HTTP checks returned 200 for the preview document, scripts, stylesheet, catalog, logo, all three wallpaper scenes, and all five prayer images.
+The isolated Worker deployment completed in run 44376221063. Direct HTTP checks returned 200 for the preview document, scripts, stylesheet, catalog, logo, all three wallpaper scenes, and all five prayer images.
 
 ## Remaining work and limits
 
