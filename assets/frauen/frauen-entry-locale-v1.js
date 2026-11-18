@@ -186,11 +186,132 @@
       .catch(function(e){try{console.warn("DAR Frauen locale overlay unavailable",e)}catch(_){} })
       .finally(function(){loading=false});
   }
+  /* Isolated localized image share; the canonical/frozen Frauen renderer is unchanged.
+     The same pack currently visible in the reader is the sole text source.
+     No external export API or subscription service is called. */
+  function imgWrap(ctx,value,maxWidth){
+    var result=[];
+    String(value||"").split(/\n/).forEach(function(paragraph){
+      var words=paragraph.trim().split(/\s+/).filter(Boolean),line="";
+      if(!words.length){result.push("");return}
+      words.forEach(function(word){
+        var next=line?line+" "+word:word;
+        if(line&&ctx.measureText(next).width>maxWidth){result.push(line);line=word}
+        else line=next;
+      });
+      if(line)result.push(line);
+    });
+    return result;
+  }
+  function imgRounded(ctx,x,y,width,height,r){
+    if(typeof ctx.roundRect==="function"){
+      ctx.beginPath();ctx.roundRect(x,y,width,height,r);return;
+    }
+    ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+width,y,x+width,y+height,r);
+    ctx.arcTo(x+width,y+height,x,y+height,r);
+    ctx.arcTo(x,y+height,x,y,r);ctx.arcTo(x,y,x+width,y,r);ctx.closePath();
+  }
+  function imgLoad(url){
+    return new Promise(function(resolve){
+      try{
+        var img=new w.Image();
+        img.onload=function(){resolve(img)};
+        img.onerror=function(){resolve(null)};
+        img.src=url;
+      }catch(e){resolve(null)}
+    });
+  }
+  async function localImageExport(item,instagramIntent){
+    var p=item.pack,lab=p.labels||{},rtl=item.code==="ar"||item.code==="ckb";
+    var W=1080,H=1350,m=76,x=rtl?W-m:m,inner=rtl?W-m-20:m+20;
+    var canvas=d.createElement("canvas");canvas.width=W;canvas.height=H;
+    var ctx=canvas.getContext("2d");if(!ctx)throw Error("Canvas nicht verfügbar");
+    var brand=await imgLoad("/watermark-my-logo-full.png?share-brand=v1275");
+    var badge=await imgLoad("/assets/app-store-badge-de-official.svg?share-brand=v1275");
+    var backgrounds=["/assets/frauen/share-v1292/01.webp","/assets/frauen/share-v1292/02.webp","/assets/frauen/share-v1292/03.webp"];
+    var photo=null;
+    for(var i=0;i<backgrounds.length&&!photo;i++)photo=await imgLoad(backgrounds[i]);
+    try{if(d.fonts&&d.fonts.ready)await d.fonts.ready}catch(_){}
+    var titleSize=p.title.length>86?35:p.title.length>55?40:46;
+    ctx.font="600 "+titleSize+"px Georgia, serif";
+    var titleLines=imgWrap(ctx,p.title,W-2*m);
+    var textSize=String(p.statement).length>750?36:String(p.statement).length>400?40:46;
+    ctx.font="400 "+textSize+"px Georgia, serif";
+    var lines=imgWrap(ctx,p.statement,W-2*m-44);
+    var titleHeight=Math.min(220,titleLines.length*(titleSize+11));
+    var contentTop=176+titleHeight+20,contentEnd=1082;
+    var lineHeight=Math.round(textSize*1.39),linesPerPage=Math.max(3,Math.floor((contentEnd-contentTop-120)/lineHeight));
+    var pages=[];
+    for(var j=0;j<lines.length;j+=linesPerPage)pages.push(lines.slice(j,j+linesPerPage));
+    if(!pages.length)pages.push([""]);
+    var files=[];
+    for(var page=0;page<pages.length;page++){
+      ctx.clearRect(0,0,W,H);ctx.direction="ltr";ctx.textAlign="left";
+      ctx.fillStyle="#0b211d";ctx.fillRect(0,0,W,H);
+      if(photo){
+        var iw=photo.naturalWidth||photo.width,ih=photo.naturalHeight||photo.height;
+        if(iw&&ih){var scale=Math.max(W/iw,H/ih),dw=iw*scale,dh=ih*scale;
+          ctx.drawImage(photo,(W-dw)/2,(H-dh)/2,dw,dh);}
+      }
+      var overlay=ctx.createLinearGradient(0,0,W,H);
+      overlay.addColorStop(0,"rgba(2,13,17,.85)");
+      overlay.addColorStop(1,"rgba(4,20,18,.82)");
+      ctx.fillStyle=overlay;ctx.fillRect(0,0,W,H);
+      ctx.fillStyle="#efd89f";ctx.font="700 25px Arial, sans-serif";
+      ctx.fillText("DĀR AL TAWḤĪD",m,69);
+      ctx.strokeStyle="rgba(239,216,159,.55)";ctx.lineWidth=1.4;
+      ctx.beginPath();ctx.moveTo(m,101);ctx.lineTo(W-m,101);ctx.stroke();
+      ctx.direction=rtl?"rtl":"ltr";ctx.textAlign=rtl?"right":"left";
+      ctx.fillStyle="#fff7e7";ctx.font="600 "+titleSize+"px Georgia, serif";
+      titleLines.forEach(function(line,n){ctx.fillText(line,x,160+n*(titleSize+11))});
+      var y=176+titleHeight;
+      imgRounded(ctx,m-15,y-16,W-2*m+30,Math.max(260,contentEnd-y),25);
+      ctx.fillStyle="rgba(3,15,15,.48)";ctx.fill();
+      ctx.strokeStyle="rgba(239,216,159,.28)";ctx.stroke();
+      ctx.fillStyle="#efd89f";ctx.font="700 16px Arial, sans-serif";
+      ctx.fillText(lab.statement||"AUSSAGE",inner,y+24);
+      ctx.fillStyle="#fff9e9";ctx.font="400 "+textSize+"px Georgia, serif";
+      pages[page].forEach(function(line,k){if(line)ctx.fillText(line,inner,y+86+k*lineHeight)});
+      var footerY=1110;
+      imgRounded(ctx,m,footerY,W-2*m,145,20);
+      ctx.fillStyle="rgba(3,15,15,.78)";ctx.fill();
+      ctx.strokeStyle="rgba(239,216,159,.29)";ctx.stroke();
+      ctx.fillStyle="#e9cf91";ctx.font="700 16px Arial, sans-serif";
+      ctx.fillText(lab.source||"QUELLE",inner,footerY+28);
+      ctx.fillStyle="#fff8e9";ctx.font="400 19px Arial, sans-serif";
+      var sourceLines=imgWrap(ctx,p.source,W-2*m-48);
+      sourceLines.slice(0,4).forEach(function(line,k){ctx.fillText(line,inner,footerY+56+k*24)});
+      if(pages.length>1){ctx.fillStyle="#e9cf91";ctx.font="600 15px Arial, sans-serif";ctx.fillText((page+1)+" / "+pages.length,rtl?m+20:W-m-20,1088);}
+      ctx.direction="ltr";ctx.textAlign="left";
+      ctx.strokeStyle="rgba(239,216,159,.48)";ctx.beginPath();ctx.moveTo(m,1284);ctx.lineTo(W-m,1284);ctx.stroke();
+      ctx.fillStyle="#fff8e9";ctx.font="600 21px Georgia, serif";
+      ctx.fillText("dar-al-tawhid.de",m+18,1324);
+      if(brand){ctx.save();ctx.beginPath();ctx.arc(W-m-54,58,42,0,Math.PI*2);ctx.clip();ctx.drawImage(brand,W-m-96,16,84,84);ctx.restore()}
+      if(badge)ctx.drawImage(badge,W-m-162,1294,162,54);
+      var blob=await new Promise(function(resolve){canvas.toBlob(resolve,"image/png",.96)});
+      if(!blob)throw Error("Bildexport konnte nicht erstellt werden");
+      files.push(new w.File([blob],"dar-al-tawhid-frauen-"+(page+1)+".png",{type:"image/png"}));
+    }
+    var nav=w.navigator||{};
+    if(typeof nav.share==="function"&&(!nav.canShare||nav.canShare({files:files}))){
+      try{await nav.share({files:files});return true}catch(e){if(e&&e.name==="AbortError")return true;}
+    }
+    var ios=w.webkit&&w.webkit.messageHandlers&&w.webkit.messageHandlers.darShareImage;
+    if(ios&&typeof ios.postMessage==="function"&&files.length){
+      var dataUrl=canvas.toDataURL("image/png");
+      ios.postMessage({dataUrl:dataUrl,filename:"dar-al-tawhid-frauen.png",title:p.title});
+      return true;
+    }
+    if(typeof nav.share==="function"){
+      await nav.share({title:p.title,text:p.statement,url:w.location.href});return true;
+    }
+    throw Error("Bild-Teilen wird auf diesem Gerät nicht unterstützt");
+  }
   function userShare(ev){
     var btn=ev.target&&ev.target.closest?ev.target.closest("button[data-frauen-share]"):null;
     if(!btn||ev.defaultPrevented||ev.button!==0||ev.ctrlKey||ev.shiftKey||ev.altKey||ev.metaKey)return;
     var kind=btn.getAttribute("data-frauen-share");
-    if(["copy-text","wa","tg","native"].indexOf(kind)<0)return;
+    if(["copy-text","wa","tg","native","image","ig"].indexOf(kind)<0)return;
     var article=btn.closest("article.post-reader");
     var id=readId(),item=active(id);
     if(!article||!item||!visibleRoot()||!visibleRoot().contains(article))return;
@@ -199,6 +320,10 @@
     // Original share route: same ID and same URL in all languages (NO Q alias).
     var url=w.location.origin+w.location.pathname+"#/frauen/"+item.entry.area+"/"+encodeURIComponent(id);
     ev.preventDefault();ev.stopImmediatePropagation();
+    if(kind==="image"||kind==="ig"){
+      localImageExport(item,kind==="ig").catch(function(e){try{console.warn("DAR Frauen Bildbeitrag:",e)}catch(_){}});
+      return;
+    }
     function copy(v){return w.navigator.clipboard&&w.navigator.clipboard.writeText?w.navigator.clipboard.writeText(v):Promise.reject(Error("Clipboard unavailable"))}
     if(kind==="wa"){w.open("https://wa.me/?text="+encodeURIComponent(msg+"\n\n"+url),"_blank","noopener,noreferrer");return}
     if(kind==="tg"){w.open("https://t.me/share/url?url="+encodeURIComponent(url)+"&text="+encodeURIComponent(msg),"_blank","noopener,noreferrer");return}
