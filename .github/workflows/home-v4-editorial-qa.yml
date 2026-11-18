@@ -163,6 +163,8 @@ jobs:
             print('FAJR_ART',art.get_attribute('src'),flush=True)
             if not art.get_attribute('src').endswith('/media/apple-tv/adhan-fajr.jpg'):errors.append('Faǧr cinematic did not use native Apple TV artwork')
             driver.execute_script("document.getElementById('stopAdhan').click()")
+            WebDriverWait(driver,10).until(lambda d:'active' not in d.find_element(By.ID,'adhanVisual').get_attribute('class'))
+            driver.find_element(By.ID,'openSettings').click()
             driver.find_element(By.CSS_SELECTOR,'button[data-tab="saver"]').click()
             driver.find_element(By.ID,'saverPreview').click()
             if 'saver-open' not in driver.find_element(By.ID,'app').get_attribute('class'):errors.append('Screensaver not started')
