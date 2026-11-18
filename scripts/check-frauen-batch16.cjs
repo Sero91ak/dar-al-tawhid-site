@@ -3,10 +3,12 @@
 /*
  * DĀR AL TAWḤĪD · Frauen Sammelblock 16
  * READ ONLY. Safe against premature publication/notification.
- * Usage: node scripts/check-frauen-batch16.cjs [status|prepare|ready]
- * status : report status and blockers (exit 0)
- * prepare: require full draft/catalog coverage with unchanged originals (exit 1 on defect)
- * ready  : require final publication/QA/review gates (exit 1 until complete)
+ * Usage: node scripts/check-frauen-batch16.cjs [status|prepare|prepublish|ready|notify]
+ * status    : report status and blockers (exit 0)
+ * prepare   : enforce complete structural drafts without bypassing locks
+ * prepublish: require source/language/reader QA, ready to propose live release
+ * ready     : require all 16 live-verified (after deployment)
+ * notify    : require live proof plus authorized, verified OneSignal targeting; never sends
  */
 const fs=require("node:fs"),path=require("node:path");
 const root=path.resolve(__dirname,"..");
@@ -95,7 +97,20 @@ const notification={
   audience:manifest.notificationDraft?.audience
 };
 const allReady=missing.length===0;
-const summary={batch:manifest.id,records:detail.length,structureReady:structureErrors.length===0,structureErrors,ready:allReady,readyCount:detail.filter(d=>d.ready).length,localeCountExpected:16*9,localeCountFound:detail.reduce((n,d)=>n+d.languages,0),missingCount:missing.length,missing,detail,notification};
+const prepublishExceptions=new Set(["Cloudflare publication verification pending"]);
+const prepublishReady=structureErrors.length===0&&detail.every(d=>d.blockers.every(reason=>prepublishExceptions.has(reason)));
+const notifyReady=allReady&&manifest.state==="published-live-verified"&&
+  lock.locked===false&&
+  manifest.notificationDraft?.guardStatus==="admin-unlocked"&&
+  manifest.notificationDraft?.verifiedSegmentType==="knowledge_woman"&&
+  manifest.notificationDraft?.verifiedSegmentAudience==="adult-app AND knowledge-opt-in"&&
+  Number.isInteger(manifest.notificationDraft?.verifiedOptInRecipientCount)&&
+  manifest.notificationDraft.verifiedOptInRecipientCount>0&&
+  manifest.notificationDraft?.requireSeparatePushLockPassword===true&&
+  manifest.notificationDraft?.onceOnly===true;
+const summary={batch:manifest.id,records:detail.length,structureReady:structureErrors.length===0,structureErrors,prepublishReady,ready:allReady,notifyReady,readyCount:detail.filter(d=>d.ready).length,localeCountExpected:16*9,localeCountFound:detail.reduce((n,d)=>n+d.languages,0),missingCount:missing.length,missing,detail,notification};
 console.log(JSON.stringify(summary,null,2));
 if(process.argv[2]==="prepare"&&structureErrors.length)process.exitCode=1;
+if(process.argv[2]==="prepublish"&&!prepublishReady)process.exitCode=1;
 if(process.argv[2]==="ready"&&!allReady)process.exitCode=1;
+if(process.argv[2]==="notify"&&!notifyReady)process.exitCode=1;
