@@ -1,9 +1,9 @@
-name: HOME V4 editorial and settings-only UX QA
+name: HOME V5 editorial and settings-only UX QA
 
 on:
   push:
     branches:
-      - feature/home-editorial-v4-apple-tv-20261118
+      - feature/home-editorial-v5-20261118
     paths:
       - home-device/**
       - .github/workflows/home-v4-editorial-qa.yml
@@ -22,7 +22,10 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             home-device
+            home-v5.css
             .github/workflows/home-v4-editorial-qa.yml
+      - name: Stage V5 stylesheet for local browser preview
+        run: cp home-v5.css home-device/home-v5.css
       - name: Verify source JavaScript syntax
         run: |
           node --check home-device/home-v3.js
@@ -32,10 +35,10 @@ jobs:
           const js=html.split('<script>')[1]?.split('</script>')[0];
           if(!js)throw Error('No inline HOME V2 engine found');
           new Function(js);
-          const required=['fajrAdhanTrack','homeAppearance','homeWallpaperUpload','homeConnectionStatus','home-v4.css','home-v4.js','h4ShowVerse','h4ShowHadith'];
+          const required=['fajrAdhanTrack','homeAppearance','homeWallpaperUpload','homeConnectionStatus','home-v4.css','home-v4.js','home-v5.css','h4ShowVerse','h4ShowHadith'];
           for(const key of required)if(!html.includes(key))throw Error('Missing HOME V3 feature: '+key);
           if(html.includes('<nav class="footnav"'))throw Error('Bottom tabs must not exist');
-          console.log('HOME V4 source, no-bottom-tabs, settings: PASS');
+          console.log('HOME V5 source, no-bottom-tabs, settings: PASS');
           NODE
       - name: Verify existing GitHub media are publicly retrievable
         run: |
@@ -145,6 +148,6 @@ jobs:
             driver.find_element(By.ID,'saver').click()
             if 'saver-open' in driver.find_element(By.ID,'app').get_attribute('class'):errors.append('Screensaver not closed')
             if errors:raise AssertionError(' | '.join(errors))
-            print('HOME V4 editorial / settings-only browser QA: PASS')
+            print('HOME V5 editorial / settings-only browser QA: PASS')
           finally:driver.quit()
           PY
