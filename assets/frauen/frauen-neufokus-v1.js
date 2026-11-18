@@ -21,7 +21,20 @@ bs:{eyebrow:"NOVI FOKUS · 48 SATI",title:"16 novih objava o ženama",body:"Asha
 fr:{eyebrow:"NOUVEAU FOCUS · 48 HEURES",title:"16 nouveaux articles sur les femmes",body:"Les Compagnes, les Mères des croyants et le droit musulman concernant les femmes. Lire, vérifier les sources et apprendre.",cta:"Lire les articles",meta:"16 articles · 9 langues · apprentissage"},
 es:{eyebrow:"NUEVO FOCO · 48 HORAS",title:"16 artículos nuevos sobre las mujeres",body:"Las Compañeras, las Madres de los Creyentes y el fiqh de la mujer. Lee los relatos, consulta las fuentes y aprende.",cta:"Leer los artículos",meta:"16 artículos · 9 idiomas · aprendizaje"}
 };
-var enabled=false,until=0,started=0,pending=null,lastFetch=0,scheduled=false;
+var enabled=false,until=0,started=0,pending=null,lastFetch=0,scheduled=false,expiryTimer=null;
+function scheduleExactExpiry(){
+ if(expiryTimer!==null){w.clearTimeout(expiryTimer);expiryTimer=null}
+ if(!enabled||!until)return;
+ var delay=until-Date.now();
+ if(delay<=0){enabled=false;render();return}
+ expiryTimer=w.setTimeout(function(){
+  expiryTimer=null;
+  if(!enabled)return;
+  // Timers can fire slightly early; never prematurely hide or extend the window.
+  if(Date.now()<until){scheduleExactExpiry();return}
+  enabled=false;render();
+ },Math.min(Math.ceil(delay),2147483647));
+}
 function locale(){
  var s="de";try{s=w.localStorage.getItem(KEY)||"de"}catch(_){}
  s=String(s).trim().toLowerCase().replace(/_/g,"-");
@@ -128,7 +141,7 @@ async function refresh(force){
    var ready=await verifyPublished();
    enabled=ready;started=ready?window.start:0;until=ready?window.end:0;
   }catch(_){enabled=false;started=0;until=0}
- })().finally(function(){pending=null;render()});
+ })().finally(function(){pending=null;scheduleExactExpiry();render()});
  return pending;
 }
 function schedule(force){
