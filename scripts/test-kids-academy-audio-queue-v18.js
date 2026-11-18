@@ -25,4 +25,8 @@ assert.equal(normalize("A  B\nC"),"A B C");
 require("node:child_process").execFileSync("python3",[
   "kids/tools/test-academy-language-isolation-v1.py"
 ],{cwd:require("node:path").resolve(__dirname,".."),stdio:"inherit"});
+// Only the first Ṣidq topic is prepared, and the CI invocation never spends credits.
+require("node:child_process").execFileSync("python3",[
+  "kids/tools/build-academy-topic-batch-v1.py","--dry-run"
+],{cwd:require("node:path").resolve(__dirname,".."),stdio:"inherit"});
 console.log("ACADEMY VOICE V18 PASS: exact Serhat-only matching, three valid staged clips and one quarantined old greeting, zero synthetic fallback, no credits.");
