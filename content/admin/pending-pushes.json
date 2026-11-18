@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-11-14T16:01:59.000Z",
+  "generated": "2026-11-18T21:25:30.000Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1801,6 +1801,59 @@
           "safari_web_push": 9
         },
         "note": "Provider message completed with 112 successful; received=0 means no individual device display confirmation. Language-specific notification heading/body sent in de/en/ar/tr/bs/fr/es; the complete app page supports nine languages including ku and ckb. No Kids or prayer push."
+      }
+    },
+    "mujahid-scham-hochmut-wissen-20261118-q58": {
+      "postId": "mujahid-scham-hochmut-wissen-20261118-q58",
+      "filename": "mujahid-scham-hochmut-wissen-20261118-q58.md",
+      "postTitle": "📖 SCHAM UND HOCHMUT VERHINDERN DAS LERNEN",
+      "postPath": "content/posts/mujahid-scham-hochmut-wissen-20261118-q58.md",
+      "status": "sent",
+      "pushApproved": true,
+      "pushApprovedAt": "2026-11-18T21:25:28.000Z",
+      "createdAt": "2026-11-18T21:25:28.000Z",
+      "publishedAt": "2026-11-18T21:25:28.000Z",
+      "sentAt": "2026-11-18T21:25:30.000Z",
+      "updatedAt": "2026-11-18T21:25:30.000Z",
+      "lastError": "",
+      "oneSignalNotificationId": "48ef5ae0-56cd-4c77-9070-0a33df375bec",
+      "liveCheck": {
+        "ok": true,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": true,
+          "postFilePublic": true,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": true,
+          "q58SourcePublic": true,
+          "nineLanguageManifestPublic": true
+        },
+        "diagnosis": "",
+        "site": "https://dar-al-tawhid.de",
+        "qSource": "https://dar-al-tawhid.de/q/58/",
+        "deploymentRun": 44400040796,
+        "smokeTestRun": 44400816726
+      },
+      "pushResult": {
+        "target": "OneSignal segment DAR_PUSH",
+        "notificationId": "48ef5ae0-56cd-4c77-9070-0a33df375bec",
+        "successful": 115,
+        "errored": 0,
+        "completedAt": "2026-11-18T21:25:30.000Z",
+        "targetUrl": "https://dar-al-tawhid.de/?post=mujahid-scham-hochmut-wissen-20261118-q58#post/mujahid-scham-hochmut-wissen-20261118-q58",
+        "languages": [
+          "de",
+          "ar",
+          "en",
+          "tr",
+          "ku",
+          "ckb",
+          "bs",
+          "fr",
+          "es"
+        ]
       }
     }
   }
