@@ -4,7 +4,7 @@
   "policy": "finish-one-topic-certify-all-ages-publish-live-verify-app-then-next",
   "currentSubject": "akhlaq",
   "currentTopic": "sidq",
-  "status": "recording",
+  "status": "audio-generated-awaiting-original-binary-import",
   "expectedCount": 58,
   "fullyCertifiedCount": 0,
   "liveConfirmed": false,
@@ -22,5 +22,20 @@
     "quran-recitation-source-correct",
     "zero-javascript-errors"
   ],
-  "notes": "A staging commit, open PR, CI pass or draft manifest is not a live deployment. Never unlock next topic on those signals."
+  "notes": "A staging commit, open PR, CI pass or draft manifest is not a live deployment. Never unlock next topic on those signals.",
+  "sourceAudioGenerationFlowId": "zrB4zGdz9OTndLryQtIB",
+  "sourceAudioGenerationFlowUrl": "https://elevenlabs.io/app/flows/zrB4zGdz9OTndLryQtIB",
+  "sourceAudioGenerationModel": "eleven_v4",
+  "sourceAudioGenerationVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "newCompletedElevenLabsGenerations": 76,
+  "completedGermanFullPhrases": 45,
+  "completedArabicMasters": 9,
+  "completedGermanBilingualSegments": 22,
+  "reusedPriorV4Clips": 3,
+  "bilingualPhrasesNotYetAssembled": 9,
+  "canonicalCompletePhrases": 58,
+  "originalAudioFilesImportedToGitHub": 0,
+  "publicV4ClipCountNew": 0,
+  "ownerAuthorizedNoListeningPrecheck": true,
+  "productionIssue": "ElevenLabs Creative returns signed media URLs but connected GitHub file tool cannot ingest binary via URL; switch to Work cloud computer for downloading 76 genuine original MP3s, run importer, merge and verify Cloudflare release. Temporary signed URLs must not be committed to repo."
 }
