@@ -245,7 +245,48 @@
     ],
     "sendVia": "existing DAR Admin contribution publisher; never generic OneSignal all/DAR_PUSH",
     "idempotencyKey": "frauen-batch16-20261118",
-    "onceOnly": true
+    "onceOnly": true,
+    "localizedMessages": {
+      "de": {
+        "title": "16 neue Frauenbeiträge",
+        "body": "Neue quellenbelegte Beiträge über Ṣaḥābiyyāt, Mütter der Gläubigen und Frauenfiqh – in neun Sprachen."
+      },
+      "ar": {
+        "title": "١٦ موضوعًا جديدًا عن النساء",
+        "body": "موضوعات موثقة بالمصادر عن الصحابيات وأمهات المؤمنين وفقه النساء، متاحة بتسع لغات."
+      },
+      "en": {
+        "title": "16 new women's knowledge articles",
+        "body": "Explore sourced reports on the female Companions, Mothers of the Believers and women's fiqh in nine languages."
+      },
+      "tr": {
+        "title": "Kadınlara dair 16 yeni içerik",
+        "body": "Sahâbî hanımlar, Müminlerin Anneleri ve kadın fıkhı hakkında kaynaklı yazılar dokuz dilde."
+      },
+      "ku": {
+        "title": "16 nivîsên nû li ser jinan",
+        "body": "Agahiyên bi çavkanî li ser jinên sahabe, dayikên bawermendan û fiqha jinan bi neh zimanan."
+      },
+      "ckb": {
+        "title": "١٦ بابەتی نوێ دەربارەی ژنان",
+        "body": "بابەتە پشتبەستووەکان بە سەرچاوە لەسەر ژنە هاوەڵان، دایکانی باوەڕداران و فیقهی ژنان بە نۆ زمان."
+      },
+      "bs": {
+        "title": "16 novih objava o ženama",
+        "body": "Tekstovi s izvorima o ashabijkama, majkama vjernika i fikhu za žene, na devet jezika."
+      },
+      "fr": {
+        "title": "16 nouveaux articles sur les femmes",
+        "body": "Des récits sourcés sur les Compagnes, les Mères des croyants et le droit musulman concernant les femmes, en neuf langues."
+      },
+      "es": {
+        "title": "16 artículos nuevos sobre las mujeres",
+        "body": "Relatos documentados sobre las Compañeras, las Madres de los Creyentes y el fiqh de la mujer, en nueve idiomas."
+      }
+    },
+    "messageReview": "editorial drafts; native-language validation required before any send",
+    "guardStatus": "not-authorized-not-sent",
+    "redirectMustOpen": "existing in-app women knowledge route #/frauen; preserve app navigation"
   },
   "excluded": [
     "Kids",
