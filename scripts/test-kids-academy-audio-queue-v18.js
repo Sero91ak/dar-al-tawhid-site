@@ -54,4 +54,17 @@ assert.equal(topicReady.nativeArabicTerms,9);
 assert.equal(topicReady.originalGenerationFilesRequired,76);
 assert.equal(topicReady.needsActualBinaryFiles,true);
 assert.equal(topicReady.live,false);
+// Check that original media imports only from signed, pinned ElevenLabs URLs.
+// This test is fully offline and cannot trigger generation or publication.
+require("node:child_process").execFileSync("python3",[
+  "kids/tools/test-academy-download-gate-v1.py"
+],{cwd:require("node:path").resolve(__dirname,".."),stdio:"inherit"});
+const originalStatus=JSON.parse(require("node:child_process").execFileSync("python3",[
+  "kids/tools/download-academy-elevenlabs-originals-v1.py",
+  "--status","--source-dir","/tmp/dar-kids-sidq-no-originals-ci-v1"
+],{cwd:require("node:path").resolve(__dirname,".."),encoding:"utf8"}));
+assert.equal(originalStatus.requiredOriginals,76);
+assert.equal(originalStatus.missingOriginals,76);
+assert.equal(originalStatus.newGenerationRequested,false);
+assert.equal(originalStatus.publiclyReleased,false);
 console.log("ACADEMY VOICE V18 PASS: exact Serhat-only matching, three valid staged clips and one quarantined old greeting, zero synthetic fallback, no credits.");
