@@ -26,6 +26,7 @@ let feed=JSON.parse(JSON.stringify(draft));
 let card=feed.items.find(x=>x.id===id);assert.ok(card);
 let serverEntries=JSON.parse(JSON.stringify(source)),lang="tr",navigated=[];
 let deployedLanguages=JSON.parse(JSON.stringify(localeCatalog)),learningAvailable=true;
+const expiryTimers=new Map();let timerSerial=0;
 const registry=new Map(),listeners={},anchor={insertAdjacentElement(pos,el){assert.equal(pos,"afterend");registry.set(el.id,el)}};
 function node(tag){
  const element={tagName:tag.toUpperCase(),children:[],attrs:{},textContent:"",lang:"",dir:"",
@@ -47,7 +48,8 @@ const doc={readyState:"loading",hidden:false,head:{appendChild(el){registry.set(
 const win={document:doc,location:{href:"https://dar-al-tawhid.de/",pathname:"/",hash:"#home"},console,
  requestAnimationFrame(cb){cb()},
  localStorage:{getItem(){return lang}},
- setInterval(){},addEventListener(){},navigate(view){navigated.push(view)},
+ setInterval(){},setTimeout(cb,delay){const id=++timerSerial;expiryTimers.set(id,{cb,delay});return id},
+ clearTimeout(id){expiryTimers.delete(id)},addEventListener(){},navigate(view){navigated.push(view)},
  fetch:async url=>{
    const pathname=url.split("?")[0];
    let result;
@@ -86,6 +88,7 @@ function getCard(){return registry.get("darFrauenNeufokus48h")||null}
  learningAvailable=true;
  await refresh();const active=getCard();
  assert.ok(active,"16/16 source records should unlock within valid 48h feed window");
+ assert.equal(expiryTimers.size,1,"Precisely one expiry timer required for the visible focus");
  assert.equal(active.dir,"ltr");assert.equal(active.lang,"tr");
  assert.ok(active.children.some(x=>/16 yeni/.test(x.textContent)),"Turkish focus label missing");
  active.onclick();assert.deepEqual(navigated,["frauen"],"Focus must open actual in-app women hub");
