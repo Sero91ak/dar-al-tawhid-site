@@ -99,4 +99,4 @@ Neue nummerierte Quellenlinks gehören immer in `q/<nummer>/`.
 | `q/55` | Nicht jede Unterstützung ist eindeutiger Kufr | `Imām aš-Šāfiʿī` | al-Umm 4/264; Fall von Ḥāṭib und Grenze des Takfīr. |
 | `q/56` | Weltlich begründete Muwāddah und Kufr | `Ibn Taymiyyah` | Maǧmūʿ al-Fatāwā 7/522–523; eigenständige Lernfragen. |
 | `q/57` | Ungehorsam trotz Wissens | `Muǧāhid ibn Ǧabr` | Ungehorsam gegenüber Allah wird im Tafsīr zu an-Nisāʾ 4:17 als Ǧahālah bezeichnet, bis man davon ablässt (aṭ-Ṭabarī 8/89, Nr. 8834). |
-| `q/58` | Scham und Hochmut verhindern das Lernen (Entwurf, nicht live) | `Muǧāhid ibn Ǧabr (Tābiʿī)` | Ṣaḥīḥ al-Buḫārī, Kitāb al-ʿIlm, Bāb al-Ḥayāʾ fī al-ʿIlm (muʿallaq); Ibn Ḥaǧar, Taġlīq at-Taʿlīq 2/93–94; neun nicht freigegebene Sprachfassungen und vier Quizfragen je Sprache. |
+| `q/58` | Scham und Hochmut verhindern das Lernen | `Muǧāhid ibn Ǧabr (Tābiʿī)` | Ṣaḥīḥ al-Buḫārī, Kitāb al-ʿIlm, Bāb al-Ḥayāʾ fī al-ʿIlm (muʿallaq); Ibn Ḥaǧar, Taġlīq at-Taʿlīq 2/93–94; neun vom Nutzer freigegebene modellgeprüfte Sprachfassungen und vier Quizfragen je Sprache; kein unabhängiges muttersprachliches Gutachten. |
