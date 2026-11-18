@@ -8,6 +8,8 @@ const root=path.resolve(__dirname,".."),read=p=>JSON.parse(fs.readFileSync(path.
 const launch=read("assets/frauen/frauen-neufokus-v1.json");
 const draft=read("content/focus-feed/feed-index.json");
 const sourceFiles=launch.sourceFiles;
+const localeCatalog=read("assets/frauen/frauen-entry-locales-v1.json");
+const lessonHtml=fs.readFileSync(path.join(root,"lernen/frauen-wissen/index.html"),"utf8");
 assert.equal(launch.items.length,16);
 assert.equal(launch.expectedCount,16);
 assert.equal(sourceFiles.length,3);
@@ -23,6 +25,7 @@ const now=Date.now(),start=new Date(now-20*60*1000).toISOString(),end=new Date(n
 let feed=JSON.parse(JSON.stringify(draft));
 let card=feed.items.find(x=>x.id===id);assert.ok(card);
 let serverEntries=JSON.parse(JSON.stringify(source)),lang="tr",navigated=[];
+let deployedLanguages=JSON.parse(JSON.stringify(localeCatalog)),learningAvailable=true;
 const registry=new Map(),listeners={},anchor={insertAdjacentElement(pos,el){assert.equal(pos,"afterend");registry.set(el.id,el)}};
 function node(tag){
  const element={tagName:tag.toUpperCase(),children:[],attrs:{},textContent:"",lang:"",dir:"",
@@ -50,6 +53,8 @@ const win={document:doc,location:{href:"https://dar-al-tawhid.de/",pathname:"/",
    let result;
    if(pathname==="/content/focus-feed/feed-index.json")result=feed;
    else if(pathname==="/assets/frauen/frauen-neufokus-v1.json")result=launch;
+   else if(pathname==="/assets/frauen/frauen-entry-locales-v1.json")result=deployedLanguages;
+   else if(pathname==="/lernen/frauen-wissen/")return learningAvailable?{ok:true,text:async()=>lessonHtml}:{ok:false,status:404};
    else result=serverEntries[pathname];
    return result?{ok:true,json:async()=>result}:{ok:false,status:404};
  }
@@ -71,6 +76,14 @@ function getCard(){return registry.get("darFrauenNeufokus48h")||null}
  lastRecord.quellenstatus="nicht-anzeigen";
  await refresh();assert.equal(getCard(),null,"15/16 source records must not launch focus");
  lastRecord.quellenstatus="geprueft";
+ // 16 German articles alone must never expose a card with stale languages.
+ const broken=deployedLanguages.entries[launch.items[2].id].locales.ar;
+ delete deployedLanguages.entries[launch.items[2].id].locales.ar;
+ await refresh();assert.equal(getCard(),null,"Missing Arabic translation must block focus");
+ deployedLanguages.entries[launch.items[2].id].locales.ar=broken;
+ learningAvailable=false;
+ await refresh();assert.equal(getCard(),null,"Missing learning page must block focus");
+ learningAvailable=true;
  await refresh();const active=getCard();
  assert.ok(active,"16/16 source records should unlock within valid 48h feed window");
  assert.equal(active.dir,"ltr");assert.equal(active.lang,"tr");
