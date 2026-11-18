@@ -25,7 +25,7 @@ function verifiedAsset(entry){
 }
 function curriculumIds(){
  const sandbox={window:{}};
- for(const filename of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2.js","kids/akademie/curriculum-v22.js","kids/akademie/curriculum-v25.js","kids/akademie/curriculum-v26.js","kids/akademie/curriculum-v27.js"]){
+ for(const filename of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2.js","kids/akademie/curriculum-v22.js","kids/akademie/curriculum-v25.js","kids/akademie/curriculum-v26.js","kids/akademie/curriculum-v27.js","kids/akademie/curriculum-v28.js","kids/akademie/curriculum-v29.js"]){
   vm.runInNewContext(fs.readFileSync(path.join(ROOT,filename),"utf8"),sandbox,{filename,timeout:1500});
  }
  return Object.keys(sandbox.window.DARKidsAcademyCurriculum||{});
@@ -42,17 +42,26 @@ function audit(){
  const v25=read("kids/data/academy-voice-plan-v25.json");
  const v26=read("kids/data/academy-voice-plan-v26.json");
  const v27=read("kids/data/academy-voice-plan-v27.json");
+ const v28=read("kids/data/academy-voice-plan-v28.json");
+ const v29=read("kids/data/academy-voice-plan-v29.json");
  if(main.modelId!==MODEL||sidq.modelId!==MODEL||main.voiceProfileId!==PROFILE||
     sidq.voiceProfileId!==PROFILE||sidq.voiceSettingsProfile!==SETTINGS||
     next.modelId!==MODEL||next.voiceProfileId!==PROFILE||
     vocabulary.modelId!==MODEL||vocabulary.voiceProfileId!==PROFILE||vocabulary.voiceSettingsProfile!==SETTINGS||
     v25.modelId!==MODEL||v25.voiceProfileId!==PROFILE||
     v26.modelId!==MODEL||v26.voiceProfileId!==PROFILE||
-    v27.modelId!==MODEL||v27.voiceProfileId!==PROFILE)throw Error("Unauthorized plan voice");
+    v27.modelId!==MODEL||v27.voiceProfileId!==PROFILE||
+    v28.modelId!==MODEL||v28.voiceProfileId!==PROFILE||
+    v29.modelId!==MODEL||v29.voiceProfileId!==PROFILE)throw Error("Unauthorized plan voice");
  const knownLessonIds=curriculumIds();
+ if(knownLessonIds.length!==65)throw Error("Actual live Academy lesson code must be 65 + standalone Ṣidq; found "+knownLessonIds.length);
+ for(const [plan,expectedCount] of [[v28,4],[v29,4]]){
+  if(plan.lessonCount!==expectedCount||plan.curriculumIds.length!==expectedCount||
+     plan.curriculumIds.some(id=>!knownLessonIds.includes(id)))throw Error("V28/V29 lesson voice plan no longer matches production curriculum");
+ }
  const knownLessonSet=new Set([...knownLessonIds,"sidq"]);
  const phrases=new Map(),coveredLessons=new Set();
- for(const plan of [main,sidq,next,v25,v26,v27,vocabulary]){
+ for(const plan of [main,sidq,next,v25,v26,v27,v28,v29,vocabulary]){
   if(!Array.isArray(plan.phrases)||plan.phraseCount!==plan.phrases.length)throw Error("Invalid voice plan");
   for(const p of plan.phrases){
    if(p.modelId!==MODEL||p.voiceProfileId!==PROFILE)throw Error("Voice identity changed for: "+p.text);
@@ -94,6 +103,7 @@ function audit(){
   schemaVersion:1,id:"kids-academy-voice-coverage-v18",voiceId:VOICE,modelId:MODEL,voiceSettingsProfile:SETTINGS,
   policy:{generatesAudio:false,usesCredits:false,autoPublishes:false,requiresHumanReview:true},
   catalogLessonCount:lessons.length+1,coveredLessonCount:coveredLessons.size,
+  editorialPlannedCount:142,actualCurriculumScripts:["v1","v2","v22","v25","v26","v27","v28","v29"],
   vocabularyTerms:vocabulary.termCount,vocabularyVoicePhrases:vocabulary.phraseCount,
   uncoveredLessons,uniquePhrases:rows.length,totals,rows
  };
