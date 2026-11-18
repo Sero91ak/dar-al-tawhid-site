@@ -13,10 +13,13 @@ const root=path.resolve(__dirname,"..");
 const load=(p)=>JSON.parse(fs.readFileSync(path.join(root,p),"utf8"));
 const manifest=load("content/admin/frauen-batch-16-2026-11-18.json");
 const locale=load("assets/frauen/frauen-entry-locales-v1.json");
+const sourceAudit=load("content/admin/frauen-batch16-source-audit-20261118.json");
 const codes=["de","ar","en","tr","ku","ckb","bs","fr","es"];
 const idSeen=new Set(),urlSeen=new Map(),missing=[],structureErrors=[],detail=[];
 const assert=(v,msg)=>{if(!v){missing.push(msg);structureErrors.push(msg)}};
 assert(manifest.expectedReleaseCount===16&&manifest.records.length===16,"Release cohort must contain exactly sixteen canonical records");
+assert(sourceAudit.sources?.length===16,"Exactly 16 primary-reference audit records required");
+assert(sourceAudit.publicationAuthorization===false,"Source audit must not grant production access by itself");
 assert(JSON.stringify(manifest.requiredLocales)===JSON.stringify(codes),"Exact nine-language roster changed");
 const dataFiles=[...new Set(manifest.records.map(x=>x.sourceFile))];
 const files=new Map(dataFiles.map(f=>[f,load(f)]));
@@ -29,6 +32,14 @@ for(const r of manifest.records){
   check(found.contentId===key,"contentId must match original kennung");
   check(found.direktnachweisUrl===r.sourceUrl,"original source link changed");
   check(found.quellePrimaerId===r.sourceId,"original source book+number changed");
+  const audited=(sourceAudit.sources||[]).find(a=>a.id===key);
+  check(Boolean(audited),"source-audit record absent");
+  if(audited){
+    check(audited.originalSourceId===r.sourceId&&audited.originalSourceUrl===r.sourceUrl,"original reference drift vs source audit");
+    check(audited.sourceLocated===true&&audited.directPageStatus==="hadith-page-opens-and-topic-matches","primary page identification incomplete");
+    check(audited.independentScholarlySignoff===true,"source-audit scholarly approval outstanding",true);
+    check(!audited.needsAttention?.length,"unresolved primary-reference anomaly",true);
+  }
   check(typeof found.arabischerOriginalauszug==="string"&&/[\u0600-\u06ff]/.test(found.arabischerOriginalauszug),"Arabic primary-text excerpt absent");
   check(!found.arabischerOriginalauszugNachweis||found.arabischerOriginalauszugNachweis===r.sourceUrl,"Arabic excerpt reference does not match original source");
   check(!Object.hasOwn(found,"qNumber")||found.qAssignmentApprovedByUser===true,"unapproved Q-number");
