@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "subject": "akhlaq",
+  "lessonId": "sidq",
+  "age": "4-5",
+  "createdAt": "2026-11-18",
+  "provenance": "ElevenLabs Creative directly verified completed generation outputs",
+  "provider": "ElevenLabs",
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "voiceName": "Serhat Abu Malik – Master",
+  "generationFlowId": "zrB4zGdz9OTndLryQtIB",
+  "flowUrl": "https://elevenlabs.io/app/flows/zrB4zGdz9OTndLryQtIB",
+  "languageCode": "de",
+  "voiceSettingsApplied": {
+    "stability": 0.62,
+    "similarity": 0.88
+  },
+  "unsupportedInElevenV4": {
+    "speed": 0.91,
+    "style": 0.16,
+    "use_speaker_boost": true
+  },
+  "arabicDictionaryApplied": false,
+  "sourceSpeechPlan": "kids/data/academy-sidq-voice-plan-v18.json",
+  "filesNotInGitHubYet": true,
+  "livePublished": false,
+  "entries": [
+    {
+      "text": "Danach kannst du um Entschuldigung bitten und beim Aufräumen helfen.",
+      "nodeId": "3xVZ1wsLWJKU5vRrPpOU",
+      "sessionId": "l913ysZefXABk74DhkqG",
+      "generationId": "AVqXwSI3ttZCLiE1H20j",
+      "durationSeconds": 3.92,
+      "generationStatus": "completed",
+      "repositoryAudioPath": null,
+      "sha256": null,
+      "importStatus": "pending-real-binary-download-and-commit"
+    },
+    {
+      "text": "Die Wahrheit sagen – das ist ehrlich.",
+      "nodeId": "S7xsLNyZpuX2xaZAT5Aa",
+      "sessionId": "FxolH6rxkSyEmwnaDOla",
+      "generationId": "MEWrw0PxNqwE1v1Fkqgj",
+      "durationSeconds": 2.8,
+      "generationStatus": "completed",
+      "repositoryAudioPath": null,
+      "sha256": null,
+      "importStatus": "pending-real-binary-download-and-commit"
+    },
+    {
+      "text": "Du darfst ehrlich sagen: Das war ich.",
+      "nodeId": "9WF9LvyLxkH3DyJSFb1i",
+      "sessionId": "D47pMSVQiG3wrxqzFpkv",
+      "generationId": "xIqLFM7g3xQxVMRqKjs9",
+      "durationSeconds": 2.72,
+      "generationStatus": "completed",
+      "repositoryAudioPath": null,
+      "sha256": null,
+      "importStatus": "pending-real-binary-download-and-commit"
+    },
+    {
+      "text": "Ehrlich sein ist gut. Das üben wir gemeinsam.",
+      "nodeId": "vaNtDBfP9o9mwk5zrAWj",
+      "sessionId": "AvKnIDZyMaGnPyvi8sXx",
+      "generationId": "q5E8WNgWGeFHrQ4EkJFf",
+      "durationSeconds": 2.96,
+      "generationStatus": "completed",
+      "repositoryAudioPath": null,
+      "sha256": null,
+      "importStatus": "pending-real-binary-download-and-commit"
+    }
+  ],
+  "notes": "Only IDs and file durations are persistent references. Temporary ElevenLabs signed download URLs MUST NOT be committed to this public repository. Reopen the canvas and download originals, then import by exact phrase and cryptographic hash. No fake/empty audio files."
+}
