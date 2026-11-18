@@ -148,6 +148,10 @@ jobs:
             print('NATIVE_MEDIA_REQUESTS',media,flush=True)
             if not any('/tv-kaaba-day.jpg' in x for x in media):errors.append('Native wallpaper asset did not load')
             if not any('/adhan-fajr.jpg' in x for x in media):errors.append('Native prayer artwork did not load')
+            if not any('/tv-brand-mark.png' in x for x in media):errors.append('Native transparent brand mark did not load')
+            brand=driver.find_element(By.CSS_SELECTOR,'.logo-mark img')
+            if not brand.get_attribute('src').endswith('/media/apple-tv/tv-brand-mark.png'):errors.append('HOME logo is not using the native transparent mark')
+            if float(driver.execute_script("return getComputedStyle(document.querySelector('.logo-mark')).borderWidth").replace('px',''))>0:errors.append('Logo tile border remains visible')
             if gallery:
               gallery[0].click()
               chosen=gallery[0].get_attribute('aria-pressed')
