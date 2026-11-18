@@ -13,6 +13,8 @@ const focus=read("content/focus-feed/feed-index.json");
 const code=fs.readFileSync(path.join(root,"assets/frauen/frauen-neufokus-v1.js"),"utf8");
 const css=fs.readFileSync(path.join(root,"assets/frauen/frauen-neufokus-v1.css"),"utf8");
 const source=Object.fromEntries(launch.sourceFiles.map(p=>["/"+p,read(p)]));
+const localeCatalog=read("assets/frauen/frauen-entry-locales-v1.json");
+const learningHtml=fs.readFileSync(path.join(root,"lernen/frauen-wissen/index.html"),"utf8");
 const id=launch.focusId,regions=["de","ar","en","tr","ku","ckb","bs","fr","es"];
 const viewports=[{name:"phone",width:390,height:844},{name:"fold",width:670,height:792},{name:"tablet",width:834,height:1112},{name:"desktop",width:1280,height:800}];
 const date=Date.now(),start=new Date(date-120000).toISOString(),expires=new Date(date-120000+48*3600000).toISOString();
@@ -34,6 +36,7 @@ function snapshot(isPublic,locale) {
  for(const viewport of viewports){
  const context=await browser.newContext({viewport:{width:viewport.width,height:viewport.height}});
  const page=await context.newPage();let state=snapshot(false,"de"),errors=[];
+ let corruptLocale=false,learningReady=true;
  page.on("pageerror",e=>errors.push(String(e)));
  await page.route("**/*",async route=>{
    const url=new URL(route.request().url()),pathname=url.pathname;
@@ -43,6 +46,14 @@ function snapshot(isPublic,locale) {
    if(pathname==="/assets/frauen/frauen-neufokus-v1.css")return route.fulfill({status:200,contentType:"text/css",body:css});
    if(pathname==="/content/focus-feed/feed-index.json")return route.fulfill({status:200,contentType:"application/json",body:JSON.stringify(state.feed)});
    if(pathname==="/assets/frauen/frauen-neufokus-v1.json")return route.fulfill({status:200,contentType:"application/json",body:JSON.stringify(launch)});
+   if(pathname==="/assets/frauen/frauen-entry-locales-v1.json"){
+     const data=JSON.parse(JSON.stringify(localeCatalog));
+     if(corruptLocale)delete data.entries[launch.items[2].id].locales.ar;
+     return route.fulfill({status:200,contentType:"application/json",body:JSON.stringify(data)});
+   }
+   if(pathname==="/lernen/frauen-wissen/"){
+     return route.fulfill({status:learningReady?200:404,contentType:"text/html",body:learningReady?learningHtml:"Missing learning page"});
+   }
    if(state.docs[pathname])return route.fulfill({status:200,contentType:"application/json",body:JSON.stringify(state.docs[pathname])});
    return route.fulfill({status:404,body:"Not found"});
  });
@@ -56,6 +67,14 @@ function snapshot(isPublic,locale) {
  await page.evaluate(()=>window.DARFrauenNeufokusV1.refresh());
  assert.equal(await page.locator("#darFrauenNeufokus48h").count(),0,"Hidden articles leaked into "+viewport.name);
  state=snapshot(true,"de");
+ corruptLocale=true;
+ await page.evaluate(()=>window.DARFrauenNeufokusV1.refresh());
+ assert.equal(await page.locator("#darFrauenNeufokus48h").count(),0,"Missing language must block focus on "+viewport.name);
+ corruptLocale=false;
+ learningReady=false;
+ await page.evaluate(()=>window.DARFrauenNeufokusV1.refresh());
+ assert.equal(await page.locator("#darFrauenNeufokus48h").count(),0,"Missing lesson must block focus on "+viewport.name);
+ learningReady=true;
  await page.evaluate(()=>window.DARFrauenNeufokusV1.refresh());
  const banner=page.locator("#darFrauenNeufokus48h");
  await banner.waitFor({timeout:10000});
