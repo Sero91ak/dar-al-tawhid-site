@@ -5,14 +5,17 @@
  const KEY='dar-home-v3-preferences';
  const $=id=>document.getElementById(id);
  const icon=name=>ROOT+'/assets/dar-3d-icons/'+name+'.png';
- const wallpapers=[
+ let wallpapers=[
   {id:'dar-wide',label:'DĀR · Weites Motiv',url:ROOT+'/assets/home-v1194/hero-wide-adobe.jpg'},
   {id:'prayer-cinema',label:'Gebet · Cinematic',url:ROOT+'/kids/assets/kids-salah-v1262/cinematic-still.jpg'},
+  {id:'tv-kaaba-day',label:'Kaʿba · Tag',url:'/media/apple-tv/tv-kaaba-day.jpg',native:true},
+  {id:'tv-kaaba-sunrise',label:'Kaʿba · Sonnenaufgang',url:'/media/apple-tv/tv-kaaba-sunrise.jpg',native:true},
+  {id:'tv-kaaba-sunset',label:'Kaʿba · Sonnenuntergang',url:'/media/apple-tv/tv-kaaba-sunset.jpg',native:true},
   {id:'home-cinema',label:'DĀR · Cinematic',url:ROOT+'/test/assets/dar-3d-icons/dar-home-cinematic-hero.png'},
   {id:'kids-hero',label:'Moschee · Nachtmotiv',url:ROOT+'/kids/assets/kids-home-v1191/hero-static-reference.jpg'},
   {id:'abstract',label:'Klassisch · ohne Bild',url:''}
  ];
- let prefs={theme:'dark',wallpaper:'prayer-cinema',saverWallpaper:'same',adhanCinema:true,allowBackgroundUpdates:true};
+ let prefs={theme:'dark',wallpaper:'tv-kaaba-day',saverWallpaper:'same',adhanCinema:true,allowBackgroundUpdates:true};
  try{const from=JSON.parse(localStorage.getItem(KEY)||'{}');if(from&&typeof from==='object'&&!Array.isArray(from)){prefs={...prefs,...from}}}catch{}
  const safeHTML=(str)=>String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
  function imageFor(name){let w=wallpapers.find(x=>x.id===name);if(name==='custom'){const raw=localStorage.getItem(KEY+'-wallpaper')||'';return /^data:image\/(?:png|jpeg|webp);base64,/i.test(raw)?raw:''}return w?.url||''}
@@ -78,6 +81,24 @@
   }
   apply();
  }
+ async function loadMediaCatalog(){
+  try{
+   const r=await fetch('/media/apple-tv/catalog.json',{cache:'no-store'});
+   if(!r.ok)return;
+   const catalog=await r.json();
+   if(catalog?.schemaVersion!==1||!Array.isArray(catalog.wallpapers))return;
+   const entries=catalog.wallpapers.filter(x=>x&&/^[a-z0-9-]{2,48}$/.test(x.id||'')&&typeof x.label==='string'&&/^\\/media\\/apple-tv\\/[A-Za-z0-9._-]+\\.(?:jpg|webp|png)$/.test(x.url||''));
+   if(!entries.length)return;
+   const preferred=prefs.wallpaper;
+   const ids=new Set(entries.map(x=>x.id));
+   wallpapers=[...wallpapers.filter(x=>!x.native&&!ids.has(x.id)),...entries.map(x=>({...x,native:true}))];
+   if(!wallpapers.some(x=>x.id===preferred)){
+    prefs.wallpaper=wallpapers.some(x=>x.id===catalog.defaultWallpaper)?catalog.defaultWallpaper:entries[0].id;
+    store();
+   }
+   makeWallpaperGallery();
+  }catch(e){/* use the bundled fallback gallery when the catalog is offline */}
+ }
  function bind(){
   const sel=$('homeAppearance');if(sel)sel.addEventListener('change',()=>{prefs.theme=sel.value;store();apply()});
   const saver=$('homeSaverBackground');if(saver){const options=[{id:'same',label:'Wie HOME-Hintergrund'},...wallpapers.map(x=>({id:x.id,label:x.label}))];saver.replaceChildren(...options.map(x=>new Option(x.label,x.id)));saver.addEventListener('change',()=>{prefs.saverWallpaper=saver.value;store();apply()})}
@@ -88,7 +109,7 @@
    const r=new FileReader();r.onload=()=>{try{localStorage.setItem(KEY+'-wallpaper',String(r.result));prefs.wallpaper='custom';store();makeWallpaperGallery()}catch{warn('Bild zu groß für diesen Browser. Bitte kleiner exportieren.')}}
    r.readAsDataURL(f);
   });
-  $('homeGalleryReset')?.addEventListener('click',()=>{prefs.wallpaper='prayer-cinema';prefs.saverWallpaper='same';localStorage.removeItem(KEY+'-wallpaper');store();makeWallpaperGallery()});
+  $('homeGalleryReset')?.addEventListener('click',()=>{prefs.wallpaper='tv-kaaba-day';prefs.saverWallpaper='same';localStorage.removeItem(KEY+'-wallpaper');store();makeWallpaperGallery()});
   $('homeAudioUnlock')?.addEventListener('click',()=>{warn('Audio-Freigabe: bitte im Aḏān-Reiter „Aḏān einmalig testen“ drücken. Browser-Autoplay bleibt geräteabhängig.')});
   $('homeRefreshNow')?.addEventListener('click',()=>{$('syncNow')?.click()});
   $('homeAppPairing')?.addEventListener('click',()=>warn('Sichere WLAN-Kopplung erfordert eine native Geräte-Bridge. Noch nicht freigeschaltet.'));
@@ -108,7 +129,7 @@
  }
  function init(){
   if(!$('app'))return;
-  augmentBrand();bind();apply();handleConnection();
+  augmentBrand();bind();apply();loadMediaCatalog();handleConnection();
   const el=$('adhanVisual');if(el)new MutationObserver(updateAdhanTitle).observe(el,{attributes:true,attributeFilter:['class']});
   window.addEventListener('online',handleConnection);window.addEventListener('offline',handleConnection);
   const i=document.querySelector('[data-tab="hintergrund"]');if(i){const img=document.createElement('img');img.src=icon('image');img.alt='';img.className='settings-icons';i.prepend(img)}
