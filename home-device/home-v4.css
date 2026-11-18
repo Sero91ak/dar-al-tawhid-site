@@ -201,3 +201,12 @@ html,body{overscroll-behavior:none}
  #app .setting-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){#app *{animation:none!important;transition:none!important}}
+
+/* Readability floor: never let the flexible audio column collapse its title or controls. */
+#app .audio-kicker,#app .audio-title,#app .audio-sub,#app .audio-controls {flex-shrink:0!important}
+#app .audio-title{line-height:1.12!important;min-height:1.12em!important}
+#app .daily-story .daily-label,#app .daily-story .source{flex-shrink:0}
+@media (min-height:701px){
+  #app .screen{grid-template-rows:auto minmax(0,1fr) auto minmax(0,1.12fr) auto!important}
+  #app .daily-area{align-items:stretch}
+}
