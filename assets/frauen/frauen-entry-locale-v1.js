@@ -16,6 +16,10 @@
     code=String(code||"").trim().toLowerCase().replace(/_/g,"-");
     if(code==="kr")code="ku";
     if(code==="ku-sorani")code="ckb";
+    if(CODES.indexOf(code)<0&&code.indexOf("-")>=0){
+      var primary=code.split("-")[0];
+      if(CODES.indexOf(primary)>=0)code=primary;
+    }
     return CODES.indexOf(code)>=0?code:"";
   }
   function selected() {
