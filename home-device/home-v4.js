@@ -14,12 +14,12 @@
     if(/ʿaṣr|asr|nachmittag/i.test(raw))return'asr';
     if(/maġrib|maghrib|abendgebet/i.test(raw))return'maghrib';
     if(/ʿišā|isha|nachtgebet/i.test(raw))return'isha';
-    return'';
+    return document.querySelector('.prayer-cell.active')?.dataset.prayer||'';
   }
   function artwork(){
     const adhan=$('adhanVisual');
     if(!adhan || !adhan.classList.contains('active')){current='';return}
-    const name=findPrayerKey();if(!name)return;
+    const name=findPrayerKey()||current;if(!name)return;
     const title=adhan.querySelector('.adhan-title');
     if(title)title.textContent=NAMES[name]+' · Aḏān';
     let image=$('h4PrayerArtwork');
@@ -29,7 +29,7 @@
       current=name;image.dataset.fallback='native';image.dataset.prayer=name;image.style.display='block';image.src=MOTIF_BASE+name+'.jpg';
       const t=document.querySelector('.prayer-cell[data-prayer="'+name+'"] .ptime')?.textContent?.trim();
       const sub=$('adhanInfo');if(sub && !sub.dataset.h4Augmented && t && /^[0-2][0-9]:[0-5][0-9]$/.test(t)){
-        sub.textContent=NAMES[name]+' · '+t+' Uhr';sub.dataset.h4Augmented='true';
+        sub.textContent='Heute · '+t+' Uhr';sub.dataset.h4Augmented='true';
       }
     }
   }
@@ -63,7 +63,7 @@
     document.querySelectorAll('.settings-tabs button').forEach(b=>b.setAttribute('aria-controls','settings-page-'+b.dataset.tab));
     document.querySelectorAll('.tabpage[data-page]').forEach(p=>p.id='settings-page-'+p.dataset.page);
   }
-  function init(){header();setupAdhan();handleKeyboard()}
+  function init(){header();setupAdhan();handleKeyboard();spatialNavigation()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
   else init();
 })();
