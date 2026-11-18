@@ -1,0 +1,3370 @@
+{
+  "schemaVersion": 1,
+  "id": "TAWHID_KIDS_FULL_ACADEMY_208_LESSON_RELEASE_REGISTER_V1",
+  "version": "2026-11-18",
+  "scope": "Only real teaching topics; release complete lesson with child-safe owner Serhat V4 speech, never count editorial outlines as live lessons.",
+  "sourceFiles": [
+    "kids/data/academy-expansion-roadmap-v23.json",
+    "kids/data/academy-year-52weeks-v1.json",
+    "kids/akademie/index.html",
+    "kids/data/academy-sidq-voice-plan-v18.json",
+    "kids/data/academy-voice-plan-v9.json",
+    "kids/data/academy-voice-plan-v22.json",
+    "kids/data/academy-voice-plan-v25.json",
+    "kids/data/academy-voice-plan-v26.json",
+    "kids/data/academy-voice-plan-v27.json",
+    "kids/data/academy-voice-plan-v28.json",
+    "kids/data/academy-voice-plan-v29.json",
+    "kids/data/academy-vocabulary-voice-plan-v24.json"
+  ],
+  "summary": {
+    "totalPlannedLessonSlots": 208,
+    "existingLessonCode": 66,
+    "additionalEditorialOutlinesNotYetInApp": 142,
+    "sourceVoicePlansCoverExisting": 66,
+    "firstTopic": "sidq",
+    "nextAfterSidq": "akhlaq-sabr",
+    "newPaidElevenLabsOriginalsPreparedForSidq": 76,
+    "actualOriginalsImportedForSidq": 0,
+    "publicV4VoiceReleaseConfirmed": false,
+    "existingDistinctLessonPhraseAssociations": 2122
+  },
+  "publicationContract": {
+    "oneCompleteTopicThenLive": true,
+    "doNotAdvanceUntilProductionConfirmed": true,
+    "threeAgeGroups": [
+      "4-5",
+      "6-8",
+      "9-10"
+    ],
+    "profileAddresses": [
+      "boy",
+      "girl"
+    ],
+    "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+    "modelId": "eleven_v4",
+    "noAutoSyntheticQuranRecitation": true,
+    "noArabicDictionaryAppliedToGermanNarration": true,
+    "sourceNumbersExcludedFromSpeech": true,
+    "zeroRegenerationOfExistingProviderAudio": true,
+    "neverConfuseGenerationWithBinaryImport": true,
+    "doNotAlterExistingProgress": true,
+    "ownerAuthorizedNoPrelisten": true,
+    "validMediaBytesRequired": true
+  },
+  "existingLessons": [
+    {
+      "productionOrder": 1,
+      "editorialSlot": 1,
+      "lessonId": "sidq",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 57,
+      "ageCoverage": {
+        "4-5": 17,
+        "6-8": 20,
+        "9-10": 17,
+        "all": 3
+      },
+      "contentKinds": [
+        "answer",
+        "greeting",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 10,
+      "productionStatus": "76-elevenlabs-generations-not-yet-imported",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-sidq-voice-plan-v18.json"
+      ]
+    },
+    {
+      "productionOrder": 2,
+      "editorialSlot": 5,
+      "lessonId": "akhlaq-sabr",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 23,
+      "ageCoverage": {
+        "4-5": 6,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 11
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 3,
+      "editorialSlot": 9,
+      "lessonId": "akhlaq-amanah",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 23,
+      "ageCoverage": {
+        "4-5": 6,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 11
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 4,
+      "editorialSlot": 2,
+      "lessonId": "adab-salam",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 23,
+      "ageCoverage": {
+        "4-5": 6,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 11
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 7,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 5,
+      "editorialSlot": 3,
+      "lessonId": "fiqh-taharah",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 23,
+      "ageCoverage": {
+        "4-5": 6,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 11
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 6,
+      "editorialSlot": 4,
+      "lessonId": "aqidah-tawhid",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 23,
+      "ageCoverage": {
+        "4-5": 6,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 11
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 9,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 7,
+      "editorialSlot": 6,
+      "lessonId": "adab-worte",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 23,
+      "ageCoverage": {
+        "4-5": 6,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 11
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 8,
+      "editorialSlot": 7,
+      "lessonId": "fiqh-wudu",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 23,
+      "ageCoverage": {
+        "4-5": 6,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 11
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 9,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 9,
+      "editorialSlot": 8,
+      "lessonId": "aqidah-iman",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 23,
+      "ageCoverage": {
+        "4-5": 6,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 11
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 9,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 10,
+      "editorialSlot": 10,
+      "lessonId": "adab-respekt",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 23,
+      "ageCoverage": {
+        "4-5": 6,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 11
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 11,
+      "editorialSlot": 11,
+      "lessonId": "fiqh-salah",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 23,
+      "ageCoverage": {
+        "4-5": 6,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 11
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 8,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 12,
+      "editorialSlot": 12,
+      "lessonId": "aqidah-ikhlas",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 23,
+      "ageCoverage": {
+        "4-5": 6,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 11
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 7,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 13,
+      "editorialSlot": 13,
+      "lessonId": "akhlaq-sabr-geduldig-warten",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 14,
+      "editorialSlot": 14,
+      "lessonId": "adab-salam-salam-erwidern",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 15,
+      "editorialSlot": 15,
+      "lessonId": "fiqh-taharah-saubere-kleidung",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 16,
+      "editorialSlot": 16,
+      "lessonId": "aqidah-tawhid-allah-ist-einer",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 8,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 17,
+      "editorialSlot": 17,
+      "lessonId": "akhlaq-sabr-nicht-aufgeben",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 18,
+      "editorialSlot": 18,
+      "lessonId": "adab-salam-zuerst-gru-en",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 19,
+      "editorialSlot": 19,
+      "lessonId": "fiqh-taharah-sauberer-lernplatz",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 20,
+      "editorialSlot": 20,
+      "lessonId": "aqidah-tawhid-nur-allah-anbeten",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 10,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 21,
+      "editorialSlot": 21,
+      "lessonId": "akhlaq-amanah-geliehene-dinge",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 22,
+      "editorialSlot": 22,
+      "lessonId": "adab-worte-bei-streit-sprechen",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 23,
+      "editorialSlot": 23,
+      "lessonId": "fiqh-wudu-gesicht-und-arme",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 13,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 24,
+      "editorialSlot": 24,
+      "lessonId": "aqidah-iman-die-engel",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 8,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 25,
+      "editorialSlot": 25,
+      "lessonId": "akhlaq-amanah-mein-versprechen",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 26,
+      "editorialSlot": 26,
+      "lessonId": "adab-worte-erst-nachdenken",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 27,
+      "editorialSlot": 27,
+      "lessonId": "fiqh-wudu-kopf-und-fu-e",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 7,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 28,
+      "editorialSlot": 28,
+      "lessonId": "aqidah-iman-die-gesandten",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 7,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 29,
+      "editorialSlot": 29,
+      "lessonId": "adab-respekt-eltern-zuhoren",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 30,
+      "editorialSlot": 30,
+      "lessonId": "fiqh-salah-allah-gedenken",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 6,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 31,
+      "editorialSlot": 31,
+      "lessonId": "aqidah-ikhlas-gutes-ohne-lob",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 32,
+      "editorialSlot": 32,
+      "lessonId": "adab-respekt-hilfsbereit-sein",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 33,
+      "editorialSlot": 33,
+      "lessonId": "fiqh-salah-gebet-lernen",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 7,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 34,
+      "editorialSlot": 34,
+      "lessonId": "aqidah-ikhlas-gute-absichten",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 21,
+      "ageCoverage": {
+        "4-5": 5,
+        "6-8": 7,
+        "9-10": 5,
+        "all": 10
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v9.json"
+      ]
+    },
+    {
+      "productionOrder": 35,
+      "editorialSlot": 35,
+      "lessonId": "adab-essen-bismillah",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 37,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 11,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v22.json"
+      ]
+    },
+    {
+      "productionOrder": 36,
+      "editorialSlot": 36,
+      "lessonId": "akhlaq-tiere-barmherzigkeit",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 37,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 10,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v22.json"
+      ]
+    },
+    {
+      "productionOrder": 37,
+      "editorialSlot": 37,
+      "lessonId": "adab-nachbarn-gutes",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 37,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 11,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v22.json"
+      ]
+    },
+    {
+      "productionOrder": 38,
+      "editorialSlot": 38,
+      "lessonId": "aqidah-dua-allah-bitten",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 37,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 18,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v22.json"
+      ]
+    },
+    {
+      "productionOrder": 39,
+      "editorialSlot": 39,
+      "lessonId": "aqidah-tawhid-recht-allahs",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 37,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 15,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v25.json"
+      ]
+    },
+    {
+      "productionOrder": 40,
+      "editorialSlot": 40,
+      "lessonId": "aqidah-iman-sechs-grundlagen",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 37,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 10,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v25.json"
+      ]
+    },
+    {
+      "productionOrder": 41,
+      "editorialSlot": 41,
+      "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 37,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 12,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v25.json"
+      ]
+    },
+    {
+      "productionOrder": 42,
+      "editorialSlot": 42,
+      "lessonId": "akhlaq-wut-ruhig-bleiben",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 37,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 10,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v25.json"
+      ]
+    },
+    {
+      "productionOrder": 43,
+      "editorialSlot": 43,
+      "lessonId": "adab-erlaubnis-anklopfen",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 37,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 8,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v25.json"
+      ]
+    },
+    {
+      "productionOrder": 44,
+      "editorialSlot": 44,
+      "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 37,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 9,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v25.json"
+      ]
+    },
+    {
+      "productionOrder": 45,
+      "editorialSlot": 45,
+      "lessonId": "akhlaq-nafs-gutes-herz",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 37,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 9,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v25.json"
+      ]
+    },
+    {
+      "productionOrder": 46,
+      "editorialSlot": 46,
+      "lessonId": "fiqh-reinheit-unterscheiden",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 37,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 13,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v26.json"
+      ]
+    },
+    {
+      "productionOrder": 47,
+      "editorialSlot": 47,
+      "lessonId": "aqidah-quran-allahs-wort",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 37,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 19,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v26.json"
+      ]
+    },
+    {
+      "productionOrder": 48,
+      "editorialSlot": 48,
+      "lessonId": "aqidah-sirah-adam-erschoepfung",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 37,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 15,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v26.json"
+      ]
+    },
+    {
+      "productionOrder": 49,
+      "editorialSlot": 49,
+      "lessonId": "adab-morgen-dhikr",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 37,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 13,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v26.json"
+      ]
+    },
+    {
+      "productionOrder": 50,
+      "editorialSlot": 50,
+      "lessonId": "adab-eltern-freundlich",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 37,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 10,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v26.json"
+      ]
+    },
+    {
+      "productionOrder": 51,
+      "editorialSlot": 51,
+      "lessonId": "aqidah-allah-erschuf-tiere",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 54,
+      "ageCoverage": {
+        "4-5": 18,
+        "6-8": 21,
+        "9-10": 19,
+        "all": 0
+      },
+      "contentKinds": [
+        "choice",
+        "evidence",
+        "feedback",
+        "hint",
+        "narration",
+        "question",
+        "recap",
+        "title"
+      ],
+      "needsArabicTermSegmentation": 11,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v27.json"
+      ]
+    },
+    {
+      "productionOrder": 52,
+      "editorialSlot": 52,
+      "lessonId": "aqidah-iman-an-allah-vertiefen",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 53,
+      "ageCoverage": {
+        "4-5": 18,
+        "6-8": 21,
+        "9-10": 19,
+        "all": 0
+      },
+      "contentKinds": [
+        "choice",
+        "evidence",
+        "feedback",
+        "hint",
+        "narration",
+        "question",
+        "recap",
+        "title"
+      ],
+      "needsArabicTermSegmentation": 17,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v27.json"
+      ]
+    },
+    {
+      "productionOrder": 53,
+      "editorialSlot": 53,
+      "lessonId": "aqidah-ikhlas-gute-lernabsicht",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 54,
+      "ageCoverage": {
+        "4-5": 18,
+        "6-8": 21,
+        "9-10": 19,
+        "all": 0
+      },
+      "contentKinds": [
+        "choice",
+        "evidence",
+        "feedback",
+        "hint",
+        "narration",
+        "question",
+        "recap",
+        "title"
+      ],
+      "needsArabicTermSegmentation": 11,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v27.json"
+      ]
+    },
+    {
+      "productionOrder": 54,
+      "editorialSlot": 54,
+      "lessonId": "akhlaq-geschwister-fair-teilen",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 53,
+      "ageCoverage": {
+        "4-5": 17,
+        "6-8": 21,
+        "9-10": 19,
+        "all": 0
+      },
+      "contentKinds": [
+        "choice",
+        "evidence",
+        "feedback",
+        "hint",
+        "narration",
+        "question",
+        "recap",
+        "title"
+      ],
+      "needsArabicTermSegmentation": 15,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v27.json"
+      ]
+    },
+    {
+      "productionOrder": 55,
+      "editorialSlot": 55,
+      "lessonId": "adab-privatsphaere-andere-achten",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 54,
+      "ageCoverage": {
+        "4-5": 18,
+        "6-8": 21,
+        "9-10": 19,
+        "all": 0
+      },
+      "contentKinds": [
+        "choice",
+        "evidence",
+        "feedback",
+        "hint",
+        "narration",
+        "question",
+        "recap",
+        "title"
+      ],
+      "needsArabicTermSegmentation": 6,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v27.json"
+      ]
+    },
+    {
+      "productionOrder": 56,
+      "editorialSlot": 56,
+      "lessonId": "akhlaq-tarbiyah-sachen-pflegen",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 54,
+      "ageCoverage": {
+        "4-5": 18,
+        "6-8": 21,
+        "9-10": 19,
+        "all": 0
+      },
+      "contentKinds": [
+        "choice",
+        "evidence",
+        "feedback",
+        "hint",
+        "narration",
+        "question",
+        "recap",
+        "title"
+      ],
+      "needsArabicTermSegmentation": 8,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v27.json"
+      ]
+    },
+    {
+      "productionOrder": 57,
+      "editorialSlot": 57,
+      "lessonId": "akhlaq-nafs-wut-sicher-ausdruecken",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 54,
+      "ageCoverage": {
+        "4-5": 18,
+        "6-8": 21,
+        "9-10": 19,
+        "all": 0
+      },
+      "contentKinds": [
+        "choice",
+        "evidence",
+        "feedback",
+        "hint",
+        "narration",
+        "question",
+        "recap",
+        "title"
+      ],
+      "needsArabicTermSegmentation": 5,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v27.json"
+      ]
+    },
+    {
+      "productionOrder": 58,
+      "editorialSlot": 58,
+      "lessonId": "fiqh-wudu-schritte-reihenfolge",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 54,
+      "ageCoverage": {
+        "4-5": 18,
+        "6-8": 21,
+        "9-10": 19,
+        "all": 0
+      },
+      "contentKinds": [
+        "choice",
+        "evidence",
+        "feedback",
+        "hint",
+        "narration",
+        "question",
+        "recap",
+        "title"
+      ],
+      "needsArabicTermSegmentation": 14,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v27.json"
+      ]
+    },
+    {
+      "productionOrder": 59,
+      "editorialSlot": 59,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 41,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 28,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v28.json"
+      ]
+    },
+    {
+      "productionOrder": 60,
+      "editorialSlot": 60,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 41,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 26,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v28.json"
+      ]
+    },
+    {
+      "productionOrder": 61,
+      "editorialSlot": 61,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 41,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 13,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v28.json"
+      ]
+    },
+    {
+      "productionOrder": 62,
+      "editorialSlot": 62,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 41,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 10,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v28.json"
+      ]
+    },
+    {
+      "productionOrder": 63,
+      "editorialSlot": 63,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 41,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 11,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v29.json"
+      ]
+    },
+    {
+      "productionOrder": 64,
+      "editorialSlot": 64,
+      "lessonId": "aqidah-iman-an-engel",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 41,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 15,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v29.json"
+      ]
+    },
+    {
+      "productionOrder": 65,
+      "editorialSlot": 65,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 41,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 11,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v29.json"
+      ]
+    },
+    {
+      "productionOrder": 66,
+      "editorialSlot": 66,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "availableInChildLessonCode": true,
+      "hasTextToSpeechPlan": true,
+      "distinctPhrasesInVoicePlans": 41,
+      "ageCoverage": {
+        "4-5": 12,
+        "6-8": 13,
+        "9-10": 11,
+        "all": 5
+      },
+      "contentKinds": [
+        "answer",
+        "narration",
+        "question",
+        "summary"
+      ],
+      "needsArabicTermSegmentation": 8,
+      "productionStatus": "source-texts-prepared-no-confirmed-public-v4-binary",
+      "liveConfirmed": false,
+      "sourcePlanFiles": [
+        "academy-voice-plan-v29.json"
+      ]
+    }
+  ],
+  "futureEditorial": [
+    {
+      "editorialSlot": 67,
+      "topicId": "editorial-067",
+      "pillar": "adab",
+      "title": "Gesprächspartner ausreden lassen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 68,
+      "topicId": "editorial-068",
+      "pillar": "tarbiyah",
+      "title": "Aufgaben in kleinen Schritten",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 69,
+      "topicId": "editorial-069",
+      "pillar": "nafs",
+      "title": "Mit Enttäuschungen umgehen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 70,
+      "topicId": "editorial-070",
+      "pillar": "fiqh",
+      "title": "Wasser beim Wuḍūʾ sparen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 71,
+      "topicId": "editorial-071",
+      "pillar": "quran",
+      "title": "Sūrat al-Ikhlāṣ verstehen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 72,
+      "topicId": "editorial-072",
+      "pillar": "sirah",
+      "title": "Ibrāhīm عليه السلام und Tawḥīd",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 73,
+      "topicId": "editorial-073",
+      "pillar": "dua",
+      "title": "Vor dem Schlafen Allah gedenken",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 74,
+      "topicId": "editorial-074",
+      "pillar": "family",
+      "title": "Freundschaften ehrlich pflegen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 75,
+      "topicId": "editorial-075",
+      "pillar": "tawhid",
+      "title": "Allah versorgt uns",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 76,
+      "topicId": "editorial-076",
+      "pillar": "iman",
+      "title": "Aufgaben der Engel",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 77,
+      "topicId": "editorial-077",
+      "pillar": "ikhlas",
+      "title": "Gutes tun, wenn niemand zuschaut",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 78,
+      "topicId": "editorial-078",
+      "pillar": "akhlaq",
+      "title": "Andere trösten",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 79,
+      "topicId": "editorial-079",
+      "pillar": "adab",
+      "title": "Höflich um etwas bitten",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 80,
+      "topicId": "editorial-080",
+      "pillar": "tarbiyah",
+      "title": "Lernziele freundlich planen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 81,
+      "topicId": "editorial-081",
+      "pillar": "nafs",
+      "title": "Sich bei Angst Hilfe holen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 82,
+      "topicId": "editorial-082",
+      "pillar": "fiqh",
+      "title": "Wann braucht man Wuḍūʾ?",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 83,
+      "topicId": "editorial-083",
+      "pillar": "quran",
+      "title": "Sūrat al-Falaq kennenlernen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 84,
+      "topicId": "editorial-084",
+      "pillar": "sirah",
+      "title": "Ismāʿīl عليه السلام und Gehorsam gegenüber Allah",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 85,
+      "topicId": "editorial-085",
+      "pillar": "dua",
+      "title": "Nach dem Aufwachen dankbar sein",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 86,
+      "topicId": "editorial-086",
+      "pillar": "family",
+      "title": "Streit ohne Gewalt lösen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 87,
+      "topicId": "editorial-087",
+      "pillar": "tawhid",
+      "title": "Allahs Barmherzigkeit kennenlernen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 88,
+      "topicId": "editorial-088",
+      "pillar": "iman",
+      "title": "Īmān an Allahs Bücher",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 89,
+      "topicId": "editorial-089",
+      "pillar": "ikhlas",
+      "title": "Lob freundlich annehmen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 90,
+      "topicId": "editorial-090",
+      "pillar": "akhlaq",
+      "title": "Großzügig teilen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 91,
+      "topicId": "editorial-091",
+      "pillar": "adab",
+      "title": "Danke und Entschuldigung sagen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 92,
+      "topicId": "editorial-092",
+      "pillar": "tarbiyah",
+      "title": "Bei Problemen Hilfe holen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 93,
+      "topicId": "editorial-093",
+      "pillar": "nafs",
+      "title": "Dankbarkeit im Herzen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 94,
+      "topicId": "editorial-094",
+      "pillar": "fiqh",
+      "title": "Wuḍūʾ: Waschen und Streichen unterscheiden",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 95,
+      "topicId": "editorial-095",
+      "pillar": "quran",
+      "title": "Sūrat an-Nās kennenlernen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 96,
+      "topicId": "editorial-096",
+      "pillar": "sirah",
+      "title": "Mūsā عليه السلام und Mut",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 97,
+      "topicId": "editorial-097",
+      "pillar": "dua",
+      "title": "Vor dem Lernen um Hilfe bitten",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 98,
+      "topicId": "editorial-098",
+      "pillar": "family",
+      "title": "Mobbing erkennen und Hilfe holen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 99,
+      "topicId": "editorial-099",
+      "pillar": "tawhid",
+      "title": "Allah hört unsere Bittgebete",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 100,
+      "topicId": "editorial-100",
+      "pillar": "iman",
+      "title": "Der Qurʾān als Offenbarung",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 101,
+      "topicId": "editorial-101",
+      "pillar": "ikhlas",
+      "title": "Nicht mit guten Taten prahlen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 102,
+      "topicId": "editorial-102",
+      "pillar": "akhlaq",
+      "title": "Verzeihen und Grenzen achten",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 103,
+      "topicId": "editorial-103",
+      "pillar": "adab",
+      "title": "Rücksicht in der Moschee",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 104,
+      "topicId": "editorial-104",
+      "pillar": "tarbiyah",
+      "title": "Eigene Grenzen respektieren",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 105,
+      "topicId": "editorial-105",
+      "pillar": "nafs",
+      "title": "Neid erkennen ohne Beschämung",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 106,
+      "topicId": "editorial-106",
+      "pillar": "fiqh",
+      "title": "Reinheit der Gebetskleidung",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 107,
+      "topicId": "editorial-107",
+      "pillar": "quran",
+      "title": "Qurʾān respektvoll auswendig lernen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 108,
+      "topicId": "editorial-108",
+      "pillar": "sirah",
+      "title": "ʿĪsā عليه السلام als Gesandter",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 109,
+      "topicId": "editorial-109",
+      "pillar": "dua",
+      "title": "Für Eltern Gutes erbitten",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 110,
+      "topicId": "editorial-110",
+      "pillar": "family",
+      "title": "Nein sagen und persönliche Sicherheit",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 111,
+      "topicId": "editorial-111",
+      "pillar": "tawhid",
+      "title": "Allah kennt unser Handeln",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 112,
+      "topicId": "editorial-112",
+      "pillar": "iman",
+      "title": "Īmān an die Gesandten",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 113,
+      "topicId": "editorial-113",
+      "pillar": "ikhlas",
+      "title": "Eine gute Absicht erneuern",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 114,
+      "topicId": "editorial-114",
+      "pillar": "akhlaq",
+      "title": "Dankbarkeit zeigen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 115,
+      "topicId": "editorial-115",
+      "pillar": "adab",
+      "title": "Den Qurʾān sorgfältig behandeln",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 116,
+      "topicId": "editorial-116",
+      "pillar": "tarbiyah",
+      "title": "Sichere Regeln zu Hause",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 117,
+      "topicId": "editorial-117",
+      "pillar": "nafs",
+      "title": "Ungeduld bemerken",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 118,
+      "topicId": "editorial-118",
+      "pillar": "fiqh",
+      "title": "Einen Gebetsplatz vorbereiten",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 119,
+      "topicId": "editorial-119",
+      "pillar": "quran",
+      "title": "Arabischen Text und Übersetzung unterscheiden",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 120,
+      "topicId": "editorial-120",
+      "pillar": "sirah",
+      "title": "Muḥammad ﷺ als barmherziger Lehrer",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 121,
+      "topicId": "editorial-121",
+      "pillar": "dua",
+      "title": "In schwierigen Momenten Duʿāʾ",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 122,
+      "topicId": "editorial-122",
+      "pillar": "family",
+      "title": "Gemeinsam in der Moschee lernen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 123,
+      "topicId": "editorial-123",
+      "pillar": "tawhid",
+      "title": "Allahs Wissen verstehen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 124,
+      "topicId": "editorial-124",
+      "pillar": "iman",
+      "title": "Allen Gesandten mit Respekt begegnen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 125,
+      "topicId": "editorial-125",
+      "pillar": "ikhlas",
+      "title": "Kleine Taten können wertvoll sein",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 126,
+      "topicId": "editorial-126",
+      "pillar": "akhlaq",
+      "title": "Bescheiden bleiben",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 127,
+      "topicId": "editorial-127",
+      "pillar": "adab",
+      "title": "Mit Gästen freundlich umgehen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 128,
+      "topicId": "editorial-128",
+      "pillar": "tarbiyah",
+      "title": "Lernen und Pausen ausgleichen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 129,
+      "topicId": "editorial-129",
+      "pillar": "nafs",
+      "title": "Fehler bereuen und verbessern",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 130,
+      "topicId": "editorial-130",
+      "pillar": "fiqh",
+      "title": "Die Gebetszeiten kennenlernen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 131,
+      "topicId": "editorial-131",
+      "pillar": "quran",
+      "title": "Einfaches Tajwīd-Hören",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 132,
+      "topicId": "editorial-132",
+      "pillar": "sirah",
+      "title": "Muḥammad ﷺ in Makkah",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 133,
+      "topicId": "editorial-133",
+      "pillar": "dua",
+      "title": "Nach dem Essen danken",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 134,
+      "topicId": "editorial-134",
+      "pillar": "family",
+      "title": "Kranken und älteren Menschen helfen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 135,
+      "topicId": "editorial-135",
+      "pillar": "tawhid",
+      "title": "Die schönen Namen Allahs",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 136,
+      "topicId": "editorial-136",
+      "pillar": "iman",
+      "title": "Der letzte Gesandte Muḥammad ﷺ",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 137,
+      "topicId": "editorial-137",
+      "pillar": "ikhlas",
+      "title": "Duʿāʾ mit aufrichtigem Herzen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 138,
+      "topicId": "editorial-138",
+      "pillar": "akhlaq",
+      "title": "Schaden von anderen abwenden",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 139,
+      "topicId": "editorial-139",
+      "pillar": "adab",
+      "title": "Als Gast gute Sitten zeigen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 140,
+      "topicId": "editorial-140",
+      "pillar": "tarbiyah",
+      "title": "Mit Bildschirmen bewusst umgehen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 141,
+      "topicId": "editorial-141",
+      "pillar": "nafs",
+      "title": "Hoffnung auf Allahs Barmherzigkeit",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 142,
+      "topicId": "editorial-142",
+      "pillar": "fiqh",
+      "title": "Die Namen der fünf Gebete",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 143,
+      "topicId": "editorial-143",
+      "pillar": "quran",
+      "title": "Was bedeutet Sunnah?",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 144,
+      "topicId": "editorial-144",
+      "pillar": "sirah",
+      "title": "Die Hiǧrah nach Madīnah",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 145,
+      "topicId": "editorial-145",
+      "pillar": "dua",
+      "title": "Duʿāʾ beim Verlassen des Hauses",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 146,
+      "topicId": "editorial-146",
+      "pillar": "family",
+      "title": "Unterschiedliche Herkunft respektieren",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 147,
+      "topicId": "editorial-147",
+      "pillar": "tawhid",
+      "title": "Ar-Raḥmān und Ar-Raḥīm",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 148,
+      "topicId": "editorial-148",
+      "pillar": "iman",
+      "title": "Īmān an den Jüngsten Tag",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 149,
+      "topicId": "editorial-149",
+      "pillar": "ikhlas",
+      "title": "Gemeinsame Aufgaben ohne Eitelkeit",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 150,
+      "topicId": "editorial-150",
+      "pillar": "akhlaq",
+      "title": "Versöhnung nach Streit",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 151,
+      "topicId": "editorial-151",
+      "pillar": "adab",
+      "title": "Weniger verschwenden beim Essen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 152,
+      "topicId": "editorial-152",
+      "pillar": "tarbiyah",
+      "title": "Für andere Verantwortung übernehmen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 153,
+      "topicId": "editorial-153",
+      "pillar": "nafs",
+      "title": "Eigene Gedanken prüfen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 154,
+      "topicId": "editorial-154",
+      "pillar": "fiqh",
+      "title": "Die Absicht zum Gebet",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 155,
+      "topicId": "editorial-155",
+      "pillar": "quran",
+      "title": "Woher stammt ein Ḥadīṯ?",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 156,
+      "topicId": "editorial-156",
+      "pillar": "sirah",
+      "title": "Ṣaḥābah und gutes Vorbild",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 157,
+      "topicId": "editorial-157",
+      "pillar": "dua",
+      "title": "Adhkār ohne Zwang wiederholen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 158,
+      "topicId": "editorial-158",
+      "pillar": "family",
+      "title": "Für die Gemeinschaft etwas Gutes tun",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 159,
+      "topicId": "editorial-159",
+      "pillar": "tawhid",
+      "title": "Allah allein danken",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 160,
+      "topicId": "editorial-160",
+      "pillar": "iman",
+      "title": "Gute Taten und Verantwortung",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 161,
+      "topicId": "editorial-161",
+      "pillar": "ikhlas",
+      "title": "Aufrichtigkeit von Außenwirkung unterscheiden",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 162,
+      "topicId": "editorial-162",
+      "pillar": "akhlaq",
+      "title": "Ruhig bleiben beim Verlieren",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 163,
+      "topicId": "editorial-163",
+      "pillar": "adab",
+      "title": "Nach dem Essen dankbar sein",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 164,
+      "topicId": "editorial-164",
+      "pillar": "tarbiyah",
+      "title": "Nach Fehlern weiterlernen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 165,
+      "topicId": "editorial-165",
+      "pillar": "nafs",
+      "title": "Nicht jeden Wunsch sofort erfüllen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 166,
+      "topicId": "editorial-166",
+      "pillar": "fiqh",
+      "title": "Zum Gebet stehen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 167,
+      "topicId": "editorial-167",
+      "pillar": "tawhid",
+      "title": "Die Bedeutung von ʿIbādah",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 168,
+      "topicId": "editorial-168",
+      "pillar": "iman",
+      "title": "Īmān an al-Qadar",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 169,
+      "topicId": "editorial-169",
+      "pillar": "ikhlas",
+      "title": "Ikhlāṣ im Wochenrückblick",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 170,
+      "topicId": "editorial-170",
+      "pillar": "akhlaq",
+      "title": "Freude für andere empfinden",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 171,
+      "topicId": "editorial-171",
+      "pillar": "adab",
+      "title": "Mit Essen nicht spielen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 172,
+      "topicId": "editorial-172",
+      "pillar": "tarbiyah",
+      "title": "Selbstständigkeit Schritt für Schritt",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 173,
+      "topicId": "editorial-173",
+      "pillar": "nafs",
+      "title": "Stille und Sammlung üben",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 174,
+      "topicId": "editorial-174",
+      "pillar": "fiqh",
+      "title": "Takbīrat al-Iḥrām kennenlernen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 175,
+      "topicId": "editorial-175",
+      "pillar": "tawhid",
+      "title": "Tawḥīd im Alltag",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 176,
+      "topicId": "editorial-176",
+      "pillar": "iman",
+      "title": "Bemühen und Allah vertrauen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 177,
+      "topicId": "editorial-177",
+      "pillar": "akhlaq",
+      "title": "Unterschiedliche Menschen respektieren",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 178,
+      "topicId": "editorial-178",
+      "pillar": "adab",
+      "title": "Trinken mit guten Sitten",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 179,
+      "topicId": "editorial-179",
+      "pillar": "nafs",
+      "title": "Wertschätzend mit sich selbst umgehen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 180,
+      "topicId": "editorial-180",
+      "pillar": "fiqh",
+      "title": "Die Qurʾān-Rezitation im Gebet",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 181,
+      "topicId": "editorial-181",
+      "pillar": "tawhid",
+      "title": "Keinen geschaffenen Dingen göttliche Macht zuschreiben",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 182,
+      "topicId": "editorial-182",
+      "pillar": "iman",
+      "title": "Glaube und gute Worte",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 183,
+      "topicId": "editorial-183",
+      "pillar": "akhlaq",
+      "title": "Hilfsbereitschaft ohne Druck",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 184,
+      "topicId": "editorial-184",
+      "pillar": "adab",
+      "title": "Beim Unterricht aufmerksam sein",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 185,
+      "topicId": "editorial-185",
+      "pillar": "nafs",
+      "title": "Schuldgefühle ohne Angstbilder besprechen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 186,
+      "topicId": "editorial-186",
+      "pillar": "fiqh",
+      "title": "Rukūʿ kennenlernen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 187,
+      "topicId": "editorial-187",
+      "pillar": "tawhid",
+      "title": "Allah vertrauen und sich bemühen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 188,
+      "topicId": "editorial-188",
+      "pillar": "iman",
+      "title": "Fragen zum Īmān stellen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 189,
+      "topicId": "editorial-189",
+      "pillar": "akhlaq",
+      "title": "Mut zur Wahrheit",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 190,
+      "topicId": "editorial-190",
+      "pillar": "adab",
+      "title": "Ältere respektvoll ansprechen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 191,
+      "topicId": "editorial-191",
+      "pillar": "nafs",
+      "title": "Regelmäßig um Vergebung bitten",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 192,
+      "topicId": "editorial-192",
+      "pillar": "fiqh",
+      "title": "Aus dem Rukūʿ aufrichten",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 193,
+      "topicId": "editorial-193",
+      "pillar": "tawhid",
+      "title": "Tawḥīd mit eigenen Worten erklären",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 194,
+      "topicId": "editorial-194",
+      "pillar": "iman",
+      "title": "Die sechs Glaubenssäulen wiederholen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 195,
+      "topicId": "editorial-195",
+      "pillar": "akhlaq",
+      "title": "Verantwortung für Worte übernehmen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 196,
+      "topicId": "editorial-196",
+      "pillar": "adab",
+      "title": "Jüngere freundlich behandeln",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 197,
+      "topicId": "editorial-197",
+      "pillar": "nafs",
+      "title": "Das Herz mit guten Taten pflegen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 198,
+      "topicId": "editorial-198",
+      "pillar": "fiqh",
+      "title": "Suǧūd kennenlernen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 199,
+      "topicId": "editorial-199",
+      "pillar": "akhlaq",
+      "title": "Fürsorge für Kranke",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 200,
+      "topicId": "editorial-200",
+      "pillar": "adab",
+      "title": "Anderen Platz machen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 201,
+      "topicId": "editorial-201",
+      "pillar": "fiqh",
+      "title": "Zwischen zwei Niederwerfungen sitzen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 202,
+      "topicId": "editorial-202",
+      "pillar": "akhlaq",
+      "title": "Guter Charakter im Wochenrückblick",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 203,
+      "topicId": "editorial-203",
+      "pillar": "adab",
+      "title": "Digitalen Adab üben",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 204,
+      "topicId": "editorial-204",
+      "pillar": "fiqh",
+      "title": "Tashahhud als Gebetsbestandteil",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 205,
+      "topicId": "editorial-205",
+      "pillar": "fiqh",
+      "title": "Den Gebetsabschluss kennenlernen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 206,
+      "topicId": "editorial-206",
+      "pillar": "fiqh",
+      "title": "Fehler beim Üben des Gebets",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 207,
+      "topicId": "editorial-207",
+      "pillar": "fiqh",
+      "title": "Ramaḍān und Fasten kennenlernen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    },
+    {
+      "editorialSlot": 208,
+      "topicId": "editorial-208",
+      "pillar": "fiqh",
+      "title": "Zakāh und Ḥaǧǧ als Säulen",
+      "sourceReviewState": "editorial-outline-only",
+      "lessonCodeExists": false,
+      "threeAgeOutcomeOutlines": true,
+      "recordingAllowed": false,
+      "releaseAllowed": false
+    }
+  ]
+}
