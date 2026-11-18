@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="de" dir="ltr" data-q-theme="light">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,follow">
+<title>Muǧāhid · Wissen und Hochmut · Lernbereich | DĀR AL TAWḤĪD</title>
+<link rel="canonical" href="https://dar-al-tawhid.de/lernen/scham-hochmut-wissen/">
+<link rel="stylesheet" href="/assets/learning-heritage.css?v=20261018a">
+<style>*{box-sizing:border-box}body{margin:0;background:#f7f4ec;color:#253c31;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{width:min(100% - 28px,740px);margin:auto;padding:26px 0 calc(35px + env(safe-area-inset-bottom,0px))}
+header{text-align:center;margin:0 0 25px}.logo{width:70px;height:70px;object-fit:contain;margin:auto;display:block}
+.brand{font:700 clamp(21px,4vw,29px) Georgia,serif}.sign{font-style:italic;color:#8b7146;margin:0}
+h1{font-size:clamp(24px,5vw,35px);line-height:1.23;margin:18px 0}
+select{min-height:44px;font:inherit;border:1px solid #b49b6b;border-radius:12px;padding:8px 12px;background:#fffdf7;color:#253c31;max-width:100%}
+.card{border:1px solid #b49b6b;background:#fffdf8;border-radius:20px;padding:clamp(18px,4vw,28px);margin:18px 0}
+.opt{display:block;width:100%;min-height:50px;border:1px solid #a38f69;background:#f7f5ed;border-radius:12px;padding:11px 15px;margin:10px 0;text-align:start;font:600 15px/1.5 system-ui,sans-serif;color:#253c31;cursor:pointer}
+.opt:disabled{opacity:.8;cursor:default}.opt[data-correct="yes"]{border:2px solid #327f51}.opt[data-wrong="yes"]{border:2px solid #ad533d}
+button.next{min-height:48px;background:#b99b60;border:0;border-radius:12px;color:#182c20;font:800 15px system-ui;padding:11px 18px;cursor:pointer}
+button.next:disabled{opacity:.4;cursor:default}.progress{font-weight:800;opacity:.74;font-size:13px}
+a{color:inherit}#results[hidden],#quiz[hidden]{display:none!important}
+@media(prefers-color-scheme:dark){body{background:#101c21;color:#f2e9d7}.card{background:#1c3037}.opt{background:#263c40;color:#f2e9d7}select{background:#1c3037;color:#f2e9d7}}
+html[dir="rtl"] .card,html[dir="rtl"] .opt{text-align:right}</style></head>
+<body><main><header><img class="logo" src="/watermark-my-logo-full.png" alt="DĀR AL TAWḤĪD Logo"><div class="brand">DĀR AL TAWḤĪD</div><p class="sign">by Serhat Abu Malik</p><h1 id="title">SCHAM UND HOCHMUT VERHINDERN DAS LERNEN</h1><select id="language" aria-label="Sprache wählen"><option value="de">Deutsch</option><option value="ar">العربية الفصحى</option><option value="en">English</option><option value="tr">Türkçe</option><option value="ku">Kurmancî</option><option value="ckb">سۆرانی</option><option value="bs">Bosanski</option><option value="fr">Français</option><option value="es">Español</option></select></header>
+<section class="card" id="quiz" aria-live="polite"><p class="progress" id="progress"></p><h2 id="question"></h2><div id="options"></div><p id="feedback" role="status"></p><button class="next" id="next" type="button" disabled></button></section>
+<section class="card" id="results" hidden><h2 id="finished"></h2><p id="score"></p><button class="next" id="again" type="button"></button></section>
+<p><a href="/q/58/" id="source">DĀR AL TAWḤĪD · Q58</a></p>
+</main>
+<script>
+(async()=>{
+ const r=await fetch('/assets/q58-locales.json',{cache:'no-cache'});if(!r.ok)return;const data=await r.json(),key='darAdultPreferredLocaleV1',sel=document.getElementById('language');
+ let code=new URLSearchParams(location.search).get('lang')||(()=>{try{return localStorage.getItem(key)}catch(_){return'de'}})(),n=0,count=0,answered=false;
+ const by=id=>document.getElementById(id);let cur;
+ function render(){cur=data.locales[code]||data.locales.de;document.documentElement.lang=code;document.documentElement.dir=code==='ar'||code==='ckb'?'rtl':'ltr';sel.value=code;by('title').textContent=cur.title;
+ by('results').hidden=true;by('quiz').hidden=false;let x=cur.quiz[n];answered=false;by('question').textContent=x.q;by('progress').textContent=cur.labels.question+' '+(n+1)+' / '+cur.quiz.length;by('next').textContent=n===cur.quiz.length-1?cur.labels.result:cur.labels.next;by('next').disabled=true;by('feedback').textContent='';
+ const options=by('options');options.replaceChildren();x.a.forEach((label,i)=>{const button=document.createElement('button');button.className='opt';button.type='button';button.textContent=String.fromCharCode(65+i)+'. '+label;button.addEventListener('click',()=>{if(answered)return;answered=true;let correct=i===x.correct;if(correct)count++;options.querySelectorAll('button').forEach((b,j)=>{b.disabled=true;if(j===x.correct)b.dataset.correct='yes';else if(j===i)b.dataset.wrong='yes'});by('feedback').textContent=(correct?cur.labels.correct:cur.labels.incorrect)+' '+x.why;by('next').disabled=false});options.appendChild(button)});
+ }
+ function setLocale(v){if(!data.locales[v])v='de';code=v;n=0;count=0;try{localStorage.setItem(key,code)}catch(_){}render()}
+ sel.addEventListener('change',()=>setLocale(sel.value));by('next').addEventListener('click',()=>{if(!answered)return;if(n<cur.quiz.length-1){n++;render()}else{by('quiz').hidden=true;by('results').hidden=false;by('finished').textContent=cur.labels.done;by('score').textContent=count+' / '+cur.quiz.length+' '+cur.labels.score;by('again').textContent=cur.labels.again}});
+ by('again').addEventListener('click',()=>{n=0;count=0;render()});setLocale(code);
+})();
+</script></body></html>
