@@ -33,8 +33,8 @@ bad = [
     valid.replace("Signature=signed-token", "Signature="),
     path + "?Expires=1&KeyName=test&Signature=test",
     valid + "#fragment",
-    valid.replace("assets-cdn-key-1", "assets-cdn-key-1") + "&garbage=1"
-    if False else path + "?Expires=not-a-time&KeyName=test&Signature=test",
+    valid.replace(module.WORKSPACE, "another-user-workspace"),
+    path + "?Expires=not-a-time&KeyName=test&Signature=test",
 ]
 for candidate in bad:
     try:
