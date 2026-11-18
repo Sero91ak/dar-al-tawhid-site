@@ -1300,7 +1300,7 @@ function injectAdultReaderRuntimeV5(html) {
   // One stable women post ID + selected adult app language, no Q number minted.
   // This is a read-only localization layer over the frozen Frauen renderer.
   if(!html.includes('id="darFrauenEntryLocaleV1"')){
-    const localeTag='<script defer id="darFrauenEntryLocaleV1" src="/assets/frauen/frauen-entry-locale-v1.js?v=20261106-no-q-nine"></'+'script>';
+    const localeTag='<script defer id="darFrauenEntryLocaleV1" src="/assets/frauen/frauen-entry-locale-v1.js?v=20261118-batch16-learning"></'+'script>';
     html=html.includes("</body>")?html.replace("</body>",localeTag+"</body>"):html+localeTag;
   }
   // Q50 is a single published adult post, localized at the existing render
