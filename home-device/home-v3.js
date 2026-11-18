@@ -87,7 +87,7 @@
    if(!r.ok)return;
    const catalog=await r.json();
    if(catalog?.schemaVersion!==1||!Array.isArray(catalog.wallpapers))return;
-   const entries=catalog.wallpapers.filter(x=>x&&/^[a-z0-9-]{2,48}$/.test(x.id||'')&&typeof x.label==='string'&&/^\\/media\\/apple-tv\\/[A-Za-z0-9._-]+\\.(?:jpg|webp|png)$/.test(x.url||''));
+   const entries=catalog.wallpapers.filter(x=>x&&/^[a-z0-9-]{2,48}$/.test(x.id||'')&&typeof x.label==='string'&&/^\/media\/apple-tv\/[A-Za-z0-9._-]+\.(?:jpg|webp|png)$/.test(x.url||''));
    if(!entries.length)return;
    const preferred=prefs.wallpaper;
    const ids=new Set(entries.map(x=>x.id));
