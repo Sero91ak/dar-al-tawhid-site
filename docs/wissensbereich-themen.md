@@ -70,3 +70,16 @@ Bei Frau→Mann muss die Frau-Zuordnung entfernt werden, ehe Mann aktiviert wird
 ## Zehnerblöcke Frauen – verpflichtende Dublettenprüfung (06.11.2026)
 
 Jeder neue Zehnerblock ist vor dem Schreiben nach Quelle, Matn, Berichtssinn, normalisiertem Titel, Sprecherin, Post-/Q-/Lern-ID und bereits vorhandenem Datensatz zu prüfen. Überlappungen werden über dieselbe kanonische ID thematisch referenziert. Gleicher Bericht mit anderem Titel oder anderer Überlieferungssammlung ist **kein** neuer Eintrag. Nicht überprüfte oder noch nicht verknüpfte Entwürfe bleiben `nicht-anzeigen`, unabhängig von vorhandenem Ṣaḥīḥ-Nachweis. Technisches Vorsieb: `scripts/check-frauen-source-duplicates.cjs` (PR-Differenz gegen ursprünglichen Zielzweig); fachliche Freigabe bleibt separat.
+
+
+## Dauerregel: Sammelveröffentlichung von Frauenbeiträgen (18.11.2026)
+
+**Freigabepaket statt Teilzustellung:** Wenn der Nutzer eine bestimmte Anzahl bestehender gesperrter Frauenbeiträge zusammen freigeben lässt, zuerst anhand kanonischer `kennung` und Originalbeleg genau diese Personen-/Beitragsmenge feststellen. Kein Dublett, keine neue Q-Nummer, keine zweite Beitrags-ID je Sprache. Unvollständige Beiträge bleiben `nicht-anzeigen`; niemals eine Zahl von fertigen Beiträgen aus bloß vorhandenen Entwürfen ableiten.
+
+**Neun wirklich lesbare Sprachen:** Für jeden Datensatz getrennte geprüfte Aussagen, Kurzvorschau, Šarḥ, Lehre, Quelle, Bedienfelder und gegebenenfalls Lernfragen in `de/ar/en/tr/ku/ckb/bs/fr/es`. Ein Sprachumschalter ohne vollständigen Inhalt ist kein fertiger Beitrag. Originalbelege und identische Leseroute bleiben unverändert; Arabisch und Sorani rechts-nach-links. Fremdsprachige Entwürfe ohne unabhängige Sprachprüfung als Entwürfe kennzeichnen.
+
+**Vollständig interaktiv vor Live:** Jede neue Karte muss über die originale Frauenkategorie antippbar sein, in derselben App und Sprache lesbar bleiben, Originalquelle öffnen, korrekt zurück navigieren und sinnvoll teilbar sein. Auf Smartphone, Android, Foldable, Tablet und Desktop prüfen. Erst nach Quellen-, Sprach-, Dubletten-, CI-/App-Health-, Admin-Lock-, Cloudflare- und tatsächlicher Live-Prüfung den gesamten freigegebenen Satz als veröffentlicht melden.
+
+**Genau eine Sammelbenachrichtigung NACH erfolgreicher Live-Auslieferung:** Eine globale Zahl wie »16 neue Beiträge« nur senden, wenn tatsächlich genau 16 neue Beiträge veröffentlicht und erreichbar sind. Ein einziges idempotentes Ereignis pro Sammelpaket, mit lokalisiertem Text und Öffnungsziel zur bestehenden Frauen-Wissensansicht. Push ist ein **separater** DĀR-Admin-Vorgang, nicht Bestandteil von GitHub-Merge, Inhaltsveröffentlichung oder Webseite-Cache. Dafür sind bestehendes Kennwort, globale und Post-Spur-Freigabe, bestätigte Opt-in-Einwilligung und die serverseitig überprüfte Zielgruppe `woman AND adult-app AND knowledge-opt-in` zwingend. Niemals auf `all`, `Subscribed Users` oder `DAR_PUSH` ausweichen. Erfolg nur mit registriertem OneSignal-Sendeergebnis behaupten. Fehlende Freigabe bedeutet: keinen Push senden, nichts umgehen.
+
+Aktueller abgegrenzter Fall: Redaktionspaket `content/admin/frauen-batch-16-2026-11-18.json`, Prüfer `scripts/check-frauen-batch16.cjs`, Draft-PR #1793. Keine zweite Automatik und keine Veränderung der Kids-/TV-/Gebets- oder Daily-Spuren.
