@@ -13,21 +13,17 @@ localizationManifest: "/assets/q58-locales.json"
 availableLocales: "de,ar,en,tr,ku,ckb,bs,fr,es"
 atharGrade: "Aussage eines Tābiʿī, bei al-Buḫārī ohne vollständigen Isnād im Kapiteltext angeführt; weitere Überlieferungswege bei Ibn Ḥaǧar; Einzelkettenstatus nicht endgültig bewertet."
 tags: []
-status: "draft"
+status: "published"
 links:
   - label: "🔗 dar-al-tawhid.de/q/58/"
     url: "/q/58/"
 feed:
-  enabled: false
-  shareEnabled: false
+  enabled: true
+  shareEnabled: true
 ---
 
 🖋️ **Muǧāhid ibn Ǧabr** (رحمه الله), einer der Tābiʿīn, sagte sinngemäß:
 
 „***Wer sich aus Scham zurückhält oder hochmütig ist, erlangt kein Wissen.***“
-
-📝 **Quelle:** Ṣaḥīḥ al-Buḫārī, Kitāb al-ʿIlm, Bāb al-Ḥayāʾ fī al-ʿIlm; Ibn Ḥaǧar, *Taġlīq at-Taʿlīq*, 2/93–94.
-
-🔗 dar-al-tawhid.de/q/58/
 
 🌙 **Fazit:** Wer Wissen erwerben möchte, sollte **aufrichtig fragen, wenn er etwas nicht versteht**, und die Wahrheit **ohne Hochmut annehmen**. Lobenswerte Schamhaftigkeit wird damit nicht getadelt.
