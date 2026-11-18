@@ -116,3 +116,38 @@
   line-height:1.35;
 }
 .source { white-space:normal; line-height:1.35; }
+
+/* The native transparent medallion floats on either appearance without a square tile. */
+#app .logo-mark {
+  width:clamp(42px,4.5vw,64px);
+  height:clamp(42px,4.5vw,64px);
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  overflow:visible!important;
+  box-shadow:none!important;
+}
+#app .logo-mark img {
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain;
+}
+#app .daily-story {
+  max-height:min(22vh,220px)!important;
+  overflow:auto!important;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+}
+#app .daily-title {
+  max-height:none!important;
+  overflow:visible!important;
+  display:block!important;
+  -webkit-line-clamp:unset!important;
+}
+#app .daily-de,
+#app .source {
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  line-height:1.35;
+}
