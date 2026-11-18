@@ -67,6 +67,16 @@ const server=http.createServer((req,res)=>{
      assert.equal(await page.locator("h1.fw-title").innerText(),pack.title,"Wrong title "+row.id+" "+code);
      assert.equal(await page.locator("html").getAttribute("dir"),["ar","ckb"].includes(code)?"rtl":"ltr","Incorrect RTL "+code);
      assert.equal(await page.locator(".fw-source").getAttribute("href"),locales.entries[row.id].sourceUrl);
+     // The user can reopen the entire statement, lesson and editorial sharh
+     // in the same locale without navigating away from the quiz.
+     const reading=page.locator(".fw-reading-reference");
+     assert.equal(await reading.count(),1);
+     await reading.locator("summary").click();
+     assert.equal(await reading.locator(".fw-reading-statement .fw-reading-body").innerText(),pack.statement);
+     assert.equal(await reading.locator(".fw-reading-lesson .fw-reading-body").innerText(),pack.lesson);
+     assert.equal(await reading.locator(".fw-reading-sharh .fw-reading-body").innerText(),pack.sharh);
+     assert.equal(await reading.locator(".fw-reading-source .fw-reading-body").innerText(),pack.source);
+     await reading.locator("summary").click();
      assert.equal(await page.locator(".fw-progress i").count(),4);
      assert.equal(await page.locator("button.fw-answer").count(),3);
      const q=api.questions(row.id,locales.entryIds,locales.entries,code);
