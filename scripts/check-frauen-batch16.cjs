@@ -3,9 +3,10 @@
 /*
  * DĀR AL TAWḤĪD · Frauen Sammelblock 16
  * READ ONLY. Safe against premature publication/notification.
- * Usage: node scripts/check-frauen-batch16.cjs [status|ready]
- * status: show completion and blockers (always exit 0)
- * ready : require all publication gates (exit 1 if any missing)
+ * Usage: node scripts/check-frauen-batch16.cjs [status|prepare|ready]
+ * status : report status and blockers (exit 0)
+ * prepare: require full draft/catalog coverage with unchanged originals (exit 1 on defect)
+ * ready  : require final publication/QA/review gates (exit 1 until complete)
  */
 const fs=require("node:fs"),path=require("node:path");
 const root=path.resolve(__dirname,"..");
@@ -13,8 +14,8 @@ const load=(p)=>JSON.parse(fs.readFileSync(path.join(root,p),"utf8"));
 const manifest=load("content/admin/frauen-batch-16-2026-11-18.json");
 const locale=load("assets/frauen/frauen-entry-locales-v1.json");
 const codes=["de","ar","en","tr","ku","ckb","bs","fr","es"];
-const idSeen=new Set(),urlSeen=new Map(),missing=[],detail=[];
-const assert=(v,msg)=>{if(!v)missing.push(msg)};
+const idSeen=new Set(),urlSeen=new Map(),missing=[],structureErrors=[],detail=[];
+const assert=(v,msg)=>{if(!v){missing.push(msg);structureErrors.push(msg)}};
 assert(manifest.expectedReleaseCount===16&&manifest.records.length===16,"Release cohort must contain exactly sixteen canonical records");
 assert(JSON.stringify(manifest.requiredLocales)===JSON.stringify(codes),"Exact nine-language roster changed");
 const dataFiles=[...new Set(manifest.records.map(x=>x.sourceFile))];
@@ -22,14 +23,14 @@ const files=new Map(dataFiles.map(f=>[f,load(f)]));
 for(const r of manifest.records){
   const key=r.id, original=(files.get(r.sourceFile)?.eintraege||[]).filter(e=>e.kennung===key);
   const found=original[0]||{}, l=locale.entries?.[key], errors=[];
-  const check=(yes,what)=>{if(!yes){errors.push(what);missing.push(key+": "+what)}};
+  const check=(yes,what,releaseOnly=false)=>{if(!yes){errors.push(what);missing.push(key+": "+what);if(!releaseOnly)structureErrors.push(key+": "+what)}};
   check(!idSeen.has(key),"duplicate canonical ID");idSeen.add(key);
   check(original.length===1,"record missing or duplicate in source file");
   check(found.contentId===key,"contentId must match original kennung");
   check(found.direktnachweisUrl===r.sourceUrl,"original source link changed");
   check(found.quellePrimaerId===r.sourceId,"original source book+number changed");
   check(!Object.hasOwn(found,"qNumber")||found.qAssignmentApprovedByUser===true,"unapproved Q-number");
-  check(found.quellenstatus==="geprueft","quellenstatus not yet published");
+  check(found.quellenstatus==="geprueft","quellenstatus not yet published",true);
   check(found.freigabeDurchSerhat===true,"author release flag missing");
   check(found.localeCatalogId===key,"locale catalog ID absent");
   const route="#/frauen/"+r.area+"/"+key;
@@ -60,10 +61,10 @@ for(const r of manifest.records){
       for(const k of labels)check(typeof p.labels?.[k]==="string"&&p.labels[k].trim().length>=2,"UI label missing "+code+"."+k);
     }
   }
-  check(r.translationReview==="approved","independent native-language review pending");
-  check(r.sourceReview==="approved","source and isnad review pending");
-  check(r.uiQa==="passed","interactive phone/fold/tablet/desktop QA pending");
-  check(r.publishQa==="passed","Cloudflare publication verification pending");
+  check(r.translationReview==="approved","independent native-language review pending",true);
+  check(r.sourceReview==="approved","source and isnad review pending",true);
+  check(r.uiQa==="passed","interactive phone/fold/tablet/desktop QA pending",true);
+  check(r.publishQa==="passed","Cloudflare publication verification pending",true);
   if(urlSeen.has(r.sourceUrl))check(false,"duplicate external source URL also in "+urlSeen.get(r.sourceUrl));
   urlSeen.set(r.sourceUrl,key);
   detail.push({id:key,title:r.displayTitle,route,source:r.sourceId,languages:l?Object.keys(l.locales||{}).length:0,ready:errors.length===0,blockers:errors});
@@ -77,6 +78,7 @@ const notification={
   audience:manifest.notificationDraft?.audience
 };
 const allReady=missing.length===0;
-const summary={batch:manifest.id,records:detail.length,ready:allReady,readyCount:detail.filter(d=>d.ready).length,localeCountExpected:16*9,localeCountFound:detail.reduce((n,d)=>n+d.languages,0),missingCount:missing.length,missing,detail,notification};
+const summary={batch:manifest.id,records:detail.length,structureReady:structureErrors.length===0,structureErrors,ready:allReady,readyCount:detail.filter(d=>d.ready).length,localeCountExpected:16*9,localeCountFound:detail.reduce((n,d)=>n+d.languages,0),missingCount:missing.length,missing,detail,notification};
 console.log(JSON.stringify(summary,null,2));
+if(process.argv[2]==="prepare"&&structureErrors.length)process.exitCode=1;
 if(process.argv[2]==="ready"&&!allReady)process.exitCode=1;
