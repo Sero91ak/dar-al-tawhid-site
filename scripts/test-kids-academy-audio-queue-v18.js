@@ -5,6 +5,20 @@ const {audit,validV4,normalize}=require("../kids/tools/audit-academy-voice-cover
 const r=audit();
 assert.ok(Number.isInteger(r.catalogLessonCount)&&r.catalogLessonCount>=50&&r.catalogLessonCount<=208,"Catalog lesson count must grow within the approved 208-lesson plan");
 assert.deepEqual(r.uncoveredLessons,[]);
+assert.equal(r.catalogLessonCount,66,"Live academy: 65 code-backed lessons + standalone Ṣidq");
+assert.equal(r.coveredLessonCount,66,"Every current lesson must have a traceable master-voice plan");
+assert.equal(r.editorialPlannedCount,142,"Future editorial outlines must not be mistaken for released lessons");
+assert.deepEqual(r.actualCurriculumScripts,["v1","v2","v22","v25","v26","v27","v28","v29"]);
+const fsAcademy=require("node:fs");
+const v28Academy=JSON.parse(fsAcademy.readFileSync("kids/data/academy-voice-plan-v28.json","utf8"));
+const v29Academy=JSON.parse(fsAcademy.readFileSync("kids/data/academy-voice-plan-v29.json","utf8"));
+assert.equal(v28Academy.lessonCount,4);
+assert.equal(v29Academy.lessonCount,4);
+assert.equal(v28Academy.phraseCount,164);
+assert.equal(v29Academy.phraseCount,163);
+assert.equal(v28Academy.phrases.length+v29Academy.phrases.length,327,
+ "Last eight classroom lessons need 327 original text entries in the V4 queue");
+
 assert.ok(r.uniquePhrases>=600);
 assert.equal(Object.values(r.totals).reduce((a,b)=>a+b,0),r.uniquePhrases);
 assert.equal(r.totals.approved,0,"Old Flash clip is NOT an approved V4 story voice");
