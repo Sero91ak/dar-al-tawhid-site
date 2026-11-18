@@ -211,3 +211,38 @@ if (fail.length) {
   process.exit(1);
 }
 console.log('Q-Quellenkarten-Gate OK: ' + files.length + ' aktive Bestandskarten, alle Nachweiskarten funktional adressiert; zukünftige Q ab 43 strikt geprüft.');
+
+/* TEMPORARY CI-ONLY LIVE PROBE FOR Q58. AUDIT BRANCH ONLY. DO NOT MERGE. */
+if (process.env.GITHUB_ACTIONS === 'true') {
+  const host = 'https://dar-al-tawhid.de';
+  const stamp = Date.now();
+  const targets = [
+    { path: '/q/58/', needles: ['SCHAM UND HOCHMUT VERHINDERN DAS LERNEN', 'q58-locales.json', 'Muǧāhid'] },
+    { path: '/assets/q58-locales.json', needles: ['"supported"', '"de"', '"ar"', '"en"', '"tr"', '"ku"', '"ckb"', '"bs"', '"fr"', '"es"'] },
+    { path: '/content/posts/posts-index.json', needles: ['mujahid-scham-hochmut-wissen-20261118-q58.md'] },
+    { path: '/content/posts/mujahid-scham-hochmut-wissen-20261118-q58.md', needles: ['SCHAM UND HOCHMUT VERHINDERN DAS LERNEN'] }
+  ];
+  let failed = false;
+  for (const item of targets) {
+    try {
+      const url = host + item.path + '?q58-live-ci=' + stamp;
+      const resp = await fetch(url, {
+        headers: { 'User-Agent': 'Mozilla/5.0 DARTawhid-CI-Smoke/1', 'Cache-Control': 'no-cache' },
+        signal: AbortSignal.timeout(25000)
+      });
+      const body = await resp.text();
+      const matched = item.needles.every(needle => body.includes(needle));
+      console.log('Q58 LIVE PROBE', JSON.stringify({ path:item.path, status:resp.status, bytes:body.length, matched, cfRay:resp.headers.get('cf-ray') }));
+      if (resp.status !== 200 || !matched) failed = true;
+    } catch(e) {
+      failed = true;
+      console.log('Q58 LIVE PROBE ERROR', item.path, String(e));
+    }
+  }
+  if (failed) {
+    console.error('Q58 LIVE PROBE FAIL: production URL/content not independently verified');
+    process.exitCode = 2;
+  } else {
+    console.log('Q58 LIVE PROBE SUCCESS: all four canonical production resources verified');
+  }
+}
