@@ -140,6 +140,14 @@ jobs:
             driver.get(url+'/?qa=home-v3')
             WebDriverWait(driver,25).until(EC.element_to_be_clickable((By.ID,'openSettings')))
             driver.find_element(By.ID,'openSettings').click()
+            settings_layout=driver.execute_script("""
+              const nav=document.querySelector('.settings-tabs'),detail=document.querySelector('.tabpage.on');
+              const n=nav.getBoundingClientRect(),d=detail.getBoundingClientRect();
+              return {direction:getComputedStyle(nav).flexDirection,navWidth:n.width,detailWidth:d.width,navRight:n.right,detailLeft:d.left};
+            """)
+            print('SETTINGS_LANDSCAPE_LAYOUT',settings_layout,flush=True)
+            if settings_layout['direction']!='column' or settings_layout['navWidth']<180 or settings_layout['detailWidth']<400 or settings_layout['detailLeft']<=settings_layout['navRight']:
+              errors.append('Landscape settings sidebar and detail view are not separated or usable')
             tab=driver.find_element(By.CSS_SELECTOR,'button[data-tab="hintergrund"]')
             tab.click()
             assert driver.find_element(By.CSS_SELECTOR,'.tabpage[data-page="hintergrund"]').get_attribute('class').find('on')>=0
