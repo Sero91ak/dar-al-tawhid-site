@@ -1,0 +1,44 @@
+/* HOME V5 — Salbei-Elfenbein theme and readability corrections */
+#app.theme-ivory {
+  --gold:#496b55; --cream:#25372f; --text:#26362e; --muted:#52645a;
+  --fine:rgba(48,76,59,.32); color-scheme:light;
+  background:#f3f1e7; color:var(--text);
+}
+#app.theme-ivory .artwork { filter:saturate(.72) brightness(1.08); }
+#app.theme-ivory .lightgrading {
+  background:linear-gradient(90deg,rgba(244,243,233,.94),rgba(244,243,233,.66) 49%,rgba(244,243,233,.88)),
+    linear-gradient(0deg,rgba(241,240,229,.97),rgba(241,240,229,.2) 70%,rgba(241,240,229,.72));
+}
+#app.theme-ivory .edge { border-color:rgba(51,77,59,.2); }
+#app.theme-ivory .corner { border-color:rgba(57,89,66,.55); }
+#app.theme-ivory .brand-mini,#app.theme-ivory .overline,#app.theme-ivory .next-arabic,
+#app.theme-ivory .band-head,#app.theme-ivory .daily-label,#app.theme-ivory .audio-kicker,
+#app.theme-ivory .saver-kicker { color:#365b43; }
+#app.theme-ivory .site-name,#app.theme-ivory .prayer-cell .pname,
+#app.theme-ivory .daily-title,#app.theme-ivory .audio-title,
+#app.theme-ivory .main-time,#app.theme-ivory .now,#app.theme-ivory .next-name,
+#app.theme-ivory .hero-verse { color:#24362d; text-shadow:none; }
+#app.theme-ivory .hero-verse { background:rgba(249,248,239,.62); padding:.12em .35em; border-radius:4px; }
+#app.theme-ivory .hero-caption,#app.theme-ivory .daily-de { color:#405247; }
+#app.theme-ivory .times-band,#app.theme-ivory .foot { border-color:rgba(48,76,59,.35); }
+#app.theme-ivory .prayer-cell { border-color:rgba(48,76,59,.28); }
+#app.theme-ivory .prayer-cell.active .ptime,#app.theme-ivory .prayer-cell.active .pname { color:#294f38; font-weight:700; }
+#app.theme-ivory .audio-area { border-color:rgba(48,76,59,.35); }
+#app.theme-ivory .topbtn,#app.theme-ivory .round,#app.theme-ivory .touchbutton {
+  color:#263c30; border-color:rgba(48,76,59,.48); background:rgba(249,248,239,.72);
+}
+#app.theme-ivory .round.primary,#app.theme-ivory .save-action { background:#365b43;color:#fffdf5;border-color:#365b43; }
+#app.theme-ivory .status,#app.theme-ivory .date,#app.theme-ivory .counter,
+#app.theme-ivory .source,#app.theme-ivory .audio-sub,#app.theme-ivory .audiosmall { color:#46584d; }
+#app.theme-ivory .settings-frame { background:radial-gradient(ellipse at 80% 10%,rgba(115,145,115,.14),transparent 55%),#f3f1e7; }
+#app.theme-ivory .overlay { background:rgba(243,241,231,.97); }
+#app.theme-ivory .settings-top h2,#app.theme-ivory .settings-tabs button.on { color:#263c30; }
+#app.theme-ivory .settings-tabs button,#app.theme-ivory .setting-desc,#app.theme-ivory .savehint,
+#app.theme-ivory .mini { color:#536258; }
+#app.theme-ivory .field label { color:#365b43; }
+#app.theme-ivory .field input,#app.theme-ivory .field select { color:#26362e; border-color:rgba(48,76,59,.42); }
+#app.theme-ivory .field select option { background:#f3f1e7;color:#26362e; }
+#app.theme-ivory .close-button,#app.theme-ivory .secondary-action,#app.theme-ivory .city-chip { color:#263c30; }
+@media (prefers-reduced-motion:reduce) {
+  #app *,#app *::before,#app *::after { animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important; }
+}
