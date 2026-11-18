@@ -286,7 +286,9 @@
     },
     "messageReview": "editorial drafts; native-language validation required before any send",
     "guardStatus": "not-authorized-not-sent",
-    "redirectMustOpen": "existing canonical in-app women knowledge route #frauen; preserve app navigation and selected language"
+    "redirectMustOpen": "existing canonical in-app women knowledge route #frauen; preserve app navigation and selected language",
+    "providerIdempotencyUuid": "d1c40b28-2bd3-43fd-a14b-708df7d5d976",
+    "providerIdempotencyPolicy": "Immutable OneSignal UUIDv4 idempotency_key, separate from the canonical editorial event key. Never send before live verification and adult-woman knowledge opt-in segment authentication."
   },
   "excluded": [
     "Kids",
