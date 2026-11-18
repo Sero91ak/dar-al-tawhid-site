@@ -21,10 +21,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
-      - name: Checkout immutable HOME V3 prototype snapshot
+      - name: Checkout immutable HOME V4 prototype snapshot
         uses: actions/checkout@v4
         with:
-          ref: 79431b354c5b6d23f4aac40cc650b2c805f60cc1
+          ref: 8665d8acbb1a1a96b934dc99a112ec30f784efaa
           persist-credentials: false
           sparse-checkout: |
             home-device
@@ -40,6 +40,8 @@ jobs:
           cp home-device/index.html .home-preview-dist/index.html
           cp home-device/home-v3.js .home-preview-dist/home-v3.js
           cp home-device/home-v3.css .home-preview-dist/home-v3.css
+          cp home-device/home-v4.js .home-preview-dist/home-v4.js
+          cp home-device/home-v4.css .home-preview-dist/home-v4.css
           cp content/home/device-config.json .home-preview-dist/content/home/device-config.json
           cat > .home-preview-worker.mjs <<'WORKER'
           const base = 'https://dar-al-tawhid.de';
@@ -86,7 +88,8 @@ jobs:
           TOML
           node --check .home-preview-worker.mjs
           node --check .home-preview-dist/home-v3.js
-          node -e 'const s=require("fs").readFileSync(".home-preview-dist/index.html","utf8");const js=s.split("<script>")[1]?.split("</script>")[0];if(!js)throw Error("missing HOME inline script");new Function(js);if(!s.includes("/home-v3.js?v=3.1")||!s.includes("/home-v3.css?v=3.1"))throw Error("V3 assets not referenced");console.log("HOME V3 scripts and asset links valid");'
+          node --check .home-preview-dist/home-v4.js
+          node -e 'const s=require("fs").readFileSync(".home-preview-dist/index.html","utf8");const js=s.split("<script>")[1]?.split("</script>")[0];if(!js)throw Error("missing HOME inline script");new Function(js);if(!s.includes("/home-v4.js?v=4.0")||!s.includes("/home-v4.css?v=4.0"))throw Error("V3 assets not referenced");console.log("HOME V4 scripts and asset links valid");'
           node -e 'const h=require("fs").readFileSync(".home-preview-dist/index.html","utf8");if(!h.includes("DĀR AL TAWḤĪD HOME"))process.exit(1);console.log("HOME kiosk HTML preview present");'
 
       - name: Deploy ONLY dar-home-kiosk-preview Worker
@@ -105,5 +108,5 @@ jobs:
         run: |
           echo "## DĀR HOME Kiosk V2 – isolated preview" >> "$GITHUB_STEP_SUMMARY"
           echo "Existing website, main site worker, Kids, iOS and tvOS were not deployed." >> "$GITHUB_STEP_SUMMARY"
-          echo "HOME source commit: 79431b354c5b6d23f4aac40cc650b2c805f60cc1" >> "$GITHUB_STEP_SUMMARY"
+          echo "HOME source commit: 8665d8acbb1a1a96b934dc99a112ec30f784efaa" >> "$GITHUB_STEP_SUMMARY"
           echo "URL: ${PREVIEW_URL:-Consult Cloudflare Workers deployment log}" >> "$GITHUB_STEP_SUMMARY"
