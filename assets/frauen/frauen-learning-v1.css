@@ -1,0 +1,37 @@
+/* DĀR AL TAWḤĪD Frauen · isolated four-question learning surface */
+:root{color-scheme:light;--fw-bg:#f4f0e5;--fw-card:#fffdf8;--fw-ink:#1e3428;--fw-sub:#425a4a;--fw-gold:#836334;--fw-line:#c6b18a;--fw-opt:#f6f2e8;--fw-good:#e1f0e3;--fw-bad:#f8e9e1;--fw-main:#173d2a}
+html[data-q-theme="dark"]{color-scheme:dark;--fw-bg:#111b17;--fw-card:#1a2b23;--fw-ink:#fff5e0;--fw-sub:#dfd4bb;--fw-gold:#f2d89c;--fw-line:#77694e;--fw-opt:#21372c;--fw-good:#1f4933;--fw-bad:#55352e;--fw-main:#debf80}
+*{box-sizing:border-box}
+html{margin:0;min-height:100%;-webkit-text-size-adjust:100%}
+body.fw-learning-page{margin:0;background:var(--fw-bg);color:var(--fw-ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.36}
+.fw-learning-shell{width:min(100% - 24px,760px);max-width:100%;min-height:100dvh;margin:auto;padding:clamp(12px,3vw,22px) 0 calc(28px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:10px}
+.fw-brand{font:700 17px/1.2 Georgia,serif;letter-spacing:.065em;color:var(--fw-gold);text-align:center}
+.fw-overline{margin:0;color:var(--fw-gold);font-size:11px;font-weight:800;letter-spacing:.04em;text-align:center}
+.fw-title{margin:0;color:var(--fw-ink);font:700 clamp(18px,4.5vw,27px)/1.2 Georgia,serif;text-align:center;text-wrap:balance;overflow-wrap:break-word}
+.fw-subtitle{margin:0;color:var(--fw-sub);font-size:12px;text-align:center}
+.fw-count{margin-top:8px;color:var(--fw-gold);font-size:12px;font-weight:800;letter-spacing:.03em}
+.fw-progress{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.fw-progress i{height:5px;border-radius:12px;background:var(--fw-line);opacity:.36}
+.fw-progress i.active,.fw-progress i.done{opacity:1;background:var(--fw-gold)}
+.fw-question{margin:9px 0 2px;color:var(--fw-ink);font:700 clamp(19px,4.2vw,26px)/1.2 Georgia,serif;overflow-wrap:break-word}
+.fw-answers{display:grid;grid-template-columns:1fr;gap:9px;min-height:0}
+.fw-answer{display:flex;align-items:flex-start;text-align:start;gap:10px;width:100%;border:1px solid var(--fw-line);border-radius:14px;background:var(--fw-opt);color:var(--fw-ink);padding:12px 11px;min-height:57px;cursor:pointer;font:600 clamp(13px,3.1vw,15px)/1.33 system-ui,sans-serif}
+.fw-letter{border:1px solid var(--fw-line);border-radius:8px;min-width:26px;height:27px;display:inline-grid;place-items:center;flex:none;color:var(--fw-gold);font-weight:800}
+.fw-answer-text{flex:1;min-width:0;overflow-wrap:anywhere;white-space:normal}
+.fw-answer[data-state="correct"]{background:var(--fw-good);border-color:#438256}
+.fw-answer[data-state="wrong"]{background:var(--fw-bad);border-color:#a65445}
+.fw-answer:disabled{opacity:1;cursor:default}
+.fw-feedback{color:var(--fw-sub);font-size:clamp(12px,2.8vw,14px);line-height:1.4;min-height:18px;margin:2px 0;overflow-wrap:break-word}
+.fw-feedback[data-state="correct"]{color:var(--fw-main)}
+.fw-next{border:1px solid var(--fw-gold);border-radius:12px;background:var(--fw-main);color:var(--fw-bg);min-height:46px;font:800 14px system-ui,sans-serif;padding:12px 18px;cursor:pointer}
+html[data-q-theme="dark"] .fw-next{color:#17251e}
+.fw-next[disabled]{opacity:.48;cursor:not-allowed}
+.fw-links{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:10px 0}
+.fw-link{display:inline-flex;align-items:center;justify-content:center;padding:8px 11px;min-height:42px;border:1px solid var(--fw-line);border-radius:12px;color:var(--fw-ink);background:var(--fw-card);font-size:12px;font-weight:650;text-decoration:none}
+.fw-message{margin:auto 10px;padding:24px;border:1px solid var(--fw-line);border-radius:18px;background:var(--fw-card);text-align:center;font-size:17px}
+.fw-result{margin:16px 0;padding:25px;border:1px solid var(--fw-line);border-radius:20px;background:var(--fw-card);font:700 clamp(21px,5vw,27px)/1.2 Georgia,serif;text-align:center}
+.fw-answer:focus-visible,.fw-link:focus-visible,.fw-next:focus-visible{outline:3px solid var(--fw-gold);outline-offset:3px}
+[dir="rtl"] .fw-answer{text-align:start;direction:rtl}
+[dir="rtl"] .fw-letter{direction:ltr}
+@media(min-width:720px){.fw-learning-shell{padding-top:24px;gap:14px}.fw-answer{padding:15px;min-height:66px}}
+@media(max-height:740px){.fw-learning-shell{gap:7px}.fw-title{font-size:clamp(16px,4.2vw,22px)}.fw-answer{min-height:46px;padding:9px}.fw-question{font-size:clamp(17px,4.1vw,22px)}}
