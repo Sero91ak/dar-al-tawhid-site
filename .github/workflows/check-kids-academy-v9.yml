@@ -22,6 +22,8 @@ on:
       - 'kids/data/academy-audio.json'
       - 'kids/data/academy-audio-staging-v9*.json'
       - 'kids/tools/audit-academy-voice-coverage-v18.js'
+      - 'kids/tools/build-academy-v9-staging.py'
+      - 'kids/tools/test-academy-language-isolation-v1.py'
       - 'scripts/test-kids-academy-audio-queue-v18.js'
       - 'scripts/test-kids-academy-v9.js'
       - 'scripts/test-kids-academy-school-v11.js'
@@ -49,6 +51,8 @@ on:
       - 'kids/data/academy-audio.json'
       - 'kids/data/academy-audio-staging-v9*.json'
       - 'kids/tools/audit-academy-voice-coverage-v18.js'
+      - 'kids/tools/build-academy-v9-staging.py'
+      - 'kids/tools/test-academy-language-isolation-v1.py'
       - 'scripts/test-kids-academy-audio-queue-v18.js'
       - 'scripts/test-kids-academy-v9.js'
       - 'scripts/test-kids-academy-school-v11.js'
@@ -130,6 +134,8 @@ jobs:
         run: |
           python3 -m py_compile kids/tools/build-academy-v9-staging.py kids/tools/build-academy-audio.py
           python3 kids/tools/build-academy-v9-staging.py --dry-run
+      - name: Verify Academy German-only preparation and no Arabic PLS contamination
+        run: python3 kids/tools/test-academy-language-isolation-v1.py
       - name: Verify frozen V9 archive against exactly the owner-authorized full Salam replacements
         run: |
           cp kids/data/academy-voice-plan-v9.json /tmp/kids-academy-v9-original.json
