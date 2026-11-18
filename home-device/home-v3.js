@@ -97,6 +97,8 @@
    const preferred=prefs.wallpaper;
    const ids=new Set(entries.map(x=>x.id));
    wallpapers=[...wallpapers.filter(x=>!x.native&&!ids.has(x.id)),...entries.map(x=>({...x,native:true}))];
+   const saverSelect=$('homeSaverBackground');
+   if(saverSelect){const options=[{id:'same',label:'Wie HOME-Hintergrund'},{id:'auto',label:'Automatisch nach Tageszeit'},...wallpapers.map(x=>({id:x.id,label:x.label}))];saverSelect.replaceChildren(...options.map(x=>new Option(x.label,x.id)));saverSelect.value=options.some(x=>x.id===prefs.saverWallpaper)?prefs.saverWallpaper:'same';}
    if(!wallpapers.some(x=>x.id===preferred)){
     prefs.wallpaper=wallpapers.some(x=>x.id===catalog.defaultWallpaper)?catalog.defaultWallpaper:entries[0].id;
     store();
