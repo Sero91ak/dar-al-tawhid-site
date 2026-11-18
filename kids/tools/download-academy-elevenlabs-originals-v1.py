@@ -36,8 +36,9 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 UPSTREAM = ROOT / "kids/tools/import-publish-academy-sidq-v4-v1.py"
 FLOW = "zrB4zGdz9OTndLryQtIB"
 DOMAIN = "elevenlabsusercontent.com"
+WORKSPACE = "9e52ab872d7b4775b36e50d2e07d17be"
 PATH_RE = re.compile(
-    r"^/database/workspace/[A-Za-z0-9_-]+/content_generation/"
+    rf"^/database/workspace/{WORKSPACE}/content_generation/"
     r"([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)/content\.mp3$"
 )
 MAX_AUDIO_BYTES = 12 * 1024 * 1024
