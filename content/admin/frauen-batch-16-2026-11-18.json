@@ -288,7 +288,39 @@
     "guardStatus": "not-authorized-not-sent",
     "redirectMustOpen": "existing canonical in-app women knowledge route #frauen; preserve app navigation and selected language",
     "providerIdempotencyUuid": "d1c40b28-2bd3-43fd-a14b-708df7d5d976",
-    "providerIdempotencyPolicy": "Immutable OneSignal UUIDv4 idempotency_key, separate from the canonical editorial event key. Never send before live verification and adult-woman knowledge opt-in segment authentication."
+    "providerIdempotencyPolicy": "Immutable OneSignal UUIDv4 idempotency_key, separate from the canonical editorial event key. Never send before live verification and adult-woman knowledge opt-in segment authentication.",
+    "deliveryLanguageVerification": {
+      "appLanguages": [
+        "de",
+        "ar",
+        "en",
+        "tr",
+        "ku",
+        "ckb",
+        "bs",
+        "fr",
+        "es"
+      ],
+      "existingWebSdkDirectLanguages": [
+        "de",
+        "en",
+        "tr",
+        "ar",
+        "bs",
+        "fr",
+        "es"
+      ],
+      "perSubscriptionRoutingRequired": [
+        "ku",
+        "ckb"
+      ],
+      "iosNativeSdkLocaleBridgeVerified": false,
+      "androidNativeSdkLocaleBridgeVerified": false,
+      "kurdishPerSubscriptionRoutingVerified": false,
+      "targetSegmentOptInVerified": false,
+      "allNineInstallationLanguagesVerified": false,
+      "policy": "One verified language per opted-in adult-woman subscription. No fallback language may be mislabeled as a translation; do not send until the native subscription language bridge and both Kurdish routing paths are proven."
+    }
   },
   "excluded": [
     "Kids",
