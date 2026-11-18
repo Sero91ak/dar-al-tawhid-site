@@ -40,4 +40,18 @@ assert.equal(academyRelease.required,58);
 assert.equal(academyRelease.nextTopicLocked,true);
 assert.equal(academyRelease.publicManifestModified,false);
 assert.equal(academyRelease.canPublish,academyRelease.confirmed===academyRelease.required);
+// The complete Ṣidq owner-authorized production manifest can be imported
+// only when the original 76 paid MP3 files are actually present. This check
+// validates all source associations without paying credits or publishing.
+const topicReady=JSON.parse(require("node:child_process").execFileSync("python3",[
+  "kids/tools/import-publish-academy-sidq-v4-v1.py","--dry-run"
+],{cwd:require("node:path").resolve(__dirname,".."),encoding:"utf8"}));
+assert.equal(topicReady.canonicalPhrases,58);
+assert.equal(topicReady.reusedPriorV4,3);
+assert.equal(topicReady.directV4,45);
+assert.equal(topicReady.mixedSentenceAssemblies,9);
+assert.equal(topicReady.nativeArabicTerms,9);
+assert.equal(topicReady.originalGenerationFilesRequired,76);
+assert.equal(topicReady.needsActualBinaryFiles,true);
+assert.equal(topicReady.live,false);
 console.log("ACADEMY VOICE V18 PASS: exact Serhat-only matching, three valid staged clips and one quarantined old greeting, zero synthetic fallback, no credits.");
