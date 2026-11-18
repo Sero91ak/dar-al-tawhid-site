@@ -40,6 +40,7 @@ const card={
  querySelector:get
 };
 const rootElement={
+ contains(element){return element===article},
  querySelector(sel){if(sel==="article.post-reader")return article;return null},
  querySelectorAll(sel){return sel.includes(".frauen-post-row")?[card]:[]}
 };
@@ -51,12 +52,13 @@ const document={
 };
 const storage={value:"de",getItem(){return this.value},setItem(k,v){this.value=v}};
 const location={href:"https://dar-al-tawhid.de/#frauen",hash:"#frauen",origin:"https://dar-al-tawhid.de",pathname:"/"};
+let lastCopiedMessage="";
 const window={
  document,location,localStorage:storage,
  fetch:async()=>({ok:true,json:async()=>index}),
  requestAnimationFrame:fn=>fn(),
  addEventListener(name,cb){(events["win:"+name]??=[]).push(cb)},
- navigator:{},console
+ navigator:{clipboard:{writeText(text){lastCopiedMessage=String(text);return Promise.resolve()}}},console
 };
 const context={window,document,URL,Promise,console,MutationObserver:class {observe(){}},CustomEvent:class {constructor(type){this.type=type}}};
 vm.runInNewContext(code,context,{filename:"frauen-entry-locale-v1.js",timeout:10000});
@@ -90,6 +92,21 @@ const emit=(name)=>{for(const f of events["win:"+name]||[])f({key:"darAdultPrefe
    fail("source link",sourceLink.getAttribute("href"),record.sourceUrl);
    fail("canonical ID",article.attrs["data-dar-frauen-content-id"],record.id);
    fail("card canonical ID",card.attrs["data-dar-frauen-content-id"],record.id);
+   const shareButton={
+     getAttribute(name){return name==="data-frauen-share"?"copy-text":null},
+     closest(sel){return sel==="article.post-reader"?article:null}
+   };
+   const evt={
+     target:{closest(sel){return sel==="button[data-frauen-share]"?shareButton:null}},
+     button:0,defaultPrevented:false,ctrlKey:false,shiftKey:false,altKey:false,metaKey:false,
+     preventDefault(){this.defaultPrevented=true},stopImmediatePropagation(){}
+   };
+   lastCopiedMessage="";
+   assert.ok((events["doc:click"]||[]).length,"Localized copy action is not connected");
+   events["doc:click"][0](evt);
+   assert.ok(evt.defaultPrevented,"Localized click action escaped to German fallback");
+   for(const [label,value] of [["title",desired.title],["statement",desired.statement],["lesson",desired.lesson],["source",desired.source]])
+     assert.ok(lastCopiedMessage.includes(value),"Localized copy-text "+label+" not present: "+record.id+" "+code);
    checked++;
   }
  }
