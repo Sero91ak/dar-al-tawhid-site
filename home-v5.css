@@ -151,3 +151,26 @@
   text-overflow:clip!important;
   line-height:1.35;
 }
+
+/* V5 minimum sizes for the 7-inch-class and low-height landscape layout. */
+#app .next-name { font-size:clamp(58px,8.2vw,154px); }
+#app .main-time { font-size:clamp(42px,5.3vw,80px); }
+#app .counter { font-size:clamp(14px,1.05vw,16px); }
+#app .hero-verse { font-size:clamp(21px,1.8vw,30px); line-height:1.55; }
+#app .daily-title { font-size:clamp(21px,1.9vw,32px); }
+#app .daily-de { font-size:clamp(18px,1.35vw,24px); }
+#app .source { font-size:clamp(12px,.9vw,15px); }
+#app .prayer-cell .pname { font-size:clamp(14px,1.18vw,19px); }
+#app .prayer-cell .ptime { font-size:clamp(28px,3vw,50px); }
+#app .date,
+#app .status,
+#app .audio-sub,
+#app .audiosmall { font-size:clamp(12px,.85vw,14px); }
+#app .overline,
+#app .band-head,
+#app .daily-label,
+#app .audio-kicker { font-size:clamp(11px,.95vw,14px); }
+@media (max-height:640px) {
+  #app .screen { gap:clamp(5px,1.2vh,10px); }
+  #app .daily-area { min-height:0; }
+}
