@@ -82,7 +82,7 @@
    if(item.url){const img=new Image();img.src=item.url;img.alt='Hintergrund: '+item.label;img.loading='lazy';b.append(img)}
    else{const blank=document.createElement('div');blank.style.cssText='aspect-ratio:16/9;background:linear-gradient(130deg,#09272a,#224c3e);border-radius:7px';b.append(blank)}
    const title=document.createElement('strong');title.textContent=item.label;b.append(title);
-   b.addEventListener('click',()=>{prefs.wallpaper=item.id;prefs.wallpaperMode='manual';store();apply()});parent.append(b);
+   b.addEventListener('click',()=>{prefs.wallpaper=item.id;prefs.wallpaperMode='manual';const mode=$('homeWallpaperMode');if(mode)mode.value='manual';store();apply()});parent.append(b);
   }
   apply();
  }
