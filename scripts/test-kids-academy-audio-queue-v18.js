@@ -106,4 +106,9 @@ assert.equal(academyAll.firstLessonId,"sidq");
 assert.equal(academyAll.firstLessonExactPhrases,58);
 assert.equal(academyAll.additionalEditorialOutlinesLocked,142);
 assert.equal(academyAll.newTtsCreditsCharged,0);
+// Nine existing, already paid native Fuṣḥā originals passed automated Scribe
+// recognition. Keep Scribe evidence distinct from human acoustic approval.
+require("node:child_process").execFileSync("python3",[
+  "kids/tools/test-academy-sidq-fusha-scribe-audit-v1.py"
+],{cwd:require("node:path").resolve(__dirname,".."),stdio:"inherit"});
 console.log("ACADEMY VOICE V18 PASS: exact Serhat-only matching, three valid staged clips and one quarantined old greeting, zero synthetic fallback, no credits.");
