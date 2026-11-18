@@ -43,3 +43,20 @@ Jede neue Aufnahme benötigt danach eine **unabhängige inhaltliche und akustisc
 ## Nächster Produktionsschritt
 
 Den aktuellen Ṣidq-Batch tatsächlich erzeugen und QA-fähig speichern. Danach weitere Ṣidq-Phrasen **nur innerhalb desselben Themas** und in weiteren begrenzten Chargen vorbereiten. Das nächste Akhlāq-Thema **Ṣabr** bleibt gesperrt, bis Ṣidq abgeschlossen ist.
+
+
+## Verbindliche Freigaberegel: 100 % fertig → **LIVE** → nächstes Thema
+
+**Nicht** nach dem ersten 4er-Batch wechseln. `Akhlāq → Ṣidq` besteht aus 58 gültigen unterschiedlichen Sprachtexten und drei Altersstufen. Vor einer Veröffentlichung werden alle 58 tatsächlichen Dateien einzeln gegen Text, Serhat-V4-`kids_story`-Identität, Quellennachweise, Fuṣḥā-Ausspracheprüfung, SHA-256 und Wiedergabe geprüft.
+
+`kids/tools/publish-academy-topic-v1.py` verhindert die Teilveröffentlichung. Status ist kostenlos:
+
+```sh
+python3 kids/tools/publish-academy-topic-v1.py --status
+```
+
+Der Befehl `--publish` verweigert die Manifeständerung, solange ein einziger der 58 Texte fehlt oder der Einzelnachweis im `akhlaq-sidq-review-ledger-v1.json` nicht vollständig vorliegt. Er verwendet **nur reale Audiobinaries** aus der historischen V9-Staging-Sammlung oder aus separat erzeugten, identisch geprüften Ṣidq-Chargen; keine behaupteten oder fingierten Tondateien. Durch `--publish` wird zunächst das lokale `kids/data/academy-audio.json` zur Integration aktualisiert; **das allein bedeutet noch nicht, dass die Kinder-App live aktualisiert ist**.
+
+Erst nach erfolgreichem PR/Merge in `main`, erfolgreichem produktivem Cloudflare-Deployment, Prüfung des live geladenen Audio-Manifests sowie Funktionstests auf iPhone/iPad und beiden Profilen wird `release-state-v1.json` als `liveConfirmed: true` dokumentiert. **Erst danach** `akhlaq-sabr` als nächstes Thema beginnen. Keine vorgezogene Freigabe, keine Freigabe nach bloßem CI-Erfolg, kein Ausfall-fallback auf Flash oder System-TTS. Die alte Produktionshistorie und der Lernfortschritt bleiben unverändert.
+
+Jede neue Themenlektion wird als zusammenhängende, funktionsfähige Live-Version veröffentlicht, bevor die nächste startet.
