@@ -7,6 +7,7 @@ on:
       - feature/home-editorial-v5-20261118
     paths:
       - home-device/**
+      - home-v5.css
       - .github/workflows/home-v4-branch-preview.yml
 
 permissions:
