@@ -29,6 +29,8 @@ for(const r of manifest.records){
   check(found.contentId===key,"contentId must match original kennung");
   check(found.direktnachweisUrl===r.sourceUrl,"original source link changed");
   check(found.quellePrimaerId===r.sourceId,"original source book+number changed");
+  check(typeof found.arabischerOriginalauszug==="string"&&/[\u0600-\u06ff]/.test(found.arabischerOriginalauszug),"Arabic primary-text excerpt absent");
+  check(!found.arabischerOriginalauszugNachweis||found.arabischerOriginalauszugNachweis===r.sourceUrl,"Arabic excerpt reference does not match original source");
   check(!Object.hasOwn(found,"qNumber")||found.qAssignmentApprovedByUser===true,"unapproved Q-number");
   check(found.quellenstatus==="geprueft","quellenstatus not yet published",true);
   check(found.freigabeDurchSerhat===true,"author release flag missing");
