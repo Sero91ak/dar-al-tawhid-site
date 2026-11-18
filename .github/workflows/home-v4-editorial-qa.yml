@@ -109,6 +109,7 @@ jobs:
               if not data['v4'] or data['icons']<4:errors.append(f'{w}x{h}: V4 styling/settings icons missing')
               if data['footerTabs']:errors.append(f'{w}x{h}: footer tabs must be absent')
               if data['scrollW']>w+3:errors.append(f'{w}x{h}: document horizontal overflow')
+              if data['boxes']['audioName']['height']<17:errors.append(f'{w}x{h}: Quran player title clipped')
               for n in ['mainScreen','nextName','times','audioName','openSettings']:
                 box=data['boxes'][n]
                 if box is None or box['width']<=0 or box['height']<=0:errors.append(f'{w}x{h}: missing or hidden {n}')
