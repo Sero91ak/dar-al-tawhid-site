@@ -121,6 +121,15 @@ jobs:
               for n in ['mainScreen','nextName','times','audioName','openSettings']:
                 box=data['boxes'][n]
                 if box is None or box['width']<=0 or box['height']<=0:errors.append(f'{w}x{h}: missing or hidden {n}')
+            long_text=driver.execute_script("""
+              const article=document.querySelector('.daily-story'),ar=document.getElementById('dailyArabic'),de=document.getElementById('dailyDe'),src=document.getElementById('dailySource');
+              const old=[ar.textContent,de.textContent,src.textContent];
+              ar.textContent=('رَبِّ زِدْنِي عِلْمًا ').repeat(32);de.textContent=('Eine gut lesbare deutsche Übersetzung mit vollständigem Sinn. ').repeat(18);src.textContent=('Qurʾān · Beispielquelle · ').repeat(12);
+              const result={scrollHeight:article.scrollHeight,clientHeight:article.clientHeight,overflow:getComputedStyle(article).overflowY};
+              [ar.textContent,de.textContent,src.textContent]=old;return result;
+            """)
+            print('LONG_DAILY_DARK',long_text,flush=True)
+            if long_text['scrollHeight']<=long_text['clientHeight'] or long_text['overflow']!='auto':errors.append('Long daily content is clipped in dark mode')
             driver.set_window_size(1280,800)
             driver.get(url+'/?qa=home-v3')
             WebDriverWait(driver,25).until(EC.element_to_be_clickable((By.ID,'openSettings')))
@@ -160,6 +169,15 @@ jobs:
             if driver.find_element(By.ID,'app').get_attribute('data-home-theme')!='light':errors.append('Light mode not applied')
             if driver.execute_script("return getComputedStyle(document.getElementById('app')).colorScheme")!='light':errors.append('V5 light color system not applied')
             if driver.execute_script("return getComputedStyle(document.getElementById('dailyDe')).whiteSpace")=='nowrap':errors.append('Daily translation still truncated to one line')
+            long_light=driver.execute_script("""
+              const article=document.querySelector('.daily-story'),ar=document.getElementById('dailyArabic'),de=document.getElementById('dailyDe'),src=document.getElementById('dailySource');
+              const old=[ar.textContent,de.textContent,src.textContent];
+              ar.textContent=('رَبِّ زِدْنِي عِلْمًا ').repeat(32);de.textContent=('Eine gut lesbare deutsche Übersetzung mit vollständigem Sinn. ').repeat(18);src.textContent=('Qurʾān · Beispielquelle · ').repeat(12);
+              const result={scrollHeight:article.scrollHeight,clientHeight:article.clientHeight,overflow:getComputedStyle(article).overflowY};
+              [ar.textContent,de.textContent,src.textContent]=old;return result;
+            """)
+            print('LONG_DAILY_LIGHT',long_light,flush=True)
+            if long_light['scrollHeight']<=long_light['clientHeight'] or long_light['overflow']!='auto':errors.append('Long daily content is clipped in light mode')
             driver.find_element(By.ID,'saveSettings').click()
             driver.find_element(By.ID,'openSettings').click()
             driver.find_element(By.CSS_SELECTOR,'button[data-tab="adhan"]').click()
