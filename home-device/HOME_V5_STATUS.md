@@ -5,7 +5,7 @@ This is a HOME-only development branch based on HOME V4. It is a reviewed test p
 ## Changes in this branch
 
 - The Salbei-Elfenbein style follows the saved HOME appearance preference. The older display appearance selector is synchronized with that preference.
-- Long daily Arabic text, German translation, and source citations remain available in a touch-scrollable reading region.
+- V5 sets minimum font sizes for the next-prayer display, countdown, daily translation, source, and prayer times on compact displays. Long daily Arabic text, German translation, and source citations remain available in a touch-scrollable reading region.
 - HOME supports a fixed wallpaper from the gallery or automatic scene selection by local time. The screensaver can follow the HOME scene, use a separate fixed scene, or select automatically.
 - Existing per-device settings and custom wallpaper storage remain in browser local storage.
 - A manifest at `media/apple-tv/catalog.json` lists the imported Apple TV scenes, adhan artwork, source project, and image transformation.
@@ -26,15 +26,15 @@ No per-image licensing metadata was present in the source asset catalog. The sou
 
 ## Verification
 
-GitHub Actions browser QA passed in run 44376288178.
+GitHub Actions browser QA passed in run 44376880705.
 
-The run checks the 1024×600, 1280×800, 1600×900, 1920×1200, and 800×1280 layouts. It measures minimum font sizes and the settings touch target; exercises appearance synchronization, long-content scrolling in both themes, automatic wallpaper selection, independent HOME and screensaver scenes, reduced motion, local asset loading, screensaver, Faǧr cinematic art, and preference persistence after reload.
+The run checks the 1024×600, 1280×800, 1600×900, 1920×1200, and 800×1280 layouts. It measures minimum font sizes and the settings touch target; exercises appearance synchronization, long-content scrolling in both themes, automatic wallpaper selection, independent HOME and screensaver scenes, light-theme screensaver colors, reduced motion, local asset loading, Faǧr cinematic art, and preference persistence after reload.
 
 The isolated HOME preview was deployed to:
 
 - https://dar-home-kiosk-preview.sero91ak.workers.dev/
 
-The isolated Worker deployment completed in run 44376221063. Direct HTTP checks returned 200 for the preview document, scripts, stylesheet, catalog, logo, all three wallpaper scenes, and all five prayer images.
+The isolated Worker deployment completed in run 44376839953. Direct HTTP checks returned 200 for the preview document, scripts, stylesheet, catalog, logo, all three wallpaper scenes, and all five prayer images.
 
 ## Remaining work and limits
 
