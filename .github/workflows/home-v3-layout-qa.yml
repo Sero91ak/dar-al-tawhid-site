@@ -35,6 +35,35 @@ jobs:
           for(const key of required)if(!html.includes(key))throw Error('Missing HOME V3 feature: '+key);
           console.log('Source JS, V3 assets and settings: PASS');
           NODE
+      - name: Verify existing GitHub media are publicly retrievable
+        run: |
+          python - <<'PY'
+          import urllib.request
+          base='https://dar-al-tawhid.de'
+          paths=[
+            '/app-logo-original.png',
+            '/assets/dar-3d-icons/home.png',
+            '/assets/dar-3d-icons/settings.png',
+            '/assets/home-v1194/hero-wide-adobe.jpg',
+            '/kids/assets/kids-salah-v1262/cinematic-still.jpg',
+            '/test/assets/dar-3d-icons/dar-home-cinematic-hero.png',
+            '/kids/assets/kids-home-v1191/hero-static-reference.jpg',
+            '/test/assets/prayer-motifs/fajr.webp',
+          ]
+          errors=[]
+          for path in paths:
+            try:
+              req=urllib.request.Request(base+path,headers={'Range':'bytes=0-4095','User-Agent':'DarHomeQA/3.1'})
+              with urllib.request.urlopen(req,timeout=18) as r:
+                typ=r.headers.get('Content-Type','')
+                sample=r.read(64)
+                code=r.status
+              print(path,code,typ,'bytes:',len(sample),flush=True)
+              if code not in (200,206) or not typ.lower().startswith('image/'):errors.append(path+': unexpected content '+typ)
+            except Exception as e:
+              print('MEDIA_ERROR',path,type(e).__name__,str(e),flush=True);errors.append(path)
+          if errors:raise AssertionError('Unavailable HOME visual sources: '+', '.join(errors))
+          PY
       - name: Browser QA dependencies
         run: python -m pip install -q selenium
       - name: Run browser layout and interaction checks
