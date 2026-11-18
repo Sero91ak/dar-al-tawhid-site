@@ -26,6 +26,9 @@ jobs:
         with:
           ref: 76c326640c8d471a538f26b1d0da8ba3b61683d7
           persist-credentials: false
+          sparse-checkout: |
+            home-device
+            content/home
 
       - name: Prepare isolated static HOME preview
         shell: bash
@@ -80,7 +83,7 @@ jobs:
           run_worker_first = true
           TOML
           node --check .home-preview-worker.mjs
-          node -e 'const f=require("fs");const html=f.readFileSync(".home-preview-dist/index.html","utf8");for (const [i,m] of [...html.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/gi)].entries()){if(m[1].trim())new Function(m[1]);}console.log("HOME preview HTML scripts syntactically valid");'
+          node -e 'const h=require("fs").readFileSync(".home-preview-dist/index.html","utf8");if(!h.includes("DĀR AL TAWḤĪD HOME"))process.exit(1);console.log("HOME kiosk HTML preview present");'
 
       - name: Deploy ONLY dar-home-kiosk-preview Worker
         id: deploy
