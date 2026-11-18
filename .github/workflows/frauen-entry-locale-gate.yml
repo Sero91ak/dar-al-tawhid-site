@@ -9,6 +9,7 @@ on:
       - 'scripts/check-frauen-entry-locales.cjs'
       - 'scripts/check-frauen-batch16.cjs'
       - 'scripts/test-frauen-batch16-reader.cjs'
+      - 'scripts/test-frauen-batch16-localization.cjs'
       - 'content/admin/frauen-batch-16-2026-11-18.json'
       - 'content/admin/frauen-batch16-locales-draft-20261118.json'
       - '.github/workflows/frauen-entry-locale-gate.yml'
@@ -33,3 +34,5 @@ jobs:
         run: node scripts/check-frauen-batch16.cjs prepare
       - name: Frauen 16 · echte Leserouten im Speicher simulieren, ohne Freischaltung
         run: node scripts/test-frauen-batch16-reader.cjs
+      - name: Frauen 16 · alle 144 Sprachwechsel für Karte und Leser simulieren
+        run: node scripts/test-frauen-batch16-localization.cjs
