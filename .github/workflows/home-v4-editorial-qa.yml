@@ -1,0 +1,150 @@
+name: HOME V4 editorial and settings-only UX QA
+
+on:
+  push:
+    branches:
+      - feature/home-editorial-v4-apple-tv-20261118
+    paths:
+      - home-device/**
+      - .github/workflows/home-v4-editorial-qa.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            home-device
+            .github/workflows/home-v4-editorial-qa.yml
+      - name: Verify source JavaScript syntax
+        run: |
+          node --check home-device/home-v3.js
+          node --check home-device/home-v4.js
+          node - <<'NODE'
+          const f=require('fs'),html=f.readFileSync('home-device/index.html','utf8');
+          const js=html.split('<script>')[1]?.split('</script>')[0];
+          if(!js)throw Error('No inline HOME V2 engine found');
+          new Function(js);
+          const required=['fajrAdhanTrack','homeAppearance','homeWallpaperUpload','homeConnectionStatus','home-v4.css','home-v4.js','h4ShowVerse','h4ShowHadith'];
+          for(const key of required)if(!html.includes(key))throw Error('Missing HOME V3 feature: '+key);
+          if(html.includes('<nav class="footnav"'))throw Error('Bottom tabs must not exist');
+          console.log('HOME V4 source, no-bottom-tabs, settings: PASS');
+          NODE
+      - name: Verify existing GitHub media are publicly retrievable
+        run: |
+          python - <<'PY'
+          import urllib.request
+          base='https://dar-al-tawhid.de'
+          paths=[
+            '/app-logo-original.png',
+            '/assets/dar-3d-icons/home.png',
+            '/assets/dar-3d-icons/settings.png',
+            '/assets/home-v1194/hero-wide-adobe.jpg',
+            '/kids/assets/kids-salah-v1262/cinematic-still.jpg',
+            '/test/assets/dar-3d-icons/dar-home-cinematic-hero.png',
+            '/kids/assets/kids-home-v1191/hero-static-reference.jpg',
+            '/test/assets/prayer-motifs/fajr.webp',
+            '/test/assets/prayer-motifs/dhuhr.webp',
+            '/test/assets/prayer-motifs/asr.webp',
+            '/test/assets/prayer-motifs/maghrib.webp',
+            '/test/assets/prayer-motifs/isha.webp',
+          ]
+          errors=[]
+          for path in paths:
+            try:
+              req=urllib.request.Request(base+path,headers={'Range':'bytes=0-4095','User-Agent':'DarHomeQA/3.1'})
+              with urllib.request.urlopen(req,timeout=18) as r:
+                typ=r.headers.get('Content-Type','')
+                sample=r.read(64)
+                code=r.status
+              print(path,code,typ,'bytes:',len(sample),flush=True)
+              if code not in (200,206) or not typ.lower().startswith('image/'):errors.append(path+': unexpected content '+typ)
+            except Exception as e:
+              print('MEDIA_ERROR',path,type(e).__name__,str(e),flush=True);errors.append(path)
+          if errors:raise AssertionError('Unavailable HOME visual sources: '+', '.join(errors))
+          PY
+      - name: Browser QA dependencies
+        run: python -m pip install -q selenium
+      - name: Run browser layout and interaction checks
+        env:
+          HOME_TEST_URL: http://127.0.0.1:8765
+        run: |
+          python3 -m http.server 8765 --directory home-device >/tmp/home-v4-http.log 2>&1 &
+          sleep 2
+          python - <<'PY'
+          import os,time
+          from selenium import webdriver
+          from selenium.webdriver.common.by import By
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.support.ui import WebDriverWait
+          from selenium.webdriver.support import expected_conditions as EC
+          from selenium.webdriver.support.ui import Select
+          from selenium.common.exceptions import WebDriverException
+          opts=Options()
+          for flag in ['--headless=new','--no-sandbox','--disable-dev-shm-usage','--disable-gpu','--hide-scrollbars']:
+            opts.add_argument(flag)
+          driver=webdriver.Chrome(options=opts)
+          url=os.environ['HOME_TEST_URL']
+          sizes=[(1024,600),(1280,800),(1600,900),(1920,1200),(800,1280)]
+          errors=[]
+          try:
+            for w,h in sizes:
+              driver.set_window_size(w,h)
+              driver.get(url+'/?qa=home-v3')
+              WebDriverWait(driver,25).until(EC.presence_of_element_located((By.ID,'mainScreen')))
+              time.sleep(2)
+              data=driver.execute_script("""
+                const o=id=>document.getElementById(id)?.getBoundingClientRect();
+                const names=['mainScreen','nextName','times','dailyArabic','audioName','openSettings'];
+                const boxes={};for(const n of names){const r=o(n);boxes[n]=r?{left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height}:null}
+                return {w:innerWidth,h:innerHeight,scrollW:document.documentElement.scrollWidth,
+                  v4:!!document.querySelector('link[href^="/home-v4.css"]'),footerTabs:!!document.querySelector('.footnav'),
+                  icons:document.querySelectorAll('.settings-icons').length,theme:document.getElementById('app').dataset.homeTheme,
+                  boxes,wallpaper:getComputedStyle(document.getElementById('app')).backgroundImage}
+              """)
+              print('VIEWPORT',w,h,data,flush=True)
+              if not data['v4'] or data['icons']<4:errors.append(f'{w}x{h}: V4 styling/settings icons missing')
+              if data['footerTabs']:errors.append(f'{w}x{h}: footer tabs must be absent')
+              if data['scrollW']>w+3:errors.append(f'{w}x{h}: document horizontal overflow')
+              if data['boxes']['audioName']['height']<17:errors.append(f'{w}x{h}: Quran player title clipped')
+              for n in ['mainScreen','nextName','times','audioName','openSettings']:
+                box=data['boxes'][n]
+                if box is None or box['width']<=0 or box['height']<=0:errors.append(f'{w}x{h}: missing or hidden {n}')
+            driver.set_window_size(1280,800)
+            driver.get(url+'/?qa=home-v3')
+            WebDriverWait(driver,25).until(EC.element_to_be_clickable((By.ID,'openSettings')))
+            driver.find_element(By.ID,'openSettings').click()
+            tab=driver.find_element(By.CSS_SELECTOR,'button[data-tab="hintergrund"]')
+            tab.click()
+            assert driver.find_element(By.CSS_SELECTOR,'.tabpage[data-page="hintergrund"]').get_attribute('class').find('on')>=0
+            gallery=driver.find_elements(By.CSS_SELECTOR,'#wallpaperOptions button[data-wallpaper]')
+            print('GALLERY',len(gallery),flush=True)
+            if len(gallery)<4:errors.append('Wallpaper gallery did not render')
+            if gallery:
+              gallery[0].click()
+              chosen=gallery[0].get_attribute('aria-pressed')
+              if chosen!='true':errors.append('Wallpaper selection not functional')
+            Select(driver.find_element(By.ID,'homeAppearance')).select_by_value('light')
+            if driver.find_element(By.ID,'app').get_attribute('data-home-theme')!='light':errors.append('Light mode not applied')
+            driver.find_element(By.ID,'saveSettings').click()
+            driver.find_element(By.ID,'openSettings').click()
+            driver.find_element(By.CSS_SELECTOR,'button[data-tab="adhan"]').click()
+            opts_f=driver.find_elements(By.CSS_SELECTOR,'#fajrAdhanTrack option')
+            opts_r=driver.find_elements(By.CSS_SELECTOR,'#adhanTrack option')
+            print('ADHAN_OPTIONS',len(opts_f),len(opts_r),flush=True)
+            driver.find_element(By.CSS_SELECTOR,'button[data-tab="saver"]').click()
+            driver.find_element(By.ID,'saverPreview').click()
+            if 'saver-open' not in driver.find_element(By.ID,'app').get_attribute('class'):errors.append('Screensaver not started')
+            driver.find_element(By.ID,'saver').click()
+            if 'saver-open' in driver.find_element(By.ID,'app').get_attribute('class'):errors.append('Screensaver not closed')
+            if errors:raise AssertionError(' | '.join(errors))
+            print('HOME V4 editorial / settings-only browser QA: PASS')
+          finally:driver.quit()
+          PY
