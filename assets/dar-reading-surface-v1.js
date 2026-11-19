@@ -10,14 +10,28 @@
  function init(){
   if(document.getElementById("darDirectReaderBarV1"))return;
   var q=/^\/q\//.test(location.pathname),header=document.createElement("nav");
+  // Locale was selected in the deferred women's lesson script before this
+  // toolbar initializes. Standalone canonical Q pages remain unchanged.
+  var lessonNav={
+    de:["⌂ Startseite","Lernen"],ar:["⌂ الصفحة الرئيسية","التعلّم"],
+    en:["⌂ Home","Learning"],tr:["⌂ Ana sayfa","Öğrenme"],
+    ku:["⌂ Rûpela sereke","Fêrbûn"],ckb:["⌂ سەرەتا","فێربوون"],
+    bs:["⌂ Početna","Učenje"],fr:["⌂ Accueil","Apprentissage"],
+    es:["⌂ Inicio","Aprendizaje"]
+  };
+  var locale=String(document.documentElement.lang||"de").trim().toLowerCase().replace(/_/g,"-");
+  if(locale==="kr")locale="ku";
+  if(locale==="ku-sorani")locale="ckb";
+  if(!lessonNav[locale])locale=locale.split("-")[0];
+  var lessonLabels=lessonNav[locale]||lessonNav.de;
   header.id="darDirectReaderBarV1";header.setAttribute("aria-label","Lese-Navigation");
   function button(label,action){
    var b=document.createElement("button");b.type="button";b.textContent=label;b.addEventListener("click",action);return b;
   }
-  var home=button("⌂ Startseite",function(){location.assign("/")});
+  var home=button(q?"⌂ Startseite":lessonLabels[0],function(){location.assign("/")});
   var left=document.createElement("div");left.className="dar-direct-reader-actions";left.append(home);
   var cap=document.createElement("span");cap.className="dar-direct-reader-caption";
-  cap.textContent=q?"DĀR AL TAWḤĪD · Quellen":"DĀR AL TAWḤĪD · Lernen";
+  cap.textContent=q?"DĀR AL TAWḤĪD · Quellen":"DĀR AL TAWḤĪD · "+lessonLabels[1];
   header.append(left,cap);
   var st=document.createElement("style");st.id="darDirectReaderNavStylesV1";
   st.textContent=`
