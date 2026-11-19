@@ -115,7 +115,7 @@ jobs:
             opts.add_argument(flag)
           driver=webdriver.Chrome(options=opts)
           url=os.environ['HOME_TEST_URL']
-          sizes=[(1024,600),(1280,800),(1600,900),(1920,1200),(800,1280)]
+          sizes=[(390,844),(844,390),(430,932),(932,430),(768,1024),(1024,768),(1024,600),(1280,800),(1600,900),(1920,1200),(800,1280)]
           errors=[]
           try:
             for w,h in sizes:
@@ -125,12 +125,12 @@ jobs:
               time.sleep(2)
               data=driver.execute_script("""
                 const o=id=>document.getElementById(id)?.getBoundingClientRect();
-                const names=['mainScreen','nextName','times','dailyDe','audioName','openSettings'];
+                const names=['mainScreen','nextName','times','dailyDe','audioName','openSettings','audioArea','dailyArea'];
                 const boxes={};for(const n of names){const r=o(n);boxes[n]=r?{left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height}:null}
                 return {w:innerWidth,h:innerHeight,scrollW:document.documentElement.scrollWidth,
                   v4:!!document.querySelector('link[href^="/home-v4.css"]'),footerTabs:!!document.querySelector('.footnav'),
                   icons:document.querySelectorAll('.settings-icons').length,theme:document.getElementById('app').dataset.homeTheme,
-                  fontSizes:{dailyDe:parseFloat(getComputedStyle(document.getElementById('dailyDe')).fontSize),source:parseFloat(getComputedStyle(document.getElementById('dailySource')).fontSize),counter:parseFloat(getComputedStyle(document.querySelector('.counter')).fontSize),ptime:parseFloat(getComputedStyle(document.querySelector('.prayer-cell .ptime')).fontSize)},
+                  fontSizes:{dailyDe:parseFloat(getComputedStyle(document.getElementById('dailyDe')).fontSize),source:parseFloat(getComputedStyle(document.getElementById('dailySource')).fontSize),counter:parseFloat(getComputedStyle(document.querySelector('.counter')).fontSize),ptime:parseFloat(getComputedStyle(document.querySelector('.prayer-cell .ptime')).fontSize)},lineSpacing:{daily:parseFloat(getComputedStyle(document.getElementById('dailyDe')).lineHeight)/parseFloat(getComputedStyle(document.getElementById('dailyDe')).fontSize),source:parseFloat(getComputedStyle(document.getElementById('dailySource')).lineHeight)/parseFloat(getComputedStyle(document.getElementById('dailySource')).fontSize)},
                   heroRight:{display:getComputedStyle(document.querySelector('.hero-right')).display,width:document.querySelector('.hero-right').getBoundingClientRect().width},
                   prayerArtCount:document.querySelectorAll('.prayer-glyph').length,arabicHomeVisible:[...document.querySelectorAll('.hero-verse,.bismillah,#dailyArabic,.next-arabic')].filter(x=>getComputedStyle(x).display!=='none'&&x.textContent.trim()).length,
                   boxes,wallpaper:getComputedStyle(document.getElementById('app')).backgroundImage}
@@ -144,6 +144,9 @@ jobs:
               if data['fontSizes']['source']<12:errors.append(f'{w}x{h}: source citation below 12px')
               if data['fontSizes']['counter']<14:errors.append(f'{w}x{h}: countdown below 14px')
               if data['fontSizes']['ptime']<19:errors.append(f'{w}x{h}: prayer time below 19px')
+              if data['lineSpacing']['daily']<1.3 or data['lineSpacing']['source']<1.2:errors.append(f'{w}x{h}: text line spacing is too tight')
+              for n in ['times','dailyArea','audioArea']:
+                if data['boxes'][n]['bottom']>h+2:errors.append(f'{w}x{h}: {n} extends beyond the viewport')
               if data['prayerArtCount']!=0:errors.append(f'{w}x{h}: Adhan-only artwork leaked into the five prayer-time cards')
               if data['arabicHomeVisible']!=0:errors.append(f'{w}x{h}: Arabic display calligraphy should be hidden on HOME')
               if h>w and data['heroRight']['display']=='none':errors.append(f'{w}x{h}: portrait hides the daily verse')
