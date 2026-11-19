@@ -17,8 +17,8 @@
   {id:'kids-hero',label:'Moschee · Nachtmotiv',url:ROOT+'/kids/assets/kids-home-v1191/hero-static-reference.jpg'},
   {id:'abstract',label:'Klassisch · ohne Bild',url:''}
  ];
- const palettes={light:{label:'Hell',light:true},soft:{label:'Sanft Elegant',light:true},eisgold:{label:'Eisgold',light:true},salbei:{label:'Salbei · Elfenbein',light:true},dark:{label:'Nachtgrün · Gold',light:false},royal:{label:'Royal Nachtblau',light:false},bordeaux:{label:'Bordeaux Royal',light:false},'dar-al-layl':{label:'Dār al-Layl',light:false}};
- let prefs={theme:'dark',palette:'dark',wallpaper:'tv-kaaba-day',wallpaperMode:'manual',reduceMotion:false,saverWallpaper:'same',adhanCinema:true,allowBackgroundUpdates:true};
+ const palettes={light:{label:'Hell',light:true},soft:{label:'Sanft Elegant',light:true},eisgold:{label:'Eisgold',light:true},salbei:{label:'Salbei · Elfenbein',light:true},dark:{label:'Klassisch Dunkel',light:false},royal:{label:'Royal Nachtblau',light:false},bordeaux:{label:'Bordeaux Royal',light:false},'dar-al-layl':{label:'Dār al-Layl',light:false},nightgold:{label:'Nachtgrün · Gold',light:false}};
+ let prefs={theme:'dark',palette:'nightgold',wallpaper:'tv-kaaba-day',wallpaperMode:'manual',reduceMotion:false,saverWallpaper:'same',adhanCinema:true,allowBackgroundUpdates:true};
  try{const from=JSON.parse(localStorage.getItem(KEY)||'{}');if(from&&typeof from==='object'&&!Array.isArray(from)){prefs={...prefs,...from}}}catch{}
  const safeHTML=(str)=>String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
  function imageFor(name){let w=wallpapers.find(x=>x.id===name);if(name==='custom'){const raw=localStorage.getItem(KEY+'-wallpaper')||'';return /^data:image\/(?:png|jpeg|webp);base64,/i.test(raw)?raw:''}return w?.url||''}
@@ -28,7 +28,7 @@
  function warn(msg){const t=$('toast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3900)}
  function apply(){
   const app=$('app');if(!app)return;
-  const paletteId=palettes[prefs.palette]?prefs.palette:(prefs.theme==='light'?'salbei':'dark');
+  const paletteId=palettes[prefs.palette]?prefs.palette:(prefs.theme==='light'?'salbei':'nightgold');
   const palette=palettes[paletteId];prefs.palette=paletteId;prefs.theme=palette.light?'light':'dark';
   app.dataset.homePalette=paletteId;
   app.dataset.homeTheme=prefs.theme;
@@ -137,8 +137,8 @@
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!picker.hidden){close();opener.focus({preventScroll:true})}});
  }
  function bind(){
-  const sel=$('homeAppearance');if(sel)sel.addEventListener('change',()=>{prefs.theme=sel.value==='light'?'light':'dark';prefs.palette=sel.value==='light'?'salbei':'dark';store();apply()});
-  const legacyTheme=$('theme');if(legacyTheme)legacyTheme.addEventListener('change',()=>{prefs.theme=legacyTheme.value==='ivory'?'light':'dark';prefs.palette=prefs.theme==='light'?'salbei':'dark';const appearance=$('homeAppearance');if(appearance)appearance.value=prefs.theme;store();apply()});
+  const sel=$('homeAppearance');if(sel)sel.addEventListener('change',()=>{prefs.theme=sel.value==='light'?'light':'dark';prefs.palette=sel.value==='light'?'salbei':'nightgold';store();apply()});
+  const legacyTheme=$('theme');if(legacyTheme)legacyTheme.addEventListener('change',()=>{prefs.theme=legacyTheme.value==='ivory'?'light':'dark';prefs.palette=prefs.theme==='light'?'salbei':'nightgold';const appearance=$('homeAppearance');if(appearance)appearance.value=prefs.theme;store();apply()});
   const saver=$('homeSaverBackground');if(saver){const options=[{id:'same',label:'Wie HOME-Hintergrund'},{id:'auto',label:'Automatisch nach Tageszeit'},...wallpapers.map(x=>({id:x.id,label:x.label}))];saver.replaceChildren(...options.map(x=>new Option(x.label,x.id)));saver.addEventListener('change',()=>{prefs.saverWallpaper=saver.value;store();apply()})}
   const wallMode=$('homeWallpaperMode');if(wallMode){wallMode.value=prefs.wallpaperMode;wallMode.addEventListener('change',()=>{prefs.wallpaperMode=wallMode.value;store();apply()})}
   const motionControl=$('homeReduceMotion');if(motionControl){motionControl.checked=!!prefs.reduceMotion;motionControl.addEventListener('change',()=>{prefs.reduceMotion=motionControl.checked;store();apply()})}
