@@ -1835,3 +1835,13 @@
 #app[data-home-palette] .calendar-view .home-view-foot,
 #app[data-home-palette] .festival-list article strong,
 #app[data-home-palette] .festival-list article span {text-shadow:0 1px 2px rgba(0,0,0,.28)!important;}
+
+/* V8: readable accent ink on bright photo regions for light palettes. */
+#app[data-home-palette="light"] {--gold:#66501f;--home-muted:#403d35;--muted:#403d35;}
+#app[data-home-palette="soft"] {--gold:#704345;--home-muted:#453a3c;--muted:#453a3c;}
+#app[data-home-palette="eisgold"] {--gold:#40596c;--home-muted:#30424e;--muted:#30424e;}
+#app[data-home-palette="salbei"] {--gold:#405c48;--home-muted:#37483c;--muted:#37483c;}
+#app[data-home-palette="light"] .overline,#app[data-home-palette="light"] .band-head,#app[data-home-palette="light"] .daily-label,#app[data-home-palette="light"] .audio-kicker,#app[data-home-palette="light"] .saver-kicker,#app[data-home-palette="light"] .next-arabic,
+#app[data-home-palette="soft"] .overline,#app[data-home-palette="soft"] .band-head,#app[data-home-palette="soft"] .daily-label,#app[data-home-palette="soft"] .audio-kicker,#app[data-home-palette="soft"] .saver-kicker,#app[data-home-palette="soft"] .next-arabic,
+#app[data-home-palette="eisgold"] .overline,#app[data-home-palette="eisgold"] .band-head,#app[data-home-palette="eisgold"] .daily-label,#app[data-home-palette="eisgold"] .audio-kicker,#app[data-home-palette="eisgold"] .saver-kicker,#app[data-home-palette="eisgold"] .next-arabic,
+#app[data-home-palette="salbei"] .overline,#app[data-home-palette="salbei"] .band-head,#app[data-home-palette="salbei"] .daily-label,#app[data-home-palette="salbei"] .audio-kicker,#app[data-home-palette="salbei"] .saver-kicker,#app[data-home-palette="salbei"] .next-arabic {color:var(--gold)!important;text-shadow:0 1px 2px rgba(255,255,255,.45)!important;}
