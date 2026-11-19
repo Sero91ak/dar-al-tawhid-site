@@ -138,7 +138,10 @@ async function verifyFrauenNeufokusPublication(env, helpers) {
     throw feedError("Frauen-Neufokus: 16er-Sammelveröffentlichung nicht vollständig live bestätigt", 409);
   }
   const ids = new Set(batch.records.map(x=>x.id));
-  if(ids.size !== 16 || focus.items.some(row => !ids.has(row.id)) ||
+  const focusIds = new Set((focus.items||[]).map(row=>row?.id));
+  if(ids.size !== 16 || focusIds.size !== 16 ||
+     focus.items.some(row => !row?.id || !ids.has(row.id)) ||
+     [...ids].some(id => !focusIds.has(id)) ||
      batch.records.some(row=>row.sourceReview!=="approved" ||
        row.translationReview!=="approved" || row.uiQa!=="passed" || row.publishQa!=="passed")) {
     throw feedError("Frauen-Neufokus: Quellen-, Sprach-, Geräte- oder Live-Freigabe fehlt", 409);
@@ -201,6 +204,10 @@ export async function saveFeedEntry(env, input, helpers) {
       incoming.startsAt=new Date(first).toISOString();
       incoming.expiresAt=new Date(first+FRAUEN_NEUFOKUS_DURATION).toISOString();
       incoming.visibility="48h";
+    } else {
+      // An unpublished draft has never had a trusted publication date.
+      // Discard any user-provided timestamp rather than persisting a forgery.
+      incoming.firstPublishedAt=null;
     }
   }
   if (incoming.status === "live") {
