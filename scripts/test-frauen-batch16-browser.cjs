@@ -12,6 +12,18 @@ const js=fs.readFileSync(path.join(root,"assets/frauen/frauen-learning-v1.js"),"
 const globals={window:{},document:{getElementById(){return null}},URL,console};
 vm.runInNewContext(js,globals,{filename:"frauen-learning-v1.js"});
 const api=globals.window.DARFrauenLearningV1,ids=new Set(batch.records.map(r=>r.id));
+const approvedForBrowser=new Set(ids);
+for(const file of Object.values(api.sourceFiles)){
+ const docs=read(file.replace(/^\//,""));
+ for(const entry of docs.eintraege||[]){
+  const locale=locales.entries[entry.kennung];
+  if(entry.quellenstatus==="geprueft"&&entry.freigabeDurchSerhat===true&&
+     locale&&entry.contentId===entry.kennung&&
+     entry.localeCatalogId===entry.kennung&&locale.sourceUrl===entry.direktnachweisUrl){
+    approvedForBrowser.add(entry.kennung);
+  }
+ }
+}
 const MIME={".html":"text/html; charset=utf-8",".js":"application/javascript; charset=utf-8",".css":"text/css; charset=utf-8",".json":"application/json; charset=utf-8",".svg":"image/svg+xml",".png":"image/png"};
 function fileFor(raw){
  let u;try{u=new URL(raw,"http://localhost")}catch(e){return null}
@@ -79,7 +91,7 @@ const server=http.createServer((req,res)=>{
      await reading.locator("summary").click();
      assert.equal(await page.locator(".fw-progress i").count(),4);
      assert.equal(await page.locator("button.fw-answer").count(),3);
-     const q=api.questions(row.id,locales.entryIds,locales.entries,code,new Set(batch.records.map(r=>r.id)));
+     const q=api.questions(row.id,locales.entryIds,locales.entries,code,approvedForBrowser);
      // Play the full learning path, not only static DOM.
      for(let i=0;i<q.length;i++){
        assert.equal(await page.locator(".fw-question").innerText(),q[i].question);
