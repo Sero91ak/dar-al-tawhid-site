@@ -188,7 +188,7 @@
  }
  function bindHomeActions(){
   document.querySelectorAll('[data-home-action="prayer"]').forEach(b=>b.addEventListener('click',()=>{closeLocalViews();const section=$('times');section?.classList.add('home-focus');document.querySelector('.prayer-cell.active')?.focus({preventScroll:true});setTimeout(()=>section?.classList.remove('home-focus'),1800)}));
-  document.querySelectorAll('[data-home-action="quran"]').forEach(b=>b.addEventListener('click',()=>openLocalView('quranReaderPanel')));
+  document.querySelectorAll('[data-home-action="quran"]').forEach(b=>b.addEventListener('click',()=>{openLocalView('quranReaderPanel');document.dispatchEvent(new Event('dar:quran-reader-open'))}));
   ['openCalendarPanel','calendarCardButton'].forEach(id=>$(id)?.addEventListener('click',()=>openLocalView('calendarPanel')));
   $('openHadithPanel')?.addEventListener('click',()=>{openLocalView('hadithPanel');document.dispatchEvent(new CustomEvent('dar:open-hadith'))});
   $('nextHadithPanel')?.addEventListener('click',()=>document.dispatchEvent(new CustomEvent('dar:next-hadith')));
