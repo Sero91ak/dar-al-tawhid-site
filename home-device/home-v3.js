@@ -17,7 +17,8 @@
   {id:'kids-hero',label:'Moschee · Nachtmotiv',url:ROOT+'/kids/assets/kids-home-v1191/hero-static-reference.jpg'},
   {id:'abstract',label:'Klassisch · ohne Bild',url:''}
  ];
- let prefs={theme:'dark',wallpaper:'tv-kaaba-day',wallpaperMode:'manual',reduceMotion:false,saverWallpaper:'same',adhanCinema:true,allowBackgroundUpdates:true};
+ const palettes={light:{label:'Hell',light:true},soft:{label:'Sanft Elegant',light:true},eisgold:{label:'Eisgold',light:true},salbei:{label:'Salbei · Elfenbein',light:true},dark:{label:'Nachtgrün · Gold',light:false},royal:{label:'Royal Nachtblau',light:false},bordeaux:{label:'Bordeaux Royal',light:false},'dar-al-layl':{label:'Dār al-Layl',light:false}};
+ let prefs={theme:'dark',palette:'dark',wallpaper:'tv-kaaba-day',wallpaperMode:'manual',reduceMotion:false,saverWallpaper:'same',adhanCinema:true,allowBackgroundUpdates:true};
  try{const from=JSON.parse(localStorage.getItem(KEY)||'{}');if(from&&typeof from==='object'&&!Array.isArray(from)){prefs={...prefs,...from}}}catch{}
  const safeHTML=(str)=>String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
  function imageFor(name){let w=wallpapers.find(x=>x.id===name);if(name==='custom'){const raw=localStorage.getItem(KEY+'-wallpaper')||'';return /^data:image\/(?:png|jpeg|webp);base64,/i.test(raw)?raw:''}return w?.url||''}
@@ -27,19 +28,23 @@
  function warn(msg){const t=$('toast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3900)}
  function apply(){
   const app=$('app');if(!app)return;
+  const paletteId=palettes[prefs.palette]?prefs.palette:(prefs.theme==='light'?'salbei':'dark');
+  const palette=palettes[paletteId];prefs.palette=paletteId;prefs.theme=palette.light?'light':'dark';
+  app.dataset.homePalette=paletteId;
+  app.dataset.homeTheme=prefs.theme;
   app.classList.toggle('reduced-motion',!!prefs.reduceMotion);
   const motionControl=$('homeReduceMotion');if(motionControl)motionControl.checked=!!prefs.reduceMotion;
-  app.dataset.homeTheme=prefs.theme==='light'?'light':'dark';
   const homeChoice=prefs.wallpaperMode==='auto'?'auto':prefs.wallpaper;
   const bg=imageFor(resolveWallpaper(homeChoice));
   const photo=$('homeWallpaper'),imageValue=bg?'url("'+bg.replaceAll('"','%22')+'")':'none';
+  app.style.setProperty('--home-wallpaper-image',imageValue);
   app.dataset.wallpaperActive=bg?'true':'false';
   app.style.backgroundImage=imageValue;
   app.style.backgroundSize=bg?'cover':'';
   app.style.backgroundPosition=bg?'center':'';
   app.style.backgroundRepeat='no-repeat';
   if(photo){photo.style.backgroundImage=imageValue;photo.style.backgroundSize='cover';photo.style.backgroundPosition='center';photo.style.backgroundRepeat='no-repeat'}
-  app.style.setProperty('--home-artwork-opacity',bg?(prefs.theme==='light'?'0.10':'0.19'):'1');
+  app.style.setProperty('--home-artwork-opacity',bg?(palette.light?'0.10':'0.19'):'1');
   const saver=$('saver');if(saver){
    const saverChoice=prefs.saverWallpaper==='same'?homeChoice:prefs.saverWallpaper;
    const sbg=imageFor(resolveWallpaper(saverChoice));
@@ -54,7 +59,7 @@
    adhan.style.backgroundImage='url("'+selected.replaceAll('"','%22')+'")';
   }
   const mode=$('homeAppearance');if(mode)mode.value=prefs.theme;
-  const legacyTheme=$('theme');if(legacyTheme)legacyTheme.value=prefs.theme==='light'?'ivory':'night';
+  const legacyTheme=$('theme');if(legacyTheme)legacyTheme.value=palette.light?'ivory':'night';
   const wallMode=$('homeWallpaperMode');if(wallMode)wallMode.value=prefs.wallpaperMode;
   const saverMode=$('homeSaverBackground');if(saverMode)saverMode.value=prefs.saverWallpaper;
   const cinema=$('homeCinemaBackground');if(cinema)cinema.checked=!!prefs.adhanCinema;
@@ -125,15 +130,15 @@
  function bindAppearancePicker(){
   const opener=$('openAppearance'),picker=$('appearancePopover');if(!opener||!picker)return;
   const close=()=>{picker.hidden=true;opener.setAttribute('aria-expanded','false')};
-  const sync=()=>picker.querySelectorAll('[data-home-theme-choice]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.homeThemeChoice===(prefs.theme==='light'?'light':'dark'))));
+  const sync=()=>picker.querySelectorAll('[data-home-palette-choice]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.homePaletteChoice===prefs.palette)));
   opener.addEventListener('click',event=>{event.stopPropagation();picker.hidden=!picker.hidden;opener.setAttribute('aria-expanded',String(!picker.hidden));if(!picker.hidden)sync()});
-  picker.addEventListener('click',event=>{event.stopPropagation();const button=event.target.closest('[data-home-theme-choice]');if(!button)return;const choice=button.dataset.homeThemeChoice;prefs.theme=choice==='light'?'light':'dark';store();apply();window.darHomeApplyThemeChoice?.(prefs.theme);sync();close()});
+  picker.addEventListener('click',event=>{event.stopPropagation();const button=event.target.closest('[data-home-palette-choice]');if(!button)return;const choice=button.dataset.homePaletteChoice;if(!palettes[choice])return;prefs.palette=choice;prefs.theme=palettes[choice].light?'light':'dark';store();apply();window.darHomeApplyThemeChoice?.(prefs.theme);sync();close()});
   document.addEventListener('click',event=>{if(!picker.hidden&&!picker.contains(event.target)&&event.target!==opener&&!opener.contains(event.target))close()});
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!picker.hidden){close();opener.focus({preventScroll:true})}});
  }
  function bind(){
-  const sel=$('homeAppearance');if(sel)sel.addEventListener('change',()=>{prefs.theme=sel.value;store();apply()});
-  const legacyTheme=$('theme');if(legacyTheme)legacyTheme.addEventListener('change',()=>{prefs.theme=legacyTheme.value==='ivory'?'light':'dark';const appearance=$('homeAppearance');if(appearance)appearance.value=prefs.theme;store();apply()});
+  const sel=$('homeAppearance');if(sel)sel.addEventListener('change',()=>{prefs.theme=sel.value==='light'?'light':'dark';prefs.palette=sel.value==='light'?'salbei':'dark';store();apply()});
+  const legacyTheme=$('theme');if(legacyTheme)legacyTheme.addEventListener('change',()=>{prefs.theme=legacyTheme.value==='ivory'?'light':'dark';prefs.palette=prefs.theme==='light'?'salbei':'dark';const appearance=$('homeAppearance');if(appearance)appearance.value=prefs.theme;store();apply()});
   const saver=$('homeSaverBackground');if(saver){const options=[{id:'same',label:'Wie HOME-Hintergrund'},{id:'auto',label:'Automatisch nach Tageszeit'},...wallpapers.map(x=>({id:x.id,label:x.label}))];saver.replaceChildren(...options.map(x=>new Option(x.label,x.id)));saver.addEventListener('change',()=>{prefs.saverWallpaper=saver.value;store();apply()})}
   const wallMode=$('homeWallpaperMode');if(wallMode){wallMode.value=prefs.wallpaperMode;wallMode.addEventListener('change',()=>{prefs.wallpaperMode=wallMode.value;store();apply()})}
   const motionControl=$('homeReduceMotion');if(motionControl){motionControl.checked=!!prefs.reduceMotion;motionControl.addEventListener('change',()=>{prefs.reduceMotion=motionControl.checked;store();apply()})}
