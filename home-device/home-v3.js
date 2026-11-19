@@ -150,7 +150,7 @@
   const q=String(query).trim().toLocaleLowerCase(),selected=String(nativeSelect.value);
   list.replaceChildren();
   for(const option of nativeSelect.options){
-   const id=String(option.value),raw=String(option.textContent||''),title=raw.replace(/^\\d+\\s*·\\s*/,'').split(' · ')[0].trim();
+   const id=String(option.value),raw=String(option.textContent||''),title=raw.replace(/^\d+\s*·\s*/,'').split(' · ')[0].trim();
    if(q&&!id.includes(q)&&!raw.toLocaleLowerCase().includes(q))continue;
    const b=document.createElement('button');b.type='button';b.className='surah-option';b.setAttribute('role','option');b.setAttribute('aria-selected',String(id===selected));b.dataset.surah=id;
    const n=document.createElement('span');n.className='surah-number';n.textContent=id;
