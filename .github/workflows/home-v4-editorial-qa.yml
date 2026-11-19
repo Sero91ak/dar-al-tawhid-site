@@ -128,7 +128,7 @@ jobs:
               WebDriverWait(driver,25).until(EC.presence_of_element_located((By.ID,'mainScreen')))
               time.sleep(2)
               data=driver.execute_script("""
-                const o=id=>document.getElementById(id)?.getBoundingClientRect();
+                const o=id=>(id==='hero'?document.querySelector('.hero'):document.getElementById(id))?.getBoundingClientRect();
                 const names=['mainScreen','nextName','hero','times','dailyDe','audioName','openSettings','audioArea','dailyArea'];
                 const boxes={};for(const n of names){const r=o(n);boxes[n]=r?{left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height}:null}
                 const screen=document.getElementById('mainScreen');return {w:innerWidth,h:innerHeight,scrollW:document.documentElement.scrollWidth,screenScroll:screen.scrollHeight,screenClient:screen.clientHeight,
