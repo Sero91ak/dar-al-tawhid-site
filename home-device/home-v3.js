@@ -176,8 +176,36 @@
  const dataObserver=new MutationObserver(()=>{if(picker&&!picker.hidden)renderSurahPicker(search?.value||'')});if(nativeSelect)dataObserver.observe(nativeSelect,{childList:true});
  nativeSelect?.addEventListener('change',()=>{if(picker&&!picker.hidden)renderSurahPicker(search?.value||'')});
  function renderHijriDate(){const targets=[$('hijriHeader'),$('calendarPanelHijri')].filter(Boolean);let value='Hiǧrī-Datum nicht verfügbar';try{value=new Intl.DateTimeFormat('de-DE-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric',timeZone:'Europe/Berlin'}).format(new Date())}catch{try{value=new Intl.DateTimeFormat('de-DE-u-ca-islamic',{day:'numeric',month:'long',year:'numeric',timeZone:'Europe/Berlin'}).format(new Date())}catch{}}targets.forEach(el=>el.textContent=value)}
- function openLocalView(id){const view=$(id),screen=$('mainScreen');if(!view||!screen)return;document.querySelectorAll('.home-view').forEach(x=>{x.hidden=true});view.hidden=false;screen.hidden=true;document.body.classList.add('home-view-open');view.querySelector('[data-close-home-view]')?.focus();if(id==='quranReaderPanel')document.dispatchEvent(new Event('dar:quran-reader-open'))}
- function closeLocalViews(){document.querySelectorAll('.home-view').forEach(x=>{x.hidden=true});const screen=$('mainScreen');if(screen)screen.hidden=false;document.body.classList.remove('home-view-open')}
+ const localRoute={active:null,returnFocus:null,hideTimer:0};
+ function addViewSettings(view){
+  const host=view.querySelector('.quran-reader-actions,.home-view-head,.tadabbur-head');if(!host||host.querySelector('[data-home-settings]'))return;
+  const button=document.createElement('button');button.type='button';button.className='route-settings';button.dataset.homeSettings='';button.setAttribute('aria-label','Einstellungen öffnen');button.title='Einstellungen';
+  const img=new Image();img.src=icon('settings');img.alt='';img.setAttribute('aria-hidden','true');button.append(img);host.append(button);
+ }
+ function openLocalView(id){
+  const view=$(id),screen=$('mainScreen');if(!view||!screen||localRoute.active===id)return;
+  clearTimeout(localRoute.hideTimer);const previous=localRoute.active&&$(localRoute.active);
+  if(previous){previous.classList.remove('is-active');previous.classList.add('is-leaving')}else localRoute.returnFocus=document.activeElement;
+  document.querySelectorAll('.home-view').forEach(x=>{if(x!==previous&&x!==view){x.hidden=true;x.classList.remove('is-active','is-leaving')}});
+  screen.hidden=false;screen.inert=true;screen.setAttribute('aria-hidden','true');screen.classList.add('view-covered');
+  view.hidden=false;view.inert=false;view.removeAttribute('aria-hidden');view.classList.remove('is-leaving','is-active');view.classList.add('route-entering');void view.offsetWidth;
+  document.body.classList.add('home-view-open');localRoute.active=id;addViewSettings(view);
+  requestAnimationFrame(()=>{view.classList.remove('route-entering');view.classList.add('is-active')});
+  if(previous)localRoute.hideTimer=setTimeout(()=>{previous.hidden=true;previous.classList.remove('is-leaving')},360);
+  view.querySelector('[data-close-home-view]')?.focus({preventScroll:true});
+  if(id==='quranReaderPanel')document.dispatchEvent(new Event('dar:quran-reader-open'));
+ }
+ function closeLocalViews(){
+  if(!localRoute.active)return;const active=$(localRoute.active),screen=$('mainScreen');localRoute.active=null;clearTimeout(localRoute.hideTimer);
+  active?.classList.remove('is-active');active?.classList.add('is-leaving');
+  if(screen){screen.hidden=false;screen.inert=false;screen.removeAttribute('aria-hidden');screen.classList.remove('view-covered')}
+  document.body.classList.remove('home-view-open');
+  localRoute.hideTimer=setTimeout(()=>{document.querySelectorAll('.home-view').forEach(x=>{x.hidden=true;x.classList.remove('is-leaving','is-active')});localRoute.returnFocus?.focus?.({preventScroll:true});localRoute.returnFocus=null},360);
+ }
+ let routeSwipeStart=null;
+ document.addEventListener('pointerdown',e=>{if(!localRoute.active||e.pointerType==='mouse'||e.target.closest('button,a,input,select,textarea,[role=button]')){routeSwipeStart=null;return}routeSwipeStart={x:e.clientX,y:e.clientY}},{passive:true});
+ document.addEventListener('pointerup',e=>{if(!routeSwipeStart)return;const dx=e.clientX-routeSwipeStart.x,dy=e.clientY-routeSwipeStart.y;routeSwipeStart=null;if(dx>88&&Math.abs(dx)>Math.abs(dy)*1.25)closeLocalViews()},{passive:true});
+ document.addEventListener('click',e=>{if(e.target.closest('[data-home-settings]'))window.darHomeEnterSettings?.('standort')});
  function bindQuranReader(){
   const panel=$('quranReaderPanel'),surahSelect=$('readerSurah'),reciterSelect=$('readerReciter'),api=()=>window.darQuranReaderAPI;
   if(!panel||!surahSelect||!api())return;
@@ -188,7 +216,7 @@
  }
  function bindHomeActions(){
   document.querySelectorAll('[data-home-action="prayer"]').forEach(b=>b.addEventListener('click',()=>{closeLocalViews();const section=$('times');section?.classList.add('home-focus');document.querySelector('.prayer-cell.active')?.focus({preventScroll:true});setTimeout(()=>section?.classList.remove('home-focus'),1800)}));
-  document.querySelectorAll('[data-home-action="quran"]').forEach(b=>b.addEventListener('click',()=>{openLocalView('quranReaderPanel');document.dispatchEvent(new Event('dar:quran-reader-open'))}));
+  document.querySelectorAll('[data-home-action="quran"]').forEach(b=>b.addEventListener('click',()=>openLocalView('quranReaderPanel')));
   ['openCalendarPanel','calendarCardButton'].forEach(id=>$(id)?.addEventListener('click',()=>openLocalView('calendarPanel')));
   $('openHadithPanel')?.addEventListener('click',()=>{openLocalView('hadithPanel');document.dispatchEvent(new CustomEvent('dar:open-hadith'))});
   $('nextHadithPanel')?.addEventListener('click',()=>document.dispatchEvent(new CustomEvent('dar:next-hadith')));
