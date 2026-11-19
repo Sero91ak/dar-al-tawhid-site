@@ -33,6 +33,7 @@ jobs:
           node --check home-device/home-v4.js
           node --check home-device/home-v6.js
           node --check home-device/home-v7.js
+          node --check home-device/home-v7.js
           node - <<'NODE'
           const f=require('fs'),html=f.readFileSync('home-device/index.html','utf8');
           const js=html.split('<script>')[1]?.split('</script>')[0];
