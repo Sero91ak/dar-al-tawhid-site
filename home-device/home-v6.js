@@ -23,7 +23,7 @@
  }
  function refOK(ref){return typeof ref==='string'&&/^(?:[1-9][0-9]{0,2}):(?:[1-9][0-9]{0,2})$/.test(ref)}
  function refMap(entries){const m=new Map();for(const e of entries){if(!m.has(e.reference))m.set(e.reference,[]);m.get(e.reference).push(e)}return m}
- function tadValid(e){return !!e&&refOK(e.reference)&&typeof e.text==='string'&&e.text.trim().length>0&&e.text.length<=420&&typeof e.narrator==='string'&&e.narrator.trim()&&typeof e.generation==='string'&&typeof e.source==='string'&&e.source.trim()&&typeof e.grading==='string'&&e.grading.trim()}
+ function tadValid(e){return !!e&&refOK(e.reference)&&typeof e.text==='string'&&e.text.trim().length>0&&typeof e.narrator==='string'&&e.narrator.trim()&&typeof e.generation==='string'&&typeof e.source==='string'&&e.source.trim()&&typeof e.grading==='string'&&e.grading.trim()}
  function safeFile(path){return typeof path==='string'&&/^[A-Za-z0-9._-]+\.json$/.test(path)}
  function notifyProgress(done,total){const e=$('tadabburStatus');if(e)say(e,'DĀR-Tadabbur wird abgeglichen · '+done+' von '+total+' Datensätzen')}
  async function loadTadabbur(){
@@ -63,7 +63,7 @@
   }
   for(const entry of items){
    const card=document.createElement('article');card.className='tadabbur-item';
-   const statement=document.createElement('p');statement.className='tadabbur-statement';statement.textContent=entry.text;
+   const statement=document.createElement('p');statement.className='tadabbur-statement';statement.textContent=MARKDOWN(entry.text);
    const speaker=document.createElement('div');speaker.className='tadabbur-speaker';speaker.textContent=[entry.narrator,entry.generation].filter(Boolean).join(' · ');
    const source=document.createElement('div');source.className='tadabbur-source';source.textContent=[entry.source,entry.grading,entry.relation].filter(Boolean).join(' · ');
    card.append(statement,speaker,source);list.append(card);
@@ -174,9 +174,9 @@
    rotationState.revision=library.revision;
   }
   if(!rotationState.remaining.length){
-   const recent=new Set(rotationState.recent||[]),rest=all.filter(x=>!recent.has(x.id));
-   rotationState.remaining=stableMix(rest.length?rest:all,library.weights);rotationState.shown=[];
-   if(rotationState.remaining[0]===rotationState.recent?.at(-1)&&rotationState.remaining.length>1)rotationState.remaining.push(rotationState.remaining.shift());
+   const cooldown=new Set((rotationState.recent||[]).slice(-Number(library.policy.crossCycleCooldownCount||20)));
+   rotationState.remaining=stableMix(all,library.weights);rotationState.shown=[];
+   for(let i=0;i<Math.min(cooldown.size,rotationState.remaining.length);){if(cooldown.has(rotationState.remaining[i]))rotationState.remaining.push(rotationState.remaining.splice(i,1)[0]);else i++}
   }
   const id=rotationState.remaining.shift(),card=byId.get(id);if(!card)return;
   const now=Math.floor(Date.now()/1000),duration=Math.round(durationFor(card,library.display));
