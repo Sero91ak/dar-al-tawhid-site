@@ -719,3 +719,51 @@
 #saver .saver-bottom span:first-child { color:var(--gold);font:600 clamp(18px,2vw,30px)/1.25 var(--display);letter-spacing:.02em; }
 #saver .saver-bottom span:last-child { font-size:clamp(11px,1vw,14px);align-self:center; }
 #app[data-home-theme="light"] #saver .saver-bottom span:first-child { color:#365b43; }
+
+/* Short landscape viewport: retain the whole control rail without clipping content. */
+@media (max-height:640px) and (orientation:landscape) {
+ #app .screen { gap:2px!important;padding-top:8px!important;padding-bottom:6px!important; }
+ #app .top { min-height:34px!important; }
+ #app .home-nav button { min-height:32px;padding:1px 4px; }
+ #app .home-nav button img { width:18px;height:18px; }
+ #app .home-nav button span { font-size:9px; }
+ #app .topbtn { min-width:44px!important;min-height:44px!important;width:44px!important;height:44px!important; }
+ #app .header-meta { margin-top:3px;padding:4px 8px;gap:4px 10px; }
+ #app .header-meta span { font-size:8px; }
+ #app .header-meta strong { font-size:10px; }
+ #app .header-meta .now { font-size:18px; }
+ #app .top-rule { margin-top:4px; }
+ #app .hero { grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.2vw; }
+ #app .hero-left { padding:4px 8px!important; }
+ #app .next-name { font-size:clamp(36px,6vw,54px)!important;margin:4px 0!important; }
+ #app .main-time { font-size:clamp(30px,4vw,44px)!important; }
+ #app .counter { padding:.25em .5em;font-size:14px!important; }
+ #app .hero-right { padding:0 4px!important; }
+ #app .calendar-card { min-height:64px;padding:7px 10px;grid-template-columns:42px minmax(0,1fr) 20px;gap:8px; }
+ #app .calendar-icon-wrap { width:40px;height:40px; }
+ #app .calendar-kicker { font-size:9px; }
+ #app #hijriDate { font-size:18px; }
+ #app .calendar-caption { font-size:10px; }
+ #app .times-band { padding:4px 0!important; }
+ #app .band-head { margin-bottom:2px; }
+ #app .prayer-cell { min-height:46px!important;padding:4px 2px!important;gap:3px!important; }
+ #app .prayer-cell .pname { font-size:12px!important; }
+ #app .prayer-cell .ptime { font-size:clamp(20px,3.4vh,25px)!important; }
+ #app .sunrise-line { margin-top:3px!important;padding-top:3px!important;font-size:11px!important; }
+ #app .sunrise-line::before { margin-bottom:3px; }
+ #app .daily-area { min-height:0!important;max-height:none;gap:10px; }
+ #app .daily-story { max-height:14vh!important;padding:4px 8px; }
+ #app .daily-de { font-size:clamp(18px,2.4vh,21px)!important;line-height:1.25!important; }
+ #app .audio-area { padding:5px 0 5px 10px;gap:4px 8px; }
+ #app .audio-title { font-size:22px; }
+ #app .audio-sub { font-size:12px!important; }
+ #app .audio-controls { gap:6px;margin:2px 0 0; }
+ #app .round { width:32px;height:32px; }
+ #app .round.primary { width:36px;height:36px; }
+ #app .foot { padding-top:4px; }
+ #app .status { font-size:10px; }
+ #app .h3-section-emblem { display:none!important; }
+}
+@media (max-width:430px) {
+ #app .topbtn { width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important; }
+}
