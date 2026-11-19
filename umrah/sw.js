@@ -1,7 +1,7 @@
 'use strict';
 /* DĀR AL TAWḤĪD ʿUmrah cache; scope /umrah/ only. */
-const CACHE='dar-umrah-v8-standalone-1';
-const CORE=['./','./index.html','./offline.html'];
+const CACHE='dar-umrah-v9-premium-1';
+const CORE=['./','./index.html','./offline.html','./enhancements.css','./enhancements.js','./quellen.html'];
 const BRAND=['/app-icon-512.png','/assets/dar-3d-icons/home.png','/assets/dar-3d-icons/qibla.png','/assets/dar-3d-icons/compass.png','/assets/dar-3d-icons/image.png','/assets/dar-3d-icons/library.png','/assets/dar-3d-icons/mosque.png'];
 const BRAND_PATHS=new Set(BRAND);
 const PREFIX=new URL(self.registration.scope).pathname;
@@ -24,12 +24,13 @@ self.addEventListener('fetch',ev=>{
  if(!u.pathname.startsWith(PREFIX)&&!BRAND_PATHS.has(u.pathname))return;
  ev.respondWith((async()=>{
    const cached=await caches.match(req);
-   if(cached)return cached;
-   try{const response=await fetch(req);
+   // Navigations: network-first, damit Korrekturen sichtbar bleiben; offline: lokaler Cache.
+   if(req.mode!=='navigate'&&cached)return cached;
+   try{const response=await fetch(req,req.mode==='navigate'?{cache:'no-store'}:undefined);
      if(response.ok){const c=await caches.open(CACHE);c.put(req,response.clone()).catch(()=>{});}
      return response;
    }catch(_){
-     if(req.mode==='navigate')return(await caches.match('./index.html'))||new Response('Offline nicht vorbereitet.',{status:503});
+     if(req.mode==='navigate')return cached||(await caches.match('./index.html'))||new Response('Offline nicht vorbereitet.',{status:503});
      return Response.error();
    }
  })());
