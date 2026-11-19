@@ -946,12 +946,26 @@
   border-left:1px solid var(--fine);
   padding-left:clamp(16px,2vw,34px);
 }
+#app .hero-right {
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  min-height:0;
+  overflow:hidden;
+}
 #app .hero-right .daily-story {
+  display:flex;
+  flex:1 1 0;
+  flex-direction:column;
   width:100%;
-  max-height:100%;
+  min-width:0;
+  min-height:0;
+  max-height:none;
+  overflow-x:hidden;
   overflow-y:auto;
   overscroll-behavior:contain;
 }
+#app .hero-right .tadabbur-open {position:relative;flex:0 0 auto;align-self:flex-start}
 #app .times-band {min-width:0}
 #app .times {min-width:0}
 #app .prayer-cell {min-width:0}
