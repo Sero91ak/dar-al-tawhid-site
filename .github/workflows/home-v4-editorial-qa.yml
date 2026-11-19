@@ -187,6 +187,10 @@ jobs:
             driver.find_element(By.CSS_SELECTOR,'[data-home-action="prayer"]').click()
             if 'home-focus' not in driver.find_element(By.ID,'times').get_attribute('class'):errors.append('Prayer navigation does not focus the HOME prayer area')
             print('LOCAL_HOME_NAV calendar/quran/hadith/prayer: PASS',flush=True)
+            driver.execute_script("document.activeElement.blur();document.body.tabIndex=-1;document.body.focus();document.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}))")
+            remote_focus=driver.execute_script("return {id:document.activeElement.id,tag:document.activeElement.tagName,role:document.activeElement.getAttribute('role')}")
+            print('TV_REMOTE_ARROW_FOCUS',remote_focus,flush=True)
+            if remote_focus['tag']=='BODY':errors.append('TV remote arrow key did not focus a HOME control')
             driver.find_element(By.ID,'openSettings').click()
             settings_layout=driver.execute_script("""
               const nav=document.querySelector('.settings-tabs'),detail=document.querySelector('.tabpage.on');
