@@ -119,11 +119,21 @@
   const wallMode=$('homeWallpaperMode');if(wallMode){wallMode.value=prefs.wallpaperMode;wallMode.addEventListener('change',()=>{prefs.wallpaperMode=wallMode.value;store();apply()})}
   const motionControl=$('homeReduceMotion');if(motionControl){motionControl.checked=!!prefs.reduceMotion;motionControl.addEventListener('change',()=>{prefs.reduceMotion=motionControl.checked;store();apply()})}
   const cin=$('homeCinemaBackground');if(cin)cin.addEventListener('change',()=>{prefs.adhanCinema=cin.checked;store();apply()});
-  const upload=$('homeWallpaperUpload');if(upload)upload.addEventListener('change',()=>{
-   const f=upload.files?.[0];if(!f)return;
-   if(!/^image\/(jpeg|png|webp)$/.test(f.type)||f.size>1.5*1024*1024){warn('Bitte PNG, JPG oder WebP bis 1,5 MB wählen');upload.value='';return}
-   const r=new FileReader();r.onload=()=>{try{localStorage.setItem(KEY+'-wallpaper',String(r.result));prefs.wallpaper='custom';store();makeWallpaperGallery()}catch{warn('Bild zu groß für diesen Browser. Bitte kleiner exportieren.')}}
-   r.readAsDataURL(f);
+  const upload=$('homeWallpaperUpload');if(upload)upload.addEventListener('change',async()=>{
+   const file=upload.files?.[0];if(!file)return;
+   if(!/^image\/(jpeg|png|webp)$/.test(file.type)||file.size>20*1024*1024){warn('Bitte JPG, PNG oder WebP bis 20 MB wählen');upload.value='';return}
+   try{
+    let blob=file;
+    if('createImageBitmap' in window){
+     const bitmap=await createImageBitmap(file),scale=Math.min(1,1920/Math.max(bitmap.width,bitmap.height));
+     const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));
+     const ctx=canvas.getContext('2d',{alpha:false});ctx.drawImage(bitmap,0,0,canvas.width,canvas.height);bitmap.close?.();
+     blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/webp',.84))||file;
+    }
+    const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result));reader.onerror=()=>reject(reader.error);reader.readAsDataURL(blob)});
+    localStorage.setItem(KEY+'-wallpaper',data);prefs.wallpaper='custom';prefs.wallpaperMode='manual';store();makeWallpaperGallery();warn('Eigenes Hintergrundbild übernommen');
+   }catch{warn('Bild konnte nicht gespeichert werden. Bitte ein kleineres Bild wählen.')}
+   finally{upload.value=''}
   });
   $('homeGalleryReset')?.addEventListener('click',()=>{prefs.wallpaper='tv-kaaba-day';prefs.wallpaperMode='manual';prefs.saverWallpaper='same';localStorage.removeItem(KEY+'-wallpaper');store();makeWallpaperGallery();const m=$('homeWallpaperMode');if(m)m.value=prefs.wallpaperMode});
   $('homeAudioUnlock')?.addEventListener('click',()=>{warn('Audio-Freigabe: bitte im Aḏān-Reiter „Aḏān einmalig testen“ drücken. Browser-Autoplay bleibt geräteabhängig.')});
@@ -165,10 +175,23 @@
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&picker&&!picker.hidden)closeSurahPicker()});
  const dataObserver=new MutationObserver(()=>{if(picker&&!picker.hidden)renderSurahPicker(search?.value||'')});if(nativeSelect)dataObserver.observe(nativeSelect,{childList:true});
  nativeSelect?.addEventListener('change',()=>{if(picker&&!picker.hidden)renderSurahPicker(search?.value||'')});
- function renderHijriDate(){const el=$('hijriDate');if(!el)return;try{const fmt=new Intl.DateTimeFormat('de-DE-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric',timeZone:'Europe/Berlin'});el.textContent=fmt.format(new Date())}catch{try{el.textContent=new Intl.DateTimeFormat('de-DE-u-ca-islamic',{day:'numeric',month:'long',year:'numeric',timeZone:'Europe/Berlin'}).format(new Date())}catch{el.textContent='Islamischer Kalender'}}}
+ function renderHijriDate(){const targets=[$('hijriHeader'),$('calendarPanelHijri')].filter(Boolean);let value='Hiǧrī-Datum nicht verfügbar';try{value=new Intl.DateTimeFormat('de-DE-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric',timeZone:'Europe/Berlin'}).format(new Date())}catch{try{value=new Intl.DateTimeFormat('de-DE-u-ca-islamic',{day:'numeric',month:'long',year:'numeric',timeZone:'Europe/Berlin'}).format(new Date())}catch{}}targets.forEach(el=>el.textContent=value)}
+ function openLocalView(id){const view=$(id);if(!view)return;document.querySelectorAll('.home-view').forEach(x=>x.hidden=true);view.hidden=false;view.querySelector('[data-close-home-view]')?.focus()}
+ function closeLocalViews(){document.querySelectorAll('.home-view').forEach(x=>x.hidden=true)}
+ function bindHomeActions(){
+  document.querySelectorAll('[data-home-action="prayer"]').forEach(b=>b.addEventListener('click',()=>{closeLocalViews();const section=$('times');section?.classList.add('home-focus');document.querySelector('.prayer-cell.active')?.focus({preventScroll:true});setTimeout(()=>section?.classList.remove('home-focus'),1800)}));
+  document.querySelectorAll('[data-home-action="quran"]').forEach(b=>b.addEventListener('click',()=>{$('openSurahPicker')?.click()}));
+  ['openCalendarPanel','calendarCardButton'].forEach(id=>$(id)?.addEventListener('click',()=>openLocalView('calendarPanel')));
+  $('openHadithPanel')?.addEventListener('click',()=>{openLocalView('hadithPanel');document.dispatchEvent(new CustomEvent('dar:open-hadith'))});
+  $('nextHadithPanel')?.addEventListener('click',()=>document.dispatchEvent(new CustomEvent('dar:next-hadith')));
+  document.querySelectorAll('[data-close-home-view]').forEach(b=>b.addEventListener('click',closeLocalViews));
+  document.querySelectorAll('.home-view').forEach(v=>v.addEventListener('click',e=>{if(e.target===v)closeLocalViews()}));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLocalViews()});
+  document.addEventListener('dar:open-hadith',()=>{window.setTimeout(()=>{const h=window.darHomeHadith;const text=$('hadithPanelText'),kind=$('hadithPanelKind'),source=$('hadithPanelSource'),narrator=$('hadithPanelNarrator');if(h){if(text)text.textContent=h.text||'';if(kind)kind.textContent=h.kind||'Ḥadīṯ';if(source)source.textContent=h.source||'Quelle nicht verfügbar';if(narrator)narrator.textContent=h.narrator||''}},0)});
+ }
  function init(){
   if(!$('app'))return;
-  augmentBrand();bind();apply();renderHijriDate();loadMediaCatalog();setInterval(()=>{if(prefs.wallpaperMode==='auto'||prefs.saverWallpaper==='auto')apply()},300000);handleConnection();
+  augmentBrand();bind();bindHomeActions();apply();renderHijriDate();loadMediaCatalog();setInterval(()=>{if(prefs.wallpaperMode==='auto'||prefs.saverWallpaper==='auto')apply()},300000);handleConnection();
   const el=$('adhanVisual');if(el)new MutationObserver(updateAdhanTitle).observe(el,{attributes:true,attributeFilter:['class']});
   window.addEventListener('online',handleConnection);window.addEventListener('offline',handleConnection);
   const i=document.querySelector('[data-tab="hintergrund"]');if(i){const img=document.createElement('img');img.src=icon('image');img.alt='';img.className='settings-icons';i.prepend(img)}
