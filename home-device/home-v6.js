@@ -157,7 +157,7 @@
    if(r.sharhStatus==='verified'&&r.sharhText&&rotation.display.sharhMode==='compact'){const p=document.createElement('p');p.className='saver-sharh';p.textContent=MARKDOWN(r.sharhText);$('saverStatement')?.append(p)}
   }
  }
- async function nextCard(){
+ async function nextCardCore(){
   if(!library)await ensureReady();
   if(!library)return;
   const all=library.cards,byId=library.byId;
@@ -181,6 +181,12 @@
   const id=rotationState.remaining.shift(),card=byId.get(id);if(!card)return;
   const now=Math.floor(Date.now()/1000),duration=Math.round(durationFor(card,library.display));
   rotationState.current={id,startedAt:now,duration};rotationState.lastId=id;await write('state','tvos-bag',rotationState);await renderCard();
+ }
+ let nextPromise=null;
+ async function nextCard(){
+  if(nextPromise)return nextPromise;
+  nextPromise=nextCardCore();
+  try{return await nextPromise}finally{nextPromise=null}
  }
  async function advance(now){
   if(!rotationState?.current){await nextCard();return}
