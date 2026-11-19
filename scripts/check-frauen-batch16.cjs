@@ -107,7 +107,11 @@ const notifyReady=allReady&&manifest.state==="published-live-verified"&&
   Number.isInteger(manifest.notificationDraft?.verifiedOptInRecipientCount)&&
   manifest.notificationDraft.verifiedOptInRecipientCount>0&&
   manifest.notificationDraft?.requireSeparatePushLockPassword===true&&
-  manifest.notificationDraft?.onceOnly===true;
+  manifest.notificationDraft?.onceOnly===true&&
+  ["iosNativeSdkLocaleBridgeVerified","androidNativeSdkLocaleBridgeVerified",
+   "kurdishPerSubscriptionRoutingVerified","targetSegmentOptInVerified",
+   "allNineInstallationLanguagesVerified"].every(key=>
+     manifest.notificationDraft?.deliveryLanguageVerification?.[key]===true);
 const summary={batch:manifest.id,records:detail.length,structureReady:structureErrors.length===0,structureErrors,prepublishReady,ready:allReady,notifyReady,readyCount:detail.filter(d=>d.ready).length,localeCountExpected:16*9,localeCountFound:detail.reduce((n,d)=>n+d.languages,0),missingCount:missing.length,missing,detail,notification};
 console.log(JSON.stringify(summary,null,2));
 if(process.argv[2]==="prepare"&&structureErrors.length)process.exitCode=1;
