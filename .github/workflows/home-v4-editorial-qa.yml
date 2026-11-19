@@ -334,6 +334,32 @@ jobs:
             if '/media/apple-tv/tv-kaaba-sunrise.jpg' not in saver_bg:errors.append('Screensaver did not use its separately selected background')
             driver.find_element(By.ID,'saver').click()
             if 'saver-open' in driver.find_element(By.ID,'app').get_attribute('class'):errors.append('Screensaver not closed')
+            driver.execute_script("""
+              const original=window.fetch.bind(window);
+              window.fetch=(input,init)=>{const raw=typeof input==='string'?input:input.url;if(raw.startsWith('/apple-tv/'))return original('https://dar-home-kiosk-preview.sero91ak.workers.dev'+raw,init);return original(input,init)};
+              window.darHomeDailyVerse={reference:'2:183',ar:'يَا أَيُّهَا الَّذِينَ آمَنُوا',de:'O ihr, die ihr glaubt'};
+              document.getElementById('openTadabbur').hidden=false;
+            """)
+            driver.find_element(By.ID,'openTadabbur').click()
+            WebDriverWait(driver,150).until(lambda d:'4774' in d.find_element(By.ID,'tadabburStatus').text or '1 geprüfte' in d.find_element(By.ID,'tadabburStatus').text or '1 geprüfte Überlieferung' in d.find_element(By.ID,'tadabburStatus').text)
+            WebDriverWait(driver,10).until(lambda d:len(d.find_elements(By.CSS_SELECTOR,'#tadabburResults .tadabbur-item'))>0)
+            tad_text=driver.find_element(By.ID,'tadabburResults').text
+            print('HOME_TADABBUR_EXACT_LOOKUP',tad_text[:500],flush=True)
+            if 'Das Fasten ist ein Schutzschild.' not in tad_text or 'Ṣaḥīḥ al-Buḫārī, Nr. 1904' not in tad_text:errors.append('Exact verse Tadabbur lookup or source citation failed')
+            driver.find_element(By.ID,'closeTadabbur').click()
+            driver.find_element(By.ID,'openSettings').click()
+            driver.find_element(By.CSS_SELECTOR,'button[data-tab="saver"]').click()
+            Select(driver.find_element(By.ID,'saverMode')).select_by_value('tvos')
+            WebDriverWait(driver,150).until(lambda d:d.execute_script("const x=window.darTvScreensaver?.status();return x?.ready&&x.counts.hadith>0&&x.counts.athar>0&&x.counts.quranTad===4774"))
+            tv_status=driver.execute_script("return window.darTvScreensaver.status()")
+            print('TVOS_5_5_5_CATALOG',tv_status,flush=True)
+            if tv_status['weights']!={'hadith':5,'athar':5,'quranTad':5}:errors.append('tvOS content weights do not follow canonical 5:5:5')
+            driver.find_element(By.ID,'saverPreview').click()
+            WebDriverWait(driver,20).until(lambda d:d.find_element(By.ID,'saverType').text.startswith(('Qurʾān','Ḥadīṯ','Āṯār')))
+            WebDriverWait(driver,15).until(lambda d:bool(d.find_element(By.ID,'saverSource').text.strip()))
+            tv_card=driver.execute_script("return {type:document.getElementById('saverType').textContent,source:document.getElementById('saverSource').textContent,narrator:document.getElementById('saverNarrator').textContent}")
+            print('TVOS_ROTATION_CARD',tv_card,flush=True)
+            driver.find_element(By.ID,'saver').click()
             driver.execute_cdp_cmd('Network.enable',{})
             driver.execute_cdp_cmd('Network.setBlockedURLs',{'urls':['https://dar-al-tawhid.de/*','https://www.dar-al-tawhid.de/*']})
             driver.refresh()
