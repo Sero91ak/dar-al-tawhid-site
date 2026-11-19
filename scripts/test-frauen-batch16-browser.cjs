@@ -61,9 +61,17 @@ const server=http.createServer((req,res)=>{
  page.on("pageerror",error=>browserErrors.push(vp.name+": "+String(error)));
  // Prove that the staging file does NOT accidentally show private study.
  const hidden=batch.records[0].id;
+ const protectedRoute=route=>{
+   const relative=new URL(route.request().url()).pathname.replace(/^\//,"");
+   const d=read(relative);
+   for(const e of d.eintraege||[])if(ids.has(e.kennung))e.quellenstatus="nicht-anzeigen";
+   route.fulfill({status:200,contentType:"application/json",body:JSON.stringify(d)});
+ };
+ await page.route("**/data/frauen-*.json*",protectedRoute);
  await page.goto(host+"/lernen/frauen-wissen/?id="+encodeURIComponent(hidden)+"&lang=de",{waitUntil:"domcontentloaded"});
  await page.locator(".fw-message").filter({hasText:api.labels.de.ready}).waitFor({timeout:10000});
  assert.equal(await page.locator(".fw-answer").count(),0,"Private report leaked before approval");
+ await page.unroute("**/data/frauen-*.json*",protectedRoute);
  // Browser-only replacement of the *response*; never changes repository files.
  await page.route("**/data/frauen-*.json*",route=>{
    const p=new URL(route.request().url()).pathname;
