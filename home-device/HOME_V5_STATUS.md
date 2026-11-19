@@ -44,7 +44,7 @@ The isolated Worker deployment completed in run 44395473800. A direct request to
 
 - The current branch improves the HOME V4 design and settings presentation. It does not yet complete the requested start-page information architecture or a full V5 redesign.
 - The settings page has seven categories and working existing controls, but some capabilities are demos or placeholders. In particular, brightness is a browser visual filter, there is no secure phone-to-device pairing, and a native device service is still needed for reliable background Aḏān.
-- Physical 7-, 8-, and 11-inch device validation, long-duration audio and energy tests, actual touch behavior, and visual review across the full photo library remain open.
+- Physical 7-, 8-, and 11-inch device validation, long-duration audio and energy tests, actual touch behavior, and visual review across the full photo library remain open. Workflow run 44482346457 reached the automatic-location assertion and failed at a non-global test-only `captureSettings` call; the test was changed to use the visible settings save button in commit 924ae74715e8e18e437599f32a5b1b6b51bfa0fb. A rerun is still required.
 - Browser autoplay is not a guarantee of background Aḏān playback. No native Aḏān service was built.
 - No per-image license metadata was present in the local Apple-TV asset catalog. The source project was accessible and its artwork was reused, but commercial redistribution rights have not been independently established.
 - No Swift, iOS, tvOS, Android, live website, or production Worker source was changed or deployed. Only the isolated HOME test Worker is in scope.
