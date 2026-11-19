@@ -176,11 +176,11 @@
  const dataObserver=new MutationObserver(()=>{if(picker&&!picker.hidden)renderSurahPicker(search?.value||'')});if(nativeSelect)dataObserver.observe(nativeSelect,{childList:true});
  nativeSelect?.addEventListener('change',()=>{if(picker&&!picker.hidden)renderSurahPicker(search?.value||'')});
  function renderHijriDate(){const targets=[$('hijriHeader'),$('calendarPanelHijri')].filter(Boolean);let value='Hiǧrī-Datum nicht verfügbar';try{value=new Intl.DateTimeFormat('de-DE-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric',timeZone:'Europe/Berlin'}).format(new Date())}catch{try{value=new Intl.DateTimeFormat('de-DE-u-ca-islamic',{day:'numeric',month:'long',year:'numeric',timeZone:'Europe/Berlin'}).format(new Date())}catch{}}targets.forEach(el=>el.textContent=value)}
- function openLocalView(id){const view=$(id);if(!view)return;document.querySelectorAll('.home-view').forEach(x=>x.hidden=true);view.hidden=false;view.querySelector('[data-close-home-view]')?.focus()}
+ function openLocalView(id){const view=$(id);if(!view)return;document.querySelectorAll('.home-view').forEach(x=>x.hidden=true);view.hidden=false;view.querySelector('[data-close-home-view]')?.focus();if(id==='quranReaderPanel')document.dispatchEvent(new Event('dar:quran-reader-open'))}
  function closeLocalViews(){document.querySelectorAll('.home-view').forEach(x=>x.hidden=true)}
  function bindHomeActions(){
   document.querySelectorAll('[data-home-action="prayer"]').forEach(b=>b.addEventListener('click',()=>{closeLocalViews();const section=$('times');section?.classList.add('home-focus');document.querySelector('.prayer-cell.active')?.focus({preventScroll:true});setTimeout(()=>section?.classList.remove('home-focus'),1800)}));
-  document.querySelectorAll('[data-home-action="quran"]').forEach(b=>b.addEventListener('click',()=>{$('openSurahPicker')?.click()}));
+  document.querySelectorAll('[data-home-action="quran"]').forEach(b=>b.addEventListener('click',()=>openLocalView('quranReaderPanel')));
   ['openCalendarPanel','calendarCardButton'].forEach(id=>$(id)?.addEventListener('click',()=>openLocalView('calendarPanel')));
   $('openHadithPanel')?.addEventListener('click',()=>{openLocalView('hadithPanel');document.dispatchEvent(new CustomEvent('dar:open-hadith'))});
   $('nextHadithPanel')?.addEventListener('click',()=>document.dispatchEvent(new CustomEvent('dar:next-hadith')));
