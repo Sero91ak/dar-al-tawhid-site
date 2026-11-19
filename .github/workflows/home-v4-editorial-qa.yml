@@ -350,10 +350,15 @@ jobs:
             driver.find_element(By.ID,'openSettings').click()
             driver.find_element(By.CSS_SELECTOR,'button[data-tab="saver"]').click()
             Select(driver.find_element(By.ID,'saverMode')).select_by_value('tvos')
-            WebDriverWait(driver,150).until(lambda d:d.execute_script("const x=window.darTvScreensaver?.status();return x?.ready&&x.counts.hadith>0&&x.counts.athar>0&&x.counts.quranTad===4774"))
+            try:
+              WebDriverWait(driver,45).until(lambda d:d.execute_script("const x=window.darTvScreensaver?.status();return x?.ready&&x.counts.hadith>0&&x.counts.athar>0&&x.counts.quranTad===4774"))
+            except Exception:
+              print('TVOS_LOAD_DIAGNOSTICS',driver.execute_script("return {status:window.darTvScreensaver?.status(),type:document.getElementById('saverType')?.textContent,detail:document.getElementById('saverDe')?.textContent,failures:performance.getEntriesByType('resource').filter(x=>x.name.includes('/apple-tv/')).map(x=>x.name)}"),flush=True)
+              raise
             tv_status=driver.execute_script("return window.darTvScreensaver.status()")
             print('TVOS_5_5_5_CATALOG',tv_status,flush=True)
             if tv_status['weights']!={'hadith':5,'athar':5,'quranTad':5}:errors.append('tvOS content weights do not follow canonical 5:5:5')
+            if tv_status['counts']['hadith']+tv_status['counts']['athar']!=3434:errors.append('Screensaver did not load all 3434 canonical Hadith and Athar cards')
             driver.find_element(By.ID,'saverPreview').click()
             WebDriverWait(driver,20).until(lambda d:d.find_element(By.ID,'saverType').text.startswith(('Qurʾān','Ḥadīṯ','Āṯār')))
             WebDriverWait(driver,15).until(lambda d:bool(d.find_element(By.ID,'saverSource').text.strip()))
