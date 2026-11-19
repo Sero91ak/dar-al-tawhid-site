@@ -79,7 +79,7 @@ const server=http.createServer((req,res)=>{
      await reading.locator("summary").click();
      assert.equal(await page.locator(".fw-progress i").count(),4);
      assert.equal(await page.locator("button.fw-answer").count(),3);
-     const q=api.questions(row.id,locales.entryIds,locales.entries,code);
+     const q=api.questions(row.id,locales.entryIds,locales.entries,code,new Set(batch.records.map(r=>r.id)));
      // Play the full learning path, not only static DOM.
      for(let i=0;i<q.length;i++){
        assert.equal(await page.locator(".fw-question").innerText(),q[i].question);
