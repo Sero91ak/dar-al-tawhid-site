@@ -101,7 +101,7 @@
   }
   text=MARKDOWN(text).replace(/\s+/g,' ').trim();
   const words=text.split(' ').filter(Boolean).length;
-  const letters=(text.match(/[\\p{L}\\p{N}]/gu)||[]).length;
+  const letters=(text.match(/[\p{L}\p{N}]/gu)||[]).length;
   const d=display.duration,base=Number(d.baseSeconds)||16,perWord=Number(d.secondsPerWord)||.35,min=Number(d.minSeconds)||18;
   const policySeconds=base+words*perWord;
   const readingSeconds=8+words*60/180;
