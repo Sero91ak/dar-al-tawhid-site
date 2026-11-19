@@ -54,6 +54,8 @@ async function getText(path){return get(path,"text")}
    checked.push({id:row.id,liveStatus:e.quellenstatus||"absent",locales:actual?Object.keys(actual.locales||{}).length:0});
  }
  const adapter=await getText("/assets/frauen/frauen-entry-locale-v1.js");
+ const localAdapter=fs.readFileSync(path.join(root,"assets/frauen/frauen-entry-locale-v1.js"),"utf8");
+ if(adapter!==localAdapter)errors.push({type:"text-reader-adapter-not-deployed-or-stale"});
  const lessonUrl="/lernen/frauen-wissen/?id="+encodeURIComponent(manifest.records[0].id)+"&lang=de";
  const lessonPage=await getText(lessonUrl);
  if(!/<main\b[^>]*id="quiz"/.test(lessonPage) ||
@@ -89,9 +91,11 @@ async function getText(path){return get(path,"text")}
       errors.push({type:"48h-start-page-focus-not-live-exactly-once"});
  }
 
- if(!adapter.includes("function localImageExport("))errors.push({type:"locale-image-export-script-missing"});
  if(!adapter.includes("darAdultPreferredLocaleV1"))errors.push({type:"adult-language-preference-not-loaded"});
- const result={batch:manifest.id,base:BASE,publiclyLive:errors.length===0,checked:checked.length,learningReady:!errors.some(x=>/learning/.test(x.type||"")),focusExpected:process.argv.includes("--expect-focus"),checks:checked,errors,
+ const learningReady=!errors.some(x=>
+   (Array.isArray(x.blockers)&&x.blockers.length>0) ||
+   /learning|reader-adapter|language-preference/.test(x.type||""));
+ const result={batch:manifest.id,base:BASE,publiclyLive:errors.length===0,checked:checked.length,learningReady,focusExpected:process.argv.includes("--expect-focus"),checks:checked,errors,
   notificationEligible:false,
   note:"Actual source, nine locales and reader adapter must be live; this read-only audit is not a push authorization."};
  console.log(JSON.stringify(result,null,2));
