@@ -3,7 +3,7 @@
  const BASE='/apple-tv/',TAD=BASE+'quran/tadabbur/',SCREEN=BASE+'screensaver/',HADITH=BASE+'hadith/';
  const $=id=>document.getElementById(id),DB_NAME='dar-home-content-v1';
  let dbPromise=null,tadPromise=null,saverPromise=null,readyPromise=null,library=null,rotation=null,rotationState=null;
- let quranMemory=new Map(),renderToken=0;
+ let quranMemory=new Map(),renderToken=0,lastLoadError='';
  const say=(el,value)=>{if(el)el.textContent=String(value||'')};
  function openDB(){
   if(!('indexedDB'in window))return Promise.resolve(null);
@@ -206,6 +206,7 @@
     rotation=data;rotationState=state||null;
     return library;
    }catch(error){
+    lastLoadError=String(error?.message||error);console.error('DĀR tvOS content load failed',lastLoadError);
     const cached=await read('saver','library');
     if(cached?.cards?.length){
      library={...cached,byId:new Map(cached.cards.map(card=>[card.id,card])),offline:true,tad:null};
@@ -221,7 +222,7 @@
  function status(){
   const counts={hadith:0,athar:0,quranTad:0};
   for(const card of library?.cards||[])counts[card.module]=(counts[card.module]||0)+1;
-  return {ready:!!library,offline:!!library?.offline,counts,weights:library?.weights||null,mode:rotation?.mode||'shuffleBag',revision:library?.revision||null};
+  return {ready:!!library,offline:!!library?.offline,error:lastLoadError,counts,weights:library?.weights||null,mode:rotation?.mode||'shuffleBag',revision:library?.revision||null};
  }
  function render(){if(!library){say($('saverType'),'DĀR-Bildschirmschoner · wird geladen');say($('saverDe'),'Geprüfte Inhalte werden synchronisiert …');ensureReady().then(()=>{if(library){if(!rotationState?.current)nextCard();else renderCard()}}).catch(()=>{});return}if(!rotationState?.current)nextCard();else renderCard()}
  function tick(now){if(!document.body.classList.contains('saver-open')&&!$('app')?.classList.contains('saver-open'))return;if(!library){ensureReady().then(()=>{if(library)nextCard()});return}advance(now).catch(()=>{})}
