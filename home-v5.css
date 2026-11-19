@@ -1359,3 +1359,16 @@
   opacity:1!important;
   filter:none!important;
 }
+
+/* Keep light-mode text readable while showing the selected scene through each content region. */
+#app[data-home-theme="light"] .hero-left,
+#app[data-home-theme="light"] .hero-right {
+  background:rgba(247,245,228,.72)!important;
+  border-radius:12px;
+}
+#app[data-home-theme="light"] .times-band {
+  background:rgba(247,245,228,.72)!important;
+}
+#app[data-home-theme="light"] .daily-area .audio-area {
+  background:rgba(247,245,228,.76)!important;
+}
