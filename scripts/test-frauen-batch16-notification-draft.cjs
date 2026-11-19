@@ -69,9 +69,29 @@ for(const [change,why] of [
 ]){
   assert.throws(()=>validate({...n,...change}),undefined,why+" unexpectedly accepted");
 }
+// Even with otherwise valid OneSignal segment metadata, every native and
+// Kurdish delivery proof is mandatory before the draft can be authorized.
+const validSegment={
+  ...n,
+  guardStatus:"admin-unlocked",
+  verifiedSegmentType:"knowledge_woman",
+  verifiedSegmentAudience:"adult-app AND knowledge-opt-in",
+  verifiedOptInRecipientCount:12,
+  deliveryLanguageVerification:{...n.deliveryLanguageVerification,
+    iosNativeSdkLocaleBridgeVerified:true,
+    androidNativeSdkLocaleBridgeVerified:true,
+    kurdishPerSubscriptionRoutingVerified:true,
+    targetSegmentOptInVerified:true,
+    allNineInstallationLanguagesVerified:true}
+};
+assert.doesNotThrow(()=>validate(validSegment),"Fully verified notification contract should remain structurally valid");
+for(const flag of ["iosNativeSdkLocaleBridgeVerified","androidNativeSdkLocaleBridgeVerified","kurdishPerSubscriptionRoutingVerified","targetSegmentOptInVerified","allNineInstallationLanguagesVerified"]){
+ const broken={...validSegment,deliveryLanguageVerification:{...validSegment.deliveryLanguageVerification,[flag]:false}};
+ assert.throws(()=>validate(broken),undefined,"Missing "+flag+" was not blocked");
+}
 if(manifest.state==="content-preparation-only"){
   assert.equal(lock.locked,true,"prepared-only release unexpectedly has global push unlocked");
   assert.equal(n.guardStatus,"not-authorized-not-sent","draft notification flagged as approved");
   assert.equal(n.sendStatus,"blocked-until-deployed-and-authorized","draft unexpectedly send-ready");
 }
-console.log("PASS Frauen batch16: nine-language push draft, stable provider UUIDv4, strict scoped audience, dual-lane authorization and four fail-closed negative controls. NO MESSAGE SENT.");
+console.log("PASS Frauen batch16: nine-language push draft, stable provider UUIDv4, strict scoped audience, dual-lane authorization and six negative controls plus five missing-proof checks. NO MESSAGE SENT.");
