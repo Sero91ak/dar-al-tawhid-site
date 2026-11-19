@@ -842,3 +842,13 @@
  #app .reader-arabic{border-right:0;border-bottom:1px solid var(--home4-hair);padding-bottom:20px}
  #app .quran-reader-footer{flex-wrap:wrap}
 }
+
+/* Adhan art stays full-frame; event details live in a readable lower-third. */
+#app #adhanVisual .h4-prayer-image{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;opacity:1!important;filter:none!important;z-index:0!important}
+#app #adhanVisual::before{background:linear-gradient(180deg,rgba(1,10,15,.18) 0%,rgba(1,10,15,.02) 36%,rgba(1,10,15,.17) 62%,rgba(1,10,15,.72) 100%)!important}
+#app #adhanVisual .adhan-lower-third{position:absolute;left:clamp(24px,6vw,110px);bottom:clamp(24px,6vh,72px);z-index:2!important;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:clamp(8px,1.4vh,16px);width:min(560px,calc(100% - 48px));padding:clamp(18px,2.5vw,34px) clamp(20px,3vw,42px);background:linear-gradient(110deg,rgba(3,18,23,.88),rgba(3,18,23,.68));border:1px solid rgba(234,210,159,.48);border-radius:18px;box-shadow:0 16px 55px rgba(0,0,0,.32);backdrop-filter:blur(8px)}
+#app #adhanVisual .adhan-title{font-size:clamp(38px,5.4vw,76px)!important;letter-spacing:.01em;line-height:1.02;text-align:left;text-shadow:0 2px 18px rgba(0,0,0,.46)}
+#app #adhanVisual .adhan-sub{font-size:clamp(15px,1.3vw,20px);color:#f5eedc;letter-spacing:.04em;text-align:left}
+#app #adhanVisual .touchbutton{background:rgba(9,30,30,.78);border:1px solid #d7c494;border-radius:13px;min-height:46px;padding:0 20px}
+@media(max-width:640px){#app #adhanVisual .adhan-lower-third{left:18px;bottom:18px;width:calc(100% - 36px);padding:17px 19px;gap:8px}#app #adhanVisual .adhan-title{font-size:clamp(34px,9vw,54px)!important}#app #adhanVisual .adhan-sub{font-size:15px}}
+@media(max-height:500px){#app #adhanVisual .adhan-lower-third{bottom:12px;left:24px;padding:12px 18px;gap:6px}#app #adhanVisual .adhan-title{font-size:clamp(32px,5vh,54px)!important}}
