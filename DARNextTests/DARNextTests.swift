@@ -61,4 +61,9 @@ struct DARNextTests {
         #expect(questions.allSatisfy { $0.isApprovedAdultContent })
         #expect(questions.allSatisfy { $0.correctIndex >= 0 && $0.correctIndex < $0.answers.count })
     }
+
+    @Test
+    func primaryTabOrderMatchesAdultNavigationContract() {
+        #expect(DARNextTab.allCases.map(\.title) == ["Start", "Quiz", "Beiträge", "Qurʾān", "Mehr"])
+    }
 }
