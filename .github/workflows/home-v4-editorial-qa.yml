@@ -39,7 +39,7 @@ jobs:
           const js=html.split('<script>')[1]?.split('</script>')[0];
           if(!js)throw Error('No inline HOME V2 engine found');
           new Function(js);
-          const required=['fajrAdhanTrack','homeAppearance','homeWallpaperMode','homeWallpaperUpload','homeConnectionStatus','home-v4.css','home-v4.js','home-v5.css','h4ShowVerse','h4ShowHadith','openTadabbur','tadabburPanel','saverMode','quranReaderPanel','quranReciterMode','readerTransliteration','openAppearance'];
+          const required=['fajrAdhanTrack','homeAppearance','homeWallpaperMode','homeWallpaperUpload','homeConnectionStatus','home-v4.css','home-v4.js','home-v5.css','h4ShowVerse','h4ShowHadith','openTadabbur','tadabburPanel','saverMode','quranReaderPanel','quranReciterMode','readerTransliteration','openAppearance','appearancePopover','tadabbur-inline','data-home-settings','selectSettingsTab'];
           for(const key of required)if(!html.includes(key))throw Error('Missing HOME V3 feature: '+key);
           if(html.includes('<nav class="footnav"'))throw Error('Bottom tabs must not exist');
           console.log('HOME V5 source, no-bottom-tabs, settings: PASS');
@@ -176,13 +176,27 @@ jobs:
             WebDriverWait(driver,25).until(EC.element_to_be_clickable((By.ID,'openSettings')))
             external=driver.find_elements(By.CSS_SELECTOR,'.home-nav a,.calendar-card[href]')
             if external:errors.append('HOME section controls must not navigate to another application')
+            driver.find_element(By.ID,'openAppearance').click()
+            WebDriverWait(driver,5).until(lambda d:d.find_element(By.ID,'appearancePopover').get_attribute('hidden') is None)
+            driver.find_element(By.CSS_SELECTOR,'[data-home-theme-choice="light"]').click()
+            if driver.find_element(By.ID,'app').get_attribute('data-home-theme')!='light':errors.append('Anchored appearance picker did not apply the selected theme')
+            if driver.find_element(By.ID,'appearancePopover').get_attribute('hidden') is None:errors.append('Appearance picker did not close after selection')
+            driver.find_element(By.ID,'openAppearance').click()
+            driver.find_element(By.CSS_SELECTOR,'[data-home-theme-choice="dark"]').click()
+            print('DIRECT_APPEARANCE_PICKER: PASS',flush=True)
             driver.find_element(By.ID,'openCalendarPanel').click()
             WebDriverWait(driver,8).until(lambda d:d.find_element(By.ID,'calendarPanel').get_attribute('hidden') is None)
+            route_state=driver.execute_script("return {active:document.getElementById('calendarPanel').classList.contains('is-active'),screenHidden:document.getElementById('mainScreen').hidden,covered:document.getElementById('mainScreen').classList.contains('view-covered'),transition:getComputedStyle(document.getElementById('calendarPanel')).transitionDuration}")
+            if not route_state['active'] or route_state['screenHidden'] or not route_state['covered'] or '0.36s' not in route_state['transition']:errors.append('Calendar did not open as an animated in-app route with a retained HOME back stack')
+            print('HOME_PUSH_ROUTE',route_state,flush=True)
             calendar_text=driver.find_element(By.ID,'calendarPanel').text
             if '1. Ramaḍān' not in calendar_text or 'ʿĪd al-Fiṭr' not in calendar_text or '10. Muḥarram' not in calendar_text:errors.append('The local Islamic festival calendar is incomplete')
             driver.find_element(By.CSS_SELECTOR,'#calendarPanel [data-close-home-view]').click()
+            WebDriverWait(driver,5).until(lambda d:d.find_element(By.ID,'calendarPanel').get_attribute('hidden') is not None)
             driver.find_element(By.CSS_SELECTOR,'[data-home-action="quran"]').click()
             WebDriverWait(driver,10).until(lambda d:d.find_element(By.ID,'quranReaderPanel').get_attribute('hidden') is None)
+            qroute=driver.execute_script("return {active:document.getElementById('quranReaderPanel').classList.contains('is-active'),screenHidden:document.getElementById('mainScreen').hidden,settings:!!document.querySelector('#quranReaderPanel [data-home-settings]')}")
+            if not qroute['active'] or qroute['screenHidden'] or not qroute['settings']:errors.append('Quran did not push in as a local route with contextual settings')
             WebDriverWait(driver,15).until(lambda d:bool(d.find_element(By.ID,'readerArabic').text.strip()) and bool(d.find_element(By.ID,'readerGerman').text.strip()))
             if not driver.find_element(By.ID,'readerSurah').get_attribute('value'):errors.append('Quran reader did not provide local Surah selection')
             if not driver.find_element(By.ID,'readerReciter').get_attribute('value'):errors.append('Quran reader did not provide reciter selection')
@@ -190,7 +204,19 @@ jobs:
             saved_pref=driver.execute_script("return JSON.parse(localStorage.getItem('dar-home-cinematic-v2')||'{}').readerTransliteration")
             if saved_pref!='hide':errors.append('Quran reader transliteration preference was not saved')
             driver.find_element(By.ID,'readerShowTransliteration').click()
-            driver.find_element(By.ID,'closeQuranReader').click()
+            driver.find_element(By.CSS_SELECTOR,'#quranReaderPanel [data-home-settings]').click()
+            WebDriverWait(driver,5).until(lambda d:'open' in d.find_element(By.ID,'settingsOverlay').get_attribute('class'))
+            city_before=driver.find_element(By.ID,'city').get_attribute('value')
+            driver.find_element(By.ID,'city').clear()
+            driver.find_element(By.ID,'city').send_keys('Köln')
+            driver.find_element(By.CSS_SELECTOR,'button[data-tab="inhalte"]').click()
+            if driver.find_element(By.ID,'city').get_attribute('value')!='Köln':errors.append('Changing settings tab discarded the current location edit')
+            driver.find_element(By.ID,'closeSettings').click()
+            if driver.find_element(By.ID,'quranReaderPanel').get_attribute('hidden') is not None or not driver.find_element(By.ID,'quranReaderPanel').get_attribute('class').find('is-active')>=0:errors.append('Closing settings did not return to the active Quran route')
+            driver.execute_script("const target=document.getElementById('readerGerman');target.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,pointerType:'touch',clientX:250,clientY:260}));document.dispatchEvent(new PointerEvent('pointerup',{bubbles:true,pointerType:'touch',clientX:390,clientY:263}))")
+            WebDriverWait(driver,6).until(lambda d:d.find_element(By.ID,'quranReaderPanel').get_attribute('hidden') is not None)
+            WebDriverWait(driver,5).until(lambda d:not d.find_element(By.ID,'mainScreen').get_attribute('class').find('view-covered')>=0)
+            print('QURAN_PUSH_SETTINGS_RETURN_AND_SWIPE_BACK: PASS',flush=True)
             print('QURAN_READER_AR_DE_TRANSLITERATION: PASS',flush=True)
             driver.find_element(By.CSS_SELECTOR,'[data-home-action="prayer"]').click()
             driver.find_element(By.CSS_SELECTOR,'[data-home-action="prayer"]').click()
@@ -363,6 +389,9 @@ jobs:
             driver.find_element(By.ID,'openTadabbur').click()
             WebDriverWait(driver,150).until(lambda d:'4774' in d.find_element(By.ID,'tadabburStatus').text or '1 geprüfte' in d.find_element(By.ID,'tadabburStatus').text or '1 geprüfte Überlieferung' in d.find_element(By.ID,'tadabburStatus').text)
             WebDriverWait(driver,10).until(lambda d:len(d.find_elements(By.CSS_SELECTOR,'#tadabburResults .tadabbur-item'))>0)
+            tad_layout=driver.execute_script("return {inline:document.getElementById('tadabburPanel').parentElement.classList.contains('daily-story'),homeHidden:document.getElementById('mainScreen').hidden,route:document.getElementById('tadabburPanel').classList.contains('home-view'),scroll:getComputedStyle(document.querySelector('.daily-story')).overflowY}")
+            if not tad_layout['inline'] or tad_layout['homeHidden'] or tad_layout['route'] or tad_layout['scroll']!='auto':errors.append('Tadabbur did not expand inline in the readable daily-text column')
+            print('TADABBUR_INLINE_LAYOUT',tad_layout,flush=True)
             tad_text=driver.find_element(By.ID,'tadabburResults').text
             print('HOME_TADABBUR_EXACT_LOOKUP',tad_text[:500],flush=True)
             if 'Das Fasten ist ein Schutzschild.' not in tad_text or 'Ṣaḥīḥ al-Buḫārī, Nr. 1904' not in tad_text:errors.append('Exact verse Tadabbur lookup or source citation failed')
