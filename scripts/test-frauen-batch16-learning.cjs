@@ -24,7 +24,7 @@ assert.match(page,/dar-reading-surface-v1\.js/);
 assert.match(css,/focus-visible/);
 assert.match(css,/\[dir="rtl"\]/);
 assert.match(adapter,/function attachLearningButton\(/);
-assert.match(adapter,/href="\/lernen\/frauen-wissen\//);
+assert.match(adapter,/learningHref="\\/lernen\\/frauen-wissen\\//,"Learning deep-link target must be the existing canonical lesson route");
 assert.match(adapter,/attachLearningButton\(article,item\)/);
 const data={};
 for(const p of [...new Set(batch.records.map(r=>r.sourceFile))])data[p]=read(p);
