@@ -221,7 +221,8 @@
  function tick(now){if(!document.body.classList.contains('saver-open')&&!$('app')?.classList.contains('saver-open'))return;if(!library){ensureReady().then(()=>{if(library)nextCard()});return}advance(now).catch(()=>{})}
  function install(){
   $('openTadabbur')?.addEventListener('click',openTadabbur);
-  $('nextTadabbur')?.addEventListener('click',openTadabbur);\n  $('closeTadabbur')?.addEventListener('click',()=>{if($('tadabburPanel'))$('tadabburPanel').hidden=true});
+  $('nextTadabbur')?.addEventListener('click',openTadabbur);
+  $('closeTadabbur')?.addEventListener('click',()=>{if($('tadabburPanel'))$('tadabburPanel').hidden=true});
   $('saverMode')?.addEventListener('change',e=>{const isTv=e.target.value==='tvos',field=$('saverRotate')?.closest('.field');if(field)field.hidden=isTv;if(isTv)ensureReady()});
   if($('saverMode')?.value==='tvos')ensureReady();
   window.darTvScreensaver={render,tick,ensureReady,status};
