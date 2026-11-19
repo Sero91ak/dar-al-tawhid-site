@@ -244,7 +244,7 @@
   current.duration=Math.max(Number(current.duration)||0,durationFor(card,library.display,rendered));
   await write('state','tvos-bag',rotationState);
  }
- function render(){if(!library){say($('saverType'),'DĀR-Bildschoner · wird geladen');say($('saverDe'),'Geprüfte Inhalte werden synchronisiert …');ensureReady().then(()=>{if(library){if(!rotationState?.current)nextCard();else renderCurrent()}}).catch(()=>{});return}if(!rotationState?.current)nextCard();else renderCurrent()}
+ function render(){if(!library){say($('saverType'),'DĀR-Bildschirmschoner · wird geladen');say($('saverDe'),'Geprüfte Inhalte werden synchronisiert …');ensureReady().then(()=>{if(library){if(!rotationState?.current)nextCard();else renderCurrent()}}).catch(()=>{});return}if(!rotationState?.current)nextCard();else renderCurrent()}
  function tick(now){if(!document.body.classList.contains('saver-open')&&!$('app')?.classList.contains('saver-open'))return;if(!library){ensureReady().then(()=>{if(library)nextCard()});return}advance(now).catch(()=>{})}
  function install(){
   $('openTadabbur')?.addEventListener('click',()=>{const p=$('tadabburPanel');if(p&&!p.hidden){p.hidden=true;p.setAttribute('aria-expanded','false');$('openTadabbur').setAttribute('aria-expanded','false');return}$('openTadabbur')?.setAttribute('aria-expanded','true');openTadabbur()});
