@@ -44,7 +44,7 @@ for(const record of batch.records){
   const pack=entry.locales[code];
   assert.ok(pack&&pack.preview&&pack.statement&&pack.lesson&&pack.sharh&&pack.source);
   assert.equal(pack.dir,["ar","ckb"].includes(code)?"rtl":"ltr");
-  const quiz=api.questions(record.id,locale.entryIds,locale.entries,code);
+  const quiz=api.questions(record.id,locale.entryIds,locale.entries,code,new Set(batch.records.map(r=>r.id)));
   assert.equal(quiz.length,4);
   for(const q of quiz){
    assert.ok(q.question.length>=10,"Question must be translated "+record.id+" "+code);
@@ -66,6 +66,8 @@ function apiFirst(value){
 }
 assert.equal(checked,144);
 assert.equal(questions,576);
+assert.throws(()=>api.questions(batch.records[0].id,locale.entryIds,locale.entries,"de",new Set([batch.records[0].id])),/Not enough verified published entries/,"Quiz must be closed without two published distractors");
+assert.throws(()=>api.questions(batch.records[0].id,locale.entryIds,locale.entries,"de",new Set(batch.records.slice(1).map(r=>r.id))),/not approved/,"Unapproved article must not be a question source");
 const focusId="neufokus-frauenwissen-16-20261118";
 for(const p of ["content/focus-feed/feed-index.json","content/staging/focus-feed/feed-index.json"]){
  const feed=read(p),matches=(feed.items||[]).filter(x=>x.id===focusId);
