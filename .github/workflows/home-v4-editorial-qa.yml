@@ -136,7 +136,7 @@ jobs:
                   v4:!!document.querySelector('link[href^="/home-v4.css"]'),footerTabs:!!document.querySelector('.footnav'),
                   icons:document.querySelectorAll('.settings-icons').length,theme:document.getElementById('app').dataset.homeTheme,
                   fontSizes:{dailyDe:parseFloat(getComputedStyle(document.getElementById('dailyDe')).fontSize),source:parseFloat(getComputedStyle(document.getElementById('dailySource')).fontSize),counter:parseFloat(getComputedStyle(document.querySelector('.counter')).fontSize),ptime:parseFloat(getComputedStyle(document.querySelector('.prayer-cell .ptime')).fontSize)},lineSpacing:{daily:parseFloat(getComputedStyle(document.getElementById('dailyDe')).lineHeight)/parseFloat(getComputedStyle(document.getElementById('dailyDe')).fontSize),source:parseFloat(getComputedStyle(document.getElementById('dailySource')).lineHeight)/parseFloat(getComputedStyle(document.getElementById('dailySource')).fontSize)},
-                  heroRight:{display:getComputedStyle(document.querySelector('.hero-right')).display,width:document.querySelector('.hero-right').getBoundingClientRect().width},
+                  heroRight:{display:getComputedStyle(document.querySelector('.hero-right')).display,width:document.querySelector('.hero-right').getBoundingClientRect().width,height:document.querySelector('.hero-right').getBoundingClientRect().height,storyHeight:document.querySelector('.hero-right .daily-story').getBoundingClientRect().height},
                   prayerArtCount:document.querySelectorAll('.prayer-glyph').length,arabicHomeVisible:[...document.querySelectorAll('.hero-verse,.bismillah,#dailyArabic,.next-arabic')].filter(x=>getComputedStyle(x).display!=='none'&&x.textContent.trim()).length,
                   boxes,wallpaper:getComputedStyle(document.getElementById('app')).backgroundImage}
               """)
@@ -158,6 +158,7 @@ jobs:
               if data['prayerArtCount']!=0:errors.append(f'{w}x{h}: Adhan-only artwork leaked into the five prayer-time cards')
               if data['arabicHomeVisible']!=0:errors.append(f'{w}x{h}: Arabic display calligraphy should be hidden on HOME')
               if h>w and data['heroRight']['display']=='none':errors.append(f'{w}x{h}: portrait hides the daily verse')
+              if data['heroRight']['height']>0 and data['heroRight']['storyHeight']<data['heroRight']['height']*.72:errors.append(f'{w}x{h}: right reading column does not use its available hero height')
               if h>w and data['boxes']['dailyDe']['height']<=0:errors.append(f'{w}x{h}: German daily translation is hidden in portrait')
               if data['boxes']['openSettings']['width']<44:errors.append(f'{w}x{h}: settings touch target below 44px')
               for n in ['mainScreen','nextName','times','audioName','openSettings']:
@@ -182,13 +183,15 @@ jobs:
             driver.find_element(By.CSS_SELECTOR,'[data-home-theme-choice="light"]').click()
             if driver.find_element(By.ID,'app').get_attribute('data-home-theme')!='light':errors.append('Anchored appearance picker did not apply the selected theme')
             if driver.find_element(By.ID,'appearancePopover').get_attribute('hidden') is None:errors.append('Appearance picker did not close after selection')
-            driver.find_element(By.ID,'openAppearance').click()
-            driver.find_element(By.CSS_SELECTOR,'[data-home-theme-choice="dark"]').click()
+            light_wallpaper=driver.execute_script("return {image:getComputedStyle(document.getElementById('app')).backgroundImage,artworkOpacity:parseFloat(getComputedStyle(document.querySelector('.artwork')).opacity)}")
+            print('LIGHT_WALLPAPER_VISIBILITY',light_wallpaper,flush=True)
+            if 'url(' not in light_wallpaper['image'] or light_wallpaper['artworkOpacity']>=.2:errors.append('Selected wallpaper is hidden beneath the ornamental artwork in light mode')
             print('DIRECT_APPEARANCE_PICKER: PASS',flush=True)
             driver.find_element(By.ID,'openCalendarPanel').click()
             WebDriverWait(driver,8).until(lambda d:d.find_element(By.ID,'calendarPanel').get_attribute('hidden') is None)
-            route_state=driver.execute_script("return {active:document.getElementById('calendarPanel').classList.contains('is-active'),screenHidden:document.getElementById('mainScreen').hidden,covered:document.getElementById('mainScreen').classList.contains('view-covered'),transition:getComputedStyle(document.getElementById('calendarPanel')).transitionDuration}")
+            route_state=driver.execute_script("const p=document.querySelector('#calendarPanel .home-view-panel');return {active:document.getElementById('calendarPanel').classList.contains('is-active'),screenHidden:document.getElementById('mainScreen').hidden,covered:document.getElementById('mainScreen').classList.contains('view-covered'),transition:getComputedStyle(document.getElementById('calendarPanel')).transitionDuration,background:getComputedStyle(p).backgroundImage}")
             if not route_state['active'] or route_state['screenHidden'] or not route_state['covered'] or '0.36s' not in route_state['transition']:errors.append('Calendar did not open as an animated in-app route with a retained HOME back stack')
+            if '0.80' not in route_state['background']:errors.append('Calendar panel is opaque and hides the selected HOME wallpaper in light mode')
             print('HOME_PUSH_ROUTE',route_state,flush=True)
             time.sleep(.4)
             calendar_text=driver.find_element(By.ID,'calendarPanel').text
@@ -197,8 +200,9 @@ jobs:
             WebDriverWait(driver,5).until(lambda d:d.find_element(By.ID,'calendarPanel').get_attribute('hidden') is not None)
             driver.find_element(By.CSS_SELECTOR,'[data-home-action="quran"]').click()
             WebDriverWait(driver,10).until(lambda d:d.find_element(By.ID,'quranReaderPanel').get_attribute('hidden') is None)
-            qroute=driver.execute_script("return {active:document.getElementById('quranReaderPanel').classList.contains('is-active'),screenHidden:document.getElementById('mainScreen').hidden,settings:!!document.querySelector('#quranReaderPanel [data-home-settings]')}")
+            qroute=driver.execute_script("return {active:document.getElementById('quranReaderPanel').classList.contains('is-active'),screenHidden:document.getElementById('mainScreen').hidden,settings:!!document.querySelector('#quranReaderPanel [data-home-settings]'),background:getComputedStyle(document.querySelector('#quranReaderPanel .quran-reader-shell')).backgroundImage}")
             if not qroute['active'] or qroute['screenHidden'] or not qroute['settings']:errors.append('Quran did not push in as a local route with contextual settings')
+            if '0.82' not in qroute['background']:errors.append('Quran reader hides the selected HOME wallpaper beneath an opaque panel')
             time.sleep(.4)
             WebDriverWait(driver,15).until(lambda d:bool(d.find_element(By.ID,'readerArabic').text.strip()) and bool(d.find_element(By.ID,'readerGerman').text.strip()))
             if not driver.find_element(By.ID,'readerSurah').get_attribute('value'):errors.append('Quran reader did not provide local Surah selection')
@@ -418,6 +422,14 @@ jobs:
             WebDriverWait(driver,15).until(lambda d:d.execute_script("const e=document.getElementById('saverSource'),r=e?.getBoundingClientRect();return !!e&&getComputedStyle(e).display!=='none'&&r?.width>0&&!!e.textContent.trim()"))
             tv_card=driver.execute_script("return {type:document.getElementById('saverType').textContent,source:document.getElementById('saverSource').textContent,narrator:document.getElementById('saverNarrator').textContent}")
             print('TVOS_ROTATION_CARD',tv_card,flush=True)
+            duration_check=driver.execute_script("""
+              const s=window.darTvScreensaver.status(),text=['saverAr','saverDe','saverNarrator','saverStatement','saverSource'].map(id=>document.getElementById(id)?.textContent||'').join(' ').replace(/\s+/g,' ').trim();
+              const words=text.split(' ').filter(Boolean).length,letters=(text.match(/[\p{L}\p{N}]/gu)||[]).length;
+              const expected=Math.max(18,Math.min(180,Math.ceil(Math.max(16+words*.35,8+words*60/180,letters/22))));
+              return {words,letters,expected,actual:s.currentDuration,textLength:text.length}
+            """)
+            print('TVOS_ADAPTIVE_DURATION',duration_check,flush=True)
+            if duration_check['actual']!=duration_check['expected']:errors.append('Screensaver duration does not follow the visible word and character length')
             driver.execute_script("document.getElementById('saver').click()")
             driver.execute_cdp_cmd('Network.enable',{})
             driver.execute_cdp_cmd('Network.setBlockedURLs',{'urls':['https://dar-al-tawhid.de/*','https://www.dar-al-tawhid.de/*']})
