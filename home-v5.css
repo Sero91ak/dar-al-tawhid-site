@@ -1130,7 +1130,7 @@
   will-change:transform;
 }
 #app .home-view.is-active {transform:translate3d(0,0,0);opacity:1}
-#app .home-view.is-leaving {transform:translate3d(100%,0,0);opacity:.96}
+#app .home-view.is-leaving {transform:translate3d(100%,0,0);opacity:.96;pointer-events:none}
 #app .home-view.route-entering {transform:translate3d(100%,0,0)}
 #app .route-settings {
   display:inline-grid;
