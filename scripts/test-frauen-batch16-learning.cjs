@@ -37,7 +37,11 @@ for(const record of batch.records){
  assert.equal(entry.id,record.id);
  assert.equal(entry.area,record.area);
  assert.equal(entry.sourceUrl,original[0].direktnachweisUrl);
- assert.equal(original[0].quellenstatus,"nicht-anzeigen","Hidden source must remain hidden before publication");
+ if(batch.state==="published-live-verified"){
+  assert.equal(original[0].quellenstatus,"geprueft","Live-verified manifest requires a published original");
+ }else{
+  assert.equal(original[0].quellenstatus,"nicht-anzeigen","Hidden source must remain hidden before publication");
+ }
  assert.equal(original[0].contentId,record.id);
  assert.equal(original[0].localeCatalogId,record.id);
  for(const code of batch.requiredLocales){
@@ -82,9 +86,16 @@ const focusId="neufokus-frauenwissen-16-20261118";
 for(const p of ["content/focus-feed/feed-index.json","content/staging/focus-feed/feed-index.json"]){
  const feed=read(p),matches=(feed.items||[]).filter(x=>x.id===focusId);
  assert.equal(matches.length,1,"Exactly one 48h focus item per feed");
- const card=matches[0];assert.equal(card.status,"draft","Focus not allowed live before 16 reports");
+ const card=matches[0];
  assert.equal(card.visibility,"48h");assert.equal(card.targetUrl,"frauen");
  assert.equal(card.targetId,"frauen");assert.equal(card.targetType,"category");
- assert.equal(card.expiresAt,null,"Real 48h window starts at actual publish, not staging");
+ if(card.status==="draft"){
+  assert.equal(card.expiresAt,null,"Unpublished focus must not start its 48h clock");
+ }else{
+  assert.equal(batch.state,"published-live-verified","Public focus requires a verified release");
+  assert.ok(["live","expired"].includes(card.status),"Unexpected public focus state");
+  const started=Date.parse(card.startsAt||""),ended=Date.parse(card.expiresAt||"");
+  assert.ok(Number.isFinite(started)&&ended-started===48*3600000,"Live focus must last exactly 48h");
+ }
 }
 console.log("PASS Frauen learning: 16 unique source-bound records × 9 locales × 4 questions = 576 questions; canonical URLs and RTL preserved; no learning or focus release before approval.");
