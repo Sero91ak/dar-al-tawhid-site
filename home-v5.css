@@ -1291,19 +1291,19 @@
 }
 #app .tadabbur-inline { flex:0 0 auto; }
 #app .home-view {
-  background:rgba(7,27,32,.70);
+  background:rgba(7,27,32,.38);
   backdrop-filter:blur(5px);
 }
 #app .quran-reader-view {
-  background:rgba(3,14,17,.48);
+  background:rgba(3,14,17,.20);
   backdrop-filter:blur(5px);
 }
 #app .quran-reader-shell {
-  background:linear-gradient(145deg,rgba(9,35,35,.82),rgba(4,20,24,.84));
+  background:linear-gradient(145deg,rgba(9,35,35,.68),rgba(4,20,24,.70));
   backdrop-filter:blur(7px);
 }
 #app .calendar-view .home-view-panel {
-  background:linear-gradient(145deg,rgba(10,39,41,.82),rgba(5,23,28,.86));
+  background:linear-gradient(145deg,rgba(10,39,41,.66),rgba(5,23,28,.68));
   backdrop-filter:blur(7px);
 }
 #app[data-home-theme="light"] .lightgrading {
@@ -1312,15 +1312,15 @@
     linear-gradient(0deg,rgba(243,241,231,.34) 0%,rgba(243,241,231,.12) 60%,rgba(243,241,231,.20) 100%)!important;
 }
 #app[data-home-theme="light"] .home-view {
-  background:rgba(243,241,231,.60);
+  background:rgba(243,241,231,.28);
   backdrop-filter:blur(5px);
 }
-#app[data-home-theme="light"] .quran-reader-view { background:rgba(243,241,231,.38); }
+#app[data-home-theme="light"] .quran-reader-view { background:rgba(243,241,231,.16); }
 #app[data-home-theme="light"] .quran-reader-shell {
-  background:linear-gradient(145deg,rgba(249,246,238,.80),rgba(235,232,221,.84));
+  background:linear-gradient(145deg,rgba(249,246,238,.60),rgba(235,232,221,.64));
 }
 #app[data-home-theme="light"] .calendar-view .home-view-panel {
-  background:linear-gradient(145deg,rgba(251,250,243,.80),rgba(232,238,229,.84));
+  background:linear-gradient(145deg,rgba(251,250,243,.58),rgba(232,238,229,.62));
 }
 #app[data-home-theme="light"] #saver::before {
   background:radial-gradient(ellipse at center,rgba(243,241,231,.34) 0%,rgba(243,241,231,.22) 67%,rgba(243,241,231,.12) 100%);
