@@ -7,6 +7,8 @@
  const icon=name=>ROOT+'/assets/dar-3d-icons/'+name+'.png';
  let wallpapers=[
   {id:'dar-wide',label:'DĀR · Weites Motiv',url:ROOT+'/assets/home-v1194/hero-wide-adobe.jpg'},
+  {id:'dar-mobile',label:'DĀR · Hochformat-Motiv',url:ROOT+'/assets/home-v1194/hero-mobile-adobe.jpg'},
+  {id:'dar-study',label:'DĀR · Wissensraum',url:ROOT+'/assets/home-v1194/study-runway.jpg'},
   {id:'prayer-cinema',label:'Gebet · Cinematic',url:ROOT+'/kids/assets/kids-salah-v1262/cinematic-still.jpg'},
   {id:'tv-kaaba-day',label:'Kaʿba · Tag',url:'/media/apple-tv/tv-kaaba-day.jpg',native:true},
   {id:'tv-kaaba-sunrise',label:'Kaʿba · Sonnenaufgang',url:'/media/apple-tv/tv-kaaba-sunrise.jpg',native:true},
@@ -19,7 +21,7 @@
  try{const from=JSON.parse(localStorage.getItem(KEY)||'{}');if(from&&typeof from==='object'&&!Array.isArray(from)){prefs={...prefs,...from}}}catch{}
  const safeHTML=(str)=>String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
  function imageFor(name){let w=wallpapers.find(x=>x.id===name);if(name==='custom'){const raw=localStorage.getItem(KEY+'-wallpaper')||'';return /^data:image\/(?:png|jpeg|webp);base64,/i.test(raw)?raw:''}return w?.url||''}
- function automaticWallpaperId(){const hour=new Date().getHours(),period=hour>=6&&hour<17?'day':'night';let choices=wallpapers.filter(x=>x.native&&x.period===period);if(!choices.length)choices=wallpapers.filter(x=>x.native);return choices[Math.floor(Date.now()/21600000)%Math.max(1,choices.length)]?.id||'tv-kaaba-day'}
+ function automaticWallpaperId(){const hour=new Date().getHours(),period=hour>=6&&hour<17?'day':'night';let choices=wallpapers.filter(x=>x.native&&(x.period===period||x.period==='any'));if(!choices.length)choices=wallpapers.filter(x=>x.native);return choices[Math.floor(Date.now()/21600000)%Math.max(1,choices.length)]?.id||'tv-kaaba-day'}
  function resolveWallpaper(name){return name==='auto'?automaticWallpaperId():name}
  function store(){try{localStorage.setItem(KEY,JSON.stringify(prefs))}catch(e){warn('Einstellungen konnten nicht gespeichert werden')}}
  function warn(msg){const t=$('toast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3900)}
@@ -37,7 +39,9 @@
    saver.style.backgroundImage=sbg?'url("'+sbg.replaceAll('"','%22')+'")':'none';
   }
   const adhan=$('adhanVisual');if(adhan){
-   adhan.style.backgroundImage=prefs.adhanCinema&&bg?'url("'+bg.replaceAll('"','%22')+'")':'none';
+   const fallback='/media/apple-tv/tv-kaaba-day.jpg';
+   const selected=prefs.adhanCinema&&bg?bg:fallback;
+   adhan.style.backgroundImage='url("'+selected.replaceAll('"','%22')+'")';
   }
   const mode=$('homeAppearance');if(mode)mode.value=prefs.theme;
   const legacyTheme=$('theme');if(legacyTheme)legacyTheme.value=prefs.theme==='light'?'ivory':'night';
@@ -57,11 +61,13 @@
    b.addEventListener('click',()=>{prefs.theme=prefs.theme==='dark'?'light':'dark';store();apply()});
    top.parentNode.insertBefore(b,top);
   }
-  const navIcons={openCities:'compass',showHadith:'hadith',showQuran:'quran',startSaver:'image'};
-  for(const [id,name] of Object.entries(navIcons)){
-   const b=$(id);if(!b||b.querySelector('.nav-icon'))continue;
-   const img=document.createElement('img');img.src=icon(name);img.className='nav-icon';img.alt='';img.setAttribute('aria-hidden','true');b.insertBefore(img,b.firstChild);
+  const actionIcons={openSettings:'settings',addCity:'compass',previewCities:'calendar',testQuran:'headphones',h4ShowVerse:'quran',h4ShowHadith:'hadith',loadNewContent:'more',previewAdhan:'bell',previewFajrAdhan:'bell',saverPreview:'image',homeGalleryReset:'home',homeRefreshNow:'widgets',syncNow:'widgets',stopAdhan:'bell'};
+  for(const [id,name] of Object.entries(actionIcons)){
+   const b=$(id);if(!b||b.querySelector('.h3-action-icon')||b.classList.contains('round'))continue;
+   const img=document.createElement('img');img.src=icon(name);img.className='h3-action-icon';img.alt='';img.setAttribute('aria-hidden','true');b.classList.add('h3-icon-action');b.insertBefore(img,b.firstChild);
   }
+  const sectionIcons=[['.times-band','prayer'],['.daily-story','quran'],['.audio-area','audio']];
+  for(const [selector,name] of sectionIcons){const section=document.querySelector(selector);if(section&&!section.querySelector(':scope > .h3-section-emblem')){const img=new Image();img.src=icon(name);img.className='h3-section-emblem';img.alt='';img.setAttribute('aria-hidden','true');section.prepend(img)}}
   const nav=document.querySelector('.footnav');
   if(nav&&!$('h3FooterSettings')){
    const b=document.createElement('button');b.id='h3FooterSettings';b.className='touchbutton';
@@ -69,9 +75,13 @@
    b.append(i,document.createTextNode(' Einstellungen'));b.addEventListener('click',()=>top?.click());nav.append(b);
   }
   for(const btn of document.querySelectorAll('.prayer-cell')){
-   if(btn.querySelector('img'))continue;
-   const img=new Image();img.src=ROOT+'/test/assets/prayer-motifs/'+btn.dataset.prayer+'.webp';img.className='prayer-glyph';img.alt='';img.setAttribute('aria-hidden','true');
-   img.addEventListener('error',()=>{img.src=icon('prayer')},{once:true});btn.insertBefore(img,btn.firstChild);
+   const name=btn.dataset.prayer;
+   const pname=btn.querySelector('.pname'),ptime=btn.querySelector('.ptime');
+   if(pname&&ptime&&!btn.querySelector('.prayer-labels')){const labels=document.createElement('span');labels.className='prayer-labels';labels.append(pname,ptime);btn.append(labels)}
+   if(btn.querySelector('img.prayer-glyph'))continue;
+   const img=new Image();img.src='/media/apple-tv/adhan-'+name+'-thumb.jpg';img.className='prayer-glyph';img.alt='';img.setAttribute('aria-hidden','true');img.dataset.fallback='native';
+   img.addEventListener('error',()=>{if(img.dataset.fallback==='native'){img.dataset.fallback='web';img.src=ROOT+'/test/assets/prayer-motifs/'+name+'.webp'}else if(img.dataset.fallback==='web'){img.dataset.fallback='icon';img.classList.add('h3-icon-fallback');img.src=icon('prayer')}else img.style.display='none'});
+   btn.insertBefore(img,btn.firstChild);
   }
  }
  function makeWallpaperGallery(){
@@ -82,7 +92,7 @@
   for(const item of opts){
    const b=document.createElement('button');b.className='wallpaper-option';b.type='button';b.dataset.wallpaper=item.id;
    b.setAttribute('aria-pressed',String(prefs.wallpaper===item.id));
-   if(item.url){const img=new Image();img.src=item.url;img.alt='Hintergrund: '+item.label;img.loading='lazy';b.append(img)}
+   if(item.url){const img=new Image();img.src=item.thumbnail||item.url;img.alt='Hintergrund: '+item.label;img.loading='lazy';b.append(img)}
    else{const blank=document.createElement('div');blank.style.cssText='aspect-ratio:16/9;background:linear-gradient(130deg,#09272a,#224c3e);border-radius:7px';b.append(blank)}
    const title=document.createElement('strong');title.textContent=item.label;b.append(title);
    b.addEventListener('click',()=>{prefs.wallpaper=item.id;prefs.wallpaperMode='manual';const mode=$('homeWallpaperMode');if(mode)mode.value='manual';store();apply()});parent.append(b);
