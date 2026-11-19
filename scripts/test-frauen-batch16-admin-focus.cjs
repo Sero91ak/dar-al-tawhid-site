@@ -4,7 +4,7 @@
  * Mocks GitHub state in memory. No real worker requests, commits, pushes. */
 const fs=require("node:fs"),path=require("node:path"),assert=require("node:assert/strict");
 const root=path.resolve(__dirname,".."),read=p=>JSON.parse(fs.readFileSync(path.join(root,p),"utf8"));
-const keys=["content/focus-feed/feed-index.json","content/admin/frauen-batch-16-2026-11-18.json","assets/frauen/frauen-neufokus-v1.json","assets/frauen/frauen-entry-locales-v1.json"];
+const keys=["content/focus-feed/feed-index.json","content/staging/focus-feed/feed-index.json","content/admin/frauen-batch-16-2026-11-18.json","assets/frauen/frauen-neufokus-v1.json","assets/frauen/frauen-entry-locales-v1.json"];
 const batch=read(keys[1]),sources=[...new Set(batch.records.map(r=>r.sourceFile))];
 const db=Object.fromEntries([...keys,...sources].map(p=>[p,read(p)]));
 let writes=0;
