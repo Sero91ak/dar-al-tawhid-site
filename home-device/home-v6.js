@@ -2,7 +2,7 @@
 (()=>{'use strict';
  const BASE='/apple-tv/',TAD=BASE+'quran/tadabbur/',SCREEN=BASE+'screensaver/',HADITH=BASE+'hadith/';
  const $=id=>document.getElementById(id),DB_NAME='dar-home-content-v1';
- let dbPromise=null,tadPromise=null,saverPromise=null,library=null,rotation=null,rotationState=null;
+ let dbPromise=null,tadPromise=null,saverPromise=null,readyPromise=null,library=null,rotation=null,rotationState=null;
  let quranMemory=new Map(),renderToken=0;
  const say=(el,value)=>{if(el)el.textContent=String(value||'')};
  function openDB(){
@@ -24,7 +24,7 @@
  function refOK(ref){return typeof ref==='string'&&/^(?:[1-9][0-9]{0,2}):(?:[1-9][0-9]{0,2})$/.test(ref)}
  function refMap(entries){const m=new Map();for(const e of entries){if(!m.has(e.reference))m.set(e.reference,[]);m.get(e.reference).push(e)}return m}
  function tadValid(e){return !!e&&refOK(e.reference)&&typeof e.text==='string'&&e.text.trim().length>0&&e.text.length<=420&&typeof e.narrator==='string'&&e.narrator.trim()&&typeof e.generation==='string'&&typeof e.source==='string'&&e.source.trim()&&typeof e.grading==='string'&&e.grading.trim()}
- function safeFile(path){return typeof path==='string'&&/^[A-Za-z0-9._-]+\\.json$/.test(path)}
+ function safeFile(path){return typeof path==='string'&&/^[A-Za-z0-9._-]+\.json$/.test(path)}
  function notifyProgress(done,total){const e=$('tadabburStatus');if(e)say(e,'DĀR-Tadabbur wird abgeglichen · '+done+' von '+total+' Datensätzen')}
  async function loadTadabbur(){
   if(tadPromise)return tadPromise;
@@ -50,7 +50,7 @@
   })();
   try{return await tadPromise}finally{tadPromise=null}
  }
- const MARKDOWN=x=>String(x||'').replace(/\\*\\*/g,'').replace(/__|[_*]/g,'').replace(/\\[[^\\]]+\\]\\([^)]*\\)/g,'').trim();
+ const MARKDOWN=x=>String(x||'').replace(/\*\*/g,'').replace(/__|[_*]/g,'').replace(/\[[^\]]+\]\([^)]*\)/g,'').trim();
  function showPanel(entries,verse){
   const panel=$('tadabburPanel'),list=$('tadabburResults'),title=$('tadabburVerse'),status=$('tadabburStatus');
   if(!panel||!list)return;
@@ -95,7 +95,7 @@
  }
  function durationFor(card,display){
   const text=card.module==='quranTad'?card.tad.text:card.record.textMarkdown;
-  const words=MARKDOWN(text).split(/\\s+/).filter(Boolean).length,sharh=card.module!=='quranTad'&&display.sharhMode==='compact'&&card.record.sharhStatus==='verified'&&card.record.sharhText;
+  const words=MARKDOWN(text).split(/\s+/).filter(Boolean).length,sharh=card.module!=='quranTad'&&display.sharhMode==='compact'&&card.record.sharhStatus==='verified'&&card.record.sharhText;
   return Math.max(display.duration.minSeconds,Math.min(display.duration.maxSeconds,display.duration.baseSeconds+words*display.duration.secondsPerWord+(sharh?display.duration.sharhBonusSeconds:0)));
  }
  function makeCards(records,tad){
@@ -121,11 +121,7 @@
     await write('saver','library',{revision,cards:built.cards,weights,display:data.display,policy:data.policy});
     return data;
    }catch(error){
-    if(cached?.cards?.length){
-     const built=makeCards([],[]);for(const c of cached.cards){if(c.module==='quranTad'&&tadCacheForCard(c)){}built.cards.push(c);built.byId?.set?.(c.id,c)}
-     return {...cached,offline:true,...makeCards([],[])}
-    }
-    throw error;
+    if(cached?.cards?.length){return {...cached,offline:true,tad:null}}\n    throw error;
    }
   })();
   try{return await saverPromise}finally{saverPromise=null}
@@ -192,34 +188,42 @@
   rotationState.shown=rotationState.shown||[];rotationState.shown.push(cur.id);rotationState.current=null;
   await nextCard();
  }
- let loadingStatus=false;
  async function ensureReady(){
   if(library)return library;
-  if(loadingStatus)return saverPromise;
-  loadingStatus=true;
-  try{
-   const [data,state]=await Promise.all([loadSaverLibrary(),read('state','tvos-bag')]);
-   if(!data)throw Error('Screensaver-Inhalte fehlen');
-   const built=makeCards(data.cards.filter(x=>x.module!=='quranTad').map(x=>x.record).filter(Boolean),data.tad.entries);
-   library={...data,...built};rotation=data;rotationState=state||null;
-   return library;
-  }catch(e){
-   const cached=await read('saver','library');
-   if(cached?.cards?.length){
-    const tad=await loadTadabbur().catch(()=>null);const built=makeCards(cached.cards.filter(x=>x.module!=='quranTad').map(x=>x.record).filter(Boolean),tad?.entries||[]);
-    library={...cached,...built,tad,offline:true};rotation=cached;rotationState=await read('state','tvos-bag');return library;
-   }
-   say($('saverType'),'Bildschirmschoner-Inhalt nicht verfügbar');say($('saverDe'),'DĀR-Inhalte können derzeit nicht geladen werden. Die Verbindung wird erneut geprüft.');return null;
-  }finally{loadingStatus=false}
+  if(readyPromise)return readyPromise;
+  readyPromise=(async()=>{
+   try{
+    const [data,state]=await Promise.all([loadSaverLibrary(),read('state','tvos-bag')]);
+    if(!data)throw Error('Screensaver-Inhalte fehlen');
+    library={...data,byId:new Map(data.cards.map(card=>[card.id,card]))};
+    rotation=data;rotationState=state||null;
+    return library;
+   }catch(error){
+    const cached=await read('saver','library');
+    if(cached?.cards?.length){
+     library={...cached,byId:new Map(cached.cards.map(card=>[card.id,card])),offline:true,tad:null};
+     rotation=cached;rotationState=await read('state','tvos-bag');return library;
+    }
+    say($('saverType'),'Bildschirmschoner-Inhalt nicht verfügbar');
+    say($('saverDe'),'DĀR-Inhalte können derzeit nicht geladen werden. Die Verbindung wird erneut geprüft.');
+    return null;
+   }finally{readyPromise=null}
+  })();
+  return readyPromise;
+ }
+ function status(){
+  const counts={hadith:0,athar:0,quranTad:0};
+  for(const card of library?.cards||[])counts[card.module]=(counts[card.module]||0)+1;
+  return {ready:!!library,offline:!!library?.offline,counts,weights:library?.weights||null,mode:rotation?.mode||'shuffleBag',revision:library?.revision||null};
  }
  function render(){if(!library){say($('saverType'),'DĀR-Bildschirmschoner · wird geladen');say($('saverDe'),'Geprüfte Inhalte werden synchronisiert …');ensureReady().then(()=>{if(library){if(!rotationState?.current)nextCard();else renderCard()}}).catch(()=>{});return}if(!rotationState?.current)nextCard();else renderCard()}
  function tick(now){if(!document.body.classList.contains('saver-open')&&!$('app')?.classList.contains('saver-open'))return;if(!library){ensureReady().then(()=>{if(library)nextCard()});return}advance(now).catch(()=>{})}
  function install(){
   $('openTadabbur')?.addEventListener('click',openTadabbur);
-  $('nextTadabbur')?.addEventListener('click',openTadabbur);
+  $('nextTadabbur')?.addEventListener('click',openTadabbur);\n  $('closeTadabbur')?.addEventListener('click',()=>{if($('tadabburPanel'))$('tadabburPanel').hidden=true});
   $('saverMode')?.addEventListener('change',e=>{const isTv=e.target.value==='tvos',field=$('saverRotate')?.closest('.field');if(field)field.hidden=isTv;if(isTv)ensureReady()});
   if($('saverMode')?.value==='tvos')ensureReady();
-  window.darTvScreensaver={render,tick,ensureReady};
+  window.darTvScreensaver={render,tick,ensureReady,status};
   window.addEventListener('online',()=>{if($('saverMode')?.value==='tvos')ensureReady()});
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
