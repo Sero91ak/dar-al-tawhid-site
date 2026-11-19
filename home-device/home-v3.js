@@ -115,8 +115,9 @@
  function bindAppearancePicker(){
   const opener=$('openAppearance'),picker=$('appearancePopover');if(!opener||!picker)return;
   const close=()=>{picker.hidden=true;opener.setAttribute('aria-expanded','false')};
-  opener.addEventListener('click',event=>{event.stopPropagation();picker.hidden=!picker.hidden;opener.setAttribute('aria-expanded',String(!picker.hidden))});
-  picker.addEventListener('click',event=>{event.stopPropagation();const button=event.target.closest('[data-home-theme-choice]');if(!button)return;const choice=button.dataset.homeThemeChoice;prefs.theme=choice==='light'?'light':'dark';store();apply();window.darHomeApplyThemeChoice?.(prefs.theme);picker.querySelectorAll('[data-home-theme-choice]').forEach(x=>x.setAttribute('aria-pressed',String(x===button)));close()});
+  const sync=()=>picker.querySelectorAll('[data-home-theme-choice]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.homeThemeChoice===(prefs.theme==='light'?'light':'dark'))));
+  opener.addEventListener('click',event=>{event.stopPropagation();picker.hidden=!picker.hidden;opener.setAttribute('aria-expanded',String(!picker.hidden));if(!picker.hidden)sync()});
+  picker.addEventListener('click',event=>{event.stopPropagation();const button=event.target.closest('[data-home-theme-choice]');if(!button)return;const choice=button.dataset.homeThemeChoice;prefs.theme=choice==='light'?'light':'dark';store();apply();window.darHomeApplyThemeChoice?.(prefs.theme);sync();close()});
   document.addEventListener('click',event=>{if(!picker.hidden&&!picker.contains(event.target)&&event.target!==opener&&!opener.contains(event.target))close()});
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!picker.hidden){close();opener.focus({preventScroll:true})}});
  }
