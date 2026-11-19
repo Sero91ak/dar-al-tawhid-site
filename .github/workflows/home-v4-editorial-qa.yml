@@ -190,6 +190,7 @@ jobs:
             route_state=driver.execute_script("return {active:document.getElementById('calendarPanel').classList.contains('is-active'),screenHidden:document.getElementById('mainScreen').hidden,covered:document.getElementById('mainScreen').classList.contains('view-covered'),transition:getComputedStyle(document.getElementById('calendarPanel')).transitionDuration}")
             if not route_state['active'] or route_state['screenHidden'] or not route_state['covered'] or '0.36s' not in route_state['transition']:errors.append('Calendar did not open as an animated in-app route with a retained HOME back stack')
             print('HOME_PUSH_ROUTE',route_state,flush=True)
+            time.sleep(.4)
             calendar_text=driver.find_element(By.ID,'calendarPanel').text
             if '1. Ramaḍān' not in calendar_text or 'ʿĪd al-Fiṭr' not in calendar_text or '10. Muḥarram' not in calendar_text:errors.append('The local Islamic festival calendar is incomplete')
             driver.find_element(By.CSS_SELECTOR,'#calendarPanel [data-close-home-view]').click()
@@ -198,6 +199,7 @@ jobs:
             WebDriverWait(driver,10).until(lambda d:d.find_element(By.ID,'quranReaderPanel').get_attribute('hidden') is None)
             qroute=driver.execute_script("return {active:document.getElementById('quranReaderPanel').classList.contains('is-active'),screenHidden:document.getElementById('mainScreen').hidden,settings:!!document.querySelector('#quranReaderPanel [data-home-settings]')}")
             if not qroute['active'] or qroute['screenHidden'] or not qroute['settings']:errors.append('Quran did not push in as a local route with contextual settings')
+            time.sleep(.4)
             WebDriverWait(driver,15).until(lambda d:bool(d.find_element(By.ID,'readerArabic').text.strip()) and bool(d.find_element(By.ID,'readerGerman').text.strip()))
             if not driver.find_element(By.ID,'readerSurah').get_attribute('value'):errors.append('Quran reader did not provide local Surah selection')
             if not driver.find_element(By.ID,'readerReciter').get_attribute('value'):errors.append('Quran reader did not provide reciter selection')
