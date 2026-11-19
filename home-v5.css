@@ -1399,3 +1399,163 @@
   #app .hero-right { height:auto!important; }
   #app .hero-right .daily-story { flex:1 1 0!important; }
 }
+
+
+/* V6 palette family: all native HOME routes share the selected photo and palette. */
+#app[data-home-palette="light"] { --gold:#8a6a2f;--cream:#332d24;--text:#282a24;--muted:#625d52;--fine:rgba(82,94,73,.28);--home4-hair:rgba(82,94,73,.28);color-scheme:light; }
+#app[data-home-palette="soft"] { --gold:#805550;--cream:#392f30;--text:#302729;--muted:#675a5b;--fine:rgba(112,78,79,.25);--home4-hair:rgba(112,78,79,.25);color-scheme:light; }
+#app[data-home-palette="eisgold"] { --gold:#536f84;--cream:#273b4a;--text:#243542;--muted:#516573;--fine:rgba(83,111,132,.28);--home4-hair:rgba(83,111,132,.28);color-scheme:light; }
+#app[data-home-palette="salbei"] { --gold:#8a6a2f;--cream:#26372d;--text:#24352b;--muted:#536057;--fine:rgba(63,93,75,.28);--home4-hair:rgba(63,93,75,.28);color-scheme:light; }
+#app[data-home-palette="dark"] { --gold:#d8bd82;--cream:#f2eee2;--text:#f4f0e6;--muted:#b8bdb5;--fine:rgba(216,189,130,.3);--home4-hair:rgba(216,189,130,.3);color-scheme:dark; }
+#app[data-home-palette="royal"] { --gold:#d8bd82;--cream:#f2eee2;--text:#f4f0e6;--muted:#c1cbd5;--fine:rgba(160,190,216,.3);--home4-hair:rgba(160,190,216,.3);color-scheme:dark; }
+#app[data-home-palette="bordeaux"] { --gold:#d8b38a;--cream:#f5ede4;--text:#f3ece5;--muted:#d1bfc0;--fine:rgba(205,151,157,.3);--home4-hair:rgba(205,151,157,.3);color-scheme:dark; }
+#app[data-home-palette="dar-al-layl"] { --gold:#bea878;--cream:#f1eddf;--text:#f3efdf;--muted:#b9c0b0;--fine:rgba(190,168,120,.3);--home4-hair:rgba(190,168,120,.3);color-scheme:dark; }
+
+/* On HOME, typography sits directly on the photograph with soft directional shading, never boxed tiles. */
+#app[data-home-theme="light"] .hero-left,
+#app[data-home-theme="light"] .hero-right,
+#app[data-home-theme="light"] .times-band,
+#app[data-home-theme="light"] .daily-area .audio-area {
+  background-color:transparent!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+#app[data-home-theme="light"] .hero-left {
+  background:linear-gradient(90deg,rgba(249,248,239,.78),rgba(249,248,239,.38) 62%,transparent)!important;
+}
+#app[data-home-theme="light"] .hero-right {
+  background:linear-gradient(90deg,rgba(249,248,239,.60),rgba(249,248,239,.30) 72%,transparent)!important;
+}
+#app[data-home-theme="light"] .times-band {
+  background:linear-gradient(90deg,rgba(249,248,239,.64),rgba(249,248,239,.30) 72%,transparent)!important;
+}
+#app[data-home-theme="light"] .daily-area .audio-area {
+  background:linear-gradient(100deg,rgba(249,248,239,.68),rgba(249,248,239,.30) 82%,transparent)!important;
+}
+#app[data-home-theme="light"] .hero-verse,
+#app[data-home-theme="light"] .daily-title,
+#app[data-home-theme="light"] .daily-de,
+#app[data-home-theme="light"] .source,
+#app[data-home-theme="light"] .next-name,
+#app[data-home-theme="light"] .main-time,
+#app[data-home-theme="light"] .counter,
+#app[data-home-theme="light"] .prayer-cell .pname,
+#app[data-home-theme="light"] .prayer-cell .ptime,
+#app[data-home-theme="light"] .audio-title,
+#app[data-home-theme="light"] .audio-sub {
+  color:#202b24!important;
+  text-shadow:0 1px 2px rgba(255,255,255,.72)!important;
+}
+
+/* Local reader and calendar pages slide over the wallpaper after HOME leaves the viewport. */
+#app .screen.view-covered {
+  transform:translate3d(-102%,0,0)!important;
+  opacity:.12!important;
+  pointer-events:none!important;
+}
+#app .home-view {
+  background-image:linear-gradient(115deg,rgba(3,16,19,.20),rgba(3,16,19,.08)),var(--home-wallpaper-image,none)!important;
+  background-position:center,center!important;
+  background-size:cover,cover!important;
+  background-repeat:no-repeat,no-repeat!important;
+  backdrop-filter:none!important;
+}
+#app[data-home-theme="light"] .home-view {
+  background-image:linear-gradient(115deg,rgba(243,241,231,.34),rgba(243,241,231,.15)),var(--home-wallpaper-image,none)!important;
+  color:#24352b!important;
+}
+#app[data-home-theme="light"] .quran-reader-shell {
+  background:linear-gradient(145deg,rgba(249,250,246,.60),rgba(232,237,228,.64))!important;
+  color:#24352b!important;
+  box-shadow:none!important;
+}
+#app[data-home-theme="light"] .quran-reader-head {
+  background:linear-gradient(90deg,rgba(249,250,246,.80),rgba(249,250,246,.48),transparent);
+}
+#app[data-home-theme="light"] .reader-column {
+  padding:clamp(16px,2vw,30px)!important;
+  border:1px solid rgba(63,93,75,.22)!important;
+  border-radius:16px;
+  background:rgba(249,250,246,.82)!important;
+  box-shadow:0 10px 30px rgba(31,49,39,.10);
+}
+#app[data-home-theme="light"] .reader-column-label,
+#app[data-home-theme="light"] .reader-check,
+#app[data-home-theme="light"] .reader-control,
+#app[data-home-theme="light"] #readerProgress,
+#app[data-home-theme="light"] #readerStatus,
+#app[data-home-theme="light"] .reader-note {
+  color:#3f5d4b!important;
+}
+#app[data-home-theme="light"] #readerArabic,
+#app[data-home-theme="light"] #readerGerman,
+#app[data-home-theme="light"] .reader-transliteration {
+  color:#202b24!important;
+}
+#app[data-home-theme="light"] .reader-transliteration {
+  background:rgba(249,250,246,.82)!important;
+  border-color:#8a6a2f!important;
+}
+#app[data-home-theme="light"] .quran-reader-footer {
+  background:rgba(249,250,246,.94)!important;
+}
+#app[data-home-theme="light"] .reader-step,
+#app[data-home-theme="light"] .reader-home {
+  color:#24352b!important;
+  border-color:rgba(63,93,75,.35)!important;
+  background:rgba(255,255,255,.78)!important;
+}
+#app[data-home-theme="light"] .reader-play {
+  color:#fffdf5!important;
+  background:#3f5d4b!important;
+}
+#app[data-home-theme="light"] .calendar-view .home-view-panel {
+  background:linear-gradient(145deg,rgba(249,250,246,.58),rgba(232,237,228,.62))!important;
+  color:#24352b!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#app[data-home-theme="light"] .calendar-view .home-view-head,
+#app[data-home-theme="light"] .calendar-view .home-view-intro,
+#app[data-home-theme="light"] .calendar-view .home-view-foot {
+  color:#24352b!important;
+  background:linear-gradient(90deg,rgba(249,250,246,.82),rgba(249,250,246,.48),transparent);
+}
+#app[data-home-theme="light"] .festival-list article {
+  color:#24352b!important;
+  background:rgba(249,250,246,.84)!important;
+  border-color:rgba(63,93,75,.24)!important;
+}
+#app[data-home-theme="light"] .festival-list article strong { color:#202b24!important; }
+#app[data-home-theme="light"] .festival-list article span { color:#3f5d4b!important; }
+
+#app[data-home-theme="dark"] .reader-column,
+#app[data-home-theme="dark"] .festival-list article {
+  background:rgba(5,24,27,.78);
+  border-color:rgba(216,189,130,.25);
+}
+#app .palette-popover {
+  width:min(360px,calc(100vw - 28px));
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+#app .palette-popover>span {grid-column:1/-1}
+#app .palette-popover button {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  min-width:0;
+  font-size:clamp(12px,.92vw,14px);
+  line-height:1.25;
+}
+#app .palette-popover button i {
+  flex:none;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:var(--swatch);
+  border:1px solid rgba(0,0,0,.2);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.55);
+}
+@media (prefers-reduced-motion:reduce) {
+ #app .screen {transition:none!important}
+}
