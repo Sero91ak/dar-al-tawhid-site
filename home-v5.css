@@ -1589,3 +1589,100 @@
     overflow-y:auto!important;
   }
 }
+
+
+/* V7 — complete palette tokens and unboxed, readable reading surfaces. */
+#app[data-home-palette="light"] { --home-ink:#28251f;--home-muted:#59544a;--home-wash:246,242,229;--gold:#86672f;--cream:#28251f;--text:#28251f;--muted:#59544a;--fine:rgba(89,79,56,.28);--home4-hair:rgba(89,79,56,.28);color-scheme:light; }
+#app[data-home-palette="soft"] { --home-ink:#332729;--home-muted:#655355;--home-wash:245,237,232;--gold:#805550;--cream:#332729;--text:#332729;--muted:#655355;--fine:rgba(112,78,79,.26);--home4-hair:rgba(112,78,79,.26);color-scheme:light; }
+#app[data-home-palette="eisgold"] { --home-ink:#203442;--home-muted:#4e6574;--home-wash:231,240,246;--gold:#55758a;--cream:#203442;--text:#203442;--muted:#4e6574;--fine:rgba(67,103,126,.28);--home4-hair:rgba(67,103,126,.28);color-scheme:light; }
+#app[data-home-palette="salbei"] { --home-ink:#26362c;--home-muted:#526057;--home-wash:237,240,228;--gold:#496b55;--cream:#26362c;--text:#26362c;--muted:#526057;--fine:rgba(63,93,75,.28);--home4-hair:rgba(63,93,75,.28);color-scheme:light; }
+#app[data-home-palette="dark"] { --home-ink:#f4f0e6;--home-muted:#c5c4b9;--home-wash:7,25,28;--gold:#d8bd82;--cream:#f2eee2;--text:#f4f0e6;--muted:#c5c4b9;--fine:rgba(216,189,130,.30);--home4-hair:rgba(216,189,130,.30);color-scheme:dark; }
+#app[data-home-palette="royal"] { --home-ink:#f2f2ed;--home-muted:#c0cad4;--home-wash:8,25,43;--gold:#d8bd82;--cream:#f2f2ed;--text:#f2f2ed;--muted:#c0cad4;--fine:rgba(160,190,216,.30);--home4-hair:rgba(160,190,216,.30);color-scheme:dark; }
+#app[data-home-palette="bordeaux"] { --home-ink:#f4ece5;--home-muted:#d2bec0;--home-wash:37,15,25;--gold:#d8b38a;--cream:#f4ece5;--text:#f4ece5;--muted:#d2bec0;--fine:rgba(205,151,157,.30);--home4-hair:rgba(205,151,157,.30);color-scheme:dark; }
+#app[data-home-palette="dar-al-layl"] { --home-ink:#f2eddd;--home-muted:#c2c3b5;--home-wash:9,33,31;--gold:#bea878;--cream:#f2eddd;--text:#f2eddd;--muted:#c2c3b5;--fine:rgba(190,168,120,.30);--home4-hair:rgba(190,168,120,.30);color-scheme:dark; }
+#app[data-home-palette="nightgold"] { --home-ink:#f4f0e6;--home-muted:#c5c4b9;--home-wash:7,25,28;--gold:#d8bd82;--cream:#f2eee2;--text:#f4f0e6;--muted:#c5c4b9;--fine:rgba(216,189,130,.30);--home4-hair:rgba(216,189,130,.30);color-scheme:dark; }
+
+#app:is([data-home-palette="light"],[data-home-palette="soft"],[data-home-palette="eisgold"],[data-home-palette="salbei"]) .lightgrading {
+  background:linear-gradient(90deg,rgba(var(--home-wash),.22),rgba(var(--home-wash),.08) 48%,rgba(var(--home-wash),.18)),
+             linear-gradient(0deg,rgba(var(--home-wash),.28),rgba(var(--home-wash),.05) 64%,rgba(var(--home-wash),.14))!important;
+}
+#app:is([data-home-palette="dark"],[data-home-palette="royal"],[data-home-palette="bordeaux"],[data-home-palette="dar-al-layl"],[data-home-palette="nightgold"]) .lightgrading {
+  background:linear-gradient(90deg,rgba(var(--home-wash),.34),rgba(var(--home-wash),.08) 48%,rgba(var(--home-wash),.28)),
+             linear-gradient(0deg,rgba(var(--home-wash),.48),rgba(var(--home-wash),.12) 64%,rgba(var(--home-wash),.24))!important;
+}
+
+/* The HOME photo remains the surface: separate sections with spacing and rules, not tiles. */
+#app .hero-left,#app .hero-right,#app .times-band,#app .daily-area .audio-area {
+  background:transparent!important;border-radius:0!important;box-shadow:none!important;
+}
+#app .hero-right {border-left:1px solid var(--fine)!important;}
+#app .times-band {border-top:1px solid var(--fine)!important;border-bottom:1px solid var(--fine)!important;}
+#app .daily-area .audio-area {border-left:1px solid var(--fine)!important;}
+#app .hero-verse,#app .daily-title,#app .daily-de,#app .source,
+#app .next-name,#app .main-time,#app .counter,#app .prayer-cell .pname,
+#app .prayer-cell .ptime,#app .audio-title,#app .audio-sub {
+  color:var(--home-ink)!important;text-shadow:0 1px 3px rgba(var(--home-wash),.38)!important;
+}
+#app .overline,#app .daily-label,#app .band-head,#app .audio-kicker,
+#app .reader-column-label,#app .reader-note,#app .reader-control,
+#app #readerStatus,#app #readerProgress {
+  color:var(--gold)!important;
+}
+#app .hero-right .daily-story {
+  min-width:0;min-height:0;overflow-x:hidden!important;overflow-y:auto!important;
+  overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--gold) transparent;
+}
+#app .hero-right .daily-story>* {flex:0 0 auto;min-width:0;max-width:100%;overflow-wrap:anywhere;}
+#app .tadabbur-item {min-width:0;padding:clamp(10px,1.5vh,18px) 0!important;border:0!important;border-bottom:1px solid var(--fine)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;}
+#app .tadabbur-statement {margin:0 0 .7em!important;color:var(--home-ink)!important;font-size:clamp(18px,1.35vw,25px)!important;line-height:1.55!important;overflow-wrap:anywhere;}
+#app .tadabbur-speaker {margin-top:.7em;color:var(--cream)!important;font-size:clamp(13px,.95vw,16px)!important;font-weight:650;line-height:1.45!important;}
+#app .tadabbur-source {margin-top:.25em;color:var(--muted)!important;font-size:clamp(12px,.82vw,14px)!important;line-height:1.5!important;}
+#app .tadabbur-inline .tadabbur-results {min-width:0;max-width:100%;}
+#app .tadabbur-inline .tadabbur-item {padding:9px 0!important;}
+#app .tadabbur-inline .tadabbur-statement {font-size:clamp(16px,1.12vw,20px)!important;line-height:1.5!important;}
+#app .tadabbur-inline .tadabbur-speaker {font-size:clamp(12px,.82vw,14px)!important;}
+#app .tadabbur-inline .tadabbur-source {font-size:clamp(11px,.76vw,13px)!important;}
+
+/* In-app Qurʾān and holiday routes keep the same wallpaper, with quiet dividers. */
+#app .home-view {
+  background-image:linear-gradient(115deg,rgba(var(--home-wash),.13),rgba(var(--home-wash),.04)),var(--home-wallpaper-image,none)!important;
+  background-position:center,center!important;background-size:cover,cover!important;background-repeat:no-repeat,no-repeat!important;
+  color:var(--home-ink)!important;backdrop-filter:none!important;
+}
+#app .quran-reader-view {background:rgba(var(--home-wash),.14)!important;backdrop-filter:blur(3px)!important;color:var(--home-ink)!important;}
+#app .quran-reader-shell {background:linear-gradient(145deg,rgba(var(--home-wash),.28),rgba(var(--home-wash),.18))!important;color:var(--home-ink)!important;box-shadow:none!important;backdrop-filter:blur(3px);}
+#app .quran-reader-head {background:linear-gradient(90deg,rgba(var(--home-wash),.24),transparent)!important;border-bottom:1px solid var(--fine)!important;}
+#app .reader-column {min-width:0;padding:clamp(14px,2vw,28px)!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;}
+#app .reader-arabic {border-right:1px solid var(--fine)!important;}
+#app #readerArabic,#app #readerGerman,#app .reader-transliteration {color:var(--home-ink)!important;overflow-wrap:anywhere;}
+#app #readerArabic {line-height:2!important;}
+#app .reader-transliteration {background:transparent!important;border:0!important;border-left:2px solid var(--gold)!important;border-radius:0!important;box-shadow:none!important;padding:12px 16px!important;}
+#app .quran-reader-footer {background:rgba(var(--home-wash),.20)!important;border-top:1px solid var(--fine)!important;}
+#app .calendar-view .home-view-panel {width:min(100%,1120px);background:rgba(var(--home-wash),.18)!important;color:var(--home-ink)!important;border:0!important;border-radius:0!important;box-shadow:none!important;backdrop-filter:blur(3px);}
+#app .calendar-view .home-view-head,#app .calendar-view .home-view-intro,#app .calendar-view .home-view-foot {color:var(--home-ink)!important;background:transparent!important;}
+#app .festival-list article {color:var(--home-ink)!important;background:transparent!important;border:0!important;border-bottom:1px solid var(--fine)!important;border-radius:0!important;box-shadow:none!important;}
+#app .festival-list article strong {color:var(--home-ink)!important;}
+#app .festival-list article span {color:var(--muted)!important;}
+#app .reader-step,#app .reader-home {color:var(--home-ink)!important;border-color:var(--fine)!important;background:rgba(var(--home-wash),.24)!important;}
+#app .reader-play {color:#fffdf5!important;background:var(--gold)!important;}
+
+@media (max-width:700px) and (orientation:landscape) and (max-height:500px) {
+  #app .top {gap:3px!important;padding-bottom:2px!important;}
+  #app .logo {gap:5px!important;min-width:0;}
+  #app .logo-mark {width:clamp(24px,5vh,30px)!important;height:clamp(24px,5vh,30px)!important;}
+  #app .brand-title {font-size:clamp(10px,2vw,14px)!important;letter-spacing:.09em!important;}
+  #app .brand-mini {font-size:6px!important;letter-spacing:.1em!important;}
+  #app .home-nav {gap:2px!important;min-width:0;}
+  #app .home-nav button {min-width:0!important;min-height:30px;padding:3px clamp(4px,1vw,8px)!important;}
+  #app .home-nav span {font-size:clamp(8px,1.5vw,10px)!important;letter-spacing:0!important;}
+  #app .hero {grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important;min-height:104px!important;gap:clamp(8px,1.5vw,16px)!important;}
+  #app .hero-left,#app .hero-right {min-width:0;min-height:0;}
+  #app .hero-right {height:100%!important;padding-left:clamp(8px,1.5vw,14px)!important;}
+  #app .hero-right .daily-story {max-height:100%!important;overflow-y:auto!important;}
+  #app .daily-title {font-size:clamp(16px,2.5vh,21px)!important;}
+  #app .daily-de {font-size:clamp(13px,2vh,17px)!important;line-height:1.4!important;}
+  #app .source {font-size:clamp(10px,1.5vh,12px)!important;}
+}
+@media (orientation:portrait) {
+  #app .reader-arabic {border-right:0!important;border-bottom:1px solid var(--fine)!important;}
+}
