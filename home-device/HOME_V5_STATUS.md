@@ -9,7 +9,9 @@ This is a HOME-only development branch based on HOME V4. It is a reviewed test p
 - HOME supports a fixed wallpaper from the gallery or automatic scene selection by local time. The screensaver can follow the HOME scene, use a separate fixed scene, or select automatically.
 - Existing per-device settings and custom wallpaper storage remain in browser local storage.
 - A manifest at `media/apple-tv/catalog.json` lists the imported Apple TV scenes, adhan artwork, source project, and image transformation.
-- The five local adhan images have an image fallback chain: native Apple TV artwork, existing public prayer motif, then the existing cinematic replacement image.
+- The five local adhan images have an image fallback chain: native Apple TV artwork, existing public prayer motif, then the existing cinematic replacement image. Adhan art is presented full-bleed with the prayer title and time in separate lines; the selected HOME scene is used as fallback.
+
+- Location settings support manual coordinates and optional automatic geolocation with local persistence. Portrait prayer cards use the landscape thumbnails; the daily verse remains visible. The Quran settings expose auto-start-on-open and all-Surah or single-Surah playback scope. Existing 3D icons have been added to the HOME control areas and settings.
 - The isolated Worker preview bundles the manifest, images, HOME files, and V5 stylesheet.
 
 ## Imported Apple TV assets
@@ -17,9 +19,9 @@ This is a HOME-only development branch based on HOME V4. It is a reviewed test p
 Source: the existing local `DarAlTawhidTV/Assets.xcassets` catalog.
 
 - Prayer artwork: Faǧr, Ḍuhr, ʿAṣr, Maġrib, and ʿIšāʾ.
-- Wallpaper scenes: Kaʿba day, sunrise, and sunset.
+- Wallpaper scenes: ten native scenes covering day, sunrise, sunset, autumn, rain, thunderstorm, architectural Kaʿba, an AI scene, and two additional Mekka images.
 - Brand asset: transparent 512×512 native brand mark.
-- The eight large scene files were converted to JPEG quality 78, capped at 1920 px on their longest edge. This keeps transferred scene files around 0.4–0.8 MB each.
+- Wallpaper masters are JPEG quality 88, capped at 3840 px (up to 4K); all five prayer images retain their source dimensions at quality 92. Separate quality-80 previews are capped at 640 px.
 - The brand mark was resized to 512×512 PNG and retains transparency.
 
 No per-image licensing metadata was present in the source asset catalog. The source provenance is recorded, but commercial redistribution rights have not been independently established.
