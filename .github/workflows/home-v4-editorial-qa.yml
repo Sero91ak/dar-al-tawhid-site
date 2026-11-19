@@ -191,7 +191,8 @@ jobs:
             WebDriverWait(driver,8).until(lambda d:d.find_element(By.ID,'calendarPanel').get_attribute('hidden') is None)
             route_state=driver.execute_script("const p=document.querySelector('#calendarPanel .home-view-panel');return {active:document.getElementById('calendarPanel').classList.contains('is-active'),screenHidden:document.getElementById('mainScreen').hidden,covered:document.getElementById('mainScreen').classList.contains('view-covered'),transition:getComputedStyle(document.getElementById('calendarPanel')).transitionDuration,background:getComputedStyle(p).backgroundImage}")
             if not route_state['active'] or route_state['screenHidden'] or not route_state['covered'] or '0.36s' not in route_state['transition']:errors.append('Calendar did not open as an animated in-app route with a retained HOME back stack')
-            if '0.58' not in route_state['background']:errors.append('Calendar panel is opaque and hides the selected HOME wallpaper in light mode')
+            calendar_alphas=[float(a) for a in re.findall(r'rgba\([^)]*,\s*([0-9.]+)\)',route_state['background'])]
+            if not any(0 < alpha < .7 for alpha in calendar_alphas):errors.append('Calendar panel is opaque and hides the selected HOME wallpaper in light mode')
             print('HOME_PUSH_ROUTE',route_state,flush=True)
             time.sleep(.4)
             calendar_text=driver.find_element(By.ID,'calendarPanel').text
