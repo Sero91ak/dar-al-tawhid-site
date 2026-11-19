@@ -54,5 +54,25 @@ assert.equal(second.item.expiresAt,first.item.expiresAt,"Re-saving must never pr
 const badInput={...input,targetId:"recent"};
 await assert.rejects(mod.saveFeedEntry(env,badInput,helpers),/Ziel muss der originale Frauenbereich sein/);
 assert.equal(writes,2);
-console.log("PASS DĀR Admin 48h launch: locked before all 16 live/reviewed, exact server timestamp, no extension after re-save, original women target only. No real publish.");
+// Saving a completely unrelated card must not erase Frauen visibility or
+// immutable publication time during the original window.
+await mod.saveFeedEntry(env,{id:"another-focus-card",title:"Other saved card",status:"draft"},helpers);
+let index=await mod.readFeedIndex(env,{staging:false},helpers);
+let retained=index.index.items.find(x=>x.id===id);
+assert.equal(retained.visibility,"48h","Normalizing another card must preserve 48h visibility");
+assert.equal(retained.firstPublishedAt,first.item.firstPublishedAt,"Other card changed original launch time");
+assert.equal(retained.expiresAt,first.item.expiresAt,"Other card extended the window");
+assert.ok(mod.filterPublicFeed(index.index).some(x=>x.id===id),"Saving other card removed live Frauen focus");
+// Switching back to draft and then live must NEVER reset the same clock.
+await mod.saveFeedEntry(env,{...input,status:"draft"},helpers);
+index=await mod.readFeedIndex(env,{staging:false},helpers);
+retained=index.index.items.find(x=>x.id===id);
+assert.equal(retained.firstPublishedAt,first.item.firstPublishedAt,"Draft transition erased first publication");
+assert.ok(!mod.filterPublicFeed(index.index).some(x=>x.id===id),"Draft must not be publicly visible");
+const third=await attempt();
+assert.equal(third.item.startsAt,first.item.startsAt,"Republishing must not restart 48h");
+assert.equal(third.item.expiresAt,first.item.expiresAt,"Republishing must not extend 48h");
+assert.equal(third.item.visibility,"48h","Visibility must survive draft/live cycle");
+assert.equal(writes,5);
+console.log("PASS DĀR Admin 48h launch: guarded publication, immutable 48h window, unrelated card write preserves visibility, draft/live cycle cannot extend, no real publish.");
 })().catch(e=>{console.error(e.stack||e);process.exitCode=1});
