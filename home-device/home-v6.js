@@ -236,7 +236,15 @@
   for(const card of library?.cards||[])counts[card.module]=(counts[card.module]||0)+1;
   return {ready:!!library,offline:!!library?.offline,error:lastLoadError,counts,weights:library?.weights||null,mode:rotation?.mode||'shuffleBag',revision:library?.revision||null,currentDuration:rotationState?.current?.duration??null,currentId:rotationState?.current?.id??null};
  }
- function render(){if(!library){say($('saverType'),'DĀR-Bildschirmschoner · wird geladen');say($('saverDe'),'Geprüfte Inhalte werden synchronisiert …');ensureReady().then(()=>{if(library){if(!rotationState?.current)nextCard();else renderCard()}}).catch(()=>{});return}if(!rotationState?.current)nextCard();else renderCard()}
+ async function renderCurrent(){
+  const current=rotationState?.current,card=current&&library?.byId.get(current.id);if(!current||!card)return;
+  await renderCard(card);
+  if(rotationState?.current!==current)return;
+  const rendered=['saverAr','saverDe','saverNarrator','saverStatement','saverSource'].map(id=>$(id)?.textContent||'').filter(Boolean).join(' ');
+  current.duration=Math.max(Number(current.duration)||0,durationFor(card,library.display,rendered));
+  await write('state','tvos-bag',rotationState);
+ }
+ function render(){if(!library){say($('saverType'),'DĀR-Bildschoner · wird geladen');say($('saverDe'),'Geprüfte Inhalte werden synchronisiert …');ensureReady().then(()=>{if(library){if(!rotationState?.current)nextCard();else renderCurrent()}}).catch(()=>{});return}if(!rotationState?.current)nextCard();else renderCurrent()}
  function tick(now){if(!document.body.classList.contains('saver-open')&&!$('app')?.classList.contains('saver-open'))return;if(!library){ensureReady().then(()=>{if(library)nextCard()});return}advance(now).catch(()=>{})}
  function install(){
   $('openTadabbur')?.addEventListener('click',()=>{const p=$('tadabburPanel');if(p&&!p.hidden){p.hidden=true;p.setAttribute('aria-expanded','false');$('openTadabbur').setAttribute('aria-expanded','false');return}$('openTadabbur')?.setAttribute('aria-expanded','true');openTadabbur()});
