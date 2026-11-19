@@ -502,3 +502,5 @@
 @keyframes timerBeat { 0%,100% { text-shadow:0 0 0 rgba(216,189,130,0); } 50% { text-shadow:0 0 13px rgba(216,189,130,.45); } }
 #app:not(.reduced-motion) .counter .countnum { animation:timerBeat 2s ease-in-out infinite; }
 @media (prefers-reduced-motion:reduce) { #app .counter .countnum { animation:none!important; } }
+
+@media (max-width:560px) and (orientation:portrait) { #app .daily-de { display:block!important; } }
