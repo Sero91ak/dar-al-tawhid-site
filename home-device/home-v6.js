@@ -222,7 +222,7 @@
  function install(){
   $('openTadabbur')?.addEventListener('click',openTadabbur);
   $('nextTadabbur')?.addEventListener('click',openTadabbur);
-  $('closeTadabbur')?.addEventListener('click',()=>{if($('tadabburPanel'))$('tadabburPanel').hidden=true});
+  $('closeTadabbur')?.addEventListener('click',()=>{if($('tadabburPanel'))$('tadabburPanel').hidden=true;document.querySelectorAll('.home-view').forEach(x=>x.hidden=false)});
   $('saverMode')?.addEventListener('change',e=>{const isTv=e.target.value==='tvos',field=$('saverRotate')?.closest('.field');if(field)field.hidden=isTv;if(isTv)ensureReady()});
   if($('saverMode')?.value==='tvos')ensureReady();
   window.darTvScreensaver={render,tick,ensureReady,status};
