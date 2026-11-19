@@ -48,6 +48,13 @@ const server=http.createServer((req,res)=>{
  const viewportConfigs=[{name:"iPhone",width:390,height:844},{name:"Duo",width:660,height:750},{name:"iPad",width:834,height:1112},{name:"Desktop",width:1280,height:800}];
  let checked=0,questions=0,rtl=0;
  const browserErrors=[];
+ const lessonNavigation={
+   de:["⌂ Startseite","Lernen"],ar:["⌂ الصفحة الرئيسية","التعلّم"],
+   en:["⌂ Home","Learning"],tr:["⌂ Ana sayfa","Öğrenme"],
+   ku:["⌂ Rûpela sereke","Fêrbûn"],ckb:["⌂ سەرەتا","فێربوون"],
+   bs:["⌂ Početna","Učenje"],fr:["⌂ Accueil","Apprentissage"],
+   es:["⌂ Inicio","Aprendizaje"]
+ };
  for(const vp of viewportConfigs){
  const context=await browser.newContext({viewport:{width:vp.width,height:vp.height},deviceScaleFactor:1});
  const page=await context.newPage();
@@ -78,6 +85,8 @@ const server=http.createServer((req,res)=>{
      const pack=locales.entries[row.id].locales[code];
      assert.equal(await page.locator("h1.fw-title").innerText(),pack.title,"Wrong title "+row.id+" "+code);
      assert.equal(await page.locator("html").getAttribute("dir"),["ar","ckb"].includes(code)?"rtl":"ltr","Incorrect RTL "+code);
+     assert.equal(await page.locator("#darDirectReaderBarV1 button").first().innerText(),lessonNavigation[code][0],"Standalone Home label not translated "+code);
+     assert.ok((await page.locator(".dar-direct-reader-caption").innerText()).includes(lessonNavigation[code][1]),"Standalone lesson caption not translated "+code);
      assert.equal(await page.locator(".fw-source").getAttribute("href"),locales.entries[row.id].sourceUrl);
      // The user can reopen the entire statement, lesson and editorial sharh
      // in the same locale without navigating away from the quiz.
