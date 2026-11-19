@@ -1883,3 +1883,45 @@
 @media (max-width:700px) and (orientation:landscape) and (max-height:500px) {
   #app .top .topbtn {width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;}
 }
+
+
+/* V11: visible touch surfaces for HOME navigation; Dār al-Layl is the sole palette. */
+#app .home-nav {gap:clamp(4px,.55vw,9px)!important;}
+#app .home-nav button {
+  box-sizing:border-box!important;min-width:clamp(58px,5.5vw,94px)!important;min-height:50px!important;
+  padding:5px clamp(7px,.8vw,12px)!important;display:flex!important;flex-direction:column!important;
+  align-items:center!important;justify-content:center!important;gap:3px!important;
+  border:1px solid rgba(216,189,130,.54)!important;border-radius:12px!important;
+  color:#f2eee2!important;background:linear-gradient(145deg,rgba(20,46,37,.94),rgba(7,25,27,.9))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 3px 11px rgba(0,0,0,.2)!important;
+  transition:background .18s ease,border-color .18s ease,transform .18s ease,box-shadow .18s ease;
+}
+#app .home-nav button span {
+  max-width:116px!important;white-space:normal!important;text-wrap:balance;
+  font:600 clamp(10px,.72vw,13px)/1.16 var(--display)!important;letter-spacing:.015em!important;
+}
+#app .home-nav button:last-child {min-width:clamp(112px,9vw,152px)!important;}
+#app .home-nav button:hover,#app .home-nav button:focus-visible {
+  color:#fffaf0!important;background:linear-gradient(145deg,rgba(34,66,52,.98),rgba(9,31,29,.96))!important;
+  border-color:#e1c88e!important;transform:translateY(-1px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 5px 14px rgba(0,0,0,.3)!important;
+}
+#app .home-nav button[aria-current="page"] {
+  border-color:#e4ca8e!important;background:linear-gradient(145deg,rgba(43,70,53,.98),rgba(10,32,29,.96))!important;
+  box-shadow:inset 0 0 0 1px rgba(228,202,142,.22),0 3px 12px rgba(0,0,0,.26)!important;
+}
+#app .home-nav button:focus-visible {outline:3px solid #f3d58c!important;outline-offset:3px;}
+#app #homeAppearance:disabled,#app #theme:disabled {opacity:1!important;color:#f2eee2!important;-webkit-text-fill-color:#f2eee2!important;cursor:default;}
+@media (max-width:700px) and (orientation:landscape) and (max-height:500px) {
+  #app .top {grid-template-columns:minmax(0,max-content) minmax(0,1fr) auto!important;column-gap:clamp(5px,1vw,10px)!important;}
+  #app .top .logo {max-width:clamp(104px,27vw,164px)!important;}
+  #app .top .home-nav {min-width:0!important;justify-content:stretch!important;gap:clamp(3px,.6vw,7px)!important;}
+  #app .top .home-nav button {flex:1 1 0!important;min-width:44px!important;min-height:44px!important;padding:3px clamp(3px,.6vw,7px)!important;}
+  #app .top .home-nav button:last-child {min-width:44px!important;flex:1.5 1 0!important;}
+  #app .top .home-nav button span {font-size:clamp(8px,1.5vw,10px)!important;max-width:100px!important;}
+}
+@media (max-width:520px) and (orientation:portrait) {
+  #app .home-nav button {min-width:44px!important;min-height:44px!important;padding:4px clamp(3px,1vw,8px)!important;}
+  #app .home-nav button:last-child {min-width:44px!important;flex:1.4 1 0!important;}
+  #app .home-nav button span {font-size:clamp(9px,2.5vw,11px)!important;max-width:92px!important;}
+}
