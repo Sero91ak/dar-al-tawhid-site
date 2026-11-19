@@ -1267,11 +1267,11 @@
 
 
 /* HOME V5.8: let the selected photo show through the ornamental skin and local pages. */
-#app .artwork { opacity:var(--home-artwork-opacity,1);transition:opacity .22s ease; }
+#app .artwork { opacity:var(--home-artwork-opacity,1)!important;mix-blend-mode:normal!important;transition:opacity .22s ease; }
 #app .lightgrading {
   background:
     linear-gradient(90deg,rgba(3,16,20,.36),rgba(4,16,20,.08) 52%,rgba(3,18,20,.26)),
-    linear-gradient(0deg,rgba(4,14,18,.50) 0%,rgba(4,14,18,.20) 42%,rgba(4,14,18,.04) 78%);
+    linear-gradient(0deg,rgba(4,14,18,.50) 0%,rgba(4,14,18,.20) 42%,rgba(4,14,18,.04) 78%)!important;
 }
 #app .hero { align-items:stretch; }
 #app .hero-right {
@@ -1309,7 +1309,7 @@
 #app[data-home-theme="light"] .lightgrading {
   background:
     linear-gradient(90deg,rgba(243,241,231,.45) 0%,rgba(243,241,231,.24) 48%,rgba(243,241,231,.12) 100%),
-    linear-gradient(0deg,rgba(243,241,231,.34) 0%,rgba(243,241,231,.12) 60%,rgba(243,241,231,.20) 100%);
+    linear-gradient(0deg,rgba(243,241,231,.34) 0%,rgba(243,241,231,.12) 60%,rgba(243,241,231,.20) 100%)!important;
 }
 #app[data-home-theme="light"] .home-view {
   background:rgba(243,241,231,.60);
