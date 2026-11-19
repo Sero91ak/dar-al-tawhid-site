@@ -57,7 +57,7 @@
   const small=document.querySelector('.brand-mini');if(small)small.textContent='H O M E  ·  SMART PRAYER DISPLAY';
   const top=$('openSettings');
   if(top&&!$('h3ThemeToggle')){
-   const b=document.createElement('button');b.className='topbtn';b.id='h3ThemeToggle';b.title='Hell/Dunkel umschalten';b.innerHTML='<span aria-hidden="true" style="font-size:25px">☼</span>';
+   const b=document.createElement('button');b.className='topbtn';b.id='h3ThemeToggle';b.title='Hell/Dunkel umschalten';b.innerHTML='';const themeIcon=new Image();themeIcon.src=icon('spark');themeIcon.className='h3-action-icon';themeIcon.alt='';themeIcon.setAttribute('aria-hidden','true');b.append(themeIcon);
    b.addEventListener('click',()=>{prefs.theme=prefs.theme==='dark'?'light':'dark';store();apply()});
    top.parentNode.insertBefore(b,top);
   }
@@ -105,7 +105,8 @@
    if(!r.ok)return;
    const catalog=await r.json();
    if(catalog?.schemaVersion!==1||!Array.isArray(catalog.wallpapers))return;
-   const entries=catalog.wallpapers.filter(x=>x&&/^[a-z0-9-]{2,48}$/.test(x.id||'')&&typeof x.label==='string'&&/^\/media\/apple-tv\/[A-Za-z0-9._-]+\.(?:jpg|webp|png)$/.test(x.url||''));
+   const mediaPath=/^\/media\/apple-tv\/[A-Za-z0-9._-]+\.(?:jpg|webp|png)$/;
+   const entries=catalog.wallpapers.filter(x=>x&&/^[a-z0-9-]{2,48}$/.test(x.id||'')&&typeof x.label==='string'&&mediaPath.test(x.url||'')&&(!x.thumbnail||mediaPath.test(x.thumbnail)));
    if(!entries.length)return;
    const preferred=prefs.wallpaper;
    const ids=new Set(entries.map(x=>x.id));
