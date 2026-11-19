@@ -321,12 +321,13 @@ jobs:
             print('FAJR_ART',art.get_attribute('src'),flush=True)
             if not art.get_attribute('src').endswith('/media/apple-tv/adhan-fajr.jpg'):errors.append('Faǧr cinematic did not use native Apple TV artwork')
             bleed=driver.execute_script("""
-              const v=document.getElementById('adhanVisual'),i=document.getElementById('h4PrayerArtwork'),t=v.querySelector('.adhan-title'),sub=document.getElementById('adhanInfo'),a=i.getBoundingClientRect(),b=v.getBoundingClientRect(),cs=getComputedStyle(i);
-              return {width:a.width,height:a.height,viewWidth:b.width,viewHeight:b.height,fit:cs.objectFit,opacity:cs.opacity,position:cs.position,title:t.textContent,subtitle:sub.textContent,naturalWidth:i.naturalWidth};
+              const v=document.getElementById('adhanVisual'),i=document.getElementById('h4PrayerArtwork'),t=v.querySelector('.adhan-title'),sub=document.getElementById('adhanInfo'),lower=v.querySelector('.adhan-lower-third'),button=document.getElementById('stopAdhan'),a=i.getBoundingClientRect(),b=v.getBoundingClientRect(),l=lower.getBoundingClientRect(),bb=button.getBoundingClientRect(),cs=getComputedStyle(i);
+              return {width:a.width,height:a.height,viewWidth:b.width,viewHeight:b.height,fit:cs.objectFit,opacity:cs.opacity,position:cs.position,title:t.textContent,subtitle:sub.textContent,naturalWidth:i.naturalWidth,lowerBottom:Math.round(b.bottom-l.bottom),buttonInside:bb.top>=l.top&&bb.bottom<=l.bottom,lowerBackground:getComputedStyle(lower).backgroundColor};
             """)
-            print('FAJR_FULL_BLEED',bleed,flush=True)
+            print('FAJR_FULL_BLEED_LOWER_THIRD',bleed,flush=True)
             if bleed['width']<bleed['viewWidth']-2 or bleed['height']<bleed['viewHeight']-2 or bleed['fit']!='cover' or bleed['opacity']!='1' or bleed['naturalWidth']<1600:errors.append('Native prayer art is not high-resolution, fully visible and full-bleed')
-            if 'Fajr' in bleed['subtitle'] or 'Faǧr' in bleed['subtitle']:errors.append('Adhan prayer name is duplicated in the time line')
+            if bleed['lowerBottom']>100 or not bleed['buttonInside']:errors.append('Adhan time and stop button are not grouped in the lower-third')
+            if bleed['subtitle'].startswith(('Fajr','Faǧr','Ḍuhr','ʿAṣr','Maġrib','ʿIšāʾ')):errors.append('Adhan prayer name is duplicated in the time line')
             for prayer,asset in [('Fajr','fajr'),('Ḍuhr','dhuhr'),('ʿAṣr','asr'),('Maġrib','maghrib'),('ʿIšāʾ','isha')]:
               driver.execute_script("const v=document.getElementById('adhanVisual');v.dataset.prayerKey='test:'+arguments[1];document.getElementById('adhanInfo').textContent=arguments[0]+' · Test';v.classList.add('active')",prayer,asset)
               expected='/media/apple-tv/adhan-'+asset+'.jpg'
