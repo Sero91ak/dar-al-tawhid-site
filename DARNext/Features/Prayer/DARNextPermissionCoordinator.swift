@@ -10,6 +10,10 @@ final class DARNextPermissionCoordinator: NSObject, CLLocationManagerDelegate {
     var locationStatus: CLAuthorizationStatus = .notDetermined
     var notificationsEnabled = false
 
+    static func shouldStartLocationUpdates(for status: CLAuthorizationStatus) -> Bool {
+        status == .authorizedWhenInUse || status == .authorizedAlways
+    }
+
     override init() {
         super.init()
         locationManager.delegate = self
@@ -56,10 +60,17 @@ final class DARNextPermissionCoordinator: NSObject, CLLocationManagerDelegate {
         UIApplication.shared.open(url)
     }
 
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        locationStatus = manager.authorizationStatus
-        if manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways {
-            manager.startUpdatingLocation()
+    nonisolated func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        let status = manager.authorizationStatus
+        Task { @MainActor [weak self] in
+            self?.applyLocationAuthorization(status)
+        }
+    }
+
+    private func applyLocationAuthorization(_ status: CLAuthorizationStatus) {
+        locationStatus = status
+        if Self.shouldStartLocationUpdates(for: status) {
+            locationManager.startUpdatingLocation()
         }
     }
 }
