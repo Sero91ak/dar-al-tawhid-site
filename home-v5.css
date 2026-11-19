@@ -412,3 +412,88 @@
 #app .motion-setting input { min-width:24px;min-height:24px; }
 #app #locationStatus { min-height:44px;display:flex;align-items:center;line-height:1.4; }
 #app .wallpaper-option img { aspect-ratio:16/9;object-fit:cover; }
+
+/* HOME V5.1: focused prayer times, readable cards and player navigation */
+#app .hero { grid-template-columns:minmax(0,1.02fr) minmax(260px,.98fr); gap:clamp(18px,3vw,44px); }
+#app .hero-left { padding:clamp(10px,1.5vh,18px) clamp(12px,1.6vw,24px); border-left:3px solid var(--gold); background:linear-gradient(90deg,rgba(5,20,22,.34),transparent 80%); }
+#app .next-name { font-size:clamp(48px,6.8vw,116px); letter-spacing:-.02em; line-height:1; margin:clamp(8px,1.2vh,16px) 0; }
+#app .next-row { gap:clamp(10px,1.5vw,22px); align-items:center; }
+#app .counter { padding:.48em .8em; border:1px solid rgba(219,195,142,.48); border-radius:999px; background:rgba(7,25,26,.6); font-size:clamp(15px,1.25vw,20px); letter-spacing:.035em; }
+#app .counter .countnum { display:inline-block; min-width:8ch; font-variant-numeric:tabular-nums; font-weight:800; }
+#app .times-band { padding:clamp(8px,1.5vh,15px) 0; }
+#app .prayer-cell { min-height:clamp(60px,8vh,92px); gap:7px; padding:6px 8px; text-align:center; }
+#app .prayer-cell .pname { font-size:clamp(14px,1.15vw,19px)!important; line-height:1.2; letter-spacing:.02em; }
+#app .prayer-cell .ptime { font-size:clamp(29px,3vw,48px)!important; line-height:1.05; letter-spacing:.015em; }
+#app .prayer-cell .prayer-glyph { display:none!important; }
+#app .prayer-cell:last-child { border-right:0; }
+#app .prayer-cell.active { background:linear-gradient(180deg,rgba(216,189,130,.18),rgba(216,189,130,.04)); border-radius:8px; }
+#app .sunrise-line { margin-top:8px; text-align:right; color:var(--muted); font:600 clamp(12px,.95vw,15px)/1.35 var(--ui); letter-spacing:.02em; }
+#app .daily-area { grid-template-columns:minmax(0,1.15fr) minmax(300px,.95fr); gap:clamp(20px,3vw,44px); min-height:clamp(130px,20vh,250px); align-items:stretch; }
+#app .daily-story { max-height:min(31vh,300px)!important; padding:clamp(10px,1.4vh,17px) clamp(10px,1.3vw,18px); border-left:2px solid var(--gold); background:rgba(4,18,20,.32); }
+#app .daily-title { display:none!important; }
+#app .daily-de { white-space:normal!important; overflow:visible!important; text-overflow:clip!important; font-size:clamp(20px,1.65vw,29px)!important; line-height:1.48!important; letter-spacing:.015em; }
+#app .source { font-size:clamp(13px,.95vw,16px)!important; line-height:1.45; letter-spacing:.025em; margin-top:10px; }
+#app .audio-area { border-left:1px solid var(--fine); padding:clamp(12px,1.6vh,20px) 0 clamp(12px,1.6vh,20px) clamp(18px,2vw,30px); display:grid; align-content:center; grid-template-columns:minmax(0,1fr) auto; gap:8px 16px; }
+#app .audio-kicker { grid-column:1/-1; letter-spacing:.12em; }
+#app .audio-title-button { grid-column:1/-1; display:flex; align-items:center; gap:12px; max-width:100%; width:max-content; padding:0; border:0; color:inherit; background:transparent; text-align:left; }
+#app .audio-title { font:700 clamp(26px,2.3vw,40px)/1.16 var(--display); white-space:normal; overflow:visible; text-overflow:clip; }
+#app .surah-chevron { color:var(--gold); font-size:24px; line-height:1; }
+#app .audio-sub { grid-column:1/-1; white-space:normal; line-height:1.45; }
+#app .audio-controls { grid-column:1/-1; margin:5px 0 0; gap:12px; }
+#app .h3-section-emblem { display:none!important; }
+#app .next-arabic { display:none!important; }
+#app .surah-picker[hidden] { display:none!important; }
+#app .surah-picker { position:absolute; inset:0; z-index:23; display:grid; place-items:center; padding:clamp(12px,4vw,48px); background:rgba(2,12,14,.78); backdrop-filter:blur(14px); }
+#app .surah-picker-panel { width:min(720px,100%); max-height:min(82dvh,850px); display:grid; grid-template-rows:auto auto auto minmax(120px,1fr); gap:14px; padding:clamp(20px,3vw,36px); border:1px solid var(--fine); border-radius:18px; background:rgba(8,28,29,.98); box-shadow:0 22px 70px rgba(0,0,0,.45); }
+#app .surah-picker-head { display:flex; align-items:center; justify-content:space-between; }
+#app .surah-picker-head h2 { margin:6px 0 0; font:600 clamp(30px,4vw,46px)/1 var(--display); }
+#app .surah-search-label { font-size:14px; color:var(--muted); }
+#app #surahSearch { width:100%; min-height:48px; padding:12px 16px; border:1px solid var(--fine); border-radius:10px; color:var(--text); background:rgba(255,255,255,.06); font-size:16px; }
+#app .surah-list { min-height:0; overflow:auto; overscroll-behavior:contain; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+#app .surah-option { display:flex; align-items:center; gap:12px; min-height:54px; padding:8px 12px; border:1px solid rgba(219,195,142,.18); border-radius:10px; color:var(--text); background:rgba(255,255,255,.035); text-align:left; }
+#app .surah-option[aria-selected="true"] { border-color:var(--gold); background:rgba(216,189,130,.14); }
+#app .surah-option .surah-number { flex:none; width:34px; height:34px; display:grid; place-items:center; border-radius:50%; background:rgba(216,189,130,.12); color:var(--gold); font-variant-numeric:tabular-nums; }
+#app .surah-option .surah-name { min-width:0; font-weight:700; line-height:1.3; }
+#app .surah-option .surah-meaning { display:block; color:var(--muted); font-size:13px; font-weight:400; line-height:1.35; }
+#app .surah-option .surah-arabic { display:none!important; }
+#app .adhan-symbol { display:none!important; }
+#app .adhan-title { padding:.18em .4em; border-radius:12px; background:rgba(3,16,19,.52); text-shadow:0 2px 18px rgba(0,0,0,.65); }
+@media (orientation:portrait) {
+ #app .hero { gap:clamp(4px,1vh,10px); }
+ #app .hero-left { padding:10px 12px!important; }
+ #app .next-name { font-size:clamp(42px,8vw,76px); }
+ #app .main-time { font-size:clamp(38px,6vw,62px); }
+ #app .hero-right { padding:clamp(8px,1.2vh,15px) 0!important; }
+ #app .times-band { padding:6px 0!important; }
+ #app .prayer-cell { min-height:56px; grid-template-columns:minmax(0,1fr); gap:4px; padding:5px 2px; }
+ #app .prayer-cell .pname { font-size:clamp(12px,1.8vw,16px)!important; }
+ #app .prayer-cell .ptime { font-size:clamp(21px,3.5vw,30px)!important; }
+ #app .daily-area { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px; min-height:clamp(160px,24vh,290px); }
+ #app .daily-story { max-height:min(30vh,260px)!important; }
+ #app .daily-de { font-size:clamp(18px,2.6vw,25px)!important; line-height:1.42!important; }
+ #app .audio-area { border-left:1px solid var(--fine); border-top:0; padding:12px 0 12px 14px; display:grid; align-content:center; grid-template-columns:1fr; }
+ #app .audio-controls { grid-column:1; }
+ #app .audio-title { font-size:clamp(22px,3.4vw,30px); }
+ #app .audio-sub { display:block; font-size:clamp(12px,1.8vw,16px); }
+}
+@media (max-width:560px) and (orientation:portrait) {
+ #app .hero { grid-template-columns:minmax(0,1fr); }
+ #app .hero-right { display:block!important; }
+ #app .daily-area { grid-template-columns:1fr; min-height:0; gap:10px; }
+ #app .daily-story { max-height:min(23vh,210px)!important; }
+ #app .audio-area { border-left:0; border-top:1px solid var(--fine); padding:12px 0 0; grid-template-columns:minmax(0,1fr) auto; }
+ #app .audio-kicker,#app .audio-sub { display:none; }
+ #app .audio-title-button { grid-column:1; }
+ #app .audio-title { font-size:clamp(24px,6vw,34px); }
+ #app .audio-controls { grid-column:2; grid-row:1/3; }
+ #app .surah-list { grid-template-columns:1fr; }
+}
+@media (max-height:640px) and (orientation:landscape) {
+ #app .screen { gap:5px; padding-top:12px; padding-bottom:10px; }
+ #app .hero { min-height:0; }
+ #app .daily-area { min-height:110px; }
+ #app .daily-story { max-height:22vh!important; }
+ #app .daily-de { font-size:clamp(16px,2.4vh,21px)!important; }
+ #app .counter { font-size:clamp(13px,2.4vh,17px); }
+}
+#app :is(button,a[href],select,input):focus-visible { outline:3px solid #f3d58c!important;outline-offset:3px; }

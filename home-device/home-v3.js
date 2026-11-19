@@ -66,7 +66,7 @@
    const b=$(id);if(!b||b.querySelector('.h3-action-icon')||b.classList.contains('round'))continue;
    const img=document.createElement('img');img.src=icon(name);img.className='h3-action-icon';img.alt='';img.setAttribute('aria-hidden','true');b.classList.add('h3-icon-action');b.insertBefore(img,b.firstChild);
   }
-  const sectionIcons=[['.times-band','prayer'],['.daily-story','quran'],['.audio-area','audio']];
+  const sectionIcons=[['.times-band','prayer']];
   for(const [selector,name] of sectionIcons){const section=document.querySelector(selector);if(section&&!section.querySelector(':scope > .h3-section-emblem')){const img=new Image();img.src=icon(name);img.className='h3-section-emblem';img.alt='';img.setAttribute('aria-hidden','true');section.prepend(img)}}
   const nav=document.querySelector('.footnav');
   if(nav&&!$('h3FooterSettings')){
@@ -74,15 +74,7 @@
    const i=new Image();i.src=icon('settings');i.className='nav-icon';i.alt='';
    b.append(i,document.createTextNode(' Einstellungen'));b.addEventListener('click',()=>top?.click());nav.append(b);
   }
-  for(const btn of document.querySelectorAll('.prayer-cell')){
-   const name=btn.dataset.prayer;
-   const pname=btn.querySelector('.pname'),ptime=btn.querySelector('.ptime');
-   if(pname&&ptime&&!btn.querySelector('.prayer-labels')){const labels=document.createElement('span');labels.className='prayer-labels';labels.append(pname,ptime);btn.append(labels)}
-   if(btn.querySelector('img.prayer-glyph'))continue;
-   const img=new Image();img.src='/media/apple-tv/adhan-'+name+'-thumb.jpg';img.className='prayer-glyph';img.alt='';img.setAttribute('aria-hidden','true');img.dataset.fallback='native';
-   img.addEventListener('error',()=>{if(img.dataset.fallback==='native'){img.dataset.fallback='web';img.src=ROOT+'/test/assets/prayer-motifs/'+name+'.webp'}else if(img.dataset.fallback==='web'){img.dataset.fallback='icon';img.classList.add('h3-icon-fallback');img.src=icon('prayer')}else img.style.display='none'});
-   btn.insertBefore(img,btn.firstChild);
-  }
+  for(const btn of document.querySelectorAll('.prayer-cell')){btn.querySelector('.prayer-glyph')?.remove();}
  }
  function makeWallpaperGallery(){
   const parent=$('wallpaperOptions');if(!parent)return;
@@ -144,13 +136,36 @@
  function updateAdhanTitle(){
   const el=$('adhanVisual');if(!el?.classList.contains('active'))return;
   const info=$('adhanInfo')?.textContent||'';
-  const name=/Fajr|Ḍuhr|ʿAṣr|Maġrib|ʿIšāʾ/.exec(info)?.[0]||'Aḏān';
-  const title=el.querySelector('.adhan-title');if(title)title.textContent=name==='Aḏān'?'Aḏān · Gebetszeit':name+' · Aḏān';
+  const key=el.dataset.prayerKey||'';const name=key==='test'?'Aḏān-Test':({fajr:'Faǧr',dhuhr:'Ḍuhr',asr:'ʿAṣr',maghrib:'Maġrib',isha:'ʿIšāʾ'}[key]||'Aḏān');
+  const title=el.querySelector('.adhan-title');if(title)title.textContent=name==='Aḏān-Test'?'Aḏān · Hörprobe':name==='Aḏān'?'Aḏān · Gebetszeit':name+' · Aḏān';
   el.dataset.cinema=prefs.adhanCinema?'on':'off';
  }
  function handleConnection(){
   const t=$('homeConnectionStatus');if(t)t.textContent=navigator.onLine?'Verbunden – DĀR-Livequellen werden regelmäßig geprüft':'Offline – lokale Gebetsberechnung; letzte gespeicherte Inhalte ggf. veraltet';
  }
+
+ const picker=$('surahPicker'), opener=$('openSurahPicker'), search=$('surahSearch'), list=$('surahList'), nativeSelect=$('surah');
+ function renderSurahPicker(query=''){
+  if(!list||!Array.isArray(surahs))return;
+  const q=String(query).trim().toLocaleLowerCase();
+  list.replaceChildren();
+  for(const item of surahs){
+   const title=String(item.transliteration||item.name||('Sūrah '+item.id)),arabic=String(item.name||'');
+   if(q&&!String(item.id).includes(q)&&!title.toLocaleLowerCase().includes(q)&&!arabic.includes(q))continue;
+   const b=document.createElement('button');b.type='button';b.className='surah-option';b.setAttribute('role','option');b.setAttribute('aria-selected',String(Number(item.id)===Number(cfg.surah)));b.dataset.surah=String(item.id);
+   const n=document.createElement('span');n.className='surah-number';n.textContent=String(item.id);
+   const name=document.createElement('span');name.className='surah-name';name.textContent=title;
+   const meaning=document.createElement('span');meaning.className='surah-meaning';meaning.textContent=String(item.englishName||item.translation||'Kapitel '+item.id);
+   name.append(meaning);b.append(n,name);b.addEventListener('click',()=>{nativeSelect.value=String(item.id);nativeSelect.dispatchEvent(new Event('change',{bubbles:true}));closeSurahPicker()});list.append(b);
+  }
+ }
+ function closeSurahPicker(){if(!picker)return;picker.hidden=true;opener?.setAttribute('aria-expanded','false');opener?.focus()}
+ opener?.addEventListener('click',()=>{if(!picker)return;renderSurahPicker(search?.value||'');picker.hidden=false;opener.setAttribute('aria-expanded','true');search?.focus()});
+ $('closeSurahPicker')?.addEventListener('click',closeSurahPicker);picker?.addEventListener('click',e=>{if(e.target===picker)closeSurahPicker()});search?.addEventListener('input',()=>renderSurahPicker(search.value));
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&picker&&!picker.hidden)closeSurahPicker()});
+ const dataObserver=new MutationObserver(()=>{if(picker&&!picker.hidden)renderSurahPicker(search?.value||'')});if(nativeSelect)dataObserver.observe(nativeSelect,{childList:true});
+ nativeSelect?.addEventListener('change',()=>{if(picker&&!picker.hidden)renderSurahPicker(search?.value||'')});
+
  function init(){
   if(!$('app'))return;
   augmentBrand();bind();apply();loadMediaCatalog();setInterval(()=>{if(prefs.wallpaperMode==='auto'||prefs.saverWallpaper==='auto')apply()},300000);handleConnection();
