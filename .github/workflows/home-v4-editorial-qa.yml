@@ -202,7 +202,8 @@ jobs:
             WebDriverWait(driver,10).until(lambda d:d.find_element(By.ID,'quranReaderPanel').get_attribute('hidden') is None)
             qroute=driver.execute_script("return {active:document.getElementById('quranReaderPanel').classList.contains('is-active'),screenHidden:document.getElementById('mainScreen').hidden,settings:!!document.querySelector('#quranReaderPanel [data-home-settings]'),background:getComputedStyle(document.querySelector('#quranReaderPanel .quran-reader-shell')).backgroundImage}")
             if not qroute['active'] or qroute['screenHidden'] or not qroute['settings']:errors.append('Quran did not push in as a local route with contextual settings')
-            alphas=[float(a) for a in re.findall(r'rgba\\([^)]*,\\s*([0-9.]+)\\)',qroute['background'])]\n            if not any(0 < alpha < .65 for alpha in alphas):errors.append('Quran reader hides the selected HOME wallpaper beneath an opaque panel')
+            alphas=[float(a) for a in re.findall(r'rgba\([^)]*,\s*([0-9.]+)\)',qroute['background'])]
+            if not any(0 < alpha < .65 for alpha in alphas):errors.append('Quran reader hides the selected HOME wallpaper beneath an opaque panel')
             time.sleep(.4)
             WebDriverWait(driver,15).until(lambda d:bool(d.find_element(By.ID,'readerArabic').text.strip()) and bool(d.find_element(By.ID,'readerGerman').text.strip()))
             if not driver.find_element(By.ID,'readerSurah').get_attribute('value'):errors.append('Quran reader did not provide local Surah selection')
