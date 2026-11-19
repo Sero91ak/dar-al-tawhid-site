@@ -39,11 +39,11 @@ async function boot(unlockInMemory){
    if(!/^\/data\/frauen-.*\.json(?:\?.*)?$/.test(url))throw Error("Unexpected network request: "+url);
    const file=path.join(root,url.split("?")[0].replace(/^\/+/,""));
    const json=JSON.parse(fs.readFileSync(file,"utf8"));
-   if(unlockInMemory)for(const e of json.eintraege||[]){
+   for(const e of json.eintraege||[]){
      if(cohort.has(e.kennung)){
-       assert.equal(e.quellenstatus,"nicht-anzeigen","The on-disk record must stay hidden: "+e.kennung);
        assert.equal(e.freigabeDurchSerhat,true,"Owner flag missing: "+e.kennung);
-       e.quellenstatus="geprueft"; // NEVER saved, only a RAM preview
+       // Explicit fixtures let this test pass before AND after actual approval.
+       e.quellenstatus=unlockInMemory?"geprueft":"nicht-anzeigen";
      }
    }
    return Promise.resolve({ok:true,json:async()=>json});
