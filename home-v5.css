@@ -1686,3 +1686,9 @@
 @media (orientation:portrait) {
   #app .reader-arabic {border-right:0!important;border-bottom:1px solid var(--fine)!important;}
 }
+
+/* Preserve comfortable reading sizes on short landscape screens; the story scrolls. */
+@media (max-width:700px) and (orientation:landscape) and (max-height:500px) {
+  #app .daily-de {font-size:clamp(18px,2vh,20px)!important;line-height:1.4!important;}
+  #app .source {font-size:clamp(12px,1.5vh,13px)!important;line-height:1.4!important;}
+}
