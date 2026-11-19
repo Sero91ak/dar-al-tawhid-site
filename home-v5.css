@@ -1872,3 +1872,10 @@
   #app .header-meta>div span {font-size:clamp(7px,1.4vw,9px)!important;line-height:1.1!important;}
   #app .header-meta .now {font-size:clamp(13px,2.5vw,18px)!important;}
 }
+
+
+/* V10: palette accent token wins over the legacy light-theme important token. */
+#app[data-home-palette="light"] {--gold:#66501f!important;}
+#app[data-home-palette="soft"] {--gold:#704345!important;}
+#app[data-home-palette="eisgold"] {--gold:#40596c!important;}
+#app[data-home-palette="salbei"] {--gold:#405c48!important;}
