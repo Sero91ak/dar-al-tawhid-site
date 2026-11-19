@@ -1,20 +1,36 @@
-/* DĀR AL TAWḤĪD ʿUmrah scope-only offline cache. No tracking or data uploads. */
-const CACHE_NAME='dar-umrah-guide-v3-20261119';
-const PREFIX='dar-umrah-guide-';
-const OFFLINE_DOCUMENT=new URL('./index.html',self.registration.scope).toString();
-self.addEventListener('install',event=>{
-  event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.add(OFFLINE_DOCUMENT)).then(()=>self.skipWaiting()).catch(()=>{}));
-});
-self.addEventListener('activate',event=>{
-  event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith(PREFIX)&&k!==CACHE_NAME).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));
-});
-self.addEventListener('fetch',event=>{
-  const request=event.request;
-  if(request.method!=='GET'||request.mode!=='navigate')return;
-  const u=new URL(request.url);
-  if(u.origin!==self.location.origin||!u.pathname.startsWith(new URL(self.registration.scope).pathname))return;
-  event.respondWith(fetch(request).then(response=>{
-    if(response.ok){const copy=response.clone();event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.put(OFFLINE_DOCUMENT,copy)).catch(()=>{}));}
-    return response;
-  }).catch(()=>caches.match(OFFLINE_DOCUMENT).then(cached=>cached||Response.error())));
+'use strict';
+/* DĀR AL TAWḤĪD ʿUmrah cache; scope /umrah/ only. */
+const CACHE='dar-umrah-v8-standalone-1';
+const CORE=['./','./index.html','./offline.html'];
+const BRAND=['/app-icon-512.png','/assets/dar-3d-icons/home.png','/assets/dar-3d-icons/qibla.png','/assets/dar-3d-icons/compass.png','/assets/dar-3d-icons/image.png','/assets/dar-3d-icons/library.png','/assets/dar-3d-icons/mosque.png'];
+const BRAND_PATHS=new Set(BRAND);
+const PREFIX=new URL(self.registration.scope).pathname;
+self.addEventListener('install',ev=>ev.waitUntil((async()=>{
+ const c=await caches.open(CACHE);
+ await c.addAll(CORE);
+ await Promise.all(BRAND.map(async p=>{try{await c.add(p)}catch(_){}}));
+ await self.skipWaiting();
+})()));
+self.addEventListener('activate',ev=>ev.waitUntil((async()=>{
+ const keys=await caches.keys();
+ await Promise.all(keys.filter(k=>k.startsWith('dar-umrah-')&&k!==CACHE).map(k=>caches.delete(k)));
+ await self.clients.claim();
+})()));
+self.addEventListener('fetch',ev=>{
+ const req=ev.request;
+ if(req.method!=='GET')return;
+ const u=new URL(req.url);
+ if(u.origin!==self.location.origin)return;
+ if(!u.pathname.startsWith(PREFIX)&&!BRAND_PATHS.has(u.pathname))return;
+ ev.respondWith((async()=>{
+   const cached=await caches.match(req);
+   if(cached)return cached;
+   try{const response=await fetch(req);
+     if(response.ok){const c=await caches.open(CACHE);c.put(req,response.clone()).catch(()=>{});}
+     return response;
+   }catch(_){
+     if(req.mode==='navigate')return(await caches.match('./index.html'))||new Response('Offline nicht vorbereitet.',{status:503});
+     return Response.error();
+   }
+ })());
 });
