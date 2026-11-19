@@ -138,9 +138,6 @@ struct DashboardView: View {
                 NavigationLink { QuranView(repository: repository) } label: {
                     DARQuickAction(title: "Qurʾān", systemImage: "book.closed.fill", tint: Color.indigo, mediaURL: DARNextMedia.quran)
                 }
-                NavigationLink { DashboardAssistantView(repository: repository) } label: {
-                    DARQuickAction(title: "Assistant", systemImage: "sparkles", tint: Color.purple)
-                }
                 NavigationLink { PrayerView() } label: {
                     DARQuickAction(title: "Gebet", systemImage: "clock.fill", tint: theme.gold, mediaURL: DARNextMedia.prayer)
                 }
