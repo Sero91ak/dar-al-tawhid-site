@@ -44,6 +44,12 @@ The current PRs are focused increments, not evidence that all app content, featu
 - real audio interruption and location-permission behavior;
 - supported older iOS runtime coverage and release-gate documentation.
 
+## Assistant public-entry audit (2026-11-19 21:21 CET)
+
+The primary-tab PR removes the Assistant tab, but a source audit found two remaining visitor-facing routes: a Dashboard quick action and an “AI Assistant” tile in the Islamic Hub. The underlying transport is a local keyword matcher with canned replies; the inspected assistant files contain no generative model or external AI endpoint. These labels overstate the current prototype and precede the quality gates in #1791.
+
+[PR #1817](https://github.com/Sero91ak/dar-al-tawhid-site/pull/1817), based on the primary-tab PR, removes those two public entry points while retaining the prototype source. It adds a UI assertion for both surfaces. The new UI assertion and build have not yet run due to low local disk space; PR #1817 remains draft pending Xcode verification.
+
 ## Next work
 
 1. Preserve and reconcile the untracked local snapshot against the actual GitHub DARNext branch before treating either as the complete source of truth.
