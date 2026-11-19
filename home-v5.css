@@ -1724,3 +1724,73 @@
 #app[data-home-palette] #saver .saver-source,
 #app[data-home-palette] #saver .saver-bottom {color:var(--home-muted)!important;}
 #app[data-home-palette] #saver .saver-bottom {border-color:var(--fine)!important;}
+
+/* V7 follow-up — palette-scoped rules outrank legacy generic light-mode overrides. */
+#app[data-home-palette] .home-nav button,
+#app[data-home-palette] .home-nav a {
+  color:var(--home-ink)!important;background:transparent!important;border:1px solid transparent!important;
+  border-bottom-color:var(--fine)!important;border-radius:0!important;box-shadow:none!important;
+}
+#app[data-home-palette] .home-nav button:hover,
+#app[data-home-palette] .home-nav button:focus-visible,
+#app[data-home-palette] .home-nav a:hover,
+#app[data-home-palette] .home-nav a:focus-visible {
+  color:var(--home-ink)!important;background:rgba(var(--home-wash),.22)!important;
+  border-color:var(--fine)!important;box-shadow:none!important;
+}
+#app[data-home-palette] .header-meta {
+  color:var(--home-ink)!important;background:linear-gradient(90deg,rgba(var(--home-wash),.24),rgba(var(--home-wash),.08),transparent)!important;
+  border:0!important;border-block:1px solid var(--fine)!important;border-radius:0!important;box-shadow:none!important;
+}
+#app[data-home-palette] .header-meta span,
+#app[data-home-palette] .header-meta strong,
+#app[data-home-palette] .header-meta .now,
+#app[data-home-palette] .brand-title,
+#app[data-home-palette] .site-name,
+#app[data-home-palette] .brand-mini {color:var(--home-ink)!important;text-shadow:0 1px 3px rgba(var(--home-wash),.42)!important;}
+#app[data-home-palette] .hero-left,
+#app[data-home-palette] .hero-right,
+#app[data-home-palette] .times-band,
+#app[data-home-palette] .daily-area .audio-area {
+  color:var(--home-ink)!important;background:transparent!important;border-radius:0!important;box-shadow:none!important;
+}
+#app[data-home-palette] .hero-left {border-left:2px solid var(--fine)!important;padding-left:clamp(10px,1.6vw,24px)!important;}
+#app[data-home-palette] .hero-right {border-left:1px solid var(--fine)!important;}
+#app[data-home-palette] .times-band {border-block:1px solid var(--fine)!important;}
+#app[data-home-palette] .daily-area .audio-area {border-left:1px solid var(--fine)!important;}
+#app[data-home-palette] .hero-verse,
+#app[data-home-palette] .daily-title,
+#app[data-home-palette] .daily-de,
+#app[data-home-palette] .source,
+#app[data-home-palette] .next-name,
+#app[data-home-palette] .main-time,
+#app[data-home-palette] .counter,
+#app[data-home-palette] .prayer-cell .pname,
+#app[data-home-palette] .prayer-cell .ptime,
+#app[data-home-palette] .audio-title,
+#app[data-home-palette] .audio-sub {color:var(--home-ink)!important;text-shadow:0 1px 3px rgba(var(--home-wash),.38)!important;}
+#app[data-home-palette] .overline,
+#app[data-home-palette] .daily-label,
+#app[data-home-palette] .band-head,
+#app[data-home-palette] .audio-kicker {color:var(--gold)!important;text-shadow:0 1px 3px rgba(var(--home-wash),.35)!important;}
+
+#app[data-home-palette] .quran-reader-view {background:rgba(var(--home-wash),.12)!important;color:var(--home-ink)!important;}
+#app[data-home-palette] .quran-reader-shell {background:linear-gradient(145deg,rgba(var(--home-wash),.28),rgba(var(--home-wash),.18))!important;color:var(--home-ink)!important;box-shadow:none!important;}
+#app[data-home-palette] .reader-column {padding:clamp(14px,2vw,28px)!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;}
+#app[data-home-palette] .reader-arabic {border-right:1px solid var(--fine)!important;}
+#app[data-home-palette] #readerArabic,
+#app[data-home-palette] #readerGerman,
+#app[data-home-palette] .reader-transliteration {color:var(--home-ink)!important;}
+#app[data-home-palette] .reader-transliteration {background:transparent!important;border:0!important;border-left:2px solid var(--gold)!important;border-radius:0!important;box-shadow:none!important;}
+#app[data-home-palette] .calendar-view .home-view-panel {background:rgba(var(--home-wash),.16)!important;color:var(--home-ink)!important;border:0!important;border-radius:0!important;box-shadow:none!important;}
+#app[data-home-palette] .calendar-view .home-view-head,
+#app[data-home-palette] .calendar-view .home-view-intro,
+#app[data-home-palette] .calendar-view .home-view-foot {color:var(--home-ink)!important;background:transparent!important;}
+#app[data-home-palette] .festival-list article {color:var(--home-ink)!important;background:transparent!important;border:0!important;border-bottom:1px solid var(--fine)!important;border-radius:0!important;box-shadow:none!important;}
+#app[data-home-palette] .festival-list article strong {color:var(--home-ink)!important;}
+#app[data-home-palette] .festival-list article span {color:var(--home-muted)!important;}
+@media (orientation:portrait) {
+  #app[data-home-palette] .hero-right {border-left:0!important;border-top:1px solid var(--fine)!important;padding:clamp(10px,2vh,18px) 0 0!important;}
+  #app[data-home-palette] .daily-area .audio-area {border-left:0!important;border-top:1px solid var(--fine)!important;}
+  #app[data-home-palette] .reader-arabic {border-right:0!important;border-bottom:1px solid var(--fine)!important;}
+}
