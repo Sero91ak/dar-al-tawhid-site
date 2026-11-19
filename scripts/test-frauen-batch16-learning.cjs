@@ -68,6 +68,16 @@ assert.equal(checked,144);
 assert.equal(questions,576);
 assert.throws(()=>api.questions(batch.records[0].id,locale.entryIds,locale.entries,"de",new Set([batch.records[0].id])),/Not enough verified published entries/,"Quiz must be closed without two published distractors");
 assert.throws(()=>api.questions(batch.records[0].id,locale.entryIds,locale.entries,"de",new Set(batch.records.slice(1).map(r=>r.id))),/not approved/,"Unapproved article must not be a question source");
+const three=new Set(batch.records.slice(0,3).map(r=>r.id));
+const threePacks=batch.records.slice(0,3).map(r=>locale.entries[r.id].locales.de);
+const isolated=api.questions(batch.records[0].id,locale.entryIds,locale.entries,"de",three);
+assert.equal(isolated.length,4,"Three verified records must allow exactly two distinct distractors");
+for(const q of isolated){
+ const field=q.field;
+ const eligible=new Set(threePacks.map(p=>normalize(field==="statement"?apiFirst(p.statement):p[field])));
+ assert.equal(q.options.length,3);
+ assert.ok(q.options.every(option=>eligible.has(normalize(option))),"Unapproved article appeared as a quiz distractor");
+}
 const focusId="neufokus-frauenwissen-16-20261118";
 for(const p of ["content/focus-feed/feed-index.json","content/staging/focus-feed/feed-index.json"]){
  const feed=read(p),matches=(feed.items||[]).filter(x=>x.id===focusId);
