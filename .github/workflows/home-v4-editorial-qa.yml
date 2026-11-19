@@ -39,7 +39,7 @@ jobs:
           const js=html.split('<script>')[1]?.split('</script>')[0];
           if(!js)throw Error('No inline HOME V2 engine found');
           new Function(js);
-          const required=['fajrAdhanTrack','homeAppearance','homeWallpaperMode','homeWallpaperUpload','homeConnectionStatus','home-v4.css','home-v4.js','home-v5.css','h4ShowVerse','h4ShowHadith','openTadabbur','tadabburPanel','saverMode','quranReaderPanel','quranReciterMode','readerTransliteration','openAppearance','appearancePopover','tadabbur-inline' ,'selectSettingsTab'];
+          const required=['fajrAdhanTrack','homeAppearance','homeWallpaperMode','homeWallpaperUpload','homeConnectionStatus','home-v4.css','home-v4.js','home-v5.css','h4ShowVerse','h4ShowHadith','openTadabbur','tadabburPanel','saverMode','quranReaderPanel','quranReciterMode','readerTransliteration','openCalendarPanel','home-nav','tadabbur-inline' ,'selectSettingsTab'];
           for(const key of required)if(!html.includes(key))throw Error('Missing HOME V3 feature: '+key);
           if(!f.readFileSync('home-device/home-v3.js','utf8').includes('data-home-settings'))throw Error('Missing contextual HOME view settings control');
           if(html.includes('<nav class="footnav"'))throw Error('Bottom tabs must not exist');
@@ -135,13 +135,15 @@ jobs:
                 const screen=document.getElementById('mainScreen');return {w:innerWidth,h:innerHeight,scrollW:document.documentElement.scrollWidth,screenScroll:screen.scrollHeight,screenClient:screen.clientHeight,
                   v4:!!document.querySelector('link[href^="/home-v4.css"]'),footerTabs:!!document.querySelector('.footnav'),
                   icons:document.querySelectorAll('.settings-icons').length,theme:document.getElementById('app').dataset.homeTheme,
-                  fontSizes:{dailyDe:parseFloat(getComputedStyle(document.getElementById('dailyDe')).fontSize),source:parseFloat(getComputedStyle(document.getElementById('dailySource')).fontSize),counter:parseFloat(getComputedStyle(document.querySelector('.counter')).fontSize),ptime:parseFloat(getComputedStyle(document.querySelector('.prayer-cell .ptime')).fontSize)},lineSpacing:{daily:parseFloat(getComputedStyle(document.getElementById('dailyDe')).lineHeight)/parseFloat(getComputedStyle(document.getElementById('dailyDe')).fontSize),source:parseFloat(getComputedStyle(document.getElementById('dailySource')).lineHeight)/parseFloat(getComputedStyle(document.getElementById('dailySource')).fontSize)},
+                  nav:[...document.querySelectorAll('.home-nav button')].map(b=>{const r=b.getBoundingClientRect(),c=getComputedStyle(b);return{text:b.innerText.trim(),aria:b.getAttribute('aria-label'),width:r.width,height:r.height,bg:c.backgroundImage,border:c.borderTopColor,current:b.getAttribute('aria-current')}}),fontSizes:{dailyDe:parseFloat(getComputedStyle(document.getElementById('dailyDe')).fontSize),source:parseFloat(getComputedStyle(document.getElementById('dailySource')).fontSize),counter:parseFloat(getComputedStyle(document.querySelector('.counter')).fontSize),ptime:parseFloat(getComputedStyle(document.querySelector('.prayer-cell .ptime')).fontSize)},lineSpacing:{daily:parseFloat(getComputedStyle(document.getElementById('dailyDe')).lineHeight)/parseFloat(getComputedStyle(document.getElementById('dailyDe')).fontSize),source:parseFloat(getComputedStyle(document.getElementById('dailySource')).lineHeight)/parseFloat(getComputedStyle(document.getElementById('dailySource')).fontSize)},
                   heroRight:{display:getComputedStyle(document.querySelector('.hero-right')).display,width:document.querySelector('.hero-right').getBoundingClientRect().width,height:document.querySelector('.hero-right').getBoundingClientRect().height,storyHeight:document.querySelector('.hero-right .daily-story').getBoundingClientRect().height},
                   prayerArtCount:document.querySelectorAll('.prayer-glyph').length,arabicHomeVisible:[...document.querySelectorAll('.hero-verse,.bismillah,#dailyArabic,.next-arabic')].filter(x=>getComputedStyle(x).display!=='none'&&x.textContent.trim()).length,
                   boxes,wallpaper:getComputedStyle(document.getElementById('app')).backgroundImage}
               """)
               print('VIEWPORT',w,h,data,flush=True)
               if not data['v4'] or data['icons']<7:errors.append(f'{w}x{h}: HOME styling or one of seven settings icons missing')
+              if [x['text'] for x in data['nav']]!=['Start','Qurʾān','Islamische Festtage']:errors.append(f'{w}x{h}: HOME navigation labels or destinations missing')
+              if any(x['width']<44 or x['height']<44 or x['bg']=='none' or x['border']=='rgba(0, 0, 0, 0)' for x in data['nav']):errors.append(f'{w}x{h}: navigation button area too small or not visibly bounded')
               if data['footerTabs']:errors.append(f'{w}x{h}: footer tabs must be absent')
               if data['scrollW']>w+3:errors.append(f'{w}x{h}: document horizontal overflow')
               if data['boxes']['audioName']['height']<17:errors.append(f'{w}x{h}: Quran player title clipped')
@@ -178,15 +180,20 @@ jobs:
             WebDriverWait(driver,25).until(EC.element_to_be_clickable((By.ID,'openSettings')))
             external=driver.find_elements(By.CSS_SELECTOR,'.home-nav a,.calendar-card[href]')
             if external:errors.append('HOME section controls must not navigate to another application')
-            driver.find_element(By.ID,'openAppearance').click()
-            WebDriverWait(driver,5).until(lambda d:d.find_element(By.ID,'appearancePopover').get_attribute('hidden') is None)
-            driver.find_element(By.CSS_SELECTOR,'[data-home-theme-choice="light"]').click()
-            if driver.find_element(By.ID,'app').get_attribute('data-home-theme')!='light':errors.append('Anchored appearance picker did not apply the selected theme')
-            if driver.find_element(By.ID,'appearancePopover').get_attribute('hidden') is None:errors.append('Appearance picker did not close after selection')
-            light_wallpaper=driver.execute_script("return {image:getComputedStyle(document.getElementById('app')).backgroundImage,artworkOpacity:parseFloat(getComputedStyle(document.querySelector('.artwork')).opacity)}")
-            print('LIGHT_WALLPAPER_VISIBILITY',light_wallpaper,flush=True)
-            if 'url(' not in light_wallpaper['image'] or light_wallpaper['artworkOpacity']>=.2:errors.append('Selected wallpaper is hidden beneath the ornamental artwork in light mode')
-            print('DIRECT_APPEARANCE_PICKER: PASS',flush=True)
+            nav_labels=[b.text.strip() for b in driver.find_elements(By.CSS_SELECTOR,'.home-nav button')]
+            if nav_labels!=['Start','Qurʾān','Islamische Festtage']:errors.append('HOME navigation labels are unclear or incomplete')
+            nav_style=driver.execute_script("return [...document.querySelectorAll('.home-nav button')].map(b=>{let r=b.getBoundingClientRect(),c=getComputedStyle(b);return {w:r.width,h:r.height,bg:c.backgroundImage,border:c.borderTopColor}})")
+            if len(nav_style)!=3 or any(x['w']<44 or x['h']<44 or x['bg']=='none' for x in nav_style):errors.append('HOME navigation buttons are too small or visually indistinct')
+            if driver.find_elements(By.ID,'openAppearance') or driver.find_elements(By.ID,'appearancePopover') or driver.find_elements(By.CSS_SELECTOR,'[data-home-palette-choice]'):errors.append('Unused appearance palette chooser remains visible in markup')
+            app=driver.find_element(By.ID,'app')
+            if app.get_attribute('data-home-theme')!='dark' or app.get_attribute('data-home-palette')!='dar-al-layl':errors.append('Dār al-Layl is not the single active appearance')
+            standard=driver.find_element(By.ID,'homeAppearance')
+            if standard.get_attribute('value')!='dark' or standard.get_attribute('disabled') is None or len(standard.find_elements(By.TAG_NAME,'option'))!=1:errors.append('HOME appearance settings expose more than the Dār al-Layl standard')
+            theme=driver.find_element(By.ID,'theme')
+            if theme.get_attribute('value')!='night' or theme.get_attribute('disabled') is None or len(theme.find_elements(By.TAG_NAME,'option'))!=1:errors.append('Legacy display settings expose another color palette')
+            wallpaper=driver.execute_script("return {image:getComputedStyle(document.getElementById('app')).backgroundImage,artworkOpacity:parseFloat(getComputedStyle(document.querySelector('.artwork')).opacity)}")
+            if 'url(' not in wallpaper['image'] or wallpaper['artworkOpacity']>=.2:errors.append('Dār al-Layl is covering the selected HOME wallpaper')
+            print('DĀR AL-LAYL ONLY + VISIBLE NAVIGATION: PASS',flush=True)
             driver.find_element(By.ID,'openCalendarPanel').click()
             WebDriverWait(driver,8).until(lambda d:d.find_element(By.ID,'calendarPanel').get_attribute('hidden') is None)
             route_state=driver.execute_script("const p=document.querySelector('#calendarPanel .home-view-panel');return {active:document.getElementById('calendarPanel').classList.contains('is-active'),screenHidden:document.getElementById('mainScreen').hidden,covered:document.getElementById('mainScreen').classList.contains('view-covered'),transition:getComputedStyle(document.getElementById('calendarPanel')).transitionDuration,background:getComputedStyle(p).backgroundColor}")
@@ -294,24 +301,21 @@ jobs:
               native_choice.click()
               chosen=native_choice.get_attribute('aria-pressed')
               if chosen!='true':errors.append('Native wallpaper selection not functional')
-            Select(driver.find_element(By.ID,'homeAppearance')).select_by_value('light')
-            if driver.find_element(By.ID,'app').get_attribute('data-home-theme')!='light':errors.append('Light mode not applied')
-            if driver.execute_script("return getComputedStyle(document.getElementById('app')).colorScheme")!='light':errors.append('V5 light color system not applied')
+            if driver.find_element(By.ID,'app').get_attribute('data-home-theme')!='dark' or driver.find_element(By.ID,'app').get_attribute('data-home-palette')!='dar-al-layl':errors.append('Dār al-Layl standard changed during settings navigation')
+            if driver.find_element(By.ID,'homeAppearance').get_attribute('disabled') is None:errors.append('Appearance standard should not be switchable to a broken palette')
             if driver.execute_script("return getComputedStyle(document.getElementById('dailyDe')).whiteSpace")=='nowrap':errors.append('Daily translation still truncated to one line')
-            long_light=driver.execute_script("""
+            long_dark_fixed=driver.execute_script("""
               const article=document.querySelector('.daily-story'),ar=document.getElementById('dailyArabic'),de=document.getElementById('dailyDe'),src=document.getElementById('dailySource');
               const old=[ar.textContent,de.textContent,src.textContent];
               de.textContent=('Eine gut lesbare deutsche Übersetzung mit vollständigem Sinn. ').repeat(18);src.textContent=('Qurʾān · Beispielquelle · ').repeat(12);
               const result={scrollHeight:article.scrollHeight,clientHeight:article.clientHeight,overflow:getComputedStyle(article).overflowY};
               [ar.textContent,de.textContent,src.textContent]=old;return result;
             """)
-            print('LONG_DAILY_LIGHT',long_light,flush=True)
-            if long_light['scrollHeight']<=long_light['clientHeight'] or long_light['overflow']!='auto':errors.append('Long daily content is clipped in light mode')
+            print('LONG_DAILY_FIXED_THEME',long_dark_fixed,flush=True)
+            if long_dark_fixed['scrollHeight']<=long_dark_fixed['clientHeight'] or long_dark_fixed['overflow']!='auto':errors.append('Long daily content is clipped in the fixed Dār al-Layl theme')
             driver.find_element(By.CSS_SELECTOR,'button[data-tab="anzeige"]').click()
-            Select(driver.find_element(By.ID,'theme')).select_by_value('night')
-            if driver.find_element(By.ID,'homeAppearance').get_attribute('value')!='dark':errors.append('Legacy dark appearance selector did not synchronize')
-            Select(driver.find_element(By.ID,'theme')).select_by_value('ivory')
-            if driver.find_element(By.ID,'homeAppearance').get_attribute('value')!='light':errors.append('Legacy light appearance selector did not synchronize')
+            legacy_theme=driver.find_element(By.ID,'theme')
+            if legacy_theme.get_attribute('disabled') is None or legacy_theme.get_attribute('value')!='night' or len(legacy_theme.find_elements(By.TAG_NAME,'option'))!=1:errors.append('Legacy display settings must keep only the Dār al-Layl standard')
             driver.find_element(By.CSS_SELECTOR,'button[data-tab="inhalte"]').click()
             WebDriverWait(driver,20).until(lambda d:len(d.find_elements(By.CSS_SELECTOR,'#surah option'))==114)
             if len(driver.find_elements(By.CSS_SELECTOR,'#quranPlaybackMode option'))!=2 or len(driver.find_elements(By.CSS_SELECTOR,'#quranPlaybackScope option'))!=2:errors.append('Quran manual/automatic and all/single controls missing')
@@ -338,8 +342,8 @@ jobs:
             time.sleep(1)
             saved=driver.execute_script("return JSON.parse(localStorage.getItem('dar-home-v3-preferences')||'{}')")
             print('PERSISTED_HOME_PREFS',saved,flush=True)
-            if saved.get('theme')!='light' or saved.get('wallpaperMode')!='manual' or saved.get('wallpaper')!='tv-kaaba-sunrise' or saved.get('saverWallpaper')!='tv-kaaba-sunrise' or saved.get('reduceMotion') is not True:errors.append('Appearance and independent wallpaper selections did not persist')
-            if driver.find_element(By.ID,'app').get_attribute('data-home-theme')!='light':errors.append('Saved light appearance did not restore after reload')
+            if saved.get('theme')!='dark' or saved.get('palette')!='dar-al-layl' or saved.get('wallpaperMode')!='manual' or saved.get('wallpaper')!='tv-kaaba-sunrise' or saved.get('saverWallpaper')!='tv-kaaba-sunrise' or saved.get('reduceMotion') is not True:errors.append('Appearance and independent wallpaper selections did not persist')
+            if driver.find_element(By.ID,'app').get_attribute('data-home-theme')!='dark' or driver.find_element(By.ID,'app').get_attribute('data-home-palette')!='dar-al-layl':errors.append('Dār al-Layl standard did not restore after reload')
             if 'reduced-motion' not in driver.find_element(By.ID,'app').get_attribute('class'):errors.append('Reduced motion did not persist after reload')
             driver.find_element(By.ID,'openSettings').click()
             driver.find_element(By.CSS_SELECTOR,'button[data-tab="adhan"]').click()
