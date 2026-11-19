@@ -1845,3 +1845,30 @@
 #app[data-home-palette="soft"] .overline,#app[data-home-palette="soft"] .band-head,#app[data-home-palette="soft"] .daily-label,#app[data-home-palette="soft"] .audio-kicker,#app[data-home-palette="soft"] .saver-kicker,#app[data-home-palette="soft"] .next-arabic,
 #app[data-home-palette="eisgold"] .overline,#app[data-home-palette="eisgold"] .band-head,#app[data-home-palette="eisgold"] .daily-label,#app[data-home-palette="eisgold"] .audio-kicker,#app[data-home-palette="eisgold"] .saver-kicker,#app[data-home-palette="eisgold"] .next-arabic,
 #app[data-home-palette="salbei"] .overline,#app[data-home-palette="salbei"] .band-head,#app[data-home-palette="salbei"] .daily-label,#app[data-home-palette="salbei"] .audio-kicker,#app[data-home-palette="salbei"] .saver-kicker,#app[data-home-palette="salbei"] .next-arabic {color:var(--gold)!important;text-shadow:0 1px 2px rgba(255,255,255,.45)!important;}
+
+
+/* V9: keep navigation and location/date context usable on narrow landscape phones. */
+@media (max-width:700px) and (orientation:landscape) and (max-height:500px) {
+  #app .top {
+    grid-template-columns:minmax(0,1fr) auto auto!important;
+    grid-template-rows:minmax(34px,auto)!important;
+    column-gap:clamp(4px,1vw,10px)!important;
+    align-items:center!important;
+  }
+  #app .top .logo {grid-column:1!important;grid-row:1!important;min-width:0!important;width:auto!important;gap:5px!important;}
+  #app .top .logo-mark {width:clamp(23px,4.5vh,30px)!important;height:clamp(23px,4.5vh,30px)!important;}
+  #app .top .brand-title {font-size:clamp(9px,1.8vw,13px)!important;letter-spacing:.07em!important;white-space:nowrap;}
+  #app .top .brand-mini,#app .top .site {display:none!important;}
+  #app .top .home-nav {grid-column:2!important;grid-row:1!important;width:auto!important;min-width:0!important;display:flex!important;flex-wrap:nowrap!important;gap:2px!important;}
+  #app .top .home-nav button {flex:0 1 auto!important;min-width:0!important;min-height:30px!important;padding:2px clamp(3px,.7vw,7px)!important;}
+  #app .top .home-nav button img {width:clamp(14px,2.7vh,18px)!important;height:clamp(14px,2.7vh,18px)!important;}
+  #app .top .home-nav button span {font-size:clamp(7px,1.25vw,9px)!important;letter-spacing:0!important;}
+  #app .top .top-spacer {display:none!important;}
+  #app .top .time-box {grid-column:3!important;grid-row:1!important;width:auto!important;min-width:0!important;}
+  #app .top .topbtn {width:clamp(32px,6vh,42px)!important;height:clamp(32px,6vh,42px)!important;min-width:clamp(32px,6vh,42px)!important;min-height:clamp(32px,6vh,42px)!important;}
+  #app .header-meta {grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:2px clamp(8px,2vw,18px)!important;padding:4px 7px!important;}
+  #app .header-meta>div {min-width:0!important;}
+  #app .header-meta>div strong {display:block!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;overflow-wrap:anywhere;font-size:clamp(9px,1.7vw,11px)!important;line-height:1.15!important;}
+  #app .header-meta>div span {font-size:clamp(7px,1.4vw,9px)!important;line-height:1.1!important;}
+  #app .header-meta .now {font-size:clamp(13px,2.5vw,18px)!important;}
+}
