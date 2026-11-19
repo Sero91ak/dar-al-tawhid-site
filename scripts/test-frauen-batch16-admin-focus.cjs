@@ -40,6 +40,11 @@ db[keys[1]].state="published-live-verified";
 for(const row of db[keys[1]].records){
  row.sourceReview="approved";row.translationReview="approved";row.uiQa="passed";row.publishQa="passed";
 }
+const focusItems=db["assets/frauen/frauen-neufokus-v1.json"].items;
+const originalSecondId=focusItems[1].id;
+focusItems[1].id=focusItems[0].id;
+await expectBlock("Duplicate focus source IDs must not publish even with 16 rows");
+focusItems[1].id=originalSecondId;
 const first=await attempt();
 assert.equal(first.ok,true);assert.equal(first.item.visibility,"48h");
 const firstStart=Date.parse(first.item.startsAt),firstExpiry=Date.parse(first.item.expiresAt);
@@ -74,5 +79,10 @@ assert.equal(third.item.startsAt,first.item.startsAt,"Republishing must not rest
 assert.equal(third.item.expiresAt,first.item.expiresAt,"Republishing must not extend 48h");
 assert.equal(third.item.visibility,"48h","Visibility must survive draft/live cycle");
 assert.equal(writes,5);
+// A never-published draft cannot smuggle an untrusted firstPublishedAt value.
+const forged=await mod.saveFeedEntry(env,{...input,status:"draft",staging:true,firstPublishedAt:"2020-01-01T00:00:00.000Z"},helpers);
+assert.equal(forged.item.firstPublishedAt,null,"Forged timestamp on unpublished draft persisted");
+assert.equal(forged.item.status,"draft");
+assert.equal(writes,6);
 console.log("PASS DĀR Admin 48h launch: guarded publication, immutable 48h window, unrelated card write preserves visibility, draft/live cycle cannot extend, no real publish.");
 })().catch(e=>{console.error(e.stack||e);process.exitCode=1});
