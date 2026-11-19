@@ -112,6 +112,7 @@ jobs:
           from selenium.webdriver.support.ui import Select
           from selenium.common.exceptions import WebDriverException
           opts=Options()
+          opts.set_capability('goog:loggingPrefs',{'browser':'ALL'})
           for flag in ['--headless=new','--no-sandbox','--disable-dev-shm-usage','--disable-gpu','--hide-scrollbars']:
             opts.add_argument(flag)
           driver=webdriver.Chrome(options=opts)
@@ -353,7 +354,7 @@ jobs:
             try:
               WebDriverWait(driver,45).until(lambda d:d.execute_script("const x=window.darTvScreensaver?.status();return x?.ready&&x.counts.hadith>0&&x.counts.athar>0&&x.counts.quranTad===4774"))
             except Exception:
-              print('TVOS_LOAD_DIAGNOSTICS',driver.execute_script("return {status:window.darTvScreensaver?.status(),type:document.getElementById('saverType')?.textContent,detail:document.getElementById('saverDe')?.textContent,failures:performance.getEntriesByType('resource').filter(x=>x.name.includes('/apple-tv/')).map(x=>x.name)}"),flush=True)
+              print('TVOS_LOAD_DIAGNOSTICS',driver.execute_script("const x=window.darTvScreensaver;return {globalType:typeof x,statusType:typeof x?.status,statusValue:typeof x?.status==='function'?x.status():null,typeExists:!!document.getElementById('saverType'),detail:document.getElementById('saverDe')?.textContent,resourceErrors:performance.getEntriesByType('resource').filter(x=>x.name.includes('dar-home-kiosk-preview')||x.name.includes('/library-shell.json')).map(x=>({name:x.name,duration:x.duration,transfer:x.transferSize}))}"),driver.get_log('browser')[-20:],flush=True)
               raise
             tv_status=driver.execute_script("return window.darTvScreensaver.status()")
             print('TVOS_5_5_5_CATALOG',tv_status,flush=True)
