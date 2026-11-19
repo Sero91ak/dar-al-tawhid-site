@@ -8,7 +8,7 @@
   let current='';
 
   function findPrayerKey(){
-    const visual=$('adhanVisual');if(visual?.dataset.prayerKey==='test')return'';
+    const visual=$('adhanVisual');if(visual?.dataset.prayerKey==='test')return'';if(visual?.dataset.prayerKey?.startsWith('test:'))return visual.dataset.prayerKey.slice(5);
     const raw=($('adhanInfo')?.textContent||'').toLowerCase();
     if(/fajr|faǧr|morgengebet/i.test(raw))return'fajr';
     if(/ḍuhr|dhuhr|mittags/i.test(raw))return'dhuhr';
