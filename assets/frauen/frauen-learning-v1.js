@@ -32,9 +32,13 @@ function pickOptions(index,field,packs){
  options=options.slice(rotation).concat(options.slice(0,rotation));
  return{options:options,answer:options.indexOf(c)};
 }
-function questions(id,entryIds,entries,code){
- code=lang(code);var idx=entryIds.indexOf(id);if(idx<0)throw Error("Unknown canonical article");
- var packs=entryIds.map(x=>entries[x]&&entries[x].locales&&entries[x].locales[code]);
+function questions(id,entryIds,entries,code,approvedIds){
+ code=lang(code);
+ if(!approvedIds||typeof approvedIds.has!=="function")throw Error("Verified published source cohort required");
+ var eligible=entryIds.filter(x=>approvedIds.has(x));
+ var idx=eligible.indexOf(id);if(idx<0)throw Error("Canonical article is not approved");
+ if(eligible.length<3)throw Error("Not enough verified published entries for a safe quiz");
+ var packs=eligible.map(x=>entries[x]&&entries[x].locales&&entries[x].locales[code]);
  if(packs.some(p=>!p||!p.statement||!p.preview||!p.lesson||!p.sharh))throw Error("Incomplete learning locale");
  var fields=["preview","statement","lesson","sharh"],definitions=L[code].questions;
  return fields.map(function(field,n){var opts=pickOptions(idx,field==="statement"?"statementExcerpt":field,
@@ -62,7 +66,7 @@ function clear(){q.replaceChildren()}
 function message(msg){clear();q.append(elem("p","fw-message",msg))}
 function safeJson(response){if(!response.ok)throw Error("HTTP "+response.status);return response.json()}
 var entryIds,entries,entry,sourceUrl,sourceStatus,stage=0,correct=0,answered=false,items=[];
-function bottomLink(){var a=elem("a","fw-link",lab.back);a.href="/#frauen/"+encodeURIComponent(entry.area)+"/"+encodeURIComponent(id);a.target="_top";return a}
+function bottomLink(){var a=elem("a","fw-link",lab.back);a.href="/?lang="+encodeURIComponent(code)+"#frauen/"+encodeURIComponent(entry.area)+"/"+encodeURIComponent(id);a.target="_top";return a}
 var READ_LABELS={
  de:"Die vollständige Aussage erneut lesen",ar:"إعادة قراءة النص الكامل",en:"Read the complete statement again",
  tr:"Tam açıklamayı yeniden oku",ku:"Gotina tevahî dîsa bixwîne",ckb:"دووبارە خوێندنەوەی دەقی تەواو",
@@ -134,7 +138,22 @@ function finish(){
   }
   if(entry.sourceUrl!==original[0].direktnachweisUrl)throw Error("Original source mismatch");
   sourceUrl=entry.sourceUrl;
-  items=api.questions(id,entryIds,entries,code);
+  // No unpublished article can become a comprehension distractor.
+  var verified=new Set();
+  var areas=Object.keys(api.sourceFiles);
+  var records=await Promise.all(areas.map(function(area){
+    return area===entry.area?Promise.resolve(source):w.fetch(api.sourceFiles[area]+"?v=20261118-batch16-learning",{cache:"no-store"}).then(safeJson);
+  }));
+  records.forEach(function(doc){
+    (doc.eintraege||[]).forEach(function(e){
+      var loc=entries[e.kennung];
+      if(e.quellenstatus==="geprueft"&&e.freigabeDurchSerhat===true&&
+         loc&&loc.sourceUrl===e.direktnachweisUrl&&
+         loc.id===e.kennung&&e.contentId===e.kennung&&
+         e.localeCatalogId===e.kennung)verified.add(e.kennung);
+    });
+  });
+  items=api.questions(id,entryIds,entries,code,verified);
   if(items.length!==4||items.some(x=>x.options.length!==3))throw Error("Incomplete comprehension quiz");
   render();
  }catch(e){try{console.warn("DAR women learning",e)}catch(_){}message(lab.failed)}
