@@ -74,7 +74,7 @@
  async function openTadabbur(){
   const panel=$('tadabburPanel'),list=$('tadabburResults'),status=$('tadabburStatus');
   if(!panel)return;
-  document.querySelectorAll('.home-view').forEach(x=>x.hidden=true);panel.hidden=false;
+  panel.hidden=false;panel.setAttribute('aria-expanded','true');
   const verse=window.darHomeDailyVerse||{},reference=verse.reference||'';
   if(!refOK(reference)){say(status,'Öffne zuerst einen Qurʾān-Vers des Tages.');return}
   say($('tadabburVerse'),'Vers '+reference);say(status,'Prüfe den vollständigen DĀR-Tadabbur-Katalog …');if(list)list.replaceChildren();
@@ -227,9 +227,9 @@
  function render(){if(!library){say($('saverType'),'DĀR-Bildschirmschoner · wird geladen');say($('saverDe'),'Geprüfte Inhalte werden synchronisiert …');ensureReady().then(()=>{if(library){if(!rotationState?.current)nextCard();else renderCard()}}).catch(()=>{});return}if(!rotationState?.current)nextCard();else renderCard()}
  function tick(now){if(!document.body.classList.contains('saver-open')&&!$('app')?.classList.contains('saver-open'))return;if(!library){ensureReady().then(()=>{if(library)nextCard()});return}advance(now).catch(()=>{})}
  function install(){
-  $('openTadabbur')?.addEventListener('click',openTadabbur);
+  $('openTadabbur')?.addEventListener('click',()=>{const p=$('tadabburPanel');if(p&&!p.hidden){p.hidden=true;p.setAttribute('aria-expanded','false');$('openTadabbur').setAttribute('aria-expanded','false');return}$('openTadabbur')?.setAttribute('aria-expanded','true');openTadabbur()});
   $('nextTadabbur')?.addEventListener('click',openTadabbur);
-  $('closeTadabbur')?.addEventListener('click',()=>{if($('tadabburPanel'))$('tadabburPanel').hidden=true});
+  $('closeTadabbur')?.addEventListener('click',()=>{const p=$('tadabburPanel');if(p){p.hidden=true;p.setAttribute('aria-expanded','false')}$('openTadabbur')?.setAttribute('aria-expanded','false');$('openTadabbur')?.focus({preventScroll:true})});
   $('saverMode')?.addEventListener('change',e=>{const isTv=e.target.value==='tvos',field=$('saverRotate')?.closest('.field');if(field)field.hidden=isTv;if(isTv)ensureReady()});
   if($('saverMode')?.value==='tvos')ensureReady();
   window.darTvScreensaver={render,tick,ensureReady,status};
