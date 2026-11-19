@@ -1,5 +1,11 @@
 import SwiftUI
 
+enum QuranScrollMotionPolicy {
+    static func shouldAnimate(reduceMotion: Bool) -> Bool {
+        !reduceMotion
+    }
+}
+
 struct QuranView: View {
     let repository: LocalContentRepository
 
@@ -84,6 +90,7 @@ struct QuranSurahView: View {
 
     @Environment(\.darTheme) private var theme
     @Environment(QuranAudioEngine.self) private var audioEngine
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var surah: QuranSurah?
     @State private var errorMessage: String?
 
@@ -139,7 +146,11 @@ struct QuranSurahView: View {
             .task(id: surah?.id) {
                 guard let focusAyah, surah != nil else { return }
                 await Task.yield()
-                withAnimation { proxy.scrollTo(focusAyah, anchor: .center) }
+                if QuranScrollMotionPolicy.shouldAnimate(reduceMotion: reduceMotion) {
+                    withAnimation { proxy.scrollTo(focusAyah, anchor: .center) }
+                } else {
+                    proxy.scrollTo(focusAyah, anchor: .center)
+                }
             }
         }
         .background(theme.backgroundGradient.ignoresSafeArea())
