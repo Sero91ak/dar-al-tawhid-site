@@ -2,7 +2,7 @@
 (()=>{'use strict';
  const BASE='/apple-tv/',TAD=BASE+'quran/tadabbur/',SCREEN=BASE+'screensaver/',HADITH=BASE+'hadith/';
  const $=id=>document.getElementById(id),DB_NAME='dar-home-content-v1';
- let dbPromise=null,tadPromise=null,saverPromise=null,readyPromise=null,library=null,rotation=null,rotationState=null;
+ let dbPromise=null,tadPromise=null,saverPromise=null,readyPromise=null,library=null,tadDataCache=null,rotation=null,rotationState=null;
  let quranMemory=new Map(),renderToken=0,lastLoadError='';
  const say=(el,value)=>{if(el)el.textContent=String(value||'')};
  function openDB(){
@@ -68,7 +68,7 @@
    const source=document.createElement('div');source.className='tadabbur-source';source.textContent=[entry.source,entry.grading,entry.relation].filter(Boolean).join(' · ');
    card.append(statement,speaker,source);list.append(card);
   }
-  const data=library?.tad;
+  const data=tadDataCache;
   say(status,(data?.offline?'Offline-Cache':'DĀR-Tadabbur')+' · '+items.length+' geprüfte '+(items.length===1?'Überlieferung':'Überlieferungen'));
  }
  async function openTadabbur(){
@@ -79,7 +79,7 @@
   if(!refOK(reference)){say(status,'Öffne zuerst einen Qurʾān-Vers des Tages.');return}
   say($('tadabburVerse'),'Vers '+reference);say(status,'Prüfe den vollständigen DĀR-Tadabbur-Katalog …');if(list)list.replaceChildren();
   try{
-   const data=await loadTadabbur();library=library||{};library.tad=data;
+   const data=await loadTadabbur();tadDataCache=data;
    showPanel(data.byReference.get(reference)||[],verse);
   }catch(error){
    say(status,'DĀR-Tadabbur ist gerade nicht erreichbar. Der letzte vollständige lokale Stand bleibt erhalten.');
