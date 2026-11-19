@@ -1559,3 +1559,5 @@
 @media (prefers-reduced-motion:reduce) {
  #app .screen {transition:none!important}
 }
+
+#app[data-home-palette="nightgold"] { --gold:#d8bd82;--cream:#f2eee2;--text:#f4f0e6;--muted:#b8bdb5;--fine:rgba(216,189,130,.3);--home4-hair:rgba(216,189,130,.3);color-scheme:dark; }
