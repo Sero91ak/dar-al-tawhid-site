@@ -76,6 +76,23 @@ jobs:
           echo "full=$full" >> "$GITHUB_OUTPUT"
           echo "skip=$skip" >> "$GITHUB_OUTPUT"
 
+      - name: Resolve PR merge base
+        if: github.event_name == 'pull_request'
+        id: pr_diff
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+          # GitHub computes the true common ancestor; comparing directly
+          # to the tip of main would include files changed only on main.
+          MERGE_BASE="$(gh api "repos/${{ github.repository }}/compare/$BASE_SHA...$HEAD_SHA" --jq '.merge_base_commit.sha')"
+          test -n "$MERGE_BASE"
+          git fetch --no-tags --depth=1 origin "$MERGE_BASE"
+          echo "merge_base=$MERGE_BASE" >> "$GITHUB_OUTPUT"
+
       - name: Optimize current media
         if: steps.mode.outputs.skip != '1'
         shell: bash
@@ -85,9 +102,7 @@ jobs:
           if [ "${{ steps.mode.outputs.full }}" = "1" ]; then
             scripts/optimize-app-media.sh --all
           elif [ "${{ github.event_name }}" = "pull_request" ]; then
-            BASE_SHA="${{ github.event.pull_request.base.sha }}"
-            git fetch --no-tags origin "$BASE_SHA" --depth=1
-            git diff --name-only "$BASE_SHA" HEAD -- \
+            git diff --name-only "${{ steps.pr_diff.outputs.merge_base }}" HEAD -- \
               assets kids/assets content apple-tv ios test/assets \
               | scripts/optimize-app-media.sh --stdin
           else
@@ -123,9 +138,7 @@ jobs:
           scan_file="$(mktemp)"
           trap 'rm -f "$scan_file"' EXIT
           if [ "${{ github.event_name }}" = "pull_request" ] && [ "${{ steps.mode.outputs.full }}" != "1" ]; then
-            BASE_SHA="${{ github.event.pull_request.base.sha }}"
-            git fetch --no-tags origin "$BASE_SHA" --depth=1
-            git diff --diff-filter=ACMR --name-only -z "$BASE_SHA" HEAD -- \
+            git diff --diff-filter=ACMR --name-only -z "${{ steps.pr_diff.outputs.merge_base }}" HEAD -- \
               assets kids/assets content apple-tv ios > "$scan_file"
             echo "PR media budget: checking only modified assets against strict limits."
           else
