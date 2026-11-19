@@ -7,6 +7,19 @@ const root=path.resolve(__dirname,".."),read=p=>JSON.parse(fs.readFileSync(path.
 const keys=["content/focus-feed/feed-index.json","content/admin/frauen-batch-16-2026-11-18.json","assets/frauen/frauen-neufokus-v1.json","assets/frauen/frauen-entry-locales-v1.json","content/staging/focus-feed/feed-index.json"];
 const batch=read(keys[1]),sources=[...new Set(batch.records.map(r=>r.sourceFile))];
 const db=Object.fromEntries([...keys,...sources].map(p=>[p,read(p)]));
+// Construct an explicit UNPUBLISHED fixture independently of the checked-in
+// editorial state. This regression must still work after the real batch goes live.
+db[keys[1]].state="content-preparation-only";
+for(const row of db[keys[1]].records){
+ row.sourceReview="pending-secondary-check";row.translationReview="pending";
+ row.uiQa="not-run";row.publishQa="not-run";
+ const e=db[row.sourceFile].eintraege.find(x=>x.kennung===row.id);
+ assert.ok(e);e.quellenstatus="nicht-anzeigen";e.freigabeDurchSerhat=true;
+}
+for(const path of [keys[0],keys[4]]){
+ const focus=(db[path].items||[]).find(x=>x.id==="neufokus-frauenwissen-16-20261118");
+ if(focus){focus.status="draft";focus.firstPublishedAt=null;focus.expiresAt=null;}
+}
 let writes=0;
 const helpers={
  githubGet:async (env,owner,repo,path,branch)=>{
