@@ -1692,3 +1692,35 @@
   #app .daily-de {font-size:clamp(18px,2vh,20px)!important;line-height:1.4!important;}
   #app .source {font-size:clamp(12px,1.5vh,13px)!important;line-height:1.4!important;}
 }
+
+/* V7 — readable, duration-aware screensaver safe area without hiding the scene. */
+#saver {padding:clamp(18px,4vw,64px)!important;}
+#saver .saver-content {
+  width:min(100%,1120px);max-height:calc(100dvh - clamp(104px,18vh,180px));
+  overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;
+  scrollbar-color:var(--gold) transparent;padding:4px clamp(2px,1.5vw,20px);
+  gap:clamp(8px,1.8vh,20px);
+}
+#saver .saver-ar {max-height:none!important;overflow:visible!important;color:var(--home-ink,#f4f0e6)!important;overflow-wrap:anywhere;}
+#saver .saver-de {max-height:none!important;overflow:visible!important;color:var(--home-ink,#f4f0e6)!important;line-height:1.5!important;overflow-wrap:anywhere;}
+#saver .saver-narrator-line {
+  margin:clamp(7px,1.2vh,14px) 0 0;padding-top:clamp(7px,1.2vh,14px);
+  border-top:1px solid var(--fine);color:var(--gold);font:600 clamp(14px,1.1vw,18px)/1.5 var(--ui);
+}
+#saver .saver-narrator span {display:block;margin-top:clamp(7px,1.2vh,14px);color:var(--gold);font-size:clamp(14px,1.1vw,18px);line-height:1.5;}
+#saver .saver-statement {max-width:78ch;color:var(--home-ink,#f4f0e6);font-size:clamp(17px,1.45vw,25px);line-height:1.55;overflow-wrap:anywhere;}
+#saver .saver-source {max-width:100%;padding-top:clamp(7px,1.2vh,14px);border-top:1px solid var(--fine);color:var(--home-muted,var(--muted));font-size:clamp(12px,.9vw,15px);line-height:1.5;letter-spacing:.02em;overflow-wrap:anywhere;}
+#app:is([data-home-palette="light"],[data-home-palette="soft"],[data-home-palette="eisgold"],[data-home-palette="salbei"]) #saver::before {
+  background:radial-gradient(ellipse at center,rgba(var(--home-wash),.14) 0%,rgba(var(--home-wash),.24) 68%,rgba(var(--home-wash),.36) 100%)!important;
+}
+#app[data-home-palette] #saver .saver-ar,
+#app[data-home-palette] #saver .saver-de,
+#app[data-home-palette] #saver .saver-statement {color:var(--home-ink)!important;text-shadow:0 1px 3px rgba(var(--home-wash),.38)!important;}
+#app[data-home-palette] #saver .saver-kicker,
+#app[data-home-palette] #saver .saver-narrator-line,
+#app[data-home-palette] #saver .saver-narrator span,
+#app[data-home-palette] #saver .saver-clock,
+#app[data-home-palette] #saver .saver-bottom span:last-child {color:var(--gold)!important;}
+#app[data-home-palette] #saver .saver-source,
+#app[data-home-palette] #saver .saver-bottom {color:var(--home-muted)!important;}
+#app[data-home-palette] #saver .saver-bottom {border-color:var(--fine)!important;}
