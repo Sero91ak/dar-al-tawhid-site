@@ -93,10 +93,20 @@
   while(left){for(const m of modules){for(let k=0;k<weights[m]&&queues[m].length;k++){result.push(queues[m].shift().id);left--}}}
   return result;
  }
- function durationFor(card,display){
-  const text=card.module==='quranTad'?card.tad.text:card.record.textMarkdown;
-  const words=MARKDOWN(text).split(/\s+/).filter(Boolean).length,sharh=card.module!=='quranTad'&&display.sharhMode==='compact'&&card.record.sharhStatus==='verified'&&card.record.sharhText;
-  return Math.max(display.duration.minSeconds,Math.min(display.duration.maxSeconds,display.duration.baseSeconds+words*display.duration.secondsPerWord+(sharh?display.duration.sharhBonusSeconds:0)));
+ function durationFor(card,display,renderedText=''){
+  let text=String(renderedText||'').trim();
+  if(!text){
+   if(card.module==='quranTad')text=[card.tad.text,card.tad.narrator,card.tad.generation,card.tad.reference,card.tad.source,card.tad.grading].filter(Boolean).join(' ');
+   else{text=[card.record.textMarkdown,card.record.narratorLine,card.record.speakerLabel,card.record.source,card.record.grade].filter(Boolean).join(' ');if(display.sharhMode==='compact'&&card.record.sharhStatus==='verified')text+=' '+String(card.record.sharhText||'')}
+  }
+  text=MARKDOWN(text).replace(/\s+/g,' ').trim();
+  const words=text.split(' ').filter(Boolean).length;
+  const letters=(text.match(/[\\p{L}\\p{N}]/gu)||[]).length;
+  const d=display.duration,base=Number(d.baseSeconds)||16,perWord=Number(d.secondsPerWord)||.35,min=Number(d.minSeconds)||18;
+  const policySeconds=base+words*perWord;
+  const readingSeconds=8+words*60/180;
+  const characterSeconds=letters/22;
+  return Math.max(min,Math.min(180,Math.ceil(Math.max(policySeconds,readingSeconds,characterSeconds))));
  }
  function makeCards(records,tad){
   const out=[],byId=new Map();
@@ -137,9 +147,9 @@
   const v={reference,ar:ar.text,de:de.text};quranMemory.set(reference,v);await write('quran',reference,v);return v;
  }
  async function setText(id,value){say($(id),value)}
- async function renderCard(){
-  const token=++renderToken,s=rotationState?.current;if(!s||!library)return;
-  const card=library.byId.get(s.id);if(!card)return;
+ async function renderCard(cardOverride=null){
+  const token=++renderToken,s=rotationState?.current;if((!s&&!cardOverride)||!library)return;
+  const card=cardOverride||library.byId.get(s.id);if(!card)return;
   $('saverAr').style.display=card.module==='quranTad'?'block':'none';$('saverAr').textContent='';
   $('saverStatement')?.replaceChildren();$('saverNarrator')?.replaceChildren();say($('saverSource'),'');
   if(card.module==='quranTad'){
@@ -179,8 +189,10 @@
    for(let i=0;i<Math.min(cooldown.size,rotationState.remaining.length);){if(cooldown.has(rotationState.remaining[i]))rotationState.remaining.push(rotationState.remaining.splice(i,1)[0]);else i++}
   }
   const id=rotationState.remaining.shift(),card=byId.get(id);if(!card)return;
-  const now=Math.floor(Date.now()/1000),duration=Math.round(durationFor(card,library.display));
-  rotationState.current={id,startedAt:now,duration};rotationState.lastId=id;await write('state','tvos-bag',rotationState);await renderCard();
+  await renderCard(card);
+  const rendered=['saverAr','saverDe','saverNarrator','saverStatement','saverSource'].map(id=>$(id)?.textContent||'').filter(Boolean).join(' ');
+  const now=Math.floor(Date.now()/1000),duration=durationFor(card,library.display,rendered);
+  rotationState.current={id,startedAt:now,duration};rotationState.lastId=id;await write('state','tvos-bag',rotationState);
  }
  let nextPromise=null;
  async function nextCard(){
@@ -222,7 +234,7 @@
  function status(){
   const counts={hadith:0,athar:0,quranTad:0};
   for(const card of library?.cards||[])counts[card.module]=(counts[card.module]||0)+1;
-  return {ready:!!library,offline:!!library?.offline,error:lastLoadError,counts,weights:library?.weights||null,mode:rotation?.mode||'shuffleBag',revision:library?.revision||null};
+  return {ready:!!library,offline:!!library?.offline,error:lastLoadError,counts,weights:library?.weights||null,mode:rotation?.mode||'shuffleBag',revision:library?.revision||null,currentDuration:rotationState?.current?.duration??null,currentId:rotationState?.current?.id??null};
  }
  function render(){if(!library){say($('saverType'),'DĀR-Bildschirmschoner · wird geladen');say($('saverDe'),'Geprüfte Inhalte werden synchronisiert …');ensureReady().then(()=>{if(library){if(!rotationState?.current)nextCard();else renderCard()}}).catch(()=>{});return}if(!rotationState?.current)nextCard();else renderCard()}
  function tick(now){if(!document.body.classList.contains('saver-open')&&!$('app')?.classList.contains('saver-open'))return;if(!library){ensureReady().then(()=>{if(library)nextCard()});return}advance(now).catch(()=>{})}
