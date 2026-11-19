@@ -1245,5 +1245,6 @@
 @media(max-height:520px) {
   #app .screen {grid-template-rows:auto auto auto auto auto!important;align-content:start}
   #app .hero {min-height:126px}
-  #app .daily-area {min-height:0!important}
+  #app .daily-area {min-height:78px!important}
+  #app .daily-area .audio-area {min-height:74px}
 }
