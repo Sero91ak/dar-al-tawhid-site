@@ -152,7 +152,7 @@ async function verifyFrauenNeufokusPublication(env, helpers) {
     if(!locales.entryIds.includes(row.id)||locales.entries?.[row.id]?.sourceUrl!==row.sourceUrl ||
       codes.some(code=>{
         const e=locales.entries?.[row.id]?.locales?.[code];
-        return !e || !e.title || !e.statement || !e.lesson || !e.sharh || !e.source;
+        return !e || !e.title || !e.statement || !e.preview || !e.lesson || !e.sharh || !e.source;
       })){throw feedError("Frauen-Neufokus: Sprachfassung oder Quellennachweis fehlt",409)}
   }
   const paths=[...new Set(batch.records.map(x=>x.sourceFile))];
