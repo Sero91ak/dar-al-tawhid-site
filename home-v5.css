@@ -570,3 +570,11 @@
  #app .calendar-caption { font-size:12px; }
 }
 @media (prefers-reduced-motion:reduce) { #app .calendar-card { transition:none!important; } }
+
+/* Sunrise is a distinct city-neutral marker centered under the full prayer row. */
+#app .sunrise-line { width:100%!important;box-sizing:border-box;text-align:center!important;margin:clamp(8px,1.2vh,14px) auto 0!important;padding:8px 0 0!important; }
+#app .sunrise-line::before { content:'';display:block;width:min(100%,680px);height:1px;margin:0 auto 8px;background:linear-gradient(90deg,transparent,var(--fine),transparent); }
+@media (max-width:560px) and (orientation:portrait) {
+ #app .sunrise-line { margin-top:6px!important;padding-top:6px!important;font-size:12px!important; }
+ #app .sunrise-line::before { margin-bottom:6px; }
+}
