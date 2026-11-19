@@ -712,3 +712,10 @@
  #app .header-meta { grid-template-columns:1fr 1.55fr 1.2fr auto; }
 }
 @media (prefers-reduced-motion:reduce) { #app .home-nav button { transition:none!important; } }
+
+/* HOME V5.6 follow-up: remove the stray hero rule and emphasize the next prayer in the saver. */
+#app .hero-left { border-left:0!important;background:linear-gradient(135deg,rgba(7,25,27,.38),rgba(7,25,27,.08));border-radius:14px; }
+#app .times-band.home-focus { outline:2px solid var(--gold);outline-offset:5px;border-radius:12px;transition:outline-color .2s ease; }
+#saver .saver-bottom span:first-child { color:var(--gold);font:600 clamp(18px,2vw,30px)/1.25 var(--display);letter-spacing:.02em; }
+#saver .saver-bottom span:last-child { font-size:clamp(11px,1vw,14px);align-self:center; }
+#app[data-home-theme="light"] #saver .saver-bottom span:first-child { color:#365b43; }
