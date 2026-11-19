@@ -136,8 +136,8 @@
  function updateAdhanTitle(){
   const el=$('adhanVisual');if(!el?.classList.contains('active'))return;
   const info=$('adhanInfo')?.textContent||'';
-  const key=el.dataset.prayerKey||'';const name=key==='test'?'Aḏān-Test':({fajr:'Faǧr',dhuhr:'Ḍuhr',asr:'ʿAṣr',maghrib:'Maġrib',isha:'ʿIšāʾ'}[key]||'Aḏān');
-  const title=el.querySelector('.adhan-title');if(title)title.textContent=name==='Aḏān-Test'?'Aḏān · Hörprobe':name==='Aḏān'?'Aḏān · Gebetszeit':name+' · Aḏān';
+  const key=el.dataset.prayerKey||'',isTest=key==='test'||key.startsWith('test:'),prayerKey=key.startsWith('test:')?key.slice(5):key;const name=key==='test'?'Aḏān-Test':({fajr:'Faǧr',dhuhr:'Ḍuhr',asr:'ʿAṣr',maghrib:'Maġrib',isha:'ʿIšāʾ'}[prayerKey]||'Aḏān');
+  const title=el.querySelector('.adhan-title');if(title)title.textContent=isTest?(name==='Aḏān-Test'?'Aḏān · Hörprobe':name+' · Hörprobe'):name==='Aḏān'?'Aḏān · Gebetszeit':name+' · Aḏān';
   el.dataset.cinema=prefs.adhanCinema?'on':'off';
  }
  function handleConnection(){
