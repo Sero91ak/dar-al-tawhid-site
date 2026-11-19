@@ -775,7 +775,7 @@
 #app .home-nav button img{width:28px;height:28px;object-fit:contain}
 #app .home-nav button:focus-visible,#app .home-nav button:hover{background:rgba(216,189,130,.15);border-color:var(--gold)}
 #app .top{min-height:clamp(48px,5.8vh,68px)}
-#app .header-meta{margin-top:0}
+#app .header-meta{margin-top:0;position:relative;z-index:45}#app .top-rule{position:relative;z-index:45}
 #app .hero{grid-template-columns:minmax(0,1fr) minmax(300px,.8fr);gap:clamp(16px,2.5vw,44px)}
 #app .hero-right{border-left:1px solid var(--home4-hair)!important;text-align:left!important;padding-left:clamp(18px,2vw,38px)!important}
 #app .hero-right .daily-story{width:100%;padding:0!important;text-align:left}
