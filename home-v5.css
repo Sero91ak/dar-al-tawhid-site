@@ -1299,7 +1299,7 @@
   backdrop-filter:blur(5px);
 }
 #app .quran-reader-shell {
-  background:linear-gradient(145deg,rgba(9,35,35,.68),rgba(4,20,24,.70));
+  background:linear-gradient(145deg,rgba(9,35,35,.60),rgba(4,20,24,.64));
   backdrop-filter:blur(7px);
 }
 #app .calendar-view .home-view-panel {
@@ -1561,3 +1561,31 @@
 }
 
 #app[data-home-palette="nightgold"] { --gold:#d8bd82;--cream:#f2eee2;--text:#f4f0e6;--muted:#b8bdb5;--fine:rgba(216,189,130,.3);--home4-hair:rgba(216,189,130,.3);color-scheme:dark; }
+
+
+/* Keep the prayer and daily reading blocks visible on the smallest portrait phones. */
+@media (max-width:380px) and (orientation:portrait) and (max-height:520px) {
+  #app .screen { grid-template-rows:auto minmax(210px,auto) auto minmax(58px,auto) auto!important; }
+  #app .hero {
+    min-height:210px!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:minmax(112px,auto) minmax(92px,auto);
+    align-content:stretch;
+    gap:6px;
+  }
+  #app .hero-left { min-height:112px!important; }
+  #app .hero-right {
+    min-height:92px!important;
+    height:auto!important;
+    align-self:stretch!important;
+    padding:8px 0 0!important;
+    overflow:hidden;
+  }
+  #app .hero-right .daily-story {
+    flex:0 1 auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+  }
+}
