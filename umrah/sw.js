@@ -1,8 +1,8 @@
 'use strict';
 /* DĀR AL TAWḤĪD ʿUmrah cache; scope /umrah/ only. */
-const CACHE='dar-umrah-v8-standalone-1';
+const CACHE='dar-umrah-v9-internal-archive-1';
 const CORE=['./','./index.html','./offline.html'];
-const BRAND=['/app-icon-512.png','/assets/dar-3d-icons/home.png','/assets/dar-3d-icons/qibla.png','/assets/dar-3d-icons/compass.png','/assets/dar-3d-icons/image.png','/assets/dar-3d-icons/library.png','/assets/dar-3d-icons/mosque.png'];
+const BRAND=['/assets/app-icons/type-creme-ar/icon-512.png','/assets/dar-3d-icons/home.png','/assets/dar-3d-icons/qibla.png','/assets/dar-3d-icons/compass.png','/assets/dar-3d-icons/image.png','/assets/dar-3d-icons/library.png','/assets/dar-3d-icons/mosque.png'];
 const BRAND_PATHS=new Set(BRAND);
 const PREFIX=new URL(self.registration.scope).pathname;
 self.addEventListener('install',ev=>ev.waitUntil((async()=>{
