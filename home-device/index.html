@@ -203,7 +203,7 @@ function testAudioActive(){return audioIsPlaying||adhanPlaying}
 function enterSettings(tab='standort'){closeSaver();lastInteraction=Date.now();$('settingsOverlay').classList.add('open');document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));document.querySelectorAll('[data-page]').forEach(p=>p.classList.toggle('on',p.dataset.page===tab));$('settingsTitle').textContent=({'standort':'Standort & Gebetszeiten',inhalte:'Qurʾān & Ḥadīṯ',adhan:'Aḏān & Cinematic',saver:'Bildschirmschoner',anzeige:'Anzeige & Verbindung',hintergrund:'Hintergrund & Design',verbindung:'Verbindung & Apps'})[tab]||'Einstellungen';fillControls()}
 function leaveSettings(){$('settingsOverlay').classList.remove('open');lastInteraction=Date.now()}
 function fillControls(){const c=getCity();for(const [id,val] of Object.entries({city:c.name,lat:c.lat,lon:c.lon,tz:c.tz,angle:c.angle,asr:c.asr,offset:c.offset||0,locationMode:cfg.locationMode||'manual',quranPlaybackMode:cfg.quranPlaybackMode||'manual',quranPlaybackScope:cfg.quranPlaybackScope||'all',surah:cfg.surah,reciter:cfg.reciter,volume:cfg.volume,adhanEnabled:cfg.adhanEnabled,adhanStyle:cfg.adhanStyle,adhanTrack:cfg.adhanTrack,fajrAdhanTrack:cfg.fajrAdhanTrack,adhanVolume:cfg.adhanVolume,dailyPanelMode:cfg.dailyPanelMode,quranMode:cfg.quranMode,offlineAdhan:cfg.offlineAdhan,hadithRotation:cfg.hadithRotation,saverEnabled:cfg.saverEnabled,saverIdle:cfg.saverIdle,saverMode:cfg.saverMode,saverRotate:cfg.saverRotate,theme:($('app').dataset.homeTheme==='light'?'ivory':'night'),brightness:cfg.brightness,remoteRefresh:cfg.remoteRefresh})){const el=$(id);if(el)el.value=String(val)}$('volumeValue').textContent=cfg.volume;$('adhanValue').textContent=cfg.adhanVolume;$('brightnessValue').textContent=cfg.brightness;renderCities()}
-function requestDeviceLocation(){
+function requestDeviceLocation(silent=false){
  const mode=$('locationMode'),status=$('locationStatus');
  if(!navigator.geolocation){if(status)status.textContent='Standortfreigabe wird von diesem Browser nicht unterstützt';if(mode)mode.value='manual';cfg.locationMode='manual';save();return}
  if(status)status.textContent='Standortfreigabe wird angefragt …';
@@ -211,12 +211,12 @@ function requestDeviceLocation(){
   const p=position.coords,tz=Intl.DateTimeFormat().resolvedOptions().timeZone||getCity().tz;
   $('city').value='Mein Standort';$('lat').value=Number(p.latitude).toFixed(6);$('lon').value=Number(p.longitude).toFixed(6);$('tz').value=tz;
   cfg.locationMode='auto';if(mode)mode.value='auto';
-  try{captureSettings();fillControls();if(status)status.textContent='Automatisch erkannt · '+Number(p.latitude).toFixed(3)+'°, '+Number(p.longitude).toFixed(3)+'°';toast('Gerätestandort übernommen')}
+  try{captureSettings();fillControls();if(status)status.textContent='Automatisch erkannt · '+Number(p.latitude).toFixed(3)+'°, '+Number(p.longitude).toFixed(3)+'°';if(!silent)toast('Gerätestandort übernommen')}
   catch(e){cfg.locationMode='manual';if(mode)mode.value='manual';save();if(status)status.textContent='Standort übernommen, bitte Eingaben prüfen';toast(e.message||'Standort konnte nicht übernommen werden')}
  },error=>{
   cfg.locationMode='manual';if(mode)mode.value='manual';save();
   const msg=error?.code===1?'Standortfreigabe verweigert':error?.code===3?'Standorterkennung hat zu lange gedauert':'Standort aktuell nicht verfügbar';
-  if(status)status.textContent=msg+' · manuelle Koordinaten bleiben aktiv';toast(msg+' · manuell weiterarbeiten');
+  if(status)status.textContent=msg+' · manuelle Koordinaten bleiben aktiv';if(!silent)toast(msg+' · manuell weiterarbeiten');
  },{enableHighAccuracy:false,timeout:12000,maximumAge:300000});
 }
 function captureCity(){const name=$('city').value.trim();const lat=Number($('lat').value),lon=Number($('lon').value),tz=$('tz').value.trim();const angle=Number($('angle').value),asr=Number($('asr').value),offset=Number($('offset').value);if(!name)throw Error('Bitte einen Ortsnamen eingeben');if(!$('lat').value||!$('lon').value||!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>90||Math.abs(lon)>180)throw Error('Standortkoordinaten ungültig');try{new Intl.DateTimeFormat('en-US',{timeZone:tz}).format(new Date())}catch{throw Error('Zeitzone ungültig')};if(![12,15,18].includes(angle)||![1,2].includes(asr)||!Number.isFinite(offset)||Math.abs(offset)>90)throw Error('Gebetszeitenparameter ungültig');return{name,lat,lon,tz,angle,asr,offset}}
@@ -248,7 +248,7 @@ $('settingsOverlay').addEventListener('click',e=>{if(e.target===$('settingsOverl
 document.addEventListener('pointerdown',e=>{if(e.target.closest('#saver'))return;resetIdle()},{passive:true});document.addEventListener('visibilitychange',()=>{if(!document.hidden){lastInteraction=Date.now();drawClock();loadPrayers();syncAll(true)}});window.addEventListener('online',()=>{syncAll(true);loadPrayers()});
 function checkDailyLabels(){if(latestDaily)drawDaily()}
 function tick(){drawClock();drawPrayers();checkSaver();tickAdhan();scheduledRefresh();returnPrayersStaleCheck();scheduleRotations()}
-function boot(){applyTheme();drawClock();drawPrayers();fillControls();scheduledRefresh.last=Date.now();const initialSync=syncAll(true);loadPrayers();if(cfg.locationMode==='auto'&&navigator.permissions?.query)navigator.permissions.query({name:'geolocation'}).then(p=>{if(p.state==='granted')requestDeviceLocation()}).catch(()=>{});initialSync.then(()=>{if(cfg.quranPlaybackMode==='auto')playQuran()});setInterval(tick,1000);tick();}
+function boot(){applyTheme();drawClock();drawPrayers();fillControls();scheduledRefresh.last=Date.now();const initialSync=syncAll(true);loadPrayers();if(cfg.locationMode==='auto'&&navigator.permissions?.query)navigator.permissions.query({name:'geolocation'}).then(p=>{if(p.state==='granted')requestDeviceLocation(true)}).catch(()=>{});initialSync.then(()=>{if(cfg.quranPlaybackMode==='auto')playQuran()});setInterval(tick,1000);tick();}
 boot();
 })();
 </script>
