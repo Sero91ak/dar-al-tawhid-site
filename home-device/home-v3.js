@@ -33,11 +33,17 @@
   const homeChoice=prefs.wallpaperMode==='auto'?'auto':prefs.wallpaper;
   const bg=imageFor(resolveWallpaper(homeChoice));
   app.style.backgroundImage=bg?'url("'+bg.replaceAll('"','%22')+'")':'none';
+  app.style.backgroundSize=bg?'cover':'';
+  app.style.backgroundPosition=bg?'center':'';
+  app.style.backgroundRepeat='no-repeat';
   app.style.setProperty('--home-artwork-opacity',bg?(prefs.theme==='light'?'0.10':'0.19'):'1');
   const saver=$('saver');if(saver){
    const saverChoice=prefs.saverWallpaper==='same'?homeChoice:prefs.saverWallpaper;
    const sbg=imageFor(resolveWallpaper(saverChoice));
    saver.style.backgroundImage=sbg?'url("'+sbg.replaceAll('"','%22')+'")':'none';
+   saver.style.backgroundSize=sbg?'cover':'';
+   saver.style.backgroundPosition=sbg?'center':'';
+   saver.style.backgroundRepeat='no-repeat';
   }
   const adhan=$('adhanVisual');if(adhan){
    const fallback='/media/apple-tv/tv-kaaba-day.jpg';
