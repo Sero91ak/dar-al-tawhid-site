@@ -32,6 +32,24 @@ Existing simulator result bundles show:
 
 ## Whole-app inventory and source provenance
 
+## DARNext branch provenance audit (2026-11-19)
+
+The local development mirror has remote refs for several DARNext branches but is itself on unborn branch `codex/darnext-scroll-jank-20261117`: `git status` reports no commits and the app/project files as untracked. The mirror is about 7.4 GiB across 5,503 files. Its Git object store has several shallow remote refs, but there is no local commit identifying the untracked source tree.
+
+Current relevant remote tips inspected:
+- `codex/darnext-native-masterauftrag-20261024`: `4acec871f16d69e14a9ce51e154db7f8bde29d75`, 2026-10-25.
+- `codex/darnext-apple-heritage-master-v1-20261024`: `59830126b81aac19bde78854acb387a49b604ee8`, 2026-10-24.
+- `codex/darnext-apple-heritage-sync-20261024`: `5548020f3dc229fcfadbb0b15482698705988ca7`.
+- `codex/darnext-p5-p9-20261024`: `c750bafd2121d8cd9c8ada6990b05cada20dfb1b`, 2026-10-24.
+- `codex/darnext-phase4-wip-2026-10-23`: `b5a7d0c35ceae92a5e6ba7688ed4356ea1b14f42`, 2026-10-24.
+
+GitHub comparison reports no common ancestor between the native-master branch and the Apple-Heritage, Apple-Heritage-sync, P5-P9, or Phase-4 branches. The native-master branch and current `main` are also diverged (21 commits unique to native-master and 1,829 unique to main at this audit). The Oct branches cannot be ranked by ancestry.
+
+A blob comparison of seven important Swift files (RootShell, Dashboard, DARTheme, DARMotion, Posts, Quran, ContentSync) found that the local untracked snapshot matches none of the compared Oct branch blobs; the native-master branch does not contain the local `DARMotion.swift` path at all. This confirms source-tree differences, but not which untracked edits are intentional or which commit they descend from.
+
+**Decision:** do not treat the Oct native branch or the untracked local mirror as the proven latest source. PRs #1812–#1817 remain separately reviewable experiments against the Oct native baseline. Reconcile the local snapshot's file inventory and preserved Git objects/reflogs with a known branch before transplanting further product edits. Keep the untracked source and 7.4-GiB object store intact.
+
+
 The local, uncommitted checkout at `/Users/muwahhid91/Developer/DARNext-Local-20261117` contains a much larger native DARNext snapshot and a detailed feature matrix. It has no commit/HEAD and its files are untracked; its ancestry and exact equivalence to the GitHub PR base have not been established. Treat it as a protected source snapshot, not as proof that all of its changes are present on GitHub.
 
 The current PRs are focused increments, not evidence that all app content, features, languages, and platform states are complete. The whole-app audit remains open for:
