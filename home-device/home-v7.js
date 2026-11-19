@@ -3,7 +3,9 @@
  const $=id=>document.getElementById(id);
  const panel=$('quranReaderPanel');
  if(!panel)return;
+ const savedPrefs=initialPrefs();const transliterationControl=$('readerShowTransliteration');if(transliterationControl)transliterationControl.checked=savedPrefs.readerTransliteration!=='hide';
  const api=()=>window.darQuranReaderAPI;
+ const initialPrefs=()=>{try{return JSON.parse(localStorage.getItem('dar-home-cinematic-v2')||'{}')}catch{return {}}};
  const cache=new Map();
  let requestKey='';
  function fillOptions(){
@@ -41,7 +43,6 @@
  $('readerReciter')?.addEventListener('change',()=>{api()?.selectReciter($('readerReciter').value);fillOptions()});
  on('readerPrevious');on('readerNext');
  $('readerPlay')?.addEventListener('click',()=>{api()?.play();setTimeout(fillOptions,100)});
- $('readerShowTransliteration').checked=true;
  $('readerShowTransliteration')?.addEventListener('change',()=>{api()?.setTransliteration($('readerShowTransliteration').checked?'show':'hide');$('readerTransliterationText').hidden=!$('readerShowTransliteration').checked});
  document.addEventListener('dar:quran-state',()=>{if(!panel.hidden){render();fillOptions()}});
  document.addEventListener('dar:quran-reader-open',render);
