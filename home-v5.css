@@ -770,12 +770,12 @@
 
 /* 2026-11-19 HOME refinement: clear navigation, readable verse and Quran reader */
 #app header{display:grid;grid-template-rows:auto auto auto auto;gap:clamp(7px,1vh,12px)}
-#app header{position:relative;z-index:45}#app .home-nav{position:relative;z-index:45;display:flex;justify-content:center;align-items:center;gap:clamp(12px,2vw,30px);min-height:40px;padding:0 12px}
+#app header{position:relative;z-index:auto}#app .home-nav{position:relative;z-index:auto;display:flex;justify-content:center;align-items:center;gap:clamp(12px,2vw,30px);min-height:40px;padding:0 12px}
 #app .home-nav button{display:flex;align-items:center;gap:9px;padding:7px 17px;border:1px solid rgba(216,189,130,.3);border-radius:999px;background:rgba(5,27,29,.5);color:var(--cream);font:600 clamp(12px,1vw,16px) var(--ui)}
 #app .home-nav button img{width:28px;height:28px;object-fit:contain}
 #app .home-nav button:focus-visible,#app .home-nav button:hover{background:rgba(216,189,130,.15);border-color:var(--gold)}
 #app .top{min-height:clamp(48px,5.8vh,68px)}
-#app .header-meta{margin-top:0;position:relative;z-index:45}#app .top-rule{position:relative;z-index:45}
+#app .header-meta{margin-top:0;position:relative;z-index:auto}#app .top-rule{position:relative;z-index:auto}
 #app .hero{grid-template-columns:minmax(0,1fr) minmax(300px,.8fr);gap:clamp(16px,2.5vw,44px)}
 #app .hero-right{border-left:1px solid var(--home4-hair)!important;text-align:left!important;padding-left:clamp(18px,2vw,38px)!important}
 #app .hero-right .daily-story{width:100%;padding:0!important;text-align:left}
@@ -852,3 +852,217 @@
 #app #adhanVisual .touchbutton{background:rgba(9,30,30,.78);border:1px solid #d7c494;border-radius:13px;min-height:46px;padding:0 20px}
 @media(max-width:640px){#app #adhanVisual .adhan-lower-third{left:18px;bottom:18px;width:calc(100% - 36px);padding:17px 19px;gap:8px}#app #adhanVisual .adhan-title{font-size:clamp(34px,9vw,54px)!important}#app #adhanVisual .adhan-sub{font-size:15px}}
 @media(max-height:500px){#app #adhanVisual .adhan-lower-third{bottom:12px;left:24px;padding:12px 18px;gap:6px}#app #adhanVisual .adhan-title{font-size:clamp(32px,5vh,54px)!important}}
+
+
+/* HOME V5 layout contract: one header rail, one content grid, one active view. */
+#app {
+  isolation:isolate;
+  --layer-home:0;
+  --layer-view:20;
+  --layer-dialog:30;
+  --layer-adhan:40;
+}
+#app .screen {
+  position:relative;
+  z-index:var(--layer-home);
+  display:grid;
+  width:100%;
+  height:100%;
+  min-height:0;
+  overflow-x:hidden;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  grid-template-rows:auto minmax(230px,1fr) auto auto auto;
+  align-content:stretch;
+}
+#app .screen[hidden],
+#app .home-view[hidden],
+#app .overlay[hidden],
+#app .surah-picker[hidden] {display:none!important}
+#app header {
+  display:grid;
+  position:relative;
+  z-index:auto;
+  grid-template-rows:auto auto auto;
+  gap:clamp(6px,.9vh,11px);
+  min-width:0;
+}
+#app .top {
+  display:flex;
+  align-items:center;
+  flex-wrap:nowrap;
+  min-width:0;
+  min-height:clamp(50px,6vh,76px);
+  gap:clamp(7px,1vw,16px);
+}
+#app .logo {flex:0 0 auto;min-width:0}
+#app .home-nav {
+  position:static;
+  z-index:auto;
+  display:flex;
+  flex:0 1 auto;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(4px,.7vw,11px);
+  min-width:0;
+  margin-inline:clamp(4px,.65vw,10px);
+  padding:0;
+  overflow:visible;
+}
+#app .home-nav button {
+  display:flex;
+  flex:0 0 auto;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  min-width:clamp(52px,5.2vw,72px);
+  min-height:48px;
+  padding:4px 8px;
+  border:1px solid rgba(216,189,130,.3);
+  border-radius:11px;
+  background:rgba(5,27,29,.44);
+  color:var(--cream);
+  font:600 clamp(10px,.76vw,13px)/1.15 var(--ui);
+}
+#app .home-nav button img {width:24px;height:24px;object-fit:contain}
+#app .home-nav button:hover,#app .home-nav button:focus-visible {
+  border-color:var(--gold);
+  background:rgba(216,189,130,.14);
+}
+#app .top-spacer {flex:1 1 auto;min-width:0}
+#app .time-box {flex:0 0 auto;align-items:center}
+#app .header-meta,
+#app .top-rule {position:relative;z-index:auto;min-width:0}
+#app .hero {
+  display:grid;
+  grid-template-columns:minmax(0,1.12fr) minmax(280px,.88fr);
+  min-width:0;
+  min-height:230px;
+  gap:clamp(14px,2.2vw,36px);
+}
+#app .hero-left,#app .hero-right {min-width:0;min-height:0}
+#app .hero-right {
+  border-left:1px solid var(--fine);
+  padding-left:clamp(16px,2vw,34px);
+}
+#app .hero-right .daily-story {
+  width:100%;
+  max-height:100%;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+}
+#app .times-band {min-width:0}
+#app .times {min-width:0}
+#app .prayer-cell {min-width:0}
+#app .daily-area {
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  align-items:center;
+  min-width:0;
+  min-height:0;
+  width:100%;
+}
+#app .daily-area .audio-area {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  grid-template-areas:"kicker controls" "title controls" "sub controls";
+  align-items:center;
+  gap:5px clamp(12px,2vw,28px);
+  width:100%;
+  min-width:0;
+  min-height:96px;
+  margin:0;
+  padding:10px clamp(14px,2vw,26px);
+  border:1px solid var(--fine);
+  border-radius:16px;
+  background:rgba(5,24,27,.56);
+}
+#app .audio-kicker {grid-area:kicker;min-width:0}
+#app .audio-title-button {grid-area:title;min-width:0}
+#app .audio-title {white-space:normal;overflow-wrap:anywhere}
+#app .audio-sub {grid-area:sub;min-width:0}
+#app .audio-controls {grid-area:controls;min-width:0;justify-content:center}
+#app .home-view {
+  position:absolute;
+  inset:0;
+  z-index:var(--layer-view);
+  display:grid;
+  place-items:center;
+  overflow:auto;
+  overscroll-behavior:contain;
+  padding:clamp(14px,3vw,42px);
+  background:#071b20;
+  color:#f8f0df;
+  backdrop-filter:none;
+}
+#app .quran-reader-view {
+  position:absolute;
+  inset:0;
+  z-index:var(--layer-view);
+  display:block;
+  overflow:auto;
+  padding:0;
+  background:#071b20;
+  color:#f8f0df;
+  backdrop-filter:none;
+}
+#app .quran-reader-shell {
+  width:100%;
+  min-height:100%;
+  height:auto;
+  overflow:visible;
+  background:linear-gradient(145deg,#092326,#061519);
+  box-shadow:none;
+}
+#app .calendar-view {display:grid;padding:clamp(14px,3vw,42px)}
+#app .calendar-view .home-view-panel {
+  width:min(100%,1120px);
+  max-height:none;
+  min-height:min(68vh,720px);
+  margin:auto;
+  padding:clamp(20px,3vw,44px);
+  border:1px solid var(--fine);
+  border-radius:20px;
+  background:#0a2729;
+}
+#app #settingsOverlay {z-index:var(--layer-dialog)}
+#app #adhanVisual {z-index:var(--layer-adhan)}
+#app[data-home-theme="light"] .home-view,
+#app[data-home-theme="light"] .quran-reader-view {background:#f3f1e7;color:#21372d}
+#app[data-home-theme="light"] .quran-reader-shell,
+#app[data-home-theme="light"] .calendar-view .home-view-panel {background:#f8f6ee;color:#21372d}
+@media(max-width:820px) {
+  #app .top {
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-areas:"brand tools" "nav nav";
+    row-gap:5px;
+    padding-bottom:3px;
+  }
+  #app .logo {grid-area:brand}
+  #app .home-nav {grid-area:nav;justify-content:stretch;margin:0}
+  #app .home-nav button {flex:1 1 0;min-width:0}
+  #app .top-spacer {display:none}
+  #app .time-box {grid-area:tools}
+  #app .hero {grid-template-columns:minmax(0,1fr) minmax(240px,.9fr)}
+}
+@media(max-width:640px) {
+  #app .screen {grid-template-rows:auto minmax(0,auto) auto auto auto}
+  #app header {gap:6px}
+  #app .header-meta {grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px}
+  #app .header-meta .local-clock {align-items:flex-start}
+  #app .hero {grid-template-columns:minmax(0,1fr);min-height:0}
+  #app .hero-right {border-left:0;border-top:1px solid var(--fine);padding:12px 0 0}
+  #app .hero-right .daily-story {max-height:none}
+  #app .daily-area .audio-area {
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:"kicker" "title" "sub" "controls";
+    gap:5px;
+  }
+  #app .audio-controls {justify-content:flex-start}
+  #app .quran-reader-columns {grid-template-columns:minmax(0,1fr)}
+}
+@media(prefers-reduced-motion:reduce) {
+  #app .home-view *,#app .quran-reader-view * {scroll-behavior:auto}
+}
