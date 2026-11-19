@@ -10,16 +10,18 @@ const manifest=read("content/admin/frauen-batch-16-2026-11-18.json");
 const baseline=read("assets/frauen/frauen-entry-locales-v1.json");
 const BASE="https://dar-al-tawhid.de";
 const errors=[],checked=[];
-async function get(url){
+async function get(url,type){
  const target=BASE+url+(url.includes("?")?"&":"?")+"audit="+encodeURIComponent(manifest.id);
  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),12000);
  try{
    const r=await fetch(target,{signal:controller.signal,redirect:"error",headers:{"Cache-Control":"no-cache","Accept":"*/*"}});
    if(!r.ok)throw Error("HTTP "+r.status+" for "+url);
-   return r;
+   // Deadline covers the full body read, not just response headers.
+   return type==="json"?await r.json():await r.text();
  }finally{clearTimeout(timer)}
 }
-async function getJson(path){const r=await get("/"+path);return r.json()}
+async function getJson(path){return get("/"+path,"json")}
+async function getText(path){return get(path,"text")}
 (async()=>{
  if(manifest.records.length!==16||manifest.expectedReleaseCount!==16)throw Error("Manifest must contain 16");
  const files=[...new Set(manifest.records.map(r=>r.sourceFile))];
@@ -51,28 +53,28 @@ async function getJson(path){const r=await get("/"+path);return r.json()}
    if(blockers.length)errors.push({id:row.id,blockers});
    checked.push({id:row.id,liveStatus:e.quellenstatus||"absent",locales:actual?Object.keys(actual.locales||{}).length:0});
  }
- const adapter=await (await get("/assets/frauen/frauen-entry-locale-v1.js")).text();
+ const adapter=await getText("/assets/frauen/frauen-entry-locale-v1.js");
  const lessonUrl="/lernen/frauen-wissen/?id="+encodeURIComponent(manifest.records[0].id)+"&lang=de";
- const lessonPage=await (await get(lessonUrl)).text();
+ const lessonPage=await getText(lessonUrl);
  if(!/<main\b[^>]*id="quiz"/.test(lessonPage) ||
     !/\/assets\/frauen\/frauen-learning-v1\.js/.test(lessonPage))errors.push({type:"full-learning-page-not-live"});
- const lessons=await (await get("/assets/frauen/frauen-learning-v1.js")).text();
+ const lessons=await getText("/assets/frauen/frauen-learning-v1.js");
  const localLessons=fs.readFileSync(path.join(root,"assets/frauen/frauen-learning-v1.js"),"utf8");
  if(lessons!==localLessons)errors.push({type:"learning-engine-not-deployed-or-stale"});
  if(!lessons.includes("sourceFiles:FILES")||!lessons.includes('quellenstatus!=="geprueft"')){
    errors.push({type:"learning-source-approval-gate-missing"});
  }
- const studyCss=await (await get("/assets/frauen/frauen-learning-v1.css")).text();
+ const studyCss=await getText("/assets/frauen/frauen-learning-v1.css");
  if(!studyCss.includes(".fw-answer")||!studyCss.includes('[dir="rtl"]'))
    errors.push({type:"learning-RTL-responsive-styles-not-live"});
  const focusManifest=await getJson("assets/frauen/frauen-neufokus-v1.json");
  if(focusManifest.items?.length!==16||focusManifest.focusId!=="neufokus-frauenwissen-16-20261118"||
     manifest.records.some(r=>!focusManifest.items.some(x=>x.id===r.id&&x.sourceUrl===r.sourceUrl)))
    errors.push({type:"48h-focus-source-manifest-not-deployed"});
- const focusJs=await (await get("/assets/frauen/frauen-neufokus-v1.js")).text();
+ const focusJs=await getText("/assets/frauen/frauen-neufokus-v1.js");
  if(!focusJs.includes("verifyPublished()")||!focusJs.includes("48*60*60*1000"))
     errors.push({type:"48h-focus-runtime-not-deployed"});
- const focusCss=await (await get("/assets/frauen/frauen-neufokus-v1.css")).text();
+ const focusCss=await getText("/assets/frauen/frauen-neufokus-v1.css");
  if(!focusCss.includes("#dv3Home .dar-frauen-neufokus"))
     errors.push({type:"48h-focus-home-styles-not-deployed"});
  if(!adapter.includes('attachLearningButton(article,item)')||
