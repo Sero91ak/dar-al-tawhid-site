@@ -1879,3 +1879,7 @@
 #app[data-home-palette="soft"] {--gold:#704345!important;}
 #app[data-home-palette="eisgold"] {--gold:#40596c!important;}
 #app[data-home-palette="salbei"] {--gold:#405c48!important;}
+
+@media (max-width:700px) and (orientation:landscape) and (max-height:500px) {
+  #app .top .topbtn {width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;}
+}
