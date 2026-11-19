@@ -38,6 +38,7 @@ for(const r of manifest.records){
   check(Boolean(audited),"source-audit record absent");
   if(audited){
     check(audited.originalSourceId===r.sourceId&&audited.originalSourceUrl===r.sourceUrl,"original reference drift vs source audit");
+    check(audited.canonicalPageIdentifier===r.sourceId,"audit canonical hadith edition/identifier mismatches primary source");
     check(audited.sourceLocated===true&&audited.directPageStatus==="hadith-page-opens-and-topic-matches","primary page identification incomplete");
     check(audited.independentScholarlySignoff===true,"source-audit scholarly approval outstanding",true);
     check(!audited.needsAttention?.length,"unresolved primary-reference anomaly",true);
