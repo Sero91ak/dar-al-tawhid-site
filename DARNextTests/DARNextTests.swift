@@ -1,3 +1,4 @@
+import CoreLocation
 import Testing
 @testable import DARNext
 
