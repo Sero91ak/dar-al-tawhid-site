@@ -1248,3 +1248,19 @@
   #app .daily-area {min-height:78px!important}
   #app .daily-area .audio-area {min-height:74px}
 }
+
+@media(max-width:360px) and (orientation:portrait) and (max-height:520px) {
+  #app .daily-area {min-height:60px!important}
+  #app .daily-area .audio-area {
+    min-height:58px;
+    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-areas:"title controls";
+    padding:4px 8px;
+    gap:4px;
+  }
+  #app .audio-kicker,#app .audio-sub,#app .audiosmall {display:none}
+  #app .audio-title {font-size:16px}
+  #app .audio-controls {gap:4px}
+  #app .round {width:28px;height:28px}
+  #app .round.primary {width:32px;height:32px}
+}
