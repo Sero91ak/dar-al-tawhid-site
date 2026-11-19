@@ -165,8 +165,20 @@ function renderSaver(){const verse=latestDaily?.verse,had=currentHadith;let hadi
 function openSaver(){if($('settingsOverlay').classList.contains('open')||adhanPlaying)return;$('app').classList.add('saver-open');lastSaverRotationKey='';renderSaver()}
 function closeSaver(){if($('app').classList.contains('saver-open'))$('app').classList.remove('saver-open');lastInteraction=Date.now()}
 function checkSaver(){if(cfg.saverEnabled==='on'&&!$('app').classList.contains('saver-open')&&Date.now()-lastInteraction>(Number(cfg.saverIdle)||300)*1000)openSaver();if($('app').classList.contains('saver-open')){const rotation=cfg.saverRotate==='daily'?nowKey(getCity().tz):Math.floor(Date.now()/(Number(cfg.saverRotate)||300)/1000);if(lastSaverRotationKey!==rotation){lastSaverRotationKey=rotation;if(cfg.saverMode==='both')shownHadith=!shownHadith;else shownHadith=cfg.saverMode==='hadith';if(shownHadith&&cfg.hadithRotation!=='daily')chooseHadith(true);renderSaver()}}}
-async function loadSurahs(){try{const j=await fetchJSON(liveURL('/content/quran/surahs.json'));if(!Array.isArray(j.surahs)||j.surahs.length!==114)throw Error('Surah-Metadaten nicht vollständig');surahs=j.surahs}catch{surahs=[{id:1,name:'الفاتحة',transliteration:'Al-Fātiḥah',total_verses:7},{id:112,name:'الإخلاص',transliteration:'Al-Iḫlāṣ',total_verses:4}]}const select=$('surah');select.innerHTML='';surahs.forEach(s=>select.add(new Option(s.id+' · '+s.transliteration+' · '+s.name,s.id)));select.value=String(cfg.surah);if(!select.value){cfg.surah=1;select.value='1'}drawAudio()}
-async function loadReciters(){try{const j=await fetchJSON(liveURL('/data/quran-reciters.json'));if(!Array.isArray(j.reciters)||!j.reciters.length)throw Error('Rezitatoren nicht verfügbar');reciters=j.reciters}catch{reciters=[{name:'Mišārī Rāšid al-ʿAfāsī',edition:'ar.alafasy'}]}$('reciter').innerHTML='';reciters.forEach(r=>$('reciter').add(new Option(r.name,r.edition)));$('reciter').value=cfg.reciter;if(!$('reciter').value){cfg.reciter=reciters[0].edition;$('reciter').value=cfg.reciter}drawAudio()}
+async function loadSurahs(){
+ const cacheKey='dar-home-quran-surahs-v1';let cached=[];
+ try{const value=JSON.parse(localStorage.getItem(cacheKey)||'[]');if(Array.isArray(value)&&value.length===114)cached=value}catch{}
+ try{const j=await fetchJSON(liveURL('/content/quran/surahs.json'));if(!Array.isArray(j.surahs)||j.surahs.length!==114)throw Error('Surah-Metadaten nicht vollständig');surahs=j.surahs;try{localStorage.setItem(cacheKey,JSON.stringify(surahs))}catch{}}
+ catch{surahs=cached.length===114?cached:[{id:1,name:'الفاتحة',transliteration:'Al-Fātiḥah',total_verses:7},{id:112,name:'الإخلاص',transliteration:'Al-Iḫlāṣ',total_verses:4}]}
+ const select=$('surah');select.innerHTML='';surahs.forEach(item=>select.add(new Option(item.id+' · '+item.transliteration+' · '+item.name,item.id)));select.value=String(cfg.surah);if(!select.value){cfg.surah=1;select.value='1'}drawAudio()
+}
+async function loadReciters(){
+ const cacheKey='dar-home-quran-reciters-v1';let cached=[];
+ try{const value=JSON.parse(localStorage.getItem(cacheKey)||'[]');if(Array.isArray(value)&&value.length)cached=value}catch{}
+ try{const j=await fetchJSON(liveURL('/data/quran-reciters.json'));if(!Array.isArray(j.reciters)||!j.reciters.length)throw Error('Rezitatoren nicht verfügbar');reciters=j.reciters;try{localStorage.setItem(cacheKey,JSON.stringify(reciters))}catch{}}
+ catch{reciters=cached.length?cached:[{name:'Mišārī Rāšid al-ʿAfāsī',edition:'ar.alafasy'}]}
+ $('reciter').innerHTML='';reciters.forEach(item=>$('reciter').add(new Option(item.name,item.edition)));$('reciter').value=cfg.reciter;if(!$('reciter').value){cfg.reciter=reciters[0].edition;$('reciter').value=cfg.reciter}drawAudio()
+}
 async function loadAdhanList(){
  try{const j=await fetchJSON(liveURL('/apple-tv/prayer/adhan.json'));adhanList=Array.isArray(j.recordings)?j.recordings.filter(r=>r.url):[]}catch{adhanList=[]}
  const regular=$('adhanTrack'),fajr=$('fajrAdhanTrack');regular.replaceChildren();fajr.replaceChildren();
