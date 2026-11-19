@@ -1372,3 +1372,30 @@
 #app[data-home-theme="light"] .daily-area .audio-area {
   background:rgba(247,245,228,.76)!important;
 }
+
+
+/* V5.9: Keep the editorial column at the hero's full height; scroll text, not the grid. */
+#app .hero { min-height:0; }
+#app .hero-right {
+  height:auto!important;
+  min-height:0!important;
+  align-self:stretch!important;
+  overflow:hidden;
+}
+#app .hero-right .daily-story {
+  flex:1 1 0!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain;
+}
+#app .hero-right .daily-story > * { flex:0 0 auto; }
+@media (orientation:portrait) {
+  #app .hero-right { height:auto!important; }
+  #app .hero-right .daily-story { flex:0 1 auto!important; }
+}
+@media (max-width:640px) and (orientation:landscape) {
+  #app .hero-right { height:auto!important; }
+  #app .hero-right .daily-story { flex:1 1 0!important; }
+}
