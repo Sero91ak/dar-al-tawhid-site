@@ -184,7 +184,7 @@ jobs:
             geo=driver.execute_script("return {mode:document.getElementById('locationMode').value,city:document.getElementById('city').value,lat:document.getElementById('lat').value,lon:document.getElementById('lon').value}")
             print('LOCATION_AUTO',geo,flush=True)
             if geo['mode']!='auto' or geo['city']!='Mein Standort' or abs(float(geo['lat'])-52.520008)>.00001 or abs(float(geo['lon'])-13.404954)>.00001:errors.append('Automatic location selection did not apply device coordinates')
-            driver.execute_script("const m=document.getElementById('locationMode');m.value='manual';m.dispatchEvent(new Event('change',{bubbles:true}));document.getElementById('city').value='Meckenheim';document.getElementById('lat').value='50.6256';document.getElementById('lon').value='6.9491';document.getElementById('tz').value='Europe/Berlin';document.getElementById('saveSettings').click()")
+            driver.execute_script("const m=document.getElementById('locationMode');m.value='manual';m.dispatchEvent(new Event('change',{bubbles:true}));document.getElementById('city').value='Meckenheim';document.getElementById('lat').value='50.6256';document.getElementById('lon').value='6.9491';document.getElementById('tz').value='Europe/Berlin';document.getElementById('saveSettings').dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,view:window}))")
             if driver.find_element(By.ID,'locationMode').get_attribute('value')!='manual':errors.append('Manual location mode cannot be restored')
             if not driver.find_element(By.ID,'locationStatus').text.startswith('Manuelle'):errors.append('Manual location status is unclear')
             tab=driver.find_element(By.CSS_SELECTOR,'button[data-tab="hintergrund"]')
