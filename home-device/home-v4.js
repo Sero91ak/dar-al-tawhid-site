@@ -67,6 +67,34 @@
     document.querySelectorAll('.settings-tabs button').forEach(b=>b.setAttribute('aria-controls','settings-page-'+b.dataset.tab));
     document.querySelectorAll('.tabpage[data-page]').forEach(p=>p.id='settings-page-'+p.dataset.page);
   }
+  function spatialNavigation(){
+    const selector='button:not([disabled]),a[href],[tabindex]:not([tabindex="-1"]),input:not([disabled]),select:not([disabled])';
+    document.addEventListener('keydown',event=>{
+      const directions={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]},vector=directions[event.key];
+      if(!vector)return;
+      const active=document.activeElement;
+      if(active?.matches('input,textarea,select,[contenteditable="true"]'))return;
+      const visible=[...document.querySelectorAll(selector)].filter(el=>{
+        const style=getComputedStyle(el),rect=el.getBoundingClientRect();
+        return style.display!=='none'&&style.visibility!=='hidden'&&Number(style.opacity)>0&&rect.width>0&&rect.height>0;
+      });
+      if(!visible.length)return;
+      if(!active||active===document.body||!visible.includes(active)){
+        visible[0].focus({preventScroll:true});event.preventDefault();return;
+      }
+      const from=active.getBoundingClientRect(),cx=from.left+from.width/2,cy=from.top+from.height/2;
+      let best=null,bestScore=Infinity;
+      for(const el of visible){
+        if(el===active)continue;
+        const r=el.getBoundingClientRect(),dx=r.left+r.width/2-cx,dy=r.top+r.height/2-cy;
+        const primary=dx*vector[0]+dy*vector[1];if(primary<=2)continue;
+        const cross=Math.abs(dx*vector[1]-dy*vector[0]);
+        const score=primary+cross*1.8;
+        if(score<bestScore){best=el;bestScore=score}
+      }
+      if(best){event.preventDefault();best.focus({preventScroll:true})}
+    });
+  }
   function init(){header();setupAdhan();handleKeyboard();spatialNavigation()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
   else init();
