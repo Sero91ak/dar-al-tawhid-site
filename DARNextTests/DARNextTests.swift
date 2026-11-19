@@ -61,4 +61,10 @@ struct DARNextTests {
         #expect(questions.allSatisfy { $0.isApprovedAdultContent })
         #expect(questions.allSatisfy { $0.correctIndex >= 0 && $0.correctIndex < $0.answers.count })
     }
+
+    @Test
+    func quranAyahFocusHonorsReduceMotion() {
+        #expect(QuranScrollMotionPolicy.shouldAnimate(reduceMotion: false))
+        #expect(!QuranScrollMotionPolicy.shouldAnimate(reduceMotion: true))
+    }
 }
