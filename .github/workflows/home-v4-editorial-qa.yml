@@ -352,6 +352,11 @@ jobs:
               window.darHomeDailyVerse={reference:'2:183',ar:'يَا أَيُّهَا الَّذِينَ آمَنُوا',de:'O ihr, die ihr glaubt'};
               document.getElementById('openTadabbur').hidden=false;
             """)
+            print('TADABBUR_RECT_DIAGNOSTIC',driver.execute_script("""
+              const pick=x=>{const e=document.querySelector(x),r=e?.getBoundingClientRect();return r?{x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,scrollHeight:e.scrollHeight,clientHeight:e.clientHeight,overflow:getComputedStyle(e).overflow,display:getComputedStyle(e).display}:null};
+              const b=document.getElementById('openTadabbur'),r=b.getBoundingClientRect(),e=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
+              return {viewport:[innerWidth,innerHeight],screen:pick('#mainScreen'),hero:pick('.hero'),right:pick('.hero-right'),story:pick('.daily-story'),button:pick('#openTadabbur'),times:pick('.times-band'),bandHead:pick('.band-head'),hit:e?.className||e?.id||e?.tagName};
+            """),flush=True)
             driver.find_element(By.ID,'openTadabbur').click()
             WebDriverWait(driver,150).until(lambda d:'4774' in d.find_element(By.ID,'tadabburStatus').text or '1 geprüfte' in d.find_element(By.ID,'tadabburStatus').text or '1 geprüfte Überlieferung' in d.find_element(By.ID,'tadabburStatus').text)
             WebDriverWait(driver,10).until(lambda d:len(d.find_elements(By.CSS_SELECTOR,'#tadabburResults .tadabbur-item'))>0)
