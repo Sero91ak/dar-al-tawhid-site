@@ -1325,3 +1325,27 @@
 #app[data-home-theme="light"] #saver::before {
   background:radial-gradient(ellipse at center,rgba(243,241,231,.34) 0%,rgba(243,241,231,.22) 67%,rgba(243,241,231,.12) 100%);
 }
+
+
+/* Keep the selected scene in its own layer so both color themes and local routes retain it. */
+#app[data-wallpaper-active="true"] #homeWallpaper {
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  pointer-events:none;
+}
+#app[data-wallpaper-active="true"] .artwork {
+  z-index:1!important;
+  opacity:var(--home-artwork-opacity,.16)!important;
+  mix-blend-mode:normal!important;
+}
+#app[data-wallpaper-active="true"] .lightgrading {
+  z-index:2!important;
+  opacity:.18!important;
+}
+#app[data-wallpaper-active="true"] .edge,
+#app[data-wallpaper-active="true"] .corner { z-index:3!important; }
+#app[data-wallpaper-active="true"] .screen { z-index:4; }
