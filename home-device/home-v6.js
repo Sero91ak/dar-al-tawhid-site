@@ -121,7 +121,8 @@
     await write('saver','library',{revision,cards:built.cards,weights,display:data.display,policy:data.policy});
     return data;
    }catch(error){
-    if(cached?.cards?.length){return {...cached,offline:true,tad:null}}\n    throw error;
+    if(cached?.cards?.length){return {...cached,offline:true,tad:null}}
+    throw error;
    }
   })();
   try{return await saverPromise}finally{saverPromise=null}
