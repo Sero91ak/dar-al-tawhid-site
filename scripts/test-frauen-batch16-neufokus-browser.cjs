@@ -21,11 +21,16 @@ const date=Date.now(),start=new Date(date-120000).toISOString(),expires=new Date
 function snapshot(isPublic,locale) {
  const feed=JSON.parse(JSON.stringify(focus));
  const item=feed.items.find(e=>e.id===id);assert.ok(item);
- if(isPublic){item.status="live";item.startsAt=start;item.expiresAt=expires;}
+ // An explicit draft fixture keeps the browser test valid after live release.
+ item.status=isPublic?"live":"draft";
+ item.startsAt=isPublic?start:item.startsAt;
+ item.expiresAt=isPublic?expires:null;
  const docs=JSON.parse(JSON.stringify(source));
- if(isPublic)for(const record of launch.items){
+ for(const record of launch.items){
   const e=docs["/"+record.sourceFile].eintraege.find(x=>x.kennung===record.id);
-  assert.ok(e);e.quellenstatus="geprueft";e.freigabeDurchSerhat=true;
+  assert.ok(e);
+  e.quellenstatus=isPublic?"geprueft":"nicht-anzeigen";
+  e.freigabeDurchSerhat=true;
  }
  return {feed,docs,locale};
 }
