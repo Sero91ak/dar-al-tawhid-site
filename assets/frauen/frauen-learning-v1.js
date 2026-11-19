@@ -23,7 +23,7 @@ function compact(s){return String(s||"").replace(/\s+/g," ").trim()}
 function pickOptions(index,field,packs){
  var entries=packs.filter(Boolean),self=entries[index],c=compact(self[field]);if(!c)throw Error("Empty learning field "+field);
  var wrong=[];for(var k=1;k<entries.length&&wrong.length<2;k++){
-   var idx=(index+3*k+field.length)%entries.length;
+   var idx=(index+k)%entries.length; // visit each approved candidate once, even when exactly three are published
    if(idx===index)continue;
    var v=compact(entries[idx][field]);if(v&&v!==c&&!wrong.includes(v))wrong.push(v);
  }
