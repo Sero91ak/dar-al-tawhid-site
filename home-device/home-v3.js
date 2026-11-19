@@ -157,7 +157,7 @@
   const el=$('adhanVisual');if(el)new MutationObserver(updateAdhanTitle).observe(el,{attributes:true,attributeFilter:['class']});
   window.addEventListener('online',handleConnection);window.addEventListener('offline',handleConnection);
   const i=document.querySelector('[data-tab="hintergrund"]');if(i){const img=document.createElement('img');img.src=icon('image');img.alt='';img.className='settings-icons';i.prepend(img)}
-  document.querySelectorAll('.settings-tabs button[data-tab]').forEach(b=>{if(b.querySelector('img'))return;const m={standort:'compass',inhalte:'quran',adhan:'prayer',saver:'image',anzeige:'settings',verbindung:'widgets'};const t=m[b.dataset.tab];if(t){const a=new Image();a.src=icon(t);a.className='settings-icons';a.alt='';b.prepend(a)}});
+  document.querySelectorAll('.settings-tabs button[data-tab]').forEach(b=>{if(b.querySelector('img'))return;const m={standort:'compass',inhalte:'quran',adhan:'prayer',saver:'image',hintergrund:'image',anzeige:'settings',verbindung:'widgets'};const t=m[b.dataset.tab];if(t){const a=new Image();a.src=icon(t);a.className='settings-icons';a.alt='';b.prepend(a)}});
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
