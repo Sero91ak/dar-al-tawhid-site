@@ -1264,3 +1264,64 @@
   #app .round {width:28px;height:28px}
   #app .round.primary {width:32px;height:32px}
 }
+
+
+/* HOME V5.8: let the selected photo show through the ornamental skin and local pages. */
+#app .artwork { opacity:var(--home-artwork-opacity,1);transition:opacity .22s ease; }
+#app .lightgrading {
+  background:
+    linear-gradient(90deg,rgba(3,16,20,.36),rgba(4,16,20,.08) 52%,rgba(3,18,20,.26)),
+    linear-gradient(0deg,rgba(4,14,18,.50) 0%,rgba(4,14,18,.20) 42%,rgba(4,14,18,.04) 78%);
+}
+#app .hero { align-items:stretch; }
+#app .hero-right {
+  align-self:stretch;
+  justify-content:flex-start;
+  height:100%;
+  min-height:0;
+}
+#app .hero-right .daily-story {
+  flex:1 1 auto;
+  width:100%;
+  min-height:0;
+  max-height:none!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain;
+}
+#app .tadabbur-inline { flex:0 0 auto; }
+#app .home-view {
+  background:rgba(7,27,32,.70);
+  backdrop-filter:blur(5px);
+}
+#app .quran-reader-view {
+  background:rgba(3,14,17,.48);
+  backdrop-filter:blur(5px);
+}
+#app .quran-reader-shell {
+  background:linear-gradient(145deg,rgba(9,35,35,.82),rgba(4,20,24,.84));
+  backdrop-filter:blur(7px);
+}
+#app .calendar-view .home-view-panel {
+  background:linear-gradient(145deg,rgba(10,39,41,.82),rgba(5,23,28,.86));
+  backdrop-filter:blur(7px);
+}
+#app[data-home-theme="light"] .lightgrading {
+  background:
+    linear-gradient(90deg,rgba(243,241,231,.45) 0%,rgba(243,241,231,.24) 48%,rgba(243,241,231,.12) 100%),
+    linear-gradient(0deg,rgba(243,241,231,.34) 0%,rgba(243,241,231,.12) 60%,rgba(243,241,231,.20) 100%);
+}
+#app[data-home-theme="light"] .home-view {
+  background:rgba(243,241,231,.60);
+  backdrop-filter:blur(5px);
+}
+#app[data-home-theme="light"] .quran-reader-view { background:rgba(243,241,231,.38); }
+#app[data-home-theme="light"] .quran-reader-shell {
+  background:linear-gradient(145deg,rgba(249,246,238,.80),rgba(235,232,221,.84));
+}
+#app[data-home-theme="light"] .calendar-view .home-view-panel {
+  background:linear-gradient(145deg,rgba(251,250,243,.80),rgba(232,238,229,.84));
+}
+#app[data-home-theme="light"] #saver::before {
+  background:radial-gradient(ellipse at center,rgba(243,241,231,.34) 0%,rgba(243,241,231,.22) 67%,rgba(243,241,231,.12) 100%);
+}
