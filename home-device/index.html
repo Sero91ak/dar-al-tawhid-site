@@ -168,7 +168,7 @@ function closeSaver(){if($('app').classList.contains('saver-open'))$('app').clas
 function checkSaver(){if(cfg.saverEnabled==='on'&&!$('app').classList.contains('saver-open')&&Date.now()-lastInteraction>(Number(cfg.saverIdle)||300)*1000)openSaver();if($('app').classList.contains('saver-open')){const rotation=cfg.saverRotate==='daily'?nowKey(getCity().tz):Math.floor(Date.now()/(Number(cfg.saverRotate)||300)/1000);if(lastSaverRotationKey!==rotation){lastSaverRotationKey=rotation;if(cfg.saverMode==='both')shownHadith=!shownHadith;else shownHadith=cfg.saverMode==='hadith';if(shownHadith&&cfg.hadithRotation!=='daily')chooseHadith(true);renderSaver()}}}
 async function loadSurahs(){
  const select=$('surah'),cacheKey='dar-home-quran-surahs-v1';let cached=[],embedded=[];
- if(select)embedded=[...select.options].map(o=>({id:Number(o.value),transliteration:String(o.textContent||'').replace(/^\\d+\\s*·\\s*/,'').trim(),name:'',total_verses:0})).filter(x=>x.id&&x.transliteration);
+ if(select)embedded=[...select.options].map(o=>({id:Number(o.value),transliteration:String(o.textContent||'').replace(/^\d+\s*·\s*/,'').trim(),name:'',total_verses:0})).filter(x=>x.id&&x.transliteration);
  try{const value=JSON.parse(localStorage.getItem(cacheKey)||'[]');if(Array.isArray(value)&&value.length===114)cached=value}catch{}
  try{const j=await fetchJSON(liveURL('/content/quran/surahs.json'));if(!Array.isArray(j.surahs)||j.surahs.length!==114)throw Error('Surah-Metadaten nicht vollständig');surahs=j.surahs;try{localStorage.setItem(cacheKey,JSON.stringify(surahs))}catch{}}
  catch{surahs=cached.length===114?cached:embedded.length===114?embedded:[{id:1,name:'',transliteration:'Al-Fātiḥah',total_verses:7},{id:112,name:'',transliteration:'Al-Iḫlāṣ',total_verses:4}]}
@@ -254,5 +254,5 @@ function boot(){applyTheme();drawClock();drawPrayers();fillControls();scheduledR
 boot();
 })();
 </script>
-<script defer src="/home-v3.js?v=5.4"></script><script defer src="/home-v4.js?v=5.2"></script>
+<script defer src="/home-v3.js?v=5.5"></script><script defer src="/home-v4.js?v=5.2"></script>
 </body></html>
