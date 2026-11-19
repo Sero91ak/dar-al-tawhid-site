@@ -27,6 +27,7 @@ const mainArea={querySelector:sel=>sel==="[data-dar-frauen-local-sharh]"?explana
 const article={
  lang:"",dir:"",attrs:{},
  setAttribute(k,v){this.attrs[k]=String(v)},
+ getAttribute(k){return this.attrs[k]||null},
  querySelector(sel){
   if(sel===".post-reader-main")return mainArea;
   if(sel==="a.frauen-direktnachweis[href]")return sourceLink;
