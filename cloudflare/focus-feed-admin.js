@@ -54,6 +54,10 @@ function normalizeFeedItem(raw, nowIso) {
     startsAt: String(raw?.startsAt || now).trim(),
     expiresAt: raw?.expiresAt == null ? null : String(raw.expiresAt || "").trim() || null,
     status,
+    // Preserve the public Frauen 48h contract when other feed cards are saved.
+    visibility: String(raw?.visibility || "").trim(),
+    // Immutable first publication; a draft's default startsAt is NOT publication.
+    firstPublishedAt: raw?.firstPublishedAt ? String(raw.firstPublishedAt).trim() : null,
     createdAt: String(raw?.createdAt || now).trim(),
     updatedAt: String(raw?.updatedAt || now).trim(),
     order: Number.isFinite(Number(raw?.order)) ? Number(raw.order) : 0,
@@ -172,20 +176,32 @@ export async function saveFeedEntry(env, input, helpers) {
   if (!incoming?.title) throw feedError("Titel fehlt", 400);
   if (input?.status && FEED_STATUSES.has(String(input.status))) incoming.status = String(input.status);
   if (!incoming.createdAt) incoming.createdAt = nowIso;
-  if (incoming.id === FRAUEN_NEUFOKUS_16_ID && incoming.status === "live") {
-    if(incoming.targetType!=="category" || incoming.targetId!=="frauen" ||
-       incoming.targetUrl!=="frauen") {
-       throw feedError("Frauen-Neufokus: Ziel muss der originale Frauenbereich sein", 400);
-    }
-    await verifyFrauenNeufokusPublication(env, helpers);
-    // The clock starts on FIRST successful Admin publication. Re-saving must
-    // never prolong the 48-hour visibility window.
+  if (incoming.id === FRAUEN_NEUFOKUS_16_ID) {
     const previous=(index.items||[]).find(item=>item?.id===FRAUEN_NEUFOKUS_16_ID);
-    const first=previous?.status==="live" ? Date.parse(previous.startsAt||"") : NaN;
-    const start=Number.isFinite(first)?first:Date.parse(nowIso);
-    incoming.startsAt=new Date(start).toISOString();
-    incoming.expiresAt=new Date(start+FRAUEN_NEUFOKUS_DURATION).toISOString();
-    incoming.visibility="48h";
+    // Never trust a client-supplied first publication timestamp.
+    const stored=Date.parse(previous?.firstPublishedAt||"");
+    const legacy=previous?.status==="live" ? Date.parse(previous.startsAt||"") : NaN;
+    const first=Number.isFinite(stored)?stored:(Number.isFinite(legacy)?legacy:NaN);
+    if(incoming.status==="live") {
+      if(incoming.targetType!=="category" || incoming.targetId!=="frauen" ||
+         incoming.targetUrl!=="frauen") {
+         throw feedError("Frauen-Neufokus: Ziel muss der originale Frauenbereich sein", 400);
+      }
+      await verifyFrauenNeufokusPublication(env, helpers);
+      // First live Admin publication starts the 48h window exactly once.
+      // Retain the timestamp even if this card was later saved as draft.
+      const start=Number.isFinite(first)?first:Date.parse(nowIso);
+      incoming.firstPublishedAt=new Date(start).toISOString();
+      incoming.startsAt=new Date(start).toISOString();
+      incoming.expiresAt=new Date(start+FRAUEN_NEUFOKUS_DURATION).toISOString();
+      incoming.visibility="48h";
+    } else if(Number.isFinite(first)) {
+      // Unpublishing cannot reset or lengthen the original 48h clock.
+      incoming.firstPublishedAt=new Date(first).toISOString();
+      incoming.startsAt=new Date(first).toISOString();
+      incoming.expiresAt=new Date(first+FRAUEN_NEUFOKUS_DURATION).toISOString();
+      incoming.visibility="48h";
+    }
   }
   if (incoming.status === "live") {
     if (!incoming.title) throw feedError("Titel fehlt für Live-Karte", 400);
