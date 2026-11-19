@@ -298,7 +298,7 @@ jobs:
             if bleed['width']<bleed['viewWidth']-2 or bleed['height']<bleed['viewHeight']-2 or bleed['fit']!='cover' or bleed['opacity']!='1' or bleed['naturalWidth']<1600:errors.append('Native prayer art is not high-resolution, fully visible and full-bleed')
             if 'Fajr' in bleed['subtitle'] or 'Faǧr' in bleed['subtitle']:errors.append('Adhan prayer name is duplicated in the time line')
             for prayer,asset in [('Fajr','fajr'),('Ḍuhr','dhuhr'),('ʿAṣr','asr'),('Maġrib','maghrib'),('ʿIšāʾ','isha')]:
-              driver.execute_script("document.getElementById('adhanInfo').textContent=arguments[0]+' ist eingetreten';document.getElementById('adhanVisual').classList.add('active')",prayer)
+              driver.execute_script("const v=document.getElementById('adhanVisual');v.dataset.prayerKey='test:'+arguments[1];document.getElementById('adhanInfo').textContent=arguments[0]+' · Test';v.classList.add('active')",prayer,asset)
               expected='/media/apple-tv/adhan-'+asset+'.jpg'
               WebDriverWait(driver,10).until(lambda d:d.find_element(By.ID,'h4PrayerArtwork').get_attribute('src').endswith(expected))
               WebDriverWait(driver,10).until(lambda d:d.execute_script("return document.getElementById('h4PrayerArtwork')?.naturalWidth||0")>0)
