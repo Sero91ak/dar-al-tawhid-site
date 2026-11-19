@@ -112,6 +112,14 @@
    makeWallpaperGallery();
   }catch(e){/* use the bundled fallback gallery when the catalog is offline */}
  }
+ function bindAppearancePicker(){
+  const opener=$('openAppearance'),picker=$('appearancePopover');if(!opener||!picker)return;
+  const close=()=>{picker.hidden=true;opener.setAttribute('aria-expanded','false')};
+  opener.addEventListener('click',event=>{event.stopPropagation();picker.hidden=!picker.hidden;opener.setAttribute('aria-expanded',String(!picker.hidden))});
+  picker.addEventListener('click',event=>{event.stopPropagation();const button=event.target.closest('[data-home-theme-choice]');if(!button)return;const choice=button.dataset.homeThemeChoice;prefs.theme=choice==='light'?'light':'dark';store();apply();window.darHomeApplyThemeChoice?.(prefs.theme);picker.querySelectorAll('[data-home-theme-choice]').forEach(x=>x.setAttribute('aria-pressed',String(x===button)));close()});
+  document.addEventListener('click',event=>{if(!picker.hidden&&!picker.contains(event.target)&&event.target!==opener&&!opener.contains(event.target))close()});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!picker.hidden){close();opener.focus({preventScroll:true})}});
+ }
  function bind(){
   const sel=$('homeAppearance');if(sel)sel.addEventListener('change',()=>{prefs.theme=sel.value;store();apply()});
   const legacyTheme=$('theme');if(legacyTheme)legacyTheme.addEventListener('change',()=>{prefs.theme=legacyTheme.value==='ivory'?'light':'dark';const appearance=$('homeAppearance');if(appearance)appearance.value=prefs.theme;store();apply()});
@@ -227,7 +235,7 @@
  }
  function init(){
   if(!$('app'))return;
-  augmentBrand();bind();bindHomeActions();bindQuranReader();apply();renderHijriDate();loadMediaCatalog();setInterval(()=>{if(prefs.wallpaperMode==='auto'||prefs.saverWallpaper==='auto')apply()},300000);handleConnection();
+  augmentBrand();bind();bindAppearancePicker();bindHomeActions();bindQuranReader();apply();renderHijriDate();loadMediaCatalog();setInterval(()=>{if(prefs.wallpaperMode==='auto'||prefs.saverWallpaper==='auto')apply()},300000);handleConnection();
   const el=$('adhanVisual');if(el)new MutationObserver(updateAdhanTitle).observe(el,{attributes:true,attributeFilter:['class']});
   window.addEventListener('online',handleConnection);window.addEventListener('offline',handleConnection);
   const i=document.querySelector('[data-tab="hintergrund"]');if(i){const img=document.createElement('img');img.src=icon('image');img.alt='';img.className='settings-icons';i.prepend(img)}
