@@ -29,7 +29,8 @@ assert.equal(new Set(roster.existingLessons.map(x=>x.lessonId)).size,66);
 assert.equal(new Set([...roster.existingLessons,...roster.futureEditorial].map(x=>x.editorialSlot)).size,208);
 assert.deepEqual(roster.existingLessons.slice(0,3).map(x=>x.lessonId),["sidq","akhlaq-sabr","akhlaq-amanah"]);
 assert.equal(roster.existingLessons[0].liveConfirmed,false);
-assert.equal(roster.existingLessons[0].productionStatus,"76-elevenlabs-generations-not-yet-imported");
+assert.equal(roster.summary.actualOriginalsImportedForSidq,76);
+assert.equal(roster.existingLessons[0].productionStatus,"real-v4-audio-imported-prepared-not-live");
 const world=vm.createContext({window:{}});
 for(const id of ["v1","v2","v22","v25","v26","v27","v28","v29"]){
  const file="kids/akademie/curriculum-"+id+".js";
@@ -122,4 +123,14 @@ assert.equal(prior.currentTopic,"sidq");
 assert.equal(prior.liveConfirmed,false);
 assert.equal(prior.newCompletedElevenLabsGenerations,76);
 assert.equal(prior.originalAudioFilesImportedToGitHub,0);
-console.log("KIDS ACADEMY 208 PASS: 66 real lessons with voice plans, 142 editorial outlines locked; V28 164 + V29 163 new exact utterances; Ṣidq still requires original binary import; zero generation or release.");
+assert.equal(prior.sourceOriginalsDownloadedToICloudCount,76);
+assert.equal(prior.sourceOriginalsVerifiedCount,76);
+assert.equal(prior.preparedLessonAudioCount,58);
+assert.equal(prior.fullyCertifiedCount,58);
+assert.equal(prior.status,"prepared-for-live-deployment");
+assert.equal(prior.liveConfirmed,false);
+assert.equal(prior.nextTopicLocked,true);
+require("node:child_process").execFileSync("node",[
+  "kids/tools/verify-academy-audio-manifest-hashes-v1.cjs"
+],{cwd:ROOT,stdio:"inherit"});
+console.log("KIDS ACADEMY 208 PASS: 66 real lessons with voice plans, 142 editorial outlines locked; Ṣidq 76 originals imported and 58/58 audio prepared, not live; V28/V29 plans preserved.");

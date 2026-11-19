@@ -82,6 +82,7 @@ on:
       - kids/assets/sahabiyyat-story-audio/**
       - kids/owner-voice.js
       - kids/data/academy-audio.json
+      - kids/assets/kids-academy-audio/**
       # KIDS Duʿāʾ V4 audio release through sole production Worker.
       - kids/dua-smart-learn.js
       - kids/data/dua-word-audio.json
@@ -246,6 +247,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Academy-Audio-Manifest und Binärhashes prüfen
+        run: node kids/tools/verify-academy-audio-manifest-hashes-v1.cjs
 
       - name: Desktop-Beitragsindex für Kurzlink-Deploy erzeugen
         run: node scripts/build-desktop-posts-index.js
