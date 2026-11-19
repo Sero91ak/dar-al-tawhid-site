@@ -51,6 +51,8 @@ jobs:
             '/assets/dar-3d-icons/home.png',
             '/assets/dar-3d-icons/settings.png',
             '/assets/home-v1194/hero-wide-adobe.jpg',
+            '/assets/home-v1194/hero-mobile-adobe.jpg',
+            '/assets/home-v1194/study-runway.jpg',
             '/kids/assets/kids-salah-v1262/cinematic-still.jpg',
             '/test/assets/dar-3d-icons/dar-home-cinematic-hero.png',
             '/kids/assets/kids-home-v1191/hero-static-reference.jpg',
@@ -73,6 +75,23 @@ jobs:
             except Exception as e:
               print('MEDIA_ERROR',path,type(e).__name__,str(e),flush=True);errors.append(path)
           if errors:raise AssertionError('Unavailable HOME visual sources: '+', '.join(errors))
+          PY
+          python - <<'PY'
+          import json,pathlib
+          root=pathlib.Path('home-device/media/apple-tv')
+          catalog=json.loads((root/'catalog.json').read_text())
+          assert len(catalog.get('wallpapers',[]))==10, 'Expected ten curated native backgrounds'
+          assert len(catalog.get('adhanMotifs',{}))==5, 'Expected all five native prayer artworks'
+          errors=[]
+          for item in catalog['wallpapers']:
+            for key in ('url','thumbnail'):
+              p=item.get(key,'')
+              if not p.startswith('/media/apple-tv/') or not (root/p.rsplit('/',1)[-1]).is_file():errors.append(p or item.get('id','missing'))
+          for group in ('adhanMotifs','adhanThumbnails'):
+            for p in catalog.get(group,{}).values():
+              if not (root/p.rsplit('/',1)[-1]).is_file():errors.append(p)
+          if errors:raise AssertionError('Catalog references missing bundled images: '+', '.join(errors))
+          print('NATIVE_MEDIA_CATALOG',len(catalog['wallpapers']),'wallpapers,',len(catalog['adhanMotifs']),'Adhan masters and thumbnails: PASS')
           PY
       - name: Browser QA dependencies
         run: python -m pip install -q selenium
