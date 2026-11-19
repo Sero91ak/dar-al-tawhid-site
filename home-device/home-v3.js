@@ -33,6 +33,7 @@
   const homeChoice=prefs.wallpaperMode==='auto'?'auto':prefs.wallpaper;
   const bg=imageFor(resolveWallpaper(homeChoice));
   app.style.backgroundImage=bg?'url("'+bg.replaceAll('"','%22')+'")':'none';
+  app.style.setProperty('--home-artwork-opacity',bg?(prefs.theme==='light'?'0.10':'0.19'):'1');
   const saver=$('saver');if(saver){
    const saverChoice=prefs.saverWallpaper==='same'?homeChoice:prefs.saverWallpaper;
    const sbg=imageFor(resolveWallpaper(saverChoice));
