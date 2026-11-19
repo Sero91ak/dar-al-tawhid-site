@@ -24,7 +24,12 @@ const id="neufokus-frauenwissen-16-20261118";
 const now=Date.now(),start=new Date(now-20*60*1000).toISOString(),end=new Date(now-20*60*1000+48*3600000).toISOString();
 let feed=JSON.parse(JSON.stringify(draft));
 let card=feed.items.find(x=>x.id===id);assert.ok(card);
+card.status="draft";card.expiresAt=null;card.firstPublishedAt=null;
 let serverEntries=JSON.parse(JSON.stringify(source)),lang="tr",navigated=[];
+for(const row of launch.items){
+ const e=serverEntries["/"+row.sourceFile].eintraege.find(x=>x.kennung===row.id);
+ assert.ok(e);e.quellenstatus="nicht-anzeigen";e.freigabeDurchSerhat=true;
+}
 let deployedLanguages=JSON.parse(JSON.stringify(localeCatalog)),learningAvailable=true;
 const expiryTimers=new Map();let timerSerial=0;
 const registry=new Map(),listeners={},anchor={insertAdjacentElement(pos,el){assert.equal(pos,"afterend");registry.set(el.id,el)}};
