@@ -17,6 +17,12 @@ const manifest=load("content/admin/frauen-batch-16-2026-11-18.json");
 const locale=load("assets/frauen/frauen-entry-locales-v1.json");
 const sourceAudit=load("content/admin/frauen-batch16-source-audit-20261118.json");
 const codes=["de","ar","en","tr","ku","ckb","bs","fr","es"];
+const mode=process.argv[2]||"status";
+const supportedModes=new Set(["status","prepare","prepublish","ready","notify"]);
+if(!supportedModes.has(mode)){
+ console.error("FRAUEN 16: unsupported gate mode "+JSON.stringify(mode));
+ process.exitCode=2;
+}
 const idSeen=new Set(),urlSeen=new Map(),missing=[],structureErrors=[],detail=[];
 const assert=(v,msg)=>{if(!v){missing.push(msg);structureErrors.push(msg)}};
 assert(manifest.expectedReleaseCount===16&&manifest.records.length===16,"Release cohort must contain exactly sixteen canonical records");
@@ -115,7 +121,7 @@ const notifyReady=allReady&&manifest.state==="published-live-verified"&&
      manifest.notificationDraft?.deliveryLanguageVerification?.[key]===true);
 const summary={batch:manifest.id,records:detail.length,structureReady:structureErrors.length===0,structureErrors,prepublishReady,ready:allReady,notifyReady,readyCount:detail.filter(d=>d.ready).length,localeCountExpected:16*9,localeCountFound:detail.reduce((n,d)=>n+d.languages,0),missingCount:missing.length,missing,detail,notification};
 console.log(JSON.stringify(summary,null,2));
-if(process.argv[2]==="prepare"&&structureErrors.length)process.exitCode=1;
-if(process.argv[2]==="prepublish"&&!prepublishReady)process.exitCode=1;
-if(process.argv[2]==="ready"&&!allReady)process.exitCode=1;
-if(process.argv[2]==="notify"&&!notifyReady)process.exitCode=1;
+if(mode==="prepare"&&structureErrors.length)process.exitCode=1;
+if(mode==="prepublish"&&!prepublishReady)process.exitCode=1;
+if(mode==="ready"&&!allReady)process.exitCode=1;
+if(mode==="notify"&&!notifyReady)process.exitCode=1;
