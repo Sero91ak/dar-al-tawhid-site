@@ -17,8 +17,8 @@
   {id:'kids-hero',label:'Moschee · Nachtmotiv',url:ROOT+'/kids/assets/kids-home-v1191/hero-static-reference.jpg'},
   {id:'abstract',label:'Klassisch · ohne Bild',url:''}
  ];
- const palettes={light:{label:'Hell',light:true},soft:{label:'Sanft Elegant',light:true},eisgold:{label:'Eisgold',light:true},salbei:{label:'Salbei · Elfenbein',light:true},dark:{label:'Klassisch Dunkel',light:false},royal:{label:'Royal Nachtblau',light:false},bordeaux:{label:'Bordeaux Royal',light:false},'dar-al-layl':{label:'Dār al-Layl',light:false},nightgold:{label:'Nachtgrün · Gold',light:false}};
- let prefs={theme:'dark',palette:'nightgold',wallpaper:'tv-kaaba-day',wallpaperMode:'manual',reduceMotion:false,saverWallpaper:'same',adhanCinema:true,allowBackgroundUpdates:true};
+ const palettes={'dar-al-layl':{label:'Dār al-Layl',light:false}};
+ let prefs={theme:'dark',palette:'dar-al-layl',wallpaper:'tv-kaaba-day',wallpaperMode:'manual',reduceMotion:false,saverWallpaper:'same',adhanCinema:true,allowBackgroundUpdates:true};
  try{const from=JSON.parse(localStorage.getItem(KEY)||'{}');if(from&&typeof from==='object'&&!Array.isArray(from)){prefs={...prefs,...from}}}catch{}
  const safeHTML=(str)=>String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
  function imageFor(name){let w=wallpapers.find(x=>x.id===name);if(name==='custom'){const raw=localStorage.getItem(KEY+'-wallpaper')||'';return /^data:image\/(?:png|jpeg|webp);base64,/i.test(raw)?raw:''}return w?.url||''}
@@ -28,8 +28,8 @@
  function warn(msg){const t=$('toast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3900)}
  function apply(){
   const app=$('app');if(!app)return;
-  const paletteId=palettes[prefs.palette]?prefs.palette:(prefs.theme==='light'?'salbei':'nightgold');
-  const palette=palettes[paletteId];prefs.palette=paletteId;prefs.theme=palette.light?'light':'dark';
+  const paletteId='dar-al-layl';
+  const palette=palettes[paletteId];prefs.palette=paletteId;prefs.theme='dark';
   app.dataset.homePalette=paletteId;
   app.dataset.homeTheme=prefs.theme;
   app.classList.toggle('reduced-motion',!!prefs.reduceMotion);
@@ -137,8 +137,8 @@
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!picker.hidden){close();opener.focus({preventScroll:true})}});
  }
  function bind(){
-  const sel=$('homeAppearance');if(sel)sel.addEventListener('change',()=>{prefs.theme=sel.value==='light'?'light':'dark';prefs.palette=sel.value==='light'?'salbei':'nightgold';store();apply()});
-  const legacyTheme=$('theme');if(legacyTheme)legacyTheme.addEventListener('change',()=>{prefs.theme=legacyTheme.value==='ivory'?'light':'dark';prefs.palette=prefs.theme==='light'?'salbei':'nightgold';const appearance=$('homeAppearance');if(appearance)appearance.value=prefs.theme;store();apply()});
+  const sel=$('homeAppearance');if(sel){sel.value='dark';sel.disabled=true;sel.addEventListener('change',()=>{prefs.theme='dark';prefs.palette='dar-al-layl';store();apply()})}
+  const legacyTheme=$('theme');if(legacyTheme){legacyTheme.value='night';legacyTheme.disabled=true;legacyTheme.addEventListener('change',()=>{prefs.theme='dark';prefs.palette='dar-al-layl';store();apply()})}
   const saver=$('homeSaverBackground');if(saver){const options=[{id:'same',label:'Wie HOME-Hintergrund'},{id:'auto',label:'Automatisch nach Tageszeit'},...wallpapers.map(x=>({id:x.id,label:x.label}))];saver.replaceChildren(...options.map(x=>new Option(x.label,x.id)));saver.addEventListener('change',()=>{prefs.saverWallpaper=saver.value;store();apply()})}
   const wallMode=$('homeWallpaperMode');if(wallMode){wallMode.value=prefs.wallpaperMode;wallMode.addEventListener('change',()=>{prefs.wallpaperMode=wallMode.value;store();apply()})}
   const motionControl=$('homeReduceMotion');if(motionControl){motionControl.checked=!!prefs.reduceMotion;motionControl.addEventListener('change',()=>{prefs.reduceMotion=motionControl.checked;store();apply()})}
@@ -219,7 +219,9 @@
   view.querySelector('[data-close-home-view]')?.focus({preventScroll:true});
   if(id==='quranReaderPanel')document.dispatchEvent(new Event('dar:quran-reader-open'));
  }
+ function setActiveNav(action){document.querySelectorAll('.home-nav [data-home-action]').forEach(button=>{if(button.dataset.homeAction===action)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current')})}
  function closeLocalViews(){
+  setActiveNav('prayer');
   if(!localRoute.active)return;const active=$(localRoute.active),screen=$('mainScreen');localRoute.active=null;clearTimeout(localRoute.hideTimer);
   active?.classList.remove('is-active');active?.classList.add('is-leaving');
   if(screen){screen.hidden=false;screen.inert=false;screen.removeAttribute('aria-hidden');screen.classList.remove('view-covered')}
@@ -239,9 +241,9 @@
   $('readerSurah').addEventListener('change',()=>{api().selectSurah(surahSelect.value);render()});$('readerReciter').addEventListener('change',()=>{api().selectReciter(reciterSelect.value);options()});$('readerPrevious').addEventListener('click',()=>api().skip(-1));$('readerNext').addEventListener('click',()=>api().skip(1));$('readerPlay').addEventListener('click',()=>{api().play();setTimeout(options,100)});$('readerShowTransliteration').checked=true;$('readerShowTransliteration').addEventListener('change',()=>{api().setTransliteration($('readerShowTransliteration').checked?'show':'hide');$('readerTransliterationText').hidden=!$('readerShowTransliteration').checked});document.addEventListener('dar:quran-state',()=>{if(!panel.hidden){render();options()}});document.addEventListener('dar:quran-reader-open',render);
  }
  function bindHomeActions(){
-  document.querySelectorAll('[data-home-action="prayer"]').forEach(b=>b.addEventListener('click',()=>{closeLocalViews();const section=$('times');section?.classList.add('home-focus');document.querySelector('.prayer-cell.active')?.focus({preventScroll:true});setTimeout(()=>section?.classList.remove('home-focus'),1800)}));
-  document.querySelectorAll('[data-home-action="quran"]').forEach(b=>b.addEventListener('click',()=>openLocalView('quranReaderPanel')));
-  ['openCalendarPanel','calendarCardButton'].forEach(id=>$(id)?.addEventListener('click',()=>openLocalView('calendarPanel')));
+  document.querySelectorAll('[data-home-action="prayer"]').forEach(b=>b.addEventListener('click',()=>{setActiveNav('prayer');closeLocalViews();const section=$('times');section?.classList.add('home-focus');document.querySelector('.prayer-cell.active')?.focus({preventScroll:true});setTimeout(()=>section?.classList.remove('home-focus'),1800)}));
+  document.querySelectorAll('[data-home-action="quran"]').forEach(b=>b.addEventListener('click',()=>{setActiveNav('quran');openLocalView('quranReaderPanel')}));
+  ['openCalendarPanel','calendarCardButton'].forEach(id=>$(id)?.addEventListener('click',()=>{setActiveNav('calendar');openLocalView('calendarPanel')}));
   $('openHadithPanel')?.addEventListener('click',()=>{openLocalView('hadithPanel');document.dispatchEvent(new CustomEvent('dar:open-hadith'))});
   $('nextHadithPanel')?.addEventListener('click',()=>document.dispatchEvent(new CustomEvent('dar:next-hadith')));
   document.querySelectorAll('[data-close-home-view]').forEach(b=>b.addEventListener('click',closeLocalViews));
@@ -251,7 +253,7 @@
  }
  function init(){
   if(!$('app'))return;
-  augmentBrand();bind();bindAppearancePicker();bindHomeActions();bindQuranReader();apply();renderHijriDate();loadMediaCatalog();setInterval(()=>{if(prefs.wallpaperMode==='auto'||prefs.saverWallpaper==='auto')apply()},300000);handleConnection();
+  augmentBrand();bind();bindAppearancePicker();bindHomeActions();bindQuranReader();apply();store();setActiveNav('prayer');renderHijriDate();loadMediaCatalog();setInterval(()=>{if(prefs.wallpaperMode==='auto'||prefs.saverWallpaper==='auto')apply()},300000);handleConnection();
   const el=$('adhanVisual');if(el)new MutationObserver(updateAdhanTitle).observe(el,{attributes:true,attributeFilter:['class']});
   window.addEventListener('online',handleConnection);window.addEventListener('offline',handleConnection);
   const i=document.querySelector('[data-tab="hintergrund"]');if(i){const img=document.createElement('img');img.src=icon('image');img.alt='';img.className='settings-icons';i.prepend(img)}
