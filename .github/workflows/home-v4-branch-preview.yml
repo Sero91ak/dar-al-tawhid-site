@@ -48,6 +48,7 @@ jobs:
           cp home-device/home-v4.js .home-preview-dist/home-v4.js
           cp home-device/home-v4.css .home-preview-dist/home-v4.css
           cp home-device/home-v6.js .home-preview-dist/home-v6.js
+          cp home-device/home-v7.js .home-preview-dist/home-v7.js
           cp home-v5.css .home-preview-dist/home-v5.css
           cp content/home/device-config.json .home-preview-dist/content/home/device-config.json
           cat > .home-preview-worker.mjs <<'WORKER'
@@ -97,8 +98,9 @@ jobs:
           node --check .home-preview-dist/home-v3.js
           node --check .home-preview-dist/home-v4.js
           node --check .home-preview-dist/home-v6.js
+          node --check .home-preview-dist/home-v7.js
           test -s .home-preview-dist/home-v5.css
-          node -e 'const s=require("fs").readFileSync(".home-preview-dist/index.html","utf8");const js=s.split("<script>")[1]?.split("</script>")[0];if(!js)throw Error("missing HOME inline script");new Function(js);if(!s.includes("/home-v4.js?v=5.2")||!s.includes("/home-v4.css?v=4.0")||!s.includes("/home-v5.css?v=5.5")||!s.includes("/home-v6.js?v=6.0"))throw Error("V3 assets not referenced");console.log("HOME V5 scripts and asset links valid");'
+          node -e 'const s=require("fs").readFileSync(".home-preview-dist/index.html","utf8");const js=s.split("<script>")[1]?.split("</script>")[0];if(!js)throw Error("missing HOME inline script");new Function(js);if(!s.includes("/home-v4.js?v=5.2")||!s.includes("/home-v4.css?v=4.0")||!s.includes("/home-v5.css?v=5.5")||!s.includes("/home-v6.js?v=6.0")||!s.includes("/home-v7.js?v=7.0"))throw Error("V3 assets not referenced");console.log("HOME V5 scripts and asset links valid");'
           node -e 'const h=require("fs").readFileSync(".home-preview-dist/index.html","utf8");if(!h.includes("DĀR AL TAWḤĪD HOME"))process.exit(1);console.log("HOME kiosk HTML preview present");'
 
       - name: Deploy ONLY dar-home-kiosk-preview Worker
