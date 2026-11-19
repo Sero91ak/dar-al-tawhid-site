@@ -1,13 +1,13 @@
 'use strict';
 /* DĀR AL TAWḤĪD ʿUmrah cache; scope /umrah/ only. */
-const CACHE='dar-umrah-v9-premium-1';
-const CORE=['./','./index.html','./offline.html','./enhancements.css','./enhancements.js','./quellen.html'];
-const BRAND=['/app-icon-512.png','/assets/dar-3d-icons/home.png','/assets/dar-3d-icons/qibla.png','/assets/dar-3d-icons/compass.png','/assets/dar-3d-icons/image.png','/assets/dar-3d-icons/library.png','/assets/dar-3d-icons/mosque.png'];
+const CACHE='dar-umrah-v10-internal-sources-20261119';
+const CORE=['./index.html','./offline.html'];
+const BRAND=['/assets/app-icons/type-creme-ar/icon-512.png','/assets/dar-3d-icons/home.png','/assets/dar-3d-icons/qibla.png','/assets/dar-3d-icons/compass.png','/assets/dar-3d-icons/image.png','/assets/dar-3d-icons/library.png','/assets/dar-3d-icons/mosque.png'];
 const BRAND_PATHS=new Set(BRAND);
 const PREFIX=new URL(self.registration.scope).pathname;
 self.addEventListener('install',ev=>ev.waitUntil((async()=>{
  const c=await caches.open(CACHE);
- await c.addAll(CORE);
+ await Promise.all(CORE.map(async p=>{try{const response=await fetch(p,{cache:'reload'});if(response.ok)await c.put(p,response)}catch(_){}}));
  await Promise.all(BRAND.map(async p=>{try{await c.add(p)}catch(_){}}));
  await self.skipWaiting();
 })()));
