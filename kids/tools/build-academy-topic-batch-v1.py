@@ -9,12 +9,14 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import fcntl
 import importlib.util
 import json
 import os
 import pathlib
 import re
 import sys
+import tempfile
 import time
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -158,6 +160,16 @@ def run():
     args = cli.parse_args()
     if args.generate == args.dry_run:
         raise SystemExit("Select exactly one: --dry-run (free) or --generate (billable)")
+    # Serialize the entire state/read/cache/generate/write sequence. This also
+    # prevents two authorized invocations from charging for the same phrase.
+    lock_name = hashlib.sha256(str(STAGING.resolve()).encode("utf-8")).hexdigest()[:24]
+    lock_path = pathlib.Path(tempfile.gettempdir()) / f"dar-kids-academy-{lock_name}.lock"
+    with lock_path.open("a+") as lock:
+        fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+        run_locked(args)
+
+
+def run_locked(args):
     request = load_json(REQUEST)
     story = load_story_backend()
     batches = prepare(request, story)
@@ -174,6 +186,11 @@ def run():
     done = safe_existing(existing_file.get("entries", {}), story)
     if set(done) - {row["text"] for row in batches}:
         raise RuntimeError("Staging contains unrelated lesson text")
+    expected_digests = {r["text"]: r["digest"] for r in batches}
+    mismatches = [text for text, entry in done.items()
+                  if entry.get("preparedSha256") != expected_digests.get(text)]
+    if mismatches:
+        raise RuntimeError("Existing staged identity differs; explicit review required; no regeneration")
     waiting = [r for r in batches if r["text"] not in done]
     print(f"Ṣidq 4–5, first topic batch: {len(done)}/4 technically staged, "
           f"{len(waiting)} pending, "
@@ -190,13 +207,15 @@ def run():
     for row in waiting:
         file = ASSETS / (row["digest"][:20] + ".m4a")
         if file.exists():
-            if file.stat().st_size < 1800 or not (0.8 <= story.technical_duration(file) <= 65):
-                raise RuntimeError("Existing cached audio has failed media verification")
-            duration = story.technical_duration(file)
-            print("Recovering previously generated exact cached file; no new generation", flush=True)
+            raise RuntimeError("Unregistered cached media requires explicit voice/provenance review; no regeneration")
         else:
-            duration = story.generate_audio(row["text"], file, secret)
+            duration, resolved_voice_id = story.generate_audio(
+                row["text"], file, secret, include_voice_id=True
+            )
             time.sleep(0.25)
+            if resolved_voice_id != request["masterVoice"]["voiceId"]:
+                file.unlink(missing_ok=True)
+                raise RuntimeError("Resolved synthesis voice differs from approved Master voice")
         done[row["text"]] = {
             "url": "/" + file.relative_to(ROOT).as_posix(),
             "sha256": hashlib.sha256(file.read_bytes()).hexdigest(),

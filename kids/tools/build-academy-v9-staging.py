@@ -35,7 +35,8 @@ from voice_text import prepare_kids_voice_text
 
 
 _QURAN_CITATION = re.compile(
-    r"(?<![\w])\d{1,3}\s*:\s*\d{1,3}(?:\s*[–—-]\s*\d{1,3})?(?![\w])"
+    r"(?<![\w])(?:Qurʾān|Quran|Sūrat\s+[^\d,;()]{1,48}?)\s+"
+    r"\d{1,3}\s*:\s*\d{1,3}(?:\s*[–—-]\s*\d{1,3})?(?![\w])"
 )
 _HADITH_COLLECTION_CITATION = re.compile(
     r"(\b(?:Ṣaḥīḥ\s+(?:Muslim|al-Buḫārī|al-Bukhārī)|Sahih\s+(?:Muslim|al-Bukhari))\s+)\d{1,8}[a-z]?\b",
@@ -46,7 +47,7 @@ _LABELED_SOURCE_NUMBER = re.compile(r"\b(?:Nr\.?|Nummer)\s*\d{1,8}[a-z]?\b", re.
 
 def prepare_academy_spoken_text(visible_text: str) -> str:
     """Keep citations in lesson data, but omit citation numbers from narration."""
-    value = _QURAN_CITATION.sub("", str(visible_text or ""))
+    value = _QURAN_CITATION.sub(lambda match: match.group(0).split(":", 1)[0].rsplit(" ", 1)[0], str(visible_text or ""))
     value = _HADITH_COLLECTION_CITATION.sub(r"\1", value)
     value = _LABELED_SOURCE_NUMBER.sub("", value)
     value = re.sub(r"\s+([,;:!?])", r"\1", value)
@@ -83,7 +84,7 @@ def technical_duration(filepath:pathlib.Path)->float:
     ],text=True).strip())
 
 
-def generate_audio(text:str, target:pathlib.Path, secret:str)->float:
+def generate_audio(text:str, target:pathlib.Path, secret:str, *, include_voice_id:bool=False):
     """Use exactly the approved story-generation backend; do NOT call Flash directly."""
     spoken_text=prepare_academy_spoken_text(text)
     prepared=prepare_academy_tts_text(text)
@@ -112,6 +113,8 @@ def generate_audio(text:str, target:pathlib.Path, secret:str)->float:
     if not (0.8<=seconds<=65) or target.stat().st_size<1800:
         target.unlink(missing_ok=True)
         raise RuntimeError("Invalid media; clip rejected without publication")
+    if include_voice_id:
+        return seconds, str(answer.get("voiceId") or "")
     return seconds
 
 

@@ -69,15 +69,11 @@ def staged_assets():
         if doc.get("stagingOnly") is not True:
             raise RuntimeError(f"Not an isolated staging pack: {path.name}")
         for phrase, asset in doc.get("entries", {}).items():
-            if phrase in result:
-                if asset.get("sha256") != result[phrase].get("sha256"):
-                    raise RuntimeError(f"Conflicting staged media for phrase: {phrase}")
-            else:
-                result[phrase] = asset
+            result.setdefault(phrase, []).append((path, asset))
     return result
 
 
-def is_valid_asset(text, asset, record):
+def is_valid_asset(text, asset, record, staging_path):
     if not isinstance(asset, dict) or not isinstance(record, dict):
         return False
     if (
@@ -100,7 +96,7 @@ def is_valid_asset(text, asset, record):
     if "?" in url or "#" in url or ".." in url or not url.endswith(".m4a"):
         return False
     local = ROOT / url.lstrip("/")
-    if not local.is_file() or local.stat().st_size < 1800:
+    if not local.is_file() or local.is_symlink() or local.stat().st_size < 1800:
         return False
     digest = hashlib.sha256(local.read_bytes()).hexdigest()
     if digest != asset.get("sha256") or digest != record.get("sha256"):
@@ -111,11 +107,19 @@ def is_valid_asset(text, asset, record):
         return False
     if not (0.8 <= duration <= 90):
         return False
+    try:
+        subprocess.run(["ffmpeg", "-v", "error", "-i", str(local), "-f", "null", "-"],
+                       check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                       timeout=30)
+    except (OSError, subprocess.SubprocessError):
+        return False
+    if not staging_path.is_file():
+        return False
     if record.get("sourceText") != text or record.get("audioPath") != url:
         return False
     if record.get("reviewStatus") != "approved-after-acoustic-audit":
         return False
-    if record.get("reviewedBy") != "owner" or not record.get("reviewedAt"):
+    if record.get("reviewedBy") != "owner" or not isinstance(record.get("reviewedAt"), str):
         return False
     if not all(record.get(key) is True for key in (
         "exactTextVerified", "arabicPronunciationVerified",
@@ -134,7 +138,7 @@ def coverage():
     release_state = read_json(RELEASE)
     if (release_state.get("currentSubject") != SUBJECT
             or release_state.get("currentTopic") != TOPIC
-            or release_state.get("status") not in ("recording", "qa", "ready-for-release", "audio-generated-awaiting-original-binary-import")):
+            or release_state.get("status") not in ("recording", "qa", "ready-for-release", "audio-generated-awaiting-original-binary-import", "prepared-for-live-deployment")):
         raise RuntimeError("Next-topic lock or unexpected state; publication refused")
     ledger = read_json(LEDGER)
     if ledger.get("subject") != SUBJECT or ledger.get("lessonId") != TOPIC:
@@ -150,16 +154,22 @@ def coverage():
     missing = []
     for row in rows:
         phrase = row["text"]
-        asset = staged.get(phrase)
         approval = approved.get(phrase)
-        if is_valid_asset(phrase, asset, approval):
-            confirmed[phrase] = asset
+        matching = [asset for source_path, asset in staged.get(phrase, [])
+                    if asset.get("url") == approval.get("audioPath")
+                    and asset.get("sha256") == approval.get("sha256")
+                    and is_valid_asset(phrase, asset, approval, source_path)] if isinstance(approval, dict) else []
+        if matching:
+            confirmed[phrase] = matching[0]
         else:
             missing.append(phrase)
     return confirmed, missing, expected
 
 
 def do_publish():
+    state = read_json(RELEASE)
+    if state.get("status") not in ("recording", "qa", "ready-for-release", "audio-generated-awaiting-original-binary-import"):
+        raise RuntimeError("Publication phase guard: this release is already prepared or not publishable")
     approved, missing, expected = coverage()
     if missing:
         raise RuntimeError(
@@ -198,17 +208,24 @@ def do_publish():
     # Public manifest mutation is atomic. Still REQUIRES GitHub PR, deployed
     # Cloudflare main and real device QA to count as a live release.
     temp = PUBLIC.with_suffix(".json.temp")
-    temp.write_text(json.dumps(public, ensure_ascii=False, indent=2) + "\n", "utf-8")
-    temp.replace(PUBLIC)
-    release = read_json(RELEASE)
+    release = state
     release["status"] = "prepared-for-live-deployment"
     release["fullyCertifiedCount"] = len(approved)
     release["expectedCount"] = len(expected)
     release["liveConfirmed"] = False
     release["publishedUtc"] = None
     temp2 = RELEASE.with_suffix(".json.temp")
+    temp.write_text(json.dumps(public, ensure_ascii=False, indent=2) + "\n", "utf-8")
     temp2.write_text(json.dumps(release, ensure_ascii=False, indent=2) + "\n", "utf-8")
-    temp2.replace(RELEASE)
+    old_public = PUBLIC.read_bytes()
+    old_release = RELEASE.read_bytes()
+    try:
+        temp.replace(PUBLIC)
+        temp2.replace(RELEASE)
+    except Exception:
+        PUBLIC.write_bytes(old_public)
+        RELEASE.write_bytes(old_release)
+        raise
     print("Ṣidq manifest prepared for PR/deployment. NOT yet confirmed live. "
           "Next topic remains locked.")
 

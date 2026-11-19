@@ -54,6 +54,17 @@ assert.equal(academyRelease.required,58);
 assert.equal(academyRelease.nextTopicLocked,true);
 assert.equal(academyRelease.publicManifestModified,false);
 assert.equal(academyRelease.canPublish,academyRelease.confirmed===academyRelease.required);
+const academyFs=require("node:fs");
+const academyCrypto=require("node:crypto");
+const academyPublicPath="kids/data/academy-audio.json";
+const academyStatePath="kids/data/academy-topic-batches/release-state-v1.json";
+const academyBefore=[academyPublicPath,academyStatePath].map(p=>academyCrypto.createHash("sha256").update(academyFs.readFileSync(p)).digest("hex"));
+const refusedPublish=require("node:child_process").spawnSync("python3",[
+  "kids/tools/publish-academy-topic-v1.py","--publish"
+],{cwd:require("node:path").resolve(__dirname,".."),encoding:"utf8"});
+assert.notEqual(refusedPublish.status,0,"Incomplete Ṣidq must refuse --publish");
+const academyAfter=[academyPublicPath,academyStatePath].map(p=>academyCrypto.createHash("sha256").update(academyFs.readFileSync(p)).digest("hex"));
+assert.deepEqual(academyAfter,academyBefore,"Refused partial publication must leave both manifests unchanged");
 // The complete Ṣidq owner-authorized production manifest can be imported
 // only when the original 76 paid MP3 files are actually present. This check
 // validates all source associations without paying credits or publishing.
