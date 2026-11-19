@@ -191,7 +191,7 @@ jobs:
             WebDriverWait(driver,8).until(lambda d:d.find_element(By.ID,'calendarPanel').get_attribute('hidden') is None)
             route_state=driver.execute_script("const p=document.querySelector('#calendarPanel .home-view-panel');return {active:document.getElementById('calendarPanel').classList.contains('is-active'),screenHidden:document.getElementById('mainScreen').hidden,covered:document.getElementById('mainScreen').classList.contains('view-covered'),transition:getComputedStyle(document.getElementById('calendarPanel')).transitionDuration,background:getComputedStyle(p).backgroundImage}")
             if not route_state['active'] or route_state['screenHidden'] or not route_state['covered'] or '0.36s' not in route_state['transition']:errors.append('Calendar did not open as an animated in-app route with a retained HOME back stack')
-            if '0.80' not in route_state['background']:errors.append('Calendar panel is opaque and hides the selected HOME wallpaper in light mode')
+            if '0.58' not in route_state['background']:errors.append('Calendar panel is opaque and hides the selected HOME wallpaper in light mode')
             print('HOME_PUSH_ROUTE',route_state,flush=True)
             time.sleep(.4)
             calendar_text=driver.find_element(By.ID,'calendarPanel').text
@@ -202,7 +202,7 @@ jobs:
             WebDriverWait(driver,10).until(lambda d:d.find_element(By.ID,'quranReaderPanel').get_attribute('hidden') is None)
             qroute=driver.execute_script("return {active:document.getElementById('quranReaderPanel').classList.contains('is-active'),screenHidden:document.getElementById('mainScreen').hidden,settings:!!document.querySelector('#quranReaderPanel [data-home-settings]'),background:getComputedStyle(document.querySelector('#quranReaderPanel .quran-reader-shell')).backgroundImage}")
             if not qroute['active'] or qroute['screenHidden'] or not qroute['settings']:errors.append('Quran did not push in as a local route with contextual settings')
-            if '0.82' not in qroute['background']:errors.append('Quran reader hides the selected HOME wallpaper beneath an opaque panel')
+            if '0.60' not in qroute['background']:errors.append('Quran reader hides the selected HOME wallpaper beneath an opaque panel')
             time.sleep(.4)
             WebDriverWait(driver,15).until(lambda d:bool(d.find_element(By.ID,'readerArabic').text.strip()) and bool(d.find_element(By.ID,'readerGerman').text.strip()))
             if not driver.find_element(By.ID,'readerSurah').get_attribute('value'):errors.append('Quran reader did not provide local Surah selection')
