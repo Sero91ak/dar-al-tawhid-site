@@ -165,9 +165,10 @@
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&picker&&!picker.hidden)closeSurahPicker()});
  const dataObserver=new MutationObserver(()=>{if(picker&&!picker.hidden)renderSurahPicker(search?.value||'')});if(nativeSelect)dataObserver.observe(nativeSelect,{childList:true});
  nativeSelect?.addEventListener('change',()=>{if(picker&&!picker.hidden)renderSurahPicker(search?.value||'')});
+ function renderHijriDate(){const el=$('hijriDate');if(!el)return;try{const fmt=new Intl.DateTimeFormat('de-DE-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric',timeZone:'Europe/Berlin'});el.textContent=fmt.format(new Date())}catch{try{el.textContent=new Intl.DateTimeFormat('de-DE-u-ca-islamic',{day:'numeric',month:'long',year:'numeric',timeZone:'Europe/Berlin'}).format(new Date())}catch{el.textContent='Islamischer Kalender'}}}
  function init(){
   if(!$('app'))return;
-  augmentBrand();bind();apply();loadMediaCatalog();setInterval(()=>{if(prefs.wallpaperMode==='auto'||prefs.saverWallpaper==='auto')apply()},300000);handleConnection();
+  augmentBrand();bind();apply();renderHijriDate();loadMediaCatalog();setInterval(()=>{if(prefs.wallpaperMode==='auto'||prefs.saverWallpaper==='auto')apply()},300000);handleConnection();
   const el=$('adhanVisual');if(el)new MutationObserver(updateAdhanTitle).observe(el,{attributes:true,attributeFilter:['class']});
   window.addEventListener('online',handleConnection);window.addEventListener('offline',handleConnection);
   const i=document.querySelector('[data-tab="hintergrund"]');if(i){const img=document.createElement('img');img.src=icon('image');img.alt='';img.className='settings-icons';i.prepend(img)}
