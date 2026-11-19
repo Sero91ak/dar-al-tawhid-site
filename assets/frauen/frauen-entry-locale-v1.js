@@ -115,17 +115,21 @@
         d.head.appendChild(style);
       }
     }
-    link.href="/lernen/frauen-wissen/?id="+encodeURIComponent(item.entry.id)+"&lang="+encodeURIComponent(item.code);
-    link.lang=item.code;link.dir=(item.code==="ar"||item.code==="ckb")?"rtl":"ltr";
-    link.textContent=LEARN_LABELS[item.code];
-    link.setAttribute("aria-label",LEARN_LABELS[item.code]);
+    var learningHref="/lernen/frauen-wissen/?id="+encodeURIComponent(item.entry.id)+"&lang="+encodeURIComponent(item.code);
+    var linkDir=(item.code==="ar"||item.code==="ckb")?"rtl":"ltr";
+    if(link.getAttribute("href")!==learningHref)link.setAttribute("href",learningHref);
+    if(link.lang!==item.code)link.lang=item.code;
+    if(link.dir!==linkDir)link.dir=linkDir;
+    if(link.textContent!==LEARN_LABELS[item.code])link.textContent=LEARN_LABELS[item.code];
+    if(link.getAttribute("aria-label")!==LEARN_LABELS[item.code])link.setAttribute("aria-label",LEARN_LABELS[item.code]);
   }
   function applyOneArticle(article,item){
     var p=item.pack,lab=p.labels||{},code=item.code;
     var dir=code==="ar"||code==="ckb"?"rtl":"ltr";
-    article.lang=code;article.dir=dir;
-    article.setAttribute("data-dar-frauen-content-id",item.entry.id);
-    article.setAttribute("data-dar-frauen-locale",code);
+    if(article.lang!==code)article.lang=code;
+    if(article.dir!==dir)article.dir=dir;
+    if(article.getAttribute("data-dar-frauen-content-id")!==item.entry.id)article.setAttribute("data-dar-frauen-content-id",item.entry.id);
+    if(article.getAttribute("data-dar-frauen-locale")!==code)article.setAttribute("data-dar-frauen-locale",code);
     text(article,".post-reader-title h2",p.title);
     text(article,".post-reader-title .kicker",lab.area);
     text(article,".statement.post-aussage .post-aussage-kicker",lab.statement);
@@ -174,9 +178,11 @@
   }
   function applyOneCard(card,item) {
     var p=item.pack,lab=p.labels||{},code=item.code;
-    card.lang=code;card.dir=(code==="ar"||code==="ckb"?"rtl":"ltr");
-    card.setAttribute("data-dar-frauen-content-id",item.entry.id);
-    card.setAttribute("data-dar-frauen-locale",code);
+    var cardDir=(code==="ar"||code==="ckb")?"rtl":"ltr";
+    if(card.lang!==code)card.lang=code;
+    if(card.dir!==cardDir)card.dir=cardDir;
+    if(card.getAttribute("data-dar-frauen-content-id")!==item.entry.id)card.setAttribute("data-dar-frauen-content-id",item.entry.id);
+    if(card.getAttribute("data-dar-frauen-locale")!==code)card.setAttribute("data-dar-frauen-locale",code);
     text(card,".post-row__body h3",p.title);
     text(card,".frauen-row__aussage",p.preview||p.statement);
     text(card,".frauen-row__quelle",p.source);
