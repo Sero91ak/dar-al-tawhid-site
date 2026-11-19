@@ -497,3 +497,8 @@
  #app .counter { font-size:clamp(13px,2.4vh,17px); }
 }
 #app :is(button,a[href],select,input):focus-visible { outline:3px solid #f3d58c!important;outline-offset:3px; }
+
+#app .bismillah,#app .hero-verse,#app .next-arabic { display:none!important; }
+@keyframes timerBeat { 0%,100% { text-shadow:0 0 0 rgba(216,189,130,0); } 50% { text-shadow:0 0 13px rgba(216,189,130,.45); } }
+#app:not(.reduced-motion) .counter .countnum { animation:timerBeat 2s ease-in-out infinite; }
+@media (prefers-reduced-motion:reduce) { #app .counter .countnum { animation:none!important; } }

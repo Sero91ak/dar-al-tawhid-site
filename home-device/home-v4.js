@@ -8,6 +8,7 @@
   let current='';
 
   function findPrayerKey(){
+    const visual=$('adhanVisual');if(visual?.dataset.prayerKey==='test')return'';
     const raw=($('adhanInfo')?.textContent||'').toLowerCase();
     if(/fajr|faǧr|morgengebet/i.test(raw))return'fajr';
     if(/ḍuhr|dhuhr|mittags/i.test(raw))return'dhuhr';
@@ -19,7 +20,10 @@
   function artwork(){
     const adhan=$('adhanVisual');
     if(!adhan || !adhan.classList.contains('active')){current='';return}
-    const name=findPrayerKey()||current;if(!name)return;
+    const test=adhan.dataset.prayerKey==='test';
+    const name=findPrayerKey()||(!test?current:'');
+    if(test){const title=adhan.querySelector('.adhan-title');if(title)title.textContent='Aḏān · Hörprobe';return}
+    if(!name)return;
     const title=adhan.querySelector('.adhan-title');
     if(title)title.textContent=NAMES[name]+' · Aḏān';
     let image=$('h4PrayerArtwork');

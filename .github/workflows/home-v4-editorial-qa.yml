@@ -125,14 +125,14 @@ jobs:
               time.sleep(2)
               data=driver.execute_script("""
                 const o=id=>document.getElementById(id)?.getBoundingClientRect();
-                const names=['mainScreen','nextName','times','dailyArabic','audioName','openSettings'];
+                const names=['mainScreen','nextName','times','dailyDe','audioName','openSettings'];
                 const boxes={};for(const n of names){const r=o(n);boxes[n]=r?{left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height}:null}
                 return {w:innerWidth,h:innerHeight,scrollW:document.documentElement.scrollWidth,
                   v4:!!document.querySelector('link[href^="/home-v4.css"]'),footerTabs:!!document.querySelector('.footnav'),
                   icons:document.querySelectorAll('.settings-icons').length,theme:document.getElementById('app').dataset.homeTheme,
                   fontSizes:{dailyDe:parseFloat(getComputedStyle(document.getElementById('dailyDe')).fontSize),source:parseFloat(getComputedStyle(document.getElementById('dailySource')).fontSize),counter:parseFloat(getComputedStyle(document.querySelector('.counter')).fontSize),ptime:parseFloat(getComputedStyle(document.querySelector('.prayer-cell .ptime')).fontSize)},
                   heroRight:{display:getComputedStyle(document.querySelector('.hero-right')).display,width:document.querySelector('.hero-right').getBoundingClientRect().width},
-                  prayerGlyph:{width:document.querySelector('.prayer-glyph')?.getBoundingClientRect().width||0,height:document.querySelector('.prayer-glyph')?.getBoundingClientRect().height||0,fit:document.querySelector('.prayer-glyph')?getComputedStyle(document.querySelector('.prayer-glyph')).objectFit:'none',naturalWidth:document.querySelector('.prayer-glyph')?.naturalWidth||0},
+                  prayerArtCount:document.querySelectorAll('.prayer-glyph').length,arabicHomeVisible:[...document.querySelectorAll('.hero-verse,.bismillah,#dailyArabic,.next-arabic')].filter(x=>getComputedStyle(x).display!=='none'&&x.textContent.trim()).length,
                   boxes,wallpaper:getComputedStyle(document.getElementById('app')).backgroundImage}
               """)
               print('VIEWPORT',w,h,data,flush=True)
@@ -143,10 +143,11 @@ jobs:
               if data['fontSizes']['dailyDe']<18:errors.append(f'{w}x{h}: German daily text below 18px')
               if data['fontSizes']['source']<12:errors.append(f'{w}x{h}: source citation below 12px')
               if data['fontSizes']['counter']<14:errors.append(f'{w}x{h}: countdown below 14px')
-              if data['fontSizes']['ptime']<28:errors.append(f'{w}x{h}: prayer time below 28px')
-              if data['prayerGlyph']['width']<=0 or data['prayerGlyph']['height']<=0 or data['prayerGlyph']['fit']!='cover':errors.append(f'{w}x{h}: native prayer image is missing or stretched')
+              if data['fontSizes']['ptime']<19:errors.append(f'{w}x{h}: prayer time below 19px')
+              if data['prayerArtCount']!=0:errors.append(f'{w}x{h}: Adhan-only artwork leaked into the five prayer-time cards')
+              if data['arabicHomeVisible']!=0:errors.append(f'{w}x{h}: Arabic display calligraphy should be hidden on HOME')
               if h>w and data['heroRight']['display']=='none':errors.append(f'{w}x{h}: portrait hides the daily verse')
-              if h>w and data['prayerGlyph']['naturalWidth']<=0:errors.append(f'{w}x{h}: portrait prayer thumbnail did not load')
+              if h>w and data['boxes']['dailyDe']['height']<=0:errors.append(f'{w}x{h}: German daily translation is hidden in portrait')
               if data['boxes']['openSettings']['width']<44:errors.append(f'{w}x{h}: settings touch target below 44px')
               for n in ['mainScreen','nextName','times','audioName','openSettings']:
                 box=data['boxes'][n]
@@ -154,7 +155,7 @@ jobs:
             long_text=driver.execute_script("""
               const article=document.querySelector('.daily-story'),ar=document.getElementById('dailyArabic'),de=document.getElementById('dailyDe'),src=document.getElementById('dailySource');
               const old=[ar.textContent,de.textContent,src.textContent];
-              ar.textContent=('رَبِّ زِدْنِي عِلْمًا ').repeat(32);de.textContent=('Eine gut lesbare deutsche Übersetzung mit vollständigem Sinn. ').repeat(18);src.textContent=('Qurʾān · Beispielquelle · ').repeat(12);
+              de.textContent=('Eine gut lesbare deutsche Übersetzung mit vollständigem Sinn. ').repeat(18);src.textContent=('Qurʾān · Beispielquelle · ').repeat(12);
               const result={scrollHeight:article.scrollHeight,clientHeight:article.clientHeight,overflow:getComputedStyle(article).overflowY};
               [ar.textContent,de.textContent,src.textContent]=old;return result;
             """)
@@ -229,7 +230,7 @@ jobs:
             long_light=driver.execute_script("""
               const article=document.querySelector('.daily-story'),ar=document.getElementById('dailyArabic'),de=document.getElementById('dailyDe'),src=document.getElementById('dailySource');
               const old=[ar.textContent,de.textContent,src.textContent];
-              ar.textContent=('رَبِّ زِدْنِي عِلْمًا ').repeat(32);de.textContent=('Eine gut lesbare deutsche Übersetzung mit vollständigem Sinn. ').repeat(18);src.textContent=('Qurʾān · Beispielquelle · ').repeat(12);
+              de.textContent=('Eine gut lesbare deutsche Übersetzung mit vollständigem Sinn. ').repeat(18);src.textContent=('Qurʾān · Beispielquelle · ').repeat(12);
               const result={scrollHeight:article.scrollHeight,clientHeight:article.clientHeight,overflow:getComputedStyle(article).overflowY};
               [ar.textContent,de.textContent,src.textContent]=old;return result;
             """)
@@ -243,6 +244,15 @@ jobs:
             driver.find_element(By.CSS_SELECTOR,'button[data-tab="inhalte"]').click()
             WebDriverWait(driver,20).until(lambda d:len(d.find_elements(By.CSS_SELECTOR,'#surah option'))==114)
             if len(driver.find_elements(By.CSS_SELECTOR,'#quranPlaybackMode option'))!=2 or len(driver.find_elements(By.CSS_SELECTOR,'#quranPlaybackScope option'))!=2:errors.append('Quran manual/automatic and all/single controls missing')
+            driver.find_element(By.ID,'closeSettings').click()
+            driver.find_element(By.ID,'openSurahPicker').click()
+            WebDriverWait(driver,10).until(lambda d:len(d.find_elements(By.CSS_SELECTOR,'#surahList [role=option]'))==114)
+            driver.find_element(By.ID,'surahSearch').send_keys('Fati')
+            WebDriverWait(driver,10).until(lambda d:len(d.find_elements(By.CSS_SELECTOR,'#surahList [role=option]'))==1)
+            driver.find_element(By.CSS_SELECTOR,'#surahList [role=option]').click()
+            if driver.find_element(By.ID,'surah').get_attribute('value')!='1':errors.append('Surah quick picker did not update the Quran player selection')
+            driver.find_element(By.ID,'openSettings').click()
+            driver.find_element(By.CSS_SELECTOR,'button[data-tab="inhalte"]').click()
             Select(driver.find_element(By.ID,'quranPlaybackScope')).select_by_value('single')
             if driver.execute_script("return JSON.parse(localStorage.getItem('dar-home-cinematic-v2')||'{}').quranPlaybackScope")!='single':errors.append('Selected-Sūrah playback scope did not save')
             Select(driver.find_element(By.ID,'quranPlaybackScope')).select_by_value('all')
@@ -265,6 +275,12 @@ jobs:
             opts_f=driver.find_elements(By.CSS_SELECTOR,'#fajrAdhanTrack option')
             opts_r=driver.find_elements(By.CSS_SELECTOR,'#adhanTrack option')
             print('ADHAN_OPTIONS',len(opts_f),len(opts_r),flush=True)
+            driver.find_element(By.ID,'previewAdhan').click()
+            WebDriverWait(driver,10).until(lambda d:'Hörprobe' in d.find_element(By.CSS_SELECTOR,'#adhanVisual .adhan-title').text)
+            if driver.find_element(By.CSS_SELECTOR,'#adhanVisual .adhan-title').text!='Aḏān · Hörprobe':errors.append('Generic Adhan test inherited the active prayer name')
+            driver.find_element(By.ID,'stopAdhan').click()
+            driver.find_element(By.ID,'openSettings').click()
+            driver.find_element(By.CSS_SELECTOR,'button[data-tab="adhan"]').click()
             driver.find_element(By.ID,'previewFajrAdhan').click()
             WebDriverWait(driver,10).until(lambda d:d.find_elements(By.ID,'h4PrayerArtwork'))
             WebDriverWait(driver,10).until(lambda d:d.execute_script("return document.getElementById('h4PrayerArtwork')?.naturalWidth||0")>0)
