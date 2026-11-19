@@ -1794,3 +1794,44 @@
   #app[data-home-palette] .daily-area .audio-area {border-left:0!important;border-top:1px solid var(--fine)!important;}
   #app[data-home-palette] .reader-arabic {border-right:0!important;border-bottom:1px solid var(--fine)!important;}
 }
+
+/* V7 contrast pass — preserve photo detail while keeping every reading line distinct. */
+#app[data-home-palette="light"] {--home-muted:#4b463d;--muted:#4b463d;}
+#app[data-home-palette="soft"] {--home-muted:#514446;--muted:#514446;}
+#app[data-home-palette="eisgold"] {--home-muted:#304655;--muted:#304655;}
+#app[data-home-palette="salbei"] {--home-muted:#3e4d43;--muted:#3e4d43;}
+#app[data-home-palette] .hero-verse,
+#app[data-home-palette] .daily-title,
+#app[data-home-palette] .daily-de,
+#app[data-home-palette] .source,
+#app[data-home-palette] .next-name,
+#app[data-home-palette] .main-time,
+#app[data-home-palette] .counter,
+#app[data-home-palette] .prayer-cell .pname,
+#app[data-home-palette] .prayer-cell .ptime,
+#app[data-home-palette] .audio-title,
+#app[data-home-palette] .audio-sub,
+#app[data-home-palette] .header-meta span,
+#app[data-home-palette] .header-meta strong,
+#app[data-home-palette] .brand-title,
+#app[data-home-palette] .site-name {text-shadow:0 1px 2px rgba(0,0,0,.32)!important;}
+#app[data-home-palette] .quran-reader-footer {
+  background:linear-gradient(90deg,rgba(var(--home-wash),.22),rgba(var(--home-wash),.12),transparent)!important;
+  border-top:1px solid var(--fine)!important;
+}
+#app[data-home-palette] .reader-step,
+#app[data-home-palette] .reader-home {
+  color:var(--home-ink)!important;border:1px solid var(--fine)!important;
+  background:transparent!important;box-shadow:none!important;
+}
+#app[data-home-palette] .reader-play {color:#fff!important;background:var(--gold)!important;border:1px solid var(--fine)!important;}
+#app[data-home-palette] .calendar-view .home-view-panel {background:rgba(var(--home-wash),.18)!important;}
+#app[data-home-palette] .calendar-view .home-view-intro {font-size:clamp(15px,1.1vw,18px);line-height:1.55;}
+#app[data-home-palette] .festival-list article {padding-block:clamp(12px,1.6vh,18px)!important;}
+#app[data-home-palette] .festival-list article strong {font-size:clamp(17px,1.25vw,22px);line-height:1.4;}
+#app[data-home-palette] .festival-list article span {font-size:clamp(14px,1vw,17px);line-height:1.5;color:var(--home-muted)!important;}
+#app[data-home-palette] .calendar-view .home-view-head,
+#app[data-home-palette] .calendar-view .home-view-intro,
+#app[data-home-palette] .calendar-view .home-view-foot,
+#app[data-home-palette] .festival-list article strong,
+#app[data-home-palette] .festival-list article span {text-shadow:0 1px 2px rgba(0,0,0,.28)!important;}
