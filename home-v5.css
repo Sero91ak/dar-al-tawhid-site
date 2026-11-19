@@ -872,7 +872,7 @@
   overflow-x:hidden;
   overflow-y:auto;
   overscroll-behavior:contain;
-  grid-template-rows:auto minmax(230px,1fr) auto minmax(96px,auto) auto!important;
+  grid-template-rows:auto minmax(230px,1fr) auto minmax(126px,auto) auto!important;
   align-content:stretch;
 }
 #app .screen[hidden],
@@ -1062,7 +1062,7 @@
   #app .hero {grid-template-columns:minmax(0,1fr) minmax(240px,.9fr)}
 }
 @media(max-width:640px) {
-  #app .screen {grid-template-rows:auto auto auto minmax(96px,auto) auto!important;}
+  #app .screen {grid-template-rows:auto auto auto minmax(126px,auto) auto!important;}
   #app header {gap:6px}
   #app .header-meta {grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px}
   #app .header-meta .local-clock {align-items:flex-start}
