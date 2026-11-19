@@ -61,6 +61,7 @@ var id=String(url.searchParams.get("id")||"").trim();
 var code=api.lang(url.searchParams.get("lang")||((function(){try{return w.localStorage.getItem("darAdultPreferredLocaleV1")}catch(_){return"de"}})()));
 var lab=api.labels[code],RTL=code==="ar"||code==="ckb";
 d.documentElement.lang=code;d.documentElement.dir=RTL?"rtl":"ltr";
+ d.title="DĀR AL TAWḤĪD · "+lab.brand;
 function elem(tag,cl,text){var x=d.createElement(tag);if(cl)x.className=cl;if(text!=null)x.textContent=text;return x}
 function clear(){q.replaceChildren()}
 function message(msg){clear();q.append(elem("p","fw-message",msg))}
