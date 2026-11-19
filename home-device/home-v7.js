@@ -3,9 +3,9 @@
  const $=id=>document.getElementById(id);
  const panel=$('quranReaderPanel');
  if(!panel)return;
+ const initialPrefs=()=>{try{return JSON.parse(localStorage.getItem('dar-home-cinematic-v2')||'{}')}catch{return {}}};
  const savedPrefs=initialPrefs();const transliterationControl=$('readerShowTransliteration');if(transliterationControl)transliterationControl.checked=savedPrefs.readerTransliteration!=='hide';
  const api=()=>window.darQuranReaderAPI;
- const initialPrefs=()=>{try{return JSON.parse(localStorage.getItem('dar-home-cinematic-v2')||'{}')}catch{return {}}};
  const cache=new Map();
  let requestKey='';
  function fillOptions(){
