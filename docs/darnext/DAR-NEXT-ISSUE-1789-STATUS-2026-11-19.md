@@ -34,7 +34,7 @@ Existing simulator result bundles show:
 
 ## DARNext branch provenance audit (2026-11-19)
 
-The local development mirror has remote refs for several DARNext branches but is itself on unborn branch `codex/darnext-scroll-jank-20261117`: `git status` reports no commits and the app/project files as untracked. The mirror is about 7.4 GiB across 5,503 files. Its Git object store has several shallow remote refs, but there is no local commit identifying the untracked source tree.
+The local development mirror has remote refs for several DARNext branches but is itself on unborn branch `codex/darnext-scroll-jank-20261117`: `git status` reports no commits and the app/project files as untracked. The mirror is about 7.4 GiB across 5,503 files. Its Git object store has several shallow remote refs, but there is no local commit identifying the untracked source tree. `git reflog --all` has no entry for the unborn scroll-jank branch. The available reflogs record only the Oct branch fetches and the later #1812/#1813 review worktrees; none links this untracked tree to a source commit.
 
 Current relevant remote tips inspected:
 - `codex/darnext-native-masterauftrag-20261024`: `4acec871f16d69e14a9ce51e154db7f8bde29d75`, 2026-10-25.
