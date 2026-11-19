@@ -1349,3 +1349,13 @@
 #app[data-wallpaper-active="true"] .edge,
 #app[data-wallpaper-active="true"] .corner { z-index:3!important; }
 #app[data-wallpaper-active="true"] .screen { z-index:4; }
+
+/* The legacy ivory root veil fully covered photographic wallpapers. */
+#app[data-home-theme="light"]::before {
+  display:none!important;
+  background:transparent!important;
+}
+#app[data-home-theme="light"] #homeWallpaper {
+  opacity:1!important;
+  filter:none!important;
+}
