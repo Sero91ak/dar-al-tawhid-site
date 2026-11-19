@@ -19,7 +19,7 @@
     bs:["⌂ Početna","Učenje"],fr:["⌂ Accueil","Apprentissage"],
     es:["⌂ Inicio","Aprendizaje"]
   };
-  var locale=String(document.documentElement.lang||"de").trim().toLowerCase().replace(/_/g,"-");
+  var locale=String(document.documentElement?.lang||"de").trim().toLowerCase().replace(/_/g,"-");
   if(locale==="kr")locale="ku";
   if(locale==="ku-sorani")locale="ckb";
   if(!lessonNav[locale])locale=locale.split("-")[0];
