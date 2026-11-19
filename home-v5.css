@@ -394,3 +394,21 @@
 #app .h3-icon-action { display:inline-flex;align-items:center;justify-content:center;gap:9px; }
 #app .h3-action-icon { width:clamp(26px,2.3vw,34px);height:clamp(26px,2.3vw,34px);object-fit:contain;flex:none; }
 #app .h3-action-icon.h3-compact { width:26px;height:26px; }
+
+/* Use the existing DĀR 3D icon set as section markers without replacing live text. */
+#app .times-band,#app .daily-story,#app .audio-area { position:relative; }
+#app .h3-section-emblem {
+  position:absolute;
+  top:clamp(4px,.7vh,10px);
+  right:clamp(4px,.7vw,10px);
+  width:clamp(28px,2.7vw,40px);
+  height:clamp(28px,2.7vw,40px);
+  object-fit:contain;
+  opacity:.94;
+  pointer-events:none;
+  z-index:2;
+}
+#app .settings-tabs .settings-icons { width:30px;height:30px;object-fit:contain;vertical-align:middle;margin-right:9px; }
+#app .motion-setting input { min-width:24px;min-height:24px; }
+#app #locationStatus { min-height:44px;display:flex;align-items:center;line-height:1.4; }
+#app .wallpaper-option img { aspect-ratio:16/9;object-fit:cover; }
