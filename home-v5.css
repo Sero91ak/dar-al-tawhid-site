@@ -770,7 +770,7 @@
 
 /* 2026-11-19 HOME refinement: clear navigation, readable verse and Quran reader */
 #app header{display:grid;grid-template-rows:auto auto auto auto;gap:clamp(7px,1vh,12px)}
-#app .home-nav{display:flex;justify-content:center;align-items:center;gap:clamp(12px,2vw,30px);min-height:40px;padding:0 12px}
+#app .home-nav{position:relative;z-index:40;display:flex;justify-content:center;align-items:center;gap:clamp(12px,2vw,30px);min-height:40px;padding:0 12px}
 #app .home-nav button{display:flex;align-items:center;gap:9px;padding:7px 17px;border:1px solid rgba(216,189,130,.3);border-radius:999px;background:rgba(5,27,29,.5);color:var(--cream);font:600 clamp(12px,1vw,16px) var(--ui)}
 #app .home-nav button img{width:28px;height:28px;object-fit:contain}
 #app .home-nav button:focus-visible,#app .home-nav button:hover{background:rgba(216,189,130,.15);border-color:var(--gold)}
