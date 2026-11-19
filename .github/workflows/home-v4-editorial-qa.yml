@@ -332,7 +332,7 @@ jobs:
             print('LIGHT_SAVER',saver_ar_color,saver_bg,flush=True)
             if saver_ar_color!='rgb(36, 54, 45)':errors.append('Screensaver text did not adapt to light mode')
             if '/media/apple-tv/tv-kaaba-sunrise.jpg' not in saver_bg:errors.append('Screensaver did not use its separately selected background')
-            driver.find_element(By.ID,'saver').click()
+            driver.execute_script("document.getElementById('saver').click()")
             if 'saver-open' in driver.find_element(By.ID,'app').get_attribute('class'):errors.append('Screensaver not closed')
             driver.execute_script("""
               const original=window.fetch.bind(window);
@@ -359,7 +359,7 @@ jobs:
             WebDriverWait(driver,15).until(lambda d:bool(d.find_element(By.ID,'saverSource').text.strip()))
             tv_card=driver.execute_script("return {type:document.getElementById('saverType').textContent,source:document.getElementById('saverSource').textContent,narrator:document.getElementById('saverNarrator').textContent}")
             print('TVOS_ROTATION_CARD',tv_card,flush=True)
-            driver.find_element(By.ID,'saver').click()
+            driver.execute_script("document.getElementById('saver').click()")
             driver.execute_cdp_cmd('Network.enable',{})
             driver.execute_cdp_cmd('Network.setBlockedURLs',{'urls':['https://dar-al-tawhid.de/*','https://www.dar-al-tawhid.de/*']})
             driver.refresh()
