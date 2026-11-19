@@ -1,0 +1,57 @@
+
+/* DĀR AL TAWḤĪD · ʿUmrah premium extension · isolated to /umrah/ */
+:root { --dar-upgrade-gold:#b89a64; }
+.dar-map-controls {display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin:10px 0 12px;padding:11px 0;border-block:1px solid var(--line)}
+.dar-map-controls label,.dar-journal-tools label {display:flex;flex:1 1 150px;min-width:0;flex-direction:column;gap:5px;font-weight:700;color:var(--sub);font-size:12px;letter-spacing:.01em}
+.dar-map-controls select,.dar-journal-tools select,.dar-journal-tools input {width:100%;min-height:44px;border:1px solid var(--line);border-radius:11px;background:var(--panel);color:var(--text);font:600 14px/1.3 system-ui,-apple-system,sans-serif;padding:9px 11px}
+.dar-map-controls select:focus-visible,.dar-journal-tools select:focus-visible,.dar-journal-tools input:focus-visible {outline:2px solid var(--gold);outline-offset:2px}
+.dar-map-message {font-size:12px;line-height:1.6;color:var(--sub);margin:6px 0}
+.dar-map-action {display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:11px 16px;border-radius:12px;background:var(--sage);color:#fff!important;font-weight:750;text-decoration:none;border:1px solid var(--gold-strong);margin:10px 0}
+.dar-place-label {display:block;color:var(--gold-strong);font-size:12px;font-weight:800;margin-top:6px}
+.dar-journal-tools {display:flex;gap:10px;flex-wrap:wrap;align-items:end;margin:12px 0;border-block:1px solid var(--line);padding:12px 0}
+.dar-journal-tools label {flex:1 1 190px}
+#page-journal .day-toolbar {position:relative}
+#page-journal #day-note {width:100%;min-height:175px;font-size:15px;line-height:1.65;resize:vertical;overflow-wrap:anywhere}
+#page-journal .photo-gallery {min-width:0;align-content:start}
+#page-journal .photo-card {min-width:0}
+#page-journal .photo-card img {max-width:100%;object-fit:cover}
+#page-journal .photo-card textarea {min-height:84px;max-width:100%;font-size:14px;line-height:1.5}
+.dar-dropzone {outline:2px dashed var(--gold-strong)!important;outline-offset:-8px}
+#page-journal .upload-action {min-height:50px}
+.dar-local-only {color:var(--sub);font-size:12px;margin:8px 0 0;line-height:1.6}
+#page-abschluss .report-preview-cover {background:linear-gradient(151deg,#0b251e 0%,#234a3c 75%,#4d5945 100%);border:1px solid var(--gold-strong)}
+#page-abschluss .report-preview-cover span {letter-spacing:.16em}
+#page-abschluss .report-preview-cover h2 {text-wrap:balance;text-shadow:0 1px 14px rgba(0,0,0,.2)}
+@media(min-width:820px) and (max-width:1190px) {
+ #page-journal .journal-layout {grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:18px}
+ #page-journal .journal-input {min-width:0}
+}
+@media(max-width:800px){
+ .dar-map-controls {gap:8px}
+ .dar-map-controls label{flex-basis:135px}
+ .dar-journal-tools label {flex-basis:calc(50% - 6px)}
+ #page-journal .journal-layout {grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:470px){
+ .dar-journal-tools label {flex-basis:100%}
+ .dar-map-controls label {flex-basis:100%}
+ #page-journal .day-toolbar {flex-wrap:nowrap}
+ #page-journal #day-note {font-size:16px}
+}
+@media(prefers-reduced-motion:no-preference){
+ .page.active>.page-head {animation:dar-umrah-appear .35s ease-out both}
+ #page-orte .place-row,.photo-card {transition:transform .18s ease,box-shadow .18s ease}
+ #page-orte .place-row:active,.photo-card:active {transform:scale(.99)}
+}
+@keyframes dar-umrah-appear {from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:none}}
+@media print {
+ @page {size:A4;margin:14mm}
+ #print-root .pr-photo-page {page-break-before:always;break-before:page;page-break-after:always;break-after:page;min-height:240mm}
+ #print-root .pr-photo-page h2{margin:0 0 7mm}
+ #print-root .pr-photo-spread {display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:6mm;align-items:start}
+ #print-root .pr-photo-spread .pr-photo {width:100%!important;max-width:100%!important;margin:0!important;break-inside:avoid;page-break-inside:avoid;display:block!important}
+ #print-root .pr-photo-spread .pr-photo img {display:block;width:100%!important;max-width:100%!important;height:145mm!important;max-height:145mm!important;object-fit:contain!important;background:#f8f7f2;border:1px solid #d7cfba}
+ #print-root .pr-photo-spread .pr-photo figcaption{font-size:9pt;overflow-wrap:anywhere;text-align:left}
+ #print-root .pr-note {orphans:3;widows:3}
+ #print-root .pr-cover {page-break-after:always;break-after:page}
+}
