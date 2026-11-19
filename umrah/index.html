@@ -1305,6 +1305,10 @@ document.getElementById('resetDataBtn').addEventListener('click', resetAll);
 
 attachFormListeners();
 initUI();
+// Standalone website offline mode: only registered under /umrah/ on HTTPS.
+if('serviceWorker' in navigator && location.protocol === 'https:') {
+ navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(()=>{});
+}
 syncConnectivity();
 </script>
 </body>
