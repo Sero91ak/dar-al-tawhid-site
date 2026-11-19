@@ -176,8 +176,8 @@
  const dataObserver=new MutationObserver(()=>{if(picker&&!picker.hidden)renderSurahPicker(search?.value||'')});if(nativeSelect)dataObserver.observe(nativeSelect,{childList:true});
  nativeSelect?.addEventListener('change',()=>{if(picker&&!picker.hidden)renderSurahPicker(search?.value||'')});
  function renderHijriDate(){const targets=[$('hijriHeader'),$('calendarPanelHijri')].filter(Boolean);let value='Hiǧrī-Datum nicht verfügbar';try{value=new Intl.DateTimeFormat('de-DE-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric',timeZone:'Europe/Berlin'}).format(new Date())}catch{try{value=new Intl.DateTimeFormat('de-DE-u-ca-islamic',{day:'numeric',month:'long',year:'numeric',timeZone:'Europe/Berlin'}).format(new Date())}catch{}}targets.forEach(el=>el.textContent=value)}
- function openLocalView(id){const view=$(id);if(!view)return;document.querySelectorAll('.home-view').forEach(x=>x.hidden=true);view.hidden=false;view.querySelector('[data-close-home-view]')?.focus();if(id==='quranReaderPanel')document.dispatchEvent(new Event('dar:quran-reader-open'))}
- function closeLocalViews(){document.querySelectorAll('.home-view').forEach(x=>x.hidden=true)}
+ function openLocalView(id){const view=$(id),screen=$('mainScreen');if(!view||!screen)return;document.querySelectorAll('.home-view').forEach(x=>{x.hidden=true});view.hidden=false;screen.hidden=true;document.body.classList.add('home-view-open');view.querySelector('[data-close-home-view]')?.focus();if(id==='quranReaderPanel')document.dispatchEvent(new Event('dar:quran-reader-open'))}
+ function closeLocalViews(){document.querySelectorAll('.home-view').forEach(x=>{x.hidden=true});const screen=$('mainScreen');if(screen)screen.hidden=false;document.body.classList.remove('home-view-open')}
  function bindQuranReader(){
   const panel=$('quranReaderPanel'),surahSelect=$('readerSurah'),reciterSelect=$('readerReciter'),api=()=>window.darQuranReaderAPI;
   if(!panel||!surahSelect||!api())return;
