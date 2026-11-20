@@ -54,13 +54,13 @@ final class DashboardAssistantModel {
         errorMessage = nil
         isLoading = true
         defer { isLoading = false }
+        messages.append(AssistantMessage(isUser: true, text: query, sources: []))
 
         do {
             let documents = try await repository.search(query: query)
             let sources = documents.prefix(5).map {
                 AssistantSourceReference(id: $0.id, title: $0.title, kind: $0.kind, sourceID: $0.sourceID)
             }
-            messages.append(AssistantMessage(isUser: true, text: query, sources: []))
             let answer = try await transport.answer(prompt: query, sources: sources)
             messages.append(AssistantMessage(isUser: false, text: answer, sources: sources))
         } catch {
@@ -151,6 +151,9 @@ struct DashboardAssistantView: View {
                     scrollToLatest(using: proxy)
                 }
                 .onChange(of: model.isLoading) { _, _ in
+                    scrollToLatest(using: proxy)
+                }
+                .onChange(of: model.errorMessage) { _, _ in
                     scrollToLatest(using: proxy)
                 }
             }
