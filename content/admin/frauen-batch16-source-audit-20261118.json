@@ -5,7 +5,7 @@
   "branchOnly": true,
   "scope": "Source page identity and core episode comparison, not comprehensive isnad/translation certification",
   "verificationMethod": "Opened and read individual Sunnah.com record pages (Arabic/English where available); canonical URL variants used for occasional inaccessible book/chapter paths. Recorded key reported event against editorial overview, without modifying the original links.",
-  "status": "primary-reference-presence-reviewed; scholarly approval pending",
+  "status": "partial-original-arabic-spotchecks-5-of-16; scholarly-approval-pending",
   "publicationAuthorization": false,
   "externalTranslationCertification": false,
   "sources": [
@@ -18,10 +18,20 @@
       "topicCheck": "sea-voyage-prediction-and-death-after-disembarking",
       "sourceLocated": true,
       "directPageStatus": "hadith-page-opens-and-topic-matches",
-      "arabicExcerptReview": "requires-final-verbatim-proofread",
+      "arabicExcerptReview": "primary-arabic-excerpt-matched-web-text",
       "germanParaphraseReview": "core-episode-matched-not-verbatim-certified",
       "independentScholarlySignoff": false,
-      "needsAttention": []
+      "needsAttention": [],
+      "primaryArabicSpotcheck": {
+        "performed": "2026-11-20",
+        "sourceUrl": "https://sunnah.com/bukhari:2788",
+        "verbatimExcerpt": "أَنْتِ مِنَ الأَوَّلِينَ",
+        "reference": "Sahih al-Bukhari 2788–2789",
+        "reviewMethod": "Direct visual read of source's Arabic report; short excerpt compared against women's draft, not a certified full-hadith or isnad audit",
+        "verbatimExcerptCompared": true,
+        "independentHumanScholarReview": false,
+        "translationPeerReview": false
+      }
     },
     {
       "id": "sahabiyyat-umm-hani-schutz-20261106",
@@ -32,10 +42,20 @@
       "topicCheck": "protection-confirmed-at-conquest-of-makkah",
       "sourceLocated": true,
       "directPageStatus": "hadith-page-opens-and-topic-matches",
-      "arabicExcerptReview": "requires-final-verbatim-proofread",
+      "arabicExcerptReview": "primary-arabic-excerpt-matched-web-text",
       "germanParaphraseReview": "core-episode-matched-not-verbatim-certified",
       "independentScholarlySignoff": false,
-      "needsAttention": []
+      "needsAttention": [],
+      "primaryArabicSpotcheck": {
+        "performed": "2026-11-20",
+        "sourceUrl": "https://sunnah.com/bukhari:357",
+        "verbatimExcerpt": "قَدْ أَجَرْنَا مَنْ أَجَرْتِ يَا أُمَّ هَانِئٍ",
+        "reference": "Sahih al-Bukhari 357",
+        "reviewMethod": "Direct visual read of source's Arabic report; short excerpt compared against women's draft, not a certified full-hadith or isnad audit",
+        "verbatimExcerptCompared": true,
+        "independentHumanScholarReview": false,
+        "translationPeerReview": false
+      }
     },
     {
       "id": "sahabiyyat-fatimah-geheimnis-20261106",
@@ -46,10 +66,20 @@
       "topicCheck": "two-private-messages-distinct-versions",
       "sourceLocated": true,
       "directPageStatus": "hadith-page-opens-and-topic-matches",
-      "arabicExcerptReview": "requires-final-verbatim-proofread",
+      "arabicExcerptReview": "primary-arabic-excerpt-matched-web-text",
       "germanParaphraseReview": "core-episode-matched-not-verbatim-certified",
       "independentScholarlySignoff": false,
-      "needsAttention": []
+      "needsAttention": [],
+      "primaryArabicSpotcheck": {
+        "performed": "2026-11-20",
+        "sourceUrl": "https://sunnah.com/bukhari:3623",
+        "verbatimExcerpt": "ثُمَّ أَسَرَّ إِلَيْهَا حَدِيثًا، فَبَكَتْ",
+        "reference": "Sahih al-Bukhari 3623–3624",
+        "reviewMethod": "Direct visual read of source's Arabic report; short excerpt compared against women's draft, not a certified full-hadith or isnad audit",
+        "verbatimExcerptCompared": true,
+        "independentHumanScholarReview": false,
+        "translationPeerReview": false
+      }
     },
     {
       "id": "sahabiyyat-umm-qays-saeugling-20261106",
@@ -60,10 +90,20 @@
       "topicCheck": "sprinkling-water-on-infant-urine",
       "sourceLocated": true,
       "directPageStatus": "hadith-page-opens-and-topic-matches",
-      "arabicExcerptReview": "requires-final-verbatim-proofread",
+      "arabicExcerptReview": "primary-arabic-excerpt-matched-web-text",
       "germanParaphraseReview": "core-episode-matched-not-verbatim-certified",
       "independentScholarlySignoff": false,
-      "needsAttention": []
+      "needsAttention": [],
+      "primaryArabicSpotcheck": {
+        "performed": "2026-11-20",
+        "sourceUrl": "https://sunnah.com/bukhari:223",
+        "verbatimExcerpt": "فَدَعَا بِمَاءٍ فَنَضَحَهُ وَلَمْ يَغْسِلْهُ",
+        "reference": "Sahih al-Bukhari 223",
+        "reviewMethod": "Direct visual read of source's Arabic report; short excerpt compared against women's draft, not a certified full-hadith or isnad audit",
+        "verbatimExcerptCompared": true,
+        "independentHumanScholarReview": false,
+        "translationPeerReview": false
+      }
     },
     {
       "id": "sahabiyyat-umm-sulaym-duft-20261106",
@@ -74,11 +114,21 @@
       "topicCheck": "prophet-perspiration-in-perfume",
       "sourceLocated": true,
       "directPageStatus": "hadith-page-opens-and-topic-matches",
-      "arabicExcerptReview": "requires-final-verbatim-proofread",
+      "arabicExcerptReview": "primary-arabic-excerpt-matched-web-text",
       "germanParaphraseReview": "core-episode-matched-not-verbatim-certified",
       "independentScholarlySignoff": false,
       "needsAttention": [],
-      "referencePrecision": "Exact canonical edition identifier muslim:2331a matches primary URL, editorial sourceId, original excerpt and locale manifest; this is a reference correction, not scholarly approval."
+      "referencePrecision": "Exact canonical edition identifier muslim:2331a matches primary URL, editorial sourceId, original excerpt and locale manifest; this is a reference correction, not scholarly approval.",
+      "primaryArabicSpotcheck": {
+        "performed": "2026-11-20",
+        "sourceUrl": "https://sunnah.com/muslim:2331a",
+        "verbatimExcerpt": "هَذَا عَرَقُكَ نَجْعَلُهُ فِي طِيبِنَا",
+        "reference": "Sahih Muslim 2331a",
+        "reviewMethod": "Direct visual read of source's Arabic report; short excerpt compared against women's draft, not a certified full-hadith or isnad audit",
+        "verbatimExcerptCompared": true,
+        "independentHumanScholarReview": false,
+        "translationPeerReview": false
+      }
     },
     {
       "id": "sahabiyyat-barirah-entscheidung-20261106",
@@ -241,5 +291,14 @@
     "Verify primary reference suffix for Muslim 2331a with canonical ID without accidental duplication",
     "Physical/real-browser interaction and production release evidence",
     "Existing push-lock/targeting approvals"
-  ]
+  ],
+  "partialProgress": {
+    "spotchecked": 5,
+    "total": 16,
+    "outstanding": 11,
+    "kind": "Arabic excerpt and immediate source context only",
+    "sourceEntriesApprovedForRelease": 0,
+    "translationLanguagesHumanCertified": 0,
+    "readyForProduction": false
+  }
 }
