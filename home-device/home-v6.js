@@ -151,18 +151,19 @@
   const token=++renderToken,s=rotationState?.current;if((!s&&!cardOverride)||!library)return;
   const card=cardOverride||library.byId.get(s.id);if(!card)return;
   $('saverAr').style.display=card.module==='quranTad'?'block':'none';$('saverAr').textContent='';
-  $('saverStatement')?.replaceChildren();$('saverNarrator')?.replaceChildren();say($('saverSource'),'');
+  $('saverStatement')?.replaceChildren();$('saverNarrator')?.replaceChildren();say($('saverSource'),'');say($('saverDe'),'');
   if(card.module==='quranTad'){
    say($('saverType'),'Qurʾān · Tadabbur');
    const verseNode=$('saverDe');say(verseNode,'Lade Qurʾān-Text und deutsche Übersetzung …');
-   const statement=document.createElement('p');statement.className='saver-tadabbur-text';statement.textContent=card.tad.text;$('saverStatement')?.append(statement);
    const meta=document.createElement('span');meta.textContent=[card.tad.narrator,card.tad.generation].filter(Boolean).join(' · ');$('saverNarrator')?.append(meta);
+   const statement=document.createElement('p');statement.className='saver-tadabbur-text';statement.textContent=card.tad.text;$('saverStatement')?.append(statement);
    say($('saverSource'),[card.tad.reference,card.tad.source,card.tad.grading].filter(Boolean).join(' · '));
    try{const v=await getQuranVerse(card.tad.reference);if(token!==renderToken)return;say($('saverAr'),v.ar);say(verseNode,v.de)}catch{if(token!==renderToken)return;say(verseNode,'Qurʾān-Vers '+card.tad.reference+' · Übersetzung wird bei Verbindung nachgeladen')}
   }else{
    const r=card.record;say($('saverType'),card.module==='athar'?'Āṯār · Überlieferung':'Ḥadīṯ · Überlieferung');$('saverAr').style.display='none';
+   const line=[r.narratorLine,r.speakerLabel].filter(Boolean).join(' ');
+   if(line){const n=document.createElement('p');n.className='saver-narrator-line';n.textContent=line;$('saverNarrator')?.append(n)}
    say($('saverDe'),MARKDOWN(r.textMarkdown));
-   const line=[r.narratorLine,r.speakerLabel].filter(Boolean).join(' ');if(line){const n=document.createElement('p');n.className='saver-narrator-line';n.textContent=line;$('saverNarrator')?.append(n)}
    say($('saverSource'),[r.source,r.grade].filter(Boolean).join(' · '));
    if(r.sharhStatus==='verified'&&r.sharhText&&rotation.display.sharhMode==='compact'){const p=document.createElement('p');p.className='saver-sharh';p.textContent=MARKDOWN(r.sharhText);$('saverStatement')?.append(p)}
   }
