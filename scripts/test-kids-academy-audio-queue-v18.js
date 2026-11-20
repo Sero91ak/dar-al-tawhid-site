@@ -21,16 +21,21 @@ assert.equal(v28Academy.phrases.length+v29Academy.phrases.length,327,
 
 assert.ok(r.uniquePhrases>=600);
 assert.equal(Object.values(r.totals).reduce((a,b)=>a+b,0),r.uniquePhrases);
-assert.equal(r.totals.approved,0,"Old Flash clip is NOT an approved V4 story voice");
+assert.equal(r.totals.approved,58,"All 58 source-exact real Ṣidq owner-V4 media assets must be hash-verified and recognized by the Academy audit");
 // Four historical binary originals remain archived, but the short Salam no longer matches
 // any eligible full-Salam production text. Therefore only three may count as staged.
 const originalPilot=JSON.parse(require("node:fs").readFileSync(require("node:path").join(__dirname,"../kids/data/academy-audio-staging-v9.json"),"utf8"));
 assert.equal(Object.keys(originalPilot.entries).length,4,"Preserve all four paid original pilot assets");
-assert.ok(r.totals.stagedAwaitingReview>=3,"Only the three non-Salam original pilot segments remain eligible for staging");
+assert.equal(r.totals.stagedAwaitingReview,0,"The three prior valid pilots must now be counted among the 58 imported and approved originals, not as awaiting approval");
 const planV19=JSON.parse(require("node:fs").readFileSync("kids/data/academy-full-salam-voice-plan-v19.json","utf8"));
 assert.ok(planV19.phrases.some(x=>x.text==="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh."&&x.reviewStatus==="not-generated"&&!x.url),"The complete greeting must be a separate ungenerated V19 candidate");
 assert.ok(!Object.keys(originalPilot.entries).includes("As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh."),"Never relabel abbreviated original audio as full Salam");
 assert.ok(r.rows.every(x=>x.contexts.length>0&&["approved","stagedAwaitingReview","needsRecording"].includes(x.state)));
+for(const text of ["As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.","Liebe Schwester.","Lieber Bruder."]){
+ const row=r.rows.find(x=>x.text===text);assert.equal(row?.state,"approved","Complete greeting and both personal addresses must be original V4 audio");
+}
+assert.equal(r.rows.filter(x=>x.text.startsWith("As-salāmu ʿalaykum, ")).length,0,"Obsolete short greetings must never be treated as a source-exact recording");
+assert.ok(r.totals.needsRecording>0,"Remaining 65 topics are not yet falsely recorded");
 assert.equal(validV4({voiceId:"different",url:"/fake",voiceProfileId:"serhat-owner-voice-2026",modelId:"eleven_v4",
  voiceSettingsProfile:"kids_story",sourceVoice:"authorized-owner-voice",sourceSpeaker:"Serhat Abu Malik",
  sameAsApprovedKidsStoryProfile:true}),false);
@@ -121,5 +126,10 @@ assert.equal(academyAll.newTtsCreditsCharged,0);
 // recognition. Keep Scribe evidence distinct from human acoustic approval.
 require("node:child_process").execFileSync("python3",[
   "kids/tools/test-academy-sidq-fusha-scribe-audit-v1.py"
+],{cwd:require("node:path").resolve(__dirname,".."),stdio:"inherit"});
+// Independently verify all imported MP3->M4A bytes by SHA-256 before
+// allowing a public deploy; do not require workflow security overrides.
+require("node:child_process").execFileSync("node",[
+ "kids/tools/verify-academy-audio-manifest-hashes-v1.cjs"
 ],{cwd:require("node:path").resolve(__dirname,".."),stdio:"inherit"});
 console.log("ACADEMY VOICE V18 PASS: exact Serhat-only matching, three valid staged clips and one quarantined old greeting, zero synthetic fallback, no credits.");
