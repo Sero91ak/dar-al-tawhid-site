@@ -1,0 +1,2419 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 70;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4B1D98A7B2956EB57A2F881F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF36AA79FBCAA59C69E104B1 /* Foundation.framework */; };
+		7C7DB90E0D3684FF42A4604C /* DATPremiumWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65AF7F4372D7A3D15C13483 /* DATPremiumWidgets.swift */; };
+		87F741D135541984FA8D8479 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6CC0960A3BD47673C6F0B4D /* Assets.xcassets */; };
+		932D66F98CFD8551336E1C25 /* DATPremiumWidgetsExtension.appex in Embed Premium Widgets */ = {isa = PBXBuildFile; fileRef = 0811D69A1ABB849654DF69CD /* DATPremiumWidgetsExtension.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A10000000000000000000001 /* DarAlTawhidApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000011 /* DarAlTawhidApp.swift */; };
+		A10000000000000000000002 /* WebAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000012 /* WebAppView.swift */; };
+		A10000000000000000000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000013 /* Assets.xcassets */; };
+		A10000000000000000000004 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A10000000000000000000014 /* WebKit.framework */; };
+		A10000000000000000000005 /* DarAppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000016 /* DarAppRouter.swift */; };
+		A10000000000000000000006 /* DarDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000011 /* DarDeepLink.swift */; };
+		A10000000000000000000007 /* DarWidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000012 /* DarWidgetSnapshot.swift */; };
+		A10000000000000000000008 /* DarWidgetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000013 /* DarWidgetStore.swift */; };
+		A10000000000000000000009 /* DarPrayerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000014 /* DarPrayerEngine.swift */; };
+		A1000000000000000000000A /* DarDailyContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000015 /* DarDailyContent.swift */; };
+		A1000000000000000000000C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000000000000000000014 /* WidgetKit.framework */; };
+		A1000000000000000000000E /* DarWidgetRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000017 /* DarWidgetRemote.swift */; };
+		A1000000000000000000000F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000019 /* PrivacyInfo.xcprivacy */; };
+		A40000000000000000000001 /* DarPushNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40000000000000000000011 /* DarPushNotifications.swift */; };
+		A60000000000000000000001 /* DarPrayerLive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60000000000000000000011 /* DarPrayerLive.swift */; };
+		A60000000000000000000004 /* ActivityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60000000000000000000013 /* ActivityKit.framework */; };
+		A70000000000000000000001 /* DarHaptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70000000000000000000011 /* DarHaptics.swift */; };
+		A70000000000000000000002 /* DarAppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70000000000000000000012 /* DarAppIntents.swift */; };
+		A70000000000000000000005 /* DarAppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70000000000000000000014 /* DarAppShortcuts.swift */; };
+		A90000000000000000000001 /* DarAppIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90000000000000000000011 /* DarAppIcons.swift */; };
+		A91000000000000000000001 /* DarAppShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91000000000000000000011 /* DarAppShell.swift */; };
+		A91100000000000000000001 /* DarInAppOpenGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91100000000000000000011 /* DarInAppOpenGuard.swift */; };
+		B50000000000000000000001 /* DarPrayerPushCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50000000000000000000002 /* DarPrayerPushCopy.swift */; };
+		C90000000000000000000001 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90000000000000000000011 /* NotificationService.swift */; };
+		C90000000000000000000002 /* OneSignalExtension.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000005 /* OneSignalExtension.xcframework */; };
+		C90000000000000000000004 /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C90000000000000000000010 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CF2817903083FFB400454145 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000000000000000000014 /* WidgetKit.framework */; };
+		CF2817913083FFB400454145 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000000000000000000015 /* SwiftUI.framework */; };
+		CF28179C3083FFB500454145 /* DATPrayerLiveActivityExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CF28178F3083FFB300454145 /* DATPrayerLiveActivityExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CF5CFE463089E4F10013C426 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CF5CFE443089E4F10013C426 /* InfoPlist.xcstrings */; };
+		CF5CFE473089E4F10013C426 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CF5CFE453089E4F10013C426 /* Localizable.xcstrings */; };
+		CF5CFE4A3089E4F10013C426 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CF5CFE483089E4F10013C426 /* InfoPlist.xcstrings */; };
+		CF5CFE4B3089E4F10013C426 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CF5CFE493089E4F10013C426 /* Localizable.xcstrings */; };
+		CF5CFE593089E4F10013C426 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CF5CFE583089E4F10013C426 /* InfoPlist.xcstrings */; };
+		CF5CFE5F308A05870013C426 /* DarLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5CFE5E308A05870013C426 /* DarLanguage.swift */; };
+		CF79AADC3086B0C6008C8051 /* DarPermissionOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF79AADB3086B0C6008C8051 /* DarPermissionOnboardingView.swift */; };
+		CF8DBA96307170E900A53AFF /* DarCarPlayAudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8DBA95307170E900A53AFF /* DarCarPlayAudioService.swift */; };
+		CF8DBA98307170F600A53AFF /* DarCarPlaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8DBA97307170F600A53AFF /* DarCarPlaySceneDelegate.swift */; };
+		CFA162A8305844C600E70795 /* DarAlTawhidWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CFA1629E305844C500E70795 /* DarAlTawhidWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CFA162B23058464B00E70795 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000000000000000000014 /* WidgetKit.framework */; };
+		CFA162B33058464B00E70795 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000000000000000000015 /* SwiftUI.framework */; };
+		CFA162C23058464C00E70795 /* DarAlTawhidWatchWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CFA162B13058464B00E70795 /* DarAlTawhidWatchWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CFC6A38E308111A3008C313D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC6A38D308111A3008C313D /* File.swift */; };
+		CFD58C0E3085F5F3002BE8B2 /* StandByRoyalDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD58C0D3085F5F3002BE8B2 /* StandByRoyalDashboardView.swift */; };
+		CFD58C103085F60D002BE8B2 /* StandByRoyalSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD58C0F3085F60D002BE8B2 /* StandByRoyalSettingsView.swift */; };
+		CFECE9A1305DC9BB008EFB06 /* DarWidgetLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFECE9A0305DC9BB008EFB06 /* DarWidgetLocationService.swift */; };
+		CFFD3AE3306545DE005EB105 /* DATWidgetTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD3AE2306545DE005EB105 /* DATWidgetTheme.swift */; };
+		CFFD3AE7306545DE005EB105 /* DATWidgetMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD3AE5306545DE005EB105 /* DATWidgetMetrics.swift */; };
+		CFFD3AEA306545DE005EB105 /* DATWidgetTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD3AE8306545DE005EB105 /* DATWidgetTypography.swift */; };
+		CFFD3AEE306545F3005EB105 /* DarPrayerTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD3AED306545F3005EB105 /* DarPrayerTimeline.swift */; };
+		CFFD3AF63065465A005EB105 /* DATWidgetSnapshotModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD3AF43065465A005EB105 /* DATWidgetSnapshotModels.swift */; };
+		CFFD3AF83065477F005EB105 /* DATWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD3AF73065477F005EB105 /* DATWeatherService.swift */; };
+		CFFD3AFB306547A3005EB105 /* DATWatchConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD3AF9306547A3005EB105 /* DATWatchConnectivity.swift */; };
+		CFFD3B0330654B93005EB105 /* DATWeatherAttributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD3B0230654B93005EB105 /* DATWeatherAttributionView.swift */; };
+		CFFD3B0530654BB2005EB105 /* DATWeatherAttributionNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD3B0430654BB2005EB105 /* DATWeatherAttributionNotification.swift */; };
+		CFFD3B0730654C0C005EB105 /* DATWeatherAttributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD3B0630654C0C005EB105 /* DATWeatherAttributionView.swift */; };
+		ICN20100000000000000000002 /* AppIconTypeCreme@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20100000000000000000001 /* AppIconTypeCreme@2x.png */; };
+		ICN20200000000000000000002 /* AppIconTypeCreme@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20200000000000000000001 /* AppIconTypeCreme@3x.png */; };
+		ICN20300000000000000000002 /* AppIconTypeCreme@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20300000000000000000001 /* AppIconTypeCreme@2x~ipad.png */; };
+		ICN20400000000000000000002 /* AppIconTypeCreme-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20400000000000000000001 /* AppIconTypeCreme-83.5@2x~ipad.png */; };
+		ICN20500000000000000000002 /* AppIconTypeSchwarzAr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20500000000000000000001 /* AppIconTypeSchwarzAr@2x.png */; };
+		ICN20600000000000000000002 /* AppIconTypeSchwarzAr@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20600000000000000000001 /* AppIconTypeSchwarzAr@3x.png */; };
+		ICN20700000000000000000002 /* AppIconTypeSchwarzAr@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20700000000000000000001 /* AppIconTypeSchwarzAr@2x~ipad.png */; };
+		ICN20800000000000000000002 /* AppIconTypeSchwarzAr-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20800000000000000000001 /* AppIconTypeSchwarzAr-83.5@2x~ipad.png */; };
+		ICN20900000000000000000002 /* AppIconTypeSchwarz@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN20900000000000000000001 /* AppIconTypeSchwarz@2x.png */; };
+		ICN21000000000000000000002 /* AppIconTypeSchwarz@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21000000000000000000001 /* AppIconTypeSchwarz@3x.png */; };
+		ICN21100000000000000000002 /* AppIconTypeSchwarz@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21100000000000000000001 /* AppIconTypeSchwarz@2x~ipad.png */; };
+		ICN21200000000000000000002 /* AppIconTypeSchwarz-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21200000000000000000001 /* AppIconTypeSchwarz-83.5@2x~ipad.png */; };
+		ICN21300000000000000000002 /* AppIconTypeNavyAr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21300000000000000000001 /* AppIconTypeNavyAr@2x.png */; };
+		ICN21400000000000000000002 /* AppIconTypeNavyAr@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21400000000000000000001 /* AppIconTypeNavyAr@3x.png */; };
+		ICN21500000000000000000002 /* AppIconTypeNavyAr@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21500000000000000000001 /* AppIconTypeNavyAr@2x~ipad.png */; };
+		ICN21600000000000000000002 /* AppIconTypeNavyAr-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21600000000000000000001 /* AppIconTypeNavyAr-83.5@2x~ipad.png */; };
+		ICN21700000000000000000002 /* AppIconTypeNavy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21700000000000000000001 /* AppIconTypeNavy@2x.png */; };
+		ICN21800000000000000000002 /* AppIconTypeNavy@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21800000000000000000001 /* AppIconTypeNavy@3x.png */; };
+		ICN21900000000000000000002 /* AppIconTypeNavy@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN21900000000000000000001 /* AppIconTypeNavy@2x~ipad.png */; };
+		ICN22000000000000000000002 /* AppIconTypeNavy-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22000000000000000000001 /* AppIconTypeNavy-83.5@2x~ipad.png */; };
+		ICN22100000000000000000002 /* AppIconTypeBordeauxAr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22100000000000000000001 /* AppIconTypeBordeauxAr@2x.png */; };
+		ICN22200000000000000000002 /* AppIconTypeBordeauxAr@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22200000000000000000001 /* AppIconTypeBordeauxAr@3x.png */; };
+		ICN22300000000000000000002 /* AppIconTypeBordeauxAr@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22300000000000000000001 /* AppIconTypeBordeauxAr@2x~ipad.png */; };
+		ICN22400000000000000000002 /* AppIconTypeBordeauxAr-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22400000000000000000001 /* AppIconTypeBordeauxAr-83.5@2x~ipad.png */; };
+		ICN22500000000000000000002 /* AppIconTypeBordeaux@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22500000000000000000001 /* AppIconTypeBordeaux@2x.png */; };
+		ICN22600000000000000000002 /* AppIconTypeBordeaux@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22600000000000000000001 /* AppIconTypeBordeaux@3x.png */; };
+		ICN22700000000000000000002 /* AppIconTypeBordeaux@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22700000000000000000001 /* AppIconTypeBordeaux@2x~ipad.png */; };
+		ICN22800000000000000000002 /* AppIconTypeBordeaux-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22800000000000000000001 /* AppIconTypeBordeaux-83.5@2x~ipad.png */; };
+		ICN22900000000000000000002 /* AppIconTypeGruenAr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN22900000000000000000001 /* AppIconTypeGruenAr@2x.png */; };
+		ICN23000000000000000000002 /* AppIconTypeGruenAr@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23000000000000000000001 /* AppIconTypeGruenAr@3x.png */; };
+		ICN23100000000000000000002 /* AppIconTypeGruenAr@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23100000000000000000001 /* AppIconTypeGruenAr@2x~ipad.png */; };
+		ICN23200000000000000000002 /* AppIconTypeGruenAr-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23200000000000000000001 /* AppIconTypeGruenAr-83.5@2x~ipad.png */; };
+		ICN23300000000000000000002 /* AppIconTypeGruen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23300000000000000000001 /* AppIconTypeGruen@2x.png */; };
+		ICN23400000000000000000002 /* AppIconTypeGruen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23400000000000000000001 /* AppIconTypeGruen@3x.png */; };
+		ICN23500000000000000000002 /* AppIconTypeGruen@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23500000000000000000001 /* AppIconTypeGruen@2x~ipad.png */; };
+		ICN23600000000000000000002 /* AppIconTypeGruen-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23600000000000000000001 /* AppIconTypeGruen-83.5@2x~ipad.png */; };
+		ICN23700000000000000000002 /* AppIconTypeSchwarzAr2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23700000000000000000001 /* AppIconTypeSchwarzAr2@2x.png */; };
+		ICN23800000000000000000002 /* AppIconTypeSchwarzAr2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23800000000000000000001 /* AppIconTypeSchwarzAr2@3x.png */; };
+		ICN23900000000000000000002 /* AppIconTypeSchwarzAr2@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN23900000000000000000001 /* AppIconTypeSchwarzAr2@2x~ipad.png */; };
+		ICN24000000000000000000002 /* AppIconTypeSchwarzAr2-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN24000000000000000000001 /* AppIconTypeSchwarzAr2-83.5@2x~ipad.png */; };
+		ICN30100000000000000000002 /* AppIconEmblemNachtblau@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30100000000000000000001 /* AppIconEmblemNachtblau@2x.png */; };
+		ICN30200000000000000000002 /* AppIconEmblemNachtblau@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30200000000000000000001 /* AppIconEmblemNachtblau@3x.png */; };
+		ICN30300000000000000000002 /* AppIconEmblemNachtblau@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30300000000000000000001 /* AppIconEmblemNachtblau@2x~ipad.png */; };
+		ICN30400000000000000000002 /* AppIconEmblemNachtblau-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30400000000000000000001 /* AppIconEmblemNachtblau-83.5@2x~ipad.png */; };
+		ICN30500000000000000000002 /* AppIconEmblemSchwarzgold@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30500000000000000000001 /* AppIconEmblemSchwarzgold@2x.png */; };
+		ICN30600000000000000000002 /* AppIconEmblemSchwarzgold@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30600000000000000000001 /* AppIconEmblemSchwarzgold@3x.png */; };
+		ICN30700000000000000000002 /* AppIconEmblemSchwarzgold@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30700000000000000000001 /* AppIconEmblemSchwarzgold@2x~ipad.png */; };
+		ICN30800000000000000000002 /* AppIconEmblemSchwarzgold-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30800000000000000000001 /* AppIconEmblemSchwarzgold-83.5@2x~ipad.png */; };
+		ICN30900000000000000000002 /* AppIconEmblemCremePetrol@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN30900000000000000000001 /* AppIconEmblemCremePetrol@2x.png */; };
+		ICN31000000000000000000002 /* AppIconEmblemCremePetrol@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN31000000000000000000001 /* AppIconEmblemCremePetrol@3x.png */; };
+		ICN31100000000000000000002 /* AppIconEmblemCremePetrol@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN31100000000000000000001 /* AppIconEmblemCremePetrol@2x~ipad.png */; };
+		ICN31200000000000000000002 /* AppIconEmblemCremePetrol-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ICN31200000000000000000001 /* AppIconEmblemCremePetrol-83.5@2x~ipad.png */; };
+		OSB000000000000000000001 /* OneSignalFramework.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000001 /* OneSignalFramework.xcframework */; };
+		OSB000000000000000000002 /* OneSignalUser.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000002 /* OneSignalUser.xcframework */; };
+		OSB000000000000000000003 /* OneSignalNotifications.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000003 /* OneSignalNotifications.xcframework */; };
+		OSB000000000000000000004 /* OneSignalLiveActivities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000004 /* OneSignalLiveActivities.xcframework */; };
+		OSB000000000000000000005 /* OneSignalExtension.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000005 /* OneSignalExtension.xcframework */; };
+		OSB000000000000000000006 /* OneSignalOutcomes.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000006 /* OneSignalOutcomes.xcframework */; };
+		OSB000000000000000000007 /* OneSignalOSCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000007 /* OneSignalOSCore.xcframework */; };
+		OSB000000000000000000008 /* OneSignalCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000008 /* OneSignalCore.xcframework */; };
+		OSE000000000000000000001 /* OneSignalFramework.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000001 /* OneSignalFramework.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		OSE000000000000000000002 /* OneSignalUser.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000002 /* OneSignalUser.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		OSE000000000000000000003 /* OneSignalNotifications.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000003 /* OneSignalNotifications.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		OSE000000000000000000004 /* OneSignalLiveActivities.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000004 /* OneSignalLiveActivities.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		OSE000000000000000000005 /* OneSignalExtension.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000005 /* OneSignalExtension.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		OSE000000000000000000006 /* OneSignalOutcomes.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000006 /* OneSignalOutcomes.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		OSE000000000000000000007 /* OneSignalOSCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000007 /* OneSignalOSCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		OSE000000000000000000008 /* OneSignalCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = OSF000000000000000000008 /* OneSignalCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		39930415CC9E1950BA3CCE30 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10000000000000000000070 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0579DA03A2078CF1BA021B2D;
+			remoteInfo = DATPremiumWidgetsExtension;
+		};
+		C90000000000000000000072 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10000000000000000000070 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C90000000000000000000040;
+			remoteInfo = OneSignalNotificationServiceExtension;
+		};
+		CF28179A3083FFB500454145 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10000000000000000000070 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CF28178E3083FFB300454145;
+			remoteInfo = DATPrayerLiveActivityExtension;
+		};
+		CF5C001A308B5AC70013C426 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10000000000000000000070 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CF5C000A308B5AC60013C426;
+			remoteInfo = DARNext;
+		};
+		CF5C0024308B5AC70013C426 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10000000000000000000070 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CF5C000A308B5AC60013C426;
+			remoteInfo = DARNext;
+		};
+		CFA162A6305844C600E70795 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10000000000000000000070 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFA1629D305844C500E70795;
+			remoteInfo = "DarAlTawhidWatch Watch App";
+		};
+		CFA162C03058464C00E70795 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10000000000000000000070 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFA162B03058464B00E70795;
+			remoteInfo = DarAlTawhidWatchWidgetsExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		074E162543C5CE63D9B51A07 /* Embed Premium Widgets */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				932D66F98CFD8551336E1C25 /* DATPremiumWidgetsExtension.appex in Embed Premium Widgets */,
+			);
+			name = "Embed Premium Widgets";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A20000000000000000000073 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CF28179C3083FFB500454145 /* DATPrayerLiveActivityExtension.appex in Embed Foundation Extensions */,
+				C90000000000000000000004 /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFA162A9305844C600E70795 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				CFA162A8305844C600E70795 /* DarAlTawhidWatch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFA162C73058464C00E70795 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CFA162C23058464C00E70795 /* DarAlTawhidWatchWidgetsExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OSE000000000000000000070 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				OSE000000000000000000001 /* OneSignalFramework.xcframework in Embed Frameworks */,
+				OSE000000000000000000002 /* OneSignalUser.xcframework in Embed Frameworks */,
+				OSE000000000000000000003 /* OneSignalNotifications.xcframework in Embed Frameworks */,
+				OSE000000000000000000004 /* OneSignalLiveActivities.xcframework in Embed Frameworks */,
+				OSE000000000000000000005 /* OneSignalExtension.xcframework in Embed Frameworks */,
+				OSE000000000000000000006 /* OneSignalOutcomes.xcframework in Embed Frameworks */,
+				OSE000000000000000000007 /* OneSignalOSCore.xcframework in Embed Frameworks */,
+				OSE000000000000000000008 /* OneSignalCore.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0811D69A1ABB849654DF69CD /* DATPremiumWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DATPremiumWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B140070EA4D63AB70103C57 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A10000000000000000000010 /* DarAlTawhid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarAlTawhid.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10000000000000000000011 /* DarAlTawhidApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAlTawhidApp.swift; sourceTree = "<group>"; };
+		A10000000000000000000012 /* WebAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAppView.swift; sourceTree = "<group>"; };
+		A10000000000000000000013 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A10000000000000000000014 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		A10000000000000000000015 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A10000000000000000000016 /* DarAppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAppRouter.swift; sourceTree = "<group>"; };
+		A10000000000000000000017 /* DarAlTawhid.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DarAlTawhid.entitlements; sourceTree = "<group>"; };
+		A10000000000000000000019 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		A20000000000000000000014 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		A20000000000000000000015 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		A30000000000000000000011 /* DarDeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarDeepLink.swift; sourceTree = "<group>"; };
+		A30000000000000000000012 /* DarWidgetSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetSnapshot.swift; sourceTree = "<group>"; };
+		A30000000000000000000013 /* DarWidgetStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetStore.swift; sourceTree = "<group>"; };
+		A30000000000000000000014 /* DarPrayerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarPrayerEngine.swift; sourceTree = "<group>"; };
+		A30000000000000000000015 /* DarDailyContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarDailyContent.swift; sourceTree = "<group>"; };
+		A30000000000000000000017 /* DarWidgetRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetRemote.swift; sourceTree = "<group>"; };
+		A40000000000000000000011 /* DarPushNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarPushNotifications.swift; sourceTree = "<group>"; };
+		A60000000000000000000011 /* DarPrayerLive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarPrayerLive.swift; sourceTree = "<group>"; };
+		A60000000000000000000013 /* ActivityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActivityKit.framework; path = System/Library/Frameworks/ActivityKit.framework; sourceTree = SDKROOT; };
+		A6CC0960A3BD47673C6F0B4D /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A70000000000000000000011 /* DarHaptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarHaptics.swift; sourceTree = "<group>"; };
+		A70000000000000000000012 /* DarAppIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAppIntents.swift; sourceTree = "<group>"; };
+		A70000000000000000000014 /* DarAppShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAppShortcuts.swift; sourceTree = "<group>"; };
+		A90000000000000000000011 /* DarAppIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAppIcons.swift; sourceTree = "<group>"; };
+		A91000000000000000000011 /* DarAppShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAppShell.swift; sourceTree = "<group>"; };
+		A91100000000000000000011 /* DarInAppOpenGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarInAppOpenGuard.swift; sourceTree = "<group>"; };
+		B50000000000000000000002 /* DarPrayerPushCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarPrayerPushCopy.swift; sourceTree = "<group>"; };
+		C90000000000000000000010 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C90000000000000000000011 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		C90000000000000000000012 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C90000000000000000000013 /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
+		CF28178F3083FFB300454145 /* DATPrayerLiveActivityExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DATPrayerLiveActivityExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF4C7762306DA58700025265 /* DarAlTawhidTVMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarAlTawhidTVMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF5C000B308B5AC60013C426 /* DARNext.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DARNext.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF5C0019308B5AC70013C426 /* DARNextTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DARNextTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF5C0023308B5AC70013C426 /* DARNextUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DARNextUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF5CFE443089E4F10013C426 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		CF5CFE453089E4F10013C426 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		CF5CFE483089E4F10013C426 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		CF5CFE493089E4F10013C426 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		CF5CFE583089E4F10013C426 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		CF5CFE5E308A05870013C426 /* DarLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarLanguage.swift; sourceTree = "<group>"; };
+		CF79AADB3086B0C6008C8051 /* DarPermissionOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarPermissionOnboardingView.swift; sourceTree = "<group>"; };
+		CF8DBA95307170E900A53AFF /* DarCarPlayAudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarCarPlayAudioService.swift; sourceTree = "<group>"; };
+		CF8DBA97307170F600A53AFF /* DarCarPlaySceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarCarPlaySceneDelegate.swift; sourceTree = "<group>"; };
+		CFA1629E305844C500E70795 /* DarAlTawhidWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DarAlTawhidWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFA162B13058464B00E70795 /* DarAlTawhidWatchWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DarAlTawhidWatchWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFA163B6305A0CE500E70795 /* DarAlTawhidTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarAlTawhidTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFC6A38D308111A3008C313D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		CFD58C0D3085F5F3002BE8B2 /* StandByRoyalDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandByRoyalDashboardView.swift; sourceTree = "<group>"; };
+		CFD58C0F3085F60D002BE8B2 /* StandByRoyalSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandByRoyalSettingsView.swift; sourceTree = "<group>"; };
+		CFECE9A0305DC9BB008EFB06 /* DarWidgetLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetLocationService.swift; sourceTree = "<group>"; };
+		CFFD3AE2306545DE005EB105 /* DATWidgetTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DATWidgetTheme.swift; sourceTree = "<group>"; };
+		CFFD3AE5306545DE005EB105 /* DATWidgetMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DATWidgetMetrics.swift; sourceTree = "<group>"; };
+		CFFD3AE8306545DE005EB105 /* DATWidgetTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DATWidgetTypography.swift; sourceTree = "<group>"; };
+		CFFD3AED306545F3005EB105 /* DarPrayerTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarPrayerTimeline.swift; sourceTree = "<group>"; };
+		CFFD3AF43065465A005EB105 /* DATWidgetSnapshotModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DATWidgetSnapshotModels.swift; sourceTree = "<group>"; };
+		CFFD3AF73065477F005EB105 /* DATWeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DATWeatherService.swift; sourceTree = "<group>"; };
+		CFFD3AF9306547A3005EB105 /* DATWatchConnectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DATWatchConnectivity.swift; sourceTree = "<group>"; };
+		CFFD3B0230654B93005EB105 /* DATWeatherAttributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DATWeatherAttributionView.swift; sourceTree = "<group>"; };
+		CFFD3B0430654BB2005EB105 /* DATWeatherAttributionNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DATWeatherAttributionNotification.swift; sourceTree = "<group>"; };
+		CFFD3B0630654C0C005EB105 /* DATWeatherAttributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DATWeatherAttributionView.swift; sourceTree = "<group>"; };
+		D65AF7F4372D7A3D15C13483 /* DATPremiumWidgets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DATPremiumWidgets.swift; sourceTree = "<group>"; };
+		FB1EA71060174F801A4A8FD9 /* DATPremiumWidgets.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = DATPremiumWidgets.entitlements; sourceTree = "<group>"; };
+		FF36AA79FBCAA59C69E104B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		ICN20100000000000000000001 /* AppIconTypeCreme@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeCreme@2x.png"; sourceTree = "<group>"; };
+		ICN20200000000000000000001 /* AppIconTypeCreme@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeCreme@3x.png"; sourceTree = "<group>"; };
+		ICN20300000000000000000001 /* AppIconTypeCreme@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeCreme@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN20400000000000000000001 /* AppIconTypeCreme-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeCreme-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN20500000000000000000001 /* AppIconTypeSchwarzAr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr@2x.png"; sourceTree = "<group>"; };
+		ICN20600000000000000000001 /* AppIconTypeSchwarzAr@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr@3x.png"; sourceTree = "<group>"; };
+		ICN20700000000000000000001 /* AppIconTypeSchwarzAr@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN20800000000000000000001 /* AppIconTypeSchwarzAr-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN20900000000000000000001 /* AppIconTypeSchwarz@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarz@2x.png"; sourceTree = "<group>"; };
+		ICN21000000000000000000001 /* AppIconTypeSchwarz@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarz@3x.png"; sourceTree = "<group>"; };
+		ICN21100000000000000000001 /* AppIconTypeSchwarz@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarz@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN21200000000000000000001 /* AppIconTypeSchwarz-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarz-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN21300000000000000000001 /* AppIconTypeNavyAr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeNavyAr@2x.png"; sourceTree = "<group>"; };
+		ICN21400000000000000000001 /* AppIconTypeNavyAr@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeNavyAr@3x.png"; sourceTree = "<group>"; };
+		ICN21500000000000000000001 /* AppIconTypeNavyAr@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeNavyAr@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN21600000000000000000001 /* AppIconTypeNavyAr-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeNavyAr-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN21700000000000000000001 /* AppIconTypeNavy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeNavy@2x.png"; sourceTree = "<group>"; };
+		ICN21800000000000000000001 /* AppIconTypeNavy@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeNavy@3x.png"; sourceTree = "<group>"; };
+		ICN21900000000000000000001 /* AppIconTypeNavy@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeNavy@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN22000000000000000000001 /* AppIconTypeNavy-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeNavy-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN22100000000000000000001 /* AppIconTypeBordeauxAr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeBordeauxAr@2x.png"; sourceTree = "<group>"; };
+		ICN22200000000000000000001 /* AppIconTypeBordeauxAr@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeBordeauxAr@3x.png"; sourceTree = "<group>"; };
+		ICN22300000000000000000001 /* AppIconTypeBordeauxAr@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeBordeauxAr@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN22400000000000000000001 /* AppIconTypeBordeauxAr-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeBordeauxAr-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN22500000000000000000001 /* AppIconTypeBordeaux@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeBordeaux@2x.png"; sourceTree = "<group>"; };
+		ICN22600000000000000000001 /* AppIconTypeBordeaux@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeBordeaux@3x.png"; sourceTree = "<group>"; };
+		ICN22700000000000000000001 /* AppIconTypeBordeaux@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeBordeaux@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN22800000000000000000001 /* AppIconTypeBordeaux-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeBordeaux-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN22900000000000000000001 /* AppIconTypeGruenAr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeGruenAr@2x.png"; sourceTree = "<group>"; };
+		ICN23000000000000000000001 /* AppIconTypeGruenAr@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeGruenAr@3x.png"; sourceTree = "<group>"; };
+		ICN23100000000000000000001 /* AppIconTypeGruenAr@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeGruenAr@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN23200000000000000000001 /* AppIconTypeGruenAr-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeGruenAr-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN23300000000000000000001 /* AppIconTypeGruen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeGruen@2x.png"; sourceTree = "<group>"; };
+		ICN23400000000000000000001 /* AppIconTypeGruen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeGruen@3x.png"; sourceTree = "<group>"; };
+		ICN23500000000000000000001 /* AppIconTypeGruen@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeGruen@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN23600000000000000000001 /* AppIconTypeGruen-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeGruen-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN23700000000000000000001 /* AppIconTypeSchwarzAr2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr2@2x.png"; sourceTree = "<group>"; };
+		ICN23800000000000000000001 /* AppIconTypeSchwarzAr2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr2@3x.png"; sourceTree = "<group>"; };
+		ICN23900000000000000000001 /* AppIconTypeSchwarzAr2@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr2@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN24000000000000000000001 /* AppIconTypeSchwarzAr2-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconTypeSchwarzAr2-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN30100000000000000000001 /* AppIconEmblemNachtblau@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemNachtblau@2x.png"; sourceTree = "<group>"; };
+		ICN30200000000000000000001 /* AppIconEmblemNachtblau@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemNachtblau@3x.png"; sourceTree = "<group>"; };
+		ICN30300000000000000000001 /* AppIconEmblemNachtblau@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemNachtblau@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN30400000000000000000001 /* AppIconEmblemNachtblau-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemNachtblau-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN30500000000000000000001 /* AppIconEmblemSchwarzgold@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemSchwarzgold@2x.png"; sourceTree = "<group>"; };
+		ICN30600000000000000000001 /* AppIconEmblemSchwarzgold@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemSchwarzgold@3x.png"; sourceTree = "<group>"; };
+		ICN30700000000000000000001 /* AppIconEmblemSchwarzgold@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemSchwarzgold@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN30800000000000000000001 /* AppIconEmblemSchwarzgold-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemSchwarzgold-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN30900000000000000000001 /* AppIconEmblemCremePetrol@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemCremePetrol@2x.png"; sourceTree = "<group>"; };
+		ICN31000000000000000000001 /* AppIconEmblemCremePetrol@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemCremePetrol@3x.png"; sourceTree = "<group>"; };
+		ICN31100000000000000000001 /* AppIconEmblemCremePetrol@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemCremePetrol@2x~ipad.png"; sourceTree = "<group>"; };
+		ICN31200000000000000000001 /* AppIconEmblemCremePetrol-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconEmblemCremePetrol-83.5@2x~ipad.png"; sourceTree = "<group>"; };
+		OSF000000000000000000001 /* OneSignalFramework.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:J3J28YJX9L:OneSignal, Inc."; lastKnownFileType = wrapper.xcframework; name = OneSignalFramework.xcframework; path = Vendor/OneSignal/OneSignalFramework.xcframework; sourceTree = "<group>"; };
+		OSF000000000000000000002 /* OneSignalUser.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:J3J28YJX9L:OneSignal, Inc."; lastKnownFileType = wrapper.xcframework; name = OneSignalUser.xcframework; path = Vendor/OneSignal/OneSignalUser.xcframework; sourceTree = "<group>"; };
+		OSF000000000000000000003 /* OneSignalNotifications.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:J3J28YJX9L:OneSignal, Inc."; lastKnownFileType = wrapper.xcframework; name = OneSignalNotifications.xcframework; path = Vendor/OneSignal/OneSignalNotifications.xcframework; sourceTree = "<group>"; };
+		OSF000000000000000000004 /* OneSignalLiveActivities.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:J3J28YJX9L:OneSignal, Inc."; lastKnownFileType = wrapper.xcframework; name = OneSignalLiveActivities.xcframework; path = Vendor/OneSignal/OneSignalLiveActivities.xcframework; sourceTree = "<group>"; };
+		OSF000000000000000000005 /* OneSignalExtension.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:J3J28YJX9L:OneSignal, Inc."; lastKnownFileType = wrapper.xcframework; name = OneSignalExtension.xcframework; path = Vendor/OneSignal/OneSignalExtension.xcframework; sourceTree = "<group>"; };
+		OSF000000000000000000006 /* OneSignalOutcomes.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:J3J28YJX9L:OneSignal, Inc."; lastKnownFileType = wrapper.xcframework; name = OneSignalOutcomes.xcframework; path = Vendor/OneSignal/OneSignalOutcomes.xcframework; sourceTree = "<group>"; };
+		OSF000000000000000000007 /* OneSignalOSCore.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:J3J28YJX9L:OneSignal, Inc."; lastKnownFileType = wrapper.xcframework; name = OneSignalOSCore.xcframework; path = Vendor/OneSignal/OneSignalOSCore.xcframework; sourceTree = "<group>"; };
+		OSF000000000000000000008 /* OneSignalCore.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:J3J28YJX9L:OneSignal, Inc."; lastKnownFileType = wrapper.xcframework; name = OneSignalCore.xcframework; path = Vendor/OneSignal/OneSignalCore.xcframework; sourceTree = "<group>"; };
+		W1A000000000000000000010 /* DarAlTawhidWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarAlTawhidWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		W1A000000000000000000011 /* DarAlTawhidWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAlTawhidWatchApp.swift; sourceTree = "<group>"; };
+		W1A000000000000000000012 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		W1A000000000000000000013 /* DarAlTawhidWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DarAlTawhidWatch.entitlements; sourceTree = "<group>"; };
+		W1A000000000000000000014 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		W1A000000000000000000015 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		W2A000000000000000000010 /* DarAlTawhidWatchWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DarAlTawhidWatchWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		W2A000000000000000000011 /* DarWatchWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWatchWidgets.swift; sourceTree = "<group>"; };
+		W2A000000000000000000012 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		W2A000000000000000000013 /* WatchWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WatchWidgets.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CF28179F3083FFB500454145 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = CF28178E3083FFB300454145 /* DATPrayerLiveActivityExtension */;
+		};
+		CFA162C33058464C00E70795 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = CFA162B03058464B00E70795 /* DarAlTawhidWatchWidgetsExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		CF2817923083FFB400454145 /* DATPrayerLiveActivity */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (CF28179F3083FFB500454145 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = DATPrayerLiveActivity; sourceTree = "<group>"; };
+		CF4C7763306DA58700025265 /* DarAlTawhidTVMobile */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DarAlTawhidTVMobile; sourceTree = "<group>"; };
+		CF5C000C308B5AC60013C426 /* DARNext */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DARNext; sourceTree = "<group>"; };
+		CF5C001C308B5AC70013C426 /* DARNextTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DARNextTests; sourceTree = "<group>"; };
+		CF5C0026308B5AC70013C426 /* DARNextUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DARNextUITests; sourceTree = "<group>"; };
+		CFA1629F305844C500E70795 /* DarAlTawhidWatch Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "DarAlTawhidWatch Watch App"; sourceTree = "<group>"; };
+		CFA162B43058464B00E70795 /* DarAlTawhidWatchWidgets */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (CFA162C33058464C00E70795 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = DarAlTawhidWatchWidgets; sourceTree = "<group>"; };
+		CFA163B7305A0CE500E70795 /* DarAlTawhidTV */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DarAlTawhidTV; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		86EA632022A2C53D49D6DFB2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B1D98A7B2956EB57A2F881F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10000000000000000000020 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000004 /* WebKit.framework in Frameworks */,
+				A1000000000000000000000C /* WidgetKit.framework in Frameworks */,
+				OSB000000000000000000001 /* OneSignalFramework.xcframework in Frameworks */,
+				OSB000000000000000000002 /* OneSignalUser.xcframework in Frameworks */,
+				OSB000000000000000000003 /* OneSignalNotifications.xcframework in Frameworks */,
+				OSB000000000000000000004 /* OneSignalLiveActivities.xcframework in Frameworks */,
+				OSB000000000000000000005 /* OneSignalExtension.xcframework in Frameworks */,
+				OSB000000000000000000006 /* OneSignalOutcomes.xcframework in Frameworks */,
+				OSB000000000000000000007 /* OneSignalOSCore.xcframework in Frameworks */,
+				OSB000000000000000000008 /* OneSignalCore.xcframework in Frameworks */,
+				A60000000000000000000004 /* ActivityKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C90000000000000000000020 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C90000000000000000000002 /* OneSignalExtension.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF28178C3083FFB300454145 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF2817913083FFB400454145 /* SwiftUI.framework in Frameworks */,
+				CF2817903083FFB400454145 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF4C775F306DA58600025265 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF5C0008308B5AC60013C426 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF5C0016308B5AC70013C426 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF5C0020308B5AC70013C426 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFA1629B305844C500E70795 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFA162AE3058464B00E70795 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFA162B33058464B00E70795 /* SwiftUI.framework in Frameworks */,
+				CFA162B23058464B00E70795 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFA163B3305A0CE500E70795 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		36B38A0C0A0A4858B3A88E19 /* DATPremiumWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				CF5CFE443089E4F10013C426 /* InfoPlist.xcstrings */,
+				CF5CFE453089E4F10013C426 /* Localizable.xcstrings */,
+				D65AF7F4372D7A3D15C13483 /* DATPremiumWidgets.swift */,
+				A6CC0960A3BD47673C6F0B4D /* Assets.xcassets */,
+				8B140070EA4D63AB70103C57 /* Info.plist */,
+				FB1EA71060174F801A4A8FD9 /* DATPremiumWidgets.entitlements */,
+			);
+			path = DATPremiumWidgets;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000030 = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000031 /* DarAlTawhid */,
+				A30000000000000000000030 /* Shared */,
+				C90000000000000000000031 /* OneSignalNotificationServiceExtension */,
+				W1A000000000000000000030 /* Watch */,
+				W2A000000000000000000031 /* WatchWidgets */,
+				CFA1629F305844C500E70795 /* DarAlTawhidWatch Watch App */,
+				CFA162B43058464B00E70795 /* DarAlTawhidWatchWidgets */,
+				CFA163B7305A0CE500E70795 /* DarAlTawhidTV */,
+				CF4C7763306DA58700025265 /* DarAlTawhidTVMobile */,
+				CF2817923083FFB400454145 /* DATPrayerLiveActivity */,
+				CF5C000C308B5AC60013C426 /* DARNext */,
+				CF5C001C308B5AC70013C426 /* DARNextTests */,
+				CF5C0026308B5AC70013C426 /* DARNextUITests */,
+				A10000000000000000000032 /* Frameworks */,
+				CFFD3B0230654B93005EB105 /* DATWeatherAttributionView.swift */,
+				CFFD3B0430654BB2005EB105 /* DATWeatherAttributionNotification.swift */,
+				A10000000000000000000033 /* Products */,
+				36B38A0C0A0A4858B3A88E19 /* DATPremiumWidgets */,
+			);
+			sourceTree = "<group>";
+		};
+		A10000000000000000000031 /* DarAlTawhid */ = {
+			isa = PBXGroup;
+			children = (
+				CF5CFE483089E4F10013C426 /* InfoPlist.xcstrings */,
+				CF5CFE493089E4F10013C426 /* Localizable.xcstrings */,
+				A10000000000000000000011 /* DarAlTawhidApp.swift */,
+				A40000000000000000000011 /* DarPushNotifications.swift */,
+				A70000000000000000000011 /* DarHaptics.swift */,
+				A70000000000000000000014 /* DarAppShortcuts.swift */,
+				A30000000000000000000017 /* DarWidgetRemote.swift */,
+				A90000000000000000000011 /* DarAppIcons.swift */,
+				A70000000000000000000012 /* DarAppIntents.swift */,
+				A91000000000000000000011 /* DarAppShell.swift */,
+				A60000000000000000000011 /* DarPrayerLive.swift */,
+				A91100000000000000000011 /* DarInAppOpenGuard.swift */,
+				A10000000000000000000016 /* DarAppRouter.swift */,
+				A10000000000000000000012 /* WebAppView.swift */,
+				A10000000000000000000013 /* Assets.xcassets */,
+				ICN000000000000000000100 /* AppIcons */,
+				A10000000000000000000019 /* PrivacyInfo.xcprivacy */,
+				A10000000000000000000015 /* Info.plist */,
+				A10000000000000000000017 /* DarAlTawhid.entitlements */,
+				CFECE9A0305DC9BB008EFB06 /* DarWidgetLocationService.swift */,
+				CFFD3AF73065477F005EB105 /* DATWeatherService.swift */,
+				CFFD3B0630654C0C005EB105 /* DATWeatherAttributionView.swift */,
+				CF8DBA95307170E900A53AFF /* DarCarPlayAudioService.swift */,
+				CF8DBA97307170F600A53AFF /* DarCarPlaySceneDelegate.swift */,
+				CFD58C0D3085F5F3002BE8B2 /* StandByRoyalDashboardView.swift */,
+				CFD58C0F3085F60D002BE8B2 /* StandByRoyalSettingsView.swift */,
+				CF79AADB3086B0C6008C8051 /* DarPermissionOnboardingView.swift */,
+				CF5CFE5E308A05870013C426 /* DarLanguage.swift */,
+			);
+			path = DarAlTawhid;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000032 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000014 /* WebKit.framework */,
+				A20000000000000000000014 /* WidgetKit.framework */,
+				A20000000000000000000015 /* SwiftUI.framework */,
+				A60000000000000000000013 /* ActivityKit.framework */,
+				OSF000000000000000000001 /* OneSignalFramework.xcframework */,
+				OSF000000000000000000002 /* OneSignalUser.xcframework */,
+				OSF000000000000000000003 /* OneSignalNotifications.xcframework */,
+				OSF000000000000000000004 /* OneSignalLiveActivities.xcframework */,
+				OSF000000000000000000005 /* OneSignalExtension.xcframework */,
+				OSF000000000000000000006 /* OneSignalOutcomes.xcframework */,
+				OSF000000000000000000007 /* OneSignalOSCore.xcframework */,
+				OSF000000000000000000008 /* OneSignalCore.xcframework */,
+				A46FF2659E751A5D2FEC2F5C /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000033 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000010 /* DarAlTawhid.app */,
+				C90000000000000000000010 /* OneSignalNotificationServiceExtension.appex */,
+				W1A000000000000000000010 /* DarAlTawhidWatch.app */,
+				W2A000000000000000000010 /* DarAlTawhidWatchWidgets.appex */,
+				CFA1629E305844C500E70795 /* DarAlTawhidWatch Watch App.app */,
+				CFA162B13058464B00E70795 /* DarAlTawhidWatchWidgetsExtension.appex */,
+				CFA163B6305A0CE500E70795 /* DarAlTawhidTV.app */,
+				CF4C7762306DA58700025265 /* DarAlTawhidTVMobile.app */,
+				0811D69A1ABB849654DF69CD /* DATPremiumWidgetsExtension.appex */,
+				CF28178F3083FFB300454145 /* DATPrayerLiveActivityExtension.appex */,
+				CF5C000B308B5AC60013C426 /* DARNext.app */,
+				CF5C0019308B5AC70013C426 /* DARNextTests.xctest */,
+				CF5C0023308B5AC70013C426 /* DARNextUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A30000000000000000000030 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				A30000000000000000000011 /* DarDeepLink.swift */,
+				A30000000000000000000012 /* DarWidgetSnapshot.swift */,
+				A30000000000000000000013 /* DarWidgetStore.swift */,
+				A30000000000000000000014 /* DarPrayerEngine.swift */,
+				B50000000000000000000002 /* DarPrayerPushCopy.swift */,
+				A30000000000000000000015 /* DarDailyContent.swift */,
+				CFFD3AE1306545DE005EB105 /* WidgetDesign */,
+				CFFD3AED306545F3005EB105 /* DarPrayerTimeline.swift */,
+				CFFD3AF9306547A3005EB105 /* DATWatchConnectivity.swift */,
+				CFC6A38D308111A3008C313D /* File.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		A46FF2659E751A5D2FEC2F5C /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				FF36AA79FBCAA59C69E104B1 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		C90000000000000000000031 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				CF5CFE583089E4F10013C426 /* InfoPlist.xcstrings */,
+				C90000000000000000000011 /* NotificationService.swift */,
+				C90000000000000000000012 /* Info.plist */,
+				C90000000000000000000013 /* OneSignalNotificationServiceExtension.entitlements */,
+			);
+			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
+		CFFD3AE1306545DE005EB105 /* WidgetDesign */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD3AE2306545DE005EB105 /* DATWidgetTheme.swift */,
+				CFFD3AE5306545DE005EB105 /* DATWidgetMetrics.swift */,
+				CFFD3AE8306545DE005EB105 /* DATWidgetTypography.swift */,
+				CFFD3AF43065465A005EB105 /* DATWidgetSnapshotModels.swift */,
+			);
+			path = WidgetDesign;
+			sourceTree = "<group>";
+		};
+		ICN000000000000000000100 /* AppIcons */ = {
+			isa = PBXGroup;
+			children = (
+				ICN30100000000000000000001 /* AppIconEmblemNachtblau@2x.png */,
+				ICN30200000000000000000001 /* AppIconEmblemNachtblau@3x.png */,
+				ICN30300000000000000000001 /* AppIconEmblemNachtblau@2x~ipad.png */,
+				ICN30400000000000000000001 /* AppIconEmblemNachtblau-83.5@2x~ipad.png */,
+				ICN30500000000000000000001 /* AppIconEmblemSchwarzgold@2x.png */,
+				ICN30600000000000000000001 /* AppIconEmblemSchwarzgold@3x.png */,
+				ICN30700000000000000000001 /* AppIconEmblemSchwarzgold@2x~ipad.png */,
+				ICN30800000000000000000001 /* AppIconEmblemSchwarzgold-83.5@2x~ipad.png */,
+				ICN30900000000000000000001 /* AppIconEmblemCremePetrol@2x.png */,
+				ICN31000000000000000000001 /* AppIconEmblemCremePetrol@3x.png */,
+				ICN31100000000000000000001 /* AppIconEmblemCremePetrol@2x~ipad.png */,
+				ICN31200000000000000000001 /* AppIconEmblemCremePetrol-83.5@2x~ipad.png */,
+				ICN20100000000000000000001 /* AppIconTypeCreme@2x.png */,
+				ICN20200000000000000000001 /* AppIconTypeCreme@3x.png */,
+				ICN20300000000000000000001 /* AppIconTypeCreme@2x~ipad.png */,
+				ICN20400000000000000000001 /* AppIconTypeCreme-83.5@2x~ipad.png */,
+				ICN20500000000000000000001 /* AppIconTypeSchwarzAr@2x.png */,
+				ICN20600000000000000000001 /* AppIconTypeSchwarzAr@3x.png */,
+				ICN20700000000000000000001 /* AppIconTypeSchwarzAr@2x~ipad.png */,
+				ICN20800000000000000000001 /* AppIconTypeSchwarzAr-83.5@2x~ipad.png */,
+				ICN20900000000000000000001 /* AppIconTypeSchwarz@2x.png */,
+				ICN21000000000000000000001 /* AppIconTypeSchwarz@3x.png */,
+				ICN21100000000000000000001 /* AppIconTypeSchwarz@2x~ipad.png */,
+				ICN21200000000000000000001 /* AppIconTypeSchwarz-83.5@2x~ipad.png */,
+				ICN21300000000000000000001 /* AppIconTypeNavyAr@2x.png */,
+				ICN21400000000000000000001 /* AppIconTypeNavyAr@3x.png */,
+				ICN21500000000000000000001 /* AppIconTypeNavyAr@2x~ipad.png */,
+				ICN21600000000000000000001 /* AppIconTypeNavyAr-83.5@2x~ipad.png */,
+				ICN21700000000000000000001 /* AppIconTypeNavy@2x.png */,
+				ICN21800000000000000000001 /* AppIconTypeNavy@3x.png */,
+				ICN21900000000000000000001 /* AppIconTypeNavy@2x~ipad.png */,
+				ICN22000000000000000000001 /* AppIconTypeNavy-83.5@2x~ipad.png */,
+				ICN22100000000000000000001 /* AppIconTypeBordeauxAr@2x.png */,
+				ICN22200000000000000000001 /* AppIconTypeBordeauxAr@3x.png */,
+				ICN22300000000000000000001 /* AppIconTypeBordeauxAr@2x~ipad.png */,
+				ICN22400000000000000000001 /* AppIconTypeBordeauxAr-83.5@2x~ipad.png */,
+				ICN22500000000000000000001 /* AppIconTypeBordeaux@2x.png */,
+				ICN22600000000000000000001 /* AppIconTypeBordeaux@3x.png */,
+				ICN22700000000000000000001 /* AppIconTypeBordeaux@2x~ipad.png */,
+				ICN22800000000000000000001 /* AppIconTypeBordeaux-83.5@2x~ipad.png */,
+				ICN22900000000000000000001 /* AppIconTypeGruenAr@2x.png */,
+				ICN23000000000000000000001 /* AppIconTypeGruenAr@3x.png */,
+				ICN23100000000000000000001 /* AppIconTypeGruenAr@2x~ipad.png */,
+				ICN23200000000000000000001 /* AppIconTypeGruenAr-83.5@2x~ipad.png */,
+				ICN23300000000000000000001 /* AppIconTypeGruen@2x.png */,
+				ICN23400000000000000000001 /* AppIconTypeGruen@3x.png */,
+				ICN23500000000000000000001 /* AppIconTypeGruen@2x~ipad.png */,
+				ICN23600000000000000000001 /* AppIconTypeGruen-83.5@2x~ipad.png */,
+				ICN23700000000000000000001 /* AppIconTypeSchwarzAr2@2x.png */,
+				ICN23800000000000000000001 /* AppIconTypeSchwarzAr2@3x.png */,
+				ICN23900000000000000000001 /* AppIconTypeSchwarzAr2@2x~ipad.png */,
+				ICN24000000000000000000001 /* AppIconTypeSchwarzAr2-83.5@2x~ipad.png */,
+			);
+			path = AppIcons;
+			sourceTree = "<group>";
+		};
+		W1A000000000000000000030 /* Watch */ = {
+			isa = PBXGroup;
+			children = (
+				W1A000000000000000000011 /* DarAlTawhidWatchApp.swift */,
+				W1A000000000000000000014 /* Assets.xcassets */,
+				W1A000000000000000000015 /* PrivacyInfo.xcprivacy */,
+				W1A000000000000000000012 /* Info.plist */,
+				W1A000000000000000000013 /* DarAlTawhidWatch.entitlements */,
+			);
+			path = Watch;
+			sourceTree = "<group>";
+		};
+		W2A000000000000000000031 /* WatchWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				W2A000000000000000000011 /* DarWatchWidgets.swift */,
+				W2A000000000000000000012 /* Info.plist */,
+				W2A000000000000000000013 /* WatchWidgets.entitlements */,
+			);
+			path = WatchWidgets;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0579DA03A2078CF1BA021B2D /* DATPremiumWidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F6A825FF2604A2BA8CFC2493 /* Build configuration list for PBXNativeTarget "DATPremiumWidgetsExtension" */;
+			buildPhases = (
+				7218CEEB387E504EA7DA2804 /* Sources */,
+				86EA632022A2C53D49D6DFB2 /* Frameworks */,
+				83B3BA7C5EC98EB5083417F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DATPremiumWidgetsExtension;
+			productName = DATPremiumWidgetsExtension;
+			productReference = 0811D69A1ABB849654DF69CD /* DATPremiumWidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		A10000000000000000000040 /* DarAlTawhid */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A10000000000000000000080 /* Build configuration list for PBXNativeTarget "DarAlTawhid" */;
+			buildPhases = (
+				A10000000000000000000050 /* Sources */,
+				A10000000000000000000020 /* Frameworks */,
+				A10000000000000000000060 /* Resources */,
+				A20000000000000000000073 /* Embed Foundation Extensions */,
+				OSE000000000000000000070 /* Embed Frameworks */,
+				CFA162A9305844C600E70795 /* Embed Watch Content */,
+				074E162543C5CE63D9B51A07 /* Embed Premium Widgets */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C90000000000000000000071 /* PBXTargetDependency */,
+				CFA162A7305844C600E70795 /* PBXTargetDependency */,
+				EA516E5463487695C4EB92CF /* PBXTargetDependency */,
+				CF28179B3083FFB500454145 /* PBXTargetDependency */,
+			);
+			name = DarAlTawhid;
+			productName = DarAlTawhid;
+			productReference = A10000000000000000000010 /* DarAlTawhid.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C90000000000000000000040 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C90000000000000000000080 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
+			buildPhases = (
+				C90000000000000000000050 /* Sources */,
+				C90000000000000000000020 /* Frameworks */,
+				C90000000000000000000060 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneSignalNotificationServiceExtension;
+			productName = OneSignalNotificationServiceExtension;
+			productReference = C90000000000000000000010 /* OneSignalNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		CF28178E3083FFB300454145 /* DATPrayerLiveActivityExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF2817A03083FFB500454145 /* Build configuration list for PBXNativeTarget "DATPrayerLiveActivityExtension" */;
+			buildPhases = (
+				CF28178B3083FFB300454145 /* Sources */,
+				CF28178C3083FFB300454145 /* Frameworks */,
+				CF28178D3083FFB300454145 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				CF2817923083FFB400454145 /* DATPrayerLiveActivity */,
+			);
+			name = DATPrayerLiveActivityExtension;
+			packageProductDependencies = (
+			);
+			productName = DATPrayerLiveActivityExtension;
+			productReference = CF28178F3083FFB300454145 /* DATPrayerLiveActivityExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		CF4C7761306DA58600025265 /* DarAlTawhidTVMobile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF4C776A306DA58800025265 /* Build configuration list for PBXNativeTarget "DarAlTawhidTVMobile" */;
+			buildPhases = (
+				CF4C775E306DA58600025265 /* Sources */,
+				CF4C775F306DA58600025265 /* Frameworks */,
+				CF4C7760306DA58600025265 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				CF4C7763306DA58700025265 /* DarAlTawhidTVMobile */,
+			);
+			name = DarAlTawhidTVMobile;
+			productName = DarAlTawhidTVMobile;
+			productReference = CF4C7762306DA58700025265 /* DarAlTawhidTVMobile.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CF5C000A308B5AC60013C426 /* DARNext */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF5C0029308B5AC70013C426 /* Build configuration list for PBXNativeTarget "DARNext" */;
+			buildPhases = (
+				CF5C0007308B5AC60013C426 /* Sources */,
+				CF5C0008308B5AC60013C426 /* Frameworks */,
+				CF5C0009308B5AC60013C426 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				CF5C000C308B5AC60013C426 /* DARNext */,
+			);
+			name = DARNext;
+			packageProductDependencies = (
+			);
+			productName = DARNext;
+			productReference = CF5C000B308B5AC60013C426 /* DARNext.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CF5C0018308B5AC70013C426 /* DARNextTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF5C002C308B5AC70013C426 /* Build configuration list for PBXNativeTarget "DARNextTests" */;
+			buildPhases = (
+				CF5C0015308B5AC70013C426 /* Sources */,
+				CF5C0016308B5AC70013C426 /* Frameworks */,
+				CF5C0017308B5AC70013C426 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CF5C001B308B5AC70013C426 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CF5C001C308B5AC70013C426 /* DARNextTests */,
+			);
+			name = DARNextTests;
+			packageProductDependencies = (
+			);
+			productName = DARNextTests;
+			productReference = CF5C0019308B5AC70013C426 /* DARNextTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CF5C0022308B5AC70013C426 /* DARNextUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF5C002F308B5AC70013C426 /* Build configuration list for PBXNativeTarget "DARNextUITests" */;
+			buildPhases = (
+				CF5C001F308B5AC70013C426 /* Sources */,
+				CF5C0020308B5AC70013C426 /* Frameworks */,
+				CF5C0021308B5AC70013C426 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CF5C0025308B5AC70013C426 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CF5C0026308B5AC70013C426 /* DARNextUITests */,
+			);
+			name = DARNextUITests;
+			packageProductDependencies = (
+			);
+			productName = DARNextUITests;
+			productReference = CF5C0023308B5AC70013C426 /* DARNextUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		CFA1629D305844C500E70795 /* DarAlTawhidWatch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFA162AC305844C600E70795 /* Build configuration list for PBXNativeTarget "DarAlTawhidWatch Watch App" */;
+			buildPhases = (
+				CFA1629A305844C500E70795 /* Sources */,
+				CFA1629B305844C500E70795 /* Frameworks */,
+				CFA1629C305844C500E70795 /* Resources */,
+				CFA162C73058464C00E70795 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CFA162C13058464C00E70795 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CFA1629F305844C500E70795 /* DarAlTawhidWatch Watch App */,
+			);
+			name = "DarAlTawhidWatch Watch App";
+			productName = "DarAlTawhidWatch Watch App";
+			productReference = CFA1629E305844C500E70795 /* DarAlTawhidWatch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CFA162B03058464B00E70795 /* DarAlTawhidWatchWidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFA162C43058464C00E70795 /* Build configuration list for PBXNativeTarget "DarAlTawhidWatchWidgetsExtension" */;
+			buildPhases = (
+				CFA162AD3058464B00E70795 /* Sources */,
+				CFA162AE3058464B00E70795 /* Frameworks */,
+				CFA162AF3058464B00E70795 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				CFA162B43058464B00E70795 /* DarAlTawhidWatchWidgets */,
+			);
+			name = DarAlTawhidWatchWidgetsExtension;
+			productName = DarAlTawhidWatchWidgetsExtension;
+			productReference = CFA162B13058464B00E70795 /* DarAlTawhidWatchWidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		CFA163B5305A0CE500E70795 /* DarAlTawhidTV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFA163C0305A0CE600E70795 /* Build configuration list for PBXNativeTarget "DarAlTawhidTV" */;
+			buildPhases = (
+				CFA163B2305A0CE500E70795 /* Sources */,
+				CFA163B3305A0CE500E70795 /* Frameworks */,
+				CFA163B4305A0CE500E70795 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				CFA163B7305A0CE500E70795 /* DarAlTawhidTV */,
+			);
+			name = DarAlTawhidTV;
+			productName = DarAlTawhidTV;
+			productReference = CFA163B6305A0CE500E70795 /* DarAlTawhidTV.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A10000000000000000000070 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2700;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					A10000000000000000000040 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					C90000000000000000000040 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					CF28178E3083FFB300454145 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					CF4C7761306DA58600025265 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					CF5C000A308B5AC60013C426 = {
+						CreatedOnToolsVersion = 27.1;
+					};
+					CF5C0018308B5AC70013C426 = {
+						CreatedOnToolsVersion = 27.1;
+						TestTargetID = CF5C000A308B5AC60013C426;
+					};
+					CF5C0022308B5AC70013C426 = {
+						CreatedOnToolsVersion = 27.1;
+						TestTargetID = CF5C000A308B5AC60013C426;
+					};
+					CFA1629D305844C500E70795 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					CFA162B03058464B00E70795 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					CFA163B5305A0CE500E70795 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+				};
+			};
+			buildConfigurationList = A10000000000000000000090 /* Build configuration list for PBXProject "DarAlTawhid" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = de;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				de,
+				en,
+				Base,
+				ar,
+				tr,
+				ku,
+				ckb,
+				bs,
+				fr,
+				es,
+			);
+			mainGroup = A10000000000000000000030;
+			productRefGroup = A10000000000000000000033 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A10000000000000000000040 /* DarAlTawhid */,
+				C90000000000000000000040 /* OneSignalNotificationServiceExtension */,
+				CFA1629D305844C500E70795 /* DarAlTawhidWatch Watch App */,
+				CFA162B03058464B00E70795 /* DarAlTawhidWatchWidgetsExtension */,
+				CFA163B5305A0CE500E70795 /* DarAlTawhidTV */,
+				CF4C7761306DA58600025265 /* DarAlTawhidTVMobile */,
+				0579DA03A2078CF1BA021B2D /* DATPremiumWidgetsExtension */,
+				CF28178E3083FFB300454145 /* DATPrayerLiveActivityExtension */,
+				CF5C000A308B5AC60013C426 /* DARNext */,
+				CF5C0018308B5AC70013C426 /* DARNextTests */,
+				CF5C0022308B5AC70013C426 /* DARNextUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		83B3BA7C5EC98EB5083417F0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF5CFE463089E4F10013C426 /* InfoPlist.xcstrings in Resources */,
+				CF5CFE473089E4F10013C426 /* Localizable.xcstrings in Resources */,
+				87F741D135541984FA8D8479 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10000000000000000000060 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000003 /* Assets.xcassets in Resources */,
+				ICN30100000000000000000002 /* AppIconEmblemNachtblau@2x.png in Resources */,
+				ICN30200000000000000000002 /* AppIconEmblemNachtblau@3x.png in Resources */,
+				ICN30300000000000000000002 /* AppIconEmblemNachtblau@2x~ipad.png in Resources */,
+				ICN30400000000000000000002 /* AppIconEmblemNachtblau-83.5@2x~ipad.png in Resources */,
+				ICN30500000000000000000002 /* AppIconEmblemSchwarzgold@2x.png in Resources */,
+				ICN30600000000000000000002 /* AppIconEmblemSchwarzgold@3x.png in Resources */,
+				ICN30700000000000000000002 /* AppIconEmblemSchwarzgold@2x~ipad.png in Resources */,
+				ICN30800000000000000000002 /* AppIconEmblemSchwarzgold-83.5@2x~ipad.png in Resources */,
+				ICN30900000000000000000002 /* AppIconEmblemCremePetrol@2x.png in Resources */,
+				ICN31000000000000000000002 /* AppIconEmblemCremePetrol@3x.png in Resources */,
+				ICN31100000000000000000002 /* AppIconEmblemCremePetrol@2x~ipad.png in Resources */,
+				ICN31200000000000000000002 /* AppIconEmblemCremePetrol-83.5@2x~ipad.png in Resources */,
+				ICN20100000000000000000002 /* AppIconTypeCreme@2x.png in Resources */,
+				ICN20200000000000000000002 /* AppIconTypeCreme@3x.png in Resources */,
+				CF5CFE4A3089E4F10013C426 /* InfoPlist.xcstrings in Resources */,
+				CF5CFE4B3089E4F10013C426 /* Localizable.xcstrings in Resources */,
+				ICN20300000000000000000002 /* AppIconTypeCreme@2x~ipad.png in Resources */,
+				ICN20400000000000000000002 /* AppIconTypeCreme-83.5@2x~ipad.png in Resources */,
+				ICN20500000000000000000002 /* AppIconTypeSchwarzAr@2x.png in Resources */,
+				ICN20600000000000000000002 /* AppIconTypeSchwarzAr@3x.png in Resources */,
+				ICN20700000000000000000002 /* AppIconTypeSchwarzAr@2x~ipad.png in Resources */,
+				ICN20800000000000000000002 /* AppIconTypeSchwarzAr-83.5@2x~ipad.png in Resources */,
+				ICN20900000000000000000002 /* AppIconTypeSchwarz@2x.png in Resources */,
+				ICN21000000000000000000002 /* AppIconTypeSchwarz@3x.png in Resources */,
+				ICN21100000000000000000002 /* AppIconTypeSchwarz@2x~ipad.png in Resources */,
+				ICN21200000000000000000002 /* AppIconTypeSchwarz-83.5@2x~ipad.png in Resources */,
+				ICN21300000000000000000002 /* AppIconTypeNavyAr@2x.png in Resources */,
+				ICN21400000000000000000002 /* AppIconTypeNavyAr@3x.png in Resources */,
+				ICN21500000000000000000002 /* AppIconTypeNavyAr@2x~ipad.png in Resources */,
+				ICN21600000000000000000002 /* AppIconTypeNavyAr-83.5@2x~ipad.png in Resources */,
+				ICN21700000000000000000002 /* AppIconTypeNavy@2x.png in Resources */,
+				ICN21800000000000000000002 /* AppIconTypeNavy@3x.png in Resources */,
+				ICN21900000000000000000002 /* AppIconTypeNavy@2x~ipad.png in Resources */,
+				ICN22000000000000000000002 /* AppIconTypeNavy-83.5@2x~ipad.png in Resources */,
+				ICN22100000000000000000002 /* AppIconTypeBordeauxAr@2x.png in Resources */,
+				ICN22200000000000000000002 /* AppIconTypeBordeauxAr@3x.png in Resources */,
+				ICN22300000000000000000002 /* AppIconTypeBordeauxAr@2x~ipad.png in Resources */,
+				ICN22400000000000000000002 /* AppIconTypeBordeauxAr-83.5@2x~ipad.png in Resources */,
+				ICN22500000000000000000002 /* AppIconTypeBordeaux@2x.png in Resources */,
+				ICN22600000000000000000002 /* AppIconTypeBordeaux@3x.png in Resources */,
+				ICN22700000000000000000002 /* AppIconTypeBordeaux@2x~ipad.png in Resources */,
+				ICN22800000000000000000002 /* AppIconTypeBordeaux-83.5@2x~ipad.png in Resources */,
+				ICN22900000000000000000002 /* AppIconTypeGruenAr@2x.png in Resources */,
+				ICN23000000000000000000002 /* AppIconTypeGruenAr@3x.png in Resources */,
+				ICN23100000000000000000002 /* AppIconTypeGruenAr@2x~ipad.png in Resources */,
+				ICN23200000000000000000002 /* AppIconTypeGruenAr-83.5@2x~ipad.png in Resources */,
+				ICN23300000000000000000002 /* AppIconTypeGruen@2x.png in Resources */,
+				ICN23400000000000000000002 /* AppIconTypeGruen@3x.png in Resources */,
+				ICN23500000000000000000002 /* AppIconTypeGruen@2x~ipad.png in Resources */,
+				ICN23600000000000000000002 /* AppIconTypeGruen-83.5@2x~ipad.png in Resources */,
+				ICN23700000000000000000002 /* AppIconTypeSchwarzAr2@2x.png in Resources */,
+				ICN23800000000000000000002 /* AppIconTypeSchwarzAr2@3x.png in Resources */,
+				ICN23900000000000000000002 /* AppIconTypeSchwarzAr2@2x~ipad.png in Resources */,
+				ICN24000000000000000000002 /* AppIconTypeSchwarzAr2-83.5@2x~ipad.png in Resources */,
+				A1000000000000000000000F /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C90000000000000000000060 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF5CFE593089E4F10013C426 /* InfoPlist.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF28178D3083FFB300454145 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF4C7760306DA58600025265 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF5C0009308B5AC60013C426 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF5C0017308B5AC70013C426 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF5C0021308B5AC70013C426 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFA1629C305844C500E70795 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFA162AF3058464B00E70795 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFA163B4305A0CE500E70795 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7218CEEB387E504EA7DA2804 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7C7DB90E0D3684FF42A4604C /* DATPremiumWidgets.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10000000000000000000050 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000001 /* DarAlTawhidApp.swift in Sources */,
+				CFD58C103085F60D002BE8B2 /* StandByRoyalSettingsView.swift in Sources */,
+				A40000000000000000000001 /* DarPushNotifications.swift in Sources */,
+				A70000000000000000000001 /* DarHaptics.swift in Sources */,
+				A90000000000000000000001 /* DarAppIcons.swift in Sources */,
+				A91000000000000000000001 /* DarAppShell.swift in Sources */,
+				CFFD3AE7306545DE005EB105 /* DATWidgetMetrics.swift in Sources */,
+				CFD58C0E3085F5F3002BE8B2 /* StandByRoyalDashboardView.swift in Sources */,
+				CFFD3AE3306545DE005EB105 /* DATWidgetTheme.swift in Sources */,
+				CF8DBA96307170E900A53AFF /* DarCarPlayAudioService.swift in Sources */,
+				CFC6A38E308111A3008C313D /* File.swift in Sources */,
+				A91100000000000000000001 /* DarInAppOpenGuard.swift in Sources */,
+				A70000000000000000000005 /* DarAppShortcuts.swift in Sources */,
+				CFFD3AEA306545DE005EB105 /* DATWidgetTypography.swift in Sources */,
+				A70000000000000000000002 /* DarAppIntents.swift in Sources */,
+				CFFD3AEE306545F3005EB105 /* DarPrayerTimeline.swift in Sources */,
+				A10000000000000000000005 /* DarAppRouter.swift in Sources */,
+				A10000000000000000000002 /* WebAppView.swift in Sources */,
+				CFFD3AFB306547A3005EB105 /* DATWatchConnectivity.swift in Sources */,
+				CFFD3AF83065477F005EB105 /* DATWeatherService.swift in Sources */,
+				A10000000000000000000006 /* DarDeepLink.swift in Sources */,
+				A10000000000000000000007 /* DarWidgetSnapshot.swift in Sources */,
+				A10000000000000000000008 /* DarWidgetStore.swift in Sources */,
+				A10000000000000000000009 /* DarPrayerEngine.swift in Sources */,
+				CFFD3AF63065465A005EB105 /* DATWidgetSnapshotModels.swift in Sources */,
+				CF5CFE5F308A05870013C426 /* DarLanguage.swift in Sources */,
+				CFECE9A1305DC9BB008EFB06 /* DarWidgetLocationService.swift in Sources */,
+				B50000000000000000000001 /* DarPrayerPushCopy.swift in Sources */,
+				CF79AADC3086B0C6008C8051 /* DarPermissionOnboardingView.swift in Sources */,
+				A1000000000000000000000A /* DarDailyContent.swift in Sources */,
+				CF8DBA98307170F600A53AFF /* DarCarPlaySceneDelegate.swift in Sources */,
+				A1000000000000000000000E /* DarWidgetRemote.swift in Sources */,
+				A60000000000000000000001 /* DarPrayerLive.swift in Sources */,
+				CFFD3B0730654C0C005EB105 /* DATWeatherAttributionView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C90000000000000000000050 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C90000000000000000000001 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF28178B3083FFB300454145 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF4C775E306DA58600025265 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF5C0007308B5AC60013C426 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF5C0015308B5AC70013C426 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF5C001F308B5AC70013C426 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFA1629A305844C500E70795 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFA162AD3058464B00E70795 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFA163B2305A0CE500E70795 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFFD3B0530654BB2005EB105 /* DATWeatherAttributionNotification.swift in Sources */,
+				CFFD3B0330654B93005EB105 /* DATWeatherAttributionView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C90000000000000000000071 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C90000000000000000000040 /* OneSignalNotificationServiceExtension */;
+			targetProxy = C90000000000000000000072 /* PBXContainerItemProxy */;
+		};
+		CF28179B3083FFB500454145 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CF28178E3083FFB300454145 /* DATPrayerLiveActivityExtension */;
+			targetProxy = CF28179A3083FFB500454145 /* PBXContainerItemProxy */;
+		};
+		CF5C001B308B5AC70013C426 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CF5C000A308B5AC60013C426 /* DARNext */;
+			targetProxy = CF5C001A308B5AC70013C426 /* PBXContainerItemProxy */;
+		};
+		CF5C0025308B5AC70013C426 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CF5C000A308B5AC60013C426 /* DARNext */;
+			targetProxy = CF5C0024308B5AC70013C426 /* PBXContainerItemProxy */;
+		};
+		CFA162A7305844C600E70795 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFA1629D305844C500E70795 /* DarAlTawhidWatch Watch App */;
+			targetProxy = CFA162A6305844C600E70795 /* PBXContainerItemProxy */;
+		};
+		CFA162C13058464C00E70795 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFA162B03058464B00E70795 /* DarAlTawhidWatchWidgetsExtension */;
+			targetProxy = CFA162C03058464C00E70795 /* PBXContainerItemProxy */;
+		};
+		EA516E5463487695C4EB92CF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DATPremiumWidgetsExtension;
+			target = 0579DA03A2078CF1BA021B2D /* DATPremiumWidgetsExtension */;
+			targetProxy = 39930415CC9E1950BA3CCE30 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0BAACDABF5F667020C71D716 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = DATPremiumWidgets/DATPremiumWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 98;
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = DATPremiumWidgets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0.5;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app.premiumwidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1449D5164FF099FB5C08B234 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = DATPremiumWidgets/DATPremiumWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 98;
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = DATPremiumWidgets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0.5;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app.premiumwidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A10000000000000000000100 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 84;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app;
+				PRODUCT_NAME = DarAlTawhid;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A10000000000000000000101 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 84;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app;
+				PRODUCT_NAME = DarAlTawhid;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A10000000000000000000102 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconEmblemNachtblau AppIconEmblemSchwarzgold AppIconEmblemCremePetrol AppIconTypeCreme AppIconTypeSchwarzAr AppIconTypeSchwarz AppIconTypeNavyAr AppIconTypeNavy AppIconTypeBordeauxAr AppIconTypeBordeaux AppIconTypeGruenAr AppIconTypeGruen AppIconTypeSchwarzAr2";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = DarAlTawhid/DarAlTawhid.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 98;
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				ENABLE_DEBUG_DYLIB = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/OneSignal",
+				);
+				INFOPLIST_FILE = DarAlTawhid/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0.5;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app;
+				PRODUCT_NAME = DarAlTawhid;
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A10000000000000000000103 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconEmblemNachtblau AppIconEmblemSchwarzgold AppIconEmblemCremePetrol AppIconTypeCreme AppIconTypeSchwarzAr AppIconTypeSchwarz AppIconTypeNavyAr AppIconTypeNavy AppIconTypeBordeauxAr AppIconTypeBordeaux AppIconTypeGruenAr AppIconTypeGruen AppIconTypeSchwarzAr2";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = DarAlTawhid/DarAlTawhid.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 98;
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				ENABLE_DEBUG_DYLIB = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/OneSignal",
+				);
+				INFOPLIST_FILE = DarAlTawhid/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0.5;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app;
+				PRODUCT_NAME = DarAlTawhid;
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C90000000000000000000102 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 98;
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/OneSignal",
+				);
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0.5;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = OneSignalNotificationServiceExtension;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C90000000000000000000103 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 98;
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/OneSignal",
+				);
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0.5;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = OneSignalNotificationServiceExtension;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CF28179D3083FFB500454145 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 98;
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DATPrayerLiveActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DATPrayerLiveActivity;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0.5;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app.DATPrayerLiveActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Debug;
+		};
+		CF28179E3083FFB500454145 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 98;
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DATPrayerLiveActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DATPrayerLiveActivity;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0.5;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app.DATPrayerLiveActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Release;
+		};
+		CF4C776B306DA58800025265 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_LOCATION = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dār Al Tawḥīd TV";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Der Apple-TV-Standort wird verwendet, um lokale Gebetszeiten und das Wetter für diesen Fernseher anzuzeigen.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.tv.mobile;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Debug;
+		};
+		CF4C776C306DA58800025265 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_LOCATION = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dār Al Tawḥīd TV";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Der Apple-TV-Standort wird verwendet, um lokale Gebetszeiten und das Wetter für diesen Fernseher anzuzeigen.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.tv.mobile;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Release;
+		};
+		CF5C002A308B5AC70013C426 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daraltawhid.darnext.DARNext;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CF5C002B308B5AC70013C426 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daraltawhid.darnext.DARNext;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CF5C002D308B5AC70013C426 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daraltawhid.darnext.DARNextTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DARNext.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DARNext";
+			};
+			name = Debug;
+		};
+		CF5C002E308B5AC70013C426 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daraltawhid.darnext.DARNextTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DARNext.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DARNext";
+			};
+			name = Release;
+		};
+		CF5C0030308B5AC70013C426 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daraltawhid.darnext.DARNextUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DARNext;
+			};
+			name = Debug;
+		};
+		CF5C0031308B5AC70013C426 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daraltawhid.darnext.DARNextUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DARNext;
+			};
+			name = Release;
+		};
+		CFA162AA305844C600E70795 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Watch/DarAlTawhidWatch.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 90;
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "DĀR AL TAWḤĪD";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Der Standort wird verwendet, um auf der Apple Watch die Qibla-Richtung zur Kaaba zu berechnen.";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = de.daraltawhid.app;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Debug;
+		};
+		CFA162AB305844C600E70795 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Watch/DarAlTawhidWatch.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 90;
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "DĀR AL TAWḤĪD";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Der Standort wird verwendet, um auf der Apple Watch die Qibla-Richtung zur Kaaba zu berechnen.";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = de.daraltawhid.app;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Release;
+		};
+		CFA162C53058464C00E70795 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = WatchWidgets/WatchWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 90;
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DarAlTawhidWatchWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "DĀR AL TAWḤĪD";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app.watchkitapp.DarAlTawhidWatchWidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Debug;
+		};
+		CFA162C63058464C00E70795 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = WatchWidgets/WatchWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 90;
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DarAlTawhidWatchWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "DĀR AL TAWḤĪD";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app.watchkitapp.DarAlTawhidWatchWidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Release;
+		};
+		CFA163BE305A0CE600E70795 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 50;
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				ENABLE_PREVIEWS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "DĀR AL TAWḤĪD TV";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Der Apple-TV-Standort wird verwendet, um lokale Gebetszeiten und das Wetter für diesen Fernseher anzuzeigen.";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.4;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Debug;
+		};
+		CFA163BF305A0CE600E70795 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 50;
+				DEVELOPMENT_TEAM = ALVZ35NL2N;
+				ENABLE_PREVIEWS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "DĀR AL TAWḤĪD TV";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Der Apple-TV-Standort wird verwendet, um lokale Gebetszeiten und das Wetter für diesen Fernseher anzuzeigen.";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.4;
+				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A10000000000000000000080 /* Build configuration list for PBXNativeTarget "DarAlTawhid" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A10000000000000000000102 /* Debug */,
+				A10000000000000000000103 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A10000000000000000000090 /* Build configuration list for PBXProject "DarAlTawhid" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A10000000000000000000100 /* Debug */,
+				A10000000000000000000101 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C90000000000000000000080 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C90000000000000000000102 /* Debug */,
+				C90000000000000000000103 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF2817A03083FFB500454145 /* Build configuration list for PBXNativeTarget "DATPrayerLiveActivityExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF28179D3083FFB500454145 /* Debug */,
+				CF28179E3083FFB500454145 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF4C776A306DA58800025265 /* Build configuration list for PBXNativeTarget "DarAlTawhidTVMobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF4C776B306DA58800025265 /* Debug */,
+				CF4C776C306DA58800025265 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF5C0029308B5AC70013C426 /* Build configuration list for PBXNativeTarget "DARNext" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF5C002A308B5AC70013C426 /* Debug */,
+				CF5C002B308B5AC70013C426 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF5C002C308B5AC70013C426 /* Build configuration list for PBXNativeTarget "DARNextTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF5C002D308B5AC70013C426 /* Debug */,
+				CF5C002E308B5AC70013C426 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF5C002F308B5AC70013C426 /* Build configuration list for PBXNativeTarget "DARNextUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF5C0030308B5AC70013C426 /* Debug */,
+				CF5C0031308B5AC70013C426 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFA162AC305844C600E70795 /* Build configuration list for PBXNativeTarget "DarAlTawhidWatch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFA162AA305844C600E70795 /* Debug */,
+				CFA162AB305844C600E70795 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFA162C43058464C00E70795 /* Build configuration list for PBXNativeTarget "DarAlTawhidWatchWidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFA162C53058464C00E70795 /* Debug */,
+				CFA162C63058464C00E70795 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFA163C0305A0CE600E70795 /* Build configuration list for PBXNativeTarget "DarAlTawhidTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFA163BE305A0CE600E70795 /* Debug */,
+				CFA163BF305A0CE600E70795 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F6A825FF2604A2BA8CFC2493 /* Build configuration list for PBXNativeTarget "DATPremiumWidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1449D5164FF099FB5C08B234 /* Release */,
+				0BAACDABF5F667020C71D716 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A10000000000000000000070 /* Project object */;
+}
