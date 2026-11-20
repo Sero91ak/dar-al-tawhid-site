@@ -28,6 +28,9 @@ struct DarWidgetSnapshot: Codable, Equatable {
     var hijriLabel: String
     var qiblaDegrees: Double
     var prayers: [DarPrayerSlot]
+    var canonicalPrayerDays: [DarCanonicalPrayerDay]
+    var lastPrayerSyncAt: Date?
+    var prayerTimeZone: String
     var nextPrayerName: String
     var nextPrayerTime: String
     var nextPrayerRemaining: String
@@ -116,7 +119,8 @@ struct DarWidgetSnapshot: Codable, Equatable {
     enum CodingKeys: String, CodingKey {
         case themeId, inkHex, goldHex, textHex, mutedHex
         case cityLabel, latitude, longitude, fajrAngle, asrFactor, hijriLabel
-        case qiblaDegrees, prayers, nextPrayerName, nextPrayerTime, nextPrayerRemaining
+        case qiblaDegrees, prayers, canonicalPrayerDays, lastPrayerSyncAt, prayerTimeZone
+        case nextPrayerName, nextPrayerTime, nextPrayerRemaining
         case recommendationTitle, recommendationBody
         case postTitle, postSnippet, postCategory, postSource
         case ayahArabic, ayahGerman, ayahTranslit, ayahRef
@@ -136,7 +140,10 @@ struct DarWidgetSnapshot: Codable, Equatable {
         duaTitle: String, duaText: String, duaGerman: String, duaTranslit: String,
         duaCategory: String, duaSource: String, updatedAt: Date, duaId: String, postId: String,
         gregorianLabel: String, hijriDay: String, hijriMonthYear: String,
-        islamicEvents: [DarIslamicEvent]
+        islamicEvents: [DarIslamicEvent],
+        canonicalPrayerDays: [DarCanonicalPrayerDay] = [],
+        lastPrayerSyncAt: Date? = nil,
+        prayerTimeZone: String = "Europe/Berlin"
     ) {
         self.themeId = themeId
         self.inkHex = inkHex
@@ -151,6 +158,9 @@ struct DarWidgetSnapshot: Codable, Equatable {
         self.hijriLabel = hijriLabel
         self.qiblaDegrees = qiblaDegrees
         self.prayers = prayers
+        self.canonicalPrayerDays = canonicalPrayerDays
+        self.lastPrayerSyncAt = lastPrayerSyncAt
+        self.prayerTimeZone = prayerTimeZone
         self.nextPrayerName = nextPrayerName
         self.nextPrayerTime = nextPrayerTime
         self.nextPrayerRemaining = nextPrayerRemaining
@@ -194,6 +204,9 @@ struct DarWidgetSnapshot: Codable, Equatable {
         hijriLabel = try c.decodeIfPresent(String.self, forKey: .hijriLabel) ?? ""
         qiblaDegrees = try c.decodeIfPresent(Double.self, forKey: .qiblaDegrees) ?? 136.3
         prayers = try c.decodeIfPresent([DarPrayerSlot].self, forKey: .prayers) ?? []
+        canonicalPrayerDays = try c.decodeIfPresent([DarCanonicalPrayerDay].self, forKey: .canonicalPrayerDays) ?? []
+        lastPrayerSyncAt = try c.decodeIfPresent(Date.self, forKey: .lastPrayerSyncAt)
+        prayerTimeZone = try c.decodeIfPresent(String.self, forKey: .prayerTimeZone) ?? "Europe/Berlin"
         nextPrayerName = try c.decodeIfPresent(String.self, forKey: .nextPrayerName) ?? "Gebetszeiten"
         nextPrayerTime = try c.decodeIfPresent(String.self, forKey: .nextPrayerTime) ?? "—"
         nextPrayerRemaining = try c.decodeIfPresent(String.self, forKey: .nextPrayerRemaining) ?? ""
@@ -227,4 +240,109 @@ enum DarWidgetKeys {
     static let appGroup = "group.de.daraltawhid.app"
     static let snapshot = "dar.widget.snapshot.v2"
     static let pendingDestination = "dar.widget.pending.hash"
+}
+
+
+// Absolute instants are decoded once from the WebApp/GitHub JSON. All consumers
+// (iPhone, iPad, WidgetKit and ActivityKit) share the same serialized Date values.
+struct DarCanonicalPrayerDay: Codable, Equatable {
+    struct Location: Codable, Equatable {
+        let name: String
+        let latitude: Double
+        let longitude: Double
+    }
+    struct Method: Codable, Equatable {
+        let fajrAngle: Double
+        let asrFactor: Double
+    }
+    struct Instant: Codable, Equatable {
+        let name: String
+        let dateTime: Date
+    }
+
+    let schemaVersion: Int
+    let date: String
+    let generatedAt: Date
+    let timeZone: String
+    let location: Location
+    let method: Method?
+    let prayers: [String: Instant]
+
+    static let order = ["fajr", "sunrise", "dhuhr", "asr", "maghrib", "isha"]
+    static let fivePrayers = ["fajr", "dhuhr", "asr", "maghrib", "isha"]
+
+    var isValid: Bool {
+        guard schemaVersion == 1,
+              let zone = TimeZone(identifier: timeZone),
+              location.latitude.isFinite, location.longitude.isFinite,
+              abs(location.latitude) <= 90, abs(location.longitude) <= 180,
+              generatedAt.timeIntervalSinceNow < 300,
+              prayers.count >= 6,
+              method.map({ $0.fajrAngle.isFinite && $0.asrFactor.isFinite && $0.fajrAngle > 0 && $0.asrFactor > 0 }) ?? true
+        else { return false }
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = zone
+        formatter.dateFormat = "yyyy-MM-dd"
+        guard let parsedDay = formatter.date(from: date),
+              formatter.string(from: parsedDay) == date else { return false }
+        var previous = Date.distantPast
+        for key in Self.order {
+            guard let instant = prayers[key],
+                  !instant.name.isEmpty,
+                  formatter.string(from: instant.dateTime) == date,
+                  instant.dateTime > previous else { return false }
+            previous = instant.dateTime
+        }
+        return true
+    }
+
+    func matches(_ snapshot: DarWidgetSnapshot) -> Bool {
+        guard isValid, snapshot.prayerTimeZone == timeZone,
+              abs(location.latitude - snapshot.latitude) < 0.0001,
+              abs(location.longitude - snapshot.longitude) < 0.0001 else { return false }
+        guard let method else { return true }
+        return abs(method.fajrAngle - snapshot.fajrAngle) < 0.001
+            && abs(method.asrFactor - snapshot.asrFactor) < 0.001
+    }
+
+    func slots() -> [DarPrayerSlot] {
+        guard isValid, let zone = TimeZone(identifier: timeZone) else { return [] }
+        let clock = DateFormatter()
+        clock.calendar = Calendar(identifier: .gregorian)
+        clock.locale = Locale(identifier: "de_DE")
+        clock.timeZone = zone
+        clock.dateFormat = "HH:mm"
+        return Self.order.compactMap { key in
+            guard let p = prayers[key] else { return nil }
+            return DarPrayerSlot(id: key, name: p.name, time: clock.string(from: p.dateTime))
+        }
+    }
+}
+
+extension DarWidgetSnapshot {
+    func prayerDay(at now: Date = Date()) -> DarCanonicalPrayerDay? {
+        canonicalPrayerDays.first { day in
+            guard day.matches(self), let zone = TimeZone(identifier: day.timeZone) else { return false }
+            let dayFormatter = DateFormatter()
+            dayFormatter.calendar = Calendar(identifier: .gregorian)
+            dayFormatter.locale = Locale(identifier: "en_US_POSIX")
+            dayFormatter.timeZone = zone
+            dayFormatter.dateFormat = "yyyy-MM-dd"
+            return day.date == dayFormatter.string(from: now)
+        }
+    }
+
+    func nextAbsolutePrayer(after now: Date = Date()) -> (id: String, name: String, target: Date)? {
+        canonicalPrayerDays
+            .filter { $0.matches(self) }
+            .flatMap { day in
+                DarCanonicalPrayerDay.fivePrayers.compactMap { key -> (id: String, name: String, target: Date)? in
+                    guard let prayer = day.prayers[key], prayer.dateTime > now else { return nil }
+                    return (id: key, name: prayer.name, target: prayer.dateTime)
+                }
+            }
+            .min { $0.target < $1.target }
+    }
 }

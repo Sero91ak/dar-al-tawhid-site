@@ -687,6 +687,7 @@ struct WebAppView: UIViewRepresentable {
                 window.webkit.messageHandlers.darWidgetSnapshot.postMessage({
                   lat:s.lat,
                   lon:s.lon,
+                  tz:s.tz||s.timeZone||"Europe/Berlin",
                   city:s.city||"",
                   angle:s.angle||12,
                   asrFactor:s.asrFactor||1,
@@ -1018,6 +1019,9 @@ struct WebAppView: UIViewRepresentable {
             if let city = body["city"] as? String, !city.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 snap.cityLabel = city
             }
+            if let tz = body["tz"] as? String, TimeZone(identifier: tz) != nil {
+                snap.prayerTimeZone = tz
+            }
             if let angle = body["angle"] as? Double { snap.fajrAngle = angle }
             else if let angle = (body["angle"] as? NSNumber)?.doubleValue { snap.fajrAngle = angle }
             if let asr = body["asrFactor"] as? Double { snap.asrFactor = asr }
@@ -1051,6 +1055,7 @@ struct WebAppView: UIViewRepresentable {
             if let src = body["postSource"] as? String, !src.isEmpty { snap.postSource = src }
             if let dsrc = body["duaSource"] as? String, !dsrc.isEmpty { snap.duaSource = dsrc }
             DarWidgetStore.save(DarDailyContent.refresh(snap))
+            DarPrayerRefreshCoordinator.update()
         }
 
         private func applyQuranNowPlaying(_ body: [String: Any]) {
