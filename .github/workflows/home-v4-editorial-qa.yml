@@ -288,13 +288,14 @@ jobs:
             print('AUTO_WALLPAPER',auto_bg,flush=True)
             if '/media/apple-tv/tv-kaaba-' not in auto_bg:errors.append('Automatic day/night wallpaper did not select a native scene')
             Select(driver.find_element(By.ID,'homeSaverBackground')).select_by_value('tv-kaaba-sunrise')
+            WebDriverWait(driver,10).until(lambda d:d.execute_script("const i=document.getElementById('saverWallpaperImage');return i.complete&&i.naturalWidth>0"))
             saver_bg=driver.execute_script("return document.getElementById('saverWallpaperImage').currentSrc")
             if '/media/apple-tv/tv-kaaba-sunrise.jpg' not in saver_bg:errors.append('Separate screensaver wallpaper was not applied')
             saver_fit=driver.execute_script("""
               const img=document.getElementById('saverWallpaperImage'),r=img.getBoundingClientRect();
               return {src:img.currentSrc,hidden:img.hidden,fit:getComputedStyle(img).objectFit,nw:img.naturalWidth,nh:img.naturalHeight,w:r.width,h:r.height};
             """)
-            if saver_fit['hidden'] or saver_fit['fit']!='contain' or not saver_fit['nw'] or not saver_fit['nh'] or abs(saver_fit['w']/saver_fit['h']-saver_fit['nw']/saver_fit['nh'])>.03:errors.append('Screensaver wallpaper is cropped or stretched')
+            if saver_fit['hidden'] or saver_fit['fit']!='contain' or not saver_fit['nw'] or not saver_fit['nh'] or saver_fit['h']<=0 or abs(saver_fit['w']/saver_fit['h']-saver_fit['nw']/saver_fit['nh'])>.03:errors.append('Screensaver wallpaper is cropped or stretched')
             Select(driver.find_element(By.ID,'homeWallpaperMode')).select_by_value('manual')
             if len(gallery)<4:errors.append('Wallpaper gallery did not render')
             if not any(x.get_attribute('data-wallpaper')=='tv-kaaba-day' for x in gallery):errors.append('Native Kaaba wallpaper missing from gallery')
