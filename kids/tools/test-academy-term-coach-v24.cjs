@@ -80,6 +80,24 @@ const info=missing.children[3];
 assert.ok(info.children[1].textContent.includes("Allah allein"));
 assert.match(info.children[3].textContent,/noch|fehlt/);
 assert.equal(plays.length,0,"No unapproved or synthetic fallback voice");
+// Regressions: a lesson without Quran/Sunnah content must never receive
+// those generic words as unrelated vocabulary.
+const neutralTerms=api.termsFor({title:"Tarbiyah lernen"},"6-8").map(x=>x.id);
+assert.ok(neutralTerms.includes("tarbiyah"));
+assert.ok(!neutralTerms.includes("quran")&&!neutralTerms.includes("sunnah"),
+ "Do not inject Quran/Sunnah when absent from the actual lesson");
+// Editorial notes remain in the evidence metadata, never in child-visible labels.
+const editorial=new Element("div");
+api.mount(editorial,{title:"Tarbiyah lernen"},"6-8",{stopAudio:()=>{}});
+editorial.children[2].children.find(x=>x.textContent==="Tarbiyah").click();
+assert.equal(editorial.children[3].children[2].hidden,true,
+ "Editorial provenance is not a religious source label for children");
+assert.equal(editorial.children[3].children[2].textContent,"");
+const documented=new Element("div");
+api.mount(documented,{title:"Sunnah lernen"},"6-8",{stopAudio:()=>{}});
+documented.children[2].children.find(x=>x.textContent==="Sunnah").click();
+assert.match(documented.children[3].children[2].textContent,/^Quelle: Qurʾān 59:7;/,
+ "An actual Quran/Sahih source must remain visible");
 sandbox.window.DARKidsOwnerVoice={masterEntry:()=>fake,play:(t,opts)=>{plays.push({t,opts});return true}};
 api.mount(approved,{title:"Tawḥīd lernen"},"9-10",{stopAudio:()=>{}});
 approved.children[2].children.find(x=>x.textContent==="Tawḥīd").click();
@@ -90,7 +108,7 @@ assert.equal(plays[0].opts.source,"kids-academy-term-v24");
 const page=read("kids/akademie/index.html");
 assert.ok(page.includes('id="academyTermCoach"'));
 assert.ok(page.includes('id="academyTermCoachSources"'));
-assert.ok(page.includes('term-coach-v24.js?v=academy-sidq-sources-v1-20261120'));
+assert.ok(page.includes('term-coach-v24.js?v=academy-sidq-sources-v2-20261120'));
 assert.ok(page.includes('function refreshAcademyVocabulary()'));
 assert.ok(page.includes('if(n===1||n===2)refreshAcademyVocabulary()'));
 assert.ok(!read(helperFile).includes("speechSynthesis")&&!read(helperFile).includes("ElevenLabs")&&!read(helperFile).includes("fetch("),
