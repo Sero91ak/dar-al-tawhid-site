@@ -57,6 +57,9 @@ jobs:
       - name: New Frauen Q cards require nine readable locales and four translated questions
         run: node scripts/check-frauen-nine-language-publication.cjs
 
+      - name: Q59 nine full languages and translated learning questions
+        run: node scripts/check-q59-nine-language.cjs
+
       - name: In-app source navigation regression
         run: node q/_registry/check-source-navigation.mjs
 
