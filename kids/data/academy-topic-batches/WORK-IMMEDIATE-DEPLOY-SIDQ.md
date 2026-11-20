@@ -10,6 +10,16 @@ Die zusätzlichen **14 tatsächlich anklickbaren, aber noch nicht mit genau pass
 **Jetzt allein diese Produktionslücke abschließen:**
 1. Die 20 vorhandenen Generationen anhand der dokumentierten IDs sicher aus dem bereits existierenden Flow exportieren; keine neuen TTS-Aufrufe, keine signierten Links committen.
 2. Die neun Erklärungstexte aus ihren exakten DE+AR-Segmenten zu jeweils drei Altersfassungen zusammensetzen; die fünf bereits vollständigen Frage-/Antwort-Originale unverändert übernehmen. Verwende das vorhandene Salawāt-Original dort, wo es im Plan angegeben ist. Keine Quellenkommentare, Audiozahlen oder Metadaten als Kinder-Audio einbauen.
+**Ab sofort vorhandener ausführbarer Offline-Importer (keine neuen Credits):**
+
+```sh
+python3 kids/tools/import-academy-sidq-click-gaps-v1.py --dry-run
+python3 kids/tools/import-academy-sidq-click-gaps-v1.py --import --source-dir /privat/elevenlabs-sidq-originals
+node kids/tools/test-academy-term-coach-v24.cjs
+```
+
+Das Original-Verzeichnis muss **21 echte MP3** enthalten: 20 neue Generationen plus `GBmSBMXAo9AwPA58e87w.mp3` aus der früheren Ṣidq-Produktion. Der Importer akzeptiert nur die im aktuellen Plan geprüften IDs und wandelt Dateien nicht durch TTS um. Die erzeugten `kids/assets/kids-academy-audio/sidq-click-*.m4a`, das aktualisierte öffentliche Manifest und beide Topic-Statusdateien zusammen committen. Anschließend nach Cloudflare-Live-Prüfung den tatsächlichen Release-Status separat bestätigen.
+
 3. Alle 14 endgültigen `.m4a`-Dateien akustisch-technisch (Codec, Länge, Segmentfolge), per SHA-256 und exaktem sichtbarem Sprechtext kontrollieren, im öffentlichen Academy-Manifest eintragen und jeden Hörbutton mit **genau diesem** verifizierten Original verbinden. Für vorhandene 58 Clips keine doppelten Gebühren.
 4. Nur den notwendigen Code + reale Audiodateien durch die bestehenden GitHub-Guards und den produktiven Cloudflare-Deploy schicken. Prüfe öffentliche Audio-URLs, angeklickte Worterklärungen, Fragen und Antworten in drei Altersgruppen und Jungen-/Mädchenprofilen. Erst danach wird der 14er-Block auf **live** gesetzt.
 5. Die Kinder-App verwendet seit Commit `760a821ab842359f693deecf339b8acf0a105a8b` eine reparierte Quellen-/Begriffslogik; der zugehörige Cloudflare-Deploy `44718879100` wurde mit `success` abgeschlossen. Diese Korrektur bewahren und nicht durch einen alten PR-Stand überschreiben.
