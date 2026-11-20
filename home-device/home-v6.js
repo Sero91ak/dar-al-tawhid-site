@@ -54,7 +54,7 @@
  function showPanel(entries,verse){
   const panel=$('tadabburPanel'),list=$('tadabburResults'),title=$('tadabburVerse'),status=$('tadabburStatus');
   if(!panel||!list)return;
-  panel.hidden=false;list.replaceChildren();
+  panel.hidden=false;panel.setAttribute('aria-expanded','true');list.replaceChildren();
   say(title,'Vers '+(verse.reference||''));
   const items=entries||[];
   if(!items.length){
@@ -74,7 +74,7 @@
  async function openTadabbur(){
   const panel=$('tadabburPanel'),list=$('tadabburResults'),status=$('tadabburStatus');
   if(!panel)return;
-  panel.hidden=false;panel.setAttribute('aria-expanded','true');
+  panel.hidden=false;panel.setAttribute('aria-expanded','true');$('closeTadabbur')?.focus({preventScroll:true});
   const verse=window.darHomeDailyVerse||{},reference=verse.reference||'';
   if(!refOK(reference)){say(status,'Öffne zuerst einen Qurʾān-Vers des Tages.');return}
   say($('tadabburVerse'),'Vers '+reference);say(status,'Prüfe den vollständigen DĀR-Tadabbur-Katalog …');if(list)list.replaceChildren();
@@ -248,7 +248,7 @@
  function render(){if(!library){say($('saverType'),'DĀR-Bildschirmschoner · wird geladen');say($('saverDe'),'Geprüfte Inhalte werden synchronisiert …');ensureReady().then(()=>{if(library){if(!rotationState?.current)nextCard();else renderCurrent()}}).catch(()=>{});return}if(!rotationState?.current)nextCard();else renderCurrent()}
  function tick(now){if(!document.body.classList.contains('saver-open')&&!$('app')?.classList.contains('saver-open'))return;if(!library){ensureReady().then(()=>{if(library)nextCard()});return}advance(now).catch(()=>{})}
  function install(){
-  $('openTadabbur')?.addEventListener('click',()=>{const p=$('tadabburPanel');if(p&&!p.hidden){p.hidden=true;p.setAttribute('aria-expanded','false');$('openTadabbur').setAttribute('aria-expanded','false');return}$('openTadabbur')?.setAttribute('aria-expanded','true');openTadabbur()});
+  $('openTadabbur')?.addEventListener('click',()=>{$('openTadabbur')?.setAttribute('aria-expanded','true');openTadabbur()});
   $('nextTadabbur')?.addEventListener('click',openTadabbur);
   $('closeTadabbur')?.addEventListener('click',()=>{const p=$('tadabburPanel');if(p){p.hidden=true;p.setAttribute('aria-expanded','false')}$('openTadabbur')?.setAttribute('aria-expanded','false');$('openTadabbur')?.focus({preventScroll:true})});
   $('saverMode')?.addEventListener('change',e=>{const isTv=e.target.value==='tvos',field=$('saverRotate')?.closest('.field');if(field)field.hidden=isTv;if(isTv)ensureReady()});
@@ -256,5 +256,6 @@
   window.darTvScreensaver={render,tick,ensureReady,status};
   window.addEventListener('online',()=>{if($('saverMode')?.value==='tvos')ensureReady()});
  }
+ document.addEventListener('keydown',event=>{if(event.key==='Escape'){const p=$('tadabburPanel');if(p&&!p.hidden){p.hidden=true;p.setAttribute('aria-expanded','false');$('openTadabbur')?.setAttribute('aria-expanded','false');$('openTadabbur')?.focus({preventScroll:true})}}});
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
 })();
