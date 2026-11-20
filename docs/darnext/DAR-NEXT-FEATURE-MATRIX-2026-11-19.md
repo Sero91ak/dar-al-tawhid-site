@@ -194,3 +194,11 @@ Der eigenständige Arbeitsnachweis in PR #1824 wurde zugunsten dieses bestehende
 - Draft-PR #1832 ergänzt einen iPhone-UI-Regressionstest für Beiträge → Quiz → Beiträge. Er scrollt zu derselben stabil identifizierten Karte, vergleicht deren Bildschirmposition vor/nach dem Tabwechsel (Toleranz 4 pt) und prüft Sichtbarkeit.
 - Swift-Parser der geänderten UI-Testdatei: bestanden. Der UI-Test wurde nicht ausgeführt; daher ist Scroll-Restoration durch Tabwechsel weiterhin nicht als Laufzeitverhalten bestätigt. Kein Laufzeitcode geändert.
 - Das Anhängen des PR-Artefakts an den Codex-Chat scheiterte am internen Thread-Datenbankzustand; PR direkt erreichbar.
+
+
+## Qurʾān-Katalog-Rückkehr und sichtbarer iPhone-Stand, 20.11.2026
+
+- PR #1832 ergänzt einen stabilen Accessibility-Identifier für jede Surenkarte und einen UI-Test für Sūrah 49 → Detail → Zurück. Der Test vergleicht die Bildschirmposition der Surenkarte mit 4 pt Toleranz. Sowohl die View-Datei als auch die UI-Testdatei bestehen die Swift-Parserprüfung.
+- PR #1832 bleibt Draft und offen. Build sowie tatsächliche UI-Tests wurden für diesen Head nicht ausgeführt.
+- Das iPhone 18 Pro Max / iOS 27.2 ist mit `simctl` gebootet; DARNext ist gestartet. `simctl screenshot` konnte einen aktuellen Bildschirm erfassen. Die grafische `Simulator.app` fehlt in der installierten Xcode-App, daher gibt es kein separates Simulatorfenster und keine interaktive sichtbare Abnahme.
+- Screenshot: der laufende App-Stand zeigt die Startseite in spanischer Sprache mit Gebetskarte, Suche, Schnellzugriffen und Bottom-Navigation. Dies belegt den laufenden Bildschirminhalt, aber keinen Scroll-/Hitch-Test.
