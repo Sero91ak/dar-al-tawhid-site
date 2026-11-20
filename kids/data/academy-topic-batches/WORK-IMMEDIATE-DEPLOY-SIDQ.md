@@ -1,5 +1,22 @@
 # DĀR AL TAWḤĪD KIDS — ausführbarer Work-Auftrag: Ṣidq vollständig LIVE
 
+
+## AKTUALISIERTE PRODUKTIONSLAGE — 20.11.2026 (VORRANG VOR DEM HISTORISCHEN 18.11.-PLAN)
+
+Die 58 kanonischen Ṣidq-V4-Sprachdateien sind bereits im produktiven Audio-Manifest `kids/data/academy-audio.json` verzeichnet; nach dem GitHub-Live-Prüfprotokoll wurden deren originale Dateien gegen Cloudflare per SHA-256 abgeglichen. **Das beweist noch keine vollständige Endgeräte-/iOS-Abnahme.** Die historischen Angaben unten zum fehlenden Import *dieser 58 Dateien* sind überholt und dürfen keinesfalls zu erneuter kostenpflichtiger Produktion oder blindem Reimport führen.
+
+Die zusätzlichen **14 tatsächlich anklickbaren, aber noch nicht mit genau passendem Audio versorgten Inhalte** wurden seitdem separat ermittelt: neun kindgerechte Begriffserklärungen (`Ṣidq`, `Sunnah`, `Qurʾān` in je drei Altersgruppen), vier Antworten und eine Frage. Alle notwendigen **20 neuen Originalsegmente** sind im vorhandenen ElevenLabs-V4-Flow abgeschlossen und in `akhlaq-sidq-14-missing-real-v4-plan-v1.json` mit **exakten `sessionId`/`generationId`-Paaren** hinterlegt; das bestehende Salawāt-Original `GBmSBMXAo9AwPA58e87w` ist wiederzuverwenden. Der zugehörige Klicklücken-Abgleich liegt in `akhlaq-sidq-visible-click-gaps-v1.json`. **Diese 14 fertig aufgenommenen Inhalte sind nicht in der App hörbar**, solange die neuen Original-Bytes nicht sicher importiert und die neun gemischtsprachigen Fassungen nicht exakt zusammengesetzt wurden. Nicht neu generieren.
+
+**Jetzt allein diese Produktionslücke abschließen:**
+1. Die 20 vorhandenen Generationen anhand der dokumentierten IDs sicher aus dem bereits existierenden Flow exportieren; keine neuen TTS-Aufrufe, keine signierten Links committen.
+2. Die neun Erklärungstexte aus ihren exakten DE+AR-Segmenten zu jeweils drei Altersfassungen zusammensetzen; die fünf bereits vollständigen Frage-/Antwort-Originale unverändert übernehmen. Verwende das vorhandene Salawāt-Original dort, wo es im Plan angegeben ist. Keine Quellenkommentare, Audiozahlen oder Metadaten als Kinder-Audio einbauen.
+3. Alle 14 endgültigen `.m4a`-Dateien akustisch-technisch (Codec, Länge, Segmentfolge), per SHA-256 und exaktem sichtbarem Sprechtext kontrollieren, im öffentlichen Academy-Manifest eintragen und jeden Hörbutton mit **genau diesem** verifizierten Original verbinden. Für vorhandene 58 Clips keine doppelten Gebühren.
+4. Nur den notwendigen Code + reale Audiodateien durch die bestehenden GitHub-Guards und den produktiven Cloudflare-Deploy schicken. Prüfe öffentliche Audio-URLs, angeklickte Worterklärungen, Fragen und Antworten in drei Altersgruppen und Jungen-/Mädchenprofilen. Erst danach wird der 14er-Block auf **live** gesetzt.
+5. Die Kinder-App verwendet seit Commit `760a821ab842359f693deecf339b8acf0a105a8b` eine reparierte Quellen-/Begriffslogik; der zugehörige Cloudflare-Deploy `44718879100` wurde mit `success` abgeschlossen. Diese Korrektur bewahren und nicht durch einen alten PR-Stand überschreiben.
+6. Erst nach Abschluss von Ṣidq den nächsten Unterricht **Akhlāq / Ṣabr** in allen drei Altersgruppen produzieren und live veröffentlichen.
+
+Die folgende älteste Aufgabenbeschreibung bleibt ausschließlich zur historischen Nachvollziehbarkeit erhalten. Vor allem die dortige 76er-Importreihenfolge darf **nicht** mehr als einziger heutiger Blocker verstanden werden.
+
 ## Autorisierung und Ziel
 
 Der Besitzer hat am 18.11.2026 ausdrücklich vollständige Produktion und direkte Live-Veröffentlichung ohne vorgelagerte Hörproben freigegeben. **Keine weiteren kostenpflichtigen ElevenLabs-Generierungen durchführen.** Es liegen bereits **76 reale, abgeschlossene ElevenLabs V4-Masteraufnahmen** unter der **bestehenden** geklonten Stimme `Serhat Abu Malik – Master` (`DkU7j9uO4ZEtLD2iRZSH`) im ElevenLabs-Flow `zrB4zGdz9OTndLryQtIB`:
