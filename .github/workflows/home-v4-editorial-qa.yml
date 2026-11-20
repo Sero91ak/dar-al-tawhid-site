@@ -142,13 +142,18 @@ jobs:
                   nav:[...document.querySelectorAll('.home-nav button')].map(b=>{const r=b.getBoundingClientRect(),c=getComputedStyle(b);return{text:b.innerText.trim(),aria:b.getAttribute('aria-label'),width:r.width,height:r.height,bg:c.backgroundColor,border:c.borderTopColor,radius:c.borderTopLeftRadius,current:b.getAttribute('aria-current')}}),fontSizes:{dailyDe:parseFloat(getComputedStyle(document.getElementById('dailyDe')).fontSize),source:parseFloat(getComputedStyle(document.getElementById('dailySource')).fontSize),counter:parseFloat(getComputedStyle(document.querySelector('.counter')).fontSize),ptime:parseFloat(getComputedStyle(document.querySelector('.prayer-cell .ptime')).fontSize)},lineSpacing:{daily:parseFloat(getComputedStyle(document.getElementById('dailyDe')).lineHeight)/parseFloat(getComputedStyle(document.getElementById('dailyDe')).fontSize),source:parseFloat(getComputedStyle(document.getElementById('dailySource')).lineHeight)/parseFloat(getComputedStyle(document.getElementById('dailySource')).fontSize)},
                   heroRight:{display:getComputedStyle(document.querySelector('.hero-right')).display,width:document.querySelector('.hero-right').getBoundingClientRect().width,height:document.querySelector('.hero-right').getBoundingClientRect().height,storyHeight:document.querySelector('.hero-right .daily-story').getBoundingClientRect().height},
                   prayerArtCount:document.querySelectorAll('.prayer-glyph').length,arabicHomeVisible:[...document.querySelectorAll('.hero-verse,.bismillah,#dailyArabic,.next-arabic')].filter(x=>getComputedStyle(x).display!=='none'&&x.textContent.trim()).length,
-                  boxes,wallpaper:getComputedStyle(document.getElementById('app')).backgroundImage}
+                  boxes,navBox:(()=>{const r=document.querySelector('.home-nav').getBoundingClientRect();return{left:r.left,right:r.right,center:r.left+r.width/2}})(),
+                  wallpaper:getComputedStyle(document.getElementById('app')).backgroundImage,
+                  wallpaperFit:(()=>{const i=document.getElementById('homeWallpaperImage'),r=i.getBoundingClientRect();return{src:i.currentSrc,hidden:i.hidden,display:getComputedStyle(i).display,fit:getComputedStyle(i).objectFit,nw:i.naturalWidth,nh:i.naturalHeight,w:r.width,h:r.height}})()}
               """)
               print('VIEWPORT',w,h,data,flush=True)
               if not data['v4'] or data['icons']<7:errors.append(f'{w}x{h}: HOME styling or one of seven settings icons missing')
               if [x['text'] for x in data['nav']]!=['Start','Qurʾān','Festtage']:errors.append(f'{w}x{h}: HOME navigation labels or destinations missing')
               if any(x['width']<44 or x['height']<44 or x['bg'] not in ('rgba(0, 0, 0, 0)','transparent') or x['border']=='rgba(0, 0, 0, 0)' or float(x['radius'].replace('px',''))<x['height']*.45 for x in data['nav']):errors.append(f'{w}x{h}: navigation button area too small or not visibly bounded')
               if data['footerTabs']:errors.append(f'{w}x{h}: footer tabs must be absent')
+              if w>h and (data['wallpaperFit']['display']=='none' or data['wallpaperFit']['fit']!='contain' or not data['wallpaperFit']['nw'] or not data['wallpaperFit']['nh'] or abs(data['wallpaperFit']['w']/data['wallpaperFit']['h']-data['wallpaperFit']['nw']/data['wallpaperFit']['nh'])>.03):errors.append(f'{w}x{h}: landscape wallpaper is not fully fitted')
+              if h>w and data['wallpaperFit']['display']!='none':errors.append(f'{w}x{h}: portrait should use the wallpaper-free standard view')
+              if h<w and abs(data['navBox']['center']-w/2)>8:errors.append(f'{w}x{h}: top navigation is not centered')
               if data['scrollW']>w+3:errors.append(f'{w}x{h}: document horizontal overflow')
               if data['boxes']['audioName']['height']<17:errors.append(f'{w}x{h}: Quran player title clipped')
               if data['fontSizes']['dailyDe']<18:errors.append(f'{w}x{h}: German daily text below 18px')
@@ -253,6 +258,13 @@ jobs:
             remote_focus=driver.execute_script("return {id:document.activeElement.id,tag:document.activeElement.tagName,role:document.activeElement.getAttribute('role')}")
             print('TV_REMOTE_ARROW_FOCUS',remote_focus,flush=True)
             if remote_focus['tag']=='BODY':errors.append('TV remote arrow key did not focus a HOME control')
+            driver.find_element(By.ID,'nightstandLaunch').click()
+            WebDriverWait(driver,8).until(lambda d:d.find_element(By.ID,'nightstandView').get_attribute('hidden') is None)
+            night=driver.execute_script("return {clock:document.getElementById('nightstandClock').textContent,prayer:document.getElementById('nightstandPrayer').textContent,time:document.getElementById('nightstandPrayerTime').textContent,bg:getComputedStyle(document.getElementById('nightstandView')).backgroundColor,exit:document.getElementById('nightstandView').getBoundingClientRect().height}")
+            print('NIGHTSTAND_VIEW',night,flush=True)
+            if not night['clock'] or not night['prayer'] or not night['time'] or night['exit']<100:errors.append('Dim nightstand view does not show the live clock and next prayer')
+            driver.find_element(By.ID,'nightstandExit').click()
+            if driver.execute_script("return !document.getElementById('nightstandView').hidden"):errors.append('Nightstand view did not close')
             driver.find_element(By.ID,'openSettings').click()
             settings_layout=driver.execute_script("""
               const nav=document.querySelector('.settings-tabs'),detail=document.querySelector('.tabpage.on');
@@ -374,6 +386,7 @@ jobs:
             driver.find_element(By.ID,'previewAdhan').click()
             WebDriverWait(driver,10).until(lambda d:'Hörprobe' in d.find_element(By.CSS_SELECTOR,'#adhanVisual .adhan-title').text)
             if driver.find_element(By.CSS_SELECTOR,'#adhanVisual .adhan-title').text!='Aḏān · Hörprobe':errors.append('Generic Adhan test inherited the active prayer name')
+            if driver.execute_script("const i=document.getElementById('h4PrayerArtwork');return i&&getComputedStyle(i).display!=='none'"):errors.append('Generic Adhan test reused a stale prayer-specific image')
             driver.find_element(By.ID,'stopAdhan').click()
             driver.find_element(By.ID,'openSettings').click()
             driver.find_element(By.CSS_SELECTOR,'button[data-tab="adhan"]').click()
@@ -385,10 +398,11 @@ jobs:
             if not art.get_attribute('src').endswith('/media/apple-tv/adhan-fajr.jpg'):errors.append('Faǧr cinematic did not use native Apple TV artwork')
             bleed=driver.execute_script("""
               const v=document.getElementById('adhanVisual'),i=document.getElementById('h4PrayerArtwork'),t=v.querySelector('.adhan-title'),sub=document.getElementById('adhanInfo'),lower=v.querySelector('.adhan-lower-third'),button=document.getElementById('stopAdhan'),a=i.getBoundingClientRect(),b=v.getBoundingClientRect(),l=lower.getBoundingClientRect(),bb=button.getBoundingClientRect(),cs=getComputedStyle(i);
-              return {width:a.width,height:a.height,viewWidth:b.width,viewHeight:b.height,fit:cs.objectFit,opacity:cs.opacity,position:cs.position,title:t.textContent,subtitle:sub.textContent,naturalWidth:i.naturalWidth,lowerBottom:Math.round(b.bottom-l.bottom),buttonInside:bb.top>=l.top&&bb.bottom<=l.bottom,lowerBackground:getComputedStyle(lower).backgroundColor};
+              return {width:a.width,height:a.height,viewWidth:b.width,viewHeight:b.height,fit:cs.objectFit,opacity:cs.opacity,position:cs.position,title:t.textContent,subtitle:sub.textContent,naturalWidth:i.naturalWidth,lowerBottom:Math.round(b.bottom-l.bottom),buttonInside:bb.top>=l.top&&bb.bottom<=l.bottom,lowerBackground:getComputedStyle(lower).backgroundColor,backdropWidth:document.getElementById('adhanWallpaperBackdrop').getBoundingClientRect().width,backdropHeight:document.getElementById('adhanWallpaperBackdrop').getBoundingClientRect().height,backdropImage:getComputedStyle(document.getElementById('adhanWallpaperBackdrop')).backgroundImage};
             """)
             print('FAJR_FULL_BLEED_LOWER_THIRD',bleed,flush=True)
-            if bleed['width']<bleed['viewWidth']-2 or bleed['height']<bleed['viewHeight']-2 or bleed['fit']!='cover' or bleed['opacity']!='1' or bleed['naturalWidth']<1600:errors.append('Native prayer art is not high-resolution, fully visible and full-bleed')
+            if bleed['width']>bleed['viewWidth']+2 or bleed['height']>bleed['viewHeight']+2 or bleed['fit']!='contain' or bleed['opacity']!='1' or bleed['naturalWidth']<1600 or abs(bleed['width']/bleed['height']-bleed['naturalWidth']/bleed['naturalHeight'])>.03:errors.append('Native prayer art is not high-resolution and fully fitted')
+            if bleed['backdropWidth']<bleed['viewWidth']-2 or bleed['backdropHeight']<bleed['viewHeight']-2 or not bleed['backdropImage'].endswith('/media/apple-tv/adhan-fajr.jpg'):errors.append('Adhan wallpaper does not fill unused aspect-ratio space with the selected prayer artwork')
             if bleed['lowerBottom']>100 or not bleed['buttonInside']:errors.append('Adhan time and stop button are not grouped in the lower-third')
             if bleed['subtitle'].startswith(('Fajr','Faǧr','Ḍuhr','ʿAṣr','Maġrib','ʿIšāʾ')):errors.append('Adhan prayer name is duplicated in the time line')
             for prayer,asset in [('Fajr','fajr'),('Ḍuhr','dhuhr'),('ʿAṣr','asr'),('Maġrib','maghrib'),('ʿIšāʾ','isha')]:
@@ -398,6 +412,8 @@ jobs:
               WebDriverWait(driver,10).until(lambda d:d.execute_script("return document.getElementById('h4PrayerArtwork')?.naturalWidth||0")>0)
             driver.execute_script("document.getElementById('stopAdhan').click()")
             WebDriverWait(driver,10).until(lambda d:'active' not in d.find_element(By.ID,'adhanVisual').get_attribute('class'))
+            if driver.execute_script("const i=document.getElementById('homeWallpaperImage');return i.hidden||getComputedStyle(i).display==='none'"):errors.append('Selected HOME wallpaper did not return after Adhan')
+            if driver.execute_script("const i=document.getElementById('h4PrayerArtwork');return i&&getComputedStyle(i).display!=='none'"):errors.append('Prayer artwork remained visible after Adhan')
             driver.find_element(By.ID,'openSettings').click()
             driver.find_element(By.CSS_SELECTOR,'button[data-tab="saver"]').click()
             driver.find_element(By.ID,'saverPreview').click()
