@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-11-18T21:25:30.000Z",
+  "generated": "2026-11-20T22:46:36.000Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1843,6 +1843,58 @@
         "errored": 0,
         "completedAt": "2026-11-18T21:25:30.000Z",
         "targetUrl": "https://dar-al-tawhid.de/?post=mujahid-scham-hochmut-wissen-20261118-q58#post/mujahid-scham-hochmut-wissen-20261118-q58",
+        "languages": [
+          "de",
+          "ar",
+          "en",
+          "tr",
+          "ku",
+          "ckb",
+          "bs",
+          "fr",
+          "es"
+        ]
+      }
+    },
+    "hafsah-bint-sirin-jugend-handeln-20261120-q59": {
+      "postId": "hafsah-bint-sirin-jugend-handeln-20261120-q59",
+      "filename": "hafsah-bint-sirin-jugend-handeln-20261120-q59.md",
+      "postTitle": "📖 DIE JUGEND IST DIE ZEIT DES HANDELNS!",
+      "postPath": "content/posts/hafsah-bint-sirin-jugend-handeln-20261120-q59.md",
+      "status": "sent",
+      "pushApproved": true,
+      "pushApprovedAt": "2026-11-20T22:46:36.000Z",
+      "createdAt": "2026-11-20T22:46:36.000Z",
+      "publishedAt": "2026-11-20T22:46:36.000Z",
+      "sentAt": "2026-11-20T22:46:36.000Z",
+      "updatedAt": "2026-11-20T22:46:36.000Z",
+      "lastError": "",
+      "oneSignalNotificationId": "52a2e540-77b9-46da-9814-514fafbd57fa",
+      "idempotencyKey": "9a8e4474-a6b5-53ce-9b72-3b05f0597a36",
+      "liveCheck": {
+        "ok": true,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": true,
+          "postFilePublic": true,
+          "cloudflareDeployed": true,
+          "q59SourcePublic": true,
+          "nineLanguageManifestPublic": true
+        },
+        "diagnosis": "",
+        "site": "https://dar-al-tawhid.de",
+        "qSource": "https://dar-al-tawhid.de/q/59/",
+        "deploymentRun": 44831185621
+      },
+      "pushResult": {
+        "target": "OneSignal segment DAR_PUSH",
+        "notificationId": "52a2e540-77b9-46da-9814-514fafbd57fa",
+        "successful": 116,
+        "errored": 0,
+        "completedAt": "2026-11-20T22:46:36.000Z",
+        "targetUrl": "https://dar-al-tawhid.de/?post=hafsah-bint-sirin-jugend-handeln-20261120-q59#post/hafsah-bint-sirin-jugend-handeln-20261120-q59",
         "languages": [
           "de",
           "ar",
