@@ -2661,3 +2661,14 @@
 #app .quran-reader-shell{display:flex!important;flex-direction:column!important;height:100%!important;min-height:0!important;overflow:hidden!important}
 #app .quran-reader-head,#app .quran-reader-position,#app .quran-reader-footer{flex:0 0 auto!important}
 #app .quran-reader-content{flex:1 1 0%!important;min-height:0!important;max-height:100%!important;overflow-y:auto!important;overscroll-behavior:contain}
+
+
+@media(max-width:720px),(orientation:portrait){
+  #app .quran-reader-head{gap:12px!important;padding-bottom:10px!important}
+  #app .quran-reader-head h2{margin:2px 0!important}
+  #app .quran-reader-position{padding:8px 0!important}
+  #app .quran-reader-columns{gap:10px!important;padding:10px 0!important}
+  #app .reader-arabic{padding-bottom:10px!important}
+  #app #readerArabic{font-size:clamp(24px,5.6vw,36px)!important;line-height:1.65!important}
+  #app #readerGerman{font-size:clamp(17px,3.1vw,19px)!important;line-height:1.5!important}
+}
