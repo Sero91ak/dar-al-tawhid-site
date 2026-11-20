@@ -109,6 +109,7 @@ jobs:
           import os,re,time
           from selenium import webdriver
           from selenium.webdriver.common.by import By
+          from selenium.webdriver.common.keys import Keys
           from selenium.webdriver.chrome.options import Options
           from selenium.webdriver.support.ui import WebDriverWait
           from selenium.webdriver.support import expected_conditions as EC
@@ -308,14 +309,14 @@ jobs:
             if driver.find_element(By.ID,'homeAppearance').get_attribute('disabled') is None:errors.append('Appearance standard should not be switchable to a broken palette')
             if driver.execute_script("return getComputedStyle(document.getElementById('dailyDe')).whiteSpace")=='nowrap':errors.append('Daily translation still truncated to one line')
             long_dark_fixed=driver.execute_script("""
-              const article=document.querySelector('.daily-story'),ar=document.getElementById('dailyArabic'),de=document.getElementById('dailyDe'),src=document.getElementById('dailySource');
-              const old=[ar.textContent,de.textContent,src.textContent];
-              de.textContent=('Eine gut lesbare deutsche Übersetzung mit vollständigem Sinn. ').repeat(18);src.textContent=('Qurʾān · Beispielquelle · ').repeat(12);
-              const result={scrollHeight:article.scrollHeight,clientHeight:article.clientHeight,overflow:getComputedStyle(article).overflowY};
-              [ar.textContent,de.textContent,src.textContent]=old;return result;
+              const article=document.querySelector('.daily-story'),de=document.getElementById('dailyDe'),src=document.getElementById('dailySource');
+              const old=[de.textContent,src.textContent];
+              de.textContent=('Eine gut lesbare deutsche Übersetzung mit vollständigem Sinn. ').repeat(18);src.textContent=('Qurʾān · Beispielquelle · ').repeat(4);window.fitDailyText();
+              const result={scrollHeight:de.scrollHeight,clientHeight:de.clientHeight,overflow:getComputedStyle(article).overflowY,font:parseFloat(getComputedStyle(de).fontSize)};
+              [de.textContent,src.textContent]=old;window.fitDailyText();return result;
             """)
             print('LONG_DAILY_FIXED_THEME',long_dark_fixed,flush=True)
-            if long_dark_fixed['scrollHeight']<=long_dark_fixed['clientHeight'] or long_dark_fixed['overflow']!='auto':errors.append('Long daily content is clipped in the fixed Dār al-Layl theme')
+            if long_dark_fixed['scrollHeight']>long_dark_fixed['clientHeight']+2 or long_dark_fixed['overflow']=='auto' or long_dark_fixed['font']>=18:errors.append('Long daily content did not fit responsively without internal scrolling')
             driver.find_element(By.CSS_SELECTOR,'button[data-tab="anzeige"]').click()
             legacy_theme=driver.find_element(By.ID,'theme')
             if legacy_theme.get_attribute('disabled') is None or legacy_theme.get_attribute('value')!='night' or len(legacy_theme.find_elements(By.TAG_NAME,'option'))!=1:errors.append('Legacy display settings must keep only the Dār al-Layl standard')
@@ -416,7 +417,7 @@ jobs:
             if driver.execute_script("return document.activeElement.id")!='openTadabbur':errors.append('Closing Tadabbur did not restore focus to its opener')
             driver.find_element(By.ID,'openTadabbur').click()
             WebDriverWait(driver,10).until(lambda d:d.find_element(By.ID,'tadabburPanel').get_attribute('hidden') is None)
-            driver.find_element(By.ID,'tadabburPanel').send_keys('ESCAPE')
+            driver.find_element(By.ID,'closeTadabbur').send_keys(Keys.ESCAPE)
             WebDriverWait(driver,5).until(lambda d:d.find_element(By.ID,'tadabburPanel').get_attribute('hidden') is not None)
             driver.find_element(By.ID,'closeTadabbur').click()
             driver.find_element(By.ID,'openSettings').click()
