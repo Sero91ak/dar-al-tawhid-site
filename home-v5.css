@@ -2774,49 +2774,73 @@
 }
 
 
-/* Adhan overlay: keep the prayer artwork unobstructed; show only a light, edge-anchored caption. */
-#app #adhanVisual{background-color:#061b21!important}
+/* Adaptive Adhan overlay: scale its text, margins and action to the available viewport. */
+#app #adhanVisual{
+  --adhan-edge-x:clamp(12px,min(3.4vw,4vh),64px);
+  --adhan-edge-y:clamp(12px,min(3vw,4vh),56px);
+  --adhan-copy-size:clamp(15px,min(1.35vw,2.3vh),24px);
+  --adhan-action-size:clamp(13px,min(.95vw,1.8vh),18px);
+  --adhan-action-height:clamp(44px,min(6vh,3.6vw),62px);
+  --adhan-action-pad:clamp(12px,1.25vw,24px);
+  background-color:#061b21!important;
+}
 #app #adhanVisual::before{
   background:linear-gradient(180deg,rgba(1,10,15,.10) 0%,rgba(1,10,15,0) 42%,rgba(1,10,15,.04) 64%,rgba(1,10,15,.60) 100%)!important;
 }
 #app #adhanVisual .adhan-lower-third{
-  position:absolute!important;left:max(24px,env(safe-area-inset-left))!important;right:max(24px,env(safe-area-inset-right))!important;
-  bottom:max(24px,env(safe-area-inset-bottom))!important;width:auto!important;max-width:none!important;
-  padding:0!important;margin:0!important;display:flex!important;flex-direction:row!important;
-  align-items:flex-end!important;justify-content:space-between!important;gap:16px!important;
+  position:absolute!important;left:max(var(--adhan-edge-x),env(safe-area-inset-left))!important;
+  right:max(var(--adhan-edge-x),env(safe-area-inset-right))!important;
+  bottom:max(var(--adhan-edge-y),env(safe-area-inset-bottom))!important;width:auto!important;max-width:none!important;
+  min-width:0!important;padding:0!important;margin:0!important;display:flex!important;flex-flow:row nowrap!important;
+  align-items:flex-end!important;justify-content:space-between!important;gap:clamp(10px,1.6vw,28px)!important;
   background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
   backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
 }
 #app #adhanVisual .adhan-title{
-  margin:0!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;
-  font-size:clamp(24px,3.6vw,48px)!important;line-height:1.05!important;letter-spacing:.01em!important;
-  text-shadow:0 2px 14px rgba(0,0,0,.7)!important;
+  min-width:0!important;margin:0!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;
+  font-size:clamp(26px,min(5vw,5.4vh),76px)!important;line-height:1.04!important;letter-spacing:.01em!important;
+  text-shadow:0 2px 14px rgba(0,0,0,.7)!important;overflow-wrap:anywhere!important;
 }
 #app #adhanVisual.active[data-prayer-key]:not([data-prayer-key="test"]) .adhan-title{display:none!important}
 #app #adhanVisual .adhan-sub{
-  margin:0!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;
-  color:#f5eedc!important;font-size:clamp(15px,1.3vw,19px)!important;line-height:1.3!important;
-  letter-spacing:.015em!important;text-shadow:0 2px 10px rgba(0,0,0,.8)!important;
+  min-width:0!important;margin:0!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;
+  color:#f5eedc!important;font-size:var(--adhan-copy-size)!important;line-height:1.3!important;letter-spacing:.015em!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.8)!important;overflow-wrap:anywhere!important;
 }
 #app #adhanVisual .touchbutton{
-  flex:0 0 auto!important;min-height:44px!important;padding:0 18px!important;
+  flex:0 0 auto!important;min-width:0!important;width:auto!important;
+  min-height:var(--adhan-action-height)!important;height:auto!important;max-height:none!important;
+  padding:0 var(--adhan-action-pad)!important;
   background:rgba(3,18,23,.24)!important;border:1px solid rgba(234,210,159,.84)!important;
   border-radius:999px!important;box-shadow:none!important;backdrop-filter:blur(3px)!important;
-  color:#fff9e8!important;font-size:14px!important;
+  color:#fff9e8!important;font-size:var(--adhan-action-size)!important;line-height:1.2!important;
+  white-space:nowrap!important;
 }
 @media(orientation:portrait){
-  #app #adhanVisual .adhan-lower-third{
-    left:max(16px,env(safe-area-inset-left))!important;right:max(16px,env(safe-area-inset-right))!important;
-    bottom:max(18px,env(safe-area-inset-bottom))!important;align-items:flex-start!important;
-    flex-direction:column!important;gap:10px!important;
+  #app #adhanVisual{
+    --adhan-edge-x:clamp(16px,min(5vw,4vh),48px);
+    --adhan-edge-y:clamp(16px,min(4vh,5vw),52px);
+    --adhan-copy-size:clamp(15px,min(4.5vw,2.2vh),24px);
+    --adhan-action-size:clamp(13px,min(4vw,1.9vh),18px);
+    --adhan-action-height:clamp(44px,min(6vh,14vw),56px);
+    --adhan-action-pad:clamp(14px,4vw,24px);
   }
-  #app #adhanVisual .adhan-title{font-size:clamp(24px,7vw,42px)!important}
-  #app #adhanVisual .adhan-sub{font-size:clamp(15px,4vw,18px)!important}
+  #app #adhanVisual .adhan-lower-third{
+    align-items:flex-start!important;flex-flow:column nowrap!important;
+    justify-content:flex-end!important;gap:clamp(8px,1.4vh,16px)!important;
+  }
 }
-@media(max-height:440px) and (orientation:landscape){
-  #app #adhanVisual .adhan-lower-third{
-    left:max(16px,env(safe-area-inset-left))!important;right:max(16px,env(safe-area-inset-right))!important;
-    bottom:max(12px,env(safe-area-inset-bottom))!important;gap:12px!important;
+@media(max-width:700px) and (max-height:440px) and (orientation:landscape){
+  #app #adhanVisual{
+    --adhan-edge-x:clamp(12px,3vw,22px);
+    --adhan-edge-y:clamp(12px,3.4vh,18px);
+    --adhan-copy-size:clamp(15px,min(2.7vw,5vh),18px);
+    --adhan-action-size:clamp(13px,min(2.2vw,4.2vh),16px);
+    --adhan-action-height:44px;
+    --adhan-action-pad:clamp(12px,2.5vw,18px);
   }
-  #app #adhanVisual .touchbutton{min-height:40px!important;padding:0 14px!important;font-size:12px!important}
+  #app #adhanVisual .adhan-lower-third{gap:clamp(8px,2vw,14px)!important}
+}
+@media(min-width:1600px) and (min-height:900px){
+  #app #adhanVisual{--adhan-edge-x:clamp(48px,4vw,96px);--adhan-edge-y:clamp(36px,4vh,72px)}
 }
