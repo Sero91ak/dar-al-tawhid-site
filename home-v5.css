@@ -2655,3 +2655,9 @@
   #app .quran-reader-footer{gap:7px 8px;padding-top:8px}
   #app .reader-playback{gap:6px}
 }
+
+
+/* Keep the reader's playback controls inside the viewport while verses scroll independently. */
+#app .quran-reader-shell{display:flex!important;flex-direction:column!important;height:100%!important;min-height:0!important;overflow:hidden!important}
+#app .quran-reader-head,#app .quran-reader-position,#app .quran-reader-footer{flex:0 0 auto!important}
+#app .quran-reader-content{flex:1 1 0%!important;min-height:0!important;max-height:100%!important;overflow-y:auto!important;overscroll-behavior:contain}
