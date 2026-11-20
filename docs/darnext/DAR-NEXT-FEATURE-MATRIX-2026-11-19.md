@@ -133,3 +133,12 @@ Der eigenständige Arbeitsnachweis in PR #1824 wurde zugunsten dieses bestehende
 - Commit `7bbda9633e84a981885fde2e8b1772c8877fbfcd` setzt ausschließlich die sechs Debug-/Release-Einstellungen dieser drei DARNext-Targets auf iOS 17.0. Andere App-, Widget-, Watch-, TV- und Live-Activity-Targets wurden nicht angepasst.
 - Die aktualisierte PBX-Datei besteht `plutil -lint` über stdin. Xcode-Build, vollständiger Typecheck und iOS-17-Laufzeittest sind noch offen; der Host ist nahezu voll und enthält keine iOS-17-Simulatorruntime.
 - Lokales `xcodebuild -version` meldet Xcode 27.2 / Build 27B52. `swift --version` konnte wegen ENOSPC nicht abgeschlossen werden. SDK-/Compilerwerte aus älteren Radar-Einträgen sind daher nicht als heutige Live-Abfrage zu lesen.
+
+
+## Aktueller Simulator- und Suchstand, 20.11.2026
+
+- Der iPhone 18 Pro Max / iOS 27.2 ist im CoreSimulator gebootet. DARNext Bundle-ID `com.daraltawhid.darnext.DARNext` ist installiert und wurde erneut gestartet (PID 71222; Bundle-Version 1). Diese Installation ist keinem aktuellen GitHub-Commit zugeordnet.
+- Xcode-Auswahl ist `/Applications/Xcode.app/Contents/Developer`, aber das installierte Xcode.app enthält weder `Contents/Developer/Applications/Simulator.app` noch einen startbaren Simulator unter `Contents/Applications`. Die GUI kann daher nicht gezeigt werden.
+- Der freie Speicher beträgt rund 100 MiB. Ein aktueller Simulator-Screenshot scheiterte mit `ENOSPC`; der frühere Screenshot belegt nicht den aktuellen Frame. Es wurden keine App-/Simulator-Daten oder Caches gelöscht.
+- Draft-PR #1828 öffnet Suchtreffer für Beiträge, Duʿāʾ und Bibliothek anhand der Inhalts-ID in der jeweiligen vorhandenen Detailansicht; Qurʾān-Routen bleiben bestehen. Hinzu kommen Suchfokus, Accessibility-ID, Dashboard-Sheet-Schließen und ein UI-Test für Post-Detail sowie Rückkehr zur Such-/Dashboardposition. Korrigierte ID-Interpolation ist im Head `5adf98052f22c80e437e711bfefa04dfcffb2349` enthalten.
+- Parserprüfung 6/6, aber Xcode-Build, XCTest und Geräteverhalten für PR #1828 sind nicht belegt. PR bleibt Draft. Die Installation auf dem gebooteten Simulator wurde nicht aus diesem Head erstellt.
