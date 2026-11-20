@@ -112,3 +112,11 @@ jobs:
           print("LIVE VOICE DELIVERY PASS: Academy release marker "+expected_release+", direct iPhone playback JS and 4 SHA-matched Serhat V4 MP4s.")
           print("PROTECTED DIAGNOSTIC: /kids/akademie/stimmen-test-v14.html is currently HTTP 401. Do not offer it as browser-accessible; do not bypass the Kids auth gate.")
           PY
+
+      # Original Serhat V4 Ṣidq lesson: assert the public Cloudflare manifest
+      # and all 58 real original audio files match the committed media SHA-256.
+      # This is read-only, uses no generation credits, and never relaxes
+      # child-preview access controls. It cannot simulate iPhone playback.
+      - name: Probe complete Ṣidq 58/58 original V4 Cloudflare audio hashes
+        if: github.event_name != 'pull_request'
+        run: python3 kids/tools/verify-live-academy-sidq-v1.py
