@@ -1,0 +1,321 @@
+{
+  "schemaVersion": 1,
+  "id": "TAWHID_KIDS_SIDQ_14_MISSING_REAL_V4_AUDIO_V1",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "flowId": "zrB4zGdz9OTndLryQtIB",
+  "currentSubject": "akhlaq",
+  "currentLesson": "sidq",
+  "sourceVoice": "Serhat Abu Malik",
+  "requestedAgeBands": [
+    "4-5",
+    "6-8",
+    "9-10"
+  ],
+  "requiredPublicTextCount": 14,
+  "productionRules": {
+    "noRegenerationOfExistingMedia": true,
+    "licensedOwnerVoiceOnly": true,
+    "germanSegmentsNeverIncludeArabicScriptOrHonorificLigatures": true,
+    "nativeArabicSegmentsFuṣḥāWithVowels": true,
+    "useExistingSalawatOriginal": "GBmSBMXAo9AwPA58e87w",
+    "unmodifiedAuthenticQuranRecitationOnly": true,
+    "retainExactVisibleSourceText": true,
+    "doNotSpeakEditorialSourceFootnotes": true,
+    "doNotRepeatAnswerNumbers": true,
+    "noSyntheticTtsFallback": true,
+    "publicApprovalRequiresDownloadedActualMediaBytesSha256FFprobeAndLiveHttps": true,
+    "ownerAuthorizedNoPrelistening": true,
+    "pronunciationDictionaryCreativeConnectorCannotAttach": true
+  },
+  "taskStatus": "waiting-for-real-generation-and-binary-import",
+  "completionClaimed": false,
+  "segments": {
+    "ar-01": {
+      "language": "ar",
+      "text": "صِدْق",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "de-02": {
+      "language": "de",
+      "text": "bedeutet: Die Wahrheit sagen.",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "de-03": {
+      "language": "de",
+      "text": "bedeutet Ehrlichkeit und Wahrhaftigkeit beim Sprechen und Handeln.",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "de-04": {
+      "language": "de",
+      "text": "heißt Wahrhaftigkeit. Sie umfasst ehrliche Worte und ein Verhalten, das zu diesen Worten passt.",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "ar-05": {
+      "language": "ar",
+      "text": "سُنَّة",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "de-06": {
+      "language": "de",
+      "text": "bedeutet: Was der Prophet",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "ar-07": {
+      "language": "ar",
+      "text": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+      "sourcePriorGenerationKey": "existing-sidq-original-salawat",
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "de-08": {
+      "language": "de",
+      "text": "uns gelehrt hat.",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "de-09": {
+      "language": "de",
+      "text": "nennen wir die überlieferte Lehre und das Vorbild des Propheten",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "ar-10": {
+      "language": "ar",
+      "text": "مُحَمَّد",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "de-11": {
+      "language": "de",
+      "text": "umfasst die authentisch überlieferten Aussagen, Handlungen und Bestätigungen des Propheten",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "ar-12": {
+      "language": "ar",
+      "text": "قُرْآن",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "de-13": {
+      "language": "de",
+      "text": "bedeutet: Allahs Wort.",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "de-14": {
+      "language": "de",
+      "text": "bedeutet: Der",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "de-15": {
+      "language": "de",
+      "text": "ist Allahs Offenbarung, die wir auf Arabisch hören und lesen.",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "de-16": {
+      "language": "de",
+      "text": "ist die von Allah offenbarte Schrift. Der arabische Vers und seine deutsche Übersetzung sind nicht dasselbe.",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "de-17": {
+      "language": "de",
+      "text": "Ich kann mich entschuldigen und helfen, den Fehler wiedergutzumachen.",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "de-18": {
+      "language": "de",
+      "text": "Warum gehört Wahrhaftigkeit zu einem guten Charakter?",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "de-19": {
+      "language": "de",
+      "text": "Wahrhaftigkeit führt zu rechtschaffenem Verhalten. Sie bewahrt das Vertrauen und hilft uns, Verantwortung zu übernehmen.",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "de-20": {
+      "language": "de",
+      "text": "Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutzumachen.",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    },
+    "de-21": {
+      "language": "de",
+      "text": "Ein Versehen und eine absichtliche Lüge sind dasselbe.",
+      "sourcePriorGenerationKey": null,
+      "plannedProductionStatus": "not-generated-or-imported"
+    }
+  },
+  "tasks": [
+    {
+      "kind": "glossary",
+      "sourceLessonId": "vocabulary-sidq",
+      "age": "4-5",
+      "visibleText": "Ṣidq bedeutet: Die Wahrheit sagen.",
+      "segments": [
+        "ar-01",
+        "de-02"
+      ],
+      "sourceVoicePlan": "kids/data/academy-vocabulary-voice-plan-v24.json"
+    },
+    {
+      "kind": "glossary",
+      "sourceLessonId": "vocabulary-sidq",
+      "age": "6-8",
+      "visibleText": "Ṣidq bedeutet Ehrlichkeit und Wahrhaftigkeit beim Sprechen und Handeln.",
+      "segments": [
+        "ar-01",
+        "de-03"
+      ],
+      "sourceVoicePlan": "kids/data/academy-vocabulary-voice-plan-v24.json"
+    },
+    {
+      "kind": "glossary",
+      "sourceLessonId": "vocabulary-sidq",
+      "age": "9-10",
+      "visibleText": "Ṣidq heißt Wahrhaftigkeit. Sie umfasst ehrliche Worte und ein Verhalten, das zu diesen Worten passt.",
+      "segments": [
+        "ar-01",
+        "de-04"
+      ],
+      "sourceVoicePlan": "kids/data/academy-vocabulary-voice-plan-v24.json"
+    },
+    {
+      "kind": "glossary",
+      "sourceLessonId": "vocabulary-sunnah",
+      "age": "4-5",
+      "visibleText": "Sunnah bedeutet: Was der Prophet ﷺ uns gelehrt hat.",
+      "segments": [
+        "ar-05",
+        "de-06",
+        "ar-07",
+        "de-08"
+      ],
+      "sourceVoicePlan": "kids/data/academy-vocabulary-voice-plan-v24.json"
+    },
+    {
+      "kind": "glossary",
+      "sourceLessonId": "vocabulary-sunnah",
+      "age": "6-8",
+      "visibleText": "Sunnah nennen wir die überlieferte Lehre und das Vorbild des Propheten Muḥammad ﷺ.",
+      "segments": [
+        "ar-05",
+        "de-09",
+        "ar-10",
+        "ar-07"
+      ],
+      "sourceVoicePlan": "kids/data/academy-vocabulary-voice-plan-v24.json"
+    },
+    {
+      "kind": "glossary",
+      "sourceLessonId": "vocabulary-sunnah",
+      "age": "9-10",
+      "visibleText": "Sunnah umfasst die authentisch überlieferten Aussagen, Handlungen und Bestätigungen des Propheten ﷺ.",
+      "segments": [
+        "ar-05",
+        "de-11",
+        "ar-07"
+      ],
+      "sourceVoicePlan": "kids/data/academy-vocabulary-voice-plan-v24.json"
+    },
+    {
+      "kind": "glossary",
+      "sourceLessonId": "vocabulary-quran",
+      "age": "4-5",
+      "visibleText": "Qurʾān bedeutet: Allahs Wort.",
+      "segments": [
+        "ar-12",
+        "de-13"
+      ],
+      "sourceVoicePlan": "kids/data/academy-vocabulary-voice-plan-v24.json"
+    },
+    {
+      "kind": "glossary",
+      "sourceLessonId": "vocabulary-quran",
+      "age": "6-8",
+      "visibleText": "Qurʾān bedeutet: Der Qurʾān ist Allahs Offenbarung, die wir auf Arabisch hören und lesen.",
+      "segments": [
+        "ar-12",
+        "de-14",
+        "ar-12",
+        "de-15"
+      ],
+      "sourceVoicePlan": "kids/data/academy-vocabulary-voice-plan-v24.json"
+    },
+    {
+      "kind": "glossary",
+      "sourceLessonId": "vocabulary-quran",
+      "age": "9-10",
+      "visibleText": "Qurʾān bedeutet: Der Qurʾān ist die von Allah offenbarte Schrift. Der arabische Vers und seine deutsche Übersetzung sind nicht dasselbe.",
+      "segments": [
+        "ar-12",
+        "de-14",
+        "ar-12",
+        "de-16"
+      ],
+      "sourceVoicePlan": "kids/data/academy-vocabulary-voice-plan-v24.json"
+    },
+    {
+      "kind": "answer",
+      "sourceLessonId": "sidq",
+      "age": "6-8",
+      "visibleText": "Antwort 1: Ich kann mich entschuldigen und helfen, den Fehler wiedergutzumachen.",
+      "segments": [
+        "de-17"
+      ],
+      "sourceVoicePlan": "kids/akademie/answer-choice-only-v1.js"
+    },
+    {
+      "kind": "question",
+      "sourceLessonId": "sidq",
+      "age": "9-10",
+      "visibleText": "Warum gehört Wahrhaftigkeit zu einem guten Charakter?",
+      "segments": [
+        "de-18"
+      ],
+      "sourceVoicePlan": "kids/akademie/answer-choice-only-v1.js"
+    },
+    {
+      "kind": "answer",
+      "sourceLessonId": "sidq",
+      "age": "9-10",
+      "visibleText": "Antwort 1: Wahrhaftigkeit führt zu rechtschaffenem Verhalten. Sie bewahrt das Vertrauen und hilft uns, Verantwortung zu übernehmen.",
+      "segments": [
+        "de-19"
+      ],
+      "sourceVoicePlan": "kids/akademie/answer-choice-only-v1.js"
+    },
+    {
+      "kind": "answer",
+      "sourceLessonId": "sidq",
+      "age": "9-10",
+      "visibleText": "Antwort 1: Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutzumachen.",
+      "segments": [
+        "de-20"
+      ],
+      "sourceVoicePlan": "kids/akademie/answer-choice-only-v1.js"
+    },
+    {
+      "kind": "answer",
+      "sourceLessonId": "sidq",
+      "age": "9-10",
+      "visibleText": "Antwort 2: Ein Versehen und eine absichtliche Lüge sind dasselbe.",
+      "segments": [
+        "de-21"
+      ],
+      "sourceVoicePlan": "kids/akademie/answer-choice-only-v1.js"
+    }
+  ]
+}
