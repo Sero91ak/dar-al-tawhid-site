@@ -2,6 +2,8 @@ import SwiftUI
 
 struct SearchView: View {
     let repository: LocalContentRepository
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Namespace private var searchTransitionNamespace
     @State private var query = ""
     @State private var isSearchFieldPresented = true
     @State private var selectedKind: SearchDocumentKind?
@@ -36,7 +38,7 @@ struct SearchView: View {
                 Section("\(filteredResults.count) Treffer") {
                     ForEach(filteredResults) { result in
                         NavigationLink {
-                            SearchDestinationView(repository: repository, result: result)
+                            SearchDestinationView(repository: repository, result: result, transitionNamespace: searchTransitionNamespace, isTransitionEnabled: DARMotion.usesZoomTransition(reduceMotion: reduceMotion))
                         } label: {
                             VStack(alignment: .leading, spacing: 4) {
                                 Label(result.title, systemImage: icon(for: result.kind))
@@ -48,6 +50,11 @@ struct SearchView: View {
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                             }
+                            .darMatchedTransitionSource(
+                                id: result.id,
+                                in: searchTransitionNamespace,
+                                isEnabled: DARMotion.usesZoomTransition(reduceMotion: reduceMotion)
+                            )
                         }
                         .accessibilityIdentifier("search-result-\(result.id)")
                     }
@@ -112,6 +119,8 @@ struct SearchView: View {
 private struct SearchDestinationView: View {
     let repository: LocalContentRepository
     let result: SearchDocument
+    let transitionNamespace: Namespace.ID
+    let isTransitionEnabled: Bool
 
     @State private var didLoad = false
     @State private var errorMessage: String?
@@ -177,6 +186,11 @@ private struct SearchDestinationView: View {
         .task(id: result.id) {
             await loadDestination()
         }
+        .darZoomNavigationTransition(
+            sourceID: result.id,
+            in: transitionNamespace,
+            isEnabled: isTransitionEnabled
+        )
     }
 
     @MainActor
