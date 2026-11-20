@@ -26,7 +26,7 @@
     "sourceAndMediaShaVerificationBeforePublicRelease": true,
     "noClaimOfLiveUntilCloudflareProbe": true
   },
-  "status": "9-provider-gaps-remain-5-generations-not-imported",
+  "status": "all-14-have-original-provider-recordings-no-binary-import-or-audio-assembly",
   "entries": [
     {
       "text": "Ṣidq bedeutet: Die Wahrheit sagen.",
@@ -37,8 +37,14 @@
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "requiresNativeFushaTerm": true,
-      "productionStatus": "missing-exact-media",
-      "publicPlaybackApproved": false
+      "productionStatus": "provider-generated-assembly-and-binary-import-pending",
+      "publicPlaybackApproved": false,
+      "segmentIds": [
+        "ar-01",
+        "de-02"
+      ],
+      "providerGenerationStatus": "segments-completed-reuse-salawat",
+      "mediaAssemblyStatus": "not-assembled"
     },
     {
       "text": "Ṣidq bedeutet Ehrlichkeit und Wahrhaftigkeit beim Sprechen und Handeln.",
@@ -49,8 +55,14 @@
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "requiresNativeFushaTerm": true,
-      "productionStatus": "missing-exact-media",
-      "publicPlaybackApproved": false
+      "productionStatus": "provider-generated-assembly-and-binary-import-pending",
+      "publicPlaybackApproved": false,
+      "segmentIds": [
+        "ar-01",
+        "de-03"
+      ],
+      "providerGenerationStatus": "segments-completed-reuse-salawat",
+      "mediaAssemblyStatus": "not-assembled"
     },
     {
       "text": "Ṣidq heißt Wahrhaftigkeit. Sie umfasst ehrliche Worte und ein Verhalten, das zu diesen Worten passt.",
@@ -61,8 +73,14 @@
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "requiresNativeFushaTerm": true,
-      "productionStatus": "missing-exact-media",
-      "publicPlaybackApproved": false
+      "productionStatus": "provider-generated-assembly-and-binary-import-pending",
+      "publicPlaybackApproved": false,
+      "segmentIds": [
+        "ar-01",
+        "de-04"
+      ],
+      "providerGenerationStatus": "segments-completed-reuse-salawat",
+      "mediaAssemblyStatus": "not-assembled"
     },
     {
       "text": "Sunnah bedeutet: Was der Prophet ﷺ uns gelehrt hat.",
@@ -73,8 +91,16 @@
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "requiresNativeFushaTerm": true,
-      "productionStatus": "missing-exact-media",
-      "publicPlaybackApproved": false
+      "productionStatus": "provider-generated-assembly-and-binary-import-pending",
+      "publicPlaybackApproved": false,
+      "segmentIds": [
+        "ar-05",
+        "de-06",
+        "ar-07",
+        "de-08"
+      ],
+      "providerGenerationStatus": "segments-completed-reuse-salawat",
+      "mediaAssemblyStatus": "not-assembled"
     },
     {
       "text": "Sunnah nennen wir die überlieferte Lehre und das Vorbild des Propheten Muḥammad ﷺ.",
@@ -85,8 +111,16 @@
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "requiresNativeFushaTerm": true,
-      "productionStatus": "missing-exact-media",
-      "publicPlaybackApproved": false
+      "productionStatus": "provider-generated-assembly-and-binary-import-pending",
+      "publicPlaybackApproved": false,
+      "segmentIds": [
+        "ar-05",
+        "de-09",
+        "ar-10",
+        "ar-07"
+      ],
+      "providerGenerationStatus": "segments-completed-reuse-salawat",
+      "mediaAssemblyStatus": "not-assembled"
     },
     {
       "text": "Sunnah umfasst die authentisch überlieferten Aussagen, Handlungen und Bestätigungen des Propheten ﷺ.",
@@ -97,8 +131,15 @@
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "requiresNativeFushaTerm": true,
-      "productionStatus": "missing-exact-media",
-      "publicPlaybackApproved": false
+      "productionStatus": "provider-generated-assembly-and-binary-import-pending",
+      "publicPlaybackApproved": false,
+      "segmentIds": [
+        "ar-05",
+        "de-11",
+        "ar-07"
+      ],
+      "providerGenerationStatus": "segments-completed-reuse-salawat",
+      "mediaAssemblyStatus": "not-assembled"
     },
     {
       "text": "Qurʾān bedeutet: Allahs Wort.",
@@ -109,8 +150,14 @@
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "requiresNativeFushaTerm": true,
-      "productionStatus": "missing-exact-media",
-      "publicPlaybackApproved": false
+      "productionStatus": "provider-generated-assembly-and-binary-import-pending",
+      "publicPlaybackApproved": false,
+      "segmentIds": [
+        "ar-12",
+        "de-13"
+      ],
+      "providerGenerationStatus": "segments-completed-reuse-salawat",
+      "mediaAssemblyStatus": "not-assembled"
     },
     {
       "text": "Qurʾān bedeutet: Der Qurʾān ist Allahs Offenbarung, die wir auf Arabisch hören und lesen.",
@@ -121,8 +168,16 @@
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "requiresNativeFushaTerm": true,
-      "productionStatus": "missing-exact-media",
-      "publicPlaybackApproved": false
+      "productionStatus": "provider-generated-assembly-and-binary-import-pending",
+      "publicPlaybackApproved": false,
+      "segmentIds": [
+        "ar-12",
+        "de-14",
+        "ar-12",
+        "de-15"
+      ],
+      "providerGenerationStatus": "segments-completed-reuse-salawat",
+      "mediaAssemblyStatus": "not-assembled"
     },
     {
       "text": "Qurʾān bedeutet: Der Qurʾān ist die von Allah offenbarte Schrift. Der arabische Vers und seine deutsche Übersetzung sind nicht dasselbe.",
@@ -133,8 +188,16 @@
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "requiresNativeFushaTerm": true,
-      "productionStatus": "missing-exact-media",
-      "publicPlaybackApproved": false
+      "productionStatus": "provider-generated-assembly-and-binary-import-pending",
+      "publicPlaybackApproved": false,
+      "segmentIds": [
+        "ar-12",
+        "de-14",
+        "ar-12",
+        "de-16"
+      ],
+      "providerGenerationStatus": "segments-completed-reuse-salawat",
+      "mediaAssemblyStatus": "not-assembled"
     },
     {
       "text": "Warum gehört Wahrhaftigkeit zu einem guten Charakter?",
@@ -216,5 +279,9 @@
       "providerGenerationStatus": "completed",
       "binaryImportStatus": "pending"
     }
-  ]
+  ],
+  "providerGeneratedVisibleTexts": 14,
+  "glossaryAssembliesPending": 9,
+  "mediaFilesImportedForNewGaps": 0,
+  "publicPlaybackApprovedCountForNewGaps": 0
 }
