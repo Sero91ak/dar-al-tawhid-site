@@ -1,3 +1,4 @@
+import CoreLocation
 import Testing
 @testable import DARNext
 
@@ -54,6 +55,14 @@ struct DARNextTests {
     }
 
     @Test
+    func locationUpdatesRequireAnAuthorizedStatus() {
+        #expect(DARNextPermissionCoordinator.shouldStartLocationUpdates(for: .authorizedWhenInUse))
+        #expect(DARNextPermissionCoordinator.shouldStartLocationUpdates(for: .authorizedAlways))
+        #expect(!DARNextPermissionCoordinator.shouldStartLocationUpdates(for: .denied))
+        #expect(!DARNextPermissionCoordinator.shouldStartLocationUpdates(for: .restricted))
+    }
+
+    @Test
     func quizQuestionsAreApprovedAdultContent() async throws {
         let questions = try await LocalContentRepository().quizQuestions()
 
@@ -61,4 +70,5 @@ struct DARNextTests {
         #expect(questions.allSatisfy { $0.isApprovedAdultContent })
         #expect(questions.allSatisfy { $0.correctIndex >= 0 && $0.correctIndex < $0.answers.count })
     }
+
 }
