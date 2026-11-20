@@ -60,3 +60,13 @@ The isolated Worker deployment completed in run 44395473800. A direct request to
 ## Completion boundary
 
 This branch delivers the web HOME preview, not a finished native release. Secure phone-to-device pairing, guaranteed background Aḏān and dimming, Android APK packaging, native iOS/tvOS integration, physical-device checks, and commercial asset-rights review still need their own implementation and verification. Browser autoplay or CSS dimming does not prove native background behavior.
+
+
+## Aḏān overlay and recording repair — 20 Nov 2026
+
+- Removed the large opaque lower-third card. The time and stop control now sit on the lower edge over a restrained gradient; portrait and landscape use separate safe-area spacing. The selected image keeps its natural aspect ratio and the blurred duplicate fills unused canvas space.
+- Scheduled playback carries an explicit prayer key through the UI. Faǧr can only resolve to a catalog entry marked `isFajr`; the other four prayers can only resolve to regular entries. A stale saved index is repaired to a matching recording instead of accidentally replaying a Faǧr file for ʿIšāʾ.
+- The accessibility label now includes prayer, scheduled time and recording name. Five native prayer artwork mappings remain covered by the existing browser QA.
+- [Browser QA run 44767456579](https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/44767456579) and [isolated preview deploy 44767456721](https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/44767456721) passed.
+- Live preview reference on 20 Nov 2026, Meckenheim: Maġrib 16:40 and ʿIšāʾ 17:57; at 16:53, ʿIšāʾ was the upcoming prayer.
+
