@@ -54,6 +54,16 @@ struct DARNextTests {
     }
 
     @Test
+    func deepLinksRouteQuizAndPostsToTheirPrimaryTabs() {
+        #expect(DARNextDeepLinkDestination.from(URL(string: "darnext://quiz")!) == .quiz)
+        #expect(DARNextDeepLinkDestination.from(URL(string: "darnext://posts")!) == .posts)
+        #expect(DARNextDeepLinkDestination.from(URL(string: "darnext://feed/latest")!) == .posts)
+        #expect(DARNextDeepLinkDestination.from(URL(string: "https://daraltawhid.de/#recent")!) == .posts)
+        #expect(DARNextDeepLinkDestination.from(URL(string: "darnext://quran")!) == .quran)
+        #expect(DARNextDeepLinkDestination.from(URL(string: "darnext://qibla")!) == .more)
+    }
+
+    @Test
     func quizQuestionsAreApprovedAdultContent() async throws {
         let questions = try await LocalContentRepository().quizQuestions()
 

@@ -32,6 +32,10 @@ struct RootShell: View {
         .tint(appearanceMode.theme.antiqueGold)
         .onOpenURL { url in
             switch DARNextDeepLinkDestination.from(url) {
+            case .quiz:
+                selectedTab = .quiz
+            case .posts:
+                selectedTab = .posts
             case .quran:
                 selectedTab = .quran
             case .more:
