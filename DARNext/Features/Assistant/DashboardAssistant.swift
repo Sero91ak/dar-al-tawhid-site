@@ -72,6 +72,8 @@ final class DashboardAssistantModel {
 struct DashboardAssistantView: View {
     private let repository: LocalContentRepository
     @State private var model: DashboardAssistantModel
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @FocusState private var isPromptFocused
 
     init(repository: LocalContentRepository) {
         self.repository = repository
@@ -80,68 +82,118 @@ struct DashboardAssistantView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: 14) {
-                    Text("Lokaler Recherche-Prototyp: zeigt passende DAR-NEXT-Suchtreffer, erstellt aber keine eigenständige KI-Antwort. Prüfe Originaltext und Fundstelle.")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                    ForEach(model.messages) { message in
-                        VStack(alignment: message.isUser ? .trailing : .leading, spacing: 8) {
-                            Text(message.text)
-                                .padding(12)
-                                .background(message.isUser ? Color.accentColor.opacity(0.18) : Color.secondary.opacity(0.12), in: RoundedRectangle(cornerRadius: 16))
-                            ForEach(message.sources) { source in
-                                NavigationLink {
-                                    AssistantSourceDestinationView(repository: repository, source: source)
-                                } label: {
-                                    HStack(alignment: .top, spacing: 10) {
-                                        Image(systemName: "doc.text.magnifyingglass")
-                                            .foregroundStyle(.tint)
-                                        VStack(alignment: .leading, spacing: 4) {
-                                            Text("\(source.kind.rawValue): \(source.title)")
-                                                .font(.subheadline.weight(.semibold))
-                                                .multilineTextAlignment(.leading)
-                                            Text(source.sourceID)
-                                                .font(.caption)
+            ScrollViewReader { proxy in
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 14) {
+                        Text("Lokaler Recherche-Prototyp: zeigt passende DAR-NEXT-Suchtreffer, erstellt aber keine eigenständige KI-Antwort. Prüfe Originaltext und Fundstelle.")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+
+                        ForEach(model.messages) { message in
+                            VStack(alignment: message.isUser ? .trailing : .leading, spacing: 8) {
+                                Text(message.text)
+                                    .padding(12)
+                                    .frame(maxWidth: .infinity, alignment: message.isUser ? .trailing : .leading)
+                                    .background(message.isUser ? Color.accentColor.opacity(0.18) : Color.secondary.opacity(0.12), in: RoundedRectangle(cornerRadius: 16))
+
+                                ForEach(message.sources) { source in
+                                    NavigationLink {
+                                        AssistantSourceDestinationView(repository: repository, source: source)
+                                    } label: {
+                                        HStack(alignment: .top, spacing: 10) {
+                                            Image(systemName: "doc.text.magnifyingglass")
+                                                .foregroundStyle(.tint)
+                                            VStack(alignment: .leading, spacing: 4) {
+                                                Text("\(source.kind.rawValue): \(source.title)")
+                                                    .font(.subheadline.weight(.semibold))
+                                                    .multilineTextAlignment(.leading)
+                                                Text(source.sourceID)
+                                                    .font(.caption)
+                                                    .foregroundStyle(.secondary)
+                                            }
+                                            Spacer(minLength: 0)
+                                            Image(systemName: "arrow.up.right")
+                                                .font(.caption.weight(.semibold))
                                                 .foregroundStyle(.secondary)
                                         }
-                                        Spacer(minLength: 0)
-                                        Image(systemName: "arrow.up.right")
-                                            .font(.caption.weight(.semibold))
-                                            .foregroundStyle(.secondary)
+                                        .padding(12)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                                        .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                                     }
-                                    .padding(12)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-                                    .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                                    .buttonStyle(.plain)
+                                    .accessibilityIdentifier("assistant-source-\(source.id)")
                                 }
-                                .buttonStyle(.plain)
-                                .accessibilityIdentifier("assistant-source-\(source.id)")
                             }
+                            .frame(maxWidth: .infinity, alignment: message.isUser ? .trailing : .leading)
+                            .id(message.id)
                         }
-                        .frame(maxWidth: .infinity, alignment: message.isUser ? .trailing : .leading)
+
+                        if model.isLoading {
+                            ProgressView("Quellen werden gesucht …")
+                                .font(.footnote)
+                                .accessibilityIdentifier("assistant-search-progress")
+                        }
+
+                        if let errorMessage = model.errorMessage {
+                            Label(errorMessage, systemImage: "exclamationmark.triangle")
+                                .font(.footnote)
+                                .foregroundStyle(.orange)
+                        }
+
+                        Color.clear
+                            .frame(height: 1)
+                            .id("assistant-latest-message")
                     }
-                    if let errorMessage = model.errorMessage {
-                        Label(errorMessage, systemImage: "exclamationmark.triangle")
-                            .font(.footnote)
-                            .foregroundStyle(.orange)
-                    }
+                    .padding()
                 }
-                .padding()
+                .onChange(of: model.messages.count) { _, _ in
+                    scrollToLatest(using: proxy)
+                }
+                .onChange(of: model.isLoading) { _, _ in
+                    scrollToLatest(using: proxy)
+                }
             }
-            HStack {
+
+            HStack(alignment: .bottom, spacing: 12) {
                 TextField("Frage zu geprüften Inhalten", text: $model.prompt, axis: .vertical)
                     .textFieldStyle(.roundedBorder)
-                Button { Task { await model.send() } } label: {
+                    .focused($isPromptFocused)
+                    .submitLabel(.send)
+                    .onSubmit(sendPrompt)
+                    .accessibilityIdentifier("assistant-prompt")
+
+                Button(action: sendPrompt) {
                     Image(systemName: model.isLoading ? "hourglass" : "arrow.up.circle.fill")
+                        .font(.title2)
                 }
+                .accessibilityLabel("Frage senden")
+                .accessibilityIdentifier("assistant-send")
                 .disabled(model.prompt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || model.isLoading)
             }
             .padding()
         }
         .navigationTitle("Wissensassistent")
     }
-}
+
+    private func sendPrompt() {
+        isPromptFocused = true
+        Task {
+            await model.send()
+            isPromptFocused = true
+        }
+    }
+
+    private func scrollToLatest(using proxy: ScrollViewProxy) {
+        guard !model.messages.isEmpty || model.isLoading else { return }
+        if reduceMotion {
+            proxy.scrollTo("assistant-latest-message", anchor: .bottom)
+        } else {
+            withAnimation(.easeOut(duration: 0.2)) {
+                proxy.scrollTo("assistant-latest-message", anchor: .bottom)
+            }
+        }
+    }
 
 
 private struct AssistantSourceDestinationView: View {
