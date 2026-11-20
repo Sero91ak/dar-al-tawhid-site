@@ -132,4 +132,16 @@ require("node:child_process").execFileSync("python3",[
 require("node:child_process").execFileSync("node",[
  "kids/tools/verify-academy-audio-manifest-hashes-v1.cjs"
 ],{cwd:require("node:path").resolve(__dirname,".."),stdio:"inherit"});
+// Full owner-authorized 66-lesson BULK production queue. This is a
+// deterministic no-credit dry run; next 142 need full verified lesson texts.
+const bulk=JSON.parse(require("node:child_process").execFileSync("python3",[
+ "kids/tools/academy-bulk-66-production-v1.py","--status"
+],{cwd:require("node:path").resolve(__dirname,".."),encoding:"utf8"}));
+assert.equal(bulk.scope.sourceBackedLessons,66);
+assert.equal(bulk.scope.separateAgeVersions,3);
+assert.equal(bulk.scope.futureEditorialLessonsNotProductionReady,142);
+assert.equal(bulk.totals.realVerifiedM4aAlreadyInRepo,58);
+assert.ok(bulk.totals.exactUtterancesMissingRealMedia>=1700);
+assert.equal(bulk.safety.noTtsCreditsCharged,true);
+assert.equal(bulk.safety.noUnreviewedEditorialOutlinesInChildrenApp,true);
 console.log("ACADEMY VOICE V18 PASS: exact Serhat-only matching, three valid staged clips and one quarantined old greeting, zero synthetic fallback, no credits.");
