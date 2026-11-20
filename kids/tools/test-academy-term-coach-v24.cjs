@@ -90,7 +90,7 @@ assert.equal(plays[0].opts.source,"kids-academy-term-v24");
 const page=read("kids/akademie/index.html");
 assert.ok(page.includes('id="academyTermCoach"'));
 assert.ok(page.includes('id="academyTermCoachSources"'));
-assert.ok(page.includes('term-coach-v24.js?v=20261011-01'));
+assert.ok(page.includes('term-coach-v24.js?v=academy-sidq-sources-v1-20261120'));
 assert.ok(page.includes('function refreshAcademyVocabulary()'));
 assert.ok(page.includes('if(n===1||n===2)refreshAcademyVocabulary()'));
 assert.ok(!read(helperFile).includes("speechSynthesis")&&!read(helperFile).includes("ElevenLabs")&&!read(helperFile).includes("fetch("),
@@ -103,4 +103,9 @@ assert.equal(counts.vocabularyVoicePhrases,99);
 assert.deepEqual(counts.uncoveredLessons,[]);
 assert.ok(counts.uniquePhrases>=730);
 assert.equal(counts.totals.approved,58,"The 58 real Ṣidq V4 media assets are now present, owner-authorized and hash-verified; no other topic may be marked recorded");
+// Regression: cross-check every visible Ṣidq answer, source label and glossary
+// tap against original source/voice text, not just static audit plans.
+require("node:child_process").execFileSync(process.execPath,[
+ "kids/tools/test-academy-sidq-audio-clicks-v1.cjs"
+],{cwd:root,stdio:"inherit"});
 console.log("KIDS V24 GLOSSARY PASS: 33 terms × 3 child-safe age explanations = 99 verified-voice requests, "+counts.catalogLessonCount+" audited lessons; 0 auto voice and 0 credits.");

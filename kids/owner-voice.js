@@ -84,7 +84,7 @@
   function stop(){
     pending=null;
     stopNativeSpeech();
-    try{player.pause();player.removeAttribute("src");player.load()}catch(e){}
+    try{player.pause();player.onloadedmetadata=null;player.removeAttribute("src");player.load()}catch(e){}
   }
   function playNow(text,options){
     options=options||{};
@@ -105,6 +105,23 @@
       emitMissing(key,options.source||"asset-error");
       if(typeof options.onerror==="function")options.onerror(new Error("owner-voice-playback"));
     };
+    // Scribe-aligned, already-paid answer originals include a spoken "Antwort N"
+    // prefix. Seek past ONLY that prefix so the shuffled child choices speak
+    // their actual answer, without a false visual-order number or new TTS.
+    var introCut=Number(entry.playbackStartSeconds||0);
+    if(!Number.isFinite(introCut)||introCut<0||introCut>3)introCut=0;
+    player.onloadedmetadata=introCut>0?function(){
+      var maxDur=Number(player.duration);
+      if(Number.isFinite(maxDur)&&maxDur>0&&introCut>=maxDur-.12){
+        emitMissing(key,"source-timing-invalid");
+        if(typeof options.onerror==="function")options.onerror(new Error("owner-voice-invalid-answer-cut"));
+        return;
+      }
+      try{player.currentTime=introCut;}catch(e){
+        emitMissing(key,"source-timing-seek");
+        if(typeof options.onerror==="function")options.onerror(e);
+      }
+    }:null;
     player.src=String(entry.url);
     player.currentTime=0;
     try{player.load()}catch(e){}
