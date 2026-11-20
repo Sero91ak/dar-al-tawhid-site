@@ -2390,3 +2390,116 @@
 #app .topbtn{width:52px!important;height:44px!important;min-width:52px!important;min-height:44px!important;padding:0!important;display:grid!important;place-items:center!important}
 
 @media(max-width:700px) and (max-height:440px) and (orientation:landscape){#app .home-nav button{height:44px!important;min-height:44px!important;box-sizing:border-box!important;font-size:10px!important}}
+
+
+/* Landscape-first home polish: full canvas artwork, centered oval navigation, simple portrait fallback. */
+@media (orientation: portrait) {
+  #app .home-wallpaper,
+  #app .home-wallpaper-backdrop,
+  #app .home-wallpaper-fit,
+  #app .artwork,
+  #app .lightgrading,
+  #app .edge,
+  #app .corner {
+    display: none !important;
+  }
+  #app {
+    background: #07191b !important;
+    background-image: none !important;
+  }
+}
+
+@media (orientation: landscape) {
+  #app .home-wallpaper {
+    overflow: hidden !important;
+    background: #07191b !important;
+  }
+  #app .home-wallpaper-backdrop {
+    inset: -4% !important;
+    background-position: center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    filter: blur(24px) brightness(.58) saturate(.9) !important;
+    opacity: .96 !important;
+  }
+  #app .home-wallpaper-fit,
+  #app #adhanVisual .h4-prayer-image {
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+}
+
+/* Keep the three primary actions visually centered even on short iPhone landscape screens. */
+#app .top {
+  position: relative !important;
+}
+#app .top .home-nav {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 12 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: max-content !important;
+  max-width: calc(100% - 128px) !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+  margin: 0 !important;
+  gap: clamp(4px, .8vw, 12px) !important;
+}
+#app .home-nav button {
+  min-width: 0 !important;
+  width: auto !important;
+  min-height: 38px !important;
+  padding: 5px clamp(9px, 1.1vw, 15px) !important;
+  border: 1px solid rgba(216,189,130,.72) !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  display: flex !important;
+  flex: 0 1 auto !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  white-space: nowrap !important;
+}
+#app .home-nav button[aria-current="page"],
+#app .home-nav button:hover,
+#app .home-nav button:focus-visible {
+  background: transparent !important;
+  border-color: var(--gold) !important;
+}
+#app .topbtn {
+  background: transparent !important;
+  border-radius: 999px !important;
+  display: grid !important;
+  place-items: center !important;
+}
+@media (max-width: 700px) and (max-height: 440px) and (orientation: landscape) {
+  #app .top .home-nav {
+    left: 50% !important;
+    top: 50% !important;
+    max-width: calc(100% - 126px) !important;
+  }
+  #app .home-nav button {
+    min-height: 36px !important;
+    height: 36px !important;
+    padding: 3px 7px !important;
+    font-size: 9px !important;
+  }
+  #app .home-nav button img {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  #app .topbtn {
+    width: 38px !important;
+    min-width: 38px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+  }
+}
