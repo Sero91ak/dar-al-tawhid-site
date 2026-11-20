@@ -63,7 +63,15 @@ final class DARNextUITests: XCTestCase {
         let topicFilter = app.descendants(matching: .any)["quiz-topic-filter"]
         XCTAssertTrue(topicFilter.waitForExistence(timeout: 10))
         XCTAssertTrue((topicFilter.value as? String ?? "").contains("Brüderlichkeit"))
-        XCTAssertTrue(app.buttons["Lernrunde starten"].exists)
+        let startRound = app.buttons["Lernrunde starten"]
+        XCTAssertTrue(startRound.exists)
+        startRound.tap()
+
+        XCTAssertTrue(app.staticTexts["Frage 1 von 1"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Welche Grundlage der Brüderlichkeit nennt Qurʾān 49:10?"].exists)
+        app.buttons["Die Gläubigen sind Brüder."].tap()
+        XCTAssertTrue(app.staticTexts["Richtig"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Qurʾān 49:10"].exists)
 
         app.navigationBars.buttons.element(boundBy: 0).tap()
         XCTAssertTrue(app.navigationBars["Beitrag"].waitForExistence(timeout: 10))
