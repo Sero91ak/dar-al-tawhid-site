@@ -4,7 +4,7 @@
   "voiceProfileId": "serhat-owner-voice-2026",
   "speaker": "Serhat Abu Malik",
   "policy": "Exact-match only. Never map a different recording onto a lesson phrase. No audio synthesis is triggered by this manifest.",
-  "manualReviewNote": "The owner authorized generation and direct publication without manual prelisten. 58 Ṣidq entries passed source/voice/media/hash automated checks. No false claim of acoustic human signoff.",
+  "manualReviewNote": "Owner-authorized bulk production without manual prelisten. Ṣidq 58/58 original Serhat V4 canonical audio media are repository-imported with 76 signed-generation provenance records; audio/hash/Arabic Scribe CI verifies source matches. Creative V4 used stability 0.62/similarity 0.88; unsupported speed/style/private dictionary were NOT applied. This manifest is a release candidate until Cloudflare HTTP and real-device checks confirm live.",
   "entries": {
     "Allah ist Einer und hat keinen Teilhaber.": {
       "url": "/kids/assets/kids-quiz-audio/e855b456578b8c2f.m4a?v=kids-quiz-owner-voice-hybrid-v1-20261008-172455",
@@ -567,7 +567,7 @@
     "Was kannst du danach Gutes tun?": {
       "url": "/kids/assets/kids-academy-audio/6e9a88514fe06babd2a6.m4a",
       "sha256": "fedec090cb3dc43600471896547b87aa87266a154222bf40b8d2c7485cc7b34c",
-      "durationSeconds": 2.0,
+      "durationSeconds": 2,
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "voiceProfileId": "serhat-owner-voice-2026",
       "voiceSettingsProfile": "kids_story",
