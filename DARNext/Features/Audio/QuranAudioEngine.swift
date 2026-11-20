@@ -24,6 +24,26 @@ enum QuranAudioInterruptionPolicy {
     }
 }
 
+struct QuranAudioInterruptionState: Equatable, Sendable {
+    private(set) var wasPlayingBeforeInterruption = false
+
+    mutating func interruptionBegan(isPlaying: Bool) {
+        wasPlayingBeforeInterruption = wasPlayingBeforeInterruption || isPlaying
+    }
+
+    mutating func interruptionEnded(systemAllowsResume: Bool) -> Bool {
+        defer { wasPlayingBeforeInterruption = false }
+        return QuranAudioInterruptionPolicy.shouldResume(
+            wasPlaying: wasPlayingBeforeInterruption,
+            systemAllowsResume: systemAllowsResume
+        )
+    }
+
+    mutating func cancelResume() {
+        wasPlayingBeforeInterruption = false
+    }
+}
+
 @MainActor
 @Observable
 final class QuranAudioEngine {
@@ -47,7 +67,7 @@ final class QuranAudioEngine {
     private var sleepTask: Task<Void, Never>?
     private var remoteCommandsConfigured = false
     private var interruptionObserver: NSObjectProtocol?
-    private var wasPlayingBeforeInterruption = false
+    private var interruptionState = QuranAudioInterruptionState()
 
     func load(_ track: QuranAudioTrack) {
         playlist = [track]
@@ -112,7 +132,7 @@ final class QuranAudioEngine {
         }
 
         removeObservers()
-        wasPlayingBeforeInterruption = false
+        interruptionState.cancelResume()
         currentTrack = track
         currentTime = 0
         duration = 0
@@ -141,14 +161,14 @@ final class QuranAudioEngine {
     }
 
     func pause() {
-        wasPlayingBeforeInterruption = false
+        interruptionState.cancelResume()
         player?.pause()
         isPlaying = false
         updateNowPlaying()
     }
 
     func stop() {
-        wasPlayingBeforeInterruption = false
+        interruptionState.cancelResume()
         player?.pause()
         player?.seek(to: .zero)
         currentTime = 0
@@ -198,16 +218,12 @@ final class QuranAudioEngine {
                 guard let self else { return }
                 switch type {
                 case .began:
-                    self.wasPlayingBeforeInterruption = self.wasPlayingBeforeInterruption || self.isPlaying
+                    self.interruptionState.interruptionBegan(isPlaying: self.isPlaying)
                     self.player?.pause()
                     self.isPlaying = false
                     self.updateNowPlaying()
                 case .ended:
-                    let shouldResume = QuranAudioInterruptionPolicy.shouldResume(
-                        wasPlaying: self.wasPlayingBeforeInterruption,
-                        systemAllowsResume: systemAllowsResume
-                    )
-                    self.wasPlayingBeforeInterruption = false
+                    let shouldResume = self.interruptionState.interruptionEnded(systemAllowsResume: systemAllowsResume)
                     if shouldResume {
                         self.play()
                     } else {
@@ -215,7 +231,7 @@ final class QuranAudioEngine {
                         self.updateNowPlaying()
                     }
                 @unknown default:
-                    self.wasPlayingBeforeInterruption = false
+                    self.interruptionState.cancelResume()
                     self.isPlaying = false
                     self.updateNowPlaying()
                 }
