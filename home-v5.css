@@ -2344,3 +2344,46 @@
   #app .counter{font-size:12px!important}
   #app .prayer-cell .ptime{font-size:16px!important}
 }
+
+/* Final short-landscape geometry: reserve the editorial and player rows explicitly. */
+@media(max-width:700px) and (max-height:440px) and (orientation:landscape){
+  #app .top .home-nav{
+    position:absolute!important;left:calc(50% + clamp(32px,4.8vw,38px))!important;top:50%!important;
+    transform:translate(-50%,-50%)!important;z-index:12!important;
+  }
+  #app .screen{
+    grid-template-rows:minmax(64px,auto) minmax(60px,1fr) minmax(34px,auto) 44px 0!important;
+    align-content:stretch!important;gap:3px!important;padding:5px 9px!important;
+  }
+  #app header{grid-template-rows:44px 17px 1px!important;gap:1px!important}
+  #app .top{height:44px!important;min-height:44px!important}
+  #app .header-meta{height:17px!important;min-height:17px!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:2px 5px!important;padding:0 4px!important}
+  #app .header-meta>div{display:flex!important;flex-direction:row!important;align-items:baseline!important;gap:3px!important;white-space:nowrap}
+  #app .header-meta>div span{font-size:6px!important;letter-spacing:.04em!important}
+  #app .header-meta>div strong{font-size:8px!important}
+  #app .header-meta .now{font-size:12px!important}
+  #app .hero{min-height:60px!important;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important}
+  #app .daily-area{height:44px!important;min-height:44px!important}
+  #app .daily-area .audio-area{height:44px!important;max-height:44px!important;min-height:44px!important}
+  #app .foot{display:none!important}
+}
+@media(max-height:200px) and (orientation:landscape){
+  #app .screen{grid-template-rows:58px 42px 28px 38px 0!important;gap:1px!important;padding:2px 4px!important}
+  #app header{grid-template-rows:44px 12px 1px!important}
+  #app .header-meta{height:12px!important;min-height:12px!important}
+  #app .header-meta>div span{font-size:5px!important}
+  #app .header-meta>div strong{font-size:7px!important}
+  #app .header-meta .now{font-size:11px!important}
+  #app .hero{min-height:42px!important}
+  #app .hero-left,#app .hero-right{padding:1px 3px!important}
+  #app .hero-left .overline{font-size:7px!important}
+  #app .nightstand-launch{min-height:22px!important;padding:1px 5px!important}
+  #app .next-name{font-size:19px!important}
+  #app .main-time{font-size:15px!important}
+  #app .times-band{padding:0!important}
+  #app .prayer-cell{min-height:27px!important}
+  #app .prayer-cell .pname{font-size:6px!important}
+  #app .prayer-cell .ptime{font-size:13px!important}
+  #app .daily-area,#app .daily-area .audio-area{height:38px!important;min-height:38px!important;max-height:38px!important}
+  #app .audio-title{font-size:14px!important}
+}
