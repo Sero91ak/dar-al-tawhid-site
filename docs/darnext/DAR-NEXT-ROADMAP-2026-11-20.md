@@ -67,3 +67,12 @@ Required integration order: merge or stack one feature branch at a time, carry f
 The four existing policy-test methods were moved to distinct locations in their respective branches; their assertions and production-code changes were preserved. Current branch heads now pass Swift parser checks. Re-running the six pairwise `git merge-file --stdout -p` simulations against common test-file base `1b92df8dd69a4a0840f1cc0150c5fbb61105d068` produced no conflicts. A cumulative simulation of #1813 → #1814 → #1815 → #1816 also merged without conflict, retained all four policy tests, and the combined test file passed `swiftc -frontend -parse`.
 
 This is source-level merge and syntax evidence only. No Xcode build or XCTest run was performed for the updated branch heads. All four PRs remain Draft. PR #1817 still reports mergeable against #1816 after the parent branch update, but its build and simulator test remain outstanding.
+
+## Source provenance and build-route check — 2026-11-20
+
+- The protected local checkout remains an unborn branch with untracked app/project files; its current free space is about 202 MiB. No Xcode build or simulator run was attempted in this check.
+- Blob comparisons against seven current DARNext code branches found no exact match for local `DARNextContentSyncService.swift`, `LocalContentRepository.swift`, `AppEnvironment.swift`, or `RootShell.swift`. The local sync service downloads manifest payloads into staging, validates paths, and activates a cache; the GitHub baseline service currently fetches and caches the manifest only. This is a meaningful implementation difference, but the local version is not yet attributable to a commit or a verified PR base and must not be treated as integrated code.
+- The current `main/.github/workflows` listing contains no DARNext Xcode build workflow. The matching iOS workflows cover the adult WKWebView bridge syntax guard (Ubuntu) and Kids visitor build (macOS); neither covers DARNext. Current heads of #1813–#1816 report no Actions checks or commit statuses.
+- Until a source base is established and adequate Xcode storage is available, only source-level review/parse and merge simulations are possible; those are not substitutes for the required DARNext build and XCTest run.
+
+Next: reconcile the local snapshot by commit/path provenance and content contracts, then run the exact merged DARNext build and tests on a supported Xcode environment before marking those PRs ready.
