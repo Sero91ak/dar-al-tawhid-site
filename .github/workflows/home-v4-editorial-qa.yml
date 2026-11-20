@@ -39,7 +39,7 @@ jobs:
           const js=html.split('<script>')[1]?.split('</script>')[0];
           if(!js)throw Error('No inline HOME V2 engine found');
           new Function(js);
-          const required=['fajrAdhanTrack','homeAppearance','homeWallpaperMode','homeWallpaperUpload','homeConnectionStatus','home-v4.css','home-v4.js','home-v5.css','h4ShowVerse','h4ShowHadith','openTadabbur','tadabburPanel','saverMode','quranReaderPanel','quranReciterMode','readerTransliteration','openCalendarPanel','home-nav','tadabbur-inline' ,'selectSettingsTab'];
+          const required=['fajrAdhanTrack','homeAppearance','homeWallpaperMode','homeWallpaperUpload','homeConnectionStatus','home-v4.css','home-v4.js','home-v5.css','h4ShowVerse','h4ShowHadith','openTadabbur','tadabburPanel','saverMode','quranReaderPanel','quranReciterMode','readerTransliteration','openCalendarPanel','home-nav','tadabbur-dialog' ,'selectSettingsTab'];
           for(const key of required)if(!html.includes(key))throw Error('Missing HOME V3 feature: '+key);
           if(!f.readFileSync('home-device/home-v3.js','utf8').includes('data-home-settings'))throw Error('Missing contextual HOME view settings control');
           if(html.includes('<nav class="footnav"'))throw Error('Bottom tabs must not exist');
