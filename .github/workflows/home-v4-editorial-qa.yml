@@ -431,7 +431,9 @@ jobs:
             tv_card=driver.execute_script("return {type:document.getElementById('saverType').textContent,source:document.getElementById('saverSource').textContent,narrator:document.getElementById('saverNarrator').textContent}")
             print('TVOS_ROTATION_CARD',tv_card,flush=True)
             tv_order=driver.execute_script("return [...document.querySelector('#saver .saver-content').children].filter(e=>getComputedStyle(e).display!=='none'&&e.textContent.trim()).map(e=>e.id||e.className)")
-            if tv_order.index('saverType')>tv_order.index('saverNarrator') or tv_order.index('saverNarrator')>tv_order.index('saverDe') or tv_order.index('saverDe')>tv_order.index('saverStatement') or tv_order.index('saverStatement')>tv_order.index('saverSource'):errors.append('Screensaver content order must be type, narrator, statement, source')
+            if 'saverNarrator' in tv_order and 'saverStatement' in tv_order and not (tv_order.index('saverType')<tv_order.index('saverNarrator')<tv_order.index('saverDe')<tv_order.index('saverStatement')<tv_order.index('saverSource')):errors.append('Screensaver Hadith/Athar order must be type, narrator, statement, source')
+            if 'saverNarrator' in tv_order and 'saverStatement' not in tv_order and not (tv_order.index('saverType')<tv_order.index('saverNarrator')<tv_order.index('saverSource')):errors.append('Screensaver Tadabbur narrator metadata must precede source')
+            print('TVOS_CONTENT_ORDER',tv_order,flush=True)
             print('TVOS_CONTENT_ORDER',tv_order,flush=True)
             duration_check=driver.execute_script("""
               const s=window.darTvScreensaver.status(),text=['saverAr','saverDe','saverNarrator','saverStatement','saverSource'].map(id=>document.getElementById(id)?.textContent||'').join(' ').replace(/\s+/g,' ').trim();
