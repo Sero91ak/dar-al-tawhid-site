@@ -74,3 +74,14 @@ The primary-tab PR removes the Assistant tab, but a source audit found two remai
 2. Continue isolated product PRs against confirmed source owners; prioritize the fully tested card/detail/return flow and the remaining user-visible defects.
 3. When storage allows, run the current-source iPhone/iPad UI matrix and a supported Instruments or hardware frame-time trace. Report setup failures separately from app failures.
 4. Keep Issue #1789 open until each required feature and QA gate has direct evidence. No main merge, public release, or paid service is authorized by this status document.
+
+
+## Status addendum – 2026-11-20
+
+- Current iPad Pro 13-inch M5 / iOS 27.2 scroll UI test across Start, Quiz, Posts, and Qurʾān passed 1/1. This verifies the test gestures and navigation, not frame pacing.
+- Dashboard prayer-card → details → return passed 1/1 on the local snapshot after adding an accessibility container so the parent section identifier no longer masks the button identifier. This fix is not in the GitHub PR branch; the remote Dashboard source differs, so it was not copied over.
+- A simultaneous Instruments Animation Hitches attempt produced no usable trace. The profiled UI run stopped after 216.9 seconds with ENOSPC while importing the result bundle; that bundle is incomplete and unreadable. The separate unprofiled scroll result remains the valid 1/1 gesture result.
+- Local toolchain queried directly: Xcode 27.2 (27B52), iOS Simulator SDK 27.2, Swift 6.4.2; local DARNext project deployment target 17.0 and Swift language mode 5.0. The local source tree remains untracked and provenance-unresolved.
+- Added [the whole-app roadmap](DAR-NEXT-ROADMAP-2026-11-20.md) and [the technology radar](TECH_RADAR.md) to PR #1812, alongside the updated feature matrix. PR #1812 is still Draft/open/mergeable; these are planning/review artifacts and do not close product or QA gates.
+- Latest disk check: about 100 MiB available; no Xcode/test process running. The previously approved cache deletion command was rejected by the automatic execution protection, and no deletion was attempted through an alternate method.
+- Next executable runtime gate remains current-head build/test for PR #1817, followed by the full current iPhone/iPad matrix and supported frame/hitch profiling when a writable test environment has sufficient capacity. No merge, release, or paid service.
