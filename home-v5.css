@@ -2639,3 +2639,19 @@
   #app .quran-reader-footer{justify-content:center}
   #app .reader-check,#app .reader-home{font-size:12px}
 }
+
+
+/* Reader frame: reserve a dedicated scroll region so long verses never sit beneath controls. */
+#app .quran-reader-shell{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;overflow:hidden}
+#app .quran-reader-content{min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding-bottom:8px}
+#app .quran-reader-footer{position:relative;inset:auto;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"playback playback" "toggle home";align-items:center;gap:8px 12px;flex-wrap:initial;padding:10px 0 0;background:rgba(7,26,29,.98);border-top:1px solid var(--home4-hair)}
+#app .reader-playback{grid-area:playback;justify-content:center}
+#app .reader-check{grid-area:toggle;min-width:0}
+#app .reader-home{grid-area:home;justify-self:end;white-space:nowrap}
+#app .reader-note{margin:4px 0 10px;min-height:1.3em}
+#app .theme-ivory .quran-reader-footer{background:#f0eee6}
+@media(max-width:720px),(orientation:portrait){
+  #app .quran-reader-shell{grid-template-rows:auto auto minmax(0,1fr) auto}
+  #app .quran-reader-footer{gap:7px 8px;padding-top:8px}
+  #app .reader-playback{gap:6px}
+}
