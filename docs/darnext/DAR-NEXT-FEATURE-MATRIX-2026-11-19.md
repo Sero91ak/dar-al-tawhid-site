@@ -144,3 +144,9 @@ Der eigenständige Arbeitsnachweis in PR #1824 wurde zugunsten dieses bestehende
 - Parserprüfung 6/6, aber Xcode-Build, XCTest und Geräteverhalten für PR #1828 sind nicht belegt. PR bleibt Draft. Die Installation auf dem gebooteten Simulator wurde nicht aus diesem Head erstellt.
 
 - Nach dem vorherigen Matrix-Snapshot ergänzt Draft-PR #1828 auf dem bestehenden Karten-/Detail-Motion-Helper einen reversiblen Suchtreffer-Übergang. Die Such-ID dient als Quelle und Detailroute; iOS 17 sowie Reduce Motion erhalten den Standard-Navigationsweg. `SearchView.swift` besteht den Parser. Der Übergang wurde nicht gebaut oder zur Laufzeit visuell geprüft.
+
+
+## Quiz-Kontexttest bis zur Antwort, 20.11.2026
+
+- PR #1825 erweitert den Beitrag → Themenquiz-UI-Test über das Öffnen des Filters hinaus: Der Brüderlichkeit-Kontext muss genau eine Frage enthalten, `quiz-445` („Welche Grundlage der Brüderlichkeit nennt Qurʾān 49:10?“), richtige Antwort und Quellenanzeige `Qurʾān 49:10` prüfen und anschließend zum Beitrag zurückkehren.
+- Der geprüfte JSON-Datensatz kennzeichnet `quiz-445` als `published`, `approved` und `sourceChecked=true`; die Parserprüfung der geänderten UI-Testdatei besteht. Der XCTest wurde mangels aktuellem Simulatorfenster und Speicher nicht ausgeführt; UI-Verhalten daher weiterhin unbestätigt.
