@@ -162,7 +162,7 @@ assert(!main.includes('data-academy-typing="true"'));
 assert(main.includes('function mode(){'));
 assert(main.includes('mode("choices");'));
 assert(main.includes('DARKidsAcademyChoiceOnlyV1.project'));
-assert(main.includes('answer-choice-only-v1.js?v=20261105-02'));
+assert(/answer-choice-only-v1\.js\?v=[A-Za-z0-9-]+/.test(main),"Academy choice-only script must carry cache-busted version");;
 assert(main.includes('id="kids-academy-choice-only-v2"'));
 assert(!main.includes('$("#answerModeCaption").textContent=q.type==="choice"?'));
 console.log("PASS: 65 released curriculum lessons + Ṣidq: 523 choice questions; all 198 text prompts projected without editing source, including 6–8 Salām.");
