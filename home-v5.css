@@ -2072,3 +2072,12 @@
 @media (prefers-reduced-motion:reduce) {
   #app .tadabbur-modal:not([hidden]) {animation:none!important;}
 }
+
+/* V16.1: Keep the HOME daily quote fixed in its slot; fitDailyText handles long copy. */
+#app .hero-right .daily-story {
+  overflow:hidden!important;
+  overflow-y:hidden!important;
+  overscroll-behavior:none!important;
+  scrollbar-width:none!important;
+}
+#app .hero-right .daily-story::-webkit-scrollbar { display:none!important; }
