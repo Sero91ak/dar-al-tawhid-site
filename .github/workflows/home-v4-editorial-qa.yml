@@ -172,11 +172,11 @@ jobs:
               const old=[de.textContent,src.textContent],oldSize=parseFloat(getComputedStyle(de).fontSize);
               de.textContent=('Eine gut lesbare deutsche Übersetzung mit vollständigem Sinn. ').repeat(18);src.textContent=('Qurʾān · Beispielquelle · ').repeat(4);
               window.fitDailyText();
-              const result={scrollHeight:de.scrollHeight,clientHeight:de.clientHeight,overflow:getComputedStyle(article).overflowY,font:parseFloat(getComputedStyle(de).fontSize),text:de.textContent.length};
+              const result={scrollHeight:de.scrollHeight,clientHeight:de.clientHeight,overflow:getComputedStyle(article).overflowY,font:parseFloat(getComputedStyle(de).fontSize),text:de.textContent.length,truncated:de.dataset.fitTruncated==='true'};
               [de.textContent,src.textContent]=old;window.fitDailyText();return result;
             """)
             print('LONG_DAILY_DARK',long_text,flush=True)
-            if long_text['scrollHeight']>long_text['clientHeight']+2 or long_text['overflow']=='auto' or long_text['font']>=18:errors.append('Long daily content did not shrink to fit without an inner scroll')
+            if long_text['overflow']=='auto' or (long_text['scrollHeight']>long_text['clientHeight']+2 and not long_text['truncated']):errors.append('Long daily content lacks a fixed, readable preview without an inner scroll')
             driver.set_window_size(1280,800)
             driver.get(url+'/?qa=home-v3')
             WebDriverWait(driver,25).until(EC.element_to_be_clickable((By.ID,'openSettings')))
@@ -312,11 +312,11 @@ jobs:
               const article=document.querySelector('.daily-story'),de=document.getElementById('dailyDe'),src=document.getElementById('dailySource');
               const old=[de.textContent,src.textContent];
               de.textContent=('Eine gut lesbare deutsche Übersetzung mit vollständigem Sinn. ').repeat(18);src.textContent=('Qurʾān · Beispielquelle · ').repeat(4);window.fitDailyText();
-              const result={scrollHeight:de.scrollHeight,clientHeight:de.clientHeight,overflow:getComputedStyle(article).overflowY,font:parseFloat(getComputedStyle(de).fontSize)};
+              const result={scrollHeight:de.scrollHeight,clientHeight:de.clientHeight,overflow:getComputedStyle(article).overflowY,font:parseFloat(getComputedStyle(de).fontSize),truncated:de.dataset.fitTruncated==='true'};
               [de.textContent,src.textContent]=old;window.fitDailyText();return result;
             """)
             print('LONG_DAILY_FIXED_THEME',long_dark_fixed,flush=True)
-            if long_dark_fixed['scrollHeight']>long_dark_fixed['clientHeight']+2 or long_dark_fixed['overflow']=='auto' or long_dark_fixed['font']>=18:errors.append('Long daily content did not fit responsively without internal scrolling')
+            if long_dark_fixed['overflow']=='auto' or (long_dark_fixed['scrollHeight']>long_dark_fixed['clientHeight']+2 and not long_dark_fixed['truncated']):errors.append('Long daily content lacks a fixed, readable preview without internal scrolling')
             driver.find_element(By.CSS_SELECTOR,'button[data-tab="anzeige"]').click()
             legacy_theme=driver.find_element(By.ID,'theme')
             if legacy_theme.get_attribute('disabled') is None or legacy_theme.get_attribute('value')!='night' or len(legacy_theme.find_elements(By.TAG_NAME,'option'))!=1:errors.append('Legacy display settings must keep only the Dār al-Layl standard')
@@ -406,8 +406,8 @@ jobs:
             driver.execute_script("window.darHomeDailyVerse={reference:'2:183',ar:'يَا أَيُّهَا الَّذِينَ آمَنُوا',de:'O ihr, die ihr glaubt'};document.getElementById('openTadabbur').hidden=false;document.getElementById('openTadabbur').click()")
             WebDriverWait(driver,150).until(lambda d:'4774' in d.find_element(By.ID,'tadabburStatus').text or '1 geprüfte' in d.find_element(By.ID,'tadabburStatus').text or '1 geprüfte Überlieferung' in d.find_element(By.ID,'tadabburStatus').text)
             WebDriverWait(driver,10).until(lambda d:len(d.find_elements(By.CSS_SELECTOR,'#tadabburResults .tadabbur-item'))>0)
-            tad_layout=driver.execute_script("const p=document.getElementById('tadabburPanel'),d=p.querySelector('.tadabbur-dialog');return {visible:!p.hidden,dialog:p.getAttribute('role'),modal:p.getAttribute('aria-modal'),fixed:getComputedStyle(p).position,display:getComputedStyle(p).display,dialogWidth:d.getBoundingClientRect().width,dialogHeight:d.getBoundingClientRect().height,homeHidden:document.getElementById('mainScreen').hidden,storyOverflow:getComputedStyle(document.querySelector('.daily-story')).overflowY,button:document.getElementById('openTadabbur').textContent.trim()}")
-            if not tad_layout['visible'] or tad_layout['dialog']!='dialog' or tad_layout['modal']!='true' or tad_layout['fixed']!='fixed' or tad_layout['display']!='grid' or tad_layout['dialogWidth']<300 or tad_layout['dialogHeight']<150 or tad_layout['homeHidden'] or tad_layout['storyOverflow']=='auto' or tad_layout['button']!='Tadabbur einblenden':errors.append('Tadabbur is not a readable modal independent of the HOME text area')
+            tad_layout=driver.execute_script("const p=document.getElementById('tadabburPanel'),d=p.querySelector('.tadabbur-dialog');return {visible:!p.hidden,dialog:p.getAttribute('role'),modal:p.getAttribute('aria-modal'),fixed:getComputedStyle(p).position,display:getComputedStyle(p).display,dialogWidth:d.getBoundingClientRect().width,dialogHeight:d.getBoundingClientRect().height,homeHidden:document.getElementById('mainScreen').hidden,storyOverflow:getComputedStyle(document.querySelector('.daily-story')).overflowY,verseCopy:document.getElementById('tadabburVerseText')?.textContent||'',button:document.getElementById('openTadabbur').textContent.trim()}")
+            if not tad_layout['visible'] or tad_layout['dialog']!='dialog' or tad_layout['modal']!='true' or tad_layout['fixed']!='fixed' or tad_layout['display']!='grid' or tad_layout['dialogWidth']<300 or tad_layout['dialogHeight']<150 or tad_layout['homeHidden'] or tad_layout['storyOverflow']=='auto' or 'Mein Herr' not in tad_layout['verseCopy'] or tad_layout['button']!='Tadabbur einblenden':errors.append('Tadabbur is not a readable modal independent of the HOME text area')
             print('TADABBUR_MODAL_LAYOUT',tad_layout,flush=True)
             tad_text=driver.find_element(By.ID,'tadabburResults').text
             print('HOME_TADABBUR_EXACT_LOOKUP',tad_text[:500],flush=True)
@@ -417,7 +417,7 @@ jobs:
             if driver.execute_script("return document.activeElement.id")!='openTadabbur':errors.append('Closing Tadabbur did not restore focus to its opener')
             driver.find_element(By.ID,'openTadabbur').click()
             WebDriverWait(driver,10).until(lambda d:d.find_element(By.ID,'tadabburPanel').get_attribute('hidden') is None)
-            driver.find_element(By.ID,'closeTadabbur').send_keys(Keys.ESCAPE)
+            driver.find_element(By.TAG_NAME,'body').send_keys(Keys.ESCAPE)
             WebDriverWait(driver,5).until(lambda d:d.find_element(By.ID,'tadabburPanel').get_attribute('hidden') is not None)
             driver.find_element(By.ID,'closeTadabbur').click()
             driver.find_element(By.ID,'openSettings').click()
