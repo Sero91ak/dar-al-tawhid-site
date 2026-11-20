@@ -118,7 +118,7 @@ private struct LibraryPublicationRow: View {
     }
 }
 
-private struct LibraryBookDetailView: View {
+struct LibraryBookDetailView: View {
     let book: LibraryBook
 
     var body: some View {
