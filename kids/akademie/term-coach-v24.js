@@ -652,7 +652,7 @@ function termsFor(lesson,age,limit=7,section="all"){
  // Show classroom terms in the lesson, source-only terms at the evidence step.
  // Never insert unrelated source vocabulary into the spoken narration.
  const corpus=section==="lesson"?lessonText:section==="sources"?sourceText:
-  lessonText+" "+sourceText+" Qurʾān Sunnah";
+  lessonText+" "+sourceText;
  const all=plain(corpus);
  const primary=plain(section==="sources"?sourceText:leading);
  return entries.map(entry=>{
@@ -673,6 +673,17 @@ function phrase(entry,age){
   (entry.id==="salam"&&spoken.startsWith("as salamu"));
  return startsWithTerm||startsWithVariant?a:entry.term+" bedeutet: "+a;
 }
+// Keep editorial provenance in lesson data, not in the children's visible source.
+function childSourceReference(raw){
+ const ref=String(raw||"").trim();
+ if(!/^(?:Qurʾān|Ṣaḥīḥ(?:\s|$))/u.test(ref))return "";
+ return ref.replace(/\s*\([^)]*\)/g,"").replace(/\s*;\s*(?:historische\s+)?Fachdefinition.*$/iu,"").trim();
+}
+function showChildSource(element,term,age){
+ const ref=childSourceReference(term?.source?.reference);
+ element.hidden=age==="4-5"||!ref;
+ element.textContent=ref?"Quelle: "+ref:"";
+}
 function approvedVoiceFor(entry,age,owner){
  const text=phrase(entry,age);
  const e=text&&owner?.masterEntry?.(text);
@@ -692,7 +703,7 @@ function mount(host,lesson,age,options={}){
  const line=document.createElement("div");line.className="academy-term-list";
  const detail=document.createElement("section");detail.className="academy-term-detail";detail.hidden=true;
  const title=document.createElement("strong"),desc=document.createElement("p"),source=document.createElement("p"),audioStatus=document.createElement("p");
- source.className="academy-term-source";source.hidden=age==="4-5";audioStatus.className="academy-term-audio-status";audioStatus.setAttribute("role","status");
+ source.className="academy-term-source";source.hidden=true;audioStatus.className="academy-term-audio-status";audioStatus.setAttribute("role","status");
  detail.append(title,desc,source,audioStatus);
  let active=null;
  for(const term of matches){
@@ -706,7 +717,7 @@ function mount(host,lesson,age,options={}){
    active=term.id;btn.setAttribute("aria-expanded","true");detail.hidden=false;
    title.textContent=term.term;
    desc.textContent=term.age[age]||term.age["6-8"];
-   source.textContent="Quelle: "+term.source.reference;
+   showChildSource(source,term,age);
    const owner=window.DARKidsOwnerVoice;
    if(!approvedVoiceFor(term,age,owner)){
     audioStatus.textContent="Du kannst die Erklärung lesen. Zum Anhören fehlt noch die passende Aufnahme.";
@@ -728,7 +739,7 @@ function mount(host,lesson,age,options={}){
   const first=matches[0];active=first.id;detail.hidden=false;
   line.firstChild?.setAttribute("aria-expanded","true");
   title.textContent=first.term;desc.textContent=first.age[age];
-  source.textContent="Quelle: "+first.source.reference;
+  showChildSource(source,first,age);
   audioStatus.textContent="Zum Anhören tippe auf das Wort.";
  }
  return matches;
