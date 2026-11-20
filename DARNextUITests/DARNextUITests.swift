@@ -98,6 +98,65 @@ final class DARNextUITests: XCTestCase {
     }
 
     @MainActor
+    func testPostsScrollPositionSurvivesPrimaryTabSwitch() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        let tabBar = app.tabBars.firstMatch
+        XCTAssertTrue(tabBar.waitForExistence(timeout: 10))
+        tabBar.buttons["Beiträge"].tap()
+        XCTAssertTrue(app.navigationBars["Beiträge"].waitForExistence(timeout: 10))
+
+        let postCard = app.descendants(matching: .any)
+            .matching(identifier: "post-card-liebe-fuer-deinen-bruder-was-du-fuer-dich-liebst-179")
+            .firstMatch
+        for _ in 0..<30 where !postCard.isHittable {
+            app.swipeUp()
+        }
+        XCTAssertTrue(postCard.isHittable, "Scroll the post list to a visible card before switching tabs.")
+        let originalMinY = Double(postCard.frame.minY)
+
+        tabBar.buttons["Quiz"].tap()
+        XCTAssertTrue(app.navigationBars["Wissensquiz"].waitForExistence(timeout: 10))
+        tabBar.buttons["Beiträge"].tap()
+        XCTAssertTrue(app.navigationBars["Beiträge"].waitForExistence(timeout: 10))
+
+        XCTAssertTrue(postCard.waitForExistence(timeout: 10))
+        XCTAssertTrue(postCard.isHittable, "The post list should return to its previous scroll position.")
+        XCTAssertEqual(Double(postCard.frame.minY), originalMinY, accuracy: 4)
+    }
+
+    @MainActor
+    func testQuranReturnsToSameSurahListScrollPosition() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        let tabBar = app.tabBars.firstMatch
+        XCTAssertTrue(tabBar.waitForExistence(timeout: 10))
+        tabBar.buttons["Qurʾān"].tap()
+        XCTAssertTrue(app.navigationBars["Qurʾān"].waitForExistence(timeout: 10))
+
+        let surah49 = app.descendants(matching: .any)
+            .matching(identifier: "quran-catalog-row-49")
+            .firstMatch
+        for _ in 0..<50 where !surah49.isHittable {
+            app.swipeUp()
+        }
+        XCTAssertTrue(surah49.isHittable, "Sūrah 49 should be visible in the catalog before opening it.")
+        let originalMinY = Double(surah49.frame.minY)
+        surah49.tap()
+
+        XCTAssertTrue(app.navigationBars["Qurʾān 49"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Qurʾān 49:1"].waitForExistence(timeout: 10))
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+
+        XCTAssertTrue(app.navigationBars["Qurʾān"].waitForExistence(timeout: 10))
+        XCTAssertTrue(surah49.waitForExistence(timeout: 10))
+        XCTAssertTrue(surah49.isHittable, "Returning from a surah should restore the catalog scroll position.")
+        XCTAssertEqual(Double(surah49.frame.minY), originalMinY, accuracy: 4)
+    }
+
+    @MainActor
     func testAssistantPrototypeIsNotExposedInPublicNavigation() throws {
         let app = XCUIApplication()
         app.launch()
