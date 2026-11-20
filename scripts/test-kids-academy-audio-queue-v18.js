@@ -141,7 +141,11 @@ assert.equal(bulk.scope.sourceBackedLessons,66);
 assert.equal(bulk.scope.separateAgeVersions,3);
 assert.equal(bulk.scope.futureEditorialLessonsNotProductionReady,142);
 assert.equal(bulk.totals.realVerifiedM4aAlreadyInRepo,58);
-assert.ok(bulk.totals.exactUtterancesMissingRealMedia>=1700);
+assert.ok(bulk.totals.distinctSourceUtterances>=1700);
+assert.ok(bulk.totals.exactUtterancesMissingRealMedia>=1600);
+assert.equal(bulk.totals.realVerifiedM4aAlreadyInRepo+
+ bulk.totals.exactUtterancesMissingRealMedia,bulk.totals.distinctSourceUtterances,
+ "Deduped bulk source coverage must equal imported genuine originals plus still missing");
 assert.equal(bulk.safety.noTtsCreditsCharged,true);
 assert.equal(bulk.safety.noUnreviewedEditorialOutlinesInChildrenApp,true);
 console.log("ACADEMY VOICE V18 PASS: exact Serhat-only matching, three valid staged clips and one quarantined old greeting, zero synthetic fallback, no credits.");
