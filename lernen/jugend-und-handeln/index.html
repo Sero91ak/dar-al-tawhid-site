@@ -11,7 +11,7 @@ main{width:min(100% - 28px,740px);margin:auto;padding:20px 0 calc(40px + env(saf
 header{text-align:center}.logo{display:block;width:67px;height:67px;object-fit:contain;margin:0 auto}
 .brand{font:700 clamp(22px,4vw,30px) Georgia,serif;letter-spacing:.06em}.signature{margin:0;font-style:italic;color:#d6b877}
 h1{font-size:clamp(23px,5vw,35px);line-height:1.22;margin:16px auto 12px}
-a{color:#f4dba3}select{border-radius:12px;border:1px solid #ab9468;background:#1d3025;color:#f5ecd7;min-height:45px;max-width:100%;padding:8px 12px;font:inherit}
+a{color:#f4dba3}button.back{background:transparent;color:#f4dba3;border:0;border-bottom:1px solid #b9a072;font:700 15px system-ui,sans-serif;cursor:pointer}select{border-radius:12px;border:1px solid #ab9468;background:#1d3025;color:#f5ecd7;min-height:45px;max-width:100%;padding:8px 12px;font:inherit}
 .back{display:inline-block;margin:16px 0;border-bottom:1px solid #b9a072;text-decoration:none;font-weight:700}
 .card{padding:clamp(17px,4vw,27px) 0;border-top:1px solid #9e895e;margin:10px 0 20px}
 .opt{display:block;width:100%;text-align:start;min-height:51px;border:1px solid #806e4f;background:#1b3125;color:#f5ecd7;border-radius:12px;padding:12px 14px;margin:10px 0;font:600 15px/1.5 system-ui,sans-serif;cursor:pointer}
@@ -25,7 +25,7 @@ html[dir="rtl"] .opt{text-align:right}
 <div class="brand">DĀR AL TAWḤĪD</div><p class="signature">by Serhat Abu Malik</p>
 <h1 id="pageTitle">DIE JUGEND IST DIE ZEIT DES HANDELNS</h1>
 <select id="language" aria-label="Sprache wählen"><option value="de">Deutsch</option><option value="ar">العربية الفصحى</option><option value="en">English</option><option value="tr">Türkçe</option><option value="ku">Kurmancî</option><option value="ckb">سۆرانی</option><option value="bs">Bosanski</option><option value="fr">Français</option><option value="es">Español</option></select>
-<p id="notice" class="note" hidden></p><a class="back" href="/q/59/" id="back">← Quellenkarte Q59</a></header>
+<p id="notice" class="note" hidden></p><button class="back" type="button" id="back">← Quellenkarte Q59</button></header>
 <section class="card" id="quiz" aria-live="polite"><p class="progress" id="progress"></p><h2 id="question"></h2><div id="options"></div><p class="note" id="feedback" role="status"></p><button class="next" id="next" type="button" disabled>Nächste Frage</button></section>
 <section class="card" id="result" hidden><h2>Ergebnis</h2><p id="score"></p><button class="next" id="again" type="button">Erneut lernen</button></section>
 <p class="note">Grundlage: al-Ḫaṭīb al-Baġdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal, Nr. 190. Die Fragen dienen dem Textverständnis und stellen keine zusätzliche Überlieferungsquelle dar.</p>
@@ -42,11 +42,11 @@ const el=id=>document.getElementById(id),select=el('language'),key='darAdultPref
 const warnings={de:'',ar:'لم تتوفر ترجمة معتمدة للأسئلة؛ يُعرض النص الألماني.',en:'Reviewed questions in this language are not yet available; German is shown.',tr:'Bu dilde onaylı sorular henüz yok; Almanca gösteriliyor.',ku:'Pirsên pejirandî hîn tune ne; almanî tê nîşandan.',ckb:'پرسیارە پەسەندکراوەکان ئامادە نین؛ دەقی ئەڵمانی نیشان دەدرێت.',bs:'Provjerena pitanja još nisu dostupna; prikazan je njemački tekst.',fr:'Les questions vérifiées ne sont pas disponibles dans cette langue ; l’allemand est affiché.',es:'Las preguntas revisadas aún no están disponibles en este idioma; se muestra el alemán.'};
 let n=0,correct=0,answered=false,code=new URLSearchParams(location.search).get('lang');
 if(!code){try{code=localStorage.getItem(key)}catch(_){}}
-function locale(v){if(!Object.hasOwn(warnings,v))v='de';code=v;select.value=v;document.documentElement.lang=v;document.documentElement.dir=v==='ar'||v==='ckb'?'rtl':'ltr';el('notice').hidden=v==='de';el('notice').textContent=warnings[v];el('back').href='/q/59/?lang='+encodeURIComponent(v);try{localStorage.setItem(key,v)}catch(_){}}
+function locale(v){if(!Object.hasOwn(warnings,v))v='de';code=v;select.value=v;document.documentElement.lang=v;document.documentElement.dir=v==='ar'||v==='ckb'?'rtl':'ltr';el('notice').hidden=v==='de';el('notice').textContent=warnings[v];el('back').dataset.target='/q/59/?lang='+encodeURIComponent(v);try{localStorage.setItem(key,v)}catch(_){}}
 function render(){answered=false;el('result').hidden=true;el('quiz').hidden=false;el('feedback').textContent='';el('next').disabled=true;el('next').textContent=n===qs.length-1?'Ergebnis anzeigen':'Nächste Frage';el('progress').textContent='Frage '+(n+1)+' von '+qs.length;el('question').textContent=qs[n].q;
 const container=el('options');container.replaceChildren();qs[n].a.forEach((choice,i)=>{const b=document.createElement('button');b.type='button';b.className='opt';b.textContent=choice;b.addEventListener('click',()=>{if(answered)return;answered=true;if(i===qs[n].c)correct++;[...container.children].forEach((it,k)=>{it.disabled=true;if(k===qs[n].c)it.dataset.correct='1';else if(k===i)it.dataset.wrong='1'});el('feedback').textContent=qs[n].e;el('next').disabled=false});container.appendChild(b)})}
 el('next').addEventListener('click',()=>{if(n<qs.length-1){n++;render()}else{el('quiz').hidden=true;el('result').hidden=false;el('score').textContent=correct+' von '+qs.length+' Fragen richtig beantwortet.'}});
-el('again').addEventListener('click',()=>{n=0;correct=0;render()});select.addEventListener('change',()=>locale(select.value));
+el('again').addEventListener('click',()=>{n=0;correct=0;render()});el('back').addEventListener('click',()=>location.assign(el('back').dataset.target||'/q/59/'));select.addEventListener('change',()=>locale(select.value));
 locale(code||'de');render();
 })();
 </script></body></html>
