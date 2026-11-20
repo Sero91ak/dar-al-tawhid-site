@@ -1,0 +1,628 @@
+/* DĀR TEST · IMMERSIVE UI ART V1 · 2026-11-06
+   The photographic layer belongs to the interface. Route-owned sticky
+   headers remain pinned; lower content passes behind the opaque scene.
+   Original art, theme, safe areas, text and all capsule controls stay.
+   Do not reuse on production without separate cross-device acceptance. */
+html.dar-test-immersive-art-v1{
+ --dar-art-top:var(--dar-test-occlusion-top,var(--dar-test-brand-header-height,0px));
+ --dar-art-a:rgba(4,18,16,.95);
+ --dar-art-b:rgba(4,18,16,.65);
+ --dar-art-c:rgba(4,18,16,.08);
+ --dar-art-edge:var(--bg,#10241e);
+ --dar-art-focus:60% center;
+}
+html.dar-test-immersive-art-v1:is([data-theme="light"],[data-theme="soft"],[data-theme="salbei"]),
+html.dar-test-immersive-art-v1[data-theme="light"][data-theme-variant="salbei"]{
+ --dar-art-a:rgba(247,245,237,.97);
+ --dar-art-b:rgba(247,245,237,.72);
+ --dar-art-c:rgba(247,245,237,.08);
+}
+html.dar-test-immersive-art-v1[data-theme] body #appView .dar-art-hero,
+html.dar-test-immersive-art-v1[data-theme] body .top-shell .dar-art-hero{
+ position:relative;isolation:isolate;min-width:0;max-width:100%;
+ box-sizing:border-box;background-color:var(--bg);
+}
+html.dar-test-immersive-art-v1[data-theme] body .dar-art-hero > :not(.dar-art-layer){
+ position:relative;z-index:2;
+}
+html.dar-test-immersive-art-v1[data-theme] body .dar-art-hero > .dar-art-layer{
+ position:absolute;inset:0;display:block;z-index:1;
+ overflow:hidden;border-radius:inherit;pointer-events:none;user-select:none;
+}
+html.dar-test-immersive-art-v1[data-theme] body .dar-art-layer::before{
+ content:"";position:absolute;inset:-2.5%;display:block;
+ background-image:
+   linear-gradient(98deg,var(--dar-art-a) 0%,var(--dar-art-b) 52%,var(--dar-art-c) 100%),
+   linear-gradient(0deg,var(--dar-art-edge) 0%,transparent 35%),
+   var(--dar-art-image,none);
+ background-position:center,center,var(--dar-art-focus);
+ background-size:cover;background-repeat:no-repeat;
+ transform-origin:var(--dar-art-focus);
+ transform:scale(var(--dar-art-scale,1.045));
+}
+html.dar-test-immersive-art-v1[data-theme] body .dar-art-layer::after{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(0deg,var(--dar-art-edge) 0%,transparent 25%),
+ radial-gradient(ellipse at 75% 9%,rgba(218,190,130,.08),transparent 55%);
+}
+/* The stickiness belongs to the actual hero, not to a duplicate scroll view.
+   It never changes the original app's scrollTop, pane placement or routing. */
+html.dar-test-immersive-art-v1[data-theme] body #appView .dar-art-hero[data-dar-art-sticky="1"]{
+ position:sticky!important;top:var(--dar-art-top)!important;
+ z-index:62!important;isolation:isolate;overflow:visible;
+ border-radius:0;box-shadow:0 1px 0 rgba(177,150,99,.15);
+}
+html.dar-test-immersive-art-v1[data-theme] body #appView .dar-art-hero[data-dar-art-sticky="1"] > .dar-art-layer{
+ border-radius:0;
+}
+html.dar-test-immersive-art-v1[data-theme] body #appView :is(.topics-hub,.topic-collection-page,.hadith-hub,.dua-hub,.post-reader,.qov-page,.library-page,.scholars-index){
+ overflow:visible;
+}
+html.dar-test-immersive-art-v1[data-theme] body #appView :is(.topics-hub,.topic-collection-page,.hadith-hub,.dua-hub) > .dar-art-hero[data-dar-art-sticky="1"]{
+ min-height:clamp(160px,22svh,270px);
+ padding-block:clamp(18px,3.7svh,38px);
+ padding-inline:clamp(16px,3.6vw,40px);
+}
+html.dar-test-immersive-art-v1[data-theme] body #appView .post-reader > .dar-art-hero[data-dar-art-sticky="1"]{
+ min-height:clamp(146px,20svh,240px);
+ padding:clamp(18px,3.2svh,34px) clamp(16px,3vw,38px);
+}
+/* Home prayer + salam/header is deliberately not sticky: it would swallow
+   the screen on small phones. Existing Frauen hero+search sticky owner stays. */
+html.dar-test-immersive-art-v1[data-theme] body .top-shell .dar-art-hero[data-dar-art-kind="home"]{
+ --dar-art-a:rgba(5,18,14,.93);
+ --dar-art-b:rgba(5,18,14,.64);
+ --dar-art-c:rgba(5,18,14,.08);
+ min-height:clamp(276px,38svh,460px);
+ border-radius:0 0 clamp(14px,2.7vw,28px) clamp(14px,2.7vw,28px);
+}
+html.dar-test-immersive-art-v1[data-theme] body #appView .dar-art-hero[data-dar-art-kind="women"]{
+ --dar-art-focus:67% center;
+}
+/* Existing art assets, never mockups of another product. */
+html.dar-test-immersive-art-v1 [data-dar-art-kind="home"]{
+ --dar-art-image:url("/test/assets/home-v1194/hero-wide-adobe.jpg");
+}
+html.dar-test-immersive-art-v1 [data-dar-art-kind="women"]{
+ --dar-art-image:var(--frauen-hero-img,none);
+}
+html.dar-test-immersive-art-v1 [data-dar-art-kind="topics"]{
+ --dar-art-image:url("/test/assets/area-heroes-v1290/topics.webp");
+}
+html.dar-test-immersive-art-v1 [data-dar-art-kind="topic"]{
+ --dar-art-image:url("/test/assets/area-heroes-v1290/topic-detail.webp");
+}
+html.dar-test-immersive-art-v1 [data-dar-art-kind="hadith"]{
+ --dar-art-image:url("/test/assets/area-heroes-v1290/book-detail.webp");
+}
+html.dar-test-immersive-art-v1 [data-dar-art-kind="dua"]{
+ --dar-art-image:url("/test/assets/area-heroes-v1290/dua.webp");
+}
+html.dar-test-immersive-art-v1 [data-dar-art-kind="post"]{
+ --dar-art-image:url("/test/assets/area-heroes-v1290/post-reader.webp");
+}
+html.dar-test-immersive-art-v1 [data-dar-art-kind="quran"]{
+ --dar-art-image:url("/test/assets/area-heroes-v1290/quran-overview.webp");
+}
+html.dar-test-immersive-art-v1 [data-dar-art-kind="library"]{
+ --dar-art-image:url("/test/assets/area-heroes-v1290/library.webp");
+}
+html.dar-test-immersive-art-v1 [data-dar-art-kind="scholars"]{
+ --dar-art-image:url("/test/assets/area-heroes-v1290/scholars.webp");
+}
+/* Only an adjacent search input is sticky, never a whole results collection. */
+html.dar-test-immersive-art-v1[data-theme] body #appView :is(.topics-hub,.topic-collection-page,.hadith-hub,.dua-hub) > .main-search{
+ position:sticky!important;
+ top:calc(var(--dar-art-top) + var(--dar-art-hero-height,0px))!important;
+ z-index:63!important;background-color:var(--bg);
+}
+/* Editorial page images are opt-in only. Never fade a book scan or screenshot
+   that contains letters or evidence. */
+html.dar-test-immersive-art-v1[data-theme] body #appView [data-dar-art-inline="decorative"]{
+ position:relative;isolation:isolate;overflow:clip;
+ border-radius:clamp(12px,2vw,24px);background:var(--bg);
+}
+html.dar-test-immersive-art-v1[data-theme] body #appView [data-dar-art-inline="decorative"] > img{
+ display:block;width:100%;height:auto;max-width:100%;border:0;border-radius:inherit;
+}
+html.dar-test-immersive-art-v1[data-theme] body #appView [data-dar-art-inline="decorative"]::after{
+ content:"";position:absolute;inset:60% 0 0;
+ background:linear-gradient(0deg,var(--bg),transparent);pointer-events:none;
+}
+@media(max-width:600px){
+ html.dar-test-immersive-art-v1 [data-dar-art-kind="home"]{
+  --dar-art-image:url("/test/assets/home-v1194/hero-mobile-adobe.jpg");
+  --dar-art-focus:54% center;
+ }
+ html.dar-test-immersive-art-v1[data-theme] body #appView :is(.topics-hub,.topic-collection-page,.hadith-hub,.dua-hub) > .dar-art-hero[data-dar-art-sticky="1"]{
+  min-height:clamp(144px,19svh,215px);padding-inline:clamp(12px,4vw,20px);
+ }
+}
+@media(max-height:540px) and (orientation:landscape){
+ html.dar-test-immersive-art-v1[data-theme] body #appView .dar-art-hero[data-dar-art-sticky="1"]{
+  min-height:clamp(120px,27svh,170px);
+ }
+}
+@media(max-width:699px) and (pointer:coarse){
+ html.dar-test-immersive-art-v1[data-theme] body #appView .dar-art-hero[data-dar-art-sticky="1"]:focus-within{
+  position:relative!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html.dar-test-immersive-art-v1[data-theme] body .dar-art-layer::before{
+  transform:none!important;transition:none!important;
+ }
+}
+
+
+/* DAR_TEST_VISIBLE_HOME_ART_V2 · The actual adult Test HOME is
+   #darHomeHtmlParityV1. Its renderer hides .top-shell and #appView outright.
+   Integrate into the VISIBLE welcome surface instead of the dead header.
+   Original live prayer, searchable input, 3D tabs and source ordering remain. */
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero{
+  --dar-art-edge:var(--dhp-bg,var(--bg));
+  --dar-art-focus:63% 48%;
+  --dar-home-art-gutter:clamp(24px,3vw,44px);
+  position:sticky!important;
+  top:var(--dar-art-top)!important;
+  z-index:64!important;
+  isolation:isolate!important;
+  display:block!important;
+  width:calc(100% + 2 * var(--dar-home-art-gutter))!important;
+  max-width:calc(100% + 2 * var(--dar-home-art-gutter))!important;
+  min-height:clamp(228px,30svh,345px)!important;
+  margin:12px calc(-1 * var(--dar-home-art-gutter)) 16px!important;
+  padding:clamp(28px,5svh,48px) clamp(21px,5vw,38px) clamp(34px,6svh,54px)!important;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background:var(--dar-art-edge)!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero > .dar-art-layer{
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  border-radius:0!important;
+  pointer-events:none!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero > :not(.dar-art-layer){
+  position:relative!important;
+  z-index:2!important;
+  max-width:min(590px,87%)!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero .dhp-greeting{
+  font-size:clamp(25px,4.4vw,39px)!important;
+  line-height:1.16!important;
+  letter-spacing:-.017em!important;
+  text-wrap:balance;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero .dhp-intro{
+  font-size:clamp(13px,1.2vw + 10px,16px)!important;
+  line-height:1.58!important;
+}
+/* An atmospheric extension beneath the scene connects the image to the
+   following Isnad without changing order or adding a graphic capsule. */
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-isnad{
+  position:relative;
+  z-index:1;
+  border-radius:0!important;
+}
+@media(max-width:480px){
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero{
+   --dar-home-art-gutter:max(14px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+   width:calc(100% + 2 * var(--dar-home-art-gutter))!important;
+   max-width:calc(100% + 2 * var(--dar-home-art-gutter))!important;
+   margin-inline:calc(-1 * var(--dar-home-art-gutter))!important;
+   min-height:clamp(210px,27svh,290px)!important;
+   padding:24px 22px 35px!important;
+ }
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero > :not(.dar-art-layer){
+   max-width:93%!important;
+ }
+}
+/* Ancillary art variants stay dark/salbei under their existing theme tokens. */
+html.dar-test-immersive-art-v1[data-theme="light"] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero,
+html.dar-test-immersive-art-v1[data-theme="salbei"] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero{
+ --dar-art-a:rgba(249,246,238,.96);
+ --dar-art-b:rgba(249,246,238,.71);
+ --dar-art-c:rgba(249,246,238,.08);
+}
+
+@media(min-width:481px) and (max-width:699px){
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero{
+  --dar-home-art-gutter:max(14px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+ }
+}
+
+
+/* DAR_TEST_HOME_STICKY_SCROLL_CHAIN_V3 · verified Chromium defect 2026-11-06:
+ * BODY had overflow-x:hidden -> computed overflow-y:auto. But the real
+ * scroll owner is HTML/window.scrollY. That phantom BODY scrolling ancestor
+ * prevents position:sticky from ever pinning to the fixed brand header.
+ * clip does not coerce visible Y to auto; retain horizontal clipping without
+ * introducing a second vertical scroll container. TEST HOME only.
+ * Do not override deliberate modal/dialog scroll locks. */
+html.dar-test-immersive-art-v1 body.has-bottom-nav.is-home-route:not(.is-feed-fullscreen):not(.is-ilm-chat-route):not(.dar-modal-open):not(.modal-open):not(.dialog-open):not([data-scroll-locked="true"]){
+ overflow-x:clip!important;
+ overflow-y:visible!important;
+}
+
+
+/* DAR_TEST_ONE_NAV_GEOMETRY_V1 · 06 NOV 2026
+   Test-only resolution of the legacy conflict:
+   adaptive-layout.css left:0/transform:none,
+   bottom-nav-global-v1075.css left:50%/translate(-50%),
+   dynamic Test inline nav rules alternating GRID and FLEX.
+   The REAL five-button #bottomNav is ONE fixed viewport capsule.
+   It keeps its existing theme, 3D icons, events and destinations.
+   The Quran unified reader, player, Ilm and fullscreen feed are excluded.
+*/
+html.dar-test-immersive-art-v1[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-player-route):not(.is-ilm-chat-route)
+:is(#appChromeDock #bottomNav.bottom-nav,#bottomNav.bottom-nav):not(.post-nav-hidden):not(.is-adaptive-rail) {
+  --dar-nav-one-width:min(560px,calc(100vw - 2 * max(12px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))));
+  position:fixed!important;
+  inset-block-start:auto!important;
+  inset-inline-start:auto!important;
+  inset-inline-end:auto!important;
+  top:auto!important;
+  left:50%!important;
+  right:auto!important;
+  bottom:calc(max(7px,calc(env(safe-area-inset-bottom,0px) - 18px)) + 3mm)!important;
+  margin:0!important;
+  padding:5px 6px!important;
+  width:var(--dar-nav-one-width)!important;
+  min-width:0!important;
+  max-width:var(--dar-nav-one-width)!important;
+  height:68px!important;
+  min-height:68px!important;
+  max-height:68px!important;
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:stretch!important;
+  justify-content:space-around!important;
+  gap:0!important;
+  grid-template-columns:none!important;
+  border-radius:28px!important;
+  overflow:hidden!important;
+  transform:translate3d(-50%,0,0)!important;
+  -webkit-transform:translate3d(-50%,0,0)!important;
+  transform-origin:50% 50%!important;
+  transition:none!important;
+  animation:none!important;
+  will-change:auto!important;
+  z-index:90!important;
+  pointer-events:auto!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-player-route):not(.is-ilm-chat-route)
+#bottomNav.bottom-nav:not(.post-nav-hidden) > .bottom-nav-btn {
+  display:flex!important;
+  flex:1 1 0!important;
+  min-width:0!important;
+  max-width:none!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:5px 2px!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:2px!important;
+  border-radius:20px!important;
+  transition:color .16s ease,background-color .16s ease!important;
+  transform:none!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-player-route):not(.is-ilm-chat-route)
+#bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+html.dar-test-immersive-art-v1[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-player-route):not(.is-ilm-chat-route)
+#bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon {
+  display:grid!important;place-items:center!important;
+  width:32px!important;min-width:32px!important;max-width:32px!important;
+  height:32px!important;min-height:32px!important;max-height:32px!important;
+  flex:0 0 32px!important;
+  margin:0 auto!important;
+  padding:1px!important;
+  transform:none!important;transition:none!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-player-route):not(.is-ilm-chat-route)
+#bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{
+  display:block!important;
+  width:100%!important;height:100%!important;
+  min-width:0!important;min-height:0!important;
+  max-width:100%!important;max-height:100%!important;
+  object-fit:contain!important;
+  transform:none!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-player-route):not(.is-ilm-chat-route)
+#bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon){
+  display:block!important;
+  position:static!important;
+  clip:auto!important;clip-path:none!important;
+  width:auto!important;height:auto!important;
+  max-width:100%!important;
+  margin:0!important;padding:0!important;
+  font-size:10px!important;line-height:1.15!important;
+  font-weight:700!important;letter-spacing:0!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  opacity:1!important;
+  transform:none!important;
+}
+@media (max-width:360px){
+ html.dar-test-immersive-art-v1[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-quran-player-route):not(.is-ilm-chat-route)
+ #bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon){font-size:9px!important;}
+}
+
+
+/* DAR_TEST_CINEMATIC_COMPOSITION_V2 · Reference-inspired, original art only.
+   The active Home scene must be encountered immediately after the fixed
+   brand/source line: preserve live prayer and search, but bring the photo
+   above prayer controls rather than leaving it as a small banner below them.
+   This is a real flex ordering, not a cloned view or an additional pane.
+*/
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content{
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:stretch!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > *{order:10;}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > .dhp-home-source-v55{order:0;}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero{order:1;}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > :is(.dhp-prayer,.dat-smart-prayer){order:2;}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > .dhp-isnad{order:3;}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > .dhp-quickbar{order:4;}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > .dhp-search-box{order:5;}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero{
+ --dar-art-a:rgba(6,20,18,.84);
+ --dar-art-b:rgba(6,20,18,.31);
+ --dar-art-c:rgba(6,20,18,.015);
+ --dar-art-focus:69% 48%;
+ min-height:clamp(340px,42svh,520px)!important;
+ margin-top:3px!important;
+ margin-bottom:0!important;
+ padding:clamp(35px,6svh,55px) clamp(25px,5vw,55px) clamp(58px,8svh,85px)!important;
+ display:flex!important;
+ flex-direction:column!important;
+ justify-content:center!important;
+ align-items:flex-start!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero > :not(.dar-art-layer){
+ max-width:min(530px,63%)!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero > .dar-art-layer::after{
+ background:
+   linear-gradient(0deg,var(--dar-art-edge) 0%,color-mix(in srgb,var(--dar-art-edge) 70%,transparent) 8%,transparent 38%),
+   linear-gradient(180deg,rgba(0,0,0,.10),transparent 24%),
+   radial-gradient(ellipse at 76% 12%,rgba(221,189,133,.10),transparent 58%);
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero .dhp-greeting{
+ margin:0 0 18px!important;
+ font-size:clamp(29px,4.7vw,52px)!important;
+ line-height:1.08!important;
+ font-weight:650!important;
+ letter-spacing:-.028em!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero .dhp-intro{
+ margin:0!important;
+ font-size:clamp(14px,1.4vw,18px)!important;
+ line-height:1.62!important;
+ text-wrap:pretty;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > .dat-smart-prayer{
+ align-self:stretch!important;
+ margin-top:-4px!important;
+ position:relative!important;
+ z-index:2!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 > .dhp-content > .dhp-isnad{
+ margin-top:clamp(10px,2.4vw,25px)!important;
+}
+html.dar-test-immersive-art-v1[data-theme]:is([data-theme="light"],[data-theme="soft"],[data-theme="salbei"]) body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero{
+ --dar-art-a:rgba(248,246,239,.92);
+ --dar-art-b:rgba(248,246,239,.30);
+ --dar-art-c:rgba(248,246,239,.02);
+}
+@media(max-width:699px){
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero{
+  --dar-art-focus:68% 43%;
+  --dar-art-b:rgba(6,20,18,.43);
+  min-height:clamp(305px,43svh,440px)!important;
+  padding:clamp(33px,6svh,48px) 25px clamp(52px,8svh,70px)!important;
+ }
+ html.dar-test-immersive-art-v1[data-theme]:is([data-theme="light"],[data-theme="soft"],[data-theme="salbei"]) body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero{
+  --dar-art-b:rgba(248,246,239,.39);
+ }
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero > :not(.dar-art-layer){max-width:88%!important;}
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero .dhp-greeting{font-size:clamp(29px,7vw,38px)!important;}
+}
+@media(max-height:530px) and (orientation:landscape){
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero{
+  min-height:clamp(185px,52svh,260px)!important;
+  padding-block:20px 30px!important;
+ }
+}
+/* Route artworks are delivered by the ONE art layer, not duplicated by a
+   second legacy background-image behind it. Preserve owner-provided text. */
+html.dar-test-immersive-art-v1[data-theme] body #appView :is(
+ .topics-hub,.topic-collection-page,.hadith-hub,.dua-hub,
+ .post-reader,.qov-page,.library-page,.scholars-index
+) > .dar-art-hero[data-dar-art-kind]{
+ background-image:none!important;
+ background-color:var(--bg)!important;
+ background-clip:padding-box!important;
+}
+
+
+/* DAR_TEST_SHARED_AREA_ART_V2 · existing per-route photos are a single
+   decorative UI stratum. Never apply to Qurʾān reading, Ḥadīṯ evidence,
+   scans, modal content or the interactive ʿIlm chat.
+   Unlike Home/Topics, service headers keep their original relative scroll
+   behavior and owner. No new scroll container, no DOM relocation. */
+html.dar-test-immersive-art-v1[data-theme] body #appView > .view-head.dar-art-hero[data-dar-art-kind="area"]{
+ --dar-art-image:var(--area1294-art,none);
+ position:relative!important;
+ isolation:isolate!important;
+ min-height:clamp(178px,23svh,300px)!important;
+ background:var(--bg)!important;
+ background-image:none!important;
+ box-shadow:none!important;
+ overflow:hidden!important;
+ border-radius:0!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body #appView > .view-head.dar-art-hero[data-dar-art-kind="area"]::before{
+ content:none!important;
+ display:none!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body #appView > .view-head.dar-art-hero[data-dar-art-kind="area"] > .dar-art-layer{
+ position:absolute!important;inset:0!important;z-index:1!important;
+ display:block!important;opacity:1!important;pointer-events:none!important;
+ border-radius:0!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body #appView > .view-head.dar-art-hero[data-dar-art-kind="area"] > :not(.dar-art-layer){
+ position:relative!important;z-index:2!important;
+}
+@media(max-width:600px){
+ html.dar-test-immersive-art-v1[data-theme] body #appView > .view-head.dar-art-hero[data-dar-art-kind="area"]{
+  min-height:clamp(150px,20svh,245px)!important;
+ }
+}
+
+
+/* DAR_TEST_APPSTORE_SCROLL_MORPH_V1 · actual App Store reference 2026-11-06
+   One ORIGINAL image bleeds underneath the fixed DĀR brand header while
+   expanded. Scroll up: scene and editorial copy naturally move under the
+   header; the header's opaque compact state grows with the same scroll
+   distance. Scroll down / iOS rubber-band: the exact inverse transition.
+   NEVER change scrollTop, DOM parent, hero height or fixed nav geometry.
+   The old permanently pinned full-height Home scene is retired. */
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero {
+  position:relative!important;
+  top:auto!important;
+  z-index:24!important;
+  overflow:visible!important;
+  isolation:isolate!important;
+  margin-top:0!important;
+  margin-bottom:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  /* Full image from top, not a separate rounded banner */
+  background:transparent!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero > .dar-art-layer {
+  top:calc(-1 * var(--dar-art-top,58px))!important;
+  bottom:0!important;
+  left:0!important;right:0!important;
+  border-radius:0!important;
+  overflow:hidden!important;
+  background:var(--dar-art-edge,var(--bg))!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero > .dar-art-layer::before {
+  inset:-1.5%!important;
+  background-position:center,center,var(--dar-art-focus,69% 48%)!important;
+  background-size:cover!important;
+  transform:scale(var(--dar-store-image-scale,1.045))!important;
+  transform-origin:68% 20%!important;
+  will-change:transform;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero > :not(.dar-art-layer){
+  opacity:var(--dar-store-title-opacity,1)!important;
+  transform:translate3d(0,var(--dar-store-title-shift,0px),0)!important;
+  will-change:opacity,transform;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero > .dhp-welcome-rule {
+  transform:none!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero + .dhp-home-source-v55{
+  margin-top:12px!important;
+}
+/* Scene becomes the FIRST thing after the measured header. The source
+   kicker remains available immediately below the cover rather than
+   creating a blank belt between header and artwork. */
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero { order:0!important; }
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darHomeHtmlParityV1 > .dhp-content > .dhp-home-source-v55 { order:1!important; }
+/* EXISTING fixed original brand header morphs over SAME image; its
+   controls/logo remain real and clickable. Content below has no duplicate
+   image or forced scrollpane. */
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darTestBrandHeaderV1[data-premium-header-v2="ready"] {
+  position:fixed!important;
+  z-index:100!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border-bottom-color:transparent!important;
+  box-shadow:none!important;
+  isolation:isolate!important;
+  overflow:visible!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darTestBrandHeaderV1[data-premium-header-v2="ready"]::before {
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  background:var(--dtbh-bg,var(--bg))!important;
+  border-bottom:1px solid var(--dtbh-line,var(--line))!important;
+  opacity:var(--dar-store-header-alpha,0)!important;
+  pointer-events:none!important;
+  box-shadow:0 6px 20px rgba(0,0,0,.06);
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darTestBrandHeaderV1[data-premium-header-v2="ready"]::after {
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  background:linear-gradient(180deg,rgba(0,0,0,.19),rgba(0,0,0,.055))!important;
+  opacity:var(--dar-store-expanded-alpha,1)!important;
+  pointer-events:none!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darTestBrandHeaderV1[data-premium-header-v2="ready"] > .dtbh-row{
+  position:relative!important;
+  z-index:2!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darTestBrandHeaderV1[data-premium-header-v2="ready"] > .dtbh-profile-popover {
+  position:absolute!important;
+  z-index:4!important;
+}
+html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+#darTestBrandHeaderV1[data-premium-header-v2="ready"] .dtbh-logo{
+  transform:scale(var(--dar-store-logo-scale,1))!important;
+  transform-origin:center!important;
+}
+/* Compact header remains the ORIGINAL header: no cloned text, buttons,
+   icons, or separate navigation controller. */
+@media(max-width:699px){
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+ #darHomeHtmlParityV1 > .dhp-content > .dhp-welcome.dar-art-hero{
+   min-height:clamp(340px,48svh,480px)!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+ #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero > .dar-art-layer::before,
+ html.dar-test-immersive-art-v1[data-theme] body.is-home-route
+ #darHomeHtmlParityV1 .dhp-welcome.dar-art-hero > :not(.dar-art-layer){
+   will-change:auto!important;
+   transform:none!important;
+ }
+}

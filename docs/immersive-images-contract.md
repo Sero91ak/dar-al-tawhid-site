@@ -1,0 +1,44 @@
+# DĀR AL TAWḤĪD – verbindliche integrierte Bildarchitektur
+
+Nutzerfreigabe: **06.11.2026**. Designreferenzen: die vom Nutzer gezeigten Juice-Lab-App-Layouts. **Nur das Prinzip der Bildintegration übernehmen, nicht Logos, Motive, Screenshots oder das Produktdesign fremder Anbieter.**
+
+## Verbindliche Gestaltungsregeln
+
+1. **Bild = Benutzeroberfläche.** Historische Hero- und dekorative Seitenbilder müssen Teil einer durchkomponierten UI sein, nicht wie angehängte rechteckige Banner wirken. Bildmotiv, Typografie, Hintergrund, Kontrast, Text und Bedienelemente werden zusammen gestaltet. Weiche Schatten, Masken, fließende Übergänge und sorgfältiger Bildfokus sind zulässig.
+2. **Originalbilder bleiben verbindlich.** Vorhandene freigegebene Bilder und 3D-Icons wiederverwenden. Keine Bildersetzung bei einem Layoutauftrag; Motive müssen historisch/thematisch passen. Keine Propheten darstellen. Logo bleibt Original.
+3. **Scrollen unter einer fixierten Fläche.** Auf geeigneten Themen-/Detailseiten bleibt der vorhandene Header mit Hero (und, falls zugehörig, Suche) am definierten oberen Anschlag. Inhalt scrollt darunter und verschwindet hinter der deckenden Hero-Ebene. Beim Zurückscrollen erhält die Szene ihren ursprünglichen Bildausschnitt; zulässig ist eine minimale, vom echten Scrollfortschritt gesteuerte Verkleinerung des Hintergrund-Crops. Keine eigenständige zweite Scrollfläche oder Zwangsanimation.
+4. **Korrekte Ausnahmen.** Auf der Startseite mit umfangreichem Gebetszeiten-/Salām-Kopf nicht den gesamten Header festklemmen. Frauenbereichs-Hero und Suche bilden weiterhin eine gemeinsame bestehende sticky Fläche; die Bildschicht darf diese Navigation nicht umbauen. Keine dekorativen Bildoverlays auf Qurʾān-Lesetext, Quellenbeweisen, Scans, Ḥadīṯ-Textgrafiken, Modals, Videos oder Kids-App.
+5. **Plattformgerechte Integration.** Smartphone, Fold auf/zu, iPad, Split View, Desktop, Landscape nach verfügbarer Breite. Safe Areas, RTL und alle neun Erwachsenen-Sprachen bewahren; nur die bestehenden freigegebenen Farbschemata. Keine iPhone-Mockup-Rahmen innerhalb der eigentlichen App.
+6. **Barrierefreiheit/Leistung.** Dekorative Layer `aria-hidden`; Textlesbarkeit gegen jede Fotofläche prüfen. `prefers-reduced-motion` respektieren. Keine scroll-blockierenden Touchhandler, keine DOM-Neuordnung, keine versteckten Inhaltsdoppelungen, keine neuen Layoutcontroller. Scrollfortschritt passiv lesen und grafische Effekte per `requestAnimationFrame` bündeln.
+7. **Seitenbilder:** Masken und Verlaufsüberblendungen nur bei eindeutig dekorativen Bildern. Texttragende Screenshots, Buchscans, Quellenbelege dürfen niemals ausgeblendet werden.
+8. **Kapseln bleiben funktional.** Bestehende Kapselarchitektur nicht gemeinsam mit einem Bildauftrag umbauen. Keine zusätzlichen leeren Rahmen zur bloßen Dekoration.
+9. **Rollout:** Erst DĀR Test, mit echten Bildern und echter Navigation, dann Browser-/Geräteabnahme und gesonderte Freigabe für Besucher/iOS/Android-Live. GitHub-Commit allein ist kein Live- oder Geräte-Nachweis.
+
+## Pilot in DĀR Test
+
+Das experimentelle `dar-fold-workspace-v2` mit linker Seitenrail, Verschieben von `#appView` und eigenem Leser-Scrollcontainer wird im Test-Worker nicht mehr geladen; die historischen Dateien bleiben für Rollback erhalten. Die Standard-5-Tab-Leiste und der normale responsive Layout-Owner bleiben bestehen.
+
+Die ausschließlich unter `/test/` geladenen Dateien `test/assets/dar-test-immersive-art-v1.css` und `.js` ergänzen die **vorhandenen** Bilder als dekorative Unterebenen der wirklichen Hero-Komponenten (Startseite, Frauen, Themen, Beiträge, Ḥadīṯ, Duʿāʾ, Qurʾān-Übersicht, Bibliothek). Suchfelder bleiben echte, bedienbare Inputs. Keine Änderung an Produktiv-App, Admin, Kids, TV, Watch, Push oder Beitragstexten.
+
+Für gezielt freigegebene dekorative Seitenbilder ist `data-dar-art-inline="decorative"` als Opt-in vorgesehen; Belegscans und Bildtext niemals so kennzeichnen.
+
+**Prüfen:** 320, 360, 390, 430, 600, 768, 1024, 1280, 1440px; iPhone, iPad Querformat, Fold geschlossen/geöffnet; dunkles und helles Theme; RTL; Suche mit Tastatur, Touch-Scroll, zurück und vor, Bildfokus und Textkontrast. Technischer Guard: `node test/tools/dar-test-immersive-art-v1-guard.cjs`.
+
+## Navigations- und bereichsübergreifender Bildvertrag – 06.11.2026
+
+- **Ein vorhandenes `#bottomNav`:** Die fünf echten 3D-Tabs dürfen bei Scrollen, SPA-Routenwechsel, Fold-/iPad-Breitenwechsel oder Themewechsel nicht seitlich verspringen, in Grid/Siderail wechseln oder ihre Kapselgeometrie verändern. Ein einziger Test-Geometrievertrag bestimmt Breite, Zentrierung, Höhe und Rundung nach verfügbarer Breite; alte konkurrierende `left:50%/transform`- und `left:0/right:0`-Regeln sind für die reguläre Test-Navigation inaktiv. Reader-/Vollbild-Ausnahmen behalten ihren eigenen, begründeten Owner.
+- **Erwachsenen-Startseite:** Das echte `#darHomeHtmlParityV1` wird genutzt; `.top-shell` ist dort unsichtbar. Immersives Bild kommt direkt nach der Kopfzeile; die vorhandenen Gebetszeiten, Suche, Āthār und Schnellzugriffe bleiben erhalten. Ein einziges Foto bildet die dekorative Grundlage, und die Inhalte scrollen darunter.
+- **Weitere Bereichsbilder:** Bereiche mit `--area1294-art` (z. B. Einstellungen, Ramadan, Themen) erhalten die bereits existierenden Bildmotive als geschützte dekorative Ebene ihres echten Hero-Elements. Keine neue Illustration, keine Kopie, kein neues Kartenlayout.
+- **Nachweis:** Chromium-Prüfung der tatsächlich ausgelieferten Test-Startseite in 390/768 CSS-Pixel und echte Routenwechsel Mehr/Start/Themen. Nav-Position und Form müssen konstant bleiben; Startseite verwendet die App-Store-typische vollständige Hero-Einblendung unter der fixierten **kompakten** Kopfzeile und scrollt nach oben wieder aus dem Sichtbereich (kein dauerhaft großes Sticky-Hero); geeignete Unterseiten behalten ihr eigenes Sticky-Hero-/Suchfeld-Verhalten. Versionierung/Deployment bleiben nur beim separaten Cloudflare-Test-Worker.
+
+## Verbindlicher Bewegungsvertrag – Apple-App-Store-Bildreferenz vom 06.11.2026
+
+Der Nutzer hat im Bildschirmvideo den dynamischen Detailbildschirm des Apple App Store als **Verhaltensreferenz** freigegeben. Keine App-Store-Logos, fremden Screenshots oder Spielebilder verwenden.
+
+- **Expanded:** Das freigegebene DĀR-Hero-Bild ist Teil der gesamten Bildschirmkomposition. Die Bildfläche beginnt direkt an und **läuft optisch hinter die bestehende fixierte Kopfzeile**, ohne rechteckigen Kartenrand oder sichtbaren Spalt.
+- **Scroll up / compact:** Ein normaler nativer Fingerswipe führt den großen Hero mit Titel und Bild organisch unter die Kopfzeile. Der große Hero bleibt **nicht** über dem Inhalt dauerhaft auf voller Höhe angeheftet. Die originale kompakte DĀR-Kopfzeile mit Logo und realen 3D-Funktionstasten bleibt stehen; ihr Hintergrund wird anhand desselben Scrollfortschritts allmählich deckend.
+- **Reverse/pull-down:** Jeder Weg zurück nach oben und das iOS-Überziehen stellt den identischen Bildausschnitt und die erweiterte Szene **stufenlos und vollständig reversibel** wieder her. Kein zeitbasierter Neustart, kein Snap, kein Nachspringen und keine künstliche Scrollposition.
+- **Technik:** Derselbe bestehende Hero-/Header-DOM, ein echtes Bildasset, ein einziger tatsächlicher Scroll-Owner, passive Scrolllistener und pro Frame höchstens ein `requestAnimationFrame`. Während der Bewegung weder Header- noch Hero-Höhe und weder `scrollTop` noch `#bottomNav`-Geometrie umschreiben. Das verhindert Rückkopplung, seitliches Wandern und Layoutsprünge.
+- **Anwendung:** Auf DĀR Test zuerst die Startseite; anschließend für weitere geeignete Bereichs-Heros anhand ihrer echten Renderer unterscheiden, ob ein kompakt einziehender Hero oder ein **explizit vom Nutzer verlangter** angehefteter Themen-/Frauen-Hero mit Suche zu verwenden ist. Ein globales Erzwingen derselben Mechanik über alle Bereiche ist verboten.
+- **Prüfung:** Reale Computed-Style- und Geometriemessung bei `scrollY=0`, mittlerem Scroll, vollständig kompakt und wieder `scrollY=0` (390px und 768px), einschließlich Navigation und Routenwechsel. Bei `prefers-reduced-motion` nur die nichtdekorativen Zustandswechsel, keine zusätzliche Parallax-Vergrößerung.
+
