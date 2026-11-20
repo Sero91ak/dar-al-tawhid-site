@@ -53,7 +53,7 @@ struct SearchView: View {
                 }
             }
         }
-        .searchable(text: $query, prompt: "DAR-Bibliothek durchsuchen")
+        .searchable(text: $query, isPresented: $isSearchFieldPresented, prompt: "DAR-Bibliothek durchsuchen")
         .navigationTitle("Suche")
         .onChange(of: query) {
             runSearch()
