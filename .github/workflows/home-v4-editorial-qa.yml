@@ -167,14 +167,15 @@ jobs:
                 box=data['boxes'][n]
                 if box is None or box['width']<=0 or box['height']<=0:errors.append(f'{w}x{h}: missing or hidden {n}')
             long_text=driver.execute_script("""
-              const article=document.querySelector('.daily-story'),ar=document.getElementById('dailyArabic'),de=document.getElementById('dailyDe'),src=document.getElementById('dailySource');
-              const old=[ar.textContent,de.textContent,src.textContent];
-              de.textContent=('Eine gut lesbare deutsche Übersetzung mit vollständigem Sinn. ').repeat(18);src.textContent=('Qurʾān · Beispielquelle · ').repeat(12);
-              const result={scrollHeight:article.scrollHeight,clientHeight:article.clientHeight,overflow:getComputedStyle(article).overflowY};
-              [ar.textContent,de.textContent,src.textContent]=old;return result;
+              const article=document.querySelector('.daily-story'),de=document.getElementById('dailyDe'),src=document.getElementById('dailySource');
+              const old=[de.textContent,src.textContent],oldSize=parseFloat(getComputedStyle(de).fontSize);
+              de.textContent=('Eine gut lesbare deutsche Übersetzung mit vollständigem Sinn. ').repeat(18);src.textContent=('Qurʾān · Beispielquelle · ').repeat(4);
+              window.fitDailyText();
+              const result={scrollHeight:de.scrollHeight,clientHeight:de.clientHeight,overflow:getComputedStyle(article).overflowY,font:parseFloat(getComputedStyle(de).fontSize),text:de.textContent.length};
+              [de.textContent,src.textContent]=old;window.fitDailyText();return result;
             """)
             print('LONG_DAILY_DARK',long_text,flush=True)
-            if long_text['scrollHeight']<=long_text['clientHeight'] or long_text['overflow']!='auto':errors.append('Long daily content is clipped in dark mode')
+            if long_text['scrollHeight']>long_text['clientHeight']+2 or long_text['overflow']=='auto' or long_text['font']>=18:errors.append('Long daily content did not shrink to fit without an inner scroll')
             driver.set_window_size(1280,800)
             driver.get(url+'/?qa=home-v3')
             WebDriverWait(driver,25).until(EC.element_to_be_clickable((By.ID,'openSettings')))
@@ -404,12 +405,19 @@ jobs:
             driver.execute_script("window.darHomeDailyVerse={reference:'2:183',ar:'يَا أَيُّهَا الَّذِينَ آمَنُوا',de:'O ihr, die ihr glaubt'};document.getElementById('openTadabbur').hidden=false;document.getElementById('openTadabbur').click()")
             WebDriverWait(driver,150).until(lambda d:'4774' in d.find_element(By.ID,'tadabburStatus').text or '1 geprüfte' in d.find_element(By.ID,'tadabburStatus').text or '1 geprüfte Überlieferung' in d.find_element(By.ID,'tadabburStatus').text)
             WebDriverWait(driver,10).until(lambda d:len(d.find_elements(By.CSS_SELECTOR,'#tadabburResults .tadabbur-item'))>0)
-            tad_layout=driver.execute_script("return {inline:document.getElementById('tadabburPanel').parentElement.classList.contains('daily-story'),homeHidden:document.getElementById('mainScreen').hidden,route:document.getElementById('tadabburPanel').classList.contains('home-view'),scroll:getComputedStyle(document.querySelector('.daily-story')).overflowY}")
-            if not tad_layout['inline'] or tad_layout['homeHidden'] or tad_layout['route'] or tad_layout['scroll']!='auto':errors.append('Tadabbur did not expand inline in the readable daily-text column')
-            print('TADABBUR_INLINE_LAYOUT',tad_layout,flush=True)
+            tad_layout=driver.execute_script("const p=document.getElementById('tadabburPanel'),d=p.querySelector('.tadabbur-dialog');return {visible:!p.hidden,dialog:p.getAttribute('role'),modal:p.getAttribute('aria-modal'),fixed:getComputedStyle(p).position,display:getComputedStyle(p).display,dialogWidth:d.getBoundingClientRect().width,dialogHeight:d.getBoundingClientRect().height,homeHidden:document.getElementById('mainScreen').hidden,storyOverflow:getComputedStyle(document.querySelector('.daily-story')).overflowY,button:document.getElementById('openTadabbur').textContent.trim()}")
+            if not tad_layout['visible'] or tad_layout['dialog']!='dialog' or tad_layout['modal']!='true' or tad_layout['fixed']!='fixed' or tad_layout['display']!='grid' or tad_layout['dialogWidth']<300 or tad_layout['dialogHeight']<150 or tad_layout['homeHidden'] or tad_layout['storyOverflow']=='auto' or tad_layout['button']!='Tadabbur einblenden':errors.append('Tadabbur is not a readable modal independent of the HOME text area')
+            print('TADABBUR_MODAL_LAYOUT',tad_layout,flush=True)
             tad_text=driver.find_element(By.ID,'tadabburResults').text
             print('HOME_TADABBUR_EXACT_LOOKUP',tad_text[:500],flush=True)
             if 'Das Fasten ist ein Schutzschild.' not in tad_text or 'Ṣaḥīḥ al-Buḫārī, Nr. 1904' not in tad_text:errors.append('Exact verse Tadabbur lookup or source citation failed')
+            driver.find_element(By.ID,'closeTadabbur').click()
+            WebDriverWait(driver,5).until(lambda d:d.find_element(By.ID,'tadabburPanel').get_attribute('hidden') is not None)
+            if driver.execute_script("return document.activeElement.id")!='openTadabbur':errors.append('Closing Tadabbur did not restore focus to its opener')
+            driver.find_element(By.ID,'openTadabbur').click()
+            WebDriverWait(driver,10).until(lambda d:d.find_element(By.ID,'tadabburPanel').get_attribute('hidden') is None)
+            driver.find_element(By.ID,'tadabburPanel').send_keys('ESCAPE')
+            WebDriverWait(driver,5).until(lambda d:d.find_element(By.ID,'tadabburPanel').get_attribute('hidden') is not None)
             driver.find_element(By.ID,'closeTadabbur').click()
             driver.find_element(By.ID,'openSettings').click()
             driver.find_element(By.CSS_SELECTOR,'button[data-tab="saver"]').click()
