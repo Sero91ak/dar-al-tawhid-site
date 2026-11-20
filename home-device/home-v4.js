@@ -17,6 +17,7 @@
     if(/ʿišā|isha|nachtgebet/i.test(raw))return'isha';
     return document.querySelector('.prayer-cell.active')?.dataset.prayer||'';
   }
+  function setAdhanBackdrop(src){const backdrop=$('adhanWallpaperBackdrop');if(backdrop){backdrop.style.backgroundImage=src?'url("'+src.replaceAll('"','%22')+'")':'none';backdrop.hidden=!src}}
   function artwork(){
     const adhan=$('adhanVisual');
     if(!adhan || !adhan.classList.contains('active')){current='';return}
@@ -28,9 +29,9 @@
     if(title)title.textContent=NAMES[name]+' · Aḏān';
     let image=$('h4PrayerArtwork');
     if(!image){image=document.createElement('img');image.id='h4PrayerArtwork';image.className='h4-prayer-image';image.alt='';image.setAttribute('aria-hidden','true');
-      image.addEventListener('error',()=>{if(image.dataset.fallback==='native'){image.dataset.fallback='web';image.src=ROOT+'/test/assets/prayer-motifs/'+(image.dataset.prayer||'fajr')+'.webp'}else if(image.dataset.fallback==='web'){image.dataset.fallback='kids';image.src=ROOT+'/kids/assets/kids-salah-v1262/cinematic-still.jpg'}else image.style.display='none'});adhan.prepend(image)}
+      image.addEventListener('error',()=>{if(image.dataset.fallback==='native'){image.dataset.fallback='web';image.src=ROOT+'/test/assets/prayer-motifs/'+(image.dataset.prayer||'fajr')+'.webp';setAdhanBackdrop(image.src)}else if(image.dataset.fallback==='web'){image.dataset.fallback='kids';image.src=ROOT+'/kids/assets/kids-salah-v1262/cinematic-still.jpg';setAdhanBackdrop(image.src)}else{image.style.display='none';setAdhanBackdrop('')}});adhan.prepend(image)}
     if(name!==current){
-      current=name;image.dataset.fallback='native';image.dataset.prayer=name;image.style.display='block';image.src=MOTIF_BASE+name+'.jpg';
+      current=name;image.dataset.fallback='native';image.dataset.prayer=name;image.style.display='block';image.src=MOTIF_BASE+name+'.jpg';setAdhanBackdrop(image.src);
       const t=document.querySelector('.prayer-cell[data-prayer="'+name+'"] .ptime')?.textContent?.trim();
       const sub=$('adhanInfo');if(sub && !sub.dataset.h4Augmented && t && /^[0-2][0-9]:[0-5][0-9]$/.test(t)){
         sub.textContent='Heute · '+t+' Uhr';sub.dataset.h4Augmented='true';
