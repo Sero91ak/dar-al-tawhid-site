@@ -28,7 +28,7 @@
     "ownerAuthorizedNoPrelistening": true,
     "pronunciationDictionaryCreativeConnectorCannotAttach": true
   },
-  "taskStatus": "waiting-for-real-generation-and-binary-import",
+  "taskStatus": "all-20-new-originals-generated-needs-binary-import-and-nine-assemblies",
   "completionClaimed": false,
   "segments": {
     "ar-01": {
@@ -397,5 +397,9 @@
   "glossaryPhrasesPendingAssembly": 9,
   "newMediaFilesImported": 0,
   "publicPlaybackApproved": false,
-  "productionStage": "all-14-click-texts-have-provider-originals; requires media binary import, 9 glossary assemblies, SHA and live HTTP verification"
+  "productionStage": "all-14-click-texts-have-provider-originals; requires media binary import, 9 glossary assemblies, SHA and live HTTP verification",
+  "providerOriginalSegmentsCompleted": 20,
+  "reusedExistingSalawatSegments": 1,
+  "binaryFilesImported": 0,
+  "childAudioPlaybackApprovedCount": 0
 }
