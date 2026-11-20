@@ -109,3 +109,12 @@ Der eigenständige Arbeitsnachweis in PR #1824 wurde zugunsten dieses bestehende
 - Der iPhone 18 Pro Max / iOS 27.2 Simulator ist weiterhin gebootet; DARNext läuft als `com.daraltawhid.darnext.DARNext` (PID 71222). Ein aktueller `simctl`-Screenshot `/tmp/darnext-live-20261120.png` (1,8 MB, 14:11 CET) zeigt die App. Das ist kein sichtbares Simulatorfenster und der Build bleibt einem GitHub-Commit nicht zugeordnet.
 - Device Hub (Xcode 27.2, PID 86164) startet, zeigt in dieser Sitzung aber kein Gerätefenster. `Simulator.app` fehlt weiterhin. Der Versuch, das lokale untracked Xcode-Projekt in Xcode zu öffnen, blockierte im AppleScript-Aufruf ohne Fenster; nur dieser eigene wartende Aufruf wurde beendet. Xcode und Simulator blieben aktiv.
 - Gemessener freier Speicher: 130 MiB. Es wurden keine Caches oder App-Daten gelöscht.
+
+
+## Laufzeit- und Bildpfadprüfung, 20.11.2026 14:22 CET
+
+- Der iPhone 18 Pro Max / iOS 27.2 bleibt im CoreSimulator gebootet; `com.daraltawhid.darnext.DARNext` startet weiterhin erfolgreich. Die installierte App ist keinem GitHub-Commit zugeordnet.
+- Das sichtbare Simulatorfenster ist nicht verfügbar: `/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app` fehlt. Xcode läuft, aber Simulator.app konnte nicht geöffnet werden.
+- Freier Speicher ist auf etwa 102 MiB gefallen. Ein neuer `simctl io screenshot` scheiterte mit `ENOSPC`; der frühere Screenshot bleibt ein älterer Laufzeitbeleg und darf nicht als aktueller Frame ausgegeben werden. Keine Caches oder Gerätedaten wurden gelöscht.
+- Im aktuellen GitHub-Head `bee6437975596d5946dedcbc227c632e6e408c10` wird der Dashboard-Hero über `DARNextRemoteImage` aus `DARNextMedia.heroMobile` geladen und anschließend auf 66×66 pt begrenzt. Die Bildkomponente verwendet `AsyncImage`; Quick Actions nutzen sie ebenfalls in 58×58 pt. Das belegt Original-URL-Nutzung an kleinen Anzeigegrößen, aber noch keine konkrete Hitch-Ursache.
+- Der Scroll-/Hero-Bericht bleibt deshalb offen: Der derzeitige Gerätestart und frühere Scrollgesten beweisen weder aktuelle PR-Integration noch flüssige Frames. Nächster Schritt ist die vollständige Inventur aller `DARNextRemoteImage` Verwendungen samt Anzeigegrößen und anschließend eine isolierte, messbare Ladeoptimierung.
