@@ -10,6 +10,9 @@ const canonicalLibraryBuilder = path.join(__dirname, 'build-canonical-books-inde
 const testLibraryPatcher = path.join(__dirname, 'patch-test-canonical-library.js');
 const visitorLibraryPublisher = path.join(__dirname, 'publish-visitor-canonical-library.js');
 
+// Block publishing if any Q1–Q50 localization UI or canonical coverage ID drifts.
+execFileSync(process.execPath, [path.join(__dirname, 'check-q1-q50-nine-language-foundation.cjs')], { cwd: root, stdio: 'inherit' });
+
 execFileSync(process.execPath, [syncBuildIds], {
   cwd: root,
   stdio: 'inherit'
