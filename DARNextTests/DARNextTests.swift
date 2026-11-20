@@ -147,6 +147,19 @@ struct DARNextTests {
         ) == nil)
     }
 
+    @Test
+    func libraryPublicationAvailabilityRequiresPublishedOfflineState() {
+        #expect(LibraryPublicationAvailability.isAvailableOffline(status: "published", offlineEnabled: true))
+        #expect(LibraryPublicationAvailability.isAvailableOffline(status: "updated", offlineEnabled: true))
+
+        #expect(!LibraryPublicationAvailability.isAvailableOffline(status: "draft", offlineEnabled: true))
+        #expect(!LibraryPublicationAvailability.isAvailableOffline(status: "pending", offlineEnabled: true))
+        #expect(!LibraryPublicationAvailability.isAvailableOffline(status: "withdrawn", offlineEnabled: true))
+        #expect(!LibraryPublicationAvailability.isAvailableOffline(status: nil, offlineEnabled: true))
+        #expect(!LibraryPublicationAvailability.isAvailableOffline(status: "published", offlineEnabled: false))
+        #expect(!LibraryPublicationAvailability.isAvailableOffline(status: "published", offlineEnabled: nil))
+    }
+
     private func quizQuestion(
         id: String,
         category: String,
