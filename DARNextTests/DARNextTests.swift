@@ -63,6 +63,15 @@ struct DARNextTests {
     }
 
     @Test
+    func locationUpdatesStopWhenAuthorizationIsRevokedOrUnavailable() {
+        #expect(DARNextPermissionCoordinator.shouldStopLocationUpdates(for: .denied))
+        #expect(DARNextPermissionCoordinator.shouldStopLocationUpdates(for: .restricted))
+        #expect(DARNextPermissionCoordinator.shouldStopLocationUpdates(for: .notDetermined))
+        #expect(!DARNextPermissionCoordinator.shouldStopLocationUpdates(for: .authorizedWhenInUse))
+        #expect(!DARNextPermissionCoordinator.shouldStopLocationUpdates(for: .authorizedAlways))
+    }
+
+    @Test
     func quizQuestionsAreApprovedAdultContent() async throws {
         let questions = try await LocalContentRepository().quizQuestions()
 
