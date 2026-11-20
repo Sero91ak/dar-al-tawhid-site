@@ -125,3 +125,11 @@ Der eigenständige Arbeitsnachweis in PR #1824 wurde zugunsten dieses bestehende
 - Am PR-Head #1826 (`bee6437975596d5946dedcbc227c632e6e408c10`) wurden die 16 Swift-Dateien in den 14 DARNext-Featureordnern gezielt nach `DARNextRemoteImage`, `DARNextMedia`, `AsyncImage` und direkten Rasterbild-Assets durchsucht. In diesem untersuchten Featurebestand nutzen Dashboard-Hero und sechs Dashboard-Schnellzugriffe die gemeinsame Remote-Bildkomponente; die übrigen geprüften Featuredateien enthalten in diesem Head keine Referenz auf diese Komponente. Das sagt nichts über den abweichenden, ungetrackten lokalen Snapshot aus.
 - Draft-PR #1827 (`codex/darnext-image-pipeline-downsample-20261120`) ergänzt für diesen GitHub-Bildpfad einen deduplizierten, begrenzten 512-px-Standard-Decode per ImageIO und einen 48-MiB-NSCache. Der Head liegt einen Commit vor #1826 und ändert genau `DARNext/DesignSystem/Components/DARNextMedia.swift`.
 - Parserprüfung dieser Datei: bestanden. Der neue Loader ist noch nicht typegeprüft, gebaut oder auf Gerät gemessen. Es fehlen insbesondere Regressions-/UI-Test, Speichervergleich und echte Frame-/Hitchmessung. PR #1827 bleibt Draft; kein Merge oder Release.
+
+
+## Deployment-Kompatibilität im GitHub-Xcode-Projekt, 20.11.2026
+
+- Audit des PR-#1812-Projektheads fand für die DARNext-App sowie Unit- und UI-Testtargets ein Mindestziel iOS 27.0. Das widersprach dem im Radar und in der Matrix festgehaltenen iOS-17-Baselinevertrag.
+- Commit `7bbda9633e84a981885fde2e8b1772c8877fbfcd` setzt ausschließlich die sechs Debug-/Release-Einstellungen dieser drei DARNext-Targets auf iOS 17.0. Andere App-, Widget-, Watch-, TV- und Live-Activity-Targets wurden nicht angepasst.
+- Die aktualisierte PBX-Datei besteht `plutil -lint` über stdin. Xcode-Build, vollständiger Typecheck und iOS-17-Laufzeittest sind noch offen; der Host ist nahezu voll und enthält keine iOS-17-Simulatorruntime.
+- Lokales `xcodebuild -version` meldet Xcode 27.2 / Build 27B52. `swift --version` konnte wegen ENOSPC nicht abgeschlossen werden. SDK-/Compilerwerte aus älteren Radar-Einträgen sind daher nicht als heutige Live-Abfrage zu lesen.
