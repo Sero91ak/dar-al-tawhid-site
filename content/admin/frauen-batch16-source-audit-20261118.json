@@ -5,7 +5,7 @@
   "branchOnly": true,
   "scope": "Source page identity and core episode comparison, not comprehensive isnad/translation certification",
   "verificationMethod": "Opened and read individual Sunnah.com record pages (Arabic/English where available); canonical URL variants used for occasional inaccessible book/chapter paths. Recorded key reported event against editorial overview, without modifying the original links.",
-  "status": "partial-original-arabic-spotchecks-15-of-16; scholarly-approval-pending",
+  "status": "all-16-short-arabic-excerpts-checked-in-primary-records; final-scholarly-and-locale-review-pending",
   "publicationAuthorization": false,
   "externalTranslationCertification": false,
   "sources": [
@@ -231,10 +231,19 @@
       "topicCheck": "false-accusation-and-revelation-of-innocence",
       "sourceLocated": true,
       "directPageStatus": "hadith-page-opens-and-topic-matches",
-      "arabicExcerptReview": "requires-final-verbatim-proofread",
+      "arabicExcerptReview": "primary-arabic-excerpt-matched-web-text",
       "germanParaphraseReview": "core-episode-matched-not-verbatim-certified",
       "independentScholarlySignoff": false,
-      "needsAttention": []
+      "needsAttention": [],
+      "primaryArabicSpotcheck": {
+        "performed": "2026-11-20",
+        "sourceUrl": "https://sunnah.com/bukhari:4141",
+        "verbatimExcerpt": "يَا عَائِشَةُ أَمَّا اللَّهُ فَقَدْ بَرَّأَكِ",
+        "reviewMethod": "Complete long source located with search snippet showing exact final Arabic quotation; only short excerpt verified, not full hadith or isnad audit",
+        "verbatimExcerptCompared": true,
+        "independentHumanScholarReview": false,
+        "translationPeerReview": false
+      }
     },
     {
       "id": "muetter-eifersucht-schale-ausgleich-20261106",
@@ -383,12 +392,10 @@
     "Existing push-lock/targeting approvals"
   ],
   "partialProgress": {
-    "spotchecked": 15,
+    "spotchecked": 16,
     "total": 16,
-    "outstanding": 1,
-    "unresolved": [
-      "sahabiyyat-aishah-ifk-offenbarung-20261106: long-source Arabic verbatim excerpt not yet conclusively located"
-    ],
+    "outstanding": 0,
+    "unresolved": [],
     "sourceEntriesApprovedForRelease": 0,
     "translationLanguagesHumanCertified": 0,
     "readyForProduction": false
