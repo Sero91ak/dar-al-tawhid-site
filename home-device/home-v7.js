@@ -31,7 +31,7 @@
   fillOptions();
   if(requestKey===key)return;
   requestKey=key;
-  const shell=panel.querySelector('.quran-reader-shell');if(shell)shell.scrollTo({top:0,behavior:'smooth'});
+  const content=$('readerScrollRegion');if(content)content.scrollTo({top:0,behavior:'smooth'});
   const ar=$('readerArabic'),de=$('readerGerman'),tr=$('readerTransliterationText'),status=$('readerStatus');
   if(cache.has(key)){const v=cache.get(key);ar.textContent=v.ar;de.textContent=v.de;tr.textContent=v.tr||'Lautschrift nicht verfügbar';tr.hidden=!$('readerShowTransliteration').checked;status.textContent='';return}
   ar.textContent='…';de.textContent='Übersetzung wird geladen …';status.textContent='Versdaten werden geladen.';
