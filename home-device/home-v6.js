@@ -150,7 +150,7 @@
  async function renderCard(cardOverride=null){
   const token=++renderToken,s=rotationState?.current;if((!s&&!cardOverride)||!library)return;
   const card=cardOverride||library.byId.get(s.id);if(!card)return;
-  $('saverAr').style.display=card.module==='quranTad'?'block':'none';$('saverAr').textContent='';
+  $('saverAr').style.display='none';$('saverAr').textContent='';
   $('saverStatement')?.replaceChildren();$('saverNarrator')?.replaceChildren();say($('saverSource'),'');say($('saverDe'),'');
   if(card.module==='quranTad'){
    say($('saverType'),'Qurʾān · Tadabbur');
@@ -158,7 +158,7 @@
    const meta=document.createElement('span');meta.textContent=[card.tad.narrator,card.tad.generation].filter(Boolean).join(' · ');$('saverNarrator')?.append(meta);
    const statement=document.createElement('p');statement.className='saver-tadabbur-text';statement.textContent=card.tad.text;$('saverStatement')?.append(statement);
    say($('saverSource'),[card.tad.reference,card.tad.source,card.tad.grading].filter(Boolean).join(' · '));
-   try{const v=await getQuranVerse(card.tad.reference);if(token!==renderToken)return;say($('saverAr'),v.ar);say(verseNode,v.de)}catch{if(token!==renderToken)return;say(verseNode,'Qurʾān-Vers '+card.tad.reference+' · Übersetzung wird bei Verbindung nachgeladen')}
+   try{const v=await getQuranVerse(card.tad.reference);if(token!==renderToken)return;say(verseNode,v.de)}catch{if(token!==renderToken)return;say(verseNode,'Qurʾān-Vers '+card.tad.reference+' · Übersetzung wird bei Verbindung nachgeladen')}
   }else{
    const r=card.record;say($('saverType'),card.module==='athar'?'Āṯār · Überlieferung':'Ḥadīṯ · Überlieferung');$('saverAr').style.display='none';
    const line=[r.narratorLine,r.speakerLabel].filter(Boolean).join(' ');
@@ -191,7 +191,7 @@
   }
   const id=rotationState.remaining.shift(),card=byId.get(id);if(!card)return;
   await renderCard(card);
-  const rendered=['saverAr','saverDe','saverNarrator','saverStatement','saverSource'].map(id=>$(id)?.textContent||'').filter(Boolean).join(' ');
+  const rendered=['saverDe','saverNarrator','saverStatement','saverSource'].map(id=>$(id)?.textContent||'').filter(Boolean).join(' ');
   const now=Math.floor(Date.now()/1000),duration=durationFor(card,library.display,rendered);
   rotationState.current={id,startedAt:now,duration};rotationState.lastId=id;await write('state','tvos-bag',rotationState);
  }
