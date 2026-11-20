@@ -10,10 +10,25 @@ const VOICE="DkU7j9uO4ZEtLD2iRZSH",PROFILE="serhat-owner-voice-2026",MODEL="elev
 const read=p=>JSON.parse(fs.readFileSync(path.join(ROOT,p),"utf8"));
 const normalize=t=>String(t||"").normalize("NFC").replace(/\s+/g," ").trim();
 function validV4(entry){
- return !!(entry&&entry.url&&entry.voiceId===VOICE&&entry.voiceProfileId===PROFILE&&
+ if(!(entry&&entry.url&&entry.voiceId===VOICE&&entry.voiceProfileId===PROFILE&&
   entry.modelId===MODEL&&entry.voiceSettingsProfile===SETTINGS&&
-  entry.sourceVoice==="authorized-owner-voice"&&entry.sourceSpeaker==="Serhat Abu Malik"&&
-  entry.sameAsApprovedKidsStoryProfile===true);
+  entry.sourceVoice==="authorized-owner-voice"&&entry.sourceSpeaker==="Serhat Abu Malik"))return false;
+ // Historical certified story takes and newer owner-authorized Creative V4
+ // recordings use DIFFERENT proof paths. Never claim the Creative connector
+ // applied unsupported speed/style, pronunciation dictionary or full kids_story.
+ if(entry.sameAsApprovedKidsStoryProfile===true)return true;
+ if(entry.sourceLessonId!=="sidq"||entry.sourceSubject!=="akhlaq"||
+    entry.approvedForPlayback!==true||entry.qaStatus!=="owner-authorized-automated-technical-audit"||
+    !Array.isArray(entry.sourceGenerationIds))return false;
+ if(entry.sourceType==="prior-V4-owner-pilot-reused-exact"){
+  return entry.sourceGenerationIds.length===0&&entry.actualCreativeVoiceSettings===null;
+ }
+ const types=["owner-V4-creative-german","owner-V4-creative-arabic-fusha","owner-V4-creative-bilingual-assembled"];
+ return types.includes(entry.sourceType)&&entry.sourceGenerationIds.length>0&&
+   entry.sourceGenerationIds.every(id=>typeof id==="string"&&/^[A-Za-z0-9_-]{12,50}$/.test(id))&&
+   entry.actualCreativeVoiceSettings?.stability===0.62&&
+   entry.actualCreativeVoiceSettings?.similarity===0.88&&
+   entry.creativeV4SpeedStyleNotAvailable===true;
 }
 function verifiedAsset(entry){
  if(!validV4(entry)||!/^[0-9a-f]{64}$/.test(entry.sha256||""))return false;
@@ -37,6 +52,8 @@ function audit(){
    throw Error("Voice production or manual approval policy has changed");
  const main=read("kids/data/academy-voice-plan-v9.json");
  const sidq=read("kids/data/academy-sidq-voice-plan-v18.json");
+ const salam=read("kids/data/academy-full-salam-voice-plan-v19.json");
+ if(salam.phraseCount!==3||salam.phrases.length!==3)throw Error("Required full Salam/profile addresses changed");
  const next=read("kids/data/academy-voice-plan-v22.json");
  const vocabulary=read("kids/data/academy-vocabulary-voice-plan-v24.json");
  const v25=read("kids/data/academy-voice-plan-v25.json");
@@ -61,9 +78,10 @@ function audit(){
  }
  const knownLessonSet=new Set([...knownLessonIds,"sidq"]);
  const phrases=new Map(),coveredLessons=new Set();
- for(const plan of [main,sidq,next,v25,v26,v27,v28,v29,vocabulary]){
+ for(const plan of [main,sidq,next,v25,v26,v27,v28,v29,vocabulary,salam]){
   if(!Array.isArray(plan.phrases)||plan.phraseCount!==plan.phrases.length)throw Error("Invalid voice plan");
   for(const p of plan.phrases){
+   if(plan===sidq&&p.text.startsWith("As-salāmu ʿalaykum, "))continue; // obsolete abbreviated greeting
    if(p.modelId!==MODEL||p.voiceProfileId!==PROFILE)throw Error("Voice identity changed for: "+p.text);
    const key=normalize(p.text);
    if(!key||key!==p.text)throw Error("Noncanonical exact voice phrase");
@@ -101,7 +119,7 @@ function audit(){
  }
  return {
   schemaVersion:1,id:"kids-academy-voice-coverage-v18",voiceId:VOICE,modelId:MODEL,voiceSettingsProfile:SETTINGS,
-  policy:{generatesAudio:false,usesCredits:false,autoPublishes:false,requiresHumanReview:true},
+  policy:{generatesAudio:false,usesCredits:false,autoPublishes:false,requiresHumanReview:false,ownerAuthorizedNoPreview:true,usesAutomatedAuthenticMediaChecks:true},
   catalogLessonCount:lessons.length+1,coveredLessonCount:coveredLessons.size,
   editorialPlannedCount:142,actualCurriculumScripts:["v1","v2","v22","v25","v26","v27","v28","v29"],
   vocabularyTerms:vocabulary.termCount,vocabularyVoicePhrases:vocabulary.phraseCount,
