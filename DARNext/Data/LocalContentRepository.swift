@@ -94,7 +94,7 @@ actor LocalContentRepository: ContentRepository {
     func libraryPublications() throws -> [LibraryPublication] {
         if let publicationsCache { return publicationsCache }
         let values = try resources.libraryPublications().filter {
-            $0.status != "withdrawn" && $0.offlineEnabled == true
+            LibraryPublicationAvailability.isAvailableOffline(status: $0.status, offlineEnabled: $0.offlineEnabled)
         }
         publicationsCache = values
         return values
@@ -232,5 +232,13 @@ actor LocalContentRepository: ContentRepository {
 
         return try FileManager.default.contentsOfDirectory(at: root, includingPropertiesForKeys: nil)
             .filter { $0.pathExtension == "md" }
+    }
+}
+
+
+enum LibraryPublicationAvailability {
+    static func isAvailableOffline(status: String?, offlineEnabled: Bool?) -> Bool {
+        guard offlineEnabled == true else { return false }
+        return status == "published" || status == "updated"
     }
 }
