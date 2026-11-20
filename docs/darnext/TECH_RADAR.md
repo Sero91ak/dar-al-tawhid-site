@@ -49,3 +49,11 @@ Radar meanings: **Adopt** means already suitable within its verified owner; **Tr
 - PR and branch evidence: [PR #1812](https://github.com/Sero91ak/dar-al-tawhid-site/pull/1812) through [PR #1817](https://github.com/Sero91ak/dar-al-tawhid-site/pull/1817).
 - Whole-app verification gaps: [Feature matrix](DAR-NEXT-FEATURE-MATRIX-2026-11-19.md).
 
+
+
+## Deployment-Kompatibilität im GitHub-Xcode-Projekt, 20.11.2026
+
+- Audit des PR-#1812-Projektheads fand für die DARNext-App sowie Unit- und UI-Testtargets ein Mindestziel iOS 27.0. Das widersprach dem im Radar und in der Matrix festgehaltenen iOS-17-Baselinevertrag.
+- Commit `7bbda9633e84a981885fde2e8b1772c8877fbfcd` setzt ausschließlich die sechs Debug-/Release-Einstellungen dieser drei DARNext-Targets auf iOS 17.0. Andere App-, Widget-, Watch-, TV- und Live-Activity-Targets wurden nicht angepasst.
+- Die aktualisierte PBX-Datei besteht `plutil -lint` über stdin. Xcode-Build, vollständiger Typecheck und iOS-17-Laufzeittest sind noch offen; der Host ist nahezu voll und enthält keine iOS-17-Simulatorruntime.
+- Lokales `xcodebuild -version` meldet Xcode 27.2 / Build 27B52. `swift --version` konnte wegen ENOSPC nicht abgeschlossen werden. SDK-/Compilerwerte aus älteren Radar-Einträgen sind daher nicht als heutige Live-Abfrage zu lesen.
