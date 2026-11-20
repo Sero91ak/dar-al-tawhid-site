@@ -22,6 +22,32 @@ struct DARNextTests {
     }
 
     @Test
+    func quranAudioInterruptionResumesOnlyWhenPlaybackWasActiveAndAllowed() {
+        #expect(QuranAudioInterruptionPolicy.shouldResume(wasPlaying: true, systemAllowsResume: true))
+        #expect(!QuranAudioInterruptionPolicy.shouldResume(wasPlaying: false, systemAllowsResume: true))
+        #expect(!QuranAudioInterruptionPolicy.shouldResume(wasPlaying: true, systemAllowsResume: false))
+    }
+
+    @Test
+    func quranAudioInterruptionStateRemembersPlaybackAcrossRepeatedBeginNotifications() {
+        var state = QuranAudioInterruptionState()
+        state.interruptionBegan(isPlaying: true)
+        state.interruptionBegan(isPlaying: false)
+
+        #expect(state.interruptionEnded(systemAllowsResume: true))
+        #expect(!state.interruptionEnded(systemAllowsResume: true))
+    }
+
+    @Test
+    func quranAudioInterruptionStateHonorsPauseOrStopDuringInterruption() {
+        var state = QuranAudioInterruptionState()
+        state.interruptionBegan(isPlaying: true)
+        state.cancelResume()
+
+        #expect(!state.interruptionEnded(systemAllowsResume: true))
+    }
+
+    @Test
     func adultContentCollectionsAreAvailable() async throws {
         let repository = LocalContentRepository()
 
@@ -61,4 +87,5 @@ struct DARNextTests {
         #expect(questions.allSatisfy { $0.isApprovedAdultContent })
         #expect(questions.allSatisfy { $0.correctIndex >= 0 && $0.correctIndex < $0.answers.count })
     }
+
 }

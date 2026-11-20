@@ -18,6 +18,32 @@ enum QuranAudioRepeatMode: Sendable, Equatable {
     case ayah
 }
 
+enum QuranAudioInterruptionPolicy {
+    static func shouldResume(wasPlaying: Bool, systemAllowsResume: Bool) -> Bool {
+        wasPlaying && systemAllowsResume
+    }
+}
+
+struct QuranAudioInterruptionState: Equatable, Sendable {
+    private(set) var wasPlayingBeforeInterruption = false
+
+    mutating func interruptionBegan(isPlaying: Bool) {
+        wasPlayingBeforeInterruption = wasPlayingBeforeInterruption || isPlaying
+    }
+
+    mutating func interruptionEnded(systemAllowsResume: Bool) -> Bool {
+        defer { wasPlayingBeforeInterruption = false }
+        return QuranAudioInterruptionPolicy.shouldResume(
+            wasPlaying: wasPlayingBeforeInterruption,
+            systemAllowsResume: systemAllowsResume
+        )
+    }
+
+    mutating func cancelResume() {
+        wasPlayingBeforeInterruption = false
+    }
+}
+
 @MainActor
 @Observable
 final class QuranAudioEngine {
@@ -40,6 +66,8 @@ final class QuranAudioEngine {
     private var endObserver: NSObjectProtocol?
     private var sleepTask: Task<Void, Never>?
     private var remoteCommandsConfigured = false
+    private var interruptionObserver: NSObjectProtocol?
+    private var interruptionState = QuranAudioInterruptionState()
 
     func load(_ track: QuranAudioTrack) {
         playlist = [track]
@@ -104,6 +132,7 @@ final class QuranAudioEngine {
         }
 
         removeObservers()
+        interruptionState.cancelResume()
         currentTrack = track
         currentTime = 0
         duration = 0
@@ -132,12 +161,14 @@ final class QuranAudioEngine {
     }
 
     func pause() {
+        interruptionState.cancelResume()
         player?.pause()
         isPlaying = false
         updateNowPlaying()
     }
 
     func stop() {
+        interruptionState.cancelResume()
         player?.pause()
         player?.seek(to: .zero)
         currentTime = 0
@@ -168,6 +199,44 @@ final class QuranAudioEngine {
         try session.setCategory(.playback, mode: .spokenAudio, options: [.allowAirPlay])
         try session.setActive(true)
         configureRemoteCommands()
+        configureInterruptionObserver()
+    }
+
+    private func configureInterruptionObserver() {
+        guard interruptionObserver == nil else { return }
+        interruptionObserver = NotificationCenter.default.addObserver(
+            forName: AVAudioSession.interruptionNotification,
+            object: AVAudioSession.sharedInstance(),
+            queue: .main
+        ) { [weak self] notification in
+            guard let rawType = notification.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt,
+                  let type = AVAudioSession.InterruptionType(rawValue: rawType) else { return }
+            let rawOptions = notification.userInfo?[AVAudioSessionInterruptionOptionKey] as? UInt ?? 0
+            let systemAllowsResume = AVAudioSession.InterruptionOptions(rawValue: rawOptions).contains(.shouldResume)
+
+            Task { @MainActor [weak self] in
+                guard let self else { return }
+                switch type {
+                case .began:
+                    self.interruptionState.interruptionBegan(isPlaying: self.isPlaying)
+                    self.player?.pause()
+                    self.isPlaying = false
+                    self.updateNowPlaying()
+                case .ended:
+                    let shouldResume = self.interruptionState.interruptionEnded(systemAllowsResume: systemAllowsResume)
+                    if shouldResume {
+                        self.play()
+                    } else {
+                        self.isPlaying = false
+                        self.updateNowPlaying()
+                    }
+                @unknown default:
+                    self.interruptionState.cancelResume()
+                    self.isPlaying = false
+                    self.updateNowPlaying()
+                }
+            }
+        }
     }
 
     private func addObservers(for item: AVPlayerItem) {
