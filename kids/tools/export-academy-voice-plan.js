@@ -69,16 +69,20 @@ const output={
 const filename=path.join(ROOT,"kids/data/academy-voice-plan-v9.json");
 const proposed=JSON.stringify(output,null,2)+"\n";
 if(fs.existsSync(filename)){
- // Protect the historic 511 exact phrases. Two unreleased curriculum lines now
- // contain the complete Islamic Salam. Validate their effect, but never rewrite V9.
+ // Protect 454 historical V9 phrases. The canonical Salam wording and one
+ // Quran 5:6 foot-washing meaning correction require fresh V4 audio plans,
+ // never an overwrite of V9 or an automatic release.
  const historic=fs.readFileSync(filename,"utf8");
  const authorizedReplacement=historic
+  .replaceAll(
+    "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und die Füße bis zu den Knöcheln.",
+    "Der Vers nennt unter anderem das Waschen des Gesichts und der Arme, das Streichen über den Kopf und das Waschen der Füße bis zu den Knöcheln.")
   .replaceAll("As-salāmu ʿalaykum ist ein islamischer Friedensgruß.",
     "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh ist ein islamischer Friedensgruß.")
   .replaceAll("Jemand sagt zu dir As-salāmu ʿalaykum. Was tust du?",
     "Jemand sagt zu dir As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh. Was tust du?");
  if(proposed!==authorizedReplacement)throw Error("Unexpected changes to immutable V9 archive: release a separate reviewed voice plan");
- console.log("ACADEMY V9: immutable historic archive verified; 2 complete-Salam teaching updates require separate future voice-plan approval; 0 credits");
+ console.log("ACADEMY V9: immutable historic archive verified; 2 complete-Salam updates and corrected Quran 5:6 meaning require separate V4 voice-plan review; 0 credits");
 }else{
  // Fresh seeding is only used when no archival plan exists.
  fs.writeFileSync(filename,proposed,"utf8");

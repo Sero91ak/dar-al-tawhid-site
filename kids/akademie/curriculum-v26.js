@@ -30,7 +30,7 @@ const additions={
       "text": "Der Prophet ﷺ betonte die große Bedeutung der rituellen Reinheit für den Glauben."
     },
     "sourceAudit": {
-      "hadithUrl": "https://dorar.net/hadith/sharh/139891",
+      "hadithUrl": "https://sunnah.com/muslim:223",
       "quranReference": "5:6",
       "hadithNumber": "223",
       "authenticity": "Ṣaḥīḥ",
@@ -639,7 +639,7 @@ const additions={
       "text": "Auf die Frage nach der Person, die besonders gute Behandlung verdient, nannte der Prophet ﷺ dreimal die Mutter und dann den Vater."
     },
     "sourceAudit": {
-      "hadithUrl": "https://dorar.net/hadith/sharh/36698",
+      "hadithUrl": "https://sunnah.com/bukhari:5971",
       "quranReference": "17:23",
       "hadithNumber": "5971",
       "authenticity": "Ṣaḥīḥ",

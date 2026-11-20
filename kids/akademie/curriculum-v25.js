@@ -215,7 +215,7 @@ const additions={
     "hint": "Īmān bedeutet Glaube. Schwierige Wörter kann dir der Begriffshelfer erklären.",
     "sample": "Ich kann die Glaubensgrundlagen nach und nach nennen.",
     "sourceAudit": {
-      "hadithUrl": "https://dorar.net/hadith/sharh/1189",
+      "hadithUrl": "https://sunnah.com/muslim:8a",
       "hadithNumber": "8",
       "quranReference": "2:285",
       "authenticity": "Ṣaḥīḥ",
@@ -366,7 +366,7 @@ const additions={
     "hint": "Niyyah heißt Absicht. Ikhlāṣ heißt Aufrichtigkeit.",
     "sample": "Ich helfe, weil ich Gutes für Allah tun möchte, nicht nur für Applaus.",
     "sourceAudit": {
-      "hadithUrl": "https://dorar.net/hadith/sharh/127209",
+      "hadithUrl": "https://dorar.net/hadith/sharh/3429",
       "hadithNumber": "1",
       "quranReference": "98:5",
       "authenticity": "Ṣaḥīḥ",
@@ -668,7 +668,7 @@ const additions={
     "hint": "Nur bei Personen, zu denen du gehen darfst, anklopfen. Fremde Türen öffnest du nicht selbst.",
     "sample": "Ich klopfe an und frage, ob ich eintreten darf.",
     "sourceAudit": {
-      "hadithUrl": "https://dorar.net/hadith/sharh/209262",
+      "hadithUrl": "https://sunnah.com/bukhari:6245",
       "hadithNumber": "6245",
       "quranReference": "24:27",
       "authenticity": "Ṣaḥīḥ",
