@@ -48,3 +48,15 @@ The isolated Worker deployment completed in run 44395473800. A direct request to
 - Browser autoplay is not a guarantee of background Aḏān playback. No native Aḏān service was built.
 - No per-image license metadata was present in the local Apple-TV asset catalog. The source project was accessible and its artwork was reused, but commercial redistribution rights have not been independently established.
 - No Swift, iOS, tvOS, Android, live website, or production Worker source was changed or deployed. Only the isolated HOME test Worker is in scope.
+
+
+## Responsive repair — 20 Nov 2026
+
+- Replaced transform-sensitive absolute navigation positioning with a three-column header grid: brand left, primary actions centered, settings right.
+- Short landscape viewports use compact but separate rows for next prayer, prayer times, and the Qurʾān player; the player title and controls stay inside their row.
+- The 568×320 and 667×375 browser cases now have non-overlapping prayer/player rows, readable compact typography, and centered navigation. Navigation is centered at the full 1280×800 layout as well.
+- Verification: [Browser QA run 44763588717](https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/44763588717) passed; isolated preview deploy [run 44763588339](https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/44763588339) passed. Preview was opened and its HOME controls and live prayer data were present.
+
+## Completion boundary
+
+This branch delivers the web HOME preview, not a finished native release. Secure phone-to-device pairing, guaranteed background Aḏān and dimming, Android APK packaging, native iOS/tvOS integration, physical-device checks, and commercial asset-rights review still need their own implementation and verification. Browser autoplay or CSS dimming does not prove native background behavior.
