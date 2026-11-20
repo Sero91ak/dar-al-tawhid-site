@@ -22,6 +22,13 @@ struct DARNextTests {
     }
 
     @Test
+    func quranAudioInterruptionResumesOnlyWhenPlaybackWasActiveAndAllowed() {
+        #expect(QuranAudioInterruptionPolicy.shouldResume(wasPlaying: true, systemAllowsResume: true))
+        #expect(!QuranAudioInterruptionPolicy.shouldResume(wasPlaying: false, systemAllowsResume: true))
+        #expect(!QuranAudioInterruptionPolicy.shouldResume(wasPlaying: true, systemAllowsResume: false))
+    }
+
+    @Test
     func adultContentCollectionsAreAvailable() async throws {
         let repository = LocalContentRepository()
 
@@ -62,10 +69,4 @@ struct DARNextTests {
         #expect(questions.allSatisfy { $0.correctIndex >= 0 && $0.correctIndex < $0.answers.count })
     }
 
-    @Test
-    func quranAudioInterruptionResumesOnlyWhenPlaybackWasActiveAndAllowed() {
-        #expect(QuranAudioInterruptionPolicy.shouldResume(wasPlaying: true, systemAllowsResume: true))
-        #expect(!QuranAudioInterruptionPolicy.shouldResume(wasPlaying: false, systemAllowsResume: true))
-        #expect(!QuranAudioInterruptionPolicy.shouldResume(wasPlaying: true, systemAllowsResume: false))
-    }
 }
