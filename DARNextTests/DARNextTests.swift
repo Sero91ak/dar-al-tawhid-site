@@ -147,6 +147,35 @@ struct DARNextTests {
         ) == nil)
     }
 
+    @Test
+    func localAssistantAbstainsWhenSearchFindsNoSource() async throws {
+        let answer = try await LocalKnowledgeAssistantTransport().answer(
+            prompt: "Qurʾān 49:10",
+            sources: []
+        )
+
+        #expect(answer.contains("kein passender Treffer"))
+        #expect(answer.contains("keine religiöse Antwort"))
+        #expect(!answer.contains("Quellen gefunden"))
+    }
+
+    @Test
+    func localAssistantNamesOnlyRetrievedSourcesWithoutClaimingAnAIAnswer() async throws {
+        let source = AssistantSourceReference(
+            id: "quran-49-10",
+            title: "Al-Ḥujurāt 49:10",
+            kind: .quran,
+            sourceID: "Qurʾān 49:10"
+        )
+        let answer = try await LocalKnowledgeAssistantTransport().answer(
+            prompt: "Brüderlichkeit",
+            sources: [source]
+        )
+
+        #expect(answer.contains("Al-Ḥujurāt 49:10"))
+        #expect(answer.contains("erstellt noch keine eigenständige religiöse Antwort"))
+    }
+
     private func quizQuestion(
         id: String,
         category: String,
