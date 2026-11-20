@@ -5,6 +5,8 @@ struct PostsView: View {
     let repository: LocalContentRepository
 
     @Environment(\.darTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Namespace private var postTransitionNamespace
     @State private var posts: [Post] = []
     @State private var errorMessage: String?
 
@@ -26,10 +28,21 @@ struct PostsView: View {
                     ForEach(posts) { post in
                         NavigationLink {
                             PostDetailView(post: post)
+                                .darZoomNavigationTransition(
+                                    sourceID: post.id,
+                                    in: postTransitionNamespace,
+                                    isEnabled: DARMotion.usesZoomTransition(reduceMotion: reduceMotion)
+                                )
                         } label: {
                             postCard(post)
+                                .darMatchedTransitionSource(
+                                    id: post.id,
+                                    in: postTransitionNamespace,
+                                    isEnabled: DARMotion.usesZoomTransition(reduceMotion: reduceMotion)
+                                )
                         }
                         .buttonStyle(.plain)
+                        .accessibilityIdentifier("post-card-\(post.id)")
                     }
                 }
             }
@@ -141,6 +154,7 @@ private struct PostDetailView: View {
         }
         .scrollIndicators(.hidden)
         .background(theme.backgroundGradient.ignoresSafeArea())
+        .accessibilityIdentifier("post-detail-\(post.id)")
         .navigationTitle("Beitrag")
         .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbar {
