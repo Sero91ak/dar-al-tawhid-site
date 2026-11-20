@@ -41,7 +41,7 @@
   function setupAdhan(){
     const visual=$('adhanVisual'), info=$('adhanInfo');
     if(!visual||!info)return;
-    const obs=new MutationObserver(()=>{if(!visual.classList.contains('active')){current='';delete info.dataset.h4Augmented;}else artwork()});
+    const obs=new MutationObserver(()=>{artwork();if(!visual.classList.contains('active'))delete info.dataset.h4Augmented});
     obs.observe(visual,{attributes:true,attributeFilter:['class']});
     const changeInfo=new MutationObserver(()=>{if(visual.classList.contains('active'))artwork()});
     changeInfo.observe(info,{childList:true,subtree:false});
