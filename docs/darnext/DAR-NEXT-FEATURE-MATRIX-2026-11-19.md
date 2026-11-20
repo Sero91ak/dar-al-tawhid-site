@@ -164,3 +164,11 @@ Der eigenständige Arbeitsnachweis in PR #1824 wurde zugunsten dieses bestehende
 - Folgeschritt in Draft-PR #1829: Assistant-Fundstellen sind jetzt lokal klickbare Detailnavigationen für Qurʾān-Suren/-Verse, Beiträge, Duʿāʾs und Bibliothekswerke; bestehende Detailansichten werden geteilt. Der Suchindex-Abgleich deckte beide Qurʾān-ID-Formen (`quran-surah-N`, `quran-N-M`) auf; parser-/Unit-Testquellen sind aktualisiert. Parser 5/5 bestanden, Builds/Tests/Routenlaufzeit fehlen; die Assistenz bleibt nicht in der öffentlichen Navigation aktiviert.
 
 - Weiterer Schritt in Draft-PR #1829: Chat zeigt Nutzerfragen sofort, hält einen Suchfortschritt sichtbar, scrollt bei Nachrichten/Lade-/Fehlerzuständen zum Ende und beachtet Reduce Motion. Fokus wird zum Eingabefeld zurückgeführt. Fünf geänderte Swift-Dateien bestehen den Parser; die visuelle Tastatur-/Scrollabnahme sowie Xcode-Tests sind offen.
+
+
+## Offline-Veröffentlichungsgate für Bibliothek, 20.11.2026
+
+- Der DARNext-Katalog enthält 40 offlinefähige Bibliothekswerke: 19 Status `published`, 21 Status `updated`. Der bisherige Repository-Filter schloss nur `withdrawn` aus und hätte künftig auch Entwürfe, ausstehende und statuslose Einträge aufgenommen, sobald `offlineEnabled=true` gesetzt wäre.
+- Draft-PR #1830 verwendet jetzt die explizite Allowlist `published`/`updated` plus Offline-Opt-in und ergänzt Unit-Tests für Ablehnungsfälle (draft, pending, withdrawn, nil, Offline-Opt-in false/nil).
+- Parserprüfung der geänderten Repository- und Testdatei: 2/2. Xcode-Build und Unit-Ausführung bleiben offen; PR bleibt Draft.
+- Die PR-Verknüpfung im Codex-Chat scheiterte erneut an der vollen lokalen Chat-Datenbank; GitHub-PR ist direkt erreichbar.
