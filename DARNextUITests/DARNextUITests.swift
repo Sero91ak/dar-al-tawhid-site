@@ -40,6 +40,43 @@ final class DARNextUITests: XCTestCase {
     }
 
     @MainActor
+    func testPostCardOpensDetailAndReturnsToVisibleCard() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        let tabBar = app.tabBars.firstMatch
+        XCTAssertTrue(tabBar.waitForExistence(timeout: 10))
+        tabBar.buttons["Beiträge"].tap()
+
+        let postCards = app.descendants(matching: .any).matching(
+            NSPredicate(format: "identifier BEGINSWITH %@", "post-card-")
+        )
+        XCTAssertTrue(postCards.firstMatch.waitForExistence(timeout: 10))
+
+        let list = app.scrollViews.firstMatch
+        list.swipeUp()
+        let visibleCard = postCards.allElementsBoundByIndex.first { $0.isHittable }
+        guard let sourceCard = visibleCard else {
+            XCTFail("Expected a visible post card after scrolling")
+            return
+        }
+
+        let sourceIdentifier = sourceCard.identifier
+        sourceCard.tap()
+
+        let detail = app.scrollViews.matching(
+            NSPredicate(format: "identifier BEGINSWITH %@", "post-detail-")
+        ).firstMatch
+        XCTAssertTrue(detail.waitForExistence(timeout: 10))
+        XCTAssertTrue(app.navigationBars.buttons["Beiträge"].waitForExistence(timeout: 10))
+        app.navigationBars.buttons["Beiträge"].tap()
+
+        let returnedCard = app.descendants(matching: .any)[sourceIdentifier]
+        XCTAssertTrue(returnedCard.waitForExistence(timeout: 10))
+        XCTAssertTrue(returnedCard.isHittable, "Returning should restore the source card's visible position")
+    }
+
+    @MainActor
     func testAssistantPrototypeIsNotExposedInPublicNavigation() throws {
         let app = XCUIApplication()
         app.launch()

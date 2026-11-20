@@ -13,6 +13,12 @@ struct DARNextTests {
     }
 
     @Test
+    func reduceMotionDisablesZoomNavigationTransition() {
+        #expect(DARMotion.usesZoomTransition(reduceMotion: false))
+        #expect(!DARMotion.usesZoomTransition(reduceMotion: true))
+    }
+
+    @Test
     func quranCatalogHasCanonicalShape() async throws {
         let catalog = try await LocalContentRepository().quranCatalog()
 
