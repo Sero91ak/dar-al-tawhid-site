@@ -179,3 +179,11 @@ Der eigenständige Arbeitsnachweis in PR #1824 wurde zugunsten dieses bestehende
 - Direkte GET-Antwort von `https://dar-al-tawhid.de/data/offline-content-manifest.json` (7.832 Bytes) ist ungültig: Nach dem JSON-Objekt stehen wörtliche Backslash-/`n`-Zeichen; `json.loads` meldet `Extra data` bei Zeile 195/Zeichen 7830. Die aktuelle `DARNextContentSyncService`-Decodierung würde bei einer frischen Installation ohne Cache scheitern.
 - Draft-PR #1831 entfernt ausschließlich diesen literalen Suffix in einem Branch auf `main`. Dieselbe Datei im Branch besteht `python3 json.load`; Manifestversion sowie 126 statische und 62 Datenpfade bleiben erhalten. Kein Merge oder Live-Release erfolgt.
 - Das PR-Artefakt ließ sich wegen eines internen Codex-Thread-Datenbankfehlers nicht an den Chat anhängen; der GitHub-PR bleibt direkt erreichbar.
+
+
+## End-to-End-Inhaltssync-Audit, 20.11.2026
+
+- Der App-Start ruft `AppEnvironment.refreshContentManifest()` auf. `DARNextContentSyncService` decodiert Version/Dateipfade und cached nur die Manifestdatei; `AppEnvironment` speichert Version/Fehler. Es gibt im geprüften DARNext-Ziel keinen Verbraucher für `requiredStatic`/`requiredData`, keinen Datei-Download, keinen Inhalts-Cache-Swap und keine Aktualisierung von `LocalContentRepository`.
+- `LocalContentRepository` lädt weiterhin aus Bundle-Ressourcen. Neue Web-Veröffentlichungen und Widerrufe erreichen deshalb den nativen Suchindex derzeit nicht automatisch.
+- Das live abgerufene Manifest enthält nur Version plus zwei Pfadlisten (126 statische / 62 Datenpfade), keine per-Content-ID-Hashes, Prüf-/Freigabestatus, SchemaVersion oder Tombstones. `requiredData` enthält außerdem `/content/staging/posts/posts-index.json`; die Liste darf nicht pauschal als freigegebener Knowledge-Import behandelt werden.
+- Draft-PR #1831 behebt ausschließlich den ungültigen JSON-Suffix. Für sichere native Updates ist weiterhin ein eigener, versionierter Publishvertrag mit stabilen IDs, Hashes, Sprache/Status, Withdrawal/Tombstones und Rollback erforderlich. Keine native Inhaltsaktualisierung oder Live-Veröffentlichung behauptet.
