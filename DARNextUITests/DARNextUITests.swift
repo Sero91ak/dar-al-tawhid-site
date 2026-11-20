@@ -48,7 +48,7 @@ final class DARNextUITests: XCTestCase {
         XCTAssertTrue(tabBar.waitForExistence(timeout: 10))
         tabBar.buttons["Beiträge"].tap()
 
-        let postCards = app.buttons.matching(
+        let postCards = app.descendants(matching: .any).matching(
             NSPredicate(format: "identifier BEGINSWITH %@", "post-card-")
         )
         XCTAssertTrue(postCards.firstMatch.waitForExistence(timeout: 10))
@@ -71,7 +71,7 @@ final class DARNextUITests: XCTestCase {
         XCTAssertTrue(app.navigationBars.buttons["Beiträge"].waitForExistence(timeout: 10))
         app.navigationBars.buttons["Beiträge"].tap()
 
-        let returnedCard = app.buttons[sourceIdentifier]
+        let returnedCard = app.descendants(matching: .any)[sourceIdentifier]
         XCTAssertTrue(returnedCard.waitForExistence(timeout: 10))
         XCTAssertTrue(returnedCard.isHittable, "Returning should restore the source card's visible position")
     }
