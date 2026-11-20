@@ -26,7 +26,7 @@
     "sourceAndMediaShaVerificationBeforePublicRelease": true,
     "noClaimOfLiveUntilCloudflareProbe": true
   },
-  "status": "13-provider-gaps-remain-1-generation-not-imported",
+  "status": "9-provider-gaps-remain-5-generations-not-imported",
   "entries": [
     {
       "text": "Ṣidq bedeutet: Die Wahrheit sagen.",
@@ -160,8 +160,13 @@
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "requiresNativeFushaTerm": false,
-      "productionStatus": "missing-exact-media",
-      "publicPlaybackApproved": false
+      "productionStatus": "provider-generated-binary-missing",
+      "publicPlaybackApproved": false,
+      "generationId": "GlrmGfnazVOj7Gp66mMY",
+      "sessionId": "XI1I6VoTJ2pBkvVhfC6L",
+      "durationSeconds": 3.68,
+      "providerGenerationStatus": "completed",
+      "binaryImportStatus": "pending"
     },
     {
       "text": "Antwort 1: Wahrhaftigkeit führt zu rechtschaffenem Verhalten. Sie bewahrt das Vertrauen und hilft uns, Verantwortung zu übernehmen.",
@@ -171,8 +176,13 @@
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "requiresNativeFushaTerm": false,
-      "productionStatus": "missing-exact-media",
-      "publicPlaybackApproved": false
+      "productionStatus": "provider-generated-binary-missing",
+      "publicPlaybackApproved": false,
+      "generationId": "WYCcot3z6gmtUOMFDG6K",
+      "sessionId": "FcG936BskU7rPqP5T5Gx",
+      "durationSeconds": 6.96,
+      "providerGenerationStatus": "completed",
+      "binaryImportStatus": "pending"
     },
     {
       "text": "Antwort 1: Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutmachen.",
@@ -182,8 +192,13 @@
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "requiresNativeFushaTerm": false,
-      "productionStatus": "missing-exact-media",
-      "publicPlaybackApproved": false
+      "productionStatus": "provider-generated-binary-missing",
+      "publicPlaybackApproved": false,
+      "generationId": "Mogi53fumf5QeyOjmt5q",
+      "sessionId": "JqTEt4QrLKRJyc7NKpHs",
+      "durationSeconds": 11.12,
+      "providerGenerationStatus": "completed",
+      "binaryImportStatus": "pending"
     },
     {
       "text": "Antwort 2: Ein Versehen und eine absichtliche Lüge sind dasselbe.",
@@ -193,8 +208,13 @@
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "requiresNativeFushaTerm": false,
-      "productionStatus": "missing-exact-media",
-      "publicPlaybackApproved": false
+      "productionStatus": "provider-generated-binary-missing",
+      "publicPlaybackApproved": false,
+      "generationId": "CdhQmFMslLfdFTrlLoL2",
+      "sessionId": "hxg3pYpdsRxhwIXspJTl",
+      "durationSeconds": 3.76,
+      "providerGenerationStatus": "completed",
+      "binaryImportStatus": "pending"
     }
   ]
 }
