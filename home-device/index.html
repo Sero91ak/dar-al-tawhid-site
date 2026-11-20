@@ -177,7 +177,7 @@ async function loadSurahs(){
  try{const value=JSON.parse(localStorage.getItem(cacheKey)||'[]');if(Array.isArray(value)&&value.length===114)cached=value}catch{}
  try{const j=await fetchJSON(liveURL('/content/quran/surahs.json'));if(!Array.isArray(j.surahs)||j.surahs.length!==114)throw Error('Surah-Metadaten nicht vollständig');surahs=j.surahs;try{localStorage.setItem(cacheKey,JSON.stringify(surahs))}catch{}}
  catch{surahs=cached.length===114?cached:embedded.length===114?embedded:[{id:1,name:'',transliteration:'Al-Fātiḥah',total_verses:7},{id:112,name:'',transliteration:'Al-Iḫlāṣ',total_verses:4}]}
- if(select){select.innerHTML='';surahs.forEach(item=>select.add(new Option(item.id+' · '+item.transliteration,item.id)));select.value=String(cfg.surah);if(!select.value){cfg.surah=1;select.value='1'}}drawAudio()
+ surahs=surahs.map(item=>({...item,total_verses:Number(item.total_verses)||VERSE_COUNTS[Number(item.id)-1]||0}));if(select){select.innerHTML='';surahs.forEach(item=>select.add(new Option(item.id+' · '+item.transliteration,item.id)));select.value=String(cfg.surah);if(!select.value){cfg.surah=1;select.value='1'}}drawAudio()
 }
 async function loadReciters(){
  const cacheKey='dar-home-quran-reciters-v1';let cached=[];
