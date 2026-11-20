@@ -76,23 +76,6 @@ jobs:
           echo "full=$full" >> "$GITHUB_OUTPUT"
           echo "skip=$skip" >> "$GITHUB_OUTPUT"
 
-      - name: Resolve PR merge base
-        if: github.event_name == 'pull_request'
-        id: pr_diff
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          BASE_SHA="${{ github.event.pull_request.base.sha }}"
-          HEAD_SHA="${{ github.event.pull_request.head.sha }}"
-          # GitHub computes the true common ancestor; comparing directly
-          # to the tip of main would include files changed only on main.
-          MERGE_BASE="$(gh api "repos/${{ github.repository }}/compare/$BASE_SHA...$HEAD_SHA" --jq '.merge_base_commit.sha')"
-          test -n "$MERGE_BASE"
-          git fetch --no-tags --depth=1 origin "$MERGE_BASE"
-          echo "merge_base=$MERGE_BASE" >> "$GITHUB_OUTPUT"
-
       - name: Optimize current media
         if: steps.mode.outputs.skip != '1'
         shell: bash
@@ -102,7 +85,9 @@ jobs:
           if [ "${{ steps.mode.outputs.full }}" = "1" ]; then
             scripts/optimize-app-media.sh --all
           elif [ "${{ github.event_name }}" = "pull_request" ]; then
-            git diff --name-only "${{ steps.pr_diff.outputs.merge_base }}" HEAD -- \
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+            git fetch --no-tags origin "$BASE_SHA" --depth=1
+            git diff --name-only "$BASE_SHA" HEAD -- \
               assets kids/assets content apple-tv ios test/assets \
               | scripts/optimize-app-media.sh --stdin
           else
@@ -131,39 +116,19 @@ jobs:
         run: |
           set -euo pipefail
           fail=0
-          # Pull requests enforce the full media size limits on every added or
-          # modified media asset. A text-only change must not be blocked by old
-          # oversized assets that it did not introduce. Main and manual full
-          # scans still enforce the budget across the entire repository.
-          scan_file="$(mktemp)"
-          trap 'rm -f "$scan_file"' EXIT
-          if [ "${{ github.event_name }}" = "pull_request" ] && [ "${{ steps.mode.outputs.full }}" != "1" ]; then
-            git diff --diff-filter=ACMR --name-only -z "${{ steps.pr_diff.outputs.merge_base }}" HEAD -- \
-              assets kids/assets content apple-tv ios > "$scan_file"
-            echo "PR media budget: checking only modified assets against strict limits."
-          else
-            find assets kids/assets content apple-tv ios -type f \
-              \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.mp4' \) \
-              -print0 2>/dev/null > "$scan_file" || true
-            echo "Main/full media budget: checking every stored delivery asset."
-          fi
-          checked=0
           while IFS= read -r -d '' f; do
-            [ -f "$f" ] || continue
             case "$f" in
               *Assets.xcassets*|*/icons/*|*/app-icons/*|*/brand/seals/*|*/logo/*|*/logos/*|*/kids-brand/logo-mark.png|*favicon*|*watermark*|*/masters/*|*/master/*|*/originals/*|*/raw/*|*/sources/*|*-master.*) continue ;;
             esac
             size=$(stat -c%s "$f")
             case "${f,,}" in
               *.jpg|*.jpeg|*.png|*.webp)
-                checked=$((checked + 1))
                 if [ "$size" -gt 1200000 ]; then echo "::error::$f is still larger than 1.2 MB"; fail=1; fi ;;
               *.mp4)
-                checked=$((checked + 1))
                 if [ "$size" -gt 12000000 ]; then echo "::warning::$f remains larger than 12 MB; move long video to Cloudflare/R2 streaming delivery."; fi ;;
             esac
-          done < "$scan_file"
-          echo "Media delivery budget checked=$checked status=$fail"
+          done < <(find assets kids/assets content apple-tv ios -type f \
+            \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.mp4' \) -print0 2>/dev/null)
           exit "$fail"
 
       - name: Commit optimized media
