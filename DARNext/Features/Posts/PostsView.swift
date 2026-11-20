@@ -105,7 +105,7 @@ struct PostsView: View {
     }
 }
 
-private struct PostDetailView: View {
+struct PostDetailView: View {
     @Environment(\.darTheme) private var theme
     let post: Post
 
