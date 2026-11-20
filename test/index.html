@@ -10562,18 +10562,26 @@ window.DAR_ANALYTICS_CONFIG={
 <link rel="stylesheet" href="/test/assets/dar-quran-learn-studio.css?v=2">
 <script>
 (function(){
-  var WANT=982;
+  var WANT=982; // Canonical release workflow keeps this version aligned.
+  var bootRequested=false;
   function boot(){
-    if(window.__DAR_QURAN_PLAYER_BUILD===WANT&&window.DARQuranPlayer)return;
+    // Only recover a missing engine. A healthy engine must not be reloaded
+    // just because a test HTML version lags behind the deployed player build.
+    if(window.DARQuranPlayer&&typeof window.DARQuranPlayer.bind==="function")return;
+    if(bootRequested)return;
+    bootRequested=true;
     var s=document.createElement("script");
     s.src="/test/assets/dar-quran-player.js?v="+WANT+"&r="+Date.now();
     s.onload=function(){
+      bootRequested=false;
       try{if(window.DARQuranPlayer&&typeof window.DARQuranPlayer.bind==="function")window.DARQuranPlayer.bind();}catch(e){}
     };
+    s.onerror=function(){bootRequested=false;};
     document.head.appendChild(s);
   }
+  // Deferred player scripts finish before load. Avoid an 800ms race that
+  // could inject a second engine while the first is still loading.
   window.addEventListener("load",boot);
-  setTimeout(boot,800);
 })();
 </script>
 <script src="/test/assets/frauen/frauen-fiqh.js?v=1293-nohint" defer></script>

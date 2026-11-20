@@ -1,0 +1,36 @@
+name: Quran single-launch regression
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "assets/dar-quran-player.js"
+      - "test/assets/dar-quran-player.js"
+      - "test/index.html"
+      - "scripts/check-quran-single-launch.cjs"
+      - ".github/workflows/quran-single-launch-regression.yml"
+  push:
+    branches: [main]
+    paths:
+      - "assets/dar-quran-player.js"
+      - "test/assets/dar-quran-player.js"
+      - "test/index.html"
+      - "scripts/check-quran-single-launch.cjs"
+      - ".github/workflows/quran-single-launch-regression.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  single-launch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Syntax and single-owner regression
+        run: |
+          node --check assets/dar-quran-player.js
+          node --check test/assets/dar-quran-player.js
+          node scripts/check-quran-single-launch.cjs
