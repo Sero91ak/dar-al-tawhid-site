@@ -77,7 +77,7 @@ struct DuaView: View {
     }
 }
 
-private struct DuaDetailView: View {
+struct DuaDetailView: View {
     @Environment(\.darTheme) private var theme
     let dua: Dua
 
