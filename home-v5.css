@@ -2603,3 +2603,39 @@
   #app .top .home-nav button img { width:19px!important;height:19px!important; }
   #app .top .home-nav button span { font-size:8px!important; }
 }
+
+
+/* Qur'an reader: clear verse position, adaptive text columns and stable reading controls. */
+#app .quran-reader-shell{overscroll-behavior:contain;scrollbar-gutter:stable}
+#app .quran-reader-position{display:grid;grid-template-columns:minmax(150px,auto) minmax(80px,1fr);align-items:center;gap:clamp(12px,2vw,24px);padding:14px 0;border-bottom:1px solid var(--home4-hair)}
+#app .quran-reader-position-label{color:#e6d4ae;font:600 clamp(12px,1vw,15px)/1.4 var(--ui);font-variant-numeric:tabular-nums;white-space:nowrap}
+#app .quran-reader-progress{height:5px;min-width:0;overflow:hidden;border-radius:999px;background:rgba(216,189,130,.18)}
+#app .quran-reader-progress-fill{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#a98b54,#e2c985);transition:width .22s ease}
+#app .quran-reader-columns{align-items:start}
+#app .reader-column{overflow-wrap:anywhere}
+#app #readerArabic,#app #readerGerman{overflow-wrap:anywhere}
+#app #readerArabic{max-width:100%;text-wrap:pretty}
+#app #readerGerman{max-width:70ch;text-wrap:pretty}
+#app .quran-reader-footer{z-index:4;flex-wrap:wrap}
+#app .reader-playback{flex-wrap:wrap}
+#app .reader-note{min-height:1.3em}
+#app .theme-ivory .quran-reader-position-label{color:#34483a}
+#app .theme-ivory .quran-reader-progress{background:rgba(73,107,85,.18)}
+#app .theme-ivory .quran-reader-progress-fill{background:#496b55}
+@media(max-width:720px),(orientation:portrait){
+  #app .quran-reader-position{grid-template-columns:1fr;gap:8px;padding:10px 0}
+  #app .quran-reader-position-label{white-space:normal}
+  #app .quran-reader-columns{gap:16px;padding:16px 0}
+  #app .reader-column{padding-inline:clamp(4px,2vw,12px)}
+  #app #readerArabic{font-size:clamp(28px,7vw,42px);line-height:1.8}
+  #app #readerGerman{font-size:clamp(17px,4.4vw,21px);line-height:1.65}
+  #app .quran-reader-footer{position:sticky;bottom:0;gap:8px;padding:9px 0}
+  #app .reader-playback{gap:7px}
+  #app .reader-step,#app .reader-play,#app .reader-home{min-height:42px;padding:9px 12px}
+}
+@media(max-width:380px){
+  #app .quran-reader-actions{gap:7px}
+  #app .reader-control select{min-width:0;width:min(38vw,170px)}
+  #app .quran-reader-footer{justify-content:center}
+  #app .reader-check,#app .reader-home{font-size:12px}
+}
