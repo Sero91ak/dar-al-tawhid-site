@@ -19,7 +19,8 @@ for(const item of api.entries){
   assert.ok(spoken&&spoken.length>10,"Every age needs a natural explanation for "+item.id);
   assert.ok(!spoken.includes(item.term+" bedeutet: "+item.term),"Never repeat the same Islamic term within a spoken definition: "+item.id+" "+age);
   assert.ok(spoken.startsWith(item.term)||item.id==="tazkiyah"&&spoken.startsWith("Tazkiyat an-Nafs")||
-   item.id==="salam"&&spoken.startsWith("As-salāmu"),"Speak the term naturally: "+item.id+" "+age);
+   item.id==="salam"&&spoken.startsWith("As-salāmu")||
+   item.id==="quran"&&spoken.startsWith("Der Qurʾān"),"Speak the term naturally: "+item.id+" "+age);
  }
  assert.notEqual(item.age["4-5"],item.age["6-8"]);
  assert.notEqual(item.age["6-8"],item.age["9-10"]);
