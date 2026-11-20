@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_ACADEMY_SIDQ_OWNER_V4_CLOUDFLARE_DELIVERY_EVIDENCE",
+  "status": "live-cloudflare-http-and-sha256-verified; native-device-playback-not-yet-tested",
+  "subject": "akhlaq",
+  "lessonId": "sidq",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "sourceSpeaker": "Serhat Abu Malik",
+  "sourceFlowId": "zrB4zGdz9OTndLryQtIB",
+  "originalElevenLabsGenerations": 76,
+  "ownerAuthorizedWithoutPrelisten": true,
+  "githubMergeCommit": "c891c697d8ce445dd3292bcd662ba2a11fd841db",
+  "cloudflareDeployedCommit": "06654031257e971071f399ea056cac242c4bff02",
+  "cloudflareDeploymentWorkflowRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/44692874266",
+  "publicLiveAudioAuditRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/44693665176",
+  "publicLiveAudioAuditAtUtc": "2026-11-20T07:16:22Z",
+  "canonicalAudioPhrases": 58,
+  "publicManifestCanonicalEntriesVerified": 58,
+  "realM4aHttp200AndSha256Matched": 58,
+  "realM4aBytesDownloadedAndHashed": 4701699,
+  "nativeFushaScribeTranscriptMatches": 9,
+  "allThreeAgeVariantsMappedInSourcePlan": true,
+  "boyGirlProfileAddressSourceExists": true,
+  "realDevicePlaybackVerified": false,
+  "actualElevenlabsCreativeSettings": {
+    "stability": 0.62,
+    "similarity": 0.88
+  },
+  "unsupportedProviderSettingsNotApplied": [
+    "speed_0.91",
+    "style_0.16",
+    "private_pronunciation_dictionary"
+  ],
+  "otherExistingAcademyLessonsWithOriginalV4AudioFullyLive": 0,
+  "all208AcademyLessonsAudioComplete": false,
+  "bulkOther66PreparationScript": "kids/tools/academy-bulk-66-production-v1.py",
+  "plannedExistingSourceBackedLessonCount": 66,
+  "futureEditorialUnimplementedCount": 142,
+  "notes": "This is a cryptographic HTTP delivery report, not a human acoustic listening assessment or evidence of real iOS/iPadOS playback. The remaining Academy curriculum has not been audio-produced. No additional Serhat V4 clips or credits were spent by this audit."
+}
