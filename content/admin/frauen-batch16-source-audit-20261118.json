@@ -5,7 +5,7 @@
   "branchOnly": true,
   "scope": "Source page identity and core episode comparison, not comprehensive isnad/translation certification",
   "verificationMethod": "Opened and read individual Sunnah.com record pages (Arabic/English where available); canonical URL variants used for occasional inaccessible book/chapter paths. Recorded key reported event against editorial overview, without modifying the original links.",
-  "status": "partial-original-arabic-spotchecks-5-of-16; scholarly-approval-pending",
+  "status": "partial-original-arabic-spotchecks-15-of-16; scholarly-approval-pending",
   "publicationAuthorization": false,
   "externalTranslationCertification": false,
   "sources": [
@@ -139,10 +139,19 @@
       "topicCheck": "barira-choice-after-manumission-wala",
       "sourceLocated": true,
       "directPageStatus": "hadith-page-opens-and-topic-matches",
-      "arabicExcerptReview": "requires-final-verbatim-proofread",
+      "arabicExcerptReview": "primary-arabic-excerpt-matched-web-text",
       "germanParaphraseReview": "core-episode-matched-not-verbatim-certified",
       "independentScholarlySignoff": false,
-      "needsAttention": []
+      "needsAttention": [],
+      "primaryArabicSpotcheck": {
+        "performed": "2026-11-20",
+        "sourceUrl": "https://sunnah.com/bukhari:5097",
+        "verbatimExcerpt": "كَانَ فِي بَرِيرَةَ ثَلاَثُ سُنَنٍ عَتَقَتْ فَخُيِّرَتْ",
+        "reviewMethod": "Primary Arabic passage compared to women's existing short excerpt; not full matn/isnad or scholarly certification",
+        "verbatimExcerptCompared": true,
+        "independentHumanScholarReview": false,
+        "translationPeerReview": false
+      }
     },
     {
       "id": "sahabiyyat-umm-habibah-milchverwandtschaft-20261106",
@@ -153,10 +162,19 @@
       "topicCheck": "prohibited-marriage-relatives-and-nursing",
       "sourceLocated": true,
       "directPageStatus": "hadith-page-opens-and-topic-matches",
-      "arabicExcerptReview": "requires-final-verbatim-proofread",
+      "arabicExcerptReview": "primary-arabic-excerpt-matched-web-text",
       "germanParaphraseReview": "core-episode-matched-not-verbatim-certified",
       "independentScholarlySignoff": false,
-      "needsAttention": []
+      "needsAttention": [],
+      "primaryArabicSpotcheck": {
+        "performed": "2026-11-20",
+        "sourceUrl": "https://sunnah.com/bukhari:5101",
+        "verbatimExcerpt": "إِنَّ ذَلِكَ لاَ يَحِلُّ لِي",
+        "reviewMethod": "Primary Arabic passage compared to women's existing short excerpt; not full matn/isnad or scholarly certification",
+        "verbatimExcerptCompared": true,
+        "independentHumanScholarReview": false,
+        "translationPeerReview": false
+      }
     },
     {
       "id": "sahabiyyat-aishah-jibril-salam-20261106",
@@ -167,10 +185,19 @@
       "topicCheck": "greeting-from-jibril",
       "sourceLocated": true,
       "directPageStatus": "hadith-page-opens-and-topic-matches",
-      "arabicExcerptReview": "requires-final-verbatim-proofread",
+      "arabicExcerptReview": "primary-arabic-excerpt-matched-web-text",
       "germanParaphraseReview": "core-episode-matched-not-verbatim-certified",
       "independentScholarlySignoff": false,
-      "needsAttention": []
+      "needsAttention": [],
+      "primaryArabicSpotcheck": {
+        "performed": "2026-11-20",
+        "sourceUrl": "https://sunnah.com/bukhari:3768",
+        "verbatimExcerpt": "هَذَا جِبْرِيلُ يُقْرِئُكِ السَّلاَمَ",
+        "reviewMethod": "Primary Arabic passage compared to women's existing short excerpt; not full matn/isnad or scholarly certification",
+        "verbatimExcerptCompared": true,
+        "independentHumanScholarReview": false,
+        "translationPeerReview": false
+      }
     },
     {
       "id": "sahabiyyat-asma-umays-zwei-hidschras-20261106",
@@ -181,10 +208,19 @@
       "topicCheck": "two-migrations-for-people-of-ship",
       "sourceLocated": true,
       "directPageStatus": "hadith-page-opens-and-topic-matches",
-      "arabicExcerptReview": "requires-final-verbatim-proofread",
+      "arabicExcerptReview": "primary-arabic-excerpt-matched-web-text",
       "germanParaphraseReview": "core-episode-matched-not-verbatim-certified",
       "independentScholarlySignoff": false,
-      "needsAttention": []
+      "needsAttention": [],
+      "primaryArabicSpotcheck": {
+        "performed": "2026-11-20",
+        "sourceUrl": "https://sunnah.com/bukhari:4231",
+        "verbatimExcerpt": "وَلَكُمْ أَنْتُمْ أَهْلَ السَّفِينَةِ هِجْرَتَانِ",
+        "reviewMethod": "Primary Arabic passage compared to women's existing short excerpt; not full matn/isnad or scholarly certification",
+        "verbatimExcerptCompared": true,
+        "independentHumanScholarReview": false,
+        "translationPeerReview": false
+      }
     },
     {
       "id": "sahabiyyat-aishah-ifk-offenbarung-20261106",
@@ -209,10 +245,19 @@
       "topicCheck": "broken-dish-replaced-after-jealousy",
       "sourceLocated": true,
       "directPageStatus": "hadith-page-opens-and-topic-matches",
-      "arabicExcerptReview": "requires-final-verbatim-proofread",
+      "arabicExcerptReview": "primary-arabic-excerpt-matched-web-text",
       "germanParaphraseReview": "core-episode-matched-not-verbatim-certified",
       "independentScholarlySignoff": false,
-      "needsAttention": []
+      "needsAttention": [],
+      "primaryArabicSpotcheck": {
+        "performed": "2026-11-20",
+        "sourceUrl": "https://sunnah.com/bukhari:5225",
+        "verbatimExcerpt": "غَارَتْ أُمُّكُمْ",
+        "reviewMethod": "Primary Arabic passage compared to women's existing short excerpt; not full matn/isnad or scholarly certification",
+        "verbatimExcerptCompared": true,
+        "independentHumanScholarReview": false,
+        "translationPeerReview": false
+      }
     },
     {
       "id": "muetter-hafsah-nach-verwitwung-20261106",
@@ -223,10 +268,19 @@
       "topicCheck": "hafsa-widowhood-and-proposal",
       "sourceLocated": true,
       "directPageStatus": "hadith-page-opens-and-topic-matches",
-      "arabicExcerptReview": "requires-final-verbatim-proofread",
+      "arabicExcerptReview": "primary-arabic-excerpt-matched-web-text",
       "germanParaphraseReview": "core-episode-matched-not-verbatim-certified",
       "independentScholarlySignoff": false,
-      "needsAttention": []
+      "needsAttention": [],
+      "primaryArabicSpotcheck": {
+        "performed": "2026-11-20",
+        "sourceUrl": "https://sunnah.com/bukhari:5122",
+        "verbatimExcerpt": "فَلَبِثْتُ لَيَالِي ثُمَّ خَطَبَهَا رَسُولُ اللَّهِ",
+        "reviewMethod": "Primary Arabic passage compared to women's existing short excerpt; not full matn/isnad or scholarly certification",
+        "verbatimExcerptCompared": true,
+        "independentHumanScholarReview": false,
+        "translationPeerReview": false
+      }
     },
     {
       "id": "muetter-zaynab-zunahme-des-uebels-20261106",
@@ -237,10 +291,19 @@
       "topicCheck": "zaynab-question-growing-evil",
       "sourceLocated": true,
       "directPageStatus": "hadith-page-opens-and-topic-matches",
-      "arabicExcerptReview": "requires-final-verbatim-proofread",
+      "arabicExcerptReview": "primary-arabic-excerpt-matched-web-text",
       "germanParaphraseReview": "core-episode-matched-not-verbatim-certified",
       "independentScholarlySignoff": false,
-      "needsAttention": []
+      "needsAttention": [],
+      "primaryArabicSpotcheck": {
+        "performed": "2026-11-20",
+        "sourceUrl": "https://sunnah.com/bukhari:3346",
+        "verbatimExcerpt": "نَعَمْ، إِذَا كَثُرَ الْخُبْثُ",
+        "reviewMethod": "Primary Arabic passage compared to women's existing short excerpt; not full matn/isnad or scholarly certification",
+        "verbatimExcerptCompared": true,
+        "independentHumanScholarReview": false,
+        "translationPeerReview": false
+      }
     },
     {
       "id": "muetter-aishah-letzte-stunden-20261106",
@@ -251,10 +314,19 @@
       "topicCheck": "aisha-eyewitness-final-hours-siwak",
       "sourceLocated": true,
       "directPageStatus": "hadith-page-opens-and-topic-matches",
-      "arabicExcerptReview": "requires-final-verbatim-proofread",
+      "arabicExcerptReview": "primary-arabic-excerpt-matched-web-text",
       "germanParaphraseReview": "core-episode-matched-not-verbatim-certified",
       "independentScholarlySignoff": false,
-      "needsAttention": []
+      "needsAttention": [],
+      "primaryArabicSpotcheck": {
+        "performed": "2026-11-20",
+        "sourceUrl": "https://sunnah.com/bukhari:4451",
+        "verbatimExcerpt": "فِي الرَّفِيقِ الأَعْلَى فِي الرَّفِيقِ الأَعْلَى",
+        "reviewMethod": "Primary Arabic passage compared to women's existing short excerpt; not full matn/isnad or scholarly certification",
+        "verbatimExcerptCompared": true,
+        "independentHumanScholarReview": false,
+        "translationPeerReview": false
+      }
     },
     {
       "id": "muetter-umm-salamah-nachtwarnung-20261106",
@@ -265,10 +337,19 @@
       "topicCheck": "night-admonition-awaken-wives",
       "sourceLocated": true,
       "directPageStatus": "hadith-page-opens-and-topic-matches",
-      "arabicExcerptReview": "requires-final-verbatim-proofread",
+      "arabicExcerptReview": "primary-arabic-excerpt-matched-web-text",
       "germanParaphraseReview": "core-episode-matched-not-verbatim-certified",
       "independentScholarlySignoff": false,
-      "needsAttention": []
+      "needsAttention": [],
+      "primaryArabicSpotcheck": {
+        "performed": "2026-11-20",
+        "sourceUrl": "https://sunnah.com/bukhari:115",
+        "verbatimExcerpt": "أَيْقِظُوا صَوَاحِبَاتِ الْحُجَرِ",
+        "reviewMethod": "Primary Arabic passage compared to women's existing short excerpt; not full matn/isnad or scholarly certification",
+        "verbatimExcerptCompared": true,
+        "independentHumanScholarReview": false,
+        "translationPeerReview": false
+      }
     },
     {
       "id": "frauen-fiqh-aishah-tayammum-halskette-20261106",
@@ -279,10 +360,19 @@
       "topicCheck": "necklace-water-missing-tayammum",
       "sourceLocated": true,
       "directPageStatus": "hadith-page-opens-and-topic-matches",
-      "arabicExcerptReview": "requires-final-verbatim-proofread",
+      "arabicExcerptReview": "primary-arabic-excerpt-matched-web-text",
       "germanParaphraseReview": "core-episode-matched-not-verbatim-certified",
       "independentScholarlySignoff": false,
-      "needsAttention": []
+      "needsAttention": [],
+      "primaryArabicSpotcheck": {
+        "performed": "2026-11-20",
+        "sourceUrl": "https://sunnah.com/bukhari:334",
+        "verbatimExcerpt": "فَأَنْزَلَ اللَّهُ آيَةَ التَّيَمُّمِ",
+        "reviewMethod": "Primary Arabic passage compared to women's existing short excerpt; not full matn/isnad or scholarly certification",
+        "verbatimExcerptCompared": true,
+        "independentHumanScholarReview": false,
+        "translationPeerReview": false
+      }
     }
   ],
   "releaseBlockers": [
@@ -293,10 +383,12 @@
     "Existing push-lock/targeting approvals"
   ],
   "partialProgress": {
-    "spotchecked": 5,
+    "spotchecked": 15,
     "total": 16,
-    "outstanding": 11,
-    "kind": "Arabic excerpt and immediate source context only",
+    "outstanding": 1,
+    "unresolved": [
+      "sahabiyyat-aishah-ifk-offenbarung-20261106: long-source Arabic verbatim excerpt not yet conclusively located"
+    ],
     "sourceEntriesApprovedForRelease": 0,
     "translationLanguagesHumanCertified": 0,
     "readyForProduction": false
