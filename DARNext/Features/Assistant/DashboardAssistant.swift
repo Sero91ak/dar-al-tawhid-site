@@ -70,9 +70,11 @@ final class DashboardAssistantModel {
 }
 
 struct DashboardAssistantView: View {
+    private let repository: LocalContentRepository
     @State private var model: DashboardAssistantModel
 
     init(repository: LocalContentRepository) {
+        self.repository = repository
         _model = State(initialValue: DashboardAssistantModel(repository: repository))
     }
 
@@ -89,9 +91,32 @@ struct DashboardAssistantView: View {
                                 .padding(12)
                                 .background(message.isUser ? Color.accentColor.opacity(0.18) : Color.secondary.opacity(0.12), in: RoundedRectangle(cornerRadius: 16))
                             ForEach(message.sources) { source in
-                                Label("\(source.kind.rawValue): \(source.title)", systemImage: "checkmark.seal")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
+                                NavigationLink {
+                                    AssistantSourceDestinationView(repository: repository, source: source)
+                                } label: {
+                                    HStack(alignment: .top, spacing: 10) {
+                                        Image(systemName: "checkmark.seal")
+                                            .foregroundStyle(.tint)
+                                        VStack(alignment: .leading, spacing: 4) {
+                                            Text("\(source.kind.rawValue): \(source.title)")
+                                                .font(.subheadline.weight(.semibold))
+                                                .multilineTextAlignment(.leading)
+                                            Text(source.sourceID)
+                                                .font(.caption)
+                                                .foregroundStyle(.secondary)
+                                        }
+                                        Spacer(minLength: 0)
+                                        Image(systemName: "arrow.up.right")
+                                            .font(.caption.weight(.semibold))
+                                            .foregroundStyle(.secondary)
+                                    }
+                                    .padding(12)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                                    .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityIdentifier("assistant-source-\(source.id)")
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: message.isUser ? .trailing : .leading)
@@ -115,5 +140,113 @@ struct DashboardAssistantView: View {
             .padding()
         }
         .navigationTitle("Wissensassistent")
+    }
+}
+
+
+private struct AssistantSourceDestinationView: View {
+    let repository: LocalContentRepository
+    let source: AssistantSourceReference
+
+    @State private var didLoad = false
+    @State private var errorMessage: String?
+    @State private var post: Post?
+    @State private var dua: Dua?
+    @State private var book: LibraryBook?
+    @State private var publication: LibraryPublication?
+
+    @ViewBuilder
+    private var destination: some View {
+        switch source.kind {
+        case .quran:
+            if let location = QuranLocation(sourceID: source.id) {
+                QuranSurahView(repository: repository, number: location.surah, focusAyah: location.ayah)
+            } else {
+                QuranView(repository: repository)
+            }
+        case .post:
+            if let post {
+                PostDetailView(post: post, repository: repository)
+            } else {
+                unavailableSource
+            }
+        case .dua:
+            if let dua {
+                DuaDetailView(dua: dua)
+            } else {
+                unavailableSource
+            }
+        case .library:
+            if let book {
+                LibraryBookDetailView(book: book)
+            } else if let publication {
+                LibraryPublicationDetailView(publication: publication)
+            } else {
+                unavailableSource
+            }
+        }
+    }
+
+    private var unavailableSource: some View {
+        ContentUnavailableView(
+            "Quelle nicht verfügbar",
+            systemImage: "doc.questionmark",
+            description: Text("Der Suchtreffer ist in der lokalen Bibliothek nicht mehr vorhanden.")
+        )
+    }
+
+    var body: some View {
+        Group {
+            if !didLoad {
+                ProgressView("Quelle wird geöffnet …")
+            } else if let errorMessage {
+                ContentUnavailableView(
+                    "Quelle nicht verfügbar",
+                    systemImage: "externaldrive.badge.xmark",
+                    description: Text(errorMessage)
+                )
+            } else {
+                destination
+            }
+        }
+        .task(id: source.id) {
+            await loadSource()
+        }
+        .accessibilityIdentifier("assistant-source-destination")
+    }
+
+    @MainActor
+    private func loadSource() async {
+        guard !didLoad else { return }
+        do {
+            switch source.kind {
+            case .quran:
+                break
+            case .post:
+                post = try await repository.posts().first { $0.id == source.id }
+            case .dua:
+                dua = try await repository.duas().first { $0.id == source.id }
+            case .library:
+                book = try await repository.libraryBooks().first { $0.id == source.id }
+                if book == nil {
+                    publication = try await repository.libraryPublications().first { $0.id == source.id }
+                }
+            }
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+        didLoad = true
+    }
+}
+
+private struct QuranLocation {
+    let surah: Int
+    let ayah: Int?
+
+    init?(sourceID: String) {
+        let parts = sourceID.split(separator: "-")
+        guard parts.count >= 2, parts[0] == "quran", let surah = Int(parts[1]) else { return nil }
+        self.surah = surah
+        self.ayah = parts.count >= 3 ? Int(parts[2]) : nil
     }
 }
