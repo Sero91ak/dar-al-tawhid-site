@@ -3,6 +3,7 @@ import SwiftUI
 struct SearchView: View {
     let repository: LocalContentRepository
     @State private var query = ""
+    @State private var isSearchFieldPresented = true
     @State private var selectedKind: SearchDocumentKind?
     @State private var results: [SearchDocument] = []
     @State private var errorMessage: String?
