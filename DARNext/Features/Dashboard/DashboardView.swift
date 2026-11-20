@@ -68,7 +68,19 @@ struct DashboardView: View {
             }
         }
         .sheet(isPresented: $isSearchPresented) {
-            NavigationStack { SearchView(repository: repository) }
+            NavigationStack {
+                SearchView(repository: repository)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            Button {
+                                isSearchPresented = false
+                            } label: {
+                                Image(systemName: "xmark")
+                            }
+                            .accessibilityLabel("Suche schließen")
+                        }
+                    }
+            }
         }
         .task {
             widgetSnapshot = DARNextWidgetStore.load()
@@ -340,6 +352,7 @@ struct DashboardView: View {
                 .font(.footnote)
                 .foregroundStyle(theme.secondaryText)
         }
+        .accessibilityIdentifier("dashboard-source-status")
     }
 
     private func verseCard(_ verse: VerseSummary) -> some View {

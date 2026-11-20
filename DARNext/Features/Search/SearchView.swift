@@ -2,7 +2,10 @@ import SwiftUI
 
 struct SearchView: View {
     let repository: LocalContentRepository
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Namespace private var searchTransitionNamespace
     @State private var query = ""
+    @State private var isSearchFieldPresented = true
     @State private var selectedKind: SearchDocumentKind?
     @State private var results: [SearchDocument] = []
     @State private var errorMessage: String?
@@ -35,7 +38,7 @@ struct SearchView: View {
                 Section("\(filteredResults.count) Treffer") {
                     ForEach(filteredResults) { result in
                         NavigationLink {
-                            SearchDestinationView(repository: repository, result: result)
+                            SearchDestinationView(repository: repository, result: result, transitionNamespace: searchTransitionNamespace, isTransitionEnabled: DARMotion.usesZoomTransition(reduceMotion: reduceMotion))
                         } label: {
                             VStack(alignment: .leading, spacing: 4) {
                                 Label(result.title, systemImage: icon(for: result.kind))
@@ -47,12 +50,18 @@ struct SearchView: View {
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                             }
+                            .darMatchedTransitionSource(
+                                id: result.id,
+                                in: searchTransitionNamespace,
+                                isEnabled: DARMotion.usesZoomTransition(reduceMotion: reduceMotion)
+                            )
                         }
+                        .accessibilityIdentifier("search-result-\(result.id)")
                     }
                 }
             }
         }
-        .searchable(text: $query, prompt: "DAR-Bibliothek durchsuchen")
+        .searchable(text: $query, isPresented: $isSearchFieldPresented, prompt: "DAR-Bibliothek durchsuchen")
         .navigationTitle("Suche")
         .onChange(of: query) {
             runSearch()
@@ -110,8 +119,18 @@ struct SearchView: View {
 private struct SearchDestinationView: View {
     let repository: LocalContentRepository
     let result: SearchDocument
+    let transitionNamespace: Namespace.ID
+    let isTransitionEnabled: Bool
 
-    var body: some View {
+    @State private var didLoad = false
+    @State private var errorMessage: String?
+    @State private var post: Post?
+    @State private var dua: Dua?
+    @State private var book: LibraryBook?
+    @State private var publication: LibraryPublication?
+
+    @ViewBuilder
+    private var loadedDestination: some View {
         switch result.kind {
         case .quran:
             if let location = QuranSearchLocation(documentID: result.id) {
@@ -120,12 +139,85 @@ private struct SearchDestinationView: View {
                 QuranView(repository: repository)
             }
         case .post:
-            PostsView(repository: repository)
+            if let post {
+                PostDetailView(post: post)
+            } else {
+                missingResult
+            }
         case .dua:
-            DuaView(repository: repository)
+            if let dua {
+                DuaDetailView(dua: dua)
+            } else {
+                missingResult
+            }
         case .library:
-            LibraryView(repository: repository)
+            if let book {
+                LibraryBookDetailView(book: book)
+            } else if let publication {
+                LibraryPublicationDetailView(publication: publication)
+            } else {
+                missingResult
+            }
         }
+    }
+
+    private var missingResult: some View {
+        ContentUnavailableView(
+            "Treffer nicht verfügbar",
+            systemImage: "doc.questionmark",
+            description: Text("Der geprüfte Inhalt ist in der lokalen Bibliothek nicht mehr vorhanden.")
+        )
+    }
+
+    var body: some View {
+        Group {
+            if !didLoad {
+                ProgressView("Treffer wird geöffnet …")
+            } else if let errorMessage {
+                ContentUnavailableView(
+                    "Inhalt nicht verfügbar",
+                    systemImage: "externaldrive.badge.xmark",
+                    description: Text(errorMessage)
+                )
+            } else {
+                loadedDestination
+            }
+        }
+        .task(id: result.id) {
+            await loadDestination()
+        }
+        .darZoomNavigationTransition(
+            sourceID: result.id,
+            in: transitionNamespace,
+            isEnabled: isTransitionEnabled
+        )
+    }
+
+    @MainActor
+    private func loadDestination() async {
+        guard !didLoad else { return }
+        do {
+            switch result.kind {
+            case .quran:
+                break
+            case .post:
+                let posts = try await repository.posts()
+                post = posts.first { $0.id == result.id }
+            case .dua:
+                let duas = try await repository.duas()
+                dua = duas.first { $0.id == result.id }
+            case .library:
+                let books = try await repository.libraryBooks()
+                book = books.first { $0.id == result.id }
+                if book == nil {
+                    let publications = try await repository.libraryPublications()
+                    publication = publications.first { $0.id == result.id }
+                }
+            }
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+        didLoad = true
     }
 }
 

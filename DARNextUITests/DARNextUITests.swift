@@ -107,6 +107,46 @@ final class DARNextUITests: XCTestCase {
     }
 
     @MainActor
+    func testDashboardSearchOpensExactPostAndRestoresSourcePosition() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        let sourceCard = app.descendants(matching: .any)
+            .matching(identifier: "dashboard-source-status")
+            .firstMatch
+        for _ in 0..<16 where !sourceCard.isHittable {
+            app.swipeUp()
+        }
+        XCTAssertTrue(sourceCard.isHittable, "Scroll to the dashboard's final source card before opening search.")
+
+        app.buttons["DAR-Bibliothek durchsuchen"].tap()
+        let searchField = app.searchFields.firstMatch
+        XCTAssertTrue(searchField.waitForExistence(timeout: 10))
+        XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 5), "Opening dashboard search should focus the search field.")
+        searchField.typeText("Unterricht")
+
+        let result = app.descendants(matching: .any)
+            .matching(identifier: "search-result-der-beste-unterricht-ist-quran-lernen-und-lehren-183")
+            .firstMatch
+        XCTAssertTrue(result.waitForExistence(timeout: 10))
+        result.tap()
+
+        XCTAssertTrue(app.navigationBars["Beitrag"].waitForExistence(timeout: 10))
+        let postTitle = app.staticTexts.matching(
+            NSPredicate(format: "label CONTAINS %@", "Der beste Unterricht ist Qurʾān lernen und lehren")
+        ).firstMatch
+        XCTAssertTrue(postTitle.waitForExistence(timeout: 10), "Search should open the selected post itself.")
+
+        app.navigationBars.buttons["Suche"].tap()
+        XCTAssertEqual(searchField.value as? String, "Unterricht")
+        XCTAssertTrue(result.isHittable, "Returning from the post should restore the search result position.")
+
+        app.buttons["Suche schließen"].tap()
+        XCTAssertTrue(sourceCard.waitForExistence(timeout: 8))
+        XCTAssertTrue(sourceCard.isHittable, "Closing search should restore the original dashboard scroll position.")
+    }
+
+    @MainActor
     func testLaunchPerformance() throws {
         // This measures how long it takes to launch your application.
         measure(metrics: [XCTApplicationLaunchMetric()]) {
