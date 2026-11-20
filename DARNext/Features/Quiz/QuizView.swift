@@ -143,8 +143,10 @@ private struct QuizRoundView: View {
                         Text("Frage \(index + 1) von \(roundQuestions.count)")
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(.secondary)
+                            .accessibilityIdentifier("quiz-round-question-count")
                         Text(question.question)
                             .font(.title2.weight(.semibold))
+                            .accessibilityIdentifier("quiz-round-question-title")
 
                         ForEach(Array(question.answers.enumerated()), id: \.offset) { answer in
                             Button {
@@ -159,6 +161,7 @@ private struct QuizRoundView: View {
                                 .background(answerBackground(answer.offset), in: RoundedRectangle(cornerRadius: 18))
                             }
                             .buttonStyle(.plain)
+                            .accessibilityIdentifier("quiz-answer-\(question.id)-\(answer.offset)")
                             .disabled(selectedAnswer != nil)
                         }
 
@@ -170,6 +173,7 @@ private struct QuizRoundView: View {
                                 )
                                 .font(.headline)
                                 .foregroundStyle(selectedAnswer == question.correctIndex ? .green : .red)
+                                .accessibilityIdentifier("quiz-answer-feedback")
                                 if let explanation = question.explanation {
                                     Text(explanation)
                                         .font(.body)
@@ -178,6 +182,7 @@ private struct QuizRoundView: View {
                                     Text(source)
                                         .font(.caption.weight(.semibold))
                                         .foregroundStyle(.secondary)
+                                        .accessibilityIdentifier("quiz-answer-source")
                                 }
                                 Button("Nächste Frage") {
                                     nextQuestion()
