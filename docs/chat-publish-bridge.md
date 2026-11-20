@@ -22,3 +22,7 @@ Diese Branch vorbereitet eine sichere Weiterleitung von ChatGPT an den vorhanden
 - **Wenn ein bestehender Beitrag korrigiert wurde:** denselben Post aktualisieren, Index und App-Deploy synchronisieren, tatsächliche Besucheransicht prüfen; **keine Gerätebenachrichtigung**. Eine gesonderte Berichtigungsnachricht darf erst nach einer ausdrücklichen Nachricht-versenden-Anweisung mit festgelegtem Wortlaut und Empfängern verschickt werden.
 - Die Linknummerierung, Quellenprüfung, Einzel-/Slide-Logik und der bestehende DAR-Admin-Publisher bleiben verbindlich.
 - Kids, Apple TV und Dar Test erhalten über diese Verbindung weder neue Inhalte noch Änderungen.
+
+## Verbindliche Apple-Notizen-Endabgabe nach eigener Q-Seite (20.11.2026)
+
+Die Reihenfolge lautet: neuer quellengeprüfter Entwurf → auf Eigentümeranweisung eine live-verifizierte kanonische Q-Karte mit neun vollständigen Sprachfassungen und Lernbereich → **als letzte Chat-Ausgabe ein einziger kopierfester Apple-Notizen-Beitrag** (📖 Unicode-Fetttitel; darunter genau vier Hashtags; 🖋️ Aussage; 📝 Quellen; 🔗 eigene Q-URL; 🌙 kurzes Fazit). Externe `#:~:text=`-Belege und ein nur verifiziertes PDF-`#page=N` gehören auf die Q-Seite. Kein Repo-Commit ist ein Live-Nachweis. Der App-/OneSignal-Push folgt **nur** nach gesondertem ausdrücklich freigegebenem „Push live“ und allen bestehenden Gates. Vollständige Regel: `docs/beitragszentrum-apple-notizen-q-push.md`.

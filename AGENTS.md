@@ -1,3 +1,7 @@
+## DĀR AL TAWḤĪD Zentrale · Beitragszentrum: Q-Link → Apple Notizen → Push (20.11.2026)
+
+**Vorrangige Nutzerregel:** Bei allen manuellen Erwachsenen-Beiträgen der Reihenfolge `Dubletten-/Isnād-Prüfung → Chat-Entwurf → explizit autorisierte Q-Quellenkarte → neun vollständig übersetzte Sprachen mit Q/Lernen → nachweislich live öffnen → als letzte Ausgabe EIN kopierbarer Apple-Notizen-Post mit eigenem Q-Link → nur nach gesondertem „Push live“ App-Publikation + einmalige Opt-in-OneSignal-Benachrichtigung` folgen. Die finale Notizen-Fassung hat Unicode-Fetttitel, direkt vier Hashtags, 🖋️ Sprecher und Hervorhebungen, 📝 Quellen, 🔗 dar-al-tawhid.de/q/N/ und 🌙 Fazit. Externe Direktnachweise gehören ausschließlich auf die Q-Karte; kein nicht erreichbarer Link gilt als fertig. Technische PDF-Anker nur nach belegter Seitenprüfung. Bestehende einzige Zentrale, H-Zeiten, Idempotenz, A–N, Freigaben und Push-Sperren unverändert. **Details und Kontrollliste:** [docs/beitragszentrum-apple-notizen-q-push.md](docs/beitragszentrum-apple-notizen-q-push.md).
+
 ## Frauen-/Wissensbeiträge: ID statt automatischer Q-Nummer (Nutzerregel 06.11.2026)
 - **Nie** selbst eine neue Q-Quellenkartennummer erzeugen. Erst wenn der Nutzer die **freie konkrete Q-Nummer** ausdrücklich nennt/freigibt. Bestehende ausdrücklich zugewiesene Q-URLs niemals ändern.
 - Für neue Frauenbeiträge ausschließlich die bestehende feste `kennung` als `contentId` verwenden; die normale Original-Quellen-URL und normale Beitragsroute bleiben in **allen Sprachen identisch**.
