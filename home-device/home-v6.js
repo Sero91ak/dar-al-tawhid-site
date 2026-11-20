@@ -77,7 +77,7 @@
   panel.hidden=false;panel.setAttribute('aria-expanded','true');$('closeTadabbur')?.focus({preventScroll:true});
   const verse=window.darHomeDailyVerse||{},reference=verse.reference||'';
   if(!refOK(reference)){say(status,'Öffne zuerst einen Qurʾān-Vers des Tages.');return}
-  say($('tadabburVerse'),'Vers '+reference);say(status,'Prüfe den vollständigen DĀR-Tadabbur-Katalog …');if(list)list.replaceChildren();
+  say($('tadabburVerse'),'Vers '+reference);say($('tadabburVerseText'),String(verse.de||''));say(status,'Prüfe den vollständigen DĀR-Tadabbur-Katalog …');if(list)list.replaceChildren();
   try{
    const data=await loadTadabbur();tadDataCache=data;
    showPanel(data.byReference.get(reference)||[],verse);
