@@ -187,3 +187,10 @@ Der eigenständige Arbeitsnachweis in PR #1824 wurde zugunsten dieses bestehende
 - `LocalContentRepository` lädt weiterhin aus Bundle-Ressourcen. Neue Web-Veröffentlichungen und Widerrufe erreichen deshalb den nativen Suchindex derzeit nicht automatisch.
 - Das live abgerufene Manifest enthält nur Version plus zwei Pfadlisten (126 statische / 62 Datenpfade), keine per-Content-ID-Hashes, Prüf-/Freigabestatus, SchemaVersion oder Tombstones. `requiredData` enthält außerdem `/content/staging/posts/posts-index.json`; die Liste darf nicht pauschal als freigegebener Knowledge-Import behandelt werden.
 - Draft-PR #1831 behebt ausschließlich den ungültigen JSON-Suffix. Für sichere native Updates ist weiterhin ein eigener, versionierter Publishvertrag mit stabilen IDs, Hashes, Sprache/Status, Withdrawal/Tombstones und Rollback erforderlich. Keine native Inhaltsaktualisierung oder Live-Veröffentlichung behauptet.
+
+
+## Tabwechsel und Scrollposition, 20.11.2026
+
+- Draft-PR #1832 ergänzt einen iPhone-UI-Regressionstest für Beiträge → Quiz → Beiträge. Er scrollt zu derselben stabil identifizierten Karte, vergleicht deren Bildschirmposition vor/nach dem Tabwechsel (Toleranz 4 pt) und prüft Sichtbarkeit.
+- Swift-Parser der geänderten UI-Testdatei: bestanden. Der UI-Test wurde nicht ausgeführt; daher ist Scroll-Restoration durch Tabwechsel weiterhin nicht als Laufzeitverhalten bestätigt. Kein Laufzeitcode geändert.
+- Das Anhängen des PR-Artefakts an den Codex-Chat scheiterte am internen Thread-Datenbankzustand; PR direkt erreichbar.
