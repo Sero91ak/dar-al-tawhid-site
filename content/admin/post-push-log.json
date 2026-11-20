@@ -1,7 +1,25 @@
 {
   "version": 1,
-  "generated": "2026-06-18T16:09:42.980Z",
-  "lastPostPush": null,
+  "generated": "2026-11-20T22:48:24.510Z",
+  "lastPostPush": {
+    "postId": "hafsah-bint-sirin-jugend-handeln-20261120-q59",
+    "qSourceId": 59,
+    "status": "completed_with_duplicate_send_warning",
+    "notifications": [
+      {
+        "notificationId": "52a2e540-77b9-46da-9814-514fafbd57fa",
+        "successful": 116,
+        "completedAt": "2026-11-20T22:46:36.000Z"
+      },
+      {
+        "notificationId": "37caf00b-d341-462f-8cac-041d6745f772",
+        "successful": 15,
+        "completedAt": "2026-11-20T22:46:53.000Z"
+      }
+    ],
+    "mustNotResend": true,
+    "auditedAt": "2026-11-20T22:48:24.510Z"
+  },
   "lastTestPush": {
     "kind": "test",
     "ok": true,
@@ -58,6 +76,28 @@
       },
       "reason": "",
       "loggedAt": "2026-06-18T16:09:42.980Z"
+    },
+    {
+      "kind": "adult-post",
+      "postId": "hafsah-bint-sirin-jugend-handeln-20261120-q59",
+      "qSourceId": 59,
+      "notificationId": "52a2e540-77b9-46da-9814-514fafbd57fa",
+      "providerSuccessful": 116,
+      "providerFailed": 0,
+      "source": "DAR_PUSH segment, parallel first send",
+      "completedAt": "2026-11-20T22:46:36.000Z",
+      "potentialDuplicate": true
+    },
+    {
+      "kind": "adult-post",
+      "postId": "hafsah-bint-sirin-jugend-handeln-20261120-q59",
+      "qSourceId": 59,
+      "notificationId": "37caf00b-d341-462f-8cac-041d6745f772",
+      "providerSuccessful": 15,
+      "providerFailed": 0,
+      "source": "direct production opted-in subscription IDs, second send",
+      "completedAt": "2026-11-20T22:46:53.000Z",
+      "potentialDuplicate": true
     }
   ]
 }

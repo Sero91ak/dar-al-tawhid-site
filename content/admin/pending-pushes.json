@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-11-20T22:46:36.000Z",
+  "generated": "2026-11-20T22:48:24.510Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1906,6 +1906,33 @@
           "fr",
           "es"
         ]
+      },
+      "deliveryAudit": {
+        "hasMultipleProviderMessages": true,
+        "oneSignalMessageCount": 2,
+        "notifications": [
+          {
+            "notificationId": "52a2e540-77b9-46da-9814-514fafbd57fa",
+            "source": "DAR_PUSH segment, parallel first send",
+            "optInRecipientCount": null,
+            "providerSuccessful": 116,
+            "providerFailed": 0,
+            "completedAt": "2026-11-20T22:46:36.000Z",
+            "recipientSetOverlapUnknown": true
+          },
+          {
+            "notificationId": "37caf00b-d341-462f-8cac-041d6745f772",
+            "source": "direct production opted-in subscription IDs, second send",
+            "optInRecipientCount": 51,
+            "providerSuccessful": 15,
+            "providerFailed": 0,
+            "completedAt": "2026-11-20T22:46:53.000Z",
+            "invalidSubscriptionIdsReturned": true,
+            "recipientSetOverlapUnknown": true
+          }
+        ],
+        "warning": "Possible duplicate devices; both sends completed. Never retry or resend without separate explicit instruction and recipient deduplication.",
+        "reviewedAt": "2026-11-20T22:48:24.509Z"
       }
     }
   }
