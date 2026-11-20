@@ -49,6 +49,7 @@ struct SearchView: View {
                                     .foregroundStyle(.secondary)
                             }
                         }
+                        .accessibilityIdentifier("search-result-\\(result.id)")
                     }
                 }
             }
