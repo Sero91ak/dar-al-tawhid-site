@@ -100,3 +100,12 @@ Der eigenständige Arbeitsnachweis in PR #1824 wurde zugunsten dieses bestehende
 - Die quizbezogene Beitragskarte stellt Titel/Zähler nun als SwiftUI-`Text`-Literale mit Interpolation bereit, damit sie in einen späteren String-Catalog-Lokalisierungslauf aufgenommen werden können; es wurden keine Übersetzungen behauptet oder hinzugefügt.
 - Die Karte fasst ihre sichtbaren Texte für assistive Bedienung zusammen und blendet dekorative Symbole aus.
 - Alle fünf geänderten Swift-Dateien auf PR-Head `codex/darnext-post-quiz-context-20261120` wurden am 20.11.2026 mit `swiftc -frontend -parse` geprüft: 5/5 Parserläufe erfolgreich. Build, Unit- und UI-Tests bleiben offen; GitHub-PR #1825 bleibt Draft.
+
+
+## Nachtrag Audio-Zustandsabdeckung und aktuelle Simulatoransicht, 20.11.2026
+
+- PR #1813 ersetzt die reine Resume-Bedingungsprüfung durch `QuranAudioInterruptionState`: wiederholte `began`-Meldungen erhalten den vorherigen Wiedergabestatus, `ended` konsumiert ihn einmalig und manuelles Pause/Stop verwirft die Fortsetzung. Drei Unit-Testfälle decken diese Übergänge ab; Parserprüfung von Engine und Testdatei 2/2. Die neuen XCTest-Fälle wurden nicht ausgeführt.
+- PR #1823 übernimmt dieselbe Zustandslogik, damit Global-Stop eine vorgemerkte automatische Fortsetzung verwirft. Drei Swift-Dateien bestehen die Parserprüfung 3/3. Der PR wurde auf einen Commit direkt auf PR #1813 bereinigt; GitHub meldet ihn mergeable. Build und XCTest des aktuellen Heads fehlen.
+- Der iPhone 18 Pro Max / iOS 27.2 Simulator ist weiterhin gebootet; DARNext läuft als `com.daraltawhid.darnext.DARNext` (PID 71222). Ein aktueller `simctl`-Screenshot `/tmp/darnext-live-20261120.png` (1,8 MB, 14:11 CET) zeigt die App. Das ist kein sichtbares Simulatorfenster und der Build bleibt einem GitHub-Commit nicht zugeordnet.
+- Device Hub (Xcode 27.2, PID 86164) startet, zeigt in dieser Sitzung aber kein Gerätefenster. `Simulator.app` fehlt weiterhin. Der Versuch, das lokale untracked Xcode-Projekt in Xcode zu öffnen, blockierte im AppleScript-Aufruf ohne Fenster; nur dieser eigene wartende Aufruf wurde beendet. Xcode und Simulator blieben aktiv.
+- Gemessener freier Speicher: 130 MiB. Es wurden keine Caches oder App-Daten gelöscht.
