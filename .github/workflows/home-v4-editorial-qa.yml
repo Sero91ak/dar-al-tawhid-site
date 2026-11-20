@@ -410,6 +410,26 @@ jobs:
               expected='/media/apple-tv/adhan-'+asset+'.jpg'
               WebDriverWait(driver,10).until(lambda d:d.find_element(By.ID,'h4PrayerArtwork').get_attribute('src').endswith(expected))
               WebDriverWait(driver,10).until(lambda d:d.execute_script("return document.getElementById('h4PrayerArtwork')?.naturalWidth||0")>0)
+            driver.execute_script("const v=document.getElementById('adhanVisual');v.dataset.prayerKey='isha';document.getElementById('adhanInfo').textContent='Heute · 17:57 Uhr';v.classList.add('active')")
+            for w,h in [(320,568),(390,844),(568,320),(667,375),(844,390),(1024,600),(1280,800),(1920,1200),(800,1280)]:
+              driver.set_window_size(w,h)
+              time.sleep(.2)
+              layout=driver.execute_script("""
+                const v=document.getElementById('adhanVisual'),l=v.querySelector('.adhan-lower-third'),s=document.getElementById('adhanInfo'),b=document.getElementById('stopAdhan'),t=v.querySelector('.adhan-title'),r=x=>{const q=x.getBoundingClientRect();return{left:q.left,right:q.right,top:q.top,bottom:q.bottom,width:q.width,height:q.height}},vr=r(v),lr=r(l),sr=r(s),br=r(b),cs=getComputedStyle(l),ss=getComputedStyle(s),bs=getComputedStyle(b);
+                const overlap=sr.left<br.right&&sr.right>br.left&&sr.top<br.bottom&&sr.bottom>br.top;
+                return{w:innerWidth,h:innerHeight,view:vr,lower:lr,sub:sr,button:br,direction:cs.flexDirection,font:parseFloat(ss.fontSize),line:parseFloat(ss.lineHeight),buttonFont:parseFloat(bs.fontSize),buttonBg:bs.backgroundColor,lowerBg:cs.backgroundColor,titleDisplay:getComputedStyle(t).display,scrollWidth:document.documentElement.scrollWidth,overlap};
+              """)
+              print('ADHAN_VIEWPORT',w,h,layout,flush=True)
+              vbox,lower,sub,button=layout['view'],layout['lower'],layout['sub'],layout['button']
+              if lower['left']<vbox['left']-1 or lower['right']>vbox['right']+1 or lower['top']<vbox['top']-1 or lower['bottom']>vbox['bottom']+1:errors.append(f'{w}x{h}: Adhan caption escapes the viewport')
+              if button['left']<vbox['left'] or button['right']>vbox['right'] or button['top']<vbox['top'] or button['bottom']>vbox['bottom']:errors.append(f'{w}x{h}: Adhan action is clipped')
+              if button['height']<44 or layout['font']<15 or layout['buttonFont']<13:errors.append(f'{w}x{h}: Adhan text or action is too small')
+              if layout['overlap']:errors.append(f'{w}x{h}: Adhan time overlaps the stop action')
+              if layout['lowerBg'] not in ('rgba(0, 0, 0, 0)','transparent'):errors.append(f'{w}x{h}: Adhan caption reintroduced an opaque card')
+              if layout['titleDisplay']!='none':errors.append(f'{w}x{h}: scheduled Adhan duplicates the artwork prayer title')
+              if layout['scrollWidth']>layout['w']+2:errors.append(f'{w}x{h}: Adhan view causes horizontal overflow')
+            driver.set_window_size(1280,800)
+            time.sleep(.2)
             driver.execute_script("document.getElementById('stopAdhan').click()")
             WebDriverWait(driver,10).until(lambda d:'active' not in d.find_element(By.ID,'adhanVisual').get_attribute('class'))
             WebDriverWait(driver,5).until(lambda d:d.execute_script("const i=document.getElementById('h4PrayerArtwork');return !i||getComputedStyle(i).display==='none'"))
