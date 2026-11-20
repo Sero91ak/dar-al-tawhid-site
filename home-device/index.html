@@ -202,7 +202,36 @@ async function playQuran(){const s=surahRecord();if(!s){toast('Surendaten nicht 
 function skipAyah(n){const step=Math.trunc(Number(n)||0);if(!step||!surahs.length)return;const list=surahs.slice().sort((a,b)=>Number(a.id)-Number(b.id)),currentIndex=list.findIndex(x=>Number(x.id)===Number(cfg.surah));if(currentIndex<0)return;const verseCount=x=>Math.max(1,Number(x.total_verses)||VERSE_COUNTS[Number(x.id)-1]||1),total=list.reduce((sum,x)=>sum+verseCount(x),0);let absolute=list.slice(0,currentIndex).reduce((sum,x)=>sum+verseCount(x),0)+Math.min(verseCount(list[currentIndex]),Math.max(1,Number(cfg.ayah)||1))+step;absolute=((absolute-1)%total+total)%total+1;let next=list[0],ayah=absolute;for(const entry of list){if(ayah<=verseCount(entry)){next=entry;break}ayah-=verseCount(entry)}cfg.surah=Number(next.id);cfg.ayah=ayah;const surahPicker=$('surah'),reciterPicker=$('reciter');if(surahPicker)surahPicker.value=String(cfg.surah);if(reciterPicker)reciterPicker.value=cfg.reciter;save();const resume=audioIsPlaying||qaudio.paused===false;qaudio.pause();qaudio.removeAttribute('src');qaudio.load();qaudio.dataset.current='';audioIsPlaying=false;drawAudio();if(resume)playQuran()}
 qaudio.addEventListener('ended',()=>{if(cfg.quranMode==='radio'){audioIsPlaying=false;drawAudio();toast('Livestream beendet · Verbindung prüfen');return}const s=surahRecord();if(!s)return;if(cfg.ayah<s.total_verses){cfg.ayah++;drawAudio();save();qaudio.src='';qaudio.dataset.current='';audioIsPlaying=false;playQuran()}else if(cfg.quranPlaybackScope==='single'){cfg.ayah=1;save();audioIsPlaying=false;drawAudio();toast('Ausgewählte Sūrah abgeschlossen') }else{const i=surahs.findIndex(x=>x.id===Number(cfg.surah));cfg.surah=surahs[(i+1)%surahs.length].id;cfg.ayah=1;if(cfg.quranReciterMode==='rotateRandom'&&reciters.length>1){const choices=reciters.filter(x=>x.edition!==cfg.reciter);cfg.reciter=choices[Math.floor(Math.random()*choices.length)].edition;$('reciter').value=cfg.reciter}$('surah').value=String(cfg.surah);save();qaudio.dataset.current='';audioIsPlaying=false;drawAudio();playQuran()}});
 qaudio.addEventListener('error',()=>{audioIsPlaying=false;drawAudio();toast('Rezitator-Audio nicht erreichbar')});
-async function playAdhan(test=false,prayerKey=''){if(adhanPlaying)return;if(!test&&cfg.adhanEnabled!=='on')return;const trackIndex=prayerKey==='fajr'?cfg.fajrAdhanTrack:cfg.adhanTrack;const r=adhanList[Number(trackIndex)||0];if(!r?.url){toast('Keine freigegebene Aḏān-Quelle geladen');return}pausedForAdhan=audioIsPlaying||nightstandPausedQuran;nightstandPausedQuran=false;qaudio.pause();audioIsPlaying=false;drawAudio();adhanPlaying=true;closeSaver();exitNightstand();$('adhanVisual').dataset.prayerKey=test?(prayerKey?'test:'+prayerKey:'test'):prayerKey;const displayPrayerTime=!test&&prayerKey?effective(prayerKey):'';$('adhanInfo').textContent=test?(prayerKey==='fajr'?'Faǧr · Test':'Allgemeiner Aḏān-Test'):displayPrayerTime!=='--:--'&&displayPrayerTime?('Heute · '+displayPrayerTime+' Uhr'):'Gebetszeit eingetreten';$('adhanVisual').classList.add('active');const video=$('cinematicVideo');const vurl=remoteConfig?.media?.cinematicAdhan?.videoUrl;const motionReduced=$('app').classList.contains('reduced-motion')||window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;if(cfg.adhanStyle==='cinematic'&&!motionReduced&&typeof vurl==='string'&&vurl.startsWith('https://')){video.src=vurl;video.play().catch(()=>{})}else if(cfg.adhanStyle==='cinematic'&&!motionReduced)toast('Cinematic-Medienquelle noch nicht hinterlegt · ruhige Ansicht aktiv');aaudio.src=r.url;aaudio.volume=(Number(cfg.adhanVolume)||60)/100;try{await aaudio.play()}catch(e){endAdhan();toast('Audio wurde vom Browser blockiert oder ist nicht erreichbar')}}
+async function playAdhan(test=false,prayerKey=''){
+ if(adhanPlaying)return;
+ if(!test&&cfg.adhanEnabled!=='on')return;
+ const prayerNames={fajr:'Faǧr',dhuhr:'Ḍuhr',asr:'ʿAṣr',maghrib:'Maġrib',isha:'ʿIšāʾ'};
+ if(!test&&!Object.hasOwn(prayerNames,prayerKey)){toast('Gebet konnte nicht eindeutig zugeordnet werden');return}
+ const settingKey=prayerKey==='fajr'?'fajrAdhanTrack':'adhanTrack';
+ const expectsFajr=prayerKey==='fajr';
+ const matchesPrayerType=r=>r&&Boolean(r.isFajr)===expectsFajr;
+ let recording=adhanList[Number(cfg[settingKey])];
+ if(!matchesPrayerType(recording))recording=adhanList.find(matchesPrayerType);
+ if(!recording?.url){toast(expectsFajr?'Keine gültige Faǧr-Aufnahme geladen':'Keine gültige reguläre Aḏān-Aufnahme geladen');return}
+ const resolvedIndex=adhanList.indexOf(recording);
+ if(String(cfg[settingKey])!==String(resolvedIndex)){cfg[settingKey]=String(resolvedIndex);const select=$(settingKey);if(select)select.value=cfg[settingKey];save()}
+ pausedForAdhan=audioIsPlaying||nightstandPausedQuran;
+ nightstandPausedQuran=false;qaudio.pause();audioIsPlaying=false;drawAudio();adhanPlaying=true;
+ closeSaver();exitNightstand();
+ const visual=$('adhanVisual');
+ visual.dataset.prayerKey=test?(prayerKey?'test:'+prayerKey:'test'):prayerKey;
+ const displayPrayerTime=!test&&prayerKey?effective(prayerKey):'';
+ const prayerName=prayerNames[prayerKey]||'';
+ $('adhanInfo').textContent=test?(prayerKey?prayerName+' · Hörprobe':'Allgemeiner Aḏān-Test'):displayPrayerTime!=='--:--'&&displayPrayerTime?('Heute · '+displayPrayerTime+' Uhr'):'Gebetszeit eingetreten';
+ visual.setAttribute('aria-label',test?('Aḏān-Hörprobe · '+(prayerName||'allgemein')+' · Aufnahme '+recording.name):(prayerName+' · Aḏān · '+displayPrayerTime+' Uhr · Aufnahme '+recording.name));
+ visual.classList.add('active');
+ const video=$('cinematicVideo'),vurl=remoteConfig?.media?.cinematicAdhan?.videoUrl;
+ const motionReduced=$('app').classList.contains('reduced-motion')||window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+ if(cfg.adhanStyle==='cinematic'&&!motionReduced&&typeof vurl==='string'&&vurl.startsWith('https://')){video.src=vurl;video.play().catch(()=>{})}
+ else if(cfg.adhanStyle==='cinematic'&&!motionReduced)toast('Cinematic-Medienquelle noch nicht hinterlegt · ruhige Ansicht aktiv');
+ aaudio.src=recording.url;aaudio.volume=(Number(cfg.adhanVolume)||60)/100;
+ try{await aaudio.play()}catch(e){endAdhan();toast('Audio wurde vom Browser blockiert oder ist nicht erreichbar')}
+}
 function endAdhan(){$('cinematicVideo').pause();$('cinematicVideo').removeAttribute('src');$('cinematicVideo').load();aaudio.pause();aaudio.removeAttribute('src');aaudio.load();$('adhanVisual').classList.remove('active');delete $('adhanVisual').dataset.prayerKey;adhanPlaying=false;const resume=pausedForAdhan;pausedForAdhan=false;if(resume)playQuran()}
 aaudio.addEventListener('ended',endAdhan);aaudio.addEventListener('error',()=>{if(adhanPlaying){endAdhan();toast('Aḏān-Aufnahme konnte nicht vollständig abgespielt werden')}});
 function tickAdhan(){if(!times||cfg.adhanEnabled!=='on'||adhanPlaying||(lastConfirmedSource==='local'&&cfg.offlineAdhan!=='on'))return;const t=Date.now(),current=nowKey(getCity().tz);if(current!==prayerDate)return;for(const k of KEYS){const tm=effective(k);if(tm==='--:--')continue;const key=current+'/'+getCity().name+'/'+k+'/'+tm;if(lastPrayerTrigger===key)continue;const epoch=epochFromLocal(current,tm,getCity().tz);if(t>=epoch&&t<epoch+15000){lastPrayerTrigger=key;playAdhan(false,k);break}}}
