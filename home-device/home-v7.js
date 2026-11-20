@@ -15,8 +15,14 @@
   if(!surah.options.length)surahs.forEach(x=>surah.add(new Option(x.id+' · '+x.name,x.id)));
   if(!reciter.options.length)reciters.forEach(x=>reciter.add(new Option(x.name,x.edition)));
   surah.value=String(state.surah);reciter.value=state.reciter;
-  $('readerSurahLabel').textContent=(surahs.find(x=>x.id===state.surah)?.name||'Sūrah '+state.surah)+' · '+state.ayah;
-  $('readerProgress').textContent='Āyah '+state.ayah+' · '+(surahs.find(x=>x.id===state.surah)?.count||'');
+  const current=surahs.find(x=>x.id===Number(state.surah)),total=Number(current?.count)||1;
+  $('readerSurahLabel').textContent='Sūrah '+state.surah+' / 114 · '+(current?.name||'Sūrah '+state.surah);
+  const position='Āyah '+state.ayah+' von '+total+' · Sūrah '+state.surah+' von 114';
+  $('readerProgress').textContent=position;$('readerProgress').setAttribute('aria-label',position);
+  const track=$('readerProgressTrack'),fill=$('readerProgressFill'),label=$('readerPosition');
+  if(label)label.textContent='Sūrah '+state.surah+' von 114 · '+(current?.name||'Sūrah '+state.surah)+' · Āyah '+state.ayah+' von '+total;
+  if(track){track.setAttribute('aria-valuemax',String(total));track.setAttribute('aria-valuenow',String(state.ayah));track.setAttribute('aria-valuetext','Āyah '+state.ayah+' von '+total)}
+  if(fill)fill.style.width=(Math.min(100,Math.max(0,Number(state.ayah)/total*100)))+'%';
   $('readerPlay').textContent=state.playing?'Ⅱ　Pause':'▶　Wiedergabe';
  }
  async function render(){
@@ -25,6 +31,7 @@
   fillOptions();
   if(requestKey===key)return;
   requestKey=key;
+  const shell=panel.querySelector('.quran-reader-shell');if(shell)shell.scrollTo({top:0,behavior:'smooth'});
   const ar=$('readerArabic'),de=$('readerGerman'),tr=$('readerTransliterationText'),status=$('readerStatus');
   if(cache.has(key)){const v=cache.get(key);ar.textContent=v.ar;de.textContent=v.de;tr.textContent=v.tr||'Lautschrift nicht verfügbar';tr.hidden=!$('readerShowTransliteration').checked;status.textContent='';return}
   ar.textContent='…';de.textContent='Übersetzung wird geladen …';status.textContent='Versdaten werden geladen.';
@@ -36,7 +43,7 @@
    cache.set(key,v);
    if(requestKey!==key)return;
    ar.textContent=v.ar;de.textContent=v.de;tr.textContent=v.tr||'Lautschrift nicht verfügbar';tr.hidden=!$('readerShowTransliteration').checked;status.textContent='';
-  }catch{if(requestKey===key){ar.textContent='';de.textContent='Übersetzung konnte nicht geladen werden.';status.textContent='Qurʾān-Textdienst nicht erreichbar.'}}
+  }catch{if(requestKey===key){ar.textContent='';de.textContent='Übersetzung konnte nicht geladen werden.';status.textContent='Qurʾān-Textdienst nicht erreichbar. Erneut versuchen: Vers wechseln oder Sūrah neu wählen.';requestKey=''}}
  }
  const on=id=>$(id)?.addEventListener('click',()=>{const a=api();if(a)a.skip(id==='readerNext'?1:-1)});
  $('readerSurah')?.addEventListener('change',()=>{api()?.selectSurah($('readerSurah').value);render()});
