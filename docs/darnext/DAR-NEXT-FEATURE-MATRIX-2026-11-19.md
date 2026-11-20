@@ -152,3 +152,11 @@ Der eigenständige Arbeitsnachweis in PR #1824 wurde zugunsten dieses bestehende
 - Der geprüfte JSON-Datensatz kennzeichnet `quiz-445` als `published`, `approved` und `sourceChecked=true`; die Parserprüfung der geänderten UI-Testdatei besteht. Der XCTest wurde mangels aktuellem Simulatorfenster und Speicher nicht ausgeführt; UI-Verhalten daher weiterhin unbestätigt.
 
 - Folgeschritt nach obigem Quiz-Kontexttest: Die Quizrunde in PR #1825 hat nun Accessibility-IDs für Zähler, Frage, Antwortoptionen, Ergebnisrückmeldung und Quellenzeile. Der UI-Test greift diese IDs ab, prüft `quiz-445` als Ein-Fragen-Runde und die Quellenanzeige. Parserprüfung der zwei geänderten Swift-Dateien: 2/2 bestanden; Xcode-/Laufzeitprüfung offen.
+
+
+## DĀR Intelligence – Source-Honesty-Fix, 20.11.2026
+
+- Audit des bestehenden `DashboardAssistant.swift` auf PR #1825 Head zeigte, dass reine Keyword-Erkennung („Qurʾān“, „Duʿāʾ“, „Gebet“) passende geprüfte Quellen behauptete, selbst wenn die lokale Suche null Treffer lieferte. Das war mit dem Blueprint-Vertrag für Nichtbeleg/Enthaltung unvereinbar.
+- Draft-PR #1829 entfernt diese keywordbasierten Behauptungen, bindet die Prototypantwort an übergebene Suchtreffer, enthält sich bei leerem Ergebnis und kennzeichnet ausdrücklich, dass keine eigenständige religiöse KI-Antwort generiert wird. Zwei Unit-Tests decken Nichttreffer und Quellenbindung ab; geänderte Swift-Dateien bestehen die Parserprüfung 2/2.
+- Xcode-Build und Unit-Tests bleiben offen; die Assistant-Entwicklung ist nicht fertig. Spracheingabe, Antwortstimme, echte Mehrturn-Intelligenz und anklickbare Quellenkarten fehlen weiterhin. PR #1829 bleibt Draft ohne Merge/Aktivierung.
+- Das Verknüpfen des PR-Artefakts mit diesem Codex-Chat schlug fehl, weil die lokale Chat-Datenbank ebenfalls `database or disk is full` meldete. Der GitHub-PR bleibt erreichbar.
