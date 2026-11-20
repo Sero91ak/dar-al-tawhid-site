@@ -194,7 +194,7 @@ struct DashboardAssistantView: View {
             }
         }
     }
-
+}
 
 private struct AssistantSourceDestinationView: View {
     let repository: LocalContentRepository
