@@ -39,9 +39,12 @@ jobs:
           const js=html.split('<script>')[1]?.split('</script>')[0];
           if(!js)throw Error('No inline HOME V2 engine found');
           new Function(js);
-          const required=['fajrAdhanTrack','homeAppearance','homeWallpaperMode','homeWallpaperUpload','homeConnectionStatus','home-v4.css','home-v4.js','home-v5.css','h4ShowVerse','h4ShowHadith','openTadabbur','tadabburPanel','saverMode','quranReaderPanel','quranReciterMode','readerTransliteration','openCalendarPanel','home-nav','tadabbur-dialog' ,'selectSettingsTab'];
+          const required=['homeWallpaperImage','saverWallpaperImage','saver-explanation','fajrAdhanTrack','homeAppearance','homeWallpaperMode','homeWallpaperUpload','homeConnectionStatus','home-v4.css','home-v4.js','home-v5.css','h4ShowVerse','h4ShowHadith','openTadabbur','tadabburPanel','saverMode','quranReaderPanel','quranReciterMode','readerTransliteration','openCalendarPanel','home-nav','tadabbur-dialog' ,'selectSettingsTab'];
           for(const key of required)if(!html.includes(key))throw Error('Missing HOME V3 feature: '+key);
           if(!f.readFileSync('home-device/home-v3.js','utf8').includes('data-home-settings'))throw Error('Missing contextual HOME view settings control');
+          const saverSource=f.readFileSync('home-device/home-v6.js','utf8'),wallpaperCSS=f.readFileSync('home-v5.css','utf8');
+          if(!saverSource.includes("label.textContent='Scharḥ · Erklärung'"))throw Error('Missing explicit Sharh section label');
+          if(!wallpaperCSS.includes('.saver-explanation')||!wallpaperCSS.includes('border-top:1px solid var(--gold)')||!wallpaperCSS.includes('object-fit:contain'))throw Error('Missing distinct Sharh divider or fitted wallpaper rules');
           if(html.includes('<nav class="footnav"'))throw Error('Bottom tabs must not exist');
           console.log('HOME V5 source, no-bottom-tabs, settings: PASS');
           NODE
@@ -195,8 +198,12 @@ jobs:
             if standard.get_attribute('value')!='dark' or standard.get_attribute('disabled') is None or len(standard.find_elements(By.TAG_NAME,'option'))!=1:errors.append('HOME appearance settings expose more than the Dār al-Layl standard')
             theme=driver.find_element(By.ID,'theme')
             if theme.get_attribute('value')!='night' or theme.get_attribute('disabled') is None or len(theme.find_elements(By.TAG_NAME,'option'))!=1:errors.append('Legacy display settings expose another color palette')
-            wallpaper=driver.execute_script("return {image:getComputedStyle(document.getElementById('app')).backgroundImage,artworkOpacity:parseFloat(getComputedStyle(document.querySelector('.artwork')).opacity)}")
-            if 'url(' not in wallpaper['image'] or wallpaper['artworkOpacity']>=.2:errors.append('Dār al-Layl is covering the selected HOME wallpaper')
+            wallpaper=driver.execute_script("""
+              const img=document.getElementById('homeWallpaperImage'),r=img.getBoundingClientRect();
+              return {src:img.currentSrc,hidden:img.hidden,fit:getComputedStyle(img).objectFit,nw:img.naturalWidth,nh:img.naturalHeight,w:r.width,h:r.height,appW:innerWidth,appH:innerHeight,artworkOpacity:parseFloat(getComputedStyle(document.querySelector('.artwork')).opacity)};
+            """)
+            print('FITTED_HOME_WALLPAPER',wallpaper,flush=True)
+            if '/media/apple-tv/' not in wallpaper['src'] or wallpaper['hidden'] or wallpaper['fit']!='contain' or not wallpaper['nw'] or not wallpaper['nh'] or wallpaper['w']>wallpaper['appW']+1 or wallpaper['h']>wallpaper['appH']+1 or abs(wallpaper['w']/wallpaper['h']-wallpaper['nw']/wallpaper['nh'])>.03 or wallpaper['artworkOpacity']>=.2:errors.append('Selected HOME wallpaper is not fully visible at its natural aspect ratio')
             print('DĀR AL-LAYL ONLY + VISIBLE NAVIGATION: PASS',flush=True)
             driver.find_element(By.ID,'openCalendarPanel').click()
             WebDriverWait(driver,8).until(lambda d:d.find_element(By.ID,'calendarPanel').get_attribute('hidden') is None)
@@ -277,12 +284,17 @@ jobs:
             thumb=driver.find_element(By.CSS_SELECTOR,'#wallpaperOptions [data-wallpaper="tv-kaaba-day"] img')
             if not thumb.get_attribute('src').endswith('tv-kaaba-day-thumb.jpg') or thumb.get_attribute('naturalWidth')!='640':errors.append('Gallery did not use the optimized 640px preview')
             Select(driver.find_element(By.ID,'homeWallpaperMode')).select_by_value('auto')
-            auto_bg=driver.execute_script("return getComputedStyle(document.getElementById('app')).backgroundImage")
+            auto_bg=driver.execute_script("return document.getElementById('homeWallpaperImage').currentSrc")
             print('AUTO_WALLPAPER',auto_bg,flush=True)
             if '/media/apple-tv/tv-kaaba-' not in auto_bg:errors.append('Automatic day/night wallpaper did not select a native scene')
             Select(driver.find_element(By.ID,'homeSaverBackground')).select_by_value('tv-kaaba-sunrise')
-            saver_bg=driver.execute_script("return document.getElementById('saver').style.backgroundImage")
+            saver_bg=driver.execute_script("return document.getElementById('saverWallpaperImage').currentSrc")
             if '/media/apple-tv/tv-kaaba-sunrise.jpg' not in saver_bg:errors.append('Separate screensaver wallpaper was not applied')
+            saver_fit=driver.execute_script("""
+              const img=document.getElementById('saverWallpaperImage'),r=img.getBoundingClientRect();
+              return {src:img.currentSrc,hidden:img.hidden,fit:getComputedStyle(img).objectFit,nw:img.naturalWidth,nh:img.naturalHeight,w:r.width,h:r.height};
+            """)
+            if saver_fit['hidden'] or saver_fit['fit']!='contain' or not saver_fit['nw'] or not saver_fit['nh'] or abs(saver_fit['w']/saver_fit['h']-saver_fit['nw']/saver_fit['nh'])>.03:errors.append('Screensaver wallpaper is cropped or stretched')
             Select(driver.find_element(By.ID,'homeWallpaperMode')).select_by_value('manual')
             if len(gallery)<4:errors.append('Wallpaper gallery did not render')
             if not any(x.get_attribute('data-wallpaper')=='tv-kaaba-day' for x in gallery):errors.append('Native Kaaba wallpaper missing from gallery')
