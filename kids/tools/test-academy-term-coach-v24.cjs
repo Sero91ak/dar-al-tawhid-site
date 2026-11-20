@@ -90,7 +90,7 @@ assert.equal(plays[0].opts.source,"kids-academy-term-v24");
 const page=read("kids/akademie/index.html");
 assert.ok(page.includes('id="academyTermCoach"'));
 assert.ok(page.includes('id="academyTermCoachSources"'));
-assert.ok(page.includes('term-coach-v24.js?v=20261011-01'));
+assert.ok(page.includes('term-coach-v24.js?v=academy-sidq-sources-v1-20261120'));
 assert.ok(page.includes('function refreshAcademyVocabulary()'));
 assert.ok(page.includes('if(n===1||n===2)refreshAcademyVocabulary()'));
 assert.ok(!read(helperFile).includes("speechSynthesis")&&!read(helperFile).includes("ElevenLabs")&&!read(helperFile).includes("fetch("),
