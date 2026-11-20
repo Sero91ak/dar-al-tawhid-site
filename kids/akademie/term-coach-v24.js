@@ -643,12 +643,18 @@ function plain(text){
  .replace(/[ṯṮ]/g,"th").replace(/[ḏḎ]/g,"dh").replace(/[ǧǦ]/g,"g")
  .replace(/[ʿʾ‘’']/g,"").toLocaleLowerCase("de");
 }
-function termsFor(lesson,age,limit=7){
+function termsFor(lesson,age,limit=7,section="all"){
  const t=lesson||{},a=t.ageText?.[age]||{};
  const leading=[t.title,t.topic,t.lead,a.intro].filter(Boolean).join(" ");
- const others=[...(a.lines||t.lines||[]),a.evidence,t.hadith?.text,t.quran?.label].filter(Boolean).join(" ");
- const all=plain(leading+" "+others+" Qurʾān Sunnah");
- const primary=plain(leading);
+ const lessonText=[leading,...(a.lines||t.lines||[])].filter(Boolean).join(" ");
+ const sourceText=[t.quran?.label,t.quran?.meaning,t.hadith?.text,t.hadith?.source,
+  t.hadith?"Sunnah":"",t.quran?"Qurʾān":""].filter(Boolean).join(" ");
+ // Show classroom terms in the lesson, source-only terms at the evidence step.
+ // Never insert unrelated source vocabulary into the spoken narration.
+ const corpus=section==="lesson"?lessonText:section==="sources"?sourceText:
+  lessonText+" "+sourceText+" Qurʾān Sunnah";
+ const all=plain(corpus);
+ const primary=plain(section==="sources"?sourceText:leading);
  return entries.map(entry=>{
   const aliases=[entry.term,...entry.aliases].map(plain).filter(Boolean);
   const found=aliases.some(v=>new RegExp("(^|[^\\p{L}])"+v.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"(?=$|[^\\p{L}])","u").test(all));
@@ -678,7 +684,7 @@ function approvedVoiceFor(entry,age,owner){
 function mount(host,lesson,age,options={}){
  if(!host)return [];
  host.replaceChildren();
- const matches=termsFor(lesson,age);
+ const matches=termsFor(lesson,age,7,options.section||"all");
  host.hidden=!matches.length;
  if(!matches.length)return [];
  const heading=document.createElement("strong");heading.className="academy-term-heading";heading.textContent="Wörter einfach erklärt";
@@ -700,7 +706,7 @@ function mount(host,lesson,age,options={}){
    active=term.id;btn.setAttribute("aria-expanded","true");detail.hidden=false;
    title.textContent=term.term;
    desc.textContent=term.age[age]||term.age["6-8"];
-   source.textContent="Lernbezug: "+term.source.reference+" · kindgerechte Erklärung, kein Originalzitat.";
+   source.textContent="Quelle: "+term.source.reference;
    const owner=window.DARKidsOwnerVoice;
    if(!approvedVoiceFor(term,age,owner)){
     audioStatus.textContent="Du kannst die Erklärung lesen. Zum Anhören fehlt noch die passende Aufnahme.";
@@ -722,7 +728,7 @@ function mount(host,lesson,age,options={}){
   const first=matches[0];active=first.id;detail.hidden=false;
   line.firstChild?.setAttribute("aria-expanded","true");
   title.textContent=first.term;desc.textContent=first.age[age];
-  source.textContent="Lernbezug: "+first.source.reference+" · kindgerechte Erklärung, kein Originalzitat.";
+  source.textContent="Quelle: "+first.source.reference;
   audioStatus.textContent="Zum Anhören tippe auf das Wort.";
  }
  return matches;
