@@ -26,6 +26,11 @@
  function resolveWallpaper(name){return name==='auto'?automaticWallpaperId():name}
  function store(){try{localStorage.setItem(KEY,JSON.stringify(prefs))}catch(e){warn('Einstellungen konnten nicht gespeichert werden')}}
  function warn(msg){const t=$('toast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3900)}
+ function setFitArtwork(imageId,backdropId,source){
+  const image=$(imageId),backdrop=$(backdropId);
+  if(image){if(source&&image.getAttribute('src')!==source)image.src=source;image.hidden=!source;image.alt='';}
+  if(backdrop){backdrop.style.backgroundImage=source?'url("'+source.replaceAll('"','%22')+'")':'none';backdrop.hidden=!source;}
+ }
  function apply(){
   const app=$('app');if(!app)return;
   const paletteId='dar-al-layl';
@@ -36,27 +41,26 @@
   const motionControl=$('homeReduceMotion');if(motionControl)motionControl.checked=!!prefs.reduceMotion;
   const homeChoice=prefs.wallpaperMode==='auto'?'auto':prefs.wallpaper;
   const bg=imageFor(resolveWallpaper(homeChoice));
-  const photo=$('homeWallpaper'),imageValue=bg?'url("'+bg.replaceAll('"','%22')+'")':'none';
+  const imageValue=bg?'url("'+bg.replaceAll('"','%22')+'")':'none';
   app.style.setProperty('--home-wallpaper-image',imageValue);
   app.dataset.wallpaperActive=bg?'true':'false';
-  app.style.backgroundImage=imageValue;
-  app.style.backgroundSize=bg?'cover':'';
-  app.style.backgroundPosition=bg?'center':'';
-  app.style.backgroundRepeat='no-repeat';
-  if(photo){photo.style.backgroundImage=imageValue;photo.style.backgroundSize='cover';photo.style.backgroundPosition='center';photo.style.backgroundRepeat='no-repeat'}
+  app.style.backgroundImage='none';
+  app.style.backgroundSize='';
+  app.style.backgroundPosition='';
+  app.style.backgroundRepeat='';
+  setFitArtwork('homeWallpaperImage','homeWallpaperBackdrop',bg);
   app.style.setProperty('--home-artwork-opacity',bg?(palette.light?'0.10':'0.19'):'1');
   const saver=$('saver');if(saver){
    const saverChoice=prefs.saverWallpaper==='same'?homeChoice:prefs.saverWallpaper;
    const sbg=imageFor(resolveWallpaper(saverChoice));
-   saver.style.backgroundImage=sbg?'url("'+sbg.replaceAll('"','%22')+'")':'none';
-   saver.style.backgroundSize=sbg?'cover':'';
-   saver.style.backgroundPosition=sbg?'center':'';
-   saver.style.backgroundRepeat='no-repeat';
+   saver.style.backgroundImage='none';
+   setFitArtwork('saverWallpaperImage','saverWallpaperBackdrop',sbg);
   }
   const adhan=$('adhanVisual');if(adhan){
    const fallback='/media/apple-tv/tv-kaaba-day.jpg';
    const selected=prefs.adhanCinema&&bg?bg:fallback;
-   adhan.style.backgroundImage='url("'+selected.replaceAll('"','%22')+'")';
+   adhan.style.backgroundImage='none';
+   setFitArtwork('adhanWallpaperImage','adhanWallpaperBackdrop',selected);
   }
   const mode=$('homeAppearance');if(mode)mode.value=prefs.theme;
   const legacyTheme=$('theme');if(legacyTheme)legacyTheme.value=palette.light?'ivory':'night';
