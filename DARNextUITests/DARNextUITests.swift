@@ -40,6 +40,64 @@ final class DARNextUITests: XCTestCase {
     }
 
     @MainActor
+    func testPostOpensItsExactTopicQuizAndReturnsToPosts() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        let tabBar = app.tabBars.firstMatch
+        XCTAssertTrue(tabBar.waitForExistence(timeout: 10))
+        tabBar.buttons["Beiträge"].tap()
+
+        let postID = "post-card-liebe-fuer-deinen-bruder-was-du-fuer-dich-liebst-179"
+        let postCard = app.descendants(matching: .any).matching(identifier: postID).firstMatch
+        for _ in 0..<30 where !postCard.isHittable {
+            app.swipeUp()
+        }
+        XCTAssertTrue(postCard.waitForExistence(timeout: 10))
+        postCard.tap()
+
+        let topicQuizLink = app.descendants(matching: .any).matching(identifier: "post-detail-context-quiz").firstMatch
+        XCTAssertTrue(topicQuizLink.waitForExistence(timeout: 10))
+        topicQuizLink.tap()
+
+        let topicFilter = app.descendants(matching: .any)["quiz-topic-filter"]
+        XCTAssertTrue(topicFilter.waitForExistence(timeout: 10))
+        XCTAssertTrue((topicFilter.value as? String ?? "").contains("Brüderlichkeit"))
+        let startRound = app.buttons["Lernrunde starten"]
+        XCTAssertTrue(startRound.exists)
+        startRound.tap()
+
+        let questionCount = app.descendants(matching: .any)
+            .matching(identifier: "quiz-round-question-count")
+            .firstMatch
+        XCTAssertTrue(questionCount.waitForExistence(timeout: 10))
+        XCTAssertEqual(questionCount.label, "Frage 1 von 1")
+
+        let questionTitle = app.descendants(matching: .any)
+            .matching(identifier: "quiz-round-question-title")
+            .firstMatch
+        XCTAssertEqual(questionTitle.label, "Welche Grundlage der Brüderlichkeit nennt Qurʾān 49:10?")
+
+        app.buttons["quiz-answer-quiz-445-0"].tap()
+        let feedback = app.descendants(matching: .any)
+            .matching(identifier: "quiz-answer-feedback")
+            .firstMatch
+        XCTAssertTrue(feedback.waitForExistence(timeout: 5))
+        XCTAssertEqual(feedback.label, "Richtig")
+
+        let source = app.descendants(matching: .any)
+            .matching(identifier: "quiz-answer-source")
+            .firstMatch
+        XCTAssertEqual(source.label, "Qurʾān 49:10")
+
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        XCTAssertTrue(app.navigationBars["Beitrag"].waitForExistence(timeout: 10))
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        XCTAssertTrue(postCard.waitForExistence(timeout: 10))
+        XCTAssertTrue(postCard.isHittable)
+    }
+
+    @MainActor
     func testAssistantPrototypeIsNotExposedInPublicNavigation() throws {
         let app = XCUIApplication()
         app.launch()

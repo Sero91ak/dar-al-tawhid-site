@@ -3,26 +3,64 @@ import SwiftUI
 struct QuizView: View {
     let repository: LocalContentRepository
     @State private var questions: [QuizQuestion] = []
-    @State private var selectedCategory = "Alle"
+    @State private var selectedCategory: String
+    @State private var selectedTopic: String?
     @State private var selectedLevel = "Alle"
     @State private var roundLength = 10
     @State private var isStarting = false
     @State private var errorMessage: String?
 
+    init(
+        repository: LocalContentRepository,
+        initialCategory: String? = nil,
+        initialTopic: String? = nil
+    ) {
+        self.repository = repository
+        _selectedCategory = State(initialValue: initialCategory ?? "Alle")
+        _selectedTopic = State(initialValue: initialTopic)
+    }
+
+    private var approvedQuestions: [QuizQuestion] {
+        questions.filter { $0.isApprovedAdultContent }
+    }
+
     private var categories: [String] {
-        ["Alle"] + Set(questions.compactMap(\.category)).sorted()
+        ["Alle"] + Set(approvedQuestions.compactMap(\.category)).sorted()
+    }
+
+    private var topics: [String] {
+        let categoryQuestions = approvedQuestions.filter {
+            selectedCategory == "Alle" || $0.category == selectedCategory
+        }
+        return Set(categoryQuestions.compactMap(\.topic)).sorted()
     }
 
     private var levels: [String] {
-        ["Alle"] + Set(questions.compactMap(\.level)).sorted()
+        ["Alle"] + Set(approvedQuestions.compactMap(\.level)).sorted()
+    }
+
+    private var filteredQuestions: [QuizQuestion] {
+        approvedQuestions.filter { question in
+            (selectedCategory == "Alle" || question.category == selectedCategory)
+                && (selectedTopic == nil || question.topic == selectedTopic)
+                && (selectedLevel == "Alle" || question.level == selectedLevel)
+        }
     }
 
     var body: some View {
         Form {
             Section("Lernrunde") {
-                Picker("Thema", selection: $selectedCategory) {
+                Picker("Kategorie", selection: $selectedCategory) {
                     ForEach(categories, id: \.self, content: Text.init)
                 }
+                .accessibilityIdentifier("quiz-category-filter")
+                Picker("Thema", selection: $selectedTopic) {
+                    Text("Alle").tag(Optional<String>.none)
+                    ForEach(topics, id: \.self) { topic in
+                        Text(topic).tag(Optional(topic))
+                    }
+                }
+                .accessibilityIdentifier("quiz-topic-filter")
                 Picker("Schwierigkeit", selection: $selectedLevel) {
                     ForEach(levels, id: \.self, content: Text.init)
                 }
@@ -35,16 +73,13 @@ struct QuizView: View {
             Section {
                 NavigationLink {
                     QuizRoundView(
-                        questions: questions.filter { question in
-                            (selectedCategory == "Alle" || question.category == selectedCategory)
-                                && (selectedLevel == "Alle" || question.level == selectedLevel)
-                        },
+                        questions: filteredQuestions,
                         roundLength: roundLength
                     )
                 } label: {
                     Label("Lernrunde starten", systemImage: "play.fill")
                 }
-                .disabled(questions.isEmpty || isStarting)
+                .disabled(filteredQuestions.isEmpty || isStarting)
             }
 
             if let errorMessage {
@@ -55,6 +90,9 @@ struct QuizView: View {
             }
         }
         .navigationTitle("Wissensquiz")
+        .onChange(of: selectedCategory) { _ in
+            selectedTopic = nil
+        }
         .overlay {
             if questions.isEmpty && errorMessage == nil {
                 ProgressView("Freigegebene Fragen werden geladen …")
@@ -64,6 +102,12 @@ struct QuizView: View {
             do {
                 isStarting = true
                 questions = try await repository.quizQuestions()
+                if !categories.contains(selectedCategory) {
+                    selectedCategory = "Alle"
+                }
+                if let selectedTopic, !topics.contains(selectedTopic) {
+                    self.selectedTopic = nil
+                }
             } catch {
                 errorMessage = error.localizedDescription
             }
@@ -99,8 +143,10 @@ private struct QuizRoundView: View {
                         Text("Frage \(index + 1) von \(roundQuestions.count)")
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(.secondary)
+                            .accessibilityIdentifier("quiz-round-question-count")
                         Text(question.question)
                             .font(.title2.weight(.semibold))
+                            .accessibilityIdentifier("quiz-round-question-title")
 
                         ForEach(Array(question.answers.enumerated()), id: \.offset) { answer in
                             Button {
@@ -115,6 +161,7 @@ private struct QuizRoundView: View {
                                 .background(answerBackground(answer.offset), in: RoundedRectangle(cornerRadius: 18))
                             }
                             .buttonStyle(.plain)
+                            .accessibilityIdentifier("quiz-answer-\(question.id)-\(answer.offset)")
                             .disabled(selectedAnswer != nil)
                         }
 
@@ -126,6 +173,7 @@ private struct QuizRoundView: View {
                                 )
                                 .font(.headline)
                                 .foregroundStyle(selectedAnswer == question.correctIndex ? .green : .red)
+                                .accessibilityIdentifier("quiz-answer-feedback")
                                 if let explanation = question.explanation {
                                     Text(explanation)
                                         .font(.body)
@@ -134,6 +182,7 @@ private struct QuizRoundView: View {
                                     Text(source)
                                         .font(.caption.weight(.semibold))
                                         .foregroundStyle(.secondary)
+                                        .accessibilityIdentifier("quiz-answer-source")
                                 }
                                 Button("Nächste Frage") {
                                     nextQuestion()

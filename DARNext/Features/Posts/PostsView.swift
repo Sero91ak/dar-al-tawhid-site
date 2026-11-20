@@ -25,11 +25,12 @@ struct PostsView: View {
 
                     ForEach(posts) { post in
                         NavigationLink {
-                            PostDetailView(post: post)
+                            PostDetailView(post: post, repository: repository)
                         } label: {
                             postCard(post)
                         }
                         .buttonStyle(.plain)
+                        .accessibilityIdentifier("post-card-\(post.id)")
                     }
                 }
             }
@@ -95,8 +96,10 @@ struct PostsView: View {
 private struct PostDetailView: View {
     @Environment(\.darTheme) private var theme
     let post: Post
+    let repository: LocalContentRepository
 
     @State private var isSourceSheetPresented = false
+    @State private var quizContext: PostQuizContext?
 
     private func cleanMarkdown(_ text: String) -> String {
         text.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -135,6 +138,9 @@ private struct PostDetailView: View {
                     .lineSpacing(5)
 
                 sourcePanel
+                if let quizContext {
+                    quizContextLink(quizContext)
+                }
             }
             .padding(18)
             .padding(.bottom, 80)
@@ -143,6 +149,14 @@ private struct PostDetailView: View {
         .background(theme.backgroundGradient.ignoresSafeArea())
         .navigationTitle("Beitrag")
         .toolbarColorScheme(.dark, for: .navigationBar)
+        .task {
+            do {
+                let questions = try await repository.quizQuestions()
+                quizContext = PostQuizContext.resolve(post: post, questions: questions)
+            } catch {
+                quizContext = nil
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 ShareLink(item: shareText) {
@@ -163,6 +177,68 @@ private struct PostDetailView: View {
             }
             .presentationDetents([.medium, .large])
         }
+    }
+
+    private func quizContextLink(_ context: PostQuizContext) -> some View {
+        NavigationLink {
+            QuizView(
+                repository: repository,
+                initialCategory: context.category,
+                initialTopic: context.topic
+            )
+        } label: {
+            HStack(spacing: 14) {
+                Image(systemName: "questionmark.circle.fill")
+                    .font(.title2)
+                    .foregroundStyle(theme.antiqueGold)
+                    .accessibilityHidden(true)
+                VStack(alignment: .leading, spacing: 4) {
+                    Group {
+                        switch context.match {
+                        case .topic:
+                            if let topic = context.topic {
+                                Text("Themenquiz: \(topic)")
+                            } else {
+                                Text("Themenquiz")
+                            }
+                        case .category:
+                            if let category = context.category {
+                                Text("Quizkategorie: \(category)")
+                            } else {
+                                Text("Quizkategorie")
+                            }
+                        }
+                    }
+                    .font(.headline)
+                    .foregroundStyle(theme.cream)
+
+                    Group {
+                        if context.questionCount == 1 {
+                            Text("1 freigegebene Frage")
+                        } else {
+                            Text("\(context.questionCount) freigegebene Fragen")
+                        }
+                    }
+                    .font(.footnote)
+                    .foregroundStyle(theme.secondaryText)
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.caption.weight(.bold))
+                    .foregroundStyle(theme.secondaryText)
+                    .accessibilityHidden(true)
+            }
+            .accessibilityElement(children: .combine)
+            .padding(16)
+            .background(theme.deepNavy.opacity(0.72), in: RoundedRectangle(cornerRadius: 20))
+            .overlay {
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(theme.antiqueGold.opacity(0.28), lineWidth: 1)
+            }
+            .contentShape(RoundedRectangle(cornerRadius: 20))
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("post-detail-context-quiz")
     }
 
     private var sourcePanel: some View {

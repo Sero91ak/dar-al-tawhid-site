@@ -73,6 +73,103 @@ struct DARNextTests {
     }
 
     @Test
+    func postQuizContextPrefersAnExactTopicMatch() {
+        let post = Post(
+            id: "post",
+            date: nil,
+            title: "Post",
+            category: "Adab",
+            topic: "Brüderlichkeit",
+            scholar: nil,
+            book: nil,
+            source: nil,
+            canonicalQSourceNumber: nil,
+            body: ""
+        )
+        let questions = [
+            quizQuestion(id: "broad", category: "Adab", topic: "Gutes Benehmen"),
+            quizQuestion(id: "exact", category: "Adab", topic: "Brüderlichkeit")
+        ]
+
+        let context = PostQuizContext.resolve(post: post, questions: questions)
+
+        #expect(context?.match == .topic)
+        #expect(context?.topic == "Brüderlichkeit")
+        #expect(context?.category == nil)
+        #expect(context?.questionCount == 1)
+    }
+
+    @Test
+    func postQuizContextUsesCategoryOnlyWhenNoExactTopicExists() {
+        let post = Post(
+            id: "post",
+            date: nil,
+            title: "Post",
+            category: "Fiqh",
+            topic: "Gebetsvorbereitung",
+            scholar: nil,
+            book: nil,
+            source: nil,
+            canonicalQSourceNumber: nil,
+            body: ""
+        )
+        let questions = [
+            quizQuestion(id: "category-match", category: "Fiqh", topic: "Wuḍūʾ"),
+            quizQuestion(id: "unapproved", category: "Fiqh", topic: "Gebetsvorbereitung", approved: false)
+        ]
+
+        let context = PostQuizContext.resolve(post: post, questions: questions)
+
+        #expect(context?.match == .category)
+        #expect(context?.category == "Fiqh")
+        #expect(context?.topic == nil)
+        #expect(context?.questionCount == 1)
+    }
+
+    @Test
+    func postQuizContextIsUnavailableWithoutApprovedExactData() {
+        let post = Post(
+            id: "post",
+            date: nil,
+            title: "Post",
+            category: "Akhlaq",
+            topic: "Nachbarschaft",
+            scholar: nil,
+            book: nil,
+            source: nil,
+            canonicalQSourceNumber: nil,
+            body: ""
+        )
+
+        #expect(PostQuizContext.resolve(
+            post: post,
+            questions: [quizQuestion(id: "draft", category: "Akhlaq", topic: "Nachbarschaft", approved: false)]
+        ) == nil)
+    }
+
+    private func quizQuestion(
+        id: String,
+        category: String,
+        topic: String,
+        approved: Bool = true
+    ) -> QuizQuestion {
+        QuizQuestion(
+            id: id,
+            question: "Question",
+            category: category,
+            topic: topic,
+            level: "Anfänger",
+            answers: ["A", "B"],
+            correctIndex: 0,
+            explanation: nil,
+            source: "Qurʾān 1:1",
+            status: approved ? "published" : "draft",
+            reviewStatus: approved ? "approved" : "pending",
+            sourceChecked: approved
+        )
+    }
+
+    @Test
     func primaryTabOrderMatchesAdultNavigationContract() {
         #expect(DARNextTab.allCases.map(\.title) == ["Start", "Quiz", "Beiträge", "Qurʾān", "Mehr"])
     }
