@@ -202,3 +202,11 @@ Der eigenständige Arbeitsnachweis in PR #1824 wurde zugunsten dieses bestehende
 - PR #1832 bleibt Draft und offen. Build sowie tatsächliche UI-Tests wurden für diesen Head nicht ausgeführt.
 - Das iPhone 18 Pro Max / iOS 27.2 ist mit `simctl` gebootet; DARNext ist gestartet. `simctl screenshot` konnte einen aktuellen Bildschirm erfassen. Die grafische `Simulator.app` fehlt in der installierten Xcode-App, daher gibt es kein separates Simulatorfenster und keine interaktive sichtbare Abnahme.
 - Screenshot: der laufende App-Stand zeigt die Startseite in spanischer Sprache mit Gebetskarte, Suche, Schnellzugriffen und Bottom-Navigation. Dies belegt den laufenden Bildschirminhalt, aber keinen Scroll-/Hitch-Test.
+
+
+## Aktuelle iPhone-Hero-/Scroll-Abnahme, 20.11.2026
+
+- Auf dem lokalen DARNext-Prüfsnapshot `codex/darnext-scroll-jank-20261117` (uncommitted, ohne HEAD; nicht identisch mit den GitHub-PR-Heads) bestand ein inkrementelles `build-for-testing` für iPhone 18 Pro Max / iOS 27.2.
+- `testImageBearingPrimaryTabsRemainResponsiveWhenScrolling`: 1/1 bestanden, zwei Scrollzyklen über Start, Quiz, Beiträge und Qurʾān (207,1 s). `testPrimaryHeroGapsRemainBoundedOnDevice`: 1/1 bestanden, Header→Hero-Grenze ≤24 pt in allen vier Bereichen sowie Collapse/Expand bei Beiträge und Qurʾān (66,7 s). Resultbundle: `/tmp/DARNext-scroll-hero-confirm-20261120.xcresult`; Screenshots: `/tmp/DARNext-scroll-hero-confirm-attachments/`.
+- XCTHitch-Metriken des Resultbundles bleiben leer (`[]`). Der separate Instruments-Versuch „Animation Hitches“ meldet, dass Hitches auf dieser Simulatorplattform nicht unterstützt werden. Daher bestätigen diese Läufe Scrollgesten und Heroabstände, **keine** ruckelfreie Bildrate.
+- Diese Laufzeitbelege gelten nur für den lokalen Prüfsnapshot. Sie beweisen weder den abweichenden PR-#1832-Head noch schließen sie dessen offen dokumentierte Scroll-Rückkehrtests. Der vollständige UI-/Hitch-Nachweis auf unterstützter Hardware bleibt offen.
