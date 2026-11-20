@@ -126,4 +126,17 @@ assert.equal(counts.totals.approved,58,"The 58 real Ṣidq V4 media assets are n
 require("node:child_process").execFileSync(process.execPath,[
  "kids/tools/test-academy-sidq-audio-clicks-v1.cjs"
 ],{cwd:root,stdio:"inherit"});
+// The post-release 14 Ṣidq click gaps must have exact already-paid V4
+// receipts and an offline, zero-credit importer. Test --dry-run in CI so
+// a broken audio importer is detected before any real media upload.
+const importer=read("kids/tools/import-academy-sidq-click-gaps-v1.py");
+assert.ok(!/elevenlabs\.com\/v1|requests\.post\(|creative_generate_speech/.test(importer),
+ "Offline importer may not call ElevenLabs or spend credits");
+const dry=JSON.parse(require("node:child_process").execFileSync("python3",[
+ "kids/tools/import-academy-sidq-click-gaps-v1.py","--dry-run"
+],{cwd:root,encoding:"utf8"}));
+assert.equal(dry.childRecordings,14);
+assert.equal(dry.newOriginalGenerations,20);
+assert.equal(dry.arabicGermanAssemblies,9);
+assert.equal(dry.newSynthesis,0);
 console.log("KIDS V24 GLOSSARY PASS: 33 terms × 3 child-safe age explanations = 99 verified-voice requests, "+counts.catalogLessonCount+" audited lessons; 0 auto voice and 0 credits.");
