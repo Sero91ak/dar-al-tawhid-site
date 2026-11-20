@@ -21,22 +21,13 @@ protocol KnowledgeAssistantTransport: Sendable {
 
 struct LocalKnowledgeAssistantTransport: KnowledgeAssistantTransport {
     func answer(prompt: String, sources: [AssistantSourceReference]) async throws -> String {
-        let query = prompt.trimmingCharacters(in: .whitespacesAndNewlines)
-        let normalized = query.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
+        let matchingSources = sources.filter { !$0.sourceID.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+        guard !matchingSources.isEmpty else {
+            return "In der lokalen DAR-Bibliothek wurde kein passender Treffer gefunden. Deshalb formuliere ich dazu keine religiöse Antwort."
+        }
 
-        if normalized.contains("dua") || normalized.contains("bitt") {
-            return "Für diese Frage wurden geprüfte Duʿāʾ-Quellen gefunden. Öffne die Quelle und lies den arabischen Originaltext zusammen mit Übersetzung und Referenz."
-        }
-        if normalized.contains("quran") || normalized.contains("vers") || normalized.contains("ayah") {
-            return "Für diese Frage wurden Qurʾān-Quellen gefunden. Lies den Originaltext im Lesemodus und prüfe die angegebene Sūrah- und Versreferenz."
-        }
-        if normalized.contains("gebet") || normalized.contains("salah") || normalized.contains("zeit") {
-            return "Gebetszeiten sind orts- und datumsabhängig. Nutze die Gebetszeiten-Ansicht für die berechneten Zeiten und prüfe die Standortangabe."
-        }
-        if let firstSource = sources.first {
-            return "Ich habe eine geprüfte Quelle zu deiner Frage gefunden: \(firstSource.title). Öffne sie für den vollständigen Originaltext und die Referenz."
-        }
-        return "In der lokalen geprüften Bibliothek wurde noch keine passende Quelle gefunden. Versuche einen konkreten Begriff, eine Sūrah, ein Duʿāʾ oder den Titel eines Beitrags."
+        let titles = matchingSources.prefix(3).map(\.title).joined(separator: "; ")
+        return "Die lokale Suche hat passende Inhalte gefunden: \(titles). Dieser Prototyp erstellt noch keine eigenständige religiöse Antwort. Öffne die Fundstellen und prüfe den jeweiligen Originaltext."
     }
 }
 
@@ -89,7 +80,7 @@ struct DashboardAssistantView: View {
         VStack(spacing: 0) {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 14) {
-                    Text("Antworten werden ausschließlich aus geprüften DAR-NEXT-Quellen vorbereitet. Originaltexte und KI-Antworten bleiben getrennt.")
+                    Text("Lokaler Recherche-Prototyp: zeigt passende DAR-NEXT-Suchtreffer, erstellt aber keine eigenständige KI-Antwort. Prüfe Originaltext und Fundstelle.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                     ForEach(model.messages) { message in
