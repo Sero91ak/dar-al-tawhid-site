@@ -2125,7 +2125,7 @@
 #saver .saver-wallpaper-backdrop{z-index:0}
 #saver .saver-wallpaper-fit{z-index:1}
 #saver::before{z-index:2!important}
-#saver .saver-content,#saver .saver-clock,#saver .saver-bottom{position:relative;z-index:3!important}
+#saver .saver-content,#saver .saver-clock,#saver .saver-bottom{z-index:3!important}
 #app #adhanVisual{isolation:isolate;overflow:hidden;background-image:none!important}
 #app #adhanVisual .adhan-wallpaper-backdrop{z-index:0}
 #app #adhanVisual .adhan-wallpaper-fit{z-index:1}
