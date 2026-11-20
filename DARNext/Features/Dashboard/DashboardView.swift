@@ -4,6 +4,8 @@ struct DashboardView: View {
     let repository: LocalContentRepository
 
     @Environment(\.darTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Namespace private var prayerTransitionNamespace
     @State private var snapshot: DashboardSnapshot?
     @State private var errorMessage: String?
     @State private var isLoading = true
@@ -23,7 +25,7 @@ struct DashboardView: View {
                 royalHero
 
                 quickActions
-                prayerCard
+                prayerCardLink
                 calendarCard
                 dailyContentCards
 
@@ -159,6 +161,25 @@ struct DashboardView: View {
         Label(title, systemImage: systemImage)
             .font(.headline)
             .foregroundStyle(theme.cream)
+    }
+
+    private var prayerCardLink: some View {
+        NavigationLink {
+            PrayerView()
+                .darZoomNavigationTransition(
+                    sourceID: "dashboard-prayer-times",
+                    in: prayerTransitionNamespace,
+                    isEnabled: DARMotion.usesZoomTransition(reduceMotion: reduceMotion)
+                )
+        } label: {
+            prayerCard.darMatchedTransitionSource(
+                id: "dashboard-prayer-times",
+                in: prayerTransitionNamespace,
+                isEnabled: DARMotion.usesZoomTransition(reduceMotion: reduceMotion)
+            )
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("dashboard-prayer-open-from-home")
     }
 
     private var prayerCard: some View {

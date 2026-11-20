@@ -113,4 +113,29 @@ final class DARNextUITests: XCTestCase {
             XCUIApplication().launch()
         }
     }
+
+    @MainActor
+    func testDashboardPrayerCardOpensAndReturnsToItsSource() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        let prayerCard = app.descendants(matching: .any)
+            .matching(identifier: "dashboard-prayer-open-from-home")
+            .firstMatch
+        for _ in 0..<5 where !prayerCard.isHittable {
+            app.swipeUp()
+        }
+        XCTAssertTrue(prayerCard.waitForExistence(timeout: 10))
+        XCTAssertTrue(prayerCard.isHittable, "Die Gebetszeiten-Karte muss erreichbar sein.")
+        prayerCard.tap()
+
+        XCTAssertTrue(
+            app.navigationBars["Gebetszeiten"].waitForExistence(timeout: 10),
+            "Die Karte muss die native Gebetszeiten-Detailansicht öffnen."
+        )
+        app.navigationBars.buttons.firstMatch.tap()
+
+        XCTAssertTrue(prayerCard.waitForExistence(timeout: 8))
+        XCTAssertTrue(prayerCard.isHittable, "Zurück muss die ursprüngliche Kartenposition wiederherstellen.")
+    }
 }
