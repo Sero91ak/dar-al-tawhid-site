@@ -29,6 +29,25 @@ struct DARNextTests {
     }
 
     @Test
+    func quranAudioInterruptionStateRemembersPlaybackAcrossRepeatedBeginNotifications() {
+        var state = QuranAudioInterruptionState()
+        state.interruptionBegan(isPlaying: true)
+        state.interruptionBegan(isPlaying: false)
+
+        #expect(state.interruptionEnded(systemAllowsResume: true))
+        #expect(!state.interruptionEnded(systemAllowsResume: true))
+    }
+
+    @Test
+    func quranAudioInterruptionStateHonorsPauseOrStopDuringInterruption() {
+        var state = QuranAudioInterruptionState()
+        state.interruptionBegan(isPlaying: true)
+        state.cancelResume()
+
+        #expect(!state.interruptionEnded(systemAllowsResume: true))
+    }
+
+    @Test
     func adultContentCollectionsAreAvailable() async throws {
         let repository = LocalContentRepository()
 
