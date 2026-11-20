@@ -191,19 +191,44 @@ private struct PostDetailView: View {
                 Image(systemName: "questionmark.circle.fill")
                     .font(.title2)
                     .foregroundStyle(theme.antiqueGold)
+                    .accessibilityHidden(true)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(context.actionTitle)
-                        .font(.headline)
-                        .foregroundStyle(theme.cream)
-                    Text(context.questionCountSummary)
-                        .font(.footnote)
-                        .foregroundStyle(theme.secondaryText)
+                    Group {
+                        switch context.match {
+                        case .topic:
+                            if let topic = context.topic {
+                                Text("Themenquiz: \(topic)")
+                            } else {
+                                Text("Themenquiz")
+                            }
+                        case .category:
+                            if let category = context.category {
+                                Text("Quizkategorie: \(category)")
+                            } else {
+                                Text("Quizkategorie")
+                            }
+                        }
+                    }
+                    .font(.headline)
+                    .foregroundStyle(theme.cream)
+
+                    Group {
+                        if context.questionCount == 1 {
+                            Text("1 freigegebene Frage")
+                        } else {
+                            Text("\(context.questionCount) freigegebene Fragen")
+                        }
+                    }
+                    .font(.footnote)
+                    .foregroundStyle(theme.secondaryText)
                 }
                 Spacer()
                 Image(systemName: "chevron.right")
                     .font(.caption.weight(.bold))
                     .foregroundStyle(theme.secondaryText)
+                    .accessibilityHidden(true)
             }
+            .accessibilityElement(children: .combine)
             .padding(16)
             .background(theme.deepNavy.opacity(0.72), in: RoundedRectangle(cornerRadius: 20))
             .overlay {
