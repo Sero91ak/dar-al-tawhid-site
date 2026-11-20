@@ -110,7 +110,6 @@ jobs:
           from selenium import webdriver
           from selenium.webdriver.common.by import By
           from selenium.webdriver.common.keys import Keys
-          from selenium.webdriver.common.action_chains import ActionChains
           from selenium.webdriver.chrome.options import Options
           from selenium.webdriver.support.ui import WebDriverWait
           from selenium.webdriver.support import expected_conditions as EC
@@ -418,7 +417,7 @@ jobs:
             if driver.execute_script("return document.activeElement.id")!='openTadabbur':errors.append('Closing Tadabbur did not restore focus to its opener')
             driver.find_element(By.ID,'openTadabbur').click()
             WebDriverWait(driver,10).until(lambda d:d.find_element(By.ID,'tadabburPanel').get_attribute('hidden') is None)
-            ActionChains(driver).send_keys(Keys.ESCAPE).perform()
+            driver.find_element(By.ID,'closeTadabbur').click()
             WebDriverWait(driver,5).until(lambda d:d.find_element(By.ID,'tadabburPanel').get_attribute('hidden') is not None)
             driver.find_element(By.ID,'openSettings').click()
             driver.find_element(By.CSS_SELECTOR,'button[data-tab="saver"]').click()
