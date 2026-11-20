@@ -26,7 +26,7 @@
     "sourceAndMediaShaVerificationBeforePublicRelease": true,
     "noClaimOfLiveUntilCloudflareProbe": true
   },
-  "status": "production-required-not-generated",
+  "status": "13-provider-gaps-remain-1-generation-not-imported",
   "entries": [
     {
       "text": "Ṣidq bedeutet: Die Wahrheit sagen.",
@@ -144,8 +144,13 @@
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "requiresNativeFushaTerm": false,
-      "productionStatus": "missing-exact-media",
-      "publicPlaybackApproved": false
+      "productionStatus": "provider-generated-binary-missing",
+      "publicPlaybackApproved": false,
+      "generationId": "AHUTh5GK6zeAxxzMkvnQ",
+      "sessionId": "3NlYEFOmfzB23GGmnj0Z",
+      "durationSeconds": 3.2,
+      "providerGenerationStatus": "completed",
+      "binaryImportStatus": "pending"
     },
     {
       "text": "Antwort 1: Ich kann mich entschuldigen und helfen, den Fehler wiedergutzumachen.",
