@@ -2016,15 +2016,15 @@
 
 /* V15: identical capsule geometry and true viewport centering in compact landscape. */
 @media (min-width:851px) {
-  #app[data-home-palette] .home-nav button {width:clamp(82px,7vw,104px)!important;}
+  #app[data-home-palette] .home-nav button {width:clamp(82px,7vw,104px)!important;min-width:clamp(82px,7vw,104px)!important;}
 }
 @media (max-width:850px) and (orientation:portrait) {
-  #app[data-home-palette] .home-nav button {width:clamp(50px,13vw,68px)!important;}
+  #app[data-home-palette] .home-nav button {width:clamp(50px,13vw,68px)!important;min-width:clamp(50px,13vw,68px)!important;}
 }
 @media (max-width:700px) and (orientation:landscape) {
   #app .top {position:relative!important;}
   #app .top .home-nav {position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;width:max-content!important;max-width:calc(100% - 190px)!important;}
-  #app[data-home-palette] .home-nav button {width:clamp(62px,10vw,78px)!important;}
+  #app[data-home-palette] .home-nav button {width:clamp(62px,10vw,78px)!important;min-width:clamp(62px,10vw,78px)!important;}
 }
 @media (max-width:380px) and (orientation:portrait) {
   #app .top .home-nav {position:static!important;left:auto!important;top:auto!important;transform:none!important;width:auto!important;max-width:none!important;}
