@@ -23,14 +23,20 @@ final class DARNextUITests: XCTestCase {
     }
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testPrimaryTabsAndQuizNavigation() throws {
         let app = XCUIApplication()
         app.launch()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // XCUIAutomation Documentation
-        // https://developer.apple.com/documentation/xcuiautomation
+        let tabBar = app.tabBars.firstMatch
+        XCTAssertTrue(tabBar.waitForExistence(timeout: 10))
+        XCTAssertEqual(
+            tabBar.buttons.allElementsBoundByIndex.map(\.label),
+            ["Start", "Quiz", "Beiträge", "Qurʾān", "Mehr"]
+        )
+
+        tabBar.buttons["Quiz"].tap()
+        XCTAssertTrue(app.navigationBars["Wissensquiz"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["Lernrunde starten"].waitForExistence(timeout: 10))
     }
 
     @MainActor

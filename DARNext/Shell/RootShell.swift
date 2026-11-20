@@ -57,10 +57,10 @@ private struct DARNextPhoneShell: View {
             .tag(DARNextTab.start)
 
             NavigationStack {
-                QuranView(repository: environment.container.contentRepository)
+                QuizView(repository: environment.container.contentRepository)
             }
-            .tabItem { Label("Qurʾān", systemImage: "book.closed.fill") }
-            .tag(DARNextTab.quran)
+            .tabItem { Label("Quiz", systemImage: "questionmark.circle.fill") }
+            .tag(DARNextTab.quiz)
 
             NavigationStack {
                 PostsView(repository: environment.container.contentRepository)
@@ -69,10 +69,10 @@ private struct DARNextPhoneShell: View {
             .tag(DARNextTab.posts)
 
             NavigationStack {
-                DashboardAssistantView(repository: environment.container.contentRepository)
+                QuranView(repository: environment.container.contentRepository)
             }
-            .tabItem { Label("AI", systemImage: "sparkles") }
-            .tag(DARNextTab.assistant)
+            .tabItem { Label("Qurʾān", systemImage: "book.closed.fill") }
+            .tag(DARNextTab.quran)
 
             NavigationStack {
                 MoreView(repository: environment.container.contentRepository)
@@ -131,12 +131,12 @@ private struct DARNextDestination: View {
         switch tab {
         case .start:
             DashboardView(repository: repository)
+        case .quiz:
+            QuizView(repository: repository)
         case .quran:
             QuranView(repository: repository)
         case .posts:
             PostsView(repository: repository)
-        case .assistant:
-            DashboardAssistantView(repository: repository)
         case .more:
             MoreView(repository: repository)
         }
@@ -154,11 +154,11 @@ private struct DARNextMiniPlayer: View {
     }
 }
 
-private enum DARNextTab: Hashable, CaseIterable, Identifiable {
+enum DARNextTab: Hashable, CaseIterable, Identifiable {
     case start
-    case quran
+    case quiz
     case posts
-    case assistant
+    case quran
     case more
 
     var id: Self { self }
@@ -166,9 +166,9 @@ private enum DARNextTab: Hashable, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .start: "Start"
-        case .quran: "Qurʾān"
+        case .quiz: "Quiz"
         case .posts: "Beiträge"
-        case .assistant: "AI"
+        case .quran: "Qurʾān"
         case .more: "Mehr"
         }
     }
@@ -176,9 +176,9 @@ private enum DARNextTab: Hashable, CaseIterable, Identifiable {
     var systemImage: String {
         switch self {
         case .start: "sparkles"
-        case .quran: "book.closed.fill"
+        case .quiz: "questionmark.circle.fill"
         case .posts: "text.book.closed.fill"
-        case .assistant: "sparkles"
+        case .quran: "book.closed.fill"
         case .more: "ellipsis"
         }
     }
