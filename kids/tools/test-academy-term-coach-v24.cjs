@@ -102,5 +102,5 @@ assert.equal(counts.vocabularyTerms,33);
 assert.equal(counts.vocabularyVoicePhrases,99);
 assert.deepEqual(counts.uncoveredLessons,[]);
 assert.ok(counts.uniquePhrases>=730);
-assert.equal(counts.totals.approved,0,"No unapproved V4 clips magically promoted");
+assert.equal(counts.totals.approved,58,"The 58 real Ṣidq V4 media assets are now present, owner-authorized and hash-verified; no other topic may be marked recorded");
 console.log("KIDS V24 GLOSSARY PASS: 33 terms × 3 child-safe age explanations = 99 verified-voice requests, "+counts.catalogLessonCount+" audited lessons; 0 auto voice and 0 credits.");
