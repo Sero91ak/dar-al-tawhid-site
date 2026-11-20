@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-academy-owner-bulk-v4-release-verification-20261120",
+      "at": "2026-11-20T07:50:00+01:00",
+      "approvedBy": "user-explicit-20261120-entire-kids-academy-v4-audio-generate-and-direct-live-push",
+      "reason": "Nutzer hat die komplette TAWḤĪD KIDS Lernakademie mit originaler Serhat-V4-Aussprache, allen drei Altersstufen und direkter Live-Veröffentlichung ausdrücklich freigegeben. Ermöglicht exakt den bereits geänderten Akademie-Audio-CI-Regressionsprüfer; sämtliche Prüfungen, globalLock, native Sicherheitsvorkehrungen, Qibla, Gebetszeiten, OneSignal und Worker-Secrets bleiben unverändert. Keine allgemeine Freischaltung.",
+      "paths": [
+        "scripts/test-kids-academy-audio-queue-v18.js"
+      ],
+      "expiresAt": "2026-11-24T23:59:00+01:00"
+    },
+    {
       "id": "adult-mobile-keyboard-bottom-nav-no-jump-20261111",
       "at": "2026-11-11T18:25:00+01:00",
       "approvedBy": "user-explicit-20261111-fix-global-keyboard-navbar-visitor-and-test",
