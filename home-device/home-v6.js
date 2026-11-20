@@ -102,11 +102,11 @@
   text=MARKDOWN(text).replace(/\s+/g,' ').trim();
   const words=text.split(' ').filter(Boolean).length;
   const letters=(text.match(/[\p{L}\p{N}]/gu)||[]).length;
-  const d=display.duration,base=Number(d.baseSeconds)||16,perWord=Number(d.secondsPerWord)||.35,min=Number(d.minSeconds)||18;
+  const d=display.duration,base=Number(d.baseSeconds)||16,perWord=Number(d.secondsPerWord)||.35,min=Number(d.minSeconds)||18,max=Number(d.maxSeconds)||40;
   const policySeconds=base+words*perWord;
   const readingSeconds=8+words*60/180;
   const characterSeconds=letters/22;
-  return Math.max(min,Math.min(180,Math.ceil(Math.max(policySeconds,readingSeconds,characterSeconds))));
+  return Math.max(min,Math.min(max,Math.ceil(Math.max(policySeconds,readingSeconds,characterSeconds))));
  }
  function makeCards(records,tad){
   const out=[],byId=new Map();
