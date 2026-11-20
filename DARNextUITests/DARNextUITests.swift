@@ -67,11 +67,28 @@ final class DARNextUITests: XCTestCase {
         XCTAssertTrue(startRound.exists)
         startRound.tap()
 
-        XCTAssertTrue(app.staticTexts["Frage 1 von 1"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Welche Grundlage der Brüderlichkeit nennt Qurʾān 49:10?"].exists)
-        app.buttons["Die Gläubigen sind Brüder."].tap()
-        XCTAssertTrue(app.staticTexts["Richtig"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.staticTexts["Qurʾān 49:10"].exists)
+        let questionCount = app.descendants(matching: .any)
+            .matching(identifier: "quiz-round-question-count")
+            .firstMatch
+        XCTAssertTrue(questionCount.waitForExistence(timeout: 10))
+        XCTAssertEqual(questionCount.label, "Frage 1 von 1")
+
+        let questionTitle = app.descendants(matching: .any)
+            .matching(identifier: "quiz-round-question-title")
+            .firstMatch
+        XCTAssertEqual(questionTitle.label, "Welche Grundlage der Brüderlichkeit nennt Qurʾān 49:10?")
+
+        app.buttons["quiz-answer-quiz-445-0"].tap()
+        let feedback = app.descendants(matching: .any)
+            .matching(identifier: "quiz-answer-feedback")
+            .firstMatch
+        XCTAssertTrue(feedback.waitForExistence(timeout: 5))
+        XCTAssertEqual(feedback.label, "Richtig")
+
+        let source = app.descendants(matching: .any)
+            .matching(identifier: "quiz-answer-source")
+            .firstMatch
+        XCTAssertEqual(source.label, "Qurʾān 49:10")
 
         app.navigationBars.buttons.element(boundBy: 0).tap()
         XCTAssertTrue(app.navigationBars["Beitrag"].waitForExistence(timeout: 10))
