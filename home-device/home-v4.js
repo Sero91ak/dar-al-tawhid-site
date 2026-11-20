@@ -20,10 +20,10 @@
   function setAdhanBackdrop(src){const backdrop=$('adhanWallpaperBackdrop');if(backdrop){backdrop.style.backgroundImage=src?'url("'+src.replaceAll('"','%22')+'")':'none';backdrop.hidden=!src}}
   function artwork(){
     const adhan=$('adhanVisual');
-    if(!adhan || !adhan.classList.contains('active')){current='';return}
+    if(!adhan || !adhan.classList.contains('active')){current='';const home=$('adhanWallpaperImage'),image=$('h4PrayerArtwork');if(home&&home.getAttribute('src'))home.hidden=false;if(image)image.style.display='none';setAdhanBackdrop(home?.getAttribute('src')||'');return}
     const test=adhan.dataset.prayerKey==='test';
     const name=findPrayerKey()||(!test?current:'');
-    if(test){const title=adhan.querySelector('.adhan-title');if(title)title.textContent='Aḏān · Hörprobe';return}
+    if(test){const title=adhan.querySelector('.adhan-title'),image=$('h4PrayerArtwork'),home=$('adhanWallpaperImage');if(title)title.textContent='Aḏān · Hörprobe';if(image)image.style.display='none';if(home&&home.getAttribute('src'))home.hidden=false;setAdhanBackdrop(home?.getAttribute('src')||'');return}
     if(!name)return;
     const title=adhan.querySelector('.adhan-title');
     if(title)title.textContent=NAMES[name]+' · Aḏān';
@@ -31,7 +31,7 @@
     if(!image){image=document.createElement('img');image.id='h4PrayerArtwork';image.className='h4-prayer-image';image.alt='';image.setAttribute('aria-hidden','true');
       image.addEventListener('error',()=>{if(image.dataset.fallback==='native'){image.dataset.fallback='web';image.src=ROOT+'/test/assets/prayer-motifs/'+(image.dataset.prayer||'fajr')+'.webp';setAdhanBackdrop(image.src)}else if(image.dataset.fallback==='web'){image.dataset.fallback='kids';image.src=ROOT+'/kids/assets/kids-salah-v1262/cinematic-still.jpg';setAdhanBackdrop(image.src)}else{image.style.display='none';setAdhanBackdrop('')}});adhan.prepend(image)}
     if(name!==current){
-      current=name;image.dataset.fallback='native';image.dataset.prayer=name;image.style.display='block';image.src=MOTIF_BASE+name+'.jpg';setAdhanBackdrop(image.src);
+      current=name;image.dataset.fallback='native';image.dataset.prayer=name;image.style.display='block';image.src=MOTIF_BASE+name+'.jpg';const home=$('adhanWallpaperImage');if(home)home.hidden=true;setAdhanBackdrop(image.src);
       const t=document.querySelector('.prayer-cell[data-prayer="'+name+'"] .ptime')?.textContent?.trim();
       const sub=$('adhanInfo');if(sub && !sub.dataset.h4Augmented && t && /^[0-2][0-9]:[0-5][0-9]$/.test(t)){
         sub.textContent='Heute · '+t+' Uhr';sub.dataset.h4Augmented='true';
