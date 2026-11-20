@@ -40,6 +40,39 @@ final class DARNextUITests: XCTestCase {
     }
 
     @MainActor
+    func testPostOpensItsExactTopicQuizAndReturnsToPosts() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        let tabBar = app.tabBars.firstMatch
+        XCTAssertTrue(tabBar.waitForExistence(timeout: 10))
+        tabBar.buttons["Beiträge"].tap()
+
+        let postID = "post-card-liebe-fuer-deinen-bruder-was-du-fuer-dich-liebst-179"
+        let postCard = app.buttons[postID]
+        for _ in 0..<12 where !postCard.isHittable {
+            app.swipeUp()
+        }
+        XCTAssertTrue(postCard.waitForExistence(timeout: 10))
+        postCard.tap()
+
+        let topicQuizLink = app.buttons["post-detail-context-quiz"]
+        XCTAssertTrue(topicQuizLink.waitForExistence(timeout: 10))
+        topicQuizLink.tap()
+
+        let topicFilter = app.descendants(matching: .any)["quiz-topic-filter"]
+        XCTAssertTrue(topicFilter.waitForExistence(timeout: 10))
+        XCTAssertTrue((topicFilter.value as? String ?? "").contains("Brüderlichkeit"))
+        XCTAssertTrue(app.buttons["Lernrunde starten"].exists)
+
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        XCTAssertTrue(app.navigationBars["Beitrag"].waitForExistence(timeout: 10))
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        XCTAssertTrue(postCard.waitForExistence(timeout: 10))
+        XCTAssertTrue(postCard.isHittable)
+    }
+
+    @MainActor
     func testAssistantPrototypeIsNotExposedInPublicNavigation() throws {
         let app = XCUIApplication()
         app.launch()
