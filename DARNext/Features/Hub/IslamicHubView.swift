@@ -53,9 +53,6 @@ struct IslamicHubView: View {
                 NavigationLink { QuizView(repository: repository) } label: {
                     DARFeatureTile(title: "Wissensquiz", subtitle: "Lernen & festigen", systemImage: "questionmark.circle.fill", tint: .purple)
                 }
-                NavigationLink { DashboardAssistantView(repository: repository) } label: {
-                    DARFeatureTile(title: "AI Assistant", subtitle: "Quellengebundene Hilfe", systemImage: "sparkles", tint: .indigo)
-                }
             }
             .buttonStyle(.plain)
         }

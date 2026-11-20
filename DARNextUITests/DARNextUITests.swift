@@ -40,6 +40,36 @@ final class DARNextUITests: XCTestCase {
     }
 
     @MainActor
+    func testAssistantPrototypeIsNotExposedInPublicNavigation() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        XCTAssertTrue(app.staticTexts["Schnellzugriff"].waitForExistence(timeout: 10))
+        let dashboardAssistant = app.buttons.matching(
+            NSPredicate(format: "label CONTAINS[c] %@", "Assistant")
+        ).firstMatch
+        XCTAssertFalse(dashboardAssistant.exists)
+        XCTAssertFalse(app.staticTexts["Assistant"].exists)
+
+        let tabBar = app.tabBars.firstMatch
+        XCTAssertTrue(tabBar.waitForExistence(timeout: 10))
+        tabBar.buttons["Mehr"].tap()
+
+        let hubLink = app.buttons.matching(
+            NSPredicate(format: "label CONTAINS %@", "Islamische Bereiche")
+        ).firstMatch
+        XCTAssertTrue(hubLink.waitForExistence(timeout: 10))
+        hubLink.tap()
+        XCTAssertTrue(app.navigationBars["Wissen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["ʿIbādah"].waitForExistence(timeout: 10))
+        let hubAssistant = app.buttons.matching(
+            NSPredicate(format: "label CONTAINS[c] %@", "AI Assistant")
+        ).firstMatch
+        XCTAssertFalse(hubAssistant.exists)
+        XCTAssertFalse(app.staticTexts["AI Assistant"].exists)
+    }
+
+    @MainActor
     func testLaunchPerformance() throws {
         // This measures how long it takes to launch your application.
         measure(metrics: [XCTApplicationLaunchMetric()]) {
