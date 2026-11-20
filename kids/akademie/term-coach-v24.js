@@ -670,7 +670,8 @@ function phrase(entry,age){
  const spoken=plain(a),word=plain(entry.term);
  const startsWithTerm=spoken===word||spoken.startsWith(word+" ")||spoken.startsWith(word+":");
  const startsWithVariant=(entry.id==="tazkiyah"&&spoken.startsWith("tazkiyat an nafs"))||
-  (entry.id==="salam"&&spoken.startsWith("as salamu"));
+  (entry.id==="salam"&&spoken.startsWith("as salamu"))||
+   (entry.id==="quran"&&spoken.startsWith("der quran"));
  return startsWithTerm||startsWithVariant?a:entry.term+" bedeutet: "+a;
 }
 function approvedVoiceFor(entry,age,owner){
