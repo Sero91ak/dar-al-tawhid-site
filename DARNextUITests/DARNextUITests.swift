@@ -44,6 +44,11 @@ final class DARNextUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
 
+        XCTAssertTrue(app.staticTexts["Schnellzugriff"].waitForExistence(timeout: 10))
+        let dashboardAssistant = app.buttons.matching(
+            NSPredicate(format: "label CONTAINS[c] %@", "Assistant")
+        ).firstMatch
+        XCTAssertFalse(dashboardAssistant.exists)
         XCTAssertFalse(app.staticTexts["Assistant"].exists)
 
         let tabBar = app.tabBars.firstMatch
@@ -56,6 +61,11 @@ final class DARNextUITests: XCTestCase {
         XCTAssertTrue(hubLink.waitForExistence(timeout: 10))
         hubLink.tap()
         XCTAssertTrue(app.navigationBars["Wissen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["ʿIbādah"].waitForExistence(timeout: 10))
+        let hubAssistant = app.buttons.matching(
+            NSPredicate(format: "label CONTAINS[c] %@", "AI Assistant")
+        ).firstMatch
+        XCTAssertFalse(hubAssistant.exists)
         XCTAssertFalse(app.staticTexts["AI Assistant"].exists)
     }
 
