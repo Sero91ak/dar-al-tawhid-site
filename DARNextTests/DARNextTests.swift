@@ -31,6 +31,12 @@ struct DARNextTests {
     }
 
     @Test
+    func quranAyahFocusHonorsReduceMotion() {
+        #expect(QuranScrollMotionPolicy.shouldAnimate(reduceMotion: false))
+        #expect(!QuranScrollMotionPolicy.shouldAnimate(reduceMotion: true))
+    }
+
+    @Test
     func libraryAndSearchUseVerifiedContent() async throws {
         let repository = LocalContentRepository()
 
@@ -61,4 +67,5 @@ struct DARNextTests {
         #expect(questions.allSatisfy { $0.isApprovedAdultContent })
         #expect(questions.allSatisfy { $0.correctIndex >= 0 && $0.correctIndex < $0.answers.count })
     }
+
 }
