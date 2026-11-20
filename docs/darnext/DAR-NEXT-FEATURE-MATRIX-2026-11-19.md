@@ -77,3 +77,10 @@ Dieser Nachtrag betrifft den separaten GitHub-Quellstand `codex/darnext-primary-
 - Der installierte App-Build ist nicht auf einen GitHub-Commit zurückgeführt. Er ist kein Abnahmenachweis für #1812, #1820 oder #1825. Der dokumentierte Hero-/Scrollteststand oben bleibt maßgeblich: Gesten und begrenzte Hero-Abstände bestanden, Frame-Hitches/Ruckelfreiheit sind nicht nachgewiesen.
 
 Der eigenständige Arbeitsnachweis in PR #1824 wurde zugunsten dieses bestehenden Masterdokuments entfernt, damit keine zweite, abweichende Gesamtmatrix geführt wird.
+
+## Compact-iPad-Abstand, 20.11.2026
+
+- Im lokalen untracked Snapshot `DARNext/Shell/RootShell.swift` fügt `DARNextTabShell` bei regulärer Größenklasse und `geometry.size.width < 860` pauschal 42 pt oberhalb des Markenheaders ein. Der Kommentar nennt Abstand für die schwebende iPad-Tabauswahl. Dieser Wert sitzt oberhalb des Markenheaders und beweist allein nicht die darunter sichtbare Lücke.
+- Die dokumentierten iPad-Hero-Gap-Läufe waren auf iPad Pro 13 M5. Sie belegen die getestete breite Geometrie, aber keinen schmalen iPad-/Split-View-Fall unter 860 pt. Ein gezielter Lauf dort fehlt.
+- Der beigefügte iPad-Ausschnitt zeigt Abstand zwischen Markenleiste und Qurʾān-Banner. Das Bild allein identifiziert weder Simulator-Build noch Breite in Punkten. Der installierte DARNext-Build ist keinem Commit zugeordnet; außerdem fehlt die sichtbare `Simulator.app`.
+- **Nächste belastbare Prüfung:** dieselbe installierte bzw. anschließend commit-verifizierte App in iPad 11-Zoll-Portrait und schmaler Split-View ausführen, Screenshot aufnehmen und Markenleisten-Unterkante gegen Banner-Oberkante messen. Erst damit entscheiden, ob die 42-pt-Shellregel, ein NavigationStack-Top-Inset oder eine weitere Seiteigenschaft die Lücke verursacht. Keine Änderung am untracked Snapshot ist vorgenommen.
