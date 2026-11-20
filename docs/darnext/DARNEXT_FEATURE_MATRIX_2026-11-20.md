@@ -40,7 +40,7 @@ These PRs are independent or stacked development changes, not a merged, integrat
 | Area | Current owner/evidence on audited DARNext branch | Status | Missing acceptance / next action |
 |---|---|---|---|
 | App shell and primary navigation | `DARNext/Shell/RootShell.swift`; #1816, #1817, #1820 | In progress | Build and exercise all five tabs and deep links on actual supported device sizes; verify back navigation and state retention. |
-| Start / dashboard / hero | `DARNext/Features/Dashboard/DashboardView.swift` | Source present, acceptance open | Inspect actual first viewport, top inset/hero gap, scroll anchoring, image changes, and motion on compact/large iPhone and iPad. No all-page scroll acceptance is recorded here. |
+| Start / dashboard / hero | `DARNext/Features/Dashboard/DashboardView.swift`, `DARNext/DesignSystem/Components/DARNextMedia.swift` | Source present, acceptance open | Source order is `welcomeHeader` then `royalHero` inside a `LazyVStack` with 22-pt spacing and 12-pt top padding; hero image has a fixed 66-pt frame. The current source gives a concrete owner and spacing to compare, but is not viewport acceptance. Inspect actual first viewport, top inset/hero gap, scroll anchoring, image changes, and motion on compact/large iPhone and iPad. |
 | Posts list and detail | `DARNext/Features/Posts/PostsView.swift`, `DARNext/Data/MarkdownContentParser.swift`; #1822 | In progress | Verify source display, card open/return, stable scroll position, Reduce Motion fallback, VoiceOver and Dynamic Type on a running build. |
 | Q Registry links | `Post.sourceURL` and canonical number parsed in `MarkdownContentParser.swift` | Data mapping absent in audited bundle | Audited all 64 bundled post Markdown files: 0 contains `canonicalQSourceNumber` or `qSourceNumber`. The parser can represent a mapping, but no post-to-Q destination is currently proven by these bundled records. Add only editorially verified existing IDs; do not infer or generate Q IDs. |
 | Quiz | `DARNext/Features/Quiz/QuizView.swift`, `DARNext/Data/ContentResourceStore.swift`, `data/quiz-questions.json` | In progress (#1825) | Audited 600 questions; all 600 meet the published/approved/source-checked predicate. Exact topic match: 2 posts share `Brüderlichkeit` with `quiz-445`. Exact category match: 14 posts in Adab (7), Fiqh (4), Tawḥīd (1), Tazkiyah (2). #1825 adds a truthfully labeled topic-first/category-fallback entry. Parser checks pass; build and interaction tests remain open. |
@@ -67,6 +67,13 @@ These PRs are independent or stacked development changes, not a merged, integrat
 - The active Xcode reports 27.2, but the installation contains no `Simulator.app` in the searched Xcode/Application/Developer locations. Therefore no Simulator GUI window can be opened from this installation. This does not prevent CoreSimulator command-line launch/screenshot, but it limits interactive GUI inspection.
 - Xcode build and XCTest have **not** been run for the changes in #1820, #1821, #1822, #1823, or #1825. #1825 includes an authored UI path test, but it has not been executed. Swift parser checks on some PRs are not a build or runtime acceptance.
 - Disk space was 127 MiB available at the latest check; an attempt to stage parser inputs failed with ENOSPC. No additional caches, app data, simulator devices, or user files were removed.
+
+## Additional scroll / image source audit (2026-11-20)
+
+- Recursive inspection found 17 Swift files under `DARNext/Features`; 9 contain a `ScrollView`. This is an owner inventory, not evidence that those pages scroll smoothly.
+- Dashboard remote images use `DARNextRemoteImage` in `DARNext/DesignSystem/Components/DARNextMedia.swift`, implemented with `AsyncImage`. Dashboard call sites apply fixed 66-pt and 58-pt image frames, so intrinsic image dimensions should not move those slots; network/decode hitches or repeated requests remain unmeasured.
+- The explicit programmatic scroll animation found in this pass is Qurʾān focus navigation in `DARNext/Features/Quran/QuranView.swift`; Reduce Motion handling is separately proposed in #1814. Its real-device behavior remains untested.
+- The installed simulator screenshot has no verified build provenance tying it to the audited commit. Do not use it as acceptance evidence for these source layouts until the audited branch is built and installed.
 
 ## Prioritized continuation
 
