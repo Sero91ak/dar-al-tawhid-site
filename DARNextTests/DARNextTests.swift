@@ -176,6 +176,13 @@ struct DARNextTests {
         #expect(answer.contains("erstellt noch keine eigenständige religiöse Antwort"))
     }
 
+    @Test
+    func assistantQuranSourcesResolveBothSurahAndAyahIDs() {
+        #expect(AssistantQuranLocation(sourceID: "quran-surah-49") == AssistantQuranLocation(surah: 49, ayah: nil))
+        #expect(AssistantQuranLocation(sourceID: "quran-49-10") == AssistantQuranLocation(surah: 49, ayah: 10))
+        #expect(AssistantQuranLocation(sourceID: "quran-invalid") == nil)
+    }
+
     private func quizQuestion(
         id: String,
         category: String,
