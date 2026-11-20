@@ -206,7 +206,7 @@ async function playAdhan(test=false,prayerKey=''){
  if(adhanPlaying)return;
  if(!test&&cfg.adhanEnabled!=='on')return;
  const prayerNames={fajr:'Faǧr',dhuhr:'Ḍuhr',asr:'ʿAṣr',maghrib:'Maġrib',isha:'ʿIšāʾ'};
- if(!test&&!Object.hasOwn(prayerNames,prayerKey)){toast('Gebet konnte nicht eindeutig zugeordnet werden');return}
+ if(!test&&!Object.prototype.hasOwnProperty.call(prayerNames,prayerKey)){toast('Gebet konnte nicht eindeutig zugeordnet werden');return}
  const settingKey=prayerKey==='fajr'?'fajrAdhanTrack':'adhanTrack';
  const expectsFajr=prayerKey==='fajr';
  const matchesPrayerType=r=>r&&Boolean(r.isFajr)===expectsFajr;
