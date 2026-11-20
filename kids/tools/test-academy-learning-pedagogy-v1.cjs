@@ -23,7 +23,20 @@ for(const n of [2,3,4,5]){
 }
 assert(html.includes('choice=i;'),"Correctness must map to canonical answer index");
 assert(html.includes('q.type==="choice")academyDisplayChoices(q,qIndex,activeLessonId+":"+age).forEach(({text:t,originalIndex:i},visibleIndex)=>'),"Display order does not feed quiz");
-assert(html.includes('speak(3,["Antwort "+(visibleIndex+1)+": "+t]);'),"Spoken answer numbering must match the visual order");
+assert(html.includes('speak(3,["Antwort "+(i+1)+": "+t]);'),"Every shuffled answer must retrieve its real canonical source recording");
+const sourceTime=JSON.parse(fs.readFileSync("kids/data/academy-topic-batches/akhlaq-sidq-answer-unnumbered-timings-v1.json","utf8"));
+const ownerVoice=fs.readFileSync("kids/owner-voice.js","utf8");
+const published=JSON.parse(fs.readFileSync("kids/data/academy-audio.json","utf8"));
+assert.equal(sourceTime.entryCount,13,"All 13 original paid answer audios require proof of where the audible answer begins");
+assert.ok(ownerVoice.includes('player.onloadedmetadata=introCut>0?function()'),"Playback must skip the original spoken number before presenting a shuffled answer");
+for(const x of sourceTime.entries){
+ const e=published.entries[x.canonicalText];
+ assert.ok(e&&e.sourceGenerationIds?.includes(x.originalGenerationId)&&e.playbackStartSeconds===x.playbackStartSeconds,
+  "Shuffled answer start-time must be Scribe-aligned with its real Serhat original");
+ assert.ok(x.playbackStartSeconds>x.numberEndSeconds&&x.playbackStartSeconds<x.answerFirstWordStartSeconds,
+  "Trim exactly between the two spoken words, never clip the answer itself");
+}
+
 assert(!html.includes('"Das war noch nicht die gesuchte Antwort. "+q.explain'),"First wrong attempt cannot disclose the answer");
 assert(!html.includes('score.unverified=(Number(score.unverified)||0)+1;'),"Choice-only academy must not award free-text or voice answers");
 assert(html.includes('score.done++;score.choices++;'),"Every new graded academy answer must be a selected choice");
