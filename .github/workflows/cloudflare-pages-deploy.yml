@@ -95,8 +95,6 @@ on:
       - data/pronunciation/**
       - data/frauen-*.json
       - q/**
-      # DĀR ʿUmrah: publish isolated interactive guide via sole production lane.
-      - umrah/**
       # Linked adult quiz/learning pages must publish with source cards.
       - lernen/**
       - quellen/**
@@ -620,31 +618,6 @@ jobs:
         env:
           SITE_URL: "https://dar-al-tawhid.de"
         run: node scripts/verify-apple-tv-live.js
-
-      - name: ʿUmrah-Guide inklusive Original-Icons LIVE prüfen
-        shell: bash
-        run: |
-          set -euo pipefail
-          PAGE="https://dar-al-tawhid.de/umrah/?live-check=${GITHUB_SHA}"
-          ok=false
-          for attempt in {1..12}; do
-            status="$(curl -sS -L --retry 2 --retry-delay 1 --max-time 30 -o /tmp/dar-umrah-live.html -w '%{http_code}' "$PAGE" || true)"
-            if [ "$status" = "200" ] && grep -Fq 'id="page-ritus"' /tmp/dar-umrah-live.html && grep -Fq 'DĀR AL TAWḤĪD' /tmp/dar-umrah-live.html; then
-              echo "ʿUmrah route live: HTTP 200 + unique interface marker"
-              ok=true
-              break
-            fi
-            echo "ʿUmrah route pending: HTTP $status (attempt $attempt/12)"
-            sleep 4
-          done
-          if [ "$ok" != true ]; then
-            echo "::error::ʿUmrah-Seite ist auf der öffentlichen Domain nicht als eigenständige Oberfläche erreichbar."
-            exit 1
-          fi
-          for asset in app-icon-512.png assets/dar-3d-icons/home.png assets/dar-3d-icons/compass.png; do
-            curl -fLsS --retry 3 --retry-delay 2 --max-time 30 -o /dev/null "https://dar-al-tawhid.de/$asset?live-check=${GITHUB_SHA}"
-            echo "ʿUmrah Originalmarkenbild erreichbar: $asset"
-          done
 
       - name: Notfall-Rollback bei kaputtem Live-Deploy
         if: ${{ failure() && steps.publish.outcome == 'success' }}
