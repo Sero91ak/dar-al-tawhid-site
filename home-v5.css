@@ -1975,3 +1975,40 @@
   #app .home-nav {flex-wrap:wrap!important;}
 }
 
+/* V14: equal oval navigation, inline portrait header and centered landscape navigation. */
+#app[data-home-palette] .home-nav button,
+#app[data-home-palette] .home-nav button[aria-current="page"] {
+  flex:0 0 auto!important;width:max-content!important;min-width:clamp(72px,7vw,104px)!important;
+  min-height:clamp(48px,4vw,60px)!important;height:clamp(48px,4vw,60px)!important;
+  padding:5px clamp(12px,1.2vw,18px)!important;border-radius:9999px!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  background:transparent!important;background-color:transparent!important;background-image:none!important;
+  border:1px solid rgba(216,189,130,.72)!important;box-shadow:none!important;transform:none!important;
+}
+#app[data-home-palette] .home-nav button img {display:block!important;width:clamp(18px,1.45vw,23px)!important;height:clamp(18px,1.45vw,23px)!important;object-fit:contain!important;margin:0 auto 2px!important;}
+#app[data-home-palette] .home-nav button span {display:block!important;max-width:none!important;white-space:nowrap!important;text-wrap:nowrap!important;text-align:center!important;font-size:clamp(10px,.72vw,13px)!important;line-height:1.15!important;}
+@media (max-width:850px) and (orientation:portrait) {
+  #app .top {display:grid!important;grid-template-columns:minmax(0,1fr) auto auto!important;grid-template-areas:"brand nav settings"!important;align-items:center!important;column-gap:clamp(6px,2vw,14px)!important;}
+  #app .top .logo {grid-area:brand!important;min-width:0!important;max-width:none!important;}
+  #app .top .home-nav {grid-area:nav!important;min-width:0!important;justify-content:flex-end!important;gap:clamp(4px,1vw,8px)!important;}
+  #app .top .top-spacer {display:none!important;}
+  #app .top .time-box {grid-area:settings!important;}
+  #app .top .home-nav button {min-width:clamp(50px,13vw,68px)!important;min-height:clamp(44px,11vw,52px)!important;height:clamp(44px,11vw,52px)!important;padding:3px clamp(5px,1.2vw,9px)!important;}
+  #app .top .home-nav button img {width:clamp(15px,4vw,20px)!important;height:clamp(15px,4vw,20px)!important;}
+  #app .top .home-nav button span {font-size:clamp(9px,2.35vw,11px)!important;}
+  #app .top .brand-mini {display:none!important;}
+}
+@media (max-width:700px) and (orientation:landscape) {
+  #app .top {display:grid!important;grid-template-columns:minmax(0,1fr) minmax(max-content,1fr) minmax(0,1fr) auto!important;grid-template-areas:"brand nav . settings"!important;align-items:center!important;column-gap:clamp(6px,1vw,12px)!important;}
+  #app .top .logo {grid-area:brand!important;}
+  #app .top .home-nav {grid-area:nav!important;justify-content:center!important;gap:clamp(4px,.9vw,10px)!important;}
+  #app .top .top-spacer {grid-area:3!important;display:block!important;}
+  #app .top .time-box {grid-area:settings!important;}
+  #app .top .home-nav button {min-width:clamp(62px,10vw,78px)!important;min-height:46px!important;height:46px!important;padding:3px 8px!important;}
+  #app .top .home-nav button img {width:17px!important;height:17px!important;}
+  #app .top .home-nav button span {font-size:clamp(9px,1.7vw,11px)!important;}
+}
+@media (max-width:380px) and (orientation:portrait) {
+  #app .top {grid-template-columns:minmax(0,1fr) auto!important;grid-template-areas:"brand settings" "nav nav"!important;row-gap:5px!important;}
+  #app .top .home-nav {justify-content:center!important;}
+}
