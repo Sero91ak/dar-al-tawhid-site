@@ -181,7 +181,9 @@ jobs:
             external=driver.find_elements(By.CSS_SELECTOR,'.home-nav a,.calendar-card[href]')
             if external:errors.append('HOME section controls must not navigate to another application')
             nav_labels=[b.text.strip() for b in driver.find_elements(By.CSS_SELECTOR,'.home-nav button')]
-            if nav_labels!=['Start','Qurʾān','Islamische Festtage']:errors.append('HOME navigation labels are unclear or incomplete')
+            if nav_labels!=['Start','Qurʾān','Festtage']:errors.append('HOME navigation labels are unclear or incomplete')
+            nav_aria=[b.get_attribute('aria-label') for b in driver.find_elements(By.CSS_SELECTOR,'.home-nav button')]
+            if nav_aria!=['Startseite mit Gebetszeiten','Qurʾān-Leser öffnen','Islamische Festtage']:errors.append('HOME navigation accessible labels are unclear or incomplete')
             nav_style=driver.execute_script("return [...document.querySelectorAll('.home-nav button')].map(b=>{let r=b.getBoundingClientRect(),c=getComputedStyle(b);return {w:r.width,h:r.height,bg:c.backgroundColor,border:c.borderTopColor,radius:c.borderTopLeftRadius}})")
             if len(nav_style)!=3 or any(x['w']<44 or x['h']<44 or x['bg']!='rgba(0, 0, 0, 0)' or x['border']=='rgba(0, 0, 0, 0)' or float(x['radius'].replace('px',''))<x['h']*.45 for x in nav_style):errors.append('HOME navigation buttons are too small or visually indistinct')
             if driver.find_elements(By.ID,'openAppearance') or driver.find_elements(By.ID,'appearancePopover') or driver.find_elements(By.CSS_SELECTOR,'[data-home-palette-choice]'):errors.append('Unused appearance palette chooser remains visible in markup')
