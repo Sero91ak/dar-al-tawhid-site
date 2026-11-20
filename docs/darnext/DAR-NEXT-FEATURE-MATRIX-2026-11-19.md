@@ -64,3 +64,16 @@ Dieser Befund ändert die nächste notwendige Arbeit nicht: erst den vollständi
 - Der Versuch, während dieses Scrolltests Instruments `Animation Hitches` aufzuzeichnen, erzeugte keine verwertbare Trace (0 Byte vor Prozessabbruch). Xcode brach das Testresultat nach 216,9 s beim Schreiben des Resultbundles mit `ENOSPC` ab; das neue Bundle ist nicht lesbar. Daher keine zusätzlichen Hitchdaten.
 - Die frühere unprofilierte Scrollrunde bleibt als bestanden belegt. Die Ruckelfreiheit ist weiterhin **nicht abgenommen**. Neue Xcode-/Simulatorläufe warten auf verfügbaren Speicher.
 - Gesamtauftrag #1789, Quellstand-Abgleich, volle Feature-/Accessibility-/Plattformmatrix, PR-Integration und Release-Gates bleiben offen. Keine Merge-/Release-Aussage.
+
+## GitHub-Branchaudit, 20.11.2026
+
+Dieser Nachtrag betrifft den separaten GitHub-Quellstand `codex/darnext-primary-deep-links-20261120`, Commit `31c9e7932370d8dde5a6e65a9eee07173fd024d3`. Er ersetzt nicht die oben dokumentierte lokale, untracked Prüfkopie.
+
+- Die 64 gebündelten Beitrags-Markdown-Dateien enthalten keine explizite `canonicalQSourceNumber`-/`qSourceNumber`-Zuordnung. Es wurden keine Qurʾān-IDs ergänzt oder aus Titeln abgeleitet.
+- Die 600 Quizfragen erfüllen im geprüften Datensatz das Prädikat veröffentlicht/freigegeben/quellengeprüft. Es gibt zwei exakte Themenübereinstimmungen mit Beiträgen (`Brüderlichkeit` ↔ `quiz-445`) und 14 exakte Kategoriezuordnungen (Adab 7, Fiqh 4, Tawḥīd 1, Tazkiyah 2).
+- PR #1825 ergänzt dafür einen ausdrücklich beschrifteten Quiz-Kontext (Thema, sonst passende Kategorie) sowie Unit-/UI-Testquellen. Diese Tests wurden für den PR-Head nicht ausgeführt; Parserprüfung allein belegt weder Build noch Laufzeit.
+- Die offene PR-Kette ist nicht als integrierter Build zu behandeln. Insbesondere gehören Dokumentations- und Matrixänderungen aus #1812 nicht automatisch zu den darauf aufbauenden, früher abgezweigten PR-Heads. Vor einer Integration muss die konkrete Basis und der resultierende Gesamtdiff je PR geprüft werden.
+- Aktueller Simulatorstatus: iPhone 18 Pro Max / iOS 27.2 ist im CoreSimulator gebootet, DARNext ist installiert und startbar. Die Xcode-Installation enthält keine `Simulator.app` an den geprüften Anwendungsorten; ein neuer Screenshot scheitert derzeit mit `ENOSPC` (etwa 102 MiB frei). Das vorhandene Bild ist daher kein aktueller Live-Screenshot und der sichtbare Simulator bleibt offen.
+- Der installierte App-Build ist nicht auf einen GitHub-Commit zurückgeführt. Er ist kein Abnahmenachweis für #1812, #1820 oder #1825. Der dokumentierte Hero-/Scrollteststand oben bleibt maßgeblich: Gesten und begrenzte Hero-Abstände bestanden, Frame-Hitches/Ruckelfreiheit sind nicht nachgewiesen.
+
+Der eigenständige Arbeitsnachweis in PR #1824 wurde zugunsten dieses bestehenden Masterdokuments entfernt, damit keine zweite, abweichende Gesamtmatrix geführt wird.
