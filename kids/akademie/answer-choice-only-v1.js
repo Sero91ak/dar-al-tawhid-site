@@ -39,10 +39,25 @@
    "Der Qurʾān-Vers und der Ḥadīṯ müssen genau denselben Wortlaut haben.":
    alternatives[0]||"Das Gegenteil des Gelernten ist richtig.";
   if(wrong===correct)wrong="Die Aussage passt nicht zum gezeigten Qurʾān- und Sunnah-Beleg.";
-  const prompt=sourcePrompt?
+  let prompt=sourcePrompt?
     "Welche Aussage verbindet Qurʾān und Sunnah zum Thema „"+title+"“ richtig?":
     /^(?:Erkläre|Beschreibe|Formuliere|Schreibe|Sprich|Tippe)\b/u.test(originalPrompt)?
      "Welche Antwort passt zu „"+title+"“ im Alltag?":originalPrompt;
+  // Ṣidq is a real released child lesson, not an editorial question template.
+  // Keep its age-specific original evidence and everyday situations. Generic
+  // substitutions about unrelated Qurʾān/Ḥadīṯ wording are not child content.
+  if(lesson?.id==="sidq"){
+    if(age==="6-8"&&index===1){
+      prompt=originalPrompt;
+      wrong="Ich verstecke den Fehler.";
+    }else if(age==="9-10"&&index===1){
+      prompt="Warum gehört Wahrhaftigkeit zu einem guten Charakter?";
+      wrong="Wahrheit spielt beim guten Charakter keine Rolle.";
+    }else if(age==="9-10"&&index===2){
+      prompt=originalPrompt;
+      wrong="Ein Versehen und eine absichtliche Lüge sind dasselbe.";
+    }
+  }
   const result={...q,type:"choice",prompt,options:[correct,wrong],correct:0,
    explain:clean(q.sample||q.explain||lesson?.goal||correct),
    hint:clean(q.hint||lesson?.hint||"Denke an unseren Unterricht."),
