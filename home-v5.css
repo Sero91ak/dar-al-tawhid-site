@@ -2332,3 +2332,15 @@
   #app .source{font-size:9px!important}
   #app .foot{display:none!important}
 }
+
+
+@media(max-width:700px) and (max-height:440px) and (orientation:landscape){
+  #app .screen{align-content:stretch!important}
+  #app .top .home-nav{position:fixed!important;left:50vw!important;top:clamp(3px,1vh,9px)!important;transform:translateX(-50%)!important;margin:0!important;z-index:12!important}
+}
+@media(max-height:200px) and (orientation:landscape){
+  #app .audio-title{font-size:14px!important}
+  #app .source{font-size:10px!important}
+  #app .counter{font-size:12px!important}
+  #app .prayer-cell .ptime{font-size:16px!important}
+}
