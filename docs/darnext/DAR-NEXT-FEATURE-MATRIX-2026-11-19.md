@@ -48,3 +48,11 @@ Die dokumentierten Scrollgesten und begrenzten Hero-Abstände sind keine Messung
 Die Matrix bleibt offen für den vollständigen Dashboard→Detail→Ursprung-Fluss, neun Sprachen und RTL, VoiceOver, Dynamic Type, systemweite Reduce Motion, Split View/Fold, echte Audio-/Standortpfade, Offline-/Remote-Sync, ältere unterstützte iOS-Versionen sowie Start-/Speicher-/Energie-Messung.
 
 PRs #1812–#1817 sind Drafts. Das kombinierte Xcode-Ergebnis meldete 9/9 Unit-Tests, aber das Resultbundle konnte wegen ENOSPC nicht vollständig geschrieben werden. PR #1817s Build und UI-Assertion wurden noch nicht ausgeführt. Keine vollständige App-Abnahme, kein Merge und kein Release.
+
+## Ergänzende Git-Objektprüfung, 2026-11-20
+
+Der lokale Spiegel hat weiterhin keinen Commit/HEAD; App- und Testquellen sind untracked. Eine vollständige read-only Prüfung mit `git fsck --full --no-reflogs --unreachable` fand viele nicht referenzierte Commitobjekte. Der Metadatenabgleich lieferte ältere Web-/Hero-Commits sowie die bekannten DARNext-Dokumentations- und Audio-PR-Commits, aber keinen identifizierten Commit, der den lokalen DARNext-Snapshot als Branchspitze belegt.
+
+Zusätzlich wurden die vier lokalen Swift-Dateien `DARMotion.swift`, `RootShell.swift`, `DashboardView.swift` und `DARTheme.swift` gehasht und gegen alle derzeit im lokalen Object Store verfügbaren Git-Objekte geprüft. Keiner dieser exakten Blobs ist dort vorhanden. Git kennzeichnet das Repository als Promisor-Repository und warnt, dass manche Objekte nicht geladen sein könnten. **Ergebnis:** kein lokaler Commit/Blob belegt die Abstammung; wegen nicht geladener Remote-Objekte lässt sich eine anderweitige historische Kopie nicht ausschließen. Die lokalen Dateien bleiben unberührt.
+
+Dieser Befund ändert die nächste notwendige Arbeit nicht: erst den vollständigen Quellstand aus einer belegten, lesbaren Quelle rekonstruieren oder den ursprünglichen Erzeugungs-/Exportnachweis finden, dann Produktänderungen portieren. Die 100 MiB freie Kapazität verhindern weiterhin belastbare neue Xcode-/Simulator-Läufe.
