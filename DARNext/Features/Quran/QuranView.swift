@@ -46,7 +46,7 @@ struct QuranView: View {
                             }
                         }
                         .buttonStyle(.plain)
-                        .accessibilityIdentifier("quran-catalog-row-\\(surah.id)")
+                        .accessibilityIdentifier("quran-catalog-row-\(surah.id)")
                     }
                 } else if let errorMessage {
                     ContentUnavailableView("Qurʾān nicht verfügbar", systemImage: "book.closed", description: Text(errorMessage))
