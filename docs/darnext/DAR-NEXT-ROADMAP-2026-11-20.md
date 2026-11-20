@@ -50,3 +50,14 @@ These PRs do not by themselves complete Issue #1789; verify each head and base b
 ## Current execution constraint
 
 At the latest check, the Mac had roughly 100 MiB available. Xcode could not save a profiled UI-test result bundle (ENOSPC), and the attempted animation-hitch trace yielded no measurement. This blocks new local simulator/trace evidence but does not convert any open item into a completed item.
+
+## PR integration audit — 2026-11-20
+
+A pairwise merge simulation found a concrete conflict risk in the four sibling Draft PRs #1813–#1816:
+
+- Each branch was compared against shared base commit `7c1692fd8afc4e616b958737665c335c5e093909`.
+- Each PR appends its unit assertion at the same end-of-file location in `DARNextTests/DARNextTests.swift` (shared base blob `1b92df8dd69a4a0840f1cc0150c5fbb61105d068`).
+- All six pairwise `git merge-file --stdout -p` simulations produced conflict markers in that test file.
+- GitHub currently reports each PR individually mergeable against the updated common base; that status does not prove the sibling PRs can be combined together without resolving their overlapping test edits.
+
+Required integration order: merge or stack one feature branch at a time, carry forward the earlier test additions, resolve the shared test file, then rerun the combined DARNext unit/build checks before advancing to the next PR. Do not merge #1813–#1816 in parallel. #1817 already depends on the five-tab branch #1816 and should follow it. This finding is about integration readiness; it does not authorize merging or release.
