@@ -44,7 +44,7 @@
  on('readerPrevious');on('readerNext');
  $('readerPlay')?.addEventListener('click',()=>{api()?.play();setTimeout(fillOptions,100)});
  $('readerShowTransliteration')?.addEventListener('change',()=>{api()?.setTransliteration($('readerShowTransliteration').checked?'show':'hide');$('readerTransliterationText').hidden=!$('readerShowTransliteration').checked});
- document.addEventListener('dar:quran-state',()=>{if(!panel.hidden){render();fillOptions()}});
+ window.addEventListener('dar:quran-state',()=>{if(!panel.hidden){render();fillOptions()}});
  document.addEventListener('dar:quran-reader-open',render);
  document.querySelectorAll('[data-home-action="quran"]').forEach(button=>button.addEventListener('click',()=>setTimeout(render,0)));
  $('openSurahPicker')?.addEventListener('click',event=>{event.preventDefault();setTimeout(render,0)});
