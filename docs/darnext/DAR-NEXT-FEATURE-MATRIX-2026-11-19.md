@@ -172,3 +172,10 @@ Der eigenständige Arbeitsnachweis in PR #1824 wurde zugunsten dieses bestehende
 - Draft-PR #1830 verwendet jetzt die explizite Allowlist `published`/`updated` plus Offline-Opt-in und ergänzt Unit-Tests für Ablehnungsfälle (draft, pending, withdrawn, nil, Offline-Opt-in false/nil).
 - Parserprüfung der geänderten Repository- und Testdatei: 2/2. Xcode-Build und Unit-Ausführung bleiben offen; PR bleibt Draft.
 - Die PR-Verknüpfung im Codex-Chat scheiterte erneut an der vollen lokalen Chat-Datenbank; GitHub-PR ist direkt erreichbar.
+
+
+## Produktionsmanifest – JSON-Syntaxdefekt gefunden, 20.11.2026
+
+- Direkte GET-Antwort von `https://dar-al-tawhid.de/data/offline-content-manifest.json` (7.832 Bytes) ist ungültig: Nach dem JSON-Objekt stehen wörtliche Backslash-/`n`-Zeichen; `json.loads` meldet `Extra data` bei Zeile 195/Zeichen 7830. Die aktuelle `DARNextContentSyncService`-Decodierung würde bei einer frischen Installation ohne Cache scheitern.
+- Draft-PR #1831 entfernt ausschließlich diesen literalen Suffix in einem Branch auf `main`. Dieselbe Datei im Branch besteht `python3 json.load`; Manifestversion sowie 126 statische und 62 Datenpfade bleiben erhalten. Kein Merge oder Live-Release erfolgt.
+- Das PR-Artefakt ließ sich wegen eines internen Codex-Thread-Datenbankfehlers nicht an den Chat anhängen; der GitHub-PR bleibt direkt erreichbar.
