@@ -31,22 +31,77 @@ html[dir="rtl"] .opt{text-align:right}
 <p class="note">Grundlage: al-Ḫaṭīb al-Baġdādī, Iqtiḍāʾ al-ʿIlm al-ʿAmal, Nr. 190. Die Fragen dienen dem Textverständnis und stellen keine zusätzliche Überlieferungsquelle dar.</p>
 </main>
 <script>
-(()=>{
-const qs=[
-{q:'Wer sprach die Mahnung über die Jugend aus?',a:['Ḥafṣah bint Sīrīn','Der Prophet ﷺ','Ibn Taymiyyah'],c:0,e:'Der Āṯār wird Ḥafṣah bint Sīrīn, einer Tābiʿiyyah, zugeschrieben.'},
-{q:'Wozu fordert Ḥafṣah die jungen Menschen auf?',a:['Gute Taten in der Jugend zu verrichten','Bis ins Alter zu warten','Nur über Taten zu diskutieren'],c:0,e:'Die Worte „arbeitet/handelt“ rufen zum tatsächlichen Handeln auf.'},
-{q:'Bedeutet diese Aussage, dass gute Taten im Alter wertlos sind?',a:['Ja, nur die Jugend zählt','Nein, die Jugend bietet besondere Kräfte und Möglichkeiten','Ja, sobald man schwächer wird'],c:1,e:'Die Aussage ist eine Mahnung, die Gelegenheit der Jugend zu nutzen, kein Ausschluss Älterer.'},
-{q:'Wie wird diese Aussage fachlich eingeordnet?',a:['Als Qurʾān-Vers','Als sicherer Prophetenḥadīṯ','Als einer Tābiʿiyyah zugeschriebener Āṯār mit dokumentiertem Isnād'],c:2,e:'Der Überlieferungsweg ist dokumentiert; damit ist keine abschließende Authentizitätsbewertung behauptet.'}
-];
-const el=id=>document.getElementById(id),select=el('language'),key='darAdultPreferredLocaleV1';
-const warnings={de:'',ar:'لم تتوفر ترجمة معتمدة للأسئلة؛ يُعرض النص الألماني.',en:'Reviewed questions in this language are not yet available; German is shown.',tr:'Bu dilde onaylı sorular henüz yok; Almanca gösteriliyor.',ku:'Pirsên pejirandî hîn tune ne; almanî tê nîşandan.',ckb:'پرسیارە پەسەندکراوەکان ئامادە نین؛ دەقی ئەڵمانی نیشان دەدرێت.',bs:'Provjerena pitanja još nisu dostupna; prikazan je njemački tekst.',fr:'Les questions vérifiées ne sont pas disponibles dans cette langue ; l’allemand est affiché.',es:'Las preguntas revisadas aún no están disponibles en este idioma; se muestra el alemán.'};
-let n=0,correct=0,answered=false,code=new URLSearchParams(location.search).get('lang');
+(async function(){
+const el=id=>document.getElementById(id);
+const select=el('language'),notice=el('notice'),key='darAdultPreferredLocaleV1';
+let code=new URLSearchParams(location.search).get('lang'),n=0,correct=0,answered=false;
 if(!code){try{code=localStorage.getItem(key)}catch(_){}}
-function locale(v){if(!Object.hasOwn(warnings,v))v='de';code=v;select.value=v;document.documentElement.lang=v;document.documentElement.dir=v==='ar'||v==='ckb'?'rtl':'ltr';el('notice').hidden=v==='de';el('notice').textContent=warnings[v];el('back').dataset.target='/q/59/?lang='+encodeURIComponent(v);try{localStorage.setItem(key,v)}catch(_){}}
-function render(){answered=false;el('result').hidden=true;el('quiz').hidden=false;el('feedback').textContent='';el('next').disabled=true;el('next').textContent=n===qs.length-1?'Ergebnis anzeigen':'Nächste Frage';el('progress').textContent='Frage '+(n+1)+' von '+qs.length;el('question').textContent=qs[n].q;
-const container=el('options');container.replaceChildren();qs[n].a.forEach((choice,i)=>{const b=document.createElement('button');b.type='button';b.className='opt';b.textContent=choice;b.addEventListener('click',()=>{if(answered)return;answered=true;if(i===qs[n].c)correct++;[...container.children].forEach((it,k)=>{it.disabled=true;if(k===qs[n].c)it.dataset.correct='1';else if(k===i)it.dataset.wrong='1'});el('feedback').textContent=qs[n].e;el('next').disabled=false});container.appendChild(b)})}
-el('next').addEventListener('click',()=>{if(n<qs.length-1){n++;render()}else{el('quiz').hidden=true;el('result').hidden=false;el('score').textContent=correct+' von '+qs.length+' Fragen richtig beantwortet.'}});
-el('again').addEventListener('click',()=>{n=0;correct=0;render()});el('back').addEventListener('click',()=>location.assign(el('back').dataset.target||'/q/59/'));select.addEventListener('change',()=>locale(select.value));
-locale(code||'de');render();
+try{
+const response=await fetch('/assets/q59-locales.json',{cache:'no-cache'});
+if(!response.ok)throw new Error('Missing Q59 translations');
+const book=await response.json(),locales=book.locales;
+const required=['de','ar','en','tr','ku','ckb','bs','fr','es'];
+if(required.some(k=>!locales[k]||locales[k].quiz?.length!==4))throw new Error('Incomplete translations');
+function render(){
+const d=locales[code],L=d.labels,qs=d.quiz;
+answered=false;
+el('result').hidden=true;el('quiz').hidden=false;
+el('feedback').textContent='';
+el('next').disabled=true;
+el('next').textContent=n===qs.length-1?L.results:L.next;
+el('progress').textContent=L.progress+' '+(n+1)+' '+L.of+' '+qs.length;
+el('question').textContent=qs[n].q;
+const box=el('options');box.replaceChildren();
+qs[n].a.forEach((choice,i)=>{
+const button=document.createElement('button');
+button.type='button';button.className='opt';button.textContent=choice;
+button.addEventListener('click',()=>{
+if(answered)return;
+answered=true;
+if(i===qs[n].correct)correct++;
+[...box.children].forEach((it,k)=>{
+it.disabled=true;
+if(k===qs[n].correct)it.dataset.correct='1';
+else if(k===i)it.dataset.wrong='1';
+});
+el('feedback').textContent=qs[n].why;
+el('next').disabled=false;
+});
+box.appendChild(button);
+});
+}
+function localize(v){
+if(!locales[v])v='de';
+code=v;
+const d=locales[v],L=d.labels;
+select.value=v;
+document.documentElement.lang=v;
+document.documentElement.dir=v==='ar'||v==='ckb'?'rtl':'ltr';
+el('pageTitle').textContent=d.title;
+el('back').textContent=L.back;
+el('result').querySelector('h2').textContent=L.result;
+el('again').textContent=L.again;
+document.querySelector('main > p.note').textContent=L.sourceNote;
+notice.hidden=true;notice.textContent='';
+n=0;correct=0;
+try{localStorage.setItem(key,v)}catch(_){}
+render();
+}
+el('next').addEventListener('click',()=>{
+const d=locales[code];
+if(n<d.quiz.length-1){n++;render()}
+else{
+el('quiz').hidden=true;el('result').hidden=false;
+el('score').textContent=correct+' / '+d.quiz.length+' '+d.labels.score;
+}
+});
+el('again').addEventListener('click',()=>{n=0;correct=0;render()});
+el('back').addEventListener('click',()=>location.assign('/q/59/?lang='+encodeURIComponent(code)));
+select.addEventListener('change',()=>localize(select.value));
+localize(code||'de');
+}catch(e){
+notice.hidden=false;notice.textContent='Sprachinhalte sind derzeit nicht verfügbar.';
+select.disabled=true;el('quiz').hidden=true;
+}
 })();
 </script></body></html>

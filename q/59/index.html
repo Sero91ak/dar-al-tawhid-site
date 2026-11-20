@@ -82,13 +82,63 @@ try{const v=localStorage.getItem("dar-quellen-royal-theme");document.documentEle
 </nav></main>
 <script src="/q/ios-native-link-fallback.js?v=1"></script>
 <script>
-(function(){
-const sel=document.getElementById('q59-language'),note=document.getElementById('q59-translation-notice'),label=document.getElementById('q59-language-label');
-const labels={de:['Sprache',''],ar:['اللغة','لم تتوفر بعد نسخة مترجمة معتمدة لهذه الصفحة. يُعرض النص الألماني الأصلي.'],en:['Language','A reviewed translation is not available yet. The German original is shown.'],tr:['Dil','Bu sayfa için doğrulanmış çeviri henüz yok. Almanca asıl metin gösteriliyor.'],ku:['Ziman','Wergera vekolînkirî hîn amade nîne. Nivîsa orîjînal a almanî tê nîşandan.'],ckb:['زمان','وەرگێڕانی پەسەندکراو هێشتا بەردەست نییە؛ دەقی ئەڵمانی نیشان دەدرێت.'],bs:['Jezik','Provjeren prevod još nije dostupan; prikazan je njemački izvornik.'],fr:['Langue','La traduction vérifiée n’est pas encore disponible. Le texte original allemand est affiché.'],es:['Idioma','Aún no hay una traducción revisada. Se muestra el original alemán.']};
-const key='darAdultPreferredLocaleV1';
-const params=new URLSearchParams(location.search);
-let initial=params.get('lang');if(!initial){try{initial=localStorage.getItem(key)}catch(_){}}
-function apply(code){if(!labels[code])code='de';sel.value=code;label.textContent=labels[code][0];document.documentElement.lang=code==='de'?'de':code;document.documentElement.dir=(code==='ar'||code==='ckb')?'rtl':'ltr';note.hidden=code==='de';note.textContent=labels[code][1];try{localStorage.setItem(key,code)}catch(_){}}
-sel.addEventListener('change',()=>apply(sel.value));apply(initial||'de');
+(async function(){
+const el=id=>document.getElementById(id);
+const select=el('q59-language'),notice=el('q59-translation-notice'),label=el('q59-language-label');
+const key='darAdultPreferredLocaleV1',sections=[...document.querySelectorAll('.q59-section')];
+const put=(node,text)=>{if(node&&typeof text==='string')node.textContent=text};
+const localeFromUrl=new URLSearchParams(location.search).get('lang');
+let language=localeFromUrl;
+if(!language){try{language=localStorage.getItem(key)}catch(_){}}
+try{
+const response=await fetch('/assets/q59-locales.json',{cache:'no-cache'});
+if(!response.ok)throw new Error('HTTP '+response.status);
+const book=await response.json(),locales=book.locales||{};
+const names=['de','ar','en','tr','ku','ckb','bs','fr','es'];
+if(names.some(code=>!locales[code]||locales[code].quiz?.length!==4))throw new Error('Incomplete language catalogue');
+function render(code){
+if(!locales[code])code='de';
+language=code;
+const d=locales[code],L=d.labels;
+document.documentElement.lang=code;
+document.documentElement.dir=(code==='ar'||code==='ckb')?'rtl':'ltr';
+select.value=code;
+put(label,L.language);
+put(document.querySelector('.qsource-hero .qsource-title'),d.title);
+put(document.querySelector('.qsource-hero > p:last-child'),d.speaker);
+document.title=d.title+' · Q59 | DĀR AL TAWḤĪD';
+put(sections[0].querySelector('h3'),L.quote);
+put(sections[0].querySelector('.q59-quote'),d.quote);
+put(sections[0].querySelector('.q59-note'),d.quoteNote);
+put(sections[1].querySelector('h3'),L.primary);
+put(sections[1].querySelector('.q59-note'),d.primaryNote);
+put(sections[2].querySelector('h3'),L.alternate);
+put(sections[2].querySelector('.q59-note'),d.alternateNote);
+put(sections[3].querySelector('h3'),L.isnad);
+put(sections[3].querySelector('p:not(.q59-note)'),d.chain);
+put(sections[3].querySelector('.q59-note'),d.status);
+put(sections[4].querySelector('h3'),L.explanation);
+put(sections[4].querySelector('p'),d.explanation);
+put(sections[5].querySelector('h3'),L.conclusion);
+put(sections[5].querySelector('p'),d.conclusion);
+put(sections[6].querySelector('h3'),L.evidence);
+put(sections[6].querySelector('p.q59-note'),d.evidenceNote);
+const srcs=[...sections[6].querySelectorAll('a.qsource-link')];
+srcs.forEach((a,i)=>{put(a.querySelector('.qsource-link-title'),d.linkTitles[i]);put(a.querySelector('.qsource-link-sub'),d.linkSubs[i]);a.setAttribute('aria-label',d.linkTitles[i])});
+const learn=document.querySelector('.q59-learning');
+put(learn.querySelector('strong'),L.learn);
+put(learn.querySelector('span'),L.learnSub);
+learn.setAttribute('aria-label',L.learn);
+learn.href='/lernen/jugend-und-handeln/';
+notice.hidden=true;notice.textContent='';
+try{localStorage.setItem(key,code)}catch(_){}
+}
+select.addEventListener('change',()=>render(select.value));
+render(language||'de');
+}catch(e){
+document.documentElement.lang='de';document.documentElement.dir='ltr';
+select.value='de';select.disabled=true;
+notice.hidden=false;notice.textContent='Die Sprachdaten konnten nicht geladen werden. Der deutsche Originaltext bleibt sichtbar.';
+}
 })();
 </script></body></html>
