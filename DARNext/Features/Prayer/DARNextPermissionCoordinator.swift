@@ -14,6 +14,10 @@ final class DARNextPermissionCoordinator: NSObject, CLLocationManagerDelegate {
         status == .authorizedWhenInUse || status == .authorizedAlways
     }
 
+    static func shouldStopLocationUpdates(for status: CLAuthorizationStatus) -> Bool {
+        !shouldStartLocationUpdates(for: status)
+    }
+
     override init() {
         super.init()
         locationManager.delegate = self
@@ -71,6 +75,8 @@ final class DARNextPermissionCoordinator: NSObject, CLLocationManagerDelegate {
         locationStatus = status
         if Self.shouldStartLocationUpdates(for: status) {
             locationManager.startUpdatingLocation()
+        } else if Self.shouldStopLocationUpdates(for: status) {
+            locationManager.stopUpdatingLocation()
         }
     }
 }
