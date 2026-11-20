@@ -166,3 +166,6 @@ assert.match(offline.getNode("sourceList").innerHTML, /href="\/q\/37\/"/);
   assert.match(sw, /url\.pathname\.startsWith\('\/q\/'\)/, "SW must isolate numbered Q pages");
   console.log("Q Royal V4.2: "+canonical.length+" links, near-white library, exact Q lookup, work search, shared CSS/JS and future Q routing verified.");
 })().catch(error => { console.error(error); process.exitCode = 1; });
+
+// Extend the existing source-library check without changing protected workflow or release locks.
+require('./check-q1-q50-nine-language.cjs');

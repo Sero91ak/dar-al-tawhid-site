@@ -6,6 +6,15 @@
 
 # DAR AL TAWHID Projektregeln
 
+## Dauerregel 06.11.2026: Q1–Q50 vollständig neunsprachig – keine bloße Menü-Übersetzung
+
+- **Rückwirkend verbindlich für alle öffentlichen `/q/1/` bis `/q/50/`:** Jede Quellenkarte benötigt denselben sichtbaren Sprachwahlschalter und fachlich geprüfte vollständige Inhaltsfassungen in `de,ar,en,tr,ku,ckb,bs,fr,es`. Titel, Aussagen, Kontext, Erklärungen, Quellen- und Überlieferungsstatus, Linkbeschriftungen, Fazits, Statusmeldungen und sämtliche anderen sichtbaren redaktionellen Texte sind zu berücksichtigen. Ein neunsprachiges **Menü** allein erfüllt diese Vorgabe ausdrücklich nicht.
+- **Verknüpfte Erwachsenen-Beiträge und Lernseiten:** Dieselbe kanonische Post-/Q-/Lern-ID weiterverwenden und Sprache mit `?lang=` beziehungsweise `darAdultPreferredLocaleV1` synchronisieren. Falls ein Lernbereich existiert, jede Frage, jede Antwortmöglichkeit, Rückmeldung, Erklärung und Navigation übersetzen, ohne den korrekten Antwortindex zu verändern. Externe Quellen behalten ihre Original-URLs.
+- **Belege bleiben unveränderlich:** Arabischer Primärwortlaut (insbesondere Qurʾān/Ḥadīṯ/Āṯār), Namen und exakte Stellenbelege, Isnād sowie geprüfte Authentizitätsbewertung nie stillschweigend durch eine neue Sprachfassung ersetzen. Arabisch und Sorani RTL. Eine einzige öffentliche kanonische Q-URL pro Beleg; kein neues Link-/ID-Schema oder Geräte-Push.
+- **Redaktionssperre und ehrlicher Fertigstellungsstatus:** Nicht unabhängig sprachlich und religiös geprüfte Entwürfe bleiben `draft-review-required` und dürfen nicht als `approved` ausgegeben werden. Fehlende Fassungen zeigen den deutschen Originaltext mit eindeutigem übersetztem Hinweis. **Weder Sprachmenü noch vorhandener Entwurf noch GitHub-Commit gelten als vollständige Live-Neunsprachenfreigabe.** Nach Quellrevision `stale` kennzeichnen.
+- **Verarbeitungsfolge:** historische Q1–Q48 in verifizierbaren **Fünferblöcken**, mit technischer und redaktioneller Abnahme pro Block; Q49/Q50 behalten ihre bereits eingebundenen Sprachpakete. Maschinenlesbare Arbeitsinventur: `docs/q1-q50-nine-language-rollout-20261106.md`. Kein erneutes Nachfragen nach dieser Regel und kein eigenmächtiges Redesign.
+
+
 ## DĀR AL TAWḤĪD Zentrale · Quellenlink-Navigation verbindlich (05.11.2026)
 
 **Für jeden neuen Erwachsenen-Beitrag und jeden Wissensbereich (Frau/Mann/Neutral), Quellenbeleg, Lernpfad, Sprachfassung und die tägliche Beitragsautomatik ist diese Regel Pflicht; auch für spätere Änderungen an bestehenden Inhalten.** Diese Regel ist bereits als Abschnitt **L** in der bestehenden einzigen stündlichen „DĀR AL TAWḤĪD Zentrale“-Automatik fest verankert. Keine zweite Automatik anlegen, keine geänderten H-Zeitfenster/Push-Freigaben.
