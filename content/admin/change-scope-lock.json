@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-academy-readonly-cloudflare-58-audio-audit-20261120",
+      "at": "2026-11-20T08:10:00+01:00",
+      "approvedBy": "user-explicit-20261120-complete-kids-academy-safety-and-direct-publishing",
+      "reason": "Eng begrenzte Eigentümerfreigabe ausschließlich zur Erweiterung der bestehenden read-only KIDS Academy Cloudflare-Liveprüfung um alle 58 echten Ṣidq-V4-Audios nach SHA-256. Bestehende Pilot-/Zugangs-/Präviewsperren, Cloudflare-Produktionsspur, globalLock, Native-/Qibla-/Gebets-/OneSignal- und Secret-Schutz unverändert lassen.",
+      "paths": [
+        ".github/workflows/kids-academy-live-audio-check.yml"
+      ],
+      "expiresAt": "2026-11-24T23:59:00+01:00"
+    },
+    {
       "id": "kids-academy-owner-bulk-v4-release-verification-20261120",
       "at": "2026-11-20T07:50:00+01:00",
       "approvedBy": "user-explicit-20261120-entire-kids-academy-v4-audio-generate-and-direct-live-push",
