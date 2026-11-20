@@ -6,6 +6,7 @@ on:
     branches:
       - feature/home-editorial-v5-20261118
     paths:
+      # Rebuild the isolated preview when HOME layout or reader assets change.
       - home-device/**
       - home-v5.css
       - .github/workflows/home-v4-branch-preview.yml
