@@ -1940,3 +1940,37 @@
   background:linear-gradient(145deg,rgba(34,66,52,.98),rgba(9,31,29,.96))!important;
   border-color:#e1c88e!important;
 }
+
+
+/* V13: transparent oval tabs sized to their short labels in every orientation. */
+#app[data-home-palette] .home-nav button:not([aria-current="page"]),
+#app[data-home-palette] .home-nav button[aria-current="page"] {
+  box-sizing:border-box!important;display:flex!important;flex:0 1 auto!important;
+  width:max-content!important;min-width:44px!important;max-width:none!important;
+  min-height:44px!important;height:auto!important;padding:6px clamp(10px,1vw,15px)!important;
+  border:1px solid rgba(216,189,130,.7)!important;border-radius:9999px!important;
+  color:#f2eee2!important;background:transparent!important;background-color:transparent!important;background-image:none!important;
+  box-shadow:none!important;transform:none!important;
+}
+#app[data-home-palette] .home-nav button[aria-current="page"] {border-color:#e4ca8e!important;color:#fffaf0!important;}
+#app[data-home-palette] .home-nav button:hover,
+#app[data-home-palette] .home-nav button:focus-visible {
+  color:#fffaf0!important;background:transparent!important;background-color:transparent!important;background-image:none!important;
+  border-color:#f0d99d!important;box-shadow:none!important;transform:none!important;
+}
+#app[data-home-palette] .home-nav button span {
+  max-width:none!important;white-space:nowrap!important;text-wrap:nowrap!important;
+  font-size:clamp(10px,.72vw,13px)!important;line-height:1.15!important;
+}
+@media (max-width:700px) and (orientation:landscape) and (max-height:500px) {
+  #app .top .home-nav {min-width:0!important;justify-content:center!important;gap:clamp(4px,.9vw,8px)!important;}
+  #app .top .home-nav button {flex:0 1 auto!important;min-width:44px!important;min-height:44px!important;padding:5px clamp(8px,1.2vw,12px)!important;}
+}
+@media (max-width:520px) and (orientation:portrait) {
+  #app .home-nav {flex-wrap:nowrap!important;justify-content:center!important;gap:clamp(3px,1vw,7px)!important;}
+  #app .home-nav button {flex:0 1 auto!important;min-width:44px!important;min-height:44px!important;padding:5px clamp(7px,2vw,11px)!important;}
+  #app .home-nav button span {font-size:clamp(9px,2.5vw,11px)!important;}
+}
+@media (max-width:360px) {
+  #app .home-nav {flex-wrap:wrap!important;}
+}
