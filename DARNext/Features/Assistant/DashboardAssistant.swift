@@ -159,7 +159,7 @@ private struct AssistantSourceDestinationView: View {
     private var destination: some View {
         switch source.kind {
         case .quran:
-            if let location = QuranLocation(sourceID: source.id) {
+            if let location = AssistantQuranLocation(sourceID: source.id) {
                 QuranSurahView(repository: repository, number: location.surah, focusAyah: location.ayah)
             } else {
                 QuranView(repository: repository)
@@ -239,13 +239,21 @@ private struct AssistantSourceDestinationView: View {
     }
 }
 
-private struct QuranLocation {
+struct AssistantQuranLocation: Equatable, Sendable {
     let surah: Int
     let ayah: Int?
 
     init?(sourceID: String) {
         let parts = sourceID.split(separator: "-")
-        guard parts.count >= 2, parts[0] == "quran", let surah = Int(parts[1]) else { return nil }
+        guard parts.first == "quran" else { return nil }
+
+        if parts.count == 3, parts[1] == "surah", let surah = Int(parts[2]) {
+            self.surah = surah
+            self.ayah = nil
+            return
+        }
+
+        guard parts.count >= 2, let surah = Int(parts[1]) else { return nil }
         self.surah = surah
         self.ayah = parts.count >= 3 ? Int(parts[2]) : nil
     }
