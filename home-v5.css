@@ -2081,3 +2081,6 @@
   scrollbar-width:none!important;
 }
 #app .hero-right .daily-story::-webkit-scrollbar { display:none!important; }
+
+/* Long German verse text is repeated in the reader-friendly Tadabbur dialog. */
+#app .tadabbur-dialog .tadabbur-verse-copy {font-size:clamp(16px,1.45vw,22px)!important;line-height:1.55!important;white-space:normal!important;overflow-wrap:anywhere!important;margin:10px 0 0!important;color:var(--home-ink,#f4f0e6)!important;}
