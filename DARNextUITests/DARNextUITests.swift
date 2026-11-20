@@ -49,14 +49,14 @@ final class DARNextUITests: XCTestCase {
         tabBar.buttons["Beiträge"].tap()
 
         let postID = "post-card-liebe-fuer-deinen-bruder-was-du-fuer-dich-liebst-179"
-        let postCard = app.buttons[postID]
-        for _ in 0..<12 where !postCard.isHittable {
+        let postCard = app.descendants(matching: .any).matching(identifier: postID).firstMatch
+        for _ in 0..<30 where !postCard.isHittable {
             app.swipeUp()
         }
         XCTAssertTrue(postCard.waitForExistence(timeout: 10))
         postCard.tap()
 
-        let topicQuizLink = app.buttons["post-detail-context-quiz"]
+        let topicQuizLink = app.descendants(matching: .any).matching(identifier: "post-detail-context-quiz").firstMatch
         XCTAssertTrue(topicQuizLink.waitForExistence(timeout: 10))
         topicQuizLink.tap()
 
