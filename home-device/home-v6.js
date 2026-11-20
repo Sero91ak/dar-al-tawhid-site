@@ -66,7 +66,7 @@
    const statement=document.createElement('p');statement.className='tadabbur-statement';statement.textContent=MARKDOWN(entry.text);
    const speaker=document.createElement('div');speaker.className='tadabbur-speaker';speaker.textContent=[entry.narrator,entry.generation].filter(Boolean).join(' · ');
    const source=document.createElement('div');source.className='tadabbur-source';source.textContent=[entry.source,entry.grading,entry.relation].filter(Boolean).join(' · ');
-   card.append(statement,speaker,source);list.append(card);
+   card.append(speaker,statement,source);list.append(card);
   }
   const data=tadDataCache;
   say(status,(data?.offline?'Offline-Cache':'DĀR-Tadabbur')+' · '+items.length+' geprüfte '+(items.length===1?'Überlieferung':'Überlieferungen'));
