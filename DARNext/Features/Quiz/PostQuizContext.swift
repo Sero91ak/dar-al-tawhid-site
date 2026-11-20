@@ -11,21 +11,6 @@ struct PostQuizContext: Equatable, Sendable {
     let questionCount: Int
     let match: PostQuizContextMatch
 
-    var actionTitle: String {
-        switch match {
-        case .topic:
-            return "Themenquiz: \(topic ?? "")"
-        case .category:
-            return "Quizkategorie: \(category ?? "")"
-        }
-    }
-
-    var questionCountSummary: String {
-        questionCount == 1
-            ? "1 freigegebene Frage"
-            : "\(questionCount) freigegebene Fragen"
-    }
-
     static func resolve(post: Post, questions: [QuizQuestion]) -> PostQuizContext? {
         let approvedQuestions = questions.filter { $0.isApprovedAdultContent }
 
