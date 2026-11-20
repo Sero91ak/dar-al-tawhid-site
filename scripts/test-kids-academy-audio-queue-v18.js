@@ -5,20 +5,147 @@ const {audit,validV4,normalize}=require("../kids/tools/audit-academy-voice-cover
 const r=audit();
 assert.ok(Number.isInteger(r.catalogLessonCount)&&r.catalogLessonCount>=50&&r.catalogLessonCount<=208,"Catalog lesson count must grow within the approved 208-lesson plan");
 assert.deepEqual(r.uncoveredLessons,[]);
+assert.equal(r.catalogLessonCount,66,"Live academy: 65 code-backed lessons + standalone Ṣidq");
+assert.equal(r.coveredLessonCount,66,"Every current lesson must have a traceable master-voice plan");
+assert.equal(r.editorialPlannedCount,142,"Future editorial outlines must not be mistaken for released lessons");
+assert.deepEqual(r.actualCurriculumScripts,["v1","v2","v22","v25","v26","v27","v28","v29"]);
+const fsAcademy=require("node:fs");
+const v28Academy=JSON.parse(fsAcademy.readFileSync("kids/data/academy-voice-plan-v28.json","utf8"));
+const v29Academy=JSON.parse(fsAcademy.readFileSync("kids/data/academy-voice-plan-v29.json","utf8"));
+assert.equal(v28Academy.lessonCount,4);
+assert.equal(v29Academy.lessonCount,4);
+assert.equal(v28Academy.phraseCount,164);
+assert.equal(v29Academy.phraseCount,163);
+assert.equal(v28Academy.phrases.length+v29Academy.phrases.length,327,
+ "Last eight classroom lessons need 327 original text entries in the V4 queue");
+
 assert.ok(r.uniquePhrases>=600);
 assert.equal(Object.values(r.totals).reduce((a,b)=>a+b,0),r.uniquePhrases);
-assert.equal(r.totals.approved,0,"Old Flash clip is NOT an approved V4 story voice");
+assert.equal(r.totals.approved,58,"All 58 source-exact real Ṣidq owner-V4 media assets must be hash-verified and recognized by the Academy audit");
 // Four historical binary originals remain archived, but the short Salam no longer matches
 // any eligible full-Salam production text. Therefore only three may count as staged.
 const originalPilot=JSON.parse(require("node:fs").readFileSync(require("node:path").join(__dirname,"../kids/data/academy-audio-staging-v9.json"),"utf8"));
 assert.equal(Object.keys(originalPilot.entries).length,4,"Preserve all four paid original pilot assets");
-assert.ok(r.totals.stagedAwaitingReview>=3,"Only the three non-Salam original pilot segments remain eligible for staging");
+assert.equal(r.totals.stagedAwaitingReview,0,"The three prior valid pilots must now be counted among the 58 imported and approved originals, not as awaiting approval");
 const planV19=JSON.parse(require("node:fs").readFileSync("kids/data/academy-full-salam-voice-plan-v19.json","utf8"));
 assert.ok(planV19.phrases.some(x=>x.text==="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh."&&x.reviewStatus==="not-generated"&&!x.url),"The complete greeting must be a separate ungenerated V19 candidate");
 assert.ok(!Object.keys(originalPilot.entries).includes("As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh."),"Never relabel abbreviated original audio as full Salam");
 assert.ok(r.rows.every(x=>x.contexts.length>0&&["approved","stagedAwaitingReview","needsRecording"].includes(x.state)));
+for(const text of ["As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.","Liebe Schwester.","Lieber Bruder."]){
+ const row=r.rows.find(x=>x.text===text);assert.equal(row?.state,"approved","Complete greeting and both personal addresses must be original V4 audio");
+}
+assert.equal(r.rows.filter(x=>x.text.startsWith("As-salāmu ʿalaykum, ")).length,0,"Obsolete short greetings must never be treated as a source-exact recording");
+assert.ok(r.totals.needsRecording>0,"Remaining 65 topics are not yet falsely recorded");
 assert.equal(validV4({voiceId:"different",url:"/fake",voiceProfileId:"serhat-owner-voice-2026",modelId:"eleven_v4",
  voiceSettingsProfile:"kids_story",sourceVoice:"authorized-owner-voice",sourceSpeaker:"Serhat Abu Malik",
  sameAsApprovedKidsStoryProfile:true}),false);
 assert.equal(normalize("A  B\nC"),"A B C");
+// The independent Python regression exercises the exact V4 Academy text preparation.
+require("node:child_process").execFileSync("python3",[
+  "kids/tools/test-academy-language-isolation-v1.py"
+],{cwd:require("node:path").resolve(__dirname,".."),stdio:"inherit"});
+// Only the first Ṣidq topic is prepared, and the CI invocation never spends credits.
+require("node:child_process").execFileSync("python3",[
+  "kids/tools/build-academy-topic-batch-v1.py","--dry-run"
+],{cwd:require("node:path").resolve(__dirname,".."),stdio:"inherit"});
+// The 100%-complete thematic release gate is a separate, non-billable check.
+// It must NOT publish a partial Ṣidq lesson, even if a four-clip batch passes.
+const academyRelease=JSON.parse(require("node:child_process").execFileSync("python3",[
+  "kids/tools/publish-academy-topic-v1.py","--status"
+],{cwd:require("node:path").resolve(__dirname,".."),encoding:"utf8"}));
+assert.equal(academyRelease.subject,"akhlaq");
+assert.equal(academyRelease.topic,"sidq");
+assert.equal(academyRelease.required,58);
+assert.equal(academyRelease.nextTopicLocked,true);
+assert.equal(academyRelease.publicManifestModified,false);
+assert.equal(academyRelease.canPublish,academyRelease.confirmed===academyRelease.required);
+const academyFs=require("node:fs");
+const academyCrypto=require("node:crypto");
+const academyPublicPath="kids/data/academy-audio.json";
+const academyStatePath="kids/data/academy-topic-batches/release-state-v1.json";
+const academyBefore=[academyPublicPath,academyStatePath].map(p=>academyCrypto.createHash("sha256").update(academyFs.readFileSync(p)).digest("hex"));
+const refusedPublish=require("node:child_process").spawnSync("python3",[
+  "kids/tools/publish-academy-topic-v1.py","--publish"
+],{cwd:require("node:path").resolve(__dirname,".."),encoding:"utf8"});
+assert.notEqual(refusedPublish.status,0,"Incomplete Ṣidq must refuse --publish");
+const academyAfter=[academyPublicPath,academyStatePath].map(p=>academyCrypto.createHash("sha256").update(academyFs.readFileSync(p)).digest("hex"));
+assert.deepEqual(academyAfter,academyBefore,"Refused partial publication must leave both manifests unchanged");
+// The complete Ṣidq owner-authorized production manifest can be imported
+// only when the original 76 paid MP3 files are actually present. This check
+// validates all source associations without paying credits or publishing.
+const topicReady=JSON.parse(require("node:child_process").execFileSync("python3",[
+  "kids/tools/import-publish-academy-sidq-v4-v1.py","--dry-run"
+],{cwd:require("node:path").resolve(__dirname,".."),encoding:"utf8"}));
+assert.equal(topicReady.canonicalPhrases,58);
+assert.equal(topicReady.reusedPriorV4,3);
+assert.equal(topicReady.directV4,45);
+assert.equal(topicReady.mixedSentenceAssemblies,9);
+assert.equal(topicReady.nativeArabicTerms,9);
+assert.equal(topicReady.originalGenerationFilesRequired,76);
+assert.equal(topicReady.needsActualBinaryFiles,true);
+assert.equal(topicReady.live,false);
+// Check that original media imports only from signed, pinned ElevenLabs URLs.
+// This test is fully offline and cannot trigger generation or publication.
+require("node:child_process").execFileSync("python3",[
+  "kids/tools/test-academy-download-gate-v1.py"
+],{cwd:require("node:path").resolve(__dirname,".."),stdio:"inherit"});
+const originalStatus=JSON.parse(require("node:child_process").execFileSync("python3",[
+  "kids/tools/download-academy-elevenlabs-originals-v1.py",
+  "--status","--source-dir","/tmp/dar-kids-sidq-no-originals-ci-v1"
+],{cwd:require("node:path").resolve(__dirname,".."),encoding:"utf8"}));
+assert.equal(originalStatus.requiredOriginals,76);
+assert.equal(originalStatus.missingOriginals,76);
+assert.equal(originalStatus.newGenerationRequested,false);
+assert.equal(originalStatus.publiclyReleased,false);
+// Complete curriculum audit: 66 code-backed lessons + 142 outlines = 208.
+// V28/V29 must remain fully source-exact (327 distinct speech texts).
+// This is offline: no ElevenLabs billing or public release.
+require("node:child_process").execFileSync("node",[
+  "kids/tools/test-academy-full-208-release-v1.cjs"
+],{cwd:require("node:path").resolve(__dirname,".."),stdio:"inherit"});
+// Source-exact continuous production queue across ALL 66 existing lessons.
+// 142 remaining editorial-only slots never enter the child app's audio catalog.
+const academyNext=JSON.parse(require("node:child_process").execFileSync("python3",[
+  "kids/tools/academy-next-topic-production-v1.py","--status"
+],{cwd:require("node:path").resolve(__dirname,".."),encoding:"utf8"}));
+assert.equal(academyNext.lessonId,"sidq");
+assert.equal(academyNext.exactUniquePhrases,58);
+assert.equal(academyNext.remainingExistingTopicsIncludingCurrent,66);
+assert.equal(academyNext.futureEditorialOutlinesLocked,142);
+assert.equal(academyNext.newCreditsChargedByThisScript,0);
+const academyAll=JSON.parse(require("node:child_process").execFileSync("python3",[
+  "kids/tools/academy-next-topic-production-v1.py","--audit-all"
+],{cwd:require("node:path").resolve(__dirname,".."),encoding:"utf8"}));
+assert.equal(academyAll.curriculumLessonCount,66);
+assert.equal(academyAll.sourceBackedLessonCount,66);
+assert.equal(academyAll.firstLessonId,"sidq");
+assert.equal(academyAll.firstLessonExactPhrases,58);
+assert.equal(academyAll.additionalEditorialOutlinesLocked,142);
+assert.equal(academyAll.newTtsCreditsCharged,0);
+// Nine existing, already paid native Fuṣḥā originals passed automated Scribe
+// recognition. Keep Scribe evidence distinct from human acoustic approval.
+require("node:child_process").execFileSync("python3",[
+  "kids/tools/test-academy-sidq-fusha-scribe-audit-v1.py"
+],{cwd:require("node:path").resolve(__dirname,".."),stdio:"inherit"});
+// Independently verify all imported MP3->M4A bytes by SHA-256 before
+// allowing a public deploy; do not require workflow security overrides.
+require("node:child_process").execFileSync("node",[
+ "kids/tools/verify-academy-audio-manifest-hashes-v1.cjs"
+],{cwd:require("node:path").resolve(__dirname,".."),stdio:"inherit"});
+// Full owner-authorized 66-lesson BULK production queue. This is a
+// deterministic no-credit dry run; next 142 need full verified lesson texts.
+const bulk=JSON.parse(require("node:child_process").execFileSync("python3",[
+ "kids/tools/academy-bulk-66-production-v1.py","--status"
+],{cwd:require("node:path").resolve(__dirname,".."),encoding:"utf8"}));
+assert.equal(bulk.scope.sourceBackedLessons,66);
+assert.equal(bulk.scope.separateAgeVersions,3);
+assert.equal(bulk.scope.futureEditorialLessonsNotProductionReady,142);
+assert.equal(bulk.totals.realVerifiedM4aAlreadyInRepo,58);
+assert.ok(bulk.totals.distinctSourceUtterances>=1700);
+assert.ok(bulk.totals.exactUtterancesMissingRealMedia>=1600);
+assert.equal(bulk.totals.realVerifiedM4aAlreadyInRepo+
+ bulk.totals.exactUtterancesMissingRealMedia,bulk.totals.distinctSourceUtterances,
+ "Deduped bulk source coverage must equal imported genuine originals plus still missing");
+assert.equal(bulk.safety.noTtsCreditsCharged,true);
+assert.equal(bulk.safety.noUnreviewedEditorialOutlinesInChildrenApp,true);
 console.log("ACADEMY VOICE V18 PASS: exact Serhat-only matching, three valid staged clips and one quarantined old greeting, zero synthetic fallback, no credits.");

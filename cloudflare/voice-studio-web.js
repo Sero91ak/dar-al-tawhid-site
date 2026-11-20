@@ -456,6 +456,7 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
         normalizedAlignment: result.normalizedAlignment || null,
         contentType: result.contentType || "audio/mpeg",
         chars: result.chars || prepared.length,
+        voiceId: result.voiceId || "",
         timingMode: "elevenlabs-character-alignment-v1"
       }, cors, 200);
     }

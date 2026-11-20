@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_ACADEMY_SIDQ_DE_AR_SEGMENTED_V1",
+  "subject": "akhlaq",
+  "lessonId": "sidq",
+  "sourcePlan": "kids/data/academy-sidq-voice-plan-v18.json",
+  "reason": "Mixed German narration and Fuṣḥā terms must never apply Arabic PLS over German or mispronounce ﷺ as glyph; source number references remain visible in child UI but are not spoken",
+  "arabicTermSource": "kids/data/academy-topic-batches/akhlaq-sidq-fusha-term-audio-v1.json",
+  "entries": [
+    {
+      "visibleText": "Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.",
+      "spokenSegments": [
+        {
+          "language": "de",
+          "text": "Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet"
+        },
+        {
+          "language": "ar",
+          "termKey": "prophet_salawat"
+        },
+        {
+          "language": "de",
+          "text": "lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen."
+        }
+      ],
+      "sourceReferencesSpoken": false,
+      "requiresConcatenation": true,
+      "assembledAndPublished": false
+    },
+    {
+      "visibleText": "Allah fordert die Gläubigen in Sūrat at-Tawbah 9:119 auf, mit den Wahrhaftigen zu sein. In Ṣaḥīḥ Muslim 2607a beschreibt der Prophet ﷺ Wahrhaftigkeit als einen Weg zur Rechtschaffenheit. Daraus lernen wir, beim Sprechen und Handeln aufrichtig zu bleiben.",
+      "spokenSegments": [
+        {
+          "language": "de",
+          "text": "Allah fordert die Gläubigen in"
+        },
+        {
+          "language": "ar",
+          "termKey": "surat_tawbah"
+        },
+        {
+          "language": "de",
+          "text": "auf, mit den Wahrhaftigen zu sein. In"
+        },
+        {
+          "language": "ar",
+          "termKey": "sahih_muslim"
+        },
+        {
+          "language": "de",
+          "text": "beschreibt der Prophet"
+        },
+        {
+          "language": "ar",
+          "termKey": "prophet_salawat"
+        },
+        {
+          "language": "de",
+          "text": "Wahrhaftigkeit als einen Weg zur Rechtschaffenheit. Daraus lernen wir, beim Sprechen und Handeln aufrichtig zu bleiben."
+        }
+      ],
+      "sourceReferencesSpoken": false,
+      "requiresConcatenation": true,
+      "assembledAndPublished": false
+    },
+    {
+      "visibleText": "Allah sagt uns im Qurʾān, dass wir mit den Wahrhaftigen sein sollen. Der Prophet ﷺ erklärte, wie gut Wahrhaftigkeit ist. Deshalb sagen wir die Wahrheit, auch wenn wir einen Fehler machen.",
+      "spokenSegments": [
+        {
+          "language": "de",
+          "text": "Allah sagt uns im"
+        },
+        {
+          "language": "ar",
+          "termKey": "quran"
+        },
+        {
+          "language": "de",
+          "text": "dass wir mit den Wahrhaftigen sein sollen. Der Prophet"
+        },
+        {
+          "language": "ar",
+          "termKey": "prophet_salawat"
+        },
+        {
+          "language": "de",
+          "text": "erklärte, wie gut Wahrhaftigkeit ist. Deshalb sagen wir die Wahrheit, auch wenn wir einen Fehler machen."
+        }
+      ],
+      "sourceReferencesSpoken": false,
+      "requiresConcatenation": true,
+      "assembledAndPublished": false
+    },
+    {
+      "visibleText": "Heute beschäftigen wir uns mit Ṣidq: Warum ist die Wahrheit wichtig, und wie handeln wir nach einem Fehler? Wir lernen anhand von Qurʾān und Sunnah und erklären das Thema mit eigenen Worten.",
+      "spokenSegments": [
+        {
+          "language": "de",
+          "text": "Heute beschäftigen wir uns mit"
+        },
+        {
+          "language": "ar",
+          "termKey": "sidq"
+        },
+        {
+          "language": "de",
+          "text": "Warum ist die Wahrheit wichtig, und wie handeln wir nach einem Fehler? Wir lernen anhand von"
+        },
+        {
+          "language": "ar",
+          "termKey": "quran"
+        },
+        {
+          "language": "de",
+          "text": "und"
+        },
+        {
+          "language": "ar",
+          "termKey": "sunnah"
+        },
+        {
+          "language": "de",
+          "text": "und erklären das Thema mit eigenen Worten."
+        }
+      ],
+      "sourceReferencesSpoken": false,
+      "requiresConcatenation": true,
+      "assembledAndPublished": false
+    },
+    {
+      "visibleText": "Was lehrt uns der Vers aus Sūrat at-Tawbah 9:119?",
+      "spokenSegments": [
+        {
+          "language": "de",
+          "text": "Was lehrt uns der Vers aus"
+        },
+        {
+          "language": "ar",
+          "termKey": "surat_tawbah"
+        }
+      ],
+      "sourceReferencesSpoken": false,
+      "requiresConcatenation": true,
+      "assembledAndPublished": false
+    },
+    {
+      "visibleText": "Welche Aussage entspricht dem Ḥadīṯ über Wahrhaftigkeit?",
+      "spokenSegments": [
+        {
+          "language": "de",
+          "text": "Welche Aussage entspricht dem"
+        },
+        {
+          "language": "ar",
+          "termKey": "hadith"
+        },
+        {
+          "language": "de",
+          "text": "über Wahrhaftigkeit?"
+        }
+      ],
+      "sourceReferencesSpoken": false,
+      "requiresConcatenation": true,
+      "assembledAndPublished": false
+    },
+    {
+      "visibleText": "Allah ruft uns dazu auf, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt.",
+      "spokenSegments": [
+        {
+          "language": "de",
+          "text": "Allah ruft uns dazu auf, mit den Wahrhaftigen zu sein. Der Prophet"
+        },
+        {
+          "language": "ar",
+          "termKey": "prophet_salawat"
+        },
+        {
+          "language": "de",
+          "text": "lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt."
+        }
+      ],
+      "sourceReferencesSpoken": false,
+      "requiresConcatenation": true,
+      "assembledAndPublished": false
+    },
+    {
+      "visibleText": "Qurʾān 9:119 und der Ḥadīṯ in Ṣaḥīḥ Muslim 2607a verdeutlichen die Bedeutung der Wahrhaftigkeit.",
+      "spokenSegments": [
+        {
+          "language": "ar",
+          "termKey": "quran"
+        },
+        {
+          "language": "de",
+          "text": "und der"
+        },
+        {
+          "language": "ar",
+          "termKey": "hadith"
+        },
+        {
+          "language": "de",
+          "text": "in"
+        },
+        {
+          "language": "ar",
+          "termKey": "sahih_muslim"
+        },
+        {
+          "language": "de",
+          "text": "verdeutlichen die Bedeutung der Wahrhaftigkeit."
+        }
+      ],
+      "sourceReferencesSpoken": false,
+      "requiresConcatenation": true,
+      "assembledAndPublished": false
+    },
+    {
+      "visibleText": "Ṣidq bedeutet Wahrhaftigkeit. Sie zeigt sich auch dann, wenn Ehrlichkeit Mut kostet.",
+      "spokenSegments": [
+        {
+          "language": "ar",
+          "termKey": "sidq"
+        },
+        {
+          "language": "de",
+          "text": "bedeutet Wahrhaftigkeit. Sie zeigt sich auch dann, wenn Ehrlichkeit Mut kostet."
+        }
+      ],
+      "sourceReferencesSpoken": false,
+      "requiresConcatenation": true,
+      "assembledAndPublished": false
+    }
+  ],
+  "complete": false
+}

@@ -1,0 +1,615 @@
+{
+  "schemaVersion": 1,
+  "id": "kids-academy-akhlaq-sidq-production-inventory-v1",
+  "subject": "akhlaq",
+  "lessonId": "sidq",
+  "sourcePlans": [
+    "kids/data/academy-sidq-voice-plan-v18.json",
+    "kids/data/academy-full-salam-voice-plan-v19.json"
+  ],
+  "policy": {
+    "stageFirst": true,
+    "noAutoPublish": true,
+    "strictExactText": true,
+    "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+    "modelId": "eleven_v4",
+    "profile": "kids_story",
+    "humanListeningNotYetCompleted": true,
+    "needsSourceReview": true
+  },
+  "catalogPhraseCount": 58,
+  "countsByState": {
+    "historic-v4-staged-unapproved": 3,
+    "not-yet-scheduled": 26,
+    "needs-de-ar-segmented-honorific": 4,
+    "batch-01-prepared-zero-audio": 4,
+    "needs-arabic-term-preflight": 5,
+    "needs-live-answer-order-audit": 13,
+    "needs-native-arabic-fusha-greeting": 1,
+    "needs-profile-specific-speaking": 2
+  },
+  "discontinuedShortGreetingCount": 2,
+  "archiveUnaffected": true,
+  "entries": [
+    {
+      "text": "Schön, dass du da bist!",
+      "age": [
+        "4-5"
+      ],
+      "kind": [
+        "greeting"
+      ],
+      "state": "historic-v4-staged-unapproved"
+    },
+    {
+      "text": "Schön, dass du dein Wissen heute erweiterst!",
+      "age": [
+        "9-10"
+      ],
+      "kind": [
+        "greeting"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Schön, dass du heute mitlernst!",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "greeting"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "needs-de-ar-segmented-honorific"
+    },
+    {
+      "text": "Allah fordert die Gläubigen in Sūrat at-Tawbah 9:119 auf, mit den Wahrhaftigen zu sein. In Ṣaḥīḥ Muslim 2607a beschreibt der Prophet ﷺ Wahrhaftigkeit als einen Weg zur Rechtschaffenheit. Daraus lernen wir, beim Sprechen und Handeln aufrichtig zu bleiben.",
+      "age": [
+        "9-10"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "needs-de-ar-segmented-honorific"
+    },
+    {
+      "text": "Allah sagt uns im Qurʾān, dass wir mit den Wahrhaftigen sein sollen. Der Prophet ﷺ erklärte, wie gut Wahrhaftigkeit ist. Deshalb sagen wir die Wahrheit, auch wenn wir einen Fehler machen.",
+      "age": [
+        "4-5"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "needs-de-ar-segmented-honorific"
+    },
+    {
+      "text": "Danach kannst du um Entschuldigung bitten und beim Aufräumen helfen.",
+      "age": [
+        "4-5"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "batch-01-prepared-zero-audio"
+    },
+    {
+      "text": "Die Wahrheit sagen – auch wenn es manchmal Mut kostet.",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Die Wahrheit sagen – das ist ehrlich.",
+      "age": [
+        "4-5"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "batch-01-prepared-zero-audio"
+    },
+    {
+      "text": "Du darfst ehrlich sagen: Das war ich.",
+      "age": [
+        "4-5"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "batch-01-prepared-zero-audio"
+    },
+    {
+      "text": "Ehrlich sein ist gut. Das üben wir gemeinsam.",
+      "age": [
+        "4-5"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "batch-01-prepared-zero-audio"
+    },
+    {
+      "text": "Eine bewusste Lüge kann das Vertrauen anderer Menschen beschädigen und weitere falsche Aussagen nach sich ziehen.",
+      "age": [
+        "9-10"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Heute beschäftigen wir uns mit Ṣidq: Warum ist die Wahrheit wichtig, und wie handeln wir nach einem Fehler? Wir lernen anhand von Qurʾān und Sunnah und erklären das Thema mit eigenen Worten.",
+      "age": [
+        "9-10"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "needs-arabic-term-preflight"
+    },
+    {
+      "text": "Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.",
+      "age": [
+        "4-5"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "historic-v4-staged-unapproved"
+    },
+    {
+      "text": "Heute sprechen wir darüber, warum Wahrhaftigkeit wichtig ist. Wir hören zu, lesen mit und denken nach. Du darfst jederzeit eine Pause machen.",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Jeder Mensch kann aus Versehen einen Fehler machen. Entscheidend ist, wie wir danach handeln.",
+      "age": [
+        "9-10"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Manchmal geht etwas aus Versehen kaputt.",
+      "age": [
+        "4-5"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "historic-v4-staged-unapproved"
+    },
+    {
+      "text": "Manchmal passiert uns aus Versehen ein Fehler.",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies.",
+      "age": [
+        "all"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Wahrhaftigkeit heißt, bewusst bei der Wahrheit zu bleiben – selbst wenn das schwierig ist.",
+      "age": [
+        "9-10"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Wahrhaftigkeit ist mehr als ein einzelnes richtiges Wort: Sie ist eine Haltung, die wir im Alltag immer wieder üben.",
+      "age": [
+        "9-10"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Wer die Wahrheit sagt, übernimmt Verantwortung und schafft die Grundlage, den Fehler wiedergutzumachen.",
+      "age": [
+        "9-10"
+      ],
+      "kind": [
+        "narration"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Du hast etwas kaputt gemacht. Was sagst du?",
+      "age": [
+        "4-5"
+      ],
+      "kind": [
+        "question"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Du hast versehentlich ein Glas zerbrochen. Was ist eine ehrliche Antwort?",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "question"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Erkläre in eigenen Worten: Warum gehört Wahrhaftigkeit zu einem guten Charakter?",
+      "age": [
+        "9-10"
+      ],
+      "kind": [
+        "question"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Was kannst du danach Gutes tun?",
+      "age": [
+        "4-5"
+      ],
+      "kind": [
+        "question"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Was kannst du tun, nachdem du einen Fehler ehrlich zugegeben hast?",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "question"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Was lehrt uns der Vers aus Sūrat at-Tawbah 9:119?",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "question"
+      ],
+      "state": "needs-arabic-term-preflight"
+    },
+    {
+      "text": "Welche Aussage entspricht dem Ḥadīṯ über Wahrhaftigkeit?",
+      "age": [
+        "9-10"
+      ],
+      "kind": [
+        "question"
+      ],
+      "state": "needs-arabic-term-preflight"
+    },
+    {
+      "text": "Worin liegt der Unterschied zwischen einem versehentlichen Fehler und einer bewussten Lüge?",
+      "age": [
+        "9-10"
+      ],
+      "kind": [
+        "question"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Allah lehrt uns, mit den Wahrhaftigen zu sein.",
+      "age": [
+        "4-5"
+      ],
+      "kind": [
+        "summary"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Allah ruft uns dazu auf, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt.",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "summary"
+      ],
+      "state": "needs-de-ar-segmented-honorific"
+    },
+    {
+      "text": "Antwort 1: Ich entschuldige mich und helfe.",
+      "age": [
+        "4-5"
+      ],
+      "kind": [
+        "answer"
+      ],
+      "state": "needs-live-answer-order-audit"
+    },
+    {
+      "text": "Antwort 1: Ich sage ehrlich: Ich war das.",
+      "age": [
+        "4-5"
+      ],
+      "kind": [
+        "answer"
+      ],
+      "state": "needs-live-answer-order-audit"
+    },
+    {
+      "text": "Antwort 1: Ich war das. Es tut mir leid.",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "answer"
+      ],
+      "state": "needs-live-answer-order-audit"
+    },
+    {
+      "text": "Antwort 1: Wahrhaftigkeit führt zur Rechtschaffenheit.",
+      "age": [
+        "9-10"
+      ],
+      "kind": [
+        "answer"
+      ],
+      "state": "needs-live-answer-order-audit"
+    },
+    {
+      "text": "Antwort 1: Wir sollen mit den Wahrhaftigen sein.",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "answer"
+      ],
+      "state": "needs-live-answer-order-audit"
+    },
+    {
+      "text": "Antwort 2: Das war bestimmt jemand anders.",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "answer"
+      ],
+      "state": "needs-live-answer-order-audit"
+    },
+    {
+      "text": "Antwort 2: Ich sage: Jemand anders war es.",
+      "age": [
+        "4-5"
+      ],
+      "kind": [
+        "answer"
+      ],
+      "state": "needs-live-answer-order-audit"
+    },
+    {
+      "text": "Antwort 2: Ich verstecke den Fehler.",
+      "age": [
+        "4-5"
+      ],
+      "kind": [
+        "answer"
+      ],
+      "state": "needs-live-answer-order-audit"
+    },
+    {
+      "text": "Antwort 2: Wahrheit spielt beim guten Charakter keine Rolle.",
+      "age": [
+        "9-10"
+      ],
+      "kind": [
+        "answer"
+      ],
+      "state": "needs-live-answer-order-audit"
+    },
+    {
+      "text": "Antwort 2: Wir dürfen lügen, wenn wir Angst haben.",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "answer"
+      ],
+      "state": "needs-live-answer-order-audit"
+    },
+    {
+      "text": "Antwort 3: Eine Lüge ist immer die leichtere und richtige Lösung.",
+      "age": [
+        "9-10"
+      ],
+      "kind": [
+        "answer"
+      ],
+      "state": "needs-live-answer-order-audit"
+    },
+    {
+      "text": "Antwort 3: Ich tue so, als hätte ich nichts gesehen.",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "answer"
+      ],
+      "state": "needs-live-answer-order-audit"
+    },
+    {
+      "text": "Antwort 3: Man soll eigene Fehler immer verstecken.",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "answer"
+      ],
+      "state": "needs-live-answer-order-audit"
+    },
+    {
+      "text": "Ich möchte ehrlich bleiben, Verantwortung übernehmen und einen Fehler nach Möglichkeit wiedergutmachen.",
+      "age": [
+        "9-10"
+      ],
+      "kind": [
+        "summary"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Qurʾān 9:119 und der Ḥadīṯ in Ṣaḥīḥ Muslim 2607a verdeutlichen die Bedeutung der Wahrhaftigkeit.",
+      "age": [
+        "9-10"
+      ],
+      "kind": [
+        "summary"
+      ],
+      "state": "needs-arabic-term-preflight"
+    },
+    {
+      "text": "Ṣidq bedeutet Wahrhaftigkeit. Sie zeigt sich auch dann, wenn Ehrlichkeit Mut kostet.",
+      "age": [
+        "9-10"
+      ],
+      "kind": [
+        "summary"
+      ],
+      "state": "needs-arabic-term-preflight"
+    },
+    {
+      "text": "Wahrhaftigkeit bedeutet, ehrlich zu sprechen.",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "summary"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Wahrhaftigkeit bedeutet: Ich sage die Wahrheit.",
+      "age": [
+        "4-5"
+      ],
+      "kind": [
+        "summary"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Wenn mir ein Fehler passiert, sage ich die Wahrheit und versuche, ihn wiedergutzumachen.",
+      "age": [
+        "6-8"
+      ],
+      "kind": [
+        "summary"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "Wenn mir ein Fehler passiert, sage ich ehrlich, was geschehen ist.",
+      "age": [
+        "4-5"
+      ],
+      "kind": [
+        "summary"
+      ],
+      "state": "not-yet-scheduled"
+    },
+    {
+      "text": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+      "age": [
+        "all"
+      ],
+      "kind": [
+        "greeting"
+      ],
+      "state": "needs-native-arabic-fusha-greeting"
+    },
+    {
+      "text": "Liebe Schwester.",
+      "age": [
+        "all"
+      ],
+      "kind": [
+        "address"
+      ],
+      "state": "needs-profile-specific-speaking"
+    },
+    {
+      "text": "Lieber Bruder.",
+      "age": [
+        "all"
+      ],
+      "kind": [
+        "address"
+      ],
+      "state": "needs-profile-specific-speaking"
+    }
+  ]
+}

@@ -4,7 +4,7 @@
   "voiceProfileId": "serhat-owner-voice-2026",
   "speaker": "Serhat Abu Malik",
   "policy": "Exact-match only. Never map a different recording onto a lesson phrase. No audio synthesis is triggered by this manifest.",
-  "manualReviewNote": "Only existing verified owner-voice clips are reused; new academy recordings are not produced here.",
+  "manualReviewNote": "The owner authorized generation and direct publication without manual prelisten. 58 Ṣidq entries passed source/voice/media/hash automated checks. No false claim of acoustic human signoff.",
   "entries": {
     "Allah ist Einer und hat keinen Teilhaber.": {
       "url": "/kids/assets/kids-quiz-audio/e855b456578b8c2f.m4a?v=kids-quiz-owner-voice-hybrid-v1-20261008-172455",
@@ -17,6 +17,1528 @@
       "sourceSpeaker": "Serhat Abu Malik",
       "sourceManifest": "KIDS_QUIZ_OWNER_VOICE_HYBRID_V1",
       "sourceManifestBuild": "kids-quiz-owner-voice-hybrid-v1-20261008-181845"
+    },
+    "Danach kannst du um Entschuldigung bitten und beim Aufräumen helfen.": {
+      "url": "/kids/assets/kids-academy-audio/cf33a69da70599a3403f.m4a",
+      "sha256": "159d57ce546e2392b7edfc29198111637eddacd123c1672f26d6f2dc88ffdaab",
+      "durationSeconds": 3.92,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Danach kannst du um Entschuldigung bitten und beim Aufräumen helfen.",
+      "sourceGenerationIds": [
+        "AVqXwSI3ttZCLiE1H20j"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Die Wahrheit sagen – das ist ehrlich.": {
+      "url": "/kids/assets/kids-academy-audio/5230f9fb0bd98b5ae0fd.m4a",
+      "sha256": "2d013d0f590f59ba2e104403cbcf1881c38b7072976f768aa1376e9cbda8434d",
+      "durationSeconds": 2.8,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Die Wahrheit sagen – das ist ehrlich.",
+      "sourceGenerationIds": [
+        "MEWrw0PxNqwE1v1Fkqgj"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Du darfst ehrlich sagen: Das war ich.": {
+      "url": "/kids/assets/kids-academy-audio/91bb7f8c4bc4f1ce0441.m4a",
+      "sha256": "1dc548449b44879e7af9e40172554d0161a0f83863e62bd1aeff9eeb23642cef",
+      "durationSeconds": 2.72,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Du darfst ehrlich sagen: Das war ich.",
+      "sourceGenerationIds": [
+        "xIqLFM7g3xQxVMRqKjs9"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Ehrlich sein ist gut. Das üben wir gemeinsam.": {
+      "url": "/kids/assets/kids-academy-audio/21953c4b688fa977c740.m4a",
+      "sha256": "19fed2727671bfaabccf1e2685120ed97c49727901194bce3bb874438cc99b18",
+      "durationSeconds": 2.96,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Ehrlich sein ist gut. Das üben wir gemeinsam.",
+      "sourceGenerationIds": [
+        "q5E8WNgWGeFHrQ4EkJFf"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Schön, dass du dein Wissen heute erweiterst!": {
+      "url": "/kids/assets/kids-academy-audio/d31256cb9e6a1ac20f14.m4a",
+      "sha256": "e3eefd5b2be9f8924a8940eec446e5c74013018e1cbf6bf364e538ad3206c229",
+      "durationSeconds": 2.4,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Schön, dass du dein Wissen heute erweiterst!",
+      "sourceGenerationIds": [
+        "h9AsLMG9iEeuJwUwmXmu"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Schön, dass du heute mitlernst!": {
+      "url": "/kids/assets/kids-academy-audio/37c60d654dc76c0f47d8.m4a",
+      "sha256": "27fa9808450ac48616393793dc0faa93e921724582f8785701ccafeacafcac1b",
+      "durationSeconds": 1.76,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Schön, dass du heute mitlernst!",
+      "sourceGenerationIds": [
+        "4mpdQUCQ3OxhIfpG9A89"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Die Wahrheit sagen – auch wenn es manchmal Mut kostet.": {
+      "url": "/kids/assets/kids-academy-audio/b1d9235959a84dd21637.m4a",
+      "sha256": "d88a94aa12f476e269a5db0466e9dbe8f35987d2eb33603c697aba591927bd21",
+      "durationSeconds": 3.6,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Die Wahrheit sagen – auch wenn es manchmal Mut kostet.",
+      "sourceGenerationIds": [
+        "23WgrjuI8jRwm8sIJEdx"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Eine bewusste Lüge kann das Vertrauen anderer Menschen beschädigen und weitere falsche Aussagen nach sich ziehen.": {
+      "url": "/kids/assets/kids-academy-audio/b40a57dcc29f73da9dbe.m4a",
+      "sha256": "192ff41712d52c7f5cba2b62d441a46cbaef9669b82b7c5a6236a82a5ffd31bc",
+      "durationSeconds": 6.24,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Eine bewusste Lüge kann das Vertrauen anderer Menschen beschädigen und weitere falsche Aussagen nach sich ziehen.",
+      "sourceGenerationIds": [
+        "bDuH5IVaQi3hVYKIVOvq"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Heute sprechen wir darüber, warum Wahrhaftigkeit wichtig ist. Wir hören zu, lesen mit und denken nach. Du darfst jederzeit eine Pause machen.": {
+      "url": "/kids/assets/kids-academy-audio/03e8f25c66a63722f2de.m4a",
+      "sha256": "3e318cc2f2e96d25000dbf286ba6f2b535a3bc61104088ff1ea82555ab74ec4e",
+      "durationSeconds": 9.28,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Heute sprechen wir darüber, warum Wahrhaftigkeit wichtig ist. Wir hören zu, lesen mit und denken nach. Du darfst jederzeit eine Pause machen.",
+      "sourceGenerationIds": [
+        "XWhRsvCAVsUkmnaF2OMW"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Jeder Mensch kann aus Versehen einen Fehler machen. Entscheidend ist, wie wir danach handeln.": {
+      "url": "/kids/assets/kids-academy-audio/7402e69601963204b90f.m4a",
+      "sha256": "6c6b82218fadb2e7f51a77b3686157a55abe5846086128fa1b30aaa1662edcb8",
+      "durationSeconds": 5.12,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Jeder Mensch kann aus Versehen einen Fehler machen. Entscheidend ist, wie wir danach handeln.",
+      "sourceGenerationIds": [
+        "weWbt1lk2Yvau3JLWhki"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Manchmal passiert uns aus Versehen ein Fehler.": {
+      "url": "/kids/assets/kids-academy-audio/a29865e949ebec2ee1d8.m4a",
+      "sha256": "6ac1659dfdae64f5d634db1221570814f8d9c293655dbd6ad4fd24179a0d5be2",
+      "durationSeconds": 2.96,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Manchmal passiert uns aus Versehen ein Fehler.",
+      "sourceGenerationIds": [
+        "okn0ZbI7zmuLUDTZjbqF"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies.": {
+      "url": "/kids/assets/kids-academy-audio/06eda4b6ecc9855a149f.m4a",
+      "sha256": "50b848c0e39863442294926a68903023467e89f8a2cd117cf80e65d1044e7f78",
+      "durationSeconds": 5.28,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies.",
+      "sourceGenerationIds": [
+        "MrQgbBlPr9pa0ortssNi"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Wahrhaftigkeit heißt, bewusst bei der Wahrheit zu bleiben – selbst wenn das schwierig ist.": {
+      "url": "/kids/assets/kids-academy-audio/4d2d4fad25f9577f7595.m4a",
+      "sha256": "5c1849b178e8bcdacdc1099fb71a6a91c74c4113fb1c70d460f98363a98e8ccb",
+      "durationSeconds": 5.44,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Wahrhaftigkeit heißt, bewusst bei der Wahrheit zu bleiben – selbst wenn das schwierig ist.",
+      "sourceGenerationIds": [
+        "oxk7yFxeBhCy1gTzisHX"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.": {
+      "url": "/kids/assets/kids-academy-audio/bb9316a90a003f4333f8.m4a",
+      "sha256": "c7fda45c23000dc887dcbe791ca9f0b57a355628fc23c52cffa8eb2ae96ca1c3",
+      "durationSeconds": 4.24,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.",
+      "sourceGenerationIds": [
+        "2lJvIZmMH2PRbOTaw0RI"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Wahrhaftigkeit ist mehr als ein einzelnes richtiges Wort: Sie ist eine Haltung, die wir im Alltag immer wieder üben.": {
+      "url": "/kids/assets/kids-academy-audio/e4499deeedf76ca2c30e.m4a",
+      "sha256": "48b3c1bd75ca663e7053ff0622805738e948a591dc1f11b0956b31a1a371216d",
+      "durationSeconds": 7.12,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Wahrhaftigkeit ist mehr als ein einzelnes richtiges Wort: Sie ist eine Haltung, die wir im Alltag immer wieder üben.",
+      "sourceGenerationIds": [
+        "rsYvXSJce9hGMUN5X7kT"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.": {
+      "url": "/kids/assets/kids-academy-audio/99dd0644cee6d0269c79.m4a",
+      "sha256": "b125ec05cd0628878f9d2cd6abb327c7233903015b3c2072d711bf43a6c0e414",
+      "durationSeconds": 5.6,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.",
+      "sourceGenerationIds": [
+        "1ZUzEhjy0ZAmj1AhOR9Q"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.": {
+      "url": "/kids/assets/kids-academy-audio/91dd7658b85611061b26.m4a",
+      "sha256": "62c6f4997575263ca3a02347b99d2a768d48ec53f5e7869146c33fbf347be77a",
+      "durationSeconds": 3.92,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.",
+      "sourceGenerationIds": [
+        "ZaHiHIT4VL19ET8pczIK"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Wer die Wahrheit sagt, übernimmt Verantwortung und schafft die Grundlage, den Fehler wiedergutzumachen.": {
+      "url": "/kids/assets/kids-academy-audio/69b6d8db76081648eecd.m4a",
+      "sha256": "b2de0b45d55f740129d9de23012956aa0c7b45dc80a91d3c63da17d64865e1be",
+      "durationSeconds": 5.76,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Wer die Wahrheit sagt, übernimmt Verantwortung und schafft die Grundlage, den Fehler wiedergutzumachen.",
+      "sourceGenerationIds": [
+        "uwX7oHUCNSDVuXauCZ9l"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Du hast etwas kaputt gemacht. Was sagst du?": {
+      "url": "/kids/assets/kids-academy-audio/b32c48d6c8242019cff4.m4a",
+      "sha256": "af569b372a29710499835bb46edc2c886e7e7b5d34c949650fd4b823ee5235dc",
+      "durationSeconds": 2.8,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Du hast etwas kaputt gemacht. Was sagst du?",
+      "sourceGenerationIds": [
+        "gneKWjhlO0VouiCNGABD"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Du hast versehentlich ein Glas zerbrochen. Was ist eine ehrliche Antwort?": {
+      "url": "/kids/assets/kids-academy-audio/a062d8920ba7d6c8cf3b.m4a",
+      "sha256": "aa347d4f6f76ea7d906006274d16c6a788a05e9df73e08d0c7fd7ef8ffa68444",
+      "durationSeconds": 4.4,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Du hast versehentlich ein Glas zerbrochen. Was ist eine ehrliche Antwort?",
+      "sourceGenerationIds": [
+        "XnSgtGVBL4IpoVJ9KwEW"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Erkläre in eigenen Worten: Warum gehört Wahrhaftigkeit zu einem guten Charakter?": {
+      "url": "/kids/assets/kids-academy-audio/a77686a6872385a7ea8c.m4a",
+      "sha256": "ea4daea8bde500f20f515c395360bdcc969a2a298b3ebd64a33c4f8f5bf7ebb4",
+      "durationSeconds": 5.28,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Erkläre in eigenen Worten: Warum gehört Wahrhaftigkeit zu einem guten Charakter?",
+      "sourceGenerationIds": [
+        "OdAJVPZuz6oLnSRLxDES"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Was kannst du danach Gutes tun?": {
+      "url": "/kids/assets/kids-academy-audio/6e9a88514fe06babd2a6.m4a",
+      "sha256": "fedec090cb3dc43600471896547b87aa87266a154222bf40b8d2c7485cc7b34c",
+      "durationSeconds": 2.0,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Was kannst du danach Gutes tun?",
+      "sourceGenerationIds": [
+        "4a6so2lN3dVsB820ocr8"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Was kannst du tun, nachdem du einen Fehler ehrlich zugegeben hast?": {
+      "url": "/kids/assets/kids-academy-audio/19fd5206d496b62b2738.m4a",
+      "sha256": "c43e996ca14f973b6ca555b1e36d625dcada61db6da92d6c54214f0741b13ae1",
+      "durationSeconds": 4.16,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Was kannst du tun, nachdem du einen Fehler ehrlich zugegeben hast?",
+      "sourceGenerationIds": [
+        "nWmxAXrp7h709u8vMDi2"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Worin liegt der Unterschied zwischen einem versehentlichen Fehler und einer bewussten Lüge?": {
+      "url": "/kids/assets/kids-academy-audio/2709e851b9588fc3e9c8.m4a",
+      "sha256": "2e38be183450f2c651a8bc095f6ed0168c559e7be1eee7146808ec6f1a6bfc89",
+      "durationSeconds": 5.12,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Worin liegt der Unterschied zwischen einem versehentlichen Fehler und einer bewussten Lüge?",
+      "sourceGenerationIds": [
+        "PazcimqDN2EDgioW6Ogm"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Allah lehrt uns, mit den Wahrhaftigen zu sein.": {
+      "url": "/kids/assets/kids-academy-audio/209cb034c51d6d304c23.m4a",
+      "sha256": "566838985a3499be08bd8dccecbe98d77003805cb9c743009b663b4390bd70e1",
+      "durationSeconds": 2.96,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Allah lehrt uns, mit den Wahrhaftigen zu sein.",
+      "sourceGenerationIds": [
+        "LeFkvF2W3zspfN1hc4up"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Ich möchte ehrlich bleiben, Verantwortung übernehmen und einen Fehler nach Möglichkeit wiedergutmachen.": {
+      "url": "/kids/assets/kids-academy-audio/7536402374d9b8576ab1.m4a",
+      "sha256": "36b1825b3eafd4a12ae5f608cab63bc6062d9991e8090d68476bbac6c3917bb4",
+      "durationSeconds": 5.76,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Ich möchte ehrlich bleiben, Verantwortung übernehmen und einen Fehler nach Möglichkeit wiedergutmachen.",
+      "sourceGenerationIds": [
+        "hPSnBLDySJjIDyNqNwlA"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Wahrhaftigkeit bedeutet, ehrlich zu sprechen.": {
+      "url": "/kids/assets/kids-academy-audio/42ba1801d7435024d44b.m4a",
+      "sha256": "e99fd131668a45234f1d3371584e942db8f049d1bb35f49894e4d4a261bd4e85",
+      "durationSeconds": 3.04,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Wahrhaftigkeit bedeutet, ehrlich zu sprechen.",
+      "sourceGenerationIds": [
+        "pAP5xNB8nCDvhxtHyOb7"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Wahrhaftigkeit bedeutet: Ich sage die Wahrheit.": {
+      "url": "/kids/assets/kids-academy-audio/5a09bf3b6250815328b7.m4a",
+      "sha256": "0d99c973b4320b675837404bd3bdd7f8a186198553c4eb6f66354ef340759812",
+      "durationSeconds": 3.36,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Wahrhaftigkeit bedeutet: Ich sage die Wahrheit.",
+      "sourceGenerationIds": [
+        "nAWHxOBZ81u8MAq629x4"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Wenn mir ein Fehler passiert, sage ich die Wahrheit und versuche, ihn wiedergutzumachen.": {
+      "url": "/kids/assets/kids-academy-audio/2f91e3b4aeec96cd8e17.m4a",
+      "sha256": "a4f878915cfea6a42de5861c42e3c4fa36e86c223b0a52f2da0170c271d7f1f8",
+      "durationSeconds": 4.8,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Wenn mir ein Fehler passiert, sage ich die Wahrheit und versuche, ihn wiedergutzumachen.",
+      "sourceGenerationIds": [
+        "eZH7a2UIWDqtwManfPeJ"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Wenn mir ein Fehler passiert, sage ich ehrlich, was geschehen ist.": {
+      "url": "/kids/assets/kids-academy-audio/ff1c64ec866d1877ec5f.m4a",
+      "sha256": "24c11577d4e39846f2c0ab71f4a6556cf8c06ab5c75e629594d6012dd7599bf8",
+      "durationSeconds": 3.76,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Wenn mir ein Fehler passiert, sage ich ehrlich, was geschehen ist.",
+      "sourceGenerationIds": [
+        "29S8siaeub5pigYrxapS"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Antwort 1: Ich entschuldige mich und helfe.": {
+      "url": "/kids/assets/kids-academy-audio/a60c0c5f436ec73e0c38.m4a",
+      "sha256": "7653a7cf881383486b607b69b20411dd3cf67a3eef8d369e729065ac5e38bc3b",
+      "durationSeconds": 3.36,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Antwort 1: Ich entschuldige mich und helfe.",
+      "sourceGenerationIds": [
+        "Fbep6jXTeTGjaNxC6tJh"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Antwort 1: Ich sage ehrlich: Ich war das.": {
+      "url": "/kids/assets/kids-academy-audio/f7621c51f8ce2cf62979.m4a",
+      "sha256": "e8848741680c39ab0f17f9840b0a650540ec429f8a9ec8d8f0cec5b6225bd4a8",
+      "durationSeconds": 3.68,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Antwort 1: Ich sage ehrlich: Ich war das.",
+      "sourceGenerationIds": [
+        "i67onXzdafMppvxdPJaS"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Antwort 1: Ich war das. Es tut mir leid.": {
+      "url": "/kids/assets/kids-academy-audio/7307c1c3f777a7cf9946.m4a",
+      "sha256": "77754833b3f7432e81e9b86f4aa38ea3c3cc9992bfb77c0af08dab1db0f0d2df",
+      "durationSeconds": 3.6,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Antwort 1: Ich war das. Es tut mir leid.",
+      "sourceGenerationIds": [
+        "fE4f9Vn5467ug4y5JXVC"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Antwort 1: Wahrhaftigkeit führt zur Rechtschaffenheit.": {
+      "url": "/kids/assets/kids-academy-audio/1bcbe6b237a55c8f9387.m4a",
+      "sha256": "af0f228866a3da23d86136289d225483b81d88f27c93a68cee87e8fda796eb0e",
+      "durationSeconds": 4.08,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Antwort 1: Wahrhaftigkeit führt zur Rechtschaffenheit.",
+      "sourceGenerationIds": [
+        "C7FGVNBRZPsl0oDRmcXm"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Antwort 1: Wir sollen mit den Wahrhaftigen sein.": {
+      "url": "/kids/assets/kids-academy-audio/c2b89137e53c89c9202b.m4a",
+      "sha256": "a8ef68c5ada43ef7d821c734ce46793075d1ce209e2e36e1131e30fb47d2de6d",
+      "durationSeconds": 3.44,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Antwort 1: Wir sollen mit den Wahrhaftigen sein.",
+      "sourceGenerationIds": [
+        "W4Htkr4hDSdOCPZ7hpF9"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Antwort 2: Das war bestimmt jemand anders.": {
+      "url": "/kids/assets/kids-academy-audio/b302a586441b1e32543b.m4a",
+      "sha256": "382296034dfae43419e5bcfebbe8de7e2ee58e16258bc673194b17b753163fb8",
+      "durationSeconds": 3.28,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Antwort 2: Das war bestimmt jemand anders.",
+      "sourceGenerationIds": [
+        "eokpcZSi128D0hBfH7e5"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Antwort 2: Ich sage: Jemand anders war es.": {
+      "url": "/kids/assets/kids-academy-audio/79f97fd8293c4d9ed393.m4a",
+      "sha256": "e8c8a1684606fab93abc2d7c9b859b09e690e73bbd1649c78d0d58e3db42316d",
+      "durationSeconds": 3.84,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Antwort 2: Ich sage: Jemand anders war es.",
+      "sourceGenerationIds": [
+        "5erHVedzAlJ2v1VA5PMY"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Antwort 2: Ich verstecke den Fehler.": {
+      "url": "/kids/assets/kids-academy-audio/1b831511795d5946cb10.m4a",
+      "sha256": "8aaf457b8d5bab2a4dec79b1be4ee110293643c9776511a5ee84887fb32a0449",
+      "durationSeconds": 2.88,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Antwort 2: Ich verstecke den Fehler.",
+      "sourceGenerationIds": [
+        "KHuq1NOAA17Olwl70CQL"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Antwort 2: Wahrheit spielt beim guten Charakter keine Rolle.": {
+      "url": "/kids/assets/kids-academy-audio/e56ca7290b11417dcf34.m4a",
+      "sha256": "b3ef41fc9dcfa3af5d29d978b696a1767031039ee00b2aaedbe9a541738f6961",
+      "durationSeconds": 4.16,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Antwort 2: Wahrheit spielt beim guten Charakter keine Rolle.",
+      "sourceGenerationIds": [
+        "in52C7BDRq8BKHo13MGl"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Antwort 2: Wir dürfen lügen, wenn wir Angst haben.": {
+      "url": "/kids/assets/kids-academy-audio/f8bb25712de18aab55df.m4a",
+      "sha256": "c5d436c15d0333dd0dff684782932662d1d7445f5e42a92a037c8b23eaa02b48",
+      "durationSeconds": 3.68,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Antwort 2: Wir dürfen lügen, wenn wir Angst haben.",
+      "sourceGenerationIds": [
+        "FW2nMX6ga1TseZBQinkx"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Antwort 3: Eine Lüge ist immer die leichtere und richtige Lösung.": {
+      "url": "/kids/assets/kids-academy-audio/8c51681865fcd73f7831.m4a",
+      "sha256": "4608eb1d7a656518c6512b9d222f4131ae6caa8a72a4c02df81515417ed956f2",
+      "durationSeconds": 4.96,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Antwort 3: Eine Lüge ist immer die leichtere und richtige Lösung.",
+      "sourceGenerationIds": [
+        "Rvff2L6azwZkoOlDGuNw"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Antwort 3: Ich tue so, als hätte ich nichts gesehen.": {
+      "url": "/kids/assets/kids-academy-audio/8be169ac1937c1f910b3.m4a",
+      "sha256": "8a18c7f27560db173935b231f6cd220521003cbf3170b344c9270d8aabb53bcb",
+      "durationSeconds": 3.92,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Antwort 3: Ich tue so, als hätte ich nichts gesehen.",
+      "sourceGenerationIds": [
+        "8l6hNiyc3cx7hsaDudDZ"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Antwort 3: Man soll eigene Fehler immer verstecken.": {
+      "url": "/kids/assets/kids-academy-audio/b4292de8b331de6b8119.m4a",
+      "sha256": "790510515e6262301eb64d4a4ef2fb5308f0d06f187b91e6afc550ee311ddcf0",
+      "durationSeconds": 3.84,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Antwort 3: Man soll eigene Fehler immer verstecken.",
+      "sourceGenerationIds": [
+        "SsB4jbZhCf331kzNKYqe"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Liebe Schwester.": {
+      "url": "/kids/assets/kids-academy-audio/8cf2ad0152450fc9c60e.m4a",
+      "sha256": "d0c946e100b90a0fe3f3b4760caff63f8ec7d5a954b6bef1a0db5ca4b874a891",
+      "durationSeconds": 1.28,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Liebe Schwester.",
+      "sourceGenerationIds": [
+        "BybAJiD94wRbUsp1knyF"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Lieber Bruder.": {
+      "url": "/kids/assets/kids-academy-audio/a798ec970b134dccaf57.m4a",
+      "sha256": "da1184f97dfda3f9d63391100fa482ffc75c3759de33d89330c5d0b8eb198589",
+      "durationSeconds": 1.04,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-german",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Lieber Bruder.",
+      "sourceGenerationIds": [
+        "98zchMA05R6gpRmozNrM"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.": {
+      "url": "/kids/assets/kids-academy-audio/91dc07c318efb09ba21a.m4a",
+      "sha256": "9932942b89f5c62f8a2dae79a00650ed149e6f17a4e8d137ef086873577ba76b",
+      "durationSeconds": 3.44,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-arabic-fusha",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ",
+      "sourceGenerationIds": [
+        "8MDOfXlceUb0r7nwR9qo"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": true,
+      "approvedForPlayback": true
+    },
+    "Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.": {
+      "url": "/kids/assets/kids-academy-audio/92dac60a78474e29dc06.m4a",
+      "sha256": "e03a5081aed51680e325d3cc1240e48d877b228d0d04b67e9bbade238bb069e7",
+      "durationSeconds": 13.92,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-bilingual-assembled",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.",
+      "sourceGenerationIds": [
+        "H5M3fHHGxdQigJnEmTUv",
+        "GBmSBMXAo9AwPA58e87w",
+        "CgT2UQt3XkcMjYh6Qo5p"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": true,
+      "approvedForPlayback": true
+    },
+    "Allah fordert die Gläubigen in Sūrat at-Tawbah 9:119 auf, mit den Wahrhaftigen zu sein. In Ṣaḥīḥ Muslim 2607a beschreibt der Prophet ﷺ Wahrhaftigkeit als einen Weg zur Rechtschaffenheit. Daraus lernen wir, beim Sprechen und Handeln aufrichtig zu bleiben.": {
+      "url": "/kids/assets/kids-academy-audio/6b7c86e78efdbffbbe4e.m4a",
+      "sha256": "7bfe6e24826e20ef39746916923d6c57cb832c3042aeb0afe3434a4f13bd41cc",
+      "durationSeconds": 19.12,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-bilingual-assembled",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Allah fordert die Gläubigen in Sūrat at-Tawbah 9:119 auf, mit den Wahrhaftigen zu sein. In Ṣaḥīḥ Muslim 2607a beschreibt der Prophet ﷺ Wahrhaftigkeit als einen Weg zur Rechtschaffenheit. Daraus lernen wir, beim Sprechen und Handeln aufrichtig zu bleiben.",
+      "sourceGenerationIds": [
+        "vu0YK90vLaEyV6Betoa0",
+        "V4M3hjNdKpGGrjDmpMqC",
+        "00xzeooejRyOgfIgcCq9",
+        "MXSbvopJb5ePfd7IAS7x",
+        "luwn39GDhOnWS41bTVts",
+        "GBmSBMXAo9AwPA58e87w",
+        "VaW31eQYMc7JJ73i638Y"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": true,
+      "approvedForPlayback": true
+    },
+    "Allah sagt uns im Qurʾān, dass wir mit den Wahrhaftigen sein sollen. Der Prophet ﷺ erklärte, wie gut Wahrhaftigkeit ist. Deshalb sagen wir die Wahrheit, auch wenn wir einen Fehler machen.": {
+      "url": "/kids/assets/kids-academy-audio/e883487551edc3bcfebb.m4a",
+      "sha256": "6053da5543bb602d8377357319121bc7b4ea4238a8140468ca9ae90b90fb383e",
+      "durationSeconds": 14.72,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-bilingual-assembled",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Allah sagt uns im Qurʾān, dass wir mit den Wahrhaftigen sein sollen. Der Prophet ﷺ erklärte, wie gut Wahrhaftigkeit ist. Deshalb sagen wir die Wahrheit, auch wenn wir einen Fehler machen.",
+      "sourceGenerationIds": [
+        "sM9CdPS9Ip6EBdzHVk5N",
+        "l02kVlBBtmna8pvh0Swa",
+        "0NYZemiai3UgJauOi4gL",
+        "GBmSBMXAo9AwPA58e87w",
+        "XuzkyJdScfGjfDsT6XkI"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": true,
+      "approvedForPlayback": true
+    },
+    "Heute beschäftigen wir uns mit Ṣidq: Warum ist die Wahrheit wichtig, und wie handeln wir nach einem Fehler? Wir lernen anhand von Qurʾān und Sunnah und erklären das Thema mit eigenen Worten.": {
+      "url": "/kids/assets/kids-academy-audio/105f6c1fd77aaf2ae15e.m4a",
+      "sha256": "343c662833ba88734ec6810fc4e7246793b40f9156888465108915c77d07ae48",
+      "durationSeconds": 14.64,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-bilingual-assembled",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Heute beschäftigen wir uns mit Ṣidq: Warum ist die Wahrheit wichtig, und wie handeln wir nach einem Fehler? Wir lernen anhand von Qurʾān und Sunnah und erklären das Thema mit eigenen Worten.",
+      "sourceGenerationIds": [
+        "kQe4ZG9Xtpew03d3UiGz",
+        "itInhmjkIskuhOnYTcaw",
+        "ckmKRNnKfFNVNFON5kd7",
+        "l02kVlBBtmna8pvh0Swa",
+        "sieS2qg7xowvFRpr287V",
+        "EesQKvLeByHuBv6kBkfK",
+        "ddRdGgJX8jDL6Zh1BrjF"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": true,
+      "approvedForPlayback": true
+    },
+    "Was lehrt uns der Vers aus Sūrat at-Tawbah 9:119?": {
+      "url": "/kids/assets/kids-academy-audio/14b257173387bcb22601.m4a",
+      "sha256": "54d8c9279c1b96273045831609f2738d16b79914b3df32d943092f0d95cf9afc",
+      "durationSeconds": 3.12,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-bilingual-assembled",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Was lehrt uns der Vers aus Sūrat at-Tawbah 9:119?",
+      "sourceGenerationIds": [
+        "BPcyqwi1EKNq2Ha1FcWS",
+        "V4M3hjNdKpGGrjDmpMqC"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": true,
+      "approvedForPlayback": true
+    },
+    "Welche Aussage entspricht dem Ḥadīṯ über Wahrhaftigkeit?": {
+      "url": "/kids/assets/kids-academy-audio/f8fb3815c194351cd5e6.m4a",
+      "sha256": "3a5e746bc7822ca8d220182156de5d01151521488cf4d75a1897d08e82c773bb",
+      "durationSeconds": 4.64,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-bilingual-assembled",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Welche Aussage entspricht dem Ḥadīṯ über Wahrhaftigkeit?",
+      "sourceGenerationIds": [
+        "mGC4rwdeJctV5Jc8IHdi",
+        "H9dncZoiXhyWq5NRZEQ5",
+        "givRwCANLBfjHjCe9ZmD"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": true,
+      "approvedForPlayback": true
+    },
+    "Allah ruft uns dazu auf, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt.": {
+      "url": "/kids/assets/kids-academy-audio/674e446655ffb3157a9d.m4a",
+      "sha256": "928460ebb8192a5359b6751311d55fc9b5d062d1f7b79607f28c174989665327",
+      "durationSeconds": 10.48,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-bilingual-assembled",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Allah ruft uns dazu auf, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt.",
+      "sourceGenerationIds": [
+        "woKdzvSBINL94VGprNrw",
+        "GBmSBMXAo9AwPA58e87w",
+        "yWaGVU99GfWHlXUzt4LH"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": true,
+      "approvedForPlayback": true
+    },
+    "Qurʾān 9:119 und der Ḥadīṯ in Ṣaḥīḥ Muslim 2607a verdeutlichen die Bedeutung der Wahrhaftigkeit.": {
+      "url": "/kids/assets/kids-academy-audio/2865bc4d7104f87a3c9b.m4a",
+      "sha256": "3b571f1f5f17da4cd6dc9684d06554c45adb8ac569a6890780e67d7a48c4b705",
+      "durationSeconds": 8.08,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-bilingual-assembled",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Qurʾān 9:119 und der Ḥadīṯ in Ṣaḥīḥ Muslim 2607a verdeutlichen die Bedeutung der Wahrhaftigkeit.",
+      "sourceGenerationIds": [
+        "l02kVlBBtmna8pvh0Swa",
+        "iTZpaiI7ZnUjIQLMDqO7",
+        "H9dncZoiXhyWq5NRZEQ5",
+        "ruDyLAwGEL7P7dl9F3A8",
+        "MXSbvopJb5ePfd7IAS7x",
+        "rnBg6s5qcOFTtE2W2tie"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": true,
+      "approvedForPlayback": true
+    },
+    "Ṣidq bedeutet Wahrhaftigkeit. Sie zeigt sich auch dann, wenn Ehrlichkeit Mut kostet.": {
+      "url": "/kids/assets/kids-academy-audio/0c4c79081899a2941f42.m4a",
+      "sha256": "7a252de0602d06bbd06dfa40ac08d4bd9e917859ad00c5f9ba0d243bce7e0030",
+      "durationSeconds": 6.32,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "owner-V4-creative-bilingual-assembled",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Ṣidq bedeutet Wahrhaftigkeit. Sie zeigt sich auch dann, wenn Ehrlichkeit Mut kostet.",
+      "sourceGenerationIds": [
+        "itInhmjkIskuhOnYTcaw",
+        "Tyju6MpG3aFQ4HzoCY2Q"
+      ],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": {
+        "stability": 0.62,
+        "similarity": 0.88
+      },
+      "creativeV4SpeedStyleNotAvailable": true,
+      "arabicSegmentsNative": true,
+      "approvedForPlayback": true
+    },
+    "Schön, dass du da bist!": {
+      "url": "/kids/assets/kids-academy-audio/f142bc78e8bcea3d8518.m4a",
+      "sha256": "7056fdbee521d06e5fdcf984229899e29fd9cefb0c1293c25ef356b89b8fff9b",
+      "durationSeconds": 1.44,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "prior-V4-owner-pilot-reused-exact",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Schön, dass du da bist!",
+      "sourceGenerationIds": [],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": null,
+      "creativeV4SpeedStyleNotAvailable": null,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.": {
+      "url": "/kids/assets/kids-academy-audio/08d1f46461d954d5e471.m4a",
+      "sha256": "1185456d0e050ea90bb6da6c8640c623ef94c16be1d30c2ca6cfefa2c9d99f1d",
+      "durationSeconds": 6.88,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "prior-V4-owner-pilot-reused-exact",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.",
+      "sourceGenerationIds": [],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": null,
+      "creativeV4SpeedStyleNotAvailable": null,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
+    },
+    "Manchmal geht etwas aus Versehen kaputt.": {
+      "url": "/kids/assets/kids-academy-audio/1a6097339111c8ac475c.m4a",
+      "sha256": "d9ec87b49724c6e1a8939d3cf84e75eee1a04fbf5f91330429155e296fa487b2",
+      "durationSeconds": 2.64,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "voiceSettingsProfile": "kids_story",
+      "modelId": "eleven_v4",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceType": "prior-V4-owner-pilot-reused-exact",
+      "sourceLessonId": "sidq",
+      "sourceSubject": "akhlaq",
+      "spokenText": "Manchmal geht etwas aus Versehen kaputt.",
+      "sourceGenerationIds": [],
+      "qaStatus": "owner-authorized-automated-technical-audit",
+      "actualCreativeVoiceSettings": null,
+      "creativeV4SpeedStyleNotAvailable": null,
+      "arabicSegmentsNative": false,
+      "approvedForPlayback": true
     }
   }
 }

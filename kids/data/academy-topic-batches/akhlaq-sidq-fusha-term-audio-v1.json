@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_ACADEMY_SIDQ_FUSHA_TERM_GENERATIONS_V1",
+  "subject": "akhlaq",
+  "lessonId": "sidq",
+  "languageCode": "ar",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "modelId": "eleven_v4",
+  "voiceSettingsApplied": {
+    "stability": 0.62,
+    "similarity": 0.88
+  },
+  "pronunciationInput": "Arabic native script with diacritics",
+  "pronunciationDictionaryApplied": false,
+  "flowId": "zrB4zGdz9OTndLryQtIB",
+  "flowUrl": "https://elevenlabs.io/app/flows/zrB4zGdz9OTndLryQtIB",
+  "referenceSources": [
+    "https://quran.com/ar/9:119",
+    "https://dorar.net/hadith/sharh/10209"
+  ],
+  "completedCount": 9,
+  "importedCount": 0,
+  "entries": [
+    {
+      "key": "sidq",
+      "arabic": "صِدْقٌ",
+      "nodeId": "W5DT8jVvHz6HOL6LVQov",
+      "sessionId": "ZMrGv6PtyCgSiGqWydOt",
+      "generationId": "itInhmjkIskuhOnYTcaw",
+      "durationSeconds": 0.96,
+      "status": "completed",
+      "importStatus": "pending-original-binary"
+    },
+    {
+      "key": "quran",
+      "arabic": "الْقُرْآنُ",
+      "nodeId": "gsKNpwAP9G1GmBZC8Zqr",
+      "sessionId": "7Y5nIFRTcyKKfiNOQOzy",
+      "generationId": "l02kVlBBtmna8pvh0Swa",
+      "durationSeconds": 1.28,
+      "status": "completed",
+      "importStatus": "pending-original-binary"
+    },
+    {
+      "key": "sunnah",
+      "arabic": "السُّنَّةُ",
+      "nodeId": "6IozIKxb1RyyOxPTNdFd",
+      "sessionId": "9PwkjlwgwaXJqABWvD4o",
+      "generationId": "EesQKvLeByHuBv6kBkfK",
+      "durationSeconds": 1.12,
+      "status": "completed",
+      "importStatus": "pending-original-binary"
+    },
+    {
+      "key": "hadith",
+      "arabic": "حَدِيثٌ",
+      "nodeId": "V8cSBxZdZWnHtKerczk4",
+      "sessionId": "IatWEQ7iFbb5nIXXNEP3",
+      "generationId": "H9dncZoiXhyWq5NRZEQ5",
+      "durationSeconds": 0.96,
+      "status": "completed",
+      "importStatus": "pending-original-binary"
+    },
+    {
+      "key": "sahih",
+      "arabic": "صَحِيحٌ",
+      "nodeId": "O8B0t8yPE4tEtgDL5ror",
+      "sessionId": "4gG6jb4Cpimii7DLd6xf",
+      "generationId": "QFMjPFaiOQn22zcBA27T",
+      "durationSeconds": 0.96,
+      "status": "completed",
+      "importStatus": "pending-original-binary"
+    },
+    {
+      "key": "surat_tawbah",
+      "arabic": "سُورَةُ التَّوْبَةِ",
+      "nodeId": "32qGUaZ2ARuhi8EjEQuJ",
+      "sessionId": "l4K9XVLPZMuPr7m84mjV",
+      "generationId": "V4M3hjNdKpGGrjDmpMqC",
+      "durationSeconds": 1.28,
+      "status": "completed",
+      "importStatus": "pending-original-binary"
+    },
+    {
+      "key": "sahih_muslim",
+      "arabic": "صَحِيحُ مُسْلِمٍ",
+      "nodeId": "ZimyBBvIgNYRdqWww2bA",
+      "sessionId": "52F46N9JXeikZ9xDYnjH",
+      "generationId": "MXSbvopJb5ePfd7IAS7x",
+      "durationSeconds": 1.52,
+      "status": "completed",
+      "importStatus": "pending-original-binary"
+    },
+    {
+      "key": "prophet_salawat",
+      "arabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+      "nodeId": "LOCApG0YScG58i8JAKgj",
+      "sessionId": "AcHCBxediDPGV9hpV3Pk",
+      "generationId": "GBmSBMXAo9AwPA58e87w",
+      "durationSeconds": 2.16,
+      "status": "completed",
+      "importStatus": "pending-original-binary"
+    },
+    {
+      "key": "full_salam",
+      "arabic": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ",
+      "nodeId": "2LwvuqdxiMWa2K7DlUNs",
+      "sessionId": "hmVvDHE5mFAUZfNHFzFN",
+      "generationId": "8MDOfXlceUb0r7nwR9qo",
+      "durationSeconds": 3.44,
+      "status": "completed",
+      "importStatus": "pending-original-binary",
+      "canonicalVisibleText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh."
+    }
+  ],
+  "note": "Eight reusable religious Fuṣḥā terms plus fully voiced complete Salām. Arabic PLS not accessible via Creative; never claim it was applied."
+}

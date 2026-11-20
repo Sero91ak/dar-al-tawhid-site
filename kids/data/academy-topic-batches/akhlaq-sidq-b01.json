@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "kids-academy-akhlaq-sidq-b01-20261118",
+  "subject": "akhlaq",
+  "lessonId": "sidq",
+  "age": "4-5",
+  "profiles": [
+    "boy",
+    "girl"
+  ],
+  "type": "narration",
+  "sourcePlan": "kids/data/academy-sidq-voice-plan-v18.json",
+  "sourceLesson": "kids/akademie/index.html",
+  "masterVoice": {
+    "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+    "voiceProfileId": "serhat-owner-voice-2026",
+    "modelId": "eleven_v4",
+    "settingsProfile": "kids_story"
+  },
+  "languageCode": "de",
+  "useArabicGlobalDictionary": false,
+  "allowedSpeechOnly": "Verified German narrative lines without Arabic writing or unresolved Arabic loanwords. Review other words and greetings in separate ar/de segments.",
+  "policy": {
+    "stagingOnly": true,
+    "approvedForPlayback": false,
+    "publishOnGeneration": false,
+    "manualDispatch": true,
+    "maximumClips": 4,
+    "maximumPreparedCharacters": 350,
+    "neverRegenerateExactAsset": true
+  },
+  "phrases": [
+    "Danach kannst du um Entschuldigung bitten und beim Aufräumen helfen.",
+    "Die Wahrheit sagen – das ist ehrlich.",
+    "Du darfst ehrlich sagen: Das war ich.",
+    "Ehrlich sein ist gut. Das üben wir gemeinsam."
+  ],
+  "pendingNext": "Continue Ṣidq age 4-5, then 6-8, then 9-10; do not start the next Akhlāq theme before Ṣidq is fully recorded, verified, assigned and released.",
+  "sourceCheck": {
+    "quran": "9:119",
+    "hadith": "Sahih Muslim 2607",
+    "authenticReference": "https://dorar.net/hadith/sharh/10209"
+  },
+  "review": {
+    "requiresOriginalVoice": true,
+    "requiresArabicLoanwordAndHonorificSegmentation": true,
+    "requiresListening": true,
+    "requiresPerPhraseHash": true,
+    "requiresDevicePlaybackBeforePublicRelease": true
+  }
+}

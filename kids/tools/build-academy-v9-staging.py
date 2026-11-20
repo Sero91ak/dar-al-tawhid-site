@@ -11,6 +11,7 @@ import hashlib
 import json
 import os
 import pathlib
+import re
 import subprocess
 import tempfile
 import time
@@ -33,6 +34,49 @@ BACKEND="https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api"
 from voice_text import prepare_kids_voice_text
 
 
+_QURAN_CITATION = re.compile(
+    r"(?<![\w])(?:Qurʾān|Quran|Sūrat\s+[^\d,;()]{1,48}?)\s+"
+    r"\d{1,3}\s*:\s*\d{1,3}(?:\s*[–—-]\s*\d{1,3})?(?![\w])"
+)
+_HADITH_COLLECTION_CITATION = re.compile(
+    r"(\b(?:Ṣaḥīḥ\s+(?:Muslim|al-Buḫārī|al-Bukhārī)|Sahih\s+(?:Muslim|al-Bukhari))\s+)\d{1,8}[a-z]?\b",
+    re.IGNORECASE,
+)
+_LABELED_SOURCE_NUMBER = re.compile(r"\b(?:Nr\.?|Nummer)\s*\d{1,8}[a-z]?\b", re.IGNORECASE)
+
+
+def prepare_academy_spoken_text(visible_text: str) -> str:
+    """Keep citations in lesson data, but omit citation numbers from narration."""
+    value = _QURAN_CITATION.sub(lambda match: match.group(0).split(":", 1)[0].rsplit(" ", 1)[0], str(visible_text or ""))
+    value = _HADITH_COLLECTION_CITATION.sub(r"\1", value)
+    value = _LABELED_SOURCE_NUMBER.sub("", value)
+    value = re.sub(r"\s+([,;:!?])", r"\1", value)
+    value = re.sub(r"([,;:!?])(?=\S)", r"\1 ", value)
+    value = re.sub(r"\s{2,}", " ", value)
+    return value.strip()
+
+
+_ARABIC_SCRIPT_RE = re.compile(
+    r"[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]"
+)
+
+
+def prepare_academy_tts_text(visible_text: str) -> str:
+    """German-only narration: no global Arabic PLS rewrites inside German sentences.
+
+    Unknown Arabic pronunciation is a review blocker, not permission to alter the
+    displayed canonical text or silently substitute an Arabic script fragment.
+    """
+    spoken_text = prepare_academy_spoken_text(visible_text)
+    prepared = prepare_kids_voice_text(spoken_text, apply_pronunciation=False)
+    if _ARABIC_SCRIPT_RE.search(prepared):
+        raise RuntimeError(
+            "Academy DE language isolation: native Arabic script or honorific "
+            "ligature requires separate verified AR segment; no credits used"
+        )
+    return prepared
+
+
 def technical_duration(filepath:pathlib.Path)->float:
     return float(subprocess.check_output([
         "ffprobe","-v","error","-show_entries","format=duration",
@@ -40,9 +84,10 @@ def technical_duration(filepath:pathlib.Path)->float:
     ],text=True).strip())
 
 
-def generate_audio(text:str, target:pathlib.Path, secret:str)->float:
+def generate_audio(text:str, target:pathlib.Path, secret:str, *, include_voice_id:bool=False):
     """Use exactly the approved story-generation backend; do NOT call Flash directly."""
-    prepared=prepare_kids_voice_text(text)
+    spoken_text=prepare_academy_spoken_text(text)
+    prepared=prepare_academy_tts_text(text)
     payload=json.dumps({"text":text,"prepared":prepared,"profile":MASTER_PROFILE},ensure_ascii=False).encode("utf-8")
     req=urllib.request.Request(
         BACKEND+"/generate-with-timings",data=payload,method="POST",
@@ -68,6 +113,8 @@ def generate_audio(text:str, target:pathlib.Path, secret:str)->float:
     if not (0.8<=seconds<=65) or target.stat().st_size<1800:
         target.unlink(missing_ok=True)
         raise RuntimeError("Invalid media; clip rejected without publication")
+    if include_voice_id:
+        return seconds, str(answer.get("voiceId") or "")
     return seconds
 
 
@@ -168,7 +215,8 @@ def main():
     used_chars=0
     for row in pending:
         phrase=row["text"]
-        prepared=prepare_kids_voice_text(phrase)
+        spoken_text=prepare_academy_spoken_text(phrase)
+        prepared=prepare_academy_tts_text(phrase)
         if created>=args.limit or used_chars+len(prepared)>args.max_chars:
             break
         digest=hashlib.sha256(json.dumps({"text":prepared,"voice":VOICE_ID,"model":MODEL,"profile":MASTER_PROFILE,"settings":POLICY["production"]["voiceSettings"],"dictionaryVersion":POLICY["production"]["pronunciationDictionaryVersionId"]},sort_keys=True,ensure_ascii=False).encode()).hexdigest()
@@ -186,7 +234,8 @@ def main():
             "voiceProfileId":PROFILE,"voiceId":VOICE_ID,"voiceSettingsProfile":MASTER_PROFILE,
             "sourceVoice":"authorized-owner-voice",
             "sourceType":"owner-voice-generated","sourceSpeaker":"Serhat Abu Malik",
-            "modelId":MODEL,"qaStatus":"technical-passed-awaiting-human-review",
+            "modelId":MODEL,"spokenText":spoken_text,
+            "qaStatus":"technical-passed-awaiting-human-review",
             "approvedForPlayback":False,"sameAsApprovedKidsStoryProfile":True
         }
         created+=1

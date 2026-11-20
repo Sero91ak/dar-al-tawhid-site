@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "TAWHID_KIDS_ACADEMY_SEQUENTIAL_TOPIC_RELEASE_HISTORY_V1",
+  "policy": "No generation of next topic until preceding source-backed lesson fully published on Cloudflare with tested real audio media and both age/profile variant validation.",
+  "currentTopic": "sidq",
+  "topicReleaseOrder": [],
+  "totalExistingTopics": 66,
+  "futureEditorialTopicsNotYetApproved": 142,
+  "requiredReceiptFields": [
+    "lessonId",
+    "liveConfirmed",
+    "cloudflareLiveVerified",
+    "liveCommit",
+    "verifiedAt",
+    "allThreeAgeGroupsVerified",
+    "bothProfilesVerified"
+  ],
+  "notes": "This is a chronological audit ledger, not a scheduling tool. Empty means Ṣidq remains first and no new topic has passed production-live verification. Never insert false release receipts."
+}

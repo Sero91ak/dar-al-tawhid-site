@@ -97,10 +97,10 @@ assert.ok(!read(helperFile).includes("speechSynthesis")&&!read(helperFile).inclu
  "Vocabulary cannot invent an AI voice or spend credits");
 const {audit}=require("./audit-academy-voice-coverage-v18.js");
 const counts=audit();
-assert.equal(counts.catalogLessonCount,58,"Voice audit currently covers through V27, not the newer unrecorded V28/V29 lessons");
+assert.equal(counts.catalogLessonCount,66,"Voice audit must cover all 66 actual school lessons, including V28 and V29");
 assert.equal(counts.vocabularyTerms,33);
 assert.equal(counts.vocabularyVoicePhrases,99);
 assert.deepEqual(counts.uncoveredLessons,[]);
 assert.ok(counts.uniquePhrases>=730);
-assert.equal(counts.totals.approved,0,"No unapproved V4 clips magically promoted");
+assert.equal(counts.totals.approved,58,"The 58 real Ṣidq V4 media assets are now present, owner-authorized and hash-verified; no other topic may be marked recorded");
 console.log("KIDS V24 GLOSSARY PASS: 33 terms × 3 child-safe age explanations = 99 verified-voice requests, "+counts.catalogLessonCount+" audited lessons; 0 auto voice and 0 credits.");
