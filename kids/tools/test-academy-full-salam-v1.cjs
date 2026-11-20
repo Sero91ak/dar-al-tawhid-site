@@ -25,7 +25,8 @@ for(const id of ["overviewAddress","welcomeAddress"]){
  assert(html.includes('$("#'+id+'").textContent=greetingAddress();'),"Gender binding missing "+id);
 }
 assert(html.includes("const spokenSalam=ACADEMY_FULL_SALAM;"),"Voice narration must use full greeting");
-assert(html.includes('index===0?[spokenSalam,$("#welcomeAddress").textContent,$("#welcomeFollowup").textContent,'),"Spoken full greeting must precede profile salutation");
+assert(html.includes('index===0?[spokenSalam,spokenProfileAddress,$("#welcomeFollowup").textContent,'),"Spoken full greeting must precede a separately recorded verified salutation");
+assert(html.includes('const spokenProfileAddress=gender==="girl"?"Liebe Schwester.":"Lieber Bruder.";'),"Show each personalized child name without inventing a non-recorded TTS name phrase");
 assert(html.includes(".lesson-stage .stage-greeting-salam{")&&html.includes("white-space:normal!important"),"Full greeting should wrap, not truncate");
 const sample=html.match(/^const ACADEMY_FULL_SALAM=.*$/m)?.[0]||"";
 const address=html.match(/^const address=.*$/m)?.[0]||"";
