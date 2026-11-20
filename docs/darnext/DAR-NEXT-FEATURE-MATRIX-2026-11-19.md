@@ -150,3 +150,5 @@ Der eigenständige Arbeitsnachweis in PR #1824 wurde zugunsten dieses bestehende
 
 - PR #1825 erweitert den Beitrag → Themenquiz-UI-Test über das Öffnen des Filters hinaus: Der Brüderlichkeit-Kontext muss genau eine Frage enthalten, `quiz-445` („Welche Grundlage der Brüderlichkeit nennt Qurʾān 49:10?“), richtige Antwort und Quellenanzeige `Qurʾān 49:10` prüfen und anschließend zum Beitrag zurückkehren.
 - Der geprüfte JSON-Datensatz kennzeichnet `quiz-445` als `published`, `approved` und `sourceChecked=true`; die Parserprüfung der geänderten UI-Testdatei besteht. Der XCTest wurde mangels aktuellem Simulatorfenster und Speicher nicht ausgeführt; UI-Verhalten daher weiterhin unbestätigt.
+
+- Folgeschritt nach obigem Quiz-Kontexttest: Die Quizrunde in PR #1825 hat nun Accessibility-IDs für Zähler, Frage, Antwortoptionen, Ergebnisrückmeldung und Quellenzeile. Der UI-Test greift diese IDs ab, prüft `quiz-445` als Ein-Fragen-Runde und die Quellenanzeige. Parserprüfung der zwei geänderten Swift-Dateien: 2/2 bestanden; Xcode-/Laufzeitprüfung offen.
