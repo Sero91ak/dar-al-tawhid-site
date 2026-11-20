@@ -93,3 +93,10 @@ Der eigenständige Arbeitsnachweis in PR #1824 wurde zugunsten dieses bestehende
 - Aktueller Laufzeitstand: iPhone 18 Pro Max / iOS 27.2 ist gebootet; com.daraltawhid.darnext.DARNext läuft in SpringBoard (PID 71222). Der simctl-Screenshot /tmp/darnext-iphone18pm-current.png wurde am 20.11.2026 aufgenommen und zeigt die App. Dieser Simulator-Build ist keinem GitHub-Commit zugeordnet.
 - Sichtbares GUI-Fenster bleibt blockiert: Simulator.app fehlt sowohl unter Xcode.app/Contents/Developer/Applications als auch Xcode.app/Contents/Applications; xcodebuild -runFirstLaunch -checkForNewerComponents meldet „No new updates for 27B52“. In dieser Installation ist kein Simulator-GUI-Zusatz verfügbar. Keine Xcode-/Simulator-Daten wurden entfernt.
 - Der vollständige Kartenfluss, Scroll-Framequalität sowie die weiteren Punkte des Gesamtauftrags #1789 bleiben offen und un-abgenommen.
+
+
+## Nachtrag PR #1825, 20.11.2026
+
+- Die quizbezogene Beitragskarte stellt Titel/Zähler nun als SwiftUI-`Text`-Literale mit Interpolation bereit, damit sie in einen späteren String-Catalog-Lokalisierungslauf aufgenommen werden können; es wurden keine Übersetzungen behauptet oder hinzugefügt.
+- Die Karte fasst ihre sichtbaren Texte für assistive Bedienung zusammen und blendet dekorative Symbole aus.
+- Alle fünf geänderten Swift-Dateien auf PR-Head `codex/darnext-post-quiz-context-20261120` wurden am 20.11.2026 mit `swiftc -frontend -parse` geprüft: 5/5 Parserläufe erfolgreich. Build, Unit- und UI-Tests bleiben offen; GitHub-PR #1825 bleibt Draft.
