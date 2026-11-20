@@ -162,3 +162,5 @@ Der eigenständige Arbeitsnachweis in PR #1824 wurde zugunsten dieses bestehende
 - Das Verknüpfen des PR-Artefakts mit diesem Codex-Chat schlug fehl, weil die lokale Chat-Datenbank ebenfalls `database or disk is full` meldete. Der GitHub-PR bleibt erreichbar.
 
 - Folgeschritt in Draft-PR #1829: Assistant-Fundstellen sind jetzt lokal klickbare Detailnavigationen für Qurʾān-Suren/-Verse, Beiträge, Duʿāʾs und Bibliothekswerke; bestehende Detailansichten werden geteilt. Der Suchindex-Abgleich deckte beide Qurʾān-ID-Formen (`quran-surah-N`, `quran-N-M`) auf; parser-/Unit-Testquellen sind aktualisiert. Parser 5/5 bestanden, Builds/Tests/Routenlaufzeit fehlen; die Assistenz bleibt nicht in der öffentlichen Navigation aktiviert.
+
+- Weiterer Schritt in Draft-PR #1829: Chat zeigt Nutzerfragen sofort, hält einen Suchfortschritt sichtbar, scrollt bei Nachrichten/Lade-/Fehlerzuständen zum Ende und beachtet Reduce Motion. Fokus wird zum Eingabefeld zurückgeführt. Fünf geänderte Swift-Dateien bestehen den Parser; die visuelle Tastatur-/Scrollabnahme sowie Xcode-Tests sind offen.
