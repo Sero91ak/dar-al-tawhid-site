@@ -3827,7 +3827,8 @@
     if(root&&isTestAppPath()&&!root.dataset.v108Mode){root.dataset.v108Mode=state.layers.taf?"taf":state.layers.tad?"tad":state.layers.lat?"learn":"listen";}
 
     if (!root) return;
-    if (!fullUiWanted) {
+    if (!fullUiWanted || !isFullPlayerRoute()) {
+      // A retained audio session must not display the full player above Qurʾān reading/learning.
       hideFullPlayerUi();
       return;
     }
@@ -4780,6 +4781,10 @@
   function onLearnLaunchTap(ev) {
     var learnBar = ev.target && ev.target.closest ? ev.target.closest(".qov-learn-launch, [data-dqp-learn-resume], [data-qov-learn-launch], #qovLearnLaunchBtn") : null;
     if (!learnBar) return false;
+    // The Qurʾān overview owns this launcher when Learn Studio is available.
+    // Do not route to the full player on pointerup while the overview opens the studio.
+    if (learnBar.closest && learnBar.closest(".qov-learn-launch, [data-qov-learn-launch], #qovLearnLaunchBtn")
+        && window.DARQuranLearnStudio && typeof window.DARQuranLearnStudio.open === "function") return false;
     ev.preventDefault();
     ev.stopPropagation();
     var now = Date.now();
@@ -4806,12 +4811,6 @@
   }, true);
   document.addEventListener("pointerup", function (ev) {
     onLearnLaunchTap(ev);
-  }, true);
-  document.addEventListener("click", function (ev) {
-    var btn = ev.target && ev.target.closest ? ev.target.closest("[data-dqp-learn-resume]") : null;
-    if (!btn) return;
-    ev.preventDefault();
-    restoreLearning({ play: false, from: "continue-card" });
   }, true);
   document.addEventListener("click", function (ev) {
     var playBtn = ev.target && ev.target.closest ? ev.target.closest("[data-qrc-ayah-play]") : null;
