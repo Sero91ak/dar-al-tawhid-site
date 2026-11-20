@@ -1,26 +1,33 @@
 import Foundation
 
-enum DARNextDeepLinkDestination {
+enum DARNextDeepLinkDestination: Equatable {
     case home
+    case quiz
     case quran
+    case posts
     case more
 
     static func from(_ url: URL) -> Self {
-        if url.fragment?.localizedCaseInsensitiveContains("quran") == true ||
-            url.host?.localizedCaseInsensitiveContains("quran") == true {
+        let route = [url.host, url.path, url.fragment]
+            .compactMap { $0 }
+            .joined(separator: "/")
+            .removingPercentEncoding ?? ""
+
+        if route.localizedCaseInsensitiveContains("quran") {
             return .quran
         }
 
-        if url.fragment?.localizedCaseInsensitiveContains("home") == true ||
-            url.host?.localizedCaseInsensitiveContains("home") == true {
-            return .home
+        if route.localizedCaseInsensitiveContains("quiz") {
+            return .quiz
         }
 
-        if url.fragment?.localizedCaseInsensitiveContains("prayer") == true ||
-            url.fragment?.localizedCaseInsensitiveContains("dua") == true ||
-            url.fragment?.localizedCaseInsensitiveContains("qibla") == true ||
-            url.fragment?.localizedCaseInsensitiveContains("calendar") == true ||
-            url.host?.localizedCaseInsensitiveContains("more") == true {
+        if ["posts", "post", "feed", "recent", "beitraege", "beiträge"]
+            .contains(where: route.localizedCaseInsensitiveContains) {
+            return .posts
+        }
+
+        if ["prayer", "dua", "qibla", "calendar", "more"]
+            .contains(where: route.localizedCaseInsensitiveContains) {
             return .more
         }
 
