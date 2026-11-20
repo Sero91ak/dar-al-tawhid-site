@@ -44,6 +44,15 @@ struct QuranAudioInterruptionState: Equatable, Sendable {
     }
 }
 
+enum QuranAudioNowPlayingOwnership {
+    static let ownerKey = "com.daraltawhid.darnext.quran-audio-owner"
+    static let globalPlayer = "global-quran-player"
+
+    static func belongsToGlobalPlayer(_ info: [String: Any]) -> Bool {
+        info[ownerKey] as? String == globalPlayer
+    }
+}
+
 @MainActor
 @Observable
 final class QuranAudioEngine {
@@ -141,7 +150,6 @@ final class QuranAudioEngine {
         player = AVPlayer(playerItem: item)
         player?.automaticallyWaitsToMinimizeStalling = true
         addObservers(for: item)
-        configureNowPlaying()
     }
 
     func play() {
@@ -152,6 +160,7 @@ final class QuranAudioEngine {
 
         do {
             try configureAudioSession()
+            configureNowPlaying()
             player.playImmediately(atRate: Float(playbackRate))
             isPlaying = true
             updateNowPlaying()
@@ -169,11 +178,24 @@ final class QuranAudioEngine {
 
     func stop() {
         interruptionState.cancelResume()
+        sleepTask?.cancel()
+        sleepTask = nil
+        removeObservers()
         player?.pause()
-        player?.seek(to: .zero)
+        player?.replaceCurrentItem(with: nil)
+        player = nil
+        currentTrack = nil
+        playlist = []
+        playlistIndex = 0
         currentTime = 0
+        duration = 0
         isPlaying = false
-        updateNowPlaying()
+        lastError = nil
+        let nowPlayingCenter = MPNowPlayingInfoCenter.default()
+        if let info = nowPlayingCenter.nowPlayingInfo,
+           QuranAudioNowPlayingOwnership.belongsToGlobalPlayer(info) {
+            nowPlayingCenter.nowPlayingInfo = nil
+        }
     }
 
     func seek(to time: TimeInterval) {
@@ -245,7 +267,7 @@ final class QuranAudioEngine {
             queue: .main
         ) { [weak self] time in
             Task { @MainActor in
-                guard let self else { return }
+                guard let self, self.player?.currentItem === item else { return }
                 self.currentTime = time.seconds.isFinite ? max(0, time.seconds) : 0
                 self.duration = item.duration.seconds.isFinite ? max(0, item.duration.seconds) : 0
                 self.updateNowPlaying()
@@ -257,7 +279,10 @@ final class QuranAudioEngine {
             object: item,
             queue: .main
         ) { [weak self] _ in
-            Task { @MainActor in self?.handlePlaybackEnded() }
+            Task { @MainActor in
+                guard let self, self.player?.currentItem === item else { return }
+                self.handlePlaybackEnded()
+            }
         }
     }
 
@@ -309,12 +334,14 @@ final class QuranAudioEngine {
             MPMediaItemPropertyTitle: track.surahTitle,
             MPMediaItemPropertyArtist: track.reciterName,
             MPMediaItemPropertyAlbumTitle: "DĀR NEXT Qurʾān",
-            MPMediaItemPropertyPlaybackDuration: duration
+            MPMediaItemPropertyPlaybackDuration: duration,
+            QuranAudioNowPlayingOwnership.ownerKey: QuranAudioNowPlayingOwnership.globalPlayer
         ]
     }
 
     private func updateNowPlaying() {
-        guard var info = MPNowPlayingInfoCenter.default().nowPlayingInfo else { return }
+        guard var info = MPNowPlayingInfoCenter.default().nowPlayingInfo,
+              QuranAudioNowPlayingOwnership.belongsToGlobalPlayer(info) else { return }
         info[MPNowPlayingInfoPropertyElapsedPlaybackTime] = currentTime
         info[MPNowPlayingInfoPropertyPlaybackRate] = isPlaying ? playbackRate : 0
         info[MPMediaItemPropertyPlaybackDuration] = duration

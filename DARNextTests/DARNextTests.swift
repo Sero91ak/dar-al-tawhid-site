@@ -1,3 +1,4 @@
+import Foundation
 import Testing
 @testable import DARNext
 
@@ -26,6 +27,52 @@ struct DARNextTests {
         #expect(QuranAudioInterruptionPolicy.shouldResume(wasPlaying: true, systemAllowsResume: true))
         #expect(!QuranAudioInterruptionPolicy.shouldResume(wasPlaying: false, systemAllowsResume: true))
         #expect(!QuranAudioInterruptionPolicy.shouldResume(wasPlaying: true, systemAllowsResume: false))
+    }
+
+    @Test
+    func pauseRetainsGlobalQuranPlayerStateButStopResetsIt() {
+        let engine = QuranAudioEngine()
+        let track = QuranAudioTrack(
+            id: "quran-1-1",
+            surahNumber: 1,
+            ayahNumber: 1,
+            surahTitle: "Al-Fātiḥah",
+            reciterName: "Test",
+            sourceURL: URL(fileURLWithPath: "/tmp/darnext-stop-test.mp3"),
+            isOfflineAvailable: false
+        )
+
+        engine.load(track)
+        engine.seek(to: 12)
+        engine.pause()
+
+        #expect(engine.currentTrack == track)
+        #expect(engine.playlist == [track])
+        #expect(engine.currentTime == 12)
+
+        engine.stop()
+
+        #expect(engine.currentTrack == nil)
+        #expect(engine.playlist.isEmpty)
+        #expect(engine.playlistIndex == 0)
+        #expect(engine.currentTime == 0)
+        #expect(engine.duration == 0)
+        #expect(!engine.isPlaying)
+    }
+
+    @Test
+    func globalQuranPlayerOnlyOwnsItsNowPlayingMetadata() {
+        let globalInfo: [String: Any] = [
+            QuranAudioNowPlayingOwnership.ownerKey: QuranAudioNowPlayingOwnership.globalPlayer
+        ]
+        let learningInfo: [String: Any] = [
+            QuranAudioNowPlayingOwnership.ownerKey: "learning-player"
+        ]
+        let unownedInfo: [String: Any] = ["title": "Other audio"]
+
+        #expect(QuranAudioNowPlayingOwnership.belongsToGlobalPlayer(globalInfo))
+        #expect(!QuranAudioNowPlayingOwnership.belongsToGlobalPlayer(learningInfo))
+        #expect(!QuranAudioNowPlayingOwnership.belongsToGlobalPlayer(unownedInfo))
     }
 
     @Test

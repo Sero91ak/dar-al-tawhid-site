@@ -79,6 +79,15 @@ struct QuranFullPlayer: View {
                 }
                 .buttonStyle(.plain)
 
+                Button {
+                    engine.stop()
+                    dismiss()
+                } label: {
+                    Label("Stopp", systemImage: "stop.fill")
+                }
+                .buttonStyle(.bordered)
+                .accessibilityIdentifier("quran-player-stop")
+
                 HStack {
                     if !engine.availableReciters.isEmpty {
                         Picker("Rezitator", selection: Binding(
