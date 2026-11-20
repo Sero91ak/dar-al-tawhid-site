@@ -178,8 +178,14 @@ struct DARNextTests {
 
     @Test
     func assistantQuranSourcesResolveBothSurahAndAyahIDs() {
-        #expect(AssistantQuranLocation(sourceID: "quran-surah-49") == AssistantQuranLocation(surah: 49, ayah: nil))
-        #expect(AssistantQuranLocation(sourceID: "quran-49-10") == AssistantQuranLocation(surah: 49, ayah: 10))
+        let surah = AssistantQuranLocation(sourceID: "quran-surah-49")
+        #expect(surah?.surah == 49)
+        #expect(surah?.ayah == nil)
+
+        let ayah = AssistantQuranLocation(sourceID: "quran-49-10")
+        #expect(ayah?.surah == 49)
+        #expect(ayah?.ayah == 10)
+
         #expect(AssistantQuranLocation(sourceID: "quran-invalid") == nil)
     }
 
