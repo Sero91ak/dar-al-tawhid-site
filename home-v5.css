@@ -2503,3 +2503,103 @@
     min-height: 36px !important;
   }
 }
+
+
+/* Final shared control system: one silhouette and footprint for navigation and settings. */
+#app .top .home-nav button,
+#app .top .time-box .topbtn {
+  width:clamp(68px,7.8vw,92px)!important;
+  min-width:clamp(68px,7.8vw,92px)!important;
+  height:48px!important;
+  min-height:48px!important;
+  max-height:48px!important;
+  box-sizing:border-box!important;
+  border:1px solid rgba(216,189,130,.72)!important;
+  border-radius:999px!important;
+  background:transparent!important;
+  padding:2px 4px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex:0 0 auto!important;
+}
+#app .top .home-nav button {
+  flex-direction:column!important;
+  gap:1px!important;
+  line-height:1!important;
+}
+#app .top .home-nav button img {
+  display:block!important;
+  width:24px!important;
+  height:24px!important;
+  flex:none!important;
+  object-fit:contain!important;
+  margin:0!important;
+}
+#app .top .home-nav button span {
+  display:block!important;
+  max-width:100%!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  font-size:clamp(9px,.72vw,11px)!important;
+  line-height:1!important;
+}
+#app .top .time-box .topbtn .icon {
+  width:23px!important;
+  height:23px!important;
+}
+#app .top .home-nav { gap:clamp(3px,.55vw,8px)!important; }
+
+@media (orientation:portrait) {
+  #app .top {
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) clamp(68px,21vw,92px)!important;
+    grid-template-rows:44px 48px!important;
+    align-items:center!important;
+    align-content:center!important;
+    column-gap:4px!important;
+    row-gap:3px!important;
+    min-height:98px!important;
+    height:98px!important;
+    position:relative!important;
+  }
+  #app .top .logo { grid-column:1!important;grid-row:1!important;min-width:0!important; }
+  #app .top .time-box {
+    grid-column:2!important;
+    grid-row:1!important;
+    justify-self:end!important;
+    min-width:0!important;
+    margin:0!important;
+  }
+  #app .top .top-spacer { display:none!important; }
+  #app .top .home-nav {
+    position:static!important;
+    inset:auto!important;
+    grid-column:1 / -1!important;
+    grid-row:2!important;
+    justify-self:center!important;
+    transform:none!important;
+    width:max-content!important;
+    max-width:100%!important;
+    margin:0!important;
+  }
+  #app .top .home-nav button,
+  #app .top .time-box .topbtn {
+    width:clamp(68px,19vw,92px)!important;
+    min-width:clamp(68px,19vw,92px)!important;
+  }
+  #app .screen { gap:clamp(6px,1.2vh,12px)!important; }
+}
+@media (max-height:200px) and (orientation:landscape) {
+  #app .top .home-nav button,
+  #app .top .time-box .topbtn {
+    width:clamp(60px,9vw,70px)!important;
+    min-width:clamp(60px,9vw,70px)!important;
+    height:42px!important;
+    min-height:42px!important;
+    max-height:42px!important;
+  }
+  #app .top .home-nav button img { width:19px!important;height:19px!important; }
+  #app .top .home-nav button span { font-size:8px!important; }
+}
