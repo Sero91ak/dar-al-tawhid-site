@@ -2152,3 +2152,122 @@
 @media(orientation:portrait){
   #app .home-wallpaper-fit,#saver .saver-wallpaper-fit,#app #adhanVisual .adhan-wallpaper-fit{max-width:100%;max-height:100%}
 }
+
+/* Landscape-first fitted home; portrait keeps the quiet wallpaper-free standard. */
+@media(orientation:portrait){
+  #app .home-wallpaper,#app .home-wallpaper-backdrop,#app .home-wallpaper-fit,
+  #app .artwork,#app .lightgrading,#app .edge,#app .corner{display:none!important}
+  #app{background:#07191b!important;background-image:none!important}
+}
+@media(orientation:landscape){
+  #app .home-wallpaper-backdrop{inset:-3%!important;filter:blur(23px) brightness(.58) saturate(.9)!important;opacity:.9!important}
+  #app .home-wallpaper-fit,#app #adhanVisual .h4-prayer-image{
+    width:auto!important;height:auto!important;max-width:100%!important;max-height:100%!important;
+    object-fit:contain!important;object-position:center!important;
+  }
+}
+#app .home-nav button{
+  min-width:0!important;width:auto!important;min-height:38px;padding:5px clamp(10px,1.2vw,16px)!important;
+  display:flex;align-items:center;gap:7px;border:1px solid rgba(216,189,130,.72)!important;
+  border-radius:999px!important;background:transparent!important;color:var(--text)!important;
+}
+#app .home-nav button:hover,#app .home-nav button:focus-visible,#app .home-nav button[aria-current="page"]{
+  background:transparent!important;border-color:var(--gold)!important;color:var(--cream)!important;
+}
+#app .topbtn{
+  border-radius:999px!important;background:transparent!important;border:1px solid var(--gold)!important;
+}
+@media(orientation:landscape){
+  #app .top{display:grid!important;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;align-items:center}
+  #app .logo{grid-column:1;justify-self:start;min-width:0}
+  #app .top .home-nav{
+    grid-column:2;position:relative!important;left:auto!important;top:auto!important;transform:none!important;
+    justify-self:center;width:max-content!important;max-width:100%!important;overflow:visible!important;
+    margin:0 auto;gap:clamp(4px,.8vw,12px)!important;
+  }
+  #app .top-spacer{display:none!important}
+  #app .time-box{grid-column:3;justify-self:end}
+}
+#app .nightstand-launch{
+  display:inline-flex;align-items:center;justify-content:center;min-height:24px;margin-top:4px;padding:2px 10px;
+  border:1px solid rgba(216,189,130,.78);border-radius:999px;background:transparent;color:var(--cream);
+  font:600 clamp(9px,.72vw,12px)/1.2 var(--ui);letter-spacing:.04em;
+}
+#app .nightstand-launch:hover,#app .nightstand-launch:focus-visible{background:transparent;border-color:var(--gold);outline-color:var(--gold)}
+#nightstandView[hidden]{display:none!important}
+#nightstandView{
+  position:absolute;inset:0;z-index:25;display:grid;place-items:center;overflow:hidden;
+  padding:clamp(14px,4vw,48px);background:#030708;color:#eee8d9;text-align:center;
+}
+.nightstand-shell{width:min(100%,760px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(5px,1.5vh,16px)}
+.nightstand-brand{color:#ae9360;font:600 clamp(10px,1vw,14px)/1.4 var(--ui);letter-spacing:.22em}
+.nightstand-time{color:#e9e2d2;font:400 clamp(68px,14vw,142px)/.98 var(--display);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.nightstand-date{color:#c2bba9;font:500 clamp(12px,1.35vw,18px)/1.4 var(--ui)}
+.nightstand-divider{width:min(220px,45vw);height:1px;background:rgba(195,166,111,.58);margin:clamp(4px,.8vh,9px) 0}
+.nightstand-caption{color:#a9956d;font:700 clamp(10px,.9vw,13px)/1.4 var(--ui);letter-spacing:.22em}
+.nightstand-prayer{color:#eee8d9;font:500 clamp(28px,5vw,50px)/1.1 var(--display)}
+.nightstand-prayer-row{display:flex;align-items:baseline;justify-content:center;gap:clamp(14px,4vw,36px);color:#d4c8ae;font:500 clamp(17px,2.4vw,27px)/1.3 var(--ui);font-variant-numeric:tabular-nums}
+.nightstand-exit{margin-top:clamp(10px,2vh,22px);min-height:38px;padding:5px 17px;border:1px solid rgba(195,166,111,.55);border-radius:999px;background:transparent;color:#e8dfca;font:600 12px var(--ui)}
+#app #adhanVisual{z-index:35!important}
+#app #adhanVisual .h4-prayer-image{object-fit:contain!important;object-position:center!important}
+@media(max-width:700px) and (max-height:440px) and (orientation:landscape){
+  #app .screen{
+    grid-template-rows:auto minmax(0,1fr) auto minmax(48px,auto) auto!important;
+    gap:3px!important;padding:6px 9px 5px!important;overflow:hidden!important;
+  }
+  #app header{grid-template-rows:auto auto auto auto!important;gap:2px!important}
+  #app .top{min-height:34px!important;gap:4px!important}
+  #app .logo{gap:5px!important}
+  #app .logo-mark{width:29px!important;height:29px!important}
+  #app .brand-title{font-size:clamp(12px,2.5vw,17px)!important;letter-spacing:.08em!important;white-space:nowrap}
+  #app .brand-mini,#app .site{display:none!important}
+  #app .top .home-nav{gap:3px!important}
+  #app .home-nav button{min-height:30px!important;padding:2px 7px!important;gap:4px!important;font-size:clamp(8px,1.4vw,10px)!important;white-space:nowrap}
+  #app .home-nav button img{width:15px!important;height:15px!important}
+  #app .topbtn{width:34px!important;height:30px!important;min-width:34px!important;min-height:30px!important}
+  #app .header-meta{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:2px 6px!important;margin:0!important;padding:3px 5px!important}
+  #app .header-meta>div{min-width:0!important}
+  #app .header-meta>div span{font-size:7px!important;letter-spacing:.07em!important}
+  #app .header-meta>div strong{font-size:9px!important;white-space:nowrap}
+  #app .header-meta .now{font-size:14px!important}
+  #app .nightstand-launch{min-height:17px!important;margin-top:1px!important;padding:1px 6px!important;font-size:8px!important}
+  #app .top-rule{margin-top:2px!important}
+  #app .hero{grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr)!important;grid-template-rows:minmax(0,1fr)!important;min-height:0!important;gap:8px!important}
+  #app .hero-left,#app .hero-right{min-width:0!important;min-height:0!important;padding:3px 5px!important}
+  #app .overline{font-size:8px!important;letter-spacing:.09em!important}
+  #app .next-name{font-size:clamp(27px,6vh,42px)!important;line-height:1!important;margin:2px 0!important}
+  #app .next-row{gap:7px!important;flex-wrap:wrap}
+  #app .main-time{font-size:clamp(22px,5vh,32px)!important}
+  #app .counter{font-size:clamp(10px,2.4vh,13px)!important}
+  #app .hero-right{border-left:1px solid var(--fine)!important;border-top:0!important;text-align:left!important;overflow:hidden!important}
+  #app .daily-story{max-height:100%!important;overflow:hidden!important;padding:1px 5px!important}
+  #app .daily-label{font-size:8px!important}
+  #app .daily-title{font-size:clamp(12px,2.8vh,16px)!important}
+  #app .daily-de{font-size:clamp(10px,2.5vh,14px)!important;line-height:1.25!important}
+  #app .source{font-size:8px!important}
+  #app .tadabbur-open{min-height:23px!important;padding:2px 7px!important;font-size:9px!important}
+  #app .times-band{padding:3px 0!important}
+  #app .band-head{margin:0 0 3px!important;font-size:8px!important}
+  #app .prayer-cell{min-height:33px!important;padding:2px 1px!important;gap:1px!important}
+  #app .prayer-cell .pname{font-size:8px!important}
+  #app .prayer-cell .ptime{font-size:clamp(15px,3.7vh,21px)!important}
+  #app .sunrise-line{font-size:8px!important;margin:2px 0 0!important}
+  #app .daily-area{grid-template-columns:minmax(0,1fr) minmax(0,.8fr)!important;min-height:48px!important;gap:5px!important}
+  #app .daily-area .audio-area{min-height:44px!important;padding:3px 7px!important;gap:3px!important}
+  #app .audio-title{font-size:14px!important}
+  #app .audio-kicker,#app .audio-sub,#app .audiosmall{display:none!important}
+  #app .audio-controls{gap:3px!important;margin:0!important}
+  #app .round{width:27px!important;height:27px!important}
+  #app .round.primary{width:30px!important;height:30px!important}
+  #app .foot{min-height:12px!important;padding-top:0!important}
+  #app .foot .status{display:none!important}
+  #app .settings-frame{padding:7px!important;gap:5px!important;grid-template-columns:minmax(90px,23%) minmax(0,1fr)!important;grid-template-rows:auto minmax(0,1fr) auto!important}
+  #app .settings-top{min-height:34px!important;padding-bottom:4px!important}
+  #app .settings-top h2{font-size:20px!important}
+  #app .settings-tabs{overflow:auto!important}
+  #app .settings-tabs button{min-height:28px!important;padding:4px 5px!important;font-size:10px!important}
+  #app .tabpage{overflow:auto!important;min-height:0!important}
+  #nightstandView{padding:8px}
+  .nightstand-shell{gap:4px}
+  .nightstand-time{font-size:clamp(56px,17vh,92px)}
+}
