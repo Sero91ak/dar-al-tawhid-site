@@ -97,7 +97,13 @@ const tests=[
  ["stop_audio_on_navigation",html.includes("function stopAll(){")&&html.includes('window.addEventListener("pagehide",stopAll)')],
  ["rotated_choices",html.includes("function academyDisplayChoices(q,index,lessonScope=\"\")")&&html.includes("choice=i;")],
   ["seed_uses_lesson_and_age",html.includes("academyDisplayChoices(q,qIndex,activeLessonId+\":\"+age)")],
-["reading_order_speech_sync",html.includes('"Antwort "+(visibleIndex+1)+": "+t')],
+["reading_order_speech_sync",html.includes('"Antwort "+(i+1)+": "+t')&&
+  read("kids/owner-voice.js").includes('player.onloadedmetadata=introCut>0?function()')&&
+  (()=>{const times=JSON.parse(read("kids/data/academy-topic-batches/akhlaq-sidq-answer-unnumbered-timings-v1.json"));
+    return times.entryCount===13&&times.entries.every(x=>
+     voice.entries[x.canonicalText]?.playbackStartSeconds===x.playbackStartSeconds&&
+     x.playbackStartSeconds>x.numberEndSeconds&&x.playbackStartSeconds<x.answerFirstWordStartSeconds);
+  })()],
  ["explanation_after_retry",!html.includes('"Das war noch nicht die gesuchte Antwort. "+q.explain')],
  ["legacy_unverified_progress_preserved",html.includes('unverifiedAnswerCount:Number(score.unverified)||0')&&html.includes('unverified:val(d.score.unverified)')],
  ["choice_only_without_microphone",!html.includes("getUserMedia")&&!html.includes("MediaRecorder")&&!html.includes('id="mic"')&&!html.includes('id="openVoice"')],
