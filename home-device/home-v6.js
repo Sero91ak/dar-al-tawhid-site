@@ -165,7 +165,12 @@
    if(line){const n=document.createElement('p');n.className='saver-narrator-line';n.textContent=line;$('saverNarrator')?.append(n)}
    say($('saverDe'),MARKDOWN(r.textMarkdown));
    say($('saverSource'),[r.source,r.grade].filter(Boolean).join(' · '));
-   if(r.sharhStatus==='verified'&&r.sharhText&&rotation.display.sharhMode==='compact'){const p=document.createElement('p');p.className='saver-sharh';p.textContent=MARKDOWN(r.sharhText);$('saverStatement')?.append(p)}
+   if(r.sharhStatus==='verified'&&r.sharhText&&rotation.display.sharhMode==='compact'){
+    const section=document.createElement('section');section.className='saver-explanation';
+    const label=document.createElement('h3');label.className='saver-explanation-label';label.textContent='Scharḥ · Erklärung';
+    const text=document.createElement('p');text.className='saver-explanation-text';text.textContent=MARKDOWN(r.sharhText);
+    section.append(label,text);$('saverStatement')?.append(section)
+   }
   }
  }
  async function nextCardCore(){
