@@ -85,3 +85,8 @@ The primary-tab PR removes the Assistant tab, but a source audit found two remai
 - Added [the whole-app roadmap](DAR-NEXT-ROADMAP-2026-11-20.md) and [the technology radar](TECH_RADAR.md) to PR #1812, alongside the updated feature matrix. PR #1812 is still Draft/open/mergeable; these are planning/review artifacts and do not close product or QA gates.
 - Latest disk check: about 100 MiB available; no Xcode/test process running. The previously approved cache deletion command was rejected by the automatic execution protection, and no deletion was attempted through an alternate method.
 - Next executable runtime gate remains current-head build/test for PR #1817, followed by the full current iPhone/iPad matrix and supported frame/hitch profiling when a writable test environment has sufficient capacity. No merge, release, or paid service.
+
+
+## Test-source update – 2026-11-20
+
+PR #1817 now waits for the relevant Dashboard quick-action and Hub worship sections before checking for assistant entry points. Its UI test also checks accessible button labels, reducing the risk that a missing/offscreen text query produces a false pass. The current remote XCTest source passes `xcrun swiftc -frontend -parse` when read from the PR branch. This is parser evidence only; Xcode target build and simulator execution remain unrun. PR #1817 remains Draft.
