@@ -61,3 +61,9 @@ A pairwise merge simulation found a concrete conflict risk in the four sibling D
 - GitHub currently reports each PR individually mergeable against the updated common base; that status does not prove the sibling PRs can be combined together without resolving their overlapping test edits.
 
 Required integration order: merge or stack one feature branch at a time, carry forward the earlier test additions, resolve the shared test file, then rerun the combined DARNext unit/build checks before advancing to the next PR. Do not merge #1813–#1816 in parallel. #1817 already depends on the five-tab branch #1816 and should follow it. This finding is about integration readiness; it does not authorize merging or release.
+
+### Resolution check — 2026-11-20
+
+The four existing policy-test methods were moved to distinct locations in their respective branches; their assertions and production-code changes were preserved. Current branch heads now pass Swift parser checks. Re-running the six pairwise `git merge-file --stdout -p` simulations against common test-file base `1b92df8dd69a4a0840f1cc0150c5fbb61105d068` produced no conflicts. A cumulative simulation of #1813 → #1814 → #1815 → #1816 also merged without conflict, retained all four policy tests, and the combined test file passed `swiftc -frontend -parse`.
+
+This is source-level merge and syntax evidence only. No Xcode build or XCTest run was performed for the updated branch heads. All four PRs remain Draft. PR #1817 still reports mergeable against #1816 after the parent branch update, but its build and simulator test remain outstanding.
