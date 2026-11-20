@@ -95,7 +95,7 @@ struct DashboardAssistantView: View {
                                     AssistantSourceDestinationView(repository: repository, source: source)
                                 } label: {
                                     HStack(alignment: .top, spacing: 10) {
-                                        Image(systemName: "checkmark.seal")
+                                        Image(systemName: "doc.text.magnifyingglass")
                                             .foregroundStyle(.tint)
                                         VStack(alignment: .leading, spacing: 4) {
                                             Text("\(source.kind.rawValue): \(source.title)")
