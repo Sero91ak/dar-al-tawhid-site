@@ -3989,7 +3989,7 @@ body[data-kids-portal="true"][data-profile="girl"] .academy-header.kids-detail-a
 <script src="/kids/akademie/curriculum-v27.js?v=20261012-27"></script>
 <script src="/kids/akademie/curriculum-v28.js?v=20261012-28"></script>
 <script src="/kids/akademie/curriculum-v29.js?v=20261012-29"></script>
-<script src="/kids/akademie/term-coach-v24.js?v=20261011-01"></script>
+<script src="/kids/akademie/term-coach-v24.js?v=academy-sidq-sources-v1-20261120"></script>
 <script src="/kids/akademie/school-progress-v11.js?v=20261012-30"></script>
 <script src="/kids/akademie/answer-choice-only-v1.js?v=20261105-02"></script>
 <script src="/kids/kids-birth-month-v1431.js?v=1431"></script>
@@ -4360,7 +4360,7 @@ function prepareOwnerVoice(){
  window.__academyOwnerVoiceRequested=true;
  window.__academyOwnerVoicePromise=new Promise(resolve=>{
   const script=document.createElement("script");
-  script.src="/kids/owner-voice.js?v=academy-serhat-pilot-v12-20261010";script.async=true;
+  script.src="/kids/owner-voice.js?v=academy-sidq-answers-v1-20261120";script.async=true;
   script.onload=()=>resolve(window.DARKidsOwnerVoice||null);
   script.onerror=()=>{
    window.__academyOwnerVoiceRequested=false;
@@ -4828,7 +4828,7 @@ function showQuestion(){
   };
   const listen=document.createElement("button");listen.type="button";listen.className="choice-listen";
   listen.textContent="Hören";
-  listen.setAttribute("aria-label","Antwort "+(i+1)+" anhören, ohne sie auszuwählen");
+  listen.setAttribute("aria-label","Diese Antwort anhören, ohne sie auszuwählen");
   listen.setAttribute("aria-pressed","false");
   listen.onclick=()=>{
     speak(3,["Antwort "+(i+1)+": "+t]); // original spoken answer ID, not shuffled index
