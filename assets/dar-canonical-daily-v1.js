@@ -30,11 +30,36 @@ d.dispatchEvent(new CustomEvent("dar:canonical-daily-ready",{detail:{date:key,du
 return snapshot();
 }).catch(function(){return fail("fetch-error",key)}).finally(function(){state.loading=null});
 return state.loading}
-function snapshot(){return state.valid?{date:state.date,dua:{id:state.dua.id,title:state.dua.title,ar:state.dua.ar,tr:state.dua.tr,de:state.dua.de,src:state.dua.src,cat:state.dua.cat},verse:state.daily.verse||null}:null}
+function snapshot(){return state.valid?{date:state.date,dua:{id:state.dua.id,title:state.dua.title,ar:state.dua.ar,tr:state.dua.tr,de:state.dua.de,src:state.dua.src,cat:state.dua.cat},recommendation:(state.daily.recommendation&&text(state.daily.recommendation.id)&&text(state.daily.recommendation.title))?{id:text(state.daily.recommendation.id),title:text(state.daily.recommendation.title)}:null,verse:state.daily.verse||null}:null}
 /* Actual visitor Home daily tile, across iOS WKWebView/PWA/browser. */
 var DAILY_TARGETS=".dhp-today-stack [data-dhp-route='duas'],.dv3-today-card,[data-nav='dua'].home-v380-open-row,#darV8Daily a[href*='page=dua']";
 function nodes(){return Array.from(d.querySelectorAll(DAILY_TARGETS))}
 function setAria(el,s){el.setAttribute("aria-label",s)}
+/* The daily recommendation is an editorial broadcast, never an audience-ranked suggestion.
+   The same published ID is shown to Neutral, Frau and Mann; the profile dashboard
+   retains its separate personal ranking and audience guards. */
+function renderGlobalRecommendation(){
+ var item=state.valid&&state.daily&&state.daily.recommendation;
+ var valid=!!(item&&text(item.id)&&text(item.title));
+ d.querySelectorAll("#dhpTodayArticle,[data-dar-global-recommendation='1']").forEach(function(el){
+  var heading=el.querySelector("#dhpTodayName,.home-v380-open-row__title,h3,strong");
+  if(!valid){
+   el.removeAttribute("data-dar-daily-recommendation-id");
+   if(el.id==="dhpTodayArticle"){el.removeAttribute("data-dhp-value");el.dataset.dhpRoute=""}
+   else{el.removeAttribute("data-value");el.dataset.nav=""}
+   el.setAttribute("aria-disabled","true");
+   if(heading&&heading.textContent!==t("missing"))heading.textContent=t("missing");
+   return;
+  }
+  var id=text(item.id),title=text(item.title);
+  if(heading&&heading.textContent!==title)heading.textContent=title;
+  if(el.id==="dhpTodayArticle"){el.dataset.dhpRoute="post";el.dataset.dhpValue=id}
+  else{el.dataset.nav="post";el.dataset.value=id}
+  el.setAttribute("data-dar-daily-recommendation-id",id);
+  el.removeAttribute("aria-disabled");
+  el.setAttribute("aria-label",title);
+ });
+}
 function render(){nodes().forEach(function(el){
 if(!state.valid){el.removeAttribute("data-dar-daily-id");if(el.matches(".dhp-today-stack [data-dhp-route='duas'],.dv3-today-card,.home-v380-open-row")){el.setAttribute("aria-disabled","true");setAria(el,t("missing"));var title=el.querySelector("strong,h3");if(title)title.textContent=t("missing");var copy=el.querySelector("span,p");if(copy)copy.textContent="";}return}
 el.setAttribute("data-dar-daily-id",state.dua.id);el.removeAttribute("aria-disabled");
@@ -53,7 +78,7 @@ el.dataset.value=state.dua.id;
 var h=el.querySelector("h3"),p=el.querySelector("p");if(h)h.textContent=state.dua.title;if(p)p.textContent=state.dua.de;
 }
 setAria(el,t("label")+": "+state.dua.title);
-})}
+});renderGlobalRecommendation()}
 function navigateDua(duaId){var id=encodeURIComponent(duaId);try{if(typeof w.navigate==="function"){w.navigate("dua",duaId);return}}catch(_){}
 if(d.getElementById("pageRoot")||/^\?page=/.test(w.location.search||"")){w.location.assign("/?page=dua&id="+id);return}
 w.location.hash="#dua/"+id}
@@ -65,7 +90,7 @@ e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
 update(false).then(function(result){if(result?.dua?.id)navigateDua(result.dua.id)});
 }
 function onDayChange(){if(state.date!==berlinDate())update(true);else render()}
-function init(){w.addEventListener("click",click,true);d.addEventListener("dar:view-rendered",render);d.addEventListener("dar-adult-locale-changed",render);
+function init(){w.addEventListener("click",click,true);d.addEventListener("dar:view-rendered",function(){w.requestAnimationFrame(render)});d.addEventListener("dar-adult-locale-changed",render);d.addEventListener("dar:visitor-profile-changed",function(){w.requestAnimationFrame(render)});
 d.addEventListener("visibilitychange",function(){if(!d.hidden)update(true)});
 w.addEventListener("pageshow",function(){update(true)});
 w.setInterval(function(){if(!d.hidden)onDayChange()},60000);
