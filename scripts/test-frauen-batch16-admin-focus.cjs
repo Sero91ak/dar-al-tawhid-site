@@ -58,6 +58,14 @@ const originalSecondId=focusItems[1].id;
 focusItems[1].id=focusItems[0].id;
 await expectBlock("Duplicate focus source IDs must not publish even with 16 rows");
 focusItems[1].id=originalSecondId;
+// ID equality alone is insufficient: metadata disagreement would hide
+// the live card while the immutable 48-hour clock is already running.
+for(const key of ["sourceFile","sourceId","sourceUrl","area"]){
+  const original=focusItems[0][key];
+  focusItems[0][key]="mismatch-"+key;
+  await expectBlock("Focus source metadata mismatch: "+key);
+  focusItems[0][key]=original;
+}
 const first=await attempt();
 assert.equal(first.ok,true);assert.equal(first.item.visibility,"48h");
 const firstStart=Date.parse(first.item.startsAt),firstExpiry=Date.parse(first.item.expiresAt);
