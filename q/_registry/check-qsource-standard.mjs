@@ -211,3 +211,22 @@ if (fail.length) {
   process.exit(1);
 }
 console.log('Q-Quellenkarten-Gate OK: ' + files.length + ' aktive Bestandskarten, alle Nachweiskarten funktional adressiert; zukünftige Q ab 43 strikt geprüft.');
+
+
+// TEMPORARY-Q62-PUBLIC-READONLY-AUDIT: This code exists ONLY in an unmerged
+// audit branch; never merge into any protected production source/push lanes.
+const q62ProofTargets = [
+  ['Q62 full original + comparison', 'https://dar-al-tawhid.de/q/62/', ['q62-comparison-title-1', 'q62-scan-catalog', 'q62-arabic']],
+  ['Q62 nine-language data', 'https://dar-al-tawhid.de/assets/q62-locales.json', ['"qSourceId": 62', '"comparisonOriginals"', '"arabicIsnad"']],
+  ['Q62 knowledge module', 'https://dar-al-tawhid.de/lernen/sifat-ohne-tashbih-shaybani/', ['q62-locales.json', 'sifat-ohne-tashbih-shaybani', 'id="quiz"']]
+];
+let q62ProofOk = 0;
+for (const [label, url, expected] of q62ProofTargets) {
+  const result = await fetch(url, {headers:{'user-agent':'DAR-GitHub-CI-Q62-Audit/1.0', 'cache-control':'no-cache'}, redirect:'follow', signal:AbortSignal.timeout(20000)});
+  const text = await result.text();
+  const absent = expected.filter(term=>!text.includes(term));
+  console.log('Q62_PUBLIC_PROOF', JSON.stringify({label,status:result.status,ok:result.ok,bodyLength:text.length,missing:absent,finalUrl:result.url}));
+  if(!result.ok||absent.length)throw Error('Q62 remote live verification failed for '+label+': status '+result.status+' missing '+absent.join(','));
+  q62ProofOk++;
+}
+console.log('Q62 PUBLIC PROOF SUCCESS: '+q62ProofOk+' publicly served Q62 resources, with full corrected contents.');
