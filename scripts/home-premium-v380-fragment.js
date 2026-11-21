@@ -85,7 +85,7 @@ function renderHomeRecommendedRow(excludeIds=new Set()){
   if(!post||excludeIds.has(String(post.id)))return"";
   const excerpt=findQuote(post);
   const meta=[post.category?normalizePostCategory(post.category):"",post.scholar].filter(Boolean).join(" · ");
-  return `<button type="button" class="home-v380-open-row" data-nav="post" data-value="${esc(post.id)}" aria-label="Heute empfohlen lesen: ${esc(post.title)}"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Heute empfohlen</span><h3 class="home-v380-open-row__title">${esc(post.title)}</h3>${excerpt?`<p class="home-v380-open-row__excerpt">${esc(excerpt)}</p>`:""}${meta?`<p class="home-v380-open-row__meta">${esc(meta)}</p>`:""}</div><span class="home-v380-open-row__action" aria-hidden="true">Lesen →</span></button>`;
+  return `<button type="button" class="home-v380-open-row" data-nav="post" data-dar-global-recommendation="1" data-value="${esc(post.id)}" aria-label="Heute empfohlen lesen: ${esc(post.title)}"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Heute empfohlen</span><h3 class="home-v380-open-row__title">${esc(post.title)}</h3>${excerpt?`<p class="home-v380-open-row__excerpt">${esc(excerpt)}</p>`:""}${meta?`<p class="home-v380-open-row__meta">${esc(meta)}</p>`:""}</div><span class="home-v380-open-row__action" aria-hidden="true">Lesen →</span></button>`;
 }
 function renderHomeRamadanRow(){
   const ctx=seasonalIslamicContext();
@@ -98,7 +98,7 @@ function renderHomeTodaySection(){
   const recPost=recommendedPost();
   if(recPost)used.add(String(recPost.id));
   const dua=renderHomeDailyDuaRow();
-  const rec=renderHomeRecommendedRow(used);
+  const rec=renderHomeRecommendedRow();
   const ramadan=renderHomeRamadanRow();
   const rows=[ramadan,dua,rec].filter(Boolean).join("");
   if(!rows)return"";
