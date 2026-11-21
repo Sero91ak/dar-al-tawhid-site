@@ -232,7 +232,7 @@
     "type": "global",
     "title": "16 neue Frauenbeiträge · DĀR AL TAWḤĪD",
     "body": "16 neue quellenbelegte Beiträge über die Ṣaḥābiyyāt, die Mütter der Gläubigen und Frauenfiqh – in neun Sprachen.",
-    "destination": "https://dar-al-tawhid.de/#frauen",
+    "destination": "https://dar-al-tawhid.de/",
     "sendStatus": "blocked-until-deployed-and-authorized",
     "audience": "adult-app AND post-push-opt-in",
     "optInRequired": true,
@@ -286,7 +286,7 @@
     },
     "messageReview": "editorial drafts; native-language validation required before any send",
     "guardStatus": "not-authorized-not-sent",
-    "redirectMustOpen": "the existing canonical in-app women knowledge route #frauen; navigation and profile-sensitive visibility must be verified first",
+    "redirectMustOpen": "Global push opens the adult home. The selected local gender profile determines which knowledge focus card is shown (woman or neutral visible; man hidden). Female knowledge card navigates to #frauen.",
     "providerIdempotencyUuid": "d1c40b28-2bd3-43fd-a14b-708df7d5d976",
     "providerIdempotencyPolicy": "Immutable UUIDv4 idempotency_key for one global opted-in adult post-push announcement. Send only after all 16 records are live and fully approved; do not target Kids or unsubscribe states.",
     "deliveryLanguageVerification": {
@@ -371,7 +371,7 @@
       "es"
     ],
     "deliveryRules": "One once-only announcement to adult post-push subscribers; do not include Kids, opted-out devices, or unknown non-adult audiences.",
-    "displayRule": "Personalized in-app recommendations/library entries respect selected woman/man/neutral profile. Profiling is local UI filtering, not a push-target segment; deep-link handling must also be verified before announcing.",
+    "displayRule": "On adult homepage women-focused 48h card appears for woman/neutral and hides for man. All opted-in adult-post subscribers receive global message, but not all are offered the same women-specific home focus.",
     "priorKnowledgeWomanTargeting": "Superseded by owner's new explicit instruction for THIS 16-item announcement, not for other women-only knowledge campaigns.",
     "requireFirst": "All 16 items published and accessible, release CI and source/locale quality gates, safe URL/deep-link verified.",
     "plannedIdempotencyKey": "d1c40b28-2bd3-43fd-a14b-708df7d5d976",
