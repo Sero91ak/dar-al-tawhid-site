@@ -173,6 +173,8 @@ async function verifyFrauenNeufokusPublication(env, helpers) {
     const matches=(parent?.eintraege||[]).filter(e=>e.kennung===row.id);
     if(matches.length!==1 || matches[0].quellenstatus!=="geprueft" ||
        matches[0].freigabeDurchSerhat!==true ||
+       matches[0].contentId!==row.id ||
+       matches[0].localeCatalogId!==row.id ||
        matches[0].quellePrimaerId!==row.sourceId ||
        matches[0].direktnachweisUrl!==row.sourceUrl) {
        throw feedError("Frauen-Neufokus: Originalbericht noch nicht freigegeben: "+row.id,409);
