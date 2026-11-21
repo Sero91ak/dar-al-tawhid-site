@@ -20,7 +20,7 @@ function validate(o){
   assert.deepEqual(manifest.requiredLocales,required,"wrong locale roster");
   assert.equal(o.type,"global","wrong global notification lane");
   assert.equal(o.audience,"adult-app AND post-push-opt-in","audience weakened");
-  assert.equal(o.destination,"https://dar-al-tawhid.de/#frauen","wrong original reader route");
+  assert.equal(o.destination,"https://dar-al-tawhid.de/","global adult notification must open profile-aware home");
   assert.equal(o.idempotencyKey,"frauen-batch16-20261118","editorial event key drift");
   assert.match(o.providerIdempotencyUuid||"",uuid4,"provider idempotency key must be UUIDv4");
   assert.equal(o.onceOnly,true,"single-send requirement absent");
