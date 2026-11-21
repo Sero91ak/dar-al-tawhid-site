@@ -3095,3 +3095,134 @@
  #app .header-quran-status:not([hidden]){max-width:34px;padding:4px 0}
  #app .header-quran-status #headerQuranStatusText{display:none}
 }
+
+/* HOME V5.8 — deterministic landscape spacing, clean separators, and visible artwork */
+@media (orientation:landscape) {
+  #app .screen {
+    min-height:0!important;
+    grid-template-rows:auto minmax(0,1fr) auto minmax(70px,auto) auto!important;
+    gap:clamp(4px,1vh,10px)!important;
+    padding-block:clamp(6px,1.5vh,18px)!important;
+  }
+  #app .top-rule {
+    height:1px!important;margin:clamp(3px,.7vh,7px) 0 0!important;
+    border:0!important;
+    background:linear-gradient(90deg,transparent,rgba(216,189,130,.36) 8%,rgba(216,189,130,.36) 92%,transparent)!important;
+  }
+  #app .top-rule::after{display:none!important}
+  #app .hero {
+    min-height:0!important;
+    grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr)!important;
+    gap:clamp(10px,1.8vw,28px)!important;
+  }
+  #app .hero-left,#app .hero-right{min-width:0!important;min-height:0!important}
+  #app .hero-right {
+    border:0!important;
+    padding:0 0 0 clamp(6px,1vw,14px)!important;
+  }
+  #app .hero-right .daily-story {
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) clamp(96px,9vw,128px)!important;
+    grid-template-rows:auto minmax(0,1fr) auto!important;
+    align-items:center!important;
+    gap:clamp(2px,.55vh,6px) clamp(8px,1vw,14px)!important;
+    width:100%!important;min-width:0!important;min-height:0!important;
+    max-height:100%!important;overflow:hidden!important;
+  }
+  #app .hero-right .daily-label{grid-column:1!important;grid-row:1!important;min-width:0!important}
+  #app .hero-right .daily-de {
+    grid-column:1!important;grid-row:2!important;min-width:0!important;
+    display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;
+    overflow:hidden!important;overflow-wrap:anywhere!important;white-space:normal!important;
+    font-size:clamp(14px,1.25vw,20px)!important;line-height:1.28!important;
+  }
+  #app .hero-right .source {
+    grid-column:1!important;grid-row:3!important;min-width:0!important;
+    white-space:normal!important;overflow-wrap:anywhere!important;line-height:1.25!important;
+  }
+  #app .hero-right .tadabbur-open {
+    grid-column:2!important;grid-row:1 / span 3!important;
+    justify-self:stretch!important;align-self:center!important;display:inline-flex!important;
+    width:clamp(96px,9vw,128px)!important;min-width:96px!important;max-width:128px!important;
+    min-height:44px!important;height:auto!important;margin:0!important;padding:7px 10px!important;
+    border-radius:999px!important;white-space:normal!important;text-align:center!important;
+    line-height:1.18!important;overflow-wrap:anywhere!important;
+  }
+  #app .next-row .counter {
+    padding:0!important;border:0!important;border-radius:0!important;
+    background:transparent!important;box-shadow:none!important;
+    white-space:nowrap!important;
+  }
+  #app .times-band {
+    min-width:0!important;padding:clamp(4px,.8vh,9px) 0!important;
+    border-top:0!important;border-bottom:0!important;
+  }
+  #app .times-band::before,#app .times-band::after{display:none!important}
+  #app .prayer-cell {
+    position:relative!important;min-width:0!important;
+    border-right:0!important;border-radius:0!important;
+    background:transparent!important;box-shadow:none!important;
+  }
+  #app .prayer-cell.active {
+    border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;
+  }
+  #app .prayer-cell.active::after {
+    content:""!important;position:absolute!important;left:50%!important;right:auto!important;
+    bottom:-2px!important;transform:translateX(-50%)!important;width:24px!important;height:2px!important;
+    border-radius:2px!important;background:var(--gold)!important;
+  }
+  #app .audio-area{border-left:0!important}
+  #app .foot{border-top:0!important}
+  #app .home-wallpaper{z-index:0!important;background:#07191b!important}
+  #app .home-wallpaper-backdrop {
+    inset:-3%!important;filter:blur(22px) brightness(.64) saturate(.92)!important;opacity:.82!important;
+  }
+  #app .home-wallpaper-fit {
+    width:auto!important;height:auto!important;max-width:100%!important;max-height:100%!important;
+    object-fit:contain!important;object-position:center!important;opacity:1!important;
+  }
+  #app .lightgrading {
+    z-index:1!important;
+    background:linear-gradient(90deg,rgba(2,12,16,.24),rgba(2,12,16,.06) 52%,rgba(2,12,16,.20)),
+      linear-gradient(0deg,rgba(2,12,16,.40),rgba(2,12,16,.06) 45%,rgba(2,12,16,.12))!important;
+  }
+  #app .screen{z-index:2!important}
+  #app #adhanVisual .adhan-wallpaper-backdrop {
+    filter:blur(22px) brightness(.66) saturate(.92)!important;opacity:.82!important;
+  }
+  #app #adhanVisual .adhan-wallpaper-fit {
+    width:auto!important;height:auto!important;max-width:100vw!important;max-height:100dvh!important;
+    object-fit:contain!important;object-position:center!important;opacity:1!important;
+  }
+}
+/* Short landscape tablets: compact rows with enough room for each label and control. */
+@media (orientation:landscape) and (min-width:701px) and (max-height:480px) {
+  #app .screen {
+    grid-template-rows:minmax(64px,auto) minmax(86px,1fr) auto minmax(56px,auto) 0!important;
+    gap:3px!important;padding:4px clamp(8px,1.8vw,18px)!important;
+  }
+  #app header{grid-template-rows:auto auto 1px!important;gap:2px!important;min-height:0!important}
+  #app .top{min-height:44px!important}
+  #app .header-meta{min-height:30px!important;padding:2px 6px!important;gap:2px 8px!important}
+  #app .header-meta>div span{font-size:clamp(6px,.72vw,9px)!important}
+  #app .header-meta>div strong{font-size:clamp(9px,1vw,12px)!important;line-height:1.15!important}
+  #app .hero{min-height:86px!important;gap:clamp(8px,1.3vw,16px)!important}
+  #app .next-name{font-size:clamp(30px,7vh,48px)!important;line-height:.98!important;margin:2px 0 5px!important}
+  #app .main-time{font-size:clamp(27px,5.4vh,40px)!important;line-height:1!important}
+  #app .counter{font-size:clamp(12px,2.2vh,15px)!important}
+  #app .hero-right .daily-story{grid-template-columns:minmax(0,1fr) 96px!important;gap:2px 8px!important}
+  #app .hero-right .daily-label{font-size:clamp(8px,1.5vh,10px)!important;line-height:1.1!important}
+  #app .hero-right .daily-de{font-size:clamp(12px,2.3vh,16px)!important;line-height:1.22!important;-webkit-line-clamp:2!important}
+  #app .hero-right .source{font-size:clamp(8px,1.6vh,10px)!important}
+  #app .hero-right .tadabbur-open{width:96px!important;min-width:96px!important;max-width:96px!important;min-height:44px!important;padding:5px!important;font-size:clamp(9px,1.7vh,11px)!important}
+  #app .times-band{padding:3px 0!important}
+  #app .prayer-cell{padding:2px 1px!important;gap:2px!important}
+  #app .prayer-cell .pname{font-size:clamp(9px,1.8vh,12px)!important}
+  #app .prayer-cell .ptime{font-size:clamp(17px,3.4vh,22px)!important;line-height:1.05!important}
+  #app .daily-area{min-height:56px!important}
+  #app .daily-area .audio-area{min-height:56px!important;padding:2px 8px!important}
+  #app .audio-title{font-size:clamp(15px,2.7vh,19px)!important}
+  #app .audio-sub{font-size:clamp(9px,1.8vh,12px)!important}
+  #app .audio-controls .round,#app .audio-controls .round.primary{width:40px!important;min-width:40px!important;height:40px!important;min-height:40px!important}
+  #app .foot{display:none!important}
+}
