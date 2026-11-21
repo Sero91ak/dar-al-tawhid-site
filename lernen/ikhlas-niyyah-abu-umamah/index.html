@@ -96,7 +96,7 @@ el('score').textContent=correct+' / '+d.quiz.length+' '+d.labels.score;
 }
 });
 el('again').addEventListener('click',()=>{n=0;correct=0;render()});
-el('back').addEventListener('click',()=>location.assign('/q/59/?lang='+encodeURIComponent(code)));
+el('back').addEventListener('click',()=>location.assign('/q/60/?lang='+encodeURIComponent(code)));
 select.addEventListener('change',()=>localize(select.value));
 localize(code||'de');
 }catch(e){
