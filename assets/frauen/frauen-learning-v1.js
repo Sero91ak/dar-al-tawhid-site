@@ -93,11 +93,12 @@ function core(){
   });
  q.append(details);
 }
-function render(){
+function render(moveFocus){
  core();
  var item=items[stage];var count=elem("div","fw-count",lab.number+" "+(stage+1)+" "+lab.of+" "+items.length);q.append(count);
  var line=elem("div","fw-progress");for(var i=0;i<items.length;i++){var el=elem("i");el.className=i===stage?"active":i<stage?"done":"";line.append(el)}q.append(line);
- q.append(elem("h2","fw-question",item.question));
+ var questionHeading=elem("h2","fw-question",item.question);
+ questionHeading.tabIndex=-1;q.append(questionHeading);
  var answers=elem("div","fw-answers"),result=elem("p","fw-feedback");result.setAttribute("aria-live","polite");
  var next=elem("button","fw-next",stage===items.length-1?lab.finish:lab.next);next.type="button";next.disabled=true;
  item.options.forEach(function(option,index){
@@ -112,17 +113,21 @@ function render(){
   });answers.append(b)
  });
  q.append(answers,result,next);
- next.addEventListener("click",function(){if(!answered)return;if(stage===items.length-1)finish();else{stage++;answered=false;render()}});
+ next.addEventListener("click",function(){if(!answered)return;if(stage===items.length-1)finish();else{stage++;answered=false;render(true)}});
  var links=elem("div","fw-links");
  var s=elem("a","fw-link fw-source",lab.source);s.href=sourceUrl;s.target="_blank";s.rel="noopener noreferrer";links.append(s);
  if(w.self===w.top)links.append(bottomLink());
  q.append(links);
+ if(moveFocus&&typeof questionHeading.focus==="function")questionHeading.focus();
 }
 function finish(){
- core();q.append(elem("div","fw-result",lab.score+": "+correct+" / "+items.length));
- var retry=elem("button","fw-next",lab.again);retry.type="button";retry.addEventListener("click",function(){stage=0;correct=0;answered=false;render()});q.append(retry);
+ core();
+ var resultHeading=elem("h2","fw-result",lab.score+": "+correct+" / "+items.length);
+ resultHeading.tabIndex=-1;q.append(resultHeading);
+ var retry=elem("button","fw-next",lab.again);retry.type="button";retry.addEventListener("click",function(){stage=0;correct=0;answered=false;render(true)});q.append(retry);
  var source=elem("a","fw-link fw-source",lab.source);source.href=sourceUrl;source.target="_blank";source.rel="noopener noreferrer";q.append(source);
  if(w.self===w.top)q.append(bottomLink());
+ if(typeof resultHeading.focus==="function")resultHeading.focus();
 }
 (async function(){
  message(lab.loading);
