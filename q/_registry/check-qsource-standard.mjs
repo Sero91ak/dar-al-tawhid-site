@@ -211,3 +211,31 @@ if (fail.length) {
   process.exit(1);
 }
 console.log('Q-Quellenkarten-Gate OK: ' + files.length + ' aktive Bestandskarten, alle Nachweiskarten funktional adressiert; zukünftige Q ab 43 strikt geprüft.');
+
+
+/* TEMPORARY read-only Q60 production post proof; audit branch only, DO NOT MERGE. */
+if (process.env.GITHUB_ACTIONS === 'true') {
+  const host='https://dar-al-tawhid.de',stamp=Date.now();
+  const targets=[
+    {path:'/q/60/',text:['ALLAH NIMMT NUR AUFRICHTIGE TATEN AN','q60-locales.json']},
+    {path:'/assets/q60-locales.json',text:['abu-umamah-ikhlas-an-nasai-3140-20261121-q60','"de"','"ar"','"en"','"tr"','"ku"','"ckb"','"bs"','"fr"','"es"']},
+    {path:'/lernen/ikhlas-niyyah-abu-umamah/',text:['q60-locales.json','Q60']},
+    {path:'/content/posts/posts-index.json',text:['abu-umamah-ikhlas-an-nasai-3140-20261121-q60.md']},
+    {path:'/content/posts/abu-umamah-ikhlas-an-nasai-3140-20261121-q60.md',text:['ALLAH NIMMT NUR AUFRICHTIGE TATEN AN','Ikhlāṣ']}
+  ];
+  let ok=true;
+  for (const item of targets) {
+    try{
+      const res=await fetch(host+item.path+'?q60-audit='+stamp,{headers:{'Cache-Control':'no-cache','User-Agent':'Mozilla/5.0 DARTawhid-Q60-Live-Audit/1'},signal:AbortSignal.timeout(20000)});
+      const body=await res.text(),pass=res.status===200&&item.text.every(x=>body.includes(x));
+      console.log('Q60 PUBLIC PROOF '+JSON.stringify({path:item.path,status:res.status,bytes:body.length,pass,cfRay:res.headers.get('cf-ray')}));
+      ok=ok&&pass;
+    } catch(e) {
+      console.log('Q60 PUBLIC PROOF ERROR '+item.path+' '+String(e));ok=false;
+    }
+  }
+  if(!ok) {
+    console.error('Q60 PUBLIC PROOF FAIL: do not send visitor notification');
+    process.exitCode=2;
+  } else console.log('Q60 PUBLIC PROOF SUCCESS: all five resources publicly reachable');
+}
