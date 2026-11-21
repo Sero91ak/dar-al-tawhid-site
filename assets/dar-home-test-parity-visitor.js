@@ -565,9 +565,7 @@ function recent(){
   }
   target.appendChild(btn);
  });
- box.querySelector("#dhpTodayName").textContent=list[0].title;
- box.querySelector("#dhpTodayArticle").dataset.dhpRoute="post";
- box.querySelector("#dhpTodayArticle").dataset.dhpValue=list[0].id;
+ // Latest publications must not replace the globally selected daily post.
 }
 function quran(){
  var root=document.getElementById(ID);if(!root)return;
