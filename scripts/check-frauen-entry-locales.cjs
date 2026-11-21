@@ -74,9 +74,9 @@ for(const row of batch16.records){
 const sulaym=loc.entries["sahabiyyat-umm-sulaym-duft-20261106"];
 assert.ok(sulaym.locales.de.statement.includes("Anas’ Mutter"),"German text must identify Anas as Umm Sulaym's son");
 assert.ok(sulaym.locales.en.statement.includes("Anas's mother"),"English narration must identify Anas's mother");
-assert.ok(sulaym.locales.tr.statement.includes("kendi annesi Ümmü Süleym"),"Turkish report must identify Umm Sulaym as Anas's mother");
+assert.ok(sulaym.locales.tr.statement.includes("Enes'in annesi Ümmü Süleym"),"Turkish report must identify Umm Sulaym as Anas's mother, not the Prophet's");
 assert.ok(sulaym.locales.tr.preview.includes("annesi Ümmü Süleym"),"Turkish preview must name the correct person collecting the sweat");
-assert.ok(!sulaym.locales.tr.statement.includes("Peygamber'in ﷺ annesi"),"False statement that Umm Sulaym was the Prophet's mother");
+assert.ok(!sulaym.locales.tr.statement.includes("Peygamber'in ﷺ kendi annesi"),"False statement that Umm Sulaym was the Prophet's mother");
 const reg=load("q/_registry/shortlinks.json");
 const misnumber=reg.links.find(x=>Number(x.number)===52);
 if(misnumber) {

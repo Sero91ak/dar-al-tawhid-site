@@ -465,7 +465,7 @@
         },
         "tr": {
           "title": 55,
-          "statement": 205,
+          "statement": 207,
           "preview": 115,
           "lesson": 79,
           "sharh": 186,
@@ -1556,6 +1556,13 @@
       "ownerApprovalFlag": true,
       "visiblityAsOfCheck": "nicht-anzeigen",
       "sourceMethod": "Previous primary-text spotcheck, plus direct Sunnah.com landing page accessibility; full matn/isnad independent sign-off absent"
+    }
+  ],
+  "revisions": [
+    {
+      "date": "2026-11-21",
+      "change": "Turkish Umm Sulaym narration now explicitly identifies Umm Sulaym as Anas's mother, not the Prophet's; both editorial and locale packs corrected; regression test updated.",
+      "source": "https://sunnah.com/muslim:2331a"
     }
   ]
 }
