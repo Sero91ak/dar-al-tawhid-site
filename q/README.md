@@ -102,3 +102,4 @@ Neue nummerierte Quellenlinks gehören immer in `q/<nummer>/`.
 | `q/58` | Scham und Hochmut verhindern das Lernen | `Muǧāhid ibn Ǧabr (Tābiʿī)` | Ṣaḥīḥ al-Buḫārī, Kitāb al-ʿIlm, Bāb al-Ḥayāʾ fī al-ʿIlm (muʿallaq); Ibn Ḥaǧar, Taġlīq at-Taʿlīq 2/93–94; neun vom Nutzer freigegebene modellgeprüfte Sprachfassungen und vier Quizfragen je Sprache; kein unabhängiges muttersprachliches Gutachten. |
 
 | `q/59` | Jugend, Handeln und ʿIbādah | `Ḥafṣah bint Sīrīn` | Ihr jungen Menschen, handelt! Denn die Zeit des Handelns ist die Jugend. |
+| `q/60` | Ikhlāṣ – Allāh nimmt nur aufrichtige Taten an | `Abū Umāmah al-Bāhilī, vom Propheten ﷺ` | Marfūʿer Ḥadīṯ in Sunan an-Nasāʾī Nr. 3140 (25/56), ḥasan (Darussalam), ḥasan ṣaḥīḥ (al-Albānī); neun Sprachen mit vier Lernfragen je Sprache. Eigener Q-Link und Apple-Notizen-Entwurf, kein automatischer Erwachsenen-Post/OneSignal. |
