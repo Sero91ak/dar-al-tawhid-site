@@ -88,7 +88,7 @@ try{
   for(const key of ['context','quote','status','explanation','conclusion','chain'])put('q60-'+key,d[key]);
   for(const key of ['context','quote','arabic','isnad','status','explanation','conclusion','sources'])put('q60-'+key+'-h',L[key]);
   put('q60-learn-h',L.learn);put('q60-learn-sub',L.learnSub);
-  document.querySelectorAll('.q60-links .qsource-link').forEach((a,i)=>a.setAttribute('aria-label',doc.sourceUrls[i].label));
+  document.querySelectorAll('.q60-links .qsource-link').forEach((a,i)=>{a.querySelector('.qsource-link-title').textContent=d.linkTitles[i];a.querySelector('.qsource-link-sub').textContent=d.linkSubs[i];a.setAttribute('aria-label',d.linkTitles[i])});
   notice.hidden=true;try{localStorage.setItem(key,v)}catch(_){}
  }
  sel.addEventListener('change',()=>render(sel.value));render(code||'de');
