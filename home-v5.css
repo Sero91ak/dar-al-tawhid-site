@@ -2844,3 +2844,74 @@
 @media(min-width:1600px) and (min-height:900px){
   #app #adhanVisual{--adhan-edge-x:clamp(48px,4vw,96px);--adhan-edge-y:clamp(36px,4vh,72px)}
 }
+
+
+/* Portrait header repair: keep primary navigation inside the header and above prayer content. */
+@media (orientation:portrait) {
+  #app header {
+    grid-template-rows:auto auto auto!important;
+    gap:clamp(4px,.65vh,7px)!important;
+  }
+  #app .top {
+    position:relative!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    grid-template-rows:48px 48px!important;
+    align-content:start!important;
+    align-items:center!important;
+    column-gap:clamp(6px,1.8vw,12px)!important;
+    row-gap:2px!important;
+    height:auto!important;
+    min-height:98px!important;
+  }
+  #app .top .logo {
+    grid-column:1!important;grid-row:1!important;min-width:0!important;
+  }
+  #app .top .time-box {
+    grid-column:2!important;grid-row:1!important;justify-self:end!important;
+    min-width:0!important;margin:0!important;
+  }
+  #app .top .top-spacer {display:none!important}
+  #app .top .home-nav {
+    position:relative!important;inset:auto!important;left:auto!important;top:auto!important;
+    grid-column:1 / -1!important;grid-row:2!important;justify-self:center!important;
+    transform:none!important;width:max-content!important;max-width:100%!important;
+    min-height:48px!important;margin:0!important;padding:0!important;
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    gap:clamp(3px,1vw,7px)!important;overflow:visible!important;
+  }
+  #app .top .home-nav button {
+    box-sizing:border-box!important;
+    width:clamp(64px,19vw,82px)!important;min-width:clamp(64px,19vw,82px)!important;
+    height:48px!important;min-height:48px!important;max-height:48px!important;
+    padding:2px 3px!important;gap:1px!important;
+  }
+  #app .top .home-nav button img {
+    width:clamp(18px,5vw,23px)!important;height:clamp(18px,5vw,23px)!important;
+  }
+  #app .top .home-nav button span {
+    font-size:clamp(8px,2.2vw,10px)!important;line-height:1!important;
+  }
+  #app .top .time-box .topbtn {
+    height:48px!important;min-height:48px!important;max-height:48px!important;
+  }
+  #app .screen {gap:clamp(5px,1vh,10px)!important}
+}
+
+/* Portrait tablets have enough width for a single aligned brand, navigation and settings row. */
+@media (min-width:600px) and (orientation:portrait) {
+  #app .top {
+    grid-template-columns:minmax(0,1fr) max-content auto!important;
+    grid-template-rows:48px!important;
+    min-height:48px!important;
+  }
+  #app .top .logo {grid-column:1!important;grid-row:1!important}
+  #app .top .home-nav {
+    grid-column:2!important;grid-row:1!important;justify-self:center!important;
+    max-width:100%!important;
+  }
+  #app .top .time-box {grid-column:3!important;grid-row:1!important}
+  #app .top .home-nav button {
+    width:clamp(58px,10.5vw,76px)!important;min-width:clamp(58px,10.5vw,76px)!important;
+  }
+}
