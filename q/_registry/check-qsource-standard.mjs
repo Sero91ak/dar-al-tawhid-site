@@ -211,3 +211,24 @@ if (fail.length) {
   process.exit(1);
 }
 console.log('Q-Quellenkarten-Gate OK: ' + files.length + ' aktive Bestandskarten, alle Nachweiskarten funktional adressiert; zukünftige Q ab 43 strikt geprüft.');
+
+
+/* TEMP_Q62_PUBLIC_HTTP_AUDIT_ONLY - DO NOT MERGE */
+const q62ProofSteps=[
+ ["/q/62/","DIE SIFAT ALLAHS: DER WEG DER FRUEHEN IMAME"],
+ ["/assets/q62-locales.json","post:shaybani-sifat-early-imams-20261121-q62"],
+ ["/lernen/sifat-ohne-tashbih-shaybani/","q62-locales.json"],
+ ["/q/61/","Q61"]
+];
+let proofFail=0;
+for(const [route,token] of q62ProofSteps){
+ const url="https://dar-al-tawhid.de"+route+(route.includes("?")?"&":"?")+"audit=q62-"+Date.now();
+ try {
+ const response=await fetch(url,{headers:{"Cache-Control":"no-cache","Accept":"text/html,application/json"},redirect:"follow",signal:AbortSignal.timeout(15000)});
+ const txt=await response.text(),match=txt.includes(token);
+ console.log("Q62 LIVE AUDIT "+route+" HTTP="+response.status+" length="+txt.length+" MATCH="+match+" routeHeader="+(response.headers.get("x-dar-q-route")||""));
+ if(response.status!==200||!match)proofFail++;
+ } catch(e){console.error("Q62 LIVE AUDIT "+route+" ERROR "+String(e?.message||e));proofFail++}
+}
+if(proofFail){console.error("Q62 PUBLIC PROOF FAILED: "+proofFail+" resources");process.exitCode=1}
+else console.log("Q62 PUBLIC PROOF SUCCESS: all four resources publicly reachable");
