@@ -175,7 +175,11 @@ else
   done
 fi
 
-python3 scripts/update-local-media-metadata.py
+if [[ "$MODE" != "--oversized" ]]; then
+  python3 scripts/update-local-media-metadata.py
+else
+  echo "Legacy image-only repair: preserve audio and Kids metadata."
+fi
 
 saved=$((before_total - after_total))
 printf 'MEDIA_OPTIMIZE_SUMMARY changed=%s skipped=%s saved_bytes=%s\n' "$changed_count" "$skipped_count" "$saved"
