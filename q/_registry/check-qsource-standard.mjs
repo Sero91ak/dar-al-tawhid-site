@@ -211,3 +211,25 @@ if (fail.length) {
   process.exit(1);
 }
 console.log('Q-Quellenkarten-Gate OK: ' + files.length + ' aktive Bestandskarten, alle Nachweiskarten funktional adressiert; zukünftige Q ab 43 strikt geprüft.');
+
+
+/* READ-ONLY Q61 public smoke test on audit branch ONLY; do not merge. */
+if(process.env.GITHUB_ACTIONS==='true'){
+  const base='https://dar-al-tawhid.de',salt=Date.now();
+  const entries=[
+  {path:'/q/61/',markers:['DIE SUNNAH DES PROPHETEN BEWAHREN','q61-locales.json','/lernen/sunnah-bewahren-umar/']},
+  {path:'/assets/q61-locales.json',markers:['umar-ibn-abd-al-aziz-sunnah-recording-20261121-q61','"de"','"ar"','"en"','"tr"','"ku"','"ckb"','"bs"','"fr"','"es"']},
+  {path:'/lernen/sunnah-bewahren-umar/',markers:['q61-locales.json','Q61','id="quiz"']}
+  ];let ok=true;
+  for(const row of entries){
+    try{
+      const r=await fetch(base+row.path+'?q61-proof='+salt,{headers:{'Cache-Control':'no-cache','User-Agent':'Mozilla/5.0 DAR-Q61-Source-Proof'},signal:AbortSignal.timeout(20000)});
+      const t=await r.text();
+      const pass=r.status===200&&row.markers.every(m=>t.includes(m));
+      console.log('Q61 PUBLIC PROOF '+JSON.stringify({path:row.path,status:r.status,bytes:t.length,pass,cfRay:r.headers.get('cf-ray')}));
+      if(!pass)ok=false;
+    }catch(e){console.log('Q61 PUBLIC PROOF ERROR '+row.path+' '+String(e));ok=false}
+  }
+  if(!ok){console.error('Q61 PUBLIC PROOF FAIL: not live, do not claim ready');process.exitCode=2}
+  else console.log('Q61 PUBLIC PROOF SUCCESS: source, all languages, learning route are online');
+}
