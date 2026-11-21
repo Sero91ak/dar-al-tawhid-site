@@ -31,7 +31,9 @@ function validate(o){
   assert.equal(o.requireSeparatePushLockPassword,true,"password requirement missing");
   assert.ok(has(o.requiredUnlocks,"push-global-freigabe"),"global lane unlock missing");
   assert.ok(has(o.requiredUnlocks,"post-push-freigabe"),"post lane unlock missing");
-  assert.equal(o.sendVia,"existing DAR Admin contribution publisher; existing verified global adult DAR_PUSH lane; not OneSignal all/unspecified");
+  assert.equal(o.sendVia,"existing DAR Admin contribution publisher; DAR_PUSH is an unverified candidate and MUST be proven adult-app AND post-push-opt-in before sending; never OneSignal all/unspecified");
+   assert.match(o.redirectMustOpen||"",/woman, man and neutral/,"48h global announcement must open for all adult profiles");
+   assert.match(manifest.notificationRoutingChoice?.displayRule||"",/woman, man and neutral/,"global homepage card cannot be profile filtered");
   assert.equal(lock.globalApprovalRequired,true,"global approval was weakened");
   assert.equal(lock.passwordRequired,true,"global password policy was weakened");
   assert.deepEqual(Object.keys(o.localizedMessages||{}).sort(),[...required].sort(),"one or more push languages missing");
