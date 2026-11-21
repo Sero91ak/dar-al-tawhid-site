@@ -66,6 +66,15 @@ for(const key of ["sourceFile","sourceId","sourceUrl","area"]){
   await expectBlock("Focus source metadata mismatch: "+key);
   focusItems[0][key]=original;
 }
+// A published learning link must reference its same canonical article.
+const firstRecord=db[db[keys[1]].records[0].sourceFile].eintraege.find(
+  e=>e.kennung===db[keys[1]].records[0].id);
+for(const key of ["contentId","localeCatalogId"]){
+  const original=firstRecord[key];
+  delete firstRecord[key];
+  await expectBlock("Missing canonical learning identity: "+key);
+  firstRecord[key]=original;
+}
 const first=await attempt();
 assert.equal(first.ok,true);assert.equal(first.item.visibility,"48h");
 const firstStart=Date.parse(first.item.startsAt),firstExpiry=Date.parse(first.item.expiresAt);
