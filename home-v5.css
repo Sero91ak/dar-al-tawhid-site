@@ -3044,3 +3044,9 @@
   #app .daily-area .audio-controls .round .icon {width:16px!important;height:16px!important}
   #app .foot {display:none!important}
 }
+
+/* Preserve readable minimum type sizes in the compact landscape prayer rail. */
+@media(max-width:700px) and (max-height:440px) and (orientation:landscape){
+  #app .counter{font-size:14px!important}
+  #app .prayer-cell .ptime{font-size:19px!important;line-height:19px!important}
+}
