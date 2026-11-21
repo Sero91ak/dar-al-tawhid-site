@@ -159,6 +159,16 @@ if [[ "$MODE" == "--all" ]]; then
   done < <(find assets kids/assets content apple-tv ios test/assets -type f \
     \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.mp4' -o -iname '*.m4a' -o -iname '*.aac' -o -iname '*.mp3' \) \
     -print0 2>/dev/null)
+elif [[ "$MODE" == "--oversized" ]]; then
+  # Controlled remediation of historical >1.2 MB runtime media only.
+  # Never touch unrelated files, originals, master assets or protected logos.
+  while IFS= read -r -d '' f; do
+    process_one "$f"
+  done < <(find assets/feed-backgrounds/auto \
+    kids/assets/kids-home-v1178 kids/assets/kids-home-v1179 \
+    kids/assets/kids-salah-v1272 -type f \
+    \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) \
+    -size +1200000c -print0 2>/dev/null)
 else
   while IFS= read -r f; do
     [[ -n "$f" ]] && process_one "$f"
