@@ -47,6 +47,10 @@ async function getText(path){return get(path,"text")}
        for(const field of ["title","statement","preview","lesson","sharh","source"]){
          if(pack[field]!==expected[field])blockers.push(code+"-"+field+"-stale");
        }
+       const requiredLabels=expected.labels||{};
+       if(!pack.labels||Object.entries(requiredLabels).some(([key,value])=>pack.labels[key]!==value)){
+         blockers.push(code+"-labels-stale");
+       }
        if(pack.dir!==(code==="ar"||code==="ckb"?"rtl":"ltr"))blockers.push(code+"-bidi");
      }
    }
