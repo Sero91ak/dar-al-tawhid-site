@@ -73,6 +73,9 @@ jobs:
           elif printf '%s' "$LAST_MSG" | grep -Fq '[media-fullscan]'; then
             full=1
           fi
+          repair=0
+          if printf '%s' "$LAST_MSG" | grep -Fq '[media-budget-repair]'; then repair=1; fi
+          echo "repair=$repair" >> "$GITHUB_OUTPUT"
           echo "full=$full" >> "$GITHUB_OUTPUT"
           echo "skip=$skip" >> "$GITHUB_OUTPUT"
 
@@ -82,7 +85,9 @@ jobs:
         run: |
           set -euo pipefail
           chmod +x scripts/optimize-app-media.sh
-          if [ "${{ steps.mode.outputs.full }}" = "1" ]; then
+          if [ "${{ steps.mode.outputs.repair }}" = "1" ]; then
+            scripts/optimize-app-media.sh --oversized
+          elif [ "${{ steps.mode.outputs.full }}" = "1" ]; then
             scripts/optimize-app-media.sh --all
           elif [ "${{ github.event_name }}" = "pull_request" ]; then
             BASE_SHA="${{ github.event.pull_request.base.sha }}"
