@@ -188,6 +188,17 @@ body.desktop-overhaul-v18 #pageRoot .toolbar .tool.active{
  border-color:var(--v8-gold)!important;
  background:color-mix(in srgb,var(--v8-gold) 17%,var(--v8-paper))!important
 }
+
+/* Theme and reading-size repair for shared legacy route controls. */
+body.desktop-overhaul-v18 #pageRoot :is(small,label,[class~="meta"],[class~="speaker-line"],[class~="kicker"],[class~="label"],[class~="caption"],[class~="eyebrow"],.section-tab),
+body.desktop-overhaul-v18 :is(.dar-v8-navcaption,.v8-player-label,.qa26-kicker,.prayer-label,.prayer-locate,.prayer-next small,.dar-v8-route-related>span){
+ font-size:max(11px,1em);
+ line-height:1.4
+}
+body.desktop-overhaul-v18.dar-v8-night #pageRoot>p{color:var(--v8-muted)}
+body.desktop-overhaul-v18.dar-v8-night #pageRoot .section-tabs .section-tab{color:var(--v8-muted)}
+body.desktop-overhaul-v18.dar-v8-night #pageRoot .section-tabs .section-tab:is(:hover,.active){color:var(--v8-ink)}
+
 body.desktop-overhaul-v18 .dar-v8-route-hero :is(.dar-v8-route-link,.dar-v8-route-actions a):focus-visible,
 body.desktop-overhaul-v18 :is(.dar-v8-side-link,.dar-v8-mobile-dock a,.dar-v8-mobile-dock button,.dar-v8-top-search,.dar-v8-top-icon):focus-visible{
  outline:2px solid var(--v8-gold)!important;outline-offset:2px!important
