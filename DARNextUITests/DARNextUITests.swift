@@ -64,9 +64,8 @@ final class DARNextUITests: XCTestCase {
         let sourceIdentifier = sourceCard.identifier
         sourceCard.tap()
 
-        let detail = app.scrollViews.matching(
-            NSPredicate(format: "identifier BEGINSWITH %@", "post-detail-")
-        ).firstMatch
+        let detailIdentifier = "post-detail-" + sourceIdentifier.dropFirst("post-card-".count)
+        let detail = app.descendants(matching: .any).matching(identifier: detailIdentifier).firstMatch
         XCTAssertTrue(detail.waitForExistence(timeout: 10))
         XCTAssertTrue(app.navigationBars.buttons["Beiträge"].waitForExistence(timeout: 10))
         app.navigationBars.buttons["Beiträge"].tap()
@@ -90,7 +89,10 @@ final class DARNextUITests: XCTestCase {
 
         let tabBar = app.tabBars.firstMatch
         XCTAssertTrue(tabBar.waitForExistence(timeout: 10))
-        tabBar.buttons["Mehr"].tap()
+        let moreTab = app.buttons["Mehr"]
+        XCTAssertTrue(moreTab.waitForExistence(timeout: 10))
+        XCTAssertTrue(moreTab.isHittable, "Der Tab Mehr muss auf dem iPhone erreichbar sein.")
+        moreTab.tap()
 
         let hubLink = app.buttons.matching(
             NSPredicate(format: "label CONTAINS %@", "Islamische Bereiche")
@@ -137,5 +139,25 @@ final class DARNextUITests: XCTestCase {
 
         XCTAssertTrue(prayerCard.waitForExistence(timeout: 8))
         XCTAssertTrue(prayerCard.isHittable, "Zurück muss die ursprüngliche Kartenposition wiederherstellen.")
+    }
+
+    @MainActor
+    func testDashboardHeroScrollReturnsToOrigin() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        let hero = app.staticTexts["DĀR NEXT"]
+        XCTAssertTrue(hero.waitForExistence(timeout: 12))
+        let prayerCard = app.buttons["dashboard-prayer-open-from-home"]
+        XCTAssertTrue(prayerCard.waitForExistence(timeout: 12))
+
+        for _ in 0..<3 {
+            app.swipeUp(velocity: .slow)
+            app.swipeUp(velocity: .fast)
+            app.swipeDown(velocity: .fast)
+            app.swipeDown(velocity: .slow)
+            XCTAssertTrue(hero.exists)
+            XCTAssertTrue(prayerCard.isHittable)
+        }
     }
 }
