@@ -28,6 +28,9 @@ function el(tag) {
  };
 }
 const target = el("div"), todayName = el("span"), todayArticle = el("button");
+// The independent daily resolver owns this tile; recent() must never mutate it.
+todayName.textContent = "Kanonische Tagesempfehlung";
+todayArticle.dataset.dhpValue = "daily-canonical-post";
 const box = {
  querySelector(selector) {
   return { "#dhpPosts": target, "#dhpTodayName": todayName, "#dhpTodayArticle": todayArticle }[selector] || null;
@@ -53,8 +56,8 @@ assert.equal(target.children[0].children[1].textContent, posts[0].title);
 assert.equal(target.children[1].children[0].children[0].textContent, posts[1].title);
 assert.equal(target.children[0].children[2].textContent, "al-Ḥasan al-Baṣrī · Tazkiyah");
 assert.equal(target.children[1].children[0].children[1].textContent, "Ibn ʿAbbās · ʿAqīdah / Tawḥīd");
-assert.equal(todayName.textContent, posts[0].title);
-assert.equal(todayArticle.dataset.dhpValue, "q-101");
+assert.equal(todayName.textContent, "Kanonische Tagesempfehlung");
+assert.equal(todayArticle.dataset.dhpValue, "daily-canonical-post");
 const first = target.children[0];
 vm.runInContext("recent();", context);
 assert.strictEqual(target.children[0], first, "Unchanged data should not re-render");
@@ -63,5 +66,5 @@ vm.runInContext("recent();", context);
 assert.equal(target.children.length, 1, "Refresh did not replace old publications");
 assert.equal(target.children[0].children[1].textContent, "Neuer geprüfter Beitrag");
 assert.equal(target.children[0].children[2].textContent, "Qurʾān · Sunnah · Aṯār");
-assert.equal(todayArticle.dataset.dhpValue, "q-104");
+assert.equal(todayArticle.dataset.dhpValue, "daily-canonical-post");
 console.log("PASS — latest publications read canonical posts directly; geometry, text and update semantics preserved.");
