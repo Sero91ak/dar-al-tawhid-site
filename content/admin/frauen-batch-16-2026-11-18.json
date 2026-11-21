@@ -351,7 +351,30 @@
     "overrideExistingSecurityGates": false,
     "actionStatus": "recorded-awaiting-release-gates",
     "notificationAudienceCorrectionAt": "2026-11-21",
-    "notificationAudienceCorrection": "global opted-in adults, profile-controlled UI presentation; supersedes original women-segment constraint for this batch"
+    "notificationAudienceCorrection": "global opted-in adults, profile-controlled UI presentation; supersedes original women-segment constraint for this batch",
+    "requestedDistribution": {
+      "recordedAt": "2026-11-21",
+      "latestOwnerInstruction": "So Push jetzt live und an Besucher auch",
+      "productionChannels": [
+        "public-visitor-web-https://dar-al-tawhid.de/",
+        "adult-iOS-native",
+        "adult-Android/PWA"
+      ],
+      "inAppVisibility": "existing profile-scoped women knowledge UI; do not change protected profile routing",
+      "actionOrder": [
+        "publish all 16 existing canonical IDs with 9 locale versions",
+        "verify public website and native app routes/readers/learning links and source links",
+        "once-only 9-locale global adult post push DAR_PUSH to opted-in subscriptions",
+        "persist delivery status idempotently"
+      ],
+      "notificationIdempotencyKey": "d1c40b28-2bd3-43fd-a14b-708df7d5d976",
+      "explicitContentAndNotificationConsent": true,
+      "technicalReleaseGatesMayNotBeFaked": true,
+      "noNewQIds": true,
+      "lastObservedMain": "all 16 existing source IDs remain quellenstatus=nicht-anzeigen",
+      "lastObservedPR": "open; optimize job failure, other gates success",
+      "currentStatus": "approved-request-blocked-before-live"
+    }
   },
   "notificationRoutingChoice": {
     "updatedAt": "2026-11-21",
