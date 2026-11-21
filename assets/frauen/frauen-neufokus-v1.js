@@ -42,10 +42,19 @@ function locale(){
  if(!I18N[s])s=s.split("-")[0];
  return I18N[s]?s:"de";
 }
+function profileAllowsWomenFocus(){
+ // Profile selection is device-local: never infer it from a push subscription.
+ // Neutral users can browse all knowledge areas; male profiles do not receive
+ // a women-focus recommendation on their personalized home dashboard.
+ var api=w.DAR_VISITOR_SMART_PROFILE_V1;
+ try{var selected=api&&typeof api.get==="function"?api.get():null;
+  return !selected||selected.gender!=="man";
+ }catch(_){return true}
+}
 function render(){
  var root=d.getElementById("dv3Home"),old=d.getElementById("darFrauenNeufokus48h");
  var now=Date.now();
- if(!root||!enabled||now<started||now>=until){
+ if(!root||!enabled||now<started||now>=until||!profileAllowsWomenFocus()){
    if(old)old.remove();return;
  }
  var t=I18N[locale()],rtl=locale()==="ar"||locale()==="ckb";
@@ -58,7 +67,7 @@ function render(){
   if(anchor&&anchor.insertAdjacentElement)anchor.insertAdjacentElement("afterend",button);
   else root.appendChild(button);
   button.addEventListener("click",function(){
-   if(!enabled||Date.now()>=until)return;
+   if(!enabled||Date.now()>=until||!profileAllowsWomenFocus())return;
    try{if(typeof w.navigate==="function"){w.navigate("frauen");return}}catch(_){}
    w.location.hash="#frauen";
   });
@@ -165,6 +174,7 @@ function init(){
  }
  observe();schedule(true);
  d.addEventListener("dar:view-rendered",function(){observe();schedule(false)});
+ d.addEventListener("dar:visitor-profile-changed",function(){render()});
  w.addEventListener("hashchange",function(){schedule(false)});
  w.addEventListener("pageshow",function(){schedule(true)});
  w.addEventListener("dar-adult-locale-changed",function(){render()});
