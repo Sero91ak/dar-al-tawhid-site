@@ -247,9 +247,27 @@
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLocalViews()});
   document.addEventListener('dar:open-hadith',()=>{window.setTimeout(()=>{const h=window.darHomeHadith;const text=$('hadithPanelText'),kind=$('hadithPanelKind'),source=$('hadithPanelSource'),narrator=$('hadithPanelNarrator');if(h){if(text)text.textContent=h.text||'';if(kind)kind.textContent=h.kind||'Ḥadīṯ';if(source)source.textContent=h.source||'Quelle nicht verfügbar';if(narrator)narrator.textContent=h.narrator||''}},0)});
  }
+ function syncNavCapsules(){
+  const nav=[...document.querySelectorAll('.home-nav button')],setting=$('openSettings');
+  if(!nav.length||!setting)return;
+  const portrait=matchMedia('(orientation: portrait)').matches;
+  const shortLandscape=!portrait&&innerWidth<=700&&innerHeight<=440;
+  const width=portrait?Math.min(76,Math.max(56,innerWidth*.11)):shortLandscape?64:Math.min(108,Math.max(64,innerWidth*.065));
+  const height=portrait?48:44;
+  [...nav,setting].forEach(button=>{
+   button.style.setProperty('box-sizing','border-box','important');
+   button.style.setProperty('width',width+'px','important');
+   button.style.setProperty('min-width',width+'px','important');
+   button.style.setProperty('max-width',width+'px','important');
+   button.style.setProperty('height',height+'px','important');
+   button.style.setProperty('min-height',height+'px','important');
+   button.style.setProperty('max-height',height+'px','important');
+   button.style.setProperty('flex','0 0 auto','important');
+  });
+ }
  function init(){
   if(!$('app'))return;
-  augmentBrand();bind();bindAppearancePicker();bindHomeActions();apply();store();setActiveNav('prayer');renderHijriDate();loadMediaCatalog();setInterval(()=>{if(prefs.wallpaperMode==='auto'||prefs.saverWallpaper==='auto')apply()},300000);handleConnection();
+  augmentBrand();bind();bindAppearancePicker();bindHomeActions();apply();store();setActiveNav('prayer');syncNavCapsules();window.addEventListener('resize',syncNavCapsules,{passive:true});screen.orientation?.addEventListener('change',syncNavCapsules);renderHijriDate();loadMediaCatalog();setInterval(()=>{if(prefs.wallpaperMode==='auto'||prefs.saverWallpaper==='auto')apply()},300000);handleConnection();
   const el=$('adhanVisual');if(el)new MutationObserver(updateAdhanTitle).observe(el,{attributes:true,attributeFilter:['class']});
   window.addEventListener('online',handleConnection);window.addEventListener('offline',handleConnection);
   const i=document.querySelector('[data-tab="hintergrund"]');if(i){const img=document.createElement('img');img.src=icon('image');img.alt='';img.className='settings-icons';i.prepend(img)}
