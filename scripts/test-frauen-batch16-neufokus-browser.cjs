@@ -66,6 +66,8 @@ function snapshot(isPublic,locale) {
  await page.evaluate(()=>{
   window.__focusedRoute="";window.navigate=view=>{window.__focusedRoute=view};
   window.localStorage.setItem("darAdultPreferredLocaleV1","de");
+  window.__testGender="neutral";
+  window.DAR_VISITOR_SMART_PROFILE_V1={get:()=>({gender:window.__testGender})};
   // Capture genuine 48h timers while keeping this local Chromium fixture fast.
   const schedule=window.setTimeout.bind(window),cancel=window.clearTimeout.bind(window);
   window.__expiryCallbacks=new Map();let nextId=-100;
@@ -100,6 +102,11 @@ function snapshot(isPublic,locale) {
  const banner=page.locator("#darFrauenNeufokus48h");
  await banner.waitFor({timeout:10000});
  assert.ok(await banner.isVisible(),viewport.name+" focus not visible");
+ for(const gender of ["man","woman","neutral"]){
+  await page.evaluate(gender=>{window.__testGender=gender;document.dispatchEvent(new Event("dar:visitor-profile-changed"))},gender);
+  await page.evaluate(()=>window.DARFrauenNeufokusV1.refresh());
+  assert.ok(await banner.isVisible(),viewport.name+" spotlight hidden for "+gender+" profile");
+ }
  assert.ok((await banner.innerText()).includes("16 neue Frauenbeiträge"));
  await banner.click();
  assert.equal(await page.evaluate(()=>window.__focusedRoute),"frauen","Home card not opening women area");
@@ -137,6 +144,6 @@ function snapshot(isPublic,locale) {
   assert.equal(a.quellenstatus,"nicht-anzeigen");
  }
  assert.equal(focus.items.find(x=>x.id===id).status,"draft");
- console.log("PASS live-like Frauen home focus: 4 real responsive Chromium layouts, 36 localized cards (RTL), source/expiry fail-closed, app navigation and unchanged repository data.");
+ console.log("PASS live-like Frauen home focus: global male/female/neutral and 4 real responsive Chromium layouts, 36 localized cards (RTL), source/expiry fail-closed, app navigation and unchanged repository data.");
  }finally{if(browser)await browser.close()}
 })().catch(e=>{console.error(e.stack||e);process.exitCode=1});
