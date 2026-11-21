@@ -25,6 +25,10 @@ Diese Branch vorbereitet eine sichere Weiterleitung von ChatGPT an den vorhanden
 - Die Linknummerierung, Quellenprüfung, Einzel-/Slide-Logik und der bestehende DAR-Admin-Publisher bleiben verbindlich.
 - Kids, Apple TV und Dar Test erhalten über diese Verbindung weder neue Inhalte noch Änderungen.
 
+## Schriftbild des Aussagegebers und exakte Quellen (21.11.2026)
+
+Der Eigentümer verlangt **vollständig kopierfetten Aussagegeber mit lateinischer Ehrformel** nach 🖋️. Beispiel: `𝐔𝐦𝐚𝐫 𝐢𝐛𝐧 𝐀𝐛𝐝 𝐚𝐥-𝐀𝐳𝐢𝐳 (𝐫𝐚𝐡𝐢𝐦𝐚𝐡𝐮𝐥𝐥𝐚𝐡)`. Im wörtlichen Zitat wichtige Wörter/kurze Sätze als echte Unicode-Fett- bzw. geschwungene Fettkursivglyphen; Quellen unmittelbar nach dem Doppelpunkt bibliografisch und überlieferungskritisch vollständig; Fazit mit wörtlich kopierbaren Hervorhebungen. Keine Markdown-only-Schrift und keine halbfetten Umlaute. Prüftemplate unter `docs/beitragszentrum-social-unicode-regeln-20261121.md`. Gilt für die bestehende Zentrale ohne weitere Automation; App-Post und OneSignal unverändert.
+
 ## Verbindliche Apple-Notizen-Endabgabe nach eigener Q-Seite (20.11.2026)
 
 Die Reihenfolge lautet: neuer quellengeprüfter Entwurf → auf Eigentümeranweisung eine live-verifizierte kanonische Q-Karte mit neun vollständigen Sprachfassungen und Lernbereich → **als letzte Chat-Ausgabe ein einziger kopierfester Apple-Notizen-Beitrag** (📖 Unicode-Fetttitel; darunter genau vier Hashtags; 🖋️ Aussage; 📝 Quellen; 🔗 eigene Q-URL; 🌙 kurzes Fazit). Externe `#:~:text=`-Belege und ein nur verifiziertes PDF-`#page=N` gehören auf die Q-Seite. Kein Repo-Commit ist ein Live-Nachweis. Der App-/OneSignal-Push folgt **nur** nach gesondertem ausdrücklich freigegebenem „Push live“ und allen bestehenden Gates. Vollständige Regel: `docs/beitragszentrum-apple-notizen-q-push.md`.
