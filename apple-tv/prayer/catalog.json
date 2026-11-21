@@ -20,7 +20,7 @@
   },
   "selection": {
     "includeAllReciters": true,
-    "useEmbeddedReciters": true,
+    "useEmbeddedReciters": false,
     "allowChoiceWithoutDownload": true,
     "lockToDownloadedOnly": false,
     "defaultEdition": "ar.alafasy",
@@ -43,7 +43,7 @@
     "autoplay": true
   },
   "offline": {
-    "downloadSelectedReciter": true,
+    "downloadSelectedReciter": false,
     "downloadSelectedReciterInBackground": false,
     "lockToDownloadedOnly": false
   },
