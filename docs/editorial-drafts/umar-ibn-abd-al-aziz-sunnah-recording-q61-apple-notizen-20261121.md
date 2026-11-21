@@ -15,8 +15,8 @@ Denn ich fürchte das 𝑽𝒆𝒓𝒃𝒍𝒂𝒔𝒔𝒆𝒏 𝒅𝒆𝒔 𝑾
 
 Ibn Ḥaǧar al-ʿAsqalānī, Fatḥ al-Bārī, Bd. 1, S. 235 (zitierte digitale Ausgabe), zum selben Kapitel. Er grenzt die später angehängten Sätze vom belegten Wortlaut des Briefes ab.
 
-Überlieferungsart: 𝐌𝐚𝐪𝐭𝐮ʿ – Aussage eines Tābiʿī, 𝐤𝐞𝐢𝐧 Prophetenḥadīṯ. Zeitliche Einordnung: gegen Ende des 1. islamischen Jahrhunderts; das genaue Datum des Briefes ist nicht belegt.
+Überlieferungsart: maqṭūʿ – Aussage eines Tābiʿī, 𝐤𝐞𝐢𝐧 Prophetenḥadīṯ. Zeitliche Einordnung: gegen Ende des 1. islamischen Jahrhunderts; das genaue Datum des Briefes ist nicht belegt.
 
 🔗 𝐐𝐮𝐞𝐥𝐥𝐞: dar-al-tawhid.de/q/61/
 
-🌙 𝐅𝐚𝐳𝐢𝐭: Die 𝑺𝒖𝒏𝒏𝒂𝒉 des Gesandten Allāhs ﷺ muss 𝐛𝐞𝐰𝐚𝐡𝐫𝐭 und 𝐬𝐨𝐫𝐠𝐟𝐚𝐞𝐥𝐭𝐢𝐠 weitergegeben werden. Wer Wissen überliefert, darf ungesicherte Zusätze nicht als authentische Aussage ausgeben.
+🌙 𝐅𝐚𝐳𝐢𝐭: Die 𝑺𝒖𝒏𝒏𝒂𝒉 des Gesandten Allāhs ﷺ muss 𝐛𝐞𝐰𝐚𝐡𝐫𝐭 und 𝐬𝐨𝐫𝐠𝐬𝐚𝐦 weitergegeben werden. Wer Wissen überliefert, darf ungesicherte Zusätze nicht als authentische Aussage ausgeben.
