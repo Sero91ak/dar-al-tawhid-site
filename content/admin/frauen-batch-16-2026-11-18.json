@@ -243,7 +243,7 @@
       "push-global-freigabe",
       "post-push-freigabe"
     ],
-    "sendVia": "existing DAR Admin contribution publisher; existing verified global adult DAR_PUSH lane; not OneSignal all/unspecified",
+    "sendVia": "existing DAR Admin contribution publisher; DAR_PUSH is an unverified candidate and MUST be proven adult-app AND post-push-opt-in before sending; never OneSignal all/unspecified",
     "idempotencyKey": "frauen-batch16-20261118",
     "onceOnly": true,
     "localizedMessages": {
@@ -286,7 +286,7 @@
     },
     "messageReview": "editorial drafts; native-language validation required before any send",
     "guardStatus": "not-authorized-not-sent",
-    "redirectMustOpen": "Global push opens the adult home. The selected local gender profile determines which knowledge focus card is shown (woman or neutral visible; man hidden). Female knowledge card navigates to #frauen.",
+    "redirectMustOpen": "Global push opens the adult home. The 48h NEUFOKUS announcement must be visible to all opted-in adult visitor profiles: woman, man and neutral. Other profile-specific women recommendations remain unchanged. The global focus card navigates to #frauen.",
     "providerIdempotencyUuid": "d1c40b28-2bd3-43fd-a14b-708df7d5d976",
     "providerIdempotencyPolicy": "Immutable UUIDv4 idempotency_key for one global opted-in adult post-push announcement. Send only after all 16 records are live and fully approved; do not target Kids or unsubscribe states.",
     "deliveryLanguageVerification": {
@@ -394,7 +394,7 @@
       "es"
     ],
     "deliveryRules": "One once-only announcement to adult post-push subscribers; do not include Kids, opted-out devices, or unknown non-adult audiences.",
-    "displayRule": "On adult homepage women-focused 48h card appears for woman/neutral and hides for man. All opted-in adult-post subscribers receive global message, but not all are offered the same women-specific home focus.",
+    "displayRule": "The 48h NEUFOKUS announcement appears globally on the adult homepage for woman, man and neutral, independent of profile. Only the other profile-specific recommendation sections may filter by gender; the global announcement always navigates to #frauen.",
     "priorKnowledgeWomanTargeting": "Superseded by owner's new explicit instruction for THIS 16-item announcement, not for other women-only knowledge campaigns.",
     "requireFirst": "All 16 items published and accessible, release CI and source/locale quality gates, safe URL/deep-link verified.",
     "plannedIdempotencyKey": "d1c40b28-2bd3-43fd-a14b-708df7d5d976",
