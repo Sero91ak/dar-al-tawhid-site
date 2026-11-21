@@ -1,0 +1,1561 @@
+{
+  "schemaVersion": 1,
+  "title": "DĀR AL TAWḤĪD Frauen · 16/16 Quellen- und 144/144 Sprachfassungs-Abgleich",
+  "createdAt": "2026-11-21",
+  "scope": "PR 1793 women batch 16",
+  "strictlyNoPublication": true,
+  "editorialOwnerConsentRecorded": true,
+  "checks": {
+    "canonicalRecords": 16,
+    "languageVariants": 144,
+    "requiredLanguageCodes": [
+      "de",
+      "ar",
+      "en",
+      "tr",
+      "ku",
+      "ckb",
+      "bs",
+      "fr",
+      "es"
+    ],
+    "completeTextFieldsEach": [
+      "title",
+      "statement",
+      "preview",
+      "lesson",
+      "sharh",
+      "source"
+    ],
+    "rtl": [
+      "ar",
+      "ckb"
+    ],
+    "sourceUrlsIdenticalAcrossEntries": true,
+    "sourceIdsIdenticalAcrossEntries": true,
+    "arabicShortQuoteSpotchecks": 16,
+    "duplicatePrimarySources": 0,
+    "allOwnerApprovalFlags": true,
+    "allStillHidden": true,
+    "structuralIssues": []
+  },
+  "provenance": {
+    "independentHumanScholarSignoff": false,
+    "independentNativeLanguageSignoff": false,
+    "verifiedSourceScope": "Primary landing pages are direct hadith number targets; only Arabic excerpt snippets were compared, not complete isnad and translation certification",
+    "fullNativeAppDevicesManuallyTested": false,
+    "existingBrowserCI": "GitHub 1793 branch checked canonical nine languages and browser tests, media optimize failed on preexisting large backgrounds",
+    "qualityClaimsDoNotInclude": "human-certified translation or full scholarly authentication"
+  },
+  "publicationSafety": {
+    "contentNotReleased": true,
+    "oneSignalSent": false,
+    "requires": "owner's publishing instruction recorded; final reviewer gates and live production tests still outstanding; protected push lock still locked; no password invented"
+  },
+  "items": [
+    {
+      "id": "sahabiyyat-umm-haram-seeueberfahrt-20261106",
+      "title": "Umm Ḥarām und die vorausgesagte Seereise",
+      "primarySourceId": "bukhari:2788",
+      "originalSourceUrl": "https://sunnah.com/bukhari:2788",
+      "languageCount": 9,
+      "packs": {
+        "de": {
+          "title": 40,
+          "statement": 418,
+          "preview": 83,
+          "lesson": 89,
+          "sharh": 180,
+          "source": 53,
+          "dir": "ltr"
+        },
+        "ar": {
+          "title": 45,
+          "statement": 266,
+          "preview": 112,
+          "lesson": 62,
+          "sharh": 117,
+          "source": 44,
+          "dir": "rtl"
+        },
+        "en": {
+          "title": 37,
+          "statement": 395,
+          "preview": 72,
+          "lesson": 102,
+          "sharh": 152,
+          "source": 61,
+          "dir": "ltr"
+        },
+        "tr": {
+          "title": 51,
+          "statement": 416,
+          "preview": 289,
+          "lesson": 76,
+          "sharh": 151,
+          "source": 55,
+          "dir": "ltr"
+        },
+        "ku": {
+          "title": 52,
+          "statement": 397,
+          "preview": 83,
+          "lesson": 73,
+          "sharh": 136,
+          "source": 63,
+          "dir": "ltr"
+        },
+        "ckb": {
+          "title": 51,
+          "statement": 422,
+          "preview": 94,
+          "lesson": 74,
+          "sharh": 126,
+          "source": 55,
+          "dir": "rtl"
+        },
+        "bs": {
+          "title": 38,
+          "statement": 380,
+          "preview": 86,
+          "lesson": 73,
+          "sharh": 139,
+          "source": 55,
+          "dir": "ltr"
+        },
+        "fr": {
+          "title": 37,
+          "statement": 469,
+          "preview": 89,
+          "lesson": 92,
+          "sharh": 201,
+          "source": 60,
+          "dir": "ltr"
+        },
+        "es": {
+          "title": 39,
+          "statement": 418,
+          "preview": 80,
+          "lesson": 94,
+          "sharh": 177,
+          "source": 64,
+          "dir": "ltr"
+        }
+      },
+      "arabicExcerptCompared": true,
+      "ownerApprovalFlag": true,
+      "visiblityAsOfCheck": "nicht-anzeigen",
+      "sourceMethod": "Previous primary-text spotcheck, plus direct Sunnah.com landing page accessibility; full matn/isnad independent sign-off absent"
+    },
+    {
+      "id": "sahabiyyat-umm-hani-schutz-20261106",
+      "title": "Umm Hāniʾ gewährte Schutz bei der Eroberung Makkahs",
+      "primarySourceId": "bukhari:357",
+      "originalSourceUrl": "https://sunnah.com/bukhari:357",
+      "languageCount": 9,
+      "packs": {
+        "de": {
+          "title": 51,
+          "statement": 286,
+          "preview": 81,
+          "lesson": 108,
+          "sharh": 206,
+          "source": 49,
+          "dir": "ltr"
+        },
+        "ar": {
+          "title": 33,
+          "statement": 153,
+          "preview": 42,
+          "lesson": 61,
+          "sharh": 139,
+          "source": 34,
+          "dir": "rtl"
+        },
+        "en": {
+          "title": 54,
+          "statement": 280,
+          "preview": 83,
+          "lesson": 91,
+          "sharh": 213,
+          "source": 49,
+          "dir": "ltr"
+        },
+        "tr": {
+          "title": 45,
+          "statement": 259,
+          "preview": 77,
+          "lesson": 75,
+          "sharh": 189,
+          "source": 44,
+          "dir": "ltr"
+        },
+        "ku": {
+          "title": 44,
+          "statement": 234,
+          "preview": 68,
+          "lesson": 89,
+          "sharh": 170,
+          "source": 52,
+          "dir": "ltr"
+        },
+        "ckb": {
+          "title": 42,
+          "statement": 244,
+          "preview": 67,
+          "lesson": 75,
+          "sharh": 177,
+          "source": 45,
+          "dir": "rtl"
+        },
+        "bs": {
+          "title": 52,
+          "statement": 258,
+          "preview": 75,
+          "lesson": 95,
+          "sharh": 195,
+          "source": 44,
+          "dir": "ltr"
+        },
+        "fr": {
+          "title": 65,
+          "statement": 302,
+          "preview": 91,
+          "lesson": 95,
+          "sharh": 225,
+          "source": 49,
+          "dir": "ltr"
+        },
+        "es": {
+          "title": 61,
+          "statement": 270,
+          "preview": 74,
+          "lesson": 105,
+          "sharh": 206,
+          "source": 53,
+          "dir": "ltr"
+        }
+      },
+      "arabicExcerptCompared": true,
+      "ownerApprovalFlag": true,
+      "visiblityAsOfCheck": "nicht-anzeigen",
+      "sourceMethod": "Previous primary-text spotcheck, plus direct Sunnah.com landing page accessibility; full matn/isnad independent sign-off absent"
+    },
+    {
+      "id": "sahabiyyat-fatimah-geheimnis-20261106",
+      "title": "Fāṭimah weinte und lachte nach zwei vertraulichen Mitteilungen",
+      "primarySourceId": "bukhari:3623",
+      "originalSourceUrl": "https://sunnah.com/bukhari:3623",
+      "languageCount": 9,
+      "packs": {
+        "de": {
+          "title": 62,
+          "statement": 570,
+          "preview": 112,
+          "lesson": 114,
+          "sharh": 246,
+          "source": 46,
+          "dir": "ltr"
+        },
+        "ar": {
+          "title": 34,
+          "statement": 340,
+          "preview": 108,
+          "lesson": 65,
+          "sharh": 145,
+          "source": 38,
+          "dir": "rtl"
+        },
+        "en": {
+          "title": 56,
+          "statement": 508,
+          "preview": 71,
+          "lesson": 115,
+          "sharh": 223,
+          "source": 54,
+          "dir": "ltr"
+        },
+        "tr": {
+          "title": 47,
+          "statement": 487,
+          "preview": 97,
+          "lesson": 79,
+          "sharh": 197,
+          "source": 48,
+          "dir": "ltr"
+        },
+        "ku": {
+          "title": 42,
+          "statement": 438,
+          "preview": 77,
+          "lesson": 87,
+          "sharh": 201,
+          "source": 56,
+          "dir": "ltr"
+        },
+        "ckb": {
+          "title": 40,
+          "statement": 458,
+          "preview": 77,
+          "lesson": 85,
+          "sharh": 185,
+          "source": 49,
+          "dir": "rtl"
+        },
+        "bs": {
+          "title": 66,
+          "statement": 467,
+          "preview": 80,
+          "lesson": 92,
+          "sharh": 198,
+          "source": 48,
+          "dir": "ltr"
+        },
+        "fr": {
+          "title": 46,
+          "statement": 507,
+          "preview": 87,
+          "lesson": 122,
+          "sharh": 237,
+          "source": 53,
+          "dir": "ltr"
+        },
+        "es": {
+          "title": 47,
+          "statement": 468,
+          "preview": 74,
+          "lesson": 105,
+          "sharh": 213,
+          "source": 57,
+          "dir": "ltr"
+        }
+      },
+      "arabicExcerptCompared": true,
+      "ownerApprovalFlag": true,
+      "visiblityAsOfCheck": "nicht-anzeigen",
+      "sourceMethod": "Previous primary-text spotcheck, plus direct Sunnah.com landing page accessibility; full matn/isnad independent sign-off absent"
+    },
+    {
+      "id": "sahabiyyat-umm-qays-saeugling-20261106",
+      "title": "Umm Qays überlieferte eine Reinigungsbegebenheit mit ihrem Säugling",
+      "primarySourceId": "bukhari:223",
+      "originalSourceUrl": "https://sunnah.com/bukhari:223",
+      "languageCount": 9,
+      "packs": {
+        "de": {
+          "title": 67,
+          "statement": 241,
+          "preview": 90,
+          "lesson": 86,
+          "sharh": 194,
+          "source": 60,
+          "dir": "ltr"
+        },
+        "ar": {
+          "title": 41,
+          "statement": 167,
+          "preview": 90,
+          "lesson": 59,
+          "sharh": 134,
+          "source": 42,
+          "dir": "rtl"
+        },
+        "en": {
+          "title": 62,
+          "statement": 242,
+          "preview": 116,
+          "lesson": 110,
+          "sharh": 184,
+          "source": 60,
+          "dir": "ltr"
+        },
+        "tr": {
+          "title": 44,
+          "statement": 218,
+          "preview": 102,
+          "lesson": 83,
+          "sharh": 202,
+          "source": 55,
+          "dir": "ltr"
+        },
+        "ku": {
+          "title": 57,
+          "statement": 208,
+          "preview": 102,
+          "lesson": 73,
+          "sharh": 158,
+          "source": 63,
+          "dir": "ltr"
+        },
+        "ckb": {
+          "title": 68,
+          "statement": 223,
+          "preview": 102,
+          "lesson": 67,
+          "sharh": 164,
+          "source": 53,
+          "dir": "rtl"
+        },
+        "bs": {
+          "title": 72,
+          "statement": 224,
+          "preview": 111,
+          "lesson": 76,
+          "sharh": 163,
+          "source": 55,
+          "dir": "ltr"
+        },
+        "fr": {
+          "title": 70,
+          "statement": 254,
+          "preview": 126,
+          "lesson": 115,
+          "sharh": 209,
+          "source": 60,
+          "dir": "ltr"
+        },
+        "es": {
+          "title": 51,
+          "statement": 221,
+          "preview": 112,
+          "lesson": 92,
+          "sharh": 191,
+          "source": 64,
+          "dir": "ltr"
+        }
+      },
+      "arabicExcerptCompared": true,
+      "ownerApprovalFlag": true,
+      "visiblityAsOfCheck": "nicht-anzeigen",
+      "sourceMethod": "Previous primary-text spotcheck, plus direct Sunnah.com landing page accessibility; full matn/isnad independent sign-off absent"
+    },
+    {
+      "id": "sahabiyyat-umm-sulaym-duft-20261106",
+      "title": "Umm Sulaym bewahrte den Schweiß des Propheten ﷺ für ihren Duft",
+      "primarySourceId": "muslim:2331a",
+      "originalSourceUrl": "https://sunnah.com/muslim:2331a",
+      "languageCount": 9,
+      "packs": {
+        "de": {
+          "title": 62,
+          "statement": 211,
+          "preview": 118,
+          "lesson": 80,
+          "sharh": 198,
+          "source": 45,
+          "dir": "ltr"
+        },
+        "ar": {
+          "title": 33,
+          "statement": 124,
+          "preview": 70,
+          "lesson": 46,
+          "sharh": 96,
+          "source": 37,
+          "dir": "rtl"
+        },
+        "en": {
+          "title": 60,
+          "statement": 214,
+          "preview": 122,
+          "lesson": 84,
+          "sharh": 207,
+          "source": 52,
+          "dir": "ltr"
+        },
+        "tr": {
+          "title": 55,
+          "statement": 205,
+          "preview": 115,
+          "lesson": 79,
+          "sharh": 186,
+          "source": 51,
+          "dir": "ltr"
+        },
+        "ku": {
+          "title": 53,
+          "statement": 206,
+          "preview": 105,
+          "lesson": 75,
+          "sharh": 163,
+          "source": 55,
+          "dir": "ltr"
+        },
+        "ckb": {
+          "title": 47,
+          "statement": 197,
+          "preview": 107,
+          "lesson": 70,
+          "sharh": 182,
+          "source": 51,
+          "dir": "rtl"
+        },
+        "bs": {
+          "title": 52,
+          "statement": 194,
+          "preview": 116,
+          "lesson": 71,
+          "sharh": 179,
+          "source": 48,
+          "dir": "ltr"
+        },
+        "fr": {
+          "title": 66,
+          "statement": 230,
+          "preview": 119,
+          "lesson": 86,
+          "sharh": 248,
+          "source": 52,
+          "dir": "ltr"
+        },
+        "es": {
+          "title": 56,
+          "statement": 192,
+          "preview": 106,
+          "lesson": 105,
+          "sharh": 217,
+          "source": 56,
+          "dir": "ltr"
+        }
+      },
+      "arabicExcerptCompared": true,
+      "ownerApprovalFlag": true,
+      "visiblityAsOfCheck": "nicht-anzeigen",
+      "sourceMethod": "Previous primary-text spotcheck, plus direct Sunnah.com landing page accessibility; full matn/isnad independent sign-off absent"
+    },
+    {
+      "id": "sahabiyyat-barirah-entscheidung-20261106",
+      "title": "Barīrah erhielt nach ihrer Freilassung eine Entscheidungsmöglichkeit",
+      "primarySourceId": "bukhari:5097",
+      "originalSourceUrl": "https://sunnah.com/bukhari:5097",
+      "languageCount": 9,
+      "packs": {
+        "de": {
+          "title": 68,
+          "statement": 292,
+          "preview": 95,
+          "lesson": 127,
+          "sharh": 223,
+          "source": 41,
+          "dir": "ltr"
+        },
+        "ar": {
+          "title": 22,
+          "statement": 166,
+          "preview": 57,
+          "lesson": 67,
+          "sharh": 157,
+          "source": 33,
+          "dir": "rtl"
+        },
+        "en": {
+          "title": 49,
+          "statement": 285,
+          "preview": 90,
+          "lesson": 101,
+          "sharh": 211,
+          "source": 48,
+          "dir": "ltr"
+        },
+        "tr": {
+          "title": 45,
+          "statement": 248,
+          "preview": 79,
+          "lesson": 88,
+          "sharh": 186,
+          "source": 43,
+          "dir": "ltr"
+        },
+        "ku": {
+          "title": 50,
+          "statement": 234,
+          "preview": 83,
+          "lesson": 91,
+          "sharh": 176,
+          "source": 51,
+          "dir": "ltr"
+        },
+        "ckb": {
+          "title": 44,
+          "statement": 258,
+          "preview": 82,
+          "lesson": 92,
+          "sharh": 183,
+          "source": 44,
+          "dir": "rtl"
+        },
+        "bs": {
+          "title": 47,
+          "statement": 275,
+          "preview": 94,
+          "lesson": 83,
+          "sharh": 181,
+          "source": 43,
+          "dir": "ltr"
+        },
+        "fr": {
+          "title": 47,
+          "statement": 274,
+          "preview": 98,
+          "lesson": 102,
+          "sharh": 217,
+          "source": 48,
+          "dir": "ltr"
+        },
+        "es": {
+          "title": 46,
+          "statement": 271,
+          "preview": 89,
+          "lesson": 102,
+          "sharh": 209,
+          "source": 52,
+          "dir": "ltr"
+        }
+      },
+      "arabicExcerptCompared": true,
+      "ownerApprovalFlag": true,
+      "visiblityAsOfCheck": "nicht-anzeigen",
+      "sourceMethod": "Previous primary-text spotcheck, plus direct Sunnah.com landing page accessibility; full matn/isnad independent sign-off absent"
+    },
+    {
+      "id": "sahabiyyat-umm-habibah-milchverwandtschaft-20261106",
+      "title": "Umm Ḥabībah fragte nach Ehehindernissen durch Verwandtschaft",
+      "primarySourceId": "bukhari:5101",
+      "originalSourceUrl": "https://sunnah.com/bukhari:5101",
+      "languageCount": 9,
+      "packs": {
+        "de": {
+          "title": 60,
+          "statement": 304,
+          "preview": 116,
+          "lesson": 84,
+          "sharh": 207,
+          "source": 45,
+          "dir": "ltr"
+        },
+        "ar": {
+          "title": 42,
+          "statement": 169,
+          "preview": 75,
+          "lesson": 47,
+          "sharh": 135,
+          "source": 36,
+          "dir": "rtl"
+        },
+        "en": {
+          "title": 66,
+          "statement": 288,
+          "preview": 74,
+          "lesson": 87,
+          "sharh": 239,
+          "source": 52,
+          "dir": "ltr"
+        },
+        "tr": {
+          "title": 56,
+          "statement": 253,
+          "preview": 73,
+          "lesson": 70,
+          "sharh": 182,
+          "source": 47,
+          "dir": "ltr"
+        },
+        "ku": {
+          "title": 60,
+          "statement": 250,
+          "preview": 83,
+          "lesson": 63,
+          "sharh": 190,
+          "source": 55,
+          "dir": "ltr"
+        },
+        "ckb": {
+          "title": 59,
+          "statement": 267,
+          "preview": 84,
+          "lesson": 76,
+          "sharh": 172,
+          "source": 47,
+          "dir": "rtl"
+        },
+        "bs": {
+          "title": 54,
+          "statement": 241,
+          "preview": 76,
+          "lesson": 72,
+          "sharh": 191,
+          "source": 47,
+          "dir": "ltr"
+        },
+        "fr": {
+          "title": 71,
+          "statement": 269,
+          "preview": 66,
+          "lesson": 94,
+          "sharh": 227,
+          "source": 52,
+          "dir": "ltr"
+        },
+        "es": {
+          "title": 69,
+          "statement": 261,
+          "preview": 66,
+          "lesson": 97,
+          "sharh": 210,
+          "source": 56,
+          "dir": "ltr"
+        }
+      },
+      "arabicExcerptCompared": true,
+      "ownerApprovalFlag": true,
+      "visiblityAsOfCheck": "nicht-anzeigen",
+      "sourceMethod": "Previous primary-text spotcheck, plus direct Sunnah.com landing page accessibility; full matn/isnad independent sign-off absent"
+    },
+    {
+      "id": "sahabiyyat-aishah-jibril-salam-20261106",
+      "title": "ʿĀʾišah erhielt den Salām von Ǧibrīl",
+      "primarySourceId": "bukhari:3768",
+      "originalSourceUrl": "https://sunnah.com/bukhari:3768",
+      "languageCount": 9,
+      "packs": {
+        "de": {
+          "title": 36,
+          "statement": 164,
+          "preview": 77,
+          "lesson": 74,
+          "sharh": 202,
+          "source": 41,
+          "dir": "ltr"
+        },
+        "ar": {
+          "title": 27,
+          "statement": 117,
+          "preview": 117,
+          "lesson": 45,
+          "sharh": 112,
+          "source": 33,
+          "dir": "rtl"
+        },
+        "en": {
+          "title": 38,
+          "statement": 189,
+          "preview": 97,
+          "lesson": 75,
+          "sharh": 157,
+          "source": 48,
+          "dir": "ltr"
+        },
+        "tr": {
+          "title": 31,
+          "statement": 176,
+          "preview": 89,
+          "lesson": 58,
+          "sharh": 146,
+          "source": 43,
+          "dir": "ltr"
+        },
+        "ku": {
+          "title": 32,
+          "statement": 156,
+          "preview": 86,
+          "lesson": 76,
+          "sharh": 144,
+          "source": 51,
+          "dir": "ltr"
+        },
+        "ckb": {
+          "title": 27,
+          "statement": 157,
+          "preview": 67,
+          "lesson": 69,
+          "sharh": 130,
+          "source": 44,
+          "dir": "rtl"
+        },
+        "bs": {
+          "title": 31,
+          "statement": 156,
+          "preview": 79,
+          "lesson": 69,
+          "sharh": 138,
+          "source": 43,
+          "dir": "ltr"
+        },
+        "fr": {
+          "title": 32,
+          "statement": 184,
+          "preview": 93,
+          "lesson": 85,
+          "sharh": 173,
+          "source": 48,
+          "dir": "ltr"
+        },
+        "es": {
+          "title": 35,
+          "statement": 170,
+          "preview": 87,
+          "lesson": 86,
+          "sharh": 166,
+          "source": 52,
+          "dir": "ltr"
+        }
+      },
+      "arabicExcerptCompared": true,
+      "ownerApprovalFlag": true,
+      "visiblityAsOfCheck": "nicht-anzeigen",
+      "sourceMethod": "Previous primary-text spotcheck, plus direct Sunnah.com landing page accessibility; full matn/isnad independent sign-off absent"
+    },
+    {
+      "id": "sahabiyyat-asma-umays-zwei-hidschras-20261106",
+      "title": "Asmāʾ bint ʿUmays und die zwei Hidschras",
+      "primarySourceId": "bukhari:4231",
+      "originalSourceUrl": "https://sunnah.com/bukhari:4231",
+      "languageCount": 9,
+      "packs": {
+        "de": {
+          "title": 40,
+          "statement": 379,
+          "preview": 102,
+          "lesson": 116,
+          "sharh": 217,
+          "source": 81,
+          "dir": "ltr"
+        },
+        "ar": {
+          "title": 24,
+          "statement": 206,
+          "preview": 80,
+          "lesson": 69,
+          "sharh": 134,
+          "source": 60,
+          "dir": "rtl"
+        },
+        "en": {
+          "title": 40,
+          "statement": 332,
+          "preview": 136,
+          "lesson": 122,
+          "sharh": 198,
+          "source": 81,
+          "dir": "ltr"
+        },
+        "tr": {
+          "title": 29,
+          "statement": 301,
+          "preview": 126,
+          "lesson": 104,
+          "sharh": 178,
+          "source": 75,
+          "dir": "ltr"
+        },
+        "ku": {
+          "title": 29,
+          "statement": 289,
+          "preview": 124,
+          "lesson": 102,
+          "sharh": 144,
+          "source": 82,
+          "dir": "ltr"
+        },
+        "ckb": {
+          "title": 31,
+          "statement": 315,
+          "preview": 132,
+          "lesson": 98,
+          "sharh": 159,
+          "source": 71,
+          "dir": "rtl"
+        },
+        "bs": {
+          "title": 30,
+          "statement": 298,
+          "preview": 120,
+          "lesson": 85,
+          "sharh": 155,
+          "source": 74,
+          "dir": "ltr"
+        },
+        "fr": {
+          "title": 41,
+          "statement": 340,
+          "preview": 130,
+          "lesson": 116,
+          "sharh": 192,
+          "source": 80,
+          "dir": "ltr"
+        },
+        "es": {
+          "title": 40,
+          "statement": 325,
+          "preview": 128,
+          "lesson": 111,
+          "sharh": 158,
+          "source": 83,
+          "dir": "ltr"
+        }
+      },
+      "arabicExcerptCompared": true,
+      "ownerApprovalFlag": true,
+      "visiblityAsOfCheck": "nicht-anzeigen",
+      "sourceMethod": "Previous primary-text spotcheck, plus direct Sunnah.com landing page accessibility; full matn/isnad independent sign-off absent"
+    },
+    {
+      "id": "sahabiyyat-aishah-ifk-offenbarung-20261106",
+      "title": "ʿĀʾišahs Bericht über die falsche Beschuldigung",
+      "primarySourceId": "bukhari:4141",
+      "originalSourceUrl": "https://sunnah.com/bukhari:4141",
+      "languageCount": 9,
+      "packs": {
+        "de": {
+          "title": 47,
+          "statement": 294,
+          "preview": 106,
+          "lesson": 94,
+          "sharh": 275,
+          "source": 60,
+          "dir": "ltr"
+        },
+        "ar": {
+          "title": 26,
+          "statement": 173,
+          "preview": 100,
+          "lesson": 63,
+          "sharh": 182,
+          "source": 47,
+          "dir": "rtl"
+        },
+        "en": {
+          "title": 41,
+          "statement": 267,
+          "preview": 150,
+          "lesson": 81,
+          "sharh": 264,
+          "source": 57,
+          "dir": "ltr"
+        },
+        "tr": {
+          "title": 44,
+          "statement": 256,
+          "preview": 149,
+          "lesson": 74,
+          "sharh": 254,
+          "source": 52,
+          "dir": "ltr"
+        },
+        "ku": {
+          "title": 44,
+          "statement": 243,
+          "preview": 135,
+          "lesson": 79,
+          "sharh": 214,
+          "source": 60,
+          "dir": "ltr"
+        },
+        "ckb": {
+          "title": 35,
+          "statement": 225,
+          "preview": 131,
+          "lesson": 75,
+          "sharh": 225,
+          "source": 58,
+          "dir": "rtl"
+        },
+        "bs": {
+          "title": 31,
+          "statement": 238,
+          "preview": 119,
+          "lesson": 70,
+          "sharh": 232,
+          "source": 52,
+          "dir": "ltr"
+        },
+        "fr": {
+          "title": 44,
+          "statement": 266,
+          "preview": 151,
+          "lesson": 109,
+          "sharh": 280,
+          "source": 57,
+          "dir": "ltr"
+        },
+        "es": {
+          "title": 45,
+          "statement": 286,
+          "preview": 161,
+          "lesson": 88,
+          "sharh": 292,
+          "source": 61,
+          "dir": "ltr"
+        }
+      },
+      "arabicExcerptCompared": true,
+      "ownerApprovalFlag": true,
+      "visiblityAsOfCheck": "nicht-anzeigen",
+      "sourceMethod": "Previous primary-text spotcheck, plus direct Sunnah.com landing page accessibility; full matn/isnad independent sign-off absent"
+    },
+    {
+      "id": "muetter-eifersucht-schale-ausgleich-20261106",
+      "title": "Eifersucht und Ersatz für eine zerbrochene Schale",
+      "primarySourceId": "bukhari:5225",
+      "originalSourceUrl": "https://sunnah.com/bukhari/67/158",
+      "languageCount": 9,
+      "packs": {
+        "de": {
+          "title": 49,
+          "statement": 288,
+          "preview": 98,
+          "lesson": 90,
+          "sharh": 196,
+          "source": 48,
+          "dir": "ltr"
+        },
+        "ar": {
+          "title": 29,
+          "statement": 192,
+          "preview": 110,
+          "lesson": 55,
+          "sharh": 133,
+          "source": 39,
+          "dir": "rtl"
+        },
+        "en": {
+          "title": 43,
+          "statement": 288,
+          "preview": 125,
+          "lesson": 89,
+          "sharh": 183,
+          "source": 55,
+          "dir": "ltr"
+        },
+        "tr": {
+          "title": 39,
+          "statement": 258,
+          "preview": 116,
+          "lesson": 75,
+          "sharh": 176,
+          "source": 50,
+          "dir": "ltr"
+        },
+        "ku": {
+          "title": 31,
+          "statement": 238,
+          "preview": 112,
+          "lesson": 73,
+          "sharh": 169,
+          "source": 58,
+          "dir": "ltr"
+        },
+        "ckb": {
+          "title": 29,
+          "statement": 230,
+          "preview": 114,
+          "lesson": 57,
+          "sharh": 172,
+          "source": 50,
+          "dir": "rtl"
+        },
+        "bs": {
+          "title": 39,
+          "statement": 245,
+          "preview": 112,
+          "lesson": 58,
+          "sharh": 172,
+          "source": 50,
+          "dir": "ltr"
+        },
+        "fr": {
+          "title": 46,
+          "statement": 271,
+          "preview": 137,
+          "lesson": 88,
+          "sharh": 191,
+          "source": 55,
+          "dir": "ltr"
+        },
+        "es": {
+          "title": 47,
+          "statement": 300,
+          "preview": 130,
+          "lesson": 77,
+          "sharh": 201,
+          "source": 59,
+          "dir": "ltr"
+        }
+      },
+      "arabicExcerptCompared": true,
+      "ownerApprovalFlag": true,
+      "visiblityAsOfCheck": "nicht-anzeigen",
+      "sourceMethod": "Previous primary-text spotcheck, plus direct Sunnah.com landing page accessibility; full matn/isnad independent sign-off absent"
+    },
+    {
+      "id": "muetter-hafsah-nach-verwitwung-20261106",
+      "title": "Ḥafṣahs Verwitwung und die spätere Eheschließung",
+      "primarySourceId": "bukhari:5122",
+      "originalSourceUrl": "https://sunnah.com/bukhari:5122",
+      "languageCount": 9,
+      "packs": {
+        "de": {
+          "title": 48,
+          "statement": 241,
+          "preview": 94,
+          "lesson": 84,
+          "sharh": 240,
+          "source": 63,
+          "dir": "ltr"
+        },
+        "ar": {
+          "title": 26,
+          "statement": 140,
+          "preview": 140,
+          "lesson": 51,
+          "sharh": 176,
+          "source": 50,
+          "dir": "rtl"
+        },
+        "en": {
+          "title": 42,
+          "statement": 243,
+          "preview": 122,
+          "lesson": 84,
+          "sharh": 233,
+          "source": 82,
+          "dir": "ltr"
+        },
+        "tr": {
+          "title": 41,
+          "statement": 224,
+          "preview": 178,
+          "lesson": 69,
+          "sharh": 233,
+          "source": 68,
+          "dir": "ltr"
+        },
+        "ku": {
+          "title": 36,
+          "statement": 222,
+          "preview": 97,
+          "lesson": 61,
+          "sharh": 212,
+          "source": 72,
+          "dir": "ltr"
+        },
+        "ckb": {
+          "title": 34,
+          "statement": 241,
+          "preview": 98,
+          "lesson": 59,
+          "sharh": 215,
+          "source": 61,
+          "dir": "rtl"
+        },
+        "bs": {
+          "title": 32,
+          "statement": 209,
+          "preview": 107,
+          "lesson": 74,
+          "sharh": 214,
+          "source": 65,
+          "dir": "ltr"
+        },
+        "fr": {
+          "title": 45,
+          "statement": 235,
+          "preview": 118,
+          "lesson": 93,
+          "sharh": 264,
+          "source": 74,
+          "dir": "ltr"
+        },
+        "es": {
+          "title": 45,
+          "statement": 231,
+          "preview": 108,
+          "lesson": 102,
+          "sharh": 230,
+          "source": 73,
+          "dir": "ltr"
+        }
+      },
+      "arabicExcerptCompared": true,
+      "ownerApprovalFlag": true,
+      "visiblityAsOfCheck": "nicht-anzeigen",
+      "sourceMethod": "Previous primary-text spotcheck, plus direct Sunnah.com landing page accessibility; full matn/isnad independent sign-off absent"
+    },
+    {
+      "id": "muetter-zaynab-zunahme-des-uebels-20261106",
+      "title": "Zaynabs Frage über die Ausbreitung des Übels",
+      "primarySourceId": "bukhari:3346",
+      "originalSourceUrl": "https://sunnah.com/bukhari/60/21",
+      "languageCount": 9,
+      "packs": {
+        "de": {
+          "title": 44,
+          "statement": 267,
+          "preview": 94,
+          "lesson": 79,
+          "sharh": 225,
+          "source": 50,
+          "dir": "ltr"
+        },
+        "ar": {
+          "title": 24,
+          "statement": 154,
+          "preview": 77,
+          "lesson": 67,
+          "sharh": 136,
+          "source": 40,
+          "dir": "rtl"
+        },
+        "en": {
+          "title": 42,
+          "statement": 277,
+          "preview": 129,
+          "lesson": 90,
+          "sharh": 213,
+          "source": 57,
+          "dir": "ltr"
+        },
+        "tr": {
+          "title": 47,
+          "statement": 295,
+          "preview": 143,
+          "lesson": 82,
+          "sharh": 202,
+          "source": 52,
+          "dir": "ltr"
+        },
+        "ku": {
+          "title": 38,
+          "statement": 246,
+          "preview": 122,
+          "lesson": 82,
+          "sharh": 178,
+          "source": 60,
+          "dir": "ltr"
+        },
+        "ckb": {
+          "title": 42,
+          "statement": 255,
+          "preview": 117,
+          "lesson": 84,
+          "sharh": 191,
+          "source": 51,
+          "dir": "rtl"
+        },
+        "bs": {
+          "title": 31,
+          "statement": 235,
+          "preview": 112,
+          "lesson": 78,
+          "sharh": 193,
+          "source": 52,
+          "dir": "ltr"
+        },
+        "fr": {
+          "title": 47,
+          "statement": 308,
+          "preview": 142,
+          "lesson": 120,
+          "sharh": 251,
+          "source": 57,
+          "dir": "ltr"
+        },
+        "es": {
+          "title": 50,
+          "statement": 256,
+          "preview": 128,
+          "lesson": 111,
+          "sharh": 219,
+          "source": 61,
+          "dir": "ltr"
+        }
+      },
+      "arabicExcerptCompared": true,
+      "ownerApprovalFlag": true,
+      "visiblityAsOfCheck": "nicht-anzeigen",
+      "sourceMethod": "Previous primary-text spotcheck, plus direct Sunnah.com landing page accessibility; full matn/isnad independent sign-off absent"
+    },
+    {
+      "id": "muetter-aishah-letzte-stunden-20261106",
+      "title": "ʿĀʾišahs Bericht über die letzten Stunden des Propheten ﷺ",
+      "primarySourceId": "bukhari:4451",
+      "originalSourceUrl": "https://sunnah.com/bukhari/64/471",
+      "languageCount": 9,
+      "packs": {
+        "de": {
+          "title": 57,
+          "statement": 215,
+          "preview": 120,
+          "lesson": 82,
+          "sharh": 231,
+          "source": 41,
+          "dir": "ltr"
+        },
+        "ar": {
+          "title": 38,
+          "statement": 130,
+          "preview": 61,
+          "lesson": 59,
+          "sharh": 149,
+          "source": 33,
+          "dir": "rtl"
+        },
+        "en": {
+          "title": 48,
+          "statement": 202,
+          "preview": 106,
+          "lesson": 82,
+          "sharh": 200,
+          "source": 48,
+          "dir": "ltr"
+        },
+        "tr": {
+          "title": 56,
+          "statement": 218,
+          "preview": 103,
+          "lesson": 74,
+          "sharh": 214,
+          "source": 43,
+          "dir": "ltr"
+        },
+        "ku": {
+          "title": 55,
+          "statement": 227,
+          "preview": 117,
+          "lesson": 74,
+          "sharh": 200,
+          "source": 51,
+          "dir": "ltr"
+        },
+        "ckb": {
+          "title": 55,
+          "statement": 216,
+          "preview": 109,
+          "lesson": 82,
+          "sharh": 198,
+          "source": 44,
+          "dir": "rtl"
+        },
+        "bs": {
+          "title": 47,
+          "statement": 211,
+          "preview": 105,
+          "lesson": 66,
+          "sharh": 202,
+          "source": 43,
+          "dir": "ltr"
+        },
+        "fr": {
+          "title": 58,
+          "statement": 230,
+          "preview": 120,
+          "lesson": 77,
+          "sharh": 226,
+          "source": 48,
+          "dir": "ltr"
+        },
+        "es": {
+          "title": 58,
+          "statement": 210,
+          "preview": 111,
+          "lesson": 78,
+          "sharh": 233,
+          "source": 52,
+          "dir": "ltr"
+        }
+      },
+      "arabicExcerptCompared": true,
+      "ownerApprovalFlag": true,
+      "visiblityAsOfCheck": "nicht-anzeigen",
+      "sourceMethod": "Previous primary-text spotcheck, plus direct Sunnah.com landing page accessibility; full matn/isnad independent sign-off absent"
+    },
+    {
+      "id": "muetter-umm-salamah-nachtwarnung-20261106",
+      "title": "Umm Salamah berichtete von der nächtlichen Ermahnung des Propheten ﷺ",
+      "primarySourceId": "bukhari:115",
+      "originalSourceUrl": "https://sunnah.com/bukhari:115",
+      "languageCount": 9,
+      "packs": {
+        "de": {
+          "title": 68,
+          "statement": 284,
+          "preview": 107,
+          "lesson": 86,
+          "sharh": 284,
+          "source": 44,
+          "dir": "ltr"
+        },
+        "ar": {
+          "title": 32,
+          "statement": 159,
+          "preview": 159,
+          "lesson": 52,
+          "sharh": 152,
+          "source": 34,
+          "dir": "rtl"
+        },
+        "en": {
+          "title": 52,
+          "statement": 254,
+          "preview": 114,
+          "lesson": 79,
+          "sharh": 238,
+          "source": 51,
+          "dir": "ltr"
+        },
+        "tr": {
+          "title": 54,
+          "statement": 234,
+          "preview": 110,
+          "lesson": 68,
+          "sharh": 196,
+          "source": 46,
+          "dir": "ltr"
+        },
+        "ku": {
+          "title": 47,
+          "statement": 245,
+          "preview": 111,
+          "lesson": 73,
+          "sharh": 172,
+          "source": 54,
+          "dir": "ltr"
+        },
+        "ckb": {
+          "title": 54,
+          "statement": 224,
+          "preview": 106,
+          "lesson": 65,
+          "sharh": 198,
+          "source": 45,
+          "dir": "rtl"
+        },
+        "bs": {
+          "title": 54,
+          "statement": 235,
+          "preview": 124,
+          "lesson": 62,
+          "sharh": 204,
+          "source": 46,
+          "dir": "ltr"
+        },
+        "fr": {
+          "title": 59,
+          "statement": 260,
+          "preview": 124,
+          "lesson": 78,
+          "sharh": 230,
+          "source": 51,
+          "dir": "ltr"
+        },
+        "es": {
+          "title": 55,
+          "statement": 257,
+          "preview": 123,
+          "lesson": 86,
+          "sharh": 223,
+          "source": 55,
+          "dir": "ltr"
+        }
+      },
+      "arabicExcerptCompared": true,
+      "ownerApprovalFlag": true,
+      "visiblityAsOfCheck": "nicht-anzeigen",
+      "sourceMethod": "Previous primary-text spotcheck, plus direct Sunnah.com landing page accessibility; full matn/isnad independent sign-off absent"
+    },
+    {
+      "id": "frauen-fiqh-aishah-tayammum-halskette-20261106",
+      "title": "ʿĀʾišahs Halskette und die Offenbarung des Tayammum",
+      "primarySourceId": "bukhari:334",
+      "originalSourceUrl": "https://sunnah.com/bukhari:334",
+      "languageCount": 9,
+      "packs": {
+        "de": {
+          "title": 51,
+          "statement": 265,
+          "preview": 100,
+          "lesson": 99,
+          "sharh": 308,
+          "source": 76,
+          "dir": "ltr"
+        },
+        "ar": {
+          "title": 28,
+          "statement": 125,
+          "preview": 76,
+          "lesson": 63,
+          "sharh": 191,
+          "source": 61,
+          "dir": "rtl"
+        },
+        "en": {
+          "title": 49,
+          "statement": 247,
+          "preview": 135,
+          "lesson": 100,
+          "sharh": 272,
+          "source": 83,
+          "dir": "ltr"
+        },
+        "tr": {
+          "title": 43,
+          "statement": 223,
+          "preview": 147,
+          "lesson": 83,
+          "sharh": 260,
+          "source": 76,
+          "dir": "ltr"
+        },
+        "ku": {
+          "title": 43,
+          "statement": 204,
+          "preview": 129,
+          "lesson": 81,
+          "sharh": 238,
+          "source": 80,
+          "dir": "ltr"
+        },
+        "ckb": {
+          "title": 42,
+          "statement": 179,
+          "preview": 111,
+          "lesson": 77,
+          "sharh": 257,
+          "source": 76,
+          "dir": "rtl"
+        },
+        "bs": {
+          "title": 41,
+          "statement": 223,
+          "preview": 134,
+          "lesson": 84,
+          "sharh": 226,
+          "source": 72,
+          "dir": "ltr"
+        },
+        "fr": {
+          "title": 50,
+          "statement": 249,
+          "preview": 141,
+          "lesson": 122,
+          "sharh": 262,
+          "source": 80,
+          "dir": "ltr"
+        },
+        "es": {
+          "title": 49,
+          "statement": 239,
+          "preview": 127,
+          "lesson": 117,
+          "sharh": 258,
+          "source": 83,
+          "dir": "ltr"
+        }
+      },
+      "arabicExcerptCompared": true,
+      "ownerApprovalFlag": true,
+      "visiblityAsOfCheck": "nicht-anzeigen",
+      "sourceMethod": "Previous primary-text spotcheck, plus direct Sunnah.com landing page accessibility; full matn/isnad independent sign-off absent"
+    }
+  ]
+}
