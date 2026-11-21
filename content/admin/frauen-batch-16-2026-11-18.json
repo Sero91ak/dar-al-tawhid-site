@@ -347,6 +347,32 @@
     "isNativeLanguageReview": false,
     "isVerifiedAudienceConsent": false,
     "overrideExistingSecurityGates": false,
-    "actionStatus": "recorded-awaiting-release-gates"
+    "actionStatus": "recorded-awaiting-release-gates",
+    "notificationAudienceCorrectionAt": "2026-11-21",
+    "notificationAudienceCorrection": "global opted-in adults, profile-controlled UI presentation; supersedes original women-segment constraint for this batch"
+  },
+  "notificationRoutingChoice": {
+    "updatedAt": "2026-11-21",
+    "ownerInstruction": "Push doch einfach ... jeder den Push bekommen ... Regel wer sie sehen kann ist in der App selber welches Profil man ausgewählt hat",
+    "audienceMode": "global-adult-post-opt-in",
+    "deliveryApp": "DĀR AL TAWḤĪD APP",
+    "oneSignalProviderAudience": "DAR_PUSH",
+    "notificationLanguages": [
+      "de",
+      "ar",
+      "en",
+      "tr",
+      "ku",
+      "ckb",
+      "bs",
+      "fr",
+      "es"
+    ],
+    "deliveryRules": "One once-only announcement to adult post-push subscribers; do not include Kids, opted-out devices, or unknown non-adult audiences.",
+    "displayRule": "Personalized in-app recommendations/library entries respect selected woman/man/neutral profile. Profiling is local UI filtering, not a push-target segment; deep-link handling must also be verified before announcing.",
+    "priorKnowledgeWomanTargeting": "Superseded by owner's new explicit instruction for THIS 16-item announcement, not for other women-only knowledge campaigns.",
+    "requireFirst": "All 16 items published and accessible, release CI and source/locale quality gates, safe URL/deep-link verified.",
+    "plannedIdempotencyKey": "d1c40b28-2bd3-43fd-a14b-708df7d5d976",
+    "currentStatus": "approved-route-not-yet-sent"
   }
 }
