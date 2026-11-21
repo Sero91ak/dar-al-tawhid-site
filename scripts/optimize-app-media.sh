@@ -12,6 +12,7 @@ before_total=0
 after_total=0
 changed_count=0
 skipped_count=0
+audio_changed_count=0
 
 is_protected() {
   [[ "$f" == kids/assets/prophet-story-audio/* || "$f" == kids/assets/mubashshirun-story-audio/* || "$f" == kids/assets/sahabiyyat-story-audio/* ]] && return 0
@@ -39,6 +40,7 @@ replace_if_smaller() {
     before_total=$((before_total + old))
     after_total=$((after_total + new))
     changed_count=$((changed_count + 1))
+    case "${src,,}" in *.mp3|*.m4a|*.aac) audio_changed_count=$((audio_changed_count + 1));; esac
     printf 'optimized %s: %s -> %s bytes\n' "$src" "$old" "$new"
   else
     rm -f "$tmp"
@@ -164,9 +166,7 @@ elif [[ "$MODE" == "--oversized" ]]; then
   # Never touch unrelated files, originals, master assets or protected logos.
   while IFS= read -r -d '' f; do
     process_one "$f"
-  done < <(find assets/feed-backgrounds/auto \
-    kids/assets/kids-home-v1178 kids/assets/kids-home-v1179 \
-    kids/assets/kids-salah-v1272 -type f \
+  done < <(find assets/feed-backgrounds/auto -type f \
     \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) \
     -size +1200000c -print0 2>/dev/null)
 else
@@ -175,10 +175,10 @@ else
   done
 fi
 
-if [[ "$MODE" != "--oversized" ]]; then
+if [[ "$MODE" == "--all" ]] || (( audio_changed_count > 0 )); then
   python3 scripts/update-local-media-metadata.py
 else
-  echo "Legacy image-only repair: preserve audio and Kids metadata."
+  echo "No audio bytes changed: preserving unrelated Kids and voice metadata."
 fi
 
 saved=$((before_total - after_total))
