@@ -1,11 +1,12 @@
-name: HOME V4 editorial and settings-only UX QA
+name: HOME V5 editorial and settings-only UX QA
 
 on:
   push:
     branches:
-      - feature/home-editorial-v4-apple-tv-20261118
+      - feature/home-editorial-v5-20261118
     paths:
       - home-device/**
+      - home-v5.css
       - .github/workflows/home-v4-editorial-qa.yml
   workflow_dispatch:
 
@@ -22,20 +23,30 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             home-device
+            home-v5.css
             .github/workflows/home-v4-editorial-qa.yml
+      - name: Stage V5 stylesheet for local browser preview
+        run: cp home-v5.css home-device/home-v5.css
       - name: Verify source JavaScript syntax
         run: |
           node --check home-device/home-v3.js
           node --check home-device/home-v4.js
+          node --check home-device/home-v6.js
+          node --check home-device/home-v7.js
+          node --check home-device/home-v7.js
           node - <<'NODE'
           const f=require('fs'),html=f.readFileSync('home-device/index.html','utf8');
           const js=html.split('<script>')[1]?.split('</script>')[0];
           if(!js)throw Error('No inline HOME V2 engine found');
           new Function(js);
-          const required=['fajrAdhanTrack','homeAppearance','homeWallpaperUpload','homeConnectionStatus','home-v4.css','home-v4.js','h4ShowVerse','h4ShowHadith'];
+          const required=['homeWallpaperImage','saverWallpaperImage','nightstandLaunch','nightstandView','nightstandClock','nightstandExit','fajrAdhanTrack','homeAppearance','homeWallpaperMode','homeWallpaperUpload','homeConnectionStatus','home-v4.css','home-v4.js','home-v5.css','h4ShowVerse','h4ShowHadith','openTadabbur','tadabburPanel','saverMode','quranReaderPanel','quranReciterMode','readerTransliteration','openCalendarPanel','home-nav','tadabbur-dialog' ,'selectSettingsTab'];
           for(const key of required)if(!html.includes(key))throw Error('Missing HOME V3 feature: '+key);
+          if(!f.readFileSync('home-device/home-v3.js','utf8').includes('data-home-settings'))throw Error('Missing contextual HOME view settings control');
+          const saverSource=f.readFileSync('home-device/home-v6.js','utf8'),wallpaperCSS=f.readFileSync('home-v5.css','utf8');
+          if(!saverSource.includes("label.textContent='Scharḥ · Erklärung'"))throw Error('Missing explicit Sharh section label');
+          if(!wallpaperCSS.includes('.saver-explanation')||!wallpaperCSS.includes('border-top:1px solid var(--gold)')||!wallpaperCSS.includes('object-fit:contain'))throw Error('Missing distinct Sharh divider or fitted wallpaper rules');
           if(html.includes('<nav class="footnav"'))throw Error('Bottom tabs must not exist');
-          console.log('HOME V4 source, no-bottom-tabs, settings: PASS');
+          console.log('HOME V5 source, no-bottom-tabs, settings: PASS');
           NODE
       - name: Verify existing GitHub media are publicly retrievable
         run: |
@@ -47,6 +58,8 @@ jobs:
             '/assets/dar-3d-icons/home.png',
             '/assets/dar-3d-icons/settings.png',
             '/assets/home-v1194/hero-wide-adobe.jpg',
+            '/assets/home-v1194/hero-mobile-adobe.jpg',
+            '/assets/home-v1194/study-runway.jpg',
             '/kids/assets/kids-salah-v1262/cinematic-still.jpg',
             '/test/assets/dar-3d-icons/dar-home-cinematic-hero.png',
             '/kids/assets/kids-home-v1191/hero-static-reference.jpg',
@@ -70,6 +83,23 @@ jobs:
               print('MEDIA_ERROR',path,type(e).__name__,str(e),flush=True);errors.append(path)
           if errors:raise AssertionError('Unavailable HOME visual sources: '+', '.join(errors))
           PY
+          python - <<'PY'
+          import json,pathlib
+          root=pathlib.Path('home-device/media/apple-tv')
+          catalog=json.loads((root/'catalog.json').read_text())
+          assert len(catalog.get('wallpapers',[]))==10, 'Expected ten curated native backgrounds'
+          assert len(catalog.get('adhanMotifs',{}))==5, 'Expected all five native prayer artworks'
+          errors=[]
+          for item in catalog['wallpapers']:
+            for key in ('url','thumbnail'):
+              p=item.get(key,'')
+              if not p.startswith('/media/apple-tv/') or not (root/p.rsplit('/',1)[-1]).is_file():errors.append(p or item.get('id','missing'))
+          for group in ('adhanMotifs','adhanThumbnails'):
+            for p in catalog.get(group,{}).values():
+              if not (root/p.rsplit('/',1)[-1]).is_file():errors.append(p)
+          if errors:raise AssertionError('Catalog references missing bundled images: '+', '.join(errors))
+          print('NATIVE_MEDIA_CATALOG',len(catalog['wallpapers']),'wallpapers,',len(catalog['adhanMotifs']),'Adhan masters and thumbnails: PASS')
+          PY
       - name: Browser QA dependencies
         run: python -m pip install -q selenium
       - name: Run browser layout and interaction checks
@@ -79,20 +109,22 @@ jobs:
           python3 -m http.server 8765 --directory home-device >/tmp/home-v4-http.log 2>&1 &
           sleep 2
           python - <<'PY'
-          import os,time
+          import os,re,time
           from selenium import webdriver
           from selenium.webdriver.common.by import By
+          from selenium.webdriver.common.keys import Keys
           from selenium.webdriver.chrome.options import Options
           from selenium.webdriver.support.ui import WebDriverWait
           from selenium.webdriver.support import expected_conditions as EC
           from selenium.webdriver.support.ui import Select
           from selenium.common.exceptions import WebDriverException
           opts=Options()
+          opts.set_capability('goog:loggingPrefs',{'browser':'ALL'})
           for flag in ['--headless=new','--no-sandbox','--disable-dev-shm-usage','--disable-gpu','--hide-scrollbars']:
             opts.add_argument(flag)
           driver=webdriver.Chrome(options=opts)
           url=os.environ['HOME_TEST_URL']
-          sizes=[(1024,600),(1280,800),(1600,900),(1920,1200),(800,1280)]
+          sizes=[(320,568),(390,844),(430,932),(568,320),(667,375),(844,390),(932,430),(768,1024),(1024,768),(1024,600),(1280,800),(1600,900),(1920,1200),(800,1280)]
           errors=[]
           try:
             for w,h in sizes:
@@ -101,50 +133,403 @@ jobs:
               WebDriverWait(driver,25).until(EC.presence_of_element_located((By.ID,'mainScreen')))
               time.sleep(2)
               data=driver.execute_script("""
-                const o=id=>document.getElementById(id)?.getBoundingClientRect();
-                const names=['mainScreen','nextName','times','dailyArabic','audioName','openSettings'];
+                const o=id=>(id==='hero'?document.querySelector('.hero'):document.getElementById(id))?.getBoundingClientRect();
+                const names=['mainScreen','nextName','hero','times','dailyDe','audioName','openSettings','audioArea','dailyArea'];
                 const boxes={};for(const n of names){const r=o(n);boxes[n]=r?{left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height}:null}
-                return {w:innerWidth,h:innerHeight,scrollW:document.documentElement.scrollWidth,
+                const screen=document.getElementById('mainScreen');return {w:innerWidth,h:innerHeight,scrollW:document.documentElement.scrollWidth,screenScroll:screen.scrollHeight,screenClient:screen.clientHeight,
                   v4:!!document.querySelector('link[href^="/home-v4.css"]'),footerTabs:!!document.querySelector('.footnav'),
                   icons:document.querySelectorAll('.settings-icons').length,theme:document.getElementById('app').dataset.homeTheme,
-                  boxes,wallpaper:getComputedStyle(document.getElementById('app')).backgroundImage}
+                  nav:[...document.querySelectorAll('.home-nav button')].map(b=>{const r=b.getBoundingClientRect(),c=getComputedStyle(b);return{text:b.innerText.trim(),aria:b.getAttribute('aria-label'),width:r.width,height:r.height,bg:c.backgroundColor,border:c.borderTopColor,radius:c.borderTopLeftRadius,current:b.getAttribute('aria-current')}}),fontSizes:{dailyDe:parseFloat(getComputedStyle(document.getElementById('dailyDe')).fontSize),source:parseFloat(getComputedStyle(document.getElementById('dailySource')).fontSize),counter:parseFloat(getComputedStyle(document.querySelector('.counter')).fontSize),ptime:parseFloat(getComputedStyle(document.querySelector('.prayer-cell .ptime')).fontSize)},lineSpacing:{daily:parseFloat(getComputedStyle(document.getElementById('dailyDe')).lineHeight)/parseFloat(getComputedStyle(document.getElementById('dailyDe')).fontSize),source:parseFloat(getComputedStyle(document.getElementById('dailySource')).lineHeight)/parseFloat(getComputedStyle(document.getElementById('dailySource')).fontSize)},
+                  heroRight:{display:getComputedStyle(document.querySelector('.hero-right')).display,width:document.querySelector('.hero-right').getBoundingClientRect().width,height:document.querySelector('.hero-right').getBoundingClientRect().height,storyHeight:document.querySelector('.hero-right .daily-story').getBoundingClientRect().height},
+                  prayerArtCount:document.querySelectorAll('.prayer-glyph').length,arabicHomeVisible:[...document.querySelectorAll('.hero-verse,.bismillah,#dailyArabic,.next-arabic')].filter(x=>getComputedStyle(x).display!=='none'&&x.textContent.trim()).length,
+                  boxes,navBox:(()=>{const r=document.querySelector('.home-nav').getBoundingClientRect();return{left:r.left,right:r.right,center:r.left+r.width/2}})(),
+                  wallpaper:getComputedStyle(document.getElementById('app')).backgroundImage,
+                  wallpaperFit:(()=>{const i=document.getElementById('homeWallpaperImage'),r=i.getBoundingClientRect();return{src:i.currentSrc,hidden:i.hidden,display:getComputedStyle(i).display,fit:getComputedStyle(i).objectFit,nw:i.naturalWidth,nh:i.naturalHeight,w:r.width,h:r.height}})()}
               """)
               print('VIEWPORT',w,h,data,flush=True)
-              if not data['v4'] or data['icons']<4:errors.append(f'{w}x{h}: V4 styling/settings icons missing')
+              if not data['v4'] or data['icons']<7:errors.append(f'{w}x{h}: HOME styling or one of seven settings icons missing')
+              if [x['text'] for x in data['nav']]!=['Start','Qurʾān','Festtage']:errors.append(f'{w}x{h}: HOME navigation labels or destinations missing')
+              if any(x['width']<44 or x['height']<44 or x['bg'] not in ('rgba(0, 0, 0, 0)','transparent') or x['border']=='rgba(0, 0, 0, 0)' or float(x['radius'].replace('px',''))<x['height']*.45 for x in data['nav']):errors.append(f'{w}x{h}: navigation button area too small or not visibly bounded')
+              if w>h:
+                settings=data['boxes']['openSettings']
+                if any(abs(x['height']-settings['height'])>1 or abs(x['width']-settings['width'])>1 for x in data['nav']):errors.append(f'{w}x{h}: landscape navigation and settings capsules differ in size')
+                if data['boxes']['hero']['bottom']>data['boxes']['times']['top']+1:errors.append(f'{w}x{h}: next-prayer and prayer-time regions overlap')
+                tad=driver.execute_script("const e=document.getElementById('openTadabbur'),r=e.getBoundingClientRect();return {display:getComputedStyle(e).display,hidden:e.hidden,height:r.height,top:r.top,bottom:r.bottom,hero:document.querySelector('.hero').getBoundingClientRect().toJSON()}")
+                if tad['hidden'] or tad['display']=='none' or tad['height']<44 or tad['top']<tad['hero']['top']-1 or tad['bottom']>tad['hero']['bottom']+2:errors.append(f'{w}x{h}: Tadabbur control hidden, too small or outside its verse region')
               if data['footerTabs']:errors.append(f'{w}x{h}: footer tabs must be absent')
+              if w>h and (data['wallpaperFit']['display']=='none' or data['wallpaperFit']['fit']!='contain' or not data['wallpaperFit']['nw'] or not data['wallpaperFit']['nh'] or abs(data['wallpaperFit']['w']/data['wallpaperFit']['h']-data['wallpaperFit']['nw']/data['wallpaperFit']['nh'])>.03):errors.append(f'{w}x{h}: landscape wallpaper is not fully fitted')
+              if h>w and data['wallpaperFit']['display']!='none':errors.append(f'{w}x{h}: portrait should use the wallpaper-free standard view')
+              if h<w and abs(data['navBox']['center']-w/2)>8:errors.append(f'{w}x{h}: top navigation is not centered')
               if data['scrollW']>w+3:errors.append(f'{w}x{h}: document horizontal overflow')
               if data['boxes']['audioName']['height']<17:errors.append(f'{w}x{h}: Quran player title clipped')
+              if data['fontSizes']['dailyDe']<18:errors.append(f'{w}x{h}: German daily text below 18px')
+              if data['fontSizes']['source']<(10 if h<200 else 12):errors.append(f'{w}x{h}: source citation too small for available landscape height')
+              if data['fontSizes']['counter']<(12 if h<200 else 14):errors.append(f'{w}x{h}: countdown too small for available landscape height')
+              if data['fontSizes']['ptime']<(16 if h<200 else 19):errors.append(f'{w}x{h}: prayer time too small for available landscape height')
+              if data['lineSpacing']['daily']<1.3 or data['lineSpacing']['source']<1.2:errors.append(f'{w}x{h}: text line spacing is too tight')
+              if data['boxes']['hero']['bottom']>data['boxes']['times']['top']+2:errors.append(f'{w}x{h}: Next Prayer overlaps prayer times')
+              if data['boxes']['times']['bottom']>data['boxes']['dailyArea']['top']+2:errors.append(f'{w}x{h}: prayer times overlap the Quran player section')
+              if data['boxes']['audioArea']['bottom']>data['boxes']['dailyArea']['bottom']+2:errors.append(f'{w}x{h}: Quran player escapes its layout row')
+              for n in ['times','dailyArea','audioArea']:
+                if data['boxes'][n]['bottom']>h+2 and data['screenScroll']<=data['screenClient']+2:errors.append(f'{w}x{h}: {n} is clipped and cannot be reached by scrolling')
+              if data['prayerArtCount']!=0:errors.append(f'{w}x{h}: Adhan-only artwork leaked into the five prayer-time cards')
+              if data['arabicHomeVisible']!=0:errors.append(f'{w}x{h}: Arabic display calligraphy should be hidden on HOME')
+              if h>w and data['heroRight']['display']=='none':errors.append(f'{w}x{h}: portrait hides the daily verse')
+              if data['heroRight']['height']>0 and data['heroRight']['storyHeight']<data['heroRight']['height']*.72:errors.append(f'{w}x{h}: right reading column does not use its available hero height')
+              if h>w and data['boxes']['dailyDe']['height']<=0:errors.append(f'{w}x{h}: German daily translation is hidden in portrait')
+              if data['boxes']['openSettings']['width']<44:errors.append(f'{w}x{h}: settings touch target below 44px')
               for n in ['mainScreen','nextName','times','audioName','openSettings']:
                 box=data['boxes'][n]
                 if box is None or box['width']<=0 or box['height']<=0:errors.append(f'{w}x{h}: missing or hidden {n}')
+            long_text=driver.execute_script("""
+              const article=document.querySelector('.daily-story'),de=document.getElementById('dailyDe'),src=document.getElementById('dailySource');
+              const old=[de.textContent,src.textContent],oldSize=parseFloat(getComputedStyle(de).fontSize);
+              de.textContent=('Eine gut lesbare deutsche Übersetzung mit vollständigem Sinn. ').repeat(18);src.textContent=('Qurʾān · Beispielquelle · ').repeat(4);
+              window.fitDailyText();
+              const result={scrollHeight:de.scrollHeight,clientHeight:de.clientHeight,overflow:getComputedStyle(article).overflowY,font:parseFloat(getComputedStyle(de).fontSize),text:de.textContent.length,truncated:de.dataset.fitTruncated==='true'};
+              [de.textContent,src.textContent]=old;window.fitDailyText();return result;
+            """)
+            print('LONG_DAILY_DARK',long_text,flush=True)
+            if long_text['overflow']=='auto' or (long_text['scrollHeight']>long_text['clientHeight']+2 and not long_text['truncated']):errors.append('Long daily content lacks a fixed, readable preview without an inner scroll')
             driver.set_window_size(1280,800)
             driver.get(url+'/?qa=home-v3')
             WebDriverWait(driver,25).until(EC.element_to_be_clickable((By.ID,'openSettings')))
+            external=driver.find_elements(By.CSS_SELECTOR,'.home-nav a,.calendar-card[href]')
+            if external:errors.append('HOME section controls must not navigate to another application')
+            nav_labels=[b.text.strip() for b in driver.find_elements(By.CSS_SELECTOR,'.home-nav button')]
+            if nav_labels!=['Start','Qurʾān','Festtage']:errors.append('HOME navigation labels are unclear or incomplete')
+            nav_accessible=[b.get_attribute('aria-label') or b.text.strip() for b in driver.find_elements(By.CSS_SELECTOR,'.home-nav button')]
+            if nav_accessible!=['Startseite mit Gebetszeiten','Qurʾān-Leser öffnen','Islamische Festtage anzeigen']:errors.append('HOME navigation accessible labels are unclear or incomplete')
+            nav_style=driver.execute_script("return [...document.querySelectorAll('.home-nav button')].map(b=>{let r=b.getBoundingClientRect(),c=getComputedStyle(b);return {w:r.width,h:r.height,bg:c.backgroundColor,border:c.borderTopColor,radius:c.borderTopLeftRadius,aria:b.getAttribute('aria-label')}})")
+            if len(nav_style)!=3 or any(x['w']<44 or x['h']<44 or x['bg'] not in ('rgba(0, 0, 0, 0)','transparent') or x['border']=='rgba(0, 0, 0, 0)' or float(x['radius'].replace('px',''))<x['h']*.45 for x in nav_style):errors.append('HOME navigation buttons are too small or visually indistinct')
+            if driver.find_elements(By.ID,'openAppearance') or driver.find_elements(By.ID,'appearancePopover') or driver.find_elements(By.CSS_SELECTOR,'[data-home-palette-choice]'):errors.append('Unused appearance palette chooser remains visible in markup')
+            app=driver.find_element(By.ID,'app')
+            if app.get_attribute('data-home-theme')!='dark' or app.get_attribute('data-home-palette')!='dar-al-layl':errors.append('Dār al-Layl is not the single active appearance')
+            standard=driver.find_element(By.ID,'homeAppearance')
+            if standard.get_attribute('value')!='dark' or standard.get_attribute('disabled') is None or len(standard.find_elements(By.TAG_NAME,'option'))!=1:errors.append('HOME appearance settings expose more than the Dār al-Layl standard')
+            theme=driver.find_element(By.ID,'theme')
+            if theme.get_attribute('value')!='night' or theme.get_attribute('disabled') is None or len(theme.find_elements(By.TAG_NAME,'option'))!=1:errors.append('Legacy display settings expose another color palette')
+            wallpaper=driver.execute_script("""
+              const img=document.getElementById('homeWallpaperImage'),r=img.getBoundingClientRect();
+              return {src:img.currentSrc,hidden:img.hidden,fit:getComputedStyle(img).objectFit,nw:img.naturalWidth,nh:img.naturalHeight,w:r.width,h:r.height,appW:innerWidth,appH:innerHeight,artworkOpacity:parseFloat(getComputedStyle(document.querySelector('.artwork')).opacity)};
+            """)
+            print('FITTED_HOME_WALLPAPER',wallpaper,flush=True)
+            if '/media/apple-tv/' not in wallpaper['src'] or wallpaper['hidden'] or wallpaper['fit']!='contain' or not wallpaper['nw'] or not wallpaper['nh'] or wallpaper['w']>wallpaper['appW']+1 or wallpaper['h']>wallpaper['appH']+1 or abs(wallpaper['w']/wallpaper['h']-wallpaper['nw']/wallpaper['nh'])>.03 or wallpaper['artworkOpacity']>=.2:errors.append('Selected HOME wallpaper is not fully visible at its natural aspect ratio')
+            print('DĀR AL-LAYL ONLY + VISIBLE NAVIGATION: PASS',flush=True)
+            driver.find_element(By.ID,'openCalendarPanel').click()
+            WebDriverWait(driver,8).until(lambda d:d.find_element(By.ID,'calendarPanel').get_attribute('hidden') is None)
+            route_state=driver.execute_script("const p=document.querySelector('#calendarPanel .home-view-panel');return {active:document.getElementById('calendarPanel').classList.contains('is-active'),screenHidden:document.getElementById('mainScreen').hidden,covered:document.getElementById('mainScreen').classList.contains('view-covered'),transition:getComputedStyle(document.getElementById('calendarPanel')).transitionDuration,background:getComputedStyle(p).backgroundColor}")
+            if not route_state['active'] or route_state['screenHidden'] or not route_state['covered'] or '0.36s' not in route_state['transition']:errors.append('Calendar did not open as an animated in-app route with a retained HOME back stack')
+            calendar_alphas=[float(a) for a in re.findall(r'rgba\([^)]*,\s*([0-9.]+)\)',route_state['background'])]
+            if not any(0 < alpha < .7 for alpha in calendar_alphas):errors.append('Calendar panel is opaque and hides the selected HOME wallpaper in light mode')
+            print('HOME_PUSH_ROUTE',route_state,flush=True)
+            time.sleep(.4)
+            calendar_text=driver.find_element(By.ID,'calendarPanel').text
+            if '1. Ramaḍān' not in calendar_text or 'ʿĪd al-Fiṭr' not in calendar_text or '10. Muḥarram' not in calendar_text:errors.append('The local Islamic festival calendar is incomplete')
+            driver.find_element(By.CSS_SELECTOR,'#calendarPanel [data-close-home-view]').click()
+            WebDriverWait(driver,5).until(lambda d:d.find_element(By.ID,'calendarPanel').get_attribute('hidden') is not None)
+            driver.find_element(By.CSS_SELECTOR,'[data-home-action="quran"]').click()
+            WebDriverWait(driver,10).until(lambda d:d.find_element(By.ID,'quranReaderPanel').get_attribute('hidden') is None)
+            qroute=driver.execute_script("return {active:document.getElementById('quranReaderPanel').classList.contains('is-active'),screenHidden:document.getElementById('mainScreen').hidden,settings:!!document.querySelector('#quranReaderPanel [data-home-settings]'),background:getComputedStyle(document.querySelector('#quranReaderPanel .quran-reader-shell')).backgroundImage}")
+            if not qroute['active'] or qroute['screenHidden'] or not qroute['settings']:errors.append('Quran did not push in as a local route with contextual settings')
+            alphas=[float(a) for a in re.findall(r'rgba\([^)]*,\s*([0-9.]+)\)',qroute['background'])]
+            if not any(0 < alpha < .65 for alpha in alphas):errors.append('Quran reader hides the selected HOME wallpaper beneath an opaque panel')
+            time.sleep(.4)
+            WebDriverWait(driver,15).until(lambda d:bool(d.find_element(By.ID,'readerArabic').text.strip()) and bool(d.find_element(By.ID,'readerGerman').text.strip()))
+            if not driver.find_element(By.ID,'readerSurah').get_attribute('value'):errors.append('Quran reader did not provide local Surah selection')
+            if not driver.find_element(By.ID,'readerReciter').get_attribute('value'):errors.append('Quran reader did not provide reciter selection')
+            driver.find_element(By.ID,'readerShowTransliteration').click()
+            saved_pref=driver.execute_script("return JSON.parse(localStorage.getItem('dar-home-cinematic-v2')||'{}').readerTransliteration")
+            if saved_pref!='hide':errors.append('Quran reader transliteration preference was not saved')
+            driver.find_element(By.ID,'readerShowTransliteration').click()
+            driver.find_element(By.CSS_SELECTOR,'#quranReaderPanel [data-home-settings]').click()
+            WebDriverWait(driver,5).until(lambda d:'open' in d.find_element(By.ID,'settingsOverlay').get_attribute('class'))
+            city_before=driver.find_element(By.ID,'city').get_attribute('value')
+            driver.find_element(By.ID,'city').clear()
+            driver.find_element(By.ID,'city').send_keys('Köln')
+            driver.find_element(By.CSS_SELECTOR,'button[data-tab="inhalte"]').click()
+            if driver.find_element(By.ID,'city').get_attribute('value')!='Köln':errors.append('Changing settings tab discarded the current location edit')
+            driver.find_element(By.ID,'closeSettings').click()
+            if driver.find_element(By.ID,'quranReaderPanel').get_attribute('hidden') is not None or not driver.find_element(By.ID,'quranReaderPanel').get_attribute('class').find('is-active')>=0:errors.append('Closing settings did not return to the active Quran route')
+            driver.execute_script("const target=document.getElementById('readerGerman');target.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,pointerType:'touch',clientX:250,clientY:260}));document.dispatchEvent(new PointerEvent('pointerup',{bubbles:true,pointerType:'touch',clientX:390,clientY:263}))")
+            WebDriverWait(driver,6).until(lambda d:d.find_element(By.ID,'quranReaderPanel').get_attribute('hidden') is not None)
+            WebDriverWait(driver,5).until(lambda d:not d.find_element(By.ID,'mainScreen').get_attribute('class').find('view-covered')>=0)
+            print('QURAN_PUSH_SETTINGS_RETURN_AND_SWIPE_BACK: PASS',flush=True)
+            print('QURAN_READER_AR_DE_TRANSLITERATION: PASS',flush=True)
+            driver.find_element(By.CSS_SELECTOR,'[data-home-action="prayer"]').click()
+            driver.find_element(By.CSS_SELECTOR,'[data-home-action="prayer"]').click()
+            if 'home-focus' not in driver.find_element(By.ID,'times').get_attribute('class'):errors.append('Prayer navigation does not focus the HOME prayer area')
+            print('LOCAL_HOME_NAV calendar/quran/hadith/prayer: PASS',flush=True)
+            driver.execute_script("document.activeElement.blur();document.body.tabIndex=-1;document.body.focus();document.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}))")
+            remote_focus=driver.execute_script("return {id:document.activeElement.id,tag:document.activeElement.tagName,role:document.activeElement.getAttribute('role')}")
+            print('TV_REMOTE_ARROW_FOCUS',remote_focus,flush=True)
+            if remote_focus['tag']=='BODY':errors.append('TV remote arrow key did not focus a HOME control')
+            driver.find_element(By.ID,'nightstandLaunch').click()
+            WebDriverWait(driver,8).until(lambda d:d.find_element(By.ID,'nightstandView').get_attribute('hidden') is None)
+            night=driver.execute_script("return {clock:document.getElementById('nightstandClock').textContent,prayer:document.getElementById('nightstandPrayer').textContent,time:document.getElementById('nightstandPrayerTime').textContent,bg:getComputedStyle(document.getElementById('nightstandView')).backgroundColor,exit:document.getElementById('nightstandView').getBoundingClientRect().height}")
+            print('NIGHTSTAND_VIEW',night,flush=True)
+            if not night['clock'] or not night['prayer'] or not night['time'] or night['exit']<100:errors.append('Dim nightstand view does not show the live clock and next prayer')
+            driver.find_element(By.ID,'nightstandExit').click()
+            if driver.execute_script("return !document.getElementById('nightstandView').hidden"):errors.append('Nightstand view did not close')
             driver.find_element(By.ID,'openSettings').click()
+            settings_layout=driver.execute_script("""
+              const nav=document.querySelector('.settings-tabs'),detail=document.querySelector('.tabpage.on');
+              const n=nav.getBoundingClientRect(),d=detail.getBoundingClientRect();
+              return {direction:getComputedStyle(nav).flexDirection,navWidth:n.width,detailWidth:d.width,navRight:n.right,detailLeft:d.left};
+            """)
+            print('SETTINGS_LANDSCAPE_LAYOUT',settings_layout,flush=True)
+            if settings_layout['direction']!='column' or settings_layout['navWidth']<180 or settings_layout['detailWidth']<400 or settings_layout['detailLeft']<=settings_layout['navRight']:
+              errors.append('Landscape settings sidebar and detail view are not separated or usable')
+            driver.execute_script("""
+              Object.defineProperty(navigator,'geolocation',{configurable:true,value:{getCurrentPosition:ok=>ok({coords:{latitude:52.520008,longitude:13.404954}})}});
+              const m=document.getElementById('locationMode');m.value='auto';m.dispatchEvent(new Event('change',{bubbles:true}));
+            """)
+            WebDriverWait(driver,10).until(lambda d:'Automatisch erkannt' in d.find_element(By.ID,'locationStatus').text)
+            geo=driver.execute_script("return {mode:document.getElementById('locationMode').value,city:document.getElementById('city').value,lat:document.getElementById('lat').value,lon:document.getElementById('lon').value}")
+            print('LOCATION_AUTO',geo,flush=True)
+            if geo['mode']!='auto' or geo['city']!='Mein Standort' or abs(float(geo['lat'])-52.520008)>.00001 or abs(float(geo['lon'])-13.404954)>.00001:errors.append('Automatic location selection did not apply device coordinates')
+            driver.execute_script("const m=document.getElementById('locationMode');m.value='manual';m.dispatchEvent(new Event('change',{bubbles:true}));document.getElementById('city').value='Meckenheim';document.getElementById('lat').value='50.6256';document.getElementById('lon').value='6.9491';document.getElementById('tz').value='Europe/Berlin'")
+            if driver.find_element(By.ID,'locationMode').get_attribute('value')!='manual':errors.append('Manual location mode cannot be restored')
+            if not driver.find_element(By.ID,'locationStatus').text.startswith('Manuelle'):errors.append('Manual location status is unclear')
             tab=driver.find_element(By.CSS_SELECTOR,'button[data-tab="hintergrund"]')
             tab.click()
             assert driver.find_element(By.CSS_SELECTOR,'.tabpage[data-page="hintergrund"]').get_attribute('class').find('on')>=0
             gallery=driver.find_elements(By.CSS_SELECTOR,'#wallpaperOptions button[data-wallpaper]')
             print('GALLERY',len(gallery),flush=True)
+            gallery_ids={x.get_attribute('data-wallpaper') for x in gallery}
+            expected_wallpapers={'tv-kaaba-day','tv-kaaba-sunrise','tv-kaaba-sunset','tv-kaaba-autumn','tv-kaaba-rain','tv-kaaba-thunderstorm','tv-kaaba-background','tv-kaaba-background-ai','tv-kaaba-mekka-1','tv-kaaba-mekka-2'}
+            if len(gallery)<17 or not expected_wallpapers.issubset(gallery_ids):errors.append('Full HOME background gallery is incomplete')
+            thumb=driver.find_element(By.CSS_SELECTOR,'#wallpaperOptions [data-wallpaper="tv-kaaba-day"] img')
+            if not thumb.get_attribute('src').endswith('tv-kaaba-day-thumb.jpg') or thumb.get_attribute('naturalWidth')!='640':errors.append('Gallery did not use the optimized 640px preview')
+            Select(driver.find_element(By.ID,'homeWallpaperMode')).select_by_value('auto')
+            auto_bg=driver.execute_script("return document.getElementById('homeWallpaperImage').currentSrc")
+            print('AUTO_WALLPAPER',auto_bg,flush=True)
+            if '/media/apple-tv/tv-kaaba-' not in auto_bg:errors.append('Automatic day/night wallpaper did not select a native scene')
+            Select(driver.find_element(By.ID,'homeSaverBackground')).select_by_value('tv-kaaba-sunrise')
+            WebDriverWait(driver,10).until(lambda d:d.execute_script("const i=document.getElementById('saverWallpaperImage');return i.complete&&i.naturalWidth>0"))
+            driver.execute_script("document.body.classList.add('saver-open')")
+            saver_bg=driver.execute_script("return document.getElementById('saverWallpaperImage').currentSrc")
+            print('SAVER_WALLPAPER_SOURCE',saver_bg,driver.execute_script("return JSON.parse(localStorage.getItem('dar-home-v3-preferences')||'{}').saverWallpaper"),flush=True)
+            if '/media/apple-tv/tv-kaaba-sunrise.jpg' not in saver_bg:errors.append('Separate screensaver wallpaper was not applied')
+            saver_fit=driver.execute_script("""
+              const img=document.getElementById('saverWallpaperImage'),r=img.getBoundingClientRect();
+              return {src:img.currentSrc,hidden:img.hidden,fit:getComputedStyle(img).objectFit,nw:img.naturalWidth,nh:img.naturalHeight,w:r.width,h:r.height};
+            """)
+            driver.execute_script("document.body.classList.remove('saver-open')")
+            print('FITTED_SAVER_WALLPAPER',saver_fit,flush=True)
+            if saver_fit['hidden'] or saver_fit['fit']!='contain' or not saver_fit['nw'] or not saver_fit['nh'] or saver_fit['h']<=0 or abs(saver_fit['w']/saver_fit['h']-saver_fit['nw']/saver_fit['nh'])>.03:errors.append('Screensaver wallpaper is cropped or stretched')
+            Select(driver.find_element(By.ID,'homeWallpaperMode')).select_by_value('manual')
             if len(gallery)<4:errors.append('Wallpaper gallery did not render')
+            if not any(x.get_attribute('data-wallpaper')=='tv-kaaba-day' for x in gallery):errors.append('Native Kaaba wallpaper missing from gallery')
+            driver.execute_async_script("""
+              const done=arguments[arguments.length-1];
+              Promise.all(['/media/apple-tv/tv-kaaba-day.jpg','/media/apple-tv/adhan-fajr.jpg'].map(src=>new Promise(resolve=>{
+                const i=new Image();i.onload=()=>resolve({src,ok:true,w:i.naturalWidth});i.onerror=()=>resolve({src,ok:false});i.src=src;
+              }))).then(done);
+            """)
+            media=driver.execute_script("return window.performance.getEntriesByType('resource').filter(x=>x.name.includes('/media/apple-tv/')).map(x=>x.name)")
+            print('NATIVE_MEDIA_REQUESTS',media,flush=True)
+            if not any('/tv-kaaba-day.jpg' in x for x in media):errors.append('Native wallpaper asset did not load')
+            if not any('/adhan-fajr.jpg' in x for x in media):errors.append('Native prayer artwork did not load')
+            if not any('/tv-brand-mark.png' in x for x in media):errors.append('Native transparent brand mark did not load')
+            brand=driver.find_element(By.CSS_SELECTOR,'.logo-mark img')
+            if not brand.get_attribute('src').endswith('/media/apple-tv/tv-brand-mark.png'):errors.append('HOME logo is not using the native transparent mark')
+            if float(driver.execute_script("return getComputedStyle(document.querySelector('.logo-mark')).borderWidth").replace('px',''))>0:errors.append('Logo tile border remains visible')
             if gallery:
-              gallery[0].click()
-              chosen=gallery[0].get_attribute('aria-pressed')
-              if chosen!='true':errors.append('Wallpaper selection not functional')
-            Select(driver.find_element(By.ID,'homeAppearance')).select_by_value('light')
-            if driver.find_element(By.ID,'app').get_attribute('data-home-theme')!='light':errors.append('Light mode not applied')
+              native_choice=driver.find_element(By.CSS_SELECTOR,'#wallpaperOptions button[data-wallpaper="tv-kaaba-sunrise"]')
+              native_choice.click()
+              chosen=native_choice.get_attribute('aria-pressed')
+              if chosen!='true':errors.append('Native wallpaper selection not functional')
+            if driver.find_element(By.ID,'app').get_attribute('data-home-theme')!='dark' or driver.find_element(By.ID,'app').get_attribute('data-home-palette')!='dar-al-layl':errors.append('Dār al-Layl standard changed during settings navigation')
+            if driver.find_element(By.ID,'homeAppearance').get_attribute('disabled') is None:errors.append('Appearance standard should not be switchable to a broken palette')
+            if driver.execute_script("return getComputedStyle(document.getElementById('dailyDe')).whiteSpace")=='nowrap':errors.append('Daily translation still truncated to one line')
+            long_dark_fixed=driver.execute_script("""
+              const article=document.querySelector('.daily-story'),de=document.getElementById('dailyDe'),src=document.getElementById('dailySource');
+              const old=[de.textContent,src.textContent];
+              de.textContent=('Eine gut lesbare deutsche Übersetzung mit vollständigem Sinn. ').repeat(18);src.textContent=('Qurʾān · Beispielquelle · ').repeat(4);window.fitDailyText();
+              const result={scrollHeight:de.scrollHeight,clientHeight:de.clientHeight,overflow:getComputedStyle(article).overflowY,font:parseFloat(getComputedStyle(de).fontSize),truncated:de.dataset.fitTruncated==='true'};
+              [de.textContent,src.textContent]=old;window.fitDailyText();return result;
+            """)
+            print('LONG_DAILY_FIXED_THEME',long_dark_fixed,flush=True)
+            if long_dark_fixed['overflow']=='auto' or (long_dark_fixed['scrollHeight']>long_dark_fixed['clientHeight']+2 and not long_dark_fixed['truncated']):errors.append('Long daily content lacks a fixed, readable preview without internal scrolling')
+            driver.find_element(By.CSS_SELECTOR,'button[data-tab="anzeige"]').click()
+            legacy_theme=driver.find_element(By.ID,'theme')
+            if legacy_theme.get_attribute('disabled') is None or legacy_theme.get_attribute('value')!='night' or len(legacy_theme.find_elements(By.TAG_NAME,'option'))!=1:errors.append('Legacy display settings must keep only the Dār al-Layl standard')
+            driver.find_element(By.CSS_SELECTOR,'button[data-tab="inhalte"]').click()
+            WebDriverWait(driver,20).until(lambda d:len(d.find_elements(By.CSS_SELECTOR,'#surah option'))==114)
+            if len(driver.find_elements(By.CSS_SELECTOR,'#quranPlaybackMode option'))!=2 or len(driver.find_elements(By.CSS_SELECTOR,'#quranPlaybackScope option'))!=2:errors.append('Quran manual/automatic and all/single controls missing')
+            driver.find_element(By.ID,'closeSettings').click()
+            driver.find_element(By.ID,'openSurahPicker').click()
+            WebDriverWait(driver,10).until(lambda d:len(d.find_elements(By.CSS_SELECTOR,'#surahList [role=option]'))>0)
+            driver.find_element(By.ID,'surahSearch').send_keys('Al-Fati')
+            WebDriverWait(driver,10).until(lambda d:len(d.find_elements(By.CSS_SELECTOR,'#surahList [role=option]'))==1)
+            driver.find_element(By.CSS_SELECTOR,'#surahList [role=option]').click()
+            if driver.find_element(By.ID,'surah').get_attribute('value')!='1':errors.append('Surah quick picker did not update the Quran player selection')
+            driver.find_element(By.ID,'openSettings').click()
+            driver.find_element(By.CSS_SELECTOR,'button[data-tab="inhalte"]').click()
+            Select(driver.find_element(By.ID,'quranPlaybackScope')).select_by_value('single')
+            if driver.execute_script("return JSON.parse(localStorage.getItem('dar-home-cinematic-v2')||'{}').quranPlaybackScope")!='single':errors.append('Selected-Sūrah playback scope did not save')
+            Select(driver.find_element(By.ID,'quranPlaybackScope')).select_by_value('all')
+            driver.find_element(By.CSS_SELECTOR,'button[data-tab="hintergrund"]').click()
+            driver.find_element(By.ID,'homeReduceMotion').click()
+            if 'reduced-motion' not in driver.find_element(By.ID,'app').get_attribute('class'):errors.append('Reduced motion preference did not apply')
+            animation=driver.execute_script("return parseFloat(getComputedStyle(document.querySelector('.saver-content')).animationDuration)")
+            if animation>=.001:errors.append('Reduced motion did not disable entrance animation')
             driver.find_element(By.ID,'saveSettings').click()
+            driver.refresh()
+            WebDriverWait(driver,15).until(EC.presence_of_element_located((By.ID,'app')))
+            time.sleep(1)
+            saved=driver.execute_script("return JSON.parse(localStorage.getItem('dar-home-v3-preferences')||'{}')")
+            print('PERSISTED_HOME_PREFS',saved,flush=True)
+            if saved.get('theme')!='dark' or saved.get('palette')!='dar-al-layl' or saved.get('wallpaperMode')!='manual' or saved.get('wallpaper')!='tv-kaaba-sunrise' or saved.get('saverWallpaper')!='tv-kaaba-sunrise' or saved.get('reduceMotion') is not True:errors.append('Appearance and independent wallpaper selections did not persist')
+            if driver.find_element(By.ID,'app').get_attribute('data-home-theme')!='dark' or driver.find_element(By.ID,'app').get_attribute('data-home-palette')!='dar-al-layl':errors.append('Dār al-Layl standard did not restore after reload')
+            if 'reduced-motion' not in driver.find_element(By.ID,'app').get_attribute('class'):errors.append('Reduced motion did not persist after reload')
             driver.find_element(By.ID,'openSettings').click()
             driver.find_element(By.CSS_SELECTOR,'button[data-tab="adhan"]').click()
             opts_f=driver.find_elements(By.CSS_SELECTOR,'#fajrAdhanTrack option')
             opts_r=driver.find_elements(By.CSS_SELECTOR,'#adhanTrack option')
             print('ADHAN_OPTIONS',len(opts_f),len(opts_r),flush=True)
+            driver.find_element(By.ID,'previewAdhan').click()
+            WebDriverWait(driver,10).until(lambda d:'Hörprobe' in d.find_element(By.CSS_SELECTOR,'#adhanVisual .adhan-title').text)
+            if driver.find_element(By.CSS_SELECTOR,'#adhanVisual .adhan-title').text!='Aḏān · Hörprobe':errors.append('Generic Adhan test inherited the active prayer name')
+            if driver.execute_script("const i=document.getElementById('h4PrayerArtwork');return i&&getComputedStyle(i).display!=='none'"):errors.append('Generic Adhan test reused a stale prayer-specific image')
+            driver.find_element(By.ID,'stopAdhan').click()
+            driver.find_element(By.ID,'openSettings').click()
+            driver.find_element(By.CSS_SELECTOR,'button[data-tab="adhan"]').click()
+            driver.find_element(By.ID,'previewFajrAdhan').click()
+            WebDriverWait(driver,10).until(lambda d:d.find_elements(By.ID,'h4PrayerArtwork'))
+            WebDriverWait(driver,10).until(lambda d:d.execute_script("return document.getElementById('h4PrayerArtwork')?.naturalWidth||0")>0)
+            art=driver.find_element(By.ID,'h4PrayerArtwork')
+            print('FAJR_ART',art.get_attribute('src'),flush=True)
+            if not art.get_attribute('src').endswith('/media/apple-tv/adhan-fajr.jpg'):errors.append('Faǧr cinematic did not use native Apple TV artwork')
+            bleed=driver.execute_script("""
+              const v=document.getElementById('adhanVisual'),i=document.getElementById('h4PrayerArtwork'),t=v.querySelector('.adhan-title'),sub=document.getElementById('adhanInfo'),lower=v.querySelector('.adhan-lower-third'),button=document.getElementById('stopAdhan'),a=i.getBoundingClientRect(),b=v.getBoundingClientRect(),l=lower.getBoundingClientRect(),bb=button.getBoundingClientRect(),cs=getComputedStyle(i);
+              return {width:a.width,height:a.height,viewWidth:b.width,viewHeight:b.height,fit:cs.objectFit,opacity:cs.opacity,position:cs.position,title:t.textContent,subtitle:sub.textContent,naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight,lowerBottom:Math.round(b.bottom-l.bottom),buttonInside:bb.top>=l.top&&bb.bottom<=l.bottom,lowerBackground:getComputedStyle(lower).backgroundColor,backdropWidth:document.getElementById('adhanWallpaperBackdrop').getBoundingClientRect().width,backdropHeight:document.getElementById('adhanWallpaperBackdrop').getBoundingClientRect().height,backdropImage:getComputedStyle(document.getElementById('adhanWallpaperBackdrop')).backgroundImage};
+            """)
+            print('FAJR_FULL_BLEED_LOWER_THIRD',bleed,flush=True)
+            if bleed['width']>bleed['viewWidth']+2 or bleed['height']>bleed['viewHeight']+2 or bleed['fit']!='contain' or bleed['opacity']!='1' or bleed['naturalWidth']<1600 or abs(bleed['width']/bleed['height']-bleed['naturalWidth']/bleed['naturalHeight'])>.03:errors.append('Native prayer art is not high-resolution and fully fitted')
+            if bleed['backdropWidth']<bleed['viewWidth']-2 or bleed['backdropHeight']<bleed['viewHeight']-2 or 'adhan-fajr.jpg' not in bleed['backdropImage']:errors.append('Adhan wallpaper does not fill unused aspect-ratio space with the selected prayer artwork')
+            if bleed['lowerBottom']>100 or not bleed['buttonInside']:errors.append('Adhan time and stop button are not grouped in the lower-third')
+            if bleed['subtitle'].startswith(('Fajr','Faǧr','Ḍuhr','ʿAṣr','Maġrib','ʿIšāʾ')):errors.append('Adhan prayer name is duplicated in the time line')
+            for prayer,asset in [('Fajr','fajr'),('Ḍuhr','dhuhr'),('ʿAṣr','asr'),('Maġrib','maghrib'),('ʿIšāʾ','isha')]:
+              driver.execute_script("const v=document.getElementById('adhanVisual');v.dataset.prayerKey='test:'+arguments[1];document.getElementById('adhanInfo').textContent=arguments[0]+' · Test';v.classList.add('active')",prayer,asset)
+              expected='/media/apple-tv/adhan-'+asset+'.jpg'
+              WebDriverWait(driver,10).until(lambda d:d.find_element(By.ID,'h4PrayerArtwork').get_attribute('src').endswith(expected))
+              WebDriverWait(driver,10).until(lambda d:d.execute_script("return document.getElementById('h4PrayerArtwork')?.naturalWidth||0")>0)
+            driver.execute_script("const v=document.getElementById('adhanVisual');v.dataset.prayerKey='isha';document.getElementById('adhanInfo').textContent='Heute · 17:57 Uhr';v.classList.add('active')")
+            for w,h in [(320,568),(390,844),(568,320),(667,375),(844,390),(1024,600),(1280,800),(1920,1200),(800,1280)]:
+              driver.set_window_size(w,h)
+              time.sleep(.2)
+              layout=driver.execute_script("""
+                const v=document.getElementById('adhanVisual'),l=v.querySelector('.adhan-lower-third'),s=document.getElementById('adhanInfo'),b=document.getElementById('stopAdhan'),t=v.querySelector('.adhan-title'),r=x=>{const q=x.getBoundingClientRect();return{left:q.left,right:q.right,top:q.top,bottom:q.bottom,width:q.width,height:q.height}},vr=r(v),lr=r(l),sr=r(s),br=r(b),cs=getComputedStyle(l),ss=getComputedStyle(s),bs=getComputedStyle(b);
+                const overlap=sr.left<br.right&&sr.right>br.left&&sr.top<br.bottom&&sr.bottom>br.top;
+                return{w:innerWidth,h:innerHeight,view:vr,lower:lr,sub:sr,button:br,direction:cs.flexDirection,font:parseFloat(ss.fontSize),line:parseFloat(ss.lineHeight),buttonFont:parseFloat(bs.fontSize),buttonBg:bs.backgroundColor,lowerBg:cs.backgroundColor,titleDisplay:getComputedStyle(t).display,scrollWidth:document.documentElement.scrollWidth,overlap};
+              """)
+              print('ADHAN_VIEWPORT',w,h,layout,flush=True)
+              vbox,lower,sub,button=layout['view'],layout['lower'],layout['sub'],layout['button']
+              if lower['left']<vbox['left']-1 or lower['right']>vbox['right']+1 or lower['top']<vbox['top']-1 or lower['bottom']>vbox['bottom']+1:errors.append(f'{w}x{h}: Adhan caption escapes the viewport')
+              if button['left']<vbox['left'] or button['right']>vbox['right'] or button['top']<vbox['top'] or button['bottom']>vbox['bottom']:errors.append(f'{w}x{h}: Adhan action is clipped')
+              if button['height']<44 or layout['font']<15 or layout['buttonFont']<13:errors.append(f'{w}x{h}: Adhan text or action is too small')
+              if layout['overlap']:errors.append(f'{w}x{h}: Adhan time overlaps the stop action')
+              if layout['lowerBg'] not in ('rgba(0, 0, 0, 0)','transparent'):errors.append(f'{w}x{h}: Adhan caption reintroduced an opaque card')
+              if layout['titleDisplay']!='none':errors.append(f'{w}x{h}: scheduled Adhan duplicates the artwork prayer title')
+              if layout['scrollWidth']>layout['w']+2:errors.append(f'{w}x{h}: Adhan view causes horizontal overflow')
+            driver.set_window_size(1280,800)
+            time.sleep(.2)
+            driver.execute_script("document.getElementById('stopAdhan').click()")
+            WebDriverWait(driver,10).until(lambda d:'active' not in d.find_element(By.ID,'adhanVisual').get_attribute('class'))
+            WebDriverWait(driver,5).until(lambda d:d.execute_script("const i=document.getElementById('h4PrayerArtwork');return !i||getComputedStyle(i).display==='none'"))
+            if driver.execute_script("const i=document.getElementById('homeWallpaperImage');return i.hidden||getComputedStyle(i).display==='none'"):errors.append('Selected HOME wallpaper did not return after Adhan')
+            if driver.execute_script("const i=document.getElementById('h4PrayerArtwork');return i&&getComputedStyle(i).display!=='none'"):errors.append('Prayer artwork remained visible after Adhan')
+            driver.find_element(By.ID,'openSettings').click()
             driver.find_element(By.CSS_SELECTOR,'button[data-tab="saver"]').click()
             driver.find_element(By.ID,'saverPreview').click()
             if 'saver-open' not in driver.find_element(By.ID,'app').get_attribute('class'):errors.append('Screensaver not started')
-            driver.find_element(By.ID,'saver').click()
+            saver_ar_color=driver.execute_script("return getComputedStyle(document.getElementById('saverAr')).color")
+            saver_bg=driver.execute_script("return document.getElementById('saverWallpaperImage').currentSrc")
+            print('DARK_SAVER',saver_ar_color,saver_bg,flush=True)
+            if saver_ar_color!='rgb(242, 237, 221)':errors.append('Screensaver text did not preserve the Dār al-Layl palette')
+            if '/media/apple-tv/tv-kaaba-sunrise.jpg' not in saver_bg:errors.append('Screensaver did not use its separately selected background')
+            driver.execute_script("document.getElementById('saver').click()")
             if 'saver-open' in driver.find_element(By.ID,'app').get_attribute('class'):errors.append('Screensaver not closed')
+            driver.get('https://dar-home-kiosk-preview.sero91ak.workers.dev/?qa=tv-contract')
+            WebDriverWait(driver,25).until(EC.presence_of_element_located((By.ID,'mainScreen')))
+            driver.execute_script("""
+              window.darHomeDailyVerse={reference:'2:183',ar:'يَا أَيُّهَا الَّذِينَ آمَنُوا',de:'O ihr, die ihr glaubt'};
+              document.getElementById('openTadabbur').hidden=false;
+            """)
+            print('TADABBUR_RECT_DIAGNOSTIC',driver.execute_script("""
+              const pick=x=>{const e=document.querySelector(x),r=e?.getBoundingClientRect();return r?{x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,scrollHeight:e.scrollHeight,clientHeight:e.clientHeight,overflow:getComputedStyle(e).overflow,display:getComputedStyle(e).display}:null};
+              const b=document.getElementById('openTadabbur'),r=b.getBoundingClientRect(),e=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
+              return {viewport:[innerWidth,innerHeight],screen:pick('#mainScreen'),hero:pick('.hero'),right:pick('.hero-right'),story:pick('.daily-story'),button:pick('#openTadabbur'),times:pick('.times-band'),bandHead:pick('.band-head'),hit:e?.className||e?.id||e?.tagName};
+            """),flush=True)
+            driver.execute_script("window.darHomeDailyVerse={reference:'2:183',ar:'يَا أَيُّهَا الَّذِينَ آمَنُوا',de:'O ihr, die ihr glaubt'};document.getElementById('openTadabbur').hidden=false;document.getElementById('openTadabbur').click()")
+            WebDriverWait(driver,150).until(lambda d:'4774' in d.find_element(By.ID,'tadabburStatus').text or '1 geprüfte' in d.find_element(By.ID,'tadabburStatus').text or '1 geprüfte Überlieferung' in d.find_element(By.ID,'tadabburStatus').text)
+            WebDriverWait(driver,10).until(lambda d:len(d.find_elements(By.CSS_SELECTOR,'#tadabburResults .tadabbur-item'))>0)
+            tad_layout=driver.execute_script("const p=document.getElementById('tadabburPanel'),d=p.querySelector('.tadabbur-dialog');return {visible:!p.hidden,dialog:p.getAttribute('role'),modal:p.getAttribute('aria-modal'),fixed:getComputedStyle(p).position,display:getComputedStyle(p).display,dialogWidth:d.getBoundingClientRect().width,dialogHeight:d.getBoundingClientRect().height,homeHidden:document.getElementById('mainScreen').hidden,storyOverflow:getComputedStyle(document.querySelector('.daily-story')).overflowY,verseCopy:document.getElementById('tadabburVerseText')?.textContent||'',button:document.getElementById('openTadabbur').textContent.trim()}")
+            if not tad_layout['visible'] or tad_layout['dialog']!='dialog' or tad_layout['modal']!='true' or tad_layout['fixed']!='fixed' or tad_layout['display']!='grid' or tad_layout['dialogWidth']<300 or tad_layout['dialogHeight']<150 or tad_layout['homeHidden'] or tad_layout['storyOverflow']=='auto' or not tad_layout['verseCopy'].strip() or tad_layout['button']!='Tadabbur einblenden':errors.append('Tadabbur is not a readable modal independent of the HOME text area')
+            print('TADABBUR_MODAL_LAYOUT',tad_layout,flush=True)
+            tad_text=driver.find_element(By.ID,'tadabburResults').text
+            print('HOME_TADABBUR_EXACT_LOOKUP',tad_text[:500],flush=True)
+            if 'Das Fasten ist ein Schutzschild.' not in tad_text or 'Ṣaḥīḥ al-Buḫārī, Nr. 1904' not in tad_text:errors.append('Exact verse Tadabbur lookup or source citation failed')
+            driver.find_element(By.ID,'closeTadabbur').click()
+            WebDriverWait(driver,5).until(lambda d:d.find_element(By.ID,'tadabburPanel').get_attribute('hidden') is not None)
+            if driver.execute_script("return document.activeElement.id")!='openTadabbur':errors.append('Closing Tadabbur did not restore focus to its opener')
+            driver.find_element(By.ID,'openSettings').click()
+            driver.find_element(By.CSS_SELECTOR,'button[data-tab="saver"]').click()
+            Select(driver.find_element(By.ID,'saverMode')).select_by_value('tvos')
+            try:
+              WebDriverWait(driver,45).until(lambda d:d.execute_script("const x=window.darTvScreensaver?.status();return x?.ready&&x.counts.hadith>0&&x.counts.athar>0&&x.counts.quranTad===4774"))
+            except Exception:
+              print('TVOS_LOAD_DIAGNOSTICS',driver.execute_script("const x=window.darTvScreensaver;return {globalType:typeof x,statusType:typeof x?.status,statusValue:typeof x?.status==='function'?x.status():null,typeExists:!!document.getElementById('saverType'),detail:document.getElementById('saverDe')?.textContent,resourceErrors:performance.getEntriesByType('resource').filter(x=>x.name.includes('dar-home-kiosk-preview')||x.name.includes('/library-shell.json')).map(x=>({name:x.name,duration:x.duration,transfer:x.transferSize}))}"),driver.get_log('browser')[-20:],flush=True)
+              raise
+            tv_status=driver.execute_script("return window.darTvScreensaver.status()")
+            print('TVOS_5_5_5_CATALOG',tv_status,flush=True)
+            if tv_status['weights']!={'hadith':5,'athar':5,'quranTad':5}:errors.append('tvOS content weights do not follow canonical 5:5:5')
+            if tv_status['counts']['hadith']+tv_status['counts']['athar']!=3434:errors.append('Screensaver did not load all 3434 canonical Hadith and Athar cards')
+            driver.find_element(By.ID,'saverPreview').click()
+            time.sleep(2)
+            print('TVOS_RENDER_DIAGNOSTICS',driver.execute_script("return {app:document.getElementById('app').className,saver:document.getElementById('saver').className,type:document.getElementById('saverType')?.textContent,de:document.getElementById('saverDe')?.textContent,source:document.getElementById('saverSource')?.textContent,status:window.darTvScreensaver.status()}"),driver.get_log('browser')[-10:],flush=True)
+            WebDriverWait(driver,20).until(lambda d:d.execute_script("const e=document.getElementById('saverType'),r=e?.getBoundingClientRect();return !!e&&getComputedStyle(e).display!=='none'&&r?.width>0&&['Qurʾān','Ḥadīṯ','Āṯār'].some(x=>e.textContent.startsWith(x))"))
+            WebDriverWait(driver,15).until(lambda d:d.execute_script("const e=document.getElementById('saverSource'),r=e?.getBoundingClientRect();return !!e&&getComputedStyle(e).display!=='none'&&r?.width>0&&!!e.textContent.trim()"))
+            tv_card=driver.execute_script("return {type:document.getElementById('saverType').textContent,source:document.getElementById('saverSource').textContent,narrator:document.getElementById('saverNarrator').textContent}")
+            print('TVOS_ROTATION_CARD',tv_card,flush=True)
+            arabic_saver=driver.execute_script("const e=document.getElementById('saverAr');return {hidden:e.hidden,display:getComputedStyle(e).display,text:e.textContent.trim(),dir:e.getAttribute('dir'),lang:e.getAttribute('lang')}")
+            if not arabic_saver['hidden'] or arabic_saver['display']!='none' or arabic_saver['text'] or arabic_saver['dir'] or arabic_saver['lang']:errors.append('Arabic text or an Arabic-direction element remains in the screensaver')
+            print('SCREENSAVER_GERMAN_ONLY',arabic_saver,flush=True)
+            tv_order=driver.execute_script("return [...document.querySelector('#saver .saver-content').children].filter(e=>getComputedStyle(e).display!=='none'&&e.textContent.trim()).map(e=>e.id||e.className)")
+            if 'saverNarrator' in tv_order and 'saverStatement' in tv_order and not (tv_order.index('saverType')<tv_order.index('saverNarrator')<tv_order.index('saverDe')<tv_order.index('saverStatement')<tv_order.index('saverSource')):errors.append('Screensaver Hadith/Athar order must be type, narrator, statement, source')
+            if 'saverNarrator' in tv_order and 'saverStatement' not in tv_order and not (tv_order.index('saverType')<tv_order.index('saverNarrator')<tv_order.index('saverSource')):errors.append('Screensaver Tadabbur narrator metadata must precede source')
+            print('TVOS_CONTENT_ORDER',tv_order,flush=True)
+            print('TVOS_CONTENT_ORDER',tv_order,flush=True)
+            duration_check=driver.execute_script("""
+              const s=window.darTvScreensaver.status(),text=['saverAr','saverDe','saverNarrator','saverStatement','saverSource'].map(id=>document.getElementById(id)?.textContent||'').join(' ').replace(/\s+/g,' ').trim();
+              const words=text.split(' ').filter(Boolean).length,letters=(text.match(/[\p{L}\p{N}]/gu)||[]).length;
+              const expected=Math.max(18,Math.min(40,Math.ceil(Math.max(16+words*.35,8+words*60/180,letters/22))));
+              return {words,letters,expected,actual:s.currentDuration,textLength:text.length}
+            """)
+            print('TVOS_ADAPTIVE_DURATION',duration_check,flush=True)
+            if duration_check['actual']!=duration_check['expected']:errors.append('Screensaver duration does not follow the visible word and character length')
+            driver.execute_script("document.getElementById('saver').click()")
+            driver.execute_cdp_cmd('Network.enable',{})
+            driver.execute_cdp_cmd('Network.setBlockedURLs',{'urls':['https://dar-al-tawhid.de/*','https://www.dar-al-tawhid.de/*']})
+            driver.refresh()
+            WebDriverWait(driver,20).until(lambda d:'LOKAL BERECHNET' in d.find_element(By.ID,'statusText').text or 'OFFLINE' in d.find_element(By.ID,'statusText').text)
+            offline_status=driver.find_element(By.ID,'statusText').text
+            offline_times=[x.text for x in driver.find_elements(By.CSS_SELECTOR,'.prayer-cell .ptime')]
+            print('OFFLINE_PRAYERS',offline_status,offline_times,flush=True)
+            if 'LOKAL BERECHNET' not in offline_status:errors.append('Fresh offline session did not compute prayer times locally')
+            offline_surahs=len(driver.find_elements(By.CSS_SELECTOR,'#surah option'))
+            print('OFFLINE_SURAH_OPTIONS',offline_surahs,flush=True)
+            if offline_surahs!=114:errors.append('Quran surah choices were not restored from local cache offline')
+            if not offline_times or any(x in ('','--:--') for x in offline_times):errors.append('Offline calculation did not populate all prayer times')
+            driver.execute_cdp_cmd('Network.setBlockedURLs',{'urls':[]})
+            driver.refresh()
+            WebDriverWait(driver,30).until(lambda d:'LIVE · DĀR Gebetszeiten' in d.find_element(By.ID,'statusText').text or 'LOKAL BERECHNET' in d.find_element(By.ID,'statusText').text)
+            restored=driver.find_element(By.ID,'statusText').text
+            print('ONLINE_RESTORED',restored,flush=True)
+            if 'LIVE · DĀR Gebetszeiten' not in restored:errors.append('Online prayer source did not recover after reconnection')
             if errors:raise AssertionError(' | '.join(errors))
-            print('HOME V4 editorial / settings-only browser QA: PASS')
+            print('HOME V5 editorial / settings-only browser QA: PASS')
           finally:driver.quit()
           PY

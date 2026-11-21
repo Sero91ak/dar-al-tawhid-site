@@ -1,0 +1,3360 @@
+/* HOME V5 — Salbei-Elfenbein theme and readability corrections */
+#app.theme-ivory,#app[data-home-theme="light"] {
+  --gold:#496b55; --cream:#25372f; --text:#26362e; --muted:#52645a;
+  --fine:rgba(48,76,59,.32); color-scheme:light;
+  background:#f3f1e7; color:var(--text);
+}
+#app.theme-ivory,#app[data-home-theme="light"] .artwork { filter:saturate(.72) brightness(1.08); }
+#app.theme-ivory,#app[data-home-theme="light"] .lightgrading {
+  background:linear-gradient(90deg,rgba(244,243,233,.94),rgba(244,243,233,.66) 49%,rgba(244,243,233,.88)),
+    linear-gradient(0deg,rgba(241,240,229,.97),rgba(241,240,229,.2) 70%,rgba(241,240,229,.72));
+}
+#app.theme-ivory,#app[data-home-theme="light"] .edge { border-color:rgba(51,77,59,.2); }
+#app.theme-ivory,#app[data-home-theme="light"] .corner { border-color:rgba(57,89,66,.55); }
+#app.theme-ivory,#app[data-home-theme="light"] .brand-mini,#app.theme-ivory,#app[data-home-theme="light"] .overline,#app.theme-ivory,#app[data-home-theme="light"] .next-arabic,
+#app.theme-ivory,#app[data-home-theme="light"] .band-head,#app.theme-ivory,#app[data-home-theme="light"] .daily-label,#app.theme-ivory,#app[data-home-theme="light"] .audio-kicker,
+#app.theme-ivory,#app[data-home-theme="light"] .saver-kicker { color:#365b43; }
+#app.theme-ivory,#app[data-home-theme="light"] .site-name,#app.theme-ivory,#app[data-home-theme="light"] .prayer-cell .pname,
+#app.theme-ivory,#app[data-home-theme="light"] .daily-title,#app.theme-ivory,#app[data-home-theme="light"] .audio-title,
+#app.theme-ivory,#app[data-home-theme="light"] .main-time,#app.theme-ivory,#app[data-home-theme="light"] .now,#app.theme-ivory,#app[data-home-theme="light"] .next-name,
+#app.theme-ivory,#app[data-home-theme="light"] .hero-verse { color:#24362d; text-shadow:none; }
+#app.theme-ivory,#app[data-home-theme="light"] .hero-verse { background:rgba(249,248,239,.62); padding:.12em .35em; border-radius:4px; }
+#app.theme-ivory,#app[data-home-theme="light"] .hero-caption,#app.theme-ivory,#app[data-home-theme="light"] .daily-de { color:#405247; }
+#app.theme-ivory,#app[data-home-theme="light"] .times-band,#app.theme-ivory,#app[data-home-theme="light"] .foot { border-color:rgba(48,76,59,.35); }
+#app.theme-ivory,#app[data-home-theme="light"] .prayer-cell { border-color:rgba(48,76,59,.28); }
+#app.theme-ivory,#app[data-home-theme="light"] .prayer-cell.active .ptime,#app.theme-ivory,#app[data-home-theme="light"] .prayer-cell.active .pname { color:#294f38; font-weight:700; }
+#app.theme-ivory,#app[data-home-theme="light"] .audio-area { border-color:rgba(48,76,59,.35); }
+#app.theme-ivory,#app[data-home-theme="light"] .topbtn,#app.theme-ivory,#app[data-home-theme="light"] .round,#app.theme-ivory,#app[data-home-theme="light"] .touchbutton {
+  color:#263c30; border-color:rgba(48,76,59,.48); background:rgba(249,248,239,.72);
+}
+#app.theme-ivory,#app[data-home-theme="light"] .round.primary,#app.theme-ivory,#app[data-home-theme="light"] .save-action { background:#365b43;color:#fffdf5;border-color:#365b43; }
+#app.theme-ivory,#app[data-home-theme="light"] .status,#app.theme-ivory,#app[data-home-theme="light"] .date,#app.theme-ivory,#app[data-home-theme="light"] .counter,
+#app.theme-ivory,#app[data-home-theme="light"] .source,#app.theme-ivory,#app[data-home-theme="light"] .audio-sub,#app.theme-ivory,#app[data-home-theme="light"] .audiosmall { color:#46584d; }
+#app.theme-ivory,#app[data-home-theme="light"] .settings-frame { background:radial-gradient(ellipse at 80% 10%,rgba(115,145,115,.14),transparent 55%),#f3f1e7; }
+#app.theme-ivory,#app[data-home-theme="light"] .overlay { background:rgba(243,241,231,.97); }
+#app.theme-ivory,#app[data-home-theme="light"] .settings-top h2,#app.theme-ivory,#app[data-home-theme="light"] .settings-tabs button.on { color:#263c30; }
+#app.theme-ivory,#app[data-home-theme="light"] .settings-tabs button,#app.theme-ivory,#app[data-home-theme="light"] .setting-desc,#app.theme-ivory,#app[data-home-theme="light"] .savehint,
+#app.theme-ivory,#app[data-home-theme="light"] .mini { color:#536258; }
+#app.theme-ivory,#app[data-home-theme="light"] .field label { color:#365b43; }
+#app.theme-ivory,#app[data-home-theme="light"] .field input,#app.theme-ivory,#app[data-home-theme="light"] .field select { color:#26362e; border-color:rgba(48,76,59,.42); }
+#app.theme-ivory,#app[data-home-theme="light"] .field select option { background:#f3f1e7;color:#26362e; }
+#app.theme-ivory,#app[data-home-theme="light"] .close-button,#app.theme-ivory,#app[data-home-theme="light"] .secondary-action,#app.theme-ivory,#app[data-home-theme="light"] .city-chip { color:#263c30; }
+@media (prefers-reduced-motion:reduce) {
+  #app *,#app *::before,#app *::after { animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important; }
+}
+
+
+/* V5 integration with the persistent HOME V3 appearance preference. */
+#app[data-home-theme="light"] { color-scheme:light; }
+#app[data-home-theme="light"] .lightgrading {
+  background:
+    linear-gradient(90deg,rgba(243,241,231,.95) 0%,rgba(243,241,231,.72) 47%,rgba(243,241,231,.25) 100%),
+    linear-gradient(0deg,rgba(243,241,231,.82) 0%,rgba(243,241,231,.12) 56%,rgba(243,241,231,.36) 100%);
+}
+#app[data-home-theme="light"] .hero-verse { background:rgba(249,248,239,.78); }
+#app[data-home-theme="light"] .daily-story {
+  max-height:min(22vh,220px);
+  overflow:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(54,91,67,.45) transparent;
+}
+#app[data-home-theme="light"] .daily-title {
+  max-height:none;
+  overflow:visible;
+  display:block;
+  -webkit-line-clamp:unset;
+}
+#app[data-home-theme="light"] .daily-de {
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+  line-height:1.35;
+}
+#app[data-home-theme="light"] .source {
+  white-space:normal;
+  line-height:1.35;
+}
+#app[data-home-theme="light"] .overline { font-size:clamp(11px,1.03vw,14px); }
+#app[data-home-theme="light"] .band-head { font-size:clamp(10px,.85vw,12px); }
+#app[data-home-theme="light"] .daily-label { font-size:clamp(10px,.85vw,12px); }
+#app[data-home-theme="light"] .source { font-size:clamp(10px,.78vw,12px); }
+#app[data-home-theme="light"] .status,
+#app[data-home-theme="light"] .date,
+#app[data-home-theme="light"] .counter,
+#app[data-home-theme="light"] .audio-sub,
+#app[data-home-theme="light"] .audiosmall { font-size:clamp(10px,.85vw,13px); }
+
+@media (max-width:850px) {
+  #app[data-home-theme="light"] .lightgrading {
+    background:
+      linear-gradient(90deg,rgba(243,241,231,.9),rgba(243,241,231,.53) 70%,rgba(243,241,231,.32)),
+      linear-gradient(0deg,rgba(243,241,231,.86),rgba(243,241,231,.14) 62%,rgba(243,241,231,.34));
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  #app *,#app *::before,#app *::after { animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important; }
+}
+
+/* Long daily content stays readable in both color modes, with touch scrolling when needed. */
+.daily-story {
+  max-height:min(22vh,220px);
+  overflow:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+}
+.daily-title {
+  max-height:none;
+  overflow:visible;
+  display:block;
+  -webkit-line-clamp:unset;
+}
+.daily-de {
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+  line-height:1.35;
+}
+.source { white-space:normal; line-height:1.35; }
+
+/* The native transparent medallion floats on either appearance without a square tile. */
+#app .logo-mark {
+  width:clamp(42px,4.5vw,64px);
+  height:clamp(42px,4.5vw,64px);
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  overflow:visible!important;
+  box-shadow:none!important;
+}
+#app .logo-mark img {
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain;
+}
+#app .daily-story {
+  max-height:min(22vh,220px)!important;
+  overflow:auto!important;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+}
+#app .daily-title {
+  max-height:none!important;
+  overflow:visible!important;
+  display:block!important;
+  -webkit-line-clamp:unset!important;
+}
+#app .daily-de,
+#app .source {
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  line-height:1.35;
+}
+
+/* V5 minimum sizes for the 7-inch-class and low-height landscape layout. */
+#app .next-name { font-size:clamp(58px,8.2vw,154px); }
+#app .main-time { font-size:clamp(42px,5.3vw,80px); }
+#app .counter { font-size:clamp(14px,1.05vw,16px); }
+#app .hero-verse { font-size:clamp(21px,1.8vw,30px); line-height:1.55; }
+#app .daily-title { font-size:clamp(21px,1.9vw,32px); }
+#app .daily-de { font-size:clamp(18px,1.35vw,24px); }
+#app .source { font-size:clamp(12px,.9vw,15px); }
+#app .prayer-cell .pname { font-size:clamp(14px,1.18vw,19px); }
+#app .prayer-cell .ptime { font-size:clamp(28px,3vw,50px); }
+#app .date,
+#app .status,
+#app .audio-sub,
+#app .audiosmall { font-size:clamp(12px,.85vw,14px); }
+#app .overline,
+#app .band-head,
+#app .daily-label,
+#app .audio-kicker { font-size:clamp(11px,.95vw,14px); }
+@media (max-height:640px) {
+  #app .screen { gap:clamp(5px,1.2vh,10px); }
+  #app .daily-area { min-height:0; }
+}
+
+#app.reduced-motion *,
+#app.reduced-motion *::before,
+#app.reduced-motion *::after {
+  animation-duration:.01ms!important;
+  animation-iteration-count:1!important;
+  scroll-behavior:auto!important;
+  transition-duration:.01ms!important;
+}
+#app.reduced-motion #cinematicVideo { display:none!important; }
+.motion-setting { display:flex; align-items:center; gap:10px; color:var(--text); font-size:clamp(13px,1vw,16px); }
+.motion-setting input { width:22px; height:22px; min-height:22px!important; accent-color:var(--gold); }
+
+/* Give screensaver text a local reading layer that follows the selected theme. */
+#saver::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(2,12,16,.12) 0%,rgba(2,12,16,.42) 76%,rgba(2,12,16,.72) 100%);
+}
+#saver .saver-content { position:relative; z-index:1; }
+#saver .saver-bottom,
+#saver .saver-clock { z-index:1; }
+#app[data-home-theme="light"] #saver::before {
+  background:radial-gradient(ellipse at center,rgba(243,241,231,.94) 0%,rgba(243,241,231,.84) 67%,rgba(243,241,231,.42) 100%);
+}
+#app[data-home-theme="light"] #saver .saver-ar,
+#app[data-home-theme="light"] #saver .saver-de { color:#24362d; text-shadow:none; }
+#app[data-home-theme="light"] #saver .saver-symbol,
+#app[data-home-theme="light"] #saver .saver-kicker,
+#app[data-home-theme="light"] #saver .saver-bottom span:last-child,
+#app[data-home-theme="light"] #saver .saver-clock { color:#365b43; text-shadow:none; }
+#app[data-home-theme="light"] #saver .saver-source,
+#app[data-home-theme="light"] #saver .saver-bottom { color:#405247; }
+#app[data-home-theme="light"] #saver .saver-bottom { border-color:rgba(48,76,59,.36); }
+
+/* Premium device-control layout: persistent category rail on landscape displays. */
+@media (min-width: 851px) {
+  #app .settings-frame {
+    grid-template-columns:minmax(190px,clamp(210px,19vw,290px)) minmax(0,1fr);
+    grid-template-rows:auto minmax(0,1fr) auto;
+    grid-template-areas:"top top" "tabs detail" "save save";
+    column-gap:clamp(20px,3vw,48px);
+    row-gap:clamp(14px,2vh,24px);
+    padding:clamp(22px,3vw,52px);
+  }
+  #app .settings-top { grid-area:top; }
+  #app .settings-tabs {
+    grid-area:tabs;
+    align-self:stretch;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    border-top:1px solid var(--fine);
+    border-bottom:1px solid var(--fine);
+    padding:12px 0;
+  }
+  #app .settings-tabs button {
+    min-height:48px;
+    width:100%;
+    padding:11px 14px;
+    white-space:normal;
+    text-align:left;
+    line-height:1.3;
+    border-radius:5px;
+    font-size:clamp(13px,1vw,16px);
+    transition:background-color .18s ease,color .18s ease;
+  }
+  #app .settings-tabs button:hover,
+  #app .settings-tabs button:focus-visible { background:rgba(216,189,130,.12);outline:2px solid currentColor;outline-offset:2px; }
+  #app .settings-tabs button.on {
+    color:var(--text);
+    background:rgba(216,189,130,.16);
+    box-shadow:inset 3px 0 0 var(--gold);
+  }
+  #app .tabpage { grid-area:detail;min-width:0;max-width:1200px;max-height:100%;overflow:auto;padding:2px clamp(4px,.8vw,12px) 12px 0; }
+  #app .savebar { grid-area:save; }
+}
+@media (max-width:850px) {
+  #app .settings-tabs button { min-height:44px; }
+  #app .settings-tabs button:focus-visible { outline:2px solid currentColor;outline-offset:2px; }
+}
+
+/* Prayer artwork is a full-screen layer. Keep the chosen HOME scene behind it as a real fallback. */
+#app #adhanVisual {
+  isolation:isolate;
+  overflow:hidden;
+  background-color:#061b21;
+  background-image:url("/media/apple-tv/tv-kaaba-day.jpg");
+  background-position:center;
+  background-size:cover;
+}
+#app #adhanVisual::before { z-index:0; }
+#app #adhanVisual .h4-prayer-image {
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  opacity:1!important;
+  filter:none!important;
+  z-index:-2!important;
+}
+#app #adhanVisual #cinematicVideo {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-1;
+}
+#app #adhanVisual .adhan-symbol,
+#app #adhanVisual .adhan-title,
+#app #adhanVisual .adhan-sub,
+#app #adhanVisual .touchbutton {
+  position:relative;
+  z-index:1;
+}
+#app #adhanVisual .adhan-title { font-weight:700; }
+#app #adhanVisual .adhan-sub { font-weight:600;font-variant-numeric:tabular-nums; }
+
+/* Compact, wide 16:9 native prayer thumbnails with aligned, readable names and times. */
+#app .prayer-cell {
+  display:grid;
+  grid-template-columns:clamp(38px,5.2vw,66px) minmax(0,1fr);
+  grid-template-rows:auto auto;
+  align-content:center;
+  align-items:center;
+  justify-items:start;
+  column-gap:clamp(6px,.8vw,12px);
+  row-gap:1px;
+  min-width:0;
+  padding:4px clamp(4px,.65vw,10px);
+  text-align:left;
+}
+#app .prayer-cell img.prayer-glyph {
+  display:block!important;
+  grid-column:1;
+  grid-row:1 / span 2;
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:16 / 9;
+  max-height:48px;
+  object-fit:cover!important;
+  border-radius:3px;
+  filter:none;
+  opacity:.96;
+}
+#app .prayer-cell img.prayer-glyph.h3-icon-fallback { object-fit:contain!important; }
+#app .prayer-cell .prayer-labels {
+  display:contents;
+}
+#app .prayer-cell .pname {
+  grid-column:2;
+  grid-row:1;
+  font-size:clamp(12px,1.16vw,17px)!important;
+  font-weight:700;
+  line-height:1.12;
+}
+#app .prayer-cell .ptime {
+  grid-column:2;
+  grid-row:2;
+  font-size:clamp(22px,2.6vw,40px)!important;
+  font-weight:700;
+  line-height:1.05;
+  font-variant-numeric:tabular-nums lining-nums;
+  white-space:nowrap;
+}
+#app .next-name,#app .main-time,#app .counter { font-weight:700; }
+#app .main-time,#app .counter,#app .prayer-cell .ptime { font-variant-numeric:tabular-nums lining-nums; }
+#app .hero-verse,#app .daily-title,#app .saver-ar {
+  font-feature-settings:"kern","liga","calt";
+  font-kerning:normal;
+  text-rendering:optimizeLegibility;
+}
+#app .hero-verse { font-size:clamp(25px,2.05vw,36px);line-height:1.55; }
+#app .daily-de { font-size:clamp(19px,1.45vw,26px);line-height:1.4; }
+#app .source { font-size:clamp(13px,.95vw,16px); }
+#app .audio-title { font-size:clamp(21px,1.7vw,30px);font-weight:700; }
+#app .audio-sub { font-size:clamp(14px,1.05vw,18px); }
+
+/* Portrait keeps the verse and a compact prayer hero instead of hiding core information. */
+@media (orientation:portrait) {
+  #app .hero { grid-template-columns:minmax(0,1fr); }
+  #app .hero-left { padding:clamp(8px,2vh,20px) 0!important; }
+  #app .hero-right {
+    display:block!important;
+    border-left:0!important;
+    border-top:1px solid var(--home4-hair);
+    padding:clamp(12px,2vh,24px) 0!important;
+    text-align:center;
+  }
+  #app .next-name { font-size:clamp(48px,7.6vw,82px); }
+  #app .main-time { font-size:clamp(40px,6vw,64px); }
+  #app .counter { font-size:clamp(16px,2vw,22px); }
+  #app .hero-verse { font-size:clamp(23px,3vw,32px); }
+  #app .times-band { padding:8px 0!important; }
+  #app .prayer-cell { grid-template-columns:clamp(32px,5vw,46px) minmax(0,1fr);column-gap:5px;padding:4px 3px; }
+  #app .prayer-cell .pname { font-size:clamp(11px,1.65vw,14px)!important; }
+  #app .prayer-cell .ptime { font-size:clamp(19px,2.7vw,25px)!important; }
+  #app .daily-de { font-size:clamp(18px,2.4vw,24px); }
+}
+/* Android TV and keyboard users need an obvious spatial focus state. */
+#app :is(button,a[href],select,input,textarea):focus-visible {
+  outline:3px solid #f0cf85!important;
+  outline-offset:4px;
+  box-shadow:0 0 0 5px rgba(6,20,23,.84),0 0 22px rgba(240,207,133,.62)!important;
+  z-index:5;
+}
+#app .h3-icon-action { display:inline-flex;align-items:center;justify-content:center;gap:9px; }
+#app .h3-action-icon { width:clamp(26px,2.3vw,34px);height:clamp(26px,2.3vw,34px);object-fit:contain;flex:none; }
+#app .h3-action-icon.h3-compact { width:26px;height:26px; }
+
+/* Use the existing DĀR 3D icon set as section markers without replacing live text. */
+#app .times-band,#app .daily-story,#app .audio-area { position:relative; }
+#app .h3-section-emblem {
+  position:absolute;
+  top:clamp(4px,.7vh,10px);
+  right:clamp(4px,.7vw,10px);
+  width:clamp(28px,2.7vw,40px);
+  height:clamp(28px,2.7vw,40px);
+  object-fit:contain;
+  opacity:.94;
+  pointer-events:none;
+  z-index:2;
+}
+#app .settings-tabs .settings-icons { width:30px;height:30px;object-fit:contain;vertical-align:middle;margin-right:9px; }
+#app .motion-setting input { min-width:24px;min-height:24px; }
+#app #locationStatus { min-height:44px;display:flex;align-items:center;line-height:1.4; }
+#app .wallpaper-option img { aspect-ratio:16/9;object-fit:cover; }
+
+/* HOME V5.1: focused prayer times, readable cards and player navigation */
+#app .hero { grid-template-columns:minmax(0,1.02fr) minmax(260px,.98fr); gap:clamp(18px,3vw,44px); }
+#app .hero-left { padding:clamp(10px,1.5vh,18px) clamp(12px,1.6vw,24px); border-left:3px solid var(--gold); background:linear-gradient(90deg,rgba(5,20,22,.34),transparent 80%); }
+#app .next-name { font-size:clamp(48px,6.8vw,116px); letter-spacing:-.02em; line-height:1; margin:clamp(8px,1.2vh,16px) 0; }
+#app .next-row { gap:clamp(10px,1.5vw,22px); align-items:center; }
+#app .counter { padding:.48em .8em; border:1px solid rgba(219,195,142,.48); border-radius:999px; background:rgba(7,25,26,.6); font-size:clamp(15px,1.25vw,20px); letter-spacing:.035em; }
+#app .counter .countnum { display:inline-block; min-width:8ch; font-variant-numeric:tabular-nums; font-weight:800; }
+#app .times-band { padding:clamp(8px,1.5vh,15px) 0; }
+#app .prayer-cell { min-height:clamp(60px,8vh,92px); gap:7px; padding:6px 8px; text-align:center; }
+#app .prayer-cell .pname { font-size:clamp(14px,1.15vw,19px)!important; line-height:1.2; letter-spacing:.02em; }
+#app .prayer-cell .ptime { font-size:clamp(29px,3vw,48px)!important; line-height:1.05; letter-spacing:.015em; }
+#app .prayer-cell .prayer-glyph { display:none!important; }
+#app .prayer-cell:last-child { border-right:0; }
+#app .prayer-cell.active { background:linear-gradient(180deg,rgba(216,189,130,.18),rgba(216,189,130,.04)); border-radius:8px; }
+#app .sunrise-line { margin-top:8px; text-align:right; color:var(--muted); font:600 clamp(12px,.95vw,15px)/1.35 var(--ui); letter-spacing:.02em; }
+#app .daily-area { grid-template-columns:minmax(0,1.15fr) minmax(300px,.95fr); gap:clamp(20px,3vw,44px); min-height:clamp(130px,20vh,250px); align-items:stretch; }
+#app .daily-story { max-height:min(31vh,300px)!important; padding:clamp(10px,1.4vh,17px) clamp(10px,1.3vw,18px); border-left:2px solid var(--gold); background:rgba(4,18,20,.32); }
+#app .daily-title { display:none!important; }
+#app .daily-de { white-space:normal!important; overflow:visible!important; text-overflow:clip!important; font-size:clamp(20px,1.65vw,29px)!important; line-height:1.48!important; letter-spacing:.015em; }
+#app .source { font-size:clamp(13px,.95vw,16px)!important; line-height:1.45; letter-spacing:.025em; margin-top:10px; }
+#app .audio-area { border-left:1px solid var(--fine); padding:clamp(12px,1.6vh,20px) 0 clamp(12px,1.6vh,20px) clamp(18px,2vw,30px); display:grid; align-content:center; grid-template-columns:minmax(0,1fr) auto; gap:8px 16px; }
+#app .audio-kicker { grid-column:1/-1; letter-spacing:.12em; }
+#app .audio-title-button { grid-column:1/-1; display:flex; align-items:center; gap:12px; max-width:100%; width:max-content; padding:0; border:0; color:inherit; background:transparent; text-align:left; }
+#app .audio-title { font:700 clamp(26px,2.3vw,40px)/1.16 var(--display); white-space:normal; overflow:visible; text-overflow:clip; }
+#app .surah-chevron { color:var(--gold); font-size:24px; line-height:1; }
+#app .audio-sub { grid-column:1/-1; white-space:normal; line-height:1.45; }
+#app .audio-controls { grid-column:1/-1; margin:5px 0 0; gap:12px; }
+#app .h3-section-emblem { display:none!important; }
+#app .next-arabic { display:none!important; }
+#app .surah-picker[hidden] { display:none!important; }
+#app .surah-picker { position:absolute; inset:0; z-index:23; display:grid; place-items:center; padding:clamp(12px,4vw,48px); background:rgba(2,12,14,.78); backdrop-filter:blur(14px); }
+#app .surah-picker-panel { width:min(720px,100%); max-height:min(82dvh,850px); display:grid; grid-template-rows:auto auto auto minmax(120px,1fr); gap:14px; padding:clamp(20px,3vw,36px); border:1px solid var(--fine); border-radius:18px; background:rgba(8,28,29,.98); box-shadow:0 22px 70px rgba(0,0,0,.45); }
+#app .surah-picker-head { display:flex; align-items:center; justify-content:space-between; }
+#app .surah-picker-head h2 { margin:6px 0 0; font:600 clamp(30px,4vw,46px)/1 var(--display); }
+#app .surah-search-label { font-size:14px; color:var(--muted); }
+#app #surahSearch { width:100%; min-height:48px; padding:12px 16px; border:1px solid var(--fine); border-radius:10px; color:var(--text); background:rgba(255,255,255,.06); font-size:16px; }
+#app .surah-list { min-height:0; overflow:auto; overscroll-behavior:contain; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+#app .surah-option { display:flex; align-items:center; gap:12px; min-height:54px; padding:8px 12px; border:1px solid rgba(219,195,142,.18); border-radius:10px; color:var(--text); background:rgba(255,255,255,.035); text-align:left; }
+#app .surah-option[aria-selected="true"] { border-color:var(--gold); background:rgba(216,189,130,.14); }
+#app .surah-option .surah-number { flex:none; width:34px; height:34px; display:grid; place-items:center; border-radius:50%; background:rgba(216,189,130,.12); color:var(--gold); font-variant-numeric:tabular-nums; }
+#app .surah-option .surah-name { min-width:0; font-weight:700; line-height:1.3; }
+#app .surah-option .surah-meaning { display:block; color:var(--muted); font-size:13px; font-weight:400; line-height:1.35; }
+#app .surah-option .surah-arabic { display:none!important; }
+#app .adhan-symbol { display:none!important; }
+#app .adhan-title { padding:.18em .4em; border-radius:12px; background:rgba(3,16,19,.52); text-shadow:0 2px 18px rgba(0,0,0,.65); }
+@media (orientation:portrait) {
+ #app .hero { gap:clamp(4px,1vh,10px); }
+ #app .hero-left { padding:10px 12px!important; }
+ #app .next-name { font-size:clamp(42px,8vw,76px); }
+ #app .main-time { font-size:clamp(38px,6vw,62px); }
+ #app .hero-right { padding:clamp(8px,1.2vh,15px) 0!important; }
+ #app .times-band { padding:6px 0!important; }
+ #app .prayer-cell { min-height:56px; grid-template-columns:minmax(0,1fr); gap:4px; padding:5px 2px; }
+ #app .prayer-cell .pname { font-size:clamp(12px,1.8vw,16px)!important; }
+ #app .prayer-cell .ptime { font-size:clamp(21px,3.5vw,30px)!important; }
+ #app .daily-area { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px; min-height:clamp(160px,24vh,290px); }
+ #app .daily-story { max-height:min(30vh,260px)!important; }
+ #app .daily-de { font-size:clamp(18px,2.6vw,25px)!important; line-height:1.42!important; }
+ #app .audio-area { border-left:1px solid var(--fine); border-top:0; padding:12px 0 12px 14px; display:grid; align-content:center; grid-template-columns:1fr; }
+ #app .audio-controls { grid-column:1; }
+ #app .audio-title { font-size:clamp(22px,3.4vw,30px); }
+ #app .audio-sub { display:block; font-size:clamp(12px,1.8vw,16px); }
+}
+@media (max-width:560px) and (orientation:portrait) {
+ #app .hero { grid-template-columns:minmax(0,1fr); }
+ #app .hero-right { display:block!important; }
+ #app .daily-area { grid-template-columns:1fr; min-height:0; gap:10px; }
+ #app .daily-story { max-height:min(23vh,210px)!important; }
+ #app .audio-area { border-left:0; border-top:1px solid var(--fine); padding:12px 0 0; grid-template-columns:minmax(0,1fr) auto; }
+ #app .audio-kicker,#app .audio-sub { display:none; }
+ #app .audio-title-button { grid-column:1; }
+ #app .audio-title { font-size:clamp(24px,6vw,34px); }
+ #app .audio-controls { grid-column:2; grid-row:1/3; }
+ #app .surah-list { grid-template-columns:1fr; }
+}
+@media (max-height:640px) and (orientation:landscape) {
+ #app .screen { gap:5px; padding-top:12px; padding-bottom:10px; }
+ #app .hero { min-height:0; }
+ #app .daily-area { min-height:110px; }
+ #app .daily-story { max-height:22vh!important; }
+ #app .daily-de { font-size:clamp(16px,2.4vh,21px)!important; }
+ #app .counter { font-size:clamp(13px,2.4vh,17px); }
+}
+#app :is(button,a[href],select,input):focus-visible { outline:3px solid #f3d58c!important;outline-offset:3px; }
+
+#app .bismillah,#app .hero-verse,#app .next-arabic { display:none!important; }
+@keyframes timerBeat { 0%,100% { text-shadow:0 0 0 rgba(216,189,130,0); } 50% { text-shadow:0 0 13px rgba(216,189,130,.45); } }
+#app:not(.reduced-motion) .counter .countnum { animation:timerBeat 2s ease-in-out infinite; }
+@media (prefers-reduced-motion:reduce) { #app .counter .countnum { animation:none!important; } }
+
+@media (max-width:560px) and (orientation:portrait) { #app .daily-de { display:block!important; } }
+
+
+/* HOME V5.3 — editorial prayer row and calendar navigation */
+#app { background-color:#07191b!important; image-rendering:auto; }
+#app.theme-ivory,#app[data-home-theme="light"] { background-color:#f3f1e7!important; }
+#app .hero-right { align-items:stretch!important; text-align:left!important; padding:0 clamp(8px,1.6vw,24px)!important; }
+#app .calendar-card {
+  min-height:clamp(118px,15vh,196px); width:100%; box-sizing:border-box;
+  display:grid; grid-template-columns:clamp(58px,6vw,88px) minmax(0,1fr) 28px;
+  align-items:center; gap:clamp(12px,1.8vw,24px);
+  padding:clamp(18px,2.1vw,32px);
+  border:1px solid rgba(219,195,142,.3); border-radius:18px;
+  color:var(--text); text-decoration:none; text-align:left;
+  background:linear-gradient(145deg,rgba(17,48,48,.94),rgba(7,25,27,.92));
+  box-shadow:0 16px 42px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.06);
+  transition:transform .22s ease,border-color .22s ease,background-color .22s ease;
+}
+#app .calendar-card:hover,#app .calendar-card:focus-visible { transform:translateY(-2px);border-color:var(--gold); }
+#app .calendar-icon-wrap { width:clamp(58px,6vw,88px);height:clamp(58px,6vw,88px);display:grid;place-items:center; }
+#app .calendar-icon { display:block;width:100%;height:100%;object-fit:contain;object-position:center;image-rendering:auto; }
+#app .calendar-copy { min-width:0;display:grid;gap:clamp(5px,.8vh,10px); }
+#app .calendar-kicker { color:var(--gold);font-size:clamp(10px,.85vw,14px);font-weight:700;letter-spacing:.18em;line-height:1.3; }
+#app #hijriDate { color:var(--text);font:600 clamp(22px,2.1vw,34px)/1.2 var(--display);text-wrap:balance; }
+#app .calendar-caption { color:var(--muted);font-size:clamp(13px,1.1vw,18px);line-height:1.4; }
+#app .calendar-arrow { display:grid;place-items:center;width:28px;height:28px;border-radius:50%;color:var(--gold);font-size:30px;line-height:1; }
+#app.theme-ivory .calendar-card,#app[data-home-theme="light"] .calendar-card {
+ color:#26362e;background:linear-gradient(145deg,#fbfaf3,#e8eee5);border-color:rgba(48,76,59,.28);
+ box-shadow:0 12px 32px rgba(36,54,45,.10),inset 0 1px #fff;
+}
+#app.theme-ivory .calendar-kicker,#app[data-home-theme="light"] .calendar-kicker { color:#365b43; }
+#app.theme-ivory .calendar-caption,#app[data-home-theme="light"] .calendar-caption { color:#52645a; }
+#app .times { gap:clamp(4px,.7vw,10px);align-items:stretch; }
+#app .prayer-cell {
+ position:relative;min-height:clamp(60px,8vh,92px)!important;padding:clamp(8px,1vh,14px) 4px!important;
+ border:1px solid transparent!important;border-radius:12px!important;background:transparent!important;
+ box-shadow:none!important;display:flex!important;align-items:center!important;justify-content:center!important;
+ text-align:center!important;gap:clamp(5px,.8vh,10px)!important;
+}
+#app .prayer-cell::after { content:none!important;display:none!important; }
+#app .prayer-cell .pname,#app .prayer-cell .ptime { width:100%;display:block;text-align:center!important; }
+#app .prayer-cell.active {
+ border-color:rgba(219,195,142,.72)!important;
+ background:linear-gradient(180deg,rgba(219,195,142,.15),rgba(219,195,142,.06))!important;
+ box-shadow:inset 0 0 0 1px rgba(219,195,142,.12),0 7px 22px rgba(0,0,0,.12)!important;
+}
+#app.theme-ivory .prayer-cell.active,#app[data-home-theme="light"] .prayer-cell.active {
+ border-color:rgba(54,91,67,.48)!important;background:linear-gradient(180deg,rgba(73,107,85,.12),rgba(73,107,85,.045))!important;
+ box-shadow:inset 0 0 0 1px rgba(54,91,67,.08)!important;
+}
+#app .prayer-cell.active .pname,#app .prayer-cell.active .ptime { color:var(--cream)!important;font-weight:700!important; }
+#app .settings-tabs .settings-icons { display:block!important;flex:0 0 30px!important;object-fit:contain!important;object-position:center!important; }
+@media (orientation:portrait) {
+ #app .hero-right { padding:0!important; }
+ #app .calendar-card { min-height:100px;grid-template-columns:58px minmax(0,1fr) 24px;padding:14px 16px; }
+ #app #hijriDate { font-size:clamp(21px,5.5vw,30px); }
+ #app .times { gap:3px; }
+ #app .prayer-cell { min-height:64px!important;padding:8px 2px!important; }
+ #app .prayer-cell .pname { font-size:clamp(12px,3.2vw,16px)!important;letter-spacing:.02em!important; }
+ #app .prayer-cell .ptime { font-size:clamp(19px,5vw,26px)!important; }
+}
+@media (max-width:560px) and (orientation:portrait) {
+ #app .calendar-card { min-height:92px; }
+ #app .calendar-icon-wrap { width:52px;height:52px; }
+ #app .calendar-caption { font-size:12px; }
+}
+@media (prefers-reduced-motion:reduce) { #app .calendar-card { transition:none!important; } }
+
+/* Sunrise is a distinct city-neutral marker centered under the full prayer row. */
+#app .sunrise-line { width:100%!important;box-sizing:border-box;text-align:center!important;margin:clamp(8px,1.2vh,14px) auto 0!important;padding:8px 0 0!important; }
+#app .sunrise-line::before { content:'';display:block;width:min(100%,680px);height:1px;margin:0 auto 8px;background:linear-gradient(90deg,transparent,var(--fine),transparent); }
+@media (max-width:560px) and (orientation:portrait) {
+ #app .sunrise-line { margin-top:6px!important;padding-top:6px!important;font-size:12px!important; }
+ #app .sunrise-line::before { margin-bottom:6px; }
+}
+/* HOME V5.5 — centered remote-friendly section rail */
+#app .top { gap:clamp(4px,.85vw,14px)!important; }
+#app .home-nav { display:flex;flex:0 1 auto;align-items:center;justify-content:center;gap:clamp(2px,.45vw,8px);min-width:0; }
+#app .home-nav a {
+ box-sizing:border-box;min-width:clamp(42px,4.6vw,64px);min-height:48px;padding:4px 5px;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+ border:1px solid transparent;border-radius:10px;color:var(--text);text-decoration:none;
+ background:rgba(7,25,27,.28);transition:background .18s ease,border-color .18s ease,transform .18s ease;
+}
+#app .home-nav a:hover,#app .home-nav a:focus-visible { background:rgba(219,195,142,.12);border-color:var(--fine);transform:translateY(-1px); }
+#app .home-nav img { display:block;width:clamp(21px,1.8vw,28px);height:clamp(21px,1.8vw,28px);object-fit:contain;object-position:center;image-rendering:auto;flex:none; }
+#app .home-nav span { font:600 clamp(9px,.73vw,12px)/1.15 var(--display);letter-spacing:.015em;white-space:nowrap; }
+#app.theme-ivory .home-nav a,#app[data-home-theme="light"] .home-nav a { color:#26362e;background:rgba(249,248,239,.58); }
+#app .sunrise-line { text-align:center!important; }
+@media (max-width:560px) {
+ #app .top { gap:3px!important; }
+ #app .logo { gap:6px!important; }
+ #app .logo-mark { width:30px!important;height:30px!important; }
+ #app .brand-title { font-size:clamp(11px,3vw,14px)!important;letter-spacing:.11em!important; }
+ #app .brand-mini { font-size:6px!important;letter-spacing:.12em!important; }
+ #app .home-nav { flex:1 1 auto;gap:1px; }
+ #app .home-nav a { min-width:0;flex:1 1 0;padding:2px 1px;min-height:42px;border-radius:7px; }
+ #app .home-nav img { width:20px;height:20px; }
+ #app .home-nav span { font-size:8px;letter-spacing:0; }
+ #app .time-box { gap:3px!important; }
+ #app .now { font-size:clamp(17px,5vw,21px)!important; }
+ #app .topbtn { width:36px!important;height:36px!important; }
+}
+@media (max-width:430px) {
+ #app .brand-mini { display:none!important; }
+ #app .logo-mark { width:27px!important;height:27px!important; }
+ #app .brand-title { font-size:10px!important; }
+ #app .home-nav a { min-height:39px; }
+ #app .home-nav img { width:18px;height:18px; }
+ #app .home-nav span { font-size:7px; }
+ #app .now { font-size:16px!important; }
+ #app .topbtn { width:32px!important;height:32px!important; }
+}
+@media (prefers-reduced-motion:reduce) { #app .home-nav a { transition:none!important; } }
+
+
+/* HOME V5.6 — centered controls, clear meta rail, and local in-app views */
+#app .top { min-height:48px; }
+#app .home-nav button {
+  box-sizing:border-box;min-width:clamp(42px,4.6vw,64px);min-height:48px;padding:4px 5px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  border:1px solid transparent;border-radius:10px;color:var(--text);text-align:center;
+  background:rgba(7,25,27,.28);transition:background .18s ease,border-color .18s ease,transform .18s ease;
+}
+#app .home-nav button:hover,#app .home-nav button:focus-visible {
+  background:rgba(219,195,142,.12);border-color:var(--fine);transform:translateY(-1px);
+}
+#app .home-nav button img { display:block;width:clamp(21px,1.8vw,28px);height:clamp(21px,1.8vw,28px);object-fit:contain;object-position:center;flex:none; }
+#app .home-nav button span { font:600 clamp(9px,.73vw,12px)/1.15 var(--display);white-space:nowrap; }
+#app[data-home-theme="light"] .home-nav button { color:#26362e;background:rgba(249,248,239,.58); }
+#app .topbtn { position:relative;display:grid!important;place-items:center!important;flex:none; }
+#app .topbtn > .icon { position:absolute;inset:0;margin:auto;width:19px;height:19px; }
+#app .header-meta {
+  display:grid;grid-template-columns:1fr 1.55fr 1.2fr auto;align-items:center;gap:clamp(8px,1.4vw,22px);
+  margin-top:clamp(8px,1.2vh,14px);padding:clamp(9px,1.1vh,14px) clamp(12px,1.4vw,20px);
+  border:1px solid rgba(219,195,142,.28);border-radius:12px;
+  background:linear-gradient(105deg,rgba(7,28,29,.76),rgba(7,24,27,.44));
+}
+#app .header-meta > div { min-width:0;display:flex;flex-direction:column;gap:3px; }
+#app .header-meta span { color:var(--gold);font-size:clamp(8px,.66vw,10px);font-weight:700;letter-spacing:.15em;line-height:1.2; }
+#app .header-meta strong { color:var(--text);font-size:clamp(11px,.95vw,14px);font-weight:600;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+#app .header-meta .local-clock { align-items:flex-end; }
+#app .header-meta .now { font-size:clamp(18px,1.8vw,27px);line-height:1; }
+#app .calendar-card { width:100%;font:inherit;text-align:left;cursor:pointer; }
+#app .home-view[hidden] { display:none!important; }
+#app .home-view {
+  position:absolute;inset:0;z-index:25;display:grid;place-items:center;padding:clamp(16px,4vw,56px);
+  background:rgba(3,15,18,.88);backdrop-filter:blur(18px);overflow:auto;
+}
+#app .home-view-panel {
+  width:min(880px,100%);max-height:min(86dvh,900px);overflow:auto;overscroll-behavior:contain;
+  padding:clamp(20px,3.4vw,44px);border:1px solid var(--fine);border-radius:18px;
+  background:linear-gradient(145deg,rgba(15,42,40,.99),rgba(7,24,27,.99));box-shadow:0 24px 80px rgba(0,0,0,.38);
+}
+#app .home-view-head { display:flex;align-items:center;justify-content:space-between;gap:16px; }
+#app .home-view-head h2 { margin:6px 0 0;font:600 clamp(32px,4vw,52px)/1.05 var(--display); }
+#app .home-view-intro { max-width:70ch;color:var(--muted);font-size:clamp(14px,1.15vw,17px);line-height:1.55;margin:18px 0 22px; }
+#app .festival-list { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 20px; }
+#app .festival-list article { min-height:72px;padding:12px 14px;display:flex;flex-direction:column;justify-content:center;gap:5px;border-left:2px solid var(--gold);background:rgba(255,255,255,.035); }
+#app .festival-list article span { color:var(--gold);font-size:12px;letter-spacing:.04em; }
+#app .festival-list article strong { font:600 clamp(15px,1.35vw,19px)/1.3 var(--display); }
+#app .home-view-foot { display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:22px;padding-top:16px;border-top:1px solid var(--fine);color:var(--muted);font-size:13px; }
+#app .home-view-foot strong { color:var(--text);font-size:15px; }
+#app .hadith-reading { margin-top:clamp(18px,3vh,32px);padding:clamp(16px,2.3vw,30px);border-left:3px solid var(--gold);background:rgba(255,255,255,.035); }
+#app .hadith-reading p { margin:12px 0;font:500 clamp(23px,2.4vw,36px)/1.5 var(--display);color:var(--cream); }
+#app .hadith-reading #hadithPanelNarrator { color:var(--muted);font-size:15px;line-height:1.5; }
+#app .hadith-reading footer { margin-top:16px;padding-top:12px;border-top:1px solid var(--fine);color:var(--gold);font-size:14px; }
+#app[data-home-theme="light"] .header-meta { background:linear-gradient(105deg,rgba(251,250,243,.93),rgba(232,238,229,.84));border-color:rgba(48,76,59,.3); }
+#app[data-home-theme="light"] .header-meta strong,#app[data-home-theme="light"] .home-view-head h2,#app[data-home-theme="light"] .festival-list article strong,#app[data-home-theme="light"] .home-view-foot strong { color:#24362d; }
+#app[data-home-theme="light"] .home-view { background:rgba(243,241,231,.9); }
+#app[data-home-theme="light"] .home-view-panel { background:linear-gradient(145deg,#fbfaf3,#e8eee5); }
+#app[data-home-theme="light"] .hadith-reading p { color:#24362d; }
+#app input[type="file"] { width:100%;min-height:44px;padding:6px;color:var(--text);font-size:14px; }
+#app input[type="file"]::file-selector-button { min-height:34px;margin-right:12px;padding:0 13px;border:1px solid var(--fine);border-radius:999px;color:var(--text);background:rgba(216,189,130,.13);cursor:pointer; }
+#saver .saver-content { max-width:min(1050px,82vw);align-items:flex-start;text-align:left;margin:0 auto 4vh; }
+#saver .saver-symbol { display:none; }
+#saver .saver-ar { max-width:100%;text-align:right;align-self:stretch; }
+#saver .saver-de { max-width:100%;text-align:left; }
+#saver .saver-kicker,#saver .saver-source { text-align:left; }
+#saver .saver-bottom { align-items:flex-start;text-align:left;line-height:1.45; }
+@media (max-width:700px) {
+ #app .header-meta { grid-template-columns:1fr 1.3fr;gap:8px 12px; }
+ #app .header-meta .local-clock { align-items:flex-start; }
+ #app .header-meta .now { font-size:19px; }
+ #app .home-nav { flex:1 1 auto; }
+ #app .home-nav button { min-width:0;flex:1 1 0;min-height:42px;padding:2px 1px; }
+ #app .home-nav button img { width:20px;height:20px; }
+ #app .home-nav button span { font-size:8px; }
+ #app .logo { gap:6px!important; }
+ #app .brand-title { font-size:clamp(11px,3vw,16px)!important;letter-spacing:.08em!important; }
+ #app .brand-mini { display:none!important; }
+ #app .home-view { padding:12px; }
+ #app .festival-list { grid-template-columns:1fr; }
+ #app .home-view-foot { align-items:flex-start;flex-direction:column; }
+}
+@media (max-width:430px) {
+ #app .top-spacer { display:none; }
+ #app .logo-mark { width:27px!important;height:27px!important; }
+ #app .brand-title { font-size:10px!important;letter-spacing:.02em!important; }
+ #app .home-nav button { min-height:39px; }
+ #app .home-nav button img { width:18px;height:18px; }
+ #app .home-nav button span { font-size:7px; }
+ #app .topbtn { width:34px!important;height:34px!important; }
+ #app .header-meta { padding:8px 10px; }
+}
+@media (min-width:851px) {
+ #app .header-meta { grid-template-columns:1fr 1.55fr 1.2fr auto; }
+}
+@media (prefers-reduced-motion:reduce) { #app .home-nav button { transition:none!important; } }
+
+/* HOME V5.6 follow-up: remove the stray hero rule and emphasize the next prayer in the saver. */
+#app .hero-left { border-left:0!important;background:linear-gradient(135deg,rgba(7,25,27,.38),rgba(7,25,27,.08));border-radius:14px; }
+#app .times-band.home-focus { outline:2px solid var(--gold);outline-offset:5px;border-radius:12px;transition:outline-color .2s ease; }
+#saver .saver-bottom span:first-child { color:var(--gold);font:600 clamp(18px,2vw,30px)/1.25 var(--display);letter-spacing:.02em; }
+#saver .saver-bottom span:last-child { font-size:clamp(11px,1vw,14px);align-self:center; }
+#app[data-home-theme="light"] #saver .saver-bottom span:first-child { color:#365b43; }
+
+/* Short landscape viewport: retain the whole control rail without clipping content. */
+@media (max-height:640px) and (orientation:landscape) {
+ #app .screen { gap:2px!important;padding-top:8px!important;padding-bottom:6px!important; }
+ #app .top { min-height:34px!important; }
+ #app .home-nav button { min-height:32px;padding:1px 4px; }
+ #app .home-nav button img { width:18px;height:18px; }
+ #app .home-nav button span { font-size:9px; }
+ #app .topbtn { min-width:44px!important;min-height:44px!important;width:44px!important;height:44px!important; }
+ #app .header-meta { margin-top:3px;padding:4px 8px;gap:4px 10px; }
+ #app .header-meta span { font-size:8px; }
+ #app .header-meta strong { font-size:10px; }
+ #app .header-meta .now { font-size:18px; }
+ #app .top-rule { margin-top:4px; }
+ #app .hero { grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.2vw; }
+ #app .hero-left { padding:4px 8px!important; }
+ #app .next-name { font-size:clamp(36px,6vw,54px)!important;margin:4px 0!important; }
+ #app .main-time { font-size:clamp(30px,4vw,44px)!important; }
+ #app .counter { padding:.25em .5em;font-size:14px!important; }
+ #app .hero-right { padding:0 4px!important; }
+ #app .calendar-card { min-height:64px;padding:7px 10px;grid-template-columns:42px minmax(0,1fr) 20px;gap:8px; }
+ #app .calendar-icon-wrap { width:40px;height:40px; }
+ #app .calendar-kicker { font-size:9px; }
+ #app #hijriDate { font-size:18px; }
+ #app .calendar-caption { font-size:10px; }
+ #app .times-band { padding:4px 0!important; }
+ #app .band-head { margin-bottom:2px; }
+ #app .prayer-cell { min-height:46px!important;padding:4px 2px!important;gap:3px!important; }
+ #app .prayer-cell .pname { font-size:12px!important; }
+ #app .prayer-cell .ptime { font-size:clamp(20px,3.4vh,25px)!important; }
+ #app .sunrise-line { margin-top:3px!important;padding-top:3px!important;font-size:11px!important; }
+ #app .sunrise-line::before { margin-bottom:3px; }
+ #app .daily-area { min-height:0!important;max-height:none;gap:10px; }
+ #app .daily-story { max-height:14vh!important;padding:4px 8px; }
+ #app .daily-de { font-size:clamp(18px,2.4vh,21px)!important;line-height:1.35!important; }
+ #app .audio-area { padding:5px 0 5px 10px;gap:4px 8px; }
+ #app .audio-title { font-size:22px; }
+ #app .audio-sub { font-size:12px!important; }
+ #app .audio-controls { gap:6px;margin:2px 0 0; }
+ #app .round { width:32px;height:32px; }
+ #app .round.primary { width:36px;height:36px; }
+ #app .foot { padding-top:4px; }
+ #app .status { font-size:10px; }
+ #app .h3-section-emblem { display:none!important; }
+}
+@media (max-width:430px) {
+ #app .topbtn { width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important; }
+}
+
+/* 2026-11-19 HOME refinement: clear navigation, readable verse and Quran reader */
+#app header{display:grid;grid-template-rows:auto auto auto auto;gap:clamp(7px,1vh,12px)}
+#app header{position:relative;z-index:auto}#app .home-nav{position:relative;z-index:auto;display:flex;justify-content:center;align-items:center;gap:clamp(12px,2vw,30px);min-height:40px;padding:0 12px}
+#app .home-nav button{display:flex;align-items:center;gap:9px;padding:7px 17px;border:1px solid rgba(216,189,130,.3);border-radius:999px;background:rgba(5,27,29,.5);color:var(--cream);font:600 clamp(12px,1vw,16px) var(--ui)}
+#app .home-nav button img{width:28px;height:28px;object-fit:contain}
+#app .home-nav button:focus-visible,#app .home-nav button:hover{background:rgba(216,189,130,.15);border-color:var(--gold)}
+#app .top{min-height:clamp(48px,5.8vh,68px)}
+#app .header-meta{margin-top:0;position:relative;z-index:auto}#app .top-rule{position:relative;z-index:auto}
+#app .hero{grid-template-columns:minmax(0,1fr) minmax(300px,.8fr);gap:clamp(16px,2.5vw,44px)}
+#app .hero-right{border-left:1px solid var(--home4-hair)!important;text-align:left!important;padding-left:clamp(18px,2vw,38px)!important}
+#app .hero-right .daily-story{width:100%;padding:0!important;text-align:left}
+#app .hero-right .daily-label{font-size:clamp(10px,.9vw,14px);margin-bottom:clamp(7px,1vh,12px)}
+#app .hero-right .daily-title{font-size:clamp(24px,2.25vw,37px);line-height:1.55;max-height:3.1em;-webkit-line-clamp:2}
+#app .hero-right .daily-de{font-size:clamp(16px,1.35vw,22px);white-space:normal;line-height:1.45}
+#app .hero-right .source{font-size:clamp(11px,.9vw,14px)}
+#app .hero-right .tadabbur-open{align-self:flex-start;margin-top:12px}
+#app .daily-area{display:flex;justify-content:flex-end;min-height:clamp(76px,12vh,150px)}
+#app .daily-area .audio-area{width:min(54%,620px);border-left:1px solid var(--home4-hair)!important;padding:4px 0 4px clamp(20px,3vw,48px)!important}
+#app .calendar-card{display:none!important}
+#app .quran-reader-view{position:fixed;inset:0;z-index:35;display:flex;align-items:stretch;justify-content:flex-end;background:rgba(3,14,17,.82);backdrop-filter:blur(18px)}
+#app .quran-reader-view[hidden]{display:none}
+#app .quran-reader-shell{width:min(100%,1500px);height:100%;overflow:auto;padding:clamp(18px,3vw,46px);background:linear-gradient(145deg,rgba(9,35,35,.98),rgba(4,20,24,.99));color:#f4f0e6;box-shadow:-24px 0 90px rgba(0,0,0,.35);animation:quranReaderIn .38s cubic-bezier(.2,.7,.2,1) both}
+@keyframes quranReaderIn{from{transform:translateX(7%);opacity:.4}to{transform:translateX(0);opacity:1}}
+#app .quran-reader-head{display:flex;justify-content:space-between;align-items:center;gap:20px;border-bottom:1px solid var(--home4-hair);padding-bottom:18px}
+#app .quran-reader-head h2{font:600 clamp(26px,3vw,42px)/1.1 var(--display);margin:6px 0}
+#app .quran-reader-head p{margin:0;color:#d4c398}
+#app .quran-reader-actions{display:flex;align-items:end;gap:12px}
+#app .reader-control{display:grid;gap:5px;color:#d8bd82;font-size:12px;letter-spacing:.08em}
+#app .reader-control select{min-width:155px;max-width:250px;background:#0b292c;color:#f4f0e6;border:1px solid rgba(216,189,130,.4);border-radius:10px;padding:10px}
+#app .quran-reader-columns{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,48px);padding:clamp(20px,3vh,36px) 0}
+#app .reader-column{min-width:0;padding:0 clamp(8px,1.4vw,22px)}
+#app .reader-column-label{color:#d8bd82;letter-spacing:.12em;text-transform:uppercase;font-size:12px;border-bottom:1px solid var(--home4-hair);padding-bottom:10px;margin-bottom:14px}
+#app .reader-arabic{border-right:1px solid var(--home4-hair);text-align:right}
+#app #readerArabic{font:clamp(26px,3vw,48px)/2 var(--arabic);text-align:right;color:#f4f0e6}
+#app #readerGerman{font:clamp(17px,1.6vw,24px)/1.8 var(--ui);color:#ebe7dc}
+#app .reader-transliteration{margin:0 clamp(8px,1.4vw,22px) 20px;padding:15px 18px;border-left:2px solid var(--gold);background:rgba(255,255,255,.035);font-size:clamp(15px,1.3vw,20px);line-height:1.7;color:#e6d4ae}
+#app .reader-transliteration[hidden]{display:none}
+#app .quran-reader-footer{position:sticky;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 0;background:rgba(7,26,29,.96);border-top:1px solid var(--home4-hair)}
+#app .reader-check{display:flex;align-items:center;gap:9px;color:#e6d4ae}
+#app .reader-playback{display:flex;align-items:center;gap:10px}
+#app .reader-step,#app .reader-play,#app .reader-home{border:1px solid var(--home4-hair);border-radius:999px;background:rgba(216,189,130,.1);color:#f4f0e6;padding:10px 15px}
+#app .reader-play{background:#d8bd82;color:#152622;font-weight:700}
+#app .reader-note{color:#c2c7bf;font-size:12px;margin:8px 0}
+#app .theme-ivory .quran-reader-shell{background:linear-gradient(145deg,#f9f6ee,#ebe8dd);color:#17251f}
+#app .theme-ivory .quran-reader-shell #readerArabic{color:#17251f}
+#app .theme-ivory .quran-reader-shell #readerGerman{color:#27362f}
+#app .theme-ivory .quran-reader-shell .reader-control select{background:#fff;color:#17251f}
+#app .theme-ivory .quran-reader-shell .quran-reader-footer{background:#f0eee6}
+#app .theme-ivory .quran-reader-shell .reader-play{background:#496b55;color:#fff}
+@media(max-width:850px){
+ #app .top{gap:8px}
+ #app .brand-mini{display:none}
+ #app .home-nav{justify-content:flex-start;overflow:auto}
+ #app .home-nav button{flex:none;padding:6px 11px}
+ #app .hero{grid-template-columns:minmax(0,1fr) minmax(240px,.9fr)}
+ #app .next-name{font-size:clamp(52px,8vw,80px)}
+ #app .daily-area .audio-area{width:70%}
+ #app .quran-reader-head{align-items:flex-start;flex-direction:column}
+ #app .quran-reader-actions{width:100%;flex-wrap:wrap}
+}
+@media(orientation:portrait){
+ #app header{grid-template-rows:auto auto auto auto}
+ #app .home-nav{justify-content:center}
+ #app .home-nav button{flex-direction:column;gap:2px;font-size:11px;padding:5px 13px}
+ #app .home-nav button img{width:24px;height:24px}
+ #app .hero{grid-template-columns:1fr!important}
+ #app .hero-right{display:flex!important;border-left:0!important;border-top:1px solid var(--home4-hair)!important;padding:14px 0 0!important;text-align:center!important}
+ #app .hero-right .daily-story{text-align:center}
+ #app .hero-right .tadabbur-open{align-self:center}
+ #app .daily-area .audio-area{width:100%;border-left:0!important;padding:8px 0!important}
+ #app .quran-reader-columns{grid-template-columns:1fr}
+ #app .reader-arabic{border-right:0;border-bottom:1px solid var(--home4-hair);padding-bottom:20px}
+ #app .quran-reader-footer{flex-wrap:wrap}
+}
+
+/* Adhan art stays full-frame; event details live in a readable lower-third. */
+#app #adhanVisual .h4-prayer-image{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;opacity:1!important;filter:none!important;z-index:0!important}
+#app #adhanVisual::before{background:linear-gradient(180deg,rgba(1,10,15,.18) 0%,rgba(1,10,15,.02) 36%,rgba(1,10,15,.17) 62%,rgba(1,10,15,.72) 100%)!important}
+#app #adhanVisual .adhan-lower-third{position:absolute;left:clamp(24px,6vw,110px);bottom:clamp(24px,6vh,72px);z-index:2!important;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:clamp(8px,1.4vh,16px);width:min(560px,calc(100% - 48px));padding:clamp(18px,2.5vw,34px) clamp(20px,3vw,42px);background:linear-gradient(110deg,rgba(3,18,23,.88),rgba(3,18,23,.68));border:1px solid rgba(234,210,159,.48);border-radius:18px;box-shadow:0 16px 55px rgba(0,0,0,.32);backdrop-filter:blur(8px)}
+#app #adhanVisual .adhan-title{font-size:clamp(38px,5.4vw,76px)!important;letter-spacing:.01em;line-height:1.02;text-align:left;text-shadow:0 2px 18px rgba(0,0,0,.46)}
+#app #adhanVisual .adhan-sub{font-size:clamp(15px,1.3vw,20px);color:#f5eedc;letter-spacing:.04em;text-align:left}
+#app #adhanVisual .touchbutton{background:rgba(9,30,30,.78);border:1px solid #d7c494;border-radius:13px;min-height:46px;padding:0 20px}
+@media(max-width:640px){#app #adhanVisual .adhan-lower-third{left:18px;bottom:18px;width:calc(100% - 36px);padding:17px 19px;gap:8px}#app #adhanVisual .adhan-title{font-size:clamp(34px,9vw,54px)!important}#app #adhanVisual .adhan-sub{font-size:15px}}
+@media(max-height:500px){#app #adhanVisual .adhan-lower-third{bottom:12px;left:24px;padding:12px 18px;gap:6px}#app #adhanVisual .adhan-title{font-size:clamp(32px,5vh,54px)!important}}
+
+
+/* HOME V5 layout contract: one header rail, one content grid, one active view. */
+#app {
+  isolation:isolate;
+  --layer-home:0;
+  --layer-view:20;
+  --layer-dialog:30;
+  --layer-adhan:40;
+}
+#app .screen {
+  position:relative;
+  z-index:var(--layer-home);
+  display:grid;
+  width:100%;
+  height:100%;
+  min-height:0;
+  overflow-x:hidden;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  grid-template-rows:auto minmax(230px,1fr) auto minmax(126px,auto) auto!important;
+  align-content:stretch;
+}
+#app .screen[hidden],
+#app .home-view[hidden],
+#app .overlay[hidden],
+#app .surah-picker[hidden] {display:none!important}
+#app header {
+  display:grid;
+  position:relative;
+  z-index:auto;
+  grid-template-rows:auto auto auto;
+  gap:clamp(6px,.9vh,11px);
+  min-width:0;
+}
+#app .top {
+  display:flex;
+  align-items:center;
+  flex-wrap:nowrap;
+  min-width:0;
+  min-height:clamp(50px,6vh,76px);
+  gap:clamp(7px,1vw,16px);
+}
+#app .logo {flex:0 0 auto;min-width:0}
+#app .home-nav {
+  position:static;
+  z-index:auto;
+  display:flex;
+  flex:0 1 auto;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(4px,.7vw,11px);
+  min-width:0;
+  margin-inline:clamp(4px,.65vw,10px);
+  padding:0;
+  overflow:visible;
+}
+#app .home-nav button {
+  display:flex;
+  flex:0 0 auto;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  min-width:clamp(52px,5.2vw,72px);
+  min-height:48px;
+  padding:4px 8px;
+  border:1px solid rgba(216,189,130,.3);
+  border-radius:11px;
+  background:rgba(5,27,29,.44);
+  color:var(--cream);
+  font:600 clamp(10px,.76vw,13px)/1.15 var(--ui);
+}
+#app .home-nav button img {width:24px;height:24px;object-fit:contain}
+#app .home-nav button:hover,#app .home-nav button:focus-visible {
+  border-color:var(--gold);
+  background:rgba(216,189,130,.14);
+}
+#app .top-spacer {flex:1 1 auto;min-width:0}
+#app .time-box {flex:0 0 auto;align-items:center}
+#app .header-meta,
+#app .top-rule {position:relative;z-index:auto;min-width:0}
+#app .hero {
+  display:grid;
+  grid-template-columns:minmax(0,1.12fr) minmax(280px,.88fr);
+  min-width:0;
+  min-height:230px;
+  gap:clamp(14px,2.2vw,36px);
+}
+#app .hero-left,#app .hero-right {min-width:0;min-height:0}
+#app .hero-right {
+  border-left:1px solid var(--fine);
+  padding-left:clamp(16px,2vw,34px);
+}
+#app .hero-right {
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  min-height:0;
+  overflow:hidden;
+}
+#app .hero-right .daily-story {
+  display:flex;
+  flex:1 1 0;
+  flex-direction:column;
+  width:100%;
+  min-width:0;
+  min-height:0;
+  max-height:none;
+  overflow-x:hidden;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+}
+#app .hero-right .tadabbur-open {position:relative;flex:0 0 auto;align-self:flex-start}
+#app .times-band {min-width:0}
+#app .times {min-width:0}
+#app .prayer-cell {min-width:0}
+#app .daily-area {
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  align-items:center;
+  min-width:0;
+  min-height:0;
+  width:100%;
+}
+#app .daily-area .audio-area {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  grid-template-areas:"kicker controls" "title controls" "sub controls";
+  align-items:center;
+  gap:5px clamp(12px,2vw,28px);
+  width:100%;
+  min-width:0;
+  min-height:96px;
+  margin:0;
+  padding:10px clamp(14px,2vw,26px);
+  border:1px solid var(--fine);
+  border-radius:16px;
+  background:rgba(5,24,27,.56);
+}
+#app .audio-kicker {grid-area:kicker;min-width:0}
+#app .audio-title-button {grid-area:title;min-width:0}
+#app .audio-title {white-space:normal;overflow-wrap:anywhere}
+#app .audio-sub {grid-area:sub;min-width:0}
+#app .audio-controls {grid-area:controls;min-width:0;justify-content:center}
+#app .home-view {
+  position:absolute;
+  inset:0;
+  z-index:var(--layer-view);
+  display:grid;
+  place-items:center;
+  overflow:auto;
+  overscroll-behavior:contain;
+  padding:clamp(14px,3vw,42px);
+  background:#071b20;
+  color:#f8f0df;
+  backdrop-filter:none;
+}
+#app .quran-reader-view {
+  position:absolute;
+  inset:0;
+  z-index:var(--layer-view);
+  display:block;
+  overflow:auto;
+  padding:0;
+  background:#071b20;
+  color:#f8f0df;
+  backdrop-filter:none;
+}
+#app .quran-reader-shell {
+  width:100%;
+  min-height:100%;
+  height:auto;
+  overflow:visible;
+  background:linear-gradient(145deg,#092326,#061519);
+  box-shadow:none;
+}
+#app .calendar-view {display:grid;padding:clamp(14px,3vw,42px)}
+#app .calendar-view .home-view-panel {
+  width:min(100%,1120px);
+  max-height:none;
+  min-height:min(68vh,720px);
+  margin:auto;
+  padding:clamp(20px,3vw,44px);
+  border:1px solid var(--fine);
+  border-radius:20px;
+  background:#0a2729;
+}
+#app #settingsOverlay {z-index:var(--layer-dialog)}
+#app #adhanVisual {z-index:var(--layer-adhan)}
+#app[data-home-theme="light"] .home-view,
+#app[data-home-theme="light"] .quran-reader-view {background:#f3f1e7;color:#21372d}
+#app[data-home-theme="light"] .quran-reader-shell,
+#app[data-home-theme="light"] .calendar-view .home-view-panel {background:#f8f6ee;color:#21372d}
+@media(max-width:820px) {
+  #app .top {
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-areas:"brand tools" "nav nav";
+    row-gap:5px;
+    padding-bottom:3px;
+  }
+  #app .logo {grid-area:brand}
+  #app .home-nav {grid-area:nav;justify-content:stretch;margin:0}
+  #app .home-nav button {flex:1 1 0;min-width:0}
+  #app .top-spacer {display:none}
+  #app .time-box {grid-area:tools}
+  #app .hero {grid-template-columns:minmax(0,1fr) minmax(240px,.9fr)}
+}
+@media(max-width:640px) {
+  #app .screen {grid-template-rows:auto auto auto minmax(126px,auto) auto!important;}
+  #app header {gap:6px}
+  #app .header-meta {grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px}
+  #app .header-meta .local-clock {align-items:flex-start}
+  #app .hero {grid-template-columns:minmax(0,1fr);min-height:0}
+  #app .hero-right {border-left:0;border-top:1px solid var(--fine);padding:12px 0 0}
+  #app .hero-right .daily-story {max-height:none}
+  #app .daily-area .audio-area {
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:"kicker" "title" "sub" "controls";
+    gap:5px;
+  }
+  #app .audio-controls {justify-content:flex-start}
+  #app .quran-reader-columns {grid-template-columns:minmax(0,1fr)}
+}
+@media(prefers-reduced-motion:reduce) {
+  #app .home-view *,#app .quran-reader-view * {scroll-behavior:auto}
+}
+
+
+/* HOME V5.7: compact responsive layout and native-style route navigation. */
+#app .screen {
+  gap:clamp(7px,1.25vh,13px);
+  grid-template-rows:auto minmax(188px,1fr) auto minmax(66px,auto) auto!important;
+  transition:transform .34s cubic-bezier(.2,.72,.24,1),opacity .34s ease;
+  will-change:transform;
+}
+#app .screen.view-covered {
+  transform:translate3d(-18px,0,0) scale(.992);
+  opacity:.58;
+  pointer-events:none;
+}
+#app .hero {
+  grid-template-columns:minmax(0,1fr) minmax(340px,1.05fr);
+  min-height:188px;
+  gap:clamp(14px,2vw,30px);
+}
+#app .hero-right {
+  padding-left:clamp(14px,1.7vw,26px);
+  overflow:hidden;
+}
+#app .hero-right .daily-story {
+  max-height:none!important;
+  min-height:0;
+  overflow:auto!important;
+  padding-right:clamp(2px,.5vw,8px);
+  scrollbar-width:thin;
+}
+#app .next-name {font-size:clamp(42px,7vw,118px);margin-block:clamp(8px,1.1vh,16px)}
+#app .daily-area {min-height:0!important}
+#app .daily-area .audio-area {
+  min-height:62px;
+  padding:6px clamp(11px,1.6vw,20px);
+  gap:3px clamp(10px,1.4vw,20px);
+  border-radius:12px;
+}
+#app .audio-title {font-size:clamp(18px,1.65vw,27px)}
+#app .audio-controls {gap:7px;margin-top:0}
+#app .round {width:34px;height:34px}
+#app .round.primary {width:38px;height:38px}
+#app .audiosmall {font-size:11px}
+#app .home-view {
+  transform:translate3d(100%,0,0);
+  opacity:.96;
+  transition:transform .36s cubic-bezier(.2,.72,.24,1),opacity .36s ease;
+  will-change:transform;
+}
+#app .home-view.is-active {transform:translate3d(0,0,0);opacity:1}
+#app .home-view.is-leaving {transform:translate3d(100%,0,0);opacity:.96;pointer-events:none}
+#app .home-view.route-entering {transform:translate3d(100%,0,0)}
+#app .route-settings {
+  display:inline-grid;
+  place-items:center;
+  flex:none;
+  width:42px;
+  height:42px;
+  margin-left:8px;
+  border:1px solid var(--fine);
+  border-radius:50%;
+  background:transparent;
+  color:inherit;
+}
+#app .route-settings img {width:24px;height:24px;object-fit:contain}
+#app .quran-reader-actions {display:flex;align-items:center;gap:8px}
+#app .home-view-head {align-items:center}
+#app .tadabbur-inline {
+  display:grid;
+  flex:0 0 auto;
+  gap:7px;
+  margin-top:10px;
+  padding:10px 0 2px;
+  border-top:1px solid var(--fine);
+}
+#app .tadabbur-inline[hidden] {display:none!important}
+#app .tadabbur-inline .tadabbur-head {align-items:center;gap:8px}
+#app .tadabbur-inline .tadabbur-head h2 {font:600 clamp(19px,1.55vw,25px)/1.15 var(--display);margin:2px 0}
+#app .tadabbur-inline .tadabbur-head p {font-size:13px;margin:2px 0}
+#app .tadabbur-inline .close-button {width:34px;height:34px;flex:none}
+#app .tadabbur-inline .tadabbur-status {font-size:12px;margin:0}
+#app .tadabbur-inline .tadabbur-results {grid-template-columns:minmax(0,1fr);gap:7px}
+#app .tadabbur-inline .tadabbur-item {padding:10px 12px;border-radius:9px}
+#app .tadabbur-inline .tadabbur-statement {font-size:clamp(16px,1.15vw,19px);line-height:1.42;margin-bottom:7px}
+#app .tadabbur-inline .tadabbur-speaker,#app .tadabbur-inline .tadabbur-source {font-size:12px;line-height:1.4}
+#app .appearance-popover {
+  position:absolute;
+  z-index:35;
+  top:clamp(64px,9vh,96px);
+  right:var(--frameX);
+  display:grid;
+  gap:7px;
+  width:min(280px,calc(100vw - 28px));
+  padding:14px;
+  border:1px solid var(--fine);
+  border-radius:14px;
+  background:rgba(5,22,25,.97);
+  color:var(--cream);
+  box-shadow:0 16px 45px #0008;
+}
+#app .appearance-popover[hidden] {display:none!important}
+#app .appearance-popover>span {font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+#app .appearance-popover button {min-height:42px;padding:8px 11px;text-align:left;border:1px solid var(--fine);border-radius:9px;background:transparent;color:inherit}
+#app .appearance-popover button[aria-pressed=true] {border-color:var(--gold);background:rgba(216,189,130,.14)}
+#app[data-home-theme=light] .appearance-popover {background:rgba(248,246,238,.98);color:#21372d;box-shadow:0 16px 45px #15201833}
+@media(max-width:820px) {
+  #app .hero {grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+}
+@media(max-width:640px) and (orientation:landscape) {
+  #app .screen {
+    gap:5px;
+    grid-template-rows:auto minmax(126px,1fr) auto minmax(58px,auto) auto!important;
+    padding-top:8px;
+    padding-bottom:8px;
+  }
+  #app header {gap:4px}
+  #app .top {min-height:42px;padding-bottom:0}
+  #app .brand-mini,#app .site {display:none}
+  #app .header-meta {grid-template-columns:repeat(4,minmax(0,1fr));gap:5px 8px}
+  #app .header-meta>div span {font-size:8px}
+  #app .header-meta>div strong {font-size:10px}
+  #app .hero {grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;min-height:126px;gap:10px}
+  #app .hero-left {text-align:left}
+  #app .overline {justify-content:flex-start;font-size:9px;letter-spacing:.12em}
+  #app .next-name {font-size:clamp(34px,6.3vw,52px);margin:6px 0}
+  #app .main-time {font-size:clamp(28px,5vw,42px)}
+  #app .counter {font-size:12px}
+  #app .next-arabic {font-size:15px;margin-top:2px}
+  #app .hero-right {display:flex!important;border-left:1px solid var(--fine)!important;border-top:0!important;padding:0 0 0 10px!important;text-align:left!important}
+  #app .daily-story {text-align:left}
+  #app .daily-label {font-size:9px;letter-spacing:.12em;margin-bottom:2px}
+  #app .daily-title {font-size:16px;line-height:1.3}
+  #app .hero-right .daily-de {display:block!important;font-size:15px;line-height:1.25}
+  #app .source {font-size:11px;line-height:1.2}
+  #app .tadabbur-open {font-size:11px;padding:5px 8px;margin-top:5px}
+  #app .times-band {padding:5px 0}
+  #app .band-head {margin-bottom:4px}
+  #app .prayer-cell .pname {font-size:12px!important}
+  #app .prayer-cell .ptime {font-size:clamp(19px,3.2vw,25px)!important}
+  #app .sunrise-line {font-size:10px}
+  #app .daily-area .audio-area {
+    min-height:56px;
+    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-areas:"title controls" "sub controls";
+    padding:4px 9px;
+  }
+  #app .audio-kicker,#app .audiosmall {display:none}
+  #app .audio-title {font-size:17px}
+  #app .audio-controls {gap:5px}
+  #app .round {width:30px;height:30px}
+  #app .round.primary {width:34px;height:34px}
+  #app .foot {padding-top:4px}
+}
+@media(orientation:portrait) {
+  #app .screen {grid-template-rows:auto minmax(0,1fr) auto minmax(66px,auto) auto!important}
+  #app .hero {min-height:0}
+  #app .hero-right {min-height:110px}
+}
+@media(prefers-reduced-motion:reduce) {
+  #app .screen,#app .home-view {transition:none!important;will-change:auto}
+}
+
+@media(max-height:520px) {
+  #app .screen {grid-template-rows:auto auto auto auto auto!important;align-content:start}
+  #app .hero {min-height:126px}
+  #app .daily-area {min-height:78px!important}
+  #app .daily-area .audio-area {min-height:74px}
+}
+
+@media(max-width:360px) and (orientation:portrait) and (max-height:520px) {
+  #app .daily-area {min-height:60px!important}
+  #app .daily-area .audio-area {
+    min-height:58px;
+    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-areas:"title controls";
+    padding:4px 8px;
+    gap:4px;
+  }
+  #app .audio-kicker,#app .audio-sub,#app .audiosmall {display:none}
+  #app .audio-title {font-size:16px}
+  #app .audio-controls {gap:4px}
+  #app .round {width:28px;height:28px}
+  #app .round.primary {width:32px;height:32px}
+}
+
+
+/* HOME V5.8: let the selected photo show through the ornamental skin and local pages. */
+#app .artwork { opacity:var(--home-artwork-opacity,1)!important;mix-blend-mode:normal!important;transition:opacity .22s ease; }
+#app .lightgrading {
+  background:
+    linear-gradient(90deg,rgba(3,16,20,.36),rgba(4,16,20,.08) 52%,rgba(3,18,20,.26)),
+    linear-gradient(0deg,rgba(4,14,18,.50) 0%,rgba(4,14,18,.20) 42%,rgba(4,14,18,.04) 78%)!important;
+}
+#app .hero { align-items:stretch; }
+#app .hero-right {
+  align-self:stretch;
+  justify-content:flex-start;
+  height:100%;
+  min-height:0;
+}
+#app .hero-right .daily-story {
+  flex:1 1 auto;
+  width:100%;
+  min-height:0;
+  max-height:none!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain;
+}
+#app .tadabbur-inline { flex:0 0 auto; }
+#app .home-view {
+  background:rgba(7,27,32,.38);
+  backdrop-filter:blur(5px);
+}
+#app .quran-reader-view {
+  background:rgba(3,14,17,.20);
+  backdrop-filter:blur(5px);
+}
+#app .quran-reader-shell {
+  background:linear-gradient(145deg,rgba(9,35,35,.60),rgba(4,20,24,.64));
+  backdrop-filter:blur(7px);
+}
+#app .calendar-view .home-view-panel {
+  background:linear-gradient(145deg,rgba(10,39,41,.66),rgba(5,23,28,.68));
+  backdrop-filter:blur(7px);
+}
+#app[data-home-theme="light"] .lightgrading {
+  background:
+    linear-gradient(90deg,rgba(243,241,231,.45) 0%,rgba(243,241,231,.24) 48%,rgba(243,241,231,.12) 100%),
+    linear-gradient(0deg,rgba(243,241,231,.34) 0%,rgba(243,241,231,.12) 60%,rgba(243,241,231,.20) 100%)!important;
+}
+#app[data-home-theme="light"] .home-view {
+  background:rgba(243,241,231,.28);
+  backdrop-filter:blur(5px);
+}
+#app[data-home-theme="light"] .quran-reader-view { background:rgba(243,241,231,.16); }
+#app[data-home-theme="light"] .quran-reader-shell {
+  background:linear-gradient(145deg,rgba(249,246,238,.60),rgba(235,232,221,.64));
+}
+#app[data-home-theme="light"] .calendar-view .home-view-panel {
+  background:linear-gradient(145deg,rgba(251,250,243,.58),rgba(232,238,229,.62));
+}
+#app[data-home-theme="light"] #saver::before {
+  background:radial-gradient(ellipse at center,rgba(243,241,231,.34) 0%,rgba(243,241,231,.22) 67%,rgba(243,241,231,.12) 100%);
+}
+
+
+/* Keep the selected scene in its own layer so both color themes and local routes retain it. */
+#app[data-wallpaper-active="true"] #homeWallpaper {
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  pointer-events:none;
+}
+#app[data-wallpaper-active="true"] .artwork {
+  z-index:1!important;
+  opacity:var(--home-artwork-opacity,.16)!important;
+  mix-blend-mode:normal!important;
+}
+#app[data-wallpaper-active="true"] .lightgrading {
+  z-index:2!important;
+  opacity:.18!important;
+}
+#app[data-wallpaper-active="true"] .edge,
+#app[data-wallpaper-active="true"] .corner { z-index:3!important; }
+#app[data-wallpaper-active="true"] .screen { z-index:4; }
+
+/* The legacy ivory root veil fully covered photographic wallpapers. */
+#app[data-home-theme="light"]::before {
+  display:none!important;
+  background:transparent!important;
+}
+#app[data-home-theme="light"] #homeWallpaper {
+  opacity:1!important;
+  filter:none!important;
+}
+
+/* Keep light-mode text readable while showing the selected scene through each content region. */
+#app[data-home-theme="light"] .hero-left,
+#app[data-home-theme="light"] .hero-right {
+  background:rgba(247,245,228,.72)!important;
+  border-radius:12px;
+}
+#app[data-home-theme="light"] .times-band {
+  background:rgba(247,245,228,.72)!important;
+}
+#app[data-home-theme="light"] .daily-area .audio-area {
+  background:rgba(247,245,228,.76)!important;
+}
+
+
+/* V5.9: Keep the editorial column at the hero's full height; scroll text, not the grid. */
+#app .hero { min-height:0; }
+#app .hero-right {
+  height:auto!important;
+  min-height:0!important;
+  align-self:stretch!important;
+  overflow:hidden;
+}
+#app .hero-right .daily-story {
+  flex:1 1 0!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain;
+}
+#app .hero-right .daily-story > * { flex:0 0 auto; }
+@media (orientation:portrait) {
+  #app .hero-right { height:auto!important; }
+  #app .hero-right .daily-story { flex:0 1 auto!important; }
+}
+@media (max-width:640px) and (orientation:landscape) {
+  #app .hero-right { height:auto!important; }
+  #app .hero-right .daily-story { flex:1 1 0!important; }
+}
+
+
+/* V6 palette family: all native HOME routes share the selected photo and palette. */
+#app[data-home-palette="light"] { --gold:#8a6a2f;--cream:#332d24;--text:#282a24;--muted:#625d52;--fine:rgba(82,94,73,.28);--home4-hair:rgba(82,94,73,.28);color-scheme:light; }
+#app[data-home-palette="soft"] { --gold:#805550;--cream:#392f30;--text:#302729;--muted:#675a5b;--fine:rgba(112,78,79,.25);--home4-hair:rgba(112,78,79,.25);color-scheme:light; }
+#app[data-home-palette="eisgold"] { --gold:#536f84;--cream:#273b4a;--text:#243542;--muted:#516573;--fine:rgba(83,111,132,.28);--home4-hair:rgba(83,111,132,.28);color-scheme:light; }
+#app[data-home-palette="salbei"] { --gold:#8a6a2f;--cream:#26372d;--text:#24352b;--muted:#536057;--fine:rgba(63,93,75,.28);--home4-hair:rgba(63,93,75,.28);color-scheme:light; }
+#app[data-home-palette="dark"] { --gold:#d8bd82;--cream:#f2eee2;--text:#f4f0e6;--muted:#b8bdb5;--fine:rgba(216,189,130,.3);--home4-hair:rgba(216,189,130,.3);color-scheme:dark; }
+#app[data-home-palette="royal"] { --gold:#d8bd82;--cream:#f2eee2;--text:#f4f0e6;--muted:#c1cbd5;--fine:rgba(160,190,216,.3);--home4-hair:rgba(160,190,216,.3);color-scheme:dark; }
+#app[data-home-palette="bordeaux"] { --gold:#d8b38a;--cream:#f5ede4;--text:#f3ece5;--muted:#d1bfc0;--fine:rgba(205,151,157,.3);--home4-hair:rgba(205,151,157,.3);color-scheme:dark; }
+#app[data-home-palette="dar-al-layl"] { --gold:#bea878;--cream:#f1eddf;--text:#f3efdf;--muted:#b9c0b0;--fine:rgba(190,168,120,.3);--home4-hair:rgba(190,168,120,.3);color-scheme:dark; }
+
+/* On HOME, typography sits directly on the photograph with soft directional shading, never boxed tiles. */
+#app[data-home-theme="light"] .hero-left,
+#app[data-home-theme="light"] .hero-right,
+#app[data-home-theme="light"] .times-band,
+#app[data-home-theme="light"] .daily-area .audio-area {
+  background-color:transparent!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+#app[data-home-theme="light"] .hero-left {
+  background:linear-gradient(90deg,rgba(249,248,239,.78),rgba(249,248,239,.38) 62%,transparent)!important;
+}
+#app[data-home-theme="light"] .hero-right {
+  background:linear-gradient(90deg,rgba(249,248,239,.60),rgba(249,248,239,.30) 72%,transparent)!important;
+}
+#app[data-home-theme="light"] .times-band {
+  background:linear-gradient(90deg,rgba(249,248,239,.64),rgba(249,248,239,.30) 72%,transparent)!important;
+}
+#app[data-home-theme="light"] .daily-area .audio-area {
+  background:linear-gradient(100deg,rgba(249,248,239,.68),rgba(249,248,239,.30) 82%,transparent)!important;
+}
+#app[data-home-theme="light"] .hero-verse,
+#app[data-home-theme="light"] .daily-title,
+#app[data-home-theme="light"] .daily-de,
+#app[data-home-theme="light"] .source,
+#app[data-home-theme="light"] .next-name,
+#app[data-home-theme="light"] .main-time,
+#app[data-home-theme="light"] .counter,
+#app[data-home-theme="light"] .prayer-cell .pname,
+#app[data-home-theme="light"] .prayer-cell .ptime,
+#app[data-home-theme="light"] .audio-title,
+#app[data-home-theme="light"] .audio-sub {
+  color:#202b24!important;
+  text-shadow:0 1px 2px rgba(255,255,255,.72)!important;
+}
+
+/* Local reader and calendar pages slide over the wallpaper after HOME leaves the viewport. */
+#app .screen.view-covered {
+  transform:translate3d(-102%,0,0)!important;
+  opacity:.12!important;
+  pointer-events:none!important;
+}
+#app .home-view {
+  background-image:linear-gradient(115deg,rgba(3,16,19,.20),rgba(3,16,19,.08)),var(--home-wallpaper-image,none)!important;
+  background-position:center,center!important;
+  background-size:cover,cover!important;
+  background-repeat:no-repeat,no-repeat!important;
+  backdrop-filter:none!important;
+}
+#app[data-home-theme="light"] .home-view {
+  background-image:linear-gradient(115deg,rgba(243,241,231,.34),rgba(243,241,231,.15)),var(--home-wallpaper-image,none)!important;
+  color:#24352b!important;
+}
+#app[data-home-theme="light"] .quran-reader-shell {
+  background:linear-gradient(145deg,rgba(249,250,246,.60),rgba(232,237,228,.64))!important;
+  color:#24352b!important;
+  box-shadow:none!important;
+}
+#app[data-home-theme="light"] .quran-reader-head {
+  background:linear-gradient(90deg,rgba(249,250,246,.80),rgba(249,250,246,.48),transparent);
+}
+#app[data-home-theme="light"] .reader-column {
+  padding:clamp(16px,2vw,30px)!important;
+  border:1px solid rgba(63,93,75,.22)!important;
+  border-radius:16px;
+  background:rgba(249,250,246,.82)!important;
+  box-shadow:0 10px 30px rgba(31,49,39,.10);
+}
+#app[data-home-theme="light"] .reader-column-label,
+#app[data-home-theme="light"] .reader-check,
+#app[data-home-theme="light"] .reader-control,
+#app[data-home-theme="light"] #readerProgress,
+#app[data-home-theme="light"] #readerStatus,
+#app[data-home-theme="light"] .reader-note {
+  color:#3f5d4b!important;
+}
+#app[data-home-theme="light"] #readerArabic,
+#app[data-home-theme="light"] #readerGerman,
+#app[data-home-theme="light"] .reader-transliteration {
+  color:#202b24!important;
+}
+#app[data-home-theme="light"] .reader-transliteration {
+  background:rgba(249,250,246,.82)!important;
+  border-color:#8a6a2f!important;
+}
+#app[data-home-theme="light"] .quran-reader-footer {
+  background:rgba(249,250,246,.94)!important;
+}
+#app[data-home-theme="light"] .reader-step,
+#app[data-home-theme="light"] .reader-home {
+  color:#24352b!important;
+  border-color:rgba(63,93,75,.35)!important;
+  background:rgba(255,255,255,.78)!important;
+}
+#app[data-home-theme="light"] .reader-play {
+  color:#fffdf5!important;
+  background:#3f5d4b!important;
+}
+#app[data-home-theme="light"] .calendar-view .home-view-panel {
+  background:linear-gradient(145deg,rgba(249,250,246,.58),rgba(232,237,228,.62))!important;
+  color:#24352b!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#app[data-home-theme="light"] .calendar-view .home-view-head,
+#app[data-home-theme="light"] .calendar-view .home-view-intro,
+#app[data-home-theme="light"] .calendar-view .home-view-foot {
+  color:#24352b!important;
+  background:linear-gradient(90deg,rgba(249,250,246,.82),rgba(249,250,246,.48),transparent);
+}
+#app[data-home-theme="light"] .festival-list article {
+  color:#24352b!important;
+  background:rgba(249,250,246,.84)!important;
+  border-color:rgba(63,93,75,.24)!important;
+}
+#app[data-home-theme="light"] .festival-list article strong { color:#202b24!important; }
+#app[data-home-theme="light"] .festival-list article span { color:#3f5d4b!important; }
+
+#app[data-home-theme="dark"] .reader-column,
+#app[data-home-theme="dark"] .festival-list article {
+  background:rgba(5,24,27,.78);
+  border-color:rgba(216,189,130,.25);
+}
+#app .palette-popover {
+  width:min(360px,calc(100vw - 28px));
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+#app .palette-popover>span {grid-column:1/-1}
+#app .palette-popover button {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  min-width:0;
+  font-size:clamp(12px,.92vw,14px);
+  line-height:1.25;
+}
+#app .palette-popover button i {
+  flex:none;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:var(--swatch);
+  border:1px solid rgba(0,0,0,.2);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.55);
+}
+@media (prefers-reduced-motion:reduce) {
+ #app .screen {transition:none!important}
+}
+
+#app[data-home-palette="nightgold"] { --gold:#d8bd82;--cream:#f2eee2;--text:#f4f0e6;--muted:#b8bdb5;--fine:rgba(216,189,130,.3);--home4-hair:rgba(216,189,130,.3);color-scheme:dark; }
+
+
+/* Keep the prayer and daily reading blocks visible on the smallest portrait phones. */
+@media (max-width:380px) and (orientation:portrait) and (max-height:520px) {
+  #app .screen { grid-template-rows:auto minmax(210px,auto) auto minmax(58px,auto) auto!important; }
+  #app .hero {
+    min-height:210px!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:minmax(112px,auto) minmax(92px,auto);
+    align-content:stretch;
+    gap:6px;
+  }
+  #app .hero-left { min-height:112px!important; }
+  #app .hero-right {
+    min-height:92px!important;
+    height:auto!important;
+    align-self:stretch!important;
+    padding:8px 0 0!important;
+    overflow:hidden;
+  }
+  #app .hero-right .daily-story {
+    flex:0 1 auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+  }
+}
+
+
+/* V7 — complete palette tokens and unboxed, readable reading surfaces. */
+#app[data-home-palette="light"] { --home-ink:#28251f;--home-muted:#59544a;--home-wash:246,242,229;--gold:#86672f;--cream:#28251f;--text:#28251f;--muted:#59544a;--fine:rgba(89,79,56,.28);--home4-hair:rgba(89,79,56,.28);color-scheme:light; }
+#app[data-home-palette="soft"] { --home-ink:#332729;--home-muted:#655355;--home-wash:245,237,232;--gold:#805550;--cream:#332729;--text:#332729;--muted:#655355;--fine:rgba(112,78,79,.26);--home4-hair:rgba(112,78,79,.26);color-scheme:light; }
+#app[data-home-palette="eisgold"] { --home-ink:#203442;--home-muted:#4e6574;--home-wash:231,240,246;--gold:#55758a;--cream:#203442;--text:#203442;--muted:#4e6574;--fine:rgba(67,103,126,.28);--home4-hair:rgba(67,103,126,.28);color-scheme:light; }
+#app[data-home-palette="salbei"] { --home-ink:#24362d;--home-muted:#526057;--home-wash:237,240,228;--gold:#496b55;--cream:#24362d;--text:#24362d;--muted:#526057;--fine:rgba(63,93,75,.28);--home4-hair:rgba(63,93,75,.28);color-scheme:light; }
+#app[data-home-palette="dark"] { --home-ink:#f4f0e6;--home-muted:#c5c4b9;--home-wash:7,25,28;--gold:#d8bd82;--cream:#f2eee2;--text:#f4f0e6;--muted:#c5c4b9;--fine:rgba(216,189,130,.30);--home4-hair:rgba(216,189,130,.30);color-scheme:dark; }
+#app[data-home-palette="royal"] { --home-ink:#f2f2ed;--home-muted:#c0cad4;--home-wash:8,25,43;--gold:#d8bd82;--cream:#f2f2ed;--text:#f2f2ed;--muted:#c0cad4;--fine:rgba(160,190,216,.30);--home4-hair:rgba(160,190,216,.30);color-scheme:dark; }
+#app[data-home-palette="bordeaux"] { --home-ink:#f4ece5;--home-muted:#d2bec0;--home-wash:37,15,25;--gold:#d8b38a;--cream:#f4ece5;--text:#f4ece5;--muted:#d2bec0;--fine:rgba(205,151,157,.30);--home4-hair:rgba(205,151,157,.30);color-scheme:dark; }
+#app[data-home-palette="dar-al-layl"] { --home-ink:#f2eddd;--home-muted:#c2c3b5;--home-wash:9,33,31;--gold:#bea878;--cream:#f2eddd;--text:#f2eddd;--muted:#c2c3b5;--fine:rgba(190,168,120,.30);--home4-hair:rgba(190,168,120,.30);color-scheme:dark; }
+#app[data-home-palette="nightgold"] { --home-ink:#f4f0e6;--home-muted:#c5c4b9;--home-wash:7,25,28;--gold:#d8bd82;--cream:#f2eee2;--text:#f4f0e6;--muted:#c5c4b9;--fine:rgba(216,189,130,.30);--home4-hair:rgba(216,189,130,.30);color-scheme:dark; }
+
+#app:is([data-home-palette="light"],[data-home-palette="soft"],[data-home-palette="eisgold"],[data-home-palette="salbei"]) .lightgrading {
+  background:linear-gradient(90deg,rgba(var(--home-wash),.22),rgba(var(--home-wash),.08) 48%,rgba(var(--home-wash),.18)),
+             linear-gradient(0deg,rgba(var(--home-wash),.28),rgba(var(--home-wash),.05) 64%,rgba(var(--home-wash),.14))!important;
+}
+#app:is([data-home-palette="dark"],[data-home-palette="royal"],[data-home-palette="bordeaux"],[data-home-palette="dar-al-layl"],[data-home-palette="nightgold"]) .lightgrading {
+  background:linear-gradient(90deg,rgba(var(--home-wash),.34),rgba(var(--home-wash),.08) 48%,rgba(var(--home-wash),.28)),
+             linear-gradient(0deg,rgba(var(--home-wash),.48),rgba(var(--home-wash),.12) 64%,rgba(var(--home-wash),.24))!important;
+}
+
+/* The HOME photo remains the surface: separate sections with spacing and rules, not tiles. */
+#app .hero-left,#app .hero-right,#app .times-band,#app .daily-area .audio-area {
+  background:transparent!important;border-radius:0!important;box-shadow:none!important;
+}
+#app .hero-right {border-left:1px solid var(--fine)!important;}
+#app .times-band {border-top:1px solid var(--fine)!important;border-bottom:1px solid var(--fine)!important;}
+#app .daily-area .audio-area {border-left:1px solid var(--fine)!important;}
+#app .hero-verse,#app .daily-title,#app .daily-de,#app .source,
+#app .next-name,#app .main-time,#app .counter,#app .prayer-cell .pname,
+#app .prayer-cell .ptime,#app .audio-title,#app .audio-sub {
+  color:var(--home-ink)!important;text-shadow:0 1px 3px rgba(var(--home-wash),.38)!important;
+}
+#app .overline,#app .daily-label,#app .band-head,#app .audio-kicker,
+#app .reader-column-label,#app .reader-note,#app .reader-control,
+#app #readerStatus,#app #readerProgress {
+  color:var(--gold)!important;
+}
+#app .hero-right .daily-story {
+  min-width:0;min-height:0;overflow-x:hidden!important;overflow-y:auto!important;
+  overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--gold) transparent;
+}
+#app .hero-right .daily-story>* {flex:0 0 auto;min-width:0;max-width:100%;overflow-wrap:anywhere;}
+#app .tadabbur-item {min-width:0;padding:clamp(10px,1.5vh,18px) 0!important;border:0!important;border-bottom:1px solid var(--fine)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;}
+#app .tadabbur-statement {margin:0 0 .7em!important;color:var(--home-ink)!important;font-size:clamp(18px,1.35vw,25px)!important;line-height:1.55!important;overflow-wrap:anywhere;}
+#app .tadabbur-speaker {margin-top:.7em;color:var(--cream)!important;font-size:clamp(13px,.95vw,16px)!important;font-weight:650;line-height:1.45!important;}
+#app .tadabbur-source {margin-top:.25em;color:var(--muted)!important;font-size:clamp(12px,.82vw,14px)!important;line-height:1.5!important;}
+#app .tadabbur-inline .tadabbur-results {min-width:0;max-width:100%;}
+#app .tadabbur-inline .tadabbur-item {padding:9px 0!important;}
+#app .tadabbur-inline .tadabbur-statement {font-size:clamp(16px,1.12vw,20px)!important;line-height:1.5!important;}
+#app .tadabbur-inline .tadabbur-speaker {font-size:clamp(12px,.82vw,14px)!important;}
+#app .tadabbur-inline .tadabbur-source {font-size:clamp(11px,.76vw,13px)!important;}
+
+/* In-app Qurʾān and holiday routes keep the same wallpaper, with quiet dividers. */
+#app .home-view {
+  background-image:linear-gradient(115deg,rgba(var(--home-wash),.13),rgba(var(--home-wash),.04)),var(--home-wallpaper-image,none)!important;
+  background-position:center,center!important;background-size:cover,cover!important;background-repeat:no-repeat,no-repeat!important;
+  color:var(--home-ink)!important;backdrop-filter:none!important;
+}
+#app .quran-reader-view {background:rgba(var(--home-wash),.14)!important;backdrop-filter:blur(3px)!important;color:var(--home-ink)!important;}
+#app .quran-reader-shell {background:linear-gradient(145deg,rgba(var(--home-wash),.28),rgba(var(--home-wash),.18))!important;color:var(--home-ink)!important;box-shadow:none!important;backdrop-filter:blur(3px);}
+#app .quran-reader-head {background:linear-gradient(90deg,rgba(var(--home-wash),.24),transparent)!important;border-bottom:1px solid var(--fine)!important;}
+#app .reader-column {min-width:0;padding:clamp(14px,2vw,28px)!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;}
+#app .reader-arabic {border-right:1px solid var(--fine)!important;}
+#app #readerArabic,#app #readerGerman,#app .reader-transliteration {color:var(--home-ink)!important;overflow-wrap:anywhere;}
+#app #readerArabic {line-height:2!important;}
+#app .reader-transliteration {background:transparent!important;border:0!important;border-left:2px solid var(--gold)!important;border-radius:0!important;box-shadow:none!important;padding:12px 16px!important;}
+#app .quran-reader-footer {background:rgba(var(--home-wash),.20)!important;border-top:1px solid var(--fine)!important;}
+#app .calendar-view .home-view-panel {width:min(100%,1120px);background:rgba(var(--home-wash),.18)!important;color:var(--home-ink)!important;border:0!important;border-radius:0!important;box-shadow:none!important;backdrop-filter:blur(3px);}
+#app .calendar-view .home-view-head,#app .calendar-view .home-view-intro,#app .calendar-view .home-view-foot {color:var(--home-ink)!important;background:transparent!important;}
+#app .festival-list article {color:var(--home-ink)!important;background:transparent!important;border:0!important;border-bottom:1px solid var(--fine)!important;border-radius:0!important;box-shadow:none!important;}
+#app .festival-list article strong {color:var(--home-ink)!important;}
+#app .festival-list article span {color:var(--muted)!important;}
+#app .reader-step,#app .reader-home {color:var(--home-ink)!important;border-color:var(--fine)!important;background:rgba(var(--home-wash),.24)!important;}
+#app .reader-play {color:#fffdf5!important;background:var(--gold)!important;}
+
+@media (max-width:700px) and (orientation:landscape) and (max-height:500px) {
+  #app .top {gap:3px!important;padding-bottom:2px!important;}
+  #app .logo {gap:5px!important;min-width:0;}
+  #app .logo-mark {width:clamp(24px,5vh,30px)!important;height:clamp(24px,5vh,30px)!important;}
+  #app .brand-title {font-size:clamp(10px,2vw,14px)!important;letter-spacing:.09em!important;}
+  #app .brand-mini {font-size:6px!important;letter-spacing:.1em!important;}
+  #app .home-nav {gap:2px!important;min-width:0;}
+  #app .home-nav button {min-width:0!important;min-height:30px;padding:3px clamp(4px,1vw,8px)!important;}
+  #app .home-nav span {font-size:clamp(8px,1.5vw,10px)!important;letter-spacing:0!important;}
+  #app .hero {grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important;min-height:104px!important;gap:clamp(8px,1.5vw,16px)!important;}
+  #app .hero-left,#app .hero-right {min-width:0;min-height:0;}
+  #app .hero-right {height:100%!important;padding-left:clamp(8px,1.5vw,14px)!important;}
+  #app .hero-right .daily-story {max-height:100%!important;overflow-y:auto!important;}
+  #app .daily-title {font-size:clamp(16px,2.5vh,21px)!important;}
+  #app .daily-de {font-size:clamp(13px,2vh,17px)!important;line-height:1.4!important;}
+  #app .source {font-size:clamp(10px,1.5vh,12px)!important;}
+}
+@media (orientation:portrait) {
+  #app .reader-arabic {border-right:0!important;border-bottom:1px solid var(--fine)!important;}
+}
+
+/* Preserve comfortable reading sizes on short landscape screens; the story scrolls. */
+@media (max-width:700px) and (orientation:landscape) and (max-height:500px) {
+  #app .daily-de {font-size:clamp(18px,2vh,20px)!important;line-height:1.4!important;}
+  #app .source {font-size:clamp(12px,1.5vh,13px)!important;line-height:1.4!important;}
+}
+
+/* V7 — readable, duration-aware screensaver safe area without hiding the scene. */
+#saver {padding:clamp(18px,4vw,64px)!important;}
+#saver .saver-content {
+  width:min(100%,1120px);max-height:calc(100dvh - clamp(104px,18vh,180px));
+  overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;
+  scrollbar-color:var(--gold) transparent;padding:4px clamp(2px,1.5vw,20px);
+  gap:clamp(8px,1.8vh,20px);
+}
+#saver .saver-ar {max-height:none!important;overflow:visible!important;color:var(--home-ink,#f4f0e6)!important;overflow-wrap:anywhere;}
+#saver .saver-de {max-height:none!important;overflow:visible!important;color:var(--home-ink,#f4f0e6)!important;line-height:1.5!important;overflow-wrap:anywhere;}
+#saver .saver-narrator-line {
+  margin:clamp(7px,1.2vh,14px) 0 0;padding-top:clamp(7px,1.2vh,14px);
+  border-top:1px solid var(--fine);color:var(--gold);font:600 clamp(14px,1.1vw,18px)/1.5 var(--ui);
+}
+#saver .saver-narrator span {display:block;margin-top:clamp(7px,1.2vh,14px);color:var(--gold);font-size:clamp(14px,1.1vw,18px);line-height:1.5;}
+#saver .saver-statement {max-width:78ch;color:var(--home-ink,#f4f0e6);font-size:clamp(17px,1.45vw,25px);line-height:1.55;overflow-wrap:anywhere;}
+#saver .saver-source {max-width:100%;padding-top:clamp(7px,1.2vh,14px);border-top:1px solid var(--fine);color:var(--home-muted,var(--muted));font-size:clamp(12px,.9vw,15px);line-height:1.5;letter-spacing:.02em;overflow-wrap:anywhere;}
+#app:is([data-home-palette="light"],[data-home-palette="soft"],[data-home-palette="eisgold"],[data-home-palette="salbei"]) #saver::before {
+  background:radial-gradient(ellipse at center,rgba(var(--home-wash),.14) 0%,rgba(var(--home-wash),.24) 68%,rgba(var(--home-wash),.36) 100%)!important;
+}
+#app[data-home-palette] #saver .saver-ar,
+#app[data-home-palette] #saver .saver-de,
+#app[data-home-palette] #saver .saver-statement {color:var(--home-ink)!important;text-shadow:0 1px 3px rgba(var(--home-wash),.38)!important;}
+#app[data-home-palette] #saver .saver-kicker,
+#app[data-home-palette] #saver .saver-narrator-line,
+#app[data-home-palette] #saver .saver-narrator span,
+#app[data-home-palette] #saver .saver-clock,
+#app[data-home-palette] #saver .saver-bottom span:last-child {color:var(--gold)!important;}
+#app[data-home-palette] #saver .saver-source,
+#app[data-home-palette] #saver .saver-bottom {color:var(--home-muted)!important;}
+#app[data-home-palette] #saver .saver-bottom {border-color:var(--fine)!important;}
+
+/* V7 follow-up — palette-scoped rules outrank legacy generic light-mode overrides. */
+#app[data-home-palette] .home-nav button,
+#app[data-home-palette] .home-nav a {
+  color:var(--home-ink)!important;background:transparent!important;border:1px solid transparent!important;
+  border-bottom-color:var(--fine)!important;border-radius:0!important;box-shadow:none!important;
+}
+#app[data-home-palette] .home-nav button:hover,
+#app[data-home-palette] .home-nav button:focus-visible,
+#app[data-home-palette] .home-nav a:hover,
+#app[data-home-palette] .home-nav a:focus-visible {
+  color:var(--home-ink)!important;background:rgba(var(--home-wash),.22)!important;
+  border-color:var(--fine)!important;box-shadow:none!important;
+}
+#app[data-home-palette] .header-meta {
+  color:var(--home-ink)!important;background:linear-gradient(90deg,rgba(var(--home-wash),.24),rgba(var(--home-wash),.08),transparent)!important;
+  border:0!important;border-block:1px solid var(--fine)!important;border-radius:0!important;box-shadow:none!important;
+}
+#app[data-home-palette] .header-meta span,
+#app[data-home-palette] .header-meta strong,
+#app[data-home-palette] .header-meta .now,
+#app[data-home-palette] .brand-title,
+#app[data-home-palette] .site-name,
+#app[data-home-palette] .brand-mini {color:var(--home-ink)!important;text-shadow:0 1px 3px rgba(var(--home-wash),.42)!important;}
+#app[data-home-palette] .hero-left,
+#app[data-home-palette] .hero-right,
+#app[data-home-palette] .times-band,
+#app[data-home-palette] .daily-area .audio-area {
+  color:var(--home-ink)!important;background:transparent!important;border-radius:0!important;box-shadow:none!important;
+}
+#app[data-home-palette] .hero-left {border-left:2px solid var(--fine)!important;padding-left:clamp(10px,1.6vw,24px)!important;}
+#app[data-home-palette] .hero-right {border-left:1px solid var(--fine)!important;}
+#app[data-home-palette] .times-band {border-block:1px solid var(--fine)!important;}
+#app[data-home-palette] .daily-area .audio-area {border-left:1px solid var(--fine)!important;}
+#app[data-home-palette] .hero-verse,
+#app[data-home-palette] .daily-title,
+#app[data-home-palette] .daily-de,
+#app[data-home-palette] .source,
+#app[data-home-palette] .next-name,
+#app[data-home-palette] .main-time,
+#app[data-home-palette] .counter,
+#app[data-home-palette] .prayer-cell .pname,
+#app[data-home-palette] .prayer-cell .ptime,
+#app[data-home-palette] .audio-title,
+#app[data-home-palette] .audio-sub {color:var(--home-ink)!important;text-shadow:0 1px 3px rgba(var(--home-wash),.38)!important;}
+#app[data-home-palette] .overline,
+#app[data-home-palette] .daily-label,
+#app[data-home-palette] .band-head,
+#app[data-home-palette] .audio-kicker {color:var(--gold)!important;text-shadow:0 1px 3px rgba(var(--home-wash),.35)!important;}
+
+#app[data-home-palette] .quran-reader-view {background:rgba(var(--home-wash),.12)!important;color:var(--home-ink)!important;}
+#app[data-home-palette] .quran-reader-shell {background:linear-gradient(145deg,rgba(var(--home-wash),.28),rgba(var(--home-wash),.18))!important;color:var(--home-ink)!important;box-shadow:none!important;}
+#app[data-home-palette] .reader-column {padding:clamp(14px,2vw,28px)!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;}
+#app[data-home-palette] .reader-arabic {border-right:1px solid var(--fine)!important;}
+#app[data-home-palette] #readerArabic,
+#app[data-home-palette] #readerGerman,
+#app[data-home-palette] .reader-transliteration {color:var(--home-ink)!important;}
+#app[data-home-palette] .reader-transliteration {background:transparent!important;border:0!important;border-left:2px solid var(--gold)!important;border-radius:0!important;box-shadow:none!important;}
+#app[data-home-palette] .calendar-view .home-view-panel {background:rgba(var(--home-wash),.16)!important;color:var(--home-ink)!important;border:0!important;border-radius:0!important;box-shadow:none!important;}
+#app[data-home-palette] .calendar-view .home-view-head,
+#app[data-home-palette] .calendar-view .home-view-intro,
+#app[data-home-palette] .calendar-view .home-view-foot {color:var(--home-ink)!important;background:transparent!important;}
+#app[data-home-palette] .festival-list article {color:var(--home-ink)!important;background:transparent!important;border:0!important;border-bottom:1px solid var(--fine)!important;border-radius:0!important;box-shadow:none!important;}
+#app[data-home-palette] .festival-list article strong {color:var(--home-ink)!important;}
+#app[data-home-palette] .festival-list article span {color:var(--home-muted)!important;}
+@media (orientation:portrait) {
+  #app[data-home-palette] .hero-right {border-left:0!important;border-top:1px solid var(--fine)!important;padding:clamp(10px,2vh,18px) 0 0!important;}
+  #app[data-home-palette] .daily-area .audio-area {border-left:0!important;border-top:1px solid var(--fine)!important;}
+  #app[data-home-palette] .reader-arabic {border-right:0!important;border-bottom:1px solid var(--fine)!important;}
+}
+
+/* V7 contrast pass — preserve photo detail while keeping every reading line distinct. */
+#app[data-home-palette="light"] {--home-muted:#4b463d;--muted:#4b463d;}
+#app[data-home-palette="soft"] {--home-muted:#514446;--muted:#514446;}
+#app[data-home-palette="eisgold"] {--home-muted:#304655;--muted:#304655;}
+#app[data-home-palette="salbei"] {--home-muted:#3e4d43;--muted:#3e4d43;}
+#app[data-home-palette] .hero-verse,
+#app[data-home-palette] .daily-title,
+#app[data-home-palette] .daily-de,
+#app[data-home-palette] .source,
+#app[data-home-palette] .next-name,
+#app[data-home-palette] .main-time,
+#app[data-home-palette] .counter,
+#app[data-home-palette] .prayer-cell .pname,
+#app[data-home-palette] .prayer-cell .ptime,
+#app[data-home-palette] .audio-title,
+#app[data-home-palette] .audio-sub,
+#app[data-home-palette] .header-meta span,
+#app[data-home-palette] .header-meta strong,
+#app[data-home-palette] .brand-title,
+#app[data-home-palette] .site-name {text-shadow:0 1px 2px rgba(0,0,0,.32)!important;}
+#app[data-home-palette] .quran-reader-footer {
+  background:linear-gradient(90deg,rgba(var(--home-wash),.22),rgba(var(--home-wash),.12),transparent)!important;
+  border-top:1px solid var(--fine)!important;
+}
+#app[data-home-palette] .reader-step,
+#app[data-home-palette] .reader-home {
+  color:var(--home-ink)!important;border:1px solid var(--fine)!important;
+  background:transparent!important;box-shadow:none!important;
+}
+#app[data-home-palette] .reader-play {color:#fff!important;background:var(--gold)!important;border:1px solid var(--fine)!important;}
+#app[data-home-palette] .calendar-view .home-view-panel {background:rgba(var(--home-wash),.18)!important;}
+#app[data-home-palette] .calendar-view .home-view-intro {font-size:clamp(15px,1.1vw,18px);line-height:1.55;}
+#app[data-home-palette] .festival-list article {padding-block:clamp(12px,1.6vh,18px)!important;}
+#app[data-home-palette] .festival-list article strong {font-size:clamp(17px,1.25vw,22px);line-height:1.4;}
+#app[data-home-palette] .festival-list article span {font-size:clamp(14px,1vw,17px);line-height:1.5;color:var(--home-muted)!important;}
+#app[data-home-palette] .calendar-view .home-view-head,
+#app[data-home-palette] .calendar-view .home-view-intro,
+#app[data-home-palette] .calendar-view .home-view-foot,
+#app[data-home-palette] .festival-list article strong,
+#app[data-home-palette] .festival-list article span {text-shadow:0 1px 2px rgba(0,0,0,.28)!important;}
+
+/* V8: readable accent ink on bright photo regions for light palettes. */
+#app[data-home-palette="light"] {--gold:#66501f;--home-muted:#403d35;--muted:#403d35;}
+#app[data-home-palette="soft"] {--gold:#704345;--home-muted:#453a3c;--muted:#453a3c;}
+#app[data-home-palette="eisgold"] {--gold:#40596c;--home-muted:#30424e;--muted:#30424e;}
+#app[data-home-palette="salbei"] {--gold:#405c48;--home-muted:#37483c;--muted:#37483c;}
+#app[data-home-palette="light"] .overline,#app[data-home-palette="light"] .band-head,#app[data-home-palette="light"] .daily-label,#app[data-home-palette="light"] .audio-kicker,#app[data-home-palette="light"] .saver-kicker,#app[data-home-palette="light"] .next-arabic,
+#app[data-home-palette="soft"] .overline,#app[data-home-palette="soft"] .band-head,#app[data-home-palette="soft"] .daily-label,#app[data-home-palette="soft"] .audio-kicker,#app[data-home-palette="soft"] .saver-kicker,#app[data-home-palette="soft"] .next-arabic,
+#app[data-home-palette="eisgold"] .overline,#app[data-home-palette="eisgold"] .band-head,#app[data-home-palette="eisgold"] .daily-label,#app[data-home-palette="eisgold"] .audio-kicker,#app[data-home-palette="eisgold"] .saver-kicker,#app[data-home-palette="eisgold"] .next-arabic,
+#app[data-home-palette="salbei"] .overline,#app[data-home-palette="salbei"] .band-head,#app[data-home-palette="salbei"] .daily-label,#app[data-home-palette="salbei"] .audio-kicker,#app[data-home-palette="salbei"] .saver-kicker,#app[data-home-palette="salbei"] .next-arabic {color:var(--gold)!important;text-shadow:0 1px 2px rgba(255,255,255,.45)!important;}
+
+
+/* V9: keep navigation and location/date context usable on narrow landscape phones. */
+@media (max-width:700px) and (orientation:landscape) and (max-height:500px) {
+  #app .top {
+    grid-template-columns:minmax(0,1fr) auto auto!important;
+    grid-template-rows:minmax(34px,auto)!important;
+    column-gap:clamp(4px,1vw,10px)!important;
+    align-items:center!important;
+  }
+  #app .top .logo {grid-column:1!important;grid-row:1!important;min-width:0!important;width:auto!important;gap:5px!important;}
+  #app .top .logo-mark {width:clamp(23px,4.5vh,30px)!important;height:clamp(23px,4.5vh,30px)!important;}
+  #app .top .brand-title {font-size:clamp(9px,1.8vw,13px)!important;letter-spacing:.07em!important;white-space:nowrap;}
+  #app .top .brand-mini,#app .top .site {display:none!important;}
+  #app .top .home-nav {grid-column:2!important;grid-row:1!important;width:auto!important;min-width:0!important;display:flex!important;flex-wrap:nowrap!important;gap:2px!important;}
+  #app .top .home-nav button {flex:0 1 auto!important;min-width:0!important;min-height:30px!important;padding:2px clamp(3px,.7vw,7px)!important;}
+  #app .top .home-nav button img {width:clamp(14px,2.7vh,18px)!important;height:clamp(14px,2.7vh,18px)!important;}
+  #app .top .home-nav button span {font-size:clamp(7px,1.25vw,9px)!important;letter-spacing:0!important;}
+  #app .top .top-spacer {display:none!important;}
+  #app .top .time-box {grid-column:3!important;grid-row:1!important;width:auto!important;min-width:0!important;}
+  #app .top .topbtn {width:clamp(32px,6vh,42px)!important;height:clamp(32px,6vh,42px)!important;min-width:clamp(32px,6vh,42px)!important;min-height:clamp(32px,6vh,42px)!important;}
+  #app .header-meta {grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:2px clamp(8px,2vw,18px)!important;padding:4px 7px!important;}
+  #app .header-meta>div {min-width:0!important;}
+  #app .header-meta>div strong {display:block!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;overflow-wrap:anywhere;font-size:clamp(9px,1.7vw,11px)!important;line-height:1.15!important;}
+  #app .header-meta>div span {font-size:clamp(7px,1.4vw,9px)!important;line-height:1.1!important;}
+  #app .header-meta .now {font-size:clamp(13px,2.5vw,18px)!important;}
+}
+
+
+/* V10: palette accent token wins over the legacy light-theme important token. */
+#app[data-home-palette="light"] {--gold:#66501f!important;}
+#app[data-home-palette="soft"] {--gold:#704345!important;}
+#app[data-home-palette="eisgold"] {--gold:#40596c!important;}
+#app[data-home-palette="salbei"] {--gold:#405c48!important;}
+
+@media (max-width:700px) and (orientation:landscape) and (max-height:500px) {
+  #app .top .topbtn {width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;}
+}
+
+
+/* V11: visible touch surfaces for HOME navigation; Dār al-Layl is the sole palette. */
+#app .home-nav {gap:clamp(4px,.55vw,9px)!important;}
+#app .home-nav button {
+  box-sizing:border-box!important;min-width:clamp(58px,5.5vw,94px)!important;min-height:50px!important;
+  padding:5px clamp(7px,.8vw,12px)!important;display:flex!important;flex-direction:column!important;
+  align-items:center!important;justify-content:center!important;gap:3px!important;
+  border:1px solid rgba(216,189,130,.54)!important;border-radius:12px!important;
+  color:#f2eee2!important;background:linear-gradient(145deg,rgba(20,46,37,.94),rgba(7,25,27,.9))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 3px 11px rgba(0,0,0,.2)!important;
+  transition:background .18s ease,border-color .18s ease,transform .18s ease,box-shadow .18s ease;
+}
+#app .home-nav button span {
+  max-width:116px!important;white-space:normal!important;text-wrap:balance;
+  font:600 clamp(10px,.72vw,13px)/1.16 var(--display)!important;letter-spacing:.015em!important;
+}
+#app .home-nav button:last-child {min-width:clamp(112px,9vw,152px)!important;}
+#app .home-nav button:hover,#app .home-nav button:focus-visible {
+  color:#fffaf0!important;background:linear-gradient(145deg,rgba(34,66,52,.98),rgba(9,31,29,.96))!important;
+  border-color:#e1c88e!important;transform:translateY(-1px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 5px 14px rgba(0,0,0,.3)!important;
+}
+#app .home-nav button[aria-current="page"] {
+  border-color:#e4ca8e!important;background:linear-gradient(145deg,rgba(43,70,53,.98),rgba(10,32,29,.96))!important;
+  box-shadow:inset 0 0 0 1px rgba(228,202,142,.22),0 3px 12px rgba(0,0,0,.26)!important;
+}
+#app .home-nav button:focus-visible {outline:3px solid #f3d58c!important;outline-offset:3px;}
+#app #homeAppearance:disabled,#app #theme:disabled {opacity:1!important;color:#f2eee2!important;-webkit-text-fill-color:#f2eee2!important;cursor:default;}
+@media (max-width:700px) and (orientation:landscape) and (max-height:500px) {
+  #app .top {grid-template-columns:minmax(0,max-content) minmax(0,1fr) auto!important;column-gap:clamp(5px,1vw,10px)!important;}
+  #app .top .logo {max-width:clamp(104px,27vw,164px)!important;}
+  #app .top .home-nav {min-width:0!important;justify-content:stretch!important;gap:clamp(3px,.6vw,7px)!important;}
+  #app .top .home-nav button {flex:1 1 0!important;min-width:44px!important;min-height:44px!important;padding:3px clamp(3px,.6vw,7px)!important;}
+  #app .top .home-nav button:last-child {min-width:44px!important;flex:1.5 1 0!important;}
+  #app .top .home-nav button span {font-size:clamp(8px,1.5vw,10px)!important;max-width:100px!important;}
+}
+@media (max-width:520px) and (orientation:portrait) {
+  #app .home-nav button {min-width:44px!important;min-height:44px!important;padding:4px clamp(3px,1vw,8px)!important;}
+  #app .home-nav button:last-child {min-width:44px!important;flex:1.4 1 0!important;}
+  #app .home-nav button span {font-size:clamp(9px,2.5vw,11px)!important;max-width:92px!important;}
+}
+
+
+/* V12: preserve the same visible frame on inactive navigation choices. */
+#app[data-home-palette] .home-nav button:not([aria-current="page"]) {
+  color:#f2eee2!important;
+  background:linear-gradient(145deg,rgba(20,46,37,.94),rgba(7,25,27,.9))!important;
+  border:1px solid rgba(216,189,130,.54)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 3px 11px rgba(0,0,0,.2)!important;
+}
+#app[data-home-palette] .home-nav button:not([aria-current="page"]):hover,
+#app[data-home-palette] .home-nav button:not([aria-current="page"]):focus-visible {
+  color:#fffaf0!important;
+  background:linear-gradient(145deg,rgba(34,66,52,.98),rgba(9,31,29,.96))!important;
+  border-color:#e1c88e!important;
+}
+
+
+/* V13: transparent oval tabs sized to their short labels in every orientation. */
+#app[data-home-palette] .home-nav button:not([aria-current="page"]),
+#app[data-home-palette] .home-nav button[aria-current="page"] {
+  box-sizing:border-box!important;display:flex!important;flex:0 1 auto!important;
+  width:max-content!important;min-width:44px!important;max-width:none!important;
+  min-height:44px!important;height:auto!important;padding:6px clamp(10px,1vw,15px)!important;
+  border:1px solid rgba(216,189,130,.7)!important;border-radius:9999px!important;
+  color:#f2eee2!important;background:transparent!important;background-color:transparent!important;background-image:none!important;
+  box-shadow:none!important;transform:none!important;
+}
+#app[data-home-palette] .home-nav button[aria-current="page"] {border-color:#e4ca8e!important;color:#fffaf0!important;}
+#app[data-home-palette] .home-nav button:hover,
+#app[data-home-palette] .home-nav button:focus-visible {
+  color:#fffaf0!important;background:transparent!important;background-color:transparent!important;background-image:none!important;
+  border-color:#f0d99d!important;box-shadow:none!important;transform:none!important;
+}
+#app[data-home-palette] .home-nav button span {
+  max-width:none!important;white-space:nowrap!important;text-wrap:nowrap!important;
+  font-size:clamp(10px,.72vw,13px)!important;line-height:1.15!important;
+}
+@media (max-width:700px) and (orientation:landscape) and (max-height:500px) {
+  #app .top .home-nav {min-width:0!important;justify-content:center!important;gap:clamp(4px,.9vw,8px)!important;}
+  #app .top .home-nav button {flex:0 1 auto!important;min-width:44px!important;min-height:44px!important;padding:5px clamp(8px,1.2vw,12px)!important;}
+}
+@media (max-width:520px) and (orientation:portrait) {
+  #app .home-nav {flex-wrap:nowrap!important;justify-content:center!important;gap:clamp(3px,1vw,7px)!important;}
+  #app .home-nav button {flex:0 1 auto!important;min-width:44px!important;min-height:44px!important;padding:5px clamp(7px,2vw,11px)!important;}
+  #app .home-nav button span {font-size:clamp(9px,2.5vw,11px)!important;}
+}
+@media (max-width:360px) {
+  #app .home-nav {flex-wrap:wrap!important;}
+}
+
+/* V14: equal oval navigation, inline portrait header and centered landscape navigation. */
+#app[data-home-palette] .home-nav button,
+#app[data-home-palette] .home-nav button[aria-current="page"] {
+  flex:0 0 auto!important;width:max-content!important;min-width:clamp(72px,7vw,104px)!important;
+  min-height:clamp(48px,4vw,60px)!important;height:clamp(48px,4vw,60px)!important;
+  padding:5px clamp(12px,1.2vw,18px)!important;border-radius:9999px!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  background:transparent!important;background-color:transparent!important;background-image:none!important;
+  border:1px solid rgba(216,189,130,.72)!important;box-shadow:none!important;transform:none!important;
+}
+#app[data-home-palette] .home-nav button img {display:block!important;width:clamp(18px,1.45vw,23px)!important;height:clamp(18px,1.45vw,23px)!important;object-fit:contain!important;margin:0 auto 2px!important;}
+#app[data-home-palette] .home-nav button span {display:block!important;max-width:none!important;white-space:nowrap!important;text-wrap:nowrap!important;text-align:center!important;font-size:clamp(10px,.72vw,13px)!important;line-height:1.15!important;}
+@media (max-width:850px) and (orientation:portrait) {
+  #app .top {display:grid!important;grid-template-columns:minmax(0,1fr) auto auto!important;grid-template-areas:"brand nav settings"!important;align-items:center!important;column-gap:clamp(6px,2vw,14px)!important;}
+  #app .top .logo {grid-area:brand!important;min-width:0!important;max-width:none!important;}
+  #app .top .home-nav {grid-area:nav!important;min-width:0!important;justify-content:flex-end!important;gap:clamp(4px,1vw,8px)!important;}
+  #app .top .top-spacer {display:none!important;}
+  #app .top .time-box {grid-area:settings!important;}
+  #app .top .home-nav button {min-width:clamp(50px,13vw,68px)!important;min-height:clamp(44px,11vw,52px)!important;height:clamp(44px,11vw,52px)!important;padding:3px clamp(5px,1.2vw,9px)!important;}
+  #app .top .home-nav button img {width:clamp(15px,4vw,20px)!important;height:clamp(15px,4vw,20px)!important;}
+  #app .top .home-nav button span {font-size:clamp(9px,2.35vw,11px)!important;}
+  #app .top .brand-mini {display:none!important;}
+}
+@media (max-width:700px) and (orientation:landscape) {
+  #app .top {display:grid!important;grid-template-columns:minmax(0,1fr) minmax(max-content,1fr) minmax(0,1fr) auto!important;grid-template-areas:"brand nav . settings"!important;align-items:center!important;column-gap:clamp(6px,1vw,12px)!important;}
+  #app .top .logo {grid-area:brand!important;}
+  #app .top .home-nav {grid-area:nav!important;justify-content:center!important;gap:clamp(4px,.9vw,10px)!important;}
+  #app .top .top-spacer {grid-area:3!important;display:block!important;}
+  #app .top .time-box {grid-area:settings!important;}
+  #app .top .home-nav button {min-width:clamp(62px,10vw,78px)!important;min-height:46px!important;height:46px!important;padding:3px 8px!important;}
+  #app .top .home-nav button img {width:17px!important;height:17px!important;}
+  #app .top .home-nav button span {font-size:clamp(9px,1.7vw,11px)!important;}
+}
+@media (max-width:380px) and (orientation:portrait) {
+  #app .top {grid-template-columns:minmax(0,1fr) auto!important;grid-template-areas:"brand settings" "nav nav"!important;row-gap:5px!important;}
+  #app .top .home-nav {justify-content:center!important;}
+}
+
+
+/* V15: identical capsule geometry and true viewport centering in compact landscape. */
+@media (min-width:851px) {
+  #app[data-home-palette] .home-nav button {width:clamp(82px,7vw,104px)!important;min-width:clamp(82px,7vw,104px)!important;}
+}
+@media (max-width:850px) and (orientation:portrait) {
+  #app[data-home-palette] .home-nav button {width:clamp(50px,13vw,68px)!important;min-width:clamp(50px,13vw,68px)!important;}
+}
+@media (max-width:700px) and (orientation:landscape) {
+  #app .top {position:relative!important;}
+  #app .top .home-nav {position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;width:max-content!important;max-width:calc(100% - 190px)!important;}
+  #app[data-home-palette] .home-nav button {width:clamp(62px,10vw,78px)!important;min-width:clamp(62px,10vw,78px)!important;}
+}
+@media (max-width:380px) and (orientation:portrait) {
+  #app .top .home-nav {position:static!important;left:auto!important;top:auto!important;transform:none!important;width:auto!important;max-width:none!important;}
+}
+
+/* V16: Tadabbur opens as a reading dialog and daily German text fits its safe area. */
+#app .daily-story {overflow:hidden!important;overscroll-behavior:auto!important;scrollbar-width:none!important;}
+#app #dailyArabic[hidden] {display:none!important;}
+#app #dailyDe {white-space:normal!important;overflow:hidden!important;text-overflow:clip!important;overflow-wrap:anywhere!important;word-break:normal!important;line-height:1.34!important;}
+#app .tadabbur-open {white-space:nowrap!important;border-radius:999px!important;padding:8px 16px!important;min-height:40px!important;}
+#app .tadabbur-modal[hidden] {display:none!important;}
+#app .tadabbur-modal:not([hidden]) {
+  position:fixed!important;inset:0!important;z-index:100000!important;
+  display:grid!important;place-items:center!important;padding:clamp(12px,3vw,36px)!important;
+  background:rgba(3,12,14,.78)!important;backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
+  animation:tadabbur-modal-in .22s ease-out both;
+}
+#app .tadabbur-dialog {
+  width:min(900px,100%)!important;max-height:min(88dvh,900px)!important;
+  overflow:auto!important;overscroll-behavior:contain!important;
+  padding:clamp(18px,3vw,34px)!important;border:1px solid rgba(218,190,130,.48)!important;
+  border-radius:clamp(16px,2.2vw,26px)!important;
+  background:linear-gradient(155deg,rgba(12,31,32,.97),rgba(5,17,20,.98))!important;
+  color:#f2eee2!important;box-shadow:0 24px 90px rgba(0,0,0,.52)!important;
+}
+#app .tadabbur-dialog .tadabbur-head {display:flex!important;justify-content:space-between!important;align-items:flex-start!important;gap:16px!important;padding-bottom:14px!important;border-bottom:1px solid var(--fine)!important;}
+#app .tadabbur-dialog .tadabbur-head h2 {font:600 clamp(22px,3vw,34px)/1.2 var(--display)!important;margin:4px 0!important;color:var(--home-ink,#f4f0e6)!important;}
+#app .tadabbur-dialog .tadabbur-head p {font-size:clamp(14px,1.2vw,17px)!important;line-height:1.4!important;margin:6px 0 0!important;color:var(--home-muted,#c8c4b5)!important;}
+#app .tadabbur-dialog .tadabbur-status {font-size:clamp(12px,.95vw,14px)!important;line-height:1.45!important;margin:12px 0!important;color:var(--home-muted,#c8c4b5)!important;}
+#app .tadabbur-dialog .tadabbur-results {display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:clamp(12px,2vh,20px)!important;}
+#app .tadabbur-dialog .tadabbur-item {min-width:0!important;padding:clamp(12px,2vw,20px)!important;border:1px solid rgba(218,190,130,.25)!important;border-radius:14px!important;background:rgba(255,255,255,.035)!important;}
+#app .tadabbur-dialog .tadabbur-statement {font-size:clamp(17px,1.55vw,23px)!important;line-height:1.58!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;margin:0 0 12px!important;}
+#app .tadabbur-dialog .tadabbur-speaker {font-size:clamp(13px,1.05vw,16px)!important;line-height:1.5!important;color:#e4ca8e!important;overflow-wrap:anywhere!important;}
+#app .tadabbur-dialog .tadabbur-source {font-size:clamp(12px,.95vw,15px)!important;line-height:1.55!important;color:var(--home-muted,#c8c4b5)!important;overflow-wrap:anywhere!important;margin-top:8px!important;}
+@keyframes tadabbur-modal-in {from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media (max-width:520px) and (orientation:portrait) {
+  #app .tadabbur-modal:not([hidden]) {padding:10px!important;align-items:center!important;}
+  #app .tadabbur-dialog {max-height:90dvh!important;padding:17px!important;}
+}
+@media (max-width:700px) and (orientation:landscape) {
+  #app .tadabbur-modal:not([hidden]) {padding:8px 4vw!important;}
+  #app .tadabbur-dialog {max-height:92dvh!important;width:min(800px,100%)!important;padding:14px 20px!important;}
+  #app .tadabbur-dialog .tadabbur-results {gap:8px!important;}
+}
+@media (prefers-reduced-motion:reduce) {
+  #app .tadabbur-modal:not([hidden]) {animation:none!important;}
+}
+
+/* V16.1: Keep the HOME daily quote fixed in its slot; fitDailyText handles long copy. */
+#app .hero-right .daily-story {
+  overflow:hidden!important;
+  overflow-y:hidden!important;
+  overscroll-behavior:none!important;
+  scrollbar-width:none!important;
+}
+#app .hero-right .daily-story::-webkit-scrollbar { display:none!important; }
+
+/* Long German verse text is repeated in the reader-friendly Tadabbur dialog. */
+#app .tadabbur-dialog .tadabbur-verse-copy {font-size:clamp(16px,1.45vw,22px)!important;line-height:1.55!important;white-space:normal!important;overflow-wrap:anywhere!important;margin:10px 0 0!important;color:var(--home-ink,#f4f0e6)!important;}
+
+
+/* Responsive fitted wallpaper artwork for HOME and the screensaver.
+   The selected image is shown whole at its natural aspect ratio; a soft duplicate fills unused space. */
+#app .home-wallpaper{
+  position:absolute!important;inset:0!important;z-index:0!important;overflow:hidden!important;
+  background:none!important;pointer-events:none!important;isolation:isolate;
+}
+#app .home-wallpaper-backdrop,
+#saver .saver-wallpaper-backdrop,
+#app #adhanVisual .adhan-wallpaper-backdrop{
+  position:absolute;inset:-2.5%;background-position:center;background-size:cover;background-repeat:no-repeat;
+  filter:blur(20px) brightness(.52) saturate(.86);transform:scale(1.04);opacity:.78;pointer-events:none;
+}
+#app .home-wallpaper-fit,
+#saver .saver-wallpaper-fit,
+#app #adhanVisual .adhan-wallpaper-fit{
+  position:absolute;left:50%;top:50%;display:block;width:auto;height:auto;
+  max-width:100%;max-height:100%;object-fit:contain;object-position:center;
+  transform:translate(-50%,-50%);pointer-events:none;
+}
+#app .home-wallpaper-fit[hidden],
+#saver .saver-wallpaper-fit[hidden],
+#app #adhanVisual .adhan-wallpaper-fit[hidden],
+#app .home-wallpaper-backdrop[hidden],
+#saver .saver-wallpaper-backdrop[hidden],
+#app #adhanVisual .adhan-wallpaper-backdrop[hidden]{display:none!important}
+#app[data-wallpaper-active="true"] #homeWallpaper{background-image:none!important;background-size:auto!important}
+#app .home-view{
+  background-image:linear-gradient(115deg,rgba(3,16,19,.24),rgba(3,16,19,.10))!important;
+  background-position:center!important;background-size:100% 100%!important;background-repeat:no-repeat!important;
+  background-color:transparent!important;
+}
+#app[data-home-theme="light"] .home-view{
+  background-image:linear-gradient(115deg,rgba(243,241,231,.43),rgba(243,241,231,.24))!important;
+  background-color:transparent!important;
+}
+#saver{isolation:isolate;overflow:hidden}
+#saver .saver-wallpaper-backdrop{z-index:0}
+#saver .saver-wallpaper-fit{z-index:1}
+#saver::before{z-index:2!important}
+#saver .saver-content,#saver .saver-clock,#saver .saver-bottom{z-index:3!important}
+#app #adhanVisual{isolation:isolate;overflow:hidden;background-image:none!important}
+#app #adhanVisual .adhan-wallpaper-backdrop{z-index:0}
+#app #adhanVisual .adhan-wallpaper-fit{z-index:1}
+#app #adhanVisual #cinematicVideo{z-index:1}
+#app #adhanVisual::before{z-index:2}
+#app #adhanVisual .adhan-lower-third{z-index:3}
+#saver .saver-explanation{
+  max-width:78ch;margin:clamp(12px,2vh,24px) auto 0;padding-top:clamp(11px,1.8vh,20px);
+  border-top:1px solid var(--gold);text-align:left;overflow-wrap:anywhere;
+}
+#saver .saver-explanation-label{
+  margin:0 0 clamp(5px,.8vh,9px);color:var(--gold);font:700 clamp(12px,.92vw,16px)/1.35 var(--ui);
+  letter-spacing:.12em;text-transform:uppercase;
+}
+#saver .saver-explanation-text{
+  margin:0;color:var(--home-ink,#f4f0e6);font:400 clamp(15px,1.18vw,20px)/1.52 var(--ui);
+  overflow-wrap:anywhere;white-space:pre-wrap;
+}
+@media(max-width:700px){
+  #saver .saver-explanation{margin-top:12px;padding-top:10px}
+  #saver .saver-explanation-label{font-size:12px}
+  #saver .saver-explanation-text{font-size:clamp(14px,3.7vw,18px)}
+}
+@media(orientation:portrait){
+  #app .home-wallpaper-fit,#saver .saver-wallpaper-fit,#app #adhanVisual .adhan-wallpaper-fit{max-width:100%;max-height:100%}
+}
+
+/* Landscape-first fitted home; portrait keeps the quiet wallpaper-free standard. */
+@media(orientation:portrait){
+  #app .home-wallpaper,#app .home-wallpaper-backdrop,#app .home-wallpaper-fit,
+  #app .artwork,#app .lightgrading,#app .edge,#app .corner{display:none!important}
+  #app{background:#07191b!important;background-image:none!important}
+}
+@media(orientation:landscape){
+  #app .home-wallpaper-backdrop{inset:-3%!important;filter:blur(23px) brightness(.58) saturate(.9)!important;opacity:.9!important}
+  #app .home-wallpaper-fit,#app #adhanVisual .h4-prayer-image{
+    width:auto!important;height:auto!important;max-width:100%!important;max-height:100%!important;
+    object-fit:contain!important;object-position:center!important;
+  }
+}
+#app .home-nav button{
+  min-width:0!important;width:auto!important;min-height:38px;padding:5px clamp(10px,1.2vw,16px)!important;
+  display:flex;align-items:center;gap:7px;border:1px solid rgba(216,189,130,.72)!important;
+  border-radius:999px!important;background:transparent!important;color:var(--text)!important;
+}
+#app .home-nav button:hover,#app .home-nav button:focus-visible,#app .home-nav button[aria-current="page"]{
+  background:transparent!important;border-color:var(--gold)!important;color:var(--cream)!important;
+}
+#app .topbtn{
+  border-radius:999px!important;background:transparent!important;border:1px solid var(--gold)!important;
+}
+@media(orientation:landscape){
+  #app .top{display:grid!important;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;align-items:center}
+  #app .logo{grid-column:1;justify-self:start;min-width:0}
+  #app .top .home-nav{
+    grid-column:2;position:relative!important;left:auto!important;top:auto!important;transform:none!important;
+    justify-self:center;width:max-content!important;max-width:100%!important;overflow:visible!important;
+    margin:0 auto;gap:clamp(4px,.8vw,12px)!important;
+  }
+  #app .top-spacer{display:none!important}
+  #app .time-box{grid-column:3;justify-self:end}
+}
+#app .nightstand-launch{
+  display:inline-flex;align-items:center;justify-content:center;min-height:24px;margin-top:4px;padding:2px 10px;
+  border:1px solid rgba(216,189,130,.78);border-radius:999px;background:transparent;color:var(--cream);
+  font:600 clamp(9px,.72vw,12px)/1.2 var(--ui);letter-spacing:.04em;
+}
+#app .nightstand-launch:hover,#app .nightstand-launch:focus-visible{background:transparent;border-color:var(--gold);outline-color:var(--gold)}
+#nightstandView[hidden]{display:none!important}
+#nightstandView{
+  position:absolute;inset:0;z-index:25;display:grid;place-items:center;overflow:hidden;
+  padding:clamp(14px,4vw,48px);background:#030708;color:#eee8d9;text-align:center;
+}
+.nightstand-shell{width:min(100%,760px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(5px,1.5vh,16px)}
+.nightstand-brand{color:#ae9360;font:600 clamp(10px,1vw,14px)/1.4 var(--ui);letter-spacing:.22em}
+.nightstand-time{color:#e9e2d2;font:400 clamp(68px,14vw,142px)/.98 var(--display);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.nightstand-date{color:#c2bba9;font:500 clamp(12px,1.35vw,18px)/1.4 var(--ui)}
+.nightstand-divider{width:min(220px,45vw);height:1px;background:rgba(195,166,111,.58);margin:clamp(4px,.8vh,9px) 0}
+.nightstand-caption{color:#a9956d;font:700 clamp(10px,.9vw,13px)/1.4 var(--ui);letter-spacing:.22em}
+.nightstand-prayer{color:#eee8d9;font:500 clamp(28px,5vw,50px)/1.1 var(--display)}
+.nightstand-prayer-row{display:flex;align-items:baseline;justify-content:center;gap:clamp(14px,4vw,36px);color:#d4c8ae;font:500 clamp(17px,2.4vw,27px)/1.3 var(--ui);font-variant-numeric:tabular-nums}
+.nightstand-exit{margin-top:clamp(10px,2vh,22px);min-height:38px;padding:5px 17px;border:1px solid rgba(195,166,111,.55);border-radius:999px;background:transparent;color:#e8dfca;font:600 12px var(--ui)}
+#app #adhanVisual{z-index:35!important}
+#app #adhanVisual .h4-prayer-image{object-fit:contain!important;object-position:center!important}
+@media(max-width:700px) and (max-height:440px) and (orientation:landscape){
+  #app .screen{
+    grid-template-rows:auto minmax(0,1fr) auto minmax(48px,auto) auto!important;
+    gap:3px!important;padding:6px 9px 5px!important;overflow:hidden!important;
+  }
+  #app header{grid-template-rows:auto auto auto auto!important;gap:2px!important}
+  #app .top{min-height:34px!important;gap:4px!important}
+  #app .logo{gap:5px!important}
+  #app .logo-mark{width:29px!important;height:29px!important}
+  #app .brand-title{font-size:clamp(12px,2.5vw,17px)!important;letter-spacing:.08em!important;white-space:nowrap}
+  #app .brand-mini,#app .site{display:none!important}
+  #app .top .home-nav{gap:3px!important}
+  #app .home-nav button{min-height:30px!important;padding:2px 7px!important;gap:4px!important;font-size:clamp(8px,1.4vw,10px)!important;white-space:nowrap}
+  #app .home-nav button img{width:15px!important;height:15px!important}
+  #app .topbtn{width:34px!important;height:30px!important;min-width:34px!important;min-height:30px!important}
+  #app .header-meta{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:2px 6px!important;margin:0!important;padding:3px 5px!important}
+  #app .header-meta>div{min-width:0!important}
+  #app .header-meta>div span{font-size:7px!important;letter-spacing:.07em!important}
+  #app .header-meta>div strong{font-size:9px!important;white-space:nowrap}
+  #app .header-meta .now{font-size:14px!important}
+  #app .nightstand-launch{min-height:17px!important;margin-top:1px!important;padding:1px 6px!important;font-size:8px!important}
+  #app .top-rule{margin-top:2px!important}
+  #app .hero{grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr)!important;grid-template-rows:minmax(0,1fr)!important;min-height:0!important;gap:8px!important}
+  #app .hero-left,#app .hero-right{min-width:0!important;min-height:0!important;padding:3px 5px!important}
+  #app .overline{font-size:8px!important;letter-spacing:.09em!important}
+  #app .next-name{font-size:clamp(27px,6vh,42px)!important;line-height:1!important;margin:2px 0!important}
+  #app .next-row{gap:7px!important;flex-wrap:wrap}
+  #app .main-time{font-size:clamp(22px,5vh,32px)!important}
+  #app .counter{font-size:clamp(10px,2.4vh,13px)!important}
+  #app .hero-right{border-left:1px solid var(--fine)!important;border-top:0!important;text-align:left!important;overflow:hidden!important}
+  #app .daily-story{max-height:100%!important;overflow:hidden!important;padding:1px 5px!important}
+  #app .daily-label{font-size:8px!important}
+  #app .daily-title{font-size:clamp(12px,2.8vh,16px)!important}
+  #app .daily-de{font-size:clamp(10px,2.5vh,14px)!important;line-height:1.25!important}
+  #app .source{font-size:8px!important}
+  #app .tadabbur-open{min-height:23px!important;padding:2px 7px!important;font-size:9px!important}
+  #app .times-band{padding:3px 0!important}
+  #app .band-head{margin:0 0 3px!important;font-size:8px!important}
+  #app .prayer-cell{min-height:33px!important;padding:2px 1px!important;gap:1px!important}
+  #app .prayer-cell .pname{font-size:8px!important}
+  #app .prayer-cell .ptime{font-size:clamp(15px,3.7vh,21px)!important}
+  #app .sunrise-line{font-size:8px!important;margin:2px 0 0!important}
+  #app .daily-area{grid-template-columns:minmax(0,1fr) minmax(0,.8fr)!important;min-height:48px!important;gap:5px!important}
+  #app .daily-area .audio-area{min-height:44px!important;padding:3px 7px!important;gap:3px!important}
+  #app .audio-title{font-size:15px!important}
+  #app .audio-kicker,#app .audio-sub,#app .audiosmall{display:none!important}
+  #app .audio-controls{gap:3px!important;margin:0!important}
+  #app .round{width:27px!important;height:27px!important}
+  #app .round.primary{width:30px!important;height:30px!important}
+  #app .foot{min-height:12px!important;padding-top:0!important}
+  #app .foot .status{display:none!important}
+  #app .settings-frame{padding:7px!important;gap:5px!important;grid-template-columns:minmax(90px,23%) minmax(0,1fr)!important;grid-template-rows:auto minmax(0,1fr) auto!important}
+  #app .settings-top{min-height:34px!important;padding-bottom:4px!important}
+  #app .settings-top h2{font-size:20px!important}
+  #app .settings-tabs{overflow:auto!important}
+  #app .settings-tabs button{min-height:28px!important;padding:4px 5px!important;font-size:10px!important}
+  #app .tabpage{overflow:auto!important;min-height:0!important}
+  #nightstandView{padding:8px}
+  .nightstand-shell{gap:4px}
+  .nightstand-time{font-size:clamp(56px,17vh,92px)}
+}
+
+
+/* Small landscape viewports use the actual viewport height, not the 360px desktop minimum. */
+@media(max-width:700px) and (max-height:440px) and (orientation:landscape){
+  #app{height:100dvh!important;min-height:0!important}
+  #app .screen{height:100%!important;min-height:0!important;grid-template-rows:auto minmax(0,1fr) auto minmax(50px,auto) auto!important}
+  #app .home-nav button{min-height:44px!important;padding:3px 7px!important;font-size:9px!important}
+  #app .home-nav button img{width:15px!important;height:15px!important}
+  #app .topbtn{width:48px!important;height:44px!important;min-width:48px!important;min-height:44px!important}
+  #app .audio-title{font-size:16px!important}
+  #app .audio-area{min-height:48px!important}
+  #app .source{font-size:12px!important}
+  #app .counter{font-size:14px!important}
+  #app .prayer-cell .ptime{font-size:19px!important}
+}
+#app #adhanVisual .h4-prayer-image{
+  position:absolute!important;left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;
+  width:auto!important;height:auto!important;max-width:100%!important;max-height:100%!important;
+  transform:translate(-50%,-50%)!important;object-fit:contain!important;object-position:center!important;z-index:1!important;
+}
+#app #adhanVisual .adhan-wallpaper-backdrop{inset:-3%!important;filter:blur(22px) brightness(.56) saturate(.9)!important;opacity:.9!important}
+
+
+/* Reserve a readable header row in short landscape layouts and keep the reading/player row inside its grid track. */
+#app .daily-area{align-items:stretch!important;min-height:0!important}
+#app .daily-area .audio-area{height:100%!important;max-height:100%!important;min-height:0!important;align-self:stretch!important;box-sizing:border-box!important;overflow:hidden!important}
+@media(max-width:700px) and (max-height:440px) and (orientation:landscape){
+  #app header{grid-template-rows:44px minmax(20px,auto) 1px!important;align-content:start!important;gap:2px!important;min-height:0!important}
+  #app .top{height:44px!important;min-height:44px!important}
+  #app .hero{min-height:0!important}
+  #app .hero-left{overflow:hidden!important}
+  #app .hero-left .overline{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:5px!important}
+  #app .hero-left .overline>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #app .nightstand-launch{flex:none;min-height:26px!important;margin:0!important;padding:2px 8px!important;font-size:9px!important}
+  #app .daily-area .audio-area{min-height:48px!important}
+  #app .audio-title{font-size:16px!important}
+  #app .source{font-size:12px!important}
+  #app .counter{font-size:14px!important}
+  #app .prayer-cell .ptime{font-size:19px!important}
+}
+@media(max-height:200px) and (orientation:landscape){
+  #app .screen{grid-template-rows:auto minmax(32px,1fr) auto 44px 0!important;gap:1px!important;padding:2px 6px!important}
+  #app header{grid-template-rows:44px 18px 1px!important;gap:1px!important}
+  #app .header-meta{padding:1px 4px!important}
+  #app .header-meta>div span{font-size:6px!important}
+  #app .header-meta>div strong{font-size:8px!important}
+  #app .header-meta .now{font-size:12px!important}
+  #app .hero{min-height:32px!important}
+  #app .next-name{font-size:20px!important}
+  #app .main-time{font-size:17px!important}
+  #app .counter{font-size:11px!important}
+  #app .times-band{padding:1px 0!important}
+  #app .prayer-cell{min-height:28px!important}
+  #app .prayer-cell .pname{font-size:7px!important}
+  #app .prayer-cell .ptime{font-size:14px!important}
+  #app .daily-area{min-height:44px!important}
+  #app .daily-area .audio-area{min-height:44px!important}
+  #app .audio-title{font-size:12px!important}
+  #app .source{font-size:9px!important}
+  #app .foot{display:none!important}
+}
+
+
+@media(max-width:700px) and (max-height:440px) and (orientation:landscape){
+  #app .screen{align-content:stretch!important}
+  #app .top .home-nav{position:fixed!important;left:50vw!important;top:clamp(3px,1vh,9px)!important;transform:translateX(-50%)!important;margin:0!important;z-index:12!important}
+}
+@media(max-height:200px) and (orientation:landscape){
+  #app .audio-title{font-size:14px!important}
+  #app .source{font-size:10px!important}
+  #app .counter{font-size:12px!important}
+  #app .prayer-cell .ptime{font-size:16px!important}
+}
+
+/* Final short-landscape geometry: reserve the editorial and player rows explicitly. */
+@media(max-width:700px) and (max-height:440px) and (orientation:landscape){
+  #app .top .home-nav{
+    position:absolute!important;left:calc(50% + clamp(32px,4.8vw,38px))!important;top:50%!important;
+    transform:translate(-50%,-50%)!important;z-index:12!important;
+  }
+  #app .screen{
+    grid-template-rows:minmax(64px,auto) minmax(60px,1fr) minmax(34px,auto) 44px 0!important;
+    align-content:stretch!important;gap:3px!important;padding:5px 9px!important;
+  }
+  #app header{grid-template-rows:44px 17px 1px!important;gap:1px!important}
+  #app .top{height:44px!important;min-height:44px!important}
+  #app .header-meta{height:17px!important;min-height:17px!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:2px 5px!important;padding:0 4px!important}
+  #app .header-meta>div{display:flex!important;flex-direction:row!important;align-items:baseline!important;gap:3px!important;white-space:nowrap}
+  #app .header-meta>div span{font-size:6px!important;letter-spacing:.04em!important}
+  #app .header-meta>div strong{font-size:8px!important}
+  #app .header-meta .now{font-size:12px!important}
+  #app .hero{min-height:60px!important;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important}
+  #app .daily-area{height:44px!important;min-height:44px!important}
+  #app .daily-area .audio-area{height:44px!important;max-height:44px!important;min-height:44px!important}
+  #app .foot{display:none!important}
+}
+@media(max-height:200px) and (orientation:landscape){
+  #app .screen{grid-template-rows:58px 42px 28px 38px 0!important;gap:1px!important;padding:2px 4px!important}
+  #app header{grid-template-rows:44px 12px 1px!important}
+  #app .header-meta{height:12px!important;min-height:12px!important}
+  #app .header-meta>div span{font-size:5px!important}
+  #app .header-meta>div strong{font-size:7px!important}
+  #app .header-meta .now{font-size:11px!important}
+  #app .hero{min-height:42px!important}
+  #app .hero-left,#app .hero-right{padding:1px 3px!important}
+  #app .hero-left .overline{font-size:7px!important}
+  #app .nightstand-launch{min-height:22px!important;padding:1px 5px!important}
+  #app .next-name{font-size:19px!important}
+  #app .main-time{font-size:15px!important}
+  #app .times-band{padding:0!important}
+  #app .prayer-cell{min-height:27px!important}
+  #app .prayer-cell .pname{font-size:6px!important}
+  #app .prayer-cell .ptime{font-size:13px!important}
+  #app .daily-area,#app .daily-area .audio-area{height:38px!important;min-height:38px!important;max-height:38px!important}
+  #app .audio-title{font-size:14px!important}
+}
+#app .topbtn{width:52px!important;height:44px!important;min-width:52px!important;min-height:44px!important;padding:0!important;display:grid!important;place-items:center!important}
+
+@media(max-width:700px) and (max-height:440px) and (orientation:landscape){#app .home-nav button{height:44px!important;min-height:44px!important;box-sizing:border-box!important;font-size:10px!important}}
+
+
+/* Landscape-first home polish: full canvas artwork, centered oval navigation, simple portrait fallback. */
+@media (orientation: portrait) {
+  #app .home-wallpaper,
+  #app .home-wallpaper-backdrop,
+  #app .home-wallpaper-fit,
+  #app .artwork,
+  #app .lightgrading,
+  #app .edge,
+  #app .corner {
+    display: none !important;
+  }
+  #app {
+    background: #07191b !important;
+    background-image: none !important;
+  }
+}
+
+@media (orientation: landscape) {
+  #app .home-wallpaper {
+    overflow: hidden !important;
+    background: #07191b !important;
+  }
+  #app .home-wallpaper-backdrop {
+    inset: -4% !important;
+    background-position: center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    filter: blur(24px) brightness(.58) saturate(.9) !important;
+    opacity: .96 !important;
+  }
+  #app .home-wallpaper-fit,
+  #app #adhanVisual .h4-prayer-image {
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+}
+
+/* Keep the three primary actions visually centered even on short iPhone landscape screens. */
+#app .top {
+  position: relative !important;
+}
+#app .top .home-nav {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 12 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: max-content !important;
+  max-width: calc(100% - 128px) !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+  margin: 0 !important;
+  gap: clamp(4px, .8vw, 12px) !important;
+}
+#app .home-nav button {
+  min-width: 0 !important;
+  width: auto !important;
+  min-height: 38px !important;
+  padding: 5px clamp(9px, 1.1vw, 15px) !important;
+  border: 1px solid rgba(216,189,130,.72) !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  display: flex !important;
+  flex: 0 1 auto !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  white-space: nowrap !important;
+}
+#app .home-nav button[aria-current="page"],
+#app .home-nav button:hover,
+#app .home-nav button:focus-visible {
+  background: transparent !important;
+  border-color: var(--gold) !important;
+}
+#app .topbtn {
+  background: transparent !important;
+  border-radius: 999px !important;
+  display: grid !important;
+  place-items: center !important;
+}
+@media (max-width: 700px) and (max-height: 440px) and (orientation: landscape) {
+  #app .top .home-nav {
+    left: 50% !important;
+    top: 50% !important;
+    max-width: calc(100% - 126px) !important;
+  }
+  #app .home-nav button {
+    min-height: 36px !important;
+    height: 36px !important;
+    padding: 3px 7px !important;
+    font-size: 9px !important;
+  }
+  #app .home-nav button img {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  #app .topbtn {
+    width: 38px !important;
+    min-width: 38px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+  }
+}
+
+
+/* Final shared control system: one silhouette and footprint for navigation and settings. */
+#app .top .home-nav button,
+#app .top .time-box .topbtn {
+  width:clamp(68px,7.8vw,92px)!important;
+  min-width:clamp(68px,7.8vw,92px)!important;
+  height:48px!important;
+  min-height:48px!important;
+  max-height:48px!important;
+  box-sizing:border-box!important;
+  border:1px solid rgba(216,189,130,.72)!important;
+  border-radius:999px!important;
+  background:transparent!important;
+  padding:2px 4px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex:0 0 auto!important;
+}
+#app .top .home-nav button {
+  flex-direction:column!important;
+  gap:1px!important;
+  line-height:1!important;
+}
+#app .top .home-nav button img {
+  display:block!important;
+  width:24px!important;
+  height:24px!important;
+  flex:none!important;
+  object-fit:contain!important;
+  margin:0!important;
+}
+#app .top .home-nav button span {
+  display:block!important;
+  max-width:100%!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  font-size:clamp(9px,.72vw,11px)!important;
+  line-height:1!important;
+}
+#app .top .time-box .topbtn .icon {
+  width:23px!important;
+  height:23px!important;
+}
+#app .top .home-nav { gap:clamp(3px,.55vw,8px)!important; }
+
+@media (orientation:portrait) {
+  #app .top {
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) clamp(68px,21vw,92px)!important;
+    grid-template-rows:44px 48px!important;
+    align-items:center!important;
+    align-content:center!important;
+    column-gap:4px!important;
+    row-gap:3px!important;
+    min-height:98px!important;
+    height:98px!important;
+    position:relative!important;
+  }
+  #app .top .logo { grid-column:1!important;grid-row:1!important;min-width:0!important; }
+  #app .top .time-box {
+    grid-column:2!important;
+    grid-row:1!important;
+    justify-self:end!important;
+    min-width:0!important;
+    margin:0!important;
+  }
+  #app .top .top-spacer { display:none!important; }
+  #app .top .home-nav {
+    position:static!important;
+    inset:auto!important;
+    grid-column:1 / -1!important;
+    grid-row:2!important;
+    justify-self:center!important;
+    transform:none!important;
+    width:max-content!important;
+    max-width:100%!important;
+    margin:0!important;
+  }
+  #app .top .home-nav button,
+  #app .top .time-box .topbtn {
+    width:clamp(68px,19vw,92px)!important;
+    min-width:clamp(68px,19vw,92px)!important;
+  }
+  #app .screen { gap:clamp(6px,1.2vh,12px)!important; }
+}
+@media (max-height:200px) and (orientation:landscape) {
+  #app .top .home-nav button,
+  #app .top .time-box .topbtn {
+    width:clamp(60px,9vw,70px)!important;
+    min-width:clamp(60px,9vw,70px)!important;
+    height:42px!important;
+    min-height:42px!important;
+    max-height:42px!important;
+  }
+  #app .top .home-nav button img { width:19px!important;height:19px!important; }
+  #app .top .home-nav button span { font-size:8px!important; }
+}
+
+
+/* Qur'an reader: clear verse position, adaptive text columns and stable reading controls. */
+#app .quran-reader-shell{overscroll-behavior:contain;scrollbar-gutter:stable}
+#app .quran-reader-position{display:grid;grid-template-columns:minmax(150px,auto) minmax(80px,1fr);align-items:center;gap:clamp(12px,2vw,24px);padding:14px 0;border-bottom:1px solid var(--home4-hair)}
+#app .quran-reader-position-label{color:#e6d4ae;font:600 clamp(12px,1vw,15px)/1.4 var(--ui);font-variant-numeric:tabular-nums;white-space:nowrap}
+#app .quran-reader-progress{height:5px;min-width:0;overflow:hidden;border-radius:999px;background:rgba(216,189,130,.18)}
+#app .quran-reader-progress-fill{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#a98b54,#e2c985);transition:width .22s ease}
+#app .quran-reader-columns{align-items:start}
+#app .reader-column{overflow-wrap:anywhere}
+#app #readerArabic,#app #readerGerman{overflow-wrap:anywhere}
+#app #readerArabic{max-width:100%;text-wrap:pretty}
+#app #readerGerman{max-width:70ch;text-wrap:pretty}
+#app .quran-reader-footer{z-index:4;flex-wrap:wrap}
+#app .reader-playback{flex-wrap:wrap}
+#app .reader-note{min-height:1.3em}
+#app .theme-ivory .quran-reader-position-label{color:#34483a}
+#app .theme-ivory .quran-reader-progress{background:rgba(73,107,85,.18)}
+#app .theme-ivory .quran-reader-progress-fill{background:#496b55}
+@media(max-width:720px),(orientation:portrait){
+  #app .quran-reader-position{grid-template-columns:1fr;gap:8px;padding:10px 0}
+  #app .quran-reader-position-label{white-space:normal}
+  #app .quran-reader-columns{gap:16px;padding:16px 0}
+  #app .reader-column{padding-inline:clamp(4px,2vw,12px)}
+  #app #readerArabic{font-size:clamp(28px,7vw,42px);line-height:1.8}
+  #app #readerGerman{font-size:clamp(17px,4.4vw,21px);line-height:1.65}
+  #app .quran-reader-footer{position:sticky;bottom:0;gap:8px;padding:9px 0}
+  #app .reader-playback{gap:7px}
+  #app .reader-step,#app .reader-play,#app .reader-home{min-height:42px;padding:9px 12px}
+}
+@media(max-width:380px){
+  #app .quran-reader-actions{gap:7px}
+  #app .reader-control select{min-width:0;width:min(38vw,170px)}
+  #app .quran-reader-footer{justify-content:center}
+  #app .reader-check,#app .reader-home{font-size:12px}
+}
+
+
+/* Reader frame: reserve a dedicated scroll region so long verses never sit beneath controls. */
+#app .quran-reader-shell{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;overflow:hidden}
+#app .quran-reader-content{min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding-bottom:8px}
+#app .quran-reader-footer{position:relative;inset:auto;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"playback playback" "toggle home";align-items:center;gap:8px 12px;flex-wrap:initial;padding:10px 0 0;background:rgba(7,26,29,.98);border-top:1px solid var(--home4-hair)}
+#app .reader-playback{grid-area:playback;justify-content:center}
+#app .reader-check{grid-area:toggle;min-width:0}
+#app .reader-home{grid-area:home;justify-self:end;white-space:nowrap}
+#app .reader-note{margin:4px 0 10px;min-height:1.3em}
+#app .theme-ivory .quran-reader-footer{background:#f0eee6}
+@media(max-width:720px),(orientation:portrait){
+  #app .quran-reader-shell{grid-template-rows:auto auto minmax(0,1fr) auto}
+  #app .quran-reader-footer{gap:7px 8px;padding-top:8px}
+  #app .reader-playback{gap:6px}
+}
+
+
+/* Keep the reader's playback controls inside the viewport while verses scroll independently. */
+#app .quran-reader-shell{display:flex!important;flex-direction:column!important;height:100%!important;min-height:0!important;overflow:hidden!important}
+#app .quran-reader-head,#app .quran-reader-position,#app .quran-reader-footer{flex:0 0 auto!important}
+#app .quran-reader-content{flex:1 1 0%!important;min-height:0!important;max-height:100%!important;overflow-y:auto!important;overscroll-behavior:contain}
+
+
+@media(max-width:720px),(orientation:portrait){
+  #app .quran-reader-head{gap:12px!important;padding-bottom:10px!important}
+  #app .quran-reader-head h2{margin:2px 0!important}
+  #app .quran-reader-position{padding:8px 0!important}
+  #app .quran-reader-columns{gap:10px!important;padding:10px 0!important}
+  #app .reader-arabic{padding-bottom:10px!important}
+  #app #readerArabic{font-size:clamp(24px,5.6vw,36px)!important;line-height:1.65!important}
+  #app #readerGerman{font-size:clamp(17px,3.1vw,19px)!important;line-height:1.5!important}
+}
+
+
+/* Responsive repair: center navigation in the viewport and prevent short-landscape row collisions. */
+#app .top .home-nav{
+  position:fixed!important;
+  left:50vw!important;
+  top:clamp(22px,5vh,56px)!important;
+  transform:translate(-50%,-50%)!important;
+  width:max-content!important;
+  max-width:calc(100vw - 128px)!important;
+  min-width:0!important;
+  z-index:20!important;
+}
+@media(max-width:700px) and (max-height:440px) and (orientation:landscape){
+  #app .top .home-nav{
+    position:fixed!important;left:50vw!important;top:22px!important;
+    transform:translate(-50%,-50%)!important;
+    width:max-content!important;max-width:calc(100vw - 128px)!important;
+  }
+  #app .screen{
+    grid-template-rows:50px minmax(30px,1fr) 32px 44px 0!important;
+    gap:1px!important;padding:2px 4px!important;align-content:stretch!important;
+  }
+  #app header{grid-template-rows:33px 15px 1px!important;gap:1px!important;min-height:0!important}
+  #app .top{height:33px!important;min-height:33px!important}
+  #app .top .home-nav button,#app .top .time-box .topbtn{
+    width:44px!important;min-width:44px!important;height:36px!important;min-height:36px!important;max-height:36px!important;
+  }
+  #app .top .home-nav button img{width:15px!important;height:15px!important}
+  #app .top .home-nav button span{font-size:8px!important}
+  #app .top .time-box .topbtn .icon{width:17px!important;height:17px!important}
+  #app .header-meta{height:15px!important;min-height:15px!important;padding:0 2px!important;gap:2px!important}
+  #app .header-meta>div span{font-size:5px!important;letter-spacing:0!important}
+  #app .header-meta>div strong{font-size:7px!important}
+  #app .header-meta .now{font-size:10px!important}
+  #app .hero{min-height:30px!important;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important}
+  #app .hero-left,#app .hero-right{min-height:0!important;padding:1px 3px!important}
+  #app .hero-left .overline{font-size:7px!important;line-height:1!important}
+  #app .nightstand-launch{display:none!important}
+  #app .next-name{font-size:20px!important;line-height:1!important;margin:1px 0!important}
+  #app .next-row{gap:8px!important}
+  #app .main-time{font-size:16px!important}
+  #app .counter{font-size:14px!important;line-height:1!important}
+  #app .daily-area{height:44px!important;min-height:44px!important;max-height:44px!important}
+  #app .daily-area .audio-area{
+    height:44px!important;min-height:44px!important;max-height:44px!important;
+    display:grid!important;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:20px 20px;
+    grid-template-areas:"title controls" "source controls";align-content:center;align-items:center;
+    gap:0 6px!important;padding:1px 5px!important;overflow:hidden!important;
+  }
+  #app .audio-kicker{display:none!important}
+  #app .audio-title-button{grid-area:title;min-width:0!important;max-width:100%!important;overflow:hidden!important}
+  #app .audio-title{display:block!important;font-size:16px!important;line-height:18px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #app .audio-sub{grid-area:source;display:block!important;font-size:10px!important;line-height:12px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #app .audio-controls{grid-area:controls;display:flex!important;align-items:center!important;gap:3px!important}
+  #app .audio-controls .round{width:24px!important;height:24px!important;min-width:24px!important;min-height:24px!important;padding:2px!important}
+  #app .audio-controls .round .icon{width:15px!important;height:15px!important}
+  #app .audiosmall{display:none!important}
+  #app .times-band{height:32px!important;min-height:32px!important;max-height:32px!important;padding:0!important;overflow:hidden!important}
+  #app .times-band .band-head,#app .times-band .sunrise-line{display:none!important}
+  #app .times{height:100%!important;min-height:0!important;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:center!important;gap:1px!important}
+  #app .prayer-cell{height:30px!important;min-height:30px!important;padding:0 1px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;gap:0!important}
+  #app .prayer-cell .pname{font-size:8px!important;line-height:10px!important}
+  #app .prayer-cell .ptime{font-size:19px!important;line-height:20px!important}
+  #app .daily-label{font-size:7px!important;line-height:1!important}
+  #app .daily-title{display:none!important}
+  #app .daily-de{font-size:18px!important;line-height:1.1!important;display:-webkit-box!important;-webkit-line-clamp:1!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+  #app .source{font-size:12px!important;line-height:1.1!important}
+  #app .tadabbur-open{display:none!important}
+  #app .foot{display:none!important}
+}
+
+
+/* Place navigation in the header's center grid track, independent of transforms and safe-area offsets. */
+@media (orientation:landscape){
+  #app .top{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) max-content minmax(0,1fr)!important;
+    align-items:center!important;
+  }
+  #app .top .logo{grid-column:1!important;grid-row:1!important;min-width:0!important}
+  #app .top .home-nav{
+    position:relative!important;inset:auto!important;left:auto!important;top:auto!important;
+    transform:none!important;grid-column:2!important;grid-row:1!important;
+    justify-self:center!important;width:max-content!important;max-width:calc(100vw - 128px)!important;
+  }
+  #app .top .top-spacer{display:none!important}
+  #app .top .time-box{grid-column:3!important;grid-row:1!important;justify-self:end!important}
+}
+@media(max-width:700px) and (max-height:440px) and (orientation:landscape){
+  #app .top{grid-template-columns:minmax(0,1fr) max-content minmax(0,1fr)!important}
+  #app .top .home-nav{position:relative!important;inset:auto!important;left:auto!important;top:auto!important;transform:none!important;justify-self:center!important}
+  #app .top .home-nav button{
+    width:44px!important;min-width:44px!important;height:36px!important;min-height:36px!important;max-height:36px!important;
+    padding:1px!important;gap:0!important;
+  }
+  #app .top .home-nav button img{width:15px!important;height:15px!important}
+  #app .top .home-nav button span{font-size:8px!important}
+  #app .source{line-height:1.2!important}
+}
+
+
+/* Adaptive Adhan overlay: scale its text, margins and action to the available viewport. */
+#app #adhanVisual{
+  --adhan-edge-x:clamp(12px,min(3.4vw,4vh),64px);
+  --adhan-edge-y:clamp(12px,min(3vw,4vh),56px);
+  --adhan-copy-size:clamp(15px,min(1.35vw,2.3vh),24px);
+  --adhan-action-size:clamp(13px,min(.95vw,1.8vh),18px);
+  --adhan-action-height:clamp(44px,min(6vh,3.6vw),62px);
+  --adhan-action-pad:clamp(12px,1.25vw,24px);
+  background-color:#061b21!important;
+}
+#app #adhanVisual::before{
+  background:linear-gradient(180deg,rgba(1,10,15,.10) 0%,rgba(1,10,15,0) 42%,rgba(1,10,15,.04) 64%,rgba(1,10,15,.60) 100%)!important;
+}
+#app #adhanVisual .adhan-lower-third{
+  position:absolute!important;left:max(var(--adhan-edge-x),env(safe-area-inset-left))!important;
+  right:max(var(--adhan-edge-x),env(safe-area-inset-right))!important;
+  bottom:max(var(--adhan-edge-y),env(safe-area-inset-bottom))!important;width:auto!important;max-width:none!important;
+  min-width:0!important;padding:0!important;margin:0!important;display:flex!important;flex-flow:row nowrap!important;
+  align-items:flex-end!important;justify-content:space-between!important;gap:clamp(10px,1.6vw,28px)!important;
+  background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+#app #adhanVisual .adhan-title{
+  min-width:0!important;margin:0!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;
+  font-size:clamp(26px,min(5vw,5.4vh),76px)!important;line-height:1.04!important;letter-spacing:.01em!important;
+  text-shadow:0 2px 14px rgba(0,0,0,.7)!important;overflow-wrap:anywhere!important;
+}
+#app #adhanVisual.active[data-prayer-key]:not([data-prayer-key="test"]) .adhan-title{display:none!important}
+#app #adhanVisual .adhan-sub{
+  min-width:0!important;margin:0!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;
+  color:#f5eedc!important;font-size:var(--adhan-copy-size)!important;line-height:1.3!important;letter-spacing:.015em!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.8)!important;overflow-wrap:anywhere!important;
+}
+#app #adhanVisual .touchbutton{
+  flex:0 0 auto!important;min-width:0!important;width:auto!important;
+  min-height:var(--adhan-action-height)!important;height:auto!important;max-height:none!important;
+  padding:0 var(--adhan-action-pad)!important;
+  background:rgba(3,18,23,.24)!important;border:1px solid rgba(234,210,159,.84)!important;
+  border-radius:999px!important;box-shadow:none!important;backdrop-filter:blur(3px)!important;
+  color:#fff9e8!important;font-size:var(--adhan-action-size)!important;line-height:1.2!important;
+  white-space:nowrap!important;
+}
+@media(orientation:portrait){
+  #app #adhanVisual{
+    --adhan-edge-x:clamp(16px,min(5vw,4vh),48px);
+    --adhan-edge-y:clamp(16px,min(4vh,5vw),52px);
+    --adhan-copy-size:clamp(15px,min(4.5vw,2.2vh),24px);
+    --adhan-action-size:clamp(13px,min(4vw,1.9vh),18px);
+    --adhan-action-height:clamp(44px,min(6vh,14vw),56px);
+    --adhan-action-pad:clamp(14px,4vw,24px);
+  }
+  #app #adhanVisual .adhan-lower-third{
+    align-items:flex-start!important;flex-flow:column nowrap!important;
+    justify-content:flex-end!important;gap:clamp(8px,1.4vh,16px)!important;
+  }
+}
+@media(max-width:700px) and (max-height:440px) and (orientation:landscape){
+  #app #adhanVisual{
+    --adhan-edge-x:clamp(12px,3vw,22px);
+    --adhan-edge-y:clamp(12px,3.4vh,18px);
+    --adhan-copy-size:clamp(15px,min(2.7vw,5vh),18px);
+    --adhan-action-size:clamp(13px,min(2.2vw,4.2vh),16px);
+    --adhan-action-height:44px;
+    --adhan-action-pad:clamp(12px,2.5vw,18px);
+  }
+  #app #adhanVisual .adhan-lower-third{gap:clamp(8px,2vw,14px)!important}
+}
+@media(min-width:1600px) and (min-height:900px){
+  #app #adhanVisual{--adhan-edge-x:clamp(48px,4vw,96px);--adhan-edge-y:clamp(36px,4vh,72px)}
+}
+
+
+/* Portrait header repair: keep primary navigation inside the header and above prayer content. */
+@media (orientation:portrait) {
+  #app header {
+    grid-template-rows:auto auto auto!important;
+    gap:clamp(4px,.65vh,7px)!important;
+  }
+  #app .top {
+    position:relative!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    grid-template-rows:48px 48px!important;
+    align-content:start!important;
+    align-items:center!important;
+    column-gap:clamp(6px,1.8vw,12px)!important;
+    row-gap:2px!important;
+    height:auto!important;
+    min-height:98px!important;
+  }
+  #app .top .logo {
+    grid-column:1!important;grid-row:1!important;min-width:0!important;
+  }
+  #app .top .time-box {
+    grid-column:2!important;grid-row:1!important;justify-self:end!important;
+    min-width:0!important;margin:0!important;
+  }
+  #app .top .top-spacer {display:none!important}
+  #app .top .home-nav {
+    position:relative!important;inset:auto!important;left:auto!important;top:auto!important;
+    grid-column:1 / -1!important;grid-row:2!important;justify-self:center!important;
+    transform:none!important;width:max-content!important;max-width:100%!important;
+    min-height:48px!important;margin:0!important;padding:0!important;
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    gap:clamp(3px,1vw,7px)!important;overflow:visible!important;
+  }
+  #app .top .home-nav button {
+    box-sizing:border-box!important;
+    width:clamp(64px,19vw,82px)!important;min-width:clamp(64px,19vw,82px)!important;
+    height:48px!important;min-height:48px!important;max-height:48px!important;
+    padding:2px 3px!important;gap:1px!important;
+  }
+  #app .top .home-nav button img {
+    width:clamp(18px,5vw,23px)!important;height:clamp(18px,5vw,23px)!important;
+  }
+  #app .top .home-nav button span {
+    font-size:clamp(8px,2.2vw,10px)!important;line-height:1!important;
+  }
+  #app .top .time-box .topbtn {
+    height:48px!important;min-height:48px!important;max-height:48px!important;
+  }
+  #app .screen {gap:clamp(5px,1vh,10px)!important}
+}
+
+/* Portrait tablets have enough width for a single aligned brand, navigation and settings row. */
+@media (min-width:600px) and (orientation:portrait) {
+  #app .top {
+    grid-template-columns:minmax(0,1fr) max-content auto!important;
+    grid-template-rows:48px!important;
+    min-height:48px!important;
+  }
+  #app .top .logo {grid-column:1!important;grid-row:1!important}
+  #app .top .home-nav {
+    grid-column:2!important;grid-row:1!important;justify-self:center!important;
+    max-width:100%!important;
+  }
+  #app .top .time-box {grid-column:3!important;grid-row:1!important}
+  #app .top .home-nav button {
+    width:clamp(58px,10.5vw,76px)!important;min-width:clamp(58px,10.5vw,76px)!important;
+  }
+}
+
+/* Landscape balance: equal controls, readable verse preview, visible Tadabbur action. */
+@media (orientation:landscape) {
+  #app .top .home-nav button,
+  #app .top .time-box .topbtn {
+    box-sizing:border-box!important;width:clamp(58px,6.5vw,88px)!important;
+    min-width:clamp(58px,6.5vw,88px)!important;height:44px!important;
+    min-height:44px!important;max-height:44px!important;
+  }
+  #app .top .home-nav button {padding:2px 4px!important;gap:1px!important}
+  #app .top .home-nav button img {width:clamp(16px,1.5vw,21px)!important;height:clamp(16px,1.5vw,21px)!important}
+  #app .top .home-nav button span {font-size:clamp(8px,.72vw,10px)!important;line-height:1!important}
+  #app .top .time-box .topbtn .icon {width:20px!important;height:20px!important}
+  #app .hero-right .daily-story {
+    display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;
+    grid-template-rows:auto minmax(0,1fr) auto!important;align-items:center!important;
+    column-gap:clamp(8px,1.1vw,16px)!important;row-gap:1px!important;width:100%!important;
+  }
+  #app .hero-right .daily-label {grid-column:1!important;grid-row:1!important;margin:0!important}
+  #app .hero-right .daily-de {
+    grid-column:1!important;grid-row:2!important;min-width:0!important;white-space:normal!important;
+    overflow:hidden!important;text-overflow:clip!important;display:-webkit-box!important;
+    -webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;overflow-wrap:anywhere!important;
+  }
+  #app .hero-right .source {grid-column:1!important;grid-row:3!important;white-space:normal!important}
+  #app .hero-right .tadabbur-open {
+    grid-column:2!important;grid-row:1 / span 3!important;align-self:center!important;justify-self:end!important;
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    width:clamp(76px,9vw,132px)!important;max-width:36%!important;min-width:72px!important;
+    min-height:44px!important;height:auto!important;margin:0!important;padding:5px 8px!important;
+    white-space:normal!important;text-align:center!important;line-height:1.15!important;
+    font-size:clamp(10px,.88vw,13px)!important;overflow-wrap:anywhere!important;
+  }
+  #app .daily-area .audio-controls .round,
+  #app .daily-area .audio-controls .round.primary {
+    box-sizing:border-box!important;width:44px!important;min-width:44px!important;
+    height:44px!important;min-height:44px!important;padding:0!important;
+  }
+  #app .daily-area .audio-controls {gap:clamp(4px,.55vw,8px)!important}
+}
+@media (max-width:700px) and (max-height:440px) and (orientation:landscape) {
+  #app .screen {
+    grid-template-rows:59px minmax(44px,1fr) 30px 44px 0!important;
+    align-content:stretch!important;gap:0!important;padding:0 4px!important;
+  }
+  #app header {grid-template-rows:42px 14px 1px!important;gap:1px!important;min-height:0!important}
+  #app .top {height:42px!important;min-height:42px!important}
+  #app .top .home-nav button,
+  #app .top .time-box .topbtn {
+    width:64px!important;min-width:64px!important;height:44px!important;
+    min-height:44px!important;max-height:44px!important;
+  }
+  #app .top .home-nav button img {width:15px!important;height:15px!important}
+  #app .top .home-nav button span {font-size:8px!important}
+  #app .top .time-box .topbtn .icon {width:18px!important;height:18px!important}
+  #app .header-meta {
+    height:14px!important;min-height:14px!important;grid-template-columns:minmax(0,1fr) auto!important;
+    align-items:center!important;gap:0 6px!important;margin:0!important;padding:0 3px!important;
+  }
+  #app .header-meta>div:nth-child(2),
+  #app .header-meta>div:nth-child(3) {display:none!important}
+  #app .header-meta>div:first-child,
+  #app .header-meta .local-clock {
+    display:flex!important;flex-direction:row!important;align-items:center!important;gap:4px!important;min-width:0!important;
+  }
+  #app .header-meta>div span {display:none!important}
+  #app .header-meta>div strong,
+  #app .header-meta .now {font-size:10px!important;line-height:13px!important;white-space:nowrap!important}
+  #app .top-rule {margin:0!important}
+  #app .hero {min-height:44px!important;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important;gap:4px!important}
+  #app .hero-left {
+    min-height:44px!important;display:flex!important;flex-flow:row nowrap!important;align-items:center!important;
+    justify-content:center!important;gap:clamp(5px,1vw,10px)!important;padding:1px 3px!important;overflow:hidden!important;
+  }
+  #app .hero-left .overline,#app .hero-left .next-arabic {display:none!important}
+  #app .next-name {font-size:20px!important;line-height:1!important;margin:0!important}
+  #app .next-row {flex-flow:row nowrap!important;align-items:center!important;gap:5px!important}
+  #app .main-time {font-size:18px!important;line-height:1!important}
+  #app .counter {font-size:11px!important;line-height:1!important;white-space:nowrap!important}
+  #app .hero-right {min-height:44px!important;max-height:44px!important;padding:0 3px!important;overflow:visible!important}
+  #app .hero-right .daily-story {
+    height:44px!important;grid-template-columns:minmax(0,1fr) 64px!important;
+    grid-template-rows:9px minmax(0,1fr)!important;column-gap:5px!important;row-gap:1px!important;
+    align-content:center!important;overflow:visible!important;
+  }
+  #app .hero-right .daily-label {font-size:7px!important;line-height:8px!important;letter-spacing:.12em!important}
+  #app .hero-right .daily-de {
+    grid-row:2!important;font-size:clamp(10px,1.7vw,12px)!important;line-height:1.15!important;
+    -webkit-line-clamp:2!important;max-height:28px!important;
+  }
+  #app .hero-right .source {display:none!important}
+  #app .hero-right .tadabbur-open {
+    grid-column:2!important;grid-row:1 / span 2!important;width:64px!important;min-width:64px!important;
+    max-width:64px!important;height:44px!important;min-height:44px!important;max-height:44px!important;
+    padding:2px!important;font-size:8px!important;line-height:1.1!important;
+  }
+  #app .times-band {
+    height:30px!important;min-height:30px!important;max-height:30px!important;display:grid!important;
+    grid-template-rows:minmax(0,1fr) 10px!important;gap:0!important;padding:0!important;overflow:hidden!important;
+  }
+  #app .times-band .band-head {display:none!important}
+  #app .times {height:20px!important;min-height:20px!important;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:center!important}
+  #app .prayer-cell {
+    height:20px!important;min-height:20px!important;padding:0 1px!important;display:flex!important;
+    flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:3px!important;
+  }
+  #app .prayer-cell .pname {font-size:clamp(7px,1.2vw,9px)!important;line-height:1!important}
+  #app .prayer-cell .ptime {font-size:clamp(11px,2vw,15px)!important;line-height:1!important}
+  #app .sunrise-line {
+    display:block!important;height:10px!important;min-height:10px!important;padding:0!important;margin:0!important;
+    text-align:center!important;font-size:7px!important;line-height:10px!important;white-space:nowrap!important;
+  }
+  #app .daily-area {height:44px!important;min-height:44px!important;max-height:44px!important}
+  #app .daily-area .audio-area {
+    height:44px!important;min-height:44px!important;max-height:44px!important;display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto!important;grid-template-rows:20px 20px;
+    grid-template-areas:"title controls" "source controls";align-content:center;align-items:center;
+    gap:0 5px!important;padding:0 4px!important;overflow:hidden!important;
+  }
+  #app .audio-kicker,#app .audiosmall {display:none!important}
+  #app .audio-title-button {grid-area:title;min-width:0!important;max-width:100%!important;overflow:hidden!important}
+  #app .audio-title {display:block!important;font-size:14px!important;line-height:18px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #app .audio-sub {grid-area:source;display:block!important;font-size:9px!important;line-height:12px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #app .audio-controls {grid-area:controls;display:flex!important;align-items:center!important;gap:3px!important;margin:0!important}
+  #app .daily-area .audio-controls .round,
+  #app .daily-area .audio-controls .round.primary {width:44px!important;min-width:44px!important;height:44px!important;min-height:44px!important}
+  #app .daily-area .audio-controls .round .icon {width:16px!important;height:16px!important}
+  #app .foot {display:none!important}
+}
+
+/* Preserve readable minimum type sizes in the compact landscape prayer rail. */
+@media(max-width:700px) and (max-height:440px) and (orientation:landscape){
+  #app .counter{font-size:14px!important}
+  #app .prayer-cell .ptime{font-size:19px!important;line-height:19px!important}
+}
+
+/* Enforce one identical landscape capsule footprint, including the active tab. */
+@media(orientation:landscape){
+  #app header .top nav.home-nav button,
+  #app header .top .time-box button.topbtn{
+    box-sizing:border-box!important;width:clamp(64px,6.5vw,88px)!important;
+    min-width:clamp(64px,6.5vw,88px)!important;max-width:clamp(64px,6.5vw,88px)!important;
+    height:44px!important;min-height:44px!important;max-height:44px!important;
+  }
+}
+@media(max-width:700px) and (max-height:440px) and (orientation:landscape){
+  #app header .top nav.home-nav button,
+  #app header .top .time-box button.topbtn{
+    width:64px!important;min-width:64px!important;max-width:64px!important;
+    height:44px!important;min-height:44px!important;max-height:44px!important;
+  }
+}
+/* HOME V5.7 — compact live playback affordance and adaptive landscape Tadabbur */
+#app .time-box{gap:clamp(5px,.7vw,10px)!important}
+#app .header-quran-status[hidden]{display:none!important}
+#app .header-quran-status:not([hidden]){
+ display:inline-flex;align-items:center;gap:8px;max-width:clamp(105px,17vw,230px);min-width:0;
+ padding:5px 2px;border:0;background:transparent;color:var(--cream);text-align:left;
+ font:600 clamp(9px,.78vw,12px)/1.2 var(--ui);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+#app .header-quran-status #headerQuranStatusText{min-width:0;overflow:hidden;text-overflow:ellipsis}
+#app .header-quran-dot{width:7px;height:7px;flex:none;border-radius:50%;background:#a9ce9e;box-shadow:0 0 0 3px rgba(169,206,158,.13)}
+#app[data-home-theme="light"] .header-quran-status{color:#26362e}
+#app .festival-list article small{color:var(--muted);font:500 clamp(11px,.9vw,13px)/1.35 var(--ui);font-variant-numeric:tabular-nums}
+#app .festival-list article{gap:4px}
+@media (orientation:landscape) and (min-width:701px){
+ #app .hero-right .tadabbur-open{
+  display:inline-flex!important;align-items:center;justify-content:center;width:clamp(104px,10vw,136px);
+  min-width:104px;min-height:44px;padding:7px 12px;white-space:normal;text-align:center;line-height:1.18;
+  border-radius:999px;margin-top:clamp(6px,1vh,12px)
+ }
+}
+@media (max-width:820px){
+ #app .header-quran-status:not([hidden]){max-width:clamp(42px,12vw,96px);font-size:9px;gap:5px}
+ #app .header-quran-status #headerQuranStatusText{max-width:68px}
+}
+@media (max-width:430px){
+ #app .header-quran-status:not([hidden]){max-width:34px;padding:4px 0}
+ #app .header-quran-status #headerQuranStatusText{display:none}
+}
+
+/* HOME V5.8 — deterministic landscape spacing, clean separators, and visible artwork */
+@media (orientation:landscape) {
+  #app .screen {
+    min-height:0!important;
+    grid-template-rows:auto minmax(0,1fr) auto minmax(70px,auto) auto!important;
+    gap:clamp(4px,1vh,10px)!important;
+    padding-block:clamp(6px,1.5vh,18px)!important;
+  }
+  #app .top-rule {
+    height:1px!important;margin:clamp(3px,.7vh,7px) 0 0!important;
+    border:0!important;
+    background:linear-gradient(90deg,transparent,rgba(216,189,130,.36) 8%,rgba(216,189,130,.36) 92%,transparent)!important;
+  }
+  #app .top-rule::after{display:none!important}
+  #app .hero {
+    min-height:0!important;
+    grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr)!important;
+    gap:clamp(10px,1.8vw,28px)!important;
+  }
+  #app .hero-left,#app .hero-right{min-width:0!important;min-height:0!important}
+  #app .hero-right {
+    border:0!important;
+    padding:0 0 0 clamp(6px,1vw,14px)!important;
+  }
+  #app .hero-right .daily-story {
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) clamp(96px,9vw,128px)!important;
+    grid-template-rows:auto minmax(0,1fr) auto!important;
+    align-items:center!important;
+    gap:clamp(2px,.55vh,6px) clamp(8px,1vw,14px)!important;
+    width:100%!important;min-width:0!important;min-height:0!important;
+    max-height:100%!important;overflow:hidden!important;
+  }
+  #app .hero-right .daily-label{grid-column:1!important;grid-row:1!important;min-width:0!important}
+  #app .hero-right .daily-de {
+    grid-column:1!important;grid-row:2!important;min-width:0!important;
+    display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;
+    overflow:hidden!important;overflow-wrap:anywhere!important;white-space:normal!important;
+    font-size:clamp(14px,1.25vw,20px)!important;line-height:1.28!important;
+  }
+  #app .hero-right .source {
+    grid-column:1!important;grid-row:3!important;min-width:0!important;
+    white-space:normal!important;overflow-wrap:anywhere!important;line-height:1.25!important;
+  }
+  #app .hero-right .tadabbur-open {
+    grid-column:2!important;grid-row:1 / span 3!important;
+    justify-self:stretch!important;align-self:center!important;display:inline-flex!important;
+    width:clamp(96px,9vw,128px)!important;min-width:96px!important;max-width:128px!important;
+    min-height:44px!important;height:auto!important;margin:0!important;padding:7px 10px!important;
+    border-radius:999px!important;white-space:normal!important;text-align:center!important;
+    line-height:1.18!important;overflow-wrap:anywhere!important;
+  }
+  #app .next-row .counter {
+    padding:0!important;border:0!important;border-radius:0!important;
+    background:transparent!important;box-shadow:none!important;
+    white-space:nowrap!important;
+  }
+  #app .times-band {
+    min-width:0!important;padding:clamp(4px,.8vh,9px) 0!important;
+    border-top:0!important;border-bottom:0!important;
+  }
+  #app .times-band::before,#app .times-band::after{display:none!important}
+  #app .prayer-cell {
+    position:relative!important;min-width:0!important;
+    border-right:0!important;border-radius:0!important;
+    background:transparent!important;box-shadow:none!important;
+  }
+  #app .prayer-cell.active {
+    border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;
+  }
+  #app .prayer-cell.active::after {
+    content:""!important;position:absolute!important;left:50%!important;right:auto!important;
+    bottom:-2px!important;transform:translateX(-50%)!important;width:24px!important;height:2px!important;
+    border-radius:2px!important;background:var(--gold)!important;
+  }
+  #app .audio-area{border-left:0!important}
+  #app .foot{border-top:0!important}
+  #app .home-wallpaper{z-index:0!important;background:#07191b!important}
+  #app .home-wallpaper-backdrop {
+    inset:-3%!important;filter:blur(22px) brightness(.64) saturate(.92)!important;opacity:.82!important;
+  }
+  #app .home-wallpaper-fit {
+    width:auto!important;height:auto!important;max-width:100%!important;max-height:100%!important;
+    object-fit:contain!important;object-position:center!important;opacity:1!important;
+  }
+  #app .lightgrading {
+    z-index:1!important;
+    background:linear-gradient(90deg,rgba(2,12,16,.24),rgba(2,12,16,.06) 52%,rgba(2,12,16,.20)),
+      linear-gradient(0deg,rgba(2,12,16,.40),rgba(2,12,16,.06) 45%,rgba(2,12,16,.12))!important;
+  }
+  #app .screen{z-index:2!important}
+  #app #adhanVisual .adhan-wallpaper-backdrop {
+    filter:blur(22px) brightness(.66) saturate(.92)!important;opacity:.82!important;
+  }
+  #app #adhanVisual .adhan-wallpaper-fit {
+    width:auto!important;height:auto!important;max-width:100vw!important;max-height:100dvh!important;
+    object-fit:contain!important;object-position:center!important;opacity:1!important;
+  }
+}
+/* Short landscape tablets: compact rows with enough room for each label and control. */
+@media (orientation:landscape) and (min-width:701px) and (max-height:480px) {
+  #app .screen {
+    grid-template-rows:minmax(64px,auto) minmax(86px,1fr) auto minmax(56px,auto) 0!important;
+    gap:3px!important;padding:4px clamp(8px,1.8vw,18px)!important;
+  }
+  #app header{grid-template-rows:auto auto 1px!important;gap:2px!important;min-height:0!important}
+  #app .top{min-height:44px!important}
+  #app .header-meta{min-height:30px!important;padding:2px 6px!important;gap:2px 8px!important}
+  #app .header-meta>div span{font-size:clamp(6px,.72vw,9px)!important}
+  #app .header-meta>div strong{font-size:clamp(9px,1vw,12px)!important;line-height:1.15!important}
+  #app .hero{min-height:86px!important;gap:clamp(8px,1.3vw,16px)!important}
+  #app .next-name{font-size:clamp(30px,7vh,48px)!important;line-height:.98!important;margin:2px 0 5px!important}
+  #app .main-time{font-size:clamp(27px,5.4vh,40px)!important;line-height:1!important}
+  #app .counter{font-size:clamp(12px,2.2vh,15px)!important}
+  #app .hero-right .daily-story{grid-template-columns:minmax(0,1fr) 96px!important;gap:2px 8px!important}
+  #app .hero-right .daily-label{font-size:clamp(8px,1.5vh,10px)!important;line-height:1.1!important}
+  #app .hero-right .daily-de{font-size:clamp(12px,2.3vh,16px)!important;line-height:1.22!important;-webkit-line-clamp:2!important}
+  #app .hero-right .source{font-size:clamp(8px,1.6vh,10px)!important}
+  #app .hero-right .tadabbur-open{width:96px!important;min-width:96px!important;max-width:96px!important;min-height:44px!important;padding:5px!important;font-size:clamp(9px,1.7vh,11px)!important}
+  #app .times-band{padding:3px 0!important}
+  #app .prayer-cell{padding:2px 1px!important;gap:2px!important}
+  #app .prayer-cell .pname{font-size:clamp(9px,1.8vh,12px)!important}
+  #app .prayer-cell .ptime{font-size:clamp(17px,3.4vh,22px)!important;line-height:1.05!important}
+  #app .daily-area{min-height:56px!important}
+  #app .daily-area .audio-area{min-height:56px!important;padding:2px 8px!important}
+  #app .audio-title{font-size:clamp(15px,2.7vh,19px)!important}
+  #app .audio-sub{font-size:clamp(9px,1.8vh,12px)!important}
+  #app .audio-controls .round,#app .audio-controls .round.primary{width:40px!important;min-width:40px!important;height:40px!important;min-height:40px!important}
+  #app .foot{display:none!important}
+}
+
+/* Narrow landscape header: keep the full wordmark clear of the centered navigation. */
+@media (orientation:landscape) and (min-width:701px) and (max-width:820px) {
+  #app .top .logo{gap:8px!important}
+  #app .logo-mark{width:clamp(28px,4vw,34px)!important;height:clamp(28px,4vw,34px)!important}
+  #app .brand-title{font-size:clamp(14px,2.25vw,17px)!important;letter-spacing:.055em!important}
+  #app .brand-mini{font-size:7px!important;letter-spacing:.22em!important;margin-top:4px!important}
+  #app .top .home-nav{gap:2px!important}
+}
+
+/* Restore the tested short-landscape grid after shared landscape overrides. */
+@media (max-width:700px) and (max-height:440px) and (orientation:landscape) {
+  #app .screen {
+    grid-template-rows:59px minmax(44px,1fr) 30px 44px 0!important;
+    align-content:stretch!important;gap:0!important;padding:0 4px!important;
+  }
+  #app header {grid-template-rows:42px 14px 1px!important;gap:1px!important;min-height:0!important}
+  #app .top {height:42px!important;min-height:42px!important}
+  #app .top .home-nav button,
+  #app .top .time-box .topbtn {
+    width:64px!important;min-width:64px!important;height:44px!important;
+    min-height:44px!important;max-height:44px!important;
+  }
+  #app .top .home-nav button img {width:15px!important;height:15px!important}
+  #app .top .home-nav button span {font-size:8px!important}
+  #app .top .time-box .topbtn .icon {width:18px!important;height:18px!important}
+  #app .header-meta {
+    height:14px!important;min-height:14px!important;grid-template-columns:minmax(0,1fr) auto!important;
+    align-items:center!important;gap:0 6px!important;margin:0!important;padding:0 3px!important;
+  }
+  #app .header-meta>div:nth-child(2),
+  #app .header-meta>div:nth-child(3) {display:none!important}
+  #app .header-meta>div:first-child,
+  #app .header-meta .local-clock {
+    display:flex!important;flex-direction:row!important;align-items:center!important;gap:4px!important;min-width:0!important;
+  }
+  #app .header-meta>div span {display:none!important}
+  #app .header-meta>div strong,
+  #app .header-meta .now {font-size:10px!important;line-height:13px!important;white-space:nowrap!important}
+  #app .top-rule {margin:0!important}
+  #app .hero {min-height:44px!important;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important;gap:4px!important}
+  #app .hero-left {
+    min-height:44px!important;display:flex!important;flex-flow:row nowrap!important;align-items:center!important;
+    justify-content:center!important;gap:clamp(5px,1vw,10px)!important;padding:1px 3px!important;overflow:hidden!important;
+  }
+  #app .hero-left .overline,#app .hero-left .next-arabic {display:none!important}
+  #app .next-name {font-size:20px!important;line-height:1!important;margin:0!important}
+  #app .next-row {flex-flow:row nowrap!important;align-items:center!important;gap:5px!important}
+  #app .main-time {font-size:18px!important;line-height:1!important}
+  #app .counter {font-size:11px!important;line-height:1!important;white-space:nowrap!important}
+  #app .hero-right {min-height:44px!important;max-height:44px!important;padding:0 3px!important;overflow:visible!important}
+  #app .hero-right .daily-story {
+    height:44px!important;grid-template-columns:minmax(0,1fr) 64px!important;
+    grid-template-rows:9px minmax(0,1fr)!important;column-gap:5px!important;row-gap:1px!important;
+    align-content:center!important;overflow:visible!important;
+  }
+  #app .hero-right .daily-label {font-size:7px!important;line-height:8px!important;letter-spacing:.12em!important}
+  #app .hero-right .daily-de {
+    grid-row:2!important;font-size:clamp(10px,1.7vw,12px)!important;line-height:1.15!important;
+    -webkit-line-clamp:2!important;max-height:28px!important;
+  }
+  #app .hero-right .source {display:none!important}
+  #app .hero-right .tadabbur-open {
+    grid-column:2!important;grid-row:1 / span 2!important;width:64px!important;min-width:64px!important;
+    max-width:64px!important;height:44px!important;min-height:44px!important;max-height:44px!important;
+    padding:2px!important;font-size:8px!important;line-height:1.1!important;
+  }
+  #app .times-band {
+    height:30px!important;min-height:30px!important;max-height:30px!important;display:grid!important;
+    grid-template-rows:minmax(0,1fr) 10px!important;gap:0!important;padding:0!important;overflow:hidden!important;
+  }
+  #app .times-band .band-head {display:none!important}
+  #app .times {height:20px!important;min-height:20px!important;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:center!important}
+  #app .prayer-cell {
+    height:20px!important;min-height:20px!important;padding:0 1px!important;display:flex!important;
+    flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:3px!important;
+  }
+  #app .prayer-cell .pname {font-size:clamp(7px,1.2vw,9px)!important;line-height:1!important}
+  #app .prayer-cell .ptime {font-size:clamp(11px,2vw,15px)!important;line-height:1!important}
+  #app .sunrise-line {
+    display:block!important;height:10px!important;min-height:10px!important;padding:0!important;margin:0!important;
+    text-align:center!important;font-size:7px!important;line-height:10px!important;white-space:nowrap!important;
+  }
+  #app .daily-area {height:44px!important;min-height:44px!important;max-height:44px!important}
+  #app .daily-area .audio-area {
+    height:44px!important;min-height:44px!important;max-height:44px!important;display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto!important;grid-template-rows:20px 20px;
+    grid-template-areas:"title controls" "source controls";align-content:center;align-items:center;
+    gap:0 5px!important;padding:0 4px!important;overflow:hidden!important;
+  }
+  #app .audio-kicker,#app .audiosmall {display:none!important}
+  #app .audio-title-button {grid-area:title;min-width:0!important;max-width:100%!important;overflow:hidden!important}
+  #app .audio-title {display:block!important;font-size:14px!important;line-height:18px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #app .audio-sub {grid-area:source;display:block!important;font-size:9px!important;line-height:12px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #app .audio-controls {grid-area:controls;display:flex!important;align-items:center!important;gap:3px!important;margin:0!important}
+  #app .daily-area .audio-controls .round,
+  #app .daily-area .audio-controls .round.primary {width:44px!important;min-width:44px!important;height:44px!important;min-height:44px!important}
+  #app .daily-area .audio-controls .round .icon {width:16px!important;height:16px!important}
+  #app .foot {display:none!important}
+}
+@media (orientation:landscape) {
+  #app .audio-title{font-size:clamp(18px,1.8vw,30px)!important;line-height:1.08!important}
+  #app .source{font-size:clamp(12px,.95vw,15px)!important}
+  #app .counter{font-size:clamp(14px,1.4vw,20px)!important}
+  #app .prayer-cell .ptime{font-size:clamp(19px,3vw,50px)!important;line-height:1!important}
+}
+@media (max-width:700px) and (max-height:440px) and (orientation:landscape) {
+  #app .audio-title{font-size:16px!important;line-height:18px!important}
+  #app .audio-sub{font-size:10px!important;line-height:12px!important}
+  #app .counter{font-size:14px!important}
+  #app .prayer-cell .ptime{font-size:19px!important;line-height:19px!important}
+  #app .source{font-size:12px!important}
+}
+
+/* Remove legacy divider and frame rules that override the clean landscape composition. */
+@media (orientation:landscape) {
+  #app[data-home-palette] .hero-left,
+  #app[data-home-palette] .hero-right,
+  #app[data-home-palette] .times-band,
+  #app[data-home-palette] .daily-area .audio-area,
+  #app[data-home-palette] .foot {
+    border:0!important;box-shadow:none!important;background:transparent!important;border-radius:0!important;
+  }
+  #app[data-home-palette] .hero-left{padding-left:0!important}
+  #app[data-home-palette] .hero-right{padding-left:clamp(8px,1.4vw,18px)!important}
+  #app[data-home-palette] .times-band{border-block:0!important}
+  #app[data-home-palette] .edge,#app[data-home-palette] .corner{display:none!important}
+  #app[data-home-palette] .hero-right .source{font-size:clamp(12px,.95vw,15px)!important;line-height:1.3!important}
+}
+@media (max-width:700px) and (max-height:440px) and (orientation:landscape) {
+  #app[data-home-palette] .hero-right .source{font-size:12px!important}
+}

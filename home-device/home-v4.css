@@ -106,12 +106,16 @@ html,body{overscroll-behavior:none}
 #app #saver .saver-source{color:#e5d9be;font-size:clamp(12px,1.2vw,19px)}
 #app #saver .saver-bottom{border-top:1px solid rgba(227,200,141,.65);background:none;padding-top:clamp(12px,2vh,28px)}
 #app #adhanVisual{background-color:#061b21;background-position:center;background-size:cover}
-#app #adhanVisual::before{background:linear-gradient(90deg,rgba(0,13,18,.83),rgba(0,14,18,.36) 65%,rgba(0,14,18,.8))!important}
-#app #adhanVisual .adhan-symbol{color:#efd49b;text-shadow:0 4px 22px #061419}
-#app #adhanVisual .adhan-title{font-size:clamp(54px,7vw,117px)!important;letter-spacing:.02em;line-height:1.05}
-#app #adhanVisual .adhan-sub{font-size:clamp(16px,1.5vw,24px);color:#f5eedc}
-#app #adhanVisual .h4-prayer-image{position:absolute;right:4.5vw;bottom:8%;width:min(29vw,410px);height:min(48vh,380px);object-fit:contain;z-index:0!important;opacity:.28;filter:drop-shadow(0 8px 40px rgba(0,0,0,.6));pointer-events:none}
-#app #adhanVisual .touchbutton{background:rgba(9,30,30,.7);border:1px solid #d7c494;border-radius:13px}
+#app #adhanVisual::before{background:linear-gradient(180deg,rgba(1,10,15,.22) 0%,rgba(1,10,15,.02) 35%,rgba(1,10,15,.18) 62%,rgba(1,10,15,.76) 100%)!important}
+#app #adhanVisual .h4-prayer-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0!important;opacity:1;filter:none;pointer-events:none}
+#app #adhanVisual #cinematicVideo{opacity:.16;mix-blend-mode:screen}
+#app #adhanVisual .adhan-lower-third{position:absolute;left:clamp(24px,6vw,110px);bottom:clamp(24px,6vh,72px);z-index:2!important;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:clamp(8px,1.4vh,16px);width:min(560px,calc(100% - 48px));padding:clamp(18px,2.5vw,34px) clamp(20px,3vw,42px);background:linear-gradient(110deg,rgba(3,18,23,.88),rgba(3,18,23,.68));border:1px solid rgba(234,210,159,.48);border-radius:18px;box-shadow:0 16px 55px rgba(0,0,0,.32);backdrop-filter:blur(8px)}
+#app #adhanVisual .adhan-title{font-size:clamp(38px,5.4vw,76px)!important;letter-spacing:.01em;line-height:1.02;text-shadow:0 2px 18px rgba(0,0,0,.46)}
+#app #adhanVisual .adhan-sub{font-size:clamp(15px,1.3vw,20px);color:#f5eedc;letter-spacing:.04em}
+#app #adhanVisual .touchbutton{background:rgba(9,30,30,.78);border:1px solid #d7c494;border-radius:13px;min-height:46px;padding:0 20px}
+@media(max-width:640px){#app #adhanVisual .adhan-lower-third{left:18px;bottom:18px;width:calc(100% - 36px);padding:17px 19px;gap:8px}#app #adhanVisual .adhan-title{font-size:clamp(34px,9vw,54px)!important}#app #adhanVisual .adhan-sub{font-size:15px}}
+@media(max-height:500px){#app #adhanVisual .adhan-lower-third{bottom:12px;left:24px;padding:12px 18px;gap:6px}#app #adhanVisual .adhan-title{font-size:clamp(32px,5vh,54px)!important}}
+
 #app #settingsOverlay{background:rgba(5,18,22,.96)!important;backdrop-filter:blur(21px)}
 #app .settings-frame{background:linear-gradient(145deg,rgba(4,27,29,.99),rgba(2,17,22,.98))!important;gap:clamp(12px,1.5vw,25px);grid-template-columns:minmax(180px,21%) minmax(0,1fr)}
 #app .settings-top{border-bottom:1px solid rgba(234,197,127,.52);padding-bottom:clamp(10px,1.1vh,18px)}
@@ -210,3 +214,81 @@ html,body{overscroll-behavior:none}
   #app .screen{grid-template-rows:auto minmax(0,1fr) auto minmax(0,1.12fr) auto!important}
   #app .daily-area{align-items:stretch}
 }
+
+/* 2026-11: calm, separated HOME navigation and two-column Qur'an reading */
+#app header{display:grid;grid-template-rows:auto auto auto auto;gap:clamp(7px,1vh,12px)}
+#app .home-nav{display:flex;justify-content:center;align-items:center;gap:clamp(12px,2vw,30px);min-height:40px;padding:0 12px}
+#app .home-nav button{display:flex;align-items:center;gap:9px;padding:7px 17px;border:1px solid rgba(216,189,130,.3);border-radius:999px;background:rgba(5,27,29,.5);color:var(--cream);font:600 clamp(12px,1vw,16px) var(--ui)}
+#app .home-nav button img{width:28px;height:28px;object-fit:contain}
+#app .home-nav button:focus-visible,#app .home-nav button:hover{background:rgba(216,189,130,.15);border-color:var(--gold)}
+#app .top{min-height:clamp(48px,5.8vh,68px)}
+#app .header-meta{margin-top:0}
+#app .hero{grid-template-columns:minmax(0,1fr) minmax(300px,.8fr);gap:clamp(16px,2.5vw,44px)}
+#app .hero-right{border-left:1px solid var(--home4-hair)!important;text-align:left!important;padding-left:clamp(18px,2vw,38px)!important}
+#app .hero-right .daily-story{width:100%;padding:0!important;text-align:left}
+#app .hero-right .daily-label{font-size:clamp(10px,.9vw,14px);margin-bottom:clamp(7px,1vh,12px)}
+#app .hero-right .daily-title{font-size:clamp(24px,2.25vw,37px);line-height:1.55;max-height:3.1em;-webkit-line-clamp:2}
+#app .hero-right .daily-de{font-size:clamp(16px,1.35vw,22px);white-space:normal;line-height:1.45}
+#app .hero-right .source{font-size:clamp(11px,.9vw,14px)}
+#app .hero-right .tadabbur-open{align-self:flex-start;margin-top:12px}
+#app .daily-area{display:flex;justify-content:flex-end;min-height:clamp(76px,12vh,150px)}
+#app .daily-area .audio-area{width:min(54%,620px);border-left:1px solid var(--home4-hair)!important;padding:4px 0 4px clamp(20px,3vw,48px)!important}
+#app .calendar-card{display:none!important}
+#app .theme-ivory{--home4-hair:rgba(64,86,69,.42);color:#17251f}
+#app .theme-ivory .quran-reader-shell,#app .theme-ivory .quran-reader-view{color:#17251f}
+#app .quran-reader-view{position:fixed;inset:0;z-index:35;display:flex;align-items:stretch;justify-content:flex-end;background:rgba(3,14,17,.82);backdrop-filter:blur(18px)}
+#app .quran-reader-view[hidden]{display:none}
+#app .quran-reader-shell{width:min(100%,1500px);height:100%;overflow:auto;padding:clamp(18px,3vw,46px);background:linear-gradient(145deg,rgba(9,35,35,.98),rgba(4,20,24,.99));color:#f4f0e6;box-shadow:-24px 0 90px rgba(0,0,0,.35);animation:quranReaderIn .38s cubic-bezier(.2,.7,.2,1) both}
+@keyframes quranReaderIn{from{transform:translateX(7%);opacity:.4}to{transform:translateX(0);opacity:1}}
+#app .quran-reader-head{display:flex;justify-content:space-between;align-items:center;gap:20px;border-bottom:1px solid var(--home4-hair);padding-bottom:18px}
+#app .quran-reader-head h2{font:600 clamp(26px,3vw,42px)/1.1 var(--display);margin:6px 0}
+#app .quran-reader-head p{margin:0;color:#d4c398}
+#app .quran-reader-actions{display:flex;align-items:end;gap:12px}
+#app .reader-control{display:grid;gap:5px;color:#d8bd82;font-size:12px;letter-spacing:.08em}
+#app .reader-control select{min-width:155px;max-width:250px;background:#0b292c;color:#f4f0e6;border:1px solid rgba(216,189,130,.4);border-radius:10px;padding:10px}
+#app .quran-reader-columns{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,48px);padding:clamp(20px,3vh,36px) 0}
+#app .reader-column{min-width:0;padding:0 clamp(8px,1.4vw,22px)}
+#app .reader-column-label{color:#d8bd82;letter-spacing:.12em;text-transform:uppercase;font-size:12px;border-bottom:1px solid var(--home4-hair);padding-bottom:10px;margin-bottom:14px}
+#app .reader-arabic{border-right:1px solid var(--home4-hair);text-align:right}
+#app #readerArabic{font:clamp(26px,3vw,48px)/2 var(--arabic);text-align:right;color:#f4f0e6}
+#app #readerGerman{font:clamp(17px,1.6vw,24px)/1.8 var(--ui);color:#ebe7dc}
+#app .reader-transliteration{margin:0 clamp(8px,1.4vw,22px) 20px;padding:15px 18px;border-left:2px solid var(--gold);background:rgba(255,255,255,.035);font-size:clamp(15px,1.3vw,20px);line-height:1.7;color:#e6d4ae}
+#app .reader-transliteration[hidden]{display:none}
+#app .quran-reader-footer{position:sticky;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 0;background:rgba(7,26,29,.96);border-top:1px solid var(--home4-hair)}
+#app .reader-check{display:flex;align-items:center;gap:9px;color:#e6d4ae}
+#app .reader-playback{display:flex;align-items:center;gap:10px}
+#app .reader-step,#app .reader-play,#app .reader-home{border:1px solid var(--home4-hair);border-radius:999px;background:rgba(216,189,130,.1);color:#f4f0e6;padding:10px 15px}
+#app .reader-play{background:#d8bd82;color:#152622;font-weight:700}
+#app .reader-note{color:#c2c7bf;font-size:12px;margin:8px 0}
+#app .theme-ivory .quran-reader-shell{background:linear-gradient(145deg,#f9f6ee,#ebe8dd);color:#17251f}
+#app .theme-ivory .quran-reader-shell #readerArabic{color:#17251f}
+#app .theme-ivory .quran-reader-shell #readerGerman{color:#27362f}
+#app .theme-ivory .quran-reader-shell .reader-control select{background:#fff;color:#17251f}
+#app .theme-ivory .quran-reader-shell .quran-reader-footer{background:#f0eee6}
+#app .theme-ivory .quran-reader-shell .reader-play{background:#496b55;color:#fff}
+@media(max-width:850px){
+ #app .top{gap:8px}
+ #app .brand-mini{display:none}
+ #app .home-nav{justify-content:flex-start;overflow:auto}
+ #app .home-nav button{flex:none;padding:6px 11px}
+ #app .hero{grid-template-columns:minmax(0,1fr) minmax(240px,.9fr)}
+ #app .next-name{font-size:clamp(52px,8vw,80px)}
+ #app .daily-area .audio-area{width:70%}
+ #app .quran-reader-head{align-items:flex-start;flex-direction:column}
+ #app .quran-reader-actions{width:100%;flex-wrap:wrap}
+}
+@media(orientation:portrait){
+ #app header{grid-template-rows:auto auto auto auto}
+ #app .home-nav{justify-content:center}
+ #app .home-nav button{flex-direction:column;gap:2px;font-size:11px;padding:5px 13px}
+ #app .home-nav button img{width:24px;height:24px}
+ #app .hero{grid-template-columns:1fr!important}
+ #app .hero-right{display:flex!important;border-left:0!important;border-top:1px solid var(--home4-hair)!important;padding:14px 0 0!important;text-align:center!important}
+ #app .hero-right .daily-story{text-align:center}
+ #app .hero-right .tadabbur-open{align-self:center}
+ #app .daily-area .audio-area{width:100%;border-left:0!important;padding:8px 0!important}
+ #app .quran-reader-columns{grid-template-columns:1fr}
+ #app .reader-arabic{border-right:0;border-bottom:1px solid var(--home4-hair);padding-bottom:20px}
+ #app .quran-reader-footer{flex-wrap:wrap}
+}
+

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "collection": "DĀR AL TAWḤĪD native Apple TV artwork",
+  "source": "DarAlTawhidTV/Assets.xcassets",
+  "imageEncoding": "Wallpaper masters: JPEG quality 88, max 3840 px long edge (4K). Adhan masters: JPEG quality 92 at source pixel dimensions. Gallery and prayer-strip thumbnails: JPEG quality 80, max 640 px.",
+  "rightsNote": "No per-image license metadata was present in the local asset catalog. Source provenance is recorded; commercial redistribution clearance remains unverified.",
+  "defaultWallpaper": "tv-kaaba-day",
+  "brandMark": "/media/apple-tv/tv-brand-mark.png",
+  "wallpapers": [
+    {
+      "id": "tv-kaaba-day",
+      "label": "Kaʿba · Tag",
+      "url": "/media/apple-tv/tv-kaaba-day.jpg",
+      "thumbnail": "/media/apple-tv/tv-kaaba-day-thumb.jpg",
+      "period": "day",
+      "sourceAsset": "TVKaabaDay.imageset/TVKaabaDay.png"
+    },
+    {
+      "id": "tv-kaaba-sunrise",
+      "label": "Kaʿba · Sonnenaufgang",
+      "url": "/media/apple-tv/tv-kaaba-sunrise.jpg",
+      "thumbnail": "/media/apple-tv/tv-kaaba-sunrise-thumb.jpg",
+      "period": "day",
+      "sourceAsset": "TVKaabaSunrise.imageset/TVKaabaSunrise.png"
+    },
+    {
+      "id": "tv-kaaba-sunset",
+      "label": "Kaʿba · Sonnenuntergang",
+      "url": "/media/apple-tv/tv-kaaba-sunset.jpg",
+      "thumbnail": "/media/apple-tv/tv-kaaba-sunset-thumb.jpg",
+      "period": "night",
+      "sourceAsset": "TVKaabaSunset.imageset/TVKaabaSunset.png"
+    },
+    {
+      "id": "tv-kaaba-autumn",
+      "label": "Kaʿba · Herbst",
+      "url": "/media/apple-tv/tv-kaaba-autumn.jpg",
+      "thumbnail": "/media/apple-tv/tv-kaaba-autumn-thumb.jpg",
+      "period": "any",
+      "sourceAsset": "TVKaabaAutumn.imageset/TVKaabaAutumn.png"
+    },
+    {
+      "id": "tv-kaaba-rain",
+      "label": "Kaʿba · Regen",
+      "url": "/media/apple-tv/tv-kaaba-rain.jpg",
+      "thumbnail": "/media/apple-tv/tv-kaaba-rain-thumb.jpg",
+      "period": "any",
+      "sourceAsset": "TVKaabaRain.imageset/TVKaabaRain.png"
+    },
+    {
+      "id": "tv-kaaba-thunderstorm",
+      "label": "Kaʿba · Gewitter",
+      "url": "/media/apple-tv/tv-kaaba-thunderstorm.jpg",
+      "thumbnail": "/media/apple-tv/tv-kaaba-thunderstorm-thumb.jpg",
+      "period": "night",
+      "sourceAsset": "TVKaabaThunderstorm.imageset/TVKaabaThunderstorm.png"
+    },
+    {
+      "id": "tv-kaaba-background",
+      "label": "Kaʿba · Architektur",
+      "url": "/media/apple-tv/tv-kaaba-background.jpg",
+      "thumbnail": "/media/apple-tv/tv-kaaba-background-thumb.jpg",
+      "period": "any",
+      "sourceAsset": "TVKaabaBackground.imageset/TVKaabaBackground.png"
+    },
+    {
+      "id": "tv-kaaba-background-ai",
+      "label": "Mekka · AI-Motiv",
+      "url": "/media/apple-tv/tv-kaaba-background-ai.jpg",
+      "thumbnail": "/media/apple-tv/tv-kaaba-background-ai-thumb.jpg",
+      "period": "day",
+      "sourceAsset": "TVKaabaBackgroundAI.imageset/TVKaabaBackgroundAI.png"
+    },
+    {
+      "id": "tv-kaaba-mekka-1",
+      "label": "Mekka · Motiv 1",
+      "url": "/media/apple-tv/tv-kaaba-mekka-1.jpg",
+      "thumbnail": "/media/apple-tv/tv-kaaba-mekka-1-thumb.jpg",
+      "period": "any",
+      "sourceAsset": "TVKaabaMekkaNeu1.imageset/mekka_neu_1.png"
+    },
+    {
+      "id": "tv-kaaba-mekka-2",
+      "label": "Mekka · Motiv 2",
+      "url": "/media/apple-tv/tv-kaaba-mekka-2.jpg",
+      "thumbnail": "/media/apple-tv/tv-kaaba-mekka-2-thumb.jpg",
+      "period": "any",
+      "sourceAsset": "TVKaabaMekkaNeu2.imageset/mekka_neu_2.png"
+    }
+  ],
+  "adhanMotifs": {
+    "fajr": "/media/apple-tv/adhan-fajr.jpg",
+    "dhuhr": "/media/apple-tv/adhan-dhuhr.jpg",
+    "asr": "/media/apple-tv/adhan-asr.jpg",
+    "maghrib": "/media/apple-tv/adhan-maghrib.jpg",
+    "isha": "/media/apple-tv/adhan-isha.jpg"
+  },
+  "adhanThumbnails": {
+    "fajr": "/media/apple-tv/adhan-fajr-thumb.jpg",
+    "dhuhr": "/media/apple-tv/adhan-dhuhr-thumb.jpg",
+    "asr": "/media/apple-tv/adhan-asr-thumb.jpg",
+    "maghrib": "/media/apple-tv/adhan-maghrib-thumb.jpg",
+    "isha": "/media/apple-tv/adhan-isha-thumb.jpg"
+  },
+  "sourcePixelDimensions": {
+    "adhan": {
+      "fajr": "1672x941",
+      "dhuhr": "2560x1440",
+      "asr": "2560x1440",
+      "maghrib": "2560x1440",
+      "isha": "2560x1440"
+    },
+    "wallpaperOutputLongEdge": 3840,
+    "thumbnailLongEdge": 640
+  }
+}
