@@ -503,7 +503,9 @@ function recent(){
   }
   target.appendChild(btn);
  });
- // Latest publications must not replace the globally selected daily post.
+ box.querySelector("#dhpTodayName").textContent=list[0].title;
+ box.querySelector("#dhpTodayArticle").dataset.dhpRoute="post";
+ box.querySelector("#dhpTodayArticle").dataset.dhpValue=list[0].id;
 }
 function quran(){
  var root=document.getElementById(ID);if(!root)return;
@@ -523,12 +525,6 @@ function sync(){
 }
 function queue(){if(pending)return;pending=true;requestAnimationFrame(function(){pending=false;try{sync()}catch(e){console.warn("Test Home parity",e)}})}
 function loadTestSmartProfileV1(){
- /* DAR TEST: share the production daily resolver, never a profile-specific copy. */
- if(!document.getElementById("darCanonicalDailyV1")){
-  var daily=document.createElement("script");daily.id="darCanonicalDailyV1";
-  daily.src="/assets/dar-canonical-daily-v1.js?v=20261121-global-recommendation-v1";daily.defer=true;
-  document.head.appendChild(daily);
- }
  /* Only this active adult /test renderer owns the enhancement; no Visitor/Kids. */
  if(!document.getElementById("darTestSmartProfileCssV1")){
   var css=document.createElement("link");css.rel="stylesheet";css.id="darTestSmartProfileCssV1";
