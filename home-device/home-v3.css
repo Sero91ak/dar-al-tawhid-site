@@ -1,0 +1,159 @@
+/* DĀR AL TAWḤĪD HOME V3 · isolated hardware-first responsive redesign.
+   Keeps the existing V2 computation, playback, content and remote-refresh engine. */
+:root { --h3-line:rgba(218,188,118,.38);--h3-panel:rgba(5,29,31,.67);--h3-ivory:#f8f0df;--h3-gold:#d5b77a; }
+html,body,#app {font-synthesis:none}
+#app {background:#071b20 center/cover no-repeat;color:var(--h3-ivory);--gold:var(--h3-gold);--cream:var(--h3-ivory);--muted:#c3c9c1;--fine:var(--h3-line)}
+#app::before {content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(90deg,rgba(1,15,20,.82),rgba(4,28,29,.25) 55%,rgba(1,17,20,.75)),linear-gradient(180deg,rgba(0,13,17,.44),rgba(0,18,20,.14) 40%,rgba(0,10,13,.81))}
+#app .artwork {opacity:.16}
+#app .lightgrading {opacity:.3}
+#app .edge {inset:12px;border-color:rgba(217,190,131,.24)}
+#app .screen {position:relative;padding:clamp(13px,2.4vh,28px) clamp(21px,3vw,58px) clamp(11px,2.3vh,23px);gap:clamp(7px,1.3vh,16px);grid-template-rows:auto minmax(0,1.3fr) auto minmax(0,.88fr) auto}
+#app header {min-width:0}
+#app .top {gap:clamp(8px,1.6vw,22px)}
+#app .logo {gap:clamp(8px,1.1vw,15px);min-width:0}
+#app .logo-mark {border-color:rgba(220,190,125,.65);background:rgba(4,29,33,.5);overflow:hidden;width:clamp(39px,4.4vw,62px);height:clamp(39px,4.4vw,62px);display:grid;place-items:center}
+#app .logo-mark img {display:block;width:90%;height:90%;object-fit:contain}
+#app .brand-title {font-size:clamp(17px,2vw,31px);letter-spacing:.18em;text-shadow:0 2px 14px rgba(0,0,0,.3)}
+#app .brand-mini {font-family:var(--ui);font-size:clamp(7px,.77vw,11px);letter-spacing:.4em;color:var(--gold)}
+#app .top-rule {margin-top:clamp(8px,1.4vh,17px)}
+#app .site-name {font-size:clamp(12px,1.05vw,16px)}
+#app .site .date {font-size:clamp(9px,.83vw,12px)}
+#app .now {font-size:clamp(25px,2.55vw,41px);font-family:var(--display)}
+#app .topbtn {background:rgba(3,23,28,.52)}
+#app .hero {gap:clamp(13px,2.7vw,44px);grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:stretch}
+#app .hero-left {position:relative;min-width:0;display:flex;flex-direction:column;justify-content:center;align-self:stretch;padding:clamp(14px,2vw,31px);border:1px solid rgba(224,193,126,.64);border-radius:18px;background:linear-gradient(100deg,rgba(3,25,28,.85),rgba(7,39,39,.48));box-shadow:0 12px 32px rgba(0,0,0,.19),inset 0 1px rgba(255,242,211,.08)}
+#app .overline {letter-spacing:.20em;font-size:clamp(10px,.94vw,14px)}
+#app .next-name {margin:clamp(6px,1.3vh,15px) 0 clamp(2px,.8vh,10px);font-size:clamp(55px,7.7vw,118px);text-shadow:0 4px 30px rgba(0,0,0,.32)}
+#app .next-row {align-items:baseline;gap:clamp(12px,1.8vw,26px)}
+#app .main-time {font-size:clamp(35px,4.1vw,64px)}
+#app .counter {font-size:clamp(11px,1.2vw,17px);letter-spacing:.06em}
+#app .countnum {font-size:1.1em;font-weight:650;color:#f5e8cf}
+#app .next-arabic {font-size:clamp(17px,1.8vw,28px)}
+#app .hero-right {align-self:stretch;justify-content:center;padding:clamp(12px,2vw,28px);border:1px solid rgba(215,182,116,.27);border-radius:18px;background:linear-gradient(105deg,rgba(2,28,32,.6),rgba(3,21,26,.77));backdrop-filter:blur(4px)}
+#app .bismillah {font-size:clamp(24px,2.6vw,43px);color:#eddda9;max-width:100%;white-space:normal}
+#app .hero-verse {font-size:clamp(18px,1.85vw,30px);line-height:1.65}
+#app .hero-caption {font-size:clamp(12px,1.3vw,19px);line-height:1.33}
+#app .times-band {background:rgba(5,30,32,.84);border:1px solid rgba(225,193,123,.5);border-radius:17px;padding:clamp(9px,1.3vh,17px) clamp(12px,1.9vw,30px);box-shadow:0 13px 30px rgba(0,0,0,.13)}
+#app .times-band::before,#app .times-band::after {display:none}
+#app .band-head {margin-bottom:clamp(8px,1.4vh,15px);font-size:clamp(10px,.9vw,14px);letter-spacing:.16em}
+#app .band-head .sun {font-size:clamp(9px,.85vw,12px)}
+#app .prayer-cell {position:relative;gap:clamp(3px,.65vh,8px);border-color:rgba(215,179,115,.24);min-height:clamp(45px,6.3vh,76px)}
+#app .prayer-cell .pname {font-size:clamp(13px,1.14vw,20px)}
+#app .prayer-cell .ptime {font-size:clamp(25px,2.7vw,43px)}
+#app .prayer-cell.active {background:rgba(220,186,114,.13);border-radius:12px;box-shadow:inset 0 0 0 1px rgba(224,193,133,.37)}
+#app .prayer-cell.active::after {bottom:2px}
+#app .prayer-glyph {width:clamp(18px,2.3vw,29px);height:clamp(18px,2.3vw,29px);object-fit:contain;vertical-align:middle;filter:drop-shadow(0 3px 5px rgba(0,0,0,.2))}
+#app .daily-area {min-height:0;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(9px,1.4vw,24px)}
+#app .daily-story,#app .audio-area {min-width:0;min-height:0;border:1px solid rgba(223,187,119,.4);border-radius:16px;background:rgba(2,23,29,.81);padding:clamp(11px,1.6vw,23px);display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+#app .daily-label {font-size:clamp(9px,.86vw,13px);letter-spacing:.19em;margin-bottom:clamp(6px,.9vh,10px)}
+#app .daily-title {font-size:clamp(19px,2vw,32px);line-height:1.45;max-height:3.1em;-webkit-line-clamp:2;text-align:center}
+#app .daily-de {font-size:clamp(12px,1.28vw,21px);white-space:normal;line-height:1.25}
+#app .source {font-size:clamp(9px,.9vw,12px)}
+#app .audio-area {border-left:1px solid rgba(223,187,119,.4)}
+#app .audio-kicker {font-size:clamp(9px,.85vw,13px);letter-spacing:.19em}
+#app .audio-title {font-size:clamp(25px,2.55vw,40px);margin:4px 0}
+#app .audio-sub {font-size:clamp(10px,1vw,15px)}
+#app .audio-controls {gap:clamp(7px,.95vw,15px)}
+#app .round {width:clamp(36px,3vw,47px);height:clamp(36px,3vw,47px)}
+#app .round.primary {width:clamp(42px,3.6vw,54px);height:clamp(42px,3.6vw,54px)}
+#app .foot {border:0;justify-content:space-between;padding-top:0;gap:clamp(8px,1.3vw,21px);min-width:0}
+#app .foot .status {max-width:clamp(130px,21vw,400px);font-size:clamp(8px,.68vw,11px);align-self:center}
+#app .footnav {gap:clamp(5px,.65vw,13px)}
+#app .touchbutton {border-radius:13px;padding:0 clamp(10px,1.15vw,21px);height:clamp(40px,5.5vh,58px);background:rgba(3,31,33,.84);font-size:clamp(10px,.91vw,14px);border-color:rgba(218,184,119,.54);font-weight:650}
+#app .touchbutton.strong {background:rgba(217,188,132,.18)}
+#app .nav-icon {width:clamp(22px,2.2vw,32px);height:clamp(22px,2.2vw,32px);object-fit:contain;filter:drop-shadow(0 4px 5px rgba(0,0,0,.33))}
+#app .footnav .touchbutton .icon {display:none}
+#app .settings-top .surtitle {letter-spacing:.21em}
+#app .overlay {background:rgba(3,16,21,.97);backdrop-filter:blur(14px)}
+#app .settings-frame {max-width:1800px;min-height:100%;height:100%;margin:auto;overflow:hidden;padding:clamp(13px,2vw,31px);display:grid;grid-template-columns:minmax(175px,19%) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;grid-template-areas:"head head" "nav page" "foot foot";gap:clamp(9px,1.3vw,19px)}
+#app .settings-top {grid-area:head;min-height:clamp(55px,8vh,94px);border-bottom:1px solid var(--fine)}
+#app .settings-tabs {grid-area:nav;display:flex;flex-direction:column;align-items:stretch;gap:5px;overflow:auto;padding:10px 9px 10px 0;border-top:0;border-right:1px solid var(--fine);border-bottom:0}
+#app .settings-tabs button {white-space:normal;text-align:left;min-height:clamp(46px,6.1vh,64px);padding:10px 13px;border:1px solid transparent;border-radius:12px;font-size:clamp(12px,1vw,15px);line-height:1.2}
+#app .settings-tabs button.on {background:rgba(211,173,106,.15);border-color:rgba(222,191,127,.55);box-shadow:none;color:#f5dcab}
+#app .tabpage {grid-area:page;max-width:none;overflow:auto;align-content:start;padding:clamp(6px,1vw,14px) clamp(8px,1.2vw,19px);scrollbar-width:thin}
+#app .tabpage.on {display:grid;gap:clamp(13px,2vh,25px)}
+#app .setting-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,25px)}
+#app .field {background:rgba(8,37,39,.75);padding:clamp(11px,1.25vw,20px);border:1px solid rgba(217,185,119,.24);border-radius:12px}
+#app .field label {font-size:clamp(11px,.95vw,14px);font-weight:700;letter-spacing:.045em;color:#dfc28c}
+#app .field input,#app .field select {font-size:clamp(12px,1.1vw,17px);border:1px solid rgba(217,185,119,.37);border-radius:9px;padding:10px 12px;background:rgba(1,17,22,.72);color:#fff8ea;min-height:44px}
+#app .field input[type=range] {background:transparent;border:0;padding:6px 0}
+#app .savebar {grid-area:foot;min-width:0;background:rgba(4,29,30,.88);border:1px solid rgba(215,182,116,.34);padding:10px 16px;border-radius:13px}
+#app .save-action,#app .secondary-action {min-height:40px;border-radius:12px}
+#app .settings-icons {width:23px;height:23px;object-fit:contain;margin-right:8px}
+#app .wallpaper-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(9px,1vw,17px)}
+#app .wallpaper-option {display:block;text-align:left;min-width:0;padding:7px;background:rgba(3,22,26,.7);border:1px solid rgba(206,170,110,.43);border-radius:12px}
+#app .wallpaper-option img {display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:7px;background:#163a35}
+#app .wallpaper-option strong {display:block;font-size:12px;color:#f4e8d2;margin:6px 4px 3px;font-weight:600}
+#app .wallpaper-option[aria-pressed="true"] {outline:2px solid #d5b778;outline-offset:1px}
+#app .wallpaper-notice,.h3-note {font-size:clamp(11px,.95vw,14px);line-height:1.5;color:var(--muted)}
+#app .h3-toggle {display:inline-flex;align-items:center;gap:10px;min-height:48px;cursor:pointer}
+#app .h3-toggle input {accent-color:#b99b60;width:22px;height:22px}
+#app .h3-section-title {font:500 clamp(22px,2vw,33px) var(--display);color:var(--cream);margin:8px 0 2px}
+#app #saver {background-size:cover;background-position:center}
+#app #saver::before {content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,16,18,.7),rgba(0,15,18,.28) 45%,rgba(0,16,18,.9));pointer-events:none}
+#app #saver .saver-content,#app #saver .saver-clock,#app #saver .saver-bottom {position:relative;z-index:2}
+#app #saver .saver-clock {position:absolute;top:clamp(21px,3vw,49px);right:clamp(21px,3vw,49px)}
+#app #saver .saver-content {max-width:min(1000px,84vw);padding:clamp(12px,2vw,38px);background:rgba(1,18,21,.31);border-radius:24px;text-shadow:0 4px 20px rgba(0,0,0,.7)}
+#app #saver .saver-ar {font-size:clamp(37px,4.7vw,73px);line-height:1.6}
+#app #saver .saver-de {font-size:clamp(24px,2.5vw,40px);line-height:1.4}
+#app #adhanVisual {background:linear-gradient(150deg,rgba(5,31,34,.95),rgba(0,16,21,.92));gap:clamp(13px,2vh,30px);background-size:cover;background-position:center}
+#app #adhanVisual::before {content:"";position:absolute;inset:0;background:rgba(0,18,21,.52);pointer-events:none}
+#app #adhanVisual.active .adhan-title {font-size:clamp(43px,5.8vw,94px);color:#f4e7cb;text-shadow:0 3px 17px rgba(0,0,0,.4)}
+#app #adhanVisual.active .adhan-symbol {font-size:clamp(44px,6vw,103px)}
+#app .h3-verse-badge {font-size:10px;letter-spacing:.19em;color:#ebce94}
+#app[data-home-theme="light"] {--h3-panel:rgba(246,241,222,.9);--h3-ivory:#253c36;--h3-gold:#947341;--h3-line:rgba(113,92,55,.4);--gold:#947341!important;--cream:#213931!important;--muted:#5b6b61!important;background-color:#e9e9d9;color:#213931}
+#app[data-home-theme="light"]::before {background:linear-gradient(90deg,rgba(247,243,226,.93),rgba(241,244,226,.50),rgba(243,240,217,.84))}
+#app[data-home-theme="light"] .hero-left,#app[data-home-theme="light"] .hero-right,#app[data-home-theme="light"] .times-band,#app[data-home-theme="light"] .daily-story,#app[data-home-theme="light"] .audio-area,#app[data-home-theme="light"] .touchbutton {background:rgba(247,245,228,.88);color:#1d352e;border-color:rgba(141,111,63,.52)}
+#app[data-home-theme="light"] .bismillah,#app[data-home-theme="light"] .hero-verse,#app[data-home-theme="light"] .brand-mini,#app[data-home-theme="light"] .overline,#app[data-home-theme="light"] .audio-kicker,#app[data-home-theme="light"] .daily-label {color:#775a35}
+#app[data-home-theme="light"] .counter,#app[data-home-theme="light"] .countnum,#app[data-home-theme="light"] .daily-de,#app[data-home-theme="light"] .source,#app[data-home-theme="light"] .audiosmall,#app[data-home-theme="light"] .site-name,#app[data-home-theme="light"] .date,#app[data-home-theme="light"] .prayer-cell .pname,#app[data-home-theme="light"] .prayer-cell .ptime {color:#304840}
+#app[data-home-theme="light"] .prayer-cell.active {background:rgba(193,170,110,.25)}
+#app[data-home-theme="light"] .settings-frame {background:#efe9d8}
+#app[data-home-theme="light"] .overlay {background:rgba(239,233,216,.98)}
+#app[data-home-theme="light"] .field,#app[data-home-theme="light"] .savebar {background:#fbf9ec}
+#app[data-home-theme="light"] .field input,#app[data-home-theme="light"] .field select {background:#fffdf5;color:#243a31}
+#app[data-home-theme="light"] .field label,#app[data-home-theme="light"] .settings-tabs button.on {color:#795c2f}
+@media (max-height:680px) {
+ #app .screen {grid-template-rows:auto minmax(0,1.16fr) auto minmax(0,.88fr) auto;gap:6px;padding-top:9px;padding-bottom:9px}
+ #app .hero-left,#app .hero-right {padding:10px 16px}
+ #app .next-name {font-size:clamp(41px,6.4vw,78px);margin:5px 0}
+ #app .bismillah {font-size:clamp(18px,2.3vw,30px)}
+ #app .hero-verse {font-size:clamp(14px,1.5vw,21px)}
+ #app .hero-caption {font-size:clamp(10px,.95vw,14px)}
+ #app .prayer-glyph {display:none}
+ #app .times-band {padding:5px 13px}
+ #app .prayer-cell {min-height:41px;gap:1px}
+ #app .daily-story,#app .audio-area {padding:9px 13px}
+ #app .daily-title {font-size:clamp(15px,1.6vw,23px);-webkit-line-clamp:1}
+ #app .daily-de {font-size:clamp(11px,1.05vw,14px)}
+ #app .audio-title {font-size:clamp(21px,2vw,28px)}
+ #app .audio-controls {margin-top:3px}
+ #app .foot .status {display:none}
+ #app .footnav {width:100%;justify-content:space-between}
+}
+@media (max-width:990px) {
+ #app .footnav .touchbutton {padding:0 9px}
+ #app .site .date {display:none}
+ #app .hero-right {padding:10px}
+ #app .hero-verse {display:none}
+ #app .settings-frame {grid-template-columns:minmax(135px,23%) minmax(0,1fr)}
+ #app .wallpaper-grid {grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:700px) and (orientation:landscape) {
+ #app .brand-mini,#app .site {display:none}
+ #app .hero {gap:8px}
+ #app .hero-left {padding:9px}
+ #app .hero-right .hero-caption {display:none}
+ #app .touchbutton span {display:none}
+ #app .daily-de {display:none}
+ #app .settings-frame {grid-template-columns:130px minmax(0,1fr)}
+}
+@media (orientation:portrait) {
+ #app .screen {grid-template-rows:auto minmax(0,1fr) auto auto auto}
+ #app .hero {grid-template-columns:1fr}
+ #app .daily-area {grid-template-columns:1fr}
+ #app .hero-right {display:none}
+ #app .settings-frame {grid-template-columns:1fr;grid-template-rows:auto auto minmax(0,1fr) auto;grid-template-areas:"head" "nav" "page" "foot"}
+ #app .settings-tabs {flex-direction:row;overflow:auto;border-right:0;border-bottom:1px solid var(--fine)}
+ #app .settings-tabs button {min-height:44px;white-space:nowrap}
+}
+@media (prefers-reduced-motion:reduce){#app * {scroll-behavior:auto!important;animation-duration:0.001ms!important;transition-duration:0.001ms!important}}
