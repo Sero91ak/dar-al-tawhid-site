@@ -99,7 +99,7 @@ const lock=load("content/admin/push-lanes-lock.json");
 const notification={
   prepared:Boolean(manifest.notificationDraft?.title&&manifest.notificationDraft?.body),
   sent:false,
-  reason:"Sending is a separate admin operation after publication. Push-lock, password, global and lane approvals, verified opted-in adult-woman segment and delivery audit are mandatory.",
+  reason:"Sending is a separate admin operation after publication. Push-lock, password, global and lane approvals, verified opted-in global adult post segment and delivery audit are mandatory.",
   pushLocked:lock.locked===true,
   audience:manifest.notificationDraft?.audience
 };
@@ -109,8 +109,10 @@ const prepublishReady=structureErrors.length===0&&detail.every(d=>d.blockers.eve
 const notifyReady=allReady&&manifest.state==="published-live-verified"&&
   lock.locked===false&&
   manifest.notificationDraft?.guardStatus==="admin-unlocked"&&
-  manifest.notificationDraft?.verifiedSegmentType==="knowledge_woman"&&
-  manifest.notificationDraft?.verifiedSegmentAudience==="adult-app AND knowledge-opt-in"&&
+  manifest.notificationDraft?.type==="global"&&
+  manifest.notificationDraft?.recipientSegment==="DAR_PUSH"&&
+  manifest.notificationDraft?.verifiedSegmentType==="global_adult_post_optin"&&
+  manifest.notificationDraft?.verifiedSegmentAudience==="adult-app AND post-push-opt-in"&&
   Number.isInteger(manifest.notificationDraft?.verifiedOptInRecipientCount)&&
   manifest.notificationDraft.verifiedOptInRecipientCount>0&&
   manifest.notificationDraft?.requireSeparatePushLockPassword===true&&
