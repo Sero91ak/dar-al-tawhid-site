@@ -1,4 +1,5 @@
 📖 𝐀𝐋𝐋𝐀𝐇 𝐍𝐈𝐌𝐌𝐓 𝐍𝐔𝐑 𝐀𝐔𝐅𝐑𝐈𝐂𝐇𝐓𝐈𝐆𝐄 𝐓𝐀𝐓𝐄𝐍 𝐀𝐍
+
 #DarAlTawhid #AbuUmamah #Ikhlas #Hadith
 
 ━━━━━━━━━━━━━━━━
@@ -11,9 +12,11 @@ Ein Mann fragte den Propheten ﷺ:
 
 Der Gesandte Allāhs ﷺ antwortete:
 
-„Er erhält nichts.“
+„Er erhält 𝐧𝐢𝐜𝐡𝐭𝐬.“
 
-Der Mann wiederholte seine Frage dreimal, und jedes Mal lautete die Antwort: „Er erhält nichts.“
+Der Mann wiederholte seine Frage dreimal, und jedes Mal lautete die Antwort:
+
+„Er erhält nichts.“
 
 Dann sagte der Prophet ﷺ:
 
@@ -21,8 +24,10 @@ Dann sagte der Prophet ﷺ:
 
 ━━━━━━━━━━━━━━━━
 
-📝 𝐐𝐮𝐞𝐥𝐥𝐞𝐧: an-Nasāʾī, Sunan, Kitāb al-Ǧihād, Nr. 3140 (Buch 25, Ḥadīṯ 56). Bewertung: ḥasan (Darussalam); ḥasan ṣaḥīḥ (al-Albānī, Ṣaḥīḥ an-Nasāʾī, Nr. 3140).
+📝 𝐐𝐮𝐞𝐥𝐥𝐞𝐧: an-Nasāʾī, Sunan, Kitāb al-Ǧihād, Nr. 3140 (Buch 25, Ḥadīṯ 56).
+
+Bewertung: ḥasan (Darussalam); ḥasan ṣaḥīḥ (al-Albānī, Ṣaḥīḥ an-Nasāʾī, Nr. 3140).
 
 🔗 𝐐𝐮𝐞𝐥𝐥𝐞: dar-al-tawhid.de/q/60/
 
-🌙 𝐅𝐚𝐳𝐢𝐭: 𝑰𝒌𝒉𝒍𝒂𝒔 bedeutet, gute Taten allein um Allāhs willen zu verrichten. Wer nach Lohn bei Allāh strebt, muss seine Absicht vor dem Streben nach Ruhm und Lob schützen.
+🌙 𝐅𝐚𝐳𝐢𝐭: Ikhlāṣ bedeutet, gute Taten allein um Allāhs willen zu verrichten. Wer nach Lohn bei Allāh strebt, muss seine 𝑨𝒃𝒔𝒊𝒄𝒉𝒕 vor dem Streben nach 𝐑𝐮𝐡𝐦 und Lob schützen.
