@@ -3,7 +3,7 @@
 
 ━━━━━━━━━━━━━━━━
 
-🖋️ 𝐌𝐮𝐡𝐚𝐦𝐦𝐚𝐝 𝐢𝐛𝐧 𝐚𝐥-𝐇𝐚𝐬𝐚𝐧 𝐚𝐬𝐡-𝐒𝐡𝐚𝐲𝐛𝐚𝐧𝐢 (𝐫𝐚𝐡𝐢𝐦𝐚𝐡𝐮𝐥𝐥𝐚𝐡), der frühe Schüler Abū Ḥanīfahs (gest. 189 n. H.), wird folgende Aussage zugeschrieben:
+🖋️ 𝐌𝐮𝐡𝐚𝐦𝐦𝐚𝐝 𝐢𝐛𝐧 𝐚𝐥-𝐇𝐚𝐬𝐚𝐧 𝐚𝐬𝐡-𝐒𝐡𝐚𝐲𝐛𝐚𝐧𝐢 (𝐫𝐚𝐡𝐢𝐦𝐚𝐡𝐮𝐥𝐥𝐚𝐡), der frühe Schüler Abū Ḥanīfahs (gest. 189 n. H.), wird dieser Āṯār zugeschrieben (ausführliche sinngemäße deutsche Wiedergabe):
 
 „Die Rechtsgelehrten vom Osten bis zum Westen waren sich einig, an den Qurʾān und an die Überlieferungen zu glauben, die zuverlässige Überlieferer vom Gesandten Allāhs ﷺ über die Eigenschaften des Herrn überbracht haben.
 
@@ -11,9 +11,9 @@ Diese Überlieferungen sind anzunehmen, 𝐨𝐡𝐧𝐞 𝐢𝐡𝐫𝐞𝐧 �
 
 Wer solche Berichte nach eigenen Vorstellungen umdeutet, entfernt sich – so die überlieferte Aussage – von dem Weg, dem der Gesandte Allāhs ﷺ und die frühe Gemeinschaft folgten.
 
-Denn sie machten keine eigenmächtigen Beschreibungen und keine spekulativen Auslegungen. Vielmehr hielten sie sich an das, was im 𝑲𝒊𝒕𝒂𝒃 𝒖𝒏𝒅 𝒊𝒏 𝒅𝒆𝒓 𝑺𝒖𝒏𝒏𝒂𝒉 überliefert wurde, und schwiegen über das, wofür sie keine Offenbarungsgrundlage hatten.
+Denn sie machten keine eigenmächtigen Beschreibungen und keine spekulativen Auslegungen. Vielmehr hielten sie sich an das, was im 𝑲𝒊𝒕𝒂𝒃 𝒖𝒏𝒅 𝒊𝒏 𝒅𝒆𝒓 𝑺𝒖𝒏𝒏𝒂𝒉 überliefert wurde, und schwiegen danach.
 
-Wer die Lehre Ǧahms übernahm, verließ nach diesem Āṯār diesen Weg, weil er Allāh letztlich mit einer Beschreibung versah, die Seine bezeugten Eigenschaften aufhob.“
+Wer die Lehre Ǧahms übernahm, verließ nach diesem Āṯār diesen Weg, weil er Allāh so beschrieb, als sei Er nichts.“
 
 ━━━━━━━━━━━━━━━━
 
