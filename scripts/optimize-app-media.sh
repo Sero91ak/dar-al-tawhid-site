@@ -54,6 +54,12 @@ opt_image() {
   ext="${ext,,}"
   size=$(stat -c%s "$f")
   (( size >= 120000 )) || { skipped_count=$((skipped_count + 1)); return; }
+  # Already compliant feed assets must not lose fidelity on repeated PR runs.
+  # A fresh oversize source is still optimized; full scans remain unchanged.
+  if [[ "$MODE" == "--stdin" && "$f" == assets/feed-backgrounds/auto/* ]] && (( size <= 1200000 )); then
+    skipped_count=$((skipped_count + 1))
+    return
+  fi
 
   case "$ext" in
     jpg|jpeg)
