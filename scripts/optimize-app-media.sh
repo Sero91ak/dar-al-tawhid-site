@@ -12,6 +12,7 @@ before_total=0
 after_total=0
 changed_count=0
 skipped_count=0
+audio_changed_count=0
 
 is_protected() {
   [[ "$f" == kids/assets/prophet-story-audio/* || "$f" == kids/assets/mubashshirun-story-audio/* || "$f" == kids/assets/sahabiyyat-story-audio/* ]] && return 0
@@ -39,6 +40,7 @@ replace_if_smaller() {
     before_total=$((before_total + old))
     after_total=$((after_total + new))
     changed_count=$((changed_count + 1))
+    case "${src,,}" in *.mp3|*.m4a|*.aac) audio_changed_count=$((audio_changed_count + 1));; esac
     printf 'optimized %s: %s -> %s bytes\n' "$src" "$old" "$new"
   else
     rm -f "$tmp"
@@ -52,6 +54,12 @@ opt_image() {
   ext="${ext,,}"
   size=$(stat -c%s "$f")
   (( size >= 120000 )) || { skipped_count=$((skipped_count + 1)); return; }
+  # Already compliant feed assets must not lose fidelity on repeated PR runs.
+  # A fresh oversize source is still optimized; full scans remain unchanged.
+  if [[ "$MODE" == "--stdin" && "$f" == assets/feed-backgrounds/auto/* ]] && (( size <= 1200000 )); then
+    skipped_count=$((skipped_count + 1))
+    return
+  fi
 
   case "$ext" in
     jpg|jpeg)
@@ -159,13 +167,25 @@ if [[ "$MODE" == "--all" ]]; then
   done < <(find assets kids/assets content apple-tv ios test/assets -type f \
     \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.mp4' -o -iname '*.m4a' -o -iname '*.aac' -o -iname '*.mp3' \) \
     -print0 2>/dev/null)
+elif [[ "$MODE" == "--oversized" ]]; then
+  # Controlled remediation of historical >1.2 MB runtime media only.
+  # Never touch unrelated files, originals, master assets or protected logos.
+  while IFS= read -r -d '' f; do
+    process_one "$f"
+  done < <(find assets/feed-backgrounds/auto -type f \
+    \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) \
+    -size +1200000c -print0 2>/dev/null)
 else
   while IFS= read -r f; do
     [[ -n "$f" ]] && process_one "$f"
   done
 fi
 
-python3 scripts/update-local-media-metadata.py
+if [[ "$MODE" == "--all" ]] || (( audio_changed_count > 0 )); then
+  python3 scripts/update-local-media-metadata.py
+else
+  echo "No audio bytes changed: preserving unrelated Kids and voice metadata."
+fi
 
 saved=$((before_total - after_total))
 printf 'MEDIA_OPTIMIZE_SUMMARY changed=%s skipped=%s saved_bytes=%s\n' "$changed_count" "$skipped_count" "$saved"
