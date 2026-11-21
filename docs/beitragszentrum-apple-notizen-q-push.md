@@ -19,6 +19,10 @@
 - Führt ein Versions-Lock zum Abbruch, war ein Run nur auf GitHub Pages erfolgreich oder wird die kanonische Q-URL nicht ausgeliefert, **Link nicht als funktionierend bezeichnen**, Fehler nachvollziehbar korrigieren und Live-Status offen melden.
 - Beim Copy-Text am Ende nur den **tatsächlich existierenden** eigenen Link nennen; bei noch ausstehender Live-Freigabe eindeutig \`noch nicht live\` angeben.
 
+## Neue Unicode-Aussagegeberregel (21.11.2026)
+
+**Bei jedem Beitrag muss der Aussagegeber nach 🖋️, samt lateinisch geschriebener Ehrformel, in echter Unicode-Fettschrift kopierbar sein.** Im Zitat wichtige Wörter bzw. kurze Kernsätze wahlweise in echten Unicode-Fett- bzw. geschwungenen Fettkursivzeichen; `📝 𝐐𝐮𝐞𝐥𝐥𝐞𝐧:` gefolgt direkt nach Doppelpunkt von exakter Stelle/Nummer/Edition/Status und nur belegtem Zeitbezug; `🌙 𝐅𝐚𝐳𝐢𝐭:` auf derselben Zeile mit echter Unicode-Hervorhebung. Keine bloßen Markdown- oder CSS-Formatierungen im Apple-Notizen-Endtext. Exakte Diakritik/Originalschrift in Q erhalten. Vollständige Regel: `docs/beitragszentrum-social-unicode-regeln-20261121.md`.
+
 ## 4. IMMER als letzte nutzbare Ausgabe: der fertige Apple-Notizen-Beitrag
 Der Nutzer speichert und teilt religiöse Texte in Apple Notizen. Nach Erstellung einer freigegebenen funktionierenden Q-Seite **als letztes Inhaltselement der Antwort genau EINEN durchgehenden kopierbaren Writing-/Textblock** mit diesem Aufbau ausgeben:
 
