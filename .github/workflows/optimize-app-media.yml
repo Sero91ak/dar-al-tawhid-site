@@ -87,9 +87,99 @@ jobs:
           elif [ "${{ github.event_name }}" = "pull_request" ]; then
             BASE_SHA="${{ github.event.pull_request.base.sha }}"
             git fetch --no-tags origin "$BASE_SHA" --depth=1
-            git diff --name-only "$BASE_SHA" HEAD -- \
+            # Only run the expensive optimizer and audio metadata pass if actual
+            # media bytes changed. Source JSON/JS/CSS is covered by other guards,
+            # and the independent delivery-size budget below still executes.
+            media_paths="$(mktemp)"
+            trap 'rm -f "$media_paths"' EXIT
+            git diff --diff-filter=ACMR --name-only "$BASE_SHA" HEAD -- \
+              assets kids/assets content apple-tv ios test/assets \
+              | grep -Ei '\.(jpg|jpeg|png|webp|mp4|m4a|aac|mp3)
+          else
+            git diff --name-only HEAD^ HEAD -- \
               assets kids/assets content apple-tv ios test/assets \
               | scripts/optimize-app-media.sh --stdin
+          fi
+
+      - name: Restore protected brand assets
+        if: steps.mode.outputs.skip != '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          # A shallow checkout may already hold a non-ancestor origin/main.
+          # Fetch the current main tree into FETCH_HEAD instead of rewriting
+          # the remote-tracking ref (which rejects non-fast-forward updates).
+          git fetch --no-tags --depth=1 origin refs/heads/main
+          git checkout FETCH_HEAD -- \
+            assets/app-icons \
+            assets/brand/seals \
+            kids/assets/kids-brand/logo-mark.png
+
+      - name: Enforce delivery budgets
+        if: steps.mode.outputs.skip != '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          fail=0
+          # Pull requests enforce the full media size limits on every added or
+          # modified media asset. A text-only change must not be blocked by old
+          # oversized assets that it did not introduce. Main and manual full
+          # scans still enforce the budget across the entire repository.
+          scan_file="$(mktemp)"
+          trap 'rm -f "$scan_file"' EXIT
+          if [ "${{ github.event_name }}" = "pull_request" ] && [ "${{ steps.mode.outputs.full }}" != "1" ]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+            git fetch --no-tags origin "$BASE_SHA" --depth=1
+            git diff --diff-filter=ACMR --name-only -z "$BASE_SHA" HEAD -- \
+              assets kids/assets content apple-tv ios > "$scan_file"
+            echo "PR media budget: checking only modified assets against strict limits."
+          else
+            find assets kids/assets content apple-tv ios -type f \
+              \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.mp4' \) \
+              -print0 2>/dev/null > "$scan_file" || true
+            echo "Main/full media budget: checking every stored delivery asset."
+          fi
+          checked=0
+          while IFS= read -r -d '' f; do
+            [ -f "$f" ] || continue
+            case "$f" in
+              *Assets.xcassets*|*/icons/*|*/app-icons/*|*/brand/seals/*|*/logo/*|*/logos/*|*/kids-brand/logo-mark.png|*favicon*|*watermark*|*/masters/*|*/master/*|*/originals/*|*/raw/*|*/sources/*|*-master.*) continue ;;
+            esac
+            size=$(stat -c%s "$f")
+            case "${f,,}" in
+              *.jpg|*.jpeg|*.png|*.webp)
+                checked=$((checked + 1))
+                if [ "$size" -gt 1200000 ]; then echo "::error::$f is still larger than 1.2 MB"; fail=1; fi ;;
+              *.mp4)
+                checked=$((checked + 1))
+                if [ "$size" -gt 12000000 ]; then echo "::warning::$f remains larger than 12 MB; move long video to Cloudflare/R2 streaming delivery."; fi ;;
+            esac
+          done < "$scan_file"
+          echo "Media delivery budget checked=$checked status=$fail"
+          exit "$fail"
+
+      - name: Commit optimized media
+        if: steps.mode.outputs.skip != '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets kids/assets content apple-tv ios test/assets kids/data kids/version.json data/pronunciation voice-studio scripts 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Media already within optimization targets."
+            exit 0
+          fi
+          git commit -m "[media-optimized] Compress app media automatically"
+          TARGET_BRANCH="${{ github.event.pull_request.head.ref || 'main' }}"
+          git pull --rebase origin "$TARGET_BRANCH"
+          git push origin HEAD:"$TARGET_BRANCH"
+ > "$media_paths" || true
+            if [ -s "$media_paths" ]; then
+              scripts/optimize-app-media.sh --stdin < "$media_paths"
+            else
+              echo "No changed media binaries: skipping optimizer and unrelated audio metadata scan."
+            fi
           else
             git diff --name-only HEAD^ HEAD -- \
               assets kids/assets content apple-tv ios test/assets \
