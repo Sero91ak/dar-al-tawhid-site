@@ -211,3 +211,23 @@ if (fail.length) {
   process.exit(1);
 }
 console.log('Q-Quellenkarten-Gate OK: ' + files.length + ' aktive Bestandskarten, alle Nachweiskarten funktional adressiert; zukünftige Q ab 43 strikt geprüft.');
+
+/* ONE-TIME, READ-ONLY Q60 PRODUCTION SMOKE PROBE — AUDIT BRANCH ONLY, NEVER MERGE */
+if (process.env.GITHUB_ACTIONS === 'true') {
+  const now=Date.now(), base='https://dar-al-tawhid.de',checks=[
+    {p:'/q/60/',expect:['qsource-page','qsource-links','Abū Umāmah','q60-locales.json','/lernen/ikhlas-niyyah-abu-umamah/']},
+    {p:'/assets/q60-locales.json',expect:['"qSourceId": 60','"supported"','"de"','"ar"','"en"','"tr"','"ku"','"ckb"','"bs"','"fr"','"es"','"quiz"']},
+    {p:'/lernen/ikhlas-niyyah-abu-umamah/',expect:['heritage-learning','id="quiz"','q60-locales.json','/q/60/']}
+  ];
+  let errors=0;
+  for(const x of checks) {
+    try{
+      const res=await fetch(base+x.p+'?q60-live-check='+now,{headers:{'cache-control':'no-cache','user-agent':'DAR-Q60-live-CI/1'},signal:AbortSignal.timeout(20000)});
+      const body=await res.text(),good=res.status===200&&x.expect.every(k=>body.includes(k));
+      console.log('Q60 PUBLIC HTTP',JSON.stringify({path:x.p,status:res.status,bytes:body.length,ok:good,cfRay:res.headers.get('cf-ray')}));
+      if(!good)errors++;
+    }catch(e){errors++;console.error('Q60 PUBLIC ERROR',x.p,String(e))}
+  }
+  if(errors){console.error('Q60 LIVE CHECK FAILED: '+errors);process.exitCode=2}
+  else console.log('Q60 PUBLIC LIVE PASS: all 3 source/locale/quiz resources verified');
+}
