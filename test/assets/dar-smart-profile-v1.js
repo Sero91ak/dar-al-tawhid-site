@@ -228,11 +228,7 @@ function updateHome(p){
   var content=p.gender==="woman"?"Dein persönlicher Zugang zu <strong>Frauenwissen</strong>, Qurʾān, Sunnah, Fiqh und überprüften Aussagen der frühen Gelehrten.":p.gender==="man"?"Dein persönlicher Wissensweg durch <strong>Tawḥīd</strong>, Qurʾān, Sunnah, Fiqh und die Aussagen der frühen Gelehrten.":"Entdecke <strong>Qurʾān</strong>, <strong>Sunnah</strong>, <strong>Āthār der frühen Imāme</strong> und geprüfte islamische Wissensgebiete.";
   if(intro.dataset.dspCopy!==p.gender){intro.innerHTML=content;intro.dataset.dspCopy=p.gender}
  }
- var todayTitle=root.querySelector("#dhpTodayTitle");
- if(todayTitle)todayTitle.textContent=p.gender==="woman"?"Heute für dich als Frau":p.gender==="man"?"Heute für dich als Mann":"Heute für dich";
- var selected=picks(p),rec=todayFeature(p,selected.map(x=>x.id));
- var todayName=root.querySelector("#dhpTodayName"),todayRow=root.querySelector("#dhpTodayArticle");
- if(todayName&&todayRow&&rec){todayName.textContent=rec.title;todayRow.dataset.dhpRoute="post";todayRow.dataset.dhpValue=rec.id}
+ // Global “Heute für dich” is owned by DARCanonicalDailyV1, independent of gender.
  syncLatest(p,root);
  syncLibrary(p,root)
 }
