@@ -146,6 +146,15 @@ async function verifyFrauenNeufokusPublication(env, helpers) {
        row.translationReview!=="approved" || row.uiQa!=="passed" || row.publishQa!=="passed")) {
     throw feedError("Frauen-Neufokus: Quellen-, Sprach-, Geräte- oder Live-Freigabe fehlt", 409);
   }
+  // A mismatched source link must not start a 48h window whose public card
+  // would fail its own source verification and stay invisible.
+  const focusById = new Map(focus.items.map(item => [item.id, item]));
+  if(batch.records.some(row => {
+    const item = focusById.get(row.id);
+    return !item || ["sourceFile","sourceId","sourceUrl","area"].some(key => item[key] !== row[key]);
+  })) {
+    throw feedError("Frauen-Neufokus: Quellen-Metadaten im Fokus weichen vom Sammelrelease ab",409);
+  }
   if(!Array.isArray(locales.entryIds))throw feedError("Frauen-Neufokus: Sprachkatalog fehlt",409);
   const codes=["de","ar","en","tr","ku","ckb","bs","fr","es"];
   for(const row of batch.records){
