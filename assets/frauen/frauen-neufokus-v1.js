@@ -81,9 +81,32 @@ function validWindow(feed){
  if(Date.now()<s||Date.now()>=e)return null;
  return{start:s,end:e};
 }
-async function json(path){
- var response=await w.fetch(path+(path.indexOf("?")<0?"?":"&")+"cache="+Date.now(),{cache:"no-store",credentials:"same-origin"});
- if(!response.ok)throw Error("Neufokus HTTP "+response.status);return response.json();
+// Limit both the network request and response-body decoding. A stalled fetch
+// must not keep the shared pending promise permanently locked.
+async function fetchReady(path,format){
+ var controller=typeof w.AbortController==="function"?new w.AbortController():null;
+ var timer=null;
+ var deadline=new Promise(function(_,reject){
+  timer=w.setTimeout(function(){
+   if(controller)controller.abort();
+   reject(Error("Neufokus request timeout"));
+  },10000);
+ });
+ try{
+  var request=(async function(){
+   var options={cache:"no-store",credentials:"same-origin"};
+   if(controller)options.signal=controller.signal;
+   var response=await w.fetch(path,options);
+   if(!response.ok)throw Error("Neufokus HTTP "+response.status);
+   return format==="text"?response.text():response.json();
+  })();
+  return await Promise.race([request,deadline]);
+ }finally{
+  if(timer!==null)w.clearTimeout(timer);
+ }
+}
+function json(path){
+ return fetchReady(path+(path.indexOf("?")<0?"?":"&")+"cache="+Date.now(),"json");
 }
 async function verifyPublished(){
  var manifest=await json("/assets/frauen/frauen-neufokus-v1.json");
@@ -123,9 +146,7 @@ async function verifyPublished(){
  }
  // The actual interactive learning destination must exist in the deployed
  // environment. Do not promote a 16-card focus that opens a missing lesson.
- var learning=await w.fetch("/lernen/frauen-wissen/?neufokus=1",{cache:"no-store",credentials:"same-origin"});
- if(!learning.ok)return false;
- var lessonHtml=await learning.text();
+ var lessonHtml=await fetchReady("/lernen/frauen-wissen/?neufokus=1","text");
  if(lessonHtml.indexOf('id="quiz"')<0||
     lessonHtml.indexOf("frauen-learning-v1.js")<0)return false;
  return true;
