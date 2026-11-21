@@ -30,7 +30,7 @@ for(const row of launch.items){
  const e=serverEntries["/"+row.sourceFile].eintraege.find(x=>x.kennung===row.id);
  assert.ok(e);e.quellenstatus="nicht-anzeigen";e.freigabeDurchSerhat=true;
 }
-let deployedLanguages=JSON.parse(JSON.stringify(localeCatalog)),learningAvailable=true;
+let deployedLanguages=JSON.parse(JSON.stringify(localeCatalog)),learningAvailable=true,visitorGender="neutral";
 const expiryTimers=new Map();let timerSerial=0;
 const registry=new Map(),listeners={},anchor={insertAdjacentElement(pos,el){assert.equal(pos,"afterend");registry.set(el.id,el)}};
 function node(tag){
@@ -51,6 +51,7 @@ const doc={readyState:"loading",hidden:false,head:{appendChild(el){registry.set(
  createElement:node,addEventListener(ev,cb){(listeners[ev]??=[]).push(cb)}
 };
 const win={document:doc,location:{href:"https://dar-al-tawhid.de/",pathname:"/",hash:"#home"},console,
+ DAR_VISITOR_SMART_PROFILE_V1:{get(){return {gender:visitorGender}}},
  requestAnimationFrame(cb){cb()},
  localStorage:{getItem(){return lang}},
  setInterval(){},setTimeout(cb,delay){const id=++timerSerial;expiryTimers.set(id,{cb,delay});return id},
@@ -93,6 +94,14 @@ function getCard(){return registry.get("darFrauenNeufokus48h")||null}
  learningAvailable=true;
  await refresh();const active=getCard();
  assert.ok(active,"16/16 source records should unlock within valid 48h feed window");
+ // The 48h editorial spotlight is globally visible, independently of
+ // personalized recommendations in the men's, women's, or neutral profile.
+ for(const gender of ["man","woman","neutral"]){
+  visitorGender=gender;
+  await refresh();
+  assert.ok(getCard(),"48h global spotlight must remain visible for "+gender+" visitor profile");
+ }
+ visitorGender="man";
  assert.equal(expiryTimers.size,1,"Precisely one expiry timer required for the visible focus");
  assert.equal(active.dir,"ltr");assert.equal(active.lang,"tr");
  assert.ok(active.children.some(x=>/16 yeni/.test(x.textContent)),"Turkish focus label missing");
@@ -111,5 +120,5 @@ function getCard(){return registry.get("darFrauenNeufokus48h")||null}
    const original=source["/"+row.sourceFile].eintraege.find(x=>x.kennung===row.id);
    assert.equal(original.quellenstatus,"nicht-anzeigen","Original source state changed: "+row.id);
  }
- console.log("PASS 48h Frauen Neufokus: draft hidden, hidden-source gate, 15/16 fail-close, 16/16 live, Turkish/Arabic RTL, in-app click, exact duration, expiry. No publish or push.");
+ console.log("PASS 48h Frauen Neufokus: global men/women/neutral, draft hidden, hidden-source gate, 15/16 fail-close, 16/16 live, Turkish/Arabic RTL, in-app click, exact duration, expiry. No publish or push.");
 })().catch(e=>{console.error(e.stack||e);process.exitCode=1});
