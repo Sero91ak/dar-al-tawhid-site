@@ -31,6 +31,9 @@ Der Nutzer speichert und teilt religiöse Texte in Apple Notizen. Nach Erstellun
 
 Keine Social-Media-Fußzeilen, keine externen URLs im finalen Apple-Notizen-Text, keine doppelten Quellen-, Kommentar- oder Prüfblöcke *nach* dem kopierfertigen Text. Bei einer Frage zum Status dürfen Nachweise und Fehlermeldungen außerhalb des Kopierblocks erläutert werden, jedoch **vor** dem abschließenden Block. Das Copy-Artefakt muss für iOS Apple Notizen ohne Nachformatierung nutzbar sein.
 
+
+**Verpflichtender Social-Zeichencheck (21.11.2026):** Für Apple Notizen, Telegram, Instagram und WhatsApp im finalen Kopierblock echte Unicode-Fett- (`𝐖𝐢𝐬𝐬𝐞𝐧`) und Unicode-Fettkursivzeichen (`𝑾𝒊𝒔𝒔𝒆𝒏`) als Text einsetzen. Keine Markdown-only-Fettschrift (`**Wort**`), bloße Kursivmarker (`*Wort*`) oder CSS als Ersatz; vor Ausgabe auf tatsächliche Unicode-Codepoints prüfen. Wörter mit Umlauten/Transliterationsdiakritika entweder vollständig regulär lassen oder andere, rein lateinische Schlüsselwörter betonen. Arabischer Wortlaut, Quellennummer, Q-Link, Titel und alle vier Hashtags bleiben unverändert. Dies betrifft nur die Social-Kopierfassung, nicht die barrierearme App-Fassung oder einen neuen Push.
+
 ## 5. Danach, nur auf weiteren ausdrücklichen „Push live“-Befehl
 - Genehmigten Erwachsenenbeitrag in die **vorhandene** zentrale Beitrags-/App-Quelle eintragen (\`tags: []\`, Aussage ohne technische Links), neunsprachige Inhaltsprüfung und bestehenden DĀR-Admin-Publikationsweg nutzen.
 - Erst nach erfolgreichem Cloudflare-Live-Nachweis, bestehendem idempotenten Push-Protokoll, Datenschutz- und Opt-in-Prüfung **genau eine** OneSignal-Benachrichtigung \`DAR_PUSH\`, Betreff **„Neuer Beitrag“**, Tap direkt zur individuellen Beitragsansicht. Keine zweite Nachricht, kein Geräte-Push bei bloßer Q-Erstellung.
