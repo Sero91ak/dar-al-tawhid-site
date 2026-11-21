@@ -23,6 +23,7 @@
 .q62-ar{font:500 clamp(23px,4.8vw,31px)/2.12 "Amiri","Noto Naskh Arabic",serif!important;overflow-wrap:anywhere;unicode-bidi:isolate}
 .q62-isnad{font:450 clamp(19px,4vw,24px)/2 "Amiri","Noto Naskh Arabic",serif!important;overflow-wrap:anywhere}
 .q62-note{font-size:15px!important;opacity:.87}
+.q62-comparison-card{border:1px solid rgba(175,143,86,.45);padding:15px 18px;margin:12px 0;border-radius:12px}.q62-comparison-card h4{margin:0 0 12px;font-size:18px}.q62-comparison-card p{font-size:16px;line-height:1.8}.q62-arabic-snippet{font:500 clamp(19px,3.8vw,25px)/2 "Amiri","Noto Naskh Arabic",serif!important;text-align:right;unicode-bidi:isolate}
 .q62-ordinal{font-size:23px;font-weight:800;color:#bba36f;min-width:34px}
 .q62-evidence-text{display:block;min-width:0}.q62-links .qsource-link{margin:9px 0;display:flex;align-items:center;gap:12px;overflow-wrap:anywhere}
 .q62-links .qsource-link-title{display:block}.q62-links .qsource-link-sub{display:block;margin-top:5px;line-height:1.4}
@@ -68,6 +69,10 @@ html[data-q-theme="light"] .q62-bar select{background:#fffaf0;color:#20392b}
 <section class="q62-section" id="q62-comparative-originals">
 <h3 id="q62-compare-h">Atharī, Ašʿarī und Māturīdī: Unterschiede</h3>
 <p id="q62-compare-intro">Der atharitische Zugang betont Annahme der Ṣifāt ohne Tašbīh und Takyīf. Ašʿarī- und Māturīdī-Schulen erkennen ebenfalls Allāhs Unvergleichbarkeit an, haben aber unterschiedliche Taʾwīl-/Tafwīḍ-Ansätze. Ihre genauen Positionen müssen aus ihren eigenen Werken verglichen werden.</p>
+<div class="q62-original-comparison" aria-label="Klassische Originaltexte im Vergleich">
+<article class="q62-comparison-card"><h4 id="q62-comparison-title-0">al-Ašʿarī · al-Ibānah · Kapitel über Istiwāʾ</h4><p class="q62-arabic-snippet" id="q62-comparison-arabic-0" lang="ar" dir="rtl">وقد قال قائلون من المعتزلة والجهمية والحرورية: إن معنى قول الله تعالى ... أنه استولى وملك وقهر</p><p id="q62-comparison-body-0">In al-Ibānah stellt al-Ašʿarī die Deutung „istawā = istawlà“ als Auffassung bestimmter Gegner vor und argumentiert dagegen. Deshalb darf sein eigener Text nicht ohne Differenzierung mit jeder späteren ašʿaritischen Taʾwīl-Position gleichgesetzt werden.</p></article>
+<article class="q62-comparison-card"><h4 id="q62-comparison-title-1">al-Māturīdī · Kitāb at-Tawḥīd · Erörterung des Thrones</h4><p class="q62-arabic-snippet" id="q62-comparison-arabic-1" lang="ar" dir="rtl">والاستواء قيل فيه بأوجه ثلاثة: أحدها الاستيلاء ... والثاني العلو والارتفاع ... والثالث التمام</p><p id="q62-comparison-body-1">Al-Māturīdī unterscheidet mehrere für „istawā“ genannte Sprachmöglichkeiten, darunter Herrschaft, Höhe und Vollendung, und argumentiert gegen die räumliche Umschließung Allāhs durch die Schöpfung. Das bloße Aufzählen sprachlicher Möglichkeiten beweist noch nicht, dass er jede als endgültige Deutung übernimmt.</p></article>
+</div>
 <div class="qsource-links q62-compare-links"><a href="https://ablibrary.net/book_content/b/9225/56?lang=ar" target="_blank" rel="noopener noreferrer">Abū Manṣūr al-Māturīdī · Kitāb at-Tawḥīd · Masʾalah bayān al-ʿarš</a>
 <a href="https://usul.ai/ar/t/ibana/99" target="_blank" rel="noopener noreferrer">Abū al-Ḥasan al-Ašʿarī · al-Ibānah · Bāb al-Istiwāʾ</a></div>
 <p id="q62-compare-caveat">Aš-Šaybānī starb 189 n. H.; die Schulen von al-Ašʿarī und al-Māturīdī entstanden später. Der Bericht nennt Ǧahm ausdrücklich, aber weder jene Schulen noch alle ihre Anhänger.</p></section>
@@ -104,6 +109,7 @@ document.querySelectorAll('#q62-details [data-detail-index]').forEach(section=>{
 set('q62-source-notice',d.sourceNotice);
 set('q62-pdf-h',d.details[5].heading);set('q62-pdf-explanation',d.details[5].body);
 set('q62-pdf-link',d.pdfLinkLabel+' · al-Lālakāʾī');
+for(let i=0;i<2;i++){const item=d.comparison?.[i]; if(item){set('q62-comparison-title-'+i,item.title);set('q62-comparison-body-'+i,item.body);set('q62-comparison-arabic-'+i,item.original)}}
 set('q62-compare-h',d.details[3].heading);set('q62-compare-intro',d.details[3].body);set('q62-compare-caveat',d.details[4].body);
 document.querySelectorAll('.q62-links .qsource-link').forEach((a,i)=>{a.querySelector('.qsource-link-title').textContent=d.linkTitles[i];a.querySelector('.qsource-link-sub').textContent=d.linkSubs[i];a.setAttribute('aria-label',d.linkTitles[i])});
 notice.hidden=true;try{localStorage.setItem(store,code)}catch(_){}
