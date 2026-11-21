@@ -18,19 +18,20 @@ function validate(o){
   assert.equal(manifest.expectedReleaseCount,16,"wrong release size");
   assert.equal(manifest.records.length,16,"wrong canonical cohort");
   assert.deepEqual(manifest.requiredLocales,required,"wrong locale roster");
-  assert.equal(o.type,"knowledge_woman","wrong scoped notification lane");
-  assert.equal(o.audience,"verified woman AND adult-app AND knowledge-opt-in","audience weakened");
+  assert.equal(o.type,"global","wrong global notification lane");
+  assert.equal(o.audience,"adult-app AND post-push-opt-in","audience weakened");
   assert.equal(o.destination,"https://dar-al-tawhid.de/#frauen","wrong original reader route");
   assert.equal(o.idempotencyKey,"frauen-batch16-20261118","editorial event key drift");
   assert.match(o.providerIdempotencyUuid||"",uuid4,"provider idempotency key must be UUIDv4");
   assert.equal(o.onceOnly,true,"single-send requirement absent");
+  assert.equal(o.recipientSegment,"DAR_PUSH","wrong adult post-push segment");
   assert.equal(o.optInRequired,true,"explicit opt-in required");
   assert.equal(o.verifyTargetSegment,true,"provider segment verification required");
   assert.equal(o.requireReleaseSuccessBeforeSend,true,"post-live verification missing");
   assert.equal(o.requireSeparatePushLockPassword,true,"password requirement missing");
   assert.ok(has(o.requiredUnlocks,"push-global-freigabe"),"global lane unlock missing");
   assert.ok(has(o.requiredUnlocks,"post-push-freigabe"),"post lane unlock missing");
-  assert.equal(o.sendVia,"existing DAR Admin contribution publisher; never generic OneSignal all/DAR_PUSH");
+  assert.equal(o.sendVia,"existing DAR Admin contribution publisher; existing verified global adult DAR_PUSH lane; not OneSignal all/unspecified");
   assert.equal(lock.globalApprovalRequired,true,"global approval was weakened");
   assert.equal(lock.passwordRequired,true,"global password policy was weakened");
   assert.deepEqual(Object.keys(o.localizedMessages||{}).sort(),[...required].sort(),"one or more push languages missing");
@@ -60,7 +61,7 @@ validate(n);
 // Negative controls prove a generic segment or missing authorization cannot
 // silently pass this static plan check.
 for(const [change,why] of [
- [{audience:"DAR_PUSH"},"generic fallback"],
+ [{audience:"Subscribed Users"},"unverified all-users fallback"],
  [{providerIdempotencyUuid:"frauen-batch16-20261118"},"non UUID provider key"],
  [{requireSeparatePushLockPassword:false},"password bypass"],
  [{verifyTargetSegment:false},"missing audience verification"],
@@ -74,8 +75,8 @@ for(const [change,why] of [
 const validSegment={
   ...n,
   guardStatus:"admin-unlocked",
-  verifiedSegmentType:"knowledge_woman",
-  verifiedSegmentAudience:"adult-app AND knowledge-opt-in",
+  verifiedSegmentType:"global_adult_post_optin",
+  verifiedSegmentAudience:"adult-app AND post-push-opt-in",
   verifiedOptInRecipientCount:12,
   deliveryLanguageVerification:{...n.deliveryLanguageVerification,
     iosNativeSdkLocaleBridgeVerified:true,
@@ -94,4 +95,4 @@ if(manifest.state==="content-preparation-only"){
   assert.equal(n.guardStatus,"not-authorized-not-sent","draft notification flagged as approved");
   assert.equal(n.sendStatus,"blocked-until-deployed-and-authorized","draft unexpectedly send-ready");
 }
-console.log("PASS Frauen batch16: nine-language push draft, stable provider UUIDv4, strict scoped audience, dual-lane authorization and six negative controls plus five missing-proof checks. NO MESSAGE SENT.");
+console.log("PASS Frauen batch16: nine-language push draft, stable provider UUIDv4, explicit global adult post audience, dual-lane authorization and six negative controls plus five missing-proof checks. NO MESSAGE SENT.");
