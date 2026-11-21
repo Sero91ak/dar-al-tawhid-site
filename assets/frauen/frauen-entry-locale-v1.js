@@ -264,7 +264,7 @@
       }catch(e){resolve(null)}
     });
   }
-  async function localImageExport(item,instagramIntent){
+  async function localImageExport(item,instagramIntent,canonicalUrl){
     var p=item.pack,lab=p.labels||{},rtl=item.code==="ar"||item.code==="ckb";
     var W=1080,H=1350,m=76,x=rtl?W-m:m,inner=rtl?W-m-20:m+20;
     var canvas=d.createElement("canvas");canvas.width=W;canvas.height=H;
@@ -348,7 +348,7 @@
       return true;
     }
     if(typeof nav.share==="function"){
-      await nav.share({title:p.title,text:p.statement,url:w.location.href});return true;
+      await nav.share({title:p.title,text:p.statement,url:canonicalUrl||w.location.href});return true;
     }
     throw Error(files.length>1?"Mehrseitige Bildbeiträge können auf diesem Gerät nicht vollständig geteilt werden":"Bild-Teilen wird auf diesem Gerät nicht unterstützt");
   }
@@ -366,7 +366,10 @@
     var url=w.location.origin+w.location.pathname+"#/frauen/"+item.entry.area+"/"+encodeURIComponent(id);
     ev.preventDefault();ev.stopImmediatePropagation();
     if(kind==="image"||kind==="ig"){
-      localImageExport(item,kind==="ig").catch(function(e){try{console.warn("DAR Frauen Bildbeitrag:",e)}catch(_){}});
+      localImageExport(item,kind==="ig",url).catch(function(e){
+        var message=e&&e.message?e.message:"Bild-Teilen ist auf diesem Gerät nicht verfügbar";
+        try{if(typeof w.alert==="function")w.alert(message);else console.warn("DAR Frauen Bildbeitrag:",message)}catch(_){}
+      });
       return;
     }
     function copy(v){return w.navigator.clipboard&&w.navigator.clipboard.writeText?w.navigator.clipboard.writeText(v):Promise.reject(Error("Clipboard unavailable"))}
