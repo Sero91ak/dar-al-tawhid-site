@@ -229,12 +229,12 @@
     }
   ],
   "notificationDraft": {
-    "type": "knowledge_woman",
+    "type": "global",
     "title": "16 neue Frauenbeiträge · DĀR AL TAWḤĪD",
     "body": "16 neue quellenbelegte Beiträge über die Ṣaḥābiyyāt, die Mütter der Gläubigen und Frauenfiqh – in neun Sprachen.",
     "destination": "https://dar-al-tawhid.de/#frauen",
     "sendStatus": "blocked-until-deployed-and-authorized",
-    "audience": "verified woman AND adult-app AND knowledge-opt-in",
+    "audience": "adult-app AND post-push-opt-in",
     "optInRequired": true,
     "verifyTargetSegment": true,
     "requireReleaseSuccessBeforeSend": true,
@@ -243,7 +243,7 @@
       "push-global-freigabe",
       "post-push-freigabe"
     ],
-    "sendVia": "existing DAR Admin contribution publisher; never generic OneSignal all/DAR_PUSH",
+    "sendVia": "existing DAR Admin contribution publisher; existing verified global adult DAR_PUSH lane; not OneSignal all/unspecified",
     "idempotencyKey": "frauen-batch16-20261118",
     "onceOnly": true,
     "localizedMessages": {
@@ -286,9 +286,9 @@
     },
     "messageReview": "editorial drafts; native-language validation required before any send",
     "guardStatus": "not-authorized-not-sent",
-    "redirectMustOpen": "existing canonical in-app women knowledge route #frauen; preserve app navigation and selected language",
+    "redirectMustOpen": "the existing canonical in-app women knowledge route #frauen; navigation and profile-sensitive visibility must be verified first",
     "providerIdempotencyUuid": "d1c40b28-2bd3-43fd-a14b-708df7d5d976",
-    "providerIdempotencyPolicy": "Immutable OneSignal UUIDv4 idempotency_key, separate from the canonical editorial event key. Never send before live verification and adult-woman knowledge opt-in segment authentication.",
+    "providerIdempotencyPolicy": "Immutable UUIDv4 idempotency_key for one global opted-in adult post-push announcement. Send only after all 16 records are live and fully approved; do not target Kids or unsubscribe states.",
     "deliveryLanguageVerification": {
       "appLanguages": [
         "de",
@@ -319,8 +319,10 @@
       "kurdishPerSubscriptionRoutingVerified": false,
       "targetSegmentOptInVerified": false,
       "allNineInstallationLanguagesVerified": false,
-      "policy": "One verified language per opted-in adult-woman subscription. No fallback language may be mislabeled as a translation; do not send until the native subscription language bridge and both Kurdish routing paths are proven."
-    }
+      "policy": "Deliver localized notification to opted-in global adult-post subscriptions only. Native and Kurdish per-installation language routing must be verified; never claim machine translations independently human reviewed."
+    },
+    "recipientSegment": "DAR_PUSH",
+    "notificationOwnerOverrideConfirmedAt": "2026-11-21"
   },
   "excluded": [
     "Kids",
