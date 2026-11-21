@@ -23,4 +23,4 @@ Einordnung: 𝐌𝐚𝐪𝐭𝐮ʿ – einem frühen Gelehrten zugeschriebener �
 
 🔗 𝐐𝐮𝐞𝐥𝐥𝐞: dar-al-tawhid.de/q/62/
 
-🌙 𝐅𝐚𝐳𝐢𝐭: Die 𝑺𝒊𝒇𝒂𝒕 Allāhs werden anhand von 𝐐𝐮𝐫ʾ𝐚̄𝐧 𝐮𝐧𝐝 𝐒𝐮𝐧𝐧𝐚𝐡 untersucht, ohne Allāh mit Seinen Geschöpfen gleichzusetzen. Eine Widerlegung späterer Taʾwīl-Ansätze muss deren tatsächliche Lehrtexte prüfen; weder die Echtheit der Zuschreibung noch ein Iǧmāʿ darf ohne Beleg als gesichert ausgegeben werden.
+🌙 𝐅𝐚𝐳𝐢𝐭: Die 𝑺𝒊𝒇𝒂𝒕 Allāhs werden anhand von Qurʾān und Sunnah und 𝐯𝐞𝐫𝐥𝐚𝐞𝐬𝐬𝐥𝐢𝐜𝐡𝐞𝐧 𝐁𝐞𝐥𝐞𝐠𝐞𝐧 untersucht, ohne Allāh mit Seinen Geschöpfen gleichzusetzen. Eine Widerlegung späterer Taʾwīl-Ansätze muss deren tatsächliche Lehrtexte prüfen; weder die Echtheit der Zuschreibung noch ein Iǧmāʿ darf ohne Beleg als gesichert ausgegeben werden.
