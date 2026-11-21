@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-11-20T22:48:24.510Z",
+  "generated": "2026-11-21T13:40:43.000Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1933,6 +1933,60 @@
         ],
         "warning": "Possible duplicate devices; both sends completed. Never retry or resend without separate explicit instruction and recipient deduplication.",
         "reviewedAt": "2026-11-20T22:48:24.509Z"
+      }
+    },
+    "abu-umamah-ikhlas-an-nasai-3140-20261121-q60": {
+      "postId": "abu-umamah-ikhlas-an-nasai-3140-20261121-q60",
+      "filename": "abu-umamah-ikhlas-an-nasai-3140-20261121-q60.md",
+      "postTitle": "📖 ALLAH NIMMT NUR AUFRICHTIGE TATEN AN",
+      "postPath": "content/posts/abu-umamah-ikhlas-an-nasai-3140-20261121-q60.md",
+      "kind": "post",
+      "status": "sent",
+      "pushApproved": true,
+      "pushApprovedAt": "2026-11-21T13:40:41.000Z",
+      "publishedAt": "2026-11-21T13:40:41.000Z",
+      "sentAt": "2026-11-21T13:40:43.000Z",
+      "updatedAt": "2026-11-21T13:40:43.000Z",
+      "lastError": "",
+      "oneSignalNotificationId": "ee2ff49e-c725-4a06-8f4c-abaed2f55293",
+      "oneSignalIdempotencyKey": "27848964-c1b1-48ae-9946-84bf8d3b9052",
+      "liveCheck": {
+        "ok": true,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": true,
+          "postFilePublic": true,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": true,
+          "q60SourcePublic": true,
+          "nineLanguageManifestPublic": true,
+          "learningPublic": true
+        },
+        "site": "https://dar-al-tawhid.de",
+        "deploymentRun": 44909715106,
+        "smokeTestRun": 44909783628,
+        "sourceUrl": "https://dar-al-tawhid.de/q/60/"
+      },
+      "pushResult": {
+        "target": "OneSignal opt-in segment DAR_PUSH (global adult visitors)",
+        "notificationId": "ee2ff49e-c725-4a06-8f4c-abaed2f55293",
+        "successful": 118,
+        "errored": 0,
+        "completedAt": "2026-11-21T13:40:43.000Z",
+        "targetUrl": "https://dar-al-tawhid.de/?post=abu-umamah-ikhlas-an-nasai-3140-20261121-q60#post/abu-umamah-ikhlas-an-nasai-3140-20261121-q60",
+        "languages": [
+          "de",
+          "ar",
+          "en",
+          "tr",
+          "ku",
+          "ckb",
+          "bs",
+          "fr",
+          "es"
+        ]
       }
     }
   }
