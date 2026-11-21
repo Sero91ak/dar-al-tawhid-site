@@ -204,6 +204,52 @@
  const dataObserver=new MutationObserver(()=>{if(picker&&!picker.hidden)renderSurahPicker(search?.value||'')});if(nativeSelect)dataObserver.observe(nativeSelect,{childList:true});
  nativeSelect?.addEventListener('change',()=>{if(picker&&!picker.hidden)renderSurahPicker(search?.value||'')});
  function renderHijriDate(){const targets=[$('hijriHeader'),$('calendarPanelHijri')].filter(Boolean);let value='Hiǧrī-Datum nicht verfügbar';try{value=new Intl.DateTimeFormat('de-DE-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric',timeZone:'Europe/Berlin'}).format(new Date())}catch{try{value=new Intl.DateTimeFormat('de-DE-u-ca-islamic',{day:'numeric',month:'long',year:'numeric',timeZone:'Europe/Berlin'}).format(new Date())}catch{}}targets.forEach(el=>el.textContent=value)}
+ function renderFestivalCalendar(){
+  const host=$('festivalList');if(!host)return;
+  const events=[
+   {month:1,day:10,hijri:'10. Muḥarram',title:'ʿĀšūrāʾ'},
+   {month:9,day:1,hijri:'1. Ramaḍān',title:'Beginn des Fastenmonats'},
+   {month:9,day:21,hijri:'Ab 21. Ramaḍān',title:'Beginn der letzten zehn Nächte'},
+   {month:10,day:1,hijri:'1. Šawwāl',title:'ʿĪd al-Fiṭr · Fest des Fastenbrechens'},
+   {month:12,day:9,hijri:'9. Ḏū l-Ḥiǧǧa',title:'Tag von ʿArafah'},
+   {month:12,day:10,hijri:'10. Ḏū l-Ḥiǧǧa',title:'ʿĪd al-Aḍḥā · Opferfest'}
+  ];
+  const rows=[];
+  try{
+   const islamic=new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn',{month:'numeric',day:'numeric',timeZone:'Europe/Berlin'});
+   const gregorian=new Intl.DateTimeFormat('de-DE',{weekday:'short',day:'numeric',month:'short',year:'numeric',timeZone:'Europe/Berlin'});
+   const base=new Date();base.setHours(12,0,0,0);
+   for(const event of events){
+    let match=null,offset=0;
+    for(;offset<=370;offset++){
+     const candidate=new Date(base);candidate.setDate(base.getDate()+offset);
+     const parts=Object.fromEntries(islamic.formatToParts(candidate).filter(x=>x.type!=='literal').map(x=>[x.type,Number(x.value)]));
+     if(parts.month===event.month&&parts.day===event.day){match=candidate;break}
+    }
+    if(match)rows.push({event,match,offset});
+   }
+   rows.sort((a,b)=>a.match-b.match);
+   host.replaceChildren(...rows.map(({event,match,offset})=>{
+    const article=document.createElement('article'),label=document.createElement('span'),title=document.createElement('strong'),date=document.createElement('small');
+    label.textContent=event.hijri;title.textContent=event.title;
+    date.textContent='Voraussichtlich '+gregorian.format(match)+(offset===0?' · heute':offset===1?' · morgen':' · in '+offset+' Tagen');
+    article.append(label,title,date);return article;
+   }));
+  }catch{
+   host.replaceChildren(...events.map(event=>{const article=document.createElement('article'),label=document.createElement('span'),title=document.createElement('strong'),date=document.createElement('small');label.textContent=event.hijri;title.textContent=event.title;date.textContent='Voraussichtlicher Termin nicht verfügbar';article.append(label,title,date);return article}));
+  }
+ }
+ function syncHeaderQuranStatus(){
+  const button=$('headerQuranStatus'),status=$('audioState'),name=$('audioName'),detail=$('audioReciter');
+  if(!button||!status)return;
+  const playing=status.textContent.trim()==='Wiedergabe';
+  button.hidden=!playing;
+  if(!playing)return;
+  const surah=(name?.textContent||'Qurʾān').trim(),verse=(detail?.textContent||'').match(/Āyah\s+(\d+)/i)?.[1];
+  const text=$('headerQuranStatusText');if(text)text.textContent=surah+(verse?' · Āya '+verse:'');
+  button.setAttribute('aria-label','Qurʾān läuft: '+surah+(verse?', Āya '+verse:'')+'. Qurʾān-Leser öffnen');
+  button.title='Wiedergabe im Qurʾān-Leser anzeigen';
+ }
  const localRoute={active:null,returnFocus:null,hideTimer:0};
  function addViewSettings(view){
   const host=view.querySelector('.quran-reader-actions,.home-view-head,.tadabbur-head');if(!host||host.querySelector('[data-home-settings]'))return;
@@ -267,7 +313,7 @@
  }
  function init(){
   if(!$('app'))return;
-  augmentBrand();bind();bindAppearancePicker();bindHomeActions();apply();store();setActiveNav('prayer');syncNavCapsules();window.addEventListener('resize',syncNavCapsules,{passive:true});screen.orientation?.addEventListener('change',syncNavCapsules);renderHijriDate();loadMediaCatalog();setInterval(()=>{if(prefs.wallpaperMode==='auto'||prefs.saverWallpaper==='auto')apply()},300000);handleConnection();
+  augmentBrand();bind();bindAppearancePicker();bindHomeActions();apply();store();setActiveNav('prayer');syncNavCapsules();window.addEventListener('resize',syncNavCapsules,{passive:true});screen.orientation?.addEventListener('change',syncNavCapsules);renderHijriDate();renderFestivalCalendar();window.addEventListener('dar:quran-state',syncHeaderQuranStatus);syncHeaderQuranStatus();loadMediaCatalog();setInterval(()=>{if(prefs.wallpaperMode==='auto'||prefs.saverWallpaper==='auto')apply()},300000);handleConnection();
   const el=$('adhanVisual');if(el)new MutationObserver(updateAdhanTitle).observe(el,{attributes:true,attributeFilter:['class']});
   window.addEventListener('online',handleConnection);window.addEventListener('offline',handleConnection);
   const i=document.querySelector('[data-tab="hintergrund"]');if(i){const img=document.createElement('img');img.src=icon('image');img.alt='';img.className='settings-icons';i.prepend(img)}
