@@ -3226,3 +3226,12 @@
   #app .audio-controls .round,#app .audio-controls .round.primary{width:40px!important;min-width:40px!important;height:40px!important;min-height:40px!important}
   #app .foot{display:none!important}
 }
+
+/* Narrow landscape header: keep the full wordmark clear of the centered navigation. */
+@media (orientation:landscape) and (min-width:701px) and (max-width:820px) {
+  #app .top .logo{gap:8px!important}
+  #app .logo-mark{width:clamp(28px,4vw,34px)!important;height:clamp(28px,4vw,34px)!important}
+  #app .brand-title{font-size:clamp(14px,2.25vw,17px)!important;letter-spacing:.055em!important}
+  #app .brand-mini{font-size:7px!important;letter-spacing:.22em!important;margin-top:4px!important}
+  #app .top .home-nav{gap:2px!important}
+}
