@@ -150,6 +150,12 @@ jobs:
               if not data['v4'] or data['icons']<7:errors.append(f'{w}x{h}: HOME styling or one of seven settings icons missing')
               if [x['text'] for x in data['nav']]!=['Start','Qurʾān','Festtage']:errors.append(f'{w}x{h}: HOME navigation labels or destinations missing')
               if any(x['width']<44 or x['height']<44 or x['bg'] not in ('rgba(0, 0, 0, 0)','transparent') or x['border']=='rgba(0, 0, 0, 0)' or float(x['radius'].replace('px',''))<x['height']*.45 for x in data['nav']):errors.append(f'{w}x{h}: navigation button area too small or not visibly bounded')
+              if w>h:
+                settings=data['boxes']['openSettings']
+                if any(abs(x['height']-settings['height'])>1 or abs(x['width']-settings['width'])>1 for x in data['nav']):errors.append(f'{w}x{h}: landscape navigation and settings capsules differ in size')
+                if data['boxes']['hero']['bottom']>data['boxes']['times']['top']+1:errors.append(f'{w}x{h}: next-prayer and prayer-time regions overlap')
+                tad=driver.execute_script("const e=document.getElementById('openTadabbur'),r=e.getBoundingClientRect();return {display:getComputedStyle(e).display,hidden:e.hidden,height:r.height,top:r.top,bottom:r.bottom,hero:document.querySelector('.hero').getBoundingClientRect().toJSON()}")
+                if tad['hidden'] or tad['display']=='none' or tad['height']<44 or tad['top']<tad['hero']['top']-1 or tad['bottom']>tad['hero']['bottom']+2:errors.append(f'{w}x{h}: Tadabbur control hidden, too small or outside its verse region')
               if data['footerTabs']:errors.append(f'{w}x{h}: footer tabs must be absent')
               if w>h and (data['wallpaperFit']['display']=='none' or data['wallpaperFit']['fit']!='contain' or not data['wallpaperFit']['nw'] or not data['wallpaperFit']['nh'] or abs(data['wallpaperFit']['w']/data['wallpaperFit']['h']-data['wallpaperFit']['nw']/data['wallpaperFit']['nh'])>.03):errors.append(f'{w}x{h}: landscape wallpaper is not fully fitted')
               if h>w and data['wallpaperFit']['display']!='none':errors.append(f'{w}x{h}: portrait should use the wallpaper-free standard view')
