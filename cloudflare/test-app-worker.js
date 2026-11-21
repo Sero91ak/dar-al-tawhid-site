@@ -282,7 +282,7 @@ async function finalizeDarTestHomeV1193(asset) {
       '@import url("/test/assets/quran-reader-v1251.css?v=area-authority-v1300");' +
       '@import url("/test/assets/quran-overview-v1250.css?v=area-authority-v1300");' +
       '@import url("/test/assets/ilm-scholars-v1240.css?v=area-authority-v1300");' +
-      '@import url("/test/assets/ilm-topics-v1242.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/ilm-topics-v1242.css?v=topics-theme-v1350");' +
       '@import url("/test/assets/ilm-dua-v1244.css?v=area-authority-v1300");' +
       '@import url("/test/assets/quiz-overview-v1257.css?v=area-authority-v1300");' +
       '@import url("/test/assets/more-v1241.css?v=area-authority-v1300");' +
