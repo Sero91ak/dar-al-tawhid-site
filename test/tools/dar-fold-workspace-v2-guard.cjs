@@ -51,7 +51,7 @@ assert.match(css,/width:calc\(100% - var\(--dar-fold-v2-rail\)\)/);
 assert.match(worker,/DAR_TEST_PREMIUM_LANDSCAPE_SINGLE_OWNER_20261122/);
 assert.match(worker,/darTestFoldWorkspaceV2Css/);
 assert.match(worker,/darTestFoldWorkspaceV2Js/);
-assert.match(worker,/premium-single-owner-20261122/);
+assert.match(worker,/no-header-unclipped-20261122-v2/);
 assert.match(worker,/fold-thumb-nav/); // legacy ref removal is explicitly retained
 assert.match(js,/dar-duo-side-active/);
 assert.match(offline,/offline-light-v1374/);
