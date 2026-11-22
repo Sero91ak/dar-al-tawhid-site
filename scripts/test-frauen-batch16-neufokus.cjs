@@ -121,9 +121,11 @@ function getCard(){return registry.get("darFrauenNeufokus48h")||null}
  assert.equal(win.location.hash,links[0].href,"Opening one article must use the canonical existing reader route");
  assert.equal(registry.get("darFrauenNeufokusIndex"),undefined,"Release index must close before reading");
  assert.deepEqual(navigated,[],"Focus must not bypass the 16-entry index to generic Frauen hub");
+ win.location.hash="#home";
  lang="ar";
- await refresh();assert.equal(getCard().dir,"rtl");assert.equal(getCard().lang,"ar");
- assert.ok(getCard().children.some(x=>/١٦/.test(x.textContent)),"Arabic title missing");
+ await refresh();assert.ok(getCard(),"Focus must reappear when native user returns to home");
+ assert.equal(getCard().dir,"rtl");assert.equal(getCard().lang,"ar");
+ assert.ok(subtree(getCard()).some(x=>/١٦/.test(x.textContent)),"Arabic title missing");
  card.expiresAt=new Date(Date.parse(end)+3600000).toISOString();
  await refresh();assert.equal(getCard(),null,"49-hour focus window must be rejected");
  card.expiresAt=end;
