@@ -1,0 +1,403 @@
+{
+  "schemaVersion": 1,
+  "id": "frauen-batch16-20261118",
+  "description": "DĀR AL TAWḤĪD – 16 bereits gespeicherte Frauenaussagen nach der Neunsprachenregel; keine neue Q-Nummer und keine Dopplung",
+  "created": "2026-11-18",
+  "userRequested": true,
+  "workflow": "source-review -> complete-nine-language-translations -> independent-language-review -> staging-touch-qa -> PR-CI -> admin-live-publish -> verify-live -> one-admin-notification",
+  "state": "content-preparation-only",
+  "requiredLocales": [
+    "de",
+    "ar",
+    "en",
+    "tr",
+    "ku",
+    "ckb",
+    "bs",
+    "fr",
+    "es"
+  ],
+  "expectedReleaseCount": 16,
+  "records": [
+    {
+      "id": "sahabiyyat-umm-haram-seeueberfahrt-20261106",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "area": "sahabiyyat",
+      "displayTitle": "Umm Ḥarām und die vorausgesagte Seereise",
+      "sourceId": "bukhari:2788",
+      "sourceUrl": "https://sunnah.com/bukhari:2788",
+      "originalStatus": "nicht-anzeigen",
+      "translationReview": "pending",
+      "sourceReview": "pending-secondary-check",
+      "uiQa": "not-run",
+      "publishQa": "not-run"
+    },
+    {
+      "id": "sahabiyyat-umm-hani-schutz-20261106",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "area": "sahabiyyat",
+      "displayTitle": "Umm Hāniʾ gewährte Schutz bei der Eroberung Makkahs",
+      "sourceId": "bukhari:357",
+      "sourceUrl": "https://sunnah.com/bukhari:357",
+      "originalStatus": "nicht-anzeigen",
+      "translationReview": "pending",
+      "sourceReview": "pending-secondary-check",
+      "uiQa": "not-run",
+      "publishQa": "not-run"
+    },
+    {
+      "id": "sahabiyyat-fatimah-geheimnis-20261106",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "area": "sahabiyyat",
+      "displayTitle": "Fāṭimah weinte und lachte nach zwei vertraulichen Mitteilungen",
+      "sourceId": "bukhari:3623",
+      "sourceUrl": "https://sunnah.com/bukhari:3623",
+      "originalStatus": "nicht-anzeigen",
+      "translationReview": "pending",
+      "sourceReview": "pending-secondary-check",
+      "uiQa": "not-run",
+      "publishQa": "not-run"
+    },
+    {
+      "id": "sahabiyyat-umm-qays-saeugling-20261106",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "area": "sahabiyyat",
+      "displayTitle": "Umm Qays überlieferte eine Reinigungsbegebenheit mit ihrem Säugling",
+      "sourceId": "bukhari:223",
+      "sourceUrl": "https://sunnah.com/bukhari:223",
+      "originalStatus": "nicht-anzeigen",
+      "translationReview": "pending",
+      "sourceReview": "pending-secondary-check",
+      "uiQa": "not-run",
+      "publishQa": "not-run"
+    },
+    {
+      "id": "sahabiyyat-umm-sulaym-duft-20261106",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "area": "sahabiyyat",
+      "displayTitle": "Umm Sulaym bewahrte den Schweiß des Propheten ﷺ für ihren Duft",
+      "sourceId": "muslim:2331a",
+      "sourceUrl": "https://sunnah.com/muslim:2331a",
+      "originalStatus": "nicht-anzeigen",
+      "translationReview": "pending",
+      "sourceReview": "pending-secondary-check",
+      "uiQa": "not-run",
+      "publishQa": "not-run"
+    },
+    {
+      "id": "sahabiyyat-barirah-entscheidung-20261106",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "area": "sahabiyyat",
+      "displayTitle": "Barīrah erhielt nach ihrer Freilassung eine Entscheidungsmöglichkeit",
+      "sourceId": "bukhari:5097",
+      "sourceUrl": "https://sunnah.com/bukhari:5097",
+      "originalStatus": "nicht-anzeigen",
+      "translationReview": "pending",
+      "sourceReview": "pending-secondary-check",
+      "uiQa": "not-run",
+      "publishQa": "not-run"
+    },
+    {
+      "id": "sahabiyyat-umm-habibah-milchverwandtschaft-20261106",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "area": "sahabiyyat",
+      "displayTitle": "Umm Ḥabībah fragte nach Ehehindernissen durch Verwandtschaft",
+      "sourceId": "bukhari:5101",
+      "sourceUrl": "https://sunnah.com/bukhari:5101",
+      "originalStatus": "nicht-anzeigen",
+      "translationReview": "pending",
+      "sourceReview": "pending-secondary-check",
+      "uiQa": "not-run",
+      "publishQa": "not-run"
+    },
+    {
+      "id": "sahabiyyat-aishah-jibril-salam-20261106",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "area": "sahabiyyat",
+      "displayTitle": "ʿĀʾišah erhielt den Salām von Ǧibrīl",
+      "sourceId": "bukhari:3768",
+      "sourceUrl": "https://sunnah.com/bukhari:3768",
+      "originalStatus": "nicht-anzeigen",
+      "translationReview": "pending",
+      "sourceReview": "pending-secondary-check",
+      "uiQa": "not-run",
+      "publishQa": "not-run"
+    },
+    {
+      "id": "sahabiyyat-asma-umays-zwei-hidschras-20261106",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "area": "sahabiyyat",
+      "displayTitle": "Asmāʾ bint ʿUmays und die zwei Hidschras",
+      "sourceId": "bukhari:4231",
+      "sourceUrl": "https://sunnah.com/bukhari:4231",
+      "originalStatus": "nicht-anzeigen",
+      "translationReview": "pending",
+      "sourceReview": "pending-secondary-check",
+      "uiQa": "not-run",
+      "publishQa": "not-run"
+    },
+    {
+      "id": "sahabiyyat-aishah-ifk-offenbarung-20261106",
+      "sourceFile": "data/frauen-sahabiyyat.json",
+      "area": "sahabiyyat",
+      "displayTitle": "ʿĀʾišahs Bericht über die falsche Beschuldigung",
+      "sourceId": "bukhari:4141",
+      "sourceUrl": "https://sunnah.com/bukhari:4141",
+      "originalStatus": "nicht-anzeigen",
+      "translationReview": "pending",
+      "sourceReview": "pending-secondary-check",
+      "uiQa": "not-run",
+      "publishQa": "not-run"
+    },
+    {
+      "id": "muetter-eifersucht-schale-ausgleich-20261106",
+      "sourceFile": "data/frauen-muetter-der-glaeubigen.json",
+      "area": "muetter-der-glaeubigen",
+      "displayTitle": "Eifersucht und Ersatz für eine zerbrochene Schale",
+      "sourceId": "bukhari:5225",
+      "sourceUrl": "https://sunnah.com/bukhari/67/158",
+      "originalStatus": "nicht-anzeigen",
+      "translationReview": "pending",
+      "sourceReview": "pending-secondary-check",
+      "uiQa": "not-run",
+      "publishQa": "not-run"
+    },
+    {
+      "id": "muetter-hafsah-nach-verwitwung-20261106",
+      "sourceFile": "data/frauen-muetter-der-glaeubigen.json",
+      "area": "muetter-der-glaeubigen",
+      "displayTitle": "Ḥafṣahs Verwitwung und die spätere Eheschließung",
+      "sourceId": "bukhari:5122",
+      "sourceUrl": "https://sunnah.com/bukhari:5122",
+      "originalStatus": "nicht-anzeigen",
+      "translationReview": "pending",
+      "sourceReview": "pending-secondary-check",
+      "uiQa": "not-run",
+      "publishQa": "not-run"
+    },
+    {
+      "id": "muetter-zaynab-zunahme-des-uebels-20261106",
+      "sourceFile": "data/frauen-muetter-der-glaeubigen.json",
+      "area": "muetter-der-glaeubigen",
+      "displayTitle": "Zaynabs Frage über die Ausbreitung des Übels",
+      "sourceId": "bukhari:3346",
+      "sourceUrl": "https://sunnah.com/bukhari/60/21",
+      "originalStatus": "nicht-anzeigen",
+      "translationReview": "pending",
+      "sourceReview": "pending-secondary-check",
+      "uiQa": "not-run",
+      "publishQa": "not-run"
+    },
+    {
+      "id": "muetter-aishah-letzte-stunden-20261106",
+      "sourceFile": "data/frauen-muetter-der-glaeubigen.json",
+      "area": "muetter-der-glaeubigen",
+      "displayTitle": "ʿĀʾišahs Bericht über die letzten Stunden des Propheten ﷺ",
+      "sourceId": "bukhari:4451",
+      "sourceUrl": "https://sunnah.com/bukhari/64/471",
+      "originalStatus": "nicht-anzeigen",
+      "translationReview": "pending",
+      "sourceReview": "pending-secondary-check",
+      "uiQa": "not-run",
+      "publishQa": "not-run"
+    },
+    {
+      "id": "muetter-umm-salamah-nachtwarnung-20261106",
+      "sourceFile": "data/frauen-muetter-der-glaeubigen.json",
+      "area": "muetter-der-glaeubigen",
+      "displayTitle": "Umm Salamah berichtete von der nächtlichen Ermahnung des Propheten ﷺ",
+      "sourceId": "bukhari:115",
+      "sourceUrl": "https://sunnah.com/bukhari:115",
+      "originalStatus": "nicht-anzeigen",
+      "translationReview": "pending",
+      "sourceReview": "pending-secondary-check",
+      "uiQa": "not-run",
+      "publishQa": "not-run"
+    },
+    {
+      "id": "frauen-fiqh-aishah-tayammum-halskette-20261106",
+      "sourceFile": "data/frauen-fiqh.json",
+      "area": "fiqh",
+      "displayTitle": "ʿĀʾišahs Halskette und die Offenbarung des Tayammum",
+      "sourceId": "bukhari:334",
+      "sourceUrl": "https://sunnah.com/bukhari:334",
+      "originalStatus": "nicht-anzeigen",
+      "translationReview": "pending",
+      "sourceReview": "pending-secondary-check",
+      "uiQa": "not-run",
+      "publishQa": "not-run"
+    }
+  ],
+  "notificationDraft": {
+    "type": "global",
+    "title": "16 neue Frauenbeiträge · DĀR AL TAWḤĪD",
+    "body": "16 neue quellenbelegte Beiträge über die Ṣaḥābiyyāt, die Mütter der Gläubigen und Frauenfiqh – in neun Sprachen.",
+    "destination": "https://dar-al-tawhid.de/",
+    "sendStatus": "blocked-until-deployed-and-authorized",
+    "audience": "adult-app AND post-push-opt-in",
+    "optInRequired": true,
+    "verifyTargetSegment": true,
+    "requireReleaseSuccessBeforeSend": true,
+    "requireSeparatePushLockPassword": true,
+    "requiredUnlocks": [
+      "push-global-freigabe",
+      "post-push-freigabe"
+    ],
+    "sendVia": "existing DAR Admin contribution publisher; DAR_PUSH is an unverified candidate and MUST be proven adult-app AND post-push-opt-in before sending; never OneSignal all/unspecified",
+    "idempotencyKey": "frauen-batch16-20261118",
+    "onceOnly": true,
+    "localizedMessages": {
+      "de": {
+        "title": "16 neue Frauenbeiträge",
+        "body": "Neue quellenbelegte Beiträge über Ṣaḥābiyyāt, Mütter der Gläubigen und Frauenfiqh – in neun Sprachen."
+      },
+      "ar": {
+        "title": "١٦ موضوعًا جديدًا عن النساء",
+        "body": "موضوعات موثقة بالمصادر عن الصحابيات وأمهات المؤمنين وفقه النساء، متاحة بتسع لغات."
+      },
+      "en": {
+        "title": "16 new women's knowledge articles",
+        "body": "Explore sourced reports on the female Companions, Mothers of the Believers and women's fiqh in nine languages."
+      },
+      "tr": {
+        "title": "Kadınlara dair 16 yeni içerik",
+        "body": "Sahâbî hanımlar, Müminlerin Anneleri ve kadın fıkhı hakkında kaynaklı yazılar dokuz dilde."
+      },
+      "ku": {
+        "title": "16 nivîsên nû li ser jinan",
+        "body": "Agahiyên bi çavkanî li ser jinên sahabe, dayikên bawermendan û fiqha jinan bi neh zimanan."
+      },
+      "ckb": {
+        "title": "١٦ بابەتی نوێ دەربارەی ژنان",
+        "body": "بابەتە پشتبەستووەکان بە سەرچاوە لەسەر ژنە هاوەڵان، دایکانی باوەڕداران و فیقهی ژنان بە نۆ زمان."
+      },
+      "bs": {
+        "title": "16 novih objava o ženama",
+        "body": "Tekstovi s izvorima o ashabijkama, majkama vjernika i fikhu za žene, na devet jezika."
+      },
+      "fr": {
+        "title": "16 nouveaux articles sur les femmes",
+        "body": "Des récits sourcés sur les Compagnes, les Mères des croyants et le droit musulman concernant les femmes, en neuf langues."
+      },
+      "es": {
+        "title": "16 artículos nuevos sobre las mujeres",
+        "body": "Relatos documentados sobre las Compañeras, las Madres de los Creyentes y el fiqh de la mujer, en nueve idiomas."
+      }
+    },
+    "messageReview": "editorial drafts; native-language validation required before any send",
+    "guardStatus": "not-authorized-not-sent",
+    "redirectMustOpen": "The one global opted-in adult post push opens the adult homepage. Its 48h NEUFOKUS is visible to woman, man and neutral profiles; tapping the card opens the dedicated nine-language 16-entry in-app index. Each entry routes directly to #frauen/{area}/{canonical-id}, not to a generic category or an unrelated article. All other profile-personalized recommendations remain unchanged.",
+    "providerIdempotencyUuid": "d1c40b28-2bd3-43fd-a14b-708df7d5d976",
+    "providerIdempotencyPolicy": "Immutable UUIDv4 idempotency_key for one global opted-in adult post-push announcement. Send only after all 16 records are live and fully approved; do not target Kids or unsubscribe states.",
+    "deliveryLanguageVerification": {
+      "appLanguages": [
+        "de",
+        "ar",
+        "en",
+        "tr",
+        "ku",
+        "ckb",
+        "bs",
+        "fr",
+        "es"
+      ],
+      "existingWebSdkDirectLanguages": [
+        "de",
+        "en",
+        "tr",
+        "ar",
+        "bs",
+        "fr",
+        "es"
+      ],
+      "perSubscriptionRoutingRequired": [
+        "ku",
+        "ckb"
+      ],
+      "iosNativeSdkLocaleBridgeVerified": false,
+      "androidNativeSdkLocaleBridgeVerified": false,
+      "kurdishPerSubscriptionRoutingVerified": false,
+      "targetSegmentOptInVerified": false,
+      "allNineInstallationLanguagesVerified": false,
+      "policy": "Deliver localized notification to opted-in global adult-post subscriptions only. Native and Kurdish per-installation language routing must be verified; never claim machine translations independently human reviewed."
+    },
+    "recipientSegment": "DAR_PUSH",
+    "notificationOwnerOverrideConfirmedAt": "2026-11-21"
+  },
+  "excluded": [
+    "Kids",
+    "Apple TV",
+    "DAR Test live",
+    "prayer pushes",
+    "daily pushes"
+  ],
+  "notes": [
+    "No German fallback disguised as a translation.",
+    "The 16 entries stay quellenstatus=nicht-anzeigen until every gate passes.",
+    "Do not claim publication or push on GitHub commit alone.",
+    "No new Q numbers, new share routes, or replacement original evidence URLs."
+  ],
+  "ownerPublicationIntent": {
+    "recordedAt": "2026-11-21",
+    "channel": "ChatGPT owner instruction",
+    "originalInstruction": "So dann Push jetzt live mit Benachrichtigung an Nutzer hast Freigabe",
+    "scope": "16 existing women knowledge entries, nine languages, production release and one notification once all existing safety and editorial gates pass",
+    "editorialReleaseConsent": true,
+    "notificationRequestConsent": true,
+    "isPassword": false,
+    "isIndependentScholarReview": false,
+    "isNativeLanguageReview": false,
+    "isVerifiedAudienceConsent": false,
+    "overrideExistingSecurityGates": false,
+    "actionStatus": "recorded-awaiting-release-gates",
+    "notificationAudienceCorrectionAt": "2026-11-21",
+    "notificationAudienceCorrection": "global opted-in adults, profile-controlled UI presentation; supersedes original women-segment constraint for this batch",
+    "requestedDistribution": {
+      "recordedAt": "2026-11-21",
+      "latestOwnerInstruction": "So Push jetzt live und an Besucher auch",
+      "productionChannels": [
+        "public-visitor-web-https://dar-al-tawhid.de/",
+        "adult-iOS-native",
+        "adult-Android/PWA"
+      ],
+      "inAppVisibility": "existing profile-scoped women knowledge UI; do not change protected profile routing",
+      "actionOrder": [
+        "publish all 16 existing canonical IDs with 9 locale versions",
+        "verify public website and native app routes/readers/learning links and source links",
+        "once-only 9-locale global adult post push DAR_PUSH to opted-in subscriptions",
+        "persist delivery status idempotently"
+      ],
+      "notificationIdempotencyKey": "d1c40b28-2bd3-43fd-a14b-708df7d5d976",
+      "explicitContentAndNotificationConsent": true,
+      "technicalReleaseGatesMayNotBeFaked": true,
+      "noNewQIds": true,
+      "lastObservedMain": "all 16 existing source IDs remain quellenstatus=nicht-anzeigen",
+      "lastObservedPR": "open; optimize job failure, other gates success",
+      "currentStatus": "approved-request-blocked-before-live"
+    }
+  },
+  "notificationRoutingChoice": {
+    "updatedAt": "2026-11-21",
+    "ownerInstruction": "Push doch einfach ... jeder den Push bekommen ... Regel wer sie sehen kann ist in der App selber welches Profil man ausgewählt hat",
+    "audienceMode": "global-adult-post-opt-in",
+    "deliveryApp": "DĀR AL TAWḤĪD APP",
+    "oneSignalProviderAudience": "DAR_PUSH",
+    "notificationLanguages": [
+      "de",
+      "ar",
+      "en",
+      "tr",
+      "ku",
+      "ckb",
+      "bs",
+      "fr",
+      "es"
+    ],
+    "deliveryRules": "One once-only announcement to adult post-push subscribers; do not include Kids, opted-out devices, or unknown non-adult audiences.",
+    "displayRule": "The 48h NEUFOKUS announcement appears globally on the adult homepage for woman, man and neutral, independent of profile. The card opens a localized 16-item list; each new contribution navigates to its own canonical #frauen/{area}/{id} reader. Only unrelated profile-specific recommendation sections remain gender-filtered.",
+    "priorKnowledgeWomanTargeting": "Superseded by owner's new explicit instruction for THIS 16-item announcement, not for other women-only knowledge campaigns.",
+    "requireFirst": "All 16 items published and accessible, release CI and source/locale quality gates, safe URL/deep-link verified.",
+    "plannedIdempotencyKey": "d1c40b28-2bd3-43fd-a14b-708df7d5d976",
+    "currentStatus": "approved-route-not-yet-sent"
+  }
+}

@@ -51,12 +51,32 @@ for(const {entry:e,file} of all){
   assert.ok(!Object.hasOwn(p,"direktnachweisUrl")&&!Object.hasOwn(p,"qNumber"),"Locale may not override source URL or ID");
  }
  assert.equal(entry.locales.de.title,e.titel,"German content title drift");
- assert.equal(entry.locales.de.statement,e.vollstaendigeAussage,"German main statement drift");
- assert.equal(entry.locales.de.lesson,e.lehre,"German lesson drift");
+ assert.equal(entry.locales.de.statement,e.vollstaendigeAussage||e.inhalt,"German main statement drift");
+ assert.equal(entry.locales.de.lesson,e.lehre||e.nutzen,"German lesson drift");
  assert.equal(entry.locales.de.source,e.quellenanzeige.replace(/^Quelle:\s*/i,""),"German source drift");
 }
 for(const id of ids)assert.ok(used.has(id),"Orphan locale ID with no linked women post: "+id);
 assert.equal(used.size,ids.size);
+// Editorial draft must have the exact same source identity and all six
+// canonical text fields in every language; no misleading parent/child claim.
+const batch16=load("content/admin/frauen-batch-16-2026-11-18.json");
+const editorial=load("content/admin/frauen-batch16-locales-draft-20261118.json");
+for(const row of batch16.records){
+ const publishedPack=loc.entries[row.id],draft=editorial.entries[row.id];
+ assert.ok(draft&&publishedPack,"Missing original editorial record "+row.id);
+ assert.equal(draft.sourceId,row.sourceId,"Editorial source ID differs from primary "+row.id);
+ assert.equal(draft.sourceUrl,row.sourceUrl,"Editorial primary link differs "+row.id);
+ for(const code of required){
+  for(const field of ["title","statement","preview","lesson","sharh","source"])
+   assert.equal(draft.locales[code][field],publishedPack.locales[code][field],"Editorial "+code+"."+field+" drift "+row.id);
+ }
+}
+const sulaym=loc.entries["sahabiyyat-umm-sulaym-duft-20261106"];
+assert.ok(sulaym.locales.de.statement.includes("Anas’ Mutter"),"German text must identify Anas as Umm Sulaym's son");
+assert.ok(sulaym.locales.en.statement.includes("Anas's mother"),"English narration must identify Anas's mother");
+assert.ok(sulaym.locales.tr.statement.includes("Enes'in annesi Ümmü Süleym"),"Turkish report must identify Umm Sulaym as Anas's mother, not the Prophet's");
+assert.ok(sulaym.locales.tr.preview.includes("annesi Ümmü Süleym"),"Turkish preview must name the correct person collecting the sweat");
+assert.ok(!sulaym.locales.tr.statement.includes("Peygamber'in ﷺ kendi annesi"),"False statement that Umm Sulaym was the Prophet's mother");
 const reg=load("q/_registry/shortlinks.json");
 const misnumber=reg.links.find(x=>Number(x.number)===52);
 if(misnumber) {

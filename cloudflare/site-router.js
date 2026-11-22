@@ -1300,8 +1300,15 @@ function injectAdultReaderRuntimeV5(html) {
   // One stable women post ID + selected adult app language, no Q number minted.
   // This is a read-only localization layer over the frozen Frauen renderer.
   if(!html.includes('id="darFrauenEntryLocaleV1"')){
-    const localeTag='<script defer id="darFrauenEntryLocaleV1" src="/assets/frauen/frauen-entry-locale-v1.js?v=20261106-no-q-nine"></'+'script>';
+    const localeTag='<script defer id="darFrauenEntryLocaleV1" src="/assets/frauen/frauen-entry-locale-v1.js?v=20261118-batch16-learning"></'+'script>';
     html=html.includes("</body>")?html.replace("</body>",localeTag+"</body>"):html+localeTag;
+  }
+  // Adult visitor V3 home: scoped 48h women Neufokus card. Its runtime
+  // remains hidden until 16 canonical articles are verifiably published and
+  // the existing Admin Focus-Feed entry's exact 48h window is live.
+  if(!html.includes('id="darFrauenNeufokusV1"')){
+    const tag='<script defer id="darFrauenNeufokusV1" src="/assets/frauen/frauen-neufokus-v1.js?v=20261122-16-index"></'+'script>';
+    html=html.includes("</body>")?html.replace("</body>",tag+"</body>"):html+tag;
   }
   // Q50 is a single published adult post, localized at the existing render
   // boundary. Include the same runtime for native WKWebView, Android PWA and

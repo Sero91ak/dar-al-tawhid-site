@@ -7,7 +7,7 @@
   "use strict";
   if(w.__DAR_FRAUEN_ENTRY_LOCALE_V1)return;
   w.__DAR_FRAUEN_ENTRY_LOCALE_V1=true;
-  var URI="/assets/frauen/frauen-entry-locales-v1.json?v=20261106-entry-v1";
+  var URI="/assets/frauen/frauen-entry-locales-v1.json?v=20261118-batch16-learning";
   var KEY="darAdultPreferredLocaleV1";
   var CODES=["de","ar","en","tr","ku","ckb","bs","fr","es"];
   var manifest=null,loading=false,scheduled=false;
@@ -16,6 +16,10 @@
     code=String(code||"").trim().toLowerCase().replace(/_/g,"-");
     if(code==="kr")code="ku";
     if(code==="ku-sorani")code="ckb";
+    if(CODES.indexOf(code)<0&&code.indexOf("-")>=0){
+      var primary=code.split("-")[0];
+      if(CODES.indexOf(primary)>=0)code=primary;
+    }
     return CODES.indexOf(code)>=0?code:"";
   }
   function selected() {
@@ -60,12 +64,72 @@
     if(e.id!==id)return null;
     return {entry:e,pack:l[code],code:code};
   }
+  // Read-only bridge for image-share exports: the visual canvas must receive
+  // exactly the same selected-language pack as the card and detail reader.
+  // Never expose draft IDs that do not exist in the canonical catalog.
+  w.DARFrauenEntryLocaleV1=Object.freeze({
+    current:function(id){
+      var item=active(String(id||""));
+      if(!item)return null;
+      return Object.freeze({
+        id:item.entry.id,
+        area:item.entry.area,
+        lang:item.code,
+        dir:item.code==="ar"||item.code==="ckb"?"rtl":"ltr",
+        title:item.pack.title,
+        statement:item.pack.statement,
+        source:item.pack.source,
+        statementLabel:(item.pack.labels||{}).statement||"",
+        sourceLabel:(item.pack.labels||{}).source||""
+      });
+    }
+  });
+  var LEARN_LABELS={
+    de:"Lernbereich öffnen · 4 Verständnisfragen",
+    ar:"فتح قسم التعلّم · أربعة أسئلة للفهم",
+    en:"Open learning area · 4 comprehension questions",
+    tr:"Öğrenme bölümünü aç · 4 anlama sorusu",
+    ku:"Beşa fêrbûnê veke · 4 pirsên têgihiştinê",
+    ckb:"کردنەوەی بەشی فێربوون · ٤ پرسیاری تێگەیشتن",
+    bs:"Otvori lekciju · 4 pitanja za razumijevanje",
+    fr:"Ouvrir le module · 4 questions de compréhension",
+    es:"Abrir la lección · 4 preguntas de comprensión"
+  };
+  function attachLearningButton(article,item){
+    // No new canonical Q route and no duplicated post. Existing adult app
+    // intercepts /lernen/ and opens it in the mounted internal reader.
+    var area=article.querySelector(".post-reader-main");
+    if(!area||!d.createElement)return;
+    var link=area.querySelector("[data-dar-frauen-learning-cta]");
+    if(!link&&(!area.appendChild||!d.head))return;
+    if(!link){
+      link=d.createElement("a");link.className="dar-frauen-learning-cta";
+      link.setAttribute("data-dar-frauen-learning-cta","");
+      link.setAttribute("aria-label","Lernbereich zum aktuellen Frauenbeitrag");
+      var source=area.querySelector(".post-source-module");
+      if(source&&source.insertAdjacentElement)source.insertAdjacentElement("afterend",link);
+      else area.appendChild(link);
+      if(!d.getElementById("darFrauenLearningCtaStylesV1")){
+        var style=d.createElement("style");style.id="darFrauenLearningCtaStylesV1";
+        style.textContent="article.post-reader .dar-frauen-learning-cta{display:flex;align-items:center;justify-content:center;text-align:center;gap:7px;width:100%;min-height:52px;margin:14px 0;padding:13px 17px;border:1px solid var(--gold2,#b69c70);border-radius:16px;background:color-mix(in srgb,var(--card,#182b24) 86%,#bd9c56 14%);color:var(--text,#f5ebd7);font:750 clamp(13px,3.7vw,17px)/1.3 system-ui,sans-serif;text-decoration:none;overflow-wrap:anywhere}article.post-reader .dar-frauen-learning-cta:focus-visible{outline:3px solid #b89457;outline-offset:3px}@media(prefers-reduced-motion:no-preference){article.post-reader .dar-frauen-learning-cta{transition:border-color .15s ease,transform .15s ease}article.post-reader .dar-frauen-learning-cta:active{transform:scale(.99)}}";
+        d.head.appendChild(style);
+      }
+    }
+    var learningHref="/lernen/frauen-wissen/?id="+encodeURIComponent(item.entry.id)+"&lang="+encodeURIComponent(item.code);
+    var linkDir=(item.code==="ar"||item.code==="ckb")?"rtl":"ltr";
+    if(link.getAttribute("href")!==learningHref)link.setAttribute("href",learningHref);
+    if(link.lang!==item.code)link.lang=item.code;
+    if(link.dir!==linkDir)link.dir=linkDir;
+    if(link.textContent!==LEARN_LABELS[item.code])link.textContent=LEARN_LABELS[item.code];
+    if(link.getAttribute("aria-label")!==LEARN_LABELS[item.code])link.setAttribute("aria-label",LEARN_LABELS[item.code]);
+  }
   function applyOneArticle(article,item){
     var p=item.pack,lab=p.labels||{},code=item.code;
     var dir=code==="ar"||code==="ckb"?"rtl":"ltr";
-    article.lang=code;article.dir=dir;
-    article.setAttribute("data-dar-frauen-content-id",item.entry.id);
-    article.setAttribute("data-dar-frauen-locale",code);
+    if(article.lang!==code)article.lang=code;
+    if(article.dir!==dir)article.dir=dir;
+    if(article.getAttribute("data-dar-frauen-content-id")!==item.entry.id)article.setAttribute("data-dar-frauen-content-id",item.entry.id);
+    if(article.getAttribute("data-dar-frauen-locale")!==code)article.setAttribute("data-dar-frauen-locale",code);
     text(article,".post-reader-title h2",p.title);
     text(article,".post-reader-title .kicker",lab.area);
     text(article,".statement.post-aussage .post-aussage-kicker",lab.statement);
@@ -110,12 +174,15 @@
       text(explanation,"h3",lab.sharh);
       text(explanation,".post-fazit-body",p.sharh);
     }
+    attachLearningButton(article,item);
   }
   function applyOneCard(card,item) {
     var p=item.pack,lab=p.labels||{},code=item.code;
-    card.lang=code;card.dir=(code==="ar"||code==="ckb"?"rtl":"ltr");
-    card.setAttribute("data-dar-frauen-content-id",item.entry.id);
-    card.setAttribute("data-dar-frauen-locale",code);
+    var cardDir=(code==="ar"||code==="ckb")?"rtl":"ltr";
+    if(card.lang!==code)card.lang=code;
+    if(card.dir!==cardDir)card.dir=cardDir;
+    if(card.getAttribute("data-dar-frauen-content-id")!==item.entry.id)card.setAttribute("data-dar-frauen-content-id",item.entry.id);
+    if(card.getAttribute("data-dar-frauen-locale")!==code)card.setAttribute("data-dar-frauen-locale",code);
     text(card,".post-row__body h3",p.title);
     text(card,".frauen-row__aussage",p.preview||p.statement);
     text(card,".frauen-row__quelle",p.source);
@@ -162,11 +229,134 @@
       .catch(function(e){try{console.warn("DAR Frauen locale overlay unavailable",e)}catch(_){} })
       .finally(function(){loading=false});
   }
+  /* Isolated localized image share; the canonical/frozen Frauen renderer is unchanged.
+     The same pack currently visible in the reader is the sole text source.
+     No external export API or subscription service is called. */
+  function imgWrap(ctx,value,maxWidth){
+    var result=[];
+    String(value||"").split(/\n/).forEach(function(paragraph){
+      var words=paragraph.trim().split(/\s+/).filter(Boolean),line="";
+      if(!words.length){result.push("");return}
+      words.forEach(function(word){
+        var next=line?line+" "+word:word;
+        if(line&&ctx.measureText(next).width>maxWidth){result.push(line);line=word}
+        else line=next;
+      });
+      if(line)result.push(line);
+    });
+    return result;
+  }
+  function imgRounded(ctx,x,y,width,height,r){
+    if(typeof ctx.roundRect==="function"){
+      ctx.beginPath();ctx.roundRect(x,y,width,height,r);return;
+    }
+    ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+width,y,x+width,y+height,r);
+    ctx.arcTo(x+width,y+height,x,y+height,r);
+    ctx.arcTo(x,y+height,x,y,r);ctx.arcTo(x,y,x+width,y,r);ctx.closePath();
+  }
+  function imgLoad(url){
+    return new Promise(function(resolve){
+      try{
+        var img=new w.Image();
+        img.onload=function(){resolve(img)};
+        img.onerror=function(){resolve(null)};
+        img.src=url;
+      }catch(e){resolve(null)}
+    });
+  }
+  async function localImageExport(item,instagramIntent,canonicalUrl){
+    var p=item.pack,lab=p.labels||{},rtl=item.code==="ar"||item.code==="ckb";
+    var W=1080,H=1350,m=76,x=rtl?W-m:m,inner=rtl?W-m-20:m+20;
+    var canvas=d.createElement("canvas");canvas.width=W;canvas.height=H;
+    var ctx=canvas.getContext("2d");if(!ctx)throw Error("Canvas nicht verfügbar");
+    var brand=await imgLoad("/watermark-my-logo-full.png?share-brand=v1275");
+    var badge=await imgLoad("/assets/app-store-badge-de-official.svg?share-brand=v1275");
+    var backgrounds=["/assets/frauen/share-v1292/01.webp","/assets/frauen/share-v1292/02.webp","/assets/frauen/share-v1292/03.webp"];
+    var photo=null;
+    for(var i=0;i<backgrounds.length&&!photo;i++)photo=await imgLoad(backgrounds[i]);
+    try{if(d.fonts&&d.fonts.ready)await d.fonts.ready}catch(_){}
+    var titleSize=p.title.length>86?35:p.title.length>55?40:46;
+    ctx.font="600 "+titleSize+"px Georgia, serif";
+    var titleLines=imgWrap(ctx,p.title,W-2*m);
+    var textSize=String(p.statement).length>750?36:String(p.statement).length>400?40:46;
+    ctx.font="400 "+textSize+"px Georgia, serif";
+    var lines=imgWrap(ctx,p.statement,W-2*m-44);
+    var titleHeight=Math.min(220,titleLines.length*(titleSize+11));
+    var contentTop=176+titleHeight+20,contentEnd=1082;
+    var lineHeight=Math.round(textSize*1.39),linesPerPage=Math.max(3,Math.floor((contentEnd-contentTop-120)/lineHeight));
+    var pages=[];
+    for(var j=0;j<lines.length;j+=linesPerPage)pages.push(lines.slice(j,j+linesPerPage));
+    if(!pages.length)pages.push([""]);
+    var files=[];
+    for(var page=0;page<pages.length;page++){
+      ctx.clearRect(0,0,W,H);ctx.direction="ltr";ctx.textAlign="left";
+      ctx.fillStyle="#0b211d";ctx.fillRect(0,0,W,H);
+      if(photo){
+        var iw=photo.naturalWidth||photo.width,ih=photo.naturalHeight||photo.height;
+        if(iw&&ih){var scale=Math.max(W/iw,H/ih),dw=iw*scale,dh=ih*scale;
+          ctx.drawImage(photo,(W-dw)/2,(H-dh)/2,dw,dh);}
+      }
+      var overlay=ctx.createLinearGradient(0,0,W,H);
+      overlay.addColorStop(0,"rgba(2,13,17,.85)");
+      overlay.addColorStop(1,"rgba(4,20,18,.82)");
+      ctx.fillStyle=overlay;ctx.fillRect(0,0,W,H);
+      ctx.fillStyle="#efd89f";ctx.font="700 25px Arial, sans-serif";
+      ctx.fillText("DĀR AL TAWḤĪD",m,69);
+      ctx.strokeStyle="rgba(239,216,159,.55)";ctx.lineWidth=1.4;
+      ctx.beginPath();ctx.moveTo(m,101);ctx.lineTo(W-m,101);ctx.stroke();
+      ctx.direction=rtl?"rtl":"ltr";ctx.textAlign=rtl?"right":"left";
+      ctx.fillStyle="#fff7e7";ctx.font="600 "+titleSize+"px Georgia, serif";
+      titleLines.forEach(function(line,n){ctx.fillText(line,x,160+n*(titleSize+11))});
+      var y=176+titleHeight;
+      imgRounded(ctx,m-15,y-16,W-2*m+30,Math.max(260,contentEnd-y),25);
+      ctx.fillStyle="rgba(3,15,15,.48)";ctx.fill();
+      ctx.strokeStyle="rgba(239,216,159,.28)";ctx.stroke();
+      ctx.fillStyle="#efd89f";ctx.font="700 16px Arial, sans-serif";
+      ctx.fillText(lab.statement||"AUSSAGE",inner,y+24);
+      ctx.fillStyle="#fff9e9";ctx.font="400 "+textSize+"px Georgia, serif";
+      pages[page].forEach(function(line,k){if(line)ctx.fillText(line,inner,y+86+k*lineHeight)});
+      var footerY=1110;
+      imgRounded(ctx,m,footerY,W-2*m,145,20);
+      ctx.fillStyle="rgba(3,15,15,.78)";ctx.fill();
+      ctx.strokeStyle="rgba(239,216,159,.29)";ctx.stroke();
+      ctx.fillStyle="#e9cf91";ctx.font="700 16px Arial, sans-serif";
+      ctx.fillText(lab.source||"QUELLE",inner,footerY+28);
+      ctx.fillStyle="#fff8e9";ctx.font="400 19px Arial, sans-serif";
+      var sourceLines=imgWrap(ctx,p.source,W-2*m-48);
+      sourceLines.slice(0,4).forEach(function(line,k){ctx.fillText(line,inner,footerY+56+k*24)});
+      if(pages.length>1){ctx.fillStyle="#e9cf91";ctx.font="600 15px Arial, sans-serif";ctx.fillText((page+1)+" / "+pages.length,rtl?m+20:W-m-20,1088);}
+      ctx.direction="ltr";ctx.textAlign="left";
+      ctx.strokeStyle="rgba(239,216,159,.48)";ctx.beginPath();ctx.moveTo(m,1284);ctx.lineTo(W-m,1284);ctx.stroke();
+      ctx.fillStyle="#fff8e9";ctx.font="600 21px Georgia, serif";
+      ctx.fillText("dar-al-tawhid.de",m+18,1324);
+      if(brand){ctx.save();ctx.beginPath();ctx.arc(W-m-54,58,42,0,Math.PI*2);ctx.clip();ctx.drawImage(brand,W-m-96,16,84,84);ctx.restore()}
+      if(badge)ctx.drawImage(badge,W-m-162,1294,162,54);
+      var blob=await new Promise(function(resolve){canvas.toBlob(resolve,"image/png",.96)});
+      if(!blob)throw Error("Bildexport konnte nicht erstellt werden");
+      files.push(new w.File([blob],"dar-al-tawhid-frauen-"+(page+1)+".png",{type:"image/png"}));
+    }
+    var nav=w.navigator||{};
+    if(typeof nav.share==="function"&&(!nav.canShare||nav.canShare({files:files}))){
+      try{await nav.share({files:files});return true}catch(e){if(e&&e.name==="AbortError")return true;}
+    }
+    var ios=w.webkit&&w.webkit.messageHandlers&&w.webkit.messageHandlers.darShareImage;
+    // Native bridge transports one image only. Never silently share the last
+    // page of a multi-page hadith as if it were the complete statement.
+    if(ios&&typeof ios.postMessage==="function"&&files.length===1){
+      var dataUrl=canvas.toDataURL("image/png");
+      ios.postMessage({dataUrl:dataUrl,filename:"dar-al-tawhid-frauen.png",title:p.title});
+      return true;
+    }
+    if(typeof nav.share==="function"){
+      await nav.share({title:p.title,text:p.statement,url:canonicalUrl||w.location.href});return true;
+    }
+    throw Error(files.length>1?"Mehrseitige Bildbeiträge können auf diesem Gerät nicht vollständig geteilt werden":"Bild-Teilen wird auf diesem Gerät nicht unterstützt");
+  }
   function userShare(ev){
     var btn=ev.target&&ev.target.closest?ev.target.closest("button[data-frauen-share]"):null;
     if(!btn||ev.defaultPrevented||ev.button!==0||ev.ctrlKey||ev.shiftKey||ev.altKey||ev.metaKey)return;
     var kind=btn.getAttribute("data-frauen-share");
-    if(["copy-text","wa","tg","native"].indexOf(kind)<0)return;
+    if(["copy-text","wa","tg","native","image","ig"].indexOf(kind)<0)return;
     var article=btn.closest("article.post-reader");
     var id=readId(),item=active(id);
     if(!article||!item||!visibleRoot()||!visibleRoot().contains(article))return;
@@ -175,6 +365,13 @@
     // Original share route: same ID and same URL in all languages (NO Q alias).
     var url=w.location.origin+w.location.pathname+"#/frauen/"+item.entry.area+"/"+encodeURIComponent(id);
     ev.preventDefault();ev.stopImmediatePropagation();
+    if(kind==="image"||kind==="ig"){
+      localImageExport(item,kind==="ig",url).catch(function(e){
+        var message=e&&e.message?e.message:"Bild-Teilen ist auf diesem Gerät nicht verfügbar";
+        try{if(typeof w.alert==="function")w.alert(message);else console.warn("DAR Frauen Bildbeitrag:",message)}catch(_){}
+      });
+      return;
+    }
     function copy(v){return w.navigator.clipboard&&w.navigator.clipboard.writeText?w.navigator.clipboard.writeText(v):Promise.reject(Error("Clipboard unavailable"))}
     if(kind==="wa"){w.open("https://wa.me/?text="+encodeURIComponent(msg+"\n\n"+url),"_blank","noopener,noreferrer");return}
     if(kind==="tg"){w.open("https://t.me/share/url?url="+encodeURIComponent(url)+"&text="+encodeURIComponent(msg),"_blank","noopener,noreferrer");return}
