@@ -80,11 +80,11 @@ function showIndex(opener){
   if(!pack)return;
   var li=d.createElement("li");li.className="dar-frauen-index-item";
   var link=d.createElement("a");link.className="dar-frauen-index-link";
-  var target="#frauen/"+encodeURIComponent(row.area)+"/"+encodeURIComponent(row.id);
-  var desktop=!!(d.getElementById("pageRoot")&&!d.getElementById("dv3Home"));
-  // Desktop has its own ?page=frau(en) router; a native #frauen/... hash is
-  // not a valid reader route there.
-  link.href=desktop?"/?page=frauen&cat="+encodeURIComponent(row.area)+"&id="+encodeURIComponent(row.id):target;
+  // Q-style standalone reader is canonical for contributions without Q IDs,
+  // identical on native iOS/Android, DAR TEST, PWA and public website.
+  // Do not mint Q numbers, clone articles or link to an unlocalized shell.
+  var target="/wissen/beitrag/?id="+encodeURIComponent(row.id)+"&lang="+encodeURIComponent(code);
+  link.href=target;
   var number=d.createElement("span");number.className="dar-frauen-index-number";number.textContent=String(i+1).padStart(2,"0");
   var body=d.createElement("span");body.className="dar-frauen-index-item-body";
   var area=d.createElement("span");area.className="dar-frauen-index-area";area.textContent=pack.labels?.area||row.area;
@@ -93,10 +93,8 @@ function showIndex(opener){
   var arrow=d.createElement("span");arrow.className="dar-frauen-index-arrow";arrow.textContent=rtl?"‹":"›";arrow.setAttribute("aria-hidden","true");
   body.appendChild(area);body.appendChild(caption);body.appendChild(preview);
   link.appendChild(number);link.appendChild(body);link.appendChild(arrow);
-  link.addEventListener("click",function(event){
-   closeIndex(false);
-   if(desktop)return; // Real desktop details route; allow normal navigation
-   event.preventDefault();w.location.hash=target;
+  link.addEventListener("click",function(){
+   closeIndex(false); // Normal same-origin navigation to the article reader.
   });
   li.appendChild(link);list.appendChild(li);
  });
