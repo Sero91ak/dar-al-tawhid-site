@@ -52,10 +52,10 @@ function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
    await list.first().waitFor({timeout:10000});
    assert.equal(await list.count(),16,cfg.name+" must display exactly 16 new entries");
    const target=await list.first().getAttribute("href");
-   assert.ok(/^\/\?page=frauen&cat=.+&id=/.test(target),cfg.name+" first article is not direct desktop reader link");
+   assert.ok(/^\/wissen\/beitrag\/\?id=[a-z0-9-]+&lang=de$/.test(target),cfg.name+" first article is not permanent non-Q reader link");
    await list.first().click();
    try{
-    await page.locator("#pageRoot .dar-frauen-desktop-entry").waitFor({timeout:18000,state:"visible"});
+    await page.locator("#darNonQReader[data-canonical-content-id]").waitFor({timeout:18000,state:"visible"});
    }catch(error){
     const diagnostic=await page.evaluate(()=>({
      location:location.href,pathname:location.pathname,search:location.search,
@@ -71,7 +71,7 @@ function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
     console.error("ACTUAL DESKTOP DETAIL DIAGNOSTICS:",JSON.stringify(diagnostic));
     throw error;
    }
-   const actual=await page.locator("#pageRoot .dar-frauen-desktop-entry").getAttribute("data-dar-frauen-release-article");
+   const actual=await page.locator("#darNonQReader[data-canonical-content-id]").getAttribute("data-canonical-content-id");
    assert.equal(actual,manifest.items[0].id,cfg.name+" direct reader selected wrong article");
    console.log("PASS LIVE PUBLIC "+cfg.name+": card, 16 links, first canonical reader, URL "+target);
    await context.close();
