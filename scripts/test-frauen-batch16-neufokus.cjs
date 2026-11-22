@@ -48,7 +48,7 @@ function node(tag){
  };
  return element;
 }
-const home={querySelector(sel){return sel===".dv3-tawhid"?anchor:null},appendChild(el){registry.set(el.id,el)}};
+const home={querySelector(sel){return sel.includes(".dv3-tawhid")?anchor:null},appendChild(el){registry.set(el.id,el)},insertBefore(el){registry.set(el.id,el)}};
 const doc={readyState:"loading",hidden:false,head:{appendChild(el){registry.set(el.id,el)}},
  body:{appendChild(el){registry.set(el.id,el)}},
  getElementById(id){if(id==="dv3Home")return home;return registry.get(id)||null},
@@ -108,7 +108,8 @@ function getCard(){return registry.get("darFrauenNeufokus48h")||null}
  visitorGender="man";
  assert.equal(expiryTimers.size,1,"Precisely one expiry timer required for the visible focus");
  assert.equal(active.dir,"ltr");assert.equal(active.lang,"tr");
- assert.ok(active.children.some(x=>/16 yeni/.test(x.textContent)),"Turkish focus label missing");
+ function subtree(node){return [node,...(node.children||[]).flatMap(subtree)}
+ assert.ok(subtree(active).some(x=>/16 yeni/.test(x.textContent)),"Turkish focus label missing");
  active.onclick();
  const overlay=registry.get("darFrauenNeufokusIndex");
  assert.ok(overlay,"Clicking the global home focus must open a 16-item index, not a generic category");
