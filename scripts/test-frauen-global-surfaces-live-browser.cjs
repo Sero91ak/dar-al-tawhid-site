@@ -97,40 +97,30 @@ async function diagnose(page) {
    await items.first().waitFor({timeout:9000});
    assert.equal(await items.count(),16,spec.name+" article index wrong count");
    const first=manifest.items[0];
-   const target="#frauen/"+encodeURIComponent(first.area)+"/"+encodeURIComponent(first.id);
-   assert.equal(await items.first().getAttribute("href"),target,spec.name+" native direct link wrong");
+   const target="/wissen/beitrag/?id="+encodeURIComponent(first.id)+"&lang=de";
+   assert.equal(await items.first().getAttribute("href"),target,
+    spec.name+" article must link to original-ID based non-Q reader, no Q number");
    await items.first().click();
-   await page.waitForFunction(expected=>location.hash===expected,target,{timeout:15000});
-   const expectedTitle=localeCatalog.entries[first.id].locales.de.title;
-   // Real installed PWA uses the existing #appView Frauen reader directly,
-   // while the official iOS/native bridge wraps it in .dar-frauen-production-root.
-   // A missing wrapper is NOT an empty article if the real PWA reader is visible.
-   const selector=spec.name==="android-installed-pwa"?"#appView":".dar-frauen-production-root";
-   const reader=page.locator(selector);
-   await reader.waitFor({state:"visible",timeout:16000});
-   try{
-    await page.waitForFunction(({selector,title})=>{
-     const e=document.querySelector(selector);
-     return !!e&&e.innerText.length>250&&e.innerText.includes(title);
-    },{selector,title:expectedTitle},{timeout:16000});
-   }catch(error){
-    const diagnostic=await page.evaluate(()=>({
-      href:location.href,body:document.body.className,
-      appPath:document.documentElement.dataset.appPath,
-      nativeReader:!!document.querySelector(".dar-frauen-production-root"),
-      pwaReader:document.getElementById("appView")?.innerText?.slice(0,700),
-      frauenModule:typeof window.DARFrauenFiqh?.render
-    })).catch(e=>({error:String(e)}));
-    console.error("GLOBAL READER MISMATCH "+spec.name+" "+JSON.stringify(diagnostic));
-    throw error;
-   }
-   const readerText=await reader.innerText();
-   assert.ok(readerText.includes(expectedTitle),spec.name+" did not open canonical article title");
-   assert.ok(readerText.length>250,spec.name+" article reader too short");
-   console.log("GLOBAL ARTICLE "+spec.name+" "+JSON.stringify({
-    length:readerText.length,title:expectedTitle,href:await page.evaluate(()=>location.href)
+   await page.waitForURL(url=>url.pathname==="/wissen/beitrag/"&&
+     url.searchParams.get("id")===first.id,{timeout:18000});
+   const reader=page.locator("#darNonQReader[data-canonical-content-id='"+first.id+"']");
+   await reader.waitFor({state:"visible",timeout:18000});
+   await page.waitForFunction(title=>{
+     const shell=document.getElementById("darNonQReader");
+     return shell?.dataset?.canonicalContentId&&shell.innerText.includes(title);
+   },localeCatalog.entries[first.id].locales.de.title,{timeout:12000});
+   const articleText=await reader.innerText();
+   assert.ok(articleText.includes(localeCatalog.entries[first.id].locales.de.statement),
+    spec.name+" source-grounded statement is missing");
+   assert.ok(articleText.includes(localeCatalog.entries[first.id].locales.de.sharh),
+    spec.name+" source-grounded editorial explanation is missing");
+   assert.ok(articleText.length>300,spec.name+" detailed non-Q reader incomplete");
+   assert.equal(await page.locator(".dar-post-learning-link").getAttribute("href"),
+    "/lernen/frauen-wissen/?id="+encodeURIComponent(first.id)+"&lang=de",
+    spec.name+" wrong learning route");
+   console.log("PASS GLOBAL "+spec.name+" "+JSON.stringify({
+    header,host:detail.focus.host,visible:true,entries:16,reader:target,chars:articleText.length
    }));
-   console.log("PASS GLOBAL "+spec.name+" "+JSON.stringify({header,host:detail.focus.host,visible:true,entries:16,reader:target,chars:readerText.length}));
    await ctx.close();
   }
  }finally{await browser.close()}
