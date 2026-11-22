@@ -1308,11 +1308,13 @@ function injectAdultReaderRuntimeV5(html) {
     const localeTag='<script defer id="darFrauenEntryLocaleV1" src="/assets/frauen/frauen-entry-locale-v1.js?v=20261118-batch16-learning"></'+'script>';
     html=html.includes("</body>")?html.replace("</body>",localeTag+"</body>"):html+localeTag;
   }
-  // Adult visitor V3 home: scoped 48h women Neufokus card. Its runtime
+  // One global 48h editorial spotlight on ALL adult surfaces: iOS/Android
+  // native apps, DĀR TEST, PWA and public website; canonical shared 16 IDs.
+  // The renderer chooses the actually visible home host per surface. Its runtime
   // remains hidden until 16 canonical articles are verifiably published and
   // the existing Admin Focus-Feed entry's exact 48h window is live.
   if(!html.includes('id="darFrauenNeufokusV1"')){
-    const tag='<script defer id="darFrauenNeufokusV1" src="/assets/frauen/frauen-neufokus-v1.js?v=20261122-android-native-frontstage-v4"></'+'script>';
+    const tag='<script defer id="darFrauenNeufokusV1" src="/assets/frauen/frauen-neufokus-v1.js?v=20261122-global-all-surfaces-v5"></'+'script>';
     html=html.includes("</body>")?html.replace("</body>",tag+"</body>"):html+tag;
   }
   // Q50 is a single published adult post, localized at the existing render
