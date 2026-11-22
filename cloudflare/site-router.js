@@ -1289,6 +1289,11 @@ function injectFrauenCompactEditorialV1417(html) {
   const link = '<link rel="stylesheet" id="darFrauenCompactEditorialV1417" href="/assets/frauen/frauen-compact-editorial-v1417.css?v=frauen-compact-v1417-20261110">';
   return html.includes("</body>") ? html.replace("</body>",link+"</body>") : html+link;
 }
+function injectFrauenDesktopEntryV1(html) {
+  if(typeof html!=="string"||!html||html.includes('id="darFrauenDesktopEntryV1"'))return html;
+  const tag='<script defer id="darFrauenDesktopEntryV1" src="/assets/frauen/frauen-desktop-entry-v1.js?v=20261122-first-reader"></'+'script>';
+  return html.includes("</body>")?html.replace("</body>",tag+"</body>"):html+tag;
+}
 function injectAdultReaderRuntimeV5(html) {
   if(typeof html!=="string"||!html)return html;
   html=html.replace(/(\/assets\/dar-app-chrome\.js)(?:\?v=[^"'\s<>]*)?/g,
@@ -1307,7 +1312,7 @@ function injectAdultReaderRuntimeV5(html) {
   // remains hidden until 16 canonical articles are verifiably published and
   // the existing Admin Focus-Feed entry's exact 48h window is live.
   if(!html.includes('id="darFrauenNeufokusV1"')){
-    const tag='<script defer id="darFrauenNeufokusV1" src="/assets/frauen/frauen-neufokus-v1.js?v=20261122-16-index"></'+'script>';
+    const tag='<script defer id="darFrauenNeufokusV1" src="/assets/frauen/frauen-neufokus-v1.js?v=20261122-home-root-v2"></'+'script>';
     html=html.includes("</body>")?html.replace("</body>",tag+"</body>"):html+tag;
   }
   // Q50 is a single published adult post, localized at the existing render
@@ -1917,6 +1922,7 @@ export default {
         if (!html.includes("darPublicWebsiteGuardV1")) html = html.replace("</body>", publicWebsiteAddon() + "</body>");
         html = activateAdultCompactHero(html);
         html = injectAdultReaderRuntimeV5(html);
+        html = injectFrauenDesktopEntryV1(html);
       }
       headers.set("Content-Type", "text/html; charset=utf-8");
       return new Response(html, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
