@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "description": "Canonical non-Q contribution reader. New approved content families can be registered without inventing a Q-number or duplicating original texts.",
+  "defaultType": "frauen",
+  "catalogs": {
+    "frauen": {
+      "title": "Frauenwissen",
+      "localeCatalogUrl": "/assets/frauen/frauen-entry-locales-v1.json",
+      "sourceFiles": {
+        "sahabiyyat": "/data/frauen-sahabiyyat.json",
+        "muetter-der-glaeubigen": "/data/frauen-muetter-der-glaeubigen.json",
+        "fiqh": "/data/frauen-fiqh.json"
+      },
+      "learningUrl": "/lernen/frauen-wissen/",
+      "requiredLocales": [
+        "de",
+        "ar",
+        "en",
+        "tr",
+        "ku",
+        "ckb",
+        "bs",
+        "fr",
+        "es"
+      ],
+      "sourceKey": "kennung",
+      "sourceStatusField": "quellenstatus",
+      "approvedSourceStatus": "geprueft",
+      "ownerConsentField": "freigabeDurchSerhat",
+      "sourceUrlField": "direktnachweisUrl",
+      "contentIdField": "contentId",
+      "localeCatalogIdField": "localeCatalogId",
+      "learningMode": "four-question-native-catalog",
+      "sourcePolicy": "Exact approved canonical source entry only; no Q number, no fabricated classical Sharh or Athar."
+    }
+  }
+}
