@@ -119,20 +119,33 @@ function isNativeHome(){
  var hash=String(w.location.hash||"").replace(/^#\/?/,"").split(/[/?]/)[0].toLowerCase();
  return hash==="home"||hash==="start"||(!hash&&!!d.body?.classList.contains("is-home-route"));
 }
+function visibleHost(node){
+ if(!node||!node.isConnected)return false;
+ try{
+  var rect=node.getBoundingClientRect(),css=w.getComputedStyle(node);
+  return rect.width>0&&rect.height>0&&css.display!=="none"&&css.visibility!=="hidden";
+ }catch(_){return false}
+}
 function homeMount(){
- // Three different real surfaces: native V3, native V380 (can lack V3),
- // public desktop V8. The focus must NOT depend on the test-app DOM.
+ // Three real home surfaces: live V3, live V380, public V8.
+ // Native #dv3Home may exist as a HIDDEN legacy sibling. Its mere existence
+ // is NOT evidence that a spotlight placed inside it will ever be visible.
  var nativeHome=d.getElementById("dv3Home");
- if(nativeHome&&(!w.location.hash||isNativeHome()))return{root:nativeHome,desktop:false,fallback:false};
+ if(nativeHome&&isNativeHome()&&visibleHost(nativeHome))
+  return{root:nativeHome,desktop:false,fallback:false};
  var website=d.getElementById("pageRoot");
  var page="start";
  try{page=new URLSearchParams(w.location.search).get("page")||"start"}catch(_){}
- if(website&&page.toLowerCase()==="start"&&website.children.length)return{root:website,desktop:true,fallback:false};
+ if(website&&page.toLowerCase()==="start"&&website.children.length)
+  return{root:website,desktop:true,fallback:false};
  if(isNativeHome()){
   var app=d.getElementById("appView");
   if(app){
-   var shell=app.querySelector(".home-v380-shell,.dv3-home,.home-v3")||app;
-   return{root:shell,desktop:false,fallback:true};
+   var candidates=app.querySelectorAll(".home-v380-shell,.dv3-home,.home-v3");
+   for(var i=0;i<candidates.length;i++){
+    if(visibleHost(candidates[i]))return{root:candidates[i],desktop:false,fallback:true};
+   }
+   if(visibleHost(app))return{root:app,desktop:false,fallback:true};
   }
  }
  return null;
@@ -162,10 +175,15 @@ function render(){
    showIndex(button);
   });
  }
- // The existing card can survive an in-app profile/locale change. Reuse the
- // same node, but move it if a shell rebuild places the card in an old host.
- if(button.parentElement!==root&&!button.parentElement?.closest("#dv3Home,#pageRoot,.home-v380-shell")){
-  root.insertBefore(button,root.firstChild);
+ // A legacy #dv3Home can be present but display:none. If a card was
+ // previously mounted there, move the SAME node into the visible V380 root.
+ if(button.parentElement!==root){
+  var anchor=home.desktop
+   ?root.querySelector(".page-intro,.dar-v8-quick,.home-foundations")
+   :root.querySelector(".dv3-hometitle,.dv3-search-box,.home-v380-hero,.home-title,.home-search,.dv3-tawhid");
+  if(anchor&&anchor.parentElement===root&&anchor.insertAdjacentElement)
+   anchor.insertAdjacentElement("afterend",button);
+  else root.insertBefore(button,root.firstChild);
  }
  button.lang=locale();button.dir=rtl?"rtl":"ltr";
  button.replaceChildren();
@@ -327,6 +345,6 @@ function init(){
  d.addEventListener("visibilitychange",function(){if(!d.hidden)schedule(true)});
  w.setInterval(function(){render();refresh(false)},60000);
 }
-w.DARFrauenNeufokusV1=Object.freeze({validWindow:validWindow,locale:locale,refresh:function(){return refresh(true)},openIndex:function(){showIndex(d.getElementById("darFrauenNeufokus48h"))},diagnostics:function(){var h=homeMount();return{home:h?.desktop?"website":h?.fallback?"native-fallback":h?"native":"none",enabled:enabled,indexReady:!!readyIndex,started:started,expires:until,cardPresent:!!d.getElementById("darFrauenNeufokus48h"),visible:!!d.getElementById("darFrauenNeufokus48h")?.getClientRects().length}}});
+w.DARFrauenNeufokusV1=Object.freeze({validWindow:validWindow,locale:locale,refresh:function(){return refresh(true)},openIndex:function(){showIndex(d.getElementById("darFrauenNeufokus48h"))},diagnostics:function(){var h=homeMount(),card=d.getElementById("darFrauenNeufokus48h");return{home:h?.desktop?"website":h?.fallback?"native-fallback":h?"native":"none",host:h?.root?.id||h?.root?.className||"",enabled:enabled,indexReady:!!readyIndex,started:started,expires:until,cardPresent:!!card,visible:visibleHost(card)}}});
 if(d.readyState==="loading")d.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })(window,document);
