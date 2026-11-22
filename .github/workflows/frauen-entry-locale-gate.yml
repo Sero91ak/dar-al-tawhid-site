@@ -74,7 +74,7 @@ jobs:
           node --check assets/frauen/frauen-learning-v1.js
           node --check assets/beitrag/reader-v1.js
           node --check assets/beitrag/learning-v1.js
-      - name: Kanonische Beiträge ohne Q: 16 IDs, 144 Sprachfassungen und Lernbereich
+      - name: "Kanonische Beiträge ohne Q – 16 IDs, 144 Sprachfassungen und Lernbereich"
         run: node scripts/test-nonq-reader-browser.cjs
       - name: 16er-Einzelartikellinks, neun Sprachen, vier Geräteklassen
         run: node scripts/test-frauen-batch16-neufokus-browser.cjs
