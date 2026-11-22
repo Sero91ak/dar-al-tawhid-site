@@ -394,7 +394,7 @@
       "es"
     ],
     "deliveryRules": "One once-only announcement to adult post-push subscribers; do not include Kids, opted-out devices, or unknown non-adult audiences.",
-    "displayRule": "The 48h NEUFOKUS announcement appears globally on the adult homepage for woman, man and neutral, independent of profile. Only the other profile-specific recommendation sections may filter by gender; the global announcement always navigates to #frauen.",
+    "displayRule": "The 48h NEUFOKUS announcement appears globally on the adult homepage for woman, man and neutral, independent of profile. The card opens a localized 16-item list; each new contribution navigates to its own canonical #frauen/{area}/{id} reader. Only unrelated profile-specific recommendation sections remain gender-filtered.",
     "priorKnowledgeWomanTargeting": "Superseded by owner's new explicit instruction for THIS 16-item announcement, not for other women-only knowledge campaigns.",
     "requireFirst": "All 16 items published and accessible, release CI and source/locale quality gates, safe URL/deep-link verified.",
     "plannedIdempotencyKey": "d1c40b28-2bd3-43fd-a14b-708df7d5d976",
