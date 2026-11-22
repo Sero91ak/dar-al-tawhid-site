@@ -117,7 +117,7 @@ async function diagnose(page) {
     spec.name+" source-grounded editorial explanation is missing");
    assert.ok(articleText.length>300,spec.name+" detailed non-Q reader incomplete");
    assert.equal(await page.locator(".dar-post-learning-link").getAttribute("href"),
-    "/lernen/frauen-wissen/?id="+encodeURIComponent(first.id)+"&lang=de",
+    "/lernen/frauen-wissen/?id="+encodeURIComponent(first.id)+"&lang=de"+(surface?"&from="+surface:""),
     spec.name+" wrong learning route");
    console.log("PASS GLOBAL "+spec.name+" "+JSON.stringify({
     header,host:detail.focus.host,visible:true,entries:16,reader:target,chars:articleText.length
