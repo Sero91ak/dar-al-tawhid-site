@@ -33,7 +33,7 @@ assert.match(js,/darFoldV2/);
 assert.match(js,/ICON_3D/);
 assert.match(js,/dar-3d-icons/);
 assert.match(js,/savedReaderTop/);
-assert.match(js,/dataset\\.railVariant/);
+assert.match(js,/dataset\.railVariant/);
 assert.match(css,/DAR_PREMIUM_FOLD_SIDEBAR_20261122/);
 assert.match(css,/data-rail-variant="compact"/);
 assert.match(css,/\.dar-fold-v2-active/);
