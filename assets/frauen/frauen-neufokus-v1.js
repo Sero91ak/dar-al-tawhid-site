@@ -120,7 +120,9 @@ function isNativeHome(){
  return hash==="home"||hash==="start"||(!hash&&!!d.body?.classList.contains("is-home-route"));
 }
 function visibleHost(node){
- if(!node||!node.isConnected)return false;
+ if(!node||node.isConnected===false)return false;
+ // Tiny DOM test fixtures and old engines may not implement layout APIs.
+ if(typeof node.getBoundingClientRect!=="function"||typeof w.getComputedStyle!=="function")return true;
  try{
   var rect=node.getBoundingClientRect(),css=w.getComputedStyle(node);
   return rect.width>0&&rect.height>0&&css.display!=="none"&&css.visibility!=="hidden";
@@ -332,7 +334,7 @@ function observe(){
 function init(){
  if(d.getElementById("darFrauenNeufokus48hStyle")===null){
   var sheet=d.createElement("link");sheet.id="darFrauenNeufokus48hStyle";sheet.rel="stylesheet";
-  sheet.href="/assets/frauen/frauen-neufokus-v1.css?v=20261122-home-root-v2";d.head.appendChild(sheet);
+  sheet.href="/assets/frauen/frauen-neufokus-v1.css?v=20261122-android-native-v3";d.head.appendChild(sheet);
  }
  observe();schedule(true);
  d.addEventListener("dar:view-rendered",function(){observe();schedule(false)});
