@@ -71,11 +71,12 @@ async function diag(page){
   const list=page.locator("#darFrauenNeufokusIndex a.dar-frauen-index-link");
   await list.first().waitFor({timeout:10000});
   assert.equal(await list.count(),16,device.name+" count mismatch");
-  const first=rows[0],target="#frauen/"+encodeURIComponent(first.area)+"/"+encodeURIComponent(first.id);
-  assert.equal(await list.first().getAttribute("href"),target,device.name+" must use native route, not desktop ?page URL");
+  const first=rows[0],target="/wissen/beitrag/?id="+encodeURIComponent(first.id)+"&lang=de";
+  assert.equal(await list.first().getAttribute("href"),target,device.name+" must use permanent non-Q nine-language reader URL");
   await list.first().click();
-  await page.waitForFunction(expected=>location.hash===expected,target,{timeout:10000});
-  await page.locator(".dar-frauen-production-root").waitFor({timeout:15000});
+  await page.waitForURL(url=>url.pathname==="/wissen/beitrag/"&&url.searchParams.get("id")===first.id,{timeout:15000});
+  await page.locator("#darNonQReader[data-canonical-content-id='"+first.id+"']").waitFor({timeout:15000});
+  assert.ok((await page.locator(".dar-post-title").innerText()).length>15,device.name+" non-Q reader title missing");
   console.log("PASS ANDROID NATIVE "+device.name+" "+JSON.stringify({nativeShell:header,card:latest.focus,items:16,target}));
   await ctx.close();
  }
