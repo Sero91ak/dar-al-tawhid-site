@@ -62,7 +62,7 @@ async function diag(page){
   const first=rows[0],target="#frauen/"+encodeURIComponent(first.area)+"/"+encodeURIComponent(first.id);
   assert.equal(await list.first().getAttribute("href"),target,device.name+" must use native route, not desktop ?page URL");
   await list.first().click();
-  await page.waitForFunction(expected=>location.hash===expected,{timeout:10000},target);
+  await page.waitForFunction(expected=>location.hash===expected,target,{timeout:10000});
   await page.locator(".dar-frauen-production-root").waitFor({timeout:15000});
   console.log("PASS ANDROID NATIVE "+device.name+" "+JSON.stringify({nativeShell:header,card:latest.focus,items:16,target}));
   await ctx.close();
