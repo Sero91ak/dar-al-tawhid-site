@@ -23,6 +23,7 @@ const router=fs.readFileSync(path.join(root,"cloudflare/site-router.js"),"utf8")
 assert.match(router,/darFrauenNeufokusV1/,"Neufokus is not mounted in actual app router");
 assert.match(css,/#dv3Home \.dar-frauen-neufokus/,"Styles must be scoped to real V3 home");
 const id="neufokus-frauenwissen-16-20261118";
+const originalFocusStatus=draft.items.find(x=>x.id===id)?.status;
 const now=Date.now(),start=new Date(now-20*60*1000).toISOString(),end=new Date(now-20*60*1000+48*3600000).toISOString();
 let feed=JSON.parse(JSON.stringify(draft));
 let card=feed.items.find(x=>x.id===id);assert.ok(card);
@@ -128,7 +129,7 @@ function getCard(){return registry.get("darFrauenNeufokus48h")||null}
  card.startsAt=new Date(now-49*3600000).toISOString();
  card.expiresAt=new Date(now-3600000).toISOString();
  await refresh();assert.equal(getCard(),null,"Expired 48-hour window must hide");
- assert.equal(draft.items.find(x=>x.id===id).status,"draft","Never alter actual staging/live feed file");
+ assert.equal(draft.items.find(x=>x.id===id).status,originalFocusStatus,"The focus fixture must not mutate the real repository status");
  for(const row of launch.items){
    const original=source["/"+row.sourceFile].eintraege.find(x=>x.kennung===row.id);
    assert.equal(original.quellenstatus,originalStatus.get(row.id),"Original source state changed: "+row.id);
