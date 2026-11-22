@@ -81,7 +81,10 @@ function showIndex(opener){
   var li=d.createElement("li");li.className="dar-frauen-index-item";
   var link=d.createElement("a");link.className="dar-frauen-index-link";
   var target="#frauen/"+encodeURIComponent(row.area)+"/"+encodeURIComponent(row.id);
-  link.href=target;
+  var desktop=!!(d.getElementById("pageRoot")&&!d.getElementById("dv3Home"));
+  // Desktop has its own ?page=frau(en) router; a native #frauen/... hash is
+  // not a valid reader route there.
+  link.href=desktop?"/?page=frauen&cat="+encodeURIComponent(row.area)+"&id="+encodeURIComponent(row.id):target;
   var number=d.createElement("span");number.className="dar-frauen-index-number";number.textContent=String(i+1).padStart(2,"0");
   var body=d.createElement("span");body.className="dar-frauen-index-item-body";
   var area=d.createElement("span");area.className="dar-frauen-index-area";area.textContent=pack.labels?.area||row.area;
@@ -91,7 +94,9 @@ function showIndex(opener){
   body.appendChild(area);body.appendChild(caption);body.appendChild(preview);
   link.appendChild(number);link.appendChild(body);link.appendChild(arrow);
   link.addEventListener("click",function(event){
-   event.preventDefault();closeIndex(false);w.location.hash=target;
+   closeIndex(false);
+   if(desktop)return; // Real desktop details route; allow normal navigation
+   event.preventDefault();w.location.hash=target;
   });
   li.appendChild(link);list.appendChild(li);
  });
@@ -110,8 +115,19 @@ function showIndex(opener){
  indexOverlay=overlay;indexOpener=opener;d.body.appendChild(overlay);
  if(typeof close.focus==="function")close.focus({preventScroll:true});
 }
+function homeMount(){
+ // Native iOS/Android V3 and public desktop website use different canonical
+ // home containers. The former verification fixtures used only #dv3Home.
+ var nativeHome=d.getElementById("dv3Home");
+ if(nativeHome)return{root:nativeHome,desktop:false};
+ var website=d.getElementById("pageRoot");
+ var page="start";
+ try{page=new URLSearchParams(w.location.search).get("page")||"start"}catch(_){}
+ if(website&&page.toLowerCase()==="start"&&website.children.length)return{root:website,desktop:true};
+ return null;
+}
 function render(){
- var root=d.getElementById("dv3Home"),old=d.getElementById("darFrauenNeufokus48h");
+ var home=homeMount(),root=home&&home.root,old=d.getElementById("darFrauenNeufokus48h");
  var now=Date.now();
  if(!root||!enabled||now<started||now>=until){
    closeIndex(false);if(old)old.remove();return;
@@ -120,11 +136,15 @@ function render(){
  var button=old;
  if(!button){
   button=d.createElement("button");button.id="darFrauenNeufokus48h";
-  button.className="dar-frauen-neufokus";
+  button.className="dar-frauen-neufokus"+(home.desktop?" dar-frauen-neufokus-desktop":"");
   button.type="button";
-  var anchor=root.querySelector(".dv3-tawhid");
+  // Public website home is rendered into #pageRoot, not #dv3Home.
+  // Place the editorial spotlight immediately below the page introduction.
+  var anchor=home.desktop
+   ?root.querySelector(".page-intro,.dar-v8-quick,.home-foundations")
+   :root.querySelector(".dv3-tawhid");
   if(anchor&&anchor.insertAdjacentElement)anchor.insertAdjacentElement("afterend",button);
-  else root.appendChild(button);
+  else root.insertBefore(button,root.firstChild);
   button.addEventListener("click",function(){
    if(!enabled||Date.now()>=until)return;
    showIndex(button);
@@ -240,13 +260,15 @@ function schedule(force){
  (w.requestAnimationFrame||function(fn){Promise.resolve().then(fn)})(function(){scheduled=false;render();refresh(Boolean(force))});
 }
 function observe(){
- var root=d.getElementById("appView");
- if(root&&!root.__darFrauenFocusObserved&&typeof w.MutationObserver==="function"){
-  root.__darFrauenFocusObserved=true;
-  new w.MutationObserver(function(changes){
-   if(changes.some(function(c){return c.type==="childList"}))schedule(false);
-  }).observe(root,{childList:true});
- }
+ ["appView","pageRoot"].forEach(function(id){
+  var root=d.getElementById(id);
+  if(root&&!root.__darFrauenFocusObserved&&typeof w.MutationObserver==="function"){
+   root.__darFrauenFocusObserved=true;
+   new w.MutationObserver(function(changes){
+    if(changes.some(function(c){return c.type==="childList"}))schedule(false);
+   }).observe(root,{childList:true});
+  }
+ });
 }
 function init(){
  if(d.getElementById("darFrauenNeufokus48hStyle")===null){
@@ -257,12 +279,13 @@ function init(){
  d.addEventListener("dar:view-rendered",function(){observe();schedule(false)});
  d.addEventListener("dar:visitor-profile-changed",function(){render()});
  w.addEventListener("hashchange",function(){closeIndex(false);schedule(false)});
+ w.addEventListener("popstate",function(){closeIndex(false);schedule(true)});
  w.addEventListener("pageshow",function(){schedule(true)});
  w.addEventListener("dar-adult-locale-changed",function(){render()});
  w.addEventListener("dar-adult-ui-languages-ready",function(){render()});
  d.addEventListener("visibilitychange",function(){if(!d.hidden)schedule(true)});
  w.setInterval(function(){render();refresh(false)},60000);
 }
-w.DARFrauenNeufokusV1=Object.freeze({validWindow:validWindow,locale:locale,refresh:function(){return refresh(true)},openIndex:function(){showIndex(d.getElementById("darFrauenNeufokus48h"))}});
+w.DARFrauenNeufokusV1=Object.freeze({validWindow:validWindow,locale:locale,refresh:function(){return refresh(true)},openIndex:function(){showIndex(d.getElementById("darFrauenNeufokus48h"))},diagnostics:function(){return{home:homeMount()?.desktop?"website":homeMount()?"native":"none",enabled:enabled,indexReady:!!readyIndex,started:started,expires:until,cardPresent:!!d.getElementById("darFrauenNeufokus48h")}}});
 if(d.readyState==="loading")d.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })(window,document);
