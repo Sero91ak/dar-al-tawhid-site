@@ -284,3 +284,116 @@ html.dar-fold-v2-reader body #appView :is(
 /* The selected view is exclusive: CSS specificity must not unhide a panel. */
 html.dar-fold-v2-active #darFoldV2Rail #darFoldV2Menu[hidden],
 html.dar-fold-v2-active #darFoldV2Rail #darFoldV2Context[hidden]{display:none!important}
+
+
+/* DAR_PREMIUM_FOLD_SIDEBAR_20261122 — ISOLATED /test ONLY.
+   A real navigation region left, the unmodified interactive app right.
+   Reuse the verified DĀR 3D asset pack; preserve all active route/player nodes. */
+html.dar-fold-v2-active {
+  --dar-fold-v2-top:clamp(46px,6.6dvh,56px);
+  --dar-fold-premium-rail-bg:color-mix(in srgb,var(--dar-fold-v2-surface) 94%,var(--dar-fold-v2-accent) 6%);
+}
+html.dar-fold-v2-active #darFoldV2Topbar {
+  background:var(--dar-fold-premium-rail-bg)!important;
+  border-bottom:1px solid color-mix(in srgb,var(--dar-fold-v2-accent) 32%,transparent)!important;
+  box-shadow:0 2px 18px rgb(0 0 0 / .065)!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail {
+  background:linear-gradient(170deg,
+    color-mix(in srgb,var(--dar-fold-v2-accent) 5%,var(--dar-fold-v2-surface)),
+    var(--dar-fold-premium-rail-bg) 34%,
+    var(--dar-fold-v2-surface) 100%)!important;
+  border-right:1px solid color-mix(in srgb,var(--dar-fold-v2-accent) 34%,transparent)!important;
+  box-shadow:7px 0 24px rgb(0 0 0 / .075)!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-intro {
+  position:relative!important;
+  padding:18px 16px 18px!important;
+  border-bottom:1px solid var(--dar-fold-v2-line)!important;
+  background:radial-gradient(circle at 5% 3%,color-mix(in srgb,var(--dar-fold-v2-accent) 9%,transparent),transparent 66%)!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-heading-3d {
+  width:52px!important;height:52px!important;object-fit:contain!important;
+  display:block!important;margin:0 0 12px!important;
+  filter:drop-shadow(0 7px 12px rgb(0 0 0 / .14));
+}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-title {
+  font-size:clamp(19px,2.2vw,24px)!important;
+  line-height:1.22!important;letter-spacing:-.015em!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-switch {
+  margin-top:14px!important;margin-bottom:14px!important;
+  min-height:46px!important;border-radius:14px!important;
+  box-shadow:inset 0 1px 0 rgb(255 255 255 / .03)!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-menu-row {
+  min-height:54px!important;padding:8px 10px!important;
+  border-bottom:1px solid color-mix(in srgb,var(--dar-fold-v2-line) 52%,transparent)!important;
+  border-radius:11px!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-menu-row:is(:hover,:focus-visible),
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-option:is(:hover,:focus-visible) {
+  background:color-mix(in srgb,var(--dar-fold-v2-accent) 9%,transparent)!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-menu-row.is-selected,
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-option.is-selected {
+  background:color-mix(in srgb,var(--dar-fold-v2-accent) 12%,transparent)!important;
+  box-shadow:inset 3px 0 0 var(--dar-fold-v2-accent)!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-icon:has(> .dar-fold-v2-icon-3d) {
+  width:36px!important;height:36px!important;min-width:36px!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-icon-3d {
+  width:100%!important;height:100%!important;object-fit:contain!important;
+  display:block!important;filter:drop-shadow(0 4px 7px rgb(0 0 0 / .12));
+}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-menu-row .dar-fold-v2-icon:last-child {
+  width:13px!important;height:13px!important;min-width:13px!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-options {padding:6px 10px 24px!important;}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-option {
+  min-height:48px!important;padding:11px 10px!important;
+  border-radius:9px!important;
+  border-bottom:1px solid color-mix(in srgb,var(--dar-fold-v2-line) 56%,transparent)!important;
+}
+html.dar-fold-v2-active #darFoldV2Pane {
+  background:var(--bg,var(--dar-fold-v2-surface))!important;
+  overscroll-behavior-y:contain!important;
+}
+html.dar-fold-v2-active body #darFoldV2Pane > #appView {
+  padding:clamp(10px,1.6vw,24px)!important;
+  padding-bottom:max(24px,env(safe-area-inset-bottom,0px))!important;
+  padding-right:max(clamp(10px,1.6vw,24px),env(safe-area-inset-right,0px))!important;
+}
+/* Compact, icon-only left navigation: short Fold/phone landscape. */
+html.dar-fold-v2-active #darFoldV2Rail[data-rail-variant="compact"] {
+  align-items:stretch!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail[data-rail-variant="compact"] :is(
+  .dar-fold-v2-intro,.dar-fold-v2-switch,.dar-fold-v2-context,.dar-fold-v2-menu-label
+) {display:none!important}
+html.dar-fold-v2-active #darFoldV2Rail[data-rail-variant="compact"] #darFoldV2Menu {
+  display:flex!important;flex-direction:column!important;justify-content:space-evenly!important;
+  overflow-x:hidden!important;overflow-y:auto!important;
+  padding:6px 8px max(6px,env(safe-area-inset-bottom,0px))!important;
+  gap:2px!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail[data-rail-variant="compact"] .dar-fold-v2-menu-row {
+  flex:1 1 0!important;min-height:39px!important;max-height:57px!important;
+  width:100%!important;padding:4px!important;margin:0!important;
+  display:flex!important;justify-content:center!important;
+  border:0!important;border-radius:13px!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail[data-rail-variant="compact"] .dar-fold-v2-menu-row .dar-fold-v2-icon:has(> .dar-fold-v2-icon-3d) {
+  width:34px!important;height:34px!important;min-width:34px!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail[data-rail-variant="compact"] .dar-fold-v2-menu-row :is(
+  .dar-fold-v2-menu-copy,.dar-fold-v2-icon:last-child
+) {display:none!important}
+html.dar-fold-v2-active #darFoldV2Rail[data-rail-variant="compact"] .dar-fold-v2-menu-row.is-selected {
+  box-shadow:inset 2px 0 0 var(--dar-fold-v2-accent)!important;
+}
+@media (prefers-reduced-motion:reduce) {
+  html.dar-fold-v2-active #darFoldV2Rail *,
+  html.dar-fold-v2-active #darFoldV2Pane * {transition-duration:0s!important;animation-duration:0s!important}
+}

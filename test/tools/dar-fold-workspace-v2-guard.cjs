@@ -10,6 +10,7 @@ const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const js=read("test/assets/dar-fold-workspace-v2.js");
 const css=read("test/assets/dar-fold-workspace-v2.css");
 const worker=read("cloudflare/test-app-worker.js");
+const offline=read("test/service-worker.js");
 new vm.Script(js,{filename:"dar-fold-workspace-v2.js"});
 assert.match(js,/darFoldPane/);
 assert.match(js,/dar-fold-v2-route/);
@@ -30,13 +31,30 @@ assert.match(css,/dar-fold-v2-menu-row/);
 assert.match(css,/dar-fold-v2-context/);
 assert.match(css,/dar-fold-v2-options/);
 assert.match(js,/darFoldV2/);
+assert.match(js,/ICON_3D/);
+assert.match(js,/dar-3d-icons/);
+assert.match(js,/savedReaderTop/);
+assert.match(js,/dataset\.railVariant/);
+assert.match(css,/DAR_PREMIUM_FOLD_SIDEBAR_20261122/);
+assert.match(css,/data-rail-variant="compact"/);
 assert.match(css,/\.dar-fold-v2-active/);
 assert.match(css,/\.dar-fold-v2-reader/);
 assert.match(css,/overflow-y:auto!important/);
 assert.match(css,/width:calc\(100% - var\(--dar-fold-v2-rail\)\)/);
-assert.match(worker,/DAR_TEST_FOLD_WORKSPACE_V2_20261101/);
-assert.match(worker,/dar-fold-workspace-v2\.js\?v=20261101-real-content-v4/);
-assert.match(worker,/dar-fold-workspace-v2\.css\?v=20261101-real-content-v4/);
+assert.match(worker,/DAR_TEST_PREMIUM_LANDSCAPE_SINGLE_OWNER_20261122/);
+assert.match(worker,/darTestFoldWorkspaceV2Css/);
+assert.match(worker,/darTestFoldWorkspaceV2Js/);
+assert.match(worker,/premium-single-owner-20261122/);
+assert.match(worker,/fold-thumb-nav/); // legacy ref removal is explicitly retained
+assert.match(js,/dar-duo-side-active/);
+assert.match(offline,/offline-light-v1373/);
+assert.match(offline,/dar-fold-workspace-v2\.js\?v=20261122-premium-single-owner-v1/);
+assert.match(offline,/dar-fold-workspace-v2\.css\?v=20261122-premium-single-owner-v1/);
+assert.doesNotMatch(offline,/['"]\/test\/assets\/fold-thumb-nav\.js['"]/);
+assert.doesNotMatch(offline,/['"]\/test\/assets\/dar-duo-responsive-v1\.js['"]/);
+
+assert.match(worker,/dar-fold-workspace-v2\.js\?v=20261122-premium-single-owner-v1/);
+assert.match(worker,/dar-fold-workspace-v2\.css\?v=20261122-premium-single-owner-v1/);
 assert.doesNotMatch(worker,/\/\/ DAR_ADAPTIVE_FOLD_V1326/);
 assert.doesNotMatch(worker,/const adaptiveFoldScripts/);
 assert.doesNotMatch(worker,/const foldLink = '<link rel="stylesheet" id="darAdultGlobalFoldAxisV1"/);
@@ -46,13 +64,16 @@ const doc={documentElement:rootNode,readyState:"loading",addEventListener(){}};
 const win={document:doc,location:{search:"",pathname:"/test/",hash:"#quran"},innerWidth:726,innerHeight:512,URLSearchParams};
 vm.runInNewContext(js,{window:win,document:doc,URLSearchParams});
 const capacity=win.DARTestFoldV2.capacity;
-for(const [w,h,expected] of [
-  [320,700,false],[390,844,false],[600,960,false],[640,480,true],
-  [726,512,true],[800,700,true],[900,550,true],[915,412,false],
-  [1024,768,true],[1280,850,true]]) {
+for(const [w,h,expected,compact] of [
+  [320,700,false,false],[390,844,false,false],[600,960,false,false],
+  [640,480,true,false],[726,512,true,false],[800,700,true,false],
+  [900,550,true,false],[915,412,true,true],[730,390,true,true],
+  [720,345,false,false],[1024,768,true,false],[1280,850,true,false]]) {
   const c=capacity(w,h);
   assert.equal(c.dual,expected,w+"x"+h+" dual mode mismatch");
-  assert.ok(c.rail>=184&&c.rail<=288,"rail bounds");
+  assert.equal(c.compact,compact,w+"x"+h+" rail mode mismatch");
+  if(compact)assert.equal(c.rail,80,"compact rail must be 80px");
+  else assert.ok(c.rail>=194&&c.rail<=274,"full rail bounds");
   assert.equal(c.rail+c.pane,w,"no lost reader pixels");
   if(c.dual)assert.ok(c.pane>c.rail,"reader must be dominant");
 }

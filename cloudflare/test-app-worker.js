@@ -558,16 +558,20 @@ async function finalizeDarTestHomeV1193(asset) {
     const script = '<script defer id="darAdultMoreReadingJsV1" src="/assets/dar-adult-more-reading-v1.js?v=20261031-mehr-compact-v1"></'+'script>';
     html = html.includes("</body>") ? html.replace("</body>",script+"</body>") : html+script;
   }
-  // DAR_TEST_FOLD_WORKSPACE_V2_20261101 — replace, do not stack, Fold owners.
-  // Strip only Test HTML refs; do not mutate imported production assets.
+  // DAR_TEST_PREMIUM_LANDSCAPE_SINGLE_OWNER_20261122
+  // Remove earlier landscape navigation implementations before the premium
+  // workspace is installed. This function runs ONLY for the isolated /test/.
   html = html.replace(/<script\b[^>]*\bsrc=(["'])[^"']*(?:\/assets\/(?:adaptive-layout|fold-split)\.js|\/test\/assets\/(?:fold-thumb-nav|dar-duo-responsive-v1)\.js)[^"']*\1[^>]*>\s*<\/script>\s*/gi, "");
   html = html.replace(/<link\b[^>]*\bhref=(["'])[^"']*(?:\/assets\/(?:adaptive-layout|fold-split|adult-fold-global-v1)\.css|\/test\/assets\/(?:fold-thumb-nav|dar-duo-responsive-v1)\.css)[^"']*\1[^>]*>\s*/gi, "");
   html = html.replace(/<style\b[^>]*\bid=(["'])darAdaptive(?:FoldAuthorityV1326|NavStyleV1325)\1[^>]*>[\s\S]*?<\/style>\s*/gi, "");
-  // An iframe receives its own true layout viewport and uses the original
-  // /test app, with the new split controller disabled to prevent recursion.
+  // Remove stale copies of the Fold controller to enforce one authority.
+  html = html.replace(/<script\b[^>]*\bid=(["'])darTestFold(?:V2Early|WorkspaceV2Js)\1[^>]*>[\s\S]*?<\/script>\s*/gi, "");
+  html = html.replace(/<link\b[^>]*\bid=(["'])darTestFoldWorkspaceV2Css\1[^>]*>\s*/gi, "");
+  // The premium workspace moves the actual #appView to the reader.
+  // No iframe or duplicate content/player shell is created.
   const foldBootstrap = '<script id="darTestFoldV2Early">if(new URLSearchParams(location.search).get("darFoldPane")==="reader")document.documentElement.classList.add("dar-fold-v2-reader");<\/script>';
-  const foldCssV2 = '<link rel="stylesheet" id="darTestFoldWorkspaceV2Css" href="/test/assets/dar-fold-workspace-v2.css?v=20261101-real-content-v4">';
-  const foldJsV2 = '<script defer id="darTestFoldWorkspaceV2Js" src="/test/assets/dar-fold-workspace-v2.js?v=20261101-real-content-v4"><\/script>';
+  const foldCssV2 = '<link rel="stylesheet" id="darTestFoldWorkspaceV2Css" href="/test/assets/dar-fold-workspace-v2.css?v=20261122-premium-single-owner-v1">';
+  const foldJsV2 = '<script defer id="darTestFoldWorkspaceV2Js" src="/test/assets/dar-fold-workspace-v2.js?v=20261122-premium-single-owner-v1"><\/script>';
   if (html.includes("</head>")) html=html.replace("</head>",foldBootstrap+"\n"+foldCssV2+"\n</head>");
   else html=foldBootstrap+foldCssV2+html;
   if (html.includes("</body>")) html=html.replace("</body>",foldJsV2+"\n</body>");
@@ -588,6 +592,7 @@ async function finalizeDarTestHomeV1193(asset) {
     "$1?v=20261111-adult-keyboard-nav-stable-v1");
 
   const headers = new Headers(asset.headers);
+  headers.set("X-DAR-Test-Fold-Layout", "premium-single-owner-20261122");
   headers.set("X-DAR-Test-Scroll-Boundary", "v3");
   headers.set("X-DAR-Test-Home", "html-parity-v50-20261020");
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
