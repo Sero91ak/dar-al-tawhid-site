@@ -235,3 +235,149 @@
  outline:2px solid #f1d08a;outline-offset:3px;
 }
 @media(max-width:640px){#pageRoot .dar-frauen-desktop-entry{margin:4px auto 20px;padding:18px 14px}}
+
+/* NATIVE_GLOBAL_NEWS_FOCUS_V3 · Shared production V3/V380, PWA and V8.
+   High-contrast editorial card. No dependency on neutral/male/female profile. */
+:where(#appView,#pageRoot) .dar-frauen-neufokus{
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;
+ box-sizing:border-box!important;isolation:isolate!important;position:relative!important;
+ width:100%!important;max-width:100%!important;min-width:0!important;
+ min-height:192px!important;gap:0!important;
+ margin:16px 0 20px!important;padding:17px 19px 16px!important;
+ border-radius:22px!important;overflow:hidden!important;
+ border:1px solid rgba(229,190,113,.67)!important;
+ background:radial-gradient(ellipse at 90% 0%,rgba(213,174,98,.24) 0%,transparent 52%),
+            radial-gradient(ellipse at 0% 110%,rgba(39,112,101,.30),transparent 56%),
+            linear-gradient(132deg,#0c2925 0%,#112d2e 48%,#0b1725 100%)!important;
+ background-color:#102922!important;
+ color:#fff5df!important;text-align:start!important;cursor:pointer!important;
+ box-shadow:0 11px 29px rgba(0,0,0,.33),
+            0 0 0 3px rgba(214,170,91,.06),
+            inset 0 1px 0 rgba(255,241,203,.18)!important;
+ -webkit-tap-highlight-color:transparent;
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus::before{
+ content:""!important;position:absolute!important;inset:7px!important;
+ border:1px solid rgba(234,205,138,.21)!important;
+ border-radius:16px!important;pointer-events:none!important;
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus::after{
+ content:""!important;position:absolute!important;
+ width:170px;height:170px;right:-68px;top:-70px;
+ background:radial-gradient(circle,rgba(247,209,139,.18),transparent 68%)!important;
+ pointer-events:none!important;z-index:0;
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus > *{
+ position:relative!important;z-index:1!important;
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus .focus-head{
+ display:flex!important;align-items:center!important;gap:9px!important;
+ width:100%;min-width:0;margin-bottom:9px;
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus .focus-emblem{
+ display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;
+ border:1px solid rgba(227,189,114,.36);border-radius:13px;
+ background:linear-gradient(143deg,rgba(244,214,157,.17),rgba(244,214,157,.035));
+ box-shadow:inset 0 1px 0 rgba(255,245,221,.18),0 4px 12px rgba(0,0,0,.22);
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus .focus-emblem img{
+ display:block!important;width:31px!important;height:31px!important;
+ max-width:100%;object-fit:contain!important;
+ filter:drop-shadow(0 2px 5px rgba(0,0,0,.28));
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus .focus-eyebrow{
+ flex:1 1 auto;min-width:0;display:block;
+ color:#ead5a3!important;font:750 10px/1.45 system-ui,sans-serif!important;
+ letter-spacing:.085em!important;text-transform:uppercase;
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus .focus-live{
+ flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;
+ padding:6px 10px;border-radius:100px;
+ border:1px solid rgba(202,234,181,.31);
+ background:rgba(58,127,86,.18);
+ color:#d0edc7!important;letter-spacing:.13em;
+ font:800 9px/1 system-ui,sans-serif;
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus .focus-live::before{
+ content:"";width:6px;height:6px;border-radius:50%;
+ background:#91da9c;box-shadow:0 0 0 3px rgba(145,218,156,.12),0 0 10px rgba(145,218,156,.5);
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus .focus-center{
+ display:flex!important;align-items:center!important;justify-content:space-between;
+ gap:12px;min-width:0;width:100%;margin:0;
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus .focus-copy{
+ display:flex;flex:1 1 auto;flex-direction:column;align-items:flex-start;gap:6px;min-width:0;
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus .focus-title{
+ margin:0!important;display:block!important;color:#fff7e8!important;
+ font:750 clamp(21px,4.8vw,28px)/1.16 Georgia,serif!important;
+ letter-spacing:-.025em;overflow-wrap:anywhere;
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus .focus-body{
+ display:block!important;color:#e4e6dc!important;opacity:1!important;
+ font:450 clamp(11px,2.6vw,13.5px)/1.53 system-ui,sans-serif!important;
+ overflow-wrap:anywhere;
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus .focus-count{
+ flex:0 0 65px;width:65px;height:66px;
+ display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0;
+ border-radius:16px;border:1px solid rgba(231,195,124,.46);
+ background:linear-gradient(155deg,rgba(235,197,132,.19),rgba(185,132,66,.04));
+ box-shadow:0 4px 15px rgba(0,0,0,.14);
+ color:#f7d99c!important;
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus .focus-count strong{
+ color:#f7d99c!important;font:700 32px/.95 Georgia,serif!important;
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus .focus-count small{
+ margin-top:3px;color:#f5dfa8!important;letter-spacing:.14em;
+ font:800 8px/1.2 system-ui,sans-serif;
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus .focus-footer{
+ display:flex!important;align-items:center!important;justify-content:space-between;
+ gap:10px;width:100%;margin-top:13px;padding-top:11px;
+ border-top:1px solid rgba(217,183,117,.25);
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus .focus-meta{
+ flex:1 1 auto;min-width:0;color:#cfcaaf!important;
+ font:600 10px/1.4 system-ui,sans-serif!important;letter-spacing:0;
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus .focus-action{
+ flex:0 0 auto;margin:0!important;padding:8px 11px!important;
+ border:1px solid rgba(224,190,123,.45);border-radius:12px;
+ background:rgba(227,192,118,.17);
+ color:#ffe7ac!important;
+ font:750 11px/1.2 system-ui,sans-serif!important;
+ white-space:normal;text-align:center;
+}
+:where(#appView,#pageRoot) .dar-frauen-neufokus:focus-visible{
+ outline:3px solid #f6d89d!important;outline-offset:3px!important;
+}
+@media (hover:hover){
+ :where(#appView,#pageRoot) .dar-frauen-neufokus:hover{
+  border-color:#eccd8b!important;box-shadow:0 15px 34px rgba(0,0,0,.35),0 0 0 3px rgba(214,170,91,.1)!important;
+ }
+}
+@media(max-width:460px){
+ :where(#appView,#pageRoot) .dar-frauen-neufokus{
+  padding:13px 14px 13px!important;border-radius:18px!important;
+  margin:12px 0 15px!important;min-height:182px!important;
+ }
+ :where(#appView,#pageRoot) .dar-frauen-neufokus .focus-emblem{
+  flex-basis:36px;width:36px;height:36px;border-radius:11px;
+ }
+ :where(#appView,#pageRoot) .dar-frauen-neufokus .focus-emblem img{width:27px!important;height:27px!important}
+ :where(#appView,#pageRoot) .dar-frauen-neufokus .focus-count{
+  flex:0 0 50px;width:50px;height:57px;border-radius:12px;
+ }
+ :where(#appView,#pageRoot) .dar-frauen-neufokus .focus-count strong{font-size:27px!important}
+ :where(#appView,#pageRoot) .dar-frauen-neufokus .focus-title{font-size:21px!important}
+ :where(#appView,#pageRoot) .dar-frauen-neufokus .focus-footer{align-items:flex-start;gap:8px}
+ :where(#appView,#pageRoot) .dar-frauen-neufokus .focus-action{
+  max-width:47%;font-size:10.5px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ :where(#appView,#pageRoot) .dar-frauen-neufokus{transition:none!important}
+}
