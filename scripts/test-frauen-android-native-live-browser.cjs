@@ -22,7 +22,19 @@ async function diag(page){
    focus:window.DARFrauenNeufokusV1?.diagnostics?.()||null,
    focusEl:!!document.getElementById("darFrauenNeufokus48h"),
    visible:!!document.getElementById("darFrauenNeufokus48h")?.getClientRects().length,
-   topText:document.getElementById("appView")?.innerText?.slice(0,180)
+   topText:document.getElementById("appView")?.innerText?.slice(0,180),
+   bodyChildren:[...document.body.children].slice(0,16).map(el=>({tag:el.tagName,id:el.id,class:String(el.className||"").slice(0,100)})),
+   candidateHosts:[document.documentElement,document.body,
+    document.getElementById("appView"),document.getElementById("dv3Home"),
+    document.querySelector("#appView .home-v380-shell"),
+    document.querySelector(".top-shell"),document.querySelector(".header"),
+    document.querySelector("#homeView"),document.querySelector("#pageRoot")
+   ].filter(Boolean).map(el=>{const r=el.getBoundingClientRect(),c=getComputedStyle(el);return{
+    tag:el.tagName,id:el.id,cls:String(el.className||"").slice(0,100),
+    display:c.display,visibility:c.visibility,opacity:c.opacity,position:c.position,
+    w:Math.round(r.width),h:Math.round(r.height),top:Math.round(r.top),
+    parent:el.parentElement?.id||String(el.parentElement?.className||"").slice(0,55)
+   }})
  })).catch(e=>({error:String(e)}));
 }
 (async()=>{
@@ -36,7 +48,7 @@ async function diag(page){
    deviceScaleFactor:2,isMobile:true,hasTouch:true,
    userAgent:"Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/126.0.0.0 Mobile Safari/537.36 DarAlTawhidAndroid/1.0"});
   const page=await ctx.newPage();let latest=null,header=null;
-  for(let trial=0;trial<5;trial++){
+  for(let trial=0;trial<2;trial++){
    const response=await page.goto(BASE+"/?native-focus-audit="+Date.now()+"#home",{waitUntil:"domcontentloaded",timeout:45000});
    header=response?.headers()?.["x-dar-surface"]||"";
    try{
@@ -44,7 +56,7 @@ async function diag(page){
     await page.evaluate(()=>window.DARFrauenNeufokusV1.refresh());
     await page.locator("#darFrauenNeufokus48h").waitFor({timeout:12000,state:"visible"});
     latest=await diag(page);break;
-   }catch(e){latest=await diag(page);console.log(device.name+" retry "+(trial+1)+" "+JSON.stringify({header,diag:latest,error:String(e).slice(0,280)}));if(trial<4)await sleep(2500)}
+   }catch(e){latest=await diag(page);console.log(device.name+" retry "+(trial+1)+" "+JSON.stringify({header,diag:latest,error:String(e).slice(0,280)}));if(trial<1)await sleep(1300)}
   }
   assert.equal(header,"ios-native",device.name+" did not receive native Android worker shell");
   assert.ok(latest?.app,device.name+" missing real native app");
