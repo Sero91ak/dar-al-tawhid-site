@@ -21,6 +21,9 @@ on:
       - 'data/frauen-*.json'
       - 'q/_registry/shortlinks.json'
       - 'cloudflare/site-router.js'
+      - 'assets/frauen/frauen-neufokus-v1.json'
+      - 'content/focus-feed/feed-index.json'
+      - '.github/workflows/frauen-entry-locale-gate.yml'
   workflow_dispatch:
 permissions:
   contents: read
@@ -47,3 +50,21 @@ jobs:
           npx playwright install --with-deps chromium
       - name: 16er-Einzelartikellinks, neun Sprachen, vier Geräteklassen
         run: node scripts/test-frauen-batch16-neufokus-browser.cjs
+
+  production-16-live-proof:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Echte öffentliche 16er-Beiträge, 144 Sprachfassungen und Originalreader prüfen
+        shell: bash
+        run: |
+          set -euo pipefail
+          if node -e "const f=require('./content/focus-feed/feed-index.json'); if(!f.items.some(x=>x.id==='neufokus-frauenwissen-16-20261118'&&x.status==='live'))process.exit(1)"; then
+            node scripts/verify-frauen-batch16-live.cjs --expect-focus
+          else
+            node scripts/verify-frauen-batch16-live.cjs
+          fi
