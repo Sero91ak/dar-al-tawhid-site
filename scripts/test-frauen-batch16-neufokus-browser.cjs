@@ -214,12 +214,54 @@ function snapshot(isPublic,locale) {
   assert.deepEqual(issues,[],websiteViewport.name+" JS errors: "+issues.join("; "));
   await context.close();
  }
+
+ // The ACTUAL Android-native visitor home is #darHomeHtmlParityV1, a sibling
+ // of the hidden legacy #appView. This exact omission caused the live outage.
+ {
+  const ctx=await browser.newContext({viewport:{width:412,height:915},isMobile:true,hasTouch:true});
+  const page=await ctx.newPage();
+  const docs=snapshot(true,"de");
+  await page.route("**/*",async route=>{
+   const u=new URL(route.request().url),p=u.pathname;
+   if(p==="/")return route.fulfill({status:200,contentType:"text/html",body:
+    '<!doctype html><html lang="de"><head><meta name="viewport" content="width=device-width,initial-scale=1"></head>'+
+    '<body class="is-home-route">'+
+    '<main id="appView" style="display:none"><section id="dv3Home">hidden legacy</section><section class="home-v380-shell">hidden</section></main>'+
+    '<section id="darHomeHtmlParityV1" style="display:block;padding:15px;width:100%;box-sizing:border-box">'+
+    '<div class="dhp-content"><div class="dhp-welcome" style="height:65px">Aktueller DĀR Start</div>'+
+    '<div class="dhp-search-box" style="height:48px">Wissen suchen</div><div class="dhp-quran-section">Qurʾān</div></div></section>'+
+    '</body></html>'});
+   if(p==="/assets/frauen/frauen-neufokus-v1.css")return route.fulfill({status:200,contentType:"text/css",body:css});
+   if(p==="/content/focus-feed/feed-index.json")return route.fulfill({status:200,contentType:"application/json",body:JSON.stringify(docs.feed)});
+   if(p==="/assets/frauen/frauen-neufokus-v1.json")return route.fulfill({status:200,contentType:"application/json",body:JSON.stringify(launch)});
+   if(p==="/assets/frauen/frauen-entry-locales-v1.json")return route.fulfill({status:200,contentType:"application/json",body:JSON.stringify(localeCatalog)});
+   if(p==="/lernen/frauen-wissen/")return route.fulfill({status:200,contentType:"text/html",body:learningHtml});
+   if(docs.docs[p])return route.fulfill({status:200,contentType:"application/json",body:JSON.stringify(docs.docs[p])});
+   return route.fulfill({status:404,body:"not found"});
+  });
+  await page.goto("https://dar-app.local/#home",{waitUntil:"domcontentloaded"});
+  await page.addScriptTag({content:code});
+  await page.evaluate(()=>window.DARFrauenNeufokusV1.refresh());
+  const current=page.locator("#darHomeHtmlParityV1 .dhp-content > #darFrauenNeufokus48h");
+  await current.waitFor({state:"visible",timeout:10000});
+  assert.equal(await page.locator("#appView #darFrauenNeufokus48h").count(),0,
+    "Never mount in the hidden legacy native #appView");
+  assert.equal((await page.evaluate(()=>window.DARFrauenNeufokusV1.diagnostics())).home,"native-frontstage");
+  assert.ok(await current.isVisible(),"Native parity home-focus must be visible to visitors");
+  await current.click();
+  const links=page.locator("#darFrauenNeufokusIndex a.dar-frauen-index-link");
+  await links.first().waitFor();
+  assert.equal(await links.count(),16,"Actual native parity focus needs all 16 direct routes");
+  assert.ok((await links.first().getAttribute("href")).startsWith("#frauen/"),
+    "Native parity must retain existing Frauen reader route");
+  await ctx.close();
+ }
  assert.equal(verified,36);
  for(const row of launch.items){
   const a=source["/"+row.sourceFile].eintraege.find(x=>x.kennung===row.id);
   assert.equal(a.quellenstatus,originalStatus.get(row.id),"Browser fixture must not mutate source state");
  }
  assert.equal(focus.items.find(x=>x.id===id).status,originalFocusStatus,"The browser fixture must not mutate the real repository focus status");
- console.log("PASS Frauen 48h: native 4 viewports/36 locale cards; public website #pageRoot on desktop+mobile; 16 direct canonical desktop readers each, global profiles, RTL, source/expiry fail-closed, immutable registry.");
+ console.log("PASS Frauen 48h: native 4 viewports/36 locale cards, real visible parity frontstage with hidden legacy appView; public website #pageRoot on desktop+mobile; 16 direct canonical desktop readers each, global profiles, RTL, source/expiry fail-closed, immutable registry.");
  }finally{if(browser)await browser.close()}
 })().catch(e=>{console.error(e.stack||e);process.exitCode=1});
