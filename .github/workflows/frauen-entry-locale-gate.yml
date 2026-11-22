@@ -23,6 +23,7 @@ on:
       - 'cloudflare/site-router.js'
       - 'assets/frauen/frauen-neufokus-v1.json'
       - 'content/focus-feed/feed-index.json'
+      - 'scripts/test-frauen-batch16-neufokus*.cjs'
       - '.github/workflows/frauen-entry-locale-gate.yml'
   workflow_dispatch:
 permissions:
