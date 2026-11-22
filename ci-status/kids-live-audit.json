@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-11-22T17:44:40Z",
+  "timestamp": "2026-11-22T17:45:07Z",
   "trigger": "workflow_run",
-  "finishedDeployConclusion": "failure",
-  "finishedDeployRun": "45050963535",
+  "finishedDeployConclusion": "cancelled",
+  "finishedDeployRun": "45051130748",
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
@@ -90,12 +90,21 @@
   "lastDeployRuns": [
     {
       "conclusion": null,
+      "created_at": "2026-11-22T17:44:58Z",
+      "head_sha": "602fc9e51d542e0b8ab0bb6fb74f92502e65494a",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45051174210",
+      "id": 45051174210,
+      "status": "pending",
+      "updated_at": "2026-11-22T17:44:59Z"
+    },
+    {
+      "conclusion": "cancelled",
       "created_at": "2026-11-22T17:44:29Z",
       "head_sha": "b0344da860d988aa8fa38d1680c842c0091dba9b",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45051130748",
       "id": 45051130748,
-      "status": "pending",
-      "updated_at": "2026-11-22T17:44:30Z"
+      "status": "completed",
+      "updated_at": "2026-11-22T17:44:59Z"
     },
     {
       "conclusion": null,
@@ -104,7 +113,7 @@
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45051040809",
       "id": 45051040809,
       "status": "in_progress",
-      "updated_at": "2026-11-22T17:44:15Z"
+      "updated_at": "2026-11-22T17:44:44Z"
     },
     {
       "conclusion": "failure",
@@ -132,15 +141,6 @@
       "id": 45050462830,
       "status": "completed",
       "updated_at": "2026-11-22T17:39:30Z"
-    },
-    {
-      "conclusion": "success",
-      "created_at": "2026-11-22T17:27:52Z",
-      "head_sha": "2e14e8132624b04861c905261778c81c2bcb76dc",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45049581540",
-      "id": 45049581540,
-      "status": "completed",
-      "updated_at": "2026-11-22T17:30:18Z"
     }
   ]
 }
