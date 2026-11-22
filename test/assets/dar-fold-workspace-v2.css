@@ -100,47 +100,6 @@ html.dar-fold-v2-active #darFoldV2Pane{
     grid-template-columns:repeat(auto-fit,minmax(min(100%,185px),1fr))!important;
   }
 }
-/* Calm editorial header: one strong name, one fine divider, no stacked cards. */
-#darFoldV2Rail .dar-fold-v2-intro{
-  flex:0 0 auto!important;min-width:0!important;
-  padding:20px 16px 13px!important;margin:0!important;
-  background:linear-gradient(145deg,color-mix(in srgb,var(--dar-fold-v2-accent) 5%,transparent),transparent 75%)!important;
-}
-#darFoldV2Rail .dar-fold-v2-eyebrow{
-  margin:0 0 9px!important;
-  color:var(--dar-fold-v2-accent)!important;
-  font:750 9px/1.25 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
-  letter-spacing:.17em!important;
-}
-#darFoldV2Rail .dar-fold-v2-title{
-  margin:0!important;padding:0!important;
-  font:650 clamp(19px,2.3vw,24px)/1.16 ui-serif,"Iowan Old Style",Georgia,serif!important;
-  letter-spacing:-.015em!important;color:var(--dar-fold-v2-ink)!important;
-  overflow-wrap:anywhere!important;
-}
-#darFoldV2Rail .dar-fold-v2-subtitle{
-  margin:7px 0 0!important;
-  color:var(--dar-fold-v2-muted)!important;
-  font:500 11.5px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
-}
-/* One navigation switch instead of seven tiny tiles on every screen. */
-#darFoldV2Rail .dar-fold-v2-switch{
-  flex:0 0 auto!important;width:calc(100% - 24px)!important;min-width:0!important;
-  display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:9px!important;
-  min-height:44px!important;margin:0 12px 13px!important;padding:0 10px!important;
-  border:1px solid var(--dar-fold-v2-line)!important;border-radius:12px!important;
-  background:color-mix(in srgb,var(--dar-fold-v2-accent) 5%,var(--dar-fold-v2-surface))!important;
-  color:var(--dar-fold-v2-ink)!important;
-  font:650 12px/1.25 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
-  text-align:start!important;cursor:pointer!important;box-sizing:border-box!important;
-}
-#darFoldV2Rail .dar-fold-v2-switch.is-open{
-  border-color:color-mix(in srgb,var(--dar-fold-v2-accent) 65%,transparent)!important;
-  background:color-mix(in srgb,var(--dar-fold-v2-accent) 10%,var(--dar-fold-v2-surface))!important;
-}
-#darFoldV2Rail .dar-fold-v2-switch-copy{
-  flex:1!important;min-width:0!important;white-space:normal!important;
-}
 #darFoldV2Rail .dar-fold-v2-icon{
   flex:0 0 auto!important;display:inline-flex!important;
   align-items:center!important;justify-content:center!important;
@@ -245,11 +204,6 @@ html.dar-fold-v2-active #darFoldV2Pane{
 #darFoldV2Rail :is(button,input):focus-visible{
   outline:2px solid var(--dar-fold-v2-accent)!important;outline-offset:2px!important;
 }
-@media(max-height:520px){
-  #darFoldV2Rail .dar-fold-v2-intro{padding-top:11px!important;padding-bottom:7px!important}
-  #darFoldV2Rail .dar-fold-v2-subtitle{margin-top:3px!important}
-  #darFoldV2Rail .dar-fold-v2-switch{margin-bottom:8px!important}
-}
 /* Historic embedded-reader styles retained as harmless compatibility only.
    Live Fold V4 no longer creates an embedded document. */
 html.dar-fold-v2-reader,html.dar-fold-v2-reader body{
@@ -293,11 +247,6 @@ html.dar-fold-v2-active {
   --dar-fold-v2-top:clamp(46px,6.6dvh,56px);
   --dar-fold-premium-rail-bg:color-mix(in srgb,var(--dar-fold-v2-surface) 94%,var(--dar-fold-v2-accent) 6%);
 }
-html.dar-fold-v2-active #darFoldV2Topbar {
-  background:var(--dar-fold-premium-rail-bg)!important;
-  border-bottom:1px solid color-mix(in srgb,var(--dar-fold-v2-accent) 32%,transparent)!important;
-  box-shadow:0 2px 18px rgb(0 0 0 / .065)!important;
-}
 html.dar-fold-v2-active #darFoldV2Rail {
   background:linear-gradient(170deg,
     color-mix(in srgb,var(--dar-fold-v2-accent) 5%,var(--dar-fold-v2-surface)),
@@ -305,26 +254,6 @@ html.dar-fold-v2-active #darFoldV2Rail {
     var(--dar-fold-v2-surface) 100%)!important;
   border-right:1px solid color-mix(in srgb,var(--dar-fold-v2-accent) 34%,transparent)!important;
   box-shadow:7px 0 24px rgb(0 0 0 / .075)!important;
-}
-html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-intro {
-  position:relative!important;
-  padding:18px 16px 18px!important;
-  border-bottom:1px solid var(--dar-fold-v2-line)!important;
-  background:radial-gradient(circle at 5% 3%,color-mix(in srgb,var(--dar-fold-v2-accent) 9%,transparent),transparent 66%)!important;
-}
-html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-heading-3d {
-  width:52px!important;height:52px!important;object-fit:contain!important;
-  display:block!important;margin:0 0 12px!important;
-  filter:drop-shadow(0 7px 12px rgb(0 0 0 / .14));
-}
-html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-title {
-  font-size:clamp(19px,2.2vw,24px)!important;
-  line-height:1.22!important;letter-spacing:-.015em!important;
-}
-html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-switch {
-  margin-top:14px!important;margin-bottom:14px!important;
-  min-height:46px!important;border-radius:14px!important;
-  box-shadow:inset 0 1px 0 rgb(255 255 255 / .03)!important;
 }
 html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-menu-row {
   min-height:54px!important;padding:8px 10px!important;
@@ -396,4 +325,120 @@ html.dar-fold-v2-active #darFoldV2Rail[data-rail-variant="compact"] .dar-fold-v2
 @media (prefers-reduced-motion:reduce) {
   html.dar-fold-v2-active #darFoldV2Rail *,
   html.dar-fold-v2-active #darFoldV2Pane * {transition-duration:0s!important;animation-duration:0s!important}
+}
+
+
+/* DAR_TEST_FOLD_UNCLIPPED_V5_20261122
+   NO separate header or category hero. Permanent 3D category buttons left,
+   the genuine visitor-style reader right. Honor every native safe inset. */
+html.dar-fold-v2-active{
+  --dar-fold-v2-top:max(0px,env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px));
+  --dar-fold-v2-safe-bottom:max(8px,env(safe-area-inset-bottom,0px),var(--dar-native-safe-bottom,0px));
+  --dar-fold-v2-visible-height:100dvh;
+  --dar-fold-v2-full-height:max(0px,calc(var(--dar-fold-v2-visible-height) - var(--dar-fold-v2-top) - var(--dar-fold-v2-safe-bottom)));
+  --dar-fold-v2-safe-left:env(safe-area-inset-left,0px);
+  --dar-fold-v2-safe-right:env(safe-area-inset-right,0px);
+}
+html.dar-fold-v2-active #darFoldV2Topbar,
+html.dar-fold-v2-active #darFoldV2Rail :is(.dar-fold-v2-intro,.dar-fold-v2-switch,.dar-fold-v2-heading-3d){display:none!important}
+html.dar-fold-v2-active #darFoldV2Rail{
+  top:var(--dar-fold-v2-top)!important;bottom:auto!important;
+  left:var(--dar-fold-v2-safe-left)!important;right:auto!important;
+  height:var(--dar-fold-v2-full-height)!important;max-height:var(--dar-fold-v2-full-height)!important;
+  min-height:0!important;width:var(--dar-fold-v2-rail)!important;overflow:hidden!important;
+  box-shadow:7px 0 22px rgb(0 0 0 / .07)!important;
+}
+html.dar-fold-v2-active #darFoldV2Pane{
+  top:var(--dar-fold-v2-top)!important;bottom:auto!important;
+  left:calc(var(--dar-fold-v2-rail) + var(--dar-fold-v2-safe-left))!important;right:auto!important;
+  width:max(0px,calc(100% - var(--dar-fold-v2-rail) - var(--dar-fold-v2-safe-left) - var(--dar-fold-v2-safe-right)))!important;
+  height:var(--dar-fold-v2-full-height)!important;max-height:var(--dar-fold-v2-full-height)!important;
+  min-height:0!important;overflow-y:auto!important;overscroll-behavior-y:contain!important;
+  scroll-padding-bottom:64px!important;
+}
+html.dar-fold-v2-active body #darFoldV2Pane > #appView{
+  padding-bottom:64px!important;min-height:100%!important;height:auto!important;
+  max-height:none!important;overflow:visible!important;
+}
+/* Two columns of original DĀR 3D buttons replace the old heading/switch,
+   exposing every category while keeping an independent scrolling index. */
+html.dar-fold-v2-active #darFoldV2Rail #darFoldV2Menu{
+  display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:4px!important;flex:0 0 auto!important;
+  min-height:0!important;max-height:52%!important;
+  overflow-x:hidden!important;overflow-y:auto!important;
+  overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch;
+  padding:10px 9px 8px!important;margin:0!important;
+  border-bottom:1px solid var(--dar-fold-v2-line)!important;
+  scrollbar-width:none!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail #darFoldV2Menu::-webkit-scrollbar{display:none!important}
+html.dar-fold-v2-active #darFoldV2Rail #darFoldV2Menu .dar-fold-v2-menu-row{
+  display:flex!important;flex-direction:column!important;align-items:center!important;
+  justify-content:center!important;gap:2px!important;
+  flex:0 0 auto!important;min-width:0!important;min-height:54px!important;
+  width:100%!important;margin:0!important;padding:5px 3px!important;
+  text-align:center!important;border:1px solid transparent!important;border-radius:12px!important;
+  box-sizing:border-box!important;
+  font:600 10.5px/1.18 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail #darFoldV2Menu .dar-fold-v2-menu-row.is-selected{
+  background:color-mix(in srgb,var(--dar-fold-v2-accent) 11%,transparent)!important;
+  border-color:var(--dar-fold-v2-line)!important;
+  box-shadow:inset 2px 0 0 var(--dar-fold-v2-accent)!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-menu-copy{
+  display:block!important;min-width:0!important;max-width:100%!important;
+  overflow-wrap:anywhere!important;white-space:normal!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail #darFoldV2Menu .dar-fold-v2-icon:has(>.dar-fold-v2-icon-3d){
+  width:31px!important;height:31px!important;min-width:31px!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-context{
+  display:flex!important;flex:1 1 auto!important;min-height:0!important;
+  overflow:hidden!important;padding-top:7px!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-options{
+  flex:1 1 auto!important;min-height:0!important;
+  overflow-y:auto!important;padding-bottom:32px!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-list-heading{
+  min-height:27px!important;margin-top:4px!important;
+  padding-top:5px!important;padding-bottom:5px!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-search-wrap{
+  min-height:40px!important;margin:0 9px!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-menu-row:is(:hover,:focus-visible),
+html.dar-fold-v2-active #darFoldV2Rail .dar-fold-v2-option:is(:hover,:focus-visible){
+  background:color-mix(in srgb,var(--dar-fold-v2-accent) 9%,transparent)!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail :is(button,input):focus-visible{
+  outline:2px solid var(--dar-fold-v2-accent)!important;outline-offset:1px!important;
+}
+/* Compact phones/Fold in landscape: every button scrolls inside an 80px rail,
+   never behind the system navigation or cut off at the bottom. */
+html.dar-fold-v2-active #darFoldV2Rail[data-rail-variant="compact"] #darFoldV2Menu{
+  display:flex!important;flex-direction:column!important;justify-content:flex-start!important;
+  flex:1 1 auto!important;max-height:none!important;min-height:0!important;
+  gap:3px!important;padding:5px 8px 18px!important;border-bottom:0!important;
+  overflow-y:auto!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail[data-rail-variant="compact"] #darFoldV2Menu .dar-fold-v2-menu-row{
+  min-height:43px!important;max-height:52px!important;flex:0 0 auto!important;
+  padding:3px!important;gap:0!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail[data-rail-variant="compact"] #darFoldV2Menu .dar-fold-v2-icon:has(>.dar-fold-v2-icon-3d){
+  width:34px!important;height:34px!important;min-width:34px!important;
+}
+html.dar-fold-v2-active #darFoldV2Rail[data-rail-variant="compact"] :is(.dar-fold-v2-menu-copy,.dar-fold-v2-context){
+  display:none!important;
+}
+@media(max-height:560px){
+  html.dar-fold-v2-active #darFoldV2Rail:not([data-rail-variant="compact"]) #darFoldV2Menu{
+    max-height:50%!important;padding-top:5px!important;padding-bottom:5px!important;
+  }
+  html.dar-fold-v2-active #darFoldV2Rail:not([data-rail-variant="compact"]) #darFoldV2Menu .dar-fold-v2-menu-row{
+    min-height:47px!important;padding:3px!important;
+  }
 }

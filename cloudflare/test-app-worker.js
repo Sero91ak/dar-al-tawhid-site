@@ -570,8 +570,8 @@ async function finalizeDarTestHomeV1193(asset) {
   // The premium workspace moves the actual #appView to the reader.
   // No iframe or duplicate content/player shell is created.
   const foldBootstrap = '<script id="darTestFoldV2Early">if(new URLSearchParams(location.search).get("darFoldPane")==="reader")document.documentElement.classList.add("dar-fold-v2-reader");<\/script>';
-  const foldCssV2 = '<link rel="stylesheet" id="darTestFoldWorkspaceV2Css" href="/test/assets/dar-fold-workspace-v2.css?v=20261122-premium-single-owner-v1">';
-  const foldJsV2 = '<script defer id="darTestFoldWorkspaceV2Js" src="/test/assets/dar-fold-workspace-v2.js?v=20261122-premium-single-owner-v1"><\/script>';
+  const foldCssV2 = '<link rel="stylesheet" id="darTestFoldWorkspaceV2Css" href="/test/assets/dar-fold-workspace-v2.css?v=20261122-no-header-viewport-v2">';
+  const foldJsV2 = '<script defer id="darTestFoldWorkspaceV2Js" src="/test/assets/dar-fold-workspace-v2.js?v=20261122-no-header-viewport-v2"><\/script>';
   if (html.includes("</head>")) html=html.replace("</head>",foldBootstrap+"\n"+foldCssV2+"\n</head>");
   else html=foldBootstrap+foldCssV2+html;
   if (html.includes("</body>")) html=html.replace("</body>",foldJsV2+"\n</body>");
@@ -592,7 +592,7 @@ async function finalizeDarTestHomeV1193(asset) {
     "$1?v=20261111-adult-keyboard-nav-stable-v1");
 
   const headers = new Headers(asset.headers);
-  headers.set("X-DAR-Test-Fold-Layout", "premium-single-owner-20261122");
+  headers.set("X-DAR-Test-Fold-Layout", "no-header-unclipped-20261122-v2");
   headers.set("X-DAR-Test-Scroll-Boundary", "v3");
   headers.set("X-DAR-Test-Home", "html-parity-v50-20261020");
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");

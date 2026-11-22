@@ -15,7 +15,11 @@ new vm.Script(js,{filename:"dar-fold-workspace-v2.js"});
 assert.match(js,/darFoldPane/);
 assert.match(js,/dar-fold-v2-route/);
 assert.match(js,/scrollByCategory/);
-assert.match(js,/Bereich wechseln/);
+assert.doesNotMatch(js,/Bereich wechseln/);
+assert.doesNotMatch(js,/make\("header","dar-fold-v2-topbar"\)/);
+assert.doesNotMatch(js,/dar-fold-v2-heading-3d/);
+assert.match(js,/doc\.body\.append\(nav,pane\)/);
+assert.match(js,/--dar-fold-v2-visible-height/);
 assert.match(js,/optionCache/);
 assert.match(js,/moveContentRight/);
 assert.match(js,/restoreContent/);
@@ -26,7 +30,7 @@ assert.match(css,/body>\.app\{/);
 assert.doesNotMatch(css,/#darFoldV2Frame\{/);
 assert.match(js,/getAttribute\("data-value"\)/); // Qurʾān surahs share data-nav and must remain distinct
 assert.match(js,/result\.push\(\{text:title,el:el,key:key,hash:hash,route:route,value:value\}\)/);
-assert.match(js,/aria-expanded/);
+assert.match(js,/aria-label/);
 assert.match(css,/dar-fold-v2-menu-row/);
 assert.match(css,/dar-fold-v2-context/);
 assert.match(css,/dar-fold-v2-options/);
@@ -36,6 +40,9 @@ assert.match(js,/dar-3d-icons/);
 assert.match(js,/savedReaderTop/);
 assert.match(js,/dataset\.railVariant/);
 assert.match(css,/DAR_PREMIUM_FOLD_SIDEBAR_20261122/);
+assert.match(css,/DAR_TEST_FOLD_UNCLIPPED_V5_20261122/);
+assert.match(css,/--dar-fold-v2-safe-bottom/);
+assert.match(css,/overflow-y:auto!important/);
 assert.match(css,/data-rail-variant="compact"/);
 assert.match(css,/\.dar-fold-v2-active/);
 assert.match(css,/\.dar-fold-v2-reader/);
@@ -44,17 +51,17 @@ assert.match(css,/width:calc\(100% - var\(--dar-fold-v2-rail\)\)/);
 assert.match(worker,/DAR_TEST_PREMIUM_LANDSCAPE_SINGLE_OWNER_20261122/);
 assert.match(worker,/darTestFoldWorkspaceV2Css/);
 assert.match(worker,/darTestFoldWorkspaceV2Js/);
-assert.match(worker,/premium-single-owner-20261122/);
+assert.match(worker,/no-header-unclipped-20261122-v2/);
 assert.match(worker,/fold-thumb-nav/); // legacy ref removal is explicitly retained
 assert.match(js,/dar-duo-side-active/);
-assert.match(offline,/offline-light-v1373/);
-assert.match(offline,/dar-fold-workspace-v2\.js\?v=20261122-premium-single-owner-v1/);
-assert.match(offline,/dar-fold-workspace-v2\.css\?v=20261122-premium-single-owner-v1/);
+assert.match(offline,/offline-light-v1374/);
+assert.match(offline,/dar-fold-workspace-v2\.js\?v=20261122-no-header-viewport-v2/);
+assert.match(offline,/dar-fold-workspace-v2\.css\?v=20261122-no-header-viewport-v2/);
 assert.doesNotMatch(offline,/['"]\/test\/assets\/fold-thumb-nav\.js['"]/);
 assert.doesNotMatch(offline,/['"]\/test\/assets\/dar-duo-responsive-v1\.js['"]/);
 
-assert.match(worker,/dar-fold-workspace-v2\.js\?v=20261122-premium-single-owner-v1/);
-assert.match(worker,/dar-fold-workspace-v2\.css\?v=20261122-premium-single-owner-v1/);
+assert.match(worker,/dar-fold-workspace-v2\.js\?v=20261122-no-header-viewport-v2/);
+assert.match(worker,/dar-fold-workspace-v2\.css\?v=20261122-no-header-viewport-v2/);
 assert.doesNotMatch(worker,/\/\/ DAR_ADAPTIVE_FOLD_V1326/);
 assert.doesNotMatch(worker,/const adaptiveFoldScripts/);
 assert.doesNotMatch(worker,/const foldLink = '<link rel="stylesheet" id="darAdultGlobalFoldAxisV1"/);
@@ -128,6 +135,8 @@ console.log("PASS DAR Test Fold V2: syntax, sole authority, responsive capacity,
   };
   const html=node("html"), body=node("body");
   html.clientWidth=726;html.clientHeight=512;
+  const measuredStyles={};
+  html.style.setProperty=(key,value)=>{measuredStyles[key]=value;};
   const app=node("div"), view=node("main","appView"), after=node("footer");
   app.append(view,after);body.append(app);
   const find=(tree,id)=>{
@@ -147,6 +156,7 @@ console.log("PASS DAR Test Fold V2: syntax, sole authority, responsive capacity,
     document:fixture,
     innerWidth:726,innerHeight:512,
     location:{search:"?darFoldV2=1",pathname:"/test/",hash:"#quran",origin:"https://example.test"},
+    visualViewport:{height:480,addEventListener(){}},
     addEventListener(){},
     requestAnimationFrame(fn){return 1;} // no implicit layout reentry in this fixture
   };
@@ -155,9 +165,19 @@ console.log("PASS DAR Test Fold V2: syntax, sole authority, responsive capacity,
   assert.ok(api,"fold controller must initialize");
   let result=api.audit();
   assert.equal(result.active,true);
+  assert.equal(measuredStyles["--dar-fold-v2-visible-height"],"480px","real visualViewport height must limit both panes");
   assert.equal(result.contentInRight,true,"Real SPA must be inside the right pane");
   const pane=fixture.getElementById("darFoldV2Pane");
   assert.ok(pane&&view.parentNode===pane,"same live #appView moved right");
+  const nav=fixture.getElementById("darFoldV2Rail");
+  const menu=fixture.getElementById("darFoldV2Menu");
+  const context=fixture.getElementById("darFoldV2Context");
+  assert.ok(nav && menu && context, "independent left navigation and search must exist");
+  assert.equal(menu.children.filter(e=>e.dataset.foldCategory).length,7,"seven 3D category buttons remain");
+  assert.equal(menu.hidden,false,"category buttons always remain visible");
+  assert.equal(context.hidden,false,"context selection remains independently accessible");
+  assert.equal(body.children.filter(e=>e.id==="darFoldV2Topbar").length,0,"redundant header removed");
+  assert.equal(nav.children.filter(e=>e.className==="dar-fold-v2-intro").length,0,"oversized selected-category hero removed");
   assert.equal(body.children.filter(e=>e.id==="darFoldV2Frame").length,0,"no duplicate iframe");
   html.clientWidth=390;html.clientHeight=844;window.innerWidth=390;window.innerHeight=844;
   api.apply();
