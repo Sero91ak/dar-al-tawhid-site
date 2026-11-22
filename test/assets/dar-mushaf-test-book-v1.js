@@ -216,11 +216,8 @@
     var known=LANGUAGES.find(function(x){return x.id===lang;});if(!known||!known.source)return[];
     if(lang==="de")return [{identifier:"de.bubenheim",name:"Bubenheim & Elyas"}];
     if(!editions)return[];
-    return editions.filter(function(e){
-      if(lang==="ckb")return e.identifier==="ku.asan";
-      var code=lang==="bs"?"bs":lang;
-      return e.language===code&&String(e.identifier).startsWith(code+".");
-    });
+    // Deliberately restrict to explicitly selected source editions; no unreviewed authors.
+    return editions.filter(function(e){return e.identifier===known.source;});
   }
   function setOptionStatus(text,isError){
     if(!optionsPanel)return;
@@ -267,7 +264,8 @@
   }
   function closeOptions(refocus) {
     if(!optionsPanel||optionsPanel.hidden)return;
-    optionsPanel.hidden=true;optionsPanel.removeEventListener("keydown",optionsFocusTrap);
+    optionsPanel.hidden=true;
+    if(root)root.removeAttribute("aria-hidden");
     if(refocus){
       var target=optionFromBook?byId("damBookSettings"):priorOptionsFocus;
       if(target&&target.isConnected)target.focus({preventScroll:true});
@@ -332,7 +330,9 @@
     byId("damShowArabic").checked=display.arabic;byId("damShowLatin").checked=display.latin;byId("damShowTranslation").checked=display.translation;
     byId("damTranslationLanguage").innerHTML=LANGUAGES.map(function(l){return '<option value="'+l.id+'">'+escapeHtml(l.name)+'</option>';}).join("");
     byId("damTranslationLanguage").value=language;
-    optionsPanel.hidden=false;syncEditions();
+    optionsPanel.hidden=false;
+    if(root&&!root.hidden)root.setAttribute("aria-hidden","true");
+    syncEditions();
     byId("damShowArabic").focus({preventScroll:true});
   }
 
@@ -346,7 +346,8 @@
   function openBook(position) {
     if(!root)makeUI();
     if(root.hidden){
-      lastFocused=document.activeElement;previousOverflow=document.body.style.overflow;
+      lastFocused=priorOptionsFocus&&priorOptionsFocus.isConnected?priorOptionsFocus:document.activeElement;
+      previousOverflow=document.body.style.overflow;
       document.body.style.overflow="hidden";root.hidden=false;
       document.documentElement.classList.add("dam-book-open");
     }
@@ -393,6 +394,7 @@
       if(trigger)trigger.remove();
       trigger=null;
       if(root&&!root.hidden)closeBook();
+      if(optionsPanel&&!optionsPanel.hidden)closeOptions(false);
       return;
     }
     if(trigger&&trigger.parentElement===actions)return;
