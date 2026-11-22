@@ -67,14 +67,33 @@ function clear(){q.replaceChildren()}
 function message(msg){clear();q.append(elem("p","fw-message",msg))}
 function safeJson(response){if(!response.ok)throw Error("HTTP "+response.status);return response.json()}
 var entryIds,entries,entry,sourceUrl,sourceStatus,stage=0,correct=0,answered=false,items=[];
-function bottomLink(){var a=elem("a","fw-link",lab.back);a.href="/?lang="+encodeURIComponent(code)+"#frauen/"+encodeURIComponent(entry.area)+"/"+encodeURIComponent(id);a.target="_top";return a}
+function bottomLink(){var a=elem("a","fw-link",lab.back);a.href="/wissen/beitrag/?id="+encodeURIComponent(id)+"&lang="+encodeURIComponent(code);a.target="_top";return a}
 var READ_LABELS={
  de:"Die vollständige Aussage erneut lesen",ar:"إعادة قراءة النص الكامل",en:"Read the complete statement again",
  tr:"Tam açıklamayı yeniden oku",ku:"Gotina tevahî dîsa bixwîne",ckb:"دووبارە خوێندنەوەی دەقی تەواو",
  bs:"Ponovo pročitaj cijeli tekst",fr:"Relire le texte complet",es:"Volver a leer el texto completo"
 };
+var LANG_LABELS={
+ de:"Sprache",ar:"اللغة",en:"Language",tr:"Dil",ku:"Ziman",ckb:"زمان",bs:"Jezik",fr:"Langue",es:"Idioma"
+};
+var LANGUAGE_NAMES={
+ de:"Deutsch",ar:"العربية",en:"English",tr:"Türkçe",ku:"Kurmancî",
+ ckb:"سۆرانی",bs:"Bosanski",fr:"Français",es:"Español"
+};
+function languageControl(){
+ var wrap=elem("div","fw-language-control"),label=elem("label","",LANG_LABELS[code]);
+ var select=elem("select","fw-language-select");select.id="fwReaderLanguage";
+ label.htmlFor=select.id;select.setAttribute("aria-label",LANG_LABELS[code]);
+ api.CODES.forEach(function(c){var o=elem("option","",LANGUAGE_NAMES[c]);o.value=c;o.selected=c===code;select.append(o)});
+ select.addEventListener("change",function(){
+  var u=new URL(w.location.href);u.searchParams.set("lang",select.value);
+  // Preserve canonical source ID, restart only the learner in chosen locale.
+  w.location.assign(u.toString());
+ });
+ wrap.append(label,select);return wrap
+}
 function core(){
- clear();q.append(elem("div","fw-brand","DĀR AL TAWḤĪD"),elem("p","fw-overline",lab.brand),elem("h1","fw-title",entry.locales[code].title),elem("p","fw-subtitle",lab.status));
+ clear();q.append(elem("div","fw-brand","DĀR AL TAWḤĪD"),elem("p","fw-overline",lab.brand),elem("h1","fw-title",entry.locales[code].title),elem("p","fw-subtitle",lab.status),languageControl());
  // Optional full reading reference for learning, not a second contribution.
  // The statement, lesson and editorial explanation come from the exact same
  // language pack and original canonical ID as the main women reader.
