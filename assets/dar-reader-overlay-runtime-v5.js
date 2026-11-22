@@ -95,7 +95,7 @@
     if(body)body.classList.toggle("dar-reader-overlay-active-v5",open);
     if(!open)return;
     ensureToolbar(panel);
-    var frame=panel.querySelector("iframe")||document.getElementById(FRAME);
+    var frame=document.getElementById(FRAME)||panel.querySelector("iframe");
     if(frame)applyFrame(frame);
   }
   function attach(panel){
@@ -109,9 +109,9 @@
     }
     new MutationObserver(function(records){
       for(var i=0;i<records.length;i++){
-        if(records[i].attributeName==="hidden"){sync(panel);return}
+        if(records[i].attributeName==="hidden"||records[i].type==="childList"){sync(panel);return}
       }
-    }).observe(panel,{attributes:true,attributeFilter:["hidden"]});
+    }).observe(panel,{attributes:true,attributeFilter:["hidden"],childList:true});
     sync(panel);
   }
   function find(){var panel=document.getElementById(PANEL);if(panel)attach(panel)}
