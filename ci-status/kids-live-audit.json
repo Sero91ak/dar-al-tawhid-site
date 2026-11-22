@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-11-22T19:03:26Z",
+  "timestamp": "2026-11-22T19:05:13Z",
   "trigger": "workflow_run",
   "finishedDeployConclusion": "failure",
-  "finishedDeployRun": "45058291203",
+  "finishedDeployRun": "45058346565",
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
@@ -24,17 +24,17 @@
     "versionJsonReadable": true,
     "trilingualWordLearningReady": true,
     "parentsDashboard": {
-      "expectedSWRef": "/kids/sw.js?v=1468",
+      "expectedSWRef": null,
       "manifestSWCacheVersion": null,
-      "actualSWCacheVersion": "1468",
-      "workerBytes": 46912,
+      "actualSWCacheVersion": null,
+      "workerBytes": 0,
       "observedSWRefs": [
         "/kids/sw.js?v=1468"
       ],
       "hasServiceWorkerRegisterCall": true,
       "htmlReferencesNewDashboard": true,
       "htmlReferencesNewStyles": true,
-      "htmlRegistersNewSW": true,
+      "htmlRegistersNewSW": false,
       "htmlHasProfileAndBirthFields": true,
       "dashboardJs": {
         "ref": "/kids/parents-dashboard-v1432.js?v=1441",
@@ -48,7 +48,7 @@
       "dashboardContainsSaveValidation": true,
       "girlsSaveButtonContrast": true,
       "stylesAreProfileScoped": true,
-      "ready": true
+      "ready": false
     },
     "visitorQuiz": {
       "homeHasPremiumStyleRef": true,
@@ -89,13 +89,13 @@
   },
   "lastDeployRuns": [
     {
-      "conclusion": null,
+      "conclusion": "failure",
       "created_at": "2026-11-22T19:01:23Z",
       "head_sha": "5872327ce6d76938b44263ec155727a1b1739c4e",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45058346565",
       "id": 45058346565,
-      "status": "in_progress",
-      "updated_at": "2026-11-22T19:03:19Z"
+      "status": "completed",
+      "updated_at": "2026-11-22T19:05:05Z"
     },
     {
       "conclusion": "cancelled",
