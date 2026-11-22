@@ -116,9 +116,9 @@ function getCard(){return registry.get("darFrauenNeufokus48h")||null}
  function descendants(el){return [el,...(el.children||[]).flatMap(descendants)]}
  const links=descendants(overlay).filter(x=>x.tagName==="A");
  assert.equal(links.length,16,"Exactly 16 new women posts must be individually selectable");
- assert.equal(links[0].href,"#frauen/sahabiyyat/sahabiyyat-umm-haram-seeueberfahrt-20261106");
+ assert.equal(links[0].href,"/wissen/beitrag/?id=sahabiyyat-umm-haram-seeueberfahrt-20261106&lang=tr");
  links[0].onclick({preventDefault(){}});
- assert.equal(win.location.hash,links[0].href,"Opening one article must use the canonical existing reader route");
+ assert.equal(win.location.hash,"#home","Non-Q link must not fabricate native hash or Q number");
  assert.equal(registry.get("darFrauenNeufokusIndex"),undefined,"Release index must close before reading");
  assert.deepEqual(navigated,[],"Focus must not bypass the 16-entry index to generic Frauen hub");
  win.location.hash="#home";
