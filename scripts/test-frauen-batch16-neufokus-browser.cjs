@@ -13,6 +13,8 @@ const focus=read("content/focus-feed/feed-index.json");
 const code=fs.readFileSync(path.join(root,"assets/frauen/frauen-neufokus-v1.js"),"utf8");
 const css=fs.readFileSync(path.join(root,"assets/frauen/frauen-neufokus-v1.css"),"utf8");
 const source=Object.fromEntries(launch.sourceFiles.map(p=>["/"+p,read(p)]));
+const originalStatus=new Map(launch.items.map(row=>[row.id,
+ source["/"+row.sourceFile].eintraege.find(e=>e.kennung===row.id)?.quellenstatus]));
 const localeCatalog=read("assets/frauen/frauen-entry-locales-v1.json");
 const learningHtml=fs.readFileSync(path.join(root,"lernen/frauen-wissen/index.html"),"utf8");
 const id=launch.focusId,regions=["de","ar","en","tr","ku","ckb","bs","fr","es"];
@@ -154,7 +156,7 @@ function snapshot(isPublic,locale) {
  assert.equal(verified,36);
  for(const row of launch.items){
   const a=source["/"+row.sourceFile].eintraege.find(x=>x.kennung===row.id);
-  assert.equal(a.quellenstatus,"nicht-anzeigen");
+  assert.equal(a.quellenstatus,originalStatus.get(row.id),"Browser fixture must not mutate source state");
  }
  assert.equal(focus.items.find(x=>x.id===id).status,"draft");
  console.log("PASS Frauen home 16-index: global male/female/neutral, 4 Chromium responsive layouts, 36 localized cards (RTL), all 16 direct canonical reader links and navigation, source/expiry fail-closed, unchanged repository data.");
