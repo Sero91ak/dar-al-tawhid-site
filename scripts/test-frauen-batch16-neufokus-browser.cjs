@@ -18,6 +18,7 @@ const originalStatus=new Map(launch.items.map(row=>[row.id,
 const localeCatalog=read("assets/frauen/frauen-entry-locales-v1.json");
 const learningHtml=fs.readFileSync(path.join(root,"lernen/frauen-wissen/index.html"),"utf8");
 const id=launch.focusId,regions=["de","ar","en","tr","ku","ckb","bs","fr","es"];
+const originalFocusStatus=focus.items.find(x=>x.id===id)?.status;
 const viewports=[{name:"phone",width:390,height:844},{name:"fold",width:670,height:792},{name:"tablet",width:834,height:1112},{name:"desktop",width:1280,height:800}];
 const date=Date.now(),start=new Date(date-120000).toISOString(),expires=new Date(date-120000+48*3600000).toISOString();
 function snapshot(isPublic,locale) {
@@ -158,7 +159,7 @@ function snapshot(isPublic,locale) {
   const a=source["/"+row.sourceFile].eintraege.find(x=>x.kennung===row.id);
   assert.equal(a.quellenstatus,originalStatus.get(row.id),"Browser fixture must not mutate source state");
  }
- assert.equal(focus.items.find(x=>x.id===id).status,"draft");
+ assert.equal(focus.items.find(x=>x.id===id).status,originalFocusStatus,"The browser fixture must not mutate the real repository focus status");
  console.log("PASS Frauen home 16-index: global male/female/neutral, 4 Chromium responsive layouts, 36 localized cards (RTL), all 16 direct canonical reader links and navigation, source/expiry fail-closed, unchanged repository data.");
  }finally{if(browser)await browser.close()}
 })().catch(e=>{console.error(e.stack||e);process.exitCode=1});
