@@ -63,20 +63,21 @@ function render(original,entry,pack,code,id,type,kind){
  elt("p","dar-post-summary",pack.preview||pack.statement));
  frag.appendChild(hero);
  frag.appendChild(languageSelect(code,id,type,t));
- var block=section(1,pack.labels?.statement||t.reported,pack.statement);
+ var step=1;
+ var block=section(step++,pack.labels?.statement||t.reported,pack.statement);
  if(block)frag.appendChild(block);
  if(original.arabischerOriginalauszug&&original.arabischerOriginalauszugNachweis===entry.sourceUrl
    &&String(original.arabischerOriginalauszugStatus||"").includes("abgeglichen")){
-  var excerpt=section(2,t.excerpt,original.arabischerOriginalauszug);
+  var excerpt=section(step++,t.excerpt,original.arabischerOriginalauszug);
   if(excerpt){excerpt.querySelector(".dar-post-body").classList.add("dar-post-arabic");
    excerpt.querySelector(".dar-post-body").lang="ar";excerpt.querySelector(".dar-post-body").dir="rtl";
    excerpt.appendChild(elt("p","dar-post-editorial-label",t.excerptNote));frag.appendChild(excerpt)}
  }
- block=section(3,t.explanation,pack.sharh,"dar-post-section--explanation");
+ block=section(step++,t.explanation,pack.sharh,"dar-post-section--explanation");
  if(block){block.appendChild(elt("p","dar-post-editorial-label",t.explanationType));frag.appendChild(block)}
- block=section(4,pack.labels?.lesson||t.lesson,pack.lesson);
+ block=section(step++,pack.labels?.lesson||t.lesson,pack.lesson);
  if(block)frag.appendChild(block);
- var source=section(5,pack.labels?.source||t.source,pack.source);
+ var source=section(step++,pack.labels?.source||t.source,pack.source);
  if(source){
   var anchor=elt("a","dar-post-source-link",t.sourceGo);anchor.href=entry.sourceUrl;anchor.target="_blank";anchor.rel="noopener noreferrer";anchor.referrerPolicy="no-referrer";
   source.appendChild(anchor);frag.appendChild(source)
