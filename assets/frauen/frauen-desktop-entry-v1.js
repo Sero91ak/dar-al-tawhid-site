@@ -66,6 +66,11 @@ function detailLabels(code){
  };
  return all[code]||all.de;
 }
+var fullReaderLabels={
+ de:"Ausführlich lesen",ar:"قراءة المقال كاملًا",en:"Read full article",tr:"Yazının tamamını oku",
+ ku:"Nivîsa tevahî bixwîne",ckb:"خوێندنەوەی تەواوی بابەت",bs:"Pročitaj cijeli članak",
+ fr:"Lire l’article complet",es:"Leer artículo completo"
+};
 function show(out,row,entry,pack,code){
  var labels=detailLabels(code),rtl=code==="ar"||code==="ckb";
  var article=el("article","dar-frauen-desktop-entry");
@@ -81,6 +86,9 @@ function show(out,row,entry,pack,code){
  sourceLink.href=row.sourceUrl;sourceLink.target="_blank";sourceLink.rel="noopener noreferrer";
  source.appendChild(sourceLink);article.appendChild(source);
  var actions=el("div","dar-frauen-desktop-actions");
+ var full=el("a","dar-frauen-desktop-action",fullReaderLabels[code]);
+ full.href="/wissen/beitrag/?id="+encodeURIComponent(row.id)+"&lang="+encodeURIComponent(code);
+ actions.appendChild(full);
  var lesson=el("a","dar-frauen-desktop-action",labels[5]);
  lesson.href="/lernen/frauen-wissen/?id="+encodeURIComponent(row.id)+"&lang="+encodeURIComponent(code);
  var back=el("a","dar-frauen-desktop-back",labels[6]);
