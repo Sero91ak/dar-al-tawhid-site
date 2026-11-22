@@ -54,7 +54,23 @@ function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
    const target=await list.first().getAttribute("href");
    assert.ok(/^\/\?page=frauen&cat=.+&id=/.test(target),cfg.name+" first article is not direct desktop reader link");
    await list.first().click();
-   await page.locator("#pageRoot .dar-frauen-desktop-entry").waitFor({timeout:18000,state:"visible"});
+   try{
+    await page.locator("#pageRoot .dar-frauen-desktop-entry").waitFor({timeout:18000,state:"visible"});
+   }catch(error){
+    const diagnostic=await page.evaluate(()=>({
+     location:location.href,pathname:location.pathname,search:location.search,
+     bodyRoute:document.body?.dataset?.darV8Route,
+     pageRoot:!!document.getElementById("pageRoot"),
+     womenReal:!!document.getElementById("womenReal"),
+     womenRealText:document.getElementById("womenReal")?.innerText?.slice(0,500),
+     detailScriptTag:!!document.getElementById("darFrauenDesktopEntryV1"),
+     detailRuntime:!!window.DARFrauenDesktopEntryV1,
+     homeRuntime:!!window.DARFrauenNeufokusV1,
+     index:document.documentElement?.outerHTML?.includes("dar-frauen-desktop-entry-v1.js")
+    })).catch(e=>({error:String(e)}));
+    console.error("ACTUAL DESKTOP DETAIL DIAGNOSTICS:",JSON.stringify(diagnostic));
+    throw error;
+   }
    const actual=await page.locator("#pageRoot .dar-frauen-desktop-entry").getAttribute("data-dar-frauen-release-article");
    assert.equal(actual,manifest.items[0].id,cfg.name+" direct reader selected wrong article");
    console.log("PASS LIVE PUBLIC "+cfg.name+": card, 16 links, first canonical reader, URL "+target);
