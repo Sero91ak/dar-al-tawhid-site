@@ -33,13 +33,12 @@
   }
   if (disabled || !/^\/test(?:\/|$)/.test(win.location.pathname)) return;
 
-  var nav, pane, topbar, source, sourceHost, sourceSibling, list, filter, contextTitle, menu, menuToggle, contextPanel, railTitle, railSubtitle, railArtwork, countEl, active = false, raf = 0;
+  var nav, pane, source, sourceHost, sourceSibling, list, filter, contextTitle, menu, contextPanel, countEl, active = false, raf = 0;
   var compactRail = false, savedReaderTop = 0, savedReaderHash = "";
   var lastItems = "", lastContextEls = [], lastHash = "", lastWidth = 0, lastHeight = 0, resizeObserver, sourceObserver;
   var scrollByCategory = Object.create(null);
   var optionCache = Object.create(null);
   var selectedOptionKeys = Object.create(null);
-  var menuOpen = false;
   var selectedCategory = "home";
   var pendingSelection = null;
   function viewport() {
@@ -72,11 +71,6 @@
     if(label!=null)el.textContent=label;
     return el;
   }
-  var AREA_HINT = {
-    home:"Deine Übersicht",quran:"Suren und Verse",hadith:"Überlieferungen",
-    bibliothek:"Bücher und Quellen",themen:"Wissen nach Themen",
-    dua:"Bittgebete und Sammlungen",more:"Weitere Bereiche"
-  };
   var ICON_PATHS = {
     home:'<path d="m3 10 9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-9Z"/><path d="M9 21v-7h6v7"/>',
     quran:'<path d="M12 6c-2.7-2-5.5-2.5-9-2v14c3.5-.5 6.3 0 9 2 2.7-2 5.5-2.5 9-2V4c-3.5-.5-6.3 0-9 2Z"/><path d="M12 6v14"/>',
@@ -115,60 +109,20 @@
     svg.innerHTML=ICON_PATHS[name]||ICON_PATHS.more;
     span.appendChild(svg);return span;
   }
-  function setMenu(open){
-    menuOpen=!!open || compactRail;
-    if(!menu || !menuToggle || !contextPanel)return;
-    menu.hidden=!menuOpen;
-    contextPanel.hidden=menuOpen;
-    menuToggle.classList.toggle("is-open",menuOpen);
-    menuToggle.setAttribute("aria-expanded",String(menuOpen));
-    menuToggle.querySelector(".dar-fold-v2-switch-copy").textContent=menuOpen?"Zur Auswahl zurück":"Bereich wechseln";
-    if(menuOpen){
-      menu.querySelectorAll("[data-fold-category]").forEach(function(b){
-        var current=b.dataset.foldCategory===selectedCategory;
-        b.classList.toggle("is-selected",current);
-        if(current)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");
-      });
-    } else {
-      renderContext();
-    }
-  }
   function createShell() {
     if (nav)return;
-    topbar=make("header","dar-fold-v2-topbar");topbar.id="darFoldV2Topbar";
-    var mark=make("span","dar-fold-v2-logo","DĀR AL TAWḤĪD");
-    var hint=make("span","dar-fold-v2-hint","WISSEN · LESEN · ENTDECKEN");
-    topbar.append(mark,hint);
+    // No redundant top header or oversized current-section icon.
+    // Category buttons remain visible while the independent context list scrolls.
     nav=make("aside","dar-fold-v2-rail");nav.id="darFoldV2Rail";
-    nav.setAttribute("aria-label","DĀR AL TAWḤĪD – Auswahlbereich");
-    var intro=make("div","dar-fold-v2-intro");
-    intro.appendChild(make("div","dar-fold-v2-eyebrow","DEINE BIBLIOTHEK"));
-    railTitle=make("h2","dar-fold-v2-title","Qurʾān");
-    railSubtitle=make("p","dar-fold-v2-subtitle","Suren und Verse");
-    railArtwork=doc.createElement("img");
-    railArtwork.className="dar-fold-v2-heading-3d";
-    railArtwork.alt="";
-    railArtwork.src="/test/assets/dar-3d-icons/home.png";
-    railArtwork.decoding="async";
-    intro.append(railArtwork,railTitle,railSubtitle);
-    nav.appendChild(intro);
-    menuToggle=make("button","dar-fold-v2-switch");
-    menuToggle.type="button";menuToggle.setAttribute("aria-controls","darFoldV2Menu");
-    menuToggle.setAttribute("aria-expanded","false");
-    menuToggle.append(pictogram("themen"),make("span","dar-fold-v2-switch-copy","Bereich wechseln"),pictogram("down"));
-    menuToggle.addEventListener("click",function(){setMenu(!menuOpen);});
-    nav.appendChild(menuToggle);
+    nav.setAttribute("aria-label","DĀR AL TAWḤĪD – Navigation und Auswahl");
     menu=make("nav","dar-fold-v2-menu");menu.id="darFoldV2Menu";
-    menu.hidden=true;menu.setAttribute("aria-label","Bereiche auswählen");
-    menu.appendChild(make("div","dar-fold-v2-menu-label","BEREICHE"));
+    menu.setAttribute("aria-label","DĀR-Bereiche auswählen");
     CATEGORIES.forEach(function(entry){
       var button=make("button","dar-fold-v2-menu-row");button.type="button";
       button.dataset.foldCategory=entry[0];
       button.setAttribute("aria-label",entry[2]);
-      button.append(pictogram(entry[0]),make("span","dar-fold-v2-menu-copy",entry[2]),pictogram("chevron"));
+      button.append(pictogram(entry[0]),make("span","dar-fold-v2-menu-copy",entry[2]));
       button.addEventListener("click",function(){
-        setMenu(false);
-        if(!compactRail)menuToggle.focus();
         if(selectedCategory!==entry[0]&&list)scrollByCategory[selectedCategory]=list.scrollTop;
         if(win.location.hash!==entry[1])win.location.hash=entry[1];else onRoute(true);
       });
@@ -185,16 +139,16 @@
     filter.addEventListener("input",function(){lastItems="";renderContext();});
     searchWrap.append(searchIcon,filter);contextPanel.appendChild(searchWrap);
     var listHeader=make("div","dar-fold-v2-list-heading");
-    contextTitle=make("span","dar-fold-v2-section","AUSWAHL");
+    contextTitle=make("span","dar-fold-v2-section","IN DIESEM BEREICH");
     countEl=make("span","dar-fold-v2-counter","");
     listHeader.append(contextTitle,countEl);
     contextPanel.appendChild(listHeader);
     list=make("div","dar-fold-v2-options");
     contextPanel.appendChild(list);nav.appendChild(contextPanel);
-    // The actual, interactive SPA becomes the right content. Never clone it.
+    // Retain original live reader DOM. No duplicate Quran/audio/player or iframe.
     pane=make("main","dar-fold-v2-pane");pane.id="darFoldV2Pane";
-    pane.setAttribute("aria-label","Rechter DĀR AL TAWḤĪD Inhaltsbereich");
-    doc.body.append(topbar,nav,pane);
+    pane.setAttribute("aria-label","Rechter DĀR AL TAWḤĪD Lesebereich");
+    doc.body.append(nav,pane);
   }
   function discover() {
     var view=doc.getElementById("appView");
@@ -268,7 +222,7 @@
     lastItems="";scheduleContext();return false;
   }
   function renderContext(){
-    if(!active||!list||menuOpen)return;
+    if(!active||!list)return;
     var items=candidates(), query=(filter.value||"").trim().toLocaleLowerCase();
     var shown=items.filter(function(x){return x.text.toLocaleLowerCase().includes(query);}).slice(0,120);
     var signature=selectedCategory+"|"+query+"|"+shown.map(function(x){return x.key+"="+x.text;}).join(";");
@@ -323,9 +277,6 @@
       lastItems="";lastContextEls=[];
       if(list)list.scrollTop=scrollByCategory[cat]||0;
     }
-    if(railTitle)railTitle.textContent=CATEGORIES.find(function(x){return x[0]===cat;})?.[2]||"Bibliothek";
-    if(railSubtitle)railSubtitle.textContent=AREA_HINT[cat]||"Entdecken und lesen";
-    if(railArtwork)railArtwork.src="/test/assets/dar-3d-icons/"+(ICON_3D[cat]||"ilm")+".png";
     if(contextTitle)contextTitle.textContent=cat==="quran"?"SUREN & VERSE":"IN DIESEM BEREICH";
     if(menu)menu.querySelectorAll("[data-fold-category]").forEach(function(b){
       var current=b.dataset.foldCategory===cat;
@@ -342,7 +293,7 @@
         if(pane){savedReaderTop=pane.scrollTop; savedReaderHash=win.location.hash||"#home";}
         restoreContent();
         active=false;root.classList.remove("dar-fold-v2-active");
-        if(nav)nav.hidden=true;if(pane)pane.hidden=true;if(topbar)topbar.hidden=true;
+        if(nav)nav.hidden=true;if(pane)pane.hidden=true;
       }
       return false;
     }
@@ -353,17 +304,19 @@
      "data-dar-duo-axis","data-dar-duo-size","data-dar-duo-layout"].forEach(function(name){
        root.removeAttribute(name);
     });
-    var wasCompact=compactRail;
     compactRail=!!c.compact;
     createShell();
     if(!moveContentRight())return false;
     root.style.setProperty("--dar-fold-v2-rail",c.rail+"px");
+    // The visual viewport can be shorter than 100dvh in WKWebView,
+    // landscape safe areas and Android multiwindow. Bound both panels to
+    // visible pixels, not to the full (possibly obscured) layout viewport.
+    var visible=Number(win.visualViewport&&win.visualViewport.height)||m.height;
+    root.style.setProperty("--dar-fold-v2-visible-height",Math.max(0,Math.floor(Math.min(m.height,visible)))+"px");
     nav.dataset.railVariant=compactRail?"compact":"full";
-    if(compactRail) setMenu(true);
-    else if(wasCompact) setMenu(false);
     if(!active){
       active=true;root.classList.add("dar-fold-v2-active");
-      nav.hidden=false;pane.hidden=false;topbar.hidden=false;
+      nav.hidden=false;pane.hidden=false;
       lastHash="";lastItems="";onRoute(true);
       // Preserve the open reader when folding and unfolding on the same route.
       if(savedReaderHash===(win.location.hash||"#home"))pane.scrollTop=savedReaderTop;
@@ -397,7 +350,7 @@
     audit:function(){
       var m=viewport(),c=capacity(m.width,m.height);
       var box=function(e){if(!e)return null;var r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,scrollTop:e.scrollTop,scrollHeight:e.scrollHeight,clientHeight:e.clientHeight};};
-      return {version:"20261122-premium-single-owner-v1",active:active,viewport:m,capacity:c,rail:box(nav),reader:box(pane),contentInRight:!!(source&&pane&&source.parentNode===pane),route:win.location.hash||"#home"};
+      return {version:"20261122-no-header-viewport-v2",active:active,viewport:m,capacity:c,rail:box(nav),reader:box(pane),contentInRight:!!(source&&pane&&source.parentNode===pane),route:win.location.hash||"#home"};
     }
   };
   if(doc.readyState==="loading")doc.addEventListener("DOMContentLoaded",start,{once:true});else start();
