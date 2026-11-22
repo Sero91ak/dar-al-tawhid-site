@@ -59,8 +59,8 @@
   function closeInternalSource(fromHistory,returnToPreviousIndex){
     if(!sourcePanel||sourcePanel.hidden)return;
     sourcePanel.hidden=true;
-    if(sourceFrame){sourceFrame.removeAttribute("src");sourceFrame.srcdoc="";sourceFrame.classList.remove("dar-source-frame-inactive");sourceFrame.id="darInternalSourceFrameV3";}
-    if(sourcePanel)Array.from(sourcePanel.querySelectorAll("iframe")).forEach(function(frame){if(frame!==sourceFrame)frame.remove()});
+    if(sourceFrame){sourceFrame.removeAttribute("src");sourceFrame.srcdoc="";sourceFrame.classList?.remove("dar-source-frame-inactive");sourceFrame.id="darInternalSourceFrameV3";}
+    if(sourcePanel&&typeof sourcePanel.querySelectorAll==="function")Array.from(sourcePanel.querySelectorAll("iframe")).forEach(function(frame){if(frame!==sourceFrame)frame.remove()});
     if(document.body){
       if(sourcePreviousOverflow===null)document.body.style.removeProperty("overflow");
       else document.body.style.overflow=sourcePreviousOverflow;
