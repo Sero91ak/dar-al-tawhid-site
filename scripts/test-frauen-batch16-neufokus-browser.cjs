@@ -50,7 +50,7 @@ function snapshot(isPublic,locale) {
  await page.route("**/*",async route=>{
    const url=new URL(route.request().url()),pathname=url.pathname;
    if(pathname==="/"){
-     return route.fulfill({status:200,contentType:"text/html",body:'<!doctype html><html lang="de"><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><main id="appView"><section id="dv3Home" style="max-width:min(calc(100% - 24px),850px);margin:auto"><button class="dv3-tawhid" style="display:block;width:100%;height:85px">Tawḥīd & ʿAqīdah</button><section>Neueste Beiträge</section></section></main></body></html>'});
+     return route.fulfill({status:200,contentType:"text/html",body:'<!doctype html><html lang="de"><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body class="is-home-route"><main id="appView"><section id="dv3Home" style="max-width:min(calc(100% - 24px),850px);margin:auto"><button class="dv3-tawhid" style="display:block;width:100%;height:85px">Tawḥīd & ʿAqīdah</button><section>Neueste Beiträge</section></section></main></body></html>'});
    }
    if(pathname==="/assets/frauen/frauen-neufokus-v1.css")return route.fulfill({status:200,contentType:"text/css",body:css});
    if(pathname==="/content/focus-feed/feed-index.json")return route.fulfill({status:200,contentType:"application/json",body:JSON.stringify(state.feed)});
@@ -66,7 +66,7 @@ function snapshot(isPublic,locale) {
    if(state.docs[pathname])return route.fulfill({status:200,contentType:"application/json",body:JSON.stringify(state.docs[pathname])});
    return route.fulfill({status:404,body:"Not found"});
  });
- await page.goto("https://dar-app.local/",{waitUntil:"domcontentloaded"});
+ await page.goto("https://dar-app.local/#home",{waitUntil:"domcontentloaded"});
  await page.evaluate(()=>{
   window.__focusedRoute="";window.navigate=view=>{window.__focusedRoute=view};
   window.localStorage.setItem("darAdultPreferredLocaleV1","de");
@@ -112,6 +112,9 @@ function snapshot(isPublic,locale) {
   assert.ok(await banner.isVisible(),viewport.name+" spotlight hidden for "+gender+" profile");
  }
  assert.ok((await banner.innerText()).includes("16 neue Frauenbeiträge"));
+ const measured=await banner.evaluate(el=>({width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height,right:el.getBoundingClientRect().right,windowWidth:window.innerWidth}));
+ assert.ok(measured.width>0&&measured.height>=135,viewport.name+" focus too small");
+ assert.ok(measured.right<=measured.windowWidth+2,viewport.name+" focus horizontally clipped");
  await banner.click();
  const modal=page.locator("#darFrauenNeufokusIndex");
  await modal.waitFor({timeout:10000});
@@ -127,9 +130,10 @@ function snapshot(isPublic,locale) {
  assert.equal(await modal.count(),0,viewport.name+" article selection must close index");
  assert.equal(await page.evaluate(()=>window.__focusedRoute),"",
   "The global home focus must not jump directly to the generic Frauen hub");
- const measured=await banner.evaluate(el=>({width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height,right:el.getBoundingClientRect().right,windowWidth:window.innerWidth}));
- assert.ok(measured.width>0&&measured.height>=135,viewport.name+" focus too small");
- assert.ok(measured.right<=measured.windowWidth+2,viewport.name+" focus horizontally clipped");
+ // Native home-only spotlights disappear on article routes and reappear on home.
+ await page.evaluate(()=>{window.location.hash="#home"});
+ await page.evaluate(()=>window.DARFrauenNeufokusV1.refresh());
+ await banner.waitFor({state:"visible",timeout:10000});
  for(const lang of regions){
   await page.evaluate(v=>{localStorage.setItem("darAdultPreferredLocaleV1",v);window.dispatchEvent(new Event("dar-adult-locale-changed"))},lang);
   assert.equal(await banner.getAttribute("lang"),lang,"Wrong displayed locale "+lang);
