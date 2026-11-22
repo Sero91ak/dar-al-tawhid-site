@@ -135,6 +135,8 @@ console.log("PASS DAR Test Fold V2: syntax, sole authority, responsive capacity,
   };
   const html=node("html"), body=node("body");
   html.clientWidth=726;html.clientHeight=512;
+  const measuredStyles={};
+  html.style.setProperty=(key,value)=>{measuredStyles[key]=value;};
   const app=node("div"), view=node("main","appView"), after=node("footer");
   app.append(view,after);body.append(app);
   const find=(tree,id)=>{
@@ -154,6 +156,7 @@ console.log("PASS DAR Test Fold V2: syntax, sole authority, responsive capacity,
     document:fixture,
     innerWidth:726,innerHeight:512,
     location:{search:"?darFoldV2=1",pathname:"/test/",hash:"#quran",origin:"https://example.test"},
+    visualViewport:{height:480,addEventListener(){}},
     addEventListener(){},
     requestAnimationFrame(fn){return 1;} // no implicit layout reentry in this fixture
   };
@@ -162,6 +165,7 @@ console.log("PASS DAR Test Fold V2: syntax, sole authority, responsive capacity,
   assert.ok(api,"fold controller must initialize");
   let result=api.audit();
   assert.equal(result.active,true);
+  assert.equal(measuredStyles["--dar-fold-v2-visible-height"],"480px","real visualViewport height must limit both panes");
   assert.equal(result.contentInRight,true,"Real SPA must be inside the right pane");
   const pane=fixture.getElementById("darFoldV2Pane");
   assert.ok(pane&&view.parentNode===pane,"same live #appView moved right");
