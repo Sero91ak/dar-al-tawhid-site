@@ -300,10 +300,9 @@ async function verifyPublished(){
  var lessonHtml=await fetchReady("/lernen/frauen-wissen/?neufokus=1","text");
  if(lessonHtml.indexOf('id="quiz"')<0||
     lessonHtml.indexOf("frauen-learning-v1.js")<0)return false;
- // Reuse approved content and all translations inside the existing app reader.
- var readerRegistry=await json("/assets/beitrag/reader-catalogs-v1.json");
- if(!readerRegistry.catalogs?.frauen||readerRegistry.catalogs.frauen.localeCatalogUrl!=="/assets/frauen/frauen-entry-locales-v1.json")return false;
- readyIndex={manifest:manifest,catalog:localeCatalog,registry:readerRegistry,sources:Object.fromEntries(paths.map(function(path,i){return ["/"+path,all[i]]}))};
+ // Keep the original focus publication gates unchanged. Reuse only the
+ // verified source and translation data already fetched for the 16-post focus.
+ readyIndex={manifest:manifest,catalog:localeCatalog,sources:Object.fromEntries(paths.map(function(path,i){return ["/"+path,all[i]]}))};
  return true;
 }
 async function refresh(force){
