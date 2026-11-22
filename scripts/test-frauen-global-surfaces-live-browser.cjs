@@ -88,8 +88,13 @@ async function diagnose(page) {
    await page.waitForFunction(expected=>location.hash===expected,target,{timeout:15000});
    const reader=page.locator(".dar-frauen-production-root");
    await reader.waitFor({timeout:16000});
-   assert.ok((await reader.innerText()).length>150,spec.name+" article reader empty");
-   console.log("PASS GLOBAL "+spec.name+" "+JSON.stringify({header,host:detail.focus.host,visible:true,entries:16,reader:target}));
+   try{
+    await page.waitForFunction(()=>{const e=document.querySelector(".dar-frauen-production-root");return e&&e.innerText.trim().length>150},{timeout:15000});
+   }catch(_){}
+   const readerText=await reader.innerText();
+   console.log("GLOBAL ARTICLE "+spec.name+" "+JSON.stringify({length:readerText.length,excerpt:readerText.slice(0,500),href:await page.evaluate(()=>location.href)}));
+   assert.ok(readerText.length>150,spec.name+" article reader content too short: "+JSON.stringify({length:readerText.length,excerpt:readerText.slice(0,250)}));
+   console.log("PASS GLOBAL "+spec.name+" "+JSON.stringify({header,host:detail.focus.host,visible:true,entries:16,reader:target,chars:readerText.length}));
    await ctx.close();
   }
  }finally{await browser.close()}
