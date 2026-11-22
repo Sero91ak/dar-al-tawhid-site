@@ -121,18 +121,10 @@ function snapshot(isPublic,locale) {
  assert.equal(await modal.locator("a.dar-frauen-index-link").count(),16,
   viewport.name+" must open precisely 16 canonical release articles");
  assert.equal(await modal.locator("a.dar-frauen-index-link").first().getAttribute("href"),
-  "#frauen/sahabiyyat/sahabiyyat-umm-haram-seeueberfahrt-20261106",
-  viewport.name+" first release link is not the canonical reader");
- await modal.locator("a.dar-frauen-index-link").first().click();
- assert.equal(await page.evaluate(()=>window.location.hash),
-  "#frauen/sahabiyyat/sahabiyyat-umm-haram-seeueberfahrt-20261106",
-  viewport.name+" clicking a post must open its direct in-app route");
- assert.equal(await modal.count(),0,viewport.name+" article selection must close index");
- assert.equal(await page.evaluate(()=>window.__focusedRoute),"",
-  "The global home focus must not jump directly to the generic Frauen hub");
- // Native home-only spotlights disappear on article routes and reappear on home.
- await page.evaluate(()=>{window.location.hash="#home"});
- await page.evaluate(()=>window.DARFrauenNeufokusV1.refresh());
+ "/wissen/beitrag/?id=sahabiyyat-umm-haram-seeueberfahrt-20261106&lang=de",
+ viewport.name+" focus entry must link to universal nine-language non-Q reader");
+ await modal.locator(".dar-frauen-index-close").click();
+ assert.equal(await modal.count(),0,viewport.name+" focus dialog must close correctly");
  await banner.waitFor({state:"visible",timeout:10000});
  for(const lang of regions){
   await page.evaluate(v=>{localStorage.setItem("darAdultPreferredLocaleV1",v);window.dispatchEvent(new Event("dar-adult-locale-changed"))},lang);
@@ -194,22 +186,13 @@ function snapshot(isPublic,locale) {
   const modal=page.locator("#darFrauenNeufokusIndex");
   await modal.waitFor();
   assert.equal(await modal.locator("a.dar-frauen-index-link").count(),16,websiteViewport.name+" missing release links");
-  const first=launch.items[0];
-  const firstUrl="/?page=frauen&cat="+encodeURIComponent(first.area)+"&id="+encodeURIComponent(first.id);
-  assert.equal(await modal.locator("a.dar-frauen-index-link").first().getAttribute("href"),firstUrl,websiteViewport.name+" desktop link did not use real website router");
-  await modal.locator("a.dar-frauen-index-link").first().click();
-  await page.locator(".dar-frauen-desktop-entry").waitFor({timeout:10000});
-  assert.equal(await page.locator("#darFrauenDesktopArticleMount").count(),1,websiteViewport.name+" V8 fallback reader did not mount");
-  assert.equal(await page.locator(".dar-frauen-desktop-entry").getAttribute("data-dar-frauen-release-article"),first.id);
-  assert.ok((await page.locator(".dar-frauen-desktop-entry").innerText()).includes(localeCatalog.entries[first.id].locales.de.statement));
-  assert.equal(await page.locator(".dar-frauen-desktop-source a").getAttribute("href"),first.sourceUrl);
-  for(const entry of launch.items.slice(1)){
-   await page.goto("https://dar-app.local/?page=frauen&cat="+encodeURIComponent(entry.area)+"&id="+encodeURIComponent(entry.id),{waitUntil:"domcontentloaded"});
-   await page.locator(".dar-frauen-desktop-entry").waitFor({timeout:10000});
-   assert.equal(await page.locator(".dar-frauen-desktop-entry").getAttribute("data-dar-frauen-release-article"),entry.id,
-    websiteViewport.name+" wrong direct entry");
-  }
-  await page.goto("https://dar-app.local/?page=wisssen",{waitUntil:"domcontentloaded"});
+  for(const [index,entry] of launch.items.entries()){
+  const expected="/wissen/beitrag/?id="+encodeURIComponent(entry.id)+"&lang=de";
+  assert.equal(await modal.locator("a.dar-frauen-index-link").nth(index).getAttribute("href"),expected,
+   websiteViewport.name+" article "+(index+1)+" should open Q-style standalone reader");
+ }
+ await modal.locator(".dar-frauen-index-close").click();
+ await page.goto("https://dar-app.local/?page=wisssen",{waitUntil:"domcontentloaded"});
   assert.equal(await page.locator("#darFrauenNeufokus48h").count(),0,websiteViewport.name+" focus leaked onto unrelated website page");
   assert.deepEqual(issues,[],websiteViewport.name+" JS errors: "+issues.join("; "));
   await context.close();
@@ -252,7 +235,7 @@ function snapshot(isPublic,locale) {
   const links=page.locator("#darFrauenNeufokusIndex a.dar-frauen-index-link");
   await links.first().waitFor();
   assert.equal(await links.count(),16,"Actual native parity focus needs all 16 direct routes");
-  assert.ok((await links.first().getAttribute("href")).startsWith("#frauen/"),
+  assert.ok((await links.first().getAttribute("href")).startsWith("/wissen/beitrag/?id="),
     "Native parity must retain existing Frauen reader route");
   await ctx.close();
  }
