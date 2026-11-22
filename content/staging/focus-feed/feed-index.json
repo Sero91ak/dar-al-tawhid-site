@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updatedAt": "2026-06-18T12:00:00.000Z",
+  "updatedAt": "2026-11-22T16:32:36.406Z",
   "items": [
     {
       "id": "neufokus-frauenwissen-16-20261118",
@@ -24,14 +24,16 @@
       "gradientTo": "#0c1720",
       "backgroundSafe": true,
       "imageSafe": true,
-      "status": "draft",
+      "status": "live",
       "visibility": "48h",
-      "startsAt": "",
-      "expiresAt": null,
-      "dateLabel": "",
+      "startsAt": "2026-11-22T16:07:16.708Z",
+      "expiresAt": "2026-11-24T16:07:16.708Z",
+      "dateLabel": "Neu · 16 Beiträge",
       "topic": "Frauenwissen",
       "releaseBatch": "frauen-batch16-20261118",
-      "description": "48h starts after all 16 canonical source pages and 16 learning routes are confirmed live; no date before true publication"
+      "description": "Mirrored owner-approved visitor release focus. Same exact 48h window as production; no additional notification or timer restart.",
+      "firstPublishedAt": "2026-11-22T16:07:16.708Z",
+      "updatedAt": "2026-11-22T16:07:16.708Z"
     }
   ]
 }
