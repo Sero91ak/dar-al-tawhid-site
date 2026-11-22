@@ -436,6 +436,16 @@ input[type="search"]{-webkit-appearance:none;appearance:none}
 #print-root .dar-book-has-photo .dar-book-cover-photo{height:43mm;margin-top:5mm}
 #print-root .dar-book-has-photo .dar-book-cover-bottom{gap:2mm;padding-top:5mm}
 #print-root .dar-book-overview{align-content:start}
+
+/* Mirror the restrained actual A4 cover in the app's live preview. */
+.report-preview-cover{background:var(--card);border:1px solid var(--gold-strong);outline:0;border-radius:3px;min-height:430px;color:var(--text);padding:29px 26px;box-shadow:0 14px 32px rgba(10,33,23,.09);position:relative}
+.report-preview-cover:before{content:"";position:absolute;inset:7px;border:1px solid var(--line);pointer-events:none}
+.report-preview-cover>span{letter-spacing:.2em;font-size:11px;font-weight:850;color:var(--sage);position:relative}
+.report-preview-cover h2{font:500 clamp(35px,5vw,52px)/1.1 Georgia,serif;color:var(--sage);margin:auto 0 25px;letter-spacing:-.035em}
+.report-preview-cover div{border-top:1px solid var(--gold-strong);padding-top:14px;width:100%;font-size:14px;line-height:1.5;position:relative;color:var(--text);overflow-wrap:anywhere}
+.report-preview-cover #report-names-preview{font:600 18px/1.5 Georgia,serif}
+.report-preview-cover #report-date-preview{border-top:0;padding-top:2px;color:var(--sub);font-size:12px}
+@media(max-width:750px){.report-preview-cover{min-height:360px;padding:24px}.report-preview-cover h2{font-size:40px}}
 </style>
 </head>
 <body>
@@ -513,7 +523,7 @@ input[type="search"]{-webkit-appearance:none;appearance:none}
 
       <section class="page" id="page-abschluss" aria-label="Erinnerungsdokument">
         <div class="page-head"><div><span class="eyebrow">PERSÖNLICHES ARCHIV</span><h1>Dein ʿUmrah-Buch</h1><p>Ein schönes, privates Erinnerungsdokument – keine amtliche Urkunde oder religiöse Bestätigung.</p></div></div>
-        <div class="report-layout"><div class="report-preview"><div class="report-preview-cover"><span>DĀR AL TAWḤĪD</span><h2>MEINE<br>ʿUMRAH</h2><div id="report-names-preview">Dein Name</div><div id="report-date-preview">Dein Reisezeitraum</div></div></div><div class="report-actions"><div class="flat-section"><h2>Inhalt des Dokuments</h2><p>Deckblatt mit eurem Namen, Qurʾān-/Sunnah-Bezug, dokumentierter Ritus-Fortschritt, Reisejournal und eigene Bilder mit Ortsangaben und Bildnotizen. Die Seitenzahl wächst mit dem Inhalt.</p><div class="dar-report-options" style="display:grid;gap:9px;margin:14px 0 18px;font-size:14px">
+        <div class="report-layout"><div class="report-preview"><div class="report-preview-cover"><span>DĀR AL TAWḤĪD</span><h2 id="preview-book-title">MEINE<br>ʿUMRAH</h2><div id="report-names-preview">Dein Name</div><div id="report-date-preview">Dein Reisezeitraum</div></div></div><div class="report-actions"><div class="flat-section"><h2>Inhalt des Dokuments</h2><p>Deckblatt mit eurem Namen, Qurʾān-/Sunnah-Bezug, dokumentierter Ritus-Fortschritt, Reisejournal und eigene Bilder mit Ortsangaben und Bildnotizen. Die Seitenzahl wächst mit dem Inhalt.</p><div class="dar-report-options" style="display:grid;gap:9px;margin:14px 0 18px;font-size:14px">
 <label style="display:flex;gap:10px;align-items:center"><input id="book-opt-steps" type="checkbox" checked style="width:18px;height:18px;flex:none"/> 25 Schritte je Person dokumentieren</label>
 <label style="display:flex;gap:10px;align-items:center"><input id="book-opt-duas" type="checkbox" checked style="width:18px;height:18px;flex:none"/> Duʿāʾ-Leseseiten mit Lautschrift</label>
 <label style="display:flex;gap:10px;align-items:center"><input id="book-opt-memories" type="checkbox" checked style="width:18px;height:18px;flex:none"/> Tagebuch und eigene Fotos</label>
@@ -879,7 +889,7 @@ async function drawPhotoGallery(){const gal=$('#photo-gallery');gal.replaceChild
 
  $$('[data-photo-remove]',gal).forEach(el=>el.onclick=async()=>{if(!confirm('Dieses Foto aus dem lokalen Tagebuch entfernen?'))return;const id=el.dataset.photoRemove;await dbDelete(id);state.photoMeta=state.photoMeta.filter(x=>x.id!==id);store();drawPhotoGallery()});
 }
-function drawReportPreview(){const names=state.people.slice(0,state.count).map(currentPersonName).join(' · ');$('#report-names-preview').textContent=names;$('#report-date-preview').textContent=state.dates||'Dein Reisezeitraum'}
+function drawReportPreview(){const names=state.people.slice(0,state.count).map(currentPersonName).join(' · ');$('#report-names-preview').textContent=names;$('#report-date-preview').textContent=state.dates||'Dein Reisezeitraum';$('#preview-book-title').innerHTML=state.count>1?'UNSERE<br>ʿUMRAH':'MEINE<br>ʿUMRAH'}
 function allPhotoPlaces(){return Object.values(LOCATIONS).flat()}
 function getPlaceName(id){return allPhotoPlaces().find(l=>l.id===id)?.name||'Persönliche Erinnerung'}
 
