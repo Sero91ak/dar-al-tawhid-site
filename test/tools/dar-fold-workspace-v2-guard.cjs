@@ -48,10 +48,10 @@ assert.match(worker,/premium-single-owner-20261122/);
 assert.match(worker,/fold-thumb-nav/); // legacy ref removal is explicitly retained
 assert.match(js,/dar-duo-side-active/);
 assert.match(offline,/offline-light-v1373/);
-assert.match(offline,/dar-fold-workspace-v2\\.js\\?v=20261122-premium-single-owner-v1/);
-assert.match(offline,/dar-fold-workspace-v2\\.css\\?v=20261122-premium-single-owner-v1/);
-assert.doesNotMatch(offline,/['"]\\/test\\/assets\\/fold-thumb-nav\\.js['"]/);
-assert.doesNotMatch(offline,/['"]\\/test\\/assets\\/dar-duo-responsive-v1\\.js['"]/);
+assert.match(offline,/dar-fold-workspace-v2\.js\?v=20261122-premium-single-owner-v1/);
+assert.match(offline,/dar-fold-workspace-v2\.css\?v=20261122-premium-single-owner-v1/);
+assert.doesNotMatch(offline,/['"]\/test\/assets\/fold-thumb-nav\.js['"]/);
+assert.doesNotMatch(offline,/['"]\/test\/assets\/dar-duo-responsive-v1\.js['"]/);
 
 assert.match(worker,/dar-fold-workspace-v2\.js\?v=20261122-premium-single-owner-v1/);
 assert.match(worker,/dar-fold-workspace-v2\.css\?v=20261122-premium-single-owner-v1/);
