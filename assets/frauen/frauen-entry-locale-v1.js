@@ -110,7 +110,8 @@
         else area.appendChild(link);
       }
     }
-    var url="/wissen/beitrag/?id="+encodeURIComponent(item.entry.id)+"&lang="+encodeURIComponent(item.code);
+    var surface=/^\/test(?:\/|$)/.test(w.location.pathname)?"test":/^\/pwa(?:\/|$)/.test(w.location.pathname)?"pwa":"";
+    var url="/wissen/beitrag/?id="+encodeURIComponent(item.entry.id)+"&lang="+encodeURIComponent(item.code)+(surface?"&from="+surface:"");
     link.href=url;
     link.lang=item.code;
     link.dir=(item.code==="ar"||item.code==="ckb")?"rtl":"ltr";
