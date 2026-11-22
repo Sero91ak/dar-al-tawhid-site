@@ -22,8 +22,9 @@ fr:{brand:"SAVOIR · ARTICLE",reading:"Lire l’article",lang:"Choisir la langue
 es:{brand:"CONOCIMIENTO · ARTÍCULO",reading:"Leer artículo",lang:"Seleccionar idioma",languageStatus:"Disponible en nueve idiomas",reported:"El relato transmitido",explanation:"Explicación del relato",explanationType:"Explicación editorial basada en la fuente · no es una cita de un erudito clásico",lesson:"Enseñanza y beneficio",source:"Fuente original y evidencia",sourceGo:"Abrir fuente original",learn:"Área de aprendizaje",learnHelp:"Profundiza con cuatro preguntas disponibles en los nueve idiomas.",learnGo:"Aprender · 4 preguntas",back:"Volver a los artículos",excerpt:"Breve extracto árabe original",excerptNote:"Solo un extracto, no el ḥadīth árabe completo",unavailable:"Este artículo no está aprobado o sus nueve traducciones están incompletas.",failed:"No se pudo cargar el artículo.",footer:"El relato, la explicación, la enseñanza y la fuente comparten un solo identificador verificado."}
 };
 var root=d.getElementById("darNonQReader");if(!root)return;
+var current=null;
 function norm(x){x=String(x||"").trim().toLowerCase().replace(/_/g,"-");if(x==="kr")x="ku";if(x==="ku-sorani")x="ckb";if(CODES.includes(x))return x;var p=x.split("-")[0];return CODES.includes(p)?p:"de"}
-function params(){return new URL(w.location.href).searchParams}
+function params(){return new URL(d.baseURI||w.location.href).searchParams}
 function chosen(){var q=params().get("lang");if(q)return norm(q);try{return norm(w.localStorage.getItem("darAdultPreferredLocaleV1"))}catch(_){return "de"}}
 function elt(tag,cl,value){var v=d.createElement(tag);if(cl)v.className=cl;if(value!=null)v.textContent=String(value);return v}
 function append(parent){for(var i=1;i<arguments.length;i++)parent.appendChild(arguments[i]);return parent}
@@ -46,18 +47,28 @@ function languageSelect(code,id,type,t){
  var controls=elt("div","dar-post-langs");var label=elt("label","",t.lang);
  var select=elt("select","dar-post-lang-select");select.id="darPostLangSelect";label.htmlFor=select.id;
  for(const c of CODES){var o=elt("option","",NAMES[c]);o.value=c;o.selected=c===code;select.appendChild(o)}
- select.addEventListener("change",function(){w.location.assign(pathFor(id,norm(select.value),type))});
+ select.addEventListener("change",function(){
+  var next=norm(select.value);
+  if(!current){w.location.assign(pathFor(id,next,type));return}
+  // All verified content stays mounted; switching language never navigates.
+  if(w.self===w.top)try{w.history.replaceState(w.history.state,"",pathFor(id,next,type))}catch(_){}
+  render(current.original,current.entry,current.entry.locales[next],next,id,type,current.kind);
+ });
  controls.appendChild(label);controls.appendChild(select);
  controls.appendChild(elt("small","dar-post-language-status",t.languageStatus));
  var back=elt("a","dar-post-back",t.back);back.href=backUrl(type);
- header.appendChild(controls);header.appendChild(back);return header
+ header.appendChild(controls);
+ // The mounted app toolbar owns Back; do not render a second Back button.
+ if(w.self===w.top)header.appendChild(back);
+ return header
 }
 function render(original,entry,pack,code,id,type,kind){
- var t=UI[code];d.documentElement.lang=code;d.documentElement.dir=code==="ar"||code==="ckb"?"rtl":"ltr";
+ var t=UI[code];current={original:original,entry:entry,kind:kind,id:id,type:type};
+ d.documentElement.lang=code;d.documentElement.dir=code==="ar"||code==="ckb"?"rtl":"ltr";
  d.title=pack.title+" · DĀR AL TAWḤĪD";
  var frag=d.createDocumentFragment();
  var hero=elt("header","dar-post-hero");hero.lang=code;hero.dir=d.documentElement.dir;
- append(hero,elt("div","dar-post-mark","DĀR AL TAWḤĪD"),
+ append(hero,elt("div","dar-post-mark","DĀR AL TAWḤĪD · ZENTRUM"),
  elt("span","dar-post-kicker",t.brand),
  elt("h1","dar-post-title",pack.title),
  elt("p","dar-post-summary",pack.preview||pack.statement));
@@ -97,17 +108,21 @@ async function load(){
  var type=String(params().get("type")||"frauen").trim();
  if(!/^[a-z0-9-]{3,160}$/.test(id)||!/^[a-z0-9-]+$/.test(type)){showError(t.unavailable);return}
  try{
-  var registry=await readJson("/assets/beitrag/reader-catalogs-v1.json?v=1");
+  // Reuse the 16 approved entries and original sources verified by Focus.
+  var preloaded=null;
+  try{if(w.parent&&w.parent!==w&&w.parent.DARFrauenNeufokusV1?.getReaderData)
+    preloaded=w.parent.DARFrauenNeufokusV1.getReaderData(id)}catch(_){}
+  var registry=preloaded?.registry||await readJson("/assets/beitrag/reader-catalogs-v1.json?v=1");
   var kind=registry.catalogs?.[type],required=kind?.requiredLocales;
   if(!kind||!Array.isArray(required)||CODES.some(c=>!required.includes(c))||
      !/^\/lernen\/[a-z0-9/-]+\/$/.test(kind.learningUrl)){showError(t.unavailable);return}
-  var catalog=await readJson(kind.localeCatalogUrl+"?reader=1");
+  var catalog=preloaded&&type==="frauen"?preloaded.catalog:await readJson(kind.localeCatalogUrl+"?reader=1");
   var entry=catalog.entries?.[id];
   if(!entry||entry.id!==id||!catalog.entryIds?.includes(id)||!kind.sourceFiles?.[entry.area]||
      !validUrl(entry.sourceUrl)||CODES.some(c=>{
       var p=entry.locales?.[c];return !p||["title","statement","preview","sharh","lesson","source"].some(k=>typeof p[k]!=="string"||!p[k].trim())
      })){showError(t.unavailable);return}
-  var doc=await readJson(kind.sourceFiles[entry.area]+"?reader=1");
+  var doc=(preloaded&&type==="frauen"&&preloaded.sources?.[kind.sourceFiles[entry.area]])||await readJson(kind.sourceFiles[entry.area]+"?reader=1");
   var found=doc.eintraege?.filter(x=>x.kennung===id)||[];
   if(found.length!==1||found[0].quellenstatus!=="geprueft"||found[0].freigabeDurchSerhat!==true||
      found[0].direktnachweisUrl!==entry.sourceUrl||
