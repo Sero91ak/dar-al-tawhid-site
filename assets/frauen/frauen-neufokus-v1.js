@@ -129,9 +129,14 @@ function visibleHost(node){
  }catch(_){return false}
 }
 function homeMount(){
- // Three real home surfaces: live V3, live V380, public V8.
- // Native #dv3Home may exist as a HIDDEN legacy sibling. Its mere existence
- // is NOT evidence that a spotlight placed inside it will ever be visible.
+ // Four real home surfaces: active parity frontstage, legacy V3, V380,
+ // and public V8. The live parity frontstage is OUTSIDE #appView.
+ // It must be preferred to the hidden V3/V380 legacy nodes.
+ var parity=d.getElementById("darHomeHtmlParityV1");
+ if(isNativeHome()&&parity&&visibleHost(parity)){
+  var parityContent=parity.querySelector(".dhp-content");
+  return{root:visibleHost(parityContent)?parityContent:parity,desktop:false,fallback:false,parity:true};
+ }
  var nativeHome=d.getElementById("dv3Home");
  if(nativeHome&&isNativeHome()&&visibleHost(nativeHome))
   return{root:nativeHome,desktop:false,fallback:false};
@@ -169,6 +174,8 @@ function render(){
   // Visible near the top on ALL native shells, not below long home sections.
   var anchor=home.desktop
    ?root.querySelector(".page-intro,.dar-v8-quick,.home-foundations")
+   :home.parity
+   ?root.querySelector(".dhp-search-box,.dhp-welcome,.dhp-quran-section")
    :root.querySelector(".dv3-hometitle,.dv3-search-box,.home-v380-hero,.home-title,.home-search,.dv3-tawhid");
   if(anchor&&anchor.insertAdjacentElement)anchor.insertAdjacentElement("afterend",button);
   else root.insertBefore(button,root.firstChild);
@@ -182,6 +189,8 @@ function render(){
  if(button.parentElement!==root){
   var anchor=home.desktop
    ?root.querySelector(".page-intro,.dar-v8-quick,.home-foundations")
+   :home.parity
+   ?root.querySelector(".dhp-search-box,.dhp-welcome,.dhp-quran-section")
    :root.querySelector(".dv3-hometitle,.dv3-search-box,.home-v380-hero,.home-title,.home-search,.dv3-tawhid");
   if(anchor&&anchor.parentElement===root&&anchor.insertAdjacentElement)
    anchor.insertAdjacentElement("afterend",button);
@@ -316,7 +325,7 @@ function schedule(force){
  (w.requestAnimationFrame||function(fn){Promise.resolve().then(fn)})(function(){scheduled=false;render();refresh(Boolean(force))});
 }
 function observe(){
- ["appView","pageRoot"].forEach(function(id){
+ ["appView","pageRoot","darHomeHtmlParityV1"].forEach(function(id){
   var root=d.getElementById(id);
   if(root&&!root.__darFrauenFocusObserved&&typeof w.MutationObserver==="function"){
    root.__darFrauenFocusObserved=true;
@@ -334,7 +343,7 @@ function observe(){
 function init(){
  if(d.getElementById("darFrauenNeufokus48hStyle")===null){
   var sheet=d.createElement("link");sheet.id="darFrauenNeufokus48hStyle";sheet.rel="stylesheet";
-  sheet.href="/assets/frauen/frauen-neufokus-v1.css?v=20261122-android-native-v3";d.head.appendChild(sheet);
+  sheet.href="/assets/frauen/frauen-neufokus-v1.css?v=20261122-android-native-v4";d.head.appendChild(sheet);
  }
  observe();schedule(true);
  d.addEventListener("dar:view-rendered",function(){observe();schedule(false)});
@@ -347,6 +356,6 @@ function init(){
  d.addEventListener("visibilitychange",function(){if(!d.hidden)schedule(true)});
  w.setInterval(function(){render();refresh(false)},60000);
 }
-w.DARFrauenNeufokusV1=Object.freeze({validWindow:validWindow,locale:locale,refresh:function(){return refresh(true)},openIndex:function(){showIndex(d.getElementById("darFrauenNeufokus48h"))},diagnostics:function(){var h=homeMount(),card=d.getElementById("darFrauenNeufokus48h");return{home:h?.desktop?"website":h?.fallback?"native-fallback":h?"native":"none",host:h?.root?.id||h?.root?.className||"",enabled:enabled,indexReady:!!readyIndex,started:started,expires:until,cardPresent:!!card,visible:visibleHost(card)}}});
+w.DARFrauenNeufokusV1=Object.freeze({validWindow:validWindow,locale:locale,refresh:function(){return refresh(true)},openIndex:function(){showIndex(d.getElementById("darFrauenNeufokus48h"))},diagnostics:function(){var h=homeMount(),card=d.getElementById("darFrauenNeufokus48h");return{home:h?.desktop?"website":h?.parity?"native-frontstage":h?.fallback?"native-fallback":h?"native":"none",host:h?.root?.id||h?.root?.className||"",enabled:enabled,indexReady:!!readyIndex,started:started,expires:until,cardPresent:!!card,visible:visibleHost(card)}}});
 if(d.readyState==="loading")d.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })(window,document);
