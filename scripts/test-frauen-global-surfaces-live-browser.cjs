@@ -20,7 +20,7 @@ const safari="Mozilla/5.0 (iPhone; CPU iPhone OS 18_2 like Mac OS X) AppleWebKit
 const android="Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36";
 const cases=[
  {name:"official-ios-native",uri:"/?native_ios=1#home",ua:iphone,header:"ios-native",width:390,height:844,home:"native-frontstage"},
- {name:"dar-test-ios",uri:"/test/#home",ua:safari,header:"isolated",width:390,height:844,home:"native-frontstage"},
+ {name:"dar-test-ios",uri:"/test/#home",ua:safari,header:"",width:390,height:844,home:"native-frontstage"},
  {name:"android-installed-pwa",uri:"/pwa/?pwa=1#home",ua:android,header:"android-pwa-app",width:412,height:915,home:"native-frontstage"},
  {name:"ios-ipad-native",uri:"/?native_ios=1#home",ua:"Mozilla/5.0 (iPad; CPU OS 18_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 DarAlTawhid-iOS/1.0 WKWebView",header:"ios-native",width:834,height:1112,home:"native-frontstage"}
 ];
@@ -68,7 +68,10 @@ async function diagnose(page) {
      if(!attempt)await sleep(1500);
     }
    }
-   assert.equal(header,spec.header,spec.name+" wrong Cloudflare branch: "+JSON.stringify({header,detail}));
+   if(spec.name==="dar-test-ios")
+    assert.equal(detail?.appPath,"test","DĀR TEST must remain the isolated test UI: "+JSON.stringify({header,detail}));
+   else
+    assert.equal(header,spec.header,spec.name+" wrong Cloudflare branch: "+JSON.stringify({header,detail}));
    assert.ok(detail?.focus?.visible,spec.name+" global focus not visible: "+JSON.stringify({detail,lastError}));
    assert.equal(detail?.focus?.enabled,true,spec.name+" live 48h feed not active");
    assert.equal(detail?.focus?.indexReady,true,spec.name+" 16-entry list not loaded");
