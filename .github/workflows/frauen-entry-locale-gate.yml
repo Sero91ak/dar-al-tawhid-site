@@ -21,9 +21,11 @@ on:
       - 'data/frauen-*.json'
       - 'q/_registry/shortlinks.json'
       - 'cloudflare/site-router.js'
-      - 'assets/frauen/frauen-neufokus-v1.json'
+      - 'assets/frauen/frauen-neufokus-v1.*'
+      - 'assets/frauen/frauen-desktop-entry-v1.js'
       - 'content/focus-feed/feed-index.json'
       - 'scripts/test-frauen-batch16-neufokus*.cjs'
+      - 'scripts/test-frauen-batch16-home-live-browser.cjs'
       - '.github/workflows/frauen-entry-locale-gate.yml'
   workflow_dispatch:
 permissions:
@@ -49,8 +51,15 @@ jobs:
         run: |
           npm install --no-save --ignore-scripts playwright
           npx playwright install --with-deps chromium
+      - name: Fokus-JavaScript und öffentlichen Direktleser auf Syntax prüfen
+        run: |
+          node --check assets/frauen/frauen-neufokus-v1.js
+          node --check assets/frauen/frauen-desktop-entry-v1.js
       - name: 16er-Einzelartikellinks, neun Sprachen, vier Geräteklassen
         run: node scripts/test-frauen-batch16-neufokus-browser.cjs
+      - name: Öffentliche Website in echtem Chromium überprüfen (#pageRoot)
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: node scripts/test-frauen-batch16-home-live-browser.cjs
 
   production-16-live-proof:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
