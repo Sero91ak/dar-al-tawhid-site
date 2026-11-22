@@ -397,7 +397,7 @@
     audit:function(){
       var m=viewport(),c=capacity(m.width,m.height);
       var box=function(e){if(!e)return null;var r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,scrollTop:e.scrollTop,scrollHeight:e.scrollHeight,clientHeight:e.clientHeight};};
-      return {version:"20261101-real-content-v4",active:active,viewport:m,capacity:c,rail:box(nav),reader:box(pane),contentInRight:!!(source&&pane&&source.parentNode===pane),route:win.location.hash||"#home"};
+      return {version:"20261122-premium-single-owner-v1",active:active,viewport:m,capacity:c,rail:box(nav),reader:box(pane),contentInRight:!!(source&&pane&&source.parentNode===pane),route:win.location.hash||"#home"};
     }
   };
   if(doc.readyState==="loading")doc.addEventListener("DOMContentLoaded",start,{once:true});else start();
