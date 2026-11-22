@@ -38,7 +38,7 @@
 
   let view=null,opts=null,trigger=null,book=null,left=null,right=null,flip=null,controls=null;
   let pages=[],meta=[],pageBase=1,display={arabic:true,latin:false,translation:false},language="de",editionId="de.bubenheim";
-  let scrollLock="",restoreFocus=null,lastUI=0,uiTimer=null,routeWatcher=null;
+  let scrollLock="",restoreFocus=null,readerReturnFocus=null,savedBookPage=1,lastUI=0,uiTimer=null,routeWatcher=null;
   let loadGeneration=0,renderBusy=false,drag=null,flipState=null,flipping=false;
   const surahCache=new Map(),translationCache=new Map(),pageCache=new Map(),imgPrefetch=new Map();
 
@@ -65,8 +65,8 @@
       }
       if(LANGS.some(l=>l[0]===state?.language))language=state.language;
       if(/^[a-z]{2,4}\.[a-z0-9-]+$/.test(String(state?.edition||"")))editionId=state.edition;
-      return num(state?.bookPage,1,604);
-    }catch(_){return 1;}
+      savedBookPage=num(state?.bookPage,1,604);return savedBookPage;
+    }catch(_){savedBookPage=1;return 1;}
   }
   function verseKey(x){return x.sura*1000+x.aya;}
   function getPageFor(sura,ayah){
@@ -81,7 +81,7 @@
     const btn=document.querySelector("[data-quran-continue]");
     const a=btn&&/^(\d{1,3}):(\d{1,3})$/.exec(btn.getAttribute("data-quran-continue")||"");
     if(a)return getPageFor(num(a[1],1,114),num(a[2],1,286));
-    return restore();
+    return savedBookPage;
   }
   function spreadStart(page){
     page=num(page,1,604);
@@ -148,6 +148,7 @@
     if(p<1||p>604||imgPrefetch.has(p))return;
     const image=new Image();imgPrefetch.set(p,image);
     image.decoding="async";image.src=imageSrc(p);
+    image.onerror=function(){if(!image.dataset.fallback){image.dataset.fallback="1";image.src=fallbackSrc(p);}};
     if(imgPrefetch.size>12){
       const oldest=imgPrefetch.keys().next().value;imgPrefetch.delete(oldest);
     }
@@ -325,7 +326,7 @@
     document.documentElement.classList.remove("damx-fullscreen");
     document.body.style.overflow=scrollLock;
     clearTimeout(uiTimer);
-    if(restoreFocus?.isConnected)restoreFocus.focus({preventScroll:true});
+    if(readerReturnFocus?.isConnected)readerReturnFocus.focus({preventScroll:true});
   }
   function validateOptions(){
     const arabic=el("damxArabic").checked,latin=el("damxLatin").checked,translation=el("damxTranslation").checked;
@@ -372,9 +373,9 @@
     closeOptions();
     try{
       if(!view)makeBook();
-      scrollLock=document.body.style.overflow;
       if(!wasOpen){
-        restoreFocus=trigger||document.activeElement;
+        scrollLock=document.body.style.overflow;
+        readerReturnFocus=trigger||document.activeElement;
         document.body.style.overflow="hidden";view.hidden=false;
         document.documentElement.classList.add("damx-fullscreen");
       }
@@ -450,6 +451,7 @@
     view.addEventListener("keydown",e=>{
       if(opts&&!opts.hidden)return;
       if(e.key==="Escape"){e.preventDefault();closeBook();}
+      if(e.target&&/SELECT|INPUT|TEXTAREA/.test(e.target.tagName||""))return;
       if(e.key==="ArrowLeft"){e.preventDefault();turn(1);}
       if(e.key==="ArrowRight"){e.preventDefault();turn(-1);}
       if(e.key==="Tab")showUI();
