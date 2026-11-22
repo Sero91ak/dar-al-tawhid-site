@@ -97,7 +97,8 @@ async function diagnose(page) {
    await items.first().waitFor({timeout:9000});
    assert.equal(await items.count(),16,spec.name+" article index wrong count");
    const first=manifest.items[0];
-   const target="/wissen/beitrag/?id="+encodeURIComponent(first.id)+"&lang=de";
+   const surface=spec.name==="dar-test-ios"?"test":spec.name==="android-installed-pwa"?"pwa":"";
+   const target="/wissen/beitrag/?id="+encodeURIComponent(first.id)+"&lang=de"+(surface?"&from="+surface:"");
    assert.equal(await items.first().getAttribute("href"),target,
     spec.name+" article must link to original-ID based non-Q reader, no Q number");
    await items.first().click();
