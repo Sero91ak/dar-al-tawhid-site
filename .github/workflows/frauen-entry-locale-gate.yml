@@ -34,6 +34,11 @@ on:
       - 'scripts/test-frauen-batch16-home-live-browser.cjs'
       - 'scripts/test-frauen-android-native-live-browser.cjs'
       - 'scripts/test-frauen-global-surfaces-live-browser.cjs'
+      - 'assets/beitrag/**'
+      - 'wissen/beitrag/**'
+      - 'lernen/beitrag/**'
+      - 'lernen/frauen-wissen/index.html'
+      - 'scripts/test-nonq-reader-*.cjs'
       - '.github/workflows/frauen-entry-locale-gate.yml'
   workflow_dispatch:
 permissions:
@@ -61,10 +66,16 @@ jobs:
         run: |
           npm install --no-save --ignore-scripts playwright
           npx playwright install --with-deps chromium
-      - name: Fokus-JavaScript und öffentlichen Direktleser auf Syntax prüfen
+      - name: Fokus, universellen Non-Q-Leser und neunsprachige Lernmodule syntaktisch prüfen
         run: |
           node --check assets/frauen/frauen-neufokus-v1.js
           node --check assets/frauen/frauen-desktop-entry-v1.js
+          node --check assets/frauen/frauen-entry-locale-v1.js
+          node --check assets/frauen/frauen-learning-v1.js
+          node --check assets/beitrag/reader-v1.js
+          node --check assets/beitrag/learning-v1.js
+      - name: Kanonische Beiträge ohne Q: 16 IDs, 144 Sprachfassungen und Lernbereich
+        run: node scripts/test-nonq-reader-browser.cjs
       - name: 16er-Einzelartikellinks, neun Sprachen, vier Geräteklassen
         run: node scripts/test-frauen-batch16-neufokus-browser.cjs
       - name: Öffentliche Website in echtem Chromium überprüfen (#pageRoot)
@@ -76,6 +87,9 @@ jobs:
       - name: Globaler iOS-Native, DĀR-TEST, iPad und installierte Android-PWA – echte Live-Prüfung
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: node scripts/test-frauen-global-surfaces-live-browser.cjs
+      - name: Öffentlichen dauerhaften Non-Q-Leser und Lernbereich auf Cloudflare prüfen
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: node scripts/test-nonq-reader-live-browser.cjs
 
   production-16-live-proof:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
