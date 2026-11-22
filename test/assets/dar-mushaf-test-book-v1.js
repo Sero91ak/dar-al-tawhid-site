@@ -63,9 +63,10 @@
     if(current.length) leafs.push(current);
     if(!leafs.length) leafs=[[]];
   }
+  function perView() { return window.matchMedia && window.matchMedia("(max-width:740px)").matches ? 1 : 2; }
   function updateControls() {
     if(!root)return;
-    var count=Math.max(1,Math.ceil(leafs.length/2));
+    var count=Math.max(1,Math.ceil(leafs.length/perView()));
     byId("damPageCount").textContent=(spread+1)+" / "+count;
     byId("damBack").disabled=turning||spread<=0;
     byId("damNext").disabled=turning||spread>=count-1;
@@ -75,18 +76,18 @@
   }
   function render() {
     if(!root || !chapter) return;
-    leftPage.innerHTML=pageMarkup(leafs[spread*2+1]||[],spread*2+1);
-    rightPage.innerHTML=pageMarkup(leafs[spread*2]||[],spread*2);
+    leftPage.innerHTML=perView()===2 ? pageMarkup(leafs[spread*2+1]||[],spread*2+1) : "";
+    rightPage.innerHTML=pageMarkup(leafs[spread*perView()]||[],spread*perView());
     leftPage.scrollTop=0;rightPage.scrollTop=0;
     updateControls();
   }
   function goToAyah(ayah) {
     var target=Math.max(1,Number(ayah)||1), idx=leafs.findIndex(function(a){return a.some(function(v){return Number(v.id)===target;});});
-    spread=Math.max(0,Math.floor(Math.max(0,idx)/2));render();
+    spread=Math.max(0,Math.floor(Math.max(0,idx)/perView()));render();
   }
   function turn(delta) {
     if(turning || !chapter) return;
-    var next=spread+delta, max=Math.ceil(leafs.length/2)-1;
+    var next=spread+delta, max=Math.ceil(leafs.length/perView())-1;
     if(next<0 || next>max)return;
     var sheet=byId("damFlipSheet"), surface=byId("damBook");
     if(!sheet || !surface)return;
@@ -94,7 +95,7 @@
     if(reduced){spread=next;render();return;}
     turning=true;updateControls();
     var oldRight=rightPage.innerHTML,oldLeft=leftPage.innerHTML;
-    sheet.innerHTML='<div class="dam-flip-front">'+(delta>0?oldRight:oldLeft)+'</div><div class="dam-flip-back">'+(delta>0?pageMarkup(leafs[next*2+1]||[],next*2+1):pageMarkup(leafs[next*2]||[],next*2))+'</div>';
+    sheet.innerHTML='<div class="dam-flip-front">'+(delta>0?oldRight:oldLeft)+'</div><div class="dam-flip-back">'+(delta>0?pageMarkup(leafs[next*perView()+1]||[],next*perView()+1):pageMarkup(leafs[next*perView()]||[],next*perView()))+'</div>';
     sheet.hidden=false;surface.classList.add(delta>0?"dam-anim-next":"dam-anim-back");
     var finished=false;
     function done(){
@@ -138,7 +139,7 @@
   }
   function updateMode(next) {
     if(!/^(ar|latin|de)$/.test(next)||next===mode)return;
-    var current=leafs[spread*2]&&leafs[spread*2][0];
+    var current=leafs[spread*perView()]&&leafs[spread*perView()][0];
     var target=current?Number(current.id):referenceAyah;
     mode=next;groupVerses();goToAyah(target);
     safeStore({surah:surahNo,mode:mode});
@@ -216,6 +217,7 @@
     var app=byId("appView");if(app)observer.observe(app,{childList:true,subtree:true});
     window.addEventListener("hashchange",schedule);
     window.addEventListener("pageshow",schedule);
+    window.addEventListener("resize",function(){if(root&&!root.hidden&&chapter){var first=leafs[spread*perView()]&&leafs[spread*perView()][0];if(first)goToAyah(first.id);}}, {passive:true});
   }
   window.DarMushafTestBook={open:openBook,close:closeBook};
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
