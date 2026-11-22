@@ -141,7 +141,7 @@ html.dam-book-open {overscroll-behavior:none}
 .dam-progress{text-align:center;display:grid;gap:2px;min-width:0}
 .dam-progress>span{font:500 19px/1.3 Georgia,serif;color:#ead3a1}
 .dam-progress small{color:#a8b3a6;font-size:10px;line-height:1.4}
-@media (max-width:620px){
+@media (max-width:540px){
   .dam-shell{padding-left:max(8px,env(safe-area-inset-left));padding-right:max(8px,env(safe-area-inset-right))}
   .dam-header{padding:3px 8px 7px}
   .dam-brand{gap:8px;flex-wrap:wrap}
@@ -258,7 +258,7 @@ html.dam-book-open {overscroll-behavior:none}
 .dam-anim-next .dam-flip-sheet,.dam-anim-back .dam-flip-sheet{
   filter:drop-shadow(-12px 7px 10px rgba(24,17,10,.22))
 }
-@media(min-width:621px) and (max-width:980px){
+@media(min-width:541px) and (max-width:980px){
   .dam-stage{padding:8px 5px}
   .dam-book{width:100%;height:min(100%,830px);padding:5px 7px 7px}
   .dam-page-inner{padding:clamp(13px,2vw,23px) clamp(11px,2vw,23px)}
@@ -268,7 +268,7 @@ html.dam-book-open {overscroll-behavior:none}
   .dam-verse-latin{font-size:clamp(10px,1.55vw,13px)}
   .dam-page-head{font-size:10px}
 }
-@media(max-width:620px){
+@media(max-width:540px){
   .dam-brand>span:last-child{display:none}
   .dam-brand-kicker{font-size:8px}
   .dam-book-settings{min-height:36px;padding:7px 11px;font-size:11px!important}
