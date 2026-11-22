@@ -172,7 +172,7 @@
   }
   function openInternalSource(target,html,restoring,scrollY,cachedFrame){
     var panel=ensureInternalSourcePanel();
-    if(restoring&&cachedFrame&&cachedFrame.isConnected){
+    if(restoring&&cachedFrame&&cachedFrame.isConnected&&target.startsWith("/wissen/beitrag/")){
       if(sourceFrame!==cachedFrame){
         var discarded=sourceFrame;
         discarded.classList.add("dar-source-frame-inactive");
@@ -194,6 +194,7 @@
     if(!restoring&&!panel.hidden&&sourceCurrentPage&&sourceCurrentPage.target!==target){
       try{sourceCurrentPage.scrollY=sourceFrame.contentWindow.scrollY||sourceFrame.contentWindow.pageYOffset||0}catch(_){}
       sourceRouteStack.push(sourceCurrentPage);
+      if(sourceCurrentPage.target.startsWith("/wissen/beitrag/")){
       sourceFrame.classList.add("dar-source-frame-inactive");
       sourceFrame.removeAttribute("id");
       var nextFrame=document.createElement("iframe");
@@ -201,6 +202,7 @@
       nextFrame.setAttribute("title","Quellenkarte und Lernbereich");
       nextFrame.setAttribute("referrerpolicy","strict-origin-when-cross-origin");
       bindSourceFrame(nextFrame);panel.appendChild(nextFrame);sourceFrame=nextFrame;
+      }
     }
     sourceCurrentPage={target:target,html:html,scrollY:scrollY||0,frame:sourceFrame};
     pendingSourceScrollY=restoring?(scrollY||0):null;
