@@ -18,7 +18,7 @@ class Element{
     this.classList={add(){},remove(){}};}
   setAttribute(k,v){this.attrs[k]=v}
   getAttribute(k){return this.attrs[k]??null}
-  removeAttribute(k){delete this.attrs[k]}
+  removeAttribute(k){delete this.attrs[k];if(k==='id')this.id=''}
   appendChild(c){this.children.push(c);c.parentNode=this;c.isConnected=true;return c}
   append(...children){for(const child of children)this.appendChild(child)}
   removeChild(c){this.children=this.children.filter(x=>x!==c);c.isConnected=false;c.parentNode=null}
