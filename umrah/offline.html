@@ -328,6 +328,29 @@ input[type="search"]{-webkit-appearance:none;appearance:none}
   img,svg{max-width:100%}
   .page,.dar-guide-card,.dar-reading-dialog,.dar-source-dialog{overflow-wrap:break-word}
 }
+
+/* V10.3 · Recitation information shown immediately at the action */
+.dar-reading-library{margin:11px 0 16px;border:1px solid var(--line);border-radius:15px;background:var(--panel);overflow:hidden}
+.dar-reading-library summary{cursor:pointer;padding:15px 16px;font-size:15px;font-weight:850;color:var(--text)}
+.dar-reading-library summary:before{content:"٭";margin-right:9px;color:var(--gold);font-size:22px}
+.dar-reading-library[open] summary{border-bottom:1px solid var(--line)}
+.dar-reading-library-list{padding:10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:7px}
+.dar-reading-library-list button{padding:13px;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:12px;text-align:start;min-height:68px;display:grid;gap:5px}
+.dar-reading-library-list strong{font-size:14px}.dar-reading-library-list small{font-size:12px;color:var(--sub);line-height:1.4}
+.dar-reading-library-foot{margin:0;padding:0 14px 14px;color:var(--sub);font-size:12px;line-height:1.5}
+.dar-step-readings,.dar-phase-readings{display:grid;gap:10px;min-width:0}.dar-step-readings{margin:2px 0 8px}.dar-phase-readings{margin-top:15px}
+.dar-recitation-card{border:1px solid rgba(173,135,72,.38);border-radius:17px;background:var(--panel);padding:15px;display:grid;gap:9px;min-width:0}
+.dar-recitation-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.dar-recitation-head strong{font-size:16px;line-height:1.4;color:var(--text)}.dar-recitation-head small{font-size:11px;color:var(--gold);font-weight:850}
+.dar-recitation-ar{font-family:"Noto Naskh Arabic","Geeza Pro","Amiri",serif;direction:rtl;text-align:right;font-size:clamp(23px,4.7vw,29px);line-height:1.85;overflow-wrap:anywhere}
+.dar-recitation-latin{font-size:clamp(16px,2.7vw,19px);font-weight:650;line-height:1.65;color:var(--text);overflow-wrap:anywhere}
+.dar-recitation-card button{font-size:14px;font-weight:850;padding:12px 14px;border:1px solid var(--gold-strong);border-radius:12px;background:var(--card);color:var(--text);min-height:46px}
+.dar-recitation-hint{border-left:3px solid var(--gold-strong);padding:12px;background:var(--bg);color:var(--sub);border-radius:0 12px 12px 0;font-size:13px;line-height:1.6}
+.dar-reading-tools{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.dar-reading-tools button{border:1px solid var(--line);border-radius:11px;background:var(--bg);color:var(--text);padding:10px 14px;min-height:44px;font-size:14px;font-weight:800}
+.dar-reading-ar{font-size:clamp(29px,calc(36px * var(--dar-recitation-scale,1)),54px)}
+.dar-reading-latin{font-size:clamp(18px,calc(23px * var(--dar-recitation-scale,1)),33px)}
+.dar-reading-de{font-size:clamp(16px,calc(19px * var(--dar-recitation-scale,1)),28px)}
+@media(max-width:600px){.dar-reading-library-list{grid-template-columns:1fr}.dar-recitation-card{padding:13px}.dar-reading-tools button{flex:1}}
 </style>
 </head>
 <body>
@@ -375,7 +398,7 @@ input[type="search"]{-webkit-appearance:none;appearance:none}
         <div class="page-head"><div><span class="eyebrow">QURʾĀN & SUNNAH</span><h1>Die ʿUmrah</h1><p>Nur die gewählte Phase ist geöffnet – ohne langes Scrollen.</p></div><div class="person-select-wrap"><label for="active-person">Für wen?</label><select id="active-person" aria-label="Person für den Fortschritt wählen"></select></div></div>
         <section id="dar-guide" class="dar-guide" aria-label="Geführter ʿUmrah-Ablauf">
 <div class="dar-guide-top"><div><small>DEIN NÄCHSTER SCHRITT · PERSÖNLICH</small><h2 id="dar-guide-top-title">Geführte ʿUmrah</h2></div><span class="dar-guide-count" id="dar-guide-count">1 / 25</span></div>
-<div class="dar-guide-meter"><span id="dar-guide-meter"></span></div>
+<div class="dar-guide-meter"><span id="dar-guide-meter"></span></div><details class="dar-reading-library" id="dar-reading-library"><summary>Was spreche ich? Duʿāʾs und Adhkār</summary><div class="dar-reading-library-list" id="dar-reading-library-list"></div><p class="dar-reading-library-foot">Belegte Texte; keine erfundenen Pflichtformeln für einzelne Ṭawāf-Runden oder Saʿy-Wege.</p></details>
 <div id="dar-guide-main" aria-live="polite"></div>
 <div class="dar-guide-controls"><button type="button" id="dar-guide-prev">← Vorheriger</button><button type="button" class="dar-guide-primary" id="dar-guide-mark">✓ Als erledigt markieren</button><button type="button" id="dar-guide-next">Nächster →</button></div>
 <details class="dar-guide-index" id="dar-guide-index"><summary>Alle Schritte durchsuchen / direkt auswählen</summary><input type="search" id="dar-guide-query" autocomplete="off" placeholder="Zum Beispiel Mīqāt, Saʿy, Menstruation …" aria-label="Schritte suchen"/><div id="dar-guide-all"></div></details>
@@ -437,7 +460,7 @@ input[type="search"]{-webkit-appearance:none;appearance:none}
 <div class="dar-reading-head"><span>DĀR AL TAWḤĪD · REZITATIONSHILFE</span><button type="button" id="dar-reading-close" aria-label="Rezitationsfenster schließen">✕</button></div>
 <h2 id="dar-reading-title"></h2>
 <h3>Arabisch · Originaltext</h3><div class="dar-reading-ar" id="dar-reading-ar" lang="ar" dir="rtl"></div>
-<h3>Lautschrift · zum Mitlesen</h3><p class="dar-reading-latin" id="dar-reading-latin" lang="de"></p>
+<div class="dar-reading-tools"><button type="button" id="dar-reading-smaller">A−</button><button type="button" id="dar-reading-larger">A+</button><button type="button" id="dar-reading-copy">Lautschrift kopieren</button></div><h3>Lautschrift · zum Mitlesen</h3><p class="dar-reading-latin" id="dar-reading-latin" lang="de"></p>
 <h3>Deutsche Bedeutung</h3><p class="dar-reading-de" id="dar-reading-de"></p>
 <p class="dar-reading-note" id="dar-reading-note"></p><p class="dar-reading-ref" id="dar-reading-ref"></p>
 </div></aside>
@@ -515,10 +538,42 @@ const DAR_RECITATIONS={
  talbiyah:{source:'b1549',title:'Die Talbiyah sprechen',note:'Ab Eintritt in den Iḥrām am Mīqāt sprechen und wiederholen, bis der Ṭawāf beginnt.'},
  takbir:{source:'b1613',title:'Takbīr am Schwarzen Stein',arabic:'اللَّهُ أَكْبَرُ',latin:'Allāhu akbar.',german:'Allah ist größer.',note:'Beim Erreichen des Schwarzen Steins den Takbīr sprechen. Niemanden bedrängen. Dieser kurze arabische Wortlaut ist der Takbīr, nicht der vollständige Ḥadīṯ-Text.'},
  rabbana:{source:'q2_201',title:'Bittgebet · Rabbanā ātinā',note:'Überliefertes Bittgebet für den Abschnitt zwischen dem Yamānī-Eck und dem Schwarzen Stein. Für jede einzelne Ṭawāf-Runde gibt es kein eigenes vorgeschriebenes Duʿāʾ.'},
- safa:{source:'q2_158',title:'Qurʾān-Auszug · Ṣafā und Marwah',note:'Dies ist ein Qurʾān-Auszug, kein frei erfundenes Duʿāʾ und kein Pflichttext für jeden Saʿy-Weg.'}
+ safa:{source:'q2_158',title:'Qurʾān-Auszug · Ṣafā und Marwah',note:'Beim Annähern an Ṣafā: Auszug aus Qurʾān 2:158. Kein frei erfundenes Duʿāʾ.'},
+ ibda:{source:'m1218a',title:'Bei Ṣafā beginnen',arabic:'أَبْدَأُ بِمَا بَدَأَ اللَّهُ بِهِ',latin:'Abdaʾu bimā badaʾa-llāhu bih.',german:'Ich beginne mit dem, womit Allah begonnen hat.',note:'Nach dem Qurʾān-Auszug beim Beginn an Ṣafā. Quelle: Ṣaḥīḥ Muslim 1218a.'},
+ safadhikr:{source:'m1218a',title:'Dhikr auf Ṣafā und Marwah',arabic:'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ',latin:'Lā ilāha illā llāhu waḥdahu lā sharīka lah. Lahu l-mulku wa-lahu l-ḥamd, wa-huwa ʿalā kulli shayʾin qadīr. Lā ilāha illā llāhu waḥdah, anjaza waʿdah, wa-naṣara ʿabdah, wa-hazama l-aḥzāba waḥdah.',german:'Niemand ist der Anbetung würdig außer Allah allein, ohne Teilhaber. Ihm gehört die Herrschaft und das Lob, und Er hat Macht über alles. Allah allein erfüllte Sein Versprechen, half Seinem Diener und besiegte die Verbündeten allein.',note:'Auf Ṣafā und Marwah in Richtung Qiblah: Allahs Einzigkeit erklären, Takbīr sprechen, diesen Dhikr und persönliche Duʿāʾs sprechen. Die Wiederholung ist in Muslim 1218a überliefert; siehe auch Ḥiṣn al-Muslim 236.'}
 };
-const DAR_STEP_READING={g05:'talbiyah',g09:'takbir',g10:'takbir',g12:'rabbana',g17:'safa',g18:'safa'};
+
+const DAR_STEP_READINGS={g04:['talbiyah'],g05:['talbiyah'],g09:['takbir'],g10:['takbir'],g11:['takbir','rabbana'],g12:['rabbana'],g17:['safa','ibda'],g18:['ibda','safadhikr'],g19:['safadhikr'],g21:['safadhikr'],g22:['safadhikr']};
+const DAR_PHASE_READINGS={ihram:['talbiyah'],tawaf:['takbir','rabbana'],say:['safa','ibda','safadhikr'],hair:[]};
+const DAR_RECITATION_ORDER=['talbiyah','takbir','rabbana','safa','ibda','safadhikr'];
+const DAR_NO_FIXED_TEXT='Hier gibt es keinen fest vorgeschriebenen zusätzlichen Wortlaut. Du darfst Allah mit eigenen Duʿāʾs bitten oder Dhikr sprechen. Keine besondere Pflichtformel für diese Runde erfinden.';
+function darReadingLabel(key){return ({talbiyah:'Am Mīqāt und unterwegs',takbir:'Am Schwarzen Stein',rabbana:'Zwischen den beiden Ecken',safa:'Vor Ṣafā · Qurʾān 2:158',ibda:'Bei Ṣafā beginnen',safadhikr:'Auf Ṣafā und Marwah'})[key]||''}
+function drawRecitationLibrary(){
+ const wrap=$('#dar-reading-library-list');if(!wrap)return;wrap.replaceChildren();
+ DAR_RECITATION_ORDER.forEach(key=>{
+  const r=DAR_RECITATIONS[key];if(!r)return;
+  const b=document.createElement('button');b.type='button';b.dataset.darReading=key;
+  b.innerHTML='<strong>'+safe(r.title)+'</strong><small>'+safe(darReadingLabel(key))+'</small>';wrap.append(b);
+ });
+}
+function renderReadingPrompt(key){
+ const r=DAR_RECITATIONS[key],ref=r&&DAR_ARCHIVE[r.source];if(!ref)return null;
+ const node=document.createElement('section');node.className='dar-recitation-card';node.setAttribute('aria-label','Zum Sprechen: '+r.title);
+ const head=document.createElement('div');head.className='dar-recitation-head';head.innerHTML='<strong>'+safe(r.title)+'</strong><small>'+safe(darReadingLabel(key))+'</small>';
+ const ar=document.createElement('div');ar.className='dar-recitation-ar';ar.lang='ar';ar.dir='rtl';ar.textContent=r.arabic||ref.arabic;
+ const latin=document.createElement('div');latin.className='dar-recitation-latin';latin.textContent=r.latin||DAR_SOURCE_TRANSLIT[r.source]||'';
+ const btn=document.createElement('button');btn.type='button';btn.dataset.darReading=key;btn.textContent='Groß lesen · Arabisch + Lautschrift + Deutsch';
+ node.append(head,ar,latin,btn);return node;
+}
+
 let darReadingReturnFocus=null;
+let darReadingScale=1;
+try{darReadingScale=Math.max(.9,Math.min(1.4,Number(localStorage.getItem('dar-umrah-reading-scale')||1)||1))}catch(_){}
+function updateDarReadingScale(delta=0){
+ darReadingScale=Math.min(1.4,Math.max(.9,Math.round((darReadingScale+delta)*10)/10));
+ $('#dar-reading-dialog').style.setProperty('--dar-recitation-scale',darReadingScale);
+ try{localStorage.setItem('dar-umrah-reading-scale',String(darReadingScale))}catch(_){}
+}
 function openReading(key){
  const r=DAR_RECITATIONS[key];if(!r)return;
  const source=DAR_ARCHIVE[r.source];if(!source)return;
@@ -529,33 +584,13 @@ function openReading(key){
  $('#dar-reading-de').textContent=r.german||source.german;
  $('#dar-reading-note').textContent=r.note+' Die Lautschrift ist eine Aussprachehilfe und ersetzt nicht den arabischen Originaltext.';
  $('#dar-reading-ref').textContent=source.kind+' · '+source.reference;
- $('#dar-reading-viewer').hidden=false;$('#dar-reading-dialog').scrollTop=0;$('#dar-reading-close').focus({preventScroll:true});
+ updateDarReadingScale(0);$('#dar-reading-viewer').hidden=false;$('#dar-reading-dialog').scrollTop=0;$('#dar-reading-close').focus({preventScroll:true});
 }
 function closeReading(){
  const v=$('#dar-reading-viewer');if(v.hidden)return;v.hidden=true;
  if(darReadingReturnFocus&&darReadingReturnFocus.isConnected)darReadingReturnFocus.focus({preventScroll:true});
  darReadingReturnFocus=null;
 }
-function darReadingPrompt(key){
- const r=DAR_RECITATIONS[key];if(!r)return null;
- const box=document.createElement('div');box.className='dar-reading-teaser';
- const title=document.createElement('span');title.textContent='Zum Mitlesen: '+r.title;
- const btn=document.createElement('button');btn.type='button';btn.dataset.darReading=key;
- btn.textContent='Arabisch · Lautschrift · Bedeutung groß öffnen';box.append(title,btn);return box;
-}
-const LOCATIONS={
- makkah:[
-  {id:'haram',name:'Masjid al-Ḥarām',tag:'ʿUmrah-Hauptort',lat:21.42249,lng:39.82621,description:'Hier findet der Ṭawāf um die Kaʿbah und der Saʿy im Masʿā statt. Die ʿUmrah muss hier vollzogen werden.',priority:'Kern der ʿUmrah',icon:'qibla.png'},
-  {id:'safa',name:'Ṣafā / Marwah (Masʿā)',tag:'Innerhalb des Ḥarām',lat:21.42225,lng:39.82635,description:'Der Saʿy beginnt bei Ṣafā und endet nach sieben Wegen bei Marwah. Dies ist kein äußerer Straßenweg. Der Korridor liegt im Ḥarām; im Gebäude den amtlichen Wegweisern folgen.',priority:'Kern der ʿUmrah',icon:'compass.png'},
-  {id:'nour',name:'Jabal an-Nūr / Ḥirāʾ',tag:'Historischer Ort',lat:21.45833,lng:39.88583,description:'Historisch mit der ersten Offenbarung verbunden. Die Besteigung ist kein vorgeschriebener Bestandteil von ʿUmrah oder Ḥaǧǧ. Auf Wärme und Belastbarkeit achten.',priority:'Freiwilliger Besuch',icon:'mosque.png'},
-  {id:'arafat',name:'ʿArafāt / Jabal ar-Raḥmah',tag:'Ḥaǧǧ-Ort',lat:21.35472,lng:39.98400,description:'Der Aufenthalt in ʿArafāt ist ein zentraler Ḥaǧǧ-Ritus, nicht Teil der ʿUmrah. Eine Besichtigung hat keine eigene vorgeschriebene ʿUmrah-Handlung.',priority:'Für ʿUmrah nicht nötig',icon:'compass.png'}
- ],
- madinah:[
-  {id:'nabawi',name:'Masjid an-Nabawī',tag:'Prophetenmoschee',lat:24.46719,lng:39.61112,description:'Eine bedeutsame Moschee zum Gebet und zur Erinnerung an den Propheten ﷺ. Der Besuch Madīnahs ist nicht Teil der ʿUmrah.',priority:'Empfohlener Besuch',icon:'mosque.png'},
-  {id:'quba',name:'Masjid Qubāʾ',tag:'Historische Moschee',lat:24.43800,lng:39.60953,description:'Der Prophet ﷺ besuchte Masjid Qubāʾ und betete dort. Der Besuch ist freiwillig und hat besondere Vorzüge.',priority:'Empfohlener Besuch',icon:'mosque.png'},
-  {id:'uhud',name:'Berg Uḥud',tag:'Sīrah',lat:24.51925,lng:39.66612,description:'Geschichtlicher Ort der Schlacht von Uḥud; Besichtigung ist freiwillig, ohne eigens vorgeschriebene Gebetsform.',priority:'Freiwilliger Besuch',icon:'compass.png'}
- ]
-};
 function newPerson(i){return {id:'p'+(Date.now()+i).toString(36),name:'',status:{},counters:{tawaf:[],say:[]},notes:Array.from({length:5},()=>''),photoIds:[],guideStatuses:{},guideIndex:0}}
 function defaultState(){return {version:5,dayCount:5,theme:'salbei',title:'',dates:'',count:2,people:[newPerson(1),newPerson(2)],activePerson:0,activePhase:0,activeDay:0,city:'makkah',place:'haram',photoMeta:[]}}
 function stateRead(){try{const val=JSON.parse(localStorage.getItem(APP_KEY)||'null');if(val&&Array.isArray(val.people)&&val.people.length){val.people.forEach(p=>{p.status=p.status||{};p.notes=Array.isArray(p.notes)?p.notes:['','','','',''];p.counters=p.counters||{tawaf:[],say:[]};for(const id of ['tawaf','say']){const old=Array.isArray(p.counters[id])?p.counters[id]:[];let n=0;while(n<7&&old.includes(n+1))n++;p.counters[id]=Array.from({length:n},(_,i)=>i+1)}});val.photoMeta=Array.isArray(val.photoMeta)?val.photoMeta:[];val.count=Math.max(1,Math.min(8,Number(val.count||val.people.length)));val.activePerson=Math.min(Math.max(0,Number(val.activePerson||0)),val.count-1);return val}}catch(e){}return defaultState()}
@@ -590,7 +625,10 @@ function guideMark(){const p=selectedPerson(),s=UMRAH_GUIDE_STEPS[p.guideIndex];
 function guideSearchResults(query){const q=String(query||'').toLocaleLowerCase('de-DE').trim(),p=selectedPerson(),out=$('#dar-guide-all');if(!out)return;out.innerHTML='';const idx=p.guideIndex;UMRAH_GUIDE_STEPS.forEach((s,i)=>{if(q&&!(s.title+' '+s.action+' '+s.here+' '+s.avoid).toLocaleLowerCase('de-DE').includes(q))return;const btn=document.createElement('button');btn.type='button';btn.dataset.guideTo=i;btn.setAttribute('aria-current',i===idx?'step':'false');btn.innerHTML='<span>'+safe((i+1)+'. '+s.title)+'</span><b>'+((p.guideStatuses?.[s.id]==='erledigt')?'✓':'›')+'</b>';out.append(btn)})}
 function drawGuide(){const p=selectedPerson();prepareGuidePerson(p);const s=UMRAH_GUIDE_STEPS[p.guideIndex];const done=UMRAH_GUIDE_STEPS.filter(x=>p.guideStatuses[x.id]==='erledigt').length;const pct=Math.round(done/UMRAH_GUIDE_STEPS.length*100);$('#dar-guide-top-title').textContent='Was tue ich als Nächstes?';$('#dar-guide-count').textContent=(p.guideIndex+1)+' / '+UMRAH_GUIDE_STEPS.length;$('#dar-guide-meter').style.width=pct+'%';const checked=guideStatus(s)==='erledigt';
  $('#dar-guide-main').innerHTML='<div class="dar-guide-card"><div class="dar-guide-badges"><span class="dar-guide-pill important">'+safe(s.kind)+'</span><span class="dar-guide-pill">'+safe(PHASES.find(x=>x.id===s.phase)?.short||'')+'</span><span class="dar-guide-pill">'+done+' von '+UMRAH_GUIDE_STEPS.length+' bestätigt</span></div><h3>'+(p.guideIndex+1)+'. '+safe(s.title)+'</h3><div class="dar-guide-callout primary"><strong>JETZT TUN</strong><p>'+safe(s.action)+'</p></div><div class="dar-guide-callout"><strong>WORAN ERKENNE ICH DIE STELLE?</strong><p>'+safe(s.here)+'</p></div><details class="dar-guide-details"><summary>Warum ist das so? · Fiqh und Hintergrund</summary><p>'+safe(s.reason)+'</p></details><details class="dar-guide-details"><summary>Was muss ich vermeiden?</summary><div class="dar-guide-callout warn" style="margin-top:7px"><p>'+safe(s.avoid)+'</p></div></details><div class="dar-guide-refs">'+sourceButtons(s.refs)+'</div></div>';
- const readingKey=DAR_STEP_READING[s.id];if(readingKey){const box=darReadingPrompt(readingKey);$('#dar-guide-main .dar-guide-refs')?.before(box)}
+ const keys=DAR_STEP_READINGS[s.id]||[];
+ const primary=$('#dar-guide-main .dar-guide-callout.primary');
+ if(primary&&keys.length){const group=document.createElement('div');group.className='dar-step-readings';group.setAttribute('aria-label','Was spreche ich?');keys.forEach(k=>{const card=renderReadingPrompt(k);if(card)group.append(card)});primary.after(group)}
+ else if(primary&&(s.phase==='tawaf'||s.phase==='say'||s.id==='g16')){const hint=document.createElement('p');hint.className='dar-recitation-hint';hint.textContent=DAR_NO_FIXED_TEXT;primary.after(hint)}
  $('#dar-guide-mark').textContent=checked?'↶ Wieder als offen markieren':'✓ Diesen Schritt erledigt';$('#dar-guide-prev').disabled=p.guideIndex===0;$('#dar-guide-next').disabled=p.guideIndex===UMRAH_GUIDE_STEPS.length-1;
  guideSearchResults($('#dar-guide-query')?.value||'');}
 function drawGuideFaq(){const x=$('#dar-fiqh-questions');x.innerHTML=UMRAH_GUIDE_FAQ.map(([q,a,refs],i)=>'<details><summary>'+safe(q)+'</summary><p>'+safe(a)+'</p><div class="dar-guide-refs">'+sourceButtons(refs)+'</div></details>').join('')}
@@ -625,9 +663,10 @@ function drawRitus(){const x=PHASES[state.activePhase],p=selectedPerson();person
   const c=p.counters?.[x.id]||[];
   html+=`<div class="counter-panel"><div><strong>${x.id==='tawaf'?'Ṭawāf-Rundenzähler':'Saʿy-Wegezähler'} · ${c.length}/7</strong><div class="counter-row-notes">Jeweils erst nach vollendetem Durchgang antippen.</div></div><div class="counter-buttons">${Array.from({length:7},(_,i)=>`<button data-count="${i+1}" class="${c.includes(i+1)?'active':''}" aria-pressed="${c.includes(i+1)}" ${i+1>c.length+1?'disabled':''} title="${i+1}. Durchgang">${i+1}</button>`).join('')}</div></div>`;
  }
- if(x.dua){const key={ihram:"talbiyah",tawaf:"rabbana",say:"safa"}[x.id];if(key)html+=`<div class="dar-reading-teaser"><span>Zum Mitlesen: ${safe(x.dua.title)}</span><button type="button" data-dar-reading="${key}">Arabisch · Lautschrift · Bedeutung groß öffnen</button></div>`}
+ html+=`<div id="dar-phase-readings" class="dar-phase-readings"></div>`
  html+=`<details class="quiet-more"><summary>Wichtiger Hinweis / mögliche Fehler</summary><p class="hint">${safe(x.warning)}</p></details><div class="phase-progress"><span>Mein Stand</span>${[['offen','Offen'],['läuft','In Arbeit'],['erledigt','Erledigt'],['klären','Klärung']].map(([v,l])=>`<button class="state-btn ${p.status?.[x.id]===v?'active':''}" data-status="${v}">${l}</button>`).join('')}</div><div class="source-links">${phaseReferences(x.id).map(s=>`<button class="dar-source-btn" type="button" data-dar-source="${s[1]}">${safe(s[0])} · lesen</button>`).join('')}</div>`;
  $('#ritual-stage').innerHTML=html;
+ const readWrap=$('#dar-phase-readings');if(readWrap){const keys=DAR_PHASE_READINGS[x.id]||[];keys.forEach(k=>{const card=renderReadingPrompt(k);if(card)readWrap.append(card)});if(!keys.length){const msg=document.createElement('p');msg.className='dar-recitation-hint';msg.textContent='Für den Abschluss ist keine zusätzliche bestimmte Duʿāʾ vorgeschrieben.';readWrap.append(msg)}}
  $$('[data-count]',$('#ritual-stage')).forEach(b=>b.addEventListener('click',()=>{const n=Number(b.dataset.count),arr=p.counters[x.id]||[];if(n===arr.length){p.counters[x.id]=arr.slice(0,-1)}else if(n===arr.length+1){p.counters[x.id]=[...arr,n]}else{toast('Bitte in der richtigen Reihenfolge zählen');return}store();drawRitus()}));
  $$('[data-status]',$('#ritual-stage')).forEach(b=>b.addEventListener('click',()=>{if(b.dataset.status==='erledigt'&&(x.id==='tawaf'||x.id==='say')&&(p.counters[x.id]||[]).length<7&&!confirm('Der Rundenzähler zeigt weniger als sieben Durchgänge. Hast du die Handlung außerhalb der App vollständig gezählt?'))return;p.status[x.id]=b.dataset.status;store();drawRitus();drawHome();toast('Für '+currentPersonName(p,state.activePerson+1)+' gespeichert')}));
  $('#phase-number').textContent=`Phase ${state.activePhase+1} von 4`;
@@ -837,8 +876,11 @@ function bind(){
  $('#dar-source-close').addEventListener('click',closeSource);
  document.addEventListener('click',e=>{const b=e.target.closest('[data-dar-reading]');if(b){e.preventDefault();openReading(b.dataset.darReading)}});
  $('#dar-reading-close').addEventListener('click',closeReading);
+ $('#dar-reading-larger').addEventListener('click',()=>updateDarReadingScale(.1));
+ $('#dar-reading-smaller').addEventListener('click',()=>updateDarReadingScale(-.1));
+ $('#dar-reading-copy').addEventListener('click',async()=>{const str=$('#dar-reading-latin').textContent||'';try{if(!navigator.clipboard?.writeText)throw Error('Unavailable');await navigator.clipboard.writeText(str);toast('Lautschrift kopiert')}catch(_){toast('Kopieren ist hier nicht verfügbar')}});
  $('#dar-reading-viewer').addEventListener('click',e=>{if(e.target===$('#dar-reading-viewer'))closeReading()});
- document.addEventListener('keydown',e=>{if($('#dar-reading-viewer').hidden)return;if(e.key==='Escape'){e.preventDefault();closeReading()}else if(e.key==='Tab'){e.preventDefault();$('#dar-reading-close').focus()}});
+ document.addEventListener('keydown',e=>{if($('#dar-reading-viewer').hidden)return;if(e.key==='Escape'){e.preventDefault();closeReading()}else if(e.key==='Tab'){const buttons=$('#dar-reading-dialog button').filter(b=>!b.disabled),at=buttons.indexOf(document.activeElement);if((e.shiftKey&&at===0)||(!e.shiftKey&&at===buttons.length-1)){e.preventDefault();buttons[e.shiftKey?buttons.length-1:0].focus()}}});
  $('#dar-guide-query').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();e.target.blur()}});
  $('#dar-source-viewer').addEventListener('click',e=>{if(e.target===$('#dar-source-viewer'))closeSource()});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#dar-source-viewer').hidden)closeSource()});
@@ -880,7 +922,7 @@ function installUmrahZoomLock(){
 function onlineStatus(){$('#online-status').classList.toggle('offline',!navigator.onLine);$('#online-status').title=navigator.onLine?'Online':'Offline'}
 (function init(){
  try{
-  initTheme();installUmrahZoomLock();bind();drawSources();drawGuideFaq();refresh();onlineStatus();
+  initTheme();installUmrahZoomLock();bind();drawSources();drawGuideFaq();drawRecitationLibrary();refresh();onlineStatus();
   // Photo database initializes later. No storage permission may block all navigation.
   Promise.race([openDB(),new Promise(resolve=>setTimeout(()=>resolve(null),2500))])
    .then(conn=>{db=conn;if(!conn)toast('Fotospeicher nicht verfügbar – Navigation und ʿUmrah funktionieren trotzdem.');})
