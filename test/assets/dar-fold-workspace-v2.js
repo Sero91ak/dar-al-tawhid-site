@@ -346,6 +346,13 @@
       }
       return false;
     }
+    // No competing landscape controllers survive into the single-owner view.
+    // Only remove obsolete Test attributes; the original reader/route stays.
+    root.classList.remove("dar-test-side-nav","dar-test-thumb-nav","dar-duo-side-active","is-adaptive-rail");
+    ["data-dar-nav-preference","data-dar-nav-position",
+     "data-dar-duo-axis","data-dar-duo-size","data-dar-duo-layout"].forEach(function(name){
+       root.removeAttribute(name);
+    });
     var wasCompact=compactRail;
     compactRail=!!c.compact;
     createShell();
