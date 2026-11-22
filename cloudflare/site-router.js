@@ -1299,7 +1299,7 @@ function injectAdultReaderRuntimeV5(html) {
   html=html.replace(/(\/assets\/dar-app-chrome\.js)(?:\?v=[^"'\s<>]*)?/g,
     "$1?v=20261122-nonq-seamless-v8");
   if(!html.includes('id="darReaderOverlayRuntimeV5"')){
-    const tag='<script defer id="darReaderOverlayRuntimeV5" src="/assets/dar-reader-overlay-runtime-v5.js?v=20261101-v5"></'+'script>';
+    const tag='<script defer id="darReaderOverlayRuntimeV5" src="/assets/dar-reader-overlay-runtime-v5.js?v=20261122-seamless-v8"></'+'script>';
     html=html.includes("</body>")?html.replace("</body>",tag+"</body>"):html+tag;
   }
   // One stable women post ID + selected adult app language, no Q number minted.
