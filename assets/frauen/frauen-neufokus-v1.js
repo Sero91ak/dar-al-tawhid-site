@@ -273,7 +273,7 @@ function observe(){
 function init(){
  if(d.getElementById("darFrauenNeufokus48hStyle")===null){
   var sheet=d.createElement("link");sheet.id="darFrauenNeufokus48hStyle";sheet.rel="stylesheet";
-  sheet.href="/assets/frauen/frauen-neufokus-v1.css?v=20261122-16-index";d.head.appendChild(sheet);
+  sheet.href="/assets/frauen/frauen-neufokus-v1.css?v=20261122-home-root-v2";d.head.appendChild(sheet);
  }
  observe();schedule(true);
  d.addEventListener("dar:view-rendered",function(){observe();schedule(false)});
