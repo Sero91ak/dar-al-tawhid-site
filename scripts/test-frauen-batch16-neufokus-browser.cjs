@@ -109,7 +109,20 @@ function snapshot(isPublic,locale) {
  }
  assert.ok((await banner.innerText()).includes("16 neue Frauenbeiträge"));
  await banner.click();
- assert.equal(await page.evaluate(()=>window.__focusedRoute),"frauen","Home card not opening women area");
+ const modal=page.locator("#darFrauenNeufokusIndex");
+ await modal.waitFor({timeout:10000});
+ assert.equal(await modal.locator("a.dar-frauen-index-link").count(),16,
+  viewport.name+" must open precisely 16 canonical release articles");
+ assert.equal(await modal.locator("a.dar-frauen-index-link").first().getAttribute("href"),
+  "#frauen/sahabiyyat/sahabiyyat-umm-haram-seeueberfahrt-20261106",
+  viewport.name+" first release link is not the canonical reader");
+ await modal.locator("a.dar-frauen-index-link").first().click();
+ assert.equal(await page.evaluate(()=>window.location.hash),
+  "#frauen/sahabiyyat/sahabiyyat-umm-haram-seeueberfahrt-20261106",
+  viewport.name+" clicking a post must open its direct in-app route");
+ assert.equal(await modal.count(),0,viewport.name+" article selection must close index");
+ assert.equal(await page.evaluate(()=>window.__focusedRoute),"",
+  "The global home focus must not jump directly to the generic Frauen hub");
  const measured=await banner.evaluate(el=>({width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height,right:el.getBoundingClientRect().right,windowWidth:window.innerWidth}));
  assert.ok(measured.width>0&&measured.height>=135,viewport.name+" focus too small");
  assert.ok(measured.right<=measured.windowWidth+2,viewport.name+" focus horizontally clipped");
@@ -144,6 +157,6 @@ function snapshot(isPublic,locale) {
   assert.equal(a.quellenstatus,"nicht-anzeigen");
  }
  assert.equal(focus.items.find(x=>x.id===id).status,"draft");
- console.log("PASS live-like Frauen home focus: global male/female/neutral and 4 real responsive Chromium layouts, 36 localized cards (RTL), source/expiry fail-closed, app navigation and unchanged repository data.");
+ console.log("PASS Frauen home 16-index: global male/female/neutral, 4 Chromium responsive layouts, 36 localized cards (RTL), all 16 direct canonical reader links and navigation, source/expiry fail-closed, unchanged repository data.");
  }finally{if(browser)await browser.close()}
 })().catch(e=>{console.error(e.stack||e);process.exitCode=1});
