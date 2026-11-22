@@ -446,6 +446,18 @@ input[type="search"]{-webkit-appearance:none;appearance:none}
 .report-preview-cover #report-names-preview{font:600 18px/1.5 Georgia,serif}
 .report-preview-cover #report-date-preview{border-top:0;padding-top:2px;color:var(--sub);font-size:12px}
 @media(max-width:750px){.report-preview-cover{min-height:360px;padding:24px}.report-preview-cover h2{font-size:40px}}
+
+/* V10.4 quick count: large one-hand controls inside active guide step */
+.dar-guided-counter{display:grid;gap:10px;min-width:0;border:1px solid rgba(65,116,91,.35);border-radius:16px;background:var(--bg);padding:15px;margin:3px 0 9px}
+.dar-guided-counter-head{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.dar-guided-counter-head strong{font-size:15px;color:var(--text)}
+.dar-guided-counter-value{font-variant-numeric:tabular-nums;font-size:29px;color:var(--sage);font-weight:850;letter-spacing:-.04em}
+.dar-guided-counter p{margin:0;font-size:13px;line-height:1.5;color:var(--sub)}
+.dar-guided-counter-actions{display:grid;grid-template-columns:1fr 2.2fr;gap:9px}
+.dar-guided-counter-actions button{min-height:53px;border-radius:13px;border:1px solid var(--line);font-weight:850;font-size:17px;color:var(--text);background:var(--card)}
+.dar-guided-counter-actions button[data-guide-count-action="plus"]{color:#fff;background:var(--sage);border-color:var(--sage)}
+.dar-guided-counter-actions button:disabled{opacity:.35;cursor:default}
+.dar-guided-counter-complete{font-size:13px;color:var(--sage);font-weight:800}
 </style>
 </head>
 <body>
@@ -727,7 +739,34 @@ function prepareGuidePerson(p){if(!p.guideStatuses||typeof p.guideStatuses!=='ob
 function sourceButtons(keys){return (keys||[]).map(id=>{const s=DAR_ARCHIVE[id];return s?'<button type="button" data-dar-source="'+safe(id)+'" aria-label="'+safe(s.title)+' intern lesen">'+safe(s.title)+' · Beleg öffnen</button>':''}).join('')}
 function guideSelect(n){const p=selectedPerson();prepareGuidePerson(p);p.guideIndex=Math.max(0,Math.min(UMRAH_GUIDE_STEPS.length-1,n));const s=UMRAH_GUIDE_STEPS[p.guideIndex];const idx=PHASES.findIndex(x=>x.id===s.phase);if(idx>=0)state.activePhase=idx;store();drawRitus();(function(){const query=$('#dar-guide-query');if(document.activeElement===query)query.blur();const view=$('#viewport'),guide=$('#dar-guide');const top=guide.getBoundingClientRect().top-view.getBoundingClientRect().top+view.scrollTop;view.scrollTo({top:Math.max(0,top-12),behavior:'auto'})})()}
 function guideStatus(s){const p=selectedPerson();prepareGuidePerson(p);return p.guideStatuses[s.id]||'offen'}
-function guideMark(){const p=selectedPerson(),s=UMRAH_GUIDE_STEPS[p.guideIndex];prepareGuidePerson(p);p.guideStatuses[s.id]=p.guideStatuses[s.id]==='erledigt'?'offen':'erledigt';store();drawGuide();drawHome()}
+function guideMark(){
+ const p=selectedPerson(),step=UMRAH_GUIDE_STEPS[p.guideIndex];prepareGuidePerson(p);
+ const countersKey=step.id==='g14'?'tawaf':step.id==='g22'?'say':null;
+ if(countersKey&&p.guideStatuses[step.id]!=='erledigt'&&(p.counters?.[countersKey]||[]).length<7){
+  if(!confirm('Der Zähler zeigt weniger als sieben Durchgänge. Hast du außerhalb der App alle sieben vollständig gezählt?'))return;
+ }
+ p.guideStatuses[step.id]=p.guideStatuses[step.id]==='erledigt'?'offen':'erledigt';
+ store();drawGuide();drawHome();
+}
+function darGuidedCounter(step){
+ let kind=null;if(step.phase==='tawaf'&&['g10','g11','g12','g13','g14'].includes(step.id))kind='tawaf';
+ if(step.phase==='say'&&['g19','g20','g21','g22'].includes(step.id))kind='say';if(!kind)return null;
+ const p=selectedPerson(),n=Math.max(0,Math.min(7,(p.counters?.[kind]||[]).length));
+ const next=kind==='say'?(n===7?'Saʿy abgeschlossen bei Marwah':(n%2===0?'Nächster Weg: Ṣafā → Marwah':'Nächster Weg: Marwah → Ṣafā')):(n===7?'Alle sieben Runden gezählt':'Erst nach Rückkehr zur Linie des Schwarzen Steins +1 tippen');
+ const panel=document.createElement('section');panel.className='dar-guided-counter';panel.dataset.counterKind=kind;
+ panel.innerHTML='<div class="dar-guided-counter-head"><strong>'+(kind==='say'?'Saʿy-Wegezähler':'Ṭawāf-Rundenzähler')+'</strong><span class="dar-guided-counter-value" role="status" aria-live="polite">'+n+' / 7</span></div><p>'+safe(next)+'</p><div class="dar-guided-counter-actions"><button type="button" data-guide-count-action="minus" '+(n===0?'disabled':'')+' aria-label="Letzten Durchgang zurücknehmen">↶ Zurück</button><button type="button" data-guide-count-action="plus" '+(n===7?'disabled':'')+' aria-label="Vollendeten Durchgang zählen">+ 1 Durchgang</button></div>';
+ if(n===7){const completed=document.createElement('div');completed.className='dar-guided-counter-complete';completed.textContent='7 von 7 erfasst · Bitte vor dem Abschluss prüfen.';panel.append(completed)}
+ return panel;
+}
+function darUpdateGuidedCounter(action,kind){
+ if(!['plus','minus'].includes(action)||!['say','tawaf'].includes(kind))return;
+ const p=selectedPerson();p.counters=p.counters||{tawaf:[],say:[]};
+ const existing=Array.isArray(p.counters[kind])?p.counters[kind]:[];
+ const n=existing.length;if(action==='plus'&&n<7)p.counters[kind]=[...existing,n+1];
+ else if(action==='minus'&&n>0)p.counters[kind]=existing.slice(0,-1);
+ else return;
+ store();drawRitus();drawHome();
+}
 function guideSearchResults(query){const q=String(query||'').toLocaleLowerCase('de-DE').trim(),p=selectedPerson(),out=$('#dar-guide-all');if(!out)return;out.innerHTML='';const idx=p.guideIndex;UMRAH_GUIDE_STEPS.forEach((s,i)=>{if(q&&!(s.title+' '+s.action+' '+s.here+' '+s.avoid).toLocaleLowerCase('de-DE').includes(q))return;const btn=document.createElement('button');btn.type='button';btn.dataset.guideTo=i;btn.setAttribute('aria-current',i===idx?'step':'false');btn.innerHTML='<span>'+safe((i+1)+'. '+s.title)+'</span><b>'+((p.guideStatuses?.[s.id]==='erledigt')?'✓':'›')+'</b>';out.append(btn)})}
 function drawGuide(){const p=selectedPerson();prepareGuidePerson(p);const s=UMRAH_GUIDE_STEPS[p.guideIndex];const done=UMRAH_GUIDE_STEPS.filter(x=>p.guideStatuses[x.id]==='erledigt').length;const pct=Math.round(done/UMRAH_GUIDE_STEPS.length*100);$('#dar-guide-top-title').textContent='Was tue ich als Nächstes?';$('#dar-guide-count').textContent=(p.guideIndex+1)+' / '+UMRAH_GUIDE_STEPS.length;$('#dar-guide-meter').style.width=pct+'%';const checked=guideStatus(s)==='erledigt';
  $('#dar-guide-main').innerHTML='<div class="dar-guide-card"><div class="dar-guide-badges"><span class="dar-guide-pill important">'+safe(s.kind)+'</span><span class="dar-guide-pill">'+safe(PHASES.find(x=>x.id===s.phase)?.short||'')+'</span><span class="dar-guide-pill">'+done+' von '+UMRAH_GUIDE_STEPS.length+' bestätigt</span></div><h3>'+(p.guideIndex+1)+'. '+safe(s.title)+'</h3><div class="dar-guide-callout primary"><strong>JETZT TUN</strong><p>'+safe(s.action)+'</p></div><div class="dar-guide-callout"><strong>WORAN ERKENNE ICH DIE STELLE?</strong><p>'+safe(s.here)+'</p></div><details class="dar-guide-details"><summary>Warum ist das so? · Fiqh und Hintergrund</summary><p>'+safe(s.reason)+'</p></details><details class="dar-guide-details"><summary>Was muss ich vermeiden?</summary><div class="dar-guide-callout warn" style="margin-top:7px"><p>'+safe(s.avoid)+'</p></div></details><div class="dar-guide-refs">'+sourceButtons(s.refs)+'</div></div>';
@@ -735,6 +774,7 @@ function drawGuide(){const p=selectedPerson();prepareGuidePerson(p);const s=UMRA
  const primary=$('#dar-guide-main .dar-guide-callout.primary');
  if(primary&&keys.length){const group=document.createElement('div');group.className='dar-step-readings';group.setAttribute('aria-label','Was spreche ich?');keys.forEach(k=>{const card=renderReadingPrompt(k);if(card)group.append(card)});primary.after(group)}
  else if(primary&&(s.phase==='tawaf'||s.phase==='say'||s.id==='g16')){const hint=document.createElement('p');hint.className='dar-recitation-hint';hint.textContent=DAR_NO_FIXED_TEXT;primary.after(hint)}
+ const guidedCount=darGuidedCounter(s);if(guidedCount){const reading=$('#dar-guide-main .dar-step-readings');if(reading)reading.after(guidedCount);else primary?.after(guidedCount)}
  $('#dar-guide-mark').textContent=checked?'↶ Wieder als offen markieren':'✓ Diesen Schritt erledigt';$('#dar-guide-prev').disabled=p.guideIndex===0;$('#dar-guide-next').disabled=p.guideIndex===UMRAH_GUIDE_STEPS.length-1;
  guideSearchResults($('#dar-guide-query')?.value||'');}
 function drawGuideFaq(){const x=$('#dar-fiqh-questions');x.innerHTML=UMRAH_GUIDE_FAQ.map(([q,a,refs],i)=>'<details><summary>'+safe(q)+'</summary><p>'+safe(a)+'</p><div class="dar-guide-refs">'+sourceButtons(refs)+'</div></details>').join('')}
@@ -1061,6 +1101,7 @@ function bind(){
  $('#dar-guide-query').addEventListener('input',e=>guideSearchResults(e.target.value));
  if(window.visualViewport){const size=()=>document.documentElement.style.setProperty('--dar-visual-height',Math.round(window.visualViewport.height)+'px');window.visualViewport.addEventListener('resize',size);size()}
  $('#dar-guide-all').addEventListener('click',e=>{const b=e.target.closest('[data-guide-to]');if(b)guideSelect(Number(b.dataset.guideTo))});
+ $('#dar-guide-main').addEventListener('click',e=>{const b=e.target.closest('[data-guide-count-action]');if(!b)return;const panel=b.closest('[data-counter-kind]');if(panel)darUpdateGuidedCounter(b.dataset.guideCountAction,panel.dataset.counterKind)});
 
 
 }
