@@ -7,6 +7,12 @@ on:
       - 'q/_registry/shortlinks.json'
       - 'cloudflare/site-router.js'
       - 'scripts/check-frauen-entry-locales.cjs'
+      - 'assets/frauen/frauen-neufokus-v1.*'
+      - 'assets/frauen/frauen-learning-v1.js'
+      - 'content/admin/frauen-batch-16-2026-11-18.json'
+      - 'content/focus-feed/feed-index.json'
+      - 'lernen/frauen-wissen/index.html'
+      - 'scripts/test-frauen-batch16-neufokus*.cjs'
       - '.github/workflows/frauen-entry-locale-gate.yml'
   push:
     branches: [main]
@@ -25,3 +31,19 @@ jobs:
       - uses: actions/checkout@v4
       - name: Vollständige Sprachen und identische Quellen/Beitrags-ID prüfen
         run: node scripts/check-frauen-entry-locales.cjs
+
+  release-home-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: 16er-Fokus, globale Profile, Quellen- und Zeitfenster-Gates
+        run: node scripts/test-frauen-batch16-neufokus.cjs
+      - name: Chromium installieren
+        run: |
+          npm install --no-save --ignore-scripts playwright
+          npx playwright install --with-deps chromium
+      - name: 16er-Einzelartikellinks, neun Sprachen, vier Geräteklassen
+        run: node scripts/test-frauen-batch16-neufokus-browser.cjs
