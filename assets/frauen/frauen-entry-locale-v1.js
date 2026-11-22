@@ -84,6 +84,39 @@
       });
     }
   });
+  var FULL_READER_LABELS={
+    de:"Vollständige Leseansicht · Aussage, Erklärung und Quelle",
+    ar:"قراءة المقال كاملًا · الرواية والشرح والمصدر",
+    en:"Full article · report, explanation and source",
+    tr:"Yazının tamamı · rivayet, açıklama ve kaynak",
+    ku:"Nivîsa tevahî · rivayet, ravekirin û çavkanî",
+    ckb:"خوێندنەوەی تەواو · ڕیوایەت و ڕوونکردنەوە و سەرچاوە",
+    bs:"Cijeli članak · predaja, objašnjenje i izvor",
+    fr:"Lire l’article complet · récit, explication et source",
+    es:"Leer artículo completo · relato, explicación y fuente"
+  };
+  function attachFullReader(article,item){
+    var area=article.querySelector(".post-reader-main");
+    if(!area||!d.createElement)return;
+    var link=area.querySelector("[data-dar-nonq-reader-cta]");
+    if(!link){
+      link=d.createElement("a");link.className="dar-frauen-learning-cta";
+      link.setAttribute("data-dar-nonq-reader-cta","");
+      var original=area.querySelector("[data-dar-frauen-learning-cta]");
+      if(original&&original.insertAdjacentElement)original.insertAdjacentElement("beforebegin",link);
+      else {
+        var source=area.querySelector(".post-source-module");
+        if(source&&source.insertAdjacentElement)source.insertAdjacentElement("afterend",link);
+        else area.appendChild(link);
+      }
+    }
+    var url="/wissen/beitrag/?id="+encodeURIComponent(item.entry.id)+"&lang="+encodeURIComponent(item.code);
+    link.href=url;
+    link.lang=item.code;
+    link.dir=(item.code==="ar"||item.code==="ckb")?"rtl":"ltr";
+    link.textContent=FULL_READER_LABELS[item.code];
+    link.setAttribute("aria-label",link.textContent);
+  }
   var LEARN_LABELS={
     de:"Lernbereich öffnen · 4 Verständnisfragen",
     ar:"فتح قسم التعلّم · أربعة أسئلة للفهم",
@@ -175,6 +208,7 @@
       text(explanation,".post-fazit-body",p.sharh);
     }
     attachLearningButton(article,item);
+    attachFullReader(article,item);
   }
   function applyOneCard(card,item) {
     var p=item.pack,lab=p.labels||{},code=item.code;
