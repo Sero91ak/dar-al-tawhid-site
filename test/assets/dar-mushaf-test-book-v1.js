@@ -10,6 +10,7 @@
   var meta = [], chapter = null, leafs = [], spread = 0, surahNo = 1, mode = "ar", loadingToken = 0, turning = false, observer, ready = false;
   var lastFocused = null, previousOverflow = "", referenceAyah = 1;
   var STORE = "darMushafTestBookPrefsV1";
+  var lastViewCount = window.matchMedia && window.matchMedia("(max-width:740px)").matches ? 1 : 2;
   var DICT = {
     de: ["Muṣḥaf", "Buchansicht", "Muṣḥaf öffnen", "Buch schließen", "Sūrah", "Arabisch", "Mit Lautschrift", "Mit Deutsch", "Taǧwīd · folgt", "Zurückblättern", "Weiterblättern", "Vorschauseite", "Qurʾān wird geladen …", "Qurʾān-Daten konnten nicht geladen werden.", "Testoberfläche · originale Versdaten · vorläufige Seiteneinteilung"],
     en: ["Muṣḥaf", "Book view", "Open Muṣḥaf", "Close book", "Surah", "Arabic", "With transliteration", "With German", "Tajwīd · coming", "Previous page", "Next page", "Preview page", "Loading Qurʾān …", "Unable to load Qurʾān data.", "Test surface · original verse data · provisional pagination"]
@@ -217,7 +218,12 @@
     var app=byId("appView");if(app)observer.observe(app,{childList:true,subtree:true});
     window.addEventListener("hashchange",schedule);
     window.addEventListener("pageshow",schedule);
-    window.addEventListener("resize",function(){if(root&&!root.hidden&&chapter){var first=leafs[spread*perView()]&&leafs[spread*perView()][0];if(first)goToAyah(first.id);}}, {passive:true});
+    window.addEventListener("resize",function(){
+      var current=perView();if(current===lastViewCount)return;
+      var first=leafs[spread*lastViewCount]&&leafs[spread*lastViewCount][0];
+      lastViewCount=current;
+      if(root&&!root.hidden&&chapter&&first)goToAyah(first.id);
+    },{passive:true});
   }
   window.DarMushafTestBook={open:openBook,close:closeBook};
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
