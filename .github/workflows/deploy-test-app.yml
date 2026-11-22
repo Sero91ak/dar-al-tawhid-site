@@ -146,6 +146,7 @@ jobs:
           INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
         run: |
           node --check cloudflare/test-app-worker.js
+          node test/tools/dar-fold-workspace-v2-guard.cjs
           node scripts/test-app-health-check.js
           node scripts/library-deploy-guard.js
           node scripts/app-stability-guard.js

@@ -11,6 +11,12 @@ const js=read("test/assets/dar-fold-workspace-v2.js");
 const css=read("test/assets/dar-fold-workspace-v2.css");
 const worker=read("cloudflare/test-app-worker.js");
 const offline=read("test/service-worker.js");
+const build=JSON.parse(read("test/version.json"));
+assert.equal(build.buildId,build.appBuildId,"Test build IDs must agree");
+const cacheNumber=String(build.buildId||"").match(/^app-shell-v(\d+)$/);
+assert.ok(cacheNumber,"canonical test version format");
+assert.ok(offline.includes("const CACHE_VERSION = 'dar-al-tawhid-offline-light-v"+cacheNumber[1]+"'"),"canonical Test build must equal offline cache epoch");
+
 new vm.Script(js,{filename:"dar-fold-workspace-v2.js"});
 assert.match(js,/darFoldPane/);
 assert.match(js,/dar-fold-v2-route/);
