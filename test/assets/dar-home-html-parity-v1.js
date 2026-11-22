@@ -8,6 +8,17 @@
 if(!/^\/test(?:\/|$)/.test(location.pathname)||/^\/test\/kids(?:\/|$)/.test(location.pathname))return;
 if(window.__darHomeHtmlParityV1)return;
 window.__darHomeHtmlParityV1=true;
+// GLOBAL_FRAUEN_NEUFOKUS_TEST_BOOT_V1:
+// The real public /test/ HTML is not guaranteed to receive the visitor router
+// script injection. Mount the SAME shared adult News/Focus runtime directly
+// from the Test home controller, without cloning its text or resetting 48h.
+(function loadCanonicalAdultFocus(){
+ if(document.getElementById("darFrauenNeufokusV1")||document.querySelector('script[src*="/assets/frauen/frauen-neufokus-v1.js"]'))return;
+ var js=document.createElement("script");
+ js.id="darFrauenNeufokusV1";js.async=false;
+ js.src="/assets/frauen/frauen-neufokus-v1.js?v=20261122-global-test-bootstrap-v6";
+ (document.head||document.documentElement).appendChild(js);
+})();
 var ID="darHomeHtmlParityV1", pending=false, lastItems="", inputTimer=null, clock=0;
 /* DAR TEST HOME SHORTCUTS V60: no duplicate appearance/settings tiles.
  * The fixed header owns appearance; Einstellungen remains in Mehr. */
