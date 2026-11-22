@@ -136,7 +136,7 @@
     scope.querySelectorAll("img[data-mushaf-page]").forEach(img=>{
       img.addEventListener("error",function(){
         if(this.dataset.source==="webp"){this.dataset.source="png";this.src=fallbackSrc(Number(this.dataset.mushafPage));}
-        else{this.classList.add("damx-image-error");this.alt="Muṣḥaf-Seite konnte nicht geladen werden";}
+        else{this.classList.add("damx-image-error");this.alt="Muṣḥaf-Seite konnte nicht geladen werden";setStatus(w()[15]);showUI();}
       },{once:false});
     });
   }
