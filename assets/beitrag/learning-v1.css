@@ -1,0 +1,17 @@
+
+/* DĀR AL TAWḤĪD · reusable Q-free knowledge self-check in nine languages */
+.dar-study-card{padding:clamp(19px,4vw,30px);border:1px solid var(--r-line);border-radius:22px;background:var(--r-card);box-shadow:0 13px 31px rgba(0,0,0,.08)}
+.dar-study-intro{margin:0 0 18px;color:var(--r-muted);font-size:14px}
+.dar-study-step{margin:0 0 11px;color:var(--r-gold);font-size:12px;font-weight:800;letter-spacing:.06em}
+.dar-study-progress{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:20px}
+.dar-study-progress span{height:5px;border-radius:100px;background:var(--r-line)}
+.dar-study-progress span.active{background:var(--r-gold)}
+.dar-study-question{font:700 clamp(20px,4vw,28px)/1.45 Georgia,serif;margin:0 0 18px;color:var(--r-ink)}
+.dar-study-show,.dar-study-next{appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:49px;padding:12px 18px;border:1px solid var(--r-line);border-radius:13px;background:var(--r-card2);color:var(--r-gold);font-size:15px;font-weight:760;cursor:pointer;touch-action:manipulation}
+.dar-study-answer{margin-top:18px;padding:20px;border:1px solid var(--r-line);border-radius:16px;background:var(--r-card2)}
+.dar-study-answer h3{margin:0 0 10px;color:var(--r-gold);font-size:14px}
+.dar-study-answer p{margin:0;font-size:clamp(16px,3.4vw,19px);line-height:1.8;white-space:pre-line;overflow-wrap:anywhere}
+.dar-study-next{margin-top:18px;background:linear-gradient(120deg,#d4b16f,#efd69e);color:#223629}
+.dar-study-controls{display:flex;gap:11px;flex-wrap:wrap;margin-top:21px}
+.dar-study-controls a{display:inline-flex;padding:10px 15px;min-height:45px;align-items:center;border:1px solid var(--r-line);border-radius:13px;text-decoration:none;color:var(--r-gold);font-size:13px;font-weight:720}
+.dar-study-show:focus-visible,.dar-study-next:focus-visible,.dar-study-controls a:focus-visible{outline:3px solid var(--r-gold);outline-offset:3px}
