@@ -65,10 +65,12 @@
     sourceNavPending=false;
     var restoreFocusIndex=sourceOpenedFromIndex&&returnToPreviousIndex===true;
     sourceOpenedFromIndex=false;
-    if(restoreFocusIndex)try{window.DARFrauenNeufokusV1?.openIndex()}catch(_){}
+    // Restore the focus index only after the browser has processed Back; the
+    // focus module's popstate listener must not immediately close it again.
     if(!fromHistory&&pushed&&window.history&&window.history.state&&window.history.state.__darInternalSourceV3){
+      if(restoreFocusIndex)window.addEventListener("popstate",function(){setTimeout(function(){try{window.DARFrauenNeufokusV1?.openIndex()}catch(_){}},0)},{once:true});
       window.history.back();
-    }
+    }else if(restoreFocusIndex)setTimeout(function(){try{window.DARFrauenNeufokusV1?.openIndex()}catch(_){}},0);
   }
   // Reuse the checked iframe DOM when returning from its internal learning view.
   function bindSourceFrame(frame){
