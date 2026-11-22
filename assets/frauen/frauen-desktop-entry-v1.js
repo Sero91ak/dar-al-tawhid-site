@@ -90,8 +90,18 @@ function show(out,row,entry,pack,code){
  out.setAttribute("aria-busy","false");
 }
 function render(){
- var next=route(),out=d.getElementById("womenReal");
- if(!next||!out)return;
+ var next=route();
+ if(!next)return;
+ var out=d.getElementById("womenReal")||d.getElementById("darFrauenDesktopArticleMount");
+ if(!out){
+  // The current public V8 route renders #pageRoot without the legacy
+  // #womenReal subcontainer. Create a dedicated reader within the existing
+  // V8 page rather than failing silently on every direct article URL.
+  var page=d.getElementById("pageRoot");
+  if(!page)return;
+  out=d.createElement("section");out.id="darFrauenDesktopArticleMount";
+  page.replaceChildren(out);
+ }
  var code=locale(),ready=out.firstElementChild;
  if(ready&&ready.dataset?.darFrauenReleaseArticle===next.id&&ready.lang===code)return;
  if(out.dataset.darFrauenEntryLoading===next.id+"|"+code)return;
@@ -103,11 +113,11 @@ function render(){
   var doc=await get("/"+row.sourceFile);
   var matches=(doc.eintraege||[]).filter(x=>x.kennung===row.id);
   if(matches.length!==1||matches[0].quellenstatus!=="geprueft"||matches[0].freigabeDurchSerhat!==true)throw Error("Source not approved");
-  var live=route(),mounted=d.getElementById("womenReal");
+  var live=route(),mounted=d.getElementById("womenReal")||d.getElementById("darFrauenDesktopArticleMount");
   if(!live||live.id!==row.id||live.area!==row.area||mounted!==out)return;
   show(out,row,entry,pack,code);
  }).catch(function(){
-  if(route()?.id===next.id&&d.getElementById("womenReal")===out)
+  if(route()?.id===next.id&&(d.getElementById("womenReal")===out||d.getElementById("darFrauenDesktopArticleMount")===out))
    out.replaceChildren(el("p","dar-frauen-desktop-error","Der Beitrag kann momentan nicht geladen werden."));
  }).finally(function(){delete out.dataset.darFrauenEntryLoading});
 }
