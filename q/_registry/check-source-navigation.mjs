@@ -14,16 +14,18 @@ assert.match(source,/DAR_INTERNAL_READER_V3/);
 assert.doesNotMatch(source,/location\.assign\(target\)/);
 assert.doesNotMatch(source,/location\.reload\(\)/);
 class Element{
-  constructor(tag='div'){this.tagName=tag;this.children=[];this.attrs={};this.hidden=false;this.style={overflow:'',removeProperty(n){delete this[n];}};this.handlers={};this.textContent='';this.srcdoc='';this.parentNode=null;}
+  constructor(tag='div'){this.tagName=tag;this.children=[];this.attrs={};this.hidden=false;this.style={overflow:'',removeProperty(n){delete this[n];}};this.handlers={};this.textContent='';this.srcdoc='';this.parentNode=null;this.isConnected=false;
+    this.classList={add(){},remove(){}};}
   setAttribute(k,v){this.attrs[k]=v}
   getAttribute(k){return this.attrs[k]??null}
   removeAttribute(k){delete this.attrs[k]}
-  appendChild(c){this.children.push(c);c.parentNode=this;return c}
+  appendChild(c){this.children.push(c);c.parentNode=this;c.isConnected=true;return c}
   append(...children){for(const child of children)this.appendChild(child)}
-  removeChild(c){this.children=this.children.filter(x=>x!==c)}
+  removeChild(c){this.children=this.children.filter(x=>x!==c);c.isConnected=false;c.parentNode=null}
   remove(){if(this.parentNode)this.parentNode.removeChild(this)}
   addEventListener(n,fn){(this.handlers[n]??=[]).push(fn)}
   querySelector(s){if(s==='.dar-source-label')return this.deep(x=>x.className==='dar-source-label');return null}
+  querySelectorAll(s){if(s!=='iframe')return [];const found=[];function visit(n){for(const c of n.children){if(c.tagName==='iframe')found.push(c);visit(c)}}visit(this);return found}
   deep(p){for(let x of this.children){if(p(x))return x;let r=x.deep?.(p);if(r)return r;}return null;}
   closest(){return null}
 }
@@ -155,19 +157,21 @@ let nested=await simulate("/q/45/",twoPages);
 let inFrame=await frameClick(nested,"/lernen/ikhlas/");
 assert.equal(inFrame.defaultPrevented,true,"Learning stays inside app reader");
 assert.equal(nested.fetches.length,2,"Only source and learning fetched");
-assert.ok(nested.frame.srcdoc.includes("Lernfragen"));
+const nestedQuiz=nested.panel.querySelectorAll('iframe').find(f=>f.id==='darInternalSourceFrameV3');
+assert.ok(nestedQuiz.srcdoc.includes("Lernfragen"),'New learning iframe opens without destroying article DOM');
 assert.equal(nested.historyStates.length,1,"One app reader history marker");
 nested.panel.children[0].children[0].children[0].handlers.click[0]();
-assert.ok(nested.frame.srcdoc.includes("qsource-body"),"Reader Back restores Q");
+assert.equal(nested.frame.id,'darInternalSourceFrameV3','Reader Back restores existing Q frame');
+assert.ok(nested.frame.srcdoc.includes("qsource-body"),"Reader Back restores Q without reloading srcdoc");
 assert.equal(nested.panel.hidden,false,"Reader remains mounted");
-nested.frame.handlers.load[0]();
-assert.equal(nested.frame.contentWindow.restored,186,"Source scroll restored");
+assert.equal(nested.frame.contentWindow.restored,186,"Source scroll restored without load event");
 nested.panel.children[0].children[0].children[0].handlers.click[0]();
 assert.equal(nested.panel.hidden,true,"Second Back restores unchanged app/post");
 assert.equal(nested.getBackCount(),1,"History marker cleaned");
 let hardware=await simulate("/q/45/",twoPages);
 await frameClick(hardware,"/lernen/ikhlas/");
 hardware.win.history.back();
+assert.equal(hardware.frame.id,"darInternalSourceFrameV3","System Back restores original Q DOM");
 assert.ok(hardware.frame.srcdoc.includes("qsource-body"),"System Back from lesson restores Q");
 assert.equal(hardware.panel.hidden,false);
 hardware.win.history.back();
