@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-11-22T16:28:21Z",
+  "timestamp": "2026-11-22T16:29:21Z",
   "trigger": "workflow_run",
-  "finishedDeployConclusion": "failure",
-  "finishedDeployRun": "45043827052",
+  "finishedDeployConclusion": "cancelled",
+  "finishedDeployRun": "45043993037",
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
@@ -90,12 +90,21 @@
   "lastDeployRuns": [
     {
       "conclusion": null,
+      "created_at": "2026-11-22T16:29:06Z",
+      "head_sha": "f5b7af0b64b7b29574d5b8bc8516f4b84e40f0aa",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45044084920",
+      "id": 45044084920,
+      "status": "pending",
+      "updated_at": "2026-11-22T16:29:07Z"
+    },
+    {
+      "conclusion": "cancelled",
       "created_at": "2026-11-22T16:28:03Z",
       "head_sha": "9dc2f0cc660760f2738bbfdddb4970b38a7cc675",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45043993037",
       "id": 45043993037,
-      "status": "pending",
-      "updated_at": "2026-11-22T16:28:04Z"
+      "status": "completed",
+      "updated_at": "2026-11-22T16:29:07Z"
     },
     {
       "conclusion": null,
@@ -104,7 +113,7 @@
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45043969244",
       "id": 45043969244,
       "status": "in_progress",
-      "updated_at": "2026-11-22T16:28:03Z"
+      "updated_at": "2026-11-22T16:28:36Z"
     },
     {
       "conclusion": "cancelled",
@@ -132,15 +141,6 @@
       "id": 45043827052,
       "status": "completed",
       "updated_at": "2026-11-22T16:28:01Z"
-    },
-    {
-      "conclusion": "success",
-      "created_at": "2026-11-22T16:07:37Z",
-      "head_sha": "4cd69c4a350c8c1b951ce71abd8bb763e062e539",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45042064472",
-      "id": 45042064472,
-      "status": "completed",
-      "updated_at": "2026-11-22T16:10:23Z"
     }
   ]
 }
