@@ -1664,6 +1664,12 @@ export default {
       if (assetResponse.ok) html = injectAdultReaderRuntimeV5(html);
       if (assetResponse.ok) html = injectFrauenCompactEditorialV1417(html);
       if (assetResponse.ok) html = injectAdultKeyboardNavAssetVersionV1(html);
+      // Installed Android PWA must have the same canonical Frauen reader as
+      // native iOS/Android; focus links are not valid without its adapter.
+      if (assetResponse.ok && !html.includes("frauen-live-adapter.js")) {
+        const frauenAddon = liveFrauenNativeAddon();
+        html = html.includes("</body>") ? html.replace("</body>", frauenAddon + "</body>") : html + frauenAddon;
+      }
       if (assetResponse.ok && !html.includes("dar-onesignal-language-sync.js")) {
         const localeTag = '<script defer id="darAdultOneSignalLocaleV1" src="/assets/dar-onesignal-language-sync.js?v=1"></script>';
         html = html.includes("</body>") ? html.replace("</body>", localeTag + "</body>") : html + localeTag;
