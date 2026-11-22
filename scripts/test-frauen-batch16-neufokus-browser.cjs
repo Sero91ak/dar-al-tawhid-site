@@ -165,7 +165,7 @@ function snapshot(isPublic,locale) {
    const u=new URL(route.request().url()),p=u.pathname,key=u.searchParams.get("page")||"start";
    if(p==="/"){
     const body=key==="frauen"
-     ?'<main id="pageRoot"><section class="page-intro">Frauen im Islam</section><section id="womenReal">Frauenbereich wird geladen…</section></main>'
+     ?'<main id="pageRoot"><section class="page-intro">Frauen im Islam</section><section class="v8-women-layout">Aktuelle V8-Frauenrubrik ohne alten womenReal-Container</section></main>'
      :'<main id="pageRoot"><section class="page-intro">DĀR AL TAWḤĪD Startseite</section><section>Wissensgrundlagen</section></main>';
     return route.fulfill({status:200,contentType:"text/html",body:'<!doctype html><html lang="de"><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body class="dar-v8-home" data-dar-v8-route="'+key+'">'+body+'<script defer src="/assets/frauen/frauen-neufokus-v1.js"></script><script defer src="/assets/frauen/frauen-desktop-entry-v1.js"></script></body></html>'});
    }
@@ -195,6 +195,7 @@ function snapshot(isPublic,locale) {
   assert.equal(await modal.locator("a.dar-frauen-index-link").first().getAttribute("href"),firstUrl,websiteViewport.name+" desktop link did not use real website router");
   await modal.locator("a.dar-frauen-index-link").first().click();
   await page.locator(".dar-frauen-desktop-entry").waitFor({timeout:10000});
+  assert.equal(await page.locator("#darFrauenDesktopArticleMount").count(),1,websiteViewport.name+" V8 fallback reader did not mount");
   assert.equal(await page.locator(".dar-frauen-desktop-entry").getAttribute("data-dar-frauen-release-article"),first.id);
   assert.ok((await page.locator(".dar-frauen-desktop-entry").innerText()).includes(localeCatalog.entries[first.id].locales.de.statement));
   assert.equal(await page.locator(".dar-frauen-desktop-source a").getAttribute("href"),first.sourceUrl);
