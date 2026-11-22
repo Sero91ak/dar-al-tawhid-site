@@ -286,7 +286,7 @@
     },
     "messageReview": "editorial drafts; native-language validation required before any send",
     "guardStatus": "not-authorized-not-sent",
-    "redirectMustOpen": "Global push opens the adult home. The 48h NEUFOKUS announcement must be visible to all opted-in adult visitor profiles: woman, man and neutral. Other profile-specific women recommendations remain unchanged. The global focus card navigates to #frauen.",
+    "redirectMustOpen": "The one global opted-in adult post push opens the adult homepage. Its 48h NEUFOKUS is visible to woman, man and neutral profiles; tapping the card opens the dedicated nine-language 16-entry in-app index. Each entry routes directly to #frauen/{area}/{canonical-id}, not to a generic category or an unrelated article. All other profile-personalized recommendations remain unchanged.",
     "providerIdempotencyUuid": "d1c40b28-2bd3-43fd-a14b-708df7d5d976",
     "providerIdempotencyPolicy": "Immutable UUIDv4 idempotency_key for one global opted-in adult post-push announcement. Send only after all 16 records are live and fully approved; do not target Kids or unsubscribe states.",
     "deliveryLanguageVerification": {
