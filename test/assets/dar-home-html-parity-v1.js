@@ -16,7 +16,7 @@ window.__darHomeHtmlParityV1=true;
  if(document.getElementById("darFrauenNeufokusV1")||document.querySelector('script[src*="/assets/frauen/frauen-neufokus-v1.js"]'))return;
  var js=document.createElement("script");
  js.id="darFrauenNeufokusV1";js.async=false;
- js.src="/assets/frauen/frauen-neufokus-v1.js?v=20261122-global-test-bootstrap-v6";
+ js.src="/assets/frauen/frauen-neufokus-v1.js?v=20261122-nonq-seamless-v8";
  (document.head||document.documentElement).appendChild(js);
 })();
 var ID="darHomeHtmlParityV1", pending=false, lastItems="", inputTimer=null, clock=0;
