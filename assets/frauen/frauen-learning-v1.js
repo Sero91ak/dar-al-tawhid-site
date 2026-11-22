@@ -67,7 +67,7 @@ function clear(){q.replaceChildren()}
 function message(msg){clear();q.append(elem("p","fw-message",msg))}
 function safeJson(response){if(!response.ok)throw Error("HTTP "+response.status);return response.json()}
 var entryIds,entries,entry,sourceUrl,sourceStatus,stage=0,correct=0,answered=false,items=[];
-function bottomLink(){var a=elem("a","fw-link",lab.back);a.href="/wissen/beitrag/?id="+encodeURIComponent(id)+"&lang="+encodeURIComponent(code);a.target="_top";return a}
+function bottomLink(){var a=elem("a","fw-link",lab.back);var surface=url.searchParams.get("from");a.href="/wissen/beitrag/?id="+encodeURIComponent(id)+"&lang="+encodeURIComponent(code)+(surface==="test"||surface==="pwa"?"&from="+surface:"");a.target="_top";return a}
 var READ_LABELS={
  de:"Die vollständige Aussage erneut lesen",ar:"إعادة قراءة النص الكامل",en:"Read the complete statement again",
  tr:"Tam açıklamayı yeniden oku",ku:"Gotina tevahî dîsa bixwîne",ckb:"دووبارە خوێندنەوەی دەقی تەواو",
