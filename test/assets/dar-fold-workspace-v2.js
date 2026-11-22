@@ -33,7 +33,8 @@
   }
   if (disabled || !/^\/test(?:\/|$)/.test(win.location.pathname)) return;
 
-  var nav, pane, topbar, source, sourceHost, sourceSibling, list, filter, contextTitle, menu, menuToggle, contextPanel, railTitle, railSubtitle, countEl, active = false, raf = 0;
+  var nav, pane, topbar, source, sourceHost, sourceSibling, list, filter, contextTitle, menu, menuToggle, contextPanel, railTitle, railSubtitle, railArtwork, countEl, active = false, raf = 0;
+  var compactRail = false, savedReaderTop = 0, savedReaderHash = "";
   var lastItems = "", lastContextEls = [], lastHash = "", lastWidth = 0, lastHeight = 0, resizeObserver, sourceObserver;
   var scrollByCategory = Object.create(null);
   var optionCache = Object.create(null);
@@ -47,9 +48,13 @@
     return {width:w,height:h};
   }
   function capacity(w,h) {
+    // Physical available space decides: a narrow phone never loses its reader.
+    // Short-edge landscape uses an icon-only rail; large Fold/tablet gets context.
+    if(w>=720 && h>=355 && h<470 && w-80>=540)
+      return {rail:80,pane:w-80,dual:true,compact:true};
     var rail = Math.min(274,Math.max(194,Math.round(w*.255)));
     var pane = Math.max(0,w-rail);
-    return {rail:rail,pane:pane,dual:w>=640 && h>=470 && pane>=390};
+    return {rail:rail,pane:pane,dual:w>=640 && h>=470 && pane>=390,compact:false};
   }
   function category(hash) {
     hash=String(hash||"#home").toLowerCase();
@@ -85,9 +90,23 @@
     down:'<path d="m6 9 6 6 6-6"/>',
     back:'<path d="m15 18-6-6 6-6"/>'
   };
+  var ICON_3D = {
+    home:"home", quran:"quran", hadith:"hadith", bibliothek:"library",
+    themen:"topics", dua:"dua", more:"more"
+  };
   function pictogram(name){
     var span=make("span","dar-fold-v2-icon");
     span.setAttribute("aria-hidden","true");
+    if(ICON_3D[name]) {
+      var art=doc.createElement("img");
+      art.className="dar-fold-v2-icon-3d";
+      art.src="/test/assets/dar-3d-icons/"+ICON_3D[name]+".png";
+      art.alt="";
+      art.decoding="async";
+      art.loading="lazy";
+      span.appendChild(art);
+      return span;
+    }
     var svg=doc.createElementNS("http://www.w3.org/2000/svg","svg");
     svg.setAttribute("viewBox","0 0 24 24");
     svg.setAttribute("fill","none");svg.setAttribute("stroke","currentColor");
@@ -97,7 +116,7 @@
     span.appendChild(svg);return span;
   }
   function setMenu(open){
-    menuOpen=!!open;
+    menuOpen=!!open || compactRail;
     if(!menu || !menuToggle || !contextPanel)return;
     menu.hidden=!menuOpen;
     contextPanel.hidden=menuOpen;
@@ -126,7 +145,12 @@
     intro.appendChild(make("div","dar-fold-v2-eyebrow","DEINE BIBLIOTHEK"));
     railTitle=make("h2","dar-fold-v2-title","Qurʾān");
     railSubtitle=make("p","dar-fold-v2-subtitle","Suren und Verse");
-    intro.append(railTitle,railSubtitle);
+    railArtwork=doc.createElement("img");
+    railArtwork.className="dar-fold-v2-heading-3d";
+    railArtwork.alt="";
+    railArtwork.src="/test/assets/dar-3d-icons/home.png";
+    railArtwork.decoding="async";
+    intro.append(railArtwork,railTitle,railSubtitle);
     nav.appendChild(intro);
     menuToggle=make("button","dar-fold-v2-switch");
     menuToggle.type="button";menuToggle.setAttribute("aria-controls","darFoldV2Menu");
@@ -140,9 +164,11 @@
     CATEGORIES.forEach(function(entry){
       var button=make("button","dar-fold-v2-menu-row");button.type="button";
       button.dataset.foldCategory=entry[0];
+      button.setAttribute("aria-label",entry[2]);
       button.append(pictogram(entry[0]),make("span","dar-fold-v2-menu-copy",entry[2]),pictogram("chevron"));
       button.addEventListener("click",function(){
-        setMenu(false);menuToggle.focus();
+        setMenu(false);
+        if(!compactRail)menuToggle.focus();
         if(selectedCategory!==entry[0]&&list)scrollByCategory[selectedCategory]=list.scrollTop;
         if(win.location.hash!==entry[1])win.location.hash=entry[1];else onRoute(true);
       });
@@ -299,6 +325,7 @@
     }
     if(railTitle)railTitle.textContent=CATEGORIES.find(function(x){return x[0]===cat;})?.[2]||"Bibliothek";
     if(railSubtitle)railSubtitle.textContent=AREA_HINT[cat]||"Entdecken und lesen";
+    if(railArtwork)railArtwork.src="/test/assets/dar-3d-icons/"+(ICON_3D[cat]||"ilm")+".png";
     if(contextTitle)contextTitle.textContent=cat==="quran"?"SUREN & VERSE":"IN DIESEM BEREICH";
     if(menu)menu.querySelectorAll("[data-fold-category]").forEach(function(b){
       var current=b.dataset.foldCategory===cat;
@@ -312,19 +339,28 @@
     var m=viewport(),c=capacity(m.width,m.height);
     if(!c.dual){
       if(active){
+        if(pane){savedReaderTop=pane.scrollTop; savedReaderHash=win.location.hash||"#home";}
         restoreContent();
         active=false;root.classList.remove("dar-fold-v2-active");
         if(nav)nav.hidden=true;if(pane)pane.hidden=true;if(topbar)topbar.hidden=true;
       }
       return false;
     }
+    var wasCompact=compactRail;
+    compactRail=!!c.compact;
     createShell();
     if(!moveContentRight())return false;
     root.style.setProperty("--dar-fold-v2-rail",c.rail+"px");
+    nav.dataset.railVariant=compactRail?"compact":"full";
+    if(compactRail) setMenu(true);
+    else if(wasCompact) setMenu(false);
     if(!active){
       active=true;root.classList.add("dar-fold-v2-active");
       nav.hidden=false;pane.hidden=false;topbar.hidden=false;
       lastHash="";lastItems="";onRoute(true);
+      // Preserve the open reader when folding and unfolding on the same route.
+      if(savedReaderHash===(win.location.hash||"#home"))pane.scrollTop=savedReaderTop;
+      savedReaderHash="";
     } else if(lastWidth!==m.width || lastHeight!==m.height) {
       scheduleContext();
     }
