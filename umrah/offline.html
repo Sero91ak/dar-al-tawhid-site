@@ -870,7 +870,7 @@ function installUmrahZoomLock(){
  document.addEventListener('touchend',e=>{
    if(e.changedTouches.length!==1||e.touches.length!==0){lastTap=0;return}
    const target=e.target instanceof Element?e.target:null;
-   if(!target||target.closest('input,textarea,select,[contenteditable="true"],iframe')){lastTap=0;return}
+   if(!target||target.closest('input,textarea,select,button,a,summary,label,[role="button"],[contenteditable="true"],iframe')){lastTap=0;return}
    const now=e.timeStamp;
    if(lastTap&&now-lastTap<280){preventZoom(e);lastTap=0}
    else lastTap=now;
