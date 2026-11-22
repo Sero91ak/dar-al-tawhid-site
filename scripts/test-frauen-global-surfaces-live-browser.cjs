@@ -101,7 +101,24 @@ async function diagnose(page) {
    await items.first().click();
    await page.waitForFunction(expected=>location.hash===expected,target,{timeout:15000});
    const reader=page.locator(".dar-frauen-production-root");
-   await reader.waitFor({timeout:16000});
+   try{await reader.waitFor({timeout:12000})}catch(error){
+    const more=await page.evaluate(()=>({
+      href:location.href,route:document.body.className,
+      appPath:document.documentElement.dataset.appPath,
+      appView:!!document.getElementById("appView"),
+      appStyle:document.getElementById("appView")?getComputedStyle(document.getElementById("appView")).display:"",
+      currentHash:location.hash,
+      root:!!document.querySelector(".dar-frauen-production-root"),
+      fraFiqhRuntime:!!window.DARFrauenFiqh,
+      fraFiqhRender:typeof window.DARFrauenFiqh?.render,
+      frauenAdapter:!!window.DARFrauenLiveAdapter,
+      expectedScript:!!document.querySelector('script[src*="frauen-live-adapter.js"]'),
+      content:document.getElementById("appView")?.innerText?.slice(0,470),
+      nativeRoute:typeof window.readRoute==="function"?window.readRoute():null
+    })).catch(e=>({error:String(e)}));
+    console.error("GLOBAL FRAUEN READER DIAGNOSTICS "+spec.name+" "+JSON.stringify(more));
+    throw error;
+   }
    try{
     await page.waitForFunction(()=>{const e=document.querySelector(".dar-frauen-production-root");return e&&e.innerText.trim().length>150},{timeout:15000});
    }catch(_){}
