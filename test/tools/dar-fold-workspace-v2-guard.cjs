@@ -10,6 +10,7 @@ const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const js=read("test/assets/dar-fold-workspace-v2.js");
 const css=read("test/assets/dar-fold-workspace-v2.css");
 const worker=read("cloudflare/test-app-worker.js");
+const offline=read("test/service-worker.js");
 new vm.Script(js,{filename:"dar-fold-workspace-v2.js"});
 assert.match(js,/darFoldPane/);
 assert.match(js,/dar-fold-v2-route/);
@@ -41,6 +42,17 @@ assert.match(css,/\.dar-fold-v2-reader/);
 assert.match(css,/overflow-y:auto!important/);
 assert.match(css,/width:calc\(100% - var\(--dar-fold-v2-rail\)\)/);
 assert.match(worker,/DAR_TEST_PREMIUM_LANDSCAPE_SINGLE_OWNER_20261122/);
+assert.match(worker,/darTestFoldWorkspaceV2Css/);
+assert.match(worker,/darTestFoldWorkspaceV2Js/);
+assert.match(worker,/premium-single-owner-20261122/);
+assert.match(worker,/fold-thumb-nav/); // legacy ref removal is explicitly retained
+assert.match(js,/dar-duo-side-active/);
+assert.match(offline,/offline-light-v1373/);
+assert.match(offline,/dar-fold-workspace-v2\\.js\\?v=20261122-premium-single-owner-v1/);
+assert.match(offline,/dar-fold-workspace-v2\\.css\\?v=20261122-premium-single-owner-v1/);
+assert.doesNotMatch(offline,/['"]\\/test\\/assets\\/fold-thumb-nav\\.js['"]/);
+assert.doesNotMatch(offline,/['"]\\/test\\/assets\\/dar-duo-responsive-v1\\.js['"]/);
+
 assert.match(worker,/dar-fold-workspace-v2\.js\?v=20261122-premium-single-owner-v1/);
 assert.match(worker,/dar-fold-workspace-v2\.css\?v=20261122-premium-single-owner-v1/);
 assert.doesNotMatch(worker,/\/\/ DAR_ADAPTIVE_FOLD_V1326/);
