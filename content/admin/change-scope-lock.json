@@ -155,6 +155,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-reader-nine-language-meanings-20261122",
+      "at": "2026-11-22T10:30:00+01:00",
+      "approvedBy": "user-explicit-20261122-quran-nine-language-selection",
+      "reason": "Eigentümerauftrag 22.11.2026: neun Sprachen im Qurʾān-Leser. Deutsch bleibt Bubenheim/Elyas. Die übrigen Bedeutungsübersetzungen der Ahl as-Sunnah liegen unter content/quran-translations und werden zuerst in Dar Test gewählt. Besucher-index, Push, Kids und Gebetszeiten bleiben außerhalb.",
+      "paths": [
+        "content/quran-translations/",
+        "scripts/import-quran-translation-locales.cjs",
+        "scripts/check-quran-translation-locales.cjs",
+        "test/assets/quran-translation-locales-v1.js",
+        "test/assets/quran-translation-locales-v1.css"
+      ]
+    },
+    {
       "id": "kids-academy-readonly-cloudflare-58-audio-audit-20261120",
       "at": "2026-11-20T08:10:00+01:00",
       "approvedBy": "user-explicit-20261120-complete-kids-academy-safety-and-direct-publishing",

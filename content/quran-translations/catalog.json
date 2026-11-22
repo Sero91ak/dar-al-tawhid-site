@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "kind": "quran-meaning-translations",
+  "updated": "2026-11-22",
+  "statement": "Diese Texte sind Übersetzungen der Bedeutungen. Der Qurʾān selbst bleibt der arabische Uthmani-Text in content/quran. Keine Fassung wurde theologisch umgeschrieben.",
+  "locales": [
+    {
+      "id": "de",
+      "name": "Deutsch",
+      "edition": "de.bubenheim",
+      "translator": "Frank Bubenheim und Nadeem Elyas",
+      "direction": "ltr",
+      "script": "Latn",
+      "storage": "content/quran",
+      "sourceUrl": "https://api.alquran.cloud/v1/quran/de.bubenheim",
+      "why": "Die bereits eingebundene sunnitische deutsche Bedeutung bleibt unverändert."
+    },
+    {
+      "id": "ar",
+      "name": "العربية",
+      "edition": "quran-uthmani",
+      "translator": "Arabischer Uthmani-Text",
+      "direction": "rtl",
+      "script": "Arab",
+      "storage": "content/quran",
+      "sourceUrl": "https://tanzil.net",
+      "why": "Arabisch ist der Qurʾān selbst, keine Übersetzung. Die Auswahl blendet nur die Bedeutungszeile aus."
+    },
+    {
+      "id": "en",
+      "name": "English",
+      "edition": "en.sahih",
+      "translator": "Saheeh International",
+      "direction": "ltr",
+      "script": "Latn",
+      "storage": "content/quran-translations/en",
+      "sourceUrl": "https://api.alquran.cloud/v1/quran/en.sahih",
+      "why": "Sunnitische Bedeutung von Saheeh International. Sie sagt Allah, bleibt als Leseübersetzung klar und gibt 20:5 mit „above the Throne established“ wieder. Hilali/Khan bleibt als Kommentarausgabe ungenutzt, weil der Leser bereits eine eigene Tafsir-Fläche hat."
+    },
+    {
+      "id": "tr",
+      "name": "Türkçe",
+      "edition": "tr.vakfi",
+      "translator": "Diyanet Vakfı",
+      "direction": "ltr",
+      "script": "Latn",
+      "storage": "content/quran-translations/tr",
+      "sourceUrl": "https://api.alquran.cloud/v1/quran/tr.vakfi",
+      "why": "Sunnitische Diyanet-Vakfı-Meali. 20:5 bleibt „Arş'a istiva etmiştir“. Die ältere Diyanet-İşleri-Fassung mit „arşa hükmetmektedir“, Elmalılıs „hakim oldu“, Gölpınarlı, Edip Yüksel und Yaşar Nuri Öztürk wurden nicht genommen."
+    },
+    {
+      "id": "ku",
+      "name": "Kurdî",
+      "edition": "kurmanji_ismail",
+      "translator": "Ismail Sageri",
+      "direction": "rtl",
+      "script": "Arab",
+      "storage": "content/quran-translations/ku",
+      "sourceUrl": "https://quranenc.com/api/v1/translation/sura/kurmanji_ismail/1",
+      "why": "Kurmanci-Bedeutung von Ismail Sageri in der arabischen Kurmandschi-Schrift, wie QuranEnc sie ausliefert. 20:5 sagt die Erhebung über den Thron, wie es Ihm gebührt, ohne das Wie. Eine lateinschriftliche Kurmanci-Vollausgabe lag nicht als geprüfte Ahl-as-Sunnah-Fassung vor und wurde nicht selbst erzeugt."
+    },
+    {
+      "id": "ckb",
+      "name": "سۆرانی",
+      "edition": "kurdish_bamoki",
+      "translator": "Muhammad Salih Bamoki",
+      "direction": "rtl",
+      "script": "Arab",
+      "storage": "content/quran-translations/ckb",
+      "sourceUrl": "https://quranenc.com/en/browse/kurdish_bamoki",
+      "why": "Sorani-Bedeutung von Muhammad Salih Bamoki unter Aufsicht des Rowwad-Übersetzungszentrums. 20:5 nennt die Erhebung über den Thron, ohne das Wie. Burhan Muhammad-Amins „Tefsiri Asan“ ist eine erklärende Tafsir-Fassung und nicht die Leseübersetzung."
+    },
+    {
+      "id": "bs",
+      "name": "Bosanski",
+      "edition": "bosnian_rwwad",
+      "translator": "Rowwad Translation Centre",
+      "direction": "ltr",
+      "script": "Latn",
+      "storage": "content/quran-translations/bs",
+      "sourceUrl": "https://quranenc.com/api/v1/translation/sura/bosnian_rwwad/1",
+      "why": "Sunnitische Rowwad-Bedeutung. 20:5 sagt „Koji se iznad Arša uzvisio“. Besim Korkut ersetzt an dieser Stelle den Thron durch „upravlja svemirom“ und wurde deshalb nicht als Leseübersetzung genommen."
+    },
+    {
+      "id": "fr",
+      "name": "Français",
+      "edition": "fr.hamidullah",
+      "translator": "Muhammad Hamidullah",
+      "direction": "ltr",
+      "script": "Latn",
+      "storage": "content/quran-translations/fr",
+      "sourceUrl": "https://api.alquran.cloud/v1/quran/fr.hamidullah",
+      "why": "Die eingeführte sunnitische französische Bedeutung von Muhammad Hamidullah. 20:5 behält Istawa: „S'est établi Istawa sur le Trône“."
+    },
+    {
+      "id": "es",
+      "name": "Español",
+      "edition": "spanish_montada_eu",
+      "translator": "Noor International",
+      "direction": "ltr",
+      "script": "Latn",
+      "storage": "content/quran-translations/es",
+      "sourceUrl": "https://quranenc.com/api/v1/translation/sura/spanish_montada_eu/1",
+      "why": "Europäisches Spanisch von Noor International. Sie sagt Al-lah und gibt 20:5 mit „establecido sobre el Trono“ wieder. Isa García wechselt zu „Dios“, Julio Cortés zu „Alá/Dios“, Muhammad Asad und Bórnez wurden nicht genommen. Fußnotenziffern [n] sind aus der Lesezeile entfernt, der Wortlaut sonst unverändert."
+    }
+  ]
+}
