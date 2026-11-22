@@ -10,7 +10,7 @@
   var meta = [], chapter = null, leafs = [], spread = 0, surahNo = 1, mode = "ar", loadingToken = 0, turning = false, observer, ready = false;
   var lastFocused = null, previousOverflow = "", referenceAyah = 1;
   var STORE = "darMushafTestBookPrefsV1";
-  var lastViewCount = window.matchMedia && window.matchMedia("(max-width:620px)").matches ? 1 : 2;
+  var lastViewCount = window.matchMedia && window.matchMedia("(max-width:540px)").matches ? 1 : 2;
   var display = { arabic:true, latin:false, translation:false }, language = "de", editionId = "de.bubenheim";
   var editionName = "Bubenheim & Elyas", translationVerses = {}, optionsPanel, priorOptionsFocus, optionFromBook = false;
   var editions = null, catalogPromise = null;
@@ -115,7 +115,7 @@
     if(!leafs.length)leafs=[[]];
   }
 
-  function perView() { return window.matchMedia && window.matchMedia("(max-width:620px)").matches ? 1 : 2; }
+  function perView() { return window.matchMedia && window.matchMedia("(max-width:540px)").matches ? 1 : 2; }
   function updateControls() {
     if(!root)return;
     var count=Math.max(1,Math.ceil(leafs.length/perView()));
