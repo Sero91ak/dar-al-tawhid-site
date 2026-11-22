@@ -108,7 +108,7 @@ function getCard(){return registry.get("darFrauenNeufokus48h")||null}
  visitorGender="man";
  assert.equal(expiryTimers.size,1,"Precisely one expiry timer required for the visible focus");
  assert.equal(active.dir,"ltr");assert.equal(active.lang,"tr");
- function subtree(node){return [node,...(node.children||[]).flatMap(subtree)}
+ function subtree(node){return [node,...(node.children||[]).flatMap(subtree)]}
  assert.ok(subtree(active).some(x=>/16 yeni/.test(x.textContent)),"Turkish focus label missing");
  active.onclick();
  const overlay=registry.get("darFrauenNeufokusIndex");
