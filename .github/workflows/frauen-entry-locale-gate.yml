@@ -4,6 +4,8 @@ on:
     paths:
       - 'assets/frauen/frauen-entry-*'
       - 'data/frauen-*.json'
+      - 'test/data/frauen-*.json'
+      - 'scripts/check-frauen-batch16-shared-reader.cjs'
       - 'q/_registry/shortlinks.json'
       - 'cloudflare/site-router.js'
       - 'scripts/check-frauen-entry-locales.cjs'
@@ -19,6 +21,8 @@ on:
     paths:
       - 'assets/frauen/frauen-entry-*'
       - 'data/frauen-*.json'
+      - 'test/data/frauen-*.json'
+      - 'scripts/check-frauen-batch16-shared-reader.cjs'
       - 'q/_registry/shortlinks.json'
       - 'cloudflare/site-router.js'
       - 'assets/frauen/frauen-neufokus-v1.*'
@@ -39,6 +43,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Vollständige Sprachen und identische Quellen/Beitrags-ID prüfen
         run: node scripts/check-frauen-entry-locales.cjs
+      - name: Gemeinsame iOS-Android-Test-App Leser müssen 16 Originalquellen und Texte enthalten
+        run: node scripts/check-frauen-batch16-shared-reader.cjs
 
   release-home-index:
     runs-on: ubuntu-latest
