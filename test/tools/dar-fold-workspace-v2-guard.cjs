@@ -30,6 +30,12 @@ assert.match(css,/dar-fold-v2-menu-row/);
 assert.match(css,/dar-fold-v2-context/);
 assert.match(css,/dar-fold-v2-options/);
 assert.match(js,/darFoldV2/);
+assert.match(js,/ICON_3D/);
+assert.match(js,/dar-3d-icons/);
+assert.match(js,/savedReaderTop/);
+assert.match(js,/dataset\\.railVariant/);
+assert.match(css,/DAR_PREMIUM_FOLD_SIDEBAR_20261122/);
+assert.match(css,/data-rail-variant="compact"/);
 assert.match(css,/\.dar-fold-v2-active/);
 assert.match(css,/\.dar-fold-v2-reader/);
 assert.match(css,/overflow-y:auto!important/);
@@ -46,13 +52,16 @@ const doc={documentElement:rootNode,readyState:"loading",addEventListener(){}};
 const win={document:doc,location:{search:"",pathname:"/test/",hash:"#quran"},innerWidth:726,innerHeight:512,URLSearchParams};
 vm.runInNewContext(js,{window:win,document:doc,URLSearchParams});
 const capacity=win.DARTestFoldV2.capacity;
-for(const [w,h,expected] of [
-  [320,700,false],[390,844,false],[600,960,false],[640,480,true],
-  [726,512,true],[800,700,true],[900,550,true],[915,412,false],
-  [1024,768,true],[1280,850,true]]) {
+for(const [w,h,expected,compact] of [
+  [320,700,false,false],[390,844,false,false],[600,960,false,false],
+  [640,480,true,false],[726,512,true,false],[800,700,true,false],
+  [900,550,true,false],[915,412,true,true],[730,390,true,true],
+  [720,345,false,false],[1024,768,true,false],[1280,850,true,false]]) {
   const c=capacity(w,h);
   assert.equal(c.dual,expected,w+"x"+h+" dual mode mismatch");
-  assert.ok(c.rail>=184&&c.rail<=288,"rail bounds");
+  assert.equal(c.compact,compact,w+"x"+h+" rail mode mismatch");
+  if(compact)assert.equal(c.rail,80,"compact rail must be 80px");
+  else assert.ok(c.rail>=194&&c.rail<=274,"full rail bounds");
   assert.equal(c.rail+c.pane,w,"no lost reader pixels");
   if(c.dual)assert.ok(c.pane>c.rail,"reader must be dominant");
 }
