@@ -1291,7 +1291,7 @@ function injectFrauenCompactEditorialV1417(html) {
 }
 function injectFrauenDesktopEntryV1(html) {
   if(typeof html!=="string"||!html||html.includes('id="darFrauenDesktopEntryV1"'))return html;
-  const tag='<script defer id="darFrauenDesktopEntryV1" src="/assets/frauen/frauen-desktop-entry-v1.js?v=20261122-first-reader"></'+'script>';
+  const tag='<script defer id="darFrauenDesktopEntryV1" src="/assets/frauen/frauen-desktop-entry-v1.js?v=20261122-v8-direct-reader-v2"></'+'script>';
   return html.includes("</body>")?html.replace("</body>",tag+"</body>"):html+tag;
 }
 function injectAdultReaderRuntimeV5(html) {
