@@ -25,7 +25,7 @@ function norm(code){code=String(code||"").toLowerCase().replace(/_/g,"-");if(cod
 var id=String(query().get("id")||""),type=String(query().get("type")||"frauen");
 var code=norm(query().get("lang")||"de"),lab=LABEL[code];
 d.documentElement.lang=code;d.documentElement.dir=code==="ar"||code==="ckb"?"rtl":"ltr";
-function articleUrl(){return "/wissen/beitrag/?id="+encodeURIComponent(id)+"&lang="+code+(type==="frauen"?"":"&type="+encodeURIComponent(type))}
+function articleUrl(){var from=query().get("from");return "/wissen/beitrag/?id="+encodeURIComponent(id)+"&lang="+code+(type==="frauen"?"":"&type="+encodeURIComponent(type))+(from==="test"||from==="pwa"?"&from="+from:"")}
 function message(text){root.replaceChildren(el("p","dar-post-error",text));root.setAttribute("aria-busy","false")}
 async function json(url){var r=await w.fetch(url,{cache:"no-store",credentials:"same-origin"});if(!r.ok)throw Error("HTTP "+r.status);return r.json()}
 function selector(){
