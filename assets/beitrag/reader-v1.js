@@ -28,8 +28,9 @@ function chosen(){var q=params().get("lang");if(q)return norm(q);try{return norm
 function elt(tag,cl,value){var v=d.createElement(tag);if(cl)v.className=cl;if(value!=null)v.textContent=String(value);return v}
 function append(parent){for(var i=1;i<arguments.length;i++)parent.appendChild(arguments[i]);return parent}
 function h(tag,text){return elt(tag,"",text)}
-function pathFor(id,code,type){return "/wissen/beitrag/?id="+encodeURIComponent(id)+"&lang="+encodeURIComponent(code)+(type==="frauen"?"":"&type="+encodeURIComponent(type))}
-function backUrl(type){var native=/DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(navigator.userAgent)||w.location.pathname.startsWith("/pwa/");return native?(type==="frauen"?"/#frauen":"/#home"):(type==="frauen"?"/?page=frauen":"/")}
+function origin(){var v=params().get("from");return v==="test"||v==="pwa"?v:""}
+function pathFor(id,code,type){return "/wissen/beitrag/?id="+encodeURIComponent(id)+"&lang="+encodeURIComponent(code)+(type==="frauen"?"":"&type="+encodeURIComponent(type))+(origin()?"&from="+origin():"")}
+function backUrl(type){var from=origin();if(from==="test")return type==="frauen"?"/test/#frauen":"/test/#home";if(from==="pwa")return type==="frauen"?"/pwa/?pwa=1#frauen":"/pwa/?pwa=1#home";var native=/DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(navigator.userAgent);if(native)return type==="frauen"?"/?native_ios=1#frauen":"/?native_ios=1#home";return type==="frauen"?"/?page=frauen":"/"}
 async function readJson(url){var r=await fetch(url,{cache:"no-store",credentials:"same-origin"});if(!r.ok)throw Error("HTTP "+r.status+" "+url);return r.json()}
 function showError(str){root.replaceChildren(elt("p","dar-post-error",str));root.setAttribute("aria-busy","false")}
 function section(n,label,value,style){
@@ -82,7 +83,7 @@ function render(original,entry,pack,code,id,type,kind){
  }
  var learning=elt("section","dar-post-learning");append(learning,elt("h2","",t.learn),elt("p","",t.learnHelp));
  var l=elt("a","dar-post-learning-link",t.learnGo);
- l.href=kind.learningUrl+"?id="+encodeURIComponent(id)+"&lang="+encodeURIComponent(code);
+ l.href=kind.learningUrl+"?id="+encodeURIComponent(id)+"&lang="+encodeURIComponent(code)+(type==="frauen"?"":"&type="+encodeURIComponent(type))+(origin()?"&from="+origin():"");
  learning.appendChild(l);frag.appendChild(learning);
  frag.appendChild(elt("p","dar-post-footer",t.footer));
  root.replaceChildren(frag);root.setAttribute("aria-busy","false");
