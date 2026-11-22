@@ -5,7 +5,7 @@
   "created": "2026-11-18",
   "userRequested": true,
   "workflow": "source-review -> complete-nine-language-translations -> independent-language-review -> staging-touch-qa -> PR-CI -> admin-live-publish -> verify-live -> one-admin-notification",
-  "state": "content-preparation-only",
+  "state": "published-live-verified",
   "requiredLocales": [
     "de",
     "ar",
@@ -27,10 +27,12 @@
       "sourceId": "bukhari:2788",
       "sourceUrl": "https://sunnah.com/bukhari:2788",
       "originalStatus": "nicht-anzeigen",
-      "translationReview": "pending",
-      "sourceReview": "pending-secondary-check",
-      "uiQa": "not-run",
-      "publishQa": "not-run"
+      "translationReview": "approved",
+      "sourceReview": "approved",
+      "uiQa": "passed",
+      "publishQa": "passed",
+      "reviewBasis": "owner-authorized + AI primary-reference audit; not independent human scholarly/native-speaker certification",
+      "qaEvidence": "GitHub production-16-live-proof and Playwright release-home-index, 2026-11-22"
     },
     {
       "id": "sahabiyyat-umm-hani-schutz-20261106",
@@ -40,10 +42,12 @@
       "sourceId": "bukhari:357",
       "sourceUrl": "https://sunnah.com/bukhari:357",
       "originalStatus": "nicht-anzeigen",
-      "translationReview": "pending",
-      "sourceReview": "pending-secondary-check",
-      "uiQa": "not-run",
-      "publishQa": "not-run"
+      "translationReview": "approved",
+      "sourceReview": "approved",
+      "uiQa": "passed",
+      "publishQa": "passed",
+      "reviewBasis": "owner-authorized + AI primary-reference audit; not independent human scholarly/native-speaker certification",
+      "qaEvidence": "GitHub production-16-live-proof and Playwright release-home-index, 2026-11-22"
     },
     {
       "id": "sahabiyyat-fatimah-geheimnis-20261106",
@@ -53,10 +57,12 @@
       "sourceId": "bukhari:3623",
       "sourceUrl": "https://sunnah.com/bukhari:3623",
       "originalStatus": "nicht-anzeigen",
-      "translationReview": "pending",
-      "sourceReview": "pending-secondary-check",
-      "uiQa": "not-run",
-      "publishQa": "not-run"
+      "translationReview": "approved",
+      "sourceReview": "approved",
+      "uiQa": "passed",
+      "publishQa": "passed",
+      "reviewBasis": "owner-authorized + AI primary-reference audit; not independent human scholarly/native-speaker certification",
+      "qaEvidence": "GitHub production-16-live-proof and Playwright release-home-index, 2026-11-22"
     },
     {
       "id": "sahabiyyat-umm-qays-saeugling-20261106",
@@ -66,10 +72,12 @@
       "sourceId": "bukhari:223",
       "sourceUrl": "https://sunnah.com/bukhari:223",
       "originalStatus": "nicht-anzeigen",
-      "translationReview": "pending",
-      "sourceReview": "pending-secondary-check",
-      "uiQa": "not-run",
-      "publishQa": "not-run"
+      "translationReview": "approved",
+      "sourceReview": "approved",
+      "uiQa": "passed",
+      "publishQa": "passed",
+      "reviewBasis": "owner-authorized + AI primary-reference audit; not independent human scholarly/native-speaker certification",
+      "qaEvidence": "GitHub production-16-live-proof and Playwright release-home-index, 2026-11-22"
     },
     {
       "id": "sahabiyyat-umm-sulaym-duft-20261106",
@@ -79,10 +87,12 @@
       "sourceId": "muslim:2331a",
       "sourceUrl": "https://sunnah.com/muslim:2331a",
       "originalStatus": "nicht-anzeigen",
-      "translationReview": "pending",
-      "sourceReview": "pending-secondary-check",
-      "uiQa": "not-run",
-      "publishQa": "not-run"
+      "translationReview": "approved",
+      "sourceReview": "approved",
+      "uiQa": "passed",
+      "publishQa": "passed",
+      "reviewBasis": "owner-authorized + AI primary-reference audit; not independent human scholarly/native-speaker certification",
+      "qaEvidence": "GitHub production-16-live-proof and Playwright release-home-index, 2026-11-22"
     },
     {
       "id": "sahabiyyat-barirah-entscheidung-20261106",
@@ -92,10 +102,12 @@
       "sourceId": "bukhari:5097",
       "sourceUrl": "https://sunnah.com/bukhari:5097",
       "originalStatus": "nicht-anzeigen",
-      "translationReview": "pending",
-      "sourceReview": "pending-secondary-check",
-      "uiQa": "not-run",
-      "publishQa": "not-run"
+      "translationReview": "approved",
+      "sourceReview": "approved",
+      "uiQa": "passed",
+      "publishQa": "passed",
+      "reviewBasis": "owner-authorized + AI primary-reference audit; not independent human scholarly/native-speaker certification",
+      "qaEvidence": "GitHub production-16-live-proof and Playwright release-home-index, 2026-11-22"
     },
     {
       "id": "sahabiyyat-umm-habibah-milchverwandtschaft-20261106",
@@ -105,10 +117,12 @@
       "sourceId": "bukhari:5101",
       "sourceUrl": "https://sunnah.com/bukhari:5101",
       "originalStatus": "nicht-anzeigen",
-      "translationReview": "pending",
-      "sourceReview": "pending-secondary-check",
-      "uiQa": "not-run",
-      "publishQa": "not-run"
+      "translationReview": "approved",
+      "sourceReview": "approved",
+      "uiQa": "passed",
+      "publishQa": "passed",
+      "reviewBasis": "owner-authorized + AI primary-reference audit; not independent human scholarly/native-speaker certification",
+      "qaEvidence": "GitHub production-16-live-proof and Playwright release-home-index, 2026-11-22"
     },
     {
       "id": "sahabiyyat-aishah-jibril-salam-20261106",
@@ -118,10 +132,12 @@
       "sourceId": "bukhari:3768",
       "sourceUrl": "https://sunnah.com/bukhari:3768",
       "originalStatus": "nicht-anzeigen",
-      "translationReview": "pending",
-      "sourceReview": "pending-secondary-check",
-      "uiQa": "not-run",
-      "publishQa": "not-run"
+      "translationReview": "approved",
+      "sourceReview": "approved",
+      "uiQa": "passed",
+      "publishQa": "passed",
+      "reviewBasis": "owner-authorized + AI primary-reference audit; not independent human scholarly/native-speaker certification",
+      "qaEvidence": "GitHub production-16-live-proof and Playwright release-home-index, 2026-11-22"
     },
     {
       "id": "sahabiyyat-asma-umays-zwei-hidschras-20261106",
@@ -131,10 +147,12 @@
       "sourceId": "bukhari:4231",
       "sourceUrl": "https://sunnah.com/bukhari:4231",
       "originalStatus": "nicht-anzeigen",
-      "translationReview": "pending",
-      "sourceReview": "pending-secondary-check",
-      "uiQa": "not-run",
-      "publishQa": "not-run"
+      "translationReview": "approved",
+      "sourceReview": "approved",
+      "uiQa": "passed",
+      "publishQa": "passed",
+      "reviewBasis": "owner-authorized + AI primary-reference audit; not independent human scholarly/native-speaker certification",
+      "qaEvidence": "GitHub production-16-live-proof and Playwright release-home-index, 2026-11-22"
     },
     {
       "id": "sahabiyyat-aishah-ifk-offenbarung-20261106",
@@ -144,10 +162,12 @@
       "sourceId": "bukhari:4141",
       "sourceUrl": "https://sunnah.com/bukhari:4141",
       "originalStatus": "nicht-anzeigen",
-      "translationReview": "pending",
-      "sourceReview": "pending-secondary-check",
-      "uiQa": "not-run",
-      "publishQa": "not-run"
+      "translationReview": "approved",
+      "sourceReview": "approved",
+      "uiQa": "passed",
+      "publishQa": "passed",
+      "reviewBasis": "owner-authorized + AI primary-reference audit; not independent human scholarly/native-speaker certification",
+      "qaEvidence": "GitHub production-16-live-proof and Playwright release-home-index, 2026-11-22"
     },
     {
       "id": "muetter-eifersucht-schale-ausgleich-20261106",
@@ -157,10 +177,12 @@
       "sourceId": "bukhari:5225",
       "sourceUrl": "https://sunnah.com/bukhari/67/158",
       "originalStatus": "nicht-anzeigen",
-      "translationReview": "pending",
-      "sourceReview": "pending-secondary-check",
-      "uiQa": "not-run",
-      "publishQa": "not-run"
+      "translationReview": "approved",
+      "sourceReview": "approved",
+      "uiQa": "passed",
+      "publishQa": "passed",
+      "reviewBasis": "owner-authorized + AI primary-reference audit; not independent human scholarly/native-speaker certification",
+      "qaEvidence": "GitHub production-16-live-proof and Playwright release-home-index, 2026-11-22"
     },
     {
       "id": "muetter-hafsah-nach-verwitwung-20261106",
@@ -170,10 +192,12 @@
       "sourceId": "bukhari:5122",
       "sourceUrl": "https://sunnah.com/bukhari:5122",
       "originalStatus": "nicht-anzeigen",
-      "translationReview": "pending",
-      "sourceReview": "pending-secondary-check",
-      "uiQa": "not-run",
-      "publishQa": "not-run"
+      "translationReview": "approved",
+      "sourceReview": "approved",
+      "uiQa": "passed",
+      "publishQa": "passed",
+      "reviewBasis": "owner-authorized + AI primary-reference audit; not independent human scholarly/native-speaker certification",
+      "qaEvidence": "GitHub production-16-live-proof and Playwright release-home-index, 2026-11-22"
     },
     {
       "id": "muetter-zaynab-zunahme-des-uebels-20261106",
@@ -183,10 +207,12 @@
       "sourceId": "bukhari:3346",
       "sourceUrl": "https://sunnah.com/bukhari/60/21",
       "originalStatus": "nicht-anzeigen",
-      "translationReview": "pending",
-      "sourceReview": "pending-secondary-check",
-      "uiQa": "not-run",
-      "publishQa": "not-run"
+      "translationReview": "approved",
+      "sourceReview": "approved",
+      "uiQa": "passed",
+      "publishQa": "passed",
+      "reviewBasis": "owner-authorized + AI primary-reference audit; not independent human scholarly/native-speaker certification",
+      "qaEvidence": "GitHub production-16-live-proof and Playwright release-home-index, 2026-11-22"
     },
     {
       "id": "muetter-aishah-letzte-stunden-20261106",
@@ -196,10 +222,12 @@
       "sourceId": "bukhari:4451",
       "sourceUrl": "https://sunnah.com/bukhari/64/471",
       "originalStatus": "nicht-anzeigen",
-      "translationReview": "pending",
-      "sourceReview": "pending-secondary-check",
-      "uiQa": "not-run",
-      "publishQa": "not-run"
+      "translationReview": "approved",
+      "sourceReview": "approved",
+      "uiQa": "passed",
+      "publishQa": "passed",
+      "reviewBasis": "owner-authorized + AI primary-reference audit; not independent human scholarly/native-speaker certification",
+      "qaEvidence": "GitHub production-16-live-proof and Playwright release-home-index, 2026-11-22"
     },
     {
       "id": "muetter-umm-salamah-nachtwarnung-20261106",
@@ -209,10 +237,12 @@
       "sourceId": "bukhari:115",
       "sourceUrl": "https://sunnah.com/bukhari:115",
       "originalStatus": "nicht-anzeigen",
-      "translationReview": "pending",
-      "sourceReview": "pending-secondary-check",
-      "uiQa": "not-run",
-      "publishQa": "not-run"
+      "translationReview": "approved",
+      "sourceReview": "approved",
+      "uiQa": "passed",
+      "publishQa": "passed",
+      "reviewBasis": "owner-authorized + AI primary-reference audit; not independent human scholarly/native-speaker certification",
+      "qaEvidence": "GitHub production-16-live-proof and Playwright release-home-index, 2026-11-22"
     },
     {
       "id": "frauen-fiqh-aishah-tayammum-halskette-20261106",
@@ -222,10 +252,12 @@
       "sourceId": "bukhari:334",
       "sourceUrl": "https://sunnah.com/bukhari:334",
       "originalStatus": "nicht-anzeigen",
-      "translationReview": "pending",
-      "sourceReview": "pending-secondary-check",
-      "uiQa": "not-run",
-      "publishQa": "not-run"
+      "translationReview": "approved",
+      "sourceReview": "approved",
+      "uiQa": "passed",
+      "publishQa": "passed",
+      "reviewBasis": "owner-authorized + AI primary-reference audit; not independent human scholarly/native-speaker certification",
+      "qaEvidence": "GitHub production-16-live-proof and Playwright release-home-index, 2026-11-22"
     }
   ],
   "notificationDraft": {
@@ -349,7 +381,7 @@
     "isNativeLanguageReview": false,
     "isVerifiedAudienceConsent": false,
     "overrideExistingSecurityGates": false,
-    "actionStatus": "recorded-awaiting-release-gates",
+    "actionStatus": "content-live-verified; focus-activation-pending; notification-password-and-optin-blocked",
     "notificationAudienceCorrectionAt": "2026-11-21",
     "notificationAudienceCorrection": "global opted-in adults, profile-controlled UI presentation; supersedes original women-segment constraint for this batch",
     "requestedDistribution": {
@@ -399,5 +431,19 @@
     "requireFirst": "All 16 items published and accessible, release CI and source/locale quality gates, safe URL/deep-link verified.",
     "plannedIdempotencyKey": "d1c40b28-2bd3-43fd-a14b-708df7d5d976",
     "currentStatus": "approved-route-not-yet-sent"
+  },
+  "publicationAudit": {
+    "verifiedAt": "2026-11-22T16:06:58.112Z",
+    "githubMainReleaseCommit": "6886d3c364d449b3731cc7087974005ba966ab0d",
+    "cloudflareProductionRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45041625928",
+    "independentPublicLiveProofRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45041898434",
+    "liveProof": "publiclyLive=true; checked=16; learningReady=true; errors=[]",
+    "ownerEditorialPermission": true,
+    "sourceAndTranslationApprovalBasis": "Owner's repeated publication and nine-language editorial consent, AI-assisted primary hadith-reference audit and automated content-field parity",
+    "independentHumanScholarCertified": false,
+    "independentNativeSpeakerCertified": false,
+    "responsiveUiQa": "Automated Playwright Chromium tests of 16-item release index over phone, fold, tablet, desktop and nine UI locales; no physical native-device signoff claimed",
+    "sourceAuditIndependentHumanStatus": "Not independently certified; historical source-audit flags remain unchanged",
+    "pushNotificationStatus": "NOT SENT; separate password, audience consent and installation-locale checks remain required"
   }
 }
