@@ -8,6 +8,7 @@ const assert=require("node:assert/strict");
 const {chromium}=require("playwright");
 const BASE=process.env.FRAUEN_LIVE_BASE||"https://dar-al-tawhid.de";
 const manifest=require("../assets/frauen/frauen-neufokus-v1.json");
+const localeCatalog=require("../assets/frauen/frauen-entry-locales-v1.json");
 const release=require("../content/focus-feed/feed-index.json").items.find(x=>x.id===manifest.focusId);
 const staging=require("../content/staging/focus-feed/feed-index.json").items.find(x=>x.id===manifest.focusId);
 const now=Date.now();
@@ -100,31 +101,35 @@ async function diagnose(page) {
    assert.equal(await items.first().getAttribute("href"),target,spec.name+" native direct link wrong");
    await items.first().click();
    await page.waitForFunction(expected=>location.hash===expected,target,{timeout:15000});
-   const reader=page.locator(".dar-frauen-production-root");
-   try{await reader.waitFor({timeout:12000})}catch(error){
-    const more=await page.evaluate(()=>({
-      href:location.href,route:document.body.className,
+   const expectedTitle=localeCatalog.entries[first.id].locales.de.title;
+   // Real installed PWA uses the existing #appView Frauen reader directly,
+   // while the official iOS/native bridge wraps it in .dar-frauen-production-root.
+   // A missing wrapper is NOT an empty article if the real PWA reader is visible.
+   const selector=spec.name==="android-installed-pwa"?"#appView":".dar-frauen-production-root";
+   const reader=page.locator(selector);
+   await reader.waitFor({state:"visible",timeout:16000});
+   try{
+    await page.waitForFunction(({selector,title})=>{
+     const e=document.querySelector(selector);
+     return !!e&&e.innerText.length>250&&e.innerText.includes(title);
+    },{selector,title:expectedTitle},{timeout:16000});
+   }catch(error){
+    const diagnostic=await page.evaluate(()=>({
+      href:location.href,body:document.body.className,
       appPath:document.documentElement.dataset.appPath,
-      appView:!!document.getElementById("appView"),
-      appStyle:document.getElementById("appView")?getComputedStyle(document.getElementById("appView")).display:"",
-      currentHash:location.hash,
-      root:!!document.querySelector(".dar-frauen-production-root"),
-      fraFiqhRuntime:!!window.DARFrauenFiqh,
-      fraFiqhRender:typeof window.DARFrauenFiqh?.render,
-      frauenAdapter:!!window.DARFrauenLiveAdapter,
-      expectedScript:!!document.querySelector('script[src*="frauen-live-adapter.js"]'),
-      content:document.getElementById("appView")?.innerText?.slice(0,470),
-      nativeRoute:typeof window.readRoute==="function"?window.readRoute():null
+      nativeReader:!!document.querySelector(".dar-frauen-production-root"),
+      pwaReader:document.getElementById("appView")?.innerText?.slice(0,700),
+      frauenModule:typeof window.DARFrauenFiqh?.render
     })).catch(e=>({error:String(e)}));
-    console.error("GLOBAL FRAUEN READER DIAGNOSTICS "+spec.name+" "+JSON.stringify(more));
+    console.error("GLOBAL READER MISMATCH "+spec.name+" "+JSON.stringify(diagnostic));
     throw error;
    }
-   try{
-    await page.waitForFunction(()=>{const e=document.querySelector(".dar-frauen-production-root");return e&&e.innerText.trim().length>150},{timeout:15000});
-   }catch(_){}
    const readerText=await reader.innerText();
-   console.log("GLOBAL ARTICLE "+spec.name+" "+JSON.stringify({length:readerText.length,excerpt:readerText.slice(0,500),href:await page.evaluate(()=>location.href)}));
-   assert.ok(readerText.length>150,spec.name+" article reader content too short: "+JSON.stringify({length:readerText.length,excerpt:readerText.slice(0,250)}));
+   assert.ok(readerText.includes(expectedTitle),spec.name+" did not open canonical article title");
+   assert.ok(readerText.length>250,spec.name+" article reader too short");
+   console.log("GLOBAL ARTICLE "+spec.name+" "+JSON.stringify({
+    length:readerText.length,title:expectedTitle,href:await page.evaluate(()=>location.href)
+   }));
    console.log("PASS GLOBAL "+spec.name+" "+JSON.stringify({header,host:detail.focus.host,visible:true,entries:16,reader:target,chars:readerText.length}));
    await ctx.close();
   }
