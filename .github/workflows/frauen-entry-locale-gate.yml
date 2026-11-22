@@ -27,6 +27,7 @@ on:
       - 'scripts/test-frauen-batch16-neufokus*.cjs'
       - 'scripts/test-frauen-batch16-home-live-browser.cjs'
       - 'scripts/test-frauen-android-native-live-browser.cjs'
+      - 'scripts/test-frauen-global-surfaces-live-browser.cjs'
       - '.github/workflows/frauen-entry-locale-gate.yml'
   workflow_dispatch:
 permissions:
@@ -64,6 +65,9 @@ jobs:
       - name: Produktive Android-native Startseite und 16-Artikel-Leser testen
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: node scripts/test-frauen-android-native-live-browser.cjs
+      - name: Globaler iOS-Native, DĀR-TEST, iPad und installierte Android-PWA – echte Live-Prüfung
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: node scripts/test-frauen-global-surfaces-live-browser.cjs
 
   production-16-live-proof:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
