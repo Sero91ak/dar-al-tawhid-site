@@ -1307,7 +1307,7 @@ function injectAdultReaderRuntimeV5(html) {
   // remains hidden until 16 canonical articles are verifiably published and
   // the existing Admin Focus-Feed entry's exact 48h window is live.
   if(!html.includes('id="darFrauenNeufokusV1"')){
-    const tag='<script defer id="darFrauenNeufokusV1" src="/assets/frauen/frauen-neufokus-v1.js?v=20261118-neufokus"></'+'script>';
+    const tag='<script defer id="darFrauenNeufokusV1" src="/assets/frauen/frauen-neufokus-v1.js?v=20261122-16-index"></'+'script>';
     html=html.includes("</body>")?html.replace("</body>",tag+"</body>"):html+tag;
   }
   // Q50 is a single published adult post, localized at the existing render
