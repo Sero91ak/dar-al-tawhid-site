@@ -115,15 +115,26 @@ function showIndex(opener){
  indexOverlay=overlay;indexOpener=opener;d.body.appendChild(overlay);
  if(typeof close.focus==="function")close.focus({preventScroll:true});
 }
+function isNativeHome(){
+ var hash=String(w.location.hash||"").replace(/^#\/?/,"").split(/[/?]/)[0].toLowerCase();
+ return hash==="home"||hash==="start"||(!hash&&!!d.body?.classList.contains("is-home-route"));
+}
 function homeMount(){
- // Native iOS/Android V3 and public desktop website use different canonical
- // home containers. The former verification fixtures used only #dv3Home.
+ // Three different real surfaces: native V3, native V380 (can lack V3),
+ // public desktop V8. The focus must NOT depend on the test-app DOM.
  var nativeHome=d.getElementById("dv3Home");
- if(nativeHome)return{root:nativeHome,desktop:false};
+ if(nativeHome&&(!w.location.hash||isNativeHome()))return{root:nativeHome,desktop:false,fallback:false};
  var website=d.getElementById("pageRoot");
  var page="start";
  try{page=new URLSearchParams(w.location.search).get("page")||"start"}catch(_){}
- if(website&&page.toLowerCase()==="start"&&website.children.length)return{root:website,desktop:true};
+ if(website&&page.toLowerCase()==="start"&&website.children.length)return{root:website,desktop:true,fallback:false};
+ if(isNativeHome()){
+  var app=d.getElementById("appView");
+  if(app){
+   var shell=app.querySelector(".home-v380-shell,.dv3-home,.home-v3")||app;
+   return{root:shell,desktop:false,fallback:true};
+  }
+ }
  return null;
 }
 function render(){
@@ -136,13 +147,14 @@ function render(){
  var button=old;
  if(!button){
   button=d.createElement("button");button.id="darFrauenNeufokus48h";
-  button.className="dar-frauen-neufokus"+(home.desktop?" dar-frauen-neufokus-desktop":"");
+  button.className="dar-frauen-neufokus"+(home.desktop?" dar-frauen-neufokus-desktop":" dar-frauen-neufokus-native");
   button.type="button";
-  // Public website home is rendered into #pageRoot, not #dv3Home.
-  // Place the editorial spotlight immediately below the page introduction.
+  button.setAttribute("aria-haspopup","dialog");
+  button.setAttribute("aria-controls","darFrauenNeufokusIndex");
+  // Visible near the top on ALL native shells, not below long home sections.
   var anchor=home.desktop
    ?root.querySelector(".page-intro,.dar-v8-quick,.home-foundations")
-   :root.querySelector(".dv3-tawhid");
+   :root.querySelector(".dv3-hometitle,.dv3-search-box,.home-v380-hero,.home-title,.home-search,.dv3-tawhid");
   if(anchor&&anchor.insertAdjacentElement)anchor.insertAdjacentElement("afterend",button);
   else root.insertBefore(button,root.firstChild);
   button.addEventListener("click",function(){
@@ -150,11 +162,35 @@ function render(){
    showIndex(button);
   });
  }
+ // The existing card can survive an in-app profile/locale change. Reuse the
+ // same node, but move it if a shell rebuild places the card in an old host.
+ if(button.parentElement!==root&&!button.parentElement?.closest("#dv3Home,#pageRoot,.home-v380-shell")){
+  root.insertBefore(button,root.firstChild);
+ }
  button.lang=locale();button.dir=rtl?"rtl":"ltr";
  button.replaceChildren();
- [["span","focus-eyebrow",t.eyebrow],["strong","focus-title",t.title],["span","focus-body",t.body],["span","focus-meta",t.meta],["span","focus-action",t.cta+"  ›"]].forEach(function(a){
-  var el=d.createElement(a[0]);el.className=a[1];el.textContent=a[2];button.appendChild(el);
- });
+ var head=d.createElement("span");head.className="focus-head";
+ var emblem=d.createElement("span");emblem.className="focus-emblem";emblem.setAttribute("aria-hidden","true");
+ var icon=d.createElement("img");icon.src="/assets/dar-3d-icons/posts.png?v=1095";icon.alt="";icon.loading="eager";
+ emblem.appendChild(icon);
+ var kicker=d.createElement("span");kicker.className="focus-eyebrow";kicker.textContent=t.eyebrow;
+ var live=d.createElement("span");live.className="focus-live";live.textContent="LIVE";live.setAttribute("aria-hidden","true");
+ head.appendChild(emblem);head.appendChild(kicker);head.appendChild(live);
+ var center=d.createElement("span");center.className="focus-center";
+ var textGroup=d.createElement("span");textGroup.className="focus-copy";
+ var title=d.createElement("strong");title.className="focus-title";title.textContent=t.title;
+ var body=d.createElement("span");body.className="focus-body";body.textContent=t.body;
+ textGroup.appendChild(title);textGroup.appendChild(body);
+ var count=d.createElement("span");count.className="focus-count";count.setAttribute("aria-hidden","true");
+ var number=d.createElement("strong");number.textContent="16";
+ var small=d.createElement("small");small.textContent="NEU";
+ count.appendChild(number);count.appendChild(small);
+ center.appendChild(textGroup);center.appendChild(count);
+ var footer=d.createElement("span");footer.className="focus-footer";
+ var meta=d.createElement("span");meta.className="focus-meta";meta.textContent=t.meta;
+ var action=d.createElement("span");action.className="focus-action";action.textContent=t.cta+"  ›";
+ footer.appendChild(meta);footer.appendChild(action);
+ button.appendChild(head);button.appendChild(center);button.appendChild(footer);
  button.setAttribute("aria-label",t.title+" – "+t.cta);
 }
 function validWindow(feed){
@@ -265,8 +301,13 @@ function observe(){
   if(root&&!root.__darFrauenFocusObserved&&typeof w.MutationObserver==="function"){
    root.__darFrauenFocusObserved=true;
    new w.MutationObserver(function(changes){
-    if(changes.some(function(c){return c.type==="childList"}))schedule(false);
-   }).observe(root,{childList:true});
+    if(changes.some(function(c){
+     if(c.type!=="childList")return false;
+     var t=c.target;
+     if(t&&typeof t.closest==="function"&&t.closest("#darFrauenNeufokus48h,#darFrauenNeufokusIndex"))return false;
+     return true;
+    }))schedule(false);
+   }).observe(root,{childList:true,subtree:true});
   }
  });
 }
@@ -286,6 +327,6 @@ function init(){
  d.addEventListener("visibilitychange",function(){if(!d.hidden)schedule(true)});
  w.setInterval(function(){render();refresh(false)},60000);
 }
-w.DARFrauenNeufokusV1=Object.freeze({validWindow:validWindow,locale:locale,refresh:function(){return refresh(true)},openIndex:function(){showIndex(d.getElementById("darFrauenNeufokus48h"))},diagnostics:function(){return{home:homeMount()?.desktop?"website":homeMount()?"native":"none",enabled:enabled,indexReady:!!readyIndex,started:started,expires:until,cardPresent:!!d.getElementById("darFrauenNeufokus48h")}}});
+w.DARFrauenNeufokusV1=Object.freeze({validWindow:validWindow,locale:locale,refresh:function(){return refresh(true)},openIndex:function(){showIndex(d.getElementById("darFrauenNeufokus48h"))},diagnostics:function(){var h=homeMount();return{home:h?.desktop?"website":h?.fallback?"native-fallback":h?"native":"none",enabled:enabled,indexReady:!!readyIndex,started:started,expires:until,cardPresent:!!d.getElementById("darFrauenNeufokus48h"),visible:!!d.getElementById("darFrauenNeufokus48h")?.getClientRects().length}}});
 if(d.readyState==="loading")d.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })(window,document);
