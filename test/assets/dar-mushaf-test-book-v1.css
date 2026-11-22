@@ -141,7 +141,7 @@ html.dam-book-open {overscroll-behavior:none}
 .dam-progress{text-align:center;display:grid;gap:2px;min-width:0}
 .dam-progress>span{font:500 19px/1.3 Georgia,serif;color:#ead3a1}
 .dam-progress small{color:#a8b3a6;font-size:10px;line-height:1.4}
-@media (max-width:740px){
+@media (max-width:620px){
   .dam-shell{padding-left:max(8px,env(safe-area-inset-left));padding-right:max(8px,env(safe-area-inset-right))}
   .dam-header{padding:3px 8px 7px}
   .dam-brand{gap:8px;flex-wrap:wrap}
@@ -176,4 +176,111 @@ html.dam-book-open {overscroll-behavior:none}
 }
 @media (prefers-reduced-motion:reduce) {
   .dam-overlay *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+
+/* DĀR TEST Muṣḥaf V2 · settings before opening; source-aware multilingual reading */
+#damMushafOptions[hidden],#darMushafTestBook #damStatus[hidden] {display:none!important}
+.dam-options-overlay {
+  position:fixed;inset:0;z-index:2147483200;
+  display:grid;place-items:center;overflow-y:auto;
+  padding:max(16px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));
+  background:rgba(7,17,20,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  color:#f5ecd8;
+  font:500 14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif
+}
+.dam-options-overlay * {box-sizing:border-box}
+.dam-options-panel {
+  width:min(590px,100%);max-height:min(850px,calc(100dvh - 36px));overflow-y:auto;
+  background:linear-gradient(145deg,#233d34,#132b2b 48%,#10232b);
+  box-shadow:0 24px 80px rgba(0,0,0,.5),inset 0 0 0 1px rgba(226,185,114,.22);
+  border:1px solid rgba(214,174,105,.4);border-radius:26px;
+  padding:clamp(19px,3vw,32px);
+  scrollbar-color:#8c7e62 transparent
+}
+.dam-options-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.dam-options-kicker{color:#d7ba7f;font:750 10px/1.4 system-ui,sans-serif;letter-spacing:.18em}
+.dam-options-head h2{margin:8px 0 6px;font:500 clamp(27px,4.5vw,36px)/1.12 Georgia,serif;letter-spacing:.015em;color:#fff5e2}
+.dam-options-head p{margin:0;max-width:440px;color:#bfcabd;font-size:12.5px;line-height:1.55}
+.dam-options-x{
+  width:40px;height:40px;flex:0 0 40px;border:1px solid rgba(226,189,119,.25);border-radius:50%;
+  color:#f5e7c8;background:rgba(255,255,255,.045);font-size:24px!important;cursor:pointer
+}
+.dam-options-types{display:grid;gap:8px;margin:22px 0 16px}
+.dam-options-types label {
+  display:flex;align-items:center;gap:13px;min-height:54px;cursor:pointer;
+  padding:10px 14px;border:1px solid rgba(231,203,144,.18);
+  border-radius:14px;background:rgba(255,255,255,.025);
+}
+.dam-options-types label:has(input:checked){border-color:rgba(224,190,119,.65);background:rgba(203,166,98,.12)}
+.dam-options-types input{width:21px;height:21px;flex:0 0 21px;accent-color:#dab477}
+.dam-options-check-name{font-size:14px;font-weight:650;line-height:1.5}
+.dam-translation-controls{display:grid;grid-template-columns:170px 1fr;align-items:center;gap:12px;margin:12px 0}
+.dam-translation-controls[hidden]{display:none!important}
+.dam-translation-controls label{font-size:12px;color:#e1d1b1;font-weight:650}
+.dam-translation-controls select{
+  width:100%;min-width:0;min-height:44px;border:1px solid rgba(220,186,119,.38);
+  border-radius:12px;padding:10px 13px;
+  background:#1a342f;color:#fff8e9;font-size:13px;direction:auto
+}
+.dam-translation-controls select option{color:#152e27;background:#f3ead8}
+.dam-options-info{
+  margin-top:16px;border-top:1px solid rgba(217,186,124,.16);
+  padding:13px 2px 3px;min-height:42px;color:#b9c2b4;font-size:11px;line-height:1.5
+}
+.dam-options-info[data-error="true"]{color:#ffcfb5}
+.dam-options-actions{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:12px}
+.dam-options-actions button{
+  min-height:49px;border-radius:14px;padding:9px 12px;border:1px solid rgba(225,190,125,.36);
+  background:rgba(255,255,255,.02);color:#f3e8d0;
+  font-size:13px;font-weight:750;cursor:pointer
+}
+.dam-options-actions #damLaunchBook{background:linear-gradient(120deg,#c39c5a,#edd49b);color:#1c322c;border-color:#dbc38c}
+.dam-options-actions button:disabled{opacity:.38;cursor:not-allowed}
+.dam-options-panel button:focus-visible,.dam-options-panel select:focus-visible,
+.dam-options-panel input:focus-visible{outline:2px solid #e9c98c;outline-offset:3px}
+.dam-header-actions{display:flex;gap:8px;align-items:center}
+.dam-book-settings {
+  min-height:40px;border:1px solid rgba(219,186,119,.32);border-radius:999px;
+  padding:9px 15px;background:rgba(214,177,111,.09);color:#f3dbab;
+  font-size:12px!important;font-weight:720!important
+}
+.dam-source{font-size:11px;letter-spacing:.025em;color:#ddc99f;text-align:center}
+.dam-verse-translation{font-family:Georgia,"Times New Roman",serif;line-height:1.65;color:#504b40;font-size:clamp(12px,1.25vw,16px)}
+.dam-verse-latin{font-family:system-ui,-apple-system,sans-serif;font-size:clamp(11px,1.05vw,14px);color:#796b58}
+.dam-trans-number{font-size:.8em;color:#a17d44;white-space:nowrap}
+.dam-book{box-shadow:0 2px 0 #b59e77,0 4px 0 rgba(39,29,20,.44),0 18px 50px rgba(0,0,0,.4),inset 0 0 0 1px rgba(217,185,121,.55)}
+.dam-flip-front,.dam-flip-back{background:linear-gradient(90deg,#f7efde 0%,#fff7e7 55%,#eddfc1 100%)}
+.dam-flip-front::after,.dam-flip-back::after{
+  content:"";pointer-events:none;position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(35,24,12,.13),transparent 19%,transparent 82%,rgba(42,28,13,.16));
+  mix-blend-mode:multiply
+}
+.dam-anim-next .dam-flip-sheet,.dam-anim-back .dam-flip-sheet{
+  filter:drop-shadow(-12px 7px 10px rgba(24,17,10,.22))
+}
+@media(min-width:621px) and (max-width:980px){
+  .dam-stage{padding:8px 5px}
+  .dam-book{width:100%;height:min(100%,830px);padding:5px 7px 7px}
+  .dam-page-inner{padding:clamp(13px,2vw,23px) clamp(11px,2vw,23px)}
+  .dam-page-inner::before{inset:8px}
+  .dam-verse-ar{font-size:clamp(20px,2.6vw,29px);line-height:1.95}
+  .dam-verse-translation{font-size:clamp(11px,1.7vw,14px)}
+  .dam-verse-latin{font-size:clamp(10px,1.55vw,13px)}
+  .dam-page-head{font-size:10px}
+}
+@media(max-width:620px){
+  .dam-brand>span:last-child{display:none}
+  .dam-brand-kicker{font-size:8px}
+  .dam-book-settings{min-height:36px;padding:7px 11px;font-size:11px!important}
+  .dam-options-panel{padding:18px 16px;border-radius:19px}
+  .dam-translation-controls{grid-template-columns:1fr;gap:5px;margin:11px 0}
+  .dam-options-types{gap:7px;margin:14px 0}
+  .dam-options-types label{min-height:48px}
+  .dam-options-actions{gap:7px}
+  .dam-options-actions button{min-height:48px;font-size:12px}
+  .dam-verse-translation{font-size:clamp(13px,3.1vw,17px)}
+  .dam-verse-latin{font-size:clamp(12px,2.8vw,15px)}
+}
+@media(prefers-reduced-motion:reduce){
+  .dam-options-overlay *,.dam-options-panel *{transition:none!important;animation:none!important}
 }
