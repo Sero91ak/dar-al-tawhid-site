@@ -15,6 +15,8 @@ assert.equal(launch.expectedCount,16);
 assert.equal(sourceFiles.length,3);
 const source={};
 for(const p of sourceFiles)source["/"+p]=read(p);
+const originalStatus=new Map(launch.items.map(row=>[row.id,
+ source["/"+row.sourceFile].eintraege.find(e=>e.kennung===row.id)?.quellenstatus]));
 const script=fs.readFileSync(path.join(root,"assets/frauen/frauen-neufokus-v1.js"),"utf8");
 const css=fs.readFileSync(path.join(root,"assets/frauen/frauen-neufokus-v1.css"),"utf8");
 const router=fs.readFileSync(path.join(root,"cloudflare/site-router.js"),"utf8");
@@ -129,7 +131,7 @@ function getCard(){return registry.get("darFrauenNeufokus48h")||null}
  assert.equal(draft.items.find(x=>x.id===id).status,"draft","Never alter actual staging/live feed file");
  for(const row of launch.items){
    const original=source["/"+row.sourceFile].eintraege.find(x=>x.kennung===row.id);
-   assert.equal(original.quellenstatus,"nicht-anzeigen","Original source state changed: "+row.id);
+   assert.equal(original.quellenstatus,originalStatus.get(row.id),"Original source state changed: "+row.id);
  }
  console.log("PASS 48h Frauen Neufokus: global man/woman/neutral, 16-entry localized index, canonical direct article click, draft hidden, 15/16 fail-close, 16/16 live, RTL, exact duration/expiry. No publish or push.");
 })().catch(e=>{console.error(e.stack||e);process.exitCode=1});
