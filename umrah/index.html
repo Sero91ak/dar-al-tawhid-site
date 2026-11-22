@@ -429,6 +429,13 @@ input[type="search"]{-webkit-appearance:none;appearance:none}
 @media screen{
  #print-root .dar-book-sheet{max-width:186mm;margin:22px auto;border:1px solid #d9d4c4;padding:12mm;box-shadow:0 12px 38px rgba(29,53,38,.11)}
 }
+
+/* Fit the optional personal cover photo onto one A4 sheet. */
+#print-root .dar-book-has-photo .dar-book-cover-center{padding-top:11mm;padding-bottom:6mm}
+#print-root .dar-book-has-photo .dar-book-cover-center h1{font-size:43pt;margin:5mm 0}
+#print-root .dar-book-has-photo .dar-book-cover-photo{height:43mm;margin-top:5mm}
+#print-root .dar-book-has-photo .dar-book-cover-bottom{gap:2mm;padding-top:5mm}
+#print-root .dar-book-overview{align-content:start}
 </style>
 </head>
 <body>
@@ -892,20 +899,24 @@ async function buildReport(){
  book.append(cover);
  if(options.memories){
   const firstPhoto=state.photoMeta.find(m=>people.some(p=>p.id===m.owner));
-  if(firstPhoto){const rec=await dbGet(firstPhoto.id);if(rec){const figure=document.createElement('figure');figure.className='dar-book-cover-photo';const img=document.createElement('img');img.alt='Persönliches Bild';img.src=await blobToDataUrl(rec.blob);figure.append(img);cover.querySelector('.dar-book-cover-center').append(figure)}}
+  if(firstPhoto){const rec=await dbGet(firstPhoto.id);if(rec){const figure=document.createElement('figure');figure.className='dar-book-cover-photo';const img=document.createElement('img');img.alt='Persönliches Bild';img.src=await blobToDataUrl(rec.blob);figure.append(img);cover.classList.add('dar-book-has-photo');cover.querySelector('.dar-book-cover-center').append(figure)}}
  }
- const summary=page('AUF EINEN BLICK','Unser Weg der ʿUmrah','Persönliche Aufzeichnung der Reise und des individuellen Fortschritts');
- summary.innerHTML='<div class="dar-book-quote"><div class="ar" lang="ar" dir="rtl">وَأَتِمُّوا الْحَجَّ وَالْعُمْرَةَ لِلَّهِ</div><div class="de">„Und vollendet den Ḥaǧǧ und die ʿUmrah für Allah.“</div><small>Qurʾān 2:196 · Auszug</small></div>';
- const peopleGrid=document.createElement('div');peopleGrid.className='dar-book-overview';
- people.forEach((p,i)=>{
-  prepareGuidePerson(p);
-  const done=UMRAH_GUIDE_STEPS.filter(s=>p.guideStatuses?.[s.id]==='erledigt').length;
-  const card=document.createElement('article');card.className='dar-book-person';
-  card.innerHTML='<strong>'+safe(currentPersonName(p,i))+'</strong><span class="count">'+done+' von 25 Schritten persönlich markiert</span><div class="dar-book-progress"><span style="width:'+Math.round(done/25*100)+'%"></span></div>'+
-  PHASES.map(ph=>'<div class="dar-book-phase-line"><span>'+safe(ph.short)+'</span><b>'+safe(({offen:'Offen',läuft:'In Arbeit',erledigt:'Markiert',klären:'Klärung'})[p.status?.[ph.id]||'offen'])+'</b></div>').join('');
-  peopleGrid.append(card);
- });summary.append(peopleGrid);
- const disclaimer=document.createElement('p');disclaimer.className='dar-book-disclaimer';disclaimer.textContent='Dieses Dokument ist ein privates Reisealbum. Ein Häkchen dokumentiert nur die persönliche Eingabe und bestätigt keine religiöse Gültigkeit. Die personenbezogenen Angaben und Bilder werden lokal verarbeitet.';summary.append(disclaimer);
+
+ for(let groupStart=0;groupStart<people.length;groupStart+=4){
+  const summary=page('AUF EINEN BLICK','Unser Weg der ʿUmrah','Persönliche Aufzeichnung der Reise · Reisende '+(groupStart+1)+'–'+Math.min(groupStart+4,people.length)+' von '+people.length);
+  if(groupStart===0)summary.innerHTML='<div class="dar-book-quote"><div class="ar" lang="ar" dir="rtl">وَأَتِمُّوا الْحَجَّ وَالْعُمْرَةَ لِلَّهِ</div><div class="de">„Und vollendet den Ḥaǧǧ und die ʿUmrah für Allah.“</div><small>Qurʾān 2:196 · Auszug</small></div>';
+  const peopleGrid=document.createElement('div');peopleGrid.className='dar-book-overview';
+  people.slice(groupStart,groupStart+4).forEach((p,offset)=>{
+   prepareGuidePerson(p);
+   const done=UMRAH_GUIDE_STEPS.filter(s=>p.guideStatuses?.[s.id]==='erledigt').length;
+   const card=document.createElement('article');card.className='dar-book-person';
+   card.innerHTML='<strong>'+safe(currentPersonName(p,groupStart+offset))+'</strong><span class="count">'+done+' von 25 Schritten persönlich markiert</span><div class="dar-book-progress"><span style="width:'+Math.round(done/25*100)+'%"></span></div>'+
+    PHASES.map(ph=>'<div class="dar-book-phase-line"><span>'+safe(ph.short)+'</span><b>'+safe(({offen:'Offen',läuft:'In Arbeit',erledigt:'Markiert',klären:'Klärung'})[p.status?.[ph.id]||'offen'])+'</b></div>').join('');
+   peopleGrid.append(card);
+  });summary.append(peopleGrid);
+  const disclaimer=document.createElement('p');disclaimer.className='dar-book-disclaimer';disclaimer.textContent='Dieses Dokument ist ein privates Reisealbum. Ein Häkchen dokumentiert nur eine persönliche Eingabe und bestätigt keine religiöse Gültigkeit. Alle Angaben und Bilder werden lokal verarbeitet.';summary.append(disclaimer);
+ }
+
  if(options.steps){
   people.forEach((p,i)=>{
    prepareGuidePerson(p);
