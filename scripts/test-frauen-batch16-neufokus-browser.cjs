@@ -222,7 +222,7 @@ function snapshot(isPublic,locale) {
   const page=await ctx.newPage();
   const docs=snapshot(true,"de");
   await page.route("**/*",async route=>{
-   const u=new URL(route.request().url),p=u.pathname;
+   const u=new URL(route.request().url()),p=u.pathname;
    if(p==="/")return route.fulfill({status:200,contentType:"text/html",body:
     '<!doctype html><html lang="de"><head><meta name="viewport" content="width=device-width,initial-scale=1"></head>'+
     '<body class="is-home-route">'+
