@@ -37,6 +37,17 @@
       !(/^\/q\/[1-9][0-9]*\/?$/.test(url.pathname)||/^\/lernen\/[a-z0-9-]+\/?$/.test(url.pathname)||/^\/wissen\/beitrag\/?$/.test(url.pathname)))return null;
     return url.pathname.replace(/\/?$/,"/")+url.search+url.hash;
   }
+  // The learner's "Back to article" link returns to the already-mounted
+  // canonical post, even if its current quiz language differs.
+  function isPreviousCanonicalPost(route){
+    var previous=sourceRouteStack[sourceRouteStack.length-1];
+    if(!previous||!previous.target.startsWith("/wissen/beitrag/")||!route.startsWith("/wissen/beitrag/"))return false;
+    try{
+      var a=new URL(previous.target,location.origin),b=new URL(route,location.origin);
+      return a.searchParams.get("id")===b.searchParams.get("id")&&
+        (a.searchParams.get("type")||"frauen")===(b.searchParams.get("type")||"frauen");
+    }catch(_){return false}
+  }
   function backInternalSource(){
     if(sourceRouteStack.length){
       var previous=sourceRouteStack.pop();
@@ -86,6 +97,18 @@
         var route=internalReaderTarget(a,doc.baseURI||location.href);
         if(!route)return;
         ev.preventDefault();ev.stopImmediatePropagation();
+        if(isPreviousCanonicalPost(route)){
+          backInternalSource();
+          try{
+            var requested=new URL(route,location.origin).searchParams.get("lang");
+            var select=sourceFrame.contentDocument?.getElementById("darPostLangSelect");
+            if(select&&requested&&select.value!==requested){
+              select.value=requested;
+              select.dispatchEvent(new Event("change",{bubbles:true}));
+            }
+          }catch(_){}
+          return;
+        }
         navigateInternalSource(route);
       },true);
     });
@@ -151,9 +174,11 @@
     var panel=ensureInternalSourcePanel();
     if(restoring&&cachedFrame&&cachedFrame.isConnected){
       if(sourceFrame!==cachedFrame){
-        sourceFrame.classList.add("dar-source-frame-inactive");
-        sourceFrame.removeAttribute("id");
+        var discarded=sourceFrame;
+        discarded.classList.add("dar-source-frame-inactive");
+        discarded.removeAttribute("id");
         sourceFrame=cachedFrame;
+        if(discarded&&!sourceRouteStack.some(function(page){return page.frame===discarded}))discarded.remove();
       }
       sourceFrame.classList.remove("dar-source-frame-inactive");
       sourceFrame.id="darInternalSourceFrameV3";
