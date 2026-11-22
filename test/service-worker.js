@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1373'; // premium Fold single-owner refresh
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1374'; // premium Fold single-owner refresh
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -89,8 +89,8 @@ const APP_SHELL = [
   '/assets/fold-split.css',
   // The retired portrait/landscape split & thumb-rail controllers are no longer
   // precached. DĀR Test uses one premium 3D sidebar and the real reader only.
-  '/test/assets/dar-fold-workspace-v2.js?v=20261122-premium-single-owner-v1',
-  '/test/assets/dar-fold-workspace-v2.css?v=20261122-premium-single-owner-v1',
+  '/test/assets/dar-fold-workspace-v2.js?v=20261122-no-header-viewport-v2',
+  '/test/assets/dar-fold-workspace-v2.css?v=20261122-no-header-viewport-v2',
   '/test/assets/frauen/frauen-fiqh.js',
   '/test/assets/frauen/frauen-fiqh.css',
   '/test/assets/frauen/library-v1224/01-grundlagen-din.jpg',
