@@ -16,6 +16,12 @@ on:
       - 'content/focus-feed/feed-index.json'
       - 'lernen/frauen-wissen/index.html'
       - 'scripts/test-frauen-batch16-neufokus*.cjs'
+      - 'scripts/test-nonq-seamless-browser.cjs'
+      - 'assets/dar-app-chrome.js'
+      - 'assets/beitrag/**'
+      - 'wissen/beitrag/**'
+      - 'lernen/beitrag/**'
+      - 'q/_registry/check-source-navigation.mjs'
       - '.github/workflows/frauen-entry-locale-gate.yml'
   push:
     branches: [main]
@@ -76,6 +82,10 @@ jobs:
           node --check assets/beitrag/learning-v1.js
       - name: "Kanonische Beiträge ohne Q – 16 IDs, 144 Sprachfassungen und Lernbereich"
         run: node scripts/test-nonq-reader-browser.cjs
+      - name: In-App-Reader-Navigation und System-Zurück ohne Neuaufbau
+        run: node q/_registry/check-source-navigation.mjs
+      - name: Beitragsansicht – keine komplette Navigation und kein Sprach-Reload
+        run: node scripts/test-nonq-seamless-browser.cjs
       - name: 16er-Einzelartikellinks, neun Sprachen, vier Geräteklassen
         run: node scripts/test-frauen-batch16-neufokus-browser.cjs
       - name: Öffentliche Website in echtem Chromium überprüfen (#pageRoot)
