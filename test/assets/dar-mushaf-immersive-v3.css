@@ -69,7 +69,7 @@ html.damx-fullscreen,html.damx-fullscreen body{overscroll-behavior:none}
   width:50%;left:0;transform-origin:right center;
   transform-style:preserve-3d;will-change:transform;
   pointer-events:none;
-  filter:drop-shadow(0 0 1px rgba(55,37,20,.12));
+  backface-visibility:visible;
 }
 .damx-flip[data-direction="previous"]{left:50%;transform-origin:left center}
 .damx-flip-front,.damx-flip-back{
