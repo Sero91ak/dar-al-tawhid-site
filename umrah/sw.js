@@ -1,6 +1,6 @@
 'use strict';
 /* DĀR AL TAWḤĪD ʿUmrah cache; scope /umrah/ only. */
-const CACHE='dar-umrah-v10-1-reading-ui-20261122';
+const CACHE='dar-umrah-v10-2-touch-lock-20261122';
 const CORE=['./index.html','./offline.html','./manifest.webmanifest'];
 const BRAND=['/assets/app-icons/type-creme-ar/icon-512.png','/assets/app-icons/type-creme-ar/icon-192.png','/assets/app-icons/type-creme-ar/icon-180.png','/assets/dar-3d-icons/home.png','/assets/dar-3d-icons/qibla.png','/assets/dar-3d-icons/compass.png','/assets/dar-3d-icons/image.png','/assets/dar-3d-icons/library.png','/assets/dar-3d-icons/mosque.png'];
 const BRAND_PATHS=new Set(BRAND);

@@ -2,7 +2,7 @@
 <html lang="de" data-theme="salbei">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
 <meta name="theme-color" content="#F4F6F0" />
 <meta name="description" content="DĀR AL TAWḤĪD – ʿUmrah. Ein eigenständiger, offline nutzbarer Begleiter nach Qurʾān und authentischer Sunnah mit Ritus, Karten, Journal und Erinnerungs-PDF." />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -284,9 +284,9 @@ body:has(#page-home:target) #page-home,body:has(#page-ritus:target) #page-ritus,
 #print-root .pr-guide-n{color:#92713e;font-weight:800}#print-root .pr-guide-row strong{font-size:10pt;color:#2d6652}#print-root .pr-guide-list{margin-top:18px}
 
 /* V10.1 app-like touch stability, without suppressing accessibility pinch zoom */
-html,body{width:100%;max-width:100%;min-width:0;overscroll-behavior:none;touch-action:manipulation}
+html,body{width:100%;max-width:100%;min-width:0;overscroll-behavior:none;touch-action:pan-x pan-y}
 #shell{width:100%;min-width:0;max-width:1800px;overflow:hidden;overscroll-behavior:none}
-.viewport{overflow-x:hidden;overscroll-behavior-y:contain;touch-action:pan-y pinch-zoom;-webkit-overflow-scrolling:touch}
+.viewport{overflow-x:hidden;overscroll-behavior-y:contain;touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch}
 .app-main,.page,.dar-guide,.dar-guide-card,.ritual-stage{min-width:0}
 button,a,summary,[role="button"]{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 input:not([type="file"]):not([type="checkbox"]):not([type="radio"]),select,textarea{font-size:16px!important;line-height:1.4;min-height:44px;max-width:100%;-webkit-text-size-adjust:100%;touch-action:manipulation}
@@ -315,6 +315,19 @@ input[type="search"]{-webkit-appearance:none;appearance:none}
 @media(max-width:550px){.dar-reading-dialog{border-radius:18px;padding:17px}.dar-reading-teaser{align-items:stretch}.dar-reading-teaser button{width:100%}}
 @media print{#dar-reading-viewer{display:none!important}}
 
+
+/* V10.2: prevent page pinch/double-tap enlargement (including home-screen standalone PWA).
+   Preserve one-finger scrolling, input focus, horizontal tabs, iframe maps, and PDF printing. */
+@media screen{
+  html,body,#shell,#viewport{touch-action:pan-x pan-y!important}
+  .day-toolbar .day-tabs,.day-tabs,#dar-guide-all,.dar-reading-dialog,.dar-source-dialog,.modal-panel{touch-action:pan-x pan-y}
+  html,body{overscroll-behavior:none;overflow-x:hidden}
+  #shell,#viewport{max-width:100%;min-width:0}
+  #viewport{overscroll-behavior:contain;overflow-x:hidden}
+  input,textarea,select{font-size:16px!important}
+  img,svg{max-width:100%}
+  .page,.dar-guide-card,.dar-reading-dialog,.dar-source-dialog{overflow-wrap:break-word}
+}
 </style>
 </head>
 <body>
@@ -840,10 +853,34 @@ function bind(){
 
 
 }
+
+/* ʿUmrah V10.2: prevent two-finger page scaling in iOS Safari, Android Chrome
+   and installed PWA/WebView. No preventDefault on single-finger touch/scroll. */
+function installUmrahZoomLock(){
+ const preventZoom=e=>{if(e.cancelable)e.preventDefault()};
+ const touchZoom=e=>{if(e.touches&&e.touches.length>1)preventZoom(e)};
+ ['gesturestart','gesturechange','gestureend'].forEach(eventName=>{
+   document.addEventListener(eventName,preventZoom,{passive:false,capture:true});
+ });
+ document.addEventListener('touchstart',touchZoom,{passive:false,capture:true});
+ document.addEventListener('touchmove',touchZoom,{passive:false,capture:true});
+ // Avoid whole-document enlargement from a double tap on the app surface.
+ // Desktop mouse double-click and native form controls stay unmodified.
+ let lastTap=0;
+ document.addEventListener('touchend',e=>{
+   if(e.changedTouches.length!==1||e.touches.length!==0){lastTap=0;return}
+   const target=e.target instanceof Element?e.target:null;
+   if(!target||target.closest('input,textarea,select,[contenteditable="true"],iframe')){lastTap=0;return}
+   const now=e.timeStamp;
+   if(lastTap&&now-lastTap<280){preventZoom(e);lastTap=0}
+   else lastTap=now;
+ },{passive:false,capture:true});
+}
+
 function onlineStatus(){$('#online-status').classList.toggle('offline',!navigator.onLine);$('#online-status').title=navigator.onLine?'Online':'Offline'}
 (function init(){
  try{
-  initTheme();bind();drawSources();drawGuideFaq();refresh();onlineStatus();
+  initTheme();installUmrahZoomLock();bind();drawSources();drawGuideFaq();refresh();onlineStatus();
   // Photo database initializes later. No storage permission may block all navigation.
   Promise.race([openDB(),new Promise(resolve=>setTimeout(()=>resolve(null),2500))])
    .then(conn=>{db=conn;if(!conn)toast('Fotospeicher nicht verfügbar – Navigation und ʿUmrah funktionieren trotzdem.');})
