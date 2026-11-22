@@ -12,6 +12,7 @@ const launch=read("assets/frauen/frauen-neufokus-v1.json");
 const focus=read("content/focus-feed/feed-index.json");
 const code=fs.readFileSync(path.join(root,"assets/frauen/frauen-neufokus-v1.js"),"utf8");
 const css=fs.readFileSync(path.join(root,"assets/frauen/frauen-neufokus-v1.css"),"utf8");
+const websiteReader=fs.readFileSync(path.join(root,"assets/frauen/frauen-desktop-entry-v1.js"),"utf8");
 const source=Object.fromEntries(launch.sourceFiles.map(p=>["/"+p,read(p)]));
 const originalStatus=new Map(launch.items.map(row=>[row.id,
  source["/"+row.sourceFile].eintraege.find(e=>e.kennung===row.id)?.quellenstatus]));
@@ -154,12 +155,66 @@ function snapshot(isPublic,locale) {
  assert.deepEqual(errors,[],viewport.name+" browser errors: "+errors.join("; "));
  await context.close();
  }
+ // Real public desktop/mobile website uses #pageRoot, never #dv3Home.
+ // This guards against the original bug where tests only mocked the native home.
+ for(const websiteViewport of [{name:"public-desktop",width:1280,height:800},{name:"public-mobile",width:390,height:844}]){
+  const context=await browser.newContext({viewport:{width:websiteViewport.width,height:websiteViewport.height}});
+  const page=await context.newPage(),issues=[];
+  page.on("pageerror",e=>issues.push(String(e)));
+  page.route("**/*",async route=>{
+   const u=new URL(route.request().url()),p=u.pathname,key=u.searchParams.get("page")||"start";
+   if(p==="/"){
+    const body=key==="frauen"
+     ?'<main id="pageRoot"><section class="page-intro">Frauen im Islam</section><section id="womenReal">Frauenbereich wird geladen…</section></main>'
+     :'<main id="pageRoot"><section class="page-intro">DĀR AL TAWḤĪD Startseite</section><section>Wissensgrundlagen</section></main>';
+    return route.fulfill({status:200,contentType:"text/html",body:'<!doctype html><html lang="de"><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body class="dar-v8-home" data-dar-v8-route="'+key+'">'+body+'<script defer src="/assets/frauen/frauen-neufokus-v1.js"></script><script defer src="/assets/frauen/frauen-desktop-entry-v1.js"></script></body></html>'});
+   }
+   if(p==="/assets/frauen/frauen-neufokus-v1.js")return route.fulfill({status:200,contentType:"application/javascript",body:code});
+   if(p==="/assets/frauen/frauen-desktop-entry-v1.js")return route.fulfill({status:200,contentType:"application/javascript",body:websiteReader});
+   if(p==="/assets/frauen/frauen-neufokus-v1.css")return route.fulfill({status:200,contentType:"text/css",body:css});
+   if(p==="/content/focus-feed/feed-index.json")return route.fulfill({status:200,contentType:"application/json",body:JSON.stringify(snapshot(true,"de").feed)});
+   if(p==="/assets/frauen/frauen-neufokus-v1.json")return route.fulfill({status:200,contentType:"application/json",body:JSON.stringify(launch)});
+   if(p==="/assets/frauen/frauen-entry-locales-v1.json")return route.fulfill({status:200,contentType:"application/json",body:JSON.stringify(localeCatalog)});
+   if(p==="/lernen/frauen-wissen/")return route.fulfill({status:200,contentType:"text/html",body:learningHtml});
+   if(source[p])return route.fulfill({status:200,contentType:"application/json",body:JSON.stringify(source[p])});
+   return route.fulfill({status:404,body:"Not found"});
+  });
+  await page.goto("https://dar-app.local/?page=start",{waitUntil:"domcontentloaded"});
+  await page.evaluate(()=>window.DARFrauenNeufokusV1.refresh());
+  const card=page.locator("#pageRoot > #darFrauenNeufokus48h");
+  await card.waitFor({timeout:10000});
+  assert.ok(await card.isVisible(),websiteViewport.name+" real #pageRoot focus invisible");
+  const dimensions=await card.evaluate(e=>({width:e.getBoundingClientRect().width,right:e.getBoundingClientRect().right}));
+  assert.ok(dimensions.width>0&&dimensions.right<=websiteViewport.width+3,websiteViewport.name+" focus offscreen");
+  await card.click();
+  const modal=page.locator("#darFrauenNeufokusIndex");
+  await modal.waitFor();
+  assert.equal(await modal.locator("a.dar-frauen-index-link").count(),16,websiteViewport.name+" missing release links");
+  const first=launch.items[0];
+  const firstUrl="/?page=frauen&cat="+encodeURIComponent(first.area)+"&id="+encodeURIComponent(first.id);
+  assert.equal(await modal.locator("a.dar-frauen-index-link").first().getAttribute("href"),firstUrl,websiteViewport.name+" desktop link did not use real website router");
+  await modal.locator("a.dar-frauen-index-link").first().click();
+  await page.locator(".dar-frauen-desktop-entry").waitFor({timeout:10000});
+  assert.equal(await page.locator(".dar-frauen-desktop-entry").getAttribute("data-dar-frauen-release-article"),first.id);
+  assert.ok((await page.locator(".dar-frauen-desktop-entry").innerText()).includes(localeCatalog.entries[first.id].locales.de.statement));
+  assert.equal(await page.locator(".dar-frauen-desktop-source a").getAttribute("href"),first.sourceUrl);
+  for(const entry of launch.items.slice(1)){
+   await page.goto("https://dar-app.local/?page=frauen&cat="+encodeURIComponent(entry.area)+"&id="+encodeURIComponent(entry.id),{waitUntil:"domcontentloaded"});
+   await page.locator(".dar-frauen-desktop-entry").waitFor({timeout:10000});
+   assert.equal(await page.locator(".dar-frauen-desktop-entry").getAttribute("data-dar-frauen-release-article"),entry.id,
+    websiteViewport.name+" wrong direct entry");
+  }
+  await page.goto("https://dar-app.local/?page=wisssen",{waitUntil:"domcontentloaded"});
+  assert.equal(await page.locator("#darFrauenNeufokus48h").count(),0,websiteViewport.name+" focus leaked onto unrelated website page");
+  assert.deepEqual(issues,[],websiteViewport.name+" JS errors: "+issues.join("; "));
+  await context.close();
+ }
  assert.equal(verified,36);
  for(const row of launch.items){
   const a=source["/"+row.sourceFile].eintraege.find(x=>x.kennung===row.id);
   assert.equal(a.quellenstatus,originalStatus.get(row.id),"Browser fixture must not mutate source state");
  }
  assert.equal(focus.items.find(x=>x.id===id).status,originalFocusStatus,"The browser fixture must not mutate the real repository focus status");
- console.log("PASS Frauen home 16-index: global male/female/neutral, 4 Chromium responsive layouts, 36 localized cards (RTL), all 16 direct canonical reader links and navigation, source/expiry fail-closed, unchanged repository data.");
+ console.log("PASS Frauen 48h: native 4 viewports/36 locale cards; public website #pageRoot on desktop+mobile; 16 direct canonical desktop readers each, global profiles, RTL, source/expiry fail-closed, immutable registry.");
  }finally{if(browser)await browser.close()}
 })().catch(e=>{console.error(e.stack||e);process.exitCode=1});
