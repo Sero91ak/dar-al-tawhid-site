@@ -66,7 +66,7 @@ function elem(tag,cl,text){var x=d.createElement(tag);if(cl)x.className=cl;if(te
 function clear(){q.replaceChildren()}
 function message(msg){clear();q.append(elem("p","fw-message",msg))}
 function safeJson(response){if(!response.ok)throw Error("HTTP "+response.status);return response.json()}
-var entryIds,entries,entry,sourceUrl,sourceStatus,stage=0,correct=0,answered=false,items=[];
+var entryIds,entries,entry,sourceUrl,sourceStatus,stage=0,correct=0,answered=false,items=[],verifiedIds=null;
 function bottomLink(){var a=elem("a","fw-link",lab.back);var surface=url.searchParams.get("from");a.href="/wissen/beitrag/?id="+encodeURIComponent(id)+"&lang="+encodeURIComponent(code)+(surface==="test"||surface==="pwa"?"&from="+surface:"");a.target="_top";return a}
 var READ_LABELS={
  de:"Die vollständige Aussage erneut lesen",ar:"إعادة قراءة النص الكامل",en:"Read the complete statement again",
@@ -86,9 +86,17 @@ function languageControl(){
  label.htmlFor=select.id;select.setAttribute("aria-label",LANG_LABELS[code]);
  api.CODES.forEach(function(c){var o=elem("option","",LANGUAGE_NAMES[c]);o.value=c;o.selected=c===code;select.append(o)});
  select.addEventListener("change",function(){
-  var u=new URL(w.location.href);u.searchParams.set("lang",select.value);
-  // Preserve canonical source ID, restart only the learner in chosen locale.
-  w.location.assign(u.toString());
+  var next=api.lang(select.value);
+  if(!verifiedIds){select.value=code;return}
+  try{
+   var translated=api.questions(id,entryIds,entries,next,verifiedIds);
+   if(translated.length!==4)return;
+   code=next;lab=api.labels[code];items=translated;
+   d.documentElement.lang=code;d.documentElement.dir=code==="ar"||code==="ckb"?"rtl":"ltr";
+   d.title="DĀR AL TAWḤĪD · "+lab.brand;
+   if(w.self===w.top)try{var u=new URL(w.location.href);u.searchParams.set("lang",code);w.history.replaceState(w.history.state,"",u.toString())}catch(_){}
+   stage=0;correct=0;answered=false;render(true);
+  }catch(error){try{console.warn("DAR quiz language unavailable",error)}catch(_){}select.value=code}
  });
  wrap.append(label,select);return wrap
 }
@@ -149,14 +157,18 @@ function finish(){
  if(typeof resultHeading.focus==="function")resultHeading.focus();
 }
 (async function(){
- message(lab.loading);
+ // Keep the verified dataset mounted: no second loading banner.
+ q.replaceChildren();
  try{
   if(!/^[a-z0-9-]+$/.test(id))throw Error("Invalid canonical ID");
-  var catalog=await w.fetch("/assets/frauen/frauen-entry-locales-v1.json?v=20261118-batch16-learning",{cache:"no-store"}).then(safeJson);
+  var cached=null;
+  try{if(w.parent&&w.parent!==w&&w.parent.DARFrauenNeufokusV1?.getReaderData)
+   cached=w.parent.DARFrauenNeufokusV1.getReaderData(id)}catch(_){}
+  var catalog=cached?.catalog||await w.fetch("/assets/frauen/frauen-entry-locales-v1.json?v=20261118-batch16-learning",{cache:"no-store"}).then(safeJson);
   entry=catalog.entries&&catalog.entries[id];entryIds=catalog.entryIds;entries=catalog.entries;
   if(!entry||!Array.isArray(entryIds)||!entryIds.includes(id)||!entry.locales||!entry.locales[code])throw Error("Article not in locale catalog");
   if(!api.sourceFiles[entry.area])throw Error("Unknown female knowledge area");
-  var source=await w.fetch(api.sourceFiles[entry.area]+"?v=20261118-batch16-learning",{cache:"no-store"}).then(safeJson);
+  var source=cached?.sources?.[api.sourceFiles[entry.area]]||await w.fetch(api.sourceFiles[entry.area]+"?v=20261118-batch16-learning",{cache:"no-store"}).then(safeJson);
   var original=(source.eintraege||[]).filter(e=>e.kennung===id);
   if(original.length!==1||original[0].quellenstatus!=="geprueft"||original[0].freigabeDurchSerhat!==true){
     message(lab.ready);return;
@@ -167,7 +179,7 @@ function finish(){
   var verified=new Set();
   var areas=Object.keys(api.sourceFiles);
   var records=await Promise.all(areas.map(function(area){
-    return area===entry.area?Promise.resolve(source):w.fetch(api.sourceFiles[area]+"?v=20261118-batch16-learning",{cache:"no-store"}).then(safeJson);
+    return area===entry.area?Promise.resolve(source):cached?.sources?.[api.sourceFiles[area]]?Promise.resolve(cached.sources[api.sourceFiles[area]]):w.fetch(api.sourceFiles[area]+"?v=20261118-batch16-learning",{cache:"no-store"}).then(safeJson);
   }));
   records.forEach(function(doc){
     (doc.eintraege||[]).forEach(function(e){
@@ -178,7 +190,7 @@ function finish(){
          e.localeCatalogId===e.kennung)verified.add(e.kennung);
     });
   });
-  items=api.questions(id,entryIds,entries,code,verified);
+  verifiedIds=verified;items=api.questions(id,entryIds,entries,code,verified);
   if(items.length!==4||items.some(x=>x.options.length!==3))throw Error("Incomplete comprehension quiz");
   render();
  }catch(e){try{console.warn("DAR women learning",e)}catch(_){}message(lab.failed)}
