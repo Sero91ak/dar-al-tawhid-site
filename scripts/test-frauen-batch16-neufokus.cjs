@@ -41,12 +41,13 @@ function node(tag){
   append(...children){this.children.push(...children)},
   replaceChildren(...children){this.children=children},
   remove(){registry.delete(this.id)},
-  querySelector(){return null}
+  querySelector(){return null},focus(){}
  };
  return element;
 }
 const home={querySelector(sel){return sel===".dv3-tawhid"?anchor:null},appendChild(el){registry.set(el.id,el)}};
 const doc={readyState:"loading",hidden:false,head:{appendChild(el){registry.set(el.id,el)}},
+ body:{appendChild(el){registry.set(el.id,el)}},
  getElementById(id){if(id==="dv3Home")return home;return registry.get(id)||null},
  createElement:node,addEventListener(ev,cb){(listeners[ev]??=[]).push(cb)}
 };
@@ -105,7 +106,17 @@ function getCard(){return registry.get("darFrauenNeufokus48h")||null}
  assert.equal(expiryTimers.size,1,"Precisely one expiry timer required for the visible focus");
  assert.equal(active.dir,"ltr");assert.equal(active.lang,"tr");
  assert.ok(active.children.some(x=>/16 yeni/.test(x.textContent)),"Turkish focus label missing");
- active.onclick();assert.deepEqual(navigated,["frauen"],"Focus must open actual in-app women hub");
+ active.onclick();
+ const overlay=registry.get("darFrauenNeufokusIndex");
+ assert.ok(overlay,"Clicking the global home focus must open a 16-item index, not a generic category");
+ function descendants(el){return [el,...(el.children||[]).flatMap(descendants)]}
+ const links=descendants(overlay).filter(x=>x.tagName==="A");
+ assert.equal(links.length,16,"Exactly 16 new women posts must be individually selectable");
+ assert.equal(links[0].href,"#frauen/sahabiyyat/sahabiyyat-umm-haram-seeueberfahrt-20261106");
+ links[0].onclick({preventDefault(){}});
+ assert.equal(win.location.hash,links[0].href,"Opening one article must use the canonical existing reader route");
+ assert.equal(registry.get("darFrauenNeufokusIndex"),undefined,"Release index must close before reading");
+ assert.deepEqual(navigated,[],"Focus must not bypass the 16-entry index to generic Frauen hub");
  lang="ar";
  await refresh();assert.equal(getCard().dir,"rtl");assert.equal(getCard().lang,"ar");
  assert.ok(getCard().children.some(x=>/١٦/.test(x.textContent)),"Arabic title missing");
@@ -120,5 +131,5 @@ function getCard(){return registry.get("darFrauenNeufokus48h")||null}
    const original=source["/"+row.sourceFile].eintraege.find(x=>x.kennung===row.id);
    assert.equal(original.quellenstatus,"nicht-anzeigen","Original source state changed: "+row.id);
  }
- console.log("PASS 48h Frauen Neufokus: global men/women/neutral, draft hidden, hidden-source gate, 15/16 fail-close, 16/16 live, Turkish/Arabic RTL, in-app click, exact duration, expiry. No publish or push.");
+ console.log("PASS 48h Frauen Neufokus: global man/woman/neutral, 16-entry localized index, canonical direct article click, draft hidden, 15/16 fail-close, 16/16 live, RTL, exact duration/expiry. No publish or push.");
 })().catch(e=>{console.error(e.stack||e);process.exitCode=1});
