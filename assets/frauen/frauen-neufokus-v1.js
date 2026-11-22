@@ -83,7 +83,10 @@ function showIndex(opener){
   // Q-style standalone reader is canonical for contributions without Q IDs,
   // identical on native iOS/Android, DAR TEST, PWA and public website.
   // Do not mint Q numbers, clone articles or link to an unlocalized shell.
-  var target="/wissen/beitrag/?id="+encodeURIComponent(row.id)+"&lang="+encodeURIComponent(code);
+  var origin=/^\/test(?:\/|$)/.test(w.location.pathname)?"test":
+    /^\/pwa(?:\/|$)/.test(w.location.pathname)?"pwa":"";
+  var target="/wissen/beitrag/?id="+encodeURIComponent(row.id)+"&lang="+encodeURIComponent(code)+
+    (origin?"&from="+origin:"");
   link.href=target;
   var number=d.createElement("span");number.className="dar-frauen-index-number";number.textContent=String(i+1).padStart(2,"0");
   var body=d.createElement("span");body.className="dar-frauen-index-item-body";
