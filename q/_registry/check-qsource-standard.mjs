@@ -211,3 +211,23 @@ if (fail.length) {
   process.exit(1);
 }
 console.log('Q-Quellenkarten-Gate OK: ' + files.length + ' aktive Bestandskarten, alle Nachweiskarten funktional adressiert; zukünftige Q ab 43 strikt geprüft.');
+
+
+// Q63 TEMPORARY PUBLIC READ-ONLY DEPLOY EVIDENCE. Audit PR only — DO NOT MERGE.
+const q63Checks = [
+ {label:'Q63 source card',url:'https://dar-al-tawhid.de/q/63/',need:['q63-arabic','q63-isnad-ar','q63-detail-sections','q63-learning','q63-archive-h']},
+ {label:'Q63 complete nine-language catalog',url:'https://dar-al-tawhid.de/assets/q63-locales.json',need:['"qSourceId": 63','"arabicOriginal"','"arabicIsnad"','"quiz"','"details"']},
+ {label:'Q63 knowledge quiz',url:'https://dar-al-tawhid.de/lernen/ikhlas-verborgene-sadaqah-abu-dharr/',need:['/assets/q63-locales.json','/q/63/','id="quiz"','https://dar-al-tawhid.de/lernen/ikhlas-verborgene-sadaqah-abu-dharr/']}
+];
+for (const item of q63Checks) {
+ let verified=false;
+ for(let n=0;n<4;n++){
+  const r=await fetch(item.url,{headers:{'cache-control':'no-cache','user-agent':'DAR-Q63-HTTP-AUDIT/1.0'},redirect:'follow',signal:AbortSignal.timeout(22000)});
+  const body=await r.text(),missing=item.need.filter(k=>!body.includes(k));
+  console.log('Q63_PUBLIC_PROOF',JSON.stringify({label:item.label,status:r.status,bytes:body.length,missing,finalUrl:r.url,attempt:n+1}));
+  if(r.status===200&&missing.length===0){verified=true;break;}
+  if(n<3)await new Promise(ok=>setTimeout(ok,3500));
+ }
+ if(!verified)throw new Error('Q63 remote live audit failed: '+item.label);
+}
+console.log('Q63_PUBLIC_PROOF_SUCCESS: all three Cloudflare public resources serve complete current material');
