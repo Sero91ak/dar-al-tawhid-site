@@ -265,7 +265,7 @@
     "title": "16 neue Frauenbeiträge · DĀR AL TAWḤĪD",
     "body": "16 neue quellenbelegte Beiträge über die Ṣaḥābiyyāt, die Mütter der Gläubigen und Frauenfiqh – in neun Sprachen.",
     "destination": "https://dar-al-tawhid.de/",
-    "sendStatus": "blocked-until-deployed-and-authorized",
+    "sendStatus": "sent",
     "audience": "adult-app AND post-push-opt-in",
     "optInRequired": true,
     "verifyTargetSegment": true,
@@ -317,7 +317,7 @@
       }
     },
     "messageReview": "editorial drafts; native-language validation required before any send",
-    "guardStatus": "not-authorized-not-sent",
+    "guardStatus": "sent-once-confirmed-by-onesignal",
     "redirectMustOpen": "The one global opted-in adult post push opens the adult homepage. Its 48h NEUFOKUS is visible to woman, man and neutral profiles; tapping the card opens the dedicated nine-language 16-entry in-app index. Each entry routes directly to #frauen/{area}/{canonical-id}, not to a generic category or an unrelated article. All other profile-personalized recommendations remain unchanged.",
     "providerIdempotencyUuid": "d1c40b28-2bd3-43fd-a14b-708df7d5d976",
     "providerIdempotencyPolicy": "Immutable UUIDv4 idempotency_key for one global opted-in adult post-push announcement. Send only after all 16 records are live and fully approved; do not target Kids or unsubscribe states.",
@@ -354,7 +354,30 @@
       "policy": "Deliver localized notification to opted-in global adult-post subscriptions only. Native and Kurdish per-installation language routing must be verified; never claim machine translations independently human reviewed."
     },
     "recipientSegment": "DAR_PUSH",
-    "notificationOwnerOverrideConfirmedAt": "2026-11-21"
+    "notificationOwnerOverrideConfirmedAt": "2026-11-21",
+    "providerNotificationId": "4a7866a4-cc5e-4f6b-bda3-7bc064843b68",
+    "sentAt": "2026-11-22T16:21:54.000Z",
+    "completedAt": "2026-11-22T16:21:56.000Z",
+    "providerTargetSegment": "DAR_PUSH",
+    "providerDelivery": {
+      "successful": 118,
+      "failed": 1,
+      "errored": 0,
+      "remaining": 0,
+      "chrome_web_push": 5,
+      "ios": 104,
+      "safari_web_push": 9
+    },
+    "senderWorkflow": "Connected OneSignal tool; directly on explicit latest owner command; separate GitHub push-lane source lock unchanged",
+    "targetUrl": "https://dar-al-tawhid.de/",
+    "nativeTargetUrl": "daraltawhid://in-app?src=https%3A%2F%2Fdar-al-tawhid.de%2F",
+    "clickData": {
+      "type": "focus",
+      "nav": "home",
+      "focusId": "neufokus-frauenwissen-16-20261118",
+      "batchId": "frauen-batch16-20261118"
+    },
+    "noRepeatedPush": true
   },
   "excluded": [
     "Kids",
@@ -381,7 +404,7 @@
     "isNativeLanguageReview": false,
     "isVerifiedAudienceConsent": false,
     "overrideExistingSecurityGates": false,
-    "actionStatus": "content-live-verified; focus-activation-pending; notification-password-and-optin-blocked",
+    "actionStatus": "16-publicly-live; global-48h-focus-live; one-9-locale-OneSignal-push-confirmed-118",
     "notificationAudienceCorrectionAt": "2026-11-21",
     "notificationAudienceCorrection": "global opted-in adults, profile-controlled UI presentation; supersedes original women-segment constraint for this batch",
     "requestedDistribution": {
@@ -430,7 +453,7 @@
     "priorKnowledgeWomanTargeting": "Superseded by owner's new explicit instruction for THIS 16-item announcement, not for other women-only knowledge campaigns.",
     "requireFirst": "All 16 items published and accessible, release CI and source/locale quality gates, safe URL/deep-link verified.",
     "plannedIdempotencyKey": "d1c40b28-2bd3-43fd-a14b-708df7d5d976",
-    "currentStatus": "approved-route-not-yet-sent"
+    "currentStatus": "sent-once-confirmed-118-success-1-failure"
   },
   "publicationAudit": {
     "verifiedAt": "2026-11-22T16:06:58.112Z",
@@ -444,6 +467,6 @@
     "independentNativeSpeakerCertified": false,
     "responsiveUiQa": "Automated Playwright Chromium tests of 16-item release index over phone, fold, tablet, desktop and nine UI locales; no physical native-device signoff claimed",
     "sourceAuditIndependentHumanStatus": "Not independently certified; historical source-audit flags remain unchanged",
-    "pushNotificationStatus": "NOT SENT; separate password, audience consent and installation-locale checks remain required"
+    "pushNotificationStatus": "One once-only OneSignal DAR_PUSH notification 4a7866a4-cc5e-4f6b-bda3-7bc064843b68; successful=118, failed=1, errored=0, sentAt=2026-11-22T16:21:54.000Z"
   }
 }
