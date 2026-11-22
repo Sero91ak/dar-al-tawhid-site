@@ -22,6 +22,7 @@ fr:{eyebrow:"NOUVEAU FOCUS · 48 HEURES",title:"16 nouveaux articles sur les fem
 es:{eyebrow:"NUEVO FOCO · 48 HORAS",title:"16 artículos nuevos sobre las mujeres",body:"Las Compañeras, las Madres de los Creyentes y el fiqh de la mujer. Lee los relatos, consulta las fuentes y aprende.",cta:"Leer los artículos",meta:"16 artículos · 9 idiomas · aprendizaje"}
 };
 var enabled=false,until=0,started=0,pending=null,lastFetch=0,scheduled=false,expiryTimer=null;
+var readyIndex=null,indexOverlay=null,indexOpener=null;
 function scheduleExactExpiry(){
  if(expiryTimer!==null){w.clearTimeout(expiryTimer);expiryTimer=null}
  if(!enabled||!until)return;
@@ -45,11 +46,75 @@ function locale(){
 // The time-limited homepage announcement is editorial/global, not a
 // personalized woman-only recommendation. Profile-specific women suggestions
 // elsewhere in the app remain unchanged.
+// Keep the 16-entry release inside the existing visitor app. This list is
+// never populated from unrelated profile recommendations or old Frauen posts.
+function closeIndex(restoreFocus){
+ if(!indexOverlay)return;
+ indexOverlay.remove();indexOverlay=null;
+ if(restoreFocus!==false&&indexOpener&&typeof indexOpener.focus==="function")
+   try{indexOpener.focus({preventScroll:true})}catch(_){}
+ indexOpener=null;
+}
+function showIndex(opener){
+ if(!enabled||Date.now()<started||Date.now()>=until||!readyIndex||!d.body)return;
+ if(indexOverlay){var existing=indexOverlay.querySelector(".dar-frauen-index-close");if(existing?.focus)existing.focus();return}
+ var code=locale(),t=I18N[code],rtl=code==="ar"||code==="ckb";
+ var overlay=d.createElement("div");overlay.id="darFrauenNeufokusIndex";
+ overlay.className="dar-frauen-index-backdrop";
+ var dialog=d.createElement("section");dialog.className="dar-frauen-index-dialog";
+ dialog.setAttribute("role","dialog");dialog.setAttribute("aria-modal","true");
+ dialog.setAttribute("aria-labelledby","darFrauenNeufokusIndexTitle");
+ dialog.lang=code;dialog.dir=rtl?"rtl":"ltr";
+ var head=d.createElement("header");head.className="dar-frauen-index-head";
+ var eyebrow=d.createElement("span");eyebrow.className="dar-frauen-index-eyebrow";eyebrow.textContent=t.eyebrow;
+ var title=d.createElement("h2");title.id="darFrauenNeufokusIndexTitle";title.textContent=t.title;
+ var subtitle=d.createElement("p");subtitle.className="dar-frauen-index-subtitle";subtitle.textContent=t.body;
+ var info=d.createElement("span");info.className="dar-frauen-index-meta";info.textContent=t.meta;
+ var close=d.createElement("button");close.type="button";close.className="dar-frauen-index-close";
+ close.textContent="×";close.setAttribute("aria-label",({de:"Schließen",ar:"إغلاق",en:"Close",tr:"Kapat",ku:"Bigire",ckb:"داخستن",bs:"Zatvori",fr:"Fermer",es:"Cerrar"})[code]);
+ close.addEventListener("click",function(){closeIndex(true)});
+ head.appendChild(eyebrow);head.appendChild(title);head.appendChild(subtitle);head.appendChild(info);head.appendChild(close);
+ var list=d.createElement("ol");list.className="dar-frauen-index-list";
+ readyIndex.manifest.items.forEach(function(row,i){
+  var entry=readyIndex.catalog.entries[row.id],pack=entry&&entry.locales&&entry.locales[code];
+  if(!pack)return;
+  var li=d.createElement("li");li.className="dar-frauen-index-item";
+  var link=d.createElement("a");link.className="dar-frauen-index-link";
+  var target="#frauen/"+encodeURIComponent(row.area)+"/"+encodeURIComponent(row.id);
+  link.href=target;
+  var number=d.createElement("span");number.className="dar-frauen-index-number";number.textContent=String(i+1).padStart(2,"0");
+  var body=d.createElement("span");body.className="dar-frauen-index-item-body";
+  var area=d.createElement("span");area.className="dar-frauen-index-area";area.textContent=pack.labels?.area||row.area;
+  var caption=d.createElement("strong");caption.className="dar-frauen-index-title";caption.textContent=pack.title;
+  var preview=d.createElement("span");preview.className="dar-frauen-index-preview";preview.textContent=pack.preview;
+  var arrow=d.createElement("span");arrow.className="dar-frauen-index-arrow";arrow.textContent=rtl?"‹":"›";arrow.setAttribute("aria-hidden","true");
+  body.appendChild(area);body.appendChild(caption);body.appendChild(preview);
+  link.appendChild(number);link.appendChild(body);link.appendChild(arrow);
+  link.addEventListener("click",function(event){
+   event.preventDefault();closeIndex(false);w.location.hash=target;
+  });
+  li.appendChild(link);list.appendChild(li);
+ });
+ if(list.children.length!==16)return;
+ dialog.appendChild(head);dialog.appendChild(list);overlay.appendChild(dialog);
+ overlay.addEventListener("click",function(event){if(event.target===overlay)closeIndex(true)});
+ dialog.addEventListener("keydown",function(event){
+  if(event.key==="Escape"){event.preventDefault();closeIndex(true);return}
+  if(event.key!=="Tab")return;
+  var controls=Array.from(dialog.querySelectorAll("button:not([disabled]),a[href]"));
+  if(!controls.length)return;
+  var first=controls[0],last=controls[controls.length-1];
+  if(event.shiftKey&&d.activeElement===first){event.preventDefault();last.focus()}
+  else if(!event.shiftKey&&d.activeElement===last){event.preventDefault();first.focus()}
+ });
+ indexOverlay=overlay;indexOpener=opener;d.body.appendChild(overlay);
+ if(typeof close.focus==="function")close.focus({preventScroll:true});
+}
 function render(){
  var root=d.getElementById("dv3Home"),old=d.getElementById("darFrauenNeufokus48h");
  var now=Date.now();
  if(!root||!enabled||now<started||now>=until){
-   if(old)old.remove();return;
+   closeIndex(false);if(old)old.remove();return;
  }
  var t=I18N[locale()],rtl=locale()==="ar"||locale()==="ckb";
  var button=old;
@@ -62,8 +127,7 @@ function render(){
   else root.appendChild(button);
   button.addEventListener("click",function(){
    if(!enabled||Date.now()>=until)return;
-   try{if(typeof w.navigate==="function"){w.navigate("frauen");return}}catch(_){}
-   w.location.hash="#frauen";
+   showIndex(button);
   });
  }
  button.lang=locale();button.dir=rtl?"rtl":"ltr";
@@ -109,6 +173,7 @@ function json(path){
  return fetchReady(path+(path.indexOf("?")<0?"?":"&")+"cache="+Date.now(),"json");
 }
 async function verifyPublished(){
+ readyIndex=null;
  var manifest=await json("/assets/frauen/frauen-neufokus-v1.json");
  if(manifest.expectedCount!==16||manifest.items?.length!==16||manifest.focusId!==ID)return false;
  if(new Set(manifest.items.map(function(x){return x&&x.id})).size!==16)return false;
@@ -149,6 +214,7 @@ async function verifyPublished(){
  var lessonHtml=await fetchReady("/lernen/frauen-wissen/?neufokus=1","text");
  if(lessonHtml.indexOf('id="quiz"')<0||
     lessonHtml.indexOf("frauen-learning-v1.js")<0)return false;
+ readyIndex={manifest:manifest,catalog:localeCatalog};
  return true;
 }
 async function refresh(force){
@@ -161,10 +227,10 @@ async function refresh(force){
    var isTest=/^\/test(?:\/|$)/.test(w.location.pathname);
    var feed=await json(isTest?"/content/staging/focus-feed/feed-index.json":"/content/focus-feed/feed-index.json");
    var window=validWindow(feed);
-   if(!window){enabled=false;started=0;until=0;return}
+   if(!window){enabled=false;started=0;until=0;readyIndex=null;return}
    var ready=await verifyPublished();
    enabled=ready;started=ready?window.start:0;until=ready?window.end:0;
-  }catch(_){enabled=false;started=0;until=0}
+  }catch(_){enabled=false;started=0;until=0;readyIndex=null}
  })().finally(function(){pending=null;scheduleExactExpiry();render()});
  return pending;
 }
@@ -190,13 +256,13 @@ function init(){
  observe();schedule(true);
  d.addEventListener("dar:view-rendered",function(){observe();schedule(false)});
  d.addEventListener("dar:visitor-profile-changed",function(){render()});
- w.addEventListener("hashchange",function(){schedule(false)});
+ w.addEventListener("hashchange",function(){closeIndex(false);schedule(false)});
  w.addEventListener("pageshow",function(){schedule(true)});
  w.addEventListener("dar-adult-locale-changed",function(){render()});
  w.addEventListener("dar-adult-ui-languages-ready",function(){render()});
  d.addEventListener("visibilitychange",function(){if(!d.hidden)schedule(true)});
  w.setInterval(function(){render();refresh(false)},60000);
 }
-w.DARFrauenNeufokusV1=Object.freeze({validWindow:validWindow,locale:locale,refresh:function(){return refresh(true)}});
+w.DARFrauenNeufokusV1=Object.freeze({validWindow:validWindow,locale:locale,refresh:function(){return refresh(true)},openIndex:function(){showIndex(d.getElementById("darFrauenNeufokus48h"))}});
 if(d.readyState==="loading")d.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })(window,document);
