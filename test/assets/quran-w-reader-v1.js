@@ -568,3 +568,19 @@
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot,{once:true});
   else boot();
 })();
+
+/* DAR_MUSHAF_TEST_BOOK_LOADER_V1 · test only; existing Quran reader/players unchanged. */
+(function () {
+  "use strict";
+  if (!/^\/test(?:\/|$)/.test(location.pathname) && !/^dar-al-tawhid-test\./.test(location.hostname)) return;
+  if (window.__DAR_TEST_MUSHAF_PREVIEW_LOADER__) return;
+  window.__DAR_TEST_MUSHAF_PREVIEW_LOADER__ = true;
+  var css = document.createElement("link");
+  css.rel = "stylesheet";
+  css.href = "/test/assets/dar-mushaf-test-book-v1.css?v=20261122";
+  document.head.appendChild(css);
+  var js = document.createElement("script");
+  js.src = "/test/assets/dar-mushaf-test-book-v1.js?v=20261122";
+  js.defer = true;
+  document.head.appendChild(js);
+})();
