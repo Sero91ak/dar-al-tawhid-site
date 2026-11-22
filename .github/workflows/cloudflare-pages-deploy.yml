@@ -99,6 +99,8 @@ on:
       - umrah/**
       # Linked adult quiz/learning pages must publish with source cards.
       - lernen/**
+      # Permanent reader for published articles without a Q number.
+      - wissen/**
       - quellen/**
       - links/**
       - download/**
