@@ -1,0 +1,61 @@
+name: KIDS Academy Publish 14 Paid Owner V4 Audio (GET only)
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/academy-sidq-history-restore-once.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: academy-sidq-v4-paid-original-get-and-publish
+  cancel-in-progress: false
+jobs:
+  recover-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+    steps:
+      - name: Checkout exact paid production registers
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: true
+      - name: Confirm no synthetic or duplicate ElevenLabs generation can occur
+        run: |
+          set -euo pipefail
+          command -v ffmpeg
+          command -v ffprobe
+          python3 kids/tools/recover-academy-sidq-v4-from-history-v1.py --verify
+          node kids/tools/test-academy-term-coach-v24.cjs
+      - name: Recover all 21 genuine original MP3 files and assemble 14 child audios
+        run: |
+          set -euo pipefail
+          python3 kids/tools/recover-academy-sidq-v4-from-history-v1.py --restore
+      - name: Verify all 72 preserved-plus-new SHA-256 media and no child speech input
+        run: |
+          set -euo pipefail
+          node kids/tools/test-academy-term-coach-v24.cjs
+          node kids/tools/test-academy-sidq-audio-clicks-v1.cjs
+          node scripts/test-kids-academy-v9.js
+      - name: Store original MP3 archive, 14 playable M4A files and receipts in GitHub main
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/original-media/academy-sidq-click-gaps-v1/ \
+            kids/assets/kids-academy-audio/ \
+            kids/data/academy-audio.json \
+            kids/data/academy-topic-batches/akhlaq-sidq-14-missing-real-v4-plan-v1.json \
+            kids/data/academy-topic-batches/akhlaq-sidq-visible-click-gaps-v1.json \
+            kids/data/academy-topic-batches/akhlaq-sidq-originals-sha-v1.json
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "Already imported: no duplicate public commit."
+            exit 0
+          fi
+          git commit -m "kids(academy): publish 14 genuine Serhat V4 Ṣidq click audios and archive 21 original MP3s"
+          git fetch origin main --depth=40
+          git rebase origin/main
+          git push origin HEAD:main
