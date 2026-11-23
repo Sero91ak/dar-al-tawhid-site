@@ -64,5 +64,53 @@ def main():
         if matched_ids or exact_texts: return 0
     print("PROBE_RESULT: Creative Flow generation IDs NOT confirmed in public ElevenLabs history. Do NOT repeat paid generation.")
     return 2
+
+def direct_probe():
+    """Read-only GET against the official Flow generation retrieval endpoint."""
+    p=json.loads(SOURCE.read_text("utf8"))
+    if not API:
+        print("DIRECT_PROBE_BLOCKED: no ELEVENLABS_API_KEY")
+        return 3
+    n=0
+    for key in ("ar-01","de-02","de-20"):
+        seg=p["segments"].get(key)
+        if not seg or not seg.get("generationId"):continue
+        gid=seg["generationId"]
+        url="https://api.elevenlabs.io/v1/flows/text-to-speech/"+urllib.parse.quote(gid,safe="")
+        req=urllib.request.Request(url,headers={
+            "xi-api-key":API,"Accept":"application/json",
+            "User-Agent":"DAR-KIDS-DIRECT-GET-PAID-V4-PROBE/1"})
+        try:
+            with urllib.request.urlopen(req,timeout=30) as res:
+                data=json.load(res)
+        except urllib.error.HTTPError as exc:
+            print("DIRECT_GENERATION",key,"HTTP",exc.code,"(no response body logged)")
+            continue
+        except Exception as exc:
+            print("DIRECT_GENERATION",key,"error",type(exc).__name__)
+            continue
+        # Print shape and URL availability, never signed content URLs.
+        def paths(obj,prefix="",depth=0):
+            if depth>5:return []
+            if isinstance(obj,dict):
+                out=[]
+                for k,v in obj.items():
+                    if isinstance(v,(dict,list)):
+                        out+=paths(v,prefix+"."+k,depth+1)
+                    elif isinstance(v,str) and v.startswith("https://"):
+                        out.append(prefix+"."+k+"=URL("+
+                            str(urllib.parse.urlsplit(v).hostname)+")")
+                    elif k in ("status","id","model_id"):
+                        out.append(prefix+"."+k+"="+str(v)[:40])
+                return out
+            if isinstance(obj,list):return sum((paths(v,prefix+"[]",depth+1) for v in obj[:3]),[])
+            return []
+        fields=paths(data)
+        print("DIRECT_GENERATION",key,"keys=",list(data.keys()),"meta=",fields[:20])
+        if any("=URL(" in x for x in fields):n+=1
+    print("DIRECT_PROBE_URLS",n,"creditsCharged",0)
+    return 0 if n else 2
+
 if __name__=="__main__":
-    raise SystemExit(main())
+    import sys
+    raise SystemExit(direct_probe() if "--direct" in sys.argv[1:] else main())
