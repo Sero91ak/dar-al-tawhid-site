@@ -1,0 +1,18 @@
+name: KIDS Academy Existing V4 Audio History Access Check (GET-only)
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/academy-history-original-check-once.yml'
+permissions:
+  contents: read
+jobs:
+  history-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify existing V4 audio retrieval through read-only API
+        run: python3 kids/tools/probe-academy-history-mapping-v1.py
