@@ -25,7 +25,7 @@
  background-image:radial-gradient(circle at 12% 8%,#fffcf5 0%,transparent 29%),radial-gradient(circle at 83% 92%,#e9d0a426,transparent 44%),repeating-linear-gradient(110deg,#8d643403 0px,#8d643403 1px,transparent 1px,transparent 7px)}
 .sheet:before{content:'';position:absolute;inset:17px;border:1px solid #d7b67b88;border-radius:1px;z-index:4;pointer-events:none}
 .sheet:after{content:'❧';position:absolute;right:28px;bottom:24px;font-size:26px;font-family:Georgia,serif;color:#c7a66b55;pointer-events:none}
-.sheet .watermark{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:390px;max-width:78%;opacity:.23;pointer-events:none;z-index:-1;mix-blend-mode:multiply;filter:sepia(1) saturate(.45)}
+.sheet .watermark{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:390px;max-width:78%;opacity:.12;pointer-events:none;z-index:-1;mix-blend-mode:multiply;filter:sepia(1) saturate(.45)}
 .eyebrow{text-transform:uppercase;letter-spacing:.22em;font-size:10px;font-weight:850;color:#9b7038}
 .page-head{display:flex;justify-content:space-between;align-items:center;gap:18px;border-bottom:1px solid #cda66c;padding:0 0 16px;margin-bottom:35px;color:var(--ink)}
 .page-head .brand{font:500 14px/1.25 DarBrand,Georgia,serif;letter-spacing:.20em;color:#38291e}.page-head .chapter-no{font:500 12px/1.1 DarDisplay,Georgia,serif;letter-spacing:.065em;color:#987344}
@@ -76,7 +76,7 @@
 .note{border-left:2px solid #b98b4a;padding:10px 0 10px 17px;font:600 23px/1.42 DarDisplay,Georgia,serif;color:#423124;min-height:72px;outline-color:#bb9357}.note small{font:400 11px var(--font)}
 [contenteditable=true]:focus{outline:2px solid #ba9255;outline-offset:4px}
 .chapter-cover{padding:72px 69px 64px;background:var(--ivory);color:var(--ink)}
-.chapter-cover .watermark{top:23%;width:350px;opacity:.22}
+.chapter-cover .watermark{top:23%;width:350px;opacity:.11}
 .chapter-cover .chapter-eyebrow{font-size:10px;letter-spacing:.23em;color:#9c713d}
 .chapter-cover .scene-text{position:relative;z-index:2;text-align:center;margin:62px 0 28px;color:var(--ink)}
 .chapter-cover h2{font:600 94px/.93 DarDisplay,Georgia,serif;margin:18px 0;color:#2f231a}
@@ -189,11 +189,18 @@
  .sheet .watermark{width:112mm}
  .arabic{font-size:30pt}.roman,.transliteration{font-size:12pt}
 }
+
+/* The brand remains a quiet 10–15% provenance seal on all interior pages. */
+.sheet:not(.cover) .watermark{opacity:.12!important;filter:sepia(.5) saturate(.34)!important;mix-blend-mode:multiply}
+.chapter-cover .watermark{opacity:.11!important}
+.toolbar .book-back{display:inline-flex;align-items:center;justify-content:center;min-height:42px;text-decoration:none;color:#5b3f23;font-weight:800;font-size:13px}
+.main-diary .diary-prose{font-family:DarDisplay,Georgia,serif;font-size:24px;line-height:1.6;color:#3f2d20;white-space:pre-wrap;overflow-wrap:anywhere;max-width:95%;margin:27px 0 0}
+@media print{.main-diary .diary-prose{font-size:18pt;line-height:1.55}}
 </style>
 </head>
 <body>
 <header class="toolbar" aria-label="Erinnerungsbuch bearbeiten">
-<b>ʿUmrah Book V11</b>
+<a class="action book-back" href="./#page-abschluss" aria-label="Zurück zur ʿUmrah-App">← ʿUmrah-App</a><b>ʿUmrah Book V11</b>
 <label>Reisende<input id="travellers" placeholder="Namen eintragen"></label>
 <label>Reisezeitraum<input id="period" placeholder="Datum / Jahr"></label>
 <label>Foto zuordnen<select id="category"><option value="auto">Automatisch / nach Foto</option><option value="makkah">Makkah allgemein</option><option value="tawaf">Ṭawāf / Kaʿbah</option><option value="say">Ṣafā und Marwah</option><option value="madinah">Madīnah</option><option value="reise">Reisebeginn</option></select></label>
@@ -300,9 +307,21 @@
 var db=null, dbName='dar-umrah-memory-book-v11', store='photo';
 var chapters=['reise','makkah','tawaf','say','madinah'];
 var traveller=document.getElementById('travellers'), period=document.getElementById('period');
+var mainUmrahState=null;try{mainUmrahState=JSON.parse(localStorage.getItem('dar-umrah-v4')||'null')}catch(_){}
+var fromUmrah=new URLSearchParams(location.search).get('source')==='umrah';
+function mainTravellerNames(state){return Array.isArray(state?.people)?state.people.slice(0,Math.max(1,Math.min(8,Number(state.count||state.people.length)))).map((p,i)=>String(p.name||'').trim()||'Person '+(i+1)).join(' · '):''}
+function transferMainProfile(){
+ if(!mainUmrahState)return;
+ var names=mainTravellerNames(mainUmrahState);
+ if((fromUmrah||!traveller.value.trim())&&names){traveller.value=names;try{localStorage.setItem('dar-book-travellers',names)}catch(_){}}
+ if((fromUmrah||!period.value.trim())&&mainUmrahState.dates){period.value=String(mainUmrahState.dates);try{localStorage.setItem('dar-book-period',period.value)}catch(_){}}
+ var title=document.querySelector('.cover h1');
+ if(title&&title.firstChild)title.firstChild.textContent=Number(mainUmrahState.count||1)>1?'Unsere':'Meine';
+ sync();
+}
 try{traveller.value=localStorage.getItem('dar-book-travellers')||'';period.value=localStorage.getItem('dar-book-period')||'';}catch(e){}
 function sync(){document.querySelectorAll('[data-field=travellers]').forEach(function(e){e.textContent=traveller.value||'Persönliche Reise'});document.querySelectorAll('[data-field=period]').forEach(function(e){e.textContent=period.value||'Unser Reisezeitraum'});}
-traveller.addEventListener('input',function(){try{localStorage.setItem('dar-book-travellers',traveller.value);}catch(e){}sync()});period.addEventListener('input',function(){try{localStorage.setItem('dar-book-period',period.value);}catch(e){}sync()});sync();
+traveller.addEventListener('input',function(){try{localStorage.setItem('dar-book-travellers',traveller.value);}catch(e){}sync()});period.addEventListener('input',function(){try{localStorage.setItem('dar-book-period',period.value);}catch(e){}sync()});transferMainProfile();sync();
 document.querySelectorAll('[data-note]').forEach(function(e){var key='dar-book-note-'+e.dataset.note;try{var v=localStorage.getItem(key);if(v!==null)e.textContent=v;}catch(x){}e.addEventListener('input',function(){try{localStorage.setItem(key,e.textContent.slice(0,4000));}catch(x){}})});
 document.getElementById('printBook').addEventListener('click',function(){window.print()});
 document.getElementById('choosePhotos').addEventListener('click',function(){document.getElementById('photos').click()});
@@ -319,8 +338,8 @@ async function exifGPS(file){try{
 }catch(e){return null}}
 function objectStore(mode){if(!db)return null;try{return db.transaction(store,mode).objectStore(store)}catch(e){return null}}
 function save(item){var s=objectStore('readwrite');if(s)try{s.put(item)}catch(e){}}
-function remove(id){var s=objectStore('readwrite');if(s)try{s.delete(id)}catch(e){}}
-function rebalance(chapter){var base=document.querySelector('[data-chapter="'+chapter+'"]');if(!base)return;var primary=base.querySelector('.photo-entries');var old=Array.from(document.querySelectorAll('[data-spread="'+chapter+'"]'));var cards=Array.from(primary.children);old.forEach(function(p){cards.push.apply(cards,Array.from(p.querySelectorAll('.photo-card')));p.remove()});cards.slice(0,2).forEach(function(c){primary.appendChild(c)});var rest=cards.slice(2),anchor=base;for(var i=0;i<rest.length;i+=4){var page=document.createElement('section');page.className='sheet chapter photo-spread';page.dataset.spread=chapter;var top=document.createElement('div');top.className='page-head';top.innerHTML='<span class="brand">DĀR AL TAWḤĪD</span><span class="chapter-no">Fototagebuch</span>';var title=document.createElement('h2');title.className='h2';title.textContent=({reise:'Unser Aufbruch',makkah:'Momente in Makkah',tawaf:'Am Ḥaram',say:'Zwischen Ṣafā und Marwah',madinah:'Erinnerungen aus Madīnah'})[chapter];var caption=document.createElement('p');caption.className='prose';caption.textContent='Bilder, Orte und persönliche Erinnerungen aus diesem Kapitel.';var grid=document.createElement('div');grid.className='photo-entries';rest.slice(i,i+4).forEach(function(c){grid.appendChild(c)});var wm=document.createElement('img');wm.className='watermark';wm.src='../app-logo-original.png';wm.alt='';page.append(wm,top,title,caption,grid);anchor.after(page);anchor=page;}}
+function remove(id){var s=objectStore('readwrite');if(s)try{s.delete(id)}catch(e){}if(String(id).startsWith('main-'))try{localStorage.setItem('dar-book-hidden-'+id,'1')}catch(_){}}
+function rebalance(chapter){var base=document.querySelector('[data-chapter="'+chapter+'"]');if(!base)return;var primary=base.querySelector('.photo-entries');var old=Array.from(document.querySelectorAll('[data-spread="'+chapter+'"]'));var cards=Array.from(primary.children);old.forEach(function(p){cards.push.apply(cards,Array.from(p.querySelectorAll('.photo-card')));p.remove()});cards.slice(0,2).forEach(function(c){primary.appendChild(c)});var rest=cards.slice(2),anchor=base;for(var i=0;i<rest.length;i+=4){var page=document.createElement('section');page.className='sheet chapter photo-spread';page.dataset.spread=chapter;var top=document.createElement('div');top.className='page-head';top.innerHTML='<span class="brand">DĀR AL TAWḤĪD</span><span class="chapter-no">Fototagebuch</span>';var title=document.createElement('h2');title.className='h2';title.textContent=({reise:'Unser Aufbruch',makkah:'Momente in Makkah',tawaf:'Am Ḥaram',say:'Zwischen Ṣafā und Marwah',madinah:'Erinnerungen aus Madīnah'})[chapter];var caption=document.createElement('p');caption.className='prose';caption.textContent='Bilder, Orte und persönliche Erinnerungen aus diesem Kapitel.';var grid=document.createElement('div');grid.className='photo-entries';rest.slice(i,i+4).forEach(function(c){grid.appendChild(c)});var wm=document.createElement('img');wm.className='watermark';wm.src='../app-logo-original.png';wm.alt='';page.append(wm,top,title,caption,grid);anchor.after(page);anchor=page;}updateBookFolios()}
 function makePhoto(item){var chapter=chapters.includes(item.chapter)?item.chapter:'reise',list=document.getElementById('photos-'+chapter);if(!list)return;var figure=document.createElement('figure');figure.className='photo-card';figure.dataset.id=item.id;
  var im=document.createElement('img');var objectUrl=URL.createObjectURL(item.file);im.src=objectUrl;im.alt=item.caption||item.name||'Persönliche Aufnahme';var editable=document.createElement('figcaption');editable.className='caption';editable.contentEditable='true';editable.textContent=item.caption||'Ein Moment in '+(chapter==='madinah'?'Madīnah':chapter==='say'?'Ṣafā / Marwah':chapter==='reise'?'unserer Reise':'Makkah');var meta=document.createElement('div');meta.className='meta';meta.textContent=item.source||'Persönliche Aufnahme';
  var del=document.createElement('button');del.type='button';del.className='remove';del.textContent='Entfernen';del.addEventListener('click',function(){if(confirm('Dieses Foto aus dem lokalen Buch entfernen?')){remove(item.id);URL.revokeObjectURL(objectUrl);figure.remove();rebalance(chapter);}});
@@ -334,8 +353,95 @@ async function addFile(file){if(!/^image\//.test(file.type)&&!/\.(heic|heif)$/i.
  var source=selected!=='auto'?'Ort manuell ausgewählt':gps&&locationGuess?'Aufnahmeort aus JPEG-GPS zugeordnet':guess(file.name)?'Dateiname zur Einordnung genutzt':'Ort manuell zugeordnet';
  var id=(crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random();var entry={id:id,name:file.name,caption:'',chapter:section,source:source,file:file};save(entry);makePhoto(entry);
 }
+
+/* The V11 book reads its own same-origin ʿUmrah journey data, never uploads it. */
+function updateBookFolios(){document.querySelectorAll('#book>.sheet').forEach(function(section,i){
+ var number=section.querySelector('.folio span:last-child');
+ if(number)number.textContent=String(i+1).padStart(2,'0');
+})}
+function makeDiaryPages(){
+ document.querySelectorAll('[data-main-diary]').forEach(function(el){el.remove()});
+ if(!mainUmrahState||!Array.isArray(mainUmrahState.people))return;
+ var people=mainUmrahState.people.slice(0,Math.max(1,Math.min(8,Number(mainUmrahState.count||mainUmrahState.people.length))));
+ var last=document.querySelector('.colophon');if(!last)return;
+ people.forEach(function(person,i){
+  (Array.isArray(person.notes)?person.notes:[]).forEach(function(note,day){
+   var remaining=String(note||'').trim(),part=0;
+   while(remaining.length){
+    var cut=Math.min(840,remaining.length);
+    if(cut<remaining.length){var space=remaining.lastIndexOf(' ',cut);if(space>400)cut=space}
+    var chunk=remaining.slice(0,cut).trim();remaining=remaining.slice(cut).trim();
+    var page=document.createElement('section');page.className='sheet chapter main-diary';page.dataset.mainDiary='1';
+    var wm=document.createElement('img');wm.className='watermark';wm.src='../app-logo-original.png';wm.alt='';
+    var head=document.createElement('div');head.className='page-head';
+    var brand=document.createElement('span');brand.className='brand';brand.textContent='DĀR AL TAWḤĪD';
+    var chapter=document.createElement('span');chapter.className='chapter-no';chapter.textContent='Persönliches Reisetagebuch';
+    head.append(brand,chapter);
+    var eyebrow=document.createElement('div');eyebrow.className='eyebrow';eyebrow.textContent=String(person.name||'Person '+(i+1));
+    var title=document.createElement('h2');title.className='h2';title.textContent='Erinnerungen · Tag '+(day+1)+(part?' · Fortsetzung':'');
+    var desc=document.createElement('p');desc.className='intro';desc.textContent='Ein besonderer Augenblick unserer Reise.';
+    var body=document.createElement('p');body.className='diary-prose';body.textContent=chunk;
+    var foot=document.createElement('div');foot.className='folio';
+    var fl=document.createElement('span');fl.textContent='Persönliches Reisejournal · '+String(person.name||'Reisende');
+    var fn=document.createElement('span');fn.textContent='';foot.append(fl,fn);
+    page.append(wm,head,eyebrow,title,desc,body,foot);
+    last.before(page);part++;
+   }
+  })
+ });
+ updateBookFolios();
+}
+function mainPhotoChapter(meta){
+ var text=[meta.place,meta.caption,meta.name].filter(Boolean).join(' ').toLowerCase();
+ if(/safa|marwa|sa.y/.test(text))return 'say';
+ if(/tawaf|ṭawāf|umrund/.test(text))return 'tawaf';
+ if(/madina|medina|nabawi|quba|uhud|rawda/.test(text))return 'madinah';
+ if(/haram|makk|mecca|kaaba|ka.bah|jabal|arafat|nour|hira/.test(text))return 'makkah';
+ return 'reise';
+}
+function loadFromPhotoDB(database,id){return new Promise(function(resolve){
+ try{var request=database.transaction('photos','readonly').objectStore('photos').get(id);request.onsuccess=function(){resolve(request.result||null)};request.onerror=function(){resolve(null)}}catch(_){resolve(null)}
+})}
+function bookPhotoExists(id){return new Promise(function(resolve){
+ try{var r=db.transaction(store,'readonly').objectStore(store).get(id);r.onsuccess=function(){resolve(!!r.result)};r.onerror=function(){resolve(false)}}catch(_){resolve(false)}
+})}
+async function transferMainPhotos(){
+ if(!mainUmrahState||!Array.isArray(mainUmrahState.photoMeta)||!mainUmrahState.photoMeta.length||!db)return;
+ var existing=mainUmrahState.photoMeta;
+ try{
+  var source=await new Promise(function(resolve){
+   var q=indexedDB.open('dar-umrah-private-photos-v1');
+   q.onsuccess=function(){resolve(q.result)};q.onerror=function(){resolve(null)};
+   q.onupgradeneeded=function(){q.transaction.abort();resolve(null)}
+  });
+  if(!source||!source.objectStoreNames.contains('photos')){if(source)source.close();return}
+  var people=Array.isArray(mainUmrahState.people)?mainUmrahState.people:[];
+  for(const m of existing){
+   if(!m||!m.id)continue;
+   var id='main-'+String(m.id);
+   try{if(localStorage.getItem('dar-book-hidden-'+id)==='1')continue}catch(_){}
+   if(await bookPhotoExists(id))continue;
+   var record=await loadFromPhotoDB(source,m.id);
+   if(!record||!(record.blob instanceof Blob))continue;
+   var person=people.find(function(p){return p.id===m.owner});
+   var owner=person?String(person.name||'').trim():'';
+   var entry={id:id,name:m.name||'Reisefoto',caption:m.caption||'',chapter:mainPhotoChapter(m),
+    source:(owner?owner+' · ':'')+'Aus dem ʿUmrah-Tagebuch · Tag '+(Number(m.day||0)+1),
+    file:record.blob,origin:'umrah',originId:m.id};
+   save(entry);makePhoto(entry);
+  }
+  source.close();
+ }catch(e){console.warn('Bilder aus der ʿUmrah-App konnten lokal nicht gelesen werden',e)}
+ updateBookFolios();
+}
+function finishBookInit(){
+ makeDiaryPages();
+ updateBookFolios();
+ transferMainPhotos().catch(function(e){console.warn('Albumübernahme eingeschränkt',e)});
+}
+
 document.getElementById('photos').addEventListener('change',async function(e){var files=Array.from(e.target.files||[]).slice(0,35);for(const f of files)await addFile(f);e.target.value=''});
-if('indexedDB' in window){try{var req=indexedDB.open(dbName,1);req.onupgradeneeded=function(){if(!req.result.objectStoreNames.contains(store))req.result.createObjectStore(store,{keyPath:'id'})};req.onsuccess=function(){db=req.result;var s=objectStore('readonly');if(s)s.getAll().onsuccess=function(e){(e.target.result||[]).forEach(makePhoto)}};}catch(e){}}
+if('indexedDB' in window){try{var req=indexedDB.open(dbName,1);req.onupgradeneeded=function(){if(!req.result.objectStoreNames.contains(store))req.result.createObjectStore(store,{keyPath:'id'})};req.onsuccess=function(){db=req.result;var s=objectStore('readonly');if(s)s.getAll().onsuccess=function(e){(e.target.result||[]).forEach(makePhoto);finishBookInit()};else finishBookInit()};req.onerror=function(){makeDiaryPages()}}catch(e){makeDiaryPages()}}else{makeDiaryPages()}
 })();
 </script>
 </body>
