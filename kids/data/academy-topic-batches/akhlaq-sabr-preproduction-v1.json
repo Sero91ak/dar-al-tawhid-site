@@ -1,0 +1,645 @@
+{
+  "schemaVersion": 1,
+  "id": "TAWHID_KIDS_SABR_SOURCE_BACKED_PREPRODUCTION_V1",
+  "topicId": "akhlaq-sabr",
+  "topic": "Ṣabr – Geduld",
+  "ageBands": [
+    "4-5",
+    "6-8",
+    "9-10"
+  ],
+  "productionPhase": "source-review-and-zero-credit-preproduction",
+  "priorTopic": "sidq",
+  "priorTopicLiveConfirmed": false,
+  "liveDeploymentAllowed": false,
+  "paymentGenerationAllowed": false,
+  "sourceMaterial": [
+    {
+      "type": "quran",
+      "reference": "2:153",
+      "canonicalArabic": "يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ ۚ إِنَّ اللَّهَ مَعَ الصَّابِرِينَ",
+      "originalReciterRequired": true
+    },
+    {
+      "type": "hadith",
+      "reference": "Ṣaḥīḥ al-Buḫārī 1469",
+      "usage": "child-friendly paraphrase; do not present as verbatim literal quote"
+    }
+  ],
+  "rules": {
+    "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+    "modelId": "eleven_v4",
+    "speaker": "Serhat Abu Malik – Master",
+    "noOriginalRegeneration": true,
+    "zeroSynthesizedQuranRecitation": true,
+    "retainReligiousSourcesAsMetadataNotChildNarration": true,
+    "stripAnswerNumberFromSpokenAudio": true,
+    "useNativeArabicFushaSegments": true,
+    "noPublicApprovalUntilActualMediaVerified": true,
+    "ownerAuthorizedNoManualPrelisten": true,
+    "preserveExistingChildProgress": true
+  },
+  "sourcePhraseCount": 23,
+  "obsoleteOriginalPromptsExcluded": [
+    {
+      "originalVisibleText": "Erkläre mit deinen Worten: Geduld – wie kannst du es im Alltag üben?",
+      "replacementReason": "Old free-text request / editorial source question: not visible after child choice-only projection",
+      "doNotGenerate": true
+    },
+    {
+      "originalVisibleText": "Erkläre, wie sich Geduld in einer Alltagssituation zeigen kann.",
+      "replacementReason": "Old free-text request / editorial source question: not visible after child choice-only projection",
+      "doNotGenerate": true
+    },
+    {
+      "originalVisibleText": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 2:153 und der genannten Überlieferung?",
+      "replacementReason": "Old free-text request / editorial source question: not visible after child choice-only projection",
+      "doNotGenerate": true
+    }
+  ],
+  "glossaryCount": 3,
+  "adaptedQuestionAnswerCount": 9,
+  "distinctPreflightPhrases": 32,
+  "childrenAgeSourceCoverage": {
+    "4-5": true,
+    "6-8": true,
+    "9-10": true
+  },
+  "status": "prepared-not-generated-not-live",
+  "entries": [
+    {
+      "visibleText": "Allah hilft den Geduldigen.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Allah hilft den Geduldigen.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Allah hilft den Geduldigen. Ich übe Geduld, wenn etwas nicht sofort klappt.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Allah hilft den Geduldigen. Ich übe Geduld, wenn etwas nicht sofort klappt.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Dann atme ich ruhig und werde nicht gemein.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Dann atme ich ruhig und werde nicht gemein.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich darf um Hilfe bitten und geduldig weiterüben.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich darf um Hilfe bitten und geduldig weiterüben.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich kann ruhig warten und freundlich bleiben.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "summary",
+          "age": "all"
+        }
+      ],
+      "kind": "summary",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich kann ruhig warten und freundlich bleiben.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich übe Geduld, wenn etwas nicht sofort klappt.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "summary",
+          "age": "all"
+        }
+      ],
+      "kind": "summary",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich übe Geduld, wenn etwas nicht sofort klappt.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen. Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "summary",
+          "age": "all"
+        }
+      ],
+      "kind": "summary",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen. Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Manchmal müssen wir auf etwas warten.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Manchmal müssen wir auf etwas warten.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Mit Geduld handle ich freundlich.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Mit Geduld handle ich freundlich.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Qurʾān: Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen. Sunnah: Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Qurʾān: Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen. Sunnah: Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Du musst auf etwas warten. Was tust du?",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Du musst auf etwas warten. Was tust du?",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Was möchten wir uns heute merken?",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Was möchten wir uns heute merken?",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wo lernen wir mehr über dieses Thema?",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Wo lernen wir mehr über dieses Thema?",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Ich kann ruhig warten und freundlich bleiben.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich kann ruhig warten und freundlich bleiben.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Ich warte ruhig und bleibe freundlich.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich warte ruhig und bleibe freundlich.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Im Qurʾān und in der authentischen Sunnah.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Im Qurʾān und in der authentischen Sunnah.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Ich muss das Gelernte nicht beachten.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich muss das Gelernte nicht beachten.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Ich schimpfe alle an.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich schimpfe alle an.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Wir müssen uns die Regeln selbst ausdenken.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Wir müssen uns die Regeln selbst ausdenken.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wie kannst du Geduld im Alltag zeigen?",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Wie kannst du Geduld im Alltag zeigen?",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Ich bleibe freundlich und übe weiter, auch wenn etwas nicht sofort klappt.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich bleibe freundlich und übe weiter, auch wenn etwas nicht sofort klappt.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Ich schimpfe, sobald ich warten muss.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich schimpfe, sobald ich warten muss.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Was zeigt Geduld, wenn etwas nicht sofort gelingt?",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Was zeigt Geduld, wenn etwas nicht sofort gelingt?",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Ich bleibe ruhig, bitte um Hilfe und versuche es erneut.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich bleibe ruhig, bitte um Hilfe und versuche es erneut.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Ich gebe sofort auf und werde gemein.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich gebe sofort auf und werde gemein.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Was lehren Qurʾān 2:153 und der Ḥadīṯ über Geduld?",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Was lehren Qurʾān 2:153 und der Ḥadīṯ über Geduld?",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Allah ist mit den Geduldigen. Wer sich um Geduld bemüht, dem gibt Allah Geduld.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Allah ist mit den Geduldigen. Wer sich um Geduld bemüht, dem gibt Allah Geduld.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Geduld spielt keine Rolle, wenn etwas schwierig wird.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-sabr",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Geduld spielt keine Rolle, wenn etwas schwierig wird.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ṣabr bedeutet: Geduldig bleiben.",
+      "source": "kids/data/academy-vocabulary-voice-plan-v24.json",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sabr",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ],
+      "kind": "glossary",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Ṣabr bedeutet: Geduldig bleiben.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ṣabr bedeutet, ruhig und standhaft zu bleiben, auch wenn etwas schwer ist.",
+      "source": "kids/data/academy-vocabulary-voice-plan-v24.json",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sabr",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ],
+      "kind": "glossary",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Ṣabr bedeutet, ruhig und standhaft zu bleiben, auch wenn etwas schwer ist.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ṣabr ist Geduld und Standhaftigkeit: nicht aufgeben, eine schwierige Lage gut bewältigen und Allah um Hilfe bitten.",
+      "source": "kids/data/academy-vocabulary-voice-plan-v24.json",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sabr",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ],
+      "kind": "glossary",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Ṣabr ist Geduld und Standhaftigkeit: nicht aufgeben, eine schwierige Lage gut bewältigen und Allah um Hilfe bitten.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    }
+  ]
+}
