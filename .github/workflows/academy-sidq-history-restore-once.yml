@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   recover-and-publish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
@@ -22,6 +22,12 @@ jobs:
         with:
           fetch-depth: 2
           persist-credentials: true
+      - name: Install missing media validators on clean runner
+        run: |
+          if ! command -v ffprobe >/dev/null 2>&1 || ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
       - name: Confirm no synthetic or duplicate ElevenLabs generation can occur
         run: |
           set -euo pipefail
