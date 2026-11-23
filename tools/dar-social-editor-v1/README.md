@@ -21,6 +21,23 @@ Die Vorlagenbilder werden ohne Veränderung und proportional auf die Exportfläc
 
 Keine Apple-Pages-Dateiimportierung, keine KI-Quellenrecherche, kein autonomes Erstellen neuer Folgeseiten, kein Cloud-Sync. Schriftarten werden aus den verfügbaren Systemfonts gewählt; die ursprünglichen Apple-Pages-Fonts sind noch nicht exakt abgeglichen. Veraltete oder nicht verifizierte Beispielbelege dürfen nicht ungeprüft veröffentlicht werden. Kein Nutzer-/Admin-Login; nicht ungeschützt in die öffentliche Website einhängen. Keine Veröffentlichung oder Push-Funktion.
 
+## Einbindung in den bestehenden DĀR Admin
+
+Der Editor ist im Entwicklungsbranch als eigener Admin-Menüpunkt **Bildstudio** innerhalb der Gruppe **REDAKTION** integriert. Das bisherige **Redaktionsatelier** und dessen Arbeitsstand bleiben erhalten.
+
+Geplanter Einstieg nach Cloudflare-Freigabe: `https://dar-al-tawhid.de/admin/?tab=bildstudio`
+
+Verwendete Dateien:
+- `admin/index.html`: Tab-Registrierung, Deep Link, Rendern ohne Statistik-Request
+- `admin/command-center-v2.js`: Menügruppe REDAKTION / Bildstudio
+- `admin/social-review.js` und `.css`: gemeinsamer Admin-Workspace mit Bildstudio-/Redaktions-Umschaltung
+- `tools/dar-social-editor-v1/`: eigenständiger lokaler Canvas-Editor
+- `scripts/test-admin-social-studio-integration.cjs`: statische Regressionstests
+
+Der bestehende DĀR-Admin-PIN ist **clientseitig**; die darunterliegenden statischen Studio-Assets sind bislang **nicht mit einer separaten serverseitigen Besitzer-Sitzung geschützt**. Kein Anspruch, dass ein bloßer Menüpunkt oder eingebetteter iframe eine echte Zugriffssperre ist. Vor einer öffentlichen Produktivbereitstellung muss der Cloudflare-Router ein echtes serverseitiges Admin-Gate durchsetzen (oder der Eigentümer muss eine bewusst öffentliche Bereitstellung ausdrücklich genehmigen). Keine automatischen Veröffentlichungen, externen Uploads oder OneSignal-Pushes.
+
+Die in den Admin-Einstellungen ausgewählte Farbe gilt ausschließlich für die Editor-Bedienoberfläche; exportierte Bilder verwenden die Original-Designmaster.
+
 ## GitHub-Integration (separater Freigabeschritt)
 
 Isolierte Ordnerstruktur `tools/dar-social-editor-v1/`; später aus bestehendem Admin mit vorhandener Admin-Authentifizierung einbinden, ohne das Besucher-UI anzupassen. Ein GitHub-Commit ist kein Live- oder App-Nachweis. Keine Änderung an Cloudflare-Router, Source-Links, Lernbereichen, OneSignal, Kids oder bestehenden Automationen.
