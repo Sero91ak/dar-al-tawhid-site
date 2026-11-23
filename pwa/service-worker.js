@@ -104,7 +104,7 @@ self.addEventListener('notificationclick',event=>{
   }catch(_){}
   if(!id){
     const type=String(row.nav||row.target||row.type||row.reminder_type||'').toLowerCase();
-    kind=type.includes('dua')?'dua':/post|recommend|article/.test(type)?'post':'';
+    kind=type.includes('dua')?'dua':(/post|recommend|article/.test(type)||row.postId||row.slug)?'post':row.duaId?'dua':'';
     id=String(row.content_id||row.postId||row.duaId||row.slug||'').trim();
   }
   if(!/^[a-z0-9._-]{1,260}$/i.test(id)){kind='';id=''}
@@ -135,7 +135,7 @@ self.addEventListener('notificationclick',event=>{
         }catch(_){}
         channel.port1.close();
       }
-      if(client.navigate){await client.navigate(finalUrl.href);return}
+      if(client.navigate){try{await client.navigate(finalUrl.href);return}catch(_){}}
     }
     await self.clients.openWindow(finalUrl.href);
   })());
