@@ -345,6 +345,99 @@ async function addFile(file){if(!/^image\//.test(file.type)&&!/\.(heic|heif)$/i.
 }
 document.getElementById('photos').addEventListener('change',async function(e){var files=Array.from(e.target.files||[]).slice(0,35);for(const f of files)await addFile(f);e.target.value=''});
 if('indexedDB' in window){try{var req=indexedDB.open(dbName,1);req.onupgradeneeded=function(){if(!req.result.objectStoreNames.contains(store))req.result.createObjectStore(store,{keyPath:'id'})};req.onsuccess=function(){db=req.result;var s=objectStore('readonly');if(s)s.getAll().onsuccess=function(e){(e.target.result||[]).forEach(makePhoto)}};}catch(e){}}
+
+/* V11 local-origin bridge: imports from the existing Umrah journal WITHOUT
+   changing, copying or erasing the old travel data. The two IndexedDB stores
+   remain separate and its photos are only read here. */
+function mainChapter(place){
+ const p=String(place||'').toLowerCase();
+ if(['safa','marwa','say'].includes(p))return 'say';
+ if(['nabawi','quba','uhud','madinah','medina'].includes(p))return 'madinah';
+ if(['haram','kaaba','kaabah','makkah','mecca','nour','arafat','hira'].includes(p))return 'makkah';
+ return 'reise';
+}
+function mainPlaceText(p){
+ return ({haram:'Masjid al-Ḥarām',safa:'Ṣafā und Marwah',nour:'Jabal an-Nūr',arafat:'ʿArafāt',nabawi:'Al-Masjid an-Nabawī',quba:'Qubāʾ-Moschee',uhud:'Berg Uḥud'})[p]||'Ort nicht zugeordnet';
+}
+function journalChunks(value){
+ const result=[];let text=String(value||'').trim();
+ while(text.length>1150){let split=text.lastIndexOf(' ',1150);if(split<690)split=1150;result.push(text.slice(0,split).trim());text=text.slice(split).trimStart()}
+ if(text)result.push(text);return result;
+}
+function appendJournalPage(name,day,text,cont){
+ const page=document.createElement('section');page.className='sheet chapter umrah-import-journal';
+ const wm=document.createElement('img');wm.className='watermark';wm.src='../app-logo-original.png';wm.alt='';wm.setAttribute('aria-hidden','true');
+ const heading=document.createElement('div');heading.className='page-head';
+ const brand=document.createElement('span');brand.className='brand';brand.textContent='DĀR AL TAWḤĪD';
+ const descriptor=document.createElement('span');descriptor.className='chapter-no';descriptor.textContent='Persönliches Reisejournal';
+ heading.append(brand,descriptor);
+ const eyebrow=document.createElement('div');eyebrow.className='eyebrow';eyebrow.textContent='Unser Reisetagebuch · Tag '+day;
+ const title=document.createElement('h2');title.className='h2';title.textContent=cont?'Erinnerungen · Fortsetzung':'Erinnerungen';
+ const person=document.createElement('p');person.className='intro';person.textContent=name;
+ const story=document.createElement('p');story.className='prose';story.style.whiteSpace='pre-wrap';story.style.overflowWrap='anywhere';story.textContent=text;
+ const footer=document.createElement('div');footer.className='folio';
+ const f=document.createElement('span');f.textContent='Persönliche Aufzeichnung · lokal gespeichert';footer.append(f);
+ page.append(wm,heading,eyebrow,title,person,story,footer);
+ document.querySelector('.sheet.colophon').before(page);
+}
+function loadOriginalUmrahJournal(){
+ let state;try{state=JSON.parse(localStorage.getItem('dar-umrah-v4')||'null')}catch(e){}
+ if(!state||!Array.isArray(state.people)||!state.people.length)return;
+ const persons=state.people.slice(0,Math.max(1,Math.min(8,Number(state.count||state.people.length))));
+ const fromApp=new URLSearchParams(location.search).get('from')==='umrah';
+ const names=persons.map((p,i)=>String(p.name||'').trim()||'Person '+(i+1));
+ if(fromApp||!traveller.value.trim()){
+  traveller.value=names.join(' · ');
+  try{localStorage.setItem('dar-book-travellers',traveller.value)}catch(e){}
+ }
+ if(state.dates&&(fromApp||!period.value.trim())){
+  period.value=String(state.dates);
+  try{localStorage.setItem('dar-book-period',period.value)}catch(e){}
+ }
+ const coverTitle=document.querySelector('.cover h1');
+ if(coverTitle)coverTitle.innerHTML=persons.length>1?'Unsere<span>ʿUmrah</span>':'Meine<span>ʿUmrah</span>';
+ sync();
+ persons.forEach((p,i)=>{
+  (Array.isArray(p.notes)?p.notes:[]).forEach((note,day)=>{
+   journalChunks(note).forEach((chunk,j)=>appendJournalPage(names[i],day+1,chunk,j>0));
+  });
+ });
+ const photos=Array.isArray(state.photoMeta)?state.photoMeta.filter(m=>m.id&&persons.some(p=>p.id===m.owner)):[];
+ if(!photos.length||!('indexedDB' in window))return;
+ try{
+  const request=indexedDB.open('dar-umrah-private-photos-v1');
+  request.onsuccess=function(){
+   const originalDB=request.result;
+   if(!originalDB.objectStoreNames.contains('photos')){originalDB.close();return}
+   const tx=originalDB.transaction('photos','readonly');
+   const objects=tx.objectStore('photos');
+   photos.forEach(function(m){
+    const owner=persons.find(p=>p.id===m.owner);
+    if(!owner)return;
+    const id='main:'+m.id,overrides=photoOverride(id);
+    if(overrides.hidden)return;
+    const fetch=objects.get(m.id);
+    fetch.onsuccess=function(){
+     const record=fetch.result;
+     if(!record||!(record.blob instanceof Blob))return;
+     const chapter=chapters.includes(overrides.chapter)?overrides.chapter:mainChapter(m.place);
+     const personName=String(owner.name||'').trim()||'Reisende';
+     const photo={
+      id:id,name:m.name||'ʿUmrah-Foto',file:record.blob,sourceType:'main',chapter:chapter,
+      caption:typeof overrides.caption==='string'?overrides.caption:String(m.caption||''),
+      source:personName+' · Tag '+(Number(m.day||0)+1)+' · '+mainPlaceText(m.place)
+     };
+     makePhoto(photo);
+    };
+   });
+   tx.oncomplete=function(){originalDB.close()};
+   tx.onerror=function(){originalDB.close()};
+  };
+  request.onerror=function(){console.warn('Der originale Fotospeicher ist hier nicht verfügbar')};
+ }catch(e){console.warn('Einlesen der lokalen Umrah-Fotos fehlgeschlagen',e)}
+}
+loadOriginalUmrahJournal();
+
 })();
 </script>
 </body>
