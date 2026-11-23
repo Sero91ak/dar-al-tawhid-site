@@ -1297,9 +1297,9 @@ function injectFrauenDesktopEntryV1(html) {
 function injectAdultReaderRuntimeV5(html) {
   if(typeof html!=="string"||!html)return html;
   html=html.replace(/(\/assets\/dar-app-chrome\.js)(?:\?v=[^"'\s<>]*)?/g,
-    "$1?v=20261101-reader-runtime-v5");
+    "$1?v=20261122-nonq-seamless-v8");
   if(!html.includes('id="darReaderOverlayRuntimeV5"')){
-    const tag='<script defer id="darReaderOverlayRuntimeV5" src="/assets/dar-reader-overlay-runtime-v5.js?v=20261101-v5"></'+'script>';
+    const tag='<script defer id="darReaderOverlayRuntimeV5" src="/assets/dar-reader-overlay-runtime-v5.js?v=20261122-seamless-v8"></'+'script>';
     html=html.includes("</body>")?html.replace("</body>",tag+"</body>"):html+tag;
   }
   // One stable women post ID + selected adult app language, no Q number minted.
@@ -1314,7 +1314,7 @@ function injectAdultReaderRuntimeV5(html) {
   // remains hidden until 16 canonical articles are verifiably published and
   // the existing Admin Focus-Feed entry's exact 48h window is live.
   if(!html.includes('id="darFrauenNeufokusV1"')){
-    const tag='<script defer id="darFrauenNeufokusV1" src="/assets/frauen/frauen-neufokus-v1.js?v=20261122-nonq-reader-return-v7"></'+'script>';
+    const tag='<script defer id="darFrauenNeufokusV1" src="/assets/frauen/frauen-neufokus-v1.js?v=20261122-nonq-seamless-v8"></'+'script>';
     html=html.includes("</body>")?html.replace("</body>",tag+"</body>"):html+tag;
   }
   // Q50 is a single published adult post, localized at the existing render

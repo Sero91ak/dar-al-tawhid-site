@@ -300,7 +300,9 @@ async function verifyPublished(){
  var lessonHtml=await fetchReady("/lernen/frauen-wissen/?neufokus=1","text");
  if(lessonHtml.indexOf('id="quiz"')<0||
     lessonHtml.indexOf("frauen-learning-v1.js")<0)return false;
- readyIndex={manifest:manifest,catalog:localeCatalog};
+ // Keep the original focus publication gates unchanged. Reuse only the
+ // verified source and translation data already fetched for the 16-post focus.
+ readyIndex={manifest:manifest,catalog:localeCatalog,sources:Object.fromEntries(paths.map(function(path,i){return ["/"+path,all[i]]}))};
  return true;
 }
 async function refresh(force){
@@ -357,6 +359,6 @@ function init(){
  d.addEventListener("visibilitychange",function(){if(!d.hidden)schedule(true)});
  w.setInterval(function(){render();refresh(false)},60000);
 }
-w.DARFrauenNeufokusV1=Object.freeze({validWindow:validWindow,locale:locale,refresh:function(){return refresh(true)},openIndex:function(){showIndex(d.getElementById("darFrauenNeufokus48h"))},diagnostics:function(){var h=homeMount(),card=d.getElementById("darFrauenNeufokus48h");return{home:h?.desktop?"website":h?.parity?"native-frontstage":h?.fallback?"native-fallback":h?"native":"none",host:h?.root?.id||h?.root?.className||"",enabled:enabled,indexReady:!!readyIndex,started:started,expires:until,cardPresent:!!card,visible:visibleHost(card)}}});
+w.DARFrauenNeufokusV1=Object.freeze({validWindow:validWindow,locale:locale,refresh:function(){return refresh(true)},closeIndex:closeIndex,openIndex:function(){showIndex(d.getElementById("darFrauenNeufokus48h"))},getReaderData:function(id){return readyIndex&&readyIndex.manifest.items.some(function(item){return item.id===id})?readyIndex:null},diagnostics:function(){var h=homeMount(),card=d.getElementById("darFrauenNeufokus48h");return{home:h?.desktop?"website":h?.parity?"native-frontstage":h?.fallback?"native-fallback":h?"native":"none",host:h?.root?.id||h?.root?.className||"",enabled:enabled,indexReady:!!readyIndex,started:started,expires:until,cardPresent:!!card,visible:visibleHost(card)}}});
 if(d.readyState==="loading")d.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })(window,document);

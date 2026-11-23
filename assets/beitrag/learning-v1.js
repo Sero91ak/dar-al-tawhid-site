@@ -20,10 +20,10 @@ es:{brand:"Comprender el relato",lang:"Idioma",intro:"Cuatro preguntas. Reflexio
 };
 var root=d.getElementById("darNonQCourse");if(!root)return;
 function el(tag,cl,value){var v=d.createElement(tag);if(cl)v.className=cl;if(value!=null)v.textContent=String(value);return v}
-function query(){return new URL(w.location.href).searchParams}
+function query(){return new URL(d.baseURI||w.location.href).searchParams}
 function norm(code){code=String(code||"").toLowerCase().replace(/_/g,"-");if(code==="ku-sorani")code="ckb";if(code==="kr")code="ku";return CODES.includes(code)?code:CODES.includes(code.split("-")[0])?code.split("-")[0]:"de"}
 var id=String(query().get("id")||""),type=String(query().get("type")||"frauen");
-var code=norm(query().get("lang")||"de"),lab=LABEL[code];
+var code=norm(query().get("lang")||"de"),lab=LABEL[code],verifiedEntry=null;
 d.documentElement.lang=code;d.documentElement.dir=code==="ar"||code==="ckb"?"rtl":"ltr";
 function articleUrl(){var from=query().get("from");return "/wissen/beitrag/?id="+encodeURIComponent(id)+"&lang="+code+(type==="frauen"?"":"&type="+encodeURIComponent(type))+(from==="test"||from==="pwa"?"&from="+from:"")}
 function message(text){root.replaceChildren(el("p","dar-post-error",text));root.setAttribute("aria-busy","false")}
@@ -32,7 +32,13 @@ function selector(){
  var box=el("div","dar-post-controls");var l=el("label","",lab.lang);
  var select=el("select","dar-post-lang-select");select.id="darStudyLang";l.htmlFor=select.id;
  for(const k of CODES){var opt=el("option","",LANG[k]);opt.value=k;opt.selected=k===code;select.appendChild(opt)}
- select.addEventListener("change",function(){var u=new URL(w.location.href);u.searchParams.set("lang",select.value);w.location.assign(u.toString())});
+ select.addEventListener("change",function(){
+  if(!verifiedEntry)return;
+  code=norm(select.value);lab=LABEL[code];
+  d.documentElement.lang=code;d.documentElement.dir=code==="ar"||code==="ckb"?"rtl":"ltr";
+  if(w.self===w.top)try{var u=new URL(w.location.href);u.searchParams.set("lang",code);w.history.replaceState(w.history.state,"",u.toString())}catch(_){}
+  start(verifiedEntry.locales[code],verifiedEntry.sourceUrl);
+ });
  box.appendChild(l);box.appendChild(select);return box
 }
 function start(pack,sourceUrl){
@@ -43,7 +49,7 @@ function start(pack,sourceUrl){
  function render(){
   root.replaceChildren();
   var hero=el("header","dar-post-hero");
-  hero.appendChild(el("div","dar-post-mark","DĀR AL TAWḤĪD"));
+  hero.appendChild(el("div","dar-post-mark","DĀR AL TAWḤĪD · ZENTRUM"));
   hero.appendChild(el("span","dar-post-kicker",lab.brand));
   hero.appendChild(el("h1","dar-post-title",pack.title));
   hero.appendChild(el("p","dar-post-summary",lab.intro));
@@ -73,16 +79,19 @@ function start(pack,sourceUrl){
 (async function(){
  if(!/^[a-z0-9-]{3,160}$/.test(id)||!/^[a-z0-9-]+$/.test(type)){message(lab.missing);return}
  try{
-  var registry=await json("/assets/beitrag/reader-catalogs-v1.json?v=1"),kind=registry.catalogs?.[type];
+  var cached=null;
+  try{if(w.parent&&w.parent!==w&&w.parent.DARFrauenNeufokusV1?.getReaderData)
+   cached=w.parent.DARFrauenNeufokusV1.getReaderData(id)}catch(_){}
+  var registry=cached?.registry||await json("/assets/beitrag/reader-catalogs-v1.json?v=1"),kind=registry.catalogs?.[type];
   if(!kind||!kind.sourceFiles||!kind.localeCatalogUrl){message(lab.missing);return}
-  var catalog=await json(kind.localeCatalogUrl+"?reader=1"),entry=catalog.entries?.[id];
+  var catalog=cached&&type==="frauen"?cached.catalog:await json(kind.localeCatalogUrl+"?reader=1"),entry=catalog.entries?.[id];
   if(!entry||!catalog.entryIds?.includes(id)||!kind.sourceFiles[entry.area]||
      CODES.some(c=>{var p=entry.locales?.[c];return !p||!["title","preview","statement","lesson","sharh"].every(k=>p[k]?.trim())})){message(lab.missing);return}
-  var source=await json(kind.sourceFiles[entry.area]+"?reader=1");
+  var source=cached?.sources?.[kind.sourceFiles[entry.area]]||await json(kind.sourceFiles[entry.area]+"?reader=1");
   var rows=source.eintraege?.filter(x=>x.kennung===id)||[];
   if(rows.length!==1||rows[0].quellenstatus!=="geprueft"||rows[0].freigabeDurchSerhat!==true||
      rows[0].direktnachweisUrl!==entry.sourceUrl){message(lab.missing);return}
-  start(entry.locales[code],entry.sourceUrl)
+  verifiedEntry=entry;start(entry.locales[code],entry.sourceUrl)
  }catch(e){try{console.warn("Non-Q study",e)}catch(_){}
   message(lab.error)}
 })();

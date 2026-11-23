@@ -12,7 +12,7 @@
      selected post and five-tab navigation remain mounted throughout. */
   var sourceNavPending=false,sourcePanel=null,sourceFrame=null;
   var sourcePreviousOverflow=null,sourcePanelHistory=false;
-  var sourceCurrentPage=null,sourceRouteStack=[],pendingSourceScrollY=null;
+  var sourceCurrentPage=null,sourceRouteStack=[],pendingSourceScrollY=null,sourceOpenedFromIndex=false;
   function showSourceUnavailable(){
     try{
       var toast=document.getElementById("darSourceNavigationError");
@@ -34,21 +34,33 @@
     var url;
     try{url=new URL(anchor.getAttribute("href"),base)}catch(_){return null}
     if(url.origin!==location.origin||
-      !(/^\/q\/[1-9][0-9]*\/?$/.test(url.pathname)||/^\/lernen\/[a-z0-9-]+\/?$/.test(url.pathname)))return null;
+      !(/^\/q\/[1-9][0-9]*\/?$/.test(url.pathname)||/^\/lernen\/[a-z0-9-]+\/?$/.test(url.pathname)||/^\/wissen\/beitrag\/?$/.test(url.pathname)))return null;
     return url.pathname.replace(/\/?$/,"/")+url.search+url.hash;
+  }
+  // The learner's "Back to article" link returns to the already-mounted
+  // canonical post, even if its current quiz language differs.
+  function isPreviousCanonicalPost(route){
+    var previous=sourceRouteStack[sourceRouteStack.length-1];
+    if(!previous||!previous.target.startsWith("/wissen/beitrag/")||!route.startsWith("/wissen/beitrag/"))return false;
+    try{
+      var a=new URL(previous.target,location.origin),b=new URL(route,location.origin);
+      return a.searchParams.get("id")===b.searchParams.get("id")&&
+        (a.searchParams.get("type")||"frauen")===(b.searchParams.get("type")||"frauen");
+    }catch(_){return false}
   }
   function backInternalSource(){
     if(sourceRouteStack.length){
       var previous=sourceRouteStack.pop();
-      openInternalSource(previous.target,previous.html,true,previous.scrollY);
+      openInternalSource(previous.target,previous.html,true,previous.scrollY,previous.frame);
       return;
     }
-    closeInternalSource(false);
+    closeInternalSource(false,true);
   }
-  function closeInternalSource(fromHistory){
+  function closeInternalSource(fromHistory,returnToPreviousIndex){
     if(!sourcePanel||sourcePanel.hidden)return;
     sourcePanel.hidden=true;
-    if(sourceFrame){sourceFrame.removeAttribute("src");sourceFrame.srcdoc="";}
+    if(sourceFrame){sourceFrame.removeAttribute("src");sourceFrame.srcdoc="";sourceFrame.classList?.remove("dar-source-frame-inactive");sourceFrame.id="darInternalSourceFrameV3";}
+    if(sourcePanel&&typeof sourcePanel.querySelectorAll==="function")Array.from(sourcePanel.querySelectorAll("iframe")).forEach(function(frame){if(frame!==sourceFrame)frame.remove()});
     if(document.body){
       if(sourcePreviousOverflow===null)document.body.style.removeProperty("overflow");
       else document.body.style.overflow=sourcePreviousOverflow;
@@ -62,9 +74,44 @@
     var pushed=sourcePanelHistory;
     sourcePanelHistory=false;
     sourceNavPending=false;
+    var restoreFocusIndex=sourceOpenedFromIndex&&returnToPreviousIndex===true;
+    sourceOpenedFromIndex=false;
+    // Restore the focus index only after the browser has processed Back; the
+    // focus module's popstate listener must not immediately close it again.
     if(!fromHistory&&pushed&&window.history&&window.history.state&&window.history.state.__darInternalSourceV3){
+      if(restoreFocusIndex)window.addEventListener("popstate",function(){setTimeout(function(){try{window.DARFrauenNeufokusV1?.openIndex()}catch(_){}},0)},{once:true});
       window.history.back();
-    }
+    }else if(restoreFocusIndex)setTimeout(function(){try{window.DARFrauenNeufokusV1?.openIndex()}catch(_){}},0);
+  }
+  // Reuse the checked iframe DOM when returning from its internal learning view.
+  function bindSourceFrame(frame){
+    frame.addEventListener("load",function(){
+      var scrollY=pendingSourceScrollY;pendingSourceScrollY=null;
+      if(scrollY>0)setTimeout(function(){try{frame.contentWindow.scrollTo(0,scrollY)}catch(_){}},0);
+      var doc;try{doc=frame.contentDocument}catch(_){return}
+      if(!doc||doc.__darInternalSourceLinksBoundV1)return;
+      doc.__darInternalSourceLinksBoundV1=true;
+      doc.addEventListener("click",function(ev){
+        if(ev.defaultPrevented||ev.button!==0||ev.metaKey||ev.ctrlKey||ev.altKey||ev.shiftKey)return;
+        var a=ev.target&&ev.target.closest?ev.target.closest("a[href]"):null;
+        var route=internalReaderTarget(a,doc.baseURI||location.href);
+        if(!route)return;
+        ev.preventDefault();ev.stopImmediatePropagation();
+        if(isPreviousCanonicalPost(route)){
+          backInternalSource();
+          try{
+            var requested=new URL(route,location.origin).searchParams.get("lang");
+            var select=sourceFrame.contentDocument?.getElementById("darPostLangSelect");
+            if(select&&requested&&select.value!==requested){
+              select.value=requested;
+              select.dispatchEvent(new Event("change",{bubbles:true}));
+            }
+          }catch(_){}
+          return;
+        }
+        navigateInternalSource(route);
+      },true);
+    });
   }
   function ensureInternalSourcePanel(){
     if(sourcePanel)return sourcePanel;
@@ -72,6 +119,7 @@
     style.id="darInternalSourceStylesV3";
     /* DAR_READING_EDGE_TO_EDGE_V4 */
     style.textContent="#darInternalSourceV3{position:fixed!important;inset:0!important;width:100%!important;height:100svh!important;height:100dvh!important;z-index:2147483000!important;background:#f8f5ef;color:#24352c;display:flex;flex-direction:column;overflow:hidden}\n#darInternalSourceV3[hidden]{display:none!important}\nhtml.dar-internal-reader-open,body.dar-internal-reader-open{overflow:hidden!important}\nbody.dar-internal-reader-open :is(#bottomNav,#bottomNavigation,#appBottomNav,.bottom-nav,.bottom-nav-global,.dar-bottom-nav,[data-bottom-nav-root]){visibility:hidden!important;pointer-events:none!important}\n#darInternalSourceV3 .dar-source-toolbar{flex:none;display:flex;align-items:center;justify-content:space-between;gap:7px;min-height:46px;padding:calc(5px + env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) 5px max(12px,env(safe-area-inset-left,0px));background:#f8f5ef;border-bottom:1px solid #d9d1c2;box-sizing:border-box}\n#darInternalSourceV3 .dar-source-actions{display:flex;align-items:center;gap:5px;min-width:0}\n#darInternalSourceV3 .dar-source-back,#darInternalSourceV3 .dar-source-home{appearance:none;display:inline-flex;align-items:center;justify-content:center;min-height:40px;background:transparent;color:#453b2b;border:1px solid #d8cbb4;border-radius:12px;padding:7px 11px;font:650 12px/1.25 -apple-system,BlinkMacSystemFont,system-ui,sans-serif;white-space:nowrap;cursor:pointer;box-shadow:none}\n#darInternalSourceV3 .dar-source-home{color:#705930;border-color:transparent}\n#darInternalSourceV3 .dar-source-label{font:750 10px/1.3 -apple-system,BlinkMacSystemFont,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;text-align:end;color:#7e6b46;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n#darInternalSourceV3 :is(.dar-source-back,.dar-source-home):focus-visible{outline:2px solid #a88b54!important;outline-offset:2px!important}\n#darInternalSourceV3 iframe{display:block;width:100%;height:100%;flex:1 1 auto;min-height:0;border:0;background:#f8f5ef;overscroll-behavior:contain}\n@media(max-width:370px){#darInternalSourceV3 .dar-source-actions{gap:2px}#darInternalSourceV3 :is(.dar-source-back,.dar-source-home){font-size:11px;padding-inline:8px}#darInternalSourceV3 .dar-source-label{font-size:9px}}\n@media(prefers-color-scheme:dark){html[data-theme='dark'] #darInternalSourceV3,html[data-theme='dar-al-layl'] #darInternalSourceV3{background:#121714;color:#f4eddb}html[data-theme='dark'] #darInternalSourceV3 .dar-source-toolbar,html[data-theme='dar-al-layl'] #darInternalSourceV3 .dar-source-toolbar{background:#18201a;border-color:#5a5036}}";
+    style.textContent+="\n#darInternalSourceV3 iframe.dar-source-frame-inactive{display:none!important}";
     (document.head||document.documentElement).appendChild(style);
     var panel=document.createElement("section");
     panel.id="darInternalSourceV3";
@@ -115,38 +163,48 @@
     frame.setAttribute("referrerpolicy","strict-origin-when-cross-origin");
     // The already mounted reader owns internal navigation, including Q -> learning.
     // Primary-source links and PDF links keep their external destinations.
-    frame.addEventListener("load",function(){
-      var scrollY=pendingSourceScrollY;
-      pendingSourceScrollY=null;
-      if(scrollY>0)setTimeout(function(){
-        try{frame.contentWindow.scrollTo(0,scrollY)}catch(_){}
-      },0);
-      var doc;
-      try{doc=frame.contentDocument}catch(_){return}
-      if(!doc||doc.__darInternalSourceLinksBoundV1)return;
-      doc.__darInternalSourceLinksBoundV1=true;
-      doc.addEventListener("click",function(ev){
-        if(ev.defaultPrevented||ev.button!==0||ev.metaKey||ev.ctrlKey||ev.altKey||ev.shiftKey)return;
-        var a=ev.target&&ev.target.closest?ev.target.closest("a[href]"):null;
-        var route=internalReaderTarget(a,doc.baseURI||location.href);
-        if(!route)return;
-        ev.preventDefault();ev.stopImmediatePropagation();
-        navigateInternalSource(route);
-      },true);
-    });
+    bindSourceFrame(frame);
     toolbar.setAttribute("data-dar-source-toolbar","1");
     panel.appendChild(toolbar);panel.appendChild(frame);
     (document.body||document.documentElement).appendChild(panel);
     sourcePanel=panel;sourceFrame=frame;
     return panel;
   }
-  function openInternalSource(target,html,restoring,scrollY){
+  function openInternalSource(target,html,restoring,scrollY,cachedFrame){
     var panel=ensureInternalSourcePanel();
+    if(restoring&&cachedFrame&&cachedFrame.isConnected&&target.startsWith("/wissen/beitrag/")){
+      if(sourceFrame!==cachedFrame){
+        var discarded=sourceFrame;
+        discarded.classList.add("dar-source-frame-inactive");
+        discarded.removeAttribute("id");
+        sourceFrame=cachedFrame;
+        if(discarded&&!sourceRouteStack.some(function(page){return page.frame===discarded}))discarded.remove();
+      }
+      sourceFrame.classList.remove("dar-source-frame-inactive");
+      sourceFrame.id="darInternalSourceFrameV3";
+      sourceCurrentPage={target:target,html:html,scrollY:scrollY||0,frame:sourceFrame};
+      pendingSourceScrollY=null;panel.hidden=false;
+      var oldCaption=panel.querySelector(".dar-source-label");
+      if(oldCaption)oldCaption.textContent=target.indexOf("/lernen/")===0?"DĀR AL TAWḤĪD · Lernen":"DĀR AL TAWḤĪD · Beiträge";
+      try{sourceFrame.contentWindow.scrollTo(0,scrollY||0)}catch(_){}
+      return;
+    }
+    var initialOpen=panel.hidden;
+    if(initialOpen)sourceOpenedFromIndex=!!document.getElementById("darFrauenNeufokusIndex");
     if(!restoring&&!panel.hidden&&sourceCurrentPage&&sourceCurrentPage.target!==target){
       try{sourceCurrentPage.scrollY=sourceFrame.contentWindow.scrollY||sourceFrame.contentWindow.pageYOffset||0}catch(_){}
       sourceRouteStack.push(sourceCurrentPage);
+      if(sourceCurrentPage.target.startsWith("/wissen/beitrag/")){
+      sourceFrame.classList.add("dar-source-frame-inactive");
+      sourceFrame.removeAttribute("id");
+      var nextFrame=document.createElement("iframe");
+      nextFrame.id="darInternalSourceFrameV3";
+      nextFrame.setAttribute("title","Quellenkarte und Lernbereich");
+      nextFrame.setAttribute("referrerpolicy","strict-origin-when-cross-origin");
+      bindSourceFrame(nextFrame);panel.appendChild(nextFrame);sourceFrame=nextFrame;
+      }
     }
-    sourceCurrentPage={target:target,html:html,scrollY:scrollY||0};
+    sourceCurrentPage={target:target,html:html,scrollY:scrollY||0,frame:sourceFrame};
     pendingSourceScrollY=restoring?(scrollY||0):null;
     if(document.body&&panel.hidden)sourcePreviousOverflow=document.body.style.overflow||"";
     if(document.body){document.body.style.overflow="hidden";if(document.body.classList)document.body.classList.add("dar-internal-reader-open")}
@@ -162,8 +220,9 @@
     src=headEnd>=0?src.slice(0,headEnd)+readerCss+src.slice(headEnd):readerCss+src;
     sourceFrame.srcdoc=src;
     panel.hidden=false;
+    if(initialOpen&&sourceOpenedFromIndex)try{window.DARFrauenNeufokusV1?.closeIndex(false)}catch(_){}
     var caption=panel.querySelector(".dar-source-label");
-    if(caption)caption.textContent=target.indexOf("/lernen/")===0?"DĀR AL TAWḤĪD · Lernen":"DĀR AL TAWḤĪD · Quellen";
+    if(caption)caption.textContent=target.indexOf("/lernen/")===0?"DĀR AL TAWḤĪD · Lernen":target.indexOf("/wissen/")===0?"DĀR AL TAWḤĪD · Beiträge":"DĀR AL TAWḤĪD · Quellen";
     if(window.history&&window.history.pushState&&!sourcePanelHistory){
       try{
         var state=Object.assign({},window.history.state||{},{__darInternalSourceV3:true});
@@ -189,7 +248,9 @@
           if(!/<body\b[^>]*\bqsource-body\b/i.test(html)||
             !/class\s*=\s*["'][^"']*\bqsource-links\b/i.test(html)||
             !/<a\b[^>]*\bqsource-link\b/i.test(html))throw Error("Q source page is not ready");
-        }else if(!/id\s*=\s*["']quiz["']/.test(html)||!/<main\b/i.test(html)){
+        }else if(target.indexOf("/wissen/beitrag/")===0){
+          if(!/id\s*=\s*["']darNonQReader["']/.test(html)||!/reader-v1\.js/.test(html))throw Error("Canonical contribution reader is not ready");
+        }else if(!/id\s*=\s*["'](?:quiz|darNonQCourse)["']/.test(html)||!/<main\b/i.test(html)){
           throw Error("Learning page is not ready");
         }
         openInternalSource(target,html);
@@ -220,13 +281,13 @@
       // Nested browser Back belongs to this reader, not the background app router.
       if(typeof ev.stopImmediatePropagation==="function")ev.stopImmediatePropagation();
       var previous=sourceRouteStack.pop();
-      openInternalSource(previous.target,previous.html,true,previous.scrollY);
+      openInternalSource(previous.target,previous.html,true,previous.scrollY,previous.frame);
       try{
         var state=Object.assign({},ev.state||{},{__darInternalSourceV3:true});
         window.history.pushState(state,"",location.href);
         sourcePanelHistory=true;
       }catch(_){}
-    }else closeInternalSource(true);
+    }else closeInternalSource(true,true);
   },true);
   document.addEventListener("keydown",function(ev){
     if(ev.key==="Escape"&&sourcePanel&&!sourcePanel.hidden){ev.preventDefault();backInternalSource();}

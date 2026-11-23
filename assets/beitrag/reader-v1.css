@@ -40,3 +40,14 @@ body.dar-post-standalone a,body.dar-post-standalone button,body.dar-post-standal
 [dir="rtl"] .dar-post-hero{text-align:right}
 @media(max-width:480px){.dar-post-hero{border-radius:20px}.dar-post-controls{align-items:stretch}.dar-post-langs{flex:1}.dar-post-lang-select{flex:1;max-width:230px}.dar-post-back{width:100%;justify-content:center}.dar-post-section{border-radius:16px}.dar-post-source-link,.dar-post-learning-link{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Shared contribution center: one reading canvas, thin separators, no stacked cards. */
+.dar-post-section{margin:0;padding:clamp(20px,4vw,28px) 5px;border:0;border-top:1px solid var(--r-line);border-radius:0;background:transparent;box-shadow:none}
+.dar-post-section--explanation{background:transparent}
+.dar-post-number{width:25px;height:auto;border:0;border-radius:0;background:none;color:var(--r-gold)}
+.dar-post-section-head{margin-bottom:10px}
+.dar-post-hero{margin-bottom:20px}
+.dar-post-learning{border:0;border-top:1px solid var(--r-line);border-radius:0;padding:25px 5px;margin:0;background:transparent}
+.dar-post-footer{border-top:1px solid var(--r-line);padding-top:18px;margin-top:6px}
+.dar-post-standalone .dar-post-reader-shell{max-width:840px}
+.dar-post-source-link{box-shadow:none}
