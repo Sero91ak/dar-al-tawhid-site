@@ -149,17 +149,47 @@
 
   /* Immersive editorial surface inside the EXISTING authenticated Admin SPA.
      Legacy Social Review renderer remains available for recovery. */
+  /* Social-Post-Studio belongs to the existing Admin Social/Redaktion tab.
+     Standalone editor assets are read-only and contain no server/publication actions. */
+  const DAR_ATELIER_URL="/admin/redaktion/?v=3";
+  const DAR_STUDIO_URL="/tools/dar-social-editor-v1/index.html?v=1";
+  const STUDIO_L10N={
+    de:["Redaktionsatelier","Bildstudio","Beitragsredaktion · Quellen","Bilder & Karussells · Masterdesign","Widescreen öffnen ↗","Widescreen schließen ×","wird geladen …","Konnte nicht geladen werden. Bitte den Test-Deploy prüfen.","Erneut laden"],
+    ar:["استوديو التحرير","استوديو الصور","تحرير المقالات والمصادر","صور ومنشورات متعددة · القالب الثابت","فتح العرض الواسع ↗","إغلاق العرض الواسع ×","جارٍ التحميل …","تعذر التحميل. تحقق من نشر الاختبار.","إعادة المحاولة"],
+    en:["Editorial studio","Image studio","Posts · sources","Images & carousels · fixed master","Open widescreen ↗","Close widescreen ×","Loading …","Could not load. Check the test deployment.","Retry"],
+    tr:["Yayın atölyesi","Görsel stüdyosu","Yazılar ve kaynaklar","Görseller ve slaytlar · sabit tasarım","Geniş ekranı aç ↗","Geniş ekranı kapat ×","Yükleniyor …","Yüklenemedi. Test dağıtımını kontrol et.","Tekrar dene"],
+    ku:["Atolyeya nivîsê","Stûdyoya wêneyan","Gotar û çavkanî","Wêne û slayt · şablona sabît","Ekrana fireh veke ↗","Ekrana fireh bigire ×","Tê barkirin …","Nehat barkirin. Weşandina ceribandinê kontrol bike.","Dîsa biceribîne"],
+    ckb:["ستۆدیۆی دەستکاری","ستۆدیۆی وێنە","بابەت و سەرچاوە","وێنە و لاپەڕە · داڕشتنی جێگیر","کردنەوەی شاشەی فراوان ↗","داخستنی شاشەی فراوان ×","باردەکرێت …","بارنەکرا. بڵاوکردنەوەی تاقیکردنەوە بپشکنە.","دووبارە هەوڵبدە"],
+    bs:["Urednički studio","Studio za slike","Objave i izvori","Slike i slajdovi · stalni dizajn","Otvori široki prikaz ↗","Zatvori široki prikaz ×","Učitavanje …","Učitavanje nije uspjelo. Provjerite testnu objavu.","Pokušaj ponovo"],
+    fr:["Atelier éditorial","Studio d’images","Articles et sources","Images et carrousels · modèle fixe","Ouvrir en grand ↗","Fermer le grand écran ×","Chargement …","Chargement impossible. Vérifiez le déploiement de test.","Réessayer"],
+    es:["Taller editorial","Estudio de imágenes","Publicaciones y fuentes","Imágenes y carruseles · diseño fijo","Abrir pantalla amplia ↗","Cerrar pantalla amplia ×","Cargando …","No se pudo cargar. Comprueba el despliegue de prueba.","Reintentar"]
+  };
+  function studioCopy(){
+    const allowed=["de","ar","en","tr","ku","ckb","bs","fr","es"];
+    let lang="de";
+    try{lang=localStorage.getItem("darAdultPreferredLocaleV1")||document.documentElement.lang||"de";}catch(_){}
+    if(!allowed.includes(lang))lang="de";
+    return STUDIO_L10N[lang];
+  }
+  let activeStudioMode=new URLSearchParams(location.search).get("studio")==="1"?"studio":"redaktion";
   function renderImmersiveAtelier(){
-    return '<section class="admin-editorial-host" data-no-collapse aria-label="Redaktionsatelier">'+
-      '<div class="admin-editorial-hostbar"><div><small>DĀR ADMIN / REDAKTION</small>'+
-      '<strong>Redaktionsatelier</strong><span>Neun Sprachen · Kanonische Beiträge · Originalnachweise</span></div>'+
-      '<button type="button" id="darEditorFullscreen" class="admin-editorial-popout" aria-pressed="false">Widescreen öffnen ↗</button></div>'+
-      '<div id="darAdminEditorialStatus" class="admin-editorial-loading" aria-live="polite">Redaktionsatelier wird geladen …</div><iframe id="darAdminEditorialFrame" title="DĀR AL TAWḤĪD Redaktion" src="/admin/redaktion/?v=3" referrerpolicy="same-origin"></iframe>'+
+    const cp=studioCopy(),studio=activeStudioMode==="studio";
+    const src=studio?DAR_STUDIO_URL:DAR_ATELIER_URL;
+    return '<section class="admin-editorial-host" data-no-collapse aria-label="DĀR AL TAWḤĪD Admin">'+
+      '<div class="admin-editorial-hostbar"><div class="dar-editorial-brand"><small>DĀR ADMIN / REDAKTION</small>'+
+      '<strong id="darStudioHostTitle">'+(studio?cp[1]:cp[0])+'</strong><span id="darStudioHostSubtitle">'+(studio?cp[3]:cp[2])+'</span></div>'+
+      '<div class="dar-studio-switch" role="group" aria-label="Werkzeug wählen">'+
+      '<button type="button" data-dar-studio-mode="redaktion" aria-pressed="'+String(!studio)+'" class="'+(!studio?'is-active':'')+'">'+cp[0]+'</button>'+
+      '<button type="button" data-dar-studio-mode="studio" aria-pressed="'+String(studio)+'" class="'+(studio?'is-active':'')+'">'+cp[1]+'</button>'+
+      '</div><button type="button" id="darEditorFullscreen" class="admin-editorial-popout" aria-pressed="false">'+cp[4]+'</button></div>'+
+      '<div id="darAdminEditorialStatus" class="admin-editorial-loading" aria-live="polite">'+(studio?cp[1]:cp[0])+' '+cp[6]+'</div>'+
+      '<iframe id="darAdminEditorialFrame" title="DĀR AL TAWḤĪD – '+(studio?cp[1]:cp[0])+'" src="'+src+'" referrerpolicy="same-origin"></iframe>'+
       '</section>';
   }
   function bindImmersiveAtelier(){
     const frame=document.getElementById("darAdminEditorialFrame");
     if(!frame)return;
+    const cp=studioCopy();
     function resize(){
       if(!frame.isConnected)return;
       const full=document.body.classList.contains("dar-editorial-fullscreen");
@@ -171,16 +201,43 @@
       const room=Math.max(280,Math.floor(visibleBottom-top-dock-(full?0:12)));
       frame.style.height=room+"px";
     }
-    const fullscreen=document.getElementById("darEditorFullscreen");
+    const status=document.getElementById("darAdminEditorialStatus");
+    const fullBtn=document.getElementById("darEditorFullscreen");
+    function refreshModeButtons(){
+      document.querySelectorAll("[data-dar-studio-mode]").forEach(button=>{
+        const selected=button.dataset.darStudioMode===activeStudioMode;
+        button.classList.toggle("is-active",selected);
+        button.setAttribute("aria-pressed",String(selected));
+      });
+      const title=document.getElementById("darStudioHostTitle"),subtitle=document.getElementById("darStudioHostSubtitle");
+      if(title)title.textContent=activeStudioMode==="studio"?cp[1]:cp[0];
+      if(subtitle)subtitle.textContent=activeStudioMode==="studio"?cp[3]:cp[2];
+    }
+    document.querySelectorAll("[data-dar-studio-mode]").forEach(button=>button.addEventListener("click",()=>{
+      const mode=button.dataset.darStudioMode;
+      if(mode===activeStudioMode)return;
+      activeStudioMode=mode==="studio"?"studio":"redaktion";
+      try{
+        const url=new URL(location.href);
+        if(activeStudioMode==="studio")url.searchParams.set("studio","1");else url.searchParams.delete("studio");
+        history.replaceState(history.state,"",url.pathname+url.search+url.hash);
+      }catch(_){}
+      if(status){status.hidden=false;status.textContent=(activeStudioMode==="studio"?cp[1]:cp[0])+" "+cp[6];}
+      refreshModeButtons();
+      frame.title="DĀR AL TAWḤĪD – "+(activeStudioMode==="studio"?cp[1]:cp[0]);
+      frame.src=activeStudioMode==="studio"?DAR_STUDIO_URL:DAR_ATELIER_URL;
+      resize();
+    }));
     const closeFullscreen=()=>{
       document.body.classList.remove("dar-editorial-fullscreen");
-      if(fullscreen){fullscreen.textContent="Widescreen öffnen ↗";fullscreen.setAttribute("aria-pressed","false")}
+      if(fullBtn){fullBtn.textContent=cp[4];fullBtn.setAttribute("aria-pressed","false");}
       resize();
     };
-    if(fullscreen)fullscreen.addEventListener("click",()=>{
-      const active=document.body.classList.toggle("dar-editorial-fullscreen");
-      fullscreen.textContent=active?"Widescreen schließen ×":"Widescreen öffnen ↗";
-      fullscreen.setAttribute("aria-pressed",String(active));resize();
+    if(fullBtn)fullBtn.addEventListener("click",()=>{
+      const on=document.body.classList.toggle("dar-editorial-fullscreen");
+      fullBtn.textContent=on?cp[5]:cp[4];
+      fullBtn.setAttribute("aria-pressed",String(on));
+      resize();
     });
     if(global.__darEditorResize)window.removeEventListener("resize",global.__darEditorResize);
     global.__darEditorResize=resize;
@@ -190,23 +247,25 @@
     global.__darEditorVisualResize=resize;
     window.visualViewport?.addEventListener("resize",resize,{passive:true});
     if(global.__darEditorEsc)window.removeEventListener("keydown",global.__darEditorEsc);
-    global.__darEditorEsc=e=>{if(e.key==="Escape"&&document.body.classList.contains("dar-editorial-fullscreen"))closeFullscreen()};
+    global.__darEditorEsc=e=>{if(e.key==="Escape"&&document.body.classList.contains("dar-editorial-fullscreen"))closeFullscreen();};
     window.addEventListener("keydown",global.__darEditorEsc);
     frame.addEventListener("load",()=>{
       resize();
-      const indicator=document.getElementById("darAdminEditorialStatus");
-      if(!indicator)return;
+      if(!status)return;
       let healthy=false;
-      try{healthy=!!frame.contentDocument?.getElementById("postText")&&!!frame.contentDocument?.getElementById("catalog")}catch(_){}
-      if(healthy){indicator.hidden=true;return}
-      indicator.hidden=false;
-      indicator.textContent="Die Redaktionsdatei wurde noch nicht korrekt ausgeliefert. Bitte den Cloudflare-Produktionsdeploy prüfen.";
-      const retry=document.createElement("button");retry.type="button";retry.textContent="Erneut laden";
-      retry.className="btn";retry.onclick=()=>{
-        indicator.textContent="Redaktionsatelier wird neu geladen …";
-        frame.src="/admin/redaktion/?v="+Date.now();
-      };
-      indicator.appendChild(retry);
+      try{
+        const doc=frame.contentDocument;
+        healthy=activeStudioMode==="studio"
+          ? Boolean(doc?.getElementById("postCanvas")&&doc?.getElementById("templateGrid")&&doc?.getElementById("exportPng")&&frame.contentWindow?.DAR_STUDIO_TEST)
+          : Boolean(doc?.getElementById("postText")&&doc?.getElementById("catalog"));
+      }catch(_){}
+      if(healthy){status.hidden=true;return;}
+      status.hidden=false;
+      status.textContent=cp[7]+" ";
+      const retry=document.createElement("button");
+      retry.type="button";retry.className="btn";retry.textContent=cp[8];
+      retry.onclick=()=>{status.textContent=cp[6];frame.src=activeStudioMode==="studio"?DAR_STUDIO_URL+"?retry="+Date.now():DAR_ATELIER_URL+"&retry="+Date.now();};
+      status.appendChild(retry);
     });
     resize();
   }
