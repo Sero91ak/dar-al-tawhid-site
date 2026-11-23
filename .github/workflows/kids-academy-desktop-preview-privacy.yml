@@ -1,0 +1,21 @@
+name: KIDS Academy Desktop Preview Privacy Guard
+on:
+  pull_request:
+    paths:
+      - 'desktop-preview/kids-akademie-unterricht.html'
+      - 'desktop-preview/kids-akademie-privacy-preview-check.cjs'
+      - '.github/workflows/kids-academy-desktop-preview-privacy.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preview-buttons-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify child privacy and JavaScript compilation in preview lane
+        run: node desktop-preview/kids-akademie-privacy-preview-check.cjs
