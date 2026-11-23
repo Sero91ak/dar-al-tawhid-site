@@ -4,7 +4,7 @@ Interner, lokal-first Social-Media-Editor mit den zwei Original-Hintergründen a
 
 ## Start
 
-ZIP herunterladen, entpacken, `index.html` in Safari, Chrome oder Edge öffnen. Kein Server notwendig: Bytegleiche Original-Hintergründe sind als Data-URLs in `brand-data.js` eingebettet, damit Canvas-Exporte auch offline ohne CORS-Fehler funktionieren. Original-JPEGs liegen zusätzlich unverändert unter `brand/`.
+ZIP herunterladen, entpacken, `index.html` in Safari, Chrome oder Edge öffnen. Kein Server notwendig: Bytegleiche Original-Hintergründe sind als Data-URLs in `brand-data.js` eingebettet, damit Canvas-Exporte auch offline ohne CORS-Fehler funktionieren. Im lokal herunterladbaren ZIP liegen die Original-JPEGs zusätzlich unverändert unter `brand/`. Im GitHub-Modul werden die unveränderten JPEG-Bytes ausschließlich über `brand-data.js` eingebettet; das Modul benötigt daher keine zusätzlichen Binärdateien.
 
 ## Funktionen
 
