@@ -1,14 +1,16 @@
 name: KIDS Academy Ṣabr 32 V4 Public Cloudflare Audio Hash Proof
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/academy-sabr-v4-cloudflare-proof-once.yml'
   workflow_dispatch:
+  # Check public audio only AFTER the single canonical production Worker deploy.
+  workflow_run:
+    workflows: ["Deploy Besucher-App (Cloudflare Workers)"]
+    types: [completed]
+    branches: [main]
 permissions:
   contents: read
 jobs:
   verified-live:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
