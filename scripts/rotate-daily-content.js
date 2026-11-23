@@ -114,7 +114,7 @@ function hashIndex(seed, size) {
 function normalizeState(items, keyFn, state = {}, fallbackLast = "") {
   const pool = unique(items, keyFn);
   const valid = new Set(pool.map((item) => String(keyFn(item))));
-  let lastKey = String(state.lastKey || fallbackLast || "");
+  let lastKey = String(fallbackLast || state.lastKey || ""); // published daily ID takes precedence
   if (!valid.has(lastKey)) lastKey = "";
   const usedKeys = unique(
     (Array.isArray(state.usedKeys) ? state.usedKeys : []).map((key) => ({ key: String(key) })),
