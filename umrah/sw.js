@@ -1,6 +1,6 @@
 'use strict';
 /* DĀR AL TAWḤĪD ʿUmrah cache; scope /umrah/ only. */
-const CACHE='dar-umrah-v11-1-book-integrated-20261123';
+const CACHE='dar-umrah-v11-2-book-typography-20261123';
 const CORE=['./index.html','./offline.html','./erinnerungsbuch-v11.html'];
 const BOOK_ASSETS=[
  './illustrations/v11-makkah.jpg','./illustrations/v11-madinah.jpg',
@@ -8,6 +8,8 @@ const BOOK_ASSETS=[
  '/app-logo-original.png',
  '/assets/fonts/cormorant-garamond-latin-500-normal.woff2',
  '/assets/fonts/cormorant-garamond-latin-600-normal.woff2',
+ '/assets/fonts/instrument-serif-latin-400-normal.woff2',
+ '/assets/fonts/instrument-serif-latin-ext-400-normal.woff2',
  '/assets/fonts/cinzel-latin-500-normal.woff2',
  '/assets/fonts/amiri-arabic-400-normal.woff2',
  '/assets/fonts/amiri-arabic-700-normal.woff2',
