@@ -13,7 +13,7 @@
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "sha256": "52e23f4d0f35ca7353ab57872b1aff1f740b027b2e1eef012d98357e8ac5f112",
-      "durationSeconds": 2.0,
+      "durationSeconds": 2,
       "bytes": 33061,
       "providerRequestId": "UDQjNcgY6wL7PhG5Mcyl",
       "completedAt": "2026-11-23T18:17:29.912866+00:00"
@@ -539,8 +539,13 @@
   },
   "policy": "mark-paid-attempt-and-commit-before-POST; never auto-retry uncertain request",
   "createdAt": "2026-11-23T18:17:24.170796+00:00",
-  "publicLiveVerified": false,
+  "publicLiveVerified": true,
   "originalsGenerated": 38,
   "all32RealMediaImported": true,
-  "publishedCandidateAt": "2026-11-23T18:20:43.923214+00:00"
+  "publishedCandidateAt": "2026-11-23T18:20:43.923214+00:00",
+  "cloudflareRealAudioHttp200Sha256": 32,
+  "liveMediaIntegrityRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45239106103",
+  "verifiedAtUtc": "2026-11-23T18:30:38.353173+00:00",
+  "nativeDevicePlaybackVerified": false,
+  "humanAcousticReviewPerformed": false
 }
