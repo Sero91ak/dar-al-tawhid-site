@@ -195,3 +195,5 @@ assert.ok(nativeWorker.includes("injectAdultReaderRuntimeV5(html)"),
 console.log("PASS: keyboard focus/blur, viewport resize, nav invisibility and restoration.");
 
 console.log("OK: responsive layout, fold mutation filtering, boot timer/observer lifecycle");
+
+require("./adult-home-startup-regression.cjs");
