@@ -131,7 +131,7 @@ assert.ok([58,72].includes(sidqRows.length),
  "Only an atomic 14-recording Ṣidq release can augment the original 58");
 for(const [display,entry] of sidqRows){
  assert.equal(entry.approvedForPlayback,true,"Unapproved child click audio: "+display);
- const location=path.join(root,entry.url.replace(/^\\/+/, ""));
+ const location=path.join(root,entry.url.replace(/^\/+/, ""));
  assert.ok(fs.existsSync(location),"Missing real audio file: "+display);
  const sha=require("node:crypto").createHash("sha256").update(fs.readFileSync(location)).digest("hex");
  assert.equal(sha,entry.sha256,"Corrupted owner V4 binary: "+display);
@@ -150,9 +150,14 @@ assert.ok(!/elevenlabs\.com\/v1|requests\.post\(|creative_generate_speech/.test(
 const dry=JSON.parse(require("node:child_process").execFileSync("python3",[
  "kids/tools/import-academy-sidq-click-gaps-v1.py","--dry-run"
 ],{cwd:root,encoding:"utf8"}));
-assert.equal(dry.childRecordings,14);
-assert.equal(dry.newOriginalGenerations,20);
-assert.equal(dry.arabicGermanAssemblies,9);
+if(dry.alreadyImported===true){
+ assert.equal(dry.newSynthesis,0,"Already imported 14 original V4 clicks must never be generated again");
+ assert.equal(sidqRows.length,72,"All 14 clickable files are already present");
+}else{
+ assert.equal(dry.childRecordings,14);
+ assert.equal(dry.newOriginalGenerations,20);
+ assert.equal(dry.arabicGermanAssemblies,9);
+}
 assert.equal(dry.newSynthesis,0);
 require("node:child_process").execFileSync(process.execPath,[
  "kids/tools/test-academy-sabr-choice-v1.cjs"
