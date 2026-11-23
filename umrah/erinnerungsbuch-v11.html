@@ -5,15 +5,19 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Meine ʿUmrah · DĀR AL TAWḤĪD Erinnerungsbuch V11</title>
 <meta name="description" content="Lokaler, druckfertiger ʿUmrah-Reisebegleiter und Erinnerungsbuch mit persönlichen Fotos">
+<!-- Load both Latin subsets before a user prints to PDF. No external font provider. -->
+<link rel="preload" href="../assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/instrument-serif-latin-ext-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/manrope-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 /* Instrument Serif: self-hosted Latin + Latin Extended for consistent macrons and underdots. */
-@font-face{font-family:DarDisplay;src:url('../assets/fonts/instrument-serif-latin-ext-400-normal.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:DarDisplay;src:url('../assets/fonts/instrument-serif-latin-ext-400-normal.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;unicode-range:U+0100-024F,U+0259,U+02B0-02FF,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2C60-2C7F,U+A720-A7FF}
 @font-face{font-family:DarDisplay;src:url('../assets/fonts/instrument-serif-latin-400-normal.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:DarArabic;src:url('../assets/fonts/amiri-arabic-400-normal.woff2') format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:DarArabic;src:url('../assets/fonts/amiri-arabic-700-normal.woff2') format('woff2');font-weight:700;font-display:swap}
 @font-face{font-family:DarNaskh;src:url('../assets/fonts/noto-naskh-arabic-arabic-400-normal.woff2') format('woff2');font-display:swap}
 @font-face{font-family:DarText;src:url('../assets/fonts/manrope-latin.woff2') format('woff2');font-display:swap}
-@font-face{font-family:DarLatin;src:url('../assets/fonts/manrope-latin-ext.woff2') format('woff2');font-display:swap;unicode-range:U+0100-024F,U+1E00-1EFF,U+2C60-2C7F}
+@font-face{font-family:DarLatin;src:url('../assets/fonts/manrope-latin-ext.woff2') format('woff2');font-display:swap;unicode-range:U+0100-024F,U+02B0-02FF,U+1E00-1EFF,U+2C60-2C7F}
 @font-face{font-family:DarBrand;src:url('../assets/fonts/cinzel-latin-500-normal.woff2') format('woff2');font-display:swap;font-weight:500}
 :root{--ivory:#fff8ea;--paper:#faf0dc;--paper-deep:#f1e1c2;--champ:#e8cc98;--gold:#b88d4e;--gold-soft:#dcc49d;--ink:#2e251c;--ink-light:#594a38;--muted:#7d6b56;--border:#d9b77f;--font:DarLatin,DarText,Arial,sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eae0d0;color:var(--ink);font-family:var(--font)}button,input,select{font:inherit}button{cursor:pointer}
@@ -202,6 +206,8 @@
 /* Cinzel Latin lacks extended letters in the brand; use one complete serif for Ā, Ḥ and Ī too. */
 .page-head .brand,.cover .brand-word{font-family:DarDisplay,Georgia,serif;font-weight:400}
 .intro,.arch-painting figcaption{font-weight:400}
+/* The compact prophetic honorific is a distinct Arabic glyph, not a Latin fallback. */
+.salawat{font-family:DarArabic,DarNaskh,"Noto Naskh Arabic",serif;font-size:.83em;font-weight:400;letter-spacing:0;white-space:nowrap;font-synthesis:none}
 .toolbar b,.h1,.h2,.page-head .chapter-no,.cover h1,.cover .sub,
 .opening .dedication,.photo-card .caption,.placeholder,.note,
 .chapter-cover h2,.chapter-cover .scene-text p,.colophon .closing,
@@ -293,7 +299,7 @@
 <section class="sheet chapter-cover">
  <img class="watermark" src="../app-logo-original.png" alt="" aria-hidden="true">
  <div class="page-head"><span class="brand">DĀR AL TAWḤĪD</span><span class="chapter-no">Kapitel 05 · Besuch in Madīnah</span></div>
- <div class="scene-text"><div class="chapter-eyebrow">Ein besonderer Besuch</div><h2>Madīnah</h2><p>Die Stadt des Propheten ﷺ. Erinnerungen an einen besonderen Besuch außerhalb der ʿUmrah-Riten.</p></div>
+ <div class="scene-text"><div class="chapter-eyebrow">Ein besonderer Besuch</div><h2>Madīnah</h2><p>Die Stadt des Propheten <span class="salawat" lang="ar" dir="rtl">ﷺ</span>. Erinnerungen an einen besonderen Besuch außerhalb der ʿUmrah-Riten.</p></div>
  <div class="chapter-divider" aria-hidden="true"></div>
  <div class="arch-feature"><img class="fullart" src="./illustrations/v11-madinah.jpg" alt="Al-Masjid an-Nabawī · Madīnah"></div>
  <div class="folio"><span>Al-Masjid an-Nabawī · Madīnah</span><span>08</span></div>
