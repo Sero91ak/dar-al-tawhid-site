@@ -252,6 +252,28 @@ body:has(#page-home:target) #page-home,body:has(#page-ritus:target) #page-ritus,
  #print-root .pr-journal-page .pr-day-note{break-inside:auto;margin-bottom:6mm}
  #print-root .pr-eyebrow{font-size:9pt;letter-spacing:.17em;color:#5b7968}
 }
+
+/* Book V11 within the native Umrah page — no green PDF mockup */
+@font-face{font-family:DarBookCover;src:url('/assets/fonts/cormorant-garamond-latin-600-normal.woff2') format('woff2');font-display:swap}
+@font-face{font-family:DarBookBrand;src:url('/assets/fonts/cinzel-latin-500-normal.woff2') format('woff2');font-display:swap}
+#page-abschluss .report-preview{padding:4px 0 15px}
+#page-abschluss .report-preview-cover{position:relative;isolation:isolate;overflow:hidden;box-sizing:border-box;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:10px;min-height:565px;padding:25px 23px 23px;background:linear-gradient(165deg,#fffbf2,#f5e7cb)!important;color:#2b231c;border:1px solid #c9a368;outline:1px solid #e8d4ad;outline-offset:-9px;border-radius:5px;box-shadow:0 15px 35px rgba(76,54,24,.14)}
+#page-abschluss .report-preview-cover:before{content:'';position:absolute;right:-65px;top:70px;z-index:-1;width:310px;height:310px;opacity:.12;background:url('/app-logo-original.png') center/contain no-repeat;pointer-events:none}
+#page-abschluss .report-preview-cover div{border:0;padding:0;max-width:100%}
+#page-abschluss .report-preview-heading{display:flex;gap:12px;align-items:center;padding-bottom:6px!important}
+#page-abschluss .report-preview-heading img{width:49px;height:49px;object-fit:contain;border-radius:50%;mix-blend-mode:multiply;opacity:.83}
+#page-abschluss .report-preview-heading span{font:500 13px/1.3 DarBookBrand,Georgia,serif;letter-spacing:.11em;color:#2b231c}
+#page-abschluss .report-preview-cover h2{font:600 clamp(43px,5.3vw,60px)/.96 DarBookCover,Georgia,serif;color:#2b231c;letter-spacing:-.035em;margin:18px 0 0}
+#page-abschluss .report-preview-deck{font:600 19px/1.25 DarBookCover,Georgia,serif;color:#5f4b35;margin:0 0 10px}
+#page-abschluss .report-preview-scenes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:11px;margin:9px 0 10px}
+#page-abschluss .report-preview-scenes figure{min-width:0;margin:0;display:flex;flex-direction:column;align-items:center}
+#page-abschluss .report-preview-scenes img{width:100%;height:170px;object-fit:cover;object-position:center;border:2px solid #c9a368;border-radius:47% 47% 2px 2px / 17% 17% 2px 2px}
+#page-abschluss .report-preview-scenes figcaption{font:600 19px/1.3 DarBookCover,Georgia,serif;color:#473222;background:#faf0dc;border:1px solid #c9a368;border-radius:20px;padding:3px 14px;margin-top:-7px;z-index:1}
+#page-abschluss .report-preview-meta{border-top:1px solid #c9a368!important;display:grid;gap:6px;padding-top:11px!important;margin-top:auto;font-size:12px;color:#493727}
+#page-abschluss .report-preview-meta #report-names-preview{font:600 18px/1.3 DarBookCover,Georgia,serif;overflow-wrap:anywhere}
+#page-abschluss .report-preview-meta #report-date-preview{font-size:11px;color:#7c6549}
+@media(max-width:650px){#page-abschluss .report-preview-cover{min-height:0;padding:21px 18px}#page-abschluss .report-preview-scenes img{height:clamp(132px,32vw,205px)}#page-abschluss .report-layout{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -321,7 +343,12 @@ body:has(#page-home:target) #page-home,body:has(#page-ritus:target) #page-ritus,
 
       <section class="page" id="page-abschluss" aria-label="Erinnerungsdokument">
         <div class="page-head"><div><span class="eyebrow">PERSÖNLICHES ARCHIV</span><h1>Dein ʿUmrah-Buch</h1><p>Ein schönes, privates Erinnerungsdokument – keine amtliche Urkunde oder religiöse Bestätigung.</p></div></div>
-        <div class="report-layout"><div class="report-preview"><div class="report-preview-cover"><span>DĀR AL TAWḤĪD</span><h2>MEINE<br>ʿUMRAH</h2><div id="report-names-preview">Dein Name</div><div id="report-date-preview">Dein Reisezeitraum</div></div></div><div class="report-actions"><div class="flat-section"><h2>Inhalt des Dokuments</h2><p>Deckblatt mit eurem Namen, Qurʾān-/Sunnah-Bezug, dokumentierter Ritus-Fortschritt, Reisejournal und eigene Bilder mit Ortsangaben und Bildnotizen. Die Seitenzahl wächst mit dem Inhalt.</p><button class="primary wide" id="print-pdf">Als PDF drucken / sichern</button><button class="secondary wide" id="download-html-report">Ausdruckbares HTML herunterladen</button><p class="hint">Beim Drucken im Browser „Als PDF speichern“ wählen. Auf iOS ggf. die Teilen-/Druckfunktion verwenden. Hintergrundgrafiken in den Druckoptionen erlauben.</p></div><div class="flat-section tools"><h2>Datensicherung</h2><button class="tertiary" id="export-json">Persönliche Daten exportieren</button><label class="tertiary">Sicherung importieren <input id="import-json" type="file" accept="application/json" hidden></label><button class="tertiary danger" id="clear-all">Lokale Daten löschen</button><p class="hint">Datenexport beinhaltet ausgewählte Fotos. Die Dateien werden nicht online hochgeladen.</p></div></div></div>
+        <div class="report-layout"><div class="report-preview"><div class="report-preview-cover">
+<div class="report-preview-heading"><img src="/assets/app-icons/emblem-creme-petrol/icon-192.png" alt="" loading="lazy"><span>DĀR AL TAWḤĪD</span></div>
+<h2 id="report-book-title">MEINE<br>ʿUMRAH</h2>
+<p class="report-preview-deck">Ein persönlicher Reisebegleiter und Erinnerungsbuch.</p>
+<div class="report-preview-scenes"><figure><img src="./illustrations/v11-makkah.jpg" alt="Illustration Makkah" loading="lazy"><figcaption>Makkah</figcaption></figure><figure><img src="./illustrations/v11-madinah.jpg" alt="Illustration Madīnah" loading="lazy"><figcaption>Madīnah</figcaption></figure></div>
+<div class="report-preview-meta"><div id="report-names-preview">Dein Name</div><div id="report-date-preview">Dein Reisezeitraum</div></div></div></div><div class="report-actions"><div class="flat-section"><h2>Inhalt des Dokuments</h2><p>Das creme-goldene Erinnerungsbuch übernimmt Namen, Reisezeitraum, Tagebucheinträge und zugeordnete Fotos von diesem Gerät. Bilder und Bildunterschriften kannst du im Buch ergänzen.</p><button class="primary wide" id="print-pdf">Erinnerungsbuch öffnen · PDF erstellen</button><button class="secondary wide" id="download-html-report">Journal und Fotos bearbeiten</button><p class="hint">Öffne das Erinnerungsbuch und wähle dort „Als PDF speichern“. Auf iPhone/iPad die Teilen-/Druckfunktion verwenden. Hintergrundgrafiken im Druckdialog einschalten.</p></div><div class="flat-section tools"><h2>Datensicherung</h2><button class="tertiary" id="export-json">Persönliche Daten exportieren</button><label class="tertiary">Sicherung importieren <input id="import-json" type="file" accept="application/json" hidden></label><button class="tertiary danger" id="clear-all">Lokale Daten löschen</button><p class="hint">Datenexport beinhaltet ausgewählte Fotos. Die Dateien werden nicht online hochgeladen.</p></div></div></div>
       </section>
     </main>
   </div>
@@ -628,7 +655,7 @@ function bind(){
  $('#day-note').addEventListener('input',e=>{selectedPerson().notes[state.activeDay]=e.target.value;store();$('#save-feedback').textContent=storageOkay?'Lokal gespeichert · keine Serverübertragung':'Speicherung blockiert – bitte Daten sichern'});
  $('#photo-files').addEventListener('change',async e=>{await addPhotos([...e.target.files]);e.target.value=''});
   $('#photo-sort').addEventListener('change',e=>{state.photoSort=e.target.value;store();drawPhotoGallery()});
- $('#print-pdf').addEventListener('click',doPrint);$('#download-html-report').addEventListener('click',htmlReport);$('#export-json').addEventListener('click',exportJSON);
+ $('#print-pdf').addEventListener('click',()=>{location.href='./erinnerungsbuch-v11.html?from=umrah'});$('#download-html-report').addEventListener('click',()=>nav('journal'));$('#export-json').addEventListener('click',exportJSON);
  $('#import-json').addEventListener('change',async e=>{if(e.target.files?.[0])await importJSON(e.target.files[0]);e.target.value=''});$('#clear-all').addEventListener('click',clearAll);
  window.addEventListener('hashchange',()=>{const p=location.hash.replace(/^#page-/,'');if(['home','ritus','orte','journal','abschluss'].includes(p))nav(p)});
  window.addEventListener('online',onlineStatus);window.addEventListener('offline',onlineStatus);
