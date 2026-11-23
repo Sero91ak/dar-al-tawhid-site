@@ -264,7 +264,7 @@
       status.textContent=cp[7]+" ";
       const retry=document.createElement("button");
       retry.type="button";retry.className="btn";retry.textContent=cp[8];
-      retry.onclick=()=>{status.textContent=cp[6];frame.src=activeStudioMode==="studio"?DAR_STUDIO_URL+"?retry="+Date.now():DAR_ATELIER_URL+"&retry="+Date.now();};
+      retry.onclick=()=>{status.textContent=cp[6];frame.src=(activeStudioMode==="studio"?DAR_STUDIO_URL:DAR_ATELIER_URL)+"&retry="+Date.now();};
       status.appendChild(retry);
     });
     resize();
