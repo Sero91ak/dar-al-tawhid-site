@@ -139,6 +139,17 @@ def transcode_audio(src, dst):
     return ffprobe(dst, "aac")
 
 
+def trim_exact_first_sentence(src, dst, seconds):
+    """Use certified original V4 alignment to keep only the actually visible answer."""
+    if not (2.0 < float(seconds) < 4.5):
+        raise ValueError("Unsafe cut position for paid V4 recording")
+    subprocess.run(["ffmpeg","-hide_banner","-loglevel","error",
+                    "-nostdin","-y","-i",str(src),"-t",format(float(seconds),".3f"),
+                    "-vn","-ac","1","-ar","44100","-c:a","aac","-b:a","128k",
+                    str(dst)],check=True)
+    return ffprobe(dst,"aac")
+
+
 def join_audio(parts, dst):
     # Produce one continuous real AAC track; never use synthesized silence.
     args = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-nostdin", "-y"]
@@ -178,7 +189,21 @@ def import_files(plan, gaps, manifest, source_dir):
             key = task["visibleText"]
             parts = task["segments"]
             output = temp / ("final-%02d.m4a" % i)
-            if len(parts) == 1:
+            if task.get("speechExtraction") == "provider-character-aligned-first-sentence-de20":
+                if (parts != ["de-20"] or task["kind"] != "answer"
+                        or key != "Antwort 1: Einen Fehler kann man unbeabsichtigt machen."):
+                    raise ValueError("Unexpected exact short child answer extraction")
+                evidence = load(source_dir / "_de20-exact-trim.json")
+                original = generation_sources["de-20"]
+                if (evidence.get("approvedForExactOfflineTrim") is not True
+                        or evidence.get("segment") != "de-20"
+                        or evidence.get("generationId") != segments["de-20"]["generationId"]
+                        or evidence.get("sourceOriginalSha256") != sha(original.read_bytes())
+                        or evidence.get("exactChildAudioText") != key.removeprefix("Antwort 1: ")
+                        or evidence.get("newV4Generations") != 0):
+                    raise ValueError("Uncertified paid V4 first-sentence trim")
+                length = trim_exact_first_sentence(original, output, evidence["cutSeconds"])
+            elif len(parts) == 1:
                 # Keep the already rendered content; simple format conversion.
                 output.write_bytes(transcoded[parts[0]].read_bytes())
                 length = ffprobe(output, "aac")
@@ -244,6 +269,7 @@ def import_files(plan, gaps, manifest, source_dir):
         row["productionStatus"] = "real-media-repo-imported-live-verification-pending"
         row["sha256"] = item["info"]["sha256"]
         row["url"] = item["info"]["url"]
+        row["durationSeconds"] = item["info"]["durationSeconds"]
         row["publicPlaybackApproved"] = False
     gaps["status"] = "all-14-imported-awaiting-cloudflare-verification"
     write_json(GAPS, gaps)
