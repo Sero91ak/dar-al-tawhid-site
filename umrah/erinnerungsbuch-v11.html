@@ -25,7 +25,7 @@
  background-image:radial-gradient(circle at 12% 8%,#fffcf5 0%,transparent 29%),radial-gradient(circle at 83% 92%,#e9d0a426,transparent 44%),repeating-linear-gradient(110deg,#8d643403 0px,#8d643403 1px,transparent 1px,transparent 7px)}
 .sheet:before{content:'';position:absolute;inset:17px;border:1px solid #d7b67b88;border-radius:1px;z-index:4;pointer-events:none}
 .sheet:after{content:'❧';position:absolute;right:28px;bottom:24px;font-size:26px;font-family:Georgia,serif;color:#c7a66b55;pointer-events:none}
-.sheet .watermark{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:390px;max-width:78%;opacity:.23;pointer-events:none;z-index:-1;mix-blend-mode:multiply;filter:sepia(1) saturate(.45)}
+.sheet .watermark{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:390px;max-width:78%;opacity:.12;pointer-events:none;z-index:-1;mix-blend-mode:multiply;filter:sepia(1) saturate(.45)}
 .eyebrow{text-transform:uppercase;letter-spacing:.22em;font-size:10px;font-weight:850;color:#9b7038}
 .page-head{display:flex;justify-content:space-between;align-items:center;gap:18px;border-bottom:1px solid #cda66c;padding:0 0 16px;margin-bottom:35px;color:var(--ink)}
 .page-head .brand{font:500 14px/1.25 DarBrand,Georgia,serif;letter-spacing:.20em;color:#38291e}.page-head .chapter-no{font:500 12px/1.1 DarDisplay,Georgia,serif;letter-spacing:.065em;color:#987344}
@@ -76,7 +76,7 @@
 .note{border-left:2px solid #b98b4a;padding:10px 0 10px 17px;font:600 23px/1.42 DarDisplay,Georgia,serif;color:#423124;min-height:72px;outline-color:#bb9357}.note small{font:400 11px var(--font)}
 [contenteditable=true]:focus{outline:2px solid #ba9255;outline-offset:4px}
 .chapter-cover{padding:72px 69px 64px;background:var(--ivory);color:var(--ink)}
-.chapter-cover .watermark{top:23%;width:350px;opacity:.22}
+.chapter-cover .watermark{top:23%;width:350px;opacity:.12}
 .chapter-cover .chapter-eyebrow{font-size:10px;letter-spacing:.23em;color:#9c713d}
 .chapter-cover .scene-text{position:relative;z-index:2;text-align:center;margin:62px 0 28px;color:var(--ink)}
 .chapter-cover h2{font:600 94px/.93 DarDisplay,Georgia,serif;margin:18px 0;color:#2f231a}
@@ -193,14 +193,14 @@
 </head>
 <body>
 <header class="toolbar" aria-label="Erinnerungsbuch bearbeiten">
-<b>ʿUmrah Book V11</b>
+<b>ʿUmrah Book V11</b><button class="action" id="backToUmrah" type="button">Zur ʿUmrah-App</button>
 <label>Reisende<input id="travellers" placeholder="Namen eintragen"></label>
 <label>Reisezeitraum<input id="period" placeholder="Datum / Jahr"></label>
 <label>Foto zuordnen<select id="category"><option value="auto">Automatisch / nach Foto</option><option value="makkah">Makkah allgemein</option><option value="tawaf">Ṭawāf / Kaʿbah</option><option value="say">Ṣafā und Marwah</option><option value="madinah">Madīnah</option><option value="reise">Reisebeginn</option></select></label>
 <div class="right"><button class="action" id="choosePhotos">+ Fotos hinzufügen</button><button class="action primary" id="printBook">Als PDF speichern</button></div>
 <input type="file" id="photos" hidden multiple accept="image/jpeg,image/png,image/webp,image/heic,image/heif">
 </header>
-<p class="instructions">Gestalte deine Erinnerungen direkt im Buch: Texte anklicken und bearbeiten, Bilder auswählen und bei Bedarf den Bereich festlegen. Die Fotos bleiben lokal in diesem Browser; nichts wird auf einen Server hochgeladen. Beim PDF-Druck in den Druckeinstellungen „Hintergrundgrafiken“ aktivieren.</p>
+<p class="instructions">Gestalte deine Erinnerungen direkt im Buch: Texte anklicken und bearbeiten, Bilder auswählen und bei Bedarf den Bereich festlegen. Gespeicherte Reisende, Reisetage und Journalfotos aus der ʿUmrah-App werden auf diesem Gerät automatisch übernommen. Die Fotos bleiben lokal; nichts wird auf einen Server hochgeladen. Beim PDF-Druck in den Druckeinstellungen „Hintergrundgrafiken“ aktivieren.</p>
 <main class="book" id="book">
 <section class="sheet cover">
  <div class="cover-brand"><img class="logo" src="../assets/app-icons/emblem-creme-petrol/icon-512.png" alt="DĀR AL TAWḤĪD Original-Emblem"><span class="brand-rule" aria-hidden="true"></span><span class="brand-word">DĀR AL TAWḤĪD</span></div>
@@ -305,6 +305,7 @@ function sync(){document.querySelectorAll('[data-field=travellers]').forEach(fun
 traveller.addEventListener('input',function(){try{localStorage.setItem('dar-book-travellers',traveller.value);}catch(e){}sync()});period.addEventListener('input',function(){try{localStorage.setItem('dar-book-period',period.value);}catch(e){}sync()});sync();
 document.querySelectorAll('[data-note]').forEach(function(e){var key='dar-book-note-'+e.dataset.note;try{var v=localStorage.getItem(key);if(v!==null)e.textContent=v;}catch(x){}e.addEventListener('input',function(){try{localStorage.setItem(key,e.textContent.slice(0,4000));}catch(x){}})});
 document.getElementById('printBook').addEventListener('click',function(){window.print()});
+document.getElementById('backToUmrah').addEventListener('click',function(){location.href='./index.html#page-abschluss'});
 document.getElementById('choosePhotos').addEventListener('click',function(){document.getElementById('photos').click()});
 function guess(name){var n=(name||'').toLowerCase();if(/madina|medina|nabawi|uhud|quba/.test(n))return 'madinah';if(/safa|marwa|sa.y/.test(n))return 'say';if(/tawaf|kaaba|kabah|ka.bah/.test(n))return 'tawaf';if(/makk|mecca|haram/.test(n))return 'makkah';if(/airport|flug|abflug|reise|ihram|miqat/.test(n))return 'reise';return null;}
 function fromGPS(lat,lon){if(lat>24.2&&lat<24.7&&lon>39.2&&lon<40)return 'madinah';if(lat>21.2&&lat<21.7&&lon>39.5&&lon<40.2)return 'makkah';return null;}
@@ -318,12 +319,20 @@ async function exifGPS(file){try{
  }pos+=len+2;}return null;
 }catch(e){return null}}
 function objectStore(mode){if(!db)return null;try{return db.transaction(store,mode).objectStore(store)}catch(e){return null}}
-function save(item){var s=objectStore('readwrite');if(s)try{s.put(item)}catch(e){}}
-function remove(id){var s=objectStore('readwrite');if(s)try{s.delete(id)}catch(e){}}
+function photoOverrideKey(id){return 'dar-book-v11-photo-override-'+id}
+function photoOverride(id){try{return JSON.parse(localStorage.getItem(photoOverrideKey(id))||'{}')}catch(e){return {}}}
+function save(item){
+ if(item.sourceType==='main'){try{localStorage.setItem(photoOverrideKey(item.id),JSON.stringify({chapter:item.chapter,caption:item.caption,hidden:!!item.hidden}))}catch(e){}return}
+ var s=objectStore('readwrite');if(s)try{s.put(item)}catch(e){}
+}
+function remove(id){
+ if(String(id).startsWith('main:')){var v=photoOverride(id);v.hidden=true;try{localStorage.setItem(photoOverrideKey(id),JSON.stringify(v))}catch(e){}return}
+ var s=objectStore('readwrite');if(s)try{s.delete(id)}catch(e){}
+}
 function rebalance(chapter){var base=document.querySelector('[data-chapter="'+chapter+'"]');if(!base)return;var primary=base.querySelector('.photo-entries');var old=Array.from(document.querySelectorAll('[data-spread="'+chapter+'"]'));var cards=Array.from(primary.children);old.forEach(function(p){cards.push.apply(cards,Array.from(p.querySelectorAll('.photo-card')));p.remove()});cards.slice(0,2).forEach(function(c){primary.appendChild(c)});var rest=cards.slice(2),anchor=base;for(var i=0;i<rest.length;i+=4){var page=document.createElement('section');page.className='sheet chapter photo-spread';page.dataset.spread=chapter;var top=document.createElement('div');top.className='page-head';top.innerHTML='<span class="brand">DĀR AL TAWḤĪD</span><span class="chapter-no">Fototagebuch</span>';var title=document.createElement('h2');title.className='h2';title.textContent=({reise:'Unser Aufbruch',makkah:'Momente in Makkah',tawaf:'Am Ḥaram',say:'Zwischen Ṣafā und Marwah',madinah:'Erinnerungen aus Madīnah'})[chapter];var caption=document.createElement('p');caption.className='prose';caption.textContent='Bilder, Orte und persönliche Erinnerungen aus diesem Kapitel.';var grid=document.createElement('div');grid.className='photo-entries';rest.slice(i,i+4).forEach(function(c){grid.appendChild(c)});var wm=document.createElement('img');wm.className='watermark';wm.src='../app-logo-original.png';wm.alt='';page.append(wm,top,title,caption,grid);anchor.after(page);anchor=page;}}
-function makePhoto(item){var chapter=chapters.includes(item.chapter)?item.chapter:'reise',list=document.getElementById('photos-'+chapter);if(!list)return;var figure=document.createElement('figure');figure.className='photo-card';figure.dataset.id=item.id;
+function makePhoto(item){if(item.sourceType==='main'&&photoOverride(item.id).hidden)return;var chapter=chapters.includes(item.chapter)?item.chapter:'reise',list=document.getElementById('photos-'+chapter);if(!list)return;var figure=document.createElement('figure');figure.className='photo-card';figure.dataset.id=item.id;
  var im=document.createElement('img');var objectUrl=URL.createObjectURL(item.file);im.src=objectUrl;im.alt=item.caption||item.name||'Persönliche Aufnahme';var editable=document.createElement('figcaption');editable.className='caption';editable.contentEditable='true';editable.textContent=item.caption||'Ein Moment in '+(chapter==='madinah'?'Madīnah':chapter==='say'?'Ṣafā / Marwah':chapter==='reise'?'unserer Reise':'Makkah');var meta=document.createElement('div');meta.className='meta';meta.textContent=item.source||'Persönliche Aufnahme';
- var del=document.createElement('button');del.type='button';del.className='remove';del.textContent='Entfernen';del.addEventListener('click',function(){if(confirm('Dieses Foto aus dem lokalen Buch entfernen?')){remove(item.id);URL.revokeObjectURL(objectUrl);figure.remove();rebalance(chapter);}});
+ var del=document.createElement('button');del.type='button';del.className='remove';del.textContent=item.sourceType==='main'?'Im Buch ausblenden':'Entfernen';del.addEventListener('click',function(){if(confirm(item.sourceType==='main'?'Dieses Foto nur in diesem Buch ausblenden? Das Original im ʿUmrah-Journal bleibt erhalten.':'Dieses Foto aus dem lokalen Buch entfernen?')){remove(item.id);URL.revokeObjectURL(objectUrl);figure.remove();rebalance(chapter);}});
  editable.addEventListener('input',function(){item.caption=editable.textContent.slice(0,220);save(item)});
  var sel=document.createElement('select');sel.style='margin:8px 5px 0;width:calc(100% - 10px);padding:4px;background:#fff;border:1px solid #d6c9ae;font-size:10px';chapters.forEach(function(v){var opt=document.createElement('option');opt.value=v;opt.textContent=({reise:'Reisebeginn',makkah:'Makkah',tawaf:'Ṭawāf',say:'Ṣafā / Marwah',madinah:'Madīnah'})[v];sel.appendChild(opt)});sel.value=chapter;sel.addEventListener('change',function(){item.chapter=sel.value;save(item);URL.revokeObjectURL(objectUrl);figure.remove();rebalance(chapter);makePhoto(item)});
  figure.append(im,editable,meta,sel,del);list.appendChild(figure);rebalance(chapter);
