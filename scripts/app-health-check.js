@@ -263,6 +263,19 @@ try {
   fail("Adult Home mutation/scroll performance regression");
 }
 
+// Same-content push links: prevent Home fallbacks and duplicate WebView/PWA reloads.
+for (const [script, label] of [
+  ["check-daily-content-consistency.cjs", "Kanonische Tagesrotation / globale Empfehlung"],
+  ["check-push-click-navigation.cjs", "Duʿāʾ- / Beitrags-Pushklick ohne Doppel-Navigation"]
+]) {
+  try {
+    require("child_process").execFileSync(process.execPath,
+      [path.join(__dirname, script)], { stdio: "inherit" });
+  } catch (e) {
+    fail(label);
+  }
+}
+
 if (failed) {
   console.error(`\n${failed} check(s) failed – Deploy stoppen.`);
   process.exit(1);
