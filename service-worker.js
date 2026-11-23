@@ -527,17 +527,20 @@ function notificationContent(data, launchUrl) {
   let kind = '', id = '';
   if (url) {
     const parsed = new URL(url);
-    const hash = decodeURIComponent(parsed.hash.replace(/^#/, ''));
-    const matched = hash.match(/^(post|dua)\/(.+)$/i);
-    if (matched) { kind = matched[1].toLowerCase(); id = matched[2]; }
-    else if (parsed.searchParams.get('post')) {
+    try {
+      const hash = decodeURIComponent(parsed.hash.replace(/^#/, ''));
+      const matched = hash.match(/^(post|dua)\/(.+)$/i);
+      if (matched) { kind = matched[1].toLowerCase(); id = matched[2]; }
+    } catch (e) {}
+    if (!id && parsed.searchParams.get('post')) {
       kind = 'post'; id = parsed.searchParams.get('post');
     }
   }
   if (!id) {
     const type = String(row.nav || row.target || row.type || row.reminder_type || '').toLowerCase();
     kind = type.includes('dua') ? 'dua'
-      : /post|recommend|article/.test(type) ? 'post' : '';
+      : /post|recommend|article/.test(type) || row.postId || row.slug ? 'post'
+      : row.duaId ? 'dua' : '';
     id = String(row.content_id || row.postId || row.duaId || row.slug || '').trim();
   }
   if (!/^[a-z0-9._-]{1,260}$/i.test(id)) return { kind: '', id: '', url };
@@ -578,7 +581,7 @@ async function focusClientToContent(clientList, targetUrl, content) {
     if (typeof client.navigate === 'function') {
       try { await client.navigate(targetUrl); return true; } catch (e) {}
     }
-    return true;
+    // There is no viable existing client navigation; let openWindow recover.
   }
   return false;
 }
