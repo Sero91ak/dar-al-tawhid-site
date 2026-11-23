@@ -17,6 +17,20 @@ function validV4(entry){
  // recordings use DIFFERENT proof paths. Never claim the Creative connector
  // applied unsupported speed/style, pronunciation dictionary or full kids_story.
  if(entry.sameAsApprovedKidsStoryProfile===true)return true;
+ if(entry.sourceLessonId==="akhlaq-sabr"&&entry.sourceSubject==="akhlaq"
+    &&entry.sourceType==="owner-V4-dialogue-segmented-de-ar"){
+  return entry.approvedForPlayback===true
+   &&entry.qaStatus==="owner-authorized-automated-technical-audit"
+   &&entry.sourceApi==="text-to-dialogue-eleven-v4"
+   &&Array.isArray(entry.sourceSegmentKeys)&&entry.sourceSegmentKeys.length>0
+   &&entry.sourceSegmentKeys.every(x=>typeof x==="string"&&/^[0-9a-f]{24}$/.test(x))
+   &&Array.isArray(entry.sourceOriginalSegmentsSha256)
+   &&entry.sourceOriginalSegmentsSha256.length===entry.sourceSegmentKeys.length
+   &&entry.sourceOriginalSegmentsSha256.every(x=>typeof x==="string"&&/^[0-9a-f]{64}$/.test(x))
+   &&entry.actualCreativeVoiceSettings?.stability===0.62
+   &&entry.actualCreativeVoiceSettings?.similarity===0.88
+   &&entry.creativeV4SpeedStyleNotAvailable===true;
+ }
  if(entry.sourceLessonId!=="sidq"||entry.sourceSubject!=="akhlaq"||
     entry.approvedForPlayback!==true||entry.qaStatus!=="owner-authorized-automated-technical-audit"||
     !Array.isArray(entry.sourceGenerationIds))return false;
