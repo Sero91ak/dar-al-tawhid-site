@@ -106,9 +106,31 @@ function click(e){var button=isDailyTarget(e.target);if(!button)return;
 e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
 update(false).then(function(result){if(result?.dua?.id)navigateDua(result.dua.id)});
 }
+// The service worker asks the *existing* installed PWA to navigate once.
+// Acknowledgement prevents a second client.navigate() document reload.
+function onServiceWorkerOpen(event){
+ var request=event&&event.data;
+ if(!request||request.type!=="DAR_OPEN_CONTENT")return;
+ var kind=text(request.kind),id=text(request.id),port=event.ports&&event.ports[0];
+ var handled=false;
+ if((kind==="post"||kind==="dua")&&/^[A-Za-z0-9._-]{1,260}$/.test(id)){
+  try{
+   var url=new URL(request.url,w.location.href);
+   if(url.origin===w.location.origin){
+    var expected="#"+kind+"/"+encodeURIComponent(id);
+    if(w.location.hash===expected)handled=true;
+    else if(typeof w.navigate==="function"){w.navigate(kind,id);handled=true}
+    else{w.location.hash=expected;handled=true}
+   }
+  }catch(_){}
+ }
+ if(port)try{port.postMessage({handled:handled})}catch(_){}
+}
 function onDayChange(){if(state.date!==berlinDate())update(true);else render()}
 function onForeground(){if(state.date!==berlinDate())update(true);else update(false)}
-function init(){w.addEventListener("click",click,true);d.addEventListener("dar:view-rendered",function(){w.requestAnimationFrame(render)});d.addEventListener("dar-adult-locale-changed",render);d.addEventListener("dar:visitor-profile-changed",function(){w.requestAnimationFrame(render)});
+function init(){w.addEventListener("click",click,true);
+if(w.navigator&&w.navigator.serviceWorker&&w.navigator.serviceWorker.addEventListener)w.navigator.serviceWorker.addEventListener("message",onServiceWorkerOpen);
+d.addEventListener("dar:view-rendered",function(){w.requestAnimationFrame(render)});d.addEventListener("dar-adult-locale-changed",render);d.addEventListener("dar:visitor-profile-changed",function(){w.requestAnimationFrame(render)});
 // Reuse the existing daily result on foreground. Force refresh only on a
 // Berlin date change; same-day freshness is already bounded by update(false).
 d.addEventListener("visibilitychange",function(){if(!d.hidden)onForeground()});
