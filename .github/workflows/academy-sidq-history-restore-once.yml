@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/academy-sidq-history-restore-once.yml'
+      - 'kids/tools/recover-academy-sidq-v4-from-history-v1.py'
   workflow_dispatch:
 permissions:
   contents: write
