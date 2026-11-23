@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "revision": "home-cinematic-v2-design-preview-2026-11-18",
+  "status": "prototype-config-not-published",
+  "visuals": {
+    "heroArabic": "وَقُل رَّبِّ زِدْنِي عِلْمًا",
+    "heroCaption": "„Mein Herr, lasse mich an Wissen zunehmen.“ · 20:114"
+  },
+  "content": {
+    "dailyVerseSource": "/content/updates/daily.json",
+    "hadithCatalogSource": "/apple-tv/hadith/catalog.json",
+    "hadithPreviewSeries": "/apple-tv/hadith/series/001-050/index.json",
+    "hadithRotationDefault": "daily",
+    "hadithRotationOptionsSeconds": [
+      300,
+      900,
+      1800
+    ],
+    "showHadithSource": true,
+    "showAuthenticityStatus": true
+  },
+  "media": {
+    "reciterCatalog": "/data/quran-reciters.json",
+    "quranAudioTemplate": "/quran-audio/{edition}/{globalAyah}.mp3",
+    "quranRadio": {
+      "label": "Qurʾān Live-Radio",
+      "streamUrl": null,
+      "rightsStatus": "pending"
+    },
+    "adhanCatalog": "/apple-tv/prayer/adhan.json",
+    "cinematicAdhan": {
+      "videoUrl": null,
+      "rightsStatus": "pending",
+      "description": "Optionales eigenes Cinematic-Aḏān-Video; für Seriennutzung schriftliche Rechte erforderlich"
+    }
+  },
+  "delivery": {
+    "mode": "pull-refresh",
+    "note": "Nur visuals.heroArabic, visuals.heroCaption, media.quranRadio und media.cinematicAdhan werden in V2 aktuell ausgewertet; die übrigen Felder gehören zum späteren Content-/Admin-Vertrag.",
+    "minimumRefreshSeconds": 60,
+    "staleWhileOffline": true,
+    "doNotEmbedCredentials": true
+  }
+}
