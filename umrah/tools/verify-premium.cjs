@@ -33,7 +33,12 @@ assert.match(css, /pr-photo-spread/);
 for(const id of ['quran-2-127','quran-2-158','quran-2-196','quran-2-201','hadith-bukhari-1549','hadith-bukhari-1727','hadith-bukhari-3364','hadith-muslim-1218a','service-nusuk','service-haramayn']){
  assert.ok(source.includes('id="'+id+'"'),'Missing local source '+id);
 }
-assert.match(sw, /dar-umrah-v9-premium-1/);
+const book=read('erinnerungsbuch-v11.html');
+assert.match(sw, /dar-umrah-v11-4-book-app-assets-20261123/);
+assert.match(sw, /erinnerungsbuch-v11\\.html/);
+assert.match(book, /\\.sheet:not\\(\\.cover\\) \\.watermark\\{opacity:\\.06!important/);
+assert.match(book, /instrument-serif-latin-ext-400-normal\\.woff2/);
+assert.match(book, /@media print/);
 for(const file of ['enhancements.js','enhancements.css','quellen.html'])assert.ok(sw.includes(file),'Missing SW asset '+file);
 assert.match(sw, /req.mode!=='navigate'/);
 console.log('PASS: Umrah Premium additive integration, self-hosted references, print and offline contract');
