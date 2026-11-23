@@ -172,6 +172,7 @@ const ADULT_VISITOR_LIVE_UI=new Set([
  '/assets/dar-visitor-smart-profile-v1.css',
  '/assets/dar-visitor-profile-picker-v1.js',
  '/assets/dar-visitor-profile-picker-v1.css',
+ '/assets/dar-canonical-daily-v1.js',
  '/assets/dar-visitor-daily-hub-v1.js',
  '/assets/dar-visitor-daily-hub-v1.css',
  '/assets/dar-pwa-release-notice-v1.js',
