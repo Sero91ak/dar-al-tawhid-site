@@ -3,7 +3,17 @@
   "topic": "akhlaq-sabr",
   "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "modelId": "eleven_v4",
-  "requests": {},
+  "requests": {
+    "5ff3b520c229279d6d060382": {
+      "state": "attempt-started-never-auto-retry",
+      "lang": "de",
+      "textSha256": "b23a74d12b36fc20a76b504a15a8fc5b8fcba48847be064ead77378e931b1284",
+      "createdAt": "2026-11-23T18:17:26.830495+00:00",
+      "sequence": 1,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4"
+    }
+  },
   "policy": "mark-paid-attempt-and-commit-before-POST; never auto-retry uncertain request",
   "createdAt": "2026-11-23T18:17:24.170796+00:00",
   "publicLiveVerified": false,
