@@ -23,6 +23,7 @@ ROOT=pathlib.Path(__file__).resolve().parents[2]
 PLAN=ROOT/"kids/data/academy-topic-batches/akhlaq-sidq-14-missing-real-v4-plan-v1.json"
 MAPPING=ROOT/"kids/data/academy-topic-batches/akhlaq-sidq-history-recovery-map-v1.json"
 IMPORTER=ROOT/"kids/tools/import-academy-sidq-click-gaps-v1.py"
+ALIGNER=ROOT/"kids/tools/align-academy-sidq-de20-short-answer-v1.py"
 ARCHIVE=ROOT/"kids/original-media/academy-sidq-click-gaps-v1"
 LEDGER=ROOT/"kids/data/academy-topic-batches/akhlaq-sidq-originals-sha-v1.json"
 VOICE="DkU7j9uO4ZEtLD2iRZSH"
@@ -131,9 +132,15 @@ def main():
     with tempfile.TemporaryDirectory(prefix="dar-sidq-history-") as directory:
         source=pathlib.Path(directory)
         ledger=recover(records,key,source)
+        # Before building the short child's answer, certify an EXACT spoken
+        # first sentence boundary in the paid 11.12s original's alignments.
+        subprocess.run([sys.executable,str(ALIGNER),"--source-dir",str(source)],
+            cwd=ROOT,check=True)
         # The atomic offline importer writes exact real M4A bytes and SHA declarations.
         subprocess.run([sys.executable,str(IMPORTER),"--import",
             "--source-dir",str(source)],cwd=ROOT,check=True)
+        # The aligner corrected the child-visible key in the canonical task.
+        p=load(PLAN)
         document=load(ROOT/"kids/data/academy-audio.json")
         if sum(e.get("sourceLessonId")=="sidq" for e in document["entries"].values())!=72:
             raise RuntimeError("14 new exact-matched public recordings missing")
