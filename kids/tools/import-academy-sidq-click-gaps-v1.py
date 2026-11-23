@@ -201,7 +201,7 @@ def import_files(plan, gaps, manifest, source_dir):
                     "modelId": "eleven_v4",
                     "sourceVoice": "authorized-owner-voice",
                     "sourceSpeaker": "Serhat Abu Malik",
-                    "sourceType": "owner-V4-creative-mixed-Fusha" if any(segments[x]["language"] == "ar" for x in parts) else "owner-V4-creative-german",
+                    "sourceType": "owner-V4-creative-bilingual-assembled" if any(segments[x]["language"] == "ar" for x in parts) else "owner-V4-creative-german",
                     "sourceSubject": "akhlaq",
                     "sourceLessonId": "sidq",
                     "sourceTeachingKind": task["kind"],
@@ -212,6 +212,8 @@ def import_files(plan, gaps, manifest, source_dir):
                     "approvedForPlayback": True,
                     "qaStatus": "owner-authorized-automated-technical-audit",
                     "arabicSegmentsNative": any(segments[x]["language"] == "ar" for x in parts),
+                    "actualCreativeVoiceSettings": {"stability": 0.62, "similarity": 0.88},
+                    "creativeV4SpeedStyleNotAvailable": True,
                 },
             }
         if len(results) != CHILD_GAP_COUNT:
