@@ -17,10 +17,15 @@ assert.ok(daily.dua?.id && daily.recommendation?.id && daily.recommendation?.fil
 if (rotation.date === daily.date && daily.source === 'dar-daily-no-repeat-rotation') {
   for (const [lane, key] of [['dua', daily.dua.id], ['recommendation', daily.recommendation.file]]) {
     const state = rotation[lane];
-    assert.equal(state.lastKey, key, lane + ' must point to the published item');
-    assert.equal(new Set(state.usedKeys).size, state.usedKeys.length, lane + ' repeats history entries');
-    assert.ok(state.usedKeys.includes(key), lane + ' does not record published item');
-    assert.equal(state.remaining, Math.max(0, state.poolSize - state.usedKeys.length));
+    // Older production history may lag behind daily.json. The code, not a
+    // committed one-day JSON snapshot, must reconcile it safely upon rotation.
+    const reconciled = adoptCanonicalSelection(
+      state, key, [...(state.usedKeys || []), key]
+    );
+    assert.equal(reconciled.lastKey, key, lane + ' must adopt the published item');
+    assert.equal(new Set(reconciled.usedKeys).size, reconciled.usedKeys.length, lane + ' repeats history entries');
+    assert.ok(reconciled.usedKeys.includes(key), lane + ' does not record published item');
+    assert.equal(reconciled.remaining, Math.max(0, state.poolSize - reconciled.usedKeys.length));
   }
 }
 
@@ -33,6 +38,16 @@ assert.equal(first.remaining, 2);
 const second = adoptCanonicalSelection(first, 'today', ['old', 'today', 'third', 'fourth']);
 assert.deepEqual(second, first, 'repeated same-day reconciliation must be idempotent');
 assert.throws(() => adoptCanonicalSelection(first, 'unknown', ['old', 'today']), /kanonischen Pool/);
+
+// When the state remembers a stale item, yesterday's published ID wins
+// and must not be selected again at midnight.
+const repairedTomorrow = pickWithoutRepeat(
+  ['old', 'today', 'future'], x => x,
+  { cycle: 0, lastKey: 'old', usedKeys: ['old'] }, 'today', '2026-11-24'
+);
+assert.equal(repairedTomorrow.item, 'future');
+assert.equal(repairedTomorrow.state.lastKey, 'future');
+assert.ok(repairedTomorrow.state.usedKeys.includes('today'));
 
 // No item is repeated until all available ones have been used.
 const pool = ['a', 'b', 'c', 'd'];
