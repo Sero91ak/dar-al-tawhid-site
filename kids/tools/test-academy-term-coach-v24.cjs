@@ -120,7 +120,14 @@ assert.equal(counts.vocabularyTerms,33);
 assert.equal(counts.vocabularyVoicePhrases,99);
 assert.deepEqual(counts.uncoveredLessons,[]);
 assert.ok(counts.uniquePhrases>=730);
-assert.equal(counts.totals.approved,58,"The 58 real Ṣidq V4 media assets are now present, owner-authorized and hash-verified; no other topic may be marked recorded");
+assert.ok([58,72].includes(counts.totals.approved),
+ "Exactly 58 canonical or 72 complete exact Ṣidq V4 real media assets, never a partial release");
+// The original 58 canonical audio texts remain unchanged; exactly 14 new
+// child-click recordings may be added only when every binary is hash-verifiable.
+const sidqPublic=JSON.parse(read("kids/data/academy-audio.json"));
+const sidqCount=Object.values(sidqPublic.entries).filter(x=>x.sourceLessonId==="sidq").length;
+assert.equal(sidqCount,counts.totals.approved,
+ "The public manifest and independently verified on-disk assets must agree");
 // Regression: cross-check every visible Ṣidq answer, source label and glossary
 // tap against original source/voice text, not just static audit plans.
 require("node:child_process").execFileSync(process.execPath,[
