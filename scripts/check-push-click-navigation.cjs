@@ -82,6 +82,14 @@ async function run() {
       assert.equal(old.loads.length, 1, 'old client must receive cold navigation fallback');
       assert.match(old.loads[0], new RegExp('#' + kind + '/' + id + '$'));
     }
+    const wrappedUrl = ORIGIN + '/#dua/dua-037';
+    const wrapped = await clickWorker(worker, {
+      app_url: 'daraltawhid://in-app?src=' + encodeURIComponent(wrappedUrl)
+    });
+    assert.equal(wrapped.messages[0]?.kind, 'dua', 'nested OneSignal src lost Duʿāʾ route');
+    assert.equal(wrapped.messages[0]?.id, 'dua-037');
+    assert.equal(wrapped.loads.length, 0, 'wrapped link reloaded warm PWA');
+
     const legacy = await clickWorker(worker, { postId: 'legacy-post' });
     assert.equal(legacy.messages[0]?.kind, 'post', 'postId-only notification lost');
     assert.equal(legacy.messages[0]?.id, 'legacy-post');
