@@ -81,11 +81,17 @@ function renderHomeDailyDuaRow(){
   return `<button type="button" class="home-v380-open-row" data-nav="dua" data-value="${esc(d.id)}" aria-label="Duʿāʾ des Tages öffnen: ${esc(d.title)}"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Duʿāʾ des Tages</span><h3 class="home-v380-open-row__title">${esc(d.title)}</h3>${preview?`<p class="home-v380-open-row__excerpt">${esc(preview)}</p>`:""}</div><span class="home-v380-open-row__action" aria-hidden="true">Öffnen →</span></button>`;
 }
 function renderHomeRecommendedRow(excludeIds=new Set()){
-  const post=recommendedPost();
-  if(!post||excludeIds.has(String(post.id)))return"";
-  const excerpt=findQuote(post);
-  const meta=[post.category?normalizePostCategory(post.category):"",post.scholar].filter(Boolean).join(" · ");
-  return `<button type="button" class="home-v380-open-row" data-nav="post" data-dar-global-recommendation="1" data-value="${esc(post.id)}" aria-label="Heute empfohlen lesen: ${esc(post.title)}"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Heute empfohlen</span><h3 class="home-v380-open-row__title">${esc(post.title)}</h3>${excerpt?`<p class="home-v380-open-row__excerpt">${esc(excerpt)}</p>`:""}${meta?`<p class="home-v380-open-row__meta">${esc(meta)}</p>`:""}</div><span class="home-v380-open-row__action" aria-hidden="true">Lesen →</span></button>`;
+  // Only the published global daily resolver owns this Home row. Personal
+  // recommendedPost() ranking must never choose a different item for Frau/Mann.
+  // Keep one non-interactive row mounted until the async daily resolver is ready.
+  const canonical=window.DARCanonicalDailyV1?.snapshot?.()?.recommendation||null;
+  const post=canonical?.id||"";
+  const title=canonical?.title||"…";
+  const excerpt=canonical?.snippet||"";
+  const meta=[canonical?.category||"",canonical?.scholar||""].filter(Boolean).join(" · ");
+  const nav=post?"post":"";
+  const disabled=post?"":' aria-disabled="true"';
+  return `<button type="button" class="home-v380-open-row" data-nav="${nav}" data-dar-global-recommendation="1" data-value="${esc(post)}"${disabled} aria-label="Heute empfohlen lesen: ${esc(title)}"><div class="home-v380-open-row__body"><span class="home-v380-kicker">Heute empfohlen</span><h3 class="home-v380-open-row__title">${esc(title)}</h3>${excerpt?`<p class="home-v380-open-row__excerpt">${esc(excerpt)}</p>`:""}${meta?`<p class="home-v380-open-row__meta">${esc(meta)}</p>`:""}</div><span class="home-v380-open-row__action" aria-hidden="true">Lesen →</span></button>`;
 }
 function renderHomeRamadanRow(){
   const ctx=seasonalIslamicContext();
