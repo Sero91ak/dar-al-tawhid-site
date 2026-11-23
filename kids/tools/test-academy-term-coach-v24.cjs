@@ -139,4 +139,7 @@ assert.equal(dry.childRecordings,14);
 assert.equal(dry.newOriginalGenerations,20);
 assert.equal(dry.arabicGermanAssemblies,9);
 assert.equal(dry.newSynthesis,0);
+require("node:child_process").execFileSync(process.execPath,[
+ "kids/tools/test-academy-sabr-choice-v1.cjs"
+],{cwd:root,stdio:"inherit"});
 console.log("KIDS V24 GLOSSARY PASS: 33 terms × 3 child-safe age explanations = 99 verified-voice requests, "+counts.catalogLessonCount+" audited lessons; 0 auto voice and 0 credits.");
