@@ -29,7 +29,7 @@
   const title=clean(lesson?.topic)||"unser Thema";
   const originalPrompt=clean(q.prompt);
   const sourcePrompt=/Qurʾān|Ḥadīṯ|Sunnah|Verses|Überlieferung|Lehrgedanke|Beleg/.test(originalPrompt);
-  const correct=compact(q.sample||q.explain||lesson?.sample||lesson?.goal);
+  let correct=compact(q.sample||q.explain||lesson?.sample||lesson?.goal);
   if(!correct)throw Error("Missing answer for "+title+"/"+age+"/"+index);
   const alternatives=(lesson?.questions?.[age]||[])
    .filter(other=>other&&other.type==="choice"&&Array.isArray(other.options))
@@ -56,6 +56,24 @@
     }else if(age==="9-10"&&index===2){
       prompt=originalPrompt;
       wrong="Ein Versehen und eine absichtliche Lüge sind dasselbe.";
+    }
+  }
+  // Ṣabr: source-linked questions must be real child pedagogy, not generic
+  // notes about the wording of a verse versus a hadith.
+  // The old unadapted source questions stay in the immutable curriculum.
+  if(lesson?.id==="akhlaq-sabr"){
+    if(age==="6-8"&&index===1){
+      prompt="Wie kannst du Geduld im Alltag zeigen?";
+      correct="Ich bleibe freundlich und übe weiter, auch wenn etwas nicht sofort klappt.";
+      wrong="Ich schimpfe, sobald ich warten muss.";
+    }else if(age==="9-10"&&index===1){
+      prompt="Was zeigt Geduld, wenn etwas nicht sofort gelingt?";
+      correct="Ich bleibe ruhig, bitte um Hilfe und versuche es erneut.";
+      wrong="Ich gebe sofort auf und werde gemein.";
+    }else if(age==="9-10"&&index===2){
+      prompt="Was lehren Qurʾān 2:153 und der Ḥadīṯ über Geduld?";
+      correct="Allah ist mit den Geduldigen. Wer sich um Geduld bemüht, dem gibt Allah Geduld.";
+      wrong="Geduld spielt keine Rolle, wenn etwas schwierig wird.";
     }
   }
   const result={...q,type:"choice",prompt,options:[correct,wrong],correct:0,
