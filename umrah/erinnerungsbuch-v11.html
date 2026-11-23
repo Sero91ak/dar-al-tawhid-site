@@ -199,6 +199,9 @@
 /* Print and screen share one font system: no artificially boldened display glyphs.
    Instrument Serif's extended Latin subset keeps ā/ī/ḥ/Ḥ/ṭ in the same typeface. */
 .sheet,.toolbar{font-synthesis:none;font-kerning:normal}
+/* Cinzel Latin lacks extended letters in the brand; use one complete serif for Ā, Ḥ and Ī too. */
+.page-head .brand,.cover .brand-word{font-family:DarDisplay,Georgia,serif;font-weight:400}
+.intro,.arch-painting figcaption{font-weight:400}
 .toolbar b,.h1,.h2,.page-head .chapter-no,.cover h1,.cover .sub,
 .opening .dedication,.photo-card .caption,.placeholder,.note,
 .chapter-cover h2,.chapter-cover .scene-text p,.colophon .closing,
