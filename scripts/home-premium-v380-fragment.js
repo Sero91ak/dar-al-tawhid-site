@@ -82,7 +82,7 @@ function renderHomeDailyDuaRow(){
 }
 function renderHomeRecommendedRow(excludeIds=new Set()){
   // Only the published global daily resolver owns this Home row. Personal
-  // recommendedPost() ranking must never choose a different item for Frau/Mann.
+  // Personal ranking must never choose a different item for Frau/Mann.
   // Keep one non-interactive row mounted until the async daily resolver is ready.
   const canonical=window.DARCanonicalDailyV1?.snapshot?.()?.recommendation||null;
   const post=canonical?.id||"";
