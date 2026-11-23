@@ -74,7 +74,19 @@ assert.equal(sourcePlan.phraseCount,57);
 const fromPlan=sourcePlan.phrases.map(x=>x.text);
 assert.ok(!missing.some(x=>x.kind==="answer"&&fromPlan.includes(x.text)),
  "An already recorded canonical answer must NEVER be falsely classified missing");
-assert.ok(missing.some(x=>x.kind==="glossary"),"Glossary still needs real owner V4 media, not an invented local browser fallback");
+// A release must be atomic: exactly 14 missing before import or exactly zero
+// missing after the 14 SHA-verified V4 binaries have been imported.
+assert.ok([0,14].includes(new Set(missing.map(x=>x.text)).size),
+ "Ṣidq playback cannot be partially published or lose a recorded child text");
+const grouped={question:0,answer:0,glossary:0};
+for(const x of new Map(missing.map(x=>[x.text,x])).values())grouped[x.kind]++;
+if(missing.length){
+ assert.deepEqual(grouped,{question:1,answer:4,glossary:9},
+  "The approved pending Ṣidq gap set must remain exactly 1+4+9");
+}else{
+ assert.equal(Object.values(pub.entries).filter(x=>x.sourceLessonId==="sidq").length,72,
+  "14 actual V4 click audios must be present before marking Ṣidq click coverage complete");
+}
 console.log(JSON.stringify({
  status:"PASS",scope:"sidq",ages,
  missingVisibleAudioTextCount:missing.length,
