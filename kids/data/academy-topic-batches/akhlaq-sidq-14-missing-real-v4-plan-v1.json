@@ -28,7 +28,7 @@
     "ownerAuthorizedNoPrelistening": true,
     "pronunciationDictionaryCreativeConnectorCannotAttach": true
   },
-  "taskStatus": "all-20-new-originals-generated-needs-binary-import-and-nine-assemblies",
+  "taskStatus": "all-14-real-binaries-imported-live-verification-pending",
   "completionClaimed": false,
   "segments": {
     "ar-01": {
@@ -212,7 +212,9 @@
       "flowId": "zrB4zGdz9OTndLryQtIB",
       "durationSeconds": 11.12,
       "promptVerifiedFromElevenLabsNode": "hAlRvo851TuJnSWGfHVQ",
-      "promptVerifiedExactToVisibleText": true
+      "promptVerifiedExactToVisibleText": false,
+      "originalProviderPromptConfirmed": true,
+      "sourceIsFullLengthForVerifiableFirstSentenceExtraction": true
     },
     "de-21": {
       "language": "de",
@@ -368,11 +370,13 @@
       "kind": "answer",
       "sourceLessonId": "sidq",
       "age": "9-10",
-      "visibleText": "Antwort 1: Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutmachen.",
+      "visibleText": "Antwort 1: Einen Fehler kann man unbeabsichtigt machen.",
       "segments": [
         "de-20"
       ],
-      "sourceVoicePlan": "kids/akademie/answer-choice-only-v1.js"
+      "sourceVoicePlan": "kids/akademie/answer-choice-only-v1.js",
+      "speechExtraction": "provider-character-aligned-first-sentence-de20",
+      "fullSourceAudioPreservedInOriginalMp3": true
     },
     {
       "kind": "answer",
@@ -402,6 +406,6 @@
   "productionStage": "all-14-click-texts-have-provider-originals; requires media binary import, 9 glossary assemblies, SHA and live HTTP verification",
   "providerOriginalSegmentsCompleted": 20,
   "reusedExistingSalawatSegments": 1,
-  "binaryFilesImported": 0,
+  "binaryFilesImported": 14,
   "childAudioPlaybackApprovedCount": 0
 }
