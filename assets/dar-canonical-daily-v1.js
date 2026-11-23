@@ -30,7 +30,7 @@ d.dispatchEvent(new CustomEvent("dar:canonical-daily-ready",{detail:{date:key,du
 return snapshot();
 }).catch(function(){return fail("fetch-error",key)}).finally(function(){state.loading=null});
 return state.loading}
-function snapshot(){return state.valid?{date:state.date,dua:{id:state.dua.id,title:state.dua.title,ar:state.dua.ar,tr:state.dua.tr,de:state.dua.de,src:state.dua.src,cat:state.dua.cat},recommendation:(state.daily.recommendation&&text(state.daily.recommendation.id)&&text(state.daily.recommendation.title))?{id:text(state.daily.recommendation.id),title:text(state.daily.recommendation.title)}:null,verse:state.daily.verse||null}:null}
+function snapshot(){return state.valid?{date:state.date,dua:{id:state.dua.id,title:state.dua.title,ar:state.dua.ar,tr:state.dua.tr,de:state.dua.de,src:state.dua.src,cat:state.dua.cat},recommendation:(state.daily.recommendation&&text(state.daily.recommendation.id)&&text(state.daily.recommendation.title))?{id:text(state.daily.recommendation.id),title:text(state.daily.recommendation.title),snippet:text(state.daily.recommendation.snippet),category:text(state.daily.recommendation.category),scholar:text(state.daily.recommendation.scholar)}:null,verse:state.daily.verse||null}:null}
 /* Actual visitor Home daily tile, across iOS WKWebView/PWA/browser. */
 var DAILY_TARGETS=".dhp-today-stack [data-dhp-route='duas'],.dv3-today-card,[data-nav='dua'].home-v380-open-row,#darV8Daily a[href*='page=dua']";
 function nodes(){return Array.from(d.querySelectorAll(DAILY_TARGETS))}
@@ -53,11 +53,28 @@ function renderGlobalRecommendation(){
   }
   var id=text(item.id),title=text(item.title);
   if(heading&&heading.textContent!==title)heading.textContent=title;
+  // The entire visible recommendation must agree with its published ID.
+  // Older Home renderers may have inserted a different personalized excerpt.
+  if(el.matches(".home-v380-open-row")){
+   var body=el.querySelector(".home-v380-open-row__body");
+   var excerpt=el.querySelector(".home-v380-open-row__excerpt");
+   var snippet=text(item.snippet);
+   if(!excerpt&&snippet&&body){
+    excerpt=d.createElement("p");excerpt.className="home-v380-open-row__excerpt";
+    var before=body.querySelector(".home-v380-open-row__meta");
+    body.insertBefore(excerpt,before||null);
+   }
+   if(excerpt){if(excerpt.textContent!==snippet)excerpt.textContent=snippet;excerpt.hidden=!snippet}
+   var meta=el.querySelector(".home-v380-open-row__meta");
+   var metaLine=[text(item.category),text(item.scholar)].filter(Boolean).join(" · ");
+   if(!meta&&metaLine&&body){meta=d.createElement("p");meta.className="home-v380-open-row__meta";body.appendChild(meta)}
+   if(meta){if(meta.textContent!==metaLine)meta.textContent=metaLine;meta.hidden=!metaLine}
+  }
   if(el.id==="dhpTodayArticle"){el.dataset.dhpRoute="post";el.dataset.dhpValue=id}
   else{el.dataset.nav="post";el.dataset.value=id}
   el.setAttribute("data-dar-daily-recommendation-id",id);
   el.removeAttribute("aria-disabled");
-  el.setAttribute("aria-label",title);
+  if(el.getAttribute("aria-label")!==title)el.setAttribute("aria-label",title);
  });
 }
 function render(){nodes().forEach(function(el){
@@ -89,10 +106,35 @@ function click(e){var button=isDailyTarget(e.target);if(!button)return;
 e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
 update(false).then(function(result){if(result?.dua?.id)navigateDua(result.dua.id)});
 }
+// The service worker asks the *existing* installed PWA to navigate once.
+// Acknowledgement prevents a second client.navigate() document reload.
+function onServiceWorkerOpen(event){
+ var request=event&&event.data;
+ if(!request||request.type!=="DAR_OPEN_CONTENT")return;
+ var kind=text(request.kind),id=text(request.id),port=event.ports&&event.ports[0];
+ var handled=false;
+ if((kind==="post"||kind==="dua")&&/^[A-Za-z0-9._-]{1,260}$/.test(id)){
+  try{
+   var url=new URL(request.url,w.location.href);
+   if(url.origin===w.location.origin){
+    var expected="#"+kind+"/"+encodeURIComponent(id);
+    if(w.location.hash===expected)handled=true;
+    else if(typeof w.navigate==="function"){w.navigate(kind,id);handled=true}
+    else{w.location.hash=expected;handled=true}
+   }
+  }catch(_){}
+ }
+ if(port)try{port.postMessage({handled:handled})}catch(_){}
+}
 function onDayChange(){if(state.date!==berlinDate())update(true);else render()}
-function init(){w.addEventListener("click",click,true);d.addEventListener("dar:view-rendered",function(){w.requestAnimationFrame(render)});d.addEventListener("dar-adult-locale-changed",render);d.addEventListener("dar:visitor-profile-changed",function(){w.requestAnimationFrame(render)});
-d.addEventListener("visibilitychange",function(){if(!d.hidden)update(true)});
-w.addEventListener("pageshow",function(){update(true)});
+function onForeground(){if(state.date!==berlinDate())update(true);else update(false)}
+function init(){w.addEventListener("click",click,true);
+if(w.navigator&&w.navigator.serviceWorker&&w.navigator.serviceWorker.addEventListener)w.navigator.serviceWorker.addEventListener("message",onServiceWorkerOpen);
+d.addEventListener("dar:view-rendered",function(){w.requestAnimationFrame(render)});d.addEventListener("dar-adult-locale-changed",render);d.addEventListener("dar:visitor-profile-changed",function(){w.requestAnimationFrame(render)});
+// Reuse the existing daily result on foreground. Force refresh only on a
+// Berlin date change; same-day freshness is already bounded by update(false).
+d.addEventListener("visibilitychange",function(){if(!d.hidden)onForeground()});
+w.addEventListener("pageshow",onForeground);
 w.setInterval(function(){if(!d.hidden)onDayChange()},60000);
 if(w.MutationObserver){var root=d.getElementById("appView")||d.body;if(root){var timer=null;new MutationObserver(function(){if(timer)return;timer=w.requestAnimationFrame(function(){timer=null;render()})}).observe(root,{childList:true,subtree:false})}}
 update(true)}

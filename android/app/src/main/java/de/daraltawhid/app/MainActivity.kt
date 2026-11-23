@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var errorOverlay: LinearLayout
     private var filePathCallback: ValueCallback<Array<Uri>>? = null
     private var pendingUrl: String = DarShell.LIVE_URL
+    private var deferredDeepLink: String? = null
     private var pendingGeoOrigin: String? = null
     private var pendingGeoCallback: GeolocationPermissions.Callback? = null
 
@@ -132,9 +133,61 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
+        // A regular launcher tap must not reset the current reading session.
+        if (intent.data == null) return
         val url = DarShell.inAppUrl(intent.data)
         pendingUrl = url
-        webView.loadUrl(url)
+        if (!this::webView.isInitialized || webView.url.isNullOrBlank() || webView.progress < 100) {
+            // Reuse the loading document; never start a second parallel load.
+            deferredDeepLink = url
+            return
+        }
+        openIncomingRoute(url)
+    }
+
+    private fun openIncomingRoute(url: String) {
+        val current = webView.url?.let { runCatching { Uri.parse(it) }.getOrNull() }
+        val target = runCatching { Uri.parse(url) }.getOrNull()
+        val currentPath = current?.path.orEmpty().let { if (it.isEmpty() || it == "/index.html") "/" else it }
+        val targetPath = target?.path.orEmpty().let { if (it.isEmpty() || it == "/index.html") "/" else it }
+        val fragment = target?.fragment.orEmpty().trimStart('#')
+        val route = fragment.substringBefore('/').lowercase()
+        val id = fragment.substringAfter('/', "")
+        val supportedRoute = route in setOf(
+            "home", "post", "dua", "duas", "prayer", "quran", "qibla",
+            "jummah", "more", "search", "recent"
+        )
+        val sameShell = current != null && target != null &&
+            DarShell.isOwnHost(current) && DarShell.isOwnHost(target) &&
+            current.scheme.equals("https", ignoreCase = true) &&
+            target.scheme.equals("https", ignoreCase = true) &&
+            currentPath == "/" && targetPath == "/"
+        if (!sameShell || !supportedRoute || fragment.length > 600 ||
+            (route == "post" || route == "dua") && id.isBlank()) {
+            webView.loadUrl(url)
+            return
+        }
+        // One in-document transition via the existing JS router. No WebView
+        // recreation, duplicate page load, loader flash, or lost scroll stack.
+        val view = JSONObject.quote(route)
+        val value = JSONObject.quote(id)
+        val hash = JSONObject.quote(fragment)
+        webView.evaluateJavascript(
+            """
+            (function(){
+              var view=$view, value=$value, hash=$hash;
+              if(location.hash==="#"+hash)return "already-open";
+              try{
+                if(typeof window.navigate==="function"){
+                  window.navigate(view,value);
+                  return "spa";
+                }
+              }catch(e){}
+              location.hash="#"+hash;
+              return "hash";
+            })();
+            """.trimIndent(), null
+        )
     }
 
     override fun onResume() {
@@ -321,6 +374,11 @@ class MainActivity : AppCompatActivity() {
         override fun onPageFinished(view: WebView?, url: String?) {
             super.onPageFinished(view, url)
             injectBridge()
+            val queued = deferredDeepLink
+            deferredDeepLink = null
+            if (queued != null) {
+                if (queued != url) openIncomingRoute(queued)
+            }
         }
 
         override fun onReceivedError(

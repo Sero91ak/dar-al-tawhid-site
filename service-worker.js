@@ -506,7 +506,48 @@ function normalizeDedicatedPwaLaunchUrl(rawUrl, postId) {
   }
 }
 
-async function focusClientToPost(clientList, targetUrl, postId) {
+function safeNotificationUrl(raw) {
+  try {
+    let url = new URL(String(raw || ''), self.location.origin);
+    // A native-style OneSignal app_url must be unwrapped before PWA routing.
+    if (url.protocol === 'daraltawhid:') {
+      const src = url.searchParams.get('src');
+      if (!src) return '';
+      url = new URL(src);
+    }
+    return url.origin === self.location.origin ? url.href : '';
+  } catch (e) { return ''; }
+}
+
+function notificationContent(data, launchUrl) {
+  const extras = data && data.additionalData && typeof data.additionalData === 'object'
+    ? data.additionalData : {};
+  const row = { ...extras, ...(data || {}) };
+  const url = safeNotificationUrl(launchUrl);
+  let kind = '', id = '';
+  if (url) {
+    const parsed = new URL(url);
+    try {
+      const hash = decodeURIComponent(parsed.hash.replace(/^#/, ''));
+      const matched = hash.match(/^(post|dua)\/(.+)$/i);
+      if (matched) { kind = matched[1].toLowerCase(); id = matched[2]; }
+    } catch (e) {}
+    if (!id && parsed.searchParams.get('post')) {
+      kind = 'post'; id = parsed.searchParams.get('post');
+    }
+  }
+  if (!id) {
+    const type = String(row.nav || row.target || row.type || row.reminder_type || '').toLowerCase();
+    kind = type.includes('dua') ? 'dua'
+      : /post|recommend|article/.test(type) || row.postId || row.slug ? 'post'
+      : row.duaId ? 'dua' : '';
+    id = String(row.content_id || row.postId || row.duaId || row.slug || '').trim();
+  }
+  if (!/^[a-z0-9._-]{1,260}$/i.test(id)) return { kind: '', id: '', url };
+  return { kind, id, url };
+}
+
+async function focusClientToContent(clientList, targetUrl, content) {
   const targetUrlObj = new URL(targetUrl);
   const targetIsDedicatedPwa = isDedicatedPwaUrl(targetUrlObj);
   for (const client of clientList) {
@@ -514,18 +555,33 @@ async function focusClientToPost(clientList, targetUrl, postId) {
     if (clientUrl.origin !== targetUrlObj.origin) continue;
     if (targetIsDedicatedPwa && !isDedicatedPwaUrl(clientUrl)) continue;
     await client.focus();
-    client.postMessage({
-      type: 'NAVIGATE_POST',
-      postId: postId || parsePostIdFromUrl(targetUrl),
-      url: targetUrl
-    });
-    if (typeof client.navigate === 'function') {
+    // An existing app receives one SPA instruction. Navigate the entire
+    // document only when an older client has no compatible message listener.
+    if (content.kind && content.id && typeof MessageChannel === 'function') {
+      const channel = new MessageChannel();
+      const acknowledged = new Promise(resolve => {
+        const timeout = setTimeout(() => resolve(false), 900);
+        channel.port1.onmessage = event => {
+          clearTimeout(timeout);
+          resolve(event.data && event.data.handled === true);
+        };
+      });
       try {
-        await client.navigate(targetUrl);
-        return true;
+        client.postMessage({
+          type: 'DAR_OPEN_CONTENT', kind: content.kind,
+          id: content.id, url: targetUrl
+        }, [channel.port2]);
+        if (await acknowledged) {
+          channel.port1.close();
+          return true;
+        }
       } catch (e) {}
+      channel.port1.close();
     }
-    return true;
+    if (typeof client.navigate === 'function') {
+      try { await client.navigate(targetUrl); return true; } catch (e) {}
+    }
+    // There is no viable existing client navigation; let openWindow recover.
   }
   return false;
 }
@@ -658,23 +714,26 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Wenn Nutzer auf Push-Benachrichtigung klickt → Beitrag öffnen
+// One notification click opens exactly its Duʿāʾ, post or recommendation.
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-
   const data = event.notification.data || {};
-  const postId = String(data.postId || data.slug || parsePostIdFromUrl(data.url || '')).trim();
-  const rawTargetUrl = data.url
-    || event.notification.data?.launchURL
-    || (event.notification.data?.buttons?.[0]?.url)
-    || event.notification.data?.additionalData?.launchURL
-    || (postId ? buildPostLaunchUrl(postId, data.cacheVersion || Date.now()) : 'https://dar-al-tawhid.de/pwa/?pwa=1');
-  const targetUrl = normalizeDedicatedPwaLaunchUrl(rawTargetUrl, postId);
-
+  const raw = data.url || data.web_url || data.launchURL
+    || data.buttons?.[0]?.url || data.additionalData?.url
+    || data.additionalData?.launchURL || data.app_url || '';
+  const content = notificationContent(data, raw);
+  const fallback = 'https://dar-al-tawhid.de/pwa/?pwa=1';
+  const canonical = content.kind && content.id
+    ? self.location.origin + '/#' + content.kind + '/' + encodeURIComponent(content.id)
+    : '';
+  // Keep a valid explicit content URL, but never launch external origins.
+  const launch = canonical || content.url || fallback;
+  const targetUrl = normalizeDedicatedPwaLaunchUrl(
+    launch, content.kind === 'post' ? content.id : ''
+  );
   event.waitUntil(
     self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(async (clientList) => {
-      const focused = await focusClientToPost(clientList, targetUrl, postId);
-      if (focused) return;
+      if (await focusClientToContent(clientList, targetUrl, content)) return;
       return self.clients.openWindow(targetUrl);
     })
   );
