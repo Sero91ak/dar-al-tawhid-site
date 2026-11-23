@@ -1,4 +1,4 @@
-name: KIDS Academy Paid Original Recovery Probe (once, GET-only)
+name: KIDS Academy Direct Flow Original Recovery Probe (GET-only)
 on:
   push:
     branches: [main]
@@ -20,4 +20,4 @@ jobs:
       - name: Checkout source plans
         uses: actions/checkout@v4
       - name: Check existing V4 recordings with read-only ElevenLabs history GET (zero credits)
-        run: python3 kids/tools/probe-academy-elevenlabs-history-v1.py
+        run: python3 kids/tools/probe-academy-elevenlabs-history-v1.py --direct
