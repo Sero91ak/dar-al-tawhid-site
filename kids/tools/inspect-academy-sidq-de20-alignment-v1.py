@@ -32,4 +32,8 @@ print(json.dumps({"prefixExact":True,"prefixLastCharacter":letters[len(prefix)-1
   "nextNonSpaceStartSeconds":starts[next_index] if next_index is not None else None,
   "nextNonSpaceCharacter":letters[next_index] if next_index is not None else None,
   "firstSentenceChars":len(prefix),
-  "totalOriginalChars":len(letters)},ensure_ascii=False))
+  "totalOriginalChars":len(letters),
+  "prefixEndMax":max(ends[:len(prefix)]),
+  "prefixStartMax":max(starts[:len(prefix)]),
+  "lastTiming":[{"ch":letters[i],"start":starts[i],"end":ends[i]}
+    for i in range(max(0,len(prefix)-18),len(prefix))]},ensure_ascii=False))
