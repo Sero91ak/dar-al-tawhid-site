@@ -1,0 +1,24 @@
+name: KIDS Academy Ṣabr 32 V4 Public Cloudflare Audio Hash Proof
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/academy-sabr-v4-cloudflare-proof-once.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verified-live:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            kids/data/academy-audio.json
+            kids/data/academy-topic-batches/akhlaq-sabr-preproduction-v1.json
+            kids/assets/kids-academy-audio/
+            kids/tools/verify-live-academy-sabr-v4-v1.py
+          sparse-checkout-cone-mode: false
+      - name: Confirm every paid original master V4 file matches production CDN SHA-256
+        run: python3 kids/tools/verify-live-academy-sabr-v4-v1.py
