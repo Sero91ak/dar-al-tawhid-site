@@ -58,8 +58,12 @@ def sidq_entries(document):
         raise RuntimeError("Wrong public Academy manifest")
     rows = {name: e for name, e in (document.get("entries") or {}).items()
             if isinstance(e, dict) and e.get("sourceLessonId") == "sidq"}
-    if len(rows) != 58:
-        raise RuntimeError("Expected exactly 58 Ṣidq canonical audio entries, got " + str(len(rows)))
+    if len(rows) not in (58, 72):
+        raise RuntimeError("Expected either 58 original or 72 complete Ṣidq audio entries, got " + str(len(rows)))
+    if len(rows) == 72:
+        plan = json.loads((ROOT / "kids/data/academy-topic-batches/akhlaq-sidq-14-missing-real-v4-plan-v1.json").read_text("utf-8"))
+        if len(plan["tasks"]) != 14 or any(task["visibleText"] not in rows for task in plan["tasks"]):
+            raise RuntimeError("Ṣidq 14-click batch not completely published")
     for name, e in rows.items():
         if not (
             e.get("modelId") == "eleven_v4"
@@ -100,7 +104,7 @@ def main():
         raise RuntimeError("Cloudflare returned non-JSON Academy manifest: " + mime)
     live = sidq_entries(json.loads(body.decode("utf-8")))
     if set(expected) != set(live):
-        raise RuntimeError("Cloudflare manifest does not contain exactly the expected 58 texts")
+        raise RuntimeError("Cloudflare manifest differs from the exact locally verified Ṣidq audio texts")
     for name, e in expected.items():
         if any(live[name].get(field) != e.get(field)
                for field in ("url", "sha256", "voiceId", "modelId", "sourceGenerationIds")):
@@ -109,7 +113,7 @@ def main():
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
         for result in pool.map(verify_track, sorted(expected.items())):
             checked.append(result)
-    if len(checked) != 58:
+    if len(checked) != len(expected):
         raise RuntimeError("Incomplete batch HTTP audit")
     print(json.dumps({
         "status": "PASS",
