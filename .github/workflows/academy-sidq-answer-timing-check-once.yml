@@ -1,0 +1,23 @@
+name: KIDS Academy Existing Answer Timing Check (GET-only)
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/academy-sidq-answer-timing-check-once.yml'
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            kids/tools/inspect-academy-sidq-de20-alignment-v1.py
+            kids/data/academy-topic-batches/akhlaq-sidq-history-recovery-map-v1.json
+          sparse-checkout-cone-mode: false
+      - name: Read original V4 alignment without generation or audio modification
+        run: python3 kids/tools/inspect-academy-sidq-de20-alignment-v1.py
