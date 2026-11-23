@@ -1,0 +1,118 @@
+/* DĀR HOME Next Generation V3 – independent UX layer over the proven V2 engine.
+   No secrets, no GitHub write credentials and no local-network privilege assumptions. */
+(()=>{'use strict';
+ const ROOT='https://dar-al-tawhid.de';
+ const KEY='dar-home-v3-preferences';
+ const $=id=>document.getElementById(id);
+ const icon=name=>ROOT+'/assets/dar-3d-icons/'+name+'.png';
+ const wallpapers=[
+  {id:'dar-wide',label:'DĀR · Weites Motiv',url:ROOT+'/assets/home-v1194/hero-wide-adobe.jpg'},
+  {id:'prayer-cinema',label:'Gebet · Cinematic',url:ROOT+'/kids/assets/kids-salah-v1262/cinematic-still.jpg'},
+  {id:'home-cinema',label:'DĀR · Cinematic',url:ROOT+'/test/assets/dar-3d-icons/dar-home-cinematic-hero.png'},
+  {id:'kids-hero',label:'Moschee · Nachtmotiv',url:ROOT+'/kids/assets/kids-home-v1191/hero-static-reference.jpg'},
+  {id:'abstract',label:'Klassisch · ohne Bild',url:''}
+ ];
+ let prefs={theme:'dark',wallpaper:'prayer-cinema',saverWallpaper:'same',adhanCinema:true,allowBackgroundUpdates:true};
+ try{const from=JSON.parse(localStorage.getItem(KEY)||'{}');if(from&&typeof from==='object'&&!Array.isArray(from)){prefs={...prefs,...from}}}catch{}
+ const safeHTML=(str)=>String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+ function imageFor(name){let w=wallpapers.find(x=>x.id===name);if(name==='custom'){const raw=localStorage.getItem(KEY+'-wallpaper')||'';return /^data:image\/(?:png|jpeg|webp);base64,/i.test(raw)?raw:''}return w?.url||''}
+ function store(){try{localStorage.setItem(KEY,JSON.stringify(prefs))}catch(e){warn('Einstellungen konnten nicht gespeichert werden')}}
+ function warn(msg){const t=$('toast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3900)}
+ function apply(){
+  const app=$('app');if(!app)return;
+  app.dataset.homeTheme=prefs.theme==='light'?'light':'dark';
+  const bg=imageFor(prefs.wallpaper);
+  app.style.backgroundImage=bg?'url("'+bg.replaceAll('"','%22')+'")':'none';
+  const saver=$('saver');if(saver){
+   const sbg=imageFor(prefs.saverWallpaper==='same'?prefs.wallpaper:prefs.saverWallpaper);
+   saver.style.backgroundImage=sbg?'url("'+sbg.replaceAll('"','%22')+'")':'none';
+  }
+  const adhan=$('adhanVisual');if(adhan){
+   adhan.style.backgroundImage=prefs.adhanCinema&&bg?'url("'+bg.replaceAll('"','%22')+'")':'none';
+  }
+  const mode=$('homeAppearance');if(mode)mode.value=prefs.theme;
+  const saverMode=$('homeSaverBackground');if(saverMode)saverMode.value=prefs.saverWallpaper;
+  const cinema=$('homeCinemaBackground');if(cinema)cinema.checked=!!prefs.adhanCinema;
+  const preview=$('wallpaperOptions');if(preview)preview.querySelectorAll('button[data-wallpaper]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.wallpaper===prefs.wallpaper)));
+  const themeQuick=$('h3ThemeToggle');if(themeQuick)themeQuick.setAttribute('aria-label',prefs.theme==='dark'?'Helles Erscheinungsbild wählen':'Dunkles Erscheinungsbild wählen');
+ }
+ function augmentBrand(){
+  const mark=document.querySelector('.logo-mark');
+  if(mark){mark.textContent='';const i=new Image();i.src=ROOT+'/app-logo-original.png';i.alt='DĀR AL TAWḤĪD Markenzeichen';i.onerror=()=>{mark.textContent='دار'};mark.append(i)}
+  const small=document.querySelector('.brand-mini');if(small)small.textContent='H O M E  ·  SMART PRAYER DISPLAY';
+  const top=$('openSettings');
+  if(top&&!$('h3ThemeToggle')){
+   const b=document.createElement('button');b.className='topbtn';b.id='h3ThemeToggle';b.title='Hell/Dunkel umschalten';b.innerHTML='<span aria-hidden="true" style="font-size:25px">☼</span>';
+   b.addEventListener('click',()=>{prefs.theme=prefs.theme==='dark'?'light':'dark';store();apply()});
+   top.parentNode.insertBefore(b,top);
+  }
+  const navIcons={openCities:'compass',showHadith:'hadith',showQuran:'quran',startSaver:'image'};
+  for(const [id,name] of Object.entries(navIcons)){
+   const b=$(id);if(!b||b.querySelector('.nav-icon'))continue;
+   const img=document.createElement('img');img.src=icon(name);img.className='nav-icon';img.alt='';img.setAttribute('aria-hidden','true');b.insertBefore(img,b.firstChild);
+  }
+  const nav=document.querySelector('.footnav');
+  if(nav&&!$('h3FooterSettings')){
+   const b=document.createElement('button');b.id='h3FooterSettings';b.className='touchbutton';
+   const i=new Image();i.src=icon('settings');i.className='nav-icon';i.alt='';
+   b.append(i,document.createTextNode(' Einstellungen'));b.addEventListener('click',()=>top?.click());nav.append(b);
+  }
+  for(const btn of document.querySelectorAll('.prayer-cell')){
+   if(btn.querySelector('img'))continue;
+   const img=new Image();img.src=ROOT+'/test/assets/prayer-motifs/'+btn.dataset.prayer+'.webp';img.className='prayer-glyph';img.alt='';img.setAttribute('aria-hidden','true');
+   img.addEventListener('error',()=>{img.src=icon('prayer')},{once:true});btn.insertBefore(img,btn.firstChild);
+  }
+ }
+ function makeWallpaperGallery(){
+  const parent=$('wallpaperOptions');if(!parent)return;
+  parent.replaceChildren();
+  const opts=wallpapers.slice();
+  if(localStorage.getItem(KEY+'-wallpaper'))opts.push({id:'custom',label:'Eigenes Bild (nur dieses Gerät)',url:imageFor('custom')});
+  for(const item of opts){
+   const b=document.createElement('button');b.className='wallpaper-option';b.type='button';b.dataset.wallpaper=item.id;
+   b.setAttribute('aria-pressed',String(prefs.wallpaper===item.id));
+   if(item.url){const img=new Image();img.src=item.url;img.alt='Hintergrund: '+item.label;img.loading='lazy';b.append(img)}
+   else{const blank=document.createElement('div');blank.style.cssText='aspect-ratio:16/9;background:linear-gradient(130deg,#09272a,#224c3e);border-radius:7px';b.append(blank)}
+   const title=document.createElement('strong');title.textContent=item.label;b.append(title);
+   b.addEventListener('click',()=>{prefs.wallpaper=item.id;store();apply()});parent.append(b);
+  }
+  apply();
+ }
+ function bind(){
+  const sel=$('homeAppearance');if(sel)sel.addEventListener('change',()=>{prefs.theme=sel.value;store();apply()});
+  const saver=$('homeSaverBackground');if(saver){const options=[{id:'same',label:'Wie HOME-Hintergrund'},...wallpapers.map(x=>({id:x.id,label:x.label}))];saver.replaceChildren(...options.map(x=>new Option(x.label,x.id)));saver.addEventListener('change',()=>{prefs.saverWallpaper=saver.value;store();apply()})}
+  const cin=$('homeCinemaBackground');if(cin)cin.addEventListener('change',()=>{prefs.adhanCinema=cin.checked;store();apply()});
+  const upload=$('homeWallpaperUpload');if(upload)upload.addEventListener('change',()=>{
+   const f=upload.files?.[0];if(!f)return;
+   if(!/^image\/(jpeg|png|webp)$/.test(f.type)||f.size>1.5*1024*1024){warn('Bitte PNG, JPG oder WebP bis 1,5 MB wählen');upload.value='';return}
+   const r=new FileReader();r.onload=()=>{try{localStorage.setItem(KEY+'-wallpaper',String(r.result));prefs.wallpaper='custom';store();makeWallpaperGallery()}catch{warn('Bild zu groß für diesen Browser. Bitte kleiner exportieren.')}}
+   r.readAsDataURL(f);
+  });
+  $('homeGalleryReset')?.addEventListener('click',()=>{prefs.wallpaper='prayer-cinema';prefs.saverWallpaper='same';localStorage.removeItem(KEY+'-wallpaper');store();makeWallpaperGallery()});
+  $('homeAudioUnlock')?.addEventListener('click',()=>{warn('Audio-Freigabe: bitte im Aḏān-Reiter „Aḏān einmalig testen“ drücken. Browser-Autoplay bleibt geräteabhängig.')});
+  $('homeRefreshNow')?.addEventListener('click',()=>{$('syncNow')?.click()});
+  $('homeAppPairing')?.addEventListener('click',()=>warn('Sichere WLAN-Kopplung erfordert eine native Geräte-Bridge. Noch nicht freigeschaltet.'));
+  $('theme')?.addEventListener('change',()=>{prefs.theme=$('theme').value==='ivory'?'light':'dark';store();apply()});
+  $('saveSettings')?.addEventListener('click',()=>{if($('homeAppearance'))prefs.theme=$('homeAppearance').value;store();setTimeout(apply,0)});
+  makeWallpaperGallery();
+ }
+ function updateAdhanTitle(){
+  const el=$('adhanVisual');if(!el?.classList.contains('active'))return;
+  const info=$('adhanInfo')?.textContent||'';
+  const name=/Fajr|Ḍuhr|ʿAṣr|Maġrib|ʿIšāʾ/.exec(info)?.[0]||'Aḏān';
+  const title=el.querySelector('.adhan-title');if(title)title.textContent=name==='Aḏān'?'Aḏān · Gebetszeit':name+' · Aḏān';
+  el.dataset.cinema=prefs.adhanCinema?'on':'off';
+ }
+ function handleConnection(){
+  const t=$('homeConnectionStatus');if(t)t.textContent=navigator.onLine?'Verbunden – DĀR-Livequellen werden regelmäßig geprüft':'Offline – lokale Gebetsberechnung; letzte gespeicherte Inhalte ggf. veraltet';
+ }
+ function init(){
+  if(!$('app'))return;
+  augmentBrand();bind();apply();handleConnection();
+  const el=$('adhanVisual');if(el)new MutationObserver(updateAdhanTitle).observe(el,{attributes:true,attributeFilter:['class']});
+  window.addEventListener('online',handleConnection);window.addEventListener('offline',handleConnection);
+  const i=document.querySelector('[data-tab="hintergrund"]');if(i){const img=document.createElement('img');img.src=icon('image');img.alt='';img.className='settings-icons';i.prepend(img)}
+  document.querySelectorAll('.settings-tabs button[data-tab]').forEach(b=>{if(b.querySelector('img'))return;const m={standort:'compass',inhalte:'quran',adhan:'prayer',saver:'image',anzeige:'settings',verbindung:'widgets'};const t=m[b.dataset.tab];if(t){const a=new Image();a.src=icon(t);a.className='settings-icons';a.alt='';b.prepend(a)}});
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
