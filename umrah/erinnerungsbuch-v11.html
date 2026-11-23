@@ -6,8 +6,9 @@
 <title>Meine ʿUmrah · DĀR AL TAWḤĪD Erinnerungsbuch V11</title>
 <meta name="description" content="Lokaler, druckfertiger ʿUmrah-Reisebegleiter und Erinnerungsbuch mit persönlichen Fotos">
 <style>
-@font-face{font-family:DarDisplay;src:url('../assets/fonts/cormorant-garamond-latin-600-normal.woff2') format('woff2');font-weight:600;font-display:swap}
-@font-face{font-family:DarDisplay;src:url('../assets/fonts/cormorant-garamond-latin-500-normal.woff2') format('woff2');font-weight:500;font-display:swap}
+/* Instrument Serif: self-hosted Latin + Latin Extended for consistent macrons and underdots. */
+@font-face{font-family:DarDisplay;src:url('../assets/fonts/instrument-serif-latin-ext-400-normal.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:DarDisplay;src:url('../assets/fonts/instrument-serif-latin-400-normal.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:DarArabic;src:url('../assets/fonts/amiri-arabic-400-normal.woff2') format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:DarArabic;src:url('../assets/fonts/amiri-arabic-700-normal.woff2') format('woff2');font-weight:700;font-display:swap}
 @font-face{font-family:DarNaskh;src:url('../assets/fonts/noto-naskh-arabic-arabic-400-normal.woff2') format('woff2');font-display:swap}
@@ -25,7 +26,7 @@
  background-image:radial-gradient(circle at 12% 8%,#fffcf5 0%,transparent 29%),radial-gradient(circle at 83% 92%,#e9d0a426,transparent 44%),repeating-linear-gradient(110deg,#8d643403 0px,#8d643403 1px,transparent 1px,transparent 7px)}
 .sheet:before{content:'';position:absolute;inset:17px;border:1px solid #d7b67b88;border-radius:1px;z-index:4;pointer-events:none}
 .sheet:after{content:'❧';position:absolute;right:28px;bottom:24px;font-size:26px;font-family:Georgia,serif;color:#c7a66b55;pointer-events:none}
-.sheet .watermark{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:390px;max-width:78%;opacity:.12;pointer-events:none;z-index:-1;mix-blend-mode:multiply;filter:sepia(1) saturate(.45)}
+.sheet .watermark{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:390px;max-width:78%;opacity:.06;pointer-events:none;z-index:-1;mix-blend-mode:multiply;filter:sepia(1) saturate(.45)}
 .eyebrow{text-transform:uppercase;letter-spacing:.22em;font-size:10px;font-weight:850;color:#9b7038}
 .page-head{display:flex;justify-content:space-between;align-items:center;gap:18px;border-bottom:1px solid #cda66c;padding:0 0 16px;margin-bottom:35px;color:var(--ink)}
 .page-head .brand{font:500 14px/1.25 DarBrand,Georgia,serif;letter-spacing:.20em;color:#38291e}.page-head .chapter-no{font:500 12px/1.1 DarDisplay,Georgia,serif;letter-spacing:.065em;color:#987344}
@@ -76,7 +77,7 @@
 .note{border-left:2px solid #b98b4a;padding:10px 0 10px 17px;font:600 23px/1.42 DarDisplay,Georgia,serif;color:#423124;min-height:72px;outline-color:#bb9357}.note small{font:400 11px var(--font)}
 [contenteditable=true]:focus{outline:2px solid #ba9255;outline-offset:4px}
 .chapter-cover{padding:72px 69px 64px;background:var(--ivory);color:var(--ink)}
-.chapter-cover .watermark{top:23%;width:350px;opacity:.11}
+.chapter-cover .watermark{top:23%;width:350px;opacity:.06}
 .chapter-cover .chapter-eyebrow{font-size:10px;letter-spacing:.23em;color:#9c713d}
 .chapter-cover .scene-text{position:relative;z-index:2;text-align:center;margin:62px 0 28px;color:var(--ink)}
 .chapter-cover h2{font:600 94px/.93 DarDisplay,Georgia,serif;margin:18px 0;color:#2f231a}
@@ -190,9 +191,23 @@
  .arabic{font-size:30pt}.roman,.transliteration{font-size:12pt}
 }
 
-/* The brand remains a quiet 10–15% provenance seal on all interior pages. */
-.sheet:not(.cover) .watermark{opacity:.12!important;filter:sepia(.5) saturate(.34)!important;mix-blend-mode:multiply}
-.chapter-cover .watermark{opacity:.11!important}
+/* Quiet, globally consistent 6% provenance seal across all interior chapters and PDF exports.
+   The separately composed front-cover mark and header logo retain their intentional treatment. */
+.sheet:not(.cover) .watermark{opacity:.06!important;filter:sepia(.5) saturate(.34)!important;mix-blend-mode:multiply}
+.chapter-cover .watermark{opacity:.06!important}
+
+/* Print and screen share one font system: no artificially boldened display glyphs.
+   Instrument Serif's extended Latin subset keeps ā/ī/ḥ/Ḥ/ṭ in the same typeface. */
+.sheet,.toolbar{font-synthesis:none;font-kerning:normal}
+.toolbar b,.h1,.h2,.page-head .chapter-no,.cover h1,.cover .sub,
+.opening .dedication,.photo-card .caption,.placeholder,.note,
+.chapter-cover h2,.chapter-cover .scene-text p,.colophon .closing,
+.main-diary .diary-prose{font-weight:400}
+@media print{
+ .sheet:not(.cover) .watermark,.chapter-cover .watermark{
+  opacity:.06!important;-webkit-print-color-adjust:exact;print-color-adjust:exact
+ }
+}
 .toolbar .book-back{display:inline-flex;align-items:center;justify-content:center;min-height:42px;text-decoration:none;color:#5b3f23;font-weight:800;font-size:13px}
 .main-diary .diary-prose{font-family:DarDisplay,Georgia,serif;font-size:24px;line-height:1.6;color:#3f2d20;white-space:pre-wrap;overflow-wrap:anywhere;max-width:95%;margin:27px 0 0}
 @media print{.main-diary .diary-prose{font-size:18pt;line-height:1.55}}
