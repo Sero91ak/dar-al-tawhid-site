@@ -131,6 +131,26 @@ function normalizeState(items, keyFn, state = {}, fallbackLast = "") {
   };
 }
 
+/**
+ * The published daily.json is authoritative for the current Berlin day.
+ * A stale state.lastKey must never override that day's already-published
+ * selection. Record it once so the next day's no-repeat pool excludes it.
+ */
+function adoptCanonicalSelection(normalized, publishedKey, availableKeys) {
+  const key = String(publishedKey || "").trim();
+  const known = new Set((availableKeys || []).map(String));
+  if (!key || !known.has(key)) {
+    throw new Error("Veröffentlichte Tagesauswahl fehlt im kanonischen Pool: " + key);
+  }
+  const usedKeys = Array.from(new Set([...(normalized.usedKeys || []), key]));
+  return {
+    ...normalized,
+    usedKeys,
+    lastKey: key,
+    remaining: Math.max(0, normalized.poolSize - usedKeys.length)
+  };
+}
+
 function pickWithoutRepeat(items, keyFn, state = {}, fallbackLast = "", seed = "") {
   const pool = unique(items, keyFn);
   if (!pool.length) return { item: null, state: null };
@@ -204,8 +224,16 @@ function run() {
   };
 
   if (previous.date === date && previous.source === "dar-daily-no-repeat-rotation" && previous.recommendation?.id && previous.dua?.id) {
-    const recommendation = normalizeState(posts, (file) => file, state.recommendation, previous.recommendation.file);
-    const dua = normalizeState(duaSources.items, (item) => item.id, state.dua, previous.dua.id);
+    const recommendation = adoptCanonicalSelection(
+      normalizeState(posts, (file) => file, state.recommendation, previous.recommendation.file),
+      previous.recommendation.file,
+      posts
+    );
+    const dua = adoptCanonicalSelection(
+      normalizeState(duaSources.items, (item) => item.id, state.dua, previous.dua.id),
+      previous.dua.id,
+      duaSources.items.map((item) => item.id)
+    );
     writeJson(STATE_FILE, {
       ...state,
       version: 3,
@@ -267,4 +295,4 @@ if (require.main === module) {
   try { run(); } catch (error) { console.error(error.stack || error); process.exit(1); }
 }
 
-module.exports = { dayKey, pickWithoutRepeat, loadDuaPool, run };
+module.exports = { dayKey, pickWithoutRepeat, adoptCanonicalSelection, loadDuaPool, run };
