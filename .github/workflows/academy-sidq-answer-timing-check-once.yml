@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/academy-sidq-answer-timing-check-once.yml'
+      - 'kids/tools/inspect-academy-sidq-de20-alignment-v1.py'
 permissions:
   contents: read
 jobs:
