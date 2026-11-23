@@ -8,9 +8,9 @@
     "6-8",
     "9-10"
   ],
-  "productionPhase": "owner-authorized-32-real-v4-complete-pending-live",
+  "productionPhase": "all-32-real-m4a-cloudflare-live-verified-pending-native-hardware-playback",
   "priorTopic": "sidq",
-  "priorTopicLiveConfirmed": false,
+  "priorTopicLiveConfirmed": true,
   "liveDeploymentAllowed": true,
   "paymentGenerationAllowed": false,
   "sourceMaterial": [
@@ -65,7 +65,7 @@
     "6-8": true,
     "9-10": true
   },
-  "status": "32-original-v4-audios-in-github-live-verification-pending",
+  "status": "32-original-v4-audios-cloudflare-http200-sha256-verified",
   "entries": [
     {
       "visibleText": "Allah hilft den Geduldigen.",
@@ -82,9 +82,10 @@
       "spokenText": "Allah hilft den Geduldigen.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-047d1984a8eb1cc759232bba.m4a",
-      "sha256": "047d1984a8eb1cc759232bbab016a017fcb9817d488d0f28ca7590ceb7126a0c"
+      "sha256": "047d1984a8eb1cc759232bbab016a017fcb9817d488d0f28ca7590ceb7126a0c",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Allah hilft den Geduldigen. Ich übe Geduld, wenn etwas nicht sofort klappt.",
@@ -101,9 +102,10 @@
       "spokenText": "Allah hilft den Geduldigen. Ich übe Geduld, wenn etwas nicht sofort klappt.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-ab037b013de0af0003072dd5.m4a",
-      "sha256": "ab037b013de0af0003072dd5fd68291ad96a9de6a112e677ffae33b6807d6807"
+      "sha256": "ab037b013de0af0003072dd5fd68291ad96a9de6a112e677ffae33b6807d6807",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Dann atme ich ruhig und werde nicht gemein.",
@@ -120,9 +122,10 @@
       "spokenText": "Dann atme ich ruhig und werde nicht gemein.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-cfb42636a6efb655fd330d7a.m4a",
-      "sha256": "cfb42636a6efb655fd330d7a0936728d3ee05abd96e0a06da42367d78b9a8b35"
+      "sha256": "cfb42636a6efb655fd330d7a0936728d3ee05abd96e0a06da42367d78b9a8b35",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht.",
@@ -139,9 +142,10 @@
       "spokenText": "Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-a9c5202541e22d911c81d154.m4a",
-      "sha256": "a9c5202541e22d911c81d15449652904aad95afddde05e8a25c03157d864b26a"
+      "sha256": "a9c5202541e22d911c81d15449652904aad95afddde05e8a25c03157d864b26a",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Ich darf um Hilfe bitten und geduldig weiterüben.",
@@ -158,9 +162,10 @@
       "spokenText": "Ich darf um Hilfe bitten und geduldig weiterüben.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-66ea48e8d4023e5a8ac48bb0.m4a",
-      "sha256": "66ea48e8d4023e5a8ac48bb03371d178914a5c8a00f9821abdaf220b744f022f"
+      "sha256": "66ea48e8d4023e5a8ac48bb03371d178914a5c8a00f9821abdaf220b744f022f",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Ich kann ruhig warten und freundlich bleiben.",
@@ -177,9 +182,10 @@
       "spokenText": "Ich kann ruhig warten und freundlich bleiben.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-177d63db90025a6b9aa67a1c.m4a",
-      "sha256": "177d63db90025a6b9aa67a1c708626442c09c0e6b7df00850b2715110d8e6941"
+      "sha256": "177d63db90025a6b9aa67a1c708626442c09c0e6b7df00850b2715110d8e6941",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Ich übe Geduld, wenn etwas nicht sofort klappt.",
@@ -196,9 +202,10 @@
       "spokenText": "Ich übe Geduld, wenn etwas nicht sofort klappt.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-634da3d8edd5db70b094e389.m4a",
-      "sha256": "634da3d8edd5db70b094e389271e79d7bd23eef68a568742501f8ff959df1824"
+      "sha256": "634da3d8edd5db70b094e389271e79d7bd23eef68a568742501f8ff959df1824",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen. Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht.",
@@ -215,9 +222,10 @@
       "spokenText": "Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen. Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-fe9ae5d4365905c9a1b5fec7.m4a",
-      "sha256": "fe9ae5d4365905c9a1b5fec7881b896c1d0b02a432ad025c76cd456ed8435510"
+      "sha256": "fe9ae5d4365905c9a1b5fec7881b896c1d0b02a432ad025c76cd456ed8435510",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Manchmal müssen wir auf etwas warten.",
@@ -234,9 +242,10 @@
       "spokenText": "Manchmal müssen wir auf etwas warten.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-d1a2b8812d89c77ebeb44873.m4a",
-      "sha256": "d1a2b8812d89c77ebeb44873c6f75cc026f451c6dd0a19fb63d911ca0a1232ab"
+      "sha256": "d1a2b8812d89c77ebeb44873c6f75cc026f451c6dd0a19fb63d911ca0a1232ab",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Mit Geduld handle ich freundlich.",
@@ -253,9 +262,10 @@
       "spokenText": "Mit Geduld handle ich freundlich.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-e843e303de2504b2e26579c1.m4a",
-      "sha256": "e843e303de2504b2e26579c165f1bb65cf003161e28b35b3734f82178a9be65c"
+      "sha256": "e843e303de2504b2e26579c165f1bb65cf003161e28b35b3734f82178a9be65c",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Qurʾān: Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen. Sunnah: Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht.",
@@ -272,9 +282,10 @@
       "spokenText": "Qurʾān: Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen. Sunnah: Der Prophet ﷺ lehrte, dass Allah demjenigen Geduld gibt, der sich um Geduld bemüht.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-08de463377d6f39bfe1ccfe7.m4a",
-      "sha256": "08de463377d6f39bfe1ccfe70ddf15bd3c1533bf8db4229e91d8dddb60a862ab"
+      "sha256": "08de463377d6f39bfe1ccfe70ddf15bd3c1533bf8db4229e91d8dddb60a862ab",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Du musst auf etwas warten. Was tust du?",
@@ -301,9 +312,10 @@
       "spokenText": "Du musst auf etwas warten. Was tust du?",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-ba8a1e940fd45a66c9ac160a.m4a",
-      "sha256": "ba8a1e940fd45a66c9ac160af8298e31077ea797ece6262881292f28f8bbcfe5"
+      "sha256": "ba8a1e940fd45a66c9ac160af8298e31077ea797ece6262881292f28f8bbcfe5",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Was möchten wir uns heute merken?",
@@ -320,9 +332,10 @@
       "spokenText": "Was möchten wir uns heute merken?",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-0eb818f6d5a880454b476051.m4a",
-      "sha256": "0eb818f6d5a880454b47605189d9bf12012267ca9eddac2cf3f21eaf3ea97681"
+      "sha256": "0eb818f6d5a880454b47605189d9bf12012267ca9eddac2cf3f21eaf3ea97681",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Wo lernen wir mehr über dieses Thema?",
@@ -339,9 +352,10 @@
       "spokenText": "Wo lernen wir mehr über dieses Thema?",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-873f4d49eb7e46d4000b9b36.m4a",
-      "sha256": "873f4d49eb7e46d4000b9b36e859bf153ce6bafdd79c1647dbd8bcb5012a54b8"
+      "sha256": "873f4d49eb7e46d4000b9b36e859bf153ce6bafdd79c1647dbd8bcb5012a54b8",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Antwort 1: Ich kann ruhig warten und freundlich bleiben.",
@@ -358,9 +372,10 @@
       "spokenText": "Ich kann ruhig warten und freundlich bleiben.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-177d63db90025a6b9aa67a1c.m4a",
-      "sha256": "177d63db90025a6b9aa67a1c708626442c09c0e6b7df00850b2715110d8e6941"
+      "sha256": "177d63db90025a6b9aa67a1c708626442c09c0e6b7df00850b2715110d8e6941",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Antwort 1: Ich warte ruhig und bleibe freundlich.",
@@ -387,9 +402,10 @@
       "spokenText": "Ich warte ruhig und bleibe freundlich.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-6f173b0393ce80c57218ed45.m4a",
-      "sha256": "6f173b0393ce80c57218ed45a8aecffb049506b301631794870ff0ad6d6ec258"
+      "sha256": "6f173b0393ce80c57218ed45a8aecffb049506b301631794870ff0ad6d6ec258",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Antwort 1: Im Qurʾān und in der authentischen Sunnah.",
@@ -406,9 +422,10 @@
       "spokenText": "Im Qurʾān und in der authentischen Sunnah.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-414553471cb676c7be7c52a4.m4a",
-      "sha256": "414553471cb676c7be7c52a47b6fce6ebb1ff94975a2a2e20de84dd5e651700d"
+      "sha256": "414553471cb676c7be7c52a47b6fce6ebb1ff94975a2a2e20de84dd5e651700d",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Antwort 2: Ich muss das Gelernte nicht beachten.",
@@ -425,9 +442,10 @@
       "spokenText": "Ich muss das Gelernte nicht beachten.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-79134e3b3b9825627c7fe233.m4a",
-      "sha256": "79134e3b3b9825627c7fe23314e427f5bde0f94ad54171a79214a931a61dacbc"
+      "sha256": "79134e3b3b9825627c7fe23314e427f5bde0f94ad54171a79214a931a61dacbc",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Antwort 2: Ich schimpfe alle an.",
@@ -454,9 +472,10 @@
       "spokenText": "Ich schimpfe alle an.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-efbf55105dd7bddaaedb5290.m4a",
-      "sha256": "efbf55105dd7bddaaedb5290137487336c41a6ee12fb18b76bfd8f2ede8adc4b"
+      "sha256": "efbf55105dd7bddaaedb5290137487336c41a6ee12fb18b76bfd8f2ede8adc4b",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Antwort 2: Wir müssen uns die Regeln selbst ausdenken.",
@@ -473,9 +492,10 @@
       "spokenText": "Wir müssen uns die Regeln selbst ausdenken.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-ef5d43874fef6004ef3b0a16.m4a",
-      "sha256": "ef5d43874fef6004ef3b0a16359862ce83253270df6a066943adee2edd787b52"
+      "sha256": "ef5d43874fef6004ef3b0a16359862ce83253270df6a066943adee2edd787b52",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Wie kannst du Geduld im Alltag zeigen?",
@@ -492,9 +512,10 @@
       "spokenText": "Wie kannst du Geduld im Alltag zeigen?",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-9c9f0fb514fa17ae4d1ed4e2.m4a",
-      "sha256": "9c9f0fb514fa17ae4d1ed4e29a0993ea7abfcefe2fdf97a4daa8323f94ac022f"
+      "sha256": "9c9f0fb514fa17ae4d1ed4e29a0993ea7abfcefe2fdf97a4daa8323f94ac022f",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Antwort 1: Ich bleibe freundlich und übe weiter, auch wenn etwas nicht sofort klappt.",
@@ -511,9 +532,10 @@
       "spokenText": "Ich bleibe freundlich und übe weiter, auch wenn etwas nicht sofort klappt.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-c3e56bd5c3e3c813e511ffd2.m4a",
-      "sha256": "c3e56bd5c3e3c813e511ffd2df6aa3cf7b047128b39d9aac101a2f1161642cad"
+      "sha256": "c3e56bd5c3e3c813e511ffd2df6aa3cf7b047128b39d9aac101a2f1161642cad",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Antwort 2: Ich schimpfe, sobald ich warten muss.",
@@ -530,9 +552,10 @@
       "spokenText": "Ich schimpfe, sobald ich warten muss.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-7608acdd18afcf0155a91776.m4a",
-      "sha256": "7608acdd18afcf0155a917761616bd5516cccb3b98364c29f253b0e6f59c9631"
+      "sha256": "7608acdd18afcf0155a917761616bd5516cccb3b98364c29f253b0e6f59c9631",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Was zeigt Geduld, wenn etwas nicht sofort gelingt?",
@@ -549,9 +572,10 @@
       "spokenText": "Was zeigt Geduld, wenn etwas nicht sofort gelingt?",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-450e8f8fd75d793c87c688cc.m4a",
-      "sha256": "450e8f8fd75d793c87c688ccd755ba05f559ae0edca0dc1a3ae8a99932484e82"
+      "sha256": "450e8f8fd75d793c87c688ccd755ba05f559ae0edca0dc1a3ae8a99932484e82",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Antwort 1: Ich bleibe ruhig, bitte um Hilfe und versuche es erneut.",
@@ -568,9 +592,10 @@
       "spokenText": "Ich bleibe ruhig, bitte um Hilfe und versuche es erneut.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-ec95d72445abfb8894b71186.m4a",
-      "sha256": "ec95d72445abfb8894b7118619091649799b599f3e5e1900ad8200bad355bae3"
+      "sha256": "ec95d72445abfb8894b7118619091649799b599f3e5e1900ad8200bad355bae3",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Antwort 2: Ich gebe sofort auf und werde gemein.",
@@ -587,9 +612,10 @@
       "spokenText": "Ich gebe sofort auf und werde gemein.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-c9fa5cdaadf40615c8620086.m4a",
-      "sha256": "c9fa5cdaadf40615c86200862db249fa2b0b1db87a196c735cfff95bc0648fa7"
+      "sha256": "c9fa5cdaadf40615c86200862db249fa2b0b1db87a196c735cfff95bc0648fa7",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Was lehren Qurʾān 2:153 und der Ḥadīṯ über Geduld?",
@@ -606,9 +632,10 @@
       "spokenText": "Was lehren Qurʾān 2:153 und der Ḥadīṯ über Geduld?",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-2d756dc63312f24f9cc34e46.m4a",
-      "sha256": "2d756dc63312f24f9cc34e46f5d530c98810d5d1d404c26c87351191ccecf92a"
+      "sha256": "2d756dc63312f24f9cc34e46f5d530c98810d5d1d404c26c87351191ccecf92a",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Antwort 1: Allah ist mit den Geduldigen. Wer sich um Geduld bemüht, dem gibt Allah Geduld.",
@@ -625,9 +652,10 @@
       "spokenText": "Allah ist mit den Geduldigen. Wer sich um Geduld bemüht, dem gibt Allah Geduld.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-ae3eef96459ea487b7778965.m4a",
-      "sha256": "ae3eef96459ea487b77789657d4a1c3af6f7fbd03f1d93318b378c8aa6b86796"
+      "sha256": "ae3eef96459ea487b77789657d4a1c3af6f7fbd03f1d93318b378c8aa6b86796",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Antwort 2: Geduld spielt keine Rolle, wenn etwas schwierig wird.",
@@ -644,9 +672,10 @@
       "spokenText": "Geduld spielt keine Rolle, wenn etwas schwierig wird.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-871325edf9b4daad0e1736f4.m4a",
-      "sha256": "871325edf9b4daad0e1736f48be09890b77e4effb7f8c1d21c88c2a59ada0d35"
+      "sha256": "871325edf9b4daad0e1736f48be09890b77e4effb7f8c1d21c88c2a59ada0d35",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Ṣabr bedeutet: Geduldig bleiben.",
@@ -663,9 +692,10 @@
       "spokenText": "Ṣabr bedeutet: Geduldig bleiben.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-48a74fba19ee14f967ba5f18.m4a",
-      "sha256": "48a74fba19ee14f967ba5f1810be9529ea03ab00b9fea1b535a50c76f83d53dd"
+      "sha256": "48a74fba19ee14f967ba5f1810be9529ea03ab00b9fea1b535a50c76f83d53dd",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Ṣabr bedeutet, ruhig und standhaft zu bleiben, auch wenn etwas schwer ist.",
@@ -682,9 +712,10 @@
       "spokenText": "Ṣabr bedeutet, ruhig und standhaft zu bleiben, auch wenn etwas schwer ist.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-22974a77fa0313f2c44b9b38.m4a",
-      "sha256": "22974a77fa0313f2c44b9b38f09d184a65722c89fbaa6e5e22a7d13db27df733"
+      "sha256": "22974a77fa0313f2c44b9b38f09d184a65722c89fbaa6e5e22a7d13db27df733",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     },
     {
       "visibleText": "Ṣabr ist Geduld und Standhaftigkeit: nicht aufgeben, eine schwierige Lage gut bewältigen und Allah um Hilfe bitten.",
@@ -701,9 +732,15 @@
       "spokenText": "Ṣabr ist Geduld und Standhaftigkeit: nicht aufgeben, eine schwierige Lage gut bewältigen und Allah um Hilfe bitten.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": false,
+      "liveVerified": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-358eb7cd74543f86fdab53f0.m4a",
-      "sha256": "358eb7cd74543f86fdab53f06d6ecfa0cd53e202e0c9ca2a11a7a68db2a6af4b"
+      "sha256": "358eb7cd74543f86fdab53f06d6ecfa0cd53e202e0c9ca2a11a7a68db2a6af4b",
+      "liveProof": "kids/data/academy-topic-batches/akhlaq-sabr-v4-live-proof-v1.json"
     }
-  ]
+  ],
+  "liveVerifierRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45239106103",
+  "liveVerifiedUtc": "2026-11-23T18:30:38.353173+00:00",
+  "webAudioDeliveryVerified": true,
+  "realIphoneIpadPlaybackVerified": false,
+  "humanFushaListeningReviewPerformed": false
 }
