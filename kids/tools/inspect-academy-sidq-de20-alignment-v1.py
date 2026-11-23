@@ -3,7 +3,7 @@
 import os, json, pathlib, urllib.request, urllib.parse
 doc=json.loads(pathlib.Path("kids/data/academy-topic-batches/akhlaq-sidq-history-recovery-map-v1.json").read_text("utf8"))
 rec=next(x for x in doc["originals"] if x["segment"]=="de-20")
-token=os.environ["ELEVENLABS_API_KEY"]
+token=os.environ["ELEVENLABS_API_KEY"].strip()
 url="https://api.elevenlabs.io/v1/history/"+urllib.parse.quote(rec["historyItemId"],safe="")
 with urllib.request.urlopen(urllib.request.Request(url,headers={"xi-api-key":token}),timeout=30) as resp:meta=json.load(resp)
 al=meta.get("alignments")
