@@ -8,10 +8,10 @@ for(const file of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2
 const all=box.window.DARKidsAcademyCurriculum,v25=box.window.DARKidsAcademyCurriculumV25;
 const seven=[
  ["aqidah-tawhid-recht-allahs","tawhid","51:56","2856","https://dorar.net/hadith/sharh/11568",false],
- ["aqidah-iman-sechs-grundlagen","iman","2:285","8","https://dorar.net/hadith/sharh/1189",true],
- ["aqidah-ikhlas-warum-gutes-tun","ikhlas","98:5","1","https://dorar.net/hadith/sharh/127209",true],
+ ["aqidah-iman-sechs-grundlagen","iman","2:285","8","https://sunnah.com/muslim:8a",true],
+ ["aqidah-ikhlas-warum-gutes-tun","ikhlas","98:5","1","https://dorar.net/hadith/sharh/3429",true],
  ["akhlaq-wut-ruhig-bleiben","akhlaq","3:134","6114","https://dorar.net/hadith/sharh/151201",true],
- ["adab-erlaubnis-anklopfen","adab","24:27","6245","https://dorar.net/hadith/sharh/209262",true],
+ ["adab-erlaubnis-anklopfen","adab","24:27","6245","https://sunnah.com/bukhari:6245",true],
  ["akhlaq-tarbiyah-sanft-lernen","tarbiyah","20:132","69","https://dorar.net/hadith/sharh/61",true],
  ["akhlaq-nafs-gutes-herz","nafs","91:9","2564","https://dorar.net/hadith/sharh/207905",false]
 ];

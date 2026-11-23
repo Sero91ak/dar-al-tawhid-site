@@ -11,10 +11,10 @@ assert.equal(ids.length,44,"37 substantive lessons plus the protected Ṣidq fou
 const newIds=["adab-essen-bismillah","akhlaq-tiere-barmherzigkeit","adab-nachbarn-gutes","aqidah-dua-allah-bitten"];
 assert.deepEqual(Array.from(ctx.window.DARKidsAcademyCurriculumV22.ids),newIds);
 const sources={
- "adab-essen-bismillah":{q:"7:31",h:"5376",url:"https://dorar.net/hadith/sharh/14362",excerpt:true},
- "akhlaq-tiere-barmherzigkeit":{q:"6:38",h:"2363",url:"https://dorar.net/hadith/sharh/72367",excerpt:true},
+ "adab-essen-bismillah":{q:"7:31",h:"5376",url:"https://sunnah.com/bukhari:5376",excerpt:true},
+ "akhlaq-tiere-barmherzigkeit":{q:"6:38",h:"2363",url:"https://sunnah.com/bukhari:2363",excerpt:true},
  "adab-nachbarn-gutes":{q:"4:36",h:"6014",url:"https://dorar.net/hadith/sharh/13223",excerpt:true},
- "aqidah-dua-allah-bitten":{q:"1:5",h:"6340",url:"https://dorar.net/hadith/sharh/10635",excerpt:false}
+ "aqidah-dua-allah-bitten":{q:"1:5",h:"6340",url:"https://sunnah.com/bukhari:6340",excerpt:false}
 };
 const planned=JSON.parse(read("kids/data/academy-voice-plan-v22.json"));
 const year=JSON.parse(read("kids/data/academy-year-52weeks-v1.json"));

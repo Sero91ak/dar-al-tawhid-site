@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "academy-208-v4-human-approved-batch-gate",
+  "status": "NO_APPROVED_TEXT_YET",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "voiceSettingsProfile": "kids_story",
+  "languageCode": "de",
+  "manualSourceAndTextApprovalsRequired": true,
+  "publicReleaseAllowed": false,
+  "items": [],
+  "maxClipsPerBatch": 4,
+  "maxPreparedCharactersPerBatch": 1200,
+  "notes": "This is a production request gate, not content approval. Only insert exact SHA-identified phrases after per-lesson Islamic source and pronunciation preflight checks. Do not mark humanListeningApproved on unheard audio."
+}
