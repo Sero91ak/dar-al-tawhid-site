@@ -28,6 +28,9 @@ jobs:
       - name: Public website isolation guard
         run: node scripts/public-website-isolation-guard.js
 
+      - name: Preview gate fails closed without Cloudflare Secrets
+        run: node scripts/test-preview-gate-security.mjs
+
       - name: Adult mobile GPS resume and location replay regression
         run: node scripts/test-mobile-location-fresh-fix.cjs
 
