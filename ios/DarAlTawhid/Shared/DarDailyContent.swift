@@ -60,11 +60,23 @@ enum DarDailyContent {
         var snap = base
         let keptDuaId = snap.duaId
         let keptPostId = snap.postId
-        let prayers = DarPrayerEngine.times(for: date, lat: snap.latitude, lng: snap.longitude, fajrAngle: snap.fajrAngle, asrFactor: snap.asrFactor)
-        let next = DarPrayerEngine.next(from: prayers, now: date)
-        snap.prayers = prayers
-        snap.nextPrayerName = next.name
-        snap.nextPrayerTime = next.time
+        // Prayer instants come exclusively from validated WebApp/GitHub source days.
+        // Never recompute local prayer times or fabricate tomorrow's clock from HH:mm.
+        snap.prayers = snap.prayerDay(at: date)?.slots() ?? []
+        if let next = snap.nextAbsolutePrayer(after: date),
+           let zone = TimeZone(identifier: snap.prayerTimeZone) {
+            let formatter = DateFormatter()
+            formatter.calendar = Calendar(identifier: .gregorian)
+            formatter.locale = Locale(identifier: "de_DE")
+            formatter.timeZone = zone
+            formatter.dateFormat = "HH:mm"
+            snap.nextPrayerName = next.name
+            snap.nextPrayerTime = formatter.string(from: next.target)
+        } else {
+            snap.nextPrayerName = "Gebetszeiten nicht verfügbar"
+            snap.nextPrayerTime = "—"
+        }
+        snap.nextPrayerRemaining = ""
         snap.qiblaDegrees = DarPrayerEngine.qiblaDegrees(lat: snap.latitude, lng: snap.longitude)
         let day = Calendar.current.ordinality(of: .day, in: .year, for: date) ?? 1
         let card = cards[day % cards.count]
