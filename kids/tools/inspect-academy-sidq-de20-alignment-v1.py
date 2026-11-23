@@ -18,3 +18,18 @@ print(json.dumps({"segment":"de-20","history_id_matches":meta.get("history_item_
     "meta_text_available":bool(meta.get("text")),"alignment":summarize(al),
     "state":meta.get("state"),"date_unix":meta.get("date_unix"),
     "firstSentenceCharacterCount":len("Einen Fehler kann man unbeabsichtigt machen.")},ensure_ascii=False))
+prefix="Einen Fehler kann man unbeabsichtigt machen."
+norm=(al or {}).get("normalized_alignment") or (al or {}).get("alignment") or {}
+letters=norm.get("characters") or []
+ends=norm.get("character_end_times_seconds") or []
+starts=norm.get("character_start_times_seconds") or []
+joined="".join(letters)
+if not joined.startswith(prefix) or len(ends)!=len(letters):
+    raise RuntimeError("Exact original alignment prefix not present")
+next_index=next((i for i in range(len(prefix),len(letters)) if not letters[i].isspace()),None)
+print(json.dumps({"prefixExact":True,"prefixLastCharacter":letters[len(prefix)-1],
+  "firstSentenceEndSeconds":ends[len(prefix)-1],
+  "nextNonSpaceStartSeconds":starts[next_index] if next_index is not None else None,
+  "nextNonSpaceCharacter":letters[next_index] if next_index is not None else None,
+  "firstSentenceChars":len(prefix),
+  "totalOriginalChars":len(letters)},ensure_ascii=False))
