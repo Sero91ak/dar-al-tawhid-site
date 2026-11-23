@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_ACADEMY_SABR_32_OWNER_ELEVEN_V4_PUBLIC_DELIVERY_PROOF",
+  "topicId": "akhlaq-sabr",
+  "topic": "Ṣabr – Geduld",
+  "status": "live-cloudflare-http-200-and-sha256-verified",
+  "provider": "ElevenLabs",
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "sourceProfile": "Serhat Abu Malik – Master",
+  "publishedOn": "https://dar-al-tawhid.de/kids/akademie/",
+  "sourcePublicManifest": "kids/data/academy-audio.json",
+  "sourceOriginalLedger": "kids/data/academy-topic-batches/akhlaq-sabr-v4-original-ledger-v1.json",
+  "liveCloudflareWorkerDeployRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45238424241",
+  "all32ProducerRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45236587790",
+  "publicSha256VerifierRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45239106103",
+  "verificationUtc": "2026-11-23T18:30:38.353173+00:00",
+  "originalNewProviderSegments": 38,
+  "canonicalChildClickTexts": 32,
+  "sourceBackedAgeBands": [
+    "4-5",
+    "6-8",
+    "9-10"
+  ],
+  "publicManifestExactMatches": 32,
+  "publicMediaHttp200AndSha256Matched": 32,
+  "publicM4aBytesDownloadedAndHashed": 2306073,
+  "existingNativeArabicOriginalsReused": true,
+  "newArabicNativeTerms": [
+    "صَبْر",
+    "حَدِيث"
+  ],
+  "allSourceAudiobooksMetadataNotNarrated": true,
+  "syntheticQuranRecitationUsed": false,
+  "humanAcousticReviewPerformed": false,
+  "realIphoneIpadPlaybackVerified": false,
+  "scope": "original source-based child-click audio assets only; no OneSignal or child progress writes",
+  "notes": "Verified through authenticated GitHub production workflow and real public Cloudflare delivery. This is a technical release receipt, not a listener-judged Fuṣḥā pronunciation rating or actual device playback result."
+}
