@@ -584,3 +584,86 @@ html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[
   min-width:0!important;
   font-size:max(14px,1rem)!important;
 }
+
+/* v1332 · Fold/iPad: rail text stays readable; each column scrolls alone. */
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"],
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="posts"],
+html.is-fold-dual:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"],
+html.is-fold-dual:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="posts"]{
+  grid-template-columns:minmax(340px,40%) minmax(0,1fr)!important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-smart-jump-toggle,
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-smart-jump-toggle b,
+html.is-fold-dual:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-smart-jump-toggle,
+html.is-fold-dual:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-smart-jump-toggle b{
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  line-height:1.25!important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-row,
+html.is-fold-dual:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-row{
+  grid-template-columns:28px minmax(0,1fr)!important;
+  height:auto!important;
+  min-height:56px!important;
+  align-items:start!important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-row-main h3,
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-row-meta,
+html.is-fold-dual:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-row-main h3,
+html.is-fold-dual:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-row-meta{
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  overflow-wrap:anywhere!important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-row-side,
+html.is-fold-dual:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-row-side{
+  grid-column:2!important;
+  max-width:100%!important;
+  justify-content:flex-start!important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-row-ar,
+html.is-fold-dual:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-row-ar{
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="posts"] .dar-fold__rail :is(h1,h2,h3,p,a,button,span),
+html.is-fold-dual:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="posts"] .dar-fold__rail :is(h1,h2,h3,p,a,button,span){
+  overflow-wrap:anywhere!important;
+}
+
+/* v1333 · One posture per hardware.
+   hinge-book: browser reports two viewport segments (Fold/Duo spanned).
+   fold-book: Samsung inner display, nearly square, split on the crease.
+   duo-book: two portrait screens side by side, wider hinge gap.
+   span-stack: two screens one above the other.
+   tablet-book: iPad landscape, continuous glass, list narrower than the reader.
+   Cover, one Duo screen and phone portrait stay a single column. */
+html[data-device-posture="fold-book"],
+html[data-device-posture="duo-book"],
+html[data-device-posture="hinge-book"]{
+  --fold-rail-min:0px;
+  --fold-rail-max:none;
+}
+html[data-fold-dual="1"][data-device-posture="fold-book"] .dar-fold[data-fold-mode="dual"],
+html[data-fold-dual="1"][data-device-posture="duo-book"] .dar-fold[data-fold-mode="dual"],
+html[data-fold-dual="1"][data-device-posture="hinge-book"] .dar-fold[data-fold-mode="dual"]{
+  grid-template-columns:minmax(0,var(--fold-rail-current,1fr)) minmax(0,1fr)!important;
+  column-gap:var(--fold-hinge,18px)!important;
+  gap:var(--fold-hinge,18px)!important;
+}
+html[data-device-posture="hinge-book"] .dar-fold[data-fold-mode="dual"]{
+  grid-template-columns:minmax(0,env(viewport-segment-width 0 0, var(--fold-rail-current, 1fr))) minmax(0,env(viewport-segment-width 1 0, 1fr))!important;
+}
+html[data-device-posture="span-stack"] .dar-fold[data-fold-mode="dual"]{
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-rows:minmax(0,46%) minmax(0,1fr)!important;
+  row-gap:var(--fold-hinge,24px)!important;
+  column-gap:0!important;
+}
+html[data-device-posture="span-stack"] .dar-fold[data-fold-mode="dual"] > .dar-fold__rail{
+  border-inline-end:0!important;
+  border-bottom:1px solid var(--fold-divider, transparent)!important;
+}
