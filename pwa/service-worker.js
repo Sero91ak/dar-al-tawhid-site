@@ -80,6 +80,67 @@ self.addEventListener('activate',event=>{
   // Do NOT wipe older caches here: preserve downloaded pages and audio.
   event.waitUntil(self.clients.claim());
 });
+// Notifications created by this dedicated PWA registration must reuse its
+// existing window, not open the Home page or force a second page reload.
+self.addEventListener('notificationclick',event=>{
+  event.notification.close();
+  const data=event.notification.data||{};
+  const extra=data.additionalData&&typeof data.additionalData==='object'?data.additionalData:{};
+  const row={...extra,...data};
+  let raw=String(row.url||row.web_url||row.launchURL||row.app_url||'');
+  let target;
+  try{
+    target=new URL(raw||'/pwa/?pwa=1',self.location.origin);
+    if(target.protocol==='daraltawhid:'){
+      const src=target.searchParams.get('src');
+      target=src?new URL(src):new URL('/pwa/?pwa=1',self.location.origin);
+    }
+    if(target.origin!==self.location.origin)target=new URL('/pwa/?pwa=1',self.location.origin);
+  }catch(_){target=new URL('/pwa/?pwa=1',self.location.origin)}
+  let kind='',id='';
+  try{
+    const match=decodeURIComponent(target.hash.replace(/^#/,'')).match(/^(post|dua)\/(.+)$/i);
+    if(match){kind=match[1].toLowerCase();id=match[2]}
+  }catch(_){}
+  if(!id){
+    const type=String(row.nav||row.target||row.type||row.reminder_type||'').toLowerCase();
+    kind=type.includes('dua')?'dua':/post|recommend|article/.test(type)?'post':'';
+    id=String(row.content_id||row.postId||row.duaId||row.slug||'').trim();
+  }
+  if(!/^[a-z0-9._-]{1,260}$/i.test(id)){kind='';id=''}
+  const finalUrl=new URL('/pwa/?pwa=1',self.location.origin);
+  if(kind&&id){
+    finalUrl.hash='#'+kind+'/'+encodeURIComponent(id);
+    if(kind==='post')finalUrl.searchParams.set('post',id);
+  }else if(target.pathname!=='/'&&target.pathname!=='/pwa/'){
+    finalUrl.pathname=target.pathname;
+    finalUrl.search=target.search;
+    finalUrl.hash=target.hash;
+  }
+  event.waitUntil((async()=>{
+    const windows=await self.clients.matchAll({type:'window',includeUncontrolled:true});
+    for(const client of windows){
+      if(new URL(client.url).origin!==self.location.origin||
+         !new URL(client.url).pathname.startsWith('/pwa'))continue;
+      await client.focus();
+      if(kind&&id&&typeof MessageChannel==='function'){
+        const channel=new MessageChannel();
+        const acknowledged=new Promise(resolve=>{
+          const timeout=setTimeout(()=>resolve(false),900);
+          channel.port1.onmessage=e=>{clearTimeout(timeout);resolve(e.data&&e.data.handled===true)}
+        });
+        try{
+          client.postMessage({type:'DAR_OPEN_CONTENT',kind,id,url:finalUrl.href},[channel.port2]);
+          if(await acknowledged){channel.port1.close();return}
+        }catch(_){}
+        channel.port1.close();
+      }
+      if(client.navigate){await client.navigate(finalUrl.href);return}
+    }
+    await self.clients.openWindow(finalUrl.href);
+  })());
+});
+
 self.addEventListener('message',event=>{
   const type=String(event.data&&event.data.type||'');
   if(type==='SKIP_WAITING')self.skipWaiting();
