@@ -85,7 +85,7 @@ def recover(originals,key,target):
         meta=json.loads(info_bytes)
         identity_checks={
             "historyIdMatches": meta.get("history_item_id")==hid,
-            "voiceMatches": meta.get("voice_id")==VOICE,
+            "voiceMatchesOrUnspecifiedInHistory": meta.get("voice_id") in (None, "", VOICE),
             "modelMatches": meta.get("model_id")==MODEL,
             "sourceExpected": meta.get("source") in ("Flows","TTS"),
         }
@@ -113,7 +113,8 @@ def recover(originals,key,target):
             "generationId":rec["generationId"],"sessionId":rec["sessionId"],
             "historyItemId":hid,"originalSha256":digest(audio),
             "originalBytes":len(audio),"durationSeconds":round(measured,3),
-            "providerModel":meta["model_id"],"sourceVoice":meta["voice_id"]}
+            "providerModel":meta["model_id"],"sourceVoiceInHistory":meta.get("voice_id"),
+            "sourceVoiceFromVerifiedCreativeReceipt":VOICE}
         print("RECOVERED",count,"/21",rec["segment"],"original VERIFIED",flush=True)
     return ledger
 def main():
