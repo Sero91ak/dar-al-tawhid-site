@@ -269,6 +269,8 @@
     });
     resize();
   }
-  global.DARAdminSocialReview={render:renderImmersiveAtelier,bind:bindImmersiveAtelier,renderLegacy:render,bindLegacy:bind};
+  function renderEditorial(){activeStudioMode="redaktion";return renderImmersiveAtelier();}
+  function renderStudio(){activeStudioMode="studio";return renderImmersiveAtelier();}
+  global.DARAdminSocialReview={render:renderImmersiveAtelier,renderEditorial,renderStudio,bind:bindImmersiveAtelier,renderLegacy:render,bindLegacy:bind};
 
 })(window);
