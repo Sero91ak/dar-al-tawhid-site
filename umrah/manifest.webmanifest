@@ -1,0 +1,32 @@
+{
+  "id": "/umrah/",
+  "name": "DĀR AL TAWḤĪD · ʿUmrah",
+  "short_name": "ʿUmrah",
+  "description": "Geführte ʿUmrah mit arabischen Originaltexten, Lautschrift, Quellen und privatem Fortschritt.",
+  "lang": "de",
+  "dir": "ltr",
+  "start_url": "/umrah/",
+  "scope": "/umrah/",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "any",
+  "background_color": "#F4F6F0",
+  "theme_color": "#F4F6F0",
+  "icons": [
+    {
+      "src": "/assets/app-icons/type-creme-ar/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/app-icons/type-creme-ar/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
