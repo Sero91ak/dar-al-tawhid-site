@@ -323,9 +323,12 @@ def production(plan,pub,outputs,segments,chars):
                 "sourceSubject":"akhlaq","sourceLessonId":"akhlaq-sabr",
                 "sourceTeachingKind":rec["kind"],"sourceAgeBand":rec["age"],
                 "sourceType":"owner-V4-dialogue-segmented-de-ar",
-                "sourceGenerationIds":[ledger["requests"][ident].get("providerRequestId") or ident
-                        if not segments[ident]["reusedId"] else segments[ident]["reusedId"]
-                        for ident in rec["keys"]],
+                "sourceGenerationIds":[segments[ident]["reusedId"]
+                        for ident in rec["keys"] if segments[ident]["reusedId"]],
+                "sourceRequestIds":[ledger["requests"][ident].get("providerRequestId")
+                        for ident in rec["keys"] if not segments[ident]["reusedId"]
+                        and ledger["requests"][ident].get("providerRequestId")],
+                "sourceSegmentKeys":list(rec["keys"]),
                 "sourceOriginalSegmentsSha256":[sha(file_for(ident,segments[ident]).read_bytes())
                         for ident in rec["keys"]],
                 "spokenText":rec["spoken"],"approvedForPlayback":True,
