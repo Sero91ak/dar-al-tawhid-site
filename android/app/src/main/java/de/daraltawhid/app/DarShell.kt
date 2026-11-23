@@ -21,10 +21,25 @@ object DarShell {
     fun inAppUrl(incoming: Uri?): String {
         val source = incoming ?: return LIVE_URL
         if (source.scheme.equals(CUSTOM_SCHEME, ignoreCase = true)) {
-            val hash = source.getQueryParameter("hash")
-                ?: source.host
-                ?: "home"
-            return "https://$HOST/#${hash.trimStart('#')}"
+            // OneSignal uses daraltawhid://in-app?src=<encoded HTTPS URL>.
+            // Android Uri.getQueryParameter already URL-decodes src.
+            val forwarded = source.getQueryParameter("src")?.trim().orEmpty()
+            if (forwarded.isNotEmpty()) {
+                val target = runCatching { Uri.parse(forwarded) }.getOrNull()
+                if (target != null && isOwnHost(target) &&
+                    target.scheme.equals("https", ignoreCase = true)) {
+                    return inAppUrl(target)
+                }
+                // Never navigate to an arbitrary site or "#in-app" on bad src.
+                return LIVE_URL
+            }
+            val rawRoute = source.getQueryParameter("hash")
+                ?: if (source.host.equals("in-app", ignoreCase = true)) "home"
+                   else source.host.orEmpty() + source.path.orEmpty()
+            val route = rawRoute.trim().trimStart('#', '/')
+            if (route.isEmpty() || route.length > 400 ||
+                !route.matches(Regex("[A-Za-z0-9_/%.-]+"))) return LIVE_URL
+            return "https://$HOST/#$route"
         }
         if (!isOwnHost(source)) return LIVE_URL
         val builder = source.buildUpon().scheme("https").authority(HOST)
