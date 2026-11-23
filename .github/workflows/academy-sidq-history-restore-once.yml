@@ -9,7 +9,7 @@ permissions:
   contents: write
 concurrency:
   group: academy-sidq-v4-paid-original-get-and-publish
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   recover-and-publish:
     runs-on: ubuntu-24.04
@@ -22,11 +22,23 @@ jobs:
         with:
           fetch-depth: 2
           persist-credentials: true
-      - name: Install missing media validators on clean runner
+      - name: Prepare portable FFmpeg and FFprobe without apt
         run: |
-          if ! command -v ffprobe >/dev/null 2>&1 || ! command -v ffmpeg >/dev/null 2>&1; then
-            sudo apt-get update -qq
-            sudo apt-get install -y -qq ffmpeg
+          set -euo pipefail
+          if command -v ffmpeg >/dev/null 2>&1 && command -v ffprobe >/dev/null 2>&1; then
+            echo "System media tools ready"
+          else
+            python3 -m venv /tmp/dar-ffmpeg-env
+            /tmp/dar-ffmpeg-env/bin/pip --disable-pip-version-check install static-ffmpeg==3.0
+            /tmp/dar-ffmpeg-env/bin/python - <<'PY'
+          import os
+          from static_ffmpeg import run
+          ffmpeg,ffprobe=run.get_or_fetch_platform_executables_else_raise()
+          os.makedirs("/tmp/dar-ffmpeg-bin",exist_ok=True)
+          for source,name in ((ffmpeg,"ffmpeg"),(ffprobe,"ffprobe")):
+              os.symlink(source,"/tmp/dar-ffmpeg-bin/"+name)
+          PY
+            echo "/tmp/dar-ffmpeg-bin" >> "${GITHUB_PATH}"
           fi
       - name: Confirm no synthetic or duplicate ElevenLabs generation can occur
         run: |
