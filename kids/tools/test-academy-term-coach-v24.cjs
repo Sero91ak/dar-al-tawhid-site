@@ -120,13 +120,31 @@ assert.equal(counts.vocabularyTerms,33);
 assert.equal(counts.vocabularyVoicePhrases,99);
 assert.deepEqual(counts.uncoveredLessons,[]);
 assert.ok(counts.uniquePhrases>=730);
-assert.ok(counts.totals.approved>=58&&counts.totals.approved<=72,
- "All canonical 58 are preserved; other V4 assets count only if referenced by the editorial voice plans");
+assert.ok(counts.totals.approved>=58&&counts.totals.approved<=104,
+ "Previous 72 Ṣidq files and the next 32 Ṣabr originals must remain faithful to audited source plans");
 // The dynamic child-choice projection includes 5 new exact click texts
 // which were absent from the older editorial source voice-plan. Validate
 // ALL public manifest entries, including those projection-only strings.
 const sidqPublic=JSON.parse(read("kids/data/academy-audio.json"));
 const sidqRows=Object.entries(sidqPublic.entries).filter(([,x])=>x.sourceLessonId==="sidq");
+const sabrRows=Object.entries(sidqPublic.entries).filter(([,x])=>x.sourceLessonId==="akhlaq-sabr");
+assert.ok([0,32].includes(sabrRows.length),
+ "Ṣabr audio must be empty or a single complete 32-phrase original V4 batch");
+if(sabrRows.length===32){
+ const plan=JSON.parse(read("kids/data/academy-topic-batches/akhlaq-sabr-preproduction-v1.json"));
+ assert.equal(plan.entries.length,32);
+ assert.deepEqual(new Set(sabrRows.map(([text])=>text)),
+    new Set(plan.entries.map(x=>x.visibleText)),
+    "32 real V4 audios must match 32 exact child clickable source texts");
+ for(const [display,entry] of sabrRows){
+  assert.equal(entry.approvedForPlayback,true,"Unapproved Ṣabr V4 answer: "+display);
+  const source=path.join(root,entry.url.replace(/^\/+/, ""));
+  assert.ok(fs.existsSync(source),"Missing genuinely generated Ṣabr M4A: "+display);
+  const digest=require("node:crypto").createHash("sha256").update(fs.readFileSync(source)).digest("hex");
+  assert.equal(digest,entry.sha256,"Ṣabr MP4 bytes do not match original archive: "+display);
+ }
+}
+
 assert.ok([58,72].includes(sidqRows.length),
  "Only an atomic 14-recording Ṣidq release can augment the original 58");
 for(const [display,entry] of sidqRows){
