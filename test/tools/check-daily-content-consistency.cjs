@@ -54,4 +54,10 @@ const resolver = fs.readFileSync(path.join(ROOT, 'assets/dar-canonical-daily-v1.
 new vm.Script(resolver, { filename: 'dar-canonical-daily-v1.js' });
 assert.ok(resolver.includes('text(item.snippet)') && resolver.includes('text(item.category)') && resolver.includes('text(item.scholar)'), 'global recommendation must not display stale metadata');
 assert.ok(resolver.includes('function onForeground()'), 'foreground refresh must avoid forced repeat fetches');
+const homeSource = fs.readFileSync(path.join(ROOT, 'scripts/home-premium-v380-fragment.js'), 'utf8');
+new vm.Script(homeSource, { filename: 'home-premium-v380-fragment.js' });
+const rowBlock = homeSource.split('function renderHomeRecommendedRow(')[1]?.split('function renderHomeRamadanRow(')[0] || '';
+assert.ok(rowBlock.includes('DARCanonicalDailyV1'), 'global Home row must use the canonical resolver');
+assert.ok(!rowBlock.includes('recommendedPost('), 'global Home row must not use per-profile ranking');
+
 console.log('Daily rotation and global recommendation regression checks passed.');
