@@ -83,8 +83,18 @@ def recover(originals,key,target):
         if info_mime not in ("application/json","text/json"):
             raise RuntimeError("Unexpected history metadata MIME for "+rec["segment"])
         meta=json.loads(info_bytes)
-        if (meta.get("history_item_id")!=hid or meta.get("voice_id")!=VOICE or
-            meta.get("model_id")!=MODEL or meta.get("source")!="Flows"):
+        identity_checks={
+            "historyIdMatches": meta.get("history_item_id")==hid,
+            "voiceMatches": meta.get("voice_id")==VOICE,
+            "modelMatches": meta.get("model_id")==MODEL,
+            "sourceExpected": meta.get("source") in ("Flows","TTS"),
+        }
+        if not all(identity_checks.values()):
+            # Print no user text, credentials, source URL or history item IDs.
+            print("HISTORY_METADATA_IDENTITY_CHECK",rec["segment"],
+                  json.dumps({"checks":identity_checks,
+                      "source":str(meta.get("source"))[:40],
+                      "availableFields":sorted(meta.keys())[:40]}),flush=True)
             raise RuntimeError("History original wrong voice/model/source: "+rec["segment"])
         when=int(meta.get("date_unix") or 0)
         if abs(when*1000-int(rec["createdAtUnixMs"]))>120_000:
