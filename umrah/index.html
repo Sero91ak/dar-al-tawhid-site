@@ -321,8 +321,33 @@ body:has(#page-home:target) #page-home,body:has(#page-ritus:target) #page-ritus,
 
       <section class="page" id="page-abschluss" aria-label="Erinnerungsdokument">
         <div class="page-head"><div><span class="eyebrow">PERSÖNLICHES ARCHIV</span><h1>Dein ʿUmrah-Buch</h1><p>Ein schönes, privates Erinnerungsdokument – keine amtliche Urkunde oder religiöse Bestätigung.</p></div></div>
-        <div class="report-layout"><div class="report-preview"><div class="report-preview-cover"><span>DĀR AL TAWḤĪD</span><h2>MEINE<br>ʿUMRAH</h2><div id="report-names-preview">Dein Name</div><div id="report-date-preview">Dein Reisezeitraum</div></div></div><div class="report-actions"><div class="flat-section"><h2>Inhalt des Dokuments</h2><p>Deckblatt mit eurem Namen, Qurʾān-/Sunnah-Bezug, dokumentierter Ritus-Fortschritt, Reisejournal und eigene Bilder mit Ortsangaben und Bildnotizen. Die Seitenzahl wächst mit dem Inhalt.</p><button class="primary wide" id="print-pdf">Als PDF drucken / sichern</button><button class="secondary wide" id="download-html-report">Ausdruckbares HTML herunterladen</button><p class="hint">Beim Drucken im Browser „Als PDF speichern“ wählen. Auf iOS ggf. die Teilen-/Druckfunktion verwenden. Hintergrundgrafiken in den Druckoptionen erlauben.</p></div><div class="flat-section tools"><h2>Datensicherung</h2><button class="tertiary" id="export-json">Persönliche Daten exportieren</button><label class="tertiary">Sicherung importieren <input id="import-json" type="file" accept="application/json" hidden></label><button class="tertiary danger" id="clear-all">Lokale Daten löschen</button><p class="hint">Datenexport beinhaltet ausgewählte Fotos. Die Dateien werden nicht online hochgeladen.</p></div></div></div>
-      </section>
+        <div class="report-layout">
+ <div class="report-preview"><div class="report-preview-cover dar-book-preview-v11" aria-label="Vorschau des creme-goldenen Erinnerungsbuchs">
+   <img class="dar-book-preview-wm" src="/app-logo-original.png" alt="" aria-hidden="true">
+   <div class="dar-book-preview-brand"><img src="/assets/app-icons/emblem-creme-petrol/icon-192.png" alt="DĀR AL TAWḤĪD Emblem"><span>DĀR AL TAWḤĪD</span></div>
+   <div class="dar-book-preview-title-wrap"><h2 id="dar-book-preview-title">Meine<br>ʿUmrah</h2><p>Ein persönlicher Reisebegleiter und ein Erinnerungsbuch.</p></div>
+   <div class="dar-book-preview-cities"><figure><div class="dar-book-preview-arch"><img src="./illustrations/v11-makkah.jpg" alt="Gemaltes Makkah"></div><figcaption>Makkah</figcaption></figure><figure><div class="dar-book-preview-arch"><img src="./illustrations/v11-madinah.jpg" alt="Gemaltes Madīnah"></div><figcaption>Madīnah</figcaption></figure></div>
+   <div class="dar-book-preview-profile"><span id="report-names-preview">Deine Reise</span><span id="report-date-preview">Dein Reisezeitraum</span></div>
+ </div></div>
+ <div class="report-actions">
+   <div class="flat-section">
+    <span class="eyebrow">DĀR · ERINNERUNGSBUCH V11</span><h2>Deine Reise als edles Buch</h2>
+    <p>Dein persönliches ʿUmrah-Erinnerungsbuch mit Makkah- und Madīnah-Kapiteln, ruhiger creme-goldener Gestaltung, arabischen Texten mit Lautschrift und euren Reiseerinnerungen. Reisende, Reisezeitraum, Tagebucheinträge und zugeordnete Fotos werden auf diesem Gerät übernommen.</p>
+    <button class="primary wide" type="button" id="print-pdf">Erinnerungsbuch gestalten &amp; als PDF sichern</button>
+    <p class="hint">Das Buch öffnet sich im App-Bereich. Dort kannst du Texte und Bilder prüfen, ergänzen und mit „Als PDF speichern“ drucken. Die privaten Daten bleiben auf diesem Gerät.</p>
+   </div>
+   <details class="flat-section dar-book-legacy"><summary>Bisheriges PDF-Protokoll (optional)</summary>
+     <p>Der bisherige technische Ausdruck bleibt als separate Ausgabe erhalten, falls du ihn noch benötigst.</p>
+     <button class="secondary wide" type="button" id="print-pdf-legacy">Klassisches PDF-Protokoll drucken</button>
+     <button class="secondary wide" type="button" id="download-html-report">Klassisches HTML-Protokoll herunterladen</button>
+   </details>
+   <div class="flat-section tools"><h2>Datensicherung</h2><button class="tertiary" id="export-json">Persönliche Daten exportieren</button>
+   <label class="tertiary">Sicherung importieren <input id="import-json" type="file" accept="application/json" hidden></label>
+   <button class="tertiary danger" id="clear-all">Lokale Daten löschen</button>
+   <p class="hint">Die Datensicherung enthält ausgewählte Fotos; sie werden nicht automatisch hochgeladen.</p>
+   </div>
+ </div>
+</div></section>
     </main>
   </div>
   <nav class="bottom-nav" aria-label="Hauptnavigation">
@@ -563,7 +588,7 @@ async function drawPhotoGallery(){const gal=$('#photo-gallery');gal.replaceChild
  $$('[data-photo-note]',gal).forEach(el=>el.oninput=()=>{const m=state.photoMeta.find(x=>x.id===el.dataset.photoNote);if(m){m.caption=el.value;store()}});
  $$('[data-photo-remove]',gal).forEach(el=>el.onclick=async()=>{if(!confirm('Dieses Foto aus dem lokalen Tagebuch entfernen?'))return;const id=el.dataset.photoRemove;await dbDelete(id);state.photoMeta=state.photoMeta.filter(x=>x.id!==id);store();drawPhotoGallery()});
 }
-function drawReportPreview(){const names=state.people.slice(0,state.count).map(currentPersonName).join(' · ');$('#report-names-preview').textContent=names;$('#report-date-preview').textContent=state.dates||'Dein Reisezeitraum'}
+function drawReportPreview(){const names=state.people.slice(0,state.count).map(currentPersonName).join(' · ');$('#report-names-preview').textContent=names;$('#report-date-preview').textContent=state.dates||'Dein Reisezeitraum';$('#dar-book-preview-title').innerHTML=state.count>1?'Unsere<br>ʿUmrah':'Meine<br>ʿUmrah'}
 function allPhotoPlaces(){return Object.values(LOCATIONS).flat()}
 function getPlaceName(id){return allPhotoPlaces().find(l=>l.id===id)?.name||'Persönliche Erinnerung'}
 async function buildReport(){const print=$('#print-root');print.replaceChildren();const main=document.createElement('div');let names=state.people.slice(0,state.count).map((p,i)=>currentPersonName(p,i)).join(' · ');
@@ -597,7 +622,30 @@ async function htmlReport(){const r=await buildReport();const css=`body{margin:0
  // Convert all photo blob URLs into data URLs for a truly portable HTML report.
  const cloneImgs=$$('img',clone),liveImgs=$$('img',r);
  for(let i=0;i<cloneImgs.length;i++){const url=liveImgs[i]?.src;if(!url)continue;try{const blob=await fetch(url).then(x=>x.blob());cloneImgs[i].src=await blobToDataUrl(blob)}catch(e){cloneImgs[i].alt='Bild konnte nicht übernommen werden'}}
- const html=`<!doctype html><html lang="de"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Meine ʿUmrah · DĀR AL TAWḤĪD</title><style>${css}</style>${clone.outerHTML}</html>`;
+ const html=`<!doctype html><html lang="de"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Meine ʿUmrah · DĀR AL TAWḤĪD</title><style>${css}
+/* V11 · Cream/gold book preview in the existing ʿUmrah app PDF tab. */
+.report-preview .dar-book-preview-v11{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;min-height:565px;padding:23px 20px 19px;background:linear-gradient(155deg,#fff9ef,#f2e0be)!important;color:#30241b!important;border:1px solid #cba46a!important;outline:0!important;box-shadow:0 14px 33px rgba(70,52,27,.16)!important}
+.report-preview .dar-book-preview-v11:before{content:"";position:absolute;inset:8px;border:1px solid #dbc18f;pointer-events:none;z-index:3}
+.report-preview .dar-book-preview-v11 .dar-book-preview-wm{position:absolute;top:29%;right:-18%;width:89%;opacity:.10;mix-blend-mode:multiply;filter:sepia(.6) saturate(.3);z-index:-1;pointer-events:none}
+.report-preview .dar-book-preview-v11 .dar-book-preview-brand{display:flex;align-items:center;gap:10px;position:relative;z-index:1;border:0!important;padding:0!important}
+.report-preview .dar-book-preview-v11 .dar-book-preview-brand img{width:61px;height:61px;object-fit:cover;border-radius:50%;opacity:.82;mix-blend-mode:multiply}
+.report-preview .dar-book-preview-v11 .dar-book-preview-brand span{font:600 14px/1.3 Georgia,serif;letter-spacing:.15em;color:#35271d}
+.report-preview .dar-book-preview-v11 .dar-book-preview-title-wrap{position:relative;z-index:1;border:0!important;padding:0!important;margin:24px 0 9px}
+.report-preview .dar-book-preview-v11 h2{font:500 clamp(48px,4.8vw,65px)/.9 Georgia,serif;letter-spacing:-.055em;text-transform:none!important;margin:0 0 14px;color:#30231a}
+.report-preview .dar-book-preview-v11 .dar-book-preview-title-wrap p{font:italic 18px/1.32 Georgia,serif;color:#5a4939;margin:0}
+.report-preview .dar-book-preview-v11 .dar-book-preview-cities{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;position:relative;z-index:1;border:0!important;padding:0!important;margin-top:auto;margin-bottom:16px}
+.report-preview .dar-book-preview-v11 .dar-book-preview-cities figure{margin:0;min-width:0}
+.report-preview .dar-book-preview-v11 .dar-book-preview-arch{border:2px solid #cda76b;border-radius:49% 49% 4px 4px / 17% 17% 4px 4px;overflow:hidden;height:167px;padding:0!important}
+.report-preview .dar-book-preview-v11 .dar-book-preview-arch img{width:100%;height:100%;object-fit:cover;display:block}
+.report-preview .dar-book-preview-v11 figcaption{text-align:center;font:600 23px Georgia,serif;color:#3c291b;margin-top:6px}
+.report-preview .dar-book-preview-v11 .dar-book-preview-profile{position:relative;z-index:1;display:flex;flex-direction:column;gap:5px;border-top:1px solid #cca66a!important;padding:11px 0 0!important;font-size:12px;color:#564634;overflow-wrap:anywhere}
+.report-preview .dar-book-preview-v11 .dar-book-preview-profile span{letter-spacing:0!important;color:#4b3a28!important;font:500 12px/1.45 Georgia,serif!important}
+.report-preview .dar-book-preview-v11 .dar-book-preview-profile #report-names-preview{font-size:17px!important}
+.dar-book-legacy{border:1px solid var(--line,#d6d2c2);border-radius:13px;padding:13px 16px!important}
+.dar-book-legacy summary{cursor:pointer;font-weight:750;color:var(--text,#2f4038);font-size:14px}
+.dar-book-legacy p{font-size:13px;line-height:1.6}
+@media(max-width:720px){.report-preview .dar-book-preview-v11{min-height:505px}.report-preview .dar-book-preview-v11 h2{font-size:53px}.report-preview .dar-book-preview-v11 .dar-book-preview-arch{height:135px}}
+</style>${clone.outerHTML}</html>`;
  download(new Blob([html],{type:'text/html;charset=utf-8'}),'umrah-erinnerungsdokument.html');toast('HTML-Bericht heruntergeladen')}
 function blobToDataUrl(blob){return new Promise((resolve,reject)=>{const fr=new FileReader();fr.onload=()=>resolve(fr.result);fr.onerror=reject;fr.readAsDataURL(blob)})}
 function download(blob,name){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000)}
@@ -627,7 +675,7 @@ function bind(){
  $('#day-note').addEventListener('input',e=>{selectedPerson().notes[state.activeDay]=e.target.value;store();$('#save-feedback').textContent=storageOkay?'Lokal gespeichert · keine Serverübertragung':'Speicherung blockiert – bitte Daten sichern'});
  $('#photo-files').addEventListener('change',async e=>{await addPhotos([...e.target.files]);e.target.value=''});
   $('#photo-sort').addEventListener('change',e=>{state.photoSort=e.target.value;store();drawPhotoGallery()});
- $('#print-pdf').addEventListener('click',doPrint);$('#download-html-report').addEventListener('click',htmlReport);$('#export-json').addEventListener('click',exportJSON);
+ $('#print-pdf').addEventListener('click',()=>{store();window.location.assign('/umrah/erinnerungsbuch-v11.html?source=umrah')});$('#print-pdf-legacy').addEventListener('click',doPrint);$('#download-html-report').addEventListener('click',htmlReport);$('#export-json').addEventListener('click',exportJSON);
  $('#import-json').addEventListener('change',async e=>{if(e.target.files?.[0])await importJSON(e.target.files[0]);e.target.value=''});$('#clear-all').addEventListener('click',clearAll);
  window.addEventListener('hashchange',()=>{const p=location.hash.replace(/^#page-/,'');if(['home','ritus','orte','journal','abschluss'].includes(p))nav(p)});
  window.addEventListener('online',onlineStatus);window.addEventListener('offline',onlineStatus);
