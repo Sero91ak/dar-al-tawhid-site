@@ -272,6 +272,15 @@ try {
   fail("Visitor Home in landscape / Fold / tablet duplicate renderer regression");
 }
 
+// The native iOS/Android web shell must load the parity Home even when
+// older iPad/Fold HTML lost its script tag or mount during orientation.
+try {
+  require("child_process").execFileSync(process.execPath,
+    [path.join(__dirname, "check-visitor-home-bootstrap.cjs")], { stdio: "inherit" });
+} catch (error) {
+  fail("Visitor canonical Home bootstrap for iOS / Android / Fold");
+}
+
 if (failed) {
   console.error(`\n${failed} check(s) failed – Deploy stoppen.`);
   process.exit(1);
