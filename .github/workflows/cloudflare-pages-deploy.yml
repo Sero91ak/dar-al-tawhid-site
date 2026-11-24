@@ -82,6 +82,9 @@ on:
       - kids/assets/sahabiyyat-story-audio/**
       - kids/owner-voice.js
       - kids/data/academy-audio.json
+      # KIDS third-source lesson Amānah: owner V4 27 new + 5 reused
+      # full child tracks passed GitHub build; let only this canonical
+      # production Worker update dar-al-tawhid.de and notify web hash QA.
       # Genuine eleven_v4 lesson media must publish through the canonical Worker,
       # not through GitHub Pages alone; this is an asset-only production trigger.
       - kids/assets/kids-academy-audio/**
