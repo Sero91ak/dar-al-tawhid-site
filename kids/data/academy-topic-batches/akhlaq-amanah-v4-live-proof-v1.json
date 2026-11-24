@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_ACADEMY_AMANAH_32_OWNER_ELEVEN_V4_PUBLIC_DELIVERY_PROOF",
+  "topicId": "akhlaq-amanah",
+  "topic": "Amānah – Vertrauenswürdigkeit",
+  "status": "live-cloudflare-32-http-200-and-sha256-verified",
+  "sourceMaterial": [
+    {
+      "reference": "Qurʾān 23:8",
+      "url": "https://quran.com/23/8"
+    },
+    {
+      "reference": "Ṣaḥīḥ al-Buḫārī 33",
+      "url": "https://sunnah.com/bukhari:33",
+      "quoteType": "child-friendly paraphrase"
+    }
+  ],
+  "provider": "ElevenLabs",
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "speaker": "Serhat Abu Malik – Master",
+  "publicLessonUrl": "https://dar-al-tawhid.de/kids/akademie/",
+  "publicManifest": "kids/data/academy-audio.json",
+  "sourcePlan": "kids/data/academy-topic-batches/akhlaq-amanah-preproduction-v1.json",
+  "sourceOriginalLedger": "kids/data/academy-topic-batches/akhlaq-amanah-v4-original-ledger-v1.json",
+  "sourceNewOriginalSegments": 32,
+  "ageBands": [
+    "4-5",
+    "6-8",
+    "9-10"
+  ],
+  "childExactAudioTexts": 32,
+  "newPaidSourceLessonM4a": 27,
+  "reusedPreviouslyApprovedExactOwnerV4ChildM4a": 5,
+  "productionRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45346178595",
+  "canonicalCloudflareWorkerDeployment": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45346768108",
+  "publicSha256VerifierRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45347248920",
+  "verifiedAtUtc": "2026-11-24T07:20:46.737751+00:00",
+  "publicManifestExactMatches": 32,
+  "realAudioHttp200Sha256Matches": 32,
+  "publicM4aBytesDownloadedAndHashMatched": 2168327,
+  "nativeArabicFushaTokens": [
+    "أَمَانَة",
+    "قُرْآن",
+    "سُنَّة",
+    "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ"
+  ],
+  "syntheticQuranRecitationUsed": false,
+  "hardwarePlaybackDirectlyTested": false,
+  "humanNativeArabicAcousticReviewPerformed": false,
+  "zeroNewCreditsSpentOnReusedFive": true,
+  "notes": "Cloudflare proof reflects actual HTTP bytes. Earlier first probe had HTTP404 for one media; the second complete immutable SHA proof passed after propagation/retry. Do not claim device listening or human pronunciation QA."
+}
