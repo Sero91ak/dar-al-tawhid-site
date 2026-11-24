@@ -120,8 +120,8 @@ assert.equal(counts.vocabularyTerms,33);
 assert.equal(counts.vocabularyVoicePhrases,99);
 assert.deepEqual(counts.uncoveredLessons,[]);
 assert.ok(counts.uniquePhrases>=730);
-assert.ok(counts.totals.approved>=58&&counts.totals.approved<=104,
- "Previous 72 Ṣidq files and the next 32 Ṣabr originals must remain faithful to audited source plans");
+assert.ok(counts.totals.approved>=58&&counts.totals.approved<=131,
+ "Keep 72 Ṣidq, 32 Ṣabr and no more than the 27 new approved Amānah V4 originals in editorial voice plans");
 // The dynamic child-choice projection includes 5 new exact click texts
 // which were absent from the older editorial source voice-plan. Validate
 // ALL public manifest entries, including those projection-only strings.
@@ -145,6 +145,31 @@ if(sabrRows.length===32){
  }
 }
 
+const amanahRows=Object.entries(sidqPublic.entries)
+ .filter(([,entry])=>entry.sourceLessonId==="akhlaq-amanah");
+assert.ok([0,27].includes(amanahRows.length),
+ "Amānah must be empty or one atomic 27-new plus 5-exactly-reused child audio release");
+if(amanahRows.length===27){
+ const plan=JSON.parse(read("kids/data/academy-topic-batches/akhlaq-amanah-preproduction-v1.json"));
+ const allTexts=new Set(plan.entries.map(x=>x.visibleText));
+ assert.equal(plan.entries.length,32);
+ assert.equal(allTexts.size,32);
+ assert.equal(plan.entries.filter(x=>x.reusedExistingApprovedOwnerV4===true).length,5);
+ assert.equal(amanahRows.length,27);
+ assert.deepEqual(new Set(amanahRows.map(([title])=>title)),
+  new Set(plan.entries.filter(x=>!x.reusedExistingApprovedOwnerV4).map(x=>x.visibleText)),
+  "The new Amānah media must match every new child-click text exactly");
+ for(const phrase of allTexts){
+  const audio=sidqPublic.entries[phrase];
+  assert.ok(audio&&audio.approvedForPlayback&&audio.voiceId==="DkU7j9uO4ZEtLD2iRZSH",
+    "Amānah 32/32 must use real approved Serhat owner master V4 audio: "+phrase);
+  assert.equal(audio.modelId,"eleven_v4");
+  const media=path.join(root,audio.url.replace(/^\/+/, ""));
+  assert.ok(fs.existsSync(media),"Missing native Amānah media in repository: "+phrase);
+  const sum=require("node:crypto").createHash("sha256").update(fs.readFileSync(media)).digest("hex");
+  assert.equal(sum,audio.sha256,"Recorded voice clip hash drift: "+phrase);
+ }
+}
 assert.ok([58,72].includes(sidqRows.length),
  "Only an atomic 14-recording Ṣidq release can augment the original 58");
 for(const [display,entry] of sidqRows){
