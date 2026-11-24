@@ -1,0 +1,82 @@
+name: KIDS Academy Amānah 32 Serhat V4 Audios - checkpointed complete production
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/academy-amanah-v4-complete-produce-once.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: academy-owner-eleven-v4-one-topic-amanah-20261124
+  cancel-in-progress: false
+jobs:
+  verify-produce-publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      TOPIC_BRANCH: academy/akhlaq-amanah-v4-20261124
+    steps:
+      - name: Checkout paid-producer scripts, canonical child plans and existing media
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: true
+      - name: Install reproducible FFmpeg+FFprobe without changing any app or visitor components
+        run: |
+          set -euo pipefail
+          if command -v ffmpeg >/dev/null 2>&1 && command -v ffprobe >/dev/null 2>&1; then
+            echo "System media tools ready"
+          else
+            python3 -m venv /tmp/dar-amanah-ffmpeg
+            /tmp/dar-amanah-ffmpeg/bin/pip --disable-pip-version-check install static-ffmpeg==3.0
+            /tmp/dar-amanah-ffmpeg/bin/python - <<'PY'
+          import os
+          from static_ffmpeg import run
+          ffmpeg,ffprobe=run.get_or_fetch_platform_executables_else_raise()
+          os.makedirs("/tmp/dar-amanah-bin",exist_ok=True)
+          for src,name in ((ffmpeg,"ffmpeg"),(ffprobe,"ffprobe")):
+              os.symlink(src,"/tmp/dar-amanah-bin/"+name)
+          PY
+            echo "/tmp/dar-amanah-bin" >> "${GITHUB_PATH}"
+          fi
+      - name: Strict zero-credit source, native Fuṣḥā and 32 audio-script preflight
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/produce-academy-amanah-v4-v1.py
+          python3 kids/tools/produce-academy-amanah-v4-v1.py --audit
+          node kids/tools/test-academy-amanah-choice-v1.cjs
+          node kids/tools/test-academy-term-coach-v24.cjs
+      - name: Isolate one durable GitHub branch for all paid original audio checkpoints
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --heads origin "${TOPIC_BRANCH}" | grep -q refs/heads/; then
+            git fetch origin "refs/heads/${TOPIC_BRANCH}:refs/remotes/origin/${TOPIC_BRANCH}"
+            git switch -C "${TOPIC_BRANCH}" "origin/${TOPIC_BRANCH}"
+          else
+            git switch -c "${TOPIC_BRANCH}"
+            git push origin "HEAD:refs/heads/${TOPIC_BRANCH}"
+          fi
+      - name: Produce only new original V4 language-isolated segments, reuse real Fuṣḥā and assemble all 32 recordings
+        run: |
+          set -euo pipefail
+          python3 kids/tools/produce-academy-amanah-v4-v1.py --produce
+      - name: Verify 32 exact child audios, no keyboard/microphone and previous 72 owner recordings intact
+        run: |
+          set -euo pipefail
+          node kids/tools/test-academy-term-coach-v24.cjs
+          node kids/tools/test-academy-amanah-choice-v1.cjs
+          node scripts/test-kids-academy-v9.js
+          python3 kids/tools/produce-academy-amanah-v4-v1.py --audit
+      - name: Deliver finished original audio archive plus 32 hashed playback files to GitHub main
+        run: |
+          set -euo pipefail
+          git status --short
+          git diff --check
+          git fetch origin main --depth=50
+          git rebase origin/main
+          git push origin "HEAD:refs/heads/main"
+          echo "AMANAH 32 PAID OWNER V4 AUDIOS STORED ON MAIN; CLOUDFLARE DELIVERY AUDIT STILL REQUIRED"
