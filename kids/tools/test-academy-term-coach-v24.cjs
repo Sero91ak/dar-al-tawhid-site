@@ -120,7 +120,7 @@ assert.equal(counts.vocabularyTerms,33);
 assert.equal(counts.vocabularyVoicePhrases,99);
 assert.deepEqual(counts.uncoveredLessons,[]);
 assert.ok(counts.uniquePhrases>=730);
-assert.ok(counts.totals.approved>=58&&counts.totals.approved<=131,
+assert.ok(counts.totals.approved>=58&&counts.totals.approved<=158,
  "Keep 72 Ṣidq, 32 Ṣabr and no more than the 27 new approved Amānah V4 originals in editorial voice plans");
 // The dynamic child-choice projection includes 5 new exact click texts
 // which were absent from the older editorial source voice-plan. Validate
@@ -169,6 +169,33 @@ if(amanahRows.length===27){
   const sum=require("node:crypto").createHash("sha256").update(fs.readFileSync(media)).digest("hex");
   assert.equal(sum,audio.sha256,"Recorded voice clip hash drift: "+phrase);
  }
+}
+const salamRows=Object.entries(sidqPublic.entries)
+ .filter(([,entry])=>entry.sourceLessonId==="adab-salam");
+assert.ok([0,27].includes(salamRows.length),
+ "Salām must publish an atomic 27-new plus five exact prior V4 child media batch");
+if(salamRows.length===27){
+ const plan=JSON.parse(read("kids/data/academy-topic-batches/adab-salam-preproduction-v1.json"));
+ const keys=new Set(plan.entries.map(x=>x.visibleText));
+ assert.equal(plan.entries.length,32);
+ assert.equal(keys.size,32);
+ assert.equal(plan.entries.filter(x=>x.reusedExistingApprovedOwnerV4===true).length,5);
+ assert.deepEqual(new Set(salamRows.map(([text])=>text)),
+  new Set(plan.entries.filter(x=>!x.reusedExistingApprovedOwnerV4).map(x=>x.visibleText)),
+  "Every canonical Salām full-greeting age source must be a real click track");
+ for(const key of keys){
+  const e=sidqPublic.entries[key];
+  assert.ok(e&&e.approvedForPlayback&&e.modelId==="eleven_v4"&&
+    e.voiceId==="DkU7j9uO4ZEtLD2iRZSH",
+    "Unapproved or fake Salām owner V4 audio: "+key);
+  const file=path.join(root,e.url.replace(/^\/+/, ""));
+  assert.ok(fs.existsSync(file),"Missing Salām audio source "+key);
+  const digest=require("node:crypto").createHash("sha256").update(fs.readFileSync(file)).digest("hex");
+  assert.equal(digest,e.sha256,"Corrupted original Salām master voice file "+key);
+ }
+ const full=sidqPublic.entries["As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh."];
+ assert.ok(full&&full.sha256==="9932942b89f5c62f8a2dae79a00650ed149e6f17a4e8d137ef086873577ba76b",
+   "Full canonical Arabic greeting must be reused, not generated");
 }
 assert.ok([58,72].includes(sidqRows.length),
  "Only an atomic 14-recording Ṣidq release can augment the original 58");
