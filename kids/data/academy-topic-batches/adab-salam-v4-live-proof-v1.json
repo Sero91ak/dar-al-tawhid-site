@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_ACADEMY_SALAM_32_OWNER_ELEVEN_V4_CLOUDFLARE_PUBLIC_DELIVERY_PROOF",
+  "topicId": "adab-salam",
+  "topic": "Salām – Grüßen",
+  "status": "live-cloudflare-32-http-200-and-sha256-verified",
+  "sourceMaterial": [
+    {
+      "reference": "Qurʾān 4:86",
+      "url": "https://quran.com/4/86"
+    },
+    {
+      "reference": "Ṣaḥīḥ Muslim 54a",
+      "url": "https://sunnah.com/muslim:54a",
+      "quoteType": "child-friendly paraphrase"
+    }
+  ],
+  "provider": "ElevenLabs",
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "speaker": "Serhat Abu Malik – Master",
+  "publicLessonUrl": "https://dar-al-tawhid.de/kids/akademie/",
+  "publicManifest": "kids/data/academy-audio.json",
+  "sourcePlan": "kids/data/academy-topic-batches/adab-salam-preproduction-v1.json",
+  "sourceOriginalLedger": "kids/data/academy-topic-batches/adab-salam-v4-original-ledger-v1.json",
+  "newNativeLanguageVoiceSegments": 36,
+  "ageBands": [
+    "4-5",
+    "6-8",
+    "9-10"
+  ],
+  "canonicalChildAudioTexts": 32,
+  "newPaidSourceLessonM4a": 27,
+  "reusedPreviouslyApprovedExactOwnerV4ChildM4a": 5,
+  "fullArabicSalamSourceOriginalReused": true,
+  "fullArabicSalamSourceOriginalSha256": "9932942b89f5c62f8a2dae79a00650ed149e6f17a4e8d137ef086873577ba76b",
+  "nativeArabicGreetingReplySynthesizedInArabic": "وَعَلَيْكُمُ السَّلَامُ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ",
+  "productionRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45376158081",
+  "canonicalCloudflareWorkerDeployment": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45376862311",
+  "publicSha256VerifierRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/45377299018",
+  "verifiedAtUtc": "2026-11-24T10:42:24.507626+00:00",
+  "publicManifestExactMatches": 32,
+  "realAudioHttp200Sha256Matches": 32,
+  "publicM4aBytesDownloadedAndHashMatched": 2488317,
+  "syntheticQuranRecitationUsed": false,
+  "hardwarePlaybackDirectlyTested": false,
+  "humanNativeArabicAcousticReviewPerformed": false,
+  "zeroNewCreditsSpentOnReusedFive": true,
+  "notes": "Real Cloudflare HTTP media bytes matched cryptographic GitHub SHA for every one of the 32 child-click texts. Real-device and human Fuṣḥā listening approvals were not performed and must not be claimed."
+}
