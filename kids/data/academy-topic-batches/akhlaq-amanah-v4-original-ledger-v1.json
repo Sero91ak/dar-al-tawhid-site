@@ -201,17 +201,22 @@
       "completedAt": "2026-11-24T07:14:52.221791+00:00"
     },
     "7b0427a41fee1777072e28cb": {
-      "state": "attempt-started-never-auto-retry",
+      "state": "done",
       "lang": "de",
       "textSha256": "b1489467340e72b36bc4adb4a6d928d36055813da0475bd77b9cfd833bfeeb1b",
       "createdAt": "2026-11-24T07:14:53.503910+00:00",
       "sequence": 18,
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
-      "modelId": "eleven_v4"
+      "modelId": "eleven_v4",
+      "sha256": "199605f7108470b2971894eb312f63707fdfe12eb58c78668dcde0c9181e069b",
+      "durationSeconds": 2.72,
+      "bytes": 44764,
+      "providerRequestId": "jgs1gafZ5mnjVrIKy4AA",
+      "completedAt": "2026-11-24T07:14:55.981050+00:00"
     }
   },
   "policy": "mark-paid-attempt-and-commit-before-POST; never auto-retry uncertain request",
   "createdAt": "2026-11-24T07:13:57.248652+00:00",
   "publicLiveVerified": false,
-  "originalsGenerated": 14
+  "originalsGenerated": 15
 }
