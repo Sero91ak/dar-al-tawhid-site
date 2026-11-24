@@ -13,6 +13,24 @@
    const node=document.createElement(tag);if(className)node.className=className;
    if(text!==undefined)node.textContent=text;return node;
  }
+ const observedFrames=new WeakSet();
+ function syncFrameAppearance(){
+   try{
+     const frame=$("#darAdminEditorialFrame"),doc=frame?.contentDocument;
+     if(!doc?.documentElement)return;
+     doc.documentElement.dataset.darAdminTheme=current;
+     doc.documentElement.style.colorScheme=current===LIGHT?"light":"dark";
+     const childMeta=doc.querySelector('meta[name="theme-color"]');
+     if(childMeta)childMeta.setAttribute("content",current===LIGHT?"#f4f6f0":"#0c0e0d");
+   }catch(_){}
+ }
+ function watchEditorialFrame(){
+   const frame=$("#darAdminEditorialFrame");
+   if(!frame||observedFrames.has(frame))return;
+   observedFrames.add(frame);
+   frame.addEventListener("load",syncFrameAppearance);
+   syncFrameAppearance();
+ }
  function apply(mode,save){
    current=MODES.has(mode)?mode:DARK;
    root.dataset.darAdminTheme=current;
@@ -32,17 +50,8 @@
      const selected=btn.dataset.darAdminChoice===current;
      btn.setAttribute("aria-pressed",String(selected));
    });
-   // The nine-language studio is a same-origin iframe with a separate document.
-   // Mirror only appearance state, never editorial content or credentials.
-   try{
-     const frame=$("#darAdminEditorialFrame"),doc=frame?.contentDocument;
-     if(doc?.documentElement){
-       doc.documentElement.dataset.darAdminTheme=current;
-       doc.documentElement.style.colorScheme=current===LIGHT?"light":"dark";
-       const childMeta=doc.querySelector('meta[name="theme-color"]');
-       if(childMeta)childMeta.setAttribute("content",current===LIGHT?"#f4f6f0":"#0c0e0d");
-     }
-   }catch(_){}
+   // The editorial iframe is a separate document. Keep its palette synchronized.
+   syncFrameAppearance();
    document.dispatchEvent(new CustomEvent("dar-admin-appearance-change",{detail:{theme:current}}));
  }
  function switchButton(classExtra=""){
@@ -89,7 +98,7 @@
    if(heading)heading.insertAdjacentElement("afterend",card);else first.prepend(card);
  }
  function mount(){
-   mountToolbar();mountLogin();mountSettings();
+   mountToolbar();mountLogin();mountSettings();watchEditorialFrame();
    apply(current,false);
  }
  function boot(){
@@ -97,6 +106,11 @@
    if(!panel)return;
    // Observe replacement of the main panel only. Never observe our own nested buttons.
    new MutationObserver(()=>queueMicrotask(mount)).observe(panel,{childList:true});
+   if(typeof window!=="undefined"&&typeof window.addEventListener==="function"){
+     window.addEventListener("storage",event=>{
+       if(event.key===KEY)apply(event.newValue,false);
+     });
+   }
    mount();
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});

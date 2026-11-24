@@ -56,6 +56,10 @@ function harness(saved="salbei",pathname="/admin/"){
  let mode="login",settingsPanel=null,mutationCallback=null;
  const select={value:"start"};
  const themeMeta=new Element("meta");
+ const frame=new Element("iframe");frame.id="darAdminEditorialFrame";
+ const frameRoot=new Element("html");
+ const frameMeta=new Element("meta");
+ frame.contentDocument={documentElement:frameRoot,querySelector:selector=>selector==='meta[name="theme-color"]'?frameMeta:null};
  const storage={darAdminAppearanceV2:saved};
  const messages=[];
  const document={
@@ -67,6 +71,7 @@ function harness(saved="salbei",pathname="/admin/"){
    if(selector==="#panel .login")return mode==="login"?login:null;
    if(selector==="#panel .split>.panel")return mode==="settings"?settingsPanel:null;
    if(selector==="#adminTabSelect")return select;
+   if(selector==="#darAdminEditorialFrame")return frame;
    if(selector==='meta[name="theme-color"]')return themeMeta;
    return null;
   },
@@ -87,7 +92,7 @@ function harness(saved="salbei",pathname="/admin/"){
   mutationCallback?.();
  }
  function toLogin(){mode="login";select.value="start";panel.replaceChildren(login);mutationCallback?.()}
- return {rootEl,panel,document,storage,messages,themeMeta,toSettings,toLogin,
+ return {rootEl,panel,document,storage,messages,themeMeta,frame,frameRoot,frameMeta,toSettings,toLogin,
   switches:()=>tree.querySelectorAll("[data-dar-admin-switch]"),
   choices:()=>tree.querySelectorAll("[data-dar-admin-choice]"),
   settingsCards:()=>tree.querySelectorAll(".dar-admin-appearance-settings")};
@@ -141,7 +146,31 @@ function testFiles(){
  assert.equal(braces(css),0,"Unbalanced appearance CSS blocks");
  assert.equal(braces(shell),0,"Unbalanced V2 CSS blocks");
 }
+function testIframePaletteAndRepaint(){
+ const h=harness("salbei");
+ assert.equal(h.frameRoot.dataset.darAdminTheme,"salbei");
+ assert.equal(h.frameMeta.getAttribute("content"),"#f4f6f0");
+ h.frameRoot.dataset.darAdminTheme="layl";
+ h.frame.events.load?.();
+ assert.equal(h.frameRoot.dataset.darAdminTheme,"salbei","Embedded editor must reapply the saved palette after load");
+ h.switches()[0].click();
+ assert.equal(h.frameRoot.dataset.darAdminTheme,"layl");
+ assert.equal(h.frameMeta.getAttribute("content"),"#0c0e0d");
+}
+function testContrastAndSemanticActions(){
+ const chrome=fs.readFileSync(path.join(root,"admin/dar-admin-top-chrome-fix.css"),"utf8");
+ assert.ok(!chrome.includes("color:#d7c9a8!important"),"Hardcoded beige defeats light theme");
+ assert.ok(chrome.includes("var(--v2muted"),"Toolbar and secondary text must inherit the palette");
+ for(const token of ["--admin-primary-bg:","--admin-primary-ink:","--admin-danger-bg:","--admin-danger-ink:"]){
+   assert.equal(css.split(token).length-1,2,"Each theme must supply "+token);
+ }
+ assert.ok(css.includes("#panel :is(.btn.primary,button.primary)"),"Generic button override must preserve primary styling");
+ assert.ok(css.includes("#panel :is(.btn.danger,button.danger"),"Generic button override must preserve danger styling");
+ assert.ok(css.includes('html[data-dar-admin-theme="salbei"] body.dar-v2-active .admin-editorial-hostbar'),"Embedded atelier needs explicit light-theme chrome");
+}
 testSavedLightAndSwitch();
 testDarkAndIsolation();
 testFiles();
-console.log("DĀR Admin V2 appearance regression: PASS (persist, login, settings, rerender, separation, theme assets)");
+testIframePaletteAndRepaint();
+testContrastAndSemanticActions();
+console.log("DĀR Admin V2 appearance regression: PASS (persist, choices, iframe, contrast, primary/danger, isolated routes)");

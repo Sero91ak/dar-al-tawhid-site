@@ -25,6 +25,8 @@ html[data-dar-admin-theme="layl"]{
  --admin-dimmer:rgba(5,10,6,.74);
  --admin-shadow:0 16px 40px rgba(0,0,0,.24);
  --admin-strong:#f6f0e4;
+ --admin-primary-bg:#d4bd85;--admin-primary-ink:#102017;
+ --admin-danger-bg:#8f3339;--admin-danger-ink:#ffffff;
 }
 html[data-dar-admin-theme="salbei"]{
  color-scheme:light;
@@ -50,6 +52,8 @@ html[data-dar-admin-theme="salbei"]{
  --admin-dimmer:rgba(23,33,27,.39);
  --admin-shadow:0 12px 34px rgba(31,49,39,.10);
  --admin-strong:#17211b;
+ --admin-primary-bg:#355b47;--admin-primary-ink:#ffffff;
+ --admin-danger-bg:#a3303e;--admin-danger-ink:#ffffff;
 }
 html[data-dar-admin-theme]{
  background:var(--v2bg)!important;
@@ -180,3 +184,60 @@ html[data-dar-admin-theme] body:not(.dar-v2-active) .login input{
  html[data-dar-admin-theme] .dar-admin-appearance-toggle,
  html[data-dar-admin-theme] .dar-admin-theme-choice{transition:none!important;animation:none!important}
 }
+
+/* Theme-switch QA: preserve semantic controls and contrast in BOTH palettes.
+   Earlier shared selectors normalized all buttons to the same neutral surface,
+   including publish/confirm and delete/cancel actions. */
+html[data-dar-admin-theme] body.dar-v2-active #panel :is(.btn.primary,button.primary){
+ background:var(--admin-primary-bg)!important;
+ color:var(--admin-primary-ink)!important;
+ border-color:var(--admin-primary-bg)!important;
+}
+html[data-dar-admin-theme] body.dar-v2-active #panel :is(.btn.danger,button.danger,.btn.error,button.error){
+ background:var(--admin-danger-bg)!important;
+ color:var(--admin-danger-ink)!important;
+ border-color:var(--admin-danger-bg)!important;
+}
+html[data-dar-admin-theme] body.dar-v2-active #panel :is(.btn,button):disabled{
+ cursor:not-allowed;
+ opacity:.58;
+}
+html[data-dar-admin-theme] body.dar-v2-active #panel :is(.btn,button):focus-visible,
+html[data-dar-admin-theme] .dar-admin-theme-choice:focus-visible,
+html[data-dar-admin-theme] .dar-admin-appearance-toggle:focus-visible{
+ outline:3px solid var(--v2gold)!important;
+ outline-offset:2px!important;
+}
+html[data-dar-admin-theme] .dar-admin-theme-choice[aria-pressed="true"]{
+ background:var(--admin-active-background)!important;
+ border-color:var(--v2gold)!important;
+}
+html[data-dar-admin-theme="salbei"] body.dar-v2-active:has(.admin-editorial-host){
+ background:var(--admin-page-background)!important;
+}
+html[data-dar-admin-theme="salbei"] body.dar-v2-active .admin-editorial-hostbar{
+ background:var(--admin-topbar-background)!important;
+ color:var(--v2ink)!important;
+}
+html[data-dar-admin-theme="salbei"] body.dar-v2-active .admin-editorial-hostbar :is(small,span){
+ color:var(--v2muted)!important;
+}
+html[data-dar-admin-theme="salbei"] body.dar-v2-active .admin-editorial-hostbar strong{
+ color:var(--v2gold)!important;
+}
+html[data-dar-admin-theme="salbei"] body.dar-v2-active .admin-editorial-popout{
+ color:var(--v2gold)!important;
+ border-color:var(--v2line)!important;
+}
+html[data-dar-admin-theme="salbei"] body.dar-v2-active .dar-studio-switch{
+ background:var(--admin-elevated-background)!important;
+ border-color:var(--v2line)!important;
+}
+html[data-dar-admin-theme="salbei"] body.dar-v2-active .dar-studio-switch button{
+ color:var(--v2ink)!important;
+}
+html[data-dar-admin-theme="salbei"] body.dar-v2-active .dar-studio-switch button.is-active{
+ color:var(--admin-primary-ink)!important;
+ background:var(--admin-primary-bg)!important;
+}
+/* Isolated screenshot-like post/preview canvases deliberately retain their authored colors. */
