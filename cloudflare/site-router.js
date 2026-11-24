@@ -1344,6 +1344,50 @@ function injectAdultReaderRuntimeV5(html) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    // Isolated DĀR Admin Bildstudio assets: reuse the existing signed owner
+    // session. Never treat the browser-only Admin PIN as server authorization.
+    const imageStudioPath = url.pathname === "/tools/dar-social-editor-v1"
+      || url.pathname.startsWith("/tools/dar-social-editor-v1/");
+    if (imageStudioPath) {
+      const authUrl = new URL("/test/academy/index.html", url.origin);
+      const ownerAccess = await academyOwnerAccess(request, authUrl, env);
+      if (ownerAccess instanceof Response) {
+        if (ownerAccess.status !== 302 && ownerAccess.status !== 401) return ownerAccess;
+        const authHtml = '<!doctype html><html lang="de"><head><meta charset="utf-8">'
+          + '<meta name="viewport" content="width=device-width,initial-scale=1">'
+          + '<meta name="robots" content="noindex,nofollow">'
+          + '<title>DĀR Bildstudio · Eigentümerzugang</title>'
+          + '<style>html,body{margin:0;min-height:100%;background:#0d1c15;color:#f6f0e4;font:15px/1.6 system-ui}'
+          + 'main{max-width:520px;margin:8vh auto;padding:25px}h1{color:#d5bd86;font:500 29px Georgia,serif}'
+          + 'a{display:inline-block;padding:12px 18px;background:#d5bd86;color:#102017;border-radius:10px;text-decoration:none;font-weight:700}'
+          + '</style></head><body><main><h1>DĀR Bildstudio geschützt</h1>'
+          + '<p>Bitte über den bestehenden DĀR-Eigentümerzugang anmelden, danach diese Admin-Seite erneut öffnen.</p>'
+          + '<a href="/test/academy/login" target="_blank" rel="noopener noreferrer">Eigentümerzugang öffnen</a>'
+          + '</main></body></html>';
+        return new Response(request.method === "HEAD" ? null : authHtml, {
+          status: 401, headers: {
+            "Content-Type": "text/html; charset=utf-8",
+            "Cache-Control": "private, no-store", "X-Robots-Tag": "noindex, nofollow",
+            "X-Frame-Options": "SAMEORIGIN", "X-Content-Type-Options": "nosniff",
+            "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; frame-ancestors 'self'; base-uri 'none'"
+          }
+        });
+      }
+      if (ownerAccess !== true) {
+        return new Response("Bildstudio nicht verfügbar", { status: 503, headers: { "Cache-Control": "no-store" } });
+      }
+      const studioAsset = await env.ASSETS.fetch(request);
+      const studioHeaders = new Headers(studioAsset.headers);
+      studioHeaders.set("Cache-Control", "private, no-store");
+      studioHeaders.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+      studioHeaders.set("X-Content-Type-Options", "nosniff");
+      studioHeaders.set("X-Frame-Options", "SAMEORIGIN");
+      studioHeaders.delete("Content-Length");
+      return new Response(request.method === "HEAD" ? null : studioAsset.body, {
+        status: studioAsset.status, statusText: studioAsset.statusText, headers: studioHeaders
+      });
+    }
     // Owner-only editorial route: fail-closed login before public static assets/router.
     const editorialAccess = await editorialOwnerAccess(request,url,env);
     if(editorialAccess instanceof Response)return editorialAccess;

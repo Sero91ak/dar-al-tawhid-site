@@ -2,12 +2,12 @@
 (()=>{"use strict";
 const groups=[
  ["ÜBERSICHT",["start","besucher","wochenanalyse","quiz-stats"]],
- ["REDAKTION",["quellen","social","wissensbereich","actions","content","schedule"]],
+ ["REDAKTION",["quellen","social","bildstudio","wissensbereich","actions","content","schedule"]],
  ["INHALTE",["news","ordner","feed","feed-bg","bibliothek","kurzlinks"]],
  ["VERWALTUNG",["reports","users","zakat","settings","tech","kennwoerter","live-edit"]]
 ];
-const names={start:"Dashboard",quellen:"Beiträge",social:"Redaktionsatelier",wissensbereich:"Wissensbereich",actions:"Neuer Beitrag",besucher:"Besucher",wochenanalyse:"Wochenanalyse","quiz-stats":"Quiz-Statistik",news:"News",ordner:"Ordner",feed:"Feed / Im Fokus","feed-bg":"Feed-Hintergründe",bibliothek:"Bibliothek",kurzlinks:"Kurzlinks",kennwoerter:"Kennwörter",settings:"Einstellungen",tech:"Technik",zakat:"Zakāt","live-edit":"Live-Editor"};
-const glyphs={start:"▦",quellen:"▤",social:"✎",wissensbereich:"◇",actions:"+",besucher:"◉",wochenanalyse:"▥","quiz-stats":"◈",news:"◌",ordner:"☷",feed:"▧","feed-bg":"▣",bibliothek:"▣",kurzlinks:"↗",kennwoerter:"⌑",settings:"⚙",tech:"⌘",zakat:"◈","live-edit":"✎"};
+const names={start:"Dashboard",quellen:"Beiträge",social:"Redaktionsatelier",bildstudio:"Bildstudio",wissensbereich:"Wissensbereich",actions:"Neuer Beitrag",besucher:"Besucher",wochenanalyse:"Wochenanalyse","quiz-stats":"Quiz-Statistik",news:"News",ordner:"Ordner",feed:"Feed / Im Fokus","feed-bg":"Feed-Hintergründe",bibliothek:"Bibliothek",kurzlinks:"Kurzlinks",kennwoerter:"Kennwörter",settings:"Einstellungen",tech:"Technik",zakat:"Zakāt","live-edit":"Live-Editor"};
+const glyphs={start:"▦",quellen:"▤",social:"✎",bildstudio:"▣",wissensbereich:"◇",actions:"+",besucher:"◉",wochenanalyse:"▥","quiz-stats":"◈",news:"◌",ordner:"☷",feed:"▧","feed-bg":"▣",bibliothek:"▣",kurzlinks:"↗",kennwoerter:"⌑",settings:"⚙",tech:"⌘",zakat:"◈","live-edit":"✎"};
 const primary=["start","quellen","actions","besucher"];
 const $=(s)=>document.querySelector(s);
 const el=(tag,cls,text)=>{const node=document.createElement(tag);if(cls)node.className=cls;if(text!==undefined)node.textContent=text;return node};
