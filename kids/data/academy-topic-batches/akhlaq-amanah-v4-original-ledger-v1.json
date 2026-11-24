@@ -423,6 +423,15 @@
       "bytes": 48526,
       "providerRequestId": "zHKFdYhlXmQX7h5xjOET",
       "completedAt": "2026-11-24T07:15:52.035070+00:00"
+    },
+    "4488a5e342a9339d9e548a81": {
+      "state": "attempt-started-never-auto-retry",
+      "lang": "de",
+      "textSha256": "c9394a8bf102b06691c438da166bc9631064609fda90129001857e1bb1031d44",
+      "createdAt": "2026-11-24T07:15:53.932627+00:00",
+      "sequence": 34,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4"
     }
   },
   "policy": "mark-paid-attempt-and-commit-before-POST; never auto-retry uncertain request",
