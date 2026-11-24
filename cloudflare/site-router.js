@@ -293,7 +293,7 @@ function activateAdultGlobalBrandV2(html) {
   /* Native iOS and PWA must use the same fresh prayer presentation as Test.
      Keep desktop public browser, Kids and the original prayer engine isolated. */
   html = html.replace(/\/assets\/dar-home-test-parity-visitor\.js\?v=[a-zA-Z0-9-]+/g,
-    "/assets/dar-home-test-parity-visitor.js?v=20261111-home-performance-v1");
+    "/assets/dar-home-test-parity-visitor.js?v=20261124-single-home-landscape-v1");
   /* VISITOR_PROFILE_HEADER_BOOT_V4: adult visitor native/PWA only.
    * Guarantee the approved palette icon, profile picker, smart personalization
    * and adaptive Frauen/Entdecken tab load with the original branded header.

@@ -263,6 +263,15 @@ try {
   fail("Adult Home mutation/scroll performance regression");
 }
 
+// One and only one adult Visitor Home must remain visible in landscape.
+// The existing portrait Home, post reader and all five tabs stay untouched.
+try {
+  require("child_process").execFileSync(process.execPath,
+    [path.join(__dirname, "check-visitor-home-landscape.cjs")], { stdio: "inherit" });
+} catch (error) {
+  fail("Visitor Home in landscape / Fold / tablet duplicate renderer regression");
+}
+
 if (failed) {
   console.error(`\n${failed} check(s) failed – Deploy stoppen.`);
   process.exit(1);
