@@ -1,0 +1,689 @@
+{
+  "schemaVersion": 1,
+  "id": "TAWHID_KIDS_SALAM_SOURCE_BACKED_V4_PREPRODUCTION_V1",
+  "topicId": "adab-salam",
+  "topic": "Salām – Grüßen",
+  "ageBands": [
+    "4-5",
+    "6-8",
+    "9-10"
+  ],
+  "productionPhase": "source-verified-ready-for-owner-V4-generation",
+  "priorTopic": "akhlaq-amanah",
+  "priorTopicLiveConfirmed": true,
+  "liveDeploymentAllowed": false,
+  "paymentGenerationAllowed": true,
+  "sourceMaterial": [
+    {
+      "type": "quran",
+      "reference": "4:86",
+      "canonicalArabic": "وَإِذَا حُيِّيتُم بِتَحِيَّةٍ فَحَيُّوا بِأَحْسَنَ مِنْهَا أَوْ رُدُّوهَا ۗ إِنَّ اللَّهَ كَانَ عَلَىٰ كُلِّ شَيْءٍ حَسِيبًا",
+      "originalReciterRequired": true,
+      "url": "https://quran.com/4/86",
+      "usage": "child-friendly German meaning, not spoken as Arabic recitation"
+    },
+    {
+      "type": "hadith",
+      "reference": "Ṣaḥīḥ Muslim 54a",
+      "usage": "child-friendly paraphrase; do not present as verbatim literal quote",
+      "url": "https://sunnah.com/muslim:54a"
+    }
+  ],
+  "rules": {
+    "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+    "modelId": "eleven_v4",
+    "speaker": "Serhat Abu Malik – Master",
+    "noOriginalRegeneration": true,
+    "zeroSynthesizedQuranRecitation": true,
+    "retainReligiousSourcesAsMetadataNotChildNarration": true,
+    "stripAnswerNumberFromSpokenAudio": true,
+    "useNativeArabicFushaSegments": true,
+    "reuseRealFullSalamOwnerAudio": {
+      "visibleText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+      "url": "/kids/assets/kids-academy-audio/91dc07c318efb09ba21a.m4a",
+      "sha256": "9932942b89f5c62f8a2dae79a00650ed149e6f17a4e8d137ef086873577ba76b",
+      "sourceGenerationIds": [
+        "8MDOfXlceUb0r7nwR9qo"
+      ]
+    },
+    "existingApprovedOwnerV4ClipsReused": 5,
+    "noPublicApprovalUntilActualMediaVerified": true,
+    "ownerAuthorizedNoManualPrelisten": true,
+    "preserveExistingChildProgress": true
+  },
+  "sourcePhraseCount": 23,
+  "obsoleteOriginalPromptsExcluded": [
+    {
+      "originalVisibleText": "Erkläre mit deinen Worten: Grüßen – wie kannst du es im Alltag üben?",
+      "doNotGenerate": true,
+      "replacementReason": "not visible after age-specific child choice-only projection"
+    },
+    {
+      "originalVisibleText": "Erkläre, wie sich Grüßen in einer Alltagssituation zeigen kann.",
+      "doNotGenerate": true,
+      "replacementReason": "not visible after age-specific child choice-only projection"
+    },
+    {
+      "originalVisibleText": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 4:86 und der genannten Überlieferung?",
+      "doNotGenerate": true,
+      "replacementReason": "not visible after age-specific child choice-only projection"
+    }
+  ],
+  "updatedOriginalVisiblePrompts": [
+    {
+      "old": "As-salāmu ʿalaykum ist ein islamischer Friedensgruß.",
+      "canonicalFullGreeting": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh ist ein islamischer Friedensgruß."
+    },
+    {
+      "old": "Jemand sagt zu dir As-salāmu ʿalaykum. Was tust du?",
+      "canonicalFullGreeting": "Jemand sagt zu dir As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh. Was tust du?"
+    }
+  ],
+  "glossaryCount": 3,
+  "adaptedQuestionAnswerCount": 9,
+  "distinctPreflightPhrases": 32,
+  "preExistingApprovedPhrases": 5,
+  "uniqueNewChildPhrasesToRender": 27,
+  "childrenAgeSourceCoverage": {
+    "4-5": true,
+    "6-8": true,
+    "9-10": true
+  },
+  "status": "prepared-not-generated-not-live",
+  "entries": [
+    {
+      "visibleText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh ist ein islamischer Friedensgruß.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh ist ein islamischer Friedensgruß.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Der Prophet ﷺ ermutigte dazu, den Salām untereinander zu verbreiten.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Der Prophet ﷺ ermutigte dazu, den Salām untereinander zu verbreiten.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ein schöner Gruß bringt Freundlichkeit in unsere Begegnung.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ein schöner Gruß bringt Freundlichkeit in unsere Begegnung.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ein schöner Gruß bringt Freundlichkeit in unsere Begegnung. Wir üben den islamischen Friedensgruß und eine gute Antwort.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ein schöner Gruß bringt Freundlichkeit in unsere Begegnung. Wir üben den islamischen Friedensgruß und eine gute Antwort.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich darf andere freundlich begrüßen.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich darf andere freundlich begrüßen.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich kann mit einem guten Gruß beginnen und antworten.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "summary",
+          "age": "all"
+        }
+      ],
+      "kind": "summary",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich kann mit einem guten Gruß beginnen und antworten.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Qurʾān: Wenn ihr freundlich gegrüßt werdet, antwortet mit einem besseren oder gleichwertigen Gruß. Sunnah: Der Prophet ﷺ ermutigte dazu, den Salām untereinander zu verbreiten.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Qurʾān: Wenn ihr freundlich gegrüßt werdet, antwortet mit einem besseren oder gleichwertigen Gruß. Sunnah: Der Prophet ﷺ ermutigte dazu, den Salām untereinander zu verbreiten.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "So zeigen wir einander Respekt und Frieden.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "So zeigen wir einander Respekt und Frieden.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wenn ich gegrüßt werde, antworte ich freundlich.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Wenn ich gegrüßt werde, antworte ich freundlich.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wenn ihr freundlich gegrüßt werdet, antwortet mit einem besseren oder gleichwertigen Gruß. Der Prophet ﷺ ermutigte dazu, den Salām untereinander zu verbreiten.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "summary",
+          "age": "all"
+        }
+      ],
+      "kind": "summary",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Wenn ihr freundlich gegrüßt werdet, antwortet mit einem besseren oder gleichwertigen Gruß. Der Prophet ﷺ ermutigte dazu, den Salām untereinander zu verbreiten.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wir üben den islamischen Friedensgruß und eine gute Antwort.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "summary",
+          "age": "all"
+        }
+      ],
+      "kind": "summary",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Wir üben den islamischen Friedensgruß und eine gute Antwort.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Jemand sagt zu dir As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh. Was tust du?",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-salam",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-salam",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Jemand sagt zu dir As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh. Was tust du?",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Was möchten wir uns heute merken?",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Was möchten wir uns heute merken?",
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": true,
+      "reusedExistingApprovedOwnerV4": true,
+      "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-0eb818f6d5a880454b476051.m4a",
+      "sha256": "0eb818f6d5a880454b47605189d9bf12012267ca9eddac2cf3f21eaf3ea97681",
+      "sourceLessonIdOriginal": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Wo lernen wir mehr über dieses Thema?",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Wo lernen wir mehr über dieses Thema?",
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": true,
+      "reusedExistingApprovedOwnerV4": true,
+      "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-873f4d49eb7e46d4000b9b36.m4a",
+      "sha256": "873f4d49eb7e46d4000b9b36e859bf153ce6bafdd79c1647dbd8bcb5012a54b8",
+      "sourceLessonIdOriginal": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Antwort 1: Ich grüße freundlich zurück.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-salam",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-salam",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich grüße freundlich zurück.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Ich kann mit einem guten Gruß beginnen und antworten.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich kann mit einem guten Gruß beginnen und antworten.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Im Qurʾān und in der authentischen Sunnah.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Im Qurʾān und in der authentischen Sunnah.",
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": true,
+      "reusedExistingApprovedOwnerV4": true,
+      "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-414553471cb676c7be7c52a4.m4a",
+      "sha256": "414553471cb676c7be7c52a47b6fce6ebb1ff94975a2a2e20de84dd5e651700d",
+      "sourceLessonIdOriginal": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Antwort 2: Ich muss das Gelernte nicht beachten.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich muss das Gelernte nicht beachten.",
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": true,
+      "reusedExistingApprovedOwnerV4": true,
+      "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-79134e3b3b9825627c7fe233.m4a",
+      "sha256": "79134e3b3b9825627c7fe23314e427f5bde0f94ad54171a79214a931a61dacbc",
+      "sourceLessonIdOriginal": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Antwort 2: Ich sage absichtlich etwas Unfreundliches.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-salam",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-salam",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich sage absichtlich etwas Unfreundliches.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Wir müssen uns die Regeln selbst ausdenken.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Wir müssen uns die Regeln selbst ausdenken.",
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": true,
+      "reusedExistingApprovedOwnerV4": true,
+      "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-ef5d43874fef6004ef3b0a16.m4a",
+      "sha256": "ef5d43874fef6004ef3b0a16359862ce83253270df6a066943adee2edd787b52",
+      "sourceLessonIdOriginal": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Wie antwortest du auf den islamischen Friedensgruß?",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Wie antwortest du auf den islamischen Friedensgruß?",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Ich sage: Wa ʿalaykumu s-salām wa raḥmatullāhi wa barakātuh.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Ich sage: Wa ʿalaykumu s-salām wa raḥmatullāhi wa barakātuh.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Ich ignoriere den Gruß absichtlich.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich ignoriere den Gruß absichtlich.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Warum verbreiten wir den Salām untereinander?",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Warum verbreiten wir den Salām untereinander?",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Wir wünschen Frieden und begegnen einander freundlich und respektvoll.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Wir wünschen Frieden und begegnen einander freundlich und respektvoll.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Wir grüßen nur, wenn wir dafür eine Belohnung von Menschen bekommen.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Wir grüßen nur, wenn wir dafür eine Belohnung von Menschen bekommen.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Was lehren Qurʾān 4:86 und die Sunnah über den Friedensgruß?",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Was lehren Qurʾān 4:86 und die Sunnah über den Friedensgruß?",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Wir beantworten den Gruß mindestens gleichwertig und verbreiten den Salām.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Wir beantworten den Gruß mindestens gleichwertig und verbreiten den Salām.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Einen freundlichen Gruß soll man absichtlich unbeantwortet lassen.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "adab-salam",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Einen freundlichen Gruß soll man absichtlich unbeantwortet lassen.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Salām bedeutet: Ein Friedensgruß.",
+      "source": "kids/data/academy-vocabulary-voice-plan-v24.json",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-salam",
+          "kind": "glossary",
+          "age": "4-5"
+        }
+      ],
+      "kind": "glossary",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Salām bedeutet: Ein Friedensgruß.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Salām ist unser freundlicher Gruß. Wir wünschen Frieden.",
+      "source": "kids/data/academy-vocabulary-voice-plan-v24.json",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-salam",
+          "kind": "glossary",
+          "age": "6-8"
+        }
+      ],
+      "kind": "glossary",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Salām ist unser freundlicher Gruß. Wir wünschen Frieden.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Salām bedeutet: As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh ist ein islamischer Friedensgruß. Wir antworten respektvoll und freundlich.",
+      "source": "kids/data/academy-vocabulary-voice-plan-v24.json",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-salam",
+          "kind": "glossary",
+          "age": "9-10"
+        }
+      ],
+      "kind": "glossary",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Salām bedeutet: As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh ist ein islamischer Friedensgruß. Wir antworten respektvoll und freundlich.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    }
+  ]
+}
