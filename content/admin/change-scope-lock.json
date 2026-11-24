@@ -155,6 +155,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "dar-admin-bildstudio-owner-live-release-20261124",
+      "at": "2026-11-24T15:25:00+01:00",
+      "approvedBy": "user-explicit-20261124-push-live-dar-admin-bildstudio",
+      "reason": "Eng begrenzte Eigentümerfreigabe für den am 24.11.2026 ausdrücklich angeforderten Live-Push des bereits geprüften DĀR Admin Bildstudios (PR #1872); exakt diese vier neuen Admin-/Regressionsdateien. Die beiden Originalbild-Master, das vorhandene Redaktionsatelier, die serverseitige signierte Eigentümersitzung und alle Release-/CI-/Schutzsperren bleiben erhalten. Keine Freigabe für Visitor, Kids, Q, Frauen, OneSignal, Worker-Secrets oder sonstige Änderungen; globalLock bleibt aktiv.",
+      "paths": [
+        "admin/command-center-v2.js",
+        "admin/social-review.css",
+        "admin/social-review.js",
+        "scripts/test-admin-social-studio-integration.cjs"
+      ],
+      "expiresAt": "2026-11-25T23:59:00+01:00"
+    },
+    {
       "id": "frauen-batch16-owner-production-20261122",
       "at": "2026-11-22T16:01:58.730Z",
       "approvedBy": "owner-explicit-20261122-repeat-authorize-release-16-women-posts-focus-and-one-notification",
