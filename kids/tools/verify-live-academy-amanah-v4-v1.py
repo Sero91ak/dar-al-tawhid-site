@@ -65,12 +65,19 @@ def main():
             time.sleep(15)
     def verify(item):
         title,e=item
-        data,mime=fetch(e["url"])
-        if mime not in ("audio/mp4","audio/x-m4a","application/octet-stream","video/mp4"):
-            raise RuntimeError("Non-M4A media MIME "+title)
-        if len(data)<1200 or sha(data)!=e["sha256"]:
-            raise RuntimeError("Wrong public original owner V4 media bytes "+title)
-        return len(data)
+        for attempt in range(4):
+            try:
+                data,mime=fetch(e["url"])
+                if mime not in ("audio/mp4","audio/x-m4a","application/octet-stream","video/mp4"):
+                    raise RuntimeError("Non-M4A media MIME: "+mime)
+                if len(data)<1200 or sha(data)!=e["sha256"]:
+                    raise RuntimeError("Wrong public original owner V4 media bytes")
+                return len(data)
+            except Exception as exc:
+                if attempt==3:
+                    raise RuntimeError("PUBLIC MASTER AUDIO NOT DELIVERED: "+e["url"]+
+                        " childText="+repr(title)+" underlying="+repr(exc)) from exc
+                time.sleep(10)
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
         sizes=list(pool.map(verify,sorted(expected.items())))
     ages={ctx.get("age") for e in plan["entries"] for ctx in e["contexts"]}
