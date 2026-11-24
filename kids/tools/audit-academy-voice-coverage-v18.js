@@ -17,8 +17,9 @@ function validV4(entry){
  // recordings use DIFFERENT proof paths. Never claim the Creative connector
  // applied unsupported speed/style, pronunciation dictionary or full kids_story.
  if(entry.sameAsApprovedKidsStoryProfile===true)return true;
- if((entry.sourceLessonId==="akhlaq-sabr"||entry.sourceLessonId==="akhlaq-amanah")
-    &&entry.sourceSubject==="akhlaq"
+ if(((entry.sourceLessonId==="akhlaq-sabr"||entry.sourceLessonId==="akhlaq-amanah")
+      &&entry.sourceSubject==="akhlaq") ||
+    (entry.sourceLessonId==="adab-salam"&&entry.sourceSubject==="adab"))
     &&entry.sourceType==="owner-V4-dialogue-segmented-de-ar"){
   return entry.approvedForPlayback===true
    &&entry.qaStatus==="owner-authorized-automated-technical-audit"
