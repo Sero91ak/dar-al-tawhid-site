@@ -8,11 +8,11 @@
     "6-8",
     "9-10"
   ],
-  "productionPhase": "source-reviewed-ready-for-owner-V4-generation",
+  "productionPhase": "owner-authorized-32-real-v4-complete-pending-live",
   "priorTopic": "akhlaq-sabr",
   "priorTopicLiveConfirmed": true,
-  "liveDeploymentAllowed": false,
-  "paymentGenerationAllowed": true,
+  "liveDeploymentAllowed": true,
+  "paymentGenerationAllowed": false,
   "sourceMaterial": [
     {
       "type": "quran",
@@ -71,7 +71,7 @@
     "6-8": true,
     "9-10": true
   },
-  "status": "prepared-not-generated-not-live",
+  "status": "32-playable-owner-v4-audios-27-new-5-reused-live-verification-pending",
   "entries": [
     {
       "visibleText": "Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten.",
@@ -86,9 +86,11 @@
       "kind": "narration",
       "arabicFushaSegmentationRequired": true,
       "spokenText": "Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-f3ef45e004a74636adb14c63.m4a",
+      "sha256": "f3ef45e004a74636adb14c636ecad8083119bbc20fc4b55466652979f1ad7b35"
     },
     {
       "visibleText": "Eine anvertraute Sache soll ich sorgfältig behandeln.",
@@ -103,9 +105,11 @@
       "kind": "narration",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Eine anvertraute Sache soll ich sorgfältig behandeln.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-d45692cdedfcdf7df1a7875f.m4a",
+      "sha256": "d45692cdedfcdf7df1a7875f2cc35d5d13793a58c16c104eba6b9f2c6ee6926e"
     },
     {
       "visibleText": "Eine anvertraute Sache soll ich sorgfältig behandeln. Ich bin zuverlässig, wenn mir jemand etwas anvertraut.",
@@ -120,9 +124,11 @@
       "kind": "narration",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Eine anvertraute Sache soll ich sorgfältig behandeln. Ich bin zuverlässig, wenn mir jemand etwas anvertraut.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-d13fcd5955da1e1458b545bb.m4a",
+      "sha256": "d13fcd5955da1e1458b545bb2386a881a96d3efc98bc64b7af7730e6350d4292"
     },
     {
       "visibleText": "Ich bin zuverlässig, wenn mir jemand etwas anvertraut.",
@@ -137,9 +143,11 @@
       "kind": "summary",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Ich bin zuverlässig, wenn mir jemand etwas anvertraut.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-4d76cbc570c02590bed665e7.m4a",
+      "sha256": "4d76cbc570c02590bed665e7c9b9a5eea926046d71c1e4fb4aec550cbd0ca119"
     },
     {
       "visibleText": "Ich frage, bevor ich etwas weitergebe.",
@@ -154,9 +162,11 @@
       "kind": "narration",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Ich frage, bevor ich etwas weitergebe.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-4aaa7e896c046d4bb7e35e7a.m4a",
+      "sha256": "4aaa7e896c046d4bb7e35e7a1c1c453a2fbf1e5adcfce0c5730ef869987fcf43"
     },
     {
       "visibleText": "Ich gebe es zuverlässig zurück.",
@@ -171,9 +181,11 @@
       "kind": "narration",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Ich gebe es zuverlässig zurück.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-c7fce871a3b259e7f9b15308.m4a",
+      "sha256": "c7fce871a3b259e7f9b1530810788f01393408c18bd6a9be14f6d2a50efa2b81"
     },
     {
       "visibleText": "Ich gehe gut mit geliehenen Sachen um.",
@@ -188,9 +200,11 @@
       "kind": "summary",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Ich gehe gut mit geliehenen Sachen um.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-30eb22743a271d61415aa6d8.m4a",
+      "sha256": "30eb22743a271d61415aa6d8a8cf6420914a45dc777c88d45758a375809b270d"
     },
     {
       "visibleText": "Ich gehe sorgfältig damit um.",
@@ -205,9 +219,11 @@
       "kind": "narration",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Ich gehe sorgfältig damit um.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-99305bf9ddec4fe227ffd69f.m4a",
+      "sha256": "99305bf9ddec4fe227ffd69fc3b266da017e820e88ab9e6df073d634615983b4"
     },
     {
       "visibleText": "Jemand leiht mir ein Buch oder Spielzeug.",
@@ -222,9 +238,11 @@
       "kind": "narration",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Jemand leiht mir ein Buch oder Spielzeug.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-4b09de69e1ba523eb0a3cefe.m4a",
+      "sha256": "4b09de69e1ba523eb0a3cefebe555941ac38055940b36c8a489451e9ab5dd906"
     },
     {
       "visibleText": "Qurʾān: Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten. Sunnah: Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten.",
@@ -239,9 +257,11 @@
       "kind": "narration",
       "arabicFushaSegmentationRequired": true,
       "spokenText": "Qurʾān: Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten. Sunnah: Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-8579aed69be3a93afba08f4e.m4a",
+      "sha256": "8579aed69be3a93afba08f4ebf4331f5ab7c79428cd81a744530ba7cdb64d6fe"
     },
     {
       "visibleText": "Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten. Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten.",
@@ -256,9 +276,11 @@
       "kind": "summary",
       "arabicFushaSegmentationRequired": true,
       "spokenText": "Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten. Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-6ea6212f16bd9c4d66e0fd5f.m4a",
+      "sha256": "6ea6212f16bd9c4d66e0fd5fcbdfd8bb2a14e96a95bc676afae50b7292ab1728"
     },
     {
       "visibleText": "Du bekommst ein Buch geliehen. Was tust du?",
@@ -283,9 +305,11 @@
       "kind": "question",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Du bekommst ein Buch geliehen. Was tust du?",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-c90b5576b7fc159562ce6e61.m4a",
+      "sha256": "c90b5576b7fc159562ce6e61b03610ac67ab82332a8612d4892dbbb4a6ffd2e6"
     },
     {
       "visibleText": "Was möchten wir uns heute merken?",
@@ -302,7 +326,7 @@
       "spokenText": "Was möchten wir uns heute merken?",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": true,
+      "liveVerified": false,
       "reusedExistingApprovedOwnerV4": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-0eb818f6d5a880454b476051.m4a",
       "sha256": "0eb818f6d5a880454b47605189d9bf12012267ca9eddac2cf3f21eaf3ea97681",
@@ -323,7 +347,7 @@
       "spokenText": "Wo lernen wir mehr über dieses Thema?",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": true,
+      "liveVerified": false,
       "reusedExistingApprovedOwnerV4": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-873f4d49eb7e46d4000b9b36.m4a",
       "sha256": "873f4d49eb7e46d4000b9b36e859bf153ce6bafdd79c1647dbd8bcb5012a54b8",
@@ -352,9 +376,11 @@
       "kind": "answer",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Ich behandle es gut und gebe es zurück.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-9127c9f38680519d7de6de7c.m4a",
+      "sha256": "9127c9f38680519d7de6de7c07379785037926c7528452ab8146872fd227ad74"
     },
     {
       "visibleText": "Antwort 1: Ich gehe gut mit geliehenen Sachen um.",
@@ -369,9 +395,11 @@
       "kind": "answer",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Ich gehe gut mit geliehenen Sachen um.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-30eb22743a271d61415aa6d8.m4a",
+      "sha256": "30eb22743a271d61415aa6d8a8cf6420914a45dc777c88d45758a375809b270d"
     },
     {
       "visibleText": "Antwort 1: Im Qurʾān und in der authentischen Sunnah.",
@@ -388,7 +416,7 @@
       "spokenText": "Im Qurʾān und in der authentischen Sunnah.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": true,
+      "liveVerified": false,
       "reusedExistingApprovedOwnerV4": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-414553471cb676c7be7c52a4.m4a",
       "sha256": "414553471cb676c7be7c52a47b6fce6ebb1ff94975a2a2e20de84dd5e651700d",
@@ -417,9 +445,11 @@
       "kind": "answer",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Ich gebe es ohne Fragen weiter.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-8126ba0ab770f59544a380a6.m4a",
+      "sha256": "8126ba0ab770f59544a380a640d420c8a933ef01249dfd1ba117cf3bff1bb5f8"
     },
     {
       "visibleText": "Antwort 2: Ich muss das Gelernte nicht beachten.",
@@ -436,7 +466,7 @@
       "spokenText": "Ich muss das Gelernte nicht beachten.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": true,
+      "liveVerified": false,
       "reusedExistingApprovedOwnerV4": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-79134e3b3b9825627c7fe233.m4a",
       "sha256": "79134e3b3b9825627c7fe23314e427f5bde0f94ad54171a79214a931a61dacbc",
@@ -457,7 +487,7 @@
       "spokenText": "Wir müssen uns die Regeln selbst ausdenken.",
       "providerGenerated": true,
       "mediaImported": true,
-      "liveVerified": true,
+      "liveVerified": false,
       "reusedExistingApprovedOwnerV4": true,
       "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-ef5d43874fef6004ef3b0a16.m4a",
       "sha256": "ef5d43874fef6004ef3b0a16359862ce83253270df6a066943adee2edd787b52",
@@ -476,9 +506,11 @@
       "kind": "question",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Wie gehst du mit etwas um, das dir anvertraut wurde?",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-da0a08cda9a788a8ca23c229.m4a",
+      "sha256": "da0a08cda9a788a8ca23c2296a0e155b75cf5fe9dfe291c38d439680bb6f1cc8"
     },
     {
       "visibleText": "Antwort 1: Ich behandle es sorgfältig und gebe es zuverlässig zurück.",
@@ -493,9 +525,11 @@
       "kind": "answer",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Ich behandle es sorgfältig und gebe es zuverlässig zurück.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-c626223d68ea2b2402f3c158.m4a",
+      "sha256": "c626223d68ea2b2402f3c158aaaaaa6f0ccf7a27ad00f20417bd1642f6c4bcba"
     },
     {
       "visibleText": "Antwort 2: Ich gebe es ohne Erlaubnis an andere weiter.",
@@ -510,9 +544,11 @@
       "kind": "answer",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Ich gebe es ohne Erlaubnis an andere weiter.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-b44ea31e967126e18a75c919.m4a",
+      "sha256": "b44ea31e967126e18a75c91904462471ba020217136894c4f0e6b98f55429a2d"
     },
     {
       "visibleText": "Wie zeigst du Amānah, wenn du jemandem etwas versprochen hast?",
@@ -527,9 +563,11 @@
       "kind": "question",
       "arabicFushaSegmentationRequired": true,
       "spokenText": "Wie zeigst du Amānah, wenn du jemandem etwas versprochen hast?",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-8dcda6840477f5fa71b84e12.m4a",
+      "sha256": "8dcda6840477f5fa71b84e12b04f0e5b4a83ded205cfcb2b70aac20966e25267"
     },
     {
       "visibleText": "Antwort 1: Ich halte mein Versprechen und bin zuverlässig.",
@@ -544,9 +582,11 @@
       "kind": "answer",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Ich halte mein Versprechen und bin zuverlässig.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-e58a31cc71a18cd180adc605.m4a",
+      "sha256": "e58a31cc71a18cd180adc6057195d0d35fb73b96ea2f83c16f4e9777e6c5381d"
     },
     {
       "visibleText": "Antwort 2: Ich ignoriere das Versprechen, sobald es schwierig wird.",
@@ -561,9 +601,11 @@
       "kind": "answer",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Ich ignoriere das Versprechen, sobald es schwierig wird.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-60559cecbe52368b4e020061.m4a",
+      "sha256": "60559cecbe52368b4e020061ded7d0f00bbabc9e112ead50818c5bf27df4d3d2"
     },
     {
       "visibleText": "Was lehren Qurʾān 23:8 und Sunnah über anvertraute Dinge?",
@@ -578,9 +620,11 @@
       "kind": "question",
       "arabicFushaSegmentationRequired": true,
       "spokenText": "Was lehren Qurʾān 23:8 und Sunnah über anvertraute Dinge?",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-cf21cb55c40fc0af491e4d71.m4a",
+      "sha256": "cf21cb55c40fc0af491e4d717a5ca6cf9427e5316b3c6c7d69a6410a22ee8330"
     },
     {
       "visibleText": "Antwort 1: Wir sollen anvertraute Dinge schützen und unsere Versprechen einhalten.",
@@ -595,9 +639,11 @@
       "kind": "answer",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Wir sollen anvertraute Dinge schützen und unsere Versprechen einhalten.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-43bc4aa93cf603e1261ed0f1.m4a",
+      "sha256": "43bc4aa93cf603e1261ed0f1a430b5055f80603404cbaa2556ad9abc1c4d568f"
     },
     {
       "visibleText": "Antwort 2: Anvertraute Dinge darf man ohne Rücksprache weitergeben.",
@@ -612,9 +658,11 @@
       "kind": "answer",
       "arabicFushaSegmentationRequired": false,
       "spokenText": "Anvertraute Dinge darf man ohne Rücksprache weitergeben.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-7124ea3f2a93194d80b6c3a5.m4a",
+      "sha256": "7124ea3f2a93194d80b6c3a5e91bb0519238b2507ea52a49693914f967ceeba7"
     },
     {
       "visibleText": "Amānah bedeutet: Auf etwas gut aufpassen.",
@@ -629,9 +677,11 @@
       "kind": "glossary",
       "arabicFushaSegmentationRequired": true,
       "spokenText": "Amānah bedeutet: Auf etwas gut aufpassen.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-faf3ce01b30d793f8d3dbebf.m4a",
+      "sha256": "faf3ce01b30d793f8d3dbebf23722ac6fdc2bccb06bdfaeea43bf85e31dcb478"
     },
     {
       "visibleText": "Amānah bedeutet etwas, das dir anvertraut wurde, sorgsam zu behandeln.",
@@ -646,9 +696,11 @@
       "kind": "glossary",
       "arabicFushaSegmentationRequired": true,
       "spokenText": "Amānah bedeutet etwas, das dir anvertraut wurde, sorgsam zu behandeln.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-12a633a96f83304b9b16ead7.m4a",
+      "sha256": "12a633a96f83304b9b16ead7407ec863eba3ef1f4241ea18338d861a2b8e66ae"
     },
     {
       "visibleText": "Amānah ist eine anvertraute Sache oder Verantwortung, die wir ehrlich und zuverlässig erfüllen sollen.",
@@ -663,9 +715,11 @@
       "kind": "glossary",
       "arabicFushaSegmentationRequired": true,
       "spokenText": "Amānah ist eine anvertraute Sache oder Verantwortung, die wir ehrlich und zuverlässig erfüllen sollen.",
-      "providerGenerated": false,
-      "mediaImported": false,
-      "liveVerified": false
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": false,
+      "mediaUrl": "/kids/assets/kids-academy-audio/amanah-v4-50ca9d9035bc54d1776f0e45.m4a",
+      "sha256": "50ca9d9035bc54d1776f0e451f28b86c63fcc6fdb24728ca0a96b08f3b3a079f"
     }
   ]
 }
