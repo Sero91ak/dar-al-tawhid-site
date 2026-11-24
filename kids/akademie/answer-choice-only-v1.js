@@ -94,6 +94,24 @@
       wrong="Anvertraute Dinge darf man ohne Rücksprache weitergeben.";
     }
   }
+  // Salām: retain the canonical full Arabic greeting in the first
+  // question; replace only three older open writing questions with
+  // age-appropriate, source-true audible selection.
+  if(lesson?.id==="adab-salam"){
+    if(age==="6-8"&&index===1){
+      prompt="Wie antwortest du auf den islamischen Friedensgruß?";
+      correct="Ich sage: Wa ʿalaykumu s-salām wa raḥmatullāhi wa barakātuh.";
+      wrong="Ich ignoriere den Gruß absichtlich.";
+    }else if(age==="9-10"&&index===1){
+      prompt="Warum verbreiten wir den Salām untereinander?";
+      correct="Wir wünschen Frieden und begegnen einander freundlich und respektvoll.";
+      wrong="Wir grüßen nur, wenn wir dafür eine Belohnung von Menschen bekommen.";
+    }else if(age==="9-10"&&index===2){
+      prompt="Was lehren Qurʾān 4:86 und die Sunnah über den Friedensgruß?";
+      correct="Wir beantworten den Gruß mindestens gleichwertig und verbreiten den Salām.";
+      wrong="Einen freundlichen Gruß soll man absichtlich unbeantwortet lassen.";
+    }
+  }
   const result={...q,type:"choice",prompt,options:[correct,wrong],correct:0,
    explain:clean(q.sample||q.explain||lesson?.goal||correct),
    hint:clean(q.hint||lesson?.hint||"Denke an unseren Unterricht."),
