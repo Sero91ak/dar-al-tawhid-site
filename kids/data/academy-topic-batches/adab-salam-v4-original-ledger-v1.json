@@ -3,7 +3,17 @@
   "topic": "adab-salam",
   "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "modelId": "eleven_v4",
-  "requests": {},
+  "requests": {
+    "edc0e86f10c92ea08151a68c": {
+      "state": "attempt-started-never-auto-retry",
+      "lang": "de",
+      "textSha256": "4033cf0a3b7769b73a96306ef29c127e4a43682937b57f9a485a54bf094214f8",
+      "createdAt": "2026-11-24T10:36:00.615450+00:00",
+      "sequence": 2,
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4"
+    }
+  },
   "policy": "mark-paid-attempt-and-commit-before-POST; never auto-retry uncertain request",
   "createdAt": "2026-11-24T10:35:58.274036+00:00",
   "publicLiveVerified": false,
