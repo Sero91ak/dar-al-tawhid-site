@@ -654,13 +654,63 @@ function mirrorFriday(){
  target.replaceChildren(inner);
 }
 
+/* VISITOR_LANDSCAPE_SINGLE_HOME_OWNER_V1
+ * The active parity Home and the older #appView/dv3Home share the page.
+ * A landscape layout override can make both Home renderers visible.
+ * Keep the portrait parity view as the only landscape Home owner.
+ * Do not remove native tabs, replace DOM, restart the app or touch Push.
+ */
+var landscapeHiddenApp=null,landscapeAppOriginal=null;
+function lockLandscapeHome(root){
+ var body=document.body;
+ var app=document.getElementById("appView");
+ var home=!!(body&&body.classList.contains("is-home-route"));
+ var landscape=window.innerWidth>window.innerHeight;
+ var hide=!!(home&&landscape&&root&&root.isConnected&&app&&!app.contains(root));
+ if(landscapeHiddenApp&&(!hide||landscapeHiddenApp!==app)){
+  var old=landscapeHiddenApp,original=landscapeAppOriginal;
+  if(original){
+   if(old.style.getPropertyValue("display")==="none"&&
+      old.style.getPropertyPriority("display")==="important"){
+    if(original.display)old.style.setProperty("display",original.display,original.priority);
+    else old.style.removeProperty("display");
+   }
+   if(original.ariaHidden===null)old.removeAttribute("aria-hidden");
+   else old.setAttribute("aria-hidden",original.ariaHidden);
+   if(original.inert)old.setAttribute("inert","");
+   else old.removeAttribute("inert");
+  }
+  old.removeAttribute("data-dar-parity-landscape-hidden");
+  landscapeHiddenApp=null;landscapeAppOriginal=null;
+ }
+ if(!hide)return;
+ if(landscapeHiddenApp!==app){
+  landscapeHiddenApp=app;
+  landscapeAppOriginal={
+   display:app.style.getPropertyValue("display"),
+   priority:app.style.getPropertyPriority("display"),
+   ariaHidden:app.getAttribute("aria-hidden"),
+   inert:app.hasAttribute("inert")
+  };
+ }
+ if(app.style.getPropertyValue("display")!=="none"||
+    app.style.getPropertyPriority("display")!=="important")
+  app.style.setProperty("display","none","important");
+ if(app.getAttribute("aria-hidden")!=="true")app.setAttribute("aria-hidden","true");
+ if(!app.hasAttribute("inert"))app.setAttribute("inert","");
+ app.setAttribute("data-dar-parity-landscape-hidden","1");
+}
 function sync(){
- if(!document.body||!document.body.classList.contains("is-home-route"))return;
- var root=create();if(!root)return;
+ if(!document.body||!document.body.classList.contains("is-home-route")){
+  lockLandscapeHome(null);return;
+ }
+ var root=create();
+ lockLandscapeHome(root);
+ if(!root)return;
  updateBrand();recent();quran();modal();mirrorFriday();restoreDarHomeScroll();
 }
 function queue(){
- if(pending||!document.body||!document.body.classList.contains("is-home-route"))return;
+ if(pending||!document.body)return;
  pending=true;
  requestAnimationFrame(function(){pending=false;try{sync()}catch(e){console.warn("Visitor Home parity",e)}});
 }
@@ -717,6 +767,10 @@ function init(){
  document.addEventListener("dar:view-rendered",queue);
  window.addEventListener("hashchange",queue);
  window.addEventListener("pageshow",queue);
+ // Keep one Home during iPad/Fold/phone rotations without a second render.
+ window.addEventListener("resize",queue,{passive:true});
+ window.addEventListener("orientationchange",queue,{passive:true});
+ window.addEventListener("dar:layoutchange",queue,{passive:true});
  setTimeout(queue,500);setTimeout(queue,1800);
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
