@@ -3265,7 +3265,8 @@ function printWeeklyReport(){
   '<h2>Tagesverlauf</h2>'+daily.map(row=>'<div class="row"><span>'+esc(weeklyDate(row.day))+'</span><b>'+weeklyNumber(row.page_views)+' Seiten · '+weeklyNumber(row.post_views)+' Beiträge</b></div>').join("")+
   '<h2>Meistgelesene Beiträge</h2>'+top.map((row,i)=>'<div class="row"><span>'+(i+1)+'. '+esc(cleanTitle(row.title||row.id))+'</span><b>'+weeklyNumber(row.views)+'</b></div>').join("")+
   '<div class="note">Datenquelle: Supabase / site_events. Technische Ereigniszahlen, keine nachgewiesene Besucherzahl. iOS-Downloads und PWA-Neuinstallationen sind nicht verifiziert; keine künstlichen Schätzungen.</div>'+
-  '</body></html>';
+  '<!-- DAR_ADMIN_BILDSTUDIO_LIVE_RELEASE_V1: owner-approved scope, signed-session route, 2026-11-24 -->
+</body></html>';
   const w=window.open("","_blank");
   if(!w){toast("Pop-up blockiert. Bitte Pop-ups für das Admin-Zentrum erlauben.");return}
   w.document.open();w.document.write(html);w.document.close();w.focus();
