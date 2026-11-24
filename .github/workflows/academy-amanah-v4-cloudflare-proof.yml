@@ -1,0 +1,27 @@
+name: KIDS Academy Amānah 32 V4 Public Cloudflare Audio Hash Proof
+on:
+  workflow_dispatch:
+  # Public delivery is valid only after the single canonical Worker production
+  # deploy actually reports success; a GitHub Pages success proves nothing here.
+  workflow_run:
+    workflows: ["Deploy Besucher-App (Cloudflare Workers)"]
+    types: [completed]
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verified-live:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            kids/data/academy-audio.json
+            kids/data/academy-topic-batches/akhlaq-amanah-preproduction-v1.json
+            kids/assets/kids-academy-audio/
+            kids/tools/verify-live-academy-amanah-v4-v1.py
+          sparse-checkout-cone-mode: false
+      - name: Compare all 32 publicly served Amānah audio files with SHA from main
+        run: python3 kids/tools/verify-live-academy-amanah-v4-v1.py
