@@ -1,6 +1,10 @@
 name: KIDS Academy Amānah 32 V4 Public Cloudflare Audio Hash Proof
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/academy-amanah-v4-cloudflare-proof.yml'
   # Public delivery is valid only after the single canonical Worker production
   # deploy actually reports success; a GitHub Pages success proves nothing here.
   workflow_run:
