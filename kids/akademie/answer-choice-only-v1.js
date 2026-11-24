@@ -76,6 +76,24 @@
       wrong="Geduld spielt keine Rolle, wenn etwas schwierig wird.";
     }
   }
+  // Amānah: age-specific choice-only questions must use real trust and
+  // responsible conduct, not a generic essay prompt or a misleading
+  // claim that a Qurʾān verse and hadith need identical wording.
+  if(lesson?.id==="akhlaq-amanah"){
+    if(age==="6-8"&&index===1){
+      prompt="Wie gehst du mit etwas um, das dir anvertraut wurde?";
+      correct="Ich behandle es sorgfältig und gebe es zuverlässig zurück.";
+      wrong="Ich gebe es ohne Erlaubnis an andere weiter.";
+    }else if(age==="9-10"&&index===1){
+      prompt="Wie zeigst du Amānah, wenn du jemandem etwas versprochen hast?";
+      correct="Ich halte mein Versprechen und bin zuverlässig.";
+      wrong="Ich ignoriere das Versprechen, sobald es schwierig wird.";
+    }else if(age==="9-10"&&index===2){
+      prompt="Was lehren Qurʾān 23:8 und Sunnah über anvertraute Dinge?";
+      correct="Wir sollen anvertraute Dinge schützen und unsere Versprechen einhalten.";
+      wrong="Anvertraute Dinge darf man ohne Rücksprache weitergeben.";
+    }
+  }
   const result={...q,type:"choice",prompt,options:[correct,wrong],correct:0,
    explain:clean(q.sample||q.explain||lesson?.goal||correct),
    hint:clean(q.hint||lesson?.hint||"Denke an unseren Unterricht."),
