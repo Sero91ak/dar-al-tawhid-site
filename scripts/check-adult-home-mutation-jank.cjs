@@ -90,6 +90,7 @@ assert.match(home, /target\.childNodes\.length\)target\.replaceChildren\(\)/, "F
 assert.match(home, /observe\(top,\{subtree:false,childList:true\}\)/, "prayer clock text must not cause continuous Home sync");
 assert.ok(motion.includes("var stepped=Math.round(progress*100)/100"), "scroll paint progress must be coalesced");
 const routerSource = fs.readFileSync(path.join(root, "cloudflare/site-router.js"), "utf8");
-assert.ok(routerSource.includes("/assets/dar-home-test-parity-visitor.js?v=20261111-home-performance-v1"), "fresh Home asset revision missing");
+assert.ok(routerSource.includes("/assets/dar-home-test-parity-visitor.js?v=20261124-single-home-boot-v2"), "fresh Home asset revision missing");
+assert.ok(routerSource.includes("darVisitorHomeBootstrapV2"), "native/PWA HTML must ensure the canonical Home mounts after orientation");
 assert.ok(routerSource.includes("/assets/adult-hero-height-runtime-v1403.js?v=visitor-hero-safearea-v1404-20261111-scroll-performance-v1"), "fresh Hero scroll asset revision missing");
 console.log("ADULT HOME MUTATION JANK: OK");
