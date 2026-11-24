@@ -1,0 +1,671 @@
+{
+  "schemaVersion": 1,
+  "id": "TAWHID_KIDS_AMANAH_SOURCE_BACKED_V4_PREPRODUCTION_V1",
+  "topicId": "akhlaq-amanah",
+  "topic": "Amānah – Vertrauenswürdigkeit",
+  "ageBands": [
+    "4-5",
+    "6-8",
+    "9-10"
+  ],
+  "productionPhase": "source-reviewed-ready-for-owner-V4-generation",
+  "priorTopic": "akhlaq-sabr",
+  "priorTopicLiveConfirmed": true,
+  "liveDeploymentAllowed": false,
+  "paymentGenerationAllowed": true,
+  "sourceMaterial": [
+    {
+      "type": "quran",
+      "reference": "23:8",
+      "canonicalArabic": "وَالَّذِينَ هُمْ لِأَمَانَاتِهِمْ وَعَهْدِهِمْ رَاعُونَ",
+      "translationInCurriculum": "Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten.",
+      "originalReciterRequired": true,
+      "url": "https://quran.com/23/8"
+    },
+    {
+      "type": "hadith",
+      "reference": "Ṣaḥīḥ al-Buḫārī 33",
+      "usage": "child-friendly paraphrase; not a verbatim hadith translation",
+      "url": "https://sunnah.com/bukhari:33"
+    }
+  ],
+  "rules": {
+    "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+    "modelId": "eleven_v4",
+    "speaker": "Serhat Abu Malik – Master",
+    "noOriginalRegeneration": true,
+    "zeroSynthesizedQuranRecitation": true,
+    "retainReligiousSourcesAsMetadataNotChildNarration": true,
+    "stripAnswerNumberFromSpokenAudio": true,
+    "useNativeArabicFushaSegments": true,
+    "existingApprovedOwnerV4ClipsReused": 5,
+    "noPublicApprovalUntilActualMediaVerified": true,
+    "ownerAuthorizedNoManualPrelisten": true,
+    "preserveExistingChildProgress": true
+  },
+  "sourcePhraseCount": 23,
+  "obsoleteOriginalPromptsExcluded": [
+    {
+      "originalVisibleText": "Erkläre mit deinen Worten: Vertrauen – wie kannst du es im Alltag üben?",
+      "doNotGenerate": true,
+      "replacementReason": "not visible after age-specific child choice-only projection"
+    },
+    {
+      "originalVisibleText": "Erkläre, wie sich Vertrauen in einer Alltagssituation zeigen kann.",
+      "doNotGenerate": true,
+      "replacementReason": "not visible after age-specific child choice-only projection"
+    },
+    {
+      "originalVisibleText": "Was ist der gemeinsame Lehrgedanke des Qurʾān-Verses 23:8 und der genannten Überlieferung?",
+      "doNotGenerate": true,
+      "replacementReason": "not visible after age-specific child choice-only projection"
+    }
+  ],
+  "glossaryCount": 3,
+  "adaptedQuestionAnswerCount": 9,
+  "distinctPreflightPhrases": 32,
+  "preExistingApprovedPhrases": 5,
+  "uniqueNewChildPhrasesToRender": 27,
+  "childrenAgeSourceCoverage": {
+    "4-5": true,
+    "6-8": true,
+    "9-10": true
+  },
+  "status": "prepared-not-generated-not-live",
+  "entries": [
+    {
+      "visibleText": "Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Eine anvertraute Sache soll ich sorgfältig behandeln.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Eine anvertraute Sache soll ich sorgfältig behandeln.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Eine anvertraute Sache soll ich sorgfältig behandeln. Ich bin zuverlässig, wenn mir jemand etwas anvertraut.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Eine anvertraute Sache soll ich sorgfältig behandeln. Ich bin zuverlässig, wenn mir jemand etwas anvertraut.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich bin zuverlässig, wenn mir jemand etwas anvertraut.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "summary",
+          "age": "all"
+        }
+      ],
+      "kind": "summary",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich bin zuverlässig, wenn mir jemand etwas anvertraut.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich frage, bevor ich etwas weitergebe.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich frage, bevor ich etwas weitergebe.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich gebe es zuverlässig zurück.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich gebe es zuverlässig zurück.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich gehe gut mit geliehenen Sachen um.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "summary",
+          "age": "all"
+        }
+      ],
+      "kind": "summary",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich gehe gut mit geliehenen Sachen um.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich gehe sorgfältig damit um.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich gehe sorgfältig damit um.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Jemand leiht mir ein Buch oder Spielzeug.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Jemand leiht mir ein Buch oder Spielzeug.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Qurʾān: Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten. Sunnah: Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "narration",
+          "age": "all"
+        }
+      ],
+      "kind": "narration",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Qurʾān: Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten. Sunnah: Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten. Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "summary",
+          "age": "all"
+        }
+      ],
+      "kind": "summary",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Und diejenigen, die auf anvertraute Dinge und ihre Vereinbarungen achten. Der Prophet ﷺ warnte davor, anvertraute Dinge zu verraten.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Du bekommst ein Buch geliehen. Was tust du?",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Du bekommst ein Buch geliehen. Was tust du?",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Was möchten wir uns heute merken?",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Was möchten wir uns heute merken?",
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": true,
+      "reusedExistingApprovedOwnerV4": true,
+      "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-0eb818f6d5a880454b476051.m4a",
+      "sha256": "0eb818f6d5a880454b47605189d9bf12012267ca9eddac2cf3f21eaf3ea97681",
+      "sourceLessonIdOriginal": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Wo lernen wir mehr über dieses Thema?",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Wo lernen wir mehr über dieses Thema?",
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": true,
+      "reusedExistingApprovedOwnerV4": true,
+      "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-873f4d49eb7e46d4000b9b36.m4a",
+      "sha256": "873f4d49eb7e46d4000b9b36e859bf153ce6bafdd79c1647dbd8bcb5012a54b8",
+      "sourceLessonIdOriginal": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Antwort 1: Ich behandle es gut und gebe es zurück.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich behandle es gut und gebe es zurück.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Ich gehe gut mit geliehenen Sachen um.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich gehe gut mit geliehenen Sachen um.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Im Qurʾān und in der authentischen Sunnah.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Im Qurʾān und in der authentischen Sunnah.",
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": true,
+      "reusedExistingApprovedOwnerV4": true,
+      "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-414553471cb676c7be7c52a4.m4a",
+      "sha256": "414553471cb676c7be7c52a47b6fce6ebb1ff94975a2a2e20de84dd5e651700d",
+      "sourceLessonIdOriginal": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Antwort 2: Ich gebe es ohne Fragen weiter.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich gebe es ohne Fragen weiter.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Ich muss das Gelernte nicht beachten.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich muss das Gelernte nicht beachten.",
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": true,
+      "reusedExistingApprovedOwnerV4": true,
+      "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-79134e3b3b9825627c7fe233.m4a",
+      "sha256": "79134e3b3b9825627c7fe23314e427f5bde0f94ad54171a79214a931a61dacbc",
+      "sourceLessonIdOriginal": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Antwort 2: Wir müssen uns die Regeln selbst ausdenken.",
+      "source": "kids/data/academy-voice-plan-v9.json",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Wir müssen uns die Regeln selbst ausdenken.",
+      "providerGenerated": true,
+      "mediaImported": true,
+      "liveVerified": true,
+      "reusedExistingApprovedOwnerV4": true,
+      "mediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-ef5d43874fef6004ef3b0a16.m4a",
+      "sha256": "ef5d43874fef6004ef3b0a16359862ce83253270df6a066943adee2edd787b52",
+      "sourceLessonIdOriginal": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Wie gehst du mit etwas um, das dir anvertraut wurde?",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Wie gehst du mit etwas um, das dir anvertraut wurde?",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Ich behandle es sorgfältig und gebe es zuverlässig zurück.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich behandle es sorgfältig und gebe es zuverlässig zurück.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Ich gebe es ohne Erlaubnis an andere weiter.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich gebe es ohne Erlaubnis an andere weiter.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wie zeigst du Amānah, wenn du jemandem etwas versprochen hast?",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Wie zeigst du Amānah, wenn du jemandem etwas versprochen hast?",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Ich halte mein Versprechen und bin zuverlässig.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich halte mein Versprechen und bin zuverlässig.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Ich ignoriere das Versprechen, sobald es schwierig wird.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Ich ignoriere das Versprechen, sobald es schwierig wird.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Was lehren Qurʾān 23:8 und Sunnah über anvertraute Dinge?",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ],
+      "kind": "question",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Was lehren Qurʾān 23:8 und Sunnah über anvertraute Dinge?",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Wir sollen anvertraute Dinge schützen und unsere Versprechen einhalten.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Wir sollen anvertraute Dinge schützen und unsere Versprechen einhalten.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Anvertraute Dinge darf man ohne Rücksprache weitergeben.",
+      "source": "kids/akademie/answer-choice-only-v1.js",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-amanah",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ],
+      "kind": "answer",
+      "arabicFushaSegmentationRequired": false,
+      "spokenText": "Anvertraute Dinge darf man ohne Rücksprache weitergeben.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Amānah bedeutet: Auf etwas gut aufpassen.",
+      "source": "kids/data/academy-vocabulary-voice-plan-v24.json",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-amanah",
+          "kind": "glossary",
+          "age": "4-5"
+        }
+      ],
+      "kind": "glossary",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Amānah bedeutet: Auf etwas gut aufpassen.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Amānah bedeutet etwas, das dir anvertraut wurde, sorgsam zu behandeln.",
+      "source": "kids/data/academy-vocabulary-voice-plan-v24.json",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-amanah",
+          "kind": "glossary",
+          "age": "6-8"
+        }
+      ],
+      "kind": "glossary",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Amānah bedeutet etwas, das dir anvertraut wurde, sorgsam zu behandeln.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Amānah ist eine anvertraute Sache oder Verantwortung, die wir ehrlich und zuverlässig erfüllen sollen.",
+      "source": "kids/data/academy-vocabulary-voice-plan-v24.json",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-amanah",
+          "kind": "glossary",
+          "age": "9-10"
+        }
+      ],
+      "kind": "glossary",
+      "arabicFushaSegmentationRequired": true,
+      "spokenText": "Amānah ist eine anvertraute Sache oder Verantwortung, die wir ehrlich und zuverlässig erfüllen sollen.",
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    }
+  ]
+}
