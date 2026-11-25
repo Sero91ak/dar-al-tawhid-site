@@ -112,6 +112,24 @@
       wrong="Einen freundlichen Gruß soll man absichtlich unbeantwortet lassen.";
     }
   }
+  // Gute Worte: exact age-specific child choices, immutable curriculum and progress.
+  if(lesson?.id==="adab-worte"){
+    if(age==="6-8"&&index===1){
+      prompt="Wie kannst du freundlich sprechen, wenn du dich ärgerst?";
+      correct="Ich denke kurz nach und antworte ruhig.";
+      wrong="Ich beleidige die andere Person.";
+    }
+    else if(age==="9-10"&&index===1){
+      prompt="Wie kannst du bei einem Streit gute Worte wählen?";
+      correct="Ich sage ehrlich und respektvoll, was mich stört.";
+      wrong="Ich verspotte die andere Person, damit ich gewinne.";
+    }
+    else if(age==="9-10"&&index===2){
+      prompt="Was lehren Qurʾān 17:53 und die Sunnah über unsere Worte?";
+      correct="Wir wählen gute Worte und verzichten auf verletzende Worte.";
+      wrong="Wir dürfen andere absichtlich mit unseren Worten verletzen.";
+    }
+  }
   const result={...q,type:"choice",prompt,options:[correct,wrong],correct:0,
    explain:clean(q.sample||q.explain||lesson?.goal||correct),
    hint:clean(q.hint||lesson?.hint||"Denke an unseren Unterricht."),
