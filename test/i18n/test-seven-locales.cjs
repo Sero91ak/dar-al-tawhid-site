@@ -3,7 +3,7 @@
 const assert=require("node:assert/strict"),fs=require("node:fs"),vm=require("node:vm"),path=require("node:path");
 const locales=JSON.parse(fs.readFileSync(path.join(__dirname,"adult-ui-locales-seven.json"),"utf8"));
 const code=fs.readFileSync(path.join(__dirname,"../assets/dar-test-turkish-ui.js"),"utf8");
-const expected=["de","tr","en","ar","ku","ckb","bs"];
+const expected=["de","tr","en","ar","ku","ckb","bs","fr","es"];
 assert.deepEqual(locales.availableLocales,expected);
 assert.equal(locales.noPaidProvider,true);
 assert.deepEqual(Object.keys(locales.translations).sort(),expected.filter(x=>x!=="de").sort());
@@ -51,4 +51,4 @@ assert.equal(nodes[0].nodeValue,"Startseite","German return must be lossless");
 const here=fs.readFileSync(path.join(__dirname,"../assets/dar-test-seven-languages-loader.js"),"utf8");
 assert(!here.includes("api.openai.com"),"Client must never use paid translation API");
 assert(here.includes("/test/i18n/adult-ui-locales-seven.json"),"Require fixed static same-origin locale pack");
-console.log("PASS: 7 languages in 3 language selectors, "+JSON.stringify(countByLocale)+", DE restoration, source protection and RTL");
+console.log("PASS: 9 languages in the shared selectors, "+JSON.stringify(countByLocale)+", DE restoration, source protection and RTL");

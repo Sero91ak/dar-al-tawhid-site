@@ -90,7 +90,7 @@ function abs(rel) {
 
 function gitLines(cmd) {
   try {
-    return execSync(cmd, { cwd: ROOT, encoding: "utf8" })
+    return execSync(cmd, { cwd: ROOT, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 })
       .trim()
       .split("\n")
       .filter(Boolean);

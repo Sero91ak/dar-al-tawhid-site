@@ -8,7 +8,7 @@ var ITEMS=[
  {code:"de",name:"Deutsch",dir:"ltr"},
  {code:"tr",name:"Türkçe",dir:"ltr"},
  {code:"en",name:"English",dir:"ltr"},
- {code:"ar",name:"العربية الفصحى",dir:"rtl"},
+ {code:"ar",name:"العربية",dir:"rtl"},
  {code:"ku",name:"Kurmancî",dir:"ltr"},
  {code:"ckb",name:"سۆرانی",dir:"rtl"},
  {code:"bs",name:"Bosanski",dir:"ltr"},
@@ -32,13 +32,14 @@ function t(){return text[read()]||text.de}
 function item(code){return ITEMS.find(function(x){return x.code===code})}
 function available(code){
  if(code==="de")return true;
+ if(TEST&&(code==="fr"||code==="es"))return false;
  if(TEST){
   var runtime=w.DarTestTurkishUI;
   if(!runtime||!Array.isArray(runtime.supportedLocales)||runtime.supportedLocales.indexOf(code)<0)return false;
   if(code==="tr")return runtime.translatedKeys>0;
   return w.__DarTestSevenLocalesReady===true&&typeof runtime.translatedFor==="function"&&runtime.translatedFor(code)>0;
  }
- return code==="tr"&&!!w.DARAdultUI18n&&w.DARAdultUI18n.translatedKeys>0;
+ return !!item(code);
 }
 function read(){
  var code="de";try{code=w.localStorage.getItem(KEY)||"de"}catch(_){}

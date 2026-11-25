@@ -35,9 +35,11 @@ try:
         driver.execute_script("document.querySelector(arguments[0]).click()",selector)
         wait.until(lambda d:d.execute_script("return document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale]').length===9"))
         assert driver.execute_script("return document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale]:not([disabled])').length")==7
-        assert driver.execute_script("return document.querySelector('#darAdultLanguagePicker [data-dal-locale=fr]').disabled && document.querySelector('#darAdultLanguagePicker [data-dal-locale=es]').disabled")
+        assert driver.execute_script("return document.querySelector('#darAdultLanguagePicker [data-dal-locale=es]').disabled")
+        names=driver.execute_script("return [...document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale] .dal-name')].map(x=>x.textContent)")
+        assert names==['Deutsch','Türkçe','English','العربية','Kurmancî','سۆرانی','Bosanski','Français','Español'], names
         driver.execute_script("document.querySelector('#darAdultLanguagePicker [data-dal-close]').click()")
-        print("PASS 9-LANGUAGE PICKER with 7 active and 2 pending",name,flush=True)
+        print("PASS 9-LANGUAGE PICKER all active",name,flush=True)
     driver.execute_script("localStorage.setItem('darAdultPreferredLocaleV1','de');window.dispatchEvent(new CustomEvent('dar-adult-locale-changed',{detail:{locale:'de'}}))")
     wait.until(lambda d:d.execute_script("return document.documentElement.lang==='de'&&document.documentElement.dir==='ltr'"))
     print("PASS LOSSLESS GERMAN RETURN; no external translation API calls",flush=True)

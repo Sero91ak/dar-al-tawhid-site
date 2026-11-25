@@ -168,7 +168,7 @@ const EXTRA_ENTRIES=[
 ["App, Qurʾān, Duʿāʾ und Beiträge","Uygulama, Kur'ân, dua ve yazılar"]
 ];
 const dictionary=new Map([...ENTRIES,...EXTRA_ENTRIES]),backward=new Map(),ambiguous=new Set();
-const SUPPORTED=new Set(["de","tr","en","ar","ku","ckb","bs"]);
+const SUPPORTED=new Set(["de","tr","en","ar","ku","ckb","bs","fr","es"]);
 const rtl=new Set(["ar","ckb"]),languagePacks=new Map();
 
 const specialBlocks=new Map(),welcomeOriginals=new WeakMap();
@@ -206,7 +206,7 @@ function registerTitleData(data){
   if(key!==(record.kind+":"+record.id)||!["post","dua"].includes(record.kind)||
      typeof record.sourceTitle!=="string"||record.sourceTitle.length>220||
      Object.keys(record.translations||{}).sort().join("|")!=="ar|bs|ckb|en|ku|tr")return false;
-  if([...SUPPORTED].filter(x=>x!=="de").some(k=>typeof record.translations[k]!=="string"||!record.translations[k].trim()))
+  if(["ar","bs","ckb","en","ku","tr"].some(k=>typeof record.translations[k]!=="string"||!record.translations[k].trim()))
     return false;
   if(prepared.has(record.sourceTitle))return false;
   prepared.set(record.sourceTitle,record);
