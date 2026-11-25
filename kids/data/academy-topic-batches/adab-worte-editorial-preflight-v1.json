@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "topicId": "adab-worte",
+  "topic": "Gute Worte – freundlich sprechen",
+  "createdAt": "2026-11-25",
+  "productionPhase": "editorial-preflight-only",
+  "priorTopic": "adab-salam",
+  "priorTechnicalLiveProof": "kids/data/academy-topic-batches/adab-salam-v4-live-proof-v1.json",
+  "ageBands": [
+    "4-5",
+    "6-8",
+    "9-10"
+  ],
+  "sourceMaterial": [
+    {
+      "type": "quran",
+      "reference": "17:53",
+      "url": "https://quran.com/17/53",
+      "canonicalArabic": "وَقُل لِّعِبَادِي يَقُولُوا الَّتِي هِيَ أَحْسَنُ ۚ إِنَّ الشَّيْطَانَ يَنزَغُ بَيْنَهُمْ ۚ إِنَّ الشَّيْطَانَ كَانَ لِلْإِنسَانِ عَدُوًّا مُّبِينًا",
+      "usage": "German age-appropriate paraphrase; Arabic verse only original reciter"
+    },
+    {
+      "type": "hadith",
+      "reference": "Ṣaḥīḥ al-Buḫārī 6018",
+      "url": "https://sunnah.com/bukhari/78/49",
+      "canonicalArabicExcerpt": "وَمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ",
+      "usage": "German age-appropriate paraphrase, not verbatim quotation"
+    }
+  ],
+  "existingCurriculum": "kids/akademie/curriculum-v1.js",
+  "existingProjection": "kids/akademie/answer-choice-only-v1.js",
+  "ageObjectives": {
+    "4-5": "Ruhig und freundlich sprechen, auch wenn jemand anderer Meinung ist.",
+    "6-8": "Bei Ärger kurz nachdenken, niemanden beleidigen und respektvoll antworten.",
+    "9-10": "Qurʾān und Sunnah verbinden: gute Worte wählen, auf verletzende Worte verzichten; Hilfe suchen, wenn jemand verletzt oder bedroht wird."
+  },
+  "candidateChoiceOverrides": [
+    {
+      "age": "6-8",
+      "index": 1,
+      "prompt": "Wie kannst du freundlich sprechen, wenn du dich ärgerst?",
+      "options": [
+        "Ich denke kurz nach und antworte ruhig.",
+        "Ich beleidige die andere Person."
+      ],
+      "correct": 0
+    },
+    {
+      "age": "9-10",
+      "index": 1,
+      "prompt": "Wie kannst du bei einem Streit gute Worte wählen?",
+      "options": [
+        "Ich sage ehrlich und respektvoll, was mich stört.",
+        "Ich verspotte die andere Person, damit ich gewinne."
+      ],
+      "correct": 0
+    },
+    {
+      "age": "9-10",
+      "index": 2,
+      "prompt": "Was lehren Qurʾān 17:53 und die Sunnah über unsere Worte?",
+      "options": [
+        "Wir wählen gute Worte und verzichten auf verletzende Worte.",
+        "Wir dürfen andere absichtlich mit unseren Worten verletzen."
+      ],
+      "correct": 0
+    }
+  ],
+  "rules": {
+    "speaker": "Serhat Abu Malik – Master",
+    "modelId": "eleven_v4",
+    "originalFushaLibraryRequired": true,
+    "reuseExactApprovedAudio": true,
+    "noPaidRetryForUncertainRequests": true,
+    "noSyntheticQuranRecitation": true,
+    "choiceOnly": true,
+    "preserveProgressAndQuestionIds": true,
+    "greetings": [
+      "Lieber Bruder",
+      "Liebe Schwester"
+    ],
+    "sourceReferencesAsMetadata": true,
+    "noChildAnswerNumbersInSpeech": true
+  },
+  "nextSteps": [
+    "Integrate and test age-specific choice projection without changing existing IDs or progress.",
+    "Extract exact rendered lesson/audio-click texts for all ages and both profiles; deduplicate against verified master audio library.",
+    "Resolve Arabic terms using original Fuṣḥā library, then generate only missing exact phrases in authorized V4 pipeline.",
+    "Archive real binaries and SHA-256 proofs, validate playback and publish whole topic atomically; verify public URLs."
+  ],
+  "coverage": {
+    "exactRenderedInventoryVerified": false,
+    "providerGenerated": false,
+    "mediaImported": false,
+    "liveVerified": false,
+    "hardwarePlaybackVerified": false,
+    "humanAcousticReviewPerformed": false
+  },
+  "liveDeploymentAllowed": false,
+  "paymentGenerationAllowed": false,
+  "notes": "Draft only. Candidate question overrides not integrated; no audio count asserted until actual renderer inventory. No production manifest changes. Prior live proof is technical only; native playback and human acoustic review were not recorded."
+}
