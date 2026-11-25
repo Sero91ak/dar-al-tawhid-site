@@ -3,7 +3,7 @@
   "topicId": "adab-worte",
   "topic": "Gute Worte – freundlich sprechen",
   "createdAt": "2026-11-25",
-  "productionPhase": "editorial-preflight-only",
+  "productionPhase": "branch-choice-projection-and-static-inventory-prepared",
   "priorTopic": "adab-salam",
   "priorTechnicalLiveProof": "kids/data/academy-topic-batches/adab-salam-v4-live-proof-v1.json",
   "ageBands": [
@@ -17,14 +17,16 @@
       "reference": "17:53",
       "url": "https://quran.com/17/53",
       "canonicalArabic": "وَقُل لِّعِبَادِي يَقُولُوا الَّتِي هِيَ أَحْسَنُ ۚ إِنَّ الشَّيْطَانَ يَنزَغُ بَيْنَهُمْ ۚ إِنَّ الشَّيْطَانَ كَانَ لِلْإِنسَانِ عَدُوًّا مُّبِينًا",
-      "usage": "German age-appropriate paraphrase; Arabic verse only original reciter"
+      "usage": "German age-appropriate paraphrase; Arabic verse only original reciter",
+      "sourceCheckedDate": "2026-11-25"
     },
     {
       "type": "hadith",
       "reference": "Ṣaḥīḥ al-Buḫārī 6018",
       "url": "https://sunnah.com/bukhari/78/49",
       "canonicalArabicExcerpt": "وَمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ",
-      "usage": "German age-appropriate paraphrase, not verbatim quotation"
+      "usage": "German age-appropriate paraphrase, not verbatim quotation",
+      "sourceCheckedDate": "2026-11-25"
     }
   ],
   "existingCurriculum": "kids/akademie/curriculum-v1.js",
@@ -98,5 +100,672 @@
   },
   "liveDeploymentAllowed": false,
   "paymentGenerationAllowed": false,
-  "notes": "Draft only. Candidate question overrides not integrated; no audio count asserted until actual renderer inventory. No production manifest changes. Prior live proof is technical only; native playback and human acoustic review were not recorded."
+  "notes": "Static inventory from renderer source, canonical lesson, staged projection and glossary lookup. Shared welcome followup/profile greeting and dynamic browser coverage still require runtime audit; manifest candidates require media hash verification. No paid requests, playback approvals or live deployment.",
+  "projectionStaged": true,
+  "distinctStaticTopicPhrases": 33,
+  "existingApprovedManifestCandidates": 11,
+  "missingOrUnverified": 22,
+  "glossaryTerms": [
+    "sunnah",
+    "quran"
+  ],
+  "entries": [
+    {
+      "visibleText": "Freundliche Worte sind Teil guten Benehmens. Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind.",
+      "spokenText": "Freundliche Worte sind Teil guten Benehmens. Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "welcome body"
+        },
+        {
+          "age": "6-8",
+          "source": "welcome body"
+        },
+        {
+          "age": "9-10",
+          "source": "welcome body"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Meine Worte können andere freuen oder verletzen.",
+      "spokenText": "Meine Worte können andere freuen oder verletzen.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "explanation 0"
+        },
+        {
+          "age": "6-8",
+          "source": "explanation 0"
+        },
+        {
+          "age": "9-10",
+          "source": "explanation 0"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich spreche ruhig und höflich.",
+      "spokenText": "Ich spreche ruhig und höflich.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "explanation 1"
+        },
+        {
+          "age": "6-8",
+          "source": "explanation 1"
+        },
+        {
+          "age": "9-10",
+          "source": "explanation 1"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich muss niemanden verspotten oder beleidigen.",
+      "spokenText": "Ich muss niemanden verspotten oder beleidigen.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "explanation 2"
+        },
+        {
+          "age": "6-8",
+          "source": "explanation 2"
+        },
+        {
+          "age": "9-10",
+          "source": "explanation 2"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Auch bei einem Streit kann ich freundlich bleiben.",
+      "spokenText": "Auch bei einem Streit kann ich freundlich bleiben.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "explanation 3"
+        },
+        {
+          "age": "6-8",
+          "source": "explanation 3"
+        },
+        {
+          "age": "9-10",
+          "source": "explanation 3"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Qurʾān: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Sunnah: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
+      "spokenText": "Qurʾān: Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Sunnah: Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
+      "kind": "narration",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "source explanation"
+        },
+        {
+          "age": "6-8",
+          "source": "source explanation"
+        },
+        {
+          "age": "9-10",
+          "source": "source explanation"
+        }
+      ],
+      "arabicFushaSegmentationRequired": true,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind.",
+      "spokenText": "Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind.",
+      "kind": "summary",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "recap 0"
+        },
+        {
+          "age": "6-8",
+          "source": "recap 0"
+        },
+        {
+          "age": "9-10",
+          "source": "recap 0"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
+      "spokenText": "Sag Meinen Dienern, sie sollen auf die beste Weise sprechen. Der Prophet ﷺ lehrte: Wer Gutes sagen kann, soll Gutes sagen; sonst soll er schweigen.",
+      "kind": "summary",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "recap 1"
+        },
+        {
+          "age": "6-8",
+          "source": "recap 1"
+        },
+        {
+          "age": "9-10",
+          "source": "recap 1"
+        }
+      ],
+      "arabicFushaSegmentationRequired": true,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Ich will ruhig und freundlich sprechen.",
+      "spokenText": "Ich will ruhig und freundlich sprechen.",
+      "kind": "summary",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "recap 2"
+        },
+        {
+          "age": "6-8",
+          "source": "recap 2"
+        },
+        {
+          "age": "9-10",
+          "source": "recap 2"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Du bist anderer Meinung als ein Freund. Was tust du?",
+      "spokenText": "Du bist anderer Meinung als ein Freund. Was tust du?",
+      "kind": "question",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "question 0"
+        },
+        {
+          "age": "6-8",
+          "source": "question 0"
+        },
+        {
+          "age": "9-10",
+          "source": "question 0"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Ich spreche ruhig und freundlich.",
+      "spokenText": "Ich spreche ruhig und freundlich.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "question 0 option 0"
+        },
+        {
+          "age": "6-8",
+          "source": "question 0 option 0"
+        },
+        {
+          "age": "9-10",
+          "source": "question 0 option 0"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Ich beleidige ihn.",
+      "spokenText": "Ich beleidige ihn.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "question 0 option 1"
+        },
+        {
+          "age": "6-8",
+          "source": "question 0 option 1"
+        },
+        {
+          "age": "9-10",
+          "source": "question 0 option 1"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Was möchten wir uns heute merken?",
+      "spokenText": "Was möchten wir uns heute merken?",
+      "kind": "question",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "question 1"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-0eb818f6d5a880454b476051.m4a",
+      "existingSha256": "0eb818f6d5a880454b47605189d9bf12012267ca9eddac2cf3f21eaf3ea97681",
+      "existingSourceLessonId": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Antwort 1: Ich will ruhig und freundlich sprechen.",
+      "spokenText": "Ich will ruhig und freundlich sprechen.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "question 1 option 0"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Ich muss das Gelernte nicht beachten.",
+      "spokenText": "Ich muss das Gelernte nicht beachten.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "question 1 option 1"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-79134e3b3b9825627c7fe233.m4a",
+      "existingSha256": "79134e3b3b9825627c7fe23314e427f5bde0f94ad54171a79214a931a61dacbc",
+      "existingSourceLessonId": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Sunnah bedeutet: Was der Prophet ﷺ uns gelehrt hat.",
+      "spokenText": "Sunnah bedeutet: Was der Prophet ﷺ uns gelehrt hat.",
+      "kind": "glossary",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "sunnah"
+        }
+      ],
+      "arabicFushaSegmentationRequired": true,
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-80f0a4da4fc7aa015afa065d.m4a",
+      "existingSha256": "80f0a4da4fc7aa015afa065db1e45c7404e434930e0607408ee1897d6bf58b7b",
+      "existingSourceLessonId": "sidq"
+    },
+    {
+      "visibleText": "Qurʾān bedeutet: Allahs Wort.",
+      "spokenText": "Qurʾān bedeutet: Allahs Wort.",
+      "kind": "glossary",
+      "contexts": [
+        {
+          "age": "4-5",
+          "source": "quran"
+        }
+      ],
+      "arabicFushaSegmentationRequired": true,
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-49d90c213b2dfeea113417d3.m4a",
+      "existingSha256": "49d90c213b2dfeea113417d3bfb660401e12c1512d095ded937ad351bc29dc61",
+      "existingSourceLessonId": "sidq"
+    },
+    {
+      "visibleText": "Wie kannst du freundlich sprechen, wenn du dich ärgerst?",
+      "spokenText": "Wie kannst du freundlich sprechen, wenn du dich ärgerst?",
+      "kind": "question",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "question 1"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Ich denke kurz nach und antworte ruhig.",
+      "spokenText": "Ich denke kurz nach und antworte ruhig.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "question 1 option 0"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Ich beleidige die andere Person.",
+      "spokenText": "Ich beleidige die andere Person.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "question 1 option 1"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Wo lernen wir mehr über dieses Thema?",
+      "spokenText": "Wo lernen wir mehr über dieses Thema?",
+      "kind": "question",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "question 2"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-873f4d49eb7e46d4000b9b36.m4a",
+      "existingSha256": "873f4d49eb7e46d4000b9b36e859bf153ce6bafdd79c1647dbd8bcb5012a54b8",
+      "existingSourceLessonId": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Antwort 1: Im Qurʾān und in der authentischen Sunnah.",
+      "spokenText": "Im Qurʾān und in der authentischen Sunnah.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "question 2 option 0"
+        }
+      ],
+      "arabicFushaSegmentationRequired": true,
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-414553471cb676c7be7c52a4.m4a",
+      "existingSha256": "414553471cb676c7be7c52a47b6fce6ebb1ff94975a2a2e20de84dd5e651700d",
+      "existingSourceLessonId": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Antwort 2: Wir müssen uns die Regeln selbst ausdenken.",
+      "spokenText": "Wir müssen uns die Regeln selbst ausdenken.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "question 2 option 1"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sabr-v4-ef5d43874fef6004ef3b0a16.m4a",
+      "existingSha256": "ef5d43874fef6004ef3b0a16359862ce83253270df6a066943adee2edd787b52",
+      "existingSourceLessonId": "akhlaq-sabr"
+    },
+    {
+      "visibleText": "Sunnah nennen wir die überlieferte Lehre und das Vorbild des Propheten Muḥammad ﷺ.",
+      "spokenText": "Sunnah nennen wir die überlieferte Lehre und das Vorbild des Propheten Muḥammad ﷺ.",
+      "kind": "glossary",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "sunnah"
+        }
+      ],
+      "arabicFushaSegmentationRequired": true,
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-5bf1a4cb17c174923cb45696.m4a",
+      "existingSha256": "5bf1a4cb17c174923cb45696d61093126170fd5a4f22282dd6f37407b2b1480d",
+      "existingSourceLessonId": "sidq"
+    },
+    {
+      "visibleText": "Qurʾān bedeutet: Der Qurʾān ist Allahs Offenbarung, die wir auf Arabisch hören und lesen.",
+      "spokenText": "Qurʾān bedeutet: Der Qurʾān ist Allahs Offenbarung, die wir auf Arabisch hören und lesen.",
+      "kind": "glossary",
+      "contexts": [
+        {
+          "age": "6-8",
+          "source": "quran"
+        }
+      ],
+      "arabicFushaSegmentationRequired": true,
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-9f84cdeb4cbbbeadcee86185.m4a",
+      "existingSha256": "9f84cdeb4cbbbeadcee861859f55162c748364af28e19ca855f0c440f50ac26d",
+      "existingSourceLessonId": "sidq"
+    },
+    {
+      "visibleText": "Wie kannst du bei einem Streit gute Worte wählen?",
+      "spokenText": "Wie kannst du bei einem Streit gute Worte wählen?",
+      "kind": "question",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "question 1"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Ich sage ehrlich und respektvoll, was mich stört.",
+      "spokenText": "Ich sage ehrlich und respektvoll, was mich stört.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "question 1 option 0"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Ich verspotte die andere Person, damit ich gewinne.",
+      "spokenText": "Ich verspotte die andere Person, damit ich gewinne.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "question 1 option 1"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Was lehren Qurʾān 17:53 und die Sunnah über unsere Worte?",
+      "spokenText": "Was lehren der Qurʾān und die Sunnah über unsere Worte?",
+      "kind": "question",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "question 2"
+        }
+      ],
+      "arabicFushaSegmentationRequired": true,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 1: Wir wählen gute Worte und verzichten auf verletzende Worte.",
+      "spokenText": "Wir wählen gute Worte und verzichten auf verletzende Worte.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "question 2 option 0"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Antwort 2: Wir dürfen andere absichtlich mit unseren Worten verletzen.",
+      "spokenText": "Wir dürfen andere absichtlich mit unseren Worten verletzen.",
+      "kind": "answer",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "question 2 option 1"
+        }
+      ],
+      "arabicFushaSegmentationRequired": false,
+      "existingApprovedManifestCandidate": false,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false
+    },
+    {
+      "visibleText": "Sunnah umfasst die authentisch überlieferten Aussagen, Handlungen und Bestätigungen des Propheten ﷺ.",
+      "spokenText": "Sunnah umfasst die authentisch überlieferten Aussagen, Handlungen und Bestätigungen des Propheten ﷺ.",
+      "kind": "glossary",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "sunnah"
+        }
+      ],
+      "arabicFushaSegmentationRequired": true,
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-bf23b416663c26641f417b63.m4a",
+      "existingSha256": "bf23b416663c26641f417b63bbdf102b5e95a4aece147c0dfd7257e504f97a89",
+      "existingSourceLessonId": "sidq"
+    },
+    {
+      "visibleText": "Qurʾān bedeutet: Der Qurʾān ist die von Allah offenbarte Schrift. Der arabische Vers und seine deutsche Übersetzung sind nicht dasselbe.",
+      "spokenText": "Qurʾān bedeutet: Der Qurʾān ist die von Allah offenbarte Schrift. Der arabische Vers und seine deutsche Übersetzung sind nicht dasselbe.",
+      "kind": "glossary",
+      "contexts": [
+        {
+          "age": "9-10",
+          "source": "quran"
+        }
+      ],
+      "arabicFushaSegmentationRequired": true,
+      "existingApprovedManifestCandidate": true,
+      "providerGenerated": false,
+      "mediaImported": false,
+      "liveVerified": false,
+      "existingMediaUrl": "/kids/assets/kids-academy-audio/sidq-click-3db8cc45cbe58428e98def3c.m4a",
+      "existingSha256": "3db8cc45cbe58428e98def3c1d6d3261e99bf171f01add410af45e99f146b7ae",
+      "existingSourceLessonId": "sidq"
+    }
+  ]
 }
