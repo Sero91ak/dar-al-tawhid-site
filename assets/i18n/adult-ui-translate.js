@@ -34,7 +34,7 @@ var originalAttributes=new WeakMap();
 var deny="script,style,noscript,textarea,pre,code,[contenteditable],[data-dar-no-translate],"+
  "[class*='quran-arabic'],[class*='ayah-ar'],[class*='arabic-text'],[class*='qsource-arabic'],"+
  "[class*='q49-ar'],[class*='qsource-links'],a[href],"+
- "[data-canonical-content]";
+ "[class*='post-body'],[data-canonical-content]";
 var attrs=["placeholder","aria-label","title"];
 function norm(s){return String(s||"").replace(/\s+/g," ").trim();}
 function locale(){
@@ -317,8 +317,9 @@ var packToken=0;
 function loadPacks(){
  var code=locale();
  var token=++packToken;
- if(code==="de"){catalog=new Map();content={posts:{},duas:{},quiz:{},learning:{}};hadithPack={};quotes=[];return Promise.resolve()}
- var uiP=loadJson("/assets/i18n/catalog/"+code+".json").then(function(data){
+ var uiCode=code==="de"?"tr":code;
+ if(code==="de"){content={posts:{},duas:{},quiz:{},learning:{}};hadithPack={};quotes=[]}
+ var uiP=loadJson("/assets/i18n/catalog/"+uiCode+".json").then(function(data){
   if(token!==packToken)return;
   catalog=new Map();
   var entries=data&&data.entries||{};
@@ -326,8 +327,8 @@ function loadPacks(){
    var to=entries[de];
    if(typeof de==="string"&&typeof to==="string"&&de.length>=2&&de.length<=240&&to.length<=500)catalog.set(de,to);
   });
- }).catch(function(){catalog=new Map()});
- var contentP=loadJson("/assets/i18n/content/"+code+".json").then(function(data){
+ }).catch(function(){if(code!=="de")catalog=new Map()});
+ var contentP=code==="de"?Promise.resolve():loadJson("/assets/i18n/content/"+code+".json").then(function(data){
   if(token!==packToken)return;
   content=data||{};
   quotes=[];
@@ -335,7 +336,7 @@ function loadPacks(){
   Object.keys(q).forEach(function(de){if(q[de])quotes.push({de:norm(de),to:q[de]})});
   quotes.sort(function(a,b){return b.de.length-a.de.length});
  }).catch(function(){content={posts:{},duas:{},quiz:{}}});
- var hadithP=loadJson("/assets/i18n/content/hadith-"+code+".json").then(function(data){
+ var hadithP=code==="de"?Promise.resolve():loadJson("/assets/i18n/content/hadith-"+code+".json").then(function(data){
   if(token!==packToken)return;
   hadithPack=data&&data.items||{};
  }).catch(function(){hadithPack={}});

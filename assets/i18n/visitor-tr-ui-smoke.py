@@ -44,7 +44,7 @@ try:
  w.until(lambda d:d.execute_script("return !!document.querySelector('.dar-more-v15 [data-dal-open=quick]')"))
  driver.execute_script("document.querySelector('.dar-more-v15 [data-dal-open=quick]').click()")
  w.until(lambda d:d.execute_script("return document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale]').length===9"))
- assert driver.execute_script("return !!document.querySelector('#darAdultLanguagePicker [data-dal-locale=fr][disabled]')")
+ assert driver.execute_script("return !document.querySelector('#darAdultLanguagePicker [data-dal-locale=fr]').disabled && !document.querySelector('#darAdultLanguagePicker [data-dal-locale=es]').disabled")
  driver.execute_script("document.querySelector('#darAdultLanguagePicker [data-dal-locale=tr]').click()")
  w.until(lambda d:d.execute_script("return document.documentElement.lang==='tr'"))
  w.until(lambda d:d.execute_script("""return [...document.querySelectorAll('.dar-more-v15 [data-dm-category]')].some(el=>el.textContent.includes('İlim'))"""))
